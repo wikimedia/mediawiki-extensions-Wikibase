@@ -91,7 +91,7 @@ final class RepoHooks {
 				__DIR__ . '/sql/changes' . $extension
 			);
 
-			if ( $type === 'mysql' && !$updater->updateRowExists( 'ChangeChangeObjectId.sql' ) ) {
+			if ( !$updater->updateRowExists( 'ChangeChangeObjectId.sql' ) ) {
 				$updater->addExtensionUpdate( array(
 					'applyPatch',
 					__DIR__ . '/sql/ChangeChangeObjectId.sql',
@@ -149,6 +149,15 @@ final class RepoHooks {
 			'api/ApiSetSiteLink',
 			'api/ApiLinkTitles',
 
+			'api/serializers/ApiSerializationOptions',
+			'api/serializers/ApiSerializer',
+			'api/serializers/ByPropertyListSerializer',
+			'api/serializers/ClaimSerializer',
+			'api/serializers/ClaimsSerializer',
+			'api/serializers/ItemSerializer',
+			'api/serializers/PropertySerializer',
+			'api/serializers/SnakSerializer',
+
 			'content/EntityContentFactory',
 			'content/EntityHandler',
 			'content/ItemContent',
@@ -161,7 +170,6 @@ final class RepoHooks {
 			'specials/SpecialCreateItem',
 			'specials/SpecialItemDisambiguation',
 			'specials/SpecialItemByTitle',
-			'specials/SpecialEntityData',
 
 			'store/IdGenerator',
 			'store/StoreFactory',
@@ -230,20 +238,30 @@ final class RepoHooks {
 			 */
 			$newEntity = $article->getContent()->getEntity();
 
-			$parent = is_null( $revision->getParentId() )
-				? null : Revision::newFromId( $revision->getParentId() );
-
-			$change = EntityChange::newFromUpdate(
-				$parent ? EntityChange::UPDATE : EntityChange::ADD,
-				$parent ? $parent->getContent()->getEntity() : null,
-				$newEntity
-			);
+			if ( is_null( $revision->getParentId() ) ) {
+				$change = EntityCreation::newFromEntity( $newEntity );
+			} else {
+				$change = EntityUpdate::newFromEntities(
+					Revision::newFromId( $revision->getParentId() )->getContent()->getEntity(),
+					$newEntity
+				);
+			}
 
 			$change->setFields( array(
 				'revision_id' => $revision->getId(),
 				'user_id' => $user->getId(),
 				'object_id' => $newEntity->getId()->getPrefixedId(),
 				'time' => $revision->getTimestamp(),
+			) );
+
+			$change->setMetadata( array(
+				'rc_user_id' => $revision->getUser(),
+				'rc_user_text' => $revision->getUserText(),
+				'rc_bot' => in_array( 'bot', $user->getRights() ),
+				'rc_curid' => $revision->getPage(),
+				'rc_this_oldid' => $revision->getId(),
+				'rc_last_oldid' => $revision->getParentId(),
+				'rc_comment' => $revision->getComment(),
 			) );
 
 			ChangeNotifier::singleton()->handleChange( $change );
@@ -285,15 +303,23 @@ final class RepoHooks {
 		 * @var Entity $entity
 		 */
 		$entity = $content->getEntity();
-
-		$change = EntityChange::newFromUpdate( EntityChange::REMOVE, $entity, null, array(
+		$change = EntityDeletion::newFromEntity( $entity );
+		$change->setFields( array(
+			//'previous_revision_id' => $wikiPage->getLatest(),
 			'revision_id' => 0, // there's no current revision
 			'user_id' => $user->getId(),
 			'object_id' => $entity->getId()->getPrefixedId(),
 			'time' => $logEntry->getTimestamp(),
 		) );
 
-		$change->setMetadataFromUser( $user );
+		$change->setMetadata( array(
+			'rc_user_id' => $user->getId(),
+			'rc_user_text' => $user->getName(),
+			'rc_curid' => 0,
+			'rc_this_oldid' => 0,
+			'rc_last_oldid' => 0,
+			'rc_comment' => $wikiPage->getTitle()->getText() . " deleted.",
+		) );
 
 		ChangeNotifier::singleton()->handleChange( $change );
 
@@ -326,42 +352,23 @@ final class RepoHooks {
 
 		if ( $content ) {
 			$entity = $content->getEntity();
-
 			$rev = Revision::newFromId( $revId );
 
-			$userId = $rev->getUser();
-			$change = EntityChange::newFromUpdate( EntityChange::RESTORE, null, $entity, array(
-				// TODO: Use timestamp of log entry, but needs core change.
-				// This hook is called before the log entry is created.
+			$change = EntityRestore::newFromEntity( $entity );
+
+			// TODO: Use timestamp of log entry, but needs core change.
+			// This hook is called before the log entry is created.
+			$change->setFields( array(
 				'revision_id' => $revId,
-				'user_id' => $userId,
+				'user_id' => $rev->getUser(),
 				'object_id' => $entity->getId()->getPrefixedId(),
 				'time' => wfTimestamp( TS_MW, wfTimestampNow() )
 			) );
-
-			$user = User::newFromId( $userId );
-			$change->setMetadataFromUser( $user );
 
 			ChangeNotifier::singleton()->handleChange( $change );
 		}
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
-		return true;
-	}
-
-	public static function onRecentChangeSave( $rc ) {
-		if ( $rc->getAttribute( 'rc_log_type' ) === null ) {
-			$revision = \Revision::newFromId( $rc->getAttribute( 'rc_this_oldid' ) );
-			$change = ChangesTable::singleton()->selectRow(
-				null,
-				array( 'revision_id' => $rc->getAttribute( 'rc_this_oldid' ) )
-			);
-
-			if ( $change ) {
-				$change->setMetadataFromRC( $rc );
-				$change->save();
-			}
-		}
 		return true;
 	}
 
@@ -893,6 +900,40 @@ final class RepoHooks {
 		}
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * Handler for the TitleGetRestrictionTypes hook.
+	 *
+	 * Implemented to prevent people from protecting pages from being
+	 * created or moved in an entity namespace (which is pointless).
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleGetRestrictionTypes
+	 *
+	 * @since 0.3
+	 *
+	 * @param Title $title
+	 * @param array $types The types of protection available
+	 *
+	 * @return boolean
+	 */
+	public static function onTitleGetRestrictionTypes( $title, &$types ) {
+		if ( !Utils::isEntityNamespace( $title->getNamespace() ) ) {
+			return true;
+		}
+
+		// Remove create and move protection for Wikibase NSs
+		if ( in_array( 'create', $types ) ) {
+			unset( $types[ array_search( 'create', $types ) ] );
+		}
+		if ( in_array( 'move', $types ) ) {
+			unset( $types[ array_search( 'move', $types ) ] );
+		}
+
+		// Force reindexation and avoid doubles as we're on it
+		$types = array_values( array_unique( $types ) );
+
 		return true;
 	}
 

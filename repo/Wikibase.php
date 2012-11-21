@@ -115,19 +115,30 @@ $wgAutoloadClasses['Wikibase\SubmitQueryAction'] 		= $dir . 'includes/actions/Ed
 // includes/api
 $wgAutoloadClasses['Wikibase\Api'] 						= $dir . 'includes/api/Api.php';
 $wgAutoloadClasses['Wikibase\ApiAutocomment'] 			= $dir . 'includes/api/ApiAutocomment.php';
-$wgAutoloadClasses['Wikibase\ApiCreateClaim'] 			= $dir . 'includes/api/ApiCreateClaim.php';
-$wgAutoloadClasses['Wikibase\ApiEditEntity'] 			= $dir . 'includes/api/ApiEditEntity.php';
-$wgAutoloadClasses['Wikibase\ApiGetClaims'] 			= $dir . 'includes/api/ApiGetClaims.php';
 $wgAutoloadClasses['Wikibase\ApiGetEntities'] 			= $dir . 'includes/api/ApiGetEntities.php';
-$wgAutoloadClasses['Wikibase\ApiLinkTitles'] 			= $dir . 'includes/api/ApiLinkTitles.php';
+$wgAutoloadClasses['Wikibase\ApiCreateClaim'] 			= $dir . 'includes/api/ApiCreateClaim.php';
 $wgAutoloadClasses['Wikibase\ApiModifyEntity'] 			= $dir . 'includes/api/ApiModifyEntity.php';
 $wgAutoloadClasses['Wikibase\ApiModifyLangAttribute'] 	= $dir . 'includes/api/ApiModifyLangAttribute.php';
-$wgAutoloadClasses['Wikibase\ApiRemoveClaims'] 			= $dir . 'includes/api/ApiRemoveClaims.php';
-$wgAutoloadClasses['Wikibase\ApiSearchEntities'] 		= $dir . 'includes/api/ApiSearchEntities.php';
-$wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
-$wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSetDescription.php';
 $wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabel.php';
+$wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSetDescription.php';
 $wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
+$wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
+$wgAutoloadClasses['Wikibase\ApiEditEntity'] 			= $dir . 'includes/api/ApiEditEntity.php';
+$wgAutoloadClasses['Wikibase\ApiLinkTitles'] 			= $dir . 'includes/api/ApiLinkTitles.php';
+$wgAutoloadClasses['Wikibase\ApiSearchEntities'] 		= $dir . 'includes/api/ApiSearchEntities.php';
+
+// includes/api/serializers
+$wgAutoloadClasses['Wikibase\ApiSerializationOptions'] 	= $dir . 'includes/api/serializers/ApiSerializationOptions.php';
+$wgAutoloadClasses['Wikibase\EntitySerializationOptions']	= $dir . 'includes/api/serializers/ApiSerializationOptions.php';
+$wgAutoloadClasses['Wikibase\ApiSerializer'] 			= $dir . 'includes/api/serializers/ApiSerializer.php';
+$wgAutoloadClasses['Wikibase\ApiSerializerObject'] 		= $dir . 'includes/api/serializers/ApiSerializerObject.php';
+$wgAutoloadClasses['Wikibase\ByPropertyListSerializer'] = $dir . 'includes/api/serializers/ByPropertyListSerializer.php';
+$wgAutoloadClasses['Wikibase\ClaimSerializer'] 			= $dir . 'includes/api/serializers/ClaimSerializer.php';
+$wgAutoloadClasses['Wikibase\ClaimsSerializer'] 		= $dir . 'includes/api/serializers/ClaimsSerializer.php';
+$wgAutoloadClasses['Wikibase\EntitySerializer'] 		= $dir . 'includes/api/serializers/EntitySerializer.php';
+$wgAutoloadClasses['Wikibase\ItemSerializer'] 			= $dir . 'includes/api/serializers/ItemSerializer.php';
+$wgAutoloadClasses['Wikibase\PropertySerializer'] 		= $dir . 'includes/api/serializers/PropertySerializer.php';
+$wgAutoloadClasses['Wikibase\SnakSerializer'] 			= $dir . 'includes/api/serializers/SnakSerializer.php';
 
 // includes/content
 $wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/content/EntityContent.php';
@@ -151,8 +162,7 @@ $wgAutoloadClasses['SpecialItemDisambiguation'] 		= $dir . 'includes/specials/Sp
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 $wgAutoloadClasses['SpecialSetLabel'] 					= $dir . 'includes/specials/SpecialSetLabel.php';
 $wgAutoloadClasses['SpecialWikibaseQueryPage']			= $dir . 'includes/specials/SpecialWikibaseQueryPage.php';
-$wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	    = $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
-$wgAutoloadClasses['SpecialEntityData'] 				= $dir . 'includes/specials/SpecialEntityData.php';
+$wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	= $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\IdGenerator'] 				= $dir . 'includes/store/IdGenerator.php';
@@ -181,6 +191,8 @@ $wgAutoloadClasses['Wikibase\RebuildEntityPerPage'] 	= $dir . 'maintenance/rebui
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';
 $wgAutoloadClasses['Wikibase\Test\ActionTestCase'] 			= $dir . 'tests/phpunit/includes/actions/ActionTestCase.php';
+$wgAutoloadClasses['Wikibase\Test\ApiSerializerBaseTest'] 	= $dir . 'tests/phpunit/includes/api/serializers/ApiSerializerBaseTest.php';
+$wgAutoloadClasses['Wikibase\Test\EntitySerializerBaseTest']= $dir . 'tests/phpunit/includes/api/serializers/EntitySerializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemBase.php';
 $wgAutoloadClasses['Wikibase\Test\ApiLangAttributeBase'] 	= $dir . 'tests/phpunit/includes/api/ApiLangAttributeBase.php';
 $wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/includes/content/EntityContentTest.php';
@@ -190,20 +202,17 @@ $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit
 // API module registration
 $wgAPIModules['wbgetentities'] 						= 'Wikibase\ApiGetEntities';
 $wgAPIModules['wbcreateclaim'] 						= 'Wikibase\ApiCreateClaim';
-$wgAPIModules['wbgetclaims'] 						= 'Wikibase\ApiGetClaims';
 $wgAPIModules['wbsetlabel'] 						= 'Wikibase\ApiSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'Wikibase\ApiSetDescription';
-$wgAPIModules['wbremoveclaims'] 					= 'Wikibase\ApiRemoveClaims';
-$wgAPIModules['wbsearchentities'] 					= 'Wikibase\ApiSearchEntities';
+$wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
 $wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
 $wgAPIModules['wbeditentity'] 						= 'Wikibase\ApiEditEntity';
 $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
-$wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
+$wgAPIModules['wbsearchentities'] 					= 'Wikibase\ApiSearchEntities';
 
 
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
-$wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 $wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
@@ -219,7 +228,6 @@ $wgHooks['UnitTestsList'][] 						= 'Wikibase\RepoHooks::registerUnitTests';
 $wgHooks['NamespaceIsMovable'][]					= 'Wikibase\RepoHooks::onNamespaceIsMovable';
 $wgHooks['NewRevisionFromEditComplete'][]			= 'Wikibase\RepoHooks::onNewRevisionFromEditComplete';
 $wgHooks['SkinTemplateNavigation'][] 				= 'Wikibase\RepoHooks::onPageTabs';
-$wgHooks['RecentChange_save'][]						= 'Wikibase\RepoHooks::onRecentChangeSave';
 $wgHooks['ArticleDeleteComplete'][] 				= 'Wikibase\RepoHooks::onArticleDeleteComplete';
 $wgHooks['ArticleUndelete'][]						= 'Wikibase\RepoHooks::onArticleUndelete';
 $wgHooks['LinkBegin'][] 							= 'Wikibase\RepoHooks::onLinkBegin';
@@ -232,6 +240,7 @@ $wgHooks['WikibaseDeleteData'][] 					= 'Wikibase\RepoHooks::onWikibaseDeleteDat
 $wgHooks['ApiCheckCanExecute'][] 					= 'Wikibase\RepoHooks::onApiCheckCanExecute';
 $wgHooks['SetupAfterCache'][] 						= 'Wikibase\RepoHooks::onSetupAfterCache';
 $wgHooks['ShowSearchHit'][] 						= 'Wikibase\RepoHooks::onShowSearchHit';
+$wgHooks['TitleGetRestrictionTypes'][]				= 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
 
 // Resource Loader Modules:
 $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
