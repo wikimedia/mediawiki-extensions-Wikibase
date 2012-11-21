@@ -48,9 +48,9 @@ class PruneChanges extends Maintenance {
 		$force = $this->getOption( 'force', false );
 		$pidfile = Utils::makePidFilename( 'WBpruneChanges', wfWikiID() );
 
-		if ( Utils::isAlreadyRunning( $pidfile, $force ) === false ) {
-			$this->output( date( 'H:i:s' ) . " failed, exiting\n" );
-			exit(5);
+		if ( !Utils::getPidLock( $pidfile, $force ) ) {
+			$this->output( date( 'H:i:s' ) . " already running, exiting\n" );
+			exit( 5 );
 		}
 
 		$this->pruneChanges( $numDays, $force );
