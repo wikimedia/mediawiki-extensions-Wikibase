@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//7UY\u003d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-21T14:59:41Z",
+      "side": 1,
+      "message": "\u003cdiv/\u003e should be \u003cdiv\u003e",
+      "revId": "96ccc945b9e63af8f6c99bd5d99274b4aca70dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7UU\u003d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-21T14:59:41Z",
+      "side": 1,
+      "message": "\u003cinput\u003e without type supposedly doesn\u0027t work in IE.",
+      "revId": "96ccc945b9e63af8f6c99bd5d99274b4aca70dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7UQ\u003d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-21T14:59:41Z",
+      "side": 1,
+      "message": "what type is property?",
+      "revId": "96ccc945b9e63af8f6c99bd5d99274b4aca70dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7UI\u003d",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-21T14:59:41Z",
+      "side": 1,
+      "message": "\u003cdiv\u003e",
+      "revId": "96ccc945b9e63af8f6c99bd5d99274b4aca70dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
