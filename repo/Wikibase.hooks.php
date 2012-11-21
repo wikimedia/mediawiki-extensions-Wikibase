@@ -896,4 +896,37 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * Handler for the TitleGetRestrictionTypes hook.
+	 *
+	 * Implemented to prevent people from protecting pages from being
+	 * created or moved in an entity namespace (which is pointless).
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleGetRestrictionTypes
+	 *
+	 * @since 0.3
+	 *
+	 * @param Title $title
+	 * @param array $types The types of protection available
+	 *
+	 * @return boolean
+	 */
+	public static function onTitleGetRestrictionTypes( $title, &$types ) {
+		if ( !Utils::isEntityNamespace( $title->getNamespace() ) ) {
+			return true;
+		}
+
+		// Remove create and move protection for Wikibase NSs
+		if ( in_array( 'create', $types ) ) {
+			unset( $types[ array_search( 'create', $types ) ] );
+		}
+		if ( in_array( 'move', $types ) ) {
+			unset( $types[ array_search( 'move', $types ) ] );
+		}
+
+		// Force reindexation and avoid doubles as we're on it
+		$types = array_values( array_unique( $types ) );
+
+		return true;
+	}
 }
