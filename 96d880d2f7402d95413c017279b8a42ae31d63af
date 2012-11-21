@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//7as\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-21T12:56:43Z",
+      "side": 1,
+      "message": "either use entityId everywhere or leave it to id everywhere. now this is confusing.",
+      "revId": "96d880d2f7402d95413c017279b8a42ae31d63af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7a4\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-21T12:56:43Z",
+      "side": 1,
+      "message": "if you use entityId, why then not also use propertyId here?",
+      "revId": "96d880d2f7402d95413c017279b8a42ae31d63af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
