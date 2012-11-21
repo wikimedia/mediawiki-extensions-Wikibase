@@ -9,34 +9,37 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-( function( wb,$, QUnit, undefined ) {
+( function( wb, dv, $, QUnit, undefined ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.datamodel.snak.js', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'constructor', function( assert ) {
-		var snakTypes = [
-			wb.PropertyNoValueSnak,
-			wb.PropertySomeValueSnak,
-			wb.PropertyValueSnak
+		var snakInfo = [
+			[ wb.PropertyNoValueSnak ],
+			[ wb.PropertySomeValueSnak ],
+			[ wb.PropertyValueSnak, [ 21, new dv.StringValue( 'test' ) ] ]
 		];
 
-		$.each( snakTypes, function( i, snakType ) {
-			var snak = new snakType( 42 );
+		$.each( snakInfo, function( i, info ) {
+			var snakConstructor = info[0],
+				snakParams = info[1] || [ 42 ];
+
+			var snak = new snakConstructor( snakParams[0], snakParams[1] );
 
 			assert.strictEqual(
 				snak.getPropertyId(),
-				42,
+				snakParams[ 0 ],
 				'Property id was set correctly'
 			);
 
 			assert.strictEqual(
 				snak.TYPE,
-				snakType.prototype.TYPE,
+				snakConstructor.prototype.TYPE,
 				'Snak type was set correctly'
 			);
 		} );
 
 	} );
 
-}( wikibase, jQuery, QUnit ) );
+}( wikibase, dataValues, jQuery, QUnit ) );
