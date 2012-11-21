@@ -93,7 +93,14 @@ class ByPropertyListSerializer extends SerializerObject {
 			$this->setIndexedTagName( $serializedObjects, $this->elementName );
 
 			$propertyId = new EntityId( Property::ENTITY_TYPE, $propertyId );
-			$serialization[$propertyId->getPrefixedId()] = $serializedObjects;
+
+			if ( $this->options->shouldIndexTags() ) {
+				$serializedObjects['id'] = $propertyId->getPrefixedId();
+				$serialization[] = $serializedObjects;
+			}
+			else {
+				$serialization[$propertyId->getPrefixedId()] = $serializedObjects;
+			}
 		}
 
 		$this->setIndexedTagName( $serialization, 'property' );
