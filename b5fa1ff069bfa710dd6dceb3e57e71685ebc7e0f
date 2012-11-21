@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZX///v8\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2012-11-21T22:43:14Z",
+      "side": 1,
+      "message": "Yes, that\u0027s certainly nicer.",
+      "parentUuid": "AAADZX///wc\u003d",
+      "revId": "b5fa1ff069bfa710dd6dceb3e57e71685ebc7e0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZX///wY\u003d",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-21T22:39:01Z",
       "side": 1,
       "message": "you are not adding elements, so why would this be needed?",
+      "revId": "b5fa1ff069bfa710dd6dceb3e57e71685ebc7e0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZX///v4\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2012-11-21T22:43:14Z",
+      "side": 1,
+      "message": "It\u0027s not... removed",
+      "parentUuid": "AAADZX///wY\u003d",
       "revId": "b5fa1ff069bfa710dd6dceb3e57e71685ebc7e0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
