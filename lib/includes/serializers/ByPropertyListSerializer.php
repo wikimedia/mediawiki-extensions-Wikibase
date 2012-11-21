@@ -53,11 +53,10 @@ class ByPropertyListSerializer extends SerializerObject {
 	 *
 	 * @param string $elementName
 	 * @param Serializer $elementSerializer
-	 * @param ApiResult $apiResult
 	 * @param SerializationOptions|null $options
 	 */
-	public function __construct( $elementName, Serializer $elementSerializer, ApiResult $apiResult, SerializationOptions $options = null ) {
-		parent::__construct( $apiResult, $options );
+	public function __construct( $elementName, Serializer $elementSerializer, SerializationOptions $options = null ) {
+		parent::__construct( $options );
 
 		$this->elementName = $elementName;
 		$this->elementSerializer = $elementSerializer;
@@ -91,13 +90,13 @@ class ByPropertyListSerializer extends SerializerObject {
 				$serializedObjects[] = $this->elementSerializer->getSerialized( $object );
 			}
 
-			$this->getResult()->setIndexedTagName( $serializedObjects, $this->elementName );
+			$this->setIndexedTagName( $serializedObjects, $this->elementName );
 
 			$propertyId = new EntityId( Property::ENTITY_TYPE, $propertyId );
 			$serialization[$propertyId->getPrefixedId()] = $serializedObjects;
 		}
 
-		$this->getResult()->setIndexedTagName( $serialization, 'property' );
+		$this->setIndexedTagName( $serialization, 'property' );
 
 		return $serialization;
 	}

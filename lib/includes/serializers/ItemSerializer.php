@@ -90,7 +90,7 @@ class ItemSerializer extends EntitySerializer {
 		}
 
 		if ( !$this->options->shouldUseKeys() ) {
-			$this->getResult()->setIndexedTagName( $serialization, 'sitelink' );
+			$this->setIndexedTagName( $serialization, 'sitelink' );
 		}
 
 		return $serialization;

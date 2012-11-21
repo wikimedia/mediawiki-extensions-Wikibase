@@ -46,15 +46,14 @@ class EntitySerializer extends SerializerObject {
 	 *
 	 * @since 0.2
 	 *
-	 * @param \ApiResult $apiResult
 	 * @param EntitySerializationOptions|null $options
 	 */
-	public function __construct( \ApiResult $apiResult, EntitySerializationOptions $options = null ) {
+	public function __construct( EntitySerializationOptions $options = null ) {
 		if ( $options === null ) {
 			$options = new EntitySerializationOptions();
 		}
 
-		parent::__construct( $apiResult, $options );
+		parent::__construct( $options );
 	}
 
 	/**
@@ -87,7 +86,7 @@ class EntitySerializer extends SerializerObject {
 					$serialization['labels'] = $this->getLabelsSerialization( $entity );
 					break;
 				case 'claims':
-					$claimsSerializer = new ClaimsSerializer( $this->getResult(), $this->options );
+					$claimsSerializer = new ClaimsSerializer( $this->options );
 					$serialization['claims'] = $claimsSerializer->getSerialized( $entity->getClaims() );
 					break;
 			}
@@ -158,7 +157,7 @@ class EntitySerializer extends SerializerObject {
 		}
 
 		if ( !$this->options->shouldUseKeys() ) {
-			$this->getResult()->setIndexedTagName( $value, 'alias' );
+			$this->setIndexedTagName( $value, 'alias' );
 		}
 
 		return $value;
@@ -195,7 +194,7 @@ class EntitySerializer extends SerializerObject {
 		}
 
 		if ( !$this->options->shouldUseKeys() ) {
-			$this->getResult()->setIndexedTagName( $value, 'description' );
+			$this->setIndexedTagName( $value, 'description' );
 		}
 
 		return $value;
@@ -232,10 +231,33 @@ class EntitySerializer extends SerializerObject {
 		}
 
 		if ( !$this->options->shouldUseKeys() ) {
-			$this->getResult()->setIndexedTagName( $value, 'label' );
+			$this->setIndexedTagName( $value, 'label' );
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Returns an EntitySerializer for the provided entity.
+	 * If there is no specific serializer registered for the type of entity,
+	 * a plain EntitySerializer is returned, else the more specific one is.
+	 *
+	 * @since 0.3
+	 *
+	 * @param Entity $entity
+	 * @param EntitySerializationOptions $options
+	 *
+	 * @return EntitySerializer
+	 */
+	public static function newForEntity( Entity $entity, EntitySerializationOptions $options = null ) {
+		$serializers = array(
+			'item' => '\Wikibase\ItemSerializer',
+			'property' => '\Wikibase\PropertySerializer',
+		);
+
+		$serializer = array_key_exists( $entity->getType(), $serializers ) ? $serializers[$entity->getType()] : '\Wikibase\EntitySerializer';
+
+		return new $serializer( $options );
 	}
 
 }
