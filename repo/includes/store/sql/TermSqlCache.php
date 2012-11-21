@@ -317,7 +317,7 @@ class TermSqlCache implements TermCache {
 	/**
 	 * @since 0.2
 	 *
-	 * @param array $terms
+	 * @param Term[] $terms
 	 * @param string $termType
 	 * @param string $entityType
 	 * @param boolean $forJoin
