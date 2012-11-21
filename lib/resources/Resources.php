@@ -62,7 +62,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase',
 				'wikibase.utilities',
-				'dataValues' // DataValues extension
+				'dataValues.values' // DataValues extension
 			)
 		),
 
@@ -286,6 +286,17 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.suggester',
 				'wikibase'
+			)
+		),
+
+		'jquery.wikibase.snakview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.snakview.js'
+			),
+			'dependencies' => array(
+				'jquery.ui.entityselector',
+				'wikibase.datamodel',
+				'dataTypes.jquery.valueview.views'
 			)
 		),
 
