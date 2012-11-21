@@ -121,26 +121,10 @@ class PollForChanges extends \Maintenance {
 		$this->startTime = (int)strtotime( $this->getOption( 'since', 0 ) );
 
 		// Make sure this script only runs once
-		$pidfileName = 'WBpollForChanges_' . wfWikiID() . ".pid";
-		// Let's see if we have a /var/run directory and if we can write to it (i.e. we're root)
-		if ( is_dir( '/var/run/' ) && is_writable( '/var/run/' ) ) {
-			$pidfile = '/var/run/' . $pidfileName;
-		// else use the temporary directory
-		} else {
-			$pidfilePath = str_replace( '\\', '/', sys_get_temp_dir() );
-			$pidfile = $pidfilePath . '/' . $pidfileName;
-		}
-		if ( file_exists( $pidfile ) ) {
-			$pid = file_get_contents( $pidfile );
-			if ( $this->checkPID( $pid ) === false ) {
-				self::msg( 'Process has died! Restarting...' );
-				file_put_contents( $pidfile, getmypid() ); // update lockfile
-			} else {
-				self::msg( 'PID is still alive! Cannot run twice!' );
-				exit;
-			}
-		} else {
-			file_put_contents( $pidfile, getmypid() ); // create lockfile
+		$pidfile = Utils::makePidFilename( 'WBpollForChanges', wfWikiID() );
+		if ( !Utils::getPidLock( $pidfile, false ) ) {
+			$this->msg( "already running, exiting." );
+			exit( 5 );
 		}
 
 		$changesWiki = Settings::get( 'changesDatabase' );
@@ -272,40 +256,6 @@ class PollForChanges extends \Maintenance {
 	 */
 	public static function msg( $message ) {
 		echo date( 'H:i:s' ) . ' ' . $message . "\n";
-	}
-
-	/**
-	 * Check for running PID
-	 *
-	 * @param int $pid
-	 * @return boolean
-	 */
-	protected function checkPID ( $pid ) {
-		if ( strtoupper( substr( PHP_OS, 0, 3 ) ) !== 'WIN' ) {
-			// Are we anything but Windows, i.e. some kind of Unix?
-			return posix_getsid( $pid );
-		} else {
-			// Welcome to Redmond
-			$processes = explode( "\n", shell_exec( "tasklist.exe" ) );
-			if ( $processes !== false && count( $processes ) > 0 ) {
-				foreach( $processes as $process ) {
-					if( strlen( $process ) > 0
-						&& ( strpos( "Image Name", $process ) === 0
-						|| strpos( "===", $process ) === 0 ) )
-						continue;
-					$matches = false;
-					preg_match( "/^(\D*)(\d+).*$/", $process, $matches );
-					$processid = 0;
-					if ( $matches !== false && count ($matches) > 1 ) {
-						$processid = $matches[ 2 ];
-					}
-					if ( $processid === $pid ) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
 	}
 
 }

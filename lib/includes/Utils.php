@@ -545,24 +545,26 @@ final class Utils {
 	}
 
 	/**
-	 * Check if the task is already running
+	 * Tries to allocate a PID based lock for the process, to avoid running more than one
+	 * instance.
 	 *
-	 * Note that this method creates the file if it is missing.
+	 * Note that this method creates the file $pidfile if necessary.
 	 *
 	 * @since 0.3
 	 *
 	 * @param string $pidfile the place where the pid is stored
-	 * @param boolean $force make the function skip the test and always return true
+	 * @param boolean $force make the function skip the test and always grab the lock
 	 *
-	 * @return boolean true if the process exist
+	 * @return boolean true if we got the lock, i.e. if no instance is already running,
+	 *         or $force was set.
 	 */
-	public static function isAlreadyRunning( $pidfile, $force = false ) {
+	public static function getPidLock( $pidfile, $force = false ) {
 		if ( $force === true ) {
 			file_put_contents( $pidfile, getmypid() );
 			return true;
-		}
-		else {
+		} else {
 			// check if the process still exist and is alive
+			// XXX: there's a race condition here.
 			if ( file_exists( $pidfile ) ) {
 				$pid = file_get_contents( $pidfile );
 				if ( Utils::isPidAlive( $pid ) === true ) {
