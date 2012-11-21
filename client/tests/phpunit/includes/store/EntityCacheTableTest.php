@@ -36,7 +36,7 @@ use \Wikibase\Entity;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityCacheTest extends \ORMTableTest {
+class EntityCacheTableTest extends \ORMTableTest {
 
 	/**
 	 * @see ORMTableTest::getRowClass
@@ -87,7 +87,7 @@ class EntityCacheTest extends \ORMTableTest {
 		$table->delete( array() );
 
 		$this->assertTrue( $table->addEntity( $entity ) );
-		$this->assertTrue( $table->hasEntity( $entity ) );
+		$this->assertTrue( $table->hasEntity( $entity->getId() ) );
 
 		$obtainedEntity = $table->getEntity( $entity->getType(), $entity->getId()->getNumericId() );
 
@@ -111,7 +111,7 @@ class EntityCacheTest extends \ORMTableTest {
 	 */
 	protected function testDeleteEntity( Entity $entity ) {
 		$this->assertTrue( $this->getTable()->deleteEntity( $entity->getId() ) );
-		$this->assertFalse( $this->getTable()->hasEntity( $entity ) );
+		$this->assertFalse( $this->getTable()->hasEntity( $entity->getId() ) );
 		$this->assertTrue( $this->getTable()->deleteEntity( $entity->getId() ) );
 	}
 

@@ -86,7 +86,7 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 */
 	public function updateEntity( Entity $entity ) {
 		$cachedEntity = $this->newRowFromEntity( $entity );
-		$currentId = $this->getCacheIdForEntity( $entity );
+		$currentId = $this->getCacheIdForEntity( $entity->getId() );
 
 		if ( $currentId !== false ) {
 			$cachedEntity->setId( $currentId );
@@ -117,14 +117,14 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Entity $entity
+	 * @param EntityId $id
 	 *
 	 * @return integer|bool
 	 */
-	protected function getCacheIdForEntity( Entity $entity ) {
+	protected function getCacheIdForEntity( EntityId $id ) {
 		$identifiers = array(
-			'entity_id' => $entity->getId()->getNumericId(),
-			'entity_type' => $entity->getType(),
+			'entity_id' => $id->getNumericId(),
+			'entity_type' => $id->getEntityType()
 		);
 
 		return $this->selectFieldsRow( 'id', $identifiers );
@@ -135,12 +135,12 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Entity $entity
+	 * @param EntityId $id
 	 *
 	 * @return boolean
 	 */
-	public function hasEntity( Entity $entity ) {
-		return $this->getCacheIdForEntity( $entity ) !== false;
+	public function hasEntity( EntityId $id ) {
+		return $this->getCacheIdForEntity( $id ) !== false;
 	}
 
 	/**
