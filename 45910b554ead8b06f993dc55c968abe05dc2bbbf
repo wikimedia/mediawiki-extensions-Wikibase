@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//7Uw\u003d",
+        "filename": "lib/includes/item/ItemObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-21T14:53:57Z",
+      "side": 1,
+      "message": "StatementObject extends Statement extends Claim?",
+      "revId": "45910b554ead8b06f993dc55c968abe05dc2bbbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
