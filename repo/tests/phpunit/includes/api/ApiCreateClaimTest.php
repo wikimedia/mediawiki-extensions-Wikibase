@@ -29,6 +29,7 @@ namespace Wikibase\Test;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
+ * @group ApiCreateClaimTest
  *
  * @group medium
  *
@@ -37,18 +38,41 @@ namespace Wikibase\Test;
  */
 class ApiCreateClaimTest extends \ApiTestCase {
 
-	public function testStuff() {
-//		$params = array(
-//			'action' => 'wbcreateclaim',
-//			// TODO
-//		);
-//
-//		list( $resultArray, ) = $this->doApiRequest( $params );
-//
-//		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
-//		$this->assertArrayHasKey( 'results', $resultArray, 'top level element has a results key' );
+	public function testValidRequest() {
+		$entity = \Wikibase\ItemObject::newEmpty();
+		$content = new \Wikibase\ItemContent( $entity );
+		$content->save( '', null, EDIT_NEW );
+		$entity = $content->getEntity();
 
-		$this->assertTrue( true );
+		$dataTypes = \Wikibase\Settings::get( 'dataTypes' );
+		$property = \Wikibase\PropertyObject::newFromType( reset( $dataTypes ) );
+		$content = new \Wikibase\PropertyContent( $property );
+		$content->save( '', null, EDIT_NEW );
+		$property = $content->getEntity();
+
+		$params = array(
+			'action' => 'wbcreateclaim',
+			'entity' => $entity->getPrefixedId(),
+			'snaktype' => 'somevalue',
+			'property' => $property->getPrefixedId(),
+		);
+
+		list( $resultArray, ) = $this->doApiRequest( $params );
+
+		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
+		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a claim key' );
+
+		$claim = $resultArray['claim'];
+
+		foreach ( array( 'id', 'mainsnak', 'type', 'rank' ) as $requiredKey ) {
+			$this->assertArrayHasKey( $requiredKey, $claim, 'claim has a "' . $requiredKey . '" key' );
+		}
+
+		$entityId = \Wikibase\EntityObject::getIdFromClaimGuid( $claim['id'] );
+
+		$this->assertEquals( $entity->getPrefixedId(), $entityId );
+
+		$this->assertEquals( 'somevalue', $claim['mainsnak']['snaktype'] );
 	}
 
 }

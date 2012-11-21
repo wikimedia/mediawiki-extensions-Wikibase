@@ -139,6 +139,7 @@ final class RepoHooks {
 			'actions/EditEntityAction',
 
 			'api/ApiBotEdit',
+			'api/ApiCreateClaim',
 			'api/ApiEditPage',
 			'api/ApiGetEntities',
 			'api/ApiLabel',
