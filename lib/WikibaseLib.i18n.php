@@ -182,6 +182,18 @@ $messages['gl'] = array(
 	'datatypes-type-commonsMedia' => 'Ficheiro multimedia de Commons',
 );
 
+/** Swiss German (Alemannisch)
+ * @author Als-Holder
+ */
+$messages['gsw'] = array(
+	'wikibaselib-desc' => 'Stellt vu dr Erwyterige Wikibase un Wikibase Client gmeinsam gnutzti Funktione z Verfiegig',
+	'wikibaselib-entity-item' => 'Objäkt',
+	'wikibaselib-entity-property' => 'Eigeschaft',
+	'wikibaselib-entity-query' => 'Abfrog',
+	'datatypes-type-wikibase-item' => 'Objäkt',
+	'datatypes-type-commonsMedia' => 'Mediedatei uf dr Commons',
+);
+
 /** Hebrew (עברית)
  * @author Amire80
  */
