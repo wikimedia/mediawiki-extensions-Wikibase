@@ -16,6 +16,24 @@
       "revId": "6d8edaa8f036c3d8f6003c6dc7b63e3129ceba41",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7eE\u003d",
+        "filename": "lib/includes/claim/ClaimObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-21T11:14:34Z",
+      "side": 1,
+      "message": "John, can you give specific examples of where you see using $ being a problem? I don\u0027t see how the $ is an issue in programming languages (PHP uses it, and I expect no problems there).",
+      "parentUuid": "AAADZH//7g4\u003d",
+      "revId": "6d8edaa8f036c3d8f6003c6dc7b63e3129ceba41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
