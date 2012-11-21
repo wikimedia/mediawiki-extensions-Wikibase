@@ -240,10 +240,10 @@ class ExternalChangesList {
 		$ns = null;
 
 		switch( $entityData['entity_type'] ) {
-			case 'wikibase-item':
+			case 'item':
 				$ns = $nsList['wikibase-item'];
 				break;
-			case 'wikibase-property':
+			case 'property':
 				$ns = $nsList['wikibase-property'];
 				break;
 			default:
