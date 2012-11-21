@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//7Uc\u003d",
+        "filename": "repo/tests/phpunit/includes/FuzzyCompareTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-21T15:07:04Z",
+      "side": 1,
+      "message": "They are not set, this is still being tested.\nRemoved from tests that are automatically run.",
+      "parentUuid": "AAADZH//7V4\u003d",
+      "revId": "892ed3694859837d271a34a26f6d51509efd0036",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//7V8\u003d",
         "filename": "repo/tests/phpunit/includes/FuzzyCompareTest.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2012-11-21T14:40:38Z",
       "side": 1,
       "message": "provider should be static",
+      "revId": "892ed3694859837d271a34a26f6d51509efd0036",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7UM\u003d",
+        "filename": "repo/tests/phpunit/includes/FuzzyCompareTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-21T15:07:04Z",
+      "side": 1,
+      "message": "http://www.phpunit.de/manual/3.6/en/writing-tests-for-phpunit.html",
+      "parentUuid": "AAADZH//7V8\u003d",
       "revId": "892ed3694859837d271a34a26f6d51509efd0036",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
