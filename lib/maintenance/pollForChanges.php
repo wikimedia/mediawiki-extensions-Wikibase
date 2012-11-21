@@ -121,28 +121,11 @@ class PollForChanges extends \Maintenance {
 		$this->startTime = (int)strtotime( $this->getOption( 'since', 0 ) );
 
 		// Make sure this script only runs once
-		$pidfileName = 'WBpollForChanges_' . wfWikiID() . ".pid";
-		// Let's see if we have a /var/run directory and if we can write to it (i.e. we're root)
-		if ( is_dir( '/var/run/' ) && is_writable( '/var/run/' ) ) {
-			$pidfile = '/var/run/' . $pidfileName;
-		// else use the temporary directory
-		} else {
-			$pidfilePath = str_replace( '\\', '/', sys_get_temp_dir() );
-			$pidfile = $pidfilePath . '/' . $pidfileName;
+		$pidfile = Utils::makePidFilename( 'WBpollForChanges', wfWikiID() );
+		if ( Utils::isAlreadyRunning( $pidfile, false ) === false ) {
+			$this->output( date( 'H:i:s' ) . " process has died, restarting\n" );
+			Utils::isAlreadyRunning( $pidfile, true );
 		}
-		if ( file_exists( $pidfile ) ) {
-			$pid = file_get_contents( $pidfile );
-			if ( $this->checkPID( $pid ) === false ) {
-				self::msg( 'Process has died! Restarting...' );
-				file_put_contents( $pidfile, getmypid() ); // update lockfile
-			} else {
-				self::msg( 'PID is still alive! Cannot run twice!' );
-				exit;
-			}
-		} else {
-			file_put_contents( $pidfile, getmypid() ); // create lockfile
-		}
-
 		$changesWiki = Settings::get( 'changesDatabase' );
 
 		if ( $changesWiki ) {
