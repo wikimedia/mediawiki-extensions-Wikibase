@@ -40,6 +40,13 @@ use Wikibase\PropertyObject;
  */
 class CachedEntityTest extends \ORMRowTest {
 
+	public function setup() {
+		parent::setup();
+
+		// reset the table.
+		$this->getTableInstance()->delete( array() ); // TODO: pull this up to ORMRowTest
+	}
+
 	/**
 	 * @see ORMRowTest::getRowClass()
 	 * @since 0.1

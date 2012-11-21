@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\EntityCacheUpdater;
-use \Wikibase\EntityUpdate;
+use \Wikibase\EntityChange;
 use \Wikibase\ItemObject;
 
 /**
@@ -46,7 +46,7 @@ class EntityCacheUpdaterTest extends \MediaWikiTestCase {
 		$sourceItem->setId( 42 );
 		$targetItem = clone $sourceItem;
 		$targetItem->setLabel( 'en', 'ohi there' );
-		$change = EntityUpdate::newFromEntities( $sourceItem, $targetItem );
+		$change = EntityChange::newFromUpdate( 'update', $sourceItem, $targetItem );
 
 		$argLists[] = array( $change, $sourceItem, $targetItem );
 

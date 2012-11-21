@@ -110,9 +110,9 @@ class EntityCacheTest extends \ORMTableTest {
 	 * @param \Wikibase\Entity $entity
 	 */
 	protected function testDeleteEntity( Entity $entity ) {
-		$this->assertTrue( $this->getTable()->deleteEntity( $entity ) );
+		$this->assertTrue( $this->getTable()->deleteEntity( $entity->getId() ) );
 		$this->assertFalse( $this->getTable()->hasEntity( $entity ) );
-		$this->assertTrue( $this->getTable()->deleteEntity( $entity ) );
+		$this->assertTrue( $this->getTable()->deleteEntity( $entity->getId() ) );
 	}
 
 	/**

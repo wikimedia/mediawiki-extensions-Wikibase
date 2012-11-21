@@ -10,6 +10,11 @@ namespace Wikibase;
  * @ingroup WikibaseClient
  *
  * @licence GNU GPL v2+
+ *
+ * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Jens Ohlig
+ * @author Daniel Kinzler
+ * @author Tobias Gritschacher
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
@@ -155,73 +160,65 @@ final class ClientHooks {
 	public static function onWikibasePollHandle( Change $change ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
-		list( $mainType, ) = explode( '~', $change->getType() ); //@todo: ugh! provide getter for entity type!
+		if ( ! ( $change instanceof EntityChange ) ) {
+			return true;
+		}
 
-		// strip the wikibase- prefix
-		$mainType = preg_replace( '/^wikibase-/', '', $mainType );
+		$cacheUpdater = new EntityCacheUpdater();
+		$cacheUpdater->handleChange( $change );
 
-		if ( in_array( $mainType, EntityFactory::singleton()->getEntityTypes() ) ) {
+		if ( ! ( $change instanceof ItemChange ) ) {
+			//TODO: other kinds of changes need entirely different kind of handling.
+			return true;
+		}
 
-			$cacheUpdater = new EntityCacheUpdater();
-			$cacheUpdater->handleChange( $change );
+		/**
+		 * @var Item $item
+		 */
+		$item = $change->getEntity();
+		$siteGlobalId = Settings::get( 'siteGlobalID' );
+		$title = null;
 
-			// The following code is a temporary hack to invalidate the cache.
-			// TODO: create cache invalidater that works with all clients for this cluster
-			if ( $mainType == Item::ENTITY_TYPE ) { //FIXME: handle all kinds of entities!
-				/**
-				 * @var Item $item
-				 */
-				$item = $change->getEntity();
-				$siteGlobalId = Settings::get( 'siteGlobalID' );
-				$siteLink = $item->getSiteLink( $siteGlobalId );
-				$title = null;
+		$pagesToUpdate = array();
 
-				$info = $change->getField( 'info' );
+		// if something relevant about the entity changes, update
+		// the corresponding local page
+		if ( ClientHooks::changeNeedsRendering( $change ) ) {
+			$siteLink = $item->getSiteLink( $siteGlobalId );
 
-				if ( $siteLink !== null ) {
-					$page = $siteLink->getPage();
-
-					if ( array_key_exists( 'diff', $info ) ) {
-						$siteLinkChangeOperations = $change->getDiff()->getSiteLinkDiff()->getTypeOperations( 'change' );
-
-						// handle when a link to this client is changed to some other page
-						// remove lang links on the old page, add them to new page that item links to
-						if ( is_array( $siteLinkChangeOperations ) && array_key_exists( $siteGlobalId, $siteLinkChangeOperations ) ) {
-							$oldTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getOldValue() );
-							$newTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getNewValue() );
-
-							if ( !is_null( $oldTitle ) ) {
-								self::updatePage( $oldTitle, $change, true );
-							}
-
-							if ( !is_null( $newTitle ) ) {
-								self::updatePage( $newTitle, $change, false );
-							}
-						// a lang link was added or removed
-						} else {
-							$title = \Title::newFromText( $page );
-							if ( !is_null( $title ) ) {
-								self::updatePage( $title, $change );
-							}
-						}
-					} else {
-						// handle item deletion or restore
-						$title = \Title::newFromText( $page );
-						if ( !is_null( $title ) ) {
-							self::updatePage( $title, $change );
-						}
-					}
-				} else if ( array_key_exists( 'diff', $info ) ) {
-					// cache should be invalidated when the sitelink got removed
-					$removedSiteLinks = $change->getDiff()->getSiteLinkDiff()->getRemovedValues();
-					if ( is_array( $removedSiteLinks ) && array_key_exists( $siteGlobalId, $removedSiteLinks ) ) {
-						$title = \Title::newFromText( $removedSiteLinks[ $siteGlobalId ] );
-						if ( !is_null( $title ) ) {
-							self::updatePage( $title, $change, true );
-						}
-					}
-				}
+			if ( $siteLink ) {
+				// we have a corresponding page on this wiki, so re-render it.
+				$pagesToUpdate[] = $siteLink->getPage();
 			}
+		}
+
+		// if an item's sitelinks change, update the old and the new target
+		$siteLinkDiff = $change->getSiteLinkDiff();
+		$siteLinkDiffOp = isset( $siteLinkDiff[ $siteGlobalId ] )
+								? $siteLinkDiff[ $siteGlobalId ] : null;
+
+		if ( $siteLinkDiffOp === null ) {
+			// no op
+		} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpAdd ) {
+			$pagesToUpdate[] = $siteLinkDiffOp->getNewValue(); // currently redundant, but keep for future reference
+		} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpRemove ) {
+			$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
+		} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpChange ) {
+			$pagesToUpdate[] = $siteLinkDiffOp->getNewValue(); // currently redundant, but keep for future reference
+			$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
+		} else {
+			wfWarn( "Unknown change operation: " . get_class( $siteLinkDiffOp )
+					. " (" . $siteLinkDiffOp->getType() . ")" );
+		}
+
+		// purge all relevant pages
+		//
+		// @todo: instead of rerendering everything, schedule pages for different kinds
+		// of update, depending on how the entity was modified. E.g. changes to
+		// sitelinks could in theory be handled without re-parsing the page, but
+		// would still need to purge the squid cache.
+		foreach ( array_unique( $pagesToUpdate ) as $page ) {
+			self::updatePage( $page, $change, false );
 		}
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
@@ -229,18 +226,36 @@ final class ClientHooks {
 	}
 
 	/**
+	 * @static
+	 *
+	 * @todo: move this somewhere same
+	 *
+	 * @param Change $change
+	 *
+	 * @return bool
+	 */
+	public static function changeNeedsRendering( ItemChange $change ) {
+		if ( !$change->getSiteLinkDiff()->isEmpty() ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Registers change with recent changes and performs other updates
 	 *
 	 * @since 0.2
 	 *
-	 * @param \Title $title  The Title of the page to update
+	 * @param string $title  The Title of the page to update
 	 * @param Change $change The Change that caused the update
-	 * @param bool $gone If set, indicates that the change's entity no longer refers to the given page.
 	 *
 	 * @return bool
 	 */
-	protected static function updatePage( \Title $title, Change $change, $gone = false ) {
+	protected static function updatePage( $titleText, Change $change ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
+
+		$title = \Title::newFromText( $titleText );
 
 		if ( !$title->exists() ) {
 			wfProfileOut( "Wikibase-" . __METHOD__ );
@@ -248,6 +263,7 @@ final class ClientHooks {
 		}
 
 		$title->invalidateCache();
+		$title->purgeSquid();
 
 		if ( Settings::get( 'injectRecentChanges' )  === false ) {
 			wfProfileOut( "Wikibase-" . __METHOD__ );
@@ -262,17 +278,12 @@ final class ClientHooks {
 		}
 
 		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
-		list( $entityType, $changeType ) = explode( '~', $change->getType() ); //@todo: ugh! provide getters!
-
-		$fields['entity_type'] = $entityType;
-		$fields['source'] = Settings::get( 'repoBase' );
+		$fields['entity_type'] = $change->getEntityType();
 		unset( $fields['info'] );
 
 		$params = array(
 			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
 		);
-
-		$ip = isset( $fields['ip'] ) ? $fields['ip'] : ''; //@todo: provide this!
 
 		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
 

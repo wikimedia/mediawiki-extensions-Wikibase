@@ -50,7 +50,7 @@ class ItemDeletionUpdate extends EntityDeletionUpdate {
 	 * @param Entity $entity
 	 */
 	protected function doTypeSpecificStuff( Store $store, Entity $entity ) {
-		$store->newSiteLinkCache()->deleteLinksOfItem( $entity );
+		$store->newSiteLinkCache()->deleteLinksOfItem( $entity->getId() );
 	}
 
 }

@@ -34,7 +34,6 @@ class EntityFactory {
 
 	/**
 	 * Maps entity types to objects representing the corresponding entity.
-	 * TODO: put this on a better place.
 	 *
 	 * @since 0.2
 	 *
@@ -83,6 +82,25 @@ class EntityFactory {
 	 */
 	public function isEntityType( $type ) {
 		return array_key_exists( $type, self::$typeMap );
+	}
+
+	/**
+	 * Creates a new empty entity of the given type.
+	 *
+	 * @param String $type the entity type, use the XXX::ENTITY_TYPE constants.
+	 *
+	 * @return Entity the new, empty entity
+	 * @throws \MWException if $type is not a valid entity type
+	 */
+	public function newEmpty( $type ) {
+		if ( !$this->isEntityType( $type ) ) {
+			throw new \MWException( "Not an entity type: $type" );
+		}
+
+		$class = self::$typeMap[ $type ];
+
+		$obj = call_user_func( array( $class, 'newEmpty' ) );
+		return $obj;
 	}
 
 }

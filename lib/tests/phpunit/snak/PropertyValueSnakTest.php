@@ -94,6 +94,10 @@ class PropertyValueSnakTest extends SnakObjectTest {
 	 * @dataProvider newFromPropertyValueProvider
 	 */
 	public function testNewFromPropertyValue( \Wikibase\Property $property, \DataValues\DataValue $dataValue ) {
+		if ( !class_exists( '\Wikibase\PropertyContent' ) ) {
+			$this->markTestSkipped( 'PropertyContent class not found' );
+		}
+
 		// We need to make sure the property exists since otherwise
 		// we cannot obtain it based on id in the method being tested.
 		$content = \Wikibase\PropertyContent::newFromProperty( $property );

@@ -38,18 +38,18 @@ use Wikibase\Entity;
  */
 class EntityChangeTest extends \MediaWikiTestCase {
 
-	protected function getClass() {
-		return 'Wikibase\EntityChange';
-	}
-
 	public function instanceProvider() {
 		$class = $this->getClass();
 		return array_map(
 			function( Entity $entity ) use ( $class ) {
-				return array( $class::newFromEntity( $entity ) );
+				return array( $class::newFromUpdate( EntityChange::UPDATE, null, $entity ) );
 			},
 			TestChanges::getEntities()
 		);
+	}
+
+	protected function getClass() {
+		return 'Wikibase\EntityChange';
 	}
 
 	public function entityProvider() {
@@ -66,9 +66,9 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	 *
 	 * @param \Wikibase\Entity $entity
 	 */
-	public function testNewFromEntity( Entity $entity ) {
+	public function testNewFromUpdate( Entity $entity ) {
 		$class = $this->getClass();
-		$entityChange = $class::newFromEntity( $entity );
+		$entityChange = $class::newFromUpdate( EntityChange::UPDATE, null, $entity );
 		$this->assertInstanceOf( $class, $entityChange );
 		$this->assertEquals( $entity, $entityChange->getEntity() );
 	}
@@ -89,7 +89,7 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	 */
 	public function testSetAndGetEntity( Entity $entity ) {
 		$class = $this->getClass();
-        $entityChange = $class::newFromEntity( $entity );
+        $entityChange = $class::newFromUpdate( EntityChange::UPDATE, null, $entity );
 		$entityChange->setEntity( $entity );
 		$this->assertEquals( $entity, $entityChange->getEntity() );
 	}
@@ -100,32 +100,15 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	 */
 	public function testMetadata( EntityChange $entityChange ) {
 		$entityChange->setMetadata( array(
-			'rc_user' => 0,
-			'rc_user_text' => '208.80.152.201'
+			'kittens' => 3,
+			'rev_id' => 23,
+			'user_text' => '171.80.182.208',
 		) );
 		$this->assertEquals(
 			array(
-				'rc_user' => 0,
-				'rc_user_text' => '208.80.152.201'
-			),
-			$entityChange->getMetadata()
-		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @since 0.3
-	 */
-	public function testSetInvalidMetadata( EntityChange $entityChange ) {
-		$entityChange->setMetadata( array(
-			'rc_kittens' => 3,
-			'rc_user' => 0,
-			'rc_user_text' => '171.80.182.208'
-		) );
-		$this->assertEquals(
-			array(
-				'rc_user' => 0,
-				'rc_user_text' => '171.80.182.208'
+				'rev_id' => 23,
+				'user_text' => '171.80.182.208',
+				'comment' => $entityChange->getComment(),
 			),
 			$entityChange->getMetadata()
 		);
