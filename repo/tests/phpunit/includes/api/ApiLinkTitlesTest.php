@@ -34,6 +34,7 @@ use ApiTestCase;
  * @group Wikibase
  * @group WikibaseAPI
  * @group ApiLinkTitlesTest
+ * @group BreakingTheSlownessBarrier
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.

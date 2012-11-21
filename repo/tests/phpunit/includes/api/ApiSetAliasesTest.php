@@ -54,6 +54,7 @@ use Wikibase\Test\ApiModifyItemBase;
  * @group Wikibase
  * @group WikibaseAPI
  * @group ApiSetAliasesTest
+ * @group BreakingTheSlownessBarrier
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

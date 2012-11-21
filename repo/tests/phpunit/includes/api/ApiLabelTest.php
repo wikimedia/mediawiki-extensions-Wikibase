@@ -52,6 +52,7 @@ namespace Wikibase\Test;
  * @group Wikibase
  * @group WikibaseAPI
  * @group ApiLanguageAttributeTest
+ * @group BreakingTheSlownessBarrier
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
