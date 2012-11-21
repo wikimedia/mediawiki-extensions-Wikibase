@@ -102,6 +102,29 @@ class DataValueFactory {
 	}
 
 	/**
+	 * Constructs a DataValue from it's array representation.
+	 * This is what @see DataValue::toArray returns.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 *
+	 * @return DataValue
+	 * @throws InvalidArgumentException
+	 */
+	public function newFromArray( array $data ) {
+		if ( !array_key_exists( 'type', $data ) ) {
+			throw new InvalidArgumentException( 'DataValue type is missing' );
+		}
+
+		if ( !array_key_exists( 'value', $data ) ) {
+			throw new InvalidArgumentException( 'DataValue value is missing' );
+		}
+
+		return $this->newDataValue( $data['type'], $data['value'] );
+	}
+
+	/**
 	 * Returns the class associated with the provided DataValue type.
 	 *
 	 * @since 0.1

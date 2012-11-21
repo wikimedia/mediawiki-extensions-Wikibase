@@ -229,4 +229,31 @@ abstract class DataValueTest extends \MediaWikiTestCase {
 		}
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 * @param DataValue $value
+	 * @param array $arguments
+	 */
+	public function testToArray( DataValue $value, array $arguments ) {
+		$array = $value->toArray();
+
+		$this->assertInternalType( 'array', $array );
+
+		$this->assertTrue( array_key_exists( 'type', $array ) );
+		$this->assertTrue( array_key_exists( 'value', $array ) );
+
+		$this->assertEquals( $value->getType(), $array['type'] );
+		$this->assertEquals( $value->getArrayValue(), $array['value'] );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param DataValue $value
+	 * @param array $arguments
+	 */
+	public function testNewFromArrayFactory( DataValue $value, array $arguments ) {
+		$factory = \DataValues\DataValueFactory::singleton();
+		$this->assertTrue( $value->equals( $factory->newFromArray( $value->toArray() ) ) );
+	}
+
 }

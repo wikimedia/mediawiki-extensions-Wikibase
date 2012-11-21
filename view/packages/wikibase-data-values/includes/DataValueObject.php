@@ -77,4 +77,18 @@ abstract class DataValueObject implements DataValue {
 		return $this->getValue();
 	}
 
+	/**
+	 * @see DataValue::toArray
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function toArray() {
+		return array(
+			'value' => $this->getArrayValue(),
+			'type' => $this->getType(),
+		);
+	}
+
 }

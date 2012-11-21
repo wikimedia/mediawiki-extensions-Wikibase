@@ -84,4 +84,19 @@ interface DataValue extends \Hashable, \Comparable, \Serializable, \Immutable, \
 	 */
 	public function getArrayValue();
 
+	/**
+	 * Returns the whole DataValue in array form.
+	 *
+	 * The array contains:
+	 * - value: mixed, same as the result of @see getArrayValue
+	 * - type: string, same as the result of @see getType
+	 *
+	 * This is sufficient for unserialization in a factory.
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function toArray();
+
 }
