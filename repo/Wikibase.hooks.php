@@ -91,7 +91,7 @@ final class RepoHooks {
 				__DIR__ . '/sql/changes' . $extension
 			);
 
-			if ( !$updater->updateRowExists( 'ChangeChangeObjectId.sql' ) ) {
+			if ( $type === 'mysql' && !$updater->updateRowExists( 'ChangeChangeObjectId.sql' ) ) {
 				$updater->addExtensionUpdate( array(
 					'applyPatch',
 					__DIR__ . '/sql/ChangeChangeObjectId.sql',

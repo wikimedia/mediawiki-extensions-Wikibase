@@ -384,15 +384,15 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 		$terms = array(
 			$id0 => array(
-				array(
+				new Term( array(
 					'termLanguage' => 'en',
 					'termText' => 'joinedterms-0',
-				),
-				array(
+				) ),
+				new Term( array(
 					'termLanguage' => 'de',
 					'termText' => 'joinedterms-d0',
 					'termType' => Term::TYPE_DESCRIPTION,
-				)
+				) )
 			),
 		);
 
@@ -400,16 +400,20 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 		$this->assertInternalType( 'array', $actual );
 
+		/**
+		 * @var Term $term
+		 * @var Term $expected
+		 */
 		foreach ( $actual as $term ) {
-			$id = $term['entityId'];
+			$id = $term->getEntityId();
 
 			$this->assertEquals( $id0, $id );
 
-			$isFirstElement = $term['termText'] === 'joinedterms-0';
+			$isFirstElement = $term->getText() === 'joinedterms-0';
 			$expected = $terms[$id][$isFirstElement ? 0 : 1];
 
-			$this->assertEquals( $expected['termText'], $term['termText'] );
-			$this->assertEquals( $expected['termLanguage'], $term['termLanguage'] );
+			$this->assertEquals( $expected->getText(), $term->getText() );
+			$this->assertEquals( $expected->getLanguage(), $term->getLanguage() );
 		}
 
 		$actual = $lookup->getMatchingTermCombination( $terms, null, null, $id0, Item::ENTITY_TYPE );
