@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//7ZI\u003d",
+        "filename": "lib/includes/snak/SnakObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-21T14:01:40Z",
+      "side": 1,
+      "message": "It just seems good practice not to re-allocate objects to represent static knowledge.",
+      "parentUuid": "AAADZH//7dY\u003d",
+      "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//7fA\u003d",
         "filename": "lib/includes/snak/SnakObject.php",
         "patchSetId": 3
@@ -107,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//7ZE\u003d",
+        "filename": "lib/includes/snak/SnakObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-21T14:01:40Z",
+      "side": 1,
+      "message": "Yea, the question was *why* it is done this way.",
+      "parentUuid": "AAADZH//7dU\u003d",
+      "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//7eo\u003d",
         "filename": "lib/includes/snak/SnakObject.php",
         "patchSetId": 3
@@ -136,6 +172,24 @@
       "side": 1,
       "message": "because this is a serialization method for internal serialization. The only place where the format is relevant is in the serialization and unserialization functions here, where it\u0027s obviously not causing any problems. Adding in keys needlessly increases the serialization size.",
       "parentUuid": "AAADZH//7eo\u003d",
+      "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7ZA\u003d",
+        "filename": "lib/includes/snak/SnakObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-21T14:01:40Z",
+      "side": 1,
+      "message": "Ah, now you *are* worried about performance ;)",
+      "parentUuid": "AAADZH//7dQ\u003d",
       "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
