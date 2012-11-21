@@ -100,11 +100,11 @@ return call_user_func( function() {
 		'wikibase.utilities.jQuery' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
-				'wikibase.utilities/wikibase.utilities.jQuery.js',
-				'wikibase.utilities/wikibase.utilities.jQuery.ui.js'
+				'wikibase.utilities/wikibase.utilities.jQuery.js'
 			),
 			'dependencies' => array(
-				'wikibase.utilities'
+				'wikibase.utilities',
+				'jquery.eachchange'
 			)
 		),
 
@@ -260,6 +260,12 @@ return call_user_func( function() {
 			'scripts' => 'templates.js'
 		),
 
+		'jquery.eachchange' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.eachchange.js'
+			)
+		),
+
 		'jquery.ui.suggester' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.suggester.js'
@@ -268,7 +274,8 @@ return call_user_func( function() {
 				'jquery.ui/themes/default/jquery.ui.suggester.css'
 			),
 			'dependencies' => array(
-				'jquery.ui.autocomplete'
+				'jquery.ui.autocomplete',
+				'jquery.eachchange'
 			)
 		),
 
