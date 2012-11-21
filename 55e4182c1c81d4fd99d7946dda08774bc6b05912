@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//7e4\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2012-11-21T11:05:06Z",
+      "side": 1,
+      "message": "Have you considered simply showing them always, and not making a preference available?",
+      "revId": "55e4182c1c81d4fd99d7946dda08774bc6b05912",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
