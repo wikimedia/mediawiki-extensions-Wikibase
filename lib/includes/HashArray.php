@@ -45,7 +45,7 @@ use GenericArrayObject;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class HashArray extends GenericArrayObject implements \Hashable {
+abstract class HashArray extends GenericArrayObject implements \Hashable, \Comparable {
 
 	/**
 	 * Maps element hashes to their offsets.
@@ -235,6 +235,8 @@ abstract class HashArray extends GenericArrayObject implements \Hashable {
 	/**
 	 * @see Hashable::getHash
 	 *
+	 * The hash is purely valuer based. Order of the elements in the array is not held into account.
+	 *
 	 * @since 0.1
 	 *
 	 * @internal param MapHasher $mapHasher
@@ -252,6 +254,23 @@ abstract class HashArray extends GenericArrayObject implements \Hashable {
 		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
 
 		return $hasher->hash( $this );
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * The comparison is done purely value based, ignoring the order of the elements in the array.
+	 *
+	 * @since 0.3
+	 *
+	 * @param mixed $mixed
+	 *
+	 * @return boolean
+	 */
+	public function equals( $mixed ) {
+		return is_object( $mixed )
+			&& $mixed instanceof HashArray
+			&& $this->getHash() === $mixed->getHash();
 	}
 
 	/**
