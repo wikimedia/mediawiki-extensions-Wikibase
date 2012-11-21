@@ -796,4 +796,17 @@ abstract class EntityObject implements Entity {
 		return $this->getPrefixedId() . '$' . $claimGuid;
 	}
 
+	/**
+	 * @see Entity::newClaim
+	 *
+	 * @since 0.3
+	 *
+	 * @param Snak $mainSnak
+	 *
+	 * @return Claim
+	 */
+	public function newClaim( Snak $mainSnak ) {
+		return new ClaimObject( $mainSnak );
+	}
+
 }

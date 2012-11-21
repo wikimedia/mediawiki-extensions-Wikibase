@@ -8,11 +8,22 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 === Version 0.3 ===
 (dev)
 
+; Interface
+
 * Added Special:ListDatatypes
 * Added Special:NewProperty
+
+; API
+
 * Added wbcreateclaim API module
 * Added wbgetclaims API module
+* Added wbremoveclaims API module
+
+; Backend
+
 * Claims are now included in the output of EntitySerializer, thus are now present in the wbgetentities API module
+* API serializers have been moved to lib and made non-API specific
+* Internal serialization logic for Snak, Claim, Statement and Reference has been implemented in toArray and newFromArray.
 
 === Version 0.2 ===
 (???)

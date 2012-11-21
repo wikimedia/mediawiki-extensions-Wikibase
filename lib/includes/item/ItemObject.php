@@ -220,4 +220,17 @@ class ItemObject extends EntityObject implements Item {
 		return ItemDiff::newFromItems( $this, $target );
 	}
 
+	/**
+	 * @see Entity::newClaim
+	 *
+	 * @since 0.3
+	 *
+	 * @param Snak $mainSnak
+	 *
+	 * @return Statement
+	 */
+	public function newClaim( Snak $mainSnak ) {
+		return new StatementObject( $mainSnak );
+	}
+
 }
