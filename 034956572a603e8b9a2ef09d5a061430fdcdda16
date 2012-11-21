@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//7VU\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-21T14:49:28Z",
+      "side": 1,
+      "message": "function ( event, oldVal ) {",
+      "revId": "034956572a603e8b9a2ef09d5a061430fdcdda16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7VM\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-21T14:49:28Z",
+      "side": 1,
+      "message": "Whether",
+      "revId": "034956572a603e8b9a2ef09d5a061430fdcdda16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
