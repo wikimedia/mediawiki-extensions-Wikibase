@@ -4,11 +4,14 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( wb, $, undefined ) {
+( function( wb, dv, $, undefined ) {
 'use strict';
 
 var PARENT = wb.Snak,
 	constructor = function( propertyId, value ) {
+		if( !( value instanceof dv.DataValue ) ) {
+			throw new Error( 'The value has to be an instance of dataValues.DataValue' );
+		}
 		PARENT.call( this, propertyId );
 		this._value = value;
 	};
@@ -21,7 +24,7 @@ var PARENT = wb.Snak,
  * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#PropertyValueSnak
  *
  * @param {Number} propertyId
- * @param {dataValues.Value} value
+ * @param {dv.DataValue} value
  */
 wb.PropertyValueSnak = wb.utilities.inherit( PARENT, constructor, {
 	/**
@@ -30,18 +33,28 @@ wb.PropertyValueSnak = wb.utilities.inherit( PARENT, constructor, {
 	TYPE: 'value',
 
 	/**
-	 * @type dataValues.Value
+	 * @type dv.DataValue
 	 */
 	_value: null,
 
 	/**
 	 * Returns the Snaks data value.
 	 *
-	 * @return {dataValues.Value|_value}
+	 * @return {dv.DataValue|_value}
 	 */
 	getValue: function() {
 		return this._value;
+	},
+
+	/**
+	 * @see wb.Snak.toJSON
+	 */
+	toJSON: function() {
+		var json = PARENT.prototype.toJSON.call( this );
+		json.value = this.getValue().toJSON();
+
+		return json;
 	}
 } );
 
-}( wikibase, jQuery ) );
+}( wikibase, dataValues, jQuery ) );
