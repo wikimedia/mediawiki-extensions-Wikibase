@@ -604,9 +604,30 @@ final class ClientHooks {
 	 *
 	 * @param \SpecialRecentChanges $special
 	 * @param array &$filters
+	 *
+	 * @return bool
 	 */
-	public static function onSpecialRecentChangesFilters( $special, &$filters ) {
-		$filters['hidewikidata'] = array( 'msg' => 'wbc-rc-hide-wikidata', 'default' => true );
+	public static function onSpecialRecentChangesFilters( \SpecialRecentChanges $special, array &$filters ) {
+		$showWikidata = $special->getUser()->getOption( 'rcshowwikidata' );
+		$default = $showWikidata ? false : true;
+		$filters['hidewikidata'] = array( 'msg' => 'wbc-rc-hide-wikidata', 'default' => $default );
+		return true;
+	}
+
+	/**
+	 * Adds a preference for showing or hiding Wikidata entries in recent changes
+	 *
+	 * @param \User $user
+	 * @param $preferences[]
+	 *
+	 * @return bool
+	 */
+	public static function onGetPreferences( \User $user, array $prefs ) {
+		$prefs['rcshowwikidata'] = array(
+			'type' => 'toggle',
+			'label-message' => 'wbc-rc-show-wikidata-pref',
+			'section' => 'rc/advancedrc',
+		);
 		return true;
 	}
 
