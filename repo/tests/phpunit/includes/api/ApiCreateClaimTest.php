@@ -155,7 +155,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 		return array();
 		// TODO: during PHPUnit run the tests are thrown as usage exceptions
 		// which makes the test think there is an error and fail.
-		
+
 		//return $argLists;
 	}
 
