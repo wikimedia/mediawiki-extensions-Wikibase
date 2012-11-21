@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//7g4\u003d",
+        "filename": "lib/includes/claim/ClaimObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-21T11:00:23Z",
+      "side": 1,
+      "message": "$ will create problem with interpretation as a link, while the previous # could be used as a fragment directly but also could generate problems as the hash mark starts a comment. Use of $ can also create problems when using the string in some programming languages as it could end up as a valid variable name, for example during replacement. I think I would prefer a dot or forward slash, but probably would check alternate id schema first.",
+      "revId": "6d8edaa8f036c3d8f6003c6dc7b63e3129ceba41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
