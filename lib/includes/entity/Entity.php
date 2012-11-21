@@ -328,4 +328,15 @@ interface Entity extends \Comparable, ClaimAggregate, \Serializable, ClaimListAc
 	 */
 	public function createClaimKey( $claimGuid );
 
+	/**
+	 * Returns a new Claim with the provided Snak as main snak.
+	 *
+	 * @since 0.3
+	 *
+	 * @param Snak $mainSnak
+	 *
+	 * @return Claim
+	 */
+	public function newClaim( Snak $mainSnak );
+
 }
