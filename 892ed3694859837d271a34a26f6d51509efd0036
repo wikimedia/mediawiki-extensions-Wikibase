@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//7WM\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-21T14:40:38Z",
+      "side": 1,
+      "message": "that",
+      "revId": "892ed3694859837d271a34a26f6d51509efd0036",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7V4\u003d",
+        "filename": "repo/tests/phpunit/includes/FuzzyCompareTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-21T14:40:38Z",
+      "side": 1,
+      "message": "How comes all scores are zero?",
+      "revId": "892ed3694859837d271a34a26f6d51509efd0036",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7V8\u003d",
+        "filename": "repo/tests/phpunit/includes/FuzzyCompareTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-21T14:40:38Z",
+      "side": 1,
+      "message": "provider should be static",
+      "revId": "892ed3694859837d271a34a26f6d51509efd0036",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
