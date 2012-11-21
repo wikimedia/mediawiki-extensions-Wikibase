@@ -16,6 +16,24 @@
       "revId": "45910b554ead8b06f993dc55c968abe05dc2bbbf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7Tk\u003d",
+        "filename": "lib/includes/item/ItemObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-21T15:06:10Z",
+      "side": 1,
+      "message": "StatementObject implements Statement which extends Claim",
+      "parentUuid": "AAADZH//7Uw\u003d",
+      "revId": "45910b554ead8b06f993dc55c968abe05dc2bbbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
