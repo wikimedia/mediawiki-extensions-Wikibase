@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZX///wc\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-21T22:39:01Z",
+      "side": 1,
+      "message": "onTitleGetRestrictionTypes( Title $title, array \u0026$types )",
+      "revId": "b5fa1ff069bfa710dd6dceb3e57e71685ebc7e0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZX///wY\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-21T22:39:01Z",
+      "side": 1,
+      "message": "you are not adding elements, so why would this be needed?",
+      "revId": "b5fa1ff069bfa710dd6dceb3e57e71685ebc7e0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
