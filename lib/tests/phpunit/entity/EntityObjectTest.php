@@ -572,4 +572,28 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 		$this->assertEquals( count( $entity->getClaims() ) !== 0, $has );
 	}
 
+	/**
+	 * Tests Entity::newClaim and EntityObject::getIdFromClaimGuid
+	 *
+	 * @dataProvider instanceProvider
+	 *
+	 * @param Entity $entity
+	 */
+	public function testNewClaim( Entity $entity ) {
+		$snak = new \Wikibase\PropertyNoValueSnak( new EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) );
+		$claim = $entity->newClaim( $snak );
+
+		$this->assertInstanceOf( '\Wikibase\Claim', $claim );
+
+		$this->assertTrue( $snak->equals( $claim->getMainSnak() ) );
+
+		$guid = $claim->getGuid();
+
+		$this->assertInternalType( 'string', $guid );
+
+		$prefixedEntityId = \Wikibase\EntityObject::getIdFromClaimGuid( $guid );
+
+		$this->assertEquals( $entity->getPrefixedId(), $prefixedEntityId );
+	}
+
 }
