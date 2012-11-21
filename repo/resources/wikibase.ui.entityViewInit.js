@@ -134,6 +134,18 @@
 		$( '.wb-entity' ).fadeTo( 0, 1 );
 		$( '.wb-entity-spinner' ).remove();
 
+		// BUILD CLAIMS VIEW:
+
+		var $claims = $( '<div/>' );
+
+		$.each( wikibase.entity.claims, function( i, claim ) {
+			var $snakView = $( '<div/>' ).snakview().appendTo( $claims );
+
+			// display value of the claim:
+			$snakView.data( 'snakview' ).value( claim.getMainSnak() );
+		} );
+
+		$( '.wb-entity' ).append( $claims );
 	} );
 
 } )( jQuery, mediaWiki, wikibase );
