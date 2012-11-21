@@ -230,7 +230,9 @@ class ItemObject extends EntityObject implements Item {
 	 * @return Statement
 	 */
 	public function newClaim( Snak $mainSnak ) {
-		return new StatementObject( $mainSnak );
+		$claim = new StatementObject( $mainSnak );
+		$claim->setGuid( $this->newClaimGuid() );
+		return $claim;
 	}
 
 }

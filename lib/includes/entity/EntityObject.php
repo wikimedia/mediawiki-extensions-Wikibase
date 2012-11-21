@@ -784,19 +784,6 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Entity::createClaimKey
-	 *
-	 * @since 0.3
-	 *
-	 * @param string $claimGuid
-	 *
-	 * @return string
-	 */
-	public function createClaimKey( $claimGuid ) {
-		return $this->getPrefixedId() . '$' . $claimGuid;
-	}
-
-	/**
 	 * @see Entity::newClaim
 	 *
 	 * @since 0.3
@@ -806,7 +793,40 @@ abstract class EntityObject implements Entity {
 	 * @return Claim
 	 */
 	public function newClaim( Snak $mainSnak ) {
-		return new ClaimObject( $mainSnak );
+		$claim = new ClaimObject( $mainSnak );
+		$claim->setGuid( $this->newClaimGuid() );
+		return $claim;
+	}
+
+	/**
+	 * @see Entity::newClaimGuid
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	public final function newClaimGuid() {
+		return $this->getPrefixedId() . '$' . Utils::getGuid();
+	}
+
+	/**
+	 * Parses the claim GUID and returns the prefixed entity ID it contains.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimKey
+	 *
+	 * @return string
+	 * @throws MWException
+	 */
+	public static function getIdFromClaimGuid( $claimKey ) {
+		$keyParts = explode( '$', $claimKey );
+
+		if ( count( $keyParts ) !== 2 ) {
+			throw new MWException( 'A claim key should have a single $ in it' );
+		}
+
+		return $keyParts[0];
 	}
 
 }

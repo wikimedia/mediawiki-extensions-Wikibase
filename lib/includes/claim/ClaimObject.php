@@ -142,13 +142,9 @@ class ClaimObject implements Claim {
 	 *
 	 * @since 0.2
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function getGuid() {
-		if ( $this->guid === null ) {
-			$this->guid = Utils::getGuid();
-		}
-
 		return $this->guid;
 	}
 
@@ -157,20 +153,19 @@ class ClaimObject implements Claim {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $guid
+	 * @param string|null $guid
 	 *
 	 * @throws MWException
 	 */
 	public function setGuid( $guid ) {
-		if ( !is_string( $guid ) ) {
-			throw new MWException( 'Can only set the GUID to string values' );
+		if ( !is_string( $guid ) && $guid !== null ) {
+			throw new MWException( 'Can only set the GUID to string values or null' );
 		}
 
 		$this->guid = $guid;
 	}
 
 	/**
-<<<<<<< HEAD
 	 * @see Claim::toArray
 	 *
 	 * @since 0.3
@@ -181,7 +176,7 @@ class ClaimObject implements Claim {
 		return array(
 			'm' => $this->mainSnak->toArray(),
 			'q' => $this->qualifiers->toArray(),
-			'g' => $this->getGuid(),
+			'g' => $this->guid,
 		);
 	}
 
@@ -195,11 +190,6 @@ class ClaimObject implements Claim {
 	 * @return Claim
 	 */
 	public static function newFromArray( array $data ) {
-		if ( !is_array( $data ) ) {
-			$data = json_decode( $data );
-			$data = (array)$data;
-		}
-
 		if ( array_key_exists( 'rank', $data ) ) {
 			return StatementObject::newFromArray( $data );
 		}
@@ -239,28 +229,6 @@ class ClaimObject implements Claim {
 		$this->setMainSnak( $instance->getMainSnak() );
 		$this->setQualifiers( $instance->getQualifiers() );
 		$this->setGuid( $instance->getGuid() );
-	}
-
-	/*
-	 * Parses a claim key to prefixed entity id and claim GUID.
-	 *
-	 * @since 0.3
-	 *
-	 * @param string $claimKey
-	 *
-	 * @return array
-	 * First element is a prefixed entity id
-	 * Second element is either null or a claim GUID
-	 * @throws MWException
-	 */
-	public static function parseKey( $claimKey ) {
-		$keyParts = explode( '$', $claimKey );
-
-		if ( count( $keyParts ) !== 2 ) {
-			throw new MWException( 'A claim key should have a single $ in it' );
-		}
-
-		return $keyParts;
 	}
 
 }

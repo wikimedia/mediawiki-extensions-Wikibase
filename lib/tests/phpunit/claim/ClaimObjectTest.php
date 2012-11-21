@@ -156,8 +156,11 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 	 */
 	public function testGetGuid( Claim $claim ) {
 		$guid = $claim->getGuid();
-		$this->assertInternalType( 'string', $guid );
+		$this->assertTypeOrValue( 'string', $guid, null );
 		$this->assertEquals( $guid, $claim->getGuid() );
+
+		$claim->setGuid( 'foobar' );
+		$this->assertEquals( 'foobar', $claim->getGuid() );
 	}
 
 	/**
