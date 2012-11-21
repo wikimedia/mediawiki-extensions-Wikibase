@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//7fI\u003d",
+        "filename": "lib/includes/reference/ReferenceList.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-21T11:11:05Z",
+      "side": 1,
+      "message": "IS it really necessary to construct a new instance for every call to this function? That can be a LOT of calls... and MapValueHasher is stateless, right? Can we use a singleton?",
+      "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7ew\u003d",
+        "filename": "lib/includes/snak/SnakObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-21T11:11:05Z",
+      "side": 1,
+      "message": "Do we really want to re-create this map for every call? how about:\n\nstatic $snakJar \u003d array( ... );\n\nCan be in the function scope or the class scope, doesn\u0027t matter much.",
+      "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7fA\u003d",
+        "filename": "lib/includes/snak/SnakObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-21T11:11:05Z",
+      "side": 1,
+      "message": "uh, $data is in *indexed* array? why are we doing this position-based?",
+      "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7eo\u003d",
+        "filename": "lib/includes/snak/SnakObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-21T11:11:05Z",
+      "side": 1,
+      "message": "again... ugh at $data[0]. Why not $data[\u0027value\u0027] and $data[\u0027type\u0027]?",
+      "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7ec\u003d",
+        "filename": "lib/tests/phpunit/hasharray/HashArrayTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-21T11:11:05Z",
+      "side": 1,
+      "message": "hm... the provider should really provide thre arguments: ( HashArray $a, HashArray $b, $shouldBeEqual ). So then we can do assertEquals( $shouldBeEqual, $a-\u003eequals( $b ) );",
+      "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7eY\u003d",
+        "filename": "lib/tests/phpunit/reference/ReferenceListTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-21T11:11:05Z",
+      "side": 1,
+      "message": "Why the serialize/unserialize dance?",
+      "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7eU\u003d",
+        "filename": "lib/tests/phpunit/reference/ReferenceListTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-21T11:11:05Z",
+      "side": 1,
+      "message": "See my comment in HashArrayTest::testEquals",
+      "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7eQ\u003d",
+        "filename": "lib/tests/phpunit/snak/SnakListTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-21T11:11:05Z",
+      "side": 1,
+      "message": "Again: why?",
+      "revId": "a906a554c4ed8a6533603f56fd4e261c8d3cea24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
