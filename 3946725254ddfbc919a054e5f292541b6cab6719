@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZX///Ik\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiCreateClaimTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-22T21:23:07Z",
+      "side": 1,
+      "message": "Iiik, a whitespace! :-O",
+      "revId": "3946725254ddfbc919a054e5f292541b6cab6719",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
