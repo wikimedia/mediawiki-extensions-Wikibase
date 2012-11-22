@@ -61,4 +61,5 @@ final class ClientUtils {
 
 		return \Html::rawElement( 'a', $attribs, $text );
 	}
+
 }

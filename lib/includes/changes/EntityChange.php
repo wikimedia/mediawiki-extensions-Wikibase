@@ -42,6 +42,11 @@ class EntityChange extends DiffChange {
 	private $entityId = null;
 
 	/**
+	 * @var string $comment
+	 */
+	protected $comment;
+
+	/**
 	 * @since 0.3
 	 *
 	 * @return Entity
@@ -190,10 +195,28 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.3
 	 *
+	 * @param string
+	 *
+	 * @return string
+	 */
+	public function setComment( $comment = null ) {
+		if ( $comment !== null ) {
+			$this->comment = $comment;
+		} else {
+			$this->comment = 'wbc-comment-' . $this->getAction();
+		}
+	}
+
+	/**
+	 * @since 0.3
+	 *
 	 * @return string
 	 */
 	public function getComment() {
-		return 'wbc-comment-' . $this->getAction();
+		if ( $this->comment === null ) {
+			$this->setComment();
+		}
+		return $this->comment;
 	}
 
 	/**
