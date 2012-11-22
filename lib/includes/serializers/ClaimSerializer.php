@@ -55,6 +55,7 @@ class ClaimSerializer extends SerializerObject {
 
 	/**
 	 * Unserializes the rank and returns an element from the Statement::RANK_ enum.
+	 * Roundtrips with @see ClaimSerializer::serializeRank
 	 *
 	 * @since 0.3
 	 *
@@ -65,6 +66,20 @@ class ClaimSerializer extends SerializerObject {
 	public static function unserializeRank( $serializedRank ) {
 		$ranks = array_flip( self::$rankMap );
 		return $ranks[$serializedRank];
+	}
+
+	/**
+	 * Serializes the rank.
+	 * Roundtrips with @see ClaimSerializer::unserializeRank
+	 *
+	 * @since 0.3
+	 *
+	 * @param integer $rank
+	 *
+	 * @return string
+	 */
+	public static function serializeRank( $rank ) {
+		return self::$rankMap[$rank];
 	}
 
 	/**

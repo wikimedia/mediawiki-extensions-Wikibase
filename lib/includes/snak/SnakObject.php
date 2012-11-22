@@ -44,11 +44,15 @@ abstract class SnakObject implements Snak {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityId $propertyId
+	 * @param EntityId|integer $propertyId
 	 *
 	 * @throws MWException
 	 */
 	public function __construct( $propertyId ) {
+		if ( is_integer( $propertyId ) ) {
+			$propertyId = new EntityId( Property::ENTITY_TYPE, $propertyId );
+		}
+
 		if ( !$propertyId instanceof EntityId ) {
 			throw new MWException( '$propertyId should be a EntityId' );
 		}

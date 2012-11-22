@@ -96,7 +96,7 @@ class ApiGetClaims extends Api {
 	protected function getClaims( Entity $entity, $claimGuid ) {
 		if ( $claimGuid !== null ) {
 			return $entity->hasClaimWithGuid( $claimGuid ) ?
-				$entity->getClaimWithGuid( $claimGuid ) : array();
+				array( $entity->getClaimWithGuid( $claimGuid ) ) : array();
 		}
 
 		$claims = array();

@@ -33,6 +33,22 @@ use MWException, WikiPage, Title, Content;
  */
 abstract class EntityHandler extends \ContentHandler {
 
+	/**
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public abstract function getEntityPrefix();
+
+	/**
+	 * Returns the name of the EntityContent deriving class.
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	protected abstract function getContentClass();
+
 	public function __construct( $modelId ) {
 		$formats = array(
 			CONTENT_FORMAT_JSON,
@@ -40,6 +56,18 @@ abstract class EntityHandler extends \ContentHandler {
 		);
 
 		parent::__construct( $modelId, $formats );
+	}
+
+	/**
+	 * @see ContentHandler::makeEmptyContent
+	 *
+	 * @since 0.1
+	 *
+	 * @return EntityContent
+	 */
+	public function makeEmptyContent() {
+		$contentClass = $this->getContentClass();
+		return $contentClass::newEmpty();
 	}
 
 	/**
@@ -112,13 +140,6 @@ abstract class EntityHandler extends \ContentHandler {
 
 		return $data;
 	}
-
-	/**
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public abstract function getEntityPrefix();
 
 	/**
 	 * @see EntityHandler::getEntityNamespace
@@ -211,4 +232,19 @@ abstract class EntityHandler extends \ContentHandler {
 	public function getSpecialPageForCreation() {
 		return null;
 	}
+
+	/**
+	 * Constructs a new EntityContent from an Entity.
+	 *
+	 * @since 0.3
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return EntityContent
+	 */
+	public function newContentFromEntity( Entity $entity ) {
+		$contentClass = $this->getContentClass();
+		return new $contentClass( $entity );
+	}
+
 }

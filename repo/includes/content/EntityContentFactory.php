@@ -185,4 +185,22 @@ class EntityContentFactory {
 		Query::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_QUERY,
 	);
 
+	/**
+	 * Constructs a new EntityContent from an Entity.
+	 *
+	 * @since 0.3
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return EntityContent
+	 */
+	public function newFromEntity( Entity $entity ) {
+		/**
+		 * @var EntityHandler $handler
+		 */
+		$handler = \ContentHandler::getForModelID( self::$typeMap[$entity->getType()] );
+
+		return $handler->newContentFromEntity( $entity );
+	}
+
 }

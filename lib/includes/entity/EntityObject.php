@@ -642,6 +642,7 @@ abstract class EntityObject implements Entity {
 	public function addClaim( Claim $claim ) {
 		$this->unstubClaims();
 		$this->claims->addClaim( $claim );
+		// TODO: ensure guid is valid for entity
 	}
 
 	/**
@@ -707,7 +708,7 @@ abstract class EntityObject implements Entity {
 	 */
 	public function getClaimWithGuid( $claimGuid ) {
 		$this->unstubClaims();
-		$this->claims->getClaimWithGuid( $claimGuid );
+		return $this->claims->getClaimWithGuid( $claimGuid );
 	}
 
 	/**

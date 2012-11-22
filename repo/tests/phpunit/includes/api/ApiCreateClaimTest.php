@@ -30,7 +30,6 @@ use Wikibase\Entity;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group ApiCreateClaimTest
  *
  * @group medium
  *
@@ -39,23 +38,33 @@ use Wikibase\Entity;
  */
 class ApiCreateClaimTest extends \ApiTestCase {
 
-	public function testValidRequest() {
+	protected function getNewEntityAndProperty() {
 		$entity = \Wikibase\ItemObject::newEmpty();
 		$content = new \Wikibase\ItemContent( $entity );
 		$content->save( '', null, EDIT_NEW );
 		$entity = $content->getEntity();
 
-		$dataTypes = \Wikibase\Settings::get( 'dataTypes' );
-		$property = \Wikibase\PropertyObject::newFromType( reset( $dataTypes ) );
+		$property = \Wikibase\PropertyObject::newFromType( 'commonsMedia' );
 		$content = new \Wikibase\PropertyContent( $property );
 		$content->save( '', null, EDIT_NEW );
 		$property = $content->getEntity();
 
+		return array( $entity, $property );
+	}
+
+	public function testValidRequest() {
+		/**
+		 * @var Entity $entity
+		 * @var Entity $property
+		 */
+		list( $entity, $property ) = $this->getNewEntityAndProperty();
+
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => $entity->getPrefixedId(),
-			'snaktype' => 'somevalue',
+			'snaktype' => 'value',
 			'property' => $property->getPrefixedId(),
+			'value' => 'foo',
 		);
 
 		list( $resultArray, ) = $this->doApiRequest( $params );
@@ -73,7 +82,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 
 		$this->assertEquals( $entity->getPrefixedId(), $entityId );
 
-		$this->assertEquals( 'somevalue', $claim['mainsnak']['snaktype'] );
+		$this->assertEquals( 'value', $claim['mainsnak']['snaktype'] );
 
 		$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
 
@@ -81,16 +90,11 @@ class ApiCreateClaimTest extends \ApiTestCase {
 	}
 
 	public function invalidRequestProvider() {
-		$entity = \Wikibase\ItemObject::newEmpty();
-		$content = new \Wikibase\ItemContent( $entity );
-		$content->save( '', null, EDIT_NEW );
-		$entity = $content->getEntity();
-
-		$dataTypes = \Wikibase\Settings::get( 'dataTypes' );
-		$property = \Wikibase\PropertyObject::newFromType( reset( $dataTypes ) );
-		$content = new \Wikibase\PropertyContent( $property );
-		$content->save( '', null, EDIT_NEW );
-		$property = $content->getEntity();
+		/**
+		 * @var Entity $entity
+		 * @var Entity $property
+		 */
+		list( $entity, $property ) = $this->getNewEntityAndProperty();
 
 		$argLists = array();
 
