@@ -92,4 +92,6 @@ class DataValuesFactoryTest extends \MediaWikiTestCase {
 		$this->assertTrue( true );
 	}
 
+	// newFromArray is tested in DataValueTest
+
 }
