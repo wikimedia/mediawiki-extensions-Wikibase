@@ -16,6 +16,24 @@
       "revId": "dcf60b77bfe10fbc26be4580f94fd63c5c2fa07b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH///RM\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-22T15:00:00Z",
+      "side": 1,
+      "message": "yes, it\u0027s not ideal per the todo. we have bug https://bugzilla.wikimedia.org/42289 for improving this but agreed it\u0027s not the highest priority for now.  We are using RC_EXTERNAL for now and this works for now.",
+      "parentUuid": "AAADZH///Rc\u003d",
+      "revId": "dcf60b77bfe10fbc26be4580f94fd63c5c2fa07b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
