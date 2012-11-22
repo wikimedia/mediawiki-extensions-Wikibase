@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZX///JQ\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiRemoveClaimsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-22T20:56:40Z",
+      "side": 1,
+      "message": "Missing group Database, is this intentional? You will then save to the ordinary database..",
+      "revId": "34581ec766d2c9b37b48d3db532bbfdc715f981b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
