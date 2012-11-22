@@ -36,7 +36,8 @@ return call_user_func( function() {
 		'wikibase' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.js',
-				'wikibase.Site.js'
+				'wikibase.Site.js',
+				'wikibase.RevisionStore.js'
 			),
 			'dependencies' => array(
 				'wikibase.common',
