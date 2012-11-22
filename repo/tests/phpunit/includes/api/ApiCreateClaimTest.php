@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\Entity;
 
 /**
  * Unit tests for the Wikibase\ApiCreateClaim class.
@@ -73,6 +74,10 @@ class ApiCreateClaimTest extends \ApiTestCase {
 		$this->assertEquals( $entity->getPrefixedId(), $entityId );
 
 		$this->assertEquals( 'somevalue', $claim['mainsnak']['snaktype'] );
+
+		$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
+
+		$this->assertTrue( $entityContent->getEntity()->hasClaimWithGuid( $claim['id'] ) );
 	}
 
 	public function invalidRequestProvider() {
@@ -112,16 +117,6 @@ class ApiCreateClaimTest extends \ApiTestCase {
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => $entity->getPrefixedId(),
-			'snaktype' => 'value',
-			'property' => 'q0',
-			'value' => 'foo',
-		);
-
-		$argLists[] = array( 'unknownerror', $params );
-
-		$params = array(
-			'action' => 'wbcreateclaim',
-			'entity' => $entity->getPrefixedId(),
 			'snaktype' => 'hax',
 			'property' => $property->getPrefixedId(),
 			'value' => 'foo',
@@ -129,7 +124,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 
 		$argLists[] = array( 'unknown_snaktype', $params );
 
-		foreach ( array( 'entity', 'snaktype', 'property' ) as $requiredParam ) {
+		foreach ( array( 'entity', 'snaktype' ) as $requiredParam ) {
 			$params = array(
 				'action' => 'wbcreateclaim',
 				'entity' => $entity->getPrefixedId(),
@@ -146,17 +141,26 @@ class ApiCreateClaimTest extends \ApiTestCase {
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => $entity->getPrefixedId(),
-			'snaktype' => 'hax',
+			'snaktype' => 'value',
+			'value' => 'foo',
+		);
+
+		$argLists[] = array( 'claim-property-id-missing', $params );
+
+		$params = array(
+			'action' => 'wbcreateclaim',
+			'entity' => $entity->getPrefixedId(),
+			'snaktype' => 'value',
 			'property' => $property->getPrefixedId(),
 		);
 
 		$argLists[] = array( 'claim-value-missing', $params );
 
-		return array();
-		// TODO: during PHPUnit run the tests are thrown as usage exceptions
-		// which makes the test think there is an error and fail.
+		foreach ( $argLists as &$argList ) {
+			$argList[] = $entity;
+		}
 
-		//return $argLists;
+		return $argLists;
 	}
 
 	/**
@@ -164,19 +168,20 @@ class ApiCreateClaimTest extends \ApiTestCase {
 	 *
 	 * @param string $errorCode
 	 * @param array $params
+	 * @param Entity $entity
 	 */
-	public function testInvalidRequest( $errorCode, array $params ) {
-		list( $resultArray, ) = $this->doApiRequest( $params );
+	public function testInvalidRequest( $errorCode, array $params, Entity $entity ) {
+		try {
+			$this->doApiRequest( $params );
+			$this->assertFalse( true, 'Invalid request should raise an exception' );
+		}
+		catch ( \UsageException $e ) {
+			$this->assertEquals( $errorCode, $e->getCodeString(), 'Invalid request raised correct error' );
+		}
 
-		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
-		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has an error key' );
+		$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
 
-		$error = $resultArray['error'];
-
-		$this->assertArrayHasKey( 'code', $error, 'error element has a code key' );
-		$this->assertArrayHasKey( 'info', $error, 'error element has an info key' );
-
-		$this->assertEquals( $errorCode, $error['code'] );
+		$this->assertFalse( $entityContent->getEntity()->hasClaims() );
 	}
 
 }
