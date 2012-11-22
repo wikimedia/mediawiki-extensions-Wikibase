@@ -61,4 +61,31 @@ final class ClientUtils {
 
 		return \Html::rawElement( 'a', $attribs, $text );
 	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param EntityChange $change
+	 *
+	 * @return string|null
+	 */
+	public static function siteLinkComment( $change ) {
+		$comment = null;
+		if ( !$change->getSiteLinkDiff()->isEmpty() ) {
+			$siteLinkDiff = $change->getSiteLinkDiff();
+			$changeKey = key( $siteLinkDiff );
+			$diffOp = $siteLinkDiff[$changeKey];
+
+			$action = 'change';
+			if ( $diffOp instanceof \Diff\DiffOpAdd ) {
+				$action = 'add';
+			} else if ( $diffOp instanceof \Diff\DiffOpRemove ) {
+				$action = 'remove';
+			}
+
+			$comment = "wbc-comment-sitelink-$action~" . key( $siteLinkDiff );
+		}
+
+		return $comment;
+	}
 }

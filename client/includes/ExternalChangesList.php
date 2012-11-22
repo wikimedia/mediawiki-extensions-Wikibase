@@ -114,7 +114,7 @@ class ExternalChangesList {
 		$line .= $userlinks;
 
 		if ( array_key_exists( 'comment', $entityData  ) ) {
-			$commentText = wfMessage( $entityData['comment'] )->text();
+			$commentText = self::parseComment( $entityData );
 		} else {
 			$commentText = '';
 		}
@@ -130,6 +130,30 @@ class ExternalChangesList {
 	 */
 	protected static function changeSeparator() {
 		return ' <span class="mw-changeslist-separator">. .</span> ';
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param string $comment
+	 *
+	 * @return string
+	 */
+	public static function parseComment( $entityData ) {
+		$parts = explode( '~', $entityData['comment'] );
+		$action = $entityData['action'];
+		if ( $parts[1] == Settings::get( 'siteGlobalID' ) ) {
+			if ( $action === 'remove' ) {
+				$message = wfMessage( 'wbc-comment-remove' )->text();
+			} else if ( $action === 'restore' ) {
+				$message = wfMessage( 'wbc-comment-restore' )->text();
+			} else {
+				$message = wfMessage( 'wbc-comment-unlink' )->text();
+			}
+		} else {
+			$message = wfMessage( $parts[0] )->params( $parts[1] )->text();
+		}
+		return $message;
 	}
 
 	/**

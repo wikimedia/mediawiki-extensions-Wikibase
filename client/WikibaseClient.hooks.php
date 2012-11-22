@@ -189,6 +189,9 @@ final class ClientHooks {
 			if ( $siteLink ) {
 				// we have a corresponding page on this wiki, so re-render it.
 				$pagesToUpdate[] = $siteLink->getPage();
+
+				$siteLinkDiff = $change->getSiteLinkDiff();
+				$change->setComment( ClientUtils::siteLinkComment( $change ) );
 			}
 		}
 
@@ -277,6 +280,8 @@ final class ClientHooks {
 			return false;
 		}
 
+		$rcinfo['comment'] = $change->getComment();
+		$rcinfo['action'] = $change->getAction();
 		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
 		$fields['entity_type'] = $change->getEntityType();
 		unset( $fields['info'] );
