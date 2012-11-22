@@ -122,6 +122,24 @@
       "revId": "892ed3694859837d271a34a26f6d51509efd0036",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZX///j4\u003d",
+        "filename": "repo/tests/phpunit/includes/FuzzyCompareTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-22T08:42:48Z",
+      "side": 1,
+      "message": "1) Providers have been converted to \"public static function provideX\", as the linked commit proves.\n2) The providers are called statically. I spent hours debugging test case where provider tried to use $this but silently failed. All that time would have not been wasted if the providers were marked as static as they are supposed to.\n\nIf that is not definite I don\u0027t know what is.",
+      "parentUuid": "AAADZX///68\u003d",
+      "revId": "892ed3694859837d271a34a26f6d51509efd0036",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
