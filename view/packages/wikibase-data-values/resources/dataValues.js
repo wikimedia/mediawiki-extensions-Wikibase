@@ -15,6 +15,7 @@
  * @type Object
  */
 var dataValues = new( function( $, undefined ) {
+	'use strict';
 
 	var dvs = [];
 
@@ -96,3 +97,5 @@ var dataValues = new( function( $, undefined ) {
 	};
 
 } )( jQuery );
+
+window.dataValues = dataValues; // global alias

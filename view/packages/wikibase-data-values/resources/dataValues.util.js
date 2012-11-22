@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( dv, $, undefined ) {
+( function( $, dv, undefined ) {
 	'use strict';
 
 	/**
@@ -64,4 +64,4 @@
 		throw new Error( 'Call to undefined abstract function' );
 	};
 
-}( dataValues, jQuery ) );
+}( jQuery, dataValues ) );
