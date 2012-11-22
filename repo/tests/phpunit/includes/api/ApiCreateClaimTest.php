@@ -27,6 +27,7 @@ use Wikibase\Entity;
  * @ingroup WikibaseTest
  *
  * @group API
+ * @group Database
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
@@ -38,7 +39,7 @@ use Wikibase\Entity;
  */
 class ApiCreateClaimTest extends \ApiTestCase {
 
-	protected function getNewEntityAndProperty() {
+	protected static function getNewEntityAndProperty() {
 		$entity = \Wikibase\ItemObject::newEmpty();
 		$content = new \Wikibase\ItemContent( $entity );
 		$content->save( '', null, EDIT_NEW );
@@ -57,7 +58,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 		 * @var Entity $entity
 		 * @var Entity $property
 		 */
-		list( $entity, $property ) = $this->getNewEntityAndProperty();
+		list( $entity, $property ) = self::getNewEntityAndProperty();
 
 		$params = array(
 			'action' => 'wbcreateclaim',
@@ -90,19 +91,13 @@ class ApiCreateClaimTest extends \ApiTestCase {
 	}
 
 	public function invalidRequestProvider() {
-		/**
-		 * @var Entity $entity
-		 * @var Entity $property
-		 */
-		list( $entity, $property ) = $this->getNewEntityAndProperty();
-
 		$argLists = array();
 
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => 'q0',
 			'snaktype' => 'value',
-			'property' => $property->getPrefixedId(),
+			'property' => '-',
 			'value' => 'foo',
 		);
 
@@ -110,7 +105,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $entity->getPrefixedId(),
+			'entity' => '-',
 			'snaktype' => 'value',
 			'property' => 'q0',
 			'value' => 'foo',
@@ -120,9 +115,9 @@ class ApiCreateClaimTest extends \ApiTestCase {
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $entity->getPrefixedId(),
+			'entity' => '-',
 			'snaktype' => 'hax',
-			'property' => $property->getPrefixedId(),
+			'property' => '-',
 			'value' => 'foo',
 		);
 
@@ -131,9 +126,9 @@ class ApiCreateClaimTest extends \ApiTestCase {
 		foreach ( array( 'entity', 'snaktype' ) as $requiredParam ) {
 			$params = array(
 				'action' => 'wbcreateclaim',
-				'entity' => $entity->getPrefixedId(),
+				'entity' => '-',
 				'snaktype' => 'value',
-				'property' => $property->getPrefixedId(),
+				'property' => '-',
 				'value' => 'foo',
 			);
 
@@ -144,7 +139,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $entity->getPrefixedId(),
+			'entity' => '-',
 			'snaktype' => 'value',
 			'value' => 'foo',
 		);
@@ -153,18 +148,24 @@ class ApiCreateClaimTest extends \ApiTestCase {
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $entity->getPrefixedId(),
+			'entity' => '-',
 			'snaktype' => 'value',
-			'property' => $property->getPrefixedId(),
+			'property' => '-',
 		);
 
 		$argLists[] = array( 'claim-value-missing', $params );
 
-		foreach ( $argLists as &$argList ) {
-			$argList[] = $entity;
+		return $argLists;
+	}
+
+	public static function getEntityAndPropertyForInvalid() {
+		static $array = null;
+
+		if ( $array === null ) {
+			$array = self::getNewEntityAndProperty();
 		}
 
-		return $argLists;
+		return $array;
 	}
 
 	/**
@@ -172,9 +173,22 @@ class ApiCreateClaimTest extends \ApiTestCase {
 	 *
 	 * @param string $errorCode
 	 * @param array $params
-	 * @param Entity $entity
 	 */
-	public function testInvalidRequest( $errorCode, array $params, Entity $entity ) {
+	public function testInvalidRequest( $errorCode, array $params ) {
+		/**
+		 * @var Entity $entity
+		 * @var Entity $property
+		 */
+		list( $entity, $property ) = self::getEntityAndPropertyForInvalid();
+
+		if ( array_key_exists( 'entity', $params ) && $params['entity'] === '-' ) {
+			$params['entity'] = $entity->getPrefixedId();
+		}
+
+		if ( array_key_exists( 'property', $params ) && $params['property'] === '-' ) {
+			$params['property'] = $property->getPrefixedId();
+		}
+
 		try {
 			$this->doApiRequest( $params );
 			$this->assertFalse( true, 'Invalid request should raise an exception' );

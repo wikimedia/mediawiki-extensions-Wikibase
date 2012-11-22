@@ -28,6 +28,7 @@ use Wikibase\Claim;
  * @ingroup WikibaseTest
  *
  * @group API
+ * @group Database
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
@@ -63,18 +64,26 @@ class ApiRemoveClaimsTest extends \ApiTestCase {
 		$dataTypes = \Wikibase\Settings::get( 'dataTypes' );
 		$property->setDataType( \DataTypes\DataTypeFactory::singleton()->getType( reset( $dataTypes ) ) );
 
-		return $this->arrayWrap( array(
+		return array(
 			$this->addClaimsAndSave( \Wikibase\ItemObject::newEmpty() ),
 			$this->addClaimsAndSave( $property ),
-		) );
+		);
+	}
+
+	public function testValidRequests() {
+		foreach ( $this->entityProvider() as $entity ) {
+			$this->doTestValidRequestSingle( $entity );
+		}
+
+		foreach ( $this->entityProvider() as $entity ) {
+			$this->doTestValidRequestMultiple( $entity );
+		}
 	}
 
 	/**
-	 * @dataProvider entityProvider
-	 *
 	 * @param Entity $entity
 	 */
-	public function testValidRequestSingle( Entity $entity ) {
+	public function doTestValidRequestSingle( Entity $entity ) {
 		/**
 		 * @var Claim[] $claims
 		 */
@@ -96,11 +105,9 @@ class ApiRemoveClaimsTest extends \ApiTestCase {
 	}
 
 	/**
-	 * @dataProvider entityProvider
-	 *
 	 * @param Entity $entity
 	 */
-	public function testValidRequestMultiple( Entity $entity ) {
+	public function doTestValidRequestMultiple( Entity $entity ) {
 		$guids = array();
 
 		/**
