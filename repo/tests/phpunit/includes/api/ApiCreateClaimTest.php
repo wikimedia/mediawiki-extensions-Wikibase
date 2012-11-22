@@ -107,17 +107,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 			'value' => 'foo',
 		);
 
-		$argLists[] = array( 'unknownerror', $params );
-
-		$params = array(
-			'action' => 'wbcreateclaim',
-			'entity' => $entity->getPrefixedId(),
-			'snaktype' => 'value',
-			'property' => 'q0',
-			'value' => 'foo',
-		);
-
-		$argLists[] = array( 'unknownerror', $params );
+		$argLists[] = array( 'cant-load-entity-content', $params );
 
 		$params = array(
 			'action' => 'wbcreateclaim',
@@ -129,7 +119,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 
 		$argLists[] = array( 'unknown_snaktype', $params );
 
-		foreach ( array( 'entity', 'snaktype', 'property' ) as $requiredParam ) {
+		foreach ( array( 'entity', 'snaktype' ) as $requiredParam ) {
 			$params = array(
 				'action' => 'wbcreateclaim',
 				'entity' => $entity->getPrefixedId(),
@@ -146,17 +136,22 @@ class ApiCreateClaimTest extends \ApiTestCase {
 		$params = array(
 			'action' => 'wbcreateclaim',
 			'entity' => $entity->getPrefixedId(),
-			'snaktype' => 'hax',
+			'snaktype' => 'value',
+			'value' => 'foo',
+		);
+
+		$argLists[] = array( 'claim-property-id-missing', $params );
+
+		$params = array(
+			'action' => 'wbcreateclaim',
+			'entity' => $entity->getPrefixedId(),
+			'snaktype' => 'value',
 			'property' => $property->getPrefixedId(),
 		);
 
 		$argLists[] = array( 'claim-value-missing', $params );
 
-		return array();
-		// TODO: during PHPUnit run the tests are thrown as usage exceptions
-		// which makes the test think there is an error and fail.
-
-		//return $argLists;
+		return $argLists;
 	}
 
 	/**
@@ -166,17 +161,13 @@ class ApiCreateClaimTest extends \ApiTestCase {
 	 * @param array $params
 	 */
 	public function testInvalidRequest( $errorCode, array $params ) {
-		list( $resultArray, ) = $this->doApiRequest( $params );
-
-		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
-		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has an error key' );
-
-		$error = $resultArray['error'];
-
-		$this->assertArrayHasKey( 'code', $error, 'error element has a code key' );
-		$this->assertArrayHasKey( 'info', $error, 'error element has an info key' );
-
-		$this->assertEquals( $errorCode, $error['code'] );
+		try {
+			$this->doApiRequest( $params );
+			$this->assertFalse( true, 'Invalid request should raise an exception' );
+		}
+		catch ( \UsageException $e ) {
+			$this->assertEquals( $errorCode, $e->getCodeString(), 'Invalid request raised correct error' );
+		}
 	}
 
 }
