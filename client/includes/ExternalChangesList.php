@@ -114,7 +114,7 @@ class ExternalChangesList {
 		$line .= $userlinks;
 
 		if ( array_key_exists( 'comment', $entityData  ) ) {
-			$commentText = wfMessage( $entityData['comment'] )->text();
+			$commentText = self::parseComment( $entityData );
 		} else {
 			$commentText = '';
 		}
@@ -130,6 +130,59 @@ class ExternalChangesList {
 	 */
 	protected static function changeSeparator() {
 		return ' <span class="mw-changeslist-separator">. .</span> ';
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @todo incorporate this logic in the change processing; store the
+	 * message key and param in rc_params instead of here
+	 *
+	 * @param string $comment
+	 *
+	 * @return string
+	 */
+	public static function parseComment( $entityData ) {
+		$comment = $entityData['comment'];
+		$action = $entityData['action'];
+		$message = null;
+
+		if ( array_key_exists( 'sitelink', $comment ) ) {
+			$sitelinks = $comment['sitelink'];
+			if ( array_key_exists( 'oldlink', $sitelinks ) && array_key_exists( 'newlink', $sitelinks ) ) {
+				$oldLink = self::wikiLink( $sitelinks['oldlink']['lang'], $sitelinks['oldlink']['page'] );
+				$newLink = self::wikiLink( $sitelinks['newlink']['lang'], $sitelinks['newlink']['page'] );
+				$param = array( $oldLink, $newLink );
+			} else if ( array_key_exists( 'oldlink', $sitelinks ) ) {
+				$param = self::wikiLink( $sitelinks['oldlink']['lang'], $sitelinks['oldlink']['page'] );
+			} else if ( array_key_exists( 'newlink', $sitelinks ) ) {
+				$param = self::wikiLink( $sitelinks['newlink']['lang'], $sitelinks['newlink']['page'] );
+			}
+		}
+
+		if ( $param !== null ) {
+			if ( is_array( $param ) ) {
+				$message = wfMessage( $comment['message'] )->rawPArams( $param[0], $param[1] )->parse();
+			} else {
+				$message = wfMessage( $comment['message'] )->rawParams( $param )->parse();
+			}
+		} else {
+			$message = wfMessage( $comment['message'] )->text();
+		}
+
+		return $message;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param string $siteLang
+	 * @param string $page
+	 *
+	 * @return string
+	 */
+	protected static function wikiLink( $siteLang, $page ) {
+		return "[[:$siteLang:$page|$siteLang:$page]]";
 	}
 
 	/**
