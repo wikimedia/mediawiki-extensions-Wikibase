@@ -30,6 +30,7 @@ use Wikibase\Statement;
  * @ingroup WikibaseTest
  *
  * @group API
+ * @group Database
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
@@ -122,13 +123,19 @@ class ApiGetClaimsTest extends \ApiTestCase {
 		return $argLists;
 	}
 
+	public function testValidRequests() {
+		foreach ( $this->validRequestProvider() as $argList ) {
+			list( $params, $claims ) = $argList;
+
+			$this->doTestValidRequest( $params, $claims );
+		}
+	}
+
 	/**
-	 * @dataProvider validRequestProvider
-	 *
 	 * @param string[] $params
 	 * @param Claims|Claim[] $claims
 	 */
-	public function testValidRequest( array $params, $claims ) {
+	public function doTestValidRequest( array $params, $claims ) {
 		list( $resultArray, ) = $this->doApiRequest( $params );
 
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
