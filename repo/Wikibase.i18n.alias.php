@@ -91,11 +91,14 @@ $specialPageAliases['it'] = array(
 
 /** Korean (한국어) */
 $specialPageAliases['ko'] = array(
+	'EntityData' => array( '항목데이터' ),
 	'CreateItem' => array( '항목만들기', '아이템만들기' ),
 	'NewProperty' => array( '새속성' ),
 	'ItemByTitle' => array( '제목별항목', '제목별아이템' ),
 	'ItemDisambiguation' => array( '레이블별항목', '라벨별항목', '레이블별아이템', '라벨별아이템' ),
 	'ListDatatypes' => array( '데이터유형목록' ),
+	'SetLabel' => array( '레이블설정' ),
+	'EntitiesWithoutLabel' => array( '레이블없는항목' ),
 );
 
 /** Macedonian (македонски) */
@@ -118,6 +121,18 @@ $specialPageAliases['nl'] = array(
 	'ListDatatypes' => array( 'GegevenstypenWeergeven' ),
 	'SetLabel' => array( 'LabelInstellen' ),
 	'EntitiesWithoutLabel' => array( 'EntiteitenZonderLabel' ),
+);
+
+/** Sicilian (sicilianu) */
+$specialPageAliases['scn'] = array(
+	'EntityData' => array( 'DatiEntità' ),
+	'CreateItem' => array( 'CreaElemento' ),
+	'NewProperty' => array( 'NuovaProprietà' ),
+	'ItemByTitle' => array( 'ElementiPerTitolo' ),
+	'ItemDisambiguation' => array( 'ElementiDisambigui' ),
+	'ListDatatypes' => array( 'ElencaTipiDati' ),
+	'SetLabel' => array( 'ImpostaEtichetta' ),
+	'EntitiesWithoutLabel' => array( 'EntitàSenzaEtichetta' ),
 );
 
 /** Simplified Chinese (中文（简体）‎) */

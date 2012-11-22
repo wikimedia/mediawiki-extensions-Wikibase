@@ -101,9 +101,14 @@ $messages['ca'] = array(
 $messages['de'] = array(
 	'wbc-desc' => 'Ermöglicht einen Client für die Erweiterung Wikibase',
 	'wbc-after-page-move' => 'Du kannst auch das zugeordnete Wikidata-Element [$1 aktualisieren], um Sprachlinks von verschobenen Seiten zu verwalten.',
+	'wbc-comment-remove' => 'Zugeordnetes Wikidata-Objekt wurde gelöscht. Sprachlinks wurden entfernt.',
+	'wbc-comment-unlink' => 'Diese Seite wurde vom Wikidata-Objekt entlinkt. Sprachlinks wurden entfernt.',
+	'wbc-comment-restore' => 'Zugeordnetes Wikidata-Objekt wurde wiederhergestellt. Sprachlinks wurden wiederhergestellt.',
+	'wbc-comment-update' => 'Sprachlinks wurden aktualisiert',
 	'wbc-editlinks' => 'Links bearbeiten',
 	'wbc-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
 	'wbc-rc-hide-wikidata' => 'Wikidata $1',
+	'wbc-rc-show-wikidata-pref' => 'Wikidata-Bearbeitungen in den „Letzten Änderungen“ anzeigen',
 );
 
 /** Zazaki (Zazaki)
@@ -180,9 +185,14 @@ $messages['fi'] = array(
 $messages['fr'] = array(
 	'wbc-desc' => 'Client pour l’extension Wikibase',
 	'wbc-after-page-move' => "Vous pouvez aussi [$1 mettre à jour] l'élément Wikidata associé pour conserver les liens de langue sur la page déplacée.",
+	'wbc-comment-remove' => 'Élément Wikidata associé supprimé. Liens de langue supprimés.',
+	'wbc-comment-unlink' => "Cette page a été dissociée de l'élément Wikidata. Liens de langue supprimés.",
+	'wbc-comment-restore' => "Suppression de l'élément Wikidata associé annulée. Liens de langue rétablis.",
+	'wbc-comment-update' => 'Liens de langue mis à jour.',
 	'wbc-editlinks' => 'Modifier les liens',
 	'wbc-editlinkstitle' => 'Modifier les liens interlangue',
 	'wbc-rc-hide-wikidata' => 'Wikidata $1',
+	'wbc-rc-show-wikidata-pref' => 'Afficher les modifications de Wikidata dans les modifications récentes',
 );
 
 /** Franco-Provençal (arpetan)
@@ -199,9 +209,14 @@ $messages['frp'] = array(
 $messages['gl'] = array(
 	'wbc-desc' => 'Cliente para a extensión Wikibase',
 	'wbc-after-page-move' => 'Tamén pode [$1 actualizar] o elemento de Wikidata asociado para manter as ligazóns lingüísticas na páxina trasladada.',
+	'wbc-comment-remove' => 'Borrouse un elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas.',
+	'wbc-comment-unlink' => 'Esta páxina foi desligada do elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas.',
+	'wbc-comment-restore' => 'Restaurouse un elemento de Wikidata asociado. Recuperáronse as ligazóns lingüísticas.',
+	'wbc-comment-update' => 'Actualizáronse as ligazóns lingüísticas.',
 	'wbc-editlinks' => 'Editar as ligazóns',
 	'wbc-editlinkstitle' => 'Editar as ligazóns interlingüísticas',
 	'wbc-rc-hide-wikidata' => '$1 o Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Mostrar as modificacións de Wikidata nos cambios recentes',
 );
 
 /** Swiss German (Alemannisch)
@@ -271,14 +286,20 @@ $messages['is'] = array(
 
 /** Italian (italiano)
  * @author Beta16
+ * @author Raoli
  * @author Sannita
  */
 $messages['it'] = array(
 	'wbc-desc' => "Client per l'estensione Wikibase",
 	'wbc-after-page-move' => "Puoi anche [$1 aggiornare] l'elemento associato su Wikidata per trasferire gli interlink sulla nuova pagina.",
+	'wbc-comment-remove' => "L'elemento di Wikidata associato è stato cancellato. I link di lingua sono stati rimossi.",
+	'wbc-comment-unlink' => "Questa pagina è stata scollegata dall'elemento di Wikidata. I link di lingua sono stati rimossi.",
+	'wbc-comment-restore' => "L'elemento di Wikidata associato è stato recuperato. I link di lingua sono stati ripristinati.",
+	'wbc-comment-update' => 'Link di lingua aggiornato.',
 	'wbc-editlinks' => 'Modifica collegamenti',
 	'wbc-editlinkstitle' => 'Modifica collegamenti interlingua',
 	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Mostra le modifiche di Wikidata nelle ultime modifiche',
 );
 
 /** Japanese (日本語)
@@ -287,8 +308,14 @@ $messages['it'] = array(
 $messages['ja'] = array(
 	'wbc-desc' => 'Wikibase 拡張機能のクライアント',
 	'wbc-after-page-move' => '移動されたページにある言語リンクを保守するために、関連付けられたウィキデータ項目を[$1 更新]することもできます。',
+	'wbc-comment-remove' => '関連付けられたウィキデータ項目が削除されました。言語リンクを除去しました。',
+	'wbc-comment-unlink' => 'このページはウィキデータ項目からリンク解除されました。言語リンクを除去しました。',
+	'wbc-comment-restore' => '関連付けられたウィキデータ項目が復元されました。言語リンクを復元しました。',
+	'wbc-comment-update' => '言語リンクを更新しました。',
 	'wbc-editlinks' => 'リンクを編集',
 	'wbc-editlinkstitle' => '言語間リンクを編集',
+	'wbc-rc-hide-wikidata' => 'ウィキデータを$1',
+	'wbc-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
 );
 
 /** Georgian (ქართული)
@@ -304,8 +331,14 @@ $messages['ka'] = array(
 $messages['ko'] = array(
 	'wbc-desc' => '위키베이스 확장 기능을 위한 클라이언트',
 	'wbc-after-page-move' => '또한 이동한 문서에 언어 링크를 유지하기 위해 관련된 위키데이터 항목을 [$1 업데이트]할 수 있습니다.',
+	'wbc-comment-remove' => '연결한 위키데이터 항목을 삭제했습니다. 언어 링크를 제거했습니다.',
+	'wbc-comment-unlink' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다.',
+	'wbc-comment-restore' => '연결한 위키데이터 항목을 복구했습니다. 언어 링크를 복구했습니다.',
+	'wbc-comment-update' => '언어 링크를 업데이트했습니다.',
 	'wbc-editlinks' => '링크 편집',
 	'wbc-editlinkstitle' => '인터언어 링크 편집',
+	'wbc-rc-hide-wikidata' => '위키데이터 $1',
+	'wbc-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
 );
 
 /** Colognian (Ripoarisch)
@@ -337,9 +370,14 @@ $messages['lb'] = array(
 $messages['mk'] = array(
 	'wbc-desc' => 'Клиент за додатокот „Викибаза“',
 	'wbc-after-page-move' => 'Можете и да го [$1 подновите] поврзаниот предмет на Википодатоци за да ги одржите јазичните врски на преместената страница.',
+	'wbc-comment-remove' => 'Здружениот предмет од Википодатоците е избришан. Јазичните врски се избришани.',
+	'wbc-comment-unlink' => 'На оваа страница ѝ е раскината врската со елементот од Википодатоците. Јазичните врски се отстранети.',
+	'wbc-comment-restore' => 'Здружениот предмет од Википодатоците е повратен. Јазичните врски се повратени.',
+	'wbc-comment-update' => 'Јазичните врски се подновени',
 	'wbc-editlinks' => 'Уреди врски',
 	'wbc-editlinkstitle' => 'Уредување на меѓујазични врски',
 	'wbc-rc-hide-wikidata' => '$1 Википодатоци',
+	'wbc-rc-show-wikidata-pref' => 'Прикажувај ги уредувањата на Википодатоците во скорешните промени',
 );
 
 /** Malay (Bahasa Melayu)
