@@ -78,6 +78,9 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
 		}
 
+		/**
+		 * @var Entity $entity
+		 */
 		$entity = $entityContent->getEntity();
 
 		// It is possible we get an exception from this method because of specifying
@@ -91,31 +94,9 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 			$this->dieUsageMsg( $ex->getMessage() );
 		}
 
-		$isStatement = false;
+		$claim = $entity->newClaim( $snak );
 
-		if ( $entity instanceof StatementListAccess ) {
-			$class = 'Wikibase\StatementObject';
-			$isStatement = true;
-		}
-		elseif ( $entity instanceof ClaimListAccess ) {
-			$class = 'Wikibase\ClaimObject';
-		}
-		else {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			throw new MWException( 'Entity does not support adding Claim objects' );
-		}
-
-		/**
-		 * @var Claim $claim
-		 */
-		$claim = new $class( $snak );
-
-		if ( $isStatement ) {
-			$entity->addStatement( $claim );
-		}
-		else {
-			$entity->addClaim( $claim );
-		}
+		$entity->addClaim( $claim );
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;

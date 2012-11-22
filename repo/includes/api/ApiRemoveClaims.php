@@ -72,14 +72,14 @@ class ApiRemoveClaims extends Api {
 
 		$guids = array();
 
-		foreach ( $params['key'] as $key ) {
-			list( $entityId, $claimGuid ) = ClaimObject::parseKey( $key );
+		foreach ( $params['key'] as $guid ) {
+			$entityId = EntityObject::getIdFromClaimGuid( $guid );
 
 			if ( !array_key_exists( $entityId, $guids ) ) {
 				$guids[$entityId] = array();
 			}
 
-			$guids[$entityId][] = $claimGuid;
+			$guids[$entityId][] = $guid;
 		}
 
 		return $guids;
@@ -146,31 +146,36 @@ class ApiRemoveClaims extends Api {
 	 * @return string[]
 	 */
 	protected function removeClaimsFromEntity( Entity &$entity, array $guids ) {
-		$removedKeys = array();
+		$removedGuids = array();
 
 		foreach ( $guids as $guid ) {
 			if ( $entity->hasClaimWithGuid( $guid ) ) {
 				$entity->removeClaimWithGuid( $guid );
-				$removedKeys[] = $entity->createClaimKey( $guid );
+				$removedGuids[] = $guid;
 			}
 		}
 
-		return $removedKeys;
+		return $removedGuids;
 	}
 
-	protected function outputResult( $removedClaimKeys ) {
+	/**
+	 * @since 0.3
+	 *
+	 * @param string[] $removedClaimGuids
+	 */
+	protected function outputResult( $removedClaimGuids ) {
 		$this->getResult()->addValue(
 			null,
 			'success',
 			1
 		);
 
-		$this->getResult()->setIndexedTagName( $removedClaimKeys, 'claim' );
+		$this->getResult()->setIndexedTagName( $removedClaimGuids, 'claim' );
 
 		$this->getResult()->addValue(
 			null,
 			'claims',
-			$removedClaimKeys
+			$removedClaimGuids
 		);
 	}
 

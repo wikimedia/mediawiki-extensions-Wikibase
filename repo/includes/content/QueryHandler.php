@@ -48,19 +48,19 @@ class QueryHandler extends EntityHandler {
 		return $instance;
 	}
 
-	/**
-	 * @see ContentHandler::makeEmptyContent
-	 *
-	 * @since 0.1
-	 *
-	 * @return QueryContent
-	 */
-	public function makeEmptyContent() {
-		return QueryContent::newEmpty();
-	}
-
 	public function __construct() {
 		parent::__construct( CONTENT_MODEL_WIKIBASE_QUERY );
+	}
+
+	/**
+	 * @see EntityHandler::getContentClass
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	protected function getContentClass() {
+		return '\Wikibase\QueryContent';
 	}
 
 	/**

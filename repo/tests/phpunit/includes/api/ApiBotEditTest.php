@@ -46,6 +46,7 @@ use Title;
  * @group Wikibase
  * @group WikibaseAPI
  * @group ApiBotEditTest
+ * @group BreakingTheSlownessBarrier
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.

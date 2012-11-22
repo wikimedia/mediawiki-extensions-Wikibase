@@ -642,6 +642,7 @@ abstract class EntityObject implements Entity {
 	public function addClaim( Claim $claim ) {
 		$this->unstubClaims();
 		$this->claims->addClaim( $claim );
+		// TODO: ensure guid is valid for entity
 	}
 
 	/**
@@ -707,7 +708,7 @@ abstract class EntityObject implements Entity {
 	 */
 	public function getClaimWithGuid( $claimGuid ) {
 		$this->unstubClaims();
-		$this->claims->getClaimWithGuid( $claimGuid );
+		return $this->claims->getClaimWithGuid( $claimGuid );
 	}
 
 	/**
@@ -784,16 +785,49 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Entity::createClaimKey
+	 * @see Entity::newClaim
 	 *
 	 * @since 0.3
 	 *
-	 * @param string $claimGuid
+	 * @param Snak $mainSnak
+	 *
+	 * @return Claim
+	 */
+	public function newClaim( Snak $mainSnak ) {
+		$claim = new ClaimObject( $mainSnak );
+		$claim->setGuid( $this->newClaimGuid() );
+		return $claim;
+	}
+
+	/**
+	 * @see Entity::newClaimGuid
+	 *
+	 * @since 0.3
 	 *
 	 * @return string
 	 */
-	public function createClaimKey( $claimGuid ) {
-		return $this->getPrefixedId() . '$' . $claimGuid;
+	public final function newClaimGuid() {
+		return $this->getPrefixedId() . '$' . Utils::getGuid();
+	}
+
+	/**
+	 * Parses the claim GUID and returns the prefixed entity ID it contains.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimKey
+	 *
+	 * @return string
+	 * @throws MWException
+	 */
+	public static function getIdFromClaimGuid( $claimKey ) {
+		$keyParts = explode( '$', $claimKey );
+
+		if ( count( $keyParts ) !== 2 ) {
+			throw new MWException( 'A claim key should have a single $ in it' );
+		}
+
+		return $keyParts[0];
 	}
 
 }

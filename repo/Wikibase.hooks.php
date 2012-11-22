@@ -139,13 +139,16 @@ final class RepoHooks {
 			'actions/EditEntityAction',
 
 			'api/ApiBotEdit',
+			'api/ApiCreateClaim',
 			'api/ApiEditPage',
+			'api/ApiGetClaims',
 			'api/ApiGetEntities',
 			'api/ApiLabel',
 			'api/ApiDescription',
 			'api/ApiPermissions',
 			'api/ApiSetAliases',
 			'api/ApiEditEntity',
+			'api/ApiRemoveClaims',
 			'api/ApiSetSiteLink',
 			'api/ApiLinkTitles',
 
