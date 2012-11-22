@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZX///IU\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-22T21:37:30Z",
+      "side": 1,
+      "message": "Not a big fan of the $ sign :(",
+      "revId": "6b5ca51507e8bc3cbe4f0016ebb3c6b75989d4d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
