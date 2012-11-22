@@ -45,15 +45,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$claim = $this->addClaim();
 
-		$serializer = new ClaimSerializer();
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-		$serializedClaim = $serializer->getSerialized( $claim );
-
-		$this->getResult()->addValue(
-			null,
-			'claim',
-			$serializedClaim
-		);
+		$this->outputClaim( $claim );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
@@ -181,6 +173,22 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 		}
 
 		return $snak;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param Claim $claim
+	 */
+	protected function outputClaim( Claim $claim ) {
+		$serializer = new ClaimSerializer();
+		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
+
+		$this->getResult()->addValue(
+			null,
+			'claim',
+			$serializer->getSerialized( $claim )
+		);
 	}
 
 	/**
