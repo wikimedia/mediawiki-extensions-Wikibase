@@ -50,14 +50,14 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
-	 * @see ContentHandler::makeEmptyContent
+	 * @see EntityHandler::getContentClass
 	 *
-	 * @since 0.1
+	 * @since 0.3
 	 *
-	 * @return ItemContent
+	 * @return string
 	 */
-	public function makeEmptyContent() {
-		return ItemContent::newEmpty();
+	protected function getContentClass() {
+		return '\Wikibase\ItemContent';
 	}
 
 	public function __construct() {
