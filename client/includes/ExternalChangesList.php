@@ -114,7 +114,7 @@ class ExternalChangesList {
 		$line .= $userlinks;
 
 		if ( array_key_exists( 'comment', $entityData  ) ) {
-			$commentText = wfMessage( $entityData['comment'] )->text();
+			$commentText = self::parseComment( $entityData );
 		} else {
 			$commentText = '';
 		}
@@ -130,6 +130,60 @@ class ExternalChangesList {
 	 */
 	protected static function changeSeparator() {
 		return ' <span class="mw-changeslist-separator">. .</span> ';
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @todo incorporate this logic in the change processing; store the
+	 * message key and param in rc_params instead of here
+	 *
+	 * @param string $comment
+	 *
+	 * @return string
+	 */
+	public static function parseComment( $entityData ) {
+		$parts = explode( '~', $entityData['comment'] );
+		$action = $entityData['action'];
+		if ( $parts[1] == Settings::get( 'siteGlobalID' ) ) {
+			if ( $action === 'remove' ) {
+				$message = wfMessage( 'wbc-comment-remove' )->text();
+			} else if ( $action === 'restore' ) {
+				$message = wfMessage( 'wbc-comment-restore' )->text();
+			} else {
+				$message = wfMessage( 'wbc-comment-unlink' )->text();
+			}
+		} else {
+			if ( array_key_exists( 'sitelinkdiff', $entityData ) ) {
+				$siteLinkDiff = $entityData['sitelinkdiff'];
+				$diffOps = $siteLinkDiff->getOperations();
+				foreach( $diffOps as $siteCode => $diffOp ) {
+					$site = \SitesTable::singleton()->selectRow(
+						null,
+						array( 'global_key' => $siteCode )
+					);
+					$siteLang = $site->getField( 'language' );
+					if ( $diffOp instanceof \Diff\DiffOpAdd ) {
+						$page = $diffOp->getNewValue();
+						$param = "[[:$siteLang:$page|$siteLang:$page]]";
+						$message = wfMessage( $parts[0] )->rawParams( $param )->parse();
+					} else if ( $diffOp instanceof \Diff\DiffOpRemove ) {
+						$page = $diffOp->getOldValue();
+						$param = "[[:$siteLang:$page|$siteLang:$page]]";
+						$message = wfMessage( $parts[0] )->rawParams( $param )->parse();
+					} else if ( $diffOp instanceof \Diff\DiffOpChange ) {
+						$newPage = $diffOp->getNewValue();
+						$oldPage = $diffOp->getOldValue();
+						$param = "[[:$siteLang:$oldPage|$siteLang:$oldPage]] -> [[:$siteLang:$newPage|$siteLang:$newPage]]";
+						$message = wfMessage( $parts[0] )->rawParams( $param )->parse();
+					} else {
+						$message = wfMessage( $parts[0] )->rawParams( $siteCode )->text();
+					}
+					break;
+				}
+			}
+		}
+		return $message;
 	}
 
 	/**

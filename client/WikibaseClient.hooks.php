@@ -178,17 +178,21 @@ final class ClientHooks {
 		$item = $change->getEntity();
 		$siteGlobalId = Settings::get( 'siteGlobalID' );
 		$title = null;
+		$changeHandler = ClientChangeHandler::singleton();
 
 		$pagesToUpdate = array();
 
 		// if something relevant about the entity changes, update
 		// the corresponding local page
-		if ( ClientHooks::changeNeedsRendering( $change ) ) {
+		if ( $changeHandler->changeNeedsRendering( $change ) ) {
 			$siteLink = $item->getSiteLink( $siteGlobalId );
 
 			if ( $siteLink ) {
 				// we have a corresponding page on this wiki, so re-render it.
 				$pagesToUpdate[] = $siteLink->getPage();
+
+				$siteLinkDiff = $change->getSiteLinkDiff();
+				$change->setComment( $changeHandler->siteLinkComment( $change ) );
 			}
 		}
 
@@ -226,23 +230,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * @static
-	 *
-	 * @todo: move this somewhere same
-	 *
-	 * @param Change $change
-	 *
-	 * @return bool
-	 */
-	public static function changeNeedsRendering( ItemChange $change ) {
-		if ( !$change->getSiteLinkDiff()->isEmpty() ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Registers change with recent changes and performs other updates
 	 *
 	 * @since 0.2
@@ -275,6 +262,15 @@ final class ClientHooks {
 		if ( ! is_array( $rcinfo ) ) {
 			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return false;
+		}
+
+		$rcinfo['comment'] = $change->getComment();
+		$rcinfo['action'] = $change->getAction();
+
+		// the corresponding local page
+		$changeHandler = ClientChangeHandler::singleton();
+		if ( $changeHandler->changeNeedsRendering( $change ) ) {
+			$rcinfo['sitelinkdiff'] = $change->getSiteLinkDiff();
 		}
 
 		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
