@@ -148,6 +148,7 @@ final class RepoHooks {
 			'api/ApiPermissions',
 			'api/ApiSetAliases',
 			'api/ApiEditEntity',
+			'api/ApiRemoveClaims',
 			'api/ApiSetSiteLink',
 			'api/ApiLinkTitles',
 
