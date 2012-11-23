@@ -161,6 +161,9 @@ class ApiLinkTitlesTest extends ApiModifyItemBase {
 			else {
 				$this->assertEquals( 2, count( $res['entity']['sitelinks'] ), "expected exactly two sitelinks structure" );
 			}
+
+			$this->assertArrayHasKey( 'lastrevid', $res['entity'] , 'entity should contain lastrevid key' );
+
 			foreach ( $res['entity']['sitelinks'] as $link ) {
 				$this->assertTrue( $fromsite === $link['site'] || $tosite === $link['site'] );
 				$this->assertTrue( $fromtitle === $link['title'] || $totitle === $link['title'] );

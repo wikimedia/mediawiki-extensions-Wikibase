@@ -203,7 +203,11 @@ class ApiEditEntityTest extends ApiModifyItemBase {
 		);
 
 		$this->assertSuccess( $res, 'entity', 'id' );
+
+		//NOTE: lastrevid should be here even though the edit didn't create a new revision,
+		//      because the content stayed the same.
 		$this->assertSuccess( $res, 'entity', 'lastrevid' );
+
 		$this->assertItemEquals( self::$expect, $res['entity'] );
 	}
 
@@ -229,7 +233,11 @@ class ApiEditEntityTest extends ApiModifyItemBase {
 		);
 
 		$this->assertSuccess( $res, 'entity', 'id' );
+
+		//NOTE: lastrevid should be here even though the edit didn't create a new revision,
+		//      because the content stayed the same.
 		$this->assertSuccess( $res, 'entity', 'lastrevid' );
+
 		$this->assertItemEquals( self::$expect, $res['entity'] );
 		$this->assertArrayHasKey( 'warnings', $res ); // there should be a B/C warning
 	}
