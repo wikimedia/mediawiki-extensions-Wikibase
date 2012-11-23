@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZX//+18\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-23T14:53:58Z",
+      "side": 1,
+      "message": "$action is never used, this line is obsolete. It also causes fatal errors for old recent changes entries:\nUndefined index: action in C:\\xampp\\htdocs\\wikidata-client\\extensions\\Wikibase\\client\\includes\\ExternalChangesList.php on line 147",
+      "revId": "4fa28c8cb1c3f4beb849b0d396c9e943746ce37c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZX//+14\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-23T14:53:58Z",
+      "side": 1,
+      "message": "there should also be an \"else\". otherwise $param can be undefined in some cases. This causes a fatal error for me:\nUndefined variable: param in C:\\xampp\\htdocs\\wikidata-client\\extensions\\Wikibase\\client\\includes\\ExternalChangesList.php on line 163",
+      "revId": "4fa28c8cb1c3f4beb849b0d396c9e943746ce37c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
