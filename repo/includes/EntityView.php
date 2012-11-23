@@ -140,7 +140,8 @@ abstract class EntityView extends \ContextSource {
 		return wfTemplate( 'wb-entity-content',
 			$this->getHtmlForLabel( $entity, $lang, $editable ),
 			$this->getHtmlForDescription( $entity, $lang, $editable ),
-			$this->getHtmlForAliases( $entity, $lang, $editable )
+			$this->getHtmlForAliases( $entity, $lang, $editable ),
+			$this->getHtmlForClaims( $entity, $lang, $editable )
 		);
 	}
 
@@ -286,6 +287,58 @@ abstract class EntityView extends \ContextSource {
 				$aliasList . $this->getHtmlForEditSection( $entity, $lang )
 			);
 		}
+	}
+
+	/**
+	 * Builds and returns the HTML representing a WikibaseEntity's claims.
+	 *
+	 * @since 0.2
+	 *
+	 * @param EntityContent $entity the entity to render
+	 * @param \Language|null $lang the language to use for rendering. if not given, the local
+	 *        context will be used.
+	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 * @return string
+	 */
+	public function getHtmlForClaims( EntityContent $entity, Language $lang = null, $editable = true ) {
+		global $wgLang;
+
+		$languageCode = isset( $lang ) ? $lang->getCode() : $wgLang->getCode();
+
+		$claims = $entity->getEntity()->getClaims();
+		$html = '';
+
+		$html .= wfTemplate( 'wb-section-heading', wfMessage( 'wikibase-statements' ) );
+
+		/**
+		 * @var string $claimsHtml
+		 */
+		$claimsHtml = '';
+		foreach( $claims as $claim ) {
+			$propertyId = $claim->getMainSnak()->getPropertyId();
+			$property = EntityContentFactory::singleton()->getFromId( $propertyId );
+			$propertyLink = \Linker::link(
+				$property->getTitle(),
+				htmlspecialchars( $property->getEntity()->getLabel( $languageCode ) )
+			);
+
+			// TODO: display a "placeholder" message for novalue/somevalue snak
+			$value = '';
+			if ( $claim->getMainSnak()->getType() === 'value' ) {
+				$value = $claim->getMainSnak()->getDataValue()->getValue();
+			}
+
+			$claimsHtml .= wfTemplate( 'wb-claim', array(
+				$claim->getMainSnak()->getPropertyId()->getNumericId(),
+				$propertyLink,
+				( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value ),
+				$this->getHtmlForEditSection( $entity, $lang, 'span' )
+			) );
+		}
+
+		$claimsHtml .= $this->getHtmlForEditSection( $entity, $lang, 'div', 'add' );
+
+		return $html . wfTemplate( 'wb-claims', $claimsHtml );
 	}
 
 	/**
