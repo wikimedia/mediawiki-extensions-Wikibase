@@ -48,6 +48,23 @@ class ReferenceObject implements Reference {
 	}
 
 	/**
+	 * @see Comparable::equals
+	 *
+	 * The comparison is done purely value based, ignoring the order of the snaks.
+	 *
+	 * @since 0.3
+	 *
+	 * @param mixed $mixed
+	 *
+	 * @return boolean
+	 */
+	public function equals( $mixed ) {
+		return is_object( $mixed )
+			&& $mixed instanceof Reference
+			&& $this->getSnaks()->equals( $mixed->getSnaks() );
+	}
+
+	/**
 	 * @see Reference::getSnaks
 	 *
 	 * @since 0.1
@@ -56,17 +73,6 @@ class ReferenceObject implements Reference {
 	 */
 	public function getSnaks() {
 		return $this->snaks;
-	}
-
-	/**
-	 * @see Reference::setSnaks
-	 *
-	 * @since 0.1
-	 *
-	 * @param Snaks $propertySnaks
-	 */
-	public function setSnaks( Snaks $propertySnaks ) {
-		$this->snaks = $propertySnaks;
 	}
 
 }
