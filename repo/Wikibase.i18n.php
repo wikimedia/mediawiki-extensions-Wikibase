@@ -35,6 +35,7 @@ $messages['en'] = array(
 	'wikibase-alias-edit-placeholder' => 'enter an alias',
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
+	'wikibase-statements' => 'Statements',
 	'wikibase-sitelinks' => 'List of pages linked to this item',
 	'wikibase-sitelinks-sitename-columnheading' => 'Language',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
@@ -300,6 +301,7 @@ This is a generic text used as a placeholder while defining the page for a possi
 Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-description-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 H.png|right|0x150px]]
 Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#Item|item]].',
+	'wikibase-statements' => 'Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata\'s glossary for [[m:Wikidata/Glossary#Statement|statements]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.',

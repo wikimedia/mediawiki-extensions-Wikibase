@@ -165,7 +165,7 @@ sizes and line heights within the heading */
 
 /********** SITE LINKS **********/
 
-.wb-sitelinks-heading .wb-ui-propertyedittool-counter {
+.wb-section-heading .wb-ui-propertyedittool-counter {
 	font-size: 67%; /* reset to standard font size */
 	margin-left: 0.6em;
 	line-height: 100%; /* prevent white space below heading */
