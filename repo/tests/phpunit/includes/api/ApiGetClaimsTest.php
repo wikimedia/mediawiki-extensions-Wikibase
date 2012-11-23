@@ -95,7 +95,7 @@ class ApiGetClaimsTest extends \ApiTestCase {
 			foreach ( $entity->getClaims() as $claim ) {
 				$params = array(
 					'action' => 'wbgetclaims',
-					'key' => $claim->getGuid(),
+					'claim' => $claim->getGuid(),
 				);
 
 				$argLists[] = array( $params, array( $claim ) );
