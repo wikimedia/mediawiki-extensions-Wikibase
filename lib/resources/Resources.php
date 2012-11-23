@@ -296,7 +296,12 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.entityselector',
 				'wikibase.datamodel',
-				'dataTypes.jquery.valueview.views'
+				'dataTypes.jquery.valueview.views',
+				'wikibase.store'
+			),
+			'messages' => array(
+				'wikibase-snak-unsupporteddatatype',
+				'datatypes-type-wikibase-item'
 			)
 		),
 

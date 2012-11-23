@@ -64,6 +64,7 @@ $messages['en'] = array(
 	'wikibase-aliases-input-help-message' => 'If this data set is known under more than one particular name, you may enter aliases and synonyms, so it can be found by its alternative names.',
 	'wikibase-aliases-empty' => 'No aliases defined.',
 	'wikibase-datatype-label' => 'Data type:',
+	'wikibase-snak-unsupporteddatatype' => 'Handling of values for "$1" data type ist not supported currently.',
 
 	'wikibase-restrictionedit-tooltip-message' => 'This page is protected. Editing is not allowed.',
 	'wikibase-blockeduser-tooltip-message' => 'You are blocked from editing.',
