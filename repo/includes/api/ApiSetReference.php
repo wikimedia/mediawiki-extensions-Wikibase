@@ -54,11 +54,7 @@ class ApiSetReference extends Api {
 			$params['reference']
 		);
 
-		$status = $content->save();
-
-		if ( !$status->isGood() ) {
-			$this->dieUsage( 'Failed to save the change', 'setclaimvalue-save-failed' );
-		}
+		$this->saveChanges( $content );
 
 		$this->outputReference( $reference );
 
@@ -160,19 +156,49 @@ class ApiSetReference extends Api {
 	/**
 	 * @since 0.3
 	 *
+	 * @param EntityContent $content
+	 */
+	protected function saveChanges( EntityContent $content ) {
+		$params = $this->extractRequestParams();
+
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId );
+
+		$status = $editEntity->attemptSave(
+			'', // TODO: automcomment
+			EDIT_UPDATE,
+			isset( $params['token'] ) ? $params['token'] : false
+		);
+
+		if ( !$status->isGood() ) {
+			$this->dieUsage( 'Failed to save the change', 'setreference-save-failed' );
+		}
+
+		$statusValue = $status->getValue();
+
+		if ( isset( $statusValue['revision'] ) ) {
+			$this->getResult()->addValue(
+				'claim',
+				'lastrevid',
+				(int)$statusValue['revision']->getId()
+			);
+		}
+	}
+
+	/**
+	 * @since 0.3
+	 *
 	 * @param Reference $reference
 	 */
 	protected function outputReference( Reference $reference ) {
-		$snakSerializer = new SnakSerializer();
-		$snakSerializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		$snaksSerializer = new ByPropertyListSerializer( 'reference', $snakSerializer );
-		$snaksSerializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
+		$serializer = new ReferenceSerializer();
+		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		$this->getResult()->addValue(
 			null,
 			'claim',
-			$snaksSerializer->getSerialized( $reference->getSnaks() )
+			$serializer->getSerialized( $reference )
 		);
 	}
 
