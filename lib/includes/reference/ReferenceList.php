@@ -58,7 +58,8 @@ class ReferenceList extends HashableObjectStorage implements References {
 	 * @return boolean
 	 */
 	public function hasReference( Reference $reference ) {
-		return $this->contains( $reference );
+		return $this->contains( $reference )
+			|| $this->hasReferenceHash( $reference->getHash() );
 	}
 
 	/**
@@ -69,7 +70,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	 * @param Reference $reference
 	 */
 	public function removeReference( Reference $reference ) {
-		$this->detach( $reference );
+		$this->removeReferenceHash( $reference->getHash() );
 	}
 
 	/**

@@ -89,6 +89,20 @@ class ReferenceListTest extends \MediaWikiTestCase {
 		$this->assertTrue( true );
 	}
 
+	public function testHasReferenceMore() {
+		$list = new ReferenceList();
+
+		$reference = new ReferenceObject( new \Wikibase\SnakList( array( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
+		$sameReference = unserialize( serialize( $reference ) );
+
+		$list->addReference( $reference );
+
+		$this->assertTrue(
+			$list->hasReference( $sameReference ),
+			'hasReference should return true when a reference with the same value is present, even when its another instance'
+		);
+	}
+
 	/**
 	 * @dataProvider instanceProvider
 	 *
@@ -129,13 +143,9 @@ class ReferenceListTest extends \MediaWikiTestCase {
 		$elements = $this->getElementInstances();
 		$element = array_shift( $elements );
 
-		if ( !$array->hasReference( $element ) ) {
-			++$elementCount;
-		}
-
 		$array->addReference( $element );
 
-		$this->assertEquals( $elementCount, count( $array ) );
+		$this->assertEquals( ++$elementCount, count( $array ) );
 	}
 
 	/**
