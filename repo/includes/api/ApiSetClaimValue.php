@@ -31,7 +31,6 @@ use ApiBase, MWException;
  */
 class ApiSetClaimValue extends Api {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
@@ -54,11 +53,7 @@ class ApiSetClaimValue extends Api {
 			$params['value']
 		);
 
-		$status = $content->save();
-
-		if ( !$status->isGood() ) {
-			$this->dieUsage( 'Failed to save the change', 'setclaimvalue-save-failed' );
-		}
+		$this->saveChanges( $content );
 
 		$this->outputClaim( $claim );
 
@@ -86,6 +81,9 @@ class ApiSetClaimValue extends Api {
 	}
 
 	/**
+	 * Updates the claim with specified GUID to have a main snak with provided value.
+	 * The claim is modified in the passed along entity and is returned as well.
+	 *
 	 * @since 0.3
 	 *
 	 * @param Entity $entity
@@ -110,6 +108,39 @@ class ApiSetClaimValue extends Api {
 		$claim->setMainSnak( PropertyValueSnak::newFromPropertyValue( $mainSnak->getPropertyId(), $value ) );
 
 		return $claim;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param EntityContent $content
+	 */
+	protected function saveChanges( EntityContent $content ) {
+		$params = $this->extractRequestParams();
+
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId );
+
+		$status = $editEntity->attemptSave(
+			'', // TODO: automcomment
+			EDIT_UPDATE,
+			isset( $params['token'] ) ? $params['token'] : false
+		);
+
+		if ( !$status->isGood() ) {
+			$this->dieUsage( 'Failed to save the change', 'setclaimvalue-save-failed' );
+		}
+
+		$statusValue = $status->getValue();
+
+		if ( isset( $statusValue['revision'] ) ) {
+			$this->getResult()->addValue(
+				'claim',
+				'lastrevid',
+				(int)$statusValue['revision']->getId()
+			);
+		}
 	}
 
 	/**
