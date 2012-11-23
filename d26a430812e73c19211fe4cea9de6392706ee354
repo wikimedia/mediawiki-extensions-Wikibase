@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZX//+0M\u003d",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-23T16:03:34Z",
+      "side": 1,
+      "message": "this is rather roundabout :)",
+      "revId": "d26a430812e73c19211fe4cea9de6392706ee354",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
