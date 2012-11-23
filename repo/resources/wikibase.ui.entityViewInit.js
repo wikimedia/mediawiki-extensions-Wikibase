@@ -18,7 +18,7 @@
 		// for site-links we don't want to remove the table cell representing the edit section
 		$( 'td.wb-editsection' ).empty();
 		// for all other values we remove the whole edit section
-		$( 'span.wb-editsection' ).remove();
+		$( 'span.wb-editsection, div.wb-editsection' ).remove();
 
 		// remove all infos about empty values which are displayed in non-JS
 		$( '.wb-value-empty' ).empty().removeClass( 'wb-value-empty' );
@@ -81,11 +81,26 @@
 				} );
 			}
 
+			$( '.wb-section-heading' ).remove();
+
+			// BUILD CLAIMS VIEW:
+			var $claims = $( '.wb-claims' ).empty();
+
+			$claims.before(
+				$( mw.template( 'wb-section-heading', mw.msg( 'wikibase-statements' ) ) )
+			);
+
+			$.each( wb.entity.claims, function( i, claim ) {
+				var $snakView = $( '<div/>' ).snakview().appendTo( $claims );
+
+				// display value of the claim:
+				$snakView.data( 'snakview' ).value( claim.getMainSnak() );
+			} );
+
 			// removing site links heading to rebuild it with value counter
-			$( '.wb-sitelinks-heading' ).remove();
 			$( 'table.wb-sitelinks' ).each( function() {
 				$( this ).before(
-					$( mw.template( 'wb-sitelinks-heading', mw.message( 'wikibase-sitelinks' ) ) )
+					$( mw.template( 'wb-section-heading', mw.msg( 'wikibase-sitelinks' ) ) )
 					.append(
 						$( '<span/>' )
 						.attr( 'id', 'wb-item-' + mw.config.get('wbEntityId') + '-sitelinks-counter' )
@@ -134,18 +149,6 @@
 		$( '.wb-entity' ).fadeTo( 0, 1 );
 		$( '.wb-entity-spinner' ).remove();
 
-		// BUILD CLAIMS VIEW:
-
-		var $claims = $( '<div/>' );
-
-		$.each( wikibase.entity.claims, function( i, claim ) {
-			var $snakView = $( '<div/>' ).snakview().appendTo( $claims );
-
-			// display value of the claim:
-			$snakView.data( 'snakview' ).value( claim.getMainSnak() );
-		} );
-
-		$( '.wb-entity' ).append( $claims );
 	} );
 
 } )( jQuery, mediaWiki, wikibase );
