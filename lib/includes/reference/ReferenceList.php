@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Hashable;
 
 /**
  * Implementation of the References interface.
@@ -34,7 +35,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ReferenceList extends \SplObjectStorage implements References {
+class ReferenceList extends HashableObjectStorage implements References {
 
 	/**
 	 * @see References::addReference
@@ -72,6 +73,56 @@ class ReferenceList extends \SplObjectStorage implements References {
 	}
 
 	/**
+	 * @see References::hasReferenceHash
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $referenceHash
+	 *
+	 * @return boolean
+	 */
+	public function hasReferenceHash( $referenceHash ) {
+		return $this->getReference( $referenceHash ) !== null;
+	}
+
+	/**
+	 * @see References::removeReferenceHash
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $referenceHash	`
+	 */
+	public function removeReferenceHash( $referenceHash ) {
+		$reference = $this->getReference( $referenceHash );
+
+		if ( $reference !== null ) {
+			$this->detach( $reference );
+		}
+	}
+
+	/**
+	 * @see References::getReference
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $referenceHash
+	 *
+	 * @return Reference|null
+	 */
+	public function getReference( $referenceHash ) {
+		/**
+		 * @var Hashable $hashable
+		 */
+		foreach ( $this as $hashable ) {
+			if ( $hashable->getHash() === $referenceHash ) {
+				return $hashable;
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * @see References::toArray
 	 *
 	 * @since 0.3
@@ -104,52 +155,10 @@ class ReferenceList extends \SplObjectStorage implements References {
 		$references = array();
 
 		foreach ( $data as $snaks ) {
-			$snaks[] = new ReferenceObject( SnakList::newFromArray( $snaks ) );
+			$references[] = new ReferenceObject( SnakList::newFromArray( $snaks ) );
 		}
 
 		return new static( $references );
-	}
-
-	/**
-	 * The hash is purely valuer based. Order of the elements in the array is not held into account.
-	 *
-	 * Note: we cannot implement Hashable interface by having this be getHash since PHP 5.4
-	 * introduced a similarly named method in SplObjectStorage.
-	 *
-	 * @since 0.3
-	 *
-	 * @internal param MapHasher $mapHasher
-	 *
-	 * @return string
-	 */
-	public function getValueHash() {
-		// We cannot have this as optional arg, because then we're no longer
-		// implementing the Hashable interface properly according to PHP...
-		$args = func_get_args();
-
-		/**
-		 * @var MapHasher $hasher
-		 */
-		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
-
-		return $hasher->hash( $this );
-	}
-
-	/**
-	 * @see Comparable::equals
-	 *
-	 * The comparison is done purely value based, ignoring the order of the elements in the array.
-	 *
-	 * @since 0.3
-	 *
-	 * @param mixed $mixed
-	 *
-	 * @return boolean
-	 */
-	public function equals( $mixed ) {
-		return is_object( $mixed )
-			&& $mixed instanceof ReferenceList
-			&& $this->getValueHash() === $mixed->getValueHash();
 	}
 
 }

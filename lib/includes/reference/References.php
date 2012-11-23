@@ -69,39 +69,42 @@ interface References extends \Traversable, \Countable, \Serializable, \Comparabl
 	 */
 	public function toArray();
 
-}
+	/**
+	 * Removes duplicates bases on hash value.
+	 *
+	 * @since 0.3
+	 */
+	public function removeDuplicates();
 
-//interface HashedReferences extends References {
-//
-//	/**
-//	 * Retruns if the list contains a reference with the provided hash.
-//	 *
-//	 * @since 0.1
-//	 *
-//	 * @param string $referenceHash
-//	 *
-//	 * @return boolean
-//	 */
-//	public function hasReferenceHash( $referenceHash );
-//
-//	/**
-//	 * Removes the reference with the provided hash if it exists in the list.
-//	 *
-//	 * @since 0.1
-//	 *
-//	 * @param string $referenceHash
-//	 */
-//	public function removeReferenceHash( $referenceHash );
-//
-//	/**
-//	 * Returns the reference with the provided hash, or false if there is no such reference in the list.
-//	 *
-//	 * @since 0.1
-//	 *
-//	 * @param string $referenceHash
-//	 *
-//	 * @return Reference|bool
-//	 */
-//	public function getReference( $referenceHash );
-//
-//}
+	/**
+	 * Returns if the list contains a reference with the provided hash.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $referenceHash
+	 *
+	 * @return boolean
+	 */
+	public function hasReferenceHash( $referenceHash );
+
+	/**
+	 * Removes the reference with the provided hash if it exists in the list.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $referenceHash
+	 */
+	public function removeReferenceHash( $referenceHash );
+
+	/**
+	 * Returns the reference with the provided hash, or null if there is no such reference in the list.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $referenceHash
+	 *
+	 * @return Reference|null
+	 */
+	public function getReference( $referenceHash );
+
+}

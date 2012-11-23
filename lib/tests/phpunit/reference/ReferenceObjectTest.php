@@ -102,17 +102,4 @@ class ReferenceObjectTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Wikibase\Snaks', $snaks );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testSetSnaks( Reference $reference ) {
-		$snaks = new SnakList(
-			new PropertyValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ), new StringValue( 'a' ) )
-		);
-
-		$reference->setSnaks( $snaks );
-
-		$this->assertEquals( $snaks, $reference->getSnaks() );
-	}
-
 }

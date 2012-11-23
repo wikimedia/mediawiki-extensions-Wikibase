@@ -14,26 +14,16 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Reference extends \Hashable {
+interface Reference extends \Hashable, \Comparable, \Immutable {
 
 	/**
 	 * Returns the property snaks that make up this reference.
+	 * Modification of the snaks should NOT happen through this getter.
 	 *
 	 * @since 0.1
 	 *
 	 * @return Snaks
 	 */
 	public function getSnaks();
-
-	/**
-	 * Sets the snaks that make up this reference.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Snaks $propertySnaks
-	 */
-	public function setSnaks( Snaks $propertySnaks );
-
-
 
 }
