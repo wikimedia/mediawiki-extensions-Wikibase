@@ -148,8 +148,14 @@ $messages['eo'] = array(
 $messages['es'] = array(
 	'wbc-desc' => 'Cliente para la extensión Wikibase',
 	'wbc-after-page-move' => 'También puedes [$1 actualizar] el elemento Wikidata asociado para mantener los vínculos de idioma en la página que se ha movido.',
+	'wbc-comment-remove' => 'Se ha borrado un elemento asociado a Wikidata. Se han eliminado los enlaces lingüísticos.',
+	'wbc-comment-unlink' => 'Esta página ha sido desenlazada de un elemento de Wikidata. Se han eliminado los enlaces lingüísticos.',
+	'wbc-comment-restore' => 'Se ha restaurado un elemento asociado a Wikidata. Se han restaurado los enlaces de idioma.',
+	'wbc-comment-update' => 'Los enlaces de idioma se han actualizado.',
 	'wbc-editlinks' => 'Editar los enlaces',
 	'wbc-editlinkstitle' => 'Editar enlaces de interlengua',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Mostrar las ediciones Wikidata en la lista de cambios recientes',
 );
 
 /** Persian (فارسی)
@@ -173,8 +179,14 @@ $messages['fa'] = array(
 $messages['fi'] = array(
 	'wbc-desc' => 'Wikibase-laajennuksen asiakasohjelma',
 	'wbc-after-page-move' => 'Voit myös [$1 päivittää] sivuun liittyvän Wikidatan kohteen säilyttääksesi kielilinkit siirretyllä sivulla.',
+	'wbc-comment-remove' => 'Sivuun liittyvä Wikidata-kohde poistettu. Kielilinkit poistettu.',
+	'wbc-comment-unlink' => 'Tämä sivu ei ole enää liitettynä Wikidata-kohteeseen. Kielilinkit poistettu.',
+	'wbc-comment-restore' => 'Sivuun liittyvä Wikidata-kohde palautettu. Kielilinkit palautettu.',
+	'wbc-comment-update' => 'Kielilinkit päivitetty.',
 	'wbc-editlinks' => 'Muokkaa linkkejä',
 	'wbc-editlinkstitle' => 'Muokkaa kieltenvälisiä linkkejä',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
 );
 
 /** French (français)
@@ -279,9 +291,14 @@ $messages['ilo'] = array(
 $messages['is'] = array(
 	'wbc-desc' => 'Biðlari fyrir Wikibase viðbótina',
 	'wbc-after-page-move' => 'Þú mátt einnig [$1 uppfæra] viðeigandi Wikidata hlut til að viðhalda tungumálatenglum á færðu síðunni.',
+	'wbc-comment-remove' => 'Tengdum Wikidata hlut eytt. Tungumálatenglar fjarlægðir.',
+	'wbc-comment-unlink' => 'Þessi síða hefur verið aftengd Wikidata hlut. Tungumálatenglar fjarlægðir.',
+	'wbc-comment-restore' => 'Tengdur Wikidata hlutur endurvakinn. Tungumálatenglar endurvaktir.',
+	'wbc-comment-update' => 'Vefsvæðis tenglar uppfærðir.',
 	'wbc-editlinks' => 'Breyta tenglum',
 	'wbc-editlinkstitle' => 'Breyta tungumálatenglum',
 	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Sýna Wikidata breytingar í nýjustu breytingum',
 );
 
 /** Italian (italiano)
@@ -488,12 +505,15 @@ $messages['ro'] = array(
  */
 $messages['ru'] = array(
 	'wbc-desc' => 'Клиент для расширения Wikibase',
-	'wbc-comment-langlinks-delete' => 'Связанный элемент Викиданных удалён. Языковые ссылки ликвидированы.',
-	'wbc-comment-langlinks-remove' => 'Связь этой страницы с элементом Викиданных была разорвана. Языковые ссылки удалены',
-	'wbc-comment-langlinks-restore' => 'Удаление связанного элемента Викиданных отменено. Языковые ссылки восстановлены',
-	'wbc-comment-langlinks-update' => 'Языковые ссылки обновлены',
+	'wbc-after-page-move' => 'Чтобы исправить на переименованной странице языковые ссылки, вы можете также [$1  обновить] связанный элемент Викиданных.',
+	'wbc-comment-remove' => 'Связанный элемент Викиданных удалён. Языковые ссылки ликвидированы.',
+	'wbc-comment-unlink' => 'Связь этой страницы с элементом Викиданных была разорвана. Языковые ссылки удалены.',
+	'wbc-comment-restore' => 'Удаление связанного элемента Викиданных отменено. Языковые ссылки восстановлены.',
+	'wbc-comment-update' => 'Языковые ссылки обновлены.',
 	'wbc-editlinks' => 'Редактировать ссылки',
 	'wbc-editlinkstitle' => 'Редактировать межъязыковые ссылки',
+	'wbc-rc-hide-wikidata' => '$1 Викиданные',
+	'wbc-rc-show-wikidata-pref' => 'Показать изменения Викиданных в списке свежих правок',
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
