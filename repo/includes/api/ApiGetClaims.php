@@ -6,8 +6,6 @@ use ApiBase, MWException;
 /**
  * API module for getting claims.
  *
- * TODO: high level tests
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -32,6 +30,11 @@ use ApiBase, MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ApiGetClaims extends Api {
+
+	// TODO: automcomment
+	// TODO: example
+	// TODO: rights
+	// TODO: conflict detection
 
 	/**
 	 * @see ApiBase::execute
