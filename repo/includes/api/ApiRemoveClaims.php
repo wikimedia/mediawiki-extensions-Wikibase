@@ -70,7 +70,7 @@ class ApiRemoveClaims extends Api {
 
 		$guids = array();
 
-		foreach ( $params['key'] as $guid ) {
+		foreach ( $params['claim'] as $guid ) {
 			$entityId = EntityObject::getIdFromClaimGuid( $guid );
 
 			if ( !array_key_exists( $entityId, $guids ) ) {
@@ -186,7 +186,7 @@ class ApiRemoveClaims extends Api {
 	 */
 	public function getAllowedParams() {
 		return array(
-			'key' => array(
+			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
 				ApiBase::PARAM_REQUIRED => true,
@@ -207,7 +207,7 @@ class ApiRemoveClaims extends Api {
 	 */
 	public function getParamDescription() {
 		return array(
-			'key' => 'A GUID identifying the claim',
+			'claim' => 'A GUID identifying the claim',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."

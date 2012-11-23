@@ -128,7 +128,7 @@ class ApiRemoveClaimsTest extends \ApiTestCase {
 	protected function makeTheRequest( array $claimGuids ) {
 		$params = array(
 			'action' => 'wbremoveclaims',
-			'key' => implode( '|', $claimGuids )
+			'claim' => implode( '|', $claimGuids )
 		);
 
 		list( $resultArray, ) = $this->doApiRequest( $params );

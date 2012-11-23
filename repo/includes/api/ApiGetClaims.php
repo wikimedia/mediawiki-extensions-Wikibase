@@ -138,14 +138,14 @@ class ApiGetClaims extends Api {
 	protected function getIdentifiers() {
 		$params = $this->extractRequestParams();
 
-		if ( !isset( $params['entity'] ) && !isset( $params['key'] ) ) {
+		if ( !isset( $params['entity'] ) && !isset( $params['claim'] ) ) {
 			$this->dieUsage( 'Either the entity parameter or the key parameter need to be set', 'getclaims-entity-or-key' );
 		}
 
 		$claimGuid = null;
 
-		if ( isset( $params['entity'] ) && isset( $params['key'] ) ) {
-			$entityId = EntityObject::getIdFromClaimGuid( $params['key'] );
+		if ( isset( $params['entity'] ) && isset( $params['claim'] ) ) {
+			$entityId = EntityObject::getIdFromClaimGuid( $params['claim'] );
 
 			if ( $entityId !== $params['entity'] ) {
 				$this->dieUsage( 'If both entity id and claim key are provided they need to point to the same entity', 'getclaims-id-mismatch' );
@@ -155,8 +155,8 @@ class ApiGetClaims extends Api {
 			$entityId = $params['entity'];
 		}
 		else {
-			$entityId = EntityObject::getIdFromClaimGuid( $params['key'] );
-			$claimGuid = $params['key'];
+			$entityId = EntityObject::getIdFromClaimGuid( $params['claim'] );
+			$claimGuid = $params['claim'];
 		}
 
 		return array( $entityId, $claimGuid );
@@ -177,7 +177,7 @@ class ApiGetClaims extends Api {
 			'property' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			'key' => array(
+			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
 			'rank' => array(
@@ -207,7 +207,7 @@ class ApiGetClaims extends Api {
 		return array(
 			'entity' => 'Id of the entity from which to obtain claims. Required unless key is provided.',
 			'property' => 'Optional filter to only return claims with a main snak that has the specified property.',
-			'key' => 'A GUID identifying the claim. Required unless entity is provided.',
+			'claim' => 'A GUID identifying the claim. Required unless entity is provided.',
 			'rank' => 'Optional filter to return only the claims that have the specified rank',
 			'props' => 'Some parts of the claim are returned optionally. This parameter controls which ones are returned.',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
