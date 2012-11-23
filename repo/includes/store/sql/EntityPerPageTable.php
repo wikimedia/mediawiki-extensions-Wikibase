@@ -159,7 +159,7 @@ class EntityPerPageTable implements EntityPerPage {
 		}
 
 		if ( $entityType !== null ) {
-			$condisions[] = 'epp_entity_type = ' . $dbr->addQuotes( $entityType );
+			$conditions[] = 'epp_entity_type = ' . $dbr->addQuotes( $entityType );
 		}
 
 		$rows = $dbr->select(
