@@ -123,7 +123,10 @@ class ApiSetReference extends Api {
 		$statement = $entity->getClaims()->getClaimWithGuid( $statementGuid );
 
 		if ( ! ( $statement instanceof Statement ) ) {
-			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'setreference-not-a-statement' );
+			$this->dieUsage(
+				'The referenced claim is not a statement and thus cannot have references',
+				'setreference-not-a-statement'
+			);
 		}
 
 		$reference = new ReferenceObject( $snaks );
@@ -133,9 +136,23 @@ class ApiSetReference extends Api {
 		 */
 		$references = $statement->getReferences();
 
-		$references->addReference( $reference );
+		if ( $refHash !== null ) {
+			if ( $references->hasReferenceHash( $refHash ) ) {
+				$references->removeReferenceHash( $refHash );
+			}
+			else {
+				$this->dieUsage(
+					'The statement does not have any associated reference with the provided reference hash',
+					'setreference-no-such-reference'
+				);
+			}
+		}
 
-		// TODO: either remove any duplicate before, update the existing one, or remove duplicates after
+		// Only adding the reference if there is none with the same hash yet.
+		// TODO: verify this is what we want to do
+		if ( !$references->hasReference( $reference ) ) {
+			$references->addReference( $reference );
+		}
 
 		return $reference;
 	}
