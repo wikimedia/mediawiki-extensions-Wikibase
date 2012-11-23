@@ -158,6 +158,14 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 			elseif ( $editEntity->hasError() ) {
 				$editEntity->reportApiErrors( $this, 'save-failed' );
 			}
+
+			$revision = $editEntity->getNewRevision();
+			if ( $revision ) {
+				$this->getResult()->addValue(
+					'entity',
+					'lastrevid', intval( $revision->getId() )
+				);
+			}
 		}
 
 		if ( $itemContent !== null ) {
