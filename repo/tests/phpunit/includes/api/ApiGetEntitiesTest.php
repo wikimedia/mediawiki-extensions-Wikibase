@@ -333,6 +333,8 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 			array( 'Leipzig', 'labels|aliases', array( 'id', 'type', 'labels' ) ), // aliases are omitted because empty
 			array( 'Leipzig', 'sitelinks|descriptions', array( 'id', 'type', 'descriptions' ) ), // sitelinks are omitted because empty
 
+			// TODO: test this for property entities props, e.g. 'datatype'
+
 			array( 'Berlin', 'xyz', false ),
 		);
 	}
