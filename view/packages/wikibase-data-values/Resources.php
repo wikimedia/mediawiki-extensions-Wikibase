@@ -59,6 +59,7 @@ return call_user_func( function() {
 				'values/MonolingualTextValue.js',
 				'values/MultilingualTextValue.js',
 				'values/StringValue.js',
+				'values/NumberValue.js',
 				'values/UnknownValue.js',
 			),
 			'dependencies' => array(
