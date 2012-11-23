@@ -93,9 +93,16 @@ class ApiSetReference extends Api {
 	 * @return Snaks
 	 */
 	protected function getSnaks( $rawSnaks ) {
-		// TODO: unserialize snaks
+		$rawSnaks = \FormatJson::decode( $rawSnaks, true );
 
-		return new SnakList();
+		$snaks = new SnakList();
+		$snakUnserializer = new SnakSerializer();
+
+		foreach ( $rawSnaks as $rawSnak ) {
+			$snaks[] = $snakUnserializer->getUnserialized( $rawSnak );
+		}
+
+		return $snaks;
 	}
 
 	/**
