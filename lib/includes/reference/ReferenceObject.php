@@ -75,4 +75,15 @@ class ReferenceObject implements Reference {
 		return $this->snaks;
 	}
 
+	/**
+	 * @see Countable::count
+	 *
+	 * @since 0.3
+	 *
+	 * @return integer
+	 */
+	public function count() {
+		return count( $this->snaks );
+	}
+
 }

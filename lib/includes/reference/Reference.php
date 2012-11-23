@@ -14,7 +14,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Reference extends \Hashable, \Comparable, \Immutable {
+interface Reference extends \Hashable, \Comparable, \Immutable, \Countable {
 
 	/**
 	 * Returns the property snaks that make up this reference.
