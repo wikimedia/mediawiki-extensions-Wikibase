@@ -176,6 +176,24 @@
       "revId": "892ed3694859837d271a34a26f6d51509efd0036",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZX//+YY\u003d",
+        "filename": "repo/tests/phpunit/includes/FuzzyCompareTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2012-11-24T23:09:26Z",
+      "side": 1,
+      "message": "* Look again, all tests in core are now converted to have providers as static functions (unless someone screwed up again).\n* As Nike has shown, it is *not* a matter of choice. There is no choice. PHPUnit calls these methods statically, always. Defining them other wise will only cause 2 things: 1) Confusion (it might make a future contributor think $this can be used, which will break the function), 2) A strict violation (depending on your debug settings).\n* We don\u0027t care about what the  _manual_ says. If anything, the PHP community has a long history of low quality examples in their (other wise) very complete documentation.",
+      "parentUuid": "AAADZX//+lo\u003d",
+      "revId": "892ed3694859837d271a34a26f6d51509efd0036",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
