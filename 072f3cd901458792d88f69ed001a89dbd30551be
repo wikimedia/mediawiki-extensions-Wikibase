@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZX//+YM\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2012-11-24T23:09:55Z",
+      "side": 1,
+      "message": "This doesn\u0027t belong in the commit message.",
+      "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
