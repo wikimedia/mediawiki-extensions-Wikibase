@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZX//+Y8\u003d",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-24T22:58:41Z",
+      "side": 1,
+      "message": "Are you sure we can display claims with a div? shouldn\u0027t we use a table for this? I think we want a clear grid for this, where all fields for the properties names have the same width and where the action column starts and ends at the same position. How is this possible with a div when it required a table in case of the site links?",
+      "revId": "24431697b7bf9a2720d94f11f87524a6a7cff002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZX//+ZA\u003d",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.PropertyNoValueSnak.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-24T22:58:41Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be necessary, I have moved the type out of the snak, use getType() instead if you have a specific instance.",
+      "revId": "24431697b7bf9a2720d94f11f87524a6a7cff002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZX//+ZM\u003d",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.PropertySomeValueSnak.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-24T22:58:41Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be necessary, I have moved the type out of the snak, use getType() instead if you have a specific instance.",
+      "revId": "24431697b7bf9a2720d94f11f87524a6a7cff002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
