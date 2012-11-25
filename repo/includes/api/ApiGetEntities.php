@@ -4,7 +4,7 @@ namespace Wikibase;
 use ApiBase, MWException;
 
 /**
- * API module to get the data for one or more Wikibase items.
+ * API module to get the data for one or more Wikibase entities.
  *
  * @since 0.1
  *
@@ -251,14 +251,14 @@ class ApiGetEntities extends Api {
 	 */
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
-			'ids' => 'The IDs of the items to get the data from',
+			'ids' => 'The IDs of the entities to get the data from',
 			'sites' => array( 'Identifier for the site on which the corresponding page resides',
 				"Use together with 'title', but only give one site for several titles or several sites for one title."
 			),
 			'titles' => array( 'The title of the corresponding page',
 				"Use together with 'sites', but only give one site for several titles or several sites for one title."
 			),
-			'props' => array( 'The names of the properties to get back from each item.',
+			'props' => array( 'The names of the properties to get back from each entity.',
 				"Will be further filtered by any languages given."
 			),
 			'sort' => array( 'The names of the properties to sort.',
@@ -280,7 +280,7 @@ class ApiGetEntities extends Api {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to get the data for multiple Wikibase items.'
+			'API module to get the data for multiple Wikibase entities.'
 		);
 	}
 
@@ -291,7 +291,7 @@ class ApiGetEntities extends Api {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
 			array( 'code' => 'id-xor-wikititle', 'info' => $this->msg( 'wikibase-api-id-xor-wikititle' )->text() ),
-			array( 'code' => 'no-such-item', 'info' => $this->msg( 'wikibase-api-no-such-item' )->text() ),
+			array( 'code' => 'no-such-item', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
 			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
 		) );
 	}
@@ -300,11 +300,14 @@ class ApiGetEntities extends Api {
 	 * @see ApiBase::getExamples()
 	 */
 	protected function getExamples() {
+		$exampleId = new EntityId( Item::ENTITY_TYPE, 42 );
+		$exampleId = $exampleId->getPrefixedId();
+
 		return array(
-			'api.php?action=wbgetentities&ids=42'
-			=> 'Get item number 42 with language attributes in all available languages',
-			'api.php?action=wbgetentities&ids=42&languages=en'
-			=> 'Get item number 42 with language attributes in English language',
+			"api.php?action=wbgetentities&ids=$exampleId"
+			=> "Get item with ID $exampleId with language attributes in all available languages",
+			"api.php?action=wbgetentities&ids=$exampleId&languages=en"
+			=> "Get item with ID $exampleId with language attributes in English language",
 			'api.php?action=wbgetentities&sites=en&titles=Berlin&languages=en'
 			=> 'Get the item for page "Berlin" on the site "en", with language attributes in English language',
 		);

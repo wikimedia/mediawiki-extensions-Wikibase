@@ -177,8 +177,7 @@ $1', # Do not translate
 	'wikibase-api-patch-incomplete' => 'The generated patch turned out to be incomplete.', # Do not translate
 	'wikibase-api-data-or-id-xor-wikititle' => 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page, or "data" for a new item.', # Do not translate
 	'wikibase-api-id-xor-wikititle' => 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page.', # Do not translate
-	'wikibase-api-no-such-item' => 'Could not find an existing item.', # Do not translate
-	'wikibase-api-no-such-item-id' => 'Could not find an existing item for this id.', # Do not translate
+	'wikibase-api-no-such-entity' => 'Could not find an existing entity.', # Do not translate
 	'wikibase-api-link-exists' => 'An article on the specified wiki is already linked.', # Do not translate
 	'wikibase-api-add-with-id' => 'Cannot add with the id of an existing item.', # Do not translate
 	'wikibase-api-add-exists' => 'Cannot add to an existing item.', # Do not translate
@@ -475,8 +474,7 @@ Parameters:
 	'wikibase-api-patch-incomplete' => 'This error message is used when the API tried to patch a contribution and the patch missed some parts. This typically happens due to edit conflicts.',
 	'wikibase-api-data-or-id-xor-wikititle' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions. {{doc-important|Do not translate "id", "site", "title" and "data".}}',
 	'wikibase-api-id-xor-wikititle' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions. {{doc-important|Do not translate "id", "site" and "title".}}',
-	'wikibase-api-no-such-item' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API could not find an item, usually on an already found page. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the item is deleted due to a race condition.',
-	'wikibase-api-no-such-item-id' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API could not find an item by using a specific item id. Usually this should never be shown to the user, unless there are some exceptional error conditions.',
+	'wikibase-api-no-such-entity' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API could not find an entity, usually on an already found page. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the entity is deleted due to a race condition.',
 	'wikibase-api-link-exists' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API requests a sitelink to be created but there already exist a similar link. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the link is already created due to a race condition.',
 	'wikibase-api-add-with-id' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API includes an id, but the operation cannot be fullfilled because this creates a conflict. Usually this should never be shown to the user, unless there are some exceptional error conditions.',
 	'wikibase-api-add-exists' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API already found an item, but the operation cannot be fullfilled because this creates a conflict. Usually this should never be shown to the user, unless there are some exceptional error conditions, or an item is already created due to a race condition.',

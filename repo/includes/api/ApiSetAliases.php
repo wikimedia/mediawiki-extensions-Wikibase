@@ -71,7 +71,7 @@ class ApiSetAliases extends ApiModifyEntity {
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
-		$this->dieUsage( $this->msg( 'wikibase-api-no-such-item' )->text(), 'no-such-item' );
+		$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-item' );
 	}
 
 	/**
