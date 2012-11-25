@@ -55,7 +55,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$item->setLabel( 'en', 'Raarrr' );
 		$this->saveItem( $item );
 
-		list( $output, $re ) = $this->executeSpecialPage( $item->getId()->getPrefixedId() );
+		list( $output, ) = $this->executeSpecialPage( $item->getId()->getPrefixedId() );
 		$this->assertNotEmpty( $output, "is output empty?" );
 
 		//TODO: check response headers

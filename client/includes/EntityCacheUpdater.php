@@ -39,7 +39,7 @@ class EntityCacheUpdater {
 	 * @param Change $change
 	 */
 	public function handleChange( Change $change ) {
-		list( $entityType, $updateType ) = explode( '~', $change->getType() );
+		list( , $updateType ) = explode( '~', $change->getType() );
 
 		/**
 		 * @var Entity $entity

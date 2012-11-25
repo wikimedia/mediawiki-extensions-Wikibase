@@ -267,7 +267,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	public function getLabelText( EntityContent $content ) {
 
 		$langCode = $this->getContext()->getLanguage()->getCode();
-		list( $labelCode, $labelText, $labelLang) =
+		list( , $labelText, ) =
 			Utils::lookupUserMultilangText(
 				$content->getEntity()->getLabels(),
 				Utils::languageChain( $langCode ),

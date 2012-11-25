@@ -137,7 +137,6 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 
 		if ( $itemContent === null ) {
 			// to not have an ItemContent isn't really bad at this point
-			$edit = null;
 			$status = Status::newGood( true );
 		}
 		else {
