@@ -16,6 +16,24 @@
       "revId": "09c45afef0185c03c14013b66347e42b7b027e55",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZX//+SY\u003d",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-25T15:36:00Z",
+      "side": 1,
+      "message": "right. should be \"entity\" or so. i just copied it from the _getValueFromApiResponse above. it\u0027s also wrong there.",
+      "parentUuid": "AAADZX//+xM\u003d",
+      "revId": "09c45afef0185c03c14013b66347e42b7b027e55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
