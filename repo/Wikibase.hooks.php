@@ -900,4 +900,82 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * Entry points for MediaWiki hook 'EditFilterMerged'
+	 *
+	 * This is our replacement for the same handler in AbuseFilter,
+	 * but now with the assumtion that the $editor is an EditEntity.
+	 *
+	 * TODO: Some data is not available as previousl, especially an "Article"
+	 * is not available. The consequences of using Content as replacement has
+	 * not been verified.
+	 *
+	 * TODO: This version needs additional tweaking
+	 *
+	 * @param $editor EditPage instance (object)
+	 * @param $text string Content of the edit box
+	 * @param &$error string Error message to return
+	 * @param $summary string Edit summary for page
+	 * @return bool
+	 */
+	public static function onEditFilterMerged( $editor, $text, &$error, $summary ) {
+		// Bail out if not run from a hook in EditEntity
+		if ( !( $editor instanceof \Wikibase\EditEntity ) ) {
+			return true;
+		}
+		// Load vars
+		$vars = new AbuseFilterVariableHolder;
+
+		# Replace line endings so the filter won't get confused as $text
+		# was not processed by Parser::preSaveTransform (bug 20310)
+		$text = str_replace( "\r\n", "\n", $text );
+
+		self::$successful_action_vars = false;
+		self::$last_edit_page = false;
+
+		// Check for null edits.
+		$oldtext = '';
+
+		$content = $editor->getNewContent();
+		$revision = $editor->getCurrentRevision();
+		$oldtext = \AbuseFilter::revisionToString( $revision, Revision::RAW );
+
+		// Cache article object so we can share a parse operation
+		$title = $editor->mTitle;
+		$articleCacheKey = $title->getNamespace() . ':' . $title->getText();
+		\AFComputedVariable::$articleCache[$articleCacheKey] = $content;
+
+		if ( strcmp( $oldtext, $text ) == 0 ) {
+			// Don't trigger for null edits.
+			return true;
+		}
+
+		global $wgUser;
+		$vars->addHolder( \AbuseFilter::generateUserVars( $wgUser ) );
+		$vars->addHolder( \AbuseFilter::generateTitleVars( $title , 'article' ) );
+		$vars->setVar( 'action', 'edit' );
+		$vars->setVar( 'summary', $summary );
+		$vars->setVar( 'minor_edit', $editor->minoredit ); //TODO  ?
+
+		$vars->setVar( 'old_wikitext', $oldtext );
+		$vars->setVar( 'new_wikitext', $text );
+
+		$vars->addHolder( \AbuseFilter::getEditVars( $title, $content ) );
+
+		$filter_result = \AbuseFilter::filterAction( $vars, $title );
+
+		// @TODO: Fix this and show it as an error
+		if ( $filter_result !== true ) {
+			global $wgOut;
+			$wgOut->addHTML( $filter_result );
+			$editor->showEditForm();
+			return false;
+		}
+
+		\AbuseFilterHooks::$successful_action_vars = $vars;
+		\AbuseFilterHooks::$last_edit_page = $editor->mArticle; // TODO ?
+
+		return true;
+	}
+
 }
