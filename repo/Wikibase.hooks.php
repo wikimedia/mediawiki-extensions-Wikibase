@@ -711,20 +711,24 @@ final class RepoHooks {
 		$model = $target->getContentModel();
 		$entityModels = EntityContentFactory::singleton()->getEntityContentModels();
 
-		if(
-			// if custom link text is given, there is no point in overwriting it
-			$html !== null
-			// we only want to handle links to Wikibase entities differently here
-			|| !in_array( $model, $entityModels )
-		) {
+
+		// we only want to handle links to Wikibase entities differently here
+		if ( !in_array( $model, $entityModels ) ) {
 			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 
-		// $wgTitle is temporarily set to special pages Title in case of special page inclusion! Therefore we can
-		// just check whether the page is a special page and if not, disable the behavior.
+		// if custom link text is given, there is no point in overwriting it
+		// but not if it is similar to the plain title
+		if ( $html !== null && $target->getFullText() !== $html ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
+			return true;
+		}
+
 		global $wgTitle;
 
+		// $wgTitle is temporarily set to special pages Title in case of special page inclusion! Therefore we can
+		// just check whether the page is a special page and if not, disable the behavior.
 		if( $wgTitle === null || !$wgTitle->isSpecialPage() ) {
 			// no special page, we don't handle this for now
 			// NOTE: If we want to handle this, messages would have to be generated in sites language instead of
