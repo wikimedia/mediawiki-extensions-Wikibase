@@ -711,20 +711,24 @@ final class RepoHooks {
 		$model = $target->getContentModel();
 		$entityModels = EntityContentFactory::singleton()->getEntityContentModels();
 
-		if(
-			// if custom link text is given, there is no point in overwriting it
-			$html !== null
-			// we only want to handle links to Wikibase entities differently here
-			|| !in_array( $model, $entityModels )
-		) {
+
+		// we only want to handle links to Wikibase entities differently here
+		if ( !in_array( $model, $entityModels ) ) {
 			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 
-		// $wgTitle is temporarily set to special pages Title in case of special page inclusion! Therefore we can
-		// just check whether the page is a special page and if not, disable the behavior.
+		// if custom link text is given, there is no point in overwriting it
+		// but not if it is similar to the plain title
+		if ( $html !== null && $target->getFullText() !== $html ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
+			return true;
+		}
+
 		global $wgTitle;
 
+		// $wgTitle is temporarily set to special pages Title in case of special page inclusion! Therefore we can
+		// just check whether the page is a special page and if not, disable the behavior.
 		if( $wgTitle === null || !$wgTitle->isSpecialPage() ) {
 			// no special page, we don't handle this for now
 			// NOTE: If we want to handle this, messages would have to be generated in sites language instead of
@@ -897,6 +901,83 @@ final class RepoHooks {
 		}
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * Entry points for MediaWiki hook 'EditFilterMerged'
+	 *
+	 * This is our replacement for the same handler in AbuseFilter,
+	 * but now with the assumtion that the $editor is an EditEntity
+	 *
+	 * @param $editor EditPage instance (object)
+	 * @param $text string Content of the edit box
+	 * @param &$error string Error message to return
+	 * @param $summary string Edit summary for page
+	 * @return bool
+	 */
+	public static function onEditFilterMerged( $editor, $text, &$error, $summary ) {
+		// Bail out if not run from a hook in EditPage
+		if ( !( $editor instanceof \Wikibase\EditEntity ) ) {
+			return true;
+		}
+		// Load vars
+		$vars = new AbuseFilterVariableHolder;
+
+		# Replace line endings so the filter won't get confused as $text
+		# was not processed by Parser::preSaveTransform (bug 20310)
+		$text = str_replace( "\r\n", "\n", $text );
+
+		self::$successful_action_vars = false;
+		self::$last_edit_page = false;
+
+		// Check for null edits.
+		$oldtext = '';
+
+		$page = $editor->getPage();
+		if ( isset($page) ) {
+			$revision = $page->getRevision();
+			if ( !$revision ) {
+				return true;
+			}
+			$oldtext = \AbuseFilter::revisionToString( $revision, Revision::RAW );
+		}
+
+		// Cache article object so we can share a parse operation
+		$title = $editor->mTitle;
+		$articleCacheKey = $title->getNamespace() . ':' . $title->getText();
+		\AFComputedVariable::$articleCache[$articleCacheKey] = $article; // TODO: here we ned something else than $article, perhaps a $content
+
+		if ( strcmp( $oldtext, $text ) == 0 ) {
+			// Don't trigger for null edits.
+			return true;
+		}
+
+		global $wgUser;
+		$vars->addHolder( \AbuseFilter::generateUserVars( $wgUser ) );
+		$vars->addHolder( \AbuseFilter::generateTitleVars( $title , 'article' ) );
+		$vars->setVar( 'action', 'edit' );
+		$vars->setVar( 'summary', $summary );
+		$vars->setVar( 'minor_edit', $editor->minoredit );
+
+		$vars->setVar( 'old_wikitext', $oldtext );
+		$vars->setVar( 'new_wikitext', $text );
+
+		$vars->addHolder( \AbuseFilter::getEditVars( $title, $article ) );
+
+		$filter_result = \AbuseFilter::filterAction( $vars, $title );
+
+		// @TODO: Fix this and show it as a 
+		if ( $filter_result !== true ) {
+			global $wgOut;
+			$wgOut->addHTML( $filter_result );
+			$editor->showEditForm();
+			return false;
+		}
+
+		\AbuseFilterHooks::$successful_action_vars = $vars;
+		\AbuseFilterHooks::$last_edit_page = $editor->mArticle;
+
 		return true;
 	}
 
