@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZX//+RA\u003d",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.PropertyNoValueSnak.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-25T19:30:51Z",
+      "side": 1,
+      "message": "Not sure why what you did there would fix the error, I think it doesn\u0027t really fix it but avoids it.\n\nThe only real fix would be to display no value and some value snaks. We don\u0027t have to do this yet, we are still concentrating on implementing PropertyValueSnak first. So, this can simply be ignored for now I think. After all, this has been an issue before your change set!",
+      "parentUuid": "AAADZX//+Ss\u003d",
+      "revId": "24431697b7bf9a2720d94f11f87524a6a7cff002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZX//+ZM\u003d",
         "filename": "lib/resources/wikibase.datamodel/wikibase.PropertySomeValueSnak.js",
         "patchSetId": 2
