@@ -256,4 +256,14 @@ class EntityId implements \Immutable, \Comparable {
 			&& $target->getEntityType() === $this->entityType;
 	}
 
+	/**
+	 * Return a string representation of this entity id. Equal to getPrefixedId().
+	 *
+	 * @since 0.3
+	 *
+	 * @return String
+	 */
+	public function __toString() {
+		return $this->getPrefixedId();
+	}
 }

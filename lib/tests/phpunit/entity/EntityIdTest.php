@@ -28,6 +28,7 @@ use Wikibase\Settings, Wikibase\EntityId;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group foooooo
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -58,6 +59,7 @@ class EntityIdTest extends \MediaWikiTestCase {
 		$id = EntityId::newFromPrefixedId( $id );
 
 		$this->assertEquals( $expected[0], $id->getPrefixedId() );
+		$this->assertEquals( $expected[0], $id ); // auto-cast to string
 		$this->assertEquals( $expected[1], $id->getPrefix() );
 		$this->assertEquals( $expected[2], $id->getNumericId() );
 	}
