@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase;
-use DatabaseUpdater;
 
 /**
  * File defining the hook handlers for the WikibaseLib extension.

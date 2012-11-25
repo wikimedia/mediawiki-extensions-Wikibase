@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 use Wikibase\ItemObject;
 use Wikibase\Item;
 use Wikibase\SiteLink;
-use Wikibase\Statement;
 
 /**
  * Tests for the Wikibase\ItemObject class.

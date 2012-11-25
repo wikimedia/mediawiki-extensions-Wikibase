@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Maintenance, Exception;
+use Maintenance;
 
 /**
  * Prune the Wikibase changes table to a maximum number of entries.
