@@ -146,7 +146,6 @@ final class Utils {
 				$languageCode = $language['code'];
 
 				foreach ( $language['site'] as $siteData ) {
-					$sites = \Sites::singleton();
 					$site = \Sites::singleton()->getSite( $siteData['dbname'] );
 
 					if ( !$site ) {

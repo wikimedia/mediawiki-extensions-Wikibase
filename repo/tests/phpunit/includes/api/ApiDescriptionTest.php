@@ -75,7 +75,7 @@ class ApiDescriptionTest extends ApiLangAttributeBase {
 	 */
 	public function testLanguageAttribute( $handle, $langCode, $value, $exception = null ) {
 		$this->doLanguageAttribute( $handle, 'wbsetdescription', 'description', $langCode, $value, $exception );
-		$id = $this->getItemId( $handle );
+		$this->getItemId( $handle );
 	}
 
 }
