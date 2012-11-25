@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZX//+TM\u003d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2012-11-25T12:45:37Z",
+      "side": 1,
+      "message": "Entityselector directly returns an object containing the item information. It is not encapsulated like in jquery.ui.autocomplete: \"ui\" should be \"item\"",
+      "revId": "6f8ff339486e15e81343b38c446a8b391560d21f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
