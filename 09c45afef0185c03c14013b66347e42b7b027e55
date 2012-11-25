@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZX//+xM\u003d",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-25T01:14:54Z",
+      "side": 1,
+      "message": "Isn\u0027t it a little missleading that you are talking about \"response\" here while you are actually providing the response.entity above?",
+      "revId": "09c45afef0185c03c14013b66347e42b7b027e55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
