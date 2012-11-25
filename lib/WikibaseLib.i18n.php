@@ -134,13 +134,14 @@ $messages['es'] = array(
 
 /** Persian (فارسی)
  * @author Reza1615
+ * @author ZxxZxxZ
  */
 $messages['fa'] = array(
-	'wikibaselib-desc' => 'نگهداری موارد اساسی برای ویکی‌پایه و افزونه‌های وابسته به ویکی‌پایه',
-	'wikibaselib-entity-item' => 'مورد',
-	'wikibaselib-entity-property' => 'خاصیت',
+	'wikibaselib-desc' => 'نگهداری قابلیت‌های اساسی برای ویکی‌بیس و افزونه‌های کارخواه ویکی‌بیس',
+	'wikibaselib-entity-item' => 'آیتم',
+	'wikibaselib-entity-property' => 'ویژگی',
 	'wikibaselib-entity-query' => 'کوئری',
-	'datatypes-type-wikibase-item' => 'مورد',
+	'datatypes-type-wikibase-item' => 'آیتم',
 	'datatypes-type-commonsMedia' => 'پرونده‌های ویکی‌انبار',
 );
 
@@ -448,4 +449,16 @@ $messages['zh-hans'] = array(
 	'wikibaselib-entity-query' => '查询',
 	'datatypes-type-wikibase-item' => '项目',
 	'datatypes-type-commonsMedia' => '共享资源媒体文件',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Justincheng12345
+ */
+$messages['zh-hant'] = array(
+	'wikibaselib-desc' => '儲存維基基礎及其客戶端的共同功能',
+	'wikibaselib-entity-item' => '項目',
+	'wikibaselib-entity-property' => '屬性',
+	'wikibaselib-entity-query' => '查詢',
+	'datatypes-type-wikibase-item' => '項目',
+	'datatypes-type-commonsMedia' => '共享資源媒體檔案',
 );

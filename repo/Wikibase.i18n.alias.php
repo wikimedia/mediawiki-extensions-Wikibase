@@ -38,6 +38,14 @@ $specialPageAliases['arc'] = array(
 	'NewProperty' => array( 'ܕܝܠܝܘܬ̈ܐ_ܚܕ̈ܬܬܐ' ),
 );
 
+/** буряад (буряад) */
+$specialPageAliases['bxr'] = array(
+	'CreateItem' => array( 'Зүйл_үүсхэхэ' ),
+	'NewProperty' => array( 'Шэнэ_шэнжэ_шанар' ),
+	'ItemByTitle' => array( 'Нэрээр_жагсааха' ),
+	'ItemDisambiguation' => array( 'Дэлгэрэнгы_нэрэ' ),
+);
+
 /** German (Deutsch) */
 $specialPageAliases['de'] = array(
 	'CreateItem' => array( 'Neues_Datenelement_erstellen' ),

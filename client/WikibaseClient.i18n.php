@@ -163,13 +163,12 @@ $messages['es'] = array(
  * @author ZxxZxxZ
  */
 $messages['fa'] = array(
-	'wbc-desc' => 'سرویس‌گیرنده برای افزونهٔ ویکی‌پایه',
-	'wbc-comment-langlinks-delete' => 'پیوند آیتم ویکی‌داده حذف گردید.پیوند زبان حذف شد.',
-	'wbc-comment-langlinks-remove' => 'این صفحه از آیتم ویکی‌داده قطع پیوند شد.پیوند زبان حذف شد.',
-	'wbc-comment-langlinks-restore' => 'پیوند آیتم ویکی‌داده بازیابی شد.پیوند زبان بازیابی شد.',
-	'wbc-comment-langlinks-update' => 'پیوند زبان‌ها به روز شد',
+	'wbc-desc' => 'کارخواه برای افزونهٔ ویکی‌بیس',
+	'wbc-comment-update' => 'پیوندهای زبانی به‌روز شد.',
 	'wbc-editlinks' => 'ویرایش پیوندها',
 	'wbc-editlinkstitle' => 'افزودن پیوندهای میان‌ویکی',
+	'wbc-rc-hide-wikidata' => '$1 ویکی‌داده',
+	'wbc-rc-show-wikidata-pref' => 'نمایش ویرایش‌های ویکی‌داده در تغییرات اخیر',
 );
 
 /** Finnish (suomi)
@@ -411,17 +410,17 @@ $messages['ms'] = array(
 );
 
 /** Norwegian Bokmål (norsk (bokmål)‎)
+ * @author Danmichaelo
  * @author Event
  * @author Jeblad
  */
 $messages['nb'] = array(
 	'wbc-desc' => 'Klientutvidelse for Wikibase, det strukturerte datalageret',
-	'wbc-comment-langlinks-delete' => 'Tilknyttet Wikidata-objekt slettet. Språklenker fjernet.',
-	'wbc-comment-langlinks-remove' => 'Denne siden har mistet lenken til Wikidata-objektet. Språklenker er fjernet',
-	'wbc-comment-langlinks-restore' => 'Tilhørende Wikidata-ojbekt er gjenopprettet sammen med språklenkene',
-	'wbc-comment-langlinks-update' => 'Språklenker er oppdatert',
+	'wbc-comment-update' => 'Språklenker er oppdatert.',
 	'wbc-editlinks' => 'Rediger lenker',
 	'wbc-editlinkstitle' => 'Rediger språkspesifikke lenker',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Vis Wikidata-redigeringer i siste endringer',
 );
 
 /** Dutch (Nederlands)
