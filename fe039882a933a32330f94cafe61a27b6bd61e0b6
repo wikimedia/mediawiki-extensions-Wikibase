@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZX//+Dw\u003d",
+        "filename": "repo/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2012-11-25T21:09:34Z",
+      "side": 1,
+      "message": "This pattern is self-invented. I don\u0027t know where you saw this, please stop this right here right now. Pay close attention to how it is done in mediawiki core.\n\nassert is context, it is passed as argument to the test callback.",
+      "revId": "fe039882a933a32330f94cafe61a27b6bd61e0b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
