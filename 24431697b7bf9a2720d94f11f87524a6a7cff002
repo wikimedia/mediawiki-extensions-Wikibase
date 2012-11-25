@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZX//+S4\u003d",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2012-11-25T13:45:58Z",
+      "side": 1,
+      "message": "The layout structure is completely different. We might think of additionally implementing the flexible box layout supported by modern browsers but I if we use a table here, we will be implementing some kind of table layout since the descending DOM structure will definitely require tables making us end up with tables within a table that is purely used for layouting. We really should avoid that. Did you even try out the change set?",
+      "parentUuid": "AAADZX//+Y8\u003d",
+      "revId": "24431697b7bf9a2720d94f11f87524a6a7cff002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZX//+ZA\u003d",
         "filename": "lib/resources/wikibase.datamodel/wikibase.PropertyNoValueSnak.js",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZX//+Ss\u003d",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.PropertyNoValueSnak.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2012-11-25T13:45:58Z",
+      "side": 1,
+      "message": "I reverted these changes. However, initiating a novalue/somevalue snak is causing a JS error that I was just trying to fix along with this change set. Please take a look yourself and fix the error.",
+      "parentUuid": "AAADZX//+ZA\u003d",
+      "revId": "24431697b7bf9a2720d94f11f87524a6a7cff002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZX//+ZM\u003d",
         "filename": "lib/resources/wikibase.datamodel/wikibase.PropertySomeValueSnak.js",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2012-11-24T22:58:41Z",
       "side": 1,
       "message": "This shouldn\u0027t be necessary, I have moved the type out of the snak, use getType() instead if you have a specific instance.",
+      "revId": "24431697b7bf9a2720d94f11f87524a6a7cff002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZX//+So\u003d",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.PropertySomeValueSnak.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2012-11-25T13:45:58Z",
+      "side": 1,
+      "message": "see comment in wikibase.PropertyNoValueSnak.js",
+      "parentUuid": "AAADZX//+ZM\u003d",
       "revId": "24431697b7bf9a2720d94f11f87524a6a7cff002",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
