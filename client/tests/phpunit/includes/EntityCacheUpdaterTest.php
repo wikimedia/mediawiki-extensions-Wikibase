@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 use Wikibase\EntityCacheUpdater;
-use \Wikibase\EntityChange;
-use \Wikibase\ItemObject;
+use Wikibase\EntityChange;
+use Wikibase\Item;
 
 /**
  * Tests for the Wikibase\EntityCacheUpdater class.
@@ -42,7 +42,7 @@ class EntityCacheUpdaterTest extends \MediaWikiTestCase {
 	public function handleChangeProvider() {
 		$argLists = array();
 
-		$sourceItem = ItemObject::newEmpty();
+		$sourceItem = Item::newEmpty();
 		$sourceItem->setId( 42 );
 		$targetItem = clone $sourceItem;
 		$targetItem->setLabel( 'en', 'ohi there' );
@@ -56,7 +56,7 @@ class EntityCacheUpdaterTest extends \MediaWikiTestCase {
 	/**
 	 * Data provider refuses to work for some reason o_O
 	 */
-	public function testHandleChange( /* EntityChange $change, ItemObject $sourceItem, ItemObject $targetItem */ ) {
+	public function testHandleChange( /* EntityChange $change, Item $sourceItem, Item $targetItem */ ) {
 		foreach ( $this->handleChangeProvider() as $argList ) {
 			list( $change, $sourceItem, $targetItem ) = $argList;
 

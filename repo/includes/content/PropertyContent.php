@@ -76,7 +76,7 @@ class PropertyContent extends EntityContent {
 	 * @return PropertyContent
 	 */
 	public static function newFromArray( array $data ) {
-		return new static( new PropertyObject( $data ) );
+		return new static( new Property( $data ) );
 	}
 
 	/**
@@ -133,7 +133,7 @@ class PropertyContent extends EntityContent {
 	 * @return PropertyContent
 	 */
 	public static function newEmpty() {
-		return new static( PropertyObject::newEmpty() );
+		return new static( Property::newEmpty() );
 	}
 
 	/**

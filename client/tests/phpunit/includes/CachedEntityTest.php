@@ -3,8 +3,6 @@
 namespace Wikibase\Test;
 use Wikibase\Item;
 use Wikibase\Property;
-use Wikibase\ItemObject;
-use Wikibase\PropertyObject;
 
 /**
  * Tests for the Wikibase\CachedEntity class.
@@ -71,7 +69,7 @@ class CachedEntityTest extends \ORMRowTest {
 				array(
 					'entity_id' => 42,
 					'entity_type' => Item::ENTITY_TYPE,
-					'entity_data' => ItemObject::newEmpty(),
+					'entity_data' => Item::newEmpty(),
 				),
 				true
 			),
@@ -79,7 +77,7 @@ class CachedEntityTest extends \ORMRowTest {
 				array(
 					'entity_id' => 42,
 					'entity_type' => Property::ENTITY_TYPE,
-					'entity_data' => PropertyObject::newEmpty(),
+					'entity_data' => Property::newEmpty(),
 				),
 				true
 			),

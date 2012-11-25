@@ -58,7 +58,7 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 			$entityContentFactory = EntityContentFactory::singleton();
 
 			if ( !EntityId::isPrefixedId( $id ) ) {
-				$id = ItemObject::getIdPrefix() . $id;
+				$id = Item::getIdPrefix() . $id;
 				$this->getResult()->setWarning( 'Assuming plain numeric ID refers to an item. '
 						. 'Please use qualified IDs instead.' );
 			}

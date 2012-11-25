@@ -10,7 +10,6 @@ use OutputPage;
 use Status;
 
 use \Wikibase\Item;
-use \Wikibase\ItemObject;
 use \Wikibase\ItemContent;
 
 /**
@@ -106,7 +105,7 @@ class ActionTestCase extends MediaWikiTestCase {
 	protected static function makeTestItemData() {
 		$items = array();
 
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 		$item->setLabel( 'de', 'Berlin' );
 		$item->setDescription( 'de', 'Stadt in Deutschland' );
 		$items['Berlin'][] = $item;
@@ -122,7 +121,7 @@ class ActionTestCase extends MediaWikiTestCase {
 		$items['Berlin'][] = $item;
 
 
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 		$item->setLabel( 'en', 'London' );
 		$items['London'][] = $item;
 
@@ -131,7 +130,7 @@ class ActionTestCase extends MediaWikiTestCase {
 		$items['London'][] = $item;
 
 
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 		$item->setLabel( 'de', 'Oslo' );
 		$item->setLabel( 'en', 'Oslo' );
 		$items['Oslo'][] = $item;

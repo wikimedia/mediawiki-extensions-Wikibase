@@ -45,7 +45,7 @@ class ItemDiffViewTest extends \MediaWikiTestCase {
 	}
 
 	public function itemProvider() {
-		$item = \Wikibase\ItemObject::newEmpty();
+		$item = \Wikibase\Item::newEmpty();
 		$item->setDescription( 'en', 'ohi there' );
 		$item->setLabel( 'de', 'o_O' );
 		$item->addAliases( 'nl', array( 'foo', 'bar' ) );
@@ -56,8 +56,8 @@ class ItemDiffViewTest extends \MediaWikiTestCase {
 		$itemClone->removeDescription( 'en' );
 
 		return array(
-			array( \Wikibase\ItemObject::newEmpty(), \Wikibase\ItemObject::newEmpty() ),
-			array( \Wikibase\ItemObject::newEmpty(), $item ),
+			array( \Wikibase\Item::newEmpty(), \Wikibase\Item::newEmpty() ),
+			array( \Wikibase\Item::newEmpty(), $item ),
 			array( $item, $itemClone ),
 		);
 	}

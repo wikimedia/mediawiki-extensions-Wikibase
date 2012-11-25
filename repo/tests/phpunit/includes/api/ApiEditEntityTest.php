@@ -144,7 +144,7 @@ class ApiEditEntityTest extends ApiModifyItemBase {
 
 		$this->assertSuccess( $res, 'entity', 'id' );
 		$this->assertItemEquals( self::$expect, $res['entity'] );
-		$this->assertRegExp( '/^' . \Wikibase\ItemObject::getIdPrefix() . '\d+$/',
+		$this->assertRegExp( '/^' . \Wikibase\Item::getIdPrefix() . '\d+$/',
 				$res['entity']['id'],
 				'Expected a qualfied ID with prefix' );
 

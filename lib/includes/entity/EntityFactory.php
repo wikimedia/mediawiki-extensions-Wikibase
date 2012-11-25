@@ -40,9 +40,9 @@ class EntityFactory {
 	 * @var array
 	 */
 	protected static $typeMap = array(
-		Item::ENTITY_TYPE => '\Wikibase\ItemObject',
-		Property::ENTITY_TYPE => '\Wikibase\PropertyObject',
-		Query::ENTITY_TYPE => '\Wikibase\QueryObject'
+		Item::ENTITY_TYPE => '\Wikibase\Item',
+		Property::ENTITY_TYPE => '\Wikibase\Property',
+		Query::ENTITY_TYPE => '\Wikibase\Query'
 	);
 
 	/**

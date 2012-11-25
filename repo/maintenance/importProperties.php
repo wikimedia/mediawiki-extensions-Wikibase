@@ -111,7 +111,7 @@ class importProperties extends Maintenance {
 	 * @return bool true if the item was created, false otherwise
 	 */
 	protected function createProperty( $data ) {
-		$property = \Wikibase\PropertyObject::newEmpty();
+		$property = \Wikibase\Property::newEmpty();
 
 		foreach ( $data as $lang => $title ) {
             $label = $title;

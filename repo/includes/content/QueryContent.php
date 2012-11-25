@@ -77,7 +77,7 @@ class QueryContent extends EntityContent {
 	 * @return QueryContent
 	 */
 	public static function newFromArray( array $data ) {
-		return new static( new QueryObject( $data ) );
+		return new static( new Query( $data ) );
 	}
 
 	/**
@@ -134,7 +134,7 @@ class QueryContent extends EntityContent {
 	 * @return QueryContent
 	 */
 	public static function newEmpty() {
-		return new static( QueryObject::newEmpty() );
+		return new static( Query::newEmpty() );
 	}
 
 	/**

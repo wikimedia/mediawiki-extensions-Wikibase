@@ -72,7 +72,7 @@ class CreatedBlacklistedItems extends \Maintenance {
 		foreach ( $items as $id => $name ) {
 			$report( "   Importing $name as item $id..." );
 
-			$item = ItemObject::newEmpty();
+			$item = Item::newEmpty();
 
 			$item->setId( $id );
 			$item->setLabel( 'en', $name );

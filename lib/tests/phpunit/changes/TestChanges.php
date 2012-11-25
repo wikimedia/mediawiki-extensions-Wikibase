@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemObject;
+use \Wikibase\Item;
 
 /**
  * Test change data for ChangeRowTest
@@ -37,7 +37,7 @@ use \Wikibase\ItemObject;
 final class TestChanges {
 
 	protected static function getItem() {
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 		$item->setLabel( 'en', 'Venezuela' );
 		$item->setDescription( 'en', 'a country' );
 		$item->addAliases( 'en', array( 'Bolivarian Republic of Venezuela' ) );
@@ -77,9 +77,9 @@ final class TestChanges {
 		$entityList = array();
 
 		$entities = array(
-			\Wikibase\ItemObject::newEmpty(),
-			\Wikibase\PropertyObject::newEmpty(),
-			\Wikibase\QueryObject::newEmpty(),
+			Item::newEmpty(),
+			\Wikibase\Property::newEmpty(),
+			\Wikibase\Query::newEmpty(),
 		);
 
 		foreach( $entities as $entity ) {

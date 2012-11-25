@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 use Wikibase\TermCache;
 use Wikibase\ItemContent;
-use Wikibase\ItemObject;
 use Wikibase\Item;
 use Wikibase\Term;
 
@@ -56,7 +55,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 	 * @param TermCache $lookup
 	 */
 	public function testGetEntityIdsForLabel( TermCache $lookup ) {
-		$item0 = ItemObject::newEmpty();
+		$item0 = Item::newEmpty();
 
 		$item0->setLabel( 'en', 'foobar' );
 		$item0->setLabel( 'de', 'foobar' );
@@ -120,7 +119,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 	 * @param TermCache $lookup
 	 */
 	public function testTermExists( TermCache $lookup ) {
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 
 		$item->setLabel( 'en', 'foobarz' );
 		$item->setLabel( 'de', 'foobarz' );
@@ -169,10 +168,10 @@ class TermCacheTest extends \MediaWikiTestCase {
 	 * @param TermCache $lookup
 	 */
 	public function testGetMatchingTerms( TermCache $lookup ) {
-		$item0 = ItemObject::newEmpty();
+		$item0 = Item::newEmpty();
 		$item0->setLabel( 'en', 'getmatchingterms-0' );
 
-		$item1 = ItemObject::newEmpty();
+		$item1 = Item::newEmpty();
 		$item1->setLabel( 'nl', 'getmatchingterms-1' );
 
 		$content0 = ItemContent::newEmpty();
@@ -224,10 +223,10 @@ class TermCacheTest extends \MediaWikiTestCase {
 	 * @param TermCache $lookup
 	 */
 	public function testGetMatchingPrefixTerms( TermCache $lookup ) {
-		$item0 = ItemObject::newEmpty();
+		$item0 = Item::newEmpty();
 		$item0->setLabel( 'en', 'prefix' );
 
-		$item1 = ItemObject::newEmpty();
+		$item1 = Item::newEmpty();
 		$item1->setLabel( 'nl', 'postfix' );
 
 		$content0 = ItemContent::newEmpty();
@@ -296,7 +295,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 	 * @param TermCache $lookup
 	 */
 	public function testDeleteTermsForEntity( TermCache $lookup ) {
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 
 		$item->setLabel( 'en', 'abc' );
 		$item->setLabel( 'de', 'def' );
@@ -326,7 +325,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 	 * @param TermCache $lookup
 	 */
 	public function testSaveTermsOfEntity( TermCache $lookup ) {
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 		$item->setId( 568431314 );
 
 		$item->setLabel( 'en', 'abc' );
@@ -373,7 +372,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 			return;
 		}
 
-		$item0 = ItemObject::newEmpty();
+		$item0 = Item::newEmpty();
 		$item0->setLabel( 'en', 'joinedterms-0' );
 		$item0->setDescription( 'de', 'joinedterms-d0' );
 

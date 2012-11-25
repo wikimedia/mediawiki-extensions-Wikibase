@@ -114,7 +114,7 @@ class importInterlang extends Maintenance {
 	 * @return bool true if the item was created, false otherwise
 	 */
 	protected function createItem( $links ) {
-		$item = \Wikibase\ItemObject::newEmpty();
+		$item = \Wikibase\Item::newEmpty();
 
 		foreach ( $links as $lang => $title ) {
 			$name = strtr( $title, "_", " " );

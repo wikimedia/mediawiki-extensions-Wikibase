@@ -72,7 +72,7 @@ class TermSqlCacheTest extends \MediaWikiTestCase {
 
 		$termCache->clear();
 
-		$item = \Wikibase\ItemObject::newEmpty();
+		$item = \Wikibase\Item::newEmpty();
 		$item->setId( 42 );
 
 		$item->setLabel( $languageCode, $termText );
@@ -89,7 +89,7 @@ class TermSqlCacheTest extends \MediaWikiTestCase {
 			'caseSensitive' => false,
 		);
 
-		$obtainedTerms = $termCache->getMatchingTerms( array( $term ), Term::TYPE_LABEL, \Wikibase\ItemObject::ENTITY_TYPE, $options );
+		$obtainedTerms = $termCache->getMatchingTerms( array( $term ), Term::TYPE_LABEL, \Wikibase\Item::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
 

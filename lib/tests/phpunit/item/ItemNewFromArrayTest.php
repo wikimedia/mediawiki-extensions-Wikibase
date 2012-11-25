@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use \Wikibase\Item;
-use \Wikibase\ItemObject;
 
 /**
  * Tests for the Wikibase\Item class.
@@ -50,7 +49,7 @@ class ItemNewFromArrayTest extends \MediaWikiTestCase {
 	 */
 	protected function setUp() {
   		parent::setUp();
-		$this->item = ItemObject::newFromArray( array( 'entity' => 'q42' ) );
+		$this->item = Item::newFromArray( array( 'entity' => 'q42' ) );
 	}
 	
   	/**

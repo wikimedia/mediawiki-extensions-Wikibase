@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ItemObject, Wikibase\Item;
+use Wikibase\Item;
 
 /**
  * Tests for the Wikibase\ItemSerializer class.
@@ -54,7 +54,7 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 	 * @return Item
 	 */
 	protected function getEntityInstance() {
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 		$item->setId( 42 );
 		return $item;
 	}

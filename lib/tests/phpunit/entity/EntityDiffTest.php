@@ -40,13 +40,13 @@ abstract class EntityDiffTest extends \MediaWikiTestCase {
 	private function newEntity ( $entityType ) {
 		switch ( $entityType ) {
 			case \Wikibase\Item::ENTITY_TYPE:
-				$entity = \Wikibase\ItemObject::newEmpty();
+				$entity = \Wikibase\Item::newEmpty();
 				break;
 			case \Wikibase\Property::ENTITY_TYPE:
-				$entity = \Wikibase\PropertyObject::newEmpty();
+				$entity = \Wikibase\Property::newEmpty();
 				break;
 			case \Wikibase\Query::ENTITY_TYPE:
-				$entity =\Wikibase\QueryObject::newEmpty();
+				$entity =\Wikibase\Query::newEmpty();
 				break;
 			default:
 				throw new \MWException( "unknown entity type: $entityType" );

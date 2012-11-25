@@ -71,7 +71,7 @@ class ApiRemoveClaims extends Api {
 		$guids = array();
 
 		foreach ( $params['claim'] as $guid ) {
-			$entityId = EntityObject::getIdFromClaimGuid( $guid );
+			$entityId = Entity::getIdFromClaimGuid( $guid );
 
 			if ( !array_key_exists( $entityId, $guids ) ) {
 				$guids[$entityId] = array();
