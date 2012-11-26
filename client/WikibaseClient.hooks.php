@@ -177,7 +177,6 @@ final class ClientHooks {
 		 */
 		$item = $change->getEntity();
 		$siteGlobalId = Settings::get( 'siteGlobalID' );
-		$title = null;
 		$changeHandler = ClientChangeHandler::singleton();
 
 		$pagesToUpdate = array();

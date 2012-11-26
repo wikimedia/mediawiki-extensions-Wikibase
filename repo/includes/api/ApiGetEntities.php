@@ -74,7 +74,6 @@ class ApiGetEntities extends Api {
 		}
 
 		// B/C: assume non-prefixed IDs refer to items
-		$entityFactory = EntityFactory::singleton();
 		foreach ( $params['ids'] as $i => $id ) {
 			if ( !EntityId::isPrefixedId( $id ) ) {
 				$params['ids'][$i] = ItemObject::getIdPrefix() . $id;

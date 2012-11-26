@@ -364,7 +364,6 @@ final class RepoHooks {
 	 */
 	public static function onRecentChangeSave( $rc ) {
 		if ( $rc->getAttribute( 'rc_log_type' ) === null ) {
-			$revision = \Revision::newFromId( $rc->getAttribute( 'rc_this_oldid' ) );
 			$change = ChangesTable::singleton()->selectRow(
 				null,
 				array( 'revision_id' => $rc->getAttribute( 'rc_this_oldid' ) )
@@ -784,13 +783,13 @@ final class RepoHooks {
 		// Get the label and description for the first languages on the chain
 		// that doesn't fail, use a fallback if everything fails. This could
 		// use the user supplied list of acceptable languages as a filter.
-		list( $labelCode, $labelText, $labelLang) = $labelTriplet =
+		list( , $labelText, $labelLang) = $labelTriplet =
 			Utils::lookupMultilangText(
 				$entity->getLabels( $langStore[$lang] ),
 				$langStore[$lang],
 				array( $wgLang->getCode(), null, $wgLang )
 			);
-		list( $descriptionCode, $descriptionText, $descriptionLang) = $descriptionTriplet =
+		list( , $descriptionText, $descriptionLang) = $descriptionTriplet =
 			Utils::lookupMultilangText(
 				$entity->getDescriptions( $langStore[$lang] ),
 				$langStore[$lang],

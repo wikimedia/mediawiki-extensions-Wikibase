@@ -58,7 +58,7 @@ class EntityCacheUpdaterTest extends \MediaWikiTestCase {
 	 */
 	public function testHandleChange( /* EntityChange $change, ItemObject $sourceItem, ItemObject $targetItem */ ) {
 		foreach ( $this->handleChangeProvider() as $argList ) {
-			list( $change, $sourceItem, $targetItem ) = $argList;
+			list( $change, , ) = $argList;
 
 			$cacheUpdater = new EntityCacheUpdater();
 

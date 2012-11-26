@@ -54,7 +54,6 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 		if ( isset( $params['id'] ) ) {
 			$id = $params['id'];
 
-			$entityFactory = EntityFactory::singleton();
 			$entityContentFactory = EntityContentFactory::singleton();
 
 			if ( !EntityId::isPrefixedId( $id ) ) {

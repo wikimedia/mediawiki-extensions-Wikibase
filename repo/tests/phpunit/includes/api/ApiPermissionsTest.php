@@ -93,8 +93,6 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 
 		self::applyPermissions( $permissions );
 
-		$token = null;
-
 		try {
 			if ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithTokens', false ) ) {
 				$params[ 'token' ] = $wgUser->getEditToken();
