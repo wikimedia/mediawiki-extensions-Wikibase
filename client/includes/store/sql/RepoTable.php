@@ -1,9 +1,11 @@
 <?php
 
 namespace Wikibase;
+use MWException;
 
 /**
- * Client store interface.
+ * Represents a lookup database table for sitelinks.
+ * It should have these fields: ips_item_id, ips_site_id, ips_site_page.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,39 +28,26 @@ namespace Wikibase;
  * @ingroup WikibaseClient
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
-interface ClientStore {
+abstract class RepoTable {
 
 	/**
-	 * Returns a new SiteLinkRemoteTable for this store.
+	 * @since 0.3
 	 *
-	 * @since 0.1
-	 *
-	 * @return SiteLinkRemoteTable
+	 * @var string
 	 */
-	public function newSiteLinkTable();
+	protected $table;
 
 	/**
-	 * Returns a new EntityCache for this store.
+	 * @since 0.3
 	 *
-	 * @since 0.1
-	 *
-	 * @return EntityCache
+	 * @param string $table
 	 */
-	public function newEntityCache();
+	public function __construct( $table ) {
+		$this->table = $table;
+		$this->repoDb = Settings::get( 'changesDatabase' );
+		$this->lb = wfGetLB( $this->repoDb );
+	}
 
-	/**
-	 * Removes all data from the store.
-	 *
-	 * @since 0.2
-	 */
-	public function clear();
-
-	/**
-	 * Rebuilds all data in the store.
-	 *
-	 * @since 0.2
-	 */
-	public function rebuild();
 }

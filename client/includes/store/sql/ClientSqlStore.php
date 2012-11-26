@@ -49,14 +49,14 @@ class ClientSqlStore implements ClientStore {
 	}
 
 	/**
-	 * @see Store::newSiteLinkCache
+	 * @see Store::newSiteLinkTable
 	 *
 	 * @since 0.1
 	 *
-	 * @return SiteLinkCache
+	 * @return SiteLinkRemoteTable
 	 */
-	public function newSiteLinkCache() {
-		return new SiteLinkTable( 'wbc_items_per_site' );
+	public function newSiteLinkTable() {
+		return new SiteLinkRemoteTable( 'wb_items_per_site' );
 	}
 
 	/**
@@ -76,7 +76,6 @@ class ClientSqlStore implements ClientStore {
 	 * @since 0.2
 	 */
 	public function clear() {
-		$this->newSiteLinkCache()->clear();
 		$this->newEntityCache()->clear();
 
 		$tables = array(

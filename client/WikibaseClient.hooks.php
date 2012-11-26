@@ -294,7 +294,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSpecialMovepageAfterMove( \MovePageForm $movePage, \Title &$oldTitle, \Title &$newTitle ) {
-		$siteLinkCache = ClientStoreFactory::getStore()->newSiteLinkCache();
+		$siteLinkCache = ClientStoreFactory::getStore()->newSiteLinkTable();
 		$globalId = Settings::get( 'siteGlobalID' );
 		$itemId = $siteLinkCache->getItemIdForLink(
 			$globalId,
@@ -582,7 +582,7 @@ final class ClientHooks {
 			$titleLink = $title->getPartialURL();
 			$siteId = Settings::get( 'siteGlobalID' );
 
-			$itemId = ClientStoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $titleText );
+			$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink( $siteId, $titleText );
 
 			if ( $itemId ) {
 				// links to the special page
