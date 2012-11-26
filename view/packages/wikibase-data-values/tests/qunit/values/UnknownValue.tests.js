@@ -9,9 +9,7 @@
 ( function( dv, $, QUnit, undefined ) {
 	'use strict';
 
-	var PARENT = dv.tests.DataValueTest,
-		constructor = function() {
-		};
+	var PARENT = dv.tests.DataValueTest;
 
 	/**
 	 * Constructor for creating a test object for the unknown DataValue.
@@ -20,7 +18,7 @@
 	 * @extends dv.tests.DataValueTest
 	 * @since 0.1
 	 */
-	dv.tests.UnknownValueTest = dv.util.inherit( PARENT, constructor, {
+	dv.tests.UnknownValueTest = dv.util.inherit( PARENT, {
 
 		/**
 		 * @see dv.tests.DataValueTest.getObject
@@ -39,7 +37,7 @@
 				[ ' foo bar baz foo bar baz. foo bar baz ' ],
 				[ 0 ],
 				[ 42 ],
-				[ -4.2 ]
+				[ -4.2 ],
 				[ { 'a': 'b' } ],
 				[ [ 'foo', 9001, { 'bar': 'baz', 5: 5 } ] ],
 				[ new Date() ],

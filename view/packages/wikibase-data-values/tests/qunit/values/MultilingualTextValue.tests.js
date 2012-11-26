@@ -9,9 +9,7 @@
 ( function( dv, $, QUnit, undefined ) {
 	'use strict';
 
-	var PARENT = dv.tests.DataValueTest,
-		constructor = function() {
-		};
+	var PARENT = dv.tests.DataValueTest;
 
 	/**
 	 * Constructor for creating a test object for the MultilingualTextValue.
@@ -20,7 +18,7 @@
 	 * @extends dv.tests.DataValueTest
 	 * @since 0.1
 	 */
-	dv.tests.MultilingualTextValueTest = dv.util.inherit( PARENT, constructor, {
+	dv.tests.MultilingualTextValueTest = dv.util.inherit( PARENT, {
 
 		/**
 		 * @see dv.tests.DataValueTest.getObject
