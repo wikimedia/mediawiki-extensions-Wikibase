@@ -48,9 +48,8 @@ class ApiGetEntities extends Api {
 				$idxTitles = 0;
 
 				for ( $k = 0; $k < $max; $k++ ) {
-					$siteId = $params['sites'][$idxSites++];
-					$title = Utils::squashToNFC( $params['titles'][$idxTitles++] );
-
+					$siteId = $params['sites'][$idxSites++ % $numSites];
+					$title = Utils::squashToNFC( $params['titles'][$idxTitles++ % $numTitles] );
 					$id = ItemHandler::singleton()->getIdForSiteLink( $siteId, $title );
 
 					if ( $id ) {
@@ -60,14 +59,6 @@ class ApiGetEntities extends Api {
 						$this->getResult()->addValue( 'entities', (string)(--$missing),
 							array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
 						);
-					}
-
-					if ( $idxSites === $numSites ) {
-						$idxSites = 0;
-					}
-
-					if ( $idxTitles === $numTitles ) {
-						$idxTitles = 0;
 					}
 				}
 			}
