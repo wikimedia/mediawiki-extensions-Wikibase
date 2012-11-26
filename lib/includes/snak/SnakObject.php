@@ -145,6 +145,8 @@ abstract class SnakObject implements Snak {
 
 	/**
 	 * Factory for constructing Snak objects from their array representation.
+	 * This is their internal array representation, which should not be confused
+	 * with whatever is used for external serialization.
 	 *
 	 * The array should have the following format:
 	 * - snak type (string)
@@ -162,33 +164,54 @@ abstract class SnakObject implements Snak {
 	 * @throws MWException
 	 */
 	public static function newFromArray( array $data ) {
+		$snakType = array_shift( $data );
+
+		$data[0] = new EntityId( Property::ENTITY_TYPE, $data[0] );
+
+		if ( $snakType === 'value' ) {
+			$data[1] = \DataValues\DataValueFactory::singleton()->newDataValue( $data[1], $data[2] );
+			unset( $data[2] );
+		}
+
+		return self::newFromType( $snakType, $data );
+	}
+
+	/**
+	 * Constructs a new snak of specified type and returns it.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $snakType
+	 * @param array $constructorArguments
+	 *
+	 * @return Snak
+	 * @throws MWException
+	 */
+	public static function newFromType( $snakType, array $constructorArguments ) {
+		if ( $constructorArguments === array() || ( $snakType === 'value' ) && count( $constructorArguments ) < 2 ) {
+			throw new MWException( __METHOD__ . ' got an array with to few constructor arguments' );
+		}
+
 		$snakJar = array(
 			'value' => '\Wikibase\PropertyValueSnak',
 			'novalue' => '\Wikibase\PropertyNoValueSnak',
 			'somevalue' => '\Wikibase\PropertySomeValueSnak',
 		);
 
-		if ( count( $data ) < 2 ) {
-			throw new MWException( __METHOD__ . ' got an array with to few elements' );
-		}
-
-		$snakType = array_shift( $data );
-
 		if ( !array_key_exists( $snakType, $snakJar ) ) {
 			throw new MWException( 'Cannot construct a snak from array with unknown snak type "' . $snakType . '"' );
 		}
 
 		$snakClass = $snakJar[$snakType];
-		$data[0] = new EntityId( Property::ENTITY_TYPE, $data[0] );
 
 		if ( $snakType === 'value' ) {
 			return new $snakClass(
-				$data[0],
-				\DataValues\DataValueFactory::singleton()->newDataValue( $data[1], $data[2] )
+				$constructorArguments[0],
+				$constructorArguments[1]
 			);
 		}
 		else {
-			return new $snakClass( $data[0] );
+			return new $snakClass( $constructorArguments[0] );
 		}
 	}
 

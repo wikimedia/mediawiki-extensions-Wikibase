@@ -4,7 +4,7 @@ namespace Wikibase;
 use ApiBase, MWException;
 
 /**
- * API module for setting the DataValue contained by the main snak of a claim.
+ * API module for creating a reference or setting the value of an existing one.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,8 +29,9 @@ use ApiBase, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiSetClaimValue extends Api {
+class ApiSetReference extends Api {
 
+	// TODO: high level tests
 	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
@@ -45,13 +46,12 @@ class ApiSetClaimValue extends Api {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$content = $this->getEntityContent();
-
 		$params = $this->extractRequestParams();
 
-		$claim = $this->updateClaim(
+		$reference = $this->updateReference(
 			$content->getEntity(),
-			$params['claim'],
-			$params['value']
+			$this->getSnaks( $params['snaks'] ),
+			$params['reference']
 		);
 
 		$status = $content->save();
@@ -60,7 +60,7 @@ class ApiSetClaimValue extends Api {
 			$this->dieUsage( 'Failed to save the change', 'setclaimvalue-save-failed' );
 		}
 
-		$this->outputClaim( $claim );
+		$this->outputReference( $reference );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
@@ -73,11 +73,11 @@ class ApiSetClaimValue extends Api {
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
 
-		$entityId = EntityId::newFromPrefixedId( EntityObject::getIdFromClaimGuid( $params['claim'] ) );
+		$entityId = EntityId::newFromPrefixedId( EntityObject::getIdFromClaimGuid( $params['statement'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setclaimvalue-entity-not-found' );
+			$this->dieUsage( 'No such entity', 'setreference-entity-not-found' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -88,43 +88,74 @@ class ApiSetClaimValue extends Api {
 	/**
 	 * @since 0.3
 	 *
-	 * @param Entity $entity
-	 * @param string $guid
-	 * @param string $value
+	 * @param string $rawSnaks
 	 *
-	 * @return Claim
+	 * @return Snaks
 	 */
-	protected function updateClaim( Entity $entity, $guid, $value ) {
-		if ( !$entity->getClaims()->hasClaimWithGuid( $guid ) ) {
-			$this->dieUsage( 'No such claim', 'setclaimvalue-claim-not-found' );
+	protected function getSnaks( $rawSnaks ) {
+		$rawSnaks = \FormatJson::decode( $rawSnaks, true );
+
+		$snaks = new SnakList();
+		$snakUnserializer = new SnakSerializer();
+
+		foreach ( $rawSnaks as $rawSnak ) {
+			$snaks[] = $snakUnserializer->getUnserialized( $rawSnak );
 		}
 
-		$claim = $entity->getClaims()->getClaimWithGuid( $guid );
-
-		$mainSnak = $claim->getMainSnak();
-
-		if ( !( $mainSnak instanceof PropertyValueSnak ) ) {
-			$this->dieUsage( 'Cannot set the value of a snak that has no value', 'setclaimvalue-invalid-snak-type' );
-		}
-
-		$claim->setMainSnak( PropertyValueSnak::newFromPropertyValue( $mainSnak->getPropertyId(), $value ) );
-
-		return $claim;
+		return $snaks;
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @param Claim $claim
+	 * @param Entity $entity
+	 * @param string $statementGuid
+	 * @param Snaks $snaks
+	 * @param string|null $refHash
+	 *
+	 * @return Reference
 	 */
-	protected function outputClaim( Claim $claim ) {
-		$serializer = new ClaimSerializer();
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
+	protected function updateReference( Entity $entity, $statementGuid, Snaks $snaks, $refHash = null ) {
+		if ( !$entity->getClaims()->hasClaimWithGuid( $statementGuid ) ) {
+			$this->dieUsage( 'No such statement', 'setreference-statement-not-found' );
+		}
+
+		$statement = $entity->getClaims()->getClaimWithGuid( $statementGuid );
+
+		if ( ! ( $statement instanceof Statement ) ) {
+			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'setreference-not-a-statement' );
+		}
+
+		$reference = new ReferenceObject( $snaks );
+
+		/**
+		 * @var References $references
+		 */
+		$references = $statement->getReferences();
+
+		$references->addReference( $reference );
+
+		// TODO: either remove any duplicate before, update the existing one, or remove duplicates after
+
+		return $reference;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param Reference $reference
+	 */
+	protected function outputReference( Reference $reference ) {
+		$snakSerializer = new SnakSerializer();
+		$snakSerializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
+
+		$snaksSerializer = new ByPropertyListSerializer( 'reference', $snakSerializer );
+		$snaksSerializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		$this->getResult()->addValue(
 			null,
 			'claim',
-			$serializer->getSerialized( $claim )
+			$snaksSerializer->getSerialized( $reference->getSnaks() )
 		);
 	}
 
@@ -137,13 +168,16 @@ class ApiSetClaimValue extends Api {
 	 */
 	public function getAllowedParams() {
 		return array(
-			'claim' => array(
+			'statement' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'value' => array(
+			'snaks' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
+			),
+			'reference' => array(
+				ApiBase::PARAM_TYPE => 'string',
 			),
 			'token' => null,
 			'baserevid' => array(
@@ -161,8 +195,9 @@ class ApiSetClaimValue extends Api {
 	 */
 	public function getParamDescription() {
 		return array(
-			'claim' => 'A GUID identifying the claim',
-			'value' => 'The value to set the datavalue of the the main snak of the claim to',
+			'statement' => 'A GUID identifying the statement for which a reference is being set',
+			'snaks' => 'The snaks to set the reference to',
+			'reference' => 'A hash of the reference that should be updated. Optional. When not provided, a new reference is created',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."

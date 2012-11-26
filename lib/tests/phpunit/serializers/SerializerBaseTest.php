@@ -28,7 +28,7 @@ use Wikibase\SerializerObject;
  * @ingroup Test
  *
  * @group Wikibase
- * @group WikibaseApiSerialization
+ * @group WikibaseSerialization
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -77,6 +77,37 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 		if ( $expected !== null ) {
 			$this->assertEquals( $expected, $output );
 		}
+
+		if ( $serializer instanceof \Wikibase\Unserializer ) {
+			$roundtrippedValue = $serializer->getUnserialized( $output );
+			$this->assertMeaningfulEquals( $input, $roundtrippedValue, 'getSerialized, getUnserialized roundtrip should result in input value' );
+		}
+	}
+
+	/**
+	 * Assert equality using comparison methods when available.
+	 *
+	 * @since 0.3
+	 *
+	 * @param mixed $expected
+	 * @param mixed $actual
+	 * @param string $message
+	 */
+	protected function assertMeaningfulEquals( $expected, $actual, $message = '' ) {
+		if ( is_object( $expected ) ) {
+			if ( $expected instanceof \Comparable ) {
+				$this->assertTrue( $expected->equals( $actual ), $message );
+				return;
+			}
+
+			if ( $expected instanceof \Hashable ) {
+				$this->assertInstanceOf( '\Hashable', $actual, $message );
+				$this->assertEquals( $expected->getHash( $actual ), $actual->getHash(), $message );
+				return;
+			}
+		}
+
+		$this->assertEquals( $expected, $actual, $message );
 	}
 
 	/**

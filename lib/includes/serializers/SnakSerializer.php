@@ -29,7 +29,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakSerializer extends SerializerObject {
+class SnakSerializer extends SerializerObject implements Unserializer {
 
 	/**
 	 * @see ApiSerializer::getSerialized
@@ -62,6 +62,27 @@ class SnakSerializer extends SerializerObject {
 		}
 
 		return $serialization;
+	}
+
+	/**
+	 * @see Unserializer::getUnserialized
+	 *
+	 * @since 0.3
+	 *
+	 * @param array $serialization
+	 *
+	 * @return mixed
+	 */
+	public function getUnserialized( array $serialization ) {
+		$constructorArguments = array(
+			EntityId::newFromPrefixedId( $serialization['property'] ),
+		);
+
+		if ( array_key_exists( 'datavalue', $serialization ) ) {
+			$constructorArguments[] = \DataValues\DataValueFactory::singleton()->newFromArray( $serialization['datavalue'] );
+		}
+
+		return SnakObject::newFromType( $serialization['snaktype'], $constructorArguments );
 	}
 
 }
