@@ -4,7 +4,7 @@
  *
  * @licence GNU GPL v2+
  *
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < danweetz@web.de >
  */
 ( function( dv, $, undefined ) {
 	'use strict';
@@ -16,33 +16,28 @@
 		};
 
 	/**
-	 * Constructor for creating a data value holding a value of unknown nature.
+	 * Constructor for creating a data value representing a number.
 	 *
 	 * @constructor
 	 * @extends dv.DataValue
 	 * @since 0.1
 	 *
-	 * @param {String} value
+	 * @param {Number} value
 	 */
-	dv.UnknownValue = dv.util.inherit( PARENT, constructor, {
-
+	dv.NumberValue = dv.util.inherit( PARENT, constructor, {
 		/**
 		 * @see dv.DataValue.getSortKey
-		 *
-		 * @since 0.1
 		 *
 		 * @return Number
 		 */
 		getSortKey: function() {
-			return 0;
+			return this._value;
 		},
 
 		/**
 		 * @see dv.DataValue.getValue
 		 *
-		 * @since 0.1
-		 *
-		 * @return String
+		 * @return Number
 		 */
 		getValue: function() {
 			return this._value;
@@ -50,15 +45,9 @@
 
 		/**
 		 * @see dv.DataValue.equals
-		 *
-		 * Since the type of value is not known, it's not possible to perform
-		 * an always correct and always meaningful comparison. Therefore false
-		 * negatives might be returned.
-		 *
-		 * @since 0.1
 		 */
 		equals: function( value ) {
-			if ( !( value instanceof dv.UnknownValue ) ) {
+			if ( !( value instanceof dv.NumberValue ) ) {
 				return false;
 			}
 
@@ -67,27 +56,25 @@
 
 		/**
 		 * @see dv.DataValue.toJSON
-		 *
-		 * @since 0.1
 		 */
 		toJSON: function() {
 			return this._value;
 		}
-
 	} );
-
-	dv.UnknownValue.newFromJSON = function( json ) {
-		return new dv.UnknownValue( json );
-	};
 
 	/**
 	 * @see dv.DataValue.newFromJSON
 	 */
-	dv.UnknownValue.TYPE = 'unknown';
+	dv.NumberValue.newFromJSON = function( json ) {
+		return new dv.NumberValue( json );
+	};
 
 	/**
 	 * @see dv.DataValue.TYPE
 	 */
-	dv.registerDataValue( dv.UnknownValue );
+	dv.NumberValue.TYPE = 'number';
+
+	// make this data value available in the factory:
+	dv.registerDataValue( dv.NumberValue );
 
 }( dataValues, jQuery ) );
