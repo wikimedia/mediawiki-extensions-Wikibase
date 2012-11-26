@@ -16,6 +16,23 @@
       "revId": "6f8ff339486e15e81343b38c446a8b391560d21f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZX//948\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2012-11-26T12:16:07Z",
+      "side": 1,
+      "message": "Please add message documentation. Thanks.",
+      "revId": "6f8ff339486e15e81343b38c446a8b391560d21f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
