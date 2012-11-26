@@ -66,6 +66,8 @@ $wgAutoloadClasses['Wikibase\EntityCache'] 			= $dir . 'includes/store/EntityCac
 // includes/store/sql
 $wgAutoloadClasses['Wikibase\ClientSqlStore'] 		= $dir . 'includes/store/sql/ClientSqlStore.php';
 $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/EntityCacheTable.php';
+$wgAutoloadClasses['Wikibase\RepoTable'] 			= $dir . 'includes/store/sql/RepoTable.php';
+$wgAutoloadClasses['Wikibase\SiteLinkRemoteTable']	= $dir . 'includes/store/sql/SiteLinkRemoteTable.php';
 
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
