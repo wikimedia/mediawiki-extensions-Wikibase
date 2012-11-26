@@ -73,10 +73,16 @@ dv.StringValue = dv.util.inherit( PARENT, constructor, {
 
 } );
 
+/**
+ * @see dv.DataValue.newFromJSON
+ */
 dv.StringValue.newFromJSON = function( json ) {
 	return new dv.StringValue( json );
 };
 
+/**
+ * @see dv.DataValue.TYPE
+ */
 dv.StringValue.TYPE = 'string';
 
 dv.registerDataValue( dv.StringValue );
