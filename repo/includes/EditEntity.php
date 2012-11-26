@@ -335,6 +335,13 @@ class EditEntity {
 	/**
 	 * Get the status object. Only defined after attemptSave() was called.
 	 *
+	 * After a successful save, the Status object's value field will contain an array,
+	 * just like the status returned by WikiPage::doEditContent(). Well known fields
+	 * in the status value are:
+	 *
+	 *  - new: bool whether the edit created a new page
+	 *  - revision: Revision the new revision object
+	 *
 	 * @since 0.1
 	 *
 	 * @return null|Status
@@ -356,6 +363,23 @@ class EditEntity {
 		}
 
 		return $this->status->isOK();
+	}
+
+	/**
+	 * Returns the Revision created by attemptSave(), if it was successful.
+	 * If attemptSave() has not yet been called or failed, null is returned.
+	 *
+	 * @since 0.3
+	 *
+	 * @return Revision|null
+	 */
+	public function getNewRevision() {
+		if ( $this->errorType > 0 || !$this->status || !$this->status->isOK() ) {
+			return null;
+		}
+
+		$value = $this->status->getValue();
+		return isset( $value['revision'] ) ? $value['revision'] : null;
 	}
 
 	/**
@@ -508,7 +532,8 @@ class EditEntity {
 	 * @param String|bool $token Edit token to check, or false to disable the token check.
 	 *                           Null will fail the token text, as will the empty string.
 	 *
-	 * @return Status Indicates success and provides detailed warnings or error messages.
+	 * @return Status Indicates success and provides detailed warnings or error messages. See
+	 *         getStatus() for more details.
 	 * @see      WikiPage::toEditContent
 	 */
 	public function attemptSave( $summary, $flags, $token ) {
@@ -558,7 +583,9 @@ class EditEntity {
 			$this->errorType |= self::SAVE_ERROR;
 		}
 
+		$this->status->setResult( $editStatus->isOK(), $editStatus->getValue() );
 		$this->status->merge( $editStatus );
+
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $this->status;
 	}

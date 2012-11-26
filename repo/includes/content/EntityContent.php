@@ -379,7 +379,7 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @see WikiPage::doEditContent
 	 *
-	 * @return \Status Success indicator
+	 * @return \Status Success indicator, like the one returned by WikiPage::doEditContent().
 	 */
 	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false, EditEntity $editEntity = null ) {
 		wfProfileIn( __METHOD__ );
@@ -425,6 +425,13 @@ abstract class EntityContent extends \AbstractContent {
 
 		if( $status->isGood() && ( $flags & EDIT_NEW ) ) {
 			StoreFactory::getStore()->newEntityPerPage()->addEntityContent( $this );
+		}
+
+		if ( $status->isOK() && !isset ( $status->value['revision'] ) ) {
+			// HACK: No new revision was created (content didn't change). Report the old one.
+			// There *might* be a race condition here, but since $page already loaded the
+			// latest revision, it should still be cached, and should always be the correct one.
+			$status->value['revision'] = $page->getRevision();
 		}
 
 		$this->editEntity = null;

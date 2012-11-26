@@ -218,10 +218,8 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 			'type', $entityContent->getEntity()->getType()
 		);
 
-		$page = $entityContent->getWikiPage();
-		$revision = $page->getRevision();
-
-		if ( $revision !== null ) {
+		$revision = $editEntity->getNewRevision();
+		if ( $revision ) {
 			$this->getResult()->addValue(
 				'entity',
 				'lastrevid', intval( $revision->getId() )

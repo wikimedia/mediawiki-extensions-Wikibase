@@ -46,9 +46,26 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$this->checkParameterRequirements();
 
-		$claim = $this->addClaim();
+		$status = $this->addClaim();
+
+		if ( !$status->isOK() ) {
+			// currently shouldn't happen, but needs to be checked just in case
+			$description = $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' );
+			$this->dieUsage( $description, 'save-failed' );
+		}
+
+		$values = $status->getValue();
+		$claim = $values['claim'];
 
 		$this->outputClaim( $claim );
+
+		$revision = isset( $values['revision'] ) ? $values['revision'] : null;
+		if ( $revision ) {
+			$this->getResult()->addValue(
+				'claim',
+				'lastrevid', intval( $revision->getId() )
+			);
+		}
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
@@ -57,11 +74,16 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 * Constructs a new Claim based on the arguments provided to the API,
 	 * adds it to the Entity and saves it.
 	 *
-	 * On success, the added Claim is returned. Else null is returned.
+	 * On success, the added Claim is returned as part of the Status object.
 	 *
 	 * @since 0.2
 	 *
-	 * @return Claim
+	 * @return \Status the status of the addClaim operation. If $status->isOK() returns true,
+	 *         $status->getValue() will return an associative array, similar to the ones returned
+	 *         by WikiPage::doEditContent() and EditEntity::attemptSave(). In addition to fields
+	 *         used by these methods (namely, "new" and "revision"), the array will also contain
+	 *         the "claim" field, which holds the newly added Claim object.
+	 *
 	 * @throws MWException
 	 */
 	protected function addClaim() {
@@ -97,14 +119,16 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new EditEntity( $entityContent, $this->getUser(), $baseRevisionId );
 
-		$editEntity->attemptSave(
+		$status = $editEntity->attemptSave(
 			Autocomment::buildApiSummary( $this, null, $entityContent ),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : false
 		);
 
+		$status->value['claim'] = $claim;
+
 		wfProfileOut( "Wikibase-" . __METHOD__ );
-		return $claim;
+		return $status;
 	}
 
 	/**
