@@ -87,35 +87,6 @@ describe "Check functionality of client-repo connection" do
         page.wlArticleIDLink1_element.text.include?(item_id).should be_true
       end
     end
-    it "should check for propagation of changes to client recent changes" do
-      visit_page(ClientRecentChangesPage) do |page|
-        page.clientFirstResultDiffLink?.should be_true
-        page.clientFirstResultUserLink_element.text.downcase.include?(WIKI_ADMIN_USERNAME.downcase).should be_true
-        page.clientFirstResultLabelLink_element.text.should == article_title_a
-        page.clientFirstResultIDLink_element.text.include?(item_id).should be_true
-      end
-    end
-    it "should check links in recent changes entries" do
-      visit_page(ClientRecentChangesPage) do |page|
-        page.clientFirstResultUserLink
-      end
-      on_page(ItemPage) do |page|
-        page.mwFirstHeading.downcase.should == "user:" + WIKI_ADMIN_USERNAME.downcase
-      end
-      visit_page(ClientRecentChangesPage) do |page|
-        page.clientFirstResultLabelLink
-      end
-      on_page(ClientPage) do |page|
-        page.clientArticleTitle.should == article_title_a
-      end
-      visit_page(ClientRecentChangesPage) do |page|
-        page.clientFirstResultIDLink
-      end
-      on_page(ItemPage) do |page|
-        page.wait_for_entity_to_load
-        page.entityLabelSpan.should == article_title_a
-      end
-    end
     it "should add additional sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
