@@ -49,6 +49,7 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'wikibase-sitelinks',
+				'wikibase-statements'
 			)
 		),
 

@@ -35,6 +35,30 @@ $1
 $2
 <hr class="wb-hr" />
 $3
+$4
+HTML;
+
+	$templates['wb-section-heading'] =
+<<<HTML
+<h2 class="wb-section-heading" dir="auto">$1</h2>
+HTML;
+
+	$templates['wb-claims'] =
+<<<HTML
+<div class="wb-claims">$1</div>
+HTML;
+
+	$templates['wb-claim'] =
+<<<HTML
+<div class="wb-claim wb-claim-$1">
+	<div class="wb-claim-column-name">
+		<div class="wb-claim-name" dir="auto">$2</div>
+	</div>
+	<div class="wb-claim-content">
+		<div class="wb-claim-value" dir="auto">$3</div>
+		$4
+	</div>
+</div>
 HTML;
 
 	$templates['wb-label'] =
@@ -106,11 +130,6 @@ HTML;
 	$templates['wb-toolbar-button-disabled'] =
 <<<HTML
 <span class="wb-ui-toolbar-button wb-ui-toolbar-button-disabled">$1</span>
-HTML;
-
-	$templates['wb-sitelinks-heading'] =
-<<<HTML
-<h2 class="wb-sitelinks-heading">$1</h2>
 HTML;
 
 	$templates['wb-sitelinks-table'] =

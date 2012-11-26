@@ -26,6 +26,15 @@
 	clear: both; /* to not overlay success message */
 }
 
+h2.wb-section-heading {
+	position: relative;
+	width: 100%;
+	padding-top: 2em;
+	margin-bottom: 0.2em;
+	padding-left: 10px;
+	border-bottom: none;
+}
+
 /* entity container */
 .wb-entity {
 	width: 100%;
@@ -261,6 +270,59 @@ EditableValue's "edit" button when aliases exist) */
 }
 
 /********** /ALIASES **********/
+
+
+/********** CLAIMS **********/
+
+div.wb-claim {
+	position: relative;
+	background-color: #FFFFFF;
+	float: left;
+	width: 100%;
+	border: 1px solid #C9C9C9;
+	margin-bottom: 1em;
+}
+
+div.wb-claim .wb-editsection {
+	top: 10px;
+	right: -18em;
+}
+
+div.wb-claim-column-name {
+	width: 15em;
+	background: #E8E8E8;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	overflow: hidden;
+}
+
+div.wb-claim-name {
+	float: left;
+	word-wrap: break-word;
+	padding: 10px;
+}
+
+div.wb-claim-content {
+	position: relative;
+	float: right;
+	background-color: #FFFFFF;
+	margin-left: 15em;
+	margin-right: 18em;
+	max-width: 32em;
+	word-wrap: break-word;
+}
+
+div.wb-claim-content .wb-claim-value {
+	padding: 10px;
+}
+
+div.wb-claims div.wb-editsection {
+	position: static;
+	float: right;
+}
+
+/********** /CLAIMS **********/
 
 
 /********** SITE LINKS **********/
