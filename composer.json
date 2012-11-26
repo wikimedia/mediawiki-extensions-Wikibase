@@ -1,0 +1,20 @@
+{
+    "name": "wikibase/wikibase",
+    "type": "mediawiki-extension",
+    "description": "Structured data repository and client for MediaWiki",
+    "keywords": ["wikibase", "wikidata", "wikibaselib", "wikibaseclient", "wikibaserepo"],
+    "homepage": "https://www.mediawiki.org/wiki/Extension:Wikibase",
+    "license": "GNU GPL v2+",
+    "authors": [
+        {
+            "name": "The Wikidata team",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "mediawiki/mediawiki": ">=1.20",
+        "diff/diff": ">=0.3",
+        "datavalues/datavalues": "*"
+    }
+}
