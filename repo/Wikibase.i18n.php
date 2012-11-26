@@ -262,6 +262,7 @@ to find out where it went.',
  * @author Kghbln
  * @author Lokal Profil
  * @author McDutchie
+ * @author Nemo bis
  * @author Nnemo
  * @author Purodha
  * @author Raymond
@@ -303,7 +304,7 @@ This is a generic text used as a placeholder while defining the page for a possi
 Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, i.e. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-description-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 H.png|right|0x150px]]
 Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#Item|item]].',
-	'wikibase-statements' => 'Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata\'s glossary for [[m:Wikidata/Glossary#Statement|statements]] and [[m:Wikidata/Glossary#Item|item]].',
+	'wikibase-statements' => "Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata's glossary for [[m:Wikidata/Glossary#Statement|statements]] and [[m:Wikidata/Glossary#Item|item]].",
 	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.',
@@ -385,9 +386,12 @@ Note that the default message says the user shall "reload and save", but after a
 * $2 is the labels language code
 * $3 is the id of the query that already has the label
 * $4 is description text',
-	'wikibase-itemlink' => 'used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
-	'wikibase-itemlink-id-wrapper' => 'Used to wrap the items id for a link to an item in parentheses or similar.',
-	'wikibase-itemlink-title' => 'Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description.',
+	'wikibase-itemlink' => '{{optional}}
+used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
+	'wikibase-itemlink-id-wrapper' => '{{optional}}
+Used to wrap the items id for a link to an item in parentheses or similar.',
+	'wikibase-itemlink-title' => '{{optional}}
+Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description.',
 	'special-itembytitle' => "The item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also Wikidata's glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].",
 	'wikibase-itembytitle-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by site and title.',
 	'wikibase-itembytitle-lookup-site' => "Label for the textfield holding the site id. See also Wikidata's glossary for [[m:Wikidata/Glossary#sitelinks|site links]].",
@@ -559,7 +563,7 @@ Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
-	'right-item-override' => '{{doc-right|item-override}}',
+	'right-item-override' => 'S{{doc-right|item-override}}',
 	'right-item-create' => '{{doc-right|item-create}}',
 	'right-item-remove' => '{{doc-right|item-remove}}',
 	'right-alias-add' => '{{doc-right|alias-add}}',
@@ -827,6 +831,7 @@ $messages['de'] = array(
 	'wikibase-alias-edit-placeholder' => 'Alias eingeben',
 	'wikibase-label-input-help-message' => 'Gib den Namen für diesen Datensatz in $1 an.',
 	'wikibase-description-input-help-message' => 'Gib eine kurze Beschreibung in $1 an.',
+	'wikibase-statements' => 'Statements',
 	'wikibase-sitelinks' => 'Liste der Seiten, die mit diesem Datenobjekt verknüpft sind',
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprache',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
@@ -856,6 +861,7 @@ $messages['de'] = array(
 	'wikibase-aliases-input-help-message' => 'Sofern dieser Datensatz unter mehr als einem bestimmten Namen bekannt ist, kannst du Aliasse und Synonyme eingeben, damit er auch unter seinen alternativen Namen gefunden werden kann.',
 	'wikibase-aliases-empty' => 'Es wurden keine Aliasse definiert.',
 	'wikibase-datatype-label' => 'Datentyp:',
+	'wikibase-snak-unsupporteddatatype' => 'Das Bearbeiten von Werten für den Datentyp „$1“ wird derzeit nicht unterstützt.',
 	'wikibase-restrictionedit-tooltip-message' => 'Diese Seite wurde geschützt, so dass Bearbeitungen nicht möglich sind.',
 	'wikibase-blockeduser-tooltip-message' => 'Du wurdest gesperrt und kannst daher keine Bearbeitungen machen.',
 	'wikibase-tooltip-error-details' => 'Einzelheiten',
@@ -1607,7 +1613,7 @@ $messages['fa'] = array(
 	'wikibase-error-relational-save-failed' => 'امکان ذخیره‌سازی شناسهٔ این آیتم در پایگاه داده نبود.',
 	'wikibase-error-sitelink-already-used' => 'پیوند وبگاهی [[$1:$2]] از قبل در آیتم [[$3]] به کار رفته‌است.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'ویژگی دیگری ($3) از قبل دارای نام «$1» مربوط به کد زبان $2 است',
-	'wikibase-error-label-not-unique-wikibase-query' => 'کوئری دیگری ($3) از قبل دارای نام «$» مربوط به کد زبان $2 است', # Fuzzy
+	'wikibase-error-label-not-unique-wikibase-query' => 'کوئری دیگری ($3) از قبل دارای نام «$1» مربوط به کد زبان $2 است',
 	'wikibase-error-label-not-unique-item' => 'آیتم دیگری ($3) از قبل دارای نام «$1» و توضیحات «$4» مربوط به کد زبان «$2» است',
 	'special-itembytitle' => 'آیتم‌ها بر پایهٔ عنوان',
 	'wikibase-itembytitle-lookup-fieldset' => 'جستجوی آیتم‌ها بر پایهٔ وب‌گاه و عنوان',
@@ -1847,6 +1853,7 @@ $messages['fr'] = array(
 	'wikibase-alias-edit-placeholder' => 'entrer un alias',
 	'wikibase-label-input-help-message' => 'Saisissez le titre de cet ensemble de données en $1.',
 	'wikibase-description-input-help-message' => 'Saisissez une courte description en $1.',
+	'wikibase-statements' => 'Déclarations',
 	'wikibase-sitelinks' => 'Liste des pages liées à cet élément',
 	'wikibase-sitelinks-sitename-columnheading' => 'Langue',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
@@ -1876,6 +1883,7 @@ $messages['fr'] = array(
 	'wikibase-aliases-input-help-message' => "Si cet ensemble de données est connu sous plus d'un nom particulier, vous pouvez entrer des alias et des synonymes, afin qu'il puisse être trouvé par ses autres noms.",
 	'wikibase-aliases-empty' => 'Aucun alias défini.',
 	'wikibase-datatype-label' => 'Type de données&nbsp;:',
+	'wikibase-snak-unsupporteddatatype' => 'La manipulation des valeurs pour le type de données "$1" n\'est pas encore supporté.',
 	'wikibase-restrictionedit-tooltip-message' => "Cette page est protégée. L'édition n'est pas autorisée.",
 	'wikibase-blockeduser-tooltip-message' => 'Vous êtes bloqué(e) en édition.',
 	'wikibase-tooltip-error-details' => 'Détails',
@@ -2082,6 +2090,7 @@ $messages['gl'] = array(
 	'wikibase-alias-edit-placeholder' => 'escriba un pseudónimo',
 	'wikibase-label-input-help-message' => 'Introduza o título deste conxunto de datos en $1.',
 	'wikibase-description-input-help-message' => 'Introduza unha breve descrición en $1.',
+	'wikibase-statements' => 'Afirmacións',
 	'wikibase-sitelinks' => 'Lista de páxinas con ligazóns cara a este elemento',
 	'wikibase-sitelinks-sitename-columnheading' => 'Lingua',
 	'wikibase-sitelinks-siteid-columnheading' => 'Código',
@@ -2111,6 +2120,7 @@ $messages['gl'] = array(
 	'wikibase-aliases-input-help-message' => 'En caso de que exista máis dun nome para denominar este conxunto de datos, pode escribir pseudónimos e sinónimos, de xeito que se poida atopar a partir destes nomes alternativos.',
 	'wikibase-aliases-empty' => 'Non hai ningún pseudónimo definido.',
 	'wikibase-datatype-label' => 'Tipo de datos',
+	'wikibase-snak-unsupporteddatatype' => 'A manipulación de valores para o tipo de datos "$1" non está soportada actualmente.',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta páxina está protexida. Non se permite a edición.',
 	'wikibase-blockeduser-tooltip-message' => 'Está bloqueado fronte á edición.',
 	'wikibase-tooltip-error-details' => 'Detalles',
@@ -2220,19 +2230,19 @@ $messages['gl'] = array(
 	'content-model-wikibase-item' => 'Elemento de Wikibase',
 	'content-model-wikibase-property' => 'Propiedade de Wikibase',
 	'content-model-wikibase-query' => 'Consulta de Wikibase',
-	'right-item-override' => 'Sobrescribir un elemento', # Fuzzy
-	'right-item-create' => 'Crear un elemento', # Fuzzy
-	'right-item-remove' => 'Eliminar un elemento', # Fuzzy
-	'right-alias-add' => 'Engadir un pseudónimo', # Fuzzy
-	'right-alias-set' => 'Establecer un pseudónimo', # Fuzzy
-	'right-alias-remove' => 'Eliminar un pseudónimo', # Fuzzy
-	'right-sitelink-remove' => 'Eliminar unha ligazón do sitio', # Fuzzy
-	'right-sitelink-update' => 'Actualizar unha ligazón do sitio', # Fuzzy
-	'right-linktitles-update' => 'Actualizar un título de ligazón', # Fuzzy
-	'right-label-remove' => 'Eliminar unha etiqueta', # Fuzzy
-	'right-label-update' => 'Actualizar unha etiqueta', # Fuzzy
-	'right-description-remove' => 'Eliminar unha descrición', # Fuzzy
-	'right-description-update' => 'Actualizar unha descrición', # Fuzzy
+	'right-item-override' => 'Sobrescribir elementos',
+	'right-item-create' => 'Crear elementos',
+	'right-item-remove' => 'Eliminar elementos',
+	'right-alias-add' => 'Engadir pseudónimos',
+	'right-alias-set' => 'Establecer pseudónimos',
+	'right-alias-remove' => 'Eliminar pseudónimos',
+	'right-sitelink-remove' => 'Eliminar ligazóns do sitio',
+	'right-sitelink-update' => 'Actualizar ligazóns do sitio',
+	'right-linktitles-update' => 'Actualizar títulos de ligazón',
+	'right-label-remove' => 'Eliminar etiquetas',
+	'right-label-update' => 'Actualizar etiquetas',
+	'right-description-remove' => 'Eliminar descricións',
+	'right-description-update' => 'Actualizar descricións',
 );
 
 /** Swiss German (Alemannisch)
@@ -3899,6 +3909,11 @@ $messages['ms'] = array(
 	'wikibase-listdatatypes-intro' => 'Ini ialah senarai semua jenis data yang sedang digunakan dalam pemasangan ini:',
 	'wikibase-history-title-with-label' => 'Semakan sejarah "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Sejarah semakan ($1)',
+	'wikibase-entitieswithoutlabel-label-language' => 'Bahasa:',
+	'wikibase-entitieswithoutlabel-submit' => 'Cari',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" bukan kod bahasa yang sah.',
+	'wikibase-entitydata-not-found' => 'Tiada entiti dengan ID $1 dijumpai.',
+	'wikibase-entitydata-unsupported-format' => 'Format data $1 tidak disokong oleh antaramuka ini.',
 	'wikibase-api-patch-incomplete' => 'Tampung yang dihasilkan rupanya tidak lengkap.',
 	'wikibase-restoreold' => 'pulihkan',
 	'wikibase-restore-summary' => 'Pulihkan semakan $1 oleh [[Special:Contributions/$2|$2]]',
@@ -3925,7 +3940,6 @@ untuk mencari di mana set data itu.',
 	'wikibase-item-summary-special-create-item' => 'Perkara [$2] dicipta dengan {{plural:$1|nilai|nilai-nilai}}',
 	'wikibase-item-summary-special-create-property' => 'Sifat [$2] dicipta dengan {{plural:$1|nilai|nilai-nilai}}',
 	'wikibase-item-summary-special-create-query' => 'Pertanyaan [$2] dicipta dengan {{plural:$1|nilai|nilai-nilai}}',
-	'content-model-1001' => 'Perkara Wikibase',
 );
 
 /** Norwegian Bokmål (norsk (bokmål)‎)
@@ -5368,19 +5382,19 @@ $messages['vi'] = array(
 	'content-model-wikibase-item' => 'khoản mục Wikibase',
 	'content-model-wikibase-property' => 'thuộc tính Wikibase',
 	'content-model-wikibase-query' => 'truy vấn Wikibase',
-	'right-item-override' => 'Ghi đè một khoản mục', # Fuzzy
-	'right-item-create' => 'Tạo một khoản mục', # Fuzzy
-	'right-item-remove' => 'Loại bỏ một khoản mục', # Fuzzy
-	'right-alias-add' => 'Thêm một tên khác', # Fuzzy
-	'right-alias-set' => 'Đặt một tên khác', # Fuzzy
-	'right-alias-remove' => 'Loại bỏ một tên khác', # Fuzzy
-	'right-sitelink-remove' => 'Loại bỏ một liên kết site', # Fuzzy
-	'right-sitelink-update' => 'Cập nhật một liên kết site', # Fuzzy
-	'right-linktitles-update' => 'Cập nhật một tên liên kết', # Fuzzy
-	'right-label-remove' => 'Loại bỏ một nhãn', # Fuzzy
-	'right-label-update' => 'Cập nhật một nhãn', # Fuzzy
-	'right-description-remove' => 'Loại bỏ một lời miêu tả', # Fuzzy
-	'right-description-update' => 'Cập nhật một lời miêu tả', # Fuzzy
+	'right-item-override' => 'Ghi đè khoản mục',
+	'right-item-create' => 'Tạo khoản mục',
+	'right-item-remove' => 'Loại bỏ khoản mục',
+	'right-alias-add' => 'Thêm tên khác',
+	'right-alias-set' => 'Đặt tên khác',
+	'right-alias-remove' => 'Loại bỏ tên khác',
+	'right-sitelink-remove' => 'Loại bỏ liên kết site',
+	'right-sitelink-update' => 'Cập nhật liên kết site',
+	'right-linktitles-update' => 'Cập nhật tên liên kết',
+	'right-label-remove' => 'Loại bỏ nhãn',
+	'right-label-update' => 'Cập nhật nhãn',
+	'right-description-remove' => 'Loại bỏ lời miêu tả',
+	'right-description-update' => 'Cập nhật lời miêu tả',
 );
 
 /** Yiddish (ייִדיש)

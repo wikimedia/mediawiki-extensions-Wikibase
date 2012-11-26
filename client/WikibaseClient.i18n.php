@@ -111,6 +111,9 @@ $messages['de'] = array(
 	'wbc-comment-unlink' => 'Diese Seite wurde vom Wikidata-Objekt entlinkt. Sprachlinks wurden entfernt.',
 	'wbc-comment-restore' => 'Zugeordnetes Wikidata-Objekt wurde wiederhergestellt. Sprachlinks wurden wiederhergestellt.',
 	'wbc-comment-update' => 'Sprachlinks wurden aktualisiert',
+	'wbc-comment-sitelink-add' => 'Sprachlink hinzugefügt: $1',
+	'wbc-comment-sitelink-change' => 'Sprachlink $1 geändert in $2',
+	'wbc-comment-sitelink-remove' => 'Sprachlink entfernt: $1',
 	'wbc-editlinks' => 'Links bearbeiten',
 	'wbc-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
 	'wbc-rc-hide-wikidata' => 'Wikidata $1',
@@ -206,6 +209,9 @@ $messages['fr'] = array(
 	'wbc-comment-unlink' => "Cette page a été dissociée de l'élément Wikidata. Liens de langue supprimés.",
 	'wbc-comment-restore' => "Suppression de l'élément Wikidata associé annulée. Liens de langue rétablis.",
 	'wbc-comment-update' => 'Liens de langue mis à jour.',
+	'wbc-comment-sitelink-add' => 'Lien de langue ajouté: $1',
+	'wbc-comment-sitelink-change' => 'Lien de langue modifié de $1 à $2',
+	'wbc-comment-sitelink-remove' => 'Lien de langue supprimé: $1',
 	'wbc-editlinks' => 'Modifier les liens',
 	'wbc-editlinkstitle' => 'Modifier les liens interlangue',
 	'wbc-rc-hide-wikidata' => 'Wikidata $1',
@@ -230,6 +236,9 @@ $messages['gl'] = array(
 	'wbc-comment-unlink' => 'Esta páxina foi desligada do elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas.',
 	'wbc-comment-restore' => 'Restaurouse un elemento de Wikidata asociado. Recuperáronse as ligazóns lingüísticas.',
 	'wbc-comment-update' => 'Actualizáronse as ligazóns lingüísticas.',
+	'wbc-comment-sitelink-add' => 'Engadiuse unha ligazón lingüística: $1',
+	'wbc-comment-sitelink-change' => 'Cambiouse unha ligazón lingüística de $1 a $2',
+	'wbc-comment-sitelink-remove' => 'Eliminouse unha ligazón lingüística: $1',
 	'wbc-editlinks' => 'Editar as ligazóns',
 	'wbc-editlinkstitle' => 'Editar as ligazóns interlingüísticas',
 	'wbc-rc-hide-wikidata' => '$1 o Wikidata',
@@ -262,12 +271,11 @@ $messages['he'] = array(
  */
 $messages['hsb'] = array(
 	'wbc-desc' => 'Klient za rozšěrjenje Wikibase',
-	'wbc-comment-langlinks-delete' => 'Přirjadowany element Wikidata zhašany. Rěčne wotkazy wotstronjene.',
-	'wbc-comment-langlinks-remove' => 'Tuta strona hižo wotkazowy cil element Wikidata hižo njeje. Rěčne wotkazy wotstronjene.',
-	'wbc-comment-langlinks-restore' => 'Přirjadowany element Wikidata zaso wobnowjeny. Rěčne wotkazy wobnowjene.',
-	'wbc-comment-langlinks-update' => 'Rěčne wotkazy zaktualizowane',
+	'wbc-comment-update' => 'Mjezyrěčne wotkazy su so zaktualizowali.',
 	'wbc-editlinks' => 'Wotkazy wobdźěłać',
 	'wbc-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
+	'wbc-rc-hide-wikidata' => 'Wikidata $1',
+	'wbc-rc-show-wikidata-pref' => 'Změny Wikidata w aktualnych změnach pokazać',
 );
 
 /** Interlingua (interlingua)
@@ -579,9 +587,14 @@ $messages['tl'] = array(
 $messages['vi'] = array(
 	'wbc-desc' => 'Trình khách của phần mở rộng Wikibase',
 	'wbc-after-page-move' => 'Bạn cũng có thể [$1 cập nhật] khoản mục Wikidata liên kết để duy trì các liên kết ngôn ngữ trên trang được di chuyển.',
+	'wbc-comment-remove' => 'Đã xóa khoản mục liên kết Wikidata. Đã loại bỏ các liên kết ngôn ngữ.',
+	'wbc-comment-unlink' => 'Đã gỡ liên kết đến khoản mục Wikidata khỏi trang này. Đã dời các liên kết ngôn ngữ.',
+	'wbc-comment-restore' => 'Đã phục hồi khoản mục liên kết Wikidata. Đã phục hồi các liên kết ngôn ngữ.',
+	'wbc-comment-update' => 'Đã cập nhật các liên kết ngôn ngữ.',
 	'wbc-editlinks' => 'Sửa liên kết',
 	'wbc-editlinkstitle' => 'Sửa liên kết giữa ngôn ngữ',
 	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Hiện các sửa đổi Wikidata trong thay đổi gần đây',
 );
 
 /** Simplified Chinese (中文（简体）‎)
