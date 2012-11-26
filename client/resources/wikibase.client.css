@@ -11,12 +11,12 @@
 
 .wbc-editpage > a:link, .wbc-editpage > a:visited {
 	/* @embed */
-	background-image: url(WBC-Asset-Pencil.png);
+	background-image: url(images/WBC-Asset-Pencil.png);
 	color: #797979 !important;
 }
 
 .wbc-editpage > a:hover {
 	/* @embed */
-	background-image: url(WBC-Asset-Pencil-Hover.png);
+	background-image: url(images/WBC-Asset-Pencil-Hover.png);
 	color: #0645AD !important;
 }

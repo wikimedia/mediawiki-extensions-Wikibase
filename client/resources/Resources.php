@@ -8,11 +8,11 @@ return call_user_func( function() {
 	);
 
 	return array(
-		'ext.wikibaseclient.init' => $moduleTemplate + array(
-			'styles' => 'ext.wikibaseclient.css'
+		'wikibase.client.init' => $moduleTemplate + array(
+			'styles' => 'wikibase.client.css',
 		),
-		'ext.wikibaseclient.page-move' => $moduleTemplate + array(
-			'styles' => 'ext.wikibaseclient.page-move.css'
+		'wikibase.client.page-move' => $moduleTemplate + array(
+			'styles' => 'wikibase.client.page-move.css'
 		),
 	);
 

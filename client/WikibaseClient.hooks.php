@@ -318,7 +318,7 @@ final class ClientHooks {
 			$itemByTitle = 'Special:ItemByTitle/' . $globalId . '/' . $oldTitle->getDBkey();
 			$itemByTitleLink = ClientUtils::baseUrl() . $itemByTitle;
 			$out = $movePage->getOutput();
-			$out->addModules( 'ext.wikibaseclient.page-move' );
+			$out->addModules( 'wikibase.client.page-move' );
 			$out->addHTML(
 				\Html::rawElement(
 					'div',
@@ -550,7 +550,7 @@ final class ClientHooks {
 		$title = $out->getTitle();
 
 		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
-			$out->addModules( 'ext.wikibaseclient.init' );
+			$out->addModules( 'wikibase.client.init' );
 		}
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
