@@ -113,6 +113,11 @@
 			for ( i in constructorArgs ) {
 				instance = this.getInstance( constructorArgs[i] );
 
+				assert.ok(
+					instance instanceof dv.DataValue,
+					'is instance of DataValue'
+				);
+
 				assert.equal(
 					typeof( instance.getType() ),
 					'string',
@@ -192,6 +197,7 @@
 		testEquals: function( assert ) {
 			var
 				instances = this.getInstances(),
+				instances2 = this.getInstances(),
 				i;
 
 			for ( i in instances ) {
@@ -200,10 +206,12 @@
 					'instance is equal to itself'
 				);
 
-				assert.ok(
-					!instances[i].equals( 42 ),
-					'instance is not equal to 42'
-				);
+				if ( instances[i].getType() !== 'unknown' ) {
+					assert.ok(
+						instances[i] !== instances2[i] && instances[i].equals( instances2[i] ),
+						'instances is equal to another instance encapsulating the same value'
+					);
+				}
 			}
 		}
 
