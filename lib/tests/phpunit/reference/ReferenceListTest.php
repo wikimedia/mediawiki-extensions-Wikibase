@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\ReferenceList;
 use Wikibase\ReferenceObject;
 use Wikibase\Reference;
+use Hashable;
 
 /**
  * Tests for the Wikibase\ReferenceList class.
@@ -175,8 +176,54 @@ class ReferenceListTest extends \MediaWikiTestCase {
 		$this->assertInternalType( 'string', $array->getValueHash() );
 
 		$copy = ReferenceList::newFromArray( $array->toArray() );
-
 		$this->assertEquals( $array->getValueHash(), $copy->getValueHash() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param ReferenceList $references
+	 */
+	public function testHasReferenceHash( ReferenceList $references ) {
+		$this->assertFalse( $references->hasReferenceHash( '~=[,,_,,]:3' ) );
+
+		/**
+		 * @var Hashable $reference
+		 */
+		foreach ( $references as $reference ) {
+			$this->assertTrue( $references->hasReferenceHash( $reference->getHash() ) );
+		}
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param ReferenceList $references
+	 */
+	public function testGetReference( ReferenceList $references ) {
+		$this->assertNull( $references->getReference( '~=[,,_,,]:3' ) );
+
+		/**
+		 * @var Reference $reference
+		 */
+		foreach ( $references as $reference ) {
+			$this->assertTrue( $reference->equals( $references->getReference( $reference->getHash() ) ) );
+		}
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param ReferenceList $references
+	 */
+	public function testRemoveReferenceHash( ReferenceList $references ) {
+		$references->removeReferenceHash( '~=[,,_,,]:3' );
+
+		/**
+		 * @var Reference $reference
+		 */
+		foreach ( $references as $reference ) {
+			$references->removeReferenceHash( $reference->getHash() );
+		}
+
+		$this->assertEquals( 0, count( $references ) );
 	}
 
 }

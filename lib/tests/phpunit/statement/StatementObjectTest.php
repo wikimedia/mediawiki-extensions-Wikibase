@@ -60,11 +60,11 @@ class StatementObjectTest extends ClaimObjectTest {
 
 		$instance = clone $baseInstance;
 
-		$instance->setReferences( new \Wikibase\ReferenceList(
+		$instance->setReferences( new \Wikibase\ReferenceList( array(
 			new ReferenceObject( new \Wikibase\SnakList(
 				new \Wikibase\PropertyValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ), new StringValue( 'a' ) )
 			) )
-		) );
+		) ) );
 
 		$instances[] = $instance;
 
@@ -82,13 +82,13 @@ class StatementObjectTest extends ClaimObjectTest {
 	 * @dataProvider instanceProvider
 	 */
 	public function testSetReferences( Statement $statement ) {
-		$references = new \Wikibase\ReferenceList(
+		$references = new \Wikibase\ReferenceList( array(
 			new ReferenceObject( new \Wikibase\SnakList(
 				new \Wikibase\PropertyValueSnak(
 					new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ),
 					new StringValue( 'a' )
 				)
-			) )
+			) ) )
 		);
 
 
