@@ -53,12 +53,18 @@ class ExternalChangesList {
 			$line .= wfMessage( 'parentheses' )->rawParams( $deletionLog );
 		} else if ( $changeType === 'update' ) {
 
+			if ( !array_key_exists( 'page_id', $entityData ) || !array_key_exists( 'rev_id', $entityData ) ||
+				!array_key_exists( 'parent_id', $entityData ) ) {
+				wfDebug( 'Missing Wikibase recent change parameters, page_id, parent_id and/or rev_id.' );
+				return false;
+			}
+
 			// build a diff link from an RC
 			$diffParams = array(
 				'title' => $entityTitle,
-				'curid' => $rc->getAttribute( 'rc_curid' ),
-				'diff' => $rc->getAttribute( 'rc_this_oldid' ),
-				'oldid' => $rc->getAttribute( 'rc_last_oldid' )
+				'curid' => $entityData['page_id'],
+				'diff' => $entityData['rev_id'],
+				'oldid' => $entityData['parent_id']
 			);
 
 			$diffQuery = wfArrayToCgi( $diffParams );
@@ -74,7 +80,7 @@ class ExternalChangesList {
 
 			$historyQuery = wfArrayToCgi( array(
 				'title' => $entityTitle,
-				'curid' => $rc->getAttribute( 'rc_curid' ),
+				'curid' => $entityData['page_id'],
 				'action' => 'history'
 			) );
 			$historyUrl = $repoIndex . '?' . $historyQuery;
