@@ -337,7 +337,9 @@ final class ClientHooks {
 		\FormOptions $opts, array &$query_options, array &$fields ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
-		if ( Settings::get( 'showExternalRecentChanges' ) === false || $opts->getValue( 'hidewikidata' ) === true ) {
+		if ( Settings::get( 'showExternalRecentChanges' ) === false ||
+			$opts->validateName( 'hidewikidata' ) === false ||
+			$opts->getValue( 'hidewikidata' ) === true ) {
 			$conds[] = 'rc_type != ' . RC_EXTERNAL;
 		}
 
@@ -608,7 +610,10 @@ final class ClientHooks {
 	public static function onSpecialRecentChangesFilters( \SpecialRecentChanges $special, array &$filters ) {
 		$showWikidata = $special->getUser()->getOption( 'rcshowwikidata' );
 		$default = $showWikidata ? false : true;
-		$filters['hidewikidata'] = array( 'msg' => 'wbc-rc-hide-wikidata', 'default' => $default );
+		if ( $special->getUser()->getOption( 'usenewrc' ) === 0 ) {
+			$filters['hidewikidata'] = array( 'msg' => 'wbc-rc-hide-wikidata', 'default' => $default );
+		}
+
 		return true;
 	}
 
@@ -626,6 +631,7 @@ final class ClientHooks {
 			'label-message' => 'wbc-rc-show-wikidata-pref',
 			'section' => 'rc/advancedrc',
 		);
+
 		return true;
 	}
 
