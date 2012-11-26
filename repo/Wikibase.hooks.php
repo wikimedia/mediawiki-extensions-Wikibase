@@ -353,6 +353,15 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * TODO: Add some stuff? Seems to be changes propagation...
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/RecentChange_save
+	 *
+	 * @since ?
+	 *
+	 * @param $rc RecentChange
+	 * @return bool
+	 */
 	public static function onRecentChangeSave( $rc ) {
 		if ( $rc->getAttribute( 'rc_log_type' ) === null ) {
 			$revision = \Revision::newFromId( $rc->getAttribute( 'rc_this_oldid' ) );
@@ -866,6 +875,26 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * Format the output when the search result contains entities
+	 *
+	 * @since 0.3
+	 *
+	 * @param SpecialSearch $searchPage
+	 * @param SearchResult $result
+	 * @param $terms
+	 * @param &$link
+	 * @param &$redirect
+	 * @param &$section
+	 * @param &$extract,
+	 * @param &$score
+	 * @param &$size
+	 * @param &$date
+	 * @param &$related
+	 * @param &$html
+	 *
+	 * @return bool
+	 */
 	public static function onShowSearchHit( \SpecialSearch $searchPage, \SearchResult $result, $terms,
 		&$link, &$redirect, &$section, &$extract,
 		&$score, &$size, &$date, &$related,
