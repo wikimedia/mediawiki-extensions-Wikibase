@@ -76,7 +76,7 @@ class ItemContent extends EntityContent {
 	 * @return ItemContent
 	 */
 	public static function newFromArray( array $data ) {
-		return new static( new ItemObject( $data ) );
+		return new static( new Item( $data ) );
 	}
 
 	/**
@@ -251,7 +251,7 @@ class ItemContent extends EntityContent {
 	 * @return ItemContent
 	 */
 	public static function newEmpty() {
-		return new static( ItemObject::newEmpty() );
+		return new static( Item::newEmpty() );
 	}
 
 	/**

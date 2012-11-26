@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\PropertyObject, Wikibase\Property;
+use Wikibase\Property;
 
 /**
  * Tests for the Wikibase\PropertySerializer class.
@@ -54,7 +54,7 @@ class PropertySerializerTest extends EntitySerializerBaseTest {
 	 * @return Property
 	 */
 	protected function getEntityInstance() {
-		$property = PropertyObject::newEmpty();
+		$property = Property::newEmpty();
 		$property->setId( 42 );
 		return $property;
 	}

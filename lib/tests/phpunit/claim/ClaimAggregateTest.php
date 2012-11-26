@@ -50,8 +50,8 @@ class ClaimAggregateTest extends \MediaWikiTestCase {
 
 		$aggregates = array();
 
-		$aggregates[] = \Wikibase\PropertyObject::newEmpty();
-		$aggregates[] = \Wikibase\QueryObject::newEmpty();
+		$aggregates[] = \Wikibase\Property::newEmpty();
+		$aggregates[] = \Wikibase\Query::newEmpty();
 
 		$argLists = array();
 

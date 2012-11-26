@@ -108,12 +108,12 @@ final class LibHooks {
 			'item/ItemMultilangTexts',
 			'item/ItemNewEmpty',
 			'item/ItemNewFromArray',
-			'item/ItemObject',
+			'item/Item',
 
 			'property/PropertyDiff',
-			'property/PropertyObject',
+			'property/Property',
 
-			'query/QueryObject',
+			'query/Query',
 
 			'reference/ReferenceList',
 			'reference/ReferenceObject',

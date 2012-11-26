@@ -60,12 +60,12 @@ class ApiRemoveClaimsTest extends \ApiTestCase {
 	}
 
 	public function entityProvider() {
-		$property = \Wikibase\PropertyObject::newEmpty();
+		$property = \Wikibase\Property::newEmpty();
 		$dataTypes = \Wikibase\Settings::get( 'dataTypes' );
 		$property->setDataType( \DataTypes\DataTypeFactory::singleton()->getType( reset( $dataTypes ) ) );
 
 		return array(
-			$this->addClaimsAndSave( \Wikibase\ItemObject::newEmpty() ),
+			$this->addClaimsAndSave( \Wikibase\Item::newEmpty() ),
 			$this->addClaimsAndSave( $property ),
 		);
 	}

@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * Interface for objects that represent a single Wikibase query.
+ * Represents a single Wikibase query.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,13 +23,82 @@ namespace Wikibase;
  * @since 0.1
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Query extends Entity {
+class Query extends Entity {
 
 	const ENTITY_TYPE = 'query';
+
+	/**
+	 * @see Entity::getIdPrefix
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public static function getIdPrefix() {
+		return Settings::get( 'queryPrefix' );
+	}
+
+	/**
+	 * @see Entity::newFromArray
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 *
+	 * @return Query
+	 */
+	public static function newFromArray( array $data ) {
+		return new static( $data );
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @return Query
+	 */
+	public static function newEmpty() {
+		return self::newFromArray( array() );
+	}
+
+	/**
+	 * @see Entity::getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return Query::ENTITY_TYPE;
+	}
+
+	/**
+	 * @see Entity::getLocalType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getLocalizedType() {
+		return wfMessage( 'wikibaselib-entity-query' )->parse();
+	}
+
+	/**
+	 * @see Entity::getDiff
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $target
+	 *
+	 * @return QueryDiff
+	 */
+	public function getDiff( Entity $target ) {
+		// TODO
+		return ItemDiff::newEmpty();
+	}
 
 }

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use \Wikibase\Item;
-use \Wikibase\ItemObject;
 
 /**
  * Tests for the Wikibase\Item class.
@@ -48,7 +47,7 @@ class ItemMultilangTextsTest extends \MediaWikiTestCase {
 	 */
 	protected function setUp() {
   		parent::setUp();
-		self::$item = ItemObject::newFromArray( array( 'entity' => 'q42' ) );
+		self::$item = Item::newFromArray( array( 'entity' => 'q42' ) );
 	}
 	
 	/**

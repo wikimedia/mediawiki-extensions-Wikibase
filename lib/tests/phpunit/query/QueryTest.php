@@ -1,11 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\QueryObject;
 use \Wikibase\Query;
 
 /**
- * Tests for the Wikibase\QueryObject class.
+ * Tests for the Wikibase\Query class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,21 +34,21 @@ use \Wikibase\Query;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class QueryObjectTest extends EntityObjectTest {
+class QueryTest extends EntityTest {
 
 	/**
-	 * @see EntityObjectTest::getNewEmpty
+	 * @see EntityTest::getNewEmpty
 	 *
 	 * @since 0.1
 	 *
 	 * @return \Wikibase\Query
 	 */
 	protected function getNewEmpty() {
-		return QueryObject::newEmpty();
+		return Query::newEmpty();
 	}
 
 	/**
-	 * @see   EntityObjectTest::getNewFromArray
+	 * @see   EntityTest::getNewFromArray
 	 *
 	 * @since 0.1
 	 *
@@ -58,6 +57,6 @@ class QueryObjectTest extends EntityObjectTest {
 	 * @return \Wikibase\Entity
 	 */
 	protected function getNewFromArray( array $data ) {
-		return QueryObject::newFromArray( $data );
+		return Query::newFromArray( $data );
 	}
 }

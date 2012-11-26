@@ -73,7 +73,7 @@ class ApiSetClaimValue extends Api {
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
 
-		$entityId = EntityId::newFromPrefixedId( EntityObject::getIdFromClaimGuid( $params['claim'] ) );
+		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {

@@ -50,17 +50,17 @@ class EntityCacheTableTest extends \ORMTableTest {
 	public function entityProvider() {
 		$entities = array();
 
-		$entity = \Wikibase\ItemObject::newEmpty();
+		$entity = \Wikibase\Item::newEmpty();
 		$entity->setId( 1 );
 		$entity->setLabel( 'en', 'foobar' );
 		$entities[] = $entity;
 
-		$entity = \Wikibase\PropertyObject::newEmpty();
+		$entity = \Wikibase\Property::newEmpty();
 		$entity->setId( 42 );
 		$entity->setLabel( 'en', 'foobar' );
 		$entities[] = $entity;
 
-		$entity = \Wikibase\QueryObject::newEmpty();
+		$entity = \Wikibase\Query::newEmpty();
 		$entity->setId( 9001 );
 		$entity->setLabel( 'en', 'foobar' );
 		$entities[] = $entity;

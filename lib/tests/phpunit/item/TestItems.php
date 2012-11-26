@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ItemObject;
 use Wikibase\SiteLink;
 use Wikibase\Item;
 
@@ -41,22 +40,22 @@ final class TestItems {
 	public static function getItems() {
 		$items = array();
 
-		//$items[] = ItemObject::newEmpty();
+		//$items[] = Item::newEmpty();
 
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 
 		$item->setDescription( 'en', 'foo' );
 		$item->setLabel( 'en', 'bar' );
 
 		//$items[] = $item;
 
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 
 		$item->addAliases( 'en', array( 'foobar', 'baz' ) );
 
 		//$items[] = $item;
 
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 
 		$group = \Wikibase\Settings::get( 'siteLinkGroup' );
 		$sites = \Sites::singleton()->getSiteGroup( $group );
@@ -67,7 +66,7 @@ final class TestItems {
 
 		//$items[] = $item;
 
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 
 		if ( count( $sites ) > 1 ) {
 			$linksIterator = $sites->getIterator();

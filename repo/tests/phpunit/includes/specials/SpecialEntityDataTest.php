@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use \Wikibase\Item;
 use \Wikibase\ItemContent;
-use \Wikibase\ItemObject;
 
 /**
  * Tests for the SpecialItemByTitle class.
@@ -51,7 +50,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	//TODO: test other formats and other entity types.
 
 	public function testExecute() {
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 		$item->setLabel( 'en', 'Raarrr' );
 		$this->saveItem( $item );
 

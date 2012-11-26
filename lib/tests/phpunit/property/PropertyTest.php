@@ -1,11 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\PropertyObject;
 use \Wikibase\Property;
 
 /**
- * Tests for the Wikibase\PropertyObject class.
+ * Tests for the Wikibase\Property class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,26 +30,26 @@ use \Wikibase\Property;
  * @group Wikibase
  * @group WikibaseProperty
  * @group WikibaseLib
- * @group PropertyObjectTest
+ * @group PropertyTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyObjectTest extends EntityObjectTest {
+class PropertyTest extends EntityTest {
 
 	/**
-	 * @see EntityObjectTest::getNewEmpty
+	 * @see EntityTest::getNewEmpty
 	 *
 	 * @since 0.1
 	 *
 	 * @return \Wikibase\Property
 	 */
 	protected function getNewEmpty() {
-		return PropertyObject::newEmpty();
+		return Property::newEmpty();
 	}
 
 	/**
-	 * @see   EntityObjectTest::getNewFromArray
+	 * @see   EntityTest::getNewFromArray
 	 *
 	 * @since 0.1
 	 *
@@ -59,7 +58,7 @@ class PropertyObjectTest extends EntityObjectTest {
 	 * @return \Wikibase\Entity
 	 */
 	protected function getNewFromArray( array $data ) {
-		return PropertyObject::newFromArray( $data );
+		return Property::newFromArray( $data );
 	}
 
 	public function testGetDataType() {
@@ -116,13 +115,13 @@ class PropertyObjectTest extends EntityObjectTest {
 	public function propertyProvider() {
 		$objects = array();
 
-		$objects[] = PropertyObject::newEmpty();
+		$objects[] = Property::newEmpty();
 
-		$entity = PropertyObject::newEmpty();
+		$entity = Property::newEmpty();
 		$entity->setDescription( 'en', 'foo' );
 		$objects[] = $entity;
 
-		$entity = PropertyObject::newEmpty();
+		$entity = Property::newEmpty();
 		$entity->setDescription( 'en', 'foo' );
 		$entity->setDescription( 'de', 'foo' );
 		$entity->setLabel( 'en', 'foo' );
@@ -141,7 +140,7 @@ class PropertyObjectTest extends EntityObjectTest {
 	public function newDataValueProvider() {
 		$argLists = array();
 
-		$property = \Wikibase\PropertyObject::newFromType( 'wikibase-item' );
+		$property = \Wikibase\Property::newFromType( 'wikibase-item' );
 		$property->setId( 852645 );
 
 		$argLists[] = array( clone $property, new \DataValues\NumberValue( 42 ) );

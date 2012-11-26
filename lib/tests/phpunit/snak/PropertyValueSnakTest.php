@@ -73,7 +73,7 @@ class PropertyValueSnakTest extends SnakObjectTest {
 	public function newFromPropertyValueProvider() {
 		$argLists = array();
 
-		$property = \Wikibase\PropertyObject::newFromType( 'wikibase-item' );
+		$property = \Wikibase\Property::newFromType( 'wikibase-item' );
 		$property->setId( 852645 );
 
 		$argLists[] = array( clone $property, new \DataValues\NumberValue( 42 ) );

@@ -9,7 +9,7 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 (dev)
 
 * Introduced EntityId interface
-* Implemented proper serialization in EntityObject
+* Implemented proper serialization in Entity
 * Improved Change classes
 * Added countLinks and getLinks in SiteLinkLookup
 * Removed Statements, StatementList, StatementListAccess and StatementsAggregate and replace usages by corresponding Claim classes

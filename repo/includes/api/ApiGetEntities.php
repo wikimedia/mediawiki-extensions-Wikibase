@@ -54,7 +54,7 @@ class ApiGetEntities extends Api {
 					$id = ItemHandler::singleton()->getIdForSiteLink( $siteId, $title );
 
 					if ( $id ) {
-						$params['ids'][] = ItemObject::getIdPrefix() . intval( $id );
+						$params['ids'][] = Item::getIdPrefix() . intval( $id );
 					}
 					else {
 						$this->getResult()->addValue( 'entities', (string)(--$missing),
@@ -76,7 +76,7 @@ class ApiGetEntities extends Api {
 		// B/C: assume non-prefixed IDs refer to items
 		foreach ( $params['ids'] as $i => $id ) {
 			if ( !EntityId::isPrefixedId( $id ) ) {
-				$params['ids'][$i] = ItemObject::getIdPrefix() . $id;
+				$params['ids'][$i] = Item::getIdPrefix() . $id;
 				$this->getResult()->setWarning( 'Assuming plain numeric ID refers to an item. '
 						. 'Please use qualified IDs instead.' );
 			}

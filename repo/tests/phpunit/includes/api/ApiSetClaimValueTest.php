@@ -65,12 +65,12 @@ class ApiSetClaimValueTest extends \ApiTestCase {
 	 * @return Entity[]
 	 */
 	protected function getEntities( EntityId $propertyId ) {
-		$property = \Wikibase\PropertyObject::newEmpty();
+		$property = \Wikibase\Property::newEmpty();
 		$dataTypes = \Wikibase\Settings::get( 'dataTypes' );
 		$property->setDataType( \DataTypes\DataTypeFactory::singleton()->getType( reset( $dataTypes ) ) );
 
 		return array(
-			$this->addClaimsAndSave( \Wikibase\ItemObject::newEmpty(), $propertyId ),
+			$this->addClaimsAndSave( \Wikibase\Item::newEmpty(), $propertyId ),
 			$this->addClaimsAndSave( $property,$propertyId ),
 		);
 	}
@@ -78,7 +78,7 @@ class ApiSetClaimValueTest extends \ApiTestCase {
 	public function testValidRequests() {
 		$argLists = array();
 
-		$property = \Wikibase\PropertyObject::newFromType( 'commonsMedia' );
+		$property = \Wikibase\Property::newFromType( 'commonsMedia' );
 		$content = new \Wikibase\PropertyContent( $property );
 		$content->save( '', null, EDIT_NEW );
 		$property = $content->getEntity();

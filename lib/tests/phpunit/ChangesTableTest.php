@@ -44,7 +44,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 					'revision_id' => 9001,
 					'object_id' => $id->getPrefixedId(),
 					'info' => array(
-						'entity' => \Wikibase\ItemObject::newEmpty(),
+						'entity' => \Wikibase\Item::newEmpty(),
 						'diff' => \Wikibase\ItemDiff::newEmpty(),
 					)
 				),
@@ -58,7 +58,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 					'revision_id' => 9001,
 					'object_id' => $id->getPrefixedId(),
 					'info' => array(
-						'entity' => \Wikibase\ItemObject::newEmpty(),
+						'entity' => \Wikibase\Item::newEmpty(),
 						'diff' => \Wikibase\ItemDiff::newEmpty(),
 					)
 				),

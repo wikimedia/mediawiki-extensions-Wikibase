@@ -40,12 +40,12 @@ use Wikibase\Entity;
 class ApiCreateClaimTest extends \ApiTestCase {
 
 	protected static function getNewEntityAndProperty() {
-		$entity = \Wikibase\ItemObject::newEmpty();
+		$entity = \Wikibase\Item::newEmpty();
 		$content = new \Wikibase\ItemContent( $entity );
 		$content->save( '', null, EDIT_NEW );
 		$entity = $content->getEntity();
 
-		$property = \Wikibase\PropertyObject::newFromType( 'commonsMedia' );
+		$property = \Wikibase\Property::newFromType( 'commonsMedia' );
 		$content = new \Wikibase\PropertyContent( $property );
 		$content->save( '', null, EDIT_NEW );
 		$property = $content->getEntity();
@@ -80,7 +80,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 			$this->assertArrayHasKey( $requiredKey, $claim, 'claim has a "' . $requiredKey . '" key' );
 		}
 
-		$entityId = \Wikibase\EntityObject::getIdFromClaimGuid( $claim['id'] );
+		$entityId = \Wikibase\Entity::getIdFromClaimGuid( $claim['id'] );
 
 		$this->assertEquals( $entity->getPrefixedId(), $entityId );
 

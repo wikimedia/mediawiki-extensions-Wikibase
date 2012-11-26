@@ -1,12 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ItemObject;
 use Wikibase\Item;
 use Wikibase\SiteLink;
 
 /**
- * Tests for the Wikibase\ItemObject class.
+ * Tests for the Wikibase\Item class.
  * Some tests for this class are located in ItemMultilangTextsTest,
  * ItemNewEmptyTest and ItemNewFromArrayTest.
  *
@@ -34,27 +33,27 @@ use Wikibase\SiteLink;
  * @group Wikibase
  * @group WikibaseItem
  * @group WikibaseLib
- * @group WikibaseItemObjectTest
+ * @group WikibaseItemTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ItemObjectTest extends EntityObjectTest {
+class ItemTest extends EntityTest {
 
 	/**
-	 * @see EntityObjectTest::getNewEmpty
+	 * @see EntityTest::getNewEmpty
 	 *
 	 * @since 0.1
 	 *
 	 * @return \Wikibase\Item
 	 */
 	protected function getNewEmpty() {
-		return ItemObject::newEmpty();
+		return Item::newEmpty();
 	}
 
 	/**
-	 * @see   EntityObjectTest::getNewFromArray
+	 * @see   EntityTest::getNewFromArray
 	 *
 	 * @since 0.1
 	 *
@@ -63,17 +62,17 @@ class ItemObjectTest extends EntityObjectTest {
 	 * @return \Wikibase\Entity
 	 */
 	protected function getNewFromArray( array $data ) {
-		return ItemObject::newFromArray( $data );
+		return Item::newFromArray( $data );
 	}
 
 	public function testConstructor() {
-		$instance = new ItemObject( array() );
+		$instance = new Item( array() );
 
 		$this->assertInstanceOf( 'Wikibase\Item', $instance );
 
 		$exception = null;
 		try {
-			new ItemObject( 'Exception throws you!' );
+			new Item( 'Exception throws you!' );
 		} catch ( \Exception $exception )
 		{}
 		$this->assertInstanceOf( '\Exception', $exception );
@@ -129,14 +128,14 @@ class ItemObjectTest extends EntityObjectTest {
 	public function testIsEmpty() {
 		parent::testIsEmpty();
 
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 		$item->addSiteLink( SiteLink::newFromText( 'enwiki', 'Foobar' ) );
 
 		$this->assertFalse( $item->isEmpty() );
 	}
 
 	public function testClear() {
-		parent::testClear(); //NOTE: we must test the ItemObject implementation of the functionality already tested for EntityObject.
+		parent::testClear(); //NOTE: we must test the Item implementation of the functionality already tested for Entity.
 
 		$item = $this->getNewEmpty();
 
@@ -151,13 +150,13 @@ class ItemObjectTest extends EntityObjectTest {
 	public function itemProvider() {
 		$items = array();
 
-		$items[] = ItemObject::newEmpty();
+		$items[] = Item::newEmpty();
 
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 		$item->setDescription( 'en', 'foo' );
 		$items[] = $item;
 
-		$item = ItemObject::newEmpty();
+		$item = Item::newEmpty();
 		$item->setDescription( 'en', 'foo' );
 		$item->setDescription( 'de', 'foo' );
 		$item->setLabel( 'en', 'foo' );

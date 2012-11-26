@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemObject;
+use \Wikibase\Item;
 use \Wikibase\SiteLink;
 
 /**
@@ -42,7 +42,7 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 	//@todo: make this a baseclass to use with all types of entitites.
 
 	/**
-	 * @var ItemObject
+	 * @var Item
 	 */
 	protected $item;
 	
@@ -51,7 +51,7 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 	 */
 	protected function setUp() {
   		parent::setUp();
-		$this->item = ItemObject::newEmpty();
+		$this->item = Item::newEmpty();
 	}
 	
 	/**

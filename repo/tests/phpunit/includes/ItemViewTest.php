@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\ItemContent;
-use Wikibase\ItemObject;
+use Wikibase\Item;
 use Wikibase\Utils;
 use Wikibase\ItemView;
 
@@ -91,7 +91,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 			$itemContent = ItemContent::newEmpty();
 			$expected[] = '/id\s*=\s*"wb-' . $view::VIEW_TYPE . '-new"/';
 		} else {
-			$itemData += array( 'entity' => ItemObject::getIdPrefix() . '123' );
+			$itemData += array( 'entity' => Item::getIdPrefix() . '123' );
 			$itemContent = ItemContent::newFromArray( $itemData );
 			$expected[] = '/id\s*=\s*"wb-' . $view::VIEW_TYPE . '-' . $itemContent->getEntity()->getPrefixedId() . '"/';
 		}

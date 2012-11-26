@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * Interface for objects that represent a single Wikibase item.
+ * Represents a single Wikibase item.
  * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Items
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,51 +24,103 @@ namespace Wikibase;
  * @since 0.1
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-interface Item extends Entity {
+class Item extends Entity {
 
 	const ENTITY_TYPE = 'item';
 
 	/**
-	 * Adds a site link.
+	 * @since 0.2
+	 *
+	 * @var Claims|null
+	 */
+	protected $statements = null;
+
+	/**
+	 * @see Entity::getIdPrefix
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public static function getIdPrefix() {
+		return Settings::get( 'itemPrefix' );
+	}
+
+	/**
+	 * @see Item::addSiteLink
 	 *
 	 * @since 0.1
 	 *
 	 * @param SiteLink $link the link to the target page
 	 * @param string $updateType
 	 *
-	 * @return array|bool Returns array on success, or false on failure
+	 * @return SiteLink|bool Returns the link on success, or false on failure
 	 */
-	public function addSiteLink( SiteLink $link, $updateType = 'add' );
+	public function addSiteLink( SiteLink $link, $updateType = 'add' ) {
+		$siteId = $link->getSite()->getGlobalId();
+
+		$success =
+			( $updateType === 'add' && !array_key_exists( $siteId, $this->data['links'] ) )
+				|| ( $updateType === 'update' && array_key_exists( $siteId, $this->data['links'] ) )
+				|| ( $updateType === 'set' );
+
+		if ( $success ) {
+			$this->data['links'][$siteId] = $link->getPage();
+		}
+
+		return $success ? $link : false;
+	}
 
 	/**
-	 * Removes a site link.
+	 * @see   Item::removeSiteLink
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $siteId
-	 * @param string|bool $pageName
+	 * @param string      $siteId the target site's id
+	 * @param bool|string $pageName he target page's name (in normalized form)
 	 *
 	 * @return bool Success indicator
 	 */
-	public function removeSiteLink( $siteId, $pageName = false );
+	public function removeSiteLink( $siteId, $pageName = false ) {
+		if ( $pageName !== false) {
+			$success = array_key_exists( $siteId, $this->data['links'] ) && $this->data['links'][$siteId] === $pageName;
+		}
+		else {
+			$success = array_key_exists( $siteId, $this->data['links'] );
+		}
+
+		if ( $success ) {
+			unset( $this->data['links'][$siteId] );
+		}
+
+		return $success;
+	}
 
 	/**
-	 * Returns the site links in an associative array with the following format:
-	 * site id (str) => SiteLink
+	 * @see Item::getSiteLinks
 	 *
 	 * @since 0.1
 	 *
-	 * @return SiteLink[]
+	 * @return array a list of SiteLink objects
 	 */
-	public function getSiteLinks();
+	public function getSiteLinks() {
+		$links = array();
+
+		foreach ( $this->data['links'] as $globalSiteId => $title ) {
+			$links[] = SiteLink::newFromText( $globalSiteId, $title );
+		}
+
+		return $links;
+	}
 
 	/**
-	 * Returns the site link for the given site id, or null.
+	 * @see Item::getSiteLink
 	 *
 	 * @since 0.1
 	 *
@@ -76,7 +128,116 @@ interface Item extends Entity {
 	 *
 	 * @return SiteLink|null the corresponding SiteLink object, or null
 	 */
-	public function getSiteLink( $siteId );
+	public function getSiteLink( $siteId ) {
+		if ( array_key_exists( $siteId, $this->data['links'] ) ) {
+			return SiteLink::newFromText( $siteId, $this->data['links'][$siteId] );
+		} else {
+			return null;
+		}
+	}
 
+	/**
+	 * @see Entity::isEmpty
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return parent::isEmpty()
+			&& $this->data['links'] === array();
+	}
+
+	/**
+	 * @see Entity::cleanStructure
+	 *
+	 * @since 0.1
+	 *
+	 * @param boolean $wipeExisting
+	 */
+	protected function cleanStructure( $wipeExisting = false ) {
+		parent::cleanStructure( $wipeExisting );
+
+		foreach ( array( 'links' ) as $field ) {
+			if (  $wipeExisting || !array_key_exists( $field, $this->data ) ) {
+				$this->data[$field] = array();
+			}
+		}
+	}
+
+	/**
+	 * @see Entity::newFromArray
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 *
+	 * @return Item
+	 */
+	public static function newFromArray( array $data ) {
+		return new static( $data );
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @return Item
+	 */
+	public static function newEmpty() {
+		return self::newFromArray( array() );
+	}
+
+	/**
+	 * @see Entity::getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return Item::ENTITY_TYPE;
+	}
+
+	/**
+	 * @see Entity::getLocalType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getLocalizedType() {
+		return wfMessage( 'wikibaselib-entity-item' )->parse();
+	}
+
+	/**
+	 * @see Entity::getDiff
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $target
+	 *
+	 * @return ItemDiff
+	 */
+	public function getDiff( Entity $target ) {
+		return ItemDiff::newFromItems( $this, $target );
+	}
+
+	/**
+	 * @see Entity::newClaim
+	 *
+	 * @since 0.3
+	 *
+	 * @param Snak $mainSnak
+	 *
+	 * @return Statement
+	 */
+	public function newClaim( Snak $mainSnak ) {
+		$claim = new StatementObject( $mainSnak );
+		$claim->setGuid( $this->newClaimGuid() );
+		return $claim;
+	}
 
 }
+
+// Compatibility with 0.3 and earlier.
+class ItemObject extends Item {}

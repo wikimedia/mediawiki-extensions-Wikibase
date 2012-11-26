@@ -1,7 +1,7 @@
 <?php
 namespace Wikibase\Test;
 use Wikibase\SiteLink;
-use Wikibase\ItemObject;
+use Wikibase\Item;
 
 /**
  * Tests for the Wikibase\ItemDiff class.
@@ -43,7 +43,7 @@ class ItemDiffTest extends EntityDiffTest {
 		$tests = array();
 
 		// add link ------------------------------
-		$a = ItemObject::newEmpty();
+		$a = Item::newEmpty();
 		$a->addSiteLink( SiteLink::newFromText( 'enwiki', 'Test' ) );
 
 		$b = $a->copy();
@@ -52,7 +52,7 @@ class ItemDiffTest extends EntityDiffTest {
 		$tests[] = array( $a, $b );
 
 		// remove link
-		$a = ItemObject::newEmpty();
+		$a = Item::newEmpty();
 		$a->addSiteLink( SiteLink::newFromText(  'enwiki', 'Test' ), 'set' );
 		$a->addSiteLink( SiteLink::newFromText(  'dewiki', 'Test' ), 'set' );
 
@@ -62,7 +62,7 @@ class ItemDiffTest extends EntityDiffTest {
 		$tests[] = array( $a, $b );
 
 		// change link
-		$a = ItemObject::newEmpty();
+		$a = Item::newEmpty();
 		$a->addSiteLink( SiteLink::newFromText(  'enwiki', 'Test' ), 'set' );
 
 		$b = $a->copy();

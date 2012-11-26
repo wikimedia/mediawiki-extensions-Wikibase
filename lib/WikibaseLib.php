@@ -123,13 +123,13 @@ $wgAutoloadClasses['Wikibase\EntityDiffObject'] 	= $dir . 'includes/entity/Entit
 $wgAutoloadClasses['Wikibase\EntityDiffView'] 		= $dir . 'includes/entity/EntityDiffView.php';
 $wgAutoloadClasses['Wikibase\EntityFactory'] 		= $dir . 'includes/entity/EntityFactory.php';
 $wgAutoloadClasses['Wikibase\EntityId'] 			= $dir . 'includes/entity/EntityId.php';
-$wgAutoloadClasses['Wikibase\EntityObject'] 		= $dir . 'includes/entity/EntityObject.php';
+$wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/entity/Entity.php';
 
 // includes/item
 $wgAutoloadClasses['Wikibase\Item'] 				= $dir . 'includes/item/Item.php';
 $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/item/ItemDiff.php';
 $wgAutoloadClasses['Wikibase\ItemDiffView'] 		= $dir . 'includes/item/ItemDiffView.php';
-$wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/item/ItemObject.php';
+$wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/item/Item.php';
 
 // includes/modules
 $wgAutoloadClasses['Wikibase\SitesModule'] 				= $dir . 'includes/modules/SitesModule.php';
@@ -139,11 +139,9 @@ $wgAutoloadClasses['Wikibase\TemplateModule'] 			= $dir . 'includes/modules/Temp
 $wgAutoloadClasses['Wikibase\Property'] 				= $dir . 'includes/property/Property.php';
 $wgAutoloadClasses['Wikibase\PropertyDiff'] 			= $dir . 'includes/property/PropertyDiff.php';
 $wgAutoloadClasses['Wikibase\PropertyDiffView'] 		= $dir . 'includes/property/PropertyDiffView.php';
-$wgAutoloadClasses['Wikibase\PropertyObject'] 			= $dir . 'includes/property/PropertyObject.php';
 
 // includes/query
 $wgAutoloadClasses['Wikibase\Query'] 					= $dir . 'includes/query/Query.php';
-$wgAutoloadClasses['Wikibase\QueryObject'] 				= $dir . 'includes/query/QueryObject.php';
 
 // includes/reference
 $wgAutoloadClasses['Wikibase\Reference'] 				= $dir . 'includes/reference/Reference.php';
@@ -192,7 +190,7 @@ $wgAutoloadClasses['Wikibase\Test\ChangeRowTest']			= $dir . 'tests/phpunit/chan
 $wgAutoloadClasses['Wikibase\Test\EntityChangeTest']		= $dir . 'tests/phpunit/changes/EntityChangeTest.php';
 $wgAutoloadClasses['Wikibase\Test\TestChanges']				= $dir . 'tests/phpunit/changes/TestChanges.php';
 $wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/item/TestItems.php';
-$wgAutoloadClasses['Wikibase\Test\EntityObjectTest'] 		= $dir . 'tests/phpunit/entity/EntityObjectTest.php';
+$wgAutoloadClasses['Wikibase\Test\EntityTest'] 				= $dir . 'tests/phpunit/entity/EntityTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityDiffTest'] 			= $dir . 'tests/phpunit/entity/EntityDiffTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityRefreshTest'] 		= $dir . 'tests/phpunit/changes/EntityRefreshTest.php';
 $wgAutoloadClasses['Wikibase\Test\SnakObjectTest'] 			= $dir . 'tests/phpunit/snak/SnakObjectTest.php';

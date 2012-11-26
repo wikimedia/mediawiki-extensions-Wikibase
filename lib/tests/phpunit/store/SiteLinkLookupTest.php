@@ -59,7 +59,7 @@ class SiteLinkLookupTest extends \MediaWikiTestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetConflictsForItem( SiteLinkLookup $lookup ) {
-		$conflicts = $lookup->getConflictsForItem( \Wikibase\ItemObject::newEmpty() );
+		$conflicts = $lookup->getConflictsForItem( \Wikibase\Item::newEmpty() );
 		$this->assertTrue( $conflicts === array() );
 	}
 

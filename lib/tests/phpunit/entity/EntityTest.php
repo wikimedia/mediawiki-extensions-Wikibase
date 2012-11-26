@@ -5,7 +5,7 @@ use Wikibase\Entity;
 use Wikibase\EntityId;
 
 /**
- * Tests for the Wikibase\EntityObject deriving classes.
+ * Tests for the Wikibase\Entity deriving classes.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ use Wikibase\EntityId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class EntityObjectTest extends \MediaWikiTestCase {
+abstract class EntityTest extends \MediaWikiTestCase {
 
 	/**
 	 * @since 0.1
@@ -553,7 +553,13 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 		$instance = unserialize( $oldSerialization );
 
 		if ( $expectedId === null ) {
-			$this->assertTrue( \Wikibase\ItemObject::newEmpty()->equals( $instance ) );
+			$thisData = $instance->toArray();
+			$thatData = \Wikibase\Item::newEmpty()->toArray();
+
+			$comparer = new \Wikibase\ObjectComparer();
+			$equals = $comparer->dataEquals( $thisData, $thatData, array( 'entity' ) );
+
+			$this->assertTrue( $equals );
 		}
 		else {
 			$this->assertEquals( $expectedId, $instance->getId()->getNumericId() );
@@ -573,7 +579,7 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * Tests Entity::newClaim and EntityObject::getIdFromClaimGuid
+	 * Tests Entity::newClaim and Entity::getIdFromClaimGuid
 	 *
 	 * @dataProvider instanceProvider
 	 *
@@ -591,7 +597,7 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 
 		$this->assertInternalType( 'string', $guid );
 
-		$prefixedEntityId = \Wikibase\EntityObject::getIdFromClaimGuid( $guid );
+		$prefixedEntityId = \Wikibase\Entity::getIdFromClaimGuid( $guid );
 
 		$this->assertEquals( $entity->getPrefixedId(), $prefixedEntityId );
 	}

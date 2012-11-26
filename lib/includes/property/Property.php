@@ -6,7 +6,7 @@ use DataValues\DataValue;
 use MWException;
 
 /**
- * Interface for objects that represent a single Wikibase property.
+ * Represents a single Wikibase property.
  * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Properties
  *
  * This program is free software; you can redistribute it and/or modify
@@ -27,52 +27,186 @@ use MWException;
  * @since 0.1
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Property extends Entity {
+class Property extends Entity {
 
 	const ENTITY_TYPE = 'property';
 
 	/**
-	 * Returns the DataType of the property.
+	 * @since 0.2
+	 *
+	 * @var DataType|null
+	 */
+	protected $dataType = null;
+
+	/**
+	 * @see Property::getDataType
 	 *
 	 * @since 0.2
 	 *
 	 * @return DataType
 	 * @throws MWException
 	 */
-	public function getDataType();
+	public function getDataType() {
+		if ( $this->dataType === null ) {
+			if ( array_key_exists( 'datatype', $this->data ) ) {
+				return $this->setDataTypeById( $this->data['datatype'] );
+			}
+			else {
+				throw new MWException( 'The DataType of the property is not known' );
+			}
+		}
+		else {
+			return $this->dataType;
+		}
+	}
 
 	/**
-	 * Sets the DataType of the property.
+	 * @see Property::setDataType
 	 *
 	 * @since 0.2
 	 *
 	 * @param DataType $dataType
 	 */
-	public function setDataType( DataType $dataType );
+	public function setDataType( DataType $dataType ) {
+		$this->dataType = $dataType;
+	}
 
 	/**
-	 * Sets the DataType of the property.
+	 * @see Property::setDataTypeById
 	 *
 	 * @since 0.2
 	 *
 	 * @param string $dataTypeId
+	 *
+	 * @return DataType
+	 * @throws MWException
 	 */
-	public function setDataTypeById( $dataTypeId );
+	public function setDataTypeById( $dataTypeId ) {
+		if ( is_string( $dataTypeId ) && in_array( $dataTypeId, Settings::get( 'dataTypes' ) ) ) {
+			$dataType = \DataTypes\DataTypeFactory::singleton()->getType( $dataTypeId );
+
+			if ( $dataType !== null ) {
+				$this->setDataType( $dataType );
+				return $dataType;
+			}
+		}
+
+		throw new MWException( 'The DataType of the property is not valid' );
+	}
 
 	/**
-	 * Factory for creating new DataValue objects for the property.
+	 * @see Entity::toArray
+	 *
+	 * @since 0.2
+	 *
+	 * @return array
+	 */
+	public function toArray() {
+		$data = parent::toArray();
+
+		if ( $this->dataType !== null ) {
+			$data['datatype'] = $this->dataType->getId();
+		}
+
+		return $data;
+	}
+
+	/**
+	 * @see Entity::getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return Property::ENTITY_TYPE;
+	}
+
+	/**
+	 * @see Entity::getLocalType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getLocalizedType() {
+		return wfMessage( 'wikibaselib-entity-property' )->parse();
+	}
+
+	/**
+	 * @see Entity::getDiff
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $target
+	 *
+	 * @return PropertyDiff
+	 */
+	public function getDiff( Entity $target ) {
+		return PropertyDiff::newFromProperties( $this, $target );
+	}
+
+
+	/**
+	 * @see Entity::getIdPrefix
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public static function getIdPrefix() {
+		return Settings::get( 'propertyPrefix' );
+	}
+
+	/**
+	 * @see Entity::newFromArray
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 *
+	 * @return Property
+	 */
+	public static function newFromArray( array $data ) {
+		return new static( $data );
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @return Property
+	 */
+	public static function newEmpty() {
+		return self::newFromArray( array() );
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param string $dataTypeId
+	 *
+	 * @return Property
+	 */
+	public static function newFromType( $dataTypeId ) {
+		return self::newFromArray( array( 'datatype' => $dataTypeId ) );
+	}
+
+	/**
+	 * @see Property::newDataValue
 	 *
 	 * @since 0.3
 	 *
-	 * @param mixed $rawDataValue The value that can be obtained via $dataValue->toArray()
+	 * @param mixed $rawDataValue
 	 *
 	 * @return DataValue
 	 */
-	public function newDataValue( $rawDataValue );
+	public function newDataValue( $rawDataValue ) {
+		return \DataValues\DataValueFactory::singleton()->newDataValue( $this->getDataType()->getDataValueType(), $rawDataValue );
+	}
 
 }
