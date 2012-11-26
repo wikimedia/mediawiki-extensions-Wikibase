@@ -496,7 +496,56 @@ abstract class EntityView extends \ContextSource {
 			\FormatJson::encode( $serializer->getSerialized( $entity ) )
 		);
 
+		// get necessary information about properties used in this entity and include it into JSON
+		$usedProperties = static::getUsedProperties( $entity );
+		$basicPropertyInfo = static::getBasicPropertyInfo( $usedProperties, $langCode );
+
+		$out->addJsConfigVars(
+			'wbUsedProperties',
+			\FormatJson::encode( $basicPropertyInfo )
+		);
+
 		wfProfileOut( "Wikibase-" . __METHOD__ );
+	}
+
+	/**
+	 * Returns the property entities used by a given entity. Basically all properties used in all of
+	 * the entities claims.
+	 */
+	protected static function getUsedProperties( EntityOBject $entity ) {
+		$propertyIds = array();
+
+		foreach( $entity->getClaims() as $claim ) {
+			$propertyIds[] = $claim->getPropertyId();
+		}
+
+		array_unique( $propertyIds );
+		return $propertyIds;
+	}
+
+	/**
+	 * Fetches some basic property information required for the entity view in JavaScript from a
+	 * set of entity IDs.
+	 *
+	 * @param array $propertyIds
+	 * @param string $langCode For the properties label which will be included in one language only.
+	 * @return array
+	 */
+	protected static function getBasicPropertyInfo( array $propertyIds, $langCode ) {
+		$propertyInfo = array();
+		$entityContentFactory = EntityContentFactory::singleton();
+
+		foreach( $propertyIds as $id ) {
+			/** @var $property PropertyObject */
+			$property = $entityContentFactory->getFromId( $id )->getEntity();
+			$id = $property->getId()->getPrefixedId();
+
+			$propertyInfo[ $id ] = array(
+				'datatype' => $property->getDataType()->getId(),
+				'label' => $property->getLabel( $langCode )
+			);
+		}
+		return $propertyInfo;
 	}
 
 	/**
