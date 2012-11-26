@@ -244,8 +244,8 @@ to find out where it went.',
 	'right-alias-add' => 'Add aliases',
 	'right-alias-set' => 'Set aliases',
 	'right-alias-remove' => 'Remove aliases',
-	'right-sitelink-remove' => 'Remove sitelinks',
-	'right-sitelink-update' => 'Update sitelinks',
+	'right-sitelink-remove' => 'Remove site links',
+	'right-sitelink-update' => 'Update site links',
 	'right-linktitles-update' => 'Update link titles',
 	'right-label-remove' => 'Remove labels',
 	'right-label-update' => 'Update labels',
@@ -305,14 +305,14 @@ Bubble help message for entering the label of the data set used for a specific i
 Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-statements' => 'Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata\'s glossary for [[m:Wikidata/Glossary#Statement|statements]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
-Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#Item|item]].',
+Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.',
 	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.',
 	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (Wikipedia) page.',
 	'wikibase-sitelinks-add' => "Add a sitelink to a language specific page on the cluster. See also Wikidata's glossary for [//wikidata.org/wiki/Wikidata:Glossary#Sitelink sitelinks].",
-	'wikibase-sitelinks-empty' => 'There are no sitelinks for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
+	'wikibase-sitelinks-empty' => 'There are no site links for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
 	'wikibase-sitelinks-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 D.png|right|0x150px]]
-Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
+Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
 	'wikibase-remove' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface being put in edit mode.',
 	'wikibase-undo-title' => 'Title shown on the form for undoing edits. Example is Undoing edit to "Spain". Parameters:
@@ -390,8 +390,8 @@ Note that the default message says the user shall "reload and save", but after a
 	'wikibase-itemlink-title' => 'Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description.',
 	'special-itembytitle' => "The item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also Wikidata's glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].",
 	'wikibase-itembytitle-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by site and title.',
-	'wikibase-itembytitle-lookup-site' => "Label for the textfield holding the site id. See also Wikidata's glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].",
-	'wikibase-itembytitle-lookup-page' => "Label for the textfield holding the external page title. See also Wikidata's glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].",
+	'wikibase-itembytitle-lookup-site' => "Label for the textfield holding the site id. See also Wikidata's glossary for [[m:Wikidata/Glossary#sitelinks|site links]].",
+	'wikibase-itembytitle-lookup-page' => "Label for the textfield holding the external page title. See also Wikidata's glossary for [[m:Wikidata/Glossary#sitelinks|site links]].",
 	'wikibase-itembytitle-submit' => 'Text for the submit button in the search form.',
 	'wikibase-itembytitle-nothing-found' => 'Informative text that the previous search failed for some reason, and that the search arguments must be refined.',
 	'wikibase-itembytitle-description' => 'Further information about the search fields and the valid values.',
@@ -460,7 +460,7 @@ Parameters:
 {{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
 	'wikibase-api-no-token' => '!!DO NOT TRANSLATE!! This is an error message for a situation where there are no token given in the API call and it is expected. Usually this should never be shown to the user, unless there are some exceptional error conditions. The message can be shown after misconfiguration of the system.',
 	'wikibase-api-no-data' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are some exceptional error condition. This message should probably not exist in the final version.',
-	'wikibase-api-client-error' => '!!DO NOT TRANSLATE!! To verify sitelinks the repository must query the external client. Sometimes this fails, but without any possibility for the user to fix the problem.',
+	'wikibase-api-client-error' => '!!DO NOT TRANSLATE!! To verify site links the repository must query the external client. Sometimes this fails, but without any possibility for the user to fix the problem.',
 	'wikibase-api-no-external-data' => '!!DO NOT TRANSLATE!! This is an error message where the external client did not reply, either because of the repo or the client terminated the connection, or because of some other connection error.',
 	'wikibase-api-no-external-page' => '!!DO NOT TRANSLATE!! This is an error message where the external client did reply, but either because of a faulty reply or because the page title could not be unwound, it was not possible to identify an external page.',
 	'wikibase-api-add-sitelink-failed' => '!!DO NOT TRANSLATE!! This is an error message where the system of some unspecific reason could not add the site link to the temporary store.',
@@ -559,19 +559,19 @@ Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
-	'right-item-override' => '{{doc-right|item-override}}', # Fuzzy
-	'right-item-create' => '{{doc-right|item-create}}', # Fuzzy
-	'right-item-remove' => '{{doc-right|item-remove}}', # Fuzzy
-	'right-alias-add' => '{{doc-right|alias-add}}', # Fuzzy
-	'right-alias-set' => '{{doc-right|alias-set}}', # Fuzzy
-	'right-alias-remove' => '{{doc-right|alias-remove}}', # Fuzzy
-	'right-sitelink-remove' => '{{doc-right|sitelink-remove}}', # Fuzzy
-	'right-sitelink-update' => '{{doc-right|sitelink-update}}', # Fuzzy
-	'right-linktitles-update' => '{{doc-right|linktitles-update}}', # Fuzzy
-	'right-label-remove' => '{{doc-right|label-remove}}', # Fuzzy
-	'right-label-update' => '{{doc-right|label-update}}', # Fuzzy
-	'right-description-remove' => '{{doc-right|description-remove}}', # Fuzzy
-	'right-description-update' => '{{doc-right|description-update}}', # Fuzzy
+	'right-item-override' => '{{doc-right|item-override}}',
+	'right-item-create' => '{{doc-right|item-create}}',
+	'right-item-remove' => '{{doc-right|item-remove}}',
+	'right-alias-add' => '{{doc-right|alias-add}}',
+	'right-alias-set' => '{{doc-right|alias-set}}',
+	'right-alias-remove' => '{{doc-right|alias-remove}}',
+	'right-sitelink-remove' => '{{doc-right|sitelink-remove}}',
+	'right-sitelink-update' => '{{doc-right|sitelink-update}}',
+	'right-linktitles-update' => '{{doc-right|linktitles-update}}',
+	'right-label-remove' => '{{doc-right|label-remove}}',
+	'right-label-update' => '{{doc-right|label-update}}',
+	'right-description-remove' => '{{doc-right|description-remove}}',
+	'right-description-update' => '{{doc-right|description-update}}',
 );
 
 /** Achinese (Acèh)
