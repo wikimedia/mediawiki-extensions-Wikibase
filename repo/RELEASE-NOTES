@@ -18,6 +18,8 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * Added wbcreateclaim API module
 * Added wbgetclaims API module
 * Added wbremoveclaims API module
+* Added wbsetclaimvalue API module
+* Added wbsetreference API module
 
 ; Backend
 
