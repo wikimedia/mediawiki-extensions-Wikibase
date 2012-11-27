@@ -11,10 +11,9 @@ use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EditEntity;
 use Wikibase\Statement;
-use Wikibase\References;
 
 /**
- * API module for removing one or more references of the same statement.
+ * API module for setting the rank of a statement
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +38,7 @@ use Wikibase\References;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveReferences extends \Wikibase\Api {
+class SetStatementRank extends \Wikibase\Api {
 
 	// TODO: automcomment
 	// TODO: example
@@ -57,13 +56,15 @@ class RemoveReferences extends \Wikibase\Api {
 		$content = $this->getEntityContent();
 		$params = $this->extractRequestParams();
 
-		$this->removeReferences(
+		$statement = $this->setStatementRank(
 			$content->getEntity(),
 			$params['statement'],
-			array_unique( $params['references'] )
+			$params['rank']
 		);
 
 		$this->saveChanges( $content );
+
+		$this->outputStatement( $statement );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
@@ -80,7 +81,7 @@ class RemoveReferences extends \Wikibase\Api {
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'removereferences-entity-not-found' );
+			$this->dieUsage( 'No such entity', 'setstatementrank-entity-not-found' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -93,40 +94,27 @@ class RemoveReferences extends \Wikibase\Api {
 	 *
 	 * @param Entity $entity
 	 * @param string $statementGuid
-	 * @param string[] $refHash
+	 * @param string $rank
+	 *
+	 * @return Statement
 	 */
-	protected function removeReferences( Entity $entity, $statementGuid, array $refHashes ) {
+	protected function setStatementRank( Entity $entity, $statementGuid, $rank ) {
 		if ( !$entity->getClaims()->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'No such statement', 'removereferences-statement-not-found' );
+			$this->dieUsage( 'No such statement', 'setstatementrank-statement-not-found' );
 		}
 
 		$statement = $entity->getClaims()->getClaimWithGuid( $statementGuid );
 
 		if ( ! ( $statement instanceof Statement ) ) {
 			$this->dieUsage(
-				'The referenced claim is not a statement and thus cannot have references',
-				'removereferences-not-a-statement'
+				'The referenced claim is not a statement and thus does not have a rank',
+				'setstatementrank-not-a-statement'
 			);
 		}
 
-		/**
-		 * @var References $references
-		 */
-		$references = $statement->getReferences();
+		$statement->setRank( \Wikibase\ClaimSerializer::unserializeRank( $rank ) );
 
-		foreach ( $refHashes as $refHash ) {
-			// TODO: perhaps we do not want to fail like this, as client cannot easily find which ref is not there
-			if ( $references->hasReferenceHash( $refHash ) ) {
-				$references->removeReferenceHash( $refHash );
-			}
-			else {
-				$this->dieUsage(
-					// TODO: does $refHash need to be escaped somehow?
-					'The statement does not have any associated reference with the provided reference hash "' . $refHash . '"',
-					'removereferences-no-such-reference'
-				);
-			}
-		}
+		return $statement;
 	}
 
 	/**
@@ -163,6 +151,22 @@ class RemoveReferences extends \Wikibase\Api {
 	}
 
 	/**
+	 * @since 0.3
+	 *
+	 * @param Statement $statement
+	 */
+	protected function outputStatement( Statement $statement ) {
+		$serializer = new \Wikibase\ClaimSerializer();
+		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
+
+		$this->getResult()->addValue(
+			null,
+			'statement',
+			$serializer->getSerialized( $statement )
+		);
+	}
+
+	/**
 	 * @see ApiBase::getAllowedParams
 	 *
 	 * @since 0.3
@@ -175,10 +179,9 @@ class RemoveReferences extends \Wikibase\Api {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'references' => array(
-				ApiBase::PARAM_TYPE => 'string',
+			'rank' => array(
+				ApiBase::PARAM_TYPE => \Wikibase\ClaimSerializer::getRanks(),
 				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_ISMULTI => true,
 			),
 			'token' => null,
 			'baserevid' => array(
@@ -196,8 +199,8 @@ class RemoveReferences extends \Wikibase\Api {
 	 */
 	public function getParamDescription() {
 		return array(
-			'statement' => 'A GUID identifying the statement for which a reference is being set',
-			'references' => 'The hashes of the references that should be removed',
+			'statement' => 'A GUID identifying the statement for which to set the rank',
+			'rank' => 'The new value to set for the rank',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
@@ -214,7 +217,7 @@ class RemoveReferences extends \Wikibase\Api {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for removing one or more references of the same statement.'
+			'API module for setting the rank of a Wikibase statement.'
 		);
 	}
 
