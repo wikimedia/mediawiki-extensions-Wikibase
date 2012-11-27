@@ -27,7 +27,7 @@ use \Status;
  * @file
  * @since 0.1
  *
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseRepoTest
  * @ingroup Test
  *
  * @group Wikibase
