@@ -17,8 +17,8 @@
  * @param {wb.Snak[]} qualifiers
  */
 wb.Claim = function( mainSnak, qualifiers ) {
-	this._mainSnak = mainSnak;
-	this._qualifiers = qualifiers;
+	this.setMainSnak( mainSnak );
+	this.setQualifiers( qualifiers || [] );
 };
 
 wb.Claim.prototype = {
@@ -48,6 +48,9 @@ wb.Claim.prototype = {
 	 * @param {wb.Snak} mainSnak
 	 */
 	setMainSnak: function( mainSnak ) {
+		if( !( mainSnak instanceof wb.Snak ) ) {
+			throw new Error( 'For creating a new claim, at least a Main Snak is required' );
+		}
 		this._mainSnak = mainSnak;
 	},
 
@@ -66,6 +69,9 @@ wb.Claim.prototype = {
 	 * @param {wb.Snak[]} qualifiers
 	 */
 	setQualifiers: function( qualifiers ) {
+		if( !$.isArray( qualifiers ) ) {
+			throw new Error( 'Qualifiers have to be an array of snaks' );
+		}
 		this._qualifiers = qualifiers;
 	}
 };
