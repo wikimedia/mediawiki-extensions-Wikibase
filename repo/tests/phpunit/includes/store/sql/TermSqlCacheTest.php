@@ -25,7 +25,7 @@ use Wikibase\Term;
  * @file
  * @since 0.2
  *
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseRepoTest
  * @ingroup Test
  *
  * @group Wikibase

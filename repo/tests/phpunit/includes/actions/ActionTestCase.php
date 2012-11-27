@@ -29,7 +29,7 @@ use \Wikibase\ItemContent;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseRepoTest
  * @ingroup Test
  *
  * @licence GNU GPL v2+

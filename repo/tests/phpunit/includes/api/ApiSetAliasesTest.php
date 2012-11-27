@@ -38,7 +38,7 @@ use Wikibase\Test\ApiModifyItemBase;
  * @file
  * @since 0.1
  *
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseRepoTest
  * @ingroup Test
  *
  * The database group has as a side effect that temporal database tables are created. This makes

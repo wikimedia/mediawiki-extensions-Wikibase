@@ -32,7 +32,7 @@ use Wikibase\Statement;
  *
  * @since 0.3
  *
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  * @ingroup API
  *
  * @licence GNU GPL v2+
