@@ -154,6 +154,7 @@ final class RepoHooks {
 			'api/ApiSetReference',
 			'api/ApiSetSiteLink',
 			'api/RemoveReferences',
+			'api/SetStatementRank',
 
 			'content/EntityContentFactory',
 			'content/EntityHandler',
