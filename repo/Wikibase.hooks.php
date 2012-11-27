@@ -151,6 +151,7 @@ final class RepoHooks {
 			'api/ApiEditEntity',
 			'api/ApiRemoveClaims',
 			'api/ApiSetClaimValue',
+			'api/ApiSetReference',
 			'api/ApiSetSiteLink',
 
 			'content/EntityContentFactory',

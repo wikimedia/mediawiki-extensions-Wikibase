@@ -129,6 +129,7 @@ $wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAli
 $wgAutoloadClasses['Wikibase\ApiSetClaimValue'] 		= $dir . 'includes/api/ApiSetClaimValue.php';
 $wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSetDescription.php';
 $wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabel.php';
+$wgAutoloadClasses['Wikibase\ApiSetReference'] 			= $dir . 'includes/api/ApiSetReference.php';
 $wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
 
 // includes/content
@@ -201,6 +202,7 @@ $wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
 $wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\ApiSetClaimValue';
 $wgAPIModules['wbeditentity'] 						= 'Wikibase\ApiEditEntity';
 $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
+$wgAPIModules['wbsetreference'] 					= 'Wikibase\ApiSetReference';
 $wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
 
 
