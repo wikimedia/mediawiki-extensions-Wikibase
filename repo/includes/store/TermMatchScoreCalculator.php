@@ -23,7 +23,7 @@ namespace Wikibase;
  * @since 0.3
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >

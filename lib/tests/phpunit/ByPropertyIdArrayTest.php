@@ -24,7 +24,7 @@ use Wikibase\ByPropertyIdArray, Wikibase\EntityId, Wikibase\Property, Wikibase\S
  * @file
  * @since 0.2
  *
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  * @ingroup Test
  *
  * @group Wikibase

@@ -9,7 +9,7 @@ use Wikibase\Autocomment;
  * @file
  * @since 0.1
  *
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  * @ingroup Test
  *
  * @group Wikibase

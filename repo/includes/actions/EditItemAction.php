@@ -4,7 +4,7 @@ namespace Wikibase;
 
 /**
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  * @ingroup Action
  *
  * @licence GNU GPL v2+

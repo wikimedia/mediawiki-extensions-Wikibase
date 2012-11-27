@@ -22,7 +22,7 @@
  * @since 0.1
  *
  * @file SpecialItemDisambiguation.php
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  *

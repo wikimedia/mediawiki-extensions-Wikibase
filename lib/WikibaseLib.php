@@ -15,9 +15,16 @@
  */
 
 /**
+ * This documentation group collects source code files belonging to Wikibase.
+ *
+ * @defgroup Wikibase Wikibase
+ */
+
+/**
  * This documentation group collects source code files belonging to WikibaseLib.
  *
  * @defgroup WikibaseLib WikibaseLib
+ * @ingroup Wikibase
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {

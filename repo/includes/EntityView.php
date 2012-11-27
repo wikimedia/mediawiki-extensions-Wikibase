@@ -29,7 +29,7 @@ use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPa
  *        these functions require an EntityContent while a DataValue (if it were implemented) should be sufficient.
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki at snater.com >

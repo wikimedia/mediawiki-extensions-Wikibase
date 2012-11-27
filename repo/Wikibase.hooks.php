@@ -25,7 +25,7 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, M
  * @since 0.1
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

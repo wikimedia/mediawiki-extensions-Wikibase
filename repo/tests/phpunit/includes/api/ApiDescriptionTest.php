@@ -36,7 +36,7 @@ namespace Wikibase\Test;
  * @file
  * @since 0.1
  *
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  * @ingroup Test
  *
  * The database group has as a side effect that temporal database tables are created. This makes

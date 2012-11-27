@@ -21,7 +21,7 @@
  * @since 0.2
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Denny Vrandecic < denny@vrandecic.de >

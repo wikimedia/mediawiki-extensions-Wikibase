@@ -24,7 +24,7 @@ use Wikibase\Property;
  * @file
  * @since 0.3
  *
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  * @ingroup Test
  *
  * @group Wikibase

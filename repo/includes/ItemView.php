@@ -10,7 +10,7 @@ use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
  * @since 0.1
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >

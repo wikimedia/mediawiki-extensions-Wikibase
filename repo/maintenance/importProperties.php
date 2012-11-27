@@ -12,7 +12,7 @@
  * @since 0.1
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Nikola Smolenski <smolensk@eunet.rs>

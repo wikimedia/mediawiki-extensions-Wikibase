@@ -24,7 +24,7 @@ use Wikibase\Item;
  * @file
  * @since 0.2
  *
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  * @ingroup Test
  *
  * @group Wikibase

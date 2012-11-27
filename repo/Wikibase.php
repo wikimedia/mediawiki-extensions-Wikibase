@@ -8,7 +8,7 @@
  * Source code:				https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -17,9 +17,10 @@
  */
 
 /**
- * This documentation group collects source code files belonging to Wikibase.
+ * This documentation group collects source code files belonging to Wikibase Client.
  *
- * @defgroup Wikibase Wikibase
+ * @defgroup WikibaseRepo Wikibase Repo
+ * @ingroup Wikibase
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {

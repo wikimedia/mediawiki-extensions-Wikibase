@@ -25,7 +25,7 @@ use WikiPage, Title, User, Status;
  * @since 0.1
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  * @ingroup Content
  *
  * @licence GNU GPL v2+

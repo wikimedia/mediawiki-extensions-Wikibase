@@ -24,7 +24,7 @@ use Title, Content, ParserOptions, ParserOutput, WikiPage, User, Status, DataUpd
  * @since 0.1
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  * @ingroup Content
  *
  * @licence GNU GPL v2+
