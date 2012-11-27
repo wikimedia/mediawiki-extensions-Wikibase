@@ -85,6 +85,7 @@
 					} );
 				} );
 			}
+			wb.entity.id = entityJSON.id;
 
 			$( '.wb-section-heading' ).remove();
 
