@@ -43,21 +43,36 @@ HTML;
 <h2 class="wb-section-heading" dir="auto">$1</h2>
 HTML;
 
-	$templates['wb-claims'] =
+	$templates['wb-claims-section'] =
 <<<HTML
-<div class="wb-claims">$1</div>
+<div class="wb-claims-section">
+	<div class="wb-claims">$1</div>
+	$2
+</div>
+HTML;
+
+	$templates['wb-claim-section'] =
+<<<HTML
+<div class="wb-claim-section wb-claim-section-$1">
+	<div class="wb-claim-section-name">
+		<div class="wb-claim-name" dir="auto">$2</div>
+	</div>
+	$3
+</div>
 HTML;
 
 	$templates['wb-claim'] =
 <<<HTML
-<div class="wb-claim wb-claim-$1">
-	<div class="wb-claim-column-name">
-		<div class="wb-claim-name" dir="auto">$2</div>
+<div class="wb-claim-container $1">
+	<div class="wb-claim wb-claim-$2">
+		<div class="wb-claim-property-container">
+			<div class="wb-claim-property" dir="auto">$3</div>
+		</div>
+		<div class="wb-claim-content-container">
+			<div class="wb-claim-content" dir="auto">$4</div>
+		</div>
 	</div>
-	<div class="wb-claim-content">
-		<div class="wb-claim-value" dir="auto">$3</div>
-		$4
-	</div>
+	$5
 </div>
 HTML;
 

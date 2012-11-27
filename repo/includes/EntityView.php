@@ -310,14 +310,23 @@ abstract class EntityView extends \ContextSource {
 
 		$html .= wfTemplate( 'wb-section-heading', wfMessage( 'wikibase-statements' ) );
 
+		// aggregate claims by properties
+		$claimsByProperty = array();
+		foreach( $claims AS $claim ) {
+			$propertyId = $claim->getMainSnak()->getPropertyId();
+			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
+		}
+
 		/**
 		 * @var string $claimsHtml
 		 */
 		$claimsHtml = '';
-		foreach( $claims as $claim ) {
-			$propertyId = $claim->getMainSnak()->getPropertyId();
+		foreach( $claimsByProperty AS $claims ) {
+			$propertyHtml = '';
+
+			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
 			$property = EntityContentFactory::singleton()->getFromId( $propertyId );
-			$propertyLink= '';
+			$propertyLink = '';
 			if ( isset( $property ) ) {
 				$propertyLink = \Linker::link(
 					$property->getTitle(),
@@ -325,23 +334,54 @@ abstract class EntityView extends \ContextSource {
 				);
 			}
 
-			// TODO: display a "placeholder" message for novalue/somevalue snak
-			$value = '';
-			if ( $claim->getMainSnak()->getType() === 'value' ) {
-				$value = $claim->getMainSnak()->getDataValue()->getValue();
+			$i = 0;
+			foreach( $claims AS $claim ) {
+				// TODO: display a "placeholder" message for novalue/somevalue snak
+				$value = '';
+				if ( $claim->getMainSnak()->getType() === 'value' ) {
+					$value = $claim->getMainSnak()->getDataValue()->getValue();
+				}
+
+				$additionalCssClasses = '';
+				if ( $i++ === 0 ) {
+					$additionalCssClasses .= 'wb-first ';
+				}
+				if ( $i === count( $claims ) ) {
+					$additionalCssClasses .= 'wb-last ';
+				}
+
+				$propertyHtml .= wfTemplate( 'wb-claim',
+					$additionalCssClasses,
+					$propertyId,
+					$propertyLink,
+					( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value ),
+					$this->getHtmlForEditSection( $entity, $lang, 'span' )
+				);
 			}
 
-			$claimsHtml .= wfTemplate( 'wb-claim', array(
-				$claim->getMainSnak()->getPropertyId()->getNumericId(),
+			$additionalCssClasses = 'wb-claim-add';
+
+			// add a new claim with this property
+			$propertyHtml .= wfTemplate( 'wb-claim',
+				$additionalCssClasses,
+				$propertyId,
 				$propertyLink,
-				( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value ),
-				$this->getHtmlForEditSection( $entity, $lang, 'span' )
-			) );
+				'&nbsp;',
+				$this->getHtmlForEditSection( $entity, $lang, 'span', 'add' )
+			);
+
+			$claimsHtml .= wfTemplate( 'wb-claim-section',
+				$propertyId,
+				$propertyLink,
+				$propertyHtml
+			);
+
 		}
 
-		$claimsHtml .= $this->getHtmlForEditSection( $entity, $lang, 'div', 'add' );
-
-		return $html . wfTemplate( 'wb-claims', $claimsHtml );
+		return $html . wfTemplate( 'wb-claims-section',
+			$claimsHtml,
+			$this->getHtmlForEditSection( $entity, $lang, 'div', 'add' )
+		);
 	}
 
 	/**
