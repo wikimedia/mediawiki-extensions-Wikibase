@@ -47,8 +47,10 @@ class ApiSetReferenceTest extends \ApiTestCase {
 		$content = new \Wikibase\ItemContent( $item );
 		$content->save( '', null, EDIT_NEW );
 
-		$statement = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$statement->setGuid( $item->newClaimGuid() );
+		/**
+		 * @var \Wikibase\Statement $statement
+		 */
+		$statement = $item->newClaim( new \Wikibase\PropertyNoValueSnak( 42 ) );
 
 		$reference = new \Wikibase\ReferenceObject( new \Wikibase\SnakList(
 			array( new \Wikibase\PropertySomeValueSnak( 1 ) )

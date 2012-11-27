@@ -586,7 +586,11 @@ abstract class EntityTest extends \MediaWikiTestCase {
 	 * @param Entity $entity
 	 */
 	public function testNewClaim( Entity $entity ) {
-		$snak = new \Wikibase\PropertyNoValueSnak( new EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) );
+		if ( $entity->getId() === null ) {
+			$entity->setId( new EntityId( $entity->getType(), 50 ) );
+		}
+
+		$snak = new \Wikibase\PropertyNoValueSnak( 42 );
 		$claim = $entity->newClaim( $snak );
 
 		$this->assertInstanceOf( '\Wikibase\Claim', $claim );
@@ -600,6 +604,23 @@ abstract class EntityTest extends \MediaWikiTestCase {
 		$prefixedEntityId = \Wikibase\Entity::getIdFromClaimGuid( $guid );
 
 		$this->assertEquals( $entity->getPrefixedId(), $prefixedEntityId );
+	}
+
+	public function testNewClaimMore() {
+		$snak = new \Wikibase\PropertyNoValueSnak( 42 );
+		$item = \Wikibase\Item::newEmpty();
+
+		$mockId = new EntityId( \Wikibase\Item::ENTITY_TYPE, 9001 );
+		$generator = new \Wikibase\Lib\ClaimGuidGenerator( $mockId );
+
+		$claim = $item->newClaim( $snak, $generator );
+		$guid = $claim->getGuid();
+
+		$this->assertInternalType( 'string', $guid );
+
+		$prefixedEntityId = \Wikibase\Entity::getIdFromClaimGuid( $guid );
+
+		$this->assertEquals( $mockId->getPrefixedId(), $prefixedEntityId );
 	}
 
 }

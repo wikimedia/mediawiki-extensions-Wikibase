@@ -415,32 +415,6 @@ final class Utils {
 	}
 
 	/**
-	 * Generates and returns a GUID.
-	 * @see http://php.net/manual/en/function.com-create-guid.php
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public static function getGuid() {
-		if ( function_exists( 'com_create_guid' ) ) {
-			return trim( com_create_guid(), '{}' );
-		}
-
-		return sprintf(
-			'%04X%04X-%04X-%04X-%04X-%04X%04X%04X',
-			mt_rand( 0, 65535 ),
-			mt_rand( 0, 65535 ),
-			mt_rand( 0, 65535 ),
-			mt_rand( 16384, 20479 ),
-			mt_rand( 32768, 49151 ),
-			mt_rand( 0, 65535 ),
-			mt_rand( 0, 65535 ),
-			mt_rand( 0, 65535 )
-		);
-	}
-
-	/**
 	 * Returns a list of entity content model ids pointing to the ids of the namespaces in which they reside.
 	 *
 	 * @since 0.1

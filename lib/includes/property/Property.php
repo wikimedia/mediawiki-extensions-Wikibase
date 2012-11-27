@@ -44,7 +44,7 @@ class Property extends Entity {
 	protected $dataType = null;
 
 	/**
-	 * @see Property::getDataType
+	 * Returns the DataType of the property.
 	 *
 	 * @since 0.2
 	 *
@@ -66,7 +66,7 @@ class Property extends Entity {
 	}
 
 	/**
-	 * @see Property::setDataType
+	 * Sets the DataType of the property.
 	 *
 	 * @since 0.2
 	 *
@@ -77,7 +77,7 @@ class Property extends Entity {
 	}
 
 	/**
-	 * @see Property::setDataTypeById
+	 * Sets the DataType of the property.
 	 *
 	 * @since 0.2
 	 *
@@ -197,7 +197,7 @@ class Property extends Entity {
 	}
 
 	/**
-	 * @see Property::newDataValue
+	 * Factory for creating new DataValue objects for the property.
 	 *
 	 * @since 0.3
 	 *

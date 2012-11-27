@@ -53,7 +53,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see Item::addSiteLink
+	 * Adds a site link.
 	 *
 	 * @since 0.1
 	 *
@@ -103,7 +103,8 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see Item::getSiteLinks
+	 * Returns the site links in an associative array with the following format:
+	 * site id (str) => SiteLink
 	 *
 	 * @since 0.1
 	 *
@@ -120,7 +121,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see Item::getSiteLink
+	 * Returns the site link for the given site id, or null.
 	 *
 	 * @since 0.1
 	 *
@@ -223,7 +224,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see Entity::newClaim
+	 * @see Entity::newClaimBase
 	 *
 	 * @since 0.3
 	 *
@@ -231,10 +232,8 @@ class Item extends Entity {
 	 *
 	 * @return Statement
 	 */
-	public function newClaim( Snak $mainSnak ) {
-		$claim = new StatementObject( $mainSnak );
-		$claim->setGuid( $this->newClaimGuid() );
-		return $claim;
+	protected function newClaimBase( Snak $mainSnak ) {
+		return new StatementObject( $mainSnak );
 	}
 
 }
