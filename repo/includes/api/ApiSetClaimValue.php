@@ -50,7 +50,8 @@ class ApiSetClaimValue extends Api {
 		$claim = $this->updateClaim(
 			$content->getEntity(),
 			$params['claim'],
-			$params['value']
+			$params['snaktype'],
+			isset( $params['value'] ) ? $params['value'] : null
 		);
 
 		$this->saveChanges( $content );
@@ -88,24 +89,37 @@ class ApiSetClaimValue extends Api {
 	 *
 	 * @param Entity $entity
 	 * @param string $guid
-	 * @param string $value
+	 * @param string $snakType
+	 * @param string|null $value
 	 *
 	 * @return Claim
 	 */
-	protected function updateClaim( Entity $entity, $guid, $value ) {
+	protected function updateClaim( Entity $entity, $guid, $snakType, $value = null ) {
 		if ( !$entity->getClaims()->hasClaimWithGuid( $guid ) ) {
 			$this->dieUsage( 'No such claim', 'setclaimvalue-claim-not-found' );
 		}
 
 		$claim = $entity->getClaims()->getClaimWithGuid( $guid );
 
-		$mainSnak = $claim->getMainSnak();
+		$constructorArguments = array( $claim->getMainSnak()->getPropertyId() );
 
-		if ( !( $mainSnak instanceof PropertyValueSnak ) ) {
-			$this->dieUsage( 'Cannot set the value of a snak that has no value', 'setclaimvalue-invalid-snak-type' );
+		if ( $value !== null ) {
+			/**
+			 * @var PropertyContent $content
+			 */
+			$content = EntityContentFactory::singleton()->getFromId( $claim->getMainSnak()->getPropertyId() );
+
+			if ( $content === null ) {
+				$this->dieUsage(
+					'The value cannot be interpreted since the property cannot be found, and thus the type of the value not be determined',
+					'setclaimvalue-property-not-found'
+				);
+			}
+
+			$constructorArguments[] = $content->getProperty()->newDataValue( $value );
 		}
 
-		$claim->setMainSnak( PropertyValueSnak::newFromPropertyValue( $mainSnak->getPropertyId(), $value ) );
+		$claim->setMainSnak( SnakObject::newFromType( $snakType, $constructorArguments ) );
 
 		return $claim;
 	}
@@ -174,6 +188,10 @@ class ApiSetClaimValue extends Api {
 			),
 			'value' => array(
 				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_REQUIRED => false,
+			),
+			'snaktype' => array(
+				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'token' => null,
@@ -193,6 +211,7 @@ class ApiSetClaimValue extends Api {
 	public function getParamDescription() {
 		return array(
 			'claim' => 'A GUID identifying the claim',
+			'snaktype' => 'The type of the snak',
 			'value' => 'The value to set the datavalue of the the main snak of the claim to',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
