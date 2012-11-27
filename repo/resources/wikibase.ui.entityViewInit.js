@@ -57,7 +57,8 @@
 		} );
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
-			var entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) );
+			var entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) ),
+				usedPropertiesJSON = $.evalJSON( mw.config.get( 'wbUsedProperties' ) );
 
 			// if there are no aliases yet, the DOM structure for creating new ones is created manually since it is not
 			// needed for running the page without JS
@@ -73,6 +74,10 @@
 				new wb.ui.AliasesEditTool( this );
 			} );
 
+			// Information about used properties:
+			$.extend( wb.properties, usedPropertiesJSON );
+
+			// Definition of the views entity:
 			if ( entityJSON.claims !== undefined ) {
 				$.each( entityJSON.claims, function( propertyId, claims ) {
 					$.each( claims, function( i, claim ) {
@@ -84,17 +89,9 @@
 			$( '.wb-section-heading' ).remove();
 
 			// BUILD CLAIMS VIEW:
-			var $claims = $( '.wb-claims' ).empty();
-
-			$claims.before(
-				$( mw.template( 'wb-section-heading', mw.msg( 'wikibase-statements' ) ) )
-			);
-
-			$.each( wb.entity.claims, function( i, claim ) {
-				var $snakView = $( '<div/>' ).snakview().appendTo( $claims );
-
-				// display value of the claim:
-				$snakView.data( 'snakview' ).value( claim.getMainSnak() );
+			// Note: $.entityview() only works for claims right now, the goal is to use it for more
+			var $claims = $( '.wb-claims' ).entityview( {
+				value: wb.entity // only holds the claims of an entity page right now
 			} );
 
 			// removing site links heading to rebuild it with value counter
