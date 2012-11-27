@@ -188,6 +188,11 @@ RSpec::Core::RakeTask.new(:security) do |spec|
   spec.pattern = '../repo/tests/selenium/item/security_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:client_recent_changes) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../client/tests/selenium/special/recent_changes_spec.rb'
+end
+
 task :run_tests, :taskname, :browser, :remote, :os do |t, args|
   task = args[:taskname] || :all
   setup_env(args[:browser], args[:remote], args[:os])
