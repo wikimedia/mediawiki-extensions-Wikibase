@@ -28,7 +28,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * @since 0.3
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon

@@ -25,7 +25,7 @@ use Wikibase\Item;
  * @file
  * @since 0.1
  *
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  * @ingroup Test
  *
  * @licence GNU GPL v2+

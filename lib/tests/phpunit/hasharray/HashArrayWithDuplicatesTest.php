@@ -25,7 +25,7 @@ use Hashable;
  * @file
  * @since 0.1
  *
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  * @ingroup Test
  *
  * @group Wikibase

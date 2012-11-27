@@ -25,7 +25,7 @@ use ResourceLoaderModule, ResourceLoaderContext, MediaWikiSite, Site, Sites;
  * @todo This modules content should be invalidated whenever sites stuff (config) changes
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

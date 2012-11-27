@@ -9,7 +9,7 @@ use ApiBase, MWException;
  * @since 0.1
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  * @ingroup API
  *
  * @licence GNU GPL v2+

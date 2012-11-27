@@ -5,7 +5,7 @@ use  Html, Linker, Skin, Status, Revision;
 
 /**
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  * @ingroup Action
  *
  * @licence GNU GPL v2+

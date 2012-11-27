@@ -26,7 +26,7 @@ namespace Wikibase;
  * @since 0.2
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >

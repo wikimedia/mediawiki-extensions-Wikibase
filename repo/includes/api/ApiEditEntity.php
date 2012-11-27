@@ -9,7 +9,7 @@ use ApiBase, User, Status, SiteList;
  * @since 0.1
  *
  * @file ApiWikibaseModifyEntity.php
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  * @ingroup API
  *
  * @licence GNU GPL v2+

@@ -26,7 +26,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * @note: this should move into core, together with \Wikibase\Utils::insertDefaultSites
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

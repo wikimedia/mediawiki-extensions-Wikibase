@@ -31,7 +31,7 @@ use ApiTestCase;
  * @file
  * @since 0.1
  *
- * @ingroup Wikibase
+ * @ingroup WikibaseRepo
  * @ingroup Test
  *
  * @licence GNU GPL v2+

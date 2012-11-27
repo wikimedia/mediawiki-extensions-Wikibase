@@ -24,7 +24,7 @@ namespace Wikibase;
  * @since 0.1
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

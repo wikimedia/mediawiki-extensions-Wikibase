@@ -24,7 +24,7 @@ use ApiResult, MWException;
  * @since 0.3
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
