@@ -9,8 +9,7 @@ use Wikibase\ItemContent;
  * @file
  * @since 0.1
  *
- * @ingroup WikibaseRepo
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseRepoTest
  * @ingroup Test
  *
  * @licence GNU GPL v2+
