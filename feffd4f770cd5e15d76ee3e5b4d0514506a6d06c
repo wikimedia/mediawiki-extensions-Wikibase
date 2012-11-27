@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADaH///Jk\u003d",
+        "filename": "lib/tests/phpunit/store/SiteLinkLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-27T11:41:23Z",
+      "side": 1,
+      "message": "this one should still be newSiteLinkCache.\n\nMaybe we should just change back the client store method to also be newSiteLinkCache, for consistency; or change the repo store method to be consistent with the client.",
+      "revId": "feffd4f770cd5e15d76ee3e5b4d0514506a6d06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
