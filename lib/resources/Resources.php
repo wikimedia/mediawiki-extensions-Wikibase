@@ -298,11 +298,29 @@ return call_user_func( function() {
 				'jquery.ui.entityselector',
 				'wikibase.datamodel',
 				'dataTypes.jquery.valueview.views',
-				'wikibase.store'
+				'wikibase.store' // required for getting datatype from entityselector selected property
 			),
 			'messages' => array(
 				'wikibase-snak-unsupporteddatatype',
 				'datatypes-type-wikibase-item'
+			)
+		),
+
+		'jquery.wikibase.claimview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.claimview.js'
+			),
+			'dependencies' => array(
+				'jquery.wikibase.snakview'
+			)
+		),
+
+		'jquery.wikibase.entityview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.entityview.js'
+			),
+			'dependencies' => array(
+				'jquery.wikibase.claimview'
 			)
 		),
 
