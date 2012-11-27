@@ -512,7 +512,7 @@ abstract class EntityView extends \ContextSource {
 	 * Returns the property entities used by a given entity. Basically all properties used in all of
 	 * the entities claims.
 	 */
-	protected static function getUsedProperties( EntityOBject $entity ) {
+	protected static function getUsedProperties( Entity $entity ) {
 		$propertyIds = array();
 
 		foreach( $entity->getClaims() as $claim ) {
@@ -536,7 +536,7 @@ abstract class EntityView extends \ContextSource {
 		$entityContentFactory = EntityContentFactory::singleton();
 
 		foreach( $propertyIds as $id ) {
-			/** @var $property PropertyObject */
+			/** @var $property Property */
 			$property = $entityContentFactory->getFromId( $id )->getEntity();
 			$id = $property->getId()->getPrefixedId();
 
