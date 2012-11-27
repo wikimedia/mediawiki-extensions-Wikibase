@@ -41,11 +41,11 @@ class SiteLinkLookupTest extends \MediaWikiTestCase {
 		$instances = array();
 
 		if ( defined( 'WB_VERSION' ) ) {
-			$instances[] = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
+			$instances[] = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newSiteLinkTable();
 		}
 
 		if ( defined( 'WBC_VERSION' ) ) {
-			$instances[] = \Wikibase\ClientStoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
+			$instances[] = \Wikibase\ClientStoreFactory::getStore( 'sqlstore' )->newSiteLinkTable();
 		}
 
 		if ( empty( $instances ) ) {
