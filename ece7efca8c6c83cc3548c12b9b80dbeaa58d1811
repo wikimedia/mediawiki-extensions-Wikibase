@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADaH///IA\u003d",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-11-27T13:17:29Z",
+      "side": 1,
+      "message": "What about the ULS?",
+      "revId": "ece7efca8c6c83cc3548c12b9b80dbeaa58d1811",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
