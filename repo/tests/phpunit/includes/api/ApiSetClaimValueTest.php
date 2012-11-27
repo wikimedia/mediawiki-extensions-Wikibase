@@ -102,6 +102,7 @@ class ApiSetClaimValueTest extends \ApiTestCase {
 			'action' => 'wbsetclaimvalue',
 			'claim' => $claimGuid,
 			'value' => $value,
+			'snaktype' => 'value',
 		);
 
 		list( $resultArray, ) = $this->doApiRequest( $params );
