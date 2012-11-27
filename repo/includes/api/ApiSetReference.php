@@ -259,7 +259,7 @@ class ApiSetReference extends Api {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for setting the value of a Wikibase claim.'
+			'API module for creating a reference or setting the value of an existing one.'
 		);
 	}
 
