@@ -40,7 +40,7 @@ class LangLinkHandler {
 	 * @return SiteLink[]
 	 */
 	public static function getEntityCacheLinks( \Parser $parser ) {
-		$itemId = ClientStoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink(
+		$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink(
 			Settings::get( 'siteGlobalID' ),
 			$parser->getTitle()->getFullText()
 		);
@@ -61,7 +61,7 @@ class LangLinkHandler {
 	 * Disabled for a page when either:
 	 * - Wikidata not enabled for namespace
 	 * - nel parser function = * (suppress all repo links)
-	 * 
+	 *
 	 * @since 0.1
 	 *
 	 * @param \Parser $parser
