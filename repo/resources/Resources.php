@@ -43,7 +43,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.ui.PropertyEditTool',
-				'jquery.wikibase.snakview',
+				'jquery.wikibase.entityview',
 				'wikibase.datamodel',
 				'jquery.json'
 			),
