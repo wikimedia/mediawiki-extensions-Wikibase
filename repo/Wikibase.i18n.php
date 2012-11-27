@@ -1717,6 +1717,7 @@ $messages['fa'] = array(
 /** Finnish (suomi)
  * @author Beluga
  * @author Crt
+ * @author Nedergard
  * @author Nike
  * @author Stryn
  * @author VezonThunder
@@ -1771,6 +1772,8 @@ $messages['fi'] = array(
 	'wikibase-error-ui-no-permissions' => 'Sinulla ei ole tämän toiminnon suorittamiseen vaadittavia oikeuksia.',
 	'wikibase-error-ui-session-failure' => 'Istuntosi on vanhentunut. Kirjaudu sisään uudelleen.',
 	'wikibase-error-sitelink-already-used' => 'Sivustolinkki [[$1:$2]] on jo käytössä kohteessa [[$3]].',
+	'special-itembytitle' => 'Nimike otsikon mukaan',
+	'wikibase-itembytitle-lookup-fieldset' => 'Etsi nimikkeitä sivun ja otsikon mukaan',
 	'wikibase-itembytitle-lookup-site' => 'Sivusto:',
 	'wikibase-itembytitle-lookup-page' => 'Sivu:',
 	'wikibase-itembytitle-submit' => 'Etsi',
@@ -1811,8 +1814,8 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'right-alias-add' => 'Lisätä alias', # Fuzzy
 	'right-alias-set' => 'Asettaa aliaksia',
 	'right-alias-remove' => 'Poistaa aliaksia',
-	'right-sitelink-remove' => 'Poistaa sivulinkit',
-	'right-sitelink-update' => 'Päivittää sivulinkit',
+	'right-sitelink-remove' => 'Poistaa sivulinkkejä',
+	'right-sitelink-update' => 'Päivittää sivulinkkejä',
 	'right-linktitles-update' => 'Päivittää linkkien otsikoita',
 	'right-label-remove' => 'Poistaa otsikko', # Fuzzy
 	'right-label-update' => 'Päivittää otsikko', # Fuzzy
@@ -3012,6 +3015,7 @@ $messages['is'] = array(
  * @author Beta16
  * @author Darth Kule
  * @author F. Cosoleto
+ * @author Gianfranco
  * @author Raoli
  * @author Sannita
  * @author Yiyi
@@ -3033,6 +3037,7 @@ $messages['it'] = array(
 	'wikibase-alias-edit-placeholder' => 'inserisci un alias',
 	'wikibase-label-input-help-message' => 'Inserisci il titolo di questo insieme di dati in $1.',
 	'wikibase-description-input-help-message' => 'Inserisci una breve descrizione in $1.',
+	'wikibase-statements' => 'Dichiarazioni',
 	'wikibase-sitelinks' => 'Elenco delle pagine collegate a questo elemento',
 	'wikibase-sitelinks-sitename-columnheading' => 'Lingua',
 	'wikibase-sitelinks-siteid-columnheading' => 'Codice',
@@ -3062,6 +3067,7 @@ $messages['it'] = array(
 	'wikibase-aliases-input-help-message' => 'Se questo insieme di dati è conosciuto con più di un nome, è possibile inserire alias e sinonimi, in modo che possa essere trovato anche tramite i suoi nomi alternativi.',
 	'wikibase-aliases-empty' => 'Nessun alias definito.',
 	'wikibase-datatype-label' => 'Tipo di dato:',
+	'wikibase-snak-unsupporteddatatype' => 'La gestione dei valori per il tipo di dati "$1" non è ancora consentita.',
 	'wikibase-restrictionedit-tooltip-message' => 'Questa pagina è protetta, la modifica non è consentita.',
 	'wikibase-blockeduser-tooltip-message' => 'Sei stato bloccato, non puoi fare modifiche.',
 	'wikibase-tooltip-error-details' => 'Dettagli',
@@ -3637,6 +3643,7 @@ $messages['mk'] = array(
 	'wikibase-alias-edit-placeholder' => 'внесете алијас',
 	'wikibase-label-input-help-message' => 'Внесете го насловот на податочниот збир во $1.',
 	'wikibase-description-input-help-message' => 'Внесете краток опис за $1.',
+	'wikibase-statements' => 'Искази',
 	'wikibase-sitelinks' => 'Список на страници поврзани со овој предмет',
 	'wikibase-sitelinks-sitename-columnheading' => 'Јазик',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
@@ -3666,6 +3673,7 @@ $messages['mk'] = array(
 	'wikibase-aliases-input-help-message' => 'Ако овој податочен збир е познат по повеќе од едно име, тогаш можете да внесете алијаси и синоними. Така збирот ќе може да се најде и по неговите други имиња.',
 	'wikibase-aliases-empty' => 'Нема зададено алијаси.',
 	'wikibase-datatype-label' => 'Податочен тип:',
+	'wikibase-snak-unsupporteddatatype' => 'Засега не е поддржано работењето со вредности за податочниот тип „$1“.',
 	'wikibase-restrictionedit-tooltip-message' => 'Страницава е заштитена. Уредувањето не е дозволено.',
 	'wikibase-blockeduser-tooltip-message' => 'Блокирани сте од уредување.',
 	'wikibase-tooltip-error-details' => 'Подробно',
@@ -3789,6 +3797,14 @@ $messages['mk'] = array(
 	'right-label-update' => 'Измена на етикети',
 	'right-description-remove' => 'Отстранување на описи',
 	'right-description-update' => 'Измена на описи',
+);
+
+/** Marathi (मराठी)
+ * @author Ydyashad
+ */
+$messages['mr'] = array(
+	'right-alias-add' => 'टोपण नाव घाला',
+	'right-alias-remove' => 'टोपण नाव काढा',
 );
 
 /** Malay (Bahasa Melayu)
@@ -5157,6 +5173,7 @@ $messages['uk'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'сайт',
 	'wikibase-sitelink-page-edit-placeholder' => 'стаття',
 	'wikibase-alias-edit-placeholder' => 'введіть синонім',
+	'wikibase-label-input-help-message' => 'Введіть назву цього набору мовою: $1.',
 	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
 	'wikibase-sitelinks-link-columnheading' => "Пов'язані статті",

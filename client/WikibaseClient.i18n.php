@@ -316,6 +316,7 @@ $messages['is'] = array(
 
 /** Italian (italiano)
  * @author Beta16
+ * @author Gianfranco
  * @author Raoli
  * @author Sannita
  */
@@ -326,6 +327,9 @@ $messages['it'] = array(
 	'wbc-comment-unlink' => "Questa pagina è stata scollegata dall'elemento di Wikidata. I link di lingua sono stati rimossi.",
 	'wbc-comment-restore' => "L'elemento di Wikidata associato è stato recuperato. I link di lingua sono stati ripristinati.",
 	'wbc-comment-update' => 'Link di lingua aggiornato.',
+	'wbc-comment-sitelink-add' => 'Link linguistico aggiunto: $1',
+	'wbc-comment-sitelink-change' => 'Link linguistico modificato da $1 a $2',
+	'wbc-comment-sitelink-remove' => 'Link linguistico rimosso: $1',
 	'wbc-editlinks' => 'Modifica collegamenti',
 	'wbc-editlinkstitle' => 'Modifica collegamenti interlingua',
 	'wbc-rc-hide-wikidata' => '$1 Wikidata',
@@ -342,6 +346,9 @@ $messages['ja'] = array(
 	'wbc-comment-unlink' => 'このページはウィキデータ項目からリンク解除されました。言語リンクを除去しました。',
 	'wbc-comment-restore' => '関連付けられたウィキデータ項目が復元されました。言語リンクを復元しました。',
 	'wbc-comment-update' => '言語リンクを更新しました。',
+	'wbc-comment-sitelink-add' => '言語リンクを追加: $1',
+	'wbc-comment-sitelink-change' => '言語リンクを $1 から $2 に変更',
+	'wbc-comment-sitelink-remove' => '言語リンクを除去: $1',
 	'wbc-editlinks' => 'リンクを編集',
 	'wbc-editlinkstitle' => '言語間リンクを編集',
 	'wbc-rc-hide-wikidata' => 'ウィキデータを$1',
@@ -404,10 +411,20 @@ $messages['mk'] = array(
 	'wbc-comment-unlink' => 'На оваа страница ѝ е раскината врската со елементот од Википодатоците. Јазичните врски се отстранети.',
 	'wbc-comment-restore' => 'Здружениот предмет од Википодатоците е повратен. Јазичните врски се повратени.',
 	'wbc-comment-update' => 'Јазичните врски се подновени',
+	'wbc-comment-sitelink-add' => 'Додадена јазична врска: $1',
+	'wbc-comment-sitelink-change' => 'Изменета јазична врска од $1 на $2',
+	'wbc-comment-sitelink-remove' => 'Отстранета јазична врска: $1',
 	'wbc-editlinks' => 'Уреди врски',
 	'wbc-editlinkstitle' => 'Уредување на меѓујазични врски',
 	'wbc-rc-hide-wikidata' => '$1 Википодатоци',
 	'wbc-rc-show-wikidata-pref' => 'Прикажувај ги уредувањата на Википодатоците во скорешните промени',
+);
+
+/** Marathi (मराठी)
+ * @author Ydyashad
+ */
+$messages['mr'] = array(
+	'wbc-rc-hide-wikidata' => '$१ विकिमाहिती', # Fuzzy
 );
 
 /** Malay (Bahasa Melayu)
