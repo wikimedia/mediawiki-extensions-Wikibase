@@ -177,6 +177,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_for_entity_to_load
         page.editSitelinkLink
         page.saveSitelinkLinkDisabled?.should be_true
+        page.saveSitelinkLink?.should be_false
         page.cancelSitelinkLink?.should be_true
         page.pageInputFieldExistingSiteLink_element.enabled?.should be_true
         current_page = page.pageInputFieldExistingSiteLink
