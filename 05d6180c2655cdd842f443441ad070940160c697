@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADaH//+2U\u003d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-27T19:26:16Z",
+      "side": 1,
+      "message": "what? So now you\u0027ll get a fatal instead of the error message below??",
+      "revId": "05d6180c2655cdd842f443441ad070940160c697",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
