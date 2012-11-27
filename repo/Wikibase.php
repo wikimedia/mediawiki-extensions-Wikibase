@@ -17,10 +17,17 @@
  */
 
 /**
- * This documentation group collects source code files belonging to Wikibase Client.
+ * This documentation group collects source code files belonging to Wikibase Repository.
  *
  * @defgroup WikibaseRepo Wikibase Repo
  * @ingroup Wikibase
+ */
+
+/**
+ * This documentation group collects source code files with tests for Wikibase Repository.
+ *
+ * @defgroup WikibaseRepoTest Tests for Wikibase Repo
+ * @ingroup WikibaseRepo
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
