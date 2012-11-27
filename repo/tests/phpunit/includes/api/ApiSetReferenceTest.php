@@ -42,6 +42,7 @@ class ApiSetReferenceTest extends \ApiTestCase {
 
 	// TODO: clean this up so more of the input space can easily be tested
 	// semi-blocked by cleanup of GUID handling in claims
+	// can perhaps tseal from RemoveReferencesTest
 	public function testRequests() {
 		$item = \Wikibase\Item::newEmpty();
 		$content = new \Wikibase\ItemContent( $item );
@@ -66,7 +67,7 @@ class ApiSetReferenceTest extends \ApiTestCase {
 			array( new \Wikibase\PropertyNoValueSnak( 42 ) )
 		) );
 
-		$this->makeValieRequest(
+		$this->makeValidRequest(
 			$statement->getGuid(),
 			$referenceHash,
 			$reference
@@ -80,7 +81,7 @@ class ApiSetReferenceTest extends \ApiTestCase {
 		);
 	}
 
-	protected function makeValieRequest( $statementGuid, $referenceHash, Reference $reference ) {
+	protected function makeValidRequest( $statementGuid, $referenceHash, Reference $reference ) {
 		$serializer = new \Wikibase\ReferenceSerializer();
 
 		$params = array(
