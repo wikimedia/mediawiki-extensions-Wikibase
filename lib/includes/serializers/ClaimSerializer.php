@@ -110,8 +110,20 @@ class ClaimSerializer extends SerializerObject {
 		if ( $claim instanceof Statement ) {
 			$serialization['rank'] = self::$rankMap[ $claim->getRank() ];
 
-			$snaksSerializer = new ByPropertyListSerializer( 'reference', $snakSerializer, $this->options );
-			$serialization['references'] = $snaksSerializer->getSerialized( $claim->getReferences() );
+			$referenceSerializer = new ReferenceSerializer( $this->options );
+
+			$serialization['references'] = array();
+
+			foreach ( $claim->getReferences() as $reference ) {
+				$serialization['references'][] = $referenceSerializer->getSerialized( $reference );
+			}
+
+			if ( $serialization['references'] === array() ) {
+				unset( $serialization['references'] );
+			}
+			else {
+				$this->setIndexedTagName( $serialization['references'], 'reference' );
+			}
 		}
 
 		return $serialization;

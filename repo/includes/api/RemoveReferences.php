@@ -14,7 +14,7 @@ use Wikibase\Statement;
 use Wikibase\References;
 
 /**
- * API module for removing a reference.
+ * API module for removing one or more references of the same statement.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -197,7 +197,7 @@ class RemoveReferences extends \Wikibase\Api {
 	public function getParamDescription() {
 		return array(
 			'statement' => 'A GUID identifying the statement for which a reference is being set',
-			'references' => 'A hash of the reference that should be removed',
+			'references' => 'The hashes of the references that should be removed',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
@@ -214,7 +214,7 @@ class RemoveReferences extends \Wikibase\Api {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for setting the value of a Wikibase claim.'
+			'API module for removing one or more references of the same statement.'
 		);
 	}
 
