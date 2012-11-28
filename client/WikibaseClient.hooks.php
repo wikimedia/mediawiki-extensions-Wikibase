@@ -308,7 +308,7 @@ final class ClientHooks {
 			$out = $movePage->getOutput();
 			$out->addModules( 'wikibase.client.page-move' );
 			$out->addHTML(
-				\Html::rawElement(
+				\Html::element(
 					'div',
 					array( 'id' => 'wbc-after-page-move',
 							'class' => 'plainlinks' ),

@@ -59,7 +59,7 @@ final class ClientUtils {
 		$attribs['class'] = $class;
 		$attribs['href'] = $url;
 
-		return \Html::rawElement( 'a', $attribs, $text );
+		return \Html::element( 'a', $attribs, $text );
 	}
 
 }
