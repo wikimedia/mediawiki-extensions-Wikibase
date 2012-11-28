@@ -34,9 +34,20 @@ final class ClientUtils {
 	 * @return string
 	 */
 	public static function baseUrl() {
-		$baseUrl = Settings::get( 'repoBase' );
+		$baseUrl = Settings::get( 'repoUrl' );
 		$baseUrl = rtrim( $baseUrl, '/' );
-		return $baseUrl . '/';
+		return $baseUrl;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param string $target
+	 *
+	 * @return string
+	 */
+	public static function repoArticleUrl( $target ) {
+		return self::baseUrl() . str_replace( '$1', $target, Settings::get( 'repoArticlePath' ) );
 	}
 
 	/**
@@ -45,11 +56,29 @@ final class ClientUtils {
 	 * @param string $target
 	 * @param string $text
 	 * @param array $attribs
-	 *
+	 i*
 	 * @return string
 	 */
 	public static function repoLink( $target, $text, $attribs = array() ) {
-		$url = self::baseUrl() . $target;
+		$baseUrl = self::baseUrl();
+
+		if ( array_key_exists( 'query', $attribs ) && is_array( $attribs['query'] ) ) {
+			$repoScriptPath = Settings::get( 'repoScriptPath' );
+			if ( $attribs['query']['type'] === 'index' ) {
+				$url = $baseUrl . $repoScriptPath . '/index.php';
+			} else if ( $attribs['query']['type'] === 'api' ) {
+				$url = $baseUrl . $repoScriptPath . '/api.php';
+			} else {
+				throw new \MWException( 'Invalid query type' );
+			}
+			$url = wfAppendQuery( $url, wfArrayToCgi( $attribs['query']['params'] ) );
+		} else {
+			$url = self::repoArticleUrl( $target );
+		}
+
+		if ( $url === null ) {
+			throw new \MWException( 'Could not build a repoLink url.' );
+		}
 
 		$class = 'plainlinks';
 		if ( array_key_exists( 'class', $attribs ) ) {
