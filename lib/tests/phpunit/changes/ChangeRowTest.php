@@ -97,4 +97,26 @@ class ChangeRowTest extends \ORMRowTest {
 			$changeRow->getObjectId()
 		);
 	}
+
+	/**
+	 * @dataProvider constructorTestProvider
+	 */
+	public function testSave( array $data, $loadDefaults ) {
+		if ( !defined( 'WBC_VERSION' ) ) {
+			parent::testSave( $data, $loadDefaults );
+		} else {
+			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
+		}
+	}
+
+	/**
+	 * @dataProvider constructorTestProvider
+	 */
+	public function testRemove( array $data, $loadDefaults ) {
+		if ( !defined( 'WBC_VERSION' ) ) {
+			parent::testRemove( $data, $loadDefaults );
+		} else {
+			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
+		}
+	}
 }
