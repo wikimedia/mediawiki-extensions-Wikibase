@@ -11,13 +11,34 @@ describe "Running QUnit tests" do
   before :all do
     # set up
   end
-  context "run the tests" do
-    it "should run tests and wait until they are finished" do
-      visit_page(QUnitPage) do |page|
+  context "run QUnit tests" do
+    it "run wikibase tests" do
+      on_page(QUnitPage) do |page|
+        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=wikibase")
+        page.wait_for_qunit_tests
+        page.qunitTestFail?.should be_false
+      end
+    end
+    it "run dataValues tests" do
+      on_page(QUnitPage) do |page|
+        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=dataValues")
+        page.wait_for_qunit_tests
+        page.qunitTestFail?.should be_false
+      end
+    end
+    it "run dataTypes tests" do
+      on_page(QUnitPage) do |page|
+        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=dataTypes")
+        page.wait_for_qunit_tests
+        page.qunitTestFail?.should be_false
+      end
+    end
+    it "run jQuery.ui tests" do
+      on_page(QUnitPage) do |page|
+        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=jQuery.ui")
         page.wait_for_qunit_tests
         page.qunitTestFail?.should be_false
       end
     end
   end
-
 end
