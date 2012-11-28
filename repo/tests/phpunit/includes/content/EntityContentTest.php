@@ -28,8 +28,11 @@ use Wikibase\EntityContent;
  * @ingroup Test
  *
  * @group Wikibase
- * @group WikibaseEntity
+ * @group WikibaseItem
+ * @group WikibaseRepo
  * @group WikibaseContent
+ * @group WikibaseItemContent
+ *
  * @group Database
  *
  * @licence GNU GPL v2+
@@ -265,6 +268,9 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	protected function prepareItemForPermissionCheck( $group, $permissions, $create ) {
 		global $wgUser;
 
+		// TODO: Figure out what is leaking the sysop group membership
+		$wgUser->removeGroup('sysop');
+
 		$content = $this->newEmpty();
 
 		if ( $create ) {
@@ -291,6 +297,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	 * @dataProvider dataCheckPermissions
 	 */
 	public function testCheckPermission( $action, $group, $permissions, $create, $expectedOK ) {
+		global $wgUser;
+
 		$content = $this->prepareItemForPermissionCheck( $group, $permissions, $create );
 
 		$status = $content->checkPermission( $action );
