@@ -38,7 +38,6 @@ class ApiGetEntities extends Api {
 			$numSites = count( $params['sites'] );
 			$numTitles = count( $params['titles'] );
 			$max = max( $numSites, $numTitles );
-
 			if ( $numSites === 0 || $numTitles === 0 ) {
 				wfProfileOut( "Wikibase-" . __METHOD__ );
 				$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
@@ -48,9 +47,8 @@ class ApiGetEntities extends Api {
 				$idxTitles = 0;
 
 				for ( $k = 0; $k < $max; $k++ ) {
-					$siteId = $params['sites'][$idxSites++];
-					$title = Utils::squashToNFC( $params['titles'][$idxTitles++] );
-
+					$siteId = $params['sites'][$idxSites++ % $numSites];
+					$title = Utils::squashToNFC( $params['titles'][$idxTitles++ % $numTitles] );
 					$id = ItemHandler::singleton()->getIdForSiteLink( $siteId, $title );
 
 					if ( $id ) {
@@ -60,14 +58,6 @@ class ApiGetEntities extends Api {
 						$this->getResult()->addValue( 'entities', (string)(--$missing),
 							array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
 						);
-					}
-
-					if ( $idxSites === $numSites ) {
-						$idxSites = 0;
-					}
-
-					if ( $idxTitles === $numTitles ) {
-						$idxTitles = 0;
 					}
 				}
 			}
@@ -211,10 +201,12 @@ class ApiGetEntities extends Api {
 			'sites' => array(
 				ApiBase::PARAM_TYPE => $this->getSiteLinkTargetSites()->getGlobalIdentifiers(),
 				ApiBase::PARAM_ISMULTI => true,
+				ApiBase::PARAM_ALLOW_DUPLICATES => true
 			),
 			'titles' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
+				ApiBase::PARAM_ALLOW_DUPLICATES => true
 			),
 			'props' => array(
 				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'aliases', 'labels',
