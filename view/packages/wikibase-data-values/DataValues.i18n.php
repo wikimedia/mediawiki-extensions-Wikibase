@@ -44,6 +44,14 @@ $messages['qqq'] = array(
 	'version-datavalues' => 'Name of the DataValues extension collection, used on Special:Version',
 );
 
+/** Asturian (asturianu)
+ * @author Xuacu
+ */
+$messages['ast'] = array(
+	'datavalues-desc' => "Coleición d'oxetos que representen varies clases de valores",
+	'version-datavalues' => 'Valores de datos',
+);
+
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
  */
