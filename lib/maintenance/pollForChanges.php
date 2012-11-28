@@ -135,7 +135,7 @@ class PollForChanges extends \Maintenance {
 			self::msg( "Polling changes from local wiki." );
 		}
 
-		if ( $this->getOption( 'rebuild' ) ) {
+		if ( defined( 'WBC_VERSION' ) && $this->getOption( 'rebuild' ) ) {
 			$dbw = wfGetDB( DB_MASTER );
 			$dbw->delete(
 				'recentchanges',
@@ -143,8 +143,10 @@ class PollForChanges extends \Maintenance {
 				__METHOD__
 			);
 
-			$dbw->delete( 'wbc_items_per_site', '*', __METHOD__ );
-			$dbw->delete( 'wbc_entity_cache', '*', __METHOD__ );
+			$store = ClientStoreFactory::getStore();
+			if ( $store instanceof ClientSqlStore ) {
+				$store->clear();
+			}
 		}
 
 		while ( !$this->done ) {
