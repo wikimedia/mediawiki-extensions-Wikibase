@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX///gc\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-28T15:29:42Z",
+      "side": 1,
+      "message": "This code is breaking the store abstraction. Please use the store and do not access tables directly from outside it",
+      "revId": "7311bb1eb697b1cffeda732bdf0c765f01dcdbf9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
