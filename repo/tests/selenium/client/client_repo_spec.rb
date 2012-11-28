@@ -75,18 +75,6 @@ describe "Check functionality of client-repo connection" do
         page.clientArticleTitle.should == item_sitelinks[3][1]
       end
     end
-    it "should add page to watchlist & check propagation of changes to watchlist" do
-      visit_page(ClientLoginPage) do |page|
-        page.login_with(CLIENT_ADMIN_USERNAME, CLIENT_ADMIN_PASSWORD)
-      end
-      on_page(ClientPage) do |page|
-        page.watch_article(article_title_a)
-      end
-      visit_page(WatchlistPage) do |page|
-        page.wlArticleLink1_element.text.should == article_title_a
-        page.wlArticleIDLink1_element.text.include?(item_id).should be_true
-      end
-    end
     it "should add additional sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
@@ -276,9 +264,6 @@ describe "Check functionality of client-repo connection" do
     end
     visit_page(RepoLoginPage) do |page|
       page.logout_user
-    end
-    visit_page(ClientPage) do |page|
-      page.unwatch_article(article_title_a)
     end
     visit_page(ClientLoginPage) do |page|
       page.logout_user

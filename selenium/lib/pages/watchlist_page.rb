@@ -11,7 +11,12 @@ class WatchlistPage
 
   page_url WIKI_CLIENT_URL + 'Special:Watchlist'
 
-  link(:wlArticleLink1, :xpath => "//ul[@class='special']/li/a[3]")
-  link(:wlArticleIDLink1, :xpath => "//ul[@class='special']/li/a[4]")
+  list_item(:wlFirstResult, :xpath => "//ul[@class='special']/li")
+  link(:wlFirstResultDiffLink, :xpath => "//ul[@class='special']/li/a[1]")
+  link(:wlFirstResultHistoryLink, :xpath => "//ul[@class='special']/li/a[2]")
+  link(:wlFirstResultLabelLink, :xpath => "//ul[@class='special']/li/a[3]")
+  link(:wlFirstResultIDLink, :xpath => "//ul[@class='special']/li/a[4]")
+  link(:wlFirstResultUserLink, :xpath => "//ul[@class='special']/li/a[5]")
+  span(:clientFirstResultComment, :xpath => "//ul[@class='special']/li/span[@class='comment']")
 
 end

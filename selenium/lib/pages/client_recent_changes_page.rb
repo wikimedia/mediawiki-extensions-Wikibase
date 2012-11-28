@@ -10,15 +10,15 @@ class ClientRecentChangesPage < RecentChangesPage
   include PageObject
   page_url WIKI_CLIENT_URL + "Special:RecentChanges"
 
-  list_item(:clientFirstResult, :xpath => "//ul[@class='special']/li")
-  link(:clientFirstResultDiffLink, :xpath => "//ul[@class='special']/li/a[1]")
-  link(:clientFirstResultHistoryLink, :xpath => "//ul[@class='special']/li/a[2]")
-  link(:clientFirstResultLabelLink, :xpath => "//ul[@class='special']/li/a[3]")
-  link(:clientFirstResultIDLink, :xpath => "//ul[@class='special']/li/a[4]")
-  link(:clientFirstResultUserLink, :xpath => "//ul[@class='special']/li/a[5]")
-  span(:clientFirstResultComment, :xpath => "//ul[@class='special']/li/span[@class='comment']")
-  link(:clientFirstResultCommentSitelink, :xpath => "//ul[@class='special']/li/span[@class='comment']/a")
-  link(:clientFilterHideWikidata, :xpath => "//fieldset[@class='rcoptions']/a[15]")
+  list_item(:rcFirstResult, :xpath => "//ul[@class='special']/li")
+  link(:rcFirstResultDiffLink, :xpath => "//ul[@class='special']/li/a[1]")
+  link(:rcFirstResultHistoryLink, :xpath => "//ul[@class='special']/li/a[2]")
+  link(:rcFirstResultLabelLink, :xpath => "//ul[@class='special']/li/a[3]")
+  link(:rcFirstResultIDLink, :xpath => "//ul[@class='special']/li/a[4]")
+  link(:rcFirstResultUserLink, :xpath => "//ul[@class='special']/li/a[5]")
+  span(:rcFirstResultComment, :xpath => "//ul[@class='special']/li/span[@class='comment']")
+  link(:rcFirstResultCommentSitelink, :xpath => "//ul[@class='special']/li/span[@class='comment']/a")
+  link(:rcFilterHideWikidata, :xpath => "//fieldset[@class='rcoptions']/a[15]")
 
   def hide_wikidata
     navigate_to WIKI_CLIENT_URL + "Special:RecentChanges" + "?hidewikidata=1"
