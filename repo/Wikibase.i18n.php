@@ -262,6 +262,7 @@ to find out where it went.',
  * @author Kghbln
  * @author Lokal Profil
  * @author McDutchie
+ * @author Minh Nguyen
  * @author Nemo bis
  * @author Nnemo
  * @author Purodha
@@ -304,7 +305,7 @@ This is a generic text used as a placeholder while defining the page for a possi
 Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, i.e. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-description-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 H.png|right|0x150px]]
 Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#Item|item]].',
-	'wikibase-statements' => "Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata's glossary for [[m:Wikidata/Glossary#Statement|statements]] and [[m:Wikidata/Glossary#Item|item]].",
+	'wikibase-statements' => "Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata's glossary for [[m:d:Wikidata:Glossary#Statement|statements]] and [[m:d:Wikidata:Glossary#Item|item]].",
 	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.',
@@ -1353,6 +1354,7 @@ $messages['es'] = array(
 	'wikibase-alias-edit-placeholder' => 'introduce un alias',
 	'wikibase-label-input-help-message' => 'Introducir el título de este conjunto de datos en  $1.',
 	'wikibase-description-input-help-message' => 'Introducir una breve descripción en  $1.',
+	'wikibase-statements' => 'Declaraciones',
 	'wikibase-sitelinks' => 'Lista de páginas enlazadas a este elemento',
 	'wikibase-sitelinks-sitename-columnheading' => 'Idioma',
 	'wikibase-sitelinks-siteid-columnheading' => 'Código',
@@ -1382,6 +1384,7 @@ $messages['es'] = array(
 	'wikibase-aliases-input-help-message' => 'Si este conjunto de datos es conocido bajo más de un nombre en particular, puede escribir sus alias y sinónimos, para que así pueda ser encontrado por sus nombres alternativos.',
 	'wikibase-aliases-empty' => 'No hay alias definidos.',
 	'wikibase-datatype-label' => 'Tipo de dato:',
+	'wikibase-snak-unsupporteddatatype' => 'La manipulación de valores para el tipo de datos "$1" no está soportada actualmente.',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta página está protegida, no se permite editar.',
 	'wikibase-blockeduser-tooltip-message' => 'Usted ha sido bloqueado para edición.',
 	'wikibase-tooltip-error-details' => 'Detalles',
@@ -1808,6 +1811,8 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetdescription-remove' => 'Poistettu [$2]-kuvaus',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Lisätty sivustokohtainen [$2]-linkki',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Poistettu sivustokohtainen [$2]-linkki',
+	'wikibase-item-summary-wbsetaliases-add' => 'Lisätty [$2] {{plural:$1|alias|aliasta}}',
+	'wikibase-item-summary-wbsetaliases-remove' => 'Poistettu [$2] {{plural:$1|alias|aliasta}}',
 	'right-item-override' => 'Korvata kohteen', # Fuzzy
 	'right-item-create' => 'Luoda kohteita',
 	'right-item-remove' => 'Poistaa kohteita',
@@ -5262,6 +5267,7 @@ $messages['vi'] = array(
 	'wikibase-alias-edit-placeholder' => 'nhập tên khác',
 	'wikibase-label-input-help-message' => 'Nhập tên tập hợp dữ liệu này trong $1.',
 	'wikibase-description-input-help-message' => 'Nhập lời miêu tả ngắn gọn trong $1.',
+	'wikibase-statements' => 'Các chi tiết',
 	'wikibase-sitelinks' => 'Các trang được liên kết đến khoản mục này',
 	'wikibase-sitelinks-sitename-columnheading' => 'Ngôn ngữ',
 	'wikibase-sitelinks-siteid-columnheading' => 'Mã',
@@ -5290,6 +5296,7 @@ $messages['vi'] = array(
 	'wikibase-aliases-input-help-message' => 'Nếu tập hợp dữ liệu này có hơn một tên, bạn có thể nhập các tên và tên đồng nghĩa để cho phép tìm kiếm theo các tên khác.',
 	'wikibase-aliases-empty' => 'Không có định rõ tên khác.',
 	'wikibase-datatype-label' => 'Kiểu dữ liệu:',
+	'wikibase-snak-unsupporteddatatype' => 'Hiện nay chưa hỗ trợ các giá trị có kiểu dữ liệu “$1”.',
 	'wikibase-restrictionedit-tooltip-message' => 'Trang này bị khóa không cho phép sửa đổi.',
 	'wikibase-blockeduser-tooltip-message' => 'Bạn đã bị cấm không được sửa đổi.',
 	'wikibase-tooltip-error-details' => 'Chi tiết',
