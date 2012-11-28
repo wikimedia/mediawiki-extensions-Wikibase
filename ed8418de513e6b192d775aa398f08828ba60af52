@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//+2M\u003d",
+        "filename": "lib/maintenance/deleteAllData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-28T23:50:14Z",
+      "side": 1,
+      "message": "If we\u0027re doing this, then the above var should also go",
+      "revId": "ed8418de513e6b192d775aa398f08828ba60af52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//+2E\u003d",
+        "filename": "lib/maintenance/rebuildAllData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-28T23:50:14Z",
+      "side": 1,
+      "message": "If we\u0027re doing this, then the above var should also go",
+      "revId": "ed8418de513e6b192d775aa398f08828ba60af52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
