@@ -52,9 +52,9 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	/**
-	 * This test also ensures long method names do not cause a problem, so it's completely legit!
+	 * Test label and description uniqueness restriction
 	 */
-	public function testLabelAndDescriptionUniquenessRestrictionSoWeKnowForSureItActuallyDoesWorkProperlyAndIsNotTotallyBrokenOrSomethingBecauseThatWouldBeRatherBadAndJohnWouldShoutAtMe() {
+	public function testLabelAndDescriptionUniquenessRestriction() {
 		if ( wfGetDB( DB_SLAVE )->getType() === 'mysql' ) {
 			$this->assertTrue( (bool)'MySQL fails' );
 			return;
