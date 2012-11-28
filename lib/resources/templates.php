@@ -46,8 +46,10 @@ HTML;
 	$templates['wb-claims-section'] =
 <<<HTML
 <div class="wb-claims-section">
-	<div class="wb-claims">$1</div>
-	$2
+	<div class="wb-claims">
+		$1 <!-- [0,*] wb-claim-section -->
+	</div>
+	<div class="wb-claims-toolbar">$2</div> <!-- edit section -->
 </div>
 HTML;
 
@@ -57,10 +59,14 @@ HTML;
 	<div class="wb-claim-section-name">
 		<div class="wb-claim-name" dir="auto">$2</div>
 	</div>
-	$3
+	$3 <!-- [1,*] wb-claim -->
 </div>
 HTML;
 
+	// TODO: this has to be more in sync with needs in JS widget structure.
+	// (1) .wb-claim-content should probably be replaced with its child node
+	// (2) .wb-claim-property-container should go, the main snaks property is put into
+	//     '.wb-claim-mainsnak > $4 > ...' by the responsible widget
 	$templates['wb-claim'] =
 <<<HTML
 <div class="wb-claim-container $1">
@@ -69,10 +75,12 @@ HTML;
 			<div class="wb-claim-property" dir="auto">$3</div>
 		</div>
 		<div class="wb-claim-content-container">
-			<div class="wb-claim-content" dir="auto">$4</div>
+			<div class="wb-claim-content" dir="auto">
+				<div class="wb-claim-mainsnak">$4</div>
+			</div>
 		</div>
 	</div>
-	$5
+	<div class="wb-claim-toolbar">$5</div> <!-- edit section -->
 </div>
 HTML;
 
