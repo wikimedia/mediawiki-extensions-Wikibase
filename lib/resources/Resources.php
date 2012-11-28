@@ -109,15 +109,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.utilities.jQuery.ui.inputAutoExpand' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.js',
-			),
-			'dependencies' => array(
-				'wikibase.utilities.jQuery',
-			)
-		),
-
 		'wikibase.utilities.jQuery.ui.tagadata' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.js',
@@ -127,7 +118,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.utilities.jQuery',
-				'wikibase.utilities.jQuery.ui.inputAutoExpand',
+				'jquery.ui.inputAutoExpand',
 				'jquery.ui.widget',
 				'jquery.effects.core',
 				'jquery.effects.blind'
@@ -199,8 +190,8 @@ return call_user_func( function() {
 				'wikibase.ui.Toolbar',
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
-				'wikibase.utilities.jQuery.ui.inputAutoExpand',
 				'wikibase.utilities.jQuery.ui.tagadata',
+				'jquery.ui.inputAutoExpand',
 				'jquery.ui.suggester',
 				'jquery.ui.entityselector',
 				'jquery.wikibase.siteselector',
@@ -264,6 +255,15 @@ return call_user_func( function() {
 		'jquery.eachchange' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.eachchange.js'
+			)
+		),
+
+		'jquery.ui.inputAutoExpand' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.inputAutoExpand.js',
+			),
+			'dependencies' => array(
+				'jquery.eachchange'
 			)
 		),
 
