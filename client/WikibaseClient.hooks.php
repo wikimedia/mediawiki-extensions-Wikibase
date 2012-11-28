@@ -75,6 +75,7 @@ final class ClientHooks {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'includes/CachedEntity',
+			'includes/ClientUtils',
 			'includes/EntityCacheUpdater',
 
 			'includes/store/EntityCacheTable',
