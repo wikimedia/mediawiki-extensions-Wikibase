@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADbX///ik\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T14:56:36Z",
+      "side": 1,
+      "message": "let\u0027s not have duplicate \"repoDatabase\" and \"changesDatabase\" settings.  We can use the one in WikibaseLib, although renaming it to \"repoDatabase\" would be nice since it does more than just changes now.",
+      "parentUuid": "AAADbX///rc\u003d",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADbX///pQ\u003d",
         "filename": "client/WikibaseClient.php",
         "patchSetId": 1
@@ -47,6 +65,23 @@
       "writtenOn": "2012-11-28T12:07:06Z",
       "side": 1,
       "message": "do an instanceof check here?",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///i0\u003d",
+        "filename": "client/includes/store/ClientStoreFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T14:56:36Z",
+      "side": 1,
+      "message": "this assumes the polling mechanism works for this mode. would be nice, but it\u0027s still a @todo",
       "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -166,6 +201,23 @@
       "writtenOn": "2012-11-28T12:07:06Z",
       "side": 1,
       "message": "please update",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///k8\u003d",
+        "filename": "client/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T14:56:36Z",
+      "side": 1,
+      "message": "whitespace",
       "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
