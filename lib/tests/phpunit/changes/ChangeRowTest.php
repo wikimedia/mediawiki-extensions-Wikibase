@@ -56,6 +56,7 @@ class ChangeRowTest extends \ORMRowTest {
 	}
 
 	public function constructorTestProvider() {
+		//return array();
 		return array(
 			array( TestChanges::getChange(), true ),
 		);
@@ -96,5 +97,27 @@ class ChangeRowTest extends \ORMRowTest {
 			'q182',
 			$changeRow->getObjectId()
 		);
+	}
+
+	/**
+	 * @dataProvider constructorTestProvider
+	 */
+	public function testSave( array $data, $loadDefaults ) {
+		if ( !defined( 'WBC_VERSION' ) ) {
+			parent::testSave($data, $loadDefaults);
+		} else {
+			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
+		}
+	}
+
+	/**
+	 * @dataProvider constructorTestProvider
+	 */
+	public function testRemove( array $data, $loadDefaults ) {
+		if ( !defined( 'WBC_VERSION' ) ) {
+			parent::testRemove($data, $loadDefaults);
+		} else {
+			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
+		}
 	}
 }
