@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use MWException;
+use Wikibase\Lib\GuidGenerator;
 
 /**
  * Represents a single Wikibase entity.
@@ -70,7 +71,17 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::toArray
+	 * Returns a type identifier for the entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public abstract function getType();
+
+	/**
+	 * Get an array representing the Entity.
+	 * A new Entity can be constructed by passing this array to @see Entity::newFromArray
 	 *
 	 * @since 0.1
 	 *
@@ -151,7 +162,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::getId
+	 * Returns the id of the entity or null if it is not in the datastore yet.
 	 *
 	 * @since 0.1 return type changed in 0.3
 	 *
@@ -171,7 +182,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::getPrefixedId
+	 * Returns a prefixed version of the entity's id or null if it is not in the datastore yet.
 	 *
 	 * @since 0.2
 	 *
@@ -182,7 +193,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::setId
+	 * Sets the ID.
+	 * Should only be set to something determined by the store and not by the user (to avoid duplicate IDs).
 	 *
 	 * @since 0.1
 	 *
@@ -207,7 +219,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::setLabel
+	 * Sets the value for the label in a certain value.
 	 *
 	 * @since 0.1
 	 *
@@ -222,7 +234,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::setDescription()
+	 * Sets the value for the description in a certain value.
 	 *
 	 * @since 0.1
 	 *
@@ -237,7 +249,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::removeLabel()
+	 * Removes the labels in the specified languages.
 	 *
 	 * @since 0.1
 	 *
@@ -248,7 +260,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::removeDescription()
+	 * Removes the descriptions in the specified languages.
 	 *
 	 * @since 0.1
 	 *
@@ -278,7 +290,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::getAliases()
+	 * Returns the aliases for the item in the language with the specified code.
 	 *
 	 * @since 0.1
 	 *
@@ -292,7 +304,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::getAllAliases()
+	 * Returns all the aliases for the item.
+	 * The result is an array with language codes pointing to an array of aliases in the language they specify.
 	 *
 	 * @since 0.1
 	 *
@@ -311,7 +324,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::setAliases()
+	 * Sets the aliases for the item in the language with the specified code.
 	 *
 	 * @since 0.1
 	 *
@@ -323,7 +336,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::addAliases()
+	 * Add the provided aliases to the aliases list of the item in the language with the specified code.
+	 * TODO: decide on how to deal with duplicates
 	 *
 	 * @since 0.1
 	 *
@@ -341,7 +355,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::removeAliases()
+	 * Removed the provided aliases from the aliases list of the item in the language with the specified code.
 	 *
 	 * @since 0.1
 	 *
@@ -359,7 +373,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::getDescriptions()
+	 * Returns the descriptions of the entity in the provided languages.
 	 *
 	 * @since 0.1
 	 *
@@ -372,7 +386,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::getLabels()
+	 * Returns the labels of the entity in the provided languages.
 	 *
 	 * @since 0.1
 	 *
@@ -385,7 +399,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::getDescription()
+	 * Returns the description of the entity in the language with the provided code,
+	 * or false in cases there is none in this language.
 	 *
 	 * @since 0.1
 	 *
@@ -399,7 +414,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::getLabel()
+	 * Returns the label of the entity in the language with the provided code,
+	 * or false in cases there is none in this language.
 	 *
 	 * @since 0.1
 	 *
@@ -460,7 +476,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::isEmpty()
+	 * Returns if the entity is empty.
 	 *
 	 * @since 0.1
 	 *
@@ -523,7 +539,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::getUndoDiff
+	 * Returns a diff representing an undo action for the changes made between
+	 * the two provided entities against the entity itself.
 	 *
 	 * @since 0.1
 	 *
@@ -548,7 +565,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::copy()
+	 * Returns a deep copy of the entity.
 	 *
 	 * @since 0.1
 	 *
@@ -570,7 +587,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::stub
+	 * Stubs the entity as far as possible.
+	 * This is useful when one wants to conserve memory.
 	 *
 	 * @since 0.2
 	 */
@@ -588,7 +606,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::getTerms
+	 * Returns all the labels, descriptions and aliases as Term objects.
 	 *
 	 * @since 0.2
 	 *
@@ -766,7 +784,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::hasClaims
+	 * Convenience function to check if the entity contains any claims.
 	 *
 	 * On top of being a convenience function, this implementation allows for doing
 	 * the check without forcing an unstub in contrast to count( $this->getClaims() ).
@@ -785,29 +803,36 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * @see Entity::newClaim
+	 * Returns a new Claim with the provided Snak as main snak.
 	 *
+	 * @since 0.3
+	 *
+	 * @param Snak $mainSnak
+	 * @param GuidGenerator|null $guidGenerator
+	 *
+	 * @return Claim
+	 */
+	public final function newClaim( Snak $mainSnak, GuidGenerator $guidGenerator = null ) {
+		$claim = $this->newClaimBase( $mainSnak );
+
+		if ( $guidGenerator === null ) {
+			$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $this->getId() );
+		}
+
+		$claim->setGuid( $guidGenerator->newGuid() );
+
+		return $claim;
+	}
+
+	/**
 	 * @since 0.3
 	 *
 	 * @param Snak $mainSnak
 	 *
 	 * @return Claim
 	 */
-	public function newClaim( Snak $mainSnak ) {
-		$claim = new ClaimObject( $mainSnak );
-		$claim->setGuid( $this->newClaimGuid() );
-		return $claim;
-	}
-
-	/**
-	 * @see Entity::newClaimGuid
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public final function newClaimGuid() {
-		return $this->getPrefixedId() . '$' . Utils::getGuid();
+	protected function newClaimBase( Snak $mainSnak ) {
+		return new ClaimObject( $mainSnak );
 	}
 
 	/**

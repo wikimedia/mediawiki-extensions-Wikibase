@@ -82,7 +82,7 @@ interface Claim extends \Hashable, \Serializable {
 	 *
 	 * @since 0.2
 	 *
-	 * @return string|null
+	 * @return string|
 	 */
 	public function getGuid();
 
