@@ -143,8 +143,12 @@ class PollForChanges extends \Maintenance {
 				__METHOD__
 			);
 
-			$dbw->delete( 'wbc_items_per_site', '*', __METHOD__ );
-			$dbw->delete( 'wbc_entity_cache', '*', __METHOD__ );
+			$cacheTables = array( 'wbc_items_per_site', 'wbc_entity_cache' );
+			foreach( $cacheTables as $cacheTable ) {
+				if ( $dbw->tableExists( $cacheTable ) ) {
+					$dbw->delete( $cacheTable, '*', __METHOD__ );
+				}
+			}
 		}
 
 		while ( !$this->done ) {
