@@ -219,7 +219,7 @@ class ExternalChangesList {
 	protected static function diffLink( $url, $text, $attribs = array() ) {
 		// build a diff link from an RC
 		$attribs['href'] = $url;
-		return \Html::rawElement( 'a', $attribs, $text );
+		return \Html::element( 'a', $attribs, $text );
 	}
 
 	/**
@@ -233,7 +233,7 @@ class ExternalChangesList {
 	 */
 	protected static function historyLink( $url, $text, $attribs = array() ) {
 		$attribs['href'] = $url;
-		return \Html::rawElement( 'a', $attribs, $text );
+		return \Html::element( 'a', $attribs, $text );
 	}
 
 	/**
