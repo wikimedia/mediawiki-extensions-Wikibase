@@ -221,7 +221,7 @@ final class LibHooks {
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.eachchange.tests.js',
 
-				'tests/qunit/jquery.ui/jquery.ui.inputAutoExpand.tests.js',
+				'tests/qunit/jquery/jquery.inputAutoExpand.tests.js',
 				'tests/qunit/jquery.ui/jquery.ui.suggester.tests.js',
 				'tests/qunit/jquery.ui/jquery.ui.entityselector.tests.js',
 				'tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js',
