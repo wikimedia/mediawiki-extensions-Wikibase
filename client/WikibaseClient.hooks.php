@@ -367,7 +367,7 @@ final class ClientHooks {
 		if ( $rcType == RC_EXTERNAL ) {
 			$params = unserialize( $rc->getAttribute( 'rc_params' ) );
 			if ( array_key_exists( 'wikibase-repo-change', $params ) ) {
-				$line = ExternalChangesList::changesLine( $changesList, $rc );
+				$line = ExternalChangesLine::changesLine( $changesList, $rc );
 				if ( $line == false ) {
 					return false;
 				}

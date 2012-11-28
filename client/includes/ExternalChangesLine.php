@@ -2,11 +2,34 @@
 
 namespace Wikibase;
 
-// TODO: watched pages should be bold in RC
-// TODO: Pages which have been changed since you last visited them are shown in bold
-// TODO: document
-
-class ExternalChangesList {
+/**
+ * Generates a changes line for including changes from the Wikibase repo in
+ * the client's recent changes, watchlist and related changes special pages.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * @since 0.3
+ *
+ * @file
+ * @ingroup WikibaseClient
+ *
+ * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
+ */
+class ExternalChangesLine {
 
 	/**
 	 * Generates a recent change line
@@ -82,33 +105,9 @@ class ExternalChangesList {
 			}
 		}
 
-		$cl->insertTimestamp( $line, $rc );
-
-		if ( \User::isIP( $userName ) ) {
-			$userlinks = self::userContribsLink( $userName, $userName );
-			$userlinks .= wfMessage( 'word-separator' )->plain()
-				. wfMessage( 'parentheses' )->rawParams( self::userTalkLink( $userName ) )->text();
-		} else {
-			$userlinks = self::userLink( $userName );
-			$usertools = array(
-				self::userTalkLink( $userName ),
-				self::userContribsLink( $userName )
-			);
-
-			$userlinks .= wfMessage( 'word-separator' )->plain()
-				. '<span class="mw-usertoollinks">'
-				. wfMessage( 'parentheses' )->rawParams( $cl->getLanguage()->pipeList( $usertools ) )->text()
-				. '</span>';
-		}
-
-		$line .= $userlinks;
-
-		if ( array_key_exists( 'comment', $entityData  ) ) {
-			$commentText = self::parseComment( $entityData );
-		} else {
-			$commentText = '';
-		}
-		$line .= \Linker::commentBlock( $commentText );
+		$line .= self::getTimestamp( $cl, $rc );
+		$line .= self::userLinks( $cl, $userName );
+		$line .= self::getComment( $entityData );
 
 		return $line;
 	}
@@ -168,6 +167,31 @@ class ExternalChangesList {
 	/**
 	 * @since 0.2
 	 *
+	 * @param array $entityData
+	 *
+	 * @return string
+	 */
+	public static function getComment( $entityData ) {
+		if ( array_key_exists( 'comment', $entityData  ) ) {
+			$commentText = self::parseComment( $entityData );
+		} else {
+			$commentText = '';
+		}
+		return \Linker::commentBlock( $commentText );
+	}
+
+	/**
+	 * @param $rc RecentChange
+	 */
+	public static function getTimestamp( $cl, $rc ) {
+		return wfMessage( 'semicolon-separator' )->text() . '<span class="mw-changeslist-date">' .
+			$cl->getLanguage()->userTime( $rc->mAttribs['rc_timestamp'], $cl->getUser() )
+			. '</span> <span class="mw-changeslist-separator">. .</span> ';
+	}
+
+	/**
+	 * @since 0.3
+	 *
 	 * @param string $titleText
 	 * @param array $entityData
 	 * @param \RecentChange $rc
@@ -184,7 +208,7 @@ class ExternalChangesList {
 				'query' => array(
 					'type' => 'index',
 					'params' => array(
-						'title' => $entityTitle,
+						'title' => $titleText,
 						'curid' => $entityData['page_id'],
 						'diff' => $entityData['rev_id'],
 						'oldif' => $entityData['parent_id']
@@ -203,7 +227,7 @@ class ExternalChangesList {
 	 * @return string
 	 */
 	protected static function historyLink( $titleText, $entityData ) {
-		return ClientUtils::repoLink(
+		$link = ClientUtils::repoLink(
 			null,
 			wfMessage( 'hist' )->text(),
 			array(
@@ -211,13 +235,14 @@ class ExternalChangesList {
 				'query' => array(
 					'type' => 'index',
 					'params' =>  array(
-						'title' => $entityTitle,
+						'title' => $titleText,
 						'curid' => $entityData['page_id'],
 						'action' => 'history'
 					)
 				)
 			)
 		);
+		return $link;
 	}
 
 	/**
@@ -240,6 +265,7 @@ class ExternalChangesList {
 	 * @return string
 	 */
 	protected static function userLink( $userName ) {
+		// @todo: localise this once namespaces are localised on the repo
 		$link = "User:$userName";
 		$attribs = array(
 			 'class' => 'mw-userlink'
@@ -256,6 +282,8 @@ class ExternalChangesList {
 	 * @return string
 	 */
 	protected static function userContribsLink( $userName, $text = null ) {
+		// @todo: know how the repo is localised. it's english now
+		// for namespaces and special pages
 		$link = "Special:Contributions/$userName";
 		if ( $text === null ) {
 			$text = wfMessage( 'contribslink' );
@@ -271,9 +299,38 @@ class ExternalChangesList {
 	 * @return string
 	 */
 	protected static function userTalkLink( $userName ) {
+		// @todo: localize this once we can localize namespaces on the repo
 		$link = "User_talk:$userName";
 		$text = wfMessage( 'talkpagelinktext' )->text();
 		return ClientUtils::repoLink( $link, $text );
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param \ChangesList $cl
+	 * @param string $userName
+	 *
+	 * @return string
+	 */
+	public static function userLinks( $cl, $userName ) {
+		if ( \User::isIP( $userName ) ) {
+			$userlinks = self::userContribsLink( $userName, $userName );
+			$userlinks .= wfMessage( 'word-separator' )->plain()
+				. wfMessage( 'parentheses' )->rawParams( self::userTalkLink( $userName ) )->text();
+		} else {
+			$userlinks = self::userLink( $userName );
+			$usertools = array(
+				self::userTalkLink( $userName ),
+				self::userContribsLink( $userName )
+			);
+
+			$userlinks .= wfMessage( 'word-separator' )->plain()
+				. '<span class="mw-usertoollinks">'
+				. wfMessage( 'parentheses' )->rawParams( $cl->getLanguage()->pipeList( $usertools ) )->text()
+				. '</span>';
+		}
+		return $userlinks;
 	}
 
 	/**
