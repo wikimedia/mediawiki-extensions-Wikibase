@@ -656,9 +656,6 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 		$p = '/';
 
 		foreach ( $path as $key ) {
-//			if (!array_key_exists($key,$obj)) {
-//				q($response);
-//			}
 			$this->assertArrayHasKey( $key, $obj, "Expected key $key under path $p in the response." );
 
 			$obj = $obj[ $key ];
