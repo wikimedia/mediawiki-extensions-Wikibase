@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX///l8\u003d",
+        "filename": "lib/tests/phpunit/changes/ChangeRowTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T13:48:00Z",
+      "side": 1,
+      "message": "spacing",
+      "revId": "640776e32ad61ad8bab2b3e5b113eed8fc0af0ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///l4\u003d",
+        "filename": "lib/tests/phpunit/changes/ChangeRowTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T13:48:00Z",
+      "side": 1,
+      "message": "spacing",
+      "revId": "640776e32ad61ad8bab2b3e5b113eed8fc0af0ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
