@@ -51,6 +51,10 @@ h2.wb-section-heading {
 	border-radius: 0;
 }
 
+.wb-entity textarea {
+	font-family: inherit;
+}
+
 /* container for the value itself */
 .wb-value,
 .wb-gridhelper {

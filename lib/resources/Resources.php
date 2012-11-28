@@ -118,7 +118,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.utilities.jQuery',
-				'jquery.ui.inputAutoExpand',
+				'jquery.inputAutoExpand',
 				'jquery.ui.widget',
 				'jquery.effects.core',
 				'jquery.effects.blind'
@@ -191,7 +191,7 @@ return call_user_func( function() {
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
 				'wikibase.utilities.jQuery.ui.tagadata',
-				'jquery.ui.inputAutoExpand',
+				'jquery.inputAutoExpand',
 				'jquery.ui.suggester',
 				'jquery.ui.entityselector',
 				'jquery.wikibase.siteselector',
@@ -258,9 +258,9 @@ return call_user_func( function() {
 			)
 		),
 
-		'jquery.ui.inputAutoExpand' => $moduleTemplate + array(
+		'jquery.inputAutoExpand' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.ui/jquery.ui.inputAutoExpand.js',
+				'jquery/jquery.inputAutoExpand.js',
 			),
 			'dependencies' => array(
 				'jquery.eachchange'
