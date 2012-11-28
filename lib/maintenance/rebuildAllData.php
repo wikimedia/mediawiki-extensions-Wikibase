@@ -55,7 +55,7 @@ class RebuildAllData extends \Maintenance {
 			echo $message;
 		};
 
-		wfRunHooks( 'WikibaseRebuildData', array( $report ) );
+		wfRunHooks( 'WikibaseRebuildData' );
 
 		$report( <<<EOT
 

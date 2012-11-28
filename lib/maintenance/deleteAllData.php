@@ -55,7 +55,7 @@ class DeleteAllData extends \Maintenance {
 			echo $message;
 		};
 
-		wfRunHooks( 'WikibaseDeleteData', array( $report ) );
+		wfRunHooks( 'WikibaseDeleteData' );
 
 		$report( <<<EOT
 Some tasty bits there... omnomnom...

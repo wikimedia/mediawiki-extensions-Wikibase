@@ -93,21 +93,19 @@ final class ClientHooks {
 	 *
 	 * @since 0.2
 	 *
-	 * @param callable $reportMessage
-	 *
 	 * @return bool
 	 */
-	public static function onWikibaseDeleteData( $reportMessage ) {
+	public static function onWikibaseDeleteData() {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$store = ClientStoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
 
-		$reportMessage( "Deleting data from the " . $stores[get_class( $store )] . " store..." );
+		echo( "Deleting data from the " . $stores[get_class( $store )] . " store..." );
 
 		$store->clear();
 
-		$reportMessage( "done!\n" );
+		echo( "done!\n" );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
@@ -121,16 +119,16 @@ final class ClientHooks {
 	 *
 	 * @since 0.2
 	 *
-	 * @param callable $reportMessage
-	 *
 	 * @return bool
 	 */
-	public static function onWikibaseRebuildData( $reportMessage ) {
+	public static function onWikibaseRebuildData() {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$store = ClientStoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
-		$reportMessage( "Rebuilding all data in the " . $stores[get_class( $store )] . " store on the client..." );
+
+		echo( "Rebuilding all data in the " . $stores[get_class( $store )] . " store on the client..." );
+
 		$store->rebuild();
 		$changes = ChangesTable::singleton();
 		$changes = $changes->select(
@@ -140,7 +138,6 @@ final class ClientHooks {
 			__METHOD__
 		);
 		ChangeHandler::singleton()->handleChanges( iterator_to_array( $changes ) );
-		$reportMessage( "done!\n" );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;

@@ -582,21 +582,19 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param callable $reportMessage
-	 *
 	 * @return boolean
 	 */
-	public static function onWikibaseRebuildData( $reportMessage ) {
+	public static function onWikibaseRebuildData() {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$store = StoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBStores'] );
 
-		$reportMessage( 'Starting rebuild of the Wikibase repository ' . $stores[get_class( $store )] . ' store...' );
+		echo( 'Starting rebuild of the Wikibase repository ' . $stores[get_class( $store )] . ' store...' );
 
 		$store->rebuild();
 
-		$reportMessage( "done!\n" );
+		echo( "done!\n" );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
@@ -608,21 +606,19 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param callable $reportMessage
-	 *
 	 * @return boolean
 	 */
-	public static function onWikibaseDeleteData( $reportMessage ) {
+	public static function onWikibaseDeleteData() {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
-		$reportMessage( 'Deleting data from changes table...' );
+		echo( 'Deleting data from changes table...' );
 
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->delete( 'wb_changes', '*', __METHOD__ );
 
-		$reportMessage( "done!\n" );
+		echo( "done!\n" );
 
-		$reportMessage( 'Deleting revisions from Data NS...' );
+		echo( 'Deleting revisions from Data NS...' );
 
 		$namespaceList = $dbw->makeList(  Utils::getEntityNamespaces(), LIST_COMMA );
 
@@ -632,25 +628,25 @@ final class RepoHooks {
 			array( 'page_namespace IN ( ' . $namespaceList . ')' )
 		);
 
-		$reportMessage( "done!\n" );
+		echo( "done!\n" );
 
-		$reportMessage( 'Deleting pages from Data NS...' );
+		echo( 'Deleting pages from Data NS...' );
 
 		$dbw->delete(
 			'page',
 			array( 'page_namespace IN ( ' . $namespaceList . ')' )
 		);
 
-		$reportMessage( "done!\n" );
+		echo( "done!\n" );
 
 		$store = StoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBStores'] );
 
-		$reportMessage( 'Deleting data from the ' . $stores[get_class( $store )] . ' store...' );
+		echo( 'Deleting data from the ' . $stores[get_class( $store )] . ' store...' );
 
 		$store->clear();
 
-		$reportMessage( "done!\n" );
+		echo( "done!\n" );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
