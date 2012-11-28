@@ -30,6 +30,7 @@ use Wikibase\EntityContent;
  * @group Wikibase
  * @group WikibaseEntity
  * @group WikibaseContent
+ *
  * @group Database
  *
  * @licence GNU GPL v2+
@@ -264,6 +265,9 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	protected function prepareItemForPermissionCheck( $group, $permissions, $create ) {
 		global $wgUser;
+
+		// TODO: Figure out what is leaking the sysop group membership
+		$wgUser->removeGroup('sysop');
 
 		$content = $this->newEmpty();
 
