@@ -1,0 +1,361 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX///rc\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "if a wiki is using the DirectSqlStore, it should not install the cache tables in the schema update.",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///pQ\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "this can be simplified, such as\n\n$wgWBClientStores \u003d array(\n  \u0027CachingSqlStore\u0027 \u003d\u003e \u0027Wikibase\\CachingSqlStore\u0027,\n  \u0027DirectSqlStore\u0027 \u003d\u003e \u0027Wikibase\\DirectSqlStore\u0027\n);",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///pI\u003d",
+        "filename": "client/includes/EntityCacheUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "do an instanceof check here?",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///pA\u003d",
+        "filename": "client/includes/store/sql/CachingSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "please update this",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///ok\u003d",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "please update",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///og\u003d",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "update please and below for other methods",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///o4\u003d",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "using the RepoTable, we can eliminate passing the $this-\u003erepoWiki argument each time.\n\nif you really prefer this way, then suppose we can live with this and get rid of the RepoTable",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///os\u003d",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///oY\u003d",
+        "filename": "client/includes/store/sql/RepoTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "would be nicer not to have to define $repoDb all the time.",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///n8\u003d",
+        "filename": "client/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "please update",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///oA\u003d",
+        "filename": "client/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "@since 0.3",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///oM\u003d",
+        "filename": "lib/includes/entity/EntityFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "needs a @since",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///oI\u003d",
+        "filename": "lib/includes/entity/EntityFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "needs a @since",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///oQ\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "perhaps we have a SiteLinkLookup class, called something different than the interface and maybe move the SiteLinkRemoteTable thing here to serve that purpose.  Then the SiteLinkTable class could extend that with the write operations?\n\notherwise, this approach could work but the $readonly thing needs improvement.",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///sc\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "huh?  defaults to $wiki?",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///r0\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "suggest to default $readonly \u003d false",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///rw\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "ugh!",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///r8\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "read only should not have access to this!",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///ro\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "$ok \u003d wfGetDB( DB_MASTER ) ....",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///sA\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "read only mode should not have access to this",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX///oE\u003d",
+        "filename": "lib/resources/Resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-28T12:07:06Z",
+      "side": 1,
+      "message": "Suggest to not touch the js stuff in this patch and don\u0027t see where you renamed the file.",
+      "revId": "f7ecffc67e1f23ff41c2446f5abfcfccf65978cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
