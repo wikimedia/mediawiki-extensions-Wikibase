@@ -25,7 +25,9 @@ $wgAutoloadClasses['Wikibase\ApiRemoveClaims'] 			= $dir . 'includes/api/ApiRemo
 $wgAutoloadClasses['Wikibase\ApiSetClaimValue'] 		= $dir . 'includes/api/ApiSetClaimValue.php';
 $wgAutoloadClasses['Wikibase\ApiSetReference'] 			= $dir . 'includes/api/ApiSetReference.php';
 $wgAutoloadClasses['Wikibase\Api\RemoveReferences'] 	= $dir . 'includes/api/RemoveReferences.php';
+$wgAutoloadClasses['Wikibase\Api\SetQualifier'] 		= $dir . 'includes/api/SetQualifier.php';
 $wgAutoloadClasses['Wikibase\Api\SetStatementRank'] 	= $dir . 'includes/api/SetStatementRank.php';
+
 
 $wgAutoloadClasses['SpecialListDatatypes'] 				= $dir . 'includes/specials/SpecialListDatatypes.php';
 $wgAutoloadClasses['SpecialNewProperty'] 				= $dir . 'includes/specials/SpecialNewProperty.php';
@@ -43,4 +45,35 @@ $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 $wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
 
-$wgHooks['UnitTestsList'][] 						= 'Wikibase\RepoHooks::registerExperimentalUnitTests';
+/**
+ * Hook to add PHPUnit test cases.
+ * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
+ *
+ * @since 0.3
+ *
+ * @param array &$files
+ *
+ * @return boolean
+ */
+$wgHooks['UnitTestsList'][] = function( array &$files ) {
+	// @codeCoverageIgnoreStart
+	$testFiles = array(
+		'specials/SpecialEntityData',
+
+		'api/ApiCreateClaim',
+		'api/ApiGetClaims',
+		'api/ApiRemoveClaims',
+		'api/ApiSetClaimValue',
+		'api/ApiSetReference',
+		'api/RemoveReferences',
+		'api/SetStatementRank',
+		'api/SetQualifier',
+	);
+
+	foreach ( $testFiles as $file ) {
+		$files[] = __DIR__ . '/tests/phpunit/includes/' . $file . 'Test.php';
+	}
+
+	return true;
+	// @codeCoverageIgnoreEnd
+};

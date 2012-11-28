@@ -260,7 +260,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	public function getParamDescription() {
 		return array(
 			'entity' => 'Id of the entity you are adding the claim to',
-			'property' => 'Id of the property when creating a claim with a Snak',
+			'property' => 'Id of the snaks property',
 			'value' => 'Value of the snak when creating a claim with a snak that has a value',
 			'snaktype' => 'The type of the snak',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',

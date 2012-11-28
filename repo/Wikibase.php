@@ -134,6 +134,7 @@ $wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSet
 $wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabel.php';
 $wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
 
+
 // includes/content
 $wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/content/EntityContent.php';
 $wgAutoloadClasses['Wikibase\EntityContentFactory'] 	= $dir . 'includes/content/EntityContentFactory.php';
