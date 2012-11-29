@@ -44,8 +44,6 @@ class ExternalChangesList {
 			return false;
 		}
 
-		$repoIndex = str_replace( 'api.php', 'index.php', Settings::get( 'repoApi' ) );
-
 		$line = '';
 
 		if ( in_array( $changeType, array( 'remove', 'restore' ) ) ) {
@@ -59,42 +57,14 @@ class ExternalChangesList {
 				return false;
 			}
 
-			// build a diff link from an RC
-			$diffParams = array(
-				'title' => $entityTitle,
-				'curid' => $entityData['page_id'],
-				'diff' => $entityData['rev_id'],
-				'oldid' => $entityData['parent_id']
-			);
+			// build a diff link
+			$diffLink = self::diffLink( $entityTitle, $entityData, $rc );
 
-			$diffQuery = wfArrayToCgi( $diffParams );
-			$diffUrl = $repoIndex . '?' . $diffQuery;
-			$diffLink = self::diffLink(
-				$diffUrl,
-				wfMessage( 'diff' )->escaped(),
-				array(
-					'class' => 'plainlinks',
-					'tabindex' => $rc->counter
-				)
-			);
-
-			$historyQuery = wfArrayToCgi( array(
-				'title' => $entityTitle,
-				'curid' => $entityData['page_id'],
-				'action' => 'history'
-			) );
-			$historyUrl = $repoIndex . '?' . $historyQuery;
-
-			$historyLink = self::historyLink(
-				$historyUrl,
-				wfMessage( 'hist' )->escaped(),
-				array(
-					'class' => 'plainlinks'
-				)
-			);
+			// build history link
+			$historyLink = self::historyLink( $entityTitle, $entityData );
 
 			$line .= wfMessage( 'parentheses' )->rawParams(
-				$cl->getLanguage()->pipeList( array( $diffLink, $historyLink ) ) )->escaped();
+				$cl->getLanguage()->pipeList( array( $diffLink, $historyLink ) ) )->text();
 		} else {
 			wfDebug( 'Invalid Wikibase change type.' );
 			return false;
@@ -108,7 +78,7 @@ class ExternalChangesList {
 			$entityLink = self::entityLink( $entityData );
 			if ( $entityLink !== false ) {
 				$line .= wfMessage( 'word-separator' )->plain()
-				 . wfMessage( 'parentheses' )->rawParams( self::entityLink( $entityData ) )->escaped();
+				 . wfMessage( 'parentheses' )->rawParams( self::entityLink( $entityData ) )->text();
 			}
 		}
 
@@ -117,7 +87,7 @@ class ExternalChangesList {
 		if ( \User::isIP( $userName ) ) {
 			$userlinks = self::userContribsLink( $userName, $userName );
 			$userlinks .= wfMessage( 'word-separator' )->plain()
-				. wfMessage( 'parentheses' )->rawParams( self::userTalkLink( $userName ) )->escaped();
+				. wfMessage( 'parentheses' )->rawParams( self::userTalkLink( $userName ) )->text();
 		} else {
 			$userlinks = self::userLink( $userName );
 			$usertools = array(
@@ -127,7 +97,7 @@ class ExternalChangesList {
 
 			$userlinks .= wfMessage( 'word-separator' )->plain()
 				. '<span class="mw-usertoollinks">'
-				. wfMessage( 'parentheses' )->rawParams( $cl->getLanguage()->pipeList( $usertools ) )->escaped()
+				. wfMessage( 'parentheses' )->rawParams( $cl->getLanguage()->pipeList( $usertools ) )->text()
 				. '</span>';
 		}
 
@@ -196,6 +166,61 @@ class ExternalChangesList {
 	}
 
 	/**
+	 * @since 0.2
+	 *
+	 * @param string $titleText
+	 * @param array $entityData
+	 * @param \RecentChange $rc
+	 *
+	 * @return string
+	 */
+	protected static function diffLink( $titleText, $entityData, $rc ) {
+		return ClientUtils::repoLink(
+			null,
+			wfMessage( 'diff' )->text(),
+			array(
+				'class' => 'plainlinks',
+				'tabindex' => $rc->counter,
+				'query' => array(
+					'type' => 'index',
+					'params' => array(
+						'title' => $titleText,
+						'curid' => $entityData['page_id'],
+						'diff' => $entityData['rev_id'],
+						'oldid' => $entityData['parent_id']
+					)
+				)
+			)
+		);
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @param string $titleText
+	 * @param array $entityData
+	 *
+	 * @return string
+	 */
+	protected static function historyLink( $titleText, $entityData ) {
+		return ClientUtils::repoLink(
+			null,
+			wfMessage( 'hist' )->text(),
+			array(
+				'class' => 'plainlinks',
+				'query' => array(
+					'type' => 'index',
+					'params' =>  array(
+						'title' => $titleText,
+						'curid' => $entityData['page_id'],
+						'action' => 'history'
+					)
+				)
+			)
+		);
+	}
+
+	/**
 	 * @since 0.3
 	 *
 	 * @param string $siteLang
@@ -205,35 +230,6 @@ class ExternalChangesList {
 	 */
 	protected static function wikiLink( $siteLang, $page ) {
 		return "[[:$siteLang:$page|$siteLang:$page]]";
-	}
-
-	/**
-	 * @since 0.2
-	 *
-	 * @param string $url
-	 * @param string $text
-	 * @param array $attribs
-	 *
-	 * @return string
-	 */
-	protected static function diffLink( $url, $text, $attribs = array() ) {
-		// build a diff link from an RC
-		$attribs['href'] = $url;
-		return \Html::element( 'a', $attribs, $text );
-	}
-
-	/**
-	 * @since 0.2
-	 *
-	 * @param string $url
-	 * @param string $text
-	 * @param array $attribs
-	 *
-	 * @return string
-	 */
-	protected static function historyLink( $url, $text, $attribs = array() ) {
-		$attribs['href'] = $url;
-		return \Html::element( 'a', $attribs, $text );
 	}
 
 	/**
@@ -276,7 +272,7 @@ class ExternalChangesList {
 	 */
 	protected static function userTalkLink( $userName ) {
 		$link = "User_talk:$userName";
-		$text = wfMessage( 'talkpagelinktext' )->escaped();
+		$text = wfMessage( 'talkpagelinktext' )->text();
 		return ClientUtils::repoLink( $link, $text );
 	}
 

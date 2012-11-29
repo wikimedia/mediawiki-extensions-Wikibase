@@ -311,11 +311,11 @@ final class ClientHooks {
 
 		if ( $itemId !== false ) {
 			$itemByTitle = 'Special:ItemByTitle/' . $globalId . '/' . $oldTitle->getDBkey();
-			$itemByTitleLink = ClientUtils::baseUrl() . $itemByTitle;
+			$itemByTitleLink = ClientUtils::repoArticleUrl( $itemByTitle );
 			$out = $movePage->getOutput();
 			$out->addModules( 'wikibase.client.page-move' );
 			$out->addHTML(
-				\Html::element(
+				\Html::rawElement(
 					'div',
 					array( 'id' => 'wbc-after-page-move',
 							'class' => 'plainlinks' ),
@@ -510,8 +510,13 @@ final class ClientHooks {
 				'namespaces' => array( NS_MAIN ),
 				'source' => array( 'dir' => __DIR__ . '/tests' ),
 				// temporary hack to provide default settings
+				// @todo: remove hack
 				'repoBase' => 'http://wikidata-test-repo.wikimedia.de/wiki/',
 				'repoApi' => 'http://wikidata-test-repo.wikimedia.de/w/api.php',
+				// @todo protocol relative urls!
+				'repoUrl' => 'http://wikidata.org',
+				'repoScriptPath' => '/w',
+				'repoArticlePath' => "/wiki/$1",
 				'sort' => 'code',
 				'sortPrepend' => false,
 				'alwaysSort' => true,
@@ -577,12 +582,6 @@ final class ClientHooks {
 		$title = $skin->getContext()->getTitle();
 		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
 
-			$editUrl = Settings::get( 'repoBase' );
-			if( !$editUrl ) {
-				wfProfileOut( "Wikibase-" . __METHOD__ );
-				return true;
-			}
-
 			$title = $skin->getContext()->getTitle();
 
 			// gets the main part of the title, no underscores used in this db table
@@ -591,6 +590,7 @@ final class ClientHooks {
 			// main part of title for building link
 			$titleLink = $title->getPartialURL();
 			$siteId = Settings::get( 'siteGlobalID' );
+			$editUrl = ClientUtils::repoArticleUrl( "Special:ItemByTitle/$siteId/$titleLink" );
 
 			$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink( $siteId, $titleText );
 
