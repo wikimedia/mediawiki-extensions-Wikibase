@@ -45,6 +45,12 @@ class SetStatementRank extends \Wikibase\Api {
 	// TODO: rights
 	// TODO: conflict detection
 
+	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
+		//NOTE: need to declare this constructor, so old PHP versions don't use the
+		//      setStatementRank() function as the constructor.
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	}
+
 	/**
 	 * @see ApiBase::execute
 	 *

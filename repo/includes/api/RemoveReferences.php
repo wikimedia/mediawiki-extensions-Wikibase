@@ -41,6 +41,12 @@ use Wikibase\References;
  */
 class RemoveReferences extends \Wikibase\Api {
 
+	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
+		//NOTE: need to declare this constructor, so old PHP versions don't use the
+		//      removeReferences() function as the constructor.
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	}
+
 	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
