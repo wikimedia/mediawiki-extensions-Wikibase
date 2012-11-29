@@ -17,6 +17,7 @@ $messages = array();
  * @author Tobias Gritschacher
  * @author John Erling Blad
  * @author Jens Ohlig
+ * @author Anja Jentzsch
  */
 $messages['en'] = array(
 	'wikibase-desc' => 'Structured data repository',
@@ -151,6 +152,7 @@ $messages['en'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Language:',
 	'wikibase-entitieswithoutlabel-submit' => 'Find',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" is not a valid language code.',
+	'special-entitydata' => 'Entity Data',
 	'wikibase-entitydata-not-found' => "No entity with ID $1 was found.",
 	'wikibase-entitydata-unsupported-format' => "The data format $1 is not supported by this interface.",
 	'wikibase-entitydata-title' => 'Entity Data',
@@ -814,6 +816,7 @@ $messages['ca'] = array(
  * @author Kghbln
  * @author Metalhead64
  * @author Nipsky
+ * @author Anja Jentzsch
  */
 $messages['de'] = array(
 	'wikibase-desc' => 'Ermöglicht ein Repositorium strukturierter Daten',
@@ -938,6 +941,7 @@ $messages['de'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Sprache:',
 	'wikibase-entitieswithoutlabel-submit' => 'Suchen',
 	'wikibase-entitieswithoutlabel-invalid-language' => '„$1“ ist kein gültiger Sprachcode.',
+	'special-entitydata' => 'Objektdaten','
 	'wikibase-entitydata-not-found' => 'Es wurde kein Objekt mit der Kennung $1 gefunden.',
 	'wikibase-entitydata-unsupported-format' => 'Das Datenformat $1 wird von dieser Schnittstelle nicht unterstützt.',
 	'wikibase-entitydata-title' => 'Objektdaten',
@@ -1460,6 +1464,7 @@ $messages['es'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Idioma:',
 	'wikibase-entitieswithoutlabel-submit' => 'Encontrar',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" no es un código de idioma válido.',
+	'special-entitydata' => 'Datos de la entidad',
 	'wikibase-entitydata-not-found' => 'No se encontró ninguna entidad con identificador ID $1.',
 	'wikibase-entitydata-unsupported-format' => 'El formato de datos $1 no es compatible con esta interfaz.',
 	'wikibase-entitydata-title' => 'Datos de la entidad',
@@ -1967,6 +1972,7 @@ $messages['fr'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Langue&nbsp;:',
 	'wikibase-entitieswithoutlabel-submit' => 'Rechercher',
 	'wikibase-entitieswithoutlabel-invalid-language' => "« $1 » n'est pas un code de langue valide.",
+	'special-entitydata' => 'Données d’entité',
 	'wikibase-entitydata-not-found' => 'Aucune entité avec l’ID « $1 » n’a été trouvée',
 	'wikibase-entitydata-unsupported-format' => 'Le format de données $1 n’est pas pris en charge par cette interface.',
 	'wikibase-entitydata-title' => 'Données d’entité',
@@ -2204,6 +2210,7 @@ $messages['gl'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Lingua:',
 	'wikibase-entitieswithoutlabel-submit' => 'Buscar',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" non é un código de lingua válido.',
+	'special-entitydata' => 'Datos da entidade',
 	'wikibase-entitydata-not-found' => 'Non se atopou entidade ningunha co ID $1.',
 	'wikibase-entitydata-unsupported-format' => 'Esta interface non soporta o formato de datos "$1".',
 	'wikibase-entitydata-title' => 'Datos da entidade',
@@ -2572,6 +2579,7 @@ $messages['hsb'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Rěč:',
 	'wikibase-entitieswithoutlabel-submit' => 'Pytać',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" płaćiwy rěčny kod njeje.',
+	'special-entitydata' => 'Entitowe daty',
 	'wikibase-entitydata-not-found' => 'Entita z ID $1 njeje so namakała.',
 	'wikibase-entitydata-unsupported-format' => 'Datowy format $1 so přez tutón wužiwarski powjerch njepodpěruje.',
 	'wikibase-entitydata-title' => 'Entitowe daty',
@@ -2796,6 +2804,7 @@ $messages['ilo'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Pagsasao:',
 	'wikibase-entitieswithoutlabel-submit' => 'Biruken',
 	'wikibase-entitieswithoutlabel-invalid-language' => 'Ti "$1" ket saan nga umiso a kodigo ti pagsasao.',
+	'special-entitydata' => 'Datos ti entidad',
 	'wikibase-entitydata-not-found' => 'Awan ti nabirukan nga entidad nga adda ti ID ti $1.',
 	'wikibase-entitydata-unsupported-format' => 'Ti pormat ti datos ti $1 ket saan a masuportaran babaen ti daytoy nga interface.',
 	'wikibase-entitydata-title' => 'Datos ti entidad',
@@ -2970,6 +2979,7 @@ $messages['is'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Tungumál:',
 	'wikibase-entitieswithoutlabel-submit' => 'Finna',
 	'wikibase-entitieswithoutlabel-invalid-language' => '„$1” er ógildur tungumálakóði.',
+	'special-entitydata' => 'Færslugögn',
 	'wikibase-entitydata-not-found' => 'Engin færsla með auðkenninu $1 fannst.',
 	'wikibase-entitydata-unsupported-format' => 'Gagnagerðin $1 er ekki studd af þessu viðmóti.',
 	'wikibase-entitydata-title' => 'Færslugögn',
@@ -3151,6 +3161,7 @@ $messages['it'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Lingua:',
 	'wikibase-entitieswithoutlabel-submit' => 'Trova',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" non è un codice di lingua valido.',
+	'special-entitydata' => "Dati dell'entità",
 	'wikibase-entitydata-not-found' => "Non è stata trovata nessun'entità avente ID $1.",
 	'wikibase-entitydata-unsupported-format' => "Il formato dati $1 non è supportato dall'interfaccia.",
 	'wikibase-entitydata-title' => "Dati dell'entità",
@@ -4254,6 +4265,7 @@ $messages['nl'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Taal:',
 	'wikibase-entitieswithoutlabel-submit' => 'Zoeken',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" is geen geldige taalcode.',
+	'special-entitydata' => 'Entiteitsgegevens',
 	'wikibase-entitydata-title' => 'Entiteitsgegevens',
 	'wikibase-api-patch-incomplete' => 'De gemaakte wijziging was incompleet.',
 	'wikibase-restoreold' => 'opnieuw instellen',
