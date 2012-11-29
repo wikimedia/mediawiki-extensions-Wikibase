@@ -51,8 +51,9 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	 * @param String|bool $wiki           The name of thw wiki database to use, in a form
 	 *                                    that wfGetLB() understands. Use false to indicate the local wiki.
 	 * @param bool        $cacheType      The cache type ID for the cache to use for
-	 *                                    caching entities in memory. False per default (no caching).
-	 *                                    Set it to $wgMainCacheType and friends to enable caching.
+	 *                                    caching entities in memory. Defaults to $wgMainCacheType.
+	 *                                    Set it to false to disable caching, or specify a different
+	 *                                    cache type using the CACHE_XXX constants.
 	 *                                    Note that the $wiki parameter determines the cache compartment,
 	 *                                    so multiple wikis loading entities from the same repository
 	 *                                    will share the cache.
@@ -61,8 +62,12 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	 *
 	 * @return \Wikibase\WikiPageEntityLookup
 	 */
-	public function __construct( $wiki = false, $cacheType = false, $cacheKeyPrefix = "wbentity" ) {
+	public function __construct( $wiki = false, $cacheType = null, $cacheKeyPrefix = "wbentity" ) {
 		parent::__construct( $wiki );
+
+		if ( $cacheType === null ) {
+			$cacheType = $GLOBALS[ 'wgMainCacheType' ];
+		}
 
 		$this->cacheType = $cacheType; //FIXME: take from Settings: defaultEntityCache 
 		$this->cacheKeyPrefix = $cacheKeyPrefix;
@@ -114,7 +119,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			$cached = $cache->get( $cacheKey );
 
 			if ( $cached ) {
-				list( $cachedEntity, $cachedRev ) = $cached;
+				list( $cachedRev, $cachedEntity ) = $cached;
 
 				if ( $revision && $revision == $cachedRev) {
 					wfProfileOut( __METHOD__ );
@@ -181,7 +186,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 
 		if ( $row = $res->fetchObject() ) {
 
-			if ( $row->rev_id === $cachedRev ) {
+			if ( $cachedRev !== false && intval( $row->rev_id ) === intval( $cachedRev ) ) {
 				// the revision we loaded is the cached one, use the cached entity
 				wfProfileOut( __METHOD__ );
 				return $cachedEntity;
@@ -195,7 +200,15 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 		// cacheable if it's the latest revision.
 		if ( $cache && $row && $entity
 			&& $row->page_latest === $row->rev_id ) {
-			$cache->add( $cacheKey, array( $row->rev_id, $entity ) );
+
+			if ( $cachedRev !== false ) {
+				$cache->replace( $cacheKey, array( $row->rev_id, $entity ) );
+			} else {
+				$cache->add( $cacheKey, array( $row->rev_id, $entity ) );
+			}
+		} else if ( $cachedRev !== false ) {
+			// no longer the latest version
+			$cache->delete( $cacheKey );
 		}
 
 		wfProfileOut( __METHOD__ );
