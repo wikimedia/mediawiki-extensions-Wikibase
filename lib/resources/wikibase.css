@@ -337,7 +337,7 @@ div.wb-claim .wb-claim-property {
 }
 
 /* Container for the claim contents */
-div.wb-claim-content-container {
+div.wb-claim-mainsnak {
 	position: relative;
 	float: right;
 	margin-left: 15em;
@@ -346,7 +346,11 @@ div.wb-claim-content-container {
 	word-wrap: break-word;
 }
 
-div.wb-claim-content {
+div.wb-mainsnak .wb-snak-property {
+	display: none;
+}
+
+div.wb-snak {
 	padding: 10px;
 }
 

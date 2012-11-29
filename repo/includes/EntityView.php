@@ -357,11 +357,16 @@ abstract class EntityView extends \ContextSource {
 					$additionalCssClasses .= 'wb-last ';
 				}
 
+				$mainSnakHtml = wfTemplate( 'wb-snak',
+					'wb-mainsnak',
+					$propertyLink,
+					( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value )
+				);
+
 				$propertyHtml .= wfTemplate( 'wb-claim',
 					$additionalCssClasses,
 					$propertyId,
-					$propertyLink,
-					( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value ),
+					$mainSnakHtml,
 					$this->getHtmlForEditSection( $entity, $lang, 'span' )
 				);
 			}
@@ -372,7 +377,6 @@ abstract class EntityView extends \ContextSource {
 			$propertyHtml .= wfTemplate( 'wb-claim',
 				$additionalCssClasses,
 				$propertyId,
-				$propertyLink,
 				'&nbsp;',
 				$this->getHtmlForEditSection( $entity, $lang, 'span', 'add' )
 			);
