@@ -63,24 +63,25 @@ HTML;
 </div>
 HTML;
 
-	// TODO: this has to be more in sync with needs in JS widget structure.
-	// (1) .wb-claim-content should probably be replaced with its child node
-	// (2) .wb-claim-property-container should go, the main snaks property is put into
-	//     '.wb-claim-mainsnak > $4 > ...' by the responsible widget
 	$templates['wb-claim'] =
 <<<HTML
 <div class="wb-claim-container $1">
 	<div class="wb-claim wb-claim-$2">
-		<div class="wb-claim-property-container">
-			<div class="wb-claim-property" dir="auto">$3</div>
-		</div>
-		<div class="wb-claim-content-container">
-			<div class="wb-claim-content" dir="auto">
-				<div class="wb-claim-mainsnak">$4</div>
-			</div>
+		<div class="wb-claim-mainsnak" dir="auto">
+			$3 <!-- wb-snak (Main Snak) -->
 		</div>
 	</div>
-	<div class="wb-claim-toolbar">$5</div> <!-- edit section -->
+	<div class="wb-claim-toolbar">$4</div> <!-- edit section -->
+</div>
+HTML;
+
+	$templates['wb-snak'] =
+// This template is not only used for PropertyValueSnak Snaks but also for other Snaks without a
+// value which may display some message in the value node.
+<<<HTML
+<div class="wb-snak $1">
+	<div class="wb-snak-property" dir="auto">$2</div>
+	<div class="wb-snak-value" dir="auto">$3</div>
 </div>
 HTML;
 
