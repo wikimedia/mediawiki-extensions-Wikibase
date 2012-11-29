@@ -97,7 +97,7 @@ final class ClientHooks {
 	 *
 	 * @since 0.2
 	 *
-	 * @param callable $reportMessage
+	 * @param callable $reportMessage // takes a string param and echos it
 	 *
 	 * @return bool
 	 */
@@ -125,7 +125,7 @@ final class ClientHooks {
 	 *
 	 * @since 0.2
 	 *
-	 * @param callable $reportMessage
+	 * @param callable $reportMessage // takes a string parameter and echos it
 	 *
 	 * @return bool
 	 */
