@@ -357,23 +357,28 @@ abstract class EntityView extends \ContextSource {
 					$additionalCssClasses .= 'wb-last ';
 				}
 
+				$mainSnakHtml = wfTemplate( 'wb-snak',
+					'wb-mainsnak',
+					$propertyLink,
+					( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value )
+				);
+
 				$propertyHtml .= wfTemplate( 'wb-claim',
 					$additionalCssClasses,
 					$propertyId,
-					$propertyLink,
-					( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value ),
+					$mainSnakHtml,
 					$this->getHtmlForEditSection( $entity, $lang, 'span' )
 				);
 			}
 
+			// add a new claim with this property
 			$additionalCssClasses = 'wb-claim-add';
 
-			// add a new claim with this property
 			$propertyHtml .= wfTemplate( 'wb-claim',
 				$additionalCssClasses,
 				$propertyId,
-				$propertyLink,
-				'&nbsp;',
+				// dummy snak to keep layout consistent
+				wfTemplate( 'wb-snak', '', '', '&nbsp;' ),
 				$this->getHtmlForEditSection( $entity, $lang, 'span', 'add' )
 			);
 
