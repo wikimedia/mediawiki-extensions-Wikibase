@@ -430,7 +430,7 @@ final class ClientHooks {
 	 */
 	public static function onParserAfterParse( \Parser &$parser, &$text, \StripState $stripState ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
-		global $wgLanguageCode;
+		global $wgLanguageCode, $wgArticlePath, $wgScriptPath;
 
 		$parserOutput = $parser->getOutput();
 
@@ -502,6 +502,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseDefaultSettings( array &$settings ) {
+		global $wgScriptPath, $wgArticlePath;
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$settings = array_merge(
@@ -515,8 +516,8 @@ final class ClientHooks {
 				'repoApi' => 'http://wikidata-test-repo.wikimedia.de/w/api.php',
 				// @todo protocol relative urls!
 				'repoUrl' => 'http://wikidata.org',
-				'repoScriptPath' => '/w',
-				'repoArticlePath' => "/wiki/$1",
+				'repoScriptPath' => $wgScriptPath,
+				'repoArticlePath' => $wgArticlePath,
 				'sort' => 'code',
 				'sortPrepend' => false,
 				'alwaysSort' => true,
