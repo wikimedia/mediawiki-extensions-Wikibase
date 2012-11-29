@@ -10,10 +10,21 @@ require_once( "$IP/extensions/Wikibase/lib/WikibaseLib.php");
 require_once( "$IP/extensions/Wikibase/client/WikibaseClient.php");
 
 // Base URL for building links to the repository.
-$wgWBSettings['repoBase'] = "http://repo.example.org/wiki/";
+// Assumes your wiki is setup as "http://repo.example.org/wiki/";
+$wgWBSettings['repoUrl'] = "http://repo.example.org";
 
-// Base URL for building API queries to the repo.
-$wgWBSettings['repoApi'] = "http://repo.example.org/w/api.php";
+// This setting is optional if you have the same type of setup for your
+// repo and client.  It will default to using the client's $wgArticlePath setting,
+// and if you do not have $wgArticlePath set anywhere, MediaWiki has a default for it.
+$wgWBSettings['repoArticlePath'] = "/wiki/$1";
+
+// Assuming your wiki is setup with such script path as "http://repo.example.org/w/api.php"
+// This should be the same as the $wgScriptPath setting if you have it set in your repo
+// If $wgScriptPath is not set, then MediaWiki assumes a default.
+//
+// If your client and repo are setup in the same way, then the below setting is optional
+// and will default to what you have $wgScriptPath set in the client.
+$wgWBSettings['repoScriptPath'] = "/w";
 
 // The global site ID by which this wiki is known on the repo.
 $wgWBSettings['siteGlobalID'] = "mywiki";
