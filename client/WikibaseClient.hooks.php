@@ -591,14 +591,13 @@ final class ClientHooks {
 			// main part of title for building link
 			$titleLink = $title->getPartialURL();
 			$siteId = Settings::get( 'siteGlobalID' );
-			$editUrl = ClientUtils::repoArticleUrl( "Special:ItemByTitle/$siteId/$titleLink" );
 
 			$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink( $siteId, $titleText );
 
 			if ( $itemId ) {
 				// links to the special page
 				$template->data['language_urls'][] = array(
-					'href' => rtrim( $editUrl, "/" ) . "/Special:ItemByTitle/$siteId/$titleLink",
+					'href' => ClientUtils::repoArticleUrl( "Special:ItemByTitle/$siteId/$titleLink" ),
 					'text' => wfMessage( 'wbc-editlinks' )->text(),
 					'title' => wfMessage( 'wbc-editlinkstitle' )->text(),
 					'class' => 'wbc-editpage',
