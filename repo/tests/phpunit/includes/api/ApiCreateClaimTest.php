@@ -24,7 +24,7 @@ use Wikibase\Entity;
  * @file
  * @since 0.3
  *
- * @ingroup WikibaseTest
+ * @ingroup WikibaseRepoTest
  *
  * @group API
  * @group Database

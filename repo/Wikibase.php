@@ -17,10 +17,17 @@
  */
 
 /**
- * This documentation group collects source code files belonging to Wikibase Client.
+ * This documentation group collects source code files belonging to Wikibase Repository.
  *
  * @defgroup WikibaseRepo Wikibase Repo
  * @ingroup Wikibase
+ */
+
+/**
+ * This documentation group collects source code files with tests for Wikibase Repository.
+ *
+ * @defgroup WikibaseRepoTest Tests for Wikibase Repo
+ * @ingroup WikibaseRepo
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -131,6 +138,8 @@ $wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSet
 $wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabel.php';
 $wgAutoloadClasses['Wikibase\ApiSetReference'] 			= $dir . 'includes/api/ApiSetReference.php';
 $wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
+$wgAutoloadClasses['Wikibase\Api\RemoveReferences'] 	= $dir . 'includes/api/RemoveReferences.php';
+$wgAutoloadClasses['Wikibase\Api\SetStatementRank'] 	= $dir . 'includes/api/SetStatementRank.php';
 
 // includes/content
 $wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/content/EntityContent.php';
@@ -204,6 +213,8 @@ $wgAPIModules['wbeditentity'] 						= 'Wikibase\ApiEditEntity';
 $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
 $wgAPIModules['wbsetreference'] 					= 'Wikibase\ApiSetReference';
 $wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
+$wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
+$wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
 
 
 // Special page registration

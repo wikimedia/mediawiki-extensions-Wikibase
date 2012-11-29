@@ -74,7 +74,6 @@ class ClaimSerializerTest extends SerializerBaseTest {
 					'snaktype' => 'novalue',
 					'property' => 'p42',
 				),
-				'qualifiers' => array(),
 				'type' => 'claim',
 			),
 		);
@@ -89,8 +88,6 @@ class ClaimSerializerTest extends SerializerBaseTest {
 					'snaktype' => 'novalue',
 					'property' => 'p42',
 				),
-				'qualifiers' => array(),
-				'references' => array(),
 				'rank' => 'normal',
 				'type' => 'statement',
 			),
