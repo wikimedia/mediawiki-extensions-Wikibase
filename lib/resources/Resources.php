@@ -318,12 +318,22 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.wikibase.claimlistview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.claimlistview.js'
+			),
+			'dependencies' => array(
+				'jquery.wikibase.claimview'
+			)
+		),
+
 		'jquery.wikibase.entityview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.entityview.js'
 			),
 			'dependencies' => array(
-				'jquery.wikibase.claimview'
+				'jquery.ui.widget',
+				'jquery.wikibase.claimlistview'
 			)
 		),
 
