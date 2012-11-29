@@ -139,9 +139,7 @@ final class RepoHooks {
 			'actions/EditEntityAction',
 
 			'api/ApiBotEdit',
-			'api/ApiCreateClaim',
 			'api/ApiEditPage',
-			'api/ApiGetClaims',
 			'api/ApiGetEntities',
 			'api/ApiLabel',
 			'api/ApiDescription',
@@ -149,9 +147,6 @@ final class RepoHooks {
 			'api/ApiPermissions',
 			'api/ApiSetAliases',
 			'api/ApiEditEntity',
-			'api/ApiRemoveClaims',
-			'api/ApiSetClaimValue',
-			'api/ApiSetReference',
 			'api/ApiSetSiteLink',
 
 			'content/EntityContentFactory',
@@ -178,6 +173,34 @@ final class RepoHooks {
 
 			'updates/ItemDeletionUpdate',
 			'updates/ItemModificationUpdate',
+		);
+
+		foreach ( $testFiles as $file ) {
+			$files[] = __DIR__ . '/tests/phpunit/includes/' . $file . 'Test.php';
+		}
+
+		return true;
+		// @codeCoverageIgnoreEnd
+	}
+
+	/**
+	 * Hook to add PHPUnit test cases.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
+	 *
+	 * @since 0.1
+	 *
+	 * @param array &$files
+	 *
+	 * @return boolean
+	 */
+	public static function registerExperimentalUnitTests( array &$files ) {
+		// @codeCoverageIgnoreStart
+		$testFiles = array(
+			'api/ApiCreateClaim',
+			'api/ApiGetClaims',
+			'api/ApiRemoveClaims',
+			'api/ApiSetClaimValue',
+			'api/ApiSetReference',
 		);
 
 		foreach ( $testFiles as $file ) {
