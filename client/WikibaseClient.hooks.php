@@ -79,6 +79,9 @@ final class ClientHooks {
 			'includes/EntityCacheUpdater',
 
 			'includes/store/EntityCacheTable',
+			'includes/store/CachingSqlStore',
+			'includes/store/DirectSqlStore',
+			'includes/store/WikiPageEntityLookup',
 		);
 
 		foreach ( $testFiles as $file ) {
@@ -165,61 +168,65 @@ final class ClientHooks {
 			return true;
 		}
 
-		$cacheUpdater = new EntityCacheUpdater();
-		$cacheUpdater->handleChange( $change );
-
-		if ( ! ( $change instanceof ItemChange ) ) {
-			//TODO: other kinds of changes need entirely different kind of handling.
-			return true;
+		if ( Settings::get( 'repoDatabase' ) === null ) {
+			// no direct access to the repo database, use local cache
+			$cacheUpdater = new EntityCacheUpdater();
+			$cacheUpdater->handleChange( $change );
 		}
 
-		/**
-		 * @var Item $item
-		 */
-		$item = $change->getEntity();
-		$siteGlobalId = Settings::get( 'siteGlobalID' );
-		$changeHandler = ClientChangeHandler::singleton();
+		// Invalidate local pages connected to a relevant data item.
+		// TODO: handle changes for foreign wikis (push to job queue).
+		// TODO: handle other kinds of entities!
+		if ( $change->getEntity() instanceof Item ) {
 
-		$pagesToUpdate = array();
+			/**
+			 * @var Item $item
+			 */
+			$item = $change->getEntity();
+			$siteGlobalId = Settings::get( 'siteGlobalID' );
+			$changeHandler = ClientChangeHandler::singleton();
 
-		// if something relevant about the entity changes, update
-		// the corresponding local page
-		if ( $changeHandler->changeNeedsRendering( $change ) ) {
-			$siteLink = $item->getSiteLink( $siteGlobalId );
+			$pagesToUpdate = array();
 
-			if ( $siteLink ) {
-				// we have a corresponding page on this wiki, so re-render it.
-				$pagesToUpdate[] = $siteLink->getPage();
+			// if something relevant about the entity changes, update
+			// the corresponding local page
+			if ( $changeHandler->changeNeedsRendering( $change ) ) {
+				$siteLink = $item->getSiteLink( $siteGlobalId );
+
+				if ( $siteLink ) {
+					// we have a corresponding page on this wiki, so re-render it.
+					$pagesToUpdate[] = $siteLink->getPage();
+				}
 			}
-		}
 
-		// if an item's sitelinks change, update the old and the new target
-		$siteLinkDiff = $change->getSiteLinkDiff();
-		$siteLinkDiffOp = isset( $siteLinkDiff[ $siteGlobalId ] )
-								? $siteLinkDiff[ $siteGlobalId ] : null;
+			// if an item's sitelinks change, update the old and the new target
+			$siteLinkDiff = $change->getSiteLinkDiff();
+			$siteLinkDiffOp = isset( $siteLinkDiff[ $siteGlobalId ] )
+									? $siteLinkDiff[ $siteGlobalId ] : null;
 
-		if ( $siteLinkDiffOp === null ) {
-			// no op
-		} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpAdd ) {
-			$pagesToUpdate[] = $siteLinkDiffOp->getNewValue(); // currently redundant, but keep for future reference
-		} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpRemove ) {
-			$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
-		} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpChange ) {
-			$pagesToUpdate[] = $siteLinkDiffOp->getNewValue(); // currently redundant, but keep for future reference
-			$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
-		} else {
-			wfWarn( "Unknown change operation: " . get_class( $siteLinkDiffOp )
-					. " (" . $siteLinkDiffOp->getType() . ")" );
-		}
+			if ( $siteLinkDiffOp === null ) {
+				// no op
+			} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpAdd ) {
+				$pagesToUpdate[] = $siteLinkDiffOp->getNewValue(); // currently redundant, but keep for future reference
+			} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpRemove ) {
+				$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
+			} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpChange ) {
+				$pagesToUpdate[] = $siteLinkDiffOp->getNewValue(); // currently redundant, but keep for future reference
+				$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
+			} else {
+				wfWarn( "Unknown change operation: " . get_class( $siteLinkDiffOp )
+						. " (" . $siteLinkDiffOp->getType() . ")" );
+			}
 
-		// purge all relevant pages
-		//
-		// @todo: instead of rerendering everything, schedule pages for different kinds
-		// of update, depending on how the entity was modified. E.g. changes to
-		// sitelinks could in theory be handled without re-parsing the page, but
-		// would still need to purge the squid cache.
-		foreach ( array_unique( $pagesToUpdate ) as $page ) {
-			self::updatePage( $page, $change, false );
+			// purge all relevant pages
+			//
+			// @todo: instead of rerendering everything, schedule pages for different kinds
+			// of update, depending on how the entity was modified. E.g. changes to
+			// sitelinks could in theory be handled without re-parsing the page, but
+			// would still need to purge the squid cache.
+			foreach ( array_unique( $pagesToUpdate ) as $page ) {
+				self::updatePage( $page, $change, false );
+			}
 		}
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
@@ -428,6 +435,7 @@ final class ClientHooks {
 		$parserOutput = $parser->getOutput();
 
 		// only run this once, for the article content and not interface stuff
+		//FIXME: this also runs for messages in EditPage::showEditTools! Ugh!
 		if ( ! $parser->getOptions()->getInterfaceMessage() ) {
 			$useRepoLinks = LangLinkHandler::useRepoLinks( $parser );
 
@@ -435,7 +443,7 @@ final class ClientHooks {
 
 				$repoLinkItems = array();
 
-				$repoLinks = LangLinkHandler::getEntityCacheLinks( $parser );
+				$repoLinks = LangLinkHandler::getEntityLinks( $parser );
 
 				if ( count( $repoLinks ) > 0 ) {
 					LangLinkHandler::suppressRepoLinks( $parser, $repoLinks );
@@ -511,7 +519,8 @@ final class ClientHooks {
 				'siteGroup' => 'wikipedia',
 				'injectRecentChanges' => true,
 				'showExternalRecentChanges' => true,
-				'defaultClientStore' => 'sqlstore',
+				'defaultClientStore' => null,
+				'repoDatabase' => null, // note: "false" means "local"!
 				// default for repo items in main namespace
 				'repoNamespaces' => array(
 					'wikibase-item' => '',

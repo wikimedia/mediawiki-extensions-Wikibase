@@ -1,9 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Test;
+use \Wikibase\EntityCacheTable;
+use \Wikibase\Entity;
 
 /**
- * Factory for obtaining a client store instance.
+ * Tests for the Wikibase\CachingSqlStore class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,41 +22,19 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @file
  * @since 0.1
  *
- * @file
  * @ingroup WikibaseClient
+ * @ingroup Test
+ *
+ * @group Wikibase
+ * @group WikibaseClient
+ * @group WikibaseEntityLookup
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-class ClientStoreFactory {
-
-	/**
-	 * Returns an instance of the default store, or an alternate store
-	 * if so specified with the $store argument.
-	 *
-	 * @since 0.1
-	 *
-	 * @param boolean $store
-	 *
-	 * @return ClientStore
-	 */
-	public static function getStore( $store = false ) {
-		global $wgWBClientStores;
-		$store = $store === false || !array_key_exists( $store, $wgWBClientStores ) ? Settings::get( 'defaultClientStore' ) : $store;
-
-		if ( !$store ) {
-			if ( Settings::get( 'repoDatabase' ) ) {
-				$store = 'DirectSqlStore';
-			} else {
-				$store = 'CachingSqlStore';
-			}
-		}
-
-		$class = $wgWBClientStores[$store];
-
-		return $class::singleton();
-	}
+class CachingSqlStoreTest extends \MediaWikiTestCase {
 
 }

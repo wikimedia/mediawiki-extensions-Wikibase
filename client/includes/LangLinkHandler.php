@@ -32,23 +32,26 @@ namespace Wikibase;
 class LangLinkHandler {
 
 	/**
-	 * Finds the corresponding item and fetches its links from the entity cache.
+	 * Finds the corresponding item and fetches its links from the entity.
 	 *
 	 * @since 0.1
 	 *
 	 * @param \Parser $parser
 	 * @return SiteLink[]
 	 */
-	public static function getEntityCacheLinks( \Parser $parser ) {
+	public static function getEntityLinks( \Parser $parser ) {
 		$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink(
 			Settings::get( 'siteGlobalID' ),
 			$parser->getTitle()->getFullText()
 		);
 
 		if ( $itemId !== false ) {
-			$item = ClientStoreFactory::getStore()->newEntityCache()->getItem( $itemId );
+			$id = new EntityId( Item::ENTITY_TYPE, $itemId );
 
-			if ( $item !== false ) {
+			/* @var Item $item */
+			$item = ClientStoreFactory::getStore()->newEntityLookup()->getEntity( $id );
+
+			if ( $item !== null ) {
 				return $item->getSiteLinks();
 			}
 		}

@@ -40,13 +40,13 @@ interface ClientStore {
 	public function newSiteLinkTable();
 
 	/**
-	 * Returns a new EntityCache for this store.
+	 * Returns a new EntityLookup for this store.
 	 *
 	 * @since 0.1
 	 *
-	 * @return EntityCache
+	 * @return EntityLookup
 	 */
-	public function newEntityCache();
+	public function newEntityLookup();
 
 	/**
 	 * Removes all data from the store.
