@@ -30,6 +30,7 @@ use Wikibase\EntityContent;
  * @group Wikibase
  * @group WikibaseEntity
  * @group WikibaseContent
+ *
  * @group Database
  *
  * @licence GNU GPL v2+
@@ -39,38 +40,18 @@ use Wikibase\EntityContent;
  */
 abstract class EntityContentTest extends \MediaWikiTestCase {
 
-	protected $permissions;
-	protected $userGroups;
-
 	function setUp() {
 		global $wgGroupPermissions, $wgUser;
 
 		parent::setUp();
-
-		$this->permissions = $wgGroupPermissions;
-		$this->userGroups = $wgUser->getGroups();
+		$this->setMwGlobals(
+			array(
+				'wgGroupPermissions' => $wgGroupPermissions,
+				'wgUser' => $wgUser
+			)
+		);
 
 		\TestSites::insertIntoDb();
-	}
-
-	function tearDown() {
-		global $wgGroupPermissions, $wgUser;
-
-		$wgGroupPermissions = $this->permissions;
-
-		$userGroups = $wgUser->getGroups();
-
-		foreach ( array_diff( $this->userGroups, $userGroups ) as $group ) {
-			$wgUser->addGroup( $group );
-		}
-
-		foreach ( array_diff( $userGroups, $this->userGroups ) as $group ) {
-			$wgUser->removeGroup( $group );
-		}
-
-		$wgUser->getEffectiveGroups( true ); // recache
-
-		parent::tearDown();
 	}
 
 	public function dataGetTextForSearchIndex() {
@@ -264,6 +245,9 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	protected function prepareItemForPermissionCheck( $group, $permissions, $create ) {
 		global $wgUser;
+
+		// TODO: Figure out what is leaking the sysop group membership
+		$wgUser->removeGroup('sysop');
 
 		$content = $this->newEmpty();
 

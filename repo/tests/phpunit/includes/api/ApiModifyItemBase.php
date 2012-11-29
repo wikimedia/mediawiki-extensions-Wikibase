@@ -88,7 +88,10 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	}
 
 	public function setUp() {
+		global $wgUser;
 		parent::setUp();
+
+		$this->setMwGlobals( array( 'wgUser' => $wgUser ) );
 
 		$this->init();
 
