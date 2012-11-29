@@ -151,6 +151,7 @@ $messages['en'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Language:',
 	'wikibase-entitieswithoutlabel-submit' => 'Find',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" is not a valid language code.',
+	'special-entitydata' => 'Entity Data',
 	'wikibase-entitydata-not-found' => "No entity with ID $1 was found.",
 	'wikibase-entitydata-unsupported-format' => "The data format $1 is not supported by this interface.",
 	'wikibase-entitydata-title' => 'Entity Data',
