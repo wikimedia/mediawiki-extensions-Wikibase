@@ -92,9 +92,9 @@ class SortUtils {
 
 	/**
 	 * Build sort order to be used by compareLinks().
-	 * Returns true if build was successful, or fals if not ('none' or unknown sort order). 
+	 * Returns true if build was successful, or fals if not ('none' or unknown sort order).
 	 *
-	 * @version $orderAlphabetic from 
+	 * @version $orderAlphabetic from
 	 *  http://meta.wikimedia.org/w/index.php?title=MediaWiki:Interwiki_config-sorting_order-native-languagename&oldid=3398113
 	 *
 	 * @version $orderAlphabeticRevised

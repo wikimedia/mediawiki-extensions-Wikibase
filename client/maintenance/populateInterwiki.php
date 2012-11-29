@@ -4,7 +4,7 @@ namespace Wikibase;
 use Http, FormatJSON, Maintenance, Exception;
 
 /**
- * Maintenance script that populates the interwiki table with list of sites 
+ * Maintenance script that populates the interwiki table with list of sites
  * as exists on Wikipedia, so interwiki links render properly.
  *
  * @since 0.1
@@ -108,7 +108,7 @@ TEXT;
 				array( 'iw_prefix' => $d['prefix'] ),
 				__METHOD__
 			);
-		
+
 			if ( ! $row ) {
 				$dbw->insert(
 					'interwiki',
@@ -121,7 +121,7 @@ TEXT;
 				);
 			}
 		}
- 		
+
 		$this->output( "Interwiki links are populated.\n" );
 
 		return true;
