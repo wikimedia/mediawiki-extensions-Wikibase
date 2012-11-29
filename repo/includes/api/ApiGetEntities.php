@@ -299,8 +299,8 @@ class ApiGetEntities extends Api {
 			=> "Get item with ID $exampleId with language attributes in all available languages",
 			"api.php?action=wbgetentities&ids=$exampleId&languages=en"
 			=> "Get item with ID $exampleId with language attributes in English language",
-			'api.php?action=wbgetentities&sites=en&titles=Berlin&languages=en'
-			=> 'Get the item for page "Berlin" on the site "en", with language attributes in English language',
+			'api.php?action=wbgetentities&sites=enwiki&titles=Berlin&languages=en'
+			=> 'Get the item for page "Berlin" on the site "enwiki", with language attributes in English language',
 		);
 	}
 
