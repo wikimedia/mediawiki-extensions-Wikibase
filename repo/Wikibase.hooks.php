@@ -280,8 +280,10 @@ final class RepoHooks {
 	) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
-		// Bail out if we are not in an entity namespace
-		if ( !$content || !in_array( $content->getModel(), EntityContentFactory::singleton()->getEntityContentModels() ) ) {
+		$entityContentFactory = EntityContentFactory::singleton();
+
+		// Bail out if we are not looking at an entity
+		if ( !$content || !$entityContentFactory->isEntityContentModel( $wikiPage->getContentModel() ) ) {
 			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
@@ -322,6 +324,7 @@ final class RepoHooks {
 
 		$entityContentFactory = EntityContentFactory::singleton();
 
+		// Bail out if we are not looking at an entity
 		if ( !$entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
 			return true;
 		}
@@ -330,6 +333,8 @@ final class RepoHooks {
 		$content = $entityContentFactory->getFromRevision( $revId );
 
 		if ( $content ) {
+			StoreFactory::getStore()->newEntityPerPage()->addEntityContent( $content );
+
 			$entity = $content->getEntity();
 
 			$rev = Revision::newFromId( $revId );
