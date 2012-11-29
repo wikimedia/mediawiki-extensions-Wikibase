@@ -63,9 +63,6 @@ $wgGroupPermissions['wbeditor']['item-set'] = true;
 
 $wgSharedTables[] = 'wb_changes';
 
-// Turn on the bleeding edge by setting this to "true"
-$wgWBSettings['experimentalFeatures'] = true;
-
 /*
 // Alternative settings, using the main namespace for items.
 // Note: if you do that, several core tests may fail. Parser tests for instance
