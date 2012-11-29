@@ -38,6 +38,15 @@ use \Wikibase\Entity;
  */
 class EntityCacheTableTest extends \ORMTableTest {
 
+
+	public function setup() {
+		if ( \Wikibase\Settings::get( 'repoDatabase' ) !== null ) {
+			$this->markTestSkipped( "Cache is not usable if WikibaseClient is configured for direct access to the repo database" );
+		}
+
+		parent::setup();
+	}
+
 	/**
 	 * @see ORMTableTest::getRowClass
 	 * @since 0.1
@@ -117,25 +126,4 @@ class EntityCacheTableTest extends \ORMTableTest {
 		$this->assertFalse( $this->getTable()->hasEntity( $entity->getId() ) );
 		$this->assertTrue( $this->getTable()->deleteEntity( $entity->getId() ) );
 	}
-
-	/**
-	 * @dataProvider entityProvider
-	 *
-	 * @param \Wikibase\Entity $entity
-	 */
-	public function testUpdateEntity( Entity $entity ) {
-		$table = $this->getTable();
-
-		$this->assertTrue( $table->updateEntity( $entity ) );
-
-		$entity->setAliases( 'en', array( 'foobar' ) );
-
-		$this->assertTrue( $table->updateEntity( $entity ) );
-
-		//TODO: provide revision ID?!
-		$obtainedEntity = $table->getEntity( $entity->getId() );
-
-		$this->assertTrue( $entity->getDiff( $obtainedEntity )->isEmpty() );
-	}
-
 }

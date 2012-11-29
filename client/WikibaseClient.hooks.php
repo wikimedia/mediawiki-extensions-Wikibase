@@ -38,20 +38,22 @@ final class ClientHooks {
 		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
 			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
 
-			$updater->addExtensionTable(
-				'wbc_entity_cache',
-				__DIR__ . '/sql/WikibaseCache' . $extension
-			);
+			if ( Settings::get( 'repoDatabase' ) === null ) {
+				// if we don't have direct access to the repo database, set up local caches.
 
-			$updater->addExtensionTable(
-				'wbc_item_usage',
-				__DIR__ . '/sql/KillLocalItems.sql'
-			);
+				$updater->addExtensionTable(
+					'wbc_entity_cache',
+					__DIR__ . '/sql/WikibaseCache' . $extension
+				);
+			}
 
+			// TODO: re-enable this once we are actually tracking item usage, etc
+			/*
 			$updater->addExtensionTable(
 				'wbc_item_usage',
 				__DIR__ . '/sql/WikibaseClient' . $extension
 			);
+			*/
 		}
 		else {
 			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
