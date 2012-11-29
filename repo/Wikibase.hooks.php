@@ -148,6 +148,8 @@ final class RepoHooks {
 			'api/ApiSetAliases',
 			'api/ApiEditEntity',
 			'api/ApiSetSiteLink',
+			'api/RemoveReferences',
+			'api/SetStatementRank',
 
 			'content/EntityContentFactory',
 			'content/EntityHandler',
@@ -161,6 +163,7 @@ final class RepoHooks {
 			'specials/SpecialCreateItem',
 			'specials/SpecialItemDisambiguation',
 			'specials/SpecialItemByTitle',
+			'specials/SpecialEntityData',
 
 			'store/IdGenerator',
 			'store/StoreFactory',
@@ -195,15 +198,11 @@ final class RepoHooks {
 	public static function registerExperimentalUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
-			'specials/SpecialEntityData',
-
 			'api/ApiCreateClaim',
 			'api/ApiGetClaims',
 			'api/ApiRemoveClaims',
 			'api/ApiSetClaimValue',
 			'api/ApiSetReference',
-			'api/RemoveReferences',
-			'api/SetStatementRank',
 		);
 
 		foreach ( $testFiles as $file ) {
