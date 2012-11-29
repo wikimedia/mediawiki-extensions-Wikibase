@@ -332,7 +332,6 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.entityview.js'
 			),
 			'dependencies' => array(
-				'jquery.ui.widget',
 				'jquery.wikibase.claimlistview'
 			)
 		),
