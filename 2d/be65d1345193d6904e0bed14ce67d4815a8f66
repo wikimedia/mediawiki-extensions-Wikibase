@@ -1,0 +1,8 @@
+Change-Id: I2dbe65d1345193d6904e0bed14ce67d4815a8f66
+Code-Review+2: Jens Ohlig <jens.ohlig@wikimedia.de>
+Verified+1: Jens Ohlig <jens.ohlig@wikimedia.de>
+Submitted-by: Jens Ohlig <jens.ohlig@wikimedia.de>
+Submitted-at: Thu, 29 Nov 2012 14:28:39 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/35902
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
