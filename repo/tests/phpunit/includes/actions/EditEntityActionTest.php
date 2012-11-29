@@ -49,6 +49,19 @@ use Title;
  */
 class EditEntityActionTest extends ActionTestCase {
 
+	public function setup() {
+		parent::setup();
+
+		static $user = null;
+
+		if ( !$user ) {
+			$user = User::newFromId( 0 );
+			$user->setName( '127.0.0.1' );
+		}
+
+		$this->setMwGlobals( 'wgUser', $user );
+	}
+
 	public function testActionForPage() {
 		$page = $this->getTestItemPage( "Berlin" );
 
