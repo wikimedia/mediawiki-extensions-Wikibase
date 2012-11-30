@@ -170,7 +170,7 @@ class SqlStore implements Store {
 	 * @return SiteLinkCache
 	 */
 	public function newSiteLinkCache() {
-		return new SiteLinkTable( 'wb_items_per_site' );
+		return new SiteLinkTable( 'wb_items_per_site', false );
 	}
 
 	/**
