@@ -31,11 +31,11 @@ namespace Wikibase;
 interface ClientStore {
 
 	/**
-	 * Returns a new SiteLinkRemoteTable for this store.
+	 * Returns a new SiteLinkLookup for this store.
 	 *
 	 * @since 0.1
 	 *
-	 * @return SiteLinkRemoteTable
+	 * @return SiteLinkLookup
 	 */
 	public function newSiteLinkTable();
 
