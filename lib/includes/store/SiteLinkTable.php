@@ -73,8 +73,13 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @param string|null $function
 	 *
 	 * @return boolean Success indicator
+	 * @throws MWException
 	 */
 	public function saveLinksOfItem( Item $item, $function = null ) {
+		if ( $this->readonly ) {
+			throw new MWException( 'Cannot write when in readonly mode' );
+		}
+
 		$function = is_null( $function ) ? __METHOD__ : $function;
 
 		if ( is_null( $item->getId() ) ) {
@@ -137,8 +142,13 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @param string|null $function
 	 *
 	 * @return boolean Success indicator
+	 * @throws MWException
 	 */
 	public function deleteLinksOfItem( EntityId $itemId, $function = null ) {
+		if ( $this->readonly ) {
+			throw new MWException( 'Cannot write when in readonly mode' );
+		}
+
 		$dbw = wfGetDB( DB_MASTER );
 
 		$ok = $dbw->delete(
@@ -246,8 +256,13 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @since 0.2
 	 *
 	 * @return boolean Success indicator
+	 * @throws MWException
 	 */
 	public function clear() {
+		if ( $this->readonly ) {
+			throw new MWException( 'Cannot write when in readonly mode' );
+		}
+
 		$dbw = $this->getConnection( DB_MASTER );
 
 		$ok = $dbw->delete( $this->table, '*', __METHOD__ );
