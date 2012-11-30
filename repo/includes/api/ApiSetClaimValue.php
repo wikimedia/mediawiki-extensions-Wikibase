@@ -34,6 +34,7 @@ class ApiSetClaimValue extends Api {
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
+	// TODO: claim uniqueness
 
 	/**
 	 * @see ApiBase::execute

@@ -179,29 +179,13 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	protected function getSnakInstance() {
 		$params = $this->extractRequestParams();
 
-		$propertyId = EntityId::newFromPrefixedId( $params['property'] );
+		$factory = new SnakFactory();
 
-		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new MWException( 'Expected an EntityId of a property' );
-		}
-
-		switch ( $params['snaktype'] ) {
-			case 'value':
-				$snak = PropertyValueSnak::newFromPropertyValue( $propertyId, $params['value'] );
-				break;
-			case 'novalue':
-				$snak = new PropertyNoValueSnak( $propertyId );
-				break;
-			case 'somevalue':
-				$snak = new PropertySomeValueSnak( $propertyId );
-				break;
-		}
-
-		if ( !isset( $snak ) ) {
-			throw new MWException( '$snak was not set to an instance of Snak' );
-		}
-
-		return $snak;
+		return $factory->newSnak(
+			$params['property'],
+			$params['snaktype'],
+			isset( $params['value'] ) ? $params['value'] : null
+		);
 	}
 
 	/**
