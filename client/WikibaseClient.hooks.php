@@ -402,10 +402,16 @@ final class ClientHooks {
 	public static function onSpecialWatchlistQuery( array &$conds, array &$tables, array &$join_conds, array &$fields ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
+		$dbr = wfGetDB( DB_SLAVE );
+
 		$newConds = array();
 		foreach( $conds as $k => $v ) {
 			if ( $v ===  'rc_this_oldid=page_latest OR rc_type=3' ) {
-				$newConds[$k] = 'rc_this_oldid=page_latest OR rc_type=3 OR rc_type=5';
+				$where = array(
+					'rc_this_oldid' => 'page_latest',
+					'rc_type' => array( 3, 5 )
+				);
+				$newConds[$k] = $dbr->makeList( $where, LIST_OR );
 			} else {
 				$newConds[$k] = $v;
 			}
