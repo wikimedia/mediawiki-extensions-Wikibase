@@ -812,11 +812,11 @@ $messages['ca'] = array(
 );
 
 /** German (Deutsch)
+ * @author Anja Jentzsch
  * @author G.Hagedorn
  * @author Kghbln
  * @author Metalhead64
  * @author Nipsky
- * @author Anja Jentzsch
  */
 $messages['de'] = array(
 	'wikibase-desc' => 'Ermöglicht ein Repositorium strukturierter Daten',
@@ -4926,6 +4926,9 @@ $messages['ru'] = array(
 	'wikibase-item-summary-wbsetaliases-add-remove' => '{{plural:$1|Добавлено или удалено|Добавлены или удалены}} доп. назв. [$2]',
 	'wikibase-item-summary-wbsetaliases-add' => '{{plural:$1|Добавлено|Добавлены}} доп. назв. [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{plural:$1|Удалено|Удалены}} доп. назв. [$2]',
+	'wikibase-item-summary-wblinktitles-connect' => 'Установлена связь со {{plural:$1|страницей|страницами}} [$2↔$3]',
+	'wikibase-item-summary-special-create-item' => 'Создан элемент [$2] со {{plural:$1|значением|значениями}}',
+	'wikibase-property-summary-special-create-property' => 'Создано свойство [$2] со {{plural:$1|значением|значениями}}',
 	'content-model-wikibase-item' => 'Элемент репозитория Wikibase',
 	'content-model-wikibase-property' => 'Свойство элемента Wikibase',
 	'content-model-wikibase-query' => 'Запрос Wikibase',
