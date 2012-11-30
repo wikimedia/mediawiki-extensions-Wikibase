@@ -95,7 +95,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		parent::setUp();
 
-		$this->permissions = $wgGroupPermissions;
+ 		$this->permissions = $wgGroupPermissions;
 		$this->userGroups = $wgUser->getGroups();
 
 		if ( $wgTitle === null ) {
@@ -197,6 +197,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		/* @var $content \Wikibase\EntityContent */
 		/* @var $revision \Revision */
+
+		static $user = null;
+		if ( !$user ) {
+			$user = \User::newFromId( 0 );
+			$user->setName( '127.0.0.1' );
+		}
+		$this->setMwGlobals( 'wgUser', $user );
 
 		$revisions = self::getTestRevisions();
 
