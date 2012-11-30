@@ -139,7 +139,7 @@ abstract class EntityView extends \ContextSource {
 	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
 
 		$claims = '';
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) ) { // still experimental
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) { // still experimental
 			if ( $entity->getEntity()->getType() === 'item' ) {
 				$claims = $this->getHtmlForClaims( $entity, $lang, $editable );
 			}
