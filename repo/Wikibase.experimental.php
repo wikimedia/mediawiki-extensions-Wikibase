@@ -1,9 +1,17 @@
 <?php
 
 /**
- * Initialization file for EXPERIMENTAL features of the Wikibase extension.
+ * This file holds registration of experimental features part of the Wikibase extension.
  *
  * This file is NOT an entry point the Wikibase extension. Use Wikibase.php.
+ * It should furthermore not be included from outside the extension.
+ *
+ * @since 0.3
+ *
+ * @file
+ * @ingroup WikibaseRepo
+ *
+ * @licence GNU GPL v2+
  */
 
 if ( !defined( 'WB_VERSION' ) ) {
