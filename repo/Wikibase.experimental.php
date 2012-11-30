@@ -3,21 +3,12 @@
 /**
  * Initialization file for EXPERIMENTAL features of the Wikibase extension.
  *
- * This file can be included in LocalSettings.php instead of including Wikibase.php,
- * in case all experimental features should be enabled.
+ * This file is NOT an entry point the Wikibase extension. Use Wikibase.php.
  */
 
-if ( !defined( 'MEDIAWIKI' ) ) {
+if ( !defined( 'WB_VERSION' ) ) {
 	die( 'Not an entry point.' );
 }
-
-// include the regular wikibase stuff
-require_once( __DIR__ . '/Wikibase.php' );
-
-// include the experimental wikibase lib stuff
-require_once( __DIR__ . '/../lib/WikibaseLib.experimental.php' );
-
-// enable, register and/or configure experimental features here!
 $dir = __DIR__ . '/';
 
 $wgAutoloadClasses['Wikibase\ApiCreateClaim'] 			= $dir . 'includes/api/ApiCreateClaim.php';

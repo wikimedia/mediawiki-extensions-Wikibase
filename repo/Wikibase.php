@@ -242,4 +242,8 @@ $wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
 $wgWBStores = array();
 $wgWBStores['sqlstore'] = 'Wikibase\SqlStore';
 
+if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
+	include_once( $dir . 'Wikibase.experimental.php' );
+}
+
 unset( $dir );
