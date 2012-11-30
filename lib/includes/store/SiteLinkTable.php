@@ -51,15 +51,17 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @since 0.1
 	 *
 	 * @param string $table The table to use for the sitelinks
-	 * @param string|bool $wiki Thich wiki's database to connec to.
+	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
-	 * @param bool $readonly Whether the table can be modified. Defaults to $wiki, because
+	 * @param bool|null $readonly Whether the table can be modified. Defaults to $wiki, because
 	 *        only the local wiki's database should normally be modified.
 	 */
 	public function __construct( $table, $wiki = false, $readonly = null ) {
 		$this->table = $table;
 		$this->wiki = $wiki;
-		$this->readonly = $readonly === null ? $wiki : $readonly;
+		$this->readonly = $readonly === null ? $wiki === false : $readonly;
+
+		assert( is_bool( $this->readonly ) );
 	}
 
 	/**
