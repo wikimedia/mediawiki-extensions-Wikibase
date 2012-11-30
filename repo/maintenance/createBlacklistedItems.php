@@ -41,6 +41,11 @@ class CreatedBlacklistedItems extends \Maintenance {
 	}
 
 	public function execute() {
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
+			exit;
+		}
+
 		$report = function( $message ) {
 			echo $message . "\n";
 		};

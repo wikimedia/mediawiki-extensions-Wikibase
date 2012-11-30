@@ -41,6 +41,11 @@ TEXT;
 	}
 
 	public function execute() {
+		if ( !defined( 'WBC_VERSION' ) ) {
+			$this->output( "You need to have WikibaseClient enabled in order to use this maintenance script!\n\n" );
+			exit;
+		}
+
 		$force = $this->getOption( 'force', false );
 		$this->source = $this->getOption( 'source', 'https://en.wikipedia.org/w/api.php' );
 		$data = $this->fetchLinks();

@@ -44,6 +44,11 @@ class PopulateSitesTable extends \Maintenance {
 	}
 
 	public function execute() {
+		if ( !defined( 'WBL_VERSION' ) ) {
+			$this->output( "You need to have WikibaseLib enabled in order to use this maintenance script!\n\n" );
+			exit;
+		}
+
 		$stripProtocols = $this->getOption( 'strip-protocols' ) ? "stripProtocol" : false;
 		$wiki = $this->getOption( 'load-from', 'https://meta.wikimedia.org/w/api.php' );
 

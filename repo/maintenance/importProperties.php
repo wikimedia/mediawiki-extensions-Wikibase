@@ -44,6 +44,11 @@ class importProperties extends Maintenance {
 	}
 
 	public function execute() {
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
+			exit;
+		}
+
 		$this->verbose = (bool)$this->getOption( 'verbose' );
 		$this->ignore_errors = (bool)$this->getOption( 'ignore-errors' );
 		$this->skip = (int)$this->getOption( 'skip' );

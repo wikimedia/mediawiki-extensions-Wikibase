@@ -41,6 +41,11 @@ class DeleteAllData extends \Maintenance {
 	}
 
 	public function execute() {
+		if ( !defined( 'WBL_VERSION' ) ) {
+			$this->output( "You need to have WikibaseLib enabled in order to use this maintenance script!\n\n" );
+			exit;
+		}
+
 		$quick = $_SERVER['argc'] > 1 && $_SERVER['argv'][1] == '--yes-im-sure-maybe';
 
 		if ( !$quick ) {

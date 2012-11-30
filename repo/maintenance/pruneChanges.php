@@ -44,6 +44,11 @@ class PruneChanges extends Maintenance {
 	}
 
 	public function execute() {
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
+			exit;
+		}
+
 		$numDays = intval( $this->getOption( 'number-of-days', 7 ) );
 		$force = $this->getOption( 'force', false );
 		$pidfile = Utils::makePidFilename( 'WBpruneChanges', wfWikiID() );
