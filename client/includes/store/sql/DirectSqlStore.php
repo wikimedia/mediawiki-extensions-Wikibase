@@ -71,7 +71,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return SiteLinkLookup
 	 */
 	public function newSiteLinkTable() {
-		return new SiteLinkRemoteTable( 'wb_items_per_site', $this->repoWiki );
+		return new SiteLinkTable( 'wb_items_per_site', true, $this->repoWiki );
 	}
 
 	/**

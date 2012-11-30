@@ -33,7 +33,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider constructorProvider
 	 */
 	public function testConstructor( $tableName ) {
-		$instance = new SiteLinkTable( $tableName );
+		$instance = new SiteLinkTable( $tableName, false );
 
 		$this->assertTrue( true );
 
