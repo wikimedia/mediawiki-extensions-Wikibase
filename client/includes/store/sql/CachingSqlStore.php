@@ -56,7 +56,7 @@ class CachingSqlStore implements ClientStore {
 	 * @return SiteLinkLookup
 	 */
 	public function newSiteLinkTable() {
-		return new SiteLinkTable( 'wbc_items_per_site' );
+		return new SiteLinkTable( 'wbc_items_per_site', true );
 	}
 
 	/**
