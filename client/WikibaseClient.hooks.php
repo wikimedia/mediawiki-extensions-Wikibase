@@ -510,7 +510,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseDefaultSettings( array &$settings ) {
-		global $wgScriptPath, $wgArticlePath;
+		global $wgDBname, $wgScriptPath, $wgArticlePath;
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$settings = array_merge(
@@ -518,18 +518,13 @@ final class ClientHooks {
 			array(
 				'namespaces' => array( NS_MAIN ),
 				'source' => array( 'dir' => __DIR__ . '/tests' ),
-				// temporary hack to provide default settings
-				// @todo: remove hack
-				'repoBase' => 'http://wikidata-test-repo.wikimedia.de/wiki/',
-				'repoApi' => 'http://wikidata-test-repo.wikimedia.de/w/api.php',
-				// @todo protocol relative urls!
-				'repoUrl' => 'http://wikidata.org',
+				'repoUrl' => '//wikidata.org',
 				'repoScriptPath' => $wgScriptPath,
 				'repoArticlePath' => $wgArticlePath,
 				'sort' => 'code',
 				'sortPrepend' => false,
 				'alwaysSort' => true,
-				'siteGlobalID' => 'enwiki',
+				'siteGlobalID' => $wgDBname,
 				'siteGroup' => 'wikipedia',
 				'injectRecentChanges' => true,
 				'showExternalRecentChanges' => true,
