@@ -66,7 +66,7 @@ $messages['en'] = array(
 	'wikibase-aliases-input-help-message' => 'If this data set is known under more than one particular name, you may enter aliases and synonyms, so it can be found by its alternative names.',
 	'wikibase-aliases-empty' => 'No aliases defined.',
 	'wikibase-datatype-label' => 'Data type:',
-	'wikibase-snak-unsupporteddatatype' => 'Handling of values for "$1" data type ist not supported currently.',
+	'wikibase-snak-unsupporteddatatype' => 'Handling of values for "$1" data type is not supported currently.',
 
 	'wikibase-restrictionedit-tooltip-message' => 'This page is protected. Editing is not allowed.',
 	'wikibase-blockeduser-tooltip-message' => 'You are blocked from editing.',
@@ -1309,7 +1309,7 @@ $messages['eo'] = array(
 	'wikibase-restoreold' => 'restarigi',
 	'wikibase-restore-summary' => 'Restarigi version $1 de [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Rekta redakto estas malebligita en nomspaco $1',
-	'wikibase-noentity' => 'Ĉi tiu datumaro ne ekzistas. Vi povas 
+	'wikibase-noentity' => 'Ĉi tiu datumaro ne ekzistas. Vi povas
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} priserĉi la riltajn protokolojn]</span>
 por trovi de kie ĝi venis.',
 	'wikibase-noentity-createone' => 'vi ankaŭ povas [[$1|krei iun novan]].',
@@ -4717,8 +4717,8 @@ $messages['pt-br'] = array(
 	'wikibase-restoreold' => 'restaurar',
 	'wikibase-restore-summary' => 'Restaurar a revisão $1 por [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'A edição direta está desabilitada no domínio $1',
-	'wikibase-noentity' => 'Este conjunto de dados não existe. Você pode 
-<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} Pesquisar os logs relacionados]</span> 
+	'wikibase-noentity' => 'Este conjunto de dados não existe. Você pode
+<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} Pesquisar os logs relacionados]</span>
 para descobrir para onde ele foi.',
 	'wikibase-noentity-createone' => 'Você também pode [[$1|criar um novo]].',
 	'wikibase-item-summary-wbeditentity' => 'Criado um novo item',
@@ -4912,7 +4912,7 @@ $messages['ru'] = array(
 	'wikibase-restore-summary' => 'Восстановлена версия $1 с помощью [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'В пространстве имён «$1» отключено прямое редактирование',
 	'wikibase-noentity' => 'Такого набора данных не существует. Вы можете
-<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} поискать соответствующие записи в журналах]</span>, 
+<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} поискать соответствующие записи в журналах]</span>,
 чтобы узнать, куда он делся.',
 	'wikibase-noentity-createone' => 'Вы также можете [[$1|создать его]].',
 	'wikibase-item-summary-wbeditentity' => 'Новый элемент создан',
