@@ -15,7 +15,7 @@ nell_afzh = "{{noexternallanglinks:af|zh}}"
 nell_itzhaf = "{{noexternallanglinks:it|zh|af}}"
 nell_none = "{{noexternallanglinks}}"
 local_langlink = "[[af:Jimmy Carter]]"
-item_description = "It's an American musician and singer-songwriter."
+item_description = generate_random_string(20)
 item_sitelinks = [["en", "Jimi Hendrix"], ["de", "Jimi Hendrix"], ["af", "Jimi Hendrix"], ["zh", "Jimi Hendrix"], ["it", "Jimi Hendrix"]]
 
 describe "Check client interwiki links" do
