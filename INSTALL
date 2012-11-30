@@ -5,3 +5,8 @@ This package contains three interrelated MediaWiki extensions:
 * Wikibase Client (in the subdirectory client)
 
 Installation instructions for each can be found in the INSTALL file in the given subdirectory.
+
+In order to enable experimental features for the extensions, put the below line before
+the inclusion of the extensions in your LocalSettings.php file:
+
+define( 'WB_EXPERIMENTAL_FEATURES', true );
