@@ -115,7 +115,7 @@ end
 
 RSpec::Core::RakeTask.new(:client_repo) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = '../repo/tests/selenium/client/client_repo_spec.rb'
+  spec.pattern = '../client/tests/selenium/interwiki/client_repo_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:undo) do |spec|
