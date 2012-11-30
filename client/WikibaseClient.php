@@ -78,7 +78,6 @@ $wgAutoloadClasses['Wikibase\EntityLookup'] 		= $dir . 'includes/store/EntityLoo
 $wgAutoloadClasses['Wikibase\CachingSqlStore'] 		= $dir . 'includes/store/sql/CachingSqlStore.php';
 $wgAutoloadClasses['Wikibase\DirectSqlStore'] 		= $dir . 'includes/store/sql/DirectSqlStore.php';
 $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/EntityCacheTable.php';
-$wgAutoloadClasses['Wikibase\RepoTable'] 			= $dir . 'includes/store/sql/RepoTable.php';
 $wgAutoloadClasses['Wikibase\WikiPageEntityLookup'] = $dir . 'includes/store/sql/WikiPageEntityLookup.php';
 
 // Hooks
