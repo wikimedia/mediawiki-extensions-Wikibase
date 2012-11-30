@@ -22,6 +22,7 @@ $messages['en'] = array(
 	'wbc-desc' => 'Client for the Wikibase extension',
 	'wbc-after-page-move' => 'You may also [$1 update] the associated Wikidata item to maintain language links on moved page.',
 	'wbc-comment-remove' => 'Associated Wikidata item deleted. Language links removed.',
+	'wbc-comment-linked' => 'A Wikidata item has been linked to this page.',
 	'wbc-comment-unlink' => 'This page has been unlinked from Wikidata item. Language links removed.',
 	'wbc-comment-restore' => 'Associated Wikidata item undeleted. Language links restored.',
 	'wbc-comment-update' => 'Language links updated.',
@@ -43,6 +44,7 @@ $messages['qqq'] = array(
 	'wbc-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfuly move, inviting user to update associated Wikibase repo item to maintain language links on the moved page on the client.
 * Parameter $1 is the link for the associated Wikibase item.',
 	'wbc-comment-remove' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item connected to a page gets deleted. This results in all the language links being removed from the page on the client.',
+	'wbc-comment-linked' => 'Autocomment message in the client for when a Wikidata item is linked to a page in the client.',
 	'wbc-comment-unlink' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a site link to a page gets removed. This results in the associated item being disconnected from the client page and all the language links being removed.',
 	'wbc-comment-restore' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item gets undeleted and has a site link to this page. Language links get readded to the client page.',
 	'wbc-comment-update' => 'Autocomment message for client (e.g. Wikipedia) recent changes when site links for a linked Wikidata item get changed. This results in language links being updated on the client page.',
