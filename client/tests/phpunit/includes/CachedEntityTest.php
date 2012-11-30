@@ -39,6 +39,10 @@ use Wikibase\Property;
 class CachedEntityTest extends \ORMRowTest {
 
 	public function setup() {
+		if ( \Wikibase\Settings::get( 'repoDatabase' ) !== null ) {
+			$this->markTestSkipped( "Cache is not usable if WikibaseClient is configured for direct access to the repo database" );
+		}
+
 		parent::setup();
 
 		// reset the table.
@@ -88,9 +92,24 @@ class CachedEntityTest extends \ORMRowTest {
 	 * @dataProvider constructorTestProvider
 	 */
 	public function testGetEntity( array $data, $loadDefaults ) {
+		if ( \Wikibase\Settings::get( 'repoDatabase' ) !== null ) {
+			$this->markTestSkipped( "Cache is not usable if WikibaseClient is configured for direct access to the repo database" );
+		}
+
 		$cachedEntity = $this->getRowInstance( $data, $loadDefaults );
 
 		$this->assertInstanceOf( '\Wikibase\Entity', $cachedEntity->getEntity() );
+	}
+
+	/**
+	 * @dataProvider constructorTestProvider
+	 */
+	public function testSave( array $data, $loadDefaults ) {
+		if ( \Wikibase\Settings::get( 'repoDatabase' ) !== null ) {
+			$this->markTestSkipped( "Cache is not usable if WikibaseClient is configured for direct access to the repo database" );
+		}
+
+		parent::testSave( $data, $loadDefaults );
 	}
 
 }
