@@ -21,7 +21,7 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.3
  *
  * @file
  * @ingroup WikibaseClient
@@ -34,7 +34,7 @@ class CachingSqlStore implements ClientStore {
 	/**
 	 * @see Store::singleton
 	 *
-	 * @since 0.1
+	 * @since 0.3
 	 *
 	 * @return Store
 	 */
@@ -51,7 +51,7 @@ class CachingSqlStore implements ClientStore {
 	/**
 	 * @see Store::newSiteLinkTable
 	 *
-	 * @since 0.1
+	 * @since 0.3
 	 *
 	 * @return SiteLinkRemoteTable
 	 */
@@ -62,7 +62,7 @@ class CachingSqlStore implements ClientStore {
 	/**
 	 * Returns a new EntityCache instance
 	 *
-	 * @since 0.1
+	 * @since 0.3
 	 *
 	 * @return EntityCache
 	 */
@@ -75,7 +75,7 @@ class CachingSqlStore implements ClientStore {
 	 *
 	 * @see Store::newEntityLookup
 	 *
-	 * @since 0.1
+	 * @since 0.3
 	 *
 	 * @return EntityCache
 	 */
@@ -92,14 +92,14 @@ class CachingSqlStore implements ClientStore {
 		$this->newEntityCache()->clear();
 
 		$tables = array(
-				'wbc_item_usage',
-				'wbc_query_usage',
+			'wbc_item_usage',
+			'wbc_query_usage',
 		);
 
 		$dbw = wfGetDB( DB_MASTER );
 
 		foreach ( $tables as $table ) {
-				$dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
+			$dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
 		}
 	}
 

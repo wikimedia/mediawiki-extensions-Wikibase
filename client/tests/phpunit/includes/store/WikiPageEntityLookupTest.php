@@ -1,8 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\EntityCacheTable;
-use \Wikibase\Entity;
 use \Wikibase\EntityId;
 use \Wikibase\WikiPageEntityLookup;
 
@@ -25,7 +23,7 @@ use \Wikibase\WikiPageEntityLookup;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.1
+ * @since 0.3
  *
  * @ingroup WikibaseClient
  * @ingroup Test
