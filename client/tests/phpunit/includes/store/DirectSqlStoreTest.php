@@ -1,8 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\EntityCacheTable;
-use \Wikibase\Entity;
 
 /**
  * Tests for the Wikibase\DirectSqlStore class.
@@ -23,7 +21,7 @@ use \Wikibase\Entity;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.1
+ * @since 0.3
  *
  * @ingroup WikibaseClient
  * @ingroup Test

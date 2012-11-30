@@ -26,7 +26,7 @@ use Wikibase\Query;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.2
+ * @since 0.3
  *
  * @ingroup WikibaseLib
  * @ingroup Test

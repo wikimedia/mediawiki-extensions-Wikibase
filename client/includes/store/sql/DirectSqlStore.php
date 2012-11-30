@@ -21,7 +21,7 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.3
  *
  * @file
  * @ingroup WikibaseClient
@@ -35,7 +35,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @see Store::singleton
 	 *
-	 * @since 0.1
+	 * @since 0.3
 	 *
 	 * @return Store
 	 */
@@ -56,6 +56,9 @@ class DirectSqlStore implements ClientStore {
 	 */
 	protected $repoWiki;
 
+	/**
+	 * @param $repoWiki
+	 */
 	public function __construct( $repoWiki ) {
 		$this->repoWiki = $repoWiki;
 	}
@@ -63,7 +66,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @see Store::newSiteLinkTable
 	 *
-	 * @since 0.1
+	 * @since 0.3
 	 *
 	 * @return SiteLinkLookup
 	 */
@@ -74,7 +77,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @see Store::newEntityLookup
 	 *
-	 * @since 0.1
+	 * @since 0.3
 	 *
 	 * @return EntityLookup
 	 */
@@ -85,7 +88,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * Does nothing.
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 */
 	public function clear() {
 		// noop
@@ -94,7 +97,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * Does nothing.
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 */
 	public function rebuild() {
 		$this->clear();

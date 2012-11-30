@@ -20,7 +20,7 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.3
  *
  * @file
  * @ingroup WikibaseClient
@@ -36,7 +36,7 @@ interface EntityLookup {
 	 * entity. If a $revision is given, the requested revision of the entity is loaded.
 	 * The the revision does not belong to the given entity, null is returned.
 	 *
-	 * @since 0.1
+	 * @since 0.3
 	 *
 	 * @param EntityID $entityId
 	 * @param int|bool $revision
