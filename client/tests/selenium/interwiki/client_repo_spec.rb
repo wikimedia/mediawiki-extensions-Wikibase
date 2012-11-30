@@ -196,6 +196,7 @@ describe "Check functionality of client-repo connection" do
       end
       on_page(DeleteItemPage) do |page|
         page.delete_item
+        sleep 1
       end
       on_page(ClientPage) do |page|
         page.navigate_to_article(article_title_a)
@@ -208,6 +209,7 @@ describe "Check functionality of client-repo connection" do
       end
       on_page(UndeleteItemPage) do |page|
         page.undelete_item(item_id)
+        sleep 1
       end
       on_page(ClientPage) do |page|
         page.navigate_to_article(article_title_a)
