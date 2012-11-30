@@ -610,7 +610,7 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param callable $reportMessage
+	 * @param callable $reportMessage // takes a string param and echos it
 	 *
 	 * @return boolean
 	 */
@@ -636,7 +636,7 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param callable $reportMessage
+	 * @param callable $reportMessage // takes a string param and echos it
 	 *
 	 * @return boolean
 	 */
