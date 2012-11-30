@@ -523,7 +523,7 @@ final class ClientHooks {
 				'repoBase' => 'http://wikidata-test-repo.wikimedia.de/wiki/',
 				'repoApi' => 'http://wikidata-test-repo.wikimedia.de/w/api.php',
 				// @todo protocol relative urls!
-				'repoUrl' => 'http://wikidata.org',
+				'repoUrl' => '//wikidata.org',
 				'repoScriptPath' => $wgScriptPath,
 				'repoArticlePath' => $wgArticlePath,
 				'sort' => 'code',
