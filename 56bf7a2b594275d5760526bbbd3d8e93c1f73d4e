@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//9bw\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-30T12:24:31Z",
+      "side": 1,
+      "message": "sprelling ejjoj, disables",
+      "revId": "56bf7a2b594275d5760526bbbd3d8e93c1f73d4e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
