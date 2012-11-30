@@ -32,15 +32,36 @@ use Wikibase\EntityId;
  */
 class ChangesTableTest extends \MediaWikiTestCase {
 
+	protected static $user = null;
+
+	public function setup() {
+		parent::setup();
+
+		if ( !self::$user ) {
+			self::$user = \User::newFromId( 0 );
+			self::$user->setName( '127.0.0.1' );
+		}
+
+		$this->setMwGlobals( 'wgUser', self::$user );
+	}
+
 	public function newFromArrayProvider() {
+		global $wgUser;
 		$id = new EntityId( Item::ENTITY_TYPE, 42 );
+
+		if ( !self::$user ) {
+			self::$user = \User::newFromId( 0 );
+			self::$user->setName( '127.0.0.1' );
+		}
+
+		$this->setMwGlobals( 'wgUser', self::$user );
 
 		return array(
 			array(
 				array(
 					'type' => 'wikibase-item~update',
 					'time' => '20120101000000',
-					'user_id' => $GLOBALS['wgUser']->getId(),
+					'user_id' => $wgUser->getId(),
 					'revision_id' => 9001,
 					'object_id' => $id->getPrefixedId(),
 					'info' => array(
@@ -54,7 +75,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 				array(
 					'type' => 'wikibase-item~update',
 					'time' => '20120101000000',
-					'user_id' => $GLOBALS['wgUser']->getId(),
+					'user_id' => $wgUser->getId(),
 					'revision_id' => 9001,
 					'object_id' => $id->getPrefixedId(),
 					'info' => array(
@@ -71,9 +92,11 @@ class ChangesTableTest extends \MediaWikiTestCase {
 	 * @dataProvider newFromArrayProvider
 	 */
 	public function testNewFromArray( array $data, $loadDefaults = false ) {
+		global $wgUser;
+
 		$change = ChangesTable::singleton()->newRow( $data, $loadDefaults );
 
-		$this->assertEquals( $GLOBALS['wgUser']->getId(), $change->getUser()->getId() );
+		$this->assertEquals( $wgUser->getId(), $change->getUser()->getId() );
 
 		foreach ( array( 'revision_id', 'object_id', 'user_id', 'type' ) as $field ) {
 			$this->assertEquals( $data[$field], $change->getField( $field ) );
