@@ -93,6 +93,11 @@ RSpec::Core::RakeTask.new(:recent_changes) do |spec|
   spec.pattern = '../repo/tests/selenium/special/recent_changes_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:contributions) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/special/contributions_spec.rb'
+end
+
 RSpec::Core::RakeTask.new(:language_selector) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/language_selector/language_selector_spec.rb'
