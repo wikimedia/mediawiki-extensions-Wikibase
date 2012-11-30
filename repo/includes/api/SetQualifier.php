@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Api;
+namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use MWException;
@@ -10,6 +10,8 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EditEntity;
+use Wikibase\Claim;
+use Wikibase\ClaimSerializer;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -39,7 +41,7 @@ use Wikibase\EditEntity;
  */
 class SetQualifier extends \Wikibase\Api {
 
-	// TODO: high level tests
+	// TODO: complete tests
 	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
@@ -57,12 +59,13 @@ class SetQualifier extends \Wikibase\Api {
 
 		$content = $this->getEntityContent();
 
-
-		$this->setQualifier(
+		$claim = $this->doSetQualifier(
 			$content->getEntity()
 		);
 
 		$this->saveChanges( $content );
+
+		$this->outputClaim( $claim );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
@@ -92,7 +95,12 @@ class SetQualifier extends \Wikibase\Api {
 			}
 		}
 
-		// TODO
+		if ( isset( $params['snaktype'] ) && $params['snaktype'] === 'value' && !isset( $params['value'] ) ) {
+			$this->dieUsage(
+				'When setting a qualifier that is a PropertyValueSnak, the value needs to be provided',
+				'setqualifier-value-required'
+			);
+		}
 	}
 
 	/**
@@ -119,11 +127,19 @@ class SetQualifier extends \Wikibase\Api {
 	 * @since 0.3
 	 *
 	 * @param Entity $entity
+	 *
+	 * @return Claim
 	 */
-	protected function setQualifier( Entity $entity ) {
+	protected function doSetQualifier( Entity $entity ) {
 		$params = $this->extractRequestParams();
 
-		// TODO
+		$claimGuid = $params['guid'];
+
+		if ( !$entity->getClaims()->hasClaimWithGuid( $claimGuid ) ) {
+			$this->dieUsage( 'No such claim', 'setqualifier-claim-not-found' );
+		}
+
+		$claim = $entity->getClaims()->getClaimWithGuid( $claimGuid );
 	}
 
 	/**
@@ -144,7 +160,7 @@ class SetQualifier extends \Wikibase\Api {
 			isset( $params['token'] ) ? $params['token'] : false
 		);
 
-		if ( !$status->isGood() ) {
+		if ( !$status->isOk() ) {
 			$this->dieUsage( 'Failed to save the change', 'save-failed' );
 		}
 
@@ -157,6 +173,22 @@ class SetQualifier extends \Wikibase\Api {
 				(int)$statusValue['revision']->getId()
 			);
 		}
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param Claim $claim
+	 */
+	protected function outputClaim( Claim $claim ) {
+		$serializer = new ClaimSerializer();
+		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
+
+		$this->getResult()->addValue(
+			null,
+			'claim',
+			$serializer->getSerialized( $claim )
+		);
 	}
 
 	/**
