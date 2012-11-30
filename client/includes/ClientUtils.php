@@ -36,7 +36,7 @@ final class ClientUtils {
 	public static function baseUrl() {
 		$baseUrl = Settings::get( 'repoUrl' );
 		$baseUrl = rtrim( $baseUrl, '/' );
-		return $baseUrl;
+		return wfExpandUrl( $baseUrl );
 	}
 
 	/**
