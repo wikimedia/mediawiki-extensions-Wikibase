@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//9Jg\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-30T17:32:31Z",
+      "side": 1,
+      "message": "perhaps have a checkReadOnle() function, so we don\u0027t have to maintain that error message in multiple places. Not really important, though.",
+      "revId": "e2e1ba298a18d48d354ab910fa268f072405e135",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
