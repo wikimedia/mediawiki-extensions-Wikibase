@@ -27,6 +27,15 @@ if ( version_compare( $wgVersion, '1.21c', '<' ) ) { // Needs to be 1.21c becaus
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.21 alpha or above.\n" );
 }
 
+// Include the WikibaseLib extension if that hasn't been done yet, since it's required for WikibaseClient to work.
+if ( !defined( 'WBL_VERSION' ) ) {
+	@include_once( __DIR__ . '/../lib/WikibaseLib.php' );
+}
+
+if ( !defined( 'WBL_VERSION' ) ) {
+	die( '<b>Error:</b> WikibaseClient depends on the <a href="https://www.mediawiki.org/wiki/Extension:WikibaseLib">WikibaseLib</a> extension.' );
+}
+
 define( 'WBC_VERSION', '0.3 alpha' );
 
 $wgExtensionCredits['other'][] = array(

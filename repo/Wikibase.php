@@ -43,7 +43,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 	@include_once( __DIR__ . '/../lib/WikibaseLib.php' );
 }
 
-if ( !defined( 'WBL_VERSION' ) ) { // No version constant to check against :/
+if ( !defined( 'WBL_VERSION' ) ) {
 	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:WikibaseLib">WikibaseLib</a> extension.' );
 }
 
