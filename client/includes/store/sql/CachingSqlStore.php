@@ -53,7 +53,7 @@ class CachingSqlStore implements ClientStore {
 	 *
 	 * @since 0.3
 	 *
-	 * @return SiteLinkRemoteTable
+	 * @return SiteLinkLookup
 	 */
 	public function newSiteLinkTable() {
 		return new SiteLinkTable( 'wbc_items_per_site' );
