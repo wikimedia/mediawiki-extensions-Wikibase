@@ -47,6 +47,11 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 	 * @return boolean
 	 */
 	public function doDBUpdates() {
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
+			exit;
+		}
+
 		StoreFactory::getStore( 'sqlstore' )->newTermCache()->rebuildSearchKey();
 		return true;
 	}
