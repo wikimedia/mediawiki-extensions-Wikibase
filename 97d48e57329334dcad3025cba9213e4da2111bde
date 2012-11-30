@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "AAADbX//9T4\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-30T13:53:04Z",
+      "side": 1,
+      "message": "So callers are forced to explicitly specify if they want it to be read-only or not. Callers know this, and it\u0027s thus better they specify it rather then relying on defaulting magic to work in the way they expect.",
+      "parentUuid": "AAADbX//9Ug\u003d",
+      "revId": "97d48e57329334dcad3025cba9213e4da2111bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADbX//9Uk\u003d",
         "filename": "lib/includes/store/SiteLinkTable.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2012-11-30T13:48:33Z",
       "side": 1,
       "message": "whitespace",
+      "revId": "97d48e57329334dcad3025cba9213e4da2111bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//9UE\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-30T13:53:04Z",
+      "side": 1,
+      "message": "where?",
+      "parentUuid": "AAADbX//9Uk\u003d",
       "revId": "97d48e57329334dcad3025cba9213e4da2111bde",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
