@@ -11,6 +11,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
+define( 'WB_EXPERIMENTAL_FEATURES', 1 );
+
 // include the regular wikibase stuff
 require_once( __DIR__ . '/WikibaseLib.php' );
 

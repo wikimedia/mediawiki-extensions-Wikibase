@@ -138,12 +138,8 @@ abstract class EntityView extends \ContextSource {
 	 */
 	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
 
-		// do not show statements for other entites than items yet
-		//      also: do not show statements at all unless we're adventureous
-		//      and $wgWBSettings['experimentalFeatures'] = true;
 		$claims = '';
-		$settings = $GLOBALS['wgWBSettings'];
-		if ( isset( $settings['experimentalFeatures'] ) && $settings['experimentalFeatures'] == true ) {
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) ) { // still experimental
 			if ( $entity->getEntity()->getType() === 'item' ) {
 				$claims = $this->getHtmlForClaims( $entity, $lang, $editable );
 			}
