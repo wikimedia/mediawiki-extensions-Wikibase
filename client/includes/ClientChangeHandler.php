@@ -107,6 +107,8 @@ class ClientChangeHandler {
 				$params['message'] = 'wbc-comment-remove';
 			} else if ( $action === 'restore' ) {
 				$params['message'] = 'wbc-comment-restore';
+			} else if ( $action === 'add' ) {
+				$params['message'] = 'wbc-comment-linked';
 			} else {
 				$params['message'] = 'wbc-comment-unlink';
 			}

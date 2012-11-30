@@ -72,7 +72,7 @@ class ExternalChangesLine {
 		if ( in_array( $changeType, array( 'remove', 'restore' ) ) ) {
 			$deletionLog = ClientUtils::repoLink( 'Special:Log/delete', wfMessage( 'dellogpage' )->text() );
 			$line .= wfMessage( 'parentheses' )->rawParams( $deletionLog );
-		} else if ( $changeType === 'update' ) {
+		} else if ( in_array( $changeType, array( 'add', 'update' ) ) ) {
 
 			if ( !array_key_exists( 'page_id', $entityData ) || !array_key_exists( 'rev_id', $entityData ) ||
 				!array_key_exists( 'parent_id', $entityData ) ) {
@@ -97,7 +97,7 @@ class ExternalChangesLine {
 
 		$line .= \Linker::link( \Title::newFromText( $rc->getAttribute( 'rc_title' ) ) );
 
-		if ( $changeType === 'update' ) {
+		if ( in_array( $changeType, array( 'add', 'restore', 'update' ) ) ) {
 			$entityLink = self::entityLink( $entityData );
 			if ( $entityLink !== false ) {
 				$line .= wfMessage( 'word-separator' )->plain()
@@ -133,11 +133,13 @@ class ExternalChangesLine {
 	 */
 	public static function parseComment( $entityData ) {
 		$comment = $entityData['comment'];
-		$message = '';
+		$message = null;
 		$param = null;
 
 		if ( is_array( $comment ) ) {
-			if ( array_key_exists( 'sitelink', $comment ) ) {
+			if ( $entityData['type'] === 'wikibase-item~add' ) {
+				$message = wfMessage( 'wbc-comment-linked' )->text();
+			} else if ( array_key_exists( 'sitelink', $comment ) ) {
 				$sitelinks = $comment['sitelink'];
 				if ( array_key_exists( 'oldlink', $sitelinks ) && array_key_exists( 'newlink', $sitelinks ) ) {
 					$oldLink = self::wikiLink( $sitelinks['oldlink']['lang'], $sitelinks['oldlink']['page'] );
@@ -148,15 +150,17 @@ class ExternalChangesLine {
 				} else if ( array_key_exists( 'newlink', $sitelinks ) ) {
 					$param = self::wikiLink( $sitelinks['newlink']['lang'], $sitelinks['newlink']['page'] );
 				}
+
+				if ( $param !== null ) {
+					if ( is_array( $param ) ) {
+						$message = wfMessage( $comment['message'] )->rawParams( $param[0], $param[1] )->parse();
+					} else {
+						$message = wfMessage( $comment['message'] )->rawParams( $param )->parse();
+					}
+				}
 			}
 
-			if ( $param !== null ) {
-				if ( is_array( $param ) ) {
-					$message = wfMessage( $comment['message'] )->rawPArams( $param[0], $param[1] )->parse();
-				} else {
-					$message = wfMessage( $comment['message'] )->rawParams( $param )->parse();
-				}
-			} else {
+			if ( $message === null ) {
 				$message = wfMessage( $comment['message'] )->text();
 			}
 		}
