@@ -16,6 +16,24 @@
       "revId": "90cf4c3f61929fcb0de92ef91f175a7922e98e4f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//9UQ\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-30T13:51:11Z",
+      "side": 1,
+      "message": "It\u0027s a boolean!",
+      "parentUuid": "AAADbX//9UY\u003d",
+      "revId": "90cf4c3f61929fcb0de92ef91f175a7922e98e4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
