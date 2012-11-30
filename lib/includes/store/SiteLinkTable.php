@@ -148,7 +148,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			throw new MWException( 'Cannot write when in readonly mode' );
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = $this->getConnection( DB_MASTER );
 
 		$ok = $dbw->delete(
 			$this->table,
