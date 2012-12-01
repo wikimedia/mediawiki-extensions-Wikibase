@@ -173,6 +173,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 * @return string Formatted HTML for inclusion in the form
 	 */
 	protected function additionalFormElements() {
+		global $wgLang;
 		return Html::element(
 			'label',
 			array(
@@ -188,7 +189,9 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 			array(
 				'id' => 'wb-createentity-label',
 				'size' => 12,
-				'class' => 'wb-input'
+				'class' => 'wb-input',
+				'lang' => $wgLang->getCode(),
+				'dir' => $wgLang->getDir(),
 			)
 		)
 		. Html::element( 'br' )
@@ -207,7 +210,9 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 			array(
 				'id' => 'wb-createentity-description',
 				'size' => 36,
-				'class' => 'wb-input'
+				'class' => 'wb-input',
+				'lang' => $wgLang->getCode(),
+				'dir' => $wgLang->getDir(),
 			)
 		)
 		. Html::element( 'br' );
