@@ -139,7 +139,7 @@ class ApiSetClaimValue extends Api {
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
 			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : false
+			isset( $params['token'] ) ? $params['token'] : ''
 		);
 
 		if ( !$status->isGood() ) {
