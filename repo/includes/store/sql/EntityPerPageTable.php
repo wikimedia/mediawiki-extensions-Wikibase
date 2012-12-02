@@ -41,8 +41,8 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @return boolean Success indicator
 	 */
 	public function addEntityContent( EntityContent $entityContent ) {
-		$dbr = wfGetDB( DB_SLAVE );
-		$select = $dbr->selectField(
+		$dbw = wfGetDB( DB_MASTER );
+		$select = $dbw->selectField(
 			'wb_entity_per_page',
 			'epp_page_id',
 			array(
@@ -55,7 +55,6 @@ class EntityPerPageTable implements EntityPerPage {
 			return false;
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
 		return $dbw->insert(
 			'wb_entity_per_page',
 			array(
