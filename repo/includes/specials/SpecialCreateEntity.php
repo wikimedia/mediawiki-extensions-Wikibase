@@ -52,6 +52,18 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	protected $description = null;
 
 	/**
+	 * Constructor.
+	 *
+	 * @param $name String: name of the special page, as seen in links and URLs
+	 * @param $restriction String: user right required, 'createpage' per default.
+	 *
+	 * @since 0.1
+	 */
+	public function __construct( $name, $restriction = 'createpage' ) {
+		parent::__construct( $name, $restriction );
+	}
+
+	/**
 	 * Main method.
 	 *
 	 * @since 0.1
@@ -61,6 +73,10 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 * @return boolean
 	 */
 	public function execute( $subPage ) {
+		if ( !parent::execute( $subPage ) ) {
+			return false;
+		}
+
 		$this->setHeaders();
 		$this->outputHeader();
 
@@ -184,7 +200,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 		)
 		. Html::input(
 			'label',
-			$this->label ? htmlspecialchars( $this->label ) : '',
+			$this->label ? $this->label : '',
 			'text',
 			array(
 				'id' => 'wb-createentity-label',
@@ -205,7 +221,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 		)
 		. Html::input(
 			'description',
-			$this->description ? htmlspecialchars( $this->description ) : '',
+			$this->description ? $this->description : '',
 			'text',
 			array(
 				'id' => 'wb-createentity-description',
