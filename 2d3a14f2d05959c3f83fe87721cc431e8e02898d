@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//8HQ\u003d",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-02T23:28:25Z",
+      "side": 1,
+      "message": "ehh, confusing indent",
+      "revId": "2d3a14f2d05959c3f83fe87721cc431e8e02898d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
