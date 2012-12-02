@@ -86,7 +86,7 @@ class EntityId implements \Immutable, \Comparable {
 		}
 
 		$this->entityType = $entityType;
-		$this->numericId = $numericId;
+		$this->numericId = (int)$numericId;
 	}
 
 	/**
@@ -108,7 +108,7 @@ class EntityId implements \Immutable, \Comparable {
 	 * @return integer
 	 */
 	public function getNumericId() {
-		return $this->numericId;
+		return (int)$this->numericId;
 	}
 
 	/**
@@ -140,7 +140,7 @@ class EntityId implements \Immutable, \Comparable {
 	 * @return string The prefixed id, or false if it can't be found
 	 */
 	public function getPrefixedId() {
-		return $this->getPrefix() . $this->numericId;
+		return $this->getPrefix() . (int)$this->numericId;
 	}
 
 	// TODO: move to sane place
