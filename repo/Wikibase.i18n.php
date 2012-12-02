@@ -1191,6 +1191,7 @@ $messages['en-ca'] = array(
 );
 
 /** Esperanto (Esperanto)
+ * @author Amire80
  * @author ArnoLagrange
  */
 $messages['eo'] = array(
@@ -1309,8 +1310,8 @@ $messages['eo'] = array(
 	'wikibase-restoreold' => 'restarigi',
 	'wikibase-restore-summary' => 'Restarigi version $1 de [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Rekta redakto estas malebligita en nomspaco $1',
-	'wikibase-noentity' => 'Ĉi tiu datumaro ne ekzistas. Vi povas
-<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} priserĉi la riltajn protokolojn]</span>
+	'wikibase-noentity' => 'Ĉi tiu datumaro ne ekzistas. Vi povas 
+<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} priserĉi la rilatajn protokolojn]</span>
 por trovi de kie ĝi venis.',
 	'wikibase-noentity-createone' => 'vi ankaŭ povas [[$1|krei iun novan]].',
 	'wikibase-item-summary-wbeditentity' => 'Kreu novan eron',
@@ -1328,7 +1329,6 @@ por trovi de kie ĝi venis.',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Kreu {{plural:$1|valordeklaron|valordeklarojn}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Kreu {{plural:$1|nevalordeklaron|nevalordeklarojn}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Kreu {{plural:$1|valordeklaron|valordeklarojn}}', # Fuzzy
-	'content-model-1001' => 'Vikidatumbazero',
 );
 
 /** Spanish (español)
@@ -1771,7 +1771,7 @@ $messages['fi'] = array(
 	'wikibase-restrictionedit-tooltip-message' => 'Tämä sivu on suojattu. Muokkaaminen ei ole sallittua.',
 	'wikibase-blockeduser-tooltip-message' => 'Sinulta on estetty muokkaaminen.',
 	'wikibase-tooltip-error-details' => 'Tiedot',
-	'wikibase-error-save-generic' => 'Tallennettaessa tapahtui virhe. Muutoksiasi ei voitu toteuttaa.',
+	'wikibase-error-save-generic' => 'Tallennus epäonnistui. Muutoksiasi ei voitu toteuttaa.',
 	'wikibase-error-save-connection' => 'Tallennettaessa tapahtui yhteysvirhe. Muutoksiasi ei voitu toteuttaa. Tarkista Internet-yhteytesi.',
 	'wikibase-error-save-timeout' => 'Sivustolla on teknisiä ongelmia. Tallennustasi ei voitu toteuttaa.',
 	'wikibase-error-autocomplete-connection' => 'Kysely Wikipedian rajapinnalta epäonnistui. Yritä myöhemmin uudelleen.',
@@ -2299,6 +2299,7 @@ $messages['he'] = array(
 	'wikibase-alias-edit-placeholder' => 'נא להזין כינוי',
 	'wikibase-label-input-help-message' => 'נא להזין את הכותרת של ערכת הנתונים הזאת ב{{GRAMMAR:תחילית|$1}}.',
 	'wikibase-description-input-help-message' => 'נא להזין תיאור קצר ב{{GRAMMAR:תחילית|$1}}.',
+	'wikibase-statements' => 'טענות',
 	'wikibase-sitelinks' => 'רשימת הדפים המקושרים לפריט הזה.',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפה',
 	'wikibase-sitelinks-siteid-columnheading' => 'קוד',
@@ -2328,6 +2329,7 @@ $messages['he'] = array(
 	'wikibase-aliases-input-help-message' => 'אם ערכת הנתונים הזאת ידועה ביותר משם אחד מסוים, אפשר להזין כינויים ושמות נרדפים, כדי שאפשר יהיה למצוא אותה בשמות חלופיים.',
 	'wikibase-aliases-empty' => 'לא הוגדרו כינויים.',
 	'wikibase-datatype-label' => 'סוג נתונים:',
+	'wikibase-snak-unsupporteddatatype' => 'טיפול בערכים עבור סוג הנתונים "$1" אינו נתמך כעת.',
 	'wikibase-restrictionedit-tooltip-message' => 'הדף הזה מוגן. לא ניתן לערוך.',
 	'wikibase-blockeduser-tooltip-message' => 'נחסמת מעריכה.',
 	'wikibase-tooltip-error-details' => 'פרטים',
@@ -2354,7 +2356,7 @@ $messages['he'] = array(
 	'wikibase-error-label-not-unique-item' => 'לפריט אחר ($3) כבר יש תווית "$1" ותיאור "$4" שמזוהה עם קוד השפה $2',
 	'special-itembytitle' => 'פריט לפי כותרת',
 	'wikibase-itembytitle-lookup-fieldset' => 'חיפוש פריטים לפי אתר וכותרת',
-	'wikibase-itembytitle-lookup-site' => 'אתר¹&rlm;²:',
+	'wikibase-itembytitle-lookup-site' => 'אתר:',
 	'wikibase-itembytitle-lookup-page' => 'דף:',
 	'wikibase-itembytitle-submit' => 'חיפוש',
 	'wikibase-itembytitle-nothing-found' => 'לא נמצא שום פריט בחיפוש הקודם. נא לזקק את השאילתה עם זיהוי טוב יותר של הדף החיצוני.',
@@ -2403,6 +2405,7 @@ $messages['he'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'שפה:',
 	'wikibase-entitieswithoutlabel-submit' => 'למצוא',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" אינו קוד שפה תקין.',
+	'special-entitydata' => 'נתוני ישות',
 	'wikibase-entitydata-not-found' => 'לא נמצאה ישות עם המזהה $1.',
 	'wikibase-entitydata-unsupported-format' => 'תסדיר $1 אינו נתמך בממשק הזה.',
 	'wikibase-entitydata-title' => 'נתוני ישות',
@@ -2433,6 +2436,9 @@ $messages['he'] = array(
 	'wikibase-item-summary-special-create-item' => 'נוצר פריט תחת [$2] עם {{plural:$1|ערך|ערכים}}',
 	'wikibase-property-summary-special-create-property' => 'נוצר מאפיין תחת [$2] עם {{plural:$1|ערך|ערכים}}',
 	'wikibase-query-summary-special-create-query' => 'נוצרה שאילתה תחת [$2] עם {{plural:$1|ערך|ערכים}}',
+	'content-model-wikibase-item' => 'פריט Wikibase',
+	'content-model-wikibase-property' => 'מאפיין Wikibase',
+	'content-model-wikibase-query' => 'שאילתת Wikibase',
 	'right-item-create' => 'יצירת פריט', # Fuzzy
 	'right-item-remove' => 'הסרת פריט', # Fuzzy
 	'right-alias-add' => 'הוספת כינוי', # Fuzzy
@@ -2701,6 +2707,7 @@ $messages['ilo'] = array(
 	'wikibase-alias-edit-placeholder' => 'agikabil ti sabali a nagan',
 	'wikibase-label-input-help-message' => 'Ikabil ti titulo ti daytoy nga agasmang ti datos ti $1.',
 	'wikibase-description-input-help-message' => 'Agikabil ti ababa a deskripsion ti $1.',
+	'wikibase-statements' => 'Insasao',
 	'wikibase-sitelinks' => 'Listaan dagiti panid a naisilpo ti daytoy a banag',
 	'wikibase-sitelinks-sitename-columnheading' => 'Pagsasao',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kodigo',
@@ -2729,6 +2736,7 @@ $messages['ilo'] = array(
 	'wikibase-aliases-input-help-message' => 'No ti agasmang ti datos ket naamammoan ti adadu ngem maysa a naisangsangayan a nagan, mabalinmo ti agikabil kadagiti sabali a nagan wenno sinonimo, tapno mabirukan babaen kadagiti sabsabali a naganna.',
 	'wikibase-aliases-empty' => 'Awan dagiti sabali a nagan a naipalawag.',
 	'wikibase-datatype-label' => 'Kita ti datos:',
+	'wikibase-snak-unsupporteddatatype' => 'Panagtengngel kadagiti pateg para iti "$1" a kita ti datos ket agdama a saan a nasuportaran.',
 	'wikibase-restrictionedit-tooltip-message' => 'Daytoy a panid ket nasalkniban. Saan a maipalubos ti agurnos.',
 	'wikibase-blockeduser-tooltip-message' => 'Naseraanka manipud ti panagurnos.',
 	'wikibase-tooltip-error-details' => 'Dagiti salaysay',
@@ -3315,6 +3323,7 @@ $messages['ja'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => '言語:',
 	'wikibase-entitieswithoutlabel-submit' => '検索',
 	'wikibase-entitieswithoutlabel-invalid-language' => '「$1」は有効な言語コードではありません。',
+	'special-entitydata' => 'エンティティのデータ',
 	'wikibase-entitydata-not-found' => 'ID $1 のエンティティが見つかりません。',
 	'wikibase-entitydata-unsupported-format' => 'このインターフェイスはデータ形式 $1 に対応していません。',
 	'wikibase-entitydata-title' => 'エンティティのデータ',
@@ -3338,9 +3347,9 @@ $messages['ja'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => '[$2] の{{plural:$1|別名}}を追加',
 	'wikibase-item-summary-wbsetaliases-remove' => '[$2] の{{plural:$1|別名}}を除去',
 	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] {{plural:$1|ページ}}を接続',
-	'wikibase-item-summary-special-create-item' => '{{plural:$1|値}}を持つ [$2] 項目を作成',
-	'wikibase-property-summary-special-create-property' => '{{plural:$1|値}}を持つ [$2] プロパティを作成',
-	'wikibase-query-summary-special-create-query' => '{{plural:$1|値}}を持つ [$2] クエリを作成',
+	'wikibase-item-summary-special-create-item' => '{{plural:$1|1=値を持つ|0=値を持たない|複数の値を持つ}} [$2] 項目を作成',
+	'wikibase-property-summary-special-create-property' => '{{plural:$1|1=値を持つ|0=値を持たない|複数の値を持つ}} [$2] プロパティを作成',
+	'wikibase-query-summary-special-create-query' => '{{plural:$1|1=値を持つ|0=値を持たない|複数の値を持つ}} [$2] クエリを作成',
 	'content-model-wikibase-item' => 'ウィキベース項目',
 	'content-model-wikibase-property' => 'ウィキベース プロパティ',
 	'content-model-wikibase-query' => 'ウィキベース クエリ',
@@ -3768,6 +3777,7 @@ $messages['mk'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Јазик:',
 	'wikibase-entitieswithoutlabel-submit' => 'Најди',
 	'wikibase-entitieswithoutlabel-invalid-language' => '„$1“ не претставува важечки јазичен код.',
+	'special-entitydata' => 'Податоци за единицата',
 	'wikibase-entitydata-not-found' => 'Не пронајдов ниедна единица со ознаката ID $1.',
 	'wikibase-entitydata-unsupported-format' => 'Податочниот формат $1 не е поддржан на овој посредник.',
 	'wikibase-entitydata-title' => 'Податоци за единицата',
@@ -4717,8 +4727,8 @@ $messages['pt-br'] = array(
 	'wikibase-restoreold' => 'restaurar',
 	'wikibase-restore-summary' => 'Restaurar a revisão $1 por [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'A edição direta está desabilitada no domínio $1',
-	'wikibase-noentity' => 'Este conjunto de dados não existe. Você pode
-<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} Pesquisar os logs relacionados]</span>
+	'wikibase-noentity' => 'Este conjunto de dados não existe. Você pode 
+<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} Pesquisar os logs relacionados]</span> 
 para descobrir para onde ele foi.',
 	'wikibase-noentity-createone' => 'Você também pode [[$1|criar um novo]].',
 	'wikibase-item-summary-wbeditentity' => 'Criado um novo item',
@@ -4912,7 +4922,7 @@ $messages['ru'] = array(
 	'wikibase-restore-summary' => 'Восстановлена версия $1 с помощью [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'В пространстве имён «$1» отключено прямое редактирование',
 	'wikibase-noentity' => 'Такого набора данных не существует. Вы можете
-<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} поискать соответствующие записи в журналах]</span>,
+<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} поискать соответствующие записи в журналах]</span>, 
 чтобы узнать, куда он делся.',
 	'wikibase-noentity-createone' => 'Вы также можете [[$1|создать его]].',
 	'wikibase-item-summary-wbeditentity' => 'Новый элемент создан',
@@ -5429,6 +5439,7 @@ $messages['vi'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Ngôn ngữ:',
 	'wikibase-entitieswithoutlabel-submit' => 'Tìm',
 	'wikibase-entitieswithoutlabel-invalid-language' => '“$1” không phải là mã ngôn ngữ hợp lệ.',
+	'special-entitydata' => 'Dữ liệu thực thể',
 	'wikibase-entitydata-not-found' => 'Không tìm thấy thực thể nào với ID $1.',
 	'wikibase-entitydata-unsupported-format' => 'Giao diện này không hỗ trợ định dạng dữ liệu $1.',
 	'wikibase-entitydata-title' => 'Dữ liệu thực thể',
