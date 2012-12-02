@@ -43,7 +43,7 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 		$this->getOutput()->addHTML( Html::openElement( 'ul' ));
 		foreach (\Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
 			$this->getOutput()->addHTML( Html::openElement( 'li' ));
-			$this->getOutput()->addHTML( $dataTypeId );
+			$this->getOutput()->addHTML( htmlspecialchars( $dataTypeId ) );
 			$this->getOutput()->addHTML( Html::closeElement( 'li' ));
 		}
 		$this->getOutput()->addHTML( Html::closeElement( 'ul' ));
