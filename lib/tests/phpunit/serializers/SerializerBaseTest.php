@@ -140,26 +140,4 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 		$this->assertException( function() use ( $serializer, $input ) { $serializer->getSerialized( $input ); } );
 	}
 
-	/**
-	 * Asserts that an exception of the specified type occurs when running
-	 * the provided code.
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $expected
-	 * @param callable $code
-	 */
-	protected function assertException( $code, $expected = 'Exception' ) {
-		$pokemons = null;
-
-		try {
-			call_user_func( $code );
-		}
-		catch ( \Exception $pokemons ) {
-			// Gotta Catch 'Em All!
-		}
-
-		$this->assertInstanceOf( $expected, $pokemons );
-	}
-
 }
