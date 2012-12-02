@@ -101,7 +101,7 @@ class ApiSearchEntities extends ApiBase {
 			// Only include matching aliases
 			$entry['aliases'] = $entity->getAliases( $language, $search );
 			foreach ( $entry['aliases'] as $key => $value ) {
-				if ( preg_match( "/^" . $search . "/i", $entry['aliases'][$key] ) === 0 ) {
+				if ( preg_match( "/^" . preg_quote( $search ) . "/i", $entry['aliases'][$key] ) === 0 ) {
 					unset( $entry['aliases'][$key] );
 				}
 			}
