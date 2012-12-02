@@ -145,7 +145,7 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 			$status = $editEntity->attemptSave(
 				Autocomment::buildApiSummary( $this, $params, $itemContent ),
 				$flags,
-				( $this->needsToken() ? $params['token'] : false )
+				( $this->needsToken() ? $params['token'] : '' )
 			);
 
 			if ( $editEntity->hasError( EditEntity::TOKEN_ERROR ) ) {

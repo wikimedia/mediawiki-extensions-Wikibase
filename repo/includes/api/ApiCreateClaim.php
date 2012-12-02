@@ -122,7 +122,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 		$status = $editEntity->attemptSave(
 			Autocomment::buildApiSummary( $this, null, $entityContent ),
 			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : false
+			isset( $params['token'] ) ? $params['token'] : ''
 		);
 
 		$status->value['claim'] = $claim;
@@ -339,4 +339,27 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 		);
 	}
 
+	/**
+	 * @see \ApiBase::needsToken()
+	 * @return bool true
+	 */
+	public function needsToken() {
+		return true;
+	}
+
+	/**
+	 * @see \ApiBase::isWriteMode()
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
+	 * @see \ApiBase::mustBePosted()
+	 * @return bool true
+	 */
+	public function mustBePosted() {
+		return true;
+	}
 }
