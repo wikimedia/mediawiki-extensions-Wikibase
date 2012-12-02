@@ -86,8 +86,8 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 				'language',
 				$this->language,
 				'text',
-                                array(
-                                        'id' => 'language'
+					array(
+						'id' => 'language'
 				)
 			) .
 			Html::input(

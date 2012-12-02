@@ -69,13 +69,15 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * @param EntityId $entityId
 	 * TODO: just getting an ID here is odd
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	protected function formatRow( EntityId $entityId ) {
 		try {
 			$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $entityId );
 			return Linker::linkKnown( $title );
 		} catch ( MWException $e ) {
+			wfWarn( "Error formatting result row: " . $e->getMessage() );
+			return false;
 		}
 	}
 
@@ -97,7 +99,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * @since 0.3
 	 */
 	protected function showQuery() {
-
 		$out = $this->getOutput();
 
 		if ( $this->limit == 0 && $this->offset == 0 ) {
@@ -118,7 +119,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 			// Disable the "next" link when we reach the end
 			$paging = $this->getLanguage()->viewPrevNext( $this->getTitleForNavigation(), $this->offset,
 				$this->limit, array(), ( $this->numRows <= $this->limit ) );
-			$out->addHTML( '<p>' . $paging . '</p>' );
+			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
 		} else {
 			// No results to show, so don't bother with "showing X of Y" etc.
 			// -- just let the user know and give up now
@@ -134,7 +135,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 			$this->offset
 		);
 
-		$out->addHTML( '<p>' . $paging . '</p>' );
+		$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
 
 		$out->addHTML( Html::closeElement( 'div' ) );
 
@@ -152,14 +153,14 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 */
 	protected function outputResults( array $results, $num, $offset ) {
 		if ( $num > 0 ) {
-			$html = "\n<ol start='" . ( $offset + 1 ) . "' class='special'>\n";
+			$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
 			for ( $i = 0; $i < $num; $i++ ) {
 				$line = $this->formatRow( $results[$i] );
 				if ( $line ) {
-					$html .= "<li>{$line}</li>\n";
+					$html .= Html::rawElement( 'li', array(), $line );
 				}
 			}
-			$html .= "</ol>\n";
+			$html .= Html::closeElement( 'ol' );
 
 			$this->getOutput()->addHTML( $html );
 		}
