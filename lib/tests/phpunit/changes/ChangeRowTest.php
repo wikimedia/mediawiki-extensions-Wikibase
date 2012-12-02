@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 use \Wikibase\ChangesTable;
 
 /**
- * Tests for the Wikibase\DiffChange class.
+ * Tests for the Wikibase\ChangeRow class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@ use \Wikibase\ChangesTable;
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseChange
+ * @group WikibaseChangeRowTest
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
