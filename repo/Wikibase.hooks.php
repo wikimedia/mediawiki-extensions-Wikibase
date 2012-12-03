@@ -183,38 +183,6 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Hook to add PHPUnit test cases.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
-	 *
-	 * @since 0.1
-	 *
-	 * @param array &$files
-	 *
-	 * @return boolean
-	 */
-	public static function registerExperimentalUnitTests( array &$files ) {
-		// @codeCoverageIgnoreStart
-		$testFiles = array(
-			'specials/SpecialEntityData',
-
-			'api/ApiCreateClaim',
-			'api/ApiGetClaims',
-			'api/ApiRemoveClaims',
-			'api/ApiSetClaimValue',
-			'api/ApiSetReference',
-			'api/RemoveReferences',
-			'api/SetStatementRank',
-		);
-
-		foreach ( $testFiles as $file ) {
-			$files[] = __DIR__ . '/tests/phpunit/includes/' . $file . 'Test.php';
-		}
-
-		return true;
-		// @codeCoverageIgnoreEnd
-	}
-
-	/**
 	 * Handler for the NamespaceIsMovable hook.
 	 *
 	 * Implemented to prevent moving pages that are in an entity namespace.
