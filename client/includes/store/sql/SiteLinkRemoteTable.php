@@ -105,7 +105,7 @@ class SiteLinkRemoteTable extends RepoTable implements SiteLinkLookup {
 				'ips_site_page',
 				'ips_item_id',
 			),
-			"($anyOfTheLinks) AND ips_item_id != " . $item->getId()->getNumericId(),
+			"($anyOfTheLinks) AND ips_item_id != " . intval( $item->getId()->getNumericId() ),
 			__METHOD__
 		);
 
