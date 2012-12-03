@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//7VM\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.suggester.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-03T21:55:21Z",
+      "side": 1,
+      "message": "Can you really do this? What if there are still other instances of this widget, won\u0027t this remove their events on the window object as well? You had check if there is still a widget around (which is possible with $( \u0027:suggester\u0027 ) ) but even then, there could be instances of the suggester bound to DOM elements not in the DOM currently, so you would miss them and if they were inserted into the DOM later, the event wouldn\u0027t be there.",
+      "revId": "08078f0099794960ae719c12adffda5ae94dfe42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
