@@ -364,10 +364,17 @@ final class RepoHooks {
 	 */
 	public static function onRecentChangeSave( $rc ) {
 		if ( $rc->getAttribute( 'rc_log_type' ) === null ) {
-			$change = ChangesTable::singleton()->selectRow(
+			$changesTable = ChangesTable::singleton();
+
+			$slave = $changesTable->getReadDb();
+			$changesTable->setReadDb( DB_MASTER );
+
+			$change = $changesTable->selectRow(
 				null,
 				array( 'revision_id' => $rc->getAttribute( 'rc_this_oldid' ) )
 			);
+
+			$changesTable->setReadDb( $slave );
 
 			if ( $change ) {
 				$change->setMetadataFromRC( $rc );
