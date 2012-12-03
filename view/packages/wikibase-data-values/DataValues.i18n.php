@@ -172,6 +172,14 @@ $messages['ta'] = array(
 	'version-datavalues' => 'தரவுப்பெறுமானங்கள்',
 );
 
+/** Ukrainian (українська)
+ * @author Base
+ */
+$messages['uk'] = array(
+	'datavalues-desc' => "Набір об'єктів для представлення різних типів значень",
+	'version-datavalues' => 'DataValues',
+);
+
 /** Yiddish (ייִדיש)
  * @author פוילישער
  */
