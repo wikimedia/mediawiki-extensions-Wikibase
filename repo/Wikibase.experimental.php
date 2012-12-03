@@ -34,7 +34,7 @@ $wgAutoloadClasses['SpecialEntityData'] 				= $dir . 'includes/specials/SpecialE
 
 $wgAPIModules['wbcreateclaim'] 						= 'Wikibase\ApiCreateClaim';
 $wgAPIModules['wbgetclaims'] 						= 'Wikibase\ApiGetClaims';
-$wgAPIModules['wbremoveclaims'] 					= 'Wikibase\ApiRemoveClaims';
+//$wgAPIModules['wbremoveclaims'] 					= 'Wikibase\ApiRemoveClaims';
 $wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\ApiSetClaimValue';
 $wgAPIModules['wbsetreference'] 					= 'Wikibase\ApiSetReference';
 $wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';

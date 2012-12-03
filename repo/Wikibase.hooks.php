@@ -199,7 +199,6 @@ final class RepoHooks {
 
 			'api/ApiCreateClaim',
 			'api/ApiGetClaims',
-			'api/ApiRemoveClaims',
 			'api/ApiSetClaimValue',
 			'api/ApiSetReference',
 			'api/RemoveReferences',
