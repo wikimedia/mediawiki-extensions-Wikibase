@@ -60,6 +60,8 @@ describe "Check statements UI" do
         # TODO: still broken in UI - save-button shoud be disabled - bug caught in statements_bugs_spec
         #page.saveStatement?.should be_false
         page.firstEntitySelectorLink?.should be_true
+        page.firstEntitySelectorLabel?.should be_true
+        page.firstEntitySelectorDescription?.should be_true
         page.firstEntitySelectorLabel.should == prop_a_label
         page.firstEntitySelectorDescription.should == prop_a_description
         page.firstEntitySelectorLink
