@@ -138,7 +138,7 @@ class SetStatementRank extends \Wikibase\Api {
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
 			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : false
+			isset( $params['token'] ) ? $params['token'] : ''
 		);
 
 		if ( !$status->isGood() ) {
@@ -263,4 +263,27 @@ class SetStatementRank extends \Wikibase\Api {
 		return __CLASS__ . '-' . WB_VERSION;
 	}
 
+	/**
+	 * @see \ApiBase::needsToken()
+	 * @return bool true
+	 */
+	public function needsToken() {
+		return true;
+	}
+
+	/**
+	 * @see \ApiBase::isWriteMode()
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
+	 * @see \ApiBase::mustBePosted()
+	 * @return bool true
+	 */
+	public function mustBePosted() {
+		return true;
+	}
 }
