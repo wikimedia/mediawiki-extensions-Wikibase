@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//8AY\u003d",
+        "filename": "repo/tests/selenium/special/contributions_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-12-03T09:44:47Z",
+      "side": 1,
+      "message": "should be ContributionsPage.\nthis is in fact testing the recent changes page at the moment. which will probably pass \u0027cause the elements are named the same. but it is not really the thing we want to test here.",
+      "revId": "ee72cbeb440f6427960b1acd06ffa1585a17f61b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//8AU\u003d",
+        "filename": "selenium/lib/pages/contributions_page.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-12-03T09:44:47Z",
+      "side": 1,
+      "message": "where is the URL to the SpecialPage?",
+      "revId": "ee72cbeb440f6427960b1acd06ffa1585a17f61b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//8AM\u003d",
+        "filename": "selenium/lib/pages/contributions_page.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-12-03T09:44:47Z",
+      "side": 1,
+      "message": "copy\u0026paste? should be renamed or removed (do we use that unordered list somewhere?)",
+      "revId": "ee72cbeb440f6427960b1acd06ffa1585a17f61b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//8AE\u003d",
+        "filename": "selenium/lib/pages/contributions_page.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-12-03T09:44:47Z",
+      "side": 1,
+      "message": "we\u0027re not using this method, so it could be removed.",
+      "revId": "ee72cbeb440f6427960b1acd06ffa1585a17f61b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
