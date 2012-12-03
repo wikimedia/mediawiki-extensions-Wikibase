@@ -65,7 +65,6 @@ class EntityFactoryTest extends EntityTestCase {
 
 	/**
 	 * @dataProvider provideIsEntityType
-	 * @covers EntityFactory::isEntityType
 	 */
 	public function testIsEntityType( $type, $expected ) {
 		$this->assertEquals( $expected, EntityFactory::singleton()->isEntityType( $type ) );
