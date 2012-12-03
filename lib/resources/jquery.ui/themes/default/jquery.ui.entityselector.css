@@ -32,14 +32,12 @@
 	text-overflow: ellipsis;
 }
 
-.ui-entityselector-list li .ui-entityselector-section-container,
-.ui-entityselector-list .ui-menu-item a.ui-state-hover,
-.ui-entityselector-list .ui-menu-item a.ui-state-active {
-	margin: .4em .2em;
-}
-
 .ui-entityselector-list .ui-entityselector-section-container {
 	line-height: 1.3;
+}
+
+.ui-entityselector-list .ui-menu-item a {
+	padding: .4em .2em;
 }
 
 .ui-entityselector-label {
