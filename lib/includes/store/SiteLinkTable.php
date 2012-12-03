@@ -192,17 +192,22 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @since 0.1
 	 *
 	 * @param Item $item
+	 * @param \DatabaseBase|null $db
 	 *
 	 * @return array of array
 	 */
-	public function getConflictsForItem( Item $item ) {
+	public function getConflictsForItem( Item $item, \DatabaseBase $db = null ) {
 		$links = $item->getSiteLinks();
 
 		if ( $links === array() ) {
 			return array();
 		}
 
-		$dbr = $this->getConnection( DB_SLAVE );
+		if ( $db ) {
+			$dbr = $db;
+		} else {
+			$dbr = $this->getConnection( DB_SLAVE );
+		}
 
 		$anyOfTheLinks = '';
 
@@ -245,7 +250,10 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			);
 		}
 
-		$this->releaseConnection( $dbr );
+		if ( !$db ) {
+			$this->releaseConnection( $dbr );
+		}
+
 		return $conflicts;
 	}
 

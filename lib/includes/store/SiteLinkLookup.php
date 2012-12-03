@@ -41,11 +41,16 @@ interface SiteLinkLookup {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
+	 * @param Item          $item
+	 * @param \DatabaseBase|null $db The database object to use (optional).
+	 *        If conflict checking is performed as part of a save operation,
+	 *        this should be used to provide the master DB connection that will
+	 *        also be used for saving. This will preserve transactional integrity
+	 *        and avoid race conditions.
 	 *
 	 * @return array of array
 	 */
-	public function getConflictsForItem( Item $item );
+	public function getConflictsForItem( Item $item, \DatabaseBase $db = null );
 
 	/**
 	 * Returns the id of the item that is equivalent to the
