@@ -286,6 +286,10 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$maxage = $request->getInt( 'maxage', $wgSquidMaxage );
 		$smaxage = $request->getInt( 'smaxage', $wgSquidMaxage );
 
+		// Sanity: 0 to 30 days. // todo: Hard maximum could be configurable somehow.
+		$maxage  = max( 0, min( 60 * 60 * 24 * 30, $maxage ) );
+		$smaxage = max( 0, min( 60 * 60 * 24 * 30, $smaxage ) );
+
 		//TODO: set Last-Modified header? Why doesn't mediawiki set that for article pages?
 
 		// make sure we are reporting the correct content type
