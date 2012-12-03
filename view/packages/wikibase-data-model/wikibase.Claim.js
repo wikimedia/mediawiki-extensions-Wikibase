@@ -14,11 +14,14 @@
  * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Statements
  *
  * @param {wb.Snak} mainSnak
- * @param {wb.Snak[]} qualifiers
+ * @param {wb.Snak[]} [qualifiers]
+ * @param {String} [guid] The Global Unique Identifier of this Claim. This can be omitted if this
+ *        is a new claim, not yet stored in the database and associated with some entity.
  */
-wb.Claim = function( mainSnak, qualifiers ) {
+wb.Claim = function( mainSnak, qualifiers, guid ) {
 	this.setMainSnak( mainSnak );
 	this.setQualifiers( qualifiers || [] );
+	this._guid = guid || null;
 };
 
 wb.Claim.prototype = {
@@ -32,6 +35,22 @@ wb.Claim.prototype = {
 	 * @todo think about implementing a SnakList rather than having an Array here
 	 */
 	_qualifiers: null,
+
+	/**
+	 * @type String
+	 */
+	_guid: null,
+
+	/**
+	 * Returns the GUID (Global Unique Identifier) of the Claim. Returns null if the claim is not
+	 * yet stored in the database.
+	 * @since 0.3
+	 *
+	 * @return String
+	 */
+	getGuid: function() {
+		return this._guid;
+	},
 
 	/**
 	 * Returns the main Snak.
@@ -86,6 +105,8 @@ wb.Claim.newFromJSON = function( json ) {
 	var mainSnak = wb.Snak.newFromJSON( json.mainsnak ),
 		qualifiers = [],
 		references = [],
+		rank,
+		guid,
 		isStatement = json.type !== undefined && json.type === 'statement';
 
 	if ( json.qualifiers !== undefined ) {
@@ -100,11 +121,14 @@ wb.Claim.newFromJSON = function( json ) {
 		} );
 	}
 
+	guid = json.id || null;
+
 	if ( isStatement ) {
-		return new wb.Statement( mainSnak, qualifiers, references );
+		rank = wb.Statement.RANK[ json.rank.toUpperCase() ];
+		return new wb.Statement( mainSnak, qualifiers, references, rank, guid );
 	}
 	else {
-		return new wb.Claim( mainSnak, qualifiers );
+		return new wb.Claim( mainSnak, qualifiers, guid );
 	}
 };
 
