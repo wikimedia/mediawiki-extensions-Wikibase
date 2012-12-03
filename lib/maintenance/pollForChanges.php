@@ -224,12 +224,14 @@ class PollForChanges extends \Maintenance {
 	protected function getContinuationConds() {
 		$conds = array();
 
+		$dbr = wfGetDB( DB_SLAVE );
+
 		if ( $this->lastChangeId === 0 && $this->startTime !== 0 ) {
-			$conds[] = 'time > ' . wfGetDB( DB_SLAVE )->addQuotes( wfTimestamp( TS_MW, $this->startTime ) );
+			$conds[] = 'time > ' . $dbr->addQuotes( wfTimestamp( TS_MW, $this->startTime ) );
 		}
 
 		if ( $this->lastChangeId !== false ) {
-			$conds[] = 'id > ' . $this->lastChangeId;
+			$conds[] = 'id > ' . $dbr->addQuotes( $this->lastChangeId );
 		}
 
 		return $conds;
