@@ -458,6 +458,7 @@ Parameters:
 	'wikibase-entitieswithoutlabel-label-language' => 'Label for the input field to change the language.',
 	'wikibase-entitieswithoutlabel-submit' => 'Label for the button that activate the action.',
 	'wikibase-entitieswithoutlabel-invalid-language' => 'Error message shown when the language code passed in parameter is invalid. $1 is invalid language code.',
+	'special-entitydata' => 'Title for special page that provides a linked data interface and easy way to get the JSON data representation for an entity.',
 	'wikibase-entitydata-not-found' => 'Error shown when no entity with the given ID could be found.',
 	'wikibase-entitydata-unsupported-format' => 'Error shown when the requested output format is not supported for entity data.',
 	'wikibase-entitydata-title' => 'Title shown on the special page when a form or text is presented',
