@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//7+c\u003d",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-12-03T10:31:52Z",
+      "side": 1,
+      "message": "// NOTE: This addition is not similar to RawAction::onView",
+      "revId": "55a009dd0766bfc9c867454005a3df1bc29c25d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
