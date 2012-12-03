@@ -379,6 +379,46 @@ div.wb-claims-section div.wb-editsection {
 	float: right;
 }
 
+/***** NEW CLAIM *****/
+
+div.wb-claim-new {
+	border: 1px solid #C9C9C9;
+	width: 100%;
+	margin-bottom: 1em;
+}
+
+div.wb-claim-new .wb-claim-mainsnak {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	float: left;
+}
+
+div.wb-claim-new .wb-snak-property {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 15em;
+	background-color: #E8E8E8;
+}
+
+div.wb-claim-new .wb-snak-property input {
+	margin: 10px;
+}
+
+div.wb-claim-new .wb-snak-value {
+	min-height: 1.5em;
+	margin-left: 15em;
+	padding: 10px;
+	max-width: 32em;
+}
+
+div.wb-claim-new textarea {
+	margin: 0;
+}
+
+/***** /NEW CLAIM *****/
+
 /********** /CLAIMS **********/
 
 
