@@ -103,6 +103,7 @@ class ApiSetClaimValueTest extends \ApiTestCase {
 			'claim' => $claimGuid,
 			'value' => $value,
 			'snaktype' => 'value',
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		list( $resultArray, ) = $this->doApiRequest( $params );

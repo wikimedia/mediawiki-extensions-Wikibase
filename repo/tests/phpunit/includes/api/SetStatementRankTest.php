@@ -141,6 +141,7 @@ class SetStatementRankTest extends \ApiTestCase {
 			'action' => 'wbsetstatementrank',
 			'statement' => $statementGuid,
 			'rank' => $statementRank,
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		list( $resultArray, ) = $this->doApiRequest( $params );
@@ -180,6 +181,7 @@ class SetStatementRankTest extends \ApiTestCase {
 			'action' => 'wbsetstatementrank',
 			'statement' => $statementGuid,
 			'rank' => $statementRank,
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		try {

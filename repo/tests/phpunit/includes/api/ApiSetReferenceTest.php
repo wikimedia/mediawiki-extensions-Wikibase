@@ -91,6 +91,7 @@ class ApiSetReferenceTest extends \ApiTestCase {
 			'statement' => $statementGuid,
 			'reference' => $referenceHash,
 			'snaks' => \FormatJson::encode( $serializer->getSerialized( $reference ) ),
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		list( $resultArray, ) = $this->doApiRequest( $params );
@@ -112,6 +113,7 @@ class ApiSetReferenceTest extends \ApiTestCase {
 			'statement' => $statementGuid,
 			'reference' => $referenceHash,
 			'snaks' => \FormatJson::encode( $serializer->getSerialized( $reference ) ),
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		try {
