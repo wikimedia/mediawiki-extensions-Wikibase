@@ -125,6 +125,7 @@ class RemoveReferencesTest extends \ApiTestCase {
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
 			'references' => implode( '|', $hashes ),
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		list( $resultArray, ) = $this->doApiRequest( $params );
@@ -140,6 +141,7 @@ class RemoveReferencesTest extends \ApiTestCase {
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
 			'references' => implode( '|', $hashes ),
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		try {

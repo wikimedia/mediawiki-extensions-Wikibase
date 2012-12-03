@@ -31,6 +31,7 @@ use Wikibase\Entity;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
+ * @group ApiCreateClaimTest
  *
  * @group medium
  *
@@ -66,6 +67,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 			'snaktype' => 'value',
 			'property' => $property->getPrefixedId(),
 			'value' => 'foo',
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		list( $resultArray, ) = $this->doApiRequest( $params );
@@ -181,6 +183,8 @@ class ApiCreateClaimTest extends \ApiTestCase {
 		 * @var Entity $property
 		 */
 		list( $entity, $property ) = self::getEntityAndPropertyForInvalid();
+
+		$params['token'] = $GLOBALS['wgUser']->getEditToken();
 
 		if ( array_key_exists( 'entity', $params ) && $params['entity'] === '-' ) {
 			$params['entity'] = $entity->getPrefixedId();

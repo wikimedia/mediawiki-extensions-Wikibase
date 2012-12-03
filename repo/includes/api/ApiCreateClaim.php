@@ -119,6 +119,8 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new EditEntity( $entityContent, $this->getUser(), $baseRevisionId );
 
+		$params = $this->extractRequestParams();
+
 		$status = $editEntity->attemptSave(
 			Autocomment::buildApiSummary( $this, null, $entityContent ),
 			EDIT_UPDATE,
