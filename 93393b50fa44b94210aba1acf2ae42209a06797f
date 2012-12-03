@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//7U4\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-03T22:02:07Z",
+      "side": 1,
+      "message": "Why move all of this? I think there was nothing wrong with having this on top of the actual Widget defnition.",
+      "revId": "93393b50fa44b94210aba1acf2ae42209a06797f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//7Uw\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-03T22:02:07Z",
+      "side": 1,
+      "message": "No need for the outer check, $.each() would simply do 0 loops if children was empty and the code wouldn\u0027t require another level of nesting.",
+      "revId": "93393b50fa44b94210aba1acf2ae42209a06797f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//7Uc\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-03T22:02:07Z",
+      "side": 1,
+      "message": "what is wrong with val( \u0027\u0027 ) here?",
+      "revId": "93393b50fa44b94210aba1acf2ae42209a06797f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
