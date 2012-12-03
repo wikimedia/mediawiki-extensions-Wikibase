@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//8Bg\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-03T09:18:10Z",
+      "side": 1,
+      "message": "This will create a string literal, causing a table scan in MySQL, because string literals can\u0027t be used with an integer index. Maybe  MySQL is smart enough to convert the string to int first, but i highly doubt that (and that would be potentially dangerous in itself).",
+      "revId": "2648676a77155a64d6292446be5539ca1b420b61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
