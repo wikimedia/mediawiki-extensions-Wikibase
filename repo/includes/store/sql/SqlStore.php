@@ -125,7 +125,9 @@ class SqlStore implements Store {
 			}
 
 			// Update from 0.1 or 0.2.
-			if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) ) {
+			if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) &&
+				!Settings::get( 'withoutTermSearchKey' ) ) {
+
 				$updater->addExtensionField(
 					'wb_terms',
 					'term_search_key',
