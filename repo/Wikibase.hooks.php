@@ -481,7 +481,7 @@ final class RepoHooks {
 					720101010,
 				),
 
-				// Enable to make TermCache work without the term_search_key field,
+				// Allow TermCache table work without the term_search_key field,
 				// for sites that can not easily roll out schema changes on large tables.
 				// This means that all searches will use exact matching
 				// (depending on the database's collation).
