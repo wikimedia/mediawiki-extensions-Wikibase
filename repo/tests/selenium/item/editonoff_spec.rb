@@ -26,12 +26,14 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.descriptionInputField_element.enabled?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
         page.editLabelLink
         page.editLabelLink?.should be_false
         page.editDescriptionLink?.should be_false
         page.descriptionInputField_element.enabled?.should be_false
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
+        page.addStatement?.should be_false
         page.cancelLabelLink?.should be_true
         page.cancelLabelLink
         page.editLabelLink?.should be_true
@@ -39,12 +41,14 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.descriptionInputField_element.enabled?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
         page.editLabelLink
         page.editLabelLink?.should be_false
         page.editDescriptionLink?.should be_false
         page.descriptionInputField_element.enabled?.should be_false
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
+        page.addStatement?.should be_false
         page.labelInputField_element.clear
         page.labelInputField_element.click
         page.descriptionInputField_element.enabled?.should be_false
@@ -57,6 +61,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.descriptionInputField_element.enabled?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
       end
     end
   end
@@ -71,12 +76,14 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.descriptionInputField_element.enabled?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
         page.descriptionInputField= generate_random_string(20)
         page.cancelDescriptionLink
         page.editLabelLink?.should be_true
         page.descriptionInputField_element.enabled?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
         page.descriptionInputField= generate_random_string(20)
         page.saveDescriptionLink
         ajax_wait
@@ -85,17 +92,20 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
         page.editDescriptionLink
         page.descriptionInputField_element.clear
         page.descriptionInputField_element.click
         page.editLabelLink?.should be_false
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
+        page.addStatement?.should be_false
         page.cancelDescriptionLink
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
       end
     end
   end
@@ -109,11 +119,13 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
         page.addSitelinkLink
         page.editLabelLink?.should be_false
         page.editDescriptionLink?.should be_false
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
+        page.addStatement?.should be_false
         page.siteIdInputField_element.should be_true
         page.pageInputField_element.enabled?.should be_false
         page.siteIdInputField="en"
@@ -127,6 +139,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.editDescriptionLink?.should be_false
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
+        page.addStatement?.should be_false
         page.saveSitelinkLink
         ajax_wait
         page.wait_for_api_callback
@@ -135,16 +148,19 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
         page.editSitelinkLink
         page.editLabelLink?.should be_false
         page.editDescriptionLink?.should be_false
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
+        page.addStatement?.should be_false
         page.cancelSitelinkLink
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
       end
     end
   end
@@ -158,16 +174,19 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
         page.addAliases
         page.editLabelLink?.should be_false
         page.editDescriptionLink?.should be_false
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
+        page.addStatement?.should be_false
         page.cancelAliases
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
         page.addAliases
         page.aliasesInputEmpty= generate_random_string(8)
         page.aliasesInputEmpty= generate_random_string(8)
@@ -176,6 +195,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
         page.editSitelinkLink?.should be_false
+        page.addStatement?.should be_false
         page.saveAliases
         ajax_wait
         page.wait_for_api_callback
@@ -183,11 +203,13 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.editDescriptionLink?.should be_true
         page.editAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
         page.editLabelLink
         page.editLabelLink?.should be_false
         page.editDescriptionLink?.should be_false
         page.editAliases?.should be_false
         page.addSitelinkLink?.should be_false
+        page.addStatement?.should be_false
         page.cancelLabelLink
       end
     end
@@ -202,6 +224,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
         page.editSitelinkLink
         page.removeSitelinkLink
         ajax_wait
@@ -210,6 +233,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.addStatement?.should be_true
       end
     end
   end
