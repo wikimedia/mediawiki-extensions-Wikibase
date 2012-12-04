@@ -385,7 +385,22 @@ div.wb-claims-section div.wb-editsection {
 	float: right;
 }
 
-/***** NEW CLAIM *****/
+/***** EDIT/NEW CLAIM *****/
+
+div.wb-claims .wb-edit .wb-claim-section-name,
+div.wb-claim-new .wb-snak-property {
+	background-color: #C0DAE5;
+}
+
+div.wb-claim-section .wb-edit,
+div.wb-claim-new {
+	background-color: #D6F3FF;
+}
+
+div.wb-claim-section .wb-edit .wb-ui-toolbar,
+div.wb-claim-new .wb-ui-toolbar {
+	background-color: #D6F3FF !important;
+}
 
 div.wb-claim-new {
 	border: 1px solid #C9C9C9;
@@ -404,7 +419,6 @@ div.wb-claim-new .wb-snak-property {
 	top: 0;
 	bottom: 0;
 	width: 15em;
-	background-color: #E8E8E8;
 }
 
 div.wb-claim-new .wb-snak-property input {
@@ -418,11 +432,7 @@ div.wb-claim-new .wb-snak-value {
 	max-width: 32em;
 }
 
-div.wb-claim-new textarea {
-	margin: 0;
-}
-
-/***** /NEW CLAIM *****/
+/***** /EDIT/NEW CLAIM *****/
 
 /********** /CLAIMS **********/
 
