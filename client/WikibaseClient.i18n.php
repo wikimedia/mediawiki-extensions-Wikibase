@@ -612,10 +612,13 @@ $messages['sv'] = array(
 );
 
 /** Tamil (தமிழ்)
+ * @author Shanmugamp7
  * @author மதனாஹரன்
  */
 $messages['ta'] = array(
 	'wbc-editlinks' => 'இணைப்புக்களைத் தொகு',
+	'wbc-rc-hide-wikidata' => '$1 விக்கித்தரவு',
+	'wbc-rc-show-wikidata-pref' => 'விக்கித்தரவு தொகுப்புகளை அண்மைய மாற்றங்களில் காண்பி',
 );
 
 /** Telugu (తెలుగు)

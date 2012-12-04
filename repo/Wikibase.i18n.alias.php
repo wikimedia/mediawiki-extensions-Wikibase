@@ -58,8 +58,11 @@ $specialPageAliases['de'] = array(
 /** Zazaki (Zazaki) */
 $specialPageAliases['diq'] = array(
 	'CreateItem' => array( 'LeteVırazê' ),
+	'NewProperty' => array( 'XısusiyetêNewey' ),
 	'ItemByTitle' => array( 'SernuşteyêLeti' ),
 	'ItemDisambiguation' => array( 'EtiketêLeti' ),
+	'ListDatatypes' => array( 'ListeyaBabetandeMelumati' ),
+	'SetLabel' => array( 'SazêEtiketan' ),
 );
 
 /** Spanish (español) */

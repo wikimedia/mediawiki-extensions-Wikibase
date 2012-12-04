@@ -567,7 +567,7 @@ Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
-	'right-item-override' => 'S{{doc-right|item-override}}',
+	'right-item-override' => '{{doc-right|item-override}}',
 	'right-item-create' => '{{doc-right|item-create}}',
 	'right-item-remove' => '{{doc-right|item-remove}}',
 	'right-alias-add' => '{{doc-right|alias-add}}',
@@ -2440,17 +2440,19 @@ $messages['he'] = array(
 	'content-model-wikibase-item' => 'פריט Wikibase',
 	'content-model-wikibase-property' => 'מאפיין Wikibase',
 	'content-model-wikibase-query' => 'שאילתת Wikibase',
-	'right-item-create' => 'יצירת פריט', # Fuzzy
-	'right-item-remove' => 'הסרת פריט', # Fuzzy
-	'right-alias-add' => 'הוספת כינוי', # Fuzzy
-	'right-alias-remove' => 'הסרת כינוי', # Fuzzy
-	'right-sitelink-remove' => 'הסרת קישור אתר', # Fuzzy
-	'right-sitelink-update' => 'עדכון קישור אתר', # Fuzzy
-	'right-linktitles-update' => 'עדכון כותרת קישור', # Fuzzy
-	'right-label-remove' => 'הסרת תווית', # Fuzzy
-	'right-label-update' => 'עדכון תווית', # Fuzzy
-	'right-description-remove' => 'הסרת תיאור', # Fuzzy
-	'right-description-update' => 'עדכון תיאור', # Fuzzy
+	'right-item-override' => 'דריסת פריטים',
+	'right-item-create' => 'יצירת פריטים',
+	'right-item-remove' => 'הסרת פריטים',
+	'right-alias-add' => 'הוספת כינויים',
+	'right-alias-set' => 'הגדרת כינויים',
+	'right-alias-remove' => 'הסרת כינויים',
+	'right-sitelink-remove' => 'הסרת קישורי אתר',
+	'right-sitelink-update' => 'עדכון קישורי אתר',
+	'right-linktitles-update' => 'עדכון כותרתות קישור',
+	'right-label-remove' => 'הסרת תוויות',
+	'right-label-update' => 'עדכון תוויות',
+	'right-description-remove' => 'הסרת תיאורים',
+	'right-description-update' => 'עדכון תיאורים',
 );
 
 /** Croatian (hrvatski)
@@ -5078,7 +5080,9 @@ $messages['ta'] = array(
 	'wikibase-itemdisambiguation-lookup-language' => 'மொழி:',
 	'wikibase-itemdisambiguation-submit' => 'தேடு',
 	'wikibase-newproperty-datatype' => 'தரவு வகை:',
+	'special-createitem' => 'ஒரு புது உருப்படியை உருவாக்குக',
 	'wikibase-createitem-fieldset' => 'ஒரு புது உருப்படியை உருவாக்குக',
+	'wikibase-createentity-description' => 'விளக்கம்:',
 	'wikibase-setlabel-id' => 'அடையாளவிலக்கம்',
 	'wikibase-setlabel-language' => 'மொழி',
 	'wikibase-entitieswithoutlabel-label-language' => 'மொழி:',
@@ -5086,8 +5090,8 @@ $messages['ta'] = array(
 	'wikibase-item-summary-wbeditentity' => 'ஒரு புதிய உருப்படி உருவாக்கப்பட்டது',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2] விளக்கம் மாற்றப்பட்டது',
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2] விளக்கம் நீக்கப்பட்டது',
-	'right-item-create' => 'ஓர் உருப்படியை உருவாக்கு',
-	'right-item-remove' => 'ஓர் உருப்படியை நீக்கு',
+	'right-item-create' => 'ஓர் உருப்படியை உருவாக்கு', # Fuzzy
+	'right-item-remove' => 'ஓர் உருப்படியை நீக்கு', # Fuzzy
 );
 
 /** Telugu (తెలుగు)
