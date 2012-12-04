@@ -65,6 +65,10 @@ class TermSqlCacheTest extends \MediaWikiTestCase {
 	 * @param boolean $matches
 	 */
 	public function testRebuildSearchKey( $languageCode, $termText, $searchText, $matches ) {
+		if ( \Wikibase\Settings::get( 'withoutTermSearchKey' ) ) {
+			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
+		}
+
 		/**
 		 * @var TermSqlCache $termCache
 		 */
