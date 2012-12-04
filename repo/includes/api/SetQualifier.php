@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Api;
+namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use MWException;
@@ -10,6 +10,11 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EditEntity;
+use Wikibase\Claim;
+use Wikibase\ClaimSerializer;
+use Wikibase\Snaks;
+use Wikibase\Snak;
+use Wikibase\SnakFactory;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -39,11 +44,12 @@ use Wikibase\EditEntity;
  */
 class SetQualifier extends \Wikibase\Api {
 
-	// TODO: high level tests
 	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
+	// TODO: more explicit support for snak merging?
+	// TODO: claim uniqueness
 
 	/**
 	 * @see ApiBase::execute
@@ -57,12 +63,13 @@ class SetQualifier extends \Wikibase\Api {
 
 		$content = $this->getEntityContent();
 
-
-		$this->setQualifier(
+		$claim = $this->doSetQualifier(
 			$content->getEntity()
 		);
 
 		$this->saveChanges( $content );
+
+		$this->outputClaim( $claim );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
@@ -92,7 +99,12 @@ class SetQualifier extends \Wikibase\Api {
 			}
 		}
 
-		// TODO
+		if ( isset( $params['snaktype'] ) && $params['snaktype'] === 'value' && !isset( $params['value'] ) ) {
+			$this->dieUsage(
+				'When setting a qualifier that is a PropertyValueSnak, the value needs to be provided',
+				'setqualifier-value-required'
+			);
+		}
 	}
 
 	/**
@@ -119,11 +131,100 @@ class SetQualifier extends \Wikibase\Api {
 	 * @since 0.3
 	 *
 	 * @param Entity $entity
+	 *
+	 * @return Claim
 	 */
-	protected function setQualifier( Entity $entity ) {
+	protected function doSetQualifier( Entity $entity ) {
 		$params = $this->extractRequestParams();
 
-		// TODO
+		$claimGuid = $params['claim'];
+
+		if ( !$entity->getClaims()->hasClaimWithGuid( $claimGuid ) ) {
+			$this->dieUsage( 'No such claim', 'setqualifier-claim-not-found' );
+		}
+
+		$claim = $entity->getClaims()->getClaimWithGuid( $claimGuid );
+
+		$this->updateQualifiers( $claim->getQualifiers() );
+
+		return $claim;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param Snaks $qualifiers
+	 */
+	protected function updateQualifiers( Snaks $qualifiers ) {
+		$params = $this->extractRequestParams();
+
+		if ( isset( $params['snakhash'] ) ) {
+			$this->updateQualifier( $qualifiers, $params['snakhash'] );
+		}
+		else {
+			$this->addQualifier( $qualifiers );
+		}
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param Snaks $qualifiers
+	 * @param string $snakHash
+	 *
+	 * @return boolean If the snak was added or not
+	 * This is false if there already is a snak with the new value in the list.
+	 * In such cases the snak will thus have been merged/removed.
+	 */
+	protected function updateQualifier( Snaks $qualifiers, $snakHash ) {
+		if ( !$qualifiers->hasSnakHash( $snakHash ) ) {
+			$this->dieUsage( 'No such qualifier', 'setqualifier-qualifier-not-found' );
+		}
+
+		$params = $this->extractRequestParams();
+
+		$snak = $qualifiers->getSnak( $snakHash );
+		$qualifiers->removeSnakHash( $snakHash );
+
+		$propertyId = isset( $params['property'] ) ? $params['property'] : $snak->getPropertyId();
+		$snakType = isset( $params['snaktype'] ) ? $params['snaktype'] : $snak->getType();
+
+		if ( isset( $params['value'] ) ) {
+			$snakValue = \FormatJson::decode( $params['value'] );
+		}
+		elseif ( $snak instanceof \Wikibase\PropertyValueSnak ) {
+			$snakValue = $snak->getDataValue()->getArrayValue();
+		}
+		else {
+			$snakValue = null;
+		}
+
+		$factory = new SnakFactory();
+		$newQualifier = $factory->newSnak( $propertyId, $snakType, $snakValue );
+
+		return $qualifiers->addSnak( $newQualifier );
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param Snaks $qualifiers
+	 *
+	 * @return boolean If the snak was added or not
+	 * This is false if there already is a snak with the new value in the list.
+	 * In such cases the snak will thus have been merged/removed.
+	 */
+	protected function addQualifier( Snaks $qualifiers ) {
+		$params = $this->extractRequestParams();
+		$factory = new SnakFactory();
+
+		$newQualifier = $factory->newSnak(
+			$params['property'],
+			$params['snaktype'],
+			isset( $params['value'] ) ? $params['value'] : null
+		);
+
+		return $qualifiers->addSnak( $newQualifier );
 	}
 
 	/**
@@ -144,7 +245,7 @@ class SetQualifier extends \Wikibase\Api {
 			isset( $params['token'] ) ? $params['token'] : false
 		);
 
-		if ( !$status->isGood() ) {
+		if ( !$status->isOk() ) {
 			$this->dieUsage( 'Failed to save the change', 'save-failed' );
 		}
 
@@ -157,6 +258,22 @@ class SetQualifier extends \Wikibase\Api {
 				(int)$statusValue['revision']->getId()
 			);
 		}
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param Claim $claim
+	 */
+	protected function outputClaim( Claim $claim ) {
+		$serializer = new ClaimSerializer();
+		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
+
+		$this->getResult()->addValue(
+			null,
+			'claim',
+			$serializer->getSerialized( $claim )
+		);
 	}
 
 	/**
@@ -276,6 +393,33 @@ class SetQualifier extends \Wikibase\Api {
 	 */
 	public function getVersion() {
 		return __CLASS__ . '-' . WB_VERSION;
+	}
+
+	/**
+	 * @see ApiBase::needsToken
+	 *
+	 * @return bool true
+	 */
+	public function needsToken() {
+		return true;
+	}
+
+	/**
+	 * @see ApiBase::isWriteMode
+	 *
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
+	 * @see ApiBase::mustBePosted
+	 *
+	 * @return bool true
+	 */
+	public function mustBePosted() {
+		return true;
 	}
 
 }
