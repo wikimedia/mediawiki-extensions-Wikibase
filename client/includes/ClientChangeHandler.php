@@ -92,10 +92,18 @@ class ClientChangeHandler {
 	 *
 	 * @param Change $change
 	 *
+	 * @throws \MWException
+	 *
 	 * @return array
 	 */
 	public function parseComment( $change ) {
 		list( $message, $sitecode ) = explode( '~', $change->getComment() );
+
+		// check that $sitecode is valid
+		if ( \Sites::singleton()->getSite( $sitecode ) === false ) {
+			throw new \MWException( "Site code $sitecode does not exist in the sites table." );
+		}
+
 		$params = array(
 			'message' => $message,
 			'sitecode' => $sitecode,
