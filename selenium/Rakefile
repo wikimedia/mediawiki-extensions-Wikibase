@@ -193,6 +193,21 @@ RSpec::Core::RakeTask.new(:client_rc_and_wl) do |spec|
   spec.pattern = '../client/tests/selenium/special/client_rc_and_wl_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:statements) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/statements/statements_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:statements_bugs) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/statements/statements_bugs_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:statements_all) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/statements/*_spec.rb'
+end
+
 task :run_tests, :taskname, :browser, :remote, :os do |t, args|
   task = args[:taskname] || :all
   setup_env(args[:browser], args[:remote], args[:os])
