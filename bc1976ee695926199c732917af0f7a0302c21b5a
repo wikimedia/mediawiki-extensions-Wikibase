@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//6wA\u003d",
+        "filename": "repo/includes/store/sql/Wikibase.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-04T16:33:33Z",
+      "side": 1,
+      "message": "You\u0027re being rather inconsistent with Id vs ID here",
+      "revId": "bc1976ee695926199c732917af0f7a0302c21b5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
