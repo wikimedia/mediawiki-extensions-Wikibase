@@ -30,6 +30,7 @@ $wgAutoloadClasses['Wikibase\Repo\Api\SetQualifier'] 		= $dir . 'includes/api/Se
 $wgAutoloadClasses['Wikibase\Api\SetStatementRank']			= $dir . 'includes/api/SetStatementRank.php';
 
 
+$wgAutoloadClasses['SpecialAssignedPages'] 				= $dir . 'includes/specials/SpecialAssignedPages.php';
 $wgAutoloadClasses['SpecialListDatatypes'] 				= $dir . 'includes/specials/SpecialListDatatypes.php';
 $wgAutoloadClasses['SpecialNewProperty'] 				= $dir . 'includes/specials/SpecialNewProperty.php';
 $wgAutoloadClasses['SpecialEntityData'] 				= $dir . 'includes/specials/SpecialEntityData.php';
@@ -44,6 +45,7 @@ $wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
 $wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Repo\Api\SetQualifier';
 $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
 
+$wgSpecialPages['AssignedPages'] 					= 'SpecialAssignedPages';
 $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 $wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
