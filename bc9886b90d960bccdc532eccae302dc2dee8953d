@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//6rg\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 439
+      },
+      "writtenOn": "2012-12-04T17:42:08Z",
+      "side": 1,
+      "message": "Spaces ;)",
+      "revId": "bc9886b90d960bccdc532eccae302dc2dee8953d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
