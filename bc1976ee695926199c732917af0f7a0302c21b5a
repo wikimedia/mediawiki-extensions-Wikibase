@@ -16,6 +16,40 @@
       "revId": "bc1976ee695926199c732917af0f7a0302c21b5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//6vQ\u003d",
+        "filename": "repo/includes/store/sql/Wikibase.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-12-04T16:54:51Z",
+      "side": 1,
+      "message": "what\u0027s the reason for this being INTEGER and not INT?\n\nno \u0027unsigned\u0027 and no \u0027NOT NULL\u0027?",
+      "revId": "bc1976ee695926199c732917af0f7a0302c21b5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//6vM\u003d",
+        "filename": "repo/includes/store/sql/Wikibase.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-12-04T16:54:51Z",
+      "side": 1,
+      "message": "same as comment above",
+      "revId": "bc1976ee695926199c732917af0f7a0302c21b5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
