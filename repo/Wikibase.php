@@ -147,6 +147,7 @@ $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryC
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
 
 // includes/specials
+$wgAutoloadClasses['SpecialAssignedPages'] 				= $dir . 'includes/specials/SpecialAssignedPages.php';
 $wgAutoloadClasses['SpecialCreateEntity'] 				= $dir . 'includes/specials/SpecialCreateEntity.php';
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
@@ -202,6 +203,7 @@ $wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
 
 
 // Special page registration
+$wgSpecialPages['AssignedPages'] 					= 'SpecialAssignedPages';
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
