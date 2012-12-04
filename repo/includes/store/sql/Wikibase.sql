@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
   term_entity_type           VARBINARY(32)       NOT NULL, -- Type of the entity
   term_language              VARBINARY(32)       NOT NULL, -- Language code
   term_type                  VARBINARY(32)       NOT NULL, -- Term type
-  term_text                  VARCHAR(255)        NOT NULL, -- The term text
-  term_search_key            VARCHAR(255)        NOT NULL -- The term text, lowercase for case-insensitive lookups
+  term_text                  VARCHAR(255) binary NOT NULL, -- The term text
+  term_search_key            VARCHAR(255) binary NOT NULL -- The term text, lowercase for case-insensitive lookups
 ) /*$wgDBTableOptions*/;
 
 CREATE INDEX /*i*/wb_terms_entity_id ON /*_*/wb_terms (term_entity_id);
