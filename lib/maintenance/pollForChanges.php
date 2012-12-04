@@ -165,8 +165,11 @@ class PollForChanges extends \Maintenance {
 			}
 		}
 		else {
-			self::msg( $changeCount . ' new changes were found' );
-
+            if ( $changeCount == 1 ) {
+                self::msg( 'One new change was found' );
+            } else {
+			    self::msg( $changeCount . ' new changes were found' );
+            }
 			$changes = iterator_to_array( $changes );
 
 			try {
