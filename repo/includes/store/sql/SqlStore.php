@@ -145,6 +145,18 @@ class SqlStore implements Store {
 
 				$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildEntityPerPage' );
 			}
+
+			// Update from 0.1 or 0.2.
+			if ( !$db->fieldExists( 'wb_terms', 'term_row_id' ) ) {
+				// creates wb_terms.term_row_id
+				// and also wb_item_per_site.ips_row_id.
+
+				$updater->addExtensionField(
+					'wb_terms',
+					'term_row_id',
+					__DIR__ . '/AddRowIDs' . $extension
+				);
+			}
 		}
 		else {
 			wfWarn( "Database type '$type' is not supported by Wikibase Client." );

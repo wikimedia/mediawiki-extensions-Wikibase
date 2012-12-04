@@ -18,6 +18,7 @@ CREATE UNIQUE INDEX /*i*/wb_id_counters_type ON /*_*/wb_id_counters (id_type);
 -- Derived storage.
 -- Links site+title pairs to item ids.
 CREATE TABLE IF NOT EXISTS /*_*/wb_items_per_site (
+  ips_row_id                 INTEGER PRIMARY KEY auto_increment, -- row ID
   ips_item_id                INT unsigned        NOT NULL, -- Id of the item
   ips_site_id                VARBINARY(32)       NOT NULL, -- Site identifier (global)
   ips_site_page              VARCHAR(255)        NOT NULL -- Title of the page
@@ -31,6 +32,7 @@ CREATE INDEX /*i*/wb_ips_item_id ON /*_*/wb_items_per_site (ips_item_id);
 
 -- Lookup table for entity terms (ie labels, aliases, descriptions).
 CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
+  ips_row_id                 INTEGER PRIMARY KEY auto_increment, -- row ID
   term_entity_id             INT unsigned        NOT NULL, -- Id of the entity
   term_entity_type           VARBINARY(32)       NOT NULL, -- Type of the entity
   term_language              VARBINARY(32)       NOT NULL, -- Language code
