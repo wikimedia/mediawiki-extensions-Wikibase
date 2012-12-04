@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAADbX//6oQ\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-12-04T18:23:38Z",
+      "side": 1,
+      "message": "suggest more explicit check here\n\n$changeCount \u003d\u003d\u003d 1",
+      "revId": "bc9886b90d960bccdc532eccae302dc2dee8953d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADbX//6rg\u003d",
         "filename": "lib/maintenance/pollForChanges.php",
         "patchSetId": 2
