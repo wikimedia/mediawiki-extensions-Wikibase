@@ -33,6 +33,24 @@
       "revId": "c12bfa6f390aa64409716b3b780ef6bfd366f702",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//6vw\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-04T16:38:19Z",
+      "side": 1,
+      "message": "That would cripple a default install, though.",
+      "parentUuid": "AAADbX//6yQ\u003d",
+      "revId": "c12bfa6f390aa64409716b3b780ef6bfd366f702",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
