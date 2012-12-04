@@ -1,13 +1,12 @@
 <?php
 
 namespace Wikibase\Test\Api;
-use Wikibase\Reference;
 use Wikibase\Snak;
 use Wikibase\Statement;
 use Wikibase\EntityId;
 
 /**
- * Unit tests for the Wikibase\Api\RemoveReferences class.
+ * Unit tests for the Wikibase\Api\RemoveQualifiers class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,13 +33,14 @@ use Wikibase\EntityId;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
+ * @group RemoveQualifiersTest
  *
  * @group medium
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveReferencesTest extends \ApiTestCase {
+class RemoveQualifiersTest extends \ApiTestCase {
 
 	/**
 	 * @return Snak[]
@@ -68,13 +68,13 @@ class RemoveReferencesTest extends \ApiTestCase {
 		foreach ( $this->snakProvider() as $snak ) {
 			$statement = clone $statement;
 			$snaks = new \Wikibase\SnakList( array( $snak ) );
-			$statement->getReferences()->addReference( new \Wikibase\ReferenceObject( $snaks ) );
+			$statement->setQualifiers( $snaks );
 			$statements[] = $statement;
 		}
 
 		$statement = clone $statement;
 		$snaks = new \Wikibase\SnakList( $this->snakProvider() );
-		$statement->getReferences()->addReference( new \Wikibase\ReferenceObject( $snaks ) );
+		$statement->setQualifiers( $snaks );
 		$statements[] = $statement;
 
 		return $statements;
@@ -92,25 +92,25 @@ class RemoveReferencesTest extends \ApiTestCase {
 
 			$content->save( '' );
 
-			$references = $statement->getReferences();
-
-			$hashes = array_map(
-				function( Reference $reference ) {
-					return $reference->getHash();
-				},
-				iterator_to_array( $references )
-			);
-
 			$this->assertInternalType( 'string', $statement->getGuid() );
 
-			if ( count( $references ) === 0 ) {
+			$qualifiers = $statement->getQualifiers();
+
+			if ( count( $qualifiers ) === 0 ) {
 				$this->makeInvalidRequest(
 					$statement->getGuid(),
 					array( '~=[,,_,,]:3' ),
-					'removereferences-no-such-reference'
+					'removequalifiers-qualifier-not-found'
 				);
 			}
 			else {
+				$hashes = array_map(
+					function( Snak $qualifier ) {
+						return $qualifier->getHash();
+					},
+					iterator_to_array( $qualifiers )
+				);
+
 				$this->makeValidRequest(
 					$statement->getGuid(),
 					$hashes
@@ -121,9 +121,9 @@ class RemoveReferencesTest extends \ApiTestCase {
 
 	protected function makeValidRequest( $statementGuid, array $hashes ) {
 		$params = array(
-			'action' => 'wbremovereferences',
-			'statement' => $statementGuid,
-			'references' => implode( '|', $hashes ),
+			'action' => 'wbremovequalifiers',
+			'claim' => $statementGuid,
+			'qualifiers' => implode( '|', $hashes ),
 			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
@@ -132,14 +132,14 @@ class RemoveReferencesTest extends \ApiTestCase {
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
 
-		$this->makeInvalidRequest( $statementGuid, $hashes, 'removereferences-no-such-reference' );
+		$this->makeInvalidRequest( $statementGuid, $hashes, 'removequalifiers-qualifier-not-found' );
 	}
 
 	protected function makeInvalidRequest( $statementGuid, array $hashes, $expectedError = null ) {
 		$params = array(
-			'action' => 'wbremovereferences',
-			'statement' => $statementGuid,
-			'references' => implode( '|', $hashes ),
+			'action' => 'wbremovequalifiers',
+			'claim' => $statementGuid,
+			'qualifiers' => implode( '|', $hashes ),
 			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 

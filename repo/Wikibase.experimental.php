@@ -24,6 +24,7 @@ $wgAutoloadClasses['Wikibase\ApiGetClaims'] 				= $dir . 'includes/api/ApiGetCla
 $wgAutoloadClasses['Wikibase\ApiRemoveClaims'] 				= $dir . 'includes/api/ApiRemoveClaims.php';
 $wgAutoloadClasses['Wikibase\ApiSetClaimValue'] 			= $dir . 'includes/api/ApiSetClaimValue.php';
 $wgAutoloadClasses['Wikibase\ApiSetReference'] 				= $dir . 'includes/api/ApiSetReference.php';
+$wgAutoloadClasses['Wikibase\Repo\Api\RemoveQualifiers'] 	= $dir . 'includes/api/RemoveQualifiers.php';
 $wgAutoloadClasses['Wikibase\Api\RemoveReferences'] 		= $dir . 'includes/api/RemoveReferences.php';
 $wgAutoloadClasses['Wikibase\Repo\Api\SetQualifier'] 		= $dir . 'includes/api/SetQualifier.php';
 $wgAutoloadClasses['Wikibase\Api\SetStatementRank']			= $dir . 'includes/api/SetStatementRank.php';
@@ -38,6 +39,7 @@ $wgAPIModules['wbgetclaims'] 						= 'Wikibase\ApiGetClaims';
 $wgAPIModules['wbremoveclaims'] 					= 'Wikibase\ApiRemoveClaims';
 $wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\ApiSetClaimValue';
 $wgAPIModules['wbsetreference'] 					= 'Wikibase\ApiSetReference';
+$wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Repo\Api\RemoveQualifiers';
 $wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
 $wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Repo\Api\SetQualifier';
 $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
@@ -66,6 +68,7 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'api/ApiRemoveClaims',
 		'api/ApiSetClaimValue',
 		'api/ApiSetReference',
+		'api/RemoveQualifiers',
 		'api/RemoveReferences',
 		'api/SetStatementRank',
 		'api/SetQualifier',
