@@ -27,6 +27,7 @@ use Wikibase\PropertyContent, Wikibase\EntityContent;
  * @ingroup WikibaseRepoTest
  * @ingroup Test
  *
+ * @group Database
  * @group Wikibase
  * @group WikibaseProperty
  * @group WikibaseRepo
