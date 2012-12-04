@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADbX//6kk\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-04T19:28:55Z",
+      "side": 1,
+      "message": "Why? It should be an integer. No explicit check needed IMO. If you want to verity it\u0027s an int, then throw an assert after $changeCount \u003d $changes-\u003ecount();",
+      "parentUuid": "AAADbX//6oQ\u003d",
+      "revId": "bc9886b90d960bccdc532eccae302dc2dee8953d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADbX//6rg\u003d",
         "filename": "lib/maintenance/pollForChanges.php",
         "patchSetId": 2
