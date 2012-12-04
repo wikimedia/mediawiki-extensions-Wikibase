@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "AAADbX//6u4\u003d",
+        "filename": "repo/includes/store/sql/Wikibase.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-04T16:56:53Z",
+      "side": 1,
+      "message": "to make it work in sqlite. didn\u0027t try whether int unsigned will also work... it might, but sqlite is quite picky about primary keys, because they are mapped to the internal object id. which is a signed (!) 64 bit int.",
+      "parentUuid": "AAADbX//6vQ\u003d",
+      "revId": "bc1976ee695926199c732917af0f7a0302c21b5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADbX//6vM\u003d",
         "filename": "repo/includes/store/sql/Wikibase.sql",
         "patchSetId": 1
