@@ -279,7 +279,7 @@ EditableValue's "edit" button when aliases exist) */
 
 /********** CLAIMS **********/
 
-div.wb-claim-section textarea {
+div.wb-claim textarea {
 	margin: 0;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -409,15 +409,15 @@ div.wb-claim-new {
 }
 
 div.wb-claim-new .wb-claim-mainsnak {
-	margin: 0;
+	margin: 0 18em 0 15em;
 	padding: 0;
-	width: 100%;
 }
 
 div.wb-claim-new .wb-snak-property {
 	position: absolute;
 	top: 0;
 	bottom: 0;
+	left: -15em;
 	width: 15em;
 }
 
@@ -427,7 +427,6 @@ div.wb-claim-new .wb-snak-property input {
 
 div.wb-claim-new .wb-snak-value {
 	min-height: 1.5em;
-	margin-left: 15em;
 	padding: 10px;
 	max-width: 32em;
 }
