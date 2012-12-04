@@ -348,8 +348,8 @@ final class ClientHooks {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		if ( Settings::get( 'showExternalRecentChanges' ) === false ||
-			$opts->validateName( 'hidewikidata' ) === false ||
-			$opts->getValue( 'hidewikidata' ) === true ) {
+			( ( $opts->validateName( 'hidewikidata' ) === false ) &&  $opts->validateName( 'hideanons' ) === false  ) ||
+			( ( $opts->getValue( 'hidewikidata' ) === true ) ||  $opts->getValue( 'hideanons' ) === true ) ){
 			$conds[] = 'rc_type != ' . RC_EXTERNAL;
 		}
 
