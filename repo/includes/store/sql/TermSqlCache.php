@@ -124,12 +124,17 @@ class TermSqlCache implements TermCache {
 	 * @return array
 	 */
 	protected function getTermFields( Term $term ) {
-		return array(
+		$fields = array(
 			'term_language' => $term->getLanguage(),
 			'term_type' => $term->getType(),
 			'term_text' => $term->getText(),
-			'term_search_key' => $term->getNormalizedText(),
 		);
+
+		if ( !Settings::get( 'withoutTermSearchKey' ) ) {
+			$fields['term_search_key'] = $term->getNormalizedText();
+		}
+
+		return $fields;
 	}
 
 	/**
@@ -356,7 +361,9 @@ class TermSqlCache implements TermCache {
 			$text = $term->getText();
 
 			if ( $text !== null ) {
-				if ( $options['caseSensitive'] ) {
+				if ( $options['caseSensitive']
+					|| Settings::get( 'withoutTermSearchKey' ) ) {
+					//NOTE: whether this match is *actually* case sensitive depends on the collation used in the database.
 					$textField = 'term_text';
 				}
 				else {
