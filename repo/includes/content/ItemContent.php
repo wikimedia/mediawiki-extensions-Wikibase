@@ -118,13 +118,17 @@ class ItemContent extends EntityContent {
 		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
 
 		if ( $status->isOK() ) {
-			$this->addSiteLinkConflicts( $status );
+			//NOTE: use master database to check for conflicts before saving.
+			//TODO: Content::prepareSave should take a database object as a parameter,
+			//      so we wouldn't need to resort to global state here.
+			$dbw = wfGetDB( DB_MASTER );
+			$this->addSiteLinkConflicts( $status, $dbw );
 
 			// Do not run this when running test using MySQL as self joins fail on temporary tables.
 			if ( !defined( 'MW_PHPUNIT_TEST' )
 				|| !( StoreFactory::getStore() instanceof \Wikibase\SqlStore )
-				|| wfGetDB( DB_SLAVE )->getType() !== 'mysql' ) {
-				$this->addLabelDescriptionConflicts( $status );
+				|| $dbw->getType() !== 'mysql' ) {
+				$this->addLabelDescriptionConflicts( $status, $dbw );
 			}
 		}
 
@@ -139,8 +143,13 @@ class ItemContent extends EntityContent {
 	 * @since 0.1
 	 *
 	 * @param Status $status
+	 * @param \DatabaseBase|null $db The database object to use (optional).
+	 *        If conflict checking is performed as part of a save operation,
+	 *        this should be used to provide the master DB connection that will
+	 *        also be used for saving. This will preserve transactional integrity
+	 *        and avoid race conditions.
 	 */
-	protected function addLabelDescriptionConflicts( Status $status ) {
+	protected function addLabelDescriptionConflicts( Status $status, \DatabaseBase $db = null ) {
 		$terms = array();
 
 		$entity = $this->getEntity();
@@ -166,6 +175,9 @@ class ItemContent extends EntityContent {
 		}
 
 		if ( !empty( $terms ) ) {
+			//TODO: The term cache should use $db for the lookup, so we can be sure
+			//      it's the master database in case we want to do consistency checks
+			//      before saving.
 			$foundTerms = StoreFactory::getStore()->newTermCache()->getMatchingTermCombination(
 				$terms,
 				null,
@@ -198,9 +210,14 @@ class ItemContent extends EntityContent {
 	 * @since 0.1
 	 *
 	 * @param Status $status
+	 * @param \DatabaseBase|null $db The database object to use (optional).
+	 *        If conflict checking is performed as part of a save operation,
+	 *        this should be used to provide the master DB connection that will
+	 *        also be used for saving. This will preserve transactional integrity
+	 *        and avoid race conditions.
 	 */
-	protected function addSiteLinkConflicts( Status $status ) {
-		$conflicts = StoreFactory::getStore()->newSiteLinkCache()->getConflictsForItem( $this->getItem() );
+	protected function addSiteLinkConflicts( Status $status, \DatabaseBase $db = null ) {
+		$conflicts = StoreFactory::getStore()->newSiteLinkCache()->getConflictsForItem( $this->getItem(), $db );
 
 		foreach ( $conflicts as $conflict ) {
 			$id = new EntityId( Item::ENTITY_TYPE, $conflict['itemId'] );
