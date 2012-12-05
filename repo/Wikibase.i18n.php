@@ -818,6 +818,7 @@ $messages['ca'] = array(
  * @author Kghbln
  * @author Metalhead64
  * @author Nipsky
+ * @author Vogone
  */
 $messages['de'] = array(
 	'wikibase-desc' => 'Ermöglicht ein Repositorium strukturierter Daten',
@@ -893,7 +894,7 @@ $messages['de'] = array(
 	'wikibase-error-label-not-unique-item' => 'Ein anderes Datenobjekt ($3) hat bereits die Bezeichnung „$1“ und die Beschreibung „$4“, die dem Sprachcode $2 zugeordnet ist.',
 	'special-itembytitle' => 'Datenobjekte nach Titel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Suche nach Datenelementen nach Website und Titel',
-	'wikibase-itembytitle-lookup-site' => 'Website:',
+	'wikibase-itembytitle-lookup-site' => 'Wiki:',
 	'wikibase-itembytitle-lookup-page' => 'Seite:',
 	'wikibase-itembytitle-submit' => 'Suchen',
 	'wikibase-itembytitle-nothing-found' => 'Mit der vorherigen Suche konnte kein Datenobjekt ermittelt werden. Bitte verfeinere die Abfrage indem du die externe Seite besser beschreibst.',
