@@ -220,7 +220,7 @@ foreach ( array(
 
 
 $wgDataTypes['wikibase-item'] = array(
-	'datavalue' => 'number',
+	'datavalue' => 'string',
 );
 
 
