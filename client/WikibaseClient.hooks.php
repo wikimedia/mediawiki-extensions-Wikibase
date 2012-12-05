@@ -113,6 +113,14 @@ final class ClientHooks {
 
 		$store->clear();
 
+		// @todo filter by something better than RC_EXTERNAL, in case something else uses that someday
+		$dbw = wfGetDB( DB_MASTER );
+		$dbw->delete(
+			'recentchanges',
+			array( 'rc_type' => RC_EXTERNAL ),
+			__METHOD__
+		);
+
 		$reportMessage( "done!\n" );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
