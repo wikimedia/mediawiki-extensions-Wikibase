@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( dv, $, undefined ) {
+( function( dv, $ ) {
 'use strict';
 
 /**
@@ -23,7 +23,7 @@ dv.DataValue.prototype = {
 	 *
 	 * @since 0.1
 	 *
-	 * @return mixed
+	 * @return {*}
 	 */
 	getValue: dv.util.abstractMember,
 
@@ -70,7 +70,13 @@ dv.DataValue.prototype = {
 	getType: function() {
 		return this.constructor.TYPE;
 	}
-
 };
+
+/**
+ * Type of the DataValue. A static definition of the type like this has to be defined for all
+ * DataValue implementations.
+ * @type String
+ */
+dv.DataValue.TYPE = null;
 
 }( dataValues, jQuery ) );
