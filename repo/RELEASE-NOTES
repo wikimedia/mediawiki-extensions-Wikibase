@@ -20,6 +20,10 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * Added wbremoveclaims API module
 * Added wbsetclaimvalue API module
 * Added wbsetreference API module
+* Added wbremovereferences API module
+* Added wbsetstatementrank API module
+* Added wbsetqualifier API module
+* Added wbremovequalifiers API module
 
 ; Backend
 
