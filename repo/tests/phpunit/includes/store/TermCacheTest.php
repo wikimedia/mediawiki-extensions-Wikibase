@@ -250,15 +250,19 @@ class TermCacheTest extends \MediaWikiTestCase {
 			) ),
 		);
 
-		$expectedTerms = array(
-			$id0 => new Term( array(
+		$expectedTerms = array();
+
+		if ( !\Wikibase\Settings::get( 'withoutTermSearchKey' ) ) {
+			// case insensitive match is only found if SearchKey can be used.
+			$expectedTerms[$id0] = new Term( array(
 				'termLanguage' => 'en',
 				'termText' => 'prefix',
-			) ),
-			$id1 => new Term( array(
-				'termText' => 'postfix',
-			) ),
-		);
+			) );
+		}
+
+		$expectedTerms[$id1] = new Term( array(
+			'termText' => 'postfix',
+		) );
 
 		$options = array(
 			'caseSensitive' => false,
