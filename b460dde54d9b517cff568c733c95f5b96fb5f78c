@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//5wM\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-12-05T11:10:16Z",
+      "side": 1,
+      "message": "shouldn\u0027t it be in the form\nassert( \u0027is_int( $changeCount )\u0027, \u0027$changeCount must be int\u0027 );",
+      "revId": "b460dde54d9b517cff568c733c95f5b96fb5f78c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
