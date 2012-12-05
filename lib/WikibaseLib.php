@@ -63,7 +63,7 @@ foreach ( $dependencies as $constant => $name ) {
 
 unset( $dependencies );
 
-define( 'WBL_VERSION', '0.3 alpha' );
+define( 'WBL_VERSION', '0.4 alpha' );
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __FILE__,

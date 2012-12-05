@@ -5,8 +5,13 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 
 
-=== Version 0.3 ===
+=== Version 0.4 ===
 (dev)
+
+*
+
+=== Version 0.3 ===
+(???)
 
 * Introduced EntityId interface
 * Implemented proper serialization in Entity

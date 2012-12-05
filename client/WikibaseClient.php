@@ -36,7 +36,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 	die( '<b>Error:</b> WikibaseClient depends on the <a href="https://www.mediawiki.org/wiki/Extension:WikibaseLib">WikibaseLib</a> extension.' );
 }
 
-define( 'WBC_VERSION', '0.3 alpha' );
+define( 'WBC_VERSION', '0.4 alpha' );
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __FILE__,
