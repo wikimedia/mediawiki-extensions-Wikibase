@@ -15,11 +15,11 @@ module StatementPage
   link(:saveStatement, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[1]")
   link(:cancelStatement, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[2]")
   #text_area(:newStatementValueInput, :xpath => "//div[contains(@class, 'wb-claim-new')]/div/div/div[contains(@class, 'wb-snak-value')]/div/div/textarea[contains(@class, 'valueview-input')]")
-  text_area(:statementValueInput, :xpath => "//div[contains(@class, 'valueview-ineditmode')]/div/textarea[contains(@class, 'valueview-input')]")
+  text_area(:statementValueInput, :xpath => "//div[contains(@class, 'valueview-ineditmode')]/div/a/textarea[contains(@class, 'valueview-input')]")
   #div(:newClaimSection, :xpath => "//div[contains(@class, 'wb-claim-new')]")
   div(:claimEditMode, :xpath => "//div[contains(@class, 'valueview-ineditmode')]")
   div(:firstClaimName, :xpath => "//div[contains(@class, 'wb-claim-section')]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]")
-  text_area(:firstClaimValue, :xpath => "//div[contains(@class, 'wb-claim-section')]/div[contains(@class, 'wb-claimview')]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value')]/div/div/textarea")
+  element(:firstClaimValue, :a, :xpath => "//div[contains(@class, 'wb-claim-section')]/div[contains(@class, 'wb-claimview')]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
 
   def wait_for_property_value_box
     wait_until do
