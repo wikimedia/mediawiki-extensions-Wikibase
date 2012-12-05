@@ -161,6 +161,8 @@ final class ClientHooks {
 	 *
 	 * @param Change $change
 	 *
+	 * @throws \MWException
+	 *
 	 * @return bool
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
@@ -168,6 +170,10 @@ final class ClientHooks {
 
 		if ( ! ( $change instanceof EntityChange ) ) {
 			return true;
+		}
+
+		if ( \SitesTable::singleton()->exists() === false ) {
+			throw new \MWException( 'Sites table does not exist, but is required for handling changes.' );
 		}
 
 		if ( Settings::get( 'repoDatabase' ) === null ) {
