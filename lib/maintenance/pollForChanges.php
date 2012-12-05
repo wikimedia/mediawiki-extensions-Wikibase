@@ -158,6 +158,7 @@ class PollForChanges extends \Maintenance {
 		);
 
 		$changeCount = $changes->count();
+		assert( 'is_int( $changeCount ) /* $changeCount must be int */' );
 
 		if ( $changeCount == 0 ) {
 			if ( $this->getOption( 'verbose' ) ) {
@@ -165,8 +166,11 @@ class PollForChanges extends \Maintenance {
 			}
 		}
 		else {
-			self::msg( $changeCount . ' new changes were found' );
-
+			if ( $changeCount == 1 ) {
+				self::msg( 'One new change was found' );
+			} else {
+				self::msg( $changeCount . ' new changes were found' );
+			}
 			$changes = iterator_to_array( $changes );
 
 			try {
