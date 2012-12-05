@@ -301,6 +301,7 @@ return call_user_func( function() {
 				'jquery.ui.entityselector',
 				'wikibase.datamodel',
 				'dataTypes.jquery.valueview.views',
+				'wikibase.jquery.valueview.views',
 				'wikibase.store' // required for getting datatype from entityselector selected property
 			),
 			'messages' => array(
@@ -347,7 +348,17 @@ return call_user_func( function() {
 				'jquery.ui.suggester',
 				'jquery.ui.resizable'
 			)
-		)
+		),
+
+		// jQuery.valueview views for Wikibase specific DataValues/DataTypes
+		'wikibase.jquery.valueview.views' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview.views/wikibaseItem.js',
+			),
+			'dependencies' => array(
+				'dataTypes.jquery.valueview',
+			),
+		),
 
 	);
 } );
