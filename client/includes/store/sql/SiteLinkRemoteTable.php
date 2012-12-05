@@ -66,17 +66,22 @@ class SiteLinkRemoteTable extends RepoTable implements SiteLinkLookup {
 	 * @since 0.3
 	 *
 	 * @param Item $item
+	 * @param \DatabaseBase|null $db The database object to use (optional).
 	 *
 	 * @return array of array
 	 */
-	public function getConflictsForItem( Item $item ) {
+	public function getConflictsForItem( Item $item, \DatabaseBase $db = null ) {
 		$links = $item->getSiteLinks();
 
 		if ( $links === array() ) {
 			return array();
 		}
 
-		$dbr = $this->lb->getConnection( DB_SLAVE );
+		if ( $db ) {
+			$dbr = $db;
+		} else {
+			$dbr = $this->lb->getConnection( DB_SLAVE );
+		}
 
 		$anyOfTheLinks = '';
 
@@ -119,7 +124,9 @@ class SiteLinkRemoteTable extends RepoTable implements SiteLinkLookup {
 			);
 		}
 
-		$this->lb->reuseConnection( $dbr );
+		if ( !$db ) {
+			$this->lb->reuseConnection( $dbr );
+		}
 
 		return $conflicts;
 	}
