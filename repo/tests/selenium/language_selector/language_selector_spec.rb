@@ -16,14 +16,14 @@ describe "Check functionality of wikidata together with ULS" do
   before :all do
     # set up: switch to english language and create an item with label & description
     visit_page(CreateItemPage) do |page|
-      page.uls_switch_language("English")
+      page.uls_switch_language("en")
       page.create_new_item(label_en, description_en, false)
     end
   end
   context "ULS test setup" do
     it "should switch to german language and enter label and description in german" do
       on_page(ItemPage) do |page|
-        page.uls_switch_language("Deutsch")
+        page.uls_switch_language("de")
         page.wait_for_entity_to_load
         page.labelInputField_element.clear
         page.labelInputField = label_de
@@ -44,14 +44,14 @@ describe "Check functionality of wikidata together with ULS" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.uls_switch_language("English")
+        page.uls_switch_language("en")
         page.wait_for_entity_to_load
         page.entityLabelSpan.should == label_en
         page.entityDescriptionSpan.should == description_en
-        page.uls_switch_language("Deutsch")
+        page.uls_switch_language("de")
         page.wait_for_entity_to_load
         page.entityLabelSpan.should == label_de
-        page.uls_switch_language("English")
+        page.uls_switch_language("en")
         page.wait_for_entity_to_load
         page.entityLabelSpan.should == label_en
       end
@@ -65,19 +65,19 @@ describe "Check functionality of wikidata together with ULS" do
         on_page(ItemPage) do |page|
           page.navigate_to_item
           page.wait_for_entity_to_load
-          page.uls_switch_language("English")
+          page.uls_switch_language("en")
           page.wait_for_entity_to_load
           page.entityLabelSpan.should == label_en
           page.viewTabLink_element.text.should == "Read"
           page.recentChangesLink
           page.specialPageTabLink_element.text.should == "Special page"
-          page.uls_switch_language("Deutsch")
+          page.uls_switch_language("de")
           page.specialPageTabLink_element.text.should == "Spezialseite"
           page.firstResultLink
           page.wait_for_entity_to_load
           page.viewTabLink_element.text.should == "Lesen"
           page.entityLabelSpan.should == label_de
-          page.uls_switch_language("English")
+          page.uls_switch_language("en")
           page.wait_for_entity_to_load
           page.entityLabelSpan.should == label_en
         end

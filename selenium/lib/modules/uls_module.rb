@@ -20,11 +20,27 @@ module ULSPage
   link(:firstResultLink, :xpath => "//span[@class='mw-title']/a")
   # ULS
   def uls_switch_language(lang)
+    if ulsOpen? == false
+      self.nouls_switch_language(lang)
+      return
+    end
     if ulsOpen_element.text != lang
       ulsOpen
       self.ulsLanguageFilter= lang
       ajax_wait
       ulsLanguageLink
     end
+  end
+
+  # NO ULS
+  def nouls_switch_language(lang)
+    url = current_url
+    uselang = "uselang=" + lang
+    if url.include? "?"
+      new_url = url + "&" + uselang
+    else
+      new_url = url + "?" + uselang
+    end
+    navigate_to new_url
   end
 end

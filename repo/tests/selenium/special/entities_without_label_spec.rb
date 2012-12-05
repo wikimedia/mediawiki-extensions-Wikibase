@@ -36,7 +36,7 @@ describe "Check EntitiesWithoutLabel special page" do
     it "should add de label" do
       visit_page(ItemPage) do |page|
         page.navigate_to_item
-        page.uls_switch_language("Deutsch")
+        page.uls_switch_language("de")
         page.wait_for_entity_to_load
         page.labelInputField = label_de
         page.saveLabelLink
