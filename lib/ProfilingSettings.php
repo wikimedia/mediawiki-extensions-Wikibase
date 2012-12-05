@@ -1,29 +1,29 @@
 <?php
 
+// Set up standard profiler
 $wgProfiler['class'] = 'Profiler';
 
-// Only record profiling info for pages that took longer than this
-$wgProfileLimit = 0.1;
-// Don't put non-profiling info into log file
-$wgProfileOnly = false;
+// Only record profiling info for requests that took longer than this
+$wgProfileLimit = 0.1; // seconds
+
 // Log sums from profiling into "profiling" table in db
+// NOTE: you need to create the necessary tables in the database first,
+// using maintenance/archives/patch-profiling.sql in MediaWiki core.
 $wgProfileToDatabase = true;
+
 // If true, print a raw call tree instead of per-function report
 $wgProfileCallTree = false;
+
 // Should application server host be put into profiling table
 $wgProfilePerHost = false;
 
-// Settings for UDP profiler
-//$wgUDPProfilerHost = '127.0.0.1';
-//$wgUDPProfilerPort = '3811';
-
 // Detects non-matching wfProfileIn/wfProfileOut calls
 $wgDebugProfiling = false;
+
 // Output debug message on every wfProfileIn/wfProfileOut
 $wgDebugFunctionEntry = 0;
-// Lots of debugging output from SquidUpdate.php
-$wgDebugSquid = false;
 
+// Enable web access to the profiling info in the database.
+// Profiling info will be available from profileinfo.php in the MediaWiki
+// installation path (where index.php and api.php can also be found).
 $wgEnableProfileInfo = true;
-
-$wgProfileIntoDatabase = true;
