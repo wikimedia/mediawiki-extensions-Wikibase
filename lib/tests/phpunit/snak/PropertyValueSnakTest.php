@@ -76,12 +76,12 @@ class PropertyValueSnakTest extends SnakObjectTest {
 		$property = \Wikibase\Property::newFromType( 'wikibase-item' );
 		$property->setId( 852645 );
 
-		$argLists[] = array( clone $property, new \DataValues\NumberValue( 42 ) );
-		$argLists[] = array( clone $property, new \DataValues\NumberValue( 9001 ) );
+		$argLists[] = array( clone $property, new \DataValues\StringValue( 'q42' ) );
+		$argLists[] = array( clone $property, new \DataValues\StringValue( 'q9001' ) );
 
 		$property->setId( 852642 );
 
-		$argLists[] = array( clone $property, new \DataValues\NumberValue( 9001 ) );
+		$argLists[] = array( clone $property, new \DataValues\StringValue( 'q9001' ) );
 
 		$property->setDataType( \DataTypes\DataTypeFactory::singleton()->getType( 'commonsMedia' ) );
 
