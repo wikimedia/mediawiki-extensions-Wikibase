@@ -336,6 +336,7 @@ $messages['is'] = array(
 	'wbc-desc' => 'Biðlari fyrir Wikibase viðbótina',
 	'wbc-after-page-move' => 'Þú mátt einnig [$1 uppfæra] viðeigandi Wikidata hlut til að viðhalda tungumálatenglum á færðu síðunni.',
 	'wbc-comment-remove' => 'Tengdum Wikidata hlut eytt. Tungumálatenglar fjarlægðir.',
+	'wbc-comment-linked' => 'Wikidata hlutur hefur tengst þessari síðu.',
 	'wbc-comment-unlink' => 'Þessi síða hefur verið aftengd Wikidata hlut. Tungumálatenglar fjarlægðir.',
 	'wbc-comment-restore' => 'Tengdur Wikidata hlutur endurvakinn. Tungumálatenglar endurvaktir.',
 	'wbc-comment-update' => 'Vefsvæðis tenglar uppfærðir.',

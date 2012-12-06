@@ -72,6 +72,14 @@ $messages['ca'] = array(
 	'datatypes-type-commonsMedia' => 'Fitxer multimèdia de Commons',
 );
 
+/** Danish (dansk)
+ * @author Poul G
+ */
+$messages['da'] = array(
+	'wikibaselib-desc' => 'Fælles funktionalitet for Wikibase og Wikibase klient udvidelser',
+	'wikibaselib-entity-item' => 'emne',
+);
+
 /** German (Deutsch)
  * @author G.Hagedorn
  * @author Kghbln
