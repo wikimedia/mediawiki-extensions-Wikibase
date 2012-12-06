@@ -28,6 +28,7 @@ use DataValues\UnknownValue;
  *
  * @group DataValue
  * @group DataValueExtensions
+ * @group UnknownValueTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
