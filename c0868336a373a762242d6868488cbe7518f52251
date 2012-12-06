@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//4g0\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-12-06T11:12:22Z",
+      "side": 1,
+      "message": "Dankon! Tio estas grava ŝanĝo.",
+      "revId": "c0868336a373a762242d6868488cbe7518f52251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
