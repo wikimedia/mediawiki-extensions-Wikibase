@@ -69,7 +69,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			$cacheType = $GLOBALS[ 'wgMainCacheType' ];
 		}
 
-		$this->cacheType = $cacheType; //FIXME: take from Settings: defaultEntityCache 
+		$this->cacheType = $cacheType; //FIXME: take from Settings: defaultEntityCache
 		$this->cacheKeyPrefix = $cacheKeyPrefix;
 	}
 
@@ -179,7 +179,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			// this can only happen if the DB is set to ignore errors, which shouldn't be the case...
 			$error = $db->lastError();
 			$enum = $db->lastErrno();
-			wfWarn( "Databse Error in " . __METHOD__ . " #$enum: $error" );
+			wfWarn( "Database Error in " . __METHOD__ . " #$enum: $error" );
 		}
 
 		$entity = null;
