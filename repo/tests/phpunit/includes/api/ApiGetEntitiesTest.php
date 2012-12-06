@@ -407,6 +407,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 
 		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
 			$this->assertArrayHasKey( 'url', $link );
+			$this->assertGreaterThan( 0, strlen( $link['url'] ) );
 		}
 	}
 
