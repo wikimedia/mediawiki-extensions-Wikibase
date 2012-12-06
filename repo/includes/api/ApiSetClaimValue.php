@@ -151,7 +151,7 @@ class ApiSetClaimValue extends Api {
 
 		if ( isset( $statusValue['revision'] ) ) {
 			$this->getResult()->addValue(
-				'claim',
+				'pageinfo',
 				'lastrevid',
 				(int)$statusValue['revision']->getId()
 			);

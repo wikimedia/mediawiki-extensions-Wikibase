@@ -181,7 +181,7 @@ class ApiSetReference extends Api {
 
 		if ( isset( $statusValue['revision'] ) ) {
 			$this->getResult()->addValue(
-				'reference',
+				'pageinfo',
 				'lastrevid',
 				(int)$statusValue['revision']->getId()
 			);

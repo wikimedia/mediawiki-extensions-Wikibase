@@ -74,7 +74,10 @@ class ApiCreateClaimTest extends \ApiTestCase {
 
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a claim key' );
-		$this->assertArrayHasKey( 'lastrevid', $resultArray['claim'], 'claim has a lastrevid key' );
+		$this->assertArrayNotHasKey( 'lastrevid', $resultArray['claim'], 'claim has a lastrevid key' );
+
+		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
+		$this->assertArrayHasKey( 'lastrevid', $resultArray['pageinfo'], 'pageinfo has a lastrevid key' );
 
 		$claim = $resultArray['claim'];
 

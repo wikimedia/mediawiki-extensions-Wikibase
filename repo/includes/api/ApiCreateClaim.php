@@ -46,16 +46,11 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$this->checkParameterRequirements();
 
-		$status = $this->addClaim();
+		$entityContent = $this->getEntityContent();
 
-		if ( !$status->isOK() ) {
-			// currently shouldn't happen, but needs to be checked just in case
-			$description = $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' );
-			$this->dieUsage( $description, 'save-failed' );
-		}
+		$claim = $this->addClaim( $entityContent->getEntity() );
 
-		$values = $status->getValue();
-		$claim = $values['claim'];
+		$this->saveChanges( $entityContent );
 
 		$this->outputClaim( $claim );
 
@@ -78,27 +73,12 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 *
 	 * @since 0.2
 	 *
-	 * @return \Status the status of the addClaim operation. If $status->isOK() returns true,
-	 *         $status->getValue() will return an associative array, similar to the ones returned
-	 *         by WikiPage::doEditContent() and EditEntity::attemptSave(). In addition to fields
-	 *         used by these methods (namely, "new" and "revision"), the array will also contain
-	 *         the "claim" field, which holds the newly added Claim object.
+	 * @param Entity $entity
 	 *
-	 * @throws MWException
+	 * @return Claim
 	 */
-	protected function addClaim() {
+	protected function addClaim( Entity $entity ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
-
-		$entityContent = $this->getEntityContent();
-
-		if ( $entityContent === null ) {
-			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
-		}
-
-		/**
-		 * @var Entity $entity
-		 */
-		$entity = $entityContent->getEntity();
 
 		// It is possible we get an exception from this method because of specifying
 		// a non existing-property, specifying an entity id for an entity with wrong
@@ -115,22 +95,41 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$entity->addClaim( $claim );
 
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $entityContent, $this->getUser(), $baseRevisionId );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
+		return $claim;
+	}
 
+	/**
+	 * @since 0.3
+	 *
+	 * @param EntityContent $content
+	 */
+	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();
 
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId );
+
 		$status = $editEntity->attemptSave(
-			Autocomment::buildApiSummary( $this, null, $entityContent ),
+			'', // TODO: automcomment
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);
 
-		$status->value['claim'] = $claim;
+		if ( !$status->isGood() ) {
+			$this->dieUsage( 'Failed to save the change', 'createclaim-save-failed' );
+		}
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
-		return $status;
+		$statusValue = $status->getValue();
+
+		if ( isset( $statusValue['revision'] ) ) {
+			$this->getResult()->addValue(
+				'pageinfo',
+				'lastrevid',
+				(int)$statusValue['revision']->getId()
+			);
+		}
 	}
 
 	/**
@@ -159,7 +158,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	/**
 	 * @since 0.2
 	 *
-	 * @return EntityContent|null
+	 * @return EntityContent
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
@@ -167,7 +166,13 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( EntityId::newFromPrefixedId( $params['entity'] ) );
 
-		return $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
+
+		if ( $entityContent === null ) {
+			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
+		}
+
+		return $entityContent;
 	}
 
 	/**
