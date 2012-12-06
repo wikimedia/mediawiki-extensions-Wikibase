@@ -45,6 +45,11 @@ class EntityCacheUpdater {
 		 * @var Entity $entity
 		 */
 		$entity = $change->getEntity();
+
+		if ( !$entity ) {
+			throw new \MWException( "The provided Change does not contain full entity data!" );
+		}
+
 		$id = $change->getEntityId();
 
 		$store = ClientStoreFactory::getStore();

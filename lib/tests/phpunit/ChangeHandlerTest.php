@@ -29,8 +29,11 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function changeProvider() {
-		$itemCreation = EntityChange::newFromUpdate( EntityChange::ADD, null, Item::newEmpty() );
-		$itemDeletion = EntityChange::newFromUpdate( EntityChange::REMOVE, Item::newEmpty(), null );
+		$empty = Item::newEmpty();
+		$empty->setId( new \Wikibase\EntityId( Item::ENTITY_TYPE, 0 ) );
+
+		$itemCreation = EntityChange::newFromUpdate( EntityChange::ADD, null, $empty );
+		$itemDeletion = EntityChange::newFromUpdate( EntityChange::REMOVE, $empty, null );
 
 		return array(
 			array(),
