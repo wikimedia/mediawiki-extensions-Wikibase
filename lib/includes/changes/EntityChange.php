@@ -309,11 +309,10 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.1
 	 *
-	 * @param string $action The action name
-	 * @param        $action
-	 * @param Entity $oldEntity
-	 * @param Entity $newEntity
-	 * @param array  $fields additional fields to set
+	 * @param string      $action The action name
+	 * @param Entity|null $oldEntity
+	 * @param Entity|null $newEntity
+	 * @param array|null  $fields additional fields to set
 	 *
 	 * @return EntityChange
 	 * @throws \MWException
