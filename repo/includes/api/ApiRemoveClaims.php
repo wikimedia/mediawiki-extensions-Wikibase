@@ -105,7 +105,7 @@ class ApiRemoveClaims extends Api {
 				$this->removeClaimsFromEntity( $entity, $guids[$entity->getPrefixedId()] )
 			);
 
-			$entityContent->save( 'Removing claim via ApiRemoveClaims' ); // TODO
+			$this->saveChanges( $entityContent );
 		}
 
 		return $removedClaims;
@@ -121,9 +121,19 @@ class ApiRemoveClaims extends Api {
 	protected function getEntityContents( array $ids ) {
 		$contents = array();
 
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+
 		// TODO: use proper batch select
 		foreach ( $ids as $id ) {
-			$content = EntityContentFactory::singleton()->getFromId( EntityId::newFromPrefixedId( $id ) );
+			$entityId = EntityId::newFromPrefixedId( $id );
+
+			if ( $entityId === null ) {
+				$this->dieUsage( 'Invalid entity id provided', 'removeclaims-invalid-entity-id' );
+			}
+
+			$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
+
+			$content = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 			if ( $content === null ) {
 				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'removeclaims-entity-not-found' );
@@ -175,6 +185,39 @@ class ApiRemoveClaims extends Api {
 			'claims',
 			$removedClaimGuids
 		);
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param EntityContent $content
+	 */
+	protected function saveChanges( EntityContent $content ) {
+		$params = $this->extractRequestParams();
+
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId );
+
+		$status = $editEntity->attemptSave(
+			'', // TODO: automcomment
+			EDIT_UPDATE,
+			isset( $params['token'] ) ? $params['token'] : ''
+		);
+
+		if ( !$status->isGood() ) {
+			$this->dieUsage( 'Failed to save the change', 'save-failed' );
+		}
+
+		$statusValue = $status->getValue();
+
+		if ( isset( $statusValue['revision'] ) ) {
+			$this->getResult()->addValue(
+				'pageinfo',
+				'lastrevid',
+				(int)$statusValue['revision']->getId()
+			);
+		}
 	}
 
 	/**
@@ -262,6 +305,33 @@ class ApiRemoveClaims extends Api {
 	 */
 	public function getVersion() {
 		return __CLASS__ . '-' . WB_VERSION;
+	}
+
+	/**
+	 * @see ApiBase::needsToken
+	 *
+	 * @return bool true
+	 */
+	public function needsToken() {
+		return true;
+	}
+
+	/**
+	 * @see ApiBase::isWriteMode
+	 *
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
+	 * @see ApiBase::mustBePosted
+	 *
+	 * @return bool true
+	 */
+	public function mustBePosted() {
+		return true;
 	}
 
 }
