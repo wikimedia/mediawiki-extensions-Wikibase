@@ -49,7 +49,7 @@ class ApiEditEntity extends ApiModifyEntity {
 	 */
 	public function getTextForComment( array $params, $plural = 'none' ) {
 		return Autocomment::formatAutoComment(
-			'wbsetentity',
+			'wbeditentity',
 			array()
 		);
 	}
