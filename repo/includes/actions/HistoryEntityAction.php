@@ -35,6 +35,12 @@ class HistoryEntityAction extends \HistoryAction {
 	 */
 	protected function getPageTitle() {
 		$content = $this->getContent();
+
+		if ( !$content ) {
+			// page does not exist
+			return parent::getPageTitle();
+		}
+
 		$entity = $content->getEntity();
 		$langCode = $this->getContext()->getLanguage()->getCode();
 		$prefixedId = ucfirst( $entity->getPrefixedId() );
