@@ -16,6 +16,24 @@
       "revId": "6a902a62b1c2a4d91e59c4cefaaa02c26be0b3ad",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//4ao\u003d",
+        "filename": "repo/includes/api/ApiRemoveClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-06T16:07:15Z",
+      "side": 1,
+      "message": "Good catch. Hard to keep track of where what has been done already with this many API modules. And in most cases it looks like the loading and saving functionality can not be unified much more without creating some new code that handles many different cases.",
+      "parentUuid": "AAADbX//4bE\u003d",
+      "revId": "6a902a62b1c2a4d91e59c4cefaaa02c26be0b3ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
