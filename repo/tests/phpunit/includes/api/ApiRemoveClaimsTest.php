@@ -128,7 +128,8 @@ class ApiRemoveClaimsTest extends \ApiTestCase {
 	protected function makeTheRequest( array $claimGuids ) {
 		$params = array(
 			'action' => 'wbremoveclaims',
-			'claim' => implode( '|', $claimGuids )
+			'claim' => implode( '|', $claimGuids ),
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		list( $resultArray, ) = $this->doApiRequest( $params );
