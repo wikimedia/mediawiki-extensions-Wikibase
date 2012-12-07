@@ -54,15 +54,20 @@ class Property extends Entity {
 	public function getDataType() {
 		if ( $this->dataType === null ) {
 			if ( array_key_exists( 'datatype', $this->data ) ) {
-				return $this->setDataTypeById( $this->data['datatype'] );
+				$registry = new LibRegistry( Settings::singleton() );
+
+				$this->dataType = $registry->getDataTypeFactory()->getType( $this->data['datatype'] );
+
+				if ( $this->dataType === null ) {
+					throw new MWException( 'The DataType of the property is not valid' );
+				}
 			}
 			else {
 				throw new MWException( 'The DataType of the property is not known' );
 			}
 		}
-		else {
-			return $this->dataType;
-		}
+
+		return $this->dataType;
 	}
 
 	/**
@@ -74,29 +79,6 @@ class Property extends Entity {
 	 */
 	public function setDataType( DataType $dataType ) {
 		$this->dataType = $dataType;
-	}
-
-	/**
-	 * Sets the DataType of the property.
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $dataTypeId
-	 *
-	 * @return DataType
-	 * @throws MWException
-	 */
-	public function setDataTypeById( $dataTypeId ) {
-		if ( is_string( $dataTypeId ) && in_array( $dataTypeId, Settings::get( 'dataTypes' ) ) ) {
-			$dataType = \DataTypes\DataTypeFactory::singleton()->getType( $dataTypeId );
-
-			if ( $dataType !== null ) {
-				$this->setDataType( $dataType );
-				return $dataType;
-			}
-		}
-
-		throw new MWException( 'The DataType of the property is not valid' );
 	}
 
 	/**
