@@ -244,6 +244,8 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 		wfProfileIn( __METHOD__ );
 
 		wfDebugLog( 'wikibase', "calling getRevisionText() on rev " . $row->rev_id );
+		wfDebugLog( 'wikibase', "blob spec: flags=" . $row->old_flags
+						. ", text=" . substr( $row->old_text, 0, 200 ) );
 
 		//NOTE: $row contains revision fields from another wiki. This SHOULD not
 		//      cause any problems, since getRevisionText should only look at the old_flags
