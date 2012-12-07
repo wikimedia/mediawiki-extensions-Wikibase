@@ -153,10 +153,15 @@ class SqlStore implements Store {
 				// creates wb_terms.term_row_id
 				// and also wb_item_per_site.ips_row_id.
 
+				$alteredExtension = $extension;
+				if ( $type === 'sqlite' ) {
+					$alteredExtension = '.sqlite' . $alteredExtension;
+				}
+
 				$updater->addExtensionField(
 					'wb_terms',
 					'term_row_id',
-					__DIR__ . '/AddRowIDs' . $extension
+					__DIR__ . '/AddRowIDs' . $alteredExtension
 				);
 			}
 		}
