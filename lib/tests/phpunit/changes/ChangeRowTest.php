@@ -102,22 +102,23 @@ class ChangeRowTest extends \ORMRowTest {
 	/**
 	 * @dataProvider constructorTestProvider
 	 */
-	public function testSave( array $data, $loadDefaults ) {
+	public function testSaveAndRemove( array $data, $loadDefaults ) {
 		if ( !defined( 'WBC_VERSION' ) ) {
-			parent::testSave( $data, $loadDefaults );
+			parent::testSaveAndRemove( $data, $loadDefaults );
 		} else {
 			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
 		}
 	}
 
 	/**
-	 * @dataProvider constructorTestProvider
+	 * @_dataProvider constructorTestProvider
 	 */
+	/*
 	public function testRemove( array $data, $loadDefaults ) {
 		if ( !defined( 'WBC_VERSION' ) ) {
 			parent::testRemove( $data, $loadDefaults );
 		} else {
 			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
 		}
-	}
+	}*/
 }
