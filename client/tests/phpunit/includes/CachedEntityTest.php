@@ -104,12 +104,12 @@ class CachedEntityTest extends \ORMRowTest {
 	/**
 	 * @dataProvider constructorTestProvider
 	 */
-	public function testSave( array $data, $loadDefaults ) {
+	public function testSaveAndRemove( array $data, $loadDefaults ) {
 		if ( \Wikibase\Settings::get( 'repoDatabase' ) !== null ) {
 			$this->markTestSkipped( "Cache is not usable if WikibaseClient is configured for direct access to the repo database" );
 		}
 
-		parent::testSave( $data, $loadDefaults );
+		parent::testSaveAndRemove( $data, $loadDefaults );
 	}
 
 }
