@@ -40,20 +40,28 @@ class LangLinkHandler {
 	 * @return SiteLink[]
 	 */
 	public static function getEntityLinks( \Parser $parser ) {
+		wfDebugLog( 'wikibase', __METHOD__ . ": Looking for sitelinks defined by the corresponding item on the wikibase repo." );
+
 		$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink(
 			Settings::get( 'siteGlobalID' ),
 			$parser->getTitle()->getFullText()
 		);
 
 		if ( $itemId !== false ) {
-			$id = new EntityId( Item::ENTITY_TYPE, $itemId );
+			wfDebugLog( 'wikibase', "Item ID for " . $parser->getTitle()->getFullText() . " is " . $itemId );
 
 			/* @var Item $item */
+			$id = new EntityId( Item::ENTITY_TYPE, $itemId );
 			$item = ClientStoreFactory::getStore()->newEntityLookup()->getEntity( $id );
 
 			if ( $item !== null ) {
+				wfDebugLog( 'wikibase', "Loaded item " . $itemId );
 				return $item->getSiteLinks();
+			} else {
+				wfDebugLog( 'wikibase', "Failed to load item " . $itemId . "!" );
 			}
+		} else {
+			wfDebugLog( 'wikibase', "No corresponding item found for " . $parser->getTitle()->getFullText() );
 		}
 
 		return array();
