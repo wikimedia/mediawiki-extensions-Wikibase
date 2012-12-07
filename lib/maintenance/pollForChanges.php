@@ -33,6 +33,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig
+ * @author Daniel Kinzler
  */
 class PollForChanges extends \Maintenance {
 
@@ -40,6 +41,16 @@ class PollForChanges extends \Maintenance {
 	 * @var ChangesTable
 	 */
 	protected $changes;
+
+	/**
+	 * @var String
+	 */
+	protected $stateFile;
+
+	/**
+	 * @var String
+	 */
+	protected $pidFile;
 
 	/**
 	 * @var integer
@@ -97,6 +108,10 @@ class PollForChanges extends \Maintenance {
 
 		$this->addOption( 'continueinterval', "Interval (in seconds) to sleep after processing a full batch.", false, true );
 
+		$this->addOption( 'pidfile', "Path to the PID lock file, for avoiding concurrent runs.", false, true );
+
+		$this->addOption( 'statefile', "Path to the state file, for recovery.", false, true );
+
 		parent::__construct();
 	}
 
@@ -109,21 +124,43 @@ class PollForChanges extends \Maintenance {
 			die( 'WikibaseLib has not been loaded.' );
 		}
 
+		// Make sure this script only runs once
+		$this->pidFile = $this->getOption( 'pidfile', Utils::makePidFilename( 'WBpollForChanges', wfWikiID() ) );
+
+		if ( !Utils::getPidLock( $this->pidFile, false ) ) {
+			$this->msg( "Already running, exiting. Lock file: " . $this->pidFile );
+			exit( 5 );
+		}
+
 		$this->changes = ChangesTable::singleton();
 
-		$this->lastChangeId = (int)$this->getOption( 'startid', 0 );
+		$this->stateFile = $this->getOption( 'statefile', Utils::makeStateFilename( 'WBpollForChanges', '.continue' ) );
+
+		if ( $this->stateFile !== '' ) {
+			self::msg( "Using {$this->stateFile} to store state." );
+		}
+
+		if ( $this->hasOption( 'startid' ) ) {
+			$this->lastChangeId = (int)$this->getOption( 'startid', 1 ) -1;
+		} else {
+			$this->lastChangeId = 0;
+
+			// recover last change ID from state file
+			if ( $this->stateFile !== '' && file_exists( $this->stateFile ) ) {
+				$state = file_get_contents( $this->stateFile );
+
+				if ( $state !== false ) {
+					$this->lastChangeId = intval( trim( $state ) );
+					self::msg( "Loaded saved state: continue after change #" . $this->lastChangeId );
+				}
+			}
+		}
+
 		$this->pollLimit = (int)$this->getOption( 'polllimit', Settings::get( 'pollDefaultLimit' ) );
 		$this->sleepInterval = (int)$this->getOption( 'sleepinterval', Settings::get( 'pollDefaultInterval' ) ) * 1000;
 		$this->continueInterval = (int)$this->getOption( 'continueinterval', Settings::get( 'pollContinueInterval' ) ) * 1000;
 
-		$this->startTime = (int)strtotime( $this->getOption( 'since', 0 ) );
-
-		// Make sure this script only runs once
-		$pidfile = Utils::makePidFilename( 'WBpollForChanges', wfWikiID() );
-		if ( !Utils::getPidLock( $pidfile, false ) ) {
-			$this->msg( "already running, exiting." );
-			exit( 5 );
-		}
+		$this->startTime = $this->hasOption( 'since' ) ? (int)strtotime( $this->getOption( 'since', 0 ) ) : 0;
 
 		$changesWiki = Settings::get( 'changesDatabase' );
 
@@ -133,12 +170,20 @@ class PollForChanges extends \Maintenance {
 			self::msg( "Polling changes from local wiki." );
 		}
 
+		if ( $this->lastChangeId > 0 ) {
+			self::msg( "Starting with change #" . ( $this->lastChangeId + 1 ) );
+		} else if ( $this->startTime ) {
+			self::msg( "Starting with changes since " . wfTimestamp( TS_DB, $this->startTime ) );
+		} else {
+			self::msg( "Processign all changes!" );
+		}
+
 		while ( !$this->done ) {
 			$ms = $this->doPoll();
 			usleep( $ms * 1000 );
 		}
 
-		unlink( $pidfile ); // delete lockfile on normal exit
+		unlink( $this->pidFile ); // delete lockfile on normal exit
 	}
 
 	/**
@@ -217,6 +262,10 @@ class PollForChanges extends \Maintenance {
 
 		if ( $this->getOption( 'once' ) ) {
 			$this->done = true;
+		}
+
+		if ( $this->stateFile !== '' ) {
+			file_put_contents( $this->stateFile, $this->lastChangeId );
 		}
 
 		return $sleepFor;

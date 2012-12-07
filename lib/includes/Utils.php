@@ -554,23 +554,48 @@ final class Utils {
 	 *
 	 * @since 0.3
 	 *
-	 * @param string $module a context for this pid file, prepended to the name
-	 * @param string $wikiId a context for this pid file, appended to the name
+	 * @param string $module used as a basis for the file name.
+	 * @param string $wikiId the wiki's id, used for per-wiki file names. Defaults to wfWikiID().
 	 *
 	 * @return boolean true if the process exist
 	 */
-	public static function makePidFilename( $module, $wikiId ) {
+	public static function makePidFilename( $module, $wikiId = null ) {
+		return self::makeStateFilename( $module, '.pid', $wikiId );
+	}
+
+	/**
+	 * Generate a name and path for a file to store some kind of state in.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $module used as a basis for the file name.
+	 * @param string $suffix suffix, including file extension, appended without a separator.
+	 * @param string $wikiId the wiki's id, used for per-wiki file names. Defaults to wfWikiID().
+	 *
+	 * @return boolean true if the process exist
+	 */
+	public static function makeStateFilename( $module, $suffix, $wikiId = null ) {
+		if ( $wikiId === null ) {
+			$wikiId = wfWikiID();
+		}
+
 		// Build the filename
-		$pidfileName = preg_replace('/[^a-z0-9]/i', '', $module ) . '_' . preg_replace('/[^a-z0-9]/i', '', $wikiId ) . '.pid';
-		// Let's see if we have a /var/run directory and if we can write to it (i.e. we're root)
-		if ( is_dir( '/var/run/' ) && is_writable( '/var/run/' ) ) {
+		$pidfileName = preg_replace('/[^a-z0-9]/i', '', $module ) . '_'
+				. preg_replace('/[^a-z0-9]/i', '', $wikiId ) . $suffix;
+
+		$pidfile = '/var/run/' . $pidfileName;
+
+		// Let's see if we can write to the file in /var/run
+		if ( is_writable( $pidfile )
+			|| ( is_dir( dirname( $pidfile ) )
+				&& ( is_writable( dirname( $pidfile ) ) ) ) ) {
 			$pidfile = '/var/run/' . $pidfileName;
+		} else {
+			// else use the temporary directory
+			$temp = str_replace( '\\', '/', sys_get_temp_dir() );
+			$pidfile = $temp . '/' . $pidfileName;
 		}
-		// else use the temporary directory
-		else {
-			$pidfilePath = str_replace( '\\', '/', sys_get_temp_dir() );
-			$pidfile = $pidfilePath . '/' . $pidfileName;
-		}
+
 		return $pidfile;
 	}
 }
