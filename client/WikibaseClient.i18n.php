@@ -101,6 +101,26 @@ $messages['ca'] = array(
 	'wbc-editlinkstitle' => 'Modifica enllaços interlingües',
 );
 
+/** Danish (dansk)
+ * @author Poul G
+ */
+$messages['da'] = array(
+	'wbc-desc' => 'Klient til Wikibase udvidelse',
+	'wbc-after-page-move' => 'Du kan også [ $1  opdatere] det tilknyttede Wikidata emne for at bevare sprog-link til den flyttede side.',
+	'wbc-comment-remove' => 'Tilknyttede Wikidata emne slettet. Sprog-link fjernes.',
+	'wbc-comment-linked' => 'Et Wikidata emne er blevet knyttet til denne side.',
+	'wbc-comment-unlink' => 'Denne side er ikke længere linket fra er Wikidata emne. Sprog kæder fjernes.',
+	'wbc-comment-restore' => 'Tilknyttede Wikidata emne er genskabt. Sprog-link gendannes.',
+	'wbc-comment-update' => 'Sprog-link opdateret.',
+	'wbc-comment-sitelink-add' => 'Sprog-link tilføjet: $1',
+	'wbc-comment-sitelink-change' => 'Sprog-link ændret fra $1 til $2',
+	'wbc-comment-sitelink-remove' => 'Sprog-link fjernet: $1',
+	'wbc-editlinks' => 'Rediger link',
+	'wbc-editlinkstitle' => 'Rediger sprog-link',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Vis Wikidata redigeringer i de seneste ændringer',
+);
+
 /** German (Deutsch)
  * @author Kghbln
  * @author Metalhead64
@@ -406,9 +426,13 @@ $messages['ko'] = array(
 	'wbc-desc' => '위키베이스 확장 기능을 위한 클라이언트',
 	'wbc-after-page-move' => '또한 이동한 문서에 언어 링크를 유지하기 위해 관련된 위키데이터 항목을 [$1 업데이트]할 수 있습니다.',
 	'wbc-comment-remove' => '연결한 위키데이터 항목을 삭제했습니다. 언어 링크를 제거했습니다.',
+	'wbc-comment-linked' => '위키데이터 항목을 이 문서에 연결했습니다.',
 	'wbc-comment-unlink' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다.',
 	'wbc-comment-restore' => '연결한 위키데이터 항목을 복구했습니다. 언어 링크를 복구했습니다.',
 	'wbc-comment-update' => '언어 링크를 업데이트했습니다.',
+	'wbc-comment-sitelink-add' => '언어 링크를 추가함: $1',
+	'wbc-comment-sitelink-change' => '언어 링크를 $1에서 $2로 바꿈',
+	'wbc-comment-sitelink-remove' => '언어 링크를 제거함: $1',
 	'wbc-editlinks' => '링크 편집',
 	'wbc-editlinkstitle' => '인터언어 링크 편집',
 	'wbc-rc-hide-wikidata' => '위키데이터 $1',

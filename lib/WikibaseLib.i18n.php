@@ -78,6 +78,10 @@ $messages['ca'] = array(
 $messages['da'] = array(
 	'wikibaselib-desc' => 'Fælles funktionalitet for Wikibase og Wikibase klient udvidelser',
 	'wikibaselib-entity-item' => 'emne',
+	'wikibaselib-entity-property' => 'egenskab',
+	'wikibaselib-entity-query' => 'forespørgsel',
+	'datatypes-type-wikibase-item' => 'Emne',
+	'datatypes-type-commonsMedia' => 'Commons media-fil',
 );
 
 /** German (Deutsch)

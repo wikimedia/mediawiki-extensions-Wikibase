@@ -3225,6 +3225,7 @@ $messages['is'] = array(
  * @author Darth Kule
  * @author F. Cosoleto
  * @author Gianfranco
+ * @author Nemo bis
  * @author Raoli
  * @author Sannita
  * @author Yiyi
@@ -3596,6 +3597,7 @@ $messages['ko'] = array(
 	'wikibase-alias-edit-placeholder' => '별명 입력',
 	'wikibase-label-input-help-message' => '$1에서 설정한 이 데이터의 제목을 입력하세요.',
 	'wikibase-description-input-help-message' => '$1에서 짧은 설명을 입력하세요.',
+	'wikibase-statements' => '주장',
 	'wikibase-sitelinks' => '이 항목으로 링크한 문서 목록',
 	'wikibase-sitelinks-sitename-columnheading' => '언어',
 	'wikibase-sitelinks-siteid-columnheading' => '코드',
@@ -3625,6 +3627,7 @@ $messages['ko'] = array(
 	'wikibase-aliases-input-help-message' => '이 데이터 집합이 하나 이상의 특정 이름으로 알려져 있다면 별명과 동의명을 입력할 수 있기 때문에 이는 그 대체 이름으로 찾을 수 있습니다.',
 	'wikibase-aliases-empty' => '별명이 정의되지 않았습니다.',
 	'wikibase-datatype-label' => '데이터 유형:',
+	'wikibase-snak-unsupporteddatatype' => '"$1" 데이터 유형에 대한 처리는 현재 지원하지 않습니다.',
 	'wikibase-restrictionedit-tooltip-message' => '이 문서는 보호되어 있어, 편집을 허용하지 않습니다.',
 	'wikibase-blockeduser-tooltip-message' => '편집에서 차단되어 있습니다.',
 	'wikibase-tooltip-error-details' => '자세한 사항',
@@ -3700,6 +3703,7 @@ $messages['ko'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => '언어:',
 	'wikibase-entitieswithoutlabel-submit' => '찾기',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1"(은)는 올바른 언어 코드가 아닙니다.',
+	'special-entitydata' => '항목 데이터',
 	'wikibase-entitydata-not-found' => '$1 ID로 된 항목을 찾을 수 없습니다.',
 	'wikibase-entitydata-unsupported-format' => '$1 데이터 형식은 이 인터페이스에서 지원되지 않습니다.',
 	'wikibase-entitydata-title' => '항목 데이터',
