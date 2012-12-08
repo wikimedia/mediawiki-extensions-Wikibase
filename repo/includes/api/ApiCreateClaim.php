@@ -54,14 +54,6 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$this->outputClaim( $claim );
 
-		$revision = isset( $values['revision'] ) ? $values['revision'] : null;
-		if ( $revision ) {
-			$this->getResult()->addValue(
-				'claim',
-				'lastrevid', intval( $revision->getId() )
-			);
-		}
-
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
