@@ -74,7 +74,8 @@ class PropertyTest extends EntityTest {
 		$this->assertInstanceOf( '\MWException', $pokemons );
 
 		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
-			$dataType = \DataTypes\DataTypeFactory::singleton()->getType( $dataTypeId );
+			$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+			$dataType = $libRegistry->getDataTypeFactory()->getType( $dataTypeId );
 
 			$property->setDataType( $dataType );
 
@@ -85,31 +86,16 @@ class PropertyTest extends EntityTest {
 	public function testSetDataType() {
 		$property = $this->getNewEmpty();
 
+		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+		$dataTypeFactory = $libRegistry->getDataTypeFactory();
+
 		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
-			$dataType = \DataTypes\DataTypeFactory::singleton()->getType( $dataTypeId );
+			$dataType = $dataTypeFactory->getType( $dataTypeId );
 
 			$property->setDataType( $dataType );
 
 			$this->assertEquals( $dataType, $property->getDataType() );
 		}
-	}
-
-	public function testSetDataTypeById() {
-		$property = $this->getNewEmpty();
-
-		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
-			$property->setDataTypeById( $dataTypeId );
-			$this->assertEquals( $dataTypeId, $property->getDataType()->getId() );
-		}
-
-		$pokemons = null;
-
-		try {
-			$property->setDataTypeById( 'this-does-not-exist' );
-		}
-		catch ( \Exception $pokemons ) {}
-
-		$this->assertInstanceOf( '\MWException', $pokemons );
 	}
 
 	public function propertyProvider() {
@@ -150,7 +136,8 @@ class PropertyTest extends EntityTest {
 
 		$argLists[] = array( clone $property, new \DataValues\StringValue( 'q9001' ) );
 
-		$property->setDataType( \DataTypes\DataTypeFactory::singleton()->getType( 'commonsMedia' ) );
+		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+		$property->setDataType( $libRegistry->getDataTypeFactory()->getType( 'commonsMedia' ) );
 
 		return $argLists;
 	}

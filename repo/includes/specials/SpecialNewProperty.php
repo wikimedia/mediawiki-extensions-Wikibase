@@ -86,7 +86,11 @@ class SpecialNewProperty extends SpecialCreateEntity {
 		if ( $this->dataType !== '' ) {
 			// TODO: lookup property by lang+label rather then by id
 			try {
-				$propertyContent->getProperty()->setDataTypeById( $this->dataType );
+				$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+
+				$propertyContent->getProperty()->setDataType(
+					$libRegistry->getDataTypeFactory()->getType( $this->dataType )
+				);
 			}
 			catch ( MWException $exception ) {
 				// TODO: we want a nice internationalized error message
@@ -115,14 +119,19 @@ class SpecialNewProperty extends SpecialCreateEntity {
 	}
 
 	protected function getDataTypes() {
+		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+		$dataTypeFactory = $libRegistry->getDataTypeFactory();
+
 		$html = '';
+
 		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $typeId ) {
 			$html .= Html::element(
 				'option',
 				array( 'value' => $typeId ),
-				\DataTypes\DataTypeFactory::singleton()->getType( $typeId )->getLabel( $this->getLanguage()->getCode() )
+				$dataTypeFactory->getType( $typeId )->getLabel( $this->getLanguage()->getCode() )
 			);
 		}
+
 		return
 			\Html::rawElement(
 				'select',

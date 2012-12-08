@@ -99,6 +99,7 @@ $wgAutoloadClasses['Wikibase\Lib\V4GuidGenerator'] 		= $dir . 'includes/GuidGene
 $wgAutoloadClasses['Wikibase\Lib\ClaimGuidGenerator'] 	= $dir . 'includes/GuidGenerator.php';
 $wgAutoloadClasses['Wikibase\HashableObjectStorage']	= $dir . 'includes/HashableObjectStorage.php';
 $wgAutoloadClasses['Wikibase\HashArray'] 				= $dir . 'includes/HashArray.php';
+$wgAutoloadClasses['Wikibase\LibRegistry'] 				= $dir . 'includes/LibRegistry.php';
 $wgAutoloadClasses['Wikibase\Template'] 				= $dir . 'includes/TemplateStore.php';
 $wgAutoloadClasses['Wikibase\TemplateStore'] 			= $dir . 'includes/TemplateStore.php';
 $wgAutoloadClasses['Wikibase\MapHasher'] 				= $dir . 'includes/MapHasher.php';

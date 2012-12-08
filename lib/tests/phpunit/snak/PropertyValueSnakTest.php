@@ -83,7 +83,8 @@ class PropertyValueSnakTest extends SnakObjectTest {
 
 		$argLists[] = array( clone $property, new \DataValues\StringValue( 'q9001' ) );
 
-		$property->setDataType( \DataTypes\DataTypeFactory::singleton()->getType( 'commonsMedia' ) );
+		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+		$property->setDataType( $libRegistry->getDataTypeFactory()->getType( 'commonsMedia' ) );
 
 		$argLists[] = array( clone $property, new \DataValues\StringValue( 'https://commons.wikimedia.org/wiki/Wikidata' ) );
 
