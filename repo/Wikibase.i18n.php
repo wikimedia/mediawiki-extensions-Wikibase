@@ -98,6 +98,7 @@ $messages['en'] = array(
 
 	'wikibase-itemlink' => '$1 $2',
 	'wikibase-itemlink-id-wrapper' => '($1)',
+	'wikibase-itemlink-userlang-wrapper' => '&nbsp;($1: $2)',
 	'wikibase-itemlink-title' => '$1 | $2',
 
 	// Special pages
@@ -390,11 +391,20 @@ Note that the default message says the user shall "reload and save", but after a
 * $3 is the id of the query that already has the label
 * $4 is description text',
 	'wikibase-itemlink' => '{{optional}}
-used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
+used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link. Params:
+* $1 is label on a html form
+* $2 is id on a html form',
 	'wikibase-itemlink-id-wrapper' => '{{optional}}
-Used to wrap the items id for a link to an item in parentheses or similar.',
+Used to wrap the items id for a link to an item in parentheses or similar. Params:
+* $1 is the prefixed id of the item',
+	'wikibase-itemlink-userlang-wrapper' => '{{optional}}
+Used to wrap the language and label for an additional entry when the language are dissimilar to the users own. Parameters:
+* $1 is the labels language name
+* $2 is the label text',
 	'wikibase-itemlink-title' => '{{optional}}
-Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description.',
+Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description. Parameters:
+* $1 label as a directional string
+* $2 description as a directional string',
 	'special-itembytitle' => "The item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also Wikidata's glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].",
 	'wikibase-itembytitle-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by site and title.',
 	'wikibase-itembytitle-lookup-site' => "Label for the textfield holding the site id. See also Wikidata's glossary for [[m:Wikidata/Glossary#sitelinks|site links]].",

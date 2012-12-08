@@ -73,41 +73,38 @@ class ItemDisambiguation extends \ContextSource {
 		return
 			'<ul class="wikibase-disambiguation">' .
 				implode( '', array_map(
-					function( ItemContent $item ) use ( $userLang, $searchLang ) {
+					function( ItemContent $itemContent ) use ( $userLang, $searchLang ) {
 
-						$userLabel = $item->getItem()->getLabel( $userLang );
-						$searchLabel = $item->getItem()->getLabel( $searchLang );
+						$userLabel = $itemContent->getItem()->getLabel( $userLang );
+						$searchLabel = $itemContent->getItem()->getLabel( $searchLang );
 
-						// FIXME: Need a more general way to figure out the "q" thingy.
-						// This should REALLY be something more elegant, but it is sufficient for now.
+						// link to the item. The text is the label in the user's language, or the ID if no label exists
 						$idLabel = \Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
-							. wfMessage( 'wikibase-itemlink-id-wrapper' )->params( $item->getTitle()->getText() )->escaped()
+							. wfMessage( 'wikibase-itemlink-id-wrapper' )->params( $itemContent->getEntity()->getPrefixedId() )->escaped()
 							. \Html::closeElement( 'span' );
-
-						// link to the item. The text is the label in the user's language, or the id if no label exists
 						$result =
 							\Linker::link(
-								$item->getTitle(),
+								$itemContent->getTitle(),
 								$userLabel ? htmlspecialchars( $userLabel ) : $idLabel
 							);
 
 						// display the label in the searched language in case it is different than in the user language
 						if ( ( $userLang !== $searchLang ) && ( $userLabel !== $searchLabel ) ) {
 							$result = $result
-									// really ugly way to add parenthesis... ;/
-									. ' ('
-									. \Language::fetchLanguageName( $searchLang, $userLang )
-									. wfMessage( 'colon-separator' )->escaped()
-									. \Html::element(
-										'span',
-										array( 'class' => 'wb-itemlink-query-lang', 'lang' => $searchLang ),
-										$searchLabel )
-									. ')'
-									;
+								. wfMessage( 'wikibase-itemlink-userlang-wrapper' )
+									->rawParams(
+										\Language::fetchLanguageName( $searchLang, $userLang ),
+										\Html::element(
+											'span',
+											array( 'class' => 'wb-itemlink-query-lang', 'lang' => $searchLang ),
+											$searchLabel
+										)
+									)
+									->parse();
 						};
 
 						// display the description in the user's language
-						$description = htmlspecialchars( $item->getItem()->getDescription( $userLang ) );
+						$description = htmlspecialchars( $itemContent->getItem()->getDescription( $userLang ) );
 						if ( $description === "" ) {
 							// Display the ID if no description is available
 							// do not display it if the ID was already displayed, i.e. if it was used instead of the label previously
