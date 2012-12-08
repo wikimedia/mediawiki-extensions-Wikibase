@@ -174,12 +174,12 @@ class ClaimList extends HashArray implements Claims {
 	 * @param mixed $index
 	 */
 	public function offsetUnset( $index ) {
-		/**
-		 * @var Claim $claim
-		 */
-		$claim = $this->offsetGet( $index );
+		if ( $this->offsetExists( $index ) ) {
+			/**
+			 * @var Claim $claim
+			 */
+			$claim = $this->offsetGet( $index );
 
-		if ( $claim !== false ) {
 			unset( $this->guidIndex[$claim->getGuid()] );
 			parent::offsetUnset( $index );
 		}
