@@ -277,12 +277,13 @@ final class RepoHooks {
 		$entityContentFactory = EntityContentFactory::singleton();
 
 		// Bail out if we are not looking at an entity
-		if ( !$content || !$entityContentFactory->isEntityContentModel( $wikiPage->getContentModel() ) ) {
+		if ( !$content || !$entityContentFactory->isEntityContentModel( $content->getModel() ) ) {
 			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 
 		/**
+		 * @var EntityContent $content
 		 * @var Entity $entity
 		 */
 		$entity = $content->getEntity();
