@@ -40,23 +40,35 @@ class LangLinkHandler {
 	 * @return SiteLink[]
 	 */
 	public static function getEntityLinks( \Parser $parser ) {
-		$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink(
+		wfDebugLog( 'wikibase', __METHOD__ . ": Looking for sitelinks defined by the corresponding item on the wikibase repo." );
+
+		$siteLinkTable = ClientStoreFactory::getStore()->newSiteLinkTable();
+
+		$itemId = $siteLinkTable->getItemIdForLink(
 			Settings::get( 'siteGlobalID' ),
 			$parser->getTitle()->getFullText()
 		);
 
+		$links =  array();
+
 		if ( $itemId !== false ) {
-			$id = new EntityId( Item::ENTITY_TYPE, $itemId );
+			wfDebugLog( 'wikibase', "Item ID for " . $parser->getTitle()->getFullText() . " is " . $itemId );
+			$rawLinks = $siteLinkTable->getLinks( array( $itemId ) );
 
-			/* @var Item $item */
-			$item = ClientStoreFactory::getStore()->newEntityLookup()->getEntity( $id );
+			/*
+			 * The links are returned as arrays with the following elements in specified order:
+			 * - siteId
+			 * - pageName
+			 * - itemId (unprefixed)
+			 */
 
-			if ( $item !== null ) {
-				return $item->getSiteLinks();
-			}
+			$links = SiteLink::siteLinksFromArray( $rawLinks, 0, 1 );
+		} else {
+			wfDebugLog( 'wikibase', "No corresponding item found for " . $parser->getTitle()->getFullText() );
 		}
 
-		return array();
+		wfDebugLog( 'wikibase', "Found " . count( $links ) . " links." );
+		return $links;
 	}
 
 	/**
