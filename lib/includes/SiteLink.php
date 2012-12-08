@@ -187,4 +187,32 @@ class SiteLink {
 		return $links;
 	}
 
+	/**
+	 * Builds an array of SiteLinks from an array of arrays.
+	 *
+	 * @since 0.4
+	 *
+	 * @param array[] $linkSpecs array of arrays, in which each sub-array representa a link and
+	 * contains the links's site ID and page name in the fields designated by $sideIdKey
+	 * and $pageNameKey, respectively.
+	 *
+	 * @param string $siteIdKey the field in which to find the link's target site id.
+	 * @param string $pageNameKey the field in which to find the link's target page name.
+	 *
+	 * @return SiteLink[]
+	 */
+	public static function siteLinksFromArray( array $linkSpecs,
+			$siteIdKey = 'site', $pageNameKey = 'title' ) {
+		$links = array();
+
+		foreach ( $linkSpecs as $spec ) {
+			$siteId = $spec[ $siteIdKey ];
+			$pageName = $spec[ $pageNameKey ];
+
+			$links[] = SiteLink::newFromText( $siteId, $pageName );
+		}
+
+		return $links;
+	}
+
 }
