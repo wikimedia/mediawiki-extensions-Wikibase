@@ -98,6 +98,7 @@ $messages['en'] = array(
 
 	'wikibase-itemlink' => '$1 $2',
 	'wikibase-itemlink-id-wrapper' => '($1)',
+	'wikibase-itemlink-userlang-wrapper' => '&nbsp;($1: $2)',
 	'wikibase-itemlink-title' => '$1 | $2',
 
 	// Special pages
@@ -393,6 +394,8 @@ Note that the default message says the user shall "reload and save", but after a
 used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
 	'wikibase-itemlink-id-wrapper' => '{{optional}}
 Used to wrap the items id for a link to an item in parentheses or similar.',
+	'wikibase-itemlink-userlang-wrapper' => '{{optional}}
+Used to wrap the language and label for an additional entry when the language are dissimilar to the users own.',
 	'wikibase-itemlink-title' => '{{optional}}
 Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description.',
 	'special-itembytitle' => "The item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also Wikidata's glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].",
