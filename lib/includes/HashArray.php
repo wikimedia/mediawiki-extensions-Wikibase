@@ -208,12 +208,12 @@ abstract class HashArray extends GenericArrayObject implements \Hashable, \Compa
 	 * @param mixed $index
 	 */
 	public function offsetUnset( $index ) {
-		$element = $this->offsetGet( $index );
-
-		if ( $element !== false ) {
+		if ( $this->offsetExists( $index ) ) {
 			/**
 			 * @var Hashable $element
 			 */
+			$element = $this->offsetGet( $index );
+
 			if ( is_array( $this->offsetHashes[$element->getHash()] )
 				&& count( $this->offsetHashes[$element->getHash()] ) > 1 ) {
 
