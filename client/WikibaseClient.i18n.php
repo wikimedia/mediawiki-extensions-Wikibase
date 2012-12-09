@@ -102,20 +102,21 @@ $messages['ca'] = array(
 );
 
 /** Danish (dansk)
+ * @author Christian List
  * @author Poul G
  */
 $messages['da'] = array(
 	'wbc-desc' => 'Klient til Wikibase udvidelse',
 	'wbc-after-page-move' => 'Du kan også [ $1  opdatere] det tilknyttede Wikidata emne for at bevare sprog-link til den flyttede side.',
-	'wbc-comment-remove' => 'Tilknyttede Wikidata emne slettet. Sprog-link fjernes.',
+	'wbc-comment-remove' => 'Det tilknyttede Wikidata emne er slettet. Sprog-links fjernet.',
 	'wbc-comment-linked' => 'Et Wikidata emne er blevet knyttet til denne side.',
-	'wbc-comment-unlink' => 'Denne side er ikke længere linket fra er Wikidata emne. Sprog kæder fjernes.',
-	'wbc-comment-restore' => 'Tilknyttede Wikidata emne er genskabt. Sprog-link gendannes.',
+	'wbc-comment-unlink' => 'Denne side er ikke længere linket fra et Wikidata emne. Sprog-links fjernet.',
+	'wbc-comment-restore' => 'Det tilknyttede Wikidata emne er genskabt. Sprog-links gendannet.',
 	'wbc-comment-update' => 'Sprog-link opdateret.',
 	'wbc-comment-sitelink-add' => 'Sprog-link tilføjet: $1',
 	'wbc-comment-sitelink-change' => 'Sprog-link ændret fra $1 til $2',
 	'wbc-comment-sitelink-remove' => 'Sprog-link fjernet: $1',
-	'wbc-editlinks' => 'Rediger link',
+	'wbc-editlinks' => 'Rediger links',
 	'wbc-editlinkstitle' => 'Rediger sprog-link',
 	'wbc-rc-hide-wikidata' => '$1 Wikidata',
 	'wbc-rc-show-wikidata-pref' => 'Vis Wikidata redigeringer i de seneste ændringer',
@@ -208,6 +209,7 @@ $messages['fa'] = array(
 );
 
 /** Finnish (suomi)
+ * @author Nike
  * @author Stryn
  * @author VezonThunder
  */
@@ -215,6 +217,7 @@ $messages['fi'] = array(
 	'wbc-desc' => 'Wikibase-laajennuksen asiakasohjelma',
 	'wbc-after-page-move' => 'Voit myös [$1 päivittää] sivuun liittyvän Wikidatan kohteen säilyttääksesi kielilinkit siirretyllä sivulla.',
 	'wbc-comment-remove' => 'Sivuun liittyvä Wikidata-kohde poistettu. Kielilinkit poistettu.',
+	'wbc-comment-linked' => 'Wikidata-tietue on linkitetty tähän sivuun.',
 	'wbc-comment-unlink' => 'Tämä sivu ei ole enää liitettynä Wikidata-kohteeseen. Kielilinkit poistettu.',
 	'wbc-comment-restore' => 'Sivuun liittyvä Wikidata-kohde palautettu. Kielilinkit palautettu.',
 	'wbc-comment-update' => 'Kielilinkit päivitetty.',
@@ -313,7 +316,15 @@ $messages['he'] = array(
  */
 $messages['hsb'] = array(
 	'wbc-desc' => 'Klient za rozšěrjenje Wikibase',
+	'wbc-after-page-move' => 'Móžeš tež přirjadowany element Wikidata [$1 aktualizować], zo by mjezyrěčne wotkazy na přesunjenej stronje zarjadował.',
+	'wbc-comment-remove' => 'Přirjadowany element Wikidata zhašany. Mjezyrěčne wotkazy wotstronjene.',
+	'wbc-comment-linked' => 'Element Wikidata je so z tutej stronu zwjazał.',
+	'wbc-comment-unlink' => 'Zwisk strony z elementom Wikidata je so wotstronił. Mjezyrěčne wotkazy wotstronjene.',
+	'wbc-comment-restore' => 'Přirjadowany element Wikidata zaso wobnowjeny. Mjezyrěčne wotkazy wobnowjene.',
 	'wbc-comment-update' => 'Mjezyrěčne wotkazy su so zaktualizowali.',
+	'wbc-comment-sitelink-add' => 'Mjezyrěčny wotkaz přidaty: $1',
+	'wbc-comment-sitelink-change' => 'Mjezyrěčny wotkaz změnjeny wot $1 do $2',
+	'wbc-comment-sitelink-remove' => 'Mjezyrěčny wotkaz wotstronjeny: $1',
 	'wbc-editlinks' => 'Wotkazy wobdźěłać',
 	'wbc-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
 	'wbc-rc-hide-wikidata' => 'Wikidata $1',
@@ -494,12 +505,17 @@ $messages['mr'] = array(
  */
 $messages['ms'] = array(
 	'wbc-desc' => 'Pelanggan sambungan Wikibase',
-	'wbc-comment-langlinks-delete' => 'Perkara Wikidata yang berkenaan dihapuskan. Pautan bahasa dipadamkan.',
-	'wbc-comment-langlinks-remove' => 'Halaman ini telah dinyahpautkan dari perkara Wikidata. Pautan bahasa dipadamkan.',
-	'wbc-comment-langlinks-restore' => 'Perkara Wikidata yang berkenaan dinyahhapus. Pautan bahasa dipulihkan.',
-	'wbc-comment-langlinks-update' => 'Pautan bahasa dikemaskinikan',
+	'wbc-comment-remove' => 'Perkara Wikidata yang berkenaan dihapuskan. Pautan bahasa dipadamkan.',
+	'wbc-comment-linked' => 'Satu perkara Wikidata telah dipautkan ke halaman ini.',
+	'wbc-comment-unlink' => 'Halaman ini telah dinyahpautkan dari perkara Wikidata. Pautan bahasa dibuang.',
+	'wbc-comment-restore' => 'Perkara Wikidata yang berkenaan dinyahhapus. Pautan bahasa dipulihkan.',
+	'wbc-comment-update' => 'Pautan bahasa dikemaskinikan.',
+	'wbc-comment-sitelink-add' => 'Pautan bahasa dibubuh: $1',
+	'wbc-comment-sitelink-change' => 'Pautan bahasa diubah daripada $1 kepada $2',
+	'wbc-comment-sitelink-remove' => 'Pautan bahasa dibuang: $1',
 	'wbc-editlinks' => 'Sunting pautan',
 	'wbc-editlinkstitle' => 'Sunting pautan antara bahasa',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
 );
 
 /** Norwegian Bokmål (norsk (bokmål)‎)
@@ -521,12 +537,9 @@ $messages['nb'] = array(
  */
 $messages['nl'] = array(
 	'wbc-desc' => 'Client voor de uitbreiding Wikibase',
-	'wbc-comment-langlinks-delete' => 'Bijbehorend Wikidataitem verwijderd. Taalverwijzingen verwijderd.',
-	'wbc-comment-langlinks-remove' => 'Deze pagina is ontkoppeld van het Wikidataitem. Taalverwijzingen zijn verwijderd',
-	'wbc-comment-langlinks-restore' => 'Gekoppeld Wikidataitem teruggeplaatst. Taalverwijzingen teruggeplaatst',
-	'wbc-comment-langlinks-update' => 'Taalverwijzingen bijgewerkt',
 	'wbc-editlinks' => 'Verwijzingen bewerken',
 	'wbc-editlinkstitle' => 'Intertaalverwijzingen bewerken',
+	'wbc-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
 );
 
 /** Norwegian Nynorsk (norsk (nynorsk)‎)
