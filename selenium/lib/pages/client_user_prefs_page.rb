@@ -24,4 +24,10 @@ class ClientUserPrefsPage
     savePrefs
   end
 
+  def wait_for_prefs_to_load
+      wait_until do
+        recentChangesTab?
+      end
+    end
+
 end
