@@ -177,7 +177,9 @@ final class Utils {
 			$dbw->commit();
 		}
 
-		\Sites::singleton()->getSites( false ); // re-cache
+		// re-cache, once the change has propagated.
+		wfWaitForSlaves();
+		\Sites::singleton()->getSites( 'recache' );
 	}
 
 	/**
