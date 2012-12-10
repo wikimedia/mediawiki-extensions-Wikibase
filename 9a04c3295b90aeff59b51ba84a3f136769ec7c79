@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//1gg\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-12-10T14:03:04Z",
+      "side": 1,
+      "message": "Should this be called newFromArray or something similar? It is already a class Sitelink, yet not a plural.",
+      "revId": "9a04c3295b90aeff59b51ba84a3f136769ec7c79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
