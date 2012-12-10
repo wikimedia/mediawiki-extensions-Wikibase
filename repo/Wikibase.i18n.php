@@ -4569,12 +4569,12 @@ $messages['nn'] = array(
 	'wikibase-error-ui-session-failure' => 'Din arbeidsøkt er avslutta, logg inn på nytt om du vil fortsette.',
 	'wikibase-error-ui-edit-conflict' => 'Det er ein endringskonflikt på gang. Lasta sida på nytt og lagra på nytt.',
 	'wikibase-move-error' => 'Du kan ikkje flytte sider i datanamnerommet, og du kan ikkje flytte sider inn i det.',
-	'wikibase-error-sitelink-already-used' => 'Nettstedlellen [[$1:$2]] er allereie brukt av datasettet med identifikator $3.', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Nettstadlenkja [[$1:$2]] er alt nytta av settet [[$3]].',
 	'special-itembytitle' => 'Datasett frå tittel',
 	'wikibase-itembytitle-lookup-site' => 'Nettstad:',
 	'wikibase-itembytitle-lookup-page' => 'Side:',
 	'wikibase-itembytitle-submit' => 'Søk',
-	'special-itemdisambiguation' => 'Eit datasett er påvist ved bruk av merkelapp', # Fuzzy
+	'special-itemdisambiguation' => 'Fleirtyding: Sett med same merkelappen',
 	'wikibase-itemdisambiguation-lookup-language' => 'Språk:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Merkelapp:',
 	'wikibase-itemdisambiguation-submit' => 'Søk',
@@ -4586,6 +4586,8 @@ $messages['nn'] = array(
 	'wikibase-createentity-submit' => 'Opprett',
 	'wikibase-restoreold' => 'attopprett',
 	'wikibase-restore-summary' => 'Attoppretta versjon $1 av [[Special:Contributions/$2|$2]]',
+	'wikibase-noentity' => 'Dette datasettet finst ikkje. Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkja i relaterte loggar] for å finna ut kvar det fór.',
+	'wikibase-noentity-createone' => 'Du kan dessutan [[$1|oppretta eit nytt eit]].',
 	'wikibase-item-summary-wbeditentity' => 'Oppretta eit nytt datasett',
 	'wikibase-item-summary-wbsetlabel-set' => 'Endra [$2]-merkelapp',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Fjerna [$2]-merkelapp',
@@ -4596,7 +4598,7 @@ $messages['nn'] = array(
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'La til og fjerna {{plural:$1|tilleggsnamn|tilleggsnamn}} for $2',
 	'wikibase-item-summary-wbsetaliases-add' => 'La til {{plural:$1|tilleggsnamn|tilleggsnamn}} for [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Fjerna {{plural:$1|tilleggsnamn|tilleggsnamn}} for [$2]',
-	'content-model-wikibase-item' => 'Wikibase datasett',
+	'content-model-wikibase-item' => 'Wikibase-sett',
 );
 
 /** Oriya (ଓଡ଼ିଆ)
@@ -4673,6 +4675,7 @@ $messages['pl'] = array(
 	'wikibase-error-ui-session-failure' => 'Twoja sesja wygasła. Proszę zalogować się ponownie.',
 	'wikibase-error-ui-edit-conflict' => 'Wystąpił konflikt edycji. Załaduj raz jeszcze i zapisz.',
 	'wikibase-move-error' => 'Nie można przenieść stron, które znajdują się w obszarze nazw data i nie można przenieść stron do niego.',
+	'wikibase-error-sitelink-already-used' => 'Link [[$1:$2]] jest już wykorzystywany przez element [[$3]].',
 	'special-itembytitle' => 'Elementy według tytułu',
 	'wikibase-itembytitle-lookup-site' => 'Witryna:',
 	'wikibase-itembytitle-lookup-page' => 'Strona:',
