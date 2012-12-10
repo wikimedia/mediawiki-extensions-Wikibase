@@ -16,6 +16,24 @@
       "revId": "bb0f46e7b54429209c9b096c0d366b7a13f7d357",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//1O0\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-12-10T19:52:56Z",
+      "side": 1,
+      "message": "changeNeedsRendering really didn\u0027t do anything before or now.  it just determines if the change has a site link diff. \n\nAgree that changeNeedsRendering should incorporate more of the logic in this block and be more fine-tuned about which changes require page re-rendering, another check if it requires site link update, etc.",
+      "parentUuid": "AAADbX//1PM\u003d",
+      "revId": "bb0f46e7b54429209c9b096c0d366b7a13f7d357",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
