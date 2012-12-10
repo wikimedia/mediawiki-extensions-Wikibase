@@ -175,7 +175,7 @@ class PollForChanges extends \Maintenance {
 		} else if ( $this->startTime ) {
 			self::msg( "Starting with changes since " . wfTimestamp( TS_DB, $this->startTime ) );
 		} else {
-			self::msg( "Processign all changes!" );
+			self::msg( "Processing all changes!" );
 		}
 
 		while ( !$this->done ) {
