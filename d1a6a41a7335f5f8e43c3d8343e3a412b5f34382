@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//1BM\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-10T20:51:57Z",
+      "side": 1,
+      "message": "Hm, would be nicer to factor the content\u0027s of the giant foreach loop into a separate function.",
+      "revId": "d1a6a41a7335f5f8e43c3d8343e3a412b5f34382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//1BI\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-10T20:51:57Z",
+      "side": 1,
+      "message": "Perhaps factor this block into yet another function.",
+      "revId": "d1a6a41a7335f5f8e43c3d8343e3a412b5f34382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//1BE\u003d",
+        "filename": "lib/includes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-10T20:51:57Z",
+      "side": 1,
+      "message": "this looks wrong - why are you wrapping the array of changes in another array?",
+      "revId": "d1a6a41a7335f5f8e43c3d8343e3a412b5f34382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//1BA\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-10T20:51:57Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be in an else block? Seems like otherwise, verbose mode would trigger each change to be processed twice.",
+      "revId": "d1a6a41a7335f5f8e43c3d8343e3a412b5f34382",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
