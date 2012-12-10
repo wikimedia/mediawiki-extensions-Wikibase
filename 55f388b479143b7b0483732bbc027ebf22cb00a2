@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "AAADbX//1iA\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-10T13:32:48Z",
+      "side": 1,
+      "message": "damn, i was tired it seems;) will fix in master.",
+      "parentUuid": "AAADbX//1r4\u003d",
+      "revId": "55f388b479143b7b0483732bbc027ebf22cb00a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADbX//1rw\u003d",
         "filename": "lib/includes/SiteLink.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2012-12-10T08:56:03Z",
       "side": 1,
       "message": "Do you not see any better approach then adding a static method here?",
+      "revId": "55f388b479143b7b0483732bbc027ebf22cb00a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//1h8\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-10T13:32:48Z",
+      "side": 1,
+      "message": "Nope. Got a suggestion? It\u0027s not really different from having a static newFromX method.",
+      "parentUuid": "AAADbX//1rw\u003d",
       "revId": "55f388b479143b7b0483732bbc027ebf22cb00a2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
