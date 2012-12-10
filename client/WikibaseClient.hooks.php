@@ -298,7 +298,7 @@ final class ClientHooks {
 
 		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
 
-		// todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
+		// @todo batch these
 		$rc->save();
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
