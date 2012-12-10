@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//1PM\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-10T19:47:43Z",
+      "side": 1,
+      "message": "This is a pretty massive change in logic: previously, changeNeedsRendering() was called to decide whether the page associated with the item needs re-rendering because of the change. \n\nNow, changeNeedsRendering() is used to determine whether *any* page in the client wiki needs rerendering because of the change. To answer that question, changeNeedsRendering() would need to perform the same analysis of the the diff object that is done below to find all affected pages.\n\nThis needs further though, or at least documentation. For now, I recommend not to change the logic in a patch that should just change where the data comes from.",
+      "revId": "bb0f46e7b54429209c9b096c0d366b7a13f7d357",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
