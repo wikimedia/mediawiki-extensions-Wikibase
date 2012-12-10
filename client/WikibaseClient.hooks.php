@@ -175,6 +175,7 @@ final class ClientHooks {
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfDebugLog( 'wikibase', __METHOD__ . " handling change #" . $change->getId() );
 
 		if ( ! ( $change instanceof EntityChange ) ) {
 			return true;
@@ -213,6 +214,9 @@ final class ClientHooks {
 			$siteGlobalId = Settings::get( 'siteGlobalID' );
 			$changeHandler = ClientChangeHandler::singleton();
 
+			wfDebugLog( 'wikibase', __METHOD__ . " handling change to item #" . $item->getId()
+				. " for site " . $siteGlobalId );
+
 			$pagesToUpdate = array();
 
 			// if something relevant about the entity changes, update
@@ -221,6 +225,9 @@ final class ClientHooks {
 				$siteLink = $item->getSiteLink( $siteGlobalId );
 
 				if ( $siteLink ) {
+					wfDebugLog( 'wikibase', __METHOD__ . " found that page " . $siteLink->getPage()
+						. " needs re-rendering." );
+
 					// we have a corresponding page on this wiki, so re-render it.
 					$pagesToUpdate[] = $siteLink->getPage();
 				}
@@ -244,6 +251,9 @@ final class ClientHooks {
 				wfWarn( "Unknown change operation: " . get_class( $siteLinkDiffOp )
 						. " (" . $siteLinkDiffOp->getType() . ")" );
 			}
+
+			wfDebugLog( 'wikibase', __METHOD__ . ": pages to update: "
+				. str_replace( "\n", ' ', var_export( $pagesToUpdate, true ) ) );
 
 			// purge all relevant pages
 			//
@@ -280,6 +290,8 @@ final class ClientHooks {
 			return false;
 		}
 
+		wfDebugLog( 'wikibase', __METHOD__ . " purging page " . $titleText );
+
 		$title->invalidateCache();
 		$title->purgeSquid();
 
@@ -310,6 +322,7 @@ final class ClientHooks {
 		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
 
 		// @todo batch these
+		wfDebugLog( 'wikibase', __METHOD__ . " saving RC entry for " . $title->getFullText() );
 		$rc->save();
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
