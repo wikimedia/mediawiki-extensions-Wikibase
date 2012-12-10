@@ -198,62 +198,47 @@ final class ClientHooks {
 		// TODO: handle other kinds of entities!
 		if ( $change->getEntityId()->getEntityType() === Item::ENTITY_TYPE ) {
 
-			/**
-			 * @var Item $item
-			 */
-			$item = ClientStoreFactory::getStore()->newEntityLookup()->getEntity( $change->getEntityId() );
-
-			if ( !$item ) {
-				// this shouldn't happen, but it shouldn't be fatal either.
-				wfWarn( "Failed to load item object " . $change->getEntityId() );
-
-				wfProfileOut( "Wikibase-" . __METHOD__ );
-				return true;
-			}
-
 			$siteGlobalId = Settings::get( 'siteGlobalID' );
 			$changeHandler = ClientChangeHandler::singleton();
-
-			wfDebugLog( 'wikibase', __METHOD__ . " handling change to item #" . $item->getId()
-				. " for site " . $siteGlobalId );
 
 			$pagesToUpdate = array();
 
 			// if something relevant about the entity changes, update
 			// the corresponding local page
 			if ( $changeHandler->changeNeedsRendering( $change ) ) {
-				$siteLink = $item->getSiteLink( $siteGlobalId );
 
-				if ( $siteLink ) {
-					wfDebugLog( 'wikibase', __METHOD__ . " found that page " . $siteLink->getPage()
-						. " needs re-rendering." );
+				// if an item's sitelinks change, update the old and the new target
+				$siteLinkDiff = $change->getSiteLinkDiff();
 
-					// we have a corresponding page on this wiki, so re-render it.
-					$pagesToUpdate[] = $siteLink->getPage();
+				$siteLinkDiffOp = isset( $siteLinkDiff[ $siteGlobalId ] )
+										? $siteLinkDiff[ $siteGlobalId ] : null;
+
+				if ( $siteLinkDiffOp === null ) {
+					$siteLinkTable = ClientStoreFactory::getStore()->newSiteLinkTable();
+					$itemId = $change->getEntityId()->getNumericId();
+
+					// @todo: getLinks is a bit ugly, need a getter for a pair of item id + site key
+					$siteLinks = $siteLinkTable->getLinks( array( $itemId ), array( $siteGlobalId ) );
+					if ( !empty( $siteLinks ) ) {
+						$page = $siteLinks[0][1];
+						$pagesToUpdate[] = $siteLinks[0][1];
+					}
+				} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpAdd ) {
+					$pagesToUpdate[] = $siteLinkDiffOp->getNewValue();
+				} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpRemove ) {
+					$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
+				} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpChange ) {
+					$pagesToUpdate[] = $siteLinkDiffOp->getNewValue();
+					$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
+				} else {
+					wfWarn( "Unknown change operation: " . get_class( $siteLinkDiffOp )
+							. " (" . $siteLinkDiffOp->getType() . ")" );
 				}
+
+				wfDebugLog( 'wikibase', __METHOD__ . ": pages to update: "
+					. str_replace( "\n", ' ', var_export( $pagesToUpdate, true ) ) );
+
 			}
-
-			// if an item's sitelinks change, update the old and the new target
-			$siteLinkDiff = $change->getSiteLinkDiff();
-			$siteLinkDiffOp = isset( $siteLinkDiff[ $siteGlobalId ] )
-									? $siteLinkDiff[ $siteGlobalId ] : null;
-
-			if ( $siteLinkDiffOp === null ) {
-				// no op
-			} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpAdd ) {
-				$pagesToUpdate[] = $siteLinkDiffOp->getNewValue(); // currently redundant, but keep for future reference
-			} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpRemove ) {
-				$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
-			} elseif ( $siteLinkDiffOp instanceof \Diff\DiffOpChange ) {
-				$pagesToUpdate[] = $siteLinkDiffOp->getNewValue(); // currently redundant, but keep for future reference
-				$pagesToUpdate[] = $siteLinkDiffOp->getOldValue();
-			} else {
-				wfWarn( "Unknown change operation: " . get_class( $siteLinkDiffOp )
-						. " (" . $siteLinkDiffOp->getType() . ")" );
-			}
-
-			wfDebugLog( 'wikibase', __METHOD__ . ": pages to update: "
-				. str_replace( "\n", ' ', var_export( $pagesToUpdate, true ) ) );
 
 			// purge all relevant pages
 			//
