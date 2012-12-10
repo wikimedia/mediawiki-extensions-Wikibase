@@ -180,6 +180,8 @@ final class ClientHooks {
 			return true;
 		}
 
+		/* @var EntityChange $change */
+
 		if ( \SitesTable::singleton()->exists() === false ) {
 			throw new \MWException( 'Sites table does not exist, but is required for handling changes.' );
 		}
@@ -193,12 +195,21 @@ final class ClientHooks {
 		// Invalidate local pages connected to a relevant data item.
 		// TODO: handle changes for foreign wikis (push to job queue).
 		// TODO: handle other kinds of entities!
-		if ( $change->getEntity() instanceof Item ) {
+		if ( $change->getEntityId()->getEntityType() === Item::ENTITY_TYPE ) {
 
 			/**
 			 * @var Item $item
 			 */
-			$item = $change->getEntity();
+			$item = ClientStoreFactory::getStore()->newEntityLookup()->getEntity( $change->getEntityId() );
+
+			if ( !$item ) {
+				// this shouldn't happen, but it shouldn't be fatal either.
+				wfWarn( "Failed to load item object " . $change->getEntityId() );
+
+				wfProfileOut( "Wikibase-" . __METHOD__ );
+				return true;
+			}
+
 			$siteGlobalId = Settings::get( 'siteGlobalID' );
 			$changeHandler = ClientChangeHandler::singleton();
 

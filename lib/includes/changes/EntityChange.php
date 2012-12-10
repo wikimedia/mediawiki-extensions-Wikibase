@@ -28,6 +28,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class EntityChange extends DiffChange {
 
@@ -49,21 +50,27 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.3
 	 *
-	 * @return Entity
-	 * @throws \MWException
+	 * @note: as of version 0.4, no code calls setEntity(), so getEntity() will always return null.
+	 * This is kept in the expectation that we may want to construct EntityChange objects
+	 * from an atom feed or the like, where full entity data would be included and useful.
+	 *
+	 * @return Entity|null
 	 */
 	public function getEntity() {
-		$info = $this->getField( 'info' );
-
+		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 		if ( !array_key_exists( 'entity', $info ) ) {
-			throw new \MWException( 'Cannot get the entity when it has not been set yet.' );
+			return null;
+		} else {
+			return $info['entity'];
 		}
-
-		return $info['entity'];
 	}
 
 	/**
 	 * @since 0.3
+	 *
+	 * @note: as of version 0.4, no code calls setEntity(), so getEntity() will always return null.
+	 * This is kept in the expectation that we may want to construct EntityChange objects
+	 * from an atom feed or the like, where full entity data would be included and useful.
 	 *
 	 * @param Entity $entity
 	 */
@@ -71,26 +78,6 @@ class EntityChange extends DiffChange {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 		$info['entity'] = $entity;
 		$this->setField( 'info', $info );
-	}
-
-	/**
-	 * Returns whether the entity in the change is empty.
-	 * If it's empty, it can be ignored.
-	 *
-	 * @since 0.3
-	 *
-	 * @return bool
-	 */
-	public function isEmpty() {
-		if ( $this->hasField( 'info' ) ) {
-			$info = $this->getField( 'info' );
-
-			if ( array_key_exists( 'entity', $info ) && !$info['entity']->isEmpty() ) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	/**
@@ -108,17 +95,14 @@ class EntityChange extends DiffChange {
 	 * @return string
 	 */
 	public function getEntityType() {
-		$entity = $this->getEntity();
-		if ( $entity !== null ) {
-			return $entity->getType();
-		}
-		return null;
+		$id = $this->getEntityId();
+		return $id->getEntityType();
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @return string
+	 * @return EntityId
 	 */
 	public function getEntityId() {
 		if ( !$this->entityId && $this->hasField( 'object_id' ) ) {
@@ -261,19 +245,20 @@ class EntityChange extends DiffChange {
 	 * @since 0.3
 	 *
 	 * @param string $action The action name
-	 * @param Entity $entity
+	 * @param EntityId $entityId
 	 * @param array $fields additional fields to set
 	 *
 	 * @return EntityChange
 	 */
-	protected static function newFromEntity( $action, Entity $entity, array $fields = null ) {
+	protected static function newForEntity( $action, EntityId $entityId, array $fields = null ) {
 		//FIXME: use factory based on $entity->getType()
-		if ( $entity instanceof Item ) {
+		if ( $entityId->getEntityType() === Item::ENTITY_TYPE ) {
 			$class = '\Wikibase\ItemChange';
 		} else {
 			$class = '\Wikibase\EntityChange';
 		}
 
+		/** @var EntityChange $instance  */
 		$instance = new $class(
 			ChangesTable::singleton(),
 			$fields,
@@ -281,11 +266,7 @@ class EntityChange extends DiffChange {
 		);
 
 		if ( !$instance->hasField( 'object_id' ) ) {
-			$id = $entity->getId();
-
-			if ( $id ) {
-				$instance->setField( 'object_id', $id->getPrefixedId() );
-			}
+			$instance->setField( 'object_id', $entityId->getPrefixedId() );
 		}
 
 		if ( !$instance->hasField( 'info' ) ) {
@@ -293,14 +274,9 @@ class EntityChange extends DiffChange {
 			$instance->setField( 'info', $info );
 		}
 
-		$info = $instance->getField( 'info' );
-		if ( !array_key_exists( 'entity', $info ) ) {
-			$instance->setEntity( $entity );
-		}
-
 		// determines which class will be used when loading teh change from the database
 		// @todo get rid of ugly cruft
-		$type = 'wikibase-' . $entity->getType() . '~' . $action;
+		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
 		$instance->setField( 'type', $type );
 
 		return $instance;
@@ -337,8 +313,9 @@ class EntityChange extends DiffChange {
 		/**
 		 * @var EntityChange $instance
 		 */
-		$instance = self::newFromEntity( $action, $theEntity, $fields );
-		$instance->setDiff( $oldEntity->getDiff( $newEntity ) );
+		$diff = $oldEntity->getDiff( $newEntity );
+		$instance = self::newForEntity( $action, $theEntity->getId(), $fields );
+		$instance->setDiff( $diff );
 
 		return $instance;
 	}
