@@ -101,6 +101,7 @@ describe "Check client RC & WL" do
         page.login_with(CLIENT_ADMIN_USERNAME, CLIENT_ADMIN_PASSWORD)
       end
       visit_page(ClientUserPrefsPage) do |page|
+        page.wait_for_prefs_to_load
         page.toggleWikidataEdits(true)
       end
       visit_page(ClientRecentChangesPage) do |page|
@@ -111,6 +112,7 @@ describe "Check client RC & WL" do
         page.rcFirstResult_element.text.include?(item_id).should be_true
       end
       visit_page(ClientUserPrefsPage) do |page|
+        page.wait_for_prefs_to_load
         page.toggleWikidataEdits(false)
       end
       visit_page(ClientLoginPage) do |page|
