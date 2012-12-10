@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//1r0\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-10T08:56:03Z",
+      "side": 1,
+      "message": "No @since",
+      "revId": "55f388b479143b7b0483732bbc027ebf22cb00a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//1r4\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-10T08:56:03Z",
+      "side": 1,
+      "message": "This is wrong, as it implies a 2D+ array, while it\u0027s an array of SiteLink.",
+      "revId": "55f388b479143b7b0483732bbc027ebf22cb00a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//1rw\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-10T08:56:03Z",
+      "side": 1,
+      "message": "Do you not see any better approach then adding a static method here?",
+      "revId": "55f388b479143b7b0483732bbc027ebf22cb00a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
