@@ -74,24 +74,27 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 		$fromSite = $sites->getSite( $params['fromsite'] );
 		// This must be tested now
 		$fromPage = $fromSite->normalizePageName( $params['fromtitle'] );
+
 		if ( $fromPage === false ) {
 			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
 		}
+
 		// This is used for testing purposes later
-		$fromId = ItemHandler::singleton()->getIdForSiteLink( $params['fromsite'], $fromPage );
+		$fromId = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $params['fromsite'], $fromPage );
 
 		// Get all part for the to-link
 		// Site is already tested through allowed params ;)
 		$toSite = $sites->getSite( $params['tosite'] );
 		// This must be tested now
 		$toPage = $toSite->normalizePageName( $params['totitle'] );
+
 		if ( $toPage === false ) {
 			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
 		}
 		// This is used for testing purposes later
-		$toId = ItemHandler::singleton()->getIdForSiteLink( $params['tosite'], $toPage );
+		$toId = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $params['tosite'], $toPage );
 
 		$return = array();
 		$flags = 0;

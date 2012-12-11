@@ -49,7 +49,8 @@ class ApiGetEntities extends Api {
 				for ( $k = 0; $k < $max; $k++ ) {
 					$siteId = $params['sites'][$idxSites++ % $numSites];
 					$title = Utils::squashToNFC( $params['titles'][$idxTitles++ % $numTitles] );
-					$id = ItemHandler::singleton()->getIdForSiteLink( $siteId, $title );
+
+					$id = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $title );
 
 					if ( $id ) {
 						$params['ids'][] = Item::getIdPrefix() . intval( $id );

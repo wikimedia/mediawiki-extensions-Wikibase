@@ -71,7 +71,8 @@ class SpecialItemByTitle extends SpecialItemResolver {
 
 			// Create an item view
 			if ( isset( $siteId ) && isset( $pageTitle ) ) {
-				$itemContent = \Wikibase\ItemHandler::singleton()->getFromSiteLink( $siteId, $pageTitle );
+				$itemHandler = new \Wikibase\ItemHandler();
+				$itemContent = $itemHandler->getFromSiteLink( $siteId, $pageTitle );
 
 				if ( $itemContent !== null ) {
 					$itemUrl = $itemContent->getTitle()->getFullUrl();

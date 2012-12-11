@@ -71,7 +71,9 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 		// Otherwise check if we have a link and try that.
 		// This will always result in an item, because only items have sitelinks.
 		elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-			$entityTitle = ItemHandler::singleton()->getTitleFromSiteLink(
+			$itemHandler = new ItemHandler();
+
+			$entityTitle = $itemHandler->getTitleFromSiteLink(
 				$params['site'],
 				Utils::squashToNFC( $params['title'] )
 			);
