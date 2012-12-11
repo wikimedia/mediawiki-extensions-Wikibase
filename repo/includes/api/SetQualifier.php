@@ -13,7 +13,6 @@ use Wikibase\EditEntity;
 use Wikibase\Claim;
 use Wikibase\ClaimSerializer;
 use Wikibase\Snaks;
-use Wikibase\Snak;
 use Wikibase\SnakFactory;
 
 /**
