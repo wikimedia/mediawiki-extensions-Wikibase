@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//0TY\u003d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-11T09:58:52Z",
+      "side": 1,
+      "message": "Please make the check explicit",
+      "revId": "bdc42e3e77b36f0c377d47edff6ceb5267aa134b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
