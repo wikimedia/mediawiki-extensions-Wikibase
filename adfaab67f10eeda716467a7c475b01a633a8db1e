@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//0OY\u003d",
+        "filename": "lib/includes/TemplateRegistry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-11T12:14:55Z",
+      "side": 1,
+      "message": "-1 Don\u0027t think this is a clearer naming",
+      "revId": "adfaab67f10eeda716467a7c475b01a633a8db1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//0OA\u003d",
+        "filename": "lib/includes/TemplateRegistry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-11T12:14:55Z",
+      "side": 1,
+      "message": "Makes sense, but perhaps put the $templateRegistry param as last one and use the TemplateStore singleton as default here. Can\u0027t think of many scenarios where you would want another store.\n\nAnother solution would be to add this parameter to the fetchMessage() function instead.",
+      "revId": "adfaab67f10eeda716467a7c475b01a633a8db1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//0N8\u003d",
+        "filename": "lib/includes/modules/TemplateModule.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-11T12:14:55Z",
+      "side": 1,
+      "message": "-1 This shouldn\u0027t know about the templates.php This module should be responsible to get all of the available, registered messages out there. Just like the core\u0027s message module does.",
+      "revId": "adfaab67f10eeda716467a7c475b01a633a8db1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
