@@ -60,51 +60,5 @@ interface Settings extends IteratorAggregate, ArrayAccess, Serializable {
 	 */
 	public function hasSetting( $settingName );
 
-	/**
-	 * Returns an instance of the settings class.
-	 *
-	 * @since 0.1
-	 *
-	 * @param boolean $rebuild
-	 *
-	 * @return Settings
-	 */
-	public static function singleton( $rebuild = false );
-
-	/**
-	 * Shortcut for ::singleton->getSetting.
-	 * @see Settings::getSetting
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $settingName
-	 *
-	 * @return mixed
-	 */
-	public static function get( $settingName );
-
-	/**
-	 * Shortcut for ::singleton->setSetting.
-	 * @see Settings::setSetting
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $settingName
-	 * @param mixed $settingValue
-	 */
-	public static function set( $settingName, $settingValue );
-
-	/**
-	 * Shortcut for ::singleton->hasSetting.
-	 * @see Settings::hasSetting
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $settingName
-	 *
-	 * @return boolean
-	 */
-	public static function has( $settingName );
-
 }
 
