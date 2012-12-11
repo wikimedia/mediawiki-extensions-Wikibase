@@ -69,7 +69,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			$cacheType = $GLOBALS[ 'wgMainCacheType' ];
 		}
 
-		$this->cacheType = $cacheType; //FIXME: take from Settings: defaultEntityCache 
+		$this->cacheType = $cacheType; //FIXME: take from Settings: defaultEntityCache
 		$this->cacheKeyPrefix = $cacheKeyPrefix;
 	}
 
@@ -192,7 +192,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 				return $cachedEntity;
 			}
 
-			$entity = self::loadEntity( $entityId->getEntityType(), $row );
+			$entity = $this->loadEntity( $entityId->getEntityType(), $row );
 		}
 
 		$this->releaseConnection( $db );
@@ -228,10 +228,15 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	 *
 	 * @return Entity|null
 	 */
-	protected static function loadEntity( $entityType, $row ) {
+	protected function loadEntity( $entityType, $row ) {
 		wfProfileIn( __METHOD__ );
 
-		$blob = \Revision::getRevisionText( $row );
+		wfDebugLog( 'wikibase', "calling getRevisionText() on rev " . $row->rev_id );
+
+		//NOTE: $row contains revision fields from another wiki. This SHOULD not
+		//      cause any problems, since getRevisionText should only look at the old_flags
+		//      and old_text fields. But be aware.
+		$blob = \Revision::getRevisionText( $row, 'old_', $this->wiki );
 
 		if ( $blob === false ) {
 			// oops. something went wrong.
