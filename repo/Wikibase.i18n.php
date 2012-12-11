@@ -214,7 +214,11 @@ to find out where it went.',
 	'wikibase-noentity-createone' => 'You can also [[$1|create a new one]].',
 
 	// summary and autocomment
-	'wikibase-item-summary-wbeditentity' => 'Created a new item',
+	'wikibase-item-summary-wbsetitem' => 'Created a new item', // legacy
+	'wikibase-item-summary-wbeditentity' => 'Created a new item', // legacy
+	'wikibase-item-summary-wbeditentity-create' => 'Created a new item',
+	'wikibase-item-summary-wbeditentity-update' => 'Updated an item',
+	'wikibase-item-summary-wbeditentity-override' => 'Overrided an item',
 	'wikibase-item-summary-wbsetlabel-set' => 'Changed [$2] label',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Removed [$2] label',
 	'wikibase-item-summary-wbsetdescription-set' => 'Changed [$2] description',
@@ -523,8 +527,9 @@ Parameters:
 * $1 is the name of the namespace for which direct editing was denied.',
 	'wikibase-noentity' => 'Of some reason the user tried to access an entity which then was detected as non-existing. This can happen when an entity is deleted and clients are not yet made aware of this.',
 	'wikibase-noentity-createone' => 'Put immediately after "wikibase-noentity" if the user has the right to create an entity of the given type. This message tells the user that he can create one and gives a link in $1 to the special page where this can be done.',
+	'wikibase-item-summary-wbsetitem' => 'Automatic edit summary generated when creating a new item. This is a legacy message.',
 	'wikibase-item-summary-wbeditentity' => 'Automatic edit summary generated when creating a new item.',
-	'wikibase-item-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing an item label, which appears in the h1 heading at top of the page. Example edit summary is "Updated [en] label:  Egypt". Parameters:
+'wikibase-item-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing an item label, which appears in the h1 heading at top of the page. Example edit summary is "Updated [en] label:  Egypt". Parameters:
 * $2 is the language code for the item page.',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Automatic edit summary generated when removing an item label. Example edit summary is "Removed [en] label". Parameters:
 * $2 is the language code for the item page.',
