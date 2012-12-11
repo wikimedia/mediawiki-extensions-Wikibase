@@ -1,0 +1,38 @@
+/**
+ * Default/Vector styles for jquery.ui.autosuggester
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+
+.ui-autosuggester {
+	position: relative;
+}
+
+/* prevent browsers from applying their native style for input boxes */
+.ui-autosuggester input {
+	padding: 0 2px;
+	border: 1px solid #AAA;
+	border-radius: 0;
+}
+
+.ui-autosuggester .ui-autosuggester-input {
+	position: absolute;
+	left: 0;
+	background-color: transparent;
+	/* need to set a (transparent) background image for IE to be able to click transparent input box */
+	background: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==);
+	/* IE/FF requires offest */
+	top: 0;
+	font-family: inherit;
+}
+
+.ui-autosuggester .ui-autosuggester-suggestion {
+	color: #AAA;
+	background-color: #FFF;
+	font-family: inherit;
+}
+
+.ui-autosuggester-disabled .ui-autosuggester-suggestion {
+	background-color: #F0F0F0;
+}

@@ -193,6 +193,7 @@ return call_user_func( function() {
 				'wikibase.utilities.jQuery.ui.tagadata',
 				'jquery.inputAutoExpand',
 				'jquery.ui.suggester',
+				'jquery.ui.autosuggester',
 				'jquery.ui.entityselector',
 				'jquery.wikibase.siteselector',
 				'mediawiki.api',
@@ -280,6 +281,18 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.autocomplete',
 				'jquery.eachchange'
+			)
+		),
+
+		'jquery.ui.autosuggester' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.autosuggester.js'
+			),
+			'styles' => array(
+				'jquery.ui/themes/default/jquery.ui.autosuggester.css'
+			),
+			'dependencies' => array(
+				'jquery.ui.suggester'
 			)
 		),
 
