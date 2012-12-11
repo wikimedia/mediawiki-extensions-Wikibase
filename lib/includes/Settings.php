@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use MWException, SettingsBase;
+use MWException;
 
 /**
  * File defining the settings for the Wikibase extension.
@@ -34,33 +34,43 @@ use MWException, SettingsBase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Settings extends SettingsBase {
+class Settings extends SettingsArray {
 
 	/**
-	 * @see SettingsBase::getSetSettings
+	 * @see Settings::singleton
 	 *
 	 * @since 0.1
 	 *
-	 * @return array
+	 * @return Settings
 	 */
-	protected function getSetSettings() {
-		return $GLOBALS['wgWBSettings'];
+	public static function singleton() {
+		static $instance = null;
+
+		if ( $instance === null ) {
+			$settings = array();
+
+			// allow extensions that use WikidataLib to register mode defaults
+			wfRunHooks( 'WikibaseDefaultSettings', array( &$settings ) );
+
+			$settings = array_merge( $settings, $GLOBALS['wgWBSettings'] );
+
+			$instance = new static( $settings );
+		}
+
+		return $instance;
 	}
 
 	/**
-	 * @see SettingsBase::getDefaultSettings
+	 * Shortcut to ::singleton()->getSetting
 	 *
 	 * @since 0.1
 	 *
-	 * @return array
+	 * @param string $settingName
+	 *
+	 * @return mixed
 	 */
-	protected function getDefaultSettings() {
-		$settings = array();
-
-		// allow extensions that use WikidataLib to register mode defaults
-		wfRunHooks( 'WikibaseDefaultSettings', array( &$settings ) );
-
-		return $settings;
+	public static function get( $settingName ) {
+		return static::singleton()->offsetGet( $settingName );
 	}
 
 }

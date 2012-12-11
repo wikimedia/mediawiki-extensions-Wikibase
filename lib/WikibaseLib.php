@@ -108,6 +108,7 @@ $wgAutoloadClasses['Wikibase\Reference'] 				= $dir . 'includes/Reference.php';
 $wgAutoloadClasses['Wikibase\ReferenceObject'] 			= $dir . 'includes/ReferenceObject.php';
 $wgAutoloadClasses['Wikibase\ObjectComparer'] 			= $dir . 'includes/ObjectComparer.php';
 $wgAutoloadClasses['Wikibase\Settings'] 				= $dir . 'includes/Settings.php';
+$wgAutoloadClasses['Wikibase\SettingsArray'] 			= $dir . 'includes/SettingsArray.php';
 $wgAutoloadClasses['Wikibase\SiteLink'] 				= $dir . 'includes/SiteLink.php';
 $wgAutoloadClasses['Wikibase\Term'] 					= $dir . 'includes/Term.php';
 $wgAutoloadClasses['Wikibase\Utils'] 					= $dir . 'includes/Utils.php';
@@ -210,15 +211,6 @@ $wgAutoloadClasses['Wikibase\Test\SnakObjectTest'] 			= $dir . 'tests/phpunit/sn
 $wgAutoloadClasses['Wikibase\Test\SerializerBaseTest'] 		= $dir . 'tests/phpunit/serializers/SerializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntitySerializerBaseTest']= $dir . 'tests/phpunit/serializers/EntitySerializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityTestCase']          = $dir . 'tests/phpunit/entity/EntityTestCase.php';
-
-foreach ( array(
-			  'Settings',
-			  'SettingsBase'
-		  ) as $compatClass ) {
-	if ( !array_key_exists( $compatClass, $wgAutoloadLocalClasses ) ) {
-		$wgAutoloadClasses[$compatClass] = $dir . 'compat/' . $compatClass . '.php';
-	}
-}
 
 
 $wgDataTypes['wikibase-item'] = array(

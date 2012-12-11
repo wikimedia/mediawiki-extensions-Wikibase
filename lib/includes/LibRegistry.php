@@ -38,16 +38,16 @@ class LibRegistry {
 	/**
 	 * @since 0.4
 	 *
-	 * @var \Settings
+	 * @var SettingsArray
 	 */
 	protected $settings;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param \Settings $settings
+	 * @param SettingsArray $settings
 	 */
-	public function __construct( \Settings $settings ) {
+	public function __construct( SettingsArray $settings ) {
 		$this->settings = $settings;
 	}
 
