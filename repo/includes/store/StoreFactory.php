@@ -31,7 +31,7 @@ class StoreFactory {
 
 		$class = $wgWBStores[$store];
 
-		return $class::singleton();
+		return new $class;
 	}
 
 }

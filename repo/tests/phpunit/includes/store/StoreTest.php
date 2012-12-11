@@ -51,16 +51,6 @@ class StoreTest extends \MediaWikiTestCase {
 	 * @dataProvider instanceProvider
 	 * @param Store $store
 	 */
-	public function testSingleton( Store $store ) {
-		$class = get_class( $store );
-		$this->assertTrue( $class::singleton() === $class::singleton() );
-		$this->assertInstanceOf( $class, $class::singleton() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param Store $store
-	 */
 	public function testRebuild( Store $store ) {
 		$store->rebuild();
 		$this->assertTrue( true );
