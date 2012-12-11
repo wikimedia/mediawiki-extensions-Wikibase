@@ -42,7 +42,7 @@ class ClientStoreFactory {
 	 */
 	public static function getStore( $store = false ) {
 		global $wgWBClientStores;
-		$store = $store === false || !array_key_exists( $store, $wgWBClientStores ) ? Settings::get( 'defaultClientStore' ) : $store;
+		$store = ( $store === false || !array_key_exists( $store, $wgWBClientStores ) ) ? Settings::get( 'defaultClientStore' ) : $store;
 
 		if ( !$store ) {
 			if ( Settings::get( 'repoDatabase' ) ) {
@@ -54,7 +54,16 @@ class ClientStoreFactory {
 
 		$class = $wgWBClientStores[$store];
 
-		return $class::singleton();
+		if ( Settings::get( 'repoDatabase' ) ) {
+			//FIXME: use the same setting for wb_changes
+			$instance = new $class( Settings::get( 'repoDatabase' ) );
+		}
+		else {
+			$instance = new $class;
+		}
+
+		assert( $instance instanceof ClientStore );
+		return $instance;
 	}
 
 }

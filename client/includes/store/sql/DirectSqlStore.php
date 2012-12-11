@@ -33,25 +33,6 @@ namespace Wikibase;
 class DirectSqlStore implements ClientStore {
 
 	/**
-	 * @see Store::singleton
-	 *
-	 * @since 0.3
-	 *
-	 * @return Store
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$repoWiki = Settings::get( 'repoDatabase' ); //FIXME: use the same setting for wb_changes
-
-			$instance = new static( $repoWiki );
-		}
-
-		return $instance;
-	}
-
-	/**
 	 * @var String|bool $repoWiki
 	 */
 	protected $repoWiki;

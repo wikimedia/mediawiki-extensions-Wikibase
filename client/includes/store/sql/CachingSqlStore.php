@@ -32,23 +32,6 @@ namespace Wikibase;
 class CachingSqlStore implements ClientStore {
 
 	/**
-	 * @see Store::singleton
-	 *
-	 * @since 0.3
-	 *
-	 * @return Store
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
-		}
-
-		return $instance;
-	}
-
-	/**
 	 * @see Store::newSiteLinkTable
 	 *
 	 * @since 0.3
