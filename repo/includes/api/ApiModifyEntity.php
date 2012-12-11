@@ -194,7 +194,8 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 		$editEntity->attemptSave(
 			Autocomment::buildApiSummary( $this, $params, $entityContent ),
 			$this->flags,
-			( $this->needsToken() ? $params['token'] : '' )
+			//( $this->needsToken() ? $params['token'] : '' )
+			( $this->needsToken() ? $params['token'] : false )
 		);
 
 		if ( $editEntity->hasError( EditEntity::TOKEN_ERROR ) ) {

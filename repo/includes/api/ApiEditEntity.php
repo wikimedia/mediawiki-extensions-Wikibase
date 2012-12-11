@@ -48,9 +48,15 @@ class ApiEditEntity extends ApiModifyEntity {
 	 * @see  ApiAutocomment::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 'none' ) {
+		if ( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
+			$action = $params['clear'] === false ? 'update' : 'override';
+		}
+		else {
+			$action = 'create';
+		}
 		return Autocomment::formatAutoComment(
-			'wbeditentity',
-			array()
+			'wbeditentity-' . $action,
+			array() // TODO: this could list all languages and/or sites (how to do this for claims?)
 		);
 	}
 
@@ -59,7 +65,7 @@ class ApiEditEntity extends ApiModifyEntity {
 	 */
 	public function getTextForSummary( array $params ) {
 		return Autocomment::formatAutoSummary(
-			array()
+			array() // TODO: this could list values (how to do this for claims?)
 		);
 	}
 
