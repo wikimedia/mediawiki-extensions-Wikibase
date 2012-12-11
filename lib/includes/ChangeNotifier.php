@@ -33,23 +33,6 @@ namespace Wikibase;
 class ChangeNotifier {
 
 	/**
-	 * Returns the global instance of the ChangeNotifier interface.
-	 *
-	 * @since 0.1
-	 *
-	 * @return ChangeNotifier
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
-		}
-
-		return $instance;
-	}
-
-	/**
 	 * Handles the provided change.
 	 *
 	 * @since 0.1
