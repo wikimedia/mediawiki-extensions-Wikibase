@@ -31,7 +31,7 @@ $wgAutoloadClasses['Wikibase\Api\SetStatementRank']			= $dir . 'includes/api/Set
 
 
 $wgAutoloadClasses['SpecialListDatatypes'] 				= $dir . 'includes/specials/SpecialListDatatypes.php';
-$wgAutoloadClasses['SpecialNewProperty'] 				= $dir . 'includes/specials/SpecialNewProperty.php';
+$wgAutoloadClasses['SpecialCreateProperty'] 			= $dir . 'includes/specials/SpecialNewProperty.php';
 $wgAutoloadClasses['SpecialEntityData'] 				= $dir . 'includes/specials/SpecialEntityData.php';
 
 $wgAPIModules['wbcreateclaim'] 						= 'Wikibase\ApiCreateClaim';
@@ -45,7 +45,7 @@ $wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Repo\Api\SetQualifier';
 $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
 
 $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
-$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
+$wgSpecialPages['CreateProperty'] 					= 'SpecialCreateProperty';
 $wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
 
 /**

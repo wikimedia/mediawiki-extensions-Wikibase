@@ -119,7 +119,7 @@ $messages['en'] = array(
 	'wikibase-itemdisambiguation-create' => 'You can [{{fullurl:Special:CreateItem|label=$1}} create the item].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Sorry, the language identifier you have provided is unknown to the system. Please use a valid identifier like "en".',
 	'wikibase-itemdisambiguation-description' => 'Values used for searching must be the complete text entry. Language is an identifier, such as "en".',
-	'special-newproperty' => 'Create a new property',
+	'special-createproperty' => 'Create a new property',
 	'wikibase-newproperty-intro' => 'Before you create a new property, consider checking whether this property already exists. To create a new one you need to specify at least the label or the description in $1, and a valid property type.',
 	'wikibase-newproperty-fieldset' => 'Create a new property',
 	'wikibase-newproperty-datatype' => 'Data type:',

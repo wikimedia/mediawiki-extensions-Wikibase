@@ -1,6 +1,7 @@
 <?php
 
-use Wikibase\PropertyContent, Wikibase\EntityContent;
+use Wikibase\PropertyContent;
+use Wikibase\EntityContent;
 
 /**
  * Page for creating new Wikibase properties.
@@ -28,7 +29,7 @@ use Wikibase\PropertyContent, Wikibase\EntityContent;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class SpecialNewProperty extends SpecialCreateEntity {
+class SpecialCreateProperty extends SpecialCreateEntity {
 
 	/**
 	 * @since 0.2
@@ -43,7 +44,7 @@ class SpecialNewProperty extends SpecialCreateEntity {
 	 * @since 0.2
 	 */
 	public function __construct() {
-		parent::__construct( 'NewProperty' );
+		parent::__construct( 'CreateProperty' );
 	}
 
 	/**
