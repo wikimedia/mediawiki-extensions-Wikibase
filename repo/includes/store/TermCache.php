@@ -70,6 +70,15 @@ interface TermCache {
 	public function deleteTermsOfEntity( Entity $entity );
 
 	/**
+	 * Returns the terms stored for the given entity.
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return Term[]
+	 */
+	public function getTermsOfEntity( EntityId $id );
+
+	/**
 	 * Returns if a term with the specified parameters exists.
 	 *
 	 * @since 0.1
