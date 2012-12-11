@@ -31,23 +31,6 @@ use Title, ParserOutput;
  */
 class QueryHandler extends EntityHandler {
 
-	/**
-	 * Returns an instance of the PropertyHandler.
-	 *
-	 * @since 0.1
-	 *
-	 * @return QueryHandler
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
-		}
-
-		return $instance;
-	}
-
 	public function __construct() {
 		parent::__construct( CONTENT_MODEL_WIKIBASE_QUERY );
 	}

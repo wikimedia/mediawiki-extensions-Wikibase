@@ -33,23 +33,6 @@ use User, Title, WikiPage, RequestContext;
 class ItemHandler extends EntityHandler {
 
 	/**
-	 * Returns an instance of the ItemHandler.
-	 *
-	 * @since 0.1
-	 *
-	 * @return ItemHandler
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
-		}
-
-		return $instance;
-	}
-
-	/**
 	 * @see EntityHandler::getContentClass
 	 *
 	 * @since 0.3

@@ -32,23 +32,6 @@ use Title, ParserOutput;
 class PropertyHandler extends EntityHandler {
 
 	/**
-	 * Returns an instance of the PropertyHandler.
-	 *
-	 * @since 0.1
-	 *
-	 * @return PropertyHandler
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
-		}
-
-		return $instance;
-	}
-
-	/**
 	 * @see EntityHandler::getContentClass
 	 *
 	 * @since 0.3
