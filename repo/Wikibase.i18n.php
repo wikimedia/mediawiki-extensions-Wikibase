@@ -237,6 +237,7 @@ to find out where it went.',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{plural:$1|value|values}}',
 	'wikibase-property-summary-special-create-property' => 'Created a [$2] property with {{plural:$1|value|values}}',
 	'wikibase-query-summary-special-create-query' => 'Created a [$2] query with {{plural:$1|value|values}}',
+	'wikibase-item-summary-special-setlabel-set' => 'Changed [$2] {{plural:$1|label|labels}}',
 
 	//content model names
 	'content-model-wikibase-item' => 'Wikibase item',
@@ -582,6 +583,9 @@ Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
 	'wikibase-query-summary-special-create-query' => 'Automatic edit summary when creating a query, and supplying one or more values. Parameters:
+* $1 is the number of values set (that is 0 - zero);
+* $2 is the language code of the entity page during creation.',
+	'wikibase-item-summary-special-setlabel-set' => 'Automatic edit summary when setting a label, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
