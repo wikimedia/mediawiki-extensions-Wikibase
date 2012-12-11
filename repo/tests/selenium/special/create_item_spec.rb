@@ -79,23 +79,6 @@ describe "Check CreateItem special page" do
         page.createEntityDescriptionField?.should be_true
       end
     end
-    it "should fail to create 2 items with same label & description" do
-      label = generate_random_string(10)
-      description = generate_random_string(20)
-      visit_page(CreateItemPage) do |page|
-        page.createEntityLabelField = label
-        page.createEntityDescriptionField = description
-        page.createEntitySubmit
-        page.wait_for_entity_to_load
-      end
-      visit_page(CreateItemPage) do |page|
-        page.createEntityLabelField = label
-        page.createEntityDescriptionField = description
-        page.createEntitySubmit
-        page.createEntityLabelField?.should be_true
-        page.createEntityDescriptionField?.should be_true
-      end
-    end
   end
 
   context "Check for correct redirect on create new item" do
