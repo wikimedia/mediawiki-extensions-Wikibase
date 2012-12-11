@@ -77,9 +77,6 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 			return false;
 		}
 
-		$this->setHeaders();
-		$this->outputHeader();
-
 		$this->parts = ( $subPage === '' ? array() : explode( '/', $subPage ) );
 		$this->prepareArguments();
 
