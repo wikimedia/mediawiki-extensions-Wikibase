@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\Autocomment;
+
 /**
  * Special page for setting the label of a Wikibase entity.
  *
@@ -86,12 +88,26 @@ class SpecialSetLabel extends SpecialWikibasePage {
 		if ( $entityContent !== null && $language !== null && $this->getRequest()->wasPosted() ) {
 
 			$entityContent->getEntity()->setLabel( $language, $label );
+
+			list( $counts, $summary, $lang) = Autocomment::formatAutoSummary(
+				array( $label ),
+				$this->getLanguage()
+			);
+			$comment = Autocomment::formatAutoComment(
+				'special-setlabel-set',
+				array( $counts, $language )
+			);
+
 			$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() ); //TODO: need conflict detection??
-			$editEntity->attemptSave( '', EDIT_AUTOSUMMARY,  $request->getVal( 'wpEditToken' ) );
+			$editEntity->attemptSave(
+				AutoComment::formatTotalSummary( $comment, $summary, $lang ),
+				EDIT_AUTOSUMMARY,
+				$request->getVal( 'wpEditToken' )
+			);
 
 			if ( !$editEntity->isSuccess() ) {
 				$editEntity->showErrorPage( $this->getOutput() );
-            }
+			}
 			else {
 				$entityUrl = $entityContent->getTitle()->getFullUrl();
 				$this->getOutput()->redirect( $entityUrl );

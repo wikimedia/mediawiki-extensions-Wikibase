@@ -237,6 +237,7 @@ to find out where it went.',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{plural:$1|value|values}}',
 	'wikibase-property-summary-special-create-property' => 'Created a [$2] property with {{plural:$1|value|values}}',
 	'wikibase-query-summary-special-create-query' => 'Created a [$2] query with {{plural:$1|value|values}}',
+	'wikibase-item-summary-special-setlabel-set' => 'Changed [$2] label',
 
 	//content model names
 	'content-model-wikibase-item' => 'Wikibase item',
