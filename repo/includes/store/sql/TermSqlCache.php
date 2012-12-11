@@ -85,6 +85,23 @@ class TermSqlCache implements TermCache {
 	 */
 	public function saveTermsOfEntity( Entity $entity ) {
 		$dbw = wfGetDB( DB_MASTER );
+		$dbw->commit( __METHOD__, "flush" ); // flush to make sure we are not in some explicit transaction
+
+		return $dbw->deadlockLoop( array( $this, 'saveTermsOfEntityInternal' ), $entity, $dbw );
+	}
+
+	/**
+	 * Internal implementation of saveTermsOfEntity, called via DatabaseBase:deadlockLoop.
+	 *
+	 * @since 0.4
+	 *
+	 * @param Entity $entity
+	 * @param DatabaseBase $dbw
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function saveTermsOfEntityInternal( Entity $entity, DatabaseBase $dbw ) {
+		//TODO: diff old against new, only update what's needed, if anything.
 
 		$entityIdentifiers = array(
 			'term_entity_id' => $entity->getId()->getNumericId(),
@@ -148,6 +165,29 @@ class TermSqlCache implements TermCache {
 	 */
 	public function deleteTermsOfEntity( Entity $entity ) {
 		$dbw = wfGetDB( DB_MASTER );
+
+		//TODO: do this via deadlockLoop. Currently triggers warnings, because deleteTermsOfEntity
+		//      is called from EntityDeletionUpdate, which is called from within the transaction
+		//      started by WikiPage::doDeleteArticleReal.
+		/*
+		$dbw->commit( __METHOD__, "flush" ); // flush to make sure we are not in some explicit transaction
+		return $dbw->deadlockLoop( array( $this, 'deleteTermsOfEntityInternal' ), $entity, $dbw );
+		*/
+
+		return $this->deleteTermsOfEntityInternal( $entity, $dbw );
+	}
+
+	/**
+	 * Internal implementation of deleteTermsOfEntity, called via DatabaseBase:deadlockLoop.
+	 *
+	 * @since 0.4
+	 *
+	 * @param Entity $entity
+	 * @param DatabaseBase $dbw
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function deleteTermsOfEntityInternal( Entity $entity, DatabaseBase $dbw ) {
 
 		return $dbw->delete(
 			$this->tableName,
