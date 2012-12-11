@@ -12,7 +12,7 @@ describe "Check functionality of non existing item page" do
   before :all do
     # set up: switch language
     visit_page(CreateItemPage) do |page|
-      page.uls_switch_language(LANGUAGE)
+      page.uls_switch_language(LANGUAGE_CODE, LANGUAGE_NAME)
     end
   end
   context "Check functionality of non existing item page" do

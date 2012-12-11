@@ -34,7 +34,7 @@ describe "Check SetLabel special page" do
         page.setLabelSubmit
         page.wait_for_entity_to_load
         page.navigate_to_item
-        page.uls_switch_language("de")
+        page.uls_switch_language("de", "deutsch")
         page.wait_for_entity_to_load
         page.entityLabelSpan.should == label_de
       end
@@ -47,7 +47,7 @@ describe "Check SetLabel special page" do
         page.setLabelSubmit
         page.wait_for_entity_to_load
         page.navigate_to_item
-        page.uls_switch_language("de")
+        page.uls_switch_language("de", "deutsch")
         page.wait_for_entity_to_load
         page.entityLabelSpan.should == label_de_different
       end
