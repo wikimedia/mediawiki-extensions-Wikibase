@@ -537,6 +537,10 @@ $messages['nb'] = array(
  */
 $messages['nl'] = array(
 	'wbc-desc' => 'Client voor de uitbreiding Wikibase',
+	'wbc-comment-linked' => 'Er is een Wikidataitem gekoppeld aan deze pagina.',
+	'wbc-comment-sitelink-add' => 'Taalverwijzing toegevoegd: $1',
+	'wbc-comment-sitelink-change' => 'Taalverwijzing gewijzigd van $1 naar $2',
+	'wbc-comment-sitelink-remove' => 'Taalverwijzing verwijderd: $1',
 	'wbc-editlinks' => 'Verwijzingen bewerken',
 	'wbc-editlinkstitle' => 'Intertaalverwijzingen bewerken',
 	'wbc-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
@@ -556,13 +560,13 @@ $messages['nn'] = array(
  * @author BeginaFelicysym
  * @author Lazowik
  * @author Maćko
+ * @author Odie2
  */
 $messages['pl'] = array(
 	'wbc-desc' => 'Klient rozszerzenia Wikibase',
-	'wbc-comment-langlinks-delete' => 'Powiązany obiekt Wikidata usunięty. Linki językowe usunięte.',
-	'wbc-comment-langlinks-remove' => 'Ta strona została odlinkowana od obiektu Wikidata. Linki językowe usunięte',
-	'wbc-comment-langlinks-restore' => 'Powiązany obiekt Wikidata przywrócony. Linki językowe przywrócone',
-	'wbc-comment-langlinks-update' => 'Linki językowe zaktualizowane',
+	'wbc-comment-sitelink-add' => 'Łącze języka dodane: $1',
+	'wbc-comment-sitelink-change' => 'Łącze języka zmienione z $1 na $2',
+	'wbc-comment-sitelink-remove' => 'Łącze języka usunięte: $1',
 	'wbc-editlinks' => 'Edytuj linki',
 	'wbc-editlinkstitle' => 'Edytuj linki wersji językowych',
 );
