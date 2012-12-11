@@ -66,9 +66,8 @@ describe "Check statements UI" do
         page.firstEntitySelectorDescription.should == prop_a_description
         page.firstEntitySelectorLink
         ajax_wait
-      # TODO: still broken in UI - property-value input-box should be shown when selecting an entity by click - bug caught in statements_bugs_spec
-        #page.wait_for_property_value_box
-        #page.statementValueInput?.should be_true
+        page.wait_for_property_value_box
+        page.statementValueInput?.should be_true
         page.entitySelectorInput_element.clear
         # TODO: still broken in UI - property-value input-box should be removed when property field is empty - bug caught in statements_bugs_spec
         #page.statementValueInput?.should be_false
