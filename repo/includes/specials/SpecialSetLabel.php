@@ -53,29 +53,14 @@ class SpecialSetLabel extends SpecialWikibasePage {
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 
-		// Setup
-		// TODO make this work for all types of entities
+		$rawId = $this->getRequest()->getVal( 'id', $parts[0] );
+		$id = \Wikibase\EntityId::newFromPrefixedId( $rawId );
 
-		// Get entity
-		$id = $request->getVal( 'id', isset( $parts[0] ) ? $parts[0] : '' );
-		if ( $id === '' ) {
-			$id = null;
+		if ( $id === null ) {
+			$entityContent = null;
 		}
-		$entityContent = null;
-		if ( $id !== null ) {
-			// TODO prefix handling should go into EntityContent or EntityHandler
-			$prefix = \Wikibase\ItemHandler::singleton()->getEntityPrefix();
-			if ( stripos( $id, $prefix ) === 0 ) {
-				$pureId = strval( substr ( $id, strlen( $prefix ) ) );
-				// strval returns 0 on everything that is not a number, so check if the number is 0 if it is a prefixed 0 indeed
-				if ( ( $pureId === 0 ) && ( strtolower( $id ) !== strtolower( $prefix ) . "0" ) ) {
-					$entityContent = null;
-				} else {
-					$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId(
-							new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, intval( $pureId ) )
-					);
-				}
-			}
+		else {
+			$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $id );
 		}
 
 		// Get language
@@ -83,26 +68,31 @@ class SpecialSetLabel extends SpecialWikibasePage {
 		// Get label
 		$label = $request->getVal( 'label' );
 
-		if ( $language === '') {
+		if ( $language === '' ) {
 			$language = null;
 		}
+
 		if ( $language !== null ) {
 			if ( ( !Language::isValidBuiltInCode( $language ) or ( !in_array( $language, \Wikibase\Utils::getLanguageCodes() ) ) ) ) {
 				$this->getOutput()->addWikiMsg( 'wikibase-setlabel-invalid-langcode', $language );
 				$language = null;
 			}
 		}
+
 		if ( $entityContent === null && $label !== null ) {
-			$this->getOutput()->addWikiMsg( 'wikibase-setlabel-invalid-id', $id );
+			$this->getOutput()->addWikiMsg( 'wikibase-setlabel-invalid-id', $rawId );
 		}
-		if ( ( $entityContent !== null ) && ( $language !== null ) && $this->getRequest()->wasPosted() ) {
+
+		if ( $entityContent !== null && $language !== null && $this->getRequest()->wasPosted() ) {
 
 			$entityContent->getEntity()->setLabel( $language, $label );
 			$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() ); //TODO: need conflict detection??
 			$editEntity->attemptSave( '', EDIT_AUTOSUMMARY,  $request->getVal( 'wpEditToken' ) );
-			if ( !($editEntity->isSuccess()) ) {
+
+			if ( !$editEntity->isSuccess() ) {
 				$editEntity->showErrorPage( $this->getOutput() );
-            } else if ( $entityContent !== null ) {
+            }
+			else {
 				$entityUrl = $entityContent->getTitle()->getFullUrl();
 				$this->getOutput()->redirect( $entityUrl );
 			}
