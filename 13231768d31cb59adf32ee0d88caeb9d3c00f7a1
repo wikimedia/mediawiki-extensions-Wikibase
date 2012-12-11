@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//0CI\u003d",
+        "filename": "lib/includes/Term.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-12-11T17:12:34Z",
+      "side": 1,
+      "message": "This seems to be a subset where $this is contained within $that.",
+      "revId": "13231768d31cb59adf32ee0d88caeb9d3c00f7a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//0B4\u003d",
+        "filename": "lib/includes/Term.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-12-11T17:12:34Z",
+      "side": 1,
+      "message": "Will this work for sorting if a common field like \u0027entityType\u0027 is defined for all terms?",
+      "revId": "13231768d31cb59adf32ee0d88caeb9d3c00f7a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
