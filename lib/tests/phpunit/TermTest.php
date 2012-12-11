@@ -76,23 +76,21 @@ class TermTest extends \MediaWikiTestCase {
 				'foo', // raw
 				'foo', // normalized
 			),
+
 			array( // #1
 				'  foo  ', // raw
 				'foo', // normalized
 			),
 
-
-			//FIXME: Term::normalizeText is broken, fix soon!
-			/*
 			array( // #2: lower case of non-ascii character
 				'Äpfel', // raw
 				'äpfel', // normalized
 			),
+
 			array( // #3: lower case of decomposed character
 				"A\xCC\x88pfel", // raw
 				'äpfel', // normalized
 			),
-			*/
 		);
 	}
 
