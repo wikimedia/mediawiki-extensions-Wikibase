@@ -18,7 +18,8 @@ namespace Wikibase;
 /**
  * Stores plain templates.
  */
-class TemplateStore {
+class TemplateRegistry {
+
 	/**
 	 * @var array
 	 */
@@ -67,7 +68,7 @@ class TemplateStore {
 	/**
 	 * Singleton pattern integration.
 	 *
-	 * @return TemplateStore
+	 * @return TemplateRegistry
 	 */
 	public static function singleton() {
 		static $instance = false;
@@ -78,12 +79,27 @@ class TemplateStore {
 
 		return $instance;
 	}
+
 }
 
 /**
  * Represents a template that can contain placeholders just like MediWiki messages.
  */
 class Template extends \Message {
+
+	protected $templateRegistry;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param TemplateRegistry $templateRegistry
+	 * @param $key: message key, or array of message keys to try and use the first non-empty message for
+	 * @param $params Array message parameters
+	 */
+	public function __construct( TemplateRegistry $templateRegistry, $key, $params = array() ) {
+		$this->templateRegistry = $templateRegistry;
+		parent::__construct( $key, $params );
+	}
 
 	/**
 	 * Fetch a template from the template store.
@@ -93,8 +109,7 @@ class Template extends \Message {
 	 */
 	function fetchMessage() {
 		if ( !isset( $this->message ) ) {
-			$cache = TemplateStore::singleton();
-			$this->message = $cache->getTemplate( $this->key );
+			$this->message = $this->templateRegistry->getTemplate( $this->key );
 		}
 		return $this->message;
 	}
