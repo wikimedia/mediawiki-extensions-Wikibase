@@ -93,7 +93,6 @@ $messages['en'] = array(
 	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Another property ($3) already has label "$1" associated with language code $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Another query ($3) already has label "$1" associated with language code $2',
-	'wikibase-error-label-not-unique-item' => 'Another item ($3) already has label "$1" and description "$4" associated with language code $2',
 
 	'wikibase-itemlink' => '$1 $2',
 	'wikibase-itemlink-id-wrapper' => '($1)',
@@ -382,11 +381,6 @@ Note that the default message says the user shall "reload and save", but after a
 * $1 is label text
 * $2 is the labels language code
 * $3 is the id of the query that already has the label',
-	'wikibase-error-label-not-unique-item' => 'Error message shown when a user tries to save an item that has a non-unique label+description pair. Parameters:
-* $1 is label text
-* $2 is the labels language code
-* $3 is the id of the query that already has the label
-* $4 is description text',
 	'wikibase-itemlink' => '{{optional}}
 used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
 	'wikibase-itemlink-id-wrapper' => '{{optional}}
