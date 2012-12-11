@@ -149,14 +149,10 @@ final class LibHooks {
 			'TemplateStore',
 			'LibHooks',
 			'MapValueHasher',
+			'SettingsArray',
 			'SiteLink',
 			'Utils',
 		);
-
-		// Test compat
-		if ( !array_key_exists( 'SettingsBase', $GLOBALS['wgAutoloadLocalClasses'] ) ) {
-			$testFiles[] = 'SettingsBase';
-		}
 
 		foreach ( $testFiles as $file ) {
 			$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';

@@ -1,7 +1,10 @@
 <?php
 
+namespace Wikibase;
+use MWException;
+
 /**
- * Interface for settings lists.
+ * Class representing a collection of settings.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +20,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
  *
- * @since 0.1
+ * @since 0.4
  *
  * @file
  * @ingroup Settings
@@ -25,19 +28,25 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Settings extends IteratorAggregate, ArrayAccess, Serializable {
+class SettingsArray extends \ArrayObject {
 
 	/**
 	 * Gets the value of the specified setting.
 	 *
-	 * @since 0.1
+	 * @since 0.14
 	 *
 	 * @param string $settingName
 	 *
 	 * @throws MWException
 	 * @return mixed
 	 */
-	public function getSetting( $settingName );
+	public function getSetting( $settingName ) {
+		if ( !$this->offsetExists( $settingName ) ) {
+			throw new MWException( 'Attempt to get non-existing setting "' . $settingName . '"' );
+		}
+
+		return $this[$settingName];
+	}
 
 	/**
 	 * Sets the value of the specified setting.
@@ -47,10 +56,12 @@ interface Settings extends IteratorAggregate, ArrayAccess, Serializable {
 	 * @param string $settingName
 	 * @param mixed $settingValue
 	 */
-	public function setSetting( $settingName, $settingValue );
+	public function setSetting( $settingName, $settingValue ) {
+		$this[$settingName] = $settingValue;
+	}
 
 	/**
-	 * Sets the value of the specified setting.
+	 * Returns if the specified settings is set or not.
 	 *
 	 * @since 0.1
 	 *
@@ -58,7 +69,8 @@ interface Settings extends IteratorAggregate, ArrayAccess, Serializable {
 	 *
 	 * @return boolean
 	 */
-	public function hasSetting( $settingName );
+	public function hasSetting( $settingName ) {
+		return $this->offsetExists( $settingName );
+	}
 
 }
-

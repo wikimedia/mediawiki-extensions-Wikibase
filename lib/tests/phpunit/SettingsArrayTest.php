@@ -1,7 +1,9 @@
 <?php
 
+namespace Wikibase\Lib\Test;
+
 /**
- * Tests for the SettingsBase class.
+ * Tests for the SettingsArray class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +20,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
  *
  * @file
- * @since 0.1
+ * @since 0.4
  *
  * @ingroup Settings
  * @ingroup Test
@@ -28,41 +30,18 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SettingsBaseTest extends \MediaWikiTestCase {
-
-	// @codeCoverageIgnoreStart
-
-	public function testSingleton() {
-		$this->assertInstanceOf( '\Settings', TestSettingsList::singleton() );
-		$this->assertTrue( TestSettingsList::singleton() === TestSettingsList::singleton() );
-		$this->assertFalse( TestSettingsList::singleton() === TestSettingsList::singleton( true ) );
-		$this->assertTrue( TestSettingsList::singleton( true ) === TestSettingsList::singleton() );
-	}
-
-	public function testGet() {
-		foreach ( TestSettingsList::getTestSetSettings() as $settingName => $settingValue ) {
-			$this->assertEquals( $settingValue, TestSettingsList::get( $settingName ) );
-		}
-	}
+class SettingsArrayTest extends \MediaWikiTestCase {
 
 	public function testGetSetting() {
-		$settings = TestSettingsList::singleton();
+		$settings = new \Wikibase\SettingsArray();
 
 		foreach ( TestSettingsList::getTestSetSettings() as $settingName => $settingValue ) {
 			$this->assertEquals( $settingValue, $settings->getSetting( $settingName ) );
 		}
 	}
 
-	public function testHas() {
-		foreach ( array_keys( TestSettingsList::getTestSetSettings() ) as $settingName ) {
-			$this->assertTrue( TestSettingsList::has( $settingName ) );
-		}
-
-		$this->assertFalse( TestSettingsList::has( 'I dont think therefore I dont exist' ) );
-	}
-
 	public function testHasSetting() {
-		$settings = TestSettingsList::singleton();
+		$settings = $settings = new \Wikibase\SettingsArray();
 
 		foreach ( array_keys( TestSettingsList::getTestSetSettings() ) as $settingName ) {
 			$this->assertTrue( $settings->hasSetting( $settingName ) );
@@ -71,20 +50,8 @@ class SettingsBaseTest extends \MediaWikiTestCase {
 		$this->assertFalse( $settings->hasSetting( 'I dont think therefore I dont exist' ) );
 	}
 
-	public function testSet() {
-		foreach ( TestSettingsList::getTestDefaults() as $settingName => $settingValue ) {
-			TestSettingsList::set( $settingName, $settingValue );
-			$this->assertEquals( $settingValue, TestSettingsList::get( $settingName ) );
-		}
-
-		foreach ( TestSettingsList::getTestSetSettings() as $settingName => $settingValue ) {
-			TestSettingsList::set( $settingName, $settingValue );
-			$this->assertEquals( $settingValue, TestSettingsList::get( $settingName ) );
-		}
-	}
-
 	public function testSetSetting() {
-		$settings = TestSettingsList::singleton();
+		$settings = new \Wikibase\SettingsArray();
 
 		foreach ( TestSettingsList::getTestDefaults() as $settingName => $settingValue ) {
 			$settings->setSetting( $settingName, $settingValue );
@@ -99,7 +66,7 @@ class SettingsBaseTest extends \MediaWikiTestCase {
 
 }
 
-class TestSettingsList extends SettingsBase {
+class TestSettingsList extends \Wikibase\SettingsArray {
 
 	public static function getTestDefaults() {
 		return array(
@@ -126,6 +93,5 @@ class TestSettingsList extends SettingsBase {
 		return static::getTestSetSettings();
 	}
 
-	// @codeCoverageIgnoreEnd
-
 }
+
