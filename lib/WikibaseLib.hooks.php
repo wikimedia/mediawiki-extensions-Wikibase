@@ -152,6 +152,7 @@ final class LibHooks {
 			'SettingsArray',
 			'SiteLink',
 			'Utils',
+			'Term',
 		);
 
 		foreach ( $testFiles as $file ) {

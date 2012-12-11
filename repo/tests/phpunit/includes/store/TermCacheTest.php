@@ -360,6 +360,57 @@ class TermCacheTest extends \MediaWikiTestCase {
 			'fr',
 			Item::ENTITY_TYPE
 		) );
+
+		// save again - this should hit an optimized code path
+		// that avoids re-saving the terms if they are the same as before.
+		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+
+		$this->assertTrue( $lookup->termExists(
+			'testDeleteTermsForEntity',
+			Term::TYPE_DESCRIPTION,
+			'en',
+			Item::ENTITY_TYPE
+		) );
+
+		$this->assertTrue( $lookup->termExists(
+			'ghi',
+			Term::TYPE_LABEL,
+			'nl',
+			Item::ENTITY_TYPE
+		) );
+
+		$this->assertTrue( $lookup->termExists(
+			'o',
+			Term::TYPE_ALIAS,
+			'fr',
+			Item::ENTITY_TYPE
+		) );
+
+		// modify and save again - this should NOT skip saving,
+		// and make sure the modified term is in the database.
+		$item->setLabel( 'nl', 'xyz' );
+		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+
+		$this->assertTrue( $lookup->termExists(
+			'testDeleteTermsForEntity',
+			Term::TYPE_DESCRIPTION,
+			'en',
+			Item::ENTITY_TYPE
+		) );
+
+		$this->assertTrue( $lookup->termExists(
+			'xyz',
+			Term::TYPE_LABEL,
+			'nl',
+			Item::ENTITY_TYPE
+		) );
+
+		$this->assertTrue( $lookup->termExists(
+			'o',
+			Term::TYPE_ALIAS,
+			'fr',
+			Item::ENTITY_TYPE
+		) );
 	}
 
 	/**
@@ -421,6 +472,46 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 		$actual = $lookup->getMatchingTermCombination( $terms, null, null, $id0, Item::ENTITY_TYPE );
 		$this->assertTrue( $actual === array() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param TermCache $lookup
+	 */
+	public function testGetTermsOfEntity( TermCache $lookup ) {
+		$item = Item::newEmpty();
+		$item->setId( 568234314 );
+
+		$item->setLabel( 'en', 'abc' );
+		$item->setLabel( 'de', 'def' );
+		$item->setLabel( 'nl', 'ghi' );
+		$item->setDescription( 'en', 'testGetTermsOfEntity' );
+		$item->setAliases( 'fr', array( 'o', '_', 'O' ) );
+
+		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+
+		$terms = $lookup->getTermsOfEntity( $item->getId() );
+
+		$this->assertEquals( 7, count( $terms ), "expected 5 terms for item" );
+
+		// make list of strings for easy checking
+		$term_keys = array();
+		foreach ( $terms as $t ) {
+			$term_keys[] = $t->getType() . '/' .  $t->getLanguage() . '/' . $t->getText();
+		}
+
+		$k = Term::TYPE_LABEL . '/en/abc';
+		$this->assertTrue( in_array( $k, $term_keys ),
+			"expected to find $k in terms for item" );
+
+		$k = Term::TYPE_DESCRIPTION . '/en/testGetTermsOfEntity';
+		$this->assertTrue( in_array( $k, $term_keys ),
+			"expected to find $k in terms for item" );
+
+		$k = Term::TYPE_ALIAS . '/fr/_';
+		$this->assertTrue( in_array( $k, $term_keys ),
+			"expected to find $k in terms for item" );
 	}
 
 }
