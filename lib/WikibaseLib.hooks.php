@@ -151,6 +151,7 @@ final class LibHooks {
 			'MapValueHasher',
 			'SiteLink',
 			'Utils',
+			'Term',
 		);
 
 		// Test compat

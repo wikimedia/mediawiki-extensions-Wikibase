@@ -84,6 +84,32 @@ class TermSqlCache implements TermCache {
 	 * @return boolean Success indicator
 	 */
 	public function saveTermsOfEntity( Entity $entity ) {
+		//First check whether there's anything to update
+		$newTerms = $entity->getTerms();
+		$oldTerms = $this->getTermsOfEntity( $entity->getId() );
+
+		//NOTE: for now, we just check if anything changed, and if yes, update all the entities's
+		//      terms in the database.
+		//TODO: generate lists of terms to add resp. remove and pass them to saveTermsOfEntityInternal
+
+		if ( count( $newTerms ) === count( $oldTerms ) ) {
+			usort( $newTerms, 'Wikibase\Term::compare' );
+			usort( $oldTerms, 'Wikibase\Term::compare' );
+			$equal = true;
+
+			foreach ( $newTerms as $i => $term ) {
+				if ( !$term->equals( $oldTerms[$i] ) ) {
+					$equal = false;
+					break;
+				}
+			}
+
+			if ( $equal ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": terms did not change, returning." );
+				return true; // nothing to do.
+			}
+		}
+
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->commit( __METHOD__, "flush" ); // flush to make sure we are not in some explicit transaction
 
@@ -93,6 +119,9 @@ class TermSqlCache implements TermCache {
 	/**
 	 * Internal implementation of saveTermsOfEntity, called via DatabaseBase:deadlockLoop.
 	 *
+	 * @note: this is public only because it acts as a callback, there should be no
+	 *        reason to call this directly!
+	 *
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
@@ -101,12 +130,12 @@ class TermSqlCache implements TermCache {
 	 * @return boolean Success indicator
 	 */
 	public function saveTermsOfEntityInternal( Entity $entity, DatabaseBase $dbw ) {
-		//TODO: diff old against new, only update what's needed, if anything.
-
 		$entityIdentifiers = array(
 			'term_entity_id' => $entity->getId()->getNumericId(),
 			'term_entity_type' => $entity->getType()
 		);
+
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": updating terms for " . $entity->getId()->getPrefixedId() );
 
 		$success = $dbw->delete(
 			$this->tableName,
@@ -125,7 +154,11 @@ class TermSqlCache implements TermCache {
 					$entityIdentifiers
 				),
 				__METHOD__
-			) && $success;
+			);
+
+			if ( !$success ) {
+				break;
+			}
 		}
 
 		return $success;
@@ -180,6 +213,9 @@ class TermSqlCache implements TermCache {
 	/**
 	 * Internal implementation of deleteTermsOfEntity, called via DatabaseBase:deadlockLoop.
 	 *
+	 * @note: this is public only because it acts as a callback, there should be no
+	 *        reason to call this directly!
+	 *
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
@@ -200,6 +236,42 @@ class TermSqlCache implements TermCache {
 
 		// TODO: failures here cause data that block valid stuff from being created to just stick around forever.
 		// We probably want some extra handling here.
+	}
+
+	/**
+	 * Returns the terms stored for the given entity.
+	 * @see TermCache::getTermsOfEntity
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return Term[]
+	 */
+	public function getTermsOfEntity( EntityId $id ) {
+		$entityIdentifiers = array(
+			'term_entity_id' => $id->getNumericId(),
+			'term_entity_type' => $id->getEntityType()
+		);
+
+		$fields = array(
+			'term_language',
+			'term_type',
+			'term_text',
+		);
+
+		if ( !Settings::get( 'withoutTermSearchKey' ) ) {
+			$fields[] = 'term_search_key';
+		}
+
+		$dbr = $this->getReadDb();
+
+		$res = $dbr->select(
+			$this->tableName,
+			$fields,
+			$entityIdentifiers,
+			__METHOD__
+		);
+
+		return $this->buildTermResult( $res );
 	}
 
 	/**
