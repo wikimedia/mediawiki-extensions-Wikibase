@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\TemplateStore;
+use Wikibase\TemplateRegistry;
 
 /**
- * Tests for the Wikibase\TemplateStore class.
+ * Tests for the Wikibase\TemplateRegistry class.
  *
  * @file
  * @since 0.1
@@ -18,16 +18,18 @@ use Wikibase\TemplateStore;
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
  */
-class TemplateStoreTest extends \MediaWikiTestCase {
+class TemplateRegistryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseLib
 	 * @dataProvider providerAddTemplate
 	 */
 	public function testAddTemplate( $html ) {
-		TemplateStore::singleton()->addTemplate( 'tmpl1', $html );
+		$registry = new TemplateRegistry();
+		$registry->addTemplate( 'tmpl1', $html );
+
 		$this->assertEquals(
-			TemplateStore::singleton()->getTemplate( 'tmpl1' ),
+			$registry->getTemplate( 'tmpl1' ),
 			$html
 		);
 	}
@@ -44,10 +46,12 @@ class TemplateStoreTest extends \MediaWikiTestCase {
 	 * @dataProvider providerAddTemplates
 	 */
 	public function testAddTemplates( $data ) {
-		TemplateStore::singleton()->addTemplates( $data );
+		$registry = new TemplateRegistry();
 
-		$templates = TemplateStore::singleton()->getTemplates();
-		foreach( $data AS $key => $html ) {
+		$registry->addTemplates( $data );
+
+		$templates = $registry->getTemplates();
+		foreach( $data as $key => $html ) {
 			$this->assertEquals(
 				$templates[$key],
 				$html

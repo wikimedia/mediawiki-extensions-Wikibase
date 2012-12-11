@@ -6,6 +6,8 @@ use ResourceLoaderFileModule, ResourceLoaderContext;
 /**
  * Injects templates into JavaScript.
  *
+ * Note: when moving the file, the path to templates.php might need updating.
+ *
  * @since 0.2
  *
  * @file
@@ -20,11 +22,16 @@ class TemplateModule extends ResourceLoaderFileModule {
 	/**
 	 * @see ResourceLoaderModule::getScript
 	 *
-	 * @param \ResourceLoaderContext $context
+	 * @param ResourceLoaderContext $context
+	 *
 	 * @return string
 	 */
 	public function getScript( ResourceLoaderContext $context ) {
-		$templatesJson = \FormatJson::encode( TemplateStore::singleton()->getTemplates() );
+		// register HTML templates
+		$templateStore = new TemplateRegistry();
+		$templateStore->addTemplates( include( __DIR__ . "/../../resources/templates.php" ) );
+
+		$templatesJson = \FormatJson::encode( $templateStore->getTemplates() );
 
 		// template store JavaScript initialisation
 		$script = <<<EOT

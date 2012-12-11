@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\TemplateStore;
+use Wikibase\TemplateRegistry;
 use Wikibase\Template;
 
 /**
@@ -26,8 +26,10 @@ class TemplateTest extends \MediaWikiTestCase {
 	 * @dataProvider providerText
 	 */
 	public function testText( $html ) {
-		TemplateStore::singleton()->addTemplate( 'tmpl1', $html );
-		$template = new Template( 'tmpl1', array( 'param' ) );
+		$registry = new TemplateRegistry();
+		$registry->addTemplate( 'tmpl1', $html );
+
+		$template = new Template( $registry, 'tmpl1', array( 'param' ) );
 		$this->assertHTMLEquals( $template->text(), '<div>param</div>' );
 	}
 
