@@ -26,9 +26,6 @@ use DataValues\DataValue;
  *
  * @ingroup DataValueTest
  *
- * @group DataValue
- * @group DataValueExtensions
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -220,7 +217,11 @@ abstract class DataValueTest extends \MediaWikiTestCase {
 
 		$this->assertTrue( $value->equals( $newInstance ) );
 
-		$dvFactory = \DataValues\DataValueFactory::singleton();
+		$dvFactory = new \DataValues\DataValueFactory();
+
+		foreach ( $GLOBALS['wgDataValues'] as $type => $class ) {
+			$dvFactory->registerDataValue( $type, $class );
+		}
 
 		if ( $dvFactory->hasDataValue( $value->getType() ) ) {
 			$newInstance = $dvFactory->newDataValue( $value->getType(), $arrayValue );
@@ -252,8 +253,13 @@ abstract class DataValueTest extends \MediaWikiTestCase {
 	 * @param array $arguments
 	 */
 	public function testNewFromArrayFactory( DataValue $value, array $arguments ) {
-		$factory = \DataValues\DataValueFactory::singleton();
-		$this->assertTrue( $value->equals( $factory->newFromArray( $value->toArray() ) ) );
+		$dvFactory = new \DataValues\DataValueFactory();
+
+		foreach ( $GLOBALS['wgDataValues'] as $type => $class ) {
+			$dvFactory->registerDataValue( $type, $class );
+		}
+
+		$this->assertTrue( $value->equals( $dvFactory->newFromArray( $value->toArray() ) ) );
 	}
 
 }
