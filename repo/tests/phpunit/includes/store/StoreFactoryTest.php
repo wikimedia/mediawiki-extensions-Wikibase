@@ -37,7 +37,6 @@ class StoreFactoryTest extends \MediaWikiTestCase {
 
 	public function testGetStore() {
 		$this->assertInstanceOf( '\Wikibase\Store', StoreFactory::getStore() );
-		$this->assertTrue( StoreFactory::getStore() === StoreFactory::getStore() );
 	}
 
 }

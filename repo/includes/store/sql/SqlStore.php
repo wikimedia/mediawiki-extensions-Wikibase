@@ -32,23 +32,6 @@ namespace Wikibase;
 class SqlStore implements Store {
 
 	/**
-	 * @see Store::singleton
-	 *
-	 * @since 0.1
-	 *
-	 * @return Store
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
-		}
-
-		return $instance;
-	}
-
-	/**
 	 * @see Store::newTermCache
 	 *
 	 * @since 0.1
