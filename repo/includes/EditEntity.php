@@ -553,6 +553,10 @@ class EditEntity {
 			return $this->status;
 		}
 
+		if ( wfReadOnly() ) {
+			throw new \ReadOnlyError();
+		}
+
 		$this->checkEditPermissions();
 
 		//NOTE: Make sure the current revision is loaded and cached.
