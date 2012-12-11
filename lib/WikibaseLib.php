@@ -100,8 +100,8 @@ $wgAutoloadClasses['Wikibase\Lib\ClaimGuidGenerator'] 	= $dir . 'includes/GuidGe
 $wgAutoloadClasses['Wikibase\HashableObjectStorage']	= $dir . 'includes/HashableObjectStorage.php';
 $wgAutoloadClasses['Wikibase\HashArray'] 				= $dir . 'includes/HashArray.php';
 $wgAutoloadClasses['Wikibase\LibRegistry'] 				= $dir . 'includes/LibRegistry.php';
-$wgAutoloadClasses['Wikibase\Template'] 				= $dir . 'includes/TemplateStore.php';
-$wgAutoloadClasses['Wikibase\TemplateStore'] 			= $dir . 'includes/TemplateStore.php';
+$wgAutoloadClasses['Wikibase\Template'] 				= $dir . 'includes/TemplateRegistry.php';
+$wgAutoloadClasses['Wikibase\TemplateRegistry'] 		= $dir . 'includes/TemplateRegistry.php';
 $wgAutoloadClasses['Wikibase\MapHasher'] 				= $dir . 'includes/MapHasher.php';
 $wgAutoloadClasses['Wikibase\MapValueHasher'] 			= $dir . 'includes/MapValueHasher.php';
 $wgAutoloadClasses['Wikibase\Reference'] 				= $dir . 'includes/Reference.php';
@@ -198,7 +198,7 @@ $wgAutoloadClasses['Wikibase\SiteLinkTable'] 			= $dir . 'includes/store/SiteLin
 $wgAutoloadClasses['Wikibase\Test\HashArrayTest'] 			= $dir . 'tests/phpunit/hasharray/HashArrayTest.php';
 $wgAutoloadClasses['Wikibase\Test\HashArrayElement'] 		= $dir . 'tests/phpunit/hasharray/HashArrayElement.php';
 $wgAutoloadClasses['Wikibase\Test\TemplateTest'] 			= $dir . 'tests/phpunit/TemplateTest.php';
-$wgAutoloadClasses['Wikibase\Test\TemplateStoreTest'] 		= $dir . 'tests/phpunit/TemplateStoreTest.php';
+$wgAutoloadClasses['Wikibase\Test\TemplateRegistryTest'] 	= $dir . 'tests/phpunit/TemplateRegistryTest.php';
 $wgAutoloadClasses['Wikibase\Test\ChangeRowTest']			= $dir . 'tests/phpunit/changes/ChangeRowTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityChangeTest']		= $dir . 'tests/phpunit/changes/EntityChangeTest.php';
 $wgAutoloadClasses['Wikibase\Test\TestChanges']				= $dir . 'tests/phpunit/changes/TestChanges.php';
@@ -232,23 +232,25 @@ $wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerPhpUnitTests';
 $wgHooks['ResourceLoaderTestModules'][]				= 'Wikibase\LibHooks::registerQUnitTests';
 
 
-// register HTML templates
-\Wikibase\TemplateStore::singleton()->addTemplates( include( "$dir/resources/templates.php" ) );
-
 /**
  * Shorthand function to retrieve a template filled with the specified parameters.
+ *
+ * @since 0.2
+ *
  * @param $key \string template key
  * Varargs: normal template parameters
- * @return \Wikibase\Template
- * @since 0.2
+ *
+ * @return string
  */
-function wfTemplate( $key /*...*/) {
+function wfTemplate( $key /*...*/ ) {
 	$params = func_get_args();
 	array_shift( $params );
+
 	if ( isset( $params[0] ) && is_array( $params[0] ) ) {
 		$params = $params[0];
 	}
-	$template = new \Wikibase\Template( $key, $params );
+
+	$template = new \Wikibase\Template( \Wikibase\TemplateRegistry::singleton(), $key, $params );
 	return $template->text();
 }
 

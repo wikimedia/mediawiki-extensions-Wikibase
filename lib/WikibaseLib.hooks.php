@@ -146,7 +146,7 @@ final class LibHooks {
 			'ChangesTable',
 			'HashableObjectStorage',
 			'Template',
-			'TemplateStore',
+			'TemplateRegistry',
 			'LibHooks',
 			'MapValueHasher',
 			'SiteLink',
