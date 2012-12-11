@@ -539,6 +539,10 @@ class EditEntity {
 	public function attemptSave( $summary, $flags, $token ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
+		if ( wfReadOnly() ) {
+			throw new \ReadOnlyError();
+		}
+
 		$this->status = Status::newGood();
 		$this->errorType = 0;
 
