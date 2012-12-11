@@ -215,18 +215,25 @@ class Term {
 	 */
 	public function getNormalizedText() {
 		$text = $this->getText();
-		return $text === null? null : self::normalizeText( $text );
+		$lang = $this->getLanguage();
+		return $text === null? null : self::normalizeText( $text, $lang );
 	}
 
 	/**
 	 * @since 0.2
 	 *
 	 * @param string $text
+	 * @param string $lang language code of the text's language, may be used
+	 *        for specialized normalization.
 	 *
 	 * @return string
 	 */
-	public static function normalizeText( $text ) {
-		return strtolower( Utils::squashToNFC( $text ) );
+	public static function normalizeText( $text, $lang = 'en' ) {
+		//TODO: Use Language::lc to convert to lower case.
+		//      But that requires us to load ALL the language objects,
+		//      which loads ALL the messages, which makes us run out
+		//      of RAM (see bug 41103).
+		return mb_strtolower( Utils::squashToNFC( $text ) );
 	}
 
 	/**

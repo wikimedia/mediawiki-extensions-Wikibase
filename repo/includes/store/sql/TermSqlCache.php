@@ -772,7 +772,7 @@ class TermSqlCache implements TermCache {
 			$dbw->update(
 				$this->tableName,
 				array(
-					'term_search_key' => Term::normalizeText( $term->term_text )
+					'term_search_key' => Term::normalizeText( $term->term_text, $term->term_language )
 				),
 				array(
 					'term_entity_id' => $term->term_entity_id,
