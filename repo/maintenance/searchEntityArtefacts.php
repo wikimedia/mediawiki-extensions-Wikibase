@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Maintenance, Exception;
+use Maintenance;
 
 /**
  * Script that queries the database for entity artifacts
