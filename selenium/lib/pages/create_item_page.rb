@@ -12,7 +12,7 @@ class CreateItemPage < CreateEntityPage
 
   def create_new_item(label, description, switch_lang = true)
     if switch_lang
-      self.uls_switch_language(LANGUAGE)
+      self.uls_switch_language(LANGUAGE_CODE, LANGUAGE_NAME)
     end
     self.createEntityLabelField = label
     self.createEntityDescriptionField = description

@@ -11,7 +11,7 @@ describe "Check NewProperty special page" do
   before :all do
     # set up: switch language
     visit_page(NewPropertyPage) do |page|
-      page.uls_switch_language(LANGUAGE)
+      page.uls_switch_language(LANGUAGE_CODE, LANGUAGE_NAME)
     end
   end
 
@@ -84,7 +84,7 @@ describe "Check NewProperty special page" do
     end
     it "should check that a blocked user cannot create a new property" do
       on_page(NewPropertyPage) do |page|
-        page.uls_switch_language("en")
+        page.uls_switch_language("en", "english")
       end
       visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
