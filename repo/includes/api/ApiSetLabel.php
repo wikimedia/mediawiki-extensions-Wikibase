@@ -35,7 +35,7 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 	 * @see ApiModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		if ( isset( $params['value'] ) ) {
 			$label = Utils::squashToNFC( $params['value'] );
@@ -51,7 +51,7 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 			$this->addLabelsToResult( $labels, 'entity' );
 		}
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 

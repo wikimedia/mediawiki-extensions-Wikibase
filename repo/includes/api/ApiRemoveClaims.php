@@ -42,7 +42,7 @@ class ApiRemoveClaims extends Api {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$guids = $this->getGuidsByEntity();
 
@@ -53,7 +53,7 @@ class ApiRemoveClaims extends Api {
 
 		$this->outputResult( $removedClaimKeys );
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**

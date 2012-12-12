@@ -48,7 +48,7 @@ class ExternalChangesLine {
 		$entityData = $params['wikibase-repo-change'];
 
 		if ( !is_array( $entityData ) ) {
-			wfDebug( 'Wikibase data missing in recent changes.' );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': Wikibase data missing in recent changes.' );
 			return false;
 		}
 
@@ -56,14 +56,14 @@ class ExternalChangesLine {
 			$parts = explode( '~', $entityData['type'] );
 			$changeType = $parts[1];
 		} else {
-			wfDebug( 'Wikibase change type missing.' );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': Wikibase change type missing.' );
 			return false;
 		}
 
 		$entityTitle = self::titleTextFromEntityData( $entityData );
 
 		if ( $entityTitle === false ) {
-			wfDebug( 'Invalid entity data in external change.' );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': Invalid entity data in external change.' );
 			return false;
 		}
 
@@ -76,7 +76,7 @@ class ExternalChangesLine {
 
 			if ( !array_key_exists( 'page_id', $entityData ) || !array_key_exists( 'rev_id', $entityData ) ||
 				!array_key_exists( 'parent_id', $entityData ) ) {
-				wfDebug( 'Missing Wikibase recent change parameters, page_id, parent_id and/or rev_id.' );
+				wfDebugLog( __CLASS__, __FUNCTION__ . ': Missing Wikibase recent change parameters, page_id, parent_id and/or rev_id.' );
 				return false;
 			}
 
@@ -89,7 +89,7 @@ class ExternalChangesLine {
 			$line .= wfMessage( 'parentheses' )->rawParams(
 				$cl->getLanguage()->pipeList( array( $diffLink, $historyLink ) ) )->text();
 		} else {
-			wfDebug( 'Invalid Wikibase change type.' );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': Invalid Wikibase change type.' );
 			return false;
 		}
 
