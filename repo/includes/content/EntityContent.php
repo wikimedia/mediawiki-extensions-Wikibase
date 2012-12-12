@@ -464,7 +464,7 @@ abstract class EntityContent extends \AbstractContent {
 		// If it isn't, then someone managed to squeeze in an edit after we checked for conflicts.
 		if ( $this->editEntity !== null && $page->getRevision() !== null ) {
 			if ( $page->getRevision()->getId() !==  $this->editEntity->getCurrentRevisionId() ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': encountered late edit conflict: current revision changed after regular conflict check.' );
+				wfDebug( 'encountered late edit conflict: current revision changed after regular conflict check.' );
 				$status->fatal('edit-conflict');
 			}
 		}

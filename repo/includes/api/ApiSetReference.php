@@ -42,7 +42,7 @@ class ApiSetReference extends Api {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$content = $this->getEntityContent();
 		$params = $this->extractRequestParams();
@@ -58,7 +58,7 @@ class ApiSetReference extends Api {
 
 		$this->outputReference( $reference );
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**

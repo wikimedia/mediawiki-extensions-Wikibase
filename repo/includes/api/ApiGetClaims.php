@@ -42,7 +42,7 @@ class ApiGetClaims extends Api {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		list( $entityId, $claimGuid ) = $this->getIdentifiers();
 
@@ -50,7 +50,7 @@ class ApiGetClaims extends Api {
 
 		$this->outputClaims( $this->getClaims( $entity, $claimGuid ) );
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**

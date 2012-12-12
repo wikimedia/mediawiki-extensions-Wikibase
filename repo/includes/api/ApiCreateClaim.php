@@ -42,7 +42,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 * @since 0.2
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$this->checkParameterRequirements();
 
@@ -54,7 +54,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$this->outputClaim( $claim );
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**
@@ -70,7 +70,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 * @return Claim
 	 */
 	protected function addClaim( Entity $entity ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		// It is possible we get an exception from this method because of specifying
 		// a non existing-property, specifying an entity id for an entity with wrong
@@ -79,7 +79,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 			$snak = $this->getSnakInstance();
 		}
 		catch ( \Exception $ex ) {
-			wfProfileOut( __METHOD__ );
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsageMsg( $ex->getMessage() );
 		}
 
@@ -87,7 +87,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$entity->addClaim( $claim );
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $claim;
 	}
 

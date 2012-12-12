@@ -57,7 +57,7 @@ class SetStatementRank extends \Wikibase\Api {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$content = $this->getEntityContent();
 		$params = $this->extractRequestParams();
@@ -72,7 +72,7 @@ class SetStatementRank extends \Wikibase\Api {
 
 		$this->outputStatement( $statement );
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**

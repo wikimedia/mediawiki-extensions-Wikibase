@@ -40,7 +40,7 @@ class LangLinkHandler {
 	 * @return SiteLink[]
 	 */
 	public static function getEntityLinks( \Parser $parser ) {
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking for sitelinks defined by the corresponding item on the wikibase repo." );
+		wfDebugLog( 'wikibase', __METHOD__ . ": Looking for sitelinks defined by the corresponding item on the wikibase repo." );
 
 		$siteLinkTable = ClientStoreFactory::getStore()->newSiteLinkTable();
 
@@ -52,7 +52,7 @@ class LangLinkHandler {
 		$links =  array();
 
 		if ( $itemId !== false ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $parser->getTitle()->getFullText() . " is " . $itemId );
+			wfDebugLog( 'wikibase', "Item ID for " . $parser->getTitle()->getFullText() . " is " . $itemId );
 			$rawLinks = $siteLinkTable->getLinks( array( $itemId ) );
 
 			/*
@@ -64,10 +64,10 @@ class LangLinkHandler {
 
 			$links = SiteLink::siteLinksFromArray( $rawLinks, 0, 1 );
 		} else {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": No corresponding item found for " . $parser->getTitle()->getFullText() );
+			wfDebugLog( 'wikibase', "No corresponding item found for " . $parser->getTitle()->getFullText() );
 		}
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Found " . count( $links ) . " links." );
+		wfDebugLog( 'wikibase', "Found " . count( $links ) . " links." );
 		return $links;
 	}
 
