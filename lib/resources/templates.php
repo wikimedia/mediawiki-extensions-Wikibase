@@ -43,6 +43,7 @@ HTML;
 <h2 class="wb-section-heading" dir="auto">$1</h2>
 HTML;
 
+	// TODO: rename this to 'wb-claimlist'
 	$templates['wb-claims-section'] =
 <<<HTML
 <div class="wb-claims-section">
@@ -53,6 +54,8 @@ HTML;
 </div>
 HTML;
 
+	// TODO: rename this to 'wb-claim-bundle' or 'wb-claim-group', which are the official names
+	//  we were discussing about when referring to Claims with Snaks with the same property.
 	$templates['wb-claim-section'] =
 <<<HTML
 <div class="wb-claim-section wb-claim-section-$1">
@@ -63,6 +66,7 @@ HTML;
 </div>
 HTML;
 
+	// TODO: should put 'wb-claim' class to root node for consistency.
 	$templates['wb-claim'] =
 <<<HTML
 <div class="wb-claim-container $1">

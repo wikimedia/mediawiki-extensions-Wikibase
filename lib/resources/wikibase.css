@@ -350,9 +350,10 @@ div.wb-claim-mainsnak {
 	margin-right: 18em;
 	max-width: 32em;
 	word-wrap: break-word;
+	min-height: 3em; /** for 'add' section on each claim section's bottom */
 }
 
-div.wb-mainsnak .wb-snak-property {
+div.wb-claim-mainsnak .wb-snak-property {
 	display: none;
 }
 
@@ -419,6 +420,7 @@ div.wb-claim-new .wb-snak-property {
 	bottom: 0;
 	left: -15em;
 	width: 15em;
+	display: block;
 }
 
 div.wb-claim-new .wb-snak-property input {
