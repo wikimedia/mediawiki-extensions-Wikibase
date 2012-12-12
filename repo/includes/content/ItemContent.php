@@ -123,85 +123,10 @@ class ItemContent extends EntityContent {
 			//      so we wouldn't need to resort to global state here.
 			$dbw = wfGetDB( DB_MASTER );
 			$this->addSiteLinkConflicts( $status, $dbw );
-
-			// Do not run this when running test using MySQL as self joins fail on temporary tables.
-			if ( !defined( 'MW_PHPUNIT_TEST' )
-				|| !( StoreFactory::getStore() instanceof \Wikibase\SqlStore )
-				|| $dbw->getType() !== 'mysql' ) {
-				$this->addLabelDescriptionConflicts( $status, $dbw );
-			}
 		}
 
 		wfProfileOut( __METHOD__ );
 		return $status;
-	}
-
-	/**
-	 * Adds any conflicts with items that have the same label
-	 * and description pair in the same language to the status.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Status $status
-	 * @param \DatabaseBase|null $db The database object to use (optional).
-	 *        If conflict checking is performed as part of a save operation,
-	 *        this should be used to provide the master DB connection that will
-	 *        also be used for saving. This will preserve transactional integrity
-	 *        and avoid race conditions.
-	 */
-	protected function addLabelDescriptionConflicts( Status $status, \DatabaseBase $db = null ) {
-		$terms = array();
-
-		$entity = $this->getEntity();
-
-		foreach ( $entity->getLabels() as $langCode => $labelText ) {
-			$description = $entity->getDescription( $langCode );
-
-			if ( $description !== false ) {
-				$label = new Term( array(
-					'termLanguage' => $langCode,
-					'termText' => $labelText,
-					'termType' => Term::TYPE_LABEL,
-				) );
-
-				$description = new Term( array(
-					'termLanguage' => $langCode,
-					'termText' => $description,
-					'termType' => Term::TYPE_DESCRIPTION,
-				) );
-
-				$terms[] = array( $label, $description );
-			}
-		}
-
-		if ( !empty( $terms ) ) {
-			//TODO: The term cache should use $db for the lookup, so we can be sure
-			//      it's the master database in case we want to do consistency checks
-			//      before saving.
-			$foundTerms = StoreFactory::getStore()->newTermCache()->getMatchingTermCombination(
-				$terms,
-				null,
-				$entity->getType(),
-				$entity->getId() === null ? null : $entity->getId()->getNumericId(),
-				$entity->getType()
-			);
-
-			if ( !empty( $foundTerms ) ) {
-				/**
-				 * @var Term $label
-				 * @var Term $description
-				 */
-				list( $label, $description ) = $foundTerms;
-
-				$status->fatal(
-					'wikibase-error-label-not-unique-item',
-					$label->getText(),
-					$label->getLanguage(),
-					$label->getEntityId(),
-					$description->getText()
-				);
-			}
-		}
 	}
 
 	/**

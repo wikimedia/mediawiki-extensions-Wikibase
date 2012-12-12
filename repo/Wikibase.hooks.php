@@ -130,11 +130,12 @@ final class RepoHooks {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'Autocomment',
+			'EditEntity',
 			'ItemMove',
 			'ItemContentDiffView',
 			'ItemMove',
 			'ItemView',
-			'EditEntity',
+			'LabelDescriptionDuplicateDetector',
 
 			'actions/EditEntityAction',
 

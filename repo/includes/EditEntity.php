@@ -294,8 +294,8 @@ class EditEntity {
 	 * If no base revision was supplied to the constructor, this will return null.
 	 * In the trivial non-conflicting case, this will be the same as $this->getCurrentRevision().
 	 *
+	 * @return Revision|null
 	 * @throws \MWException
-	 * @return Revision
 	 */
 	public function getBaseRevision() {
 		wfProfileIn( __METHOD__ );
@@ -325,7 +325,7 @@ class EditEntity {
 	 * If no base revision was supplied to the constructor, this will return null.
 	 * Shorthand for $this->getBaseRevision()->getContent()
 	 *
-	 * @return EntityContent
+	 * @return EntityContent|null
 	 */
 	public function getBaseContent() {
 		$rev = $this->getBaseRevision();
@@ -565,14 +565,11 @@ class EditEntity {
 		$this->getCurrentRevision();
 		$this->getCurrentRevisionId();
 
-		if ( $this->hasEditConflict() ) {
-			if ( !$this->fixEditConflict() ) {
-				$this->status->fatal( 'edit-conflict' );
-				$this->errorType |= self::EDIT_CONFLICT_ERROR;
+		$status = $this->applyPreSaveChecks();
 
-				wfProfileOut( __METHOD__ );
-				return $this->status;
-			}
+		if ( !$status->isOK() ) {
+			wfProfileOut( __METHOD__ );
+			return $status;
 		}
 
 		$editStatus = $this->newContent->save(
@@ -591,6 +588,60 @@ class EditEntity {
 		$this->status->merge( $editStatus );
 
 		wfProfileOut( __METHOD__ );
+		return $this->status;
+	}
+
+	protected function applyPreSaveChecks() {
+		if ( $this->hasEditConflict() ) {
+			if ( !$this->fixEditConflict() ) {
+				$this->status->fatal( 'edit-conflict' );
+				$this->errorType |= self::EDIT_CONFLICT_ERROR;
+
+				wfProfileOut( "Wikibase-" . __METHOD__ );
+				return $this->status;
+			}
+		}
+
+		/**
+		 * @var Entity $entity
+		 */
+		$entity = $this->newContent->getEntity();
+
+		// TODO: the below logic is Item specific, so would be good if this got handled
+		// using composition or polymorphism.
+
+		if ( $entity->getType() !== Item::ENTITY_TYPE ) {
+			return $this->status;
+		}
+
+		$dbw = wfGetDB( DB_MASTER );
+
+		// Do not run this when running test using MySQL as self joins fail on temporary tables.
+		if ( !defined( 'MW_PHPUNIT_TEST' )
+			|| !( StoreFactory::getStore() instanceof \Wikibase\SqlStore )
+			|| $dbw->getType() !== 'mysql' ) {
+
+			$itemDiff = null;
+
+			if ( $this->getBaseContent() instanceof EntityContent ) {
+				$itemDiff = $entity->getDiff( $this->getBaseContent()->getEntity() );
+			}
+
+			// The below looks for all conflicts and then removes the ones not
+			// caused by the edit. This can be improved by only looking for
+			// those conflicts that can be caused by the edit.
+
+			$termViolationDetector = new LabelDescriptionDuplicateDetector();
+
+			$termViolationDetector->addLabelDescriptionConflicts(
+				$entity,
+				$this->status,
+				StoreFactory::getStore()->newTermCache(),
+				$itemDiff === null ? null : $itemDiff->getLabelsDiff(),
+				$itemDiff === null ? null : $itemDiff->getDescriptionsDiff()
+			);
+		}
+
 		return $this->status;
 	}
 
