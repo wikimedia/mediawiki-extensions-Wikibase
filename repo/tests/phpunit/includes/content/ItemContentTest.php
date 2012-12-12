@@ -82,7 +82,8 @@ class ItemContentTest extends EntityContentTest {
 		$content1->getItem()->setLabel( 'en', 'label' );
 		$content1->getItem()->setDescription( 'en', 'description' );
 
-		$status = $content1->save( 'save item' );
+		$editEntity = new \Wikibase\EditEntity( $content1, null, $content1->getTitle()->getLatestRevID() );
+		$status = $editEntity->attemptSave( 'save item', EDIT_UPDATE, false );
 		$this->assertFalse( $status->isOK(), "saving an item with duplicate lang+label+description should not work" );
 		$this->assertTrue( $status->hasMessage( 'wikibase-error-label-not-unique-item' ) );
 	}

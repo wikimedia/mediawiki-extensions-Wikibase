@@ -28,7 +28,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface TermCache {
+interface TermCache extends TermCombinationMatchFinder {
 
 	/**
 	 * Returns the type, id tuples for the entities with the provided label in the specified language.
@@ -117,23 +117,6 @@ interface TermCache {
 	 * @return array
 	 */
 	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() );
-
-	/**
-	 * TODO: update docs
-	 *
-	 * Similar to @see TermCache::getMatchingTerms
-	 *
-	 * @since 0.2
-	 *
-	 * @param array $terms
-	 * @param string|null $termType
-	 * @param string|null $entityType
-	 * @param integer|null $excludeId
-	 * @param string|null $excludeType
-	 *
-	 * @return array
-	 */
-	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, $excludeId = null, $excludeType = null );
 
 	/**
 	 * Clears all terms from the cache.

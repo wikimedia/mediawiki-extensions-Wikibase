@@ -100,6 +100,7 @@ $wgAutoloadClasses['Wikibase\ItemContentDiffView'] 		= $dir . 'includes/ItemCont
 $wgAutoloadClasses['Wikibase\ItemDisambiguation'] 		= $dir . 'includes/ItemDisambiguation.php';
 $wgAutoloadClasses['Wikibase\EntityView']				= $dir . 'includes/EntityView.php';
 $wgAutoloadClasses['Wikibase\ItemView'] 				= $dir . 'includes/ItemView.php';
+$wgAutoloadClasses['Wikibase\LabelDescriptionDuplicateDetector'] = $dir . 'includes/LabelDescriptionDuplicateDetector.php';
 $wgAutoloadClasses['Wikibase\PropertyView']				= $dir . 'includes/PropertyView.php';
 
 // includes/actions
@@ -158,12 +159,13 @@ $wgAutoloadClasses['SpecialWikibaseQueryPage']			= $dir . 'includes/specials/Spe
 $wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	    = $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
 
 // includes/store
+$wgAutoloadClasses['Wikibase\EntityPerPage']			= $dir . 'includes/store/EntityPerPage.php';
 $wgAutoloadClasses['Wikibase\IdGenerator'] 				= $dir . 'includes/store/IdGenerator.php';
 $wgAutoloadClasses['Wikibase\Store'] 					= $dir . 'includes/store/Store.php';
 $wgAutoloadClasses['Wikibase\StoreFactory'] 			= $dir . 'includes/store/StoreFactory.php';
 $wgAutoloadClasses['Wikibase\TermCache'] 				= $dir . 'includes/store/TermCache.php';
+$wgAutoloadClasses['Wikibase\TermCombinationMatchFinder'] = $dir . 'includes/store/TermCombinationMatchFinder.php';
 $wgAutoloadClasses['Wikibase\TermMatchScoreCalculator'] = $dir . 'includes/store/TermMatchScoreCalculator.php';
-$wgAutoloadClasses['Wikibase\EntityPerPage']			= $dir . 'includes/store/EntityPerPage.php';
 
 // includes/store/sql
 $wgAutoloadClasses['Wikibase\SqlIdGenerator'] 			= $dir . 'includes/store/sql/SqlIdGenerator.php';
