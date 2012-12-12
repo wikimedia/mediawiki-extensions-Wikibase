@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//zYY\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2012-12-12T00:57:35Z",
+      "side": 1,
+      "message": "What is 0 - zero?",
+      "revId": "8f4e6a366c92d91c31afaa2b9b75eab2deee0c36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
