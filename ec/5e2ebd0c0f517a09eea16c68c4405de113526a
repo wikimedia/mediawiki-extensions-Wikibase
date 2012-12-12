@@ -1,0 +1,8 @@
+Change-Id: Iec5e2ebd0c0f517a09eea16c68c4405de113526a
+Code-Review+2: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Verified+1: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Submitted-by: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Submitted-at: Wed, 12 Dec 2012 14:43:25 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/38315
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
