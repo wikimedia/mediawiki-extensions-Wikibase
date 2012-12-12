@@ -43,6 +43,7 @@ HTML;
 <h2 class="wb-section-heading" dir="auto">$1</h2>
 HTML;
 
+	// TODO: rename this to 'wb-claimlist' or 'wb-claims' (in which case the widget should also be renamed)
 	$templates['wb-claims-section'] =
 <<<HTML
 <div class="wb-claims-section">
@@ -63,6 +64,8 @@ HTML;
 </div>
 HTML;
 
+	// TODO: should put 'wb-claim' class to root node for consistency. This will also result in
+	//       the 'wb-claim-$2' which results in 'wb-claim-new' being on top.
 	$templates['wb-claim'] =
 <<<HTML
 <div class="wb-claim-container $1">
