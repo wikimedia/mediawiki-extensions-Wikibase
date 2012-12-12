@@ -350,7 +350,6 @@ div.wb-claim-mainsnak {
 	margin-right: 18em;
 	max-width: 32em;
 	word-wrap: break-word;
-	min-height: 3em; /** for 'add' section on each claim section's bottom */
 }
 
 div.wb-claim-mainsnak .wb-snak-property-container {
@@ -374,6 +373,7 @@ div.wb-claim-container .wb-editsection .wb-ui-toolbar {
 div.wb-claim-section .wb-claim-add {
 	border-bottom: none;
 	background-color: #F8F8F8;
+	min-height: 3em;
 }
 
 div.wb-claim-section .wb-claim-add .wb-editsection .wb-ui-toolbar {
@@ -401,6 +401,17 @@ div.wb-claim-new {
 div.wb-claim-section .wb-edit .wb-ui-toolbar,
 div.wb-claim-new .wb-ui-toolbar {
 	background-color: #D6F3FF !important;
+}
+
+div.wb-claim-section .wb-claim-new {
+	margin-bottom: 0;
+	border: none;
+	border-bottom: 1px dashed #AAA;
+}
+
+div.wb-claim-section .wb-claim-new .wb-claim {
+	margin-bottom: 0;
+	border: none;
 }
 
 div.wb-claim-new {
