@@ -80,6 +80,17 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	public abstract function getType();
 
 	/**
+	 * Returns an EntityDiff between $this and the provided Entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $target
+	 *
+	 * @return EntityDiff
+	 */
+	public abstract function getDiff( Entity $target );
+
+	/**
 	 * Get an array representing the Entity.
 	 * A new Entity can be constructed by passing this array to @see Entity::newFromArray
 	 *
