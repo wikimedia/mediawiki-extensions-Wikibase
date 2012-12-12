@@ -22,12 +22,12 @@ class ApiGetEntities extends Api {
 	 * @see ApiBase::execute()
 	 */
 	public function execute() {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$params = $this->extractRequestParams();
 
 		if ( !( isset( $params['ids'] ) XOR ( isset( $params['sites'] ) && isset( $params['titles'] ) ) ) ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
 		}
 
@@ -39,7 +39,7 @@ class ApiGetEntities extends Api {
 			$numTitles = count( $params['titles'] );
 			$max = max( $numSites, $numTitles );
 			if ( $numSites === 0 || $numTitles === 0 ) {
-				wfProfileOut( "Wikibase-" . __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
 			}
 			else {
@@ -100,7 +100,7 @@ class ApiGetEntities extends Api {
 			(int)$success
 		);
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -115,7 +115,7 @@ class ApiGetEntities extends Api {
 	 * @throws MWException
 	 */
 	protected function handleEntity( $id, array $params, array $props ) {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = EntityContentFactory::singleton();
 
@@ -187,7 +187,7 @@ class ApiGetEntities extends Api {
 			$res->addValue( $entityPath, 'id', $id->getPrefixedId() );
 			$res->addValue( $entityPath, 'type', $id->getEntityType() );
 		}
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
