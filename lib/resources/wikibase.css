@@ -352,7 +352,7 @@ div.wb-claim-mainsnak {
 	word-wrap: break-word;
 }
 
-div.wb-mainsnak .wb-snak-property {
+div.wb-mainsnak .wb-snak-property-container {
 	display: none;
 }
 
@@ -388,7 +388,7 @@ div.wb-claims-section div.wb-editsection {
 /***** EDIT/NEW CLAIM *****/
 
 div.wb-claims .wb-edit .wb-claim-section-name,
-div.wb-claim-new .wb-snak-property {
+div.wb-claim-new .wb-snak-property-container {
 	background-color: #C0DAE5;
 }
 
@@ -413,7 +413,7 @@ div.wb-claim-new .wb-claim-mainsnak {
 	padding: 0;
 }
 
-div.wb-claim-new .wb-snak-property {
+div.wb-claim-new .wb-snak-property-container {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -421,8 +421,15 @@ div.wb-claim-new .wb-snak-property {
 	width: 15em;
 }
 
+div.wb-claim-new .wb-snak-property {
+	padding: 10px;
+}
+
 div.wb-claim-new .wb-snak-property input {
-	margin: 10px;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 div.wb-claim-new .wb-snak-value {

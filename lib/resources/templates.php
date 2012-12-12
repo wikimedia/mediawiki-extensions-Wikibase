@@ -80,7 +80,9 @@ HTML;
 // value which may display some message in the value node.
 <<<HTML
 <div class="wb-snak $1">
-	<div class="wb-snak-property" dir="auto">$2</div>
+	<div class="wb-snak-property-container">
+		<div class="wb-snak-property" dir="auto">$2</div>
+	</div>
 	<div class="wb-snak-value" dir="auto">$3</div>
 </div>
 HTML;
