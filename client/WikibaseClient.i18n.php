@@ -537,12 +537,17 @@ $messages['nb'] = array(
  */
 $messages['nl'] = array(
 	'wbc-desc' => 'Client voor de uitbreiding Wikibase',
+	'wbc-comment-remove' => 'Het gekoppelde Wikidataitem is verwijderd. De taalverwijzingen zijn verwijderd.',
 	'wbc-comment-linked' => 'Er is een Wikidataitem gekoppeld aan deze pagina.',
+	'wbc-comment-unlink' => 'Deze pagina is ontkoppeld van het Wikidataitem. De taalverwijzingen zijn verwijderd.',
+	'wbc-comment-restore' => 'Het gekoppelde Wikidataitem is teruggeplaatst. De taalverwijzingen zijn hersteld.',
+	'wbc-comment-update' => 'De taalverwijzingen zijn bijgewerkt.',
 	'wbc-comment-sitelink-add' => 'Taalverwijzing toegevoegd: $1',
 	'wbc-comment-sitelink-change' => 'Taalverwijzing gewijzigd van $1 naar $2',
 	'wbc-comment-sitelink-remove' => 'Taalverwijzing verwijderd: $1',
 	'wbc-editlinks' => 'Verwijzingen bewerken',
 	'wbc-editlinkstitle' => 'Intertaalverwijzingen bewerken',
+	'wbc-rc-hide-wikidata' => 'Wikidata $1',
 	'wbc-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
 );
 
