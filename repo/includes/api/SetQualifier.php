@@ -56,7 +56,7 @@ class SetQualifier extends \Wikibase\Api {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$this->checkParameterRequirements();
 
@@ -70,7 +70,7 @@ class SetQualifier extends \Wikibase\Api {
 
 		$this->outputClaim( $claim );
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**

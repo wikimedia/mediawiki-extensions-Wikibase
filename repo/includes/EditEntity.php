@@ -298,7 +298,7 @@ class EditEntity {
 	 * @return Revision
 	 */
 	public function getBaseRevision() {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		if ( $this->baseRev === null ) {
 			$id = $this->getBaseRevisionId();
@@ -310,13 +310,13 @@ class EditEntity {
 			} else {
 				$this->baseRev = Revision::newFromId( $id );
 				if ( $this->baseRev === false ) {
-					wfProfileOut( "Wikibase-" . __METHOD__ );
+					wfProfileOut( __METHOD__ );
 					throw new \MWException( 'base revision ID: ' . $id );
 				}
 			}
 		}
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $this->baseRev;
 	}
 
@@ -403,19 +403,19 @@ class EditEntity {
 	 * @return bool
 	 */
 	public function hasEditConflict() {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		if ( $this->isNew() || !$this->doesCheckForEditConflicts() ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
 		if ( $this->getBaseRevisionId() == $this->getCurrentRevisionId() ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -482,7 +482,7 @@ class EditEntity {
 	 * @throws \PermissionsError if the user's permissions are not sufficient
 	 */
 	public function checkEditPermissions() {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		foreach ( $this->requiredPremissions as $action ) {
 			$permissionStatus = $this->newContent->checkPermission( $action, $this->getUser() );
@@ -491,12 +491,12 @@ class EditEntity {
 
 			if ( !$this->status->isOK() ) {
 				$this->errorType |= self::PERMISSION_ERROR;
-				wfProfileOut( "Wikibase-" . __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				throw new \PermissionsError( $action, $permissionStatus->getErrorsArray() );
 			}
 		}
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -537,7 +537,7 @@ class EditEntity {
 	 * @see      WikiPage::toEditContent
 	 */
 	public function attemptSave( $summary, $flags, $token ) {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		if ( wfReadOnly() ) {
 			throw new \ReadOnlyError();
@@ -553,7 +553,7 @@ class EditEntity {
 			$this->status->fatal( 'session-failure' );
 			$this->errorType |= self::TOKEN_ERROR;
 
-			wfProfileOut( "Wikibase-" . __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return $this->status;
 		}
 
@@ -570,7 +570,7 @@ class EditEntity {
 				$this->status->fatal( 'edit-conflict' );
 				$this->errorType |= self::EDIT_CONFLICT_ERROR;
 
-				wfProfileOut( "Wikibase-" . __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				return $this->status;
 			}
 		}
@@ -590,7 +590,7 @@ class EditEntity {
 		$this->status->setResult( $editStatus->isOK(), $editStatus->getValue() );
 		$this->status->merge( $editStatus );
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $this->status;
 	}
 
@@ -622,18 +622,18 @@ class EditEntity {
 	 * @return bool
 	 */
 	public static function userWasLastToEdit( $userId = false, $lastRevId = false ) {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		// If the lastRevId is missing then skip all further test and give false.
 		// Note that without a revision id it will not be possible to do patching.
 		if ( $lastRevId === false ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return false;
 		}
 		else {
 			$revision = \Revision::newFromId( $lastRevId );
 			if ( !isset( $revision ) ) {
-				wfProfileOut( "Wikibase-" . __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				return false;
 			}
 		}
@@ -641,13 +641,13 @@ class EditEntity {
 		// If the userId is missing then skip all further test and give false.
 		// It is only the user id that is used later on.
 		if ( $userId === false ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return false;
 		}
 		else {
 			$user = \User::newFromId( $userId );
 			if ( !isset( $user ) ) {
-				wfProfileOut( "Wikibase-" . __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				return false;
 			}
 		}
@@ -656,7 +656,7 @@ class EditEntity {
 		// There must be a title so we can get an article id
 		$title = $revision->getTitle();
 		if ( $title === null ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
@@ -674,7 +674,7 @@ class EditEntity {
 			__METHOD__,
 			array( 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 )
 		);
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $res->current() === false; // return true if query had no match
 	}
 
@@ -690,7 +690,7 @@ class EditEntity {
 	 * @return bool true if an error page was shown, false if there were no errors to show.
 	 */
 	public function showErrorPage( OutputPage $out = null, $titleMessage = null ) {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		global $wgOut;
 
 		if ( $out === null ) {
@@ -698,7 +698,7 @@ class EditEntity {
 		}
 
 		if ( $this->status === null || $this->status->isOK() ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
@@ -714,7 +714,7 @@ class EditEntity {
 			$out->returnToMain( '', $this->getTitle() );
 		}
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -726,7 +726,7 @@ class EditEntity {
 	 * @return bool true if any message was shown, false if there were no errors to show.
 	 */
 	protected function showStatus( OutputPage $out = null ) {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		global $wgOut;
 
 		if ( $out === null ) {
@@ -734,7 +734,7 @@ class EditEntity {
 		}
 
 		if ( $this->status === null || $this->status->isGood() ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
@@ -742,7 +742,7 @@ class EditEntity {
 
 		$out->addHTML( \Html::element( 'div', array( 'class' => 'error' ), $text ) );
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -759,9 +759,9 @@ class EditEntity {
 	 * @param array    $extradata    array Data to add to the "<error>" element; array in ApiResult format
 	 */
 	public function reportApiErrors( \ApiBase $api, $errorCode, $httpRespCode = 0, $extradata = null ) {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		if ( $this->status === null ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return;
 		}
 
@@ -776,10 +776,10 @@ class EditEntity {
 
 		if ( !$this->status->isOK() ) {
 			$description = $this->status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' );
-			wfProfileOut( "Wikibase-" . __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			$api->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
 		}
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 }

@@ -78,7 +78,7 @@ class ApiSetAliases extends ApiModifyEntity {
 	 * @see ApiModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		if ( isset( $params['set'] ) ) {
 			$entityContent->getEntity()->setAliases(
@@ -115,7 +115,7 @@ class ApiSetAliases extends ApiModifyEntity {
 			$this->addAliasesToResult( array( $params['language'] => $aliases ), 'entity' );
 		}
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 

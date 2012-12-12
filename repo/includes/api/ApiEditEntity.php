@@ -108,16 +108,16 @@ class ApiEditEntity extends ApiModifyEntity {
 	 * @see ApiModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
-		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		$status = Status::newGood();
 		if ( isset( $params['data'] ) ) {
 			$data = json_decode( $params['data'], true );
 			if ( is_null( $data ) ) {
-				wfProfileOut( "Wikibase-" . __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( $this->msg( 'wikibase-api-json-invalid' )->text(), 'json-invalid' );
 			}
 			if ( !is_array( $data ) ) { // NOTE: json_decode will decode any JS literal or structure, not just objects!
-				wfProfileOut( "Wikibase-" . __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-array' );
 			}
 			$languages = array_flip( Utils::getLanguageCodes() );
@@ -152,26 +152,26 @@ class ApiEditEntity extends ApiModifyEntity {
 				// conditional processing
 				case 'pageid':
 					if ( isset( $data[$props] ) && ( is_object( $page ) ? $page->getId() !== $data[$props] : true ) ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'pageid' )->text(), 'illegal-field' );
 					}
 					break;
 				case 'ns':
 					// not completly convinced that we can use title to get the namespace in this case
 					if ( isset( $data[$props] ) && ( is_object( $title ) ? $title->getNamespace() !== $data[$props] : true ) ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'namespace' )->text(), 'illegal-field' );
 					}
 					break;
 				case 'title':
 					if ( isset( $data[$props] ) && ( is_object( $title ) ? $title->getPrefixedText() !== $data[$props] : true ) ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'title' )->text(), 'illegal-field' );
 					}
 					break;
 				case 'lastrevid':
 					if ( isset( $data[$props] ) && ( is_object( $revision ) ? $revision->getId() !== $data[$props] : true ) ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'lastrevid' )->text(), 'illegal-field' );
 					}
 					break;
@@ -179,7 +179,7 @@ class ApiEditEntity extends ApiModifyEntity {
 				// ordinary entries
 				case 'labels':
 					if ( !is_array( $list ) ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( "Key 'labels' must refer to an array", 'not-recognized-array' );
 					}
 
@@ -194,7 +194,7 @@ class ApiEditEntity extends ApiModifyEntity {
 					}
 
 					if ( !$status->isOk() ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 					}
 
@@ -202,7 +202,7 @@ class ApiEditEntity extends ApiModifyEntity {
 
 				case 'descriptions':
 					if ( !is_array( $list ) ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( "Key 'descriptions' must refer to an array", 'not-recognized-array' );
 					}
 
@@ -217,7 +217,7 @@ class ApiEditEntity extends ApiModifyEntity {
 					}
 
 					if ( !$status->isOk() ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 					}
 
@@ -225,7 +225,7 @@ class ApiEditEntity extends ApiModifyEntity {
 
 				case 'aliases':
 					if ( !is_array( $list ) ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( "Key 'aliases' must refer to an array", 'not-recognized-array' );
 					}
 
@@ -268,7 +268,7 @@ class ApiEditEntity extends ApiModifyEntity {
 					}
 
 					if ( !$status->isOk() ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 					}
 
@@ -283,12 +283,12 @@ class ApiEditEntity extends ApiModifyEntity {
 					// TODO: This is a temporary fix that should be handled properly with an
 					// injector/inputter class that is specific for the given entity
 					if ( $entityContent->getEntity()->getType() !== Item::ENTITY_TYPE ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( "key can't be handled: $props", 'not-recognized' );
 					}
 
 					if ( !is_array( $list ) ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( "Key 'sitelinks' must refer to an array", 'not-recognized-array' );
 					}
 
@@ -304,7 +304,7 @@ class ApiEditEntity extends ApiModifyEntity {
 							$linkPage = $linkSite->normalizePageName( $arg['title'] );
 
 							if ( $linkPage === false ) {
-								wfProfileOut( "Wikibase-" . __METHOD__ );
+								wfProfileOut( __METHOD__ );
 								$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'add-sitelink-failed' );
 							}
 
@@ -312,7 +312,7 @@ class ApiEditEntity extends ApiModifyEntity {
 							$ret = $entityContent->getEntity()->addSiteLink( $link, 'set' );
 
 							if ( $ret === false ) {
-								wfProfileOut( "Wikibase-" . __METHOD__ );
+								wfProfileOut( __METHOD__ );
 								$this->dieUsage( $this->msg( 'wikibase-api-add-sitelink-failed' )->text(), 'add-sitelink-failed' );
 							}
 
@@ -324,7 +324,7 @@ class ApiEditEntity extends ApiModifyEntity {
 					}
 
 					if ( !$status->isOk() ) {
-						wfProfileOut( "Wikibase-" . __METHOD__ );
+						wfProfileOut( __METHOD__ );
 						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 					}
 
@@ -333,7 +333,7 @@ class ApiEditEntity extends ApiModifyEntity {
 					break;
 
 				default:
-					wfProfileOut( "Wikibase-" . __METHOD__ );
+					wfProfileOut( __METHOD__ );
 					$this->dieUsage( "unknown key: $props", 'not-recognized' );
 				}
 			}
@@ -356,7 +356,7 @@ class ApiEditEntity extends ApiModifyEntity {
 			$this->addSiteLinksToResult( $entity->getSiteLinks(), 'entity' );
 		}
 
-		wfProfileOut( "Wikibase-" . __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 

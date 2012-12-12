@@ -149,7 +149,7 @@ class ExternalRecentChange {
 	 */
 	public function save() {
 		if ( !isset( $this->mAttribs ) || !is_array( $this->mAttribs ) ) {
-			wfDebug( 'mAttribs in ExternalRecentChange is missing.' );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': mAttribs in ExternalRecentChange is missing.' );
 			return false;
 		}
 
