@@ -245,7 +245,8 @@ final class RepoHooks {
 				'time' => $revision->getTimestamp(),
 			) );
 
-			ChangeNotifier::singleton()->handleChange( $change );
+			$changeNotifier = new ChangeNotifier();
+			$changeNotifier->handleChange( $change );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -297,7 +298,8 @@ final class RepoHooks {
 
 		$change->setMetadataFromUser( $user );
 
-		ChangeNotifier::singleton()->handleChange( $change );
+		$changeNotifier = new ChangeNotifier();
+		$changeNotifier->handleChange( $change );
 
 		wfProfileOut( __METHOD__ );
 		return true;
@@ -347,7 +349,8 @@ final class RepoHooks {
 			$user = User::newFromId( $userId );
 			$change->setMetadataFromUser( $user );
 
-			ChangeNotifier::singleton()->handleChange( $change );
+			$changeNotifier = new ChangeNotifier();
+			$changeNotifier->handleChange( $change );
 		}
 
 		wfProfileOut( __METHOD__ );
