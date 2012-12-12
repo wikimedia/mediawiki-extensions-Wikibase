@@ -236,7 +236,8 @@ final class LibHooks {
 				'wikibase.ui.Toolbar',
 				'wikibase.ui.PropertyEditTool',
 				'jquery.ui.suggester',
-				'jquery.ui.entityselector'
+				'jquery.ui.entityselector',
+				'jquery.client'
 			),
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => 'Wikibase/lib',
