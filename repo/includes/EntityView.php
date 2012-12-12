@@ -80,7 +80,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 		$info = $this->extractEntityInfo( $entity, $lang );
@@ -121,7 +121,7 @@ abstract class EntityView extends \ContextSource {
 			}, 7000 );
 		' );
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $html;
 	}
 
@@ -171,7 +171,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( EntityContent $entity, ParserOptions $options = null, $generateHtml = true ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		if ( !$options ) {
 			$options = $this->makeParserOptions();
@@ -209,7 +209,7 @@ abstract class EntityView extends \ContextSource {
 		// set the display title
 		//$pout->setTitleText( $entity>getLabel( $langCode ) );
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $pout;
 	}
 
@@ -467,7 +467,7 @@ abstract class EntityView extends \ContextSource {
 	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
 	 */
 	public function render( EntityContent $entity, OutputPage $out = null, ParserOptions $options = null, ParserOutput $pout = null ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$isPoutSet = $pout !== null;
 
@@ -501,7 +501,7 @@ abstract class EntityView extends \ContextSource {
 		static::registerJsConfigVars( $out, $entity, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
 
 		$out->addParserOutput( $pout );
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $pout;
 	}
 
@@ -520,7 +520,7 @@ abstract class EntityView extends \ContextSource {
 	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
 	 */
 	public static function registerJsConfigVars( OutputPage $out, EntityContent $entityContent, $langCode, $editableView = false  ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		global $wgUser;
 
@@ -558,7 +558,7 @@ abstract class EntityView extends \ContextSource {
 			\FormatJson::encode( $basicPropertyInfo )
 		);
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**

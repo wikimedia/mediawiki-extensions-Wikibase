@@ -107,7 +107,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	 */
 	public function getEntity( EntityID $entityId, $revision = false ) {
 		wfProfileIn( __METHOD__ );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up entity " . $entityId->getPrefixedId()
+		wfDebugLog( 'wikibase', __METHOD__ . ": Looking up entity " . $entityId->getPrefixedId()
 				. " (rev $revision)" );
 
 		$cache = null;
@@ -121,11 +121,11 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			$cached = $cache->get( $cacheKey );
 
 			if ( $cached ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found entity in cache (key $cacheKey)" );
+				wfDebugLog( 'wikibase', "Found entity in cache (key $cacheKey)" );
 				list( $cachedRev, $cachedEntity ) = $cached;
 
 				if ( $revision && $revision == $cachedRev) {
-					wfDebugLog( __CLASS__, __FUNCTION__ . ": Using cached entity (rev $cachedRev)" );
+					wfDebugLog( 'wikibase', "Using cached entity (rev $cachedRev)" );
 					wfProfileOut( __METHOD__ );
 					return $cachedEntity;
 				}
@@ -160,7 +160,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			// pick text via rev_text_id
 			$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revision of " . $entityId->getPrefixedId() );
+			wfDebugLog( 'wikibase', "Looking up revision $revision of " . $entityId->getPrefixedId() );
 		} else {
 			// entity to page mapping
 			$tables[] = 'wb_entity_per_page';
@@ -178,7 +178,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			// pick text via rev_text_id
 			$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up latest revision of " . $entityId->getPrefixedId() );
+			wfDebugLog( 'wikibase', "Looking up latest revision of " . $entityId->getPrefixedId() );
 		}
 
 		$res = $db->select( $tables, $vars, $where, __METHOD__, $opt, $join );
@@ -196,7 +196,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 
 			if ( $cachedRev !== false && intval( $row->rev_id ) === intval( $cachedRev ) ) {
 				// the revision we loaded is the cached one, use the cached entity
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Using cached entity (rev $cachedRev is latest)" );
+				wfDebugLog( 'wikibase', "Using cached entity (rev $cachedRev is latest)" );
 				wfProfileOut( __METHOD__ );
 				return $cachedEntity;
 			}
@@ -211,15 +211,15 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			&& $row->page_latest === $row->rev_id ) {
 
 			if ( $cachedRev !== false ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Updating cached version of " . $entityId->getPrefixedId() );
+				wfDebugLog( 'wikibase', "Updating cached version of " . $entityId->getPrefixedId() );
 				$cache->replace( $cacheKey, array( $row->rev_id, $entity ) );
 			} else {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Adding cached version of " . $entityId->getPrefixedId() );
+				wfDebugLog( 'wikibase', "Adding cached version of " . $entityId->getPrefixedId() );
 				$cache->add( $cacheKey, array( $row->rev_id, $entity ) );
 			}
 		} else if ( $cachedRev !== false ) {
 			// no longer the latest version
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Removing cached version of " . $entityId->getPrefixedId() );
+			wfDebugLog( 'wikibase', "Removing cached version of " . $entityId->getPrefixedId() );
 			$cache->delete( $cacheKey );
 		}
 
@@ -243,7 +243,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	protected function loadEntity( $entityType, $row ) {
 		wfProfileIn( __METHOD__ );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": calling getRevisionText() on rev " . $row->rev_id );
+		wfDebugLog( 'wikibase', "calling getRevisionText() on rev " . $row->rev_id );
 
 		//NOTE: $row contains revision fields from another wiki. This SHOULD not
 		//      cause any problems, since getRevisionText should only look at the old_flags
@@ -260,7 +260,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 		$format = $row->rev_content_format;
 		$entity = EntityFactory::singleton()->newFromBlob( $entityType, $blob, $format );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
+		wfDebugLog( 'wikibase', "Created entity object from revision blob: "
 			. $entity->getId()->getPrefixedId() );
 
 		wfProfileOut( __METHOD__ );

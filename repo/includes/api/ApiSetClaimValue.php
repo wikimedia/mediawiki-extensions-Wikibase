@@ -42,7 +42,7 @@ class ApiSetClaimValue extends Api {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$content = $this->getEntityContent();
 
@@ -59,7 +59,7 @@ class ApiSetClaimValue extends Api {
 
 		$this->outputClaim( $claim );
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**

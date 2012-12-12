@@ -52,7 +52,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	 * @since 0.3
 	 */
 	public function execute() {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$content = $this->getEntityContent();
 
@@ -60,7 +60,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 
 		$this->saveChanges( $content );
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**

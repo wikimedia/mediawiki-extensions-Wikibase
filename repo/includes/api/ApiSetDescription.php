@@ -35,7 +35,7 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 	 * @see ApiModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		if ( isset( $params['value'] ) ) {
 			$description = Utils::squashToNFC( $params['value'] );
@@ -51,7 +51,7 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 			$this->addDescriptionsToResult( $descriptions, 'entity' );
 		}
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 

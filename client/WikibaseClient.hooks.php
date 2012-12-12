@@ -31,7 +31,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$type = $updater->getDB()->getType();
 
@@ -59,7 +59,7 @@ final class ClientHooks {
 			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
 		}
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -104,7 +104,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseDeleteData( $reportMessage ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$store = ClientStoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
@@ -123,7 +123,7 @@ final class ClientHooks {
 
 		$reportMessage( "done!\n" );
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -140,7 +140,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseRebuildData( $reportMessage ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$store = ClientStoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
@@ -156,7 +156,7 @@ final class ClientHooks {
 		ChangeHandler::singleton()->handleChanges( iterator_to_array( $changes ) );
 		$reportMessage( "done!\n" );
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -174,8 +174,8 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
-		wfProfileIn( __METHOD__ );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #" . $change->getId() );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+		wfDebugLog( 'wikibase', __METHOD__ . " handling change #" . $change->getId() );
 
 		if ( ! ( $change instanceof EntityChange ) ) {
 			return true;
@@ -237,7 +237,7 @@ final class ClientHooks {
 					. " (" . $siteLinkDiffOp->getType() . ")" );
 			}
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": pages to update: "
+			wfDebugLog( 'wikibase', __METHOD__ . ": pages to update: "
 				. str_replace( "\n", ' ', var_export( $pagesToUpdate, true ) ) );
 
 			// purge all relevant pages
@@ -251,7 +251,7 @@ final class ClientHooks {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -266,29 +266,29 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	protected static function updatePage( $titleText, Change $change ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$title = \Title::newFromText( $titleText );
 
 		if ( !$title->exists() ) {
-			wfProfileOut( __METHOD__ );
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return false;
 		}
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": purging page " . $titleText );
+		wfDebugLog( 'wikibase', __METHOD__ . " purging page " . $titleText );
 
 		$title->invalidateCache();
 		$title->purgeSquid();
 
 		if ( Settings::get( 'injectRecentChanges' )  === false ) {
-			wfProfileOut( __METHOD__ );
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 
 		$rcinfo = $change->getMetadata();
 
 		if ( ! is_array( $rcinfo ) ) {
-			wfProfileOut( __METHOD__ );
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return false;
 		}
 
@@ -307,10 +307,10 @@ final class ClientHooks {
 		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
 
 		// @todo batch these
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
+		wfDebugLog( 'wikibase', __METHOD__ . " saving RC entry for " . $title->getFullText() );
 		$rc->save();
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -368,7 +368,7 @@ final class ClientHooks {
 	 */
 	public static function onSpecialRecentChangesQuery( array &$conds, array &$tables, array &$join_conds,
 		\FormOptions $opts, array &$query_options, array &$fields ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		if ( Settings::get( 'showExternalRecentChanges' ) === false ||
 			( ( $opts->validateName( 'hidewikidata' ) === false ) &&  $opts->validateName( 'hideanons' ) === false  ) ||
@@ -376,7 +376,7 @@ final class ClientHooks {
 			$conds[] = 'rc_type != ' . RC_EXTERNAL;
 		}
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -393,7 +393,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onOldChangesListRecentChangesLine( \ChangesList &$changesList, &$s, \RecentChange $rc ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$rcType = $rc->getAttribute( 'rc_type' );
 		if ( $rcType == RC_EXTERNAL ) {
@@ -407,7 +407,7 @@ final class ClientHooks {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -425,7 +425,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSpecialWatchlistQuery( array &$conds, array &$tables, array &$join_conds, array &$fields ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$dbr = wfGetDB( DB_SLAVE );
 
@@ -443,7 +443,7 @@ final class ClientHooks {
 		}
 		$conds = $newConds;
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -460,7 +460,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onParserAfterParse( \Parser &$parser, &$text, \StripState $stripState ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 		global $wgLanguageCode;
 
 		$parserOutput = $parser->getOutput();
@@ -518,7 +518,7 @@ final class ClientHooks {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -534,7 +534,7 @@ final class ClientHooks {
 	 */
 	public static function onWikibaseDefaultSettings( array &$settings ) {
 		global $wgDBname, $wgScriptPath, $wgArticlePath;
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$settings = array_merge(
 			$settings,
@@ -561,7 +561,7 @@ final class ClientHooks {
 			)
 		);
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -576,7 +576,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onBeforePageDisplay( \OutputPage $out, \Skin $skin ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$title = $out->getTitle();
 
@@ -584,7 +584,7 @@ final class ClientHooks {
 			$out->addModules( 'wikibase.client.init' );
 		}
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -599,10 +599,10 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
-		wfProfileIn( __METHOD__ );
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		if ( empty( $template->data['language_urls'] ) ) {
-			wfProfileOut( __METHOD__ );
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 
@@ -631,7 +631,7 @@ final class ClientHooks {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
