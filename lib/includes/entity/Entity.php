@@ -550,32 +550,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * Returns a diff representing an undo action for the changes made between
-	 * the two provided entities against the entity itself.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $newerEntity
-	 * @param Entity $olderEntity
-	 *
-	 * @return EntityDiff
-	 * @throws \MWException
-	 */
-	public function getUndoDiff( Entity $newerEntity, Entity $olderEntity ) {
-		if ( $newerEntity->getType() !== $this->getType() || $olderEntity->getType() !== $this->getType() ) {
-			throw new \MWException( 'Entities passed to getUndoDiff must have the same type' );
-		}
-
-		wfProfileIn( __METHOD__ );
-
-		// FIXME: awareness of internal entity structure in diff code where it can be avoided (and is already in EntityDiff)
-		$diff = $newerEntity->getDiff( $olderEntity )->getApplicableDiff( $this->toArray() );
-
-		wfProfileOut( __METHOD__ );
-		return $diff;
-	}
-
-	/**
 	 * Returns a deep copy of the entity.
 	 *
 	 * @since 0.1
