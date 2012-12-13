@@ -80,6 +80,8 @@ final class ClientHooks {
 			'includes/ClientUtils',
 			'includes/EntityCacheUpdater',
 
+			'includes/api/ApiClientInfo',
+
 			'includes/store/EntityCacheTable',
 			'includes/store/CachingSqlStore',
 			'includes/store/DirectSqlStore',
