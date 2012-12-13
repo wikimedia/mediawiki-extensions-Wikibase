@@ -128,8 +128,15 @@ class PollForChanges extends \Maintenance {
 		$this->pidFile = $this->getOption( 'pidfile', Utils::makePidFilename( 'WBpollForChanges', wfWikiID() ) );
 
 		if ( !Utils::getPidLock( $this->pidFile, false ) ) {
-			$this->msg( "Already running, exiting. Lock file: " . $this->pidFile );
+			if ( $this->getOption( 'verbose' ) || $this->getOption( 'all' ) || $this->getOption( 'once' ) ) {
+				$this->msg( "Already running, exiting. Lock file: " . $this->pidFile );
+			}
+
 			exit( 5 );
+		} else {
+			if ( !$this->getOption( 'all' ) && !$this->getOption( 'once' ) ) {
+				$this->msg( "Starting persistent polling. Lock file: " . $this->pidFile );
+			}
 		}
 
 		$this->changes = ChangesTable::singleton();
