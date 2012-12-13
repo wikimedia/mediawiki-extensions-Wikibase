@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//yKY\u003d",
+        "filename": "client/tests/phpunit/includes/api/ApiRepoInfoTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-13T10:29:06Z",
+      "side": 1,
+      "message": "did you really mean to remove all the assertions?!",
+      "revId": "8e9a6281b069c46e29fdb70e06b5a27b5d0272fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
