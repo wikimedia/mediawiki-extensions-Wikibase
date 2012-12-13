@@ -33,6 +33,24 @@
       "revId": "4f82c46e5111ce42babf37348e7af2e14b5231ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADcH///8I\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-12-13T16:53:29Z",
+      "side": 1,
+      "message": "it\u0027s already adding additional data. I will refactor the whole thing a bit in another changeset.",
+      "parentUuid": "AAADcH///8g\u003d",
+      "revId": "4f82c46e5111ce42babf37348e7af2e14b5231ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
