@@ -72,8 +72,8 @@ $wgAutoloadClasses['Wikibase\ApiClientInfo']		= $dir . 'includes/api/ApiClientIn
 $wgAutoloadClasses['Wikibase\ClientChangeHandler']  = $dir . 'includes/ClientChangeHandler.php';
 
 // includes/recentchanges
-$wgAutoloadClasses['Wikibase\ExternalChangesLine']	= $dir . 'includes/ExternalChangesLine.php';
-$wgAutoloadClasses['Wikibase\ExternalRecentChange'] = $dir . 'includes/ExternalRecentChange.php';
+$wgAutoloadClasses['Wikibase\ExternalChangesLine']	= $dir . 'includes/recentchanges/ExternalChangesLine.php';
+$wgAutoloadClasses['Wikibase\ExternalRecentChange'] = $dir . 'includes/recentchanges/ExternalRecentChange.php';
 $wgAutoloadClasses['Wikibase\RecentChangesFilterOptions'] 	= $dir . 'includes/recentchanges/RecentChangesFilterOptions.php';
 
 // includes/store
