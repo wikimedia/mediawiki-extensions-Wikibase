@@ -51,6 +51,24 @@
       "revId": "4f82c46e5111ce42babf37348e7af2e14b5231ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADcH///6M\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-13T17:43:31Z",
+      "side": 1,
+      "message": "Existing bad code is not an excuse to write more bad code. You do not have to fix the existing stuff (although IMO it makes sense to do it at this point), however you could put the new code in a proper place.",
+      "parentUuid": "AAADcH///8I\u003d",
+      "revId": "4f82c46e5111ce42babf37348e7af2e14b5231ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
