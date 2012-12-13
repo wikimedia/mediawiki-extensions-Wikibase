@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Lib\Test;
+use Wikibase\SettingsArray;
 
 /**
  * Tests for the SettingsArray class.
@@ -22,76 +23,79 @@ namespace Wikibase\Lib\Test;
  * @file
  * @since 0.4
  *
- * @ingroup Settings
+ * @ingroup Wikibase
  * @ingroup Test
  *
- * @group Settings
+ * @group Wikibase
+ * @group WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SettingsArrayTest extends \MediaWikiTestCase {
 
-	public function testGetSetting() {
-		$settings = new \Wikibase\SettingsArray();
+	public function settingArrayProvider() {
+		$settingArrays = array();
 
-		foreach ( TestSettingsList::getTestSetSettings() as $settingName => $settingValue ) {
+		$settingArrays[] = new SettingsArray();
+
+		return $this->arrayWrap( $settingArrays );
+	}
+
+	/**
+	 * @dataProvider settingArrayProvider
+	 *
+	 * @param SettingsArray $settings
+	 */
+	public function testGetSetting( SettingsArray $settings ) {
+		foreach ( $settings as $settingName => $settingValue ) {
 			$this->assertEquals( $settingValue, $settings->getSetting( $settingName ) );
+		}
+
+		$unknownSettings = array( 'dzgtxdfgtdsrxstds4ryt', 'sadftsrftszy' );
+
+		foreach ( $unknownSettings as $unknownSetting ) {
+			$this->assertException(
+				function() use ( $settings, $unknownSetting ) {
+					$settings->getSetting( $unknownSetting );
+				},
+				'MWException'
+			);
 		}
 	}
 
-	public function testHasSetting() {
-		$settings = $settings = new \Wikibase\SettingsArray();
-
-		foreach ( array_keys( TestSettingsList::getTestSetSettings() ) as $settingName ) {
+	/**
+	 * @dataProvider settingArrayProvider
+	 *
+	 * @param SettingsArray $settings
+	 */
+	public function testHasSetting( SettingsArray $settings ) {
+		foreach ( array_keys( iterator_to_array( $settings ) ) as $settingName ) {
 			$this->assertTrue( $settings->hasSetting( $settingName ) );
 		}
 
 		$this->assertFalse( $settings->hasSetting( 'I dont think therefore I dont exist' ) );
 	}
 
-	public function testSetSetting() {
-		$settings = new \Wikibase\SettingsArray();
-
-		foreach ( TestSettingsList::getTestDefaults() as $settingName => $settingValue ) {
+	/**
+	 * @dataProvider settingArrayProvider
+	 *
+	 * @param SettingsArray $settings
+	 */
+	public function testSetSetting( SettingsArray $settings ) {
+		foreach ( $settings as $settingName => $settingValue ) {
 			$settings->setSetting( $settingName, $settingValue );
-			$this->assertEquals( $settingValue, TestSettingsList::get( $settingName ) );
+			$this->assertEquals( $settingValue, $settings->getSetting( $settingName ) );
 		}
 
-		foreach ( TestSettingsList::getTestSetSettings() as $settingName => $settingValue ) {
+		foreach ( $settings as $settingName => $settingValue ) {
 			$settings->setSetting( $settingName, $settingValue );
-			$this->assertEquals( $settingValue, TestSettingsList::get( $settingName ) );
+			$this->assertEquals( $settingValue, $settings->getSetting( $settingName ) );
+		}
+
+		if ( $settings->count() === 0 ) {
+			$this->assertTrue( true );
 		}
 	}
 
 }
-
-class TestSettingsList extends \Wikibase\SettingsArray {
-
-	public static function getTestDefaults() {
-		return array(
-			'awesome' => null,
-			'answer' => 0,
-			'amount' => 9001,
-			'foo' => 'bar',
-		);
-	}
-
-	public static function getTestSetSettings() {
-		return array(
-			'awesome' => true,
-			'answer' => 42,
-			'amount' => 9001,
-		);
-	}
-
-	public function getDefaultSettings() {
-		return static::getTestDefaults();
-	}
-
-	public function getSetSettings() {
-		return static::getTestSetSettings();
-	}
-
-}
-
