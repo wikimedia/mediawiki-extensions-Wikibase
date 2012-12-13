@@ -16,6 +16,24 @@
       "revId": "ff4e43a8b67fccb2ddf6b3c812507a0f511246ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//yKM\u003d",
+        "filename": "client/tests/phpunit/includes/api/ApiRepoInfoTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-12-13T10:32:55Z",
+      "side": 1,
+      "message": "According to Daniel K. reading from the database will fail in the Jenkins setup unless @group Database is used and that could cause unpredictable errors.\n\nShort story; keep it as it is.",
+      "parentUuid": "AAADbX//yQ4\u003d",
+      "revId": "ff4e43a8b67fccb2ddf6b3c812507a0f511246ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
