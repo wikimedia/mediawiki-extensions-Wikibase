@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADbX//yQ4\u003d",
+        "filename": "client/tests/phpunit/includes/api/ApiRepoInfoTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-12-13T02:51:12Z",
+      "side": 1,
+      "message": "You don\u0027t need this as you don\u0027t change anything in the database, and then the tests run faster.",
+      "revId": "ff4e43a8b67fccb2ddf6b3c812507a0f511246ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
