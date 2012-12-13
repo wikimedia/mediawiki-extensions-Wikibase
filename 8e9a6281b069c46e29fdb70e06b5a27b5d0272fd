@@ -16,6 +16,24 @@
       "revId": "8e9a6281b069c46e29fdb70e06b5a27b5d0272fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADbX//yKQ\u003d",
+        "filename": "client/tests/phpunit/includes/api/ApiRepoInfoTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-12-13T10:37:50Z",
+      "side": 1,
+      "message": "ooops, somehow not the right file here.  fixed",
+      "parentUuid": "AAADbX//yKY\u003d",
+      "revId": "8e9a6281b069c46e29fdb70e06b5a27b5d0272fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
