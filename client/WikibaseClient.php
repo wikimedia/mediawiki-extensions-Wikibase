@@ -62,11 +62,14 @@ $wgAutoloadClasses['Wikibase\CachedEntity'] 		= $dir . 'includes/CachedEntity.ph
 $wgAutoloadClasses['Wikibase\ClientChangeHandler']	= $dir . 'includes/ClientChangeHandler.php';
 $wgAutoloadClasses['Wikibase\ClientUtils']		= $dir . 'includes/ClientUtils.php';
 $wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCacheUpdater.php';
-$wgAutoloadClasses['Wikibase\ExternalChangesLine']      = $dir . 'includes/recentchanges/ExternalChangesLine.php';
-$wgAutoloadClasses['Wikibase\ExternalRecentChange']	= $dir . 'includes/recentchanges/ExternalRecentChange.php';
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\SortUtils']		= $dir . 'includes/SortUtils.php';
+
+// includes/recentchanges
+$wgAutoloadClasses['Wikibase\ExternalChangesLine']	= $dir . 'includes/recentchanges/ExternalChangesLine.php';
+$wgAutoloadClasses['Wikibase\ExternalRecentChange'] = $dir . 'includes/recentchanges/ExternalRecentChange.php';
+$wgAutoloadClasses['Wikibase\RecentChangesFilter'] 	= $dir . 'includes/recentchanges/RecentChangesFilter.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
