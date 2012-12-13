@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADcH///+g\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-13T15:48:14Z",
+      "side": 1,
+      "message": "should update this information about the additional stuff you are returning now",
+      "revId": "2d1f3cd224ea1b4a719ce08193edde14eaa390c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADcH///+c\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-13T15:48:14Z",
+      "side": 1,
+      "message": "I guess its fine to return this as second parameter, put perhaps it would be wiser to return the whole result.pageinfo instead?",
+      "revId": "2d1f3cd224ea1b4a719ce08193edde14eaa390c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
