@@ -157,6 +157,14 @@ $messages['mk'] = array(
 	'version-datavalues' => 'ПодаточниВредности',
 );
 
+/** Malay (Bahasa Melayu)
+ * @author Anakmalaysia
+ */
+$messages['ms'] = array(
+	'datavalues-desc' => 'Koleksi objek-objek yang melambangkan pelbagai jenis nilai',
+	'version-datavalues' => 'DataValues',
+);
+
 /** Dutch (Nederlands)
  * @author Siebrand
  */
@@ -178,6 +186,14 @@ $messages['ta'] = array(
 $messages['uk'] = array(
 	'datavalues-desc' => "Набір об'єктів для представлення різних типів значень",
 	'version-datavalues' => 'DataValues',
+);
+
+/** Vietnamese (Tiếng Việt)
+ * @author Minh Nguyen
+ */
+$messages['vi'] = array(
+	'datavalues-desc' => 'Bộ sưu tập các đối tượng đại diện cho các kiểu giá trị',
+	'version-datavalues' => 'Giá trị dữ liệu',
 );
 
 /** Yiddish (ייִדיש)
