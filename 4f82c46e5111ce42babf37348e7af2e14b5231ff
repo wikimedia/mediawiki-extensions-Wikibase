@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADcH///8k\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-13T16:51:35Z",
+      "side": 1,
+      "message": "not used?",
+      "revId": "4f82c46e5111ce42babf37348e7af2e14b5231ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADcH///8g\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-13T16:51:35Z",
+      "side": 1,
+      "message": "A method named sortByScore should do 1 thing: sort\n\nIt should not add additional data",
+      "revId": "4f82c46e5111ce42babf37348e7af2e14b5231ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
