@@ -358,6 +358,9 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery.valueview.views/wikibaseItem.js',
 			),
+			'styles' => array(
+				'jquery.valueview.views/views.css',
+			),
 			'dependencies' => array(
 				'dataTypes.jquery.valueview',
 			),
