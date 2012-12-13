@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Lib\Test;
+use Wikibase\SettingsArray;
 
 /**
  * Tests for the SettingsArray class.
@@ -33,7 +34,7 @@ namespace Wikibase\Lib\Test;
 class SettingsArrayTest extends \MediaWikiTestCase {
 
 	public function testGetSetting() {
-		$settings = new \Wikibase\SettingsArray();
+		$settings = new SettingsArray();
 
 		foreach ( TestSettingsList::getTestSetSettings() as $settingName => $settingValue ) {
 			$this->assertEquals( $settingValue, $settings->getSetting( $settingName ) );
@@ -41,7 +42,7 @@ class SettingsArrayTest extends \MediaWikiTestCase {
 	}
 
 	public function testHasSetting() {
-		$settings = $settings = new \Wikibase\SettingsArray();
+		$settings = $settings = new SettingsArray();
 
 		foreach ( array_keys( TestSettingsList::getTestSetSettings() ) as $settingName ) {
 			$this->assertTrue( $settings->hasSetting( $settingName ) );
@@ -51,7 +52,7 @@ class SettingsArrayTest extends \MediaWikiTestCase {
 	}
 
 	public function testSetSetting() {
-		$settings = new \Wikibase\SettingsArray();
+		$settings = new SettingsArray();
 
 		foreach ( TestSettingsList::getTestDefaults() as $settingName => $settingValue ) {
 			$settings->setSetting( $settingName, $settingValue );
@@ -66,7 +67,7 @@ class SettingsArrayTest extends \MediaWikiTestCase {
 
 }
 
-class TestSettingsList extends \Wikibase\SettingsArray {
+class TestSettingsList extends SettingsArray {
 
 	public static function getTestDefaults() {
 		return array(
