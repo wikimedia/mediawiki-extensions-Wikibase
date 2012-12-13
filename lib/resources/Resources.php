@@ -278,8 +278,7 @@ return call_user_func( function() {
 				'jquery.ui/themes/default/jquery.ui.suggester.css'
 			),
 			'dependencies' => array(
-				'jquery.ui.autocomplete',
-				'jquery.eachchange'
+				'jquery.ui.autocomplete'
 			)
 		),
 
@@ -349,7 +348,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.suggester',
-				'jquery.ui.resizable'
+				'jquery.ui.resizable',
+				'jquery.eachchange'
 			)
 		),
 
