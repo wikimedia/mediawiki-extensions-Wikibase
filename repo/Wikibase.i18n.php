@@ -214,7 +214,7 @@ $1', # Do not translate
 to find out where it went.',
 	'wikibase-noentity-createone' => 'You can also [[$1|create a new one]].',
 
-	// summary and autocomment
+	// item - summary and autocomment
 	'wikibase-item-summary-wbsetitem' => 'Created a new item', // legacy
 	'wikibase-item-summary-wbeditentity' => 'Created a new item', // legacy
 	'wikibase-item-summary-wbeditentity-create' => 'Created a new item',
@@ -224,18 +224,33 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Removed [$2] label',
 	'wikibase-item-summary-wbsetdescription-set' => 'Changed [$2] description',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Removed [$2] description',
-	'wikibase-item-summary-wbsetsitelink-set' => 'Added site-specific [$2] link',
-	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed site-specific [$2] link',
 	'wikibase-item-summary-wbsetaliases-set' => 'Setting [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Added site-specific [$2] link',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed site-specific [$2] link',
 	'wikibase-item-summary-wblinktitles-connect' => 'Connected [$2↔$3] {{plural:$1|page|pages}}',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{plural:$1|a value claim|value claims}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created {{plural:$1|a novalue claim|novalue claims}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created {{plural:$1|a somevalue claim|somevalue claims}}',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{plural:$1|value|values}}',
+
+	// property - summary and autocomment
+	'wikibase-property-summary-wbeditentity-create' => 'Created a new property',
+	'wikibase-property-summary-wbeditentity-update' => 'Updated a property',
+	'wikibase-property-summary-wbeditentity-override' => 'Overrided a property',
+	'wikibase-property-summary-wbsetlabel-set' => 'Changed [$2] label',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Removed [$2] label',
+	'wikibase-property-summary-wbsetdescription-set' => 'Changed [$2] description',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Removed [$2] description',
+	'wikibase-property-summary-wbsetaliases-set' => 'Setting [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-property-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-property-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-property-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-property-summary-special-create-property' => 'Created a [$2] property with {{plural:$1|value|values}}',
+
+	// query - summary and autocomment
 	'wikibase-query-summary-special-create-query' => 'Created a [$2] query with {{plural:$1|value|values}}',
 
 	//content model names
@@ -537,6 +552,7 @@ Parameters:
 * $1 is the name of the namespace for which direct editing was denied.',
 	'wikibase-noentity' => 'Of some reason the user tried to access an entity which then was detected as non-existing. This can happen when an entity is deleted and clients are not yet made aware of this.',
 	'wikibase-noentity-createone' => 'Put immediately after "wikibase-noentity" if the user has the right to create an entity of the given type. This message tells the user that he can create one and gives a link in $1 to the special page where this can be done.',
+
 	'wikibase-item-summary-wbsetitem' => 'Automatic edit summary generated when creating a new item. This is a legacy message.',
 	'wikibase-item-summary-wbeditentity' => 'Automatic edit summary generated when creating a new item. This is a legacy message.',
 	'wikibase-item-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new item.',
@@ -550,21 +566,21 @@ Parameters:
 * $2 is the language code for the item page.',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Automatic edit summary when removing an item description. Example edit summary is "Removed [en] description". Parameters:
 * $2 is the language code for the item page.',
+	'wikibase-item-summary-wbsetaliases-set' => 'Automatic edit summary when adding or editing item aliases.  Example for adding aliases on the English item page for Italy: "Setting [en] aliases:  Italian Republic, Repubblica italiana". Parameters:
+* $2 is the language code for the item page.',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Automatic edit summary when adding and removing item aliases. A user can be in edit mode for aliases and can remove one or more aliases, while adding others in the same edit. Parameter:
+* $1 is the number of aliases added/removed;
+* $2 is the language code of the item page.',
+	'wikibase-item-summary-wbsetaliases-add' => 'Automatic edit summary when adding an alias(es) for an item. Parameters:
+* $1 is the number of aliases that were added;
+* $2 is the language code for the item page.',
+	'wikibase-item-summary-wbsetaliases-remove' => 'Automatic edit summary when a user removes one or more aliases from an item. Parameters:
+* $1 is the number of aliases that were removed;
+* $2 is the language code for the item page.',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Automatic edit summary when adding or editing a language link. Such an edit summary would appear in English as "Added site-specific [itwiki] link:  Italia". Parameters:
 * $2 is the site code for the link target wiki, such as itwiki (Italian Wikipedia).',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Automatic edit summary when removing a language link from a Wikidata item (page). Such an edit summary would appear in English as "Removed site-specific [itwiki] link". Parameters:
 * $2 is the site code for the link target wiki, such as itwiki (Italian Wikipedia).',
-	'wikibase-item-summary-wbsetaliases-set' => 'Automatic edit summary when adding or editing item aliases.  Example for adding aliases on the English item page for Italy: "Setting [en] aliases:  Italian Republic, Repubblica italiana". Parameters:
-* $2 is the language code for the item page.',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Automatic edit summary when adding and removing aliases. A user can be in edit mode for aliases and can remove one or more aliases, while adding others in the same edit. Parameter:
-* $1 is the number of aliases added/removed;
-* $2 is the language code of the item page.',
-	'wikibase-item-summary-wbsetaliases-add' => 'Automatic edit summary when adding an alias(es). Parameters:
-* $1 is the number of aliases that were added;
-* $2 is the language code for the item page.',
-	'wikibase-item-summary-wbsetaliases-remove' => 'Automatic edit summary when a user removes one or more aliases. Parameters:
-* $1 is the number of aliases that were removed;
-* $2 is the language code for the item page.',
 	'wikibase-item-summary-wblinktitles-connect' => 'Automatic edit summary when connecting page(s). Parameters:
 * $1 is the number of pages that were connected;
 * $2 is the site code for the from-page;
@@ -578,12 +594,34 @@ Parameters:
 	'wikibase-item-summary-special-create-item' => 'Automatic edit summary when creating an item, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
+
+	'wikibase-property-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing a property label, which appears in the h1 heading at top of the page. Example edit summary is "Updated [en] label:  Egypt". Parameters:
+* $2 is the language code for the item page.',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Automatic edit summary generated when removing a property label. Example edit summary is "Removed [en] label". Parameters:
+* $2 is the language code for the item page.',
+	'wikibase-property-summary-wbsetdescription-set' => 'Automatic edit summary when creating or editing a property description. Example edit summary is "Updated [en] description:  a country in Africa". Parameters:
+* $2 is the language code for the item page.',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Automatic edit summary when removing a property description. Example edit summary is "Removed [en] description". Parameters:
+* $2 is the language code for the item page.',
+	'wikibase-property-summary-wbsetaliases-set' => 'Automatic edit summary when adding or editing property aliases.  Example for adding aliases on the English item page for Italy: "Setting [en] aliases:  Italian Republic, Repubblica italiana". Parameters:
+* $2 is the language code for the item page.',
+	'wikibase-property-summary-wbsetaliases-add-remove' => 'Automatic edit summary when adding and removing property aliases. A user can be in edit mode for aliases and can remove one or more aliases, while adding others in the same edit. Parameter:
+* $1 is the number of aliases added/removed;
+* $2 is the language code of the item page.',
+	'wikibase-property-summary-wbsetaliases-add' => 'Automatic edit summary when adding an alias(es) for a property. Parameters:
+* $1 is the number of aliases that were added;
+* $2 is the language code for the item page.',
+	'wikibase-property-summary-wbsetaliases-remove' => 'Automatic edit summary when a user removes one or more aliases from a property. Parameters:
+* $1 is the number of aliases that were removed;
+* $2 is the language code for the item page.',
 	'wikibase-property-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
+
 	'wikibase-query-summary-special-create-query' => 'Automatic edit summary when creating a query, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
+
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 	'right-item-override' => '{{doc-right|item-override}}',
 	'right-item-create' => '{{doc-right|item-create}}',
