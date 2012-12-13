@@ -75,7 +75,7 @@
 			} );
 
 			// Information about used properties:
-			$.extend( wb.properties, usedPropertiesJSON );
+			$.extend( wb.entities, usedPropertiesJSON );
 
 			// Definition of the views entity:
 			if ( entityJSON.claims !== undefined ) {
