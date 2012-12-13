@@ -833,6 +833,14 @@ $messages['ca'] = array(
 	'right-description-update' => 'Actualitzar una descripció', # Fuzzy
 );
 
+/** Czech (česky)
+ * @author Vogone
+ */
+$messages['cs'] = array(
+	'special-itembytitle' => 'Najít položku podle názvu',
+	'special-createitem' => 'Vytvořit novou položku',
+);
+
 /** Danish (dansk)
  * @author Poul G
  */
@@ -1087,7 +1095,7 @@ $messages['de'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Eine andere Eigenschaft ($3) hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Eine andere Abfrage ($3) hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.',
 	'wikibase-error-label-not-unique-item' => 'Ein anderes Datenobjekt ($3) hat bereits die Bezeichnung „$1“ und die Beschreibung „$4“, die dem Sprachcode $2 zugeordnet ist.',
-	'special-itembytitle' => 'Datenobjekte nach Titel',
+	'special-itembytitle' => 'Datenelemente nach Titel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Suche nach Datenelementen nach Website und Titel',
 	'wikibase-itembytitle-lookup-site' => 'Wiki:',
 	'wikibase-itembytitle-lookup-page' => 'Seite:',
@@ -3430,6 +3438,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 
 /** Japanese (日本語)
  * @author Shirayuki
+ * @author Vogone
  */
 $messages['ja'] = array(
 	'wikibase-desc' => '構造化されたデータリポジトリ',
@@ -3487,6 +3496,7 @@ $messages['ja'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => '言語コード $2 に関連付けられたラベル「$1」を持つ他のプロパティ ($3) が既に存在します',
 	'wikibase-error-label-not-unique-wikibase-query' => '言語コード $2 に関連付けられたラベル「$1」を持つ他のクエリ ($3) が既に存在します',
 	'wikibase-error-label-not-unique-item' => '言語コード $2 には、ラベル「$1」および説明「$4」の項目 ($3) が既にあります',
+	'special-itembytitle' => 'タイトルから項目を探す',
 	'wikibase-itembytitle-lookup-site' => 'サイト:',
 	'wikibase-itembytitle-lookup-page' => 'ページ:',
 	'wikibase-itembytitle-submit' => '検索',
@@ -4104,6 +4114,7 @@ $messages['ms'] = array(
 	'wikibase-aliases-input-help-message' => 'Jika set data ini dikenali dengan lebih daripada satu nama, anda boleh menaipkan nama lain dan sinonim supaya ia boleh dicari dengan nama-nama alternatifnya.',
 	'wikibase-aliases-empty' => 'Tiada nama lain diberikan.',
 	'wikibase-datatype-label' => 'Jenis data:',
+	'wikibase-snak-unsupporteddatatype' => 'Pengelolaan nilai-nilai untuk jenis data "$1" tidak disokong buat masa ini.',
 	'wikibase-restrictionedit-tooltip-message' => 'Halaman ini dilindungi. Dilarang menyunting.',
 	'wikibase-blockeduser-tooltip-message' => 'Anda disekat daripada menyunting.',
 	'wikibase-tooltip-error-details' => 'Butiran',
@@ -4173,6 +4184,8 @@ $messages['ms'] = array(
 	'wikibase-listdatatypes-intro' => 'Ini ialah senarai semua jenis data yang sedang digunakan dalam pemasangan ini:',
 	'wikibase-history-title-with-label' => 'Semakan sejarah "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Sejarah semakan ($1)',
+	'special-entitieswithoutlabel' => 'Senarai entiti tanpa label',
+	'wikibase-entitieswithoutlabel-legend' => 'Dapatkan senarai entiti tanpa label',
 	'wikibase-entitieswithoutlabel-label-language' => 'Bahasa:',
 	'wikibase-entitieswithoutlabel-submit' => 'Cari',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" bukan kod bahasa yang sah.',
@@ -4180,7 +4193,10 @@ $messages['ms'] = array(
 	'wikibase-entitydata-not-found' => 'Tiada entiti dengan ID $1 dijumpai.',
 	'wikibase-entitydata-unsupported-format' => 'Format data $1 tidak disokong oleh antaramuka ini.',
 	'wikibase-entitydata-title' => 'Data Entiti',
+	'wikibase-entitydata-text' => 'Halaman ini menyediakan antaramuka data yang berpautan kepada nilai-nilai entiti. Sila berikan ID entiti di dalam URL dengan menggunakan sintaks subhalaman.',
 	'wikibase-api-patch-incomplete' => 'Tampung yang dihasilkan rupanya tidak lengkap.',
+	'wikibase-self-conflict-patched' => 'Suntingan anda ditampungkan ke dalam versi terkini, sekaligus mengubah ganti sesetengah suntingan pertengahan anda.',
+	'wikibase-conflict-patched' => 'Suntingan anda telah ditampungkan ke dalam versi terkini.',
 	'wikibase-restoreold' => 'pulihkan',
 	'wikibase-restore-summary' => 'Pulihkan semakan $1 oleh [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Penyuntingan secara langsung dilarang di ruang nama $1',
@@ -4190,6 +4206,9 @@ untuk mencari di mana set data itu.',
 	'wikibase-noentity-createone' => 'Anda juga boleh [[$1|mencipta set data yang baru]].',
 	'wikibase-item-summary-wbsetitem' => 'Perkara baru dicipta',
 	'wikibase-item-summary-wbeditentity' => 'Perkara baru dicipta',
+	'wikibase-item-summary-wbeditentity-create' => 'Perkara baru dicipta',
+	'wikibase-item-summary-wbeditentity-update' => 'Perkara dikemaskinikan',
+	'wikibase-item-summary-wbeditentity-override' => 'Perkara ditulis ganti',
 	'wikibase-item-summary-wbsetlabel-set' => 'Label [$2] ditukar',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Label [$2] dibuang',
 	'wikibase-item-summary-wbsetdescription-set' => 'Keterangan [$2] diubah',
@@ -4207,6 +4226,22 @@ untuk mencari di mana set data itu.',
 	'wikibase-item-summary-special-create-item' => 'Perkara [$2] dicipta dengan {{plural:$1|nilai|nilai-nilai}}',
 	'wikibase-property-summary-special-create-property' => 'Sifat [$2] dicipta dengan {{plural:$1|nilai|nilai-nilai}}',
 	'wikibase-query-summary-special-create-query' => 'Pertanyaan [$2] dicipta dengan {{plural:$1|nilai|nilai-nilai}}',
+	'content-model-wikibase-item' => 'Perkara Wikibase',
+	'content-model-wikibase-property' => 'Sifat Wikibase',
+	'content-model-wikibase-query' => 'Pertanyaan Wikibase',
+	'right-item-override' => 'Mengubah ganti perkara',
+	'right-item-create' => 'Mencipta perkara',
+	'right-item-remove' => 'Menggugurkan perkara',
+	'right-alias-add' => 'Menambahkan alias',
+	'right-alias-set' => 'Menetapkan alias',
+	'right-alias-remove' => 'Membuang alias',
+	'right-sitelink-remove' => 'Membuang pautan tapak',
+	'right-sitelink-update' => 'Mengemaskinikan pautan tapak',
+	'right-linktitles-update' => 'Mengemaskinikan tajuk pautan',
+	'right-label-remove' => 'Membuang label',
+	'right-label-update' => 'Mengemaskinikan label',
+	'right-description-remove' => 'Membuang keterangan',
+	'right-description-update' => 'Mengemaskinikan keterangan',
 );
 
 /** Norwegian Bokmål (norsk (bokmål)‎)
@@ -4540,6 +4575,7 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-item-summary-special-create-item' => 'Item voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
 	'wikibase-property-summary-special-create-property' => 'Eigenschap voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
 	'wikibase-query-summary-special-create-query' => 'Zoekopdracht voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
+	'wikibase-item-summary-special-setlabel-set' => 'Label{{plural:$1||s}} in het [$2] gewijzigd',
 	'content-model-wikibase-item' => 'Wikibaseitem',
 	'content-model-wikibase-property' => 'Wikibase-eigenschap',
 	'content-model-wikibase-query' => 'Wikibasezoekopdracht',
@@ -5709,7 +5745,11 @@ $messages['vi'] = array(
 	'wikibase-noentity' => 'Tập hợp dữ liệu này không tồn tại. Bạn có thể tìm ra tập hợp dữ liệu trong
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} các nhật trình liên quan]</span>.',
 	'wikibase-noentity-createone' => 'Bạn cũng có thể [[$1|tạo một thực thể mới]].',
+	'wikibase-item-summary-wbsetitem' => 'Đã tạo khoản mục mới',
 	'wikibase-item-summary-wbeditentity' => 'Đã tạo khoản mục mới',
+	'wikibase-item-summary-wbeditentity-create' => 'Đã tạo khoản mục mới',
+	'wikibase-item-summary-wbeditentity-update' => 'Đã cập nhật khoản mục',
+	'wikibase-item-summary-wbeditentity-override' => 'Đã ghi đè khoản mục',
 	'wikibase-item-summary-wbsetlabel-set' => 'Đã thay đổi nhãn [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Đã loại bỏ nhãn [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Đã thay đổi lời miêu tả [$2]',

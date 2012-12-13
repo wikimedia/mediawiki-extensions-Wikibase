@@ -505,6 +505,7 @@ $messages['mr'] = array(
  */
 $messages['ms'] = array(
 	'wbc-desc' => 'Pelanggan sambungan Wikibase',
+	'wbc-after-page-move' => 'Anda juga boleh [$1 mengemaskinikan] perkara Wikidata yang berkenaan untuk memelihara pautan bahasa pada halaman yang dipindahkan.',
 	'wbc-comment-remove' => 'Perkara Wikidata yang berkenaan dihapuskan. Pautan bahasa dipadamkan.',
 	'wbc-comment-linked' => 'Satu perkara Wikidata telah dipautkan ke halaman ini.',
 	'wbc-comment-unlink' => 'Halaman ini telah dinyahpautkan dari perkara Wikidata. Pautan bahasa dibuang.',
@@ -516,6 +517,7 @@ $messages['ms'] = array(
 	'wbc-editlinks' => 'Sunting pautan',
 	'wbc-editlinkstitle' => 'Sunting pautan antara bahasa',
 	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Paparkan suntingan Wikidata dalam perubahan terkini',
 );
 
 /** Norwegian Bokmål (norsk (bokmål)‎)
