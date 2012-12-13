@@ -1,0 +1,15 @@
+/**
+ * Styles for Wikibase valueview views.
+ *
+ * @since 0.1
+ * @file
+ * @ingroup WikibaseLib
+ *
+ * @license GNU GPL v2+
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ */
+
+.valueview_wikibaseitem a span {
+	color: gray;
+	font-style: italic;
+}
