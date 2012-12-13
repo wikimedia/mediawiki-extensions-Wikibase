@@ -307,7 +307,7 @@ div.wb-claim-section .wb-claim-section-name {
 	/* In rare cases, the title might be too long, since we need to position absolute, we cannot
 	have the container height adjusted. */
 	overflow-y: auto;
-	z-index: 20; /* should overlay borders of claim containers etc. */
+	z-index: 1; /* should overlay borders of claim containers etc. */
 }
 
 /* The actual section title (the linked property name) */
@@ -335,7 +335,6 @@ div.wb-claim .wb-claim-property-container {
 	width: 15em;
 	top: 0;
 	position: absolute;
-	z-index: 21; /* z-index has to be higher than div.wb-claim-section .wb-claim-section-name */
 	display: none; /* hidden by default (used in JS only) */
 }
 
@@ -362,7 +361,6 @@ div.wb-snak {
 
 div.wb-claim-container .wb-editsection {
 	top: 10px; /* even out padding */
-	z-index: 22; /* covering edge case of having a very narrow browser window */
 }
 
 div.wb-claim-container .wb-editsection .wb-ui-toolbar {
