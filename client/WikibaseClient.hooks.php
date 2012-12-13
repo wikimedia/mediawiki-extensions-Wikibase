@@ -370,9 +370,9 @@ final class ClientHooks {
 		\FormOptions $opts, array &$query_options, array &$fields ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( Settings::get( 'showExternalRecentChanges' ) === false ||
-			( ( $opts->validateName( 'hidewikidata' ) === false ) &&  $opts->validateName( 'hideanons' ) === false  ) ||
-			( ( $opts->getValue( 'hidewikidata' ) === true ) ||  $opts->getValue( 'hideanons' ) === true ) ){
+		$rcFilterOpts = new RecentChangesFilterOptions( $opts );
+
+		if ( $rcFilterOpts->showWikibaseEdits() === false ) {
 			$conds[] = 'rc_type != ' . RC_EXTERNAL;
 		}
 
