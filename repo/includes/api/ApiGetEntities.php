@@ -121,18 +121,25 @@ class ApiGetEntities extends Api {
 
 		$res = $this->getResult();
 
-		$id = EntityId::newFromPrefixedId( $id );
+		$entityId = EntityId::newFromPrefixedId( $id );
+
+		if ( !$entityId ) {
+			//TODO: report as missing instead?
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( "Invalid id: $id", 'no-such-entity-id' );
+		}
 
 		// key should be numeric to get the correct behaviour
 		// note that this setting depends upon "setIndexedTagName_internal"
+		//FIXME: if we get different kinds of entities at once, $entityId->getNumericId() may not be unique.
 		$entityPath = array(
 			'entities',
-			$this->getUsekeys() ? $id->getPrefixedId() : $id->getNumericId()
+			$this->getUsekeys() ? $entityId->getPrefixedId() : $entityId->getNumericId()
 		);
 
 		// later we do a getContent but only if props are defined
 		if ( $params['props'] !== array() ) {
-			$page = $entityContentFactory->getWikiPageForId( $id );
+			$page = $entityContentFactory->getWikiPageForId( $entityId );
 
 			if ( $page->exists() ) {
 
@@ -145,7 +152,7 @@ class ApiGetEntities extends Api {
 				// this should not happen unless a page is not what we assume it to be
 				// that is, we want this to be a little more solid if something ges wrong
 				if ( is_null( $entityContent ) ) {
-					$res->addValue( $entityPath, 'id', $id->getPrefixedId() );
+					$res->addValue( $entityPath, 'id', $entityId->getPrefixedId() );
 					$res->addValue( $entityPath, 'illegal', "" );
 					return;
 				}
@@ -184,8 +191,8 @@ class ApiGetEntities extends Api {
 				$res->addValue( $entityPath, 'missing', "" );
 			}
 		} else {
-			$res->addValue( $entityPath, 'id', $id->getPrefixedId() );
-			$res->addValue( $entityPath, 'type', $id->getEntityType() );
+			$res->addValue( $entityPath, 'id', $entityId->getPrefixedId() );
+			$res->addValue( $entityPath, 'type', $entityId->getEntityType() );
 		}
 		wfProfileOut( __METHOD__ );
 	}

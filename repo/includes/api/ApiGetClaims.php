@@ -44,9 +44,14 @@ class ApiGetClaims extends Api {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		list( $entityId, $claimGuid ) = $this->getIdentifiers();
+		list( $id, $claimGuid ) = $this->getIdentifiers();
 
-		$entity = $this->getEntity( EntityId::newFromPrefixedId( $entityId ) );
+		$entityId = EntityId::newFromPrefixedId( $id );
+		$entity = $entityId ? $this->getEntity( $entityId ) : null;
+
+		if ( !$entity ) {
+			$this->dieUsage( "No entity found matching ID $id", 'no-such-entity-id' );
+		}
 
 		$this->outputClaims( $this->getClaims( $entity, $claimGuid ) );
 

@@ -184,6 +184,25 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 	}
 
 	/**
+	 * Testing behavior for malformed entity ids.
+	 *
+	 * @group API
+	 */
+	public function testGetEntitiesByMalformedId( ) {
+		try {
+			$badid = 'xyz123+++';
+			$this->doApiRequest( array(
+				'action' => 'wbgetentities',
+				'ids' => $badid,
+			) );
+
+			$this->fail( "Expected a usage exception when providing a malformed id" );
+		} catch ( \UsageException $ex ) {
+			$this->assertTrue( true, "make phpunit happy" );
+		}
+	}
+
+	/**
 	 * Testing if we can get an item using a site that is not part of the group supported for sitelinks.
 	 * Note that this makes assumptions about which sitelinks exist in the test items.
 	 *

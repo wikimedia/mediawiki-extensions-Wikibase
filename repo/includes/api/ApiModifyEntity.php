@@ -62,7 +62,9 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 						. 'Please use qualified IDs instead.' );
 			}
 
-			$entityTitle = $entityContentFactory->getTitleForId( EntityId::newFromPrefixedId( $id ), \Revision::FOR_THIS_USER );
+			//NOTE: $id is user-supplied and may be invalid!
+			$entityId = EntityId::newFromPrefixedId( $id );
+			$entityTitle = $entityId ? $entityContentFactory->getTitleForId( $entityId, \Revision::FOR_THIS_USER ) : null;
 
 			if ( is_null( $entityTitle ) ) {
 				$this->dieUsage( "No entity found matching ID $id", 'no-such-entity-id' );

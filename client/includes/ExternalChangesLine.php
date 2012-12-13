@@ -399,21 +399,21 @@ class ExternalChangesLine {
 	 */
 	protected static function titleTextFromEntityData( $entityData, $includeNamespace = true ) {
 		if ( isset( $entityData['object_id'] ) ) {
-			$entityId = $entityData['object_id'];
+			$id = $entityData['object_id'];
 
-			if ( ctype_digit( $entityId ) || is_numeric( $entityId ) ) {
+			if ( ctype_digit( $id ) || is_numeric( $id ) ) {
 				// FIXME: this is evil; we seem to have lost all encapsulation at this point,
 				// so some refactoring is needed to have sane access to the info here.
 				$entityType = explode( '-', $entityData['entity_type'], 2 );
 
-				$entityId = new EntityId( $entityType, (int)$entityId );
+				$entityId = new EntityId( $entityType, (int)$id );
 			}
 			else {
-				$entityId = EntityId::newFromPrefixedId( $entityId );
+				$entityId = EntityId::newFromPrefixedId( $id );
 			}
 
 			// TODO: ideally the uppercasing would be handled by a Title object
-			$titleText = strtoupper( $entityId->getPrefixedId() );
+			$titleText = $entityId ? strtoupper( $entityId->getPrefixedId() ) : $id;
 
 			if ( $includeNamespace ) {
 				$ns = self::getNamespace( $entityData );

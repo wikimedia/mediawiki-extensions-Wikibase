@@ -156,8 +156,9 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 		$params = $this->extractRequestParams();
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( EntityId::newFromPrefixedId( $params['entity'] ) );
 
+		$entityId = EntityId::newFromPrefixedId( $params['entity'] );
+		$entityTitle = $entityId ? EntityContentFactory::singleton()->getTitleForId( $entityId ) : null;
 		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 		if ( $entityContent === null ) {
