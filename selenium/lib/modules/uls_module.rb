@@ -19,23 +19,23 @@ module ULSPage
   link(:specialPageTabLink, :xpath => "//li[@id='ca-nstab-special']/span/a")
   link(:firstResultLink, :xpath => "//span[@class='mw-title']/a")
   # ULS
-  def uls_switch_language(lang)
+  def uls_switch_language(code, name)
     if ulsOpen? == false
-      self.nouls_switch_language(lang)
+      self.nouls_switch_language(code)
       return
     end
-    if ulsOpen_element.text != lang
+    if ulsOpen_element.text != name
       ulsOpen
-      self.ulsLanguageFilter= lang
+      self.ulsLanguageFilter= name
       ajax_wait
       ulsLanguageLink
     end
   end
 
   # NO ULS
-  def nouls_switch_language(lang)
+  def nouls_switch_language(code)
     url = current_url
-    uselang = "uselang=" + lang
+    uselang = "uselang=" + code
     if url.include? "?"
       new_url = url + "&" + uselang
     else

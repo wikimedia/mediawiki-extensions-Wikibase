@@ -16,33 +16,33 @@ describe "Check item disambiguation special page" do
   before :all do
     # set up: create 3 items with same label but with two different descriptions and one without
     visit_page(CreateItemPage) do |page|
-      page.uls_switch_language("en")
-      page.create_new_item(label_abc, description_a)
+      page.uls_switch_language("en", "english")
+      page.create_new_item(label_abc, description_a,false)
       page.wait_for_entity_to_load
-      page.uls_switch_language("de")
-      page.wait_for_entity_to_load
-      page.change_label(label_ac_in_de)
-      page.uls_switch_language("en")
-    end
-    visit_page(CreateItemPage) do |page|
-      page.create_new_item(label_abc, description_b)
-    end
-    visit_page(CreateItemPage) do |page|
-      page.create_new_item(label_abc, "")
-      page.wait_for_entity_to_load
-      page.uls_switch_language("de")
+      page.uls_switch_language("de", "deutsch")
       page.wait_for_entity_to_load
       page.change_label(label_ac_in_de)
-      page.uls_switch_language("en")
+      page.uls_switch_language("en", "english")
+    end
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(label_abc, description_b, false)
+    end
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(label_abc, "", false)
+      page.wait_for_entity_to_load
+      page.uls_switch_language("de", "deutsch")
+      page.wait_for_entity_to_load
+      page.change_label(label_ac_in_de)
+      page.uls_switch_language("en", "english")
     end
   end
 
   context "item disambiguation functionality test" do
     it "language field should be preset with the language" do
       visit_page(ItemDisambiguationPage) do |page|
-        page.uls_switch_language("de")
+        page.uls_switch_language("de", "deutsch")
         page.disambiguationLanguageField.should == "de"
-        page.uls_switch_language("en")
+        page.uls_switch_language("en", "english")
         page.disambiguationLanguageField.should == "en"
       end
     end

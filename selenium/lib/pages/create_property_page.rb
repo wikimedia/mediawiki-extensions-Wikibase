@@ -14,7 +14,7 @@ class NewPropertyPage < CreateEntityPage
 
   def create_new_property(label, description, datatype = "Item", switch_lang = true)
     if switch_lang
-      self.uls_switch_language(LANGUAGE)
+      self.uls_switch_language(LANGUAGE_CODE, LANGUAGE_NAME)
     end
     self.createEntityLabelField = label
     self.createEntityDescriptionField = description

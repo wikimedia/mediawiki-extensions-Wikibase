@@ -11,7 +11,7 @@ describe "Check CreateItem special page" do
   before :all do
     # set up: switch language
     visit_page(CreateItemPage) do |page|
-      page.uls_switch_language(LANGUAGE)
+      page.uls_switch_language(LANGUAGE_CODE, LANGUAGE_NAME)
     end
   end
   context "create item functionality" do
@@ -103,7 +103,7 @@ describe "Check CreateItem special page" do
       label = generate_random_string(10)
       description = generate_random_string(20)
       visit_page(CreateItemPage) do |page|
-        page.uls_switch_language("de")
+        page.uls_switch_language("de", "deutsch")
         page.createEntityLabelField = label
         page.createEntityDescriptionField = description
         page.createEntitySubmit
@@ -120,7 +120,7 @@ describe "Check CreateItem special page" do
   context "Check for permissions on item creation" do
     it "should check that a blocked user cannot create a new item" do
       on_page(CreateItemPage) do |page|
-        page.uls_switch_language("en")
+        page.uls_switch_language("en", "english")
       end
       visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)

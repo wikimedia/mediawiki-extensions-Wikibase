@@ -25,6 +25,6 @@
  # the prefix of property ids (e.g. "P" at the moment)
  PROPERTY_ID_PREFIX: "P"
 
- # Language to be used for testing (local name)
- LANGUAGE: "English"
-
+ # Language to be used for testing (code & local name)
+ LANGUAGE_CODE: "en"
+ LANGUAGE_NAME: "english"
