@@ -56,12 +56,14 @@ class ApiSearchEntities extends ApiBase {
 		);
 
 		$entities = array();
+		$urls = array();
 
 		/**
 		 * @var Term $term
 		 */
 		foreach ( $terms as $term ) {
-			$entity = \Wikibase\EntityContentFactory::singleton()->getFromId( new EntityId( $entityType, $term->getEntityId() ) );
+			$entityId = new EntityId( $entityType, $term->getEntityId() );
+			$entity = EntityContentFactory::singleton()->getFromId( $entityId );
 
 			if ( $entity !== null ) {
 				$entities[] = $entity;
@@ -92,6 +94,9 @@ class ApiSearchEntities extends ApiBase {
 			$entry = array();
 			$entity = $result->getEntity();
 			$entry['id'] = $entity->getPrefixedId();
+			$entry['url'] =
+				EntityContentFactory::singleton()->getTitleForId( $entity->getId() )->getFullUrl();
+
 			if ( $entity->getLabel( $language ) !== false ) {
 				$entry['label'] = $entity->getLabel( $language );
 			}
@@ -144,8 +149,9 @@ class ApiSearchEntities extends ApiBase {
 		wfProfileIn( __METHOD__ );
 
 		$params = $this->extractRequestParams();
+		$entities = $this->searchEntities( $params['language'], $params['search'], $params['type'] );
 		$entries = $this->sortByScore(
-			$this->searchEntities( $params['language'], $params['search'], $params['type'] ),
+			$entities,
 			$params['language'], $params['search']
 		);
 		$totalhits = count( $entries );
