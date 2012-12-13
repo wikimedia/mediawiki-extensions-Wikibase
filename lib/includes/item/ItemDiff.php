@@ -35,7 +35,7 @@ use Diff\MapDiff;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig
  */
-class ItemDiff extends EntityDiffObject implements \Immutable {
+class ItemDiff extends EntityDiff implements \Immutable {
 
 	/**
 	 * Creates a new ItemDiff representing the difference between $oldItem and $newItem
