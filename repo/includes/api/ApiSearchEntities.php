@@ -99,12 +99,15 @@ class ApiSearchEntities extends ApiBase {
 				$entry['description'] = $entity->getDescription( $language );
 			}
 			// Only include matching aliases
-			$entry['aliases'] = $entity->getAliases( $language, $search );
-			foreach ( $entry['aliases'] as $key => $value ) {
-				if ( preg_match( "/^" . preg_quote( $search ) . "/i", $entry['aliases'][$key] ) === 0 ) {
-					unset( $entry['aliases'][$key] );
+			$aliases = $entity->getAliases( $language, $search );
+			$entry['aliases'] = array();
+			
+			foreach ( $aliases as $alias ) {
+				if ( preg_match( "/^" . preg_quote( $search ) . "/i", $alias ) !== 0 ) {
+					$entry['aliases'][] = $alias;
 				}
 			}
+
 			$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
 			$scoreCalculator = new TermMatchScoreCalculator( $entry, $search );
 			$score = $scoreCalculator->calculateScore();
