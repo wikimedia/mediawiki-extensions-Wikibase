@@ -15,6 +15,7 @@ use ApiBase;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class ApiSearchEntities extends ApiBase {
 
@@ -74,18 +75,45 @@ class ApiSearchEntities extends ApiBase {
 	}
 
 	/**
-	 * Order returned search array by score
+	 * Sort search array by score
 	 *
 	 * @since 0.2
+	 *
+	 * @param array $entries 
+	 *
+	 * @return array $entries
+	 */
+	private function sortByScore( $entries ) {
+		wfProfileIn( __METHOD__ );
+
+		$sortArray = array();
+		foreach( $entries as $entry ){
+			foreach( $entry as $key=>$value){
+				if( !isset( $sortArray[$key] ) ) {
+					$sortArray[$key] = array();
+				}
+				$sortArray[$key][] = $value;
+			}
+		}
+		$orderby = "score";
+		if ( $entries !== array() ) {
+			array_multisort( $sortArray[$orderby], SORT_DESC, $entries );
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $entries;
+	}
+
+	/**
+	 * Populate the search result entries
+	 *
+	 * @since 0.4
 	 *
 	 * @param EntityContent[] $results
 	 * @param string $language
 	 * @param string $search
-	 *
-	 * @return array $entries
 	 */
-
-	private function sortByScore( $results, $language, $search ) {
+	private function getSearchEntries( $results, $language, $search ) {
 		wfProfileIn( __METHOD__ );
 
 		$entries = array();
@@ -104,15 +132,19 @@ class ApiSearchEntities extends ApiBase {
 			}
 			// Only include matching aliases
 			$aliases = $entity->getAliases( $language, $search );
-			$entry['aliases'] = array();
+			$aliasEntries = array();
 
 			foreach ( $aliases as $alias ) {
 				if ( preg_match( "/^" . preg_quote( $search ) . "/i", $alias ) !== 0 ) {
-					$entry['aliases'][] = $alias;
+					$aliasEntries[] = $alias;
 				}
 			}
 
-			$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
+			if ( count( $aliasEntries ) > 0 ) {
+				$entry['aliases'] = $aliasEntries;
+				$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
+			}
+
 			$scoreCalculator = new TermMatchScoreCalculator( $entry, $search );
 			$score = $scoreCalculator->calculateScore();
 			if ( $score > 0 ) {
@@ -121,20 +153,6 @@ class ApiSearchEntities extends ApiBase {
 			if ( !in_array( $entry, $entries ) ) {
 				$entries[] = $entry;
 			}
-		}
-		// Do the actual sort by score
-		$sortArray = array();
-		foreach( $entries as $entry ){
-			foreach( $entry as $key=>$value){
-				if( !isset( $sortArray[$key] ) ){
-					$sortArray[$key] = array();
-				}
-				$sortArray[$key][] = $value;
-			}
-		}
-		$orderby = "score";
-		if ( $entries !== array() ) {
-			array_multisort( $sortArray[$orderby], SORT_DESC, $entries );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -148,10 +166,12 @@ class ApiSearchEntities extends ApiBase {
 		wfProfileIn( __METHOD__ );
 
 		$params = $this->extractRequestParams();
-		$entries = $this->sortByScore(
+
+		$entries = $this->sortByScore( $this->getSearchEntries(
 			$this->searchEntities( $params['language'], $params['search'], $params['type'] ),
 			$params['language'], $params['search']
-		);
+		) );
+
 		$totalhits = count( $entries );
 
 		$this->getResult()->addValue(
