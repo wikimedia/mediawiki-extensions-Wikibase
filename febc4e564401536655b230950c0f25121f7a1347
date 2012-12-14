@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADdH///iw\u003d",
+        "filename": "client/includes/recentchanges/RecentChangesFilterOptions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-14T12:09:44Z",
+      "side": 1,
+      "message": "I still don\u0027t understand why we check hideanons here. Hiding anons *incidentally* also hides wikibase edits. But why *enforce* that behavior here? Seems like we are turning a bug into a requirement... Is this needed for consistency somewhere?",
+      "revId": "febc4e564401536655b230950c0f25121f7a1347",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
