@@ -54,7 +54,7 @@ class ExternalRecentChange {
 		$this->mAttribs = array(
 			'rc_namespace' => $title->getNamespace(),
 			'rc_title' => $title->getDBkey(),
-			'rc_user' => \User::newFromId( 0 ),
+			'rc_user' => 0,
 			'rc_user_text' => $userText,
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
