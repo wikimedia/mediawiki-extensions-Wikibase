@@ -28,6 +28,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 
 class TermMatchScoreCalculator {
@@ -56,13 +57,19 @@ class TermMatchScoreCalculator {
 	 * @returns integer $score
 	 */
 	public function calculateScore() {
-		$score = $this->searchLength / strlen( $this->entry['label'] );
+		$score = 0;
 
-		foreach ( $this->entry['aliases'] as $alias ) {
-			$aliasScore = $this->searchLength / strlen( $alias );
+		if ( isset( $this->entry['label'] ) ) {
+			$score = $this->searchLength / strlen( $this->entry['label'] );
+		}
 
-			if ( $aliasScore > $score ) {
-				$score = $aliasScore;
+		if ( isset( $this->entry['aliases'] ) ) {
+			foreach ( $this->entry['aliases'] as $alias ) {
+				$aliasScore = $this->searchLength / strlen( $alias );
+
+				if ( $aliasScore > $score ) {
+					$score = $aliasScore;
+				}
 			}
 		}
 
