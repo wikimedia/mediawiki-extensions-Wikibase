@@ -320,7 +320,7 @@ abstract class EntityView extends \ContextSource {
 
 		// aggregate claims by properties
 		$claimsByProperty = array();
-		foreach( $claims AS $claim ) {
+		foreach( $claims as $claim ) {
 			$propertyId = $claim->getMainSnak()->getPropertyId();
 			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
 		}
@@ -329,7 +329,7 @@ abstract class EntityView extends \ContextSource {
 		 * @var string $claimsHtml
 		 */
 		$claimsHtml = '';
-		foreach( $claimsByProperty AS $claims ) {
+		foreach( $claimsByProperty as $claims ) {
 			$propertyHtml = '';
 
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
@@ -343,7 +343,7 @@ abstract class EntityView extends \ContextSource {
 			}
 
 			$i = 0;
-			foreach( $claims AS $claim ) {
+			foreach( $claims as $claim ) {
 				// TODO: display a "placeholder" message for novalue/somevalue snak
 				$value = '';
 				if ( $claim->getMainSnak()->getType() === 'value' ) {
@@ -366,7 +366,7 @@ abstract class EntityView extends \ContextSource {
 
 				$propertyHtml .= wfTemplate( 'wb-claim',
 					$additionalCssClasses,
-					$propertyId,
+					$claim->getGuid(),
 					$mainSnakHtml,
 					$this->getHtmlForEditSection( $entity, $lang, 'span' )
 				);
@@ -377,7 +377,7 @@ abstract class EntityView extends \ContextSource {
 
 			$propertyHtml .= wfTemplate( 'wb-claim',
 				$additionalCssClasses,
-				$propertyId,
+				$claim->getGuid(),
 				// dummy snak to keep layout consistent
 				wfTemplate( 'wb-snak', '', '', '&nbsp;' ),
 				$this->getHtmlForEditSection( $entity, $lang, 'span', 'add' )
