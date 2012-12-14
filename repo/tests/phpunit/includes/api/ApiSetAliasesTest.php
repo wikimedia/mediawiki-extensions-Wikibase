@@ -123,6 +123,26 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 		$this->assertArrayEquals( $expected, $actual );
 	}
 
+	public function testSetAliases_invalidId() {
+		$badId = 'xyz123+++';
+
+		$req = array(
+			'token' => $this->getItemToken(),
+			'id' => $badId,
+			'action' => 'wbsetaliases',
+			'language' => 'en',
+			'set' => 'foo'
+		);
+
+		try {
+			$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+
+			$this->fail( "Expected a usage exception when providing a malformed id" );
+		} catch ( \UsageException $ex ) {
+			$this->assertTrue( true, "make phpunit happy" );
+		}
+	}
+
 	/**
 	 * Pseudo-Test that just resets the items we messed with
 	 *
