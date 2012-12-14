@@ -3,6 +3,8 @@
 namespace Wikibase;
 
 /**
+ * @todo: factor out specific types of handling and delegate tasks
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -28,31 +30,25 @@ namespace Wikibase;
  */
 class ClientChangeHandler {
 
+	protected $change;
+
 	/**
-	 * @since 0.3
+	 * @since 0.4
 	 *
-	 * @return ClientChangeHandler
+	 * @param Change $change
 	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
-		}
-
-		return $instance;
+	public function __construct( Change $change ) {
+		$this->change = $change;
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @param Change $change
-	 *
 	 * @return bool
 	 */
-	public function changeNeedsRendering( Change $change ) {
-		if ( $change instanceof ItemChange ) {
-			if ( !$change->getSiteLinkDiff()->isEmpty() ) {
+	public function changeNeedsRendering() {
+		if ( $this->change instanceof ItemChange ) {
+			if ( !$this->change->getSiteLinkDiff()->isEmpty() ) {
 				return true;
 			}
 		}
@@ -63,14 +59,12 @@ class ClientChangeHandler {
 	/**
 	 * @since 0.3
 	 *
-	 * @param Change $change
-	 *
 	 * @return string|null
 	 */
-	public function siteLinkComment( $change ) {
+	public function siteLinkComment() {
 		$comment = null;
-		if ( !$change->getSiteLinkDiff()->isEmpty() ) {
-			$siteLinkDiff = $change->getSiteLinkDiff();
+		if ( !$this->change->getSiteLinkDiff()->isEmpty() ) {
+			$siteLinkDiff = $this->change->getSiteLinkDiff();
 			$changeKey = key( $siteLinkDiff );
 			$diffOp = $siteLinkDiff[$changeKey];
 
@@ -84,20 +78,20 @@ class ClientChangeHandler {
 			$comment = "wbc-comment-sitelink-$action~" . key( $siteLinkDiff );
 		}
 
-		return $comment;
+		return $this->parseComment( $comment );
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @param Change $change
+	 * @param string $comment
 	 *
 	 * @throws \MWException
 	 *
 	 * @return array
 	 */
-	public function parseComment( $change ) {
-		list( $message, $sitecode ) = explode( '~', $change->getComment() );
+	public function parseComment( $comment ) {
+		list( $message, $sitecode ) = explode( '~', $comment );
 
 		// check that $sitecode is valid
 		if ( \Sites::singleton()->getSite( $sitecode ) === false ) {
@@ -110,7 +104,7 @@ class ClientChangeHandler {
 		);
 
 		if ( $sitecode === Settings::get( 'siteGlobalID' ) ) {
-			$action = $change->getAction();
+			$action = $this->change->getAction();
 			if ( $action === 'remove' ) {
 				$params['message'] = 'wbc-comment-remove';
 			} else if ( $action === 'restore' ) {
@@ -121,8 +115,8 @@ class ClientChangeHandler {
 				$params['message'] = 'wbc-comment-unlink';
 			}
 		} else {
-			if ( $change->getSiteLinkDiff() ) {
-				$siteLinkDiff = $change->getSiteLinkDiff();
+			if ( $this->change->getSiteLinkDiff() ) {
+				$siteLinkDiff = $this->change->getSiteLinkDiff();
 				$diffOps = $siteLinkDiff->getOperations();
 				foreach( $diffOps as $siteCode => $diffOp ) {
 					$site = \SitesTable::singleton()->selectRow(
