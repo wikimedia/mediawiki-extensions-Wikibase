@@ -298,6 +298,7 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.snakview.js'
 			),
 			'dependencies' => array(
+				'jquery.eachchange',
 				'jquery.ui.entityselector',
 				'wikibase.datamodel',
 				'dataTypes.jquery.valueview.views',
