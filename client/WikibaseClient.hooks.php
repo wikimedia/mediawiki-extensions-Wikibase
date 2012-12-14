@@ -201,7 +201,7 @@ final class ClientHooks {
 		if ( $change->getEntityId()->getEntityType() === Item::ENTITY_TYPE ) {
 
 			$siteGlobalId = Settings::get( 'siteGlobalID' );
-			$changeHandler = ClientChangeHandler::singleton();
+			$changeHandler = new ClientChangeHandler( $change );
 
 			$pagesToUpdate = array();
 
@@ -294,9 +294,8 @@ final class ClientHooks {
 			return false;
 		}
 
-		$changeHandler = ClientChangeHandler::singleton();
-		$change->setComment( $changeHandler->siteLinkComment( $change ) );
-		$rcinfo['comment'] = $changeHandler->parseComment( $change );
+		$changeHandler = new ClientChangeHandler( $change );
+		$rcinfo['comment'] = $changeHandler->siteLinkComment();
 
 		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
 		$fields['entity_type'] = $change->getEntityType();

@@ -59,7 +59,6 @@ $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.m
 $wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php';
 
 $wgAutoloadClasses['Wikibase\CachedEntity'] 		= $dir . 'includes/CachedEntity.php';
-$wgAutoloadClasses['Wikibase\ClientChangeHandler']	= $dir . 'includes/ClientChangeHandler.php';
 $wgAutoloadClasses['Wikibase\ClientUtils']		= $dir . 'includes/ClientUtils.php';
 $wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCacheUpdater.php';
 $wgAutoloadClasses['Wikibase\ExternalChangesLine']      = $dir . 'includes/ExternalChangesLine.php';
@@ -70,6 +69,9 @@ $wgAutoloadClasses['Wikibase\SortUtils']		= $dir . 'includes/SortUtils.php';
 
 // includes/api
 $wgAutoloadClasses['Wikibase\ApiClientInfo']		= $dir . 'includes/api/ApiClientInfo.php';
+
+// includes/handlers
+$wgAutoloadClasses['Wikibase\ClientChangeHandler']  = $dir . 'includes/ClientChangeHandler.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
