@@ -35,7 +35,7 @@ use Diff\MapDiff;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig
  */
-class PropertyDiff extends EntityDiffObject implements \Immutable {
+class PropertyDiff extends EntityDiff implements \Immutable {
 
 	/**
 	 * Creates a new PropertyDiff representing the difference between $oldProperty and $newProperty
