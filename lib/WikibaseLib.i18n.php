@@ -59,6 +59,18 @@ $messages['be-tarask'] = array(
 	'wikibaselib-entity-query' => 'запыт',
 );
 
+/** Bosnian (bosanski)
+ * @author Edinwiki
+ */
+$messages['bs'] = array(
+	'wikibaselib-desc' => 'Sadrži zajedničku funkcionalnost za Wikibazu i proširenje za Wikibaza klijent.',
+	'wikibaselib-entity-item' => 'stavka',
+	'wikibaselib-entity-property' => 'svojstvo',
+	'wikibaselib-entity-query' => 'upit',
+	'datatypes-type-wikibase-item' => 'Stavka',
+	'datatypes-type-commonsMedia' => 'Commons medijska datoteka',
+);
+
 /** Catalan (català)
  * @author Arnaugir
  * @author Grondin

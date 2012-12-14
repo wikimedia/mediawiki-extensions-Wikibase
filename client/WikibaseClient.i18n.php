@@ -88,6 +88,26 @@ $messages['br'] = array(
 	'wbc-editlinkstitle' => 'Kemmañ al liammoù etreyezhel',
 );
 
+/** Bosnian (bosanski)
+ * @author Edinwiki
+ */
+$messages['bs'] = array(
+	'wbc-desc' => 'Klijent za proširenje Wikibaza',
+	'wbc-after-page-move' => 'Možete također [$1 ažurirati] asociranu Wikidata stavku za održavanje jezičnih veza na premještenoj stranici.',
+	'wbc-comment-remove' => 'Asocirana Wikidata stavka je izbrisana. Jezične veze su uklonjene.',
+	'wbc-comment-linked' => 'Neka Wikidata stavka je povezana prema ovoj stranici.',
+	'wbc-comment-unlink' => 'Ova stranica je odvojena od Wikidata stavke. Jezične veze su uklonjene.',
+	'wbc-comment-restore' => 'Asocirana Wikidata stavka je vraćena. Jezične veze su sada isto vraćene.',
+	'wbc-comment-update' => 'Jezične veze su ažurirane.',
+	'wbc-comment-sitelink-add' => 'Jezična veza dodana: $1',
+	'wbc-comment-sitelink-change' => 'Jezična veza izmjenjena sa $1 u $2',
+	'wbc-comment-sitelink-remove' => 'Jezična veza uklonjena: $1',
+	'wbc-editlinks' => 'Izmjeni veze',
+	'wbc-editlinkstitle' => 'Izmjeni međujezične veze',
+	'wbc-rc-hide-wikidata' => 'Wikidata $1',
+	'wbc-rc-show-wikidata-pref' => 'Pokaži Wikidata izmjene u nedavnim izmjenama',
+);
+
 /** Catalan (català)
  * @author Arnaugir
  * @author Grondin
