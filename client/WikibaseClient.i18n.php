@@ -38,9 +38,11 @@ $messages['en'] = array(
 /** Message documentation (Message documentation)
  * @author Jeblad
  * @author Katie Filbert
+ * @author Shirayuki
  */
 $messages['qqq'] = array(
-	'wbc-desc' => '{{desc}} See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
+	'wbc-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
+See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wbc-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfuly move, inviting user to update associated Wikibase repo item to maintain language links on the moved page on the client.
 * Parameter $1 is the link for the associated Wikibase item.',
 	'wbc-comment-remove' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item connected to a page gets deleted. This results in all the language links being removed from the page on the client.',
@@ -186,12 +188,19 @@ $messages['dsb'] = array(
  */
 $messages['eo'] = array(
 	'wbc-desc' => 'Kliento por la Vikidatuma etendaĵo',
-	'wbc-comment-langlinks-delete' => 'Ligita vikidatuma ero estis forigita. La lingvaj ligiloj estis forviŝitaj.',
-	'wbc-comment-langlinks-remove' => 'Ĉi tiu paĝo estis malligita de vikidatuma ero. La lingvaj ligiloj estis forviŝitaj.',
-	'wbc-comment-langlinks-restore' => 'Ligita vikidatuma ero estis restarigita. La lingvaj ligiloj ankaŭ estis restarigitaj.',
-	'wbc-comment-langlinks-update' => 'Lingvaj ligiloj ĝisdatigitaj',
+	'wbc-after-page-move' => 'Vi povas [$1 ĝisdatigi] la ligitan Vikidatuman eron por pluteni la lingvan ligilon al la la movita paĝo.',
+	'wbc-comment-remove' => 'Ligita Vikidatuma ero etis forigita. La lingvaj ligiloj estas forviŝitaj.',
+	'wbc-comment-linked' => 'Vikidatuma ero estis ligita al ĉi tiu paĝo.',
+	'wbc-comment-unlink' => 'Ĉi tiu paĝo estis malligita de la Vikidatuma ero. La lingvaj ligiloj estas forigitaj.',
+	'wbc-comment-restore' => 'Ligita vikidatuma ero estis restarigita. La lingvaj ligiloj ankaŭ estis restarigitaj.',
+	'wbc-comment-update' => 'Lingvaj ligiloj ĝisdatigitaj.',
+	'wbc-comment-sitelink-add' => 'Lingva ligilo aldonita: $1',
+	'wbc-comment-sitelink-change' => 'Lingva ligilo ŝanĝita de $1 al $2',
+	'wbc-comment-sitelink-remove' => 'Lingva ligilo forigita: $1',
 	'wbc-editlinks' => 'Redaktu ligilojn',
 	'wbc-editlinkstitle' => 'Redaktu interlingvajn ligilojn',
+	'wbc-rc-hide-wikidata' => '$1 Vikidatumoj',
+	'wbc-rc-show-wikidata-pref' => 'Montru Vikidatumaj redaktoj en la lastaj ŝanĝoj',
 );
 
 /** Spanish (español)

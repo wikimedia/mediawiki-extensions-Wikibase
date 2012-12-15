@@ -26,10 +26,11 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Shirayuki
  * @author Waldir
  */
 $messages['qqq'] = array(
-	'wikibaselib-desc' => '{{desc}}',
+	'wikibaselib-desc' => '{{desc|name=Wikibase Lib|url=http://www.mediawiki.org/wiki/Extension:WikibaseLib}}',
 	'wikibaselib-entity-item' => "How we refer to entities of type item. See also Wikidata's glossary on [[m:Wikidata/Glossary#item|item]].",
 	'wikibaselib-entity-property' => 'How we refer to entities of type property. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
 	'wikibaselib-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
