@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 use Status;
-use Diff\MapDiff;
+use Diff\Diff;
 
 /**
  * Detector of label+description uniqueness constraint violations.
@@ -94,11 +94,11 @@ class LabelDescriptionDuplicateDetector {
 	 * @param Entity $entity The Entity for which to check if it has any non-unique label+description pairs
 	 * @param Status $status The status to which to add an error if there is a violation
 	 * @param TermCombinationMatchFinder $termCache The TermCache to use for conflict detection
-	 * @param MapDiff|null $labelsDiff
-	 * @param MapDiff|null $descriptionDiff
+	 * @param Diff|null $labelsDiff
+	 * @param Diff|null $descriptionDiff
 	 */
 	public function addLabelDescriptionConflicts( Entity $entity, Status $status, TermCombinationMatchFinder $termCache,
-												  MapDiff $labelsDiff = null, MapDiff $descriptionDiff = null ) {
+												  Diff $labelsDiff = null, Diff $descriptionDiff = null ) {
 
 		$foundTerms = $this->getConflictingTerms( $entity, $termCache );
 
@@ -129,12 +129,12 @@ class LabelDescriptionDuplicateDetector {
 	 * @since 0.4
 	 *
 	 * @param string $languageCode
-	 * @param MapDiff|null $labelsDiff
-	 * @param MapDiff|null $descriptionDiff
+	 * @param Diff|null $labelsDiff
+	 * @param Diff|null $descriptionDiff
 	 *
 	 * @return boolean
 	 */
-	protected function languageAffectedByDiff( $languageCode, MapDiff $labelsDiff = null, MapDiff $descriptionDiff = null ) {
+	protected function languageAffectedByDiff( $languageCode, Diff $labelsDiff = null, Diff $descriptionDiff = null ) {
 		$c = $labelsDiff->getOperations();
 
 		if ( $labelsDiff !== null && array_key_exists( $languageCode, $c ) ) {

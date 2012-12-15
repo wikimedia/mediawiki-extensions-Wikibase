@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Diff\MapDiff;
+use Diff\Diff;
 
 /**
  * Represents a diff between two WikibaseItem instances.
@@ -56,7 +57,7 @@ class ItemDiff extends EntityDiff implements \Immutable {
 	}
 
 	/**
-	 * Returns a MapDiff object with the sitelink differences.
+	 * Returns a Diff object with the sitelink differences.
 	 *
 	 * @since 0.1
 	 *
@@ -83,10 +84,10 @@ class ItemDiff extends EntityDiff implements \Immutable {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Diff\MapDiff $linkOps
+	 * @param Diff $linkOps
 	 * @param Entity $entity
 	 */
-	private function applyLinks( MapDiff $linkOps, Entity $entity ) {
+	private function applyLinks( Diff $linkOps, Entity $entity ) {
 		foreach ( $linkOps as $site => $op ) {
 			$this->applyLink( $site, $op, $entity );
 		}
