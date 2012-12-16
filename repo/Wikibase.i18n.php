@@ -201,7 +201,7 @@ $1', # Do not translate
 	'wikibase-api-wrong-class' => 'The content on the found page is not of correct type.',  # Do not translate
 	'wikibase-api-session-failure' => 'The current session has failed. You have to log in again.', # Do not translate
 	'wikibase-api-illegal-field' => 'Illegal field used in call: $1', # Do not translate
-	'wikibase-api-edit-conflict' => 'It is detected an edit conflict and it is not possible to resolve it by patching the current revision.', # Do not translate
+	'wikibase-api-edit-conflict' => 'Edit conflict, could not patch the current revision', # Do not translate
 
 	'wikibase-self-conflict-patched' => 'Your edit was patched into the latest version, overriding some of your own intermediate changes.',
 	'wikibase-conflict-patched' => 'Your edit was patched into the latest version.',
