@@ -219,7 +219,7 @@ to find out where it went.',
 	'wikibase-item-summary-wbeditentity' => 'Created a new item', // legacy
 	'wikibase-item-summary-wbeditentity-create' => 'Created a new item',
 	'wikibase-item-summary-wbeditentity-update' => 'Updated an item',
-	'wikibase-item-summary-wbeditentity-override' => 'Overrided an item',
+	'wikibase-item-summary-wbeditentity-override' => 'Overrode an item',
 	'wikibase-item-summary-wbsetlabel-set' => 'Changed [$2] label',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Removed [$2] label',
 	'wikibase-item-summary-wbsetdescription-set' => 'Changed [$2] description',
