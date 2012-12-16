@@ -2356,7 +2356,10 @@ $messages['fr'] = array(
 	'wikibase-noentity' => 'Cet ensemble de données n’existe pas. Vous pouvez
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} consulter les journaux]</span> pour plus d’informations.',
 	'wikibase-noentity-createone' => 'Vous pouvez aussi [[$1|en créer une nouvelle]].',
+	'wikibase-item-summary-wbsetitem' => 'Création d’un nouvel élément',
 	'wikibase-item-summary-wbeditentity' => 'Nouvel élément créé',
+	'wikibase-item-summary-wbeditentity-create' => 'Création d’un nouvel élément',
+	'wikibase-item-summary-wbeditentity-update' => 'Mise à jour d’un élément',
 	'wikibase-item-summary-wbsetlabel-set' => 'Changement du libellé [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Retrait du libellé [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Modification de la description [$2]',
@@ -2372,6 +2375,17 @@ $messages['fr'] = array(
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{plural:$1|une revendication sans valeur créée|revendications sans valeur créées}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => "{{plural:$1|une revendication d'une valeur quelconque créée|revendications d'une valeur quelconque créées}}",
 	'wikibase-item-summary-special-create-item' => 'Un élément [$2] créé avec {{plural:$1|une valeur|des valeurs}}',
+	'wikibase-item-summary-special-setlabel-set' => 'Modification {{plural:$1|d’un libellé|de libellés}} [$2]',
+	'wikibase-property-summary-wbeditentity-create' => 'Création d’une nouvelle propriété',
+	'wikibase-property-summary-wbeditentity-update' => 'Mise à jour d’une propriété',
+	'wikibase-property-summary-wbsetlabel-set' => 'Changement du libellé [$2]',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Retrait du libellé [$2]',
+	'wikibase-property-summary-wbsetdescription-set' => 'Modification de la description [$2]',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Retrait de la description [$2]',
+	'wikibase-property-summary-wbsetaliases-set' => 'Alias [$2] {{plural:$1|défini|définis}}',
+	'wikibase-property-summary-wbsetaliases-add-remove' => 'Ajout et retrait {{plural:$1|d’un alias|d’alias}} [$2]',
+	'wikibase-property-summary-wbsetaliases-add' => 'Ajout {{plural:$1|d’un alias|d’alias}} [$2]',
+	'wikibase-property-summary-wbsetaliases-remove' => 'Retrait {{plural:$1|d’un alias|d’alias}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Une propriété [$2] créée avec {{plural:$1|une valeur|des valeurs}}',
 	'wikibase-query-summary-special-create-query' => 'Une requête [$2] créée avec {{plural:$1|une valeur|des valeurs}}',
 	'content-model-wikibase-item' => 'Élément Wikibase',
@@ -4784,6 +4798,17 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Claim{{PLURAL:$1||s}} met waarde aangemaakt',
 	'wikibase-item-summary-special-create-item' => 'Item voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
 	'wikibase-item-summary-special-setlabel-set' => 'Label{{plural:$1||s}} in het [$2] gewijzigd',
+	'wikibase-property-summary-wbeditentity-create' => 'Nieuwe eigenschap aangemaakt',
+	'wikibase-property-summary-wbeditentity-update' => 'Eigenschap bijgewerkt',
+	'wikibase-property-summary-wbeditentity-override' => 'Eigenschap overschreven',
+	'wikibase-property-summary-wbsetlabel-set' => 'Label in [$2] gewijzigd',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Label in [$2] verwijderd',
+	'wikibase-property-summary-wbsetdescription-set' => 'Beschrijving in het [$2] gewijzigd',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Beschrijving in het [$2] verwijderd',
+	'wikibase-property-summary-wbsetaliases-set' => '{{plural:$1|alias|aliassen}} voor [$2] ingesteld',
+	'wikibase-property-summary-wbsetaliases-add-remove' => '{{plural:$1|alias|aliassen}} voor [$2] toegevoegd en verwijderd',
+	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd',
+	'wikibase-property-summary-wbsetaliases-remove' => '{{plural:$1|alias|aliassen}} voor [$2] verwijderd',
 	'wikibase-property-summary-special-create-property' => 'Eigenschap voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
 	'wikibase-query-summary-special-create-query' => 'Zoekopdracht voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
 	'content-model-wikibase-item' => 'Wikibaseitem',
@@ -5736,7 +5761,9 @@ $messages['tzm'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Aced
  * @author Base
+ * @author Steve.rusyn
  */
 $messages['uk'] = array(
 	'wikibase-desc' => 'Сховище структурованих даних',
@@ -5776,6 +5803,10 @@ $messages['uk'] = array(
 	'wikibase-error-save-generic' => 'Сталася помилка під час спроби виконати збереження, через це Ваші зміни не можуть бути здійснені.',
 	'wikibase-error-remove-generic' => 'Сталась помилка під час спроби виконати вилучення, через це Ваші зміни не можуть бути здійснені.',
 	'wikibase-error-save-connection' => "Під час спроби здійснити виконати збереження сталась помилка з'єднання, через це Ваші зміни не можуть бути здійснені. Будь ласка, перевірте Ваше з'єднання з Інтернетом.",
+	'wikibase-itembytitle-lookup-site' => 'Сайт:',
+	'wikibase-itembytitle-lookup-page' => 'Сторінка:',
+	'wikibase-createentity-description' => 'Опис:',
+	'wikibase-createentity-submit' => 'Створити',
 );
 
 /** Urdu (اردو)
@@ -5981,6 +6012,17 @@ $messages['vi'] = array(
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1}}Đã tạo lời khẳng định có một số giá trị',
 	'wikibase-item-summary-special-create-item' => '{{PLURAL:$1}}Đã tạo khoản mục [$2] có giá trị',
 	'wikibase-item-summary-special-setlabel-set' => 'Đã thay đổi {{plural:$1|nhãn|các nhãn}} [$2]',
+	'wikibase-property-summary-wbeditentity-create' => 'Đã tạo thuộc tính mới',
+	'wikibase-property-summary-wbeditentity-update' => 'Đã cập nhật thuộc tính',
+	'wikibase-property-summary-wbeditentity-override' => 'Đã ghi đè thuộc tính',
+	'wikibase-property-summary-wbsetlabel-set' => 'Đã thay đổi nhãn [$2]',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Đã loại bỏ nhãn [$2]',
+	'wikibase-property-summary-wbsetdescription-set' => 'Đã thay đổi lời miêu tả [$2]',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Đã loại bỏ lời miêu tả [$2]',
+	'wikibase-property-summary-wbsetaliases-set' => '{{PLURAL:$1}}Đã đặt tên khác [$2]',
+	'wikibase-property-summary-wbsetaliases-add-remove' => '{{PLURAL:$1}}Đã thêm và loại bỏ tên khác [$2]',
+	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1}}Đã thêm tên khác [$2]',
+	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1}}Đã loại bỏ tên khác [$2]',
 	'wikibase-property-summary-special-create-property' => '{{PLURAL:$1}}Đã tạo thuộc tính [$2] có giá trị',
 	'wikibase-query-summary-special-create-query' => '{{PLURAL:$1}}Đã tạo truy vấn [$2] có giá trị',
 	'content-model-wikibase-item' => 'khoản mục Wikibase',
