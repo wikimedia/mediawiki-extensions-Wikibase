@@ -61,7 +61,8 @@ class ApiSearchEntities extends ApiBase {
 		 * @var Term $term
 		 */
 		foreach ( $terms as $term ) {
-			$entity = \Wikibase\EntityContentFactory::singleton()->getFromId( new EntityId( $entityType, $term->getEntityId() ) );
+			$entityId = new EntityId( $entityType, $term->getEntityId() );
+			$entity = EntityContentFactory::singleton()->getFromId( $entityId );
 
 			if ( $entity !== null ) {
 				$entities[] = $entity;
@@ -92,6 +93,9 @@ class ApiSearchEntities extends ApiBase {
 			$entry = array();
 			$entity = $result->getEntity();
 			$entry['id'] = $entity->getPrefixedId();
+			$entry['url'] =
+				EntityContentFactory::singleton()->getTitleForId( $entity->getId() )->getFullUrl();
+
 			if ( $entity->getLabel( $language ) !== false ) {
 				$entry['label'] = $entity->getLabel( $language );
 			}
