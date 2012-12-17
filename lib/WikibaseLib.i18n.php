@@ -452,6 +452,18 @@ $messages['tl'] = array(
 	'wikibaselib-desc' => 'Naghahawak ng karaniwang panunungkulan para sa mga pandugtong ng Wikibase at Wikibase Client',
 );
 
+/** Ukrainian (українська)
+ * @author Ата
+ */
+$messages['uk'] = array(
+	'wikibaselib-desc' => 'Загальні функції розширень Wikibase і Wikibase Client',
+	'wikibaselib-entity-item' => 'елемент',
+	'wikibaselib-entity-property' => 'властивість',
+	'wikibaselib-entity-query' => 'запит',
+	'datatypes-type-wikibase-item' => 'Елемент',
+	'datatypes-type-commonsMedia' => 'Медіафайл з Вікісховища',
+);
+
 /** Vietnamese (Tiếng Việt)
  * @author Minh Nguyen
  */

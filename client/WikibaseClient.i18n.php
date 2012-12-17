@@ -568,6 +568,7 @@ $messages['nb'] = array(
  */
 $messages['nl'] = array(
 	'wbc-desc' => 'Client voor de uitbreiding Wikibase',
+	'wbc-after-page-move' => 'U kunt ook het gekoppelde Wikidataitem [$1 bijwerken] om de taalverwijzingen op de hernoemde pagina te kunnen beheren.',
 	'wbc-comment-remove' => 'Het gekoppelde Wikidataitem is verwijderd. De taalverwijzingen zijn verwijderd.',
 	'wbc-comment-linked' => 'Er is een Wikidataitem gekoppeld aan deze pagina.',
 	'wbc-comment-unlink' => 'Deze pagina is ontkoppeld van het Wikidataitem. De taalverwijzingen zijn verwijderd.',
@@ -714,6 +715,26 @@ $messages['tl'] = array(
 	'wbc-desc' => 'Kliyente para sa dugtong na Wikibase',
 	'wbc-editlinks' => 'Baguhin ang mga kawing',
 	'wbc-editlinkstitle' => 'Baguhin ang mga kawing na para sa interwika',
+);
+
+/** Ukrainian (українська)
+ * @author Ата
+ */
+$messages['uk'] = array(
+	'wbc-desc' => 'Клієнт для розширення Wikibase',
+	'wbc-after-page-move' => "Щоб виправити мовні посилання на перейменованій сторінці, Ви також можете [$1 оновити] пов'язаний елемент Вікіданих.",
+	'wbc-comment-remove' => "Пов'язаний елемент Вікіданих видалений. Мовні посилання видалені.",
+	'wbc-comment-linked' => 'Елемент Вікіданих посилався на цю сторінку.',
+	'wbc-comment-unlink' => "Ця сторінка була від'єднана від елемента Вікіданих. Мовні посилання видалені.",
+	'wbc-comment-restore' => "Пов'язаний елемент Вікіданих відновлений. Мовні посилання відновлені.",
+	'wbc-comment-update' => 'Мовні посилання оновлені.',
+	'wbc-comment-sitelink-add' => 'Додано мовне посилання: $1',
+	'wbc-comment-sitelink-change' => 'Мовне посилання змінено з $1 на $2',
+	'wbc-comment-sitelink-remove' => 'Мовне посилання видалено: $1',
+	'wbc-editlinks' => 'Редагувати посилання',
+	'wbc-editlinkstitle' => 'Редагувати міжмовні посилання',
+	'wbc-rc-hide-wikidata' => '$1 Вікідані',
+	'wbc-rc-show-wikidata-pref' => 'Показати зміни Вікіданих у списку нових редагувань',
 );
 
 /** Vietnamese (Tiếng Việt)
