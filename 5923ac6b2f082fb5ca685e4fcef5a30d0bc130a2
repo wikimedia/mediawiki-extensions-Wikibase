@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADfn///JI\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-17T10:29:47Z",
+      "side": 1,
+      "message": "firstMatch.aliases \u0026\u0026 firstMatch.\naliases.length \u003e 0\n\nwould be enough since this can only be an array or undefined.\n\nEven just \"firstMatch.aliases\" should be enough as long as the API result won\u0027t change again. Perhaps it would be best to assume that.",
+      "revId": "5923ac6b2f082fb5ca685e4fcef5a30d0bc130a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADfn///I0\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-17T10:29:47Z",
+      "side": 1,
+      "message": "same",
+      "revId": "5923ac6b2f082fb5ca685e4fcef5a30d0bc130a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADfn///Iw\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-17T10:29:47Z",
+      "side": 1,
+      "message": "same",
+      "revId": "5923ac6b2f082fb5ca685e4fcef5a30d0bc130a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
