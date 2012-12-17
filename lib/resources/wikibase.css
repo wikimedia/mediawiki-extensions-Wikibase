@@ -391,6 +391,11 @@ div.wb-claim-new .wb-snak-property-container {
 	background-color: #C0DAE5;
 }
 
+/**
+ * TODO: styling Claims with .wb-edit with blue color should be enough, don't do the same for
+ *  .wb-claim-new! Instead the sections for new Claims should have other classes so the whole
+ *  section can be styled independently.
+ */
 div.wb-claim-section .wb-edit,
 div.wb-claim-new {
 	background-color: #D6F3FF;
