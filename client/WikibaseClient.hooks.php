@@ -85,7 +85,6 @@ final class ClientHooks {
 			'includes/store/EntityCacheTable',
 			'includes/store/CachingSqlStore',
 			'includes/store/DirectSqlStore',
-			'includes/store/WikiPageEntityLookup',
 		);
 
 		foreach ( $testFiles as $file ) {
