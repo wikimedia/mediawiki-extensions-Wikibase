@@ -107,6 +107,12 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 	z-index: 99;
 }
 
+.wb-entity-undefinedinfo {
+	color: #505050;
+	font-style: italic;
+}
+
+
 /********** /BASIC LAYOUT **********/
 
 
