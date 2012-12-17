@@ -148,6 +148,7 @@ final class LibHooks {
 			'ChangeNotifier',
 			'ChangeHandler',
 			'ChangesTable',
+			'ReferencedEntitiesFinder',
 			'HashableObjectStorage',
 			'Template',
 			'TemplateRegistry',
