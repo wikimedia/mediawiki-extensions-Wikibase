@@ -69,6 +69,24 @@
       "revId": "4f82c46e5111ce42babf37348e7af2e14b5231ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADfn///KA\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-12-17T10:07:07Z",
+      "side": 1,
+      "message": "I don\u0027t quite agree. If there is bad code like this, not all developers have the time to look into this right away and to figure out where to put it. And in some cases, it would just make the whole thing more confusing. So I wouldn\u0027t blame Tobi here. Adding a Todo wouldn\u0027t harm though",
+      "parentUuid": "AAADcH///6M\u003d",
+      "revId": "4f82c46e5111ce42babf37348e7af2e14b5231ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
