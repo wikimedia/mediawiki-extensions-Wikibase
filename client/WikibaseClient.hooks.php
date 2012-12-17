@@ -76,6 +76,9 @@ final class ClientHooks {
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
+			'MockRepository',
+			'includes/LangLinkHandler',
+
 			'includes/CachedEntity',
 			'includes/ClientUtils',
 			'includes/EntityCacheUpdater',
@@ -463,61 +466,31 @@ final class ClientHooks {
 	 */
 	public static function onParserAfterParse( \Parser &$parser, &$text, \StripState $stripState ) {
 		wfProfileIn( __METHOD__ );
-		global $wgLanguageCode;
 
 		$parserOutput = $parser->getOutput();
 
 		// only run this once, for the article content and not interface stuff
 		//FIXME: this also runs for messages in EditPage::showEditTools! Ugh!
-		if ( ! $parser->getOptions()->getInterfaceMessage() ) {
-			$useRepoLinks = LangLinkHandler::useRepoLinks( $parser );
+		if ( $parser->getOptions()->getInterfaceMessage() ) {
+			return true;
+		}
 
-			if ( $useRepoLinks ) {
+		$langLinkHandler = new LangLinkHandler(
+			Settings::get( 'siteGlobalID' ),
+			Settings::get( 'namespaces' ),
+			ClientStoreFactory::getStore()->newSiteLinkTable(),
+			\Sites::singleton() );
 
-				$repoLinkItems = array();
+		$useRepoLinks = $langLinkHandler->useRepoLinks( $parser->getTitle(), $parser->getOutput() );
 
-				$repoLinks = LangLinkHandler::getEntityLinks( $parser );
+		if ( $useRepoLinks ) {
+			// add links
+			$langLinkHandler->addLinksFromRepository( $parser->getTitle(), $parser->getOutput() );
+		}
 
-				if ( count( $repoLinks ) > 0 ) {
-					LangLinkHandler::suppressRepoLinks( $parser, $repoLinks );
-
-					/**
-					 * @var SiteLink $link
-					 */
-					foreach ( $repoLinks as $link ) {
-						foreach ( $link->getSite()->getNavigationIds() as $navigationId ) {
-							if ( $navigationId !== $wgLanguageCode ) {
-								$repoLinkItems[] = $navigationId . ':' . $link->getPage();
-							}
-						}
-					}
-				}
-
-				// get interwiki lang links from local wikitext
-				$localLinks = $parserOutput->getLanguageLinks();
-
-				// building array with language codes from local links
-				$localLinkCodes = array();
-				foreach ( $localLinks as $localLink ) {
-					$matches = array();
-					preg_match( "/([^:]*):/", $localLink, $matches );
-					$localLinkCodes[] = $matches[1];
-				}
-
-				// use the local links as default and add missing links from the repo
-				foreach ( $repoLinkItems as $repoLink ) {
-					$matches = array();
-					preg_match( "/([^:]*):/", $repoLink, $matches );
-					if ( !in_array( $matches[1], $localLinkCodes ) ) {
-						$parserOutput->addLanguageLink( $repoLink );
-					}
-				}
-			}
-
-			if ( $useRepoLinks || Settings::get( 'alwaysSort' ) ) {
-				// sort links
-				SortUtils::sortLinks( $parserOutput->getLanguageLinks() );
-			}
+		if ( $useRepoLinks || Settings::get( 'alwaysSort' ) ) {
+			// sort links
+			SortUtils::sortLinks( $parserOutput->getLanguageLinks() );
 		}
 
 		wfProfileOut( __METHOD__ );

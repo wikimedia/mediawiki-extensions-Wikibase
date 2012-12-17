@@ -83,6 +83,9 @@ $wgAutoloadClasses['Wikibase\DirectSqlStore'] 		= $dir . 'includes/store/sql/Dir
 $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/EntityCacheTable.php';
 $wgAutoloadClasses['Wikibase\WikiPageEntityLookup'] = $dir . 'includes/store/sql/WikiPageEntityLookup.php';
 
+// tests/phpunit
+$wgAutoloadClasses['Wikibase\Test\MockRepository'] 		= $dir . 'tests/phpunit/MockRepository.php';
+
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
 $wgHooks['LoadExtensionSchemaUpdates'][] 		= '\Wikibase\ClientHooks::onSchemaUpdate';

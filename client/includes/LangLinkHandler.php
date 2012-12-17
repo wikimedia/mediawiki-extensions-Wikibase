@@ -1,6 +1,10 @@
 <?php
 
 namespace Wikibase;
+use Sites;
+use Site;
+use Title;
+use ParserOutput;
 
 /**
  * Handles language links.
@@ -28,32 +32,56 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Nikola Smolenski <smolensk@eunet.rs>
+ * @author Daniel Kinzler
+ * @author Katie Filbert
  */
 class LangLinkHandler {
 
+	protected $siteId;
+	protected $namespaces;
+	protected $siteLinksLookup;
+	protected $sites;
+
+	private $sitesByNavigationId = null;
+
 	/**
-	 * Finds the corresponding item and fetches its links from the entity.
+	 * Constructs a new LangLinkHandler using the given service instances.
 	 *
-	 * @since 0.1
+	 * @param str            $siteId The global site ID for the local wiki
+	 * @param array          $namespaces The list of namespaces for which language links should be handled.
+	 * @param SiteLinkLookup $siteLinksLookup A site link lookup service
+	 * @param Sites          $sites A site definition lookup service
+	 */
+	public function __construct( $siteId, array $namespaces,
+			SiteLinkLookup $siteLinksLookup, Sites $sites ) {
+		$this->siteId = $siteId;
+		$this->namespaces = $namespaces;
+		$this->siteLinksLookup = $siteLinksLookup;
+		$this->sites = $sites;
+	}
+
+	/**
+	 * Finds the corresponding item on the repository and returns the item's site links.
 	 *
-	 * @param \Parser $parser
+	 * @since    0.1
+	 *
+	 * @param Title $title
+	 *
 	 * @return SiteLink[]
 	 */
-	public static function getEntityLinks( \Parser $parser ) {
+	public function getEntityLinks( Title $title ) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking for sitelinks defined by the corresponding item on the wikibase repo." );
 
-		$siteLinkTable = ClientStoreFactory::getStore()->newSiteLinkTable();
-
-		$itemId = $siteLinkTable->getItemIdForLink(
-			Settings::get( 'siteGlobalID' ),
-			$parser->getTitle()->getFullText()
+		$itemId = $this->siteLinksLookup->getItemIdForLink(
+			$this->siteId,
+			$title->getFullText()
 		);
 
 		$links =  array();
 
 		if ( $itemId !== false ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $parser->getTitle()->getFullText() . " is " . $itemId );
-			$rawLinks = $siteLinkTable->getLinks( array( $itemId ) );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $title->getFullText() . " is " . $itemId );
+			$rawLinks = $this->siteLinksLookup->getLinks( array( $itemId ) );
 
 			/*
 			 * The links are returned as arrays with the following elements in specified order:
@@ -64,7 +92,7 @@ class LangLinkHandler {
 
 			$links = SiteLink::siteLinksFromArray( $rawLinks, 0, 1 );
 		} else {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": No corresponding item found for " . $parser->getTitle()->getFullText() );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": No corresponding item found for " . $title->getFullText() );
 		}
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Found " . count( $links ) . " links." );
@@ -79,18 +107,17 @@ class LangLinkHandler {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Parser $parser
+	 * @param \Title        $title
+	 * @param \ParserOutput $out
+	 *
 	 * @return boolean
 	 */
-	public static function useRepoLinks( \Parser $parser ) {
-		$title = $parser->getTitle();
-
+	public function useRepoLinks( Title $title, ParserOutput $out ) {
 		// use repoLinks in only the namespaces specified in settings
-		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
-			$nel = self::getNoExternalLangLinks( $parser->getOutput() );
+		if ( in_array( $title->getNamespace(), $this->namespaces ) ) {
+			$nel = self::getNoExternalLangLinks( $out );
 
-			// unsets all the repolinks
-			if( array_key_exists( '*', $nel ) ) {
+			if( in_array( '*', $nel ) ) {
 				return false;
 			}
 			return true;
@@ -99,56 +126,52 @@ class LangLinkHandler {
 	}
 
 	/**
-	 * Suppress specific repo interwiki links
+	 * Returns a filtered version of $repoLinks, containing only links that should be considered
+	 * for combining with the local inter-language links. This takes into account the
+	 * {{#noexternallanglinks}} parser function, and also removed any link to
+	 * this wiki itself.
+	 *
+	 * This function does not remove links to wikis for which there is already an
+	 * inter-language link defined in the local wikitext. This is done later
+	 * by getEffectiveRepoLinks().
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Parser $parser
-	 * @param SiteLink[] $repoLinks
+	 * @param ParserOutput $out
+	 * @param array $repoLinks An array that uses global site IDs as keys.
 	 *
-	 * @return boolean true
+	 * @return array A filtered copy of $repoLinks, which any inappropriate
+	 *         entries removed.
 	 */
-	public static function suppressRepoLinks( \Parser $parser, &$repoLinks ) {
-		$out = $parser->getOutput();
+	public function suppressRepoLinks( ParserOutput $out, $repoLinks ) {
 		$nel = self::getNoExternalLangLinks( $out );
 
-		// unset only specified repolinks
-		if ( is_array( $repoLinks ) && is_array( $nel ) ) {
+		foreach ( $nel as $code ) {
+			$site = $this->getSiteByNavigationId( $code );
 
-			// Remove the links specified by noexternallanglinks parser function.
-			foreach ( array_keys( $nel ) as $code ) {
-				foreach ( $repoLinks as $key => &$repoLink ) {
-					// site corresponding to the $nel code specified and site group
-					$site = \SitesTable::singleton()->selectRow( null, array(
-						'language' => $code,
-						'group' => Settings::get( 'siteGroup' )
-					) );
-
-					// check if site is found or not
-					if ( $site !== false ) {
-						$nelGlobalId = $site->getGlobalId();
-
-						// global id for the repo link
-						$repoLinkGlobalId = $repoLink->getSite()->getGlobalId();
-
-						if ( $repoLinkGlobalId == $nelGlobalId ) {
-							unset( $repoLinks[$key] );
-						}
-					}
-				}
+			if ( $site === false ) {
+				continue;
 			}
+
+			$wiki = $site->getGlobalId();
+			unset( $repoLinks[$wiki] );
 		}
-		return true;
+
+		unset( $repoLinks[$this->siteId] ); // remove self-link
+
+		return $repoLinks;
 	}
 
 	/**
-	 * Get no_external_interlang parser property.
+	 * Get the noexternallanglinks page property from the ParserOutput,
+	 * which is set by the {{#noexternallanglinks}} parser function.
 	 *
 	 * @param \ParserOutput $out
 	 *
-	 * @return Array Empty array if not set.
+	 * @return Array A list of language codes, identifying which repository links to ignore.
+	 *         Empty if {{#noexternallanglinks}} was not used on the page.
 	 */
-	public static function getNoExternalLangLinks( \ParserOutput $out ) {
+	public static function getNoExternalLangLinks( ParserOutput $out ) {
 		$nel = $out->getProperty( 'noexternallanglinks' );
 
 		if( empty( $nel ) ) {
@@ -160,4 +183,171 @@ class LangLinkHandler {
 		return $nel;
 	}
 
+	/**
+	 * Set the noexternallanglinks page property in the ParserOutput,
+	 * which is set by the {{#noexternallanglinks}} parser function.
+	 *
+	 * @since 0.4
+	 *
+	 * @param \ParserOutput $out
+	 * @param array $noexternallanglinks a list of languages to suppress
+	 */
+	public static function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
+		$out->setProperty( 'noexternallanglinks', serialize( $noexternallanglinks )  );
+	}
+
+	/**
+	 * Returns a Site object for the given navigational ID (alias inter-language prefix).
+	 *
+	 * @since 0.4
+	 *
+	 * @todo: move this functionality into Sites/SiteList/SiteArray!
+	 *
+	 * @param string $id The navigation ID to find a site for.
+	 *
+	 * @return bool|Site The site with the given navigational ID, or false if not found.
+	 */
+	protected function getSiteByNavigationId( $id ) {
+		//FIXME: this needs to be moved into core, into SiteList resp. SiteArray!
+		if ( $this->sitesByNavigationId === null ) {
+			$this->sitesByNavigationId = array();
+
+			/* @var Site $site */
+			foreach ( $this->sites->getSites() as $site ) {
+				$ids = $site->getNavigationIds();
+
+				foreach ( $ids as $navId ) {
+					$this->sitesByNavigationId[$navId] = $site;
+				}
+			}
+		}
+
+		return isset( $this->sitesByNavigationId[$id] ) ? $this->sitesByNavigationId[$id] : false;
+	}
+
+	/**
+	 * Converts a list of interwiki links into an associative array that maps
+	 * global site IDs to the respective target pages on the designated wikis.
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $flatLinks
+	 *
+	 * @return array An associative array, using site IDs for keys
+	 *           and the target pages on the respective wiki as the associated value.
+	 */
+	protected function localLinksToArray( array $flatLinks ) {
+		$links = array();
+
+		foreach ( $flatLinks as $s ) {
+			$parts = explode( ':', $s, 2 );
+
+			if ( count($parts) === 2 ) {
+				$lang = $parts[0];
+				$page = $parts[1];
+
+				$site = $this->getSiteByNavigationId( $lang );
+
+				if ( $site ) {
+					$wiki = $site->getGlobalId();
+					$links[$wiki] = $page;
+				} else {
+					wfWarn( "Failed to map interlanguage prefix $lang to a global site ID." );
+				}
+			}
+		}
+
+		return $links;
+	}
+
+	/**
+	 * Converts a list of SiteLink objects into an associative array that maps
+	 * global site IDs to the respective target pages on the designated wikis.
+	 *
+	 * @since 0.4
+	 *
+	 * @param SiteLink[] $repoLinks
+	 *
+	 * @return array An associative array, using site IDs for keys
+	 *         and the target pages on the respective wiki as the associated value.
+	 */
+	protected function repoLinksToArray( array $repoLinks ) {
+		$links = array();
+
+		/* @var SiteLink $link */
+		foreach ( $repoLinks as $link ) {
+			$wiki = $link->getSite()->getGlobalId();
+			$page = $link->getPage();
+
+			$links[$wiki] = $page;
+		}
+
+		return $links;
+	}
+
+	/**
+	 * Look up sitelinks for the given title on the repository and filter them
+	 * taking into account any applicable configuration and any use of the
+	 * {{#noexternallanglinks}} function on the page.
+	 *
+	 * The result is an associative array of links that should be added to the
+	 * current page, excluding any target languages for which there already is a
+	 * link on the page.
+	 *
+	 * @since 0.4
+	 *
+	 * @param Title        $title The page's title
+	 * @param ParserOutput $out   Parsed representation of the page
+	 *
+	 * @return \Wikibase\SiteLink[] An associative array, using site IDs for keys
+	 *         and the target pages in the respective languages as the associated value.
+	 */
+	public function getEffectiveRepoLinks( Title $title, ParserOutput $out ) {
+		if ( !$this->useRepoLinks( $title, $out ) ) {
+			return array();
+		}
+
+		$onPageLinks = $out->getLanguageLinks();
+		$onPageLinks = $this->localLinksToArray( $onPageLinks );
+
+		$repoLinks = $this->getEntityLinks( $title );
+		$repoLinks = $this->repoLinksToArray( $repoLinks );
+		$repoLinks = $this->suppressRepoLinks( $out, $repoLinks );
+
+		$repoLinks = array_diff_key( $repoLinks, $onPageLinks ); // remove local links
+
+		return $repoLinks;
+	}
+
+	/**
+	 * Look up sitelinks for the given title on the repository and add them
+	 * to the ParserOutput object, taking into account any applicable
+	 * configuration and any use of the {{#noexternallanglinks}} function on the page.
+	 *
+	 * The language links are not sorted, call sortLanguageLinks() to do that.
+	 *
+	 * @since 0.4
+	 *
+	 * @param \Title        $title The page's title
+	 * @param \ParserOutput $out   Parsed representation of the page
+	 */
+	public function addLinksFromRepository( Title $title, ParserOutput $out ) {
+		$repoLinks = $this->getEffectiveRepoLinks( $title, $out );
+
+		foreach ( $repoLinks as $wiki => $page ) {
+			$site = $this->sites->getSite( $wiki );
+
+			$nav = $site->getNavigationIds();
+			$nav = array_values( $nav );
+
+			if ( isset( $nav[0] ) ) {
+				$lang = $nav[0];
+
+				$link = "$lang:$page";
+				$out->addLanguageLink( $link );
+			} else {
+				wfWarn( "No interlanguage prefix found for $wiki." );
+			}
+		}
+	}
 }
