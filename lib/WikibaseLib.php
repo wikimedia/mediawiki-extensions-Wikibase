@@ -90,10 +90,12 @@ $wgAutoloadClasses['Wikibase\LibHooks'] 			= $dir . 'WikibaseLib.hooks.php';
 
 // includes
 $wgAutoloadClasses['Wikibase\ByPropertyIdArray'] 		= $dir . 'includes/ByPropertyIdArray.php';
+$wgAutoloadClasses['Wikibase\CachingEntityLoader'] 		= $dir . 'includes/CachingEntityLoader.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 			= $dir . 'includes/ChangeNotifier.php';
 $wgAutoloadClasses['Wikibase\ChangesTable'] 			= $dir . 'includes/ChangesTable.php';
 $wgAutoloadClasses['Wikibase\DiffView'] 				= $dir . 'includes/DiffView.php';
+$wgAutoloadClasses['Wikibase\EntityLoader'] 			= $dir . 'includes/EntityLoader.php';
 $wgAutoloadClasses['Wikibase\Lib\GuidGenerator'] 		= $dir . 'includes/GuidGenerator.php';
 $wgAutoloadClasses['Wikibase\Lib\V4GuidGenerator'] 		= $dir . 'includes/GuidGenerator.php';
 $wgAutoloadClasses['Wikibase\Lib\ClaimGuidGenerator'] 	= $dir . 'includes/GuidGenerator.php';
@@ -104,8 +106,7 @@ $wgAutoloadClasses['Wikibase\Template'] 				= $dir . 'includes/TemplateRegistry.
 $wgAutoloadClasses['Wikibase\TemplateRegistry'] 		= $dir . 'includes/TemplateRegistry.php';
 $wgAutoloadClasses['Wikibase\MapHasher'] 				= $dir . 'includes/MapHasher.php';
 $wgAutoloadClasses['Wikibase\MapValueHasher'] 			= $dir . 'includes/MapValueHasher.php';
-$wgAutoloadClasses['Wikibase\Reference'] 				= $dir . 'includes/Reference.php';
-$wgAutoloadClasses['Wikibase\ReferenceObject'] 			= $dir . 'includes/ReferenceObject.php';
+$wgAutoloadClasses['Wikibase\ReferencedEntitiesFinder'] = $dir . 'includes/ReferencedEntitiesFinder.php';
 $wgAutoloadClasses['Wikibase\ObjectComparer'] 			= $dir . 'includes/ObjectComparer.php';
 $wgAutoloadClasses['Wikibase\Settings'] 				= $dir . 'includes/Settings.php';
 $wgAutoloadClasses['Wikibase\SettingsArray'] 			= $dir . 'includes/SettingsArray.php';
