@@ -69,8 +69,12 @@ final class LibHooks {
 				),
 				'dataTypes' => array(
 					'wikibase-item',
+
 					'commonsMedia',
-					//'string',
+					'geo-coordinate',
+					'quantity',
+					'monolingual-text',
+					'multilingual-text',
 				),
 				'entityNamespaces' => array()
 			)
