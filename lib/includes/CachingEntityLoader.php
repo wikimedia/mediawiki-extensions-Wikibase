@@ -90,7 +90,7 @@ class CachingEntityLoader implements EntityLoader {
 
 		// TODO: we really want batch lookup here :)
 		foreach ( $propsToLoad as $entityId ) {
-			$loadedProps[$entityId->getPrefixedId] = $this->getEntity( $entityId );
+			$loadedProps[$entityId->getPrefixedId()] = $this->getEntity( $entityId );
 		}
 
 		return $loadedProps;
