@@ -95,6 +95,7 @@ $wgAutoloadClasses['Wikibase\RepoHooks'] 				= $dir . 'Wikibase.hooks.php';
 // includes
 $wgAutoloadClasses['Wikibase\Autocomment']				= $dir . 'includes/Autocomment.php';
 $wgAutoloadClasses['Wikibase\CachingEntityLoader']      = $dir . 'includes/CachingEntityLoader.php';
+$wgAutoloadClasses['Wikibase\DataTypeSelector']			= $dir . 'includes/DataTypeSelector.php';
 $wgAutoloadClasses['Wikibase\EditEntity'] 				= $dir . 'includes/EditEntity.php';
 $wgAutoloadClasses['Wikibase\EntityContentDiffView'] 	= $dir . 'includes/EntityContentDiffView.php';
 $wgAutoloadClasses['Wikibase\ItemContentDiffView'] 		= $dir . 'includes/ItemContentDiffView.php';

@@ -104,6 +104,11 @@ class SpecialNewProperty extends SpecialCreateEntity {
 	 * @see SpecialCreateEntity::additionalFormElements()
 	 */
 	protected function additionalFormElements() {
+		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+		$dataTypeFactory = $libRegistry->getDataTypeFactory();
+
+		$selector = new \Wikibase\DataTypeSelector( $dataTypeFactory->getTypes(), $this->getLanguage()->getCode() );
+
 		return parent::additionalFormElements()
 			. Html::element(
 				'label',
@@ -113,44 +118,8 @@ class SpecialNewProperty extends SpecialCreateEntity {
 				),
 				$this->msg( 'wikibase-newproperty-datatype' )->text()
 			)
-			. $this->getDataTypes()
+			. $selector->getHtml( 'wb-newproperty-datatype' )
 			. Html::element( 'br' );
-	}
-
-	protected function getDataTypes() {
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-		$dataTypeFactory = $libRegistry->getDataTypeFactory();
-
-		$dataTypes = array();
-		$langCode = $this->getLanguage()->getCode();
-
-		foreach ( $dataTypeFactory->getTypes() as $dataType ) {
-			$dataTypes[$dataType->getId()] = $dataType->getLabel( $langCode );
-		}
-
-		natcasesort( $dataTypes );
-
-		$html = '';
-
-		foreach ( $dataTypes as $typeId => $typeLabel ) {
-			$html .= Html::element(
-				'option',
-				array( 'value' => $typeId ),
-				$typeLabel
-			);
-		}
-
-		$html = Html::rawElement(
-			'select',
-			array(
-				'name' => 'datatype',
-				'id' => 'wb-newproperty-datatype',
-				'class' => 'wb-select'
-			),
-			$html
-		);
-
-		return $html;
 	}
 
 	/**
