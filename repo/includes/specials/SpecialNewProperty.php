@@ -1,6 +1,7 @@
 <?php
 
-use Wikibase\PropertyContent, Wikibase\EntityContent;
+use Wikibase\PropertyContent;
+use Wikibase\EntityContent;
 
 /**
  * Page for creating new Wikibase properties.
@@ -122,26 +123,36 @@ class SpecialNewProperty extends SpecialCreateEntity {
 		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
 		$dataTypeFactory = $libRegistry->getDataTypeFactory();
 
+		$dataTypes = array();
+		$langCode = $this->getLanguage()->getCode();
+
+		foreach ( $dataTypeFactory->getTypes() as $dataType ) {
+			$dataTypes[$dataType->getId()] = $dataType->getLabel( $langCode );
+		}
+
+		natcasesort( $dataTypes );
+
 		$html = '';
 
-		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $typeId ) {
+		foreach ( $dataTypes as $typeId => $typeLabel ) {
 			$html .= Html::element(
 				'option',
 				array( 'value' => $typeId ),
-				$dataTypeFactory->getType( $typeId )->getLabel( $this->getLanguage()->getCode() )
+				$typeLabel
 			);
 		}
 
-		return
-			\Html::rawElement(
-				'select',
-				array(
-					'name' => 'datatype',
-					'id' => 'wb-newproperty-datatype',
-					'class' => 'wb-select'
-				),
-				$html
-			);
+		$html = Html::rawElement(
+			'select',
+			array(
+				'name' => 'datatype',
+				'id' => 'wb-newproperty-datatype',
+				'class' => 'wb-select'
+			),
+			$html
+		);
+
+		return $html;
 	}
 
 	/**
