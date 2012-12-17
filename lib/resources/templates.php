@@ -66,6 +66,9 @@ HTML;
 
 	// TODO: should put 'wb-claim' class to root node for consistency. This will also result in
 	//       the 'wb-claim-$2' which results in 'wb-claim-new' being on top.
+	// TODO: There should be another template wrapping the claim template when adding a new claim
+	//       via the general "add" link. That would allow more consistent styling using the wb-edit
+	//       class only.
 	$templates['wb-claim'] =
 <<<HTML
 <div class="wb-claim-container $1">
