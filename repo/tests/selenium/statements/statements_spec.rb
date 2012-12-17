@@ -8,29 +8,58 @@
 
 require 'spec_helper'
 
-item_label = generate_random_string(10)
-item_description = generate_random_string(20)
-prop_a_label = generate_random_string(10)
-prop_a_description = generate_random_string(20)
-prop_a_datatype = "Commons media file"
+num_items = 1
+num_props_cm = 2
+num_props_item = 1
+
+# items
+count = 0
+items = Array.new
+while count < num_items do
+  items.push({"label"=>generate_random_string(10), "description"=>generate_random_string(20)})
+  count = count + 1
+end
+
+# commons media properties
+count = 0
+properties_cm = Array.new
+while count < num_props_cm do
+  properties_cm.push({"label"=>generate_random_string(10), "description"=>generate_random_string(20), "datatype"=>"Commons media file"})
+  count = count + 1
+end
+
+# item properties
+count = 0
+properties_item = Array.new
+while count < num_props_item do
+  properties_item.push({"label"=>generate_random_string(10), "description"=>generate_random_string(20), "datatype"=>"Item"})
+  count = count + 1
+end
+
 statement_value = generate_random_string(10)
 statement_value_changed = generate_random_string(10)
 
 describe "Check statements UI" do
   before :all do
-    # set up: create item & property
-    visit_page(CreateItemPage) do |page|
-      page.create_new_item(item_label, item_description)
+    # set up: create items & properties
+    items.each do |item|
+      visit_page(CreateItemPage) do |page|
+        item['id'] = page.create_new_item(item['label'], item['description'])
+        item['url'] = page.current_url
+      end
     end
-    visit_page(NewPropertyPage) do |page|
-      page.create_new_property(prop_a_label, prop_a_description, prop_a_datatype)
+    properties_cm.each do |property|
+      visit_page(NewPropertyPage) do |page|
+        property['id'] = page.create_new_property(property['label'], property['description'], property['datatype'])
+        property['url'] = page.current_url
+      end
     end
   end
 
   context "Check statements UI" do
     it "should check statement buttons behaviour" do
       on_page(ItemPage) do |page|
-        page.navigate_to_item
+        page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
         page.addStatement?.should be_true
         page.addStatement
@@ -50,10 +79,10 @@ describe "Check statements UI" do
     end
     it "should check entity suggestor behaviour" do
       on_page(ItemPage) do |page|
-        page.navigate_to_item
+        page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
         page.addStatement
-        page.entitySelectorInput = prop_a_label[0..8]
+        page.entitySelectorInput = properties_cm[0]["label"][0..8]
         ajax_wait
         page.wait_for_entity_selector_list
         page.statementValueInput?.should be_false
@@ -62,8 +91,8 @@ describe "Check statements UI" do
         page.firstEntitySelectorLink?.should be_true
         page.firstEntitySelectorLabel?.should be_true
         page.firstEntitySelectorDescription?.should be_true
-        page.firstEntitySelectorLabel.should == prop_a_label
-        page.firstEntitySelectorDescription.should == prop_a_description
+        page.firstEntitySelectorLabel.should == properties_cm[0]["label"]
+        page.firstEntitySelectorDescription.should == properties_cm[0]["description"]
         page.firstEntitySelectorLink
         ajax_wait
         page.wait_for_property_value_box
@@ -71,7 +100,7 @@ describe "Check statements UI" do
         page.entitySelectorInput_element.clear
         # TODO: still broken in UI - property-value input-box should be removed when property field is empty - bug caught in statements_bugs_spec
         #page.statementValueInput?.should be_false
-        page.entitySelectorInput = prop_a_label
+        page.entitySelectorInput = properties_cm[0]["label"]
         ajax_wait
         page.wait_for_entity_selector_list
         page.wait_for_property_value_box
@@ -90,34 +119,185 @@ describe "Check statements UI" do
     end
     it "should check adding a statement" do
       on_page(ItemPage) do |page|
-        page.navigate_to_item
+        page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
-        page.add_statement(prop_a_label, statement_value)
-        page.firstClaimName?.should be_true
-        page.firstClaimValue?.should be_true
+        page.add_statement(properties_cm[0]["label"], statement_value)
+        page.statement1Name?.should be_true
+        page.statement1ClaimValue1?.should be_true
         page.addStatement?.should be_true
         page.saveStatement?.should be_false
         page.cancelStatement?.should be_false
         page.editFirstStatement?.should be_true
-        page.firstClaimName.should == prop_a_label
-        page.firstClaimValue.should == statement_value
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == statement_value
+        page.statement1Link
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == properties_cm[0]["label"]
+        @browser.back
         @browser.refresh
         page.wait_for_entity_to_load
         page.addStatement?.should be_true
         page.editFirstStatement?.should be_true
-        page.firstClaimName.should == prop_a_label
-        page.firstClaimValue.should == statement_value
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == statement_value
+        page.statement1Link
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == properties_cm[0]["label"]
+      end
+    end
+    it "should check removing of claim/statement" do
+      on_page(ItemPage) do |page|
+        page.navigate_to items[0]["url"]
+        page.wait_for_entity_to_load
+        page.editFirstStatement
+        page.removeClaimButton?.should be_true
+        page.removeClaimButton
+        ajax_wait
+        page.wait_for_statement_request_finished
+        page.addStatement?.should be_true
+        page.editFirstStatement?.should be_false
+        page.statement1Name?.should be_false
+        page.statement1ClaimValue1?.should be_false
+        @browser.refresh
+        page.addStatement?.should be_true
+        page.editFirstStatement?.should be_false
+        page.statement1Name?.should be_false
+        page.statement1ClaimValue1?.should be_false
+      end
+    end
+    it "should check ESC/RETURN button behaviour" do
+      on_page(ItemPage) do |page|
+        page.navigate_to items[0]["url"]
+        page.wait_for_entity_to_load
+        # ESCAPE key
+        page.addStatement?.should be_true
+        page.addStatement
+        page.addStatement?.should be_false
+        page.entitySelectorInput = properties_cm[0]["label"]
+        page.entitySelectorInput_element.send_keys :escape
+        page.addStatement?.should be_true
+        page.entitySelectorInput?.should be_false
+        page.addStatement
+        page.entitySelectorInput = properties_cm[0]["label"]
+        ajax_wait
+        page.wait_for_property_value_box
+        page.statementValueInput?.should be_true
+        page.statementValueInput = statement_value
+        page.statementValueInput_element.send_keys :escape
+        page.addStatement?.should be_true
+        page.entitySelectorInput?.should be_false
+        page.statementValueInput?.should be_false
+        # RETURN key
+        page.addStatement
+        page.entitySelectorInput = properties_cm[0]["label"]
+        ajax_wait
+        page.wait_for_property_value_box
+        page.entitySelectorInput_element.send_keys :return
+        ajax_wait
+        page.statementValueInput?.should be_true
+        page.statementValueInput = statement_value
+        page.statementValueInput_element.send_keys :return
+        ajax_wait
+        page.wait_for_statement_request_finished
+        page.addStatement?.should be_true
+        page.entitySelectorInput?.should be_false
+        page.statementValueInput?.should be_false
+        page.remove_all_claims
+      end
+    end
+    it "should check adding multiple claims to same statement" do
+      on_page(ItemPage) do |page|
+        page.navigate_to items[0]["url"]
+        page.wait_for_entity_to_load
+        values = [generate_random_string(10), generate_random_string(10), generate_random_string(10)]
+        page.add_statement(properties_cm[0]["label"], values[0])
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == values[0]
+        page.statement1ClaimValue2?.should be_false
+        page.statement1ClaimValue3?.should be_false
+        page.add_statement(properties_cm[0]["label"], values[1])
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == values[0]
+        page.statement1ClaimValue2.should == values[1]
+        page.statement1ClaimValue3?.should be_false
+        page.add_statement(properties_cm[0]["label"], values[2])
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == values[0]
+        page.statement1ClaimValue2.should == values[1]
+        page.statement1ClaimValue3.should == values[2]
+        @browser.refresh
+        # TODO: bug 43200 - wbcreateclaim overrides existing claim with new one when not reloading page before adding new claim
+        #page.statement1ClaimValue1.should == values[0]
+        #page.statement1ClaimValue2.should == values[1]
+        #page.statement1ClaimValue3.should == values[2]
+        page.remove_all_claims
+        page.statement1ClaimValue1?.should be_false
+        page.statement1Name?.should be_false
+        @browser.refresh
+        page.statement1ClaimValue1?.should be_false
+        page.statement1Name?.should be_false
+        page.add_statement(properties_cm[0]["label"], values[0])
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == values[0]
+        page.statement1ClaimValue2?.should be_false
+        page.statement1ClaimValue3?.should be_false
+        page.add_claim_to_first_statement(values[1])
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == values[0]
+        page.statement1ClaimValue2.should == values[1]
+        page.statement1ClaimValue3?.should be_false
+        page.add_claim_to_first_statement(values[2])
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == values[0]
+        page.statement1ClaimValue2.should == values[1]
+        page.statement1ClaimValue3.should == values[2]
+        @browser.refresh
+        # TODO: bug 43200 - wbcreateclaim overrides existing claim with new one when not reloading page before adding new claim
+        #page.statement1ClaimValue1.should == values[0]
+        #page.statement1ClaimValue2.should == values[1]
+        #page.statement1ClaimValue3.should == values[2]
+        page.remove_all_claims
+      end
+    end
+    it "should check adding multiple statements & claims" do
+      on_page(ItemPage) do |page|
+        page.navigate_to items[0]["url"]
+        page.wait_for_entity_to_load
+        statement1_values = [generate_random_string(10), generate_random_string(10)]
+        statement2_values = [generate_random_string(10), generate_random_string(10)]
+        page.add_statement(properties_cm[0]["label"], statement1_values[0])
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == statement1_values[0]
+        page.add_statement(properties_cm[1]["label"], statement2_values[0])
+        page.statement2Name.should == properties_cm[1]["label"]
+        page.statement2ClaimValue1.should == statement2_values[0]
+        page.add_statement(properties_cm[0]["label"], statement1_values[1])
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue2.should == statement1_values[1]
+        page.add_statement(properties_cm[1]["label"], statement2_values[1])
+        page.statement2Name.should == properties_cm[1]["label"]
+        page.statement2ClaimValue2.should == statement2_values[1]
+        # TODO: bug 43200 - removing claims fails, cause they are not existing because of bug 43200
+        #page.remove_all_claims
+        #page.statement1Name?.should be_false
       end
     end
     it "should check button behaviour when editing a statement" do
       on_page(ItemPage) do |page|
-        page.navigate_to_item
+        page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
+        # make sure no claims displayed on page
+        page.remove_all_claims
+        @browser.refresh # because of bug 43200
+        page.add_statement(properties_cm[0]["label"], statement_value)
         page.editFirstStatement
+        page.saveStatement?.should be_true
+        page.cancelStatement?.should be_true
+        page.removeClaimButton?.should be_true
         page.entitySelectorInput?.should be_false
         page.statementValueInput?.should be_true
         page.statementValueInput.should == statement_value
-        page.firstClaimName.should == prop_a_label
+        page.statement1Name.should == properties_cm[0]["label"]
         # TODO: still broken in UI - save-button shoud be disabled - bug caught in statements_bugs_spec
         #page.saveStatement?.should be_false
         page.cancelStatement?.should be_true
@@ -127,40 +307,40 @@ describe "Check statements UI" do
         page.statementValueInput = statement_value_changed
         page.saveStatement?.should be_true
         page.cancelStatement
-        page.firstClaimName?.should be_true
-        page.firstClaimValue?.should be_true
+        page.statement1Name?.should be_true
+        page.statement1ClaimValue1?.should be_true
         page.addStatement?.should be_true
         page.saveStatement?.should be_false
         page.cancelStatement?.should be_false
         page.editFirstStatement?.should be_true
-        page.firstClaimName.should == prop_a_label
-        page.firstClaimValue.should == statement_value
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == statement_value
       end
     end
     it "should check editing a statement" do
       on_page(ItemPage) do |page|
-        page.navigate_to_item
+        page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
         page.editFirstStatement
         page.statementValueInput_element.clear
         page.statementValueInput = statement_value_changed
         page.saveStatement
         ajax_wait
-        page.wait_for_statement_save_finished
-        page.firstClaimName?.should be_true
-        page.firstClaimValue?.should be_true
+        page.wait_for_statement_request_finished
+        page.statement1Name?.should be_true
+        page.statement1ClaimValue1?.should be_true
         page.addStatement?.should be_true
         page.saveStatement?.should be_false
         page.cancelStatement?.should be_false
         page.editFirstStatement?.should be_true
-        page.firstClaimName.should == prop_a_label
-        page.firstClaimValue.should == statement_value_changed
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == statement_value_changed
         @browser.refresh
         page.wait_for_entity_to_load
         page.addStatement?.should be_true
         page.editFirstStatement?.should be_true
-        page.firstClaimName.should == prop_a_label
-        page.firstClaimValue.should == statement_value_changed
+        page.statement1Name.should == properties_cm[0]["label"]
+        page.statement1ClaimValue1.should == statement_value_changed
       end
     end
   end
