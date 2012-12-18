@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, Sites, MediaWikiSite;
+use MWException, FormatJson;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
@@ -498,7 +499,7 @@ abstract class EntityView extends \ContextSource {
 
 		// register JS stuff
 		$editableView = $options->getEditSection(); //XXX: apparently, EditSections isn't included in the parser cache key?!
-		static::registerJsConfigVars( $out, $entity, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
+		$this->registerJsConfigVars( $out, $entity, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
 
 		$out->addParserOutput( $pout );
 		wfProfileOut( __METHOD__ );
@@ -511,7 +512,7 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \OutputPage    $out the OutputPage to add to
+	 * @param OutputPage    $out the OutputPage to add to
 	 * @param EntityContent  $entityContent the entity for which we want to add the JS config
 	 * @param string         $langCode the language used for showing the entity.
 	 * @param bool           $editableView whether entities on this page should be editable.
@@ -519,16 +520,16 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
 	 */
-	public static function registerJsConfigVars( OutputPage $out, EntityContent $entityContent, $langCode, $editableView = false  ) {
+	public function registerJsConfigVars( OutputPage $out, EntityContent $entityContent, $langCode, $editableView = false  ) {
 		wfProfileIn( __METHOD__ );
 
-		global $wgUser;
+		$user = $this->getUser();
 
 		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
-		$out->addJsConfigVars( 'wbUserIsBlocked', $wgUser->isBlockedFrom( $entityContent->getTitle() ) ); //NOTE: deprecated
+		$out->addJsConfigVars( 'wbUserIsBlocked', $user->isBlockedFrom( $entityContent->getTitle() ) ); //NOTE: deprecated
 
 		// tell JS whether the user can edit
-		$out->addJsConfigVars( 'wbUserCanEdit', $entityContent->userCanEdit( $wgUser, false ) ); //TODO: make this a per-entity info
+		$out->addJsConfigVars( 'wbUserCanEdit', $entityContent->userCanEdit( $user, false ) ); //TODO: make this a per-entity info
 		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
 
 		$out->addJsConfigVars( 'wbEntityType', static::VIEW_TYPE ); //TODO: use $entity->getEntity()->getType after prefixes got removed there
@@ -546,7 +547,7 @@ abstract class EntityView extends \ContextSource {
 
 		$out->addJsConfigVars(
 			'wbEntity',
-			\FormatJson::encode( $serializer->getSerialized( $entity ) )
+			FormatJson::encode( $serializer->getSerialized( $entity ) )
 		);
 
 		// make information about properties used in this entity available in JavaScript view:
@@ -555,7 +556,7 @@ abstract class EntityView extends \ContextSource {
 
 		$out->addJsConfigVars(
 			'wbUsedProperties',
-			\FormatJson::encode( $basicPropertyInfo )
+			FormatJson::encode( $basicPropertyInfo )
 		);
 
 		wfProfileOut( __METHOD__ );
@@ -604,17 +605,18 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * Returns a new view which is suited to render different variations of EntityContent.
 	 *
-	 * @param EntityContent $entity
-	 * @return mixed
-	 * @throws \MWException
-	 *
 	 * @since 0.2
+	 *
+	 * @param EntityContent $entity
+	 *
+	 * @return EntityView
+	 * @throws MWException
 	 */
 	public static function newForEntityContent( EntityContent $entity ) {
 		$type = $entity->getEntity()->getType();
 
 		if ( !in_array( $type, array_keys( self::$typeMap ) ) ) {
-			throw new \MWException( "No entity view known for handling entities of type '$type'" );
+			throw new MWException( "No entity view known for handling entities of type '$type'" );
 		}
 
 		$instance = new self::$typeMap[ $type ]();
