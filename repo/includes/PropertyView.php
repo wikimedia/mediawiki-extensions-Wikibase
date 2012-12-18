@@ -33,8 +33,6 @@ use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
  */
 class PropertyView extends EntityView {
 
-	const VIEW_TYPE = 'property';
-
 	/**
 	 * @see EntityView::getInnerHtml
 	 *

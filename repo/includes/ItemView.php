@@ -18,8 +18,6 @@ use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
  */
 class ItemView extends EntityView {
 
-	const VIEW_TYPE = 'item';
-
 	/**
 	 * @see EntityView::getInnerHtml
 	 */

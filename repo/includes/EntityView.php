@@ -37,8 +37,6 @@ use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPa
  */
 abstract class EntityView extends \ContextSource {
 
-	const VIEW_TYPE = 'entity';
-
 	/**
 	 * Maps entity types to the corresponding entity view.
 	 *
@@ -84,12 +82,12 @@ abstract class EntityView extends \ContextSource {
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 		$info = $this->extractEntityInfo( $entity, $lang );
-		$entityType = static::VIEW_TYPE;
+
 		$entityId = $entity->getEntity()->getPrefixedId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 		$html = '';
 
 		$html .= wfTemplate( 'wb-entity',
-			$entityType,
+			$entity->getEntity()->getType(),
 			$entityId,
 			$info['lang']->getCode(),
 			$info['lang']->getDir(),
@@ -524,6 +522,8 @@ abstract class EntityView extends \ContextSource {
 
 		global $wgUser;
 
+		$entity = $entityContent->getEntity();
+
 		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
 		$out->addJsConfigVars( 'wbUserIsBlocked', $wgUser->isBlockedFrom( $entityContent->getTitle() ) ); //NOTE: deprecated
 
@@ -531,10 +531,8 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbUserCanEdit', $entityContent->userCanEdit( $wgUser, false ) ); //TODO: make this a per-entity info
 		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
 
-		$out->addJsConfigVars( 'wbEntityType', static::VIEW_TYPE ); //TODO: use $entity->getEntity()->getType after prefixes got removed there
+		$out->addJsConfigVars( 'wbEntityType', $entity->getType() );
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
-
-		$entity = $entityContent->getEntity();
 
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $entity->getPrefixedId() );
