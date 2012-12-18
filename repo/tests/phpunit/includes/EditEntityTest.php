@@ -135,10 +135,10 @@ class EditEntityTest extends \MediaWikiTestCase {
 	public function provideHasEditConflict() {
 		/*
 		 * Test Revisions:
-		 * #0: labels: array( 'en' => 'foo' );
-		 * #1: labels: array( 'en' => 'bar' ); // by other user
-		 * #2: labels: array( 'en' => 'bar', 'de' => 'bar' );
-		 * #3: labels: array( 'en' => 'test', 'de' => 'bar' );
+		 * #0: label: array( 'en' => 'foo' );
+		 * #1: label: array( 'en' => 'bar' ); // by other user
+		 * #2: label: array( 'en' => 'bar', 'de' => 'bar' );
+		 * #3: label: array( 'en' => 'test', 'de' => 'bar' ), description: array( 'en' => 'more testing' );
 		*/
 
 		return array(
@@ -154,18 +154,27 @@ class EditEntityTest extends \MediaWikiTestCase {
 				false, // expected conflict
 				false, // expected fix
 			),
-			array( // #2: case III: user was last to edit
+			array( // #2: case IIIa: user was last to edit
 				array( // input data
 					'label' => array( 'de' => 'yarrr' ),
 				),
-				1,     // base rev index
+				2,     // base rev index
 				true,  // expected conflict
 				true,  // expected fix
 				array( // expected data
 					'label' => array( 'en' => 'test', 'de' => 'yarrr' ),
 				)
 			),
-			array( // #3: case IV: patch applied
+			array( // #3: case IIIb: user was last to edit, but intoduces a new operand
+				array( // input data
+					'label' => array( 'de' => 'yarrr' ),
+				),
+				1,     // base rev index
+				true,  // expected conflict
+				false, // expected failure, diff operand change
+				null
+			),
+			array( // #4: case IV: patch applied
 				array( // input data
 					'label' => array( 'nl' => 'test', 'fr' => 'frrrrtt' ),
 				),
@@ -177,7 +186,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 					                  'nl' => 'test', 'fr' => 'frrrrtt' ),
 				)
 			),
-			array( // #4: case V: patch failed, expect a conflict
+			array( // #5: case V: patch failed, expect a conflict
 				array( // input data
 					'label' => array( 'nl' => 'test', 'de' => 'bar' ),
 				),
@@ -260,7 +269,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 			foreach ( $expectedData as $key => $expectedValue ) {
 				$actualValue = $data[$key];
-				$this->assertArrayEquals( $expectedValue, $actualValue );
+				$this->assertArrayEquals( $expectedValue, $actualValue, false, true );
 			}
 		}
 	}

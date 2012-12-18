@@ -175,4 +175,97 @@ class ItemTest extends EntityTest {
 		return $this->arrayWrap( $items );
 	}
 
+	public function diffProvider() {
+		$argLists = parent::diffProvider();
+
+		// Addition of a sitelink
+		$entity0 = $this->getNewEmpty();
+		$entity1 = $this->getNewEmpty();
+		$entity1->addSiteLink( SiteLink::newFromText( 'enwiki', 'Berlin' ) );
+
+		$expected = new \Wikibase\EntityDiff( array(
+			'links' => new \Diff\Diff( array(
+				'enwiki' => new \Diff\DiffOpAdd( 'Berlin' ),
+			), true ),
+		) );
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+
+		// Removal of a sitelink
+		$entity0 = $this->getNewEmpty();
+		$entity0->addSiteLink( SiteLink::newFromText( 'enwiki', 'Berlin' ) );
+		$entity1 = $this->getNewEmpty();
+
+		$expected = new \Wikibase\EntityDiff( array(
+			'links' => new \Diff\Diff( array(
+				'enwiki' => new \Diff\DiffOpRemove( 'Berlin' ),
+			), true ),
+		) );
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+
+		// Modification of a sitelink
+		$entity0 = $this->getNewEmpty();
+		$entity0->addSiteLink( SiteLink::newFromText( 'enwiki', 'Berlin' ) );
+		$entity1 = $this->getNewEmpty();
+		$entity1->addSiteLink( SiteLink::newFromText( 'enwiki', 'Foobar' ) );
+
+		$expected = new \Wikibase\EntityDiff( array(
+			'links' => new \Diff\Diff( array(
+				'enwiki' => new \Diff\DiffOpChange( 'Berlin', 'Foobar' ),
+			), true ),
+		) );
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+		return $argLists;
+	}
+
+	public function patchProvider() {
+		$argLists = parent::patchProvider();
+
+		// Addition of a sitelink
+		$source = $this->getNewEmpty();
+		$patch = new \Wikibase\ItemDiff( array(
+			'links' => new \Diff\Diff( array( 'enwiki' => new \Diff\DiffOpAdd( 'Berlin' ) ), true )
+		) );
+		$expected = clone $source;
+		$expected->addSiteLink( SiteLink::newFromText( 'enwiki', 'Berlin' ) );
+
+		$argLists[] = array( $source, $patch, $expected );
+
+
+		// Retaining of a sitelink
+		$source = clone $expected;
+		$patch = new \Wikibase\ItemDiff();
+		$expected = clone $source;
+
+		$argLists[] = array( $source, $patch, $expected );
+
+
+		// Modification of a sitelink
+		$source = clone $expected;
+		$patch = new \Wikibase\ItemDiff( array(
+			'links' => new \Diff\Diff( array( 'enwiki' => new \Diff\DiffOpChange( 'Berlin', 'Foobar' ) ), true )
+		) );
+		$expected = $this->getNewEmpty();
+		$expected->addSiteLink( SiteLink::newFromText( 'enwiki', 'Foobar' ) );
+
+		$argLists[] = array( $source, $patch, $expected );
+
+
+		// Removal of a sitelink
+		$source = clone $expected;
+		$patch = new \Wikibase\ItemDiff( array(
+			'links' => new \Diff\Diff( array( 'enwiki' => new \Diff\DiffOpRemove( 'Foobar' ) ), true )
+		) );
+		$expected = $this->getNewEmpty();
+
+		$argLists[] = array( $source, $patch, $expected );
+
+		return $argLists;
+	}
+
 }
