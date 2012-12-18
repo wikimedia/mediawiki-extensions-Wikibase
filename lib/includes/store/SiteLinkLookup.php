@@ -101,4 +101,14 @@ interface SiteLinkLookup {
 	 */
 	public function getLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() );
 
+	/**
+	 * Returns an array of SiteLink for an EntityId
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return SiteLink[]
+	 */
+	public function getSiteLinksForItem( EntityId $entityId );
 }
