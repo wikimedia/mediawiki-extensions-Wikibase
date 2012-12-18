@@ -457,8 +457,12 @@ class EditEntity {
 		}
 
 		// apply the patch( base -> new ) to the current revision.
-		$this->newContent = $current->copy();
-		$patch->apply( $this->newContent->getEntity() );
+		$entity = $current->getEntity()->copy();
+
+		$entityPatcher = EntityPatcher::newForType( $entity->getType() );
+		$entity = $entityPatcher->getPatchedEntity( $entity, $patch );
+
+		$this->newContent = EntityContentFactory::singleton()->newFromEntity( $entity );
 
 		$this->status->warning( 'wikibase-conflict-patched' );
 		return true;
