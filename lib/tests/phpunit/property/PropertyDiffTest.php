@@ -1,6 +1,6 @@
 <?php
 namespace Wikibase\Test;
-use Wikibase\Entity;
+
 /**
  * Tests for the Wikibase\PropertyDiff class.
  *
@@ -37,14 +37,6 @@ class PropertyDiffTest extends EntityDiffTest {
 
 	public function provideApplyData() {
 		return parent::generateApplyData( \Wikibase\Property::ENTITY_TYPE );
-	}
-
-	/**
-	 *
-	 * @dataProvider provideApplyData
-	 */
-	public function testApply( Entity $a, Entity $b ) {
-		parent::testApply( $a, $b );
 	}
 
 }
