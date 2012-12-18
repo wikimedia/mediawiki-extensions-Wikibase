@@ -442,7 +442,10 @@ class EditEntity {
 		}
 
 		// detect conflicts against current revision
-		$cleanPatch = $patch->getApplicableDiff( $current->getEntity()->toArray() );
+		$patchedCurrent = $current->getEntity()->copy();
+		$patchedCurrent->patch( $patch );
+		$cleanPatch = $base->getEntity()->getDiff( $patchedCurrent );
+
 		$conflicts = $patch->count() - $cleanPatch->count();
 
 		if ( $conflicts > 0 ) {
@@ -457,8 +460,9 @@ class EditEntity {
 		}
 
 		// apply the patch( base -> new ) to the current revision.
-		$this->newContent = $current->copy();
-		$patch->apply( $this->newContent->getEntity() );
+		$entity = $current->getEntity()->copy();
+		$entity->patch( $patch );
+		$this->newContent = EntityContentFactory::singleton()->newFromEntity( $entity );
 
 		$this->status->warning( 'wikibase-conflict-patched' );
 		return true;

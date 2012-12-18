@@ -137,7 +137,6 @@ $wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/entity/Entity.php';
 // includes/item
 $wgAutoloadClasses['Wikibase\Item'] 				= $dir . 'includes/item/Item.php';
 $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/item/ItemDiff.php';
-$wgAutoloadClasses['Wikibase\ItemDiffView'] 		= $dir . 'includes/item/ItemDiffView.php';
 $wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/item/Item.php';
 
 // includes/modules
@@ -146,8 +145,6 @@ $wgAutoloadClasses['Wikibase\TemplateModule'] 			= $dir . 'includes/modules/Temp
 
 // includes/property
 $wgAutoloadClasses['Wikibase\Property'] 				= $dir . 'includes/property/Property.php';
-$wgAutoloadClasses['Wikibase\PropertyDiff'] 			= $dir . 'includes/property/PropertyDiff.php';
-$wgAutoloadClasses['Wikibase\PropertyDiffView'] 		= $dir . 'includes/property/PropertyDiffView.php';
 
 // includes/query
 $wgAutoloadClasses['Wikibase\Query'] 					= $dir . 'includes/query/Query.php';
