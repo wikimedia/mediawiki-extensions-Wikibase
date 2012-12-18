@@ -69,7 +69,7 @@ abstract class ViewEntityAction extends \ViewAction {
 			$isEditableView = $this->isPlainView();
 
 			$view = EntityView::newForEntityContent( $content );
-			$view::registerJsConfigVars(
+			$view->registerJsConfigVars(
 				$this->getOutput(),
 				$content,
 				$this->getLanguage()->getCode(),
