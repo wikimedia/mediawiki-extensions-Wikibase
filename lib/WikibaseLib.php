@@ -130,15 +130,17 @@ $wgAutoloadClasses['Wikibase\Claims'] 				= $dir . 'includes/claim/Claims.php';
 // includes/entity
 $wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/entity/Entity.php';
 $wgAutoloadClasses['Wikibase\EntityDiff'] 			= $dir . 'includes/entity/EntityDiff.php';
+$wgAutoloadClasses['Wikibase\EntityDiffer'] 		= $dir . 'includes/entity/EntityDiffer.php';
 $wgAutoloadClasses['Wikibase\EntityDiffView'] 		= $dir . 'includes/entity/EntityDiffView.php';
 $wgAutoloadClasses['Wikibase\EntityFactory'] 		= $dir . 'includes/entity/EntityFactory.php';
 $wgAutoloadClasses['Wikibase\EntityId'] 			= $dir . 'includes/entity/EntityId.php';
 $wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/entity/Entity.php';
+$wgAutoloadClasses['Wikibase\EntityPatcher'] 		= $dir . 'includes/entity/EntityPatcher.php';
 
 // includes/item
 $wgAutoloadClasses['Wikibase\Item'] 				= $dir . 'includes/item/Item.php';
 $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/item/ItemDiff.php';
-$wgAutoloadClasses['Wikibase\ItemDiffView'] 		= $dir . 'includes/item/ItemDiffView.php';
+$wgAutoloadClasses['Wikibase\ItemDiffer'] 			= $dir . 'includes/item/ItemDiffer.php';
 $wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/item/Item.php';
 
 // includes/modules
@@ -147,8 +149,6 @@ $wgAutoloadClasses['Wikibase\TemplateModule'] 			= $dir . 'includes/modules/Temp
 
 // includes/property
 $wgAutoloadClasses['Wikibase\Property'] 				= $dir . 'includes/property/Property.php';
-$wgAutoloadClasses['Wikibase\PropertyDiff'] 			= $dir . 'includes/property/PropertyDiff.php';
-$wgAutoloadClasses['Wikibase\PropertyDiffView'] 		= $dir . 'includes/property/PropertyDiffView.php';
 
 // includes/query
 $wgAutoloadClasses['Wikibase\Query'] 					= $dir . 'includes/query/Query.php';

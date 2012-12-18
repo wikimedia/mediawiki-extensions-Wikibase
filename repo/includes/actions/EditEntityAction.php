@@ -395,8 +395,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @param EntityDiff $diff
 	 */
 	protected function displayUndoDiff( EntityDiff $diff ) {
-		$diffView = $diff->getView();
-		$diffView->setContext( $this->getContext() );
+		$diffView = new EntityDiffView( array(), $diff, $this->getContext() );
 
 		$tableClass = 'diff diff-contentalign-' . htmlspecialchars( $this->getTitle()->getPageLanguage()->alignStart() );
 
@@ -598,25 +597,30 @@ class SubmitEntityAction extends EditEntityAction {
 
 		if ( $newerRevision->getId() == $latestRevision->getId() ) { // restore
 			$summary = $req->getText( 'wpSummary' );
+
 			if ( $summary === '' ) {
 				$summary = $this->makeRestoreSummary( $olderRevision, $newerRevision, $latestRevision );
 			}
 
 			if ( !$diff->isEmpty() ) {
+				$status = Status::newGood();
+				$status->warning( 'wikibase-empty-undo' );
+			} else {
 				// make the old content the new content.
 				// NOTE: conflict detection is not needed for a plain restore, it's not based on anything.
 				$edit = new EditEntity( $olderContent, $this->getUser() );
 				$status = $edit->attemptSave( $summary, 0, $token );
-			} else {
-				$status = Status::newGood();
-				$status->warning( 'wikibase-empty-undo' );
 			}
 		} else { // undo
 			$appDiff = $diff->getApplicableDiff( $latestContent->getEntity()->toArray() );
 
-			if ( !$appDiff->isEmpty() ) {
+			if ( $appDiff->isEmpty() ) {
+				$status = Status::newGood();
+				$status->warning( 'wikibase-empty-undo' );
+			} else {
 				$entity = $latestContent->getEntity();
-				$appDiff->apply( $entity );
+
+				$entity = EntityPatcher::newForType( $entity->getType() )->getPatchedEntity( $entity, $appDiff );
 
 				$summary = $req->getText( 'wpSummary' );
 				if ( $summary === '' ) {
@@ -627,9 +631,6 @@ class SubmitEntityAction extends EditEntityAction {
 				//      based on the latest revision.
 				$edit = new EditEntity( $latestContent, $this->getUser(), $latestRevision->getId() );
 				$status = $edit->attemptSave( $summary, 0, $token );
-			} else {
-				$status = Status::newGood();
-				$status->warning( 'wikibase-empty-undo' );
 			}
 		}
 
