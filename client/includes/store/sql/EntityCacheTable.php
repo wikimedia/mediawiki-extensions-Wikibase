@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use ORMTable;
+use MWException;
 
 /**
  * Represents the entity cache of a single cluster.
@@ -203,6 +204,37 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 		$cachedEntity = $this->selectRow( null, $where );
 
 		return $cachedEntity === false ? null : $cachedEntity->getEntity();
+	}
+
+	/**
+	 * @see EntityLookup::getEntities
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityID[] $entityIds
+	 * @param array|bool $revision
+	 *
+	 * @return Entity|null[]
+	 */
+	public function getEntities( array $entityIds, $revision = false ) {
+		$entities = array();
+
+		// TODO: we really want batch lookup here :)
+		foreach ( $entityIds as $key => $entityId ) {
+			$rev = $revision;
+
+			if ( is_array( $rev ) ) {
+				if ( !array_key_exists( $key, $rev ) ) {
+					throw new MWException( '$entityId has no revision specified' );
+				}
+
+				$rev = $rev[$key];
+			}
+
+			$entities[$entityId->getPrefixedId()] = $this->getEntity( $entityId, $rev );
+		}
+
+		return $entities;
 	}
 
 	/**

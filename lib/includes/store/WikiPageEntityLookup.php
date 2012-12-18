@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use MWException;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -225,6 +226,37 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 
 		wfProfileOut( __METHOD__ );
 		return $entity;
+	}
+
+	/**
+	 * @see EntityLookup::getEntities
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityID[] $entityIds
+	 * @param array|bool $revision
+	 *
+	 * @return Entity|null[]
+	 */
+	public function getEntities( array $entityIds, $revision = false ) {
+		$entities = array();
+
+		// TODO: we really want batch lookup here :)
+		foreach ( $entityIds as $key => $entityId ) {
+			$rev = $revision;
+
+			if ( is_array( $rev ) ) {
+				if ( !array_key_exists( $key, $rev ) ) {
+					throw new MWException( '$entityId has no revision specified' );
+				}
+
+				$rev = $rev[$key];
+			}
+
+			$entities[$entityId->getPrefixedId()] = $this->getEntity( $entityId, $rev );
+		}
+
+		return $entities;
 	}
 
 	/**

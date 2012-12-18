@@ -80,13 +80,11 @@ $wgAutoloadClasses['Wikibase\RecentChangesFilterOptions'] 	= $dir . 'includes/re
 $wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
 $wgAutoloadClasses['Wikibase\ClientStoreFactory'] 	= $dir . 'includes/store/ClientStoreFactory.php';
 $wgAutoloadClasses['Wikibase\EntityCache'] 			= $dir . 'includes/store/EntityCache.php';
-$wgAutoloadClasses['Wikibase\EntityLookup'] 		= $dir . 'includes/store/EntityLookup.php';
 
 // includes/store/sql
 $wgAutoloadClasses['Wikibase\CachingSqlStore'] 		= $dir . 'includes/store/sql/CachingSqlStore.php';
 $wgAutoloadClasses['Wikibase\DirectSqlStore'] 		= $dir . 'includes/store/sql/DirectSqlStore.php';
 $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/EntityCacheTable.php';
-$wgAutoloadClasses['Wikibase\WikiPageEntityLookup'] = $dir . 'includes/store/sql/WikiPageEntityLookup.php';
 
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';

@@ -143,11 +143,13 @@ final class LibHooks {
 
 			'store/SiteLinkLookup',
 			'store/SiteLinkTable',
+			'store/WikiPageEntityLookup',
 
 			'ByPropertyIdArray',
 			'ChangeNotifier',
 			'ChangeHandler',
 			'ChangesTable',
+			'ReferencedEntitiesFinder',
 			'HashableObjectStorage',
 			'Template',
 			'TemplateRegistry',
