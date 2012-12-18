@@ -67,7 +67,7 @@ class ApiGetClaims extends Api {
 		// TODO: hold into account props parameter
 		$serializer = new ClaimsSerializer();
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-		$serializedClaims = $serializer->getSerialized( new ClaimList( $claims ) );
+		$serializedClaims = $serializer->getSerialized( new Claims( $claims ) );
 
 		$this->getResult()->addValue(
 			null,
