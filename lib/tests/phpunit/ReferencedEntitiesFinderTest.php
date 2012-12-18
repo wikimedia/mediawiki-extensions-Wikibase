@@ -1,7 +1,11 @@
 <?php
 
 namespace Wikibase\Lib\Test;
+<<<<<<< HEAD
 use Wikibase\ClaimList;
+=======
+use Wikibase\Claims;
+>>>>>>> Replace Claims interface by ClaimList. Old interface made little sense
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\ClaimObject;
 use Wikibase\PropertyNoValueSnak;
@@ -133,7 +137,11 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 	public function testFindClaimLinks( array $claims, array $expected ) {
 		$linkFinder = new ReferencedEntitiesFinder( $this->getMockEntityLoader() );
 
+<<<<<<< HEAD
 		$actual = $linkFinder->findClaimLinks( new ClaimList( $claims ) );
+=======
+		$actual = $linkFinder->findClaimLinks( new Claims( $claims ) );
+>>>>>>> Replace Claims interface by ClaimList. Old interface made little sense
 
 		$this->assertArrayEquals( $expected, $actual );
 	}
