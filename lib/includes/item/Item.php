@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+use MWException;
+use Diff\Patcher;
 
 /**
  * Represents a single Wikibase item.
@@ -78,11 +80,13 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see   Item::removeSiteLink
+	 * Removes the sitelink with specified site ID if the Item has such a sitelink.
+	 * A page name can be provided to have removal only happen when it matches what is set.
+	 * A boolean is returned indicating if a link got removed or not.
 	 *
 	 * @since 0.1
 	 *
-	 * @param string      $siteId the target site's id
+	 * @param string $siteId the target site's id
 	 * @param bool|string $pageName he target page's name (in normalized form)
 	 *
 	 * @return bool Success indicator
@@ -100,6 +104,21 @@ class Item extends Entity {
 		}
 
 		return $success;
+	}
+
+	/**
+	 * Replaces the currently set sitelinks with the provided ones.
+	 *
+	 * @since 0.4
+	 *
+	 * @param SiteLink[] $siteLinks
+	 */
+	public function setSiteLinks( array $siteLinks ) {
+		$this->data['links'] = array();
+
+		foreach ( $siteLinks as $siteLink ) {
+			$this->data['links'][$siteLink->getSite()->getGlobalId()] = $siteLink->getPage();
+		}
 	}
 
 	/**
@@ -211,19 +230,6 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see Entity::getDiff
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $target
-	 *
-	 * @return ItemDiff
-	 */
-	public function getDiff( Entity $target ) {
-		return ItemDiff::newFromItems( $this, $target );
-	}
-
-	/**
 	 * @see Entity::newClaimBase
 	 *
 	 * @since 0.3
@@ -234,6 +240,48 @@ class Item extends Entity {
 	 */
 	protected function newClaimBase( Snak $mainSnak ) {
 		return new StatementObject( $mainSnak );
+	}
+
+	/**
+	 * @see Entity::entityToDiffArray
+	 *
+	 * @since 0.4
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return array
+	 * @throws MWException
+	 */
+	protected function entityToDiffArray( Entity $entity ) {
+		if ( !( $entity instanceof Item ) ) {
+			throw new MWException( 'ItemDiffer only accepts Item objects' );
+		}
+
+		$array = parent::entityToDiffArray( $entity );
+
+		$array['links'] = SiteLink::siteLinksToArray( $entity->getSiteLinks() );
+
+		return $array;
+	}
+
+	/**
+	 * @see Entity::patchSpecificFields
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityDiff $patch
+	 * @param Patcher $patcher
+	 */
+	protected function patchSpecificFields( EntityDiff $patch, Patcher $patcher ) {
+		if ( $patch instanceof ItemDiff ) {
+			$siteLinksDiff = $patch->getSiteLinkDiff();
+
+			if ( !$siteLinksDiff->isEmpty() ) {
+				$links = $this->data['links'];
+				$links = $patcher->patch( $links, $siteLinksDiff );
+				$this->data['links'] = $links;
+			}
+		}
 	}
 
 }

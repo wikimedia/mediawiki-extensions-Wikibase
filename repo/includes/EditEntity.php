@@ -463,15 +463,27 @@ class EditEntity {
 			return true;
 		}
 
+		// apply the patch( base -> new ) to the current revision.
+		$patchedCurrent = $current->getEntity()->copy();
+		$patchedCurrent->patch( $patch );
+
 		// detect conflicts against current revision
-		$cleanPatch = $patch->getApplicableDiff( $current->getEntity()->toArray() );
+		$cleanPatch = $current->getEntity()->getDiff( $patchedCurrent );
+
 		$conflicts = $patch->count() - $cleanPatch->count();
 
 		if ( $conflicts > 0 ) {
-			// patch doesn't apply cleanly. If it's a self-conflict apply anyway.
-
+			// patch doesn't apply cleanly
 			if ( self::userWasLastToEdit( $this->getUser()->getId(), $this->getBaseRevisionId() ) ) {
-				$this->status->warning( 'wikibase-self-conflict-patched' );
+				// it's a self-conflict
+				if ( $cleanPatch->count() === 0 ) {
+					// patch collapsed, possibly because of diff operation change from base to current
+					return false;
+				}
+				else {
+					// we still have a working patch, try to apply
+					$this->status->warning( 'wikibase-self-conflict-patched' );
+				}
 			} else {
 				// there are unresolvable conflicts.
 				return false;
@@ -482,9 +494,8 @@ class EditEntity {
 			$this->status->warning( 'wikibase-conflict-patched' );
 		}
 
-		// apply the patch( base -> new ) to the current revision.
-		$this->newContent = $current->copy();
-		$patch->apply( $this->newContent->getEntity() );
+		// create a new entity and tuck it away
+		$this->newContent = EntityContentFactory::singleton()->newFromEntity( $patchedCurrent );
 
 		return true;
 	}
