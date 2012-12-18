@@ -305,8 +305,17 @@ return call_user_func( function() {
 				'wikibase.store' // required for getting datatype from entityselector selected property
 			),
 			'messages' => array(
-				'wikibase-snak-unsupporteddatatype',
-				'datatypes-type-wikibase-item'
+				'wikibase-snakview-unsupporteddatatype',
+				'datatypes-type-wikibase-item',
+				'datatypes-type-string',
+				'datatypes-type-quantity',
+				'datatypes-type-monolingual-text',
+				'datatypes-type-multilingual-text',
+				'datatypes-type-number',
+				'datatypes-type-mediawiki-title',
+				'datatypes-type-unknown',
+				'datatypes-type-boolean',
+				'datatypes-type-geo-coordinate',
 			)
 		),
 
