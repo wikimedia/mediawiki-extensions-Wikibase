@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Test;
 use Wikibase\Term;
-use Diff\MapDiff;
+use Diff\Diff;
 
 /**
  * Tests Wikibase\LabelDescriptionDuplicateDetector.
@@ -116,10 +116,10 @@ class LabelDescriptionDuplicateDetectorTest extends \MediaWikiTestCase {
 	 * @param $label
 	 * @param $description
 	 * @param $shouldConflict
-	 * @param MapDiff $labelsDiff
-	 * @param MapDiff $descriptionDiff
+	 * @param Diff $labelsDiff
+	 * @param Diff $descriptionDiff
 	 */
-	public function testAddLabelDescriptionConflicts( $langCode, $label, $description, $shouldConflict, MapDiff $labelsDiff, MapDiff $descriptionDiff ) {
+	public function testAddLabelDescriptionConflicts( $langCode, $label, $description, $shouldConflict, Diff $labelsDiff, Diff $descriptionDiff ) {
 		$termCache = new MockTermCache();
 
 		$detector = new \Wikibase\LabelDescriptionDuplicateDetector();

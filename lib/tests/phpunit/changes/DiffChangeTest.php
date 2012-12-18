@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use Diff\MapDiff;
+use Diff\Diff;
+use Diff\MapDiffer;
 
 /**
  * Tests for the Wikibase\DiffChange class.
@@ -37,28 +38,31 @@ use Diff\MapDiff;
 class DiffChangeTest extends \MediaWikiTestCase {
 
 	public function diffProvider() {
+		$differ = new MapDiffer();
+
 		return array(
-			array( MapDiff::newEmpty() ),
-			array( MapDiff::newFromArrays( array(), array( 'en' => 'foo' ) ) ),
-			array( MapDiff::newFromArrays( array( 'en' => 'bar' ), array( 'en' => 'foo' ) ) ),
-			array( MapDiff::newFromArrays( array( 'en' => 'bar' ), array( 'de' => 'bar' ) ) ),
+			array( new Diff( array(), true ) ),
+			array( new Diff( $differ->doDiff( array(), array( 'en' => 'foo' ) ), true ) ),
+			array( new Diff( $differ->doDiff( array( 'en' => 'bar' ), array( 'en' => 'foo' ) ), true ) ),
+			array( new Diff( $differ->doDiff( array( 'en' => 'bar' ), array( 'de' => 'bar' ) ), true ) ),
 		);
 	}
 
 	/**
-	 * @param MapDiff $diff
+	 * @param Diff $diff
 	 * @dataProvider diffProvider
 	 */
-	public function testNewFromDiff( MapDiff $diff ) {
+	public function testNewFromDiff( Diff $diff ) {
 		$change = \Wikibase\DiffChange::newFromDiff( $diff );
 
 		$this->assertEquals( $diff->isEmpty(), $change->isEmpty() );
 
-		$change->setDiff( MapDiff::newEmpty() );
+		$change->setDiff( new Diff() );
 
 		$this->assertTrue( $change->isEmpty() );
 
-		$diff = MapDiff::newFromArrays( array(), array( 'en' => 'foo' ) );
+		$differ = new MapDiffer();
+		$diff = new Diff( $differ->doDiff( array(), array( 'en' => 'foo' ) ), true );
 
 		$change->setDiff( $diff );
 

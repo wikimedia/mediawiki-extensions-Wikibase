@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Diff\MapDiff;
+use Diff\Diff;
 use Diff\DiffOp;
 
 
@@ -90,10 +91,10 @@ abstract class EntityDiff extends MapDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Diff\MapDiff $aliasesOps
+	 * @param Diff $aliasesOps
 	 * @param Entity $entity
 	 */
-	private function applyAliases( MapDiff $aliasesOps, Entity $entity ) {
+	private function applyAliases( Diff $aliasesOps, Entity $entity ) {
 		foreach ( $aliasesOps as $lang => $ops ) {
 			foreach ( $ops as $op ) {
 				$this->applyAlias( $lang, $op, $entity );
@@ -134,10 +135,10 @@ abstract class EntityDiff extends MapDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Diff\MapDiff $labelOps
+	 * @param Diff $labelOps
 	 * @param Entity $entity
 	 */
-	private function applyLabels( MapDiff $labelOps, Entity $entity ) {
+	private function applyLabels( Diff $labelOps, Entity $entity ) {
 		foreach ( $labelOps as $lang => $op ) {
 			$this->applyLabel( $lang, $op, $entity );
 		}
@@ -156,7 +157,7 @@ abstract class EntityDiff extends MapDiff {
 	 *
 	 * @return bool true
 	 */
-	private function applyLabel( $lang, \Diff\DiffOp $diffOp, Entity $entity ) {
+	private function applyLabel( $lang, DiffOp $diffOp, Entity $entity ) {
 		$type = $diffOp->getType();
 		if ( $type === "add" ) {
 			$entity->setLabel( $lang, $diffOp->getNewValue() );
@@ -175,10 +176,10 @@ abstract class EntityDiff extends MapDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Diff\MapDiff $descriptionOps
+	 * @param Diff $descriptionOps
 	 * @param Entity $entity
 	 */
-	private function applyDescriptions( MapDiff $descriptionOps, Entity $entity ) {
+	private function applyDescriptions( Diff $descriptionOps, Entity $entity ) {
 		foreach ( $descriptionOps as $lang => $op ) {
 			$this->applyDescription( $lang, $op, $entity );
 		}
@@ -197,7 +198,7 @@ abstract class EntityDiff extends MapDiff {
 	 *
 	 * @return bool true
 	 */
-	private function applyDescription( $lang, \Diff\DiffOp $diffOp, Entity $entity ) {
+	private function applyDescription( $lang, DiffOp $diffOp, Entity $entity ) {
 		$type = $diffOp->getType();
 		if ( $type === "add" ) {
 			$entity->setDescription( $lang, $diffOp->getNewValue()  );
@@ -212,36 +213,36 @@ abstract class EntityDiff extends MapDiff {
 	}
 
 	/**
-	 * Returns a MapDiff object with the aliases differences.
+	 * Returns a Diff object with the aliases differences.
 	 *
 	 * @since 0.1
 	 *
-	 * @return MapDiff
+	 * @return Diff
 	 */
 	public function getAliasesDiff() {
-		return isset( $this['aliases'] ) ? $this['aliases'] : new \Diff\MapDiff( array() );
+		return isset( $this['aliases'] ) ? $this['aliases'] : new Diff( array(), true );
 	}
 
 	/**
-	 * Returns a MapDiff object with the labels differences.
+	 * Returns a Diff object with the labels differences.
 	 *
 	 * @since 0.1
 	 *
-	 * @return MapDiff
+	 * @return Diff
 	 */
 	public function getLabelsDiff() {
-		return isset( $this['label'] ) ? $this['label'] : new \Diff\MapDiff( array() );
+		return isset( $this['label'] ) ? $this['label'] : new Diff( array(), true );
 	}
 
 	/**
-	 * Returns a MapDiff object with the descriptions differences.
+	 * Returns a Diff object with the descriptions differences.
 	 *
 	 * @since 0.1
 	 *
-	 * @return MapDiff
+	 * @return Diff
 	 */
 	public function getDescriptionsDiff() {
-		return isset( $this['description'] ) ? $this['description'] : new \Diff\MapDiff( array() );
+		return isset( $this['description'] ) ? $this['description'] : new Diff( array(), true );
 	}
 
 	/**
@@ -263,11 +264,11 @@ abstract class EntityDiff extends MapDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @param MapDiff $mapDiff
+	 * @param Diff $mapDiff
 	 *
 	 * @return EntityDiff
 	 */
-	protected static function newFromMapDiff( MapDiff $mapDiff ) {
+	protected static function newFromMapDiff( Diff $mapDiff ) {
 		return new static( iterator_to_array( $mapDiff ) );
 	}
 
