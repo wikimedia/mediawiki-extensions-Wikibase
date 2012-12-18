@@ -211,19 +211,6 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see Entity::getDiff
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $target
-	 *
-	 * @return ItemDiff
-	 */
-	public function getDiff( Entity $target ) {
-		return ItemDiff::newFromItems( $this, $target );
-	}
-
-	/**
 	 * @see Entity::newClaimBase
 	 *
 	 * @since 0.3

@@ -260,6 +260,10 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 			foreach ( $expectedData as $key => $expectedValue ) {
 				$actualValue = $data[$key];
+
+				if ($expectedValue!==$actualValue) {
+					q($inputData, $expectedValue, $actualValue, $fixed);
+				}
 				$this->assertArrayEquals( $expectedValue, $actualValue );
 			}
 		}
