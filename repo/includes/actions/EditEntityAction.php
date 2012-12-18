@@ -223,7 +223,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 			// if the revision to undo is the latest revision, then there can be no conflicts
 			$appDiff = $diff;
 		} else {
-			$appDiff = $diff->getApplicableDiff( $latestContent->getEntity()->toArray() );
+			$patchedCurrent = clone $latestContent->getEntity();
+			$patchedCurrent->patch( $diff );
+			$appDiff = $latestContent->getEntity()->getDiff( $patchedCurrent );
 		}
 
 		if ( !$restore ) {
@@ -395,8 +397,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @param EntityDiff $diff
 	 */
 	protected function displayUndoDiff( EntityDiff $diff ) {
-		$diffView = $diff->getView();
-		$diffView->setContext( $this->getContext() );
+		$diffView = EntityDiffView::newForDiff( $diff, $this->getContext() );
 
 		$tableClass = 'diff diff-contentalign-' . htmlspecialchars( $this->getTitle()->getPageLanguage()->alignStart() );
 
@@ -598,27 +599,30 @@ class SubmitEntityAction extends EditEntityAction {
 
 		if ( $newerRevision->getId() == $latestRevision->getId() ) { // restore
 			$summary = $req->getText( 'wpSummary' );
+
 			if ( $summary === '' ) {
 				$summary = $this->makeRestoreSummary( $olderRevision, $newerRevision, $latestRevision );
 			}
 
 			if ( !$diff->isEmpty() ) {
+				$status = Status::newGood();
+				$status->warning( 'wikibase-empty-undo' );
+			} else {
 				// make the old content the new content.
 				// NOTE: conflict detection is not needed for a plain restore, it's not based on anything.
 				$edit = new EditEntity( $olderContent, $this->getUser() );
 				$status = $edit->attemptSave( $summary, 0, $token );
-			} else {
-				$status = Status::newGood();
-				$status->warning( 'wikibase-empty-undo' );
 			}
 		} else { // undo
-			$appDiff = $diff->getApplicableDiff( $latestContent->getEntity()->toArray() );
+			$entity = $latestContent->getEntity()->copy();
+			$latestContent->getEntity()->patch( $diff );;
 
-			if ( !$appDiff->isEmpty() ) {
-				$entity = $latestContent->getEntity();
-				$appDiff->apply( $entity );
-
+			if ( $latestContent->getEntity()->getDiff( $entity )->isEmpty() ) {
+				$status = Status::newGood();
+				$status->warning( 'wikibase-empty-undo' );
+			} else {
 				$summary = $req->getText( 'wpSummary' );
+
 				if ( $summary === '' ) {
 					$summary = $this->makeUndoSummary( $olderRevision, $newerRevision, $latestRevision );
 				}
@@ -627,9 +631,6 @@ class SubmitEntityAction extends EditEntityAction {
 				//      based on the latest revision.
 				$edit = new EditEntity( $latestContent, $this->getUser(), $latestRevision->getId() );
 				$status = $edit->attemptSave( $summary, 0, $token );
-			} else {
-				$status = Status::newGood();
-				$status->warning( 'wikibase-empty-undo' );
 			}
 		}
 

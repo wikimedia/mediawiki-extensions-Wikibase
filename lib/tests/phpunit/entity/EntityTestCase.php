@@ -34,7 +34,7 @@ use Wikibase\Query;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityTestCase extends \MediaWikiTestCase {
+abstract class EntityTestCase extends \MediaWikiTestCase {
 
 	/**
 	 * @param Entity|array $expected
