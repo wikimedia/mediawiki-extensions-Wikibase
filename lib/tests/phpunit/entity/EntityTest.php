@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 use Wikibase\Entity;
 use Wikibase\EntityId;
+use Wikibase\EntityDiff;
 
 /**
  * Tests for the Wikibase\Entity deriving classes.
@@ -621,6 +622,141 @@ abstract class EntityTest extends \MediaWikiTestCase {
 		$prefixedEntityId = \Wikibase\Entity::getIdFromClaimGuid( $guid );
 
 		$this->assertEquals( $mockId->getPrefixedId(), $prefixedEntityId );
+	}
+
+	public function diffProvider() {
+		$argLists = array();
+
+		$emptyDiff = EntityDiff::newForType( $this->getNewEmpty()->getType() );
+
+		$entity0 = $this->getNewEmpty();
+		$entity1 = $this->getNewEmpty();
+		$expected = clone $emptyDiff;
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+		$entity0 = $this->getNewEmpty();
+		$entity0->addAliases( 'nl', array( 'bah' ) );
+		$entity0->addAliases( 'de', array( 'bah' ) );
+
+		$entity1 = $this->getNewEmpty();
+		$entity1->addAliases( 'en', array( 'foo', 'bar' ) );
+		$entity1->addAliases( 'nl', array( 'bah', 'baz' ) );
+
+		$entity1->setDescription( 'en', 'onoez' );
+
+		$expected = new \Wikibase\EntityDiff( array(
+			'aliases' => new \Diff\Diff( array(
+				'en' => new \Diff\Diff( array(
+					new \Diff\DiffOpAdd( 'foo' ),
+					new \Diff\DiffOpAdd( 'bar' ),
+				), false ),
+				'de' => new \Diff\Diff( array(
+					new \Diff\DiffOpRemove( 'bah' ),
+				), false ),
+				'nl' => new \Diff\Diff( array(
+					new \Diff\DiffOpAdd( 'baz' ),
+				), false )
+			) ),
+			'description' => new \Diff\Diff( array(
+				'en' => new \Diff\DiffOpAdd( 'onoez' ),
+			) ),
+		) );
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+		$entity0 = clone $entity1;
+		$entity1 = clone $entity1;
+		$expected = clone $emptyDiff;
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+		$entity0 = $this->getNewEmpty();
+
+		$entity1 = $this->getNewEmpty();
+		$entity1->setLabel( 'en', 'onoez' );
+
+		$expected = new \Wikibase\EntityDiff( array(
+			'label' => new \Diff\Diff( array(
+				'en' => new \Diff\DiffOpAdd( 'onoez' ),
+			) ),
+		) );
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider diffProvider
+	 *
+	 * @param Entity $entity0
+	 * @param Entity $entity1
+	 * @param EntityDiff $expected
+	 */
+	public function testDiffEntities( Entity $entity0, Entity $entity1, EntityDiff $expected ) {
+		$actual = $entity0->getDiff( $entity1 );
+
+		$this->assertInstanceOf( '\Wikibase\EntityDiff', $actual );
+		$this->assertEquals( count( $expected ), count( $actual ) );
+
+		// TODO: equality check
+		// (simple serialize does not work, since the order is not relevant, and not only on the top level)
+	}
+
+	public function patchProvider() {
+		$argLists = array();
+
+		$source = $this->getNewEmpty();
+		$patch = new EntityDiff();
+		$expected = clone $source;
+
+//		$argLists[] = array( $source, $patch, $expected );
+
+		$source = $this->getNewEmpty();
+		$source->setLabel( 'en', 'foo' );
+		$source->setLabel( 'nl', 'bar' );
+		$source->setDescription( 'de', 'foobar' );
+		$source->setAliases( 'en', array( 'baz', 'bah' ) );
+
+		$patch = new EntityDiff();
+		$expected = clone $source;
+
+//		$argLists[] = array( $source, $patch, $expected );
+
+		$source = clone $source;
+
+		$patch = new EntityDiff( array(
+			'description' => new \Diff\Diff( array(
+				'de' => new \Diff\DiffOpChange( 'foobar', 'onoez' ),
+				'en' => new \Diff\DiffOpAdd( 'foobar' ),
+			) ),
+		) );
+		$expected = clone $source;
+		$expected->setDescription( 'de', 'onoez' );
+		$expected->setDescription( 'en', 'foobar' );
+
+		$argLists[] = array( $source, $patch, $expected );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider patchProvider
+	 *
+	 * @param Entity $source
+	 * @param EntityDiff $patch
+	 * @param Entity $expected
+	 */
+	public function testPatch( Entity $source, EntityDiff $patch, Entity $expected ) {
+		$o = clone $source;
+		$source->patch( $patch );
+		if (!$expected->equals( $source )) {
+			$patch = iterator_to_array( $patch );
+			$patch['description'] = iterator_to_array( $patch['description'] );
+			$this->assertTrue( $expected->equals( $source ) );
+		}
+
 	}
 
 }

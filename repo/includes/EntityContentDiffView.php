@@ -128,8 +128,10 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		 * @var EntityContent $old
 		 * @var EntityContent $new
 		 */
-		$diffView = $old->getEntity()->getDiff( $new->getEntity() )->getView();
-		$diffView->setContext( $this->getContext() );
+
+		$diff = $old->getEntity()->getDiff( $new->getEntity() );
+		$diffView = EntityDiffView::newForDiff( $diff, $this->getContext() );
+
 		return $diffView->getHtml();
 	}
 
