@@ -54,6 +54,15 @@ class ApiCreateClaimTest extends \ApiTestCase {
 		return array( $entity, $property );
 	}
 
+	protected function assertRequestValidity( $resultArray ) {
+		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
+		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a claim key' );
+		$this->assertArrayNotHasKey( 'lastrevid', $resultArray['claim'], 'claim has a lastrevid key' );
+
+		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
+		$this->assertArrayHasKey( 'lastrevid', $resultArray['pageinfo'], 'pageinfo has a lastrevid key' );
+	}
+
 	public function testValidRequest() {
 		/**
 		 * @var Entity $entity
@@ -72,12 +81,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 
 		list( $resultArray, ) = $this->doApiRequest( $params );
 
-		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
-		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a claim key' );
-		$this->assertArrayNotHasKey( 'lastrevid', $resultArray['claim'], 'claim has a lastrevid key' );
-
-		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
-		$this->assertArrayHasKey( 'lastrevid', $resultArray['pageinfo'], 'pageinfo has a lastrevid key' );
+		$this->assertRequestValidity( $resultArray );
 
 		$claim = $resultArray['claim'];
 
@@ -208,6 +212,58 @@ class ApiCreateClaimTest extends \ApiTestCase {
 		$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
 
 		$this->assertFalse( $entityContent->getEntity()->hasClaims() );
+	}
+
+	public function testMultipleRequests() {
+		/**
+		 * @var Entity $entity
+		 * @var Entity $property
+		 */
+		list( $entity, $property ) = self::getNewEntityAndProperty();
+
+		$params = array(
+			'action' => 'wbcreateclaim',
+			'entity' => $entity->getPrefixedId(),
+			'snaktype' => 'value',
+			'property' => $property->getPrefixedId(),
+			'value' => 'foo',
+			'token' => $GLOBALS['wgUser']->getEditToken()
+		);
+
+		list( $resultArray, ) = $this->doApiRequest( $params );
+
+		$this->assertRequestValidity( $resultArray );
+
+		$revId = $resultArray['pageinfo']['lastrevid'];
+
+		$firstGuid = $resultArray['claim']['id'];
+
+		$params = array(
+			'action' => 'wbcreateclaim',
+			'entity' => $entity->getPrefixedId(),
+			'snaktype' => 'value',
+			'property' => $property->getPrefixedId(),
+			'value' => 'bar',
+			'token' => $GLOBALS['wgUser']->getEditToken(),
+			'baserevid' => $revId
+		);
+
+		list( $resultArray, ) = $this->doApiRequest( $params );
+
+		$this->assertRequestValidity( $resultArray );
+
+		$newRevId = $resultArray['pageinfo']['lastrevid'];
+
+		$secondGuid = $resultArray['claim']['id'];
+
+		$this->assertTrue( (int)$revId < (int)$newRevId );
+
+		$this->assertNotEquals( $firstGuid, $secondGuid );
+
+		$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
+
+		$this->assertTrue( $entityContent->getEntity()->hasClaimWithGuid( $firstGuid ) );
+		$this->assertTrue( $entityContent->getEntity()->hasClaimWithGuid( $secondGuid ) );
 	}
 
 }
