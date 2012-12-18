@@ -736,7 +736,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	 */
 	protected function unstubClaims() {
 		if ( $this->claims === null ) {
-			$this->claims = new ClaimList();
+			$this->claims = new Claims();
 
 			foreach ( $this->data['claims'] as $claimSerialization ) {
 				$this->claims->addClaim( ClaimObject::newFromArray( $claimSerialization ) );

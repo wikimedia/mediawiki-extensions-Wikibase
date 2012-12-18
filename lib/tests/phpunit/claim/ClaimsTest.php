@@ -1,12 +1,12 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ClaimList;
+use Wikibase\Claims;
 use Wikibase\ClaimObject;
 use Wikibase\Claim;
 
 /**
- * Tests for the Wikibase\ClaimList class.
+ * Tests for the Wikibase\Claims class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,10 +36,10 @@ use Wikibase\Claim;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimListTest extends \MediaWikiTestCase {
+class ClaimsTest extends \MediaWikiTestCase {
 
 	public function getInstanceClass() {
-		return '\Wikibase\ClaimList';
+		return '\Wikibase\Claims';
 	}
 
 	public function instanceProvider() {
@@ -75,9 +75,9 @@ class ClaimListTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\ClaimList $array
+	 * @param \Wikibase\Claims $array
 	 */
-	public function testHasClaim( ClaimList $array ) {
+	public function testHasClaim( Claims $array ) {
 		/**
 		 * @var Claim $hashable
 		 */
@@ -93,9 +93,9 @@ class ClaimListTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\ClaimList $array
+	 * @param \Wikibase\Claims $array
 	 */
-	public function testRemoveClaim( ClaimList $array ) {
+	public function testRemoveClaim( Claims $array ) {
 		$elementCount = count( $array );
 
 		/**
@@ -122,9 +122,9 @@ class ClaimListTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\ClaimList $array
+	 * @param \Wikibase\Claims $array
 	 */
-	public function testAddClaim( ClaimList $array ) {
+	public function testAddClaim( Claims $array ) {
 		$elementCount = count( $array );
 
 		$elements = $this->getElementInstances();
@@ -141,7 +141,7 @@ class ClaimListTest extends \MediaWikiTestCase {
 		$firstClaim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
 		$secondClaim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
 
-		$list = new ClaimList();
+		$list = new Claims();
 		$this->assertTrue( $list->addElement( $firstClaim ), 'Adding the first element should work' );
 		$this->assertTrue( $list->addElement( $secondClaim ), 'Adding a duplicate element should work' );
 

@@ -100,7 +100,7 @@ class ApiRemoveClaimsTest extends \ApiTestCase {
 
 			$this->assertFalse( $obtainedEntity->hasClaimWithGuid( $claim->getGuid() ) );
 
-			$currentClaims = new \Wikibase\ClaimList( $claims );
+			$currentClaims = new \Wikibase\Claims( $claims );
 			$this->assertTrue( $obtainedEntity->getClaims()->getHash() === $currentClaims->getHash() );
 		}
 
