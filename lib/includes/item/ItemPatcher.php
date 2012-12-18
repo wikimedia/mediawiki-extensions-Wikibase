@@ -1,13 +1,10 @@
 <?php
 
 namespace Wikibase;
-use Diff\MapDiff;
+use MWException;
 
 /**
- * Represents a diff between two WikibaseProperty instances.
- * Acts as a container for diffs between the various fields
- * of the propertys. Also contains methods to obtain these
- * diffs as Wikibase\Change objects.
+ * Class for patching an Item with an ItemDiff.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,44 +21,36 @@ use Diff\MapDiff;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * Immutable.
- *
- * @since 0.1
- *
- * @file
+ * @since 0.4
  * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Jens Ohlig
  */
-class PropertyDiff extends EntityDiff implements \Immutable {
+class ItemPatcher extends EntityPatcher {
 
 	/**
-	 * Creates a new PropertyDiff representing the difference between $oldProperty and $newProperty
+	 * @see EntityPatcher::patchSpecificFields
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
-	 * @param Property $oldProperty
-	 * @param Property $newProperty
-	 * @return EntityDiff
+	 * @param Entity $entity
+	 * @param EntityDiff $patch
+	 *
+	 * @throws MWException
 	 */
-	public static function newFromProperties( Property $oldProperty, Property $newProperty ) {
-		return parent::newFromEntities( $oldProperty, $newProperty, array() );
+	protected function patchSpecificFields( Entity &$entity, EntityDiff $patch ) {
+		if ( !( $entity instanceof Item ) || !( $patch instanceof ItemDiff ) ) {
+			throw new MWException( 'ItemPatcher only deals with Item objects' );
+		}
+
+		/**
+		 * @var Item $entity
+		 * @var ItemDIff $patch
+		 */
+		$links = SiteLink::siteLinksToArray( $entity->getSiteLinks() );
+		$links = $this->mapPatcher->patch( $links, $patch->getSiteLinkDiff() );
+		$entity->setSiteLinks( SiteLink::siteLinksFromArray( $links ) );
 	}
-
-
-	/**
-	 * @see EntityDiff::getView
-	 *
-	 * @since 0.1
-	 *
-	 * @return PropertyDiffView
-	 */
-	public function getView() {
-		return new PropertyDiffView( array(), $this );
-	}
-
-
 
 }

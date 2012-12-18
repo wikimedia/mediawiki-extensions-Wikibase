@@ -87,18 +87,4 @@ class Query extends Entity {
 		return wfMessage( 'wikibaselib-entity-query' )->parse();
 	}
 
-	/**
-	 * @see Entity::getDiff
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $target
-	 *
-	 * @return QueryDiff
-	 */
-	public function getDiff( Entity $target ) {
-		// TODO
-		return ItemDiff::newEmpty();
-	}
-
 }

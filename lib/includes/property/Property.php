@@ -121,20 +121,6 @@ class Property extends Entity {
 	}
 
 	/**
-	 * @see Entity::getDiff
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $target
-	 *
-	 * @return PropertyDiff
-	 */
-	public function getDiff( Entity $target ) {
-		return PropertyDiff::newFromProperties( $this, $target );
-	}
-
-
-	/**
 	 * @see Entity::getIdPrefix
 	 *
 	 * @since 0.1

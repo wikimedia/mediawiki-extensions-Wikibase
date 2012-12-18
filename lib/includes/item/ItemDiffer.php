@@ -1,9 +1,10 @@
 <?php
 
 namespace Wikibase;
+use MWException;
 
 /**
- * Class for generating views of ItemDiff objects.
+ * Class for diffing two Item objects to an EntityDiff.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,17 +21,24 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
- *
- * @file
+ * @since 0.4
  * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
+class ItemDiffer extends EntityDiffer {
 
-class ItemDiffView extends EntityDiffView {
+	protected function entityToArray( Entity $entity ) {
+		if ( !( $entity instanceof Item ) ) {
+			throw new MWException( 'ItemDiffer only accepts Item objects' );
+		}
 
+		$array = parent::entityToArray( $entity );
 
+		$array['links'] = SiteLink::siteLinksToArray( $entity->getSiteLinks() );
+
+		return $array;
+	}
 
 }

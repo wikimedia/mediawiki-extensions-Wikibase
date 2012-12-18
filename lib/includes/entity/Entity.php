@@ -80,17 +80,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	public abstract function getType();
 
 	/**
-	 * Returns an EntityDiff between $this and the provided Entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $target
-	 *
-	 * @return EntityDiff
-	 */
-	public abstract function getDiff( Entity $target );
-
-	/**
 	 * Get an array representing the Entity.
 	 * A new Entity can be constructed by passing this array to @see Entity::newFromArray
 	 *
@@ -478,6 +467,55 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
+	 * Replaces the currently set labels with the provided ones.
+	 * The labels are provided as an associative array where the keys are
+	 * language codes pointing to the label in that language.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string[] $labels
+	 */
+	public function setLabels( array $labels ) {
+		$this->data['label'] = $labels;
+	}
+
+	/**
+	 * Replaces the currently set descriptions with the provided ones.
+	 * The descriptions are provided as an associative array where the keys are
+	 * language codes pointing to the description in that language.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string[] $descriptions
+	 */
+	public function setDescriptions( array $descriptions ) {
+		$this->data['description'] = $descriptions;
+	}
+
+	/**
+	 * Replaces the currently set aliases with the provided ones.
+	 * The aliases are provided as an associative array where the keys are
+	 * language codes pointing to an array value that holds the aliases
+	 * in that language.
+	 *
+	 * @since 0.4
+	 *
+	 * @param array[] $aliasLists
+	 */
+	public function setAllAliases( array $aliasLists ) {
+		$this->data['aliases'] = $aliasLists;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param Claim[] $claims
+	 */
+	public function setClaims( array $claims ) {
+		// TODO
+	}
+
+	/**
 	 * Clears the structure.
 	 *
 	 * @since 0.1
@@ -818,6 +856,20 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	 */
 	protected function newClaimBase( Snak $mainSnak ) {
 		return new ClaimObject( $mainSnak );
+	}
+
+	/**
+	 * Returns an EntityDiff between $this and the provided Entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $target
+	 *
+	 * @return EntityDiff
+	 */
+	public final function getDiff( Entity $target ) {
+		$differ = EntityDiffer::newForType( $this->getType() );
+		return $differ->diffEntities( $this, $target );
 	}
 
 	/**

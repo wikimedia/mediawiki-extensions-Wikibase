@@ -105,6 +105,7 @@ final class LibHooks {
 			'claim/ClaimList',
 			'claim/ClaimObject',
 
+			'entity/EntityDiffer',
 			'entity/EntityFactory',
 			'entity/EntityId',
 

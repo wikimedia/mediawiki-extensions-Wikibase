@@ -67,10 +67,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	 * @param \Wikibase\Entity $entity
 	 */
 	public function testNewFromUpdate( Entity $entity ) {
-		if ( $entity instanceof \Wikibase\Query ) {
-			$this->markTestSkipped( "Diffs are not yet implemented for Query objects" );
-		}
-
 		/* @var EntityChange $entityChange */
 		$class = $this->getClass();
 		$entityChange = $class::newFromUpdate( EntityChange::UPDATE, null, $entity );
