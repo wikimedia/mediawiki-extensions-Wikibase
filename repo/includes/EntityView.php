@@ -549,6 +549,21 @@ abstract class EntityView extends \ContextSource {
 			\FormatJson::encode( $serializer->getSerialized( $entity ) )
 		);
 
+		$entityLoader = new CachingEntityLoader();
+
+		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
+		$entities = $refFinder->findClaimLinks( $entity->getClaims() );
+
+		// TODO: only include the info we need
+		foreach ( $entities as &$entityToSerialize ) {
+			$entityToSerialize = $serializer->getSerialized( $entityToSerialize );
+		}
+
+		$out->addJsConfigVars(
+			'wbReferencedEntities',
+			\FormatJson::encode( $entities )
+		);
+
 		// make information about properties used in this entity available in JavaScript view:
 		$usedProperties = static::getUsedProperties( $entity );
 		$basicPropertyInfo = static::getBasicPropertyInfo( $usedProperties, $langCode );
