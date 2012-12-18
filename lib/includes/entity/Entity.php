@@ -3,6 +3,8 @@
 namespace Wikibase;
 use MWException;
 use Wikibase\Lib\GuidGenerator;
+use Diff\Patcher;
+use Diff\Differ;
 
 /**
  * Represents a single Wikibase entity.
@@ -78,17 +80,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	 * @return string
 	 */
 	public abstract function getType();
-
-	/**
-	 * Returns an EntityDiff between $this and the provided Entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $target
-	 *
-	 * @return EntityDiff
-	 */
-	public abstract function getDiff( Entity $target );
 
 	/**
 	 * Get an array representing the Entity.
@@ -478,6 +469,55 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
+	 * Replaces the currently set labels with the provided ones.
+	 * The labels are provided as an associative array where the keys are
+	 * language codes pointing to the label in that language.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string[] $labels
+	 */
+	public function setLabels( array $labels ) {
+		$this->data['label'] = $labels;
+	}
+
+	/**
+	 * Replaces the currently set descriptions with the provided ones.
+	 * The descriptions are provided as an associative array where the keys are
+	 * language codes pointing to the description in that language.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string[] $descriptions
+	 */
+	public function setDescriptions( array $descriptions ) {
+		$this->data['description'] = $descriptions;
+	}
+
+	/**
+	 * Replaces the currently set aliases with the provided ones.
+	 * The aliases are provided as an associative array where the keys are
+	 * language codes pointing to an array value that holds the aliases
+	 * in that language.
+	 *
+	 * @since 0.4
+	 *
+	 * @param array[] $aliasLists
+	 */
+	public function setAllAliases( array $aliasLists ) {
+		$this->data['aliases'] = $aliasLists;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param Claim[] $claims
+	 */
+	public function setClaims( array $claims ) {
+		// TODO
+	}
+
+	/**
 	 * Clears the structure.
 	 *
 	 * @since 0.1
@@ -818,6 +858,89 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	 */
 	protected function newClaimBase( Snak $mainSnak ) {
 		return new ClaimObject( $mainSnak );
+	}
+
+	/**
+	 * Returns an EntityDiff between $this and the provided Entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $target
+	 * @param Differ|null $differ Since 0.4
+	 *
+	 * @return EntityDiff
+	 * @throws MWException
+	 */
+	public final function getDiff( Entity $target, Differ $differ = null ) {
+		if ( $this->getType() !== $target->getType() ) {
+			throw new MWException( 'Can only diff between entities of the same type' );
+		}
+
+		if ( $differ === null ) {
+			$differ = new \Diff\MapDiffer( true );
+		}
+
+		$oldEntity = $this->entityToDiffArray( $this );
+		$newEntity = $this->entityToDiffArray( $target );
+
+		$diffOps = $differ->doDiff( $oldEntity, $newEntity );
+		$diff = EntityDiff::newForType( $this->getType(), $diffOps );
+
+		return $diff;
+	}
+
+	/**
+	 * Create and returns an array based serialization suitable for EntityDiff.
+	 *
+	 * @since 0.4
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return array
+	 */
+	protected function entityToDiffArray( Entity $entity ) {
+		$array = array();
+
+		$array['aliases'] = $entity->getAllAliases();
+		$array['label'] = $entity->getLabels();
+		$array['description'] = $entity->getDescriptions();
+
+		// TODO: claims
+
+		return $array;
+	}
+
+	/**
+	 * Apply an EntityDiff to the entity.
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityDiff $patch
+	 * @param Patcher|null $patcher The patcher with which to apply the diff
+	 */
+	public final function patch( EntityDiff $patch, Patcher $patcher = null ) {
+		if ( $patcher === null ) {
+			$patcher = new \Diff\MapPatcher();
+		}
+
+		$this->setLabels( $patcher->patch( $this->getLabels(), $patch->getLabelsDiff() ) );
+		$this->setDescriptions( $patcher->patch( $this->getDescriptions(), $patch->getDescriptionsDiff() ) );
+		$this->setAllAliases( $patcher->patch( $this->getAllAliases(), $patch->getAliasesDiff() ) );
+
+		$this->patchSpecificFields( $patch, $patcher );
+	}
+
+	/**
+	 * Patch fields specific to the type of entity.
+	 * @see patch
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityDiff $patch
+	 * @param Patcher $patcher
+	 */
+	protected function patchSpecificFields( EntityDiff $patch, Patcher $patcher ) {
+		// No-op, meant to be overridden in deriving classes to add specific behaviour
 	}
 
 	/**

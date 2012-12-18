@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use IContextSource;
 
 /**
  * Class for generating views of EntityDiff objects.
@@ -31,6 +32,19 @@ namespace Wikibase;
 
 class EntityDiffView extends DiffView {
 
-
+	/**
+	 * Returns a new EntityDiffView for the provided EntityDiff.
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityDiff $diff
+	 * @param IContextSource $contextSource
+	 *
+	 * @return EntityDiffView
+	 */
+	public static function newForDiff( EntityDiff $diff, IContextSource $contextSource = null ) {
+		return new static( array(), $diff, $contextSource );
+		// TODO: grep for new EntityDiffView and rep by this
+	}
 
 }
