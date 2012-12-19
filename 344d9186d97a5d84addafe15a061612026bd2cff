@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgH///ZU\u003d",
+        "filename": "lib/tests/phpunit/store/SiteLinkTableTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-19T01:58:02Z",
+      "side": 1,
+      "message": "You probably want \n\nif ( !defined( \u0027WB_VERSION\u0027 ) ) {",
+      "revId": "344d9186d97a5d84addafe15a061612026bd2cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
