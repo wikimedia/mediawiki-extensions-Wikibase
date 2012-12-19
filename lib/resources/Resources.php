@@ -307,17 +307,7 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'wikibase-snakview-unsupporteddatatype',
-				'wikibase-snakview-property-input-placeholder',
-				'datatypes-type-wikibase-item',
-				'datatypes-type-string',
-				'datatypes-type-quantity',
-				'datatypes-type-monolingual-text',
-				'datatypes-type-multilingual-text',
-				'datatypes-type-number',
-				'datatypes-type-mediawiki-title',
-				'datatypes-type-unknown',
-				'datatypes-type-boolean',
-				'datatypes-type-geo-coordinate',
+				'datatypes-type-wikibase-item'
 			)
 		),
 
