@@ -306,6 +306,7 @@ return call_user_func( function() {
 				'mediawiki.legacy.shared'
 			),
 			'messages' => array(
+				'wikibase-snakview-property-input-placeholder',
 				'wikibase-snakview-unsupporteddatatype',
 				'datatypes-type-wikibase-item'
 			)
