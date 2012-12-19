@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgH///So\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-19T11:45:50Z",
+      "side": 1,
+      "message": "We could simply return array() - is it really a coding mistake to ask an non-item entity for it\u0027s sitelinks? Or can we just pretend other entities have an empty list of site links?\n\nAnyway, fine for now.",
+      "revId": "7a901257362d129e003f8983ebebcc552b0f0495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
