@@ -87,17 +87,16 @@ class ApiSearchEntities extends ApiBase {
 		wfProfileIn( __METHOD__ );
 
 		$sortArray = array();
-		foreach( $entries as $entry ){
-			foreach( $entry as $key=>$value){
-				if( !isset( $sortArray[$key] ) ) {
-					$sortArray[$key] = array();
-				}
-				$sortArray[$key][] = $value;
+		foreach ( $entries as $entry ) {
+			if ( isset( $entry["score"] ) ) {
+				$sortArray[] = $entry["score"];
+			} else {
+				$sortArray[] = 0;
 			}
 		}
-		$orderby = "score";
+
 		if ( $entries !== array() ) {
-			array_multisort( $sortArray[$orderby], SORT_DESC, $entries );
+			array_multisort( $sortArray, SORT_DESC, $entries );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -283,8 +282,7 @@ class ApiSearchEntities extends ApiBase {
 	 * @see ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-		) );
+		return array_merge( parent::getPossibleErrors(), array() );
 	}
 
 	/**
