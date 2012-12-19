@@ -302,10 +302,12 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 				'dataTypes.jquery.valueview.views',
 				'wikibase.jquery.valueview.views',
-				'wikibase.store' // required for getting datatype from entityselector selected property
+				'wikibase.store', // required for getting datatype from entityselector selected property
+				'mediawiki.legacy.shared'
 			),
 			'messages' => array(
 				'wikibase-snak-unsupporteddatatype',
+				'wikibase-snak-property-input-placeholder',
 				'datatypes-type-wikibase-item'
 			)
 		),

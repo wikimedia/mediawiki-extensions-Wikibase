@@ -66,6 +66,7 @@ $messages['en'] = array(
 	'wikibase-aliases-input-help-message' => 'If this data set is known under more than one particular name, you may enter aliases and synonyms, so it can be found by its alternative names.',
 	'wikibase-aliases-empty' => 'No aliases defined.',
 	'wikibase-datatype-label' => 'Data type:',
+	'wikibase-snak-property-input-placeholder' => 'select a property',
 	'wikibase-snak-unsupporteddatatype' => 'Handling of values for "$1" data type is not supported currently.',
 
 	'wikibase-restrictionedit-tooltip-message' => 'This page is protected. Editing is not allowed.',
@@ -373,6 +374,7 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-propertyedittool-co
 	'wikibase-aliases-input-help-message' => 'Bubble help message for entering the aliases of the data set used for a specific item.',
 	'wikibase-aliases-empty' => 'Placeholder message when no aliases for this data set representing a specific item have been defined.',
 	'wikibase-datatype-label' => 'Label for the data type name/label on a property page.',
+	'wikibase-snak-property-input-placeholder' => 'Placeholder message that is initially displayed within the property input element when adding a new snak. See also [[m:Wikidata/Glossary]]',
 	'wikibase-restrictionedit-tooltip-message' => 'When editing a page (a data item) is restricted for the current user, this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item.',
 	'wikibase-blockeduser-tooltip-message' => 'When the current user is blocked from editing a page (a data item), this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item or creating a new item.',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).',
