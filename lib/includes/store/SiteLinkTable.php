@@ -86,7 +86,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		}
 
 		$dbw = $this->getConnection( DB_MASTER );
-	
+
 		$success = $this->deleteLinksOfItem( $item->getId(), $function );
 
 		if ( !$success ) {
@@ -367,6 +367,48 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		}
 
 		$this->releaseConnection( $dbr );
+		return $siteLinks;
+	}
+
+	/**
+	 * Get array of SiteLink for an item or returns empty array if no site links
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityId $id
+	 *
+	 * @throws \MWException
+	 *
+	 * @return SiteLink[]
+	 */
+	public function getSiteLinksForItem( EntityId $entityId ) {
+		if ( $entityId->getEntityType() !== Item::ENTITY_TYPE ) {
+			throw new \MWException( "$entityId is not an item id" );
+		}
+
+		$numericId = $entityId->getNumericId();
+
+		$dbr = $this->getConnection( DB_SLAVE );
+
+		$rows = $dbr->select(
+			$this->table,
+			array(
+				'ips_site_id', 'ips_site_page'
+			),
+			array(
+				'ips_item_id' => $numericId
+			),
+			__METHOD__
+		);
+
+		$siteLinks = array();
+
+		foreach( $rows as $row ) {
+			$siteLinks[] = SiteLink::newFromText( $row->ips_site_id, $row->ips_site_page );
+		}
+
+		$this->releaseConnection( $dbr );
+
 		return $siteLinks;
 	}
 
