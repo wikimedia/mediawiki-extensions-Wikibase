@@ -34,6 +34,24 @@
       "revId": "48b7606624b067e5d3f862fd4092ef7724a91491",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADgH//+Vg\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-12-20T12:49:19Z",
+      "side": 1,
+      "message": "I have no preference, except wish for consistency.",
+      "parentUuid": "AAADgH//+V8\u003d",
+      "revId": "48b7606624b067e5d3f862fd4092ef7724a91491",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
