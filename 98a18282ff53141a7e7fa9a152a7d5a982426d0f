@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgH//+GU\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-12-20T17:29:26Z",
+      "side": 1,
+      "message": "guys, are we really going to pass around such arrays again?",
+      "revId": "98a18282ff53141a7e7fa9a152a7d5a982426d0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
