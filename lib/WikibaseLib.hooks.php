@@ -134,7 +134,7 @@ final class LibHooks {
 			'serializers/SerializationOptions',
 			'serializers/Serializer',
 			'serializers/SnakSerializer',
-			
+
 			'snak/PropertyValueSnak',
 			'snak/SnakList',
 			'snak/Snak',
@@ -149,7 +149,6 @@ final class LibHooks {
 			'ChangeNotifier',
 			'ChangeHandler',
 			'ChangesTable',
-			'EntityLoader',
 			'ReferencedEntitiesFinder',
 			'HashableObjectStorage',
 			'Template',
