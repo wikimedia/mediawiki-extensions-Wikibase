@@ -69,12 +69,11 @@ class NoLangLinkHandler {
 		$langs = func_get_args();
 		// Remove the first member, which is the parser.
 		array_shift( $langs );
-		$langs = array_flip( $langs );
 
 		$out = $parser->getOutput();
 		$nel = LangLinkHandler::getNoExternalLangLinks( $out );
 		$nel += $langs;
-		$out->setProperty( 'noexternallanglinks', serialize( $nel ) );
+		LangLinkHandler::setNoExternalLangLinks( $out, $nel );
 
 		return "";
 	}
