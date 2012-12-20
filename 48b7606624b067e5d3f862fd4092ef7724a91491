@@ -16,6 +16,24 @@
       "revId": "48b7606624b067e5d3f862fd4092ef7724a91491",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADgH//+V8\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-12-20T12:11:15Z",
+      "side": 1,
+      "message": "There is 18 files in the repo that doen\u0027t use \"use\" but use \\Wikibase\\, and 211 files that do use \"use\". So, yes, there\u0027s an inconsistency, but I think the files that do not use \"use\" should be fixed.\n\nBash scripts for counting:\n\ndaniel@brightpad [review/daniel_kinzler/bug/43195] ~/www/wikidata/extensions/Wikibase\u003e for f in `find . -name \"*.php\" -not -path \"*/.git/*\"`; do if ! grep \u0027^use \u0027 \"$f\" \u003e /dev/null \u0026\u0026 grep \u0027\\\\Wikibase\\\\\u0027 \"$f\" \u003e /dev/null ; then echo \"$f\"; fi; done | wc -l\n18\n\ndaniel@brightpad [review/daniel_kinzler/bug/43195] ~/www/wikidata/extensions/Wikibase\u003e for f in `find . -name \"*.php\" -not -path \"*/.git/*\"`; do if grep \u0027^use \u0027 \"$f\" \u003e /dev/null; then echo \"$f\"; fi; done | wc -l\n211",
+      "parentUuid": "AAADgH//+Xs\u003d",
+      "revId": "48b7606624b067e5d3f862fd4092ef7724a91491",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
