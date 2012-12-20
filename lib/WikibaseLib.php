@@ -90,7 +90,6 @@ $wgAutoloadClasses['Wikibase\LibHooks'] 			= $dir . 'WikibaseLib.hooks.php';
 
 // includes
 $wgAutoloadClasses['Wikibase\ByPropertyIdArray'] 		= $dir . 'includes/ByPropertyIdArray.php';
-$wgAutoloadClasses['Wikibase\CachingEntityLoader'] 		= $dir . 'includes/CachingEntityLoader.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 			= $dir . 'includes/ChangeNotifier.php';
 $wgAutoloadClasses['Wikibase\ChangesTable'] 			= $dir . 'includes/ChangesTable.php';
