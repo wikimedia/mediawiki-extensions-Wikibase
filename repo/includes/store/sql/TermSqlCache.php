@@ -571,17 +571,16 @@ class TermSqlCache implements TermCache {
 	 * Note: the interface specifies capability for only a single join, which in this implementation
 	 * is enforced by the $joinCount var. The code itself however could handle multiple joins.
 	 *
-	 * @since 0.2
+	 * @since 0.4
 	 *
 	 * @param array $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
-	 * @param integer|null $excludeId
-	 * @param string|null $excludeType
+	 * @param EntityId|null $excludeId
 	 *
 	 * @return array
 	 */
-	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, $excludeId = null, $excludeType = null ) {
+	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, EntityId $excludeId = null ) {
 		if ( empty( $terms ) ) {
 			return array();
 		}
@@ -600,11 +599,8 @@ class TermSqlCache implements TermCache {
 			$exclusionConds = array();
 
 			if ( $excludeId !== null ) {
-				$exclusionConds[] = 'terms0.term_entity_id <> ' . $dbr->addQuotes( $excludeId );
-			}
-
-			if ( $excludeType !== null ) {
-				$exclusionConds[] = 'terms0.term_entity_type <> ' . $dbr->addQuotes( $excludeType );
+				$exclusionConds[] = 'terms0.term_entity_id <> ' . $dbr->addQuotes( $excludeId->getNumericId() );
+				$exclusionConds[] = 'terms0.term_entity_type <> ' . $dbr->addQuotes( $excludeId->getEntityType() );
 			}
 
 			if ( !empty( $exclusionConds ) ) {
