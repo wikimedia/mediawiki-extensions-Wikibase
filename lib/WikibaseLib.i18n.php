@@ -478,9 +478,11 @@ $messages['vi'] = array(
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Shizhao
+ * @author Stevenliuyi
  * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
+	'wikibaselib-desc' => '储存维基基础及其客户端的共同功能',
 	'wikibaselib-entity-item' => '项目',
 	'wikibaselib-entity-property' => '属性',
 	'wikibaselib-entity-query' => '查询',

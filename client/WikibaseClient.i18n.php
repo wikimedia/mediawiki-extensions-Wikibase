@@ -760,22 +760,42 @@ $messages['vi'] = array(
 /** Simplified Chinese (中文（简体）‎)
  * @author Linforest
  * @author Shizhao
+ * @author Stevenliuyi
  * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
 	'wbc-desc' => 'Wikibase扩展客户端',
-	'wbc-comment-langlinks-delete' => '关联的维基数据项目已删除。语言链接已移除。',
-	'wbc-comment-langlinks-remove' => '本页已在维基数据解除链接。语言链接已移除。',
-	'wbc-comment-langlinks-restore' => '关联的维基数据项目已恢复。恢复语言链接',
-	'wbc-comment-langlinks-update' => '语言链接已更新',
+	'wbc-after-page-move' => '您还可以[$1 更新]关联的维基数据项目，使其链接至移动后的页面。',
+	'wbc-comment-remove' => '关联的维基数据项目已删除。语言链接已移除。',
+	'wbc-comment-linked' => '一个维基数据项目已链接至此页面。',
+	'wbc-comment-unlink' => '本页已解除维基数据项目的链接。语言链接已移除。',
+	'wbc-comment-restore' => '关联的维基数据项目已还原。语言链接已恢复。',
+	'wbc-comment-update' => '语言链接已更新。',
+	'wbc-comment-sitelink-add' => '添加语言链接：$1',
+	'wbc-comment-sitelink-change' => '语言链接从$1更改为$2',
+	'wbc-comment-sitelink-remove' => '删除语言链接：$1',
 	'wbc-editlinks' => '编辑链接',
 	'wbc-editlinkstitle' => '编辑跨语言链接',
+	'wbc-rc-hide-wikidata' => '$1维基数据',
+	'wbc-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
 );
 
 /** Traditional Chinese (中文（繁體）‎)
+ * @author Stevenliuyi
  */
 $messages['zh-hant'] = array(
 	'wbc-desc' => 'Wikibase擴展客戶端',
+	'wbc-after-page-move' => '您還可以[$1 更新]關聯的維基數據項目，使其連結至移動後的頁面。',
+	'wbc-comment-remove' => '關聯的維基數據項目已刪除。語言連結已移除。',
+	'wbc-comment-linked' => '一個維基數據項目已連結至此頁面。',
+	'wbc-comment-unlink' => '本頁已解除維基數據項目的連結。語言連結已移除。',
+	'wbc-comment-restore' => '關聯的維基數據項目已還原。語言連結已恢復。',
+	'wbc-comment-update' => '語言連結已更新。',
+	'wbc-comment-sitelink-add' => '添加語言連結：$1',
+	'wbc-comment-sitelink-change' => '語言連結從$1更改為$2',
+	'wbc-comment-sitelink-remove' => '刪除語言連結：$1',
 	'wbc-editlinks' => '編輯鏈接',
 	'wbc-editlinkstitle' => '編輯跨語言鏈接',
+	'wbc-rc-hide-wikidata' => '$1維基數據',
+	'wbc-rc-show-wikidata-pref' => '在最近更改中顯示維基數據的編輯',
 );

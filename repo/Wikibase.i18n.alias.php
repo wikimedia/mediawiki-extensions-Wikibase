@@ -146,6 +146,17 @@ $specialPageAliases['scn'] = array(
 	'EntitiesWithoutLabel' => array( 'EntitàSenzaEtichetta' ),
 );
 
+/** Vietnamese (Tiếng Việt) */
+$specialPageAliases['vi'] = array(
+	'EntityData' => array( 'Dữ_liệu_thực_thể' ),
+	'CreateItem' => array( 'Tạo_khoản_mục' ),
+	'NewProperty' => array( 'Thuộc_tính_mới' ),
+	'ItemDisambiguation' => array( 'Định_hướng_khoản_mục' ),
+	'ListDatatypes' => array( 'Danh_sách_kiểu_dữ_liệu' ),
+	'SetLabel' => array( 'Đặt_nhãn' ),
+	'EntitiesWithoutLabel' => array( 'Thực_thể_không_nhãn' ),
+);
+
 /** Simplified Chinese (中文（简体）‎) */
 $specialPageAliases['zh-hans'] = array(
 	'CreateItem' => array( '创建项目' ),
