@@ -770,7 +770,16 @@ final class RepoHooks {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
-		$content = $page->getContent();
+		$content = null;
+
+		try {
+			$content = $page->getContent();
+		} catch ( \MWContentSerializationException $ex ) {
+			// if this fails, it's not horrible.
+			wfWarn( "Failed to get entity object for [[" . $page->getTitle()->getFullText() . "]]"
+					. ": " . $ex->getMessage() );
+		}
+
 		if ( is_null( $content ) || !( $content instanceof EntityContent ) ) {
 			// Failed, can't continue. This could happen because the content is empty (page doesn't exist),
 			// e.g. after item was deleted.
@@ -780,6 +789,7 @@ final class RepoHooks {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
+
 		$entity = $content->getEntity();
 		if ( is_null( $entity ) ) {
 			// Failed, can't continue. This could happen because there is an illegal structure that could
