@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Test;
 use Wikibase\Term;
 use Diff\Diff;
+use Diff\DiffOpChange;
 
 /**
  * Tests Wikibase\LabelDescriptionDuplicateDetector.
@@ -51,15 +52,22 @@ class LabelDescriptionDuplicateDetectorTest extends \MediaWikiTestCase {
 		$argLists = array();
 
 		foreach ( $this->conflictProvider() as $argList ) {
-			$argList[] = new \Diff\MapDiff( array( $argList[0] => new \Diff\DiffOpChange( 'a', $argList[1] ) ) );
-			$argList[] = new \Diff\MapDiff( array( $argList[0] => new \Diff\DiffOpChange( 'a', $argList[2] ) ) );
+			$argList[] = new Diff( array( $argList[0] => new DiffOpChange( 'a', $argList[1] ) ) );
+			$argList[] = new Diff( array( $argList[0] => new DiffOpChange( 'a', $argList[2] ) ) );
 
 			$argLists[] = $argList;
 		}
 
 		foreach ( $this->conflictProvider() as $argList ) {
-			$argList[] = new \Diff\MapDiff( array( 'foo' => new \Diff\DiffOpChange( 'a', $argList[1] ) ) );
-			$argList[] = new \Diff\MapDiff( array( 'foo' => new \Diff\DiffOpChange( 'a', $argList[2] ) ) );
+			$argList[] = null;
+			$argList[] = null;
+
+			$argLists[] = $argList;
+		}
+
+		foreach ( $this->conflictProvider() as $argList ) {
+			$argList[] = new Diff( array( 'foo' => new DiffOpChange( 'a', $argList[1] ) ) );
+			$argList[] = new Diff( array( 'foo' => new DiffOpChange( 'a', $argList[2] ) ) );
 			$argList[3] = false;
 
 			$argLists[] = $argList;
@@ -116,10 +124,10 @@ class LabelDescriptionDuplicateDetectorTest extends \MediaWikiTestCase {
 	 * @param $label
 	 * @param $description
 	 * @param $shouldConflict
-	 * @param Diff $labelsDiff
-	 * @param Diff $descriptionDiff
+	 * @param Diff|null $labelsDiff
+	 * @param Diff|null $descriptionDiff
 	 */
-	public function testAddLabelDescriptionConflicts( $langCode, $label, $description, $shouldConflict, Diff $labelsDiff, Diff $descriptionDiff ) {
+	public function testAddLabelDescriptionConflicts( $langCode, $label, $description, $shouldConflict, Diff $labelsDiff = null, Diff $descriptionDiff = null ) {
 		$termCache = new MockTermCache();
 
 		$detector = new \Wikibase\LabelDescriptionDuplicateDetector();
