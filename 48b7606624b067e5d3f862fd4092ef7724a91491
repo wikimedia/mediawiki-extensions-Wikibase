@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgH//+Xs\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-12-20T11:48:58Z",
+      "side": 1,
+      "message": "don\u0027t like the inconsistency of having use statements here but most places, esp. in the client we don\u0027t do things this way.",
+      "revId": "48b7606624b067e5d3f862fd4092ef7724a91491",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
