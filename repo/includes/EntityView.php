@@ -549,56 +549,51 @@ abstract class EntityView extends \ContextSource {
 			\FormatJson::encode( $serializer->getSerialized( $entity ) )
 		);
 
-		// make information about properties used in this entity available in JavaScript view:
-		$usedProperties = static::getUsedProperties( $entity );
-		$basicPropertyInfo = static::getBasicPropertyInfo( $usedProperties, $langCode );
+		// make information about other entities used in this entity available in JavaScript view:
+		$entityLoader = new CachingEntityLoader();
+		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
+
+		$usedEntityIds = $refFinder->findClaimLinks( $entity->getClaims() );
+		$basicEntityInfo = static::getBasicEntityInfo( $entityLoader, $usedEntityIds, $langCode );
 
 		$out->addJsConfigVars(
-			'wbUsedProperties',
-			\FormatJson::encode( $basicPropertyInfo )
+			'wbUsedEntities',
+			\FormatJson::encode( $basicEntityInfo )
 		);
 
 		wfProfileOut( __METHOD__ );
 	}
 
 	/**
-	 * Returns the property entities used by a given entity. Basically all properties used in all of
-	 * the entities claims.
-	 */
-	protected static function getUsedProperties( Entity $entity ) {
-		$propertyIds = array();
-
-		foreach( $entity->getClaims() as $claim ) {
-			$propertyIds[] = $claim->getPropertyId();
-		}
-
-		array_unique( $propertyIds );
-		return $propertyIds;
-	}
-
-	/**
-	 * Fetches some basic property information required for the entity view in JavaScript from a
+	 * Fetches some basic entity information required for the entity view in JavaScript from a
 	 * set of entity IDs.
+	 * @since 0.4
 	 *
-	 * @param array $propertyIds
-	 * @param string $langCode For the properties label which will be included in one language only.
+	 * @param EntityLookup $entityLoader
+	 * @param EntityId[] $entityIds
+	 * @param string $langCode For the entity labels which will be included in one language only.
 	 * @return array
 	 */
-	protected static function getBasicPropertyInfo( array $propertyIds, $langCode ) {
-		$propertyInfo = array();
-		$entityContentFactory = EntityContentFactory::singleton();
+	protected static function getBasicEntityInfo( EntityLookup $entityLoader, array $entityIds, $langCode ) {
+		$entities = $entityLoader->getEntities( $entityIds );
+		$entityInfo = array();
 
-		foreach( $propertyIds as $id ) {
-			/** @var $property Property */
-			$property = $entityContentFactory->getFromId( $id )->getEntity();
-			$id = $property->getId()->getPrefixedId();
+		foreach( $entities as $prefixedId => $entity ) {
+			if( $entity === null ) {
+				continue;
+			}
+			$entities[ $prefixedId ] = $entity->getLabel( $langCode );
 
-			$propertyInfo[ $id ] = array(
-				'datatype' => $property->getDataType()->getId(),
-				'label' => $property->getLabel( $langCode )
+			$entityInfo[ $prefixedId ] = array(
+				'label' => $entity->getLabel( $langCode ),
+				'url' => EntityContentFactory::singleton()->getTitleForId( $entity->getId() )->getFullUrl()
 			);
+
+			if( $entity instanceof Property ) {
+				$entityInfo[ $prefixedId ]['datatype'] = $entity->getDataType()->getId();
+			}
 		}
-		return $propertyInfo;
+		return $entityInfo;
 	}
 
 	/**

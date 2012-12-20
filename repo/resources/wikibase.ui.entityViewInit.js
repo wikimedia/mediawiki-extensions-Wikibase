@@ -58,7 +58,7 @@
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
 			var entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) ),
-				usedPropertiesJSON = $.evalJSON( mw.config.get( 'wbUsedProperties' ) );
+				usedEntitiesJSON = $.evalJSON( mw.config.get( 'wbUsedEntities' ) );
 
 			// if there are no aliases yet, the DOM structure for creating new ones is created manually since it is not
 			// needed for running the page without JS
@@ -75,7 +75,7 @@
 			} );
 
 			// Information about used properties:
-			$.extend( wb.entities, usedPropertiesJSON );
+			$.extend( wb.entities, usedEntitiesJSON );
 
 			// Definition of the views entity:
 			if ( entityJSON.claims !== undefined ) {
