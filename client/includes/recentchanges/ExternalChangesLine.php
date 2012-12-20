@@ -95,7 +95,8 @@ class ExternalChangesLine {
 
 		$line .= self::changeSeparator();
 
-		$line .= \Linker::link( \Title::newFromText( $rc->getAttribute( 'rc_title' ) ) );
+		$title = \Title::newFromText( $rc->getAttribute( 'rc_title' ), $rc->getAttribute( 'rc_namespace' ) );
+		$line .= \Linker::link( $title );
 
 		if ( in_array( $changeType, array( 'add', 'restore', 'update' ) ) ) {
 			$entityLink = self::entityLink( $entityData );
