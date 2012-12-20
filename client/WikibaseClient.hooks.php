@@ -251,7 +251,10 @@ final class ClientHooks {
 			// sitelinks could in theory be handled without re-parsing the page, but
 			// would still need to purge the squid cache.
 			foreach ( array_unique( $pagesToUpdate ) as $page ) {
-				self::updatePage( $page, $change, false );
+				$title = \Title::newFromText( $page );
+				if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
+					self::updatePage( $page, $change, false );
+				}
 			}
 		}
 
