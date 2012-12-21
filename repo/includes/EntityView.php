@@ -361,6 +361,7 @@ abstract class EntityView extends \ContextSource {
 				$mainSnakHtml = wfTemplate( 'wb-snak',
 					'wb-mainsnak',
 					$propertyLink,
+					'', // type selector, JS only
 					( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value )
 				);
 
