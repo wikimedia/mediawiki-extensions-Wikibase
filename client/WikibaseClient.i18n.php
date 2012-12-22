@@ -589,8 +589,19 @@ $messages['nl'] = array(
  */
 $messages['nn'] = array(
 	'wbc-desc' => 'Klient for Wikibase-utvidinga',
+	'wbc-after-page-move' => 'Du kan òg [$1 oppdatera] det tilknytte Wikidata-settet for å halda språklenkjene på den flytte sida ved like.',
+	'wbc-comment-remove' => 'Tilknytt Wikidata-sett sletta. Språklenkjer fjerna.',
+	'wbc-comment-linked' => 'Eit Wikidata-sett har vorte lenkja til sida.',
+	'wbc-comment-unlink' => 'Lenkinga til sida har vorte fjerna frå Wikidata-settet. Språklenkjer fjerna.',
+	'wbc-comment-restore' => 'Tilknytt Wikidata-sett attoppretta. Språklenkjer lagde inn att.',
+	'wbc-comment-update' => 'Språklenkjer oppdaterte.',
+	'wbc-comment-sitelink-add' => 'Språklenkje lagd til: $1',
+	'wbc-comment-sitelink-change' => 'Språklenkje endra frå $1 til $2',
+	'wbc-comment-sitelink-remove' => 'Språklenkje fjerna: $1',
 	'wbc-editlinks' => 'Endra lenkjer',
 	'wbc-editlinkstitle' => 'Endra mellomspråklege lenkjer',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Vis Wikidata-endringar i siste endringane',
 );
 
 /** Polish (polski)

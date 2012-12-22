@@ -369,9 +369,15 @@ $messages['nl'] = array(
 
 /** Norwegian Nynorsk (norsk (nynorsk)‎)
  * @author Jeblad
+ * @author Njardarlogar
  */
 $messages['nn'] = array(
-	'wikibaselib-desc' => 'Felles funksjonalitet for Wikibase, det strukturerte datalageret',
+	'wikibaselib-desc' => 'Har felles funksjonalitet for Wikibase- og Wikibase Client-utvidingane',
+	'wikibaselib-entity-item' => 'sett',
+	'wikibaselib-entity-property' => 'eigenskap',
+	'wikibaselib-entity-query' => 'spørjing',
+	'datatypes-type-wikibase-item' => 'Sett',
+	'datatypes-type-commonsMedia' => 'Mediefil frå Commons',
 );
 
 /** Polish (polski)
