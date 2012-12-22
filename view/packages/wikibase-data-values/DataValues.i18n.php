@@ -125,6 +125,13 @@ $messages['hsb'] = array(
 	'version-datavalues' => 'Datowe hódnoty',
 );
 
+/** Indonesian (Bahasa Indonesia)
+ * @author Farras
+ */
+$messages['id'] = array(
+	'version-datavalues' => 'DataValues',
+);
+
 /** Italian (italiano)
  * @author Beta16
  */
