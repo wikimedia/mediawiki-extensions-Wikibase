@@ -38,9 +38,10 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Shirayuki
  */
 $messages['qqq'] = array(
-	'datavalues-desc' => '{{desc}}',
+	'datavalues-desc' => '{{desc|name=Data Values|url=http://www.mediawiki.org/wiki/Extension:DataValues}}',
 	'version-datavalues' => 'Name of the DataValues extension collection, used on Special:Version',
 );
 
@@ -129,6 +130,7 @@ $messages['hsb'] = array(
  * @author Farras
  */
 $messages['id'] = array(
+	'datavalues-desc' => 'Kumpulan objek yang mewakili berbagai macam nilai',
 	'version-datavalues' => 'DataValues',
 );
 
@@ -178,6 +180,20 @@ $messages['ms'] = array(
 $messages['nl'] = array(
 	'datavalues-desc' => 'Verzameling objecten die verschillende soorten waarden vertegenwoordigen',
 	'version-datavalues' => 'Gegevenswaarden',
+);
+
+/** Sinhala (සිංහල)
+ * @author Singhalawap
+ */
+$messages['si'] = array(
+	'version-datavalues' => 'දත්තයේ අගයන්',
+);
+
+/** Swedish (svenska)
+ * @author WikiPhoenix
+ */
+$messages['sv'] = array(
+	'version-datavalues' => 'Datavärden',
 );
 
 /** Tamil (தமிழ்)
