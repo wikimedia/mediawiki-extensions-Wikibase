@@ -330,6 +330,18 @@ $messages['mk'] = array(
 	'datatypes-type-commonsMedia' => 'Медиумска податотека од Ризницата',
 );
 
+/** Malayalam (മലയാളം)
+ * @author Praveenp
+ */
+$messages['ml'] = array(
+	'wikibaselib-desc' => 'വിക്കിബേസിനും വിക്കിബേസ് ക്ലയന്റ് അനുബന്ധങ്ങൾക്കുമുള്ള പൊതു പ്രവർത്തനരീതി',
+	'wikibaselib-entity-item' => 'ഇനം',
+	'wikibaselib-entity-property' => 'ഗുണഗണങ്ങൾ',
+	'wikibaselib-entity-query' => 'ആവശ്യം',
+	'datatypes-type-wikibase-item' => 'ഇനം',
+	'datatypes-type-commonsMedia' => 'കോമൺസിൽ നിന്നുള്ള മീഡിയ പ്രമാണം',
+);
+
 /** Malay (Bahasa Melayu)
  * @author Anakmalaysia
  */

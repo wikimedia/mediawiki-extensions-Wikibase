@@ -747,6 +747,13 @@ $messages['be-tarask'] = array(
 	'wikibase-item-summary-wblinktitles-connect' => '{{plural:$1|Злучаная старонка|Злучаныя старонкі}} [$2↔$3]',
 );
 
+/** Bulgarian (български)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['bg'] = array(
+	'wikibase-edit' => 'редактиране',
+);
+
 /** Breton (brezhoneg)
  * @author Fulup
  */
@@ -1018,7 +1025,8 @@ $messages['da'] = array(
 	'wikibase-aliases-input-help-message' => 'Hvis dette datasæt er kendt under mere end ét bestemt navn, kan du angive alias og synonymer, så det kan findes ved de alternative navne.',
 	'wikibase-aliases-empty' => 'ingen definerede alias',
 	'wikibase-datatype-label' => 'datatype:',
-	'wikibase-snak-unsupporteddatatype' => 'håndtering af værdier for "$1" - datatypen understøttes ikke i øjeblikket.',
+	'wikibase-snakview-property-input-placeholder' => 'egenskab',
+	'wikibase-snakview-unsupporteddatatype' => 'Håndtering af værdier for " $1 "-datatype understøttes ikke endnu.',
 	'wikibase-restrictionedit-tooltip-message' => 'Denne side er beskyttet. Redigering er ikke tilladt.',
 	'wikibase-blockeduser-tooltip-message' => 'Du er blokeret fra at redigere.',
 	'wikibase-tooltip-error-details' => 'Detaljer',
@@ -1038,7 +1046,7 @@ $messages['da'] = array(
 	'wikibase-error-ui-session-failure' => 'Din session er udløbet. Log venligst ind igen.',
 	'wikibase-error-ui-edit-conflict' => 'Der er en redigerings-konflikt. Genindlæs og gem igen.',
 	'wikibase-move-error' => 'Du kan ikke flytte sider, der er i navneområdet for data, og du kan ikke flytte sider ind i det.',
-	'wikibase-error-sitelink-already-used' => 'Områdelink [[$1:$2]] bruges allerede elementet [[ $3 ]].', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Områdelink [[ $1 : $2 ]] anvendes allerede af emnet [[ $3 ]].', # Fuzzy
 	'wikibase-error-label-not-unique-wikibase-property' => 'En anden egenskab ($3) har allerede etiketten "$1" indenfor sprogkode $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'En anden søgning ($3) har allerede etiketten "$1" indenfor sprogkode $2',
 	'wikibase-error-label-not-unique-item' => 'Et andet emne ($3) har allerede etiketten "$1" og beskrivelse "$4" indenfor sprogkode $2',
@@ -1108,7 +1116,11 @@ $messages['da'] = array(
 <span class="plainlinks">[{{fullurl: {{#Special:Log}} |page = {{FULLPAGENAMEE}}} søge relaterede logfiler]</span>
  for at finde ud af hvad skete.', # Fuzzy
 	'wikibase-noentity-createone' => 'Du kan også [[ $1 |oprette et nyt]].', # Fuzzy
+	'wikibase-item-summary-wbsetitem' => 'Oprettede et nyt emne',
 	'wikibase-item-summary-wbeditentity' => 'Oprettede et nyt emne',
+	'wikibase-item-summary-wbeditentity-create' => 'Oprettede et nyt emne',
+	'wikibase-item-summary-wbeditentity-update' => 'Opdateret et emne',
+	'wikibase-item-summary-wbeditentity-override' => 'Overskrev et emne',
 	'wikibase-item-summary-wbsetlabel-set' => 'Ændrede [$2] etiket',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Fjernede [$2] etiket',
 	'wikibase-item-summary-wbsetdescription-set' => 'Ændrede [$2] beskrivelse',
@@ -1124,6 +1136,18 @@ $messages['da'] = array(
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Oprettede {{plural:$1|egenskab|egenskaber}} uden værdi',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Oprettede {{plural:$1|egenskab|egenskaber}} med ukendt værdi',
 	'wikibase-item-summary-special-create-item' => 'Oprettede et [$2] emne med {{plural:$1|værdi|værdier}}',
+	'wikibase-item-summary-special-setlabel-set' => 'Ændrede [ $2 ] {{plural: $1 |label|labels}}', # Fuzzy
+	'wikibase-property-summary-wbeditentity-create' => 'Oprettede en ny egenskab',
+	'wikibase-property-summary-wbeditentity-update' => 'Opdaterede en egenskab',
+	'wikibase-property-summary-wbeditentity-override' => 'Overskrev en egenskab',
+	'wikibase-property-summary-wbsetlabel-set' => 'Ændrede [$2] etiket(-ter)',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Fjernede [$2] etiket',
+	'wikibase-property-summary-wbsetdescription-set' => 'Ændrede [$2] beskrivelse',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Fjernede [$2] beskrivelse',
+	'wikibase-property-summary-wbsetaliases-set' => 'Indstiller [ $2 ] alias', # Fuzzy
+	'wikibase-property-summary-wbsetaliases-add-remove' => 'Tilføjede og fjernede [ $2 ] {{plural: $1 |alias|alias}}', # Fuzzy
+	'wikibase-property-summary-wbsetaliases-add' => 'Tilføjede [ $2 ] {{plural: $1 |alias|alias}}', # Fuzzy
+	'wikibase-property-summary-wbsetaliases-remove' => 'Fjernede [ $2 ] alias', # Fuzzy
 	'wikibase-property-summary-special-create-property' => 'Oprettede en [$2] egenskab med {{plural:$1|værdi|værdier}}',
 	'wikibase-query-summary-special-create-query' => 'Oprettede en [$2] forespørgsel med {{plural:$1|værdi|værdier}}',
 	'content-model-wikibase-item' => 'Wikibase emne',
@@ -3121,6 +3145,25 @@ $messages['ia'] = array(
 	'content-model-1001' => 'Elemento de Wikibase',
 );
 
+/** Indonesian (Bahasa Indonesia)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['id'] = array(
+	'wikibase-edit' => 'sunting',
+	'wikibase-save' => 'simpan',
+	'wikibase-cancel' => 'Batalkan',
+	'wikibase-add' => 'tambahkan',
+	'wikibase-sitelink-page-edit-placeholder' => 'Artikel',
+	'wikibase-sitelinks-sitename-columnheading' => 'Bahasa',
+	'wikibase-remove' => 'hapus',
+	'wikibase-tooltip-error-details' => 'Rincian',
+	'wikibase-itembytitle-lookup-page' => 'Halaman:',
+	'wikibase-itemdisambiguation-lookup-language' => 'Bahasa:',
+	'wikibase-createentity-description' => 'Deskripsi:',
+	'wikibase-setlabel-language' => 'Bahasa',
+	'wikibase-entitieswithoutlabel-label-language' => 'Bahasa:',
+);
+
 /** Iloko (Ilokano)
  * @author Lam-ang
  */
@@ -4199,7 +4242,7 @@ $messages['mk'] = array(
 	'wikibase-aliases-input-help-message' => 'Ако овој податочен збир е познат по повеќе од едно име, тогаш можете да внесете алијаси и синоними. Така збирот ќе може да се најде и по неговите други имиња.',
 	'wikibase-aliases-empty' => 'Нема зададено алијаси.',
 	'wikibase-datatype-label' => 'Податочен тип:',
-	'wikibase-snakview-property-input-placeholder' => 'изберете својство', # Fuzzy
+	'wikibase-snakview-property-input-placeholder' => 'својство',
 	'wikibase-snakview-unsupporteddatatype' => 'Засега не е поддржано работењето со вредности за податочниот тип „$1“.',
 	'wikibase-restrictionedit-tooltip-message' => 'Страницава е заштитена. Уредувањето не е дозволено.',
 	'wikibase-blockeduser-tooltip-message' => 'Блокирани сте од уредување.',
@@ -4340,6 +4383,41 @@ $messages['mk'] = array(
 	'right-label-update' => 'Измена на етикети',
 	'right-description-remove' => 'Отстранување на описи',
 	'right-description-update' => 'Измена на описи',
+);
+
+/** Malayalam (മലയാളം)
+ * @author Praveenp
+ */
+$messages['ml'] = array(
+	'wikibase-desc' => 'വിന്യസിത ഡേറ്റാ റെപ്പോസിറ്ററി',
+	'wikibase-edit' => 'തിരുത്തുക',
+	'wikibase-save' => 'സേവ് ചെയ്യുക',
+	'wikibase-cancel' => 'റദ്ദാക്കുക',
+	'wikibase-add' => 'ചേർക്കുക',
+	'wikibase-save-inprogress' => 'സേവ് ചെയ്യുന്നു...',
+	'wikibase-remove-inprogress' => 'നീക്കം ചെയ്യുന്നു...',
+	'wikibase-label-empty' => 'ഇതുവരെ തലക്കുറിയൊന്നും നിർവചിച്ചിട്ടില്ല',
+	'wikibase-label-edit-placeholder' => 'തലക്കുറി നൽകുക',
+	'wikibase-description-empty' => 'ഇതുവരെ വിവരണമൊന്നും നിർവചിച്ചിട്ടില്ല',
+	'wikibase-description-edit-placeholder' => 'വിവർണം നൽകുക',
+	'wikibase-sitelink-site-edit-placeholder' => 'സൈറ്റ്',
+	'wikibase-sitelink-page-edit-placeholder' => 'ലേഖനം',
+	'wikibase-alias-edit-placeholder' => 'ഒരു മറുപേര് നൽകുക',
+	'wikibase-label-input-help-message' => 'ഈ ഡേറ്റാ ഗണത്തിന്റെ തലക്കെട്ട് $1 ആയി നൽകുക.',
+	'wikibase-description-input-help-message' => '$1 ആയി ഒരു ചെറുവിവരണം നൽകുക.',
+	'wikibase-statements' => 'പ്രസ്താവനകൾ',
+	'wikibase-sitelinks' => 'ഈ ഇനത്തിലേയ്ക്ക് കണ്ണി ചേർത്തിട്ടുള്ള താളുകളുടെ പട്ടിക',
+	'wikibase-sitelinks-sitename-columnheading' => 'ഭാഷ',
+	'wikibase-sitelinks-siteid-columnheading' => 'കോഡ്',
+	'wikibase-sitelinks-link-columnheading' => 'കണ്ണിചേർത്തിട്ടുള്ള ലേഖനം',
+	'wikibase-sitelinks-add' => 'സൈറ്റ്-കണ്ണിയിൽ ഒരു കണ്ണി ചേർക്കുക',
+	'wikibase-sitelinks-empty' => 'ഇതുവരെ ഈ ഇനത്തിന് സൈറ്റ്-കണ്ണി നൽകിയിട്ടില്ല.',
+	'wikibase-sitelinks-input-help-message' => 'ഈ ഇനവുമായി ബന്ധമുള്ള താളിലേയ്ക്ക് ഒരു കണ്ണി സജ്ജീകരിക്കുക.',
+	'wikibase-remove' => 'നീക്കം ചെയ്യുക',
+	'wikibase-undo-title' => '"$1" എന്നതിൽ നടത്തിയ തിരുത്ത് വേണ്ടന്നു വെയ്ക്കുന്നു',
+	'wikibase-restore-title' => '"$1" എന്നതിന്റെ പഴയ പതിപ്പ് പുനഃസ്ഥാപിക്കുന്നു',
+	'wikibase-partial-undo' => 'തിരുത്തൽ ഭാഗികമായി ഒഴിവാക്കാവുന്നതാണ്.',
+	'wikibase-undo-revision-error' => 'തിരസ്കരണം പരാജയപ്പെട്ടു',
 );
 
 /** Marathi (मराठी)
@@ -5487,10 +5565,10 @@ $messages['ro'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Etichetă:',
 	'wikibase-itemdisambiguation-submit' => 'Caută',
 	'special-createitem' => 'Creare element nou',
-	'wikibase-createitem-fieldset' => 'Creați un element nou',
+	'wikibase-createitem-fieldset' => 'Creare element nou',
 	'wikibase-createentity-label' => 'Etichetă:',
 	'wikibase-createentity-description' => 'Descriere:',
-	'wikibase-createentity-submit' => 'Creați',
+	'wikibase-createentity-submit' => 'Creează',
 	'special-setlabel' => 'Creare etichetă',
 	'wikibase-setlabel-id' => 'Identificator',
 	'wikibase-setlabel-language' => 'Limbă',
@@ -5498,10 +5576,10 @@ $messages['ro'] = array(
 	'wikibase-setlabel-submit' => 'Definește eticheta',
 	'wikibase-entitieswithoutlabel-label-language' => 'Limbă:',
 	'wikibase-restoreold' => 'restaurare',
-	'right-label-remove' => 'Eliminați etichetele',
-	'right-label-update' => 'Actualizați etichetele',
-	'right-description-remove' => 'Elimină descrierile',
-	'right-description-update' => 'Actualizează descrierile',
+	'right-label-remove' => 'Elimină etichete',
+	'right-label-update' => 'Actualizează etichete',
+	'right-description-remove' => 'Elimină descrieri',
+	'right-description-update' => 'Actualizează descrieri',
 );
 
 /** Russian (русский)
@@ -6001,6 +6079,8 @@ $messages['uk'] = array(
 	'wikibase-setlabel-id' => 'ID',
 	'wikibase-setlabel-language' => 'Мова',
 	'wikibase-entitieswithoutlabel-label-language' => 'Мова:',
+	'right-item-create' => 'Створення елементів',
+	'right-item-remove' => 'Видалити елементи',
 );
 
 /** Urdu (اردو)
@@ -6306,7 +6386,7 @@ $messages['zh-hans'] = array(
 	'wikibase-aliases-input-help-message' => '如果此数据集有一个以上的名称，您可以输入它的别名和同义词，以便可以通过其他名称找到此项。',
 	'wikibase-aliases-empty' => '没有已定义的别名。',
 	'wikibase-datatype-label' => '数据类型：',
-	'wikibase-snakview-property-input-placeholder' => '选择一个属性', # Fuzzy
+	'wikibase-snakview-property-input-placeholder' => '属性',
 	'wikibase-snakview-unsupporteddatatype' => '目前不支持数据类型“$1”的数值处理。',
 	'wikibase-restrictionedit-tooltip-message' => '此页面已被保护。不允许编辑。',
 	'wikibase-blockeduser-tooltip-message' => '您已被封禁，不能编辑。',
@@ -6340,14 +6420,14 @@ $messages['zh-hans'] = array(
 	'wikibase-itembytitle-nothing-found' => '上次搜索没有发现任何项目，请更改并再次搜索。',
 	'wikibase-itembytitle-invalid-site' => '上次查询不能用于搜索。请提供一个合适的查询。',
 	'wikibase-itembytitle-description' => '站点是一种标识代码，如“enwiki”。',
-	'wikibase-itembytitle-create' => '您也可以[{{fullurl:Special:CreateItem|site=$1&page=$2}}创建项]。',
+	'wikibase-itembytitle-create' => '您也可以[{{fullurl:Special:CreateItem|site=$1&page=$2}} 创建项目]。',
 	'special-itemdisambiguation' => '消歧义：具有同一个标签的项',
 	'wikibase-itemdisambiguation-lookup-fieldset' => '按标签搜索项',
 	'wikibase-itemdisambiguation-lookup-language' => '语言：',
 	'wikibase-itemdisambiguation-lookup-label' => '标签：',
 	'wikibase-itemdisambiguation-submit' => '搜索',
 	'wikibase-itemdisambiguation-nothing-found' => '抱歉，没有找到具有此标签的项。',
-	'wikibase-itemdisambiguation-create' => '您可以[{{fullurl:Special:CreateItem|label=$1}} 创建项]。',
+	'wikibase-itemdisambiguation-create' => '您可以[{{fullurl:Special:CreateItem|label=$1}} 创建项目]。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '抱歉，您提供的语言标识符对系统是未知的。请使用有效的标识符，如“en”。',
 	'wikibase-itemdisambiguation-description' => '用于搜索的值必须是一个完整的文本项。语言是一种标识符，例如“en”。',
 	'special-newproperty' => '创建新属性',
@@ -6502,7 +6582,7 @@ $messages['zh-hant'] = array(
 	'wikibase-aliases-input-help-message' => '若此數據集有多於一個的名稱，您可以輸入其別名和同義詞，以便通過其他名稱找到此項。',
 	'wikibase-aliases-empty' => '没有已定義的別名。',
 	'wikibase-datatype-label' => '數據類型：',
-	'wikibase-snakview-property-input-placeholder' => '選擇一個屬性', # Fuzzy
+	'wikibase-snakview-property-input-placeholder' => '屬性',
 	'wikibase-snakview-unsupporteddatatype' => '當前不支援數據類型「$1」的數值處理。',
 	'wikibase-restrictionedit-tooltip-message' => '此頁面已被保護。不容許編輯。',
 	'wikibase-blockeduser-tooltip-message' => '您已被封禁，不能編輯。',
