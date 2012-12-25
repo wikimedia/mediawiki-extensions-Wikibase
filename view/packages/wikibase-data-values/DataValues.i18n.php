@@ -182,6 +182,22 @@ $messages['nl'] = array(
 	'version-datavalues' => 'Gegevenswaarden',
 );
 
+/** Polish (polski)
+ * @author Matma Rex
+ */
+$messages['pl'] = array(
+	'datavalues-desc' => 'Zbiór obiektów reprezentujących różne rodzaje wartości',
+	'version-datavalues' => 'DataValues',
+);
+
+/** Piedmontese (Piemontèis)
+ * @author Dragonòt
+ */
+$messages['pms'] = array(
+	'datavalues-desc' => "Colession d'oget rapresentant vaire sòrt ëd valor",
+	'version-datavalues' => 'DataValues',
+);
+
 /** Sinhala (සිංහල)
  * @author Singhalawap
  */
