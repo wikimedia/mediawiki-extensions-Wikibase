@@ -51,7 +51,7 @@ class ClaimListAccessTest extends \MediaWikiTestCase {
 
 		$lists[] = \Wikibase\Property::newEmpty();
 		$lists[] = \Wikibase\Query::newEmpty();
-		$lists[] = new \Wikibase\ClaimList();
+		$lists[] = new \Wikibase\Claims();
 
 		$argLists = array();
 

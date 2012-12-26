@@ -144,7 +144,7 @@ class ApiGetClaimsTest extends \ApiTestCase {
 		$this->assertArrayHasKey( 'claims', $resultArray, 'top level element has a claims key' );
 
 		if ( is_array( $claims ) ) {
-			$claims = new \Wikibase\ClaimList( $claims );
+			$claims = new \Wikibase\Claims( $claims );
 		}
 
 		$serializer = new \Wikibase\ClaimsSerializer();

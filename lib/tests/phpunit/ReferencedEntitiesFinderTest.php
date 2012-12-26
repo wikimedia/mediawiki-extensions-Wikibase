@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Lib\Test;
-use Wikibase\ClaimList;
+use Wikibase\Claims;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\ClaimObject;
 use Wikibase\PropertyNoValueSnak;
@@ -137,7 +137,7 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 
 		$linkFinder = new ReferencedEntitiesFinder( $this->getMockEntityLoader() );
 
-		$actual = $linkFinder->findClaimLinks( new ClaimList( $claims ) );
+		$actual = $linkFinder->findClaimLinks( new Claims( $claims ) );
 
 		$this->assertArrayEquals( $expected, $actual );
 	}

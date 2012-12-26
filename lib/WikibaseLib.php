@@ -122,7 +122,6 @@ $wgAutoloadClasses['Wikibase\ItemChange']			= $dir . 'includes/changes/ItemChang
 // includes/claims
 $wgAutoloadClasses['Wikibase\Claim'] 				= $dir . 'includes/claim/Claim.php';
 $wgAutoloadClasses['Wikibase\ClaimAggregate'] 		= $dir . 'includes/claim/ClaimAggregate.php';
-$wgAutoloadClasses['Wikibase\ClaimList'] 			= $dir . 'includes/claim/ClaimList.php';
 $wgAutoloadClasses['Wikibase\ClaimListAccess'] 		= $dir . 'includes/claim/ClaimListAccess.php';
 $wgAutoloadClasses['Wikibase\ClaimObject'] 			= $dir . 'includes/claim/ClaimObject.php';
 $wgAutoloadClasses['Wikibase\Claims'] 				= $dir . 'includes/claim/Claims.php';
