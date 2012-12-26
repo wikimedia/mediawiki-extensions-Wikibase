@@ -198,6 +198,14 @@ $messages['pms'] = array(
 	'version-datavalues' => 'DataValues',
 );
 
+/** Russian (русский)
+ * @author Ole Yves
+ */
+$messages['ru'] = array(
+	'datavalues-desc' => 'Коллекция объектов, представляющих различные значения',
+	'version-datavalues' => 'DataValues',
+);
+
 /** Sinhala (සිංහල)
  * @author Singhalawap
  */
