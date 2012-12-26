@@ -196,6 +196,17 @@ $messages['fr'] = array(
 	'datatypes-type-commonsMedia' => 'Fichier multimédia de Commons',
 );
 
+/** Franco-Provençal (arpetan)
+ * @author ChrisPtDe
+ */
+$messages['frp'] = array(
+	'wikibaselib-entity-item' => 'èlèment',
+	'wikibaselib-entity-property' => 'propriètât',
+	'wikibaselib-entity-query' => 'demanda',
+	'datatypes-type-wikibase-item' => 'Èlèment',
+	'datatypes-type-commonsMedia' => 'Fichiér mèdia de Commons',
+);
+
 /** Galician (galego)
  * @author Toliño
  */
@@ -316,6 +327,7 @@ $messages['ko'] = array(
  */
 $messages['ksh'] = array(
 	'wikibaselib-desc' => 'Jemeinsamme Fungxjuhne för di Projramm-Zohsäz <i lang="en">Wikibase</i> un <i lang="en">Wikibase Client</i>.',
+	'wikibaselib-entity-property' => 'Eijeschaff',
 );
 
 /** Macedonian (македонски)
@@ -451,6 +463,16 @@ $messages['ru'] = array(
 	'wikibaselib-entity-query' => 'запрос',
 	'datatypes-type-wikibase-item' => 'Элемент',
 	'datatypes-type-commonsMedia' => 'Медиафайл на Викисклде',
+);
+
+/** Sinhala (සිංහල)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['si'] = array(
+	'wikibaselib-entity-item' => 'අයිතමය',
+	'wikibaselib-entity-property' => 'ගුණාංගය',
+	'wikibaselib-entity-query' => 'ප්‍රශ්නය',
+	'datatypes-type-wikibase-item' => 'අයිතමය',
 );
 
 /** Tamil (தமிழ்)

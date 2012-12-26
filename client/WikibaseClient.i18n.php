@@ -285,8 +285,14 @@ $messages['fr'] = array(
  * @author ChrisPtDe
  */
 $messages['frp'] = array(
+	'wbc-comment-update' => 'Lims de lengoua betâs a jorn.',
+	'wbc-comment-sitelink-add' => 'Lim de lengoua apondu : $1',
+	'wbc-comment-sitelink-change' => 'Lim de lengoua changiê de $1 a $2',
+	'wbc-comment-sitelink-remove' => 'Lim de lengoua enlevâ : $1',
 	'wbc-editlinks' => 'Changiér los lims',
 	'wbc-editlinkstitle' => 'Changiér los lims entèrlengoua',
+	'wbc-rc-hide-wikidata' => 'Wikidata $1',
+	'wbc-rc-show-wikidata-pref' => 'Fâre vêre los changements de Wikidata dedens los dèrriérs changements',
 );
 
 /** Galician (galego)
@@ -691,6 +697,14 @@ $messages['ru'] = array(
 	'wbc-editlinkstitle' => 'Редактировать межъязыковые ссылки',
 	'wbc-rc-hide-wikidata' => '$1 Викиданные',
 	'wbc-rc-show-wikidata-pref' => 'Показать изменения Викиданных в списке свежих правок',
+);
+
+/** Sinhala (සිංහල)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['si'] = array(
+	'wbc-editlinks' => 'සබැඳි සංස්කරණය කරන්න',
+	'wbc-rc-hide-wikidata' => '$1 විකිදත්ත',
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
