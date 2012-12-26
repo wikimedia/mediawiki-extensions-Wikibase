@@ -85,17 +85,15 @@ class SpecialNewProperty extends SpecialCreateEntity {
 		$status = parent::modifyEntity( $propertyContent );
 
 		if ( $this->dataType !== '' ) {
-			// TODO: lookup property by lang+label rather then by id
-			try {
-				$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+			$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
 
-				$propertyContent->getProperty()->setDataType(
-					$libRegistry->getDataTypeFactory()->getType( $this->dataType )
-				);
+			$dataType = $libRegistry->getDataTypeFactory()->getType( $this->dataType );
+
+			if ( $dataType === null ) {
+				$status->fatal( 'wikibase-newproperty-invalid-datatype' );
 			}
-			catch ( MWException $exception ) {
-				// TODO: we want a nice internationalized error message
-				$status->fatal( $exception->getText() );
+			else {
+				$propertyContent->getProperty()->setDataType( $dataType );
 			}
 		}
 
