@@ -85,15 +85,15 @@ class ItemViewTest extends \MediaWikiTestCase {
 		if ( is_string( $expected ) ) {
 			$expected = ( array )$expected;
 		}
-		$expected[] = '/class\s*=\s*"wb-entity wb-' . $view::VIEW_TYPE . '"/';
+		$expected[] = '/class\s*=\s*"wb-entity wb-' . Item::ENTITY_TYPE . '"/';
 
 		if( $itemData === false ) {
 			$itemContent = ItemContent::newEmpty();
-			$expected[] = '/id\s*=\s*"wb-' . $view::VIEW_TYPE . '-new"/';
+			$expected[] = '/id\s*=\s*"wb-' . Item::ENTITY_TYPE . '-new"/';
 		} else {
 			$itemData += array( 'entity' => Item::getIdPrefix() . '123' );
 			$itemContent = ItemContent::newFromArray( $itemData );
-			$expected[] = '/id\s*=\s*"wb-' . $view::VIEW_TYPE . '-' . $itemContent->getEntity()->getPrefixedId() . '"/';
+			$expected[] = '/id\s*=\s*"wb-' . Item::ENTITY_TYPE . '-' . $itemContent->getEntity()->getPrefixedId() . '"/';
 		}
 
 		$itemContent->getEntity()->setLabel( 'de', 'Stockholm' );
