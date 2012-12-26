@@ -48,11 +48,10 @@ interface TermCombinationMatchFinder {
 	 * @param array $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
-	 * @param integer|null $excludeId
-	 * @param string|null $excludeType
+	 * @param EntityId|null $excludeId
 	 *
 	 * @return array
 	 */
-	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, $excludeId = null, $excludeType = null );
+	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, EntityId $excludeId = null );
 
 }

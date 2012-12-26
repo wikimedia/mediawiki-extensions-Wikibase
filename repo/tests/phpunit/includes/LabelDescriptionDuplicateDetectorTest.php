@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Test;
 use Wikibase\Term;
+use Wikibase\EntityId;
 use Diff\Diff;
 use Diff\DiffOpChange;
 
@@ -190,12 +191,11 @@ class MockTermCache implements \Wikibase\TermCombinationMatchFinder {
 	 * @param array $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
-	 * @param int|null $excludeId
-	 * @param string|null $excludeType
+	 * @param EntityId|null $excludeId
 	 *
 	 * @return array
 	 */
-	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, $excludeId = null, $excludeType = null ) {
+	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, EntityId $excludeId = null ) {
 		/**
 		 * @var Term[] $termPair
 		 * @var Term[] $matchingTerms

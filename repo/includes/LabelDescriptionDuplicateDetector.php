@@ -76,8 +76,7 @@ class LabelDescriptionDuplicateDetector {
 			$terms,
 			null,
 			$entity->getType(),
-			$entity->getId() === null ? null : $entity->getId()->getNumericId(),
-			$entity->getType()
+			$entity->getId() === null ? null : $entity->getId()
 		);
 
 		return $foundTerms;
