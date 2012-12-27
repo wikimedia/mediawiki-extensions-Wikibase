@@ -551,9 +551,7 @@ final class ClientHooks {
 	public static function onBeforePageDisplay( \OutputPage $out, \Skin $skin ) {
 		wfProfileIn( __METHOD__ );
 
-		$title = $out->getTitle();
-
-		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
+		if ( ClientUtils::includeWikibaseLinks( $skin->getContext() ) === true ) {
 			$out->addModules( 'wikibase.client.init' );
 		}
 
@@ -579,9 +577,7 @@ final class ClientHooks {
 			return true;
 		}
 
-		$title = $skin->getContext()->getTitle();
-		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
-
+		if ( ClientUtils::includeWikibaseLinks( $skin->getContext() ) === true ) {
 			$title = $skin->getContext()->getTitle();
 
 			// gets the main part of the title, no underscores used in this db table

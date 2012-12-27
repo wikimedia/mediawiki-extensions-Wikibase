@@ -92,4 +92,26 @@ final class ClientUtils {
 		return \Html::element( 'a', $attribs, $text );
 	}
 
+	/**
+	 * Checks whether to include Wikibase Client module and try to display them
+	 * based on namespace and presence of languages links in OutputPage.  Depending on action,
+	 * Wikibase and other interwiki links may or may not be included in OutputPage.
+	 *
+	 * @since 0.4
+	 *
+	 * @param \IContextSource $context
+	 *
+	 * @return bool
+	 */
+	public static function includeWikibaseLinks( \IContextSource $context ) {
+		$links = $context->getOutput()->getLanguageLinks();
+		$title = $context->getTitle();
+
+		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) && !empty( $links ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
 }
