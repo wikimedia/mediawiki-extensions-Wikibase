@@ -92,4 +92,29 @@ final class ClientUtils {
 		return \Html::element( 'a', $attribs, $text );
 	}
 
+	/**
+	 * Checks whether to include Wikibase language links based on namespace and action.
+	 *
+	 * @since 0.4
+	 *
+	 * @param \Skin $skin
+	 *
+	 * @return bool
+	 */
+	public static function includeWikibaseLinks( \Skin $skin ) {
+		$context = $skin->getOutput()->getContext();
+		$action = \Action::getActionName( $context );
+		$title = $context->getTitle();
+
+		// @todo: do we want to show links on edit action?
+		if (
+			( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) &&
+			( in_array( $action, array( 'view', 'purge', 'raw' ) )
+				|| $action === null ) ) {
+					return true;
+		}
+
+		return false;
+	}
+
 }
