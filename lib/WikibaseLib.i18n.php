@@ -473,6 +473,7 @@ $messages['si'] = array(
 	'wikibaselib-entity-property' => 'ගුණාංගය',
 	'wikibaselib-entity-query' => 'ප්‍රශ්නය',
 	'datatypes-type-wikibase-item' => 'අයිතමය',
+	'datatypes-type-commonsMedia' => 'කොමන්ස් මාධ්‍ය ගොනුව',
 );
 
 /** Tamil (தமிழ்)

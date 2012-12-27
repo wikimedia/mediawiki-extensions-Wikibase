@@ -684,15 +684,20 @@ $messages['ro'] = array(
 
 /** Russian (русский)
  * @author Kaganer
+ * @author Ole Yves
  * @author Александр Сигачёв
  */
 $messages['ru'] = array(
 	'wbc-desc' => 'Клиент для расширения Wikibase',
 	'wbc-after-page-move' => 'Чтобы исправить на переименованной странице языковые ссылки, вы можете также [$1  обновить] связанный элемент Викиданных.',
 	'wbc-comment-remove' => 'Связанный элемент Викиданных удалён. Языковые ссылки ликвидированы.',
+	'wbc-comment-linked' => 'Элемент Викиданных был связан с данной страницей.',
 	'wbc-comment-unlink' => 'Связь этой страницы с элементом Викиданных была разорвана. Языковые ссылки удалены.',
 	'wbc-comment-restore' => 'Удаление связанного элемента Викиданных отменено. Языковые ссылки восстановлены.',
 	'wbc-comment-update' => 'Языковые ссылки обновлены.',
+	'wbc-comment-sitelink-add' => 'Интервики-ссылка добавлена: $1.',
+	'wbc-comment-sitelink-change' => 'Интервики-ссылка изменена с $1 на $2',
+	'wbc-comment-sitelink-remove' => 'Интервики-ссылка удалена: $1',
 	'wbc-editlinks' => 'Редактировать ссылки',
 	'wbc-editlinkstitle' => 'Редактировать межъязыковые ссылки',
 	'wbc-rc-hide-wikidata' => '$1 Викиданные',
@@ -703,7 +708,12 @@ $messages['ru'] = array(
  * @author පසිඳු කාවින්ද
  */
 $messages['si'] = array(
+	'wbc-comment-update' => 'භාෂා සබැඳි යාවත්කාලීන කරන ලදී.',
+	'wbc-comment-sitelink-add' => 'භාෂා සබැඳිය එක් කරන ලදී: $1',
+	'wbc-comment-sitelink-change' => 'භාෂා සබැඳිය $1 ගෙන් $2 වෙත වෙනස් වෙන ලදී',
+	'wbc-comment-sitelink-remove' => 'භාෂා සබැඳිය ඉවත් කරන ලදී: $1',
 	'wbc-editlinks' => 'සබැඳි සංස්කරණය කරන්න',
+	'wbc-editlinkstitle' => 'අන්තර්භාෂාමය සබැඳි සංස්කරණය කරන්න',
 	'wbc-rc-hide-wikidata' => '$1 විකිදත්ත',
 );
 
