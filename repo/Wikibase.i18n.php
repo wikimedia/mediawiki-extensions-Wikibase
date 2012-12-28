@@ -3559,6 +3559,7 @@ $messages['is'] = array(
 	'wikibase-newproperty-intro' => 'Áður en þú býrð til nýjan eiginleika, athugaðu hvort þessi eiginleiki sé til fyrir. Til þess að búa til nýjan þarft þú í minnsta lagi að tilgreina $1n merkimiða eða lýsingu og gilda gagnagerð.',
 	'wikibase-newproperty-fieldset' => 'Búa til nýjan eiginleika',
 	'wikibase-newproperty-datatype' => 'Gagnagerð:',
+	'wikibase-newproperty-invalid-datatype' => 'Ógild gagnagerð tilgreind',
 	'special-createitem' => 'Stofna nýjan hlut',
 	'wikibase-createitem-intro' => 'Áður en þú býrð til nýjan hlut, athugaðu hvort þessi hlutur sé til fyrir. Til þess að búa til nýjan þarft þú í minnsta lagi að tilgreina $1n merkimiða eða lýsingu.',
 	'wikibase-createitem-fieldset' => 'Búa til nýjan hlut',
@@ -5536,6 +5537,32 @@ $messages['pl'] = array(
 	'right-sitelink-update' => 'Uaktualnij łącza strony',
 );
 
+/** Piedmontese (Piemontèis)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['pms'] = array(
+	'wikibase-edit' => 'modìfica',
+	'wikibase-save' => 'salva',
+	'wikibase-add' => 'gionta',
+	'wikibase-sitelinks-sitename-columnheading' => 'Lenga',
+	'wikibase-sitelinks-siteid-columnheading' => 'Còdes',
+	'wikibase-remove' => 'gava',
+	'wikibase-tooltip-error-details' => 'Detaj',
+	'wikibase-itembytitle-lookup-page' => 'Pàgina:',
+	'wikibase-itembytitle-submit' => 'Sërca',
+	'wikibase-itemdisambiguation-lookup-language' => 'Lenga:',
+	'wikibase-itemdisambiguation-lookup-label' => 'Tichëtta:',
+	'wikibase-itemdisambiguation-submit' => 'Sërca',
+	'wikibase-createentity-label' => 'Tichëtta:',
+	'wikibase-createentity-description' => 'Descrission:',
+	'wikibase-createentity-submit' => 'Crea',
+	'wikibase-setlabel-id' => 'ID',
+	'wikibase-setlabel-language' => 'Lenga',
+	'wikibase-setlabel-label' => 'Tichëtta',
+	'wikibase-entitieswithoutlabel-label-language' => 'Lenga:',
+	'wikibase-entitieswithoutlabel-submit' => 'Treuva',
+);
+
 /** Pashto (پښتو)
  * @author Ahmed-Najib-Biabani-Ibrahimkhel
  */
@@ -5556,6 +5583,10 @@ $messages['ps'] = array(
 	'wikibase-itemdisambiguation-submit' => 'پلټل',
 	'wikibase-createentity-description' => 'څرګندونه:',
 	'wikibase-createentity-submit' => 'جوړول',
+	'wikibase-setlabel-id' => 'پېژند',
+	'wikibase-setlabel-language' => 'ژبه',
+	'wikibase-entitieswithoutlabel-label-language' => 'ژبه:',
+	'wikibase-entitieswithoutlabel-submit' => 'موندل',
 	'wikibase-restoreold' => 'بيازېرمل',
 );
 
@@ -6097,9 +6128,16 @@ $messages['si'] = array(
 	'wikibase-item-summary-wbeditentity-create' => 'නව අයිතමයක් තනන ලදී',
 	'wikibase-item-summary-wbeditentity-update' => 'අයිතමය යාවත්කාලීන කරන ලදී',
 	'wikibase-item-summary-wbeditentity-override' => 'අයිතමය ප්‍රතික්ෂේප කරන ලදී',
+	'wikibase-item-summary-wbsetlabel-set' => '[$2] ලේබලය වෙනස් කරන ලදී',
+	'wikibase-item-summary-wbsetdescription-set' => '[$2] විස්තරය වෙනස් කරන ලදී',
+	'wikibase-item-summary-wbsetdescription-remove' => '[$2] විස්තරය ඉවත් කරන ලදී',
 	'wikibase-property-summary-wbeditentity-create' => 'නව අයිතියක් තනන ලදී',
 	'wikibase-property-summary-wbeditentity-update' => 'අයිතිය යාවත්කාලීන කරන ලදී',
 	'wikibase-property-summary-wbeditentity-override' => 'අයිතිය ප්‍රතික්ෂේප කරන ලදී',
+	'wikibase-property-summary-wbsetlabel-set' => '[$2] ලේබලය වෙනස් කරන ලදී',
+	'wikibase-property-summary-wbsetlabel-remove' => '[$2] ලේබලය ඉවත් කරන ලදී',
+	'wikibase-property-summary-wbsetdescription-set' => '[$2] විස්තරය වෙනස් කරන ලදී',
+	'wikibase-property-summary-wbsetdescription-remove' => '[$2] විස්තරය ඉවත් කරන ලදී',
 	'content-model-wikibase-item' => 'විකිපාදක අයිතමය',
 	'content-model-wikibase-property' => 'විකිපාදක අයිතිය',
 	'content-model-wikibase-query' => 'විකිපාදක ප්‍රශ්නය',
@@ -6443,6 +6481,8 @@ $messages['uk'] = array(
 	'wikibase-item-summary-wbeditentity-update' => 'Оновлено елемент',
 	'right-item-create' => 'Створення елементів',
 	'right-item-remove' => 'Видалити елементи',
+	'right-description-remove' => 'Видалити описи',
+	'right-description-update' => 'Оновлення описів',
 );
 
 /** Urdu (اردو)

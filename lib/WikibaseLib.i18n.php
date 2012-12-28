@@ -422,9 +422,15 @@ $messages['pl'] = array(
 /** Piedmontese (Piemontèis)
  * @author Borichèt
  * @author Dragonòt
+ * @author පසිඳු කාවින්ද
  */
 $messages['pms'] = array(
 	'wikibaselib-desc' => "A conten dle funsionalità comun-e a j'estension Wikibase e Wikibase Client",
+	'wikibaselib-entity-item' => 'Element',
+	'wikibaselib-entity-property' => 'propietà',
+	'wikibaselib-entity-query' => 'anterogassion',
+	'datatypes-type-wikibase-item' => 'Element',
+	'datatypes-type-commonsMedia' => 'Archivi ëd mojen comun',
 );
 
 /** Portuguese (português)
