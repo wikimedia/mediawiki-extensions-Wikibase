@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADgX//9iw\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-12-28T19:42:17Z",
+      "side": 1,
+      "message": "The Wikidata team is including either (minor) or (bug #) at the beginning of our commit message.\n\nMy non-wikidata commits have just a bug number or no prefix. For Wikidata, not sure about unilaterally doing things different than the team.",
+      "parentUuid": "AAADgX//9ww\u003d",
+      "revId": "fc04a9534a21ccca8332a9484473e098bb5bc2db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADgX//9xA\u003d",
         "filename": "client/includes/ClientUtils.php",
         "patchSetId": 2
