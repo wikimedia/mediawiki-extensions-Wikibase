@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAADgX//9ww\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2012-12-28T13:15:31Z",
+      "side": 1,
+      "message": "How hard the change was, or what the priority of the change is, should probably not be part of the first line of the commit message.",
+      "revId": "fc04a9534a21ccca8332a9484473e098bb5bc2db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADgX//9xA\u003d",
         "filename": "client/includes/ClientUtils.php",
         "patchSetId": 2
