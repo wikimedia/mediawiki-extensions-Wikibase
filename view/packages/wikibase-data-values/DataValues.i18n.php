@@ -126,6 +126,14 @@ $messages['hsb'] = array(
 	'version-datavalues' => 'Datowe hódnoty',
 );
 
+/** Hungarian (magyar)
+ * @author Dj
+ */
+$messages['hu'] = array(
+	'datavalues-desc' => 'Különbüző értékeket reprezentáló objektumok gyűjteménye',
+	'version-datavalues' => 'Adatértékek',
+);
+
 /** Indonesian (Bahasa Indonesia)
  * @author Farras
  */
