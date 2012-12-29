@@ -645,6 +645,26 @@ $messages['pl'] = array(
 	'wbc-editlinkstitle' => 'Edytuj linki wersji językowych',
 );
 
+/** Piedmontese (Piemontèis)
+ * @author Dragonòt
+ */
+$messages['pms'] = array(
+	'wbc-desc' => "Client për l'estension Wikibase",
+	'wbc-after-page-move' => "It peule ëdcò [$1 modifiché] j'element associà Wikidata për manten-e ij colegamente ëd lenga dzor le pagine tramudà.",
+	'wbc-comment-remove' => 'Element associà Wikidata scanselà. Colegament ëd lenga gavà.',
+	'wbc-comment-linked' => "N'element Wikidata a l'é stàit colegà a sta pagina.",
+	'wbc-comment-unlink' => "Sta pagina a l'é stàita scolegà da l'element Wikidata. Colegament ëd lenga gavà.",
+	'wbc-comment-restore' => 'Element associà Wikidata ripristinà. Colegament ëd lenga ripristinà.',
+	'wbc-comment-update' => 'Colegament ëd lenga agiornà.',
+	'wbc-comment-sitelink-add' => 'Colegament ëd lenga giontà: $1',
+	'wbc-comment-sitelink-change' => 'Colegament ëd lenga cangià da $1 a $2',
+	'wbc-comment-sitelink-remove' => 'Colegament ëd lenga gavà: $1',
+	'wbc-editlinks' => "Modifiché j'anliure",
+	'wbc-editlinkstitle' => 'Modìfica colegament antërlenga',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Smon modìfiche Wikidata ant ij cambi recent',
+);
+
 /** Portuguese (português)
  * @author Helder.wiki
  * @author Malafaya
