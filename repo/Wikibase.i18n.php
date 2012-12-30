@@ -955,11 +955,18 @@ $messages['ca'] = array(
 
 /** Czech (česky)
  * @author Mormegil
+ * @author Vks
  * @author Vogone
  */
 $messages['cs'] = array(
+	'wikibase-sitelink-page-edit-placeholder' => 'článek',
+	'wikibase-snakview-property-input-placeholder' => 'vlastnost',
 	'special-itembytitle' => 'Položky podle názvu',
+	'wikibase-itembytitle-lookup-site' => 'Stránka:',
 	'special-createitem' => 'Vytvořit novou položku',
+	'wikibase-createentity-label' => 'Popisek:',
+	'wikibase-entitieswithoutlabel-submit' => 'Najít',
+	'wikibase-restoreold' => 'obnovit',
 );
 
 /** Danish (dansk)
@@ -1033,7 +1040,7 @@ $messages['da'] = array(
 	'wikibase-error-ui-session-failure' => 'Din session er udløbet. Log venligst ind igen.',
 	'wikibase-error-ui-edit-conflict' => 'Der er en redigerings-konflikt. Genindlæs og gem igen.',
 	'wikibase-move-error' => 'Du kan ikke flytte sider, der er i navneområdet for data, og du kan ikke flytte sider ind i det.',
-	'wikibase-error-sitelink-already-used' => 'Områdelink [[ $1 : $2 ]] anvendes allerede af emnet [[ $3 ]].', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Linket [[$1:$2]] anvendes allerede af emnet [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'En anden egenskab ($3) har allerede etiketten "$1" indenfor sprogkode $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'En anden søgning ($3) har allerede etiketten "$1" indenfor sprogkode $2',
 	'wikibase-error-label-not-unique-item' => 'Et andet emne ($3) har allerede etiketten "$1" og beskrivelse "$4" indenfor sprogkode $2',
@@ -1123,7 +1130,7 @@ $messages['da'] = array(
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Oprettede {{plural:$1|egenskab|egenskaber}} uden værdi',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Oprettede {{plural:$1|egenskab|egenskaber}} med ukendt værdi',
 	'wikibase-item-summary-special-create-item' => 'Oprettede et [$2] emne med {{plural:$1|værdi|værdier}}',
-	'wikibase-item-summary-special-setlabel-set' => 'Ændrede [ $2 ] {{plural: $1 |label|labels}}', # Fuzzy
+	'wikibase-item-summary-special-setlabel-set' => 'Ændrede [$2] {{plural:$1|etiket|etiketter}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Oprettede en ny egenskab',
 	'wikibase-property-summary-wbeditentity-update' => 'Opdaterede en egenskab',
 	'wikibase-property-summary-wbeditentity-override' => 'Overskrev en egenskab',
@@ -1131,10 +1138,10 @@ $messages['da'] = array(
 	'wikibase-property-summary-wbsetlabel-remove' => 'Fjernede [$2] etiket',
 	'wikibase-property-summary-wbsetdescription-set' => 'Ændrede [$2] beskrivelse',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Fjernede [$2] beskrivelse',
-	'wikibase-property-summary-wbsetaliases-set' => 'Indstiller [ $2 ] alias', # Fuzzy
-	'wikibase-property-summary-wbsetaliases-add-remove' => 'Tilføjede og fjernede [ $2 ] {{plural: $1 |alias|alias}}', # Fuzzy
-	'wikibase-property-summary-wbsetaliases-add' => 'Tilføjede [ $2 ] {{plural: $1 |alias|alias}}', # Fuzzy
-	'wikibase-property-summary-wbsetaliases-remove' => 'Fjernede [ $2 ] alias', # Fuzzy
+	'wikibase-property-summary-wbsetaliases-set' => 'Indstiller [ $2 ] {{plural:$1|alias|aliases}}',
+	'wikibase-property-summary-wbsetaliases-add-remove' => 'Tilføjede og fjernede [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-property-summary-wbsetaliases-add' => 'Tilføjede [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-property-summary-wbsetaliases-remove' => 'Fjernede [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-property-summary-special-create-property' => 'Oprettede en [$2] egenskab med {{plural:$1|værdi|værdier}}',
 	'wikibase-query-summary-special-create-query' => 'Oprettede en [$2] forespørgsel med {{plural:$1|værdi|værdier}}',
 	'content-model-wikibase-item' => 'Wikibase emne',
@@ -4348,7 +4355,10 @@ $messages['lb'] = array(
 	'wikibase-itembytitle-lookup-page' => 'Säit:',
 	'wikibase-itembytitle-submit' => 'Sichen',
 	'wikibase-itemdisambiguation-lookup-language' => 'Sprooch:',
+	'wikibase-itemdisambiguation-lookup-label' => 'Etiquette:',
 	'wikibase-itemdisambiguation-submit' => 'Sichen',
+	'wikibase-createentity-description' => 'Beschreiwung:',
+	'wikibase-entitieswithoutlabel-label-language' => 'Sprooch:',
 );
 
 /** Lithuanian (lietuvių)
@@ -4737,6 +4747,7 @@ $messages['ms'] = array(
 	'wikibase-newproperty-intro' => 'Sebelum mencipta sifat baru, sila pastikan sama ada sifat ini sudah wujud atau tidak. Untuk mencipta sifat baru, anda perlu menyatakan sekurang-kurangnya label atau keterangannya dalam $1, dan sejenis sifat yang sah.',
 	'wikibase-newproperty-fieldset' => 'Cipta sifat baru',
 	'wikibase-newproperty-datatype' => 'Jenis data:',
+	'wikibase-newproperty-invalid-datatype' => 'Jenis data yang dinyatakan tidak sah',
 	'special-createitem' => 'Cipta perkara baru',
 	'wikibase-createitem-intro' => 'Sebelum mencipta perkara baru, sila pastikan sama ada perkara ini sudah wujud atau tidak. Untuk mencipta perkara baru, anda perlu menyatakan sekurang-kurangnya label atau keterangannya dalam $1.',
 	'wikibase-createitem-fieldset' => 'Cipta perkara baru',
@@ -6246,18 +6257,28 @@ $messages['si'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'අඩවිය',
 	'wikibase-sitelink-page-edit-placeholder' => 'ලිපිය',
 	'wikibase-alias-edit-placeholder' => 'අන්වර්ථ නාමය යොදන්න',
+	'wikibase-description-input-help-message' => '$1 බසින් කෙටි විස්තරයක් යොදන්න.',
 	'wikibase-statements' => 'ප්‍රකාශන',
+	'wikibase-sitelinks' => 'මෙම අයිතමය සඳහා සම්බන්ධිත පිටු ලැයිස්තුව',
 	'wikibase-sitelinks-sitename-columnheading' => 'භාෂාව',
 	'wikibase-sitelinks-siteid-columnheading' => 'කේතය',
 	'wikibase-sitelinks-link-columnheading' => 'සබැඳිගත ලිපිය',
+	'wikibase-sitelinks-add' => 'අඩවි-සබැඳියට සබැඳියක් එක් කරන්න',
+	'wikibase-sitelinks-empty' => 'මෙම අයිතමය සඳහා අඩවි-සබැඳියක් තවමත් නොමැත.',
 	'wikibase-remove' => 'ඉවත් කරන්න',
+	'wikibase-undo-title' => '"$1" වෙත සංස්කරණය නිෂ්ප්‍රභ කරමින්',
+	'wikibase-empty-undo' => 'මෙහිදී නිෂ්ප්‍රභ කල හැකි කිසිවක් නොමැත.',
 	'wikibase-undo-revision-error' => 'නිෂ්ප්‍රභ කිරීම අසාර්ථකයි',
+	'wikibase-undo-firstrev' => 'පිටුවල තැනීම නිෂ්ප්‍රභ කල නොහැක',
 	'wikibase-propertyedittool-full' => 'අගයන්වල ලැයිස්තුව සම්පූර්ණයි.',
+	'wikibase-propertyedittool-counter' => '({{PLURAL:$1|ඇතුලත් කිරීම්}} $1)',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-disambiguation-title' => '"$1" සඳහා අනේකාර්ථය',
 	'wikibase-aliases-label' => 'මෙසේද ගම්‍ය වේ:',
+	'wikibase-aliases-empty' => 'අන්වර්ථ නාම කිසිවක් අර්ථ දක්වා නොමැත.',
 	'wikibase-datatype-label' => 'දත්ත වර්ගය:',
 	'wikibase-snakview-property-input-placeholder' => 'ගුණාංගය',
+	'wikibase-restrictionedit-tooltip-message' => 'මෙම පිටුව ආරක්ෂණය කර ඇත. සංස්කරණයට ඉඩ නොදේ.',
 	'wikibase-blockeduser-tooltip-message' => 'ඔබව සංස්කරණ කිරීමෙන් වලක්වා ඇත.',
 	'wikibase-tooltip-error-details' => 'විස්තර',
 	'wikibase-error-autocomplete-response' => 'සර්වරය ප්‍රතිචාර දක්වන ලදී: $1',
@@ -6266,13 +6287,18 @@ $messages['si'] = array(
 	'wikibase-error-ui-session-failure' => 'ඔබේ සැසිය ඉකුත් වී ඇත. කරුණාකර නැවත ප්‍රවිෂ්ට වන්න.',
 	'wikibase-error-ui-edit-conflict' => 'මෙය සංස්කරණ ගැටුමකි. කරුණාකර ප්‍රතිපූර්ණය කර නැවත සුරකින්න.',
 	'special-itembytitle' => 'ශීර්ෂය අනුව අයිතමය',
+	'wikibase-itembytitle-lookup-fieldset' => 'අඩවිය සහ ශීර්ෂය අනුව අයිතමයන් සඳහා සොයන්න',
 	'wikibase-itembytitle-lookup-site' => 'අඩවිය:',
 	'wikibase-itembytitle-lookup-page' => 'පිටුව:',
 	'wikibase-itembytitle-submit' => 'සොයන්න',
+	'wikibase-itembytitle-create' => 'ඔබට [{{fullurl:Special:CreateItem|site=$1&page=$2}} අයිතමයක් තැනිය] හැක.',
+	'special-itemdisambiguation' => 'අනවක්‍රෝක්තිය: එකම ලේබලය සහිත අයිතමයන්',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'ලේබලය අනුව අයිතමයන් සඳහා සොයන්න',
 	'wikibase-itemdisambiguation-lookup-language' => 'භාෂාව:',
 	'wikibase-itemdisambiguation-lookup-label' => 'ලේබලය:',
 	'wikibase-itemdisambiguation-submit' => 'සොයන්න',
+	'wikibase-itemdisambiguation-nothing-found' => 'කණගාටුයි, එම ලේබලය සමඟ අයිතමයන් කිසිවක් හමු නොවුණි.',
+	'wikibase-itemdisambiguation-create' => 'ඔබට [{{fullurl:Special:CreateItem|label=$1}} අයිතමය තැනිය] හැක.',
 	'special-newproperty' => 'නව අයිතියක් තනන්න',
 	'wikibase-newproperty-fieldset' => 'නව අයිතියක් තනන්න',
 	'wikibase-newproperty-datatype' => 'දත්ත වර්ගය:',

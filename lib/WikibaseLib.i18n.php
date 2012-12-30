@@ -85,6 +85,13 @@ $messages['ca'] = array(
 	'datatypes-type-commonsMedia' => 'Fitxer multimèdia de Commons',
 );
 
+/** Czech (česky)
+ * @author Vks
+ */
+$messages['cs'] = array(
+	'wikibaselib-entity-item' => 'položka',
+);
+
 /** Danish (dansk)
  * @author Poul G
  */

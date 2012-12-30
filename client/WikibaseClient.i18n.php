@@ -292,7 +292,7 @@ $messages['frp'] = array(
 	'wbc-editlinks' => 'Changiér los lims',
 	'wbc-editlinkstitle' => 'Changiér los lims entèrlengoua',
 	'wbc-rc-hide-wikidata' => 'Wikidata $1',
-	'wbc-rc-show-wikidata-pref' => 'Fâre vêre los changements de Wikidata dedens los dèrriérs changements',
+	'wbc-rc-show-wikidata-pref' => 'Montrar los changements de Wikidata dedens los dèrriérs changements',
 );
 
 /** Galician (galego)
@@ -728,6 +728,7 @@ $messages['ru'] = array(
  * @author පසිඳු කාවින්ද
  */
 $messages['si'] = array(
+	'wbc-desc' => 'විකිපාදක දිගුව සඳහා සේවාදායකයා',
 	'wbc-comment-update' => 'භාෂා සබැඳි යාවත්කාලීන කරන ලදී.',
 	'wbc-comment-sitelink-add' => 'භාෂා සබැඳිය එක් කරන ලදී: $1',
 	'wbc-comment-sitelink-change' => 'භාෂා සබැඳිය $1 ගෙන් $2 වෙත වෙනස් වෙන ලදී',
@@ -735,6 +736,7 @@ $messages['si'] = array(
 	'wbc-editlinks' => 'සබැඳි සංස්කරණය කරන්න',
 	'wbc-editlinkstitle' => 'අන්තර්භාෂාමය සබැඳි සංස්කරණය කරන්න',
 	'wbc-rc-hide-wikidata' => '$1 විකිදත්ත',
+	'wbc-rc-show-wikidata-pref' => 'මෑත වෙනස්කම්වල විකිදත්ත සංස්කරණ පෙන්වන්න',
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
