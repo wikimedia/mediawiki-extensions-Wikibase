@@ -40,5 +40,5 @@ $magicWords['ml'] = array(
 
 /** Dutch (Nederlands) */
 $magicWords['nl'] = array(
-	'noexternallanglinks' => array( 0, 'geenexternetaalverwijzingen' ),
+	'noexternallanglinks' => array( 0, 'geenexternetaalkoppelingen', 'geenexternetaalverwijzingen' ),
 );

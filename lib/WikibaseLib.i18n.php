@@ -506,6 +506,14 @@ $messages['tl'] = array(
 	'wikibaselib-desc' => 'Naghahawak ng karaniwang panunungkulan para sa mga pandugtong ng Wikibase at Wikibase Client',
 );
 
+/** Uyghur (Arabic script) (ئۇيغۇرچە)
+ * @author Sahran
+ */
+$messages['ug-arab'] = array(
+	'wikibaselib-entity-query' => 'سۈرۈشتۈر',
+	'datatypes-type-wikibase-item' => 'تۈر',
+);
+
 /** Ukrainian (українська)
  * @author Ата
  */
