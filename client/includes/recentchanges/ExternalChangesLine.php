@@ -31,6 +31,23 @@ namespace Wikibase;
  */
 class ExternalChangesLine {
 
+	protected $cl;
+
+	protected $rc;
+
+	/**
+	 * Construct a new ExternalChangesLine object
+	 *
+	 * @since 0.4
+	 *
+	 * @param \IContextSource
+	 * @param \RecentChange
+	 */
+	public function __construct( \IContextSource $context, \RecentChange $rc ) {
+		$this->cl = \ChangesList::newFromContext( $context );
+		$this->rc = $rc;
+	}
+
 	/**
 	 * Generates a recent change line
 	 *
@@ -41,10 +58,10 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	public static function changesLine( &$cl, $rc ) {
-		$userName = $rc->getAttribute( 'rc_user_text' );
+	public function generate() {
+		$userName = $this->rc->getAttribute( 'rc_user_text' );
 
-		$params = unserialize( $rc->getAttribute( 'rc_params' ) );
+		$params = unserialize( $this->rc->getAttribute( 'rc_params' ) );
 		$entityData = $params['wikibase-repo-change'];
 
 		if ( !is_array( $entityData ) ) {
@@ -60,7 +77,7 @@ class ExternalChangesLine {
 			return false;
 		}
 
-		$entityTitle = self::titleTextFromEntityData( $entityData );
+		$entityTitle = $this->titleTextFromEntityData( $entityData );
 
 		if ( $entityTitle === false ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': Invalid entity data in external change.' );
@@ -81,33 +98,33 @@ class ExternalChangesLine {
 			}
 
 			// build a diff link
-			$diffLink = self::diffLink( $entityTitle, $entityData, $rc );
+			$diffLink = $this->diffLink( $entityTitle, $entityData, $this->rc );
 
 			// build history link
-			$historyLink = self::historyLink( $entityTitle, $entityData );
+			$historyLink = $this->historyLink( $entityTitle, $entityData );
 
 			$line .= wfMessage( 'parentheses' )->rawParams(
-				$cl->getLanguage()->pipeList( array( $diffLink, $historyLink ) ) )->text();
+				$this->cl->getLanguage()->pipeList( array( $diffLink, $historyLink ) ) )->text();
 		} else {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': Invalid Wikibase change type.' );
 			return false;
 		}
 
-		$line .= self::changeSeparator();
+		$line .= $this->changeSeparator();
 
-		$line .= \Linker::link( \Title::newFromText( $rc->getAttribute( 'rc_title' ) ) );
+		$line .= \Linker::link( \Title::newFromText( $this->rc->getAttribute( 'rc_title' ) ) );
 
 		if ( in_array( $changeType, array( 'add', 'restore', 'update' ) ) ) {
-			$entityLink = self::entityLink( $entityData );
+			$entityLink = $this->entityLink( $entityData );
 			if ( $entityLink !== false ) {
 				$line .= wfMessage( 'word-separator' )->plain()
-				 . wfMessage( 'parentheses' )->rawParams( self::entityLink( $entityData ) )->text();
+				 . wfMessage( 'parentheses' )->rawParams( $this->entityLink( $entityData ) )->text();
 			}
 		}
 
-		$line .= self::getTimestamp( $cl, $rc );
-		$line .= self::userLinks( $cl, $userName );
-		$line .= self::getComment( $entityData );
+		$line .= $this->cl->getTimestamp( $this->rc );
+		$line .= $this->userLinks( $this->cl, $userName );
+		$line .= $this->getComment( $entityData );
 
 		return $line;
 	}
@@ -117,7 +134,7 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	protected static function changeSeparator() {
+	protected function changeSeparator() {
 		return ' <span class="mw-changeslist-separator">. .</span> ';
 	}
 
@@ -131,7 +148,7 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	public static function parseComment( $entityData ) {
+	protected function parseComment( $entityData ) {
 		$comment = $entityData['comment'];
 		$message = null;
 		$param = null;
@@ -142,13 +159,13 @@ class ExternalChangesLine {
 			} else if ( array_key_exists( 'sitelink', $comment ) ) {
 				$sitelinks = $comment['sitelink'];
 				if ( array_key_exists( 'oldlink', $sitelinks ) && array_key_exists( 'newlink', $sitelinks ) ) {
-					$oldLink = self::wikiLink( $sitelinks['oldlink']['lang'], $sitelinks['oldlink']['page'] );
-					$newLink = self::wikiLink( $sitelinks['newlink']['lang'], $sitelinks['newlink']['page'] );
+					$oldLink = $this->wikiLink( $sitelinks['oldlink']['lang'], $sitelinks['oldlink']['page'] );
+					$newLink = $this->wikiLink( $sitelinks['newlink']['lang'], $sitelinks['newlink']['page'] );
 					$param = array( $oldLink, $newLink );
 				} else if ( array_key_exists( 'oldlink', $sitelinks ) ) {
-					$param = self::wikiLink( $sitelinks['oldlink']['lang'], $sitelinks['oldlink']['page'] );
+					$param = $this->wikiLink( $sitelinks['oldlink']['lang'], $sitelinks['oldlink']['page'] );
 				} else if ( array_key_exists( 'newlink', $sitelinks ) ) {
-					$param = self::wikiLink( $sitelinks['newlink']['lang'], $sitelinks['newlink']['page'] );
+					$param = $this->wikiLink( $sitelinks['newlink']['lang'], $sitelinks['newlink']['page'] );
 				}
 
 				if ( $param !== null ) {
@@ -175,22 +192,13 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	public static function getComment( $entityData ) {
+	protected function getComment( $entityData ) {
 		if ( array_key_exists( 'comment', $entityData  ) ) {
-			$commentText = self::parseComment( $entityData );
+			$commentText = $this->parseComment( $entityData );
 		} else {
 			$commentText = '';
 		}
 		return \Linker::commentBlock( $commentText );
-	}
-
-	/**
-	 * @param $rc RecentChange
-	 */
-	public static function getTimestamp( $cl, $rc ) {
-		return wfMessage( 'semicolon-separator' )->text() . '<span class="mw-changeslist-date">' .
-			$cl->getLanguage()->userTime( $rc->mAttribs['rc_timestamp'], $cl->getUser() )
-			. '</span> <span class="mw-changeslist-separator">. .</span> ';
 	}
 
 	/**
@@ -202,7 +210,7 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	protected static function diffLink( $titleText, $entityData, $rc ) {
+	protected function diffLink( $titleText, $entityData, $rc ) {
 		return ClientUtils::repoLink(
 			null,
 			wfMessage( 'diff' )->text(),
@@ -230,7 +238,7 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	protected static function historyLink( $titleText, $entityData ) {
+	protected function historyLink( $titleText, $entityData ) {
 		$link = ClientUtils::repoLink(
 			null,
 			wfMessage( 'hist' )->text(),
@@ -257,7 +265,7 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	protected static function wikiLink( $siteLang, $page ) {
+	protected function wikiLink( $siteLang, $page ) {
 		return "[[:$siteLang:$page|$siteLang:$page]]";
 	}
 
@@ -268,7 +276,7 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	protected static function userLink( $userName ) {
+	protected function userLink( $userName ) {
 		// @todo: localise this once namespaces are localised on the repo
 		$link = "User:$userName";
 		$attribs = array(
@@ -285,7 +293,7 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	protected static function userContribsLink( $userName, $text = null ) {
+	protected function userContribsLink( $userName, $text = null ) {
 		// @todo: know how the repo is localised. it's english now
 		// for namespaces and special pages
 		$link = "Special:Contributions/$userName";
@@ -302,7 +310,7 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	protected static function userTalkLink( $userName ) {
+	protected function userTalkLink( $userName ) {
 		// @todo: localize this once we can localize namespaces on the repo
 		$link = "User_talk:$userName";
 		$text = wfMessage( 'talkpagelinktext' )->text();
@@ -317,16 +325,16 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	public static function userLinks( $cl, $userName ) {
+	protected function userLinks( $cl, $userName ) {
 		if ( \User::isIP( $userName ) ) {
-			$userlinks = self::userContribsLink( $userName, $userName );
+			$userlinks = $this->userContribsLink( $userName, $userName );
 			$userlinks .= wfMessage( 'word-separator' )->plain()
-				. wfMessage( 'parentheses' )->rawParams( self::userTalkLink( $userName ) )->text();
+				. wfMessage( 'parentheses' )->rawParams( $this->userTalkLink( $userName ) )->text();
 		} else {
-			$userlinks = self::userLink( $userName );
+			$userlinks = $this->userLink( $userName );
 			$usertools = array(
-				self::userTalkLink( $userName ),
-				self::userContribsLink( $userName )
+				$this->userTalkLink( $userName ),
+				$this->userContribsLink( $userName )
 			);
 
 			$userlinks .= wfMessage( 'word-separator' )->plain()
@@ -344,9 +352,9 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	protected static function entityLink( $entityData ) {
-		$entityText = self::titleTextFromEntityData( $entityData );
-		$entityId = self::titleTextFromEntityData( $entityData, false );
+	protected function entityLink( $entityData ) {
+		$entityText = $this->titleTextFromEntityData( $entityData );
+		$entityId = $this->titleTextFromEntityData( $entityData, false );
 
 		if ( $entityText === false ) {
 			return false;
@@ -367,7 +375,7 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	protected static function getNamespace( $entityData ) {
+	protected function getNamespace( $entityData ) {
 		$nsList = Settings::get( 'repoNamespaces' );
 		$ns = null;
 
@@ -397,7 +405,7 @@ class ExternalChangesLine {
 	 *
 	 * @return string|bool
 	 */
-	protected static function titleTextFromEntityData( $entityData, $includeNamespace = true ) {
+	protected function titleTextFromEntityData( $entityData, $includeNamespace = true ) {
 		if ( isset( $entityData['object_id'] ) ) {
 			$id = $entityData['object_id'];
 
@@ -416,7 +424,7 @@ class ExternalChangesLine {
 			$titleText = $entityId ? strtoupper( $entityId->getPrefixedId() ) : $id;
 
 			if ( $includeNamespace ) {
-				$ns = self::getNamespace( $entityData );
+				$ns = $this->getNamespace( $entityData );
 				$titleText = $ns . $titleText;
 			}
 
