@@ -402,7 +402,8 @@ final class ClientHooks {
 		if ( $rcType == RC_EXTERNAL ) {
 			$params = unserialize( $rc->getAttribute( 'rc_params' ) );
 			if ( array_key_exists( 'wikibase-repo-change', $params ) ) {
-				$line = ExternalChangesLine::changesLine( $changesList, $rc );
+				$changeLine = new ExternalChangesLine( $changesList->getContext(), $rc );
+				$line = $changeLine->generate();
 				if ( $line == false ) {
 					return false;
 				}
