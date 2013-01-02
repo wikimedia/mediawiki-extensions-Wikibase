@@ -582,9 +582,17 @@ $messages['ms'] = array(
  */
 $messages['nb'] = array(
 	'wbc-desc' => 'Klientutvidelse for Wikibase, det strukturerte datalageret',
-	'wbc-comment-update' => 'Språklenker er oppdatert.',
+	'wbc-after-page-move' => 'Du kan også [$1 oppdatere] det tilknyttede Wikidata-datasettet for å bevare språklenkene til den flyttede siden.',
+	'wbc-comment-remove' => 'Det tilknyttede Wikidata-datasettet har blitt slettet. Språklenker har blitt fjernet.',
+	'wbc-comment-linked' => 'Et Wikidata-datasett har blitt knyttet til denne siden.',
+	'wbc-comment-unlink' => 'Denne siden har blitt fraknyttet et Wikidata-datasett. Språklenker har blitt fjernet.',
+	'wbc-comment-restore' => 'Det tilknyttede Wikidata-datasettet har blitt gjenopprettet. Språklenker har blitt gjenopprettet.',
+	'wbc-comment-update' => 'Språklenker har blitt oppdatert.',
+	'wbc-comment-sitelink-add' => 'Språklenke tilført: $1',
+	'wbc-comment-sitelink-change' => 'Språklenke endret fra $1 til $2',
+	'wbc-comment-sitelink-remove' => 'Språklenke fjernet: $1',
 	'wbc-editlinks' => 'Rediger lenker',
-	'wbc-editlinkstitle' => 'Rediger språkspesifikke lenker',
+	'wbc-editlinkstitle' => 'Rediger språklenker – lenker til artikkelen på andre språk',
 	'wbc-rc-hide-wikidata' => '$1 Wikidata',
 	'wbc-rc-show-wikidata-pref' => 'Vis Wikidata-redigeringer i siste endringer',
 );
@@ -667,17 +675,25 @@ $messages['pms'] = array(
 
 /** Portuguese (português)
  * @author Helder.wiki
+ * @author Lijealso
  * @author Malafaya
  * @author SandroHc
  */
 $messages['pt'] = array(
 	'wbc-desc' => 'Cliente para a extensão Wikibase',
-	'wbc-comment-langlinks-delete' => 'O item associado no Wikidata foi eliminado. Foram removidos os links para outros idiomas.',
-	'wbc-comment-langlinks-remove' => 'Esta página foi desvinculada do item do Wikidata. Os links para outros idiomas foram removidos',
-	'wbc-comment-langlinks-restore' => 'O item do Wikidata associado foi restaurado. Os links para outros idiomas foram restaurados',
-	'wbc-comment-langlinks-update' => 'Foram atualizados os links para outros idiomas',
+	'wbc-after-page-move' => 'Também pode [$1 actualizar] o item do Wikidata associado para manter os links de idioma na página movida.',
+	'wbc-comment-remove' => 'O item associado no Wikidata foi eliminado. Foram removidos os links para outros idiomas.',
+	'wbc-comment-linked' => 'Um item do Wikidata foi ligado a esta página.',
+	'wbc-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para outros idiomas foram removidos.',
+	'wbc-comment-restore' => 'O item associado no Wikidata foi restaurado. Foram restaurados os links para outros idiomas.',
+	'wbc-comment-update' => 'Foram atualizados os links para outros idiomas',
+	'wbc-comment-sitelink-add' => 'Link de idioma adicionado:$1',
+	'wbc-comment-sitelink-change' => 'Link de idioma alterado de  $1 para $2',
+	'wbc-comment-sitelink-remove' => 'Link de idioma removido: $1',
 	'wbc-editlinks' => 'Editar links',
 	'wbc-editlinkstitle' => 'Editar links interlínguas',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Mostrar as edições no Wikidata nas mudanças recentes',
 );
 
 /** Brazilian Portuguese (português do Brasil)
@@ -686,12 +702,19 @@ $messages['pt'] = array(
  */
 $messages['pt-br'] = array(
 	'wbc-desc' => 'Cliente para a extensão Wikibase',
-	'wbc-comment-langlinks-delete' => 'O item associado no Wikidata foi eliminado. Foram removidos os links para outros idiomas.',
-	'wbc-comment-langlinks-remove' => 'Esta página foi desvinculada do item do Wikidata. Os links para outros idiomas foram removidos',
-	'wbc-comment-langlinks-restore' => 'O item do Wikidata associado foi restaurado. Os links para outros idiomas foram restaurados',
-	'wbc-comment-langlinks-update' => 'Foram atualizados os links para outros idiomas',
+	'wbc-after-page-move' => 'Você também pode [$1 atualizar] o item associado ao Wikidata para manter os links de idioma na página movida.',
+	'wbc-comment-remove' => 'O item associado no Wikidata foi eliminado. Os links para os outros idiomas foram removidos.',
+	'wbc-comment-linked' => 'Um item do Wikidata foi linkado a esta página.',
+	'wbc-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para os outros idiomas foram removidos.',
+	'wbc-comment-restore' => 'O item associado no Wikidata foi restaurado. Os links para os outros idiomas foram restaurados.',
+	'wbc-comment-update' => 'Os links para outros idiomas foram atualizados.',
+	'wbc-comment-sitelink-add' => 'Link de idioma adicionado: $1',
+	'wbc-comment-sitelink-change' => 'Link de idioma alterado de $1 para $2',
+	'wbc-comment-sitelink-remove' => 'Link de idioma removido: $1',
 	'wbc-editlinks' => 'Editar links',
 	'wbc-editlinkstitle' => 'Editar links para outros idiomas',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Mostrar as edições do Wikidata nas mudanças recentes',
 );
 
 /** Romanian (română)
@@ -783,6 +806,7 @@ $messages['ta'] = array(
 $messages['te'] = array(
 	'wbc-editlinks' => 'లంకెలను మార్చు',
 	'wbc-rc-hide-wikidata' => 'వికీడాటాను $1',
+	'wbc-rc-show-wikidata-pref' => 'వికీడామా మార్పులను ఇటీవలి మార్పులలో చూపించు',
 );
 
 /** Tagalog (Tagalog)

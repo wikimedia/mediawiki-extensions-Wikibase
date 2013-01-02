@@ -125,6 +125,7 @@ $specialPageAliases['mk'] = array(
 
 /** Dutch (Nederlands) */
 $specialPageAliases['nl'] = array(
+	'EntityData' => array( 'Entiteitsgegevens' ),
 	'CreateItem' => array( 'ItemAanmaken' ),
 	'NewProperty' => array( 'NieuweEigenschap' ),
 	'ItemByTitle' => array( 'ItemPerTitel' ),

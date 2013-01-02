@@ -954,11 +954,17 @@ $messages['ca'] = array(
 );
 
 /** Czech (česky)
+ * @author JAn Dudík
  * @author Mormegil
  * @author Vks
  * @author Vogone
  */
 $messages['cs'] = array(
+	'wikibase-edit' => 'edituj',
+	'wikibase-save' => 'uložit',
+	'wikibase-cancel' => 'zrušit',
+	'wikibase-add' => 'přidat',
+	'wikibase-save-inprogress' => 'Ukládám…',
 	'wikibase-sitelink-page-edit-placeholder' => 'článek',
 	'wikibase-snakview-property-input-placeholder' => 'vlastnost',
 	'special-itembytitle' => 'Položky podle názvu',
