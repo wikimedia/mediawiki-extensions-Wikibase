@@ -256,7 +256,7 @@ PropertyEditTool toolbar */
 .wb-aliases li {
 	font-size: 84%;
 	float: left;
-	margin: 0.2em 1em 0.2em 0;
+	margin: 0.2em 12px 0.2em 0;
 	display: inline;
 	list-style-type: none;
 	border: 1px solid #CCC;

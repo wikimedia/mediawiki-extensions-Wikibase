@@ -8,7 +8,7 @@ ul.tagadata {
 ul.tagadata li {
 	display: block;
 	float: left;
-	margin: 2px 5px 2px 0;
+	margin: 2px 4px 2px 0;
 }
 
 ul.tagadata li.tagadata-choice {
@@ -35,7 +35,7 @@ ul.tagadata li.tagadata-choice .tagadata-close .text-icon {
 
 ul.tagadata li.tagadata-choice .tagadata-label-text { /* the input or pure text */
 	margin: 0;
-	padding: .4em 4px .4em 6px;
+	padding: .4em 4px .4em 7px;
 	display: block;
 }
 
@@ -44,6 +44,7 @@ ul.tagadata li.tagadata-choice .tagadata-label input {
 	-webkit-box-sizing: border-box;
 	box-sizing:         border-box;
 
+	display: inline;
 	border: none;
 	width: inherit;
 	background: transparent;
@@ -51,9 +52,11 @@ ul.tagadata li.tagadata-choice .tagadata-label input {
 	direction: ltr; /* to be flipped */
 }
 
+ul.tagadata li.tagadata-choice-empty,
+ul.tagadata li.tagadata-choice-active,
 ul.tagadata li.tagadata-choice .tagadata-label input:focus,
 ul.tagadata li.tagadata-choice-empty input {
-	background-color: white!important;
+	background: none white !important;
 }
 
 ul.tagadata li.tagadata-choice-empty .tagadata-close {
