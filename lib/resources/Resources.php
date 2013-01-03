@@ -304,7 +304,10 @@ return call_user_func( function() {
 
 		'jquery.wikibase.snakview' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase/jquery.wikibase.snakview.js'
+				'jquery.wikibase/jquery.wikibase.snakview.js',
+				'jquery.wikibase/snakview.variations/snakview.variations.js',
+				'jquery.wikibase/snakview.variations/snakview.variations.Variation.js',
+				'jquery.wikibase/snakview.variations/snakview.variations.Value.js',
 			),
 			'dependencies' => array(
 				'jquery.eachchange',
@@ -318,7 +321,8 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'wikibase-snakview-property-input-placeholder',
-				'wikibase-snakview-unsupporteddatatype',
+				'wikibase-snakview-unsupportedsnaktype',
+				'wikibase-snakview-variation-unsupporteddatatype',
 				'datatypes-type-wikibase-item'
 			)
 		),
