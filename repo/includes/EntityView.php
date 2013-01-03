@@ -252,8 +252,8 @@ abstract class EntityView extends \ContextSource {
 
 		return wfTemplate( 'wb-description',
 			wfTemplate( 'wb-property',
-				empty( $description ) ? 'wb-value-empty' : '',
-				empty( $description ) ? wfMessage( 'wikibase-description-empty' )->text() : htmlspecialchars( $description ),
+				$description === false ? 'wb-value-empty' : '',
+				$description === false ? wfMessage( 'wikibase-description-empty' )->text() : htmlspecialchars( $description ),
 				$this->getHtmlForEditSection( $entity, $lang )
 			)
 		);
