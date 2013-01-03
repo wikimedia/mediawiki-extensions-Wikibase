@@ -459,8 +459,9 @@ div.wb-claim-new .wb-snak-value {
 	max-width: 32em;
 }
 
-.wb-snakview-unsupporteddatatype {
-	color: #505050;
+.wb-snakview-unsupportedsnaktype,
+.wb-snakview-variation-unsupporteddatatype {
+	color: #565656;
 	font-style: italic;
 	line-height: 1.25em;
 }
