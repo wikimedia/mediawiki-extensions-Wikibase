@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgX//5lU\u003d",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 283
+      },
+      "writtenOn": "2013-01-03T17:13:42Z",
+      "side": 1,
+      "message": "Is the -webkit- prefix really necessary? Only mobile webkit browsers seem to need that: http://caniuse.com/#feat\u003dcss3-boxsizing",
+      "revId": "4e526f4e455175b15bb4218816b2aedff8eeb4cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
