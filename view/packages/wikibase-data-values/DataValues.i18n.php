@@ -199,10 +199,11 @@ $messages['pl'] = array(
 );
 
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  * @author Dragonòt
  */
 $messages['pms'] = array(
-	'datavalues-desc' => "Colession d'oget rapresentant vaire sòrt ëd valor",
+	'datavalues-desc' => "Colession d'oget rapresentant vàire sòrt ëd valor",
 	'version-datavalues' => 'DataValues',
 );
 
