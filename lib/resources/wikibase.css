@@ -495,6 +495,7 @@ table.wb-sitelinks .wb-sitelinks-sitename {
 	width: 25%;
 	word-wrap: break-word;
 	padding-left: 10px;
+	padding-right: 10px;
 	border-left: 1px solid #C9C9C9;
 }
 
@@ -538,10 +539,6 @@ table.wb-sitelinks .even td.wb-sitelinks-siteid {
 
 table.wb-sitelinks .wb-sitelinks-link {
 	padding-left: 10px;
-}
-
-table.wb-sitelinks .wb-pending-value .wb-sitelinks-sitename,
-table.wb-sitelinks .wb-sitelinks-link {
 	padding-right: 16px;
 	border-right: none;
 }

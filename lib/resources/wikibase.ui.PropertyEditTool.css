@@ -173,8 +173,12 @@ sizes and line heights within the heading */
 
 table.wb-sitelinks input {
 	margin: 0;
+	font-family: inherit;
 	font-size: 1em; /* prevent font size rounding errors */
 	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 }
 
 /* the following ruler elements are used to detect the maximum site id column with preventing layout
@@ -195,7 +199,7 @@ table.wb-sitelinks .wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelink
 }
 
 table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-link {
-	padding-left: 7px; /* above value minus input border and padding */
+	padding-left: 7px;
 }
 @-moz-document url-prefix() { /* Firefox */
 	table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-link {
