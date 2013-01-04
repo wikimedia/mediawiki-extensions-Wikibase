@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADgX//4ug\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-04T11:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADgX//45k\u003d",
+      "revId": "d9727d0e97bf8d321fb7a0e8bd0ce9d7544d98e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADgX//45s\u003d",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-01-04T08:53:16Z",
       "side": 1,
       "message": "I think this is the first actual occurrence of \"Snak\" in the UI. Adding a link to a place where the concept is defined (or briefly defining it here) would be nice.",
+      "revId": "d9727d0e97bf8d321fb7a0e8bd0ce9d7544d98e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADgX//4uU\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-04T11:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADgX//45s\u003d",
       "revId": "d9727d0e97bf8d321fb7a0e8bd0ce9d7544d98e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
