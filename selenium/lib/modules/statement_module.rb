@@ -23,12 +23,12 @@ module StatementPage
   div(:statement2Name, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]")
   link(:statement1Link, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]/a")
   link(:statement2Link, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]/a")
-  element(:statement1ClaimValue1, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claimview')][1]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  element(:statement1ClaimValue2, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claimview')][2]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  element(:statement1ClaimValue3, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claimview')][3]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  element(:statement2ClaimValue1, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claimview')][1]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  element(:statement2ClaimValue2, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claimview')][2]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
-  element(:statement2ClaimValue3, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claimview')][3]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
+  element(:statement1ClaimValue1, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claimview')][1]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
+  element(:statement1ClaimValue2, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claimview')][2]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
+  element(:statement1ClaimValue3, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claimview')][3]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
+  element(:statement2ClaimValue1, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claimview')][1]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
+  element(:statement2ClaimValue2, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claimview')][2]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
+  element(:statement2ClaimValue3, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claimview')][3]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
 
   def wait_for_property_value_box
     wait_until do
