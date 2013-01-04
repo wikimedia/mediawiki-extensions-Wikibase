@@ -98,7 +98,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 						'special-create-' . $entityContent->getEntity()->getType(),
 						array( $counts, $this->getLanguage()->getCode() )
 					);
-					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() );
+					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser(), false, $this->getContext() );
 					$editEntity->attemptSave(
 						AutoComment::formatTotalSummary( $comment, $summary, $lang ),
 						EDIT_AUTOSUMMARY|EDIT_NEW,

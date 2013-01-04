@@ -605,7 +605,7 @@ class SubmitEntityAction extends EditEntityAction {
 			if ( !$diff->isEmpty() ) {
 				// make the old content the new content.
 				// NOTE: conflict detection is not needed for a plain restore, it's not based on anything.
-				$edit = new EditEntity( $olderContent, $this->getUser() );
+				$edit = new EditEntity( $olderContent, $this->getUser(), false, $this->getContext() );
 				$status = $edit->attemptSave( $summary, 0, $token );
 			} else {
 				$status = Status::newGood();
@@ -625,7 +625,7 @@ class SubmitEntityAction extends EditEntityAction {
 
 				//NOTE: use latest revision as base revision - we are saving patched content
 				//      based on the latest revision.
-				$edit = new EditEntity( $latestContent, $this->getUser(), $latestRevision->getId() );
+				$edit = new EditEntity( $latestContent, $this->getUser(), $latestRevision->getId(), $this->getContext() );
 				$status = $edit->attemptSave( $summary, 0, $token );
 			} else {
 				$status = Status::newGood();
@@ -636,7 +636,7 @@ class SubmitEntityAction extends EditEntityAction {
 		if ( $status->isOK() ) {
 			$this->getOutput()->redirect( $this->getTitle()->getFullUrl() );
 		} else {
-			$edit->showErrorPage( $this->getOutput() );
+			$edit->showErrorPage();
 		}
 	}
 

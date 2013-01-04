@@ -98,7 +98,8 @@ class SpecialSetLabel extends SpecialWikibasePage {
 				array( $counts, $language )
 			);
 
-			$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() ); //TODO: need conflict detection??
+			//TODO: need conflict detection??
+			$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser(), false, $this->getContext() );
 			$editEntity->attemptSave(
 				AutoComment::formatTotalSummary( $comment, $summary, $lang ),
 				EDIT_AUTOSUMMARY,
@@ -106,7 +107,7 @@ class SpecialSetLabel extends SpecialWikibasePage {
 			);
 
 			if ( !$editEntity->isSuccess() ) {
-				$editEntity->showErrorPage( $this->getOutput() );
+				$editEntity->showErrorPage();
 			}
 			else {
 				$entityUrl = $entityContent->getTitle()->getFullUrl();

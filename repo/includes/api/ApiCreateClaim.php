@@ -101,10 +101,10 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId );
+		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			'', // TODO: autocomment
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);

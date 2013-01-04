@@ -113,6 +113,18 @@ class EditEntity {
 	const SAVE_ERROR = 8;
 
 	/**
+	 * Indicates that the content failed some precondition to saving,
+	 * such a a global uniqueness constraint.
+	 */
+	const PRECONDITION_FAILED = 16;
+
+	/**
+	 * Indicates that the content triggered an edit filter that uses
+	 * the EditFilterMergedContent hook to supervise edits.
+	 */
+	const FILTERED = 32;
+
+	/**
 	 * bit mask for asking for any error.
 	 */
 	const ANY_ERROR = 0xFFFFFFFF;
@@ -130,16 +142,20 @@ class EditEntity {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $newContent the new entity content
-	 * @param User|null     $user       the user performing the edit (defaults to $wgUser)
-	 * @param int|boolean   $baseRevId  the base revision ID for conflict checking.
-	 *                                  Defaults to false, disabling conflict checks.
+	 * @param EntityContent   $newContent the new entity content
+	 * @param User|null       $user       the user performing the edit (defaults to $wgUser)
+	 * @param int|boolean     $baseRevId  the base revision ID for conflict checking.
+	 *                                    Defaults to false, disabling conflict checks.
 	 *                                  `true` can be used to set the base revision to the current revision:
-	 *                                  This will detect "late" edit conflicts, i.e. someone squeezing in an edit
-	 *                                  just before the actual database transaction for saving beings.
-	 *                                  The empty string and 0 are both treated as `false`, disabling conflict checks.
+	 *                                    This will detect "late" edit conflicts, i.e. someone squeezing in an edit
+	 *                                    just before the actual database transaction for saving beings.
+	 *                                    The empty string and 0 are both treated as `false`, disabling conflict checks.
+	 * @param \IContextSource $context the context source to use while processing the edit; defaults
+	 *                        to \RequestContext::getMain().
 	 */
-	public function __construct( EntityContent $newContent, \User $user = null, $baseRevId = false ) {
+	public function __construct( EntityContent $newContent, \User $user = null, $baseRevId = false,
+			\IContextSource $context = null ) {
+
 		$this->newContent = $newContent;
 
 		if ( is_string( $baseRevId ) ) {
@@ -155,6 +171,12 @@ class EditEntity {
 
 		$this->errorType = 0;
 		$this->status = Status::newGood();
+
+		if ( $context === null ) {
+			$context = \RequestContext::getMain();
+		}
+
+		$this->context = $context;
 	}
 
 	/**
@@ -454,13 +476,16 @@ class EditEntity {
 				// there are unresolvable conflicts.
 				return false;
 			}
+		} else {
+			// can apply cleanly
+
+			$this->status->warning( 'wikibase-conflict-patched' );
 		}
 
 		// apply the patch( base -> new ) to the current revision.
 		$this->newContent = $current->copy();
 		$patch->apply( $this->newContent->getEntity() );
 
-		$this->status->warning( 'wikibase-conflict-patched' );
 		return true;
 	}
 
@@ -565,11 +590,35 @@ class EditEntity {
 		$this->getCurrentRevision();
 		$this->getCurrentRevisionId();
 
-		$status = $this->applyPreSaveChecks();
+		$this->applyPreSaveChecks(); // modifies $this->status
 
-		if ( !$status->isOK() ) {
+		if ( !$this->status->isOK() ) {
+			$this->errorType |= self::PRECONDITION_FAILED;
+		}
+
+		if ( !$this->status->isOK() ) {
 			wfProfileOut( __METHOD__ );
-			return $status;
+			return $this->status;
+		}
+
+		// Run edit filter hooks
+		$filterStatus = Status::newGood();
+		if ( !wfRunHooks( 'EditFilterMergedContent',
+			array( $this->context, $this->newContent, &$filterStatus, $summary, $this->getUser(), false ) ) ) {
+
+			# Error messages etc. were handled inside the hook.
+			$filterStatus->setResult( false, $filterStatus->getValue() );
+		}
+
+		if ( !$filterStatus->isOK() ) {
+			$this->errorType |= self::FILTERED;
+		}
+
+		$this->status->merge( $filterStatus );
+
+		if ( !$this->status->isOK() ) {
+			wfProfileOut( __METHOD__ );
+			return $this->status;
 		}
 
 		$editStatus = $this->newContent->save(
@@ -735,18 +784,13 @@ class EditEntity {
 	 * If $titleMessage is set it is made an assumption that the page is still the original
 	 * one, and there should be no link back from a special error page.
 	 *
-	 * @param OutputPage $out the output object to write output to
 	 * @param String|null $titleMessage message key for the page title
 	 *
 	 * @return bool true if an error page was shown, false if there were no errors to show.
 	 */
-	public function showErrorPage( OutputPage $out = null, $titleMessage = null ) {
+	public function showErrorPage( $titleMessage = null ) {
 		wfProfileIn( __METHOD__ );
-		global $wgOut;
-
-		if ( $out === null ) {
-			$out = $wgOut;
-		}
+		$out = $this->context->getOutput();
 
 		if ( $this->status === null || $this->status->isOK() ) {
 			wfProfileOut( __METHOD__ );
@@ -759,7 +803,7 @@ class EditEntity {
 			$out->prepareErrorPage( wfMessage( $titleMessage ), wfMessage( 'errorpagetitle' ) );
 		}
 
-		$this->showStatus( $out );
+		$this->showStatus();
 
 		if ( !isset( $titleMessage ) ) {
 			$out->returnToMain( '', $this->getTitle() );
@@ -772,17 +816,11 @@ class EditEntity {
 	/**
 	 * Shows any errors or warnings from attemptSave().
 	 *
-	 * @param OutputPage $out the output object to write output to
-	 *
 	 * @return bool true if any message was shown, false if there were no errors to show.
 	 */
-	protected function showStatus( OutputPage $out = null ) {
+	protected function showStatus( ) {
 		wfProfileIn( __METHOD__ );
-		global $wgOut;
-
-		if ( $out === null ) {
-			$out = $wgOut;
-		}
+		$out = $this->context->getOutput();
 
 		if ( $this->status === null || $this->status->isGood() ) {
 			wfProfileOut( __METHOD__ );

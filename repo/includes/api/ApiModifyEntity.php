@@ -191,7 +191,7 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 		// collect information and create an EditEntity
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : null;
-		$editEntity = new EditEntity( $entityContent, $user, $baseRevisionId );
+		$editEntity = new EditEntity( $entityContent, $user, $baseRevisionId, $this->getContext() );
 
 		// Do the actual save, or if it don't exist yet create it.
 		// There will be exceptions but we just leak them out ;)

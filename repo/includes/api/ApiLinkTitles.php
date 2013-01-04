@@ -144,7 +144,7 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 		}
 		else {
 			// Do the actual save, or if it don't exist yet create it.
-			$editEntity = new EditEntity( $itemContent, $user );
+			$editEntity = new EditEntity( $itemContent, $user, false, $this->getContext() );
 			$status = $editEntity->attemptSave(
 				Autocomment::buildApiSummary( $this, $params, $itemContent ),
 				$flags,
