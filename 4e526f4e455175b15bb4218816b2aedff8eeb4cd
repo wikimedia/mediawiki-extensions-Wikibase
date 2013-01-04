@@ -16,6 +16,24 @@
       "revId": "4e526f4e455175b15bb4218816b2aedff8eeb4cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADgX//4mA\u003d",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-04T13:18:49Z",
+      "side": 1,
+      "message": "Safari 3 to 4 also requires it, so by using it we are on the safe side I assume.",
+      "parentUuid": "AAADgX//5lU\u003d",
+      "revId": "4e526f4e455175b15bb4218816b2aedff8eeb4cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
