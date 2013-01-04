@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgX//4mM\u003d",
+        "filename": "lib/resources/wikibase.ui.SiteLinksEditTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-04T13:13:33Z",
+      "side": 1,
+      "message": "why 11?",
+      "revId": "ff7bf95ae8fc6c40db9ec3d75f458ce2ae65c608",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
