@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAADgX//45k\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-04T08:54:31Z",
+      "side": 1,
+      "message": "See http://www.mediawiki.org/wiki/Git/Commit_message_guidelines:\n\nA detailed summary of the committed changes. May have bullet points or paragraphs.\nSHOULD break between 80-100 chars, but is not enforced.\"",
+      "revId": "d9727d0e97bf8d321fb7a0e8bd0ce9d7544d98e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADgX//45s\u003d",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 1
