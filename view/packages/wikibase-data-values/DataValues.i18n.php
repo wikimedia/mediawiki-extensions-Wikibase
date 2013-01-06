@@ -166,6 +166,14 @@ $messages['ko'] = array(
 	'version-datavalues' => '데이터값',
 );
 
+/** Luxembourgish (Lëtzebuergesch)
+ * @author Robby
+ */
+$messages['lb'] = array(
+	'datavalues-desc' => 'Sammlung vun Objeten déi verschidden Zorte vu Wäerter representéieren',
+	'version-datavalues' => 'DataValues',
+);
+
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
