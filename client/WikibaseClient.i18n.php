@@ -123,6 +123,26 @@ $messages['ca'] = array(
 	'wbc-editlinkstitle' => 'Modifica enllaços interlingües',
 );
 
+/** Czech (česky)
+ * @author JAn Dudík
+ */
+$messages['cs'] = array(
+	'wbc-desc' => 'Klient pro rozšíření Wikibase',
+	'wbc-after-page-move' => 'Můžete také [ $1  aktualizovat] související položku Wikidat pro údržbu mezijazykových odkazů na přesunuté stránce.',
+	'wbc-comment-remove' => 'Související položka Wikidat odstraněna. Mezijazykové odkazy odstraněny.',
+	'wbc-comment-linked' => 'Položka Wikidat odkazovala na tuto stránku.',
+	'wbc-comment-unlink' => 'Odkaz na tuto stránku byl odstraněn z Wikidat. Mezijazykové odkazy odstraněny.',
+	'wbc-comment-restore' => 'Související položka Wikidat obnovena. Mezijazykové odkazy obnoveny.',
+	'wbc-comment-update' => 'Aktualizovány mezijazykové odkazy.',
+	'wbc-comment-sitelink-add' => 'Přidán mezijazykový odkaz:$1',
+	'wbc-comment-sitelink-change' => 'Změněn mezijazykový odkaz z $1 na $2',
+	'wbc-comment-sitelink-remove' => 'Odstraněn mezijazykový odkaz:$1',
+	'wbc-editlinks' => 'Upravit odkazy',
+	'wbc-editlinkstitle' => 'Editovat mezijazykové odkazy',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Zobrazit změny Wikidat v posledních změnách',
+);
+
 /** Danish (dansk)
  * @author Christian List
  * @author Poul G
@@ -260,21 +280,22 @@ $messages['fi'] = array(
 );
 
 /** French (français)
+ * @author Crochet.david
  * @author Gomoko
  * @author Ltrlg
  * @author Wyz
  */
 $messages['fr'] = array(
 	'wbc-desc' => 'Client pour l’extension Wikibase',
-	'wbc-after-page-move' => "Vous pouvez aussi [$1 mettre à jour] l'élément Wikidata associé pour conserver les liens de langue sur la page déplacée.",
+	'wbc-after-page-move' => 'Vous pouvez aussi [$1 mettre à jour] l’élément Wikidata associé pour conserver les liens de langue sur la page déplacée.',
 	'wbc-comment-remove' => 'Élément Wikidata associé supprimé. Liens de langue supprimés.',
 	'wbc-comment-linked' => 'Un élément Wikidata a été lié à cette page.',
-	'wbc-comment-unlink' => "Cette page a été dissociée de l'élément Wikidata. Liens de langue supprimés.",
-	'wbc-comment-restore' => "Suppression de l'élément Wikidata associé annulée. Liens de langue rétablis.",
+	'wbc-comment-unlink' => 'Cette page a été dissociée de l’élément Wikidata. Liens de langue supprimés.',
+	'wbc-comment-restore' => 'Suppression de l’élément Wikidata associé annulée. Liens de langue rétablis.',
 	'wbc-comment-update' => 'Liens de langue mis à jour.',
-	'wbc-comment-sitelink-add' => 'Lien de langue ajouté: $1',
+	'wbc-comment-sitelink-add' => 'Lien de langue ajouté : $1',
 	'wbc-comment-sitelink-change' => 'Lien de langue modifié de $1 à $2',
-	'wbc-comment-sitelink-remove' => 'Lien de langue supprimé: $1',
+	'wbc-comment-sitelink-remove' => 'Lien de langue supprimé : $1',
 	'wbc-editlinks' => 'Modifier les liens',
 	'wbc-editlinkstitle' => 'Modifier les liens interlangue',
 	'wbc-rc-hide-wikidata' => 'Wikidata $1',
@@ -762,6 +783,17 @@ $messages['si'] = array(
 	'wbc-rc-show-wikidata-pref' => 'මෑත වෙනස්කම්වල විකිදත්ත සංස්කරණ පෙන්වන්න',
 );
 
+/** Slovak (slovenčina)
+ * @author JAn Dudík
+ */
+$messages['sk'] = array(
+	'wbc-desc' => 'Klient pre rozšírenie Wikibase',
+	'wbc-editlinks' => 'Upraviť odkazy',
+	'wbc-editlinkstitle' => 'Upraviť medzijazykové odkazy',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Zobraziť úpravy Wikidat v posledných zmienách',
+);
+
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
  * @author Nikola Smolenski
  * @author Rancher
@@ -786,8 +818,18 @@ $messages['sr-el'] = array(
  */
 $messages['sv'] = array(
 	'wbc-desc' => 'Klient för tillägget Wikibase',
-	'wbc-comment-langlinks-update' => 'Språklänkar uppdaterade',
+	'wbc-comment-remove' => 'Tillhörande Wikidata objekt togs bort. Språklänkar togs bort.',
+	'wbc-comment-linked' => 'Ett Wikidata-objekt har länkats till den här sidan.',
+	'wbc-comment-unlink' => 'Denna sida har gjorts olänkad från Wikidata-objektet. Språklänkar togs bort.',
+	'wbc-comment-restore' => 'Tillhörande Wikidata-objekt togs bort. Språklänkar togs bort.',
+	'wbc-comment-update' => 'Språklänkar uppdaterades.',
+	'wbc-comment-sitelink-add' => 'Språklänken lades till: $1',
+	'wbc-comment-sitelink-change' => 'Språklänken ändrades från $1 till $2',
+	'wbc-comment-sitelink-remove' => 'Språklänken togs bort: $1',
 	'wbc-editlinks' => 'Redigera länkar',
+	'wbc-editlinkstitle' => 'Redigera interwikilänkar',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Visa Wikidataredigeringar i senaste ändringar',
 );
 
 /** Tamil (தமிழ்)

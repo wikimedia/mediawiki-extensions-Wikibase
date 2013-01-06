@@ -86,10 +86,16 @@ $messages['ca'] = array(
 );
 
 /** Czech (česky)
+ * @author JAn Dudík
  * @author Vks
  */
 $messages['cs'] = array(
+	'wikibaselib-desc' => 'Obsahuje běžné funkce pro rozšíření Wikibase a Wikibase klient',
 	'wikibaselib-entity-item' => 'položka',
+	'wikibaselib-entity-property' => 'vlastnost',
+	'wikibaselib-entity-query' => 'dotaz',
+	'datatypes-type-wikibase-item' => 'Položka',
+	'datatypes-type-commonsMedia' => 'Commons multimediální soubor',
 );
 
 /** Danish (dansk)
