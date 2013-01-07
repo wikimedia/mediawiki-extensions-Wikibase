@@ -34,6 +34,24 @@
       "revId": "4ec5fd26fcc543bd8ab1c1703a91e63f35fe397b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADgX//2y0\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-07T14:39:09Z",
+      "side": 1,
+      "message": "Adding such code without a clear need for it seems bad to me\n\n* It\u0027s clutter that makes the code harder to understand and wastes peoples time by trying to figure out what it\u0027s good for\n* You can go very far in adding things that could be nice at some point\n* It might trick people into believing they can rely on this being an array without holes while this not not guaranteed, and thus cause bugs",
+      "parentUuid": "AAADgX//2zE\u003d",
+      "revId": "4ec5fd26fcc543bd8ab1c1703a91e63f35fe397b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
