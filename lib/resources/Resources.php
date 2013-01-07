@@ -252,6 +252,16 @@ return call_user_func( function() {
 			'scripts' => 'templates.js'
 		),
 
+		'jquery.ui.TemplatedWidget' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.TemplatedWidget.js'
+			),
+			'dependencies' => array(
+				'wikibase.templates',
+				'jquery.ui.widget'
+			)
+		),
+
 		'jquery.eachchange' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.eachchange.js'
@@ -303,7 +313,8 @@ return call_user_func( function() {
 				'dataTypes.jquery.valueview.views',
 				'wikibase.jquery.valueview.views',
 				'wikibase.store', // required for getting datatype from entityselector selected property
-				'mediawiki.legacy.shared'
+				'mediawiki.legacy.shared',
+				'jquery.ui.TemplatedWidget'
 			),
 			'messages' => array(
 				'wikibase-snakview-property-input-placeholder',
