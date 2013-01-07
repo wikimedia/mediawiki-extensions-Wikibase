@@ -297,7 +297,7 @@ to find out where it went.',
  */
 $messages['qqq'] = array(
 	'wikibase-desc' => '{{desc|name=Wikibase|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}
-See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
+See also [[d:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wikibase-edit' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
 [[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 1 and 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an existing element of some kind.',
@@ -320,26 +320,26 @@ This is a generic placeholder message used while a remove is in progress, and re
 This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [https://www.wikidata.org/wiki/Wikidata:Glossary#languageattribute-label label].',
 	'wikibase-description-empty' => "Placeholder message displayed instead of the item's description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
-This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
+This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[d:Wikidata/Glossary#Languageattribute-description|description]].',
 	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
-This is a generic text used as a placeholder while defining the site for a new sitelink. See also Wikidatas glossary on [[m:Wikidata/Glossary#sitelink|sitelink]].',
+This is a generic text used as a placeholder while defining the site for a new sitelink. See also Wikidatas glossary on [[d:Wikidata/Glossary#Sitelink|sitelink]].',
 	'wikibase-sitelink-page-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
-This is a generic text used as a placeholder while defining the page for a possibly new sitelink. See also Wikidatas glossary on [[m:Wikidata/Glossary#sitelink|sitelink]].',
+This is a generic text used as a placeholder while defining the page for a possibly new sitelink. See also Wikidatas glossary on [[d:Wikidata/Glossary#Sitelink|sitelink]].',
 	'wikibase-alias-edit-placeholder' => 'This is a generic placeholder message used while editing the list of aliases of an item. It is displayed in an empty input box which can be used to define a new alias.',
 	'wikibase-label-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 I.png|right|0x150px]]
-Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, i.e. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Item|item]].',
+Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, i.e. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata/Glossary#Languageattribute-label|label]] and [[d:Wikidata/Glossary#Item|item]].',
 	'wikibase-description-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 H.png|right|0x150px]]
-Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#Item|item]].',
+Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata/Glossary#Languageattribute-description|description]] and [[d:Wikidata/Glossary#Item|item]].',
 	'wikibase-statements' => "Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata's glossary for [[m:d:Wikidata:Glossary#Statement|statements]] and [[m:d:Wikidata:Glossary#Item|item]].",
 	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
-Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#Item|item]].',
-	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.',
-	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.',
-	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (Wikipedia) page.',
-	'wikibase-sitelinks-add' => "Add a sitelink to a language specific page on the cluster. See also Wikidata's glossary for [//wikidata.org/wiki/Wikidata:Glossary#Sitelink sitelinks].",
-	'wikibase-sitelinks-empty' => 'There are no site links for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
+Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[d:Wikidata/Glossary#Sitelink|sitelinks]] and [[d:Wikidata/Glossary#Item|item]].',
+	'wikibase-sitelinks-sitename-columnheading' => 'Sitelinks table column heading for the column containing the language names.',
+	'wikibase-sitelinks-siteid-columnheading' => 'Sitelinks table column heading for the column containing the language codes.',
+	'wikibase-sitelinks-link-columnheading' => 'Sitelinks table column heading for the column containg the title/link of/to the referenced (Wikipedia) page.',
+	'wikibase-sitelinks-add' => "Add a sitelink to a language specific page on the cluster. See also Wikidata's glossary for [[d:Wikidata:Glossary#Sitelink|sitelinks]].",
+	'wikibase-sitelinks-empty' => 'There are no sitelinks for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[d:Wikidata/Glossary#sitelink|sitelinks]] and [[d:Wikidata/Glossary#sitelink-title|title]].',
 	'wikibase-sitelinks-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 D.png|right|0x150px]]
-Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
+Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[d:Wikidata/Glossary#Sitelink|sitelinks]] and [[d:Wikidata/Glossary#Sitelink-title|title]].',
 	'wikibase-remove' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface being put in edit mode.',
 	'wikibase-undo-title' => 'Title shown on the form for undoing edits. Example is Undoing edit to "Spain". Parameters:
@@ -368,14 +368,14 @@ The number of pending elements within the list of site links and a leading "+".
 This will be inserted into parameter $3 of {{msg-mw|wikibase-propertyedittool-counter-pending}}.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => 'Parameters:
 * $1 is the number of elements not saved yet.',
-	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
+	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available. See also Wikidatas glossary for [[d:Wikidata/Glossary#Sitelink|sitelinks]].',
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'wb-special-createitem-new-item-notification' => 'Message displayed when a new item was created on [[Special:CreateItem]] and the user has been redirected to the new items page. $1 is the new items id, $2 is a link back to the special page with "special-createitem" as label',
-	'wikibase-aliases-label' => 'Label for list of aliases, displayed in front of the list. Aliases are alternate names and nicknames for the item. See also [[m:Wikidata/Glossary]].',
+	'wikibase-aliases-label' => 'Label for list of aliases, displayed in front of the list. Aliases are alternate names and nicknames for the item. See also [[d:Wikidata/Glossary]].',
 	'wikibase-aliases-input-help-message' => 'Bubble help message for entering the aliases of the data set used for a specific item.',
 	'wikibase-aliases-empty' => 'Placeholder message when no aliases for this data set representing a specific item have been defined.',
 	'wikibase-datatype-label' => 'Label for the data type name/label on a property page.',
-	'wikibase-snakview-property-input-placeholder' => 'Placeholder message that is initially displayed within the property input element when adding a new snak. See also [[m:Wikidata/Glossary]]',
+	'wikibase-snakview-property-input-placeholder' => 'Placeholder message that is initially displayed within the property input element when adding a new snak. See also [[d:Wikidata/Glossary]]',
 	'wikibase-snakview-unsupporteddatatype' => 'When adding a snak, this message will be displayed when choosing a property that has a datatype whose values can not be edited via the user interface yet because the necessary widget (the method how a value for the datatype may be specified) has not been implemented yet.',
 	'wikibase-restrictionedit-tooltip-message' => 'When editing a page (a data item) is restricted for the current user, this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item.',
 	'wikibase-blockeduser-tooltip-message' => 'When the current user is blocked from editing a page (a data item), this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item or creating a new item.',
@@ -396,8 +396,8 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-propertyedittool-co
 	'wikibase-error-ui-session-failure' => 'This is a human readable version of the API error "wikibase-api-session-failure" which is shown in the UI.',
 	'wikibase-error-ui-edit-conflict' => 'This is a human readable version of the API error "edit-conflict" which is shown in the UI.
 Note that the default message says the user shall "reload and save", but after a reload the content that should be saved will be lost.',
-	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|page]] and [[m:Wikidata/Glossary#item|item]].',
-	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a site link already used by another item. Parameters:
+	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[d:Wikidata/Glossary#Page|page]] and [[d:Wikidata/Glossary#Item|item]].',
+	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a sitelink already used by another item. Parameters:
 * $1 is the site id (interwiki prefix);
 * $2 is the title on the remote site;
 * $3 is the title of the conflicting item.",
@@ -429,22 +429,23 @@ Used to wrap the language and label for an additional entry when the language ar
 Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description. Parameters:
 * $1 label as a directional string
 * $2 description as a directional string',
-	'special-itembytitle' => "The item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also Wikidata's glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].",
+	'special-itembytitle' => "The item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also Wikidata's glossary for [[d:Wikidata/Glossary#Languageattribute-label|label]] and [[d:Wikidata/Glossary#Item|items]].",
 	'wikibase-itembytitle-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by site and title.',
-	'wikibase-itembytitle-lookup-site' => "Label for the textfield holding the site id. See also Wikidata's glossary for [[m:Wikidata/Glossary#sitelinks|site links]].",
-	'wikibase-itembytitle-lookup-page' => "Label for the textfield holding the external page title. See also Wikidata's glossary for [[m:Wikidata/Glossary#sitelinks|site links]].",
+	'wikibase-itembytitle-lookup-site' => "Label for the textfield holding the site id. See also Wikidata's glossary for [[d:Wikidata/Glossary#Sitelink|sitelinks]].",
+	'wikibase-itembytitle-lookup-page' => "Label for the textfield holding the external page title. See also Wikidata's glossary for [[d:Wikidata/Glossary#Sitelink|sitelinks]].",
 	'wikibase-itembytitle-submit' => 'Text for the submit button in the search form.',
 	'wikibase-itembytitle-nothing-found' => 'Informative text that the previous search failed for some reason, and that the search arguments must be refined.',
+	'wikibase-itembytitle-invalid-site' => 'Informative text when the provided site id is invalid.',
 	'wikibase-itembytitle-description' => 'Further information about the search fields and the valid values.',
 	'wikibase-itembytitle-create' => 'Information about how to proceede to create a new item. This message is presented when a user searched (or requested by URL) for an item by site and page title (e.g. item, linked to a particular Wikipedia page in a particular language), but no item was found that linked to that page.  This gives the user the option to create a new item with the page title as the item label.  The user will be sent to the Create Item page and the label would be pre-populated.
 
 Parameters:
 * $1 is the site identifier used in the URL.
 * $2 is the page name on escaped form for use in the URL.',
-	'special-itemdisambiguation' => "This special page returns all items with a given label. It provides an interface to disambiguate them. See also Wikidata's glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].",
+	'special-itemdisambiguation' => "This special page returns all items with a given label. It provides an interface to disambiguate them. See also Wikidata's glossary for [[d:Wikidata/Glossary#Languageattribute-label|label]] and [[d:Wikidata/Glossary#Item|items]].",
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by language and label.',
 	'wikibase-itemdisambiguation-lookup-language' => 'Label for the textfield holding the language id.',
-	'wikibase-itemdisambiguation-lookup-label' => 'Label for the textfield holding the language specific label. See also Wikidatas glossary for [[m:Wikidata/Glossary#label|label]].',
+	'wikibase-itemdisambiguation-lookup-label' => 'Label for the textfield holding the language specific label. See also Wikidatas glossary for [[d:Wikidata/Glossary#Label|label]].',
 	'wikibase-itemdisambiguation-submit' => 'Text for the submit button in the search form.',
 	'wikibase-itemdisambiguation-nothing-found' => 'Response if the search failed because no such items have been found.',
 	'wikibase-itemdisambiguation-create' => 'Invitation to click a link and create an item with the given label.',
@@ -617,6 +618,8 @@ This module generates a slightly different summary (autocomment) than the other 
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
+	'content-model-wikibase-property' => 'The name for Wikibase property content model, used when describing what type of content a page contains.',
+	'content-model-wikibase-query' => 'The name for Wikibase query content model, used when describing what type of content a page contains.',
 	'right-item-override' => '{{doc-right|item-override}}',
 	'right-item-create' => '{{doc-right|item-create}}',
 	'right-item-remove' => '{{doc-right|item-remove}}',
@@ -2266,6 +2269,8 @@ $messages['fi'] = array(
 	'wikibase-newproperty-datatype' => 'Tietotyyppi:',
 	'special-createitem' => 'Luo uusi nimike',
 	'wikibase-createitem-fieldset' => 'Luo uusi nimike',
+	'wikibase-createitem-site' => 'Sivusto ensimmäisenä linkitettävälle sivulle',
+	'wikibase-createitem-page' => 'Nimi ensimmäisenä linkitettävälle sivulle',
 	'wikibase-createentity-label' => 'Otsikko',
 	'wikibase-createentity-description' => 'Kuvaus',
 	'wikibase-createentity-submit' => 'Luo',
@@ -2303,6 +2308,7 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetaliases-remove' => 'Poistettu [$2] {{plural:$1|alias|aliasta}}',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Lisätty sivustokohtainen [$2]-linkki',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Poistettu sivustokohtainen [$2]-linkki',
+	'wikibase-item-summary-special-create-item' => 'Luotu [$2]-nimike {{plural:$1|arvolla|arvoilla}}',
 	'wikibase-item-summary-special-setlabel-set' => 'Muutettu [$2]-{{plural:$1|otsikko|otsikoita}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Loi uuden ominaisuuden',
 	'wikibase-property-summary-wbsetdescription-set' => 'Muutettiin kuvausta kielellä [$2]',
@@ -4979,7 +4985,7 @@ $messages['nb'] = array(
 	'wikibase-sitelinks-empty' => 'Det er ingen nettstedslenker',
 	'wikibase-sitelinks-input-help-message' => 'Definer en nettstedslenke slik at den peker på en artikkel.',
 	'wikibase-remove' => 'fjern',
-	'wikibase-undo-title' => 'Fjernet endringen av «$1»',
+	'wikibase-undo-title' => 'Fjern endring av «$1»',
 	'wikibase-restore-title' => 'Gjenoppretter gammel versjon "$1"',
 	'wikibase-partial-undo' => 'Redigeringen kan bare delvis bli omgjort.',
 	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|endring|endringer}} har blitt utelatt fordi {{PLURAL:$1|den tilhørende verdien|de tilhørende verdiene}} har endret seg etter dette.',
@@ -7218,6 +7224,7 @@ $messages['zh-hans'] = array(
 	'wikibase-newproperty-intro' => '创建一个新属性之前，考虑检查该属性是否已经存在。要创建一个新属性，您需要为$1指定至少一个标签或描述，及一个有效的属性类型。',
 	'wikibase-newproperty-fieldset' => '创建新属性',
 	'wikibase-newproperty-datatype' => '数据类型：',
+	'wikibase-newproperty-invalid-datatype' => '指定的数据类型无效',
 	'special-createitem' => '创建新项目',
 	'wikibase-createitem-intro' => '创建一个新属性之前，考虑检查该属性是否已经存在。要创建一个新属性，您需要为$1指定至少一个标签或描述。',
 	'wikibase-createitem-fieldset' => '创建新项目',
@@ -7258,8 +7265,7 @@ $messages['zh-hans'] = array(
 	'wikibase-restoreold' => '恢复',
 	'wikibase-restore-summary' => '恢复[[Special:Contributions/$2|$2]]作出的修订$1',
 	'wikibase-no-direct-editing' => '在命名空间$1中已禁用直接编辑',
-	'wikibase-noentity' => '此数据集不存在。您可以
-<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 搜索相关日志]</span>来得知原因。',
+	'wikibase-noentity' => '此数据集不存在。您可以<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 搜索相关日志]</span>来得知原因。',
 	'wikibase-noentity-createone' => '您也可以[[$1|新创建一个]]。',
 	'wikibase-item-summary-wbsetitem' => '创建新项目',
 	'wikibase-item-summary-wbeditentity' => '创建新项目',
@@ -7413,6 +7419,7 @@ $messages['zh-hant'] = array(
 	'wikibase-newproperty-intro' => '創建一個新屬性之前，考慮檢查該屬性是否已經存在。要創建一個新屬性，您需要於$1指定至少一個標籤或描述，及一個有效的屬性類型',
 	'wikibase-newproperty-fieldset' => '創建新屬性',
 	'wikibase-newproperty-datatype' => '數據類型：',
+	'wikibase-newproperty-invalid-datatype' => '指定的數據類型無效',
 	'special-createitem' => '創建一個新項目',
 	'wikibase-createitem-intro' => '創建一個新屬性之前，考慮檢查該屬性是否已經存在。要創建一個新屬性，您需要於$1指定至少一個標籤或描述。',
 	'wikibase-createitem-fieldset' => '創建一個新項目',
