@@ -21,6 +21,10 @@ The lib bundles common code that is used by both the client and the repo.
 
 Note that in each of the directories you will also find README notes for each of the extensions.
 
+== Requirements ==
+
+To use this extension, it is required to install the Diff and DataValues extension.
+
 == Wikidata ==
 
 These extensions where created by the Wikidata team for the Wikidata project.
