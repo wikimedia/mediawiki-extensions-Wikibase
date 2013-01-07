@@ -61,8 +61,6 @@ $wgWBSettings['apiWithTokens'] = true;
 
 $wgGroupPermissions['wbeditor']['item-set'] = true;
 
-$wgSharedTables[] = 'wb_changes';
-
 /*
 // Alternative settings, using the main namespace for items.
 // Note: if you do that, several core tests may fail. Parser tests for instance
