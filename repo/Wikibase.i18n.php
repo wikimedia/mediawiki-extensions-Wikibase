@@ -69,6 +69,7 @@ $messages['en'] = array(
 	'wikibase-snakview-property-input-placeholder' => 'property',
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak of type "$1". Handling for this kind of Snak is not yet supported.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Handling of values for "$1" data type is not yet supported.',
+	'wikibase-snakview-variations-somevalue-label' => 'some unknown value',
 	'wikibase-snakview-variations-novalue-label' => 'no value',
 
 	'wikibase-restrictionedit-tooltip-message' => 'This page is protected. Editing is not allowed.',
@@ -379,6 +380,7 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-propertyedittool-co
 	'wikibase-datatype-label' => 'Label for the data type name/label on a property page.',
 	'wikibase-snakview-property-input-placeholder' => 'Placeholder message that is initially displayed within the property input element when adding a new snak. See also [[m:Wikidata/Glossary]]',
 	'wikibase-snakview-unsupporteddatatype' => 'When adding a snak, this message will be displayed when choosing a property that has a datatype whose values can not be edited via the user interface yet because the necessary widget (the method how a value for the datatype may be specified) has not been implemented yet.',
+	'wikibase-snakview-variations-somevalue-label' => "Message displayed for 'some value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
 	'wikibase-restrictionedit-tooltip-message' => 'When editing a page (a data item) is restricted for the current user, this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item.',
 	'wikibase-blockeduser-tooltip-message' => 'When the current user is blocked from editing a page (a data item), this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item or creating a new item.',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).',

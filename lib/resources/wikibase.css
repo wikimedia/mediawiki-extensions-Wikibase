@@ -461,6 +461,7 @@ div.wb-claim-new .wb-snak-value {
 
 .wb-snakview-unsupportedsnaktype,
 .wb-snakview-variation-valuesnak-unsupporteddatatype,
+.wb-snakview-variation-somevaluesnak,
 .wb-snakview-variation-novaluesnak {
 	color: #565656;
 	font-style: italic;
