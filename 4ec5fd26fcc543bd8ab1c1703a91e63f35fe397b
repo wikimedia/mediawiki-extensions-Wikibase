@@ -16,6 +16,24 @@
       "revId": "4ec5fd26fcc543bd8ab1c1703a91e63f35fe397b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADgX//2zE\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-01-07T14:33:59Z",
+      "side": 1,
+      "message": "I don\u0027t think the code is going to blow up if we don\u0027t do this but I consider it more sane to have a freshly indexed array. (This could also be done in Title::getRestrictionTypes after the hook has run)",
+      "parentUuid": "AAADgX//21A\u003d",
+      "revId": "4ec5fd26fcc543bd8ab1c1703a91e63f35fe397b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
