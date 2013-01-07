@@ -187,6 +187,7 @@ table.wb-sitelinks input {
 /* the following ruler elements are used to detect the maximum site id column with preventing layout
 jitters when toggling edit mode */
 table.wb-sitelinks .wb-ruler,
+table.wb-sitelinks .wb-ruler th,
 table.wb-sitelinks .wb-ruler td,
 table.wb-sitelinks .wb-ruler .wb-ruler {
 	height: 0;
