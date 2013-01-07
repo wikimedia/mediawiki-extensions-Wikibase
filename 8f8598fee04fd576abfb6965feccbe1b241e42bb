@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgX//3As\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-07T10:31:41Z",
+      "side": 1,
+      "message": "Does this belong here? Probably not important to move it to another change set.",
+      "revId": "8f8598fee04fd576abfb6965feccbe1b241e42bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
