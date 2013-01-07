@@ -308,6 +308,7 @@ return call_user_func( function() {
 				'jquery.wikibase/snakview.variations/snakview.variations.js',
 				'jquery.wikibase/snakview.variations/snakview.variations.Variation.js',
 				'jquery.wikibase/snakview.variations/snakview.variations.Value.js',
+				'jquery.wikibase/snakview.variations/snakview.variations.SomeValue.js',
 			),
 			'dependencies' => array(
 				'jquery.eachchange',
@@ -323,6 +324,7 @@ return call_user_func( function() {
 				'wikibase-snakview-property-input-placeholder',
 				'wikibase-snakview-unsupportedsnaktype',
 				'wikibase-snakview-variation-unsupporteddatatype',
+				'wikibase-snakview-variations-somevalue-label',
 				'datatypes-type-wikibase-item'
 			)
 		),
