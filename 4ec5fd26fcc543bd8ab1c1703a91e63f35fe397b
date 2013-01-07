@@ -52,6 +52,24 @@
       "revId": "4ec5fd26fcc543bd8ab1c1703a91e63f35fe397b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADgX//2yk\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-07T14:45:39Z",
+      "side": 1,
+      "message": "I agree with Jeroen: if $types is expected to be continuous, the hooks documentation should say so. It\u0027s not an expectation that generally holds true in PHP, so I don\u0027t think it\u0027s a good idea to do this here.\n\nBut then, I don\u0027t think it\u0027s horrible either.",
+      "parentUuid": "AAADgX//2y0\u003d",
+      "revId": "4ec5fd26fcc543bd8ab1c1703a91e63f35fe397b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
