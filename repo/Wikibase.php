@@ -60,11 +60,6 @@ $wgExtensionCredits['other'][] = array(
 	'descriptionmsg' => 'wikibase-desc'
 );
 
-// constants
-define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
-define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
-define( 'CONTENT_MODEL_WIKIBASE_QUERY', "wikibase-query" );
-
 $dir = __DIR__ . '/';
 
 // rights

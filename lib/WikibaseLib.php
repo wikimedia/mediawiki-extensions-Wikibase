@@ -78,6 +78,10 @@ $wgExtensionCredits['other'][] = array(
 
 $dir = __DIR__ . '/';
 
+// constants
+define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
+define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
+define( 'CONTENT_MODEL_WIKIBASE_QUERY', "wikibase-query" );
 define( 'SUMMARY_MAX_LENGTH', 250 );
 
 // i18n
