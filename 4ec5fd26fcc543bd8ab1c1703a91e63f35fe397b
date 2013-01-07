@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgX//21A\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-07T13:46:41Z",
+      "side": 1,
+      "message": "Why is this needed? If code blows up if this is not done, then that code probably needs to take care of it",
+      "revId": "4ec5fd26fcc543bd8ab1c1703a91e63f35fe397b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
