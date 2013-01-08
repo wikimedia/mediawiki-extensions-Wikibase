@@ -150,18 +150,17 @@ abstract class EntityDiffTest extends \MediaWikiTestCase {
 		return $tests;
 	}
 
-//	/**
-//	 *
-//	 * @dataProvider provideApplyData
-//	 */
-//	public function testApply( Entity $a, Entity $b ) {
-//		$diff = $a->getDiff( $b );
-//		$diff->apply( $a );
-//
-//		$this->assertArrayEquals( $a->getLabels(), $b->getLabels() );
-//		$this->assertArrayEquals( $a->getDescriptions(), $b->getDescriptions() );
-//		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
-//	}
+	/**
+	 *
+	 * @dataProvider provideApplyData
+	 */
+	public function testApply( Entity $a, Entity $b ) {
+		$a->patch( $a->getDiff( $b ) );
+
+		$this->assertArrayEquals( $a->getLabels(), $b->getLabels() );
+		$this->assertArrayEquals( $a->getDescriptions(), $b->getDescriptions() );
+		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
+	}
 
 	public function provideConflictDetection() {
 		$cases = array();

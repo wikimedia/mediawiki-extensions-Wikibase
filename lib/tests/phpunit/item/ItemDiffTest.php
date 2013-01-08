@@ -74,19 +74,17 @@ class ItemDiffTest extends EntityDiffTest {
 	}
 
 	/**
-	 *
 	 * @dataProvider provideApplyData
 	 */
-//	public function testApply( \Wikibase\Entity $a, \Wikibase\Entity $b ) {
-//		parent::testApply( $a, $b);
-//
-//		$diff = $a->getDiff( $b );
-//		$diff->apply( $a );
-//
-//		$this->assertArrayEquals( $a->getLabels(), $b->getLabels() );
-//		$this->assertArrayEquals( $a->getDescriptions(), $b->getDescriptions() );
-//		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
-//		$this->assertArrayEquals( SiteLink::siteLinksToArray( $a->getSiteLinks() ), SiteLink::siteLinksToArray( $b->getSiteLinks() ) );
-//	}
+	public function testApply( \Wikibase\Entity $a, \Wikibase\Entity $b ) {
+		parent::testApply( $a, $b );
+
+		$a->patch( $a->getDiff( $b ) );
+
+		$this->assertArrayEquals( $a->getLabels(), $b->getLabels() );
+		$this->assertArrayEquals( $a->getDescriptions(), $b->getDescriptions() );
+		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
+		$this->assertArrayEquals( SiteLink::siteLinksToArray( $a->getSiteLinks() ), SiteLink::siteLinksToArray( $b->getSiteLinks() ) );
+	}
 
 }
