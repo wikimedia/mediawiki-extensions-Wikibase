@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgn///2A\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-08T17:00:50Z",
+      "side": 1,
+      "message": "Please pass $title instead of $page and change updatePage() accordingly. It has to construct a Title anyway, and it seems nicer to pass it if we already have it.",
+      "revId": "0171eebe8432e8e9c02c6d873eda85b13ae4edc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
