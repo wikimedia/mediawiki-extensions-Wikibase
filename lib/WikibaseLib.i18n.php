@@ -268,6 +268,18 @@ $messages['hsb'] = array(
 	'datatypes-type-commonsMedia' => 'Medijowa dataja na Wikimedia Commons',
 );
 
+/** Hungarian (magyar)
+ * @author Tgr
+ */
+$messages['hu'] = array(
+	'wikibaselib-desc' => 'A Wikibase és a Wikibase kliens kiterjesztések közös funkcióit tartalmazza',
+	'wikibaselib-entity-item' => 'tétel',
+	'wikibaselib-entity-property' => 'tulajdonság',
+	'wikibaselib-entity-query' => 'lekérdezés',
+	'datatypes-type-wikibase-item' => 'Tétel',
+	'datatypes-type-commonsMedia' => 'Commons médiafájl',
+);
+
 /** Interlingua (interlingua)
  * @author McDutchie
  */

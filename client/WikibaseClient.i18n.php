@@ -387,6 +387,26 @@ $messages['hsb'] = array(
 	'wbc-rc-show-wikidata-pref' => 'Změny Wikidata w aktualnych změnach pokazać',
 );
 
+/** Hungarian (magyar)
+ * @author Tgr
+ */
+$messages['hu'] = array(
+	'wbc-desc' => 'Kliens a Wikibase kiterjesztéshez',
+	'wbc-after-page-move' => 'Ha azt akarod, hogy a nyelvközi hivatkozások megmaradjanak, [$1 frissítsd] a kapcsolt Wikidata elemet is.',
+	'wbc-comment-remove' => 'Nyelvközi hivatkozások eltávolítása – a kapcsolt Wikidata elemet törölték.',
+	'wbc-comment-linked' => 'Egy Wikidata elemet kapcsoltak ehhez az oldalhoz.',
+	'wbc-comment-unlink' => 'Nyelvközi hivatkozások eltávolítása – már nincs összekapcsolva a Wikidata elemmel.',
+	'wbc-comment-restore' => 'Nyelvközi hivatkozások visszaállítása – a hozzátartozó törölt Wikidata elemet visszaállították.',
+	'wbc-comment-update' => 'Nyelvközi hivatkozások frissítése.',
+	'wbc-comment-sitelink-add' => 'Nyelvközi hivatkozás hozzáadása: $1',
+	'wbc-comment-sitelink-change' => 'Nyelvközi hivatkozás módosítása (régi: $1, új: $2)',
+	'wbc-comment-sitelink-remove' => 'Nyelvközi hivatkozás törlése: $1',
+	'wbc-editlinks' => 'szerkesztés',
+	'wbc-editlinkstitle' => 'Nyelvközi hivatkozások szerkesztése',
+	'wbc-rc-hide-wikidata' => 'Wikidata $1',
+	'wbc-rc-show-wikidata-pref' => 'Wikidata szerkesztések mutatása a friss változtatásokban',
+);
+
 /** Interlingua (interlingua)
  * @author McDutchie
  */
@@ -720,12 +740,13 @@ $messages['pt'] = array(
 /** Brazilian Portuguese (português do Brasil)
  * @author Helder.wiki
  * @author Jaideraf
+ * @author Tuliouel
  */
 $messages['pt-br'] = array(
 	'wbc-desc' => 'Cliente para a extensão Wikibase',
 	'wbc-after-page-move' => 'Você também pode [$1 atualizar] o item associado ao Wikidata para manter os links de idioma na página movida.',
 	'wbc-comment-remove' => 'O item associado no Wikidata foi eliminado. Os links para os outros idiomas foram removidos.',
-	'wbc-comment-linked' => 'Um item do Wikidata foi linkado a esta página.',
+	'wbc-comment-linked' => 'Um item do Wikidata foi associado a esta página.',
 	'wbc-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para os outros idiomas foram removidos.',
 	'wbc-comment-restore' => 'O item associado no Wikidata foi restaurado. Os links para os outros idiomas foram restaurados.',
 	'wbc-comment-update' => 'Os links para outros idiomas foram atualizados.',
