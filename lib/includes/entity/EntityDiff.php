@@ -29,10 +29,17 @@ use MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Jens Ohlig
  */
 class EntityDiff extends Diff {
 
+	/**
+	 * @since 0.4
+	 *
+	 * @param string $entityType
+	 * @param \Diff\DiffOp[] $operations
+	 *
+	 * @return EntityDiff
+	 */
 	public static function newForType( $entityType, $operations = array() ) {
 		if ( $entityType === Item::ENTITY_TYPE ) {
 			return new ItemDiff( $operations );
@@ -42,6 +49,11 @@ class EntityDiff extends Diff {
 		}
 	}
 
+	/**
+	 * Constructor.
+	 *
+	 * @param \Diff\DiffOp[] $operations
+	 */
 	public function __construct( array $operations = array() ) {
 		parent::__construct( $operations, true );
 	}
