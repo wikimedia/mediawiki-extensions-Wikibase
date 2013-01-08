@@ -226,7 +226,7 @@ $wgHooks['ResourceLoaderTestModules'][]				= 'Wikibase\LibHooks::registerQUnitTe
  *
  * @since 0.2
  *
- * @param $key \string template key
+ * @param $key string template key
  * Varargs: normal template parameters
  *
  * @return string

@@ -113,7 +113,7 @@ class DiffView extends \ContextSource {
 				$html .= Html::openElement( 'tr' );
 				$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 				$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
-					Html::rawElement( 'div', null,
+					Html::rawElement( 'div', array(),
 						Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
 							$op->getOldValue() ) ) );
 				$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );

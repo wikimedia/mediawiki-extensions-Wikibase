@@ -47,7 +47,7 @@ class LangLinkHandler {
 	/**
 	 * Constructs a new LangLinkHandler using the given service instances.
 	 *
-	 * @param str            $siteId The global site ID for the local wiki
+	 * @param string         $siteId The global site ID for the local wiki
 	 * @param array          $namespaces The list of namespaces for which language links should be handled.
 	 * @param SiteLinkLookup $siteLinksLookup A site link lookup service
 	 * @param Sites          $sites A site definition lookup service
