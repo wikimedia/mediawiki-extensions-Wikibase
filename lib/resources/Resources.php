@@ -305,6 +305,7 @@ return call_user_func( function() {
 		'jquery.wikibase.snakview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.snakview.js',
+				'jquery.wikibase/jquery.wikibase.snakview.TypeSelector.js',
 				'jquery.wikibase/snakview.variations/snakview.variations.js',
 				'jquery.wikibase/snakview.variations/snakview.variations.Variation.js',
 				'jquery.wikibase/snakview.variations/snakview.variations.Value.js',
