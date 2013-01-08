@@ -328,6 +328,9 @@ return call_user_func( function() {
 				'datatypes-type-wikibase-item',
 				'wikibase-snakview-variations-somevalue-label',
 				'wikibase-snakview-variations-novalue-label',
+				'wikibase-snakview-snaktypeselector-value',
+				'wikibase-snakview-snaktypeselector-somevalue',
+				'wikibase-snakview-snaktypeselector-novalue'
 			)
 		),
 

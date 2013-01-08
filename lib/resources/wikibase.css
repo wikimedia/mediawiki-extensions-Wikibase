@@ -365,6 +365,10 @@ div.wb-snak {
 	padding: 10px;
 }
 
+div.wb-snak .wb-snak-value-container {
+	margin-right: 16px;
+}
+
 div.wb-claim-container .wb-editsection {
 	top: 10px; /* even out padding */
 }
@@ -430,7 +434,7 @@ div.wb-claim-new .wb-claim {
 
 div.wb-claim-new .wb-claim-mainsnak {
 	margin: 0 18em 0 15em;
-	padding: 0;
+	padding: 10px;
 }
 
 div.wb-claim-new .wb-snak-property-container {
@@ -455,8 +459,13 @@ div.wb-claim-new .wb-snak-property input {
 
 div.wb-claim-new .wb-snak-value {
 	min-height: 1.5em;
-	padding: 10px;
 	max-width: 32em;
+}
+
+.wb-snak-typeselector {
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
 }
 
 .wb-snakview-unsupportedsnaktype,
