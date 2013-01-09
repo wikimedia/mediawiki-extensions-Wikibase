@@ -21,6 +21,9 @@ require_all 'lib'
 
 configs = YAML::load( File.open( 'configuration.yml' ) )
 RSpec.configure do |config|
+  if configs['EXPERIMENTAL'] == false
+    config.exclusion_filter = { :experimental => true }
+  end
   config.include PageObject::PageFactory
   config.before(:all) do
     if(ENV["BROWSER_TYPE"] && SUPPORTED_BROWSERS.include?(ENV["BROWSER_TYPE"]))
