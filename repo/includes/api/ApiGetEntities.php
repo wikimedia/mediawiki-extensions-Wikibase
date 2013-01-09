@@ -64,15 +64,6 @@ class ApiGetEntities extends Api {
 			}
 		}
 
-		// B/C: assume non-prefixed IDs refer to items
-		foreach ( $params['ids'] as $i => $id ) {
-			if ( !EntityId::isPrefixedId( $id ) ) {
-				$params['ids'][$i] = Item::getIdPrefix() . $id;
-				$this->getResult()->setWarning( 'Assuming plain numeric ID refers to an item. '
-						. 'Please use qualified IDs instead.' );
-			}
-		}
-
 		$params['ids'] = array_unique( $params['ids'] );
 
 		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {

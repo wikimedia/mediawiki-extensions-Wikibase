@@ -102,18 +102,6 @@ class EntityIdTest extends \MediaWikiTestCase {
 	 * @param \Wikibase\EntityId $id
 	 * @param array $constructorArgs
 	 */
-	public function testIsPrefixedId( EntityId $id, array $constructorArgs ) {
-		$this->assertTrue( EntityId::isPrefixedId( $id->getPrefixedId() ) );
-		$this->assertFalse( EntityId::isPrefixedId( $id->getNumericId() ) );
-		$this->assertFalse( EntityId::isPrefixedId( $id->getPrefix() ) );
-		$this->assertFalse( EntityId::isPrefixedId( $id->getEntityType() ) );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param \Wikibase\EntityId $id
-	 * @param array $constructorArgs
-	 */
 	public function testGetEntityType( EntityId $id, array $constructorArgs ) {
 		$this->assertEquals( $constructorArgs[0], $id->getEntityType() );
 	}

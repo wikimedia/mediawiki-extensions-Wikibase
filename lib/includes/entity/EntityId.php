@@ -49,6 +49,62 @@ use MWException;
 class EntityId implements \Immutable, \Comparable {
 
 	/**
+	 * Constructs an EntityId object from a prefixed id.
+	 *
+	 * @since 0.3
+	 * @deprecated since 0.4
+	 *
+	 * @param string $prefixedId
+	 *
+	 * @return EntityId|null
+	 * @throws MWException
+	 */
+	public static function newFromPrefixedId( $prefixedId ) {
+		$prefixMap = array();
+
+		foreach ( self::$prefixMap as $setting => $entityType ) {
+			$prefixMap[ Settings::get( $setting ) ] = $entityType;
+		}
+
+		$options = new \ValueParsers\ParserOptions( array(
+			\Wikibase\Lib\EntityIdParser::OPT_PREFIX_MAP => $prefixMap
+		) );
+
+		$idParser = new \Wikibase\Lib\EntityIdParser( $options );
+		$result = $idParser->parse( $prefixedId );
+		return $result->isValid() ? $result->getValue() : null;
+	}
+
+	// TODO: move to sane place
+	protected static $prefixMap = array(
+		'itemPrefix' => Item::ENTITY_TYPE,
+		'propertyPrefix' => Property::ENTITY_TYPE,
+		'queryPrefix' => Query::ENTITY_TYPE,
+	);
+
+	/**
+	 * Returns the prefixed used when serializing the ID.
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	public function getPrefix() {
+		// FIXME
+		static $prefixMap = false;
+
+		if ( $prefixMap === false ) {
+			$prefixMap = array();
+
+			foreach ( self::$prefixMap as $setting => $type ) {
+				$prefixMap[$type] = Settings::get( $setting );
+			}
+		}
+
+		return $prefixMap[$this->entityType];
+	}
+
+	/**
 	 * The type of the entity to which the ID belongs.
 	 *
 	 * @since 0.3
@@ -112,27 +168,6 @@ class EntityId implements \Immutable, \Comparable {
 	}
 
 	/**
-	 * Returns the prefixed used when serializing the ID.
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public function getPrefix() {
-		static $prefixMap = false;
-
-		if ( $prefixMap === false ) {
-			$prefixMap = array();
-
-			foreach ( self::$prefixMap as $setting => $type ) {
-				$prefixMap[$type] = Settings::get( $setting );
-			}
-		}
-
-		return $prefixMap[$this->entityType];
-	}
-
-	/**
 	 * Gets the serialized ID consisting out of entity type prefix followed by the numerical ID.
 	 *
 	 * @since 0.3
@@ -141,104 +176,6 @@ class EntityId implements \Immutable, \Comparable {
 	 */
 	public function getPrefixedId() {
 		return $this->getPrefix() . $this->numericId;
-	}
-
-	// TODO: move to sane place
-	protected static $prefixMap = array(
-		'itemPrefix' => Item::ENTITY_TYPE,
-		'propertyPrefix' => Property::ENTITY_TYPE,
-		'queryPrefix' => Query::ENTITY_TYPE,
-	);
-
-	/**
-	 * Constructs an EntityId object from a prefixed id.
-	 *
-	 * @since 0.3
-	 *
-	 * @param string $prefixedId
-	 *
-	 * @return EntityId|null
-	 * @throws MWException
-	 */
-	public static function newFromPrefixedId( $prefixedId ) {
-		if ( !is_string( $prefixedId ) ) {
-			throw new MWException( '$prefixedId needs to be a string' );
-		}
-
-		$idParts = self::getIdParts( $prefixedId );
-
-		if ( count( $idParts ) < 3 || !ctype_digit( $idParts[2] ) ) {
-			return null;
-		}
-
-		$entityType = self::getEntityTypeForPrefix( $idParts[1] );
-
-		if ( $entityType === null ) {
-			return null;
-		}
-
-		return new self( $entityType, (int)$idParts[2] );
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param string $prefix
-	 *
-	 * @return string|null
-	 */
-	protected static function getEntityTypeForPrefix( $prefix ) {
-		static $typeMap = false;
-
-		if ( $typeMap === false ) {
-			$typeMap = array();
-
-			foreach ( self::$prefixMap as $setting => $entityType ) {
-				$typeMap[Settings::get( $setting )] = $entityType;
-			}
-		}
-
-		return array_key_exists( $prefix, $typeMap ) ? $typeMap[$prefix] : null;
-	}
-
-	/**
-	 * Get individual parts of an id.
-	 *
-	 * @since 0.3
-	 *
-	 * @param string $id
-	 *
-	 * @return array The actual id broken up in prefix, number, hash and fragment and fragment alone
-	 */
-	protected static function getIdParts( $id ) {
-		static $regex = false;
-
-		if ( $regex === false ) {
-			$prefixes = array();
-
-			foreach ( array_keys( self::$prefixMap ) as $setting ) {
-				$prefixes[] = preg_quote( Settings::get( $setting ) );
-			}
-
-			$regex = '/^(' . implode( '|', $prefixes ) . '|)(\d+)(#.*|)$/';
-		}
-
-		preg_match( $regex, strtolower( $id ), $matches );
-
-		return $matches;
-	}
-
-	/**
-	 * Predicate to check if there is a prefix in place
-	 * @since 0.3
-	 *
-	 * @param string $id
-	 *
-	 * @return bool true if a prefix is found, false if it is not found
-	 */
-	public static function isPrefixedId( $id ) {
-		$parts = self::getIdParts( $id );
-		return ( isset( $parts[1] ) && $parts[1] !== '' );
 	}
 
 	/**

@@ -87,9 +87,9 @@ final class LibHooks {
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
-	 * @since 0.2 (as registerUnitTests in 0.1)
+	 * @since 0.2
 	 *
-	 * @param array $files
+	 * @param string[] $files
 	 *
 	 * @return boolean
 	 */
@@ -116,6 +116,8 @@ final class LibHooks {
 			'item/ItemNewEmpty',
 			'item/ItemNewFromArray',
 			'item/Item',
+
+			'parsers/EntityIdParser',
 
 			'property/PropertyDiff',
 			'property/Property',

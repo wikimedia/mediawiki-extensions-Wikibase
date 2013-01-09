@@ -12,6 +12,8 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 ; API
 
+* Dropped support for numeric item ids. They now always need to be prefixed.
+
 ; Backend
 
 === Version 0.3 ===
