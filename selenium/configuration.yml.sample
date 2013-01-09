@@ -28,3 +28,6 @@
  # Language to be used for testing (code & local name)
  LANGUAGE_CODE: "en"
  LANGUAGE_NAME: "english"
+
+ # Enable/disable testing of experimental features
+ EXPERIMENTAL: false

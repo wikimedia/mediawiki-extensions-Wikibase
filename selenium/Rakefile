@@ -58,6 +58,11 @@ RSpec::Core::RakeTask.new(:label) do |spec|
   spec.pattern = '../repo/tests/selenium/item/label_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:ld) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/item/{label_spec.rb,description_spec.rb}'
+end
+
 RSpec::Core::RakeTask.new(:sitelinks) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/sitelinks/*_spec.rb'
@@ -200,6 +205,11 @@ end
 
 RSpec::Core::RakeTask.new(:statements) do |spec|
   spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/statements/{statements_spec.rb,statements_cm_spec.rb,statements_item_spec.rb}'
+end
+
+RSpec::Core::RakeTask.new(:statements_basic) do |spec|
+  spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/statements/statements_spec.rb'
 end
 
@@ -216,11 +226,6 @@ end
 RSpec::Core::RakeTask.new(:statements_bugs) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/statements/statements_bugs_spec.rb'
-end
-
-RSpec::Core::RakeTask.new(:statements_all) do |spec|
-  spec.ruby_opts = "-I lib:spec"
-  spec.pattern = '../repo/tests/selenium/statements/*_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:ip_notification) do |spec|
