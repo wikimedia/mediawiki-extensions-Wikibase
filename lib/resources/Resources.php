@@ -340,6 +340,10 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.snakview'
+			),
+			'messages' => array(
+				'wikibase-claimview-snak-tooltip',
+				'wikibase-claimview-snak-new-tooltip'
 			)
 		),
 
