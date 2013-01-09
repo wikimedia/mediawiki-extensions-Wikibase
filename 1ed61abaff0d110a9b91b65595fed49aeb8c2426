@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgn//+jE\u003d",
+        "filename": "client/tests/selenium/interwiki/client_repo_spec.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-09T16:41:11Z",
+      "side": 1,
+      "message": "propagate\n\neww, whitespace too :)",
+      "revId": "1ed61abaff0d110a9b91b65595fed49aeb8c2426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADgn//+jA\u003d",
+        "filename": "client/tests/selenium/interwiki/client_repo_spec.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-09T16:41:11Z",
+      "side": 1,
+      "message": "propagate",
+      "revId": "1ed61abaff0d110a9b91b65595fed49aeb8c2426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
