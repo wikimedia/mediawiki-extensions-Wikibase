@@ -45,12 +45,6 @@ class ExternalRecentChange {
 			$userText = $metadata['rc_user_text'];
 		}
 
-		if ( array_key_exists( 'page_id', $metadata ) ) {
-			$pageId = $metadata['page_id'];
-		} else {
-			$pageId = $metadata['rc_curid'];
-		}
-
 		$this->mAttribs = array(
 			'rc_namespace' => $title->getNamespace(),
 			'rc_title' => $title->getDBkey(),
@@ -64,7 +58,7 @@ class ExternalRecentChange {
 			'rc_this_oldid' => $title->getLatestRevID(),
 			'rc_last_oldid' => $title->getLatestRevID(),
 			'rc_params' => serialize( $attribs ),
-			'rc_cur_id' => $pageId,
+			'rc_cur_id' => $title->getArticleID(),
 			'rc_comment' => '',
 			'rc_timestamp' => $metadata['time'],
 			'rc_cur_time' => $metadata['time'],
