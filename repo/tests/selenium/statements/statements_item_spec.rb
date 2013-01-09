@@ -69,7 +69,7 @@ describe "Check item type statements UI" do
         page.wait_for_entity_to_load
         page.editFirstStatement
         ajax_wait
-        page.statementValueItem.should == items[1]["label"]
+        page.statementValueInput.should == items[1]["label"]
         page.cancelStatement
       end
     end
