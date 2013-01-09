@@ -137,6 +137,7 @@ final class RepoHooks {
 			'ItemMove',
 			'ItemView',
 			'LabelDescriptionDuplicateDetector',
+			'MultiLangConstraintDetector',
 			'NamespaceUtils',
 
 			'actions/EditEntityAction',
@@ -493,7 +494,12 @@ final class RepoHooks {
 				// This means that all searches will use exact matching
 				// (depending on the database's collation).
 				'withoutTermSearchKey' => false,
-				'entityNamespaces' => array()
+				'entityNamespaces' => array(),
+
+				// These are used for multilanguage strings that should have a soft length constraint
+				'multilang-limits' => array(
+					'length' => 25,
+				)
 			)
 		);
 

@@ -101,6 +101,10 @@ Your IP address will be recorded in this property's edit history.",
 
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
+	'wikibase-error-constraint-violation-label' => 'The label has a constraint violation for language code(s) $1',
+	'wikibase-error-constraint-violation-description' => 'The description has a constraint violation for language code(s) $1',
+	'wikibase-error-constraint-violation-aliases' => 'The aliases has a constraint violation for language code(s) $1',
+
 	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Another property ($3) already has label "$1" associated with language code $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Another query ($3) already has label "$1" associated with language code $2',
@@ -417,6 +421,12 @@ Note that the default message says the user shall "reload and save", but after a
 * $1 is the site id (interwiki prefix);
 * $2 is the title on the remote site;
 * $3 is the title of the conflicting item.",
+	'wikibase-error-constraint-violation-label' => "Error message shown when a user tries to save a multilabel label that has some constraint violation.
+* $1 is the violating languages",
+	'wikibase-error-constraint-violation-description' => "Error message shown when a user tries to save a multilabel description that has some constraint violation.
+* $1 is the violating languages",
+	'wikibase-error-constraint-violation-alias' => "Error message shown when a user tries to save a multilabel alias that has some constraint violation.
+* $1 is the violating languages",
 	'wikibase-error-label-not-unique-wikibase-property' => 'Error message shown when a user tries to save a property that has a non-unique label.
 * $1 is label text
 * $2 is the labels language code
