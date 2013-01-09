@@ -63,7 +63,7 @@ wb.Snak.prototype = {
 	 */
 	toJSON: function() {
 		return {
-			type: this.getType(),
+			snaktype: this.getType(),
 			propertyId: this.getPropertyId()
 		};
 	}
