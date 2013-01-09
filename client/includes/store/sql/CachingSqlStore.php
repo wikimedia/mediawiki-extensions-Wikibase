@@ -67,6 +67,17 @@ class CachingSqlStore implements ClientStore {
 	}
 
 	/**
+	 * Throws an MWException, because no changes table is available.
+	 *
+	 * @since 0.4
+	 *
+	 * @throws \MWException because no changes table can be supplied.
+	 */
+	public function newChangesTable() {
+		throw new \MWException( "no changes table available" );
+	}
+
+	/**
 	 * Delete client store data
 	 *
 	 * @since 0.2

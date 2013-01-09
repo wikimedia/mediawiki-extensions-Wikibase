@@ -49,6 +49,17 @@ interface ClientStore {
 	public function newEntityLookup();
 
 	/**
+	 * Returns a new ChangesTable for this store.
+	 *
+	 * @since 0.4
+	 *
+	 * @return ChangesTable
+	 *
+	 * @throws \MWException if no changes table can be supplied.
+	 */
+	public function newChangesTable();
+
+	/**
 	 * Removes all data from the store.
 	 *
 	 * @since 0.2
