@@ -19,6 +19,12 @@
 	display: block;
 }
 
+/* No point in always displaying the notification right under the search box since notifications
+are also triggered down the document */
+.wb-entitypage #mw-notification-area {
+	position: fixed;
+}
+
 
 /********** BASIC LAYOUT **********/
 
