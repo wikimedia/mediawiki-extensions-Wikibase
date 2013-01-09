@@ -102,16 +102,4 @@ class UtilsTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function testGetEntityNamespaces() {
-		$this->assertInternalType( 'array', Utils::getEntityNamespaces() );
-	}
-
-	public function testGetEntityNamespace() {
-		foreach ( Utils::getEntityNamespaces() as $namespaceId ) {
-			$this->assertTrue( Utils::isEntityNamespace( $namespaceId ) );
-		}
-
-		$this->assertFalse( Utils::isEntityNamespace( 720101010 ) );
-	}
-
 }

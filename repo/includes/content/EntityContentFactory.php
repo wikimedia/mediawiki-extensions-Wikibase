@@ -140,7 +140,7 @@ class EntityContentFactory {
 	public function getTitleForId( EntityId $id ) {
 		return Title::newFromText(
 			$id->getPrefixedId(),
-			Utils::getEntityNamespace( self::$typeMap[$id->getEntityType()] )
+			NamespaceUtils::getEntityNamespace( self::$typeMap[$id->getEntityType()] )
 		);
 	}
 

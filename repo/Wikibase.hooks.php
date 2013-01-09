@@ -137,6 +137,7 @@ final class RepoHooks {
 			'ItemMove',
 			'ItemView',
 			'LabelDescriptionDuplicateDetector',
+			'NamespaceUtils',
 
 			'actions/EditEntityAction',
 
@@ -201,7 +202,7 @@ final class RepoHooks {
 	public static function onNamespaceIsMovable( $ns, &$movable ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( Utils::isEntityNamespace( $ns ) ) {
+		if ( NamespaceUtils::isEntityNamespace( $ns ) ) {
 			$movable = false;
 		}
 
@@ -492,6 +493,7 @@ final class RepoHooks {
 				// This means that all searches will use exact matching
 				// (depending on the database's collation).
 				'withoutTermSearchKey' => false,
+				'entityNamespaces' => array()
 			)
 		);
 
@@ -974,7 +976,7 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onTitleGetRestrictionTypes( Title $title, array &$types ) {
-		if ( !Utils::isEntityNamespace( $title->getNamespace() ) ) {
+		if ( !NamespaceUtils::isEntityNamespace( $title->getNamespace() ) ) {
 			return true;
 		}
 
