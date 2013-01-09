@@ -59,6 +59,21 @@ wb.Snak.prototype = {
 	},
 
 	/**
+	 * Returns whether this Snak is equal to another Snak. This means that their property and type
+	 * are the same, as well as any other attributes they might have depending on their Snak type.
+	 *
+	 * @param {wb.Snak} snak
+	 * @return {Boolean}
+	 */
+	equals: function( snak ) {
+		return snak === this
+			|| (
+				this.getPropertyId() === snak.getPropertyId()
+				&& this.getType() === snak.getType()
+			);
+	},
+
+	/**
 	 * Returns a simple JSON structure representing this data value.
 	 * @since 0.3
 	 *

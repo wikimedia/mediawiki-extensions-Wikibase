@@ -42,6 +42,20 @@ wb.PropertyValueSnak = wb.utilities.inherit( PARENT, constructor, {
 	},
 
 	/**
+	 * @see wb.Snak.equals
+	 */
+	equals: function( snak ) {
+		// Snaks are equal if basic stuff (id, type) are equal...
+		var equal = PARENT.prototype.equals.call( this, snak );
+
+		if( !equal ) {
+			return false;
+		}
+		// ... plus, the actual value has to be equal:
+		return this._value.equals( snak.getValue() );
+	},
+
+	/**
 	 * @see wb.Snak.toJSON
 	 */
 	toJSON: function() {
