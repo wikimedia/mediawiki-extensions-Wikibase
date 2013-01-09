@@ -14,12 +14,15 @@
  * @since 0.2
  * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Snaks
  *
- * @param {Number} propertyId
+ * @param {String} propertyId
  */
 wb.Snak = function( propertyId ) {
 	// check whether the Snak has a type, doesn't make sense to create an instance of wb.Snak!
 	if( !this.constructor.TYPE ) {
 		throw new Error( 'Can not create abstract Snak of no specific type' );
+	}
+	if( !propertyId ) {
+		throw new Error( 'Property ID is required for constructing new Snak' );
 	}
 	this._propertyId = propertyId;
 };
@@ -48,7 +51,7 @@ wb.Snak.prototype = {
 	},
 
 	/**
-	 * Returns the ID of the property entity the snak relates to.
+	 * Returns the ID of the property entity the Snak relates to.
 	 * @return Number
 	 */
 	getPropertyId: function() {
@@ -64,7 +67,7 @@ wb.Snak.prototype = {
 	toJSON: function() {
 		return {
 			snaktype: this.getType(),
-			propertyId: this.getPropertyId()
+			property: this.getPropertyId()
 		};
 	}
 };
