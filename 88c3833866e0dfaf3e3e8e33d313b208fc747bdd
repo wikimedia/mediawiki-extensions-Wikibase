@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgn//+3U\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-09T12:00:26Z",
+      "side": 1,
+      "message": "$titleText doesn\u0027t exist any more, use $title-\u003egetPrefixedText()",
+      "revId": "88c3833866e0dfaf3e3e8e33d313b208fc747bdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
