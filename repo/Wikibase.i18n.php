@@ -101,6 +101,11 @@ Your IP address will be recorded in this property's edit history.",
 
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
+	'wikibase-warning-constraint-violation-length' => 'A length constraint is triggered for language code "$1".',
+	'wikibase-error-constraint-violation-label' => 'There is {{plural:$1|a constraint|constraints}} violation for {{plural:$1|label|labels}} "$2" for {{plural:$1|language code|language codes}} "$1".',
+	'wikibase-error-constraint-violation-description' => 'There is {{plural:$1|a constraint|constraints}} violation for {{plural:$1|description|descriptions}} "$2" for {{plural:$1|language code|language codes}} "$1".',
+	'wikibase-error-constraint-violation-aliases' => 'There is {{plural:$1|a constraint|constraints}} violation for {{plural:$1|alias|aliases}} "$2" for {{plural:$1|language code|language codes}} "$1".',
+
 	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Another property ($3) already has label "$1" associated with language code $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Another query ($3) already has label "$1" associated with language code $2',
@@ -417,6 +422,20 @@ Note that the default message says the user shall "reload and save", but after a
 * $1 is the site id (interwiki prefix);
 * $2 is the title on the remote site;
 * $3 is the title of the conflicting item.",
+	'wikibase-warning-constraint-violation-length' => 'A warning message that a length constraint is triggered. This will usually come together with a fatal error message.
+* $1 is the language code',
+	'wikibase-error-constraint-violation-label' => "Error message shown when a user tries to save a multilabel label that has some constraint violation.
+* $1 is the count of violating languages
+* $2 is the violating languages
+* $3 is the violating string, but this is usually not very usefull as the message is usually given in an edit window",
+	'wikibase-error-constraint-violation-description' => "Error message shown when a user tries to save a multilabel description that has some constraint violation.
+* $1 is the count of violating languages
+* $2 is the violating languages
+* $3 is the violating string, but this is usually not very usefull as the message is usually given in an edit window",
+	'wikibase-error-constraint-violation-alias' => "Error message shown when a user tries to save a multilabel alias that has some constraint violation.
+* $1 is the count of violating languages, but note that there might be a different number of aliases
+* $2 is the violating languages
+* $3 is the violating strings, but this is usually not very usefull as the message is usually given in an edit window",
 	'wikibase-error-label-not-unique-wikibase-property' => 'Error message shown when a user tries to save a property that has a non-unique label.
 * $1 is label text
 * $2 is the labels language code
