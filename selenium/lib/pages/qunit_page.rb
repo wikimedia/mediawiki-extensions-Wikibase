@@ -9,7 +9,7 @@
 class QUnitPage
   include PageObject
 
-  #page_url WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=wikibase"
+  h1(:mwFirstHeading, :id => "firstHeading")
   paragraph(:qunitTestResult, :id => "qunit-testresult")
   ordered_list(:qunitTestList, :id => "qunit-tests")
   list_item(:qunitTestFail, :class => "fail")
@@ -17,6 +17,7 @@ class QUnitPage
 
   def wait_for_qunit_tests
     wait_until do
+      mwFirstHeading_element.click
       qunitTestResult? && qunitTestList? && (qunitTestRunning? == false)
     end
   end
