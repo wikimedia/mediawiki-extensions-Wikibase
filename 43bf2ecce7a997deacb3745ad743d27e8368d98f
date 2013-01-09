@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgn//+oA\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-09T15:32:21Z",
+      "side": 1,
+      "message": "passed in",
+      "revId": "43bf2ecce7a997deacb3745ad743d27e8368d98f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
