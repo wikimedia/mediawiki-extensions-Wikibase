@@ -100,6 +100,11 @@ final class RepoHooks {
 
 				$updater->insertUpdateRow( 'ChangeChangeObjectId.sql' );
 			}
+
+			$updater->addExtensionTable(
+				'wb_changes_dispatch',
+				__DIR__ . '/sql/changes_dispatch' . $extension
+			);
 		}
 		else {
 			wfWarn( "Database type '$type' is not supported by the Wikibase repository." );

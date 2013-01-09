@@ -92,6 +92,7 @@ $wgAutoloadClasses['Wikibase\LibHooks'] 			= $dir . 'WikibaseLib.hooks.php';
 $wgAutoloadClasses['Wikibase\ByPropertyIdArray'] 		= $dir . 'includes/ByPropertyIdArray.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 			= $dir . 'includes/ChangeNotifier.php';
+$wgAutoloadClasses['Wikibase\ChangeNotificationJob']	= $dir . 'includes/ChangeNotificationJob.php';
 $wgAutoloadClasses['Wikibase\ChangesTable'] 			= $dir . 'includes/ChangesTable.php';
 $wgAutoloadClasses['Wikibase\DiffView'] 				= $dir . 'includes/DiffView.php';
 $wgAutoloadClasses['Wikibase\Lib\GuidGenerator'] 		= $dir . 'includes/GuidGenerator.php';
@@ -213,6 +214,7 @@ $wgDataTypes['wikibase-item'] = array(
 	'datavalue' => 'string',
 );
 
+$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 
 // Hooks
 $wgHooks['WikibaseDefaultSettings'][]				= 'Wikibase\LibHooks::onWikibaseDefaultSettings';
