@@ -8,7 +8,8 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 === Version 0.4 ===
 (dev)
 
-*
+* Added EntityIdParser
+* Added ReferencedEntitiesFinder
 
 === Version 0.3 ===
 (???)

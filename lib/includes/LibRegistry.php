@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use DataTypes\DataTypeFactory;
+use Wikibase\Lib\EntityIdParser;
 
 /**
  * Application registry for Wikibase Lib.
@@ -42,6 +43,9 @@ class LibRegistry {
 	 */
 	protected $settings;
 
+	protected $dataTypeFactory = null;
+	protected $entityIdParser = null;
+
 	/**
 	 * @since 0.4
 	 *
@@ -57,14 +61,36 @@ class LibRegistry {
 	 * @return DataTypeFactory
 	 */
 	public function getDataTypeFactory() {
-		global $wgDataTypes;
+		if ( $this->dataTypeFactory === null ) {
+			global $wgDataTypes;
 
-		$dataTypes = array_intersect_key(
-			$wgDataTypes,
-			array_flip( $this->settings->getSetting( 'dataTypes' ) )
-		);
+			$dataTypes = array_intersect_key(
+				$wgDataTypes,
+				array_flip( $this->settings->getSetting( 'dataTypes' ) )
+			);
 
-		return new DataTypeFactory( $dataTypes );
+			$this->dataTypeFactory = new DataTypeFactory( $dataTypes );
+		}
+
+		return $this->dataTypeFactory;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return EntityIdParser
+	 */
+	public function getEntityIdParser() {
+		if ( $this->entityIdParser === null ) {
+			$options = new \ValueParsers\ParserOptions( array(
+				\Wikibase\Lib\EntityIdParser::OPT_PREFIX_MAP => $this->settings->getSetting( 'entityPrefixes' )
+			) );
+
+			$this->entityIdParser = new \Wikibase\Lib\EntityIdParser( $options );
+		}
+
+		return $this->entityIdParser;
+
 	}
 
 	// Do not add new stuff here without reading the notice at the top first.

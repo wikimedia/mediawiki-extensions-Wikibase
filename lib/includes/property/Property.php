@@ -121,17 +121,6 @@ class Property extends Entity {
 	}
 
 	/**
-	 * @see Entity::getIdPrefix
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public static function getIdPrefix() {
-		return Settings::get( 'propertyPrefix' );
-	}
-
-	/**
 	 * @see Entity::newFromArray
 	 *
 	 * @since 0.1

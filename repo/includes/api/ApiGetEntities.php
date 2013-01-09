@@ -52,24 +52,16 @@ class ApiGetEntities extends Api {
 
 					$id = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $title );
 
-					if ( $id ) {
-						$params['ids'][] = Item::getIdPrefix() . intval( $id );
-					}
-					else {
+					if ( $id === false ) {
 						$this->getResult()->addValue( 'entities', (string)(--$missing),
 							array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
 						);
 					}
+					else {
+						$id = new EntityId( Item::ENTITY_TYPE, $id );
+						$params['ids'][] = $id->getPrefixedId();
+					}
 				}
-			}
-		}
-
-		// B/C: assume non-prefixed IDs refer to items
-		foreach ( $params['ids'] as $i => $id ) {
-			if ( !EntityId::isPrefixedId( $id ) ) {
-				$params['ids'][$i] = Item::getIdPrefix() . $id;
-				$this->getResult()->setWarning( 'Assuming plain numeric ID refers to an item. '
-						. 'Please use qualified IDs instead.' );
 			}
 		}
 

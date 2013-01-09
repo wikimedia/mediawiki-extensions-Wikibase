@@ -144,7 +144,7 @@ class ApiEditEntityTest extends ApiModifyItemBase {
 
 		$this->assertSuccess( $res, 'entity', 'id' );
 		$this->assertItemEquals( self::$expect, $res['entity'] );
-		$this->assertRegExp( '/^' . \Wikibase\Item::getIdPrefix() . '\d+$/',
+		$this->assertRegExp( '/^q\d+$/',
 				$res['entity']['id'],
 				'Expected a qualfied ID with prefix' );
 
@@ -209,37 +209,6 @@ class ApiEditEntityTest extends ApiModifyItemBase {
 		$this->assertSuccess( $res, 'entity', 'lastrevid' );
 
 		$this->assertItemEquals( self::$expect, $res['entity'] );
-	}
-
-	/**
-	 * Check success of entity update with a valid id
-	 */
-	function testEditEntityWithNumericId() {
-		$token = $this->getItemToken();
-
-		$numId = preg_replace( '/^[a-z]*/', '', self::$id );
-
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbeditentity',
-				'reason' => 'Some reason',
-				'data' => json_encode( self::$entity ),
-				'token' => $token,
-				'id' => $numId,
-			),
-			null,
-			false,
-			self::$users['wbeditor']->user
-		);
-
-		$this->assertSuccess( $res, 'entity', 'id' );
-
-		//NOTE: lastrevid should be here even though the edit didn't create a new revision,
-		//      because the content stayed the same.
-		$this->assertSuccess( $res, 'entity', 'lastrevid' );
-
-		$this->assertItemEquals( self::$expect, $res['entity'] );
-		$this->assertArrayHasKey( 'warnings', $res ); // there should be a B/C warning
 	}
 
 	/**

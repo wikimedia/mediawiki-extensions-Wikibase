@@ -38,9 +38,11 @@ final class LibHooks {
 
 				'useChangesTable' => true, // whether changes get recorded to wb_changes
 
-				'itemPrefix' => 'q',
-				'propertyPrefix' => 'p',
-				'queryPrefix' => 'y', // TODO: find a more suiting prefix, perhaps use 'q' and use 'i' for items then
+				'entityPrefixes' => array(
+					'q' => Item::ENTITY_TYPE,
+					'p' => Property::ENTITY_TYPE,
+					'y' => Query::ENTITY_TYPE,
+				),
 
 				'siteLinkGroup' => 'wikipedia',
 
@@ -87,9 +89,9 @@ final class LibHooks {
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
-	 * @since 0.2 (as registerUnitTests in 0.1)
+	 * @since 0.2
 	 *
-	 * @param array $files
+	 * @param string[] $files
 	 *
 	 * @return boolean
 	 */
@@ -116,6 +118,8 @@ final class LibHooks {
 			'item/ItemNewEmpty',
 			'item/ItemNewFromArray',
 			'item/Item',
+
+			'parsers/EntityIdParser',
 
 			'property/PropertyDiff',
 			'property/Property',

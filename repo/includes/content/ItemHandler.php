@@ -112,17 +112,6 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
-	 * @see EntityHandler::getEntityPrefix
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getEntityPrefix() {
-		return Settings::get( 'itemPrefix' );
-	}
-
-	/**
 	 * Get the item corresponding to the provided site and title pair, or null if there is no such item.
 	 *
 	 * @since 0.1

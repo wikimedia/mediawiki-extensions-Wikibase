@@ -153,17 +153,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	}
 
 	/**
-	 * Returns a unique id prefix for the type of entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public static function getIdPrefix() {
-		return '';
-	}
-
-	/**
 	 * Returns the id of the entity or null if it is not in the datastore yet.
 	 *
 	 * @since 0.1 return type changed in 0.3
