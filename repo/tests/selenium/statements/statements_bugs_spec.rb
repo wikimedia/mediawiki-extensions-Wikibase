@@ -116,9 +116,9 @@ describe "Check for bugs in statements UI" do
         page.statementValueInput = statement_value
         page.cancelStatement?.should be_true
         page.entitySelectorInput_element.clear
-        page.entitySelectorInput = " "
-        page.statementValueInput_element.clear
-        page.statementValueInput = " "
+        page.entitySelectorInput = " " # element.clear seems to not trigger the correct events
+        page.statementValueInput?.should be_false
+        page.entitySelectorInput_element.clear
         page.cancelStatement?.should be_true
         page.cancelStatement
         page.cancelStatement?.should be_false
