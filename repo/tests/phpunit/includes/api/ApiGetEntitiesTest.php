@@ -89,19 +89,6 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 		$this->assertRegExp( '/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z$/',
 			$res['entities'][$id]['modified'], "should be in ISO 8601 format" );
 
-		// check with numeric ID (B/C mode)
-		$numId = preg_replace( '/^[a-z]*/', '', $id );
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'format' => 'json', // make sure IDs are used as keys
-				'ids' => $numId )
-		);
-
-		$this->assertSuccess( $res, 'entities', $id );
-		$this->assertItemEquals( $item,  $res['entities'][$id] );
-		$this->assertArrayHasKey( 'warnings', $res ); // there should be a B/C warning
-
 		//@todo: check non-item
 	}
 

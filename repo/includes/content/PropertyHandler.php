@@ -96,17 +96,6 @@ class PropertyHandler extends EntityHandler {
 //	}
 
 	/**
-	 * @see EntityHandler::getEntityPrefix
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getEntityPrefix() {
-		return Settings::get( 'propertyPrefix' );
-	}
-
-	/**
 	 * @see EntityHandler::getSpecialPageForCreation
 	 * @since 0.2
 	 *

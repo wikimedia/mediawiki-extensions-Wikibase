@@ -28,41 +28,12 @@ use Wikibase\Settings, Wikibase\EntityId;
  *
  * @group Wikibase
  * @group WikibaseLib
- * @group foooooo
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class EntityIdTest extends \MediaWikiTestCase {
-
-	public function provideGetIdParts() {
-		$data = array();
-		$numbers = array( '0', '1', '23' );
-		$prefixes = array( Settings::get( 'itemPrefix' ), Settings::get( 'propertyPrefix' ), Settings::get( 'queryPrefix' ) );
-
-		foreach ( $prefixes as $prefix ) {
-			foreach ( $numbers as $num ) {
-				$upperPrefix = strtoupper( $prefix );
-				$data[] = array( "{$prefix}{$num}", array( "{$prefix}{$num}", $prefix, $num ) );
-				$data[] = array( "{$upperPrefix}{$num}", array( "{$prefix}{$num}", $prefix, $num ) );
-			}
-		}
-
-		return $data;
-	}
-
-	/**
-	 * @dataProvider provideGetIdParts
-	 */
-	public function testNewFromPrefixedId( $id, array $expected ) {
-		$id = EntityId::newFromPrefixedId( $id );
-
-		$this->assertEquals( $expected[0], $id->getPrefixedId() );
-		$this->assertEquals( $expected[0], $id ); // auto-cast to string
-		$this->assertEquals( $expected[1], $id->getPrefix() );
-		$this->assertEquals( $expected[2], $id->getNumericId() );
-	}
 
 	public function constructorProvider() {
 		$argLists = array();
@@ -95,18 +66,6 @@ class EntityIdTest extends \MediaWikiTestCase {
 		}
 
 		return $ids;
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param \Wikibase\EntityId $id
-	 * @param array $constructorArgs
-	 */
-	public function testIsPrefixedId( EntityId $id, array $constructorArgs ) {
-		$this->assertTrue( EntityId::isPrefixedId( $id->getPrefixedId() ) );
-		$this->assertFalse( EntityId::isPrefixedId( $id->getNumericId() ) );
-		$this->assertFalse( EntityId::isPrefixedId( $id->getPrefix() ) );
-		$this->assertFalse( EntityId::isPrefixedId( $id->getEntityType() ) );
 	}
 
 	/**

@@ -143,6 +143,9 @@ $wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/item/Item.php';
 $wgAutoloadClasses['Wikibase\SitesModule'] 				= $dir . 'includes/modules/SitesModule.php';
 $wgAutoloadClasses['Wikibase\TemplateModule'] 			= $dir . 'includes/modules/TemplateModule.php';
 
+// includes/parsers
+$wgAutoloadClasses['Wikibase\Lib\EntityIdParser'] 		= $dir . 'includes/parsers/EntityIdParser.php';
+
 // includes/property
 $wgAutoloadClasses['Wikibase\Property'] 				= $dir . 'includes/property/Property.php';
 

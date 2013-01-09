@@ -44,17 +44,6 @@ class Item extends Entity {
 	protected $statements = null;
 
 	/**
-	 * @see Entity::getIdPrefix
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public static function getIdPrefix() {
-		return Settings::get( 'itemPrefix' );
-	}
-
-	/**
 	 * Adds a site link.
 	 *
 	 * @since 0.1

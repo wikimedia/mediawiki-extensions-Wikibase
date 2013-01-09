@@ -91,7 +91,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 			$itemContent = ItemContent::newEmpty();
 			$expected[] = '/id\s*=\s*"wb-' . Item::ENTITY_TYPE . '-new"/';
 		} else {
-			$itemData += array( 'entity' => Item::getIdPrefix() . '123' );
+			$itemData += array( 'entity' => 'q123' );
 			$itemContent = ItemContent::newFromArray( $itemData );
 			$expected[] = '/id\s*=\s*"wb-' . Item::ENTITY_TYPE . '-' . $itemContent->getEntity()->getPrefixedId() . '"/';
 		}

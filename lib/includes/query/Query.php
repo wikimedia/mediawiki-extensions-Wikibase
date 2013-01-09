@@ -33,17 +33,6 @@ class Query extends Entity {
 	const ENTITY_TYPE = 'query';
 
 	/**
-	 * @see Entity::getIdPrefix
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public static function getIdPrefix() {
-		return Settings::get( 'queryPrefix' );
-	}
-
-	/**
 	 * @see Entity::newFromArray
 	 *
 	 * @since 0.1

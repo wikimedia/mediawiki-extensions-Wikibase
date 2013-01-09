@@ -34,13 +34,6 @@ use MWException, WikiPage, Title, Content;
 abstract class EntityHandler extends \ContentHandler {
 
 	/**
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public abstract function getEntityPrefix();
-
-	/**
 	 * Returns the name of the EntityContent deriving class.
 	 *
 	 * @since 0.3

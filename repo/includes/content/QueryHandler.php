@@ -84,16 +84,5 @@ class QueryHandler extends EntityHandler {
 //		return '\Wikibase\QueryDiffView';
 //	}
 
-	/**
-	 * @see EntityHandler::getEntityPrefix
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getEntityPrefix() {
-		return Settings::get( 'queryPrefix' );
-	}
-
 }
 
