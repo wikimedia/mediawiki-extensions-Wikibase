@@ -98,8 +98,9 @@ describe "Check statements UI" do
         page.wait_for_property_value_box
         page.statementValueInput?.should be_true
         page.entitySelectorInput_element.clear
-        # TODO: still broken in UI - property-value input-box should be removed when property field is empty - bug caught in statements_bugs_spec
-        #page.statementValueInput?.should be_false
+        page.entitySelectorInput = " " # element.clear seems to not trigger the correct events
+        page.entitySelectorInput_element.clear
+        page.statementValueInput?.should be_false
         page.entitySelectorInput = properties_cm[0]["label"]
         ajax_wait
         page.wait_for_entity_selector_list
