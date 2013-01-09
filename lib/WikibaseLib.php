@@ -212,9 +212,19 @@ $wgAutoloadClasses['Wikibase\Test\EntitySerializerBaseTest']= $dir . 'tests/phpu
 $wgAutoloadClasses['Wikibase\Test\EntityTestCase']          = $dir . 'tests/phpunit/entity/EntityTestCase.php';
 
 
-$wgDataTypes['wikibase-item'] = array(
-	'datavalue' => 'string',
-);
+// TODO: this is not nice, figure out a better design
+$wgExtensionFunctions[] = function() {
+	global $wgDataTypes;
+
+	$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+
+	$wgDataTypes['wikibase-item'] = array(
+		'datavalue' => 'string',
+		'parser' => $libRegistry->getEntityIdParser(),
+	);
+
+    return true;
+};
 
 
 // Hooks
