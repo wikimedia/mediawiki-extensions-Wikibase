@@ -46,7 +46,11 @@ wb.PropertyValueSnak = wb.utilities.inherit( PARENT, constructor, {
 	 */
 	toJSON: function() {
 		var json = PARENT.prototype.toJSON.call( this );
-		json.value = this.getValue().toJSON();
+
+		json.datavalue = {
+			type: this.getValue().getType(),
+			value: this.getValue().toJSON()
+		};
 
 		return json;
 	}
