@@ -34,10 +34,17 @@ class ChangesTable extends \ORMTable {
 	/**
 	 * Constructor.
 	 *
+	 * @param String|null $changesDatabase the logical name of the database to interact with.
+	 *        If null, Settings::get( 'changesDatabase' ) will be used to determine the target DB.
+	 *
 	 * @since 0.1
 	 */
-	public function __construct() {
-		$this->setTargetWiki( Settings::get( 'changesDatabase' ) );
+	public function __construct( $changesDatabase = null ) {
+		if ( $changesDatabase === null ) {
+			$changesDatabase = Settings::get( 'changesDatabase' );
+		}
+
+		$this->setTargetWiki( $changesDatabase );
 	}
 
 	/**
