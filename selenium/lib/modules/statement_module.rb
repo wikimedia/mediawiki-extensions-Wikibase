@@ -17,7 +17,6 @@ module StatementPage
   link(:cancelStatement, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='cancel']")
   link(:removeClaimButton, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='remove']")
   text_area(:statementValueInput, :xpath => "//div[contains(@class, 'valueview-ineditmode')]/div/a/textarea[contains(@class, 'valueview-input')]")
-  text_field(:statementValueItem, :xpath => "//div[contains(@class, 'valueview-ineditmode')]/div/a/input[contains(@class, 'valueview-input')]")
   div(:claimEditMode, :xpath => "//div[contains(@class, 'valueview-ineditmode')]")
   div(:statement1Name, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]")
   div(:statement2Name, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]")
@@ -32,7 +31,7 @@ module StatementPage
 
   def wait_for_property_value_box
     wait_until do
-      self.statementValueInput? || self.statementValueItem?
+      self.statementValueInput
     end
   end
 
@@ -50,9 +49,7 @@ module StatementPage
     self.wait_for_property_value_box
     if self.statementValueInput?
       self.statementValueInput = statement_value
-    else
-      self.statementValueItem = statement_value
-      # TODO: bug 43609: as long as no verification of the input is done, we have to wait for the entityselector to finish the selection
+      # TODO: bug 43609: Regarding item property, as long as no verification of the input is done, we have to wait for the entityselector to finish the selection
       ajax_wait
     end
     saveStatement
