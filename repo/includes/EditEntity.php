@@ -687,6 +687,17 @@ class EditEntity {
 				$itemDiff = $entity->getDiff( $this->getBaseContent()->getEntity() );
 			}
 
+			$multilangViolationDetector = new MultiLangConstraintDetector();
+			$multilangViolationDetector->addConstraintChecks(
+				$entity,
+				$this->status,
+				$itemDiff
+			);
+
+			if ( !$this->status->isOk() ) {
+				return $this->status;
+			}
+
 			// The below looks for all conflicts and then removes the ones not
 			// caused by the edit. This can be improved by only looking for
 			// those conflicts that can be caused by the edit.
