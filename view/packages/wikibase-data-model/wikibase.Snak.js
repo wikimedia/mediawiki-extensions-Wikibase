@@ -52,6 +52,8 @@ wb.Snak.prototype = {
 
 	/**
 	 * Returns the ID of the property entity the Snak relates to.
+	 * @since 0.3
+	 *
 	 * @return Number
 	 */
 	getPropertyId: function() {
@@ -74,12 +76,26 @@ wb.Snak.prototype = {
 	},
 
 	/**
-	 * Returns a simple JSON structure representing this data value.
+	 * Returns a simple JSON structure representing this Snak.
 	 * @since 0.3
 	 *
 	 * @return Object
 	 */
 	toJSON: function() {
+		return this.toMap();
+	},
+
+	/**
+	 * Returns a plain Object representing this Snak. Similar to toJSON(), containing the same
+	 * fields but the values within the fields will not be serialized to JSON in the Object returned
+	 * by this function.
+	 *
+	 * @since 0.4
+	 *
+	 * @return {Object} Object with 'snaktype' and 'property' fields and possibly others, depending
+	 *         on the Snak type.
+	 */
+	toMap: function() {
 		return {
 			snaktype: this.getType(),
 			property: this.getPropertyId()
@@ -87,24 +103,43 @@ wb.Snak.prototype = {
 	}
 };
 
+// TODO: make newFromJSON and newFromMap abstract factories with registration for new Snak types!
 /**
- * Creates a new Snak object from a given JSON structure.
+ * Creates a new Snak Object from a given JSON structure.
  *
  * @param {String} json
- * @return {wb.Snak}
+ * @return wb.Snak
  */
 wb.Snak.newFromJSON = function( json ) {
-	switch( json.snaktype ) {
+	// don't alter given Object in case of 'value' Snak by copying structure into new Object
+	var map = $.extend( {}, json );
+
+	if( json.snaktype === 'value' ) {
+		map.datavalue = dv.newDataValue(
+			json.datavalue.type,
+			json.datavalue.value
+		);
+	}
+	return wb.Snak.newFromMap( map );
+};
+
+/**
+ * Creates a new Snak Object from a given Object with certain keys and values, what a certain Snak
+ * would return when calling toMap().
+ *
+ * @since 0.4
+ *
+ * @param {Object} map Requires at least 'snaktype' and 'property' fields.
+ * @return wb.Snak
+ */
+wb.Snak.newFromMap = function( map ) {
+	switch( map.snaktype ) {
 		case 'value':
-			var dataValue = dv.newDataValue(
-				json.datavalue.type,
-				json.datavalue.value
-			);
-			return new wb.PropertyValueSnak( json.property, dataValue );
+			return new wb.PropertyValueSnak( map.property, map.datavalue );
 		case 'novalue':
-			return new wb.PropertyNoValueSnak( json.property );
+			return new wb.PropertyNoValueSnak( map.property );
 		case 'somevalue':
-			return new wb.PropertySomeValueSnak( json.property );
+			return new wb.PropertySomeValueSnak( map.property );
 		default:
 			return null;
 	}

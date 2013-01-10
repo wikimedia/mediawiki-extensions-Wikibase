@@ -59,14 +59,24 @@ wb.PropertyValueSnak = wb.utilities.inherit( PARENT, constructor, {
 	 * @see wb.Snak.toJSON
 	 */
 	toJSON: function() {
-		var json = PARENT.prototype.toJSON.call( this );
+		var json = this.toMap();
 
 		json.datavalue = {
-			type: this.getValue().getType(),
-			value: this.getValue().toJSON()
+			type: json.datavalue.getType(),
+			value: json.datavalue.toJSON()
 		};
 
 		return json;
+	},
+
+	/**
+	 * @see wb.Snak.toMap
+	 */
+	toMap: function() {
+		var map = PARENT.prototype.toMap.call( this );
+
+		map.datavalue = this.getValue();
+		return map;
 	}
 } );
 
