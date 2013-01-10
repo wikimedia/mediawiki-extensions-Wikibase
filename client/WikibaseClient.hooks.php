@@ -635,7 +635,7 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onGetPreferences( \User $user, array $prefs ) {
+	public static function onGetPreferences( \User $user, array &$prefs ) {
 		$prefs['rcshowwikidata'] = array(
 			'type' => 'toggle',
 			'label-message' => 'wbc-rc-show-wikidata-pref',
