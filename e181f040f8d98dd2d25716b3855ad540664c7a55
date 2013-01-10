@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgn//9nk\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-10T10:53:08Z",
+      "side": 1,
+      "message": "getLocalURL?",
+      "revId": "e181f040f8d98dd2d25716b3855ad540664c7a55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
