@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADgn//9YA\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-10T15:48:40Z",
+      "side": 1,
+      "message": "@param array[] \u0026$prefs",
+      "revId": "462b30fa30b527b4179c9c0f72f6e6fabf3b2f74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
