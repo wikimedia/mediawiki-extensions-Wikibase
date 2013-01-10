@@ -87,7 +87,7 @@ class ItemView extends EntityView {
 					$alternatingClass,
 					htmlspecialchars( $link->getSite()->getGlobalId() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, 'td' )
+					$this->getHtmlForEditSection( $item, $lang, '', 'td' ) // TODO: add link to SpecialPage
 				);
 
 			} else {
@@ -103,7 +103,7 @@ class ItemView extends EntityView {
 					htmlspecialchars( $languageCode ), // TODO: get an actual site id rather then just the language code
 					htmlspecialchars( $link->getUrl() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, 'td' )
+					$this->getHtmlForEditSection( $item, $lang, '', 'td' ) // TODO: add link to SpecialPage
 				);
 			}
 		}
@@ -113,7 +113,7 @@ class ItemView extends EntityView {
 
 		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
 			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->text() : '',
-			$this->getHtmlForEditSection( $item, $lang, 'td', 'add', !$isFull )
+			$this->getHtmlForEditSection( $item, $lang, '', 'td', 'add', !$isFull ) // TODO: add link to SpecialPage
 		);
 
 		return $html . wfTemplate( 'wb-sitelinks-table', $thead, $tbody, $tfoot );
