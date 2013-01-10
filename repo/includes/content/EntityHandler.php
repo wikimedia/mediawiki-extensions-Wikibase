@@ -142,7 +142,7 @@ abstract class EntityHandler extends \ContentHandler {
 	 * @return integer
 	 */
 	final public function getEntityNamespace() {
-		return Utils::getEntityNamespace( $this->getModelID() );
+		return NamespaceUtils::getEntityNamespace( $this->getModelID() );
 	}
 
 	/**

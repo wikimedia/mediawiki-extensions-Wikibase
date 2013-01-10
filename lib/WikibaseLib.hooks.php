@@ -78,7 +78,6 @@ final class LibHooks {
 					'monolingual-text',
 					'multilingual-text',
 				),
-				'entityNamespaces' => array()
 			)
 		);
 

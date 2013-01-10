@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 use ApiTestCase, TestUser;
 use Wikibase\Settings;
-use Wikibase\Utils;
+use Wikibase\NamespaceUtils;
 use Title;
 
 /**
@@ -195,7 +195,7 @@ class ApiBotEditTest extends ApiModifyItemBase {
 		//NOTE: the order of the entries in recentchanges is undefined if multiple
 		//      edits were done in the same second.
 		$change = null;
-		$itemNs = Utils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
+		$itemNs = NamespaceUtils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
 		foreach ( $third[0]['query']['recentchanges'] as $rc ) {
 			$title = Title::newFromText( $rc['title'] );
 			// XXX: strtoupper is a bit arcane, would ne nice to have a utility function for prefixed id -> title.
