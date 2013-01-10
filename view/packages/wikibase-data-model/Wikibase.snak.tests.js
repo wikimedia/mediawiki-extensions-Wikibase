@@ -15,13 +15,49 @@
 
 	QUnit.module( 'wikibase.datamodel.snak.js', QUnit.newMwEnvironment() );
 
-	QUnit.test( 'constructor', function( assert ) {
+	QUnit.test( 'wb.Snak.prototype, its constructor and wb.Snak static functions', function( assert ) {
 		var snakInfo = [
 			[ wb.PropertyNoValueSnak ],
 			[ wb.PropertySomeValueSnak ],
 			[ wb.PropertyValueSnak, [ '21', new dv.StringValue( 'test' ) ] ]
 		];
 		var unequalSnak = new wb.PropertyValueSnak( '21', new dv.StringValue( 'not equal!' ) );
+
+		/**
+		 * Does test functions of the Snak prototype which turn the Snak into an Object representing
+		 * the Snak.
+		 *
+		 * @param {wb.Snak} snak
+		 * @param {String} methodLabel Objectification method name used in test messages
+		 * @param {String} toObjectFnName name of a function in wb.Snak.prototype
+		 * @param {String} fromObjectFnName name of a function in wb.Snak
+		 */
+		var snakToObjectTest = function( snak, methodLabel, toObjectFnName, fromObjectFnName ) {
+			var objectifiedSnak = snak[ toObjectFnName ]();
+
+			assert.ok(
+				$.isPlainObject( objectifiedSnak ),
+				toObjectFnName + '() will return a plain object'
+			);
+
+			assert.ok(
+				objectifiedSnak.snaktype === snak.getType(),
+				"In the " + methodLabel + ", the 'snaktype' field is set correctly"
+			);
+
+			var deobjectifiedSnak = wb.Snak[ fromObjectFnName ]( objectifiedSnak );
+
+			assert.ok(
+				deobjectifiedSnak instanceof wb.Snak,
+				'Constructing new Snak from ' + methodLabel + ' via wb.Snak.' + fromObjectFnName
+					+ '() successful'
+			);
+
+			assert.ok(
+				deobjectifiedSnak.equals( snak ) && snak.equals( deobjectifiedSnak ),
+				'Newly constructed Snak from json is equal to original Snak'
+			);
+		}
 
 		$.each( snakInfo, function( i, info ) {
 			var snakConstructor = info[0],
@@ -55,29 +91,8 @@
 				'Snak type "' + snak.getType() + '" was set correctly'
 			);
 
-			var snakJson = snak.toJSON();
-
-			assert.ok(
-				$.isPlainObject( snakJson ),
-				'toJSON() will return a plain object'
-			);
-
-			assert.ok(
-				snakJson.snaktype === snak.getType(),
-				"In the json, the 'snaktype' field is set correctly"
-			);
-
-			var unserializedSnak = wb.Snak.newFromJSON( snakJson );
-
-			assert.ok(
-				unserializedSnak instanceof wb.Snak,
-				'Constructing new Snak from json via wb.Snak.newFromJSON successful'
-			);
-
-			assert.ok(
-				unserializedSnak.equals( snak ) && snak.equals( unserializedSnak ),
-				'Newly constructed Snak from json is equal to original Snak'
-			);
+			snakToObjectTest( snak, 'JSON', 'toJSON', 'newFromJSON' );
+			snakToObjectTest( snak, 'Map', 'toMap', 'newFromMap' );
 		} );
 
 	} );
