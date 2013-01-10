@@ -129,4 +129,19 @@ class SpecialNewProperty extends SpecialCreateEntity {
 		return $this->msg( 'wikibase-newproperty-fieldset' );
 	}
 
+	/**
+	 * @see SpecialCreateEntity::getWarnings()
+	 */
+	protected function getWarnings() {
+		global $wgUser;
+
+		$warnings = array();
+
+		if ( $wgUser->isAnon() ) {
+			$warnings[] = $this->msg( 'wikibase-anonymouseditwarning-property' );
+		}
+
+		return $warnings;
+	}
+
 }
