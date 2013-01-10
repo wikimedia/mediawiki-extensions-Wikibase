@@ -80,6 +80,8 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 		$this->parts = ( $subPage === '' ? array() : explode( '/', $subPage ) );
 		$this->prepareArguments();
 
+		$out = $this->getOutput();
+
 		if ( $this->getRequest()->wasPosted()
 			&&  $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'token' ) ) ) {
 
@@ -88,7 +90,6 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 
 				$status = $this->modifyEntity( $entityContent );
 
-				$out = $this->getOutput();
 				if ( $status->isGood() ) {
 					list( $counts, $summary, $lang) = Autocomment::formatAutoSummary(
 						array( $this->label, $this->description ),
@@ -124,6 +125,11 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 		}
 
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
+
+		foreach ( $this->getWarnings() as $warning ) {
+			$out->addHTML( Html::element( 'div', array( 'class' => 'warning' ), $warning ) );
+		}
+
 		$this->createForm( $this->getLegend(), $this->additionalFormElements() );
 	}
 
@@ -291,5 +297,14 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 * @return string Legend for the fieldset
 	 */
 	abstract protected function getLegend();
+
+	/**
+	 * Returns any warnings.
+	 *
+	 * @since 0.4
+	 *
+	 * @return string[] Warnings that should be presented to the user
+	 */
+	abstract protected function getWarnings();
 
 }

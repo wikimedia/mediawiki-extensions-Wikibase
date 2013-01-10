@@ -86,6 +86,7 @@
 				} );
 			}
 			wb.entity.id = entityJSON.id;
+			wb.entity.type = entityJSON.type;
 
 			$( '.wb-section-heading' ).remove();
 
@@ -125,12 +126,12 @@
 				) === -1
 			) {
 				// user is not allowed to edit
-				$( wikibase ).triggerHandler( 'restrictEntityPageActions' );
+				$( wb ).triggerHandler( 'restrictEntityPageActions' );
 			}
 		}
 
 		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
-			$( wikibase ).triggerHandler( 'blockEntityPageActions' );
+			$( wb ).triggerHandler( 'blockEntityPageActions' );
 		}
 
 		if( !mw.config.get( 'wbIsEditView' ) ) {
@@ -140,7 +141,14 @@
 			$( 'body' ).addClass( 'wb-editing-disabled' );
 			// make it even harder to edit stuff, e.g. if someone is trying to be smart, using
 			// firebug to show hidden nodes again to click on them:
-			$( wikibase ).triggerHandler( 'restrictEntityPageActions' );
+			$( wb ).triggerHandler( 'restrictEntityPageActions' );
+		}
+
+		// Display anonymous user edit warning
+		if ( mw.user.isAnon() ) {
+			$( wb ).on( 'startItemPageEditMode', function( event ) {
+				mw.notify( mw.message( 'wikibase-anonymouseditwarning-' + wb.entity.type ) );
+			} );
 		}
 
 		// remove loading spinner after JavaScript has kicked in

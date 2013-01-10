@@ -153,4 +153,19 @@ class SpecialCreateItem extends SpecialCreateEntity {
 		return $this->msg( 'wikibase-createitem-fieldset' );
 	}
 
+	/**
+	 * @see SpecialCreateEntity::getWarnings()
+	 */
+	protected function getWarnings() {
+		global $wgUser;
+
+		$warnings = array();
+
+		if ( $wgUser->isAnon() ) {
+			$warnings[] = $this->msg( 'wikibase-anonymouseditwarning-property' );
+		}
+
+		return $warnings;
+	}
+
 }
