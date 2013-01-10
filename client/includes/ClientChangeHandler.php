@@ -57,96 +57,90 @@ class ClientChangeHandler {
 	}
 
 	/**
+	 * @todo integrate this with the change handler stuff in a nicer way
+	 *
 	 * @since 0.3
 	 *
-	 * @return string|null
+	 * @return array|null
 	 */
 	public function siteLinkComment() {
 		$comment = null;
 		if ( !$this->change->getSiteLinkDiff()->isEmpty() ) {
 			$siteLinkDiff = $this->change->getSiteLinkDiff();
-			$changeKey = key( $siteLinkDiff );
-			$diffOp = $siteLinkDiff[$changeKey];
 
-			$action = 'change';
-			if ( $diffOp instanceof \Diff\DiffOpAdd ) {
-				$action = 'add';
-			} else if ( $diffOp instanceof \Diff\DiffOpRemove ) {
-				$action = 'remove';
-			}
+			$globalId = Settings::get( 'siteGlobalID' );
 
-			$comment = "wbc-comment-sitelink-$action~" . key( $siteLinkDiff );
-		}
+            // check that $sitecode is valid
+            if ( \Sites::singleton()->getSite( $globalId ) === false ) {
+                throw new \MWException( "Site code $globalId does not exist in the sites table. "
+					. "Has the sites table been populated?" );
+            }
 
-		return $this->parseComment( $comment );
-	}
+			$params = array();
 
-	/**
-	 * @since 0.3
-	 *
-	 * @param string $comment
-	 *
-	 * @throws \MWException
-	 *
-	 * @return array
-	 */
-	public function parseComment( $comment ) {
-		list( $message, $sitecode ) = explode( '~', $comment );
+			// change involved site link to client wiki
+			if ( array_key_exists( $globalId, $siteLinkDiff ) ) {
 
-		// check that $sitecode is valid
-		if ( \Sites::singleton()->getSite( $sitecode ) === false ) {
-			throw new \MWException( "Site code $sitecode does not exist in the sites table." );
-		}
+				$diffOp = $siteLinkDiff[$globalId];
 
-		$params = array(
-			'message' => $message,
-			'sitecode' => $sitecode,
-		);
-
-		if ( $sitecode === Settings::get( 'siteGlobalID' ) ) {
-			$action = $this->change->getAction();
-			if ( $action === 'remove' ) {
-				$params['message'] = 'wbc-comment-remove';
-			} else if ( $action === 'restore' ) {
-				$params['message'] = 'wbc-comment-restore';
-			} else if ( $action === 'add' ) {
-				$params['message'] = 'wbc-comment-linked';
+				if ( $this->change->getAction() === 'remove' ) {
+					$params['message'] = 'wbc-comment-remove';
+				} else if ( $this->change->getAction() === 'restore' ) {
+					$params['message'] = 'wbc-comment-restore';
+				} else if ( $diffOp instanceof \Diff\DiffOpAdd ) {
+					$params['message'] = 'wbc-comment-linked';
+				} else if ( $diffOp instanceof \Diff\DiffOpRemove ) {
+					$params['message'] = 'wbc-comment-unlink';
+				} else if ( $diffOp instanceof \Diff\DiffOpChange ) {
+					$params['message'] = 'wbc-comment-sitelink-change';
+					$iwPrefix = Settings::get( 'siteLocalID' );
+					$params['sitelink'] = array(
+						'oldlink' => array(
+							'lang' => $iwPrefix,
+							'page' => $diffOp->getOldValue()
+						),
+						'newlink' => array(
+							'lang' => $iwPrefix,
+							'page' => $diffOp->getNewValue()
+						)
+					);
+				}
 			} else {
-				$params['message'] = 'wbc-comment-unlink';
-			}
-		} else {
-			if ( $this->change->getSiteLinkDiff() ) {
-				$siteLinkDiff = $this->change->getSiteLinkDiff();
-				$diffOps = $siteLinkDiff->getOperations();
-				foreach( $diffOps as $siteCode => $diffOp ) {
+				$messagePrefix = 'wbc-comment-sitelink-';
+				$params['message'] = $messagePrefix . 'change';
+
+				foreach( $siteLinkDiff as $siteKey => $diffOp ) {
 					$site = \SitesTable::singleton()->selectRow(
 						null,
-						array( 'global_key' => $siteCode )
+						array( 'global_key' => $siteKey )
 					);
-					// @todo: language might not always work? we need local interwiki id
-					$siteLang = $site->getField( 'language' );
+					// assumes interwiki prefix is same as lang code
+					// true for wikipedia but need todo more robustly
+					$iwPrefix = $site->getLanguageCode();
 					if ( $diffOp instanceof \Diff\DiffOpAdd ) {
+						$params['message'] = $messagePrefix . 'add';
 						$params['sitelink'] = array(
 							'newlink' =>  array(
-								'lang' => $siteLang,
+								'lang' => $iwPrefix,
 								'page' => $diffOp->getNewValue()
 							)
 						);
 					} else if ( $diffOp instanceof \Diff\DiffOpRemove ) {
+						$params['message'] = $messagePrefix . 'remove';
 						$params['sitelink'] = array(
 							'oldlink' => array(
-								'lang' => $siteLang,
+								'lang' => $iwPrefix,
 								'page' => $diffOp->getOldValue()
 							)
 						);
 					} else if ( $diffOp instanceof \Diff\DiffOpChange ) {
 						$params['sitelink'] = array(
 							'oldlink' => array(
-								'lang' => $siteLang,
+								'lang' => $iwPrefix,
 								'page' => $diffOp->getOldValue()
 							),
 							'newlink' => array(
-								'lang' => $siteLang,
+								'lang' => $iwPrefix,
 								'page' => $diffOp->getNewValue()
 							)
 						);
@@ -156,8 +150,8 @@ class ClientChangeHandler {
 					break;
 				}
 			}
-		}
 
-		return $params;
+			return $params;
+		}
 	}
 }
