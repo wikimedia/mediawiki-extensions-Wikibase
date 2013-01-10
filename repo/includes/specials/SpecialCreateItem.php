@@ -20,7 +20,7 @@
  *
  * @since 0.1
  *
- * @file 
+ * @file
  * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
@@ -162,7 +162,7 @@ class SpecialCreateItem extends SpecialCreateEntity {
 		$warnings = array();
 
 		if ( $wgUser->isAnon() ) {
-			$warnings[] = $this->msg( 'wikibase-anonymouseditwarning-property' );
+			$warnings[] = $this->msg( 'wikibase-anonymouseditwarning-item' );
 		}
 
 		return $warnings;
