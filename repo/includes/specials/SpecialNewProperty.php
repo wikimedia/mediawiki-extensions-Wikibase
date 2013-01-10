@@ -23,7 +23,7 @@ use Wikibase\EntityContent;
  *
  * @since 0.2
  *
- * @file 
+ * @file
  * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
@@ -33,7 +33,7 @@ class SpecialNewProperty extends SpecialCreateEntity {
 
 	/**
 	 * @since 0.2
-	 * 
+	 *
 	 * @var string|null
 	 */
 	protected $dataType = null;
@@ -133,11 +133,9 @@ class SpecialNewProperty extends SpecialCreateEntity {
 	 * @see SpecialCreateEntity::getWarnings()
 	 */
 	protected function getWarnings() {
-		global $wgUser;
-
 		$warnings = array();
 
-		if ( $wgUser->isAnon() ) {
+		if ( $this->getUser()->isAnon() ) {
 			$warnings[] = $this->msg( 'wikibase-anonymouseditwarning-property' );
 		}
 
