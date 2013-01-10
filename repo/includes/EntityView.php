@@ -225,13 +225,22 @@ abstract class EntityView extends \ContextSource {
 	public function getHtmlForLabel( EntityContent $entity, Language $lang = null, $editable = true ) {
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$label = $entity->getEntity()->getLabel( $info['lang']->getCode() );
+		$entityId = $entity->getEntity()->getPrefixedId();
+		$specialPage = \SpecialPageFactory::getPage( "SetLabel" );
+
+		if ( $specialPage !== null ) {
+			$editLink = $specialPage->getTitle()->getFullURL( $lang )
+				. '/' . $entityId . '/' . $info['lang']->getCode();
+		} else {
+			$editLink = '';
+		}
 
 		return wfTemplate( 'wb-label',
 			$info['id'],
 			wfTemplate( 'wb-property',
 				$label === false ? 'wb-value-empty' : '',
 				$label === false ? wfMessage( 'wikibase-label-empty' )->text() : htmlspecialchars( $label ),
-				$this->getHtmlForEditSection( $entity, $lang )
+				$this->getHtmlForEditSection( $entity, $lang, $editLink )
 			)
 		);
 	}
@@ -254,7 +263,7 @@ abstract class EntityView extends \ContextSource {
 			wfTemplate( 'wb-property',
 				$description === false ? 'wb-value-empty' : '',
 				$description === false ? wfMessage( 'wikibase-description-empty' )->text() : htmlspecialchars( $description ),
-				$this->getHtmlForEditSection( $entity, $lang )
+				$this->getHtmlForEditSection( $entity, $lang ) // TODO: add link to SpecialPage
 			)
 		);
 	}
@@ -278,7 +287,7 @@ abstract class EntityView extends \ContextSource {
 				'wb-aliases-empty',
 				'wb-value-empty',
 				wfMessage( 'wikibase-aliases-empty' )->text(),
-				$this->getHtmlForEditSection( $entity, $lang, 'span', 'add' )
+				$this->getHtmlForEditSection( $entity, $lang, '', 'span', 'add' ) // TODO: add link to SpecialPage
 			);
 		} else {
 			$aliasesHtml = '';
@@ -291,7 +300,7 @@ abstract class EntityView extends \ContextSource {
 				'',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->text(),
-				$aliasList . $this->getHtmlForEditSection( $entity, $lang )
+				$aliasList . $this->getHtmlForEditSection( $entity, $lang ) // TODO: add link to SpecialPage
 			);
 		}
 	}
@@ -368,7 +377,7 @@ abstract class EntityView extends \ContextSource {
 					$additionalCssClasses,
 					$claim->getGuid(),
 					$mainSnakHtml,
-					$this->getHtmlForEditSection( $entity, $lang, 'span' )
+					$this->getHtmlForEditSection( $entity, $lang, '', 'span' ) // TODO: add link to SpecialPage
 				);
 			}
 
@@ -380,7 +389,7 @@ abstract class EntityView extends \ContextSource {
 				$claim->getGuid(),
 				// dummy snak to keep layout consistent
 				wfTemplate( 'wb-snak', '', '', '&nbsp;' ),
-				$this->getHtmlForEditSection( $entity, $lang, 'span', 'add' )
+				$this->getHtmlForEditSection( $entity, $lang, '', 'span', 'add' ) // TODO: add link to SpecialPage
 			);
 
 			$claimsHtml .= wfTemplate( 'wb-claim-section',
@@ -393,7 +402,7 @@ abstract class EntityView extends \ContextSource {
 
 		return $html . wfTemplate( 'wb-claims-section',
 			$claimsHtml,
-			$this->getHtmlForEditSection( $entity, $lang, 'div', 'add' )
+			$this->getHtmlForEditSection( $entity, $lang, '', 'div', 'add' ) // TODO: add link to SpecialPage
 		);
 	}
 
@@ -406,20 +415,21 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @param EntityContent $entity
 	 * @param \Language|null $lang
+	 * @param string $url specifies the URL for the button, default is an empty string
 	 * @param string $tag allows to specify the type of the outer node
 	 * @param string $action by default 'edit', for aliases this could also be 'add'
 	 * @param bool $enabled can be set to false to display the button disabled
 	 * @return string
 	 */
 	public function getHtmlForEditSection(
-		EntityContent $entity, Language $lang = null, $tag = 'span', $action = 'edit', $enabled = true
+		EntityContent $entity, Language $lang = null, $url = '', $tag = 'span', $action = 'edit', $enabled = true
 	) {
 		$buttonLabel = wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )->text();
 
 		$button = ( $enabled ) ?
 			wfTemplate( 'wb-toolbar-button',
 				$buttonLabel,
-				'' // todo: add link to special page for non-JS editing
+				$url // todo: add link to special page for non-JS editing
 			) :
 			wfTemplate( 'wb-toolbar-button-disabled',
 				$buttonLabel
