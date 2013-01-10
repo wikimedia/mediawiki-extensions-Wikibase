@@ -58,6 +58,9 @@ class EntityPage < RubySelenium
   div(:wbErrorDetailsDiv, :class => "wb-tooltip-error-details")
   link(:wbErrorDetailsLink, :class => "wb-tooltip-error-details-link")
 
+  # mw notifications
+  div(:mwNotificationContent, :xpath => "//div[@id='mw-notification-area']/div/div[contains(@class, 'mw-notification-content')]")
+
   # ***** METHODS *****
   def wait_for_api_callback
     #TODO: workaround for weird error randomly claiming that apiCallWaitingMessage-element is not attached to the DOM anymore
@@ -98,5 +101,11 @@ class EntityPage < RubySelenium
     saveDescriptionLink
     ajax_wait
     wait_for_api_callback
+  end
+
+  def wait_for_mw_notification_shown
+    wait_until do
+      mwNotificationContent? == true
+    end
   end
 end
