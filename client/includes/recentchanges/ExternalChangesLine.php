@@ -139,17 +139,18 @@ class ExternalChangesLine {
 
 		if ( is_array( $comment ) ) {
 			if ( $entityData['type'] === 'wikibase-item~add' ) {
+				// @todo: provide a link to the entity
 				$message = wfMessage( 'wbc-comment-linked' )->text();
 			} else if ( array_key_exists( 'sitelink', $comment ) ) {
 				$sitelinks = $comment['sitelink'];
 				if ( array_key_exists( 'oldlink', $sitelinks ) && array_key_exists( 'newlink', $sitelinks ) ) {
-					$oldLink = self::wikiLink( $sitelinks['oldlink']['lang'], $sitelinks['oldlink']['page'] );
-					$newLink = self::wikiLink( $sitelinks['newlink']['lang'], $sitelinks['newlink']['page'] );
+					$oldLink = self::wikiLink( $sitelinks['oldlink']['page'], $sitelinks['oldlink']['lang'] );
+					$newLink = self::wikiLink( $sitelinks['newlink']['page'], $sitelinks['newlink']['lang'] );
 					$param = array( $oldLink, $newLink );
 				} else if ( array_key_exists( 'oldlink', $sitelinks ) ) {
-					$param = self::wikiLink( $sitelinks['oldlink']['lang'], $sitelinks['oldlink']['page'] );
+					$param = self::wikiLink( $sitelinks['oldlink']['page'], $sitelinks['oldlink']['lang'] );
 				} else if ( array_key_exists( 'newlink', $sitelinks ) ) {
-					$param = self::wikiLink( $sitelinks['newlink']['lang'], $sitelinks['newlink']['page'] );
+					$param = self::wikiLink( $sitelinks['newlink']['page'], $sitelinks['newlink']['lang'] );
 				}
 
 				if ( $param !== null ) {
@@ -251,6 +252,8 @@ class ExternalChangesLine {
 	}
 
 	/**
+	 * @todo use the title object here
+	 *
 	 * @since 0.3
 	 *
 	 * @param string $siteLang
@@ -258,8 +261,13 @@ class ExternalChangesLine {
 	 *
 	 * @return string
 	 */
-	protected static function wikiLink( $siteLang, $page ) {
-		return "[[:$siteLang:$page|$siteLang:$page]]";
+	protected static function wikiLink( $page, $siteLang ) {
+		$localId = Settings::get( 'siteLocalID' );
+		if ( $siteLang !== null && $siteLang !== $localId ) {
+			return "[[:$siteLang:$page|$siteLang:$page]]";
+		} else {
+			return "[[$page]]";
+		}
 	}
 
 	/**

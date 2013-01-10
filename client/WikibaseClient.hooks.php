@@ -562,7 +562,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseDefaultSettings( array &$settings ) {
-		global $wgDBname, $wgScriptPath, $wgArticlePath;
+		global $wgDBname, $wgScriptPath, $wgArticlePath, $wgLanguageCode;
 		wfProfileIn( __METHOD__ );
 
 		$settings = array_merge(
@@ -577,6 +577,9 @@ final class ClientHooks {
 				'sortPrepend' => false,
 				'alwaysSort' => true,
 				'siteGlobalID' => $wgDBname,
+				// @todo would be great to just get this from the sites stuff
+				// but we will need to make sure the caching works good enough
+				'siteLocalID' => $wgLanguageCode,
 				'siteGroup' => 'wikipedia',
 				'injectRecentChanges' => true,
 				'showExternalRecentChanges' => true,
