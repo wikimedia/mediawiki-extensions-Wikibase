@@ -229,7 +229,7 @@ abstract class EntityView extends \ContextSource {
 		$specialPage = \SpecialPageFactory::getPage( "SetLabel" );
 
 		if ( $specialPage !== null ) {
-			$editLink = $specialPage->getTitle()->getLocalURL( $lang )
+			$editLink = $specialPage->getTitle()->getLocalURL()
 				. '/' . $entityId . '/' . $info['lang']->getCode();
 		} else {
 			$editLink = '';
