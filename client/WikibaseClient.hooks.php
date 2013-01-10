@@ -267,12 +267,12 @@ final class ClientHooks {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $title  The Title of the page to update
+	 * @param \Title $title  The Title of the page to update
 	 * @param Change $change The Change that caused the update
 	 *
 	 * @return bool
 	 */
-	protected static function updatePage( $title, Change $change ) {
+	protected static function updatePage( \Title $title, Change $change ) {
 		wfProfileIn( __METHOD__ );
 
 		if ( !$title->exists() ) {
@@ -542,14 +542,14 @@ final class ClientHooks {
 	/**
 	 * Adds css for the edit links sidebar link
 	 *
-	 * @param \OutputPage $out
-	 * @param \Skin $skin
+	 * @param \OutputPage &$out
+	 * @param \Skin &$skin
 	 *
 	 * @since 0.1
 	 *
 	 * @return bool
 	 */
-	public static function onBeforePageDisplay( \OutputPage $out, \Skin $skin ) {
+	public static function onBeforePageDisplay( \OutputPage &$out, \Skin &$skin ) {
 		wfProfileIn( __METHOD__ );
 
 		$title = $out->getTitle();
@@ -631,7 +631,7 @@ final class ClientHooks {
 	 * Adds a preference for showing or hiding Wikidata entries in recent changes
 	 *
 	 * @param \User $user
-	 * @param $preferences[]
+	 * @param &$prefs[]
 	 *
 	 * @return bool
 	 */
