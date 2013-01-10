@@ -9,6 +9,12 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
+/* No point in always displaying the notification right under the search box since notifications
+are also triggered down the document */
+.wb-entitypage #mw-notification-area {
+	position: fixed;
+}
+
 /* since a custom heading is being used on the entity pages, the native h1 tag has to be hidden */
 .wb-entitypage .firstHeading {
 	display: none;
