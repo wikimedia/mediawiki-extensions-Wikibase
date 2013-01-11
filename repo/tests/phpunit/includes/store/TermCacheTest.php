@@ -173,6 +173,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 		$item1 = Item::newEmpty();
 		$item1->setLabel( 'nl', 'getmatchingterms-1' );
+		$item1->setLabel( 'de', 'GeTMAtchingterms-2' );
 
 		$content0 = ItemContent::newEmpty();
 		$content0->setItem( $item0 );
@@ -193,6 +194,9 @@ class TermCacheTest extends \MediaWikiTestCase {
 			$id1 => new Term( array(
 				'termText' => 'getmatchingterms-1',
 			) ),
+			new Term( array(
+				'termText' => 'getmatchingterms-2',
+			) ),
 		);
 
 		$actual = $lookup->getMatchingTerms( $terms );
@@ -200,7 +204,8 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$terms[$id1]->setLanguage( 'nl' );
 
 		$this->assertInternalType( 'array', $actual );
-
+		$this->assertEquals( 2, count( $actual ) );
+		
 		/**
 		 * @var Term $term
 		 * @var Term $expected
