@@ -641,7 +641,7 @@ final class RepoHooks {
 
 		$reportMessage( 'Deleting revisions from Data NS...' );
 
-		$namespaceList = $dbw->makeList(  Utils::getEntityNamespaces(), LIST_COMMA );
+		$namespaceList = $dbw->makeList( NamespaceUtils::getEntityNamespaces(), LIST_COMMA );
 
 		$dbw->deleteJoin(
 			'revision', 'page',

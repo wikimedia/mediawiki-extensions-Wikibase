@@ -70,7 +70,7 @@ class SearchEntityArtefacts extends Maintenance {
 			$pages = $dbw->select(
 				array( 'page' ),
 				array( 'page_title' ),
-				array( 'page_namespace' => Utils::getEntityNamespaces() ),
+				array( 'page_namespace' => NamespaceUtils::getEntityNamespaces() ),
 				__METHOD__,
 				array( 'LIMIT' => 1000, 'OFFSET' => $begin )
 			);
