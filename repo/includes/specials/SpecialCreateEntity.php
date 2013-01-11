@@ -91,7 +91,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 				$status = $this->modifyEntity( $entityContent );
 
 				if ( $status->isGood() ) {
-					list( $counts, $summary, $lang) = Autocomment::formatAutoSummary(
+					list( $counts, $summary, $lang ) = Autocomment::formatAutoSummary(
 						array( $this->label, $this->description ),
 						$this->getLanguage()
 					);
