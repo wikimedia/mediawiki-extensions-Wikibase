@@ -1,7 +1,9 @@
 <?php
 
+use Wikibase\SiteLink;
+
 /**
- * Special page for setting the label of a Wikibase entity.
+ * Special page for setting the sitelink of a Wikibase entity.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,17 +28,33 @@
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-class SpecialSetLabel extends SpecialSetEntity {
+class SpecialSetSiteLink extends SpecialSetEntity {
 
 	public function __construct() {
-		parent::__construct( 'Label' );
+		parent::__construct( 'SiteLink' );
 	}
 	
 	protected function getValue( $entityContent, $language ) {
-		return $entityContent ? $entityContent->getEntity()->getLabel( $language ) : '';
+		if( !( $entityContent instanceof ItemContent ) ) {
+			#throw new Exception( '$entityContent not instanceof ItemContent (at SpecialSetSitelink::getValue' ); // TODO
+		}
+		if( !$entityContent )
+			return '';
+		$sitelink = $entityContent->getEntity()->getSitelink( $language . 'wiki' );
+		if( !$sitelink )
+			return '';
+		return $sitelink->getPage();
 	}
 	
 	protected function setValue( $entityContent, $language, $value ) {
-		$entityContent->getEntity()->setLabel( $language, $value );
+		if( !( $entityContent instanceof ItemContent ) ) {
+			#throw new Exception( '$entityContent not instanceof ItemContent (at SpecialSetSitelink::setValue' ); // TODO
+		}
+		$site = \Sites::singleton()->getSite( $language . 'wiki' );
+		if ( $site->normalizePageName( $value ) === false ) {
+			throw new Exception( $this->msg( 'wikibase-error-ui-no-external-page' )->text() );
+		}
+		$siteLink = new SiteLink( $site, $value );
+		$entityContent->getEntity()->addSiteLink( $siteLink, 'set' );
 	}
 }

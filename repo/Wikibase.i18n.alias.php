@@ -23,6 +23,9 @@ $specialPageAliases['en'] = array(
 	'ItemDisambiguation' => array( 'ItemDisambiguation' ),
 	'ListDatatypes' => array( 'ListDatatypes' ),
 	'SetLabel' => array( 'SetLabel' ),
+	'SetDescription' => array( 'SetDescription' ),
+	'SetAliases' => array( 'SetAliases' ),
+	'SetSiteLink' => array( 'SetSiteLink' ),
 	'EntitiesWithoutLabel' => array( 'EntitiesWithoutLabel' ),
 );
 
