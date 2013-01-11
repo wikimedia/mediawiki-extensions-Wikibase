@@ -27,7 +27,7 @@ while count < num_props_item do
   count = count + 1
 end
 
-describe "Check item type statements UI" do
+describe "Check item type statements UI", :experimental => true do
   before :all do
     # set up: create items & properties
     items.each do |item|

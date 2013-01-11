@@ -39,7 +39,7 @@ end
 statement_value = generate_random_string(10)
 statement_value_changed = generate_random_string(10)
 
-describe "Check statements UI" do
+describe "Check statements UI", :experimental => true do
   before :all do
     # set up: create items & properties
     items.each do |item|

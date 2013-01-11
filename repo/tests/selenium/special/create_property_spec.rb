@@ -7,7 +7,7 @@
 
 require 'spec_helper'
 
-describe "Check NewProperty special page" do
+describe "Check NewProperty special page", :experimental => true do
   before :all do
     # set up: switch language
     visit_page(NewPropertyPage) do |page|

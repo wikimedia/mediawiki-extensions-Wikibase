@@ -15,7 +15,7 @@ prop_description = generate_random_string(20)
 prop_datatype = "Commons media file"
 cm_filename = "Air_France_A380_F-HPJA.jpg"
 
-describe "Check commons media statements UI" do
+describe "Check commons media statements UI", :experimental => true do
   before :all do
     # set up: create item & properties
     visit_page(CreateItemPage) do |page|
