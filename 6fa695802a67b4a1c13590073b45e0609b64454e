@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADg3///N4\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-11T11:35:59Z",
+      "side": 1,
+      "message": "no known -\u003e not known\nvalue alternative -\u003e alternate value?\nright next -\u003e next (right as meant as \"immediately adjacent to\" correct?)",
+      "revId": "6fa695802a67b4a1c13590073b45e0609b64454e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADg3///N0\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-11T11:35:59Z",
+      "side": 1,
+      "message": "no known -\u003e not known\nvalue alternative -\u003e alternate value?\nright next -\u003e next (right as meant as \"immediately adjacent to\" correct?)",
+      "revId": "6fa695802a67b4a1c13590073b45e0609b64454e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
