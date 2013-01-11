@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Special page for setting the label of a Wikibase entity.
+ * Special page for setting the aliases of a Wikibase entity.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-class SpecialSetLabel extends SpecialSetEntity {
+class SpecialSetAliases extends SpecialSetEntity {
 	public function __construct() {
-		parent::__construct( 'SetLabel', 'label' );
+		parent::__construct( 'SetAliases', 'aliases' );
 	}
 }

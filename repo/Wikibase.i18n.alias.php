@@ -24,6 +24,8 @@ $specialPageAliases['en'] = array(
 	'ListDatatypes' => array( 'ListDatatypes' ),
 	'SetLabel' => array( 'SetLabel' ),
 	'EntitiesWithoutLabel' => array( 'EntitiesWithoutLabel' ),
+	'SetDescription' => array( 'SetDescription' ),
+	'SetAliases' => array( 'SetAliases' )
 );
 
 /** Arabic (العربية) */
