@@ -58,19 +58,13 @@ RSpec.configure do |config|
         puts "Running remote on Selenium GRID using OS " + target_os + "."
       end
       @browser = Watir::Browser.new(:remote, :url => REMOTE_SELENIUM_HUB, :desired_capabilities => caps)
-      screen_width = @browser.execute_script("return screen.width;")
-      screen_height = @browser.execute_script("return screen.height;")
-      @browser.driver.manage.window.resize_to(screen_width, screen_height)
-      @browser.driver.manage.window.move_to(0, 0)
+      @browser.driver.manage.window.maximize()
     else
       if configs['CONSOLE_LOG']
         puts "Running on local machine."
       end
       @browser = Watir::Browser.new(browser_type)
-      screen_width = @browser.execute_script("return screen.width;")
-      screen_height = @browser.execute_script("return screen.height;")
-      @browser.driver.manage.window.resize_to(screen_width, screen_height)
-      @browser.driver.manage.window.move_to(0, 0)
+      @browser.driver.manage.window.maximize()
     end
   end
 
