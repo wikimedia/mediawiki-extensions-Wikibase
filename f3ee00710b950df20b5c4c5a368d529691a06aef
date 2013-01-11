@@ -16,6 +16,40 @@
       "revId": "f3ee00710b950df20b5c4c5a368d529691a06aef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADg3//+oI\u003d",
+        "filename": "repo/includes/specials/SpecialSetDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-11T21:30:33Z",
+      "side": 1,
+      "message": "Something is seriously wrong here, all lines is wrapped into a single one!",
+      "revId": "f3ee00710b950df20b5c4c5a368d529691a06aef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADg3//+n8\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-11T21:30:33Z",
+      "side": 1,
+      "message": "Lots of additional whitespace, set up your text editor / IDE to mark whitespace so you can remove them!",
+      "revId": "f3ee00710b950df20b5c4c5a368d529691a06aef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
