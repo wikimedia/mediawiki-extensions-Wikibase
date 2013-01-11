@@ -143,6 +143,11 @@ RSpec::Core::RakeTask.new(:qunit) do |spec|
   spec.pattern = '../repo/tests/selenium/qunit/*_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:client_qunit) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../client/tests/selenium/qunit/*_spec.rb'
+end
+
 RSpec::Core::RakeTask.new(:undelete) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/special/undelete_spec.rb'
