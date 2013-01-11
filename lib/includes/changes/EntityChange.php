@@ -114,7 +114,7 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @see Change::getChangeType
+	 *
 	 *
 	 * @since 0.3
 	 *
@@ -318,6 +318,29 @@ class EntityChange extends DiffChange {
 		$instance->setDiff( $diff );
 
 		return $instance;
+	}
+
+	public function __toString() {
+		$s = get_class( $this );
+		$s .= ": ";
+
+		$fields = $this->getFields();
+		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+		$meta = $this->getMetadata();
+
+		$fields = array_merge( $fields, $info );
+		$fields = array_merge( $fields, $meta );
+
+		foreach ( $fields as $k => $v ) {
+			if ( is_array( $v ) || is_object( $v ) ) {
+				unset( $fields[$k] );
+			}
+		}
+
+		ksort( $fields );
+
+		$s .= preg_replace( '/\s+/s', ' ', var_export( $fields, true ) );
+		return $s;
 	}
 
 }

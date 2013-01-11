@@ -233,7 +233,7 @@ class DispatchChanges extends \Maintenance {
 
 		$n = count( $changes );
 
-		$this->trace( "Posted $n changes to $wikiDB" );
+		$this->log( "Posted $n changes to $wikiDB" );
 		return $n;
 	}
 
