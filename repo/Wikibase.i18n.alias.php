@@ -24,6 +24,8 @@ $specialPageAliases['en'] = array(
 	'ListDatatypes' => array( 'ListDatatypes' ),
 	'SetLabel' => array( 'SetLabel' ),
 	'EntitiesWithoutLabel' => array( 'EntitiesWithoutLabel' ),
+	'SetDescription' => array( 'SetDescription' ),
+	'SetAliases' => array( 'SetAliases' )
 );
 
 /** Arabic (العربية) */
@@ -52,7 +54,7 @@ $specialPageAliases['de'] = array(
 	'NewProperty' => array( 'Neues_Attribut_erstellen' ),
 	'ItemByTitle' => array( 'Datenelement_nach_Name' ),
 	'ItemDisambiguation' => array( 'Begriffsklärung_zu_Datenelement' ),
-	'ListDatatypes' => array( 'Datentypen_auflisten' ),
+	'ListDatatypes' => array( 'Datentypen_auflisten' )
 );
 
 /** Zazaki (Zazaki) */
