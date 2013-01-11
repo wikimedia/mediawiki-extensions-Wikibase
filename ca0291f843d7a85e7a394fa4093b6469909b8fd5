@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADg3//++c\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-11T16:50:23Z",
+      "side": 1,
+      "message": "Plural is not supported for status objects.\nAdded plural to the messages, then it is there for later.",
+      "parentUuid": "AAADg3///FA\u003d",
+      "revId": "ca0291f843d7a85e7a394fa4093b6469909b8fd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADg3///EY\u003d",
         "filename": "repo/includes/MultiLangConstraintDetector.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-01-11T15:24:51Z",
       "side": 1,
       "message": "This comma separator should be user language dependent. Use $wgLang-\u003ecommaList( $failedLang ) or possibly even $wgLang-\u003elistToText(). This should pass count( $failedLang ) as second parameter, so the message can be properly localised.",
+      "revId": "ca0291f843d7a85e7a394fa4093b6469909b8fd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADg3//++Y\u003d",
+        "filename": "repo/includes/MultiLangConstraintDetector.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-11T16:50:23Z",
+      "side": 1,
+      "message": "Its a left over.",
+      "parentUuid": "AAADg3///EY\u003d",
       "revId": "ca0291f843d7a85e7a394fa4093b6469909b8fd5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
