@@ -15,7 +15,7 @@ prop_a_description = generate_random_string(20)
 prop_a_datatype = "Commons media file"
 statement_value = generate_random_string(10)
 
-describe "Check for bugs in statements UI" do
+describe "Check for bugs in statements UI", :experimental => true do
   before :all do
     # set up: create item & property
     visit_page(CreateItemPage) do |page|
