@@ -110,7 +110,7 @@ $wgAutoloadClasses['Wikibase\PropertyView']				= $dir . 'includes/PropertyView.p
 // includes/actions
 $wgAutoloadClasses['Wikibase\HistoryEntityAction'] 		= $dir . 'includes/actions/HistoryEntityAction.php';
 $wgAutoloadClasses['Wikibase\HistoryItemAction'] 		= $dir . 'includes/actions/HistoryItemAction.php';
-$wgAutoloadClasses['Wikibase\HistoryPropertyAction'] 		= $dir . 'includes/actions/HistoryPropertyAction.php';
+$wgAutoloadClasses['Wikibase\HistoryPropertyAction'] 	= $dir . 'includes/actions/HistoryPropertyAction.php';
 $wgAutoloadClasses['Wikibase\HistoryQueryAction'] 		= $dir . 'includes/actions/HistoryQueryAction.php';
 $wgAutoloadClasses['Wikibase\EditEntityAction'] 		= $dir . 'includes/actions/EditEntityAction.php';
 $wgAutoloadClasses['Wikibase\EditItemAction'] 			= $dir . 'includes/actions/EditItemAction.php';
@@ -157,7 +157,12 @@ $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialC
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
 $wgAutoloadClasses['SpecialItemDisambiguation'] 		= $dir . 'includes/specials/SpecialItemDisambiguation.php';
+$wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
+$wgAutoloadClasses['SpecialSetEntity'] 					= $dir . 'includes/specials/SpecialSetEntity.php';
 $wgAutoloadClasses['SpecialSetLabel'] 					= $dir . 'includes/specials/SpecialSetLabel.php';
+$wgAutoloadClasses['SpecialSetDescription'] 			= $dir . 'includes/specials/SpecialSetDescription.php';
+$wgAutoloadClasses['SpecialSetAliases'] 				= $dir . 'includes/specials/SpecialSetAliases.php';
+$wgAutoloadClasses['SpecialWikibaseQueryPage']			= $dir . 'includes/specials/SpecialWikibaseQueryPage.php';
 $wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	    = $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
 
 // includes/store
@@ -210,6 +215,8 @@ $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 $wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
+$wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
+$wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
 $wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
 
 
