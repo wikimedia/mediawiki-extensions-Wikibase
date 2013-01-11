@@ -215,6 +215,14 @@ $messages['pms'] = array(
 	'version-datavalues' => 'DataValues',
 );
 
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'datavalues-desc' => 'Collezzione de oggette ca rappresendane diverse tipe de valore',
+	'version-datavalues' => 'DataValues',
+);
+
 /** Russian (русский)
  * @author Ole Yves
  */
