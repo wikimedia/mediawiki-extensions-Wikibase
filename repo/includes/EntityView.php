@@ -226,7 +226,7 @@ abstract class EntityView extends \ContextSource {
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$label = $entity->getEntity()->getLabel( $info['lang']->getCode() );
 		$entityId = $entity->getEntity()->getPrefixedId();
-		$specialPage = \SpecialPageFactory::getPage( "SetLabel" );
+		$specialPage = \SpecialPageFactory::getPage( 'SetLabel' );
 
 		if ( $specialPage !== null ) {
 			$editLink = $specialPage->getTitle()->getLocalURL()
@@ -258,12 +258,21 @@ abstract class EntityView extends \ContextSource {
 	public function getHtmlForDescription( EntityContent $entity, Language $lang = null, $editable = true ) {
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$description = $entity->getEntity()->getDescription( $info['lang']->getCode() );
+		$entityId = $entity->getEntity()->getPrefixedId();
+		$specialPage = \SpecialPageFactory::getPage( 'SetDescription' );
+
+		if ( $specialPage !== null ) {
+			$editLink = $specialPage->getTitle()->getLocalURL()
+				. '/' . $entityId . '/' . $info['lang']->getCode();
+		} else {
+			$editLink = '';
+		}
 
 		return wfTemplate( 'wb-description',
 			wfTemplate( 'wb-property',
 				$description === false ? 'wb-value-empty' : '',
 				$description === false ? wfMessage( 'wikibase-description-empty' )->text() : htmlspecialchars( $description ),
-				$this->getHtmlForEditSection( $entity, $lang ) // TODO: add link to SpecialPage
+				$this->getHtmlForEditSection( $entity, $lang, $editLink )
 			)
 		);
 	}
@@ -281,13 +290,22 @@ abstract class EntityView extends \ContextSource {
 	public function getHtmlForAliases( EntityContent $entity, Language $lang = null, $editable = true ) {
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$aliases = $entity->getEntity()->getAliases( $info['lang']->getCode() );
+		$entityId = $entity->getEntity()->getPrefixedId();
+		$specialPage = \SpecialPageFactory::getPage( 'SetAliases' );
+
+		if ( $specialPage !== null ) {
+			$editLink = $specialPage->getTitle()->getLocalURL()
+				. '/' . $entityId . '/' . $info['lang']->getCode();
+		} else {
+			$editLink = '';
+		}
 
 		if ( empty( $aliases ) ) {
 			return wfTemplate( 'wb-aliases-wrapper',
 				'wb-aliases-empty',
 				'wb-value-empty',
 				wfMessage( 'wikibase-aliases-empty' )->text(),
-				$this->getHtmlForEditSection( $entity, $lang, '', 'span', 'add' ) // TODO: add link to SpecialPage
+				$this->getHtmlForEditSection( $entity, $lang, $editLink, 'span', 'add' )
 			);
 		} else {
 			$aliasesHtml = '';
@@ -300,7 +318,7 @@ abstract class EntityView extends \ContextSource {
 				'',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->text(),
-				$aliasList . $this->getHtmlForEditSection( $entity, $lang ) // TODO: add link to SpecialPage
+				$aliasList . $this->getHtmlForEditSection( $entity, $lang, $editLink )
 			);
 		}
 	}
