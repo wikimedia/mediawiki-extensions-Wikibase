@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADg3///Fk\u003d",
+        "filename": "client/resources/wikibase-client.watchlist.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-11T15:17:27Z",
+      "side": 1,
+      "message": "should be documented as well. @type for the variable type. But see my last comment as well.",
+      "revId": "fb52c3564588c0b8b7d08b16007505f16b91002e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADg3///FM\u003d",
+        "filename": "client/resources/wikibase-client.watchlist.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-11T15:17:27Z",
+      "side": 1,
+      "message": "toggleSection would be a better name since toggle is a verb and you already have toggleWikibase.",
+      "revId": "fb52c3564588c0b8b7d08b16007505f16b91002e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADg3///FQ\u003d",
+        "filename": "client/resources/wikibase-client.watchlist.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-11T15:17:27Z",
+      "side": 1,
+      "message": "@return is missing and function name is not really expressive, hasWbEditsOnly could be clearer.",
+      "revId": "fb52c3564588c0b8b7d08b16007505f16b91002e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADg3///F0\u003d",
+        "filename": "client/resources/wikibase-client.watchlist.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-11T15:17:27Z",
+      "side": 1,
+      "message": "could be a little more elegant:\n\nvar $el \u003d $( el ),\n    $items \u003d $el.find( \u0027li\u0027 ),\n    $editItems \u003d $items.filter( \u0027.wikibase-edit\u0027 )\n\nreturn $items.length \u003d\u003d\u003d $editItems.length\n\nOr in one line, something like:\n\nreturn $el.find( \u0027li\u0027 ).not( \u0027.wikibase-edit\u0027 ).length \u003d\u003d\u003d 0",
+      "revId": "fb52c3564588c0b8b7d08b16007505f16b91002e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADg3///Fg\u003d",
+        "filename": "client/resources/wikibase-client.watchlist.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-11T15:17:27Z",
+      "side": 1,
+      "message": "Could make this a two liner:\n\nwatchlist.toggleOn \u003d !watchlist.toggleOn\n$( \u0027.wikibase-edit\u0027 ).toggle()\n\nNot sure you want to have the watchlist.toggleOn variable at all, seems rather useless.",
+      "revId": "fb52c3564588c0b8b7d08b16007505f16b91002e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
