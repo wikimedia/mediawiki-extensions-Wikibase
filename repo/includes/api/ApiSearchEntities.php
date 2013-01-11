@@ -6,9 +6,8 @@ use ApiBase;
 /**
  * API module to search for Wikibase entities.
  *
- * FIXME: continuation is no longer implemented
  * FIXME: the post-query filter can result in fewer rows returned then the limit
- * FIXME: an entity content is obtained for each term (even in a seperate query)
+ * FIXME: an entity content is obtained for each term (even in a separate query)
  * FIXME: this module is doing to much work. Ranking terms is not its job and should be delegated
  *
  * @since 0.2
@@ -34,10 +33,11 @@ class ApiSearchEntities extends ApiBase {
 	 * @param string $term
 	 * @param string|null $entityType
 	 * @param int $limit
+	 * @param bool $prefixSearch
 	 *
 	 * @return EntityContent[]
 	 */
-	protected function searchEntities( $language, $term, $entityType = null, $limit = 10 ) {
+	protected function searchEntities( $language, $term, $entityType, $limit, $prefixSearch  ) {
 		wfProfileIn( __METHOD__ );
 
 		$terms = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
@@ -57,7 +57,7 @@ class ApiSearchEntities extends ApiBase {
 			$entityType,
 			array(
 				'caseSensitive' => false,
-				'prefixSearch' => true,
+				'prefixSearch' => $prefixSearch,
 				'LIMIT' => $limit,
 			)
 		);
@@ -81,35 +81,6 @@ class ApiSearchEntities extends ApiBase {
 	}
 
 	/**
-	 * Sort search array by score
-	 *
-	 * @since 0.2
-	 *
-	 * @param array $entries
-	 *
-	 * @return array $entries
-	 */
-	private function sortByScore( $entries ) {
-		wfProfileIn( __METHOD__ );
-
-		$sortArray = array();
-		foreach ( $entries as $entry ) {
-			if ( isset( $entry["score"] ) ) {
-				$sortArray[] = $entry["score"];
-			} else {
-				$sortArray[] = 0;
-			}
-		}
-
-		if ( $entries !== array() ) {
-			array_multisort( $sortArray, SORT_DESC, $entries );
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $entries;
-	}
-
-	/**
 	 * Populate the search result entries
 	 *
 	 * @since 0.4
@@ -118,8 +89,15 @@ class ApiSearchEntities extends ApiBase {
 	 * @param string $language
 	 * @param string $search
 	 */
-	private function getSearchEntries( $results, $language, $search ) {
+	private function getSearchEntries( $params ) {
 		wfProfileIn( __METHOD__ );
+
+		// Gets exact matches. If there are not enough exact matches, it gets prefixed matches
+		$limit = $params['limit'] + $params['continue'] + 1;
+		$results = $this->searchEntities( $params['language'], $params['search'], $params['type'], $limit, false );
+		if ( count( $results ) < $limit ) {
+			$results = $this->searchEntities( $params['language'], $params['search'], $params['type'], $limit, true );
+		}
 
 		$entries = array();
 
@@ -130,20 +108,20 @@ class ApiSearchEntities extends ApiBase {
 			$entry['id'] = $entity->getPrefixedId();
 			$entry['url'] = EntityContentFactory::singleton()->getTitleForId( $entity->getId() )->getFullUrl();
 
-			if ( $entity->getLabel( $language ) !== false ) {
-				$entry['label'] = $entity->getLabel( $language );
+			if ( $entity->getLabel( $params['language'] ) !== false ) {
+				$entry['label'] = $entity->getLabel( $params['language'] );
 			}
 
-			if ( $entity->getDescription( $language ) !== false ) {
-				$entry['description'] = $entity->getDescription( $language );
+			if ( $entity->getDescription( $params['language'] ) !== false ) {
+				$entry['description'] = $entity->getDescription( $params['language'] );
 			}
 
 			// Only include matching aliases
-			$aliases = $entity->getAliases( $language, $search );
+			$aliases = $entity->getAliases( $params['language'], $params['search'] );
 			$aliasEntries = array();
 
 			foreach ( $aliases as $alias ) {
-				if ( preg_match( "/^" . preg_quote( $search ) . "/i", $alias ) !== 0 ) {
+				if ( preg_match( "/^" . preg_quote( $params['search'] ) . "/i", $alias ) !== 0 ) {
 					$aliasEntries[] = $alias;
 				}
 			}
@@ -153,11 +131,6 @@ class ApiSearchEntities extends ApiBase {
 				$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
 			}
 
-			$scoreCalculator = new TermMatchScoreCalculator( $entry, $search );
-			$score = $scoreCalculator->calculateScore();
-			if ( $score > 0 ) {
-				$entry['score'] = $score;
-			}
 			if ( !in_array( $entry, $entries ) ) {
 				$entries[] = $entry;
 			}
@@ -175,16 +148,12 @@ class ApiSearchEntities extends ApiBase {
 
 		$params = $this->extractRequestParams();
 
-		$entries = $this->sortByScore( $this->getSearchEntries(
-			$this->searchEntities( $params['language'], $params['search'], $params['type'], $params['limit'] ),
-			$params['language'], $params['search']
-		) );
+		$entries = $this->getSearchEntries( $params );
 
 		$this->getResult()->addValue(
 			null,
 			'searchinfo',
 			array(
-				'totalhits' => count( $entries ),
 				'search' => $params['search']
 			)
 		);
@@ -194,6 +163,17 @@ class ApiSearchEntities extends ApiBase {
 			'search',
 			array()
 		);
+
+		$totalHits = count ( $entries );
+		$entries = array_slice( $entries, $params['continue'], $params['limit'] );
+
+		if ( $totalHits > ( $params['continue'] + $params['limit'] ) )  {
+			$this->getResult()->addValue(
+				null,
+				'search-continue',
+				$totalHits - 1
+			);
+		}
 
 		$this->getResult()->addValue(
 			null,
