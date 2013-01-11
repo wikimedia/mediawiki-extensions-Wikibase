@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADg3///FA\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-11T15:24:51Z",
+      "side": 1,
+      "message": "This can and should support plural instead of awkward \"code(s)\". In languages with 5 plural forms this would look like \"code(s)(r)(t)(l)\" or something similar. Same for the two strings below.\n\nSuggested rewording:\nThe label has a constraint violation for language {{PLURAL:$2|code|codes}} $1\u0027",
+      "revId": "ca0291f843d7a85e7a394fa4093b6469909b8fd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADg3///EY\u003d",
+        "filename": "repo/includes/MultiLangConstraintDetector.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-11T15:24:51Z",
+      "side": 1,
+      "message": "This comma separator should be user language dependent. Use $wgLang-\u003ecommaList( $failedLang ) or possibly even $wgLang-\u003elistToText(). This should pass count( $failedLang ) as second parameter, so the message can be properly localised.",
+      "revId": "ca0291f843d7a85e7a394fa4093b6469909b8fd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
