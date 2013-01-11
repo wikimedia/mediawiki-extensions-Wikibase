@@ -13,6 +13,7 @@ class SetLabelPage < ItemPage
   text_field(:idField, :name => "id")
   text_field(:languageField, :name => "language")
   text_field(:labelField, :name => "label")
-  button(:setLabelSubmit, :css => "form#wb-setlabel-form1 > input[type='submit']")
+  #button(:setLabelSubmit, :css => "form#wb-setlabel-form1 > input[type='submit']")
+  button(:setLabelSubmit, :id => "wb-setlabel-submit")
 
 end
