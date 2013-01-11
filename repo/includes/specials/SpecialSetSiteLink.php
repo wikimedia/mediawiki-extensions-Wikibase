@@ -1,7 +1,9 @@
 <?php
 
+use Wikibase\SiteLink;
+
 /**
- * Special page for setting the label of a Wikibase entity.
+ * Special page for setting the sitelink of a Wikibase entity.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +28,7 @@
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-class SpecialSetLabel extends SpecialSetEntity {
+class SpecialSetSiteLink extends SpecialSetEntity {
 
 	/**
 	 * Constructor
@@ -34,36 +36,56 @@ class SpecialSetLabel extends SpecialSetEntity {
 	 * @since 0.4
 	 */
 	public function __construct() {
-		parent::__construct( 'SetLabel' );
+		parent::__construct( 'SetSiteLink' );
 	}
 
 	/**
 	 * @see SpecialSetEntity::getPostedValue()
 	 */
 	protected function getPostedValue() {
-		return $this->getRequest()->getVal( 'label' );
+		return $this->getRequest()->getVal( 'sitelink' );
 	}
 
 	/**
 	 * @see SpecialSetEntity::getValue()
 	 */
 	protected function getValue( $entityContent, $language ) {
-		return $entityContent ? $entityContent->getEntity()->getLabel( $language ) : '';
+		if( !$entityContent ) {
+			return '';
+		}
+		$sitelink = $entityContent->getEntity()->getSitelink( $language . 'wiki' );
+		if( !$sitelink ) {
+			return '';
+		}
+		return $sitelink->getPage();
 	}
 
 	/**
 	 * @see SpecialSetEntity::setValue()
 	 */
 	protected function setValue( $entityContent, $language, $value, &$summary ) {
+		$site = \Sites::singleton()->getSite( $language . 'wiki' );
+		$status = \Status::newGood();
+
+		if( $site === false ) {
+			$status->error( 'wikibase-setentity-invalid-langcode', $language ); // should not happen (strike out?)
+			return $status;
+		}
+		if ( $site->normalizePageName( $value ) === false && $value !== '' ) {
+			$status->error( 'wikibase-error-ui-no-external-page' );
+			return $status;
+		}
+
 		if( $value === '' ) {
-			$entityContent->getEntity()->removeLabel( $language );
-			$i18n = 'wbsetlabel-remove';
+			$entityContent->getEntity()->removeSitelink( $language . 'wiki' );
+			$i18n = 'wbsetsitelink-remove';
 		}
 		else {
-			$entityContent->getEntity()->setLabel( $language, $value );
-			$i18n = 'wbsetlabel-set';
+			$siteLink = new SiteLink( $site, $value );
+			$entityContent->getEntity()->addSiteLink( $siteLink, 'set' );
+			$i18n = 'wbsetsitelink-set';
 		}
 		$summary = $this->getSummary( $language, $value, $i18n );
-		return \Status::newGood();
+		return $status;
 	}
 }
