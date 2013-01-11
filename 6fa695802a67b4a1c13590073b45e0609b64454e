@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADg3///M0\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-01-11T12:07:54Z",
+      "side": 1,
+      "message": "1) Right.\n2) It is actually more a \"value alternative\". (At least that should have more meaning than \"snak type\".) As alternatives to specifying a (custom) value, you can select if there is no value at all or if there is some (unknown) value. Will rephrase to \"... choose an alternative to specifying a custom value by clicking... \"\n3) \"right next to\" is correct.",
+      "parentUuid": "AAADg3///N4\u003d",
+      "revId": "6fa695802a67b4a1c13590073b45e0609b64454e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADg3///N0\u003d",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 2
