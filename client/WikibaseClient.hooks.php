@@ -396,7 +396,9 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onOldChangesListRecentChangesLine( \ChangesList &$changesList, &$s, \RecentChange $rc ) {
+	public static function onOldChangesListRecentChangesLine( \ChangesList &$changesList, &$s,
+		\RecentChange $rc, array &$classes ) {
+
 		wfProfileIn( __METHOD__ );
 
 		$rcType = $rc->getAttribute( 'rc_type' );
@@ -407,6 +409,7 @@ final class ClientHooks {
 				if ( $line == false ) {
 					return false;
 				}
+				$classes[] = 'wikibase-edit';
 				$s = $line;
 			}
 		}
@@ -642,6 +645,15 @@ final class ClientHooks {
 			'section' => 'rc/advancedrc',
 		);
 
+		return true;
+	}
+
+	public static function onSpecialPageBeforeExecute( \SpecialPage $special, $subpage ) {
+		if ( $special->getName() === 'Watchlist' ) {
+			$special->getOutput()->addModules( array(
+				'wikibase-client.watchlist',
+			) );
+		}
 		return true;
 	}
 
