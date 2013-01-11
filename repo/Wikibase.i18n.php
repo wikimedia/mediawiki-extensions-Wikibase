@@ -343,7 +343,8 @@ Bubble help message for entering the description of the data set used for a spec
 	'wikibase-statements' => "Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata's glossary for [[m:d:Wikidata:Glossary#Statement|statements]] and [[m:d:Wikidata:Glossary#Item|item]].",
 	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#Item|item]].',
-	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.',
+	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.
+{{Identical|Language}}',
 	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.',
 	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (Wikipedia) page.',
 	'wikibase-sitelinks-add' => "Add a sitelink to a language specific page on the cluster. See also Wikidata's glossary for [//wikidata.org/wiki/Wikidata:Glossary#Sitelink sitelinks].",
@@ -391,8 +392,18 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-propertyedittool-co
 	'wikibase-snakview-snaktypeselector-value' => "Short descriptive title of a 'value' snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option - which is the default when adding a claim - is allowing the user to specify a value.",
 	'wikibase-snakview-snaktypeselector-somevalue' => "Short descriptive title of a some-value snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that a value exists but it is unknown.",
 	'wikibase-snakview-snaktypeselector-novalue' => "Short descriptive title of a no-value snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that no value exists.",
-	'wikibase-anonymouseditwarning-item' => 'Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on an item (see [[d:Wikidata/Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in.',
-	'wikibase-anonymouseditwarning-property' => 'Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on a property (see [[d:Wikidata/Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in.',
+	'wikibase-anonymouseditwarning-item' => 'Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on an item (see [[d:Wikidata/Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in.
+
+See also:
+* {{msg-mw|Anoneditwarning}}
+* {{msg-mw|Sf autoedit anoneditwarning}}
+* {{msg-mw|Wikibase-anonymouseditwarning-property}}',
+	'wikibase-anonymouseditwarning-property' => 'Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on a property (see [[d:Wikidata/Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in.
+
+See also:
+* {{msg-mw|Anoneditwarning}}
+* {{msg-mw|Sf autoedit anoneditwarning}}
+* {{msg-mw|Wikibase-anonymouseditwarning-item}}',
 	'wikibase-restrictionedit-tooltip-message' => 'When editing a page (a data item) is restricted for the current user, this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item.',
 	'wikibase-blockeduser-tooltip-message' => 'When the current user is blocked from editing a page (a data item), this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item or creating a new item.',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).',
@@ -493,7 +504,8 @@ Parameters:
 	'wikibase-setlabel-intro' => 'A short text at the top of the page that allows users to set the label of an entity, explaining the form.',
 	'wikibase-setlabel-id' => 'Label for the input field to select the ID of the entity.
 {{Identical|ID}}',
-	'wikibase-setlabel-language' => 'Label for the input field to select the language the label should be set in.',
+	'wikibase-setlabel-language' => 'Label for the input field to select the language the label should be set in.
+{{Identical|Language}}',
 	'wikibase-setlabel-label' => 'Label for the input field to type the label to set the entity to.',
 	'wikibase-setlabel-submit' => 'Label for the button that activates the action.',
 	'wikibase-setlabel-invalid-langcode' => 'Response informing that the language code is not valid. Could give an example of a valid language code. $1 is the invalid code.
@@ -2427,6 +2439,10 @@ $messages['fr'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'valeur personnalisée',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valeur inconnue',
 	'wikibase-snakview-snaktypeselector-novalue' => 'aucune valeur',
+	'wikibase-anonymouseditwarning-item' => "Attention: Vous n’êtes pas connecté.
+Votre adresse IP sera enregistrée dans l'historique des modifications de cet élément.",
+	'wikibase-anonymouseditwarning-property' => "Attention: Vous n’êtes pas connecté.
+Votre adresse IP sera enregistrée dans l'historique des modifications de la propriété.",
 	'wikibase-restrictionedit-tooltip-message' => "Cette page est protégée. L'édition n'est pas autorisée.",
 	'wikibase-blockeduser-tooltip-message' => 'Vous êtes bloqué(e) en édition.',
 	'wikibase-tooltip-error-details' => 'Détails',
@@ -2798,6 +2814,10 @@ $messages['gl'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'valor personalizado',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valor descoñecido',
 	'wikibase-snakview-snaktypeselector-novalue' => 'sen valor',
+	'wikibase-anonymouseditwarning-item' => 'Aviso: Non accedeu ao sistema.
+O seu enderezo IP quedará rexistrado no historial de revisións deste elemento.',
+	'wikibase-anonymouseditwarning-property' => 'Aviso: Non accedeu ao sistema.
+O seu enderezo IP quedará rexistrado no historial de revisións desta propiedade.',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta páxina está protexida. Non se permite a edición.',
 	'wikibase-blockeduser-tooltip-message' => 'Está bloqueado fronte á edición.',
 	'wikibase-tooltip-error-details' => 'Detalles',
@@ -3654,6 +3674,16 @@ $messages['is'] = array(
 	'wikibase-aliases-empty' => 'Engin samnefni tilgreind.',
 	'wikibase-datatype-label' => 'Gagnagerð:',
 	'wikibase-snakview-property-input-placeholder' => 'eiginleiki',
+	'wikibase-snakview-variation-unsupporteddatatype' => 'Gildi af gagnagerð „$1” eru ekki studd ennþá.',
+	'wikibase-snakview-variations-somevalue-label' => 'óþekkt gildi',
+	'wikibase-snakview-variations-novalue-label' => 'ekkert gildi',
+	'wikibase-snakview-snaktypeselector-value' => 'sérstakt gildi',
+	'wikibase-snakview-snaktypeselector-somevalue' => 'óþekkt gildi',
+	'wikibase-snakview-snaktypeselector-novalue' => 'ekkert gildi',
+	'wikibase-anonymouseditwarning-item' => "'''Viðvörun:''' Þú ert ekki innskráð(ur).
+Vistfang þitt skráist í breytingaskrá hlutsins.",
+	'wikibase-anonymouseditwarning-property' => "'''Viðvörun:''' Þú ert ekki innskráð(ur).
+Vistfang þitt skráist í breytingaskrá eiginleikans.",
 	'wikibase-restrictionedit-tooltip-message' => 'Þessi síða er vernduð, breytingar eru óheimilar.',
 	'wikibase-blockeduser-tooltip-message' => 'Þér er bannað að breyta síðum.',
 	'wikibase-tooltip-error-details' => 'Nánar',
@@ -4052,6 +4082,10 @@ $messages['ja'] = array(
 	'wikibase-snakview-variations-novalue-label' => '値なし',
 	'wikibase-snakview-snaktypeselector-somevalue' => '不明な値',
 	'wikibase-snakview-snaktypeselector-novalue' => '値なし',
+	'wikibase-anonymouseditwarning-item' => '警告: ログインしていません。
+編集すると、IPアドレスがこのページの編集履歴に記録されます。',
+	'wikibase-anonymouseditwarning-property' => '警告: ログインしていません。
+編集すると、IPアドレスがこのページの編集履歴に記録されます。',
 	'wikibase-restrictionedit-tooltip-message' => 'このページは保護されています。編集は許可されていません。',
 	'wikibase-blockeduser-tooltip-message' => 'あなたは編集ブロックされています。',
 	'wikibase-tooltip-error-details' => '詳細',
@@ -4266,6 +4300,10 @@ $messages['ko'] = array(
 	'wikibase-snakview-snaktypeselector-value' => '사용자 정의 값',
 	'wikibase-snakview-snaktypeselector-somevalue' => '알 수 없는 값',
 	'wikibase-snakview-snaktypeselector-novalue' => '값 없음',
+	'wikibase-anonymouseditwarning-item' => '주의: 로그인하고 있지 않습니다.
+IP 주소가 이 항목의 편집 역사에 남게 됩니다.',
+	'wikibase-anonymouseditwarning-property' => '주의: 로그인하고 있지 않습니다.
+IP 주소가 이 속성의 편집 역사에 남게 됩니다.',
 	'wikibase-restrictionedit-tooltip-message' => '이 문서는 보호되어 있어, 편집을 허용하지 않습니다.',
 	'wikibase-blockeduser-tooltip-message' => '편집에서 차단되어 있습니다.',
 	'wikibase-tooltip-error-details' => '자세한 사항',
@@ -4595,6 +4633,10 @@ $messages['mk'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'прилагодена вредност',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'непозната вредност',
 	'wikibase-snakview-snaktypeselector-novalue' => 'нема вредност',
+	'wikibase-anonymouseditwarning-item' => "'''Предупредување:''' Не сте најавени.
+Вашата IP-адреса ќе биде заведена во историјата на предметов.",
+	'wikibase-anonymouseditwarning-property' => 'Предупредување: Не сте најавени. 
+Вашата IP-адреса ќе биде заведена во историјата на својствово.',
 	'wikibase-restrictionedit-tooltip-message' => 'Страницава е заштитена. Уредувањето не е дозволено.',
 	'wikibase-blockeduser-tooltip-message' => 'Блокирани сте од уредување.',
 	'wikibase-tooltip-error-details' => 'Подробно',
