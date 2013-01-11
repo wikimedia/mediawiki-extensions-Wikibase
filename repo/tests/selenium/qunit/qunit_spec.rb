@@ -7,11 +7,11 @@
 
 require 'spec_helper'
 
-describe "Running QUnit tests" do
+describe "Running repo QUnit tests" do
   before :all do
     # set up
   end
-  context "run QUnit tests" do
+  context "run repo QUnit tests" do
     it "run wikibase tests" do
       on_page(QUnitPage) do |page|
         page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=wikibase")
