@@ -39,7 +39,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 define( 'WBC_VERSION', '0.4 alpha' );
 
 $wgExtensionCredits['other'][] = array(
-	'path' => __DIR__,
+	'path' => __FILE__,
 	'name' => 'Wikibase Client',
 	'version' => WBC_VERSION,
 	'author' => array(
@@ -64,6 +64,7 @@ $wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCach
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\SortUtils']		= $dir . 'includes/SortUtils.php';
+$wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
 
 // includes/api
 $wgAutoloadClasses['Wikibase\ApiClientInfo']		= $dir . 'includes/api/ApiClientInfo.php';
@@ -86,7 +87,7 @@ $wgAutoloadClasses['Wikibase\CachingSqlStore'] 		= $dir . 'includes/store/sql/Ca
 $wgAutoloadClasses['Wikibase\DirectSqlStore'] 		= $dir . 'includes/store/sql/DirectSqlStore.php';
 $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/EntityCacheTable.php';
 
-// tests/phpunit
+// test
 $wgAutoloadClasses['Wikibase\Test\MockRepository'] 		= $dir . 'tests/phpunit/MockRepository.php';
 
 // Hooks

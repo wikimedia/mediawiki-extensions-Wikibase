@@ -155,7 +155,6 @@ final class LibHooks {
 
 			'ByPropertyIdArray',
 			'ChangeNotifier',
-			'ChangeHandler',
 			'ChangesTable',
 			'DataTypes',
 			'ReferencedEntitiesFinder',

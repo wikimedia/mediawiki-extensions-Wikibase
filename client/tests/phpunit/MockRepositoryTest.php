@@ -31,6 +31,7 @@ use \Wikibase\SiteLink;
  * @ingroup WikibaseClient
  * @ingroup Test
  *
+ * @group Wikibase
  * @group WikibaseClient
  *
  * @licence GNU GPL v2+

@@ -178,7 +178,12 @@ class ExternalChangesLine {
 	 * @return string
 	 */
 	public static function getComment( $entityData ) {
-		if ( array_key_exists( 'comment', $entityData  ) ) {
+		//TODO: If $entityData['changes'] is set, this is a coalesced change.
+		//      Combine all the comments! Up to some max length?
+
+		if ( array_key_exists( 'composite-comment', $entityData ) ) {
+			$commentText = wfMessage( 'wbc-comment-multi', count( $entityData['composite-comment'] ) )->text();
+		} else if ( array_key_exists( 'comment', $entityData  ) ) {
 			$commentText = self::parseComment( $entityData );
 		} else {
 			$commentText = '';

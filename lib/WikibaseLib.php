@@ -90,7 +90,6 @@ $wgAutoloadClasses['Wikibase\LibHooks'] 			= $dir . 'WikibaseLib.hooks.php';
 
 // includes
 $wgAutoloadClasses['Wikibase\ByPropertyIdArray'] 		= $dir . 'includes/ByPropertyIdArray.php';
-$wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 			= $dir . 'includes/ChangeNotifier.php';
 $wgAutoloadClasses['Wikibase\ChangeNotificationJob']	= $dir . 'includes/ChangeNotificationJob.php';
 $wgAutoloadClasses['Wikibase\ChangesTable'] 			= $dir . 'includes/ChangesTable.php';
@@ -212,7 +211,6 @@ $wgAutoloadClasses['Wikibase\Test\SerializerBaseTest'] 		= $dir . 'tests/phpunit
 $wgAutoloadClasses['Wikibase\Test\EntitySerializerBaseTest']= $dir . 'tests/phpunit/serializers/EntitySerializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityTestCase']          = $dir . 'tests/phpunit/entity/EntityTestCase.php';
 
-
 // TODO: this is not nice, figure out a better design
 $wgExtensionFunctions[] = function() {
 	global $wgDataTypes;
@@ -229,7 +227,6 @@ $wgExtensionFunctions[] = function() {
 
 $wgValueParsers['wikibase-entityid'] = 'Wikibase\Lib\EntityIdParser';
 $wgDataValues['wikibase-entityid'] = 'Wikibase\EntityId';
-
 $wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 
 // Hooks
