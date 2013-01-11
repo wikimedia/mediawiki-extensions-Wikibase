@@ -300,6 +300,8 @@ final class ClientHooks {
 	 */
 	protected static function updatePage( \Title $title, Change $change ) {
 		wfProfileIn( __METHOD__ );
+		$meta = $change->getMetadata();
+		print "* #" . $change->getId() . " {$meta['parent_id']}:{$meta['rev_id']} --> " . $titleText . "\n";
 
 		if ( !$title->exists() ) {
 			wfProfileOut( __METHOD__ );
@@ -334,6 +336,10 @@ final class ClientHooks {
 			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
 		);
 
+		//FIXME: The same change may be reported to several target pages;
+		//       The comment we generate should be adapted to the role that page
+		//       plays in the change, e.g. when a sitelink changes from one page to another,
+		//       the link was effectively removed from one and added to the other page.
 		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
 
 		// @todo batch these

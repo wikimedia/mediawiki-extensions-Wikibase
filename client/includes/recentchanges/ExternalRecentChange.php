@@ -77,6 +77,10 @@ class ExternalRecentChange {
 	 * @return mixed|bool
 	 */
 	public function getParam( $param, $rc_params ) {
+		if ( is_string( $rc_params ) ) {
+			$rc_params = unserialize( $rc_params );
+		}
+
 		if ( is_array( $rc_params ) && array_key_exists( 'wikibase-repo-change', $rc_params ) ) {
 			$metadata = $rc_params['wikibase-repo-change'];
 			if ( is_array( $metadata ) && array_key_exists( $param, $metadata ) ) {
@@ -112,26 +116,32 @@ class ExternalRecentChange {
 			'recentchanges',
 			array( 'rc_id', 'rc_timestamp', 'rc_type', 'rc_params' ),
 			array(
+				'rc_namespace' => $this->mAttribs['rc_namespace'],
+				'rc_title' => $this->mAttribs['rc_title'],
 				'rc_timestamp' => $this->mAttribs['rc_timestamp'],
 				'rc_type' => RC_EXTERNAL
 			),
 			__METHOD__
 		);
 
-		if ( $res->numRows() > 0 ) {
-			$changeRevId = $this->getParam( 'rev_id', $this->mAttribs['rc_params'] );
+		if ( $res->numRows() == 0 ) {
+			return false;
 		}
 
-		$match = false;
+		$changeRevId = self::getParam( 'rev_id', $this->mAttribs['rc_params'] );
+		$changeParentId = self::getParam( 'parent_id', $this->mAttribs['rc_params'] );
+
 		foreach ( $res as $rc ) {
+			$parent_id = self::getParam( 'parent_id', $rc->rc_params );
 			$rev_id = self::getParam( 'rev_id', $rc->rc_params );
 
-			if ( $rev_id === $changeRevId ) {
-				$match = true;
+			if ( $rev_id === $changeRevId
+				&& $parent_id === $changeParentId ) {
+				return true;
 			}
 		}
 
-		return $match;
+		return false;
 	}
 
 	/**

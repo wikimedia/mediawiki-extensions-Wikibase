@@ -28,6 +28,7 @@ use \ORMRow, \User;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ChangeRow extends ORMRow implements Change {
 
@@ -143,5 +144,4 @@ class ChangeRow extends ORMRow implements Change {
 	public function getObjectId() {
 		return $this->getField( 'object_id' );
 	}
-
 }
