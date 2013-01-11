@@ -6,6 +6,11 @@ use ApiBase;
 /**
  * API module to search for Wikibase entities.
  *
+ * FIXME: continuation is no longer implemented
+ * FIXME: the post-query filter can result in fewer rows returned then the limit
+ * FIXME: an entity content is obtained for each term (even in a seperate query)
+ * FIXME: this module is doing to much work. Ranking terms is not its job and should be delegated
+ *
  * @since 0.2
  *
  * @file
@@ -23,16 +28,16 @@ class ApiSearchEntities extends ApiBase {
 	 * Get the entities corresponding to the provided language and term pair.
 	 * Term means it is either a label or an alias.
 	 *
-	 *
 	 * @since 0.2
 	 *
 	 * @param string $language
 	 * @param string $term
 	 * @param string|null $entityType
+	 * @param int $limit
 	 *
 	 * @return EntityContent[]
 	 */
-	public function searchEntities( $language, $term, $entityType = null ) {
+	protected function searchEntities( $language, $term, $entityType = null, $limit = 10 ) {
 		wfProfileIn( __METHOD__ );
 
 		$terms = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
@@ -53,6 +58,7 @@ class ApiSearchEntities extends ApiBase {
 			array(
 				'caseSensitive' => false,
 				'prefixSearch' => true,
+				'LIMIT' => $limit,
 			)
 		);
 
@@ -116,19 +122,22 @@ class ApiSearchEntities extends ApiBase {
 		wfProfileIn( __METHOD__ );
 
 		$entries = array();
+
 		foreach ( $results as $result ) {
 			$entry = array();
 			$entity = $result->getEntity();
+
 			$entry['id'] = $entity->getPrefixedId();
-			$entry['url'] =
-				EntityContentFactory::singleton()->getTitleForId( $entity->getId() )->getFullUrl();
+			$entry['url'] = EntityContentFactory::singleton()->getTitleForId( $entity->getId() )->getFullUrl();
 
 			if ( $entity->getLabel( $language ) !== false ) {
 				$entry['label'] = $entity->getLabel( $language );
 			}
+
 			if ( $entity->getDescription( $language ) !== false ) {
 				$entry['description'] = $entity->getDescription( $language );
 			}
+
 			// Only include matching aliases
 			$aliases = $entity->getAliases( $language, $search );
 			$aliasEntries = array();
@@ -167,17 +176,15 @@ class ApiSearchEntities extends ApiBase {
 		$params = $this->extractRequestParams();
 
 		$entries = $this->sortByScore( $this->getSearchEntries(
-			$this->searchEntities( $params['language'], $params['search'], $params['type'] ),
+			$this->searchEntities( $params['language'], $params['search'], $params['type'], $params['limit'] ),
 			$params['language'], $params['search']
 		) );
-
-		$totalhits = count( $entries );
 
 		$this->getResult()->addValue(
 			null,
 			'searchinfo',
 			array(
-				'totalhits' => $totalhits,
+				'totalhits' => count( $entries ),
 				'search' => $params['search']
 			)
 		);
@@ -187,25 +194,6 @@ class ApiSearchEntities extends ApiBase {
 			'search',
 			array()
 		);
-
-		if ( $params['limit'] !== 0 && $totalhits > $params['limit'] ) {
-			$continue = $params['continue'];
-			$limit = $params['limit'];
-			if ( $continue !== 0 ) {
-				$entries = array_slice( $entries, $continue - 1, $limit );
-			} else {
-				$entries = array_slice( $entries, 0, $limit );
-			}
-
-			if ( ( $continue + $limit ) <= $totalhits ) {
-				$searchcontinue['search']['continue'] = $continue + $limit + 1;
-				$this->getResult()->addValue(
-						null,
-						'search-continue',
-						$searchcontinue
-				);
-			}
-		}
 
 		$this->getResult()->addValue(
 			null,

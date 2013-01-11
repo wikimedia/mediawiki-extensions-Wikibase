@@ -417,11 +417,18 @@ class TermSqlCache implements TermCache {
 
 		$dbr = $this->getReadDb();
 
+		$queryOptions = array();
+
+		if ( array_key_exists( 'LIMIT', $options ) ) {
+			$queryOptions['LIMIT'] = $options['LIMIT'];
+		}
+
 		$obtainedTerms = $dbr->select(
 			$this->tableName,
 			$selectionFields,
 			implode( ' OR ', $conditions ),
-			__METHOD__
+			__METHOD__,
+			$queryOptions
 		);
 
 		return $this->buildTermResult( $obtainedTerms );
