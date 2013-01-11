@@ -271,6 +271,51 @@ class TermSqlCache implements TermCache {
 	}
 
 	/**
+	 * Returns the terms stored for the given entities.
+	 *
+	 * @see TermCache::getTermsOfEntities
+	 *
+	 * @param EntityId[] $ids
+	 * @param string $entityType
+	 * @param string|null $language Language code
+	 *
+	 * @return Term[]
+	 */
+	public function getTermsOfEntities( array $ids, $entityType, $language = null ) {
+		$entityIdentifiers = array(
+			'term_entity_type' => $entityType
+		);
+		if ( $language !== null ) {
+			$entityIdentifiers->term_language = $language;
+		}
+
+		$idConds = array();
+		foreach ( $ids as $id ) {
+			$idConds[] = 'term_entity_id = ' . $id->getNumericId();
+		}
+		$entityIdentifiers[] = '(' . implode( ' OR ', $idConds ) . ')';
+
+		$fields = array(
+			'term_entity_id',
+			'term_entity_type',
+			'term_language',
+			'term_type',
+			'term_text',
+		);
+
+		$dbr = $this->getReadDb();
+
+		$res = $dbr->select(
+			$this->tableName,
+			$fields,
+			$entityIdentifiers,
+			__METHOD__
+		);
+
+		return $this->buildTermResult( $res );
+	}
+
+	/**
 	 * Returns the Database from which to read.
 	 *
 	 * @since 0.1
@@ -432,6 +477,49 @@ class TermSqlCache implements TermCache {
 		);
 
 		return $this->buildTermResult( $obtainedTerms );
+	}
+
+	/**
+	 * @see TermCache::getMatchingIDs
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $terms
+	 * @param string $entityType
+	 * @param array $options
+	 *
+	 * @return EntityId[]
+	 */
+	public function getMatchingIDs( array $terms, $entityType, array $options = array() ) {
+		if ( empty( $terms ) ) {
+			return array();
+		}
+
+		$conditions = $this->termsToConditions( $terms, null, $entityType, false, $options );
+
+		$selectionFields = array( 'term_entity_id' );
+
+		$dbr = $this->getReadDb();
+
+		$queryOptions = array( 'DISTINCT' );
+
+		if ( array_key_exists( 'LIMIT', $options ) ) {
+			$queryOptions['LIMIT'] = $options['LIMIT'];
+		}
+
+		$obtainedIDs = $dbr->select(
+			$this->tableName,
+			$selectionFields,
+			implode( ' OR ', $conditions ),
+			__METHOD__,
+			$queryOptions
+		);
+
+		$result = array();
+		foreach ( $obtainedIDs as $obtainedID ) {
+			$result[] = new EntityId( $entityType, (int)$obtainedID->term_entity_id );
+		}
+		return $result;
 	}
 
 	/**

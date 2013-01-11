@@ -79,6 +79,18 @@ interface TermCache extends TermCombinationMatchFinder {
 	public function getTermsOfEntity( EntityId $id );
 
 	/**
+	 * Returns the terms stored for the given entities. Can be filtered by language.
+	 * Note that the entities must all be of the given type.
+	 *
+	 * @param EntityId[] $ids
+	 * @param string $entityType
+	 * @param string|null $language language code
+	 *
+	 * @return Term[]
+	 */
+	public function getTermsOfEntities( array $ids, $entityType, $language = null );
+
+	/**
 	 * Returns if a term with the specified parameters exists.
 	 *
 	 * @since 0.1
@@ -118,6 +130,29 @@ interface TermCache extends TermCombinationMatchFinder {
 	 * @return array
 	 */
 	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() );
+
+	/**
+	 * Returns the IDs that match the provided conditions.
+	 *
+	 * $terms is an array of Term objects. Terms are joined by OR.
+	 * The fields of the terms are joined by AND.
+	 *
+	 * A single entityType has to be provided.
+	 *
+	 * @since 0.4
+	 *
+	 * @param Term[] $terms
+	 * @param string $entityType
+	 * @param array $options
+	 *        Accepted options are:
+	 *        - caseSensitive: boolean, default true
+	 *        - prefixSearch: boolean, default false
+	 *        - LIMIT: int, defaults to none
+	 *
+	 * @return EntityId[]
+	 */
+	public function getMatchingIDs( array $terms, $entityType, array $options = array() );
+
 
 	/**
 	 * Clears all terms from the cache.
