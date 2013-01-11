@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADg3//+og\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-11T21:24:46Z",
+      "side": 1,
+      "message": "It seems like vim has made some newlines that confuses gerrit!",
+      "revId": "f3ee00710b950df20b5c4c5a368d529691a06aef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
