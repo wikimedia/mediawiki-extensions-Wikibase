@@ -6,10 +6,12 @@ use ApiBase;
 /**
  * API module to search for Wikibase entities.
  *
- * FIXME: continuation is no longer implemented
- * FIXME: the post-query filter can result in fewer rows returned then the limit
- * FIXME: an entity content is obtained for each term (even in a seperate query)
  * FIXME: this module is doing to much work. Ranking terms is not its job and should be delegated
+ * FIXME: the continuation currently relies on the search order returned by the TermStore
+ *
+ * Note: Continuation only works for a rather small number of entities. It is assumed that a large
+ * number of entities will not be searched through by human editors, and that bots cannot search
+ * through them anyway.
  *
  * @since 0.2
  *
@@ -34,13 +36,14 @@ class ApiSearchEntities extends ApiBase {
 	 * @param string $term
 	 * @param string|null $entityType
 	 * @param int $limit
+	 * @param bool $prefixSearch
 	 *
 	 * @return EntityContent[]
 	 */
-	protected function searchEntities( $language, $term, $entityType = null, $limit = 10 ) {
+	protected function searchEntities( $language, $term, $entityType, $limit, $prefixSearch  ) {
 		wfProfileIn( __METHOD__ );
 
-		$terms = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
+		$ids = StoreFactory::getStore()->newTermCache()->getMatchingIDs(
 			array(
 				new Term( array(
 					'termType' 		=> Term::TYPE_LABEL,
@@ -53,60 +56,16 @@ class ApiSearchEntities extends ApiBase {
 					'termText' 		=> $term
 				) )
 			),
-			null,
 			$entityType,
 			array(
 				'caseSensitive' => false,
-				'prefixSearch' => true,
+				'prefixSearch' => $prefixSearch,
 				'LIMIT' => $limit,
 			)
 		);
 
-		$entities = array();
-
-		/**
-		 * @var Term $term
-		 */
-		foreach ( $terms as $term ) {
-			$entityId = new EntityId( $entityType, $term->getEntityId() );
-			$entity = EntityContentFactory::singleton()->getFromId( $entityId );
-
-			if ( $entity !== null ) {
-				$entities[] = $entity;
-			}
-		}
-
 		wfProfileOut( __METHOD__ );
-		return $entities;
-	}
-
-	/**
-	 * Sort search array by score
-	 *
-	 * @since 0.2
-	 *
-	 * @param array $entries
-	 *
-	 * @return array $entries
-	 */
-	private function sortByScore( $entries ) {
-		wfProfileIn( __METHOD__ );
-
-		$sortArray = array();
-		foreach ( $entries as $entry ) {
-			if ( isset( $entry["score"] ) ) {
-				$sortArray[] = $entry["score"];
-			} else {
-				$sortArray[] = 0;
-			}
-		}
-
-		if ( $entries !== array() ) {
-			array_multisort( $sortArray, SORT_DESC, $entries );
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $entries;
+		return $ids;
 	}
 
 	/**
@@ -118,49 +77,54 @@ class ApiSearchEntities extends ApiBase {
 	 * @param string $language
 	 * @param string $search
 	 */
-	private function getSearchEntries( $results, $language, $search ) {
+	private function getSearchEntries( $params ) {
 		wfProfileIn( __METHOD__ );
+
+		// Gets exact matches. If there are not enough exact matches, it gets prefixed matches
+		$limit = $params['limit'] + $params['continue'] + 1;
+		$ids = $this->searchEntities( $params['language'], $params['search'], $params['type'], $limit, false );
+		if ( count( $ids ) < $limit ) {
+			$ids = $this->searchEntities( $params['language'], $params['search'], $params['type'], $limit, true );
+		}
+
+		$terms = StoreFactory::getStore()->newTermCache()->getTermsOfEntities( $ids, $params['type'], $params['language'] );
 
 		$entries = array();
 
-		foreach ( $results as $result ) {
+		/**
+		 * var EntityId $id
+		 */
+		foreach ( $ids as $id ) {
 			$entry = array();
-			$entity = $result->getEntity();
 
-			$entry['id'] = $entity->getPrefixedId();
-			$entry['url'] = EntityContentFactory::singleton()->getTitleForId( $entity->getId() )->getFullUrl();
+			$entry['id'] = $id->getPrefixedId();
+			$entry['url'] = EntityContentFactory::singleton()->getTitleForId( $id )->getFullUrl();
 
-			if ( $entity->getLabel( $language ) !== false ) {
-				$entry['label'] = $entity->getLabel( $language );
-			}
-
-			if ( $entity->getDescription( $language ) !== false ) {
-				$entry['description'] = $entity->getDescription( $language );
-			}
-
-			// Only include matching aliases
-			$aliases = $entity->getAliases( $language, $search );
-			$aliasEntries = array();
-
-			foreach ( $aliases as $alias ) {
-				if ( preg_match( "/^" . preg_quote( $search ) . "/i", $alias ) !== 0 ) {
-					$aliasEntries[] = $alias;
+			$aliases = array();
+			foreach ( $terms as $term ) {
+				if ( $term->getEntityId() === $id->getNumericId() ) {
+					if ( $term->getType() === 'label' ) {
+						$entry['label'] = $term->getText();
+					}
+					if ( $term->getType() === 'description' ) {
+						$entry['description'] = $term->getText();
+					}
+					if ( $term->getType() === 'alias' ) {
+						// Only include matching aliases
+						// TODO This needs to be rethought when a different search engine is used
+						if ( preg_match( "/^" . preg_quote( $params['search'] ) . "/i", $term->getText() ) !== 0 ) {
+							$aliases[] = $term->getText();
+						}
+					}
 				}
 			}
 
-			if ( count( $aliasEntries ) > 0 ) {
-				$entry['aliases'] = $aliasEntries;
+			if ( count( $aliases ) > 0 ) {
+				$entry['aliases'] = $aliases;
 				$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
 			}
 
-			$scoreCalculator = new TermMatchScoreCalculator( $entry, $search );
-			$score = $scoreCalculator->calculateScore();
-			if ( $score > 0 ) {
-				$entry['score'] = $score;
-			}
-			if ( !in_array( $entry, $entries ) ) {
-				$entries[] = $entry;
-			}
+			$entries[] = $entry;
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -175,16 +139,12 @@ class ApiSearchEntities extends ApiBase {
 
 		$params = $this->extractRequestParams();
 
-		$entries = $this->sortByScore( $this->getSearchEntries(
-			$this->searchEntities( $params['language'], $params['search'], $params['type'], $params['limit'] ),
-			$params['language'], $params['search']
-		) );
+		$entries = $this->getSearchEntries( $params );
 
 		$this->getResult()->addValue(
 			null,
 			'searchinfo',
 			array(
-				'totalhits' => count( $entries ),
 				'search' => $params['search']
 			)
 		);
@@ -194,6 +154,20 @@ class ApiSearchEntities extends ApiBase {
 			'search',
 			array()
 		);
+
+		$totalHits = count ( $entries );
+		$entries = array_slice( $entries, $params['continue'], $params['limit'] );
+
+		$allowedParams = $this->getAllowedParams();
+		$maxContinuation = $allowedParams['continue'][ApiBase::PARAM_MAX];
+		if (( $totalHits > ( $params['continue'] + $params['limit'] ) )
+			&& ( ( $totalHits + 1 ) <  $maxContinuation )) {
+			$this->getResult()->addValue(
+				null,
+				'search-continue',
+				$totalHits - 1
+			);
+		}
 
 		$this->getResult()->addValue(
 			null,
@@ -216,8 +190,6 @@ class ApiSearchEntities extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	public function getAllowedParams() {
-		// TODO: We probably need a flag for fuzzy searches. This is
-		// only a boolean flag.
 		return array(
 			'search' => array(
 				ApiBase::PARAM_TYPE => 'string',
@@ -234,10 +206,16 @@ class ApiSearchEntities extends ApiBase {
 			'limit' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_DFLT => 7,
+				ApiBase::PARAM_MAX => ApiBase::LIMIT_SML1,
+				ApiBase::PARAM_MIN => 0,
+				ApiBase::PARAM_RANGE_ENFORCE => true,
 			),
 			'continue' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_DFLT => 0,
+				ApiBase::PARAM_MAX => ApiBase::LIMIT_SML1,
+				ApiBase::PARAM_MIN => 0,
+				ApiBase::PARAM_RANGE_ENFORCE => true,
 			),
 		);
 	}
@@ -246,14 +224,12 @@ class ApiSearchEntities extends ApiBase {
 	 * @see ApiBase::getParamDescription
 	 */
 	public function getParamDescription() {
-		// we probably need a flag for fuzzy searches
 		return array(
-			'search' => 'Search for this initial text.',
-			'language' => 'Search within this language.',
+			'search' => 'Search for this text.',
+			'language' => 'Search in this language.',
 			'type' => 'Search for this type of entity.',
-			'limit' => array( 'Limit to this number of non-exact matches',
-				"The value '0' will return all found matches." ),
-			'continue' => 'Offset where to continue when in a (limited) search continuation',
+			'limit' => 'Maximal number of results',
+			'continue' => 'Offset where to continue a search',
 		);
 	}
 
