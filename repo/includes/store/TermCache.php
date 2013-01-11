@@ -113,6 +113,7 @@ interface TermCache extends TermCombinationMatchFinder {
 	 *        Accepted options are:
 	 *        - caseSensitive: boolean, default true
 	 *        - prefixSearch: boolean, default false
+	 *        - LIMIT: int, defaults to none
 	 *
 	 * @return array
 	 */
