@@ -30,4 +30,4 @@
  LANGUAGE_NAME: "english"
 
  # Enable/disable testing of experimental features
- EXPERIMENTAL: false
+ EXPERIMENTAL: true

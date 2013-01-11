@@ -13,7 +13,7 @@ label_changed = label + " stuff"
 description = generate_random_string(20)
 description_changed = description + " stuff"
 
-describe "Check functionality of property view" do
+describe "Check functionality of property view", :experimental => true do
   before :all do
     # set up: create property
     visit_page(NewPropertyPage) do |page|

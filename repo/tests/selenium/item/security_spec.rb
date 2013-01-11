@@ -56,7 +56,7 @@ describe "Check for security issues" do
       end
     end
   end
-  context "check for JS injection for property labels/descriptions" do
+  context "check for JS injection for property labels/descriptions", :experimental => true do
     it "should check if no JS injection is possible for property labels" do
       visit_page(NewPropertyPage) do |page|
         page.create_new_property(generate_random_string(10), generate_random_string(20))
@@ -83,7 +83,7 @@ describe "Check for security issues" do
         page.firstHeading?.should be_true
       end
     end
-    context "check for JS injection for property aliases" do
+    context "check for JS injection for property aliases", :experimental => true do
       it "should check if no JS injection is possible for aliases" do
         visit_page(NewPropertyPage) do |page|
           page.create_new_property(generate_random_string(10), generate_random_string(20))
