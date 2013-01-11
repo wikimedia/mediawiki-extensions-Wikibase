@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Special page for setting the label of a Wikibase entity.
+ * Special page for setting the aliases of a Wikibase entity.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-class SpecialSetLabel extends SpecialSetEntity {
+class SpecialSetAliases extends SpecialSetEntity {
 
 	/**
 	 * Constructor
@@ -34,7 +34,7 @@ class SpecialSetLabel extends SpecialSetEntity {
 	 * @since 0.4
 	 */
 	public function __construct() {
-		parent::__construct( 'SetLabel' );
+		parent::__construct( 'SetAliases' );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class SpecialSetLabel extends SpecialSetEntity {
 	 * @return string
 	 */
 	protected function getPostedValue() {
-		return $this->getRequest()->getVal( 'label' );
+		return $this->getRequest()->getVal( 'aliases' );
 	}
 
 	/**
@@ -59,7 +59,7 @@ class SpecialSetLabel extends SpecialSetEntity {
 	 * @return string
 	 */
 	protected function getValue( $entityContent, $language ) {
-		return $entityContent === null ? '' : $entityContent->getEntity()->getLabel( $language );
+		return $entityContent === null ? '' : implode( '|', $entityContent->getEntity()->getAliases( $language ) );
 	}
 
 	/**
@@ -75,15 +75,8 @@ class SpecialSetLabel extends SpecialSetEntity {
 	 * @return Status
 	 */
 	protected function setValue( $entityContent, $language, $value, &$summary ) {
-		if( $value === '' ) {
-			$entityContent->getEntity()->removeLabel( $language );
-			$i18n = 'wbsetlabel-remove';
-		}
-		else {
-			$entityContent->getEntity()->setLabel( $language, $value );
-			$i18n = 'wbsetlabel-set';
-		}
-		$summary = $this->getSummary( $language, $value, $i18n );
+		$entityContent->getEntity()->setAliases( $language, explode( '|', $value ) );
+		$summary = $this->getSummary( $language, $value, 'wbsetaliases-set' );
 		return \Status::newGood();
 	}
 }

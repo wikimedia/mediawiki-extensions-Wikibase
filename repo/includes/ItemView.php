@@ -71,6 +71,9 @@ class ItemView extends EntityView {
 			$siteLinks = $safetyCopy;
 		}
 
+		// Link to SpecialPage
+		$editLink = ''; // $this->getEditUrl( $item->getEntity()->getPrefixedId(), null, 'SetSiteLink' );
+
 		/**
 		 * @var SiteLink $link
 		 */
@@ -87,7 +90,7 @@ class ItemView extends EntityView {
 					$alternatingClass,
 					htmlspecialchars( $link->getSite()->getGlobalId() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, '', 'td' ) // TODO: add link to SpecialPage
+					$this->getHtmlForEditSection( $item, $lang, $editLink, 'td' )
 				);
 
 			} else {
@@ -103,7 +106,7 @@ class ItemView extends EntityView {
 					htmlspecialchars( $languageCode ), // TODO: get an actual site id rather then just the language code
 					htmlspecialchars( $link->getUrl() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, '', 'td' ) // TODO: add link to SpecialPage
+					$this->getHtmlForEditSection( $item, $lang, $editLink /* . '/' . $languageCode */, 'td' )
 				);
 			}
 		}
@@ -113,7 +116,7 @@ class ItemView extends EntityView {
 
 		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
 			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->text() : '',
-			$this->getHtmlForEditSection( $item, $lang, '', 'td', 'add', !$isFull ) // TODO: add link to SpecialPage
+			$this->getHtmlForEditSection( $item, $lang, $editLink, 'td', 'add', !$isFull )
 		);
 
 		return $html . wfTemplate( 'wb-sitelinks-table', $thead, $tbody, $tfoot );
