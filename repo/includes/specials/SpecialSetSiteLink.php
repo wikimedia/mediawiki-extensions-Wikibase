@@ -1,7 +1,9 @@
 <?php
 
+use Wikibase\SiteLink;
+
 /**
- * Special page for setting the label of a Wikibase entity.
+ * Special page for setting the sitelink of a Wikibase entity.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,34 +28,49 @@
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-class SpecialSetLabel extends SpecialSetEntity {
+class SpecialSetSiteLink extends SpecialSetEntity {
 
-	/**
-	 * Constructor
-	 *
-	 * @since 0.4
-	 */
 	public function __construct() {
-		parent::__construct( 'Label' );
+		parent::__construct( 'SiteLink' );
 	}
 
 	/**
 	 * @see SpecialSetEntity::getValue()
 	 */
 	protected function getValue( $entityContent, $language ) {
-		return $entityContent ? $entityContent->getEntity()->getLabel( $language ) : '';
+		if( !$entityContent ) {
+			return '';
+		}
+		$sitelink = $entityContent->getEntity()->getSitelink( $language . 'wiki' );
+		if( !$sitelink ) {
+			return '';
+		}
+		return $sitelink->getPage();
 	}
 
 	/**
 	 * @see SpecialSetEntity::setValue()
 	 */
 	protected function setValue( $entityContent, $language, $value ) {
+		$site = \Sites::singleton()->getSite( $language . 'wiki' );
+		$status = \Status::newGood();
+
+		if( $site === false ) {
+			$status->error( 'wikibase-setentity-invalid-langcode', $language ); // should not happen (strike out?)
+			return $status;
+		}
+		if ( $site->normalizePageName( $value ) === false && $value !== '' ) {
+			$status->error( 'wikibase-error-ui-no-external-page' );
+			return $status;
+		}
+
 		if( $value === '' ) {
-			$entityContent->getEntity()->removeLabel( $language );
+			$entityContent->getEntity()->removeSitelink( $language . 'wiki' );
 		}
 		else {
-			$entityContent->getEntity()->setLabel( $language, $value );
+			$siteLink = new SiteLink( $site, $value );
+			$entityContent->getEntity()->addSiteLink( $siteLink, 'set' );
 		}
-		return \Status::newGood();
+		return $status;
 	}
 }
