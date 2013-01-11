@@ -101,7 +101,7 @@ return call_user_func( function() {
 		'wikibase.utilities.jQuery' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
-				'wikibase.utilities/wikibase.utilities.jQuery.js'
+				'wikibase.utilities/wikibase.utilities.jQuery.js',
 			),
 			'dependencies' => array(
 				'wikibase.utilities',
@@ -191,6 +191,7 @@ return call_user_func( function() {
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
 				'wikibase.utilities.jQuery.ui.tagadata',
+				'jquery.nativeEventHandler',
 				'jquery.inputAutoExpand',
 				'jquery.ui.suggester',
 				'jquery.ui.entityselector',
@@ -262,6 +263,12 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.nativeEventHandler' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.nativeEventHandler.js'
+			)
+		),
+
 		'jquery.eachchange' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.eachchange.js'
@@ -314,6 +321,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.eachchange',
+				'jquery.nativeEventHandler',
 				'jquery.ui.entityselector',
 				'wikibase.datamodel',
 				'dataTypes.jquery.valueview.views',

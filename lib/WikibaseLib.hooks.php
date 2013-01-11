@@ -249,6 +249,7 @@ final class LibHooks {
 				'wikibase.ui.PropertyEditTool',
 				'jquery.ui.suggester',
 				'jquery.ui.entityselector',
+				'jquery.nativeEventHandler',
 				'jquery.client'
 			),
 			'localBasePath' => __DIR__,
