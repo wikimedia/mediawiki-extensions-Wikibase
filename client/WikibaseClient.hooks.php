@@ -99,6 +99,32 @@ final class ClientHooks {
 	}
 
 	/**
+	 * Add new javascript testing modules. This is called after the addition of MediaWiki core test suites.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
+	 *
+	 * @since 0.4
+	 *
+	 * @param array &$testModules
+	 * @param \ResourceLoader &$resourceLoader
+	 *
+	 * @return boolean
+	 */
+	 public static function onRegisterQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
+		$testModules['qunit']['wikibase.tests'] = array(
+			'scripts' => array(
+				'tests/qunit/wbclient.watchlist.tests.js'
+			),
+			'dependencies' => array(
+				'wbclient.watchlist',
+				'wbclient.watchlist.css'
+			),
+            'localBasePath' => __DIR__,
+            'remoteExtPath' => 'Wikibase/client'
+		);
+		return true;
+	}
+
+	/**
 	 * Deletes all the data stored on the repository.
 	 *
 	 * @since 0.2
@@ -396,7 +422,9 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onOldChangesListRecentChangesLine( \ChangesList &$changesList, &$s, \RecentChange $rc ) {
+	public static function onOldChangesListRecentChangesLine( \ChangesList &$changesList, &$s,
+		\RecentChange $rc, array &$classes ) {
+
 		wfProfileIn( __METHOD__ );
 
 		$rcType = $rc->getAttribute( 'rc_type' );
@@ -407,6 +435,7 @@ final class ClientHooks {
 				if ( $line == false ) {
 					return false;
 				}
+				$classes[] = 'wikibase-edit';
 				$s = $line;
 			}
 		}
@@ -642,6 +671,24 @@ final class ClientHooks {
 			'section' => 'rc/advancedrc',
 		);
 
+		return true;
+	}
+
+	/**
+	 * Adds a JS stuff that provides a toggle for wikibase edits on the watchlist
+	 *
+	 * @param \SpecialPage $special
+	 * @param string $subpage
+	 *
+	 * @return bool
+	 */
+	public static function onSpecialPageBeforeExecute( \SpecialPage $special, $subpage ) {
+		if ( $special->getName() === 'Watchlist' ) {
+			$special->getOutput()->addModules( array(
+				'wbclient.watchlist.css',
+				'wbclient.watchlist',
+			) );
+		}
 		return true;
 	}
 

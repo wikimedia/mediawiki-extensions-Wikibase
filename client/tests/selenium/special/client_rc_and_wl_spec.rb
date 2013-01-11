@@ -41,6 +41,9 @@ describe "Check client RC & WL" do
         page.watch_article(article_title)
       end
       visit_page(WatchlistPage) do |page|
+        page.wlFirstResultUserLink_element.text.downcase.include?(WIKI_ADMIN_USERNAME.downcase).should be_false
+		page.wlShowWikidataToggle?.should be_true
+        page.wlShowWikidataToggle
         page.wlFirstResultDiffLink?.should be_true
         page.wlFirstResultUserLink?.should be_true
         page.wlFirstResultUserLink_element.text.downcase.include?(WIKI_ADMIN_USERNAME.downcase).should be_true
@@ -51,12 +54,14 @@ describe "Check client RC & WL" do
         page.wlFirstResultIDLink_element.text.include?(item_id).should be_true
       end
       visit_page(WatchlistPage) do |page|
+        page.wlShowWikidataToggle
         page.wlFirstResultUserLink
       end
       on_page(ItemPage) do |page|
         page.mwFirstHeading.downcase.should == "user:" + WIKI_ADMIN_USERNAME.downcase
       end
       visit_page(WatchlistPage) do |page|
+        page.wlShowWikidataToggle
         page.wlFirstResultHistoryLink
       end
       on_page(ClientPage) do |page|
@@ -64,6 +69,7 @@ describe "Check client RC & WL" do
         page.current_url.include?("action=history").should == true
       end
       visit_page(WatchlistPage) do |page|
+        page.wlShowWikidataToggle
         page.wlFirstResultDiffLink
       end
       on_page(ClientPage) do |page|
@@ -71,12 +77,14 @@ describe "Check client RC & WL" do
         page.clientArticleTitle.include?("Difference").should == true
       end
       visit_page(WatchlistPage) do |page|
+        page.wlShowWikidataToggle
         page.wlFirstResultLabelLink
       end
       on_page(ClientPage) do |page|
         page.clientArticleTitle.should == article_title
       end
       visit_page(WatchlistPage) do |page|
+        page.wlShowWikidataToggle
         page.wlFirstResultIDLink
       end
       on_page(ItemPage) do |page|
