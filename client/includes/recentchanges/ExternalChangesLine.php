@@ -178,6 +178,9 @@ class ExternalChangesLine {
 	 * @return string
 	 */
 	public static function getComment( $entityData ) {
+		//TODO: If $entityData['changes'] is set, this is a coalesced change.
+		//      Combine all the comments! Up to some max length?
+
 		if ( array_key_exists( 'comment', $entityData  ) ) {
 			$commentText = self::parseComment( $entityData );
 		} else {

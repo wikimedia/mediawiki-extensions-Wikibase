@@ -76,10 +76,10 @@ final class ClientHooks {
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
-			'MockRepository',
 			'includes/LangLinkHandler',
 
 			'includes/CachedEntity',
+			'includes/ChangeHandler',
 			'includes/ClientUtils',
 			'includes/EntityCacheUpdater',
 
@@ -88,6 +88,8 @@ final class ClientHooks {
 			'includes/store/EntityCacheTable',
 			'includes/store/CachingSqlStore',
 			'includes/store/DirectSqlStore',
+
+			'MockRepository',
 		);
 
 		foreach ( $testFiles as $file ) {
@@ -334,6 +336,10 @@ final class ClientHooks {
 			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
 		);
 
+		//FIXME: The same change may be reported to several target pages;
+		//       The comment we generate should be adapted to the role that page
+		//       plays in the change, e.g. when a sitelink changes from one page to another,
+		//       the link was effectively removed from one and added to the other page.
 		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
 
 		// @todo batch these
@@ -444,10 +450,7 @@ final class ClientHooks {
 					return false;
 				}
 
-				if ( isset( $classes ) || !is_array( $classes ) ) {
-					$classes[] = 'wikibase-edit';
-				}
-
+				$classes[] = 'wikibase-edit';
 				$s = $line;
 			}
 		}
