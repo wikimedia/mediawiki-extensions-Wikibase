@@ -101,7 +101,8 @@ return call_user_func( function() {
 		'wikibase.utilities.jQuery' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
-				'wikibase.utilities/wikibase.utilities.jQuery.js'
+				'wikibase.utilities/wikibase.utilities.jQuery.js',
+				'wikibase.utilities/wikibase.utilities.jQuery.nativeEventHandler.js'
 			),
 			'dependencies' => array(
 				'wikibase.utilities',
