@@ -106,6 +106,7 @@ class ChangeNotificationJob extends \Job {
 
 			// load actual change records from the changes table
 			// TODO: allow mock store for testing!
+			// FIXME: This only works when executed on the client! check WBC_VERSION first!
 			$table = ClientStoreFactory::getStore()->newChangesTable();
 			$this->changes = $table->selectObjects( null, array( 'id' => $ids ), array(), __METHOD__ );
 
