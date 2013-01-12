@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAADhH///nM\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-12T20:24:52Z",
+      "side": 1,
+      "message": "I would add a note about the current continuation relying on the result order being the same because the result is not getting sorted.\n\nAnd another note on that only small offsets are supported because we are actually using an offset rather then something like \"id \u003e\u003d continuation-id\"",
+      "revId": "2618619356d89d067b5877008b0f81d7f2e06bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///mw\u003d",
+        "filename": "repo/includes/store/TermCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-12T20:24:52Z",
+      "side": 1,
+      "message": "missing since tag :)",
+      "revId": "2618619356d89d067b5877008b0f81d7f2e06bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///mk\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-12T20:24:52Z",
+      "side": 1,
+      "message": "missing an if empty return empty array",
+      "revId": "2618619356d89d067b5877008b0f81d7f2e06bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///ms\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-12T20:24:52Z",
+      "side": 1,
+      "message": "Please verify that the provided entities all have the correct type and throw an exception when this is not the case. Right now we\u0027ll end up with rather odd behaviour when someone fails to spot the notice in the interface :)",
+      "revId": "2618619356d89d067b5877008b0f81d7f2e06bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH///rY\u003d",
         "filename": "repo/includes/store/sql/TermSqlCache.php",
         "patchSetId": 3
@@ -31,6 +99,58 @@
       "side": 1,
       "message": "MediaWiki does not have a way to represent multi-level conjunctions and disjunctions in its db abstraction layer (or anywhere else). This class contains a bunch of logic related to handling such structures, which ideally it would not have to deal with.",
       "parentUuid": "AAADhH///rY\u003d",
+      "revId": "2618619356d89d067b5877008b0f81d7f2e06bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///m8\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-12T20:24:52Z",
+      "side": 1,
+      "message": "Oh... this is new code :)\n\nThis can indeed be done better:\n\n $entityIdentifiers[\u0027term_entity_id\u0027] \u003d $numericIds // where this value is in the form of array( 1, 2, 3 )",
+      "parentUuid": "AAADhH///oI\u003d",
+      "revId": "2618619356d89d067b5877008b0f81d7f2e06bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///mo\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-12T20:24:52Z",
+      "side": 1,
+      "message": "Please verify that the provided entities all have the correct type and throw an exception when this is not the case.",
+      "revId": "2618619356d89d067b5877008b0f81d7f2e06bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///m4\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-12T20:24:52Z",
+      "side": 1,
+      "message": "Arrays fed in here are imploded in the same way as what you are doing, which thus is redundant",
       "revId": "2618619356d89d067b5877008b0f81d7f2e06bde",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
