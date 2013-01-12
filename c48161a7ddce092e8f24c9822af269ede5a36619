@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH///eg\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-12T21:57:45Z",
+      "side": 1,
+      "message": "What I mean is that it looks like this line could just be\n\n  $conditions,",
+      "revId": "c48161a7ddce092e8f24c9822af269ede5a36619",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
