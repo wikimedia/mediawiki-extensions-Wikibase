@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH///rE\u003d",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-12T16:50:18Z",
+      "side": 1,
+      "message": "not sure it makes a difference, but probably should not remove the comma.  (and, as you did, add just English here; translatewiki takes care of the rest)",
+      "revId": "d72e27da7e2c8c426d618846804a114bd383a3be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///rA\u003d",
+        "filename": "repo/includes/specials/SpecialSetDescription.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-12T16:50:18Z",
+      "side": 1,
+      "message": "this is still misformatted.  something went very wrong here :(",
+      "revId": "d72e27da7e2c8c426d618846804a114bd383a3be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
