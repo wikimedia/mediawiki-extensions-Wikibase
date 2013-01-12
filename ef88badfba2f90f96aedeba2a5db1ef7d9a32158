@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH///e4\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-12T21:25:21Z",
+      "side": 1,
+      "message": "Get an error here:\n\nPHP Warning:  Missing argument 3 for SpecialSetEntity::setValue(), called in /var/www/common/php-master/extensions/Wikibase/repo/includes/specials/SpecialSetEntity.php on line 96\n\nThink we need to also pass $entityContent variable here",
+      "revId": "ef88badfba2f90f96aedeba2a5db1ef7d9a32158",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///fI\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-12T21:25:21Z",
+      "side": 1,
+      "message": "I realize you only copied this line as-is from SpecialSetLabel, but some people might be picky about there being no space between $lang and the closing parentheses.  \n\nPer our coding style conventions, it would be nice to add a space here. :)",
+      "revId": "ef88badfba2f90f96aedeba2a5db1ef7d9a32158",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///fY\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-12T21:25:21Z",
+      "side": 1,
+      "message": "I get an error here, \"PHP Fatal error:  Call to undefined function getValue()\" when trying to view Special:SetLabel",
+      "revId": "ef88badfba2f90f96aedeba2a5db1ef7d9a32158",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
