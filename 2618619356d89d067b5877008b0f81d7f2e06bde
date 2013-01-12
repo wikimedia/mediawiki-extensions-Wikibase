@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH///rY\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-01-12T15:04:59Z",
+      "side": 1,
+      "message": "I am unsure whether this is the right way to disjunctions using the MediaWiki DB layer. Please double check.",
+      "revId": "2618619356d89d067b5877008b0f81d7f2e06bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
