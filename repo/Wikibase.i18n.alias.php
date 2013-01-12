@@ -114,6 +114,7 @@ $specialPageAliases['ko'] = array(
 
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = array(
+	'EntityData' => array( 'ЕдиницаПодаток' ),
 	'CreateItem' => array( 'СоздајПредмет' ),
 	'NewProperty' => array( 'НовоСвојство' ),
 	'ItemByTitle' => array( 'ПредметПоНаслов' ),

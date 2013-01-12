@@ -472,7 +472,8 @@ Parameters:
 	'special-itemdisambiguation' => "This special page returns all items with a given label. It provides an interface to disambiguate them. See also Wikidata's glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].",
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by language and label.',
 	'wikibase-itemdisambiguation-lookup-language' => 'Label for the textfield holding the language id.',
-	'wikibase-itemdisambiguation-lookup-label' => 'Label for the textfield holding the language specific label. See also Wikidatas glossary for [[m:Wikidata/Glossary#label|label]].',
+	'wikibase-itemdisambiguation-lookup-label' => 'Label for the textfield holding the language specific label. See also Wikidatas glossary for [[m:Wikidata/Glossary#label|label]].
+{{Identical|Label}}',
 	'wikibase-itemdisambiguation-submit' => 'Text for the submit button in the search form.',
 	'wikibase-itemdisambiguation-nothing-found' => 'Response if the search failed because no such items have been found.',
 	'wikibase-itemdisambiguation-create' => 'Invitation to click a link and create an item with the given label.',
@@ -494,7 +495,8 @@ Parameters:
 	'wikibase-createitem-no-external-page' => 'Error message shown when a user tries to add a page that does not exist on the website choosen.',
 	'wikibase-createitem-add-sitelink-failed' => 'Error message shown when the save of a link failed.',
 	'wikibase-createitem-not-recognized-siteid' => 'Error message shown when a user tries to add a link to a site with an unknown identifier.',
-	'wikibase-createentity-label' => 'Label for the label textfield holding the label of the new item.',
+	'wikibase-createentity-label' => 'Label for the label textfield holding the label of the new item.
+{{Identical|Label}}',
 	'wikibase-createentity-description' => 'Label for the description textfield holding the description of the new item.',
 	'wikibase-createentity-submit' => 'Text for the submit button on the CreateItem special page.',
 	'special-setlabel' => 'Title of the special page that allows the user to set a label for an entity',
@@ -506,7 +508,8 @@ Parameters:
 {{Identical|ID}}',
 	'wikibase-setlabel-language' => 'Label for the input field to select the language the label should be set in.
 {{Identical|Language}}',
-	'wikibase-setlabel-label' => 'Label for the input field to type the label to set the entity to.',
+	'wikibase-setlabel-label' => 'Label for the input field to type the label to set the entity to.
+{{Identical|Label}}',
 	'wikibase-setlabel-submit' => 'Label for the button that activates the action.',
 	'wikibase-setlabel-invalid-langcode' => 'Response informing that the language code is not valid. Could give an example of a valid language code. $1 is the invalid code.
 
@@ -3371,6 +3374,13 @@ $messages['hsb'] = array(
 	'right-description-update' => 'Wopisanja aktualizować',
 );
 
+/** Hungarian (magyar)
+ * @author Tgr
+ */
+$messages['hu'] = array(
+	'wikibase-desc' => 'Strukturált adattár',
+);
+
 /** Interlingua (interlingua)
  * @author McDutchie
  */
@@ -3680,10 +3690,10 @@ $messages['is'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'sérstakt gildi',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'óþekkt gildi',
 	'wikibase-snakview-snaktypeselector-novalue' => 'ekkert gildi',
-	'wikibase-anonymouseditwarning-item' => "'''Viðvörun:''' Þú ert ekki innskráð(ur).
-Vistfang þitt skráist í breytingaskrá hlutsins.",
-	'wikibase-anonymouseditwarning-property' => "'''Viðvörun:''' Þú ert ekki innskráð(ur).
-Vistfang þitt skráist í breytingaskrá eiginleikans.",
+	'wikibase-anonymouseditwarning-item' => 'Viðvörun: Þú ert ekki innskráð(ur).
+Vistfang þitt skráist í breytingaskrá hlutsins.',
+	'wikibase-anonymouseditwarning-property' => 'Viðvörun: Þú ert ekki innskráð(ur).
+Vistfang þitt skráist í breytingaskrá eiginleikans.',
 	'wikibase-restrictionedit-tooltip-message' => 'Þessi síða er vernduð, breytingar eru óheimilar.',
 	'wikibase-blockeduser-tooltip-message' => 'Þér er bannað að breyta síðum.',
 	'wikibase-tooltip-error-details' => 'Nánar',
@@ -5803,7 +5813,17 @@ $messages['pms'] = array(
 	'wikibase-aliases-empty' => 'Gnun alias definì.',
 	'wikibase-datatype-label' => 'Sòrt ëd dat:',
 	'wikibase-snakview-property-input-placeholder' => 'propietà',
-	'wikibase-snakview-unsupporteddatatype' => 'La gestion dij valor për la sòrt ëd dat "$1" a l\'é anco\' pa apogià.',
+	'wikibase-snakview-unsupportedsnaktype' => 'Snak ëd sòrt "$1". Gestion për sta sòrt dë Snak a l\'é pa anco\' apogià.',
+	'wikibase-snakview-variation-unsupporteddatatype' => 'La gestion dij valor për la sòrt ëd dat "$1" a l\'é anco\' pa apogià.',
+	'wikibase-snakview-variations-somevalue-label' => 'valor pa conossù',
+	'wikibase-snakview-variations-novalue-label' => 'gnun valor',
+	'wikibase-snakview-snaktypeselector-value' => 'valor përsonalisà',
+	'wikibase-snakview-snaktypeselector-somevalue' => 'valor pa conossù',
+	'wikibase-snakview-snaktypeselector-novalue' => 'gnun valor',
+	'wikibase-anonymouseditwarning-item' => "Atension: a l'é nen intrà ant ël sistema.
+Soa adrëssa IP a sarà memorisà ant la stòria dle modìfiche dë sto element.",
+	'wikibase-anonymouseditwarning-property' => "Atension: a l'é nen intrà ant ël sistema. 
+Soa adrëssa IP a sarà memorisà ant la stòria dle modìfiche ëd sa propietà.",
 	'wikibase-restrictionedit-tooltip-message' => "Sta pagina a l'é protegiùa. As peul pa modifichesse.",
 	'wikibase-blockeduser-tooltip-message' => 'It ses blocà, gnente modìfiche.',
 	'wikibase-tooltip-error-details' => 'Detaj',
@@ -7086,6 +7106,10 @@ $messages['vi'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'giá trị tùy biến',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'giá trị không xác định',
 	'wikibase-snakview-snaktypeselector-novalue' => 'vô giá trị',
+	'wikibase-anonymouseditwarning-item' => 'Cảnh báo: Bạn chưa đăng nhập.
+Địa chỉ IP của bạn sẽ được ghi lại trong lịch sử sửa đổi của khoản mục này.',
+	'wikibase-anonymouseditwarning-property' => 'Cảnh báo: Bạn chưa đăng nhập.
+Địa chỉ IP của bạn sẽ được ghi lại trong lịch sử sửa đổi của thuộc tính này.',
 	'wikibase-restrictionedit-tooltip-message' => 'Trang này bị khóa không cho phép sửa đổi.',
 	'wikibase-blockeduser-tooltip-message' => 'Bạn đã bị cấm không được sửa đổi.',
 	'wikibase-tooltip-error-details' => 'Chi tiết',
