@@ -99,9 +99,16 @@ class SqlStore implements Store {
 				$updater->dropTable( 'wb_aliases' );
 				$updater->dropTable( 'wb_texts_per_lang' );
 
-				$updater->addExtensionTable(
+				$termsKeyUpdate = 'AddTermsSearchKey' . $extension;
+
+				if ( $type = 'sqlite' ) {
+					$termsKeyUpdate = 'AddTermsSearchKey.sqlite.sql';
+				}
+
+				$updater->addExtensionField(
 					'wb_terms',
-					__DIR__ . '/Wikibase' . $extension
+					'term_search_key',
+					__DIR__ . '/' . $termsKeyUpdate
 				);
 
 				$this->rebuild();
