@@ -25,6 +25,8 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
+$wgContentHandlerUseDB = true;
+
 // Define custom namespaces. Use these exact constant names.
 $baseNs = 100;
 
