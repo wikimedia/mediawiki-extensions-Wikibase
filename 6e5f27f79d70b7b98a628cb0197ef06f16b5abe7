@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH///ZA\u003d",
+        "filename": "repo/includes/store/sql/AddTermsSearchKey.sqlite.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-13T11:09:44Z",
+      "side": 1,
+      "message": "adding a not null field with no default?  doesn\u0027t work like that in sqlite.\n\nError: Cannot add a NOT NULL column with default value NULL\n\nIt appears MySQL will set a default value of \u0027\u0027 (empty string) for  the new varchar column with NOT NULL or if i insert new rows and don\u0027t specify that column.\n\nthe alternative would be adding something like default \u0027\u0027 to the field definition.",
+      "parentUuid": "AAADhH///aY\u003d",
+      "revId": "6e5f27f79d70b7b98a628cb0197ef06f16b5abe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH///aU\u003d",
         "filename": "repo/includes/store/sql/SqlStore.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH///Y4\u003d",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-13T11:09:44Z",
+      "side": 1,
+      "message": "what do you expect at 4 a.m.? :) why do we have code review and not merge our own patches, eh???",
+      "parentUuid": "AAADhH///aU\u003d",
+      "revId": "6e5f27f79d70b7b98a628cb0197ef06f16b5abe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH///aQ\u003d",
         "filename": "repo/includes/store/sql/SqlStore.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2013-01-13T04:59:19Z",
       "side": 1,
       "message": "You probably want to add code below here",
+      "revId": "6e5f27f79d70b7b98a628cb0197ef06f16b5abe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///Y8\u003d",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-13T11:09:44Z",
+      "side": 1,
+      "message": "putting it here is what I meant to do.  yes I tested the upgrade path a bunch of times with mysql and sqlite, with this change here.",
+      "parentUuid": "AAADhH///aQ\u003d",
       "revId": "6e5f27f79d70b7b98a628cb0197ef06f16b5abe7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
