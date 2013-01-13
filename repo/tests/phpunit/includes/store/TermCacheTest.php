@@ -205,7 +205,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 		$this->assertInternalType( 'array', $actual );
 		$this->assertEquals( 2, count( $actual ) );
-		
+
 		/**
 		 * @var Term $term
 		 * @var Term $expected
@@ -439,7 +439,8 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$content0 = ItemContent::newEmpty();
 		$content0->setItem( $item0 );
 		$content0->save( '', null, EDIT_NEW );
-		$id0 = $content0->getItem()->getId()->getNumericId();
+		$entityId0 = $content0->getItem()->getId();
+		$id0 = $entityId0->getNumericId();
 
 		$terms = array(
 			$id0 => array(
@@ -475,7 +476,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 			$this->assertEquals( $expected->getLanguage(), $term->getLanguage() );
 		}
 
-		$actual = $lookup->getMatchingTermCombination( $terms, null, null, $id0, Item::ENTITY_TYPE );
+		$actual = $lookup->getMatchingTermCombination( $terms, null, null, $entityId0, Item::ENTITY_TYPE );
 		$this->assertTrue( $actual === array() );
 	}
 
