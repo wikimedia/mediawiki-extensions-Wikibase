@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH///X4\u003d",
+        "filename": "repo/includes/store/sql/AddTermsSearchKey.sqlite.sql",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-13T14:12:43Z",
+      "side": 1,
+      "message": "in this case, populating the term_search_key with term_text as default is okay.  otherwise, I think one would use \u0027\u0027 or some other default that works with the code.\n\nit\u0027s still nice to run the rebuild script for term search key",
+      "revId": "f0ca0cc277df444c3f3c332eba53191aa19fe6d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
