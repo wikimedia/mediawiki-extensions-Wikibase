@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH///aY\u003d",
+        "filename": "repo/includes/store/sql/AddTermsSearchKey.sqlite.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-13T04:59:19Z",
+      "side": 1,
+      "message": "Ehh, is there no more sane way to add a field?",
+      "revId": "6e5f27f79d70b7b98a628cb0197ef06f16b5abe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///aU\u003d",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-13T04:59:19Z",
+      "side": 1,
+      "message": "Look at the above like. Not only will the new code not work properly, it breaks an existing upgrade path\n\nPlease test your changes, submit with [do not merge] or explicitly mention it\u0027s not tested",
+      "revId": "6e5f27f79d70b7b98a628cb0197ef06f16b5abe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH///aQ\u003d",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-13T04:59:19Z",
+      "side": 1,
+      "message": "You probably want to add code below here",
+      "revId": "6e5f27f79d70b7b98a628cb0197ef06f16b5abe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
