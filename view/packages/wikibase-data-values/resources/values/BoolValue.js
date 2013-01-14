@@ -76,7 +76,7 @@ dv.BoolValue.newFromJSON = function( json ) {
 	return new dv.BoolValue( json );
 };
 
-dv.BoolValue.TYPE = 'bool';
+dv.BoolValue.TYPE = 'boolean';
 
 dv.registerDataValue( dv.BoolValue );
 
