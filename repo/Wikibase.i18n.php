@@ -68,6 +68,7 @@ $messages['en'] = array(
 	'wikibase-datatype-label' => 'Data type:',
 	'wikibase-snakview-property-input-placeholder' => 'property',
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak of type "$1". Handling for this kind of Snak is not yet supported.',
+	'wikibase-snakview-choosesnaktype' => 'Choose a Snak type.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Handling of values for "$1" data type is not yet supported.',
 	'wikibase-snakview-variations-somevalue-label' => 'unknown value',
 	'wikibase-snakview-variations-novalue-label' => 'no value',
@@ -650,6 +651,7 @@ This module generates a slightly different summary (autocomment) than the other 
 	'right-label-update' => '{{doc-right|label-update}}',
 	'right-description-remove' => '{{doc-right|description-remove}}',
 	'right-description-update' => '{{doc-right|description-update}}',
+	'wikibase-snakview-choosesnaktype' => 'Displayed if no Snak type is chosen in the snakview. Asks the user to choose one.'
 );
 
 /** Achinese (Acèh)
