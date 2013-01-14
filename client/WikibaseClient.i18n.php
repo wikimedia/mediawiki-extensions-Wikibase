@@ -474,7 +474,7 @@ $messages['it'] = array(
 	'wbc-comment-sitelink-change' => 'Link linguistico modificato da $1 a $2',
 	'wbc-comment-sitelink-remove' => 'Link linguistico rimosso: $1',
 	'wbc-editlinks' => 'Modifica collegamenti',
-	'wbc-editlinkstitle' => 'Modifica collegamenti interlingua',
+	'wbc-editlinkstitle' => 'Modifica collegamenti interlinguistici',
 	'wbc-rc-hide-wikidata' => '$1 Wikidata',
 	'wbc-rc-show-wikidata-pref' => 'Mostra le modifiche di Wikidata nelle ultime modifiche',
 );

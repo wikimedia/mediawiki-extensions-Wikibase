@@ -100,6 +100,11 @@ $specialPageAliases['it'] = array(
 	'EntitiesWithoutLabel' => array( 'EntitàSenzaEtichetta' ),
 );
 
+/** Japanese (日本語) */
+$specialPageAliases['ja'] = array(
+	'NewProperty' => array( '新規プロパティ' ),
+);
+
 /** Korean (한국어) */
 $specialPageAliases['ko'] = array(
 	'EntityData' => array( '항목데이터' ),
