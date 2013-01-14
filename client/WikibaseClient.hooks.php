@@ -115,8 +115,8 @@ final class ClientHooks {
 				'wbclient.watchlist',
 				'wbclient.watchlist.css'
 			),
-            'localBasePath' => __DIR__,
-            'remoteExtPath' => 'Wikibase/client'
+			'localBasePath' => __DIR__,
+			'remoteExtPath' => 'Wikibase/client'
 		);
 		return true;
 	}
@@ -419,7 +419,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onOldChangesListRecentChangesLine( \ChangesList &$changesList, &$s,
-		\RecentChange $rc, array &$classes ) {
+		\RecentChange $rc, &$classes = array() ) {
 
 		wfProfileIn( __METHOD__ );
 
@@ -431,7 +431,11 @@ final class ClientHooks {
 				if ( $line == false ) {
 					return false;
 				}
-				$classes[] = 'wikibase-edit';
+
+				if ( isset( $classes ) || !is_array( $classes ) ) {
+					$classes[] = 'wikibase-edit';
+				}
+
 				$s = $line;
 			}
 		}
