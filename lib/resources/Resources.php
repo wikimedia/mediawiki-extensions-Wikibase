@@ -311,14 +311,14 @@ return call_user_func( function() {
 
 		'jquery.wikibase.snakview' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase/jquery.wikibase.snakview.js',
-				'jquery.wikibase/jquery.wikibase.snakview.SnakTypeSelector.js',
-				'jquery.wikibase/jquery.wikibase.snakview.ViewState.js',
-				'jquery.wikibase/snakview.variations/snakview.variations.js',
-				'jquery.wikibase/snakview.variations/snakview.variations.Variation.js',
-				'jquery.wikibase/snakview.variations/snakview.variations.Value.js',
-				'jquery.wikibase/snakview.variations/snakview.variations.SomeValue.js',
-				'jquery.wikibase/snakview.variations/snakview.variations.NoValue.js',
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.js',
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.SnakTypeSelector.js',
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.ViewState.js',
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.js',
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Variation.js',
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Value.js',
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.SomeValue.js',
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.NoValue.js',
 			),
 			'dependencies' => array(
 				'jquery.eachchange',
