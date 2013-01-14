@@ -48,6 +48,11 @@ final class LibHooks {
 
 				'changesDatabase' => false, // local by default. Set to something LBFactory understands.
 
+				'localClientDatabases' => array(),  // list of logical database names of local client wikis.
+													// may contain mappings from site-id to db-name.
+
+				'dispatchBatchChunkFactor' => 3, // should be roughly the factor of changes that get filtered out for each client.
+
 				'changeHandlers' => array(
 					'wikibase-item~add' => 'Wikibase\ItemChange',
 					'wikibase-property~add' => 'Wikibase\EntityChange',
