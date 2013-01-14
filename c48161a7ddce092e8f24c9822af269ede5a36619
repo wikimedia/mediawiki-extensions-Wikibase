@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAADhH//+zw\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-01-14T11:48:27Z",
+      "side": 1,
+      "message": "should be $entityIdentifiers[\u0027term_language\u0027] \u003d $language",
+      "revId": "c48161a7ddce092e8f24c9822af269ede5a36619",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH///eg\u003d",
         "filename": "repo/includes/store/sql/TermSqlCache.php",
         "patchSetId": 4
