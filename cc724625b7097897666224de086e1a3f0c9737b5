@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//+rw\u003d",
+        "filename": "client/includes/ClientChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-14T14:35:48Z",
+      "side": 1,
+      "message": "would be nice to at least document what this returns",
+      "revId": "cc724625b7097897666224de086e1a3f0c9737b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//+sA\u003d",
+        "filename": "client/includes/ClientChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-14T14:35:48Z",
+      "side": 1,
+      "message": "what happened to the indent here?",
+      "revId": "cc724625b7097897666224de086e1a3f0c9737b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//+rk\u003d",
+        "filename": "client/includes/ClientChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-14T14:35:48Z",
+      "side": 1,
+      "message": "why is this an either-or decision? when changes get coalesced, the same change could include effect the link to the current wiki and modify other links to other wikis...",
+      "revId": "cc724625b7097897666224de086e1a3f0c9737b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//+rg\u003d",
+        "filename": "client/includes/ClientChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-14T14:35:48Z",
+      "side": 1,
+      "message": "Why can\u0027t we use the original message here?",
+      "revId": "cc724625b7097897666224de086e1a3f0c9737b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//+r0\u003d",
+        "filename": "client/includes/ClientChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-14T14:35:48Z",
+      "side": 1,
+      "message": "you could use $iwPrefixes \u003d $site-\u003egetNavigationIds(). Note the plural, though!",
+      "revId": "cc724625b7097897666224de086e1a3f0c9737b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//+rc\u003d",
+        "filename": "client/includes/recentchanges/ExternalChangesLine.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-14T14:35:48Z",
+      "side": 1,
+      "message": "why this way around now? seems odd...",
+      "revId": "cc724625b7097897666224de086e1a3f0c9737b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
