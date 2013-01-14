@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//+oM\u003d",
+        "filename": "repo/includes/MultiLangConstraintDetector.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-14T15:21:53Z",
+      "side": 1,
+      "message": "missing documentation for $limits",
+      "revId": "3dfb90d6e17b3cfe3ec2fc5822f271cf480fde3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//+oE\u003d",
+        "filename": "repo/includes/MultiLangConstraintDetector.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-14T15:21:53Z",
+      "side": 1,
+      "message": "why not simply write\n\nreturn $diff !\u003d\u003d null \u0026\u0026 array_key_exists( $languageCode, $c )",
+      "revId": "3dfb90d6e17b3cfe3ec2fc5822f271cf480fde3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
