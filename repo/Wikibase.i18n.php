@@ -68,6 +68,7 @@ $messages['en'] = array(
 	'wikibase-datatype-label' => 'Data type:',
 	'wikibase-snakview-property-input-placeholder' => 'property',
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak of type "$1". Handling for this kind of Snak is not yet supported.',
+	'wikibase-snakview-choosesnaktype' => 'Choose a value type.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Handling of values for "$1" data type is not yet supported.',
 	'wikibase-snakview-variations-somevalue-label' => 'unknown value',
 	'wikibase-snakview-variations-novalue-label' => 'no value',
@@ -386,6 +387,7 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-propertyedittool-co
 	'wikibase-aliases-empty' => 'Placeholder message when no aliases for this data set representing a specific item have been defined.',
 	'wikibase-datatype-label' => 'Label for the data type name/label on a property page.',
 	'wikibase-snakview-property-input-placeholder' => 'Placeholder message that is initially displayed within the property input element when adding a new snak. See also [[m:Wikidata/Glossary]]',
+	'wikibase-snakview-choosesnaktype' => 'Message prompting the user to select a Snak type (see [[d:Wikidata/Glossary]]) when adding or editing a Snak. Since a default Snak type should always be selected when adding a Snak, the message is visible on rare occasions only. Since "Snak" oder "Snak type" does not express any meaning for the user, these phrases should be avoided in the message.',
 	'wikibase-snakview-variations-somevalue-label' => "Message displayed for 'some value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
 	'wikibase-snakview-variations-novalue-label' => "Message displayed for 'no value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
 	'wikibase-snakview-snaktypeselector-value' => "Short descriptive title of a 'value' snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option - which is the default when adding a claim - is allowing the user to specify a value.",
@@ -649,7 +651,7 @@ This module generates a slightly different summary (autocomment) than the other 
 	'right-label-remove' => '{{doc-right|label-remove}}',
 	'right-label-update' => '{{doc-right|label-update}}',
 	'right-description-remove' => '{{doc-right|description-remove}}',
-	'right-description-update' => '{{doc-right|description-update}}',
+	'right-description-update' => '{{doc-right|description-update}}'
 );
 
 /** Achinese (Acèh)
