@@ -50,8 +50,20 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.parsers' => $moduleTemplate + array(
+			'scripts' => array(
+				'parsers/EntityIdParser.js',
+			),
+			'dependencies' => array(
+				'valueParsers.ValueParser',
+				'valueParsers.api',
+				'wikibase.datamodel',
+			),
+		),
+
 		'wikibase.datamodel' => $moduleTemplate + array(
 			'scripts' => array(
+				'wikibase.datamodel/wikibase.EntityId.js',
 				'wikibase.datamodel/wikibase.Snak.js',
 				'wikibase.datamodel/wikibase.PropertyValueSnak.js',
 				'wikibase.datamodel/wikibase.PropertySomeValueSnak.js',
@@ -401,6 +413,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataTypes.jquery.valueview',
+				'wikibase.parsers',
 			),
 		),
 

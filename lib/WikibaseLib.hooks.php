@@ -190,6 +190,8 @@ final class LibHooks {
 				'tests/qunit/templates.tests.js',
 				'tests/qunit/wikibase.tests.js',
 
+				'tests/qunit/parsers/EntityIdParser.tests.js',
+
 				'tests/qunit/wikibase.datamodel/Wikibase.claim.tests.js',
 				'tests/qunit/wikibase.datamodel/Wikibase.reference.tests.js',
 				'tests/qunit/wikibase.datamodel/Wikibase.snak.tests.js',
@@ -242,6 +244,7 @@ final class LibHooks {
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
 				'wikibase',
+				'wikibase.parsers',
 				'wikibase.store',
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',

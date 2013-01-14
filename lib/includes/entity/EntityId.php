@@ -46,7 +46,7 @@ use MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class EntityId implements \Immutable, \Comparable {
+class EntityId extends \DataValues\DataValueObject {
 
 	/**
 	 * Constructs an EntityId object from a prefixed id.
@@ -187,4 +187,77 @@ class EntityId implements \Immutable, \Comparable {
 	public function __toString() {
 		return $this->getPrefixedId();
 	}
+
+	/**
+	 * @see Serializable::serialize
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	public function serialize() {
+		return \FormatJson::encode( array( $this->entityType, $this->numericId ) );
+	}
+
+	/**
+	 * @see Serializable::unserialize
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $value
+	 *
+	 * @return EntityId
+	 */
+	public function unserialize( $value ) {
+		list( $entityType, $numericId ) = \FormatJson::decode( $value );
+		$this->__construct(  $entityType, $numericId );
+	}
+
+	/**
+	 * @see DataValue::getType
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return 'wikibase-entityid';
+	}
+
+	/**
+	 * @see DataValue::getSortKey
+	 *
+	 * @since 0.4
+	 *
+	 * @return string|float|int
+	 */
+	public function getSortKey() {
+		return $this->entityType . $this->numericId;
+	}
+
+	/**
+	 * @see DataValue::getValue
+	 *
+	 * @since 0.4
+	 *
+	 * @return EntityId
+	 */
+	public function getValue() {
+		return $this;
+	}
+
+	/**
+	 * @see DataValue::getArrayValue
+	 *
+	 * @since 0.4
+	 *
+	 * @return EntityId
+	 */
+	public function getArrayValue() {
+		return array(
+			'entity-type' => $this->entityType,
+			'numeric-id' => $this->numericId,
+		);
+	}
+
 }

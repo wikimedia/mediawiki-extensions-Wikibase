@@ -226,6 +226,7 @@ $wgExtensionFunctions[] = function() {
     return true;
 };
 
+$wgValueParsers['wikibase-entityid'] = 'Wikibase\Lib\EntityIdParser';
 
 // Hooks
 $wgHooks['WikibaseDefaultSettings'][]				= 'Wikibase\LibHooks::onWikibaseDefaultSettings';
