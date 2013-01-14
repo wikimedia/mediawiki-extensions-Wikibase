@@ -412,13 +412,10 @@ div.wb-claim-new .wb-snak-property-container {
  * a new template wrapping a new/pending claim. See TODO in templates.php at 'wb-claim' template
  */
 div.wb-claim-section .wb-edit,
-div.wb-claim-new {
-	background-color: #D6F3FF;
-}
-
 div.wb-claim-section .wb-edit .wb-ui-toolbar,
-div.wb-claim-new .wb-ui-toolbar {
-	background-color: #D6F3FF !important;
+div.wb-claim-new,
+div.wb-claim-new .wb-editsection .wb-ui-toolbar {
+	background-color: #D6F3FF;
 }
 
 div.wb-claim-new {
@@ -481,6 +478,11 @@ div.wb-claim-new .wb-snak-value {
 	color: #565656;
 	font-style: italic;
 	line-height: 1.25em;
+}
+
+.wb-error .wb-claim,
+.wb-error .wb-editsection .wb-ui-toolbar {
+	background-color: #FFDFC9 !important;
 }
 
 /***** /EDIT/NEW CLAIM *****/
