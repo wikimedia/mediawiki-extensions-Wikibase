@@ -142,7 +142,6 @@ final class RepoHooks {
 			'ItemMove',
 			'ItemView',
 			'LabelDescriptionDuplicateDetector',
-			'MultiLangConstraintDetector',
 			'NamespaceUtils',
 
 			'actions/EditEntityAction',
@@ -181,6 +180,10 @@ final class RepoHooks {
 
 			'updates/ItemDeletionUpdate',
 			'updates/ItemModificationUpdate',
+
+			'violations/AliasConstraintDetector',
+			'violations/DescriptionConstraintDetector',
+			'violations/LabelConstraintDetector',
 		);
 
 		foreach ( $testFiles as $file ) {
@@ -503,7 +506,7 @@ final class RepoHooks {
 
 				// These are used for multilanguage strings that should have a soft length constraint
 				'multilang-limits' => array(
-					'length' => 2500,
+					'length' => 250,
 				),
 				'multilang-truncate-length' => 32,
 			)

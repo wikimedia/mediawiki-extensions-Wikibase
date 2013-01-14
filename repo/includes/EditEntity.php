@@ -687,30 +687,34 @@ class EditEntity {
 				$itemDiff = $entity->getDiff( $this->getBaseContent()->getEntity() );
 			}
 
-			$multilangViolationDetector = new MultiLangConstraintDetector();
-			$multilangViolationDetector->addConstraintChecks(
-				$entity,
-				$this->status,
-				$itemDiff
+			$detectors = array(
+				new LabelConstraintDetector(),
+				new DescriptionConstraintDetector(),
+				new AliasConstraintDetector()
 			);
-
-			if ( !$this->status->isOk() ) {
-				return $this->status;
+			foreach ( $detectors as $detector) {
+				if ( $this->status->isOk() ) {
+					$detector->checkConstraints(
+						$entity,
+						$this->status,
+						$itemDiff
+					);
+				}
 			}
 
 			// The below looks for all conflicts and then removes the ones not
 			// caused by the edit. This can be improved by only looking for
 			// those conflicts that can be caused by the edit.
-
-			$termViolationDetector = new LabelDescriptionDuplicateDetector();
-
-			$termViolationDetector->addLabelDescriptionConflicts(
-				$entity,
-				$this->status,
-				StoreFactory::getStore()->newTermCache(),
-				$itemDiff === null ? null : $itemDiff->getLabelsDiff(),
-				$itemDiff === null ? null : $itemDiff->getDescriptionsDiff()
-			);
+			if ( $this->status->isOk() ) {
+				$termViolationDetector = new LabelDescriptionDuplicateDetector();
+				$termViolationDetector->addLabelDescriptionConflicts(
+					$entity,
+					$this->status,
+					StoreFactory::getStore()->newTermCache(),
+					$itemDiff === null ? null : $itemDiff->getLabelsDiff(),
+					$itemDiff === null ? null : $itemDiff->getDescriptionsDiff()
+				);
+			}
 		}
 
 		return $this->status;

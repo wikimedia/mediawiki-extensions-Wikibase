@@ -111,7 +111,7 @@ class SpecialSetLabel extends SpecialWikibasePage {
 			}
 			else {
 				$entityUrl = $entityContent->getTitle()->getFullUrl();
-				$this->getOutput()->redirect( $entityUrl );
+			//	$this->getOutput()->redirect( $entityUrl );
 			}
 		} else {
 			$this->setLabelForm( $entityContent, $language, $label );

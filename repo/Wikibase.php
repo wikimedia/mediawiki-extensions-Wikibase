@@ -183,6 +183,12 @@ $wgAutoloadClasses['Wikibase\EntityModificationUpdate'] = $dir . 'includes/updat
 $wgAutoloadClasses['Wikibase\ItemDeletionUpdate'] 		= $dir . 'includes/updates/ItemDeletionUpdate.php';
 $wgAutoloadClasses['Wikibase\ItemModificationUpdate'] 	= $dir . 'includes/updates/ItemModificationUpdate.php';
 
+// includes/violations
+$wgAutoloadClasses['Wikibase\MultiLangConstraintDetector'] = $dir . 'includes/violations/MultiLangConstraintDetector.php';
+$wgAutoloadClasses['Wikibase\LabelConstraintDetector'] = $dir . 'includes/violations/LabelConstraintDetector.php';
+$wgAutoloadClasses['Wikibase\DescriptionConstraintDetector'] = $dir . 'includes/violations/DescriptionConstraintDetector.php';
+$wgAutoloadClasses['Wikibase\AliasConstraintDetector'] = $dir . 'includes/violations/AliasConstraintDetector.php';
+
 // maintenance
 $wgAutoloadClasses['Wikibase\RebuildTermsSearchKey'] 	= $dir . 'maintenance/rebuildTermsSearchKey.php';
 $wgAutoloadClasses['Wikibase\RebuildEntityPerPage'] 	= $dir . 'maintenance/rebuildEntityPerPage.php';
@@ -195,6 +201,7 @@ $wgAutoloadClasses['Wikibase\Test\ApiLangAttributeBase'] 	= $dir . 'tests/phpuni
 $wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/includes/content/EntityContentTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 		= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
 $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/includes/specials/SpecialPageTestBase.php';
+$wgAutoloadClasses['Wikibase\Test\MultiLangConstraintDetectorBase'] 	= $dir . 'tests/phpunit/includes/violations/MultiLangConstraintDetectorBase.php';
 
 // API module registration
 $wgAPIModules['wbgetentities'] 						= 'Wikibase\ApiGetEntities';
