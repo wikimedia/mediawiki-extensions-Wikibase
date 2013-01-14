@@ -1,0 +1,8 @@
+Change-Id: I4ee532a21f2144392a6dfb3ee633ef30b174a07a
+Code-Review+2: Daniel Werner <daniel.werner@wikimedia.de>
+Verified+2: Daniel Werner <daniel.werner@wikimedia.de>
+Submitted-by: Daniel Werner <daniel.werner@wikimedia.de>
+Submitted-at: Mon, 14 Jan 2013 19:07:45 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/43856
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
