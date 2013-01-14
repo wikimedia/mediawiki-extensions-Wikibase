@@ -179,8 +179,15 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$factory = new SnakFactory();
 
+		$libRegistry = new LibRegistry( Settings::singleton() );
+		$parseResult = $libRegistry->getEntityIdParser()->parse( $params['property'] );
+
+		if ( !$parseResult->isValid() ) {
+			throw new MWException( $parseResult->getError()->getText() );
+		}
+
 		return $factory->newSnak(
-			$params['property'],
+			$parseResult->getValue(),
 			$params['snaktype'],
 			isset( $params['value'] ) ? $params['value'] : null
 		);

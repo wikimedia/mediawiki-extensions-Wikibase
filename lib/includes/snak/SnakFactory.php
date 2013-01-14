@@ -35,18 +35,14 @@ class SnakFactory {
 	 *
 	 * @since 0.3
 	 *
-	 * @param string|EntityId $propertyId
+	 * @param EntityId $propertyId
 	 * @param string $snakType
 	 * @param string|null $snakValue
 	 *
 	 * @return Snak
 	 * @throws MWException
 	 */
-	public function newSnak( $propertyId, $snakType, $snakValue = null ) {
-		if ( !( $propertyId instanceof EntityId ) ) {
-			$propertyId = EntityId::newFromPrefixedId( $propertyId );
-		}
-
+	public function newSnak( EntityId $propertyId, $snakType, $snakValue = null ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
 			throw new MWException( 'Expected an EntityId of a property' );
 		}

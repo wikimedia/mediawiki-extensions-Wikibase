@@ -186,6 +186,18 @@ class SetQualifier extends \Wikibase\Api {
 		$qualifiers->removeSnakHash( $snakHash );
 
 		$propertyId = isset( $params['property'] ) ? $params['property'] : $snak->getPropertyId();
+
+		if ( is_string( $propertyId ) ) {
+			$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+			$parseResult = $libRegistry->getEntityIdParser()->parse( $propertyId );
+
+			if ( !$parseResult->isValid() ) {
+				$this->dieUsage( $parseResult->getError()->getText(), 'invalid-property-id' );
+			}
+
+			$propertyId = $parseResult->getValue();
+		}
+
 		$snakType = isset( $params['snaktype'] ) ? $params['snaktype'] : $snak->getType();
 
 		if ( isset( $params['value'] ) ) {
@@ -217,8 +229,15 @@ class SetQualifier extends \Wikibase\Api {
 		$params = $this->extractRequestParams();
 		$factory = new SnakFactory();
 
+		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+		$parseResult = $libRegistry->getEntityIdParser()->parse( $params['property'] );
+
+		if ( !$parseResult->isValid() ) {
+			throw new MWException( $parseResult->getError()->getText() );
+		}
+
 		$newQualifier = $factory->newSnak(
-			$params['property'],
+			$parseResult->getValue(),
 			$params['snaktype'],
 			isset( $params['value'] ) ? $params['value'] : null
 		);
