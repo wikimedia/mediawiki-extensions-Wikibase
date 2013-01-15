@@ -26,6 +26,7 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Nemo bis
  * @author Shirayuki
  * @author Waldir
  */
@@ -35,7 +36,7 @@ $messages['qqq'] = array(
 	'wikibaselib-entity-property' => 'How we refer to entities of type property. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
 	'wikibaselib-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.',
-	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Commons.',
+	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English).',
 );
 
 /** Asturian (asturianu)
@@ -58,6 +59,8 @@ $messages['be-tarask'] = array(
 	'wikibaselib-entity-item' => 'элемэнт',
 	'wikibaselib-entity-property' => 'уласьцівасьць',
 	'wikibaselib-entity-query' => 'запыт',
+	'datatypes-type-wikibase-item' => 'Аб’ект',
+	'datatypes-type-commonsMedia' => 'Мэдыяфайл зь Вікісховішча',
 );
 
 /** Bosnian (bosanski)
