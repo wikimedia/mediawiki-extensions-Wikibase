@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//9ho\u003d",
+        "filename": "repo/includes/store/sql/AddRowIDs.sqlite.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2013-01-15T12:44:35Z",
+      "side": 1,
+      "message": "Copied from original schema\n\n-- Derived storage.\n-- Links site+title pairs to item ids.\nCREATE TABLE IF NOT EXISTS /*_*/wb_items_per_site (\n  ips_row_id                 int unsigned        NOT NULL PRIMARY KEY AUTO_INCREMENT, -- row ID\n  ips_item_id                INT unsigned        NOT NULL, -- Id of the item\n  ips_site_id                VARBINARY(32)       NOT NULL, -- Site identifier (global)\n  ips_site_page              VARCHAR(255)        NOT NULL -- Title of the page\n) /*$wgDBTableOptions*/;\n\nCREATE UNIQUE INDEX /*i*/wb_ips_item_site_page ON /*_*/wb_items_per_site (ips_site_id, ips_site_page);\nCREATE INDEX /*i*/wb_ips_site_page ON /*_*/wb_items_per_site (ips_site_page);\nCREATE INDEX /*i*/wb_ips_item_id ON /*_*/wb_items_per_site (ips_item_id);",
+      "parentUuid": "AAADhH//9iA\u003d",
+      "revId": "4116fac249477f18fc0cc7f0f7a2cdc00f215e88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//9h0\u003d",
         "filename": "repo/includes/store/sql/AddRowIDs.sqlite.sql",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2013-01-15T12:39:55Z",
       "side": 1,
       "message": "If it\u0027s a SQLite-specific .sql file, why use non-native types instead of TEXT or BLOB?",
+      "revId": "4116fac249477f18fc0cc7f0f7a2cdc00f215e88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9hs\u003d",
+        "filename": "repo/includes/store/sql/AddRowIDs.sqlite.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2013-01-15T12:44:35Z",
+      "side": 1,
+      "message": "It\u0027s only sqlite specific as you cannot add fields like mysql.\n\nIt currently just uses the same schema as MySQL in Wikibase",
+      "parentUuid": "AAADhH//9h0\u003d",
       "revId": "4116fac249477f18fc0cc7f0f7a2cdc00f215e88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
