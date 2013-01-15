@@ -519,7 +519,7 @@ final class ClientHooks {
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
 			ClientStoreFactory::getStore()->newSiteLinkTable(),
-			\Sites::singleton() );
+			\SitesTable::newInstance() );
 
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $parser->getTitle(), $parser->getOutput() );
 

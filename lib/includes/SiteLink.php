@@ -39,7 +39,9 @@ class SiteLink {
 	 * @note  : If $normalize is set, this may cause an API request to the remote site, so beware that this function may
 	 *          be slow slow and depend on an external service.
 	 *
-	 * @param String $globalSiteId     The site's global ID, to be used with Sites::singleton()->getSiteByGlobalId().
+	 * @deprecated since 0.4, use the constructor or Site::newForType
+	 *
+	 * @param String $globalSiteId     The site's global ID
 	 * @param String $page       The target page's title
 	 * @param bool   $normalize  Whether the page title should be normalized (default: false)
 	 *
@@ -49,10 +51,11 @@ class SiteLink {
 	 * @throws \MWException if the $siteID isn't known.
 	 */
 	public static function newFromText( $globalSiteId, $page, $normalize = false ) {
-		$site = Sites::singleton()->getSite( $globalSiteId );
+		$site = \SitesTable::newInstance()->getSite( $globalSiteId );
 
-		if ( $site === false ) {
-			$site = Sites::newSite( $globalSiteId );
+		if ( $site === null ) {
+			$site = new Site();
+			$site->setGlobalId( $globalSiteId );
 		}
 
 		if ( $normalize ) {
