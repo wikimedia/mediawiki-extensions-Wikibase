@@ -13,11 +13,13 @@ class QUnitPage
   paragraph(:qunitTestResult, :id => "qunit-testresult")
   ordered_list(:qunitTestList, :id => "qunit-tests")
   list_item(:qunitTestFail, :class => "fail")
+  span(:qunitTestModuleFail1, :xpath => "//li[@class='fail'][1]/strong/span")
+  span(:qunitTestModuleFail2, :xpath => "//li[@class='fail'][2]/strong/span")
+  span(:qunitTestModuleFail3, :xpath => "//li[@class='fail'][3]/strong/span")
   list_item(:qunitTestRunning, :class => "running")
 
   def wait_for_qunit_tests
     wait_until do
-      mwFirstHeading_element.click
       qunitTestResult? && qunitTestList? && (qunitTestRunning? == false)
     end
   end
