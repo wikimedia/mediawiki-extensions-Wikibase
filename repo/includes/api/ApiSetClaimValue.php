@@ -52,7 +52,7 @@ class ApiSetClaimValue extends Api {
 			$content->getEntity(),
 			$params['claim'],
 			$params['snaktype'],
-			isset( $params['value'] ) ? $params['value'] : null
+			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
 		);
 
 		$this->saveChanges( $content );

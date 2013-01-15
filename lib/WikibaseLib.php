@@ -220,12 +220,15 @@ $wgExtensionFunctions[] = function() {
 	$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
 
 	$wgDataTypes['wikibase-item'] = array(
-		'datavalue' => 'string',
+		'datavalue' => 'wikibase-entityid',
 		'parser' => $libRegistry->getEntityIdParser(),
 	);
 
     return true;
 };
+
+$wgValueParsers['wikibase-entityid'] = 'Wikibase\Lib\EntityIdParser';
+$wgDataValues['wikibase-entityid'] = 'Wikibase\EntityId';
 
 $wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 

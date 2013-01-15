@@ -75,7 +75,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 			'entity' => $entity->getPrefixedId(),
 			'snaktype' => 'value',
 			'property' => $property->getPrefixedId(),
-			'value' => 'foo',
+			'value' => '"foo"',
 			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
@@ -108,7 +108,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 			'entity' => 'q0',
 			'snaktype' => 'value',
 			'property' => '-',
-			'value' => 'foo',
+			'value' => '"foo"',
 		);
 
 		$argLists[] = array( 'cant-load-entity-content', $params );
@@ -118,7 +118,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 			'entity' => '-',
 			'snaktype' => 'value',
 			'property' => 'q0',
-			'value' => 'foo',
+			'value' => '"foo"',
 		);
 
 		$argLists[] = array( 'unknownerror', $params );
@@ -128,7 +128,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 			'entity' => '-',
 			'snaktype' => 'hax',
 			'property' => '-',
-			'value' => 'foo',
+			'value' => '"foo"',
 		);
 
 		$argLists[] = array( 'unknown_snaktype', $params );
@@ -139,7 +139,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 				'entity' => '-',
 				'snaktype' => 'value',
 				'property' => '-',
-				'value' => 'foo',
+				'value' => '"foo"',
 			);
 
 			unset( $params[$requiredParam] );
@@ -151,7 +151,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
 			'snaktype' => 'value',
-			'value' => 'foo',
+			'value' => '"foo"',
 		);
 
 		$argLists[] = array( 'claim-property-id-missing', $params );
@@ -226,7 +226,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 			'entity' => $entity->getPrefixedId(),
 			'snaktype' => 'value',
 			'property' => $property->getPrefixedId(),
-			'value' => 'foo',
+			'value' => '"foo"',
 			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
@@ -243,7 +243,7 @@ class ApiCreateClaimTest extends \ApiTestCase {
 			'entity' => $entity->getPrefixedId(),
 			'snaktype' => 'value',
 			'property' => $property->getPrefixedId(),
-			'value' => 'bar',
+			'value' => '"bar"',
 			'token' => $GLOBALS['wgUser']->getEditToken(),
 			'baserevid' => $revId
 		);
