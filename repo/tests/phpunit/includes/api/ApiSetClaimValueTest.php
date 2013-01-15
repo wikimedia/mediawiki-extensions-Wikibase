@@ -104,7 +104,7 @@ class ApiSetClaimValueTest extends \ApiTestCase {
 		$params = array(
 			'action' => 'wbsetclaimvalue',
 			'claim' => $claimGuid,
-			'value' => $value,
+			'value' => \FormatJson::encode( $value ),
 			'snaktype' => 'value',
 			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
