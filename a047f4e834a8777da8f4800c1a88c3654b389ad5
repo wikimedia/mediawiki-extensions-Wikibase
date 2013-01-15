@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//9Zs\u003d",
+        "filename": "lib/resources/parsers/EntityIdParser.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-15T16:09:16Z",
+      "side": 1,
+      "message": "@since 0.4",
+      "revId": "a047f4e834a8777da8f4800c1a88c3654b389ad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
