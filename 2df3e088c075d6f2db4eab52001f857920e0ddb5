@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//9n0\u003d",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "SetEntity appears to be missing.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9oQ\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "Typo: separated",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9oA\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "All new keys in \u0027en\u0027 should have an entry in \u0027qqq\u0027 also. See https://www.mediawiki.org/wiki/I18n#Message_documentation",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9og\u003d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "Shouldn\u0027t use inline tabs, only leading tabs.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9oU\u003d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "None of the Wikidata special pages have $wgSpecialPageGroups set. This causes the (visible) special pages to be classified as \"Other special pages\" in https://www.wikidata.org/wiki/Special:SpecialPages?uselang\u003den. You may want to fix that.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9nw\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "trailing ws.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9n8\u003d",
+        "filename": "repo/includes/specials/SpecialSetAliases.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "Please remove trailing whitespace. See http://www.mediawiki.org/wiki/Manual:Coding_conventions#Trailing_whitespace",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9ns\u003d",
+        "filename": "repo/includes/specials/SpecialSetAliases.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "trailing ws.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9no\u003d",
+        "filename": "repo/includes/specials/SpecialSetDescription.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "trailing ws.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9nk\u003d",
+        "filename": "repo/includes/specials/SpecialSetDescription.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "trailing ws.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9nc\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "trailing ws.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9ng\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "trailing ws.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9nU\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "trailing ws.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9nY\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-15T10:32:36Z",
+      "side": 1,
+      "message": "trailing ws.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
