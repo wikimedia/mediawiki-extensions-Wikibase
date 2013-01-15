@@ -140,16 +140,19 @@ final class Utils {
 			$dbw->begin();
 		}
 
+		$sites = \SitesTable::newInstance()->getSites();
+
 		// Inserting obtained sites...
 		foreach ( $languages['sitematrix'] as $language ) {
 			if ( is_array( $language ) && array_key_exists( 'code', $language ) && array_key_exists( 'site', $language ) ) {
 				$languageCode = $language['code'];
 
 				foreach ( $language['site'] as $siteData ) {
-					$site = \Sites::singleton()->getSite( $siteData['dbname'] );
+					$site = $sites->getSite( $siteData['dbname'] );
 
 					if ( !$site ) {
-						$site = \MediaWikiSite::newFromGlobalId( $siteData['dbname'] );
+						$site = new \MediaWikiSite();
+						$site->setGlobalId( $siteData['dbname'] );
 					}
 
 					$site->setGroup( $groupMap[$siteData['code']] );
@@ -176,10 +179,6 @@ final class Utils {
 		if ( $doTrx ) {
 			$dbw->commit();
 		}
-
-		// re-cache, once the change has propagated.
-		wfWaitForSlaves();
-		\Sites::singleton()->getSites( 'recache' );
 	}
 
 	/**

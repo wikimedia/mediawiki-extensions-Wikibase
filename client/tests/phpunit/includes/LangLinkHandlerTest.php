@@ -87,7 +87,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			'testwiki',
 			array( NS_MAIN ),
 			$this->mockRepo,
-			\Sites::singleton()
+			\SitesTable::newInstance()
 		);
 	}
 
