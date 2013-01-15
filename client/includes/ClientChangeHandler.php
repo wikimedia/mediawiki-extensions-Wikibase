@@ -71,7 +71,7 @@ class ClientChangeHandler {
 			$globalId = Settings::get( 'siteGlobalID' );
 
             // check that $sitecode is valid
-            if ( \Sites::singleton()->getSite( $globalId ) === false ) {
+            if ( \SitesTable::newInstance()->getSite( $globalId ) === false ) {
                 throw new \MWException( "Site code $globalId does not exist in the sites table. "
 					. "Has the sites table been populated?" );
             }
