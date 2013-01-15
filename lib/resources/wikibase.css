@@ -372,7 +372,7 @@ div.wb-snak {
 }
 
 div.wb-snak .wb-snak-value-container {
-	margin-right: 16px;
+	margin-left: 16px;
 }
 
 div.wb-claim-container .wb-editsection {
@@ -467,7 +467,8 @@ div.wb-claim-new .wb-snak-value {
 
 .wb-snak-typeselector {
 	position: absolute;
-	right: 10px;
+	left: 10px;
+	width: 16px;
 	cursor: pointer;
 }
 
