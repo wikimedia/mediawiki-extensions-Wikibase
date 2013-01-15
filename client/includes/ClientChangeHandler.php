@@ -110,7 +110,7 @@ class ClientChangeHandler {
 				$params['message'] = $messagePrefix . 'change';
 
 				foreach( $siteLinkDiff as $siteKey => $diffOp ) {
-					$site = \SitesTable::singleton()->selectRow(
+					$site = \SiteSQLStore::singleton()->selectRow(
 						null,
 						array( 'global_key' => $siteKey )
 					);

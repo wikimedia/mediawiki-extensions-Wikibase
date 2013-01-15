@@ -57,7 +57,7 @@ class ItemView extends EntityView {
 		$i = 0;
 
 		// Batch load the sites we need info about during the building of the sitelink list.
-		Sites::singleton()->getSites();
+		$sites = Sites::singleton()->getSites();
 
 		// Sort the sitelinks according to their global id
 		$safetyCopy = $siteLinks; // keep a shallow copy;
@@ -109,7 +109,7 @@ class ItemView extends EntityView {
 		}
 
 		// built table footer with button to add site-links, consider list could be complete!
-		$isFull = count( $siteLinks ) >= count( Sites::singleton()->getSites() );
+		$isFull = count( $siteLinks ) >= count( $sites );
 
 		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
 			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->text() : '',

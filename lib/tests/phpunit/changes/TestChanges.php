@@ -42,14 +42,17 @@ final class TestChanges {
 		$item->setDescription( 'en', 'a country' );
 		$item->addAliases( 'en', array( 'Bolivarian Republic of Venezuela' ) );
 
-		$group = \Wikibase\Settings::get( 'siteLinkGroup' );
-		$sites = \Sites::singleton()->getSiteGroup( $group );
+		$site = new \Site();
+		$site->setGlobalId( 'enwiki' );
+		$item->addSiteLink( new \Wikibase\SiteLink( $site, 'Venezuela' )  );
 
-		if ( count( $sites ) > 1 ) {
-			$item->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Venezuela' ) );
-			$item->addSiteLink( \Wikibase\SiteLink::newFromText( 'jawiki', 'ベネズエラ' ) );
-			$item->addSiteLink( \Wikibase\SiteLink::newFromText( 'cawiki', 'Veneçuela' ) );
-		}
+		$site = new \Site();
+		$site->setGlobalId( 'jawiki' );
+		$item->addSiteLink( new \Wikibase\SiteLink( $site, 'ベネズエラ' )  );
+
+		$site = new \Site();
+		$site->setGlobalId( 'cawiki' );
+		$item->addSiteLink( new \Wikibase\SiteLink( $site, 'Veneçuela' )  );
 
 		return $item;
 	}
