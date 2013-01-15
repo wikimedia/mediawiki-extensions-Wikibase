@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Sites;
+use SiteStore;
 use Site;
 use Title;
 use ParserOutput;
@@ -40,6 +40,10 @@ class LangLinkHandler {
 	protected $siteId;
 	protected $namespaces;
 	protected $siteLinksLookup;
+
+	/**
+	 * @var SiteStore
+	 */
 	protected $sites;
 
 	private $sitesByNavigationId = null;
@@ -50,10 +54,10 @@ class LangLinkHandler {
 	 * @param string         $siteId The global site ID for the local wiki
 	 * @param array          $namespaces The list of namespaces for which language links should be handled.
 	 * @param SiteLinkLookup $siteLinksLookup A site link lookup service
-	 * @param Sites          $sites A site definition lookup service
+	 * @param SiteStore      $sites A site definition lookup service
 	 */
 	public function __construct( $siteId, array $namespaces,
-			SiteLinkLookup $siteLinksLookup, Sites $sites ) {
+			SiteLinkLookup $siteLinksLookup, SiteStore $sites ) {
 		$this->siteId = $siteId;
 		$this->namespaces = $namespaces;
 		$this->siteLinksLookup = $siteLinksLookup;

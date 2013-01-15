@@ -72,8 +72,9 @@ class SpecialCreateItem extends SpecialCreateEntity {
 		$status = parent::modifyEntity( $itemContent );
 
 		if ( $this->site !== null && $this->page !== null ) {
-			$site = \Sites::singleton()->getSite( $this->site );
-			if ( $site === false ) {
+			$site = \SiteSQLStore::newInstance()->getSite( $this->site );
+
+			if ( $site === null ) {
 				$status->error( 'wikibase-createitem-not-recognized-siteid' );
 				return $status;
 			}
