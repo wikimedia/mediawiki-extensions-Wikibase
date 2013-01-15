@@ -66,7 +66,7 @@ unset( $dependencies );
 define( 'WBL_VERSION', '0.4 alpha' );
 
 $wgExtensionCredits['other'][] = array(
-	'path' => __FILE__,
+	'path' => __DIR__,
 	'name' => 'WikibaseLib',
 	'version' => WBL_VERSION,
 	'author' => array(
