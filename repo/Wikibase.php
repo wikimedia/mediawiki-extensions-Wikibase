@@ -50,7 +50,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 define( 'WB_VERSION', '0.4 alpha' );
 
 $wgExtensionCredits['other'][] = array(
-	'path' => __FILE__,
+	'path' => __DIR__,
 	'name' => 'Wikibase',
 	'version' => WB_VERSION,
 	'author' => array(
