@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//9gA\u003d",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-15T13:43:17Z",
+      "side": 1,
+      "message": "since SetEntity is abstract, do we really need the alias?  if so, fine but not sure it\u0027s needed?",
+      "parentUuid": "AAADhH//9n0\u003d",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//9oQ\u003d",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 13
@@ -81,6 +99,24 @@
       "writtenOn": "2013-01-15T10:32:36Z",
       "side": 1,
       "message": "None of the Wikidata special pages have $wgSpecialPageGroups set. This causes the (visible) special pages to be classified as \"Other special pages\" in https://www.wikidata.org/wiki/Special:SpecialPages?uselang\u003den. You may want to fix that.",
+      "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9gE\u003d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-15T13:43:17Z",
+      "side": 1,
+      "message": "we have a bug for this and will do in separate patch for all wikibase special pages\n\nhttps://bugzilla.wikimedia.org/43912\n\n(it\u0027s trivial yes but good to do all at once)",
+      "parentUuid": "AAADhH//9oU\u003d",
       "revId": "2df3e088c075d6f2db4eab52001f857920e0ddb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
