@@ -346,8 +346,7 @@ abstract class Api extends \ApiBase {
 	 * @return \SiteList
 	 */
 	protected function getSiteLinkTargetSites() {
-		$group = Settings::get( 'siteLinkGroup' );
-		return \Sites::singleton()->getSiteGroup( $group );
+		return \SitesTable::newInstance()->getSites()->getGroup( Settings::get( 'siteLinkGroup' ) );
 	}
 
 

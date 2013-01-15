@@ -68,7 +68,11 @@ class SqlIdGenerator implements IdGenerator {
 	 * @throws \MWException
 	 */
 	protected function generateNewId( $type, $retry = true ) {
-		$this->db->begin( __METHOD__ );
+		$trx = $this->db->trxLevel();
+
+		if ( $trx == 0 ) {
+			$this->db->begin( __METHOD__ );
+		}
 
 		$currentId = $this->db->selectRow(
 			$this->table,
@@ -105,7 +109,9 @@ class SqlIdGenerator implements IdGenerator {
 			}
 		}
 
-		$this->db->commit( __METHOD__ );
+		if ( $trx == 0 ) {
+			$this->db->commit( __METHOD__ );
+		}
 
 		if ( !$success ) {
 			throw new \MWException( 'Could not generate a reliably unique ID.' );
