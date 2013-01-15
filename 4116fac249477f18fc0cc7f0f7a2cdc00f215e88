@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//9iA\u003d",
+        "filename": "repo/includes/store/sql/AddRowIDs.sqlite.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 43
+      },
+      "writtenOn": "2013-01-15T12:39:55Z",
+      "side": 1,
+      "message": "Inconsistent casing: INT vs. int.",
+      "revId": "4116fac249477f18fc0cc7f0f7a2cdc00f215e88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//9h0\u003d",
+        "filename": "repo/includes/store/sql/AddRowIDs.sqlite.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 43
+      },
+      "writtenOn": "2013-01-15T12:39:55Z",
+      "side": 1,
+      "message": "If it\u0027s a SQLite-specific .sql file, why use non-native types instead of TEXT or BLOB?",
+      "revId": "4116fac249477f18fc0cc7f0f7a2cdc00f215e88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
