@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//9fs\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-15T13:58:01Z",
+      "side": 1,
+      "message": "Not intended I guess",
+      "revId": "caa69ec66ac98e8779d9583296e3e2eebad0817c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
