@@ -622,7 +622,7 @@ final class ClientHooks {
 			$title = $skin->getContext()->getTitle();
 
 			// gets the main part of the title, no underscores used in this db table
-			$titleText = $title->getText();
+			$titleText = $title->getPrefixedText();
 
 			// main part of title for building link
 			$titleLink = $title->getPartialURL();
