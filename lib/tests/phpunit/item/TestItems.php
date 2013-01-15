@@ -58,7 +58,7 @@ final class TestItems {
 		$item = Item::newEmpty();
 
 		$group = \Wikibase\Settings::get( 'siteLinkGroup' );
-		$sites = \Sites::singleton()->getSiteGroup( $group );
+		$sites = \SiteSQLStore::newInstance()->getSites()->getGroup( $group );
 
 		if ( count( $sites ) > 1 ) {
 			$item->addSiteLink( new SiteLink( $sites->getIterator()->current(), 'spam' ) );
