@@ -227,6 +227,9 @@ $wgExtensionFunctions[] = function() {
     return true;
 };
 
+$wgValueParsers['wikibase-entityid'] = 'Wikibase\Lib\EntityIdParser';
+$wgDataValues['wikibase-entityid'] = 'Wikibase\EntityId';
+
 $wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 
 // Hooks
