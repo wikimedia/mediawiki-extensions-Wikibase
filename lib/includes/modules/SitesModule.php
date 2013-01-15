@@ -50,7 +50,7 @@ class SitesModule extends ResourceLoaderModule {
 		/**
 		 * @var MediaWikiSite $site
 		 */
-		foreach ( Sites::singleton()->getSites() as $site ) {
+		foreach ( \SiteSQLStore::newInstance()->getSites() as $site ) {
 			if ( $site->getType() === Site::TYPE_MEDIAWIKI && $site->getGroup() === 'wikipedia' ) {
 				$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
 
