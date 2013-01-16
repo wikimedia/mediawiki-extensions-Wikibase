@@ -215,6 +215,14 @@ $wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
 $wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
 
 
+// Special page groups
+$wgSpecialPageGroups['CreateItem']					= 'wikibaserepo';
+$wgSpecialPageGroups['ItemByTitle']					= 'wikibaserepo';
+$wgSpecialPageGroups['ItemDisambiguation']			= 'wikibaserepo';
+$wgSpecialPageGroups['SetLabel']					= 'wikibaserepo';
+$wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
+
+
 // Hooks
 $wgHooks['WikibaseDefaultSettings'][] 			    = 'Wikibase\RepoHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\RepoHooks::onSchemaUpdate';
