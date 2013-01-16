@@ -28,6 +28,10 @@ module StatementPage
   element(:statement2ClaimValue1, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claimview')][1]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
   element(:statement2ClaimValue2, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claimview')][2]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
   element(:statement2ClaimValue3, :a, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claimview')][3]/div/div[contains(@class, 'wb-claim-mainsnak')]/div[contains(@class, 'wb-snak-value-container')]/div[contains(@class, 'wb-snak-value')]/div/div/a")
+  span(:snaktypeSelectorIcon, :xpath => "//div[contains(@class, 'wb-snak-typeselector')]/span[contains(@class, 'wb-snaktypeselector')]")
+  link(:snaktypeSelectorValue, :xpath => "//ul[contains(@class, 'wb-snaktypeselector-menu')]/li[contains(@class, 'wb-snaktypeselector-menuitem-value')]/a")
+  link(:snaktypeSelectorSomevalue, :xpath => "//ul[contains(@class, 'wb-snaktypeselector-menu')]/li[contains(@class, 'wb-snaktypeselector-menuitem-somevalue')]/a")
+  link(:snaktypeSelectorNovalue, :xpath => "//ul[contains(@class, 'wb-snaktypeselector-menu')]/li[contains(@class, 'wb-snaktypeselector-menuitem-novalue')]/a")
 
   def wait_for_property_value_box
     wait_until do
@@ -72,6 +76,17 @@ module StatementPage
       removeClaimButton
       ajax_wait
       self.wait_for_statement_request_finished
+    end
+  end
+
+  def change_snaktype(type)
+    snaktypeSelectorIcon_element.click
+    if type == "value"
+      self.snaktypeSelectorValue
+    elsif type == "somevalue"
+      self.snaktypeSelectorSomevalue
+    elsif type == "novalue"
+      self.snaktypeSelectorNovalue
     end
   end
 end
