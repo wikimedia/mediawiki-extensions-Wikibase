@@ -473,11 +473,16 @@ div.wb-claim-new .wb-snak-value {
 
 .wb-snakview-unsupportedsnaktype,
 .wb-snakview-variation-valuesnak-unsupporteddatatype,
+.wb-snakview-variation-valuesnak-datavaluetypemismatch,
 .wb-snakview-variation-somevaluesnak,
 .wb-snakview-variation-novaluesnak {
 	color: #565656;
 	font-style: italic;
 	line-height: 1.25em;
+}
+
+.wb-snakview-variation-valuesnak-datavaluetypemismatch {
+	color: red;
 }
 
 .wb-error .wb-claim,
