@@ -1,0 +1,8 @@
+Change-Id: I664d019e327dba395f96cae4f082f8f690a0395c
+Code-Review+2: Aude <aude.wiki@gmail.com>
+Verified+2: Aude <aude.wiki@gmail.com>
+Submitted-by: Aude <aude.wiki@gmail.com>
+Submitted-at: Wed, 16 Jan 2013 18:43:03 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/44265
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/mw1.21-wmf7
