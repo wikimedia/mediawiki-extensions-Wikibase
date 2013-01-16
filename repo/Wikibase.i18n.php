@@ -21,6 +21,7 @@ $messages = array();
  */
 $messages['en'] = array(
 	'wikibase-desc' => 'Structured data repository',
+	'specialpages-group-wikibaserepo' => 'Wikidata repository',
 	'wikibase-edit' => 'edit',
 	'wikibase-save' => 'save',
 	'wikibase-cancel' => 'cancel',
