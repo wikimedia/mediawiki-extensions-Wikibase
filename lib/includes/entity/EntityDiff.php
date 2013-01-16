@@ -33,7 +33,7 @@ use Diff\DiffOp;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig
  */
-class EntityDiff extends MapDiff {
+abstract class EntityDiff extends MapDiff {
 
 	/**
 	 * Returns a view object for the diff.
@@ -42,7 +42,7 @@ class EntityDiff extends MapDiff {
 	 *
 	 * @return EntityDiffView
 	 */
-	//public abstract function getView();
+	public abstract function getView();
 
 	/**
 	 * Creates a new Entity diff from two entities.
