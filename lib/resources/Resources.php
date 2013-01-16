@@ -336,6 +336,8 @@ return call_user_func( function() {
 				'wikibase-snakview-unsupportedsnaktype',
 				'wikibase-snakview-choosesnaktype',
 				'wikibase-snakview-variation-unsupporteddatatype',
+				'wikibase-snakview-variation-datavaluetypemismatch',
+				'wikibase-snakview-variation-datavaluetypemismatch-details',
 				'datatypes-type-wikibase-item',
 				'wikibase-snakview-variations-somevalue-label',
 				'wikibase-snakview-variations-novalue-label',
