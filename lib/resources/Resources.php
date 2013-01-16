@@ -104,8 +104,7 @@ return call_user_func( function() {
 				'wikibase.utilities/wikibase.utilities.jQuery.js',
 			),
 			'dependencies' => array(
-				'wikibase.utilities',
-				'jquery.eachchange'
+				'wikibase.utilities'
 			)
 		),
 
@@ -117,11 +116,10 @@ return call_user_func( function() {
 				'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.css',
 			),
 			'dependencies' => array(
-				'wikibase.utilities.jQuery',
+				'jquery.eachchange',
+				'jquery.effects.blind',
 				'jquery.inputAutoExpand',
-				'jquery.ui.widget',
-				'jquery.effects.core',
-				'jquery.effects.blind'
+				'jquery.ui.widget'
 			)
 		),
 
@@ -147,11 +145,12 @@ return call_user_func( function() {
 				'wikibase.ui.Toolbar.Button.js'
 			),
 			'dependencies' => array(
+				'jquery.nativeEventHandler',
+				'jquery.tipsy',
+				'jquery.ui.core',
+				'mediawiki.legacy.shared',
 				'wikibase',
 				'wikibase.common',
-				'jquery.tipsy',
-				'mediawiki.legacy.shared',
-				'jquery.ui.core',
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery'
 			),
@@ -186,20 +185,21 @@ return call_user_func( function() {
 				'wikibase.ui.PropertyEditTool.css'
 			),
 			'dependencies' => array(
-				'wikibase',
-				'wikibase.ui.Toolbar',
-				'wikibase.utilities',
-				'wikibase.utilities.jQuery',
-				'wikibase.utilities.jQuery.ui.tagadata',
+				'jquery.eachchange',
 				'jquery.nativeEventHandler',
 				'jquery.inputAutoExpand',
+				'jquery.tablesorter',
 				'jquery.ui.suggester',
 				'jquery.ui.entityselector',
 				'jquery.wikibase.siteselector',
 				'mediawiki.api',
 				'mediawiki.Title',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
-				'jquery.tablesorter'
+				'wikibase',
+				'wikibase.ui.Toolbar',
+				'wikibase.utilities',
+				'wikibase.utilities.jQuery',
+				'wikibase.utilities.jQuery.ui.tagadata'
 			),
 			'messages' => array(
 				'wikibase-cancel',
@@ -363,7 +363,8 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.claimlistview.js'
 			),
 			'dependencies' => array(
-				'jquery.wikibase.claimview'
+				'jquery.wikibase.claimview',
+				'wikibase.templates'
 			),
 			'messages' => array(
 				'wikibase-label-empty'
@@ -375,7 +376,8 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.entityview.js'
 			),
 			'dependencies' => array(
-				'jquery.wikibase.claimlistview'
+				'jquery.wikibase.claimlistview',
+				'wikibase.templates'
 			),
 			'messages' => array(
 				'wikibase-anonymouseditwarning-item',
@@ -407,6 +409,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataTypes.jquery.valueview',
+				'jquery.eachchange'
 			),
 		),
 
