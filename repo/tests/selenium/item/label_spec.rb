@@ -89,7 +89,7 @@ describe "Check functionality of edit label" do
     end
   end
 
-  context "Check for normalization of label" do
+  context "Check for special inputs for label" do
     it "should check if normalization for item labels is working" do
       on_page(ItemPage) do |page|
         page.editLabelLink
@@ -102,6 +102,22 @@ describe "Check functionality of edit label" do
         @browser.refresh
         page.wait_for_entity_to_load
         page.entityLabelSpan.should == label_normalized
+      end
+    end
+    it "should check for correct behaviour on '0'" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.editLabelLink
+        page.labelInputField_element.clear
+        page.labelInputField = "0"
+        page.saveLabelLink
+        ajax_wait
+        page.wait_for_api_callback
+        page.entityLabelSpan.should == "0"
+        @browser.refresh
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == "0"
       end
     end
   end

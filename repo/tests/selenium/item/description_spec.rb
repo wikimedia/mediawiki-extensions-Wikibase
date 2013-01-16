@@ -86,7 +86,7 @@ describe "Check functionality of edit description" do
     end
   end
 
-  context "Check for normalization of description" do
+  context "Check for special inputs for description" do
     it "should check if normalization for item description is working" do
       on_page(ItemPage) do |page|
         page.editDescriptionLink
@@ -99,6 +99,22 @@ describe "Check functionality of edit description" do
         @browser.refresh
         page.wait_for_entity_to_load
         page.entityDescriptionSpan.should == description_normalized
+      end
+    end
+    it "should check for correct behaviour on '0'" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.editDescriptionLink
+        page.descriptionInputField_element.clear
+        page.descriptionInputField = "0"
+        page.saveDescriptionLink
+        ajax_wait
+        page.wait_for_api_callback
+        page.entityDescriptionSpan.should == "0"
+        @browser.refresh
+        page.wait_for_entity_to_load
+        page.entityDescriptionSpan.should == "0"
       end
     end
   end

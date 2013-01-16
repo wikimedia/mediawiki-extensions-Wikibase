@@ -10,6 +10,7 @@ require 'spec_helper'
 
 describe "Check functionality of add/edit/remove aliases" do
   NUM_INITIAL_ALIASES = 3
+  aliases = [generate_random_string(8), generate_random_string(8), '0']
   test_alias = generate_random_string(8)
 
   before :all do
@@ -47,7 +48,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.addAliases
         i = 0;
         while i < NUM_INITIAL_ALIASES do
-          page.aliasesInputEmpty= generate_random_string(8)
+          page.aliasesInputEmpty= aliases[i]
           i += 1;
         end
         page.saveAliases?.should be_true
@@ -67,7 +68,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.addAliases
         i = 0;
         while i < NUM_INITIAL_ALIASES do
-          page.aliasesInputEmpty= generate_random_string(8)
+          page.aliasesInputEmpty= aliases[i]
           i += 1;
         end
         page.saveAliases?.should be_true
