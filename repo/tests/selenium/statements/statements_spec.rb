@@ -77,6 +77,34 @@ describe "Check statements UI", :experimental => true do
         page.statementValueInput?.should be_false
       end
     end
+    it "should check snaktype selector behaviour", :exclude_firefox => true do
+      on_page(ItemPage) do |page|
+        page.navigate_to items[0]["url"]
+        page.wait_for_entity_to_load
+        page.addStatement
+        page.entitySelectorInput = properties_cm[0]["label"]
+        ajax_wait
+        page.wait_for_property_value_box
+        page.snaktypeSelectorIcon?.should be_true
+        page.snaktypeSelectorIcon_element.click
+        page.statementValueInput?.should be_true
+        page.snaktypeSelectorValue?.should be_true
+        page.snaktypeSelectorSomevalue?.should be_true
+        page.snaktypeSelectorNovalue?.should be_true
+        page.snaktypeSelectorSomevalue
+        page.statementValueInput?.should be_false
+        page.snaktypeSelectorIcon_element.click
+        page.statementValueInput?.should be_false
+        page.snaktypeSelectorNovalue
+        page.statementValueInput?.should be_false
+        page.snaktypeSelectorIcon_element.click
+        page.statementValueInput?.should be_false
+        page.snaktypeSelectorValue
+        page.statementValueInput?.should be_true
+        page.cancelStatement
+        page.snaktypeSelectorIcon?.should be_false
+      end
+    end
     it "should check entity suggestor behaviour" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
