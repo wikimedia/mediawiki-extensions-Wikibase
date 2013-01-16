@@ -72,6 +72,8 @@ $messages['en'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak of type "$1". Handling for this kind of Snak is not yet supported.',
 	'wikibase-snakview-choosesnaktype' => 'Choose a value type.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Handling of values for "$1" data type is not yet supported.',
+	'wikibase-snakview-variation-datavaluetypemismatch' => 'The value does not comply with the property\'s definition.',
+	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'The value\'s data value type "$1" does not match the property\'s data type\'s data value type "$2".',
 	'wikibase-snakview-variations-somevalue-label' => 'unknown value',
 	'wikibase-snakview-variations-novalue-label' => 'no value',
 	'wikibase-snakview-snaktypeselector-value' => 'custom value',
@@ -403,6 +405,11 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-propertyedittool-co
 	'wikibase-snakview-snaktypeselector-value' => "Short descriptive title of a 'value' snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option - which is the default when adding a claim - is allowing the user to specify a value.",
 	'wikibase-snakview-snaktypeselector-somevalue' => "Short descriptive title of a some-value snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that a value exists but it is unknown.",
 	'wikibase-snakview-snaktypeselector-novalue' => "Short descriptive title of a no-value snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that no value exists.",
+	'wikibase-snakview-variation-datavaluetypemismatch' => "Warning displayed if the data value type used by a Snak's (see [[d:Wikidata/Glossary]]) property's data type is different from the data value type of the same Snak's actual value. This should only appear after internal changes or after a property's data type has changed and no scripts for updating the data were executed (there might not even be any scripts for handling all possible causes of this).",
+	'wikibase-snakview-variation-datavaluetypemismatch-details' => "Details of the warning displayed if the data value type used by a Snak's (see [[d:Wikidata/Glossary]]) property's data type is different from the data value type of the same Snak's actual value. Parameters:
+* $1: data value type of the property-value Snak's value.
+* $2: data value type used by the data type used in the property which is used by the property-value Snak.
+",
 	'wikibase-anonymouseditwarning-item' => 'Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on an item (see [[d:Wikidata/Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in.
 
 See also:
