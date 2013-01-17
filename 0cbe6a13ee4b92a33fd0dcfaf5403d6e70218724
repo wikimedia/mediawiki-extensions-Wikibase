@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//7Qs\u003d",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2013-01-17T16:11:15Z",
+      "side": 1,
+      "message": "Didn\u0027t know whether to split this up into more lines...",
+      "revId": "0cbe6a13ee4b92a33fd0dcfaf5403d6e70218724",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
