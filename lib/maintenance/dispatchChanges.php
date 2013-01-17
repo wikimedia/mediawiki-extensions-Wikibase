@@ -65,7 +65,12 @@ class DispatchChanges extends \Maintenance {
 	/**
 	 * @var int: the number of client update passes to perform before exiting.
 	 */
-	protected $passes;
+	protected $maxPasses;
+
+	/**
+	 * @var int: the number of seconds passes to run before exiting.
+	 */
+	protected $maxTime;
 
 	/**
 	 * @var int: the number of seconds to wait before executing the next pass.
@@ -86,6 +91,8 @@ class DispatchChanges extends \Maintenance {
 	 * Constructor.
 	 */
 	public function __construct() {
+		parent::__construct();
+
 		$this->mDescription =
 			'Maintenance script that polls for Wikibase changes in the shared wb_changes table
 			and dispatches them to any client wikis using their job queue.';
@@ -93,10 +100,9 @@ class DispatchChanges extends \Maintenance {
 		$this->addOption( 'verbose', "Report activity." );
 		$this->addOption( 'max-select-tries', "How often to try to find an idle client wiki before giving up. Default: 10", false, true );
 		$this->addOption( 'pass-delay', "Seconds to sleep between passes. Default: 1", false, true );
-		$this->addOption( 'passes', "The number of passes to do before exiting. Default: the number of client wikis.", false, true );
-		$this->addOption( 'batch-size', "How many changes to pass to a client at a time. Default: 100", false, true );
-
-		parent::__construct();
+		$this->addOption( 'max-passes', "The number of passes to do before exiting. Default: the number of client wikis if max-time isn't given. Infinite if it is.", false, true );
+		$this->addOption( 'max-time', "The number of seconds before exiting. Default: infinite.", false, true );
+		$this->addOption( 'batch-size', "Max number of changes to pass to a client at a time. Default: 1000", false, true );
 	}
 
 	/**
@@ -109,8 +115,9 @@ class DispatchChanges extends \Maintenance {
 		$this->clientWikis = Settings::get( 'localClientDatabases' );
 		$this->batchChunkFactor = Settings::get( 'dispatchBatchChunkFactor' );
 
-		$this->batchSize = intval( $this->getOption( 'batch-size', 100 ) );
-		$this->passes = intval( $this->getOption( 'passes', count( $this->clientWikis ) ) );
+		$this->batchSize = intval( $this->getOption( 'batch-size', 1000 ) );
+		$this->maxTime = intval( $this->getOption( 'max-time', PHP_INT_MAX ) );
+		$this->maxPasses = intval( $this->getOption( 'max-passes', $this->maxTime < PHP_INT_MAX ? PHP_INT_MAX : count( $this->clientWikis ) ) );
 		$this->delay = intval( $this->getOption( 'pass-delay', 1 ) );
 
 		$this->maxSelectTries = intval( $this->getOption( 'max-select-tries', 10 ) );
@@ -175,21 +182,32 @@ class DispatchChanges extends \Maintenance {
 	/**
 	 * Maintenance script entry point.
 	 *
-	 * This will run $this->runPass() in a loop, the number of times specified by $this->passes,
-	 * sleeping $this->delay seconds between passes.
+	 * This will run $this->runPass() in a loop, the number of times specified by $this->maxPasses,
+	 * sleeping $this->delay seconds between passes. If $this->maxTime is exceeded before all passes
+	 * are run, execution is also terminated.
 	 */
 	public function execute() {
 		if ( !defined( 'WBL_VERSION' ) ) {
 			// Since people might waste time debugging odd errors when they forget to enable the extension. BTDT.
-			die( 'WikibaseLib has not been loaded.' );
+			throw new \MWException( "WikibaseLib has not been loaded." );
 		}
 
 		$this->handleOptions();
 
-		$this->log( "Starting loop for {$this->passes} passes" );
+		if ( empty( $this->clientWikis ) ) {
+			throw new \MWException( "No client wikis configured! Please set \$wgWBSettings['localClientDatabases']." );
+		}
+
+		$passes = $this->maxPasses === PHP_INT_MAX ? "unlimited" : $this->maxPasses;
+		$time = $this->maxTime === PHP_INT_MAX ? "unlimited" : $this->maxTime;
+
+		$this->log( "Starting loop for $passes passes or $time seconds" );
+
+		$startTime = time();
+		$t = 0;
 
 		//run passes in a loop, and sleep between passes.
-		for ( $i = 0; $i < $this->passes; $i++ ) {
+		for ( $i = 0; $i < $this->maxPasses; $i++ ) {
 			if ( $i && $this->delay > 0 ) {
 				// sleep before all but the first pass
 				sleep( $this->delay );
@@ -200,9 +218,15 @@ class DispatchChanges extends \Maintenance {
 			} catch ( \Exception $ex ) {
 				$this->log( "ERROR: $ex" );
 			}
+
+			$t = ( time() - $startTime );
+
+			if ( ( $t  + $this->delay ) > $this->maxTime ) {
+				break;
+			}
 		}
 
-		$this->log( "Done, exiting." );
+		$this->log( "Done, exiting after $i passes and $t seconds." );
 	}
 
 	/**
@@ -233,7 +257,7 @@ class DispatchChanges extends \Maintenance {
 
 		$n = count( $changes );
 
-		$this->trace( "Posted $n changes to $wikiDB" );
+		$this->log( "Posted $n changes to $wikiDB" );
 		return $n;
 	}
 
@@ -283,7 +307,7 @@ class DispatchChanges extends \Maintenance {
 	 */
 	protected function trySelectClient() {
 		if ( empty( $this->clientWikis ) ) {
-			throw new \MWException( "no client wikis configured!" );
+			throw new \MWException( "No client wikis configured! Please set \$wgWBSettings['localClientDatabases']." );
 		}
 
 		// pick a client at random
