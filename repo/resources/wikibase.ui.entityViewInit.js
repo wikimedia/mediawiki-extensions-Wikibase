@@ -145,13 +145,11 @@
 		}
 
 		// Display anonymous user edit warning
-		/*
-		if ( mw.user.isAnon() ) {
+		if ( mw.user && mw.user.isAnon && mw.user.isAnon() ) {
 			$( wb ).on( 'startItemPageEditMode', function( event ) {
 				mw.notify( mw.message( 'wikibase-anonymouseditwarning-' + wb.entity.type ) );
 			} );
 		}
-		*/
 
 		// remove loading spinner after JavaScript has kicked in
 		$( '.wb-entity' ).fadeTo( 0, 1 );

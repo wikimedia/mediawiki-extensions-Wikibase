@@ -42,6 +42,7 @@ return call_user_func( function() {
 				'wikibase.ui.entityViewInit.js' // should probably be adjusted for more modularity
 			),
 			'dependencies' => array(
+				'mediawiki.user',
 				'wikibase.ui.PropertyEditTool',
 				'jquery.wikibase.entityview',
 				'wikibase.datamodel',
