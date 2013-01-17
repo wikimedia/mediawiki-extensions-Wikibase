@@ -118,6 +118,25 @@ describe "Check statements UI", :experimental => true do
         page.statementValueInput?.should be_false
       end
     end
+    it "should check error handling" do
+      on_page(ItemPage) do |page|
+        js_snippet = "wikibase.Api.prototype.createClaim ="+
+        "function(entityId,baseRevId,mainSnak){return this._claimApiCall(baseRevId,mainSnak,{action:'nonexistant',entity:entityId});}"
+        page.navigate_to items[0]["url"]
+        page.wait_for_entity_to_load
+        @browser.execute_script(js_snippet);
+        page.addStatement
+        page.entitySelectorInput = properties_cm[0]["label"]
+        ajax_wait
+        page.wait_for_entity_selector_list
+        page.wait_for_property_value_box
+        page.statementValueInput = statement_value
+        page.saveStatement
+        ajax_wait
+        page.wbErrorDiv?.should be_true
+        page.cancelStatement
+      end
+    end
     it "should check adding a statement" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
