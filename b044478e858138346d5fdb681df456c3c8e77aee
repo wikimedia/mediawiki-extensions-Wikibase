@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//7RM\u003d",
+        "filename": "repo/tests/selenium/aliases/aliases_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2013-01-17T11:58:30Z",
+      "side": 1,
+      "message": "Why is this a string?",
+      "revId": "b044478e858138346d5fdb681df456c3c8e77aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7RI\u003d",
+        "filename": "repo/tests/selenium/item/description_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2013-01-17T11:58:30Z",
+      "side": 1,
+      "message": "String comparison with \"0\" done, not numerical comparison.",
+      "revId": "b044478e858138346d5fdb681df456c3c8e77aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
