@@ -111,6 +111,7 @@ final class LibHooks {
 			'claim/ClaimObject',
 			'claim/Claims',
 
+			'entity/EntityDiff',
 			'entity/EntityFactory',
 			'entity/EntityId',
 
@@ -125,7 +126,6 @@ final class LibHooks {
 
 			'parsers/EntityIdParser',
 
-			'property/PropertyDiff',
 			'property/Property',
 
 			'query/Query',

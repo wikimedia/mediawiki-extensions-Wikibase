@@ -92,6 +92,17 @@ class EntityDiff extends Diff {
 	}
 
 	/**
+	 * Returns a Diff object with the claim differences.
+	 *
+	 * @since 0.4
+	 *
+	 * @return Diff
+	 */
+	public function getClaimsDiff() {
+		return isset( $this['claim'] ) ? $this['claim'] : new Diff( array(), false );
+	}
+
+	/**
 	 * Returns if there are any changes (equivalent to: any differences between the entities).
 	 *
 	 * @since 0.1
@@ -101,7 +112,8 @@ class EntityDiff extends Diff {
 	public function isEmpty() {
 		return $this->getDescriptionsDiff()->isEmpty()
 			&& $this->getAliasesDiff()->isEmpty()
-			&& $this->getLabelsDiff()->isEmpty();
+			&& $this->getLabelsDiff()->isEmpty()
+			&& $this->getClaimsDiff()->isEmpty();
 	}
 
 }
