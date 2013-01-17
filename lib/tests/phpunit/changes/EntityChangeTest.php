@@ -128,4 +128,18 @@ class EntityChangeTest extends \MediaWikiTestCase {
 			$entityChange->getMetadata()
 		);
 	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @since 0.4
+	 */
+	public function testToString( EntityChange $entityChange ) {
+		$s = "$entityChange"; // magically calls __toString()
+
+		$id = $entityChange->getEntityId()->getPrefixedId();
+		$type = $entityChange->getType();
+
+		$this->assertTrue( strpos( $s, $id ) !== false, "contains entity ID" );
+		$this->assertTrue( strpos( $s, $type ) !== false, "contains type" );
+	}
 }
