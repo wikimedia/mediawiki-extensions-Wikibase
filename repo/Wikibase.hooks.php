@@ -854,10 +854,10 @@ final class RepoHooks {
 			. Html::closeElement( 'span' );
 
 		// Set title attribute for constructed link, and make tricks with the directionality to get it right
-		$titleText = ( $labelText !== '' )
+		$titleText = ( $labelText !== null )
 			? $labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
 			: $target->getPrefixedText();
-		$customAttribs[ 'title' ] = ( $descriptionText !== '' ) ?
+		$customAttribs[ 'title' ] = ( $descriptionText !== null ) ?
 			wfMessage(
 				'wikibase-itemlink-title',
 				$titleText,
