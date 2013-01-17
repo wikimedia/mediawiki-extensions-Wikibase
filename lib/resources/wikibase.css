@@ -25,6 +25,16 @@ are also triggered down the document */
 	display: block;
 }
 
+.wb-entitypage .ui-state-disabled {
+	opacity: 1;
+}
+
+.wb-entitypage .ui-state-disabled input,
+.wb-entitypage .ui-state-disabled textarea {
+	background-color: #F0F0F0;
+	color: #565656;
+}
+
 
 /********** BASIC LAYOUT **********/
 
