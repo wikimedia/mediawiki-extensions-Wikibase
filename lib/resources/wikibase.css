@@ -25,6 +25,11 @@ are also triggered down the document */
 	display: block;
 }
 
+.wb-disabled {
+	background-color: #F0F0F0 !important;
+	color: #565656;
+}
+
 
 /********** BASIC LAYOUT **********/
 
