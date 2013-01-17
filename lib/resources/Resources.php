@@ -205,6 +205,7 @@ return call_user_func( function() {
 				'jquery.ui.entityselector',
 				'jquery.wikibase.siteselector',
 				'mediawiki.api',
+				'mediawiki.language',
 				'mediawiki.Title',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase',
