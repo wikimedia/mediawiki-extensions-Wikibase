@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+use MWException;
+use Diff\Differ;
 
 /**
  * Implementation of the Claims interface.
@@ -183,6 +185,55 @@ class Claims extends HashArray implements ClaimListAccess {
 			unset( $this->guidIndex[$claim->getGuid()] );
 			parent::offsetUnset( $index );
 		}
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param Claims $claims
+	 * @param Differ|null $differ
+	 *
+	 * @return \Diff\Diff
+	 * @throws MWException
+	 */
+	public function getDiff( Claims $claims, Differ $differ = null ) {
+		if ( $differ === null ) {
+			$differ = new \Diff\ListDiffer();
+		}
+
+		$sourceHashes = array();
+		$targetHashes = array();
+
+		/**
+		 * @var Claim $claim
+		 */
+		foreach ( $this as $claim ) {
+			$sourceHashes[] = $claim->getHash();
+		}
+
+		foreach ( $claims as $claim ) {
+			$targetHashes[] = $claim->getHash();
+		}
+
+		$diff = new \Diff\Diff( array(), false );
+
+		foreach ( $differ->doDiff( $sourceHashes, $targetHashes ) as $diffOp ) {
+			if ( $diffOp instanceof \Diff\DiffOpAdd ) {
+				$claim = $claims->getByElementHash( $diffOp->getNewValue() );
+				assert( $claim instanceof Claim );
+				$diff[] = new \Diff\DiffOpAdd( $claim );
+			}
+			elseif ( $diffOp instanceof \Diff\DiffOpRemove ) {
+				$claim = $this->getByElementHash( $diffOp->getOldValue() );
+				assert( $claim instanceof Claim );
+				$diff[] = new \Diff\DiffOpRemove( $claim );
+			}
+			else {
+				throw new MWException( 'Invalid DiffOp type cannot be handled' );
+			}
+		}
+
+		return $diff;
 	}
 
 }
