@@ -2,6 +2,244 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAADhH//7Jg\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "Why [$2] and not just $2?",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7Jo\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "This should document the meaning of the individual message parameters.",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7JA\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "While it\u0027s unlikely to ever cause a problem, all things added to a URL should be run through urlencode()  or wfUrlencode, to make sure the URL isn\u0027t broken by a language code containing, say, a \"+\" or maybe the ID containing a \"#\".",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7JQ\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "This is not a link, it\u0027s a url. So $editUrl would be nicer.",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7I0\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "Maybe this logic should be wrapped in a separate function getStaticEditUrl( $specialPage, EntityId $entity ). This is the fourth time or so I see this in this change.",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7Hw\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "The name is a bit misleading - this doesn\u0027t set an entity, it modifies an entity by changing one of the entities attributes. So, maybe this should be called SpecialModifyEntity - that would be analogous to ApiModifyEntity.",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7Bs\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "Too much is magically derived from $valueName for my taste... maybe we can do completely without?",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7Bw\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "I\u0027d prefer to avoid magic like this. Just let the subclass provide the full name here.",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7Hc\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "Should the acceptable type(s) of entities be specified and checked here? Not all SetX special pages will be able to operate on all types of entities.",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7BA\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "Yould be done by an abstract method getPostedValue() or some such. I\u0027m not sure the actual value is needed by this code at all...",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7CI\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "I would prefer an abstract getAutoComment method to be implemented by subclasses instead of magically composing a name based on some member that has to be set by the subclass.",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7AA\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "EDIT_AUTOSUMMARY? Really? I would suggest EDIT_UPDATE.",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//6/k\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "Oh no! Saving my fail for all kinds of reasons. Please now a nice message to the user, instead of \"ARRGGG! SOMETHING IS VERY WRONG!!!\"\n\nHow about $editEntity-\u003eshowErrorPage()? That\u0027s what it\u0027s there for...",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//6/g\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "please use one brace style consistently. either\n\n}\nelse {\n\nor\n\n} else {\n\nmixing them makes me dizzy :)",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//7Q0\u003d",
         "filename": "repo/includes/specials/SpecialSetEntity.php",
         "patchSetId": 17
@@ -13,6 +251,40 @@
       "writtenOn": "2013-01-17T12:05:16Z",
       "side": 1,
       "message": "There is no error page shown when e.g. a blocked user tries to set a label. I think it\u0027s because of the try/catch but I\u0027m really not sure why this happens.",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//6/c\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "MWException is really for coding errors. They mean somethign WENT WRONG. If you want to just show a failure to the user, use ErrorPageError (and don\u0027t catch it).\n\nAnyway, EditEntity already provides a way to report errors nicely, see above.",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//7BQ\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-17T16:01:23Z",
+      "side": 1,
+      "message": "Is this needed/used?",
       "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
