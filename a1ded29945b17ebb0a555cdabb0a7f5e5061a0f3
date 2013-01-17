@@ -87,6 +87,23 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//658\u003d",
+        "filename": "repo/includes/specials/SpecialSetDescription.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-17T17:12:38Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003d",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//7Hw\u003d",
         "filename": "repo/includes/specials/SpecialSetEntity.php",
         "patchSetId": 17
@@ -166,6 +183,23 @@
       "writtenOn": "2013-01-17T16:01:23Z",
       "side": 1,
       "message": "Yould be done by an abstract method getPostedValue() or some such. I\u0027m not sure the actual value is needed by this code at all...",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//650\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-17T17:12:38Z",
+      "side": 1,
+      "message": "We use ||, not or",
       "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -285,6 +319,74 @@
       "writtenOn": "2013-01-17T16:01:23Z",
       "side": 1,
       "message": "Is this needed/used?",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//65s\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-17T17:12:38Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003d",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//65k\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-17T17:12:38Z",
+      "side": 1,
+      "message": "missing curly brackets",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//65o\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-17T17:12:38Z",
+      "side": 1,
+      "message": "missing curly brackets",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//65g\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-17T17:12:38Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003d",
       "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
