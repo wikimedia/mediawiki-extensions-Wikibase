@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use Wikibase\Reference;
-use Wikibase\EntityId;
 
 /**
  * Unit tests for the Wikibase\class ApiSetReference class.

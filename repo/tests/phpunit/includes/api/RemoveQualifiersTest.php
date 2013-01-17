@@ -3,7 +3,6 @@
 namespace Wikibase\Test\Api;
 use Wikibase\Snak;
 use Wikibase\Statement;
-use Wikibase\EntityId;
 
 /**
  * Unit tests for the Wikibase\Api\RemoveQualifiers class.

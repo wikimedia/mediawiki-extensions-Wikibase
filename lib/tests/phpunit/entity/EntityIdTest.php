@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Settings, Wikibase\EntityId;
+use Wikibase\EntityId;
 
 /**
  * Tests for the Wikibase\EntityId class.
