@@ -705,36 +705,61 @@ abstract class EntityTest extends \MediaWikiTestCase {
 	}
 
 	public function patchProvider() {
+		$claim0 = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim1 = new \Wikibase\ClaimObject( new \Wikibase\PropertySomeValueSnak( 42 ) );
+		$claim2 = new \Wikibase\ClaimObject( new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'ohi' ) ) );
+		$claim3 = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 1 ) );
+
 		$argLists = array();
 
+
+//		$source = $this->getNewEmpty();
+//		$patch = new EntityDiff();
+//		$expected = clone $source;
+//
+//		$argLists[] = array( $source, $patch, $expected );
+//
+//
+//		$source = $this->getNewEmpty();
+//		$source->setLabel( 'en', 'foo' );
+//		$source->setLabel( 'nl', 'bar' );
+//		$source->setDescription( 'de', 'foobar' );
+//		$source->setAliases( 'en', array( 'baz', 'bah' ) );
+//		$source->addClaim( $claim1 );
+//
+//		$patch = new EntityDiff();
+//		$expected = clone $source;
+//
+//		$argLists[] = array( $source, $patch, $expected );
+//
+//
+//		$source = clone $source;
+//
+//		$patch = new EntityDiff( array(
+//			'description' => new \Diff\Diff( array(
+//				'de' => new \Diff\DiffOpChange( 'foobar', 'onoez' ),
+//				'en' => new \Diff\DiffOpAdd( 'foobar' ),
+//			), true ),
+//		) );
+//		$expected = clone $source;
+//		$expected->setDescription( 'de', 'onoez' );
+//		$expected->setDescription( 'en', 'foobar' );
+//
+//		$argLists[] = array( $source, $patch, $expected );
+
+
 		$source = $this->getNewEmpty();
-		$patch = new EntityDiff();
-		$expected = clone $source;
-
-		$argLists[] = array( $source, $patch, $expected );
-
-		$source = $this->getNewEmpty();
-		$source->setLabel( 'en', 'foo' );
-		$source->setLabel( 'nl', 'bar' );
-		$source->setDescription( 'de', 'foobar' );
-		$source->setAliases( 'en', array( 'baz', 'bah' ) );
-
-		$patch = new EntityDiff();
-		$expected = clone $source;
-
-		$argLists[] = array( $source, $patch, $expected );
-
-		$source = clone $source;
-
-		$patch = new EntityDiff( array(
-			'description' => new \Diff\Diff( array(
-				'de' => new \Diff\DiffOpChange( 'foobar', 'onoez' ),
-				'en' => new \Diff\DiffOpAdd( 'foobar' ),
-			), true ),
-		) );
-		$expected = clone $source;
-		$expected->setDescription( 'de', 'onoez' );
-		$expected->setDescription( 'en', 'foobar' );
+		$source->addClaim( $claim0 );
+		$source->addClaim( $claim1 );
+		$patch = new EntityDiff( array( 'claim' => new \Diff\Diff( array(
+			new \Diff\DiffOpRemove( $claim0 ),
+			new \Diff\DiffOpAdd( $claim2 ),
+			new \Diff\DiffOpAdd( $claim3 )
+		), false ) ) );
+		$expected = $this->getNewEmpty();
+		$expected->addClaim( $claim1 );
+		$expected->addClaim( $claim2 );
+		$expected->addClaim( $claim3 );
 
 		$argLists[] = array( $source, $patch, $expected );
 
@@ -750,14 +775,7 @@ abstract class EntityTest extends \MediaWikiTestCase {
 	 */
 	public function testPatch( Entity $source, EntityDiff $patch, Entity $expected ) {
 		$source->patch( $patch );
-
-		$equals = $expected->equals( $source );
-
-		if ( !$equals ) {
-			q( $source, $expected );
-		}
-
-		$this->assertTrue( $equals );
+		$this->assertTrue( $expected->equals( $source ) );
 	}
 
 }
