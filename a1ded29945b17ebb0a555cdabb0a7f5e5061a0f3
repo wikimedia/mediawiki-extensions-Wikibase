@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//7Q0\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-01-17T12:05:16Z",
+      "side": 1,
+      "message": "There is no error page shown when e.g. a blocked user tries to set a label. I think it\u0027s because of the try/catch but I\u0027m really not sure why this happens.",
+      "revId": "a1ded29945b17ebb0a555cdabb0a7f5e5061a0f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
