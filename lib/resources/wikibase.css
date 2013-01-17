@@ -379,19 +379,11 @@ div.wb-claim-container .wb-editsection {
 	top: 10px; /* even out padding */
 }
 
-div.wb-claim-container .wb-editsection .wb-ui-toolbar {
-	background-color: #FFF;
-}
-
 /* Link to add claim to section */
 div.wb-claim-section .wb-claim-add {
 	border-bottom: none;
 	background-color: #F8F8F8;
 	min-height: 3em;
-}
-
-div.wb-claim-section .wb-claim-add .wb-editsection .wb-ui-toolbar {
-	background-color: transparent;
 }
 
 /* General add new claim link */
@@ -407,15 +399,23 @@ div.wb-claim-new .wb-snak-property-container {
 	background-color: #C0DAE5;
 }
 
+div.wb-claims .wb-error .wb-claim-section-name,
+div.wb-claim-new .wb-error .wb-snak-property-container {
+	background-color: #E5C8B5;
+}
+
 /**
  * TODO: styling Claims with .wb-edit with blue color should be enough; however, there needs to be
  * a new template wrapping a new/pending claim. See TODO in templates.php at 'wb-claim' template
  */
 div.wb-claim-section .wb-edit,
-div.wb-claim-section .wb-edit .wb-ui-toolbar,
-div.wb-claim-new,
-div.wb-claim-new .wb-editsection .wb-ui-toolbar {
+div.wb-claim-new {
 	background-color: #D6F3FF;
+}
+
+div.wb-claim-section .wb-error .wb-claim,
+div.wb-claim-new .wb-error {
+	background-color: #FFDFC9;
 }
 
 div.wb-claim-new {
@@ -488,11 +488,6 @@ div.wb-claim-new .wb-snak-value {
 .wb-snakview-variation-valuesnak-datavaluetypemismatch-message div {
 	font-size: 84%;
 	margin-top: 0.4em;
-}
-
-.wb-error .wb-claim,
-.wb-error .wb-editsection .wb-ui-toolbar {
-	background-color: #FFDFC9 !important;
 }
 
 /***** /EDIT/NEW CLAIM *****/
