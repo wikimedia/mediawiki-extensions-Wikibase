@@ -100,12 +100,12 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 		$argLists[] = array(
 			array(
 				new ClaimObject(
-					new PropertyValueSnak( 2, new StringValue( $id9001->getPrefixedId() ) ),
+					new PropertyValueSnak( 2, $id9001 ),
 					new SnakList( array(
 						new PropertyNoValueSnak( 42 ),
 						new PropertySomeValueSnak( 43 ),
 						new PropertyValueSnak( 1, new StringValue( 'onoez' ) ),
-						new PropertyValueSnak( 2, new StringValue( $id1->getPrefixedId() ) ),
+						new PropertyValueSnak( 2, $id1 ),
 					) )
 				),
 				new ClaimObject( new PropertyNoValueSnak( 44 ) ),

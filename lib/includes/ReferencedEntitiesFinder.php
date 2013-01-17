@@ -96,13 +96,16 @@ class ReferencedEntitiesFinder {
 					$dataType = $properties[$prefixedId]->getDataType()->getId();
 
 					if ( $dataType === 'wikibase-item' ) {
-						$entityId = EntityId::newFromPrefixedId( $snak->getDataValue()->getValue() );
+						$entityId = $snak->getDataValue();
 
 						if ( $entityId === null ) {
 							// TODO: handle ref to non-existing item
 						}
-						else {
+						else if ( $entityId instanceof EntityId ) {
 							$foundEntities[] = $entityId;
+						}
+						else {
+							// TODO: handle values in other formats
 						}
 					}
 				}

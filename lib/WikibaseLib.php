@@ -220,7 +220,7 @@ $wgExtensionFunctions[] = function() {
 	$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
 
 	$wgDataTypes['wikibase-item'] = array(
-		'datavalue' => 'string',
+		'datavalue' => 'wikibase-entityid',
 		'parser' => $libRegistry->getEntityIdParser(),
 	);
 
