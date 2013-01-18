@@ -25,6 +25,7 @@ describe "Check functionality of property view", :experimental => true do
     it "should check changing label" do
       on_page(PropertyPage) do |page|
         page.navigate_to_property
+        page.wait_for_entity_to_load
         @browser.title.include?(label).should be_true
         page.entityLabelSpan.should == label
         page.entityDescriptionSpan.should == description
@@ -53,6 +54,7 @@ describe "Check functionality of property view", :experimental => true do
     it "should check changing description" do
       on_page(PropertyPage) do |page|
         page.navigate_to_property
+        page.wait_for_entity_to_load
         page.entityLabelSpan.should == label
         page.entityDescriptionSpan.should == description
         page.editDescriptionLink
@@ -76,6 +78,30 @@ describe "Check functionality of property view", :experimental => true do
         page.wait_for_api_callback
       end
     end
+    it "should check behavior when using '0' as label/description" do
+      on_page(PropertyPage) do |page|
+        page.navigate_to_property
+        page.wait_for_entity_to_load
+        page.editLabelLink
+        page.labelInputField_element.clear
+        page.labelInputField = '0'
+        page.saveLabelLink
+        ajax_wait
+        page.wait_for_api_callback
+        page.editDescriptionLink
+        page.descriptionInputField_element.clear
+        page.descriptionInputField = '0'
+        page.saveDescriptionLink
+        ajax_wait
+        page.wait_for_api_callback
+        page.entityLabelSpan.should == '0'
+        page.entityDescriptionSpan.should == '0'
+        @browser.refresh
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == '0'
+        page.entityDescriptionSpan.should == '0'
+      end
+    end
   end
 
   context "Check for adding/removing property aliases" do
@@ -89,12 +115,13 @@ describe "Check functionality of property view", :experimental => true do
           page.aliasesInputEmpty = generate_random_string(8)
           i += 1;
         end
+        page.aliasesInputEmpty = '0'
         page.saveAliases
         ajax_wait
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_entity_to_load
-        page.count_existing_aliases.should == 3
+        page.count_existing_aliases.should == 4
       end
     end
     it "should check that removing aliases work properly" do
@@ -131,6 +158,22 @@ describe "Check functionality of property view", :experimental => true do
   end
 
   after :all do
-    # tear down
+    # tear down: set label/description to something random (to not violate unique constraints in future tests)
+    on_page(PropertyPage) do |page|
+      page.navigate_to_property
+      page.wait_for_entity_to_load
+      page.editLabelLink
+      page.labelInputField_element.clear
+      page.labelInputField = generate_random_string(10)
+      page.saveLabelLink
+      ajax_wait
+      page.wait_for_api_callback
+      page.editDescriptionLink
+      page.descriptionInputField_element.clear
+      page.descriptionInputField = generate_random_string(20)
+      page.saveDescriptionLink
+      ajax_wait
+      page.wait_for_api_callback
+    end
   end
 end
