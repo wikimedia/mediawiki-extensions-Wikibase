@@ -109,7 +109,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 			isset( $params['token'] ) ? $params['token'] : ''
 		);
 
-		if ( !$status->isGood() ) {
+		if ( !$status->isOK() ) {
 			$this->dieUsage( 'Failed to save the change', 'createclaim-save-failed' );
 		}
 
