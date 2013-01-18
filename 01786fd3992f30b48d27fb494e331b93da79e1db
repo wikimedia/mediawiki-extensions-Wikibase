@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//5p0\u003d",
+        "filename": "lib/includes/claim/Claim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-18T14:48:07Z",
+      "side": 1,
+      "message": "@since 0.4 now + a comment how you changed it in 0.4 if you want to be consequent on this.",
+      "revId": "01786fd3992f30b48d27fb494e331b93da79e1db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
