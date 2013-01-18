@@ -128,7 +128,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
   context "Check for adding multiple site links UI" do
     it "should check if adding multiple sitelinks works" do
       count = 1
-      sitelinks = [["de", "Ber", "Deutsch (de)"], ["ja", "Ber", "日本語 (ja)"], ["he", "Ber", "עברית (he)"]]
+      sitelinks = [["de", "Ber", "Deutsch (de)"], ["ja", "Ber", "日本語 (ja)"], ["he", "BER", "עברית (he)"]]
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
