@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Test;
 use Wikibase\Claims;
 use Wikibase\ReferencedEntitiesFinder;
-use Wikibase\ClaimObject;
+use Wikibase\Claim;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -56,7 +56,7 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 
 		$argLists[] = array(
 			array(
-				new ClaimObject( new PropertyNoValueSnak( 42 ) )
+				new Claim( new PropertyNoValueSnak( 42 ) )
 			),
 			array(
 				new EntityId( Property::ENTITY_TYPE, 42 )
@@ -65,8 +65,8 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 
 		$argLists[] = array(
 			array(
-				new ClaimObject( new PropertyNoValueSnak( 42 ) ),
-				new ClaimObject( new PropertyNoValueSnak( 43 ) ),
+				new Claim( new PropertyNoValueSnak( 42 ) ),
+				new Claim( new PropertyNoValueSnak( 43 ) ),
 			),
 			array(
 				new EntityId( Property::ENTITY_TYPE, 42 ),
@@ -76,7 +76,7 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 
 		$argLists[] = array(
 			array(
-				new ClaimObject(
+				new Claim(
 					new PropertyNoValueSnak( 42 ),
 					new SnakList( array(
 						new PropertyNoValueSnak( 42 ),
@@ -84,7 +84,7 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 						new PropertyValueSnak( 1, new StringValue( 'onoez' ) ),
 					) )
 				),
-				new ClaimObject( new PropertyNoValueSnak( 44 ) ),
+				new Claim( new PropertyNoValueSnak( 44 ) ),
 			),
 			array(
 				new EntityId( Property::ENTITY_TYPE, 42 ),
@@ -99,7 +99,7 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 
 		$argLists[] = array(
 			array(
-				new ClaimObject(
+				new Claim(
 					new PropertyValueSnak( 2, $id9001 ),
 					new SnakList( array(
 						new PropertyNoValueSnak( 42 ),
@@ -108,7 +108,7 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 						new PropertyValueSnak( 2, $id1 ),
 					) )
 				),
-				new ClaimObject( new PropertyNoValueSnak( 44 ) ),
+				new Claim( new PropertyNoValueSnak( 44 ) ),
 			),
 			array(
 				new EntityId( Property::ENTITY_TYPE, 2 ),

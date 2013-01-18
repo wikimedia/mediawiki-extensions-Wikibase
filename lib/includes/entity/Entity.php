@@ -768,7 +768,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 			$this->claims = new Claims();
 
 			foreach ( $this->data['claims'] as $claimSerialization ) {
-				$this->claims->addClaim( ClaimObject::newFromArray( $claimSerialization ) );
+				$this->claims->addClaim( Claim::newFromArray( $claimSerialization ) );
 			}
 		}
 	}
@@ -846,7 +846,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	 * @return Claim
 	 */
 	protected function newClaimBase( Snak $mainSnak ) {
-		return new ClaimObject( $mainSnak );
+		return new Claim( $mainSnak );
 	}
 
 	/**

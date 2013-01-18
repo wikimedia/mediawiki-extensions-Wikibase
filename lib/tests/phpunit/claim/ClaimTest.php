@@ -1,11 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ClaimObject, Wikibase\Claim, Wikibase\Snak, Wikibase\SnakList, Wikibase\Snaks;
+use Wikibase\Claim, Wikibase\Snak, Wikibase\SnakList, Wikibase\Snaks;
 use DataValues\StringValue;
 
 /**
- * Tests for the Wikibase\ClaimObject class.
+ * Tests for the Wikibase\Claim class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ use DataValues\StringValue;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimObjectTest extends \MediaWikiTestCase {
+class ClaimTest extends \MediaWikiTestCase {
 
 	public function constructorProvider() {
 		$argLists = array();
@@ -63,7 +63,7 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 			function( array $arguments ) {
 				$snak = $arguments[0];
 				$qualifiers = array_key_exists( 1, $arguments ) ? $arguments[1] : null;
-				return array( new ClaimObject( $snak, $qualifiers ) );
+				return array( new Claim( $snak, $qualifiers ) );
 			},
 			$this->constructorProvider()
 		);
@@ -76,7 +76,7 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 	 * @param null|\Wikibase\Snaks $qualifiers
 	 */
 	public function testConstructor( Snak $snak, Snaks $qualifiers = null ) {
-		$claim = new ClaimObject( $snak, $qualifiers );
+		$claim = new Claim( $snak, $qualifiers );
 
 		$this->assertInstanceOf( '\Wikibase\Claim', $claim );
 
@@ -96,7 +96,7 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 	public function testSetMainSnak() {
 		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
 
-		$claim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( $id42 ) );
+		$claim = new Claim( new \Wikibase\PropertyNoValueSnak( $id42 ) );
 
 		$snak = new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 41 ) );
 		$claim->setMainSnak( $snak );
@@ -114,7 +114,7 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 	public function testSetQualifiers() {
 		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
 
-		$claim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( $id42 ) );
+		$claim = new Claim( new \Wikibase\PropertyNoValueSnak( $id42 ) );
 
 		$qualifiers = new SnakList();
 		$claim->setQualifiers( $qualifiers );
@@ -180,7 +180,7 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 
 		$this->assertInternalType( 'array', $data );
 
-		$copy = ClaimObject::newFromArray( $data );
+		$copy = Claim::newFromArray( $data );
 
 		$this->assertEquals( $claim->getHash(), $copy->getHash(), 'toArray newFromArray roundtrip should not affect hash' );
 	}

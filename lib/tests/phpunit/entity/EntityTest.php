@@ -705,10 +705,10 @@ abstract class EntityTest extends \MediaWikiTestCase {
 	}
 
 	public function patchProvider() {
-		$claim0 = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$claim1 = new \Wikibase\ClaimObject( new \Wikibase\PropertySomeValueSnak( 42 ) );
-		$claim2 = new \Wikibase\ClaimObject( new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'ohi' ) ) );
-		$claim3 = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 1 ) );
+		$claim0 = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim1 = new \Wikibase\Claim( new \Wikibase\PropertySomeValueSnak( 42 ) );
+		$claim2 = new \Wikibase\Claim( new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'ohi' ) ) );
+		$claim3 = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 1 ) );
 
 		$argLists = array();
 

@@ -38,7 +38,7 @@ use \DataValues\StringValue;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementObjectTest extends ClaimObjectTest {
+class StatementObjectTest extends ClaimTest {
 
 	public function instanceProvider() {
 		$instances = array();
