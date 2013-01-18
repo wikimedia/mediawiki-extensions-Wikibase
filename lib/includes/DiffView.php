@@ -3,10 +3,10 @@
 namespace Wikibase;
 use Html;
 use Diff\IDiff;
-use Diff\IDiffOp;
+use Diff\DiffOp;
 
 /**
- * Class for generating views of IDiff objects.
+ * Class for generating views of DiffOp objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -83,14 +83,18 @@ class DiffView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param array $path
-	 * @param IDiffOp $op
+	 * @param DiffOp $op
 	 *
 	 * @return string
 	 * @throws \MWException
 	 */
-	protected function generateOpHtml( array $path, IDiffOp $op ) {
+	protected function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
-			$name = implode( ' / ', $path ); #TODO: l10n
+			$name = implode( ' / ', $path ); // TODO: l10n
+
+			if ( $path[0] === 'claim' ) {
+				return 'TODO: claim diff visualization'; // TODO
+			}
 
 			$html = Html::openElement( 'tr' );
 			$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
