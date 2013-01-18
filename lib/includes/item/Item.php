@@ -228,7 +228,7 @@ class Item extends Entity {
 	 * @return Statement
 	 */
 	protected function newClaimBase( Snak $mainSnak ) {
-		return new StatementObject( $mainSnak );
+		return new Statement( $mainSnak );
 	}
 
 	/**

@@ -1,14 +1,13 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\StatementObject;
 use Wikibase\Statement;
 use Wikibase\Claim;
 use Wikibase\ReferenceObject;
 use \DataValues\StringValue;
 
 /**
- * Tests for the Wikibase\StatementObject class.
+ * Tests for the Wikibase\Statement class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,14 +37,14 @@ use \DataValues\StringValue;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementObjectTest extends ClaimTest {
+class StatementTest extends ClaimTest {
 
 	public function instanceProvider() {
 		$instances = array();
 
 		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
 
-		$baseInstance = new StatementObject( new \Wikibase\PropertyNoValueSnak( $id42 ) );
+		$baseInstance = new Statement( new \Wikibase\PropertyNoValueSnak( $id42 ) );
 
 		$instances[] = $baseInstance;
 
@@ -150,7 +149,7 @@ class StatementObjectTest extends ClaimTest {
 
 		$this->assertInternalType( 'array', $data );
 
-		$copy = StatementObject::newFromArray( $data );
+		$copy = Statement::newFromArray( $data );
 
 		$this->assertEquals( $claim->getHash(), $copy->getHash(), 'toArray newFromArray roundtrip should not affect hash' );
 	}
