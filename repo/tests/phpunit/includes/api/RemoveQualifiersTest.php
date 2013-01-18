@@ -61,7 +61,7 @@ class RemoveQualifiersTest extends \ApiTestCase {
 		$statements = array();
 
 		$mainSnak = new \Wikibase\PropertyNoValueSnak( 42 );
-		$statement = new \Wikibase\StatementObject( $mainSnak );
+		$statement = new \Wikibase\Statement( $mainSnak );
 		$statements[] = $statement;
 
 		foreach ( $this->snakProvider() as $snak ) {

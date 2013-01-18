@@ -167,7 +167,7 @@ class ItemTest extends EntityTest {
 		 * @var Item $item;
 		 */
 		$item = $item->copy();
-		$item->addClaim( new \Wikibase\StatementObject(
+		$item->addClaim( new \Wikibase\Statement(
 			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) )
 		) );
 		$items[] = $item;
