@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use Wikibase\Claims;
-use Wikibase\ClaimObject;
 use Wikibase\Claim;
 
 /**
@@ -57,7 +56,7 @@ class ClaimsTest extends \MediaWikiTestCase {
 	public function getElementInstances() {
 		$instances = array();
 
-		$instances[] = new \Wikibase\ClaimObject(
+		$instances[] = new \Wikibase\Claim(
 			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) )
 		);
 
@@ -138,8 +137,8 @@ class ClaimsTest extends \MediaWikiTestCase {
 	}
 
 	public function testDuplicateClaims() {
-		$firstClaim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$secondClaim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$firstClaim = new Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$secondClaim = new Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
 
 		$list = new Claims();
 		$this->assertTrue( $list->addElement( $firstClaim ), 'Adding the first element should work' );
@@ -147,7 +146,7 @@ class ClaimsTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( 2, count( $list->getArrayCopy() ), 'Adding two duplicates to an empty list should result in a count of two' );
 
-		$this->assertTrue( $list->addElement( new ClaimObject( new \Wikibase\PropertySomeValueSnak( 1 ) ) ) );
+		$this->assertTrue( $list->addElement( new Claim( new \Wikibase\PropertySomeValueSnak( 1 ) ) ) );
 
 		$list->removeDuplicates();
 
@@ -157,11 +156,11 @@ class ClaimsTest extends \MediaWikiTestCase {
 	public function getDiffProvider() {
 		$argLists = array();
 
-		$claim0 = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$claim1 = new ClaimObject( new \Wikibase\PropertySomeValueSnak( 42 ) );
-		$claim2 = new ClaimObject( new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'ohi' ) ) );
-		$claim3 = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 1 ) );
-		$claim4 = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 2 ) );
+		$claim0 = new Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim1 = new Claim( new \Wikibase\PropertySomeValueSnak( 42 ) );
+		$claim2 = new Claim( new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'ohi' ) ) );
+		$claim3 = new Claim( new \Wikibase\PropertyNoValueSnak( 1 ) );
+		$claim4 = new Claim( new \Wikibase\PropertyNoValueSnak( 2 ) );
 
 
 		$source = new Claims();

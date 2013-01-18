@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Statement extends Claim {
+interface Statement {
 
 	/**
 	 * Rank enum. Higher values are more preferred.

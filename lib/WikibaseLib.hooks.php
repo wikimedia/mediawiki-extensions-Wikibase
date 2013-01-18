@@ -108,8 +108,8 @@ final class LibHooks {
 
 			'claim/ClaimAggregate',
 			'claim/ClaimListAccess',
-			'claim/ClaimObject',
 			'claim/Claims',
+			'claim/Claim',
 
 			'entity/EntityDiff',
 			'entity/EntityFactory',

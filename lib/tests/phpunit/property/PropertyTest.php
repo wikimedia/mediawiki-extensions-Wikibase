@@ -115,7 +115,7 @@ class PropertyTest extends EntityTest {
 		$objects[] = $entity;
 
 		$entity = $entity->copy();
-		$entity->addClaim( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak(
+		$entity->addClaim( new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak(
 			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 )
 		) ) );
 		$objects[] = $entity;

@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementObject extends ClaimObject implements Statement {
+class StatementObject extends Claim implements Statement {
 
 	/**
 	 * @since 0.1

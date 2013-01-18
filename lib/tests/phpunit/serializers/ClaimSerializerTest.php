@@ -58,13 +58,13 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 		$id = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
 
-		$validArgs[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( $id ) );
+		$validArgs[] = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( $id ) );
 
-		$validArgs[] = new \Wikibase\ClaimObject( new \Wikibase\PropertySomeValueSnak( $id ) );
+		$validArgs[] = new \Wikibase\Claim( new \Wikibase\PropertySomeValueSnak( $id ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
-		$claim = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( $id ) );
+		$claim = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( $id ) );
 
 		$validArgs[] = array(
 			$claim,
