@@ -138,16 +138,19 @@ abstract class EntityView extends \ContextSource {
 	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
 
 		$claims = '';
+		$languageTerms = '';
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) { // still experimental
 			if ( $entity->getEntity()->getType() === 'item' ) {
 				$claims = $this->getHtmlForClaims( $entity, $lang, $editable );
 			}
+			$languageTerms = $this->getHtmlForLanguageTerms( $entity, $lang, $editable );
 		}
 
 		return wfTemplate( 'wb-entity-content',
 			$this->getHtmlForLabel( $entity, $lang, $editable ),
 			$this->getHtmlForDescription( $entity, $lang, $editable ),
 			$this->getHtmlForAliases( $entity, $lang, $editable ),
+			$languageTerms,
 			$claims
 		);
 	}
@@ -303,6 +306,88 @@ abstract class EntityView extends \ContextSource {
 				$aliasList . $this->getHtmlForEditSection( $entity, $lang ) // TODO: add link to SpecialPage
 			);
 		}
+	}
+
+	/**
+	 * Selects the languages for the terms to display on first try, based on the current user and the available
+	 * languages.
+	 *
+	 * @since 0.4
+	 *
+	 * @param Entity $entity
+	 * @param \Language $lang
+	 * @param \User $user
+	 * @return string[] selected langcodes
+	 */
+	private function selectTerms( Entity $entity, \Language $lang = null, \User $user = null ) {
+		$result = array();
+
+		// if the Babel extension is installed, add all languages of the user
+		if ( class_exists( 'Babel' ) ) {
+			$result = \Babel::getUserLanguages( $user );
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Builds and returns the HTML representing a WikibaseEntity's collection of terms.
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityContent $entity the entity to render
+	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 * @return string
+	 */
+	public function getHtmlForLanguageTerms( EntityContent $entity, Language $lang = null, $editable = true ) {
+
+		$html = $thead = $tbody = $tfoot = '';
+
+		$labels = $entity->getEntity()->getLabels();
+		$descriptions = $entity->getEntity()->getDescriptions();
+
+		$html .= wfTemplate( 'wb-terms-heading', wfMessage( 'wikibase-terms' ) );
+
+		$i = 0;
+
+		$languages = $this->selectTerms( $entity->getEntity(), $lang, $this->getUser() );
+
+		foreach( $languages as $language ) {
+
+			$label = array_key_exists( $language, $labels ) ? $labels[$language] : false;
+			$description = array_key_exists( $language, $descriptions ) ? $descriptions[$language] : false;
+
+			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
+
+			$specialLabelPage = \SpecialPageFactory::getPage( "SetLabel" );
+			if ( $specialLabelPage !== null ) {
+				$editLabelLink = $specialLabelPage->getTitle()->getLocalURL()
+					. '/' . $entity->getEntity()->getPrefixedId() . '/' . $language;
+			} else {
+				$editLabelLink = '';
+			}
+
+			$specialDescriptionPage = \SpecialPageFactory::getPage( "SetDescription" );
+			if ( $specialDescriptionPage !== null ) {
+				$editDescriptionLink = $specialDescriptionPage->getTitle()->getLocalURL()
+					. '/' . $entity->getEntity()->getPrefixedId() . '/' . $language;
+			} else {
+				$editDescriptionLink = '';
+			}
+
+			$tbody .= wfTemplate( 'wb-term',
+				$language,
+				$alternatingClass,
+				Utils::fetchLanguageName( $language ),
+				$label ? $label : '<em>' . wfMessage( 'wikibase-label-empty' ) . '</em>',
+				$description ? $description : '<em>' . wfMessage( 'wikibase-description-empty' ) . '</em>',
+				$this->getHtmlForEditSection( $entity, $lang, $editLabelLink ),
+				$this->getHtmlForEditSection( $entity, $lang, $editDescriptionLink )
+			);
+		}
+
+		return $html . wfTemplate( 'wb-terms-table', $tbody );
 	}
 
 	/**
