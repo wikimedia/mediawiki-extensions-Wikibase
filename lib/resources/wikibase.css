@@ -288,6 +288,76 @@ EditableValue's "edit" button when aliases exist) */
 
 /********** /ALIASES **********/
 
+/********** TERMS **********/
+h2.wb-terms-heading {
+    float: left;
+    width: 100%;
+    margin-top: 2em;
+    margin-bottom: 0.2em;
+    padding-left: 10px;
+    border-bottom: none;
+}
+
+table.wb-terms {
+    border-spacing: 0;
+    width: 100%;
+    border-bottom: 1px solid #C9C9C9;
+}
+
+table.wb-terms .wb-terms-language {
+    width: 25%;
+    word-wrap: break-word;
+    padding-left: 10px;
+    border-left: 1px solid #C9C9C9;
+}
+
+table.wb-terms .wb-terms-term {
+    width: 75%;
+    word-wrap: break-word;
+    padding-left: 10px;
+}
+
+table.wb-terms {
+    clear: both;
+    border-right: 1px solid #C9C9C9;
+}
+
+table.wb-terms td {
+    height: 2.2em;
+    border-top: 1px solid #C9C9C9;
+}
+
+table.wb-terms .uneven td {
+    background: #F0F0F0;
+}
+table.wb-terms .even td {
+    background: #F8F8F8;
+}
+
+/* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
+table.wb-terms .wb-editsection {
+    width: 18em;
+    position: static; /* clear absolute positioning */
+    float: none; /* overwrite edit section's float: right */
+    padding: 0;
+    margin-left: 0; /* reset edit section's margin which is set in the toolbar group instead;
+	                applying margin to the edit section cell should not have any effect at all */
+}
+
+table.wb-terms .wb-editsection .wb-ui-toolbar {
+    width: 18em; /* additionally assign width to toolbar to enforce width in no-JS version */
+}
+
+table.wb-terms .wb-editsection .wb-ui-toolbar .wb-ui-toolbar-group {
+    margin-left: 1px; /* even out table cell's right border */
+}
+
+table.wb-terms .wb-editsection .wb-ui-toolbar .wb-ui-toolbar-group .wb-ui-toolbar-group {
+    margin-left: 0; /* do not apply margin to nested toolbar groups */
+}
+
+/********** /TERMS **********/
+
 
 /********** CLAIMS **********/
 
