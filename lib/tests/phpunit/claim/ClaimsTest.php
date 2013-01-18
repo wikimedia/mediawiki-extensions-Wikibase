@@ -154,4 +154,67 @@ class ClaimsTest extends \MediaWikiTestCase {
 		$this->assertEquals( 2, count( $list->getArrayCopy() ), 'Removing duplicates from a list should work' );
 	}
 
+	public function getDiffProvider() {
+		$argLists = array();
+
+		$claim0 = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim1 = new ClaimObject( new \Wikibase\PropertySomeValueSnak( 42 ) );
+		$claim2 = new ClaimObject( new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'ohi' ) ) );
+		$claim3 = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 1 ) );
+		$claim4 = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 2 ) );
+
+
+		$source = new Claims();
+		$target = new Claims();
+		$expected = new \Diff\Diff( array(), false );
+		$argLists[] = array( $source, $target, $expected, 'Two empty lists should result in an empty diff' );
+
+
+		$source = new Claims();
+		$target = new Claims( array( $claim0 ) );
+		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim0 ) ), false );
+		$argLists[] = array( $source, $target, $expected, 'List with no entries to list with one should result in one add op' );
+
+
+		$source = new Claims( array( $claim0 ) );
+		$target = new Claims();
+		$expected = new \Diff\Diff( array( new \Diff\DiffOpRemove( $claim0 ) ), false );
+		$argLists[] = array( $source, $target, $expected, 'List with one entry to an empty list should result in one remove op' );
+
+
+		$source = new Claims( array( $claim0, $claim3, $claim2 ) );
+		$target = new Claims( array( $claim0, $claim2, $claim3 ) );
+		$expected = new \Diff\Diff( array(), false );
+		$argLists[] = array( $source, $target, $expected, 'Two identical lists should result in an empty diff' );
+
+
+		$source = new Claims( array( $claim0 ) );
+		$target = new Claims( array( $claim1 ) );
+		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim1 ), new \Diff\DiffOpRemove( $claim0 ) ), false );
+		$argLists[] = array( $source, $target, $expected, 'Two lists with each a single different entry should result into one add and one remove op' );
+
+
+		$source = new Claims( array( $claim2, $claim3, $claim0, $claim4 ) );
+		$target = new Claims( array( $claim2, $claim1, $claim3, $claim4 ) );
+		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim1 ), new \Diff\DiffOpRemove( $claim0 ) ), false );
+		$argLists[] = array( $source, $target, $expected, 'Two lists with identical items except for one change should result in one add and one remove op' );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider getDiffProvider
+	 *
+	 * @param \Wikibase\Claims $source
+	 * @param \Wikibase\Claims $target
+	 * @param \Diff\Diff $expected
+	 * @param string $message
+	 */
+	public function testGetDiff( Claims $source, Claims $target, \Diff\Diff $expected, $message ) {
+		$actual = $source->getDiff( $target );
+
+		// Note: this makes order of inner arrays relevant, and this order is not guaranteed by the interface
+		$this->assertArrayEquals( $expected->getOperations(), $actual->getOperations(), false, true, $message );
+	}
+
 }

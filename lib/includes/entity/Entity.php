@@ -873,9 +873,9 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 		$newEntity = $this->entityToDiffArray( $target );
 
 		$diffOps = $differ->doDiff( $oldEntity, $newEntity );
-		$diff = EntityDiff::newForType( $this->getType(), $diffOps );
+		$diffOps['claim'] = $this->getClaims()->getDiff( $target->getClaims() );
 
-		return $diff;
+		return EntityDiff::newForType( $this->getType(), $diffOps );
 	}
 
 	/**
@@ -893,8 +893,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 		$array['aliases'] = $entity->getAllAliases();
 		$array['label'] = $entity->getLabels();
 		$array['description'] = $entity->getDescriptions();
-
-		// TODO: claims
 
 		return $array;
 	}

@@ -36,7 +36,7 @@ use Wikibase\Item;
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
  */
 
-class ItemDiffTest extends EntityDiffTest {
+class ItemDiffTest extends EntityDiffOldTest {
 
 	public function provideApplyData() {
 		$originalTests = parent::generateApplyData( \Wikibase\Item::ENTITY_TYPE );

@@ -1,9 +1,10 @@
 <?php
+
 namespace Wikibase\Test;
-use Wikibase\Entity;
+use Wikibase\EntityDiff;
 
 /**
- * Tests for the Wikibase\EntityDiff deriving classes.
+ * Tests for the Wikibase\EntityDiff class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,224 +21,138 @@ use Wikibase\Entity;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @file
- * @since 0.1
+ * @since 0.4
  *
  * @ingroup WikibaseLib
  * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib
- * @group WikibaseDiff
  *
  * @licence GNU GPL v2+
- * @author Daniel Kinzler
- * @author Jens Ohlig <jens.ohlig@wikimedia.de>
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
+class EntityDiffTest extends \MediaWikiTestCase {
 
-abstract class EntityDiffTest extends \MediaWikiTestCase {
+	public function isEmptyProvider() {
+		$argLists = array();
 
-	private function newEntity ( $entityType ) {
-		switch ( $entityType ) {
-			case \Wikibase\Item::ENTITY_TYPE:
-				$entity = \Wikibase\Item::newEmpty();
-				break;
-			case \Wikibase\Property::ENTITY_TYPE:
-				$entity = \Wikibase\Property::newEmpty();
-				break;
-			case \Wikibase\Query::ENTITY_TYPE:
-				$entity =\Wikibase\Query::newEmpty();
-				break;
-			default:
-				throw new \MWException( "unknown entity type: $entityType" );
+		$argLists[] = array( array(), true );
+
+		$fields = array( 'aliases', 'label', 'description', 'claim' );
+
+		foreach ( $fields as $field ) {
+			$argLists[] = array( array( $field => new \Diff\Diff( array() ) ), true );
 		}
 
-		return $entity;
-	}
+		$diffOps = array();
 
-	protected function generateApplyData( $entityType ) {
-		$tests = array();
+		foreach ( $fields as $field ) {
+			$diffOps[$field] = new \Diff\Diff( array() );
+		}
 
-		// #0: add label
-		$a = $this->newEntity( $entityType );
-		$a->setLabel( 'en', 'Test' );
+		$argLists[] = array( $diffOps, true );
 
-		$b = $a->copy();
-		$b->setLabel( 'de', 'Test' );
+		foreach ( $fields as $field ) {
+			$argLists[] = array( array( $field => new \Diff\Diff( array( new \Diff\DiffOpAdd( 42 ) ) ) ), false );
+		}
 
-		$tests[] = array( $a, $b );
-
-		// #1: remove label
-		$a = $this->newEntity( $entityType );
-		$a->setLabel( 'en', 'Test' );
-		$a->setLabel( 'de', 'Test' );
-
-		$b = $a->copy();
-		$b->removeLabel( array( 'en' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #2: change label
-		$a = $this->newEntity( $entityType );
-		$a->setLabel( 'en', 'Test' );
-
-		$b = $a->copy();
-		$b->setLabel( 'en', 'Test!!!' );
-
-		// #3: add description ------------------------------
-		$a = $this->newEntity( $entityType );
-		$a->setDescription( 'en', 'Test' );
-
-		$b = $a->copy();
-		$b->setDescription( 'de', 'Test' );
-
-		$tests[] = array( $a, $b );
-
-		// #4: remove description
-		$a = $this->newEntity( $entityType );
-		$a->setDescription( 'en', 'Test' );
-		$a->setDescription( 'de', 'Test' );
-
-		$b = $a->copy();
-		$b->removeDescription( array( 'en' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #5: change description
-		$a = $this->newEntity( $entityType );
-		$a->setDescription( 'en', 'Test' );
-
-		$b = $a->copy();
-		$b->setDescription( 'en', 'Test!!!' );
-
-		$tests[] = array( $a, $b );
-
-		// #6: add alias ------------------------------
-		$a = $this->newEntity( $entityType );
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->addAliases( 'en', array( 'Quux' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #7: add alias language
-		$a = $this->newEntity( $entityType );
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->addAliases( 'de', array( 'Quux' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #8: remove alias
-		$a = $this->newEntity( $entityType );
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->removeAliases( 'en', array( 'Foo' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #9: remove alias language
-		$a = $this->newEntity( $entityType );
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->removeAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$tests[] = array( $a, $b );
-		return $tests;
+		return $argLists;
 	}
 
 	/**
+	 * @dataProvider isEmptyProvider
 	 *
-	 * @dataProvider provideApplyData
+	 * @param array $diffOps
+	 * @param boolean $isEmpty
 	 */
-	public function testApply( Entity $a, Entity $b ) {
-		$a->patch( $a->getDiff( $b ) );
-
-		$this->assertArrayEquals( $a->getLabels(), $b->getLabels() );
-		$this->assertArrayEquals( $a->getDescriptions(), $b->getDescriptions() );
-		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
+	public function testIsEmpty( array $diffOps, $isEmpty ) {
+		$diff = new \Wikibase\EntityDiff( $diffOps );
+		$this->assertEquals( $isEmpty, $diff->isEmpty() );
 	}
 
-	public function provideConflictDetection() {
-		$cases = array();
+	public function diffProvider() {
+		$diffs = array();
 
-		// #0: adding a label where there was none before
-		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
-		$current = $base;
-
-		$new = $base->copy();
-		$new->setLabel( 'en', 'TEST' );
-
-		$cases[] = array(
-			$base,
-			$current,
-			$new,
-			0 // there should eb no conflicts.
+		$diffOps = array(
+			'label' => new \Diff\Diff( array(
+				'en' => new \Diff\DiffOpAdd( 'foobar' ),
+				'de' => new \Diff\DiffOpRemove( 'onoez' ),
+				'nl' => new \Diff\DiffOpChange( 'foo', 'bar' ),
+			), true )
 		);
 
-		// #1: adding an alias where there was none before
-		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
-		$current = $base;
+		$diffs[] = new EntityDiff( $diffOps );
 
-		$new = $base->copy();
-		$new->addAliases( 'en', array( 'TEST' ) );
+		$diffOps['description'] = new \Diff\Diff( array(
+			'en' => new \Diff\DiffOpAdd( 'foobar' ),
+			'de' => new \Diff\DiffOpRemove( 'onoez' ),
+			'nl' => new \Diff\DiffOpChange( 'foo', 'bar' ),
+		), true );
 
-		$cases[] = array(
-			$base,
-			$current,
-			$new,
-			0 // there should eb no conflicts.
-		);
+		$diffs[] = new EntityDiff( $diffOps );
 
-		// #2: adding an alias where there already was one before
-		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
-		$base->addAliases( 'en', array( 'Foo' ) );
-		$current = $base;
+		$diffOps['aliases'] = new \Diff\Diff( array(
+			'en' => new \Diff\Diff( array( new \Diff\DiffOpAdd( 'foobar' ), new \Diff\DiffOpRemove( 'onoez' ) ), false ),
+			'de' => new \Diff\Diff( array( new \Diff\DiffOpRemove( 'foo' ) ), false ),
+		), true );
 
-		$new = $base->copy();
-		$new->addAliases( 'en', array( 'Bar' ) );
+		$diffs[] = new EntityDiff( $diffOps );
 
-		$cases[] = array(
-			$base,
-			$current,
-			$new,
-			0 // there should be no conflicts.
-		);
+		$claims = new \Wikibase\Claims( array( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
 
-		// #3: adding an alias where there already was one in another language
-		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
-		$base->addAliases( 'en', array( 'Foo' ) );
-		$current = $base;
+		$diffOps['claim'] = $claims->getDiff( new \Wikibase\Claims() );
 
-		$new = $base->copy();
-		$new->addAliases( 'de', array( 'Bar' ) );
+		$diffs[] = new EntityDiff( $diffOps );
 
-		$cases[] = array(
-			$base,
-			$current,
-			$new,
-			0 // there should be no conflicts.
-		);
-
-		return $cases;
+		return $this->arrayWrap( $diffs );
 	}
 
 	/**
-	 * @dataProvider provideConflictDetection
+	 * @dataProvider diffProvider
 	 */
-	public function testConflictDetection( Entity $base, Entity $current, Entity $new, $expectedConflicts ) {
-		$patch = $base->getDiff( $new ); // diff from base to new
+	public function testGetClaimsDiff( EntityDiff $entityDiff ) {
+		$diff = $entityDiff->getClaimsDiff();
 
-		$patchedCurrent = clone $current;
-		$patchedCurrent->patch( $patch );
-		$cleanPatch = $base->getDiff( $patchedCurrent );
+		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertFalse( $diff->isAssociative() );
 
-		$conflicts = $patch->count() - $cleanPatch->count();
+		foreach ( $diff as $diffOp ) {
+			$this->assertTrue( $diffOp instanceof \Diff\DiffOpAdd || $diffOp instanceof \Diff\DiffOpRemove );
 
-		$this->assertEquals( $expectedConflicts, $conflicts, "check number of conflicts detected" );
+			$claim = $diffOp instanceof \Diff\DiffOpAdd ? $diffOp->getNewValue() : $diffOp->getOldValue();
+			$this->assertInstanceOf( '\Wikibase\Claim', $claim );
+		}
 	}
+
+	/**
+	 * @dataProvider diffProvider
+	 */
+	public function testGetDescriptionsDiff( EntityDiff $entityDiff ) {
+		$diff = $entityDiff->getDescriptionsDiff();
+
+		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertTrue( $diff->isAssociative() );
+	}
+
+	/**
+	 * @dataProvider diffProvider
+	 */
+	public function testGetLabelsDiff( EntityDiff $entityDiff ) {
+		$diff = $entityDiff->getLabelsDiff();
+
+		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertTrue( $diff->isAssociative() );
+	}
+
+	/**
+	 * @dataProvider diffProvider
+	 */
+	public function testGetAliasesDiff( EntityDiff $entityDiff ) {
+		$diff = $entityDiff->getAliasesDiff();
+
+		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertTrue( $diff->isAssociative() );
+	}
+
 }
