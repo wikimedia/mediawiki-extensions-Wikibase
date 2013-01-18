@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//51U\u003d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-18T11:44:50Z",
+      "side": 1,
+      "message": "should call the snakview\u0027s disable rather than the variation\u0027s, so the entity selector and property selector can be disabled as well",
+      "revId": "803ccad587ecccaa8f77fecb3bea83e78d4aa2ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
