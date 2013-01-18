@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//5b0\u003d",
+        "filename": "lib/tests/phpunit/claim/ClaimsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-18T17:06:44Z",
+      "side": 1,
+      "message": "\\Y\\U\\No\\Use\\Use?",
+      "revId": "aabd4c985b0080159dfc60ff0b40a27192cc0143",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//5ac\u003d",
+        "filename": "lib/tests/phpunit/hasharray/HashArrayTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-18T17:06:44Z",
+      "side": 1,
+      "message": "spacy space is spacy.",
+      "revId": "aabd4c985b0080159dfc60ff0b40a27192cc0143",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//5aU\u003d",
+        "filename": "lib/tests/phpunit/hasharray/HashArrayWithDuplicatesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-18T17:06:44Z",
+      "side": 1,
+      "message": "It\u0027s not necessary to make a new test group for every class. Just use --filter HashArrayWithDuplicates",
+      "revId": "aabd4c985b0080159dfc60ff0b40a27192cc0143",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
