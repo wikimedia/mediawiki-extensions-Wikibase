@@ -163,6 +163,20 @@ class ClaimsTest extends \MediaWikiTestCase {
 		$claim3 = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 1 ) );
 		$claim4 = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 2 ) );
 
+		$statement0 = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 5 ) );
+		$statement0->setRank( \Wikibase\Statement::RANK_PREFERRED );
+
+		$statement1 = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 5 ) );
+		$statement1->setReferences( new \Wikibase\ReferenceList( array( new \Wikibase\ReferenceObject(
+			new \Wikibase\SnakList( array( new \Wikibase\PropertyValueSnak( 10, new \DataValues\StringValue( 'spam' ) ) ) )
+		) ) ) );
+
+		$guidGen = new \Wikibase\Lib\V4GuidGenerator();
+		$claim0->setGuid( $guidGen->newGuid() );
+		$claim1->setGuid( $guidGen->newGuid() );
+		$claim2->setGuid( $guidGen->newGuid() );
+		$statement1->setGuid( $guidGen->newGuid() );
+
 
 		$source = new Claims();
 		$target = new Claims();
@@ -198,6 +212,18 @@ class ClaimsTest extends \MediaWikiTestCase {
 		$target = new Claims( array( $claim2, $claim1, $claim3, $claim4 ) );
 		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim1 ), new \Diff\DiffOpRemove( $claim0 ) ), false );
 		$argLists[] = array( $source, $target, $expected, 'Two lists with identical items except for one change should result in one add and one remove op' );
+
+
+		$source = new Claims( array( $claim0, $claim0, $claim3, $claim2, $claim2, $claim2, $statement0 ) );
+		$target = new Claims( array( $claim0, $claim0, $claim2, $claim3, $claim2, $claim2, $statement0 ) );
+		$expected = new \Diff\Diff( array(), false );
+		$argLists[] = array( $source, $target, $expected, 'Two identical lists with duplicate items should result in an empty diff' );
+
+
+		$source = new Claims( array( $statement0, $statement0, $claim1, $statement1 ) );
+		$target = new Claims( array( $claim1, $statement0, $claim1, $statement1 ) );
+		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim1 ), new \Diff\DiffOpRemove( $statement0 ) ), false );
+		$argLists[] = array( $source, $target, $expected, 'Two lists with duplicate items and a different entry should result into one add and one remove op' );
 
 		return $argLists;
 	}
