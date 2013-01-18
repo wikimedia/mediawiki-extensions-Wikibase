@@ -90,15 +90,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.Api' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.store.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel'
-			)
-		),
-
 		'wikibase.utilities' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
@@ -211,7 +202,8 @@ return call_user_func( function() {
 				'wikibase.ui.Toolbar',
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
-				'wikibase.utilities.jQuery.ui.tagadata'
+				'wikibase.utilities.jQuery.ui.tagadata',
+				'wikibase.store',
 			),
 			'messages' => array(
 				'wikibase-cancel',
