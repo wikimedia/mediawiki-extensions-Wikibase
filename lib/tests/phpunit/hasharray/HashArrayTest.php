@@ -117,4 +117,6 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 		$this->assertFalse( $array->equals( 42 ) );
 	}
 
+
+
 }

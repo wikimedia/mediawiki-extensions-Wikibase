@@ -500,10 +500,10 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	/**
 	 * @since 0.4
 	 *
-	 * @param Claim[] $claims
+	 * @param Claims $claims
 	 */
-	public function setClaims( array $claims ) {
-		$this->claims = new Claims( $claims );
+	public function setClaims( Claims $claims ) {
+		$this->claims = $claims;
 	}
 
 	/**
@@ -914,7 +914,9 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 		$this->setDescriptions( $patcher->patch( $this->getDescriptions(), $patch->getDescriptionsDiff() ) );
 		$this->setAllAliases( $patcher->patch( $this->getAllAliases(), $patch->getAliasesDiff() ) );
 
-		$this->setClaims( $patcher->patch( iterator_to_array( $this->getClaims() ), $patch->getClaimsDiff() ) );
+		$claims = $patcher->patch( iterator_to_array( $this->getClaims() ), $patch->getClaimsDiff() );
+
+		$this->setClaims( new Claims( $claims ) );
 
 		$this->patchSpecificFields( $patch, $patcher );
 	}
