@@ -227,10 +227,9 @@ describe "Check statements UI", :experimental => true do
         page.statement1ClaimValue2.should == values[1]
         page.statement1ClaimValue3.should == values[2]
         @browser.refresh
-        # TODO: bug 43200 - wbcreateclaim overrides existing claim with new one when not reloading page before adding new claim
-        #page.statement1ClaimValue1.should == values[0]
-        #page.statement1ClaimValue2.should == values[1]
-        #page.statement1ClaimValue3.should == values[2]
+        page.statement1ClaimValue1.should == values[0]
+        page.statement1ClaimValue2.should == values[1]
+        page.statement1ClaimValue3.should == values[2]
         page.remove_all_claims
         page.statement1ClaimValue1?.should be_false
         page.statement1Name?.should be_false
@@ -253,10 +252,9 @@ describe "Check statements UI", :experimental => true do
         page.statement1ClaimValue2.should == values[1]
         page.statement1ClaimValue3.should == values[2]
         @browser.refresh
-        # TODO: bug 43200 - wbcreateclaim overrides existing claim with new one when not reloading page before adding new claim
-        #page.statement1ClaimValue1.should == values[0]
-        #page.statement1ClaimValue2.should == values[1]
-        #page.statement1ClaimValue3.should == values[2]
+        page.statement1ClaimValue1.should == values[0]
+        page.statement1ClaimValue2.should == values[1]
+        page.statement1ClaimValue3.should == values[2]
         page.remove_all_claims
       end
     end
@@ -278,9 +276,8 @@ describe "Check statements UI", :experimental => true do
         page.add_statement(properties_cm[1]["label"], statement2_values[1])
         page.statement2Name.should == properties_cm[1]["label"]
         page.statement2ClaimValue2.should == statement2_values[1]
-        # TODO: bug 43200 - removing claims fails, cause they are not existing because of bug 43200
-        #page.remove_all_claims
-        #page.statement1Name?.should be_false
+        page.remove_all_claims
+        page.statement1Name?.should be_false
       end
     end
     it "should check button behaviour when editing a statement" do
@@ -289,7 +286,6 @@ describe "Check statements UI", :experimental => true do
         page.wait_for_entity_to_load
         # make sure no claims displayed on page
         page.remove_all_claims
-        @browser.refresh # because of bug 43200
         page.add_statement(properties_cm[0]["label"], statement_value)
         page.editFirstStatement
         page.saveStatement?.should be_true
