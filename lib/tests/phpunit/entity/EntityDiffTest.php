@@ -99,7 +99,7 @@ class EntityDiffTest extends \MediaWikiTestCase {
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		$claims = new \Wikibase\Claims( array( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
+		$claims = new \Wikibase\Claims( array( new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
 
 		$diffOps['claim'] = $claims->getDiff( new \Wikibase\Claims() );
 

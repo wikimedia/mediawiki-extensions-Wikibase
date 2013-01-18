@@ -51,7 +51,7 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 
 		$lists[] = array_map(
 			function( \Wikibase\Snak $snak ) {
-				return new \Wikibase\ClaimObject( $snak );
+				return new \Wikibase\Claim( $snak );
 			},
 			$snaks
 		);

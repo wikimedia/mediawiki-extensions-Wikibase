@@ -1,9 +1,10 @@
 <?php
 
 namespace Wikibase;
+use MWException;
 
 /**
- * Interface for objects that represent a single Wikibase claim.
+ * Class that represents a single Wikibase claim.
  * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Statements
  *
  * This program is free software; you can redistribute it and/or modify
@@ -29,7 +30,43 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Claim extends \Hashable, \Serializable {
+class Claim implements \Hashable, \Serializable {
+
+	/**
+	 * @since 0.1
+	 *
+	 * @var Snak
+	 */
+	protected $mainSnak;
+
+	/**
+	 * The property snaks that are qualifiers for this claim.
+	 *
+	 * @since 0.1
+	 *
+	 * @var Snaks
+	 */
+	protected $qualifiers;
+
+	/**
+	 * @since 0.2
+	 *
+	 * @var string|null
+	 */
+	protected $guid = null;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Snak $mainSnak
+	 * @param null|Snaks $qualifiers
+	 */
+	public function __construct( Snak $mainSnak, Snaks $qualifiers = null ) {
+		$this->mainSnak = $mainSnak;
+		$this->qualifiers = $qualifiers === null ? new SnakList() : $qualifiers;
+	}
 
 	/**
 	 * Returns the value snak.
@@ -38,16 +75,20 @@ interface Claim extends \Hashable, \Serializable {
 	 *
 	 * @return Snak
 	 */
-	public function getMainSnak();
+	public function getMainSnak() {
+		return $this->mainSnak;
+	}
 
 	/**
-	 * Returns the main snak.
+	 * Sets the main snak.
 	 *
 	 * @since 0.1
 	 *
 	 * @param Snak $mainSnak
 	 */
-	public function setMainSnak( Snak $mainSnak );
+	public function setMainSnak( Snak $mainSnak ) {
+		$this->mainSnak = $mainSnak;
+	}
 
 	/**
 	 * Gets the property snaks making up the qualifiers for this claim.
@@ -56,7 +97,9 @@ interface Claim extends \Hashable, \Serializable {
 	 *
 	 * @return Snaks
 	 */
-	public function getQualifiers();
+	public function getQualifiers() {
+		return $this->qualifiers;
+	}
 
 	/**
 	 * Sets the property snaks making up the qualifiers for this claim.
@@ -65,7 +108,23 @@ interface Claim extends \Hashable, \Serializable {
 	 *
 	 * @param Snaks $propertySnaks
 	 */
-	public function setQualifiers( Snaks $propertySnaks );
+	public function setQualifiers( Snaks $propertySnaks ) {
+		$this->qualifiers = $propertySnaks;
+	}
+
+	/**
+	 * @see Hashable::getHash
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getHash() {
+		return sha1(
+			$this->mainSnak->getHash()
+				. $this->qualifiers->getHash()
+		);
+	}
 
 	/**
 	 * Returns the id of the property of the main snak.
@@ -75,7 +134,9 @@ interface Claim extends \Hashable, \Serializable {
 	 *
 	 * @return integer
 	 */
-	public function getPropertyId();
+	public function getPropertyId() {
+		return $this->getMainSnak()->getPropertyId();
+	}
 
 	/**
 	 * Returns the GUID of the Claim.
@@ -84,7 +145,9 @@ interface Claim extends \Hashable, \Serializable {
 	 *
 	 * @return string|null
 	 */
-	public function getGuid();
+	public function getGuid() {
+		return $this->guid;
+	}
 
 	/**
 	 * Sets the GUID of the Claim.
@@ -92,12 +155,20 @@ interface Claim extends \Hashable, \Serializable {
 	 * @since 0.2
 	 *
 	 * @param string|null $guid
+	 *
+	 * @throws MWException
 	 */
-	public function setGuid( $guid );
+	public function setGuid( $guid ) {
+		if ( !is_string( $guid ) && $guid !== null ) {
+			throw new MWException( 'Can only set the GUID to string values or null' );
+		}
+
+		$this->guid = $guid;
+	}
 
 	/**
 	 * Returns an array representing the claim.
-	 * Roundtrips with ClaimObject::newFromArray
+	 * Roundtrips with Claim::newFromArray
 	 *
 	 * This method can be used for serialization when passing the array to for
 	 * instance json_encode which created behaviour similar to
@@ -106,8 +177,70 @@ interface Claim extends \Hashable, \Serializable {
 	 *
 	 * @since 0.3
 	 *
+	 * @return array
+	 */
+	public function toArray() {
+		return array(
+			'm' => $this->mainSnak->toArray(),
+			'q' => $this->qualifiers->toArray(),
+			'g' => $this->guid,
+		);
+	}
+
+	/**
+	 * Constructs a new Claim from an array in the same format as Claim::toArray returns.
+	 *
+	 * @since 0.3
+	 *
+	 * @param array $data
+	 *
+	 * @return Claim
+	 */
+	public static function newFromArray( array $data ) {
+		if ( array_key_exists( 'rank', $data ) ) {
+			return StatementObject::newFromArray( $data );
+		}
+
+		$mainSnak = SnakObject::newFromArray( $data['m'] );
+		$qualifiers = SnakList::newFromArray( $data['q'] );
+
+		$claim = new static( $mainSnak, $qualifiers );
+		$claim->setGuid( $data['g'] );
+
+		return $claim;
+	}
+
+	/**
+	 * @see Serializable::serialize
+	 *
+	 * @since 0.3
+	 *
 	 * @return string
 	 */
-	public function toArray();
+	public function serialize() {
+		return json_encode( $this->toArray() );
+	}
+
+	/**
+	 * @see Serializable::unserialize
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $serialization
+	 *
+	 * @return Claim
+	 */
+	public function unserialize( $serialization ) {
+		$instance = static::newFromArray( json_decode( $serialization, true ) );
+
+		$this->setMainSnak( $instance->getMainSnak() );
+		$this->setQualifiers( $instance->getQualifiers() );
+		$this->setGuid( $instance->getGuid() );
+	}
 
 }
+
+/**
+ * @deprecated
+ */
+class ClaimObject extends Claim {}
