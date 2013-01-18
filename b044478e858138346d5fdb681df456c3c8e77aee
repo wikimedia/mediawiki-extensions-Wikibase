@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//5z4\u003d",
+        "filename": "repo/tests/selenium/aliases/aliases_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-01-18T11:58:16Z",
+      "side": 1,
+      "message": "it\u0027s not a string, it\u0027s an array, isn\u0027t it?",
+      "parentUuid": "AAADhH//7RM\u003d",
+      "revId": "b044478e858138346d5fdb681df456c3c8e77aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//7RI\u003d",
         "filename": "repo/tests/selenium/item/description_spec.rb",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-01-17T11:58:30Z",
       "side": 1,
       "message": "String comparison with \"0\" done, not numerical comparison.",
+      "revId": "b044478e858138346d5fdb681df456c3c8e77aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//50A\u003d",
+        "filename": "repo/tests/selenium/item/description_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-01-18T11:58:16Z",
+      "side": 1,
+      "message": "that\u0027s fine, as it is the string \"0\". page.entityDescriptionsSpan gives you the value inside the HTML element as a string.",
+      "parentUuid": "AAADhH//7RI\u003d",
       "revId": "b044478e858138346d5fdb681df456c3c8e77aee",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
