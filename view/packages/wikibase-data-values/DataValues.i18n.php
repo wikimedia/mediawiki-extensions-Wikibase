@@ -239,9 +239,11 @@ $messages['si'] = array(
 );
 
 /** Swedish (svenska)
+ * @author Lokal Profil
  * @author WikiPhoenix
  */
 $messages['sv'] = array(
+	'datavalues-desc' => 'Samling av objekt som representerar olika typer av värden',
 	'version-datavalues' => 'Datavärden',
 );
 
