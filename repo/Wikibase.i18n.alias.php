@@ -35,7 +35,7 @@ $specialPageAliases['ar'] = array(
 
 /** Aramaic (ܐܪܡܝܐ) */
 $specialPageAliases['arc'] = array(
-	'NewProperty' => array( 'ܕܝܠܝܘܬ̈ܐ_ܚܕ̈ܬܬܐ' ),
+	'NewProperty' => array( 'ܕܝܠܝܘ̈ܬܐ_ܚܕ̈ܬܬܐ' ),
 );
 
 /** буряад (буряад) */
@@ -78,6 +78,16 @@ $specialPageAliases['es'] = array(
 	'ListDatatypes' => array( 'ListarTiposDeDatos' ),
 	'SetLabel' => array( 'AsignarEtiqueta' ),
 	'EntitiesWithoutLabel' => array( 'EntidadesSinEtiqueta' ),
+);
+
+/** Finnish (suomi) */
+$specialPageAliases['fi'] = array(
+	'CreateItem' => array( 'Luo_kohde' ),
+	'NewProperty' => array( 'Uusi_ominaisuus' ),
+	'ItemByTitle' => array( 'Kohde_otsikon_mukaan' ),
+	'ItemDisambiguation' => array( 'Kohdetäsmennys' ),
+	'SetLabel' => array( 'Aseta_nimi' ),
+	'EntitiesWithoutLabel' => array( 'Aiheet_ilman_nimeä' ),
 );
 
 /** Icelandic (íslenska) */
