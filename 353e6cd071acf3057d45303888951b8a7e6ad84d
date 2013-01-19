@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//4gE\u003d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-19T18:46:43Z",
+      "side": 1,
+      "message": "this._disabled should be defined on top, otherwise this will return undefined when called before disable/enable",
+      "revId": "353e6cd071acf3057d45303888951b8a7e6ad84d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
