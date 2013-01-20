@@ -165,6 +165,7 @@ $wgAutoloadClasses['SpecialWikibaseQueryPage']			= $dir . 'includes/specials/Spe
 
 // includes/api/serializers
 $wgAutoloadClasses['Wikibase\Lib\Serializers\ByPropertyListSerializer'] = $dir . 'includes/serializers/ByPropertyListSerializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\ByPropertyListUnserializer'] = $dir . 'includes/serializers/ByPropertyListUnserializer.php';
 $wgAutoloadClasses['Wikibase\Lib\Serializers\ClaimSerializer'] 			= $dir . 'includes/serializers/ClaimSerializer.php';
 $wgAutoloadClasses['Wikibase\Lib\Serializers\ClaimsSerializer'] 		= $dir . 'includes/serializers/ClaimsSerializer.php';
 $wgAutoloadClasses['Wikibase\Lib\Serializers\EntitySerializer'] 		= $dir . 'includes/serializers/EntitySerializer.php';

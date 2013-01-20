@@ -1,14 +1,10 @@
 <?php
 
-namespace Wikibase\Test\Repo\Api;
-use Wikibase\Item;
-use Wikibase\Snak;
-use Wikibase\Statement;
+namespace Wikibase\Repo\Test\Api;
 use Wikibase\Claim;
-use Wikibase\EntityId;
 
 /**
- * Unit tests for the Wikibase\Repo\Api\SetQualifier class.
+ * Unit tests for the Wikibase\Repo\Api\ApSetClaim class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +22,7 @@ use Wikibase\EntityId;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.3
+ * @since 0.4
  *
  * @ingroup WikibaseRepoTest
  *
@@ -35,17 +31,17 @@ use Wikibase\EntityId;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group SetQualifierTest
+ * @group ApSetClaimTest
  *
  * @group medium
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetQualifierTest extends \ApiTestCase {
+class ApSetClaimTest extends \ApiTestCase {
 
 	/**
-	 * @return Snak[]
+	 * @return \Wikibase\Snak[]
 	 */
 	protected function snakProvider() {
 		$snaks = array();
@@ -80,13 +76,13 @@ class SetQualifierTest extends \ApiTestCase {
 		$statements[] = $statement;
 
 		$ranks = array(
-			Statement::RANK_DEPRECATED,
-			Statement::RANK_NORMAL,
-			Statement::RANK_PREFERRED
+			\Wikibase\Statement::RANK_DEPRECATED,
+			\Wikibase\Statement::RANK_NORMAL,
+			\Wikibase\Statement::RANK_PREFERRED
 		);
 
 		/**
-		 * @var Statement[] $statements
+		 * @var \Wikibase\Statement[] $statements
 		 */
 		foreach ( $statements as &$statement ) {
 			$statement->setRank( $ranks[array_rand( $ranks )] );
@@ -95,57 +91,37 @@ class SetQualifierTest extends \ApiTestCase {
 		return $statements;
 	}
 
-	/**
-	 * @return Snak[]
-	 */
-	protected function newQualifierProvider() {
-		$property = \Wikibase\Property::newFromType( 'commonsMedia' );
-		$content = new \Wikibase\PropertyContent( $property );
-		$status = $content->save( '', null, EDIT_NEW );
-
-		$this->assertTrue( $status->isOK() );
-
-		return array(
-			new \Wikibase\PropertySomeValueSnak( 1 ),
-			new \Wikibase\PropertyNoValueSnak( 1 ),
-			new \Wikibase\PropertyValueSnak( $property->getId(), new \DataValues\StringValue( 'new qualifier' ) ),
-		);
-	}
-
-	public function testRequests() {
+	public function testAddClaim() {
 		foreach ( $this->claimProvider() as $claim ) {
 			$item = \Wikibase\Item::newEmpty();
 			$content = new \Wikibase\ItemContent( $item );
 			$content->save( '', null, EDIT_NEW );
 
 			$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( $item->getId() );
-			$claim->setGuid( $guidGenerator->newGuid() );
-			$item->addClaim( $claim );
+			$guid = $guidGenerator->newGuid();
 
-			$content->save( '' );
+			$claim->setGuid( $guid );
 
-			// This qualifier should not be part of the Claim yet!
-			foreach ( $this->newQualifierProvider() as $qualifier ) {
-				$this->makeAddRequest( $claim->getGuid(), $qualifier, $item->getId() );
-			}
+			// Addition request
+			$this->makeRequest( $claim, $item->getId() );
+
+			$claim = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( 'new stuff' ) );
+			$claim->setGuid( $guid );
+
+			// Update request
+			$this->makeRequest( $claim, $item->getId() );
 		}
 	}
 
-	protected function makeAddRequest( $statementGuid, Snak $qualifier, EntityId $entityId ) {
+	protected function makeRequest( Claim $claim, \Wikibase\EntityId $entityId ) {
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $claim );
+
 		$params = array(
-			'action' => 'wbsetqualifier',
-			'claim' => $statementGuid,
-			'snaktype' => $qualifier->getType(),
-			'property' => $qualifier->getPropertyId()->getPrefixedId(),
+			'action' => 'wbsetclaim',
+			'claim' => \FormatJson::encode( $serializer->getSerialized( $claim ) ),
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
-
-		if ( $qualifier instanceof \Wikibase\PropertyValueSnak ) {
-			$params['value'] = $qualifier->getDataValue()->getArrayValue();
-
-			if ( is_array( $params['value'] ) ) {
-				$params['value'] = \FormatJson::encode( $params['value'] );
-			}
-		}
 
 		$this->makeValidRequest( $params );
 
@@ -155,14 +131,23 @@ class SetQualifierTest extends \ApiTestCase {
 
 		$claims = new \Wikibase\Claims( $content->getEntity()->getClaims() );
 
-		$this->assertTrue( $claims->hasClaimWithGuid( $params['claim'] ) );
+		if(!$claims->hasClaim( $claim )){
+			$claim2 = $content->getEntity()->getClaims()[0];
+			if ( $claim->getHash() !== $claim2->getHash() ) {
+				assert( $claim->getGuid() === $claim2->getGuid() );
+				assert( $claim->getRank() === $claim2->getRank() );
+				assert( $claim->getQualifiers()->getHash() === $claim2->getQualifiers()->getHash() );
 
-		$claim = $claims->getClaimWithGuid( $params['claim'] );
+				if ( $claim->getReferences()->getValueHash() !== $claim2->getReferences()->getValueHash() ) {
+					$refs0 = $claim->getReferences();
+					$refs1 = $claim2->getReferences();
 
-		$this->assertTrue(
-			$claim->getQualifiers()->hasSnak( $qualifier ),
-			'The qualifier should exist in the qualifier list after making the request'
-		);
+					q($refs0->getValueHash(), $refs1->getValueHash());
+				}
+			}
+		}
+
+		$this->assertTrue( $claims->hasClaim( $claim ) );
 	}
 
 	protected function makeValidRequest( array $params ) {
@@ -174,7 +159,5 @@ class SetQualifierTest extends \ApiTestCase {
 
 		return $resultArray;
 	}
-
-	// TODO: test update requests
 
 }

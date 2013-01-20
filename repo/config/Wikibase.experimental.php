@@ -38,11 +38,13 @@ $dir = __DIR__ . '/../';
 $wgAutoloadClasses['Wikibase\Repo\Api\RemoveQualifiers'] 	= $dir . 'includes/api/RemoveQualifiers.php';
 $wgAutoloadClasses['Wikibase\Repo\Api\SetQualifier'] 		= $dir . 'includes/api/SetQualifier.php';
 $wgAutoloadClasses['Wikibase\Api\SetStatementRank']			= $dir . 'includes/api/SetStatementRank.php';
+$wgAutoloadClasses['Wikibase\Repo\Api\SetClaim']			= $dir . 'includes/api/SetClaim.php';
 $wgAutoloadClasses['SpecialEntityData'] 					= $dir . 'includes/specials/SpecialEntityData.php';
 
 $wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Repo\Api\RemoveQualifiers';
 $wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Repo\Api\SetQualifier';
 $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
+$wgAPIModules['wbsetclaim'] 						= 'Wikibase\Repo\Api\SetClaim';
 
 $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 
@@ -65,6 +67,7 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'api/RemoveQualifiers',
 		'api/SetStatementRank',
 		'api/SetQualifier',
+		'api/SetClaim',
 	);
 
 	foreach ( $testFiles as $file ) {

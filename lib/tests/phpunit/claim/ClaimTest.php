@@ -185,4 +185,17 @@ class ClaimTest extends \MediaWikiTestCase {
 		$this->assertEquals( $claim->getHash(), $copy->getHash(), 'toArray newFromArray roundtrip should not affect hash' );
 	}
 
+	public function testGetHashStability() {
+		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 31 ) );
+		$guid = $guidGenerator->newGuid();
+
+		$claim0 = new Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim0->setGuid( $guid );
+
+		$claim1 = new Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim1->setGuid( $guid );
+
+		$this->assertEquals( $claim0->getHash(), $claim1->getHash() );
+	}
+
 }
