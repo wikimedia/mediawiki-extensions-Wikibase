@@ -51,6 +51,8 @@ interface Serializer {
 	/**
 	 * Sets the options to use during serialization.
 	 *
+	 * TODO: use PDO like options system as done in ValueParsers
+	 *
 	 * @since 0.3
 	 *
 	 * @param SerializationOptions $options

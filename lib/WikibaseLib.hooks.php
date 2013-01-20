@@ -60,6 +60,7 @@ final class LibHooks {
 			'reference/Reference',
 
 			'serializers/ByPropertyListSerializer',
+			'serializers/ByPropertyListUnserializer',
 			'serializers/ClaimSerializer',
 			'serializers/ClaimsSerializer',
 			'serializers/ItemSerializer',

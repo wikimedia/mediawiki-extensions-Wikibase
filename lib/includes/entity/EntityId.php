@@ -69,6 +69,7 @@ class EntityId extends \DataValues\DataValueObject {
 	 * Returns the prefixed used when serializing the ID.
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.4
 	 *
 	 * @return string
 	 */
@@ -155,6 +156,7 @@ class EntityId extends \DataValues\DataValueObject {
 	 * Gets the serialized ID consisting out of entity type prefix followed by the numerical ID.
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.4
 	 *
 	 * @return string The prefixed id, or false if it can't be found
 	 */
