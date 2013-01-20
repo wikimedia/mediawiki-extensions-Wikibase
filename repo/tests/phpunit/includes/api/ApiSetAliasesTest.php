@@ -150,5 +150,6 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 	 */
 	public function testReset( $handle ) {
 		$this->resetItem( $handle );
+		$this->assertTrue( true );
 	}
 }
