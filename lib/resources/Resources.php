@@ -33,6 +33,10 @@ return call_user_func( function() {
 			'class' => 'Wikibase\SitesModule',
 		),
 
+		'wikibase.repoAccess' => $moduleTemplate + array(
+			'class' => 'Wikibase\RepoAccessModule',
+		),
+
 		'wikibase' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.js',
@@ -85,7 +89,9 @@ return call_user_func( function() {
 				'wikibase.store/wikibase.Api.js',
 			),
 			'dependencies' => array(
+				'user.tokens',
 				'wikibase.datamodel',
+				'wikibase.repoAccess',
 				'jquery.json'
 			)
 		),
