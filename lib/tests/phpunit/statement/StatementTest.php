@@ -154,4 +154,19 @@ class StatementTest extends ClaimTest {
 		$this->assertEquals( $claim->getHash(), $copy->getHash(), 'toArray newFromArray roundtrip should not affect hash' );
 	}
 
+	public function testGetHash() {
+		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 31 ) );
+		$guid = $guidGenerator->newGuid();
+
+		$claim0 = new Statement( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim0->setGuid( $guid );
+		$claim0->setRank( Statement::RANK_DEPRECATED );
+
+		$claim1 = new Statement( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim1->setGuid( $guid );
+		$claim1->setRank( Statement::RANK_DEPRECATED );
+
+		$this->assertEquals( $claim0->getHash(), $claim1->getHash() );
+	}
+
 }

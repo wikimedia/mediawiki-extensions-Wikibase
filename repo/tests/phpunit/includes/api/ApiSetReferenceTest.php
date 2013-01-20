@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\Reference;
 
 /**
- * Unit tests for the Wikibase\class ApiSetReference class.
+ * Unit tests for the Wikibase\ApiSetReference class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

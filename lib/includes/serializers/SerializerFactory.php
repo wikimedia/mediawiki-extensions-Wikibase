@@ -88,6 +88,9 @@ class SerializerFactory {
 			case 'Wikibase\Snak':
 				return new SnakSerializer();
 				break;
+			case 'Wikibase\Reference':
+				return new ReferenceSerializer();
+				break;
 			case 'Wikibase\Claim':
 				return new ClaimSerializer();
 				break;

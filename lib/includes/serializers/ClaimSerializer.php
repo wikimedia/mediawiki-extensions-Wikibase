@@ -209,7 +209,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 					// TODO
 				}
 
-				$claim->setReferences( $references );
+				$claim->setReferences( new \Wikibase\ReferenceList( $references ) );
 			}
 		}
 

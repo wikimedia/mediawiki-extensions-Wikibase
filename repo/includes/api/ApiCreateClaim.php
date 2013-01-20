@@ -32,9 +32,7 @@ use ApiBase, MWException;
 class ApiCreateClaim extends Api implements ApiAutocomment {
 
 	// TODO: automcomment
-	// TODO: example
 	// TODO: rights
-	// TODO: conflict detection
 
 	/**
 	 * @see ApiBase::execute

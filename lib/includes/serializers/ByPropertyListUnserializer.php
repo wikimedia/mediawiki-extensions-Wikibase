@@ -1,11 +1,11 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use MWException;
-use Wikibase\Reference;
+use Traversable, ApiResult, MWException;
 
 /**
- * Serializer for Reference objects.
+ * Serializer for Traversable objects that need to be grouped
+ * per property id. Each element needs to have a getPropertyId method.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,41 +22,32 @@ use Wikibase\Reference;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.3
+ * @since 0.4
  *
  * @file
- * @ingroup Wikibase
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ReferenceSerializer extends SerializerObject implements Unserializer {
+class ByPropertyListUnserializer implements Unserializer {
 
 	/**
-	 * @see ApiSerializer::getSerialized
+	 * @since 0.2
 	 *
-	 * @since 0.3
-	 *
-	 * @param mixed $reference
-	 *
-	 * @return array
-	 * @throws MWException
+	 * @var Serializer
 	 */
-	public function getSerialized( $reference ) {
-		if ( !( $reference instanceof Reference ) ) {
-			throw new MWException( 'ReferenceSerializer can only serialize Reference objects' );
-		}
+	protected $elementUnserializer;
 
-		$serialization = array();
-
-		$serialization['hash'] = $reference->getHash();
-
-		$snakSerializer = new SnakSerializer( $this->options );
-		$snaksSerializer = new ByPropertyListSerializer( 'snak', $snakSerializer, $this->options );
-
-		$serialization['snaks'] = $snaksSerializer->getSerialized( $reference->getSnaks() );
-
-		return $serialization;
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.2
+	 *
+	 * @param Unserializer $elementUnserializer
+	 */
+	public function __construct( Unserializer $elementUnserializer ) {
+		$this->elementUnserializer = $elementUnserializer;
 	}
 
 	/**
@@ -66,11 +57,16 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 	 *
 	 * @param array $serialization
 	 *
-	 * @return Reference
+	 * @return array|Traversable
 	 * @throws MWException
 	 */
 	public function newFromSerialization( array $serialization ) {
+		foreach ( $serialization as $propertyId => $byPropId ) {
+			foreach ( $byPropId as $ ) {
 
+			}
+
+		}
 	}
 
 }

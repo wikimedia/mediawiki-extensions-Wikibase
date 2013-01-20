@@ -498,6 +498,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	}
 
 	/**
+	 * TODO: change to take Claim[]
+	 *
 	 * @since 0.4
 	 *
 	 * @param Claims $claims
