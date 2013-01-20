@@ -43,6 +43,7 @@ $wgAutoloadClasses['SpecialEntityData'] 					= $dir . 'includes/specials/Special
 $wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Repo\Api\RemoveQualifiers';
 $wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Repo\Api\SetQualifier';
 $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
+$wgAPIModules['wbsetclaim'] 						= 'Wikibase\Repo\Api\SetClaim';
 
 $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 
