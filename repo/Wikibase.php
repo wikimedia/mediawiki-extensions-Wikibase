@@ -34,6 +34,20 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
+global $wgVersion,
+	   $wgExtensionCredits,
+	   $wgGroupPermissions,
+	   $wgExtensionMessagesFiles,
+	   $wgAutoloadClasses,
+	   $wgAPIModules,
+	   $wgSpecialPages,
+	   $wgSpecialPageGroups,
+	   $wgHooks,
+	   $wgResourceModules,
+	   $wgContentHandlers,
+
+	   $wgWBStores;
+
 if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
 	die( '<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.' );
 }
@@ -259,7 +273,11 @@ $wgWBStores = array();
 $wgWBStores['sqlstore'] = 'Wikibase\SqlStore';
 
 if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-	include_once( $dir . 'Wikibase.experimental.php' );
+	call_user_func( function() {
+		// @codeCoverageIgnoreStart
+		include_once( __DIR__ . '/Wikibase.experimental.php' );
+		// @codeCoverageIgnoreEnd
+	} );
 }
 
 unset( $dir );

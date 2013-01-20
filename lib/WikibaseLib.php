@@ -31,6 +31,20 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
+global $wgVersion,
+	   $wgExtensionCredits,
+	   $wgExtensionMessagesFiles,
+	   $wgAutoloadClasses,
+	   $wgExtensionFunctions,
+	   $wgJobClasses,
+	   $wgHooks,
+	   $wgResourceModules,
+
+	   $wgDataValues,
+	   $wgValueParsers,
+
+	   $wgWBSettings;
+
 if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
 	die( '<b>Error:</b> WikibaseLib requires MediaWiki 1.20 or above.' );
 }

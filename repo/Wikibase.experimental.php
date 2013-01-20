@@ -17,6 +17,9 @@
 if ( !defined( 'WB_VERSION' ) ) {
 	die( 'Not an entry point.' );
 }
+
+global $wgAutoloadClasses, $wgAPIModules, $wgSpecialPages, $wgHooks;
+
 $dir = __DIR__ . '/';
 
 $wgAutoloadClasses['Wikibase\ApiCreateClaim'] 				= $dir . 'includes/api/ApiCreateClaim.php';

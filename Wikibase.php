@@ -17,7 +17,7 @@
  */
 
 // @codeCoverageIgnoreStart
-//call_user_func( function() {
+call_user_func( function() {
 	$components = array(
 		'lib/WikibaseLib',
 		'client/WikibaseClient',
@@ -29,5 +29,5 @@
 		require_once __DIR__ . '/' . $component . '.php';
 	}
 
-//} );
+} );
 // @codeCoverageIgnoreEnd

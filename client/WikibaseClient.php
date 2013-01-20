@@ -23,6 +23,16 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( "Not an entry point.\n" );
 }
 
+global $wgVersion,
+	   $wgExtensionCredits,
+	   $wgExtensionMessagesFiles,
+	   $wgAutoloadClasses,
+	   $wgHooks,
+	   $wgAPIMetaModules,
+	   $wgResourceModules,
+
+	   $wgWBClientStores;
+
 if ( version_compare( $wgVersion, '1.21c', '<' ) ) { // Needs to be 1.21c because version_compare() works in confusing ways.
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.21 alpha or above.\n" );
 }
