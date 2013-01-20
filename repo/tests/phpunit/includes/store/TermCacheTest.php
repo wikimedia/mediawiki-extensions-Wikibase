@@ -475,7 +475,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 			$this->assertEquals( $expected->getLanguage(), $term->getLanguage() );
 		}
 
-		$actual = $lookup->getMatchingTermCombination( $terms, null, null, $id0, Item::ENTITY_TYPE );
+		$actual = $lookup->getMatchingTermCombination( $terms, null, null, $content0->getItem()->getId(), Item::ENTITY_TYPE );
 		$this->assertTrue( $actual === array() );
 	}
 
