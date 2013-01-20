@@ -115,7 +115,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 	$siteLinkTable = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
 
 		$this->assertTrue(
-			$siteLinkTable->deleteLinksOfItem( $item->getId() )
+			$siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false
 		);
 
 		$this->assertEquals(
