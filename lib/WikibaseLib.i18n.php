@@ -36,7 +36,7 @@ $messages['qqq'] = array(
 	'wikibaselib-entity-property' => 'How we refer to entities of type property. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
 	'wikibaselib-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.',
-	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English).',
+	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
 );
 
 /** Asturian (asturianu)
