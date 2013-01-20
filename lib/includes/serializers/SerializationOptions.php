@@ -21,6 +21,8 @@ use MWException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * TODO: use PDO like options system as done in ValueParsers
+ *
  * @since 0.2
  *
  * @file

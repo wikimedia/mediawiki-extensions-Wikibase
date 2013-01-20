@@ -129,14 +129,12 @@ class Statement extends Claim {
 	 * @return string
 	 */
 	public function getHash() {
-		$hasher = new MapValueHasher();
-
 		return sha1( implode(
 			'|',
 			array(
 				parent::getHash(),
 				$this->rank,
-				$hasher->hash( $this->references ),
+				$this->references->getValueHash(),
 			)
 		) );
 	}

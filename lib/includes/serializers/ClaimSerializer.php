@@ -203,13 +203,13 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			if ( array_key_exists( 'references', $serialization ) ) {
 				$references = array();
 
-				// TODO
+				$referenceUnserializer = new ReferenceSerializer();
 
-				foreach ( $serialization['references'] as $reference ) {
-					// TODO
+				foreach ( $serialization['references'] as $referenceSerialization ) {
+					$references[] = $referenceUnserializer->newFromSerialization( $referenceSerialization );
 				}
 
-				$claim->setReferences( $references );
+				$claim->setReferences( new \Wikibase\ReferenceList( $references ) );
 			}
 		}
 
