@@ -28,7 +28,6 @@
  */
 class SpecialCreateItem extends SpecialCreateEntity {
 
-
 	/**
 	 * @var string|null
 	 */
@@ -49,7 +48,9 @@ class SpecialCreateItem extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::prepareArguments()
+	 * @see SpecialCreateEntity::prepareArguments
+	 *
+	 * @return boolean
 	 */
 	protected function prepareArguments() {
 		parent::prepareArguments();
@@ -60,13 +61,19 @@ class SpecialCreateItem extends SpecialCreateEntity {
 
 	/**
 	 * @see SpecialCreateEntity::createEntityContent
+	 *
+	 * @return \Wikibase\ItemContent
 	 */
 	protected function createEntityContent() {
 		return \Wikibase\ItemContent::newEmpty();
 	}
 
 	/**
-	 * @see SpecialCreateEntity::modifyEntity()
+	 * @see SpecialCreateEntity::modifyEntity
+	 *
+	 * @param \Wikibase\EntityContent $itemContent
+	 *
+	 * @return Status
 	 */
 	protected function modifyEntity( \Wikibase\EntityContent &$itemContent ) {
 		$status = parent::modifyEntity( $itemContent );
@@ -96,7 +103,9 @@ class SpecialCreateItem extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::additionalFormElements()
+	 * @see SpecialCreateEntity::additionalFormElements
+	 *
+	 * @return string
 	 */
 	protected function additionalFormElements() {
 		if ( $this->site === null || $this->page === null ) {
@@ -147,14 +156,18 @@ class SpecialCreateItem extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::getLegend()
+	 * @see SpecialCreateEntity::getLegend
+	 *
+	 * @return string
 	 */
 	protected function getLegend() {
 		return $this->msg( 'wikibase-createitem-fieldset' );
 	}
 
 	/**
-	 * @see SpecialCreateEntity::getWarnings()
+	 * @see SpecialCreateEntity::getWarnings
+	 *
+	 * @return array
 	 */
 	protected function getWarnings() {
 		$warnings = array();
