@@ -110,7 +110,7 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	 public static function onRegisterQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
-		$testModules['qunit']['wikibase.tests'] = array(
+		$testModules['qunit']['wikibase.client.watchlist.test'] = array(
 			'scripts' => array(
 				'tests/qunit/wbclient.watchlist.tests.js'
 			),
