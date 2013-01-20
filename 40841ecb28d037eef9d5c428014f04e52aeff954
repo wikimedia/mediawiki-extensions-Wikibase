@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//4Qw\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-20T12:03:28Z",
+      "side": 1,
+      "message": "will fatal when null. Can thus typehint against Language in method def",
+      "revId": "40841ecb28d037eef9d5c428014f04e52aeff954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//4Qs\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-20T12:03:28Z",
+      "side": 1,
+      "message": "lowercase",
+      "revId": "40841ecb28d037eef9d5c428014f04e52aeff954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//4Qo\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-20T12:03:28Z",
+      "side": 1,
+      "message": "if ( a ) { b } else { c }\n\nis easier to understand then\n\nif ( !a ) { c } else { b }",
+      "revId": "40841ecb28d037eef9d5c428014f04e52aeff954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//4Qk\u003d",
+        "filename": "repo/includes/specials/SpecialSetAliases.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-20T12:03:28Z",
+      "side": 1,
+      "message": "methods are missing @param and @return docs",
+      "revId": "40841ecb28d037eef9d5c428014f04e52aeff954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//4Qg\u003d",
+        "filename": "repo/includes/specials/SpecialSetDescription.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-20T12:03:28Z",
+      "side": 1,
+      "message": "methods are missing @param and @return docs",
+      "revId": "40841ecb28d037eef9d5c428014f04e52aeff954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//4Qc\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-20T12:03:28Z",
+      "side": 1,
+      "message": "Double escaping",
+      "revId": "40841ecb28d037eef9d5c428014f04e52aeff954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//4QY\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-20T12:03:28Z",
+      "side": 1,
+      "message": "missing @param and @return",
+      "revId": "40841ecb28d037eef9d5c428014f04e52aeff954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//4QU\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-20T12:03:28Z",
+      "side": 1,
+      "message": "please use explicit checks. when checking for null, use \u003d\u003d\u003d null or is_null()",
+      "revId": "40841ecb28d037eef9d5c428014f04e52aeff954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//4QQ\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-20T12:03:28Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "40841ecb28d037eef9d5c428014f04e52aeff954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
