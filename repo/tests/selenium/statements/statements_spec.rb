@@ -120,7 +120,7 @@ describe "Check statements UI", :experimental => true do
     end
     it "should check error handling" do
       on_page(ItemPage) do |page|
-        js_snippet = "wikibase.Api.prototype.createClaim ="+
+        js_snippet = "wikibase.RepoApi.prototype.createClaim ="+
         "function(entityId,baseRevId,mainSnak){return this._claimApiCall(baseRevId,mainSnak,{action:'nonexistant',entity:entityId});}"
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load

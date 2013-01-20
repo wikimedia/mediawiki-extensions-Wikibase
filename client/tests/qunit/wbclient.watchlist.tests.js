@@ -12,7 +12,7 @@
 ( function( mw, $, QUnit ) {
 	'use strict';
 
-	QUnit.module( 'mw.wbclient.watchlist', QUnit.newMwEnvironment() );
+	QUnit.module( 'wikibase.client.watchlist.test', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'wikibase client toggle', function ( assert ) {
 		var $namespaceFilters, $env, $toggleLink, $wbToggle, $mockWatchlist,
