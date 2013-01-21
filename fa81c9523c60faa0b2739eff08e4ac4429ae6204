@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//3vc\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-01-21T10:49:47Z",
+      "side": 1,
+      "message": "This is intentional. But you are right that it should be communicated somewhere, probably in a documentation once this feature is merged.",
+      "parentUuid": "AAADhH//3wg\u003d",
+      "revId": "fa81c9523c60faa0b2739eff08e4ac4429ae6204",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3wM\u003d",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 1
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//3vY\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-01-21T10:49:47Z",
+      "side": 1,
+      "message": "Agree to moving the constructor out of the loop. The rest is in the right place IMHO.",
+      "parentUuid": "AAADhH//3wM\u003d",
+      "revId": "fa81c9523c60faa0b2739eff08e4ac4429ae6204",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3wE\u003d",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 1
@@ -82,6 +118,24 @@
       "writtenOn": "2013-01-21T10:30:20Z",
       "side": 1,
       "message": "ditto",
+      "revId": "fa81c9523c60faa0b2739eff08e4ac4429ae6204",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3vU\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-01-21T10:49:47Z",
+      "side": 1,
+      "message": "ditto.",
+      "parentUuid": "AAADhH//3wE\u003d",
       "revId": "fa81c9523c60faa0b2739eff08e4ac4429ae6204",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
