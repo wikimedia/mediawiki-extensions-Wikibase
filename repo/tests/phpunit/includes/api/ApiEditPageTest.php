@@ -113,6 +113,7 @@ class ApiEditPageTest extends ApiModifyItemBase {
 		} catch ( \UsageException $ex ) {
 			//ok, pass
 			//print "\n$ex\n";
+			$this->assertTrue( true );
 		} catch ( \MWException $ex ) {
 			if ( !$wgContentHandlerUseDB ) {
 				$this->markTestSkipped( 'With $wgContentHandlerUseDB, attempts to use a non-default content modfel will always fail.' );
