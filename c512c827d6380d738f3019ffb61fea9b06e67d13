@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//3uI\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-21T10:54:55Z",
+      "side": 1,
+      "message": "Do we really need regex black magic here?",
+      "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
