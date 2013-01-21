@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//3pY\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-21T12:30:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADhH//3t4\u003d",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3xY\u003d",
         "filename": "client/includes/ChangeHandler.php",
         "patchSetId": 5
@@ -104,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//3p0\u003d",
+        "filename": "client/includes/ClientChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-21T12:30:12Z",
+      "side": 1,
+      "message": "I\u0027m currently not merging sitelink changes that affect the client with other changes to the item. And at the moment, sitelink changes are the only relevant kind of change. So this is currently mostly academic.",
+      "parentUuid": "AAADhH//3tw\u003d",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3tg\u003d",
         "filename": "lib/WikibaseLib.hooks.php",
         "patchSetId": 5
@@ -115,6 +151,24 @@
       "writtenOn": "2013-01-21T11:07:27Z",
       "side": 1,
       "message": "how is this related?  did you rebase or something?",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3pw\u003d",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-21T12:30:12Z",
+      "side": 1,
+      "message": "i have no idea how this got here.",
+      "parentUuid": "AAADhH//3tg\u003d",
       "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +192,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//3ps\u003d",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-21T12:30:12Z",
+      "side": 1,
+      "message": "or this...",
+      "parentUuid": "AAADhH//3tc\u003d",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3tU\u003d",
         "filename": "lib/WikibaseLib.php",
         "patchSetId": 5
@@ -149,6 +221,24 @@
       "writtenOn": "2013-01-21T11:07:27Z",
       "side": 1,
       "message": "how is this related to the patch?",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3po\u003d",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-21T12:30:12Z",
+      "side": 1,
+      "message": "it isn\u0027t. hm...\n\nmy guess is that i reverted some of my earlier changes by checking out from master, instead of checking out from HEAD^.",
+      "parentUuid": "AAADhH//3tU\u003d",
       "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
