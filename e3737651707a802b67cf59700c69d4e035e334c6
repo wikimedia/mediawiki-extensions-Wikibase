@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//3oY\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-21T13:30:55Z",
+      "side": 1,
+      "message": "Still a spelling error.. ;)",
+      "revId": "e3737651707a802b67cf59700c69d4e035e334c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
