@@ -43,9 +43,6 @@ class PropertyValueSnakTest extends SnakObjectTest {
 		$argLists = array(
 			array( true, 1, new StringValue( 'a' ) ),
 			array( true, 9001, new StringValue( 'a' ) ),
-			array( false ),
-			array( false, 42 ),
-			array( false, 9001, 'a' ),
 		);
 
 		foreach ( $argLists as &$argList ) {
