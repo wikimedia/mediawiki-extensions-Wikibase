@@ -35,6 +35,11 @@ are also triggered down the document */
 	color: #565656;
 }
 
+/* Messages displayed while some action is performed (e.g. an API call) */
+.wb-actionmsg {
+	font-style: italic;
+}
+
 
 /********** BASIC LAYOUT **********/
 
