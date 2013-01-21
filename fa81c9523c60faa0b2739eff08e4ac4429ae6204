@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAADhH//3u8\u003d",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-21T10:39:09Z",
+      "side": 1,
+      "message": "would be great if we could add HTML comments to those parameters as long as we only support numeric parameters in the template engine. See the \"wb-claims-section\" template as a good example.",
+      "revId": "fa81c9523c60faa0b2739eff08e4ac4429ae6204",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3wg\u003d",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 1
