@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\Entity;
+use Wikibase\Lib\Serializers\EntitySerializationOptions;
 
 /**
  * Tests for the Wikibase\EntitySerializer deriving classes.
@@ -56,7 +57,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 
 		$validArgs = array();
 
-		$options = new \Wikibase\EntitySerializationOptions();
+		$options = new EntitySerializationOptions();
 		$options->setProps( array( 'aliases' ) );
 
 		$entity0 = $entity->copy();
@@ -94,7 +95,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 			$options,
 		);
 
-		$options = new \Wikibase\EntitySerializationOptions();
+		$options = new EntitySerializationOptions();
 		$options->setProps( array( 'descriptions', 'labels' ) );
 
 		$entity1 = $entity->copy();

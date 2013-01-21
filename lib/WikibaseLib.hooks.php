@@ -140,6 +140,7 @@ final class LibHooks {
 			'serializers/PropertySerializer',
 			'serializers/ReferenceSerializer',
 			'serializers/SerializationOptions',
+			'serializers/SerializerFactory',
 			'serializers/Serializer',
 			'serializers/SnakSerializer',
 

@@ -6,6 +6,7 @@ use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\Claim;
 use Wikibase\Statement;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**
  * Tests for the Wikibase\ClaimsSerializer class.
@@ -47,7 +48,7 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 	 * @return string
 	 */
 	protected function getClass() {
-		return '\Wikibase\ClaimsSerializer';
+		return '\Wikibase\Lib\Serializers\ClaimsSerializer';
 	}
 
 	/**
@@ -68,7 +69,7 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 			new Statement( new PropertyNoValueSnak( $propertyId ) ),
 		);
 
-		$claimSerializer = new \Wikibase\ClaimSerializer();
+		$claimSerializer = new ClaimSerializer();
 
 		$validArgs[] = array(
 			new \Wikibase\Claims( $claims ),

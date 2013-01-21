@@ -1,10 +1,12 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Serializers;
 use MWException;
+use Wikibase\Statement;
+use Wikibase\Claim;
 
 /**
- * API serializer for Claim objects.
+ * Serializer for Claim objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +31,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimSerializer extends SerializerObject {
+class ClaimSerializer extends SerializerObject implements Unserializer {
 
 	/**
 	 * @since 0.3
@@ -131,6 +133,87 @@ class ClaimSerializer extends SerializerObject {
 		}
 
 		return $serialization;
+	}
+
+	/**
+	 * @see Unserializer::newFromSerialization
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $serialization
+	 *
+	 * @return Claim
+	 * @throws MWException
+	 */
+	public function newFromSerialization( array $serialization ) {
+		if ( !array_key_exists( 'type', $serialization )
+			|| !in_array( $serialization['type'], array( 'claim', 'statement' ) ) ) {
+			throw new MWException( 'Invalid claim type specified' );
+		}
+
+		$requiredElements = array(
+			'id',
+			'mainsnak',
+		);
+
+		$isStatement = $serialization['type'] === 'statement';
+
+		if ( $isStatement ) {
+			$requiredElements[] = 'rank';
+		}
+
+		foreach ( $requiredElements as $requiredElement ) {
+			if ( !array_key_exists( $requiredElement, $serialization ) ) {
+				throw new MWException( "Required key '$requiredElement' missing" );
+			}
+		}
+
+		$snakDeserializer = new SnakSerializer(); // FIXME: derp injection
+
+		$claimClass = $isStatement ? '\Wikibase\Statement' : '\Wikibase\Claim';
+
+		/**
+		 * @var Claim $claim
+		 */
+		$claim = new $claimClass( $snakDeserializer->newFromSerialization( $serialization['mainsnak'] ) );
+		assert( $claim instanceof Claim );
+
+		$claim->setGuid( $serialization['id'] );
+
+		if ( array_key_exists( 'qualifiers', $serialization ) ) {
+			$qualifiers = array();
+
+			foreach ( $serialization['qualifiers'] as $qualifier ) {
+				$qualifiers[] = $snakDeserializer->newFromSerialization( $qualifier );
+			}
+
+			$claim->setQualifiers( new \Wikibase\SnakList( $qualifiers ) );
+		}
+
+		if ( $isStatement ) {
+			if ( !in_array( $serialization['rank'], self::$rankMap ) ) {
+				throw new MWException( 'Invalid statement rank provided' );
+			}
+
+			/**
+			 * @var Statement $claim
+			 */
+			$claim->setRank( self::unserializeRank( $serialization['rank'] ) );
+
+			if ( array_key_exists( 'references', $serialization ) ) {
+				$references = array();
+
+				// TODO
+
+				foreach ( $serialization['references'] as $reference ) {
+					// TODO
+				}
+
+				$claim->setReferences( $references );
+			}
+		}
+
+		return $claim;
 	}
 
 }

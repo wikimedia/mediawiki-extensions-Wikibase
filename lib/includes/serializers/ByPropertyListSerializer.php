@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Serializers;
 use Traversable, ApiResult, MWException;
 
 /**
- * API serializer for Traversable objects that need to be grouped
+ * Serializer for Traversable objects that need to be grouped
  * per property id. Each element needs to have a getPropertyId method.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -80,7 +80,7 @@ class ByPropertyListSerializer extends SerializerObject {
 		$serialization = array();
 
 		// FIXME: "iterator => array => iterator" is stupid
-		$objects = new ByPropertyIdArray( iterator_to_array( $objects ) );
+		$objects = new \Wikibase\ByPropertyIdArray( iterator_to_array( $objects ) );
 		$objects->buildIndex();
 
 		foreach ( $objects->getPropertyIds() as $propertyId ) {
@@ -92,7 +92,7 @@ class ByPropertyListSerializer extends SerializerObject {
 
 			$this->setIndexedTagName( $serializedObjects, $this->elementName );
 
-			$propertyId = new EntityId( Property::ENTITY_TYPE, $propertyId );
+			$propertyId = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, $propertyId );
 
 			if ( $this->options->shouldIndexTags() ) {
 				$serializedObjects['id'] = $propertyId->getPrefixedId();

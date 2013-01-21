@@ -259,11 +259,13 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$printer->setRootElement( $entityKey );
 		}
 
-		$opt = new \Wikibase\EntitySerializationOptions();
-		$opt->setIndexTags( $res->getIsRawMode() ); //FIXME: $res->rawMode doesn't seem to be set to what we want.
-		$opt->setProps( self::$fieldsToShow );
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializer =$serializerFactory->newSerializerForObject( $entityContent->getEntity() );
 
-		$serializer = \Wikibase\EntitySerializer::newForEntity( $entityContent->getEntity(), $opt );
+		$opt = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
+		$opt->setIndexTags( $res->getIsRawMode() ); //FIXME: $res->rawMode doesn't seem to be set to what we want.
+		$opt->setProps( self::$fieldsToShow );      //FIXME: someone does not know how to write clear FIXMEs
+		$serializer->setOptions( $opt );
 
 		$arr = $serializer->getSerialized( $entityContent->getEntity() );
 

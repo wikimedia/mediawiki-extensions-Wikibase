@@ -107,7 +107,7 @@ class ApiGetClaimsTest extends \ApiTestCase {
 				$params = array(
 					'action' => 'wbgetclaims',
 					'entity' => $entity->getPrefixedId(),
-					'rank' => \Wikibase\ClaimSerializer::serializeRank( $rank ),
+					'rank' => \Wikibase\Lib\Serializers\ClaimSerializer::serializeRank( $rank ),
 				);
 
 				$claims = array();
@@ -147,7 +147,8 @@ class ApiGetClaimsTest extends \ApiTestCase {
 			$claims = new \Wikibase\Claims( $claims );
 		}
 
-		$serializer = new \Wikibase\ClaimsSerializer();
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $claims );
 		$expected = $serializer->getSerialized( $claims );
 
 		$byPropClaims = new \Wikibase\ByPropertyIdArray( $claims );

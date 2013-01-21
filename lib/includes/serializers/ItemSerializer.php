@@ -1,10 +1,13 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Serializers;
 use MWException;
+use Wikibase\Entity;
+use Wikibase\Item;
+use Wikibase\SiteLink;
 
 /**
- * API serializer for items.
+ * Serializer for items.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

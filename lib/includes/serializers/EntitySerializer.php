@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Serializers;
 use ApiResult, MWException;
+use Wikibase\Entity;
 
 /**
- * API serializer for entities.
+ * Serializer for entities.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -87,7 +88,7 @@ class EntitySerializer extends SerializerObject {
 					break;
 				case 'claims':
 					$claimsSerializer = new ClaimsSerializer( $this->options );
-					$serialization['claims'] = $claimsSerializer->getSerialized( new Claims( $entity->getClaims() ) );
+					$serialization['claims'] = $claimsSerializer->getSerialized( new \Wikibase\Claims( $entity->getClaims() ) );
 					break;
 			}
 		}
@@ -243,6 +244,7 @@ class EntitySerializer extends SerializerObject {
 	 * a plain EntitySerializer is returned, else the more specific one is.
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.4
 	 *
 	 * @param Entity $entity
 	 * @param EntitySerializationOptions $options
@@ -250,14 +252,14 @@ class EntitySerializer extends SerializerObject {
 	 * @return EntitySerializer
 	 */
 	public static function newForEntity( Entity $entity, EntitySerializationOptions $options = null ) {
-		$serializers = array(
-			'item' => '\Wikibase\ItemSerializer',
-			'property' => '\Wikibase\PropertySerializer',
-		);
+		$factory = new SerializerFactory();
 
-		$serializer = array_key_exists( $entity->getType(), $serializers ) ? $serializers[$entity->getType()] : '\Wikibase\EntitySerializer';
+		$serializer = $factory->newSerializerForObject( $entity );
+		$serializer->setOptions( $options );
 
-		return new $serializer( $options );
+		assert( $serializer instanceof EntitySerializer );
+
+		return $serializer;
 	}
 
 }

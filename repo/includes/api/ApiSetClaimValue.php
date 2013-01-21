@@ -168,7 +168,9 @@ class ApiSetClaimValue extends Api {
 	 * @param Claim $claim
 	 */
 	protected function outputClaim( Claim $claim ) {
-		$serializer = new ClaimSerializer();
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $claim );
+
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		$this->getResult()->addValue(

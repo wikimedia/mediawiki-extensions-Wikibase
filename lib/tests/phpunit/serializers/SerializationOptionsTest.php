@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
  * Tests for the Wikibase\SerializationOptions class.

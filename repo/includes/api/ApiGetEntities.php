@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use ApiBase, MWException;
+use Wikibase\Lib\Serializers\EntitySerializationOptions;
 
 /**
  * API module to get the data for one or more Wikibase entities.
@@ -165,13 +166,15 @@ class ApiGetEntities extends Api {
 
 				$entity = $entityContent->getEntity();
 
-				$options = new EntitySerializationOptions();
+				$options = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
 				$options->setLanguages( $params['languages'] );
 				$options->setSortDirection( $params['dir'] );
 				$options->setProps( $props );
 				$options->setIndexTags( $this->getResult()->getIsRawMode() );
 
-				$entitySerializer = EntitySerializer::newForEntity( $entity, $options );
+				$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+				$entitySerializer = $serializerFactory->newSerializerForObject( $entity );
+				$entitySerializer->setOptions( $options );
 
 				$entitySerialization = $entitySerializer->getSerialized( $entity );
 

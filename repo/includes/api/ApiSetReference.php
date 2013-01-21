@@ -92,11 +92,13 @@ class ApiSetReference extends Api {
 		$rawSnaks = \FormatJson::decode( $rawSnaks, true );
 
 		$snaks = new SnakList();
-		$snakUnserializer = new SnakSerializer();
+
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$snakUnserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Snak' );
 
 		foreach ( $rawSnaks as $byPropertySnaks ) {
 			foreach ( $byPropertySnaks as $rawSnak ) {
-				$snaks[] = $snakUnserializer->getUnserialized( $rawSnak );
+				$snaks[] = $snakUnserializer->newFromSerialization( $rawSnak );
 			}
 		}
 
@@ -198,7 +200,8 @@ class ApiSetReference extends Api {
 	 * @param Reference $reference
 	 */
 	protected function outputReference( Reference $reference ) {
-		$serializer = new ReferenceSerializer();
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $reference );
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		$this->getResult()->addValue(

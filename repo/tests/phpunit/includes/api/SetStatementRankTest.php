@@ -4,6 +4,7 @@ namespace Wikibase\Test\Api;
 use Wikibase\Item;
 use Wikibase\Snak;
 use Wikibase\Statement;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**
  * Unit tests for the Wikibase\Api\SetStatementRank class.
@@ -93,7 +94,7 @@ class SetStatementRankTest extends \ApiTestCase {
 	}
 
 	public function testRequests() {
-		$ranks = \Wikibase\ClaimSerializer::getRanks();
+		$ranks = ClaimSerializer::getRanks();
 
 		foreach ( $this->statementProvider() as $statement ) {
 			$item = \Wikibase\Item::newEmpty();
@@ -109,7 +110,7 @@ class SetStatementRankTest extends \ApiTestCase {
 			while ( true ) {
 				$rank = $ranks[array_rand( $ranks )];
 
-				if ( \Wikibase\ClaimSerializer::unserializeRank( $rank ) !== $statement->getRank() ) {
+				if ( ClaimSerializer::unserializeRank( $rank ) !== $statement->getRank() ) {
 					break;
 				}
 			}
@@ -170,7 +171,7 @@ class SetStatementRankTest extends \ApiTestCase {
 		$claim = $claims->getClaimWithGuid( $statementGuid );
 
 		$this->assertEquals(
-			\Wikibase\ClaimSerializer::unserializeRank( $statementRank ),
+			ClaimSerializer::unserializeRank( $statementRank ),
 			$claim->getRank()
 		);
 	}

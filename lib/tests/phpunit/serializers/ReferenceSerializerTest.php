@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\Lib\Serializers\SnakSerializer;
 
 /**
  * Tests for the Wikibase\ReferenceSerializer class.
@@ -42,7 +43,7 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 	 * @return string
 	 */
 	protected function getClass() {
-		return '\Wikibase\ReferenceSerializer';
+		return '\Wikibase\Lib\Serializers\ReferenceSerializer';
 	}
 
 	/**
@@ -63,7 +64,7 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 			new \Wikibase\PropertyValueSnak( 9001, new \DataValues\StringValue( 'foobar' ) ),
 		);
 
-		$snakSerializer = new \Wikibase\SnakSerializer();
+		$snakSerializer = new SnakSerializer();
 
 		$reference = new \Wikibase\Reference( new \Wikibase\SnakList( $snaks ) );
 

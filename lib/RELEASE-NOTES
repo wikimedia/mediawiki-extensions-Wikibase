@@ -8,8 +8,18 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 === Version 0.4 ===
 (dev)
 
+; Additions
+
 * Added EntityIdParser
 * Added ReferencedEntitiesFinder
+* Added Unserializer interface
+* Added SerializerFactory
+
+; Changes
+
+* ClaimObject class and Claim interface changed to Claim class
+* StatementObject class and Statement interface changed to Statement class
+* Moved all Serializer code into Wikibase\Lib\Serializers
 
 === Version 0.3 ===
 (???)

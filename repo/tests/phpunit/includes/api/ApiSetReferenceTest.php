@@ -83,7 +83,8 @@ class ApiSetReferenceTest extends \ApiTestCase {
 	}
 
 	protected function makeValidRequest( $statementGuid, $referenceHash, Reference $reference ) {
-		$serializer = new \Wikibase\ReferenceSerializer();
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $reference );
 		$serializedReference = $serializer->getSerialized( $reference );
 
 		$params = array(
@@ -106,7 +107,8 @@ class ApiSetReferenceTest extends \ApiTestCase {
 	}
 
 	protected function makeInvalidRequest( $statementGuid, $referenceHash, Reference $reference ) {
-		$serializer = new \Wikibase\ReferenceSerializer();
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $reference );
 		$serializedReference = $serializer->getSerialized( $reference );
 
 		$params = array(

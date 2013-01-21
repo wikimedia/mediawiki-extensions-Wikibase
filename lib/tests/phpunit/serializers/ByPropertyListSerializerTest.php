@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ByPropertyListSerializer;;
+use Wikibase\Lib\Serializers\ByPropertyListSerializer;
+use Wikibase\Lib\Serializers\SnakSerializer;
 
 /**
  * Tests for the Wikibase\ByPropertyListSerializer class.
@@ -43,7 +44,7 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 	 * @return string
 	 */
 	protected function getClass() {
-		return '\Wikibase\ByPropertyListSerializer';
+		return '\Wikibase\Lib\Serializers\ByPropertyListSerializer';
 	}
 
 	/**
@@ -52,7 +53,7 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 	 * @return ByPropertyListSerializer
 	 */
 	protected function getInstance() {
-		$snakSetailizer = new \Wikibase\SnakSerializer();
+		$snakSetailizer = new SnakSerializer();
 		return new ByPropertyListSerializer( 'test', $snakSetailizer );
 	}
 
