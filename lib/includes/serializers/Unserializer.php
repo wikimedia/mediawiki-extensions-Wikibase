@@ -4,7 +4,7 @@ namespace Wikibase;
 use MWException;
 
 /**
- * Serializer for properties.
+ *
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ use MWException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.3
+ * @since 0.4
  *
  * @file
  * @ingroup WikibaseLib
@@ -29,28 +29,17 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertySerializer extends EntitySerializer {
+interface Unserializer {
 
 	/**
-	 * @see EntitySerializer::getEntityTypeSpecificSerialization
+	 * Constructs the original object from the provided serialization.
 	 *
-	 * @since 0.3
+	 * @since 0.4
 	 *
-	 * @param Entity $property
+	 * @param array $serialization
 	 *
-	 * @return array
-	 * @throws MWException
+	 * @return mixed
 	 */
-	protected function getEntityTypeSpecificSerialization( Entity $property ) {
-		if ( !( $property instanceof Property ) ) {
-			throw new MWException( 'PropertySerializer can only serialize Property implementing objects' );
-		}
-
-		$serialization = array();
-
-		$serialization['datatype'] = $property->getDataType()->getId();
-
-		return $serialization;
-	}
+	public function newFromSerialization( array $serialization );
 
 }
