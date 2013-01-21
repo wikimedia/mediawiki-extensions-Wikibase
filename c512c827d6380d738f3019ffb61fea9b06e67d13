@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//3rQ\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-21T11:48:01Z",
+      "side": 1,
+      "message": "Actually, you could avoid the whole \"black magic\" by adding another config var \"wbIsRepo\" or so. Perhaps not into the RL module you introduced in this change set though, since it seems somewhat more basic.",
+      "parentUuid": "AAADhH//3rY\u003d",
+      "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3sE\u003d",
         "filename": "lib/resources/wikibase.store/wikibase.Api.js",
         "patchSetId": 3
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Changing this would require changing all callers and the tests... and I doubt we\u0027ll ever going to have client side APIs. I\u0027m open for both but sticking with this is a lot easier and not super uggly either, I guess (as those function aren\u0027t used outside of this abstraction script anyway).",
       "parentUuid": "AAADhH//3sE\u003d",
+      "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3rM\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-21T11:48:01Z",
+      "side": 1,
+      "message": "In this early stage of the project (there is not many Gadgets etc. yet) it would be rather easy to rename it still. If we had lots of Gadgets already, we had to assume that they are using these two functions as well ;)\n\nLets think about this later anyhow.",
+      "parentUuid": "AAADhH//3rk\u003d",
       "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
