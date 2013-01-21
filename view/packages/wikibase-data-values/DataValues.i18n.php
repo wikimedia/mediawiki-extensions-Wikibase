@@ -277,3 +277,11 @@ $messages['yi'] = array(
 	'datavalues-desc' => 'זאמלונג פון אביעקטן וואס רעפרעזענטירן פארשידענע סארטן ווערטן',
 	'version-datavalues' => 'דאטנווערטן',
 );
+
+/** Simplified Chinese (中文（简体）‎)
+ * @author Yfdyh000
+ */
+$messages['zh-hans'] = array(
+	'datavalues-desc' => '表示各种类型的值的对象集合',
+	'version-datavalues' => 'DataValues',
+);
