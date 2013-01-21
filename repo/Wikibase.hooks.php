@@ -146,6 +146,7 @@ final class RepoHooks {
 			'NamespaceUtils',
 
 			'actions/EditEntityAction',
+			'actions/ViewEntityAction',
 
 			'api/ApiBotEdit',
 			'api/ApiEditPage',

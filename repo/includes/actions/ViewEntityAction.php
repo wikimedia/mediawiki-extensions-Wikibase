@@ -177,6 +177,8 @@ abstract class ViewEntityAction extends \ViewAction {
 	 * @since 0.1
 	 */
 	protected function displayMissingEntity() {
+		global $wgSend404Code;
+
 		$title = $this->getArticle()->getTitle();
 		$oldid = $this->getArticle()->getOldID();
 
@@ -184,10 +186,28 @@ abstract class ViewEntityAction extends \ViewAction {
 
 		$out->setPageTitle( $title->getPrefixedText() );
 
-		// TODO: firing hooks from core here is NOT nice...
+		// TODO: Factor the "show stuff for missing page" code out from Article::showMissingArticle,
+		//       so it can be re-used here. The below code is copied & modified from there...
+
 		wfRunHooks( 'ShowMissingArticle', array( $this ) );
 
+		# Show delete and move logs
+		\LogEventsList::showLogExtract( $out, array( 'delete', 'move' ), $title, '',
+			array(  'lim' => 10,
+			        'conds' => array( "log_action != 'revision'" ),
+			        'showIfEmpty' => false,
+			        'msgKey' => array( 'moveddeleted-notice' ) )
+		);
+
+		if ( $wgSend404Code ) {
+			// If there's no backing content, send a 404 Not Found
+			// for better machine handling of broken links.
+			$this->getContext()->getRequest()->response()->header( "HTTP/1.1 404 Not Found" );
+		}
+
 		$hookResult = wfRunHooks( 'BeforeDisplayNoArticleText', array( $this ) );
+
+		// XXX: ...end of stuff stolen from Article::showMissingArticle
 
 		if ( $hookResult ) {
 			// Show error message
