@@ -31,11 +31,12 @@ HTML;
 
 	$templates['wb-entity-content'] =
 <<<HTML
-$1
-$2
+$1 <!-- label -->
+$2 <!-- description -->
 <hr class="wb-hr" />
-$3
-$4
+$3 <!-- aliases -->
+$4 <!-- terms -->
+$5 <!-- claims -->
 HTML;
 
 	$templates['wb-section-heading'] =
@@ -165,6 +166,50 @@ HTML;
 	$templates['wb-toolbar-button-disabled'] =
 <<<HTML
 <span class="wb-ui-toolbar-button wb-ui-toolbar-button-disabled">$1</span>
+HTML;
+
+	$templates['wb-terms-heading'] =
+		<<<HTML
+		<h2 class="wb-terms-heading">$1</h2>
+HTML;
+
+	$templates['wb-terms-table'] =
+		<<<HTML
+		<table class="wb-terms">
+	<colgroup>
+		<col class="wb-terms-language" />
+		<col class="wb-terms-term" />
+		<col class="wb-editsection" />
+	</colgroup>
+	<tbody>$1</tbody>
+</table>
+HTML;
+
+// make the wb-value-row a wb-property-container to start with the edit button stuff
+	$templates['wb-term'] =
+		<<<HTML
+		<tr class="wb-terms-label wb-terms-$1 $2">
+	<td class="wb-terms-language wb-terms-language-$1" rowspan="2">$3</td>
+	<td class="wb-terms-label wb-terms-label-$1">
+		$4
+	</td>
+	<td>
+	$6
+	</td>
+</tr>
+<tr class="wb-terms-description wb-terms-$1 $2">
+	<td class="wb-terms-description wb-terms-description-$1">
+		<div class="wb-value-row" dir="auto">
+			<div class="wb-property-container-key" title="description"></div>
+			<span class="wb-property-container-value wb-value-container" dir="auto">
+				<span class="wb-value $1">$5</span>
+			</span>
+		</div>
+	</td>
+	<td>
+	$7
+	</td>
+</tr>
 HTML;
 
 	$templates['wb-sitelinks-table'] =
