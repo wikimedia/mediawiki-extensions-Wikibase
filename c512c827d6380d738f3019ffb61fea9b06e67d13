@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//3rw\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-01-21T11:41:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADhH//3ss\u003d",
+      "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3uI\u003d",
         "filename": "lib/resources/wikibase.store/wikibase.Api.js",
         "patchSetId": 3
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//3rY\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-01-21T11:41:00Z",
+      "side": 1,
+      "message": "Well, that sounds ok... done",
+      "parentUuid": "AAADhH//3s0\u003d",
+      "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3sE\u003d",
         "filename": "lib/resources/wikibase.store/wikibase.Api.js",
         "patchSetId": 3
@@ -82,6 +118,24 @@
       "writtenOn": "2013-01-21T11:24:58Z",
       "side": 1,
       "message": "I am ok with renaming those. On the other hand, would be worth thinking about just renaming the constructor into wikibase.RepoApi instead, separating it from an eventual Client API.",
+      "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3rk\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-01-21T11:41:00Z",
+      "side": 1,
+      "message": "Changing this would require changing all callers and the tests... and I doubt we\u0027ll ever going to have client side APIs. I\u0027m open for both but sticking with this is a lot easier and not super uggly either, I guess (as those function aren\u0027t used outside of this abstraction script anyway).",
+      "parentUuid": "AAADhH//3sE\u003d",
       "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
