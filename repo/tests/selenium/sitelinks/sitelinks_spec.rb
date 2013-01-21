@@ -9,14 +9,13 @@
 require 'spec_helper'
 
 describe "Check functionality of add/edit/remove sitelinks" do
-
-  context "Check for empty site links UI" do
-    before :all do
-      # set up
-      visit_page(CreateItemPage) do |page|
-        page.create_new_item(generate_random_string(10), generate_random_string(20))
-      end
+  before :all do
+    # set up
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(generate_random_string(10), generate_random_string(20))
     end
+  end
+  context "Check sitelinks UI" do
     it "should check that there are no site links and if there's an add button" do
       on_page(ItemPage) do |page|
         page.wait_for_entity_to_load
@@ -38,9 +37,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.count_existing_sitelinks.should == 0
       end
     end
-  end
 
-  context "Check for adding site link to non existing article" do
     it "should check if adding sitelink to a non existing article produces an error" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
@@ -69,9 +66,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wbErrorDetailsDiv_element.text.should == "The external client site did not provide page information."
       end
     end
-  end
 
-  context "Check for adding site link UI" do
     it "should check if adding a sitelink works" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
@@ -123,9 +118,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.cancelSitelinkLink
       end
     end
-  end
 
-  context "Check for adding multiple site links UI" do
     it "should check if adding multiple sitelinks works" do
       count = 1
       sitelinks = [["de", "Ber", "Deutsch (de)"], ["ja", "Ber", "日本語 (ja)"], ["he", "BER", "עברית (he)"]]
@@ -156,9 +149,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         end
       end
     end
-  end
 
-  context "Check for displaying normalized title when adding sitelink" do
     it "should check if the normalized version of the title is displayed" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
@@ -168,9 +159,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.pageArticleNormalized_element.text.should == "Хелијум"
       end
     end
-  end
 
-  context "Check for editing site links UI" do
     it "should check if editing sitelinks works" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
@@ -196,9 +185,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.pageInputFieldExistingSiteLink.should_not == current_page
       end
     end
-  end
 
-  context "Check clicking on sitelink" do
     it "should check if the sitelink leads to the correct page" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
@@ -207,9 +194,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.articleTitle.should == "Bermuda"
       end
     end
-  end
 
-  context "Check behaviour on maximum sitelinks reached" do
     it "should check correct message when maximum number of sitelinks are reached" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
@@ -223,9 +208,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.addSitelinkLink?.should be_true
       end
     end
-  end
 
-  context "Check sorting of sitelinks table" do
     it "should check correct sorting of sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
@@ -252,12 +235,21 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.get_text_from_sitelist_table(6, 1).should == "sr"
       end
     end
-  end
 
-  context "Check for removing multiple site link UI" do
+    it "should check if localizing numbers works" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.uls_switch_language("ar", "arabic")
+        page.wait_for_entity_to_load
+        page.siteLinkCounter.include?("٦").should be_true
+      end
+    end
+
     it "should check if removing multiple sitelink works" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
+        page.uls_switch_language(LANGUAGE_CODE, LANGUAGE_NAME)
         page.wait_for_entity_to_load
         numExistingSitelinks = page.count_existing_sitelinks
         for i in 1..numExistingSitelinks
