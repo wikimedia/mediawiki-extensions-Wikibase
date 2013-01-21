@@ -147,7 +147,7 @@ final class LibHooks {
 			'snak/SnakList',
 			'snak/Snak',
 
-			'statement/StatementObject',
+			'statement/Statement',
 
 			'store/SiteLinkLookup',
 			'store/SiteLinkTable',

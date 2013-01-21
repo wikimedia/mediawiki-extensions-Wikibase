@@ -78,7 +78,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			),
 		);
 
-		$statement = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( $id ) );
+		$statement = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( $id ) );
 
 		$validArgs[] = array(
 			$statement,
@@ -111,7 +111,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 	 */
 	public function testRankSerialization( $rank ) {
 		$id = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
-		$statement = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( $id ) );
+		$statement = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( $id ) );
 
 		$statement->setRank( $rank );
 

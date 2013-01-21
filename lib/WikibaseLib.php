@@ -186,7 +186,7 @@ $wgAutoloadClasses['Wikibase\Snaks'] 					= $dir . 'includes/snak/Snaks.php';
 
 // includes/statement
 $wgAutoloadClasses['Wikibase\Statement'] 				= $dir . 'includes/statement/Statement.php';
-$wgAutoloadClasses['Wikibase\StatementObject'] 			= $dir . 'includes/statement/StatementObject.php';
+$wgAutoloadClasses['Wikibase\StatementObject'] 			= $dir . 'includes/statement/Statement.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\EntityLookup'] 			= $dir . 'includes/store/EntityLookup.php';

@@ -162,10 +162,10 @@ class ClaimsTest extends \MediaWikiTestCase {
 		$claim3 = new Claim( new \Wikibase\PropertyNoValueSnak( 1 ) );
 		$claim4 = new Claim( new \Wikibase\PropertyNoValueSnak( 2 ) );
 
-		$statement0 = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 5 ) );
+		$statement0 = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( 5 ) );
 		$statement0->setRank( \Wikibase\Statement::RANK_PREFERRED );
 
-		$statement1 = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 5 ) );
+		$statement1 = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( 5 ) );
 		$statement1->setReferences( new \Wikibase\ReferenceList( array( new \Wikibase\ReferenceObject(
 			new \Wikibase\SnakList( array( new \Wikibase\PropertyValueSnak( 10, new \DataValues\StringValue( 'spam' ) ) ) )
 		) ) ) );

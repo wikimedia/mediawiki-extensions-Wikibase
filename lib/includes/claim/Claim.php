@@ -198,7 +198,7 @@ class Claim implements \Hashable, \Serializable {
 	 */
 	public static function newFromArray( array $data ) {
 		if ( array_key_exists( 'rank', $data ) ) {
-			return StatementObject::newFromArray( $data );
+			return Statement::newFromArray( $data );
 		}
 
 		$mainSnak = SnakObject::newFromArray( $data['m'] );
