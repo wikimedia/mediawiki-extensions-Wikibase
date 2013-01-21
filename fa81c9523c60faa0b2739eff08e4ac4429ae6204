@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//3wg\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-21T10:30:20Z",
+      "side": 1,
+      "message": "This can be confusing as it will add the zero-languages too, but we can simply say that we add them anyhow in Wikidata. It is like \"can read this language but can\u0027t communicate in it\"",
+      "revId": "fa81c9523c60faa0b2739eff08e4ac4429ae6204",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3wM\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-21T10:30:20Z",
+      "side": 1,
+      "message": "This should be outside the loop, and the following should probably be isolated in its own method. To have handling of special cases like this inside a general method seems odd.",
+      "revId": "fa81c9523c60faa0b2739eff08e4ac4429ae6204",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3wE\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-21T10:30:20Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "fa81c9523c60faa0b2739eff08e4ac4429ae6204",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
