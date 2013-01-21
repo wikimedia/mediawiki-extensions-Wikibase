@@ -1,7 +1,5 @@
 <?php
 
-use Wikibase\EntityId;
-
 /**
  * Base for special pages that show the result of a Query. Rewriting of QueryPage but
  * with abstraction of the storage system and without cache support.
@@ -24,7 +22,7 @@ use Wikibase\EntityId;
  * @since 0.3
  *
  * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
@@ -66,20 +64,12 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 *
 	 * @since 0.3
 	 *
-	 * @param EntityId $entityId
+	 * @param $entry
 	 * TODO: just getting an ID here is odd
 	 *
 	 * @return string|null
 	 */
-	protected function formatRow( EntityId $entityId ) {
-		try {
-			$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $entityId );
-			return Linker::linkKnown( $title );
-		} catch ( MWException $e ) {
-			wfWarn( "Error formatting result row: " . $e->getMessage() );
-			return false;
-		}
-	}
+	protected abstract function formatRow( $entry );
 
 	/**
 	 * Return the result of the query
@@ -89,7 +79,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * @param integer $offset
 	 * @param integer $limit
 	 *
-	 * @return EntityId[]
+	 * @return array
 	 */
 	protected abstract function getResult( $offset = 0, $limit = 0 );
 
@@ -130,7 +120,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 
 		$this->outputResults(
 			$result,
-			// do not format the one extra row, if exist
+			// do not format the one extra row, if it exist
 			min( $this->numRows, $this->limit ),
 			$this->offset
 		);
@@ -167,7 +157,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Return the Title of the special page with full subpages informations in oder to be used for naviagtion.
+	 * Return the Title of the special page with full subpages informations in order to be used for navigation.
 	 *
 	 * @since 0.3
 	 *

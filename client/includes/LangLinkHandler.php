@@ -287,23 +287,30 @@ class LangLinkHandler {
 	 * current page, excluding any target languages for which there already is a
 	 * link on the page.
 	 *
+	 * This method can set the page props as a side effect. This is not nice, but
+	 * it is done here as a simple work around as the necessary prerequisite is
+	 * the ParserOutput and that is available here.
+	 *
 	 * @since 0.4
 	 *
 	 * @param Title        $title The page's title
 	 * @param ParserOutput $out   Parsed representation of the page
+	 * @param boolean      $storeNumLinks Shall the count of sitelinks be stored as a page props?
 	 *
 	 * @return \Wikibase\SiteLink[] An associative array, using site IDs for keys
 	 *         and the target pages in the respective languages as the associated value.
 	 */
-	public function getEffectiveRepoLinks( Title $title, ParserOutput $out ) {
-		if ( !$this->useRepoLinks( $title, $out ) ) {
-			return array();
-		}
-
+	public function getEffectiveRepoLinks( Title $title, ParserOutput $out, array $repoLinks = null ) {
 		$onPageLinks = $out->getLanguageLinks();
 		$onPageLinks = $this->localLinksToArray( $onPageLinks );
 
-		$repoLinks = $this->getEntityLinks( $title );
+		// Note that we pick up the repo links from the ParserOutput as a property
+		// because this lets us avoid loading them in some cases
+		$repoLinks = unserialize( $out->getProperty( 'Sitelinks' ) );
+		if ( !is_array( $repoLinks ) ) {
+			$repoLinks = array();
+		}
+
 		$repoLinks = $this->repoLinksToArray( $repoLinks );
 		$repoLinks = $this->suppressRepoLinks( $out, $repoLinks );
 
@@ -324,8 +331,40 @@ class LangLinkHandler {
 	 * @param \Title        $title The page's title
 	 * @param \ParserOutput $out   Parsed representation of the page
 	 */
-	public function addLinksFromRepository( Title $title, ParserOutput $out ) {
-		$repoLinks = $this->getEffectiveRepoLinks( $title, $out );
+	public function addLinksFromRepository( Title $title, ParserOutput $out, $reloadSitelinks = true ) {
+		if ( !$this->useRepoLinks( $title, $out ) ) {
+			return array();
+		}
+
+		// get repo links
+		// FIXME: that sitelinks should be saved if there are none.. hm, need a marker..
+		// or if the page is purged, etc...
+		if ( $reloadSitelinks === true ) {
+			// load from table
+			$repoLinks = $this->getEntityLinks( $title );
+
+			// store them away for later
+			// FIXME: set to null if empty? Then drop numsitelinks
+			$out->setProperty(
+				'Sitelinks',
+				serialize( $repoLinks )
+			);
+			$out->setProperty(
+				'NumSitelinks',
+				serialize( empty( $repoLinks ) ? null : serialize( count( $repoLinks ) ) )
+			);
+		}
+		else {
+			// load from ParserOutput
+			$repoLinks = unserialize( $out->getProperty( 'Sitelinks' ) );
+			if ( !is_array( $repoLinks ) ) {
+				$repoLinks = array();
+			}
+		}
+
+		// reduce them before we do further processing
+		//$repoLinks = $this->getEffectiveRepoLinks( $title, $out, $repoLinks );
+		$repoLinks = $this->getEffectiveRepoLinks( $title, $out, $repoLinks );
 
 		foreach ( $repoLinks as $wiki => $page ) {
 			$site = $this->sites->getSite( $wiki );

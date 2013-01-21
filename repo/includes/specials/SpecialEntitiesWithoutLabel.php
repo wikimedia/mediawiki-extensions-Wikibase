@@ -110,6 +110,27 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	}
 
 	/**
+	 * Formats a row for display.
+	 * If the function returns false, the line output will be skipped.
+	 *
+	 * @since 0.3
+	 *
+	 * @param $entry
+	 * TODO: just getting an ID here is odd
+	 *
+	 * @return string|null
+	 */
+	protected function formatRow( $entry ) {
+		try {
+			$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $entry );
+			return Linker::linkKnown( $title );
+		} catch ( MWException $e ) {
+			wfWarn( "Error formatting result row: " . $e->getMessage() );
+			return false;
+		}
+	}
+
+	/**
 	 * @see SpecialWikibaseQueryPage::getResult
 	 *
 	 * @since 0.2
