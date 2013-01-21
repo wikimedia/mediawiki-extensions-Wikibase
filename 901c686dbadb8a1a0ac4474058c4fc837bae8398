@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//3us\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-21T11:07:27Z",
+      "side": 1,
+      "message": "wrappaer?",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3uA\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-21T11:07:27Z",
+      "side": 1,
+      "message": "not so nice to introduce yet another array key, but suppose we can fix in a follow up",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3uo\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-21T11:07:27Z",
+      "side": 1,
+      "message": "we already do this, although once we get properties and other stuff then we\u0027ll need to consider more types of changes for pages.",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3t4\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-21T11:07:27Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3xY\u003d",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-21T11:07:27Z",
+      "side": 1,
+      "message": "cleanly",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3tw\u003d",
+        "filename": "client/includes/ClientChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-21T11:07:27Z",
+      "side": 1,
+      "message": "in that case should we really merge them?  or present them as merged on the client?",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3tg\u003d",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-21T11:07:27Z",
+      "side": 1,
+      "message": "how is this related?  did you rebase or something?",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3tc\u003d",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-21T11:07:27Z",
+      "side": 1,
+      "message": "what is this for?",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3tU\u003d",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-21T11:07:27Z",
+      "side": 1,
+      "message": "how is this related to the patch?",
+      "revId": "901c686dbadb8a1a0ac4474058c4fc837bae8398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
