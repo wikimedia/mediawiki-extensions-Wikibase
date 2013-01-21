@@ -77,6 +77,10 @@ $wgLBFactoryConf = array(
 	// The easiest way to do this is to set bind-address = 0.0.0.0 in the MySQL
 	// configuration. Beware that this makes MySQL listen on you ethernet port too.
 	// Safer alternatives include setting up mysql-proxy or mysqld_multi.
+	//
+	// For this setup to work a valid user must be set up for each of the addresses you use,
+	// that is grant access to the wikiuser for each of them. Failure to do so will make the
+	// MySQL server refuse access.
 	'hostsByName' => array(
 		'localhost' => '127.0.0.1:3306',
 		'local1' => '127.0.2.1',
