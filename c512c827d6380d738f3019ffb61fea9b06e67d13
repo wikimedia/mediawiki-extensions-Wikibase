@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAADhH//3ss\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-21T11:24:58Z",
+      "side": 1,
+      "message": "Naming should stick to conventional camelCase, e.g. _extendRepoCall. Perhaps \"call\" is not self explanatory. What you are extending is in fact the call/request\u0027s parameters, so _extendRepoCallParams might be more revealing.",
+      "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3uI\u003d",
         "filename": "lib/resources/wikibase.store/wikibase.Api.js",
         "patchSetId": 3
@@ -31,6 +48,40 @@
       "side": 1,
       "message": "Sadly it is cause the API responses with a 403 in case we set origin but the associated header isn\u0027t set (and jQuery only sets it in case we\u0027re on a different domain). Furthermore this would make it necessary to have $wgCrossSiteAJAXdomains set up even if both the client and the repo are available on the same domain...",
       "parentUuid": "AAADhH//3uI\u003d",
+      "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3s0\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-21T11:24:58Z",
+      "side": 1,
+      "message": "Why not use: \"/.*?\\/\\//\" ?",
+      "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3sE\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-21T11:24:58Z",
+      "side": 1,
+      "message": "I am ok with renaming those. On the other hand, would be worth thinking about just renaming the constructor into wikibase.RepoApi instead, separating it from an eventual Client API.",
       "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
