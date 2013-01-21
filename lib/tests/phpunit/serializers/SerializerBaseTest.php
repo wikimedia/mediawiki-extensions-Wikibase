@@ -79,7 +79,7 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 		}
 
 		if ( $serializer instanceof \Wikibase\Unserializer ) {
-			$roundtrippedValue = $serializer->getUnserialized( $output );
+			$roundtrippedValue = $serializer->newFromSerialization( $output );
 			$this->assertMeaningfulEquals( $input, $roundtrippedValue, 'getSerialized, getUnserialized roundtrip should result in input value' );
 		}
 	}

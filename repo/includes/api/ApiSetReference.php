@@ -96,7 +96,7 @@ class ApiSetReference extends Api {
 
 		foreach ( $rawSnaks as $byPropertySnaks ) {
 			foreach ( $byPropertySnaks as $rawSnak ) {
-				$snaks[] = $snakUnserializer->getUnserialized( $rawSnak );
+				$snaks[] = $snakUnserializer->newFromSerialization( $rawSnak );
 			}
 		}
 

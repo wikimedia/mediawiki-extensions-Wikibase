@@ -103,7 +103,7 @@ class Statement extends Claim {
 		$ranks = array( Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED );
 
 		if ( !in_array( $rank, $ranks, true ) ) {
-			throw new \MWException( 'Invalid rank specified for statement' );
+			throw new \MWException( 'Invalid rank specified for statement: ' . var_export( $rank, true ) );
 		}
 
 		$this->rank = $rank;

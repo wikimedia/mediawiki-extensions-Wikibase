@@ -176,6 +176,7 @@ $wgAutoloadClasses['Wikibase\EntitySerializationOptions']	= $dir . 'includes/ser
 $wgAutoloadClasses['Wikibase\Serializer'] 				= $dir . 'includes/serializers/Serializer.php';
 $wgAutoloadClasses['Wikibase\SerializerObject'] 		= $dir . 'includes/serializers/SerializerObject.php';
 $wgAutoloadClasses['Wikibase\SnakSerializer'] 			= $dir . 'includes/serializers/SnakSerializer.php';
+$wgAutoloadClasses['Wikibase\Unserializer'] 			= $dir . 'includes/serializers/Unserializer.php';
 
 // includes/snak
 $wgAutoloadClasses['Wikibase\PropertyNoValueSnak'] 		= $dir . 'includes/snak/PropertyNoValueSnak.php';
