@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//3dE\u003d",
+        "filename": "Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-21T17:14:33Z",
+      "side": 1,
+      "message": "We have a bunch of tests marked as skipped if the client is installed.  A bunch of stuff won\u0027t be tested at all.  I think it\u0027s better just to enable tests for the repo/lib and then separately for a client instance with lib.\n\nI don\u0027t think this is a good approach.",
+      "parentUuid": "AAADhH//3d4\u003d",
+      "revId": "eddddf46130c734e1b58a2341367dcf94992493e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3lw\u003d",
         "filename": "Wikibase.php",
         "patchSetId": 1
