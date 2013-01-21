@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//3lw\u003d",
+        "filename": "Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 24
+      },
+      "writtenOn": "2013-01-21T14:57:51Z",
+      "side": 1,
+      "message": "What is wrong with the simpler:\n\n require_once __DIR__ . \u0027/lib/WikibaseLib.php\u0027;\n require_once __DIR__ . \u0027/lib/WikibaseClient.php\u0027;\n require_once __DIR__ . \u0027/repo/Wikibase.php\u0027;\n\n:-)",
+      "revId": "eddddf46130c734e1b58a2341367dcf94992493e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
