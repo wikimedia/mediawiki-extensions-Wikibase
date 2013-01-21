@@ -4,7 +4,7 @@ namespace Wikibase;
 use MWException;
 
 /**
- * API serializer for Claim objects.
+ * Serializer for Claim objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimSerializer extends SerializerObject {
+class ClaimSerializer extends SerializerObject implements Unserializer {
 
 	/**
 	 * @since 0.3

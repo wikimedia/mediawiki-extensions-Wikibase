@@ -4,7 +4,7 @@ namespace Wikibase;
 use Traversable, ApiResult, MWException;
 
 /**
- * API serializer for Traversable objects that need to be grouped
+ * Serializer for Traversable objects that need to be grouped
  * per property id. Each element needs to have a getPropertyId method.
  *
  * This program is free software; you can redistribute it and/or modify

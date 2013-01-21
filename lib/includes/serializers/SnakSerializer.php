@@ -4,7 +4,7 @@ namespace Wikibase;
 use MWException;
 
 /**
- * API serializer for Snak objects.
+ * Serializer for Snak objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -65,15 +65,15 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 	}
 
 	/**
-	 * @see Unserializer::getUnserialized
+	 * @see Unserializer::newFromSerialization
 	 *
-	 * @since 0.3
+	 * @since 0.4
 	 *
 	 * @param array $serialization
 	 *
 	 * @return mixed
 	 */
-	public function getUnserialized( array $serialization ) {
+	public function newFromSerialization( array $serialization ) {
 		$constructorArguments = array(
 			EntityId::newFromPrefixedId( $serialization['property'] ),
 		);

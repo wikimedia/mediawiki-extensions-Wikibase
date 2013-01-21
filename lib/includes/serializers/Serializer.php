@@ -69,17 +69,3 @@ interface Serializer {
 
 }
 
-interface Unserializer {
-
-	/**
-	 * Turns the provided serialization into the original value.
-	 *
-	 * @since 0.3
-	 *
-	 * @param array $serialization
-	 *
-	 * @return mixed
-	 */
-	public function getUnserialized( array $serialization );
-
-}
