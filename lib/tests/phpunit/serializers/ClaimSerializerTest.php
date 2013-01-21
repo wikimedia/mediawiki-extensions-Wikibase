@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\Statement;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**
  * Tests for the Wikibase\ClaimSerializer class.
@@ -43,7 +44,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 	 * @return string
 	 */
 	protected function getClass() {
-		return '\Wikibase\ClaimSerializer';
+		return '\Wikibase\Lib\Serializers\ClaimSerializer';
 	}
 
 	/**
@@ -115,13 +116,13 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 		$statement->setRank( $rank );
 
-		$serializer = new \Wikibase\ClaimSerializer();
+		$serializer = new ClaimSerializer();
 
 		$serialization = $serializer->getSerialized( $statement );
 
 		$this->assertEquals(
 			$rank,
-			\Wikibase\ClaimSerializer::unserializeRank( $serialization['rank'] ),
+			ClaimSerializer::unserializeRank( $serialization['rank'] ),
 			'Roundtrip between rank serialization and unserialization'
 		);
 	}

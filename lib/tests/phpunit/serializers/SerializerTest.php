@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Serializer;
+use Wikibase\Lib\Serializers\Serializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
  * Tests for the Wikibase\Serializer implementing classes.
@@ -38,11 +39,11 @@ class SerializerTest extends \MediaWikiTestCase {
 	public function apiSerializerProvider() {
 		$serializers = array();
 
-		$serializers[] = new \Wikibase\SnakSerializer();
-		$serializers[] = new \Wikibase\ClaimSerializer();
+		$serializers[] = new \Wikibase\Lib\Serializers\SnakSerializer();
+		$serializers[] = new \Wikibase\Lib\Serializers\ClaimSerializer();
 
-		$snakSetailizer = new \Wikibase\SnakSerializer();
-		$serializers[] = new \Wikibase\ByPropertyListSerializer( 'test', $snakSetailizer );
+		$snakSetailizer = new \Wikibase\Lib\Serializers\SnakSerializer();
+		$serializers[] = new \Wikibase\Lib\Serializers\ByPropertyListSerializer( 'test', $snakSetailizer );
 
 		return $this->arrayWrap( $serializers );
 	}
@@ -52,7 +53,7 @@ class SerializerTest extends \MediaWikiTestCase {
 	 * @param Serializer $serializer
 	 */
 	public function testSetOptions( Serializer $serializer ) {
-		$serializer->setOptions( new \Wikibase\SerializationOptions() );
+		$serializer->setOptions( new SerializationOptions() );
 		$this->assertTrue( true );
 	}
 

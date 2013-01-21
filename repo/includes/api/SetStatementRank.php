@@ -13,6 +13,8 @@ use Wikibase\EditEntity;
 use Wikibase\Statement;
 use Wikibase\Settings;
 
+use Wikibase\Lib\Serializers\ClaimSerializer;
+
 /**
  * API module for setting the rank of a statement
  *
@@ -121,7 +123,7 @@ class SetStatementRank extends \Wikibase\Api {
 			);
 		}
 
-		$statement->setRank( \Wikibase\ClaimSerializer::unserializeRank( $rank ) );
+		$statement->setRank( ClaimSerializer::unserializeRank( $rank ) );
 
 		$entity->setClaims( $claims );
 
@@ -167,7 +169,9 @@ class SetStatementRank extends \Wikibase\Api {
 	 * @param Statement $statement
 	 */
 	protected function outputStatement( Statement $statement ) {
-		$serializer = new \Wikibase\ClaimSerializer();
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $statement );
+
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		$this->getResult()->addValue(
@@ -191,7 +195,7 @@ class SetStatementRank extends \Wikibase\Api {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'rank' => array(
-				ApiBase::PARAM_TYPE => \Wikibase\ClaimSerializer::getRanks(),
+				ApiBase::PARAM_TYPE => ClaimSerializer::getRanks(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'token' => null,

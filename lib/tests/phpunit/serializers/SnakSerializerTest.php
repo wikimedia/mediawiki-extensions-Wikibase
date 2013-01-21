@@ -42,7 +42,7 @@ class SnakSerializerTest extends SerializerBaseTest {
 	 * @return string
 	 */
 	protected function getClass() {
-		return '\Wikibase\SnakSerializer';
+		return '\Wikibase\Lib\Serializers\SnakSerializer';
 	}
 
 	/**

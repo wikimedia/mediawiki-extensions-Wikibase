@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Serializers;
 use MWException;
+use Wikibase\Reference;
 
 /**
- * API serializer for Reference objects.
+ * Serializer for Reference objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

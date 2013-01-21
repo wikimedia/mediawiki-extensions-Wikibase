@@ -11,7 +11,6 @@ use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EditEntity;
 use Wikibase\Claim;
-use Wikibase\ClaimSerializer;
 use Wikibase\Snaks;
 use Wikibase\SnakFactory;
 use Wikibase\Settings;
@@ -289,7 +288,8 @@ class SetQualifier extends \Wikibase\Api {
 	 * @param Claim $claim
 	 */
 	protected function outputClaim( Claim $claim ) {
-		$serializer = new ClaimSerializer();
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $claim );
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		$this->getResult()->addValue(

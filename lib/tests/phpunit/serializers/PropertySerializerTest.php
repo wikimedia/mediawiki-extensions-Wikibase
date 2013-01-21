@@ -43,7 +43,7 @@ class PropertySerializerTest extends EntitySerializerBaseTest {
 	 * @return string
 	 */
 	protected function getClass() {
-		return '\Wikibase\PropertySerializer';
+		return '\Wikibase\Lib\Serializers\PropertySerializer';
 	}
 
 	/**

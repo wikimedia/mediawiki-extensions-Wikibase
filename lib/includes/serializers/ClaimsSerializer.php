@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Serializers;
 use MWException;
 
 /**
- * API serializer for lists of claims.
+ * Serializer for lists of claims.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ class ClaimsSerializer extends SerializerObject {
 	 * @throws MWException
 	 */
 	public function getSerialized( $claims ) {
-		if ( !( $claims instanceof Claims ) ) {
+		if ( !( $claims instanceof \Wikibase\Claims ) ) {
 			throw new MWException( 'ClaimsSerializer can only serialize Claims objects' );
 		}
 

@@ -746,10 +746,10 @@ abstract class EntityView extends \ContextSource {
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $entity->getPrefixedId() );
 
-		$serializationOptions = new EntitySerializationOptions();
+		$serializationOptions = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
 		$serializationOptions->addProp( 'sitelinks' );
 
-		$serializer = EntitySerializer::newForEntity( $entity, $serializationOptions );
+		$serializer = \Wikibase\Lib\Serializers\EntitySerializer::newForEntity( $entity, $serializationOptions );
 
 		$out->addJsConfigVars(
 			'wbEntity',

@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\SerializerObject;
+use Wikibase\Lib\Serializers\SerializerObject;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\Unserializer;
 
 /**
  * Base class for tests that test classes deriving from Wikibase\SerializerObject.
@@ -64,7 +66,7 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 	 *
 	 * @since 0.2
 	 */
-	public function testGetSerializedValid( $input, array $expected = null, \Wikibase\SerializationOptions $options = null ) {
+	public function testGetSerializedValid( $input, array $expected = null, SerializationOptions $options = null ) {
 		$serializer = $this->getInstance();
 
 		if ( $options !== null ) {
@@ -78,8 +80,8 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 			$this->assertEquals( $expected, $output );
 		}
 
-		if ( $serializer instanceof \Wikibase\Unserializer ) {
-			$roundtrippedValue = $serializer->getUnserialized( $output );
+		if ( $serializer instanceof Unserializer ) {
+			$roundtrippedValue = $serializer->newFromSerialization( $output );
 			$this->assertMeaningfulEquals( $input, $roundtrippedValue, 'getSerialized, getUnserialized roundtrip should result in input value' );
 		}
 	}

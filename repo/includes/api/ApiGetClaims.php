@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use ApiBase, MWException;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**
  * API module for getting claims.
@@ -64,10 +65,15 @@ class ApiGetClaims extends Api {
 	 * @param Claim[] $claims
 	 */
 	protected function outputClaims( array $claims ) {
+		$claims = new Claims( $claims );
+
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $claims );
+
 		// TODO: hold into account props parameter
-		$serializer = new ClaimsSerializer();
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-		$serializedClaims = $serializer->getSerialized( new Claims( $claims ) );
+
+		$serializedClaims = $serializer->getSerialized( $claims );
 
 		$this->getResult()->addValue(
 			null,

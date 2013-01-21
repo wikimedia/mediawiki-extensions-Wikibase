@@ -164,18 +164,20 @@ $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/Specia
 $wgAutoloadClasses['SpecialWikibaseQueryPage']			= $dir . 'includes/specials/SpecialWikibaseQueryPage.php';
 
 // includes/api/serializers
-$wgAutoloadClasses['Wikibase\ByPropertyListSerializer'] = $dir . 'includes/serializers/ByPropertyListSerializer.php';
-$wgAutoloadClasses['Wikibase\ClaimSerializer'] 			= $dir . 'includes/serializers/ClaimSerializer.php';
-$wgAutoloadClasses['Wikibase\ClaimsSerializer'] 		= $dir . 'includes/serializers/ClaimsSerializer.php';
-$wgAutoloadClasses['Wikibase\EntitySerializer'] 		= $dir . 'includes/serializers/EntitySerializer.php';
-$wgAutoloadClasses['Wikibase\ItemSerializer'] 			= $dir . 'includes/serializers/ItemSerializer.php';
-$wgAutoloadClasses['Wikibase\PropertySerializer'] 		= $dir . 'includes/serializers/PropertySerializer.php';
-$wgAutoloadClasses['Wikibase\ReferenceSerializer'] 		= $dir . 'includes/serializers/ReferenceSerializer.php';
-$wgAutoloadClasses['Wikibase\SerializationOptions'] 	= $dir . 'includes/serializers/SerializationOptions.php';
-$wgAutoloadClasses['Wikibase\EntitySerializationOptions']	= $dir . 'includes/serializers/SerializationOptions.php';
-$wgAutoloadClasses['Wikibase\Serializer'] 				= $dir . 'includes/serializers/Serializer.php';
-$wgAutoloadClasses['Wikibase\SerializerObject'] 		= $dir . 'includes/serializers/SerializerObject.php';
-$wgAutoloadClasses['Wikibase\SnakSerializer'] 			= $dir . 'includes/serializers/SnakSerializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\ByPropertyListSerializer'] = $dir . 'includes/serializers/ByPropertyListSerializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\ClaimSerializer'] 			= $dir . 'includes/serializers/ClaimSerializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\ClaimsSerializer'] 		= $dir . 'includes/serializers/ClaimsSerializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\EntitySerializer'] 		= $dir . 'includes/serializers/EntitySerializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\ItemSerializer'] 			= $dir . 'includes/serializers/ItemSerializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\PropertySerializer'] 		= $dir . 'includes/serializers/PropertySerializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\ReferenceSerializer'] 		= $dir . 'includes/serializers/ReferenceSerializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\SerializationOptions'] 	= $dir . 'includes/serializers/SerializationOptions.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\EntitySerializationOptions']	= $dir . 'includes/serializers/SerializationOptions.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\Serializer'] 				= $dir . 'includes/serializers/Serializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\SerializerFactory'] 		= $dir . 'includes/serializers/SerializerFactory.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\SerializerObject'] 		= $dir . 'includes/serializers/SerializerObject.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\SnakSerializer'] 			= $dir . 'includes/serializers/SnakSerializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\Unserializer'] 			= $dir . 'includes/serializers/Unserializer.php';
 
 // includes/snak
 $wgAutoloadClasses['Wikibase\PropertyNoValueSnak'] 		= $dir . 'includes/snak/PropertyNoValueSnak.php';

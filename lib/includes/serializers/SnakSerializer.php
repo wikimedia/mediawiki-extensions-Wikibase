@@ -1,10 +1,12 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Serializers;
 use MWException;
+use Wikibase\Snak;
+use Wikibase\SnakObject;
 
 /**
- * API serializer for Snak objects.
+ * Serializer for Snak objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,7 +58,7 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 
 		if ( $snak->getType() === 'value' ) {
 			/**
-			 * @var PropertyValueSnak $snak
+			 * @var \Wikibase\PropertyValueSnak $snak
 			 */
 			$serialization['datavalue'] = $snak->getDataValue()->toArray();
 		}
@@ -65,17 +67,18 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 	}
 
 	/**
-	 * @see Unserializer::getUnserialized
+	 * @see Unserializer::newFromSerialization
 	 *
-	 * @since 0.3
+	 * @since 0.4
 	 *
 	 * @param array $serialization
 	 *
-	 * @return mixed
+	 * @return Snak
 	 */
-	public function getUnserialized( array $serialization ) {
+	public function newFromSerialization( array $serialization ) {
+		// TODO: inject id parser
 		$constructorArguments = array(
-			EntityId::newFromPrefixedId( $serialization['property'] ),
+			\Wikibase\EntityId::newFromPrefixedId( $serialization['property'] ),
 		);
 
 		if ( array_key_exists( 'datavalue', $serialization ) ) {
