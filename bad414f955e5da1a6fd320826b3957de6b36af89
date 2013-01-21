@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//3ng\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-21T13:54:49Z",
+      "side": 1,
+      "message": "Curly brackets.",
+      "revId": "bad414f955e5da1a6fd320826b3957de6b36af89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//3nc\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-21T13:54:49Z",
+      "side": 1,
+      "message": "Please use a more descriptive name, it will make everyone happy!",
+      "revId": "bad414f955e5da1a6fd320826b3957de6b36af89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
