@@ -21,18 +21,32 @@ require_all 'lib'
 
 configs = YAML::load( File.open( 'configuration.yml' ) )
 RSpec.configure do |config|
-  if configs['EXPERIMENTAL'] == false
-    config.exclusion_filter = { :experimental => true }
+  if(ENV["BROWSER_TYPE"] && SUPPORTED_BROWSERS.include?(ENV["BROWSER_TYPE"]))
+    browser_type = ENV["BROWSER_TYPE"]
+  elsif configs['DEFAULT_BROWSER']
+    browser_type = configs['DEFAULT_BROWSER']
+  else
+    raise "No default browser defined. Please define DEFAULT_BROWSER in your local configuration.yml!"
   end
+
+  config.exclusion_filter = {}
+
+  if configs['EXPERIMENTAL'] == false
+    config.exclusion_filter = config.exclusion_filter.merge({ :experimental => true })
+  end
+  if browser_type == "firefox"
+    config.exclusion_filter = config.exclusion_filter.merge({ :exclude_firefox => true })
+  end
+  if browser_type == "chrome"
+    config.exclusion_filter = config.exclusion_filter.merge({ :exclude_chrome => true })
+  end
+  if browser_type == "ie"
+    config.exclusion_filter = config.exclusion_filter.merge({ :exclude_ie => true })
+  end
+
   config.include PageObject::PageFactory
+
   config.before(:all) do
-    if(ENV["BROWSER_TYPE"] && SUPPORTED_BROWSERS.include?(ENV["BROWSER_TYPE"]))
-      browser_type = ENV["BROWSER_TYPE"]
-    elsif configs['DEFAULT_BROWSER']
-      browser_type = configs['DEFAULT_BROWSER']
-    else
-      raise "No default browser defined. Please define DEFAULT_BROWSER in your local configuration.yml!"
-    end
     if configs['CONSOLE_LOG']
       puts "\nUsing browser " + browser_type + "."
     end
