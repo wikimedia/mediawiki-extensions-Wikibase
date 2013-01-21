@@ -32,6 +32,8 @@ namespace Wikibase\Test;
  * @group WikibaseAPI
  * @group WikibaseClient
  *
+ * @group medium
+ *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
