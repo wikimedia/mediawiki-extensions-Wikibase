@@ -1002,4 +1002,24 @@ final class RepoHooks {
 
 		return true;
 	}
+
+	/**
+	 * Hook handler for AbuseFilter's AbuseFilter-contentToString hook, implemented
+	 * to provide a custom text representation of Entities for filtering.
+	 *
+	 * @param \Content $content The content object
+	 * @param string  &$text The resulting text
+	 *
+	 * @return bool
+	 */
+	public static function onAbuseFilterContentToString( \Content $content, &$text ) {
+		if ( !( $content instanceof EntityContent ) ) {
+			return true;
+		}
+
+		/* @var EntityContent $content */
+		$text = $content->getTextForFilters();
+
+		return false;
+	}
 }

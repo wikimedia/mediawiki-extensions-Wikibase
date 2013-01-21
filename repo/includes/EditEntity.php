@@ -612,10 +612,19 @@ class EditEntity {
 			return $this->status;
 		}
 
+		if ( !$this->isNew() ) {
+			$context = clone $this->context;
+
+			$context->setTitle( $this->getTitle() );
+			$context->setWikiPage( $this->getPage() );
+		} else {
+			$context = $this->context;
+		}
+
 		// Run edit filter hooks
 		$filterStatus = Status::newGood();
 		if ( !wfRunHooks( 'EditFilterMergedContent',
-			array( $this->context, $this->newContent, &$filterStatus, $summary, $this->getUser(), false ) ) ) {
+			array( $context, $this->newContent, &$filterStatus, $summary, $this->getUser(), false ) ) ) {
 
 			# Error messages etc. were handled inside the hook.
 			$filterStatus->setResult( false, $filterStatus->getValue() );
