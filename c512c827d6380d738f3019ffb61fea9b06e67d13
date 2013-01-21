@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "AAADhH//3qk\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-01-21T12:02:26Z",
+      "side": 1,
+      "message": "No, that would only tell us whether we\u0027re on a repo but in case we aren\u0027t we still have two options:\n* Repo and client are on the same domain (probably mostly test setups)\n* Repo and client are on different domains (the actual WMF set up)",
+      "parentUuid": "AAADhH//3rQ\u003d",
+      "revId": "c512c827d6380d738f3019ffb61fea9b06e67d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADhH//3sE\u003d",
         "filename": "lib/resources/wikibase.store/wikibase.Api.js",
         "patchSetId": 3
