@@ -32,6 +32,13 @@ $messages['en'] = array(
 	'wikibase-comment-multi' => '$1 changes',
 	'wikibase-editlinks' => 'Edit links',
 	'wikibase-editlinkstitle' => 'Edit interlanguage links',
+	'wikibase-linkItem-title' => 'Link with item',
+	'wikibase-linkItem-linkPage' => 'Link to item',
+	'wikibase-linkItem-selectLink' => 'Please select another language and choose a page to link this page with then',
+	'wikibase-linkItem-siteInput' => 'Language: ',
+	'wikibase-linkItem-pageInput' => 'Page: ',
+	'wikibase-linkItem-confirmLinkWithItem' => 'Please confirm that the item shown below is the one you want to link',
+	'wikibase-linkItem-confirmButton' => 'Confirm',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
 );

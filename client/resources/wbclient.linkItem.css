@@ -1,0 +1,18 @@
+#wbclient-linkItem-siteLinks {
+	overflow: auto;
+	height: 250px;
+	width: 100%;
+}
+#wbclient-linkItem-siteLinks table {
+	width: 100%;
+}
+#wbclient-linkItem-siteLinks td {
+	text-align: center;
+	border: 1px solid black;
+}
+#wbclient-linkItem-siteLinks a {
+	color: navy;
+}
+.wikibase-client-linkItemInput {
+	margin: 20px;
+}
