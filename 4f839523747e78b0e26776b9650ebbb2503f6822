@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//2y8\u003d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-22T12:05:13Z",
+      "side": 1,
+      "message": "Is there no common way to name those pesky hooks? ;/",
+      "revId": "4f839523747e78b0e26776b9650ebbb2503f6822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
