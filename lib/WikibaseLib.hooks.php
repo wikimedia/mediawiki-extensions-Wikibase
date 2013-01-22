@@ -204,6 +204,7 @@ final class LibHooks {
 				'tests/qunit/wikibase.Site.tests.js',
 
 				'tests/qunit/wikibase.store/wikibase.RepoApi.tests.js',
+				'tests/qunit/wikibase.store/wikibase.RepoApiError.tests.js',
 
 				'tests/qunit/wikibase.ui.AliasesEditTool.tests.js',
 				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
