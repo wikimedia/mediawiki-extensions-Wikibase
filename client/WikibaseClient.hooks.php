@@ -595,7 +595,8 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Adds css for the edit links sidebar link
+	 * Adds css for the edit links sidebar link or JS to create a new item
+	 * or to link with an existing one.
 	 *
 	 * @param \OutputPage &$out
 	 * @param \Skin &$skin
@@ -611,6 +612,10 @@ final class ClientHooks {
 
 		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
 			$out->addModules( 'wikibase.client.init' );
+			$langLinks = $out->getLanguageLinks();
+			if ( empty( $langLinks ) ) {
+				$out->addModules( 'wbclient.linkItem' );
+			}
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -630,13 +635,26 @@ final class ClientHooks {
 	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( empty( $template->data['language_urls'] ) ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
 		$title = $skin->getContext()->getTitle();
 		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
+			
+			if ( empty( $template->data['language_urls'] ) ) {
+				# @FIXME: This needs some sanity checks right now the link appears on every page without langlinks (even non-articles)
+				# Probably we should only show a no langlinks thing and add the link to the dialog in JS
+
+				// Link to link to an existing item or to create new one if the page doesn't have any langlinks yet
+				// self::onBeforePageDisplay adds the JavaScript module
+				$template->data['language_urls'][] = array(
+					'href' => '#',
+					# @TODO: Custom text and title
+					'text' => wfMessage( 'wbc-editlinks' )->text(),
+					'title' => wfMessage( 'wbc-editlinkstitle' )->text(),
+					'id' => 'wbc-linkToItem',
+					'class' => 'wbc-editpage',
+				);
+				wfProfileOut( __METHOD__ );
+				return true;
+			}
 
 			$title = $skin->getContext()->getTitle();
 
