@@ -141,6 +141,7 @@ $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/item/ItemDiff.php'
 $wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/item/Item.php';
 
 // includes/modules
+$wgAutoloadClasses['Wikibase\RepoAccessModule'] 		= $dir . 'includes/modules/RepoAccessModule.php';
 $wgAutoloadClasses['Wikibase\SitesModule'] 				= $dir . 'includes/modules/SitesModule.php';
 $wgAutoloadClasses['Wikibase\TemplateModule'] 			= $dir . 'includes/modules/TemplateModule.php';
 
