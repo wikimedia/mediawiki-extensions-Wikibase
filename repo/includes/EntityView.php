@@ -323,8 +323,43 @@ abstract class EntityView extends \ContextSource {
 		$result = array();
 
 		// if the Babel extension is installed, add all languages of the user
-		if ( class_exists( 'Babel' ) ) {
-			$result = \Babel::getUserLanguages( $user );
+		$userLanguages = array();
+		if ( class_exists( 'Babel' ) && ( ! $user->isAnon() ) ) {
+			$userLanguages = \Babel::getUserLanguages( $user );
+			$result = $userLanguages;
+		}
+
+		// remove the current language
+		if ( ( $lang !== null ) && in_array( $lang->getCode(), $result ) ) {
+			$result = array_diff( $result, array( $lang->getCode() ) );
+		}
+
+		$labels = $entity->getLabels();
+		$descriptions = $entity->getDescriptions();
+
+		// if there are no labels or descriptions, that's all
+		if ( ( count( $labels ) == 0 ) && ( count( $descriptions ) == 0 ) ) {
+			return $result;
+		}
+
+		// if there are labels or descriptions in any of the languages of the user, then that's sufficient
+		if ( count( array_intersect( $userLanguages, array_unique( array_merge ( array_keys( $labels ), array_keys( $descriptions ) ) ) ) ) > 0 ) {
+			return $result;
+		}
+
+		// if we are here, then none of the languages of the user have any entries, but there are
+		// *some* entries in the set. We just give back the first three entries with labels, and
+		// that's it.
+		$results = 3; // magic constant
+		foreach ( $labels as $code => $label ) {
+			if ( $code === $lang->getCode() ) {
+				continue;
+			}
+			$results--;
+			array_push( $result, $code );
+			if ( $results === 0 ) {
+				break;
+			}
 		}
 
 		return $result;
@@ -340,27 +375,34 @@ abstract class EntityView extends \ContextSource {
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForLanguageTerms( EntityContent $entity, Language $lang = null, $editable = true ) {
+	public function getHtmlForLanguageTerms( EntityContent $entity, \Language $lang = null, $editable = true ) {
 
-		$html = $thead = $tbody = $tfoot = '';
+		if ( $lang === null ) {
+			$lang = $this->getLanguage();
+		}
+
+		$languages = $this->selectTerms( $entity->getEntity(), $lang, $this->getUser() );
+		if ( count ( $languages ) === 0 ) {
+			return '';
+		}
+		$html = $thead = $tbody = '';
 
 		$labels = $entity->getEntity()->getLabels();
 		$descriptions = $entity->getEntity()->getDescriptions();
 
 		$html .= wfTemplate( 'wb-terms-heading', wfMessage( 'wikibase-terms' ) );
 
-		$i = 0;
-
 		$languages = $this->selectTerms( $entity->getEntity(), $lang, $this->getUser() );
 
 		$specialLabelPage = \SpecialPageFactory::getPage( "SetLabel" );
 		$specialDescriptionPage = \SpecialPageFactory::getPage( "SetDescription" );
+		$rowNumber = 0;
 		foreach( $languages as $language ) {
 
 			$label = array_key_exists( $language, $labels ) ? $labels[$language] : false;
 			$description = array_key_exists( $language, $descriptions ) ? $descriptions[$language] : false;
 
-			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
+			$alternatingClass = ( $rowNumber++ % 2 ) ? 'even' : 'uneven';
 
 			$editLabelLink = $specialLabelPage->getTitle()->getLocalURL()
 				. '/' . $entity->getEntity()->getPrefixedId() . '/' . $language;
