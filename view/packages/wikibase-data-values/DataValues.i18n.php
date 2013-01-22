@@ -67,7 +67,7 @@ $messages['be-tarask'] = array(
  */
 $messages['de'] = array(
 	'datavalues-desc' => 'Stellt eine Sammlung von Objekten bereit, die verschiedene Wertearten darstellen',
-	'version-datavalues' => 'Datenwerte',
+	'version-datavalues' => 'Erweiterungen bezüglich Datenwerten',
 );
 
 /** Zazaki (Zazaki)
