@@ -72,6 +72,9 @@ $wgAutoloadClasses['Wikibase\ApiClientInfo']		= $dir . 'includes/api/ApiClientIn
 // includes/handlers
 $wgAutoloadClasses['Wikibase\ClientChangeHandler']  = $dir . 'includes/ClientChangeHandler.php';
 
+// includes/modules
+$wgAutoloadClasses['Wikibase\SiteModule']  = $dir . 'includes/modules/SiteModule.php';
+
 // includes/recentchanges
 $wgAutoloadClasses['Wikibase\ExternalChangesLine']	= $dir . 'includes/recentchanges/ExternalChangesLine.php';
 $wgAutoloadClasses['Wikibase\ExternalRecentChange'] = $dir . 'includes/recentchanges/ExternalRecentChange.php';
