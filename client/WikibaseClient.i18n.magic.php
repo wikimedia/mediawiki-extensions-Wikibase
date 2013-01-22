@@ -18,6 +18,11 @@ $magicWords['en'] = array(
 	'noexternallanglinks' => array( 0, 'noexternallanglinks' ),
 );
 
+/** Arabic (العربية) */
+$magicWords['ar'] = array(
+	'noexternallanglinks' => array( 0, 'لا_وصلات_لغة_خارجية' ),
+);
+
 /** German (Deutsch) */
 $magicWords['de'] = array(
 	'noexternallanglinks' => array( 0, 'keineexternensprachlinks', 'keine_externen_sprachlinks' ),
