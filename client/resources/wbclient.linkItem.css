@@ -1,0 +1,27 @@
+#wbclient-linkItem-siteLinks {
+	overflow: auto;
+	height: 250px;
+	width: 100%;
+}
+#wbclient-linkItem-siteLinks table {
+	width: 100%;
+}
+.wbclient-linkItem-colum-site,
+.wbclient-linkItem-colum-page {
+	border-bottom: 1px solid black;
+	text-align: center;
+}
+.wbclient-linkItem-colum-site {
+	border-right: 1px solid black;
+}
+
+#wbclient-linkItem-siteLinks a {
+	color: #0645AD;
+}
+.wbclient-linkItem-Input {
+	margin: 20px;
+}
+.wbclient-linkItem-not-loggedin-message a,
+.wbclient-linkItem-success-message a {
+	color: #0645AD;
+}
