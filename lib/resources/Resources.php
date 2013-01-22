@@ -167,13 +167,38 @@ return call_user_func( function() {
 			'position' => 'top'
 		),
 
-		// should be independent from the rest of Wikibase (or only use other stuff that could go into core)
-		'wikibase.ui.Toolbar' => $moduleTemplate + array(
+		'wikibase.ui.Base' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ui.js',
 				'wikibase.ui.Base.js',
+			),
+			'dependencies' => array(
+				'wikibase',
+				'wikibase.utilities',
+			),
+		),
+
+		'wikibase.ui.Tooltip' => $moduleTemplate + array(
+			'scripts' => array(
 				'wikibase.ui.Tooltip.js',
 				'wikibase.ui.Tooltip.Extension.js',
+			),
+			'dependencies' => array(
+				'jquery.nativeEventHandler',
+				'jquery.tipsy',
+				'wikibase',
+				'wikibase.RepoApiError',
+				'wikibase.ui.Base',
+				'wikibase.utilities',
+			),
+			'messages' => array(
+				'wikibase-tooltip-error-details'
+			)
+		),
+
+		// should be independent from the rest of Wikibase (or only use other stuff that could go into core)
+		'wikibase.ui.Toolbar' => $moduleTemplate + array(
+			'scripts' => array(
 				'wikibase.ui.Toolbar.js',
 				'wikibase.ui.Toolbar.Group.js',
 				'wikibase.ui.Toolbar.Label.js',
@@ -181,23 +206,19 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.nativeEventHandler',
-				'jquery.tipsy',
 				'jquery.ui.core',
 				'mediawiki.legacy.shared',
 				'wikibase',
 				'wikibase.common',
+				'wikibase.ui.Base',
+				'wikibase.ui.Tooltip',
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery'
 			),
-			'messages' => array(
-				'wikibase-tooltip-error-details'
-			)
 		),
 
 		'wikibase.ui.PropertyEditTool' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.ui.js',
-				'wikibase.ui.Base.js',
 				'wikibase.ui.Toolbar.EditGroup.js', // related to EditableValue, see todo in file
 				'wikibase.ui.PropertyEditTool.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.js',
@@ -232,6 +253,7 @@ return call_user_func( function() {
 				'mediawiki.Title',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase',
+				'wikibase.ui.Base',
 				'wikibase.ui.Toolbar',
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
