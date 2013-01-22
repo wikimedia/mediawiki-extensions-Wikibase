@@ -3,13 +3,16 @@
 return call_user_func( function() {
 
 	$moduleTemplate = array(
-		'localBasePath' => dirname( __FILE__ ),
+		'localBasePath' => __DIR__,
 		'remoteExtPath' => 'Wikibase/client/resources'
 	);
 
 	return array(
 		'wikibase.client.init' => $moduleTemplate + array(
 			'styles' => 'wikibase.client.css',
+		),
+		'wikibase.client.currentSite' => $moduleTemplate + array(
+			'class' => 'Wikibase\SiteModul'
 		),
 		'wikibase.client.page-move' => $moduleTemplate + array(
 			'styles' => 'wikibase.client.page-move.css'
@@ -28,6 +31,27 @@ return call_user_func( function() {
 				'wbc-rc-hide-wikidata',
 			),
 		),
+		'wbclient.linkItem' => $moduleTemplate + array(
+			'scripts' => array(
+				'wbclient.linkItem.js'
+			),
+			'styles' => array(
+				'wbclient.linkItem.css'
+			),
+			'dependencies' => array(
+				'jquery.spinner',
+				'jquery.ui.dialog',
+				'jquery.wikibase.siteselector',
+				'wikibase.client.currentSite',
+				'wikibase.sites',
+				'wikibase.store',
+				'wikibase.templates',
+			//	'wikibase.ui.PropertyEditTool'
+			),
+			'messages' => array(
+				'wb-sitelink',
+			),
+		)
 	);
 
 } );
