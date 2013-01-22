@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADhH//20E\u003d",
+        "filename": "lib/includes/modules/RepoAccessModule.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-22T10:44:51Z",
+      "side": 1,
+      "message": "missing a short description here",
+      "revId": "ff4e35a1cc2e73040c7f924f87cde4d9a2306c92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//2z4\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.RepoApi.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-22T10:44:51Z",
+      "side": 1,
+      "message": "should be changed to\n\n@since 0.4 (since 0.3 as wb.Api without support for client usage)",
+      "revId": "ff4e35a1cc2e73040c7f924f87cde4d9a2306c92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADhH//2z0\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.RepoApi.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-22T10:44:51Z",
+      "side": 1,
+      "message": "should rather be\n\n/**\n * Temporary alias for backwards compatiblity\n * @deprecated\n * @since 0.3 (available before but not really working in some parts)\n */",
+      "revId": "ff4e35a1cc2e73040c7f924f87cde4d9a2306c92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
