@@ -241,7 +241,7 @@ class ApiSetReference extends Api {
 	public function getParamDescription() {
 		return array(
 			'statement' => 'A GUID identifying the statement for which a reference is being set',
-			'snaks' => 'The snaks to set the reference to',
+			'snaks' => 'The snaks to set the reference to. JSON object with property ids pointing to arrays containing the snaks for that property',
 			'reference' => 'A hash of the reference that should be updated. Optional. When not provided, a new reference is created',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
@@ -272,8 +272,10 @@ class ApiSetReference extends Api {
 	 */
 	protected function getExamples() {
 		return array(
-			// TODO
-			// 'ex' => 'desc'
+			'api.php?statement=q586$57CE3C9F-37AF-42B5-B067-DADA198DD579&snaks={"p1":[{snak}, {snak}], "p2": [{snak}]}&token=foo&baserevid=42' =>
+				'Creating a new reference with 3 snaks',
+			'api.php?statement=q586$57CE3C9F-37AF-42B5-B067-DADA198DD579&snaks={"p2": [{snak}]}&reference=da39a3ee5e6b4b0d3255bfef95601890afd80709&token=foo&baserevid=42' =>
+				'Updating an existing reference to contain a single snak',
 		);
 	}
 
