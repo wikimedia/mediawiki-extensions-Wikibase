@@ -36,16 +36,14 @@ use ValueParsers\Result;
 class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 
 	/**
-	 * @see ValueParserTestBase::parseProvider
+	 * @see \ValueParsers\Test\ValueParserTestBase::newParserOptions
 	 *
 	 * @since 0.4
 	 *
-	 * @return array
+	 * @return \ValueParsers\ParserOptions
 	 */
-	public function parseProvider() {
-		$argLists = array();
-
-		$parser = new \Wikibase\Lib\EntityIdParser( new \ValueParsers\ParserOptions( array(
+	protected function newParserOptions() {
+		return new \ValueParsers\ParserOptions( array(
 			\Wikibase\Lib\EntityIdParser::OPT_PREFIX_MAP => array(
 				'a' => 'entity-type-a',
 				'b' => 'entity-type-b',
@@ -55,7 +53,20 @@ class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 				'-' => 'entity-type-f',
 				'|' => 'entity-type-f',
 			) )
-		) );
+		);
+	}
+
+	/**
+	 * @see ValueParserTestBase::parseProvider
+	 *
+	 * @since 0.4
+	 *
+	 * @return array
+	 */
+	public function parseProvider() {
+		$argLists = array();
+
+		$parser = new \Wikibase\Lib\EntityIdParser( $this->newParserOptions() );
 
 		$valid = array(
 			'a1' => array( 'entity-type-a', 1 ),
