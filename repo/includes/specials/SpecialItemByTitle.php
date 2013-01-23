@@ -98,7 +98,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	protected function switchForm( $siteId, $page ) {
 
 		$group = \Wikibase\Settings::get( 'siteLinkGroup' );
-		$sites = \Sites::singleton()->getSiteGroup( $group );
+		$sites = \SiteSQLStore::newInstance()->getSites()->getGroup( $group );
 
 		$siteExists = $sites->hasSite( $siteId );
 

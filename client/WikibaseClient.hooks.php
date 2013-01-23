@@ -215,7 +215,7 @@ final class ClientHooks {
 
 		/* @var EntityChange $change */
 
-		if ( \SitesTable::singleton()->exists() === false ) {
+		if ( \SiteSQLStore::singleton()->exists() === false ) {
 			throw new \MWException( 'Sites table does not exist, but is required for handling changes.' );
 		}
 

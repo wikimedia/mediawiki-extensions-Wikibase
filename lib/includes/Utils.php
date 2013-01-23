@@ -78,7 +78,7 @@ final class Utils {
 	 * @since 0.1
 	 */
 	public static function insertDefaultSites( $updater = null ) {
-		if ( \SitesTable::singleton()->count() > 0 ) {
+		if ( \Sites::singleton()->getSites()->count() > 0 ) {
 			return;
 		}
 
