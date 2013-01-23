@@ -115,6 +115,10 @@ class ChangesTableTest extends \MediaWikiTestCase {
 	 * @dataProvider newFromArrayProvider
 	 */
 	public function testSaveSelectCountAndDelete( array $data, $loadDefaults = false ) {
+		if ( defined( 'WBC_VERSION' ) ) {
+			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
+		}
+
 		$changesTable = ChangesTable::singleton();
 
 		$change = $changesTable->newRow( $data, $loadDefaults );
