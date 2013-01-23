@@ -109,9 +109,9 @@ Your IP address will be recorded in this property's edit history.",
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
 	'wikibase-warning-constraint-violation-length' => 'A length constraint is triggered for language code "$1".',
-	'wikibase-error-constraint-violation-label' => 'There is {{plural:$1|a constraint|constraints}} violation for {{plural:$1|label|labels}} "$2" for {{plural:$1|language code|language codes}} "$1".',
-	'wikibase-error-constraint-violation-description' => 'There is {{plural:$1|a constraint|constraints}} violation for {{plural:$1|description|descriptions}} "$2" for {{plural:$1|language code|language codes}} "$1".',
-	'wikibase-error-constraint-violation-aliases' => 'There is {{plural:$1|a constraint|constraints}} violation for {{plural:$1|alias|aliases}} "$2" for {{plural:$1|language code|language codes}} "$1".',
+	'wikibase-error-constraint-violation-label' => 'There is {{plural:$1|a constraint|constraints}} violation for {{plural:$1|label|labels}} "$3" for {{plural:$1|language code|language codes}} "$2".',
+	'wikibase-error-constraint-violation-description' => 'There is {{plural:$1|a constraint|constraints}} violation for {{plural:$1|description|descriptions}} "$3" for {{plural:$1|language code|language codes}} "$2".',
+	'wikibase-error-constraint-violation-aliases' => 'There is {{plural:$1|a constraint|constraints}} violation for {{plural:$1|alias|aliases}} "$3" for {{plural:$1|language code|language codes}} "$2".',
 
 	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Another property ($3) already has label "$1" associated with language code $2',
