@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH///H4\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-23T20:51:24Z",
+      "side": 1,
+      "message": "$siteId, not $siteid",
+      "revId": "5e33dfae869651c1a73a2fcc3c0d287b9a8317fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH///IE\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-23T20:51:24Z",
+      "side": 1,
+      "message": "Clearly it\u0027s not a language form :)",
+      "revId": "5e33dfae869651c1a73a2fcc3c0d287b9a8317fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH///H8\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-23T20:51:24Z",
+      "side": 1,
+      "message": "defaulting to the language???",
+      "revId": "5e33dfae869651c1a73a2fcc3c0d287b9a8317fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH///II\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-23T20:51:24Z",
+      "side": 1,
+      "message": "need siteid, not language",
+      "revId": "5e33dfae869651c1a73a2fcc3c0d287b9a8317fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH///IM\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-23T20:51:24Z",
+      "side": 1,
+      "message": "need siteid, not language",
+      "revId": "5e33dfae869651c1a73a2fcc3c0d287b9a8317fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
