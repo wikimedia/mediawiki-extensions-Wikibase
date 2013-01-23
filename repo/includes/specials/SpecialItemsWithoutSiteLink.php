@@ -1,0 +1,89 @@
+<?php
+
+use Wikibase\EntityId;
+
+/**
+ * Page for listing entities without label.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * @since 0.4
+ *
+ * @file
+ * @ingroup WikibaseRepo
+ *
+ * @licence GNU GPL v2+
+ * @author Thomas Pellissier Tanon
+ */
+class SpecialItemsWithoutSiteLink extends SpecialWikibaseQueryPage {
+
+	public function __construct() {
+		parent::__construct( 'ItemsWithoutSiteLink' );
+	}
+
+	/**
+	 * @see SpecialWikibasePage::execute
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $subPage
+	 * @return boolean
+	 */
+	public function execute( $subPage ) {
+		if ( !parent::execute( $subPage ) ) {
+			return false;
+		}
+
+		$this->showQuery();
+	}
+
+	/**
+	 * @see SpecialWikibaseQueryPage::formatRow
+	 *
+	 * @since 0.4
+	 *
+	 * @param $entry The entry is for this call an EntityId
+	 * TODO: just getting an ID here is odd
+	 *
+	 * @return string|null
+	 */
+	protected function formatRow( $entry ) {
+		try {
+			$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $entry );
+			return Linker::linkKnown( $title );
+		} catch ( MWException $e ) {
+			wfWarn( "Error formatting result row: " . $e->getMessage() );
+			return false;
+		}
+	}
+
+	/**
+	 * @see SpecialWikibaseQueryPage::getResult
+	 *
+	 * @since 0.4
+	 *
+	 * @param integer $offset
+	 * @param integer $limit
+	 *
+	 * @return EntityId[]
+	 * TODO: it's a bit odd that this returns an array of EntityId
+	 */
+	protected function getResult( $offset = 0, $limit = 0 ) {
+		$entityPerPage = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
+		return $entityPerPage->getItemsWithoutSiteLink( null, $offset, $limit );
+	}
+
+}

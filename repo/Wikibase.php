@@ -159,6 +159,7 @@ $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/Specia
 $wgAutoloadClasses['SpecialItemDisambiguation'] 		= $dir . 'includes/specials/SpecialItemDisambiguation.php';
 $wgAutoloadClasses['SpecialSetLabel'] 					= $dir . 'includes/specials/SpecialSetLabel.php';
 $wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	    = $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
+$wgAutoloadClasses['SpecialItemsWithoutSiteLink'] 	    = $dir . 'includes/specials/SpecialItemsWithoutSiteLink.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\EntityPerPage']			= $dir . 'includes/store/EntityPerPage.php';
@@ -211,6 +212,7 @@ $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 $wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
 $wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
+$wgSpecialPages['ItemsWithoutSiteLink'] 			= 'SpecialItemsWithoutSiteLink';
 
 
 // Special page groups

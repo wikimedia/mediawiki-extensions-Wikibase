@@ -183,4 +183,48 @@ class EntityPerPageTable implements EntityPerPage {
 		}
 		return $entities;
 	}
+
+	/**
+	 * Return all items without site link
+	 *
+	 * @since 0.4
+	 *
+	 * @param string|null $siteId Restrict the request to a specific site.
+	 * @param integer $limit Limit of the query.
+	 * @param integer $offset Offset of the query.
+	 * @return EntityId[]
+	 */
+	public function getItemsWithoutSiteLink( $siteId = null, $limit = 50, $offset = 0 ) {
+		$dbr = wfGetDB( DB_SLAVE );
+		$conditions = array(
+			'ips_site_page IS NULL'
+		);
+		$conditions['epp_entity_type'] = Item::ENTITY_TYPE;
+		$joinConditions = 'ips_item_id = epp_entity_id';
+
+		if ( $siteId !== null ) {
+			$joinConditions .= ' AND ips_site_id = ' . $dbr->addQuotes( $siteId );
+		}
+
+		$rows = $dbr->select(
+			array( 'wb_entity_per_page', 'wb_items_per_site' ),
+			array(
+				'entity_id' => 'epp_entity_id'
+			),
+			$conditions,
+			__METHOD__,
+			array(
+				'OFFSET' => $offset,
+				'LIMIT' => $limit,
+				'ORDER BY' => 'epp_page_id DESC'
+			),
+			array( 'wb_items_per_site' => array( 'LEFT JOIN', $joinConditions ) )
+		);
+
+		$entities = array();
+		foreach ( $rows as $row ) {
+			$entities[] = new EntityId( Item::ENTITY_TYPE, (int)$row->entity_id );
+		}
+		return $entities;
+	}
 }
