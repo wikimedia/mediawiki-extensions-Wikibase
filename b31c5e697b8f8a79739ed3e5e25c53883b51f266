@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH///ZM\u003d",
+        "filename": "repo/includes/specials/SpecialItemsWithoutSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-23T17:22:04Z",
+      "side": 1,
+      "message": "This is one query per row. Better batch getting the info.",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH///ZI\u003d",
+        "filename": "repo/includes/specials/SpecialItemsWithoutSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-23T17:22:04Z",
+      "side": 1,
+      "message": "What\u0027s odd about the ids?",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
