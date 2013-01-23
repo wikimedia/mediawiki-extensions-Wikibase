@@ -63,7 +63,6 @@ $wgAutoloadClasses['Wikibase\ClientUtils']		= $dir . 'includes/ClientUtils.php';
 $wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCacheUpdater.php';
 $wgAutoloadClasses['Wikibase\InterwikiSorter']      = $dir . 'includes/InterwikiSorter.php';
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
-$wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\NamespaceChecker']		= $dir . 'includes/NamespaceChecker.php';
 
@@ -75,6 +74,10 @@ $wgAutoloadClasses['Wikibase\ClientChangeHandler']  = $dir . 'includes/ClientCha
 
 // includes/modules
 $wgAutoloadClasses['Wikibase\SiteModule']  = $dir . 'includes/modules/SiteModule.php';
+
+// include/parserhooks
+$wgAutoloadClasses['Wikibase\NoLangLinkHandler']    = $dir . 'includes/parserhooks/NoLangLinkHandler.php';
+$wgAutoloadClasses['Wikibase\ParserErrorMessageFormatter']	= $dir . 'includes/parserhooks/ParserErrorMessageFormatter.php';
 
 // includes/recentchanges
 $wgAutoloadClasses['Wikibase\ExternalChangesLine']	= $dir . 'includes/recentchanges/ExternalChangesLine.php';
