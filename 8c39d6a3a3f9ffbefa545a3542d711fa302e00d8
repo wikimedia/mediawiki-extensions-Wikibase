@@ -16,6 +16,24 @@
       "revId": "8c39d6a3a3f9ffbefa545a3542d711fa302e00d8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH///N4\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-23T19:53:05Z",
+      "side": 1,
+      "message": "no, we are not using DB key form in the wb_items_per_site table.  \n\n(if you think we should, please file a new bug ticket, although it\u0027d be a bit involved to rebuild the entire table on wikidata.org!)",
+      "parentUuid": "AAADiH///Pw\u003d",
+      "revId": "8c39d6a3a3f9ffbefa545a3542d711fa302e00d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
