@@ -57,7 +57,6 @@ $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.m
 
 // Autoloading
 $wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php';
-
 $wgAutoloadClasses['Wikibase\CachedEntity'] 		= $dir . 'includes/CachedEntity.php';
 $wgAutoloadClasses['Wikibase\ClientUtils']		= $dir . 'includes/ClientUtils.php';
 $wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCacheUpdater.php';
@@ -126,7 +125,6 @@ $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/R
 $wgWBClientStores = array();
 $wgWBClientStores['CachingSqlStore'] = 'Wikibase\CachingSqlStore';
 $wgWBClientStores['DirectSqlStore'] = 'Wikibase\DirectSqlStore';
-
 
 include_once( $dir . 'config/WikibaseClient.default.php' );
 

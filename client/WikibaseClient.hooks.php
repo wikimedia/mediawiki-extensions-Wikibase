@@ -745,4 +745,21 @@ final class ClientHooks {
 		return true;
 	}
 
+	/**
+	 * Register the parser function.
+	 *
+	 * @param $parser \Parser
+	 *
+	 * @return bool
+	 */
+	public static function onParserFirstCallInit( &$parser ) {
+		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::noExternalLangLinks', SFH_NO_HASH );
+
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			$parser->setFunctionHook( 'property', array( '\Wikibase\PropertyParser', 'render' ) );
+		}
+
+		return true;
+	}
+
 }
