@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH///Sg\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2013-01-23T18:55:47Z",
+      "side": 1,
+      "message": "PLURAL needed even that $1 \u003e\u003d 2 always per message documentation. A lot of languages have multiple plural forms.",
+      "revId": "f3085b017962e6b2c9e4987e306f11d088e55019",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
