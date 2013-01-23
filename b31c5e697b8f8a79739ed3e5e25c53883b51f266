@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADiH///Vs\u003d",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2013-01-23T18:36:22Z",
+      "side": 1,
+      "message": "I18n messages use \"site link\" or \"site-link\" and classes use SiteLink and not Sitelink. So, I\u0027m not sure that Sitelink is the best case to use in order to be consistent with other parts of the software.",
+      "parentUuid": "AAADiH///YY\u003d",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH///ZM\u003d",
         "filename": "repo/includes/specials/SpecialItemsWithoutSiteLink.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAADiH///WM\u003d",
+        "filename": "repo/includes/specials/SpecialItemsWithoutSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2013-01-23T18:36:22Z",
+      "side": 1,
+      "message": "Are you talking about EntityContentFactory::getTitleForId or Linker::linkKnown (that use RepoHook::onLinkBegin)?",
+      "parentUuid": "AAADiH///ZM\u003d",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH///ZI\u003d",
         "filename": "repo/includes/specials/SpecialItemsWithoutSiteLink.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2013-01-23T17:22:04Z",
       "side": 1,
       "message": "What\u0027s odd about the ids?",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH///Ws\u003d",
+        "filename": "repo/includes/specials/SpecialItemsWithoutSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2013-01-23T18:36:22Z",
+      "side": 1,
+      "message": "I\u0027ve just copy/past comments of Special:EntitiesWithoutLabel without thinking more.\nI believe that this TODO was written at the introduction of EntityId but I don\u0027t see why use of EntityId is odd.\n\nI\u0027ll remove this comment from the two special pages.",
+      "parentUuid": "AAADiH///ZI\u003d",
       "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
