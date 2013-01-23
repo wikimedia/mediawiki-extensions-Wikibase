@@ -717,12 +717,15 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Register the parser function.
+	 * Register the parser functions.
+	 *
 	 * @param $parser \Parser
+	 *
 	 * @return bool
 	 */
 	public static function onParserFirstCallInit( &$parser ) {
 		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::handle', SFH_NO_HASH );
+
 		return true;
 	}
 
