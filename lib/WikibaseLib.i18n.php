@@ -355,7 +355,11 @@ $messages['ko'] = array(
  */
 $messages['ksh'] = array(
 	'wikibaselib-desc' => 'Jemeinsamme Fungxjuhne för di Projramm-Zohsäz <i lang="en">Wikibase</i> un <i lang="en">Wikibase Client</i>.',
+	'wikibaselib-entity-item' => 'Jäjeschtand',
 	'wikibaselib-entity-property' => 'Eijeschaff',
+	'wikibaselib-entity-query' => 'Frooch',
+	'datatypes-type-wikibase-item' => 'Jäjeschtand',
+	'datatypes-type-commonsMedia' => 'Meedijedattei vun Wikkimeedija Commons',
 );
 
 /** Macedonian (македонски)
