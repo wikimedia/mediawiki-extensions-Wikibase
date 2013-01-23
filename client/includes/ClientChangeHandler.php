@@ -27,6 +27,9 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ *
+ * @fixme: ChangeHandler and ClientChangeHandler are named similarly but are quite unrelated.
+ *         This is really a client side version of Change... perhaps rename to ClientSideChange?...
  */
 class ClientChangeHandler {
 
@@ -64,6 +67,9 @@ class ClientChangeHandler {
 	 * @return array|null
 	 */
 	public function siteLinkComment() {
+		//FIXME: Allow for comments specific to the affected page.
+		//       Different pages may be affected in different ways by the same change.
+		//       Also, merged changes may affect the same page in multiple ways.
 		$comment = null;
 		if ( !$this->change->getSiteLinkDiff()->isEmpty() ) {
 			$siteLinkDiff = $this->change->getSiteLinkDiff();
