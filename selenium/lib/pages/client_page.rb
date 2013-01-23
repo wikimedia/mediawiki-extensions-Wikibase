@@ -73,6 +73,8 @@ class ClientPage < RubySelenium
     if clientActionConfirmationButton?
       clientActionConfirmationButton
     end
+    sleep 1
+    @browser.refresh
   end
 
   def count_interwiki_links
