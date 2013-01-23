@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADiH///lI\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-01-23T21:10:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH///ls\u003d",
+      "revId": "104575941b3c44f054bad2ff80d78d256338296a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH///l0\u003d",
         "filename": "client/includes/modules/SiteModule.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAADiH///lE\u003d",
+        "filename": "client/includes/modules/SiteModule.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-01-23T21:10:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH///l0\u003d",
+      "revId": "104575941b3c44f054bad2ff80d78d256338296a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH///lw\u003d",
         "filename": "client/resources/Resources.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2013-01-23T12:53:22Z",
       "side": 1,
       "message": "typo here",
+      "revId": "104575941b3c44f054bad2ff80d78d256338296a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH///lA\u003d",
+        "filename": "client/resources/Resources.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-01-23T21:10:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH///lw\u003d",
       "revId": "104575941b3c44f054bad2ff80d78d256338296a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
