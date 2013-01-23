@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAADiH///YY\u003d",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-23T17:45:06Z",
+      "side": 1,
+      "message": "This should be ItemsWithoutSitelinks if we are to follow the glossary.",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH///ZM\u003d",
         "filename": "repo/includes/specials/SpecialItemsWithoutSiteLink.php",
         "patchSetId": 1
