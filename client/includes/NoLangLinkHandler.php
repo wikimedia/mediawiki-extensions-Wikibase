@@ -32,16 +32,6 @@ use Wikibase\LangLinkHandler;
 class NoLangLinkHandler {
 
 	/**
-	 * Register the parser function.
-	 * @param $parser \Parser
-	 * @return bool
-	 */
-	public static function onParserFirstCallInit( &$parser ) {
-		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::noExternalLangLinks', SFH_NO_HASH );
-		return true;
-	}
-
-	/**
 	 * Register the magic word.
 	 */
 	public static function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {

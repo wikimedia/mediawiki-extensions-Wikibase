@@ -32,6 +32,8 @@ $messages['en'] = array(
 	'wikibase-comment-multi' => '$1 changes',
 	'wikibase-editlinks' => 'Edit links',
 	'wikibase-editlinkstitle' => 'Edit interlanguage links',
+	'wikibase-property-notfound' => '$1 property not found.',
+	'wikibase-property-notsupportedyet' => 'Wikibase does not yet support property type for $1 property.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
 );
@@ -59,7 +61,9 @@ See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 * $1 - the number of changes; is always at least 2.',
 	'wikibase-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.',
-	'wikibase-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizard to edit interlanguage links.',
+	'wikibase-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizzard to edit interlanguage links.',
+	'wikibase-property-notfound' => 'Message for property parser function when a property is not found. $1 is the name of the property.',
+	'wikibase-property-notsupportedyet' => 'Message for property parser function for property types not supported yet. $1 is the name of the property.',
 	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
 * Parameter $1 is a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
 );
