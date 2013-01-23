@@ -16,6 +16,7 @@ $magicWords = array();
 /** English (English) */
 $magicWords['en'] = array(
 	'noexternallanglinks' => array( 0, 'noexternallanglinks' ),
+	'property' => array( 0, 'property' ),
 );
 
 /** Arabic (العربية) */

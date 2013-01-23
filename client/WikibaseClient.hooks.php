@@ -717,16 +717,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Register the parser function.
-	 * @param $parser \Parser
-	 * @return bool
-	 */
-	public static function onParserFirstCallInit( &$parser ) {
-		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::handle', SFH_NO_HASH );
-		return true;
-	}
-
-	/**
 	 * Register the magic word.
 	 */
 	public static function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {
@@ -741,6 +731,19 @@ final class ClientHooks {
 		if( $magicWordId == 'noexternallanglinks' ) {
 			NoLangLinkHandler::handle( $parser, '*' );
 		}
+
+		return true;
+	}
+
+	/**
+	 * Register the parser functions.
+	 *
+	 * @param $parser \Parser
+	 *
+	 * @return bool
+	 */
+	public static function onParserFirstCallInit( &$parser ) {
+		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::noExternalLangLinks', SFH_NO_HASH );
 
 		return true;
 	}
