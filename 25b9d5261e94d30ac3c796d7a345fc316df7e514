@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH///eU\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-23T15:06:37Z",
+      "side": 1,
+      "message": "We are creating a new SiteSQLStore and re-fetching the full list of site entries every time this is called? That\u0027s inefficient, and also violates the \"don\u0027t create service objects in data objects\" principle. I don\u0027t think we can get past a global default instance of SiteStore.",
+      "revId": "25b9d5261e94d30ac3c796d7a345fc316df7e514",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH///d8\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-23T15:06:37Z",
+      "side": 1,
+      "message": "Let\u0027s please not re-load that list every time...",
+      "revId": "25b9d5261e94d30ac3c796d7a345fc316df7e514",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
