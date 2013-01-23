@@ -214,9 +214,28 @@ describe "Check functionality of add/edit/remove aliases" do
     end
   end
 
+  context "Check for special inputs for aliases" do
+    it "should check for length constraint (assuming max 250 chars)" do
+      on_page(ItemPage) do |page|
+        too_long_string =
+        "loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" +
+        "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" +
+        "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong";
+        page.wait_for_entity_to_load
+        page.editAliases
+        page.aliasesInputEmpty = too_long_string
+        page.saveAliases
+        ajax_wait
+        page.wait_for_api_callback
+        page.wbErrorDiv?.should be_true
+      end
+    end
+  end
+
   context "Check functionality of removing aliases" do
     it "should check that removing aliases work properly" do
       on_page(ItemPage) do |page|
+        page.navigate_to_item
         page.wait_for_entity_to_load
 
         # checking functionality of removing aliases

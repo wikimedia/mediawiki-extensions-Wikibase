@@ -120,6 +120,23 @@ describe "Check functionality of edit label" do
         page.entityLabelSpan.should == "0"
       end
     end
+    it "should check for length constraint (assuming max 250 chars)" do
+      on_page(ItemPage) do |page|
+        too_long_string =
+        "loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" +
+        "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" +
+        "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong";
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.editLabelLink
+        page.labelInputField_element.clear
+        page.labelInputField = too_long_string
+        page.saveLabelLink
+        ajax_wait
+        page.wait_for_api_callback
+        page.wbErrorDiv?.should be_true
+      end
+    end
   end
 
   after :all do
