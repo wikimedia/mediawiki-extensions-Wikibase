@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH///GU\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-23T20:59:43Z",
+      "side": 1,
+      "message": "I suggest creating a dedicated special page for this, and not try to derive from SpecialSetEntity, which does not really support what you are trying to do here",
+      "revId": "77df7eecd51cd0e7ca5be1f68db8d079d5abe0bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
