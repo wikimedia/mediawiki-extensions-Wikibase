@@ -12,9 +12,9 @@ describe "Running client QUnit tests" do
     # set up
   end
   context "run client QUnit tests" do
-    it "run wikibase tests" do
+    it "run wikibase client tests" do
       on_page(QUnitPage) do |page|
-        page.call_qunit(WIKI_CLIENT_URL + "Special:JavaScriptTest/qunit?filter=wikibase")
+        page.call_qunit(WIKI_CLIENT_URL + "Special:JavaScriptTest/qunit?filter=wikibase.client")
         page.wait_for_qunit_tests
         page.qunitTestFail?.should be_false
       end
