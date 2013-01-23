@@ -99,11 +99,6 @@ class SqlStore implements Store {
 				$updater->dropTable( 'wb_aliases' );
 				$updater->dropTable( 'wb_texts_per_lang' );
 
-				$updater->addExtensionTable(
-					'wb_terms',
-					__DIR__ . '/Wikibase' . $extension
-				);
-
 				$this->rebuild();
 			}
 
@@ -111,10 +106,16 @@ class SqlStore implements Store {
 			if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) &&
 				!Settings::get( 'withoutTermSearchKey' ) ) {
 
+				$termsKeyUpdate = 'AddTermsSearchKey' . $extension;
+
+				if ( $type = 'sqlite' ) {
+					$termsKeyUpdate = 'AddTermsSearchKey.sqlite.sql';
+				}
+
 				$updater->addExtensionField(
 					'wb_terms',
 					'term_search_key',
-					__DIR__ . '/AddTermsSearchKey' . $extension
+					__DIR__ . '/' . $termsKeyUpdate
 				);
 
 				$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildTermsSearchKey' );
