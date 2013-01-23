@@ -40,7 +40,8 @@ describe "Check EntitiesWithoutLabel special page" do
         page.wait_for_entity_to_load
         page.labelInputField = label_de
         page.saveLabelLink
-        page.wait_for_entity_to_load
+        ajax_wait
+        page.wait_for_api_callback
       end
     end
     it "should not find an item through EntitiesWithoutLabel special page" do
