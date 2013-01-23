@@ -14,7 +14,7 @@ class ProtectedPage < ItemPage
 
   def protect_page
     navigate_to(@@item_url + "?action=protect")
-    self.protectionLevel= "Administrators only"
+    self.protectionLevel= "Allow only administrators"
     protectSubmit
   end
 
