@@ -16,6 +16,24 @@
       "revId": "f3085b017962e6b2c9e4987e306f11d088e55019",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH///R0\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-23T19:06:52Z",
+      "side": 1,
+      "message": "This message is only used if $1 is larger than 1 - it is for *multiple* changes. I have documented that in the qqq message.",
+      "parentUuid": "AAADiH///Sg\u003d",
+      "revId": "f3085b017962e6b2c9e4987e306f11d088e55019",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
