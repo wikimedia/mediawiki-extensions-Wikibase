@@ -38,7 +38,7 @@ if ( !defined( 'DATAVALUES' ) ) {
 global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks, $wgResourceModules;
 
 $wgExtensionCredits['datavalues'][] = array(
-	'path' => __FILE__,
+	'path' => __DIR__,
 	'name' => 'DataValues',
 	'version' => DataValues_VERSION,
 	'author' => array( '[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]' ),
