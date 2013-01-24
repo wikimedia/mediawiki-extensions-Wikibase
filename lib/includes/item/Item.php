@@ -215,7 +215,7 @@ class Item extends Entity {
 	 * @return string
 	 */
 	public function getLocalizedType() {
-		return wfMessage( 'wikibaselib-entity-item' )->parse();
+		return wfMessage( 'wikibase-entity-item' )->parse();
 	}
 
 	/**

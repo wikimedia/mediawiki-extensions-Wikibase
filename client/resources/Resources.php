@@ -25,7 +25,7 @@ return call_user_func( function() {
 			'messages' => array(
 				'hide',
 				'show',
-				'wbc-rc-hide-wikidata',
+				'wikibase-rc-hide-wikidata',
 			),
 		),
 	);

@@ -19,21 +19,21 @@ $messages = array();
  * @author Nikola Smolenski
  */
 $messages['en'] = array(
-	'wbc-desc' => 'Client for the Wikibase extension',
-	'wbc-after-page-move' => 'You may also [$1 update] the associated Wikidata item to maintain language links on moved page.',
-	'wbc-comment-remove' => 'Associated Wikidata item deleted. Language links removed.',
-	'wbc-comment-linked' => 'A Wikidata item has been linked to this page.',
-	'wbc-comment-unlink' => 'This page has been unlinked from Wikidata item. Language links removed.',
-	'wbc-comment-restore' => 'Associated Wikidata item undeleted. Language links restored.',
-	'wbc-comment-update' => 'Language links updated.',
-	'wbc-comment-sitelink-add' => 'Language link added: $1',
-	'wbc-comment-sitelink-change' => 'Language link changed from $1 to $2',
-	'wbc-comment-sitelink-remove' => 'Language link removed: $1',
-	'wbc-comment-multi' => '$1 changes',
-	'wbc-editlinks' => 'Edit links',
-	'wbc-editlinkstitle' => 'Edit interlanguage links',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
+	'wikibase-client-desc' => 'Client for the Wikibase extension',
+	'wikibase-after-page-move' => 'You may also [$1 update] the associated Wikidata item to maintain language links on moved page.',
+	'wikibase-comment-remove' => 'Associated Wikidata item deleted. Language links removed.',
+	'wikibase-comment-linked' => 'A Wikidata item has been linked to this page.',
+	'wikibase-comment-unlink' => 'This page has been unlinked from Wikidata item. Language links removed.',
+	'wikibase-comment-restore' => 'Associated Wikidata item undeleted. Language links restored.',
+	'wikibase-comment-update' => 'Language links updated.', // Not used anywhere as it seems
+	'wikibase-comment-sitelink-add' => 'Language link added: $1', // Not used anywhere as it seems
+	'wikibase-comment-sitelink-change' => 'Language link changed from $1 to $2',
+	'wikibase-comment-sitelink-remove' => 'Language link removed: $1', // Not used anywhere as it seems
+	'wikibase-comment-multi' => '$1 changes',
+	'wikibase-editlinks' => 'Edit links',
+	'wikibase-editlinkstitle' => 'Edit interlanguage links',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
 );
 
 /** Message documentation (Message documentation)

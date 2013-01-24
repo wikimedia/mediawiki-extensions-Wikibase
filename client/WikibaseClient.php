@@ -46,7 +46,7 @@ $wgExtensionCredits['other'][] = array(
 		'The Wikidata team', // TODO: link?
 	),
 	'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_Client',
-	'descriptionmsg' => 'wbc-desc'
+	'descriptionmsg' => 'wikibase-client-desc'
 );
 
 $dir = __DIR__ . '/';
