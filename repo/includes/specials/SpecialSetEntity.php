@@ -310,7 +310,7 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 	 * @param string $key the language
 	 */
 	protected function checkKey( $key ) {
-		if ( Language::isValidBuiltInCode( $key ) && in_array( $key, \Wikibase\Utils::getLanguageCodes() ) ) {
+		if ( !( Language::isValidBuiltInCode( $key ) && in_array( $key, \Wikibase\Utils::getLanguageCodes() ) ) ) {
 			$this->showError( $this->msg( 'wikibase-setentity-invalid-langcode', $key )->text() );
 		}
 	}
