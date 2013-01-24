@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//+UQ\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-24T11:52:48Z",
+      "side": 1,
+      "message": "Can you please open a bug for that? Otherwise I\u0027m afraid this may remain unaddressed for eternity.",
+      "revId": "1ef336412bc745ebe397f25069c20d0a6e4b5e2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//+UM\u003d",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-24T11:52:48Z",
+      "side": 1,
+      "message": "Inline tabs should be avoided (not related, but something that should be done in a maintenance commit).",
+      "revId": "1ef336412bc745ebe397f25069c20d0a6e4b5e2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
