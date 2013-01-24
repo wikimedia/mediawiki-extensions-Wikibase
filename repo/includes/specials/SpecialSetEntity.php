@@ -1,7 +1,5 @@
 <?php
 
-use Wikibase\Autocomment;
-
 /**
  * Abstract special page for setting a value of a Wikibase entity.
  *
@@ -26,10 +24,27 @@ use Wikibase\Autocomment;
  * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
- * @author Denny Vrandecic < denny@vrandecic.de >
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-abstract class SpecialSetEntity extends SpecialWikibasePage {
+abstract class SpecialSetEntity extends SpecialModifyEntity {
+
+	/**
+	 * The langauge the value is set in.
+	 *
+	 * @since 0.4
+	 *
+	 * @var string
+	 */
+	protected $language;
+
+	/**
+	 * The value to set.
+	 *
+	 * @since 0.4
+	 *
+	 * @var string
+	 */
+	protected $value;
 
 	/**
 	 * Constructor.
@@ -43,346 +58,149 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 	public function __construct( $title, $restriction = 'edit' ) {
 		parent::__construct( $title, $restriction );
 	}
-
+	
 	/**
-	 * Main method
+	 * @see SpecialModifyEntity::prepareArguments()
 	 *
 	 * @since 0.4
 	 *
-	 * @param string|null $subPage
-	 *
-	 * @return boolean
+	 * @param string $subPage
 	 */
-	public function execute( $subPage ) {
-		if ( !parent::execute( $subPage ) ) {
-			return false;
-		}
-
-		$this->setHeaders();
-		$this->outputHeader();
+	protected function prepareArguments( $subPage ) {
+		parent::prepareArguments( $subPage );
 
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 
-		// Get id
-		$rawId = $this->getRequest()->getVal( 'id', isset( $parts[0] ) ? $parts[0] : '' );
-		$id = \Wikibase\EntityId::newFromPrefixedId( $rawId );
-
-		if ( $id === null ) {
-			$entityContent = null;
+		// Language
+		$this->language = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
+		if ( $this->language === '' ) {
+			$this->language = null;
 		}
-		else {
-			$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $id );
-		}
-
-		// Get language
-		$language = $this->getPostedKey( $parts );
-		// Get value
-		$value = $this->getPostedValue();
-
-		if( $value === null ) {
-			$value = $request->getVal( 'value' );
-		}
-
-		if( $rawId === '' ) {
-			$rawId = null;
-		}
-
-		if ( $language === '' ) {
-			$language = null;
-		}
-
-		if ( $language !== null ) {
-			$this->checkKey( $language );
-		}
-
-		if ( $entityContent === null && $value !== null && $rawId !== null ) {
-			$this->showError( $this->msg( 'wikibase-setentity-invalid-id', $rawId )->text() );
-		}
-
-		if ( $entityContent !== null && $language !== null && $request->wasPosted() ) {
-			 // to provide removing after posting the full form
-			if( $request->getVal( 'fullrequest' ) === 'fullrequest' && $value == '' ) {
-				$this->showError(
-					$this->msg(
-						'wikibase-' . strtolower( $this->getName() ) . '-warning-remove',
-						$entityContent->getTitle()->getText()
-					)->parse(),
-					'warning'
-				);
-				$this->setEntityForm( $entityContent, $language, $value );
-			}
-			else {
-				$status = $this->setValue( $entityContent, $language, $value, $summary );
-
-				if ( $status->isGood() ) {
-
-					//TODO: need conflict detection??
-					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser(), false, $this->getContext() );
-					$editEntity->attemptSave(
-						$summary,
-						EDIT_UPDATE,
-						$request->getVal( 'wpEditToken' )
-					);
-
-					if ( !$editEntity->isSuccess() ) {
-						$this->showError( $editEntity->getStatus()->getMessage() );
-					}
-					else {
-						$entityUrl = $entityContent->getTitle()->getFullUrl();
-						$this->getOutput()->redirect( $entityUrl );
-					}
-				}
-				else {
-					$this->showError( $status->getHTML() );
-					$this->setEntityForm( $entityContent, $language, $value );
-				}
+		if ( $this->language !== null ) {
+			if ( !( Language::isValidBuiltInCode( $this->language ) && in_array( $this->language, \Wikibase\Utils::getLanguageCodes() ) ) ) {
+				$this->showError( $this->msg( 'wikibase-setentity-invalid-langcode', $this->language )->text() );
 			}
 		}
-		else {
-			$this->setEntityForm( $entityContent, $language, $value );
+
+		// Value
+		$this->value = $this->getPostedValue();
+		if( $this->value === null ) {
+			$this->value = $request->getVal( 'value' );
 		}
 	}
 
 	/**
-	 * Building the HTML form for setting the value of an entity. If the entity and the language are already given,
-	 * the form will only ask for the value. If not, a complete form is being shown.
+	 * @see SpecialModifyEntity::modifyEntity()
 	 *
-	 * @since 0.2
+	 * @since 0.4
 	 *
-	 * @param \Wikibase\EntityContent|null $entityContent the entity to have the value set
-	 * @param string|null $language language code for the value
-	 * @param string $value
+	 * @return string|boolean the summary or false
 	 */
-	public function setEntityForm( $entityContent, $language, $value ) {
-		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
-
-		if ( $this->getUser()->isAnon() ) {
-			$this->showError( $this->msg( 'wikibase-anonymouseditwarning-item' ), 'warning' );
+	function modifyEntity() {
+		$request = $this->getRequest();
+		if ( !( $this->entityContent !== null && $this->language !== null && $request->wasPosted() ) ) {
+			return false;
 		}
 
-		if ( $value === null ) {
-			$value = $this->getValue( $entityContent, $language );
+		// to provide removing after posting the full form
+		if( $request->getVal( 'remove' ) != 'remove' && $this->value === '' ) {
+			$this->showError(
+				$this->msg(
+					'wikibase-' . strtolower( $this->getName() ) . '-warning-remove',
+					$this->entityContent->getTitle()->getText()
+				)->parse(),
+				'warning'
+			);
+			return false;
 		}
 
-		$this->getOutput()->addHTML(
-			Html::openElement(
-				'form',
-				array(
-					'method' => 'post',
-					'action' => $this->getTitle()->getFullUrl(),
-					'name' => strtolower( $this->getName() ),
-					'id' => 'wb-' . strtolower( $this->getName() ) . '-form1',
-					'class' => 'wb-form'
-				)
-			)
-			. Html::openElement(
-				'fieldset',
-				array( 'class' => 'wb-fieldset' )
-			)
-			. Html::element(
-				'legend',
-				array( 'class' => 'wb-legend' ),
-				$this->msg( 'special-' . strtolower( $this->getName() ) )->text()
-			)
-		);
+		$status = $this->setValue( $this->entityContent, $this->language, $this->value, $summary );
 
-		if ( ( $entityContent !== null ) && ( $language !== null ) ) {
-			$this->getOutput()->addHtml(
-				Html::rawElement(
-					'p',
-					array(),
-					$this->getIntrofull( $entityContent, $language )
-				)
-			);
-			$this->getOutput()->addHTML(
-				Html::input( 'language', $language, 'hidden' )
-				. Html::input( 'id', $entityContent->getTitle()->getText(), 'hidden' )
-			);
+		if ( !$status->isGood() ) {
+			$this->showError( $status->getHTML() );
+			return false;
+		}
+
+		return $summary;
+	}
+	
+	/**
+	 * @see SpecialModifyEntity::getFormElements()
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	protected function getFormElements() {
+		$this->language = $this->language ? $this->language : $this->getLanguage()->getCode();
+		if( $this->value === null ) {
+			$this->value = $this->getValue( $this->entityContent, $this->language );
+		}
+		$valueinput = Html::input(
+			'value',
+			$this->value,
+			'text',
+			array(
+				'class' => 'wb-input wb-input-text',
+				'id' => 'wb-setentity-value',
+				'size' => 50
+			)
+		)
+		. Html::element( 'br' );
+
+		$languageName = \Language::fetchLanguageName( $this->language, $this->getLanguage()->getCode() );
+		
+		if ( $this->entityContent !== null && $this->language !== null && $languageName !== '' ) {
+			return Html::rawElement(
+				'p',
+				array(),
+				$this->msg(
+					'wikibase-' . strtolower( $this->getName() ) . '-introfull',
+					$this->entityContent->getTitle()->getPrefixedText(),
+					$languageName
+				)->parse()
+			)
+			. Html::input( 'language', $this->language, 'hidden' )
+			. Html::input( 'id', $this->entityContent->getTitle()->getText(), 'hidden' )
+			. Html::input( 'remove', 'remove', 'hidden' )
+			. $valueinput;
 		}
 		else {
-			$id = $entityContent ? $entityContent->getTitle()->getText() : '';
-			$value = $this->getValue( $entityContent, $language ? $language : $this->getLanguage()->getCode() );
-			$this->getOutput()->addHTML(
-				Html::element(
-					'p',
-					array(),
-					$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->text()
-				)
-				. Html::element(
-					'label',
-					array(
-						'for' => 'wb-setentity-id',
-						'class' => 'wb-label'
-					),
-					$this->msg( 'wikibase-setentity-id' )->text()
-				)
-				. Html::input(
-					'id',
-					$id,
-					'text',
-					array(
-						'class' => 'wb-input',
-						'id' => 'wb-setentity-id'
-					)
-				)
-				. Html::element( 'br' )
-				. $this->getKeyForm( $language )
-				. Html::element( 'br' )
-				. Html::element(
-					'label',
-					array(
-						'for' => 'wb-setentity-value',
-						'class' => 'wb-label'
-					),
-					$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-label' )->text()
-				)
-				. Html::input( 'fullrequest', 'fullrequest', 'hidden' )
-			);
-		}
-
-		$this->getOutput()->addHTML(
-			Html::input(
-				'value',
-				$value,
+			return Html::element(
+				'p',
+				array(),
+				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->text()
+			)
+			. parent::getFormElements()
+			. Html::element(
+				'label',
+				array(
+					'for' => 'wb-setentity-language',
+					'class' => 'wb-label'
+				),
+				$this->msg( 'wikibase-setentity-language' )->text()
+			)
+			. Html::input(
+				'language',
+				$this->language,
 				'text',
 				array(
-					'class' => 'wb-input wb-input-text',
-					'id' => 'wb-setentity-value',
-					'size' => 50
+					'class' => 'wb-input',
+					'id' => 'wb-setentity-language'
 				)
 			)
 			. Html::element( 'br' )
-			. Html::input(
-				'wikibase-' . strtolower( $this->getName() ) . '-submit',
-				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-submit' )->text(),
-				'submit',
+			. Html::element(
+				'label',
 				array(
-					'id' => 'wb-' . strtolower( $this->getName() ) . '-submit',
-					'class' => 'wb-button'
-				)
+					'for' => 'wb-setentity-value',
+					'class' => 'wb-label'
+				),
+				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-label' )->text()
 			)
-			. Html::input(
-				'wpEditToken',
-				$this->getUser()->getEditToken(),
-				'hidden'
-			)
-			. Html::closeElement( 'fieldset' )
-			. Html::closeElement( 'form' )
-		);
-	}
-
-	/**
-	 * Showing an error.
-	 *
-	 * @since 0.4
-	 *
-	 * @param string $error the error message
-	 * @param string $class the element's class, default 'error'
-	 */
-	protected function showError( $error, $class = 'error' ) {
-		$this->getOutput()->addHTML(
-			Html::rawElement(
-				'p',
-				array( 'class' => $class ),
-				$error
-			)
-		);
-	}
-
-	/**
-	 * Returns the posted language.
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $parts the parts of the subpage
-	 * @return string
-	 */
-	protected function getPostedKey( $parts ) {
-		return $this->getRequest()->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
-	}
-
-	/**
-	 * Checks if the language is ok.
-	 *
-	 * @since 0.4
-	 *
-	 * @param string $key the language
-	 */
-	protected function checkKey( $key ) {
-		if ( Language::isValidBuiltInCode( $key ) && in_array( $key, \Wikibase\Utils::getLanguageCodes() ) ) {
-			$this->showError( $this->msg( 'wikibase-setentity-invalid-langcode', $key )->text() );
+			. $valueinput;
 		}
-	}
-
-	/**
-	 * Returns the full intro when both id and language are set.
-	 *
-	 * @since 0.4
-	 *
-	 * @param \Wikibase\EntityContent $entityContent the entity to have the value set
-	 * @param string $language
-	 * @return string
-	 */
-	protected function getIntrofull( $entityContent, $language ) {
-		return $this->msg(
-			'wikibase-' . strtolower( $this->getName() ) . '-introfull',
-			$entityContent->getTitle()->getPrefixedText(),
-			\Language::fetchLanguageName( $language, $this->getLanguage()->getCode() )
-		)->parse();
-	}
-
-	/**
-	 * Returns the label and the input box for the language.
-	 *
-	 * @since 0.4
-	 *
-	 * @param string $default the default value for the language field
-	 * @return string
-	 */
-	protected function getKeyForm( $default ) {
-		$default = $default ? $default : $this->getLanguage()->getCode();
-		return Html::element(
-			'label',
-			array(
-				'for' => 'wb-setentity-language',
-				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-setentity-language' )->text()
-		)
-		. Html::input(
-			'language',
-			$default,
-			'text',
-			array(
-				'class' => 'wb-input',
-				'id' => 'wb-setentity-language'
-			)
-		);
-	}
-
-	/**
-	 * Returning the summary.
-	 *
-	 * @since 0.4
-	 *
-	 * @param string $value
-	 * @param string $key
-	 * @param string $i18n the i18n key of the summary
-	 * @return string
-	 */
-	protected function getSummary( $key, $value, $i18n ) {
-		list( $counts, $summary, $lang ) = Autocomment::formatAutoSummary(
-			array( $value ),
-			$this->getLanguage()
-		);
-
-		$comment = Autocomment::formatAutoComment(
-			$i18n,
-			array( $counts, $key )
-		);
-
-		return AutoComment::formatTotalSummary( $comment, $summary, $lang );
 	}
 
 	/**
