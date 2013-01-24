@@ -90,15 +90,15 @@ class ClientChangeHandler {
 				$diffOp = $siteLinkDiff[$globalId];
 
 				if ( $this->change->getAction() === 'remove' ) {
-					$params['message'] = 'wbc-comment-remove';
+					$params['message'] = 'wikibase-comment-remove';
 				} else if ( $this->change->getAction() === 'restore' ) {
-					$params['message'] = 'wbc-comment-restore';
+					$params['message'] = 'wikibase-comment-restore';
 				} else if ( $diffOp instanceof \Diff\DiffOpAdd ) {
-					$params['message'] = 'wbc-comment-linked';
+					$params['message'] = 'wikibase-comment-linked';
 				} else if ( $diffOp instanceof \Diff\DiffOpRemove ) {
-					$params['message'] = 'wbc-comment-unlink';
+					$params['message'] = 'wikibase-comment-unlink';
 				} else if ( $diffOp instanceof \Diff\DiffOpChange ) {
-					$params['message'] = 'wbc-comment-sitelink-change';
+					$params['message'] = 'wikibase-comment-sitelink-change';
 					$iwPrefix = Settings::get( 'siteLocalID' );
 					$params['sitelink'] = array(
 						'oldlink' => array(
@@ -112,7 +112,10 @@ class ClientChangeHandler {
 					);
 				}
 			} else {
-				$messagePrefix = 'wbc-comment-sitelink-';
+				$messagePrefix = 'wikibase-comment-sitelink-';
+				/* Messages used:
+					wikibase-comment-sitelink-add wikibase-comment-sitelink-change wikibase-comment-sitelink-remove
+				*/
 				$params['message'] = $messagePrefix . 'change';
 
 				foreach( $siteLinkDiff as $siteKey => $diffOp ) {

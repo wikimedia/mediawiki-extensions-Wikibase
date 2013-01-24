@@ -187,7 +187,7 @@ class EntityChange extends DiffChange {
 		if ( $comment !== null ) {
 			$this->comment = $comment;
 		} else {
-			$this->comment = 'wbc-comment-' . $this->getAction();
+			$this->comment = 'wikibase-comment-' . $this->getAction();
 		}
 	}
 

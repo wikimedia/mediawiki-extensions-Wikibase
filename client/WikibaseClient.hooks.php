@@ -392,7 +392,7 @@ final class ClientHooks {
 					'div',
 					array( 'id' => 'wbc-after-page-move',
 							'class' => 'plainlinks' ),
-					wfMessage( 'wbc-after-page-move', $itemByTitleLink )->parse()
+					wfMessage( 'wikibase-after-page-move', $itemByTitleLink )->parse()
 				)
 			);
 		}
@@ -657,8 +657,8 @@ final class ClientHooks {
 				// links to the special page
 				$template->data['language_urls'][] = array(
 					'href' => ClientUtils::repoArticleUrl( "Special:ItemByTitle/$siteId/$titleLink" ),
-					'text' => wfMessage( 'wbc-editlinks' )->text(),
-					'title' => wfMessage( 'wbc-editlinkstitle' )->text(),
+					'text' => wfMessage( 'wikibase-editlinks' )->text(),
+					'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
 					'class' => 'wbc-editpage',
 				);
 			}
@@ -680,7 +680,7 @@ final class ClientHooks {
 		$showWikidata = $special->getUser()->getOption( 'rcshowwikidata' );
 		$default = $showWikidata ? false : true;
 		if ( $special->getUser()->getOption( 'usenewrc' ) === 0 ) {
-			$filters['hidewikidata'] = array( 'msg' => 'wbc-rc-hide-wikidata', 'default' => $default );
+			$filters['hidewikidata'] = array( 'msg' => 'wikibase-rc-hide-wikidata', 'default' => $default );
 		}
 
 		return true;

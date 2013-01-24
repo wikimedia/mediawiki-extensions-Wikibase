@@ -140,7 +140,7 @@ class ExternalChangesLine {
 		if ( is_array( $comment ) ) {
 			if ( $entityData['type'] === 'wikibase-item~add' ) {
 				// @todo: provide a link to the entity
-				$message = wfMessage( 'wbc-comment-linked' )->text();
+				$message = wfMessage( 'wikibase-comment-linked' )->text();
 			} else if ( array_key_exists( 'sitelink', $comment ) ) {
 				$sitelinks = $comment['sitelink'];
 				if ( array_key_exists( 'oldlink', $sitelinks ) && array_key_exists( 'newlink', $sitelinks ) ) {
@@ -182,7 +182,7 @@ class ExternalChangesLine {
 		//      Combine all the comments! Up to some max length?
 
 		if ( array_key_exists( 'composite-comment', $entityData ) ) {
-			$commentText = wfMessage( 'wbc-comment-multi', count( $entityData['composite-comment'] ) )->text();
+			$commentText = wfMessage( 'wikibase-comment-multi', count( $entityData['composite-comment'] ) )->text();
 		} else if ( array_key_exists( 'comment', $entityData  ) ) {
 			$commentText = self::parseComment( $entityData );
 		} else {

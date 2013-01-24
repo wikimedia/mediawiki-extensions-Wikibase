@@ -17,10 +17,14 @@ $messages = array();
  * @author Jeroen De Dauw
  */
 $messages['en'] = array(
-	'wikibaselib-desc' => 'Holds common functionality for the Wikibase and Wikibase Client extensions',
-	'wikibaselib-entity-item' => 'item',
-	'wikibaselib-entity-property' => 'property',
-	'wikibaselib-entity-query' => 'query',
+	'wikibase-lib-desc' => 'Holds common functionality for the Wikibase and Wikibase Client extensions',
+	'wikibase-entity-item' => 'item',
+	'wikibase-entity-property' => 'property',
+	'wikibase-entity-query' => 'query',
+	'wikibase-sitelinks' => 'List of pages linked to this item',
+	'wikibase-sitelinks-sitename-columnheading' => 'Language',
+	'wikibase-sitelinks-siteid-columnheading' => 'Code',
+	'wikibase-sitelinks-link-columnheading' => 'Linked article',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Commons media file',
 );

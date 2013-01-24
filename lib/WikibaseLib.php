@@ -73,7 +73,7 @@ $wgExtensionCredits['other'][] = array(
 		'The Wikidata team', // TODO: link?
 	),
 	'url' => 'https://www.mediawiki.org/wiki/Extension:WikibaseLib',
-	'descriptionmsg' => 'wikibaselib-desc'
+	'descriptionmsg' => 'wikibase-lib-desc'
 );
 
 $dir = __DIR__ . '/';
