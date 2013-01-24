@@ -37,6 +37,40 @@
     },
     {
       "key": {
+        "uuid": "AAADiH//+WQ\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-24T13:18:17Z",
+      "side": 1,
+      "message": "These still are used, though we could make it a bit more obvious (e.g. via grepping).  They are generated with a message key prefix + action type",
+      "revId": "1ef336412bc745ebe397f25069c20d0a6e4b5e2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//+SA\u003d",
+        "filename": "client/includes/ClientChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-24T13:18:17Z",
+      "side": 1,
+      "message": "we should also change the prefix here",
+      "revId": "1ef336412bc745ebe397f25069c20d0a6e4b5e2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//+UM\u003d",
         "filename": "lib/WikibaseLib.php",
         "patchSetId": 1
