@@ -28,7 +28,7 @@ class ApiGetEntities extends Api {
 
 		if ( !( isset( $params['ids'] ) XOR ( isset( $params['sites'] ) && isset( $params['titles'] ) ) ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
+			$this->dieUsage( $this->msg( 'wikibase-api-ids-xor-wikititles' )->text(), 'id-xor-wikititle' );
 		}
 
 		$missing = 0;
@@ -40,7 +40,7 @@ class ApiGetEntities extends Api {
 			$max = max( $numSites, $numTitles );
 			if ( $numSites === 0 || $numTitles === 0 ) {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
+				$this->dieUsage( $this->msg( 'wikibase-api-ids-xor-wikititles' )->text(), 'id-xor-wikititle' );
 			}
 			else {
 				$idxSites = 0;
@@ -281,7 +281,7 @@ class ApiGetEntities extends Api {
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
-			array( 'code' => 'id-xor-wikititle', 'info' => $this->msg( 'wikibase-api-id-xor-wikititle' )->text() ),
+			array( 'code' => 'id-xor-wikititle', 'info' => $this->msg( 'wikibase-api-ids-xor-wikititles' )->text() ),
 			array( 'code' => 'no-such-item', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
 			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
 		) );
