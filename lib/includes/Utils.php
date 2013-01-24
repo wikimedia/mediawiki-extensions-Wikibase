@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Sanitizer, UtfNormal, Language;
+use Sanitizer, UtfNormal, Language, SiteList, SiteSQLStore;
 
 /**
  * Utility functions for Wikibase.
@@ -87,7 +87,7 @@ final class Utils {
 
 	/**
 	 * Inserts sites from another wiki into the sites table. The other wiki must run the
-	 * WikiMatrix extension.
+	 * WikiMatrix extension. Existing entries in the sites table are not modified.
 	 *
 	 * @note This should move into core, together with the populateSitesTable.php script.
 	 *
@@ -133,12 +133,8 @@ final class Utils {
 			'wikinews' => 'wikinews',
 		);
 
-		$dbw = wfGetDB( DB_MASTER );
-		$doTrx = ( $dbw->trxLevel() === 0 );
-
-		if ( $doTrx ) {
-			$dbw->begin();
-		}
+		$sites = SiteSQLStore::newInstance();
+		$newSites = array();
 
 		// Inserting obtained sites...
 		foreach ( $languages['sitematrix'] as $language ) {
@@ -146,11 +142,14 @@ final class Utils {
 				$languageCode = $language['code'];
 
 				foreach ( $language['site'] as $siteData ) {
-					$site = \Sites::singleton()->getSite( $siteData['dbname'] );
+					$site = $sites->getSite( $siteData['dbname'] );
 
-					if ( !$site ) {
-						$site = \MediaWikiSite::newFromGlobalId( $siteData['dbname'] );
+					if ( $site ) {
+						continue;
 					}
+
+					$site = new \MediaWikiSite();
+					$site->setGlobalId( $siteData['dbname'] );
 
 					$site->setGroup( $groupMap[$siteData['code']] );
 					$site->setLanguageCode( $languageCode );
@@ -168,18 +167,14 @@ final class Utils {
 					$site->setFilePath( $url . '/w/$1' );
 					$site->setPagePath( $url . '/wiki/$1' );
 
-					$site->save();
+					$newSites[]= $site;
 				}
 			}
 		}
 
-		if ( $doTrx ) {
-			$dbw->commit();
-		}
+		$sites->saveSites( $newSites );
 
-		// re-cache, once the change has propagated.
 		wfWaitForSlaves();
-		\Sites::singleton()->getSites( 'recache' );
 	}
 
 	/**
