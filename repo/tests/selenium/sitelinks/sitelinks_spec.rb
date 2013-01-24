@@ -67,6 +67,31 @@ describe "Check functionality of add/edit/remove sitelinks" do
       end
     end
 
+    it "should check if an error is correctly displayed when the site API is inaccessible" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.count_existing_sitelinks.should == 0
+        page.addSitelinkLink
+        page.siteIdInputField_element.should be_true
+        page.pageInputField_element.enabled?.should be_false
+        page.siteIdInputField="en"
+        ajax_wait
+        page.wait_until do
+          page.siteIdAutocompleteList_element.visible?
+        end
+        page.siteIdAutocompleteList_element.visible?.should be_true
+        page.pageInputField_element.enabled?.should be_true
+        @browser.execute_script("$( '.wb-sitelinks-link input.ui-suggester-input' ).data( 'suggester' ).options.ajax.url = 'thisWillCauseAnError';")
+        page.pageInputField="Montreal"
+        ajax_wait
+        page.wbErrorDiv?.should be_true
+        page.wbErrorDetailsLink?.should be_true
+        page.wbErrorDetailsLink
+        page.wbErrorDetailsDiv?.should be_true
+      end
+    end
+
     it "should check if adding a sitelink works" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
