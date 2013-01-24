@@ -128,6 +128,7 @@ class ChangeNotificationJob extends \Job {
 	public function run() {
 		$changes = $this->getChanges();
 
+		//TODO: allow mock handler for testing
 		ChangeHandler::singleton()->handleChanges( $changes );
 	}
 
