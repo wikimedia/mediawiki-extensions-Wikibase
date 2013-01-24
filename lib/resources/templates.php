@@ -221,9 +221,15 @@ HTML;
 		<col class="wb-sitelinks-link" />
 		<col class="wb-editsection" />
 	</colgroup>
-	<thead>$1</thead>
-	<tbody>$2</tbody>
-	<tfoot>$3</tfoot>
+	<thead>
+		$1 <!-- wb-sitelinks-thead -->
+	</thead>
+	<tbody>
+		$2 <!-- [0,*] wb-sitelink -->
+	</tbody>
+	<tfoot>
+		$3 <!-- wb-sitelinks-tfoot -->
+	</tfoot>
 </table>
 HTML;
 
@@ -241,7 +247,7 @@ HTML;
 <<<HTML
 <tr>
 	<td colspan="3" class="wb-sitelinks-placeholder">$1</td>
-	$2
+	$2 <!-- wb-editsection( param1: 'td' ) -->
 </tr>
 HTML;
 
