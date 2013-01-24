@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//9iI\u003d",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-24T23:02:39Z",
+      "side": 1,
+      "message": "Can you add the message keys that are used here in full in a comment please, so they will surface when grepped?",
+      "revId": "f24462fc04945c3ed62ade47542d14ba404b7d04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
