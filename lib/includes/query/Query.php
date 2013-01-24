@@ -73,7 +73,7 @@ class Query extends Entity {
 	 * @return string
 	 */
 	public function getLocalizedType() {
-		return wfMessage( 'wikibaselib-entity-query' )->parse();
+		return wfMessage( 'wikibase-entity-query' )->parse();
 	}
 
 }

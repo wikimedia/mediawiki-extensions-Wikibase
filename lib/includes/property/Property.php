@@ -117,7 +117,7 @@ class Property extends Entity {
 	 * @return string
 	 */
 	public function getLocalizedType() {
-		return wfMessage( 'wikibaselib-entity-property' )->parse();
+		return wfMessage( 'wikibase-entity-property' )->parse();
 	}
 
 	/**

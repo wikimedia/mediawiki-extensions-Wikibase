@@ -28,7 +28,7 @@ watchlist = {
 
 	getToggle: function( toggleLink ) {
 		return '<span id="wb-toggle">'
-            +  mw.message( 'wbc-rc-hide-wikidata' ).escaped().replace( '$1', toggleLink )
+            +  mw.message( 'wikibase-rc-hide-wikidata' ).escaped().replace( '$1', toggleLink )
             + '</span>';
 	},
 
