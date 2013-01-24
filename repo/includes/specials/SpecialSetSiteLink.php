@@ -1,7 +1,9 @@
 <?php
 
+use Wikibase\SiteLink;
+
 /**
- * Abstract special page for setting a value of a Wikibase entity.
+ * Special page for setting the sitepage of a Wikibase entity.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,38 +28,35 @@
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-abstract class SpecialSetEntity extends SpecialModifyEntity {
+class SpecialSetSiteLink extends SpecialModifyEntity {
 
 	/**
-	 * The langauge the value is set in.
+	 * The site of the site link.
 	 *
 	 * @since 0.4
 	 *
 	 * @var string
 	 */
-	protected $language;
+	protected $site;
 
 	/**
-	 * The value to set.
+	 * The page of the site link.
 	 *
 	 * @since 0.4
 	 *
 	 * @var string
 	 */
-	protected $value;
+	protected $page;
 
 	/**
-	 * Constructor.
+	 * Constructor
 	 *
 	 * @since 0.4
-	 *
-	 * @param string $title The title of the special page
-	 * @param string $restriction The required user right, 'edit' per default.
 	 */
-	public function __construct( $title, $restriction = 'edit' ) {
-		parent::__construct( $title, $restriction );
+	public function __construct() {
+		parent::__construct( 'SetSiteLink' );
 	}
-	
+
 	/**
 	 * @see SpecialModifyEntity::prepareArguments()
 	 *
@@ -71,22 +70,16 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 
-		// Language
-		$this->language = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
-		if ( $this->language === '' ) {
-			$this->language = null;
-		}
-		if ( $this->language !== null ) {
-			if ( !( Language::isValidBuiltInCode( $this->language ) && in_array( $this->language, \Wikibase\Utils::getLanguageCodes() ) ) ) {
-				$this->showError( $this->msg( 'wikibase-setentity-invalid-langcode', $this->language )->text() );
+		// Site
+		$this->site = $request->getVal( 'site', isset( $parts[1] ) ? $parts[1] : '' );
+		if ( $this->site !== null ) {
+			if( \Sites::singleton()->getSite( $this->site ) === false ) {
+				$this->showError( $this->msg( 'wikibase-setsitelink-invalid-site', $this->site )->text() );
 			}
 		}
 
-		// Value
-		$this->value = $this->getPostedValue();
-		if( $this->value === null ) {
-			$this->value = $request->getVal( 'value' );
-		}
+		// Title
+		$this->page = $request->getVal( 'page' );
 	}
 
 	/**
@@ -98,15 +91,15 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 	 */
 	protected function modifyEntity() {
 		$request = $this->getRequest();
-		if ( !( $this->entityContent !== null && $this->language !== null && $request->wasPosted() ) ) {
+		if ( !( $this->entityContent !== null && $this->site !== null && $request->wasPosted() ) ) {
 			return false;
 		}
 
 		// to provide removing after posting the full form
-		if( $request->getVal( 'remove' ) != 'remove' && $this->value === '' ) {
+		if( $request->getVal( 'remove' ) != 'remove' && $this->page === '' ) {
 			$this->showError(
 				$this->msg(
-					'wikibase-' . strtolower( $this->getName() ) . '-warning-remove',
+					'wikibase-setsitelink-warning-remove',
 					$this->entityContent->getTitle()->getText()
 				)->parse(),
 				'warning'
@@ -114,7 +107,7 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 			return false;
 		}
 
-		$status = $this->setValue( $this->entityContent, $this->language, $this->value, $summary );
+		$status = $this->setSiteLink( $this->entityContent, $this->site, $this->page, $summary );
 
 		if ( !$status->isGood() ) {
 			$this->showError( $status->getHTML() );
@@ -123,7 +116,7 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 
 		return $summary;
 	}
-	
+
 	/**
 	 * @see SpecialModifyEntity::getFormElements()
 	 *
@@ -132,108 +125,131 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 	 * @return string
 	 */
 	protected function getFormElements() {
-		$this->language = $this->language ? $this->language : $this->getLanguage()->getCode();
-		if( $this->value === null ) {
-			$this->value = $this->getValue( $this->entityContent, $this->language );
+		if( $this->page === null ) {
+			$this->page = $this->getSiteLink( $this->entityContent, $this->site );
 		}
-		$valueinput = Html::input(
-			'value',
-			$this->value,
+		$pageinput = Html::input(
+			'page',
+			$this->page,
 			'text',
 			array(
 				'class' => 'wb-input wb-input-text',
-				'id' => 'wb-setentity-value',
+				'id' => 'wb-setsitelink-page',
 				'size' => 50
 			)
 		)
 		. Html::element( 'br' );
 
-		$languageName = \Language::fetchLanguageName( $this->language, $this->getLanguage()->getCode() );
-		
-		if ( $this->entityContent !== null && $this->language !== null && $languageName !== '' ) {
+		$site = \Sites::singleton()->getSite( $this->site );
+
+		if ( $this->entityContent !== null && $this->site !== null && $site !== false ) {
 			return Html::rawElement(
 				'p',
 				array(),
 				$this->msg(
-					'wikibase-' . strtolower( $this->getName() ) . '-introfull',
+					'wikibase-setsitelink-introfull',
 					$this->entityContent->getTitle()->getPrefixedText(),
-					$languageName
+					'[' . \Sites::singleton()->getSite( $this->site )->getPageUrl( '' ) . ' ' . $this->site . ']'
 				)->parse()
 			)
-			. Html::input( 'language', $this->language, 'hidden' )
+			. Html::input( 'site', $this->site, 'hidden' )
 			. Html::input( 'id', $this->entityContent->getTitle()->getText(), 'hidden' )
 			. Html::input( 'remove', 'remove', 'hidden' )
-			. $valueinput;
+			. $pageinput;
 		}
 		else {
 			return Html::element(
 				'p',
 				array(),
-				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->text()
+				$this->msg( 'wikibase-setsitelink-intro' )->text()
 			)
 			. parent::getFormElements()
 			. Html::element(
 				'label',
 				array(
-					'for' => 'wb-setentity-language',
+					'for' => 'wb-setsitelink-site',
 					'class' => 'wb-label'
 				),
-				$this->msg( 'wikibase-setentity-language' )->text()
+				$this->msg( 'wikibase-setsitelink-site' )->text()
 			)
 			. Html::input(
-				'language',
-				$this->language,
+				'site',
+				$this->site,
 				'text',
 				array(
 					'class' => 'wb-input',
-					'id' => 'wb-setentity-language'
+					'id' => 'wb-setsitelink-site'
 				)
 			)
 			. Html::element( 'br' )
 			. Html::element(
 				'label',
 				array(
-					'for' => 'wb-setentity-value',
+					'for' => 'wb-setsitelink-page',
 					'class' => 'wb-label'
 				),
-				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-label' )->text()
+				$this->msg( 'wikibase-setsitelink-label' )->text()
 			)
-			. $valueinput;
+			. $pageinput;
 		}
 	}
 
 	/**
-	 * Returning the posted value of the request.
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	abstract protected function getPostedValue();
-
-	/**
-	 * Returning the value of the entity name by the given language
+	 * Returning the site page of the entity.
 	 *
 	 * @since 0.4
 	 *
 	 * @param \Wikibase\EntityContent $entityContent
-	 * @param string $language
+	 * @param string $site
 	 *
 	 * @return string
 	 */
-	abstract protected function getValue( $entityContent, $language );
+	protected function getSiteLink( $entityContent, $site ) {
+		if( $entityContent === null ) {
+			return '';
+		}
+		$sitelink = $entityContent->getEntity()->getSitelink( $site );
+		if( $sitelink === null ) {
+			return '';
+		}
+		return $sitelink->getPage();
+	}
 
 	/**
-	 * Setting the value of the entity name by the given language
+	 * Setting the sitepage of the entity.
 	 *
 	 * @since 0.4
 	 *
 	 * @param \Wikibase\EntityContent $entityContent
-	 * @param string $language
-	 * @param string $value
+	 * @param string $site
+	 * @param string $page
 	 * @param string &$summary The summary for this edit will be saved here.
 	 *
 	 * @return Status
 	 */
-	abstract protected function setValue( $entityContent, $language, $value, &$summary );
+	protected function setSiteLink( $entityContent, $site, $page, &$summary ) {
+		$siteObject = \Sites::singleton()->getSite( $site );
+		$status = \Status::newGood();
+
+		if( $siteObject === false ) {
+			$status->error( 'wikibase-setsitelink-invalid-site', $site );
+			return $status;
+		}
+		if ( $siteObject->normalizePageName( $page ) === false && $page !== '' ) {
+			$status->error( 'wikibase-error-ui-no-external-page' );
+			return $status;
+		}
+
+		if( $page === '' ) {
+			$entityContent->getEntity()->removeSitelink( $site );
+			$i18n = 'wbsetsitelink-remove';
+		}
+		else {
+			$siteLink = new SiteLink( $siteObject, $page );
+			$entityContent->getEntity()->addSiteLink( $siteLink, 'set' );
+			$i18n = 'wbsetsitelink-set';
+		}
+		$summary = $this->getSummary( $site, $page, $i18n );
+		return $status;
+	}
 }
