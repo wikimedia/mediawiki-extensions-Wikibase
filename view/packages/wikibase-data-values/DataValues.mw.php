@@ -76,6 +76,7 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'includes/values/NumberValue',
 		'includes/values/QuantityValue',
 		'includes/values/StringValue',
+		'includes/values/TimeValue',
 		'includes/values/UnknownValue',
 
 		'includes/DataValueFactory',

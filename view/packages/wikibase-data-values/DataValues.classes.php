@@ -36,7 +36,7 @@ return array(
 	'DataValues\NumberValue' => 'includes/values/NumberValue.php',
 	'DataValues\QuantityValue' => 'includes/values/QuantityValue.php',
 	'DataValues\StringValue' => 'includes/values/StringValue.php',
-//	'DataValues\TimeValue' => 'includes/values/TimeValue.php',
+	'DataValues\TimeValue' => 'includes/values/TimeValue.php',
 	'DataValues\UnknownValue' => 'includes/values/UnknownValue.php',
 
 	'DataValues\DataValue' => 'includes/DataValue.php',

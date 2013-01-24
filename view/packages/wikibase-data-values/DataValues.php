@@ -86,4 +86,4 @@ $wgDataValues['number'] = 'DataValues\NumberValue';
 $wgDataValues['quantity'] = 'DataValues\QuantityValue';
 $wgDataValues['string'] = 'DataValues\StringValue';
 $wgDataValues['unknown'] = 'DataValues\UnknownValue';
-//$wgDataValues['time'] = 'DataValues\TimeValue';
+$wgDataValues['time'] = 'DataValues\TimeValue';
