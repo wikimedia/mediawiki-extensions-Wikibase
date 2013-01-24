@@ -215,10 +215,6 @@ final class ClientHooks {
 
 		/* @var EntityChange $change */
 
-		if ( \SiteSQLStore::singleton()->exists() === false ) {
-			throw new \MWException( 'Sites table does not exist, but is required for handling changes.' );
-		}
-
 		if ( Settings::get( 'repoDatabase' ) === null ) {
 			// no direct access to the repo database, use local cache
 			$cacheUpdater = new EntityCacheUpdater();
