@@ -76,7 +76,7 @@ class ItemView extends EntityView {
 		}
 
 		// Link to SpecialPage
-		$editLink = ''; // $this->getEditUrl( $item->getEntity()->getPrefixedId(), null, 'SetSiteLink' );
+		$editLink = $this->getEditUrl( $item->getEntity()->getPrefixedId(), null, 'SetSiteLink' );
 
 		/**
 		 * @var SiteLink $link
@@ -110,7 +110,7 @@ class ItemView extends EntityView {
 					htmlspecialchars( $languageCode ), // TODO: get an actual site id rather then just the language code
 					htmlspecialchars( $link->getUrl() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, $editLink /* . '/' . $languageCode */, 'td' )
+					$this->getHtmlForEditSection( $item, $lang, $editLink . '/' . $languageCode, 'td' )
 				);
 			}
 		}
