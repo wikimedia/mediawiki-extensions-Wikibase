@@ -116,10 +116,10 @@ class ClientChangeHandler {
 				$params['message'] = $messagePrefix . 'change';
 
 				foreach( $siteLinkDiff as $siteKey => $diffOp ) {
-					$site = \SiteSQLStore::singleton()->selectRow(
-						null,
-						array( 'global_key' => $siteKey )
-					);
+					$site = \Sites::singleton()->getSite( $siteKey );
+					if( $site === null ) {
+						break;
+					}
 					// assumes interwiki prefix is same as lang code
 					// true for wikipedia but need todo more robustly
 					$iwPrefix = $site->getLanguageCode();
