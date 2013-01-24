@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADiH//+To\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-01-24T11:55:15Z",
+      "side": 1,
+      "message": "By the time this one is merged I\u0027ll do this in a follow up. We just decided it would be better to do that in a separate change set...",
+      "parentUuid": "AAADiH//+UQ\u003d",
+      "revId": "1ef336412bc745ebe397f25069c20d0a6e4b5e2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//+UM\u003d",
         "filename": "lib/WikibaseLib.php",
         "patchSetId": 1
