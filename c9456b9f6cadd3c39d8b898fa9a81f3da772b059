@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//+Nk\u003d",
+        "filename": "client/includes/ClientChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-24T14:42:49Z",
+      "side": 1,
+      "message": "break? Did you want \"continue\"?\n\nWould also add a wfWarn or something, so the issue does not completely go unnoticed",
+      "revId": "c9456b9f6cadd3c39d8b898fa9a81f3da772b059",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
