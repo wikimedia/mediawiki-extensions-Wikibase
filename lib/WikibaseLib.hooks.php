@@ -81,6 +81,7 @@ final class LibHooks {
 			'store/SiteLinkTable',
 			'store/WikiPageEntityLookup',
 
+			'Arrayalizer',
 			'ByPropertyIdArray',
 			'ChangesTable',
 			'DataTypes',
