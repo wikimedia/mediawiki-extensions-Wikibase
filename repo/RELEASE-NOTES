@@ -16,6 +16,8 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 ; Backend
 
+* Referenced entities are now added to the pagelinks table and thus show up on places such as Special:WhatLinksHere
+
 === Version 0.3 ===
 (???)
 
