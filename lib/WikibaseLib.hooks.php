@@ -153,6 +153,7 @@ final class LibHooks {
 			'store/SiteLinkTable',
 			'store/WikiPageEntityLookup',
 
+			'Arrayalizer',
 			'ByPropertyIdArray',
 			'ChangeNotifier',
 			'ChangesTable',
