@@ -92,7 +92,7 @@ class ReferencedEntitiesFinder {
 			if ( $snak instanceof PropertyValueSnak ) {
 				$prefixedId = $snak->getPropertyId()->getPrefixedId();
 
-				if ( array_key_exists( $prefixedId, $properties ) ) {
+				if ( array_key_exists( $prefixedId, $properties ) && $properties[$prefixedId] !== null ) {
 					$dataType = $properties[$prefixedId]->getDataType()->getId();
 
 					if ( $dataType === 'wikibase-item' ) {
