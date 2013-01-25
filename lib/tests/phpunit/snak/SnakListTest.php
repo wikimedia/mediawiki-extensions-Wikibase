@@ -163,7 +163,8 @@ class SnakListTest extends HashArrayTest {
 	}
 
 	/**
-	 * @dataProvider snakProvider
+	 * @dataProvider instanceProvider
+	 * 
 	 * @param SnakList $snaks
 	 */
 	public function testToArrayRoundtrip( SnakList $snaks ) {
