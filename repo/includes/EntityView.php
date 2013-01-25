@@ -191,6 +191,16 @@ abstract class EntityView extends \ContextSource {
 		// fresh parser output with entity markup
 		$pout = new ParserOutput();
 
+		$entityLoader = new CachingEntityLoader();
+		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
+		$contentFactory = EntityContentFactory::singleton();
+
+		$usedEntityIds = $refFinder->findClaimLinks( $entity->getEntity()->getClaims() );
+
+		foreach ( $usedEntityIds as $entityId ) {
+			$pout->addLink( $contentFactory->getTitleForId( $entityId ) );
+		}
+
 		if ( $generateHtml ) {
 			$html = $this->getHtml( $entity, $langCode, $editable );
 			$pout->setText( $html );
