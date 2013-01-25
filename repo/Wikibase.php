@@ -157,6 +157,8 @@ $wgAutoloadClasses['Wikibase\ItemContent'] 				= $dir . 'includes/content/ItemCo
 $wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/content/ItemHandler.php';
 $wgAutoloadClasses['Wikibase\PropertyContent'] 			= $dir . 'includes/content/PropertyContent.php';
 $wgAutoloadClasses['Wikibase\PropertyHandler'] 			= $dir . 'includes/content/PropertyHandler.php';
+$wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
+$wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
 
 // includes/specials
 $wgAutoloadClasses['SpecialCreateEntity'] 				= $dir . 'includes/specials/SpecialCreateEntity.php';
@@ -170,6 +172,7 @@ $wgAutoloadClasses['SpecialSetLabel'] 					= $dir . 'includes/specials/SpecialSe
 $wgAutoloadClasses['SpecialSetDescription'] 			= $dir . 'includes/specials/SpecialSetDescription.php';
 $wgAutoloadClasses['SpecialSetAliases'] 				= $dir . 'includes/specials/SpecialSetAliases.php';
 $wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	    = $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
+$wgAutoloadClasses['SpecialItemsWithoutSitelinks'] 	    = $dir . 'includes/specials/SpecialItemsWithoutSitelinks.php';
 $wgAutoloadClasses['SpecialListDatatypes'] 				= $dir . 'includes/specials/SpecialListDatatypes.php';
 
 // includes/store
@@ -231,6 +234,7 @@ $wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
 $wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
 $wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
 $wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
+$wgSpecialPages['ItemsWithoutSitelinks']		= 'SpecialItemsWithoutSitelinks';
 $wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
 
@@ -245,11 +249,12 @@ $wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
 $wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
 $wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
 $wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
+$wgSpecialPageGroups['ItemsWithoutSitelinks']		= 'wikibaserepo';
 $wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
 
 
 // Hooks
-$wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
+$wgHooks['WikibaseDefaultSettings'][] 			    = 'Wikibase\RepoHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\RepoHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'Wikibase\RepoHooks::registerUnitTests';
 $wgHooks['NamespaceIsMovable'][]					= 'Wikibase\RepoHooks::onNamespaceIsMovable';
@@ -279,6 +284,7 @@ $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/R
 // register hooks and handlers
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = '\Wikibase\PropertyHandler';
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
 
 $wgWBStores = array();
 
@@ -291,3 +297,5 @@ include_once( __DIR__ . '/config/Wikibase.default.php' );
 if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 	include_once( __DIR__ . '/config/Wikibase.experimental.php' );
 }
+
+unset( $dir );

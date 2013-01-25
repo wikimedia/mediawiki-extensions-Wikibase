@@ -70,7 +70,6 @@ interface EntityPerPage {
 	 */
 	public function rebuild();
 
-
 	/**
 	 * Return all entities without a specify term
 	 *
@@ -84,4 +83,17 @@ interface EntityPerPage {
 	 * @return EntityId[]
 	 */
 	public function getEntitiesWithoutTerm( $termType, $language = null, $entityType = null, $limit = 50, $offset = 0 );
+
+
+	/**
+	 * Return all items without sitelinks
+	 *
+	 * @since 0.4
+	 *
+	 * @param string|null $siteId Restrict the request to a specific site.
+	 * @param integer $limit Limit of the query.
+	 * @param integer $offset Offset of the query.
+	 * @return EntityId[]
+	 */
+	public function getItemsWithoutSitelinks( $siteId = null, $limit = 50, $offset = 0 );
 }
