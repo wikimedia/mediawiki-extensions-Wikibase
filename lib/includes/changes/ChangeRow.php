@@ -144,4 +144,78 @@ class ChangeRow extends ORMRow implements Change {
 		return $this->getField( 'object_id' );
 	}
 
+
+	/**
+	 * @see ORMRow::setField
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $name
+	 * @param mixed $value
+	 *
+	 * @throws \MWException
+	 */
+	public function setField( $name, $value ) {
+		if ( $name === 'info' && is_string( $value ) ) {
+			$value = $this->unserializeInfo( $value );
+		}
+
+		parent::setField( $name, $value );
+	}
+
+	/**
+	 * @see ORMRow::getWriteValues()
+	 *
+	 * @since 0.4
+	 *
+	 * @return array
+	 */
+	protected function getWriteValues() {
+		$values = parent::getWriteValues();
+		$infoField = $this->table->getPrefixedField( 'info' );
+
+		if ( isset( $values[$infoField] ) ) {
+			$values[$infoField] = $this->serializeInfo( $values[$infoField] );
+		}
+
+		return $values;
+	}
+
+	/**
+	 * Serialized the info field using json_encode.
+	 * This may be overridden by subclasses to implement special handling
+	 * for information in the info field.
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $info
+	 *
+	 * @return string
+	 */
+	protected function serializeInfo( array $info ) {
+		//XXX: we could JSON_UNESCAPED_UNICODE here, perhaps.
+		return json_encode( $info );
+	}
+
+	/**
+	 * Unserializes the info field using json_decode.
+	 * This may be overridden by subclasses to implement special handling
+	 * for information in the info field.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $str
+	 *
+	 * @return array the info array
+	 */
+	protected function unserializeInfo( $str ) {
+		if ( $str[0] === '{' ) { // json
+			$info = json_decode( $str, true );
+		} else {
+			// we may still have legacy stuff in the database for a while!
+			$info = unserialize( $str );
+		}
+
+		return $info;
+	}
 }

@@ -39,6 +39,18 @@ use \Wikibase\ChangesTable;
 class ChangeRowTest extends \ORMRowTest {
 
 	/**
+	 * @since 1.20
+	 * @return array
+	 */
+	protected function getMockValues() {
+		$values = parent::getMockValues();
+
+		// register special "json" type
+		$values['json'] = array( "foo", 'bar' );
+		return $values;
+	}
+
+	/**
 	 * @see ORMRowTest::getRowClass
 	 * @since 0.2
 	 * @return string
