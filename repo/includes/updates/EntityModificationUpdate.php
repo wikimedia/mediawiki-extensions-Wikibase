@@ -82,7 +82,7 @@ class EntityModificationUpdate extends \DataUpdate {
 		 *
 		 * @since 0.1
 		 *
-		 * @param ItemStructuredSave $this
+		 * @param EntityModificationUpdate $this
 		 */
 		wfRunHooks( 'WikibaseEntityModificationUpdate', array( $this ) );
 
