@@ -115,7 +115,6 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	 * @since 0.3
 	 *
 	 * @param $entry The entry is for this call an EntityId
-	 * TODO: just getting an ID here is odd
 	 *
 	 * @return string|null
 	 */
@@ -138,7 +137,6 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	 * @param integer $limit
 	 *
 	 * @return EntityId[]
-	 * TODO: it's a bit odd that this returns an array of EntityId
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$entityPerPage = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();

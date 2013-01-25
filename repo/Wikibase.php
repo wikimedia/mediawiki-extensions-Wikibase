@@ -159,6 +159,7 @@ $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/Specia
 $wgAutoloadClasses['SpecialItemDisambiguation'] 		= $dir . 'includes/specials/SpecialItemDisambiguation.php';
 $wgAutoloadClasses['SpecialSetLabel'] 					= $dir . 'includes/specials/SpecialSetLabel.php';
 $wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	    = $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
+$wgAutoloadClasses['SpecialItemsWithoutSitelinks'] 	    = $dir . 'includes/specials/SpecialItemsWithoutSitelinks.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\EntityPerPage']			= $dir . 'includes/store/EntityPerPage.php';
@@ -211,6 +212,7 @@ $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 $wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
 $wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
+$wgSpecialPages['ItemsWithoutSitelinks']		= 'SpecialItemsWithoutSitelinks';
 
 
 // Special page groups
@@ -219,6 +221,7 @@ $wgSpecialPageGroups['ItemByTitle']					= 'wikibaserepo';
 $wgSpecialPageGroups['ItemDisambiguation']			= 'wikibaserepo';
 $wgSpecialPageGroups['SetLabel']					= 'wikibaserepo';
 $wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
+$wgSpecialPageGroups['ItemsWithoutSitelinks']		= 'wikibaserepo';
 
 
 // Hooks
