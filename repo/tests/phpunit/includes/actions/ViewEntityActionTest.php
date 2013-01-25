@@ -72,7 +72,7 @@ class ViewEntityActionTest extends ActionTestCase {
 	}
 
 	/**
-	 * @dataProvider provideExecuteOutput
+	 * @dataProvider provideShow
 	 */
 	public function testShow( $handle, $regex ) {
 		$page = $this->getTestItemPage( $handle );
