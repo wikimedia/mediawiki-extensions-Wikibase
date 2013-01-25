@@ -37,6 +37,58 @@
     },
     {
       "key": {
+        "uuid": "AAADiH//9GE\u003d",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-25T10:51:42Z",
+      "side": 1,
+      "message": "Not really an opinion about SiteLinks vs. Sitelinks, but I do agree with John that it should be plural.\n\nThat there is a requirement to use \"site link\" or \"sitelink\" consistently across the product shouldn\u0027t be doubted. John, can you ensure this makes it to your product manager, so it can be decided upon and fixed?",
+      "parentUuid": "AAADiH///Vs\u003d",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//9GM\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-25T10:51:42Z",
+      "side": 1,
+      "message": "Is this the special page title and the name used in Special:SpecialPages? In that case, \"Items without site links\" is probably the best description.",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//9GI\u003d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-01-25T10:51:42Z",
+      "side": 1,
+      "message": "Don\u0027t use inline tabs.",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH///ZM\u003d",
         "filename": "repo/includes/specials/SpecialItemsWithoutSiteLink.php",
         "patchSetId": 1
