@@ -57,6 +57,8 @@ $specialPageAliases['de'] = array(
 	'ItemDisambiguation' => array( 'Begriffsklärung_zu_Datenelement' ),
 	'ListDatatypes' => array( 'Datentypen_auflisten' ),
 	'SetLabel' => array( 'Bezeichnung_festlegen' ),
+	'SetDescription' => array( 'Beschreibung_festlegen' ),
+	'SetAliases' => array( 'Aliasse_festlegen' ),
 	'EntitiesWithoutLabel' => array( 'Objekte_ohne_Bezeichnung' ),
 );
 
@@ -129,6 +131,8 @@ $specialPageAliases['ko'] = array(
 	'ItemDisambiguation' => array( '레이블별항목', '라벨별항목', '레이블별아이템', '라벨별아이템' ),
 	'ListDatatypes' => array( '데이터유형목록' ),
 	'SetLabel' => array( '레이블설정' ),
+	'SetDescription' => array( '설명설정' ),
+	'SetAliases' => array( '별명설정' ),
 	'EntitiesWithoutLabel' => array( '레이블없는항목' ),
 );
 

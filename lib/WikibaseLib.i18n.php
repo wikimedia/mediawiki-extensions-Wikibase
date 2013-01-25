@@ -31,15 +31,26 @@ $messages['en'] = array(
 
 /** Message documentation (Message documentation)
  * @author Nemo bis
+ * @author Raymond
  * @author Shirayuki
  * @author Waldir
  */
 $messages['qqq'] = array(
-	'wikibaselib-desc' => '{{desc|name=Wikibase Lib|url=http://www.mediawiki.org/wiki/Extension:WikibaseLib}}',
-	'wikibaselib-entity-item' => "How we refer to entities of type item. See also Wikidata's glossary on [[m:Wikidata/Glossary#item|item]].",
-	'wikibaselib-entity-property' => 'How we refer to entities of type property. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
-	'wikibaselib-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
-	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.',
+	'wikibase-lib-desc' => '{{desc|name=Wikibase Lib|url=http://www.mediawiki.org/wiki/Extension:WikibaseLib}}',
+	'wikibase-entity-item' => "How we refer to entities of type item. See also Wikidata's glossary on [[m:Wikidata/Glossary#item|item]].
+{{Identical|Item}}",
+	'wikibase-entity-property' => 'How we refer to entities of type property. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].
+{{Identical|Property}}',
+	'wikibase-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].
+{{Identical|Query}}',
+	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
+Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#Item|item]].',
+	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.
+{{Identical|Language}}',
+	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.',
+	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (Wikipedia) page.',
+	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
+{{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
 );
 
@@ -358,10 +369,12 @@ $messages['ko'] = array(
  * @author Purodha
  */
 $messages['ksh'] = array(
-	'wikibaselib-desc' => 'Jemeinsamme Fungxjuhne för di Projramm-Zohsäz <i lang="en">Wikibase</i> un <i lang="en">Wikibase Client</i>.',
-	'wikibaselib-entity-item' => 'Jäjeschtand',
-	'wikibaselib-entity-property' => 'Eijeschaff',
-	'wikibaselib-entity-query' => 'Frooch',
+	'wikibase-lib-desc' => 'Jemeinsamme Fungxjuhne för di Projramm-Zohsäz <i lang="en">Wikibase</i> un <i lang="en">Wikibase Client</i>.',
+	'wikibase-entity-item' => 'Jäjeschtand',
+	'wikibase-entity-property' => 'Eijeschaff',
+	'wikibase-entity-query' => 'Frooch',
+	'wikibase-sitelinks-sitename-columnheading' => 'Schprooch',
+	'wikibase-sitelinks-siteid-columnheading' => 'Köözel',
 	'datatypes-type-wikibase-item' => 'Jäjeschtand',
 	'datatypes-type-commonsMedia' => 'Meedijedattei vun Wikkimeedija Commons',
 );
@@ -493,6 +506,17 @@ $messages['pt-br'] = array(
 	'wikibaselib-entity-query' => 'consulta',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Arquivo de mídia do Commons',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'wikibase-entity-item' => 'vôsce',
+	'wikibase-entity-property' => 'probbietà',
+	'wikibase-sitelinks-sitename-columnheading' => 'Lènghe',
+	'wikibase-sitelinks-siteid-columnheading' => 'Codece',
+	'datatypes-type-wikibase-item' => 'Vôsce',
 );
 
 /** Russian (русский)

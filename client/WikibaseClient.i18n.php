@@ -39,26 +39,28 @@ $messages['en'] = array(
 /** Message documentation (Message documentation)
  * @author Jeblad
  * @author Katie Filbert
+ * @author Raymond
  * @author Shirayuki
  */
 $messages['qqq'] = array(
-	'wbc-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
+	'wikibase-client-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
 See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
-	'wbc-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfuly move, inviting user to update associated Wikibase repo item to maintain language links on the moved page on the client.
+	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfuly move, inviting user to update associated Wikibase repo item to maintain language links on the moved page on the client.
 * Parameter $1 is the link for the associated Wikibase item.',
-	'wbc-comment-remove' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item connected to a page gets deleted. This results in all the language links being removed from the page on the client.',
-	'wbc-comment-linked' => 'Autocomment message in the client for when a Wikidata item is linked to a page in the client.',
-	'wbc-comment-unlink' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a site link to a page gets removed. This results in the associated item being disconnected from the client page and all the language links being removed.',
-	'wbc-comment-restore' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item gets undeleted and has a site link to this page. Language links get readded to the client page.',
-	'wbc-comment-update' => 'Autocomment message for client (e.g. Wikipedia) recent changes when site links for a linked Wikidata item get changed. This results in language links being updated on the client page.',
-	'wbc-comment-sitelink-add' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets added on the repository. This change appears on the client as a new language link in the sidebar. $1 is the wikilink that was added, in form of [[:de:Berlin|de:Berlin]].',
-	'wbc-comment-sitelink-change' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets changed on the repository.  $1 is the wikilink for the old link and $2 is the new wikilink.  Format of wikilink is [[:de:Berlin|de:Berlin]].',
-	'wbc-comment-sitelink-remove' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets removed on the repository.  $1 is the wikilink for the link removed, in format [[:de:Berlin|de:Berlin]].',
-	'wbc-comment-multi' => 'Summary shown in Special:RecentChanges and on Special:WatchList for an entry that represents multiple changes on the Wikibase repository. $1 is the number of changes; $1 is always at least 2.',
-	'wbc-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
+	'wikibase-comment-remove' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item connected to a page gets deleted. This results in all the language links being removed from the page on the client.',
+	'wikibase-comment-linked' => 'Autocomment message in the client for when a Wikidata item is linked to a page in the client.',
+	'wikibase-comment-unlink' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a site link to a page gets removed. This results in the associated item being disconnected from the client page and all the language links being removed.',
+	'wikibase-comment-restore' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item gets undeleted and has a site link to this page. Language links get readded to the client page.',
+	'wikibase-comment-update' => 'Autocomment message for client (e.g. Wikipedia) recent changes when site links for a linked Wikidata item get changed. This results in language links being updated on the client page.',
+	'wikibase-comment-sitelink-add' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets added on the repository. This change appears on the client as a new language link in the sidebar. $1 is the wikilink that was added, in form of [[:de:Berlin|de:Berlin]].',
+	'wikibase-comment-sitelink-change' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets changed on the repository.  $1 is the wikilink for the old link and $2 is the new wikilink.  Format of wikilink is [[:de:Berlin|de:Berlin]].',
+	'wikibase-comment-sitelink-remove' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets removed on the repository.  $1 is the wikilink for the link removed, in format [[:de:Berlin|de:Berlin]].',
+	'wikibase-comment-multi' => 'Summary shown in Special:RecentChanges and on Special:WatchList for an entry that represents multiple changes on the Wikibase repository. Parameters:
+* $1 - the number of changes; is always at least 2.',
+	'wikibase-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.',
-	'wbc-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizzard to edit interlanguage links.',
-	'wbc-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
+	'wikibase-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizard to edit interlanguage links.',
+	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
 * Parameter $1 is a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
 );
 
@@ -265,20 +267,21 @@ $messages['fa'] = array(
  * @author VezonThunder
  */
 $messages['fi'] = array(
-	'wbc-desc' => 'Wikibase-laajennuksen asiakasohjelma',
-	'wbc-after-page-move' => 'Voit myös [$1 päivittää] sivuun liittyvän Wikidatan kohteen säilyttääksesi kielilinkit siirretyllä sivulla.',
-	'wbc-comment-remove' => 'Sivuun liittyvä Wikidata-kohde poistettu. Kielilinkit poistettu.',
-	'wbc-comment-linked' => 'Wikidata-kohde linkitettiin tähän sivuun.',
-	'wbc-comment-unlink' => 'Tämä sivu ei ole enää liitettynä Wikidata-kohteeseen. Kielilinkit poistettu.',
-	'wbc-comment-restore' => 'Sivuun liittyvä Wikidata-kohde palautettu. Kielilinkit palautettu.',
-	'wbc-comment-update' => 'Kielilinkit päivitetty.',
-	'wbc-comment-sitelink-add' => 'Kielilinkki lisätty: $1',
-	'wbc-comment-sitelink-change' => 'Kielilinkki $1 muutettu muotoon $2',
-	'wbc-comment-sitelink-remove' => 'Kielilinkki poistettu: $1',
-	'wbc-editlinks' => 'Muokkaa linkkejä',
-	'wbc-editlinkstitle' => 'Muokkaa kieltenvälisiä linkkejä',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
+	'wikibase-client-desc' => 'Wikibase-laajennuksen asiakasohjelma',
+	'wikibase-after-page-move' => 'Voit myös [$1 päivittää] sivuun liittyvän Wikidatan kohteen säilyttääksesi kielilinkit siirretyllä sivulla.',
+	'wikibase-comment-remove' => 'Sivuun liittyvä Wikidata-kohde poistettu. Kielilinkit poistettu.',
+	'wikibase-comment-linked' => 'Wikidata-kohde liitettiin tähän sivuun.',
+	'wikibase-comment-unlink' => 'Tämä sivu ei ole enää liitettynä Wikidata-kohteeseen. Kielilinkit poistettu.',
+	'wikibase-comment-restore' => 'Sivuun liittyvä Wikidata-kohde palautettu. Kielilinkit palautettu.',
+	'wikibase-comment-update' => 'Kielilinkit päivitetty.',
+	'wikibase-comment-sitelink-add' => 'Kielilinkki lisätty: $1',
+	'wikibase-comment-sitelink-change' => 'Kielilinkki $1 muutettu muotoon $2',
+	'wikibase-comment-sitelink-remove' => 'Kielilinkki poistettu: $1',
+	'wikibase-comment-multi' => '$1 muutosta',
+	'wikibase-editlinks' => 'Muokkaa linkkejä',
+	'wikibase-editlinkstitle' => 'Muokkaa kieltenvälisiä linkkejä',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
 );
 
 /** French (français)
@@ -745,20 +748,21 @@ $messages['pt'] = array(
  * @author Tuliouel
  */
 $messages['pt-br'] = array(
-	'wbc-desc' => 'Cliente para a extensão Wikibase',
-	'wbc-after-page-move' => 'Você também pode [$1 atualizar] o item associado ao Wikidata para manter os links de idioma na página movida.',
-	'wbc-comment-remove' => 'O item associado no Wikidata foi eliminado. Os links para os outros idiomas foram removidos.',
-	'wbc-comment-linked' => 'Um item do Wikidata foi associado a esta página.',
-	'wbc-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para os outros idiomas foram removidos.',
-	'wbc-comment-restore' => 'O item associado no Wikidata foi restaurado. Os links para os outros idiomas foram restaurados.',
-	'wbc-comment-update' => 'Os links para outros idiomas foram atualizados.',
-	'wbc-comment-sitelink-add' => 'Link de idioma adicionado: $1',
-	'wbc-comment-sitelink-change' => 'Link de idioma alterado de $1 para $2',
-	'wbc-comment-sitelink-remove' => 'Link de idioma removido: $1',
-	'wbc-editlinks' => 'Editar links',
-	'wbc-editlinkstitle' => 'Editar links para outros idiomas',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Mostrar as edições do Wikidata nas mudanças recentes',
+	'wikibase-client-desc' => 'Cliente para a extensão Wikibase',
+	'wikibase-after-page-move' => 'Você também pode [$1 atualizar] o item associado ao Wikidata para manter os links de idioma na página movida.',
+	'wikibase-comment-remove' => 'O item associado no Wikidata foi eliminado. Os links para os outros idiomas foram removidos.',
+	'wikibase-comment-linked' => 'Um item do Wikidata foi associado a esta página.',
+	'wikibase-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para os outros idiomas foram removidos.',
+	'wikibase-comment-restore' => 'O item associado no Wikidata foi restaurado. Os links para os outros idiomas foram restaurados.',
+	'wikibase-comment-update' => 'Os links para outros idiomas foram atualizados.',
+	'wikibase-comment-sitelink-add' => 'Link de idioma adicionado: $1',
+	'wikibase-comment-sitelink-change' => 'Link de idioma alterado de $1 para $2',
+	'wikibase-comment-sitelink-remove' => 'Link de idioma removido: $1',
+	'wikibase-comment-multi' => '$1 alterações',
+	'wikibase-editlinks' => 'Editar links',
+	'wikibase-editlinkstitle' => 'Editar links para outros idiomas',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Mostrar as edições do Wikidata nas mudanças recentes',
 );
 
 /** Romanian (română)
