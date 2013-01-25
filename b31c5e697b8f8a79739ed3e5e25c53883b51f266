@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "AAADiH//9E0\u003d",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-01-25T11:09:15Z",
+      "side": 1,
+      "message": "I think we made a decision, but it is not formalized. It is in the glossary, but we don\u0027t use the glossary for the code. And we are not even consistent in the glossary, thats my fault.",
+      "parentUuid": "AAADiH//9GE\u003d",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//9GM\u003d",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 1
