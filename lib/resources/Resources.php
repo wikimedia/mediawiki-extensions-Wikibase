@@ -328,15 +328,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'jquery.eachchange' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery/jquery.eachchange.js'
-			),
-			'dependencies' => array(
-				'jquery.client'
-			)
-		),
-
 		'jquery.inputAutoExpand' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.inputAutoExpand.js',
