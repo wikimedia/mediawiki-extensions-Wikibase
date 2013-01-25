@@ -67,7 +67,7 @@ final class TestChanges {
 			'revision_id' => 452,
 			'user_id' => 0,
 			'info' => array(
-				'entity' => self::getItem(),
+				//NOTE: we no longer put Entity objects into the change, they are just too big.
 				'metadata' => array(
 					'rc_user' => 0,
 					'rc_user_text' => '208.80.152.201'

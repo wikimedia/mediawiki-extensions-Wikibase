@@ -28,14 +28,25 @@ use Diff\MapDiffer;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group Database
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseChange
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-class DiffChangeTest extends \MediaWikiTestCase {
+class DiffChangeTest extends ChangeRowTest {
+
+	/**
+	 * @see ORMRowTest::getRowClass
+	 * @since 0.4
+	 * @return string
+	 */
+	protected function getRowClass() {
+		return '\Wikibase\DiffChange';
+	}
 
 	public function diffProvider() {
 		$differ = new MapDiffer();
@@ -46,6 +57,23 @@ class DiffChangeTest extends \MediaWikiTestCase {
 			array( new Diff( $differ->doDiff( array( 'en' => 'bar' ), array( 'en' => 'foo' ) ), true ) ),
 			array( new Diff( $differ->doDiff( array( 'en' => 'bar' ), array( 'de' => 'bar' ) ), true ) ),
 		);
+	}
+
+	public function constructorTestProvider() {
+		$data = TestChanges::getChange();
+
+		$diffCases = $this->diffProvider();
+		$cases = array();
+
+		foreach ( $diffCases as $diffCase ) {
+			$case = $data;
+			$diff = $diffCase[0];
+			$case['info']['diff'] = $diff;
+
+			$cases[] = array( $case, true );
+		}
+
+		return $cases;
 	}
 
 	/**

@@ -2,6 +2,9 @@
 
 namespace Wikibase\Test;
 use \Wikibase\ChangesTable;
+use \Wikibase\ChangeRow;
+use \Wikibase\Settings;
+
 
 /**
  * Tests for the Wikibase\ChangeRow class.
@@ -35,8 +38,21 @@ use \Wikibase\ChangesTable;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class ChangeRowTest extends \ORMRowTest {
+
+	/**
+	 * @since 1.20
+	 * @return array
+	 */
+	protected function getMockValues() {
+		$values = parent::getMockValues();
+
+		// register special "data" type
+		$values['data'] = array( "foo", 'bar' );
+		return $values;
+	}
 
 	/**
 	 * @see ORMRowTest::getRowClass
@@ -108,6 +124,38 @@ class ChangeRowTest extends \ORMRowTest {
 		} else {
 			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
 		}
+	}
+
+	public function provideSaveAndLoad() {
+		$instanceCases = $this->instanceProvider();
+		$cases = array();
+
+		foreach ( $instanceCases as $case ) {
+			$cases[] = array( $case[0], true );
+			$cases[] = array( $case[0], false );
+		}
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider provideSaveAndLoad
+	 */
+	public function testSaveAndLoad( ChangeRow $changeRow, $json = false ) {
+		Settings::singleton()->offsetSet( "changesAsJson", $json );
+		$this->assertEquals( $json, Settings::get( "changesAsJson" ) ); // sanity
+
+		$changeRow->save();
+		$id = $changeRow->getId();
+
+		/* @var ChangesTable $table */
+		$table = $this->getTableInstance();
+		$rows = $table->selectObjects( null, array( 'id' => $id ) );
+
+		$this->assertEquals( 1, count( $rows ), "Expected exactly one object with the given ID" );
+		$loadedRow = reset( $rows );
+
+		$this->verifyFields( $loadedRow, $changeRow->getFields() );
 	}
 
 }
