@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Diff\IDiff;
+use Diff\Diff;
 
 /**
  * Class for changes that can be represented as a IDiff.
@@ -97,4 +98,107 @@ class DiffChange extends ChangeRow {
 		return true;
 	}
 
+	/**
+	 * @see ChangeRow::serializeInfo()
+	 *
+	 * Overwritten to use the array representation of the diff.
+	 *
+	 * @since 0.4
+	 * @param array $info
+	 * @return string
+	 */
+	protected function serializeInfo( array $info ) {
+		if ( isset( $info['diff'] ) && $info['diff'] instanceof \Diff\DiffOp ) {
+			$info['diff'] = $this->diffToArray( $info['diff'] );
+		}
+
+		return parent::serializeInfo( $info );
+	}
+
+	/**
+	 * @see ChangeRow::unserializeInfo()
+	 *
+	 * Overwritten to use the array representation of the diff.
+	 *
+	 * @since 0.4
+	 * @param string $str
+	 * @return array the info array
+	 */
+	protected function unserializeInfo( $str ) {
+		$info = parent::unserializeInfo( $str );
+
+		if ( isset( $info['diff'] ) && is_array( $info['diff'] ) ) {
+			$info['diff'] = $this->arrayToDiff( $info['diff'] );
+		}
+
+		return $info;
+	}
+
+	/**
+	 * Converts a Diff object into its array representation.
+	 * May be overwritten by subclasses to provide special handling.
+	 *
+	 * @since 0.4
+	 * @param \Diff\DiffOp $diff
+	 * @return array
+	 */
+	protected function diffToArray( \Diff\DiffOp $diff ) {
+		return $diff->toArray();
+	}
+
+	/**
+	 * Converts an array structure into a Diff object.
+	 * May be overwritten by subclasses to provide special handling.
+	 *
+	 * @since 0.4
+	 * @param array $data
+	 * @return mixed
+	 */
+	protected function arrayToDiff( array $data ) {
+		static $factory = null;
+
+		if ( $factory == null ) {
+			$factory = new WikibaseDiffOpFactory();
+		}
+
+		return $factory->newFromArray( $data );
+	}
+}
+
+class WikibaseDiffOpFactory extends \Diff\DiffOpFactory {
+	public function newFromArray( array $diffOp ) {
+		$this->assertHasKey( 'type', $diffOp );
+
+		// see EntityDiff::getType() and ItemDiff::getType()
+		if ( preg_match( '!^diff/(.*)$!', $diffOp['type'], $matches ) ) {
+			$itemType = $matches[1];
+			$this->assertHasKey( 'operations', $diffOp );
+
+			$operations = $this->createOperations( $diffOp['operations'] );
+			$diff = EntityDiff::newForType( $itemType, $operations );
+
+			return $diff;
+		}
+
+		return parent::newFromArray( $diffOp );
+	}
+
+	/**
+	 * Converts a list of diff operations represented by arrays into a list of
+	 * DiffOp objects.
+	 *
+	 * @todo: pull this up into DiffOpFactory
+	 *
+	 * @param array $data the input data
+	 * @return \Diff\DiffOp[] The diff ops
+	 */
+	protected function createOperations( array $data ) {
+		$operations = array();
+
+		foreach ( $data as $key => $operation ) {
+			$operations[$key] = $this->newFromArray( $operation );
+		}
+
+		return $operations;
+	}
 }

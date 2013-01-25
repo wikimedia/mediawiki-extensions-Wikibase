@@ -354,4 +354,89 @@ class EntityChange extends DiffChange {
 		$s .= preg_replace( '/\s+/s', ' ', var_export( $fields, true ) );
 		return $s;
 	}
+
+	/**
+	 * Converts a Diff object into its array representation.
+	 * May be overwritten by subclasses to provide special handling.
+	 *
+	 * @since 0.4
+	 * @param \Diff\DiffOp $diff
+	 * @return array
+	 */
+	protected function diffToArray( \Diff\DiffOp $diff ) {
+		$data = parent::diffToArray( $diff );
+
+		Arrayalizer::arrayalize( 'Wikibase\EntityChange::arrayalizeClaim', $data );
+
+		return $data;
+	}
+
+	/**
+	 * Converts an array structure into a Diff object.
+	 * May be overwritten by subclasses to provide special handling.
+	 *
+	 * @since 0.4
+	 * @param array $data
+	 * @return mixed
+	 */
+	protected function arrayToDiff( array $data ) {
+		Arrayalizer::objectify( 'Wikibase\EntityChange::objectifyClaim', $data );
+
+		return parent::arrayToDiff( $data );
+	}
+
+	/**
+	 * Callback function for turning a Claim object into an array representation
+	 * via the Arrayalizer.
+	 *
+	 * @see Arrayalizer::arrayalize()
+	 * @since 0.4
+	 *
+	 * @param mixed &$data The data to convert.
+	 *        This is passed as a reference only for performance, and is not modified
+	 *        if $data is not a Claim object.
+	 *
+	 * @return mixed The resulting data. Will be an array if $data is a Claim object,
+	 *         or $data unchanged otherwise.
+	 */
+	public static function arrayalizeClaim( &$data ) {
+		if ( $data instanceof Claim ) {
+			$a = $data->toArray();
+			$a['_claimclass_'] = get_class( $data );
+
+			return $a;
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Callback function for turning an array structure into a Claim object
+	 * via the Arrayalizer.
+	 *
+	 * @see Arrayalizer::objectify()
+	 * @since 0.4
+	 *
+	 * @param array &$data The array structure to objectify.
+	 *        This is passed as a reference only for performance, and is not modified
+	 *        if $data does not represent a Claim.
+	 * @param null|int|string $role Context (unused)
+	 *
+	 * @return array|object A Claim object if $data represents a claim, or $data
+	 *         unchanged otherwise.
+	 */
+	public static function objectifyClaim( &$data, $role = null ) {
+		if ( is_array( $data ) && isset( $data['_claimclass_'] ) ) {
+			$class = $data['_claimclass_'];
+
+			if ( $class === 'Wikibase\Claim' || is_subclass_of( $class, 'Wikibase\Claim' ) ) {
+				unset( $data['_claimclass_'] );
+
+				$claim = call_user_func( array( $class, 'newFromArray' ), $data );
+				return $claim;
+			}
+		}
+
+		return $data;
+	}
 }
