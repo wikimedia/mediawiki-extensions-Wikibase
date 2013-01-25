@@ -174,7 +174,7 @@ class SnakListTest extends HashArrayTest {
 		$this->assertInternalType( 'array', $array, 'toArray should return array' );
 
 		foreach ( array( $array, unserialize( $serialization ) ) as $data ) {
-			$copy = \Wikibase\SnakObject::newFromArray( $data );
+			$copy = SnakList::newFromArray( $data );
 
 			$this->assertInstanceOf( '\Wikibase\Snaks', $copy, 'newFromArray should return object implementing Snaks' );
 
