@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "AAADiH//89c\u003d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-25T14:19:00Z",
+      "side": 1,
+      "message": "We are using them here. If you have a problem with that, mail to the list, create a bug, or make a commit removing them all.\n\nDiscouraging contributors from being consistent with the existing code is at least in this case not a good idea.",
+      "parentUuid": "AAADiH//9GI\u003d",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH///ZM\u003d",
         "filename": "repo/includes/specials/SpecialItemsWithoutSiteLink.php",
         "patchSetId": 1
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Are you talking about EntityContentFactory::getTitleForId or Linker::linkKnown (that use RepoHook::onLinkBegin)?",
       "parentUuid": "AAADiH///ZM\u003d",
+      "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//89Y\u003d",
+        "filename": "repo/includes/specials/SpecialItemsWithoutSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-01-25T14:19:00Z",
+      "side": 1,
+      "message": "getTitleForId\n\nthough looking at it closer I realize this does not actually cause queries. Consider this point dropped :)",
+      "parentUuid": "AAADiH///WM\u003d",
       "revId": "b31c5e697b8f8a79739ed3e5e25c53883b51f266",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
