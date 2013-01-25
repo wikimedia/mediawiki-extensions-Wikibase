@@ -354,4 +354,54 @@ class EntityChange extends DiffChange {
 		$s .= preg_replace( '/\s+/s', ' ', var_export( $fields, true ) );
 		return $s;
 	}
+
+	/**
+	 * @see DiffChange::arrayalizeObjects
+	 *
+	 * Overwritten to handle Claim objects.
+	 *
+	 * @since 0.4
+	 *
+	 * @param mixed $data
+	 * @return mixed
+	 */
+	public function arrayalizeObjects( $data ) {
+		$data = parent::arrayalizeObjects( $data );
+
+		if ( $data instanceof Claim ) {
+			$a = $data->toArray();
+			$a['_claimclass_'] = get_class( $data );
+
+			return $a;
+		}
+
+		return $data;
+	}
+
+	/**
+	 * @see DiffChange::objectifyArrays
+	 *
+	 * Overwritten to handle Claim objects.
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $data
+	 * @return mixed
+	 */
+	public function objectifyArrays( array $data ) {
+		$data = parent::objectifyArrays( $data );
+
+		if ( is_array( $data ) && isset( $data['_claimclass_'] ) ) {
+			$class = $data['_claimclass_'];
+
+			if ( $class === 'Wikibase\Claim' || is_subclass_of( $class, 'Wikibase\Claim' ) ) {
+				unset( $data['_claimclass_'] );
+
+				$claim = call_user_func( array( $class, 'newFromArray' ), $data );
+				return $claim;
+			}
+		}
+
+		return $data;
+	}
 }
