@@ -56,6 +56,29 @@ class ChangesTableTest extends \MediaWikiTestCase {
 
 		$this->setMwGlobals( 'wgUser', self::$user );
 
+		// Check that we can save and retrieve diffs.
+		$diff1 = new\Wikibase\ItemDiff(
+			array(
+				'label' => new \Diff\Diff(
+					array(
+						"en" => new \Diff\DiffOpChange( "OLD", "NEW" ),
+					)
+				)
+			)
+		);
+
+		// Make sure we can save and retrieve complex diff structures,
+		// even if they contain objects as values.
+		$diff2 = new\Wikibase\ItemDiff(
+			array(
+				'claim' => new \Diff\Diff(
+					array(
+						new \Diff\DiffOpAdd( new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 77 ) ) ),
+					)
+				)
+			)
+		);
+
 		return array(
 			array(
 				array(
@@ -65,8 +88,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 					'revision_id' => 9001,
 					'object_id' => $id->getPrefixedId(),
 					'info' => array(
-						'entity' => \Wikibase\Item::newEmpty(),
-						'diff' => new \Wikibase\ItemDiff(),
+						'diff' => $diff1,
 					)
 				),
 				true
@@ -74,13 +96,12 @@ class ChangesTableTest extends \MediaWikiTestCase {
 			array(
 				array(
 					'type' => 'wikibase-item~update',
-					'time' => '20120101000000',
+					'time' => '20120101000005',
 					'user_id' => $wgUser->getId(),
-					'revision_id' => 9001,
+					'revision_id' => 9002,
 					'object_id' => $id->getPrefixedId(),
 					'info' => array(
-						'entity' => \Wikibase\Item::newEmpty(),
-						'diff' => new \Wikibase\ItemDiff,
+						'diff' => $diff2,
 					)
 				),
 				true
@@ -130,6 +151,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 
 		$obtainedChange = $changesTable->selectRow( null, array( 'id' => $id ) );
 		$this->assertTrue( $obtainedChange !== false, 'Change could not be loaded via ORMTable!' );
+		$this->assertEquals( $change, $obtainedChange, 'round trip' );
 
 		$this->assertEquals( 1, $changesTable->count( array( 'id' => $id ) ) );
 
