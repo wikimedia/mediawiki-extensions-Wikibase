@@ -523,6 +523,7 @@ final class ClientHooks {
 		// only run this once, for the article content and not interface stuff
 		//FIXME: this also runs for messages in EditPage::showEditTools! Ugh!
 		if ( $parser->getOptions()->getInterfaceMessage() ) {
+			wfProfileOut( __METHOD__ );
 			return true;
 		}
 

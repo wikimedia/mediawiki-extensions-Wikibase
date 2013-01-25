@@ -74,6 +74,7 @@ class LangLinkHandler {
 	 * @return SiteLink[]
 	 */
 	public function getEntityLinks( Title $title ) {
+		wfProfileIn( __METHOD__ );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking for sitelinks defined by the corresponding item on the wikibase repo." );
 
 		$itemId = $this->siteLinksLookup->getItemIdForLink(
@@ -93,6 +94,8 @@ class LangLinkHandler {
 		}
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Found " . count( $links ) . " links." );
+		wfProfileOut( __METHOD__ );
+
 		return $links;
 	}
 
@@ -110,15 +113,20 @@ class LangLinkHandler {
 	 * @return boolean
 	 */
 	public function useRepoLinks( Title $title, ParserOutput $out ) {
+		wfProfileIn( __METHOD__ );
+
 		// use repoLinks in only the namespaces specified in settings
 		if ( in_array( $title->getNamespace(), $this->namespaces ) ) {
 			$nel = self::getNoExternalLangLinks( $out );
 
 			if( in_array( '*', $nel ) ) {
+				wfProfileOut( __METHOD__ );
 				return false;
 			}
+			wfProfileOut( __METHOD__ );
 			return true;
 		}
+		wfProfileOut( __METHOD__ );
 		return false;
 	}
 
@@ -141,6 +149,8 @@ class LangLinkHandler {
 	 *         entries removed.
 	 */
 	public function suppressRepoLinks( ParserOutput $out, $repoLinks ) {
+		wfProfileIn( __METHOD__ );
+
 		$nel = self::getNoExternalLangLinks( $out );
 
 		foreach ( $nel as $code ) {
@@ -156,6 +166,7 @@ class LangLinkHandler {
 
 		unset( $repoLinks[$this->siteId] ); // remove self-link
 
+		wfProfileOut( __METHOD__ );
 		return $repoLinks;
 	}
 
@@ -169,6 +180,7 @@ class LangLinkHandler {
 	 *         Empty if {{#noexternallanglinks}} was not used on the page.
 	 */
 	public static function getNoExternalLangLinks( ParserOutput $out ) {
+		wfProfileIn( __METHOD__ );
 		$nel = $out->getProperty( 'noexternallanglinks' );
 
 		if( empty( $nel ) ) {
@@ -177,6 +189,7 @@ class LangLinkHandler {
 			$nel = unserialize( $nel );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $nel;
 	}
 
@@ -190,7 +203,9 @@ class LangLinkHandler {
 	 * @param array $noexternallanglinks a list of languages to suppress
 	 */
 	public static function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
+		wfProfileIn( __METHOD__ );
 		$out->setProperty( 'noexternallanglinks', serialize( $noexternallanglinks )  );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -205,6 +220,8 @@ class LangLinkHandler {
 	 * @return bool|Site The site with the given navigational ID, or false if not found.
 	 */
 	protected function getSiteByNavigationId( $id ) {
+		wfProfileIn( __METHOD__ );
+
 		//FIXME: this needs to be moved into core, into SiteList resp. SiteArray!
 		if ( $this->sitesByNavigationId === null ) {
 			$this->sitesByNavigationId = array();
@@ -219,6 +236,7 @@ class LangLinkHandler {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return isset( $this->sitesByNavigationId[$id] ) ? $this->sitesByNavigationId[$id] : false;
 	}
 
@@ -234,6 +252,8 @@ class LangLinkHandler {
 	 *           and the target pages on the respective wiki as the associated value.
 	 */
 	protected function localLinksToArray( array $flatLinks ) {
+		wfProfileIn( __METHOD__ );
+
 		$links = array();
 
 		foreach ( $flatLinks as $s ) {
@@ -254,6 +274,7 @@ class LangLinkHandler {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $links;
 	}
 
@@ -269,6 +290,8 @@ class LangLinkHandler {
 	 *         and the target pages on the respective wiki as the associated value.
 	 */
 	protected function repoLinksToArray( array $repoLinks ) {
+		wfProfileIn( __METHOD__ );
+
 		$links = array();
 
 		/* @var SiteLink $link */
@@ -279,6 +302,7 @@ class LangLinkHandler {
 			$links[$wiki] = $page;
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $links;
 	}
 
@@ -300,7 +324,10 @@ class LangLinkHandler {
 	 *         and the target pages in the respective languages as the associated value.
 	 */
 	public function getEffectiveRepoLinks( Title $title, ParserOutput $out ) {
+		wfProfileIn( __METHOD__ );
+
 		if ( !$this->useRepoLinks( $title, $out ) ) {
+			wfProfileOut( __METHOD__ );
 			return array();
 		}
 
@@ -313,6 +340,7 @@ class LangLinkHandler {
 
 		$repoLinks = array_diff_key( $repoLinks, $onPageLinks ); // remove local links
 
+		wfProfileOut( __METHOD__ );
 		return $repoLinks;
 	}
 
@@ -329,6 +357,8 @@ class LangLinkHandler {
 	 * @param \ParserOutput $out   Parsed representation of the page
 	 */
 	public function addLinksFromRepository( Title $title, ParserOutput $out ) {
+		wfProfileIn( __METHOD__ );
+
 		$repoLinks = $this->getEffectiveRepoLinks( $title, $out );
 
 		foreach ( $repoLinks as $wiki => $page ) {
@@ -346,5 +376,7 @@ class LangLinkHandler {
 				wfWarn( "No interlanguage prefix found for $wiki." );
 			}
 		}
+
+		wfProfileOut( __METHOD__ );
 	}
 }
