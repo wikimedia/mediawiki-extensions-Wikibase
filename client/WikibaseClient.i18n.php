@@ -68,50 +68,46 @@ See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
  * @author Xuacu
  */
 $messages['ast'] = array(
-	'wbc-desc' => 'Cliente pa la estensión Wikibase',
-	'wbc-editlinks' => 'Editar los enllaces',
-	'wbc-editlinkstitle' => "Editar los enllaces d'interllingua",
+	'wikibase-client-desc' => 'Cliente pa la estensión Wikibase',
+	'wikibase-editlinks' => 'Editar los enllaces',
+	'wikibase-editlinkstitle' => "Editar los enllaces d'interllingua",
 );
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
-	'wbc-desc' => 'Кліент пашырэньня Wikibase',
-	'wbc-comment-langlinks-delete' => 'Злучаны аб’ект Вікізьвестак выдалены. Будуць выдаленыя моўныя спасылкі.',
-	'wbc-comment-langlinks-remove' => 'Гэтая старонка была адлучаная да аб’екту Вікізьвестак. Моўныя спасылкі выдаленыя',
-	'wbc-comment-langlinks-restore' => 'Злучаны аб’ект Вікізьвестак адноўлены. Будуць адноўленыя моўныя спасылкі',
-	'wbc-comment-langlinks-update' => 'Моўныя спасылкі абноўленыя',
-	'wbc-editlinks' => 'Рэдагаваць спасылкі',
-	'wbc-editlinkstitle' => 'Рэдагаваць міжмоўныя спасылкі',
+	'wikibase-client-desc' => 'Кліент пашырэньня Wikibase',
+	'wikibase-editlinks' => 'Рэдагаваць спасылкі',
+	'wikibase-editlinkstitle' => 'Рэдагаваць міжмоўныя спасылкі',
 );
 
 /** Breton (brezhoneg)
  * @author Fulup
  */
 $messages['br'] = array(
-	'wbc-editlinks' => 'Kemmañ al liammoù',
-	'wbc-editlinkstitle' => 'Kemmañ al liammoù etreyezhel',
+	'wikibase-editlinks' => 'Kemmañ al liammoù',
+	'wikibase-editlinkstitle' => 'Kemmañ al liammoù etreyezhel',
 );
 
 /** Bosnian (bosanski)
  * @author Edinwiki
  */
 $messages['bs'] = array(
-	'wbc-desc' => 'Klijent za proširenje Wikibaza',
-	'wbc-after-page-move' => 'Možete također [$1 ažurirati] asociranu Wikidata stavku za održavanje jezičnih veza na premještenoj stranici.',
-	'wbc-comment-remove' => 'Asocirana Wikidata stavka je izbrisana. Jezične veze su uklonjene.',
-	'wbc-comment-linked' => 'Neka Wikidata stavka je povezana prema ovoj stranici.',
-	'wbc-comment-unlink' => 'Ova stranica je odvojena od Wikidata stavke. Jezične veze su uklonjene.',
-	'wbc-comment-restore' => 'Asocirana Wikidata stavka je vraćena. Jezične veze su sada isto vraćene.',
-	'wbc-comment-update' => 'Jezične veze su ažurirane.',
-	'wbc-comment-sitelink-add' => 'Jezična veza dodana: $1',
-	'wbc-comment-sitelink-change' => 'Jezična veza izmjenjena sa $1 u $2',
-	'wbc-comment-sitelink-remove' => 'Jezična veza uklonjena: $1',
-	'wbc-editlinks' => 'Izmjeni veze',
-	'wbc-editlinkstitle' => 'Izmjeni međujezične veze',
-	'wbc-rc-hide-wikidata' => 'Wikidata $1',
-	'wbc-rc-show-wikidata-pref' => 'Pokaži Wikidata izmjene u nedavnim izmjenama',
+	'wikibase-client-desc' => 'Klijent za proširenje Wikibaza',
+	'wikibase-after-page-move' => 'Možete također [$1 ažurirati] asociranu Wikidata stavku za održavanje jezičnih veza na premještenoj stranici.',
+	'wikibase-comment-remove' => 'Asocirana Wikidata stavka je izbrisana. Jezične veze su uklonjene.',
+	'wikibase-comment-linked' => 'Neka Wikidata stavka je povezana prema ovoj stranici.',
+	'wikibase-comment-unlink' => 'Ova stranica je odvojena od Wikidata stavke. Jezične veze su uklonjene.',
+	'wikibase-comment-restore' => 'Asocirana Wikidata stavka je vraćena. Jezične veze su sada isto vraćene.',
+	'wikibase-comment-update' => 'Jezične veze su ažurirane.',
+	'wikibase-comment-sitelink-add' => 'Jezična veza dodana: $1',
+	'wikibase-comment-sitelink-change' => 'Jezična veza izmjenjena sa $1 u $2',
+	'wikibase-comment-sitelink-remove' => 'Jezična veza uklonjena: $1',
+	'wikibase-editlinks' => 'Izmjeni veze',
+	'wikibase-editlinkstitle' => 'Izmjeni međujezične veze',
+	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-show-wikidata-pref' => 'Pokaži Wikidata izmjene u nedavnim izmjenama',
 );
 
 /** Catalan (català)
@@ -121,30 +117,30 @@ $messages['bs'] = array(
  * @author Àlex
  */
 $messages['ca'] = array(
-	'wbc-desc' => "Client per l'extensió Wikibase",
-	'wbc-after-page-move' => "Podeu també [$1 actualitzar] l'element associat de Wikidata per a mantenir els enllaços d'idioma a la pàgina moguda.",
-	'wbc-editlinks' => 'Modifica els enllaços',
-	'wbc-editlinkstitle' => 'Modifica enllaços interlingües',
+	'wikibase-client-desc' => "Client per l'extensió Wikibase",
+	'wikibase-after-page-move' => "Podeu també [$1 actualitzar] l'element associat de Wikidata per a mantenir els enllaços d'idioma a la pàgina moguda.",
+	'wikibase-editlinks' => 'Modifica els enllaços',
+	'wikibase-editlinkstitle' => 'Modifica enllaços interlingües',
 );
 
 /** Czech (česky)
  * @author JAn Dudík
  */
 $messages['cs'] = array(
-	'wbc-desc' => 'Klient pro rozšíření Wikibase',
-	'wbc-after-page-move' => 'Můžete také [ $1  aktualizovat] související položku Wikidat pro údržbu mezijazykových odkazů na přesunuté stránce.',
-	'wbc-comment-remove' => 'Související položka Wikidat odstraněna. Mezijazykové odkazy odstraněny.',
-	'wbc-comment-linked' => 'Položka Wikidat odkazovala na tuto stránku.',
-	'wbc-comment-unlink' => 'Odkaz na tuto stránku byl odstraněn z Wikidat. Mezijazykové odkazy odstraněny.',
-	'wbc-comment-restore' => 'Související položka Wikidat obnovena. Mezijazykové odkazy obnoveny.',
-	'wbc-comment-update' => 'Aktualizovány mezijazykové odkazy.',
-	'wbc-comment-sitelink-add' => 'Přidán mezijazykový odkaz:$1',
-	'wbc-comment-sitelink-change' => 'Změněn mezijazykový odkaz z $1 na $2',
-	'wbc-comment-sitelink-remove' => 'Odstraněn mezijazykový odkaz:$1',
-	'wbc-editlinks' => 'Upravit odkazy',
-	'wbc-editlinkstitle' => 'Editovat mezijazykové odkazy',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Zobrazit změny Wikidat v posledních změnách',
+	'wikibase-client-desc' => 'Klient pro rozšíření Wikibase',
+	'wikibase-after-page-move' => 'Můžete také [ $1  aktualizovat] související položku Wikidat pro údržbu mezijazykových odkazů na přesunuté stránce.',
+	'wikibase-comment-remove' => 'Související položka Wikidat odstraněna. Mezijazykové odkazy odstraněny.',
+	'wikibase-comment-linked' => 'Položka Wikidat odkazovala na tuto stránku.',
+	'wikibase-comment-unlink' => 'Odkaz na tuto stránku byl odstraněn z Wikidat. Mezijazykové odkazy odstraněny.',
+	'wikibase-comment-restore' => 'Související položka Wikidat obnovena. Mezijazykové odkazy obnoveny.',
+	'wikibase-comment-update' => 'Aktualizovány mezijazykové odkazy.',
+	'wikibase-comment-sitelink-add' => 'Přidán mezijazykový odkaz:$1',
+	'wikibase-comment-sitelink-change' => 'Změněn mezijazykový odkaz z $1 na $2',
+	'wikibase-comment-sitelink-remove' => 'Odstraněn mezijazykový odkaz:$1',
+	'wikibase-editlinks' => 'Upravit odkazy',
+	'wikibase-editlinkstitle' => 'Editovat mezijazykové odkazy',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Zobrazit změny Wikidat v posledních změnách',
 );
 
 /** Danish (dansk)
@@ -152,20 +148,20 @@ $messages['cs'] = array(
  * @author Poul G
  */
 $messages['da'] = array(
-	'wbc-desc' => 'Klient til Wikibase udvidelse',
-	'wbc-after-page-move' => 'Du kan også [ $1  opdatere] det tilknyttede Wikidata emne for at bevare sprog-link til den flyttede side.',
-	'wbc-comment-remove' => 'Det tilknyttede Wikidata emne er slettet. Sprog-links fjernet.',
-	'wbc-comment-linked' => 'Et Wikidata emne er blevet knyttet til denne side.',
-	'wbc-comment-unlink' => 'Denne side er ikke længere linket fra et Wikidata emne. Sprog-links fjernet.',
-	'wbc-comment-restore' => 'Det tilknyttede Wikidata emne er genskabt. Sprog-links gendannet.',
-	'wbc-comment-update' => 'Sprog-link opdateret.',
-	'wbc-comment-sitelink-add' => 'Sprog-link tilføjet: $1',
-	'wbc-comment-sitelink-change' => 'Sprog-link ændret fra $1 til $2',
-	'wbc-comment-sitelink-remove' => 'Sprog-link fjernet: $1',
-	'wbc-editlinks' => 'Rediger links',
-	'wbc-editlinkstitle' => 'Rediger sprog-link',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Vis Wikidata redigeringer i de seneste ændringer',
+	'wikibase-client-desc' => 'Klient til Wikibase udvidelse',
+	'wikibase-after-page-move' => 'Du kan også [ $1  opdatere] det tilknyttede Wikidata emne for at bevare sprog-link til den flyttede side.',
+	'wikibase-comment-remove' => 'Det tilknyttede Wikidata emne er slettet. Sprog-links fjernet.',
+	'wikibase-comment-linked' => 'Et Wikidata emne er blevet knyttet til denne side.',
+	'wikibase-comment-unlink' => 'Denne side er ikke længere linket fra et Wikidata emne. Sprog-links fjernet.',
+	'wikibase-comment-restore' => 'Det tilknyttede Wikidata emne er genskabt. Sprog-links gendannet.',
+	'wikibase-comment-update' => 'Sprog-link opdateret.',
+	'wikibase-comment-sitelink-add' => 'Sprog-link tilføjet: $1',
+	'wikibase-comment-sitelink-change' => 'Sprog-link ændret fra $1 til $2',
+	'wikibase-comment-sitelink-remove' => 'Sprog-link fjernet: $1',
+	'wikibase-editlinks' => 'Rediger links',
+	'wikibase-editlinkstitle' => 'Rediger sprog-link',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata redigeringer i de seneste ændringer',
 );
 
 /** German (Deutsch)
@@ -174,57 +170,57 @@ $messages['da'] = array(
  * @author Purodha
  */
 $messages['de'] = array(
-	'wbc-desc' => 'Ermöglicht einen Client für die Erweiterung Wikibase',
-	'wbc-after-page-move' => 'Du kannst auch das zugeordnete Wikidata-Element [$1 aktualisieren], um Sprachlinks von verschobenen Seiten zu verwalten.',
-	'wbc-comment-remove' => 'Zugeordnetes Wikidata-Objekt wurde gelöscht. Sprachlinks wurden entfernt.',
-	'wbc-comment-linked' => 'Ein Wikidata-Objekt wurde mit dieser Seite verknüpft.',
-	'wbc-comment-unlink' => 'Diese Seite wurde vom Wikidata-Objekt entlinkt. Sprachlinks wurden entfernt.',
-	'wbc-comment-restore' => 'Zugeordnetes Wikidata-Objekt wurde wiederhergestellt. Sprachlinks wurden wiederhergestellt.',
-	'wbc-comment-update' => 'Sprachlinks wurden aktualisiert',
-	'wbc-comment-sitelink-add' => 'Sprachlink hinzugefügt: $1',
-	'wbc-comment-sitelink-change' => 'Sprachlink $1 geändert in $2',
-	'wbc-comment-sitelink-remove' => 'Sprachlink entfernt: $1',
-	'wbc-editlinks' => 'Links bearbeiten',
-	'wbc-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
-	'wbc-rc-hide-wikidata' => 'Wikidata $1',
-	'wbc-rc-show-wikidata-pref' => 'Wikidata-Bearbeitungen in den „Letzten Änderungen“ anzeigen',
+	'wikibase-client-desc' => 'Ermöglicht einen Client für die Erweiterung Wikibase',
+	'wikibase-after-page-move' => 'Du kannst auch das zugeordnete Wikidata-Element [$1 aktualisieren], um Sprachlinks von verschobenen Seiten zu verwalten.',
+	'wikibase-comment-remove' => 'Zugeordnetes Wikidata-Objekt wurde gelöscht. Sprachlinks wurden entfernt.',
+	'wikibase-comment-linked' => 'Ein Wikidata-Objekt wurde mit dieser Seite verknüpft.',
+	'wikibase-comment-unlink' => 'Diese Seite wurde vom Wikidata-Objekt entlinkt. Sprachlinks wurden entfernt.',
+	'wikibase-comment-restore' => 'Zugeordnetes Wikidata-Objekt wurde wiederhergestellt. Sprachlinks wurden wiederhergestellt.',
+	'wikibase-comment-update' => 'Sprachlinks wurden aktualisiert',
+	'wikibase-comment-sitelink-add' => 'Sprachlink hinzugefügt: $1',
+	'wikibase-comment-sitelink-change' => 'Sprachlink $1 geändert in $2',
+	'wikibase-comment-sitelink-remove' => 'Sprachlink entfernt: $1',
+	'wikibase-comment-multi' => '$1 Änderungen',
+	'wikibase-editlinks' => 'Links bearbeiten',
+	'wikibase-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
+	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Bearbeitungen in den „Letzten Änderungen“ anzeigen',
 );
 
 /** Zazaki (Zazaki)
  * @author Erdemaslancan
  */
 $messages['diq'] = array(
-	'wbc-comment-langlinks-update' => 'Linka zıwani rocaniyaya',
-	'wbc-editlinks' => 'Gri bıvurnê',
+	'wikibase-editlinks' => 'Gri bıvurnê',
 );
 
 /** Lower Sorbian (dolnoserbski)
  * @author Michawiki
  */
 $messages['dsb'] = array(
-	'wbc-desc' => 'Klient za rozšyrjenje Wikibase',
-	'wbc-editlinks' => 'Wótkaze wobźěłaś',
-	'wbc-editlinkstitle' => 'Mjazyrěcne wótkaze wobźěłaś',
+	'wikibase-client-desc' => 'Klient za rozšyrjenje Wikibase',
+	'wikibase-editlinks' => 'Wótkaze wobźěłaś',
+	'wikibase-editlinkstitle' => 'Mjazyrěcne wótkaze wobźěłaś',
 );
 
 /** Esperanto (Esperanto)
  * @author ArnoLagrange
  */
 $messages['eo'] = array(
-	'wbc-desc' => 'Kliento por la Vikidatuma etendaĵo',
-	'wbc-after-page-move' => 'Vi povas [$1 ĝisdatigi] la ligitan Vikidatuman eron por pluteni la lingvan ligilon al la la movita paĝo.',
-	'wbc-comment-remove' => 'Ligita Vikidatuma ero etis forigita. La lingvaj ligiloj estas forviŝitaj.',
-	'wbc-comment-linked' => 'Vikidatuma ero estis ligita al ĉi tiu paĝo.',
-	'wbc-comment-unlink' => 'Ĉi tiu paĝo estis malligita de la Vikidatuma ero. La lingvaj ligiloj estas forigitaj.',
-	'wbc-comment-restore' => 'Ligita vikidatuma ero estis restarigita. La lingvaj ligiloj ankaŭ estis restarigitaj.',
-	'wbc-comment-update' => 'Lingvaj ligiloj ĝisdatigitaj.',
-	'wbc-comment-sitelink-add' => 'Lingva ligilo aldonita: $1',
-	'wbc-comment-sitelink-change' => 'Lingva ligilo ŝanĝita de $1 al $2',
-	'wbc-comment-sitelink-remove' => 'Lingva ligilo forigita: $1',
-	'wbc-editlinks' => 'Redaktu ligilojn',
-	'wbc-editlinkstitle' => 'Redaktu interlingvajn ligilojn',
-	'wbc-rc-hide-wikidata' => '$1 Vikidatumoj',
-	'wbc-rc-show-wikidata-pref' => 'Montru Vikidatumaj redaktoj en la lastaj ŝanĝoj',
+	'wikibase-client-desc' => 'Kliento por la Vikidatuma etendaĵo',
+	'wikibase-after-page-move' => 'Vi povas [$1 ĝisdatigi] la ligitan Vikidatuman eron por pluteni la lingvan ligilon al la la movita paĝo.',
+	'wikibase-comment-remove' => 'Ligita Vikidatuma ero etis forigita. La lingvaj ligiloj estas forviŝitaj.',
+	'wikibase-comment-linked' => 'Vikidatuma ero estis ligita al ĉi tiu paĝo.',
+	'wikibase-comment-unlink' => 'Ĉi tiu paĝo estis malligita de la Vikidatuma ero. La lingvaj ligiloj estas forigitaj.',
+	'wikibase-comment-restore' => 'Ligita vikidatuma ero estis restarigita. La lingvaj ligiloj ankaŭ estis restarigitaj.',
+	'wikibase-comment-update' => 'Lingvaj ligiloj ĝisdatigitaj.',
+	'wikibase-comment-sitelink-add' => 'Lingva ligilo aldonita: $1',
+	'wikibase-comment-sitelink-change' => 'Lingva ligilo ŝanĝita de $1 al $2',
+	'wikibase-comment-sitelink-remove' => 'Lingva ligilo forigita: $1',
+	'wikibase-editlinks' => 'Redaktu ligilojn',
+	'wikibase-editlinkstitle' => 'Redaktu interlingvajn ligilojn',
+	'wikibase-rc-hide-wikidata' => '$1 Vikidatumoj',
+	'wikibase-rc-show-wikidata-pref' => 'Montru Vikidatumaj redaktoj en la lastaj ŝanĝoj',
 );
 
 /** Spanish (español)
@@ -232,20 +228,20 @@ $messages['eo'] = array(
  * @author Dalton2
  */
 $messages['es'] = array(
-	'wbc-desc' => 'Cliente para la extensión Wikibase',
-	'wbc-after-page-move' => 'También puedes [$1 actualizar] el elemento Wikidata asociado para mantener los vínculos de idioma en la página que se ha movido.',
-	'wbc-comment-remove' => 'Se ha borrado un elemento asociado a Wikidata. Se han eliminado los enlaces lingüísticos.',
-	'wbc-comment-linked' => 'Un artículo de Wikidata ha sido enlazado a esta página.',
-	'wbc-comment-unlink' => 'Esta página ha sido desenlazada de un elemento de Wikidata. Se han eliminado los enlaces lingüísticos.',
-	'wbc-comment-restore' => 'Se ha restaurado un elemento asociado a Wikidata. Se han restaurado los enlaces de idioma.',
-	'wbc-comment-update' => 'Los enlaces de idioma se han actualizado.',
-	'wbc-comment-sitelink-add' => 'Se ha añadido un enlace de idioma: $1',
-	'wbc-comment-sitelink-change' => 'Se ha cambiado el enlace de idioma de $1 a $2',
-	'wbc-comment-sitelink-remove' => 'Se ha eliminado el enlace de idioma: $1',
-	'wbc-editlinks' => 'Editar los enlaces',
-	'wbc-editlinkstitle' => 'Editar enlaces de interlengua',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Mostrar las ediciones Wikidata en la lista de cambios recientes',
+	'wikibase-client-desc' => 'Cliente para la extensión Wikibase',
+	'wikibase-after-page-move' => 'También puedes [$1 actualizar] el elemento Wikidata asociado para mantener los vínculos de idioma en la página que se ha movido.',
+	'wikibase-comment-remove' => 'Se ha borrado un elemento asociado a Wikidata. Se han eliminado los enlaces lingüísticos.',
+	'wikibase-comment-linked' => 'Un artículo de Wikidata ha sido enlazado a esta página.',
+	'wikibase-comment-unlink' => 'Esta página ha sido desenlazada de un elemento de Wikidata. Se han eliminado los enlaces lingüísticos.',
+	'wikibase-comment-restore' => 'Se ha restaurado un elemento asociado a Wikidata. Se han restaurado los enlaces de idioma.',
+	'wikibase-comment-update' => 'Los enlaces de idioma se han actualizado.',
+	'wikibase-comment-sitelink-add' => 'Se ha añadido un enlace de idioma: $1',
+	'wikibase-comment-sitelink-change' => 'Se ha cambiado el enlace de idioma de $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Se ha eliminado el enlace de idioma: $1',
+	'wikibase-editlinks' => 'Editar los enlaces',
+	'wikibase-editlinkstitle' => 'Editar enlaces de interlengua',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Mostrar las ediciones Wikidata en la lista de cambios recientes',
 );
 
 /** Persian (فارسی)
@@ -253,12 +249,12 @@ $messages['es'] = array(
  * @author ZxxZxxZ
  */
 $messages['fa'] = array(
-	'wbc-desc' => 'کارخواه برای افزونهٔ ویکی‌بیس',
-	'wbc-comment-update' => 'پیوندهای زبانی به‌روز شد.',
-	'wbc-editlinks' => 'ویرایش پیوندها',
-	'wbc-editlinkstitle' => 'افزودن پیوندهای میان‌ویکی',
-	'wbc-rc-hide-wikidata' => '$1 ویکی‌داده',
-	'wbc-rc-show-wikidata-pref' => 'نمایش ویرایش‌های ویکی‌داده در تغییرات اخیر',
+	'wikibase-client-desc' => 'کارخواه برای افزونهٔ ویکی‌بیس',
+	'wikibase-comment-update' => 'پیوندهای زبانی به‌روز شد.',
+	'wikibase-editlinks' => 'ویرایش پیوندها',
+	'wikibase-editlinkstitle' => 'افزودن پیوندهای میان‌ویکی',
+	'wikibase-rc-hide-wikidata' => '$1 ویکی‌داده',
+	'wikibase-rc-show-wikidata-pref' => 'نمایش ویرایش‌های ویکی‌داده در تغییرات اخیر',
 );
 
 /** Finnish (suomi)
@@ -291,174 +287,175 @@ $messages['fi'] = array(
  * @author Wyz
  */
 $messages['fr'] = array(
-	'wbc-desc' => 'Client pour l’extension Wikibase',
-	'wbc-after-page-move' => 'Vous pouvez aussi [$1 mettre à jour] l’élément Wikidata associé pour conserver les liens de langue sur la page déplacée.',
-	'wbc-comment-remove' => 'Élément Wikidata associé supprimé. Liens de langue supprimés.',
-	'wbc-comment-linked' => 'Un élément Wikidata a été lié à cette page.',
-	'wbc-comment-unlink' => 'Cette page a été dissociée de l’élément Wikidata. Liens de langue supprimés.',
-	'wbc-comment-restore' => 'Suppression de l’élément Wikidata associé annulée. Liens de langue rétablis.',
-	'wbc-comment-update' => 'Liens de langue mis à jour.',
-	'wbc-comment-sitelink-add' => 'Lien de langue ajouté : $1',
-	'wbc-comment-sitelink-change' => 'Lien de langue modifié de $1 à $2',
-	'wbc-comment-sitelink-remove' => 'Lien de langue supprimé : $1',
-	'wbc-editlinks' => 'Modifier les liens',
-	'wbc-editlinkstitle' => 'Modifier les liens interlangue',
-	'wbc-rc-hide-wikidata' => 'Wikidata $1',
-	'wbc-rc-show-wikidata-pref' => 'Afficher les modifications de Wikidata dans les modifications récentes',
+	'wikibase-client-desc' => 'Client pour l’extension Wikibase',
+	'wikibase-after-page-move' => 'Vous pouvez aussi [$1 mettre à jour] l’élément Wikidata associé pour conserver les liens de langue sur la page déplacée.',
+	'wikibase-comment-remove' => 'Élément Wikidata associé supprimé. Liens de langue supprimés.',
+	'wikibase-comment-linked' => 'Un élément Wikidata a été lié à cette page.',
+	'wikibase-comment-unlink' => 'Cette page a été dissociée de l’élément Wikidata. Liens de langue supprimés.',
+	'wikibase-comment-restore' => 'Suppression de l’élément Wikidata associé annulée. Liens de langue rétablis.',
+	'wikibase-comment-update' => 'Liens de langue mis à jour.',
+	'wikibase-comment-sitelink-add' => 'Lien de langue ajouté : $1',
+	'wikibase-comment-sitelink-change' => 'Lien de langue modifié de $1 à $2',
+	'wikibase-comment-sitelink-remove' => 'Lien de langue supprimé : $1',
+	'wikibase-editlinks' => 'Modifier les liens',
+	'wikibase-editlinkstitle' => 'Modifier les liens interlangue',
+	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-show-wikidata-pref' => 'Afficher les modifications de Wikidata dans les modifications récentes',
 );
 
 /** Franco-Provençal (arpetan)
  * @author ChrisPtDe
  */
 $messages['frp'] = array(
-	'wbc-comment-update' => 'Lims de lengoua betâs a jorn.',
-	'wbc-comment-sitelink-add' => 'Lim de lengoua apondu : $1',
-	'wbc-comment-sitelink-change' => 'Lim de lengoua changiê de $1 a $2',
-	'wbc-comment-sitelink-remove' => 'Lim de lengoua enlevâ : $1',
-	'wbc-editlinks' => 'Changiér los lims',
-	'wbc-editlinkstitle' => 'Changiér los lims entèrlengoua',
-	'wbc-rc-hide-wikidata' => 'Wikidata $1',
-	'wbc-rc-show-wikidata-pref' => 'Montrar los changements de Wikidata dedens los dèrriérs changements',
+	'wikibase-comment-update' => 'Lims de lengoua betâs a jorn.',
+	'wikibase-comment-sitelink-add' => 'Lim de lengoua apondu : $1',
+	'wikibase-comment-sitelink-change' => 'Lim de lengoua changiê de $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Lim de lengoua enlevâ : $1',
+	'wikibase-editlinks' => 'Changiér los lims',
+	'wikibase-editlinkstitle' => 'Changiér los lims entèrlengoua',
+	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-show-wikidata-pref' => 'Montrar los changements de Wikidata dedens los dèrriérs changements',
 );
 
 /** Galician (galego)
  * @author Toliño
  */
 $messages['gl'] = array(
-	'wbc-desc' => 'Cliente para a extensión Wikibase',
-	'wbc-after-page-move' => 'Tamén pode [$1 actualizar] o elemento de Wikidata asociado para manter as ligazóns lingüísticas na páxina trasladada.',
-	'wbc-comment-remove' => 'Borrouse un elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas.',
-	'wbc-comment-linked' => 'Esta páxina foi ligada desde un elemento de Wikidata.',
-	'wbc-comment-unlink' => 'Esta páxina foi desligada do elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas.',
-	'wbc-comment-restore' => 'Restaurouse un elemento de Wikidata asociado. Recuperáronse as ligazóns lingüísticas.',
-	'wbc-comment-update' => 'Actualizáronse as ligazóns lingüísticas.',
-	'wbc-comment-sitelink-add' => 'Engadiuse unha ligazón lingüística: $1',
-	'wbc-comment-sitelink-change' => 'Cambiouse unha ligazón lingüística de $1 a $2',
-	'wbc-comment-sitelink-remove' => 'Eliminouse unha ligazón lingüística: $1',
-	'wbc-editlinks' => 'Editar as ligazóns',
-	'wbc-editlinkstitle' => 'Editar as ligazóns interlingüísticas',
-	'wbc-rc-hide-wikidata' => '$1 o Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Mostrar as modificacións de Wikidata nos cambios recentes',
+	'wikibase-client-desc' => 'Cliente para a extensión Wikibase',
+	'wikibase-after-page-move' => 'Tamén pode [$1 actualizar] o elemento de Wikidata asociado para manter as ligazóns lingüísticas na páxina trasladada.',
+	'wikibase-comment-remove' => 'Borrouse un elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas.',
+	'wikibase-comment-linked' => 'Esta páxina foi ligada desde un elemento de Wikidata.',
+	'wikibase-comment-unlink' => 'Esta páxina foi desligada do elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas.',
+	'wikibase-comment-restore' => 'Restaurouse un elemento de Wikidata asociado. Recuperáronse as ligazóns lingüísticas.',
+	'wikibase-comment-update' => 'Actualizáronse as ligazóns lingüísticas.',
+	'wikibase-comment-sitelink-add' => 'Engadiuse unha ligazón lingüística: $1',
+	'wikibase-comment-sitelink-change' => 'Cambiouse unha ligazón lingüística de $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Eliminouse unha ligazón lingüística: $1',
+	'wikibase-comment-multi' => '$1 modificacións',
+	'wikibase-editlinks' => 'Editar as ligazóns',
+	'wikibase-editlinkstitle' => 'Editar as ligazóns interlingüísticas',
+	'wikibase-rc-hide-wikidata' => '$1 o Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Mostrar as modificacións de Wikidata nos cambios recentes',
 );
 
 /** Swiss German (Alemannisch)
  * @author Als-Holder
  */
 $messages['gsw'] = array(
-	'wbc-desc' => 'Macht e Client fir d Erwyterig Wikibase megli',
-	'wbc-after-page-move' => 'Du chasch au s zuegordnet Wikidata-Elemänt [$1 aktualisiere], go Sprochlink vu verschobene Syte verwalte.',
-	'wbc-editlinks' => 'Links bearbeite',
-	'wbc-editlinkstitle' => 'Sprachibergryfigi Link bearbeite',
-	'wbc-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-client-desc' => 'Macht e Client fir d Erwyterig Wikibase megli',
+	'wikibase-after-page-move' => 'Du chasch au s zuegordnet Wikidata-Elemänt [$1 aktualisiere], go Sprochlink vu verschobene Syte verwalte.',
+	'wikibase-editlinks' => 'Links bearbeite',
+	'wikibase-editlinkstitle' => 'Sprachibergryfigi Link bearbeite',
+	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 );
 
 /** Hebrew (עברית)
  * @author Amire80
  */
 $messages['he'] = array(
-	'wbc-desc' => 'לקוח להרחבה Wikibase',
-	'wbc-after-page-move' => 'אפשר גם [$1 לעדכן] את הפריט המשויך בוויקיפדיה כדי לתחזק את קישורי השפה בדף שהועבר.',
-	'wbc-comment-remove' => 'פריט הוויקינתונים המשויך נמחק. קישורי שפה הוסרו.',
-	'wbc-comment-linked' => 'פריט ויקינתונים קוּשר לדף הזה.',
-	'wbc-comment-unlink' => 'הדף הזה נותק מִפריט ויקינתונים. קישורי השפה הוסרו.',
-	'wbc-comment-restore' => 'פריט הוויקינתונים המשויך שוחזר. קישורי השפה שוחזרו.',
-	'wbc-comment-update' => 'קישורי השפה עודכנו.',
-	'wbc-comment-sitelink-add' => 'קישור שפה הוסף: $1',
-	'wbc-comment-sitelink-change' => 'קישור השפה שוּנה מ־$1 אל $2',
-	'wbc-comment-sitelink-remove' => 'קישור השפה הוסר: $1',
-	'wbc-editlinks' => 'עריכת קישורים',
-	'wbc-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
-	'wbc-rc-hide-wikidata' => '$1 ויקינתונים',
-	'wbc-rc-show-wikidata-pref' => 'הצגת עריכות ויקינתונים בשינויים אחרונים',
+	'wikibase-client-desc' => 'לקוח להרחבה Wikibase',
+	'wikibase-after-page-move' => 'אפשר גם [$1 לעדכן] את הפריט המשויך בוויקיפדיה כדי לתחזק את קישורי השפה בדף שהועבר.',
+	'wikibase-comment-remove' => 'פריט הוויקינתונים המשויך נמחק. קישורי שפה הוסרו.',
+	'wikibase-comment-linked' => 'פריט ויקינתונים קוּשר לדף הזה.',
+	'wikibase-comment-unlink' => 'הדף הזה נותק מִפריט ויקינתונים. קישורי השפה הוסרו.',
+	'wikibase-comment-restore' => 'פריט הוויקינתונים המשויך שוחזר. קישורי השפה שוחזרו.',
+	'wikibase-comment-update' => 'קישורי השפה עודכנו.',
+	'wikibase-comment-sitelink-add' => 'קישור שפה הוסף: $1',
+	'wikibase-comment-sitelink-change' => 'קישור השפה שוּנה מ־$1 אל $2',
+	'wikibase-comment-sitelink-remove' => 'קישור השפה הוסר: $1',
+	'wikibase-editlinks' => 'עריכת קישורים',
+	'wikibase-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
+	'wikibase-rc-hide-wikidata' => '$1 ויקינתונים',
+	'wikibase-rc-show-wikidata-pref' => 'הצגת עריכות ויקינתונים בשינויים אחרונים',
 );
 
 /** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */
 $messages['hsb'] = array(
-	'wbc-desc' => 'Klient za rozšěrjenje Wikibase',
-	'wbc-after-page-move' => 'Móžeš tež přirjadowany element Wikidata [$1 aktualizować], zo by mjezyrěčne wotkazy na přesunjenej stronje zarjadował.',
-	'wbc-comment-remove' => 'Přirjadowany element Wikidata zhašany. Mjezyrěčne wotkazy wotstronjene.',
-	'wbc-comment-linked' => 'Element Wikidata je so z tutej stronu zwjazał.',
-	'wbc-comment-unlink' => 'Zwisk strony z elementom Wikidata je so wotstronił. Mjezyrěčne wotkazy wotstronjene.',
-	'wbc-comment-restore' => 'Přirjadowany element Wikidata zaso wobnowjeny. Mjezyrěčne wotkazy wobnowjene.',
-	'wbc-comment-update' => 'Mjezyrěčne wotkazy su so zaktualizowali.',
-	'wbc-comment-sitelink-add' => 'Mjezyrěčny wotkaz přidaty: $1',
-	'wbc-comment-sitelink-change' => 'Mjezyrěčny wotkaz změnjeny wot $1 do $2',
-	'wbc-comment-sitelink-remove' => 'Mjezyrěčny wotkaz wotstronjeny: $1',
-	'wbc-editlinks' => 'Wotkazy wobdźěłać',
-	'wbc-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
-	'wbc-rc-hide-wikidata' => 'Wikidata $1',
-	'wbc-rc-show-wikidata-pref' => 'Změny Wikidata w aktualnych změnach pokazać',
+	'wikibase-client-desc' => 'Klient za rozšěrjenje Wikibase',
+	'wikibase-after-page-move' => 'Móžeš tež přirjadowany element Wikidata [$1 aktualizować], zo by mjezyrěčne wotkazy na přesunjenej stronje zarjadował.',
+	'wikibase-comment-remove' => 'Přirjadowany element Wikidata zhašany. Mjezyrěčne wotkazy wotstronjene.',
+	'wikibase-comment-linked' => 'Element Wikidata je so z tutej stronu zwjazał.',
+	'wikibase-comment-unlink' => 'Zwisk strony z elementom Wikidata je so wotstronił. Mjezyrěčne wotkazy wotstronjene.',
+	'wikibase-comment-restore' => 'Přirjadowany element Wikidata zaso wobnowjeny. Mjezyrěčne wotkazy wobnowjene.',
+	'wikibase-comment-update' => 'Mjezyrěčne wotkazy su so zaktualizowali.',
+	'wikibase-comment-sitelink-add' => 'Mjezyrěčny wotkaz přidaty: $1',
+	'wikibase-comment-sitelink-change' => 'Mjezyrěčny wotkaz změnjeny wot $1 do $2',
+	'wikibase-comment-sitelink-remove' => 'Mjezyrěčny wotkaz wotstronjeny: $1',
+	'wikibase-editlinks' => 'Wotkazy wobdźěłać',
+	'wikibase-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
+	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-show-wikidata-pref' => 'Změny Wikidata w aktualnych změnach pokazać',
 );
 
 /** Hungarian (magyar)
  * @author Tgr
  */
 $messages['hu'] = array(
-	'wbc-desc' => 'Kliens a Wikibase kiterjesztéshez',
-	'wbc-after-page-move' => 'Ha azt akarod, hogy a nyelvközi hivatkozások megmaradjanak, [$1 frissítsd] a kapcsolt Wikidata elemet is.',
-	'wbc-comment-remove' => 'Nyelvközi hivatkozások eltávolítása – a kapcsolt Wikidata elemet törölték.',
-	'wbc-comment-linked' => 'Egy Wikidata elemet kapcsoltak ehhez az oldalhoz.',
-	'wbc-comment-unlink' => 'Nyelvközi hivatkozások eltávolítása – már nincs összekapcsolva a Wikidata elemmel.',
-	'wbc-comment-restore' => 'Nyelvközi hivatkozások visszaállítása – a hozzátartozó törölt Wikidata elemet visszaállították.',
-	'wbc-comment-update' => 'Nyelvközi hivatkozások frissítése.',
-	'wbc-comment-sitelink-add' => 'Nyelvközi hivatkozás hozzáadása: $1',
-	'wbc-comment-sitelink-change' => 'Nyelvközi hivatkozás módosítása (régi: $1, új: $2)',
-	'wbc-comment-sitelink-remove' => 'Nyelvközi hivatkozás törlése: $1',
-	'wbc-editlinks' => 'szerkesztés',
-	'wbc-editlinkstitle' => 'Nyelvközi hivatkozások szerkesztése',
-	'wbc-rc-hide-wikidata' => 'Wikidata $1',
-	'wbc-rc-show-wikidata-pref' => 'Wikidata szerkesztések mutatása a friss változtatásokban',
+	'wikibase-client-desc' => 'Kliens a Wikibase kiterjesztéshez',
+	'wikibase-after-page-move' => 'Ha azt akarod, hogy a nyelvközi hivatkozások megmaradjanak, [$1 frissítsd] a kapcsolt Wikidata elemet is.',
+	'wikibase-comment-remove' => 'Nyelvközi hivatkozások eltávolítása – a kapcsolt Wikidata elemet törölték.',
+	'wikibase-comment-linked' => 'Egy Wikidata elemet kapcsoltak ehhez az oldalhoz.',
+	'wikibase-comment-unlink' => 'Nyelvközi hivatkozások eltávolítása – már nincs összekapcsolva a Wikidata elemmel.',
+	'wikibase-comment-restore' => 'Nyelvközi hivatkozások visszaállítása – a hozzátartozó törölt Wikidata elemet visszaállították.',
+	'wikibase-comment-update' => 'Nyelvközi hivatkozások frissítése.',
+	'wikibase-comment-sitelink-add' => 'Nyelvközi hivatkozás hozzáadása: $1',
+	'wikibase-comment-sitelink-change' => 'Nyelvközi hivatkozás módosítása (régi: $1, új: $2)',
+	'wikibase-comment-sitelink-remove' => 'Nyelvközi hivatkozás törlése: $1',
+	'wikibase-editlinks' => 'szerkesztés',
+	'wikibase-editlinkstitle' => 'Nyelvközi hivatkozások szerkesztése',
+	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-show-wikidata-pref' => 'Wikidata szerkesztések mutatása a friss változtatásokban',
 );
 
 /** Interlingua (interlingua)
  * @author McDutchie
  */
 $messages['ia'] = array(
-	'wbc-desc' => 'Cliente pro le extension Wikibase',
-	'wbc-editlinks' => 'Modificar ligamines',
-	'wbc-editlinkstitle' => 'Modificar ligamines interlingua',
+	'wikibase-client-desc' => 'Cliente pro le extension Wikibase',
+	'wikibase-editlinks' => 'Modificar ligamines',
+	'wikibase-editlinkstitle' => 'Modificar ligamines interlingua',
 );
 
 /** Iloko (Ilokano)
  * @author Lam-ang
  */
 $messages['ilo'] = array(
-	'wbc-desc' => 'Kliente para iti Wikibase a pagpaatiddog',
-	'wbc-after-page-move' => 'Mabalinmo pay a [$1 pabaruen] ti mainaig a banag ti Wikidata tapno mataripatu dagiti silpo ti pagsasao ti naiyalis a panid.',
-	'wbc-comment-remove' => 'Ti mainaig a banag ti Wikidata ket naikkaten. Dagiti silpo ti pagsasao ket naikkaten.',
-	'wbc-comment-linked' => 'Ti Wikidata a banag ket naisilpon iti daytoy a panid.',
-	'wbc-comment-unlink' => 'Daytoy a panid ket naikkat ti silpona manipud ti Wikidata a banag. Dagiti silpo ti pagsasao ket naikkaten.',
-	'wbc-comment-restore' => 'Ti mainaig a banag ti Wikidata ket naisubli ti pannakaikkatna. Dagiti silpo ti pagsasao ket naipasubli.',
-	'wbc-comment-update' => 'Naipabaro dagiti silpo ti pagsasao.',
-	'wbc-comment-sitelink-add' => 'Nanayonan ti silpo ti pagsasao: $1',
-	'wbc-comment-sitelink-change' => 'Ti silpo ti pagsasao ket nasukatan manipud ti $1 iti $2',
-	'wbc-comment-sitelink-remove' => 'Naikkat ti silpo ti pagsasao: $1',
-	'wbc-editlinks' => 'Nurnosen dagiti silpo',
-	'wbc-editlinkstitle' => 'Urnosen dagiti sangkapagsasaoan a silpo',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Ipakita dagiti Wikidata nga inurnos idiay kinaudi a binalbaliwan',
+	'wikibase-client-desc' => 'Kliente para iti Wikibase a pagpaatiddog',
+	'wikibase-after-page-move' => 'Mabalinmo pay a [$1 pabaruen] ti mainaig a banag ti Wikidata tapno mataripatu dagiti silpo ti pagsasao ti naiyalis a panid.',
+	'wikibase-comment-remove' => 'Ti mainaig a banag ti Wikidata ket naikkaten. Dagiti silpo ti pagsasao ket naikkaten.',
+	'wikibase-comment-linked' => 'Ti Wikidata a banag ket naisilpon iti daytoy a panid.',
+	'wikibase-comment-unlink' => 'Daytoy a panid ket naikkat ti silpona manipud ti Wikidata a banag. Dagiti silpo ti pagsasao ket naikkaten.',
+	'wikibase-comment-restore' => 'Ti mainaig a banag ti Wikidata ket naisubli ti pannakaikkatna. Dagiti silpo ti pagsasao ket naipasubli.',
+	'wikibase-comment-update' => 'Naipabaro dagiti silpo ti pagsasao.',
+	'wikibase-comment-sitelink-add' => 'Nanayonan ti silpo ti pagsasao: $1',
+	'wikibase-comment-sitelink-change' => 'Ti silpo ti pagsasao ket nasukatan manipud ti $1 iti $2',
+	'wikibase-comment-sitelink-remove' => 'Naikkat ti silpo ti pagsasao: $1',
+	'wikibase-editlinks' => 'Nurnosen dagiti silpo',
+	'wikibase-editlinkstitle' => 'Urnosen dagiti sangkapagsasaoan a silpo',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Ipakita dagiti Wikidata nga inurnos idiay kinaudi a binalbaliwan',
 );
 
 /** Icelandic (íslenska)
  * @author Snævar
  */
 $messages['is'] = array(
-	'wbc-desc' => 'Biðlari fyrir Wikibase viðbótina',
-	'wbc-after-page-move' => 'Þú mátt einnig [$1 uppfæra] viðeigandi Wikidata hlut til að viðhalda tungumálatenglum á færðu síðunni.',
-	'wbc-comment-remove' => 'Tengdum Wikidata hlut eytt. Tungumálatenglar fjarlægðir.',
-	'wbc-comment-linked' => 'Wikidata hlutur hefur tengst þessari síðu.',
-	'wbc-comment-unlink' => 'Þessi síða hefur verið aftengd Wikidata hlut. Tungumálatenglar fjarlægðir.',
-	'wbc-comment-restore' => 'Tengdur Wikidata hlutur endurvakinn. Tungumálatenglar endurvaktir.',
-	'wbc-comment-update' => 'Vefsvæðis tenglar uppfærðir.',
-	'wbc-comment-sitelink-add' => 'Tungumálatengli bætt við: $1',
-	'wbc-comment-sitelink-change' => 'Tungumálatengli breytt frá $1 í $2',
-	'wbc-comment-sitelink-remove' => 'Tungumálatengill fjarlægður: $1',
-	'wbc-editlinks' => 'Breyta tenglum',
-	'wbc-editlinkstitle' => 'Breyta tungumálatenglum',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Sýna Wikidata breytingar í nýjustu breytingum',
+	'wikibase-client-desc' => 'Biðlari fyrir Wikibase viðbótina',
+	'wikibase-after-page-move' => 'Þú mátt einnig [$1 uppfæra] viðeigandi Wikidata hlut til að viðhalda tungumálatenglum á færðu síðunni.',
+	'wikibase-comment-remove' => 'Tengdum Wikidata hlut eytt. Tungumálatenglar fjarlægðir.',
+	'wikibase-comment-linked' => 'Wikidata hlutur hefur tengst þessari síðu.',
+	'wikibase-comment-unlink' => 'Þessi síða hefur verið aftengd Wikidata hlut. Tungumálatenglar fjarlægðir.',
+	'wikibase-comment-restore' => 'Tengdur Wikidata hlutur endurvakinn. Tungumálatenglar endurvaktir.',
+	'wikibase-comment-update' => 'Vefsvæðis tenglar uppfærðir.',
+	'wikibase-comment-sitelink-add' => 'Tungumálatengli bætt við: $1',
+	'wikibase-comment-sitelink-change' => 'Tungumálatengli breytt frá $1 í $2',
+	'wikibase-comment-sitelink-remove' => 'Tungumálatengill fjarlægður: $1',
+	'wikibase-editlinks' => 'Breyta tenglum',
+	'wikibase-editlinkstitle' => 'Breyta tungumálatenglum',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Sýna Wikidata breytingar í nýjustu breytingum',
 );
 
 /** Italian (italiano)
@@ -468,157 +465,161 @@ $messages['is'] = array(
  * @author Sannita
  */
 $messages['it'] = array(
-	'wbc-desc' => "Client per l'estensione Wikibase",
-	'wbc-after-page-move' => "Puoi anche [$1 aggiornare] l'elemento associato su Wikidata per trasferire gli interlink sulla nuova pagina.",
-	'wbc-comment-remove' => "L'elemento di Wikidata associato è stato cancellato. I collegamenti interlinguistici sono stati rimossi.",
-	'wbc-comment-linked' => 'Un elemento di Wikidata è stato collegato a questa pagina.',
-	'wbc-comment-unlink' => "Questa pagina è stata scollegata dall'elemento di Wikidata. I collegamenti interlinguistici sono stati rimossi.",
-	'wbc-comment-restore' => "L'elemento di Wikidata associato è stato recuperato. I collegamenti interlinguistici sono stati ripristinati.",
-	'wbc-comment-update' => 'Collegamento linguistico aggiornato.',
-	'wbc-comment-sitelink-add' => 'Collegamento linguistico aggiunto: $1',
-	'wbc-comment-sitelink-change' => 'Collegamento linguistico modificato da $1 a $2',
-	'wbc-comment-sitelink-remove' => 'Collegamento linguistico rimosso: $1',
-	'wbc-editlinks' => 'Modifica link',
-	'wbc-editlinkstitle' => 'Modifica collegamenti interlinguistici',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Mostra le modifiche di Wikidata nelle ultime modifiche',
+	'wikibase-client-desc' => "Client per l'estensione Wikibase",
+	'wikibase-after-page-move' => "Puoi anche [$1 aggiornare] l'elemento associato su Wikidata per trasferire gli interlink sulla nuova pagina.",
+	'wikibase-comment-remove' => "L'elemento di Wikidata associato è stato cancellato. I collegamenti interlinguistici sono stati rimossi.",
+	'wikibase-comment-linked' => 'Un elemento di Wikidata è stato collegato a questa pagina.',
+	'wikibase-comment-unlink' => "Questa pagina è stata scollegata dall'elemento di Wikidata. I collegamenti interlinguistici sono stati rimossi.",
+	'wikibase-comment-restore' => "L'elemento di Wikidata associato è stato recuperato. I collegamenti interlinguistici sono stati ripristinati.",
+	'wikibase-comment-update' => 'Collegamento linguistico aggiornato.',
+	'wikibase-comment-sitelink-add' => 'Collegamento linguistico aggiunto: $1',
+	'wikibase-comment-sitelink-change' => 'Collegamento linguistico modificato da $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Collegamento linguistico rimosso: $1',
+	'wikibase-comment-multi' => '$1 modifiche',
+	'wikibase-editlinks' => 'Modifica link',
+	'wikibase-editlinkstitle' => 'Modifica collegamenti interlinguistici',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Mostra le modifiche di Wikidata nelle ultime modifiche',
 );
 
 /** Japanese (日本語)
  * @author Shirayuki
  */
 $messages['ja'] = array(
-	'wbc-desc' => 'Wikibase 拡張機能のクライアント',
-	'wbc-after-page-move' => '移動されたページにある言語リンクを維持するために、関連付けられたウィキデータ項目を[$1 更新]することもできます。',
-	'wbc-comment-remove' => '関連付けられたウィキデータ項目を削除しました。言語リンクを除去しました。',
-	'wbc-comment-linked' => 'ウィキデータ項目をこのページにリンクしました。',
-	'wbc-comment-unlink' => 'このページをウィキデータ項目からリンク解除しました。言語リンクを除去しました。',
-	'wbc-comment-restore' => '関連付けられたウィキデータ項目を復元しました。言語リンクを復元しました。',
-	'wbc-comment-update' => '言語リンクを更新しました。',
-	'wbc-comment-sitelink-add' => '言語リンクを追加: $1',
-	'wbc-comment-sitelink-change' => '言語リンクを $1 から $2 に変更',
-	'wbc-comment-sitelink-remove' => '言語リンクを除去: $1',
-	'wbc-editlinks' => 'リンクを編集',
-	'wbc-editlinkstitle' => '言語間リンクを編集',
-	'wbc-rc-hide-wikidata' => 'ウィキデータを$1',
-	'wbc-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
+	'wikibase-client-desc' => 'Wikibase 拡張機能のクライアント',
+	'wikibase-after-page-move' => '移動されたページにある言語リンクを維持するために、関連付けられたウィキデータ項目を[$1 更新]することもできます。',
+	'wikibase-comment-remove' => '関連付けられたウィキデータ項目を削除しました。言語リンクを除去しました。',
+	'wikibase-comment-linked' => 'ウィキデータ項目をこのページにリンクしました。',
+	'wikibase-comment-unlink' => 'このページをウィキデータ項目からリンク解除しました。言語リンクを除去しました。',
+	'wikibase-comment-restore' => '関連付けられたウィキデータ項目を復元しました。言語リンクを復元しました。',
+	'wikibase-comment-update' => '言語リンクを更新しました。',
+	'wikibase-comment-sitelink-add' => '言語リンクを追加: $1',
+	'wikibase-comment-sitelink-change' => '言語リンクを $1 から $2 に変更',
+	'wikibase-comment-sitelink-remove' => '言語リンクを除去: $1',
+	'wikibase-comment-multi' => '$1 件の変更',
+	'wikibase-editlinks' => 'リンクを編集',
+	'wikibase-editlinkstitle' => '言語間リンクを編集',
+	'wikibase-rc-hide-wikidata' => 'ウィキデータを$1',
+	'wikibase-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
 );
 
 /** Georgian (ქართული)
  * @author David1010
  */
 $messages['ka'] = array(
-	'wbc-editlinks' => 'ბმულების რედაქტირება',
+	'wikibase-editlinks' => 'ბმულების რედაქტირება',
 );
 
 /** Korean (한국어)
  * @author 아라
  */
 $messages['ko'] = array(
-	'wbc-desc' => '위키베이스 확장 기능을 위한 클라이언트',
-	'wbc-after-page-move' => '또한 이동한 문서에 언어 링크를 유지하기 위해 관련된 위키데이터 항목을 [$1 업데이트]할 수 있습니다.',
-	'wbc-comment-remove' => '연결한 위키데이터 항목을 삭제했습니다. 언어 링크를 제거했습니다.',
-	'wbc-comment-linked' => '위키데이터 항목을 이 문서에 연결했습니다.',
-	'wbc-comment-unlink' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다.',
-	'wbc-comment-restore' => '연결한 위키데이터 항목을 복구했습니다. 언어 링크를 복구했습니다.',
-	'wbc-comment-update' => '언어 링크를 업데이트했습니다.',
-	'wbc-comment-sitelink-add' => '언어 링크를 추가함: $1',
-	'wbc-comment-sitelink-change' => '언어 링크를 $1에서 $2로 바꿈',
-	'wbc-comment-sitelink-remove' => '언어 링크를 제거함: $1',
-	'wbc-editlinks' => '링크 편집',
-	'wbc-editlinkstitle' => '인터언어 링크 편집',
-	'wbc-rc-hide-wikidata' => '위키데이터 $1',
-	'wbc-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
+	'wikibase-client-desc' => '위키베이스 확장 기능을 위한 클라이언트',
+	'wikibase-after-page-move' => '또한 이동한 문서에 언어 링크를 유지하기 위해 관련된 위키데이터 항목을 [$1 업데이트]할 수 있습니다.',
+	'wikibase-comment-remove' => '연결한 위키데이터 항목을 삭제했습니다. 언어 링크를 제거했습니다.',
+	'wikibase-comment-linked' => '위키데이터 항목을 이 문서에 연결했습니다.',
+	'wikibase-comment-unlink' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다.',
+	'wikibase-comment-restore' => '연결한 위키데이터 항목을 복구했습니다. 언어 링크를 복구했습니다.',
+	'wikibase-comment-update' => '언어 링크를 업데이트했습니다.',
+	'wikibase-comment-sitelink-add' => '언어 링크를 추가함: $1',
+	'wikibase-comment-sitelink-change' => '언어 링크를 $1에서 $2로 바꿈',
+	'wikibase-comment-sitelink-remove' => '언어 링크를 제거함: $1',
+	'wikibase-comment-multi' => '$1개 바뀜',
+	'wikibase-editlinks' => '링크 편집',
+	'wikibase-editlinkstitle' => '인터언어 링크 편집',
+	'wikibase-rc-hide-wikidata' => '위키데이터 $1',
+	'wikibase-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
 );
 
 /** Colognian (Ripoarisch)
  * @author Purodha
  */
 $messages['ksh'] = array(
-	'wbc-desc' => 'Madd en Aanwendong vun däm WikiData Projrammzihsaz müjjelesch.',
-	'wbc-editlinks' => 'Lengks ändere',
-	'wbc-editlinkstitle' => 'Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße',
+	'wikibase-client-desc' => 'Madd en Aanwendong vun däm WikiData Projrammzihsaz müjjelesch.',
+	'wikibase-editlinks' => 'Lengks ändere',
+	'wikibase-editlinkstitle' => 'Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
  * @author George Animal
  */
 $messages['ku-latn'] = array(
-	'wbc-editlinks' => 'Girêdanan biguherîne',
+	'wikibase-editlinks' => 'Girêdanan biguherîne',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
 $messages['lb'] = array(
-	'wbc-desc' => "Client fir d'Wikibase Erweiderung",
+	'wikibase-client-desc' => "Client fir d'Wikibase Erweiderung",
 );
 
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
 $messages['mk'] = array(
-	'wbc-desc' => 'Клиент за додатокот „Викибаза“',
-	'wbc-after-page-move' => 'Можете и да го [$1 подновите] поврзаниот предмет на Википодатоци за да ги одржите јазичните врски на преместената страница.',
-	'wbc-comment-remove' => 'Здружениот предмет од Википодатоците е избришан. Јазичните врски се избришани.',
-	'wbc-comment-linked' => 'Со страницава е поврзан предмет од Википодатоците.',
-	'wbc-comment-unlink' => 'На оваа страница ѝ е раскината врската со елементот од Википодатоците. Јазичните врски се отстранети.',
-	'wbc-comment-restore' => 'Здружениот предмет од Википодатоците е повратен. Јазичните врски се повратени.',
-	'wbc-comment-update' => 'Јазичните врски се подновени',
-	'wbc-comment-sitelink-add' => 'Додадена јазична врска: $1',
-	'wbc-comment-sitelink-change' => 'Изменета јазична врска од $1 на $2',
-	'wbc-comment-sitelink-remove' => 'Отстранета јазична врска: $1',
-	'wbc-editlinks' => 'Уреди врски',
-	'wbc-editlinkstitle' => 'Уредување на меѓујазични врски',
-	'wbc-rc-hide-wikidata' => '$1 Википодатоци',
-	'wbc-rc-show-wikidata-pref' => 'Прикажувај ги уредувањата на Википодатоците во скорешните промени',
+	'wikibase-client-desc' => 'Клиент за додатокот „Викибаза“',
+	'wikibase-after-page-move' => 'Можете и да го [$1 подновите] поврзаниот предмет на Википодатоци за да ги одржите јазичните врски на преместената страница.',
+	'wikibase-comment-remove' => 'Здружениот предмет од Википодатоците е избришан. Јазичните врски се избришани.',
+	'wikibase-comment-linked' => 'Со страницава е поврзан предмет од Википодатоците.',
+	'wikibase-comment-unlink' => 'На оваа страница ѝ е раскината врската со елементот од Википодатоците. Јазичните врски се отстранети.',
+	'wikibase-comment-restore' => 'Здружениот предмет од Википодатоците е повратен. Јазичните врски се повратени.',
+	'wikibase-comment-update' => 'Јазичните врски се подновени',
+	'wikibase-comment-sitelink-add' => 'Додадена јазична врска: $1',
+	'wikibase-comment-sitelink-change' => 'Изменета јазична врска од $1 на $2',
+	'wikibase-comment-sitelink-remove' => 'Отстранета јазична врска: $1',
+	'wikibase-comment-multi' => '$1 промени',
+	'wikibase-editlinks' => 'Уреди врски',
+	'wikibase-editlinkstitle' => 'Уредување на меѓујазични врски',
+	'wikibase-rc-hide-wikidata' => '$1 Википодатоци',
+	'wikibase-rc-show-wikidata-pref' => 'Прикажувај ги уредувањата на Википодатоците во скорешните промени',
 );
 
 /** Malayalam (മലയാളം)
  * @author Praveenp
  */
 $messages['ml'] = array(
-	'wbc-desc' => 'വിക്കിബേസ് അനുബന്ധത്തിനുള്ള ക്ലയന്റ്',
-	'wbc-after-page-move' => 'മാറ്റിയ താളിലെ ഭാഷാ കണ്ണികൾ പരിപാലിക്കുന്നതിനായി ബന്ധപ്പെട്ട വിക്കിഡേറ്റ ഇനം താങ്കൾക്ക് [$1 പുതുക്കുകയും] ചെയ്യാവുന്നതാണ്.',
-	'wbc-comment-remove' => 'ബന്ധപ്പെട്ട വിക്കിഡേറ്റ ഇനം മായ്ക്കപ്പെട്ടിരിക്കുന്നു. ഭാഷാ കണ്ണികൾ നീക്കം ചെയ്തു.',
-	'wbc-comment-linked' => 'ഒരു വിക്കിഡേറ്റ ഇനം ഈ താളിൽ കണ്ണി ചേർത്തിരിക്കുന്നു.',
-	'wbc-comment-unlink' => 'ഈ താൾ വിക്കിഡേറ്റാ ഇനത്തിൽ നിന്നും കണ്ണി മാറ്റിയിരിക്കുന്നു. ഭാഷാ കണ്ണികൾ നീക്കം ചെയ്തു.',
-	'wbc-comment-restore' => 'ബന്ധപ്പെട്ട വിക്കിഡേറ്റ ഇനം പുനഃസ്ഥാപിച്ചിരിക്കുന്നു. ഭാഷാ കണ്ണികൾ പുനഃസ്ഥാപിച്ചു.',
-	'wbc-comment-update' => 'ഭാഷാ കണ്ണികൾ പുതുക്കപ്പെട്ടു.',
-	'wbc-comment-sitelink-add' => 'ഭാഷാ കണ്ണി ചേർത്തു: $1',
-	'wbc-comment-sitelink-change' => 'ഭാഷാ കണ്ണി $1 എന്നതിൽ നിന്ന് $2 എന്നാക്കി മാറ്റിയിരിക്കുന്നു',
-	'wbc-comment-sitelink-remove' => 'ഭാഷാ കണ്ണി നീക്കം ചെയ്തു: $1',
-	'wbc-editlinks' => 'കണ്ണികൾ തിരുത്തുക',
-	'wbc-editlinkstitle' => 'അന്തർഭാഷാ കണ്ണികൾ തിരുത്തുക',
-	'wbc-rc-hide-wikidata' => 'വിക്കിഡേറ്റ $1',
-	'wbc-rc-show-wikidata-pref' => 'സമീപകാല മാറ്റങ്ങളിൽ വിക്കിഡേറ്റാ തിരുത്തലുകളും പ്രദർശിപ്പിക്കുക',
+	'wikibase-client-desc' => 'വിക്കിബേസ് അനുബന്ധത്തിനുള്ള ക്ലയന്റ്',
+	'wikibase-after-page-move' => 'മാറ്റിയ താളിലെ ഭാഷാ കണ്ണികൾ പരിപാലിക്കുന്നതിനായി ബന്ധപ്പെട്ട വിക്കിഡേറ്റ ഇനം താങ്കൾക്ക് [$1 പുതുക്കുകയും] ചെയ്യാവുന്നതാണ്.',
+	'wikibase-comment-remove' => 'ബന്ധപ്പെട്ട വിക്കിഡേറ്റ ഇനം മായ്ക്കപ്പെട്ടിരിക്കുന്നു. ഭാഷാ കണ്ണികൾ നീക്കം ചെയ്തു.',
+	'wikibase-comment-linked' => 'ഒരു വിക്കിഡേറ്റ ഇനം ഈ താളിൽ കണ്ണി ചേർത്തിരിക്കുന്നു.',
+	'wikibase-comment-unlink' => 'ഈ താൾ വിക്കിഡേറ്റാ ഇനത്തിൽ നിന്നും കണ്ണി മാറ്റിയിരിക്കുന്നു. ഭാഷാ കണ്ണികൾ നീക്കം ചെയ്തു.',
+	'wikibase-comment-restore' => 'ബന്ധപ്പെട്ട വിക്കിഡേറ്റ ഇനം പുനഃസ്ഥാപിച്ചിരിക്കുന്നു. ഭാഷാ കണ്ണികൾ പുനഃസ്ഥാപിച്ചു.',
+	'wikibase-comment-update' => 'ഭാഷാ കണ്ണികൾ പുതുക്കപ്പെട്ടു.',
+	'wikibase-comment-sitelink-add' => 'ഭാഷാ കണ്ണി ചേർത്തു: $1',
+	'wikibase-comment-sitelink-change' => 'ഭാഷാ കണ്ണി $1 എന്നതിൽ നിന്ന് $2 എന്നാക്കി മാറ്റിയിരിക്കുന്നു',
+	'wikibase-comment-sitelink-remove' => 'ഭാഷാ കണ്ണി നീക്കം ചെയ്തു: $1',
+	'wikibase-editlinks' => 'കണ്ണികൾ തിരുത്തുക',
+	'wikibase-editlinkstitle' => 'അന്തർഭാഷാ കണ്ണികൾ തിരുത്തുക',
+	'wikibase-rc-hide-wikidata' => 'വിക്കിഡേറ്റ $1',
+	'wikibase-rc-show-wikidata-pref' => 'സമീപകാല മാറ്റങ്ങളിൽ വിക്കിഡേറ്റാ തിരുത്തലുകളും പ്രദർശിപ്പിക്കുക',
 );
 
 /** Marathi (मराठी)
  * @author Ydyashad
  */
 $messages['mr'] = array(
-	'wbc-rc-hide-wikidata' => '$१ विकिमाहिती', # Fuzzy
+	'wikibase-rc-hide-wikidata' => '$१ विकिमाहिती',
 );
 
 /** Malay (Bahasa Melayu)
  * @author Anakmalaysia
  */
 $messages['ms'] = array(
-	'wbc-desc' => 'Pelanggan sambungan Wikibase',
-	'wbc-after-page-move' => 'Anda juga boleh [$1 mengemaskinikan] perkara Wikidata yang berkenaan untuk memelihara pautan bahasa pada halaman yang dipindahkan.',
-	'wbc-comment-remove' => 'Perkara Wikidata yang berkenaan dihapuskan. Pautan bahasa dipadamkan.',
-	'wbc-comment-linked' => 'Satu perkara Wikidata telah dipautkan ke halaman ini.',
-	'wbc-comment-unlink' => 'Halaman ini telah dinyahpautkan dari perkara Wikidata. Pautan bahasa dibuang.',
-	'wbc-comment-restore' => 'Perkara Wikidata yang berkenaan dinyahhapus. Pautan bahasa dipulihkan.',
-	'wbc-comment-update' => 'Pautan bahasa dikemaskinikan.',
-	'wbc-comment-sitelink-add' => 'Pautan bahasa dibubuh: $1',
-	'wbc-comment-sitelink-change' => 'Pautan bahasa diubah daripada $1 kepada $2',
-	'wbc-comment-sitelink-remove' => 'Pautan bahasa dibuang: $1',
-	'wbc-editlinks' => 'Sunting pautan',
-	'wbc-editlinkstitle' => 'Sunting pautan antara bahasa',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Paparkan suntingan Wikidata dalam perubahan terkini',
+	'wikibase-client-desc' => 'Pelanggan sambungan Wikibase',
+	'wikibase-after-page-move' => 'Anda juga boleh [$1 mengemaskinikan] perkara Wikidata yang berkenaan untuk memelihara pautan bahasa pada halaman yang dipindahkan.',
+	'wikibase-comment-remove' => 'Perkara Wikidata yang berkenaan dihapuskan. Pautan bahasa dipadamkan.',
+	'wikibase-comment-linked' => 'Satu perkara Wikidata telah dipautkan ke halaman ini.',
+	'wikibase-comment-unlink' => 'Halaman ini telah dinyahpautkan dari perkara Wikidata. Pautan bahasa dibuang.',
+	'wikibase-comment-restore' => 'Perkara Wikidata yang berkenaan dinyahhapus. Pautan bahasa dipulihkan.',
+	'wikibase-comment-update' => 'Pautan bahasa dikemaskinikan.',
+	'wikibase-comment-sitelink-add' => 'Pautan bahasa dibubuh: $1',
+	'wikibase-comment-sitelink-change' => 'Pautan bahasa diubah daripada $1 kepada $2',
+	'wikibase-comment-sitelink-remove' => 'Pautan bahasa dibuang: $1',
+	'wikibase-editlinks' => 'Sunting pautan',
+	'wikibase-editlinkstitle' => 'Sunting pautan antara bahasa',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Paparkan suntingan Wikidata dalam perubahan terkini',
 );
 
 /** Norwegian Bokmål (norsk (bokmål)‎)
@@ -627,40 +628,41 @@ $messages['ms'] = array(
  * @author Jeblad
  */
 $messages['nb'] = array(
-	'wbc-desc' => 'Klientutvidelse for Wikibase, det strukturerte datalageret',
-	'wbc-after-page-move' => 'Du kan også [$1 oppdatere] det tilknyttede Wikidata-datasettet for å bevare språklenkene til den flyttede siden.',
-	'wbc-comment-remove' => 'Det tilknyttede Wikidata-datasettet har blitt slettet. Språklenker har blitt fjernet.',
-	'wbc-comment-linked' => 'Et Wikidata-datasett har blitt knyttet til denne siden.',
-	'wbc-comment-unlink' => 'Denne siden har blitt fraknyttet et Wikidata-datasett. Språklenker har blitt fjernet.',
-	'wbc-comment-restore' => 'Det tilknyttede Wikidata-datasettet har blitt gjenopprettet. Språklenker har blitt gjenopprettet.',
-	'wbc-comment-update' => 'Språklenker har blitt oppdatert.',
-	'wbc-comment-sitelink-add' => 'Språklenke tilført: $1',
-	'wbc-comment-sitelink-change' => 'Språklenke endret fra $1 til $2',
-	'wbc-comment-sitelink-remove' => 'Språklenke fjernet: $1',
-	'wbc-editlinks' => 'Rediger lenker',
-	'wbc-editlinkstitle' => 'Rediger språklenker – lenker til artikkelen på andre språk',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Vis Wikidata-redigeringer i siste endringer',
+	'wikibase-client-desc' => 'Klientutvidelse for Wikibase, det strukturerte datalageret',
+	'wikibase-after-page-move' => 'Du kan også [$1 oppdatere] det tilknyttede Wikidata-datasettet for å bevare språklenkene til den flyttede siden.',
+	'wikibase-comment-remove' => 'Det tilknyttede Wikidata-datasettet har blitt slettet. Språklenker har blitt fjernet.',
+	'wikibase-comment-linked' => 'Et Wikidata-datasett har blitt knyttet til denne siden.',
+	'wikibase-comment-unlink' => 'Denne siden har blitt fraknyttet et Wikidata-datasett. Språklenker har blitt fjernet.',
+	'wikibase-comment-restore' => 'Det tilknyttede Wikidata-datasettet har blitt gjenopprettet. Språklenker har blitt gjenopprettet.',
+	'wikibase-comment-update' => 'Språklenker har blitt oppdatert.',
+	'wikibase-comment-sitelink-add' => 'Språklenke tilført: $1',
+	'wikibase-comment-sitelink-change' => 'Språklenke endret fra $1 til $2',
+	'wikibase-comment-sitelink-remove' => 'Språklenke fjernet: $1',
+	'wikibase-editlinks' => 'Rediger lenker',
+	'wikibase-editlinkstitle' => 'Rediger språklenker – lenker til artikkelen på andre språk',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata-redigeringer i siste endringer',
 );
 
 /** Dutch (Nederlands)
  * @author Siebrand
  */
 $messages['nl'] = array(
-	'wbc-desc' => 'Client voor de uitbreiding Wikibase',
-	'wbc-after-page-move' => 'U kunt ook het gekoppelde Wikidataitem [$1 bijwerken] om de taalkoppelingen op de hernoemde pagina te kunnen beheren.',
-	'wbc-comment-remove' => 'Het gekoppelde Wikidataitem is verwijderd. De taalkoppelingen zijn verwijderd.',
-	'wbc-comment-linked' => 'Er is een Wikidataitem gekoppeld aan deze pagina.',
-	'wbc-comment-unlink' => 'Deze pagina is ontkoppeld van het Wikidataitem. De taalkoppelingen zijn verwijderd.',
-	'wbc-comment-restore' => 'Het gekoppelde Wikidataitem is teruggeplaatst. De taalkoppelingen zijn hersteld.',
-	'wbc-comment-update' => 'De taalkoppelingen zijn bijgewerkt.',
-	'wbc-comment-sitelink-add' => 'Taalkoppeling toegevoegd: $1',
-	'wbc-comment-sitelink-change' => 'Taalkoppeling gewijzigd van $1 naar $2',
-	'wbc-comment-sitelink-remove' => 'Taalkoppeling verwijderd: $1',
-	'wbc-editlinks' => 'Koppelingen bewerken',
-	'wbc-editlinkstitle' => 'Intertaalkoppelingen bewerken',
-	'wbc-rc-hide-wikidata' => 'Wikidata $1',
-	'wbc-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
+	'wikibase-client-desc' => 'Client voor de uitbreiding Wikibase',
+	'wikibase-after-page-move' => 'U kunt ook het gekoppelde Wikidataitem [$1 bijwerken] om de taalkoppelingen op de hernoemde pagina te kunnen beheren.',
+	'wikibase-comment-remove' => 'Het gekoppelde Wikidataitem is verwijderd. De taalkoppelingen zijn verwijderd.',
+	'wikibase-comment-linked' => 'Er is een Wikidataitem gekoppeld aan deze pagina.',
+	'wikibase-comment-unlink' => 'Deze pagina is ontkoppeld van het Wikidataitem. De taalkoppelingen zijn verwijderd.',
+	'wikibase-comment-restore' => 'Het gekoppelde Wikidataitem is teruggeplaatst. De taalkoppelingen zijn hersteld.',
+	'wikibase-comment-update' => 'De taalkoppelingen zijn bijgewerkt.',
+	'wikibase-comment-sitelink-add' => 'Taalkoppeling toegevoegd: $1',
+	'wikibase-comment-sitelink-change' => 'Taalkoppeling gewijzigd van $1 naar $2',
+	'wikibase-comment-sitelink-remove' => 'Taalkoppeling verwijderd: $1',
+	'wikibase-comment-multi' => '$1 wijzigingen',
+	'wikibase-editlinks' => 'Koppelingen bewerken',
+	'wikibase-editlinkstitle' => 'Intertaalkoppelingen bewerken',
+	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
 );
 
 /** Norwegian Nynorsk (norsk (nynorsk)‎)
@@ -668,20 +670,20 @@ $messages['nl'] = array(
  * @author Njardarlogar
  */
 $messages['nn'] = array(
-	'wbc-desc' => 'Klient for Wikibase-utvidinga',
-	'wbc-after-page-move' => 'Du kan òg [$1 oppdatera] det tilknytte Wikidata-settet for å halda språklenkjene på den flytte sida ved like.',
-	'wbc-comment-remove' => 'Tilknytt Wikidata-sett sletta. Språklenkjer fjerna.',
-	'wbc-comment-linked' => 'Eit Wikidata-sett har vorte lenkja til sida.',
-	'wbc-comment-unlink' => 'Lenkinga til sida har vorte fjerna frå Wikidata-settet. Språklenkjer fjerna.',
-	'wbc-comment-restore' => 'Tilknytt Wikidata-sett attoppretta. Språklenkjer lagde inn att.',
-	'wbc-comment-update' => 'Språklenkjer oppdaterte.',
-	'wbc-comment-sitelink-add' => 'Språklenkje lagd til: $1',
-	'wbc-comment-sitelink-change' => 'Språklenkje endra frå $1 til $2',
-	'wbc-comment-sitelink-remove' => 'Språklenkje fjerna: $1',
-	'wbc-editlinks' => 'Endra lenkjer',
-	'wbc-editlinkstitle' => 'Endra mellomspråklege lenkjer',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Vis Wikidata-endringar i siste endringane',
+	'wikibase-client-desc' => 'Klient for Wikibase-utvidinga',
+	'wikibase-after-page-move' => 'Du kan òg [$1 oppdatera] det tilknytte Wikidata-settet for å halda språklenkjene på den flytte sida ved like.',
+	'wikibase-comment-remove' => 'Tilknytt Wikidata-sett sletta. Språklenkjer fjerna.',
+	'wikibase-comment-linked' => 'Eit Wikidata-sett har vorte lenkja til sida.',
+	'wikibase-comment-unlink' => 'Lenkinga til sida har vorte fjerna frå Wikidata-settet. Språklenkjer fjerna.',
+	'wikibase-comment-restore' => 'Tilknytt Wikidata-sett attoppretta. Språklenkjer lagde inn att.',
+	'wikibase-comment-update' => 'Språklenkjer oppdaterte.',
+	'wikibase-comment-sitelink-add' => 'Språklenkje lagd til: $1',
+	'wikibase-comment-sitelink-change' => 'Språklenkje endra frå $1 til $2',
+	'wikibase-comment-sitelink-remove' => 'Språklenkje fjerna: $1',
+	'wikibase-editlinks' => 'Endra lenkjer',
+	'wikibase-editlinkstitle' => 'Endra mellomspråklege lenkjer',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata-endringar i siste endringane',
 );
 
 /** Polish (polski)
@@ -691,32 +693,32 @@ $messages['nn'] = array(
  * @author Odie2
  */
 $messages['pl'] = array(
-	'wbc-desc' => 'Klient rozszerzenia Wikibase',
-	'wbc-comment-sitelink-add' => 'Łącze języka dodane: $1',
-	'wbc-comment-sitelink-change' => 'Łącze języka zmienione z $1 na $2',
-	'wbc-comment-sitelink-remove' => 'Łącze języka usunięte: $1',
-	'wbc-editlinks' => 'Edytuj linki',
-	'wbc-editlinkstitle' => 'Edytuj linki wersji językowych',
+	'wikibase-client-desc' => 'Klient rozszerzenia Wikibase',
+	'wikibase-comment-sitelink-add' => 'Łącze języka dodane: $1',
+	'wikibase-comment-sitelink-change' => 'Łącze języka zmienione z $1 na $2',
+	'wikibase-comment-sitelink-remove' => 'Łącze języka usunięte: $1',
+	'wikibase-editlinks' => 'Edytuj linki',
+	'wikibase-editlinkstitle' => 'Edytuj linki wersji językowych',
 );
 
 /** Piedmontese (Piemontèis)
  * @author Dragonòt
  */
 $messages['pms'] = array(
-	'wbc-desc' => "Client për l'estension Wikibase",
-	'wbc-after-page-move' => "It peule ëdcò [$1 modifiché] j'element associà Wikidata për manten-e ij colegamente ëd lenga dzor le pagine tramudà.",
-	'wbc-comment-remove' => 'Element associà Wikidata scanselà. Colegament ëd lenga gavà.',
-	'wbc-comment-linked' => "N'element Wikidata a l'é stàit colegà a sta pagina.",
-	'wbc-comment-unlink' => "Sta pagina a l'é stàita scolegà da l'element Wikidata. Colegament ëd lenga gavà.",
-	'wbc-comment-restore' => 'Element associà Wikidata ripristinà. Colegament ëd lenga ripristinà.',
-	'wbc-comment-update' => 'Colegament ëd lenga agiornà.',
-	'wbc-comment-sitelink-add' => 'Colegament ëd lenga giontà: $1',
-	'wbc-comment-sitelink-change' => 'Colegament ëd lenga cangià da $1 a $2',
-	'wbc-comment-sitelink-remove' => 'Colegament ëd lenga gavà: $1',
-	'wbc-editlinks' => "Modifiché j'anliure",
-	'wbc-editlinkstitle' => 'Modìfica colegament antërlenga',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Smon modìfiche Wikidata ant ij cambi recent',
+	'wikibase-client-desc' => "Client për l'estension Wikibase",
+	'wikibase-after-page-move' => "It peule ëdcò [$1 modifiché] j'element associà Wikidata për manten-e ij colegamente ëd lenga dzor le pagine tramudà.",
+	'wikibase-comment-remove' => 'Element associà Wikidata scanselà. Colegament ëd lenga gavà.',
+	'wikibase-comment-linked' => "N'element Wikidata a l'é stàit colegà a sta pagina.",
+	'wikibase-comment-unlink' => "Sta pagina a l'é stàita scolegà da l'element Wikidata. Colegament ëd lenga gavà.",
+	'wikibase-comment-restore' => 'Element associà Wikidata ripristinà. Colegament ëd lenga ripristinà.',
+	'wikibase-comment-update' => 'Colegament ëd lenga agiornà.',
+	'wikibase-comment-sitelink-add' => 'Colegament ëd lenga giontà: $1',
+	'wikibase-comment-sitelink-change' => 'Colegament ëd lenga cangià da $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Colegament ëd lenga gavà: $1',
+	'wikibase-editlinks' => "Modifiché j'anliure",
+	'wikibase-editlinkstitle' => 'Modìfica colegament antërlenga',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Smon modìfiche Wikidata ant ij cambi recent',
 );
 
 /** Portuguese (português)
@@ -726,20 +728,20 @@ $messages['pms'] = array(
  * @author SandroHc
  */
 $messages['pt'] = array(
-	'wbc-desc' => 'Cliente para a extensão Wikibase',
-	'wbc-after-page-move' => 'Também pode [$1 actualizar] o item do Wikidata associado para manter os links de idioma na página movida.',
-	'wbc-comment-remove' => 'O item associado no Wikidata foi eliminado. Foram removidos os links para outros idiomas.',
-	'wbc-comment-linked' => 'Um item do Wikidata foi ligado a esta página.',
-	'wbc-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para outros idiomas foram removidos.',
-	'wbc-comment-restore' => 'O item associado no Wikidata foi restaurado. Foram restaurados os links para outros idiomas.',
-	'wbc-comment-update' => 'Foram atualizados os links para outros idiomas',
-	'wbc-comment-sitelink-add' => 'Link de idioma adicionado:$1',
-	'wbc-comment-sitelink-change' => 'Link de idioma alterado de  $1 para $2',
-	'wbc-comment-sitelink-remove' => 'Link de idioma removido: $1',
-	'wbc-editlinks' => 'Editar links',
-	'wbc-editlinkstitle' => 'Editar links interlínguas',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Mostrar as edições no Wikidata nas mudanças recentes',
+	'wikibase-client-desc' => 'Cliente para a extensão Wikibase',
+	'wikibase-after-page-move' => 'Também pode [$1 actualizar] o item do Wikidata associado para manter os links de idioma na página movida.',
+	'wikibase-comment-remove' => 'O item associado no Wikidata foi eliminado. Foram removidos os links para outros idiomas.',
+	'wikibase-comment-linked' => 'Um item do Wikidata foi ligado a esta página.',
+	'wikibase-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para outros idiomas foram removidos.',
+	'wikibase-comment-restore' => 'O item associado no Wikidata foi restaurado. Foram restaurados os links para outros idiomas.',
+	'wikibase-comment-update' => 'Foram atualizados os links para outros idiomas',
+	'wikibase-comment-sitelink-add' => 'Link de idioma adicionado:$1',
+	'wikibase-comment-sitelink-change' => 'Link de idioma alterado de  $1 para $2',
+	'wikibase-comment-sitelink-remove' => 'Link de idioma removido: $1',
+	'wikibase-editlinks' => 'Editar links',
+	'wikibase-editlinkstitle' => 'Editar links interlínguas',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Mostrar as edições no Wikidata nas mudanças recentes',
 );
 
 /** Brazilian Portuguese (português do Brasil)
@@ -769,8 +771,8 @@ $messages['pt-br'] = array(
  * @author Stelistcristi
  */
 $messages['ro'] = array(
-	'wbc-editlinks' => 'Editează legăturile',
-	'wbc-editlinkstitle' => 'Editează legăturile interlingvistice',
+	'wikibase-editlinks' => 'Editează legăturile',
+	'wikibase-editlinkstitle' => 'Editează legăturile interlingvistice',
 );
 
 /** Russian (русский)
@@ -779,46 +781,46 @@ $messages['ro'] = array(
  * @author Александр Сигачёв
  */
 $messages['ru'] = array(
-	'wbc-desc' => 'Клиент для расширения Wikibase',
-	'wbc-after-page-move' => 'Чтобы исправить на переименованной странице языковые ссылки, вы можете также [$1  обновить] связанный элемент Викиданных.',
-	'wbc-comment-remove' => 'Связанный элемент Викиданных удалён. Языковые ссылки ликвидированы.',
-	'wbc-comment-linked' => 'Элемент Викиданных был связан с данной страницей.',
-	'wbc-comment-unlink' => 'Связь этой страницы с элементом Викиданных была разорвана. Языковые ссылки удалены.',
-	'wbc-comment-restore' => 'Удаление связанного элемента Викиданных отменено. Языковые ссылки восстановлены.',
-	'wbc-comment-update' => 'Языковые ссылки обновлены.',
-	'wbc-comment-sitelink-add' => 'Интервики-ссылка добавлена: $1.',
-	'wbc-comment-sitelink-change' => 'Интервики-ссылка изменена с $1 на $2',
-	'wbc-comment-sitelink-remove' => 'Интервики-ссылка удалена: $1',
-	'wbc-editlinks' => 'Редактировать ссылки',
-	'wbc-editlinkstitle' => 'Редактировать межъязыковые ссылки',
-	'wbc-rc-hide-wikidata' => '$1 Викиданные',
-	'wbc-rc-show-wikidata-pref' => 'Показать изменения Викиданных в списке свежих правок',
+	'wikibase-client-desc' => 'Клиент для расширения Wikibase',
+	'wikibase-after-page-move' => 'Чтобы исправить на переименованной странице языковые ссылки, вы можете также [$1  обновить] связанный элемент Викиданных.',
+	'wikibase-comment-remove' => 'Связанный элемент Викиданных удалён. Языковые ссылки ликвидированы.',
+	'wikibase-comment-linked' => 'Элемент Викиданных был связан с данной страницей.',
+	'wikibase-comment-unlink' => 'Связь этой страницы с элементом Викиданных была разорвана. Языковые ссылки удалены.',
+	'wikibase-comment-restore' => 'Удаление связанного элемента Викиданных отменено. Языковые ссылки восстановлены.',
+	'wikibase-comment-update' => 'Языковые ссылки обновлены.',
+	'wikibase-comment-sitelink-add' => 'Интервики-ссылка добавлена: $1.',
+	'wikibase-comment-sitelink-change' => 'Интервики-ссылка изменена с $1 на $2',
+	'wikibase-comment-sitelink-remove' => 'Интервики-ссылка удалена: $1',
+	'wikibase-editlinks' => 'Редактировать ссылки',
+	'wikibase-editlinkstitle' => 'Редактировать межъязыковые ссылки',
+	'wikibase-rc-hide-wikidata' => '$1 Викиданные',
+	'wikibase-rc-show-wikidata-pref' => 'Показать изменения Викиданных в списке свежих правок',
 );
 
 /** Sinhala (සිංහල)
  * @author පසිඳු කාවින්ද
  */
 $messages['si'] = array(
-	'wbc-desc' => 'විකිපාදක දිගුව සඳහා සේවාදායකයා',
-	'wbc-comment-update' => 'භාෂා සබැඳි යාවත්කාලීන කරන ලදී.',
-	'wbc-comment-sitelink-add' => 'භාෂා සබැඳිය එක් කරන ලදී: $1',
-	'wbc-comment-sitelink-change' => 'භාෂා සබැඳිය $1 ගෙන් $2 වෙත වෙනස් වෙන ලදී',
-	'wbc-comment-sitelink-remove' => 'භාෂා සබැඳිය ඉවත් කරන ලදී: $1',
-	'wbc-editlinks' => 'සබැඳි සංස්කරණය කරන්න',
-	'wbc-editlinkstitle' => 'අන්තර්භාෂාමය සබැඳි සංස්කරණය කරන්න',
-	'wbc-rc-hide-wikidata' => '$1 විකිදත්ත',
-	'wbc-rc-show-wikidata-pref' => 'මෑත වෙනස්කම්වල විකිදත්ත සංස්කරණ පෙන්වන්න',
+	'wikibase-client-desc' => 'විකිපාදක දිගුව සඳහා සේවාදායකයා',
+	'wikibase-comment-update' => 'භාෂා සබැඳි යාවත්කාලීන කරන ලදී.',
+	'wikibase-comment-sitelink-add' => 'භාෂා සබැඳිය එක් කරන ලදී: $1',
+	'wikibase-comment-sitelink-change' => 'භාෂා සබැඳිය $1 ගෙන් $2 වෙත වෙනස් වෙන ලදී',
+	'wikibase-comment-sitelink-remove' => 'භාෂා සබැඳිය ඉවත් කරන ලදී: $1',
+	'wikibase-editlinks' => 'සබැඳි සංස්කරණය කරන්න',
+	'wikibase-editlinkstitle' => 'අන්තර්භාෂාමය සබැඳි සංස්කරණය කරන්න',
+	'wikibase-rc-hide-wikidata' => '$1 විකිදත්ත',
+	'wikibase-rc-show-wikidata-pref' => 'මෑත වෙනස්කම්වල විකිදත්ත සංස්කරණ පෙන්වන්න',
 );
 
 /** Slovak (slovenčina)
  * @author JAn Dudík
  */
 $messages['sk'] = array(
-	'wbc-desc' => 'Klient pre rozšírenie Wikibase',
-	'wbc-editlinks' => 'Upraviť odkazy',
-	'wbc-editlinkstitle' => 'Upraviť medzijazykové odkazy',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Zobraziť úpravy Wikidat v posledných zmienách',
+	'wikibase-client-desc' => 'Klient pre rozšírenie Wikibase',
+	'wikibase-editlinks' => 'Upraviť odkazy',
+	'wikibase-editlinkstitle' => 'Upraviť medzijazykové odkazy',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Zobraziť úpravy Wikidat v posledných zmienách',
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
@@ -826,17 +828,17 @@ $messages['sk'] = array(
  * @author Rancher
  */
 $messages['sr-ec'] = array(
-	'wbc-desc' => 'Клијент за проширење Викибаза',
-	'wbc-editlinks' => 'Уреди везе',
-	'wbc-editlinkstitle' => 'Уређивање међујезичких веза',
+	'wikibase-client-desc' => 'Клијент за проширење Викибаза',
+	'wikibase-editlinks' => 'Уреди везе',
+	'wikibase-editlinkstitle' => 'Уређивање међујезичких веза',
 );
 
 /** Serbian (Latin script) (srpski (latinica)‎)
  */
 $messages['sr-el'] = array(
-	'wbc-desc' => 'Klijent za proširenje Vikibaza',
-	'wbc-editlinks' => 'Uredi veze',
-	'wbc-editlinkstitle' => 'Uređivanje međujezičkih veza',
+	'wikibase-client-desc' => 'Klijent za proširenje Vikibaza',
+	'wikibase-editlinks' => 'Uredi veze',
+	'wikibase-editlinkstitle' => 'Uređivanje međujezičkih veza',
 );
 
 /** Swedish (svenska)
@@ -844,19 +846,19 @@ $messages['sr-el'] = array(
  * @author Lokal Profil
  */
 $messages['sv'] = array(
-	'wbc-desc' => 'Klient för tillägget Wikibase',
-	'wbc-comment-remove' => 'Tillhörande Wikidata objekt togs bort. Språklänkar togs bort.',
-	'wbc-comment-linked' => 'Ett Wikidata-objekt har länkats till den här sidan.',
-	'wbc-comment-unlink' => 'Denna sida har gjorts olänkad från Wikidata-objektet. Språklänkar togs bort.',
-	'wbc-comment-restore' => 'Tillhörande Wikidata-objekt togs bort. Språklänkar togs bort.',
-	'wbc-comment-update' => 'Språklänkar uppdaterades.',
-	'wbc-comment-sitelink-add' => 'Språklänken lades till: $1',
-	'wbc-comment-sitelink-change' => 'Språklänken ändrades från $1 till $2',
-	'wbc-comment-sitelink-remove' => 'Språklänken togs bort: $1',
-	'wbc-editlinks' => 'Redigera länkar',
-	'wbc-editlinkstitle' => 'Redigera interwikilänkar',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Visa Wikidataredigeringar i senaste ändringar',
+	'wikibase-client-desc' => 'Klient för tillägget Wikibase',
+	'wikibase-comment-remove' => 'Tillhörande Wikidata objekt togs bort. Språklänkar togs bort.',
+	'wikibase-comment-linked' => 'Ett Wikidata-objekt har länkats till den här sidan.',
+	'wikibase-comment-unlink' => 'Denna sida har gjorts olänkad från Wikidata-objektet. Språklänkar togs bort.',
+	'wikibase-comment-restore' => 'Tillhörande Wikidata-objekt togs bort. Språklänkar togs bort.',
+	'wikibase-comment-update' => 'Språklänkar uppdaterades.',
+	'wikibase-comment-sitelink-add' => 'Språklänken lades till: $1',
+	'wikibase-comment-sitelink-change' => 'Språklänken ändrades från $1 till $2',
+	'wikibase-comment-sitelink-remove' => 'Språklänken togs bort: $1',
+	'wikibase-editlinks' => 'Redigera länkar',
+	'wikibase-editlinkstitle' => 'Redigera interwikilänkar',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Visa Wikidataredigeringar i senaste ändringar',
 );
 
 /** Tamil (தமிழ்)
@@ -864,67 +866,67 @@ $messages['sv'] = array(
  * @author மதனாஹரன்
  */
 $messages['ta'] = array(
-	'wbc-editlinks' => 'இணைப்புக்களைத் தொகு',
-	'wbc-rc-hide-wikidata' => '$1 விக்கித்தரவு',
-	'wbc-rc-show-wikidata-pref' => 'விக்கித்தரவு தொகுப்புகளை அண்மைய மாற்றங்களில் காண்பி',
+	'wikibase-editlinks' => 'இணைப்புக்களைத் தொகு',
+	'wikibase-rc-hide-wikidata' => '$1 விக்கித்தரவு',
+	'wikibase-rc-show-wikidata-pref' => 'விக்கித்தரவு தொகுப்புகளை அண்மைய மாற்றங்களில் காண்பி',
 );
 
 /** Telugu (తెలుగు)
  * @author Veeven
  */
 $messages['te'] = array(
-	'wbc-editlinks' => 'లంకెలను మార్చు',
-	'wbc-rc-hide-wikidata' => 'వికీడాటాను $1',
-	'wbc-rc-show-wikidata-pref' => 'వికీడామా మార్పులను ఇటీవలి మార్పులలో చూపించు',
+	'wikibase-editlinks' => 'లంకెలను మార్చు',
+	'wikibase-rc-hide-wikidata' => 'వికీడాటాను $1',
+	'wikibase-rc-show-wikidata-pref' => 'వికీడామా మార్పులను ఇటీవలి మార్పులలో చూపించు',
 );
 
 /** Tagalog (Tagalog)
  * @author AnakngAraw
  */
 $messages['tl'] = array(
-	'wbc-desc' => 'Kliyente para sa dugtong na Wikibase',
-	'wbc-editlinks' => 'Baguhin ang mga kawing',
-	'wbc-editlinkstitle' => 'Baguhin ang mga kawing na para sa interwika',
+	'wikibase-client-desc' => 'Kliyente para sa dugtong na Wikibase',
+	'wikibase-editlinks' => 'Baguhin ang mga kawing',
+	'wikibase-editlinkstitle' => 'Baguhin ang mga kawing na para sa interwika',
 );
 
 /** Ukrainian (українська)
  * @author Ата
  */
 $messages['uk'] = array(
-	'wbc-desc' => 'Клієнт для розширення Wikibase',
-	'wbc-after-page-move' => "Щоб виправити мовні посилання на перейменованій сторінці, Ви також можете [$1 оновити] пов'язаний елемент Вікіданих.",
-	'wbc-comment-remove' => "Пов'язаний елемент Вікіданих видалений. Мовні посилання видалені.",
-	'wbc-comment-linked' => 'Елемент Вікіданих посилався на цю сторінку.',
-	'wbc-comment-unlink' => "Ця сторінка була від'єднана від елемента Вікіданих. Мовні посилання видалені.",
-	'wbc-comment-restore' => "Пов'язаний елемент Вікіданих відновлений. Мовні посилання відновлені.",
-	'wbc-comment-update' => 'Мовні посилання оновлені.',
-	'wbc-comment-sitelink-add' => 'Додано мовне посилання: $1',
-	'wbc-comment-sitelink-change' => 'Мовне посилання змінено з $1 на $2',
-	'wbc-comment-sitelink-remove' => 'Мовне посилання видалено: $1',
-	'wbc-editlinks' => 'Редагувати посилання',
-	'wbc-editlinkstitle' => 'Редагувати міжмовні посилання',
-	'wbc-rc-hide-wikidata' => '$1 Вікідані',
-	'wbc-rc-show-wikidata-pref' => 'Показати зміни Вікіданих у списку нових редагувань',
+	'wikibase-client-desc' => 'Клієнт для розширення Wikibase',
+	'wikibase-after-page-move' => "Щоб виправити мовні посилання на перейменованій сторінці, Ви також можете [$1 оновити] пов'язаний елемент Вікіданих.",
+	'wikibase-comment-remove' => "Пов'язаний елемент Вікіданих видалений. Мовні посилання видалені.",
+	'wikibase-comment-linked' => 'Елемент Вікіданих посилався на цю сторінку.',
+	'wikibase-comment-unlink' => "Ця сторінка була від'єднана від елемента Вікіданих. Мовні посилання видалені.",
+	'wikibase-comment-restore' => "Пов'язаний елемент Вікіданих відновлений. Мовні посилання відновлені.",
+	'wikibase-comment-update' => 'Мовні посилання оновлені.',
+	'wikibase-comment-sitelink-add' => 'Додано мовне посилання: $1',
+	'wikibase-comment-sitelink-change' => 'Мовне посилання змінено з $1 на $2',
+	'wikibase-comment-sitelink-remove' => 'Мовне посилання видалено: $1',
+	'wikibase-editlinks' => 'Редагувати посилання',
+	'wikibase-editlinkstitle' => 'Редагувати міжмовні посилання',
+	'wikibase-rc-hide-wikidata' => '$1 Вікідані',
+	'wikibase-rc-show-wikidata-pref' => 'Показати зміни Вікіданих у списку нових редагувань',
 );
 
 /** Vietnamese (Tiếng Việt)
  * @author Minh Nguyen
  */
 $messages['vi'] = array(
-	'wbc-desc' => 'Trình khách của phần mở rộng Wikibase',
-	'wbc-after-page-move' => 'Bạn cũng có thể [$1 cập nhật] khoản mục Wikidata liên kết để duy trì các liên kết ngôn ngữ trên trang được di chuyển.',
-	'wbc-comment-remove' => 'Đã xóa khoản mục liên kết Wikidata. Đã loại bỏ các liên kết ngôn ngữ.',
-	'wbc-comment-linked' => 'Một khoản mục Wikidata đã được liên kết đến trang này.',
-	'wbc-comment-unlink' => 'Đã gỡ liên kết đến khoản mục Wikidata khỏi trang này. Đã dời các liên kết ngôn ngữ.',
-	'wbc-comment-restore' => 'Đã phục hồi khoản mục liên kết Wikidata. Đã phục hồi các liên kết ngôn ngữ.',
-	'wbc-comment-update' => 'Đã cập nhật các liên kết ngôn ngữ.',
-	'wbc-comment-sitelink-add' => 'Đã thêm liên kết ngôn ngữ: $1',
-	'wbc-comment-sitelink-change' => 'Đã đổi liên kết ngôn ngữ từ $1 thành $2',
-	'wbc-comment-sitelink-remove' => 'Đã loại bỏ liên kết ngôn ngữ: $1',
-	'wbc-editlinks' => 'Sửa liên kết',
-	'wbc-editlinkstitle' => 'Sửa liên kết giữa ngôn ngữ',
-	'wbc-rc-hide-wikidata' => '$1 Wikidata',
-	'wbc-rc-show-wikidata-pref' => 'Hiện các sửa đổi Wikidata trong thay đổi gần đây',
+	'wikibase-client-desc' => 'Trình khách của phần mở rộng Wikibase',
+	'wikibase-after-page-move' => 'Bạn cũng có thể [$1 cập nhật] khoản mục Wikidata liên kết để duy trì các liên kết ngôn ngữ trên trang được di chuyển.',
+	'wikibase-comment-remove' => 'Đã xóa khoản mục liên kết Wikidata. Đã loại bỏ các liên kết ngôn ngữ.',
+	'wikibase-comment-linked' => 'Một khoản mục Wikidata đã được liên kết đến trang này.',
+	'wikibase-comment-unlink' => 'Đã gỡ liên kết đến khoản mục Wikidata khỏi trang này. Đã dời các liên kết ngôn ngữ.',
+	'wikibase-comment-restore' => 'Đã phục hồi khoản mục liên kết Wikidata. Đã phục hồi các liên kết ngôn ngữ.',
+	'wikibase-comment-update' => 'Đã cập nhật các liên kết ngôn ngữ.',
+	'wikibase-comment-sitelink-add' => 'Đã thêm liên kết ngôn ngữ: $1',
+	'wikibase-comment-sitelink-change' => 'Đã đổi liên kết ngôn ngữ từ $1 thành $2',
+	'wikibase-comment-sitelink-remove' => 'Đã loại bỏ liên kết ngôn ngữ: $1',
+	'wikibase-editlinks' => 'Sửa liên kết',
+	'wikibase-editlinkstitle' => 'Sửa liên kết giữa ngôn ngữ',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Hiện các sửa đổi Wikidata trong thay đổi gần đây',
 );
 
 /** Simplified Chinese (中文（简体）‎)
@@ -934,38 +936,36 @@ $messages['vi'] = array(
  * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
-	'wbc-desc' => 'Wikibase扩展客户端',
-	'wbc-after-page-move' => '您还可以[$1 更新]关联的维基数据项目，使其链接至移动后的页面。',
-	'wbc-comment-remove' => '关联的维基数据项目已删除。语言链接已移除。',
-	'wbc-comment-linked' => '一个维基数据项目已链接至此页面。',
-	'wbc-comment-unlink' => '本页已解除维基数据项目的链接。语言链接已移除。',
-	'wbc-comment-restore' => '关联的维基数据项目已还原。语言链接已恢复。',
-	'wbc-comment-update' => '语言链接已更新。',
-	'wbc-comment-sitelink-add' => '添加语言链接：$1',
-	'wbc-comment-sitelink-change' => '语言链接从$1更改为$2',
-	'wbc-comment-sitelink-remove' => '删除语言链接：$1',
-	'wbc-editlinks' => '编辑链接',
-	'wbc-editlinkstitle' => '编辑跨语言链接',
-	'wbc-rc-hide-wikidata' => '$1维基数据',
-	'wbc-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
+	'wikibase-client-desc' => 'Wikibase扩展客户端',
+	'wikibase-after-page-move' => '您还可以[$1 更新]关联的维基数据项目，使其链接至移动后的页面。',
+	'wikibase-comment-remove' => '关联的维基数据项目已删除。语言链接已移除。',
+	'wikibase-comment-linked' => '一个维基数据项目已链接至此页面。',
+	'wikibase-comment-unlink' => '本页已解除维基数据项目的链接。语言链接已移除。',
+	'wikibase-comment-restore' => '关联的维基数据项目已还原。语言链接已恢复。',
+	'wikibase-comment-update' => '语言链接已更新。',
+	'wikibase-comment-sitelink-add' => '添加语言链接：$1',
+	'wikibase-comment-sitelink-change' => '语言链接从$1更改为$2',
+	'wikibase-comment-sitelink-remove' => '删除语言链接：$1',
+	'wikibase-editlinkstitle' => '编辑跨语言链接',
+	'wikibase-rc-hide-wikidata' => '$1维基数据',
+	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
 );
 
 /** Traditional Chinese (中文（繁體）‎)
  * @author Stevenliuyi
  */
 $messages['zh-hant'] = array(
-	'wbc-desc' => 'Wikibase擴展客戶端',
-	'wbc-after-page-move' => '您還可以[$1 更新]關聯的維基數據項目，使其連結至移動後的頁面。',
-	'wbc-comment-remove' => '關聯的維基數據項目已刪除。語言連結已移除。',
-	'wbc-comment-linked' => '一個維基數據項目已連結至此頁面。',
-	'wbc-comment-unlink' => '本頁已解除維基數據項目的連結。語言連結已移除。',
-	'wbc-comment-restore' => '關聯的維基數據項目已還原。語言連結已恢復。',
-	'wbc-comment-update' => '語言連結已更新。',
-	'wbc-comment-sitelink-add' => '添加語言連結：$1',
-	'wbc-comment-sitelink-change' => '語言連結從$1更改為$2',
-	'wbc-comment-sitelink-remove' => '刪除語言連結：$1',
-	'wbc-editlinks' => '編輯鏈接',
-	'wbc-editlinkstitle' => '編輯跨語言鏈接',
-	'wbc-rc-hide-wikidata' => '$1維基數據',
-	'wbc-rc-show-wikidata-pref' => '在最近更改中顯示維基數據的編輯',
+	'wikibase-client-desc' => 'Wikibase擴展客戶端',
+	'wikibase-after-page-move' => '您還可以[$1 更新]關聯的維基數據項目，使其連結至移動後的頁面。',
+	'wikibase-comment-remove' => '關聯的維基數據項目已刪除。語言連結已移除。',
+	'wikibase-comment-linked' => '一個維基數據項目已連結至此頁面。',
+	'wikibase-comment-unlink' => '本頁已解除維基數據項目的連結。語言連結已移除。',
+	'wikibase-comment-restore' => '關聯的維基數據項目已還原。語言連結已恢復。',
+	'wikibase-comment-update' => '語言連結已更新。',
+	'wikibase-comment-sitelink-add' => '添加語言連結：$1',
+	'wikibase-comment-sitelink-change' => '語言連結從$1更改為$2',
+	'wikibase-comment-sitelink-remove' => '刪除語言連結：$1',
+	'wikibase-editlinkstitle' => '編輯跨語言鏈接',
+	'wikibase-rc-hide-wikidata' => '$1維基數據',
+	'wikibase-rc-show-wikidata-pref' => '在最近更改中顯示維基數據的編輯',
 );

@@ -58,10 +58,10 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
  * @author Xuacu
  */
 $messages['ast'] = array(
-	'wikibaselib-desc' => 'Contién les funciones comúnes pa les estensiones Wikibase y Wikibase Client.',
-	'wikibaselib-entity-item' => 'elementu',
-	'wikibaselib-entity-property' => 'propiedá',
-	'wikibaselib-entity-query' => 'consulta',
+	'wikibase-lib-desc' => 'Contién les funciones comúnes pa les estensiones Wikibase y Wikibase Client.',
+	'wikibase-entity-item' => 'elementu',
+	'wikibase-entity-property' => 'propiedá',
+	'wikibase-entity-query' => 'consulta',
 	'datatypes-type-wikibase-item' => 'Elementu',
 	'datatypes-type-commonsMedia' => 'Ficheru multimedia de Commons',
 );
@@ -70,10 +70,14 @@ $messages['ast'] = array(
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
-	'wikibaselib-desc' => 'Утрымлівае агульны функцыянал пашырэньняў Wikibase і Wikibase Client.',
-	'wikibaselib-entity-item' => 'элемэнт',
-	'wikibaselib-entity-property' => 'уласьцівасьць',
-	'wikibaselib-entity-query' => 'запыт',
+	'wikibase-lib-desc' => 'Утрымлівае агульны функцыянал пашырэньняў Wikibase і Wikibase Client.',
+	'wikibase-entity-item' => 'элемэнт',
+	'wikibase-entity-property' => 'уласьцівасьць',
+	'wikibase-entity-query' => 'запыт',
+	'wikibase-sitelinks' => 'Сьпіс старонак, што спасылаюцца на гэты аб’ект',
+	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
+	'wikibase-sitelinks-siteid-columnheading' => 'Код',
+	'wikibase-sitelinks-link-columnheading' => 'Злучаны артыкул',
 	'datatypes-type-wikibase-item' => 'Аб’ект',
 	'datatypes-type-commonsMedia' => 'Мэдыяфайл зь Вікісховішча',
 );
@@ -82,10 +86,14 @@ $messages['be-tarask'] = array(
  * @author Edinwiki
  */
 $messages['bs'] = array(
-	'wikibaselib-desc' => 'Sadrži zajedničku funkcionalnost za Wikibazu i proširenje za Wikibaza klijent.',
-	'wikibaselib-entity-item' => 'stavka',
-	'wikibaselib-entity-property' => 'svojstvo',
-	'wikibaselib-entity-query' => 'upit',
+	'wikibase-lib-desc' => 'Sadrži zajedničku funkcionalnost za Wikibazu i proširenje za Wikibaza klijent.',
+	'wikibase-entity-item' => 'stavka',
+	'wikibase-entity-property' => 'svojstvo',
+	'wikibase-entity-query' => 'upit',
+	'wikibase-sitelinks' => 'Spisak stranica koje su povezane uz ovu stavku',
+	'wikibase-sitelinks-sitename-columnheading' => 'Jezik',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
+	'wikibase-sitelinks-link-columnheading' => 'Povezana stranica',
 	'datatypes-type-wikibase-item' => 'Stavka',
 	'datatypes-type-commonsMedia' => 'Commons medijska datoteka',
 );
@@ -93,25 +101,34 @@ $messages['bs'] = array(
 /** Catalan (català)
  * @author Arnaugir
  * @author Grondin
+ * @author Toniher
  */
 $messages['ca'] = array(
-	'wikibaselib-desc' => 'Té la funcionalitat comuna per les extensions de Wikibase i de Wikibase Client',
-	'wikibaselib-entity-item' => 'element',
-	'wikibaselib-entity-property' => 'propietat',
-	'wikibaselib-entity-query' => 'consulta',
+	'wikibase-lib-desc' => 'Té la funcionalitat comuna per les extensions de Wikibase i de Wikibase Client',
+	'wikibase-entity-item' => 'element',
+	'wikibase-entity-property' => 'propietat',
+	'wikibase-entity-query' => 'consulta',
+	'wikibase-sitelinks' => 'Llista de les pàgines vinculades a aquest element',
+	'wikibase-sitelinks-sitename-columnheading' => 'Llengua',
+	'wikibase-sitelinks-siteid-columnheading' => 'Codi',
+	'wikibase-sitelinks-link-columnheading' => 'Article enllaçat',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Fitxer multimèdia de Commons',
 );
 
 /** Czech (česky)
+ * @author Danny B.
  * @author JAn Dudík
  * @author Vks
  */
 $messages['cs'] = array(
-	'wikibaselib-desc' => 'Obsahuje běžné funkce pro rozšíření Wikibase a Wikibase klient',
-	'wikibaselib-entity-item' => 'položka',
-	'wikibaselib-entity-property' => 'vlastnost',
-	'wikibaselib-entity-query' => 'dotaz',
+	'wikibase-lib-desc' => 'Obsahuje běžné funkce pro rozšíření Wikibase a Wikibase klient',
+	'wikibase-entity-item' => 'položka',
+	'wikibase-entity-property' => 'vlastnost',
+	'wikibase-entity-query' => 'dotaz',
+	'wikibase-sitelinks' => 'Seznam stránek svázaných s touto položkou',
+	'wikibase-sitelinks-sitename-columnheading' => 'Jazyk',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kód',
 	'datatypes-type-wikibase-item' => 'Položka',
 	'datatypes-type-commonsMedia' => 'Commons multimediální soubor',
 );
@@ -120,10 +137,14 @@ $messages['cs'] = array(
  * @author Poul G
  */
 $messages['da'] = array(
-	'wikibaselib-desc' => 'Fælles funktionalitet for Wikibase og Wikibase klient udvidelser',
-	'wikibaselib-entity-item' => 'emne',
-	'wikibaselib-entity-property' => 'egenskab',
-	'wikibaselib-entity-query' => 'forespørgsel',
+	'wikibase-lib-desc' => 'Fælles funktionalitet for Wikibase og Wikibase klient udvidelser',
+	'wikibase-entity-item' => 'emne',
+	'wikibase-entity-property' => 'egenskab',
+	'wikibase-entity-query' => 'forespørgsel',
+	'wikibase-sitelinks' => 'Liste over sider, der er knyttet til dette emne',
+	'wikibase-sitelinks-sitename-columnheading' => 'Sprog',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
+	'wikibase-sitelinks-link-columnheading' => 'Linket artikel',
 	'datatypes-type-wikibase-item' => 'Emne',
 	'datatypes-type-commonsMedia' => 'Commons media-fil',
 );
@@ -134,10 +155,14 @@ $messages['da'] = array(
  * @author Metalhead64
  */
 $messages['de'] = array(
-	'wikibaselib-desc' => 'Stellt von den Erweiterungen Wikibase und Wikibase Client gemeinsam genutzte Funktionen bereit',
-	'wikibaselib-entity-item' => 'Datenobjekt',
-	'wikibaselib-entity-property' => 'Eigenschaft',
-	'wikibaselib-entity-query' => 'Abfrage',
+	'wikibase-lib-desc' => 'Stellt von den Erweiterungen Wikibase und Wikibase Client gemeinsam genutzte Funktionen bereit',
+	'wikibase-entity-item' => 'Datenobjekt',
+	'wikibase-entity-property' => 'Eigenschaft',
+	'wikibase-entity-query' => 'Abfrage',
+	'wikibase-sitelinks' => 'Liste der Seiten, die mit diesem Datenobjekt verknüpft sind',
+	'wikibase-sitelinks-sitename-columnheading' => 'Sprache',
+	'wikibase-sitelinks-siteid-columnheading' => 'Code',
+	'wikibase-sitelinks-link-columnheading' => 'Verlinkter Artikel',
 	'datatypes-type-wikibase-item' => 'Datenobjekt',
 	'datatypes-type-commonsMedia' => 'Mediendatei auf Commons',
 );
@@ -146,8 +171,10 @@ $messages['de'] = array(
  * @author Erdemaslancan
  */
 $messages['diq'] = array(
-	'wikibaselib-entity-item' => 'çêki',
-	'wikibaselib-entity-query' => 'persen',
+	'wikibase-entity-item' => 'çêki',
+	'wikibase-entity-query' => 'persen',
+	'wikibase-sitelinks-sitename-columnheading' => 'Zıwan',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
 	'datatypes-type-wikibase-item' => 'Çêki',
 );
 
@@ -155,10 +182,14 @@ $messages['diq'] = array(
  * @author Michawiki
  */
 $messages['dsb'] = array(
-	'wikibaselib-desc' => 'Stoj powšyknu funkcionalnosć za rozšyrjeni Wikibase a Wikibase Client k dispoziciji',
-	'wikibaselib-entity-item' => 'element',
-	'wikibaselib-entity-property' => 'kakosć',
-	'wikibaselib-entity-query' => 'wótpšašanje',
+	'wikibase-lib-desc' => 'Stoj powšyknu funkcionalnosć za rozšyrjeni Wikibase a Wikibase Client k dispoziciji',
+	'wikibase-entity-item' => 'element',
+	'wikibase-entity-property' => 'kakosć',
+	'wikibase-entity-query' => 'wótpšašanje',
+	'wikibase-sitelinks' => 'Lisćina bokow, kótarež su z toś tym elementom zwězane',
+	'wikibase-sitelinks-sitename-columnheading' => 'Rěc',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
+	'wikibase-sitelinks-link-columnheading' => 'Wótkazany nastawk',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Medijowa dataja na Wikimedia Commons',
 );
@@ -167,10 +198,14 @@ $messages['dsb'] = array(
  * @author ArnoLagrange
  */
 $messages['eo'] = array(
-	'wikibaselib-desc' => 'Enhavas komunajn funckiojn por Vikidatumaj kaj por la Vikidatuma klienta etendaĵo',
-	'wikibaselib-entity-item' => 'ero',
-	'wikibaselib-entity-property' => 'Atributo',
-	'wikibaselib-entity-query' => 'Serĉomendo',
+	'wikibase-lib-desc' => 'Enhavas komunajn funckiojn por Vikidatumaj kaj por la Vikidatuma klienta etendaĵo',
+	'wikibase-entity-item' => 'ero',
+	'wikibase-entity-property' => 'Atributo',
+	'wikibase-entity-query' => 'Serĉomendo',
+	'wikibase-sitelinks' => 'Listo de paĝoj ligitaj al ĉi tiu ero',
+	'wikibase-sitelinks-sitename-columnheading' => 'Lingvo',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kodo',
+	'wikibase-sitelinks-link-columnheading' => 'Ligita artikolo',
 	'datatypes-type-wikibase-item' => 'Ero',
 	'datatypes-type-commonsMedia' => 'Multrimeda dosiero en Komunejo',
 );
@@ -180,23 +215,39 @@ $messages['eo'] = array(
  * @author Dalton2
  */
 $messages['es'] = array(
-	'wikibaselib-desc' => 'Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.',
-	'wikibaselib-entity-item' => 'elemento',
-	'wikibaselib-entity-property' => 'propiedad',
-	'wikibaselib-entity-query' => 'consulta',
+	'wikibase-lib-desc' => 'Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.',
+	'wikibase-entity-item' => 'elemento',
+	'wikibase-entity-property' => 'propiedad',
+	'wikibase-entity-query' => 'consulta',
+	'wikibase-sitelinks' => 'Lista de páginas enlazadas a este elemento',
+	'wikibase-sitelinks-sitename-columnheading' => 'Idioma',
+	'wikibase-sitelinks-siteid-columnheading' => 'Código',
+	'wikibase-sitelinks-link-columnheading' => 'Artículo enlazado',
 	'datatypes-type-wikibase-item' => 'Elemento',
 	'datatypes-type-commonsMedia' => 'Archivo multimedia de Commons',
 );
 
+/** Estonian (eesti)
+ * @author Avjoska
+ */
+$messages['et'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'Keel',
+);
+
 /** Persian (فارسی)
+ * @author Dalba
  * @author Reza1615
  * @author ZxxZxxZ
  */
 $messages['fa'] = array(
-	'wikibaselib-desc' => 'نگهداری قابلیت‌های اساسی برای ویکی‌بیس و افزونه‌های کارخواه ویکی‌بیس',
-	'wikibaselib-entity-item' => 'آیتم',
-	'wikibaselib-entity-property' => 'ویژگی',
-	'wikibaselib-entity-query' => 'کوئری',
+	'wikibase-lib-desc' => 'نگهداری قابلیت‌های اساسی برای ویکی‌بیس و افزونه‌های کارخواه ویکی‌بیس',
+	'wikibase-entity-item' => 'آیتم',
+	'wikibase-entity-property' => 'ویژگی',
+	'wikibase-entity-query' => 'کوئری',
+	'wikibase-sitelinks' => 'فهرست صفحه‌هایی که به این آیتم پیوند دارند',
+	'wikibase-sitelinks-sitename-columnheading' => 'زبان',
+	'wikibase-sitelinks-siteid-columnheading' => 'کد',
+	'wikibase-sitelinks-link-columnheading' => 'مقالهٔ پیوندداده‌شده',
 	'datatypes-type-wikibase-item' => 'آیتم',
 	'datatypes-type-commonsMedia' => 'پرونده‌های ویکی‌انبار',
 );
@@ -206,23 +257,34 @@ $messages['fa'] = array(
  * @author VezonThunder
  */
 $messages['fi'] = array(
-	'wikibaselib-desc' => 'Sisältää Wikibase- ja Wikibase Client -laajennuksille yhteistä toiminnallisuutta',
-	'wikibaselib-entity-item' => 'kohde',
-	'wikibaselib-entity-property' => 'ominaisuus',
-	'wikibaselib-entity-query' => 'kysely',
+	'wikibase-lib-desc' => 'Sisältää Wikibase- ja Wikibase Client -laajennuksille yhteistä toiminnallisuutta',
+	'wikibase-entity-item' => 'kohde',
+	'wikibase-entity-property' => 'ominaisuus',
+	'wikibase-entity-query' => 'kysely',
+	'wikibase-sitelinks' => 'Luettelo tähän kohteeseen linkitetyistä sivuista',
+	'wikibase-sitelinks-sitename-columnheading' => 'Kieli',
+	'wikibase-sitelinks-siteid-columnheading' => 'Koodi',
+	'wikibase-sitelinks-link-columnheading' => 'Linkitetty artikkeli',
 	'datatypes-type-wikibase-item' => 'Kohde',
 	'datatypes-type-commonsMedia' => 'Commonsin mediatiedosto',
 );
 
 /** French (français)
  * @author Arkanosis
+ * @author DavidL
+ * @author Ltrlg
+ * @author Tititou36
  * @author Wyz
  */
 $messages['fr'] = array(
-	'wikibaselib-desc' => 'Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client',
-	'wikibaselib-entity-item' => 'élément',
-	'wikibaselib-entity-property' => 'propriété',
-	'wikibaselib-entity-query' => 'requête',
+	'wikibase-lib-desc' => 'Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client',
+	'wikibase-entity-item' => 'élément',
+	'wikibase-entity-property' => 'propriété',
+	'wikibase-entity-query' => 'requête',
+	'wikibase-sitelinks' => 'Liste des pages liées à cet élément',
+	'wikibase-sitelinks-sitename-columnheading' => 'Langue',
+	'wikibase-sitelinks-siteid-columnheading' => 'Code',
+	'wikibase-sitelinks-link-columnheading' => 'Articles liés',
 	'datatypes-type-wikibase-item' => 'Élément',
 	'datatypes-type-commonsMedia' => 'Fichier multimédia de Commons',
 );
@@ -231,9 +293,13 @@ $messages['fr'] = array(
  * @author ChrisPtDe
  */
 $messages['frp'] = array(
-	'wikibaselib-entity-item' => 'èlèment',
-	'wikibaselib-entity-property' => 'propriètât',
-	'wikibaselib-entity-query' => 'demanda',
+	'wikibase-entity-item' => 'èlèment',
+	'wikibase-entity-property' => 'propriètât',
+	'wikibase-entity-query' => 'demanda',
+	'wikibase-sitelinks' => 'Lista de les pâges liyêyes a cet’èlèment',
+	'wikibase-sitelinks-sitename-columnheading' => 'Lengoua',
+	'wikibase-sitelinks-siteid-columnheading' => 'Code',
+	'wikibase-sitelinks-link-columnheading' => 'Articllo liyê',
 	'datatypes-type-wikibase-item' => 'Èlèment',
 	'datatypes-type-commonsMedia' => 'Fichiér mèdia de Commons',
 );
@@ -242,10 +308,14 @@ $messages['frp'] = array(
  * @author Toliño
  */
 $messages['gl'] = array(
-	'wikibaselib-desc' => 'Contén funcionalidades comúns para as extensións Wikibase e Wikibase Client',
-	'wikibaselib-entity-item' => 'elemento',
-	'wikibaselib-entity-property' => 'propiedade',
-	'wikibaselib-entity-query' => 'pescuda',
+	'wikibase-lib-desc' => 'Contén funcionalidades comúns para as extensións Wikibase e Wikibase Client',
+	'wikibase-entity-item' => 'elemento',
+	'wikibase-entity-property' => 'propiedade',
+	'wikibase-entity-query' => 'pescuda',
+	'wikibase-sitelinks' => 'Lista de páxinas con ligazóns cara a este elemento',
+	'wikibase-sitelinks-sitename-columnheading' => 'Lingua',
+	'wikibase-sitelinks-siteid-columnheading' => 'Código',
+	'wikibase-sitelinks-link-columnheading' => 'Artigo ligado',
 	'datatypes-type-wikibase-item' => 'Elemento',
 	'datatypes-type-commonsMedia' => 'Ficheiro multimedia de Commons',
 );
@@ -254,10 +324,11 @@ $messages['gl'] = array(
  * @author Als-Holder
  */
 $messages['gsw'] = array(
-	'wikibaselib-desc' => 'Stellt vu dr Erwyterige Wikibase un Wikibase Client gmeinsam gnutzti Funktione z Verfiegig',
-	'wikibaselib-entity-item' => 'Objäkt',
-	'wikibaselib-entity-property' => 'Eigeschaft',
-	'wikibaselib-entity-query' => 'Abfrog',
+	'wikibase-lib-desc' => 'Stellt vu dr Erwyterige Wikibase un Wikibase Client gmeinsam gnutzti Funktione z Verfiegig',
+	'wikibase-entity-item' => 'Objäkt',
+	'wikibase-entity-property' => 'Eigeschaft',
+	'wikibase-entity-query' => 'Abfrog',
+	'wikibase-sitelinks' => '{{SITENAME}}-Syte, wu mit däm Datenelemänt verchnipft sin', # Fuzzy
 	'datatypes-type-wikibase-item' => 'Objäkt',
 	'datatypes-type-commonsMedia' => 'Mediedatei uf dr Commons',
 );
@@ -266,10 +337,14 @@ $messages['gsw'] = array(
  * @author Amire80
  */
 $messages['he'] = array(
-	'wikibaselib-desc' => 'הפעולות המשותפות להרחבות Wikibase ו־Wikibase Client',
-	'wikibaselib-entity-item' => 'פריט',
-	'wikibaselib-entity-property' => 'מאפיין',
-	'wikibaselib-entity-query' => 'שאילתה',
+	'wikibase-lib-desc' => 'הפעולות המשותפות להרחבות Wikibase ו־Wikibase Client',
+	'wikibase-entity-item' => 'פריט',
+	'wikibase-entity-property' => 'מאפיין',
+	'wikibase-entity-query' => 'שאילתה',
+	'wikibase-sitelinks' => 'רשימת הדפים המקושרים לפריט הזה.',
+	'wikibase-sitelinks-sitename-columnheading' => 'שפה',
+	'wikibase-sitelinks-siteid-columnheading' => 'קוד',
+	'wikibase-sitelinks-link-columnheading' => 'ערך מקושר',
 	'datatypes-type-wikibase-item' => 'פריט',
 	'datatypes-type-commonsMedia' => 'קובץ מדיה בוויקישיתוף',
 );
@@ -278,10 +353,14 @@ $messages['he'] = array(
  * @author Michawiki
  */
 $messages['hsb'] = array(
-	'wikibaselib-desc' => 'Steji powšitkownu funkcionalnosć za rozšěrjeni Wikibase a Wikibase Client k dispoziciji',
-	'wikibaselib-entity-item' => 'element',
-	'wikibaselib-entity-property' => 'kajkosć',
-	'wikibaselib-entity-query' => 'naprašowanje',
+	'wikibase-lib-desc' => 'Steji powšitkownu funkcionalnosć za rozšěrjeni Wikibase a Wikibase Client k dispoziciji',
+	'wikibase-entity-item' => 'element',
+	'wikibase-entity-property' => 'kajkosć',
+	'wikibase-entity-query' => 'naprašowanje',
+	'wikibase-sitelinks' => 'Lisćina stronow, kotrež su z tutym elementom zwjazane',
+	'wikibase-sitelinks-sitename-columnheading' => 'Rěč',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
+	'wikibase-sitelinks-link-columnheading' => 'Wotkazany nastawk',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Medijowa dataja na Wikimedia Commons',
 );
@@ -290,10 +369,14 @@ $messages['hsb'] = array(
  * @author Tgr
  */
 $messages['hu'] = array(
-	'wikibaselib-desc' => 'A Wikibase és a Wikibase kliens kiterjesztések közös funkcióit tartalmazza',
-	'wikibaselib-entity-item' => 'tétel',
-	'wikibaselib-entity-property' => 'tulajdonság',
-	'wikibaselib-entity-query' => 'lekérdezés',
+	'wikibase-lib-desc' => 'A Wikibase és a Wikibase kliens kiterjesztések közös funkcióit tartalmazza',
+	'wikibase-entity-item' => 'tétel',
+	'wikibase-entity-property' => 'tulajdonság',
+	'wikibase-entity-query' => 'lekérdezés',
+	'wikibase-sitelinks' => 'Ehhez a fogalomhoz kapcsolt lapok listája',
+	'wikibase-sitelinks-sitename-columnheading' => 'Nyelv',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kód',
+	'wikibase-sitelinks-link-columnheading' => 'Kapcsolt szócikk',
 	'datatypes-type-wikibase-item' => 'Tétel',
 	'datatypes-type-commonsMedia' => 'Commons médiafájl',
 );
@@ -302,17 +385,29 @@ $messages['hu'] = array(
  * @author McDutchie
  */
 $messages['ia'] = array(
-	'wikibaselib-desc' => 'Contine functionalitate commun pro le extensiones Wikibase e Wikibase Client',
+	'wikibase-lib-desc' => 'Contine functionalitate commun pro le extensiones Wikibase e Wikibase Client',
+	'wikibase-sitelinks' => 'Lista de paginas ligate a iste objecto',
+);
+
+/** Indonesian (Bahasa Indonesia)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['id'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'Bahasa',
 );
 
 /** Iloko (Ilokano)
  * @author Lam-ang
  */
 $messages['ilo'] = array(
-	'wikibaselib-desc' => 'Agtengngel kadagiti sapasap a pamay-an para kadagiti Wikibase ken Wikibase a kliente a pagpaatiddog',
-	'wikibaselib-entity-item' => 'banag',
-	'wikibaselib-entity-property' => 'tagikua',
-	'wikibaselib-entity-query' => 'panagbiruk',
+	'wikibase-lib-desc' => 'Agtengngel kadagiti sapasap a pamay-an para kadagiti Wikibase ken Wikibase a kliente a pagpaatiddog',
+	'wikibase-entity-item' => 'banag',
+	'wikibase-entity-property' => 'tagikua',
+	'wikibase-entity-query' => 'panagbiruk',
+	'wikibase-sitelinks' => 'Listaan dagiti panid a naisilpo ti daytoy a banag',
+	'wikibase-sitelinks-sitename-columnheading' => 'Pagsasao',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kodigo',
+	'wikibase-sitelinks-link-columnheading' => 'Naisilpo nga artikulo',
 	'datatypes-type-wikibase-item' => 'Banag',
 	'datatypes-type-commonsMedia' => 'Midia a papeles ti Commons',
 );
@@ -321,10 +416,14 @@ $messages['ilo'] = array(
  * @author Snævar
  */
 $messages['is'] = array(
-	'wikibaselib-desc' => 'Inniheldur almenna virkni fyrir Wikibase og Wikibase Client.',
-	'wikibaselib-entity-item' => 'hlutur',
-	'wikibaselib-entity-property' => 'eiginleiki',
-	'wikibaselib-entity-query' => 'fyrirspurn',
+	'wikibase-lib-desc' => 'Inniheldur almenna virkni fyrir Wikibase og Wikibase Client.',
+	'wikibase-entity-item' => 'hlutur',
+	'wikibase-entity-property' => 'eiginleiki',
+	'wikibase-entity-query' => 'fyrirspurn',
+	'wikibase-sitelinks' => 'Listi yfir síður sem tengja á þennan hlut',
+	'wikibase-sitelinks-sitename-columnheading' => 'Tungumál',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kóði',
+	'wikibase-sitelinks-link-columnheading' => 'Tengd grein',
 	'datatypes-type-wikibase-item' => 'Hlutur',
 	'datatypes-type-commonsMedia' => 'Commons margmiðlunarskrá',
 );
@@ -333,10 +432,14 @@ $messages['is'] = array(
  * @author Beta16
  */
 $messages['it'] = array(
-	'wikibaselib-desc' => 'Contiene le funzionalità comuni per le estensioni Wikibase e Wikibase Client.',
-	'wikibaselib-entity-item' => 'elemento',
-	'wikibaselib-entity-property' => 'proprietà',
-	'wikibaselib-entity-query' => 'interrogazione',
+	'wikibase-lib-desc' => 'Contiene le funzionalità comuni per le estensioni Wikibase e Wikibase Client.',
+	'wikibase-entity-item' => 'elemento',
+	'wikibase-entity-property' => 'proprietà',
+	'wikibase-entity-query' => 'interrogazione',
+	'wikibase-sitelinks' => 'Elenco delle pagine collegate a questo elemento',
+	'wikibase-sitelinks-sitename-columnheading' => 'Lingua',
+	'wikibase-sitelinks-siteid-columnheading' => 'Codice',
+	'wikibase-sitelinks-link-columnheading' => 'Voce collegata',
 	'datatypes-type-wikibase-item' => 'Elemento',
 	'datatypes-type-commonsMedia' => 'File multimediale su Commons',
 );
@@ -345,22 +448,38 @@ $messages['it'] = array(
  * @author Shirayuki
  */
 $messages['ja'] = array(
-	'wikibaselib-desc' => 'ウィキベースとウィキベースクライアント拡張機能で共通の機能を保持する',
-	'wikibaselib-entity-item' => '項目',
-	'wikibaselib-entity-property' => 'プロパティ',
-	'wikibaselib-entity-query' => 'クエリ',
+	'wikibase-lib-desc' => 'ウィキベースとウィキベースクライアント拡張機能で共通の機能を保持する',
+	'wikibase-entity-item' => '項目',
+	'wikibase-entity-property' => 'プロパティ',
+	'wikibase-entity-query' => 'クエリ',
+	'wikibase-sitelinks' => 'この項目にリンクしているページの一覧',
+	'wikibase-sitelinks-sitename-columnheading' => '言語',
+	'wikibase-sitelinks-siteid-columnheading' => 'コード',
+	'wikibase-sitelinks-link-columnheading' => 'リンクされている記事',
 	'datatypes-type-wikibase-item' => '項目',
 	'datatypes-type-commonsMedia' => 'コモンズのメディアファイル',
+);
+
+/** Georgian (ქართული)
+ * @author David1010
+ */
+$messages['ka'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'ენა',
+	'wikibase-sitelinks-siteid-columnheading' => 'კოდი',
 );
 
 /** Korean (한국어)
  * @author 아라
  */
 $messages['ko'] = array(
-	'wikibaselib-desc' => '위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 함수 취득',
-	'wikibaselib-entity-item' => '항목',
-	'wikibaselib-entity-property' => '속성',
-	'wikibaselib-entity-query' => '쿼리',
+	'wikibase-lib-desc' => '위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 함수 취득',
+	'wikibase-entity-item' => '항목',
+	'wikibase-entity-property' => '속성',
+	'wikibase-entity-query' => '쿼리',
+	'wikibase-sitelinks' => '이 항목으로 링크한 문서 목록',
+	'wikibase-sitelinks-sitename-columnheading' => '언어',
+	'wikibase-sitelinks-siteid-columnheading' => '코드',
+	'wikibase-sitelinks-link-columnheading' => '링크한 문서',
 	'datatypes-type-wikibase-item' => '항목',
 	'datatypes-type-commonsMedia' => '공용 미디어 파일',
 );
@@ -379,14 +498,34 @@ $messages['ksh'] = array(
 	'datatypes-type-commonsMedia' => 'Meedijedattei vun Wikkimeedija Commons',
 );
 
+/** Kirghiz (Кыргызча)
+ * @author Growingup
+ */
+$messages['ky'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'Тил',
+	'wikibase-sitelinks-siteid-columnheading' => 'Код',
+);
+
+/** Luxembourgish (Lëtzebuergesch)
+ * @author Robby
+ */
+$messages['lb'] = array(
+	'wikibase-sitelinks' => 'Lëscht vun de Säiten déi mat dësem Objet verlinkt sinn',
+	'wikibase-sitelinks-sitename-columnheading' => 'Sprooch',
+);
+
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
 $messages['mk'] = array(
-	'wikibaselib-desc' => 'Содржи почести функции за додатоците Викибаза и Клиент на Викибазата.',
-	'wikibaselib-entity-item' => 'предмет',
-	'wikibaselib-entity-property' => 'својство',
-	'wikibaselib-entity-query' => 'барање',
+	'wikibase-lib-desc' => 'Содржи почести функции за додатоците Викибаза и Клиент на Викибазата.',
+	'wikibase-entity-item' => 'предмет',
+	'wikibase-entity-property' => 'својство',
+	'wikibase-entity-query' => 'барање',
+	'wikibase-sitelinks' => 'Список на страници поврзани со овој предмет',
+	'wikibase-sitelinks-sitename-columnheading' => 'Јазик',
+	'wikibase-sitelinks-siteid-columnheading' => 'Код',
+	'wikibase-sitelinks-link-columnheading' => 'Сврзана статија',
 	'datatypes-type-wikibase-item' => 'Предмет',
 	'datatypes-type-commonsMedia' => 'Медиумска податотека од Ризницата',
 );
@@ -395,10 +534,14 @@ $messages['mk'] = array(
  * @author Praveenp
  */
 $messages['ml'] = array(
-	'wikibaselib-desc' => 'വിക്കിബേസിനും വിക്കിബേസ് ക്ലയന്റ് അനുബന്ധങ്ങൾക്കുമുള്ള പൊതു പ്രവർത്തനരീതി',
-	'wikibaselib-entity-item' => 'ഇനം',
-	'wikibaselib-entity-property' => 'ഗുണഗണങ്ങൾ',
-	'wikibaselib-entity-query' => 'ആവശ്യം',
+	'wikibase-lib-desc' => 'വിക്കിബേസിനും വിക്കിബേസ് ക്ലയന്റ് അനുബന്ധങ്ങൾക്കുമുള്ള പൊതു പ്രവർത്തനരീതി',
+	'wikibase-entity-item' => 'ഇനം',
+	'wikibase-entity-property' => 'ഗുണഗണങ്ങൾ',
+	'wikibase-entity-query' => 'ആവശ്യം',
+	'wikibase-sitelinks' => 'ഈ ഇനത്തിലേയ്ക്ക് കണ്ണി ചേർത്തിട്ടുള്ള താളുകളുടെ പട്ടിക',
+	'wikibase-sitelinks-sitename-columnheading' => 'ഭാഷ',
+	'wikibase-sitelinks-siteid-columnheading' => 'കോഡ്',
+	'wikibase-sitelinks-link-columnheading' => 'കണ്ണിചേർത്തിട്ടുള്ള ലേഖനം',
 	'datatypes-type-wikibase-item' => 'ഇനം',
 	'datatypes-type-commonsMedia' => 'കോമൺസിൽ നിന്നുള്ള മീഡിയ പ്രമാണം',
 );
@@ -407,10 +550,14 @@ $messages['ml'] = array(
  * @author Anakmalaysia
  */
 $messages['ms'] = array(
-	'wikibaselib-desc' => 'Memegang kefungsian sepunya untuk sambungan Wikibase dan Wikibase Client',
-	'wikibaselib-entity-item' => 'perkara',
-	'wikibaselib-entity-property' => 'sifat',
-	'wikibaselib-entity-query' => 'pertanyaan',
+	'wikibase-lib-desc' => 'Memegang kefungsian sepunya untuk sambungan Wikibase dan Wikibase Client',
+	'wikibase-entity-item' => 'perkara',
+	'wikibase-entity-property' => 'sifat',
+	'wikibase-entity-query' => 'pertanyaan',
+	'wikibase-sitelinks' => 'Senarai halaman yang berpaut pada perkara ini',
+	'wikibase-sitelinks-sitename-columnheading' => 'Bahasa',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
+	'wikibase-sitelinks-link-columnheading' => 'Rencana terpaut',
 	'datatypes-type-wikibase-item' => 'Perkara',
 	'datatypes-type-commonsMedia' => 'Fail media Commons',
 );
@@ -421,10 +568,14 @@ $messages['ms'] = array(
  * @author Jeblad
  */
 $messages['nb'] = array(
-	'wikibaselib-desc' => 'Felles funksjonalitet for Wikibase, det strukturerte datalageret',
-	'wikibaselib-entity-item' => 'datasett',
-	'wikibaselib-entity-property' => 'egenskap',
-	'wikibaselib-entity-query' => 'spørring',
+	'wikibase-lib-desc' => 'Felles funksjonalitet for Wikibase, det strukturerte datalageret',
+	'wikibase-entity-item' => 'datasett',
+	'wikibase-entity-property' => 'egenskap',
+	'wikibase-entity-query' => 'spørring',
+	'wikibase-sitelinks' => 'Sider som lenkes til dette datasettet',
+	'wikibase-sitelinks-sitename-columnheading' => 'Språk',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
+	'wikibase-sitelinks-link-columnheading' => 'Lenket artikkel',
 	'datatypes-type-wikibase-item' => 'Datasett',
 	'datatypes-type-commonsMedia' => 'Commons mediafil',
 );
@@ -433,10 +584,14 @@ $messages['nb'] = array(
  * @author Siebrand
  */
 $messages['nl'] = array(
-	'wikibaselib-desc' => 'Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client',
-	'wikibaselib-entity-item' => 'item',
-	'wikibaselib-entity-property' => 'eigenschap',
-	'wikibaselib-entity-query' => 'zoekopdracht',
+	'wikibase-lib-desc' => 'Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client',
+	'wikibase-entity-item' => 'item',
+	'wikibase-entity-property' => 'eigenschap',
+	'wikibase-entity-query' => 'zoekopdracht',
+	'wikibase-sitelinks' => "Lijst met pagina's gekoppeld aan dit item",
+	'wikibase-sitelinks-sitename-columnheading' => 'Taal',
+	'wikibase-sitelinks-siteid-columnheading' => 'Code',
+	'wikibase-sitelinks-link-columnheading' => 'Gekoppelde pagina',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Mediabestand van Commons',
 );
@@ -446,10 +601,14 @@ $messages['nl'] = array(
  * @author Njardarlogar
  */
 $messages['nn'] = array(
-	'wikibaselib-desc' => 'Har felles funksjonalitet for Wikibase- og Wikibase Client-utvidingane',
-	'wikibaselib-entity-item' => 'sett',
-	'wikibaselib-entity-property' => 'eigenskap',
-	'wikibaselib-entity-query' => 'spørjing',
+	'wikibase-lib-desc' => 'Har felles funksjonalitet for Wikibase- og Wikibase Client-utvidingane',
+	'wikibase-entity-item' => 'sett',
+	'wikibase-entity-property' => 'eigenskap',
+	'wikibase-entity-query' => 'spørjing',
+	'wikibase-sitelinks' => 'Sidene som er knytte til dette datasettet',
+	'wikibase-sitelinks-sitename-columnheading' => 'Språk',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
+	'wikibase-sitelinks-link-columnheading' => 'Artikkel som er lenkja til',
 	'datatypes-type-wikibase-item' => 'Sett',
 	'datatypes-type-commonsMedia' => 'Mediefil frå Commons',
 );
@@ -461,10 +620,14 @@ $messages['nn'] = array(
  * @author Maćko
  */
 $messages['pl'] = array(
-	'wikibaselib-desc' => 'Zawiera elementy wspólne dla rozszerzeń Wikibase i Wikibase Client',
-	'wikibaselib-entity-item' => 'element',
-	'wikibaselib-entity-property' => 'właściwość',
-	'wikibaselib-entity-query' => 'zapytanie',
+	'wikibase-lib-desc' => 'Zawiera elementy wspólne dla rozszerzeń Wikibase i Wikibase Client',
+	'wikibase-entity-item' => 'element',
+	'wikibase-entity-property' => 'właściwość',
+	'wikibase-entity-query' => 'zapytanie',
+	'wikibase-sitelinks' => 'Lista stron powiązanych z tym elementem',
+	'wikibase-sitelinks-sitename-columnheading' => 'Język',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
+	'wikibase-sitelinks-link-columnheading' => 'Powiązany artykuł',
 	'datatypes-type-wikibase-item' => 'Obiekt',
 	'datatypes-type-commonsMedia' => 'Plik multimedialny na Commons',
 );
@@ -475,37 +638,67 @@ $messages['pl'] = array(
  * @author පසිඳු කාවින්ද
  */
 $messages['pms'] = array(
-	'wikibaselib-desc' => "A conten dle funsionalità comun-e a j'estension Wikibase e Wikibase Client",
-	'wikibaselib-entity-item' => 'Element',
-	'wikibaselib-entity-property' => 'propietà',
-	'wikibaselib-entity-query' => 'anterogassion',
+	'wikibase-lib-desc' => "A conten dle funsionalità comun-e a j'estension Wikibase e Wikibase Client",
+	'wikibase-entity-item' => 'Element',
+	'wikibase-entity-property' => 'propietà',
+	'wikibase-entity-query' => 'anterogassion',
+	'wikibase-sitelinks' => 'Lista ëd pagine colegà a sto element',
+	'wikibase-sitelinks-sitename-columnheading' => 'Lenga',
+	'wikibase-sitelinks-siteid-columnheading' => 'Còdes',
+	'wikibase-sitelinks-link-columnheading' => 'Vos colegà',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Archivi ëd mojen comun',
 );
 
+/** Pashto (پښتو)
+ * @author Ahmed-Najib-Biabani-Ibrahimkhel
+ */
+$messages['ps'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'ژبه',
+);
+
 /** Portuguese (português)
+ * @author Hamilton Abreu
  * @author Helder.wiki
  * @author Waldir
  */
 $messages['pt'] = array(
-	'wikibaselib-desc' => 'Contém funcionalidades comuns para as extensões Wikibase e Wikibase Client',
-	'wikibaselib-entity-item' => 'elemento',
-	'wikibaselib-entity-property' => 'propriedade',
-	'wikibaselib-entity-query' => 'consulta',
+	'wikibase-lib-desc' => 'Contém funcionalidades comuns para as extensões Wikibase e Wikibase Client',
+	'wikibase-entity-item' => 'elemento',
+	'wikibase-entity-property' => 'propriedade',
+	'wikibase-entity-query' => 'consulta',
+	'wikibase-sitelinks' => 'Lista de páginas com links para este elemento',
+	'wikibase-sitelinks-sitename-columnheading' => 'Idioma',
+	'wikibase-sitelinks-siteid-columnheading' => 'Código',
+	'wikibase-sitelinks-link-columnheading' => 'Artigo associado',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Ficheiro de mídia do Commons',
 );
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Jaideraf
+ * @author 555
  */
 $messages['pt-br'] = array(
-	'wikibaselib-desc' => 'Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client',
-	'wikibaselib-entity-item' => 'item',
-	'wikibaselib-entity-property' => 'propriedade',
-	'wikibaselib-entity-query' => 'consulta',
+	'wikibase-lib-desc' => 'Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client',
+	'wikibase-entity-item' => 'item',
+	'wikibase-entity-property' => 'propriedade',
+	'wikibase-entity-query' => 'consulta',
+	'wikibase-sitelinks' => 'Lista de páginas com links para este item',
+	'wikibase-sitelinks-sitename-columnheading' => 'Idioma',
+	'wikibase-sitelinks-siteid-columnheading' => 'Código',
+	'wikibase-sitelinks-link-columnheading' => 'Artigo linkado',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Arquivo de mídia do Commons',
+);
+
+/** Romanian (română)
+ * @author Stelistcristi
+ */
+$messages['ro'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'Limbă',
+	'wikibase-sitelinks-siteid-columnheading' => 'Cod',
+	'wikibase-sitelinks-link-columnheading' => 'Articol legat',
 );
 
 /** tarandíne (tarandíne)
@@ -522,12 +715,17 @@ $messages['roa-tara'] = array(
 /** Russian (русский)
  * @author Amire80
  * @author Kaganer
+ * @author Ole Yves
  */
 $messages['ru'] = array(
-	'wikibaselib-desc' => 'Общие функции расширений Wikibase и Wikibase Client',
-	'wikibaselib-entity-item' => 'элемент',
-	'wikibaselib-entity-property' => 'свойство',
-	'wikibaselib-entity-query' => 'запрос',
+	'wikibase-lib-desc' => 'Общие функции расширений Wikibase и Wikibase Client',
+	'wikibase-entity-item' => 'элемент',
+	'wikibase-entity-property' => 'свойство',
+	'wikibase-entity-query' => 'запрос',
+	'wikibase-sitelinks' => 'Список страниц, ссылающихся на этот элемент',
+	'wikibase-sitelinks-sitename-columnheading' => 'Язык',
+	'wikibase-sitelinks-siteid-columnheading' => 'Код',
+	'wikibase-sitelinks-link-columnheading' => 'Связанные статьи',
 	'datatypes-type-wikibase-item' => 'Элемент',
 	'datatypes-type-commonsMedia' => 'Медиафайл на Викисклде',
 );
@@ -536,46 +734,81 @@ $messages['ru'] = array(
  * @author පසිඳු කාවින්ද
  */
 $messages['si'] = array(
-	'wikibaselib-entity-item' => 'අයිතමය',
-	'wikibaselib-entity-property' => 'ගුණාංගය',
-	'wikibaselib-entity-query' => 'ප්‍රශ්නය',
+	'wikibase-entity-item' => 'අයිතමය',
+	'wikibase-entity-property' => 'ගුණාංගය',
+	'wikibase-entity-query' => 'ප්‍රශ්නය',
+	'wikibase-sitelinks' => 'මෙම අයිතමය සඳහා සම්බන්ධිත පිටු ලැයිස්තුව',
+	'wikibase-sitelinks-sitename-columnheading' => 'භාෂාව',
+	'wikibase-sitelinks-siteid-columnheading' => 'කේතය',
+	'wikibase-sitelinks-link-columnheading' => 'සබැඳිගත ලිපිය',
 	'datatypes-type-wikibase-item' => 'අයිතමය',
 	'datatypes-type-commonsMedia' => 'කොමන්ස් මාධ්‍ය ගොනුව',
+);
+
+/** Swedish (svenska)
+ * @author Lokal Profil
+ */
+$messages['sv'] = array(
+	'wikibase-sitelinks' => 'Sidor som är länkade till det här objektet',
+	'wikibase-sitelinks-sitename-columnheading' => 'Språk',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
+	'wikibase-sitelinks-link-columnheading' => 'Länkad artikel',
 );
 
 /** Tamil (தமிழ்)
  * @author மதனாஹரன்
  */
 $messages['ta'] = array(
-	'wikibaselib-entity-item' => 'உருப்படி',
-	'wikibaselib-entity-query' => 'வினவல்',
+	'wikibase-entity-item' => 'உருப்படி',
+	'wikibase-entity-query' => 'வினவல்',
+	'wikibase-sitelinks-sitename-columnheading' => 'மொழி',
+	'wikibase-sitelinks-siteid-columnheading' => 'குறியீடு',
+	'wikibase-sitelinks-link-columnheading' => 'இணைத்த கட்டுரை',
 	'datatypes-type-wikibase-item' => 'உருப்படி',
 	'datatypes-type-commonsMedia' => 'பொதுவூடகக் கோப்பு',
+);
+
+/** Telugu (తెలుగు)
+ * @author Veeven
+ */
+$messages['te'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'భాష',
 );
 
 /** Tagalog (Tagalog)
  * @author AnakngAraw
  */
 $messages['tl'] = array(
-	'wikibaselib-desc' => 'Naghahawak ng karaniwang panunungkulan para sa mga pandugtong ng Wikibase at Wikibase Client',
+	'wikibase-lib-desc' => 'Naghahawak ng karaniwang panunungkulan para sa mga pandugtong ng Wikibase at Wikibase Client',
+	'wikibase-sitelinks' => 'Listahan ng mga pahinang nakakawing papunta sa bagay na ito',
+	'wikibase-sitelinks-sitename-columnheading' => 'Wika',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kodigo',
+	'wikibase-sitelinks-link-columnheading' => 'Artikulong nakakawing',
 );
 
 /** Uyghur (Arabic script) (ئۇيغۇرچە)
  * @author Sahran
  */
 $messages['ug-arab'] = array(
-	'wikibaselib-entity-query' => 'سۈرۈشتۈر',
+	'wikibase-entity-query' => 'سۈرۈشتۈر',
+	'wikibase-sitelinks-sitename-columnheading' => 'تىل',
+	'wikibase-sitelinks-siteid-columnheading' => 'كود',
 	'datatypes-type-wikibase-item' => 'تۈر',
 );
 
 /** Ukrainian (українська)
+ * @author Base
  * @author Ата
  */
 $messages['uk'] = array(
-	'wikibaselib-desc' => 'Загальні функції розширень Wikibase і Wikibase Client',
-	'wikibaselib-entity-item' => 'елемент',
-	'wikibaselib-entity-property' => 'властивість',
-	'wikibaselib-entity-query' => 'запит',
+	'wikibase-lib-desc' => 'Загальні функції розширень Wikibase і Wikibase Client',
+	'wikibase-entity-item' => 'елемент',
+	'wikibase-entity-property' => 'властивість',
+	'wikibase-entity-query' => 'запит',
+	'wikibase-sitelinks' => 'Список сторінок, що посилаються на цей елемент',
+	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
+	'wikibase-sitelinks-siteid-columnheading' => 'Код',
+	'wikibase-sitelinks-link-columnheading' => "Пов'язані статті",
 	'datatypes-type-wikibase-item' => 'Елемент',
 	'datatypes-type-commonsMedia' => 'Медіафайл з Вікісховища',
 );
@@ -584,10 +817,14 @@ $messages['uk'] = array(
  * @author Minh Nguyen
  */
 $messages['vi'] = array(
-	'wikibaselib-desc' => 'Các chức năng chung của các phần mở rộng Wikibase và Trình khách Wikibase',
-	'wikibaselib-entity-item' => 'khoản mục',
-	'wikibaselib-entity-property' => 'thuộc tính',
-	'wikibaselib-entity-query' => 'truy vấn',
+	'wikibase-lib-desc' => 'Các chức năng chung của các phần mở rộng Wikibase và Trình khách Wikibase',
+	'wikibase-entity-item' => 'khoản mục',
+	'wikibase-entity-property' => 'thuộc tính',
+	'wikibase-entity-query' => 'truy vấn',
+	'wikibase-sitelinks' => 'Các trang được liên kết đến khoản mục này',
+	'wikibase-sitelinks-sitename-columnheading' => 'Ngôn ngữ',
+	'wikibase-sitelinks-siteid-columnheading' => 'Mã',
+	'wikibase-sitelinks-link-columnheading' => 'Bài viết liên kết',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
 	'datatypes-type-commonsMedia' => 'Tập tin phương tiện Commons',
 );
@@ -598,10 +835,14 @@ $messages['vi'] = array(
  * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
-	'wikibaselib-desc' => '储存维基基础及其客户端的共同功能',
-	'wikibaselib-entity-item' => '项目',
-	'wikibaselib-entity-property' => '属性',
-	'wikibaselib-entity-query' => '查询',
+	'wikibase-lib-desc' => '储存维基基础及其客户端的共同功能',
+	'wikibase-entity-item' => '项目',
+	'wikibase-entity-property' => '属性',
+	'wikibase-entity-query' => '查询',
+	'wikibase-sitelinks' => '链接到本项目的页面列表',
+	'wikibase-sitelinks-sitename-columnheading' => '语言',
+	'wikibase-sitelinks-siteid-columnheading' => '代码',
+	'wikibase-sitelinks-link-columnheading' => '链接的条目',
 	'datatypes-type-wikibase-item' => '项目',
 	'datatypes-type-commonsMedia' => '共享资源媒体文件',
 );
@@ -610,10 +851,14 @@ $messages['zh-hans'] = array(
  * @author Justincheng12345
  */
 $messages['zh-hant'] = array(
-	'wikibaselib-desc' => '儲存維基基礎及其客戶端的共同功能',
-	'wikibaselib-entity-item' => '項目',
-	'wikibaselib-entity-property' => '屬性',
-	'wikibaselib-entity-query' => '查詢',
+	'wikibase-lib-desc' => '儲存維基基礎及其客戶端的共同功能',
+	'wikibase-entity-item' => '項目',
+	'wikibase-entity-property' => '屬性',
+	'wikibase-entity-query' => '查詢',
+	'wikibase-sitelinks' => '鏈接到此項目的頁面清單',
+	'wikibase-sitelinks-sitename-columnheading' => '語言',
+	'wikibase-sitelinks-siteid-columnheading' => '代碼',
+	'wikibase-sitelinks-link-columnheading' => '已連結的條目',
 	'datatypes-type-wikibase-item' => '項目',
 	'datatypes-type-commonsMedia' => '共享資源媒體檔案',
 );
