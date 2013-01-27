@@ -227,6 +227,8 @@ $wgExtensionFunctions[] = function() {
 		'parser' => $libRegistry->getEntityIdParser(),
 	);
 
+	\Wikibase\TemplateRegistry::singleton()->addTemplates( include( __DIR__ . "/resources/templates.php" ) );
+
     return true;
 };
 
@@ -238,8 +240,6 @@ $wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 $wgHooks['WikibaseDefaultSettings'][]				= 'Wikibase\LibHooks::onWikibaseDefaultSettings';
 $wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerPhpUnitTests';
 $wgHooks['ResourceLoaderTestModules'][]				= 'Wikibase\LibHooks::registerQUnitTests';
-
-\Wikibase\TemplateRegistry::singleton()->addTemplates( include( "$dir/resources/templates.php" ) );
 
 /**
  * Shorthand function to retrieve a template filled with the specified parameters.
