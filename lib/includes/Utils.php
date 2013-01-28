@@ -57,11 +57,19 @@ final class Utils {
 	 * @since 0.1
 	 *
 	 * @param string $languageCode
+	 * @param string|null $inLanguage
 	 *
 	 * @return string
 	 */
-	public static function fetchLanguageName( $languageCode ) {
-		$languageName = \Language::fetchLanguageName( str_replace( '_', '-', $languageCode ) );
+	public static function fetchLanguageName( $languageCode, $inLanguage = null ) {
+		$languageCode = str_replace( '_', '-', $languageCode );
+		if ( isset( $inLanguage ) ) {
+			$inLanguage = str_replace( '_', '-', $inLanguage );
+			$languageName = \Language::fetchLanguageName( $languageCode, $inLanguage );
+		}
+		else {
+			$languageName = \Language::fetchLanguageName( $languageCode );
+		}
 		if ( $languageName == '' ) {
 			$languageName = $languageCode;
 		}

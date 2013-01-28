@@ -35,7 +35,7 @@ use Wikibase\EntityId;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group SetQualifierTest
+ * @group SetQualifier
  *
  * @group medium
  *
