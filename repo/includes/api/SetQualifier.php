@@ -44,12 +44,16 @@ use Wikibase\Settings;
  */
 class SetQualifier extends \Wikibase\Api {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
 	// TODO: more explicit support for snak merging?
 	// TODO: claim uniqueness
+
+	/**
+	 * @var string
+	 */
+	protected $summary = null;
 
 	/**
 	 * @see ApiBase::execute
@@ -60,12 +64,21 @@ class SetQualifier extends \Wikibase\Api {
 		wfProfileIn( __METHOD__ );
 
 		$this->checkParameterRequirements();
-
+		$params = $this->extractRequestParams();
 		$content = $this->getEntityContent();
 
 		$claim = $this->doSetQualifier(
 			$content->getEntity()
 		);
+
+		$action = isset( $params['snakhash'] ) ? 'update' : 'add';
+		if ( isset( $params['snaktype'] ) ) {
+			$action .= '-' . $params['snaktype'];
+		}
+		$this->summary = new \Wikibase\Summary( 'wbsetqualifier', $action );
+		$this->summary->removeFormat( \Wikibase\Summary::USE_SUMMARY );
+		$this->summary->addAutoCommentArgs( $claim->getMainSnak()->getPropertyId() . '/' . $claim->getGuid() );
+		$this->summary->addAutoSummaryArgs( \Wikibase\Summary::pickValuesFromParams( $params, 'value' ) );
 
 		$this->saveChanges( $content );
 

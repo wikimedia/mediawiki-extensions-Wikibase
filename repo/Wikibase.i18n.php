@@ -258,21 +258,31 @@ to find out where it went.',
 	'wikibase-item-summary-wbeditentity-create' => 'Created a new item',
 	'wikibase-item-summary-wbeditentity-update' => 'Updated an item',
 	'wikibase-item-summary-wbeditentity-override' => 'Overrode an item',
-	'wikibase-item-summary-wbsetlabel-set' => 'Changed [$2] label',
-	'wikibase-item-summary-wbsetlabel-remove' => 'Removed [$2] label',
-	'wikibase-item-summary-wbsetdescription-set' => 'Changed [$2] description',
-	'wikibase-item-summary-wbsetdescription-remove' => 'Removed [$2] description',
-	'wikibase-item-summary-wbsetaliases-set' => 'Setting [$2] {{plural:$1|alias|aliases}}',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{plural:$1|alias|aliases}}',
-	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
-	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
-	'wikibase-item-summary-wbsetsitelink-set' => 'Added site-specific [$2] link',
-	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed site-specific [$2] link',
-	'wikibase-item-summary-wblinktitles-connect' => 'Connected [$2↔$3] {{plural:$1|page|pages}}',
-	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{plural:$1|a value claim|value claims}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created {{plural:$1|a novalue claim|novalue claims}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created {{plural:$1|a somevalue claim|somevalue claims}}',
-	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{plural:$1|value|values}}',
+	'wikibase-item-summary-wbsetlabel-set' => 'Changed [$2] item {{plural:$1|label|labels}}',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Removed [$2] item {{plural:$1|label|labels}}',
+	'wikibase-item-summary-wbsetdescription-set' => 'Changed [$2] item {{plural:$1|description|descriptions}}',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Removed [$2] item {{plural:$1|description|descriptions}}',
+	'wikibase-item-summary-wbsetaliases-set' => 'Set [$2] item {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Added and removed [$2] item {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] item {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] item {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Added [$2] item {{plural:$1|sitelink|sitelinks}}',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed [$2] item {{plural:$1|sitelink|sitelinks}}',
+	'wikibase-item-summary-wblinktitles-connect' => 'Connected [$2↔$3] external {{plural:$1|page|pages}}',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Created [$3] claim with {{plural:$1|value|values}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created [$3] claim with {{plural:$1|no value|no values}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created [$3] claim with {{plural:$1|some value|some values}}',
+	'wikibase-item-summary-wbsetclaimvalue-value' => 'Set [$3] claim with {{plural:$1|value|values}}', // added
+	'wikibase-item-summary-wbsetclaimvalue-novalue' => 'Set [$3] claim with {{plural:$1|no value|no values}}', // added
+	'wikibase-item-summary-wbsetclaimvalue-somevalue' => 'Set [$3] claim with {{plural:$1|some value|some values}}', // added
+	'wikibase-item-summary-wbremoveclaims' => 'Removed [$3] {{plural:$1|claim|claims}}', // added
+	'wikibase-item-summary-wbsetreference' => 'Added [$3] statement {{plural:$1|reference|references}}', // added
+	'wikibase-item-summary-wbremovereferences' => 'Removed [$3] statement {{plural:$1|reference|references}}', // added
+	'wikibase-item-summary-wbsetqualifier' => 'Added [$3] {{plural:$1|qualifier|qualifiers}}', // added
+	'wikibase-item-summary-wbremovequalifiers' => 'Removed [$3] {{plural:$1|qualifier|qualifiers}}', // added
+	'wikibase-item-summary-wbsetstatementrank' => 'Set [$3] statement {{plural:$1|rank|ranks}}', // added
+	'wikibase-item-summary-special-create-item' => 'Created [$2] item with {{plural:$1|value|values}}', // legacy
+	'wikibase-item-summary-specialnewentity-create' => 'Created [$2] item with {{plural:$1|value|values}}',
 
 	// property - summary and autocomment
 	'wikibase-property-summary-wbeditentity-create' => 'Created a new property',
@@ -286,10 +296,15 @@ to find out where it went.',
 	'wikibase-property-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-property-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
-	'wikibase-property-summary-special-create-property' => 'Created a [$2] property with {{plural:$1|value|values}}',
+	'wikibase-property-summary-special-create-property' => 'Created a [$2] property with {{plural:$1|value|values}}', // legacy
+	'wikibase-property-summary-specialnewentity-create' => 'Created a [$2] property with {{plural:$1|value|values}}',
 
 	// query - summary and autocomment
-	'wikibase-query-summary-special-create-query' => 'Created a [$2] query with {{plural:$1|value|values}}',
+	'wikibase-query-summary-special-create-query' => 'Created a [$2] query with {{plural:$1|value|values}}', // legacy
+	'wikibase-query-summary-specialnewentity-create' => 'Created a [$2] query with {{plural:$1|value|values}}',
+
+	// entity - summary and autocomment if fallback if everything else fails - should not be used
+	'wikibase-entity-summary-specialnewentity-create' => 'Created a [$2] query with {{plural:$1|value|values}}',
 
 	//content model names
 	'content-model-wikibase-item' => 'Wikibase item',
