@@ -45,6 +45,7 @@ class SpecialCreateItem extends SpecialCreateEntity {
 	 */
 	public function __construct() {
 		parent::__construct( 'CreateItem' );
+		//$this->summary->setModuleName( 'specialnewitem' );
 	}
 
 	/**
@@ -98,6 +99,8 @@ class SpecialCreateItem extends SpecialCreateEntity {
 				$status->error( 'wikibase-createitem-add-sitelink-failed' );
 				return $status;
 			}
+			$this->summary->addAutoCommentArgs( $this->site );
+			$this->summary->addAutoSummaryArgs( $this->page );
 		}
 
 		return $status;

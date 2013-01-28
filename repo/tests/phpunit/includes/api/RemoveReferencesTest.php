@@ -33,6 +33,7 @@ use Wikibase\Statement;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
+ * @group RemoveReferences
  *
  * @group medium
  *

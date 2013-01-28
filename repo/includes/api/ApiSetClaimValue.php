@@ -37,6 +37,11 @@ class ApiSetClaimValue extends Api {
 	// TODO: claim uniqueness
 
 	/**
+	 * @var string
+	 */
+	protected $summary = null;
+
+	/**
 	 * @see ApiBase::execute
 	 *
 	 * @since 0.3
@@ -54,6 +59,10 @@ class ApiSetClaimValue extends Api {
 			$params['snaktype'],
 			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
 		);
+
+		$this->summary = new \Wikibase\Summary( 'wbsetclaimvalue', $params['snaktype'] );
+		$this->summary->addAutoCommentArgs( $claim->getGuid() );
+		$this->summary->addAutoSummaryArgs( Summary::pickValuesFromParams( $params, 'value' ) );
 
 		$this->saveChanges( $content );
 
@@ -142,7 +151,7 @@ class ApiSetClaimValue extends Api {
 		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$this->summary->toString(),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);

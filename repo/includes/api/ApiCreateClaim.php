@@ -29,9 +29,8 @@ use ApiBase, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiCreateClaim extends Api implements ApiAutocomment {
+class ApiCreateClaim extends Api implements ApiSummary {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
@@ -46,9 +45,15 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$this->checkParameterRequirements();
 
+		$params = $this->extractRequestParams();
+
 		$entityContent = $this->getEntityContent();
 
 		$claim = $this->addClaim( $entityContent->getEntity() );
+
+		$this->summary = new \Wikibase\Summary( 'wbcreateclaim', $params['snaktype'] );
+		$this->summary->addAutoCommentArgs( $claim->getGuid() );
+		$this->summary->addAutoSummaryArgs( Summary::pickValuesFromParams( $params, 'value' ) );
 
 		$this->saveChanges( $entityContent );
 
@@ -104,7 +109,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: autocomment
+			$this->summary->toString(),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);
@@ -312,23 +317,24 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			'wbcreateclaim-' . $params['snaktype'],
 			array(
-				/*plural */ (int)isset( $params['value'] ) + (int)isset( $params['property'] )
+				/*plural */ (int)isset( $params['value'] ),
+				isset( $params['property'] ) ? $params['property'] : ''
 			)
 		);
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'property', 'value' )
+		return Summary::formatAutoSummary(
+			Summary::pickValuesFromParams( $params, 'value' )
 		);
 	}
 

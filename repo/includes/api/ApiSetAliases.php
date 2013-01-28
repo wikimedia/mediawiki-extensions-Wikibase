@@ -49,21 +49,21 @@ class ApiSetAliases extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
-			'wbsetaliases-' . implode( '-', Autocomment::pickKeysFromParams( $params, 'set', 'add', 'remove' ) ),
+		return Summary::formatAutoComment(
+			'wbsetaliases-' . implode( '-', Summary::pickKeysFromParams( $params, 'set', 'add', 'remove' ) ),
 			array( $plural, $params['language'] )
 		);
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'set', 'add', 'remove' )
+		return Summary::formatAutoSummary(
+			Summary::pickValuesFromParams( $params, 'set', 'add', 'remove' )
 		);
 	}
 
