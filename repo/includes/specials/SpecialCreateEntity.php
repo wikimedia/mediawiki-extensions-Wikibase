@@ -1,7 +1,7 @@
 <?php
 
 use Wikibase\EntityContent;
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 use Wikibase\Utils;
 
 /**
@@ -52,6 +52,11 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	protected $description = null;
 
 	/**
+	 * @var string
+	 */
+	protected $summary = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param $name String: name of the special page, as seen in links and URLs
@@ -61,6 +66,8 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 */
 	public function __construct( $name, $restriction = 'createpage' ) {
 		parent::__construct( $name, $restriction );
+		$this->summary = new Summary( 'specialnewentity' );
+		$this->summary->setLanguage( $this->getLanguage() );
 	}
 
 	/**
@@ -86,22 +93,17 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 			&&  $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'token' ) ) ) {
 
 			if ( $this->hasSufficientArguments() ) {
+				$this->summary->setAction( 'create' );
+				$this->summary->addAutoSummaryArgs( $this->label, $this->description );
+
 				$entityContent = $this->createEntityContent();
 
 				$status = $this->modifyEntity( $entityContent );
 
 				if ( $status->isGood() ) {
-					list( $counts, $summary, $lang ) = Autocomment::formatAutoSummary(
-						array( $this->label, $this->description ),
-						$this->getLanguage()
-					);
-					$comment = Autocomment::formatAutoComment(
-						'special-create-' . $entityContent->getEntity()->getType(),
-						array( $counts, $this->getLanguage()->getCode() )
-					);
 					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser(), false, $this->getContext() );
 					$editEntity->attemptSave(
-						AutoComment::formatTotalSummary( $comment, $summary, $lang ),
+						$this->summary->toString(),
 						EDIT_AUTOSUMMARY|EDIT_NEW,
 						$this->getRequest()->getVal( 'token' )
 					);

@@ -42,13 +42,17 @@ use Wikibase\Settings;
  */
 class RemoveReferences extends \Wikibase\Api {
 
+	/**
+	 * @var string
+	 */
+	protected $summary = null;
+
 	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
 		//NOTE: need to declare this constructor, so old PHP versions don't use the
 		//      removeReferences() function as the constructor.
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 	}
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
@@ -62,13 +66,21 @@ class RemoveReferences extends \Wikibase\Api {
 		wfProfileIn( __METHOD__ );
 
 		$content = $this->getEntityContent();
+
 		$params = $this->extractRequestParams();
+
+		$this->summary = new \Wikibase\Summary( 'wbremovereferences' );
+		$this->summary->removeFormat( \Wikibase\Summary::USE_SUMMARY );
+
+		$references = array_unique( $params['references'] );
 
 		$this->removeReferences(
 			$content->getEntity(),
 			$params['statement'],
-			array_unique( $params['references'] )
+			$references
 		);
+
+		$this->summary->addAutoSummaryArgs( $references );
 
 		$this->saveChanges( $content );
 
@@ -110,6 +122,7 @@ class RemoveReferences extends \Wikibase\Api {
 		}
 
 		$statement = $claims->getClaimWithGuid( $statementGuid );
+		$this->summary->addAutoCommentArgs( $statement->getMainSnak()->getPropertyId() . '/' . $statement->getGuid() );
 
 		if ( ! ( $statement instanceof Statement ) ) {
 			$this->dieUsage(
@@ -153,7 +166,7 @@ class RemoveReferences extends \Wikibase\Api {
 		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$this->summary->toString(),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);
