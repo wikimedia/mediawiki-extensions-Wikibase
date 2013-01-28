@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//6oE\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 54
+      },
+      "writtenOn": "2013-01-28T13:12:57Z",
+      "side": 1,
+      "message": "The usual practice is to use only small letters in message keys. See http://www.mediawiki.org/wiki/I18n#Adding_new_messages . This concerns all the messages.",
+      "revId": "96003924d1ddfdab4234117bc0be4ee04fb150aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//6oA\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 54
+      },
+      "writtenOn": "2013-01-28T13:12:57Z",
+      "side": 1,
+      "message": "If I understand correctly, this is a label. There shouldn\u0027t be a space in the end of the message string.",
+      "revId": "96003924d1ddfdab4234117bc0be4ee04fb150aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//6n8\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 54
+      },
+      "writtenOn": "2013-01-28T13:12:57Z",
+      "side": 1,
+      "message": "Ditto, remove the space in the end.",
+      "revId": "96003924d1ddfdab4234117bc0be4ee04fb150aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
