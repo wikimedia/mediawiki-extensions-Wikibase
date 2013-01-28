@@ -410,6 +410,14 @@ return call_user_func( function() {
 				'wikibase-claimview-snak-new-tooltip'
 			)
 		),
+		'jquery.wikibase.statementview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.statementview.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.claimview',
+			)
+		),
 
 		'jquery.wikibase.claimlistview' => $moduleTemplate + array(
 			'scripts' => array(
@@ -429,6 +437,7 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.entityview.js'
 			),
 			'dependencies' => array(
+				'jquery.wikibase.statementview',
 				'jquery.wikibase.claimlistview',
 				'wikibase.templates'
 			),
