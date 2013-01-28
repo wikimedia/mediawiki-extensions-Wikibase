@@ -16,7 +16,7 @@ use User, Title, ApiBase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-abstract class ApiModifyEntity extends Api implements ApiAutocomment {
+abstract class ApiModifyEntity extends Api implements ApiSummary {
 
 	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
@@ -190,9 +190,9 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 		// Do the actual save, or if it don't exist yet create it.
 		// There will be exceptions but we just leak them out ;)
 		$editEntity->attemptSave(
-			Autocomment::buildApiSummary( $this, $params, $entityContent ),
+			Summary::buildApiSummary( $this, $params, $entityContent ),
 			$this->flags,
-			( $this->needsToken() ? $params['token'] : '' )
+			$this->needsToken() ? $params['token'] : ''
 		);
 
 		if ( $editEntity->hasError( EditEntity::TOKEN_ERROR ) ) {

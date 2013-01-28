@@ -32,6 +32,7 @@ use Wikibase\Claim;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
+ * @group ApiRemoveClaims
  *
  * @group medium
  *
