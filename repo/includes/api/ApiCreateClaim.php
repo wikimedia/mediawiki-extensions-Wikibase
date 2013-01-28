@@ -29,9 +29,8 @@ use ApiBase, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiCreateClaim extends Api implements ApiAutocomment {
+class ApiCreateClaim extends Api implements ApiSummary {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
@@ -46,9 +45,14 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$this->checkParameterRequirements();
 
+		$params = $this->extractRequestParams();
+
 		$entityContent = $this->getEntityContent();
 
+		$this->summary = new \Wikibase\Summary( 'wbcreateclaim', $params['snaktype'] );
 		$claim = $this->addClaim( $entityContent->getEntity() );
+
+		$this->summary->addAutoCommentArgs( $claim->getMainSnak()->getPropertyId() . '/' . $claim->getGuid() );
 
 		$this->saveChanges( $entityContent );
 
@@ -83,6 +87,11 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 			$this->dieUsageMsg( $ex->getMessage() );
 		}
 
+		if ( $snak instanceof PropertyValueSnak ) {
+			$dataValue = $snak->getDataValue();
+			$this->summary->addAutoSummaryArgs( $dataValue->getValue() );
+		}
+
 		$claim = $entity->newClaim( $snak );
 
 		$entity->addClaim( $claim );
@@ -104,7 +113,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: autocomment
+			$this->summary->toString(),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);
@@ -312,23 +321,24 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			'wbcreateclaim-' . $params['snaktype'],
 			array(
-				/*plural */ (int)isset( $params['value'] ) + (int)isset( $params['property'] )
+				/*plural */ (int)isset( $params['value'] ),
+				isset( $params['property'] ) ? $params['property'] : ''
 			)
 		);
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'property', 'value' )
+		return Summary::formatAutoSummary(
+			Summary::pickValuesFromParams( $params, 'value' )
 		);
 	}
 

@@ -44,12 +44,16 @@ use Wikibase\Settings;
  */
 class SetQualifier extends \Wikibase\Api {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
 	// TODO: more explicit support for snak merging?
 	// TODO: claim uniqueness
+
+	/**
+	 * @var string
+	 */
+	protected $summary = null;
 
 	/**
 	 * @see ApiBase::execute
@@ -60,8 +64,14 @@ class SetQualifier extends \Wikibase\Api {
 		wfProfileIn( __METHOD__ );
 
 		$this->checkParameterRequirements();
-
+		$params = $this->extractRequestParams();
 		$content = $this->getEntityContent();
+
+		$action = isset( $params['snakhash'] ) ? 'update' : 'add';
+		if ( isset( $params['snaktype'] ) ) {
+			$action .= '-' . $params['snaktype'];
+		}
+		$this->summary = new \Wikibase\Summary( 'wbsetqualifier', $action );
 
 		$claim = $this->doSetQualifier(
 			$content->getEntity()
@@ -146,6 +156,7 @@ class SetQualifier extends \Wikibase\Api {
 		}
 
 		$claim = $claims->getClaimWithGuid( $claimGuid );
+		$this->summary->addAutoCommentArgs( $claim->getMainSnak()->getPropertyId() . '/' . $claim->getGuid() );
 
 		$this->updateQualifiers( $claim->getQualifiers() );
 
@@ -215,6 +226,10 @@ class SetQualifier extends \Wikibase\Api {
 			$snakValue = null;
 		}
 
+		if ( $snakValue instanceof PropertyValueSnak ) {
+			$this->summary->addAutoSummaryArgs( $snakValue->getDataValue()->getValue() );
+		}
+
 		$factory = new SnakFactory();
 		$newQualifier = $factory->newSnak( $propertyId, $snakType, $snakValue );
 
@@ -263,7 +278,7 @@ class SetQualifier extends \Wikibase\Api {
 		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$this->summary->toString(),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : false
 		);
