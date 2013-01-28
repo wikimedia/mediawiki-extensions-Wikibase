@@ -134,7 +134,6 @@ final class RepoHooks {
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
-			'Autocomment',
 			'EditEntity',
 			'EntityLoader',
 			'ItemMove',
@@ -144,6 +143,7 @@ final class RepoHooks {
 			'LabelDescriptionDuplicateDetector',
 			'MultiLangConstraintDetector',
 			'NamespaceUtils',
+			'Summary',
 
 			'actions/EditEntityAction',
 			'actions/ViewEntityAction',

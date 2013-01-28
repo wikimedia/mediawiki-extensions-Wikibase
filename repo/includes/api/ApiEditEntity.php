@@ -45,7 +45,7 @@ class ApiEditEntity extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 'none' ) {
 		if ( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
@@ -54,17 +54,17 @@ class ApiEditEntity extends ApiModifyEntity {
 		else {
 			$action = 'create';
 		}
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			'wbeditentity-' . $action,
 			array() // TODO: this could list all languages and/or sites (how to do this for claims?)
 		);
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
+		return Summary::formatAutoSummary(
 			array() // TODO: this could list values (how to do this for claims?)
 		);
 	}
