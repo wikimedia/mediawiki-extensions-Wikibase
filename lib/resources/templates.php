@@ -97,6 +97,24 @@ HTML;
 </div>
 HTML;
 
+	$templates['wb-statement'] =
+<<<HTML
+<div class="wb-statement wb-claim-container $1">
+	<div class="wb-statement-claim">
+		<div class="wb-claim wb-claim-$2">
+			<div class="wb-claim-mainsnak" dir="auto">
+				$3 <!-- wb-snak (Main Snak) -->
+			</div>
+		</div>
+		<div class="wb-claim-toolbar">$4</div> <!-- edit section -->
+	</div>
+	<div class="wb-statement-references-container">
+		<div class="wb-statement-references-heading">$5</div>
+		<div class="wb-statement-references">$6 <!-- [0,*] wb-reference --></div>
+	</div>
+</div>
+HTML;
+
 	$templates['wb-label'] =
 // add an h1 for displaying the entity's label; the actual firstHeading is being hidden by
 // css since the original MediaWiki DOM does not represent a Wikidata entity's structure
