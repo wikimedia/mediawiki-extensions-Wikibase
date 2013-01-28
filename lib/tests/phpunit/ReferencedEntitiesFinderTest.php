@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 use Wikibase\Claims;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Claim;
+use Wikibase\Statement;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -15,6 +16,8 @@ use DataValues\StringValue;
 use Wikibase\CachingEntityLoader;
 use Wikibase\LibRegistry;
 use Wikibase\Settings;
+use Wikibase\ReferenceList;
+use Wikibase\ReferenceObject;
 
 /**
  * Tests for the Wikibase\ReferencedEntitiesFinder class.
@@ -60,6 +63,21 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 			),
 			array(
 				new EntityId( Property::ENTITY_TYPE, 42 )
+			)
+		);
+
+		$argLists[] = array(
+			array(
+				new Statement(
+					new PropertyNoValueSnak( 42 ),
+					null,
+					new ReferenceList( array( new ReferenceObject( new SnakList( array(
+						new PropertyNoValueSnak( 24 ) ) ) ) ) )
+				)
+			),
+			array(
+				new EntityId( Property::ENTITY_TYPE, 42 ),
+				new EntityId( Property::ENTITY_TYPE, 24 )
 			)
 		);
 
