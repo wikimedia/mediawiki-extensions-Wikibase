@@ -95,6 +95,7 @@ class SpecialNewProperty extends SpecialCreateEntity {
 			else {
 				$propertyContent->getProperty()->setDataType( $dataType );
 			}
+			$this->summary->addAutoSummaryArgs( $this->dataType );
 		}
 
 		return $status;

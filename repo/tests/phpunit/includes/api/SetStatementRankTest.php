@@ -34,6 +34,7 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
+ * @group SetStatementRank
  *
  * @group medium
  *

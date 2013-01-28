@@ -37,6 +37,11 @@ class ApiSetClaimValue extends Api {
 	// TODO: claim uniqueness
 
 	/**
+	 * @var string
+	 */
+	protected $summary = null;
+
+	/**
 	 * @see ApiBase::execute
 	 *
 	 * @since 0.3
@@ -48,12 +53,16 @@ class ApiSetClaimValue extends Api {
 
 		$params = $this->extractRequestParams();
 
+		$this->summary = new \Wikibase\Summary( 'wbsetclaimvalue', $params['snaktype'] );
+
 		$claim = $this->updateClaim(
 			$content->getEntity(),
 			$params['claim'],
 			$params['snaktype'],
 			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
 		);
+
+		$this->summary->addAutoCommentArgs( $claim->getMainSnak()->getPropertyId() . '/' . $claim->getGuid()  );
 
 		$this->saveChanges( $content );
 
@@ -119,7 +128,13 @@ class ApiSetClaimValue extends Api {
 				);
 			}
 
-			$constructorArguments[] = $content->getProperty()->newDataValue( $value );
+			$dataValue = $content->getProperty()->newDataValue( $value );
+			// the test should not be necessary
+			if ( $claim->getMainSnak() instanceof PropertyValueSnak ) {
+				$this->summary->addAutoSummaryArgs( $dataValue->getValue() );
+			}
+
+			$constructorArguments[] = $dataValue;
 		}
 
 		$claim->setMainSnak( SnakObject::newFromType( $snakType, $constructorArguments ) );
@@ -142,7 +157,7 @@ class ApiSetClaimValue extends Api {
 		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$this->summary->toString(),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);

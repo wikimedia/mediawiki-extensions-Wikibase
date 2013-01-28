@@ -59,20 +59,20 @@ class ApiSetSiteLink extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			'wbsetsitelink-' . ( ( isset( $params['linktitle'] ) && $params['linktitle'] !== "" ) ? "set" : "remove" ),
 			array( /*$plural*/ 1, $params['linksite'] )
 		);
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
+		return Summary::formatAutoSummary(
 			array( $params['linktitle'] )
 		);
 	}
