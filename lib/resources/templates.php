@@ -115,6 +115,22 @@ HTML;
 </div>
 HTML;
 
+	$templates['wb-reference'] =
+<<<HTML
+<div class="wb-reference">
+	<div class="wb-reference-snaks">$1</div> <!-- [0,*] wb-snak -->
+	<div class="wb-claim-toolbar">$2</div> <!-- edit section -->
+</div>
+HTML;
+
+	$templates['wb-listview'] =
+<<<HTML
+<div>
+	<div class="wb-listview-items">$1</div> <!-- list members -->
+	<div class="wb-listview-toolbar">$2</div> <!-- edit section -->
+</div>
+HTML;
+
 	$templates['wb-label'] =
 // add an h1 for displaying the entity's label; the actual firstHeading is being hidden by
 // css since the original MediaWiki DOM does not represent a Wikidata entity's structure
