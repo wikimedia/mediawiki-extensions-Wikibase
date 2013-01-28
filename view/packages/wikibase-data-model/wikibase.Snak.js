@@ -54,7 +54,7 @@ wb.Snak.prototype = {
 	 * Returns the ID of the property entity the Snak relates to.
 	 * @since 0.3
 	 *
-	 * @return Number
+	 * @return string
 	 */
 	getPropertyId: function() {
 		return this._propertyId;

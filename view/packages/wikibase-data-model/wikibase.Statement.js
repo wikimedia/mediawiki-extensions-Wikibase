@@ -25,8 +25,8 @@ var PARENT = wb.Claim,
  * @param {wb.Snak[]} [qualifiers]
  * @param {Array} [references] An array of arrays of Snaks or empty array
  * @param {Number} [rank]
- * @param {String} [guid] The Global Unique Identifier of this Statement. This can be omitted if
- *        this is a new reference, not yet stored in the database and associated with some item.
+ * @param {String|null} [guid] The Global Unique Identifier of this Statement. Can be omitted or null
+ *        if this is a new Statement, not yet stored in the database and associated with some entity.
  */
 wb.Statement = wb.utilities.inherit( PARENT, constructor, {
 	/**
