@@ -26,6 +26,7 @@ $messages['en'] = array(
 	'wikibase-save' => 'save',
 	'wikibase-cancel' => 'cancel',
 	'wikibase-add' => 'add',
+	'wikibase-addreference' => 'add source',
 	'wikibase-save-inprogress' => 'Saving…',
 	'wikibase-remove-inprogress' => 'Removing…',
 	'wikibase-label-empty' => 'No label defined yet',
@@ -342,6 +343,7 @@ This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-add' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
 [[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an additional element of some kind.',
+	'wikibase-addreference' => 'Label of the link to add a reference (see [[d:Wikidata/Glossary]]) to a statement.',
 	'wikibase-save-inprogress' => '[[File:Screenshot WikidataRepo 2012-05-25 L.png|right|350px]]
 [[File:Screenshot WikidataRepo 2012-05-25 J.png|right|350px]]
 [[File:Screenshot WikidataRepo 2012-05-25 K.png|right|350px]]

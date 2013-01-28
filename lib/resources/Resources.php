@@ -360,6 +360,16 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.wikibase.listview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.listview.js',
+				'jquery.wikibase/jquery.wikibase.listview.ListItemAdapter.js'
+			),
+			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
+			)
+		),
+
 		'jquery.wikibase.snakview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.snakview/snakview.js',
@@ -410,15 +420,28 @@ return call_user_func( function() {
 				'wikibase-claimview-snak-new-tooltip'
 			)
 		),
+
+		'jquery.wikibase.referenceview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.referenceview.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.claimview',
+			)
+		),
+
 		'jquery.wikibase.statementview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.statementview.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.claimview',
+				'jquery.wikibase.listview',
+				'jquery.wikibase.referenceview',
 			),
 			'messages' => array(
 				'wikibase-statementview-referencesheading',
+				'wikibase-addreference'
 			)
 		),
 
