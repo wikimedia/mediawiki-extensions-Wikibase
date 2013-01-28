@@ -98,6 +98,8 @@ class SpecialCreateItem extends SpecialCreateEntity {
 				$status->error( 'wikibase-createitem-add-sitelink-failed' );
 				return $status;
 			}
+			$this->summary->addAutoCommentArgs( $this->site );
+			$this->summary->addAutoSummaryArgs( $this->page );
 		}
 
 		return $status;
