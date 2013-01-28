@@ -26,6 +26,7 @@ $messages['en'] = array(
 	'wikibase-save' => 'save',
 	'wikibase-cancel' => 'cancel',
 	'wikibase-add' => 'add',
+	'wikibase-addreference' => 'add source',
 	'wikibase-save-inprogress' => 'Saving…',
 	'wikibase-remove-inprogress' => 'Removing…',
 	'wikibase-label-empty' => 'No label defined yet',
