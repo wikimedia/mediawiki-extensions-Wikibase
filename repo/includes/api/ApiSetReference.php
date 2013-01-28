@@ -31,10 +31,14 @@ use ApiBase, MWException;
  */
 class ApiSetReference extends Api {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
+
+	/**
+	 * @var string
+	 */
+	protected $summary = null;
 
 	/**
 	 * @see ApiBase::execute
@@ -46,11 +50,21 @@ class ApiSetReference extends Api {
 
 		$content = $this->getEntityContent();
 		$params = $this->extractRequestParams();
+		$snaks = $this->getSnaks( $params['snaks'] );
+
+		$this->summary = new Summary( 'wbsetreference' );
+		$this->summary->removeFormat( \Wikibase\Summary::USE_SUMMARY );
+
+		$stringified = array();
+		foreach ($snaks as $snak) {
+			$stringified[] = $snak->getPropertyId(); // FIXME: should be the value as a string (aka use ValueFormatter)
+		}
+		$this->summary->addAutoSummaryArgs( $stringified );
 
 		$reference = $this->updateReference(
 			$content->getEntity(),
 			$params['statement'],
-			$this->getSnaks( $params['snaks'] ),
+			$snaks,
 			$params['reference']
 		);
 
@@ -121,6 +135,7 @@ class ApiSetReference extends Api {
 		}
 
 		$statement = $claims->getClaimWithGuid( $statementGuid );
+		$this->summary->addAutoCommentArgs( $statement->getMainSnak()->getPropertyId() . '/' . $statement->getGuid() );
 
 		if ( ! ( $statement instanceof Statement ) ) {
 			$this->dieUsage(
@@ -172,7 +187,7 @@ class ApiSetReference extends Api {
 		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$this->summary->toString(),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);

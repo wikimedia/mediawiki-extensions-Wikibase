@@ -41,11 +41,15 @@ use Wikibase\Settings;
  */
 class RemoveQualifiers extends \Wikibase\Api {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
 	// TODO: claim uniqueness
+
+	/**
+	 * @var string
+	 */
+	protected $summary = null;
 
 	/**
 	 * @see ApiBase::execute
@@ -56,6 +60,11 @@ class RemoveQualifiers extends \Wikibase\Api {
 		wfProfileIn( __METHOD__ );
 
 		$content = $this->getEntityContent();
+
+		$params = $this->extractRequestParams();
+
+		$this->summary = new \Wikibase\Summary( 'wbremovequalifiers' );
+		$this->summary->removeFormat( \Wikibase\Summary::USE_SUMMARY );
 
 		$this->doRemoveQualifiers( $content->getEntity() );
 
@@ -93,10 +102,12 @@ class RemoveQualifiers extends \Wikibase\Api {
 		$params = $this->extractRequestParams();
 
 		$claim = $this->getClaim( $entity, $params['claim'] );
+		$this->summary->addAutoCommentArgs( $claim->getMainSnak()->getPropertyId() . '/' . $claim->getGuid() );
 
 		$qualifiers = $claim->getQualifiers();
+		$uniqueCandidates = array_unique( $params['qualifiers'] );
 
-		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
+		foreach ( $uniqueCandidates as $qualifierHash ) {
 			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
 				// TODO: does $qualifierHash need to be escaped?
 				$this->dieUsage( 'There is no qualifier with hash ' . $qualifierHash, 'removequalifiers-qualifier-not-found' );
@@ -104,6 +115,8 @@ class RemoveQualifiers extends \Wikibase\Api {
 
 			$qualifiers->removeSnakHash( $qualifierHash );
 		}
+
+		$this->summary->addAutoSummaryArgs( $uniqueCandidates );
 	}
 
 	/**
@@ -141,7 +154,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$this->summary->toString(),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : false
 		);
