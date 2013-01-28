@@ -69,6 +69,7 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.datamodel/wikibase.EntityId.js',
 				'wikibase.datamodel/wikibase.Snak.js',
+				'wikibase.datamodel/wikibase.SnakList.js',
 				'wikibase.datamodel/wikibase.PropertyValueSnak.js',
 				'wikibase.datamodel/wikibase.PropertySomeValueSnak.js',
 				'wikibase.datamodel/wikibase.PropertyNoValueSnak.js',
