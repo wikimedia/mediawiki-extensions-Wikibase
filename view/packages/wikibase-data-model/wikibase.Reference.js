@@ -13,14 +13,13 @@
 	 * @since 0.3
 	 * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#ReferenceRecords
 	 *
-	 * @param {wb.Snak[]} snaks
+	 * @param {wb.Snak[]|wb.Snak|wb.SnakList} [snaks]
 	 */
 	wb.Reference = function( snaks ) {
-		this._snaks = snaks;
+		this.setSnaks( snaks );
 	};
 
 	wb.Reference.prototype = {
-
 		/**
 		 * @type wb.Snak[]
 		 * @todo think about implementing a SnakList rather than having an Array here
@@ -28,9 +27,9 @@
 		_snaks: null,
 
 		/**
-		 * Returns all the snaks.
+		 * Returns a list of the Snaks.
 		 *
-		 * @return wb.Snak[]
+		 * @return wb.SnakList
 		 */
 		getSnaks: function() {
 			return this._snaks;
@@ -39,11 +38,17 @@
 		/**
 		 * Overwrites the current set of snaks.
 		 *
-		 * @param {wb.Snak[]} snaks
+		  * @param {wb.Snak[]|wb.Snak|wb.SnakList} snaks
 		 */
 		setSnaks: function( snaks ) {
-			this._snaks = snaks;
+			this._snaks = new wb.SnakList( snaks );
 		}
 	};
+
+	wb.Reference.newFromJSON = function( json ) {
+		return new wb.Reference(
+			wb.SnakList.newFromJSON( json )
+		);
+	}
 
 }( wikibase, jQuery ) );
