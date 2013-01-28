@@ -504,7 +504,7 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Hook runs after internal parsing
+	 * Hook runs after internal parsing, adds calls for LangLinkHandler
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserAfterParse
 	 *
 	 * @since 0.1
@@ -515,15 +515,12 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onParserAfterParse( \Parser &$parser, &$text, \StripState $stripState ) {
+	public static function onParserAfterParseForLangLinkHandler( \Parser &$parser, &$text, \StripState $stripState ) {
 		wfProfileIn( __METHOD__ );
-
-		$parserOutput = $parser->getOutput();
 
 		// only run this once, for the article content and not interface stuff
 		//FIXME: this also runs for messages in EditPage::showEditTools! Ugh!
 		if ( $parser->getOptions()->getInterfaceMessage() ) {
-			wfProfileOut( __METHOD__ );
 			return true;
 		}
 
@@ -537,12 +534,55 @@ final class ClientHooks {
 
 		if ( $useRepoLinks ) {
 			// add links
-			$langLinkHandler->addLinksFromRepository( $parser->getTitle(), $parser->getOutput() );
+			$langLinkHandler->addLinksFromRepository(
+				$parser->getTitle(),
+				$parser->getOutput(),
+				true // TODO: Find some way to set this correctly
+			);
 		}
 
 		if ( $useRepoLinks || Settings::get( 'alwaysSort' ) ) {
 			// sort links
-			SortUtils::sortLinks( $parserOutput->getLanguageLinks() );
+			SortUtils::sortLinks( $parser->getOutput()->getLanguageLinks() );
+		}
+
+		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * Hook runs after internal parsing, adds property for ConnectedItem
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserAfterParse
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Parser $parser
+	 * @param string $text
+	 * @param \StripState $stripState
+	 *
+	 * @return bool
+	 */
+	public static function onParserAfterParseForConnectedItem( \Parser &$parser, &$text, \StripState $stripState ) {
+		wfProfileIn( __METHOD__ );
+
+		// only run this once, for the article content and not interface stuff
+		//FIXME: this also runs for messages in EditPage::showEditTools! Ugh!
+		if ( $parser->getOptions()->getInterfaceMessage() ) {
+			return true;
+		}
+
+		$title = $parser->getTitle();
+		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
+
+			$titleText = $title->getPrefixedText();
+			$siteId = Settings::get( 'siteGlobalID' );
+			$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink( $siteId, $titleText );
+
+			$parser->getOutput()->setProperty(
+				'ConnectedItem',
+				$itemId === false ? null : serialize( $itemId )
+			);
+
 		}
 
 		wfProfileOut( __METHOD__ );
