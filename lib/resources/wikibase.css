@@ -464,6 +464,11 @@ div.wb-claim-container .wb-editsection {
 	top: 10px; /* even out padding */
 }
 
+div.wb-reference .wb-editsection {
+	position:relative; /* TODO: just for better usability until real styling is done */
+	top: 0;
+}
+
 /* Link to add claim to section */
 div.wb-claim-section .wb-claim-add {
 	border-bottom: none;
@@ -578,6 +583,15 @@ div.wb-claim-new .wb-snak-value {
 /***** /EDIT/NEW CLAIM *****/
 
 /********** /CLAIMS **********/
+
+
+/********** STATEMENTS **********/
+
+.wb-statement-references-container {
+	padding-left: 17em;
+}
+
+/********** /STATEMENTS **********/
 
 
 /********** SITE LINKS **********/
