@@ -31,10 +31,14 @@ use ApiBase, MWException;
  */
 class ApiRemoveClaims extends Api {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
+
+	/**
+	 * @var string
+	 */
+	protected $summary = null;
 
 	/**
 	 * @see ApiBase::execute
@@ -44,7 +48,11 @@ class ApiRemoveClaims extends Api {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
+		$params = $this->extractRequestParams();
+
 		$guids = $this->getGuidsByEntity();
+
+		$this->summary = new \Wikibase\Summary( 'wbremoveclaims' );
 
 		$removedClaimKeys = $this->removeClaims(
 			$this->getEntityContents( array_keys( $guids ) ),
@@ -95,24 +103,33 @@ class ApiRemoveClaims extends Api {
 	 * @return string[]
 	 */
 	protected function removeClaims( $entityContents, array $guids ) {
-		$removedClaims = array();
+		$accRemovedClaims = array();
 
 		foreach ( $entityContents as $entityContent ) {
 			$entity = $entityContent->getEntity();
 
 			$claims = new Claims( $entity->getClaims() );
+			$oldClaims = clone $claims;
 
-			$removedClaims = array_merge(
-				$removedClaims,
-				$this->removeClaimsFromList( $claims, $guids[$entity->getPrefixedId()] )
+			$removedClaims = $this->removeClaimsFromList( $claims, $guids[$entity->getPrefixedId()] );
+
+			$removedGuids = array_map(
+				function( $guid ) use ( $oldClaims ) {
+					$claim = $oldClaims->getClaimWithGuid( $guid );
+					return $claim === null ? '' : $claim->getMainSnak()->getPropertyId();
+				},
+				$removedClaims
 			);
+			$this->summary->addAutoCommentArgs( implode( '¦', $removedGuids ) );
+			$this->summary->addAutoSummaryNumArgs( $removedClaims );
+
+			$accRemovedClaims = array_merge( $accRemovedClaims, $removedClaims );
 
 			$entity->setClaims( $claims );
-
 			$this->saveChanges( $entityContent );
 		}
 
-		return $removedClaims;
+		return $accRemovedClaims;
 	}
 
 	/**
@@ -204,7 +221,7 @@ class ApiRemoveClaims extends Api {
 		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$this->summary->toString(),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);
@@ -254,7 +271,7 @@ class ApiRemoveClaims extends Api {
 	 */
 	public function getParamDescription() {
 		return array(
-			'claim' => 'A GUID identifying the claim',
+			'claim' => 'A GUID identifying the claim', // this should be a plural
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
@@ -312,21 +329,27 @@ class ApiRemoveClaims extends Api {
 	}
 
 	/**
-	 * @see \ApiBase::needsToken()
+	 * @see \ApiBase::needsToken
+	 *
+	 * @return bool true
 	 */
 	public function needsToken() {
 		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
 	}
 
 	/**
-	 * @see \ApiBase::mustBePosted()
+	 * @see \ApiBase::mustBePosted
+	 *
+	 * @return bool
 	 */
 	public function mustBePosted() {
 		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 	}
 
 	/**
-	 * @see \ApiBase::isWriteMode()
+	 * @see \ApiBase::isWriteMode
+	 *
+	 * @return bool
 	 */
 	public function isWriteMode() {
 		return true;
