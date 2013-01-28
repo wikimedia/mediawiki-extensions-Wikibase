@@ -157,6 +157,8 @@ $specialPageAliases['nl'] = array(
 	'ItemDisambiguation' => array( 'ItemPerLabel' ),
 	'ListDatatypes' => array( 'GegevenstypenWeergeven' ),
 	'SetLabel' => array( 'LabelInstellen' ),
+	'SetDescription' => array( 'BeschrijvingInstellen' ),
+	'SetAliases' => array( 'AliassenInstellen' ),
 	'EntitiesWithoutLabel' => array( 'EntiteitenZonderLabel' ),
 );
 

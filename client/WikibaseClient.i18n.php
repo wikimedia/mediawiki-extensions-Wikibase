@@ -363,6 +363,7 @@ $messages['he'] = array(
 	'wikibase-comment-sitelink-add' => 'קישור שפה הוסף: $1',
 	'wikibase-comment-sitelink-change' => 'קישור השפה שוּנה מ־$1 אל $2',
 	'wikibase-comment-sitelink-remove' => 'קישור השפה הוסר: $1',
+	'wikibase-comment-multi' => '$1 שינויים',
 	'wikibase-editlinks' => 'עריכת קישורים',
 	'wikibase-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
 	'wikibase-rc-hide-wikidata' => '$1 ויקינתונים',
