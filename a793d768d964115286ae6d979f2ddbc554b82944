@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//6vM\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-28T10:43:15Z",
+      "side": 1,
+      "message": "whitespace :o",
+      "revId": "a793d768d964115286ae6d979f2ddbc554b82944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//6vQ\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-28T10:43:15Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be REPO_API?",
+      "revId": "a793d768d964115286ae6d979f2ddbc554b82944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//6vc\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-01-28T10:43:15Z",
+      "side": 1,
+      "message": "this is confusing",
+      "revId": "a793d768d964115286ae6d979f2ddbc554b82944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
