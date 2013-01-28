@@ -31,10 +31,14 @@ use ApiBase, MWException;
  */
 class ApiSetReference extends Api {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
+
+	/**
+	 * @var string
+	 */
+	protected $summary = null;
 
 	/**
 	 * @see ApiBase::execute
@@ -46,11 +50,14 @@ class ApiSetReference extends Api {
 
 		$content = $this->getEntityContent();
 		$params = $this->extractRequestParams();
+		$snaks = $this->getSnaks( $params['snaks'] );
+
+		$this->summary = new Summary( 'wbsetreference', isset( $params['reference'] ) ? 'add' : 'update' );
 
 		$reference = $this->updateReference(
 			$content->getEntity(),
 			$params['statement'],
-			$this->getSnaks( $params['snaks'] ),
+			$snaks,
 			$params['reference']
 		);
 
@@ -131,6 +138,13 @@ class ApiSetReference extends Api {
 			);
 		}
 
+		$this->summary->addAutoCommentArgs( $statement->getMainSnak()->getPropertyId() . '/' . $statement->getGuid() );
+		foreach ($snaks as $snak) {
+			if ( $snak instanceof PropertyValueSnak ) {
+				$this->summary->addAutoSummaryArgs( $snak->getDataValue()->getValue() );
+			}
+		}
+
 		$reference = new Reference( $snaks );
 
 		/**
@@ -174,7 +188,7 @@ class ApiSetReference extends Api {
 		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$this->summary->toString(),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);

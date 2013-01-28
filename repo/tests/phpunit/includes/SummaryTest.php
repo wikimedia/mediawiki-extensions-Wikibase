@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 
 /**
- * Test Autocomment.
+ * Test Summary.
  *
  * @file
  * @since 0.1
@@ -13,13 +13,13 @@ use Wikibase\Autocomment;
  * @ingroup Test
  *
  * @group Wikibase
- * @group Autocomment
+ * @group Summary
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  *
  */
-class AutocommentTest extends \MediaWikiTestCase {
+class SummaryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider providerOnFormat
@@ -28,7 +28,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 		$itemTitle = $this->getMock( $title );
 		$itemTitle->expects( $this->once() )->method( 'getContentModel' )->will( $this->returnValue( $model ) );
 		$comment = null;
-		Autocomment::onFormat( array($model, $root), $comment, $pre, $auto, $post, $itemTitle, $local );
+		Summary::onFormat( array($model, $root), $comment, $pre, $auto, $post, $itemTitle, $local );
 		if ( is_null( $expected ) ) {
 			$this->assertEquals( $expected, $comment, "Didn't find the expected null" );
 		}
@@ -39,7 +39,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 
 	public static function providerOnFormat() {
 		return array( //@todo: test other types of entities too!
-			array(
+			array( // 0
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
 				'', '', '',
@@ -47,7 +47,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 				false,
 				null
 			),
-			array(
+			array( // 1
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
 				'foo', '', 'bar',
@@ -55,7 +55,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 				false,
 				null
 			),
-			array(
+			array( // 2
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
 				'foo', 'wbeditentity', 'bar',
@@ -63,45 +63,45 @@ class AutocommentTest extends \MediaWikiTestCase {
 				false,
 				'!foo- ‎<span dir="auto"><span class="autocomment">.*?</span>bar</span>!'
 			),
-			array(
+			array( // 3
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
 				'foo', 'wbsetlabel-set:1|en', 'bar',
 				'Title',
 				false,
-				'!foo- ‎<span dir="auto"><span class="autocomment">.*?\[en\].*?</span>bar</span>!'
+				'!foo- ‎<span dir="auto"><span class="autocomment">.*?\[English\].*?</span>bar</span>!'
 			),
-			array(
+			array( // 4
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
 				'foo', 'wbsetlabel-set:1|<>', 'bar',
 				'Title',
 				false,
-				'!foo- ‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span>bar</span>!'
+				'!foo- ‎<span dir="auto"><span class="autocomment">.*?\[\].*?</span>bar</span>!'
 			),
-			array(
+			array( // 5
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
 				'foo', 'wbsetlabel-set:1|&lt;&gt;', 'bar',
 				'Title',
 				false,
-				'!foo- ‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span>bar</span>!'
+				'!foo- ‎<span dir="auto"><span class="autocomment">.*?\[\].*?</span>bar</span>!'
 			),
-			array(
+			array( // 6
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
 				'foo', 'wbsetlabel-set:1|&', 'bar',
 				'Title',
 				false,
-				'!foo- ‎<span dir="auto"><span class="autocomment">.*?\[&amp;\].*?</span>bar</span>!'
+				'!foo- ‎<span dir="auto"><span class="autocomment">.*?\[\].*?</span>bar</span>!'
 			),
-			array(
+			array( // 7
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
 				'foo', 'wbsetlabel-set:1|…', 'bar',
 				'Title',
 				false,
-				'!foo- ‎<span dir="auto"><span class="autocomment">.*?\[…\].*?</span>bar</span>!'
+				'!foo- ‎<span dir="auto"><span class="autocomment">.*?\[\].*?</span>bar</span>!'
 			)
 		);
 	}
@@ -110,7 +110,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 	 * @dataProvider providerPickValuesFromParams
 	 */
 	public function testPickValuesFromParams( array $params, array $sequence, array $expected ) {
-		$result = Autocomment::pickValuesFromParams( $params, $sequence );
+		$result = Summary::pickValuesFromParams( $params, $sequence );
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
@@ -148,7 +148,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 	 * @dataProvider providerPickKeysFromParams
 	 */
 	public function testPickKeysFromParams( array $params, array $sequence, array $expected ) {
-		$result = Autocomment::pickKeysFromParams( $params, $sequence );
+		$result = Summary::pickKeysFromParams( $params, $sequence );
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
@@ -186,7 +186,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 	 * @dataProvider providerFormatAutoComment
 	 */
 	public function testFormatAutoComment( $msg, $parts, $expected ) {
-		$result = Autocomment::formatAutoComment( $msg, $parts );
+		$result = Summary::formatAutoComment( $msg, $parts );
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
@@ -204,7 +204,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 	 * @dataProvider providerFormatAutoSummary
 	 */
 	public function testFormatAutoSummary( $parts, $lang, $expected ) {
-		$result = Autocomment::formatAutoSummary( $parts, $lang );
+		$result = Summary::formatAutoSummary( $parts, $lang );
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
@@ -222,7 +222,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 	 * @dataProvider providerFormatTotalSummary
 	 */
 	public function testFormatTotalSummary( $comment, $summary, $lang, $expected ) {
-		$result = Autocomment::formatTotalSummary( $comment, $summary, $lang );
+		$result = Summary::formatTotalSummary( $comment, $summary, $lang );
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
