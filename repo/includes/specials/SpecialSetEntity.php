@@ -1,6 +1,6 @@
 <?php
 
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 
 /**
  * Abstract special page for setting a value of a Wikibase entity.
@@ -372,17 +372,17 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 	 * @return string
 	 */
 	protected function getSummary( $key, $value, $i18n ) {
-		list( $counts, $summary, $lang ) = Autocomment::formatAutoSummary(
+		list( $counts, $summary, $lang ) = Summary::formatAutoSummary(
 			array( $value ),
 			$this->getLanguage()
 		);
 
-		$comment = Autocomment::formatAutoComment(
+		$comment = Summary::formatAutoComment(
 			$i18n,
 			array( $counts, $key )
 		);
 
-		return AutoComment::formatTotalSummary( $comment, $summary, $lang );
+		return Summary::formatTotalSummary( $comment, $summary, $lang );
 	}
 
 	/**

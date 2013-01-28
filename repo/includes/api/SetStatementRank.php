@@ -43,10 +43,14 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
  */
 class SetStatementRank extends \Wikibase\Api {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
+
+	/**
+	 * @var string
+	 */
+	protected $summary = null;
 
 	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
 		//NOTE: need to declare this constructor, so old PHP versions don't use the
@@ -70,6 +74,10 @@ class SetStatementRank extends \Wikibase\Api {
 			$params['statement'],
 			$params['rank']
 		);
+
+		$this->summary = new \Wikibase\Summary( 'wbsetstatementrank' );
+		$this->summary->addAutoCommentArgs( $statement->getMainSnak()->getPropertyId() . '/' . $statement->getGuid() );
+		$this->summary->addAutoSummaryArgs( \Wikibase\Summary::pickValuesFromParams( $params, 'rank' ) );
 
 		$this->saveChanges( $content );
 
@@ -143,7 +151,7 @@ class SetStatementRank extends \Wikibase\Api {
 		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$this->summary->toString(),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);
