@@ -257,7 +257,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 					'page_id' => 1,
 					'rev_id' => 11,
 					'parent_id' => 0,
-					'comment' => 'wbc-comment-add',
+					'comment' => 'wikibase-comment-add',
 				),
 			)
 		));
@@ -276,7 +276,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 					'page_id' => 1,
 					'rev_id' => 12,
 					'parent_id' => 11,
-					'comment' => 'wbc-comment-add',
+					'comment' => 'wikibase-comment-add',
 				),
 			)
 		));
@@ -295,7 +295,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 					'page_id' => 1,
 					'rev_id' => 13,
 					'parent_id' => 12,
-					'comment' => 'wbc-comment-add',
+					'comment' => 'wikibase-comment-add',
 				),
 			)
 		));
@@ -314,7 +314,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 					'page_id' => 1,
 					'rev_id' => 13,   // rev id from last change
 					'parent_id' => 0, // parent rev from first change
-					'comment' => 'wbc-comment-add',
+					'comment' => 'wikibase-comment-add',
 				),
 			)
 		));
@@ -398,7 +398,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			'info' => array(
 				'metadata' => array(
 					'bot' => 0,
-					'comment' => 'wbc-comment-add'
+					'comment' => 'wikibase-comment-add' // this assumes a specific 'type'
 				)
 			)
 		), self::makeDiff( Item::ENTITY_TYPE,
@@ -435,7 +435,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			'info' => array(
 				'metadata' => array(
 					'bot' => 0,
-					'comment' => 'wbc-comment-add'
+					'comment' => 'wikibase-comment-add' // this assumes a specific 'type'
 				)
 			)
 		), self::makeDiff( Item::ENTITY_TYPE,
