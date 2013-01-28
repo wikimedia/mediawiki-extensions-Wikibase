@@ -49,4 +49,28 @@
 		} );
 	} );
 
+	QUnit.test( 'getHash', function( assert ) {
+		var hash = 'hash12390213',
+			reference = new wb.Reference( [], hash );
+
+		assert.equal(
+			reference.getHash(),
+			hash,
+			'Reference\'s hash from constructor returned in getHash()'
+		);
+
+		reference.setSnaks( snakLists[0] );
+		assert.equal(
+			reference.getHash(),
+			hash,
+			'Reference\'s hash does not change when snak list changes'
+		);
+
+		assert.equal(
+			( new wb.Reference( [] ) ).getHash(),
+			null,
+			'Reference without initial hash will return null in getHash()'
+		);
+	} );
+
 }( wikibase, dataValues, jQuery, QUnit ) );
