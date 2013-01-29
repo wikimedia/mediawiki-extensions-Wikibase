@@ -220,12 +220,14 @@ $wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
 
 // Special page groups
 $wgSpecialPageGroups['CreateItem']					= 'wikibaserepo';
+$wgSpecialPageGroups['NewProperty']					= 'wikibaserepo';
 $wgSpecialPageGroups['ItemByTitle']					= 'wikibaserepo';
 $wgSpecialPageGroups['ItemDisambiguation']			= 'wikibaserepo';
 $wgSpecialPageGroups['SetLabel']					= 'wikibaserepo';
 $wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
 $wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
 $wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
+$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
 
 
 // Hooks
