@@ -28,7 +28,7 @@ describe "Check edit-conflicts" do
     end
   end
 
-  context "check behaviour on edit conflicts" do
+  context "check behaviour on edit conflicts (descriptions)" do
     it "should login as user 1, change description and save revid" do
       visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
@@ -134,6 +134,118 @@ describe "Check edit-conflicts" do
         page.wait_for_api_callback
         page.wbErrorDiv?.should be_false
         page.entityDescriptionSpan.should == description_user1
+      end
+    end
+  end
+
+  context "check behaviour on edit conflicts (claims)", :experimental => true do
+    prop_label = generate_random_string(10)
+    prop_description = generate_random_string(20)
+    prop_datatype = "Commons media file"
+    cm_filename = "Air_France_A380_F-HPJA.jpg"
+    statement_value_user1 = "Ellipse sign template.svg"
+    statement_value_user2 = "Jaen - Mapa municipal.svg"
+    statement_value_user1_changed = "Kreisbewegungen-Coppernicus-0.djvu"
+    first_claim_guid = 0
+    old_revid = 0
+    it "should login as user 1, change claim and save revid" do
+      visit_page(NewPropertyPage) do |page|
+        page.create_new_property(prop_label, prop_description, prop_datatype)
+      end
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.add_statement(prop_label, cm_filename)
+      end
+      visit_page(RepoLoginPage) do |page|
+        page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
+      end
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.editFirstStatement
+        page.statementValueInput_element.clear
+        page.statementValueInput = statement_value_user1
+        page.saveStatement
+        ajax_wait
+        page.wait_for_statement_request_finished
+        first_claim_guid = @browser.execute_script("return $('.wb-claimview').first().data('wikibaseStatementview').value().getGuid()");
+        old_revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid + "');")
+        old_revid.should > 0
+      end
+    end
+    it "should login as user 2, change claim value" do
+      visit_page(RepoLoginPage) do |page|
+        page.logout_user
+      end
+      visit_page(RepoLoginPage) do |page|
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+      end
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.editFirstStatement
+        page.statementValueInput_element.clear
+        page.statementValueInput = statement_value_user2
+        page.saveStatement
+        ajax_wait
+        page.wait_for_statement_request_finished
+        revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid + "');")
+        revid.should > old_revid
+      end
+    end
+    # TODO: this test will fail because of bug 44101 (issue 1)
+    it "should login as user 1 again, inject old revid & complain about edit conflict when changing claim value" do
+      visit_page(RepoLoginPage) do |page|
+        page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
+      end
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid + "');")
+        inject_old_revid = "wb.getRevisionStore().setClaimRevision(parseInt(" + old_revid.to_s() + "), '" + first_claim_guid.to_s() + "');"
+        @browser.execute_script(inject_old_revid)
+        injected_revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid + "');")
+        injected_revid.should == old_revid
+        page.editFirstStatement
+        page.statementValueInput_element.clear
+        page.statementValueInput = statement_value_user1_changed
+        page.saveStatement
+        ajax_wait
+        page.wbErrorDiv?.should be_true
+        page.wbErrorDetailsLink?.should be_true
+        page.wbErrorDetailsLink
+        page.wbErrorDetailsDiv?.should be_true
+        # TODO: this will fail because of bug 44101 (issue 1)
+        page.wbErrorDetailsDiv_element.text.should == edit_conflict_msg
+        page.cancelStatement
+      end
+    end
+    # TODO: this test will fail because of bug 44101 (issue 2)
+    it "should login as user 1 again, inject old revid & complain about edit conflict when changing claim value" do
+      visit_page(RepoLoginPage) do |page|
+        page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
+      end
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid + "');")
+        inject_old_revid = "wb.getRevisionStore().setClaimRevision(parseInt(" + old_revid.to_s() + "), '" + first_claim_guid.to_s() + "');"
+        @browser.execute_script(inject_old_revid)
+        injected_revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid + "');")
+        injected_revid.should == old_revid
+        page.editFirstStatement
+        page.statementValueInput_element.clear
+        page.statementValueInput = statement_value_user1
+        page.saveStatement
+        ajax_wait
+        # TODO: this will fail because of bug 44101 (issue 2)
+        page.wbErrorDiv?.should be_true
+        page.wbErrorDetailsLink?.should be_true
+        page.wbErrorDetailsLink
+        page.wbErrorDetailsDiv?.should be_true
+        page.wbErrorDetailsDiv_element.text.should == edit_conflict_msg
+        page.cancelStatement
       end
     end
   end
