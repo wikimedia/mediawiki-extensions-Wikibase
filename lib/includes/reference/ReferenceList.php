@@ -128,7 +128,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	 *
 	 * @since 0.3
 	 *
-	 * @return string
+	 * @return array
 	 */
 	public function toArray() {
 		$references = array();
