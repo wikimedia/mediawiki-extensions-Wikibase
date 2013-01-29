@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//5gU\u003d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-01-29T00:09:51Z",
+      "side": 1,
+      "message": "This function is the worst, still has \"claim\" written all over the place and will be subject to some cleanup.",
+      "revId": "bb6b33d7aeed77a328d9b5d370f27ce2c105a7e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
