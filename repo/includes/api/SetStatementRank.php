@@ -249,7 +249,7 @@ class SetStatementRank extends \Wikibase\Api {
 	 * @return string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetclaimvalue';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetstatementrank';
 	}
 
 	/**

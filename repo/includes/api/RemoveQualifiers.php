@@ -237,7 +237,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	 * @return string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremovequalifier';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremovequalifiers';
 	}
 
 	/**
