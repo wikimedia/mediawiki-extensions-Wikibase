@@ -46,10 +46,16 @@ class ReferenceSerializer extends SerializerObject {
 			throw new MWException( 'ReferenceSerializer can only serialize Reference objects' );
 		}
 
+		$serialization = array();
+
+		$serialization['hash'] = $reference->getHash();
+
 		$snakSerializer = new SnakSerializer( $this->options );
 		$snaksSerializer = new ByPropertyListSerializer( 'snak', $snakSerializer, $this->options );
 
-		return $snaksSerializer->getSerialized( $reference->getSnaks() );
+		$serialization['snaks'] = $snaksSerializer->getSerialized( $reference->getSnaks() );
+
+		return $serialization;
 	}
 
 }

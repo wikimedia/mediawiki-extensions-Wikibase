@@ -70,16 +70,19 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			$reference,
 			array(
-				'p42' => array(
-					$snakSerializer->getSerialized( $snaks[0] ),
-					$snakSerializer->getSerialized( $snaks[2] ),
-				),
-				'p1' => array(
-					$snakSerializer->getSerialized( $snaks[1] ),
-					$snakSerializer->getSerialized( $snaks[3] ),
-				),
-				'p9001' => array(
-					$snakSerializer->getSerialized( $snaks[4] ),
+				'hash' => $reference->getHash(),
+				'snaks' => array(
+					'p42' => array(
+						$snakSerializer->getSerialized( $snaks[0] ),
+						$snakSerializer->getSerialized( $snaks[2] ),
+					),
+					'p1' => array(
+						$snakSerializer->getSerialized( $snaks[1] ),
+						$snakSerializer->getSerialized( $snaks[3] ),
+					),
+					'p9001' => array(
+						$snakSerializer->getSerialized( $snaks[4] ),
+					),
 				),
 			),
 		);
