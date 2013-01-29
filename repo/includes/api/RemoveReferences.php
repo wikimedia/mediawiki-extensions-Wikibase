@@ -12,6 +12,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EditEntity;
 use Wikibase\Statement;
 use Wikibase\References;
+use Wikibase\Settings;
 
 /**
  * API module for removing one or more references of the same statement.

@@ -14,6 +14,7 @@ use Wikibase\Claim;
 use Wikibase\ClaimSerializer;
 use Wikibase\Snaks;
 use Wikibase\SnakFactory;
+use Wikibase\Settings;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
