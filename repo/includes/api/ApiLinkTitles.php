@@ -206,25 +206,23 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 			array( 'code' => 'fromsite-eq-tosite', 'info' => $this->msg( 'wikibase-api-fromsite-eq-tosite' )->text() ),
 		) );
 	}
+
 	/**
-	 * Returns whether this module requires a Token to execute
-	 * @return bool
+	 * @see \ApiBase::needsToken()
 	 */
 	public function needsToken() {
 		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
 	}
 
 	/**
-	 * Indicates whether this module must be called with a POST request
-	 * @return bool
+	 * @see \ApiBase::mustBePosted()
 	 */
 	public function mustBePosted() {
 		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 	}
 
 	/**
-	 * Indicates whether this module requires write mode
-	 * @return bool
+	 * @see \ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {
 		return true;

@@ -270,4 +270,25 @@ class ApiSetClaimValue extends Api {
 		return __CLASS__ . '-' . WB_VERSION;
 	}
 
+	/**
+	 * @see \ApiBase::needsToken()
+	 */
+	public function needsToken() {
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
+	}
+
+	/**
+	 * @see \ApiBase::mustBePosted()
+	 */
+	public function mustBePosted() {
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
+	}
+
+	/**
+	 * @see \ApiBase::isWriteMode()
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
 }

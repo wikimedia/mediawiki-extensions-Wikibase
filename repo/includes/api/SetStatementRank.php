@@ -265,25 +265,23 @@ class SetStatementRank extends \Wikibase\Api {
 
 	/**
 	 * @see \ApiBase::needsToken()
-	 * @return bool true
 	 */
 	public function needsToken() {
-		return true;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
+	}
+
+	/**
+	 * @see \ApiBase::mustBePosted()
+	 */
+	public function mustBePosted() {
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 	}
 
 	/**
 	 * @see \ApiBase::isWriteMode()
-	 * @return bool true
 	 */
 	public function isWriteMode() {
 		return true;
 	}
 
-	/**
-	 * @see \ApiBase::mustBePosted()
-	 * @return bool true
-	 */
-	public function mustBePosted() {
-		return true;
-	}
 }
