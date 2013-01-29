@@ -263,7 +263,7 @@ class ApiSearchEntities extends ApiBase {
 	 * @see ApiBase::getHelpUrls
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsearchentity';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsearchentities';
 	}
 
 	/**

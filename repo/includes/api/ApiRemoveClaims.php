@@ -293,7 +293,7 @@ class ApiRemoveClaims extends Api {
 	 * @return string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremoveclaim';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremoveclaims';
 	}
 
 	/**
