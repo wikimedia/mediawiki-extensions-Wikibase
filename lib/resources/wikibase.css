@@ -70,6 +70,10 @@ h2.wb-section-heading {
 	padding: 0 2px;
 	border: 1px solid #AAA;
 	border-radius: 0;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+
 }
 
 .wb-entity textarea {
@@ -420,6 +424,7 @@ div.wb-claim-container {
 	float: left;
 	width: 100%;
 	position: relative;
+	padding-bottom: 1em;
 }
 
 /* A single claim */
@@ -462,11 +467,6 @@ div.wb-snak .wb-snak-value-container {
 
 div.wb-claim-container .wb-editsection {
 	top: 10px; /* even out padding */
-}
-
-div.wb-reference .wb-editsection {
-	position:relative; /* TODO: just for better usability until real styling is done */
-	top: 0;
 }
 
 /* Link to add claim to section */
@@ -587,9 +587,76 @@ div.wb-claim-new .wb-snak-value {
 
 /********** STATEMENTS **********/
 
+/***** REFERENCES *****/
+
 .wb-statement-references-container {
 	padding-left: 17em;
 }
+
+.wb-statement-references-container .wb-statement-references-heading {
+	font-size: 90%;
+}
+
+.wb-referenceview {
+	position: relative;
+	background: #F0F0F0;
+}
+
+.wb-referenceview .wb-reference-snaks {
+	margin-bottom: 10px;
+	min-height: 1.7em;
+}
+
+.wb-referenceview .wb-reference-snaks .wb-snak-property {
+	width: 12em;
+	position: absolute;
+	font-size: 90%;
+}
+
+.wb-referenceview .wb-reference-snaks .wb-snak-property input {
+	width: 100%;
+	font-size: 100%;
+	top: 0;
+	position: absolute;
+}
+
+.wb-referenceview .wb-reference-snaks .wb-snak-value-container {
+	margin-left: 12em;
+	position: relative;
+}
+
+.wb-referenceview .wb-reference-snaks .wb-snak-value-container .wb-snak-value {
+	margin-left: 16px;
+	margin-right: 18em;
+}
+
+.wb-referenceview .wb-reference-snaks .wb-snak-value-container .wb-snak-value .valueview-value {
+	font-size: 90%;
+}
+
+.wb-referenceview .wb-reference-snaks .wb-snak-value-container .wb-snak-typeselector {
+	left: 0;
+}
+
+.wb-referenceview .wb-reference-snaks .wb-snak-value-container .wb-snak-value .valueview-value textarea {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.wb-referenceview .wb-claim-toolbar {
+	width: 18em;
+	position: absolute;
+	top: 10px;
+	right: 0;
+}
+
+.wb-referenceview .wb-claim-toolbar .wb-editsection {
+	font-size: 100%;
+	top: 0;
+}
+
+/***** /REFERENCES *****/
 
 /********** /STATEMENTS **********/
 
