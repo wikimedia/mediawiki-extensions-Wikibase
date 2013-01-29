@@ -117,6 +117,23 @@ describe "Check functionality of edit description" do
         page.entityDescriptionSpan.should == "0"
       end
     end
+    it "should check for length constraint (assuming max 250 chars)" do
+      on_page(ItemPage) do |page|
+        too_long_string =
+        "loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" +
+        "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" +
+        "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong";
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.editDescriptionLink
+        page.descriptionInputField_element.clear
+        page.descriptionInputField = too_long_string
+        page.saveDescriptionLink
+        ajax_wait
+        page.wait_for_api_callback
+        page.wbErrorDiv?.should be_true
+      end
+    end
   end
 
   after :all do
