@@ -156,7 +156,7 @@ $wgAutoloadClasses['Wikibase\Query'] 					= $dir . 'includes/query/Query.php';
 // includes/reference
 $wgAutoloadClasses['Wikibase\Reference'] 				= $dir . 'includes/reference/Reference.php';
 $wgAutoloadClasses['Wikibase\ReferenceList'] 			= $dir . 'includes/reference/ReferenceList.php';
-$wgAutoloadClasses['Wikibase\ReferenceObject'] 			= $dir . 'includes/reference/ReferenceObject.php';
+$wgAutoloadClasses['Wikibase\ReferenceObject'] 			= $dir . 'includes/reference/Reference.php';
 $wgAutoloadClasses['Wikibase\References'] 				= $dir . 'includes/reference/References.php';
 
 // includes/specials

@@ -131,7 +131,7 @@ final class LibHooks {
 			'query/Query',
 
 			'reference/ReferenceList',
-			'reference/ReferenceObject',
+			'reference/Reference',
 
 			'serializers/ByPropertyListSerializer',
 			'serializers/ClaimSerializer',

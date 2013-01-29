@@ -166,7 +166,7 @@ class ClaimsTest extends \MediaWikiTestCase {
 		$statement0->setRank( \Wikibase\Statement::RANK_PREFERRED );
 
 		$statement1 = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( 5 ) );
-		$statement1->setReferences( new \Wikibase\ReferenceList( array( new \Wikibase\ReferenceObject(
+		$statement1->setReferences( new \Wikibase\ReferenceList( array( new \Wikibase\Reference(
 			new \Wikibase\SnakList( array( new \Wikibase\PropertyValueSnak( 10, new \DataValues\StringValue( 'spam' ) ) ) )
 		) ) ) );
 

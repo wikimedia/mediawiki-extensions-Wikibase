@@ -156,7 +156,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 		$references = array();
 
 		foreach ( $data as $snaks ) {
-			$references[] = new ReferenceObject( SnakList::newFromArray( $snaks ) );
+			$references[] = new Reference( SnakList::newFromArray( $snaks ) );
 		}
 
 		return new static( $references );

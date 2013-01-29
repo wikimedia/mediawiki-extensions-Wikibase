@@ -65,7 +65,7 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 
 		$snakSerializer = new \Wikibase\SnakSerializer();
 
-		$reference = new \Wikibase\ReferenceObject( new \Wikibase\SnakList( $snaks ) );
+		$reference = new \Wikibase\Reference( new \Wikibase\SnakList( $snaks ) );
 
 		$validArgs[] = array(
 			$reference,
