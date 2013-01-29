@@ -64,8 +64,7 @@ describe "Check statements UI", :experimental => true do
         page.addStatement?.should be_true
         page.addStatement
         page.addStatement?.should be_false
-        # TODO: still broken in UI - save-button shoud be disabled - bug caught in statements_bugs_spec
-        #page.saveStatement?.should be_false
+        page.saveStatement?.should be_false
         page.cancelStatement?.should be_true
         page.entitySelectorInput?.should be_true
         page.statementValueInput?.should be_false
@@ -114,8 +113,7 @@ describe "Check statements UI", :experimental => true do
         ajax_wait
         page.wait_for_entity_selector_list
         page.statementValueInput?.should be_false
-        # TODO: still broken in UI - save-button shoud be disabled - bug caught in statements_bugs_spec
-        #page.saveStatement?.should be_false
+        page.saveStatement?.should be_false
         page.firstEntitySelectorLink?.should be_true
         page.firstEntitySelectorLabel?.should be_true
         page.firstEntitySelectorDescription?.should be_true
@@ -134,8 +132,7 @@ describe "Check statements UI", :experimental => true do
         page.wait_for_entity_selector_list
         page.wait_for_property_value_box
         page.statementValueInput?.should be_true
-        # TODO: still broken in UI - save-button shoud be disabled - bug caught in statements_bugs_spec
-        #page.saveStatement?.should be_false
+        page.saveStatement?.should be_false
         page.statementValueInput = statement_value
         page.saveStatement?.should be_true
         page.cancelStatement
@@ -335,19 +332,17 @@ describe "Check statements UI", :experimental => true do
         page.remove_all_claims
         page.add_statement(properties_cm[0]["label"], statement_value)
         page.editFirstStatement
-        page.saveStatement?.should be_true
+        page.saveStatement?.should be_false
         page.cancelStatement?.should be_true
         page.removeClaimButton?.should be_true
         page.entitySelectorInput?.should be_false
         page.statementValueInput?.should be_true
         page.statementValueInput.should == statement_value
         page.statement1Name.should == properties_cm[0]["label"]
-        # TODO: still broken in UI - save-button shoud be disabled - bug caught in statements_bugs_spec
-        #page.saveStatement?.should be_false
+        page.saveStatement?.should be_false
         page.cancelStatement?.should be_true
         page.statementValueInput_element.clear
-        # TODO: still broken in UI - save-button shoud be disabled - bug caught in statements_bugs_spec
-        #page.saveStatement?.should be_false
+        page.saveStatement?.should be_false
         page.statementValueInput = statement_value_changed
         page.saveStatement?.should be_true
         page.cancelStatement
