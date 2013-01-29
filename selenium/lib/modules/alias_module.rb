@@ -27,6 +27,9 @@ module AliasPage
   # aliases methods
   def count_existing_aliases
     count = 0
+    if aliasesList? == false
+      return 0
+    end
     aliasesList_element.each do |aliasElem|
       count = count+1
     end

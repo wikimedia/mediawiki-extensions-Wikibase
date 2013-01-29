@@ -11,6 +11,6 @@ class SetEntityPage < ItemPage
 
   text_field(:idField, :id => "wb-setentity-id")
   text_field(:languageField, :id => "wb-setentity-language")
-  text_field(:labelField, :id => "wb-setentity-value")
+  text_field(:valueField, :id => "wb-setentity-value")
 
 end
