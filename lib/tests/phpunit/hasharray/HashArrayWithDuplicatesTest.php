@@ -30,7 +30,7 @@ use Hashable;
  *
  * @group Wikibase
  * @group WikibaseLib
- * @group HashArrayWithDuplicatesTest
+ * @group HashArray
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -129,6 +129,27 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 		$array->addElement( $element );
 
 		$this->assertFalse( $newHash === $array->getHash(), 'Hash should not be the same after adding an existing element again' );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\HashArray $array
+	 */
+	public function testIndicesAreUpToDate( HashArray $array ) {
+		$this->assertInternalType( 'boolean', $array->indicesAreUpToDate() );
+
+		$mutable = new MutableHashable();
+
+		$array->addElement( $mutable );
+
+		$mutable->text = '~[,,_,,]:3';
+
+		$this->assertFalse( $array->indicesAreUpToDate() );
+
+		$array->rebuildIndices();
+
+		$this->assertTrue( $array->indicesAreUpToDate() );
 	}
 
 }
