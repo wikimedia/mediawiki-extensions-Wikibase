@@ -17,7 +17,7 @@ use Wikibase\CachingEntityLoader;
 use Wikibase\LibRegistry;
 use Wikibase\Settings;
 use Wikibase\ReferenceList;
-use Wikibase\ReferenceObject;
+use Wikibase\Reference;
 
 /**
  * Tests for the Wikibase\ReferencedEntitiesFinder class.
@@ -71,7 +71,7 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 				new Statement(
 					new PropertyNoValueSnak( 42 ),
 					null,
-					new ReferenceList( array( new ReferenceObject( new SnakList( array(
+					new ReferenceList( array( new Reference( new SnakList( array(
 						new PropertyNoValueSnak( 24 ) ) ) ) ) )
 				)
 			),
