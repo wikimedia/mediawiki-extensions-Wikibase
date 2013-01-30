@@ -1,7 +1,13 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Api;
+
 use ApiBase;
+
+use Wikibase\StoreFactory;
+use Wikibase\EntityContentFactory;
+use Wikibase\EntityFactory;
+use Wikibase\Utils;
 
 /**
  * API module to search for Wikibase entities.
@@ -38,7 +44,7 @@ class ApiSearchEntities extends ApiBase {
 	 * @param int $limit
 	 * @param bool $prefixSearch
 	 *
-	 * @return EntityContent[]
+	 * @return \Wikibase\EntityContent[]
 	 */
 	protected function searchEntities( $language, $term, $entityType, $limit, $prefixSearch  ) {
 		wfProfileIn( __METHOD__ );
@@ -73,7 +79,7 @@ class ApiSearchEntities extends ApiBase {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityContent[] $results
+	 * @param \Wikibase\EntityContent[] $results
 	 * @param string $language
 	 * @param string $search
 	 */
@@ -92,7 +98,7 @@ class ApiSearchEntities extends ApiBase {
 		$entries = array();
 
 		/**
-		 * var EntityId $id
+		 * var \Wikibase\EntityId $id
 		 */
 		foreach ( $ids as $id ) {
 			$entry = array();
@@ -132,7 +138,7 @@ class ApiSearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::execute()
+	 * @see \ApiBase::execute()
 	*/
 	public function execute() {
 		wfProfileIn( __METHOD__ );
@@ -187,7 +193,7 @@ class ApiSearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @see \ApiBase::getAllowedParams
 	 */
 	public function getAllowedParams() {
 		return array(
@@ -221,7 +227,7 @@ class ApiSearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
+	 * @see \ApiBase::getParamDescription
 	 */
 	public function getParamDescription() {
 		return array(
@@ -234,7 +240,7 @@ class ApiSearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getDescription
+	 * @see \ApiBase::getDescription
 	 */
 	public function getDescription() {
 		return array(
@@ -243,14 +249,14 @@ class ApiSearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getPossibleErrors()
+	 * @see \ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array() );
 	}
 
 	/**
-	 * @see ApiBase::getExamples
+	 * @see \ApiBase::getExamples
 	 */
 	protected function getExamples() {
 		return array(
@@ -260,14 +266,14 @@ class ApiSearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getHelpUrls
+	 * @see \ApiBase::getHelpUrls
 	 */
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsearchentities';
 	}
 
 	/**
-	 * @see ApiBase::getVersion
+	 * @see \ApiBase::getVersion
 	 */
 	public function getVersion() {
 		return __CLASS__ . '-' . WB_VERSION;

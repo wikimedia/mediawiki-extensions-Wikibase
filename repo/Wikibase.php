@@ -126,18 +126,18 @@ $wgAutoloadClasses['Wikibase\SubmitPropertyAction'] 	= $dir . 'includes/actions/
 $wgAutoloadClasses['Wikibase\SubmitQueryAction'] 		= $dir . 'includes/actions/EditQueryAction.php';
 
 // includes/api
-$wgAutoloadClasses['Wikibase\Api'] 						= $dir . 'includes/api/Api.php';
-$wgAutoloadClasses['Wikibase\ApiAutocomment'] 			= $dir . 'includes/api/ApiAutocomment.php';
-$wgAutoloadClasses['Wikibase\ApiEditEntity'] 			= $dir . 'includes/api/ApiEditEntity.php';
-$wgAutoloadClasses['Wikibase\ApiGetEntities'] 			= $dir . 'includes/api/ApiGetEntities.php';
-$wgAutoloadClasses['Wikibase\ApiLinkTitles'] 			= $dir . 'includes/api/ApiLinkTitles.php';
-$wgAutoloadClasses['Wikibase\ApiModifyEntity'] 			= $dir . 'includes/api/ApiModifyEntity.php';
-$wgAutoloadClasses['Wikibase\ApiModifyLangAttribute'] 	= $dir . 'includes/api/ApiModifyLangAttribute.php';
-$wgAutoloadClasses['Wikibase\ApiSearchEntities'] 		= $dir . 'includes/api/ApiSearchEntities.php';
-$wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
-$wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSetDescription.php';
-$wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabel.php';
-$wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
+$wgAutoloadClasses['Wikibase\Api\Api'] 						= $dir . 'includes/api/Api.php';
+$wgAutoloadClasses['Wikibase\Api\IAutocomment'] 			= $dir . 'includes/api/IAutocomment.php';
+$wgAutoloadClasses['Wikibase\Api\EditEntity'] 				= $dir . 'includes/api/EditEntity.php';
+$wgAutoloadClasses['Wikibase\Api\GetEntities'] 				= $dir . 'includes/api/GetEntities.php';
+$wgAutoloadClasses['Wikibase\Api\LinkTitles'] 				= $dir . 'includes/api/LinkTitles.php';
+$wgAutoloadClasses['Wikibase\Api\ModifyEntity'] 			= $dir . 'includes/api/ModifyEntity.php';
+$wgAutoloadClasses['Wikibase\Api\ModifyLangAttribute'] 		= $dir . 'includes/api/ModifyLangAttribute.php';
+$wgAutoloadClasses['Wikibase\Api\ApiSearchEntities'] 		= $dir . 'includes/api/ApiSearchEntities.php';
+$wgAutoloadClasses['Wikibase\Api\SetAliases'] 				= $dir . 'includes/api/SetAliases.php';
+$wgAutoloadClasses['Wikibase\Api\SetDescription'] 			= $dir . 'includes/api/SetDescription.php';
+$wgAutoloadClasses['Wikibase\Api\SetLabel'] 				= $dir . 'includes/api/SetLabel.php';
+$wgAutoloadClasses['Wikibase\Api\SetSiteLink'] 				= $dir . 'includes/api/SetSiteLink.php';
 
 
 // includes/content
@@ -191,21 +191,21 @@ $wgAutoloadClasses['Wikibase\RebuildEntityPerPage'] 	= $dir . 'maintenance/rebui
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';
 $wgAutoloadClasses['Wikibase\Test\ActionTestCase'] 			= $dir . 'tests/phpunit/includes/actions/ActionTestCase.php';
-$wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemBase.php';
-$wgAutoloadClasses['Wikibase\Test\ApiLangAttributeBase'] 	= $dir . 'tests/phpunit/includes/api/ApiLangAttributeBase.php';
+$wgAutoloadClasses['Wikibase\Test\ModifyItemBase'] 			= $dir . 'tests/phpunit/includes/api/ModifyItemBase.php';
+$wgAutoloadClasses['Wikibase\Test\LangAttributeBase'] 	= $dir . 'tests/phpunit/includes/api/LangAttributeBase.php';
 $wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/includes/content/EntityContentTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 		= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
 $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/includes/specials/SpecialPageTestBase.php';
 
 // API module registration
-$wgAPIModules['wbgetentities'] 						= 'Wikibase\ApiGetEntities';
-$wgAPIModules['wbsetlabel'] 						= 'Wikibase\ApiSetLabel';
-$wgAPIModules['wbsetdescription'] 					= 'Wikibase\ApiSetDescription';
-$wgAPIModules['wbsearchentities'] 					= 'Wikibase\ApiSearchEntities';
-$wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
-$wgAPIModules['wbeditentity'] 						= 'Wikibase\ApiEditEntity';
-$wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
-$wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
+$wgAPIModules['wbgetentities'] 						= 'Wikibase\Api\GetEntities';
+$wgAPIModules['wbsetlabel'] 						= 'Wikibase\Api\SetLabel';
+$wgAPIModules['wbsetdescription'] 					= 'Wikibase\Api\SetDescription';
+$wgAPIModules['wbsearchentities'] 					= 'Wikibase\Api\ApiSearchEntities';
+$wgAPIModules['wbsetaliases'] 						= 'Wikibase\Api\SetAliases';
+$wgAPIModules['wbeditentity'] 						= 'Wikibase\Api\EditEntity';
+$wgAPIModules['wblinktitles'] 						= 'Wikibase\Api\LinkTitles';
+$wgAPIModules['wbsetsitelink'] 						= 'Wikibase\Api\SetSiteLink';
 
 
 // Special page registration

@@ -1,0 +1,341 @@
+<?php
+
+namespace Wikibase\Api;
+
+use ApiBase, User, Status;
+
+use Wikibase\SiteLink;
+//use Wikibase\EditEntity;
+use Wikibase\EntityId;
+use Wikibase\Entity;
+use Wikibase\EntityContentFactory;
+use Wikibase\Item;
+use Wikibase\ItemContent;
+use Wikibase\StoreFactory;
+use Wikibase\Autocomment;
+use Wikibase\Settings;
+
+/**
+ * API module to associate two pages on two different sites with a Wikibase item .
+ * Requires API write mode to be enabled.
+ *
+ * @since 0.1
+ *
+ * @file
+ * @ingroup WikibaseRepo
+ * @ingroup API
+ *
+ * @licence GNU GPL v2+
+ */
+class LinkTitles extends Api implements IAutocomment {
+
+	/**
+	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 */
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
+
+		$permissions[] = 'linktitles-update';
+		return $permissions;
+	}
+
+	/**
+	 * @see  \Wikibase\Api\ApiAutocomment::getTextForComment()
+	 */
+	public function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			'wblinktitles-connect',
+			array( /*$plural*/ 2, $params['fromsite'], $params['tosite'] )
+		);
+	}
+
+	/**
+	 * @see  \Wikibase\ApiAutocomment::getTextForSummary()
+	 */
+	public function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			array( $params['fromtitle'], $params['totitle'] )
+		);
+	}
+
+	/**
+	 * Main method. Does the actual work and sets the result.
+	 *
+	 * @since 0.1
+	 */
+	public function execute() {
+		wfProfileIn( __METHOD__ );
+
+		$params = $this->extractRequestParams();
+		$user = $this->getUser();
+
+		if ( $params['fromsite'] === $params['tosite'] ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-fromsite-eq-tosite' )->text(), 'fromsite-eq-tosite' );
+		}
+
+		if ( !( strlen( $params['fromtitle'] ) > 0 && strlen( $params['totitle'] ) > 0 ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-fromtitle-and-totitle' )->text(), 'fromtitle-and-totitle' );
+		}
+
+		$sites = $this->getSiteLinkTargetSites();
+
+		// Get all parts for the from-link
+		// Site is already tested through allowed params ;)
+		$fromSite = $sites->getSite( $params['fromsite'] );
+		// This must be tested now
+		$fromPage = $fromSite->normalizePageName( $params['fromtitle'] );
+
+		if ( $fromPage === false ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
+		}
+
+		// This is used for testing purposes later
+		$fromId = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $params['fromsite'], $fromPage );
+
+		// Get all part for the to-link
+		// Site is already tested through allowed params ;)
+		$toSite = $sites->getSite( $params['tosite'] );
+		// This must be tested now
+		$toPage = $toSite->normalizePageName( $params['totitle'] );
+
+		if ( $toPage === false ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
+		}
+		// This is used for testing purposes later
+		$toId = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $params['tosite'], $toPage );
+
+		$return = array();
+		$flags = 0;
+		$itemContent = null;
+
+		// Figure out which parts to use and what to create anew
+		if ( !$fromId && !$toId ) {
+			// create new item
+			$itemContent = ItemContent::newEmpty();
+			$toLink = new SiteLink( $toSite, $toPage );
+			$return[] = $itemContent->getItem()->addSiteLink( $toLink, 'set' );
+			$fromLink = new SiteLink( $fromSite, $fromPage );
+			$return[] = $itemContent->getItem()->addSiteLink( $fromLink, 'set' );
+
+			$flags |= EDIT_NEW;
+		}
+		elseif ( !$fromId && $toId ) {
+			// reuse to-site's item
+			$itemContent = EntityContentFactory::singleton()->getFromId(
+				new EntityId( Item::ENTITY_TYPE, $toId )
+			);
+			$fromLink = new SiteLink( $fromSite, $fromPage );
+			$return[] = $itemContent->getItem()->addSiteLink( $fromLink, 'set' );
+		}
+		elseif ( $fromId && !$toId ) {
+			// reuse from-site's item
+			$itemContent = EntityContentFactory::singleton()->getFromId(
+				new EntityId( Item::ENTITY_TYPE, $fromId )
+			);
+			$toLink = new SiteLink( $toSite, $toPage );
+			$return[] = $itemContent->getItem()->addSiteLink( $toLink, 'set' );
+		}
+		elseif ( $fromId === $toId ) {
+			// no-op
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-common-item' )->text(), 'common-item' );
+		}
+		else {
+			// dissimilar items
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-common-item' )->text(), 'no-common-item' );
+		}
+
+		$this->addSiteLinksToResult( $return, 'entity' );
+
+		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+
+		if ( $itemContent === null ) {
+			// to not have an ItemContent isn't really bad at this point
+			$status = Status::newGood( true );
+		}
+		else {
+			// Do the actual save, or if it don't exist yet create it.
+			$editEntity = new \Wikibase\EditEntity( $itemContent, $user, false, $this->getContext() );
+			$status = $editEntity->attemptSave(
+				Autocomment::buildApiSummary( $this, $params, $itemContent ),
+				$flags,
+				( $this->needsToken() ? $params['token'] : '' )
+			);
+
+			if ( $editEntity->hasError( \Wikibase\EditEntity::TOKEN_ERROR ) ) {
+				$editEntity->reportApiErrors( $this, 'session-failure' );
+			}
+			elseif ( $editEntity->hasError( \Wikibase\EditEntity::EDIT_CONFLICT_ERROR ) ) {
+				$editEntity->reportApiErrors( $this, 'edit-conflict' );
+			}
+			elseif ( $editEntity->hasError() ) {
+				$editEntity->reportApiErrors( $this, 'save-failed' );
+			}
+
+			$revision = $editEntity->getNewRevision();
+			if ( $revision ) {
+				$this->getResult()->addValue(
+					'entity',
+					'lastrevid', intval( $revision->getId() )
+				);
+			}
+		}
+
+		if ( $itemContent !== null ) {
+			$this->getResult()->addValue(
+				'entity',
+				'id', $itemContent->getItem()->getId()->getNumericId()
+			);
+			$this->getResult()->addValue(
+				'entity',
+				'type', $itemContent->getItem()->getType()
+			);
+		}
+
+		$this->getResult()->addValue(
+			null,
+			'success',
+			(int)$status->isOK()
+		);
+
+		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Returns a list of all possible errors returned by the module
+	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 */
+	public function getPossibleErrors() {
+		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'create-failed', 'info' => $this->msg( 'wikibase-api-create-failed' )->text() ),
+			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
+			array( 'code' => 'session-failure', 'info' => $this->msg( 'wikibase-api-session-failure' )->text() ),
+			array( 'code' => 'common-item', 'info' => $this->msg( 'wikibase-api-common-item' )->text() ),
+			array( 'code' => 'no-common-item', 'info' => $this->msg( 'wikibase-api-no-common-item' )->text() ),
+			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
+			array( 'code' => 'fromtitle-and-totitle', 'info' => $this->msg( 'wikibase-api-fromtitle-and-totitle' )->text() ),
+			array( 'code' => 'fromsite-eq-tosite', 'info' => $this->msg( 'wikibase-api-fromsite-eq-tosite' )->text() ),
+		) );
+	}
+
+	/**
+	 * @see \ApiBase::needsToken()
+	 */
+	public function needsToken() {
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
+	}
+
+	/**
+	 * @see \ApiBase::mustBePosted()
+	 */
+	public function mustBePosted() {
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
+	}
+
+	/**
+	 * @see \ApiBase::isWriteMode()
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
+	 * Returns an array of allowed parameters (parameter name) => (default
+	 * value) or (parameter name) => (array with PARAM_* constants as keys)
+	 * Don't call this function directly: use getFinalParams() to allow
+	 * hooks to modify parameters as needed.
+	 * @return array|bool
+	 */
+	public function getAllowedParams() {
+		$sites = $this->getSiteLinkTargetSites();
+		return array_merge( parent::getAllowedParams(), array(
+			'tosite' => array(
+				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+			),
+			'totitle' => array(
+				ApiBase::PARAM_TYPE => 'string',
+			),
+			'fromsite' => array(
+				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+			),
+			'fromtitle' => array(
+				ApiBase::PARAM_TYPE => 'string',
+			),
+			'token' => null,
+			'bot' => false,
+		) );
+	}
+
+	/**
+	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
+	 * needed.
+	 *
+	 * @return array|bool False on no parameter descriptions
+	 */
+	public function getParamDescription() {
+		return array_merge( parent::getParamDescription(), array(
+			'tosite' => array( 'An identifier for the site on which the page resides.',
+				"Use together with 'totitle' to make a complete sitelink."
+			),
+			'totitle' => array( 'Title of the page to associate.',
+				"Use together with 'tosite' to make a complete sitelink."
+			),
+			'fromsite' => array( 'An identifier for the site on which the page resides.',
+				"Use together with 'fromtitle' to make a complete sitelink."
+			),
+			'fromtitle' => array( 'Title of the page to associate.',
+				"Use together with 'fromsite' to make a complete sitelink."
+			),
+			'token' => array( 'A "edittoken" token previously obtained through the token module (prop=info).',
+				'Later it can be implemented a mechanism where a token can be returned spontaneously',
+				'and the requester should then start using the new token from the next request, possibly when',
+				'repeating a failed request.'
+			),
+		) );
+	}
+
+	/**
+	 * Returns the description string for this module
+	 * @return mixed string or array of strings
+	 */
+	public function getDescription() {
+		return array(
+			'API module to associate two articles on two different wikis with a Wikibase item.'
+		);
+	}
+
+	/**
+	 * Returns usage examples for this module. Return false if no examples are available.
+	 * @return bool|string|array
+	 */
+	protected function getExamples() {
+		return array(
+			'api.php?action=wblinktitles&fromsite=enwiki&fromtitle=Hydrogen&tosite=dewiki&totitle=Wasserstoff'
+			=> 'Add a link "Hydrogen" from the English page to "Wasserstoff" at the German page',
+		);
+	}
+
+	/**
+	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
+	 */
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wblinktitles';
+	}
+
+	/**
+	 * @see ApiBase::getVersion
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getVersion() {
+		return __CLASS__ . '-' . WB_VERSION;
+	}
+
+}
