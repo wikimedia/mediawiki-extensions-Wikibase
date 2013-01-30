@@ -430,7 +430,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 
 		if ( $permissions !== null ) {
-			ApiModifyItemBase::applyPermissions( array(
+			ModifyItemBase::applyPermissions( array(
 				'*' => $permissions,
 				'user' => $permissions,
 				$group => $permissions,

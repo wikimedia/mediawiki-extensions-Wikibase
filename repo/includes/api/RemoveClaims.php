@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Api;
+
 use ApiBase, MWException;
 
 //use Wikibase\EditEntity;
@@ -8,12 +9,10 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-use Wikibase\Statement;
-use Wikibase\ClaimSerializer;
 use Wikibase\Settings;
 
 /**
- * API module for setting the rank of a statement
+ * API module for removing claims.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,18 +37,12 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetStatementRank extends Api {
+class RemoveClaims extends Api {
 
 	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
-
-	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
-		//NOTE: need to declare this constructor, so old PHP versions don't use the
-		//      setStatementRank() function as the constructor.
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-	}
 
 	/**
 	 * @see \ApiBase::execute
@@ -59,68 +52,147 @@ class SetStatementRank extends Api {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$content = $this->getEntityContent();
-		$params = $this->extractRequestParams();
+		$guids = $this->getGuidsByEntity();
 
-		$statement = $this->setStatementRank(
-			$content->getEntity(),
-			$params['statement'],
-			$params['rank']
+		$removedClaimKeys = $this->removeClaims(
+			$this->getEntityContents( array_keys( $guids ) ),
+			$guids
 		);
 
-		$this->saveChanges( $content );
-
-		$this->outputStatement( $statement );
+		$this->outputResult( $removedClaimKeys );
 
 		wfProfileOut( __METHOD__ );
 	}
 
 	/**
+	 * Parses the key parameter and returns it as an array with as keys
+	 * prefixed entity ids and as values arrays with the claim GUIDs for
+	 * the specific entity.
+	 *
 	 * @since 0.3
 	 *
-	 * @return \Wikibase\EntityContent
+	 * @return array
 	 */
-	protected function getEntityContent() {
+	protected function getGuidsByEntity() {
 		$params = $this->extractRequestParams();
 
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
+		$guids = array();
 
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setstatementrank-entity-not-found' );
+		foreach ( $params['claim'] as $guid ) {
+			$entityId = Entity::getIdFromClaimGuid( $guid );
+
+			if ( !array_key_exists( $entityId, $guids ) ) {
+				$guids[$entityId] = array();
+			}
+
+			$guids[$entityId][] = $guid;
 		}
 
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		return $guids;
+	}
 
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
+	/**
+	 * Does the claim removal and returns a list of claim keys for
+	 * the claims that actually got removed.
+	 *
+	 * @since 0.3
+	 *
+	 * @param \Wikibase\EntityContent[] $entityContents
+	 * @param array $guids
+	 *
+	 * @return string[]
+	 */
+	protected function removeClaims( $entityContents, array $guids ) {
+		$removedClaims = array();
+
+		foreach ( $entityContents as $entityContent ) {
+			$entity = $entityContent->getEntity();
+
+			$removedClaims = array_merge(
+				$removedClaims,
+				$this->removeClaimsFromEntity( $entity, $guids[$entity->getPrefixedId()] )
+			);
+
+			$this->saveChanges( $entityContent );
+		}
+
+		return $removedClaims;
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @param Entity $entity
-	 * @param string $statementGuid
-	 * @param string $rank
+	 * @param string[] $ids
 	 *
-	 * @return \Wikibase\Statement
+	 * @return \Wikibase\EntityContent[]
 	 */
-	protected function setStatementRank( Entity $entity, $statementGuid, $rank ) {
-		if ( !$entity->getClaims()->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'No such statement', 'setstatementrank-statement-not-found' );
+	protected function getEntityContents( array $ids ) {
+		$contents = array();
+
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+
+		// TODO: use proper batch select
+		foreach ( $ids as $id ) {
+			$entityId = EntityId::newFromPrefixedId( $id );
+
+			if ( $entityId === null ) {
+				$this->dieUsage( 'Invalid entity id provided', 'removeclaims-invalid-entity-id' );
+			}
+
+			$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
+
+			$content = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+
+			if ( $content === null ) {
+				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'removeclaims-entity-not-found' );
+			}
+
+			$contents[] = $content;
 		}
 
-		$statement = $entity->getClaims()->getClaimWithGuid( $statementGuid );
+		return $contents;
+	}
 
-		if ( ! ( $statement instanceof Statement ) ) {
-			$this->dieUsage(
-				'The referenced claim is not a statement and thus does not have a rank',
-				'setstatementrank-not-a-statement'
-			);
+	/**
+	 * @since 0.3
+	 *
+	 * @param \Wikibase\Entity $entity
+	 * @param string[] $guids
+	 *
+	 * @return string[]
+	 */
+	protected function removeClaimsFromEntity( Entity &$entity, array $guids ) {
+		$removedGuids = array();
+
+		foreach ( $guids as $guid ) {
+			if ( $entity->hasClaimWithGuid( $guid ) ) {
+				$entity->removeClaimWithGuid( $guid );
+				$removedGuids[] = $guid;
+			}
 		}
 
-		$statement->setRank( ClaimSerializer::unserializeRank( $rank ) );
+		return $removedGuids;
+	}
 
-		return $statement;
+	/**
+	 * @since 0.3
+	 *
+	 * @param string[] $removedClaimGuids
+	 */
+	protected function outputResult( $removedClaimGuids ) {
+		$this->getResult()->addValue(
+			null,
+			'success',
+			1
+		);
+
+		$this->getResult()->setIndexedTagName( $removedClaimGuids, 'claim' );
+
+		$this->getResult()->addValue(
+			null,
+			'claims',
+			$removedClaimGuids
+		);
 	}
 
 	/**
@@ -157,22 +229,6 @@ class SetStatementRank extends Api {
 	}
 
 	/**
-	 * @since 0.3
-	 *
-	 * @param \Wikibase\Statement $statement
-	 */
-	protected function outputStatement( Statement $statement ) {
-		$serializer = new ClaimSerializer();
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		$this->getResult()->addValue(
-			null,
-			'statement',
-			$serializer->getSerialized( $statement )
-		);
-	}
-
-	/**
 	 * @see \ApiBase::getAllowedParams
 	 *
 	 * @since 0.3
@@ -181,12 +237,9 @@ class SetStatementRank extends Api {
 	 */
 	public function getAllowedParams() {
 		return array(
-			'statement' => array(
+			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'rank' => array(
-				ApiBase::PARAM_TYPE => ClaimSerializer::getRanks(),
+				ApiBase::PARAM_ISMULTI => true,
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'token' => null,
@@ -205,8 +258,7 @@ class SetStatementRank extends Api {
 	 */
 	public function getParamDescription() {
 		return array(
-			'statement' => 'A GUID identifying the statement for which to set the rank',
-			'rank' => 'The new value to set for the rank',
+			'claim' => 'A GUID identifying the claim',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
@@ -223,7 +275,7 @@ class SetStatementRank extends Api {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for setting the rank of a Wikibase statement.'
+			'API module for removing Wikibase claims.'
 		);
 	}
 
@@ -249,7 +301,7 @@ class SetStatementRank extends Api {
 	 * @return string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetstatementrank';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremoveclaims';
 	}
 
 	/**
