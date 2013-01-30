@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//3no\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "The name seems odd to me. This does not parse properties, not property values. It is a way to reference properties and get to their values... How about PropertyParserFunction?",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//3ng\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "These should be optional constructor parameters, so we can supply mock stores for testing.",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//3m0\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "Hm, setEntityId may result in querying an external database. That\u0027s hidden cost in a constructor... not nice. Perhaps require an EntityId object as a parameter?",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//3nA\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "We should really have an alternative method that will directly return an EntityId object.",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//3nU\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "Please use Item::ENTITY_TYPE, not \u0027item\u0027.",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//3nQ\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "this can not happen, new will always return an object. You\u0027ll have to check whether $itemId is false (or null?) instead, before constructiong the EntityId.",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//3k0\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "Use Html:: for HTML, and Xml:: for XML.",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//3lU\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "Looking through the properties in the Entity to find an appropriate property is a nice workaround to not having a global property registry, probably fine for now. But please factor the get-property-id-for label or even get-property-claims-for-label stuff into a separate function (two levels of nested loops is icky, three levels is a reason to refactor).\n\nEventually though, getting a Property object based on a label should really be moved into the EntityLookup interface. It *is* looking up an entity!",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//3lQ\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "So you return the first one you find and ignore any further Claims about that property? Fine for now, I guess, but a //TODO or even //FIXME would be appropriate.",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//3lE\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "This should really use the ValueFormatter facility. Can be left for later, but again, please mark as //TODO.",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//3kI\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "What about what we are doing here is \"parsing\"? How about \"evaluate\"?",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//3kM\u003d",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:39:56Z",
+      "side": 1,
+      "message": "Hm... I don\u0027t think we should return an error here. Note that this case applies when a perfectly valid property is simply not set for an item. That case is something that templates will want to handle using something like\n\n{{#if:{{#property:date of death}}|{{#property:date of death}}|}}\n\nSo, if the property isn\u0027t set for the item, just return an empty string. Later we may add options that allow more control, e.g. {{#property:date of death|isset?}} or something.",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
