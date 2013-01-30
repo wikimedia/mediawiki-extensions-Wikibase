@@ -9,6 +9,7 @@
 module StatementPage
   include PageObject
   include EntitySelectorPage
+  include ReferencePage
   # statements UI elements
   link(:addStatement, :xpath => "//div[contains(@class, 'wb-claims-toolbar')]/div/span/span/a")
   link(:addClaimToFirstStatement, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claim-add')]/div[contains(@class, 'wb-claim-toolbar')]/span/span/span/a")
