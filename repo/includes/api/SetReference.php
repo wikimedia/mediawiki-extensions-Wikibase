@@ -9,12 +9,17 @@ use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Statement;
+use Wikibase\Reference;
+use Wikibase\ReferenceObject;
+use Wikibase\ReferenceSerializer;
+use Wikibase\Snaks;
+use Wikibase\SnakList;
+use Wikibase\SnakSerializer;
+use Wikibase\Claims;
 use Wikibase\Settings;
 
-use Wikibase\Lib\Serializers\ClaimSerializer;
-
 /**
- * API module for setting the rank of a statement
+ * API module for creating a reference or setting the value of an existing one.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,21 +44,15 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetStatementRank extends ApiWikibase {
+class SetReference extends ApiWikibase {
 
 	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
 
-	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
-		//NOTE: need to declare this constructor, so old PHP versions don't use the
-		//      setStatementRank() function as the constructor.
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-	}
-
 	/**
-	 * @see \ApiBase::execute
+	 * @see ApiBase::execute
 	 *
 	 * @since 0.3
 	 */
@@ -63,15 +62,16 @@ class SetStatementRank extends ApiWikibase {
 		$content = $this->getEntityContent();
 		$params = $this->extractRequestParams();
 
-		$statement = $this->setStatementRank(
+		$reference = $this->updateReference(
 			$content->getEntity(),
 			$params['statement'],
-			$params['rank']
+			$this->getSnaks( $params['snaks'] ),
+			$params['reference']
 		);
 
 		$this->saveChanges( $content );
 
-		$this->outputStatement( $statement );
+		$this->outputReference( $reference );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -88,7 +88,7 @@ class SetStatementRank extends ApiWikibase {
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setstatementrank-entity-not-found' );
+			$this->dieUsage( 'No such entity', 'setreference-entity-not-found' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -99,33 +99,81 @@ class SetStatementRank extends ApiWikibase {
 	/**
 	 * @since 0.3
 	 *
-	 * @param Entity $entity
-	 * @param string $statementGuid
-	 * @param string $rank
+	 * @param string $rawSnaks
 	 *
-	 * @return \Wikibase\Statement
+	 * @return \Wikibase\Snaks
 	 */
-	protected function setStatementRank( Entity $entity, $statementGuid, $rank ) {
-		$claims = new \Wikibase\Claims( $entity->getClaims() );
+	protected function getSnaks( $rawSnaks ) {
+		$rawSnaks = \FormatJson::decode( $rawSnaks, true );
+
+		$snaks = new SnakList();
+
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$snakUnserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Snak' );
+
+		foreach ( $rawSnaks as $byPropertySnaks ) {
+			foreach ( $byPropertySnaks as $rawSnak ) {
+				$snaks[] = $snakUnserializer->newFromSerialization( $rawSnak );
+			}
+		}
+
+		return $snaks;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param \Wikibase\Entity $entity
+	 * @param string $statementGuid
+	 * @param \Wikibase\Snaks $snaks
+	 * @param string|null $refHash
+	 *
+	 * @return \Wikibase\Reference
+	 */
+	protected function updateReference( Entity $entity, $statementGuid, Snaks $snaks, $refHash = null ) {
+		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'No such statement', 'setstatementrank-statement-not-found' );
+			$this->dieUsage( 'No such statement', 'setreference-statement-not-found' );
 		}
 
 		$statement = $claims->getClaimWithGuid( $statementGuid );
 
 		if ( ! ( $statement instanceof Statement ) ) {
 			$this->dieUsage(
-				'The referenced claim is not a statement and thus does not have a rank',
-				'setstatementrank-not-a-statement'
+				'The referenced claim is not a statement and thus cannot have references',
+				'setreference-not-a-statement'
 			);
 		}
 
-		$statement->setRank( ClaimSerializer::unserializeRank( $rank ) );
+		$reference = new Reference( $snaks );
+
+		/**
+		 * @var \Wikibase\References $references
+		 */
+		$references = $statement->getReferences();
+
+		if ( $refHash !== null ) {
+			if ( $references->hasReferenceHash( $refHash ) ) {
+				$references->removeReferenceHash( $refHash );
+			}
+			else {
+				$this->dieUsage(
+					'The statement does not have any associated reference with the provided reference hash',
+					'setreference-no-such-reference'
+				);
+			}
+		}
+
+		// Only adding the reference if there is none with the same hash yet.
+		// TODO: verify this is what we want to do
+		if ( !$references->hasReference( $reference ) ) {
+			$references->addReference( $reference );
+		}
 
 		$entity->setClaims( $claims );
 
-		return $statement;
+		return $reference;
 	}
 
 	/**
@@ -135,7 +183,6 @@ class SetStatementRank extends ApiWikibase {
 	 */
 	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();
-
 		$user = $this->getUser();
 		$flags = 0;
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -151,7 +198,7 @@ class SetStatementRank extends ApiWikibase {
 		);
 
 		if ( !$status->isGood() ) {
-			$this->dieUsage( 'Failed to save the change', 'save-failed' );
+			$this->dieUsage( 'Failed to save the change', 'setreference-save-failed' );
 		}
 
 		$statusValue = $status->getValue();
@@ -168,18 +215,17 @@ class SetStatementRank extends ApiWikibase {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \Wikibase\Statement $statement
+	 * @param \Wikibase\Reference $reference
 	 */
-	protected function outputStatement( Statement $statement ) {
+	protected function outputReference( Reference $reference ) {
 		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $statement );
-
+		$serializer = $serializerFactory->newSerializerForObject( $reference );
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		$this->getResult()->addValue(
 			null,
-			'statement',
-			$serializer->getSerialized( $statement )
+			'reference',
+			$serializer->getSerialized( $reference )
 		);
 	}
 
@@ -196,9 +242,12 @@ class SetStatementRank extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'rank' => array(
-				ApiBase::PARAM_TYPE => ClaimSerializer::getRanks(),
+			'snaks' => array(
+				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
+			),
+			'reference' => array(
+				ApiBase::PARAM_TYPE => 'string',
 			),
 			'token' => null,
 			'baserevid' => array(
@@ -217,8 +266,9 @@ class SetStatementRank extends ApiWikibase {
 	 */
 	public function getParamDescription() {
 		return array(
-			'statement' => 'A GUID identifying the statement for which to set the rank',
-			'rank' => 'The new value to set for the rank',
+			'statement' => 'A GUID identifying the statement for which a reference is being set',
+			'snaks' => 'The snaks to set the reference to. JSON object with property ids pointing to arrays containing the snaks for that property',
+			'reference' => 'A hash of the reference that should be updated. Optional. When not provided, a new reference is created',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
@@ -238,7 +288,7 @@ class SetStatementRank extends ApiWikibase {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for setting the rank of a Wikibase statement.'
+			'API module for creating a reference or setting the value of an existing one.'
 		);
 	}
 
@@ -251,8 +301,10 @@ class SetStatementRank extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			// TODO
-			// 'ex' => 'desc'
+			'api.php?statement=q586$57CE3C9F-37AF-42B5-B067-DADA198DD579&snaks={"p1":[{snak}, {snak}], "p2": [{snak}]}&token=foo&baserevid=42' =>
+				'Creating a new reference with 3 snaks',
+			'api.php?statement=q586$57CE3C9F-37AF-42B5-B067-DADA198DD579&snaks={"p2": [{snak}]}&reference=da39a3ee5e6b4b0d3255bfef95601890afd80709&token=foo&baserevid=42' =>
+				'Updating an existing reference to contain a single snak',
 		);
 	}
 
@@ -264,7 +316,7 @@ class SetStatementRank extends ApiWikibase {
 	 * @return string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetstatementrank';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetreference';
 	}
 
 	/**
