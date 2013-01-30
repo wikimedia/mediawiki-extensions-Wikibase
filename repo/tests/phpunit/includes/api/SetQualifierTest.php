@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Repo\Api;
+namespace Wikibase\Test\Api;
 use Wikibase\Item;
 use Wikibase\Snak;
 use Wikibase\Statement;

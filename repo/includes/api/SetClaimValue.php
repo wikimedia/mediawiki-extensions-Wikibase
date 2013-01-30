@@ -4,17 +4,19 @@ namespace Wikibase\Api;
 
 use ApiBase, MWException;
 
+use Wikibase\Autocomment;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-use Wikibase\Statement;
+use Wikibase\SnakObject;
+use Wikibase\Claim;
+use Wikibase\ClaimSerializer;
+use Wikibase\Claims;
 use Wikibase\Settings;
 
-use Wikibase\Lib\Serializers\ClaimSerializer;
-
 /**
- * API module for setting the rank of a statement
+ * API module for setting the DataValue contained by the main snak of a claim.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,18 +41,12 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetStatementRank extends ApiWikibase {
+class SetClaimValue extends ApiWikibase implements IAutocomment{
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
-
-	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
-		//NOTE: need to declare this constructor, so old PHP versions don't use the
-		//      setStatementRank() function as the constructor.
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-	}
+	// TODO: claim uniqueness
 
 	/**
 	 * @see \ApiBase::execute
@@ -61,17 +57,19 @@ class SetStatementRank extends ApiWikibase {
 		wfProfileIn( __METHOD__ );
 
 		$content = $this->getEntityContent();
+
 		$params = $this->extractRequestParams();
 
-		$statement = $this->setStatementRank(
+		$claim = $this->updateClaim(
 			$content->getEntity(),
-			$params['statement'],
-			$params['rank']
+			$params['claim'],
+			$params['snaktype'],
+			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
 		);
 
 		$this->saveChanges( $content );
 
-		$this->outputStatement( $statement );
+		$this->outputClaim( $claim );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -84,11 +82,11 @@ class SetStatementRank extends ApiWikibase {
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
 
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
+		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setstatementrank-entity-not-found' );
+			$this->dieUsage( 'No such entity', 'setclaimvalue-entity-not-found' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -97,35 +95,50 @@ class SetStatementRank extends ApiWikibase {
 	}
 
 	/**
+	 * Updates the claim with specified GUID to have a main snak with provided value.
+	 * The claim is modified in the passed along entity and is returned as well.
+	 *
 	 * @since 0.3
 	 *
-	 * @param Entity $entity
-	 * @param string $statementGuid
-	 * @param string $rank
+	 * @param \Wikibase\Entity $entity
+	 * @param string $guid
+	 * @param string $snakType
+	 * @param string|null $value
 	 *
-	 * @return \Wikibase\Statement
+	 * @return \Wikibase\Claim
 	 */
-	protected function setStatementRank( Entity $entity, $statementGuid, $rank ) {
-		$claims = new \Wikibase\Claims( $entity->getClaims() );
+	protected function updateClaim( Entity $entity, $guid, $snakType, $value = null ) {
+		$claims = new Claims( $entity->getClaims() );
 
-		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'No such statement', 'setstatementrank-statement-not-found' );
+		if ( !$claims->hasClaimWithGuid( $guid ) ) {
+			$this->dieUsage( 'No such claim', 'setclaimvalue-claim-not-found' );
 		}
 
-		$statement = $claims->getClaimWithGuid( $statementGuid );
+		$claim = $claims->getClaimWithGuid( $guid );
 
-		if ( ! ( $statement instanceof Statement ) ) {
-			$this->dieUsage(
-				'The referenced claim is not a statement and thus does not have a rank',
-				'setstatementrank-not-a-statement'
-			);
+		$constructorArguments = array( $claim->getMainSnak()->getPropertyId() );
+
+		if ( $value !== null ) {
+			/**
+			 * @var \Wikibase\PropertyContent $content
+			 */
+			$content = EntityContentFactory::singleton()->getFromId( $claim->getMainSnak()->getPropertyId() );
+
+			if ( $content === null ) {
+				$this->dieUsage(
+					'The value cannot be interpreted since the property cannot be found, and thus the type of the value not be determined',
+					'setclaimvalue-property-not-found'
+				);
+			}
+
+			$constructorArguments[] = $content->getProperty()->newDataValue( $value );
 		}
 
-		$statement->setRank( ClaimSerializer::unserializeRank( $rank ) );
+		$claim->setMainSnak( SnakObject::newFromType( $snakType, $constructorArguments ) );
 
 		$entity->setClaims( $claims );
 
-		return $statement;
+		return $claim;
 	}
 
 	/**
@@ -151,7 +164,7 @@ class SetStatementRank extends ApiWikibase {
 		);
 
 		if ( !$status->isGood() ) {
-			$this->dieUsage( 'Failed to save the change', 'save-failed' );
+			$this->dieUsage( 'Failed to save the change', 'setclaimvalue-save-failed' );
 		}
 
 		$statusValue = $status->getValue();
@@ -168,23 +181,23 @@ class SetStatementRank extends ApiWikibase {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \Wikibase\Statement $statement
+	 * @param \Wikibase\Claim $claim
 	 */
-	protected function outputStatement( Statement $statement ) {
+	protected function outputClaim( Claim $claim ) {
 		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $statement );
+		$serializer = $serializerFactory->newSerializerForObject( $claim );
 
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		$this->getResult()->addValue(
 			null,
-			'statement',
-			$serializer->getSerialized( $statement )
+			'claim',
+			$serializer->getSerialized( $claim )
 		);
 	}
 
 	/**
-	 * @see \ApiBase::getAllowedParams
+	 * @see ApiBase::getAllowedParams
 	 *
 	 * @since 0.3
 	 *
@@ -192,12 +205,16 @@ class SetStatementRank extends ApiWikibase {
 	 */
 	public function getAllowedParams() {
 		return array(
-			'statement' => array(
+			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'rank' => array(
-				ApiBase::PARAM_TYPE => ClaimSerializer::getRanks(),
+			'value' => array(
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_REQUIRED => false,
+			),
+			'snaktype' => array(
+				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'token' => null,
@@ -217,8 +234,9 @@ class SetStatementRank extends ApiWikibase {
 	 */
 	public function getParamDescription() {
 		return array(
-			'statement' => 'A GUID identifying the statement for which to set the rank',
-			'rank' => 'The new value to set for the rank',
+			'claim' => 'A GUID identifying the claim',
+			'snaktype' => 'The type of the snak',
+			'value' => 'The value to set the datavalue of the the main snak of the claim to',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
@@ -226,6 +244,7 @@ class SetStatementRank extends ApiWikibase {
 			'bot' => array( 'Mark this edit as bot',
 				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),
+
 		);
 	}
 
@@ -238,7 +257,7 @@ class SetStatementRank extends ApiWikibase {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for setting the rank of a Wikibase statement.'
+			'API module for setting the value of a Wikibase claim.'
 		);
 	}
 
@@ -256,47 +275,26 @@ class SetStatementRank extends ApiWikibase {
 		);
 	}
 
+
 	/**
-	 * @see \ApiBase::getHelpUrls
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
+	 * @see  \Wikibase\Api\IAutocomment::getTextForComment()
 	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetstatementrank';
+	public function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			$this->getModuleName(),
+			array(
+				/*plural */ (int)isset( $params['claim'] )
+			)
+		);
 	}
 
 	/**
-	 * @see \ApiBase::getVersion
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
+	 * @see  \Wikibase\Api\IAutocomment::getTextForSummary()
 	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WB_VERSION;
-	}
-
-	/**
-	 * @see \ApiBase::needsToken()
-	 */
-	public function needsToken() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
-	}
-
-	/**
-	 * @see \ApiBase::mustBePosted()
-	 */
-	public function mustBePosted() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
-	}
-
-	/**
-	 * @see \ApiBase::isWriteMode()
-	 */
-	public function isWriteMode() {
-		return true;
+	public function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'claim' )
+		);
 	}
 
 }
