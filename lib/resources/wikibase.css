@@ -424,7 +424,6 @@ div.wb-claim-container {
 	float: left;
 	width: 100%;
 	position: relative;
-	padding-bottom: 1em;
 }
 
 /* A single claim */
@@ -512,6 +511,7 @@ div.wb-claim-new {
 	border: 1px solid #C9C9C9;
 	width: 100%;
 	margin-bottom: 1em;
+	padding-bottom: 0;
 }
 
 div.wb-claim-section .wb-claim-new {
@@ -586,6 +586,10 @@ div.wb-claim-new .wb-snak-value {
 
 
 /********** STATEMENTS **********/
+
+.wb-statementview {
+	padding-bottom: 1em;
+}
 
 /***** REFERENCES *****/
 
