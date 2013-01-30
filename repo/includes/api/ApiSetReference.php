@@ -114,11 +114,13 @@ class ApiSetReference extends Api {
 	 * @return Reference
 	 */
 	protected function updateReference( Entity $entity, $statementGuid, Snaks $snaks, $refHash = null ) {
-		if ( !$entity->getClaims()->hasClaimWithGuid( $statementGuid ) ) {
+		$claims = new Claims( $entity->getClaims() );
+
+		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
 			$this->dieUsage( 'No such statement', 'setreference-statement-not-found' );
 		}
 
-		$statement = $entity->getClaims()->getClaimWithGuid( $statementGuid );
+		$statement = $claims->getClaimWithGuid( $statementGuid );
 
 		if ( ! ( $statement instanceof Statement ) ) {
 			$this->dieUsage(
@@ -151,6 +153,8 @@ class ApiSetReference extends Api {
 		if ( !$references->hasReference( $reference ) ) {
 			$references->addReference( $reference );
 		}
+
+		$entity->setClaims( $claims );
 
 		return $reference;
 	}

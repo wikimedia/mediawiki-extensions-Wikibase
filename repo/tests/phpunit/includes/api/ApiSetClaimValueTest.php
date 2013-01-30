@@ -121,7 +121,7 @@ class ApiSetClaimValueTest extends \ApiTestCase {
 		$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
 		$obtainedEntity = $content->getEntity();
 
-		$claims = $obtainedEntity->getClaims();
+		$claims = new \Wikibase\Claims( $obtainedEntity->getClaims() );
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $claimGuid ) );
 

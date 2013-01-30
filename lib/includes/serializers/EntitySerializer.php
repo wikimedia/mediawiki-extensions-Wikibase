@@ -87,7 +87,7 @@ class EntitySerializer extends SerializerObject {
 					break;
 				case 'claims':
 					$claimsSerializer = new ClaimsSerializer( $this->options );
-					$serialization['claims'] = $claimsSerializer->getSerialized( $entity->getClaims() );
+					$serialization['claims'] = $claimsSerializer->getSerialized( new Claims( $entity->getClaims() ) );
 					break;
 			}
 		}

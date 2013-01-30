@@ -76,7 +76,7 @@ class ClaimAggregateTest extends \MediaWikiTestCase {
 	 * @param array $claims
 	 */
 	public function testAllOfTheStuff( ClaimAggregate $aggregate, array $claims ) {
-		$obtainedClaims = $aggregate->getClaims();
+		$obtainedClaims = new \Wikibase\Claims( $aggregate->getClaims() );
 		$this->assertInstanceOf( '\Wikibase\Claims', $obtainedClaims );
 
 		// Below code tests if the Claims in the ClaimAggregate indeed do not get modified.
@@ -99,7 +99,7 @@ class ClaimAggregateTest extends \MediaWikiTestCase {
 			$obtainedClaims->addClaim( $claim );
 		}
 
-		$freshlyObtained = $aggregate->getClaims();
+		$freshlyObtained = new \Wikibase\Claims( $aggregate->getClaims() );
 
 		$this->assertArrayEquals(
 			iterator_to_array( $unmodifiedClaims ),

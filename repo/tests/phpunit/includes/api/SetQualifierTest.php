@@ -153,7 +153,7 @@ class SetQualifierTest extends \ApiTestCase {
 
 		$this->assertInstanceOf( '\Wikibase\EntityContent', $content );
 
-		$claims = $content->getEntity()->getClaims();
+		$claims = new \Wikibase\Claims( $content->getEntity()->getClaims() );
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $params['claim'] ) );
 

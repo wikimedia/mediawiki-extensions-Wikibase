@@ -160,7 +160,7 @@ class SetStatementRankTest extends \ApiTestCase {
 
 		$freshItem = $itemContent->getEntity();
 
-		$claims = $freshItem->getClaims();
+		$claims = new \Wikibase\Claims( $freshItem->getClaims() );
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $statementGuid ) );
 

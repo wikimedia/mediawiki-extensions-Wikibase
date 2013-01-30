@@ -96,11 +96,13 @@ class ApiSetClaimValue extends Api {
 	 * @return Claim
 	 */
 	protected function updateClaim( Entity $entity, $guid, $snakType, $value = null ) {
-		if ( !$entity->getClaims()->hasClaimWithGuid( $guid ) ) {
+		$claims = new Claims( $entity->getClaims() );
+
+		if ( !$claims->hasClaimWithGuid( $guid ) ) {
 			$this->dieUsage( 'No such claim', 'setclaimvalue-claim-not-found' );
 		}
 
-		$claim = $entity->getClaims()->getClaimWithGuid( $guid );
+		$claim = $claims->getClaimWithGuid( $guid );
 
 		$constructorArguments = array( $claim->getMainSnak()->getPropertyId() );
 
@@ -122,10 +124,6 @@ class ApiSetClaimValue extends Api {
 
 		$claim->setMainSnak( SnakObject::newFromType( $snakType, $constructorArguments ) );
 
-		// TODO: refactor Entity interface to use Claim[] rather then Claims
-		$claims = $entity->getClaims();
-		$claims->rebuildIndices();
-		assert( $claims->indicesAreUpToDate() );
 		$entity->setClaims( $claims );
 
 		return $claim;

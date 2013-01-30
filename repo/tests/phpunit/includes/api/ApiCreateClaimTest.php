@@ -97,7 +97,9 @@ class ApiCreateClaimTest extends \ApiTestCase {
 
 		$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
 
-		$this->assertTrue( $entityContent->getEntity()->hasClaimWithGuid( $claim['id'] ) );
+		$claims = new \Wikibase\Claims( $entityContent->getEntity()->getClaims() );
+
+		$this->assertTrue( $claims->hasClaimWithGuid( $claim['id'] ) );
 	}
 
 	public function invalidRequestProvider() {
@@ -262,8 +264,10 @@ class ApiCreateClaimTest extends \ApiTestCase {
 
 		$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
 
-		$this->assertTrue( $entityContent->getEntity()->hasClaimWithGuid( $firstGuid ) );
-		$this->assertTrue( $entityContent->getEntity()->hasClaimWithGuid( $secondGuid ) );
+		$claims = new \Wikibase\Claims( $entityContent->getEntity()->getClaims() );
+
+		$this->assertTrue( $claims->hasClaimWithGuid( $firstGuid ) );
+		$this->assertTrue( $claims->hasClaimWithGuid( $secondGuid ) );
 	}
 
 }

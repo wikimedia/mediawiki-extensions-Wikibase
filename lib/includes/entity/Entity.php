@@ -33,7 +33,7 @@ use Diff\Differ;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, ClaimListAccess {
+abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 
 	/**
 	 * @since 0.1
@@ -503,7 +503,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	 * @param Claims $claims
 	 */
 	public function setClaims( Claims $claims ) {
-		$this->claims = $claims;
+		$this->claims = iterator_to_array( $claims );
 	}
 
 	/**
@@ -673,74 +673,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	 */
 	public function addClaim( Claim $claim ) {
 		$this->unstubClaims();
-		$this->claims->addClaim( $claim );
+		$this->claims[] = $claim;
 		// TODO: ensure guid is valid for entity
-	}
-
-	/**
-	 * @see ClaimListAccess::hasClaim
-	 *
-	 * @since 0.3
-	 *
-	 * @param Claim $claim
-	 *
-	 * @return boolean
-	 */
-	public function hasClaim( Claim $claim ) {
-		$this->unstubClaims();
-		return $this->claims->hasClaim( $claim );
-	}
-
-	/**
-	 * @see ClaimListAccess::removeClaim
-	 *
-	 * @since 0.3
-	 *
-	 * @param Claim $claim
-	 */
-	public function removeClaim( Claim $claim ) {
-		$this->unstubClaims();
-		$this->claims->removeClaim( $claim );
-	}
-
-	/**
-	 * @see ClaimListAccess::hasClaimWithGuid
-	 *
-	 * @since 0.3
-	 *
-	 * @param string $claimGuid
-	 *
-	 * @return boolean
-	 */
-	public function hasClaimWithGuid( $claimGuid ) {
-		$this->unstubClaims();
-		return $this->claims->hasClaimWithGuid( $claimGuid );
-	}
-
-	/**
-	 * @see ClaimListAccess::removeClaimWithGuid
-	 *
-	 * @since 0.3
-	 *
-	 * @param string $claimGuid
-	 */
-	public function removeClaimWithGuid( $claimGuid ) {
-		$this->unstubClaims();
-		$this->claims->removeClaimWithGuid( $claimGuid );
-	}
-
-	/**
-	 * @see ClaimListAccess::getClaimWithGuid
-	 *
-	 * @since 0.3
-	 *
-	 * @param string $claimGuid
-	 *
-	 * @return Claim|null
-	 */
-	public function getClaimWithGuid( $claimGuid ) {
-		$this->unstubClaims();
-		return $this->claims->getClaimWithGuid( $claimGuid );
 	}
 
 	/**
@@ -748,11 +682,11 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	 *
 	 * @since 0.3
 	 *
-	 * @return Claims
+	 * @return Claim[]
 	 */
 	public function getClaims() {
 		$this->unstubClaims();
-		return clone $this->claims;
+		return $this->claims;
 	}
 
 	/**
@@ -765,10 +699,10 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 	 */
 	protected function unstubClaims() {
 		if ( $this->claims === null ) {
-			$this->claims = new Claims();
+			$this->claims = array();
 
 			foreach ( $this->data['claims'] as $claimSerialization ) {
-				$this->claims->addClaim( Claim::newFromArray( $claimSerialization ) );
+				$this->claims[] = Claim::newFromArray( $claimSerialization );
 			}
 		}
 	}
@@ -873,7 +807,9 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 		$newEntity = $this->entityToDiffArray( $target );
 
 		$diffOps = $differ->doDiff( $oldEntity, $newEntity );
-		$diffOps['claim'] = $this->getClaims()->getDiff( $target->getClaims() );
+
+		$claims = new Claims( $this->getClaims() );
+		$diffOps['claim'] = $claims->getDiff( new Claims( $target->getClaims() ) );
 
 		return EntityDiff::newForType( $this->getType(), $diffOps );
 	}
@@ -914,7 +850,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Cla
 		$this->setDescriptions( $patcher->patch( $this->getDescriptions(), $patch->getDescriptionsDiff() ) );
 		$this->setAllAliases( $patcher->patch( $this->getAllAliases(), $patch->getAliasesDiff() ) );
 
-		$claims = $patcher->patch( iterator_to_array( $this->getClaims() ), $patch->getClaimsDiff() );
+		$claims = $patcher->patch( $this->getClaims(), $patch->getClaimsDiff() );
 
 		$this->setClaims( new Claims( $claims ) );
 

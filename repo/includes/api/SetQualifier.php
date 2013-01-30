@@ -139,13 +139,17 @@ class SetQualifier extends \Wikibase\Api {
 
 		$claimGuid = $params['claim'];
 
-		if ( !$entity->getClaims()->hasClaimWithGuid( $claimGuid ) ) {
+		$claims = new \Wikibase\Claims( $entity->getClaims() );
+
+		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
 			$this->dieUsage( 'No such claim', 'setqualifier-claim-not-found' );
 		}
 
-		$claim = $entity->getClaims()->getClaimWithGuid( $claimGuid );
+		$claim = $claims->getClaimWithGuid( $claimGuid );
 
 		$this->updateQualifiers( $claim->getQualifiers() );
+
+		$entity->setClaims( $claims );
 
 		return $claim;
 	}
