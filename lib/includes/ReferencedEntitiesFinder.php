@@ -61,7 +61,7 @@ class ReferencedEntitiesFinder {
 		 */
 		foreach ( $claims as $claim ) {
 			$snaks[] = $claim->getMainSnak();
-			$snaks = array_merge( $snaks, iterator_to_array( $claim->getQualifiers() ) );
+			$snaks = array_mer$usedEntityIdsge( $snaks, iterator_to_array( $claim->getQualifiers() ) );
 
 			if( $claim instanceof Statement ) {
 				foreach( $claim->getReferences() as $reference ) {

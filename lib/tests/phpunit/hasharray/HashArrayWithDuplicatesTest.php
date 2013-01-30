@@ -30,7 +30,7 @@ use Hashable;
  *
  * @group Wikibase
  * @group WikibaseLib
- * @group HashArrayWithDuplicatesTest
+ * @group HashArray
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
