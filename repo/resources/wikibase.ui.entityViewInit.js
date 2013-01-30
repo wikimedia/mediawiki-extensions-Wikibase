@@ -75,7 +75,10 @@
 			} );
 
 			// Information about used properties:
-			$.extend( wb.entities, usedEntitiesJSON );
+			$.each( usedEntitiesJSON, function( id, entity ) {
+				entity.id = id; // we don't get that in the JSON but it is essential for wb.entities
+				wb.entities[ id ] = entity;
+			} );
 
 			// Definition of the views entity:
 			if ( entityJSON.claims !== undefined ) {
