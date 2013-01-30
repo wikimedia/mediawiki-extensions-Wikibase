@@ -99,6 +99,11 @@ class SqlStore implements Store {
 				$updater->dropTable( 'wb_aliases' );
 				$updater->dropTable( 'wb_texts_per_lang' );
 
+				$updater->addExtensionTable(
+					'wb_terms',
+					__DIR__ . '/Wikibase' . $extension
+				);
+
 				$this->rebuild();
 			}
 
