@@ -245,6 +245,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.addSitelinkLink?.should be_false
         page.addAliases?.should be_false
         page.addStatement?.should be_false
+        page.saveStatement?.should be_false
         page.cancelStatement
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_true
