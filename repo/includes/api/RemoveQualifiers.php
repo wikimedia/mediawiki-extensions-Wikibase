@@ -11,6 +11,7 @@ use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EditEntity;
 use Wikibase\Claim;
+use Wikibase\Settings;
 
 /**
  * API module for removing qualifiers from a claim.

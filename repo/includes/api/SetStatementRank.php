@@ -11,6 +11,7 @@ use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EditEntity;
 use Wikibase\Statement;
+use Wikibase\Settings;
 
 /**
  * API module for setting the rank of a statement
