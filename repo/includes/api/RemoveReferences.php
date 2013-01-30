@@ -2,14 +2,13 @@
 
 namespace Wikibase\Api;
 
-use ApiBase;
-use MWException;
+use ApiBase, MWException;
 
 use Wikibase\EntityContent;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
-use Wikibase\EditEntity;
+//use Wikibase\EditEntity; // conflict with api module
 use Wikibase\Statement;
 use Wikibase\References;
 use Wikibase\Settings;
@@ -40,7 +39,7 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveReferences extends \Wikibase\Api {
+class RemoveReferences extends Api {
 
 	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
 		//NOTE: need to declare this constructor, so old PHP versions don't use the
@@ -146,7 +145,7 @@ class RemoveReferences extends \Wikibase\Api {
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$editEntity = new \Wikibase\EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment

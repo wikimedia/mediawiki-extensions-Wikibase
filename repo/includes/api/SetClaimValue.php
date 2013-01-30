@@ -9,11 +9,13 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
+use Wikibase\SnakObject;
 use Wikibase\Claim;
+use Wikibase\ClaimSerializer;
 use Wikibase\Settings;
 
 /**
- * API module for removing qualifiers from a claim.
+ * API module for setting the DataValue contained by the main snak of a claim.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,9 +40,8 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveQualifiers extends Api {
+class SetClaimValue extends Api {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
@@ -56,9 +57,18 @@ class RemoveQualifiers extends Api {
 
 		$content = $this->getEntityContent();
 
-		$this->doRemoveQualifiers( $content->getEntity() );
+		$params = $this->extractRequestParams();
+
+		$claim = $this->updateClaim(
+			$content->getEntity(),
+			$params['claim'],
+			$params['snaktype'],
+			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
+		);
 
 		$this->saveChanges( $content );
+
+		$this->outputClaim( $claim );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -75,7 +85,7 @@ class RemoveQualifiers extends Api {
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'removequalifiers-entity-not-found' );
+			$this->dieUsage( 'No such entity', 'setclaimvalue-entity-not-found' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -84,43 +94,44 @@ class RemoveQualifiers extends Api {
 	}
 
 	/**
+	 * Updates the claim with specified GUID to have a main snak with provided value.
+	 * The claim is modified in the passed along entity and is returned as well.
+	 *
 	 * @since 0.3
 	 *
 	 * @param \Wikibase\Entity $entity
+	 * @param string $guid
+	 * @param string $snakType
+	 * @param string|null $value
+	 *
+	 * @return Claim
 	 */
-	protected function doRemoveQualifiers( Entity $entity ) {
-		$params = $this->extractRequestParams();
+	protected function updateClaim( Entity $entity, $guid, $snakType, $value = null ) {
+		if ( !$entity->getClaims()->hasClaimWithGuid( $guid ) ) {
+			$this->dieUsage( 'No such claim', 'setclaimvalue-claim-not-found' );
+		}
 
-		$claim = $this->getClaim( $entity, $params['claim'] );
+		$claim = $entity->getClaims()->getClaimWithGuid( $guid );
 
-		$qualifiers = $claim->getQualifiers();
+		$constructorArguments = array( $claim->getMainSnak()->getPropertyId() );
 
-		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
-			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
-				// TODO: does $qualifierHash need to be escaped?
-				$this->dieUsage( 'There is no qualifier with hash ' . $qualifierHash, 'removequalifiers-qualifier-not-found' );
+		if ( $value !== null ) {
+			/**
+			 * @var \Wikibase\PropertyContent $content
+			 */
+			$content = EntityContentFactory::singleton()->getFromId( $claim->getMainSnak()->getPropertyId() );
+
+			if ( $content === null ) {
+				$this->dieUsage(
+					'The value cannot be interpreted since the property cannot be found, and thus the type of the value not be determined',
+					'setclaimvalue-property-not-found'
+				);
 			}
 
-			$qualifiers->removeSnakHash( $qualifierHash );
-		}
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param \Wikibase\Entity $entity
-	 * @param string $claimGuid
-	 *
-	 * @return \Wikibase\Claim
-	 */
-	protected function getClaim( Entity $entity, $claimGuid ) {
-		if ( !$entity->getClaims()->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'No such claim', 'removequalifiers-claim-not-found' );
+			$constructorArguments[] = $content->getProperty()->newDataValue( $value );
 		}
 
-		$claim = $entity->getClaims()->getClaimWithGuid( $claimGuid );
-
-		assert( $claim instanceof Claim );
+		$claim->setMainSnak( SnakObject::newFromType( $snakType, $constructorArguments ) );
 
 		return $claim;
 	}
@@ -140,11 +151,11 @@ class RemoveQualifiers extends Api {
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
 			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : false
+			isset( $params['token'] ) ? $params['token'] : ''
 		);
 
-		if ( !$status->isOk() ) {
-			$this->dieUsage( 'Failed to save the change', 'save-failed' );
+		if ( !$status->isGood() ) {
+			$this->dieUsage( 'Failed to save the change', 'setclaimvalue-save-failed' );
 		}
 
 		$statusValue = $status->getValue();
@@ -156,6 +167,22 @@ class RemoveQualifiers extends Api {
 				(int)$statusValue['revision']->getId()
 			);
 		}
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param \Wikibase\Claim $claim
+	 */
+	protected function outputClaim( Claim $claim ) {
+		$serializer = new ClaimSerializer();
+		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
+
+		$this->getResult()->addValue(
+			null,
+			'claim',
+			$serializer->getSerialized( $claim )
+		);
 	}
 
 	/**
@@ -171,10 +198,13 @@ class RemoveQualifiers extends Api {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'qualifiers' => array(
+			'value' => array(
 				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_REQUIRED => false,
+			),
+			'snaktype' => array(
+				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
 				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_ISMULTI => true,
 			),
 			'token' => null,
 			'baserevid' => array(
@@ -192,11 +222,11 @@ class RemoveQualifiers extends Api {
 	 */
 	public function getParamDescription() {
 		return array(
-			'claim' => 'A GUID identifying the claim from which to remove qualifiers',
-			'qualifiers' => 'Snak hashes of the querliers to remove',
+			'claim' => 'A GUID identifying the claim',
+			'snaktype' => 'The type of the snak',
+			'value' => 'The value to set the datavalue of the the main snak of the claim to',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array(
-				'The numeric identifier for the revision to base the modification on.',
+			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
 			),
 		);
@@ -211,7 +241,7 @@ class RemoveQualifiers extends Api {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for removing a qualifier from a claim.'
+			'API module for setting the value of a Wikibase claim.'
 		);
 	}
 
@@ -237,11 +267,11 @@ class RemoveQualifiers extends Api {
 	 * @return string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremovequalifiers';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetclaimvalue';
 	}
 
 	/**
-	 * @see \ApiBase::getVersion
+	 * @see ApiBase::getVersion
 	 *
 	 * @since 0.3
 	 *

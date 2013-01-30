@@ -9,11 +9,10 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-use Wikibase\Claim;
 use Wikibase\Settings;
 
 /**
- * API module for removing qualifiers from a claim.
+ * API module for removing claims.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,13 +37,12 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveQualifiers extends Api {
+class RemoveClaims extends Api {
 
 	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
-	// TODO: claim uniqueness
 
 	/**
 	 * @see \ApiBase::execute
@@ -54,75 +52,147 @@ class RemoveQualifiers extends Api {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$content = $this->getEntityContent();
+		$guids = $this->getGuidsByEntity();
 
-		$this->doRemoveQualifiers( $content->getEntity() );
+		$removedClaimKeys = $this->removeClaims(
+			$this->getEntityContents( array_keys( $guids ) ),
+			$guids
+		);
 
-		$this->saveChanges( $content );
+		$this->outputResult( $removedClaimKeys );
 
 		wfProfileOut( __METHOD__ );
 	}
 
 	/**
+	 * Parses the key parameter and returns it as an array with as keys
+	 * prefixed entity ids and as values arrays with the claim GUIDs for
+	 * the specific entity.
+	 *
 	 * @since 0.3
 	 *
-	 * @return \Wikibase\EntityContent
+	 * @return array
 	 */
-	protected function getEntityContent() {
+	protected function getGuidsByEntity() {
 		$params = $this->extractRequestParams();
 
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
+		$guids = array();
 
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'removequalifiers-entity-not-found' );
+		foreach ( $params['claim'] as $guid ) {
+			$entityId = Entity::getIdFromClaimGuid( $guid );
+
+			if ( !array_key_exists( $entityId, $guids ) ) {
+				$guids[$entityId] = array();
+			}
+
+			$guids[$entityId][] = $guid;
 		}
+
+		return $guids;
+	}
+
+	/**
+	 * Does the claim removal and returns a list of claim keys for
+	 * the claims that actually got removed.
+	 *
+	 * @since 0.3
+	 *
+	 * @param \Wikibase\EntityContent[] $entityContents
+	 * @param array $guids
+	 *
+	 * @return string[]
+	 */
+	protected function removeClaims( $entityContents, array $guids ) {
+		$removedClaims = array();
+
+		foreach ( $entityContents as $entityContent ) {
+			$entity = $entityContent->getEntity();
+
+			$removedClaims = array_merge(
+				$removedClaims,
+				$this->removeClaimsFromEntity( $entity, $guids[$entity->getPrefixedId()] )
+			);
+
+			$this->saveChanges( $entityContent );
+		}
+
+		return $removedClaims;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param string[] $ids
+	 *
+	 * @return \Wikibase\EntityContent[]
+	 */
+	protected function getEntityContents( array $ids ) {
+		$contents = array();
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
-	}
+		// TODO: use proper batch select
+		foreach ( $ids as $id ) {
+			$entityId = EntityId::newFromPrefixedId( $id );
 
-	/**
-	 * @since 0.3
-	 *
-	 * @param \Wikibase\Entity $entity
-	 */
-	protected function doRemoveQualifiers( Entity $entity ) {
-		$params = $this->extractRequestParams();
-
-		$claim = $this->getClaim( $entity, $params['claim'] );
-
-		$qualifiers = $claim->getQualifiers();
-
-		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
-			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
-				// TODO: does $qualifierHash need to be escaped?
-				$this->dieUsage( 'There is no qualifier with hash ' . $qualifierHash, 'removequalifiers-qualifier-not-found' );
+			if ( $entityId === null ) {
+				$this->dieUsage( 'Invalid entity id provided', 'removeclaims-invalid-entity-id' );
 			}
 
-			$qualifiers->removeSnakHash( $qualifierHash );
+			$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
+
+			$content = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+
+			if ( $content === null ) {
+				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'removeclaims-entity-not-found' );
+			}
+
+			$contents[] = $content;
 		}
+
+		return $contents;
 	}
 
 	/**
 	 * @since 0.3
 	 *
 	 * @param \Wikibase\Entity $entity
-	 * @param string $claimGuid
+	 * @param string[] $guids
 	 *
-	 * @return \Wikibase\Claim
+	 * @return string[]
 	 */
-	protected function getClaim( Entity $entity, $claimGuid ) {
-		if ( !$entity->getClaims()->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'No such claim', 'removequalifiers-claim-not-found' );
+	protected function removeClaimsFromEntity( Entity &$entity, array $guids ) {
+		$removedGuids = array();
+
+		foreach ( $guids as $guid ) {
+			if ( $entity->hasClaimWithGuid( $guid ) ) {
+				$entity->removeClaimWithGuid( $guid );
+				$removedGuids[] = $guid;
+			}
 		}
 
-		$claim = $entity->getClaims()->getClaimWithGuid( $claimGuid );
+		return $removedGuids;
+	}
 
-		assert( $claim instanceof Claim );
+	/**
+	 * @since 0.3
+	 *
+	 * @param string[] $removedClaimGuids
+	 */
+	protected function outputResult( $removedClaimGuids ) {
+		$this->getResult()->addValue(
+			null,
+			'success',
+			1
+		);
 
-		return $claim;
+		$this->getResult()->setIndexedTagName( $removedClaimGuids, 'claim' );
+
+		$this->getResult()->addValue(
+			null,
+			'claims',
+			$removedClaimGuids
+		);
 	}
 
 	/**
@@ -140,10 +210,10 @@ class RemoveQualifiers extends Api {
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
 			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : false
+			isset( $params['token'] ) ? $params['token'] : ''
 		);
 
-		if ( !$status->isOk() ) {
+		if ( !$status->isGood() ) {
 			$this->dieUsage( 'Failed to save the change', 'save-failed' );
 		}
 
@@ -169,12 +239,8 @@ class RemoveQualifiers extends Api {
 		return array(
 			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'qualifiers' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
 				ApiBase::PARAM_ISMULTI => true,
+				ApiBase::PARAM_REQUIRED => true,
 			),
 			'token' => null,
 			'baserevid' => array(
@@ -192,11 +258,9 @@ class RemoveQualifiers extends Api {
 	 */
 	public function getParamDescription() {
 		return array(
-			'claim' => 'A GUID identifying the claim from which to remove qualifiers',
-			'qualifiers' => 'Snak hashes of the querliers to remove',
+			'claim' => 'A GUID identifying the claim',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array(
-				'The numeric identifier for the revision to base the modification on.',
+			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
 			),
 		);
@@ -211,7 +275,7 @@ class RemoveQualifiers extends Api {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for removing a qualifier from a claim.'
+			'API module for removing Wikibase claims.'
 		);
 	}
 
@@ -237,7 +301,7 @@ class RemoveQualifiers extends Api {
 	 * @return string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremovequalifiers';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremoveclaims';
 	}
 
 	/**

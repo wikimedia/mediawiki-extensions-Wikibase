@@ -7,13 +7,18 @@ use ApiBase, MWException;
 //use Wikibase\EditEntity; // conflict with api module
 use Wikibase\EntityId;
 use Wikibase\Entity;
-use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-use Wikibase\Claim;
+use Wikibase\Statement;
+use Wikibase\Reference;
+use Wikibase\ReferenceObject;
+use Wikibase\ReferenceSerializer;
+use Wikibase\Snaks;
+use Wikibase\SnakList;
+use Wikibase\SnakSerializer;
 use Wikibase\Settings;
 
 /**
- * API module for removing qualifiers from a claim.
+ * API module for creating a reference or setting the value of an existing one.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,16 +43,15 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveQualifiers extends Api {
+class SetReference extends Api {
 
 	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
-	// TODO: claim uniqueness
 
 	/**
-	 * @see \ApiBase::execute
+	 * @see ApiBase::execute
 	 *
 	 * @since 0.3
 	 */
@@ -55,10 +59,18 @@ class RemoveQualifiers extends Api {
 		wfProfileIn( __METHOD__ );
 
 		$content = $this->getEntityContent();
+		$params = $this->extractRequestParams();
 
-		$this->doRemoveQualifiers( $content->getEntity() );
+		$reference = $this->updateReference(
+			$content->getEntity(),
+			$params['statement'],
+			$this->getSnaks( $params['snaks'] ),
+			$params['reference']
+		);
 
 		$this->saveChanges( $content );
+
+		$this->outputReference( $reference );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -71,11 +83,11 @@ class RemoveQualifiers extends Api {
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
 
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
+		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'removequalifiers-entity-not-found' );
+			$this->dieUsage( 'No such entity', 'setreference-entity-not-found' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -86,43 +98,75 @@ class RemoveQualifiers extends Api {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \Wikibase\Entity $entity
+	 * @param string $rawSnaks
+	 *
+	 * @return \Wikibase\Snaks
 	 */
-	protected function doRemoveQualifiers( Entity $entity ) {
-		$params = $this->extractRequestParams();
+	protected function getSnaks( $rawSnaks ) {
+		$rawSnaks = \FormatJson::decode( $rawSnaks, true );
 
-		$claim = $this->getClaim( $entity, $params['claim'] );
+		$snaks = new SnakList();
+		$snakUnserializer = new SnakSerializer();
 
-		$qualifiers = $claim->getQualifiers();
-
-		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
-			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
-				// TODO: does $qualifierHash need to be escaped?
-				$this->dieUsage( 'There is no qualifier with hash ' . $qualifierHash, 'removequalifiers-qualifier-not-found' );
+		foreach ( $rawSnaks as $byPropertySnaks ) {
+			foreach ( $byPropertySnaks as $rawSnak ) {
+				$snaks[] = $snakUnserializer->getUnserialized( $rawSnak );
 			}
-
-			$qualifiers->removeSnakHash( $qualifierHash );
 		}
+
+		return $snaks;
 	}
 
 	/**
 	 * @since 0.3
 	 *
 	 * @param \Wikibase\Entity $entity
-	 * @param string $claimGuid
+	 * @param string $statementGuid
+	 * @param \Wikibase\Snaks $snaks
+	 * @param string|null $refHash
 	 *
-	 * @return \Wikibase\Claim
+	 * @return \Wikibase\Reference
 	 */
-	protected function getClaim( Entity $entity, $claimGuid ) {
-		if ( !$entity->getClaims()->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'No such claim', 'removequalifiers-claim-not-found' );
+	protected function updateReference( Entity $entity, $statementGuid, Snaks $snaks, $refHash = null ) {
+		if ( !$entity->getClaims()->hasClaimWithGuid( $statementGuid ) ) {
+			$this->dieUsage( 'No such statement', 'setreference-statement-not-found' );
 		}
 
-		$claim = $entity->getClaims()->getClaimWithGuid( $claimGuid );
+		$statement = $entity->getClaims()->getClaimWithGuid( $statementGuid );
 
-		assert( $claim instanceof Claim );
+		if ( ! ( $statement instanceof Statement ) ) {
+			$this->dieUsage(
+				'The referenced claim is not a statement and thus cannot have references',
+				'setreference-not-a-statement'
+			);
+		}
 
-		return $claim;
+		$reference = new Reference( $snaks );
+
+		/**
+		 * @var \Wikibase\References $references
+		 */
+		$references = $statement->getReferences();
+
+		if ( $refHash !== null ) {
+			if ( $references->hasReferenceHash( $refHash ) ) {
+				$references->removeReferenceHash( $refHash );
+			}
+			else {
+				$this->dieUsage(
+					'The statement does not have any associated reference with the provided reference hash',
+					'setreference-no-such-reference'
+				);
+			}
+		}
+
+		// Only adding the reference if there is none with the same hash yet.
+		// TODO: verify this is what we want to do
+		if ( !$references->hasReference( $reference ) ) {
+			$references->addReference( $reference );
+		}
+
+		return $reference;
 	}
 
 	/**
@@ -140,11 +184,11 @@ class RemoveQualifiers extends Api {
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
 			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : false
+			isset( $params['token'] ) ? $params['token'] : ''
 		);
 
-		if ( !$status->isOk() ) {
-			$this->dieUsage( 'Failed to save the change', 'save-failed' );
+		if ( !$status->isGood() ) {
+			$this->dieUsage( 'Failed to save the change', 'setreference-save-failed' );
 		}
 
 		$statusValue = $status->getValue();
@@ -159,6 +203,22 @@ class RemoveQualifiers extends Api {
 	}
 
 	/**
+	 * @since 0.3
+	 *
+	 * @param \Wikibase\Reference $reference
+	 */
+	protected function outputReference( Reference $reference ) {
+		$serializer = new ReferenceSerializer();
+		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
+
+		$this->getResult()->addValue(
+			null,
+			'reference',
+			$serializer->getSerialized( $reference )
+		);
+	}
+
+	/**
 	 * @see \ApiBase::getAllowedParams
 	 *
 	 * @since 0.3
@@ -167,14 +227,16 @@ class RemoveQualifiers extends Api {
 	 */
 	public function getAllowedParams() {
 		return array(
-			'claim' => array(
+			'statement' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'qualifiers' => array(
+			'snaks' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_ISMULTI => true,
+			),
+			'reference' => array(
+				ApiBase::PARAM_TYPE => 'string',
 			),
 			'token' => null,
 			'baserevid' => array(
@@ -192,11 +254,11 @@ class RemoveQualifiers extends Api {
 	 */
 	public function getParamDescription() {
 		return array(
-			'claim' => 'A GUID identifying the claim from which to remove qualifiers',
-			'qualifiers' => 'Snak hashes of the querliers to remove',
+			'statement' => 'A GUID identifying the statement for which a reference is being set',
+			'snaks' => 'The snaks to set the reference to. JSON object with property ids pointing to arrays containing the snaks for that property',
+			'reference' => 'A hash of the reference that should be updated. Optional. When not provided, a new reference is created',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array(
-				'The numeric identifier for the revision to base the modification on.',
+			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
 			),
 		);
@@ -211,7 +273,7 @@ class RemoveQualifiers extends Api {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for removing a qualifier from a claim.'
+			'API module for creating a reference or setting the value of an existing one.'
 		);
 	}
 
@@ -224,8 +286,10 @@ class RemoveQualifiers extends Api {
 	 */
 	protected function getExamples() {
 		return array(
-			// TODO
-			// 'ex' => 'desc'
+			'api.php?statement=q586$57CE3C9F-37AF-42B5-B067-DADA198DD579&snaks={"p1":[{snak}, {snak}], "p2": [{snak}]}&token=foo&baserevid=42' =>
+				'Creating a new reference with 3 snaks',
+			'api.php?statement=q586$57CE3C9F-37AF-42B5-B067-DADA198DD579&snaks={"p2": [{snak}]}&reference=da39a3ee5e6b4b0d3255bfef95601890afd80709&token=foo&baserevid=42' =>
+				'Updating an existing reference to contain a single snak',
 		);
 	}
 
@@ -237,7 +301,7 @@ class RemoveQualifiers extends Api {
 	 * @return string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremovequalifiers';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetreference';
 	}
 
 	/**

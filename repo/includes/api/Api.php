@@ -1,7 +1,12 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Api;
+
 use User, Status, ApiBase;
+
+use Wikibase\Entity;
+use Wikibase\EntityContent;
+use Wikibase\Settings;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -29,7 +34,7 @@ abstract class Api extends \ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getPossibleErrors()
+	 * @see \ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
 		return array(
@@ -40,7 +45,7 @@ abstract class Api extends \ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription()
+	 * @see \ApiBase::getParamDescription()
 	 */
 	public function getParamDescription() {
 		return array(
@@ -48,7 +53,7 @@ abstract class Api extends \ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams()
+	 * @see \ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
 		return array(
@@ -108,7 +113,7 @@ abstract class Api extends \ApiBase {
 	 * Add sitelinks to result
 	 *
 	 * @deprecated
-	 * TODO: move to EntitySerializer
+	 * TODO: move to \Wikibase\EntitySerializer
 	 *
 	 * @since 0.1
 	 *
@@ -174,7 +179,7 @@ abstract class Api extends \ApiBase {
 		}
 
 		/**
-		 * @var SiteLink $link
+		 * @var \Wikibase\SiteLink $link
 		 */
 		foreach ( $siteLinks as $link ) {
 			$response = array(
@@ -213,7 +218,7 @@ abstract class Api extends \ApiBase {
 	 * Add descriptions to result
 	 *
 	 * @deprecated
-	 * TODO: remove, now in EntitySerializer
+	 * TODO: remove, now in \Wikibase\EntitySerializer
 	 *
 	 * @since 0.1
 	 *
@@ -256,7 +261,7 @@ abstract class Api extends \ApiBase {
 	 * Add labels to result
 	 *
 	 * @deprecated
-	 * TODO: remove, now in EntitySerializer
+	 * TODO: remove, now in \Wikibase\EntitySerializer
 	 *
 	 * @since 0.1
 	 *
@@ -299,7 +304,7 @@ abstract class Api extends \ApiBase {
 	 * Returns the permissions that are required to perform the operation specified by
 	 * the parameters.
 	 *
-	 * @param $entity Entity the entity to check permissions for
+	 * @param $entity \Wikibase\Entity the entity to check permissions for
 	 * @param $params array of arguments for the module, describing the operation to be performed
 	 *
 	 * @return \Status the check's result
@@ -317,7 +322,7 @@ abstract class Api extends \ApiBase {
 	/**
 	 * Check the rights for the user accessing the module.
 	 *
-	 * @param $entityContent EntityContent the entity to check
+	 * @param $entityContent \Wikibase\EntityContent the entity to check
 	 * @param $user User doing the action
 	 * @param $params array of arguments for the module, passed for ModifyItem
 	 *
@@ -365,7 +370,7 @@ abstract class Api extends \ApiBase {
 	 *                          Revision::getContent().
 	 * @param \User    $user    : the user to consider if $audience == Revision::FOR_THIS_USER
 	 *
-	 * @return EntityContent|null the revision's content, or null if not available.
+	 * @return \Wikibase\EntityContent|null the revision's content, or null if not available.
 	 */
 	protected function loadEntityContent( \Title $title, $revId = false,
 		$audience = \Revision::FOR_PUBLIC,
