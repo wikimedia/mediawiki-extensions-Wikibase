@@ -4,17 +4,16 @@ namespace Wikibase\Api;
 
 use ApiBase, MWException;
 
-use Wikibase\EntityContent;
+//use Wikibase\EditEntity; // conflict with api module
 use Wikibase\EntityId;
 use Wikibase\Entity;
+use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-//use Wikibase\EditEntity; // conflict with api module
-use Wikibase\Statement;
-use Wikibase\References;
+use Wikibase\Claims;
 use Wikibase\Settings;
 
 /**
- * API module for removing one or more references of the same statement.
+ * API module for removing claims.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,13 +38,7 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveReferences extends Api {
-
-	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
-		//NOTE: need to declare this constructor, so old PHP versions don't use the
-		//      removeReferences() function as the constructor.
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-	}
+class RemoveClaims extends Api {
 
 	// TODO: automcomment
 	// TODO: example
@@ -53,96 +46,164 @@ class RemoveReferences extends Api {
 	// TODO: conflict detection
 
 	/**
-	 * @see ApiBase::execute
+	 * @see \ApiBase::execute
 	 *
 	 * @since 0.3
 	 */
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$content = $this->getEntityContent();
-		$params = $this->extractRequestParams();
+		$guids = $this->getGuidsByEntity();
 
-		$this->removeReferences(
-			$content->getEntity(),
-			$params['statement'],
-			array_unique( $params['references'] )
+		$removedClaimKeys = $this->removeClaims(
+			$this->getEntityContents( array_keys( $guids ) ),
+			$guids
 		);
 
-		$this->saveChanges( $content );
+		$this->outputResult( $removedClaimKeys );
 
 		wfProfileOut( __METHOD__ );
 	}
 
 	/**
+	 * Parses the key parameter and returns it as an array with as keys
+	 * prefixed entity ids and as values arrays with the claim GUIDs for
+	 * the specific entity.
+	 *
 	 * @since 0.3
 	 *
-	 * @return EntityContent
+	 * @return array
 	 */
-	protected function getEntityContent() {
+	protected function getGuidsByEntity() {
 		$params = $this->extractRequestParams();
 
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
+		$guids = array();
 
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'removereferences-entity-not-found' );
+		foreach ( $params['claim'] as $guid ) {
+			$entityId = Entity::getIdFromClaimGuid( $guid );
+
+			if ( !array_key_exists( $entityId, $guids ) ) {
+				$guids[$entityId] = array();
+			}
+
+			$guids[$entityId][] = $guid;
 		}
+
+		return $guids;
+	}
+
+	/**
+	 * Does the claim removal and returns a list of claim keys for
+	 * the claims that actually got removed.
+	 *
+	 * @since 0.3
+	 *
+	 * @param \Wikibase\EntityContent[] $entityContents
+	 * @param array $guids
+	 *
+	 * @return string[]
+	 */
+	protected function removeClaims( $entityContents, array $guids ) {
+		$removedClaims = array();
+
+		foreach ( $entityContents as $entityContent ) {
+			$entity = $entityContent->getEntity();
+
+			$claims = new Claims( $entity->getClaims() );
+
+			$removedClaims = array_merge(
+				$removedClaims,
+				$this->removeClaimsFromList( $claims, $guids[$entity->getPrefixedId()] )
+			);
+
+			$entity->setClaims( $claims );
+
+			$this->saveChanges( $entityContent );
+		}
+
+		return $removedClaims;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param string[] $ids
+	 *
+	 * @return \Wikibase\EntityContent[]
+	 */
+	protected function getEntityContents( array $ids ) {
+		$contents = array();
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		// TODO: use proper batch select
+		foreach ( $ids as $id ) {
+			$entityId = EntityId::newFromPrefixedId( $id );
+
+			if ( $entityId === null ) {
+				$this->dieUsage( 'Invalid entity id provided', 'removeclaims-invalid-entity-id' );
+			}
+
+			$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
+
+			$content = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+
+			if ( $content === null ) {
+				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'removeclaims-entity-not-found' );
+			}
+
+			$contents[] = $content;
+		}
+
+		return $contents;
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @param Entity $entity
-	 * @param string $statementGuid
-	 * @param string[] $refHashes
+	 * @param \Wikibase\Claims $claims
+	 * @param string[] $guids
+	 *
+	 * @return string[]
 	 */
-	protected function removeReferences( Entity $entity, $statementGuid, array $refHashes ) {
-		$claims = new \Wikibase\Claims( $entity->getClaims() );
+	protected function removeClaimsFromList( Claims &$claims, array $guids ) {
+		$removedGuids = array();
 
-		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'No such statement', 'removereferences-statement-not-found' );
-		}
-
-		$statement = $claims->getClaimWithGuid( $statementGuid );
-
-		if ( ! ( $statement instanceof Statement ) ) {
-			$this->dieUsage(
-				'The referenced claim is not a statement and thus cannot have references',
-				'removereferences-not-a-statement'
-			);
-		}
-
-		/**
-		 * @var References $references
-		 */
-		$references = $statement->getReferences();
-
-		foreach ( $refHashes as $refHash ) {
-			// TODO: perhaps we do not want to fail like this, as client cannot easily find which ref is not there
-			if ( $references->hasReferenceHash( $refHash ) ) {
-				$references->removeReferenceHash( $refHash );
-			}
-			else {
-				$this->dieUsage(
-					// TODO: does $refHash need to be escaped somehow?
-					'The statement does not have any associated reference with the provided reference hash "' . $refHash . '"',
-					'removereferences-no-such-reference'
-				);
+		foreach ( $guids as $guid ) {
+			if ( $claims->hasClaimWithGuid( $guid ) ) {
+				$claims->removeClaimWithGuid( $guid );
+				$removedGuids[] = $guid;
 			}
 		}
 
-		$entity->setClaims( $claims );
+		return $removedGuids;
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @param EntityContent $content
+	 * @param string[] $removedClaimGuids
+	 */
+	protected function outputResult( $removedClaimGuids ) {
+		$this->getResult()->addValue(
+			null,
+			'success',
+			1
+		);
+
+		$this->getResult()->setIndexedTagName( $removedClaimGuids, 'claim' );
+
+		$this->getResult()->addValue(
+			null,
+			'claims',
+			$removedClaimGuids
+		);
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param \Wikibase\EntityContent $content
 	 */
 	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();
@@ -173,7 +234,7 @@ class RemoveReferences extends Api {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @see \ApiBase::getAllowedParams
 	 *
 	 * @since 0.3
 	 *
@@ -181,14 +242,10 @@ class RemoveReferences extends Api {
 	 */
 	public function getAllowedParams() {
 		return array(
-			'statement' => array(
+			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'references' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
 				ApiBase::PARAM_ISMULTI => true,
+				ApiBase::PARAM_REQUIRED => true,
 			),
 			'token' => null,
 			'baserevid' => array(
@@ -198,7 +255,7 @@ class RemoveReferences extends Api {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
+	 * @see \ApiBase::getParamDescription
 	 *
 	 * @since 0.3
 	 *
@@ -206,8 +263,7 @@ class RemoveReferences extends Api {
 	 */
 	public function getParamDescription() {
 		return array(
-			'statement' => 'A GUID identifying the statement for which a reference is being set',
-			'references' => 'The hashes of the references that should be removed',
+			'claim' => 'A GUID identifying the claim',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
@@ -216,7 +272,7 @@ class RemoveReferences extends Api {
 	}
 
 	/**
-	 * @see ApiBase::getDescription
+	 * @see \ApiBase::getDescription
 	 *
 	 * @since 0.3
 	 *
@@ -224,12 +280,12 @@ class RemoveReferences extends Api {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for removing one or more references of the same statement.'
+			'API module for removing Wikibase claims.'
 		);
 	}
 
 	/**
-	 * @see ApiBase::getExamples
+	 * @see \ApiBase::getExamples
 	 *
 	 * @since 0.3
 	 *
@@ -243,18 +299,18 @@ class RemoveReferences extends Api {
 	}
 
 	/**
-	 * @see ApiBase::getHelpUrls
+	 * @see \ApiBase::getHelpUrls
 	 *
 	 * @since 0.3
 	 *
 	 * @return string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremovereferences';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremoveclaims';
 	}
 
 	/**
-	 * @see ApiBase::getVersion
+	 * @see \ApiBase::getVersion
 	 *
 	 * @since 0.3
 	 *

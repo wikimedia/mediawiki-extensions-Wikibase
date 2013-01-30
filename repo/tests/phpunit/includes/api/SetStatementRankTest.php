@@ -33,6 +33,7 @@ use Wikibase\Statement;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
+ * @group SetStatementRankTest
  *
  * @group medium
  *

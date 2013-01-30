@@ -1,20 +1,22 @@
 <?php
 
-namespace Wikibase\Repo\Api;
+namespace Wikibase\Api;
 
-use ApiBase;
-use MWException;
+use ApiBase, MWException;
 
 use Wikibase\EntityContent;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
-use Wikibase\EditEntity;
+//use Wikibase\EditEntity; // conflict with api module
 use Wikibase\Claim;
 use Wikibase\ClaimSerializer;
 use Wikibase\Snaks;
 use Wikibase\SnakFactory;
+use Wikibase\PropertyValueSnak;
+use Wikibase\LibRegistry;
 use Wikibase\Settings;
+
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -42,7 +44,7 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetQualifier extends \Wikibase\Api {
+class SetQualifier extends Api {
 
 	// TODO: automcomment
 	// TODO: example
@@ -193,7 +195,7 @@ class SetQualifier extends \Wikibase\Api {
 		$propertyId = isset( $params['property'] ) ? $params['property'] : $snak->getPropertyId();
 
 		if ( is_string( $propertyId ) ) {
-			$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+			$libRegistry = new LibRegistry( Settings::singleton() );
 			$parseResult = $libRegistry->getEntityIdParser()->parse( $propertyId );
 
 			if ( !$parseResult->isValid() ) {
@@ -208,7 +210,7 @@ class SetQualifier extends \Wikibase\Api {
 		if ( isset( $params['value'] ) ) {
 			$snakValue = \FormatJson::decode( $params['value'] );
 		}
-		elseif ( $snak instanceof \Wikibase\PropertyValueSnak ) {
+		elseif ( $snak instanceof PropertyValueSnak ) {
 			$snakValue = $snak->getDataValue()->getArrayValue();
 		}
 		else {
@@ -234,7 +236,7 @@ class SetQualifier extends \Wikibase\Api {
 		$params = $this->extractRequestParams();
 		$factory = new SnakFactory();
 
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+		$libRegistry = new LibRegistry( Settings::singleton() );
 		$parseResult = $libRegistry->getEntityIdParser()->parse( $params['property'] );
 
 		if ( !$parseResult->isValid() ) {
@@ -260,7 +262,7 @@ class SetQualifier extends \Wikibase\Api {
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$editEntity = new \Wikibase\EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
