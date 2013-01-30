@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//3eY\u003d",
+        "filename": "repo/includes/api/ApiSetClaimValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T20:48:33Z",
+      "side": 1,
+      "message": "If we rebuild the indices explicitly like here, I think we should not clone the Claims object at all. That\u0027s confusing... bah. Anyway.",
+      "revId": "e7a42964e73700c963f3ad30de2d53f9e62d30ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
