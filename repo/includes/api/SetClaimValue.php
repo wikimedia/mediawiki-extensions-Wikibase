@@ -44,7 +44,6 @@ use Wikibase\Settings;
 class SetClaimValue extends Api {
 
 	// TODO: example
-	// TODO: rights
 	// TODO: conflict detection
 	// TODO: claim uniqueness
 
@@ -57,8 +56,12 @@ class SetClaimValue extends Api {
 		wfProfileIn( __METHOD__ );
 
 		$content = $this->getEntityContent();
-
 		$params = $this->extractRequestParams();
+
+		if ( !$content->userCanEdit( $this->getUser(), false ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-cant-edit' )->text(), 'cant-edit' );
+		}
 
 		$claim = $this->updateClaim(
 			$content->getEntity(),
@@ -152,15 +155,23 @@ class SetClaimValue extends Api {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new \Wikibase\EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$editEntity->addRequiredPermissions(
+			array(
+				$content->getEntity()->getType() . '-update',
+				'claim-update'
+			)
+		);
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
 			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : ''
+			isset( $params['token'] ) ? $params['token'] : '',
+			$this->getErrorFlags()
 		);
 
-		if ( !$status->isGood() ) {
-			$this->dieUsage( 'Failed to save the change', 'setclaimvalue-save-failed' );
+		if ( $editEntity->hasError( $this->getErrorFlags() ) ) {
+			$errorCode = $this->findErrorCode( $editEntity->getErrors() );
+			$editEntity->reportApiErrors( $this, $errorCode );
 		}
 
 		$statusValue = $status->getValue();

@@ -42,7 +42,6 @@ class SetStatementRank extends Api {
 
 	// TODO: automcomment
 	// TODO: example
-	// TODO: rights
 	// TODO: conflict detection
 
 	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
@@ -61,6 +60,11 @@ class SetStatementRank extends Api {
 
 		$content = $this->getEntityContent();
 		$params = $this->extractRequestParams();
+
+		if ( !$content->userCanEdit( $this->getUser(), false ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-cant-edit' )->text(), 'cant-edit' );
+		}
 
 		$statement = $this->setStatementRank(
 			$content->getEntity(),
@@ -138,15 +142,23 @@ class SetStatementRank extends Api {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new \Wikibase\EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$editEntity->addRequiredPermissions(
+			array(
+				$content->getEntity()->getType() . '-update',
+				'rank-update'
+			)
+		);
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
 			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : ''
+			isset( $params['token'] ) ? $params['token'] : '',
+			$this->getErrorFlags()
 		);
 
-		if ( !$status->isGood() ) {
-			$this->dieUsage( 'Failed to save the change', 'save-failed' );
+		if ( $editEntity->hasError( $this->getErrorFlags() ) ) {
+			$errorCode = $this->findErrorCode( $editEntity->getErrors() );
+			$editEntity->reportApiErrors( $this, $errorCode );
 		}
 
 		$statusValue = $status->getValue();

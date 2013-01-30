@@ -46,7 +46,6 @@ class CreateClaim extends Api implements IAutocomment {
 
 	// TODO: automcomment
 	// TODO: example
-	// TODO: rights
 	// TODO: conflict detection
 
 	/**
@@ -60,6 +59,11 @@ class CreateClaim extends Api implements IAutocomment {
 		$this->checkParameterRequirements();
 
 		$entityContent = $this->getEntityContent();
+
+		if ( !$entityContent->userCanEdit( $this->getUser(), false ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-cant-edit' )->text(), 'cant-edit' );
+		}
 
 		$claim = $this->addClaim( $entityContent->getEntity() );
 
@@ -115,15 +119,23 @@ class CreateClaim extends Api implements IAutocomment {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new \Wikibase\EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$editEntity->addRequiredPermissions(
+			array(
+				$content->getEntity()->getType() . '-update',
+				'claim-create'
+			)
+		);
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: autocomment
 			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : ''
+			isset( $params['token'] ) ? $params['token'] : '',
+			$this->getErrorFlags()
 		);
 
-		if ( !$status->isOK() ) {
-			$this->dieUsage( 'Failed to save the change', 'createclaim-save-failed' );
+		if ( $editEntity->hasError( $this->getErrorFlags() ) ) {
+			$errorCode = $this->findErrorCode( $editEntity->getErrors() );
+			$editEntity->reportApiErrors( $this, $errorCode );
 		}
 
 		$statusValue = $status->getValue();

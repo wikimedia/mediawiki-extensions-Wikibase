@@ -111,6 +111,10 @@ class PermissionsTest extends ModifyItemBase {
 			if ( $expectedError !== true ) {
 				$this->assertEquals( $expectedError, $ex->getCodeString(), 'API did not return expected error code. Got error message ' . $ex );
 			}
+		} catch ( \PermissionsError $ex ) {
+			if ( $expectedError !== true ) {
+				$this->assertEquals( $expectedError, $ex->permission, 'API did not return expected error code. Got error message ' . $ex );
+			}
 		}
 	}
 
@@ -193,7 +197,7 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'item-create' => false ),
 				'user' => array( 'item-create' => false )
 			),
-			'cant-edit' // error
+			'cant-edit' // error - previous early error
 		);
 
 		return $permissions;
@@ -224,7 +228,7 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'sitelink-update' => false ),
 				'user' => array( 'sitelink-update' => false )
 			),
-			'cant-edit' # error
+			'cant-edit' // error - previous early error
 		);
 
 		return $permissions;
@@ -258,7 +262,7 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'label-update' => false ),
 				'user' => array( 'label-update' => false )
 			),
-			'cant-edit' // error
+			'cant-edit' // error - previous early error
 		);
 
 		return $permissions;
@@ -285,7 +289,7 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'description-update' => false ),
 				'user' => array( 'description-update' => false )
 			),
-			'cant-edit' // error
+			'cant-edit' // error - previous early error
 		);
 
 		return $permissions;

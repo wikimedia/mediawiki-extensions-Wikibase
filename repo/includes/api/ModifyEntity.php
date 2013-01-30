@@ -45,7 +45,6 @@ abstract class ModifyEntity extends Api implements IAutocomment {
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
 
-		$permissions[] = 'edit';
 		return $permissions;
 	}
 
@@ -167,12 +166,11 @@ abstract class ModifyEntity extends Api implements IAutocomment {
 			$entityContent = $this->createEntity( $params );
 		}
 
-		// At this point only change/edit rights should be checked
-		$status = $this->checkPermissions( $entityContent, $user, $params );
-
-		if ( !$status->isOK() ) {
+		// At this point only change/edit rights should be checked,
+		// more fine grained checks are done in the EditEntity
+		if ( !$entityContent->userCanEdit( $user, false ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' ), 'cant-edit' );
+			$this->dieUsage( $this->msg( 'wikibase-api-cant-edit' )->text(), 'cant-edit' );
 		}
 
 		$success = $this->modifyEntity( $entityContent, $params );
@@ -197,23 +195,20 @@ abstract class ModifyEntity extends Api implements IAutocomment {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : null;
 		$editEntity = new \Wikibase\EditEntity( $entityContent, $user, $baseRevisionId, $this->getContext() );
+		$editEntity->addRequiredPermissions( $this->getRequiredPermissions( $entityContent->getEntity(), $params ) );
 
 		// Do the actual save, or if it don't exist yet create it.
 		// There will be exceptions but we just leak them out ;)
 		$editEntity->attemptSave(
 			Autocomment::buildApiSummary( $this, $params, $entityContent ),
 			$this->flags,
-			( $this->needsToken() ? $params['token'] : '' )
+			( $this->needsToken() ? $params['token'] : '' ),
+			$this->getErrorFlags()
 		);
 
-		if ( $editEntity->hasError( \Wikibase\EditEntity::TOKEN_ERROR ) ) {
-			$editEntity->reportApiErrors( $this, 'session-failure' );
-		}
-		elseif ( $editEntity->hasError( \Wikibase\EditEntity::EDIT_CONFLICT_ERROR ) ) {
-			$editEntity->reportApiErrors( $this, 'edit-conflict' );
-		}
-		elseif ( $editEntity->hasError() ) {
-			$editEntity->reportApiErrors( $this, 'save-failed' );
+		if ( $editEntity->hasError( $this->getErrorFlags() ) ) {
+			$errorCode = $this->findErrorCode( $editEntity->getErrors() );
+			$editEntity->reportApiErrors( $this, $errorCode );
 		}
 
 		$this->getResult()->addValue(
@@ -272,6 +267,7 @@ abstract class ModifyEntity extends Api implements IAutocomment {
 			array( 'code' => 'no-such-entity-link', 'info' => 'No item found with the given sitelink' ),
 			array( 'code' => 'no-such-entity-id', 'info' => 'No item found with the given ID' ),
 			array( 'code' => 'create-failed', 'info' => $this->msg( 'wikibase-api-create-failed' )->text() ),
+			array( 'code' => 'cant-edit', 'info' => $this->msg( 'wikibase-api-cant-edit' )->text() ),
 			array( 'code' => 'modify-failed', 'info' => $this->msg( 'wikibase-api-modify-failed' )->text() ),
 			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
 			array( 'code' => 'invalid-contentmodel', 'info' => $this->msg( 'wikibase-api-invalid-contentmodel' )->text() ),

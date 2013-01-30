@@ -159,6 +159,11 @@ class LinkTitles extends Api implements IAutocomment {
 			$status = Status::newGood( true );
 		}
 		else {
+			if ( !$itemContent->userCanEdit( $user, false ) ) {
+				wfProfileOut( __METHOD__ );
+				$this->dieUsage( $this->msg( 'wikibase-api-cant-edit' )->text(), 'cant-edit' );
+			}
+
 			// Do the actual save, or if it don't exist yet create it.
 			$editEntity = new \Wikibase\EditEntity( $itemContent, $user, false, $this->getContext() );
 			$status = $editEntity->attemptSave(
