@@ -73,6 +73,7 @@ describe "Check for bugs in statements UI", :experimental => true do
         page.wait_for_property_value_box
         page.statementValueInput?.should be_true
         page.entitySelectorInput_element.clear
+        page.entitySelectorInput = " "
         page.statementValueInput?.should be_false
         page.cancelStatement
       end
