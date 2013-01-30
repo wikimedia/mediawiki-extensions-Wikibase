@@ -198,7 +198,7 @@ class Claims extends HashArray implements ClaimListAccess {
 	 */
 	public function getDiff( Claims $claims, Differ $differ = null ) {
 		if ( $differ === null ) {
-			$differ = new \Diff\ListDiffer();
+			$differ = new \Diff\MapDiffer();
 		}
 
 		$sourceHashes = array();
@@ -208,25 +208,35 @@ class Claims extends HashArray implements ClaimListAccess {
 		 * @var Claim $claim
 		 */
 		foreach ( $this as $claim ) {
-			$sourceHashes[] = $claim->getHash();
+			$sourceHashes[$claim->getGuid()] = $claim->getHash();
 		}
 
 		foreach ( $claims as $claim ) {
-			$targetHashes[] = $claim->getHash();
+			$targetHashes[$claim->getGuid()] = $claim->getHash();
 		}
 
 		$diff = new \Diff\Diff( array(), false );
 
 		foreach ( $differ->doDiff( $sourceHashes, $targetHashes ) as $diffOp ) {
-			if ( $diffOp instanceof \Diff\DiffOpAdd ) {
+			if ( $diffOp instanceof \Diff\DiffOpChange ) {
+				$oldClaim = $this->getByElementHash( $diffOp->getOldValue() );
+				$newClaim = $this->getByElementHash( $diffOp->getNewValue() );
+
+				assert( $oldClaim instanceof Claim );
+				assert( $newClaim instanceof Claim );
+				assert( $oldClaim->getGuid() === $newClaim->getGuid() );
+
+				$diff[$oldClaim->getGuid()] = new \Diff\DiffOpChange( $oldClaim, $newClaim );
+			}
+			elseif ( $diffOp instanceof \Diff\DiffOpAdd ) {
 				$claim = $claims->getByElementHash( $diffOp->getNewValue() );
 				assert( $claim instanceof Claim );
-				$diff[] = new \Diff\DiffOpAdd( $claim );
+				$diff[$claim->getGuid()] = new \Diff\DiffOpAdd( $claim );
 			}
 			elseif ( $diffOp instanceof \Diff\DiffOpRemove ) {
 				$claim = $this->getByElementHash( $diffOp->getOldValue() );
 				assert( $claim instanceof Claim );
-				$diff[] = new \Diff\DiffOpRemove( $claim );
+				$diff[$claim->getGuid()] = new \Diff\DiffOpRemove( $claim );
 			}
 			else {
 				throw new MWException( 'Invalid DiffOp type cannot be handled' );
