@@ -1,15 +1,14 @@
 <?php
 
-namespace Wikibase\Repo\Api;
+namespace Wikibase\Api;
 
-use ApiBase;
-use MWException;
+use ApiBase, MWException;
 
-use Wikibase\EntityContent;
+//use Wikibase\EditEntity;
 use Wikibase\EntityId;
 use Wikibase\Entity;
+use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-use Wikibase\EditEntity;
 use Wikibase\Claim;
 use Wikibase\Settings;
 
@@ -39,7 +38,7 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveQualifiers extends \Wikibase\Api {
+class RemoveQualifiers extends Api {
 
 	// TODO: automcomment
 	// TODO: example
@@ -48,7 +47,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	// TODO: claim uniqueness
 
 	/**
-	 * @see ApiBase::execute
+	 * @see \ApiBase::execute
 	 *
 	 * @since 0.3
 	 */
@@ -67,7 +66,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	/**
 	 * @since 0.3
 	 *
-	 * @return EntityContent
+	 * @return \Wikibase\EntityContent
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
@@ -87,7 +86,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	/**
 	 * @since 0.3
 	 *
-	 * @param Entity $entity
+	 * @param \Wikibase\Entity $entity
 	 */
 	protected function doRemoveQualifiers( Entity $entity ) {
 		$params = $this->extractRequestParams();
@@ -109,10 +108,10 @@ class RemoveQualifiers extends \Wikibase\Api {
 	/**
 	 * @since 0.3
 	 *
-	 * @param Entity $entity
+	 * @param \Wikibase\Entity $entity
 	 * @param string $claimGuid
 	 *
-	 * @return Claim
+	 * @return \Wikibase\Claim
 	 */
 	protected function getClaim( Entity $entity, $claimGuid ) {
 		if ( !$entity->getClaims()->hasClaimWithGuid( $claimGuid ) ) {
@@ -129,14 +128,14 @@ class RemoveQualifiers extends \Wikibase\Api {
 	/**
 	 * @since 0.3
 	 *
-	 * @param EntityContent $content
+	 * @param \Wikibase\EntityContent $content
 	 */
 	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$editEntity = new \Wikibase\EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
@@ -160,7 +159,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @see \ApiBase::getAllowedParams
 	 *
 	 * @since 0.3
 	 *
@@ -185,7 +184,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
+	 * @see \ApiBase::getParamDescription
 	 *
 	 * @since 0.3
 	 *
@@ -204,7 +203,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getDescription
+	 * @see \ApiBase::getDescription
 	 *
 	 * @since 0.3
 	 *
@@ -217,7 +216,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getExamples
+	 * @see \ApiBase::getExamples
 	 *
 	 * @since 0.3
 	 *
@@ -231,7 +230,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getHelpUrls
+	 * @see \ApiBase::getHelpUrls
 	 *
 	 * @since 0.3
 	 *
@@ -242,7 +241,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getVersion
+	 * @see \ApiBase::getVersion
 	 *
 	 * @since 0.3
 	 *
