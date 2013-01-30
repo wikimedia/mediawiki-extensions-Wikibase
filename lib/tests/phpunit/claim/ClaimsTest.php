@@ -162,6 +162,9 @@ class ClaimsTest extends \MediaWikiTestCase {
 		$claim3 = new Claim( new \Wikibase\PropertyNoValueSnak( 1 ) );
 		$claim4 = new Claim( new \Wikibase\PropertyNoValueSnak( 2 ) );
 
+		$claim2v2 = unserialize( serialize( $claim2 ) );
+		$claim2v2->setMainSnak( new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'omnomnom' ) ) );
+
 		$statement0 = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( 5 ) );
 		$statement0->setRank( \Wikibase\Statement::RANK_PREFERRED );
 
@@ -179,50 +182,55 @@ class ClaimsTest extends \MediaWikiTestCase {
 
 		$source = new Claims();
 		$target = new Claims();
-		$expected = new \Diff\Diff( array(), false );
+		$expected = new \Diff\Diff( array(), true );
 		$argLists[] = array( $source, $target, $expected, 'Two empty lists should result in an empty diff' );
 
 
 		$source = new Claims();
 		$target = new Claims( array( $claim0 ) );
-		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim0 ) ), false );
+		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim0 ) ), true );
 		$argLists[] = array( $source, $target, $expected, 'List with no entries to list with one should result in one add op' );
 
 
 		$source = new Claims( array( $claim0 ) );
 		$target = new Claims();
-		$expected = new \Diff\Diff( array( new \Diff\DiffOpRemove( $claim0 ) ), false );
+		$expected = new \Diff\Diff( array( new \Diff\DiffOpRemove( $claim0 ) ), true );
 		$argLists[] = array( $source, $target, $expected, 'List with one entry to an empty list should result in one remove op' );
 
 
 		$source = new Claims( array( $claim0, $claim3, $claim2 ) );
 		$target = new Claims( array( $claim0, $claim2, $claim3 ) );
-		$expected = new \Diff\Diff( array(), false );
+		$expected = new \Diff\Diff( array(), true );
 		$argLists[] = array( $source, $target, $expected, 'Two identical lists should result in an empty diff' );
 
 
 		$source = new Claims( array( $claim0 ) );
 		$target = new Claims( array( $claim1 ) );
-		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim1 ), new \Diff\DiffOpRemove( $claim0 ) ), false );
+		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim1 ), new \Diff\DiffOpRemove( $claim0 ) ), true );
 		$argLists[] = array( $source, $target, $expected, 'Two lists with each a single different entry should result into one add and one remove op' );
 
 
 		$source = new Claims( array( $claim2, $claim3, $claim0, $claim4 ) );
 		$target = new Claims( array( $claim2, $claim1, $claim3, $claim4 ) );
-		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim1 ), new \Diff\DiffOpRemove( $claim0 ) ), false );
+		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim1 ), new \Diff\DiffOpRemove( $claim0 ) ), true );
 		$argLists[] = array( $source, $target, $expected, 'Two lists with identical items except for one change should result in one add and one remove op' );
 
 
 		$source = new Claims( array( $claim0, $claim0, $claim3, $claim2, $claim2, $claim2, $statement0 ) );
 		$target = new Claims( array( $claim0, $claim0, $claim2, $claim3, $claim2, $claim2, $statement0 ) );
-		$expected = new \Diff\Diff( array(), false );
+		$expected = new \Diff\Diff( array(), true );
 		$argLists[] = array( $source, $target, $expected, 'Two identical lists with duplicate items should result in an empty diff' );
 
 
 		$source = new Claims( array( $statement0, $statement0, $claim1, $statement1 ) );
 		$target = new Claims( array( $claim1, $statement0, $claim1, $statement1 ) );
-		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim1 ), new \Diff\DiffOpRemove( $statement0 ) ), false );
+		$expected = new \Diff\Diff( array( new \Diff\DiffOpAdd( $claim1 ), new \Diff\DiffOpRemove( $statement0 ) ), true );
 		$argLists[] = array( $source, $target, $expected, 'Two lists with duplicate items and a different entry should result into one add and one remove op' );
+
+		$source = new Claims( array( $claim0, $claim3, $claim2 ) );
+		$target = new Claims( array( $claim0, $claim2v2, $claim3 ) );
+		$expected = new \Diff\Diff( array( $claim2->getGuid() => new \Diff\DiffOpChange( $claim2, $claim2v2 ) ), true );
+		$argLists[] = array( $source, $target, $expected, 'Changing the value of a claim should result in a change op' );
 
 		return $argLists;
 	}
