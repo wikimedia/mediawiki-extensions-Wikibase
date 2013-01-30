@@ -30,6 +30,7 @@ use Hashable;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group HashArray
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -117,6 +118,35 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 		$this->assertFalse( $array->equals( 42 ) );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\HashArray $array
+	 */
+	public function testIndicesAreUpToDate( HashArray $array ) {
+		$this->assertInternalType( 'boolean', $array->indicesAreUpToDate() );
 
+		$mutable = new MutableHashable();
+
+		$array->addElement( $mutable );
+
+		$mutable->text = '~[,,_,,]:3';
+
+		$this->assertFalse( $array->indicesAreUpToDate() );
+
+		$array->rebuildIndices();
+
+		$this->assertTrue( $array->indicesAreUpToDate() );
+	}
+
+}
+
+class MutableHashable implements Hashable {
+
+	public $text = '';
+
+	public function getHash() {
+		return sha1( __CLASS__ . $this->text );
+	}
 
 }
