@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//3r0\u003d",
+        "filename": "lib/includes/HashArray.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:03:24Z",
+      "side": 1,
+      "message": "This will not work if the offsetHash gets totally out of whack:\n\n* if a value is missing from offsetHashes, that is not detected.\n* if a value is removed from the list but its hash is still in offsetHashes, that will cause an \"undefined index\" warning.\n\nSomething like that should never happen, but still...",
+      "revId": "bc0bcde1872c339279019d21fad946128f68a85a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
