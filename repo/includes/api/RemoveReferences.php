@@ -100,14 +100,16 @@ class RemoveReferences extends \Wikibase\Api {
 	 *
 	 * @param Entity $entity
 	 * @param string $statementGuid
-	 * @param string[] $refHash
+	 * @param string[] $refHashes
 	 */
 	protected function removeReferences( Entity $entity, $statementGuid, array $refHashes ) {
-		if ( !$entity->getClaims()->hasClaimWithGuid( $statementGuid ) ) {
+		$claims = new \Wikibase\Claims( $entity->getClaims() );
+
+		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
 			$this->dieUsage( 'No such statement', 'removereferences-statement-not-found' );
 		}
 
-		$statement = $entity->getClaims()->getClaimWithGuid( $statementGuid );
+		$statement = $claims->getClaimWithGuid( $statementGuid );
 
 		if ( ! ( $statement instanceof Statement ) ) {
 			$this->dieUsage(
@@ -134,6 +136,8 @@ class RemoveReferences extends \Wikibase\Api {
 				);
 			}
 		}
+
+		$entity->setClaims( $claims );
 	}
 
 	/**

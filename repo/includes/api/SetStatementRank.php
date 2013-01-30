@@ -106,11 +106,13 @@ class SetStatementRank extends \Wikibase\Api {
 	 * @return Statement
 	 */
 	protected function setStatementRank( Entity $entity, $statementGuid, $rank ) {
-		if ( !$entity->getClaims()->hasClaimWithGuid( $statementGuid ) ) {
+		$claims = new \Wikibase\Claims( $entity->getClaims() );
+
+		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
 			$this->dieUsage( 'No such statement', 'setstatementrank-statement-not-found' );
 		}
 
-		$statement = $entity->getClaims()->getClaimWithGuid( $statementGuid );
+		$statement = $claims->getClaimWithGuid( $statementGuid );
 
 		if ( ! ( $statement instanceof Statement ) ) {
 			$this->dieUsage(
@@ -120,6 +122,8 @@ class SetStatementRank extends \Wikibase\Api {
 		}
 
 		$statement->setRank( \Wikibase\ClaimSerializer::unserializeRank( $rank ) );
+
+		$entity->setClaims( $claims );
 
 		return $statement;
 	}

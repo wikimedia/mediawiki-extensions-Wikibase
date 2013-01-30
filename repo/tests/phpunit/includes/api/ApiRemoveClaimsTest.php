@@ -90,21 +90,22 @@ class ApiRemoveClaimsTest extends \ApiTestCase {
 		/**
 		 * @var Claim[] $claims
 		 */
-		$claims = iterator_to_array( $entity->getClaims() );
+		$claims = $entity->getClaims();
 
 		while ( $claim = array_shift( $claims ) ) {
 			$this->makeTheRequest( array( $claim->getGuid() ) );
 
 			$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
-			$obtainedEntity = $content->getEntity();
+			$obtainedClaims = new \Wikibase\Claims( $content->getEntity()->getClaims() );
 
-			$this->assertFalse( $obtainedEntity->hasClaimWithGuid( $claim->getGuid() ) );
+			$this->assertFalse( $obtainedClaims->hasClaimWithGuid( $claim->getGuid() ) );
 
 			$currentClaims = new \Wikibase\Claims( $claims );
-			$this->assertTrue( $obtainedEntity->getClaims()->getHash() === $currentClaims->getHash() );
+
+			$this->assertTrue( $obtainedClaims->getHash() === $currentClaims->getHash() );
 		}
 
-		$this->assertFalse( $obtainedEntity->hasClaims() );
+		$this->assertTrue( $obtainedClaims->isEmpty() );
 	}
 
 	/**

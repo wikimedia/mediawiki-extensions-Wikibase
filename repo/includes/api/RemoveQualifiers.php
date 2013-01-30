@@ -115,11 +115,13 @@ class RemoveQualifiers extends \Wikibase\Api {
 	 * @return Claim
 	 */
 	protected function getClaim( Entity $entity, $claimGuid ) {
-		if ( !$entity->getClaims()->hasClaimWithGuid( $claimGuid ) ) {
+		$claims = new \Wikibase\Claims( $entity->getClaims() );
+
+		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
 			$this->dieUsage( 'No such claim', 'removequalifiers-claim-not-found' );
 		}
 
-		$claim = $entity->getClaims()->getClaimWithGuid( $claimGuid );
+		$claim = $claims->getClaimWithGuid( $claimGuid );
 
 		assert( $claim instanceof Claim );
 
