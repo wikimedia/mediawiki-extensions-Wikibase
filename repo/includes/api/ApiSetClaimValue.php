@@ -122,6 +122,12 @@ class ApiSetClaimValue extends Api {
 
 		$claim->setMainSnak( SnakObject::newFromType( $snakType, $constructorArguments ) );
 
+		// TODO: refactor Entity interface to use Claim[] rather then Claims
+		$claims = $entity->getClaims();
+		$claims->rebuildIndices();
+		assert( $claims->indicesAreUpToDate() );
+		$entity->setClaims( $claims );
+
 		return $claim;
 	}
 
