@@ -4,17 +4,19 @@ namespace Wikibase\Api;
 
 use ApiBase, MWException;
 
-use Wikibase\EntityContent;
+//use Wikibase\EditEntity; // conflict with api module
 use Wikibase\EntityId;
 use Wikibase\Entity;
+use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-//use Wikibase\EditEntity; // conflict with api module
-use Wikibase\Statement;
-use Wikibase\References;
+use Wikibase\SnakObject;
+use Wikibase\Claim;
+use Wikibase\ClaimSerializer;
+use Wikibase\Claims;
 use Wikibase\Settings;
 
 /**
- * API module for removing one or more references of the same statement.
+ * API module for setting the DataValue contained by the main snak of a claim.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,21 +41,15 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveReferences extends Api {
+class SetClaimValue extends Api {
 
-	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
-		//NOTE: need to declare this constructor, so old PHP versions don't use the
-		//      removeReferences() function as the constructor.
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-	}
-
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
+	// TODO: claim uniqueness
 
 	/**
-	 * @see ApiBase::execute
+	 * @see \ApiBase::execute
 	 *
 	 * @since 0.3
 	 */
@@ -61,15 +57,19 @@ class RemoveReferences extends Api {
 		wfProfileIn( __METHOD__ );
 
 		$content = $this->getEntityContent();
+
 		$params = $this->extractRequestParams();
 
-		$this->removeReferences(
+		$claim = $this->updateClaim(
 			$content->getEntity(),
-			$params['statement'],
-			array_unique( $params['references'] )
+			$params['claim'],
+			$params['snaktype'],
+			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
 		);
 
 		$this->saveChanges( $content );
+
+		$this->outputClaim( $claim );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -77,16 +77,16 @@ class RemoveReferences extends Api {
 	/**
 	 * @since 0.3
 	 *
-	 * @return EntityContent
+	 * @return \Wikibase\EntityContent
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
 
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
+		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'removereferences-entity-not-found' );
+			$this->dieUsage( 'No such entity', 'setclaimvalue-entity-not-found' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -95,54 +95,56 @@ class RemoveReferences extends Api {
 	}
 
 	/**
+	 * Updates the claim with specified GUID to have a main snak with provided value.
+	 * The claim is modified in the passed along entity and is returned as well.
+	 *
 	 * @since 0.3
 	 *
-	 * @param Entity $entity
-	 * @param string $statementGuid
-	 * @param string[] $refHashes
+	 * @param \Wikibase\Entity $entity
+	 * @param string $guid
+	 * @param string $snakType
+	 * @param string|null $value
+	 *
+	 * @return Claim
 	 */
-	protected function removeReferences( Entity $entity, $statementGuid, array $refHashes ) {
-		$claims = new \Wikibase\Claims( $entity->getClaims() );
+	protected function updateClaim( Entity $entity, $guid, $snakType, $value = null ) {
+		$claims = new Claims( $entity->getClaims() );
 
-		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'No such statement', 'removereferences-statement-not-found' );
+		if ( !$claims->hasClaimWithGuid( $guid ) ) {
+			$this->dieUsage( 'No such claim', 'setclaimvalue-claim-not-found' );
 		}
 
-		$statement = $claims->getClaimWithGuid( $statementGuid );
+		$claim = $claims->getClaimWithGuid( $guid );
 
-		if ( ! ( $statement instanceof Statement ) ) {
-			$this->dieUsage(
-				'The referenced claim is not a statement and thus cannot have references',
-				'removereferences-not-a-statement'
-			);
-		}
+		$constructorArguments = array( $claim->getMainSnak()->getPropertyId() );
 
-		/**
-		 * @var References $references
-		 */
-		$references = $statement->getReferences();
+		if ( $value !== null ) {
+			/**
+			 * @var \Wikibase\PropertyContent $content
+			 */
+			$content = EntityContentFactory::singleton()->getFromId( $claim->getMainSnak()->getPropertyId() );
 
-		foreach ( $refHashes as $refHash ) {
-			// TODO: perhaps we do not want to fail like this, as client cannot easily find which ref is not there
-			if ( $references->hasReferenceHash( $refHash ) ) {
-				$references->removeReferenceHash( $refHash );
-			}
-			else {
+			if ( $content === null ) {
 				$this->dieUsage(
-					// TODO: does $refHash need to be escaped somehow?
-					'The statement does not have any associated reference with the provided reference hash "' . $refHash . '"',
-					'removereferences-no-such-reference'
+					'The value cannot be interpreted since the property cannot be found, and thus the type of the value not be determined',
+					'setclaimvalue-property-not-found'
 				);
 			}
+
+			$constructorArguments[] = $content->getProperty()->newDataValue( $value );
 		}
 
+		$claim->setMainSnak( SnakObject::newFromType( $snakType, $constructorArguments ) );
+
 		$entity->setClaims( $claims );
+
+		return $claim;
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @param EntityContent $content
+	 * @param \Wikibase\EntityContent $content
 	 */
 	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();
@@ -158,7 +160,7 @@ class RemoveReferences extends Api {
 		);
 
 		if ( !$status->isGood() ) {
-			$this->dieUsage( 'Failed to save the change', 'save-failed' );
+			$this->dieUsage( 'Failed to save the change', 'setclaimvalue-save-failed' );
 		}
 
 		$statusValue = $status->getValue();
@@ -173,7 +175,23 @@ class RemoveReferences extends Api {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @since 0.3
+	 *
+	 * @param \Wikibase\Claim $claim
+	 */
+	protected function outputClaim( Claim $claim ) {
+		$serializer = new ClaimSerializer();
+		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
+
+		$this->getResult()->addValue(
+			null,
+			'claim',
+			$serializer->getSerialized( $claim )
+		);
+	}
+
+	/**
+	 * @see \ApiBase::getAllowedParams
 	 *
 	 * @since 0.3
 	 *
@@ -181,14 +199,17 @@ class RemoveReferences extends Api {
 	 */
 	public function getAllowedParams() {
 		return array(
-			'statement' => array(
+			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'references' => array(
+			'value' => array(
 				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_REQUIRED => false,
+			),
+			'snaktype' => array(
+				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
 				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_ISMULTI => true,
 			),
 			'token' => null,
 			'baserevid' => array(
@@ -198,7 +219,7 @@ class RemoveReferences extends Api {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
+	 * @see \ApiBase::getParamDescription
 	 *
 	 * @since 0.3
 	 *
@@ -206,8 +227,9 @@ class RemoveReferences extends Api {
 	 */
 	public function getParamDescription() {
 		return array(
-			'statement' => 'A GUID identifying the statement for which a reference is being set',
-			'references' => 'The hashes of the references that should be removed',
+			'claim' => 'A GUID identifying the claim',
+			'snaktype' => 'The type of the snak',
+			'value' => 'The value to set the datavalue of the the main snak of the claim to',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
@@ -216,7 +238,7 @@ class RemoveReferences extends Api {
 	}
 
 	/**
-	 * @see ApiBase::getDescription
+	 * @see \ApiBase::getDescription
 	 *
 	 * @since 0.3
 	 *
@@ -224,12 +246,12 @@ class RemoveReferences extends Api {
 	 */
 	public function getDescription() {
 		return array(
-			'API module for removing one or more references of the same statement.'
+			'API module for setting the value of a Wikibase claim.'
 		);
 	}
 
 	/**
-	 * @see ApiBase::getExamples
+	 * @see \ApiBase::getExamples
 	 *
 	 * @since 0.3
 	 *
@@ -243,14 +265,14 @@ class RemoveReferences extends Api {
 	}
 
 	/**
-	 * @see ApiBase::getHelpUrls
+	 * @see \ApiBase::getHelpUrls
 	 *
 	 * @since 0.3
 	 *
 	 * @return string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremovereferences';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetclaimvalue';
 	}
 
 	/**

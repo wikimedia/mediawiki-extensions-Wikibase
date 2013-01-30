@@ -1,16 +1,15 @@
 <?php
 
 namespace Wikibase\Api;
+use ApiBase, MWException;
 
-use ApiBase;
-use MWException;
-
-use Wikibase\EntityContent;
+//use Wikibase\EditEntity; // conflict with api module
 use Wikibase\EntityId;
 use Wikibase\Entity;
+use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-use Wikibase\EditEntity;
 use Wikibase\Statement;
+use Wikibase\ClaimSerializer;
 use Wikibase\Settings;
 
 /**
@@ -39,7 +38,7 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetStatementRank extends \Wikibase\Api {
+class SetStatementRank extends Api {
 
 	// TODO: automcomment
 	// TODO: example
@@ -53,7 +52,7 @@ class SetStatementRank extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::execute
+	 * @see \ApiBase::execute
 	 *
 	 * @since 0.3
 	 */
@@ -79,7 +78,7 @@ class SetStatementRank extends \Wikibase\Api {
 	/**
 	 * @since 0.3
 	 *
-	 * @return EntityContent
+	 * @return \Wikibase\EntityContent
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
@@ -103,7 +102,7 @@ class SetStatementRank extends \Wikibase\Api {
 	 * @param string $statementGuid
 	 * @param string $rank
 	 *
-	 * @return Statement
+	 * @return \Wikibase\Statement
 	 */
 	protected function setStatementRank( Entity $entity, $statementGuid, $rank ) {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
@@ -121,7 +120,7 @@ class SetStatementRank extends \Wikibase\Api {
 			);
 		}
 
-		$statement->setRank( \Wikibase\ClaimSerializer::unserializeRank( $rank ) );
+		$statement->setRank( ClaimSerializer::unserializeRank( $rank ) );
 
 		$entity->setClaims( $claims );
 
@@ -131,14 +130,14 @@ class SetStatementRank extends \Wikibase\Api {
 	/**
 	 * @since 0.3
 	 *
-	 * @param EntityContent $content
+	 * @param \Wikibase\EntityContent $content
 	 */
 	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$editEntity = new \Wikibase\EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
@@ -164,10 +163,10 @@ class SetStatementRank extends \Wikibase\Api {
 	/**
 	 * @since 0.3
 	 *
-	 * @param Statement $statement
+	 * @param \Wikibase\Statement $statement
 	 */
 	protected function outputStatement( Statement $statement ) {
-		$serializer = new \Wikibase\ClaimSerializer();
+		$serializer = new ClaimSerializer();
 		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 
 		$this->getResult()->addValue(
@@ -178,7 +177,7 @@ class SetStatementRank extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @see \ApiBase::getAllowedParams
 	 *
 	 * @since 0.3
 	 *
@@ -191,7 +190,7 @@ class SetStatementRank extends \Wikibase\Api {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'rank' => array(
-				ApiBase::PARAM_TYPE => \Wikibase\ClaimSerializer::getRanks(),
+				ApiBase::PARAM_TYPE => ClaimSerializer::getRanks(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'token' => null,
@@ -202,7 +201,7 @@ class SetStatementRank extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getParamDescription
+	 * @see \ApiBase::getParamDescription
 	 *
 	 * @since 0.3
 	 *
@@ -220,7 +219,7 @@ class SetStatementRank extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getDescription
+	 * @see \ApiBase::getDescription
 	 *
 	 * @since 0.3
 	 *
@@ -233,7 +232,7 @@ class SetStatementRank extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getExamples
+	 * @see \ApiBase::getExamples
 	 *
 	 * @since 0.3
 	 *
@@ -247,7 +246,7 @@ class SetStatementRank extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getHelpUrls
+	 * @see \ApiBase::getHelpUrls
 	 *
 	 * @since 0.3
 	 *
@@ -258,7 +257,7 @@ class SetStatementRank extends \Wikibase\Api {
 	}
 
 	/**
-	 * @see ApiBase::getVersion
+	 * @see \ApiBase::getVersion
 	 *
 	 * @since 0.3
 	 *
