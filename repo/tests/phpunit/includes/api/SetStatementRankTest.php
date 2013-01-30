@@ -67,13 +67,13 @@ class SetStatementRankTest extends \ApiTestCase {
 		foreach ( $this->snakProvider() as $snak ) {
 			$statement = clone $statement;
 			$snaks = new \Wikibase\SnakList( array( $snak ) );
-			$statement->getReferences()->addReference( new \Wikibase\ReferenceObject( $snaks ) );
+			$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
 			$statements[] = $statement;
 		}
 
 		$statement = clone $statement;
 		$snaks = new \Wikibase\SnakList( $this->snakProvider() );
-		$statement->getReferences()->addReference( new \Wikibase\ReferenceObject( $snaks ) );
+		$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
 		$statements[] = $statement;
 
 		$ranks = array(

@@ -52,7 +52,7 @@ class ApiSetReferenceTest extends \ApiTestCase {
 		 */
 		$statement = $item->newClaim( new \Wikibase\PropertyNoValueSnak( 42 ) );
 
-		$reference = new \Wikibase\ReferenceObject( new \Wikibase\SnakList(
+		$reference = new \Wikibase\Reference( new \Wikibase\SnakList(
 			array( new \Wikibase\PropertySomeValueSnak( 1 ) )
 		) );
 
@@ -64,7 +64,7 @@ class ApiSetReferenceTest extends \ApiTestCase {
 
 		$referenceHash = $reference->getHash();
 
-		$reference = new \Wikibase\ReferenceObject( new \Wikibase\SnakList(
+		$reference = new \Wikibase\Reference( new \Wikibase\SnakList(
 			array( new \Wikibase\PropertyNoValueSnak( 42 ) )
 		) );
 

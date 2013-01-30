@@ -3,13 +3,12 @@
 namespace Wikibase\Test;
 use DataValues\StringValue;
 use Wikibase\PropertyValueSnak;
-use Wikibase\ReferenceObject;
 use Wikibase\Reference;
 use Wikibase\SnakList;
 use Wikibase\Snaks;
 
 /**
- * Tests for the Wikibase\ReferenceObject class.
+ * Tests for the Wikibase\Reference class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +38,7 @@ use Wikibase\Snaks;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ReferenceObjectTest extends \MediaWikiTestCase {
+class ReferenceTest extends \MediaWikiTestCase {
 
 	public function snakListProvider() {
 		$snakLists = array();
@@ -62,9 +61,9 @@ class ReferenceObjectTest extends \MediaWikiTestCase {
 	public function instanceProvider() {
 		$references = array();
 
-		$references[] = new ReferenceObject();
+		$references[] = new Reference();
 
-		$references[] = new ReferenceObject( new SnakList( array( new PropertyValueSnak(
+		$references[] = new Reference( new SnakList( array( new PropertyValueSnak(
 			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ),
 			new StringValue( 'a' )
 		) ) ) );
@@ -78,7 +77,7 @@ class ReferenceObjectTest extends \MediaWikiTestCase {
 	 * @param \Wikibase\Snaks $snaks
 	 */
 	public function testConstructor( Snaks $snaks ) {
-		$omnomnomReference = new ReferenceObject( $snaks );
+		$omnomnomReference = new Reference( $snaks );
 
 		$this->assertInstanceOf( '\Wikibase\Reference', $omnomnomReference );
 

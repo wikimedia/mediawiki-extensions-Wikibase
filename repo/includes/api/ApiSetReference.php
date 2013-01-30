@@ -127,7 +127,7 @@ class ApiSetReference extends Api {
 			);
 		}
 
-		$reference = new ReferenceObject( $snaks );
+		$reference = new Reference( $snaks );
 
 		/**
 		 * @var References $references

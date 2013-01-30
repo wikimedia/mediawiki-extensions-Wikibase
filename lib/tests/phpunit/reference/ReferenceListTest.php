@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use Wikibase\ReferenceList;
-use Wikibase\ReferenceObject;
 use Wikibase\Reference;
 use Hashable;
 
@@ -58,7 +57,7 @@ class ReferenceListTest extends \MediaWikiTestCase {
 	public function getElementInstances() {
 		$instances = array();
 
-		$instances[] = new ReferenceObject();
+		$instances[] = new Reference();
 
 		return $instances;
 	}
@@ -92,7 +91,7 @@ class ReferenceListTest extends \MediaWikiTestCase {
 	public function testHasReferenceMore() {
 		$list = new ReferenceList();
 
-		$reference = new ReferenceObject( new \Wikibase\SnakList( array( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
+		$reference = new Reference( new \Wikibase\SnakList( array( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
 		$sameReference = unserialize( serialize( $reference ) );
 
 		$list->addReference( $reference );
