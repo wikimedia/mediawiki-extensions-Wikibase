@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//3o8\u003d",
+        "filename": "lib/includes/claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-30T19:12:50Z",
+      "side": 1,
+      "message": "Please add a text for the DiffOpChange case to ClaimsTest.",
+      "revId": "46963013cd8ce593886364119518557055e7ef37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
