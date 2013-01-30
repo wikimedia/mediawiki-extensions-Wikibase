@@ -159,23 +159,22 @@ class LinkTitles extends Api implements IAutocomment {
 			$status = Status::newGood( true );
 		}
 		else {
+			if ( !$itemContent->userCanEdit( $user, false ) ) {
+				wfProfileOut( __METHOD__ );
+				$this->dieUsage( $this->msg( 'wikibase-api-cant-edit' )->text(), 'cant-edit' );
+			}
+
 			// Do the actual save, or if it don't exist yet create it.
 			$editEntity = new \Wikibase\EditEntity( $itemContent, $user, false, $this->getContext() );
+			$editEntity->addRequiredPermissions( $this->getRequiredPermissions( $itemContent->getEntity(), $params ) );
 			$status = $editEntity->attemptSave(
 				Autocomment::buildApiSummary( $this, $params, $itemContent ),
 				$flags,
 				( $this->needsToken() ? $params['token'] : '' )
 			);
 
-			if ( $editEntity->hasError( \Wikibase\EditEntity::TOKEN_ERROR ) ) {
-				$editEntity->reportApiErrors( $this, 'session-failure' );
-			}
-			elseif ( $editEntity->hasError( \Wikibase\EditEntity::EDIT_CONFLICT_ERROR ) ) {
-				$editEntity->reportApiErrors( $this, 'edit-conflict' );
-			}
-			elseif ( $editEntity->hasError() ) {
-				$editEntity->reportApiErrors( $this, 'save-failed' );
-			}
+			$this->reportPossibleErrors( $editEntity );
+
 
 			$revision = $editEntity->getNewRevision();
 			if ( $revision ) {

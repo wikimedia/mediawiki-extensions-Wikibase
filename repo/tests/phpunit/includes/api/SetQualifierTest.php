@@ -137,6 +137,7 @@ class SetQualifierTest extends \ApiTestCase {
 			'claim' => $statementGuid,
 			'snaktype' => $qualifier->getType(),
 			'property' => $qualifier->getPropertyId()->getPrefixedId(),
+			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
 		if ( $qualifier instanceof \Wikibase\PropertyValueSnak ) {

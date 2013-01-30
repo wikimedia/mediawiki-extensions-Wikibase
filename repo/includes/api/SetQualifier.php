@@ -48,10 +48,21 @@ class SetQualifier extends Api {
 
 	// TODO: automcomment
 	// TODO: example
-	// TODO: rights
 	// TODO: conflict detection
 	// TODO: more explicit support for snak merging?
 	// TODO: claim uniqueness
+
+	/**
+	 * @see  \Wikibase\Api\Api::getRequiredPermissions()
+	 */
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
+
+		$permissions[] = 'edit';
+		$permissions[] = $entity->getType() . '-update';
+		$permissions[] = 'qualifier-create';
+		return $permissions;
+	}
 
 	/**
 	 * @see ApiBase::execute
@@ -64,6 +75,11 @@ class SetQualifier extends Api {
 		$this->checkParameterRequirements();
 
 		$content = $this->getEntityContent();
+
+		if ( !$content->userCanEdit( $this->getUser(), false ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-cant-edit' )->text(), 'cant-edit' );
+		}
 
 		$claim = $this->doSetQualifier(
 			$content->getEntity()
@@ -263,16 +279,16 @@ class SetQualifier extends Api {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new \Wikibase\EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$editEntity->addRequiredPermissions( $this->getRequiredPermissions( $content->getEntity(), $params ) );
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
 			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : false
+			isset( $params['token'] ) ? $params['token'] : '',
+			$this->getErrorFlags()
 		);
 
-		if ( !$status->isOk() ) {
-			$this->dieUsage( 'Failed to save the change', 'save-failed' );
-		}
+		$this->reportPossibleErrors( $editEntity );
 
 		$statusValue = $status->getValue();
 
