@@ -115,7 +115,7 @@ class EntityDiffTest extends \MediaWikiTestCase {
 		$diff = $entityDiff->getClaimsDiff();
 
 		$this->assertInstanceOf( '\Diff\Diff', $diff );
-		$this->assertFalse( $diff->isAssociative() );
+		$this->assertTrue( $diff->isAssociative() );
 
 		foreach ( $diff as $diffOp ) {
 			$this->assertTrue( $diffOp instanceof \Diff\DiffOpAdd || $diffOp instanceof \Diff\DiffOpRemove );
