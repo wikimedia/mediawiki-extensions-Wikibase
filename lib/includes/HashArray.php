@@ -214,18 +214,21 @@ abstract class HashArray extends GenericArrayObject implements \Hashable, \Compa
 			 */
 			$element = $this->offsetGet( $index );
 
-			if ( is_array( $this->offsetHashes[$element->getHash()] )
-				&& count( $this->offsetHashes[$element->getHash()] ) > 1 ) {
+			$hash = $element->getHash();
 
-				$this->offsetHashes[$element->getHash()] = array_filter(
-					$this->offsetHashes[$element->getHash()],
+			if ( array_key_exists( $hash, $this->offsetHashes )
+				&& is_array( $this->offsetHashes[$hash] )
+				&& count( $this->offsetHashes[$hash] ) > 1 ) {
+
+				$this->offsetHashes[$hash] = array_filter(
+					$this->offsetHashes[$hash],
 					function( $value ) use ( $index ) {
 						return $value !== $index;
 					}
 				);
 			}
 			else {
-				unset( $this->offsetHashes[$element->getHash()] );
+				unset( $this->offsetHashes[$hash] );
 			}
 
 			parent::offsetUnset( $index );
@@ -293,6 +296,48 @@ abstract class HashArray extends GenericArrayObject implements \Hashable, \Compa
 			else {
 				$knownHashes[] = $hash;
 			}
+		}
+	}
+
+	/**
+	 * Returns if the hash indices are up to date.
+	 * For an HashArray with immutable objects this should always be the case.
+	 * For one with mutable objects it's the responsibility of the mutating code
+	 * to keep the indices up to date (see class documentation) and thus possible
+	 * this has not been done since the last update, thus causing a state where
+	 * one or more indices are out of date.
+	 *
+	 * @since 0.4
+	 *
+	 * @return boolean
+	 */
+	public function indicesAreUpToDate() {
+		foreach ( $this->offsetHashes as $hash => $offsets ) {
+			$offsets = (array)$offsets;
+
+			foreach ( $offsets as $offset ) {
+				if ( $this[$offset]->getHash() !== $hash ) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Removes and adds all elements, ensuring the indices are up to date.
+	 *
+	 * @since 0.4
+	 */
+	public function rebuildIndices() {
+		$hashables = iterator_to_array( $this );
+
+		$this->offsetHashes = array();
+
+		foreach ( $hashables as $offset => $hashable ) {
+			$this->offsetUnset( $offset );
+			$this->offsetSet( $offset, $hashable );
 		}
 	}
 

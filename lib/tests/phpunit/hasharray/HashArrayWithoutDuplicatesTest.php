@@ -29,6 +29,7 @@ use Wikibase\HashArray;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group HashArray
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -111,6 +112,27 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 		$array->addElement( $element );
 
 		$this->assertTrue( ( $hash === $array->getHash() ) === $hasElement );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\HashArray $array
+	 */
+	public function testIndicesAreUpToDate( HashArray $array ) {
+		$this->assertInternalType( 'boolean', $array->indicesAreUpToDate() );
+
+		$mutable = new MutableHashable();
+
+		$array->addElement( $mutable );
+
+		$mutable->text = '~[,,_,,]:3';
+
+		$this->assertFalse( $array->indicesAreUpToDate() );
+
+		$array->rebuildIndices();
+
+		$this->assertTrue( $array->indicesAreUpToDate() );
 	}
 
 }
