@@ -99,7 +99,7 @@ class EntityDiff extends Diff {
 	 * @return Diff
 	 */
 	public function getClaimsDiff() {
-		return isset( $this['claim'] ) ? $this['claim'] : new Diff( array(), false );
+		return isset( $this['claim'] ) ? $this['claim'] : new Diff( array(), true );
 	}
 
 	/**
