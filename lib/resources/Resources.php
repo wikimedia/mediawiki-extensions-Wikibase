@@ -130,6 +130,9 @@ return call_user_func( function() {
 				'wikibase.utilities/wikibase.utilities.ui.js',
 				'wikibase.utilities/wikibase.utilities.ui.StatableObject.js',
 			),
+			'styles' => array(
+				'wikibase.utilities/wikibase.utilities.ui.css',
+			),
 			'dependencies' => array(
 				'wikibase'
 			)
