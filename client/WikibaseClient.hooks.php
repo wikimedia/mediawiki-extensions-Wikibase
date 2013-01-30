@@ -118,8 +118,8 @@ final class ClientHooks {
 				'wbclient.watchlist',
 				'wbclient.watchlist.css'
 			),
-            'localBasePath' => __DIR__,
-            'remoteExtPath' => 'Wikibase/client'
+			'localBasePath' => __DIR__,
+			'remoteExtPath' => 'Wikibase/client'
 		);
 		return true;
 	}
