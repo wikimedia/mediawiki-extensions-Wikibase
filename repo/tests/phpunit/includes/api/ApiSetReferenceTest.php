@@ -84,12 +84,13 @@ class ApiSetReferenceTest extends \ApiTestCase {
 
 	protected function makeValidRequest( $statementGuid, $referenceHash, Reference $reference ) {
 		$serializer = new \Wikibase\ReferenceSerializer();
+		$serializedReference = $serializer->getSerialized( $reference );
 
 		$params = array(
 			'action' => 'wbsetreference',
 			'statement' => $statementGuid,
 			'reference' => $referenceHash,
-			'snaks' => \FormatJson::encode( $serializer->getSerialized( $reference ) ),
+			'snaks' => \FormatJson::encode( $serializedReference['snaks'] ),
 			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
@@ -106,12 +107,13 @@ class ApiSetReferenceTest extends \ApiTestCase {
 
 	protected function makeInvalidRequest( $statementGuid, $referenceHash, Reference $reference ) {
 		$serializer = new \Wikibase\ReferenceSerializer();
+		$serializedReference = $serializer->getSerialized( $reference );
 
 		$params = array(
 			'action' => 'wbsetreference',
 			'statement' => $statementGuid,
 			'reference' => $referenceHash,
-			'snaks' => \FormatJson::encode( $serializer->getSerialized( $reference ) ),
+			'snaks' => \FormatJson::encode( $serializedReference['snaks'] ),
 			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
