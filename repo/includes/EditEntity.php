@@ -125,6 +125,12 @@ class EditEntity {
 	const FILTERED = 32;
 
 	/**
+	 * Indicates that a save was attempted while the database was in
+	 * read-only mode.
+	 */
+	const READONLY = 64;
+
+	/**
 	 * bit mask for asking for any error.
 	 */
 	const ANY_ERROR = 0xFFFFFFFF;
@@ -418,6 +424,10 @@ class EditEntity {
 		return ( $this->errorType & $errorType ) > 0;
 	}
 
+	public function getErrors() {
+		return $this->errorType;
+	}
+
 	/**
 	 * Determines whether an edit conflict exists, that is, whether another user has edited the same item
 	 * after the base revision was created.
@@ -490,7 +500,6 @@ class EditEntity {
 			}
 		} else {
 			// can apply cleanly
-
 			$this->status->warning( 'wikibase-conflict-patched' );
 		}
 
@@ -508,6 +517,19 @@ class EditEntity {
 	 */
 	public function addRequiredPermission( $permission ) {
 		$this->requiredPremissions[] = $permission;
+	}
+
+	/**
+	 * Adds a number of permissions
+	 *
+	 * @param string[]|null $permissions
+	 */
+	public function addRequiredPermissions( array $permissions = null ) {
+		if ( $permissions !== null ) {
+			$this->requiredPremissions = array_unique(
+				array_merge( $this->requiredPremissions, $permissions )
+			);
+		}
 	}
 
 	/**
@@ -561,7 +583,9 @@ class EditEntity {
 	}
 
 	/**
-	 * Attempts to save the new entity content, chile first checking for permissions, edit conflicts, etc.
+	 * Attempts to save the new entity content, while first checking for permissions, edit conflicts, etc.
+	 *
+	 * This version will intercept exceptions thrown from the internal version.
 	 *
 	 * @param String $summary    The edit summary
 	 * @param int    $flags      The edit flags (see WikiPage::toEditContent)
@@ -572,15 +596,43 @@ class EditEntity {
 	 *         getStatus() for more details.
 	 * @see      WikiPage::toEditContent
 	 */
-	public function attemptSave( $summary, $flags, $token ) {
-		wfProfileIn( __METHOD__ );
-
-		if ( wfReadOnly() ) {
-			throw new \ReadOnlyError();
+	public function attemptSave( $summary, $flags, $token, $filter = 0 ) {
+		try {
+			$this->attemptSave_Internal( $summary, $flags, $token );
 		}
+		catch ( \MWException $ex ) {
+			if ( !( $this->errorType & $filter ) ) {
+				throw $ex;
+			}
+		}
+		return $this->status;
+	}
+
+	/**
+	 * Attempts to save the new entity content, while first checking for permissions, edit conflicts, etc.
+	 *
+	 * This version is the internal version that will not intercept exceptions.
+	 *
+	 * @param String $summary    The edit summary
+	 * @param int    $flags      The edit flags (see WikiPage::toEditContent)
+	 * @param String|bool $token Edit token to check, or false to disable the token check.
+	 *                           Null will fail the token text, as will the empty string.
+	 *
+	 * @return Status Indicates success and provides detailed warnings or error messages. See
+	 *         getStatus() for more details.
+	 * @see      WikiPage::toEditContent
+	 */
+	protected function attemptSave_Internal( $summary, $flags, $token ) {
+		wfProfileIn( __METHOD__ );
 
 		$this->status = Status::newGood();
 		$this->errorType = 0;
+
+		if ( wfReadOnly() ) {
+			$this->status->fatal( 'readonly' );
+			$this->errorType |= self::READONLY;
+			throw new \ReadOnlyError();
+		}
 
 		if ( $token !== false && !$this->isTokenOK( $token ) ) {
 			//@todo: This is redundant to the error code set in isTokenOK().
@@ -605,9 +657,7 @@ class EditEntity {
 
 		if ( !$this->status->isOK() ) {
 			$this->errorType |= self::PRECONDITION_FAILED;
-		}
 
-		if ( !$this->status->isOK() ) {
 			wfProfileOut( __METHOD__ );
 			return $this->status;
 		}

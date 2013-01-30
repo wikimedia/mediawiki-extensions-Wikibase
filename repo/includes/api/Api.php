@@ -329,6 +329,7 @@ abstract class Api extends \ApiBase {
 	 * @return Status the check's result
 	 * @todo: use this also to check for read access in ApiGetEntities, etc
 	 */
+	/*
 	public function checkPermissions( EntityContent $entityContent, User $user, array $params ) {
 		if ( Settings::get( 'apiInDebug' ) && !Settings::get( 'apiDebugWithRights', false ) ) {
 			return Status::newGood();
@@ -344,7 +345,62 @@ abstract class Api extends \ApiBase {
 
 		return $status;
 	}
+*/
 
+	/**
+	 * Get the array code to flags mapping
+	 *
+	 * @since 0.4
+	 * 
+	 * @return array with the actual mapping
+	 */
+	public function getErrorMapping() {
+		return array(
+			'cant-edit' => \Wikibase\EditEntity::PERMISSION_ERROR | \Wikibase\EditEntity::READONLY,
+			'session-failure' => \Wikibase\EditEntity::TOKEN_ERROR,
+			'edit-conflict' => \Wikibase\EditEntity::EDIT_CONFLICT_ERROR,
+			'save-failed' => \Wikibase\EditEntity::ANY_ERROR
+		);
+	}
+
+	/**
+	 * Get the flags we are planning to handle
+	 *
+	 * @since 0.4
+	 *
+	 * @return integer used as a bit vector
+	 */
+	public function getErrorFlags() {
+		$errorFlags = 0;
+
+		foreach ( $this->getErrorMapping() as $errorCode => $errorFlag ) {
+			$errorFlags |= $errorFlag;
+		}
+
+		return $errorFlags;
+	}
+
+	/**
+	 * Get the first found error code that matches the needle
+	 *
+	 * Note that this only returns a single error code even if
+	 * there might be several flags set in the needle.
+	 *
+	 * @since 0.4
+	 *
+	 * @param integer $needle used as a bit vector
+	 *
+	 * @return string a message key
+	 */
+	public function findErrorCode( $needle ) {
+		foreach ( $this->getErrorMapping() as $errorCode => $errorFlag ) {
+			if ( $needle & $errorFlag ) {
+				return $errorCode;
+			}
+		}
+
+		return false;
+	}
 	/**
 	 * Returns the list of sites that is suitable as a sitelink target.
 	 *

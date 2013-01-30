@@ -34,7 +34,6 @@ class EditEntity extends ModifyEntity {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
 
 		$type = $entity->getType();
-		$permissions[] = 'edit';
 		$permissions[] = $type . '-' . ( $entity->getId() === null ? 'create' : 'override' );
 		return $permissions;
 	}

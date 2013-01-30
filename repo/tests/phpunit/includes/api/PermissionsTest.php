@@ -90,7 +90,8 @@ class PermissionsTest extends ModifyItemBase {
 
 	function doPermissionsTest( $action, $params, $permissions, $expectedError ) {
 		global $wgUser;
-
+		//print("\n".$action."\n");
+		//print_r($permissions);
 		self::applyPermissions( $permissions );
 
 		try {
@@ -110,6 +111,15 @@ class PermissionsTest extends ModifyItemBase {
 		} catch ( \UsageException $ex ) {
 			if ( $expectedError !== true ) {
 				$this->assertEquals( $expectedError, $ex->getCodeString(), 'API did not return expected error code. Got error message ' . $ex );
+			}
+		} catch ( \PermissionsError $ex ) {
+			if ( $expectedError !== true ) {
+				//print("then clause 3\n");
+				//print("permissions: ". $ex->permission ." 3\n");
+				$this->assertEquals( $expectedError, $ex->permission, 'API did not return expected error code. Got error message ' . $ex );
+			}
+			else {
+				//print("then clause 3\n");
 			}
 		}
 	}
@@ -193,7 +203,8 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'item-create' => false ),
 				'user' => array( 'item-create' => false )
 			),
-			'cant-edit' // error
+			'cant-edit' // error - previous early error
+			//'item-create' // permission error
 		);
 
 		return $permissions;
@@ -224,7 +235,8 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'sitelink-update' => false ),
 				'user' => array( 'sitelink-update' => false )
 			),
-			'cant-edit' # error
+			'cant-edit' // error - previous early error
+			//'sitelink-update' // permission error
 		);
 
 		return $permissions;
@@ -258,7 +270,8 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'label-update' => false ),
 				'user' => array( 'label-update' => false )
 			),
-			'cant-edit' // error
+			'cant-edit' // error - previous early error
+			//'label-update' // permission error
 		);
 
 		return $permissions;
@@ -285,7 +298,8 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'description-update' => false ),
 				'user' => array( 'description-update' => false )
 			),
-			'cant-edit' // error
+			'cant-edit' // error - previous early error
+			//'description-update' // permission error
 		);
 
 		return $permissions;

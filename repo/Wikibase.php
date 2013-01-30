@@ -69,19 +69,32 @@ $dir = __DIR__ . '/';
 
 // rights
 // names should be according to other naming scheme
-$wgGroupPermissions['*']['item-override']	= true;
-$wgGroupPermissions['*']['item-create']		= true;
-$wgGroupPermissions['*']['item-remove']		= true;
-$wgGroupPermissions['*']['alias-add']		= true;
-$wgGroupPermissions['*']['alias-set']		= true;
-$wgGroupPermissions['*']['alias-remove']	= true;
-$wgGroupPermissions['*']['sitelink-remove']	= true;
-$wgGroupPermissions['*']['sitelink-update']	= true;
+$wgGroupPermissions['*']['property-override']	= true;
+$wgGroupPermissions['*']['property-create']		= true;
+$wgGroupPermissions['*']['property-remove']		= true;
+$wgGroupPermissions['*']['property-update']		= true;
+$wgGroupPermissions['*']['item-override']		= true;
+$wgGroupPermissions['*']['item-create']			= true;
+$wgGroupPermissions['*']['item-remove']			= true;
+$wgGroupPermissions['*']['item-update']			= true;
+$wgGroupPermissions['*']['alias-add']			= true;
+$wgGroupPermissions['*']['alias-set']			= true;
+$wgGroupPermissions['*']['alias-remove']		= true;
+$wgGroupPermissions['*']['sitelink-remove']		= true;
+$wgGroupPermissions['*']['sitelink-update']		= true;
 $wgGroupPermissions['*']['linktitles-update']	= true;
-$wgGroupPermissions['*']['label-remove']	= true;
-$wgGroupPermissions['*']['label-update']	= true;
+$wgGroupPermissions['*']['label-remove']		= true;
+$wgGroupPermissions['*']['label-update']		= true;
 $wgGroupPermissions['*']['description-remove']	= true;
 $wgGroupPermissions['*']['description-update']	= true;
+$wgGroupPermissions['*']['claim-create']		= true;
+$wgGroupPermissions['*']['claim-remove']		= true;
+$wgGroupPermissions['*']['claim-update']		= true;
+$wgGroupPermissions['*']['qualifier-create']	= true;
+$wgGroupPermissions['*']['qualifier-remove']	= true;
+$wgGroupPermissions['*']['reference-create']	= true;
+$wgGroupPermissions['*']['reference-remove']	= true;
+$wgGroupPermissions['*']['rank-update']			= true;
 
 // i18n
 $wgExtensionMessagesFiles['Wikibase'] 		= $dir . 'Wikibase.i18n.php';

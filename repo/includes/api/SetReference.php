@@ -186,15 +186,23 @@ class SetReference extends Api {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new \Wikibase\EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$editEntity->addRequiredPermissions(
+			array(
+				$content->getEntity()->getType() . '-update',
+				'reference-create' // I think this should only be a create if the value is unmutable
+			)
+		);
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
 			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : ''
+			isset( $params['token'] ) ? $params['token'] : '',
+			$this->getErrorFlags()
 		);
 
-		if ( !$status->isGood() ) {
-			$this->dieUsage( 'Failed to save the change', 'setreference-save-failed' );
+		if ( $editEntity->hasError( $this->getErrorFlags() ) ) {
+			$errorCode = $this->findErrorCode( $editEntity->getErrors() );
+			$editEntity->reportApiErrors( $this, $errorCode );
 		}
 
 		$statusValue = $status->getValue();
