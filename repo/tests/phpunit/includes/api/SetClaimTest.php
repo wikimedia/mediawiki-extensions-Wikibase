@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Test\Api;
+namespace Wikibase\Test\Api;
 use Wikibase\Claim;
 
 /**
@@ -38,7 +38,7 @@ use Wikibase\Claim;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApSetClaimTest extends \ApiTestCase {
+class SetClaimTest extends \ApiTestCase {
 
 	/**
 	 * @return \Wikibase\Snak[]

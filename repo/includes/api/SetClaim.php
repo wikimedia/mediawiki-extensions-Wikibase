@@ -1,6 +1,7 @@
 <?php
 
-namespace Wikibase\Repo\Api;
+namespace Wikibase\Api;
+
 use MWException;
 
 use ApiBase;
@@ -8,7 +9,6 @@ use ApiBase;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
-use Wikibase\EditEntity;
 use Wikibase\EntityId;
 use Wikibase\EntityContentFactory;
 
@@ -38,7 +38,7 @@ use Wikibase\EntityContentFactory;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetClaim extends \Wikibase\Api {
+class SetClaim extends ApiWikibase {
 
 	// TODO: rights
 
@@ -154,7 +154,7 @@ class SetClaim extends \Wikibase\Api {
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$editEntity = new \Wikibase\EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment

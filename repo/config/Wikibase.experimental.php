@@ -35,10 +35,10 @@ if ( !defined( 'WB_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 
 $dir = __DIR__ . '/../';
 
-$wgAutoloadClasses['Wikibase\Repo\Api\RemoveQualifiers'] 	= $dir . 'includes/api/RemoveQualifiers.php';
-$wgAutoloadClasses['Wikibase\Repo\Api\SetQualifier'] 		= $dir . 'includes/api/SetQualifier.php';
+$wgAutoloadClasses['Wikibase\Api\RemoveQualifiers'] 	= $dir . 'includes/api/RemoveQualifiers.php';
+$wgAutoloadClasses['Wikibase\Api\SetQualifier'] 		= $dir . 'includes/api/SetQualifier.php';
 $wgAutoloadClasses['Wikibase\Api\SetStatementRank']			= $dir . 'includes/api/SetStatementRank.php';
-$wgAutoloadClasses['Wikibase\Repo\Api\SetClaim']			= $dir . 'includes/api/SetClaim.php';
+$wgAutoloadClasses['Wikibase\Api\SetClaim']			= $dir . 'includes/api/SetClaim.php';
 
 $wgAutoloadClasses['SpecialEntityData'] 					= $dir . 'includes/specials/SpecialEntityData.php';
 
@@ -64,10 +64,10 @@ if ( !class_exists( 'MessageReporter' ) ) {
 }
 
 
-$wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Repo\Api\RemoveQualifiers';
-$wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Repo\Api\SetQualifier';
+$wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Api\RemoveQualifiers';
+$wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Api\SetQualifier';
 $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
-$wgAPIModules['wbsetclaim'] 						= 'Wikibase\Repo\Api\SetClaim';
+$wgAPIModules['wbsetclaim'] 						= 'Wikibase\Api\SetClaim';
 
 $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 
