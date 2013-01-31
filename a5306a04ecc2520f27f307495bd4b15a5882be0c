@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//288\u003d",
+        "filename": "lib/includes/entity/Entity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-01-31T12:57:32Z",
+      "side": 1,
+      "message": "Should accept any iterable, really...",
+      "revId": "a5306a04ecc2520f27f307495bd4b15a5882be0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
