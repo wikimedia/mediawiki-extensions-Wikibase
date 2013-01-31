@@ -138,6 +138,12 @@ $wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAli
 $wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSetDescription.php';
 $wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabel.php';
 $wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
+$wgAutoloadClasses['Wikibase\ApiCreateClaim'] 			= $dir . 'includes/api/ApiCreateClaim.php';
+$wgAutoloadClasses['Wikibase\ApiGetClaims'] 			= $dir . 'includes/api/ApiGetClaims.php';
+$wgAutoloadClasses['Wikibase\ApiRemoveClaims'] 			= $dir . 'includes/api/ApiRemoveClaims.php';
+$wgAutoloadClasses['Wikibase\ApiSetClaimValue'] 		= $dir . 'includes/api/ApiSetClaimValue.php';
+$wgAutoloadClasses['Wikibase\ApiSetReference'] 			= $dir . 'includes/api/ApiSetReference.php';
+$wgAutoloadClasses['Wikibase\Api\RemoveReferences'] 	= $dir . 'includes/api/RemoveReferences.php';
 
 
 // includes/content
@@ -154,6 +160,7 @@ $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryH
 // includes/specials
 $wgAutoloadClasses['SpecialCreateEntity'] 				= $dir . 'includes/specials/SpecialCreateEntity.php';
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
+$wgAutoloadClasses['SpecialNewProperty'] 				= $dir . 'includes/specials/SpecialNewProperty.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
 $wgAutoloadClasses['SpecialItemDisambiguation'] 		= $dir . 'includes/specials/SpecialItemDisambiguation.php';
@@ -162,6 +169,8 @@ $wgAutoloadClasses['SpecialSetLabel'] 					= $dir . 'includes/specials/SpecialSe
 $wgAutoloadClasses['SpecialSetDescription'] 			= $dir . 'includes/specials/SpecialSetDescription.php';
 $wgAutoloadClasses['SpecialSetAliases'] 				= $dir . 'includes/specials/SpecialSetAliases.php';
 $wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	    = $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
+$wgAutoloadClasses['SpecialEntityData'] 				= $dir . 'includes/specials/SpecialEntityData.php';
+$wgAutoloadClasses['SpecialListDatatypes'] 				= $dir . 'includes/specials/SpecialListDatatypes.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\EntityPerPage']			= $dir . 'includes/store/EntityPerPage.php';
@@ -206,6 +215,12 @@ $wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
 $wgAPIModules['wbeditentity'] 						= 'Wikibase\ApiEditEntity';
 $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
 $wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
+$wgAPIModules['wbcreateclaim'] 						= 'Wikibase\ApiCreateClaim';
+$wgAPIModules['wbgetclaims'] 						= 'Wikibase\ApiGetClaims';
+$wgAPIModules['wbremoveclaims'] 					= 'Wikibase\ApiRemoveClaims';
+$wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\ApiSetClaimValue';
+$wgAPIModules['wbsetreference'] 					= 'Wikibase\ApiSetReference';
+$wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
 
 
 // Special page registration
@@ -216,6 +231,9 @@ $wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
 $wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
 $wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
 $wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
+$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
+$wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
+$wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 
 
 // Special page groups

@@ -19,34 +19,13 @@ if ( !defined( 'WB_VERSION' ) ) {
 }
 $dir = __DIR__ . '/';
 
-$wgAutoloadClasses['Wikibase\ApiCreateClaim'] 				= $dir . 'includes/api/ApiCreateClaim.php';
-$wgAutoloadClasses['Wikibase\ApiGetClaims'] 				= $dir . 'includes/api/ApiGetClaims.php';
-$wgAutoloadClasses['Wikibase\ApiRemoveClaims'] 				= $dir . 'includes/api/ApiRemoveClaims.php';
-$wgAutoloadClasses['Wikibase\ApiSetClaimValue'] 			= $dir . 'includes/api/ApiSetClaimValue.php';
-$wgAutoloadClasses['Wikibase\ApiSetReference'] 				= $dir . 'includes/api/ApiSetReference.php';
 $wgAutoloadClasses['Wikibase\Repo\Api\RemoveQualifiers'] 	= $dir . 'includes/api/RemoveQualifiers.php';
-$wgAutoloadClasses['Wikibase\Api\RemoveReferences'] 		= $dir . 'includes/api/RemoveReferences.php';
 $wgAutoloadClasses['Wikibase\Repo\Api\SetQualifier'] 		= $dir . 'includes/api/SetQualifier.php';
 $wgAutoloadClasses['Wikibase\Api\SetStatementRank']			= $dir . 'includes/api/SetStatementRank.php';
 
-
-$wgAutoloadClasses['SpecialListDatatypes'] 				= $dir . 'includes/specials/SpecialListDatatypes.php';
-$wgAutoloadClasses['SpecialNewProperty'] 				= $dir . 'includes/specials/SpecialNewProperty.php';
-$wgAutoloadClasses['SpecialEntityData'] 				= $dir . 'includes/specials/SpecialEntityData.php';
-
-$wgAPIModules['wbcreateclaim'] 						= 'Wikibase\ApiCreateClaim';
-$wgAPIModules['wbgetclaims'] 						= 'Wikibase\ApiGetClaims';
-$wgAPIModules['wbremoveclaims'] 					= 'Wikibase\ApiRemoveClaims';
-$wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\ApiSetClaimValue';
-$wgAPIModules['wbsetreference'] 					= 'Wikibase\ApiSetReference';
 $wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Repo\Api\RemoveQualifiers';
-$wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
 $wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Repo\Api\SetQualifier';
 $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
-
-$wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
-$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
-$wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
 
 /**
  * Hook to add PHPUnit test cases.
@@ -61,15 +40,7 @@ $wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
 $wgHooks['UnitTestsList'][] = function( array &$files ) {
 	// @codeCoverageIgnoreStart
 	$testFiles = array(
-		'specials/SpecialEntityData',
-
-		'api/ApiCreateClaim',
-		'api/ApiGetClaims',
-		'api/ApiRemoveClaims',
-		'api/ApiSetClaimValue',
-		'api/ApiSetReference',
 		'api/RemoveQualifiers',
-		'api/RemoveReferences',
 		'api/SetStatementRank',
 		'api/SetQualifier',
 	);
