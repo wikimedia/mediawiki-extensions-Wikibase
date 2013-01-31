@@ -158,6 +158,12 @@ final class RepoHooks {
 			'api/ApiSetAliases',
 			'api/ApiEditEntity',
 			'api/ApiSetSiteLink',
+			'api/ApiCreateClaim',
+			'api/ApiGetClaims',
+			'api/ApiRemoveClaims',
+			'api/ApiSetClaimValue',
+			'api/ApiSetReference',
+			'api/RemoveReferences',
 
 			'content/EntityContentFactory',
 			'content/EntityHandler',
@@ -171,6 +177,7 @@ final class RepoHooks {
 			'specials/SpecialCreateItem',
 			'specials/SpecialItemDisambiguation',
 			'specials/SpecialItemByTitle',
+			'specials/SpecialEntityData',
 
 			'store/IdGenerator',
 			'store/StoreFactory',
