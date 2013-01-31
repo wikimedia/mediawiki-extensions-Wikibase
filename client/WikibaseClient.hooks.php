@@ -643,9 +643,6 @@ final class ClientHooks {
 
 			// gets the main part of the title, no underscores used in this db table
 			$titleText = $title->getPrefixedText();
-
-			// main part of title for building link
-			$titleLink = $title->getPartialURL();
 			$siteId = Settings::get( 'siteGlobalID' );
 
 			$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink( $siteId, $titleText );
@@ -653,7 +650,7 @@ final class ClientHooks {
 			if ( $itemId ) {
 				// links to the special page
 				$template->data['language_urls'][] = array(
-					'href' => ClientUtils::repoArticleUrl( "Special:ItemByTitle/$siteId/$titleLink" ),
+					'href' => ClientUtils::repoArticleUrl( "Special:ItemByTitle/$siteId/$titleText" ),
 					'text' => wfMessage( 'wikibase-editlinks' )->text(),
 					'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
 					'class' => 'wbc-editpage',
