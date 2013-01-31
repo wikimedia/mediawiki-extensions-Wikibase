@@ -77,9 +77,20 @@ $messages['ast'] = array(
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
-	'wikibase-client-desc' => 'Кліент пашырэньня Wikibase',
-	'wikibase-editlinks' => 'Рэдагаваць спасылкі',
+	'wikibase-client-desc' => 'Кліент для пашырэньня Wikibase',
+	'wikibase-after-page-move' => 'Каб захаваць міжмоўныя спасылкі на перанесеную старонку, вы можаце [$1 абнавіць] злучаны аб’ект у Вікізьвестках.',
+	'wikibase-comment-remove' => 'Злучаны аб’ект выдалены зь Вікізьвестак. Моўныя спасылкі былі выдаленыя.',
+	'wikibase-comment-linked' => 'Аб’ект Вікізьвестак быў злучаны з гэтай старонкай.',
+	'wikibase-comment-unlink' => 'Гэтая старонка была адлучаная ад аб’екта Вікізьвестак. Моўныя спасылкі выдаленыя.',
+	'wikibase-comment-restore' => 'Выдаленьне злучанага аб’екта Вікізьвестак скасавана. Моўныя спасылкі адноўленыя.',
+	'wikibase-comment-update' => 'Моўныя спасылкі абноўленыя.',
+	'wikibase-comment-sitelink-add' => 'Дададзеная моўная спасылка: $1',
+	'wikibase-comment-sitelink-change' => 'Моўная спасылка зьмененая з $1 на $2',
+	'wikibase-comment-sitelink-remove' => 'Моўная спасылка выдаленая: $1',
+	'wikibase-editlinks' => 'Зьмяніць спасылкі',
 	'wikibase-editlinkstitle' => 'Рэдагаваць міжмоўныя спасылкі',
+	'wikibase-rc-hide-wikidata' => '$1 Вікізьвесткі',
+	'wikibase-rc-show-wikidata-pref' => 'Паказваць праўкі Вікізьвестак у сьпісе апошніх зьменаў',
 );
 
 /** Breton (brezhoneg)
@@ -119,6 +130,7 @@ $messages['bs'] = array(
 $messages['ca'] = array(
 	'wikibase-client-desc' => "Client per l'extensió Wikibase",
 	'wikibase-after-page-move' => "Podeu també [$1 actualitzar] l'element associat de Wikidata per a mantenir els enllaços d'idioma a la pàgina moguda.",
+	'wikibase-comment-multi' => '{{PLURAL:$1|canvi|canvis}}',
 	'wikibase-editlinks' => 'Modifica els enllaços',
 	'wikibase-editlinkstitle' => 'Modifica enllaços interlingües',
 );
@@ -454,6 +466,7 @@ $messages['is'] = array(
 	'wikibase-comment-sitelink-add' => 'Tungumálatengli bætt við: $1',
 	'wikibase-comment-sitelink-change' => 'Tungumálatengli breytt frá $1 í $2',
 	'wikibase-comment-sitelink-remove' => 'Tungumálatengill fjarlægður: $1',
+	'wikibase-comment-multi' => '$1 breytingar',
 	'wikibase-editlinks' => 'Breyta tenglum',
 	'wikibase-editlinkstitle' => 'Breyta tungumálatenglum',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
