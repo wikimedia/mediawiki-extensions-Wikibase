@@ -44,10 +44,14 @@ class RepoAccessModule extends ResourceLoaderModule {
 	 * @return string
 	 */
 	public function getScript( ResourceLoaderContext $context ) {
-		global $wgWBSettings, $wgServer, $wgScriptPath;
+		global $wgServer, $wgScriptPath;
+
+		$settings = Settings::singleton();
+
 		$variables = array(
-			'wbRepoUrl' => $wgWBSettings['repoUrl'] ? $wgWBSettings['repoUrl'] : $wgServer,
-			'wbRepoScriptPath' => $wgWBSettings['repoScriptPath'] ? $wgWBSettings['repoScriptPath'] : $wgScriptPath
+			'wbRepoUrl' => $settings->hasSetting( 'repoUrl' ) ? $settings->getSetting( 'repoUrl' ) : $wgServer,
+			'wbRepoScriptPath' => $settings->hasSetting( 'repoScriptPath' )
+				? $settings->getSetting( 'repoScriptPath' ) : $wgScriptPath
 		);
 
 		return 'mediaWiki.config.set( ' . \FormatJson::encode( $variables ) . ' );';
