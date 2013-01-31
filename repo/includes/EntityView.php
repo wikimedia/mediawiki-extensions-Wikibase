@@ -136,15 +136,13 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
-
 		$claims = '';
 		$languageTerms = '';
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) { // still experimental
-			if ( $entity->getEntity()->getType() === 'item' ) {
-				$claims = $this->getHtmlForClaims( $entity, $lang, $editable );
-			}
-			$languageTerms = $this->getHtmlForLanguageTerms( $entity, $lang, $editable );
+
+		if( $entity->getEntity()->getType() === 'item' ) {
+			$claims = $this->getHtmlForClaims( $entity, $lang, $editable );
 		}
+		$languageTerms = $this->getHtmlForLanguageTerms( $entity, $lang, $editable );
 
 		return wfTemplate( 'wb-entity-content',
 			$this->getHtmlForLabel( $entity, $lang, $editable ),
