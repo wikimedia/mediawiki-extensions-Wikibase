@@ -635,8 +635,8 @@ final class ClientHooks {
 				// links to the special page
 				$template->data['language_urls'][] = array(
 					'href' => ClientUtils::repoArticleUrl( "Special:ItemByTitle/$siteId/$titleText" ),
-					'text' => wfMessage( 'wikibase-editlinks' )->text(),
-					'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
+					'text' => wfMessage( 'wbc-editlinks' )->text(),
+					'title' => wfMessage( 'wbc-editlinkstitle' )->text(),
 					'class' => 'wbc-editpage',
 				);
 			}
