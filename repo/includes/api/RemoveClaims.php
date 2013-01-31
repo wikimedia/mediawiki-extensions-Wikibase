@@ -42,7 +42,6 @@ class RemoveClaims extends Api {
 
 	// TODO: automcomment
 	// TODO: example
-	// TODO: rights
 	// TODO: conflict detection
 
 	/**

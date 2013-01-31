@@ -48,7 +48,6 @@ class SetQualifier extends Api {
 
 	// TODO: automcomment
 	// TODO: example
-	// TODO: rights
 	// TODO: conflict detection
 	// TODO: more explicit support for snak merging?
 	// TODO: claim uniqueness

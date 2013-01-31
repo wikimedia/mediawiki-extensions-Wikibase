@@ -42,7 +42,6 @@ class SetStatementRank extends Api {
 
 	// TODO: automcomment
 	// TODO: example
-	// TODO: rights
 	// TODO: conflict detection
 
 	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {

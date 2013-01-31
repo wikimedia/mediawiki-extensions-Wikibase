@@ -43,8 +43,8 @@ use Wikibase\Settings;
  */
 class SetClaimValue extends Api {
 
+	// TODO: automcomment
 	// TODO: example
-	// TODO: rights
 	// TODO: conflict detection
 	// TODO: claim uniqueness
 

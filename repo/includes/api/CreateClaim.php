@@ -46,7 +46,6 @@ class CreateClaim extends Api implements IAutocomment {
 
 	// TODO: automcomment
 	// TODO: example
-	// TODO: rights
 	// TODO: conflict detection
 
 	/**
