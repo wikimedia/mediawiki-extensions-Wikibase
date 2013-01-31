@@ -604,10 +604,11 @@ div.wb-claim-new .wb-snak-value {
 .wb-referenceview {
 	position: relative;
 	background: #F0F0F0;
+	overflow: hidden;
+	margin-bottom: 10px;
 }
 
 .wb-referenceview .wb-reference-snaks {
-	margin-bottom: 10px;
 	min-height: 1.7em;
 }
 
@@ -632,6 +633,7 @@ div.wb-claim-new .wb-snak-value {
 .wb-referenceview .wb-reference-snaks .wb-snak-value-container .wb-snak-value {
 	margin-left: 16px;
 	margin-right: 18em;
+	word-wrap: break-word;
 }
 
 .wb-referenceview .wb-reference-snaks .wb-snak-value-container .wb-snak-value .valueview-value {
