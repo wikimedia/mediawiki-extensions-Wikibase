@@ -142,6 +142,8 @@ class ItemContent extends EntityContent {
 	 *        and avoid race conditions.
 	 */
 	protected function addSiteLinkConflicts( Status $status, \DatabaseBase $db = null ) {
+		wfProfileIn( __METHOD__ );
+
 		$conflicts = StoreFactory::getStore()->newSiteLinkCache()->getConflictsForItem( $this->getItem(), $db );
 
 		foreach ( $conflicts as $conflict ) {
@@ -161,6 +163,8 @@ class ItemContent extends EntityContent {
 				$conflictingPage->getTitle()->getFullText()
 			);
 		}
+
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
