@@ -7,6 +7,7 @@ use ApiBase;
 use Wikibase\StoreFactory;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
+use Wikibase\Term;
 use Wikibase\Utils;
 
 /**
