@@ -794,7 +794,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @return EntityDiff
 	 * @throws MWException
 	 */
-	public final function getDiff( Entity $target, Differ $differ = null ) {
+	public final function getDiff( Entity $target, Differ $differ = null, $includeClaims = true ) {
 		if ( $this->getType() !== $target->getType() ) {
 			throw new MWException( 'Can only diff between entities of the same type' );
 		}
@@ -808,8 +808,10 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 
 		$diffOps = $differ->doDiff( $oldEntity, $newEntity );
 
-		$claims = new Claims( $this->getClaims() );
-		$diffOps['claim'] = $claims->getDiff( new Claims( $target->getClaims() ) );
+		if ( $includeClaims === true ) {
+			$claims = new Claims( $this->getClaims() );
+			$diffOps['claim'] = $claims->getDiff( new Claims( $target->getClaims() ) );
+		}
 
 		return EntityDiff::newForType( $this->getType(), $diffOps );
 	}

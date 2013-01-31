@@ -313,7 +313,7 @@ class EntityChange extends DiffChange {
 		/**
 		 * @var EntityChange $instance
 		 */
-		$diff = $oldEntity->getDiff( $newEntity );
+		$diff = $oldEntity->getDiff( $newEntity, null, false );
 		$instance = self::newForEntity( $action, $theEntity->getId(), $fields );
 		$instance->setDiff( $diff );
 
