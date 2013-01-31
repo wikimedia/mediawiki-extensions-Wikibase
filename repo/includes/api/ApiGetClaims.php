@@ -102,9 +102,11 @@ class ApiGetClaims extends Api {
 	 * @return Claim[]
 	 */
 	protected function getClaims( Entity $entity, $claimGuid ) {
+		$claimsList = new Claims( $entity->getClaims() );
+
 		if ( $claimGuid !== null ) {
-			return $entity->hasClaimWithGuid( $claimGuid ) ?
-				array( $entity->getClaimWithGuid( $claimGuid ) ) : array();
+			return $claimsList->hasClaimWithGuid( $claimGuid ) ?
+				array( $claimsList->getClaimWithGuid( $claimGuid ) ) : array();
 		}
 
 		$claims = array();
@@ -117,7 +119,7 @@ class ApiGetClaims extends Api {
 		/**
 		 * @var Claim $claim
 		 */
-		foreach ( $entity->getClaims() as $claim ) {
+		foreach ( $claimsList as $claim ) {
 			$rankIsOk = $rank === false
 				|| ( $claim instanceof Statement && $claim->getRank() === $rank );
 

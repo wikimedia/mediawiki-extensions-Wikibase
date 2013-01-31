@@ -49,11 +49,11 @@ class ReferencedEntitiesFinder {
 	/**
 	 * @since 0.4
 	 *
-	 * @param Claims $claims
+	 * @param Claim[]|Claims $claims
 	 *
 	 * @return EntityId[]
 	 */
-	public function findClaimLinks( Claims $claims ) {
+	public function findClaimLinks( $claims ) {
 		$snaks = array();
 
 		/**

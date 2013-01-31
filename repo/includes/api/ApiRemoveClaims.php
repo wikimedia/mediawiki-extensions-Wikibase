@@ -100,10 +100,14 @@ class ApiRemoveClaims extends Api {
 		foreach ( $entityContents as $entityContent ) {
 			$entity = $entityContent->getEntity();
 
+			$claims = new Claims( $entity->getClaims() );
+
 			$removedClaims = array_merge(
 				$removedClaims,
-				$this->removeClaimsFromEntity( $entity, $guids[$entity->getPrefixedId()] )
+				$this->removeClaimsFromList( $claims, $guids[$entity->getPrefixedId()] )
 			);
+
+			$entity->setClaims( $claims );
 
 			$this->saveChanges( $entityContent );
 		}
@@ -148,17 +152,17 @@ class ApiRemoveClaims extends Api {
 	/**
 	 * @since 0.3
 	 *
-	 * @param Entity $entity
+	 * @param Claims $claims
 	 * @param string[] $guids
 	 *
 	 * @return string[]
 	 */
-	protected function removeClaimsFromEntity( Entity &$entity, array $guids ) {
+	protected function removeClaimsFromList( Claims &$claims, array $guids ) {
 		$removedGuids = array();
 
 		foreach ( $guids as $guid ) {
-			if ( $entity->hasClaimWithGuid( $guid ) ) {
-				$entity->removeClaimWithGuid( $guid );
+			if ( $claims->hasClaimWithGuid( $guid ) ) {
+				$claims->removeClaimWithGuid( $guid );
 				$removedGuids[] = $guid;
 			}
 		}

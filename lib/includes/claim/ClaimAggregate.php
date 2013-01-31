@@ -32,12 +32,13 @@ interface ClaimAggregate {
 
 	/**
 	 * Returns the claims contained by this ClaimAggregate.
-	 * This is a read-only interface. Changes to obtained
-	 * claims will NOT be reflected in the ClaimAggregate.
+	 * This is a read-only interface. You should not modify
+	 * claims obtained through this interface without cloning
+	 * them first.
 	 *
 	 * @since 0.2
 	 *
-	 * @return Claims
+	 * @return Claim[]
 	 */
 	public function getClaims();
 
