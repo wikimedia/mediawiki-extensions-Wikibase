@@ -51,6 +51,8 @@ class SiteLink {
 	 * @throws \MWException if the $siteID isn't known.
 	 */
 	public static function newFromText( $globalSiteId, $page, $normalize = false ) {
+		wfProfileIn( __METHOD__ );
+
 		$site = Sites::singleton()->getSite( $globalSiteId );
 
 		if ( $site === null ) {
@@ -68,7 +70,10 @@ class SiteLink {
 			$page = $normalized;
 		}
 
-		return new SiteLink( $site, $page );
+		$link = new SiteLink( $site, $page );
+
+		wfProfileOut( __METHOD__ );
+		return $link;
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////

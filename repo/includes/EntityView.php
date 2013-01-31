@@ -136,6 +136,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( __METHOD__ );
 
 		$claims = '';
 		$languageTerms = '';
@@ -146,13 +147,16 @@ abstract class EntityView extends \ContextSource {
 			$languageTerms = $this->getHtmlForLanguageTerms( $entity, $lang, $editable );
 		}
 
-		return wfTemplate( 'wb-entity-content',
+		$html = wfTemplate( 'wb-entity-content',
 			$this->getHtmlForLabel( $entity, $lang, $editable ),
 			$this->getHtmlForDescription( $entity, $lang, $editable ),
 			$this->getHtmlForAliases( $entity, $lang, $editable ),
 			$languageTerms,
 			$claims
 		);
+
+		wfProfileOut( __METHOD__ );
+		return $html;
 	}
 
 	protected function makeParserOptions( ) {
@@ -236,11 +240,13 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForLabel( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( __METHOD__ );
+
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$label = $entity->getEntity()->getLabel( $info['lang']->getCode() );
 		$editUrl = $this->getEditUrl( $info['id'], $info['lang'], 'SetLabel' );
 
-		return wfTemplate( 'wb-label',
+		$html = wfTemplate( 'wb-label',
 			$info['id'],
 			wfTemplate( 'wb-property',
 				$label === false ? 'wb-value-empty' : '',
@@ -248,6 +254,9 @@ abstract class EntityView extends \ContextSource {
 				$this->getHtmlForEditSection( $entity, $lang, $editUrl )
 			)
 		);
+
+		wfProfileOut( __METHOD__ );
+		return $html;
 	}
 
 	/**
@@ -261,17 +270,22 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForDescription( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( __METHOD__ );
+
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$description = $entity->getEntity()->getDescription( $info['lang']->getCode() );
 		$editUrl = $this->getEditUrl( $info['id'], $info['lang'], 'SetDescription' );
 
-		return wfTemplate( 'wb-description',
+		$html = wfTemplate( 'wb-description',
 			wfTemplate( 'wb-property',
 				$description === false ? 'wb-value-empty' : '',
 				$description === false ? wfMessage( 'wikibase-description-empty' )->text() : htmlspecialchars( $description ),
 				$this->getHtmlForEditSection( $entity, $lang, $editUrl )
 			)
 		);
+
+		wfProfileOut( __METHOD__ );
+		return $html;
 	}
 
 	/**
@@ -285,12 +299,14 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForAliases( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( __METHOD__ );
+
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$aliases = $entity->getEntity()->getAliases( $info['lang']->getCode() );
 		$editUrl = $this->getEditUrl( $info['id'], $info['lang'], 'SetAliases' );
 
 		if ( empty( $aliases ) ) {
-			return wfTemplate( 'wb-aliases-wrapper',
+			$html = wfTemplate( 'wb-aliases-wrapper',
 				'wb-aliases-empty',
 				'wb-value-empty',
 				wfMessage( 'wikibase-aliases-empty' )->text(),
@@ -303,13 +319,16 @@ abstract class EntityView extends \ContextSource {
 			}
 			$aliasList = wfTemplate( 'wb-aliases', $aliasesHtml );
 
-			return wfTemplate( 'wb-aliases-wrapper',
+			$html = wfTemplate( 'wb-aliases-wrapper',
 				'',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->text(),
 				$aliasList . $this->getHtmlForEditSection( $entity, $lang, $editUrl )
 			);
 		}
+
+		wfProfileOut( __METHOD__ );
+		return $html;
 	}
 
 	/**
@@ -324,6 +343,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return string[] selected langcodes
 	 */
 	private function selectTerms( Entity $entity, \Language $lang = null, \User $user = null ) {
+		wfProfileIn( __METHOD__ );
 		$result = array();
 
 		// if the Babel extension is installed, add all languages of the user
@@ -343,11 +363,13 @@ abstract class EntityView extends \ContextSource {
 
 		// if there are no labels or descriptions, that's all
 		if ( ( count( $labels ) == 0 ) && ( count( $descriptions ) == 0 ) ) {
+			wfProfileOut( __METHOD__ );
 			return $result;
 		}
 
 		// if there are labels or descriptions in any of the languages of the user, then that's sufficient
 		if ( count( array_intersect( $userLanguages, array_unique( array_merge ( array_keys( $labels ), array_keys( $descriptions ) ) ) ) ) > 0 ) {
+			wfProfileOut( __METHOD__ );
 			return $result;
 		}
 
@@ -366,6 +388,7 @@ abstract class EntityView extends \ContextSource {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $result;
 	}
 
@@ -389,6 +412,9 @@ abstract class EntityView extends \ContextSource {
 		if ( count ( $languages ) === 0 ) {
 			return '';
 		}
+
+		wfProfileIn( __METHOD__ );
+
 		$html = $thead = $tbody = '';
 
 		$labels = $entity->getEntity()->getLabels();
@@ -431,7 +457,10 @@ abstract class EntityView extends \ContextSource {
 			);
 		}
 
-		return $html . wfTemplate( 'wb-terms-table', $tbody );
+		$html = $html . wfTemplate( 'wb-terms-table', $tbody );
+
+		wfProfileOut( __METHOD__ );
+		return $html;
 	}
 
 	/**
@@ -447,6 +476,8 @@ abstract class EntityView extends \ContextSource {
 	 */
 	public function getHtmlForClaims( EntityContent $entity, Language $lang = null, $editable = true ) {
 		global $wgLang;
+
+		wfProfileIn( __METHOD__ );
 
 		$languageCode = isset( $lang ) ? $lang->getCode() : $wgLang->getCode();
 
@@ -529,10 +560,13 @@ abstract class EntityView extends \ContextSource {
 
 		}
 
-		return $html . wfTemplate( 'wb-claims-section',
+		$html = $html . wfTemplate( 'wb-claims-section',
 			$claimsHtml,
 			$this->getHtmlForEditSection( $entity, $lang, '', 'div', 'add' ) // TODO: add link to SpecialPage
 		);
+
+		wfProfileOut( __METHOD__ );
+		return $html;
 	}
 
 	/**
@@ -553,6 +587,8 @@ abstract class EntityView extends \ContextSource {
 	public function getHtmlForEditSection(
 		EntityContent $entity, Language $lang = null, $url = '', $tag = 'span', $action = 'edit', $enabled = true
 	) {
+		wfProfileIn( __METHOD__ );
+
 		$buttonLabel = wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )->text();
 
 		$button = ( $enabled ) ?
@@ -564,12 +600,14 @@ abstract class EntityView extends \ContextSource {
 				$buttonLabel
 			);
 
-		return wfTemplate( 'wb-editsection',
+		$html = wfTemplate( 'wb-editsection',
 			$tag,
 			wfTemplate( 'wb-toolbar',
 				wfTemplate( 'wb-toolbar-group', $button )
 			)
 		);
+
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -737,6 +775,8 @@ abstract class EntityView extends \ContextSource {
 	 * @return array
 	 */
 	protected static function getBasicEntityInfo( EntityLookup $entityLoader, array $entityIds, $langCode ) {
+		wfProfileIn( __METHOD__ );
+
 		$entities = $entityLoader->getEntities( $entityIds );
 		$entityInfo = array();
 
@@ -755,6 +795,8 @@ abstract class EntityView extends \ContextSource {
 				$entityInfo[ $prefixedId ]['datatype'] = $entity->getDataType()->getId();
 			}
 		}
+
+		wfProfileOut( __METHOD__ );
 		return $entityInfo;
 	}
 

@@ -119,12 +119,15 @@ class Item extends Entity {
 	 * @return array a list of SiteLink objects
 	 */
 	public function getSiteLinks() {
+		wfProfileIn( __METHOD__ );
+
 		$links = array();
 
 		foreach ( $this->data['links'] as $globalSiteId => $title ) {
 			$links[] = SiteLink::newFromText( $globalSiteId, $title );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $links;
 	}
 

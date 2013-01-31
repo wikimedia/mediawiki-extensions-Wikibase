@@ -197,9 +197,12 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @return array of array
 	 */
 	public function getConflictsForItem( Item $item, \DatabaseBase $db = null ) {
+		wfProfileIn( __METHOD__ );
+
 		$links = $item->getSiteLinks();
 
 		if ( $links === array() ) {
+			wfProfileOut( __METHOD__ );
 			return array();
 		}
 
@@ -229,6 +232,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		//TODO: $anyOfTheLinks might get very large and hit some size limit imposed by the database.
 		//      We could chop it up of we know that size limit. For MySQL, it's select @@max_allowed_packet.
 
+		wfProfileIn( __METHOD__ . '#select' );
 		$conflictingLinks = $dbr->select(
 			$this->table,
 			array(
@@ -239,6 +243,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			"($anyOfTheLinks) AND ips_item_id != " . intval( $item->getId()->getNumericId() ),
 			__METHOD__
 		);
+		wfProfileOut( __METHOD__ . '#select' );
 
 		$conflicts = array();
 
@@ -254,6 +259,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			$this->releaseConnection( $dbr );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $conflicts;
 	}
 
