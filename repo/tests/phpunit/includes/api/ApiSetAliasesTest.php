@@ -123,6 +123,36 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 		$this->assertArrayEquals( $expected, $actual );
 	}
 
+	public function testSetAliases_length( ) {
+		$handle = 'Oslo';
+		$id = $this->getItemId( $handle );
+		$langCode = 'en';
+		$op = 'add';
+		$value = ApiLangAttributeBase::makeOverlyLongString();
+		$exception = 'UsageException';
+
+		// update the item ----------------------------------------------------------------
+		$req = array(
+			'token' => $this->getItemToken(),
+			'id' => $id,
+			'action' => 'wbsetaliases',
+			'language' => $langCode,
+			$op => $value
+		);
+
+		try {
+			list( $apiResponse,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+		} catch ( \Exception $e ) {
+			if ( $exception !== null && ! $e instanceof \PHPUnit_Framework_AssertionFailedError ) {
+				$this->assertTrue( is_a( $e, $exception ), "Not the expected exception" );
+				return;
+			}
+			else {
+				throw $e;
+			}
+		}
+	}
+
 	public function testSetAliases_invalidId() {
 		$badId = 'xyz123+++';
 
