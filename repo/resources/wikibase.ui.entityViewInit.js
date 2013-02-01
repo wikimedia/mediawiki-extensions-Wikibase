@@ -140,7 +140,7 @@
 		if( !mw.config.get( 'wbIsEditView' ) ) {
 			// no need to implement a 'disableEntityPageActions' since hiding all the toolbars directly like this is
 			// not really worse than hacking the Toolbar prototype to achieve this:
-			$( '.wb-ui-propertyedittool .wb-ui-toolbar' ).hide();
+			$( '.wb-ui-toolbar' ).hide();
 			$( 'body' ).addClass( 'wb-editing-disabled' );
 			// make it even harder to edit stuff, e.g. if someone is trying to be smart, using
 			// firebug to show hidden nodes again to click on them:
