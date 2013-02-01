@@ -238,6 +238,7 @@ $messages['eo'] = array(
 /** Spanish (español)
  * @author Armando-Martin
  * @author Dalton2
+ * @author Hazard-SJ
  */
 $messages['es'] = array(
 	'wikibase-client-desc' => 'Cliente para la extensión Wikibase',
@@ -250,6 +251,7 @@ $messages['es'] = array(
 	'wikibase-comment-sitelink-add' => 'Se ha añadido un enlace de idioma: $1',
 	'wikibase-comment-sitelink-change' => 'Se ha cambiado el enlace de idioma de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Se ha eliminado el enlace de idioma: $1',
+	'wikibase-comment-multi' => '$1 cambios',
 	'wikibase-editlinks' => 'Editar los enlaces',
 	'wikibase-editlinkstitle' => 'Editar enlaces de interlengua',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
@@ -397,6 +399,7 @@ $messages['hsb'] = array(
 	'wikibase-comment-sitelink-add' => 'Mjezyrěčny wotkaz přidaty: $1',
 	'wikibase-comment-sitelink-change' => 'Mjezyrěčny wotkaz změnjeny wot $1 do $2',
 	'wikibase-comment-sitelink-remove' => 'Mjezyrěčny wotkaz wotstronjeny: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|změna|změnje|změny|změnow}}',
 	'wikibase-editlinks' => 'Wotkazy wobdźěłać',
 	'wikibase-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
