@@ -140,10 +140,12 @@ abstract class EntityView extends \ContextSource {
 
 		$claims = '';
 		$languageTerms = '';
+
+		if ( $entity->getEntity()->getType() === 'item' ) {
+			$claims = $this->getHtmlForClaims( $entity, $lang, $editable );
+		}
+
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) { // still experimental
-			if ( $entity->getEntity()->getType() === 'item' ) {
-				$claims = $this->getHtmlForClaims( $entity, $lang, $editable );
-			}
 			$languageTerms = $this->getHtmlForLanguageTerms( $entity, $lang, $editable );
 		}
 
