@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//2Dw\u003d",
+        "filename": "lib/includes/changes/ChangeRow.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-01T14:47:34Z",
+      "side": 1,
+      "message": "json_encode will try to turn anything int a json-like string, also something that isn\u0027t an array and then this test will fail. Not sure that this is a real problem in this case as serializeInfo will enforce an array as argument during encoding.",
+      "revId": "a39586a8dc2af03dbaca69d62358078ffe27b16c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
