@@ -60,13 +60,14 @@ namespace Wikibase\Test;
  */
 class ApiLabelTest extends ApiLangAttributeBase {
 
-	public function paramProvider() {
+	public static function paramProvider() {
 		return array(
 			// $handle, $langCode, $value, $exception
 			array( 'Oslo', 'en', 'Oslo', null ),
 			//array( 'Oslo', 'en', 'Oslo', 'UsageException' ),
 			//array( 'Oslo', 'en', 'Bergen', null ),
 			array( 'Oslo', 'en', '', null ),
+			array( 'Oslo', 'en', self::makeOverlyLongString( 'Oslo' ), 'UsageException' ),
 		);
 	}
 

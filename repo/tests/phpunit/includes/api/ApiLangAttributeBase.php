@@ -60,6 +60,17 @@ namespace Wikibase\Test;
  */
 abstract class ApiLangAttributeBase extends ApiModifyItemBase {
 
+	public static function makeOverlyLongString( $text = "Test", $length = null ) {
+		if ( $length === null ) {
+			$limits = \Wikibase\Settings::get( 'multilang-limits' );
+			$length = $limits['length'];
+		}
+
+		$rep = $length / strlen( $text ) + 1;
+		$s = str_repeat( $text, $rep );
+
+		return $s;
+	}
 
 	/**
 	 * @dataProvider paramProvider
@@ -84,7 +95,7 @@ abstract class ApiLangAttributeBase extends ApiModifyItemBase {
 			}
 		}
 		catch ( \Exception $e ) {
-			if ( $exception !== null ) {
+			if ( $exception !== null && ! $e instanceof \PHPUnit_Framework_AssertionFailedError ) {
 				$this->assertTrue( is_a( $e, $exception ), "Not the expected exception" );
 				return;
 			}
