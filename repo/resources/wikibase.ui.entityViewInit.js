@@ -133,7 +133,7 @@
 			}
 		}
 
-		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
+		if ( mw.config.get( 'wbUserIsBlocked' ) || !mw.config.get( 'wbUserCanEdit' ) ) {
 			$( wb ).triggerHandler( 'blockEntityPageActions' );
 		}
 
