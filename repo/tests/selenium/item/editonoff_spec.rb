@@ -214,7 +214,7 @@ describe "Check functionality of disabling/enabling edit actions" do
     end
   end
 
-  context "disabling/enabling of statement edit actions while in editmode", :experimental => true do
+  context "disabling/enabling of statement edit actions while in editmode" do
     it "should check if statement edit actions are disbled/enabled correctly when editing" do
       visit_page(CreateItemPage) do |page|
         page.create_new_item(generate_random_string(10), generate_random_string(20))
