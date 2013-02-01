@@ -67,6 +67,7 @@ class ApiDescriptionTest extends ApiLangAttributeBase {
 			//array( 'Oslo', 'en', 'Capitol of Norway', 'UsageException' ),
 			//array( 'Oslo', 'en', 'Not capitol of Norway', null ),
 			array( 'Oslo', 'en', '', null ),
+			array( 'Oslo', 'en', self::makeOverlyLongString( 'Oslo' ), 'UsageException' ),
 		);
 	}
 

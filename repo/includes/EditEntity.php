@@ -683,29 +683,31 @@ class EditEntity {
 			return $this->status;
 		}
 
+		$itemDiff = null;
+
+		if ( $this->getBaseContent() instanceof EntityContent ) {
+			//XXX: havn't we calculated this diff already?
+			$itemDiff = $entity->getDiff( $this->getBaseContent()->getEntity() );
+		}
+		//XXX: ...else diff against an empty item?...
+
+		$multilangViolationDetector = new MultiLangConstraintDetector();
+		$multilangViolationDetector->addConstraintChecks(
+			$entity,
+			$this->status,
+			$itemDiff
+		);
+
+		if ( !$this->status->isOk() ) {
+			return $this->status;
+		}
+
 		$dbw = wfGetDB( DB_MASTER );
 
 		// Do not run this when running test using MySQL as self joins fail on temporary tables.
 		if ( !defined( 'MW_PHPUNIT_TEST' )
 			|| !( StoreFactory::getStore() instanceof \Wikibase\SqlStore )
 			|| $dbw->getType() !== 'mysql' ) {
-
-			$itemDiff = null;
-
-			if ( $this->getBaseContent() instanceof EntityContent ) {
-				$itemDiff = $entity->getDiff( $this->getBaseContent()->getEntity() );
-			}
-
-			$multilangViolationDetector = new MultiLangConstraintDetector();
-			$multilangViolationDetector->addConstraintChecks(
-				$entity,
-				$this->status,
-				$itemDiff
-			);
-
-			if ( !$this->status->isOk() ) {
-				return $this->status;
-			}
 
 			// The below looks for all conflicts and then removes the ones not
 			// caused by the edit. This can be improved by only looking for
