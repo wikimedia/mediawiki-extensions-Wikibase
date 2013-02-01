@@ -610,6 +610,7 @@ abstract class EntityView extends \ContextSource {
 		);
 
 		wfProfileOut( __METHOD__ );
+		return $html;
 	}
 
 	/**
