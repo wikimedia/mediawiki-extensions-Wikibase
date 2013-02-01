@@ -244,6 +244,7 @@ $wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
 $wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
 $wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
 $wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
+$wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
 
 
 // Hooks
