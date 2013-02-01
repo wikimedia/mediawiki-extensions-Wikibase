@@ -86,7 +86,7 @@ describe "Check functionality of ip notifications" do
         page.cancelSitelinkLink
       end
     end
-    it "should check notification on editing statements", :experimental => true do
+    it "should check notification on editing statements" do
       visit_page(RepoLoginPage) do |page|
         page.logout_user
       end

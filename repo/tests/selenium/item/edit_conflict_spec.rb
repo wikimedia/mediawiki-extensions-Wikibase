@@ -138,7 +138,7 @@ describe "Check edit-conflicts" do
     end
   end
 
-  context "check behaviour on edit conflicts (claims)", :experimental => true do
+  context "check behaviour on edit conflicts (claims)" do
     prop_label = generate_random_string(10)
     prop_description = generate_random_string(20)
     prop_datatype = "Commons media file"
