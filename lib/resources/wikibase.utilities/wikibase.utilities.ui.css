@@ -8,6 +8,9 @@
  * @license GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
+
+/****** TOGGLE: wb.utilities.ui.buildToggle ******/
+
 .wb-toggle {
 	display: block;
 	margin-top: .5em;
@@ -44,3 +47,19 @@ body.rtl .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
 	     -o-transform: rotate(90deg);
 	        transform: rotate(90deg);
 }
+
+/****** /TOGGLE ******/
+
+
+/****** PENDING-COUNTER: wb.utilities.ui.buildPendingCounter ******/
+
+.wb-ui-pendingcounter {
+	white-space: nowrap;
+}
+.wb-ui-pendingcounter span { /* the +1 part in the counter */
+	margin-left: .25em;
+	color: #57a7b9;
+	font-weight: bold;
+}
+
+/****** /PENDING-COUNTER ******/
