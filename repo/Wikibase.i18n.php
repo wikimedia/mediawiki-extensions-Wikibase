@@ -54,10 +54,11 @@ $messages['en'] = array(
 	'wikibase-undo-badpage' => 'Bad revision: Revision $2 does not belong to [[$1]].',
 	'wikibase-undo-firstrev' => "Cannot undo the page's creation",
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
-	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entry|entries}})',
-	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entry|entries}})',
-	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-ui-pendingquantitycounter-nonpending' => '$2 $1',
+	'wikibase-ui-pendingquantitycounter-pending' => '$2$3 $1',
+	'wikibase-ui-pendingquantitycounter-pending-pendingsubpart' => '+$1',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|One value|$1 values}} not saved yet',
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|entry|entries}}',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
 	'wikibase-disambiguation-title' => 'Disambiguation for "$1"',
 	'wb-special-createitem-new-item-notification' => 'New item $1 created and redirected to its page. Back to $2.',
@@ -391,18 +392,19 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 * $2 is the revision id number.',
 	'wikibase-undo-firstrev' => "Message shown when the user attempts to undo the very first revision of a page, that is, the page's creation.",
 	'wikibase-propertyedittool-full' => 'A list of elements the user is assumed to enter is now complete.',
-	'wikibase-propertyedittool-counter' => 'Parameters:
-* $1 is the sum of elements in the list currently.  The entries are the list of Wikipedia pages linked to the item.',
-	'wikibase-propertyedittool-counter-pending' => 'Parameters:
-* $1 is the sum of elements in the list plus the ones pending (still in edit mode and not saved).
-* $2 is the number of elements stored in the list (not pending).
-* $3 is the message {{msg-mw|wikibase-propertyedittool-counter-pending-pendingsubpart}} with some additional markup around, expressing how many entries in the list are pending right now.',
-	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '{{optional}}
-The number of pending elements within the list of site links and a leading "+".
-
-This will be inserted into parameter $3 of {{msg-mw|wikibase-propertyedittool-counter-pending}}.',
+	'wikibase-ui-pendingquantitycounter-nonpending' => "Message for a generic counter which will display a quantity and of what nature that quantity is. Parameters:
+* $1 is the label of the counter's subject. E.g. 'sources' in an item's statement's references counter displayed in the heading above the references.
+* $2 is the number the quantity the counter is currently displaying. E.g. on an item page, the entries in the list of Wikipedia pages linked to the item.",
+	'wikibase-ui-pendingquantitycounter-pending' => "Message for a generic counter which will display a fixed quantity as well as a non-fixed, pending quantity and of what nature those quantities are. Parameters:
+* $1 is the label of the counter's subject. E.g. 'sources' in an item's statement's references counter displayed in the heading above the references.
+* $2 is the fixed quantity of the counter. The fixed quantity can for example be the number of site-links in an item's site-links table which are already saved and permanently displayed in the table, ready to be edited by the user.
+* $3 is the pending quantity of the counter with some additional markup around, expressing and explaining the pending nature of the number. Basically, this is the content of {{msg-mw|wikibase-ui-pendingquantitycounter-pending-pendingsubpart}}. The pending quantity can for example be the number of site-links in an item's site-links table which are not yet saved.",
+	'wikibase-ui-pendingquantitycounter-pending-pendingsubpart' => "{{optional}}
+The pending quantity of a counter and a leading '+'. The pending quantity of a counter can for example be the number of site-links in an item's site-links table which are not yet saved.
+This will be inserted into parameter $3 of {{msg-mw|wikibase-ui-pendingquantitycounter-pending}}.",
 	'wikibase-propertyedittool-counter-pending-tooltip' => 'Parameters:
 * $1 is the number of elements not saved yet.',
+	'wikibase-propertyedittool-counter-entrieslabel' => "Used in the counter on top of the site-links table. The counter is giving information about how many site-links exist in the following table. This is just the label for the counter's subject, the site-links. The number of site-links is not part of the message but they are given as parameter $1 for plural usage in the label.",
 	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'wb-special-createitem-new-item-notification' => 'Message displayed when a new item was created on [[Special:CreateItem]] and the user has been redirected to the new items page. $1 is the new items id, $2 is a link back to the special page with "special-createitem" as label',

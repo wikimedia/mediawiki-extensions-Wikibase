@@ -22,16 +22,6 @@
 	background-position: left center;
 }
 
-/* counter displaying number of a PropertyEditTool's EditableValues in th UI */
-.wb-ui-propertyedittool-counter {
-	white-space: nowrap;
-}
-.wb-ui-propertyedittool-counter-pending {
-	margin-left: .25em;
-	color: #57a7b9;
-	font-weight: bold;
-}
-
 /* wait message displayed while saving or removing and editable value */
 .wb-ui-propertyedittool-editablevalue-waitmsg {
 	margin: 0.3em;
