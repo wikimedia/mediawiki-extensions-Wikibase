@@ -69,7 +69,8 @@ $messages['en'] = array(
 	'wikibase-datatype-label' => 'Data type:',
 	'wikibase-claimview-snak-tooltip' => 'Enter a value corresponding to the property named "$1". If the property has no designated value or the actual value is not known, you may choose an alternative to specifying a custom value by clicking the icon next to the value input box.',
 	'wikibase-claimview-snak-new-tooltip' => 'After specifying a property you can enter a corresponding value. If the property has no designated value or the actual value is not known, you may choose an alternative to specifying a custom value by clicking the icon next to the value input box.',
-	'wikibase-statementview-referencesheading' => '$1 {{PLURAL:$1|source|sources}}',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|source|sources}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|One source|$1 sources}} not saved yet',
 	'wikibase-snakview-property-input-placeholder' => 'property',
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak of type "$1". Handling for this kind of Snak is not yet supported.',
 	'wikibase-snakview-choosesnaktype' => 'Choose a value type.',
@@ -400,6 +401,9 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-ui-pendingquantityc
 	'wikibase-claimview-snak-tooltip' => 'Tooltip message displayed when hovering/clicking the help icon next to the save, cancel and remove links of a claim (see [[d:Wikidata:Glossary#Claim]]). $1 is the property name the user is about to edit a value of or add another value to.',
 	'wikibase-claimview-snak-new-tooltip' => 'Tooltip message displayed when hovering/clicking the help icon next to the save, cancel and remove links of a claim (see [[d:Wikidata/Glossary]]) when about to add a completely new claim which includes specifying the property.',
 	'wikibase-statementview-referencesheading' => 'Heading for the references associated with a statement (see [[d:Wikidata/Glossary]]) giving information about how many references exist for that statement. $1 is the number of references.',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => 'Used in the Heading for the references associated with a statement (see [[d:Wikidata/Glossary]]). The heading is giving information about how many references exist for that statement. This is just the label for the counter\'s subject, the references, the number of references is not part of the message. $1 is the number of references for plural usage.',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'Tooltip displayed in the references headin when there are references (see [[d:Wikidata/Glossary]]) in edit mode which are not saved yet. Parameters:
+* $1 is the number of elements not saved yet.',
 	'wikibase-snakview-property-input-placeholder' => 'Placeholder message that is initially displayed within the property input element when adding a new snak. See also [[m:Wikidata/Glossary]].
 {{Identical|Property}}',
 	'wikibase-snakview-choosesnaktype' => 'Message prompting the user to select a Snak type (see [[d:Wikidata/Glossary]]) when adding or editing a Snak. Since a default Snak type should always be selected when adding a Snak, the message is visible on rare occasions only. Since "Snak" oder "Snak type" does not express any meaning for the user, these phrases should be avoided in the message.',
