@@ -439,9 +439,11 @@ return call_user_func( function() {
 				'jquery.wikibase.claimview',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.referenceview',
+				'wikibase.utilities',
 			),
 			'messages' => array(
-				'wikibase-statementview-referencesheading',
+				'wikibase-statementview-referencesheading-pendingcountersubject',
+				'wikibase-statementview-referencesheading-pendingcountertooltip',
 				'wikibase-addreference'
 			)
 		),
