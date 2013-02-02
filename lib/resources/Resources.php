@@ -135,6 +135,11 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase'
+			),
+			'messages' => array(
+				'wikibase-ui-pendingquantitycounter-nonpending',
+				'wikibase-ui-pendingquantitycounter-pending',
+				'wikibase-ui-pendingquantitycounter-pending-pendingsubpart'
 			)
 		),
 
@@ -287,10 +292,8 @@ return call_user_func( function() {
 				'wikibase-sitelinks-link-columnheading',
 				'wikibase-remove',
 				'wikibase-propertyedittool-full',
-				'wikibase-propertyedittool-counter',
-				'wikibase-propertyedittool-counter-pending',
-				'wikibase-propertyedittool-counter-pending-pendingsubpart',
 				'wikibase-propertyedittool-counter-pending-tooltip',
+				'wikibase-propertyedittool-counter-entrieslabel',
 				'wikibase-sitelinksedittool-full',
 				'wikibase-error-save-generic',
 				'wikibase-error-remove-generic',
@@ -308,7 +311,8 @@ return call_user_func( function() {
 				'wikibase-error-ui-session-failure',
 				'wikibase-error-ui-edit-conflict',
 				'wikibase-restrictionedit-tooltip-message',
-				'wikibase-blockeduser-tooltip-message'
+				'wikibase-blockeduser-tooltip-message',
+				'parentheses',
 			)
 		),
 
