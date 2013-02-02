@@ -62,6 +62,10 @@ $messages['ast'] = array(
 	'wikibase-entity-item' => 'elementu',
 	'wikibase-entity-property' => 'propiedá',
 	'wikibase-entity-query' => 'consulta',
+	'wikibase-sitelinks' => 'Llista de páxines enllazaes a esti elementu',
+	'wikibase-sitelinks-sitename-columnheading' => 'Llingua',
+	'wikibase-sitelinks-siteid-columnheading' => 'Códigu',
+	'wikibase-sitelinks-link-columnheading' => 'Artículu enllazáu',
 	'datatypes-type-wikibase-item' => 'Elementu',
 	'datatypes-type-commonsMedia' => 'Ficheru multimedia de Commons',
 );
