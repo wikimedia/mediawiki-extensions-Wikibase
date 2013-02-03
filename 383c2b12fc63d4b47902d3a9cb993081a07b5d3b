@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//0oI\u003d",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-03T22:06:13Z",
+      "side": 1,
+      "message": "Could post it in the header",
+      "revId": "383c2b12fc63d4b47902d3a9cb993081a07b5d3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
