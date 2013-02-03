@@ -133,7 +133,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function providerNewForEntityContent() {
+	public static function providerNewForEntityContent() {
 		return array(
 			array( ItemContent::newEmpty() ),
 			array( \Wikibase\PropertyContent::newEmpty() )
@@ -141,7 +141,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 	}
 
 	// Should use proper abstraction and not create items from arrays
-	public function providerGetHtml() {
+	public static function providerGetHtml() {
 		return array(
 			array(
 				false,

@@ -37,7 +37,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function providerOnFormat() {
+	public static function providerOnFormat() {
 		return array( //@todo: test other types of entities too!
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
@@ -114,7 +114,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
-	public function providerPickValuesFromParams() {
+	public static function providerPickValuesFromParams() {
 		return array(
 			array(
 				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
@@ -152,7 +152,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
-	public function providerPickKeysFromParams() {
+	public static function providerPickKeysFromParams() {
 		return array(
 			array(
 				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
@@ -190,7 +190,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
-	public function providerFormatAutoComment() {
+	public static function providerFormatAutoComment() {
 		return array(
 			array( '', array(), '' ),
 			array( 'msgkey', array(), 'msgkey' ),
@@ -208,7 +208,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
-	public function providerFormatAutoSummary() {
+	public static function providerFormatAutoSummary() {
 		$lang = \Language::factory( 'en' );
 		return array(
 			array( array(), $lang, array( 0, '', $lang ) ),
@@ -226,7 +226,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $result, 'Not the expected result' );
 	}
 
-	public function providerFormatTotalSummary() {
+	public static function providerFormatTotalSummary() {
 		$lang = \Language::factory( 'en' );
 		return array(
 			array( '', '', $lang, '' ),

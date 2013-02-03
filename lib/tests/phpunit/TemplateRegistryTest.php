@@ -34,7 +34,7 @@ class TemplateRegistryTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function providerAddTemplate() {
+	public static function providerAddTemplate() {
 		return array(
 			array( '<div>$1</div>' )
 		);
@@ -59,7 +59,7 @@ class TemplateRegistryTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function providerAddTemplates() {
+	public static function providerAddTemplates() {
 		return array(
 			array(
 				array( 'tmpl2' => '<div>$1</div>' ),

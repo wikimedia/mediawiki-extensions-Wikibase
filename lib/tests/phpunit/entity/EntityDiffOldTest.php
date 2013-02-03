@@ -38,7 +38,7 @@ use Wikibase\EntityDiff;
 
 abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 
-	private function newEntity ( $entityType ) {
+	private static function newEntity ( $entityType ) {
 		switch ( $entityType ) {
 			case \Wikibase\Item::ENTITY_TYPE:
 				$entity = \Wikibase\Item::newEmpty();
@@ -56,11 +56,11 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		return $entity;
 	}
 
-	public function generateApplyData( $entityType ) {
+	public static function generateApplyData( $entityType ) {
 		$tests = array();
 
 		// #0: add label
-		$a = $this->newEntity( $entityType );
+		$a = self::newEntity( $entityType );
 		$a->setLabel( 'en', 'Test' );
 
 		$b = $a->copy();
@@ -69,7 +69,7 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		$tests[] = array( $a, $b );
 
 		// #1: remove label
-		$a = $this->newEntity( $entityType );
+		$a = self::newEntity( $entityType );
 		$a->setLabel( 'en', 'Test' );
 		$a->setLabel( 'de', 'Test' );
 
@@ -79,14 +79,14 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		$tests[] = array( $a, $b );
 
 		// #2: change label
-		$a = $this->newEntity( $entityType );
+		$a = self::newEntity( $entityType );
 		$a->setLabel( 'en', 'Test' );
 
 		$b = $a->copy();
 		$b->setLabel( 'en', 'Test!!!' );
 
 		// #3: add description ------------------------------
-		$a = $this->newEntity( $entityType );
+		$a = self::newEntity( $entityType );
 		$a->setDescription( 'en', 'Test' );
 
 		$b = $a->copy();
@@ -95,7 +95,7 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		$tests[] = array( $a, $b );
 
 		// #4: remove description
-		$a = $this->newEntity( $entityType );
+		$a = self::newEntity( $entityType );
 		$a->setDescription( 'en', 'Test' );
 		$a->setDescription( 'de', 'Test' );
 
@@ -105,7 +105,7 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		$tests[] = array( $a, $b );
 
 		// #5: change description
-		$a = $this->newEntity( $entityType );
+		$a = self::newEntity( $entityType );
 		$a->setDescription( 'en', 'Test' );
 
 		$b = $a->copy();
@@ -114,7 +114,7 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		$tests[] = array( $a, $b );
 
 		// #6: add alias ------------------------------
-		$a = $this->newEntity( $entityType );
+		$a = self::newEntity( $entityType );
 		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
 
 		$b = $a->copy();
@@ -123,7 +123,7 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		$tests[] = array( $a, $b );
 
 		// #7: add alias language
-		$a = $this->newEntity( $entityType );
+		$a = self::newEntity( $entityType );
 		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
 
 		$b = $a->copy();
@@ -132,7 +132,7 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		$tests[] = array( $a, $b );
 
 		// #8: remove alias
-		$a = $this->newEntity( $entityType );
+		$a = self::newEntity( $entityType );
 		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
 
 		$b = $a->copy();
@@ -141,7 +141,7 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		$tests[] = array( $a, $b );
 
 		// #9: remove alias language
-		$a = $this->newEntity( $entityType );
+		$a = self::newEntity( $entityType );
 		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
 
 		$b = $a->copy();
@@ -163,11 +163,11 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
 	}
 
-	public function provideConflictDetection() {
+	public static function provideConflictDetection() {
 		$cases = array();
 
 		// #0: adding a label where there was none before
-		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$base = self::newEntity( \Wikibase\Item::ENTITY_TYPE );
 		$current = $base;
 
 		$new = $base->copy();
@@ -181,7 +181,7 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		);
 
 		// #1: adding an alias where there was none before
-		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$base = self::newEntity( \Wikibase\Item::ENTITY_TYPE );
 		$current = $base;
 
 		$new = $base->copy();
@@ -195,7 +195,7 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		);
 
 		// #2: adding an alias where there already was one before
-		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$base = self::newEntity( \Wikibase\Item::ENTITY_TYPE );
 		$base->addAliases( 'en', array( 'Foo' ) );
 		$current = $base;
 
@@ -210,7 +210,7 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 		);
 
 		// #3: adding an alias where there already was one in another language
-		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$base = self::newEntity( \Wikibase\Item::ENTITY_TYPE );
 		$base->addAliases( 'en', array( 'Foo' ) );
 		$current = $base;
 
