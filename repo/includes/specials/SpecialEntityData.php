@@ -63,14 +63,29 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 * @return boolean
 	 */
 	public function execute( $subPage ) {
-		$id = $subPage;
+		$revision = 0;
+		$format = 'json';
 
-		if ( $id === null || $id === '' ) {
-			$id = $this->getRequest()->getText( 'id', '' );
+		// get format from $subPage or request param
+		if ( preg_match( '#\.([-./\w]+)$#', $subPage, $m ) ) {
+			$subPage = preg_replace( '#\.([-./\w]+)$#', '', $subPage );
+			$format = $m[1];
 		}
 
-		// TODO: load specified revision; wait for getTitleFromId to be merged.
-		// $revision = $this->getRequest()->getText( 'revid', null );
+		$format = $this->getRequest()->getText( 'format', $format );
+
+		// get revision from $subPage or request param
+		if ( preg_match( '#:(\w+)$#', $subPage, $m ) ) {
+			$subPage = preg_replace( '#:(\w+)$#', '', $subPage );
+			$revision = (int)$m[1];
+		}
+
+		$revision = $this->getRequest()->getInt( 'oldid', $revision );
+		$revision = $this->getRequest()->getInt( 'revision', $revision );
+
+		// get entity from remaining $subPage or request param
+		$id = $subPage;
+		$id = $this->getRequest()->getText( 'id', $id );
 
 		if ( $id === null || $id === '' ) {
 			$this->showForm();
@@ -79,7 +94,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		//TODO: handle IfModifiedSince!
 
-		$format = $this->getRequest()->getText( 'format', 'json' );
+
 		$apiFormat = self::getApiFormatName( $format );
 		$printer = $apiFormat === null ? null : $this->createApiPrinter( $apiFormat );
 
@@ -87,14 +102,45 @@ class SpecialEntityData extends SpecialWikibasePage {
 			throw new \HttpError( 415, wfMessage( 'wikibase-entitydata-unsupported-format' )->params( $format ) );
 		}
 
-		$eid = EntityId::newFromPrefixedId( $id ); //XXX: newFromPrefixedId should accept upper-case prefix
+		$eid = EntityId::newFromPrefixedId( strtolower( $id ) ); //XXX: newFromPrefixedId should accept upper-case prefix
 		$entity = $eid ? EntityContentFactory::singleton()->getFromId( $eid ) : null;
 
 		if ( !$entity ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": entity not found: $id"  );
 			throw new \HttpError( 404, wfMessage( 'wikibase-entitydata-not-found' )->params( $id ) );
 		}
 
-		$this->showData( $entity, $printer );
+		$page = $entity->getWikiPage();
+
+		if ( $revision > 0 ) {
+			// get the desired revision
+			$rev = Revision::newFromId( $revision );
+
+			if ( $rev === null ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision not found: $revision"  );
+				$entity = null;
+			} elseif ( $rev->getPage() !== $page->getId() ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision $revision does not belong to page "
+					. $page->getTitle()->getPrefixedDBkey() );
+				$entity = null;
+			} elseif ( !EntityContentFactory::singleton()->isEntityContentModel( $rev->getContentModel() ) ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision has bad model: "
+					. $rev->getContentModel() );
+				$entity = null;
+			} else {
+				$entity = $rev->getContent();
+			}
+
+			if ( !$entity ) {
+				//TODO: more specific error message
+				$msg = wfMessage( 'wikibase-entitydata-bad-revision' );
+				throw new \HttpError( 404, $msg->params( $eid->getPrefixedId(), $revision ) );
+			}
+		} else {
+			$rev = $page->getRevision();
+		}
+
+		$this->showData( $entity, $printer, $rev );
 	}
 
 	/**
@@ -194,25 +240,27 @@ class SpecialEntityData extends SpecialWikibasePage {
 		wfProfileIn( __METHOD__ );
 
 		$format = strtolower( $printer->getFormat() ); //XXX: hack!
-		$useKeys = $printer->getResult()->getIsRawMode();
 
 		$entityKey = 'entity'; //XXX: perhaps better: $entity->getEntity()->getType();
 		$basePath = array();
 
-		// serialize entity
 		$res = $this->getApiMain( $format )->getResult();
 
-		if ( !$useKeys ) {
+		// Make sure result is empty. May still be full if this
+		// function gets called multiple times during testing, etc.
+		$res->reset();
+
+		if ( $printer->getNeedsRawData() ) {
 			$res->setRawMode();
 		}
 
 		if ( $printer instanceof ApiFormatXml ) {
-			// hack to force the top level element's name
+			// XXX: hack to force the top level element's name
 			$printer->setRootElement( $entityKey );
 		}
 
 		$opt = new \Wikibase\EntitySerializationOptions();
-		$opt->setUseKeys( $useKeys );
+		$opt->setIndexTags( $res->getIsRawMode() ); //FIXME: $res->rawMode doesn't seem to be set to what we want.
 		$opt->setProps( self::$fieldsToShow );
 
 		$serializer = \Wikibase\EntitySerializer::newForEntity( $entityContent->getEntity(), $opt );
@@ -223,13 +271,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 		foreach ( $arr as $key => $value ) {
 			$res->addValue( $basePath, $key, $value );
 		}
-
-		// inject revision info
-		$page = $entityContent->getWikiPage();
-		$revision = $page->getRevision(); //FIXME: this is WRONG if a specific revision was requested! remember to change this!
-
-		$res->addValue( $basePath , 'revision', intval( $revision->getId() ) );
-		$res->addValue( $basePath , 'modified', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
 
 		wfProfileOut( __METHOD__ );
 		return $res;
@@ -244,21 +285,29 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 *
 	 * @param Wikibase\EntityContent $entity the entity to output.
 	 * @param ApiFormatBase $printer the printer to use to generate the output
+	 * @param Revision $revision the entity's revision (optional)
 	 */
-	public function output( EntityContent $entity, ApiFormatBase $printer  ) {
+	public function output( EntityContent $entity, ApiFormatBase $printer, Revision $revision ) {
 		// NOTE: The way the ApiResult is provided to $printer is somewhat
 		//       counter-intuitive. Basically, the relevant ApiResult object
 		//       is owned by the ApiMain module provided by getApiMain().
 
 		// Pushes $entity into the ApiResult held by the ApiMain module
-		$this->generateApiResult( $entity, $printer );
+		$res = $this->generateApiResult( $entity, $printer );
+
+
+		//XXX: really inject meta-info? where else should we put it?
+		$basePath = array();
+		$res->addValue( $basePath , '_revision_', intval( $revision->getId() ) );
+		$res->addValue( $basePath , '_modified_', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
+
 
 		$this->getOutput()->disable(); // don't generate HTML
 
 		$printer->profileIn();
 		$printer->initPrinter( false );
 
-		// Outputs the ApiResult held by the ApiMain module
+		// Outputs the ApiResult held by the ApiMain module, which is hopefully the same as $res
 		$printer->execute();
 
 		$printer->closePrinter();
@@ -272,10 +321,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 *
 	 * @param Wikibase\EntityContent $entity the entity to output.
 	 * @param ApiFormatBase $printer the printer to use to generate the output
+	 * @param Revision $revision the entity's revision (optional)
 	 *
 	 * @throws HttpError If an unsupported format is requested.
 	 */
-	public function showData( EntityContent $entity, ApiFormatBase $printer ) {
+	public function showData( EntityContent $entity, ApiFormatBase $printer, Revision $revision = null ) {
 		global $wgSquidMaxage;
 
 		// NOTE: similar code as in RawAction::onView, keep in sync.
@@ -301,7 +351,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$response->header( 'Cache-Control: ' . $mode . ', s-maxage=' . $smaxage . ', max-age=' . $maxage );
 		//FIXME: Cache-Control and Expires headers are apparently overwritten later!
 
-		$this->output( $entity, $printer );
+		$this->output( $entity, $printer, $revision );
 	}
 
 }

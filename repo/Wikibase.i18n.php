@@ -190,6 +190,7 @@ Your IP address will be recorded in this property's edit history.",
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" is not a valid language code.',
 	'special-entitydata' => 'Entity data',
 	'wikibase-entitydata-not-found' => "No entity with ID $1 was found.",
+	'wikibase-entitydata-bad-revision' => "Can't show revision $2 of entity $1.",
 	'wikibase-entitydata-unsupported-format' => "The data format $1 is not supported by this interface.",
 	'wikibase-entitydata-title' => 'Entity Data',
 	'wikibase-entitydata-text' => 'This page provides a linked data interface to entity values. Please provide the entity ID in the URL, using subpage syntax.',
@@ -592,7 +593,10 @@ Parameters:
 	'wikibase-entitieswithoutlabel-invalid-language' => 'Error message shown when the language code passed in parameter is invalid. $1 is invalid language code.',
 	'special-entitydata' => 'Title for special page that provides a linked data interface and easy way to get the JSON data representation for an entity.',
 	'wikibase-entitydata-not-found' => 'Error shown when no entity with the given ID could be found. Paramters:
-* $1 is the given ID.',
+* $1 is the given ID',
+	'wikibase-entitydata-bad-revision' => "Error shown when the requested revision of a data entity was not found or was not suitable. Paramters:
+* $1 the the entity ID
+* $2 is the requested revision ID",
 	'wikibase-entitydata-unsupported-format' => 'Error shown when the requested output format is not supported for entity data.',
 	'wikibase-entitydata-title' => 'Title shown on the special page when a form or text is presented',
 	'wikibase-entitydata-text' => 'Explanatory text shown on the special page.',
