@@ -594,9 +594,9 @@ Parameters:
 	'special-entitydata' => 'Title for special page that provides a linked data interface and easy way to get the JSON data representation for an entity.',
 	'wikibase-entitydata-not-found' => 'Error shown when no entity with the given ID could be found. Paramters:
 * $1 is the given ID',
-	'wikibase-entitydata-bad-revision' => "Error shown when the requested revision of a data entity was not found or was not suitable. Paramters:
+	'wikibase-entitydata-bad-revision' => 'Error shown when the requested revision of a data entity was not found or was not suitable. Paramters:
 * $1 the the entity ID
-* $2 is the requested revision ID",
+* $2 is the requested revision ID',
 	'wikibase-entitydata-unsupported-format' => 'Error shown when the requested output format is not supported for entity data.',
 	'wikibase-entitydata-title' => 'Title shown on the special page when a form or text is presented',
 	'wikibase-entitydata-text' => 'Explanatory text shown on the special page.',
@@ -1521,6 +1521,7 @@ Es wird deine IP-Adresse in der Versionsgeschichte dieser Eigenschaft aufgezeich
 	'wikibase-entitieswithoutlabel-invalid-language' => '„$1“ ist kein gültiger Sprachcode.',
 	'special-entitydata' => 'Objektdaten',
 	'wikibase-entitydata-not-found' => 'Es wurde kein Objekt mit der Kennung $1 gefunden.',
+	'wikibase-entitydata-bad-revision' => 'Die Version $2 des Objektes $1 kann nicht angezeigt werden.',
 	'wikibase-entitydata-unsupported-format' => 'Das Datenformat $1 wird von dieser Schnittstelle nicht unterstützt.',
 	'wikibase-entitydata-title' => 'Objektdaten',
 	'wikibase-entitydata-text' => 'Diese Seite liefert eine verlinkte Datenschnittstelle zu Objektwerten. Bitte gib die Objektkennung in der URL an, indem du Unterseitensyntax verwendest.',
@@ -2145,6 +2146,7 @@ $messages['et'] = array(
 );
 
 /** Basque (euskara)
+ * @author An13sa
  * @author පසිඳු කාවින්ද
  */
 $messages['eu'] = array(
@@ -2154,11 +2156,14 @@ $messages['eu'] = array(
 	'wikibase-add' => 'gehitu',
 	'wikibase-remove' => 'kendu',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-statementview-referencesheading' => 'Jatorriak:',
 	'wikibase-tooltip-error-details' => 'Xehetasunak',
 	'wikibase-itembytitle-lookup-page' => 'Orrialdea:',
 	'wikibase-itembytitle-submit' => 'Bilatu',
 	'wikibase-itemdisambiguation-lookup-language' => 'Hizkuntza:',
 	'wikibase-itemdisambiguation-submit' => 'Bilatu',
+	'wikibase-setlabel-label' => 'Etiketa:',
+	'wikibase-setentity-id' => 'ID:',
 	'wikibase-restoreold' => 'Leheneratu',
 );
 
@@ -2401,6 +2406,7 @@ $messages['fi'] = array(
 	'wikibase-datatype-label' => 'Tietotyyppi:',
 	'wikibase-claimview-snak-tooltip' => 'Kirjoita arvo, joka vastaa ominaisuutta "$1". Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon mukautetulle arvolle painamalla kuvaketta arvon syöttökentän vieressä.',
 	'wikibase-claimview-snak-new-tooltip' => 'Määritettyäsi ominaisuuden voit kirjoittaa sitä vastaavan arvon. Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon mukautetulle arvolle painamalla kuvaketta arvon syöttökentän vieressä.',
+	'wikibase-statementview-referencesheading' => 'Lähteet',
 	'wikibase-snakview-property-input-placeholder' => 'ominaisuus',
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak on tyyppiä "$1". Tällaisen snakin käsittelyä ei vielä tueta.',
 	'wikibase-snakview-choosesnaktype' => 'Valitse arvon tyyppi.',
@@ -2728,6 +2734,7 @@ Votre adresse IP sera enregistrée dans l'historique des modifications de la pro
 	'wikibase-entitieswithoutlabel-invalid-language' => "« $1 » n'est pas un code de langue valide.",
 	'special-entitydata' => 'Données d’entité',
 	'wikibase-entitydata-not-found' => 'Aucune entité avec l’ID « $1 » n’a été trouvée',
+	'wikibase-entitydata-bad-revision' => "Impossible d'afficher la révision $2 de l’entité $1.",
 	'wikibase-entitydata-unsupported-format' => 'Le format de données $1 n’est pas pris en charge par cette interface.',
 	'wikibase-entitydata-title' => 'Données d’entité',
 	'wikibase-entitydata-text' => "Cette page fournit une interface de données liées à des valeurs d’entité. Veuillez fournir l'ID de l’entité dans l'URL, en utilisant la syntaxe de sous-page.",
@@ -4751,6 +4758,7 @@ $messages['ja'] = array(
 	'wikibase-entitieswithoutlabel-invalid-language' => '「$1」は有効な言語コードではありません。',
 	'special-entitydata' => 'エンティティのデータ',
 	'wikibase-entitydata-not-found' => 'ID $1 のエンティティが見つかりません。',
+	'wikibase-entitydata-bad-revision' => 'エンティティ $1 の版 $2 を表示できません。',
 	'wikibase-entitydata-unsupported-format' => 'このインターフェイスはデータ形式 $1 に対応していません。',
 	'wikibase-entitydata-title' => 'エンティティのデータ',
 	'wikibase-entitydata-text' => 'このページではエンティティの値にリンクされたデータ インターフェイスを提供します。下位ページの構文を使用して、URL にエンティティ ID を指定してください。',
@@ -5005,6 +5013,7 @@ IP 주소가 이 속성의 편집 역사에 남게 됩니다.',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1"(은)는 올바른 언어 코드가 아닙니다.',
 	'special-entitydata' => '항목 데이터',
 	'wikibase-entitydata-not-found' => '$1 ID로 된 항목을 찾을 수 없습니다.',
+	'wikibase-entitydata-bad-revision' => '$1 항목의 $2 판을 보여줄 수 없습니다.',
 	'wikibase-entitydata-unsupported-format' => '$1 데이터 형식은 이 인터페이스에서 지원되지 않습니다.',
 	'wikibase-entitydata-title' => '항목 데이터',
 	'wikibase-entitydata-text' => '이 문서는 항목 값에 연결된 데이터 인터페이스를 제공합니다. 하위 문서 구문을 사용하여 URL에 있는 항목 ID를 입력하세요.',
@@ -5358,6 +5367,7 @@ $messages['mk'] = array(
 	'wikibase-entitieswithoutlabel-invalid-language' => '„$1“ не претставува важечки јазичен код.',
 	'special-entitydata' => 'Податоци за единицата',
 	'wikibase-entitydata-not-found' => 'Не пронајдов ниедна единица со ознаката ID $1.',
+	'wikibase-entitydata-bad-revision' => 'Не можам да ја прикажам ревизијата $2 на единицата $1.',
 	'wikibase-entitydata-unsupported-format' => 'Податочниот формат $1 не е поддржан на овој посредник.',
 	'wikibase-entitydata-title' => 'Податоци за единицата',
 	'wikibase-entitydata-text' => 'Страницава дава посредник со сврзани податоци за вредностите на единиците. Наведете ја назнаката на единицата во URL-адресата, користејќи ја синтаксата на потстраницата.',
@@ -7917,6 +7927,7 @@ $messages['yi'] = array(
  * @author Shizhao
  * @author Stevenliuyi
  * @author Yfdyh000
+ * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
 	'wikibase-desc' => '结构化数据知识库',
@@ -7971,6 +7982,7 @@ $messages['zh-hans'] = array(
 	'wikibase-restrictionedit-tooltip-message' => '此页面已被保护。不允许编辑。',
 	'wikibase-blockeduser-tooltip-message' => '您已被封禁，不能编辑。',
 	'wikibase-tooltip-error-details' => '详细信息',
+	'wikibase-error-unexpected' => '发生意外错误。',
 	'wikibase-error-save-generic' => '进行保存时发生错误，因此您所做的变更可能未被完成。',
 	'wikibase-error-remove-generic' => '进行删除时发生错误，因此您所做的变更可能未被完成。',
 	'wikibase-error-save-connection' => '进行保存时发生连接错误，因此您的变更可能未被完成。请检查您的因特网连接。',
@@ -8029,10 +8041,21 @@ $messages['zh-hans'] = array(
 	'special-setlabel' => '设置标签',
 	'wikibase-setlabel-introfull' => '您正在设置[[$1]]的$2标签。',
 	'wikibase-setlabel-intro' => '这个窗体允许你设置一个实体的标签。你必须提供一个项目ID（例如Q23）、一个语言代码（例如en）以及标签。',
-	'wikibase-setlabel-label' => '标签', # Fuzzy
+	'wikibase-setlabel-label' => '标签：',
 	'wikibase-setlabel-submit' => '设置标签',
-	'wikibase-setentity-id' => 'ID', # Fuzzy
-	'wikibase-setentity-language' => '语言', # Fuzzy
+	'wikibase-setlabel-warning-remove' => '您真的要删除[[$1]]的标签吗？',
+	'special-setdescription' => '设置一个描述',
+	'wikibase-setdescription-introfull' => '您正在以$2为[[$1]]设置描述。',
+	'wikibase-setdescription-intro' => '这个窗体允许你设置一个实体的描述。你必须提供一个项目ID（例如Q23）、一个语言代码（例如en）以及描述。',
+	'wikibase-setdescription-label' => '描述：',
+	'wikibase-setdescription-submit' => '设置描述',
+	'wikibase-setdescription-warning-remove' => '您真的要删除[[$1]]的描述吗？',
+	'wikibase-setaliases-introfull' => '您正在以$2为[[$1]]设置别名。各别名之间以<code>|</code>分隔。',
+	'wikibase-setaliases-intro' => '这个窗体允许你设置一个实体的别名。你必须提供一个项目ID（例如Q23）、一个语言代码（例如en）以及别名。各别名之间以<code>|</code>分隔。',
+	'wikibase-setaliases-label' => '别名：',
+	'wikibase-setaliases-warning-remove' => '您真的要删除[[$1]]所有的别名吗？',
+	'wikibase-setentity-id' => 'ID：',
+	'wikibase-setentity-language' => '语言：',
 	'wikibase-setentity-invalid-langcode' => '未知的语言标识符“$1”。请使用一个系统已知的语言标识符，例如“zh”。',
 	'wikibase-setentity-invalid-id' => 'ID“$1”是未知的。请使用一个有效的实体ID。',
 	'special-listdatatypes' => '所有可用数据类型的列表',

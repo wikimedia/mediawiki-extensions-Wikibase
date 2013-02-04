@@ -88,9 +88,11 @@ $specialPageAliases['es'] = array(
 $specialPageAliases['fi'] = array(
 	'CreateItem' => array( 'Luo_kohde' ),
 	'NewProperty' => array( 'Uusi_ominaisuus' ),
-	'ItemByTitle' => array( 'Kohde_otsikon_mukaan' ),
-	'ItemDisambiguation' => array( 'Kohdetäsmennys' ),
+	'ItemByTitle' => array( 'Hae_kohdetta_otsikolla' ),
+	'ItemDisambiguation' => array( 'Kohteet_samalla_nimellä' ),
 	'SetLabel' => array( 'Aseta_nimi' ),
+	'SetDescription' => array( 'Aseta_kuvaus' ),
+	'SetAliases' => array( 'Aseta_aliakset' ),
 	'EntitiesWithoutLabel' => array( 'Aiheet_ilman_nimeä' ),
 );
 
