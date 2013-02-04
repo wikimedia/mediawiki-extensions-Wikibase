@@ -744,6 +744,8 @@ abstract class EntityView extends \ContextSource {
 
 		$serializationOptions = new EntitySerializationOptions();
 		$serializationOptions->addProp( 'sitelinks' );
+		// TODO: add handling for Claims/References using deleted properties in their Snaks
+		$serializationOptions->setIncludeValuesWithMissingReferences( false );
 
 		$serializer = EntitySerializer::newForEntity( $entity, $serializationOptions );
 
