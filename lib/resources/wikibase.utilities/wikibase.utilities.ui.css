@@ -1,0 +1,18 @@
+/**
+ * Styles accompanying wb.utilities.ui.js
+ *
+ * @since 0.4
+ * @file
+ * @ingroup WikibaseLib
+ *
+ * @license GNU GPL v2+
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ */
+.wb-toggle {
+	display: block;
+	margin-top: .5em;
+	white-space: nowrap;
+}
+.wb-toggle > span.ui-icon, .wb-toggle-label {
+	display: inline-block;
+}

@@ -267,28 +267,14 @@ table.wb-sitelinks .wb-ui-toolbar {
 	}
 
 		.wb-tooltip-error-top-message {
-			float:left;
 			border-bottom:1px dotted #B27631;
 			padding-bottom:1em;
 		}
-		.wb-tooltip-error-details-link {
-			float:left;
-			clear:both;
-			margin-top:.5em;
-			white-space:nowrap;
-		}
-			.wb-tooltip-error-details-link .ui-icon {
-				display:block;
-				float:left;
-			}
 		.wb-tooltip-error-details {
-			display:none;
 			/* These error messages are always displayed in English. */
-			/* @noflip */ float:left;
 			/* @noflip */ text-align:left;
-			clear:both;
 			margin-top:.2em;
-			margin-bottom:.6em;
+			margin-bottom:.5em;
 			font-family:'Courier New', Courier, 'Andale Mono', serif;
 			background-color:#FFF2E4;
 			padding:.2em;
