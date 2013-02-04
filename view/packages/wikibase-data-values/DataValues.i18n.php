@@ -190,6 +190,14 @@ $messages['ms'] = array(
 	'version-datavalues' => 'DataValues',
 );
 
+/** Norwegian Bokmål (norsk (bokmål)‎)
+ * @author EvenT
+ */
+$messages['nb'] = array(
+	'datavalues-desc' => 'Samling av objekter som representerer ulike typer verdier',
+	'version-datavalues' => 'DataValues',
+);
+
 /** Dutch (Nederlands)
  * @author Siebrand
  */
