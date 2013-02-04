@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//0eA\u003d",
+        "filename": "lib/resources/wikibase.utilities/wikibase.utilities.ui.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-02-04T09:31:50Z",
+      "side": 1,
+      "message": "I guess that should be \u0027nw\u0027 for rtl?",
+      "revId": "f6d96ba6e5cabf3df26ae852fcb8e11328df9284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//0eI\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-02-04T09:31:50Z",
+      "side": 1,
+      "message": "Why don\u0027t you erase the obsolete messages?",
+      "revId": "f6d96ba6e5cabf3df26ae852fcb8e11328df9284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//0eE\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-02-04T09:31:50Z",
+      "side": 1,
+      "message": "No qqq message.",
+      "revId": "f6d96ba6e5cabf3df26ae852fcb8e11328df9284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
