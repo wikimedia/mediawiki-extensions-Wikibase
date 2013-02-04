@@ -29,6 +29,7 @@ use Traversable, ApiResult, MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 class ByPropertyListSerializer extends SerializerObject {
 
@@ -87,12 +88,25 @@ class ByPropertyListSerializer extends SerializerObject {
 			$serializedObjects = array();
 
 			foreach ( $objects->getByPropertyId( $propertyId ) as $object ) {
-				$serializedObjects[] = $this->elementSerializer->getSerialized( $object );
+				$serializedElement = $this->elementSerializer->getSerialized( $object );
+
+				if( !$this->options->getIncludeValuesWithMissingReferences()
+					&& empty( $serializedElement )
+				) {
+					continue;
+				}
+				$serializedObjects[] = $serializedElement;
 			}
 
 			$this->setIndexedTagName( $serializedObjects, $this->elementName );
 
 			$propertyId = new EntityId( Property::ENTITY_TYPE, $propertyId );
+
+			if( !$this->options->getIncludeValuesWithMissingReferences()
+				&& EntityContentFactory::singleton()->getFromId( $propertyId ) === null
+			) {
+				continue;
+			}
 
 			if ( $this->options->shouldIndexTags() ) {
 				$serializedObjects['id'] = $propertyId->getPrefixedId();

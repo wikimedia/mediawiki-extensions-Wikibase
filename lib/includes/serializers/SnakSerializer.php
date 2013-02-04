@@ -46,11 +46,20 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 			throw new MWException( 'SnakSerializer can only serialize Snak objects' );
 		}
 
+		$propertyId = $snak->getPropertyId();
+
+		if( !$this->options->getIncludeValuesWithMissingReferences() ) {
+			$entityContent = EntityContentFactory::singleton()->getFromId( $propertyId );
+			if( $entityContent === null ) {
+				return array();
+			}
+		}
+
 		$serialization = array();
 
 		$serialization['snaktype'] = $snak->getType();
 
-		$serialization['property'] = $snak->getPropertyId()->getPrefixedId();
+		$serialization['property'] = $propertyId->getPrefixedId();
 
 		// TODO: we might want to include the data type of the property here as well
 

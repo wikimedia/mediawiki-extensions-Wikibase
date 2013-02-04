@@ -28,6 +28,7 @@ use MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 class ReferenceSerializer extends SerializerObject {
 
@@ -53,7 +54,13 @@ class ReferenceSerializer extends SerializerObject {
 		$snakSerializer = new SnakSerializer( $this->options );
 		$snaksSerializer = new ByPropertyListSerializer( 'snak', $snakSerializer, $this->options );
 
-		$serialization['snaks'] = $snaksSerializer->getSerialized( $reference->getSnaks() );
+		$snakList = $snaksSerializer->getSerialized( $reference->getSnaks() );
+
+		if( !$this->options->getIncludeValuesWithMissingReferences() && empty( $snakList ) ) {
+			// don't want a serialized reference without any snaks if the option is set!
+			return array();
+		}
+		$serialization['snaks'] = $snakList;
 
 		return $serialization;
 	}

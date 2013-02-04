@@ -28,6 +28,7 @@ use MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 class SerializationOptions {
 
@@ -93,6 +94,7 @@ class SerializationOptions {
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 class EntitySerializationOptions extends SerializationOptions {
 
@@ -144,6 +146,16 @@ class EntitySerializationOptions extends SerializationOptions {
 	 * @var string Element of the EntitySerializationOptions::SORT_ enum
 	 */
 	protected $sortDirection = self::SORT_NONE;
+
+	/**
+	 * Whether or not to include values into the serialization if Snaks use properties which do not
+	 * exist for some reason.
+	 *
+	 * @since 0.4
+	 *
+	 * @var bool
+	 */
+	protected $includeValuesWithMissingReferences = true;
 
 	/**
 	 * Sets if keys should be used in the serialization.
@@ -277,4 +289,29 @@ class EntitySerializationOptions extends SerializationOptions {
 		return $this->sortDirection;
 	}
 
+	/**
+	 * Sets whether the serialized output should include Snaks using missed properties (e.g. because
+	 * of deletion). This can also end in a whole Reference or Claim not being included in the
+	 * following cases:
+	 * - Claim: If the main Snak is affected
+	 * - References: If all Snaks of the Reference are affected or if the Reference only consists of
+	 *   one Snak which is affected.
+	 *
+	 * @since 0.4
+	 *
+	 * @return bool
+	 */
+	public function setIncludeValuesWithMissingReferences( $value ) {
+		return $this->includeValuesWithMissingReferences = $value;
+	}
+
+	/**
+	 *
+	 * @since 0.4
+	 *
+	 * @return bool
+	 */
+	public function getIncludeValuesWithMissingReferences() {
+		return $this->includeValuesWithMissingReferences;
+	}
 }
