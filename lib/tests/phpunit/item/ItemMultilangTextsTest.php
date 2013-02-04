@@ -74,7 +74,7 @@ class ItemMultilangTextsTest extends \MediaWikiTestCase {
 		);
 	}
 	
-	public function providerLabels() {
+	public static function providerLabels() {
 		return array(
 			array( 'de', 'Bar' ),
 			array( 'en', 'Foo' ),
@@ -105,7 +105,7 @@ class ItemMultilangTextsTest extends \MediaWikiTestCase {
 		);
 	}
 	
-	public function providerDescriptions() {
+	public static function providerDescriptions() {
 		return array(
 			array( 'de', 'This is about Bar' ),
 			array( 'en', 'This is about Foo' ),

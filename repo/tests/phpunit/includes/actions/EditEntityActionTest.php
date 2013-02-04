@@ -102,7 +102,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$params[ $key ] = $rev->getId();
 	}
 
-	public function provideUndoForm() {
+	public static function provideUndoForm() {
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 
 		return array(
@@ -317,7 +317,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$this->tryUndoAction( $action, $page, $params, $post, $user, $htmlPattern, $expectedProps );
 	}
 
-	public function provideUndoSubmit() {
+	public static function provideUndoSubmit() {
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 
 		return array(
@@ -666,7 +666,7 @@ class EditEntityActionTest extends ActionTestCase {
 		}
 	}
 
-	public function provideUndoRevisions() {
+	public static function provideUndoRevisions() {
 
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 
@@ -793,7 +793,7 @@ class EditEntityActionTest extends ActionTestCase {
 		self::resetTestItem( $handle );
 	}
 
-	public function provideUndoPermissions() {
+	public static function provideUndoPermissions() {
 		return array(
 			array( //0
 				'edit',

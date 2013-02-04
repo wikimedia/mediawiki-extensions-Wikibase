@@ -132,7 +132,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		parent::tearDown();
 	}
 
-	public function provideHasEditConflict() {
+	public static function provideHasEditConflict() {
 		/*
 		 * Test Revisions:
 		 * #0: label: array( 'en' => 'foo' );
@@ -274,7 +274,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function provideAttemptSaveWithLateConflict() {
+	public static function provideAttemptSaveWithLateConflict() {
 		return array(
 			array( true, true ),
 			array( false, false ),
@@ -490,7 +490,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertNotEquals( $expectedOK, $edit->showErrorPage() );
 	}
 
-	public function provideIsTokenOk() {
+	public static function provideIsTokenOk() {
 		return array(
 			array( //0
 				true, // use a newly generated valid token

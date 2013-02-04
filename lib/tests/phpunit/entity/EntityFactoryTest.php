@@ -112,10 +112,10 @@ class EntityFactoryTest extends EntityTestCase {
 		$this->assertEntityStructureEquals( $data, $entity );
 	}
 
-	public function provideNewFromBlob() {
+	public static function provideNewFromBlob() {
 		$tests = array();
 
-		foreach ( $this->provideNewFromArray() as $arrayTest ) {
+		foreach ( self::provideNewFromArray() as $arrayTest ) {
 			$tests[] = array(
 				$arrayTest[0],
 				json_encode( $arrayTest[1] ),

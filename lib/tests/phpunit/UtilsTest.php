@@ -35,7 +35,7 @@ class UtilsTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function providerGetLanguageCodes() {
+	public static function providerGetLanguageCodes() {
 		return array(
 			array( 'de' ),
 			array( 'en' ),
@@ -52,7 +52,7 @@ class UtilsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, Utils::squashWhitespace( $string ) );
 	}
 
-	public function providerSquashWhitespace() {
+	public static function providerSquashWhitespace() {
 		return array(
 			array( 'foo bar', 'foo bar'),
 			array( ' foo  bar ', 'foo bar'),
@@ -77,7 +77,7 @@ class UtilsTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function providerCleanupToNFC() {
+	public static function providerCleanupToNFC() {
 		return array(
 			array( "\xC3\x85land", 'Åland', true ),
 			array( "A\xCC\x8Aland", 'Åland', true ),
@@ -93,7 +93,7 @@ class UtilsTest extends \MediaWikiTestCase {
 		$this->assertEquals( $dst, Utils::squashToNFC( $src ), "String '$src' is not the same as the expected '$dst'" );
 	}
 
-	public function providerSquashToNFC() {
+	public static function providerSquashToNFC() {
 		return array(
 			array( "  \xC3\x85land  øyene  ", 'Åland øyene' ),
 			array( "  A\xCC\x8Aland  øyene  ", 'Åland øyene' ),

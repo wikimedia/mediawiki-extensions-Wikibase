@@ -30,7 +30,7 @@ class TermTest extends \MediaWikiTestCase {
 	);
 	 */
 
-	public function provideContructor() {
+	public static function provideContructor() {
 		return array(
 			array( // #0
 				array(
@@ -70,7 +70,7 @@ class TermTest extends \MediaWikiTestCase {
 		$this->assertEquals( isset( $fields['termText'] ) ? $fields['termText'] : null, $term->getText() );
 	}
 
-	public function provideGetNormalizedText() {
+	public static function provideGetNormalizedText() {
 		return array(
 			array( // #0
 				'foo', // raw
@@ -119,7 +119,7 @@ class TermTest extends \MediaWikiTestCase {
 		$this->assertTrue( $term->equals( $clone ), "clone must be equal to original" );
 	}
 
-	public function provideCompare() {
+	public static function provideCompare() {
 		$tests = array();
 
 		$tests[] = array( // #0
@@ -204,7 +204,7 @@ class TermTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function provideEquals() {
+	public static function provideEquals() {
 		$tests = array(
 			array( // #0
 				new Term( array() ),

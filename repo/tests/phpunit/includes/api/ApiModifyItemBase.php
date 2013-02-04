@@ -106,7 +106,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 		self::$loginSession = false;
 		self::$token = false;
 
-		$this->initItems();
+		self::initItems();
 		$this->setUpComplete = true;
 	}
 
@@ -114,13 +114,13 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	 * Initializes the static list of item input structures, using data from makeItemData().
 	 * Note that test items are identified by "handles".
 	 */
-	protected function initItems() {
+	protected static function initItems() {
 		if ( self::$itemInput ) {
 			return;
 		}
 
 		self::$itemInput = array();
-		$data = $this->makeItemData();
+		$data = self::makeItemData();
 
 		foreach ( $data as $item ) {
 			self::$itemInput[ $item['handle'] ] = $item;
@@ -132,7 +132,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	 * This data is used in particular by createItems().
 	 * Note that test items are identified by "handles".
 	 */
-	function makeItemData() {
+	static function makeItemData() {
 		return array(
 			array(
 				"handle" => "Empty",
@@ -350,7 +350,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			return;
 		}
 
-		$this->initItems();
+		self::initItems();
 		$token = $this->getItemToken();
 
 		foreach ( self::$itemInput as $item ) {
@@ -426,12 +426,12 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	/**
 	 * Returns the item for the given handle, in input format.
 	 */
-	function getItemInput( $handle ) {
+	static function getItemInput( $handle ) {
 		if ( !is_string( $handle ) ) {
 			trigger_error( "bad handle: $handle", E_USER_ERROR );
 		}
 
-		$this->initItems();
+		self::initItems();
 		return self::$itemInput[ $handle ];
 	}
 
@@ -457,7 +457,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	 * data provider for passing each item handle to the test function.
 	 */
 	function provideItemHandles() {
-		$this->initItems();
+		self::initItems();
 
 		$handles = array();
 
@@ -471,8 +471,8 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	/**
 	 * returns the list handles for the well known test items.
 	 */
-	function getItemHandles() {
-		$this->initItems();
+	static function getItemHandles() {
+		self::initItems();
 
 		return array_keys( self::$itemInput );
 	}

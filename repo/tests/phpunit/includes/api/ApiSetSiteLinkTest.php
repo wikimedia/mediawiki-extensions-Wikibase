@@ -162,7 +162,7 @@ class ApiSetSiteLinkTest extends ApiModifyItemBase {
 		}
 	}
 
-	public function provideSetLiteLink() {
+	public static function provideSetLiteLink() {
 		return array(
 			array( 'Leipzig', // handle
 				array( 'id' => null ), // by id

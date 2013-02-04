@@ -112,12 +112,12 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 		$this->assertItemEquals( $item,  $res['entities'][$id] );
 	}
 
-	public function provideGetItemByTitle() {
+	public static function provideGetItemByTitle() {
 		$calls = array();
-		$handles = $this->getItemHandles();
+		$handles = static::getItemHandles();
 
 		foreach ( $handles as $handle ) {
-			$item = $this->getItemInput( $handle );
+			$item = static::getItemInput( $handle );
 
 			if ( !isset( $item['sitelinks'] ) ) {
 				continue;

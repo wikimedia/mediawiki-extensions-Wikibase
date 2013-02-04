@@ -70,7 +70,7 @@ class ApiLinkTitlesTest extends ApiModifyItemBase {
 		}
 	}
 
-	public function provideLinkTitles() {
+	public static function provideLinkTitles() {
 		return array(
 			// Oslo should already exist, add nowiki
 			array( 'Oslo', // handle
