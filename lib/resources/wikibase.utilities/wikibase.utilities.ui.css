@@ -16,3 +16,31 @@
 .wb-toggle > span.ui-icon, .wb-toggle-label {
 	display: inline-block;
 }
+.wb-toggle span.ui-icon.wb-toggle-icon3dtrans {
+	-webkit-transition: .25s ease-out;
+	   -moz-transition: .25s ease-out;
+	     -o-transition: .25s ease-out;
+	        transition: .25s ease-out;
+}
+
+/** rotate toggle icon in ltr languages */
+.wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
+	-webkit-transition: .25s ease-out;
+	   -moz-transition: .25s ease-out;
+	     -o-transition: .25s ease-out;
+	        transition: .25s ease-out;
+
+	-webkit-transform: rotate(-90deg);
+	   -moz-transform: rotate(-90deg);
+	    -ms-transform: rotate(-90deg);
+	     -o-transform: rotate(-90deg);
+	        transform: rotate(-90deg);
+}
+/** rotate toggle icon in rtl languages (overwrite above) */
+body.rtl .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
+	-webkit-transform: rotate(90deg);
+	   -moz-transform: rotate(90deg);
+	    -ms-transform: rotate(90deg);
+	     -o-transform: rotate(90deg);
+	        transform: rotate(90deg);
+}
