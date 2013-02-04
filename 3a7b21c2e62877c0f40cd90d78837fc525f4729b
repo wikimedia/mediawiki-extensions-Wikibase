@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//0Zw\u003d",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-04T13:03:55Z",
+      "side": 1,
+      "message": "return?",
+      "revId": "3a7b21c2e62877c0f40cd90d78837fc525f4729b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//0Zs\u003d",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-04T13:03:55Z",
+      "side": 1,
+      "message": "if you are not doing any validation anyway, perhaps you can just have a public property includeValuesWithMissingReferences? getIncludeValuesWithMissingReferences is an odd name, which I would when not knowing the code expect to return an array rather then a bool",
+      "revId": "3a7b21c2e62877c0f40cd90d78837fc525f4729b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//0Zo\u003d",
+        "filename": "lib/includes/serializers/SerializerObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-04T13:03:55Z",
+      "side": 1,
+      "message": "ApiSerializers?",
+      "revId": "3a7b21c2e62877c0f40cd90d78837fc525f4729b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
