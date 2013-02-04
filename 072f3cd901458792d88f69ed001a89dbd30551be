@@ -16,6 +16,74 @@
       "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//0as\u003d",
+        "filename": "repo/includes/FuzzyCompare.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-04T12:18:10Z",
+      "side": 1,
+      "message": "FuzzyComparer?",
+      "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//0ao\u003d",
+        "filename": "repo/includes/FuzzyCompare.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-04T12:18:10Z",
+      "side": 1,
+      "message": "getSignature?",
+      "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//0ak\u003d",
+        "filename": "repo/includes/FuzzyCompare.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-04T12:18:10Z",
+      "side": 1,
+      "message": "getOverallScore?",
+      "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//0ag\u003d",
+        "filename": "repo/includes/FuzzyCompare.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-04T12:18:10Z",
+      "side": 1,
+      "message": "getSingleScore?",
+      "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
