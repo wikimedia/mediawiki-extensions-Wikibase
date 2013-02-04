@@ -28,8 +28,12 @@ use ApiResult, MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ *
+ * @todo Move this into core or somewhere else but out of the Wikibase namespace since it is not
+ *       Wikibase specific
  */
-abstract class SerializerObject implements Serializer {
+abstract class GenericSerializerObject implements Serializer {
 
 	/**
 	 * The ApiResult to use during serialization.
@@ -94,4 +98,33 @@ abstract class SerializerObject implements Serializer {
 		return $this->options;
 	}
 
+}
+
+/**
+ * Base class for Wikibase related ApiSerializers.
+ *
+ * @since 0.4
+ *
+ * @file
+ * @ingroup WikibaseLib
+ *
+ * @licence GNU GPL v2+
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
+ */
+abstract class SerializerObject extends GenericSerializerObject {
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.4
+	 *
+	 * @param ApiResult $apiResult
+	 * @param EntitySerializationOptions|null $options
+	 */
+	public function __construct( SerializationOptions $options = null ) {
+		if ( $options === null ) {
+			$options = new EntitySerializationOptions();
+		}
+
+		$this->options = $options;
+	}
 }

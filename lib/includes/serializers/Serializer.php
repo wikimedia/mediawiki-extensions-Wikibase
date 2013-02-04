@@ -44,7 +44,8 @@ interface Serializer {
 	 *
 	 * @param mixed $object
 	 *
-	 * @return array
+	 * @return array Can be an empty array in case the serializer is dealing with an invalid object
+	 *         of some and/or options are set accordingly.
 	 */
 	public function getSerialized( $object );
 
