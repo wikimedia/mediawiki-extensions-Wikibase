@@ -93,7 +93,7 @@ class DiffView extends \ContextSource {
 			$name = implode( ' / ', $path ); // TODO: l10n
 
 			if ( $path[0] === 'claim' ) {
-				return 'TODO: claim diff visualization'; // TODO
+				return '';
 			}
 
 			$html = Html::openElement( 'tr' );
