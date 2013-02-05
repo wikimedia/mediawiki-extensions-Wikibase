@@ -56,9 +56,9 @@ $messages['en'] = array(
 /** Message documentation (Message documentation)
  * @author Jeblad
  * @author Katie Filbert
+ * @author Marius Hoch
  * @author Raymond
  * @author Shirayuki
- * @author Marius Hoch
  */
 $messages['qqq'] = array(
 	'wikibase-client-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
@@ -84,7 +84,7 @@ See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wikibase-linkitem-failure' => 'Shown in case an error occurred which is not an API error (like a linking conflict)',
 	'wikibase-linkitem-title' => 'Title for the dialog which allows linking the current page with a page on another site.',
 	'wikibase-linkitem-linkpage' => 'Button in the dialog which allows linking the current page with a page on another site. Usable after the user inserted a site and a page to link.',
-	'wikibase-linkitem-selectlink' => 'Explaining the user that he can choose a site and a page that should be linked with the one he\'s currently on.',
+	'wikibase-linkitem-selectlink' => "Explaining the user that he can choose a site and a page that should be linked with the one he's currently on.",
 	'wikibase-linkitem-input-site' => 'Label for the (autocompleted) inputbox asking for a site/ language',
 	'wikibase-linkitem-input-page' => 'Label for the (autocompleted) inputbox asking for a page',
 	'wikibase-linkitem-invalidsite' => 'Tooltip shown if the user entered an invalid site to link pages with',
@@ -734,6 +734,7 @@ $messages['nn'] = array(
 	'wikibase-comment-sitelink-add' => 'Språklenkje lagd til: $1',
 	'wikibase-comment-sitelink-change' => 'Språklenkje endra frå $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Språklenkje fjerna: $1',
+	'wikibase-comment-multi' => '$1 endringar',
 	'wikibase-editlinks' => 'Endra lenkjer',
 	'wikibase-editlinkstitle' => 'Endra mellomspråklege lenkjer',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',

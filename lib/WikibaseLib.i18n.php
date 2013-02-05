@@ -48,7 +48,9 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Jeblad
  * @author Nemo bis
+ * @author Nnemo
  * @author Raymond
  * @author Shirayuki
  * @author Waldir
@@ -61,6 +63,23 @@ $messages['qqq'] = array(
 {{Identical|Property}}',
 	'wikibase-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].
 {{Identical|Query}}',
+	'wikibase-error-unexpected' => 'Error message that is used as a fallback message if no other message can be assigned to the error that occurred. This error message being displayed should never happen. However, there may be "unexpected" errors not covered by the implemented error handling.',
+	'wikibase-error-save-generic' => 'Generic error message for an error happening during a save operation.',
+	'wikibase-error-remove-generic' => 'Generic error message for an error happening during a remove operation',
+	'wikibase-error-save-connection' => 'Error message for an error happening during a save operation. The error might most likely be caused by a connection problem.',
+	'wikibase-error-remove-connection' => 'Error message for an error happening during a remove operation. The error might most likely be caused by a connection problem.',
+	'wikibase-error-save-timeout' => 'Error message for an error happening during a save operation. The error was caused by a request time out.',
+	'wikibase-error-remove-timeout' => 'Error message for an error happening during a remove operation. The error was caused by a request time out.',
+	'wikibase-error-autocomplete-connection' => 'Error message for page auto-complete input box; displayed when API could not be reached.',
+	'wikibase-error-autocomplete-response' => 'When querying the API for auto-completion fails, this message contains more detailed information about the error. $1 is the actual server error response or jQuery error code (e.g. when the server did not respond).',
+	'wikibase-error-ui-client-error' => 'This is a human readable version of the API error "wikibase-api-client-error" which is shown in the UI.',
+	'wikibase-error-ui-no-external-page' => 'This is a human readable version of the API error "wikibase-api-no-external-page" which is shown in the UI.',
+	'wikibase-error-ui-cant-edit' => 'This is a human readable version of the API error "wikibase-api-cant-edit" which is shown in the UI.',
+	'wikibase-error-ui-no-permissions' => 'This is a human readable version of the API error "wikibase-api-no-permission" which is shown in the UI.',
+	'wikibase-error-ui-link-exists' => 'This is a human readable version of the API error "wikibase-api-link-exists" which is shown in the UI.',
+	'wikibase-error-ui-session-failure' => 'This is a human readable version of the API error "wikibase-api-session-failure" which is shown in the UI.',
+	'wikibase-error-ui-edit-conflict' => 'This is a human readable version of the API error "edit-conflict" which is shown in the UI.
+Note that the default message says the user shall "reload and save", but after a reload the content that should be saved will be lost.',
 	'wikibase-replicationnote' => 'Note telling the user that it can take a few minutes until the made changes are visible on all wikis.',
 	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#Item|item]].',
@@ -68,6 +87,7 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
 {{Identical|Language}}',
 	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.',
 	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (Wikipedia) page.',
+	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).',
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
@@ -276,6 +296,8 @@ $messages['fa'] = array(
 );
 
 /** Finnish (suomi)
+ * @author Crt
+ * @author Nike
  * @author Stryn
  * @author VezonThunder
  */
@@ -284,18 +306,38 @@ $messages['fi'] = array(
 	'wikibase-entity-item' => 'kohde',
 	'wikibase-entity-property' => 'ominaisuus',
 	'wikibase-entity-query' => 'kysely',
+	'wikibase-error-save-generic' => 'Tallennus epäonnistui. Muutoksiasi ei voitu toteuttaa.',
+	'wikibase-error-remove-generic' => 'Poistamisessa tapahtui virhe. Muutoksiasi ei voitu toteuttaa.',
+	'wikibase-error-save-connection' => 'Tallennettaessa tapahtui yhteysvirhe. Muutoksiasi ei voitu toteuttaa. Tarkista Internet-yhteytesi.',
+	'wikibase-error-remove-connection' => 'Poistamisessa tapahtui yhteysvirhe. Muutoksiasi ei voitu toteuttaa. Tarkista Internet-yhteytesi.',
+	'wikibase-error-save-timeout' => 'Sivustolla on teknisiä ongelmia. Tallennustasi ei voitu toteuttaa.',
+	'wikibase-error-remove-timeout' => 'Sivustolla on teknisiä ongelmia. Poistoasi ei voitu toteuttaa.',
+	'wikibase-error-autocomplete-connection' => 'Kysely Wikipedian rajapinnalta epäonnistui. Yritä myöhemmin uudelleen.',
+	'wikibase-error-autocomplete-response' => 'Palvelin vastasi: $1',
+	'wikibase-error-ui-client-error' => 'Yhteys asiakassivuun epäonnistui. Yritä myöhemmin uudelleen.',
+	'wikibase-error-ui-no-external-page' => 'Määritettyä artikkelia ei löytynyt vastaavalta sivustolta.',
+	'wikibase-error-ui-cant-edit' => 'Sinulla ei ole oikeutta suorittaa tätä toimintoa.',
+	'wikibase-error-ui-no-permissions' => 'Sinulla ei ole tämän toiminnon suorittamiseen vaadittavia oikeuksia.',
+	'wikibase-error-ui-link-exists' => 'Et voi lisätä linkkiä tähän sivuun, koska toisessa kohteessa on jo sama linkki.',
+	'wikibase-error-ui-session-failure' => 'Istuntosi on vanhentunut. Kirjaudu sisään uudelleen.',
+	'wikibase-error-ui-edit-conflict' => 'Tapahtui muokkausristiriita. Päivitä sivu ja tallenna uudelleen.',
 	'wikibase-sitelinks' => 'Luettelo tähän kohteeseen linkitetyistä sivuista',
 	'wikibase-sitelinks-sitename-columnheading' => 'Kieli',
 	'wikibase-sitelinks-siteid-columnheading' => 'Koodi',
 	'wikibase-sitelinks-link-columnheading' => 'Linkitetty artikkeli',
+	'wikibase-tooltip-error-details' => 'Tiedot',
 	'datatypes-type-wikibase-item' => 'Kohde',
 	'datatypes-type-commonsMedia' => 'Commonsin mediatiedosto',
 );
 
 /** French (français)
+ * @author Alno
  * @author Arkanosis
+ * @author Crochet.david
  * @author DavidL
+ * @author Gomoko
  * @author Ltrlg
+ * @author Nnemo
  * @author Tititou36
  * @author Wyz
  */
@@ -304,10 +346,27 @@ $messages['fr'] = array(
 	'wikibase-entity-item' => 'élément',
 	'wikibase-entity-property' => 'propriété',
 	'wikibase-entity-query' => 'requête',
+	'wikibase-error-unexpected' => 'Une erreur inattendue s’est produite.',
+	'wikibase-error-save-generic' => "Une erreur est survenue lors de l'enregistrement, en conséquence, vos modifications n'ont pas pu être prises en compte.",
+	'wikibase-error-remove-generic' => "Une erreur est survenue lors de la suppression, en conséquence, vos modifications n'ont pas pu être prises en compte.",
+	'wikibase-error-save-connection' => "Une erreur de connexion est survenue lors de l'enregistrement, en conséquence, vos modifications n'ont pas pu être prises en compte. Vérifiez votre connexion Internet.",
+	'wikibase-error-remove-connection' => "Une erreur de connexion est survenue lors de la suppression, en conséquence, vos modifications n'ont pas pu être prises en compte. Vérifiez votre connexion Internet.",
+	'wikibase-error-save-timeout' => 'Nous rencontrons actuellement quelques problèmes techniques, la sauvegarde que vous avez demandée ne peut être réalisée.',
+	'wikibase-error-remove-timeout' => "Nous rencontrons quelques problèmes techniques, en conséquence la suppression que vous avez demandée n'a pas pu être réalisée.",
+	'wikibase-error-autocomplete-connection' => "Impossible d'interroger l'API Wikipedia. Veuillez réessayer plus tard.",
+	'wikibase-error-autocomplete-response' => 'Le serveur a répondu&nbsp;: $1',
+	'wikibase-error-ui-client-error' => 'Échec de la connexion à la page client. Veuillez réessayer ultérieurement.',
+	'wikibase-error-ui-no-external-page' => "L'article spécifié est introuvable sur le site correspondant.",
+	'wikibase-error-ui-cant-edit' => 'Vous n’êtes pas autorisé(e) à effectuer cette action.',
+	'wikibase-error-ui-no-permissions' => 'Vous n’avez pas de droits suffisants pour effectuer cette action.',
+	'wikibase-error-ui-link-exists' => "Vous ne pouvez pas faire de lien vers cette page parce qu'un autre élément la référence déjà.",
+	'wikibase-error-ui-session-failure' => 'Votre session a expiré. Veuillez vous connecter à nouveau.',
+	'wikibase-error-ui-edit-conflict' => 'Il y a conflit d’édition. Rechargez la page et enregistrez de nouveau.',
 	'wikibase-sitelinks' => 'Liste des pages liées à cet élément',
 	'wikibase-sitelinks-sitename-columnheading' => 'Langue',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
 	'wikibase-sitelinks-link-columnheading' => 'Articles liés',
+	'wikibase-tooltip-error-details' => 'Détails',
 	'datatypes-type-wikibase-item' => 'Élément',
 	'datatypes-type-commonsMedia' => 'Fichier multimédia de Commons',
 );
@@ -364,10 +423,27 @@ $messages['he'] = array(
 	'wikibase-entity-item' => 'פריט',
 	'wikibase-entity-property' => 'מאפיין',
 	'wikibase-entity-query' => 'שאילתה',
+	'wikibase-error-unexpected' => 'אירעה שגיאה בלתי־צפויה.',
+	'wikibase-error-save-generic' => 'אירעה שגיאה בעת ניסיון לבצע שמירה ובגלל זה לא ניתן להשלים את השינויים שלך.',
+	'wikibase-error-remove-generic' => 'אירעה שגיאה בעת ניסיון לבצע הסרה ובגלל זה לא ניתן להשלים את השינויים שלך.',
+	'wikibase-error-save-connection' => 'אירעה שגיאת התחברות בעת ניסיון לבצע שמירה ובגלל זה לא ניתן להשלים את השינויים שלך. נא לבדוק את חיבור האינטרנט שלך.',
+	'wikibase-error-remove-connection' => 'אירעה שגיאה בעת ניסיון לבצע הסרה ובגלל זה לא ניתן להשלים את השינויים שלך. נא לבדוק את חיבור האינטרנט שלך.',
+	'wikibase-error-save-timeout' => 'יש לנו קשיים טכניים ובגלל זה לא ניתן להשלים את השמירה שלך.',
+	'wikibase-error-remove-timeout' => 'יש לנו קשיים טכניים ובגלל זה לא ניתן להשלים את ההסרה שלך.',
+	'wikibase-error-autocomplete-connection' => 'לא ניתן לבצע שאילתה מתוך API של ויקיפדיה. נא לנסות שוב מאוחר יותר.',
+	'wikibase-error-autocomplete-response' => 'השרת ענה: $1',
+	'wikibase-error-ui-client-error' => 'החיבור לדף הלקוח נכשל. נא לנסות שוב מאוחר יותר.',
+	'wikibase-error-ui-no-external-page' => 'הערך שהוזן לא נמצא באתר המתאים.',
+	'wikibase-error-ui-cant-edit' => 'אין לך הרשאה לבצע את הפעולה הזאת.',
+	'wikibase-error-ui-no-permissions' => 'אין לך מספיק הרשאות לבצע את הפעולה הזאת.',
+	'wikibase-error-ui-link-exists' => 'אין לך אפשרות לקשר לדף הזה כי פריט אחר כבר מקשר אליו.',
+	'wikibase-error-ui-session-failure' => 'השיחה שלך פגה. נא להיכנס שוב.',
+	'wikibase-error-ui-edit-conflict' => 'אירעה התנגשות עריכה. נא לרענן את הדף ולשמור מחדש.',
 	'wikibase-sitelinks' => 'רשימת הדפים המקושרים לפריט הזה.',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפה',
 	'wikibase-sitelinks-siteid-columnheading' => 'קוד',
 	'wikibase-sitelinks-link-columnheading' => 'ערך מקושר',
+	'wikibase-tooltip-error-details' => 'פרטים',
 	'datatypes-type-wikibase-item' => 'פריט',
 	'datatypes-type-commonsMedia' => 'קובץ מדיה בוויקישיתוף',
 );
@@ -380,10 +456,27 @@ $messages['hsb'] = array(
 	'wikibase-entity-item' => 'element',
 	'wikibase-entity-property' => 'kajkosć',
 	'wikibase-entity-query' => 'naprašowanje',
+	'wikibase-error-unexpected' => 'Njewočakowany zmylk je wustupił.',
+	'wikibase-error-save-generic' => 'Při składowanju je zmylk wustupił, a tohodla njedachu so změny přewjesć.',
+	'wikibase-error-remove-generic' => 'Při wotstronjenu je zmylk wustupił, a tohodla njedachu so twoje změny přewjesć.',
+	'wikibase-error-save-connection' => 'Zwiskowy zmylk je při składowanju wustupił a twoje změny njedadźa so tohodla přewjesć. Prošu přepruwuj swój internetowy zwisk.',
+	'wikibase-error-remove-connection' => 'Zwiskowy zmylk je při wotstronjenju wustupił a tohodla njedadźa so twoje změny přewjesć. Prošu přepruwuj swój internetowy zwisk.',
+	'wikibase-error-save-timeout' => 'Mamy techniske ćežkosće a tohodla njeda so ničo składować.',
+	'wikibase-error-remove-timeout' => 'Mamy techniske ćežkosće a tohodla njeda so ničo wotstronić.',
+	'wikibase-error-autocomplete-connection' => 'API Wikipedije njeda so naprašować. Prošu spytaj pozdźišo hišće raz.',
+	'wikibase-error-autocomplete-response' => 'Serwer wotmołwi: $1',
+	'wikibase-error-ui-client-error' => 'Zwisk k eksternej webstronje je so njeporadźił. Prošu spytaj pozdźišo hišće raz.',
+	'wikibase-error-ui-no-external-page' => 'Podaty nastawk njeda so na wotpowědowacym sydle namakać.',
+	'wikibase-error-ui-cant-edit' => 'Njesměš tutu akciju wuwjesć.',
+	'wikibase-error-ui-no-permissions' => 'Nimaš dosć prawow, zo by tutu akciju wuwjedł.',
+	'wikibase-error-ui-link-exists' => 'Njemóžeš k tutej stronje wotkazować, dokelž druhi element hižo k njej wotkazuje.',
+	'wikibase-error-ui-session-failure' => 'Twoje posedźenje je spadnyło. Prošu přizjew so hišće raz.',
+	'wikibase-error-ui-edit-conflict' => 'Je wobdźěłowanski konflikt wustupił. Prošu začituj a składuj znowa.',
 	'wikibase-sitelinks' => 'Lisćina stronow, kotrež su z tutym elementom zwjazane',
 	'wikibase-sitelinks-sitename-columnheading' => 'Rěč',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
 	'wikibase-sitelinks-link-columnheading' => 'Wotkazany nastawk',
+	'wikibase-tooltip-error-details' => 'Podrobnosće',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Medijowa dataja na Wikimedia Commons',
 );
@@ -427,10 +520,27 @@ $messages['ilo'] = array(
 	'wikibase-entity-item' => 'banag',
 	'wikibase-entity-property' => 'tagikua',
 	'wikibase-entity-query' => 'panagbiruk',
+	'wikibase-error-unexpected' => 'Adda rimsua a maysa a saan a nanamnama a biddut.',
+	'wikibase-error-save-generic' => 'Ada biddut a napasamak bayat nga agar-aramidka ti panagidulin iti daytoy, saan a malpas dagiti panagibalbaliwmo.',
+	'wikibase-error-remove-generic' => 'Adda biddut a napasamak bayat nga agar-aramidka ti panagikkat ti daytoy, saan a malpas dagiti panagibalbaliwmo.',
+	'wikibase-error-save-connection' => 'Adda biddut napasamak ti panakaikapet bayat nga agar-aramid ti panagidulin, ken gapu ti daytoy dagiti panagibalwbaliwmo ket saan a malpas. Pangngaasi a kitaem ti panakaikapetmo ti internet.',
+	'wikibase-error-remove-connection' => 'Adda biddut napasamak ti panakaikapet bayat nga agar-aramid ti panagikkat, ken gapu ti daytoy dagiti panagibalwbaliwmo ket saan a malpas. Pangngaasi a kitaem ti panakaikapetmo ti internet.',
+	'wikibase-error-save-timeout' => 'Makasansanay kami kadagiti teknikal a parikut, ken gapu ti daytoy ti "indulinmo" ket saan a malpas.',
+	'wikibase-error-remove-timeout' => 'Makasansanay kami kadagiti teknikal a parikut, ken gapu ti daytoy ti "panagikkatmo" ket saan a malpas.',
+	'wikibase-error-autocomplete-connection' => 'Saan a makagun-od ti Wikipedia API. Pangngaasi a padasem manen no madamdama.',
+	'wikibase-error-autocomplete-response' => 'Simmungbat ti server: $1',
+	'wikibase-error-ui-client-error' => 'Ti panakaikapet ti kliente apanid ket napaay. Pangngaasi a padasem manen no madamdama.',
+	'wikibase-error-ui-no-external-page' => 'Ti naitudon nga artikulo ket saan a mabirukan idiay maipada a sitio.',
+	'wikibase-error-ui-cant-edit' => 'Saanmo a mabalin ti agaramid ti daytoy a tignay.',
+	'wikibase-error-ui-no-permissions' => 'Awan ti umanay a karbengam nga agaramid ti daytoy a tignay.',
+	'wikibase-error-ui-link-exists' => 'Saanka a makasilpo ti daytoy a panid gaputa adda ti maysa a banagen a nakasilpo ti daytoy.',
+	'wikibase-error-ui-session-failure' => 'Ti gimongam ket nagpason. Pangngaasi a sumrekka manen.',
+	'wikibase-error-ui-edit-conflict' => 'Adda kasinnupiat a panagurnos. Pangngaasi nga ikarga ken idulin manen.',
 	'wikibase-sitelinks' => 'Listaan dagiti panid a naisilpo ti daytoy a banag',
 	'wikibase-sitelinks-sitename-columnheading' => 'Pagsasao',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kodigo',
 	'wikibase-sitelinks-link-columnheading' => 'Naisilpo nga artikulo',
+	'wikibase-tooltip-error-details' => 'Dagiti salaysay',
 	'datatypes-type-wikibase-item' => 'Banag',
 	'datatypes-type-commonsMedia' => 'Midia a papeles ti Commons',
 );
@@ -628,10 +738,27 @@ $messages['nn'] = array(
 	'wikibase-entity-item' => 'sett',
 	'wikibase-entity-property' => 'eigenskap',
 	'wikibase-entity-query' => 'spørjing',
+	'wikibase-error-unexpected' => 'Det oppstod ein uventa feil.',
+	'wikibase-error-save-generic' => 'Ein feil oppstod under forsøket på å lagre oppføringa, og på grunn av dette så kunne ikkje endringa gjennomførast.',
+	'wikibase-error-remove-generic' => 'Ein feil oppstod under forsøket på å fjerne oppføringa, og på grunn av dette så kunne ikkje endringa gjennomførast.',
+	'wikibase-error-save-connection' => 'Ein feil oppstod under forsøket på å lagre oppføringa, og på grunn av dette så kunne ikkje endringa gjennomførast. Sjekk di tilknyting til internett.',
+	'wikibase-error-remove-connection' => 'Ein feil oppstod under forsøket på å fjerne oppføringa, og på grunn av dette så kunne ikkje endringa gjennomførast. Sjekk di tilknyting til internett.',
+	'wikibase-error-save-timeout' => 'Vi har tekniske problem, og på grunn av dette så kan vi ikkje gjennomføre lagring av oppføringa.',
+	'wikibase-error-remove-timeout' => 'Vi har tekniske problem, og på grunn av dette så kan vi ikkje gjennomføre fjerning av oppføringa.',
+	'wikibase-error-autocomplete-connection' => 'Kunne ikkje spørje mot API-en til Wikipedia. Prøv om att seinare.',
+	'wikibase-error-autocomplete-response' => 'Tenaren svarte: $1',
+	'wikibase-error-ui-client-error' => 'Kontakten med klientsida feila. Freista på nytt seinare.',
+	'wikibase-error-ui-no-external-page' => 'Den oppgjevne artikkelen vart ikkje funnen på den tilhøyrande nettstaden.',
+	'wikibase-error-ui-cant-edit' => 'Du har ikkje lov til å utføre denne handlinga.',
+	'wikibase-error-ui-no-permissions' => 'Du har ikkje tilstrekkelege rettar til å utføre denne handlinga.',
+	'wikibase-error-ui-link-exists' => 'Du kan ikkje lenke til denne sida fordi eit anna datasett lenker allereie til den.',
+	'wikibase-error-ui-session-failure' => 'Din arbeidsøkt er avslutta, logg inn på nytt om du vil fortsette.',
+	'wikibase-error-ui-edit-conflict' => 'Det er ein endringskonflikt på gang. Lasta sida på nytt og lagra på nytt.',
 	'wikibase-sitelinks' => 'Sidene som er knytte til dette datasettet',
 	'wikibase-sitelinks-sitename-columnheading' => 'Språk',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
 	'wikibase-sitelinks-link-columnheading' => 'Artikkel som er lenkja til',
+	'wikibase-tooltip-error-details' => 'Detaljar',
 	'datatypes-type-wikibase-item' => 'Sett',
 	'datatypes-type-commonsMedia' => 'Mediefil frå Commons',
 );
@@ -838,16 +965,34 @@ $messages['uk'] = array(
 
 /** Vietnamese (Tiếng Việt)
  * @author Minh Nguyen
+ * @author පසිඳු කාවින්ද
  */
 $messages['vi'] = array(
 	'wikibase-lib-desc' => 'Các chức năng chung của các phần mở rộng Wikibase và Trình khách Wikibase',
 	'wikibase-entity-item' => 'khoản mục',
 	'wikibase-entity-property' => 'thuộc tính',
 	'wikibase-entity-query' => 'truy vấn',
+	'wikibase-error-unexpected' => 'Đã xuất hiện lỗi bất ngờ.',
+	'wikibase-error-save-generic' => 'Đã gặp lỗi khi lưu nên không thể thực hiện các thay đổi của bạn.',
+	'wikibase-error-remove-generic' => 'Đã gặp lỗi nên không thể thực hiện tác vụ loại bỏ.',
+	'wikibase-error-save-connection' => 'Đã gặp lỗi kết nối khi lưu nên không thể thực hiện các thay đổi của bạn. Xin hãy kiểm tra kết nối Internet của bạn.',
+	'wikibase-error-remove-connection' => 'Đã gặp lỗi nên không thể thực hiện tác vụ loại bỏ. Xin hãy kiểm tra kết nối Internet của bạn.',
+	'wikibase-error-save-timeout' => 'Chúng tôi đang gặp trục trặc kỹ thuật nên không thể thực hiện tác vụ lưu của bạn.',
+	'wikibase-error-remove-timeout' => 'Chúng tôi đang gặp trục trặc kỹ thuật nên không thể thực hiện tác vụ loại bỏ của bạn.',
+	'wikibase-error-autocomplete-connection' => 'Không thể truy vấn API của Wikipedia. Xin hãy thử lại sau.',
+	'wikibase-error-autocomplete-response' => 'Máy chủ đã phản hồi: $1',
+	'wikibase-error-ui-client-error' => 'Kết nối đến trang khách bị thất bại. Xin hãy thử lại sau.',
+	'wikibase-error-ui-no-external-page' => 'Không tìm thấy bài chỉ định trên site tương ứng.',
+	'wikibase-error-ui-cant-edit' => 'Bạn không được phép thực hiện thao tác này.',
+	'wikibase-error-ui-no-permissions' => 'Bạn không có đủ quyền để thực hiện thao tác này.',
+	'wikibase-error-ui-link-exists' => 'Không thể đặt liên kết đến trang này vì một khoản mục khác đã liên kết với nó.',
+	'wikibase-error-ui-session-failure' => 'Phiên của bạn đã hết hạn. Xin hãy đăng nhập lại.',
+	'wikibase-error-ui-edit-conflict' => 'Một mâu thuẫn sửa đổi đã xảy ra. Xin hãy tải lại và lưu lần nữa.',
 	'wikibase-sitelinks' => 'Các trang được liên kết đến khoản mục này',
 	'wikibase-sitelinks-sitename-columnheading' => 'Ngôn ngữ',
 	'wikibase-sitelinks-siteid-columnheading' => 'Mã',
 	'wikibase-sitelinks-link-columnheading' => 'Bài viết liên kết',
+	'wikibase-tooltip-error-details' => 'Chi tiết',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
 	'datatypes-type-commonsMedia' => 'Tập tin phương tiện Commons',
 );
@@ -856,16 +1001,34 @@ $messages['vi'] = array(
  * @author Shizhao
  * @author Stevenliuyi
  * @author Yfdyh000
+ * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
 	'wikibase-lib-desc' => '储存维基基础及其客户端的共同功能',
 	'wikibase-entity-item' => '项目',
 	'wikibase-entity-property' => '属性',
 	'wikibase-entity-query' => '查询',
+	'wikibase-error-unexpected' => '发生意外错误。',
+	'wikibase-error-save-generic' => '进行保存时发生错误，因此您所做的变更可能未被完成。',
+	'wikibase-error-remove-generic' => '进行删除时发生错误，因此您所做的变更可能未被完成。',
+	'wikibase-error-save-connection' => '进行保存时发生连接错误，因此您的变更可能未被完成。请检查您的因特网连接。',
+	'wikibase-error-remove-connection' => '进行删除时发生连接错误，因此您的变更可能未被完成。请检查您的因特网连接。',
+	'wikibase-error-save-timeout' => '我们遇到了技术问题，因此无法完成您的保存操作。',
+	'wikibase-error-remove-timeout' => '我们遇到了技术问题，因此无法完成您的删除操作。',
+	'wikibase-error-autocomplete-connection' => '无法查询维基百科API。请稍后重试。',
+	'wikibase-error-autocomplete-response' => '服务器响应：$1',
+	'wikibase-error-ui-client-error' => '无法连接到客户端页面。请稍后重试。',
+	'wikibase-error-ui-no-external-page' => '在相应的站点上找不到指定的条目。',
+	'wikibase-error-ui-cant-edit' => '您不能执行此操作。',
+	'wikibase-error-ui-no-permissions' => '您没有足够的权限执行此操作。',
+	'wikibase-error-ui-link-exists' => '因为另一项目已链接，您不能链接到此页面。',
+	'wikibase-error-ui-session-failure' => '您的会话已过期。请重新登录。',
+	'wikibase-error-ui-edit-conflict' => '发生编辑冲突。请刷新再重新保存。',
 	'wikibase-sitelinks' => '链接到本项目的页面列表',
 	'wikibase-sitelinks-sitename-columnheading' => '语言',
 	'wikibase-sitelinks-siteid-columnheading' => '代码',
 	'wikibase-sitelinks-link-columnheading' => '链接的条目',
+	'wikibase-tooltip-error-details' => '详细信息',
 	'datatypes-type-wikibase-item' => '项目',
 	'datatypes-type-commonsMedia' => '共享资源媒体文件',
 );
