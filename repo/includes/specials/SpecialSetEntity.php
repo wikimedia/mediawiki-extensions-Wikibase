@@ -207,7 +207,7 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 				Html::element(
 					'p',
 					array(),
-					$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->text()
+					$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
 				)
 				. Html::element(
 					'label',
