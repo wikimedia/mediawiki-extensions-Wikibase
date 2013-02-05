@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//zUY\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-05T13:24:19Z",
+      "side": 1,
+      "message": "Must use Html::rawElement for this to work.",
+      "revId": "cc7307627a1e9e0d18e5f4c0d27bc1e6b2a60f43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
