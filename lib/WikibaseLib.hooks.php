@@ -154,7 +154,6 @@ final class LibHooks {
 			'store/WikiPageEntityLookup',
 
 			'ByPropertyIdArray',
-			'ChangeNotifier',
 			'ChangesTable',
 			'DataTypes',
 			'ReferencedEntitiesFinder',
