@@ -207,6 +207,7 @@ $wgAutoloadClasses['Wikibase\Test\TemplateRegistryTest'] 	= $dir . 'tests/phpuni
 $wgAutoloadClasses['Wikibase\Test\ChangeRowTest']			= $dir . 'tests/phpunit/changes/ChangeRowTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityChangeTest']		= $dir . 'tests/phpunit/changes/EntityChangeTest.php';
 $wgAutoloadClasses['Wikibase\Test\TestChanges']				= $dir . 'tests/phpunit/changes/TestChanges.php';
+$wgAutoloadClasses['Wikibase\Test\ClaimTest']				= $dir . 'tests/phpunit/claim/ClaimTest.php';
 $wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/item/TestItems.php';
 $wgAutoloadClasses['Wikibase\Test\EntityTest'] 				= $dir . 'tests/phpunit/entity/EntityTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityDiffOldTest'] 		= $dir . 'tests/phpunit/entity/EntityDiffOldTest.php';
