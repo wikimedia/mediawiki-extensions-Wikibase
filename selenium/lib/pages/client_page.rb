@@ -28,6 +28,16 @@ class ClientPage < RubySelenium
   unordered_list(:clientInterwikiLinkList, :xpath => "//div[@id='p-lang']/div/ul")
   button(:clientActionConfirmationButton, :xpath => "//form[@class='visualClear']/input[@class='mw-htmlform-submit']")
 
+  #link item dialog
+  span(:clientLinkDialogHeader, :xpath => "//div[contains(@class, 'ui-dialog')]/div[contains(@class, 'ui-dialog-titlebar')]/span[contains(@class, 'ui-dialog-title')]")
+  link(:clientLinkDialogClose, :class => "ui-dialog-titlebar-close")
+  link(:clientLinkItemLink, :id => "wbc-linkToItem-link")
+  text_field(:clientLinkItemLanguageInput, :id => "wbclient-linkItem-Site")
+  text_field(:clientLinkItemLanguagePage, :id => "wbclient-linkItem-page")
+  button(:clientLinkItemSubmit, :id => "wbclient-linkItem-goButton")
+  link(:clientLinkItemLanguageSelectorFirst, :xpath => "//ul[contains(@class, 'wikibase-siteselector-list')]/li/a")
+  link(:clientLinkItemSuccess, :xpath => "//p[contains(@class, 'wbclient-linkItem-success-message')]/a")
+
   #language links
   link(:interwiki_de, :xpath => "//li[@class='interwiki-de']/a")
   link(:interwiki_en, :xpath => "//li[@class='interwiki-en']/a")
@@ -69,7 +79,8 @@ class ClientPage < RubySelenium
     if purge
       param_purge = "?action=purge"
     end
-    navigate_to WIKI_CLIENT_URL + title + param_purge
+    url = WIKI_CLIENT_URL + title + param_purge
+    navigate_to url
     if clientActionConfirmationButton?
       clientActionConfirmationButton
     end
@@ -98,6 +109,12 @@ class ClientPage < RubySelenium
     navigate_to(current_url + "?action=unwatch")
     if clientActionConfirmationButton?
       clientActionConfirmationButton
+    end
+  end
+
+  def wait_for_link_item_link
+    wait_until do
+      clientLinkItemLink?
     end
   end
 end
