@@ -128,6 +128,11 @@ RSpec::Core::RakeTask.new(:client_repo) do |spec|
   spec.pattern = '../client/tests/selenium/interwiki/client_repo_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:client_edit_sitelinks) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../client/tests/selenium/interwiki/edit_sitelinks_spec.rb'
+end
+
 RSpec::Core::RakeTask.new(:undo) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/special/undo_spec.rb'
