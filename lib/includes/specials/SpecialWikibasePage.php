@@ -75,7 +75,8 @@ abstract class SpecialWikibasePage extends SpecialPage {
 		$this->subPage = trim( str_replace( '_', ' ', $subPage ) );
 
 		$this->setHeaders();
-		$this->outputHeader();
+		$contLang = $this->getContext()->getLanguage();
+		$this->outputHeader( $contLang->lc( 'wikibase-' . $this->getName() ) . '-summary' );
 
 		// If the user is authorized, display the page, if not, show an error.
 		if ( !$this->userCanExecute( $this->getUser() ) ) {
