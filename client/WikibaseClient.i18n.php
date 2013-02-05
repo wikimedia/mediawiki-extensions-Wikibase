@@ -17,6 +17,7 @@ $messages = array();
  * @author Katie Filbert
  * @author Jeroen De Dauw
  * @author Nikola Smolenski
+ * @author Marius Hoch
  */
 $messages['en'] = array(
 	'wikibase-client-desc' => 'Client for the Wikibase extension',
@@ -30,8 +31,24 @@ $messages['en'] = array(
 	'wikibase-comment-sitelink-change' => 'Language link changed from $1 to $2',
 	'wikibase-comment-sitelink-remove' => 'Language link removed: $1',
 	'wikibase-comment-multi' => '$1 changes',
+	'wikibase-nolanglinks' => 'none',
 	'wikibase-editlinks' => 'Edit links',
 	'wikibase-editlinkstitle' => 'Edit interlanguage links',
+	'wikibase-linkitem-addlinks' => 'Add links',
+	'wikibase-linkitem-close' => 'Close dialog and reload page',
+	'wikibase-linkitem-failure' => 'An unknown error occured while trying to link the given page.',
+	'wikibase-linkitem-title' => 'Link with page',
+	'wikibase-linkitem-linkpage' => 'Link with page',
+	'wikibase-linkitem-selectlink' => 'Please select a site and a page you want to link this page with.',
+	'wikibase-linkitem-input-site' => 'Language:',
+	'wikibase-linkitem-input-page' => 'Page:',
+	'wikibase-linkitem-invalidsite' => 'Unknown or invalid site selected',
+	'wikibase-linkitem-confirmitem-text' => 'Please confirm that the pages shown below are the ones you want to link with this page.',
+	'wikibase-linkitem-confirmitem-button' => 'Confirm',
+	'wikibase-linkitem-not-loggedin-title' => 'You need to be logged in',
+	'wikibase-linkitem-not-loggedin' => 'You need to be logged in on this wiki and in the [$1 central data repository] to use this feature.',
+	'wikibase-linkitem-success-create' => 'The pages have successfully been linked. You can find the newly created item containing the links in our [$1 central data repository].',
+	'wikibase-linkitem-success-link' => 'The pages have successfully been linked. You can find the item containing the links in our [$1 central data repository].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
 );
@@ -41,6 +58,7 @@ $messages['en'] = array(
  * @author Katie Filbert
  * @author Raymond
  * @author Shirayuki
+ * @author Marius Hoch
  */
 $messages['qqq'] = array(
 	'wikibase-client-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
@@ -57,9 +75,25 @@ See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wikibase-comment-sitelink-remove' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets removed on the repository.  $1 is the wikilink for the link removed, in format [[:de:Berlin|de:Berlin]].',
 	'wikibase-comment-multi' => 'Summary shown in Special:RecentChanges and on Special:WatchList for an entry that represents multiple changes on the Wikibase repository. Parameters:
 * $1 - the number of changes; is always at least 2.',
+	'wikibase-nolanglinks' => 'Shown in the "Languages" box in case the page exists but hasn\'t got any langlinks',
 	'wikibase-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.',
 	'wikibase-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizard to edit interlanguage links.',
+	'wikibase-linkitem-addlinks' => 'Link on the left asking to link the current page with pages on other sites. Only visible in case the current page has no langlinks',
+	'wikibase-linkitem-close' => 'Button text asking to close the current dialog and to reload the page.',
+	'wikibase-linkitem-failure' => 'Shown in case an error occurred which is not an API error (like a linking conflict)',
+	'wikibase-linkitem-title' => 'Title for the dialog which allows linking the current page with a page on another site.',
+	'wikibase-linkitem-linkpage' => 'Button in the dialog which allows linking the current page with a page on another site. Usable after the user inserted a site and a page to link.',
+	'wikibase-linkitem-selectlink' => 'Explaining the user that he can choose a site and a page that should be linked with the one he\'s currently on.',
+	'wikibase-linkitem-input-site' => 'Label for the (autocompleted) inputbox asking for a site/ language',
+	'wikibase-linkitem-input-page' => 'Label for the (autocompleted) inputbox asking for a page',
+	'wikibase-linkitem-invalidsite' => 'Tooltip shown if the user entered an invalid site to link pages with',
+	'wikibase-linkitem-confirmitem-text' => 'Text shown above a table containing links to other pages. Asks the user to confirm that the links are correct and should be linked with the current page.',
+	'wikibase-linkitem-confirmitem-button' => 'Button label below a table containing links to other pages. Asks the user to confirm that he wants to link them with the current page.',
+	'wikibase-linkitem-not-loggedin-title' => 'Title of the dialog telling the user that he needs to login on both the repo and client to use this feature.',
+	'wikibase-linkitem-not-loggedin' => 'This messages informs the user that he needs to be logged in on both this wiki and the repo to use this feature. $1 is the URI to the login form of the repo',
+	'wikibase-linkitem-success-create' => 'Success message after a new item has been created which contains links to the page the user is currently on and the one entered. $1 holds a URL pointing to the new item.',
+	'wikibase-linkitem-success-link' => 'Success message after the page the user currently is on has been linked with an item. $1 holds a URL pointing to the item.',
 	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
 * Parameter $1 is a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
 );
