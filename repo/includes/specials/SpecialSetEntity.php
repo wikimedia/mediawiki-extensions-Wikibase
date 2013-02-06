@@ -61,6 +61,10 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 		$this->setHeaders();
 		$this->outputHeader();
 
+		$this->checkPermissions();
+		$this->checkBlocked();
+		$this->checkReadOnly();
+
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 
@@ -419,4 +423,23 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 	 * @return Status
 	 */
 	abstract protected function setValue( $entityContent, $language, $value, &$summary );
+	/**
+	 * Output an error message telling the user that he is blocked
+	 */
+
+	function displayBlockedError() {
+		throw new UserBlockedError( $this->getUser()->getBlock() );
+	}
+
+	/**
+	 * Checks if user is blocked, and if he is blocked throws a UserBlocked
+	 *
+	 * @since 0.4
+	 */
+	public function checkBlocked() {
+		if ( $this->getUser()->isBlocked() ) {
+			$this->displayBlockedError();
+		}
+	}
+
 }
