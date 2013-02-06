@@ -21,6 +21,7 @@ $messages = array();
  */
 $messages['en'] = array(
 	'wikibase-client-desc' => 'Client for the Wikibase extension',
+	'specialpages-group-wikibaseclient' => 'Wikidata client',
 	'wikibase-after-page-move' => 'You may also [$1 update] the associated Wikidata item to maintain language links on moved page.',
 	'wikibase-comment-remove' => 'Associated Wikidata item deleted. Language links removed.',
 	'wikibase-comment-linked' => 'A Wikidata item has been linked to this page.',
@@ -51,6 +52,14 @@ $messages['en'] = array(
 	'wikibase-linkitem-success-link' => 'The pages have successfully been linked. You can find the item containing the links in our [$1 central data repository].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
+	'special-unconnectedpages' => 'Unconnected pages',
+	'wikibase-unconnectedpages-legend' => 'Get a list of pages without connected items',
+	'wikibase-unconnectedpages-page' => 'Start page:',
+	'wikibase-unconnectedpages-submit' => 'Find',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" is not a valid language code.',
+	'wikibase-unconnectedpages-page-warning' => 'The page title could not be used for the query and is ignored.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Only pages with interlanguage-links',
+	'wikibase-unconnectedpages-format-row' => '($1 interlanguage-links on the page)',
 );
 
 /** Message documentation (Message documentation)
@@ -63,6 +72,7 @@ $messages['en'] = array(
 $messages['qqq'] = array(
 	'wikibase-client-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
 See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
+	'specialpages-group-wikibaseclient' => 'Title of group of special pages related to Wikidata clients',
 	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfuly move, inviting user to update associated Wikibase repo item to maintain language links on the moved page on the client.
 * Parameter $1 is the link for the associated Wikibase item.',
 	'wikibase-comment-remove' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item connected to a page gets deleted. This results in all the language links being removed from the page on the client.',
@@ -96,6 +106,9 @@ See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wikibase-linkitem-success-link' => 'Success message after the page the user currently is on has been linked with an item. $1 holds a URL pointing to the item.',
 	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
 * Parameter $1 is a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
+	'special-unconnectedpages' => 'Title of the special page for listing unconnected items.',
+	'wikibase-unconnectedpages-page-warning' => 'The title that is typed in could not be used of some kind of reason. This can happen for example when the title has an interwiki prefix to another language, or a namespace that is not used for Wikibase entities.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Text for the checkbox. Should say that only pages without interlanguage-links should be listed.',
 );
 
 /** Asturian (asturianu)
