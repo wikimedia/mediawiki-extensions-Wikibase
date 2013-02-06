@@ -574,11 +574,10 @@ final class ClientHooks {
 			$titleText = $title->getPrefixedText();
 			$siteId = Settings::get( 'siteGlobalID' );
 			$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink( $siteId, $titleText );
-
-			$parser->getOutput()->setProperty(
-				'ConnectedItem',
-				$itemId === false ? null : serialize( $itemId )
-			);
+			
+			if ( $itemId !== false ) {
+				$parser->getOutput()->setProperty( 'ConnectedItem', $itemId );
+			}
 
 		}
 
