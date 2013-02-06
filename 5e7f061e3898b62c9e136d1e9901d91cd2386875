@@ -194,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "AAADiH//yJY\u003d",
+        "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T15:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH//yPI\u003d",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//yMk\u003d",
         "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
         "patchSetId": 1
@@ -211,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "AAADiH//yJU\u003d",
+        "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T15:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH//yMk\u003d",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//yMQ\u003d",
         "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
         "patchSetId": 1
@@ -222,6 +258,24 @@
       "writtenOn": "2013-02-06T14:37:58Z",
       "side": 1,
       "message": "remove",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yJk\u003d",
+        "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T15:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH//yMQ\u003d",
       "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -280,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "AAADiH//yJc\u003d",
+        "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T15:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH//yME\u003d",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//yMA\u003d",
         "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
         "patchSetId": 1
@@ -291,6 +363,24 @@
       "writtenOn": "2013-02-06T14:37:58Z",
       "side": 1,
       "message": "remove",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yJg\u003d",
+        "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T15:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH//yMA\u003d",
       "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
