@@ -274,6 +274,20 @@ to find out where it went.',
 	// query - summary and autocomment
 	'wikibase-query-summary-special-create-query' => 'Created a [$2] query with {{plural:$1|value|values}}',
 
+	// datatype descriptions
+	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Link to other items at the project. During entry the "Item" namespace on Wikidata will be searced for matching entries. It consists of a single text entry field',
+	'wikibase-listdatatypes-commonsmedia-head' => 'Commons media',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Link to files stored at Wikimedia Commons. During entry the "File" namespace on Commons will be searched for matching entries.',
+	'wikibase-listdatatypes-geo-coordinate-head' => 'Geo coordinate',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'Literal data for a geographical position given as a latitude-longitude pair in gms or decimal degrees for the given stellar body. Defaults to "Earth" and then "WGS84". It adds a resolution and range.',
+	'wikibase-listdatatypes-quantity-head' => 'Quantity',
+	'wikibase-listdatatypes-quantity-body' => 'Literal data field for a quantity that relates to some kind of well-defined unit. The actual unit goes in the data values that is entered.',
+	'wikibase-listdatatypes-monolingual-text-head' => 'Monolingual text',
+	'wikibase-listdatatypes-monolingual-text-body' => 'Literal data field for a string that is not translated into other languages. This type of string is defined once and reused across all languages. Typical use is a geographical names written in the local language, an identifier of some kind, a chemical formula or a Latin scientific name.',
+	'wikibase-listdatatypes-multilingual-text-head' => 'Multilingual text',
+	'wikibase-listdatatypes-multilingual-text-body' => 'Literal data field for a string that must be translated into other languages. Typical use is a entity name of global interest that has non-local written forms. Those can differ both in languages and script systems.',
+
 	//content model names
 	'content-model-wikibase-item' => 'Wikibase item',
 	'content-model-wikibase-property' => 'Wikibase property',
@@ -705,6 +719,20 @@ This module generates a slightly different summary (autocomment) than the other 
 	'right-label-update' => '{{doc-right|label-update}}',
 	'right-description-remove' => '{{doc-right|description-remove}}',
 	'right-description-update' => '{{doc-right|description-update}}',
+
+	// datatype descriptions
+	'wikibase-listdatatypes-wikibase-item-head' => 'Descriptive header text for the "Item" -type. Used on the "List of all datatypes" special page.',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Descriptive body text for the "Item" -type. Used on the "List of all datatypes" special page.',
+	'wikibase-listdatatypes-commonsmedia-head' => 'Descriptive header text for the "Commons media" -type. Used on the "List of all datatypes" special page.',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Descriptive body text for the "Commons media" -type. Used on the "List of all datatypes" special page.',
+	'wikibase-listdatatypes-geo-coordinate-head' => 'Descriptive header text for the "Geo coordinate" -type. Used on the "List of all datatypes" special page.',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'Descriptive body text for the "Geo coordinate" -type. Used on the "List of all datatypes" special page.',
+	'wikibase-listdatatypes-quantity-head' => 'Descriptive header text for the "Quantity" -type. Used on the "List of all datatypes" special page.',
+	'wikibase-listdatatypes-quantity-body' => 'Descriptive body text for the "Quantity" -type. Used on the "List of all datatypes" special page.',
+	'wikibase-listdatatypes-monolingual-text-head' => 'Descriptive header text for the "Monolingual text" -type. Used on the "List of all datatypes" special page.',
+	'wikibase-listdatatypes-monolingual-text-body' => 'Descriptive body text for the "Monolingual text" -type. Used on the "List of all datatypes" special page.',
+	'wikibase-listdatatypes-multilingual-text-head' => 'Descriptive header text for the "Multilingual text" -type. Used on the "List of all datatypes" special page.',
+	'wikibase-listdatatypes-multilingual-text-body' => 'Descriptive body text for the "Multilingual text" -type. Used on the "List of all datatypes" special page.',
 );
 
 /** Achinese (Acèh)
