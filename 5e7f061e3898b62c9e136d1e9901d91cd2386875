@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//yP8\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T14:06:31Z",
+      "side": 1,
+      "message": "ws",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yPY\u003d",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T14:06:31Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yPk\u003d",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T14:06:31Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yPA\u003d",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T14:06:31Z",
+      "side": 1,
+      "message": "make sure the userCan stuff is added to the claims also",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yPM\u003d",
+        "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T14:06:31Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yPI\u003d",
+        "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T14:06:31Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yPE\u003d",
+        "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T14:06:31Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "5e7f061e3898b62c9e136d1e9901d91cd2386875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
