@@ -94,7 +94,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 			list( $this->limit, $this->offset ) = $this->getRequest()->getLimitOffset();
 		}
 
-		$result = $this->getResult( $this->limit + 1, $this->offset );
+		$result = $this->getResult( $this->offset, $this->limit + 1 );
 
 		$this->numRows = count( $result );
 

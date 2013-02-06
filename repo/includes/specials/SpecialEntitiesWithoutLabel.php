@@ -142,7 +142,7 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$entityPerPage = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
-		return $entityPerPage->getEntitiesWithoutTerm( \Wikibase\Term::TYPE_LABEL, $this->language, null, $offset, $limit );
+		return $entityPerPage->getEntitiesWithoutTerm( \Wikibase\Term::TYPE_LABEL, $this->language, null, $limit, $offset );
 	}
 
 
