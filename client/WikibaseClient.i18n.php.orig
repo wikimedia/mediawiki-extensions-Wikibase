@@ -112,10 +112,13 @@ See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wikibase-linkitem-success-link' => 'Success message after the page the user currently is on has been linked with an item. $1 holds a URL pointing to the item.',
 	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
 * Parameter $1 is a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
+<<<<<<< HEAD
 	'wikibase-rc-show-wikidata-pref' => 'Option in the Recent changes section of preferences to show wikibase changes by default in recent changes',
+=======
 	'special-unconnectedpages' => 'Title of the special page for listing unconnected items.',
 	'wikibase-unconnectedpages-page-warning' => 'The title that is typed in could not be used of some kind of reason. This can happen for example when the title has an interwiki prefix to another language, or a namespace that is not used for Wikibase entities.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Text for the checkbox. Should say that only pages without interlanguage-links should be listed.',
+>>>>>>> (Bug 43994) Add a special page for pages that are not connected to items
 );
 
 /** Asturian (asturianu)
