@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//yZg\u003d",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T09:48:32Z",
+      "side": 1,
+      "message": "ws",
+      "revId": "b64e51183c05c7730bbd05d5648950e9c9a4fb56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yZc\u003d",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T09:48:32Z",
+      "side": 1,
+      "message": "ws",
+      "revId": "b64e51183c05c7730bbd05d5648950e9c9a4fb56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yZQ\u003d",
+        "filename": "repo/includes/api/RemoveQualifiers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T09:48:32Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "b64e51183c05c7730bbd05d5648950e9c9a4fb56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yZY\u003d",
+        "filename": "repo/includes/api/RemoveReferences.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T09:48:32Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "b64e51183c05c7730bbd05d5648950e9c9a4fb56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADiH//yZU\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T09:48:32Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "b64e51183c05c7730bbd05d5648950e9c9a4fb56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
