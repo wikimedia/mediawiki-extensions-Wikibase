@@ -2,6 +2,9 @@
 
 namespace Wikibase;
 use IContextSource;
+use Html;
+use Diff\IDiff;
+use Diff\DiffOp;
 
 /**
  * Class for generating views of EntityDiff objects.
@@ -28,6 +31,7 @@ use IContextSource;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 
 class EntityDiffView extends DiffView {
@@ -42,9 +46,36 @@ class EntityDiffView extends DiffView {
 	 *
 	 * @return EntityDiffView
 	 */
-	public static function newForDiff( EntityDiff $diff, IContextSource $contextSource = null ) {
-		return new static( array(), $diff, $contextSource );
+	public static function newForDiff( EntityDiff $diff, IContextSource $contextSource = null, $entityLookup = null ) {
+		return new static( array(), $diff, $contextSource, $entityLookup );
 		// TODO: grep for new EntityDiffView and rep by this
 	}
 
+	/**
+	 * Get HTML for a changed snak
+	 *
+	 * @since 0.4
+	 *
+	 * @param Claim $claim
+	 *
+	 * @return string
+	 */
+	protected function getChangedSnakHtml( Claim $claim ) {
+		$snakType = $claim->getMainSnak()->getType();
+		$diffValueString = $snakType;
+
+		if ( $snakType === 'value' ) {
+			$dataValue = $claim->getMainSnak()->getDataValue();
+
+			//FIXME: This will break for types other than EntityId or StringValue
+			//we do not have a generic way to get string representations of the values yet
+			if ( $dataValue instanceof EntityId ) {
+				$diffValueString = $this->getEntityLabel( $dataValue );
+			} else {
+				$diffValueString = $dataValue->getValue();
+			}
+		}
+
+		return $diffValueString;
+	}
 }
