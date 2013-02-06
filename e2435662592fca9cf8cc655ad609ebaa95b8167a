@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADiH//yDw\u003d",
+        "filename": "repo/includes/specials/SpecialCreateEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-06T17:16:00Z",
+      "side": 1,
+      "message": "Uh, why not inline this?\n\nAnd if you keep it as method, please make it non-public",
+      "revId": "e2435662592fca9cf8cc655ad609ebaa95b8167a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
