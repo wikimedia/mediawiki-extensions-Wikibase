@@ -274,6 +274,39 @@ to find out where it went.',
 	// query - summary and autocomment
 	'wikibase-query-summary-special-create-query' => 'Created a [$2] query with {{plural:$1|value|values}}',
 
+	// datatype descriptions
+	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Link to other items at the project. (Is this a MediaWikiTitle?) During entry the "Item" namespace on Wikidata will be searced for matching entries. It consists of a single text entry field.
+* scheme &ndash; implicit part of the Iri-string
+* hierarchicalpart &ndash; implicit part of the Iri-string
+* query &ndash; implicit part of the Iri-string
+* fragment &ndash; implicit part of the Iri-string',
+	'wikibase-listdatatypes-commonsmedia-head' => 'Commons media',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Link to files stored at Wikimedia Commons. (Is this a MediaWikiTitle?) During entry the "File" namespace on Commons will be searched for matching entries.
+* scheme &ndash; implicit part of the Iri-string
+* hierarchicalpart &ndash; implicit part of the Iri-string
+* query &ndash; implicit part of the Iri-string
+* fragment &ndash; implicit part of the Iri-string',
+	'wikibase-listdatatypes-geo-coordinate-head' => 'Geo coordinate',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'Literal data for a geographical position given as a latitude-longitude pair in gms or decimal degrees for the given stellar body. Defaults to "Earth" and then "WGS84". It adds a resolution and range.
+* latitude &ndash; implicit first part (float, dms, dm, dd) of the coordinate string, direction is either given by prefixed sign or by postfixed N/S
+* longitude &ndash; implicit second part (float, dms, dm, dd) of the coordinate string, direction is either given by prefixed sign or by postfixed E/W
+* altitude (optional) &ndash; explicit (?) value for the height over a reference plane , for the globe "Earth" that would be the "WGS84" reference globe
+* globe (optional) &ndash; explicit (?) data value, given as stellar body that defaults to "Earth" and then "WGS84"',
+	'wikibase-listdatatypes-quantity-head' => 'Quantity',
+	'wikibase-listdatatypes-quantity-body' => 'Literal data field for a quantity that relates to some kind of well-defined unit. The actual unit goes in the data values that is entered.
+* value &ndash; implicit part of the string (mapping of unit prefix is unclear)
+* unit &ndash; implicit part of the string (mapping to standardizing body is unclear)
+* accuracy (optional) &ndash; explicit data value, has the same unit as the value',
+	'wikibase-listdatatypes-monolingual-text-head' => 'Monolingual text',
+	'wikibase-listdatatypes-monolingual-text-body' => 'Literal data field for a string that is not translated into other languages. This type of string is defined once and reused across all languages. Typical use is a geographical names written in the local language, an identifier of some kind, a chemical formula or a Latin scientific name.
+* language &ndash; explicit value for identifying the language for the text part
+* text &ndash; explicit value for the language specific variant string',
+	'wikibase-listdatatypes-multilingual-text-head' => 'Multilingual text',
+	'wikibase-listdatatypes-multilingual-text-body' => 'Literal data field for a string that must be translated into other languages. Typical use is a entity name of global interest that has non-local written forms. Those can differ both in languages and script systems.
+* language &ndash; explicit value for identifying the language for the text part
+* text &ndash; explicit value for the language specific variant string',
+
 	//content model names
 	'content-model-wikibase-item' => 'Wikibase item',
 	'content-model-wikibase-property' => 'Wikibase property',
@@ -705,6 +738,20 @@ This module generates a slightly different summary (autocomment) than the other 
 	'right-label-update' => '{{doc-right|label-update}}',
 	'right-description-remove' => '{{doc-right|description-remove}}',
 	'right-description-update' => '{{doc-right|description-update}}',
+
+	// datatype descriptions
+	'wikibase-listdatatypes-wikibase-item-head' => '{{Wikibase-datatype-head|Item}}',
+	'wikibase-listdatatypes-wikibase-item-body' => '{{Wikibase-datatype-body|Item}}',
+	'wikibase-listdatatypes-commonsmedia-head' => '{{Wikibase-datatype-head|Commons media}}',
+	'wikibase-listdatatypes-commonsmedia-body' => '{{Wikibase-datatype-body|Commons media}}',
+	'wikibase-listdatatypes-geo-coordinate-head' => '{{Wikibase-datatype-head|Geo coordinate}}',
+	'wikibase-listdatatypes-geo-coordinate-body' => '{{Wikibase-datatype-body|Geo coordinate}}',
+	'wikibase-listdatatypes-quantity-head' => '{{Wikibase-datatype-head|Quantity}}',
+	'wikibase-listdatatypes-quantity-body' => '{{Wikibase-datatype-body|Quantity}}',
+	'wikibase-listdatatypes-monolingual-text-head' => '{{Wikibase-datatype-head|Monolingual text}}',
+	'wikibase-listdatatypes-monolingual-text-body' => '{{Wikibase-datatype-body|Monolingual text}}',
+	'wikibase-listdatatypes-multilingual-text-head' => '{{Wikibase-datatype-head|Multilingual text}}',
+	'wikibase-listdatatypes-multilingual-text-body' => '{{Wikibase-datatype-body|Multilingual text}}',
 );
 
 /** Achinese (Acèh)

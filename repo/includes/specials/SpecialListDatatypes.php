@@ -40,12 +40,13 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 		$this->getOutput()->addHTML( $this->msg( 'wikibase-listdatatypes-intro' ) );
-		$this->getOutput()->addHTML( Html::openElement( 'ul' ));
+		$this->getOutput()->addHTML( Html::openElement( 'dl' ));
 		foreach (\Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
-			$this->getOutput()->addHTML( Html::openElement( 'li' ));
-			$this->getOutput()->addHTML( htmlspecialchars( $dataTypeId ) );
-			$this->getOutput()->addHTML( Html::closeElement( 'li' ));
+			$baseKey = 'wikibase-listdatatypes-' . mb_strtolower( $dataTypeId );
+			$out = Html::rawElement( 'dt', array(), $this->msg( $baseKey . '-head' )->parse() )
+			. Html::rawElement( 'dd', array(), $this->msg( $baseKey . '-body' )->parse() );
+			$this->getOutput()->addHTML( $out );
 		}
-		$this->getOutput()->addHTML( Html::closeElement( 'ul' ));
+		$this->getOutput()->addHTML( Html::closeElement( 'dl' ));
 	}
 }
