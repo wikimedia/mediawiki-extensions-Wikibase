@@ -31,6 +31,7 @@ use Diff\DiffOp;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class DiffView extends \ContextSource {
 
@@ -90,57 +91,18 @@ class DiffView extends \ContextSource {
 	 */
 	protected function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
-			$name = implode( ' / ', $path ); // TODO: l10n
-
-			if ( $path[0] === 'claim' ) {
-				return 'TODO: claim diff visualization'; // TODO
-			}
-
-			$html = Html::openElement( 'tr' );
-			$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
-			$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
-			$html .= Html::closeElement( 'tr' );
+			$html = $this->generateDiffHeaderHtml( implode( ' / ', $path ) );
 
 			//TODO: no path, but localized section title.
 
 			//FIXME: complex objects as values?
 			if ( $op->getType() === 'add' ) {
-				$html .= Html::openElement( 'tr' );
-				$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
-				$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
-				$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
-					Html::rawElement( 'div', array(),
-						Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-							$op->getNewValue() ) ) );
-				$html .= Html::closeElement( 'tr' );
+				$html .= $this->generateAddOpHtml( $op->getNewValue() );
 			} elseif ( $op->getType() === 'remove' ) {
-				$html .= Html::openElement( 'tr' );
-				$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
-				$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
-					Html::rawElement( 'div', array(),
-						Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-							$op->getOldValue() ) ) );
-				$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
-				$html .= Html::closeElement( 'tr' );
+				$html .= $this->generateRemoveOpHtml( $op->getOldValue() );
 			} elseif ( $op->getType() === 'change' ) {
-				//TODO: use WordLevelDiff!
-
-				$html .= Html::openElement( 'tr' );
-				$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
-				$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
-					Html::rawElement( 'div', array(),
-						Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-							$op->getOldValue() ) ) );
-				$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
-				$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
-					Html::rawElement( 'div', array(),
-						Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-							$op->getNewValue() ) ) );
-				$html .= Html::closeElement( 'tr' );
-                $html .= Html::closeElement( 'tr' );
-
-			}
-			else {
+				$html .= $this->generateChangeOpHtml( $op->getNewValue(), $op->getOldValue() );
+			} else {
 				throw new \MWException( 'Invalid diffOp type' );
 			}
 		} else {
@@ -156,4 +118,94 @@ class DiffView extends \ContextSource {
 		return $html;
 	}
 
+	/**
+	 * Generates HTML for an add diffOp
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	protected function generateAddOpHtml( $value ) {
+		$html = Html::openElement( 'tr' );
+		$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
+			Html::rawElement( 'div', array(),
+				Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+					$value ) ) );
+		$html .= Html::closeElement( 'tr' );
+
+		return $html;
+	}
+
+	/**
+	 * Generates HTML for an remove diffOp
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	protected function generateRemoveOpHtml( $value ) {
+		$html = Html::openElement( 'tr' );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
+			Html::rawElement( 'div', array(),
+				Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+					$value ) ) );
+		$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
+		$html .= Html::closeElement( 'tr' );
+
+		return $html;
+	}
+
+	/**
+	 * Generates HTML for an change diffOp
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $oldValue
+	 * @param string $newValue
+	 *
+	 * @return string
+	 */
+	protected function generateChangeOpHtml( $oldValue, $newValue ) {
+		//TODO: use WordLevelDiff!
+		$html = Html::openElement( 'tr' );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
+			Html::rawElement( 'div', array(),
+				Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+					$oldValue ) ) );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
+			Html::rawElement( 'div', array(),
+				Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+					$newValue ) ) );
+		$html .= Html::closeElement( 'tr' );
+		$html .= Html::closeElement( 'tr' );
+
+		return $html;
+	}
+
+	/**
+	 * Generates HTML for the header of the diff operation
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $name
+	 *
+	 * @return string
+	 */
+	protected function generateDiffHeaderHtml( $name ) {
+		$html = Html::openElement( 'tr' );
+		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
+		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
+		$html .= Html::closeElement( 'tr' );
+
+		return $html;
+	}
 }
