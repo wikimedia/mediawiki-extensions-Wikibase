@@ -21,6 +21,7 @@ $messages = array();
  */
 $messages['en'] = array(
 	'wikibase-client-desc' => 'Client for the Wikibase extension',
+	'specialpages-group-wikibaseclient' => 'Wikidata client',
 	'wikibase-after-page-move' => 'You may also [$1 update] the associated Wikidata item to maintain language links on moved page.',
 	'wikibase-comment-remove' => 'Associated Wikidata item deleted. Language links removed.',
 	'wikibase-comment-linked' => 'A Wikidata item has been linked to this page.',
@@ -51,6 +52,14 @@ $messages['en'] = array(
 	'wikibase-linkitem-success-link' => 'The pages have successfully been linked. You can find the item containing the links in our [$1 central data repository].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
+	'special-unconnectedpages' => 'Pages not connected to items',
+	'wikibase-unconnectedpages-legend' => 'Unconnected pages options',
+	'wikibase-unconnectedpages-page' => 'Start page:',
+	'wikibase-unconnectedpages-submit' => 'Go',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" is not a valid language code.',
+	'wikibase-unconnectedpages-page-warning' => 'The page title could not be used for the query and is ignored.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Only pages with interlanguagelinks',
+	'wikibase-unconnectedpages-format-row' => '($1 interlanguagelinks on the page)',
 );
 
 /** Message documentation (Message documentation)
@@ -63,6 +72,7 @@ $messages['en'] = array(
 $messages['qqq'] = array(
 	'wikibase-client-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
 See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
+	'specialpages-group-wikibaseclient' => 'Title of group of special pages related to Wikidata clients',
 	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfuly move, inviting user to update associated Wikibase repo item to maintain language links on the moved page on the client.
 * Parameter $1 is the link for the associated Wikibase item.',
 	'wikibase-comment-remove' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item connected to a page gets deleted. This results in all the language links being removed from the page on the client.',
@@ -103,6 +113,14 @@ See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
 * Parameter $1 is a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
 	'wikibase-rc-show-wikidata-pref' => 'Option in the Recent changes section of preferences to show wikibase changes by default in recent changes',
+	'special-unconnectedpages' => 'Title of the special page for listing unconnected items.',
+	'wikibase-unconnectedpages-page-warning' => 'The title that is typed in could not be used of some kind of reason. This can happen for example when the title has an interwiki prefix to another language, or a namespace that is not used for Wikibase entities.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Text for the checkbox. Should say that only pages without interlanguage-links should be listed.',
+	'wikibase-unconnectedpages-legend' => 'Legend for the options box at the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-page' => 'Label for the start page field in the options box of the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-submit' => 'Text for the submit button in the options box of the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-invalid-language' => 'Warning message about invalid language used at the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-format-row' => 'Formating of the additional data for each row in the result set on the special page for pages not connected to sitelinks.',
 );
 
 /** Asturian (asturianu)
