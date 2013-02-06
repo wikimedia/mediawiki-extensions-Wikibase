@@ -77,6 +77,10 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 			return false;
 		}
 
+		$this->checkPermissions();
+		$this->checkBlocked();
+		$this->checkReadOnly();
+
 		$this->parts = ( $subPage === '' ? array() : explode( '/', $subPage ) );
 		$this->prepareArguments();
 
@@ -306,5 +310,23 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 * @return string[] Warnings that should be presented to the user
 	 */
 	abstract protected function getWarnings();
+
+	/**
+	 * Output an error message telling the user that he is blocked
+	 */
+	function displayBlockedError() {
+		throw new UserBlockedError( $this->getUser()->getBlock() );
+	}
+
+	/**
+	 * Checks if user is blocked, and if he is blocked throws a UserBlocked
+	 *
+	 * @since 0.4
+	 */
+	public function checkBlocked() {
+		if ( $this->getUser()->isBlocked() ) {
+			$this->displayBlockedError();
+		}
+	}
 
 }

@@ -96,10 +96,7 @@ describe "Check NewProperty special page" do
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
       visit_page(NewPropertyPage) do |page|
-        page.createEntityLabelField = generate_random_string(10)
-        page.createEntityDescriptionField = generate_random_string(20)
-        page.createEntitySubmit
-        page.mwFirstHeading.should == "Permissions errors"
+        page.mwFirstHeading.should == "User is blocked"
       end
     end
   end
