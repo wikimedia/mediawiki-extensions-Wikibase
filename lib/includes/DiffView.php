@@ -31,6 +31,7 @@ use Diff\DiffOp;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class DiffView extends \ContextSource {
 
@@ -49,6 +50,13 @@ class DiffView extends \ContextSource {
 	protected $diff;
 
 	/**
+	 * @since 0.4
+	 *
+	 * @var WikiPageEntityLookup
+	 */
+	protected $entityLookup;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
@@ -64,6 +72,8 @@ class DiffView extends \ContextSource {
 		if ( !is_null( $contextSource ) ) {
 			$this->setContext( $contextSource );
 		}
+
+		$this->entityLookup = new \Wikibase\WikiPageEntityLookup();
 	}
 
 	/**
@@ -90,54 +100,65 @@ class DiffView extends \ContextSource {
 	 */
 	protected function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
-			$name = implode( ' / ', $path ); // TODO: l10n
-
-			if ( $path[0] === 'claim' ) {
-				return 'TODO: claim diff visualization'; // TODO
-			}
-
-			$html = Html::openElement( 'tr' );
-			$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
-			$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
-			$html .= Html::closeElement( 'tr' );
+			$html = $this->generateDiffHeaderHtml( $path, $op );
 
 			//TODO: no path, but localized section title.
 
 			//FIXME: complex objects as values?
 			if ( $op->getType() === 'add' ) {
+				$newValue = $op->getNewValue();
+				if ( !is_string( $newValue ) && $path[0] === 'claim' ) {
+					$newValue = $this->getChangedSnakHtml( $newValue );
+				}
+
 				$html .= Html::openElement( 'tr' );
 				$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
 				$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 				$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
 					Html::rawElement( 'div', array(),
 						Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-							$op->getNewValue() ) ) );
+							$newValue ) ) );
 				$html .= Html::closeElement( 'tr' );
 			} elseif ( $op->getType() === 'remove' ) {
-				$html .= Html::openElement( 'tr' );
-				$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
-				$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
-					Html::rawElement( 'div', array(),
-						Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-							$op->getOldValue() ) ) );
-				$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
-				$html .= Html::closeElement( 'tr' );
-			} elseif ( $op->getType() === 'change' ) {
-				//TODO: use WordLevelDiff!
+				$oldValue = $op->getOldValue();
+				if ( !is_string( $oldValue ) && $path[0] === 'claim' ) {
+					$oldValue = $this->getChangedSnakHtml( $oldValue );
+				}
 
 				$html .= Html::openElement( 'tr' );
 				$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 				$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
 					Html::rawElement( 'div', array(),
 						Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-							$op->getOldValue() ) ) );
+							$oldValue ) ) );
+				$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
+				$html .= Html::closeElement( 'tr' );
+			} elseif ( $op->getType() === 'change' ) {
+				//TODO: use WordLevelDiff!
+
+				$newValue = $op->getNewValue();
+				if ( !is_string( $newValue ) && $path[0] === 'claim' ) {
+					$newValue = $this->getChangedSnakHtml( $newValue );
+				}
+
+				$oldValue = $op->getOldValue();
+				if ( !is_string( $oldValue ) && $path[0] === 'claim' ) {
+					$oldValue = $this->getChangedSnakHtml( $oldValue );
+				}
+
+				$html .= Html::openElement( 'tr' );
+				$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
+				$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
+					Html::rawElement( 'div', array(),
+						Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+							$oldValue ) ) );
 				$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 				$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
 					Html::rawElement( 'div', array(),
 						Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-							$op->getNewValue() ) ) );
+							$newValue ) ) );
 				$html .= Html::closeElement( 'tr' );
-                $html .= Html::closeElement( 'tr' );
+				$html .= Html::closeElement( 'tr' );
 
 			}
 			else {
@@ -154,6 +175,86 @@ class DiffView extends \ContextSource {
 		}
 
 		return $html;
+	}
+
+	/**
+	 * Get HTML for a changed snak
+	 *
+	 * @since 0.4
+	 *
+	 * @param Statement $statement
+	 *
+	 * @return string
+	 */
+	private function getChangedSnakHtml( Statement $statement ) {
+		$snakType = $statement->getMainSnak()->getType();
+		$diffValueString = $snakType;
+
+		if ( $snakType === 'value' ) {
+			$dataValue = $statement->getMainSnak()->getDataValue();
+			if ( $dataValue instanceof EntityId ) {
+				$diffValueString = $this->getEntityLabel( $dataValue );
+			} else {
+				$diffValueString = $dataValue->getValue();
+			}
+		}
+
+		return $diffValueString;
+	}
+
+	/**
+	 * Builds the HTML for the header of a specific diff operation
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $path
+	 * @param DiffOp $op
+	 *
+	 * @return string
+	 */
+	private function generateDiffHeaderHtml( array $path, DiffOp $op ) {
+		if ( $path[0] === 'claim' ) {
+			if ( $op->getType() === 'change' ) {
+				$propertyLabel = $this->getEntityLabel( $op->getOldValue()->getPropertyId() );
+				$name = $path[0] . ' / ' . $propertyLabel;
+			} elseif ( $op->getType() === 'add' ) {
+				$propertyLabel = $this->getEntityLabel( $op->getNewValue()->getPropertyId() );
+				$name = $path[0] . ' / ' . $propertyLabel;
+			} elseif ( $op->getType() === 'remove' ) {
+				$propertyLabel = $this->getEntityLabel( $op->getOldValue()->getPropertyId() );
+				$name = $path[0] . ' / ' . $propertyLabel;
+			}
+		} else {
+			$name = implode( ' / ', $path ); // TODO: l10n
+		}
+
+		$html = Html::openElement( 'tr' );
+		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
+		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
+		$html .= Html::closeElement( 'tr' );
+
+		return $html;
+	}
+
+	/**
+	 * Gets the label of an entity represented by its EntityId
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return string 
+	 */
+	private function getEntityLabel( EntityId $id ) {
+		$label = $this->entityLookup->getEntity( $id )->getLabel(
+			$this->getContext()->getLanguage()->getCode()
+		);
+
+		if ( $label === false ) {
+			$label = $id->getPrefixedId();
+		}
+
+		return $label;
 	}
 
 }
