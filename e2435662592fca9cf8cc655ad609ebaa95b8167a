@@ -16,6 +16,24 @@
       "revId": "e2435662592fca9cf8cc655ad609ebaa95b8167a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///tg\u003d",
+        "filename": "repo/includes/specials/SpecialCreateEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-06T21:08:06Z",
+      "side": 1,
+      "message": "Mostly because I think it should have a nicer solution than going down in flames, and then it is nice to have somewhere to put the code. That said, the checkPermissions() just throws an exception that to, so it is mostly that I feel insulted by the throws.\n\nYes it should be protected, forgot that.",
+      "parentUuid": "AAADiH//yDw\u003d",
+      "revId": "e2435662592fca9cf8cc655ad609ebaa95b8167a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
