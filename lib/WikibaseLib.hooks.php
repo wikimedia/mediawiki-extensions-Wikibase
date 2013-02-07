@@ -82,6 +82,7 @@ final class LibHooks {
 					'quantity',
 					'monolingual-text',
 					'multilingual-text',
+					'time',
 				),
 			)
 		);
