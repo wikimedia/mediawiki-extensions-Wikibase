@@ -268,8 +268,26 @@ $messages['diq'] = array(
  */
 $messages['dsb'] = array(
 	'wikibase-client-desc' => 'Klient za rozšyrjenje Wikibase',
+	'wikibase-comment-linked' => 'Element Wikidata jo se z toś tym bokom zwězał.',
+	'wikibase-comment-update' => 'Mjazyrěcne wótkaze su se zaktualizěrowali.',
+	'wikibase-comment-sitelink-add' => 'Mjazyrěcny wótkaz pśidany: $1',
+	'wikibase-comment-sitelink-change' => 'Mjazyrěcny wótkaz změnjony wót $1 do $2',
+	'wikibase-comment-sitelink-remove' => 'Mjazyrěcny wótkaz wótpórany: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|změna|změnje|změny|změnow}}',
+	'wikibase-nolanglinks' => 'žeden',
 	'wikibase-editlinks' => 'Wótkaze wobźěłaś',
 	'wikibase-editlinkstitle' => 'Mjazyrěcne wótkaze wobźěłaś',
+	'wikibase-linkitem-addlinks' => 'Wótkaze pśidaś',
+	'wikibase-linkitem-close' => 'Dialog zacyniś a bok znowego zacytaś',
+	'wikibase-linkitem-title' => 'Z bokom zwězaś',
+	'wikibase-linkitem-linkpage' => 'Z bokom zwězaś',
+	'wikibase-linkitem-input-site' => 'Rěc:',
+	'wikibase-linkitem-input-page' => 'Bok:',
+	'wikibase-linkitem-invalidsite' => 'Njeznate abo njepłaśiwe sedło wubrane',
+	'wikibase-linkitem-confirmitem-button' => 'Wobkšuśiś',
+	'wikibase-linkitem-not-loggedin-title' => 'Musyš pśizjawjony byś',
+	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-show-wikidata-pref' => 'Změny Wikidata w aktualnych změnach pokazaś',
 );
 
 /** Esperanto (Esperanto)
@@ -468,8 +486,24 @@ $messages['he'] = array(
 	'wikibase-comment-sitelink-change' => 'קישור השפה שוּנה מ־$1 אל $2',
 	'wikibase-comment-sitelink-remove' => 'קישור השפה הוסר: $1',
 	'wikibase-comment-multi' => '$1 שינויים',
+	'wikibase-nolanglinks' => 'אין',
 	'wikibase-editlinks' => 'עריכת קישורים',
 	'wikibase-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
+	'wikibase-linkitem-addlinks' => 'הוספת קישורים',
+	'wikibase-linkitem-close' => 'סגירה ורענון',
+	'wikibase-linkitem-failure' => 'שגיאה בלתי־ידועה אירעה בעת ניסיון לקשר את הדף הנתון.',
+	'wikibase-linkitem-title' => 'קישור עם דף',
+	'wikibase-linkitem-linkpage' => 'קישור עם דף',
+	'wikibase-linkitem-selectlink' => 'נא לבחור אתר ודף שאליו ברצונכם לקשר את הדף הזה.',
+	'wikibase-linkitem-input-site' => 'שפה:',
+	'wikibase-linkitem-input-page' => 'דף:',
+	'wikibase-linkitem-invalidsite' => 'בחרת אתר בלתי־ידוע או בלתי־תקין',
+	'wikibase-linkitem-confirmitem-text' => 'נא לאשר שהדפים להלן הם אלה בשרצית לקשר אל הדף הזה.',
+	'wikibase-linkitem-confirmitem-button' => 'אישור',
+	'wikibase-linkitem-not-loggedin-title' => 'יש להיכנס לחשבון',
+	'wikibase-linkitem-not-loggedin' => 'יש להיכנס לחשבון בוויקי הזה וב[$1 מאגר הנתונים המרכזי] כדי להשתמש באפשרות הזאת.',
+	'wikibase-linkitem-success-create' => 'הדפים קושרו בהצלחה. אפשר למצוא את הפריט החדש שמכיל את הקישורים ב[$1 מאגר הנתונים המרכזי].',
+	'wikibase-linkitem-success-link' => 'הדפים קושרו בהצלחה. אפשר למצוא את הפריט החדש שמכיל את הקישורים ב[$1 מאגר הנתונים המרכזי].',
 	'wikibase-rc-hide-wikidata' => '$1 ויקינתונים',
 	'wikibase-rc-show-wikidata-pref' => 'הצגת עריכות ויקינתונים בשינויים אחרונים',
 );
@@ -489,8 +523,18 @@ $messages['hsb'] = array(
 	'wikibase-comment-sitelink-change' => 'Mjezyrěčny wotkaz změnjeny wot $1 do $2',
 	'wikibase-comment-sitelink-remove' => 'Mjezyrěčny wotkaz wotstronjeny: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|změna|změnje|změny|změnow}}',
+	'wikibase-nolanglinks' => 'žadyn',
 	'wikibase-editlinks' => 'Wotkazy wobdźěłać',
 	'wikibase-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
+	'wikibase-linkitem-addlinks' => 'Wotkazy přidać',
+	'wikibase-linkitem-close' => 'Dialog začinić a stronu znowa začitać',
+	'wikibase-linkitem-title' => 'Ze stronu zwjazać',
+	'wikibase-linkitem-linkpage' => 'Ze stronu zwjazać',
+	'wikibase-linkitem-input-site' => 'Rěč:',
+	'wikibase-linkitem-input-page' => 'Strona:',
+	'wikibase-linkitem-invalidsite' => 'Njeznate abo njepłaćiwe sydło wubrane',
+	'wikibase-linkitem-confirmitem-button' => 'Wobkrućić',
+	'wikibase-linkitem-not-loggedin-title' => 'Dyrbiš přizjewjeny być',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Změny Wikidata w aktualnych změnach pokazać',
 );
@@ -822,7 +866,7 @@ $messages['nl'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
 );
 
-/** Norwegian Nynorsk (norsk (nynorsk)‎)
+/** Norwegian Nynorsk (norsk nynorsk)
  * @author Jeblad
  * @author Njardarlogar
  */
