@@ -45,15 +45,28 @@
 		}
 
 		// add an edit tool for all properties in the data view:
-		$( 'body' )
-		.find( '.wb-property-container' )
-		.each( function() {
+		$( '.wb-property-container' ).each( function() {
 			// TODO: Make this nicer when we have implemented the data model
 			if( $( this ).children( '.wb-property-container-key' ).attr( 'title') === 'description' ) {
 				new wb.ui.DescriptionEditTool( this );
 			} else {
 				new wb.ui.PropertyEditTool( this );
 			}
+		} );
+
+		$( 'tr.wb-terms-label, tr.wb-terms-description' ).each( function() {
+			var $termsRow = $( this ),
+				editTool = wb.ui.PropertyEditTool[
+					$termsRow.hasClass( 'wb-terms-label' )
+						? 'EditableLabel'
+						: 'EditableDescription' ],
+				toolbar = new wb.ui.Toolbar(),
+				editGroup = new wb.ui.Toolbar.EditGroup();
+
+			toolbar.addElement( editGroup );
+			toolbar.editGroup = editGroup; // TODO: EditableLabel should not assume that this is set
+
+			editTool.newFromDom( $termsRow, {}, toolbar );
 		} );
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
@@ -68,9 +81,7 @@
 			} );
 
 			// edit tool for aliases:
-			$( 'body' )
-			.find( '.wb-aliases' )
-			.each( function() {
+			$( '.wb-aliases' ).each( function() {
 				new wb.ui.AliasesEditTool( this );
 			} );
 
