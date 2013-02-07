@@ -550,52 +550,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Adds default settings.
-	 * Setting name (string) => setting value (mixed)
-	 *
-	 * @param array &$settings
-	 *
-	 * @since 0.1
-	 *
-	 * @return bool
-	 */
-	public static function onWikibaseDefaultSettings( array &$settings ) {
-		global $wgDBname, $wgScriptPath, $wgArticlePath, $wgLanguageCode;
-		wfProfileIn( __METHOD__ );
-
-		$settings = array_merge(
-			$settings,
-			array(
-				'namespaces' => array( NS_MAIN ),
-				'source' => array( 'dir' => __DIR__ . '/tests' ),
-				'repoUrl' => '//wikidata.org',
-				'repoScriptPath' => $wgScriptPath,
-				'repoArticlePath' => $wgArticlePath,
-				'sort' => 'code',
-				'sortPrepend' => false,
-				'alwaysSort' => true,
-				'siteGlobalID' => $wgDBname,
-				// @todo would be great to just get this from the sites stuff
-				// but we will need to make sure the caching works good enough
-				'siteLocalID' => $wgLanguageCode,
-				'siteGroup' => 'wikipedia',
-				'injectRecentChanges' => true,
-				'showExternalRecentChanges' => true,
-				'defaultClientStore' => null,
-				'repoDatabase' => null, // note: "false" means "local"!
-				// default for repo items in main namespace
-				'repoNamespaces' => array(
-					'wikibase-item' => '',
-					'wikibase-property' => 'Property'
-				)
-			)
-		);
-
-		wfProfileOut( __METHOD__ );
-		return true;
-	}
-
-	/**
 	 * Adds css for the edit links sidebar link or JS to create a new item
 	 * or to link with an existing one.
 	 *

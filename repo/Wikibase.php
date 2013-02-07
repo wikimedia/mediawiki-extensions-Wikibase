@@ -248,7 +248,6 @@ $wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
 
 
 // Hooks
-$wgHooks['WikibaseDefaultSettings'][] 			    = 'Wikibase\RepoHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\RepoHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'Wikibase\RepoHooks::registerUnitTests';
 $wgHooks['NamespaceIsMovable'][]					= 'Wikibase\RepoHooks::onNamespaceIsMovable';
@@ -281,10 +280,15 @@ $wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = '\Wikibase\PropertyHandler
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
 
 $wgWBStores = array();
+
 $wgWBStores['sqlstore'] = 'Wikibase\SqlStore';
 
+unset( $dir );
+
+include_once( __DIR__ . '/config/Wikibase.default.php' );
+
 if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-	include_once( $dir . 'Wikibase.experimental.php' );
+	include_once( __DIR__ . '/config/Wikibase.experimental.php' );
 }
 
-unset( $dir );
+
