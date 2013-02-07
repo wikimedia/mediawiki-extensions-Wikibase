@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3///Dc\u003d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-07T13:48:01Z",
+      "side": 1,
+      "message": "Why did you negate the if, this makes the whole diff a lot harder since you changed both blocks... Please change again. Or am I missing something?",
+      "revId": "3466a4b8434c2a0af128345e6c0d752f6db527b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
