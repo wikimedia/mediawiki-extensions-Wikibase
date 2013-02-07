@@ -225,7 +225,7 @@ HTML;
 <<<HTML
 <tr class="wb-terms-label wb-terms-$1 $2">
 	<td class="wb-terms-language wb-terms-language-$1" rowspan="2">
-		$3 <!-- language name -->
+		<a href="?setlang=$1">$3</a> <!-- language name -->
 	</td>
 	<td class="wb-terms-label wb-terms-label-$1 wb-value wb-value-lang-$1 $8">
 		$4 <!-- label -->
