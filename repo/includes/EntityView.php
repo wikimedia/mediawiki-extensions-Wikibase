@@ -349,53 +349,33 @@ abstract class EntityView extends \ContextSource {
 		$result = array();
 
 		// if the Babel extension is installed, add all languages of the user
-		$userLanguages = array();
 		if ( class_exists( 'Babel' ) && ( ! $user->isAnon() ) ) {
-			$userLanguages = \Babel::getUserLanguages( $user );
-			$result = $userLanguages;
+			$result = \Babel::getUserLanguages( $user );
+			if( $lang !== null ) {
+				$result = array_diff( $result, array( $lang->getCode() ) );
+			}
+			if( !empty( $result ) ) {
+				wfProfileOut( __METHOD__ );
+				return $result;
+			}
 		}
 
-		// remove the current language
-		if ( ( $lang !== null ) && in_array( $lang->getCode(), $result ) ) {
-			$result = array_diff( $result, array( $lang->getCode() ) );
-		}
-
+		// get all labels and descriptions in OTHER language versions:
 		$labels = $entity->getLabels();
 		$descriptions = $entity->getDescriptions();
-
-		// if there are no labels or descriptions, that's all
-		if ( empty( $labels ) && empty( $descriptions ) ) {
-			wfProfileOut( __METHOD__ );
-			return $result;
+		if ( $lang !== null ) {
+			$langCode = $lang->getCode();
+			unset( $labels[ $langCode ], $descriptions[ $langCode ] );
 		}
 
-		// if there are labels or descriptions in any of the languages of the user, then that's sufficient
-		if ( count(
-			array_intersect(
-				$userLanguages,
-				array_merge( array_keys( $labels ), array_keys( $descriptions ) )
-			) ) > 0
-		) {
-			wfProfileOut( __METHOD__ );
-			return $result;
-		}
+		$otherLanguageVersions = array_unique(
+			array_merge( array_keys( $labels ), array_keys( $descriptions ) ) );
 
 		// if we are here, then none of the languages of the user have any entries, but there are
-		// *some* entries in the set. We just give back the first three entries with labels, and
-		// that's it.
-		$results = 3; // magic constant
-		foreach ( $labels as $code => $label ) {
-			if ( $lang !== null && $code === $lang->getCode() ) {
-				continue;
-			}
-			array_push( $result, $code );
-			if ( --$results === 0 ) {
-				break;
-			}
-		}
-
+		// *some* entries in the set. We just give back the first three entries with labels or
+		// description, and that's it.
 		wfProfileOut( __METHOD__ );
-		return $result;
+		return array_slice( $otherLanguageVersions, 0, 3 );
 	}
 
 	/**
