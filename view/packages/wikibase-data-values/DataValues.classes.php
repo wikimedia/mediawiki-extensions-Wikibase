@@ -34,6 +34,7 @@ return array(
 	'DataValues\MultilingualTextValue' => 'includes/values/MultilingualTextValue.php',
 	'DataValues\MediaWikiTitleValue' => 'includes/values/MediaWikiTitleValue.php',
 	'DataValues\NumberValue' => 'includes/values/NumberValue.php',
+	'DataValues\PropertyValue' => 'includes/values/PropertyValue.php',
 	'DataValues\QuantityValue' => 'includes/values/QuantityValue.php',
 	'DataValues\StringValue' => 'includes/values/StringValue.php',
 	'DataValues\TimeValue' => 'includes/values/TimeValue.php',
