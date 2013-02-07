@@ -190,7 +190,7 @@ $messages['ms'] = array(
 	'version-datavalues' => 'DataValues',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author EvenT
  */
 $messages['nb'] = array(
