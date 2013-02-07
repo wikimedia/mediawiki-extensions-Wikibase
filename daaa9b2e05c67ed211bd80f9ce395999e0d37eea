@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3///C0\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-07T13:55:19Z",
+      "side": 1,
+      "message": "It sucks that now you had to fill the messages manually each time you want to instantiate an entityselector widget within MediaWiki. How about a check whether the mediaWiki object is defined and dependent on that the default option will use it or not.",
+      "revId": "daaa9b2e05c67ed211bd80f9ce395999e0d37eea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
