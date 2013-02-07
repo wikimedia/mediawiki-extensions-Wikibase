@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3//+6o\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T16:56:50Z",
+      "side": 1,
+      "message": "You no longer need this one here :)",
+      "revId": "c19c5dc412cc1241228906a122d4d69fbb8814c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//+7I\u003d",
+        "filename": "lib/includes/entity/EntityDiffView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T16:56:50Z",
+      "side": 1,
+      "message": "ALL of the tabs",
+      "revId": "c19c5dc412cc1241228906a122d4d69fbb8814c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
