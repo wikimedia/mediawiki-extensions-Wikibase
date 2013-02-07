@@ -81,7 +81,7 @@ See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.
 {{Identical|Edit link}}',
 	'wikibase-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizard to edit interlanguage links.',
-	'wikibase-linkitem-addlinks' => 'Link on the left asking to link the current page with pages on other sites. Only visible in case the current page has no langlinks.
+	'wikibase-linkitem-addlinks' => 'Link in the sidebar asking to add language links and link the current page with pages on other sites. Only visible in case the current page has no langlinks.
 {{Identical|Add link}}',
 	'wikibase-linkitem-close' => 'Button text asking to close the current dialog and to reload the page.',
 	'wikibase-linkitem-failure' => 'Shown in case an error occurred which is not an API error (like a linking conflict)',
@@ -102,6 +102,7 @@ See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wikibase-linkitem-success-link' => 'Success message after the page the user currently is on has been linked with an item. $1 holds a URL pointing to the item.',
 	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
 * Parameter $1 is a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
+	'wikibase-rc-show-wikidata-pref' => 'Option in the Recent changes section of preferences to show wikibase changes by default in recent changes',
 );
 
 /** Asturian (asturianu)
