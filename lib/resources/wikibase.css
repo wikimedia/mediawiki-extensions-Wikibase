@@ -502,7 +502,7 @@ div.wb-claim-new {
 	background-color: #D6F3FF;
 }
 
-div.wb-claim-section .wb-error .wb-claim,
+div.wb-claims .wb-error .wb-error,
 .wb-error div.wb-claim-new {
 	background-color: #FFDFC9;
 }
