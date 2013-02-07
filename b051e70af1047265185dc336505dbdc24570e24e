@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3///D4\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T13:53:45Z",
+      "side": 1,
+      "message": "can also be null",
+      "revId": "b051e70af1047265185dc336505dbdc24570e24e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///DQ\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T13:53:45Z",
+      "side": 1,
+      "message": "@param",
+      "revId": "b051e70af1047265185dc336505dbdc24570e24e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///D0\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T13:53:45Z",
+      "side": 1,
+      "message": "This method does not exist",
+      "revId": "b051e70af1047265185dc336505dbdc24570e24e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Dw\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T13:53:45Z",
+      "side": 1,
+      "message": "Claim specific code still here...",
+      "revId": "b051e70af1047265185dc336505dbdc24570e24e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Ds\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T13:53:45Z",
+      "side": 1,
+      "message": "still duplicating \n\n$propertyLabel \u003d $this-\u003egetEntityLabel()",
+      "revId": "b051e70af1047265185dc336505dbdc24570e24e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///C8\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T13:53:45Z",
+      "side": 1,
+      "message": "This is entity specific, and thus should not reside in this class",
+      "revId": "b051e70af1047265185dc336505dbdc24570e24e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Do\u003d",
+        "filename": "lib/includes/entity/EntityDiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T13:53:45Z",
+      "side": 1,
+      "message": "missing @param",
+      "revId": "b051e70af1047265185dc336505dbdc24570e24e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Dk\u003d",
+        "filename": "lib/includes/entity/EntityDiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T13:53:45Z",
+      "side": 1,
+      "message": "getClaimHtml would be more correct",
+      "revId": "b051e70af1047265185dc336505dbdc24570e24e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
