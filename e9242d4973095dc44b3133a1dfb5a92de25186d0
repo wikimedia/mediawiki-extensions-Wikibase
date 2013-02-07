@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3///LI\u003d",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-07T10:51:02Z",
+      "side": 1,
+      "message": "It would be nice if you added a list of known and used messages here. That way this location will show up if they\u0027re ever grepped for.",
+      "revId": "e9242d4973095dc44b3133a1dfb5a92de25186d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
