@@ -238,7 +238,6 @@ $wgDataValues['wikibase-entityid'] = 'Wikibase\EntityId';
 $wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 
 // Hooks
-$wgHooks['WikibaseDefaultSettings'][]				= 'Wikibase\LibHooks::onWikibaseDefaultSettings';
 $wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerPhpUnitTests';
 $wgHooks['ResourceLoaderTestModules'][]				= 'Wikibase\LibHooks::registerQUnitTests';
 
@@ -268,7 +267,10 @@ function wfTemplate( $key /*...*/ ) {
 $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
 
 
-$wgWBSettings = array();
+include_once( $dir . 'config/WikibaseLib.default.php' );
 
+if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+	include_once( $dir . 'config/WikibaseLib.experimental.php' );
+}
 
 unset( $dir );

@@ -113,7 +113,6 @@ $wgHooks['SpecialPageBeforeExecute'][]		= '\Wikibase\ClientHooks::onSpecialPageB
 
 // extension hooks
 $wgHooks['WikibasePollHandle'][]                        = '\Wikibase\ClientHooks::onWikibasePollHandle';
-$wgHooks['WikibaseDefaultSettings'][]                   = '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
 $wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
 $wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
 
@@ -126,3 +125,10 @@ $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/R
 $wgWBClientStores = array();
 $wgWBClientStores['CachingSqlStore'] = 'Wikibase\CachingSqlStore';
 $wgWBClientStores['DirectSqlStore'] = 'Wikibase\DirectSqlStore';
+
+
+include_once( $dir . 'config/WikibaseClient.default.php' );
+
+if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+	include_once( $dir . 'config/WikibaseClient.experimental.php' );
+}
