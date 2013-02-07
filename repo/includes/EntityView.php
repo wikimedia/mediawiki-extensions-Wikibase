@@ -340,7 +340,7 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
-	 * @param \Language $lang
+	 * @param \Language|null $lang
 	 * @param \User $user
 	 * @return string[] selected langcodes
 	 */
@@ -364,13 +364,18 @@ abstract class EntityView extends \ContextSource {
 		$descriptions = $entity->getDescriptions();
 
 		// if there are no labels or descriptions, that's all
-		if ( ( count( $labels ) == 0 ) && ( count( $descriptions ) == 0 ) ) {
+		if ( empty( $labels ) && empty( $descriptions ) ) {
 			wfProfileOut( __METHOD__ );
 			return $result;
 		}
 
 		// if there are labels or descriptions in any of the languages of the user, then that's sufficient
-		if ( count( array_intersect( $userLanguages, array_unique( array_merge ( array_keys( $labels ), array_keys( $descriptions ) ) ) ) ) > 0 ) {
+		if ( count(
+			array_intersect(
+				$userLanguages,
+				array_merge( array_keys( $labels ), array_keys( $descriptions ) )
+			) ) > 0
+		) {
 			wfProfileOut( __METHOD__ );
 			return $result;
 		}
@@ -380,12 +385,11 @@ abstract class EntityView extends \ContextSource {
 		// that's it.
 		$results = 3; // magic constant
 		foreach ( $labels as $code => $label ) {
-			if ( $code === $lang->getCode() ) {
+			if ( $lang !== null && $code === $lang->getCode() ) {
 				continue;
 			}
-			$results--;
 			array_push( $result, $code );
-			if ( $results === 0 ) {
+			if ( --$results === 0 ) {
 				break;
 			}
 		}
