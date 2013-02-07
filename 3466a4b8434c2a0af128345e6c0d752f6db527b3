@@ -34,6 +34,24 @@
       "revId": "3466a4b8434c2a0af128345e6c0d752f6db527b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//+sI\u003d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-07T19:34:41Z",
+      "side": 1,
+      "message": "It is not about the indentation but about the blocks being switched. Intendation can be handled by some diff engines, e.g. this one in Gerrit. So if you would switch back the order of the blocks, the diff would be more revealing what has actually been changed in the (original) second block.",
+      "parentUuid": "AAADi3///Aw\u003d",
+      "revId": "3466a4b8434c2a0af128345e6c0d752f6db527b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
