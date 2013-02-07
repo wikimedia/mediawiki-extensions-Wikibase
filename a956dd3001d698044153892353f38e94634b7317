@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3///Kk\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-07T11:02:29Z",
+      "side": 1,
+      "message": "Suggestion: Change to \"Get a list of pages...\"",
+      "revId": "a956dd3001d698044153892353f38e94634b7317",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Kg\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-07T11:02:29Z",
+      "side": 1,
+      "message": "Change to: \"Start page:\"",
+      "revId": "a956dd3001d698044153892353f38e94634b7317",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Kc\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-07T11:02:29Z",
+      "side": 1,
+      "message": "Suggestion: Change disregarded to ignored. This word is used more often.",
+      "revId": "a956dd3001d698044153892353f38e94634b7317",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///KY\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-07T11:02:29Z",
+      "side": 1,
+      "message": "Use \"interlanguage\" instead of \"IW-\". Abbriviations do not translate well.",
+      "revId": "a956dd3001d698044153892353f38e94634b7317",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///KU\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-07T11:02:29Z",
+      "side": 1,
+      "message": "Same as above.",
+      "revId": "a956dd3001d698044153892353f38e94634b7317",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///KQ\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-07T11:02:29Z",
+      "side": 1,
+      "message": "Will this be the only special page in that group? In that case, it may be a better idea to put the page in an already existing group. \"maintenance\" seems to be a good fit. This also allows you to use one message less in the i18n file.",
+      "revId": "a956dd3001d698044153892353f38e94634b7317",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///KM\u003d",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-07T11:02:29Z",
+      "side": 1,
+      "message": "What does Antoine have to do with this? :)",
+      "revId": "a956dd3001d698044153892353f38e94634b7317",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///KE\u003d",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-07T11:02:29Z",
+      "side": 1,
+      "message": "-\u003eparams() is not needed here. Can just use -\u003emsg( msg, param)-\u003etext(). You would use params() if there is for example an first -\u003enumParams() or rawParams(), and one or more regular params() after that.",
+      "revId": "a956dd3001d698044153892353f38e94634b7317",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
