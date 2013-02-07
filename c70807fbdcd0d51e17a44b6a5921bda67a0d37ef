@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3///HM\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-07T12:03:26Z",
+      "side": 1,
+      "message": "has \"bug Bug\". Best remove one. Less bugs is better :).",
+      "revId": "c70807fbdcd0d51e17a44b6a5921bda67a0d37ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
