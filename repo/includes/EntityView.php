@@ -456,10 +456,12 @@ abstract class EntityView extends \ContextSource {
 				$language,
 				$alternatingClass,
 				Utils::fetchLanguageName( $language ),
-				$label ? $label : '<em>' . wfMessage( 'wikibase-label-empty' ) . '</em>',
-				$description ? $description : '<em>' . wfMessage( 'wikibase-description-empty' ) . '</em>',
+				$label !== false ? $label : wfMessage( 'wikibase-label-empty' ),
+				$description !== false ? $description : wfMessage( 'wikibase-description-empty' ),
 				$this->getHtmlForEditSection( $entity, $lang, $editLabelLink ),
-				$this->getHtmlForEditSection( $entity, $lang, $editDescriptionLink )
+				$this->getHtmlForEditSection( $entity, $lang, $editDescriptionLink ),
+				$label !== false ? '' : 'wb-value-empty',
+				$description !== false ? '' : 'wb-value-empty'
 			);
 		}
 

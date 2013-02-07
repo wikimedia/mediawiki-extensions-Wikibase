@@ -220,28 +220,26 @@ HTML;
 HTML;
 
 // make the wb-value-row a wb-property-container to start with the edit button stuff
+// $1: language-code
 	$templates['wb-term'] =
-		<<<HTML
-		<tr class="wb-terms-label wb-terms-$1 $2">
-	<td class="wb-terms-language wb-terms-language-$1" rowspan="2">$3</td>
-	<td class="wb-terms-label wb-terms-label-$1">
-		$4
+<<<HTML
+<tr class="wb-terms-label wb-terms-$1 $2">
+	<td class="wb-terms-language wb-terms-language-$1" rowspan="2">
+		$3 <!-- language name -->
 	</td>
-	<td>
-	$6
+	<td class="wb-terms-label wb-terms-label-$1 wb-value wb-value-lang-$1 $8">
+		$4 <!-- label -->
+	</td>
+	<td class="wb-editsection">
+		$6 <!-- label toolbar -->
 	</td>
 </tr>
 <tr class="wb-terms-description wb-terms-$1 $2">
-	<td class="wb-terms-description wb-terms-description-$1">
-		<div class="wb-value-row" dir="auto">
-			<div class="wb-property-container-key" title="description"></div>
-			<span class="wb-property-container-value wb-value-container" dir="auto">
-				<span class="wb-value $1">$5</span>
-			</span>
-		</div>
+	<td class="wb-terms-description wb-terms-description-$1 wb-value wb-value-lang-$1 $9">
+		$5 <!-- description -->
 	</td>
-	<td>
-	$7
+	<td class="wb-editsection">
+		$7 <!-- description toolbar -->
 	</td>
 </tr>
 HTML;
