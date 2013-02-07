@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3///Ho\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T12:26:07Z",
+      "side": 1,
+      "message": "the interface is EntityLookup",
+      "revId": "9cafeca88b7defeeb380f69d3ceb44e1e9374a58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Go\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T12:26:07Z",
+      "side": 1,
+      "message": "Please do not pull in dependencies like this. Esp not in the constructor.\n\nIt\u0027d be better to pass it in as an argument here in the constructor or use setter injection. In case of an optional arg or setter injection you will ofc need to check it actually got set later on",
+      "revId": "9cafeca88b7defeeb380f69d3ceb44e1e9374a58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Hk\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T12:26:07Z",
+      "side": 1,
+      "message": "This is quite a bunch of code for visualizing the difference between claims. We might also want to use it at some other place, and in some cases we might want to have alternate behaviour here. I therefore suggest you put this into a dedicated object which you composite in here and delegate to.",
+      "revId": "9cafeca88b7defeeb380f69d3ceb44e1e9374a58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Hg\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T12:26:07Z",
+      "side": 1,
+      "message": "Hmm, this is actually not the proper object to put this functionality in to begin with. Look at the class name and the stuff it takes in the constructor.\n\nEntityDiffView would be a better place to put this stuff. Might need some minor restructuring in this class to nicely facilitate that.",
+      "revId": "9cafeca88b7defeeb380f69d3ceb44e1e9374a58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///HY\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T12:26:07Z",
+      "side": 1,
+      "message": "We are dealing with Claim objects here, they are not always a Statement",
+      "revId": "9cafeca88b7defeeb380f69d3ceb44e1e9374a58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///GE\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T12:26:07Z",
+      "side": 1,
+      "message": "The below is a hack. It will works for StringValue and EntityId, though break for stuff such as MonolingualValue or GeocoordinateValue. We do not have a generic way to get simple string representations yet, and this is out of scope of this commit. Do however put in a FIXME, so we do not forget about it and find out when diffing on WP is broken :)",
+      "revId": "9cafeca88b7defeeb380f69d3ceb44e1e9374a58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Gg\u003d",
+        "filename": "lib/includes/DiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-07T12:26:07Z",
+      "side": 1,
+      "message": "needless duplication of\n\n$name \u003d $path[0] . \u0027 / \u0027 . $propertyLabel;",
+      "revId": "9cafeca88b7defeeb380f69d3ceb44e1e9374a58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
