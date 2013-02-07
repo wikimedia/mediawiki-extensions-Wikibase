@@ -11,6 +11,8 @@ use MWException;
  * Changing one of these settings can be done by assigning to $wgWBSettings,
  * AFTER the inclusion of the extension itself.
  *
+ * // TODO: have dedicated settings interfaces per extension
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -47,12 +49,15 @@ class Settings extends SettingsArray {
 		static $instance = null;
 
 		if ( $instance === null ) {
-			$settings = array();
+			$settings = $GLOBALS['wgWBSettings'];
 
-			// allow extensions that use WikidataLib to register mode defaults
-			wfRunHooks( 'WikibaseDefaultSettings', array( &$settings ) );
+			if ( defined( 'WB_VERSION' ) ) {
+				$settings = array_merge( $settings, $GLOBALS['wgWBRepoSettings'] );
+			}
 
-			$settings = array_merge( $settings, $GLOBALS['wgWBSettings'] );
+			if ( defined( 'WBC_VERSION' ) ) {
+				$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
+			}
 
 			$instance = new static( $settings );
 		}
