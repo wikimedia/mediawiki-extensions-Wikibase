@@ -476,6 +476,7 @@ $messages['he'] = array(
 	'wikibase-error-ui-link-exists' => 'אין לך אפשרות לקשר לדף הזה כי פריט אחר כבר מקשר אליו.',
 	'wikibase-error-ui-session-failure' => 'השיחה שלך פגה. נא להיכנס שוב.',
 	'wikibase-error-ui-edit-conflict' => 'אירעה התנגשות עריכה. נא לרענן את הדף ולשמור מחדש.',
+	'wikibase-replicationnote' => 'יש לשים לב לכך שייקח מספר דקות עד שהשינויים יוצגו בכל אתרי הוויקי',
 	'wikibase-sitelinks' => 'רשימת הדפים המקושרים לפריט הזה.',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפה',
 	'wikibase-sitelinks-siteid-columnheading' => 'קוד',
@@ -509,6 +510,7 @@ $messages['hsb'] = array(
 	'wikibase-error-ui-link-exists' => 'Njemóžeš k tutej stronje wotkazować, dokelž druhi element hižo k njej wotkazuje.',
 	'wikibase-error-ui-session-failure' => 'Twoje posedźenje je spadnyło. Prošu přizjew so hišće raz.',
 	'wikibase-error-ui-edit-conflict' => 'Je wobdźěłowanski konflikt wustupił. Prošu začituj a składuj znowa.',
+	'wikibase-replicationnote' => 'Prošu dźiwaj na to, zo móže wjacore mjeńšiny trać, doniž změny na wšěch wikijach widźomne njejsu.',
 	'wikibase-sitelinks' => 'Lisćina stronow, kotrež su z tutym elementom zwjazane',
 	'wikibase-sitelinks-sitename-columnheading' => 'Rěč',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
@@ -813,7 +815,7 @@ $messages['nl'] = array(
 	'datatypes-type-commonsMedia' => 'Mediabestand van Commons',
 );
 
-/** Norwegian Nynorsk (norsk (nynorsk)‎)
+/** Norwegian Nynorsk (norsk nynorsk)
  * @author Jeblad
  * @author Njardarlogar
  */
