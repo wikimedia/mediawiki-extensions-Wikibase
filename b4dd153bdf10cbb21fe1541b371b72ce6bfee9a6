@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3///CI\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 439
+      },
+      "writtenOn": "2013-02-07T14:16:54Z",
+      "side": 1,
+      "message": "Make clearer what unconnected means: In the client setting this might mean pages not being connected by interwiki links (as Rome to Italy etc.). I would suggest sth like \"Get a list of pages without a link to the central data repository\". That was the last agreed naming that makes it clear it\u0027s not interwiki links.",
+      "revId": "b4dd153bdf10cbb21fe1541b371b72ce6bfee9a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
