@@ -16,6 +16,24 @@
       "revId": "daaa9b2e05c67ed211bd80f9ce395999e0d37eea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Ak\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-02-07T15:16:18Z",
+      "side": 1,
+      "message": "Thanks for your kind judgement. I will implemented your suggested logic. Nonetheless, I would like to keep this additional option since you should be able to use the entityselector outside of MediaWiki as well.",
+      "parentUuid": "AAADi3///C0\u003d",
+      "revId": "daaa9b2e05c67ed211bd80f9ce395999e0d37eea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
