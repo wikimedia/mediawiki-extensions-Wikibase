@@ -16,6 +16,24 @@
       "revId": "b4dd153bdf10cbb21fe1541b371b72ce6bfee9a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//9u8\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-08T13:02:05Z",
+      "side": 1,
+      "message": "The previous line is for the legend in the form field, I guess you mean the line before that which is the name of the special page.\n\nChanged the line to \"Pages not connected to items\"",
+      "parentUuid": "AAADi3///CI\u003d",
+      "revId": "b4dd153bdf10cbb21fe1541b371b72ce6bfee9a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
