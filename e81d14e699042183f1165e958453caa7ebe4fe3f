@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//9lM\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-02-08T16:42:47Z",
+      "side": 1,
+      "message": "See type checks for global variables:\nhttp://www.mediawiki.org/wiki/Manual:Coding_conventions/JavaScript#Type_checks",
+      "parentUuid": "AAADi3//9ts\u003d",
+      "revId": "e81d14e699042183f1165e958453caa7ebe4fe3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADi3//9to\u003d",
         "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
         "patchSetId": 1
