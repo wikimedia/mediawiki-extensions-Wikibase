@@ -16,6 +16,24 @@
       "revId": "e9242d4973095dc44b3133a1dfb5a92de25186d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3///Dg\u003d",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-08T13:43:18Z",
+      "side": 1,
+      "message": "The list is not known yet, and it can be rather long. It is actually depending on the data types in use on the project. Right now there are 7 in the repo but only 2 are used in the clients. Later on it would not be a big surprise if we get datatypes that are configured directly in LocalSettings.\n\nStill I could add some of the known types as of now.",
+      "parentUuid": "AAADi3///LI\u003d",
+      "revId": "e9242d4973095dc44b3133a1dfb5a92de25186d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
