@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3//9Zo\u003d",
+        "filename": "lib/includes/serializers/ReferenceSerializer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-08T19:12:29Z",
+      "side": 1,
+      "message": "Will give empty results in api, is this a problem?",
+      "revId": "d34b57f36c32b021d1f29b0f2e1d6eaa9d223156",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//9Zw\u003d",
+        "filename": "lib/includes/serializers/SerializerFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-08T19:12:29Z",
+      "side": 1,
+      "message": "Will not pass return, why break? Same for the following two.",
+      "revId": "d34b57f36c32b021d1f29b0f2e1d6eaa9d223156",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//9Yc\u003d",
+        "filename": "lib/tests/phpunit/statement/StatementTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-08T19:12:29Z",
+      "side": 1,
+      "message": "What about the preferred state? Only set to this by wbsetclaimrank?",
+      "revId": "d34b57f36c32b021d1f29b0f2e1d6eaa9d223156",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//9Yg\u003d",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-08T19:12:29Z",
+      "side": 1,
+      "message": "This should separate the different failures..\n\nSecond thought, this could be handled the same way for all of the api modules. It is in the other modules (copy-paste of the same code sequence), but it is not merged yet. We could make a method and put it in Api I guess.",
+      "revId": "d34b57f36c32b021d1f29b0f2e1d6eaa9d223156",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//9ZQ\u003d",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-08T19:12:29Z",
+      "side": 1,
+      "message": "// TODO: summary\n// TODO: edit conflict etc..",
+      "revId": "d34b57f36c32b021d1f29b0f2e1d6eaa9d223156",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//9ZA\u003d",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-08T19:12:29Z",
+      "side": 1,
+      "message": "Edit summary is missing",
+      "revId": "d34b57f36c32b021d1f29b0f2e1d6eaa9d223156",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//9ZE\u003d",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-08T19:12:29Z",
+      "side": 1,
+      "message": "This should be replaced by a more complete test, it will only say that the save failed instead of for example it failed due to an edit conflict.",
+      "revId": "d34b57f36c32b021d1f29b0f2e1d6eaa9d223156",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
