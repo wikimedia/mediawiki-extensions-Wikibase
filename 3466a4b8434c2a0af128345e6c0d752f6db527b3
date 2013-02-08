@@ -52,6 +52,24 @@
       "revId": "3466a4b8434c2a0af128345e6c0d752f6db527b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//9oY\u003d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-02-08T15:43:29Z",
+      "side": 1,
+      "message": "Please, why don\u0027t you take a look on the actual changes? The lines that have been in the \"if( dropValue || !newSnak ) {\" block have been moved out of the \"stopediting\" into the \"afterstopediting\" event block. I know, you will not like that either, but enough time has been invested on this change already and the actual problem is solved.",
+      "parentUuid": "AAADi3//+sI\u003d",
+      "revId": "3466a4b8434c2a0af128345e6c0d752f6db527b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
