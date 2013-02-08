@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//9oQ\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-02-08T15:51:22Z",
+      "side": 1,
+      "message": "I get your point but I would prefer a \"clean\" options object since it also serves an important aspect of documentation. Think of more messages to come. The _create method initializes the element parsing the options. I think the logic is not in a wrong spot there.",
+      "parentUuid": "AAADi3//9tY\u003d",
+      "revId": "e81d14e699042183f1165e958453caa7ebe4fe3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADi3//9ts\u003d",
         "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
         "patchSetId": 1
