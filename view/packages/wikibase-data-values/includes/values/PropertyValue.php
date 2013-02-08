@@ -4,10 +4,9 @@ namespace DataValues;
 use InvalidArgumentException;
 
 /**
- * Class representing a simple numeric value.
+ * Class representing the identity of a property.
  *
- * More complex numeric values that have associated info such as
- * unit and accuracy can be represented with a @see QuantityValue.
+ * Loosely based on SMWDIProperty.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,30 +31,30 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class NumberValue extends DataValueObject {
+class PropertyValue extends DataValueObject {
 
 	/**
 	 * @since 0.1
 	 *
-	 * @var int|float
+	 * @var string
 	 */
-	protected $value;
+	protected $id;
 
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
 	 *
-	 * @param int|float $value
+	 * @param string $propertyId
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $value ) {
-		if ( !is_int( $value ) && !is_float( $value ) ) {
-			throw new InvalidArgumentException( 'Can only construct NumberValue from floats or integers' );
+	public function __construct( $propertyId ) {
+		if ( !is_string( $propertyId ) ) {
+			throw new InvalidArgumentException( 'Can only construct PropertyValue with a string id' );
 		}
 
-		$this->value = $value;
+		$this->id = $propertyId;
 	}
 
 	/**
@@ -66,7 +65,7 @@ class NumberValue extends DataValueObject {
 	 * @return int|float
 	 */
 	public function serialize() {
-		return serialize( $this->value );
+		return json_encode( array( $this->id ) );
 	}
 
 	/**
@@ -77,9 +76,16 @@ class NumberValue extends DataValueObject {
 	 * @param string $value
 	 *
 	 * @return NumberValue
+	 * @throws InvalidArgumentException
 	 */
 	public function unserialize( $value ) {
-		$this->__construct( unserialize( $value ) );
+		$data = json_decode( $value );
+
+		if ( !is_array( $data ) || !array_key_exists( 0, $data ) ) {
+			throw new InvalidArgumentException( 'Invalid serialization provided' );
+		}
+
+		$this->__construct( $data[0] );
 	}
 
 	/**
@@ -90,7 +96,7 @@ class NumberValue extends DataValueObject {
 	 * @return string
 	 */
 	public function getType() {
-		return 'number';
+		return 'property';
 	}
 
 	/**
@@ -101,19 +107,31 @@ class NumberValue extends DataValueObject {
 	 * @return string|float|int
 	 */
 	public function getSortKey() {
-		return $this->value;
+		return $this->id;
 	}
 
 	/**
-	 * Returns the number.
+	 * @see DataValue::getArrayValue
+	 *
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
+	public function getArrayValue() {
+		return array(
+			'propertyId' => $this->id,
+		);
+	}
+
+	/**
 	 * @see DataValue::getValue
 	 *
 	 * @since 0.1
 	 *
-	 * @return int|float
+	 * @return mixed
 	 */
 	public function getValue() {
-		return $this->value;
+		return $this;
 	}
 
 	/**
@@ -125,9 +143,14 @@ class NumberValue extends DataValueObject {
 	 * @param mixed $data
 	 *
 	 * @return DataValue
+	 * @throws InvalidArgumentException
 	 */
 	public static function newFromArray( $data ) {
-		return new static( $data );
+		if ( !is_array( $data ) || !array_key_exists( 'propertyId', $data ) ) {
+			throw new InvalidArgumentException( 'Cannot construct instance from invalid array format' );
+		}
+
+		return new static( $data['propertyId'] );
 	}
 
 }
