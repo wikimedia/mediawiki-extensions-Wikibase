@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3//9tY\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-08T13:59:15Z",
+      "side": 1,
+      "message": "Sorry, but I don\u0027t get the advantage of the whole system. Why make it so complicated?\n\nAll you\u0027ve got to do is to write it like this:\n\nmessages: {\n  \u0027aliases-label\u0027: mwmsgOrString( \u0027wikibase-aliases-label\u0027, \u0027also known as:\u0027 )\n}\n\nwhere you would define mwmsgOrString in the outer closure, simply as:\n\nfunction mwmsgOrString( msgKey, string ) {\n  return mw !\u003d\u003d undefined\n    ? mw.msg( msgKey )\n    : string;\n}\n\nThis is more performant and less overhead in your _create. Also, why check for both, message keys with and without \u0027wikibase-\u0027 prefix. You have to add your messages to your resource loader module anyhow, so having them as described above, you will have all actualy required keys in one spot.",
+      "revId": "e81d14e699042183f1165e958453caa7ebe4fe3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//9ts\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-08T13:59:15Z",
+      "side": 1,
+      "message": "better use\n\nmw !\u003d\u003d undefined",
+      "revId": "e81d14e699042183f1165e958453caa7ebe4fe3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//9to\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-08T13:59:15Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "e81d14e699042183f1165e958453caa7ebe4fe3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
