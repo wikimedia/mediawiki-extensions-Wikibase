@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//9l8\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.suggester.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-02-08T16:41:15Z",
+      "side": 1,
+      "message": "As to coding conventions, only actual primitive values are allowed inside the curly brackets: http://www.mediawiki.org/wiki/Manual:Coding_conventions/JavaScript#Documentation. (Letter case will be converted for the overall file at some point.) \"adaptLetterCase\" option uses the same syntax. Apart from that, I think it is quite logic that it does not really make sense to specify \"true\" here. Just takes a look at the example.",
+      "parentUuid": "AAADi3//9uA\u003d",
+      "revId": "3d1ba2d07203e02a9824d33219c6cf9119d85f49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADi3//9uI\u003d",
         "filename": "lib/resources/jquery.ui/jquery.ui.suggester.js",
         "patchSetId": 2
