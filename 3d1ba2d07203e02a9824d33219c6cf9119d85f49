@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3//9uA\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.suggester.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-08T13:42:44Z",
+      "side": 1,
+      "message": "what happens if the value is set to true? Otherwise it should perhaps say {Object|false}\n\nDespite the other two points, why make this an option in the first place? Wouldn\u0027t it be more flexible if you had a function \u0027addCustomListItem\u0027 and \u0027removeCustomListItem\u0027 ? It seems likely that you want more than just one custom list item. Could be something for the future though.",
+      "revId": "3d1ba2d07203e02a9824d33219c6cf9119d85f49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//9uI\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.suggester.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-08T13:42:44Z",
+      "side": 1,
+      "message": "They are all just one option, the option is an object, so I wouldn\u0027t document each with its own @option but rather make a list of the fields, e.g.\n\n@option: foo {Object} Can have the following fields:\n        - baa {boolean} Some description \n        - bam {string} Some other description",
+      "revId": "3d1ba2d07203e02a9824d33219c6cf9119d85f49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
