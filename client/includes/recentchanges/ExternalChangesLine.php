@@ -182,7 +182,7 @@ class ExternalChangesLine {
 		//      Combine all the comments! Up to some max length?
 
 		if ( array_key_exists( 'composite-comment', $entityData ) ) {
-			$commentText = wfMessage( 'wikibase-comment-multi', count( $entityData['composite-comment'] ) )->text();
+			$commentText = wfMessage( 'wikibase-comment-multi' )->numParams( count( $entityData['composite-comment'] ) )->text();
 		} else if ( array_key_exists( 'comment', $entityData  ) ) {
 			$commentText = self::parseComment( $entityData );
 		} else {
