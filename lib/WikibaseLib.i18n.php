@@ -594,10 +594,28 @@ $messages['is'] = array(
 	'wikibase-entity-item' => 'hlutur',
 	'wikibase-entity-property' => 'eiginleiki',
 	'wikibase-entity-query' => 'fyrirspurn',
+	'wikibase-error-unexpected' => 'Óvænt villa átti sér stað.',
+	'wikibase-error-save-generic' => 'Villa átti sér stað þegar þú reyndir að framkvæma vistun og því mistókst að vista breytingarnar þínar.',
+	'wikibase-error-remove-generic' => 'Villa átti sér stað þegar þú reyndir að fjarlægja hlut og því mistókst að ljúka breytingum þínum.',
+	'wikibase-error-save-connection' => 'Tengingar villa átti sér stað þegar reynt var að framkvæma vistun og því mistókst að ljúka breytingunum þínum. Athugaðu hvort þú sért tengd/ur netinu.',
+	'wikibase-error-remove-connection' => 'Tengingar villa átti sér stað þegar þú reyndir að framkvæma fjarlægingu og því mistókst að ljúka breytingum þínum. Vinsamlegast athugaðu hvort þú sért tengd/ur netinu.',
+	'wikibase-error-save-timeout' => 'Við höfum orðið fyrir tæknilegum örðugleikum og því mistókst að ljúka vistun.',
+	'wikibase-error-remove-timeout' => 'Við höfum orðið fyrir tæknilegum örðugleikum og því mistókst að ljúka fjarlægingu.',
+	'wikibase-error-autocomplete-connection' => 'Mistókst að senda fyrirspurn til Wikipedia. Vinsamlegast reyndu aftur síðar.',
+	'wikibase-error-autocomplete-response' => 'Vefþjónninn svaraði: $1',
+	'wikibase-error-ui-client-error' => 'Tenging við biðlarann mistókst. Vinsamlegast reyndu aftur síðar.',
+	'wikibase-error-ui-no-external-page' => 'Greinin sem tilgreind var fannst ekki á vefsíðunni.',
+	'wikibase-error-ui-cant-edit' => 'Þú getur ekki gert þessa aðgerð.',
+	'wikibase-error-ui-no-permissions' => 'Þú hefur ekki tilætluð réttindi til þess að framkvæma þessa aðgerð.',
+	'wikibase-error-ui-link-exists' => 'Þú getur ekki tengt í þessa síðu því annar hlutur tengir nú þegar í hana.',
+	'wikibase-error-ui-session-failure' => 'Setan þín rann út. Vinsamlegast skráðu þig inn aftur.',
+	'wikibase-error-ui-edit-conflict' => 'Breytingarárekstur. Vinsamlegast endurhladdu síðunni og vistaðu aftur.',
+	'wikibase-replicationnote' => 'Athugaðu að það tekur nokkrar mínútur þangað til breytingarnar eru sýnilegar á öllum wiki verkefnum.',
 	'wikibase-sitelinks' => 'Listi yfir síður sem tengja á þennan hlut',
 	'wikibase-sitelinks-sitename-columnheading' => 'Tungumál',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kóði',
 	'wikibase-sitelinks-link-columnheading' => 'Tengd grein',
+	'wikibase-tooltip-error-details' => 'Nánar',
 	'datatypes-type-wikibase-item' => 'Hlutur',
 	'datatypes-type-commonsMedia' => 'Commons margmiðlunarskrá',
 );
@@ -1072,7 +1090,9 @@ $messages['ug-arab'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author AS
  * @author Base
+ * @author Steve.rusyn
  * @author Ата
  */
 $messages['uk'] = array(
@@ -1080,10 +1100,16 @@ $messages['uk'] = array(
 	'wikibase-entity-item' => 'елемент',
 	'wikibase-entity-property' => 'властивість',
 	'wikibase-entity-query' => 'запит',
+	'wikibase-error-unexpected' => 'Сталася невідома помилка',
+	'wikibase-error-save-generic' => 'Сталася помилка під час спроби виконати збереження, через це Ваші зміни не можуть бути здійснені.',
+	'wikibase-error-remove-generic' => 'Сталась помилка під час спроби виконати вилучення, через це Ваші зміни не можуть бути здійснені.',
+	'wikibase-error-save-connection' => "Під час спроби здійснити виконати збереження сталась помилка з'єднання, через це Ваші зміни не можуть бути здійснені. Будь ласка, перевірте Ваше з'єднання з Інтернетом.",
+	'wikibase-error-autocomplete-response' => 'Сервер відповів: $1',
 	'wikibase-sitelinks' => 'Список сторінок, що посилаються на цей елемент',
 	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
 	'wikibase-sitelinks-link-columnheading' => "Пов'язані статті",
+	'wikibase-tooltip-error-details' => 'Деталі',
 	'datatypes-type-wikibase-item' => 'Елемент',
 	'datatypes-type-commonsMedia' => 'Медіафайл з Вікісховища',
 );

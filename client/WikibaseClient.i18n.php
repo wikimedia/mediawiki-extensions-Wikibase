@@ -437,7 +437,7 @@ $messages['gl'] = array(
 	'wikibase-comment-sitelink-add' => 'Engadiuse unha ligazón lingüística: $1',
 	'wikibase-comment-sitelink-change' => 'Cambiouse unha ligazón lingüística de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Eliminouse unha ligazón lingüística: $1',
-	'wikibase-comment-multi' => '$1 modificacións', # Fuzzy
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|modificación|modificacións}}',
 	'wikibase-nolanglinks' => 'ningunha',
 	'wikibase-editlinks' => 'Editar as ligazóns',
 	'wikibase-editlinkstitle' => 'Editar as ligazóns interlingüísticas',
@@ -604,9 +604,25 @@ $messages['is'] = array(
 	'wikibase-comment-sitelink-add' => 'Tungumálatengli bætt við: $1',
 	'wikibase-comment-sitelink-change' => 'Tungumálatengli breytt frá $1 í $2',
 	'wikibase-comment-sitelink-remove' => 'Tungumálatengill fjarlægður: $1',
-	'wikibase-comment-multi' => '$1 breytingar',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|breyting|breytingar}}',
+	'wikibase-nolanglinks' => 'engir',
 	'wikibase-editlinks' => 'Breyta tenglum',
 	'wikibase-editlinkstitle' => 'Breyta tungumálatenglum',
+	'wikibase-linkitem-addlinks' => 'Bæta við tenglum',
+	'wikibase-linkitem-close' => 'Loka glugganum og endurhlaða síðunni',
+	'wikibase-linkitem-failure' => 'Óþekkt villa kom upp þegar reynt var að tengja í síðuna.',
+	'wikibase-linkitem-title' => 'Tengja í síðu',
+	'wikibase-linkitem-linkpage' => 'Tengja í síðu',
+	'wikibase-linkitem-selectlink' => 'Vinsamlegast veldu vefsvæði og síðu sem þú vilt tengja þessa síðu við.',
+	'wikibase-linkitem-input-site' => 'Tungumál:',
+	'wikibase-linkitem-input-page' => 'Síða:',
+	'wikibase-linkitem-invalidsite' => 'Óþekkt eða ógild síða valin',
+	'wikibase-linkitem-confirmitem-text' => 'Vinsamlegast staðfestu að síðurnar fyrir neðan eru þær sem þú vilt tengja við þessa síðu.',
+	'wikibase-linkitem-confirmitem-button' => 'Staðfesta',
+	'wikibase-linkitem-not-loggedin-title' => 'Þú þarft að vera skráð/ur inn',
+	'wikibase-linkitem-not-loggedin' => 'Þú þarft að vera skráð/ur inn á þennann wiki og á [$1 samnýtta þekkingargrunninn] til að nota þennan möguleika.',
+	'wikibase-linkitem-success-create' => 'Síðurnar hafa verið tengdar saman. Þú getur fundið hlutinn, sem var nýlega búinn til með tenglunum, í [$1 samnýtta þekkingargrunninum].',
+	'wikibase-linkitem-success-link' => 'Síðurnar hafa verið tengdar saman. Þú getur fundið hlutinn með tenglunum í [$1 samnýtta þekkingargrunninum].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Sýna Wikidata breytingar í nýjustu breytingum',
 );
@@ -663,7 +679,7 @@ $messages['ja'] = array(
 	'wikibase-comment-sitelink-add' => '言語リンクを追加: $1',
 	'wikibase-comment-sitelink-change' => '言語リンクを $1 から $2 に変更',
 	'wikibase-comment-sitelink-remove' => '言語リンクを除去: $1',
-	'wikibase-comment-multi' => '$1 件の変更', # Fuzzy
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|件の変更}}',
 	'wikibase-nolanglinks' => 'なし',
 	'wikibase-editlinks' => 'リンクを編集',
 	'wikibase-editlinkstitle' => '言語間リンクを編集',
@@ -685,7 +701,11 @@ $messages['ja'] = array(
  * @author David1010
  */
 $messages['ka'] = array(
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|ცვლილება|ცვლილება}}',
+	'wikibase-nolanglinks' => 'არა',
 	'wikibase-editlinks' => 'ბმულების რედაქტირება',
+	'wikibase-linkitem-input-site' => 'ენა:',
+	'wikibase-linkitem-input-page' => 'გვერდი:',
 );
 
 /** Korean (한국어)
@@ -762,7 +782,7 @@ $messages['mk'] = array(
 	'wikibase-comment-sitelink-add' => 'Додадена јазична врска: $1',
 	'wikibase-comment-sitelink-change' => 'Изменета јазична врска од $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Отстранета јазична врска: $1',
-	'wikibase-comment-multi' => '$1 промени', # Fuzzy
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|промена|промени}}',
 	'wikibase-nolanglinks' => 'нема',
 	'wikibase-editlinks' => 'Уреди врски',
 	'wikibase-editlinkstitle' => 'Уредување на меѓујазични врски',
@@ -1119,6 +1139,7 @@ $messages['tl'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author AS
  * @author Ата
  */
 $messages['uk'] = array(
@@ -1132,8 +1153,21 @@ $messages['uk'] = array(
 	'wikibase-comment-sitelink-add' => 'Додано мовне посилання: $1',
 	'wikibase-comment-sitelink-change' => 'Мовне посилання змінено з $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Мовне посилання видалено: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|зміна|зміни|змін}}',
+	'wikibase-nolanglinks' => 'не вказано',
 	'wikibase-editlinks' => 'Редагувати посилання',
 	'wikibase-editlinkstitle' => 'Редагувати міжмовні посилання',
+	'wikibase-linkitem-addlinks' => 'Додати посилання',
+	'wikibase-linkitem-close' => 'Закрити діалог і оновити сторінку',
+	'wikibase-linkitem-failure' => "При спробі прив'язати вибрану сторінку сталася невідома помилка.",
+	'wikibase-linkitem-title' => "Прив'язати до сторінки",
+	'wikibase-linkitem-linkpage' => "Прив'язати до сторінки",
+	'wikibase-linkitem-selectlink' => "Виберіть сайт і сторінку, яку треба прив'язати до активної сторінки.",
+	'wikibase-linkitem-input-site' => 'Мова:',
+	'wikibase-linkitem-input-page' => 'Сторінка:',
+	'wikibase-linkitem-invalidsite' => 'Вибрано невідомий або недопустимий сайт',
+	'wikibase-linkitem-confirmitem-text' => "Підтвердіть, що наведений нижче список сторінок до прив'язання складено правильно.",
+	'wikibase-linkitem-confirmitem-button' => 'Підтвердити',
 	'wikibase-rc-hide-wikidata' => '$1 Вікідані',
 	'wikibase-rc-show-wikidata-pref' => 'Показати зміни Вікіданих у списку нових редагувань',
 );
