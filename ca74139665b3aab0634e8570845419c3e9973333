@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3//8Bk\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-10T18:09:09Z",
+      "side": 1,
+      "message": "This seems to be an arbitrary line break. Why?",
+      "revId": "ca74139665b3aab0634e8570845419c3e9973333",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
