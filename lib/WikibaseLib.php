@@ -165,6 +165,7 @@ $wgAutoloadClasses['SpecialWikibaseQueryPage']			= $dir . 'includes/specials/Spe
 
 // includes/api/serializers
 $wgAutoloadClasses['Wikibase\Lib\Serializers\ByPropertyListSerializer'] = $dir . 'includes/serializers/ByPropertyListSerializer.php';
+$wgAutoloadClasses['Wikibase\Lib\Serializers\ByPropertyListUnserializer'] = $dir . 'includes/serializers/ByPropertyListUnserializer.php';
 $wgAutoloadClasses['Wikibase\Lib\Serializers\ClaimSerializer'] 			= $dir . 'includes/serializers/ClaimSerializer.php';
 $wgAutoloadClasses['Wikibase\Lib\Serializers\ClaimsSerializer'] 		= $dir . 'includes/serializers/ClaimsSerializer.php';
 $wgAutoloadClasses['Wikibase\Lib\Serializers\EntitySerializer'] 		= $dir . 'includes/serializers/EntitySerializer.php';
@@ -218,6 +219,7 @@ $wgAutoloadClasses['Wikibase\Test\SnakObjectTest'] 			= $dir . 'tests/phpunit/sn
 $wgAutoloadClasses['Wikibase\Test\SerializerBaseTest'] 		= $dir . 'tests/phpunit/serializers/SerializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntitySerializerBaseTest']= $dir . 'tests/phpunit/serializers/EntitySerializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityTestCase']          = $dir . 'tests/phpunit/entity/EntityTestCase.php';
+$wgAutoloadClasses['Wikibase\Lib\Test\Serializers\UnserializerBaseTest'] = $dir . 'tests/phpunit/serializers/UnserializerBaseTest.php';
 
 // TODO: this is not nice, figure out a better design
 $wgExtensionFunctions[] = function() {
