@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3//7/4\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-02-10T18:51:10Z",
+      "side": 1,
+      "message": "i think I changed my mind about this magic number. I will accept this changeset, since it is an obvious improvement, but I will create one of my own to get rid of this magic.",
+      "revId": "40513ead10bdde293ac9dcac44ebf51ed512923c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
