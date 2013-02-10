@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//8Bc\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-10T18:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADZX//+YM\u003d",
+      "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//0as\u003d",
         "filename": "repo/includes/FuzzyCompare.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-02-04T12:18:10Z",
       "side": 1,
       "message": "FuzzyComparer?",
+      "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//8DM\u003d",
+        "filename": "repo/includes/FuzzyCompare.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-10T18:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH//0as\u003d",
       "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//8Bs\u003d",
+        "filename": "repo/includes/FuzzyCompare.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-10T18:20:51Z",
+      "side": 1,
+      "message": "Its not a getter, closer to a generator function.",
+      "parentUuid": "AAADiH//0ao\u003d",
+      "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//0ak\u003d",
         "filename": "repo/includes/FuzzyCompare.php",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//8BI\u003d",
+        "filename": "repo/includes/FuzzyCompare.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-10T18:20:51Z",
+      "side": 1,
+      "message": "Should be accumulateSingleScore, its not getting a simple value. If the class is reformulated it could be a getter I guess.",
+      "parentUuid": "AAADiH//0ak\u003d",
+      "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//0ag\u003d",
         "filename": "repo/includes/FuzzyCompare.php",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2013-02-04T12:18:10Z",
       "side": 1,
       "message": "getSingleScore?",
+      "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//8BM\u003d",
+        "filename": "repo/includes/FuzzyCompare.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-10T18:20:51Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "AAADiH//0ag\u003d",
       "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
