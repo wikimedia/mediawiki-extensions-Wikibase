@@ -334,8 +334,8 @@ abstract class EntityView extends \ContextSource {
 	}
 
 	/**
-	 * Selects the languages for the terms to display on first try, based on the current user and the available
-	 * languages.
+	 * Selects the languages for the terms to display on first try, based on the current user and
+	 * the available languages.
 	 *
 	 * @since 0.4
 	 *
@@ -354,28 +354,9 @@ abstract class EntityView extends \ContextSource {
 			if( $lang !== null ) {
 				$result = array_diff( $result, array( $lang->getCode() ) );
 			}
-			if( !empty( $result ) ) {
-				wfProfileOut( __METHOD__ );
-				return $result;
-			}
 		}
-
-		// get all labels and descriptions in OTHER language versions:
-		$labels = $entity->getLabels();
-		$descriptions = $entity->getDescriptions();
-		if ( $lang !== null ) {
-			$langCode = $lang->getCode();
-			unset( $labels[ $langCode ], $descriptions[ $langCode ] );
-		}
-
-		$otherLanguageVersions = array_unique(
-			array_merge( array_keys( $labels ), array_keys( $descriptions ) ) );
-
-		// if we are here, then none of the languages of the user have any entries, but there are
-		// *some* entries in the set. We just give back the first three entries with labels or
-		// description, and that's it.
 		wfProfileOut( __METHOD__ );
-		return array_slice( $otherLanguageVersions, 0, 3 );
+		return $result;
 	}
 
 	/**
