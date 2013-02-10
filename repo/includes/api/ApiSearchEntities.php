@@ -81,12 +81,36 @@ class ApiSearchEntities extends ApiBase {
 		wfProfileIn( __METHOD__ );
 
 		// Gets exact matches. If there are not enough exact matches, it gets prefixed matches
+		// TODO: This is a work around for the broken code - it should be fixed
 		$limit = $params['limit'] + $params['continue'] + 1;
-		$ids = $this->searchEntities( $params['language'], $params['search'], $params['type'], $limit, false );
-		if ( count( $ids ) < $limit ) {
-			$ids = $this->searchEntities( $params['language'], $params['search'], $params['type'], $limit, true );
+		$ids = array();
+		// Gets exact match for the search term as an id if it can be found
+		$entityId = EntityId::newFromPrefixedId( $params['search'] );
+		if ( $entityId ) {
+			$page = EntityContentFactory::singleton()->getWikiPageForId( $entityId );
+			if ( $page->exists() ) {
+				$entityContent = $page->getContent();
+				if ( $entityContent instanceof EntityContent ) {
+					$ids[] = $entityId;
+				}
+			}
 		}
 
+		// If still space, then merge in exact matches
+		if ( count( $ids ) < $limit ) {
+			$ids = array_merge( $ids, $this->searchEntities( $params['language'], $params['search'], $params['type'], $limit, false ) );
+			$ids = array_unique( $ids );
+		}
+
+		// If still space, then merge in prefix matches
+		if ( count( $ids ) < $limit ) {
+			$ids = array_merge( $ids, $this->searchEntities( $params['language'], $params['search'], $params['type'], $limit, true ) );
+			$ids = array_unique( $ids );
+		}
+		// reduce any overflow
+		$ids = array_slice ( $ids, 0, $limit );
+
+		// Find all the remaining terms for the given entities
 		$terms = StoreFactory::getStore()->newTermCache()->getTermsOfEntities( $ids, $params['type'], $params['language'] );
 
 		$entries = array();
