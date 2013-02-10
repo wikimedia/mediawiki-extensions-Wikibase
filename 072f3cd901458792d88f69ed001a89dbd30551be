@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//8AE\u003d",
+        "filename": "repo/includes/FuzzyCompare.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-10T18:34:19Z",
+      "side": 1,
+      "message": "This could be a getter, agree.",
+      "parentUuid": "AAADi3//8BI\u003d",
+      "revId": "072f3cd901458792d88f69ed001a89dbd30551be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//0ag\u003d",
         "filename": "repo/includes/FuzzyCompare.php",
         "patchSetId": 3
