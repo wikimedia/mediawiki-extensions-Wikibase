@@ -16,6 +16,24 @@
       "revId": "ca74139665b3aab0634e8570845419c3e9973333",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//71s\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-10T21:48:43Z",
+      "side": 1,
+      "message": "More or less, the page should be fixed as it lets the form expand without limit and looks rather weird.\n\nIn my opinion these messages doesn\u0027t belong in the form.",
+      "parentUuid": "AAADi3//8Bk\u003d",
+      "revId": "ca74139665b3aab0634e8570845419c3e9973333",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
