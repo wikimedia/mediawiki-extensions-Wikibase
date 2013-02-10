@@ -838,6 +838,7 @@ $messages['nb'] = array(
 );
 
 /** Dutch (Nederlands)
+ * @author Saruman
  * @author Siebrand
  */
 $messages['nl'] = array(
@@ -845,10 +846,28 @@ $messages['nl'] = array(
 	'wikibase-entity-item' => 'item',
 	'wikibase-entity-property' => 'eigenschap',
 	'wikibase-entity-query' => 'zoekopdracht',
+	'wikibase-error-unexpected' => 'Er is een onverwachte fout opgetreden.',
+	'wikibase-error-save-generic' => 'Er is een fout opgetreden tijdens het opslaan van uw wijzigingen. Uw wijzigingen konden niet worden opgeslagen.',
+	'wikibase-error-remove-generic' => 'Er is een fout opgetreden tijdens het verwijderen. Uw wijzigingen konden niet worden opgeslagen.',
+	'wikibase-error-save-connection' => 'Er is een fout in de verbinding opgetreden tijdens het opslaan. Uw wijzigingen konden niet worden opgeslagen. Controleer uw internetverbinding.',
+	'wikibase-error-remove-connection' => 'Er is een fout in de verbinding opgetreden tijdens het verwijderen. Uw wijzigingen konden niet worden opgeslagen. Controleer uw internetverbinding.',
+	'wikibase-error-save-timeout' => 'Wij ondervinden technische problemen. Uw wijzigingen kunnen niet worden opgeslagen.',
+	'wikibase-error-remove-timeout' => 'ij ondervinden technische problemen. Uw wijzigingen kunnen niet worden opgeslagen.',
+	'wikibase-error-autocomplete-connection' => 'Het was niet mogelijk de Wikipedia-API te bereiken. Probeer het later opnieuw.',
+	'wikibase-error-autocomplete-response' => 'Antwoord van server: $1',
+	'wikibase-error-ui-client-error' => 'De verbinding met de externe pagina kon niet gemaakt worden. Probeer het later nog eens.',
+	'wikibase-error-ui-no-external-page' => 'De opgegeven pagina kon niet worden gevonden op de overeenkomende site.',
+	'wikibase-error-ui-cant-edit' => 'U mag deze handeling niet uitvoeren.',
+	'wikibase-error-ui-no-permissions' => 'U hebt geen rechten om deze handeling uit te voeren.',
+	'wikibase-error-ui-link-exists' => 'U kunt geen koppeling naar deze pagina maken omdat een ander item er al aan gekoppeld is.',
+	'wikibase-error-ui-session-failure' => 'Uw sessie is verlopen. Meld u opnieuw aan.',
+	'wikibase-error-ui-edit-conflict' => 'Er is een bewerkingsconflict opgetreden. Laad de pagina opnieuw en sla uw wijzigingen opnieuw op.',
+	'wikibase-replicationnote' => "Het kan een aantal minuten duren voor alle wijzigingen op alle wiki's zichtbaar zijn",
 	'wikibase-sitelinks' => "Lijst met pagina's gekoppeld aan dit item",
 	'wikibase-sitelinks-sitename-columnheading' => 'Taal',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
 	'wikibase-sitelinks-link-columnheading' => 'Gekoppelde pagina',
+	'wikibase-tooltip-error-details' => 'Details',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Mediabestand van Commons',
 );
@@ -1149,6 +1168,7 @@ $messages['vi'] = array(
 );
 
 /** Simplified Chinese (中文（简体）‎)
+ * @author Hydra
  * @author Shizhao
  * @author Stevenliuyi
  * @author Yfdyh000
@@ -1175,6 +1195,7 @@ $messages['zh-hans'] = array(
 	'wikibase-error-ui-link-exists' => '因为另一项目已链接，您不能链接到此页面。',
 	'wikibase-error-ui-session-failure' => '您的会话已过期。请重新登录。',
 	'wikibase-error-ui-edit-conflict' => '发生编辑冲突。请刷新再重新保存。',
+	'wikibase-replicationnote' => '更改可能需要几分钟的时间才能在所有的维基上看到，敬请留意。',
 	'wikibase-sitelinks' => '链接到本项目的页面列表',
 	'wikibase-sitelinks-sitename-columnheading' => '语言',
 	'wikibase-sitelinks-siteid-columnheading' => '代码',

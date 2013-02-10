@@ -5900,6 +5900,7 @@ $messages['nl'] = array(
 	'wikibase-undo-firstrev' => 'Het is niet mogelijk het aanmaken van de pagina ongedaan te maken.',
 	'wikibase-propertyedittool-full' => 'De lijst met waarden is compleet.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Eén waarde|$1 waarden}} nog niet opgeslagen',
+	'wikibase-propertyedittool-counter-entrieslabel' => '$1 {{PLURAL:$1|ingang|ingangen}}',
 	'wikibase-sitelinksedittool-full' => "Koppelingen naar pagina's die al zijn ingesteld voor alle bekende sites.",
 	'wikibase-disambiguation-title' => 'Disambiguatie voor "$1"',
 	'wb-special-createitem-new-item-notification' => 'Nieuw item $1 aangemaakt en doorverwezen naar de pagina voor dat item. Terug naar $2.',
@@ -5909,7 +5910,8 @@ $messages['nl'] = array(
 	'wikibase-datatype-label' => 'Gegevenstype:',
 	'wikibase-claimview-snak-tooltip' => 'Voer een waarde in die overeenkomt met de eigenschap "$1". Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het icoon naast het invoerveld voor de waarde te klikken.',
 	'wikibase-claimview-snak-new-tooltip' => 'Nadat u een eigenschap hebt opgegeven kunt u een bijbehorende waarde opgeven. Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het icoon naast het invoerveld voor de waarde te klikken.',
-	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'Bronnen:', # Fuzzy
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|bron|bronnen}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Eén bron|$1 bronnen}} nog niet opgeslagen',
 	'wikibase-snakview-property-input-placeholder' => 'eigenschap',
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak van het type "$1". Het verwerken van dit type Snak wordt nog niet ondersteund.',
 	'wikibase-snakview-choosesnaktype' => 'Kies een waardetype.',
@@ -6870,6 +6872,7 @@ $messages['roa-tara'] = array(
 );
 
 /** Russian (русский)
+ * @author AS
  * @author Amire80
  * @author Kaganer
  * @author Ole Yves
@@ -6920,6 +6923,8 @@ $messages['ru'] = array(
 	'wikibase-aliases-input-help-message' => 'Если этот набор данных известен под более чем одним названием, вы можете ввести здесь псевдонимы, альтернативные названия и синонимы, чтобы этот элемент можно было найти по его альтернативным именам.',
 	'wikibase-aliases-empty' => 'Альтернативные названия (синонимы) не определены',
 	'wikibase-datatype-label' => 'Тип данных:',
+	'wikibase-claimview-snak-tooltip' => 'Введите значение, соответствующее свойству «$1». Если свойство не имеет значения или оно неизвестно, Вы можете выбрать альтернативу указав пользовательское значение, нажав на значок рядом с полем ввода.',
+	'wikibase-claimview-snak-new-tooltip' => 'После указания свойства можно ввести соответствующее значение. Если свойство не имеет значения или оно неизвестно, Вы можете выбрать альтернативу указав пользовательское значение, нажав на значок рядом с полем ввода.',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'Источники:', # Fuzzy
 	'wikibase-snakview-property-input-placeholder' => 'свойство',
 	'wikibase-snakview-choosesnaktype' => 'Выберите тип значения.',
@@ -7493,6 +7498,7 @@ $messages['ug-arab'] = array(
  */
 $messages['uk'] = array(
 	'wikibase-desc' => 'Сховище структурованих даних',
+	'specialpages-group-wikibaserepo' => 'Сховище Вікіданих',
 	'wikibase-edit' => 'редагувати',
 	'wikibase-save' => 'зберегти',
 	'wikibase-cancel' => 'скасувати',
@@ -7529,10 +7535,15 @@ $messages['uk'] = array(
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|запис|записи|записів}}',
 	'wikibase-sitelinksedittool-full' => 'Посилання на сторінки вже встановлено для всіх відомих сайтів.',
 	'wikibase-disambiguation-title' => 'Значення для "$1"',
+	'wb-special-createitem-new-item-notification' => 'Новий елемент $1 створено. Вас перенаправлено на його сторінку. Назад до «$2».',
 	'wikibase-aliases-label' => 'Також відомий як:',
+	'wikibase-aliases-input-help-message' => 'Якщо цей набір даних відомий під різними назвами, Ви можете вказати додаткові назви, що полегшить пошук.',
 	'wikibase-aliases-empty' => 'Не визначено жодного синоніма.',
 	'wikibase-datatype-label' => 'Тип даних:',
+	'wikibase-claimview-snak-tooltip' => 'Введіть значення, яке відповідає властивості "$1". Якщо властивість не має значення або воно невідоме, Ви можете вказати звичайне значення, клацнувши по значку біля поля введення.',
+	'wikibase-claimview-snak-new-tooltip' => 'Вибравши властивість, Ви можете ввести відповідне значення. Якщо властивість не має значення або воно невідоме, Ви можете вказати звичайне значення, клацнувши по значку біля поля введення.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|джерело|джерела}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Одне джерело|$1 джерел}} ще не збережено',
 	'wikibase-snakview-property-input-placeholder' => 'властивість',
 	'wikibase-restrictionedit-tooltip-message' => 'Цю сторінку захищено. Редагування не дозволено.',
 	'wikibase-blockeduser-tooltip-message' => 'Ви заблоковані від редагування.',
@@ -7540,6 +7551,7 @@ $messages['uk'] = array(
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
 	'wikibase-itembytitle-lookup-page' => 'Сторінка:',
 	'wikibase-itembytitle-submit' => 'Пошук',
+	'special-itemdisambiguation' => 'Неоднозначності: елементи з такою самою назвою',
 	'wikibase-itemdisambiguation-lookup-language' => 'Мова:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Назва:',
 	'wikibase-itemdisambiguation-submit' => 'Знайти',
@@ -7556,8 +7568,12 @@ $messages['uk'] = array(
 	'special-setlabel' => 'Задавання назви',
 	'wikibase-setlabel-label' => 'Назва:',
 	'wikibase-setlabel-submit' => 'Задати назву',
+	'special-setdescription' => 'Задавання опису',
+	'special-setaliases' => 'Задавання додаткових назв',
 	'wikibase-setentity-id' => 'ID', # Fuzzy
 	'wikibase-setentity-language' => 'Мова', # Fuzzy
+	'special-listdatatypes' => 'Список усіх доступних типів даних',
+	'special-entitieswithoutlabel' => 'Список сутностей без назви',
 	'wikibase-entitieswithoutlabel-label-language' => 'Мова:',
 	'wikibase-entitieswithoutlabel-submit' => 'Знайти',
 	'special-entitydata' => 'Дані про сутність',
@@ -7853,6 +7869,7 @@ $messages['yi'] = array(
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
+ * @author Hydra
  * @author Linforest
  * @author Shirayuki
  * @author Shizhao
@@ -7862,6 +7879,7 @@ $messages['yi'] = array(
  */
 $messages['zh-hans'] = array(
 	'wikibase-desc' => '结构化数据知识库',
+	'specialpages-group-wikibaserepo' => '维基数据存储库',
 	'wikibase-edit' => '编辑',
 	'wikibase-save' => '保存',
 	'wikibase-cancel' => '取消',
@@ -7895,6 +7913,7 @@ $messages['zh-hans'] = array(
 	'wikibase-undo-firstrev' => '无法撤销该页面的创建',
 	'wikibase-propertyedittool-full' => '取值列表已完整。',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '$1个值尚未保存',
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|项目|项目}}',
 	'wikibase-sitelinksedittool-full' => '已经为所有的已知站点设置了指向页面的链接。',
 	'wikibase-disambiguation-title' => '“$1”的消歧义',
 	'wb-special-createitem-new-item-notification' => '已建立新项目$1并重定向。回到$2。',
@@ -7902,7 +7921,8 @@ $messages['zh-hans'] = array(
 	'wikibase-aliases-input-help-message' => '如果此数据集有一个以上的名称，您可以输入它的别名和同义词，以便可以通过其他名称找到此项。',
 	'wikibase-aliases-empty' => '没有已定义的别名。',
 	'wikibase-datatype-label' => '数据类型：',
-	'wikibase-statementview-referencesheading-pendingcountertooltip' => '来源：', # Fuzzy
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|来源|来源}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|1个来源|$1个来源}}还未保存',
 	'wikibase-snakview-property-input-placeholder' => '属性',
 	'wikibase-snakview-variations-somevalue-label' => '未知值',
 	'wikibase-snakview-variations-novalue-label' => '无值',

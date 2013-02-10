@@ -898,9 +898,25 @@ $messages['nl'] = array(
 	'wikibase-comment-sitelink-add' => 'Taalkoppeling toegevoegd: $1',
 	'wikibase-comment-sitelink-change' => 'Taalkoppeling gewijzigd van $1 naar $2',
 	'wikibase-comment-sitelink-remove' => 'Taalkoppeling verwijderd: $1',
-	'wikibase-comment-multi' => '$1 wijzigingen',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|wijziging|wijzigingen}}',
+	'wikibase-nolanglinks' => 'geen',
 	'wikibase-editlinks' => 'Koppelingen bewerken',
 	'wikibase-editlinkstitle' => 'Intertaalkoppelingen bewerken',
+	'wikibase-linkitem-addlinks' => 'Koppelingen toevoegen',
+	'wikibase-linkitem-close' => 'Venster sluiten en de pagina opnieuw laden',
+	'wikibase-linkitem-failure' => 'Er is een onbekende fout opgetreden tijdens het maken van een koppeling naar de opgegeven pagina.',
+	'wikibase-linkitem-title' => 'Koppelen met pagina',
+	'wikibase-linkitem-linkpage' => 'Koppelen met pagina',
+	'wikibase-linkitem-selectlink' => 'Selecteer en site en een pagina waar u deze pagina mee wilt koppelen.',
+	'wikibase-linkitem-input-site' => 'Taal:',
+	'wikibase-linkitem-input-page' => 'Pagina:',
+	'wikibase-linkitem-invalidsite' => 'Er is een onbekende of ongeldige site geselecteerd',
+	'wikibase-linkitem-confirmitem-text' => "Bevestig dat de onderstaande pagina's inderdaad de pagina's zijn die u met deze pagina wilt koppelen.",
+	'wikibase-linkitem-confirmitem-button' => 'Bevestigen',
+	'wikibase-linkitem-not-loggedin-title' => 'U moet aangemeld zijn',
+	'wikibase-linkitem-not-loggedin' => 'U moet aangemeld zijn bij deze wiki en de [$1 centrale gegevensrepository] om deze functie te kunnen gebruiken.',
+	'wikibase-linkitem-success-create' => "De pagina's zijn gekoppeld. U kunt het nieuw aangemaakte item met de koppelingen vinden in de [$1 centrale gegevensrepository].",
+	'wikibase-linkitem-success-link' => "De pagina's zijn gekoppeld. U kunt het item met de koppelingen vinden in de [$1 centrale gegevensrepository].",
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
 );
@@ -1194,6 +1210,7 @@ $messages['vi'] = array(
 );
 
 /** Simplified Chinese (中文（简体）‎)
+ * @author Hydra
  * @author Linforest
  * @author Shizhao
  * @author Stevenliuyi
@@ -1210,7 +1227,25 @@ $messages['zh-hans'] = array(
 	'wikibase-comment-sitelink-add' => '添加语言链接：$1',
 	'wikibase-comment-sitelink-change' => '语言链接从$1更改为$2',
 	'wikibase-comment-sitelink-remove' => '删除语言链接：$1',
+	'wikibase-comment-multi' => '$1 个更改',
+	'wikibase-nolanglinks' => '无',
+	'wikibase-editlinks' => '编辑连接',
 	'wikibase-editlinkstitle' => '编辑跨语言链接',
+	'wikibase-linkitem-addlinks' => '添加连接',
+	'wikibase-linkitem-close' => '关闭视窗和刷新页面',
+	'wikibase-linkitem-failure' => '在连接页面时出现了一个未知的问题。',
+	'wikibase-linkitem-title' => '与页面连接',
+	'wikibase-linkitem-linkpage' => '与页面连接',
+	'wikibase-linkitem-selectlink' => '请选择一个您想连接这个页面的网站与页面。',
+	'wikibase-linkitem-input-site' => '语言：',
+	'wikibase-linkitem-input-page' => '页面：',
+	'wikibase-linkitem-invalidsite' => '选择了一个未知或无效的网站',
+	'wikibase-linkitem-confirmitem-text' => '请确认以下是您想在这个页面上连接的页面。',
+	'wikibase-linkitem-confirmitem-button' => '确认',
+	'wikibase-linkitem-not-loggedin-title' => '您必须要登入',
+	'wikibase-linkitem-not-loggedin' => '您必须要在此维基上和[$1 中央数据存储库]登入才能使用此功能。',
+	'wikibase-linkitem-success-create' => '页面以成功地被连接了。您可以在我们的[$1 中央数据存储库]找到包含连接的新项目。',
+	'wikibase-linkitem-success-link' => '页面以成功地被连接了。您可以在我们的[$1 中央数据存储库]找到包含连接的项目。',
 	'wikibase-rc-hide-wikidata' => '$1维基数据',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
 );
