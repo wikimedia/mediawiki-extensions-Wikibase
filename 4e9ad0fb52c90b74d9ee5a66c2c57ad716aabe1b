@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3//7vI\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-11T08:45:17Z",
+      "side": 1,
+      "message": "What is a MediaWikiTitle?",
+      "revId": "4e9ad0fb52c90b74d9ee5a66c2c57ad716aabe1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7vM\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-11T08:45:17Z",
+      "side": 1,
+      "message": "Please use a Unicode character here, not an entity. Also a few times below and above.",
+      "revId": "4e9ad0fb52c90b74d9ee5a66c2c57ad716aabe1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
