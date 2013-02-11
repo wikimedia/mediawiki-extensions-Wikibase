@@ -364,6 +364,11 @@ class LangLinkHandler {
 		foreach ( $repoLinks as $wiki => $page ) {
 			$site = $this->sites->getSite( $wiki );
 
+			if ( !$site ) {
+				trigger_error( "Unknown wiki '$wiki' used as sitelink target", E_USER_WARNING );
+				continue;
+			}
+
 			$nav = $site->getNavigationIds();
 			$nav = array_values( $nav );
 

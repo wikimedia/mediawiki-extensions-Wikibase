@@ -76,11 +76,13 @@ class ClientChangeHandler {
 
 			$globalId = Settings::get( 'siteGlobalID' );
 
-            // check that $sitecode is valid
-            if ( \Sites::singleton()->getSite( $globalId ) === false ) {
-                throw new \MWException( "Site code $globalId does not exist in the sites table. "
-					. "Has the sites table been populated?" );
-            }
+			// check that $sitecode is valid
+			if ( !\Sites::singleton()->getSite( $globalId ) ) {
+				trigger_error( "Site code $globalId does not exist in the sites table. "
+					. "Has the sites table been populated?", E_USER_WARNING );
+
+				return null; //XXX: can we do better?
+			}
 
 			$params = array();
 
@@ -120,8 +122,8 @@ class ClientChangeHandler {
 
 				foreach( $siteLinkDiff as $siteKey => $diffOp ) {
 					$site = \Sites::singleton()->getSite( $siteKey );
-					if( $site === null ) {
-						wfWarn( "Could not get site with globalId $siteKey." );
+					if( !$site ) {
+						trigger_error( "Could not get site with globalId $siteKey.", E_USER_WARNING );
 						continue;
 					}
 					// assumes interwiki prefix is same as lang code
