@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//7cY\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-11T14:22:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADi3//7rs\u003d",
+      "revId": "63375c132b978eed76fa60a9a3a5369827f5d6ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADi3//7ro\u003d",
         "filename": "client/WikibaseClient.i18n.alias.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-02-11T09:33:57Z",
       "side": 1,
       "message": "Please reconsider using 3 aliases for the same special page. Using one is preferred.",
+      "revId": "63375c132b978eed76fa60a9a3a5369827f5d6ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7cM\u003d",
+        "filename": "client/WikibaseClient.i18n.alias.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-11T14:22:12Z",
+      "side": 1,
+      "message": "We can\u0027t agree on a single name.",
+      "parentUuid": "AAADi3//7ro\u003d",
       "revId": "63375c132b978eed76fa60a9a3a5369827f5d6ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//7bs\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-11T14:22:12Z",
+      "side": 1,
+      "message": "This really needs a cleanup several places, \"Go\" seems to be pretty seldom... But I can change it to Go anyhow..",
+      "parentUuid": "AAADi3//7rg\u003d",
+      "revId": "63375c132b978eed76fa60a9a3a5369827f5d6ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADi3//7rc\u003d",
         "filename": "client/WikibaseClient.i18n.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2013-02-11T09:33:57Z",
       "side": 1,
       "message": "No need for a dash.",
+      "revId": "63375c132b978eed76fa60a9a3a5369827f5d6ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7bo\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-11T14:22:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADi3//7rc\u003d",
       "revId": "63375c132b978eed76fa60a9a3a5369827f5d6ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//7bk\u003d",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-11T14:22:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADi3//7rk\u003d",
+      "revId": "63375c132b978eed76fa60a9a3a5369827f5d6ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADi3//7rY\u003d",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2013-02-11T09:33:57Z",
       "side": 1,
       "message": "Use @todo as it\u0027s a valid PHPDoc keyword. See http://manual.phpdoc.org/HTMLSmartyConverter/HandS/phpDocumentor/tutorial_tags.todo.pkg.html for details. It ensures that PHPDoc and IDEs can create proper lists.",
+      "revId": "63375c132b978eed76fa60a9a3a5369827f5d6ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7cE\u003d",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-11T14:22:12Z",
+      "side": 1,
+      "message": "Moved out of the header, it is algorithm specific",
+      "parentUuid": "AAADi3//7rY\u003d",
       "revId": "63375c132b978eed76fa60a9a3a5369827f5d6ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
