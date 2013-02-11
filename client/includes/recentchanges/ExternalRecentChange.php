@@ -53,6 +53,7 @@ class ExternalRecentChange {
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
 			'rc_bot' => $isBot,
+			'rc_patrolled' => true,
 			'rc_old_len' => $title->getLength(),
 			'rc_new_len' => $title->getLength(),
 			'rc_this_oldid' => $title->getLatestRevID(),
