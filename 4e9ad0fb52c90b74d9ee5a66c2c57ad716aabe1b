@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//6wU\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-11T22:42:13Z",
+      "side": 1,
+      "message": "A specific datatype. These explanations are preliminary. A more thorough explanation will be made later.",
+      "parentUuid": "AAADi3//7vI\u003d",
+      "revId": "4e9ad0fb52c90b74d9ee5a66c2c57ad716aabe1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADi3//7vM\u003d",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 4
