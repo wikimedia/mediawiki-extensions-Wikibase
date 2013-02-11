@@ -36,7 +36,8 @@ if ( !defined( 'WBC_VERSION' ) ) {
 global $wgScriptPath, $wgArticlePath, $wgLanguageCode, $wgDBname;
 
 $wgWBClientSettings = array(
-	'namespaces' => array( NS_MAIN ),
+	'namespaces' => false, // by default, include all namespaces
+	'excludeNamespaces' => array(),
 	'source' => array( 'dir' => __DIR__ . '/tests' ),
 	'repoUrl' => '//wikidata.org',
 	'repoScriptPath' => $wgScriptPath,
