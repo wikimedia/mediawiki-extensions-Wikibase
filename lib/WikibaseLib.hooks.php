@@ -33,6 +33,9 @@ final class LibHooks {
 			'changes/EntityChange',
 
 			'claim/ClaimAggregate',
+			'claim/ClaimDifference',
+			'claim/ClaimDifferenceVisualizer',
+			'claim/ClaimDiffer',
 			'claim/ClaimListAccess',
 			'claim/Claims',
 			'claim/Claim',

@@ -397,8 +397,6 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @param EntityDiff $diff
 	 */
 	protected function displayUndoDiff( EntityDiff $diff ) {
-		$diffView = EntityDiffView::newForDiff( $diff, $this->getContext() );
-
 		$tableClass = 'diff diff-contentalign-' . htmlspecialchars( $this->getTitle()->getPageLanguage()->alignStart() );
 
 		$this->getOutput()->addHTML( Html::openElement( 'table', array( 'class' => $tableClass ) ) );
@@ -414,7 +412,14 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( Html::rawElement( 'td', array( 'colspan' => '2' ), Html::rawElement( 'div', array( 'id' => 'mw-diff-ntitle1' ), $new ) ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
 
-		$this->getOutput()->addHTML( $diffView->getHtml() );
+		// TODO: derp inject the EntityDiffVisualizer
+		$diffVisualizer = new EntityDiffVisualizer(
+			$this->getContext(),
+			new ClaimDiffer( new \Diff\ListDiffer() ),
+			new ClaimDifferenceVisualizer( new WikiPageEntityLookup() )
+		);
+
+		$this->getOutput()->addHTML( $diffVisualizer->visualizeDiff( $diff ) );
 
 		$this->getOutput()->addHTML( Html::closeElement( 'tbody' ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'table' ) );
