@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3//7dk\u003d",
+        "filename": "client/includes/recentchanges/RecentChangesFilterOptions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-02-11T14:01:51Z",
+      "side": 1,
+      "message": "hmm...",
+      "revId": "7af42ecf2be6740ccc595fb083ab7cd897ec8fa6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
