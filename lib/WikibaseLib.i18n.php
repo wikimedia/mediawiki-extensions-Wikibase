@@ -21,6 +21,7 @@ $messages['en'] = array(
 	'wikibase-entity-item' => 'item',
 	'wikibase-entity-property' => 'property',
 	'wikibase-entity-query' => 'query',
+	'wikibase-diffview-references' => 'references',
 	'wikibase-error-unexpected' => 'An unexpected error occurred.',
 	'wikibase-error-save-generic' => 'An error occurred while trying to perform save and because of this, your changes could not be completed.',
 	'wikibase-error-remove-generic' => 'An error occurred while trying to perform remove and because of this, your changes could not be completed.',
@@ -63,6 +64,7 @@ $messages['qqq'] = array(
 {{Identical|Property}}',
 	'wikibase-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].
 {{Identical|Query}}',
+	'wikibase-diffview-references' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects references. Will be shown as e.g. "claim / property q1 / refereneces".',
 	'wikibase-error-unexpected' => 'Error message that is used as a fallback message if no other message can be assigned to the error that occurred. This error message being displayed should never happen. However, there may be "unexpected" errors not covered by the implemented error handling.',
 	'wikibase-error-save-generic' => 'Generic error message for an error happening during a save operation.',
 	'wikibase-error-remove-generic' => 'Generic error message for an error happening during a remove operation',
