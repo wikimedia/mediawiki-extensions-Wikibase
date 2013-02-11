@@ -51,7 +51,7 @@ define( 'WB_VERSION', '0.4 alpha' );
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __DIR__,
-	'name' => 'Wikibase',
+	'name' => 'Wikibase Repository',
 	'version' => WB_VERSION,
 	'author' => array(
 		'The Wikidata team', // TODO: link?

@@ -2,7 +2,7 @@
 
 The Wikibase package consists of three interconnected extensions:
 
-* Wikibase (in the directory repo)
+* Wikibase Repository (in the directory repo)
 * Wikibase Client (in the directory client)
 * WikibaseLib (in the directory lib)
 
