@@ -65,6 +65,7 @@ $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHand
 $wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\SortUtils']		= $dir . 'includes/SortUtils.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
+$wgAutoloadClasses['Wikibase\NamespaceChecker']		= $dir . 'includes/NamespaceChecker.php';
 
 // includes/api
 $wgAutoloadClasses['Wikibase\ApiClientInfo']		= $dir . 'includes/api/ApiClientInfo.php';
