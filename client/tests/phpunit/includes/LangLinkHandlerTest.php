@@ -86,6 +86,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$this->langLinkHandler = new \Wikibase\LangLinkHandler(
 			'testwiki',
 			array( NS_MAIN ),
+			array(),
 			$this->mockRepo,
 			\SiteSQLStore::newInstance()
 		);
