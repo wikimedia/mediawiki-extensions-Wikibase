@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3//7aE\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-11T14:50:17Z",
+      "side": 1,
+      "message": "Why serialize? That just makes the value longer and harder to query. EntityIds have a canonical external representation, it\u0027s provided by $itemId-\u003egetPrefixedId(). Is there any reason not to use that? Or, since we already know that it\u0027s an item, just use the numeric ID alone.",
+      "revId": "ca5efe32a88b1bd9f73ec85e7ded593f05591d4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
