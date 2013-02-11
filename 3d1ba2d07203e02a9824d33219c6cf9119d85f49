@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAADi3//7kU\u003d",
+        "filename": "lib/resources/jquery.ui/jquery.ui.suggester.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-11T11:34:33Z",
+      "side": 1,
+      "message": "I just updated the coding docs. There were examples of @return {null}, so why shoundn\u0027t something like {Object|false} not be allowed? false is just a primitive as null or undefined.",
+      "parentUuid": "AAADi3//9l8\u003d",
+      "revId": "3d1ba2d07203e02a9824d33219c6cf9119d85f49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADi3//9uI\u003d",
         "filename": "lib/resources/jquery.ui/jquery.ui.suggester.js",
         "patchSetId": 2
