@@ -69,13 +69,15 @@ class ApiSearchEntities extends ApiBase {
 	}
 
 	/**
-	 * Populate the search result entries
+	 * Populates the search result returning the number of requested matches plus one additional
+	 * item for being able to determine if there would be any more results.
+	 * If there are not enough exact matches, the list of returned entries will be additionally
+	 * filled with prefixed matches.
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityContent[] $results
-	 * @param string $language
-	 * @param string $search
+	 * @param array $params
+	 * @return array
 	 */
 	private function getSearchEntries( $params ) {
 		wfProfileIn( __METHOD__ );
@@ -179,17 +181,24 @@ class ApiSearchEntities extends ApiBase {
 			array()
 		);
 
-		$totalHits = count ( $entries );
+		// getSearchEntities returns one more item than requested in order to determine if there
+		// would be any more results coming up.
+		$hits = count( $entries );
+
+		// Actual result set.
 		$entries = array_slice( $entries, $params['continue'], $params['limit'] );
 
 		$allowedParams = $this->getAllowedParams();
+		$nextContinuation = $params['continue'] + $params['limit'];
 		$maxContinuation = $allowedParams['continue'][ApiBase::PARAM_MAX];
-		if (( $totalHits > ( $params['continue'] + $params['limit'] ) )
-			&& ( ( $totalHits + 1 ) <  $maxContinuation )) {
+
+		// Only pass search-continue param if there are more results and the maximum continuation
+		// limit is not exceeded.
+		if ( $hits > $nextContinuation && $nextContinuation <= $maxContinuation ) {
 			$this->getResult()->addValue(
 				null,
 				'search-continue',
-				$totalHits - 1
+				$nextContinuation
 			);
 		}
 
