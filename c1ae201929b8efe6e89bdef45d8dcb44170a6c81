@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADi3//7Z4\u003d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-11T15:11:57Z",
+      "side": 1,
+      "message": "Do we really need all these fine grained permissions? This seems overly complex to me, which may cause configuration errors and thereby confusion and inconsistent behavior, or worse, security issues.",
+      "revId": "c1ae201929b8efe6e89bdef45d8dcb44170a6c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7Y0\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-11T15:11:57Z",
+      "side": 1,
+      "message": "I can haz documentation for $filter? \n\nAlso... passing a filter to a function to suppress specific exception seems utterly wrong-headed.  The readable way to do that would be to catch (and examine) the respective exception in the calling code, where it is known which error should trigger which reaction.\n\nIS it so common that we want to suppress specific errors? Why?",
+      "revId": "c1ae201929b8efe6e89bdef45d8dcb44170a6c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7Ys\u003d",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-11T15:11:57Z",
+      "side": 1,
+      "message": "Why do we no longer want to check the \u0027edit\u0027 permission here? I think it\u0027s pretty essential to always check that.",
+      "revId": "c1ae201929b8efe6e89bdef45d8dcb44170a6c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7YY\u003d",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-11T15:11:57Z",
+      "side": 1,
+      "message": "Hm... why?",
+      "revId": "c1ae201929b8efe6e89bdef45d8dcb44170a6c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7Zk\u003d",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-11T15:11:57Z",
+      "side": 1,
+      "message": "This seems pretty generic, shall we move it to the base class?",
+      "revId": "c1ae201929b8efe6e89bdef45d8dcb44170a6c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7ZU\u003d",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-11T15:11:57Z",
+      "side": 1,
+      "message": "Seems pretty generic, can we just do this in the base class, using $this-\u003egetRequiredPermissions() ?",
+      "revId": "c1ae201929b8efe6e89bdef45d8dcb44170a6c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7ZQ\u003d",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-11T15:11:57Z",
+      "side": 1,
+      "message": "Again, fairly generic, how about reportEditError( $editEntity ) in the base class?",
+      "revId": "c1ae201929b8efe6e89bdef45d8dcb44170a6c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7ZM\u003d",
+        "filename": "repo/includes/api/RemoveQualifiers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-11T15:11:57Z",
+      "side": 1,
+      "message": "Oh! This seems wrong. \"false\" disabled the token check. We should not just disable the check if the token is missing, right?",
+      "revId": "c1ae201929b8efe6e89bdef45d8dcb44170a6c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7YI\u003d",
+        "filename": "repo/includes/api/RemoveReferences.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-11T15:11:57Z",
+      "side": 1,
+      "message": "Why is $doExpensiveQueries \u003d false? We are checking for the actual edit, so all checks must be run in full!\n\n$doExpensiveQueries \u003d false is intended for use in the UI, for changing labels, removing tabs, etc - in situation where the permission check is a conveniance, and not critical.",
+      "revId": "c1ae201929b8efe6e89bdef45d8dcb44170a6c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
