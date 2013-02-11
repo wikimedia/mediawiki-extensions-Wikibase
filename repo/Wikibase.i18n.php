@@ -22,7 +22,7 @@ $messages = array();
  */
 $messages['en'] = array(
 	'wikibase-desc' => 'Structured data repository',
-	'specialpages-group-wikibaserepo' => 'Wikidata repository',
+	'specialpages-group-wikibaserepo' => 'Wikibase repository',
 	'wikibase-edit' => 'edit',
 	'wikibase-save' => 'save',
 	'wikibase-cancel' => 'cancel',
@@ -321,7 +321,7 @@ to find out where it went.',
 $messages['qqq'] = array(
 	'wikibase-desc' => '{{desc|name=Wikibase|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}
 See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
-	'specialpages-group-wikibaserepo' => 'Title of group of special pages related to Wikidata repository',
+	'specialpages-group-wikibaserepo' => 'Title of group of special pages related to the Wikibase (repository) extension',
 	'wikibase-edit' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
 [[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 1 and 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an existing element of some kind.',
