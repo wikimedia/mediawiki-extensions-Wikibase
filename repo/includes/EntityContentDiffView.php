@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+use Diff\ListDiffer;
+
 use Content, Html;
 
 /**
@@ -130,7 +132,12 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		 */
 
 		$diff = $old->getEntity()->getDiff( $new->getEntity() );
-		$diffView = EntityDiffView::newForDiff( $diff, $this->getContext(), new WikiPageEntityLookup() );
+		$diffView = EntityDiffView::newForDiff(
+			$diff,
+			$this->getContext(),
+			new ClaimDiffer( new ListDiffer() ),
+			new ClaimDiffView( new WikiPageEntityLookup() )
+		);
 
 		return $diffView->getHtml();
 	}
