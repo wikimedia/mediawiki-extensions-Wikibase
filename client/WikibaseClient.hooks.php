@@ -274,7 +274,13 @@ final class ClientHooks {
 			// would still need to purge the squid cache.
 			foreach ( array_unique( $pagesToUpdate ) as $page ) {
 				$title = \Title::newFromText( $page );
-				if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
+				$namespace = new ClientNamespace(
+					$title->getNamespace(),
+					Settings::get( 'excludeNamespaces' ),
+					Settings::get( 'namespaces' )
+				);
+
+				if ( $namespace->wikibaseEnabled() ) {
 					self::updatePage( $title, $change, false );
 				}
 			}
@@ -534,6 +540,7 @@ final class ClientHooks {
 		$langLinkHandler = new LangLinkHandler(
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
+			Settings::get( 'excludeNamespaces' ),
 			ClientStoreFactory::getStore()->newSiteLinkTable(),
 			\Sites::singleton() );
 
@@ -568,8 +575,13 @@ final class ClientHooks {
 		wfProfileIn( __METHOD__ );
 
 		$title = $out->getTitle();
+		$namespace = new ClientNamespace(
+			$title->getNamespace(),
+			Settings::get( 'excludeNamespaces' ),
+			Settings::get( 'namespaces' )
+		);
 
-		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
+		if ( $namespace->wikibaseEnabled() ) {
 			$out->addModules( 'wikibase.client.init' );
 			// Experimental for now
 			// if ( !$out->getLanguageLinks() && \Action::getActionName( $skin->getContext() ) === 'view' && $title->exists() ) {
@@ -595,7 +607,7 @@ final class ClientHooks {
 		wfProfileIn( __METHOD__ );
 
 		$title = $skin->getContext()->getTitle();
-		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) && $title->exists() ) {
+		if ( !in_array( $title->getNamespace(), Settings::get( 'excludeNamespaces' ) ) && $title->exists() ) {
 
 			$title = $skin->getContext()->getTitle();
 
