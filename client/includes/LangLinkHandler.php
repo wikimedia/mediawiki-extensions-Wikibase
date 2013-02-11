@@ -363,6 +363,15 @@ class LangLinkHandler {
 
 		foreach ( $repoLinks as $wiki => $page ) {
 			$site = $this->sites->getSite( $wiki );
+			if ( $site === null ) {
+				// Wiki isn't yet known, try to recache
+				$this->sites->getSites( 'recache' );
+				$site = $this->sites->getSite( $wiki );
+				if ( $site === null ) {
+					// Still not known, give up
+					throw new \MWException( "Unknown site: $wiki" );
+				}
+			}
 
 			$nav = $site->getNavigationIds();
 			$nav = array_values( $nav );
