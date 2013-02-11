@@ -79,41 +79,53 @@ class EntityDiffView extends DiffView {
 				} elseif ( $op->getType() === 'add' ) {
 					$propertyId = $op->getNewValue()->getPropertyId();
 				}
-				$name = $path[0] . ' / ' . $this->getEntityLabel( $propertyId );
+				$name = $path[0] . ' / ' . Html::element( 'i', array(), $this->getEntityLabel( $propertyId ) );
 			} else {
 				$name = implode( ' / ', $path ); // TODO: l10n
 			}
 
-			$html = $this->generateDiffHeaderHtml( $name );
+			$diffHtml = '';
 
 			if ( $op->getType() === 'add' ) {
 				$newValue = $op->getNewValue();
 				if ( !is_string( $newValue ) && $path[0] === 'claim' ) {
-					$newValue = $this->getClaimHtml( $newValue );
+					$newValue = $this->getSnakHtml( $newValue->getMainSnak() );
 				}
-				$html .= $this->generateAddOpHtml( $newValue );
+				$diffHtml .= $this->generateAddOpHtml( $newValue );
 			} elseif ( $op->getType() === 'remove' ) {
 				$oldValue = $op->getOldValue();
 				if ( !is_string( $oldValue ) && $path[0] === 'claim' ) {
-					$oldValue = $this->getClaimHtml( $oldValue );
+					$oldValue = $this->getSnakHtml( $oldValue->getMainSnak() );
 				}
-				$html .= $this->generateRemoveOpHtml( $oldValue );
+				$diffHtml .= $this->generateRemoveOpHtml( $oldValue );
 			} elseif ( $op->getType() === 'change' ) {
 				$newValue = $op->getNewValue();
-				if ( !is_string( $newValue ) && $path[0] === 'claim' ) {
-					$newValue = $this->getClaimHtml( $newValue );
-				}
-
 				$oldValue = $op->getOldValue();
-				if ( !is_string( $oldValue ) && $path[0] === 'claim' ) {
-					$oldValue = $this->getClaimHtml( $oldValue );
+
+				if ( !is_string( $newValue ) && $path[0] === 'claim' ) {
+					$differ = new \Diff\MapDiffer();
+					$claimDiff = $differ->doDiff( $oldValue->toArray(), $newValue->toArray() );
+
+					if ( array_key_exists( 'm', $claimDiff ) ) {
+						$newValue = $this->getSnakHtml( $newValue->getMainSnak() );
+						$oldValue = $this->getSnakHtml( $oldValue->getMainSnak() );
+					} elseif ( array_key_exists( 'refs', $claimDiff ) ) {
+						$name .= ' / ' . wfMessage( 'wikibase-diffview-references' )->escaped();
+						$newValue = $this->getRefsHtml( $newValue->getReferences() );
+						$oldValue = $this->getRefsHtml( $oldValue->getReferences() );
+					} elseif ( array_key_exists( 'q', $claimDiff ) ) {
+						throw new \MWException( 'Diff of qualifiers not implemented' );
+					} else {
+						throw new \MWException( 'Invalid Snak type' );
+					}
 				}
 
-				$html .= $this->generateChangeOpHtml( $oldValue, $newValue );
+				$diffHtml .= $this->generateChangeOpHtml( $oldValue, $newValue );
 			}
 			else {
 				throw new \MWException( 'Invalid diffOp type' );
 			}
+			$html = $this->generateDiffHeaderHtml( $name ) . $diffHtml;
 		} else {
 			$html = '';
 			foreach ( $op as $key => $subOp ) {
@@ -128,20 +140,45 @@ class EntityDiffView extends DiffView {
 	}
 
 	/**
+	 * Get HTML for references
+	 *
+	 * @since 0.4
+	 *
+	 * @param ReferenceList $refList
+	 *
+	 * @return string
+	 */
+	private function getRefsHtml( ReferenceList $refList ) {
+		$html = '';
+		foreach ( $refList as $ref ) {
+			$refSnakList = $ref->getSnaks();
+			foreach ( $refSnakList as $snak ) {
+				if ( $html !== '' ) {
+					$html .= Html::rawElement( 'br', array(), '' );
+				}
+				$html .= $this->getSnakHtml( $snak );
+			}
+			$html .= Html::rawElement( 'br', array(), '' );
+		}
+
+		return $html;
+	}
+
+	/**
 	 * Get HTML for a changed snak
 	 *
 	 * @since 0.4
 	 *
-	 * @param Claim $claim
+	 * @param Snak $snak
 	 *
 	 * @return string
 	 */
-	protected function getClaimHtml( Claim $claim ) {
-		$snakType = $claim->getMainSnak()->getType();
-		$diffValueString = $snakType;
+	protected function getSnakHtml( Snak $snak ) {
+		$snakType = $snak->getType();
+		$diffValueString = Html::rawElement( 'i', array(), $snakType );
 
 		if ( $snakType === 'value' ) {
-			$dataValue = $claim->getMainSnak()->getDataValue();
+			$dataValue = $snak->getDataValue();
 
 			//FIXME: This will break for types other than EntityId or StringValue
 			//we do not have a generic way to get string representations of the values yet
