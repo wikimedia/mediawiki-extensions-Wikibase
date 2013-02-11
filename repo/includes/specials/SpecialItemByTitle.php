@@ -102,6 +102,8 @@ class SpecialItemByTitle extends SpecialItemResolver {
 
 		$siteExists = $sites->hasSite( $siteId );
 
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": Site $siteId exists: " . var_export( $siteExists, true ) );
+
 		$this->getOutput()->addModules( 'wikibase.special.itemByTitle' );
 
 		$this->getOutput()->addHTML(
