@@ -39,6 +39,7 @@ class LangLinkHandler {
 
 	protected $siteId;
 	protected $namespaces;
+	protected $excludeNamespaces;
 	protected $siteLinksLookup;
 
 	/**
@@ -53,13 +54,15 @@ class LangLinkHandler {
 	 *
 	 * @param string         $siteId The global site ID for the local wiki
 	 * @param array          $namespaces The list of namespaces for which language links should be handled.
+	 * @param array          $excludeNamespaces List of namespaces to exclude language links
 	 * @param SiteLinkLookup $siteLinksLookup A site link lookup service
 	 * @param SiteStore      $sites A site definition lookup service
 	 */
-	public function __construct( $siteId, array $namespaces,
+	public function __construct( $siteId, array $namespaces, array $excludeNamespaces,
 			SiteLinkLookup $siteLinksLookup, SiteStore $sites ) {
 		$this->siteId = $siteId;
 		$this->namespaces = $namespaces;
+		$this->excludeNamespaces = $excludeNamespaces;
 		$this->siteLinksLookup = $siteLinksLookup;
 		$this->sites = $sites;
 	}
@@ -115,9 +118,14 @@ class LangLinkHandler {
 	public function useRepoLinks( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
 
+		$namespaceChecker = new NamespaceChecker(
+			$this->excludeNamespaces,
+			$this->namespaces
+		);
+
 		// use repoLinks in only the namespaces specified in settings
-		if ( in_array( $title->getNamespace(), $this->namespaces ) ) {
-			$nel = $this->getNoExternalLangLinks( $out );
+		if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+			$nel = self::getNoExternalLangLinks( $out );
 
 			if( in_array( '*', $nel ) ) {
 				wfProfileOut( __METHOD__ );
@@ -126,6 +134,7 @@ class LangLinkHandler {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
+
 		wfProfileOut( __METHOD__ );
 		return false;
 	}
