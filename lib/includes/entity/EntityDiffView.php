@@ -39,9 +39,16 @@ class EntityDiffView extends DiffView {
 	/**
 	 * @since 0.4
 	 *
-	 * @var EntityLookup|null
+	 * @var ClaimDiffer|null
 	 */
-	private static $entityLookup;
+	private static $claimDiffer;
+
+	/**
+	 * @since 0.4
+	 *
+	 * @var ClaimDiffView|null
+	 */
+	private static $claimDiffView;
 
 	/**
 	 * Returns a new EntityDiffView for the provided EntityDiff.
@@ -54,9 +61,10 @@ class EntityDiffView extends DiffView {
 	 *
 	 * @return EntityDiffView
 	 */
-	public static function newForDiff( EntityDiff $diff, IContextSource $contextSource = null, $entityLookup = null ) {
-		self::$entityLookup = $entityLookup;
-		return new static( array(), $diff, $contextSource, $entityLookup );
+	public static function newForDiff( EntityDiff $diff, IContextSource $contextSource = null, $claimDiffer = null, $claimDiffView = null ) {
+		self::$claimDiffer = $claimDiffer;
+		self::$claimDiffView = $claimDiffView;
+		return new static( array(), $diff, $contextSource );
 		// TODO: grep for new EntityDiffView and rep by this
 	}
 
@@ -79,41 +87,40 @@ class EntityDiffView extends DiffView {
 				} elseif ( $op->getType() === 'add' ) {
 					$propertyId = $op->getNewValue()->getPropertyId();
 				}
-				$name = $path[0] . ' / ' . $this->getEntityLabel( $propertyId );
+				$name = $path[0] . ' / ';# . Html::element( 'i', array(), $this->getEntityLabel( $propertyId ) );
 			} else {
 				$name = implode( ' / ', $path ); // TODO: l10n
 			}
 
-			$html = $this->generateDiffHeaderHtml( $name );
+			$diffHtml = '';
 
 			if ( $op->getType() === 'add' ) {
 				$newValue = $op->getNewValue();
 				if ( !is_string( $newValue ) && $path[0] === 'claim' ) {
-					$newValue = $this->getClaimHtml( $newValue );
+					$newValue = self::$claimDiffView->getSnakHtml( $newValue->getMainSnak() );
 				}
-				$html .= $this->generateAddOpHtml( $newValue );
+				$diffHtml .= $this->generateAddOpHtml( $newValue );
 			} elseif ( $op->getType() === 'remove' ) {
 				$oldValue = $op->getOldValue();
 				if ( !is_string( $oldValue ) && $path[0] === 'claim' ) {
-					$oldValue = $this->getClaimHtml( $oldValue );
+					$oldValue = self::$claimDiffView->getSnakHtml( $oldValue->getMainSnak() );
 				}
-				$html .= $this->generateRemoveOpHtml( $oldValue );
+				$diffHtml .= $this->generateRemoveOpHtml( $oldValue );
 			} elseif ( $op->getType() === 'change' ) {
 				$newValue = $op->getNewValue();
-				if ( !is_string( $newValue ) && $path[0] === 'claim' ) {
-					$newValue = $this->getClaimHtml( $newValue );
-				}
-
 				$oldValue = $op->getOldValue();
-				if ( !is_string( $oldValue ) && $path[0] === 'claim' ) {
-					$oldValue = $this->getClaimHtml( $oldValue );
-				}
 
-				$html .= $this->generateChangeOpHtml( $oldValue, $newValue );
+				if ( !is_string( $newValue ) && $path[0] === 'claim' ) {
+					$claimDifference = self::$claimDiffer->diffClaims( $oldValue, $newValue );
+					$diffHtml .= self::$claimDiffView->getClaimDifferenceHtml( $claimDifference );
+				} else {
+					$diffHtml .= $this->generateChangeOpHtml( $oldValue, $newValue );
+				}
 			}
 			else {
 				throw new \MWException( 'Invalid diffOp type' );
 			}
+			$html = $this->generateDiffHeaderHtml( $name ) . $diffHtml;
 		} else {
 			$html = '';
 			foreach ( $op as $key => $subOp ) {
@@ -127,53 +134,4 @@ class EntityDiffView extends DiffView {
 		return $html;
 	}
 
-	/**
-	 * Get HTML for a changed snak
-	 *
-	 * @since 0.4
-	 *
-	 * @param Claim $claim
-	 *
-	 * @return string
-	 */
-	protected function getClaimHtml( Claim $claim ) {
-		$snakType = $claim->getMainSnak()->getType();
-		$diffValueString = $snakType;
-
-		if ( $snakType === 'value' ) {
-			$dataValue = $claim->getMainSnak()->getDataValue();
-
-			//FIXME: This will break for types other than EntityId or StringValue
-			//we do not have a generic way to get string representations of the values yet
-			if ( $dataValue instanceof EntityId ) {
-				$diffValueString = $this->getEntityLabel( $dataValue );
-			} else {
-				$diffValueString = $dataValue->getValue();
-			}
-		}
-
-		return $diffValueString;
-	}
-
-	/**
-	 * Get the label of an entity represented by its EntityId
-	 *
-	 * @since 0.4
-	 *
-	 * @param EntityId $id
-	 *
-	 * @return string
-	 */
-	protected function getEntityLabel( EntityId $id ) {
-		$label = $id->getPrefixedId();
-
-		$lookedUpLabel = self::$entityLookup->getEntity( $id )->getLabel(
-			$this->getContext()->getLanguage()->getCode()
-		);
-		if ( $lookedUpLabel !== false ) {
-			$label = $lookedUpLabel;
-		}
-
-		return $label;
-	}
 }
