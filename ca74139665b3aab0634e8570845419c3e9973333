@@ -34,6 +34,24 @@
       "revId": "ca74139665b3aab0634e8570845419c3e9973333",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7yc\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-11T04:11:24Z",
+      "side": 1,
+      "message": "This solution is really ugly, I think. Is there another way (CSS?) that can ensure the line breaks are not needed, or can you get them to a different location where the line breaks would not be needed?\n\nThis is used on https://www.wikidata.org/wiki/Special:SetLabel I guess. I would suggest it\u0027s moved to above the form. That makes much more sense. See for example https://www.wikidata.org/wiki/Special:Categories, which is I think the regular way this is done.",
+      "parentUuid": "AAADi3//71s\u003d",
+      "revId": "ca74139665b3aab0634e8570845419c3e9973333",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
