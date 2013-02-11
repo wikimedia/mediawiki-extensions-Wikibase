@@ -481,23 +481,29 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSpecialWatchlistQuery( array &$conds, array &$tables, array &$join_conds, array &$fields ) {
+		global $wgRequest, $wgUser;
+
 		wfProfileIn( __METHOD__ );
 
-		$dbr = wfGetDB( DB_SLAVE );
+		if ( $wgRequest->getBool( 'enhanced', $wgUser->getOption( 'usenewrc' ) ) === false ) {
+			$dbr = wfGetDB( DB_SLAVE );
 
-		$newConds = array();
-		foreach( $conds as $k => $v ) {
-			if ( $v ===  'rc_this_oldid=page_latest OR rc_type=3' ) {
-				$where = array(
-					'rc_this_oldid=page_latest',
-					'rc_type' => array( 3, 5 )
-				);
-				$newConds[$k] = $dbr->makeList( $where, LIST_OR );
-			} else {
-				$newConds[$k] = $v;
+			$newConds = array();
+			foreach( $conds as $k => $v ) {
+				if ( $v ===  'rc_this_oldid=page_latest OR rc_type=3' ) {
+					$where = array(
+						'rc_this_oldid=page_latest',
+						'rc_type' => array( 3, 5 )
+					);
+					$newConds[$k] = $dbr->makeList( $where, LIST_OR );
+				} else {
+					$newConds[$k] = $v;
+				}
 			}
+			$conds = $newConds;
+		} else {
+			$conds[] = 'rc_type != 5';
 		}
-		$conds = $newConds;
 
 		wfProfileOut( __METHOD__ );
 		return true;
@@ -637,10 +643,14 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSpecialRecentChangesFilters( \SpecialRecentChanges $special, array &$filters ) {
-		$showWikidata = $special->getUser()->getOption( 'rcshowwikidata' );
-		$default = $showWikidata ? false : true;
-		if ( $special->getUser()->getOption( 'usenewrc' ) === 0 ) {
-			$filters['hidewikidata'] = array( 'msg' => 'wikibase-rc-hide-wikidata', 'default' => $default );
+		$context = $special->getContext();
+
+		if ( $context->getRequest()->getBool( 'enhanced', $context->getUser()->getOption( 'usenewrc' ) ) === false ) {
+			$showWikidata = $special->getUser()->getOption( 'rcshowwikidata' );
+			$default = $showWikidata ? false : true;
+			if ( $context->getUser()->getOption( 'usenewrc' ) === 0 ) {
+				$filters['hidewikidata'] = array( 'msg' => 'wikibase-rc-hide-wikidata', 'default' => $default );
+			}
 		}
 
 		return true;
@@ -674,11 +684,15 @@ final class ClientHooks {
 	 */
 	public static function onSpecialPageBeforeExecute( \SpecialPage $special, $subpage ) {
 		if ( $special->getName() === 'Watchlist' ) {
-			$special->getOutput()->addModules( array(
-				'wbclient.watchlist.css',
-				'wbclient.watchlist',
-			) );
+			$context = $special->getContext();
+		  	if ( $context->getRequest()->getBool( 'enhanced', $context->getUser()->getOption( 'usenewrc' ) ) === false ) {
+				$special->getOutput()->addModules( array(
+					'wbclient.watchlist.css',
+					'wbclient.watchlist',
+				) );
+			}
 		}
+
 		return true;
 	}
 
