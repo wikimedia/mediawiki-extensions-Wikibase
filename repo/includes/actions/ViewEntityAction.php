@@ -30,12 +30,12 @@ abstract class ViewEntityAction extends \ViewAction {
 	}
 
 	/**
-	 * Returns the content of the page being viewed.
+	 * Returns the content of the page in the revision being viewed.
 	 *
 	 * @return EntityContent|null
 	 */
 	protected function getContent() {
-		return $this->getArticle()->getPage()->getContent();
+		return $this->getArticle()->getRevisionFetched()->getContent();
 	}
 
 	/**
