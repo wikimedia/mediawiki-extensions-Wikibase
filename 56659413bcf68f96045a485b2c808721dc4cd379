@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dkw-AxSw",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-12T12:25:03Z",
+      "side": 1,
+      "message": "*shudder* can we avoid using the Article class? It\u0027s horrible and should go away...\n\nOk, maybe that\u0027s for another change, but it does seem related.",
+      "revId": "56659413bcf68f96045a485b2c808721dc4cd379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
