@@ -16,6 +16,24 @@
       "revId": "56659413bcf68f96045a485b2c808721dc4cd379",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dk28BkTw",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-02-12T14:27:55Z",
+      "side": 1,
+      "message": "Yes, I would say that should be another change as I did not introduce the Article stuff here and it is used in several other places too which requires quite some changes I think.\nBtw. do you have a suggestion on how to avoid using Article? What other classes are able to deal with revisions?",
+      "parentUuid": "Dkw-AxSw",
+      "revId": "56659413bcf68f96045a485b2c808721dc4cd379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
