@@ -42,7 +42,7 @@ describe "Check client RC & WL" do
       end
       visit_page(WatchlistPage) do |page|
         page.wlFirstResultUserLink_element.text.downcase.include?(WIKI_ADMIN_USERNAME.downcase).should be_false
-		page.wlShowWikidataToggle?.should be_true
+		    page.wlShowWikidataToggle?.should be_true
         page.wlShowWikidataToggle
         page.wlFirstResultDiffLink?.should be_true
         page.wlFirstResultUserLink?.should be_true
@@ -90,6 +90,46 @@ describe "Check client RC & WL" do
       on_page(ItemPage) do |page|
         page.wait_for_entity_to_load
         page.entityLabelSpan.should == article_title
+      end
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.remove_all_sitelinks
+      end
+      visit_page(WatchlistPage) do |page|
+        @browser.refresh
+        page.wlShowWikidataToggle
+        page.wait_until do
+          page.clientFirstResultComment?
+        end
+        page.clientFirstResultComment.include?("Language links removed").should == true
+      end
+      visit_page(ClientPage) do |page|
+        page.create_article("Bermuda", "Island", true)
+      end
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.add_sitelinks(item_sitelinks)
+        page.editSitelinkLink
+        current_page = page.pageInputFieldExistingSiteLink
+        new_page = "Bermuda"
+        page.pageInputFieldExistingSiteLink = new_page
+        ajax_wait
+        page.wait_until do
+          page.editSitelinkAutocompleteList_element.visible?
+        end
+        page.saveSitelinkLink
+        ajax_wait
+        page.wait_for_api_callback
+      end
+      visit_page(WatchlistPage) do |page|
+        @browser.refresh
+        page.wlShowWikidataToggle
+        page.wait_until do
+          page.clientFirstResultComment?
+        end
+        page.clientFirstResultComment.include?("Language link changed from").should == true
       end
     end
   end
