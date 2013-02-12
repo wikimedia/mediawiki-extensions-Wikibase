@@ -34,6 +34,24 @@
       "revId": "56659413bcf68f96045a485b2c808721dc4cd379",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlI74O.Q",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-12T16:44:33Z",
+      "side": 1,
+      "message": "Title, WikiPage and Revision are the classes that should be used to find and fetch page/revision content.\n\nArticle tries to do two things: it represents page content, and it implements the standard article view. The page content representation was factored out into WikiPage some time ago, Article now acts as a proxy to WikiPage for that. ViewAction is still a stub, but all rendering functionality should move there.\n\nThe Article class really needs to die :)",
+      "parentUuid": "Dk28BkTw",
+      "revId": "56659413bcf68f96045a485b2c808721dc4cd379",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
