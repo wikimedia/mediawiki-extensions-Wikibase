@@ -146,6 +146,8 @@ class ChangeHandler {
 		$entity = $this->entityLookup->getEntity( $entityId, $latestRevId );
 		$parent = $parentRevId ? $this->entityLookup->getEntity( $entityId, $parentRevId ) : null;
 
+		$entity = null;
+
 		if ( !$entity ) {
 			throw new \MWException( "Failed to load revision $latestRevId of $entityId" );
 		}
@@ -234,7 +236,14 @@ class ChangeHandler {
 			// FIXME: Perhaps more easily, get rid of them here and now!
 			if ( $break ) {
 				if ( !empty( $currentRun ) ) {
-					$coalesced[] = $this->mergeChanges( $currentRun );
+					try {
+						$coalesced[] = $this->mergeChanges( $currentRun );
+					} catch ( \MWException $ex ) {
+						// Something went wrong while trying to merge the changes.
+						// Just keep the original run.
+						wfWarn( $ex->getMessage() );
+						$coalesced = array_merge( $coalesced, $currentRun );
+					}
 				}
 
 				$currentRun = array();
@@ -247,7 +256,14 @@ class ChangeHandler {
 		}
 
 		if ( !empty( $currentRun ) ) {
-			$coalesced[] = $this->mergeChanges( $currentRun );
+			try {
+				$coalesced[] = $this->mergeChanges( $currentRun );
+			} catch ( \MWException $ex ) {
+				// Something went wrong while trying to merge the changes.
+				// Just keep the original run.
+				wfWarn( $ex->getMessage() );
+				$coalesced = array_merge( $coalesced, $currentRun );
+			}
 		}
 
 		return $coalesced;
