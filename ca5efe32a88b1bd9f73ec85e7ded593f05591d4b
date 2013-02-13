@@ -16,6 +16,24 @@
       "revId": "ca5efe32a88b1bd9f73ec85e7ded593f05591d4b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADi3//7YA\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-13T15:52:04Z",
+      "side": 1,
+      "message": "Mostly a leftover, I can change it but I\u0027m not sure why anyone would query it directly. Content of blobs would be very unpredictable.",
+      "parentUuid": "AAADi3//7aE\u003d",
+      "revId": "ca5efe32a88b1bd9f73ec85e7ded593f05591d4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
