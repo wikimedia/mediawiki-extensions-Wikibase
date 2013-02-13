@@ -11,6 +11,7 @@ module ReferencePage
   # references UI elements
   div(:referenceContainer, :class => "wb-statement-references-container")
   div(:referenceHeading, :class => "wb-statement-references-heading")
+  link(:referenceHeadingToggleLink, :css => ".wb-statement-references-heading a")
   div(:referenceListItems, :xpath => "//div[contains(@class, 'wb-statement-references')]/div[contains(@class, 'wb-listview-items')]")
   div(:reference1Property, :xpath => "//div[contains(@class, 'wb-referenceview')][1]/div[contains(@class, 'wb-reference-snaks')]/div[contains(@class, 'wb-snak-property-container')]/div")
   div(:reference2Property, :xpath => "//div[contains(@class, 'wb-referenceview')][2]/div[contains(@class, 'wb-reference-snaks')]/div[contains(@class, 'wb-snak-property-container')]/div")
@@ -32,4 +33,11 @@ module ReferencePage
       self.referenceValueInput
     end
   end
+
+  def wait_for_referencesToggle
+    wait_until do
+      referenceListItems_element.visible?
+    end
+  end
+
 end
