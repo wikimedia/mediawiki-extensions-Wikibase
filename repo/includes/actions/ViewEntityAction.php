@@ -30,12 +30,24 @@ abstract class ViewEntityAction extends \ViewAction {
 	}
 
 	/**
-	 * Returns the content of the page being viewed.
+	 * Returns the content of the page in the revision being viewed.
 	 *
 	 * @return EntityContent|null
 	 */
 	protected function getContent() {
-		return $this->getArticle()->getPage()->getContent();
+		$queryValues = $this->getRequest()->getQueryValues();
+
+		if ( array_key_exists( 'oldid', $queryValues ) ) {
+			$revision = \Revision::newFromId( $queryValues['oldid'] );
+		} else {
+			$revision = \Revision::newFromTitle( $this->getTitle() );
+		}
+
+		if ( $revision !== null ) {
+			return $revision->getContent();
+		} else {
+			return null;
+		}
 	}
 
 	/**
