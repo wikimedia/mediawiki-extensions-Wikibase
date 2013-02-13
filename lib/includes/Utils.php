@@ -27,7 +27,6 @@ use Sanitizer, UtfNormal, Language, SiteList, SiteSQLStore;
  * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */
