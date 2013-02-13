@@ -46,6 +46,36 @@ class UtilsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseUtils
+	 * @dataProvider providerFetchLanguageName
+	 */
+	public function testFetchLanguageName( $languageCode, $inLanguage, $autonym,  $languageName ) {
+		// autonym
+		$result = Utils::fetchLanguageName( $languageCode );
+		$this->assertEquals(
+			$autonym,
+			$result,
+			"The language name {$autonym} could not be found in the returned result"
+		);
+		// translated name
+		$result = Utils::fetchLanguageName( $languageCode, $inLanguage );
+		$this->assertEquals(
+			$languageName,
+			$result,
+			"The language name {$languageName} could not be found in the returned result"
+		);
+	}
+
+	public static function providerFetchLanguageName() {
+		return array(
+			array( 'de', 'en', 'Deutsch', 'German' ),
+			array( 'en', 'en', 'English', 'English' ),
+			array( 'de', 'no', 'Deutsch', 'tysk' ),
+			array( 'en', 'no', 'English', 'engelsk' ),
+		);
+	}
+
+	/**
+	 * @group WikibaseUtils
 	 * @dataProvider providerSquashWhitespace
 	 */
 	public function testSquashWhitespace( $string, $expected ) {
