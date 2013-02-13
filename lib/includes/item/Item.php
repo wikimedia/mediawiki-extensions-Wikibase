@@ -211,17 +211,6 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see Entity::getLocalType
-	 *
-	 * @since 0.2
-	 *
-	 * @return string
-	 */
-	public function getLocalizedType() {
-		return wfMessage( 'wikibase-entity-item' )->parse();
-	}
-
-	/**
 	 * @see Entity::newClaimBase
 	 *
 	 * @since 0.3

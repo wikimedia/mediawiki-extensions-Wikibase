@@ -65,15 +65,4 @@ class Query extends Entity {
 		return Query::ENTITY_TYPE;
 	}
 
-	/**
-	 * @see Entity::getLocalType
-	 *
-	 * @since 0.2
-	 *
-	 * @return string
-	 */
-	public function getLocalizedType() {
-		return wfMessage( 'wikibase-entity-query' )->parse();
-	}
-
 }

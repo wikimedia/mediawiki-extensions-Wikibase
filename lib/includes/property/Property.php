@@ -110,17 +110,6 @@ class Property extends Entity {
 	}
 
 	/**
-	 * @see Entity::getLocalType
-	 *
-	 * @since 0.2
-	 *
-	 * @return string
-	 */
-	public function getLocalizedType() {
-		return wfMessage( 'wikibase-entity-property' )->parse();
-	}
-
-	/**
 	 * @see Entity::newFromArray
 	 *
 	 * @since 0.1
