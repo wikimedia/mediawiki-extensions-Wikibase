@@ -51,10 +51,16 @@ class EntityLoaderTest extends \MediaWikiTestCase {
 		$item = Item::newEmpty();
 		$item->setId( 42 );
 
-		$query = Query::newEmpty();
-		$query->setId( 9001 );
+		$entities = array( $item );
 
-		$loader->setEntities( array( $item, $query ) );
+		if ( class_exists( 'Wikibase\Query' ) ) {
+			$query = Query::newEmpty();
+			$query->setId( 9001 );
+
+			$entities[] = $query;
+		}
+
+		$loader->setEntities( $entities );
 
 		$loaders[] = $loader;
 
@@ -71,9 +77,12 @@ class EntityLoaderTest extends \MediaWikiTestCase {
 			new EntityId( Item::ENTITY_TYPE, 1 ),
 			new EntityId( Item::ENTITY_TYPE, 42 ),
 			new EntityId( Property::ENTITY_TYPE, 9001 ),
-			new EntityId( Query::ENTITY_TYPE, 9001 ),
-			new EntityId( Query::ENTITY_TYPE, 2 ),
 		);
+
+		if ( class_exists( 'Wikibase\Query' ) ) {
+			$entityIds[] = new EntityId( Query::ENTITY_TYPE, 2 );
+			$entityIds[] = new EntityId( Query::ENTITY_TYPE, 9001 );
+		}
 
 		foreach ( $entityIds as $entityId ) {
 			$entity = $loader->getEntity( $entityId );
@@ -91,9 +100,12 @@ class EntityLoaderTest extends \MediaWikiTestCase {
 			new EntityId( Item::ENTITY_TYPE, 1 ),
 			new EntityId( Item::ENTITY_TYPE, 42 ),
 			new EntityId( Property::ENTITY_TYPE, 9001 ),
-			new EntityId( Query::ENTITY_TYPE, 9001 ),
-			new EntityId( Query::ENTITY_TYPE, 2 ),
 		);
+
+		if ( class_exists( 'Wikibase\Query' ) ) {
+			$entityIds[] = new EntityId( Query::ENTITY_TYPE, 2 );
+			$entityIds[] = new EntityId( Query::ENTITY_TYPE, 9001 );
+		}
 
 		$entities = $loader->getEntities( $entityIds );
 

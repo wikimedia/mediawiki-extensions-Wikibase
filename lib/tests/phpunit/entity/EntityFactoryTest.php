@@ -46,7 +46,9 @@ class EntityFactoryTest extends EntityTestCase {
 
 		$this->assertTrue( in_array( Item::ENTITY_TYPE, $types ), "must contain item type" );
 		$this->assertTrue( in_array( Property::ENTITY_TYPE, $types ), "must contain property type" );
-		$this->assertTrue( in_array( Query::ENTITY_TYPE, $types ), "must contain query type" );
+
+		// TODO
+		// $this->assertTrue( in_array( Query::ENTITY_TYPE, $types ), "must contain query type" );
 	}
 
 	public static function provideIsEntityType() {
@@ -74,7 +76,9 @@ class EntityFactoryTest extends EntityTestCase {
 		return array(
 			array( Item::ENTITY_TYPE, '\Wikibase\Item' ),
 			array( Property::ENTITY_TYPE, '\Wikibase\Property' ),
-			array( Query::ENTITY_TYPE, '\Wikibase\Query' ),
+
+			// TODO
+			//array( Query::ENTITY_TYPE, '\Wikibase\Query' ),
 		);
 	}
 

@@ -43,21 +43,16 @@ define( 'WB_NS_ITEM', $baseNs );
 define( 'WB_NS_ITEM_TALK', $baseNs + 1 );
 define( 'WB_NS_PROPERTY', $baseNs + 2 );
 define( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
-define( 'WB_NS_QUERY', $baseNs + 4 );
-define( 'WB_NS_QUERY_TALK', $baseNs + 5 );
 
 // Register extra namespaces.
 $wgExtraNamespaces[WB_NS_ITEM] = 'Item';
 $wgExtraNamespaces[WB_NS_ITEM_TALK] = 'Item_talk';
 $wgExtraNamespaces[WB_NS_PROPERTY] = 'Property';
 $wgExtraNamespaces[WB_NS_PROPERTY_TALK] = 'Property_talk';
-$wgExtraNamespaces[WB_NS_QUERY] = 'Query';
-$wgExtraNamespaces[WB_NS_QUERY_TALK] = 'Query_talk';
 
 // Tell Wikibase which namespace to use for which kind of entity
 $wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_ITEM] = WB_NS_ITEM;
 $wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_PROPERTY;
-$wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY;
 
 // NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $wgWBSettings
 
@@ -71,6 +66,16 @@ $wgWBRepoSettings['apiWithRights'] = true;
 $wgWBRepoSettings['apiWithTokens'] = true;
 
 $wgGroupPermissions['wbeditor']['item-set'] = true;
+
+if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
+	define( 'WB_NS_QUERY', $baseNs + 4 );
+	define( 'WB_NS_QUERY_TALK', $baseNs + 5 );
+
+	$wgExtraNamespaces[WB_NS_QUERY] = 'Query';
+	$wgExtraNamespaces[WB_NS_QUERY_TALK] = 'Query_talk';
+	
+	$wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY;
+}
 
 
 /*

@@ -82,9 +82,11 @@ final class TestChanges {
 		$entities = array(
 			Item::newEmpty(),
 			\Wikibase\Property::newEmpty(),
-			\Wikibase\Query::newEmpty(),
 		);
 
+		/**
+		 * @var \Wikibase\Entity $entity
+		 */
 		foreach( $entities as $entity ) {
 			$entityList[] = $entity;
 

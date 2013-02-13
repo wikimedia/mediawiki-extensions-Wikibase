@@ -48,7 +48,9 @@ abstract class EntityView extends \ContextSource {
 	public static $typeMap = array(
 		Item::ENTITY_TYPE => '\Wikibase\ItemView',
 		Property::ENTITY_TYPE => '\Wikibase\PropertyView',
-		Query::ENTITY_TYPE => '\Wikibase\QueryView'
+
+		// TODO: Query::ENTITY_TYPE
+		'query' => '\Wikibase\QueryView',
 	);
 
 	/**

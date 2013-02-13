@@ -47,7 +47,9 @@ class SerializerTest extends \MediaWikiTestCase {
 		$argLists[] = array( new \Wikibase\Reference() );
 		$argLists[] = array( new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
 		$argLists[] = array( \Wikibase\Item::newEmpty() );
-		$argLists[] = array( \Wikibase\Query::newEmpty() );
+
+		// TODO
+		//$argLists[] = array( \Wikibase\Query::newEmpty() );
 
 		return $argLists;
 	}
