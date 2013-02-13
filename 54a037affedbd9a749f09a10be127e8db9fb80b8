@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DlfNiCEE",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T11:14:43Z",
+      "side": 1,
+      "message": "newFromTitle takes the revision ID as an optional second parameter. Using that, this could be written more concisely.",
+      "revId": "54a037affedbd9a749f09a10be127e8db9fb80b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
