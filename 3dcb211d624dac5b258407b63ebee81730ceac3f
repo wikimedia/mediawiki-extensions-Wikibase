@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DldNNzJs",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-13T12:22:41Z",
+      "side": 1,
+      "message": "What does \"legacy\" mean in this context?",
+      "revId": "3dcb211d624dac5b258407b63ebee81730ceac3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
