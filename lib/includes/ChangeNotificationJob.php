@@ -130,6 +130,8 @@ class ChangeNotificationJob extends \Job {
 
 		//TODO: allow mock handler for testing
 		ChangeHandler::singleton()->handleChanges( $changes );
+
+		return true;
 	}
 
 }
