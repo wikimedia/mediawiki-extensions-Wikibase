@@ -69,13 +69,6 @@ class ItemTest extends EntityTest {
 		$instance = new Item( array() );
 
 		$this->assertInstanceOf( 'Wikibase\Item', $instance );
-
-		$exception = null;
-		try {
-			new Item( 'Exception throws you!' );
-		} catch ( \Exception $exception )
-		{}
-		$this->assertInstanceOf( '\Exception', $exception );
 	}
 
 	public function testToArray() {
