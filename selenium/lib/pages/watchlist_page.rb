@@ -18,6 +18,6 @@ class WatchlistPage
   link(:wlFirstResultIDLink, :xpath => "//ul[@class='special']/li/a[4]")
   link(:wlFirstResultUserLink, :xpath => "//ul[@class='special']/li/a[5]")
   link(:wlShowWikidataToggle, :id => "wb-toggle-link")
-  span(:clientFirstResultComment, :xpath => "//ul[@class='special']/li/span[@class='comment']")
+  span(:clientFirstResultComment, :xpath => "//ul[@class='special']/li/span[contains(@class,'comment')]")
 
 end
