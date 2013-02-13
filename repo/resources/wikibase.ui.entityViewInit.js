@@ -159,43 +159,12 @@
 			$( wb ).triggerHandler( 'restrictEntityPageActions' );
 		}
 
-		$( wb ).on( 'startItemPageEditMode', function( event ) {
-			// Display anonymous user edit warning:
-			if ( mw.user && mw.user.isAnon() ) {
+		// Display anonymous user edit warning
+		if ( mw.user && mw.user.isAnon() ) {
+			$( wb ).on( 'startItemPageEditMode', function( event ) {
 				mw.notify( mw.message( 'wikibase-anonymouseditwarning-' + wb.entity.type ) );
-			}
-
-			// add copyright warning to 'save' button if there is one:
-			if( mw.config.exists( 'wbCopyrightWarning' ) ) {
-				var $activeToolbar = $( '.wb-edit' )
-					// label/description of EditableValue always in edit mode if empty, 2nd '.wb-edit'
-					// on PropertyEditTool only appended when really being edited by the user though
-					.not( '.wb-ui-propertyedittool-editablevalue-ineditmode' )
-					.find( '.wb-ui-toolbar-editgroup-ineditmode' );
-
-				if( !$activeToolbar.length ) {
-					return; // no toolbar for some reason, just stop
-				}
-
-				var toolbar = $activeToolbar.data( 'wb-toolbar' );
-				var tooltip = new wb.ui.Tooltip(
-					// TODO: make _getTooltipParent public or add a Toolbar.Label.getElement()
-					toolbar.btnSave._getTooltipParent(),
-					{},
-					$( '<span>' + mw.config.get( 'wbCopyrightWarning' ) + '</span>' ),
-					// assuming the toolbar is used on the right side of some edit UI, we want to
-					// point the tooltip away from that so it won't overlap with it:
-					{ gravity: 'nw' }
-				);
-				toolbar.btnSave.setTooltip( tooltip );
-				tooltip.show( true ); // show permanently, not just on hover!
-
-				// destroy tooltip after edit mode gets closed again:
-				$( wb ).one( 'stopItemPageEditMode', function( event ) {
-					tooltip.destroy();
-				} );
-			}
-		} );
+			} );
+		}
 
 		// remove loading spinner after JavaScript has kicked in
 		$( '.wb-entity' ).fadeTo( 0, 1 );
