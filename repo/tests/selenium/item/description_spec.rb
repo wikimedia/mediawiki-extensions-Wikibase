@@ -136,6 +136,33 @@ describe "Check functionality of edit description" do
     end
   end
 
+  context "Check for correct toolbar interaction" do
+    it "should check if edit links are re-enabled when interacting with an empty description input" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.editDescriptionLink
+        # erase description
+        page.descriptionInputField_element.clear
+        page.descriptionInputField = 'a'
+        page.descriptionInputField_element.send_keys :backspace # needed to trigger "eachchange" event
+        page.saveDescriptionLink
+        ajax_wait
+        page.wait_for_api_callback
+        page.saveDescriptionLinkDisabled?.should be_true
+        page.editLabelLink?.should be_true
+        page.descriptionInputField?.should be_true
+        page.descriptionInputField = 'a'
+        page.saveDescriptionLink?.should be_true
+        page.editLabelLinkDisabled.should be_true
+        page.descriptionInputField_element.send_keys :backspace
+        page.saveDescriptionLinkDisabled?.should be_true
+        page.editLabelLink?.should be_true
+        page.descriptionInputField?.should be_true
+      end
+    end
+  end
+
   after :all do
     # tear down
   end
