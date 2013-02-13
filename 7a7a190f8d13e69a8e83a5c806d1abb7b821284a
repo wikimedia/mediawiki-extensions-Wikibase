@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DlRZo4oc",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-02-13T15:06:36Z",
+      "side": 1,
+      "message": "see other comment",
+      "revId": "7a7a190f8d13e69a8e83a5c806d1abb7b821284a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlTZr3og",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-02-13T15:06:36Z",
+      "side": 1,
+      "message": "To whom the question \"Is this a MedisWikiTitle?\"  is directed to?",
+      "revId": "7a7a190f8d13e69a8e83a5c806d1abb7b821284a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
