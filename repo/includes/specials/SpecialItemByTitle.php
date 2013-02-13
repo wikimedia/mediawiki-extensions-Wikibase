@@ -63,7 +63,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			$title = \Title::newFromText( $page );
 
 			if ( $title !== null ) {
-				$pageTitle = $title->getText();
+				$pageTitle = $title->getFullText();
 			} else {
 				// TODO: throw error, page title contains invalid chars
 				$pageTitle = '';
