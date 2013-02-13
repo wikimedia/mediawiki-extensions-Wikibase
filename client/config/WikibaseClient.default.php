@@ -37,13 +37,12 @@ global $wgScriptPath, $wgArticlePath, $wgLanguageCode, $wgDBname;
 
 $wgWBClientSettings = array(
 	'namespaces' => array( NS_MAIN ),
-	'source' => array( 'dir' => __DIR__ . '/tests' ),
 	'repoUrl' => '//wikidata.org',
 	'repoScriptPath' => $wgScriptPath,
 	'repoArticlePath' => $wgArticlePath,
 	'sort' => 'code',
-	'sortPrepend' => false,
-	'alwaysSort' => true,
+	'sortPrepend' => array(),
+	'alwaysSort' => false,
 	'siteGlobalID' => $wgDBname,
 	// @todo would be great to just get this from the sites stuff
 	// but we will need to make sure the caching works good enough

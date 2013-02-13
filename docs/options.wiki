@@ -1,0 +1,96 @@
+= Wikibase Configuration =
+
+This document describes the configuration of the Wikibase extensions.
+
+As usual, the extension is configured in MediaWiki's LocalSettings.php file. However, Wikibase settings are placed in a single associative array, <code>$wgWBSettings</code>, instead of individual global variables. So, if below the setting <code>foo</code> is described below, you would need to use <code>$wgWBSettings['foo']</code> in LocalSettings.php.
+
+
+== Common Settings ==
+=== Basic Settings ===
+
+;changesDatabase: The database that changes are recorded to for processing by clients. This must be set to a symbolic database identifier that MediaWiki's LBFactory class understands; <code>false</code> means that the wiki's own database shall be used. '''Note''' that on the client, this setting should usually be the same as the <code>repoDatabase</code> setting.
+;siteLinkGroup: The site group to use in sitelinks. Must correspond to a value used to give the site group in the MediaWiki <code>sites</code> table. Default is "wikipedia". This defines which group of sites can be linked to Wikibase items. '''Note''' that this setting will likely change in the future to allow multiple groups to be configured.
+;localClientDatabases: An array of locally accessible client databases, for use by the <code>dispatchChanges.php</code> script. This setting determines which wikis changes are pushed to directly. It must be given either as an associative array, mapping global site IDs to logical database names, or, of the database names are the same as the site IDs, as a list of databases. The default is an empty array, indicating no local client databases.
+
+=== Expert Settings ===
+
+;entityPrefixes: ID prefixes to use for the different entity types, as an associative array mapping prefixes to entity type constants. Default:
+<poem>
+          array(
+              'q' => \Wikibase\Item::ENTITY_TYPE,
+              'p' => \Wikibase\Property::ENTITY_TYPE,
+              'y' => \Wikibase\Query::ENTITY_TYPE,
+          );
+</poem>
+:'''Warning:''' do not change this if you already have Wikibase entities in your database, since they may become unreadable!
+;serializationFormat: the internal serialization format used to store entities in the database. Must be either <code>CONTENT_FORMAT_JSON</code> or <code>CONTENT_FORMAT_SERIALIZED</code>, default is <code>CONTENT_FORMAT_JSON</code>. '''Warning:''' do not change this if you already have Wikibase entities in your database, since they will become unreadable!
+;pollDefaultInterval: Seconds to wait between passes of the <code>pollForChanges.php</code> script if there are no more pending changes to process. Defaults to 1 second. '''Note''' that pollForChanges is '''deprecated'''.
+;pollDefaultLimit: The maximum number of changes to process in a single pass of the pollForChanges script. Default is 100. '''Note''' that pollForChanges is '''deprecated'''.
+;pollContinueInterval: Seconds to wait between passes of the <code>pollForChanges.php</code> script if there are pending changes waiting. Defaults to 0 seconds. '''Note''' that pollForChanges is '''deprecated'''.
+;useChangesTable: Whether to record changes in the database, so they can be pushed to clients. Boolean, defaults to <code>true</code>. May be set to false in situations where there are no clients to notify, to preserve space. '''Note''' that if this is true, the <code>pruneChanges.php</code> script should be run periodically to remove old changes from the database table.
+;dispatchBatchChunkFactor: Chunk factor used internally by the <code>dispatchChanges.php</code> script. The default is 3. If most clients are not interested in most changes, this factor can be raised to lower the number of database queries needed to fetch a batch of changes.
+;changeHandlers: Array mapping change type IDs to handler classes. May be used by extensions to register additional change classes.
+;dataTypes: Array listing the available data types that can be used in snaks (and thus in claims and statements). The relevant data type identifiers are defined by the DataType extension. Default:
+<poem>
+          array(
+              'wikibase-item',
+              'commonsMedia',
+          )
+</poem>
+
+
+== Repository Settings ==
+
+=== Basic Settings ===
+
+;entityNamespaces: Defines which kind of entity is managed in which namespace; this is given as an associative array mapping content model IDs such as <code>CONTENT_MODEL_WIKIBASE_ITEM</code> to namespace IDs. This setting is required for each kind of entity that should be supported.
+
+=== Expert Settings ===
+;apiInDebug: Put Wikibase API into debug mode. Boolean, default is false. '''Deprecated'''.
+;apiDebugWithPost: Allow GET requests to Wikibase API modules that would normally require POST. Boolean, default is false. '''Deprecated'''.
+;apiDebugWithRights: Bypass permission checks for Wikibase API modules. Boolean, default is false. '''Deprecated'''.
+;apiDebugWithTokens: Bypass token checks for Wikibase API modules. Boolean, default is false. '''Deprecated'''.
+;defaultStore: The storage engine to use for storing entities. Default: 'sqlstore'. The is currently no alternative.
+;idBlacklist: A list of IDs to reserve and skip for new entities. IDs are given as integers, the blacklist applies to all types of entities. '''Note:''' this may change in the future to allow separate blacklists for different kinds of entities.
+;withoutTermSearchKey: Allow the terms table to work without the term_search_key field, for sites that can not easily roll out schema changes on large tables. This means that all searches will use exact matching (depending on the database's collation). Default: <code>false</code>. This is only needed for compatibility with old database layouts.
+;multilang-limits: Limits to impose on multilanguage strings like labels, descriptions and such. Supported limits:
+:;length: the maximum length of the string, in characters.
+:Default: <code>array( 'length' => 250 )</code>
+;multilang-truncate-length: Length of the prefix of overly long strings to be included in error messages reporting overly long strings. Defaults is 32 characters.
+
+== Client Settings ==
+
+=== Basic Settings ===
+;namespaces: List of namespaces on the client wiki that should have access to repository items. Default: <code>array( NS_MAIN )</code>
+;repoUrl: The repository's base URL, including the schema (protocol) and domain; This URL can be protocol-relative. Default is <code>'//wikidata.org'</code>. '''Note:''' this may be removed once we can get this information from the sites table.
+;repoScriptPath: The repository's script path. Default is $wgScriptPath, assuming that the repo's script path is the same as this wiki's script path. '''Note:''' this may be removed once we can get this information from the sites table.
+;repoArticlePath: The repository's article path. Default is $wgArticlePath, assuming that the repo's article path is the same as this wiki's script path. '''Note:''' this may be removed once we can get this information from the sites table.
+;sort: How to sort language links in the side bar. Possible values:
+:;<code>'code'</code>: by language code
+:;<code>'alphabetic'</code>: [[meta:Interwiki_sorting_order|By language name]] (<code>meta-native-languagename</code>)
+:;<code>'alphabetic_revised'</code>: [[meta:Interwiki_sorting_order|By language name (alternative)]] (<code>meta-native-languagename-firstword</code>)
+:;<code>'none'</code>: Don't sort. Basically, the order of the links is not guaranteed. '''Deprecated''' and dysfunctional.
+: Default is <code>'code'</code>.
+;sortPrepend: List of language codes to put on top of the language links in the side bar. Default: <code>array()</code>. '''Note''': this may change to use global wiki IDs instead of language codes in the future.
+;alwaysSort: Sort links from wikitext even if <code><nowiki>{{noexternallanglinks:*}}</nowiki></code> is used. Default: <code>true</code>.
+;siteGlobalID: This site's global ID (e.g. <code>'itwiki'</code>), as used in the sites table. Default: <code>$wgDBname</code>.
+;siteLocalID: This site's local ID resp. language code (e.g. <code>'it'</code>). Default: <code>$wgLanguageCode</code>. '''Note:''' this setting will be removed once we can take this information from the sites table.
+;repoDatabase: The logical name of the repository database, in a form that LBFactory can understand. If not <code>null</code>, the client wiki will access the repository's database directly, instead of locally caching information received via change notifications. Default: <node>null</code>. Note that <code>false</code> would mean "this wiki's database"! '''Note:''' this is currently required to be not <code>null</code>, since local caching is not fully implemented.
+	// default for repo items in main namespace
+;repoNamespaces: An array telling the client wiki which namespaces on the repository are used for which kind of entity. This is given as an associative array mapping entity type IDs such as Item::ENTITY_TYPE, to namespace names. This information is used when constructing links to entities on the repository. Default:
+<poem>
+          array(
+              'wikibase-item' => '',
+              'wikibase-property' => 'Property'
+          )
+</poem>
+
+=== Expert Settings ===
+;siteGroup: This site's group ID, as used in the sites table. Default: <tt>'wikipedia'</tt>. '''Note:''' this setting will be removed once we can take this information from the sites table.
+;injectRecentChanges: whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc. Requires the <code>dispatchChanges.php</code> script to run, and this wiki to be listed in the <code>localClientDatabases</code> setting on the repository.
+;showExternalRecentChanges: whether changes on the repository should be displayed on Special:RecentChanges, Special:Watchlist, etc on the client wiki. In contrast to <code>injectRecentChanges</code>, this setting just removes the changes from the user interface. The default is <code>false</code>. This is intended to temporarily prevent external changes from showing in order to find or fix some issue on a live site.
+;defaultClientStore: The storage engine to use for storing information on the client side. Default: <code>null</code>. Possible values:
+:;<code>'DirectSqlStore'</code>: Access the repo's database directly to fetch entity data etc.
+:;<code>'CachingSqlStore'</code>: No direct access to the repo's database. Use cache information received from change notifications. '''Warning:''' dies is currently dysfunctional.
+:;<code>null</code>: Automatic, use <code>'DirectSqlStore'</code> if <code>repoDatabase</code> is set, <code>'CachingSqlStore'</code> if not.
+: '''Caveat:''' should always be <code>null</code> at the moment, because some code relies on the <code>repoDatabase</code> setting to determine whether the local cache tables should be used.
