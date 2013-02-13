@@ -39,7 +39,11 @@ $wgAutoloadClasses['Wikibase\Repo\Api\RemoveQualifiers'] 	= $dir . 'includes/api
 $wgAutoloadClasses['Wikibase\Repo\Api\SetQualifier'] 		= $dir . 'includes/api/SetQualifier.php';
 $wgAutoloadClasses['Wikibase\Api\SetStatementRank']			= $dir . 'includes/api/SetStatementRank.php';
 $wgAutoloadClasses['Wikibase\Repo\Api\SetClaim']			= $dir . 'includes/api/SetClaim.php';
+
 $wgAutoloadClasses['SpecialEntityData'] 					= $dir . 'includes/specials/SpecialEntityData.php';
+
+$wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
+$wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
 
 $wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Repo\Api\RemoveQualifiers';
 $wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Repo\Api\SetQualifier';
@@ -47,6 +51,8 @@ $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
 $wgAPIModules['wbsetclaim'] 						= 'Wikibase\Repo\Api\SetClaim';
 
 $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
+
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
 
 unset( $dir );
 
@@ -63,11 +69,16 @@ unset( $dir );
 $wgHooks['UnitTestsList'][] = function( array &$files ) {
 	// @codeCoverageIgnoreStart
 	$testFiles = array(
-		'specials/SpecialEntityData',
 		'api/RemoveQualifiers',
 		'api/SetStatementRank',
 		'api/SetQualifier',
 		'api/SetClaim',
+
+		'content/QueryContent',
+		'content/QueryHandler',
+
+		'specials/SpecialEntityData',
+
 	);
 
 	foreach ( $testFiles as $file ) {

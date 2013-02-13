@@ -50,7 +50,6 @@ $wgWBSettings['useChangesTable'] = true;
 $wgWBSettings['entityPrefixes'] = array(
 	'q' => \Wikibase\Item::ENTITY_TYPE,
 	'p' => \Wikibase\Property::ENTITY_TYPE,
-	'y' => \Wikibase\Query::ENTITY_TYPE,
 );
 
 $wgWBSettings['siteLinkGroup'] = 'wikipedia';

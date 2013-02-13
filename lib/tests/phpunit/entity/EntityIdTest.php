@@ -40,7 +40,9 @@ class EntityIdTest extends \MediaWikiTestCase {
 
 		$argLists[] = array( \Wikibase\Item::ENTITY_TYPE, 123 );
 		$argLists[] = array( \Wikibase\Property::ENTITY_TYPE, 321 );
-		$argLists[] = array( \Wikibase\Query::ENTITY_TYPE, 9342 );
+
+		// TODO
+		//$argLists[] = array( \Wikibase\Query::ENTITY_TYPE, 9342 );
 
 		return $argLists;
 	}
@@ -92,7 +94,9 @@ class EntityIdTest extends \MediaWikiTestCase {
 		$types = array(
 			\Wikibase\Item::ENTITY_TYPE,
 			\Wikibase\Property::ENTITY_TYPE,
-			\Wikibase\Query::ENTITY_TYPE
+
+			// TODO
+			// \Wikibase\Query::ENTITY_TYPE
 		);
 
 		foreach ( array_values( $types ) as $type ) {

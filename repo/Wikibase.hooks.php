@@ -171,8 +171,6 @@ final class RepoHooks {
 			'content/ItemHandler',
 			'content/PropertyContent',
 			'content/PropertyHandler',
-			'content/QueryContent',
-			'content/QueryHandler',
 
 			'specials/SpecialCreateItem',
 			'specials/SpecialItemDisambiguation',

@@ -150,9 +150,6 @@ $wgAutoloadClasses['Wikibase\Lib\EntityIdParser'] 		= $dir . 'includes/parsers/E
 // includes/property
 $wgAutoloadClasses['Wikibase\Property'] 				= $dir . 'includes/property/Property.php';
 
-// includes/query
-$wgAutoloadClasses['Wikibase\Query'] 					= $dir . 'includes/query/Query.php';
-
 // includes/reference
 $wgAutoloadClasses['Wikibase\Reference'] 				= $dir . 'includes/reference/Reference.php';
 $wgAutoloadClasses['Wikibase\ReferenceList'] 			= $dir . 'includes/reference/ReferenceList.php';

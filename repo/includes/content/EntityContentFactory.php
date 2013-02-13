@@ -182,7 +182,9 @@ class EntityContentFactory {
 	protected static $typeMap = array(
 		Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
 		Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY,
-		Query::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_QUERY,
+
+		// TODO: Query::ENTITY_TYPE
+		'query' => CONTENT_MODEL_WIKIBASE_QUERY,
 	);
 
 	/**

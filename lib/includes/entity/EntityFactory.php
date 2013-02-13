@@ -42,7 +42,9 @@ class EntityFactory {
 	protected static $typeMap = array(
 		Item::ENTITY_TYPE => '\Wikibase\Item',
 		Property::ENTITY_TYPE => '\Wikibase\Property',
-		Query::ENTITY_TYPE => '\Wikibase\Query'
+
+		// TODO: Query::ENTITY_TYPE
+		'query' => '\Wikibase\Query'
 	);
 
 	/**
