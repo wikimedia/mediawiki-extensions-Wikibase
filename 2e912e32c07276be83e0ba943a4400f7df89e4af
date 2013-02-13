@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DlXbeBmw",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "Looks sane, but should be a separate change.",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlVbbCno",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "Why the brackets? Seems contrary to general wiki conventions...",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlTbofhE",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "Perhaps renaming and refactoring should not be done in the same change. As it is, I have no way of seeing what actually changed in this file.",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlVbEKpM",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "instanceof would be sufficient",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlTbBnoM",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "$arg may also be a Title object...",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlTaPXng",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "Please don\u0027t use a member to pass data between methods!\n\nAlso, please declare members before using them.",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlZb4UuQ",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "Can\u0027t we just do that inside addClaim?",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dldbu2iI",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "Should come from a parameter",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlVaS6p8",
+        "filename": "repo/includes/api/ApiRemoveClaims.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "Please don\u0027t use a member to pass data between methods!",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlZZCkhE",
+        "filename": "repo/includes/api/ApiSetClaimValue.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "why is it here anyway?",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlbbMbr4",
+        "filename": "repo/includes/api/ApiSetReference.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "So if we omit other snaks, doesn\u0027t that screw with the plural arg for the autocomment?",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlTZSvt4",
+        "filename": "repo/tests/phpunit/includes/api/RemoveReferencesTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-13T14:41:59Z",
+      "side": 1,
+      "message": "This is not needed, just use --filter instead of --group",
+      "revId": "2e912e32c07276be83e0ba943a4400f7df89e4af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
