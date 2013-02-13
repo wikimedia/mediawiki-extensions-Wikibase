@@ -37,10 +37,6 @@ $dir = __DIR__ . '/';
 
 $wgWBRepoSettings = array();
 
-// Defaults to turn on deletion of empty items
-// set to true will always delete empty items
-$wgWBRepoSettings['apiDeleteEmpty'] = false;
-
 // Set API in debug mode
 // do not turn on in production!
 $wgWBRepoSettings['apiInDebug'] = false;
@@ -50,16 +46,6 @@ $wgWBRepoSettings['apiInDebug'] = false;
 $wgWBRepoSettings['apiDebugWithPost'] = false;
 $wgWBRepoSettings['apiDebugWithRights'] = false;
 $wgWBRepoSettings['apiDebugWithTokens'] = false;
-
-// settings for the user agent
-//TODO: This should REALLY be handled somehow as without it we could run into lots of trouble
-// this is before final timeout, without maxlag or maxage we can't hang around
-//'clientTimeout' => 120, // this is before final timeout, the maxlag value and then some
-$wgWBRepoSettings['clientTimeout'] = 10;
-
-$wgWBRepoSettings['clientPageOpts'] = array(
-	'userAgent' => 'Wikibase',
-);
 
 $wgWBRepoSettings['defaultStore'] = 'sqlstore';
 
