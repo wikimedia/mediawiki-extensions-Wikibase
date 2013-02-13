@@ -2,6 +2,9 @@
 
 namespace Wikibase;
 
+use Ask\Language\Query as QueryDefinition;
+use MWException;
+
 /**
  * Represents a single Wikibase query.
  *
@@ -24,6 +27,7 @@ namespace Wikibase;
  *
  * @file
  * @ingroup WikibaseLib
+ * @ingroup WikibaseQuery
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -31,6 +35,45 @@ namespace Wikibase;
 class Query extends Entity {
 
 	const ENTITY_TYPE = 'query';
+
+	/**
+	 * @since 0.4
+	 *
+	 * @var QueryDefinition|null
+	 */
+	protected $queryDefinition = null;
+
+	/**
+	 * Returns the QueryDefinition of the query entity.
+	 *
+	 * @since 0.4
+	 *
+	 * @return QueryDefinition
+	 * @throws MWException
+	 */
+	public function getQueryDefinition() {
+		if ( $this->queryDefinition === null ) {
+			if ( array_key_exists( 'querydefinition', $this->data ) ) {
+				// TODO
+			}
+			else {
+				throw new MWException( 'The QueryDefinition of the query is not known' );
+			}
+		}
+
+		return $this->queryDefinition;
+	}
+
+	/**
+	 * Sets the QueryDefinition of the query entity.
+	 *
+	 * @since 0.4
+	 *
+	 * @param QueryDefinition $queryDefinition
+	 */
+	public function setQueryDefinition( QueryDefinition $queryDefinition ) {
+		$this->queryDefinition = $queryDefinition;
+	}
 
 	/**
 	 * @see Entity::newFromArray

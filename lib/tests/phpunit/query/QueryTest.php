@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\Query;
+
+use Wikibase\Query;
 
 /**
  * Tests for the Wikibase\Query class.
@@ -59,4 +60,22 @@ class QueryTest extends EntityTest {
 	protected function getNewFromArray( array $data ) {
 		return Query::newFromArray( $data );
 	}
+
+	public function testSetQueryDefinition() {
+		$query = Query::newEmpty();
+
+		$queryDefinition = new \Ask\Language\Query(
+			new \Ask\Language\Description\AnyValue(),
+			array(),
+			new \Ask\Language\Option\QueryOptions( 1, 0 )
+		);
+
+		$query->setQueryDefinition( $queryDefinition );
+
+		$obtainedDefinition = $query->getQueryDefinition();
+
+		$this->assertInstanceOf( 'Ask\Language\Query', $obtainedDefinition );
+		$this->assertEquals( $queryDefinition, $obtainedDefinition );
+	}
+
 }
