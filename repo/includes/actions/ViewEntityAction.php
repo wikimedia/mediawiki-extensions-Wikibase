@@ -64,6 +64,8 @@ abstract class ViewEntityAction extends \ViewAction {
 			$this->displayMissingEntity();
 		}
 		else {
+			$this->getArticle()->getRevisionFetched();
+
 			$this->displayEntityContent( $content );
 
 			$isEditableView = $this->isPlainView();

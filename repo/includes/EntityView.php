@@ -173,7 +173,7 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param EntityContent       $entity the entity to analyze/render
-	 * @param null|\ParserOptions  $options parser options. If nto provided, the local context will be used to create generic parser options.
+	 * @param null|\ParserOptions $options parser options. If nto provided, the local context will be used to create generic parser options.
 	 * @param bool                $generateHtml whether to generate HTML. Set to false if only interested in meta-info. default: true.
 	 *
 	 * @return ParserOutput
@@ -692,9 +692,10 @@ abstract class EntityView extends \ContextSource {
 	public function registerJsConfigVars( OutputPage $out, EntityContent $entityContent, $langCode, $editableView = false  ) {
 		wfProfileIn( __METHOD__ );
 
+		$parser = new \Parser();
 		$user = $this->getUser();
-
 		$entity = $entityContent->getEntity();
+		$title = $out->getTitle();
 
 		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
 		$out->addJsConfigVars( 'wbUserIsBlocked', $user->isBlockedFrom( $entityContent->getTitle() ) ); //NOTE: deprecated
@@ -708,6 +709,15 @@ abstract class EntityView extends \ContextSource {
 
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $entity->getPrefixedId() );
+
+		// copyright warning message
+		$out->addJsConfigVars( 'wbCopyrightWarning',
+			$parser->parse( // copyright warning will be wikitext, we need HTML!
+				\EditPage::getCopyrightWarning( $title ),
+				$title,
+				new ParserOptions()
+			)->getText()
+		);
 
 		$serializationOptions = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
 		$serializationOptions->addProp( 'sitelinks' );
