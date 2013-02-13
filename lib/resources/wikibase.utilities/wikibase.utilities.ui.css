@@ -18,6 +18,7 @@
 }
 .wb-toggle > span.ui-icon, .wb-toggle-label {
 	display: inline-block;
+	vertical-align: middle;
 }
 .wb-toggle span.ui-icon.wb-toggle-icon3dtrans {
 	-webkit-transition: .25s ease-out;
