@@ -16,6 +16,24 @@
       "revId": "3dcb211d624dac5b258407b63ebee81730ceac3f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlVNa-E4",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-13T12:27:26Z",
+      "side": 1,
+      "message": "It is for some of the changes that already is in use, but they were never used on wikidata. Perhaps I should remove them as they are only \"legacy\" on my server.",
+      "parentUuid": "DldNNzJs",
+      "revId": "3dcb211d624dac5b258407b63ebee81730ceac3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
