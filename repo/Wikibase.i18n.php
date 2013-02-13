@@ -82,6 +82,7 @@ $messages['en'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'custom value',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'unknown value',
 	'wikibase-snakview-snaktypeselector-novalue' => 'no value',
+	'wikibase-copyrighttooltip-acknowledge' => 'I acknowledge and do not want to see this message again.',
 
 	'wikibase-entityselector-more' => 'more',
 
