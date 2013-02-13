@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DlXMPODk",
+        "filename": "lib/includes/entity/EntityDiffView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-13T13:15:56Z",
+      "side": 1,
+      "message": "static binding / pulling of dependency :)",
+      "revId": "5adf3d86b39a4b876ceeea90c2185a40a9302a6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
