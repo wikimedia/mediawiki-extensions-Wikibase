@@ -134,6 +134,8 @@ describe "Check references UI" do
         @browser.back
         @browser.refresh
         page.wait_for_entity_to_load
+        page.referenceHeadingToggleLink
+        page.wait_for_referencesToggle
         page.reference1Property.should == properties_cm[1]["label"]
         page.reference1Value.should == cm_reference_value
         page.reference1PropertyLink
@@ -141,6 +143,8 @@ describe "Check references UI" do
         page.entityLabelSpan.should == properties_cm[1]["label"]
         @browser.back
         page.wait_for_entity_to_load
+        page.referenceHeadingToggleLink
+        page.wait_for_referencesToggle
         page.reference1ValueLink
         page.articleTitle.include?("File:" + cm_reference_value).should be_true
       end
@@ -150,6 +154,8 @@ describe "Check references UI" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
+        page.referenceHeadingToggleLink
+        page.wait_for_referencesToggle
         page.editReference1?.should be_true
         page.editReference1
         page.editReference1?.should be_false
@@ -175,6 +181,8 @@ describe "Check references UI" do
         @browser.back
         @browser.refresh
         page.wait_for_entity_to_load
+        page.referenceHeadingToggleLink
+        page.wait_for_referencesToggle
         page.reference1Property.should == properties_cm[1]["label"]
         page.reference1Value.should == cm_reference_value_changed
       end
@@ -184,6 +192,8 @@ describe "Check references UI" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
+        page.referenceHeadingToggleLink
+        page.wait_for_referencesToggle
         page.editReference1?.should be_true
         page.editReference1
         page.removeReference?.should be_true
