@@ -55,7 +55,7 @@ class SiteLink {
 
 		$site = Sites::singleton()->getSite( $globalSiteId );
 
-		if ( $site === null ) {
+		if ( !$site ) {
 			$site = new Site();
 			$site->setGlobalId( $globalSiteId );
 		}
