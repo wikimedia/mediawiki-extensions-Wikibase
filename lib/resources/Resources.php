@@ -496,6 +496,10 @@ return call_user_func( function() {
 				'jquery.ui.suggester',
 				'jquery.ui.resizable',
 				'jquery.eachchange'
+			),
+			'messages' => array(
+				'wikibase-aliases-label',
+				'wikibase-entityselector-more'
 			)
 		),
 

@@ -48,6 +48,23 @@
 	font-style: italic;
 }
 
+.ui-entityselector-list li.ui-entityselector-more {
+	border-top-style: solid;
+	background-color: #F8F8F8;
+}
+
+.ui-entityselector-list li.ui-entityselector-more a {
+	float: right;
+	width: 100%;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.ui-entityselector-list li.ui-entityselector-more a span {
+	float: right;
+	padding-right: 1.2em;
+}
+
 .ui-entityselector-list .ui-resizable-s {
 	bottom: 0; /* prevent unintationally showing a scrollbar by setting negative bottom offset */
 }
