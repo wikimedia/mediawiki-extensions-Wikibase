@@ -362,7 +362,7 @@ $messages['fi'] = array(
 	'wikibase-comment-sitelink-add' => 'Kielilinkki lisätty: $1',
 	'wikibase-comment-sitelink-change' => 'Kielilinkki $1 muutettu muotoon $2',
 	'wikibase-comment-sitelink-remove' => 'Kielilinkki poistettu: $1',
-	'wikibase-comment-multi' => '$1 muutosta',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|muutos|muutosta}}',
 	'wikibase-editlinks' => 'Muokkaa linkkejä',
 	'wikibase-editlinkstitle' => 'Muokkaa kieltenvälisiä linkkejä',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
@@ -386,7 +386,7 @@ $messages['fr'] = array(
 	'wikibase-comment-sitelink-add' => 'Lien de langue ajouté : $1',
 	'wikibase-comment-sitelink-change' => 'Lien de langue modifié de $1 à $2',
 	'wikibase-comment-sitelink-remove' => 'Lien de langue supprimé : $1',
-	'wikibase-comment-multi' => '$1 changements', # Fuzzy
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|modification|modifications}}',
 	'wikibase-nolanglinks' => 'aucun',
 	'wikibase-editlinks' => 'Modifier les liens',
 	'wikibase-editlinkstitle' => 'Modifier les liens interlangue',
@@ -644,7 +644,7 @@ $messages['it'] = array(
 	'wikibase-comment-sitelink-add' => 'Collegamento linguistico aggiunto: $1',
 	'wikibase-comment-sitelink-change' => 'Collegamento linguistico modificato da $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Collegamento linguistico rimosso: $1',
-	'wikibase-comment-multi' => '$1 modifiche', # Fuzzy
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|modifica|modifiche}}',
 	'wikibase-nolanglinks' => 'nessuno',
 	'wikibase-editlinks' => 'Modifica link',
 	'wikibase-editlinkstitle' => 'Modifica collegamenti interlinguistici',
@@ -826,7 +826,7 @@ $messages['ml'] = array(
 	'wikibase-linkitem-addlinks' => 'കണ്ണികൾ ചേർക്കുക',
 	'wikibase-linkitem-input-site' => 'ഭാഷ:',
 	'wikibase-linkitem-input-page' => 'താൾ:',
-	'wikibase-linkitem-invalidsite' => 'തെറ്റായതോ അജ്ഞാതമായതോ ആയ സൈറ്റ് തിരഞ്ഞെടുത്തു.',
+	'wikibase-linkitem-invalidsite' => 'അപരിചിതമോ അസാധുവോ ആയ സൈറ്റാണ് തിരഞ്ഞെടുത്തത്',
 	'wikibase-linkitem-confirmitem-button' => 'സ്ഥിരീകരിക്കുക',
 	'wikibase-rc-hide-wikidata' => 'വിക്കിഡേറ്റ $1',
 	'wikibase-rc-show-wikidata-pref' => 'സമീപകാല മാറ്റങ്ങളിൽ വിക്കിഡേറ്റാ തിരുത്തലുകളും പ്രദർശിപ്പിക്കുക',
@@ -937,8 +937,24 @@ $messages['nn'] = array(
 	'wikibase-comment-sitelink-change' => 'Språklenkje endra frå $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Språklenkje fjerna: $1',
 	'wikibase-comment-multi' => '$1 endringar', # Fuzzy
+	'wikibase-nolanglinks' => 'ingen',
 	'wikibase-editlinks' => 'Endra lenkjer',
 	'wikibase-editlinkstitle' => 'Endra mellomspråklege lenkjer',
+	'wikibase-linkitem-addlinks' => 'Legg til lenkjer',
+	'wikibase-linkitem-close' => 'Lat att dialog og last sida på nytt',
+	'wikibase-linkitem-failure' => 'Ein ukjend feil oppstod under lenkinga av sida.',
+	'wikibase-linkitem-title' => 'Lenk til side',
+	'wikibase-linkitem-linkpage' => 'Lenk til side',
+	'wikibase-linkitem-selectlink' => 'Vel ein nettstad og ei side du ynskjer å lenkja til denne sida.',
+	'wikibase-linkitem-input-site' => 'Språk:',
+	'wikibase-linkitem-input-page' => 'Side:',
+	'wikibase-linkitem-invalidsite' => 'Ukjend eller ugild nettstad er vald.',
+	'wikibase-linkitem-confirmitem-text' => 'Stadfest at sidene viste under er dei du ynskjer at skal lenkjast til denne sida.',
+	'wikibase-linkitem-confirmitem-button' => 'Stadfest',
+	'wikibase-linkitem-not-loggedin-title' => 'Du lyt vera innlogga',
+	'wikibase-linkitem-not-loggedin' => 'Du lyt vera innlogga på denne wikien og på det [$1 sentrale datalageret] for å nytta denne funksjonen.',
+	'wikibase-linkitem-success-create' => 'Sidene vart lenkja til kvarandre. Du kan finna det nyoppretta objektet som inneheld lenkjene i det [$1 sentrale datalageret] vårt.',
+	'wikibase-linkitem-success-link' => 'Sidene vart lenkja til kvarandre. Du kan finna objektet som inneheld lenkjene i det [$1 sentrale datalageret] vårt.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata-endringar i siste endringane',
 );
@@ -959,23 +975,24 @@ $messages['pl'] = array(
 );
 
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  * @author Dragonòt
  */
 $messages['pms'] = array(
 	'wikibase-client-desc' => "Client për l'estension Wikibase",
-	'wikibase-after-page-move' => "It peule ëdcò [$1 modifiché] j'element associà Wikidata për manten-e ij colegamente ëd lenga dzor le pagine tramudà.",
-	'wikibase-comment-remove' => 'Element associà Wikidata scanselà. Colegament ëd lenga gavà.',
-	'wikibase-comment-linked' => "N'element Wikidata a l'é stàit colegà a sta pagina.",
-	'wikibase-comment-unlink' => "Sta pagina a l'é stàita scolegà da l'element Wikidata. Colegament ëd lenga gavà.",
-	'wikibase-comment-restore' => 'Element associà Wikidata ripristinà. Colegament ëd lenga ripristinà.',
-	'wikibase-comment-update' => 'Colegament ëd lenga agiornà.',
-	'wikibase-comment-sitelink-add' => 'Colegament ëd lenga giontà: $1',
-	'wikibase-comment-sitelink-change' => 'Colegament ëd lenga cangià da $1 a $2',
-	'wikibase-comment-sitelink-remove' => 'Colegament ëd lenga gavà: $1',
+	'wikibase-after-page-move' => "It peule ëdcò [$1 modifiché] j'element Wikidata associà për goerné le ëd lenga an sla pàgine tramudà.",
+	'wikibase-comment-remove' => 'Element Wikidata associà scancelà. Liura ëd lenga gavà.',
+	'wikibase-comment-linked' => "N'element Wikidata a l'é stàit colegà a sta pàgina.",
+	'wikibase-comment-unlink' => "Sta pàgina a l'é stàita dëscolegà da l'element Wikidata. Liure ëd lenga gavà.",
+	'wikibase-comment-restore' => 'Element associà Wikidata ripristinà. Liure ëd lenga ripristinà.',
+	'wikibase-comment-update' => 'Liure ëd lenga agiornà.',
+	'wikibase-comment-sitelink-add' => 'Liure ëd lenga giontà: $1',
+	'wikibase-comment-sitelink-change' => 'Liure ëd lenga modificà da $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Liure ëd lenga gavà: $1',
 	'wikibase-editlinks' => "Modifiché j'anliure",
-	'wikibase-editlinkstitle' => 'Modìfica colegament antërlenga',
+	'wikibase-editlinkstitle' => 'Modifiché le liure antërlenga',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
-	'wikibase-rc-show-wikidata-pref' => 'Smon modìfiche Wikidata ant ij cambi recent',
+	'wikibase-rc-show-wikidata-pref' => "Smon-e le modìfiche ëd Wikidata ant j'ùltime modìfiche",
 );
 
 /** Portuguese (português)
