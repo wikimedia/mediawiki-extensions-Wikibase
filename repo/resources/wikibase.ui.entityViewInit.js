@@ -179,16 +179,19 @@
 
 				var toolbar = $activeToolbar.data( 'wb-toolbar' );
 				var tooltip = new wb.ui.Tooltip(
-					// TODO: make _getTooltipParent public or add a Toolbar.Label.getElement()
-					toolbar.btnSave._getTooltipParent(),
+					toolbar.btnSave.getTooltipParent().parent(),
 					{},
 					$( '<span>' + mw.config.get( 'wbCopyrightWarning' ) + '</span>' ),
 					// assuming the toolbar is used on the right side of some edit UI, we want to
 					// point the tooltip away from that so it won't overlap with it:
 					{ gravity: 'nw' }
 				);
-				toolbar.btnSave.setTooltip( tooltip );
+				// don't set tooltip to 'save' since it would vanish on error messages!
+				toolbar.setTooltip( tooltip );
 				tooltip.show( true ); // show permanently, not just on hover!
+				// don't display the arrow since tipsy will center the tooltip on the toolbar which
+				// looks weird with the arrow pointing to the remove button eventually.
+				tooltip._tipsy.tip().find( '.tipsy-arrow' ).hide();
 
 				// destroy tooltip after edit mode gets closed again:
 				$( wb ).one( 'stopItemPageEditMode', function( event ) {
