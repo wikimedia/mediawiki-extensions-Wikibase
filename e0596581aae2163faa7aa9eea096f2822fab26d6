@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DldNnDE8",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-13T12:02:42Z",
+      "side": 1,
+      "message": "this class is no longer in your patch",
+      "revId": "e0596581aae2163faa7aa9eea096f2822fab26d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlbNcgHw",
+        "filename": "lib/includes/changes/DiffChange.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-13T12:02:42Z",
+      "side": 1,
+      "message": "let\u0027s not put a class within another class file",
+      "revId": "e0596581aae2163faa7aa9eea096f2822fab26d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlZOk5Fo",
+        "filename": "lib/includes/changes/DiffChange.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-13T12:02:42Z",
+      "side": 1,
+      "message": "ugly cruft but can overlook it for now.\n\nmaybe put a todo here",
+      "revId": "e0596581aae2163faa7aa9eea096f2822fab26d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlZPrxHk",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-13T12:02:42Z",
+      "side": 1,
+      "message": "should put a todo or note here, that once clients are handling claims, we\u0027ll not want to unset the claims.",
+      "revId": "e0596581aae2163faa7aa9eea096f2822fab26d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
