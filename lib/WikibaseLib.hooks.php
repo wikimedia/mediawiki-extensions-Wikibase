@@ -54,8 +54,6 @@ final class LibHooks {
 
 			'property/Property',
 
-			'query/Query',
-
 			'reference/ReferenceList',
 			'reference/Reference',
 

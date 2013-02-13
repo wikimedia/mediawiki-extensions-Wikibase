@@ -33,7 +33,7 @@ if ( !defined( 'WBL_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
 
-global $wgWBSettings;
+global $wgWBSettings, $wgAutoloadClasses, $wgHooks;
 
 $wgWBSettings['dataTypes'] = array_merge( $wgWBSettings['dataTypes'], array(
 	'geo-coordinate',
@@ -42,3 +42,21 @@ $wgWBSettings['dataTypes'] = array_merge( $wgWBSettings['dataTypes'], array(
 	'multilingual-text',
 	'time',
 ) );
+
+$wgAutoloadClasses['Wikibase\Query'] = __DIR__ . '/../includes/query/Query.php';
+
+$wgHooks['UnitTestsList'][]	= function( array &$files ) {
+	// @codeCoverageIgnoreStart
+	$testFiles = array(
+		'query/Query',
+	);
+
+	foreach ( $testFiles as $file ) {
+		$files[] = __DIR__ . '/../tests/phpunit/' . $file . 'Test.php';
+	}
+
+	return true;
+	// @codeCoverageIgnoreEnd
+};
+
+$wgWBSettings['entityPrefixes']['y'] = \Wikibase\Query::ENTITY_TYPE;
