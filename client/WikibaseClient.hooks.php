@@ -501,6 +501,8 @@ final class ClientHooks {
 				}
 			}
 			$conds = $newConds;
+		} else {
+			$conds[] = 'rc_type != 5';
 		}
 
 		wfProfileOut( __METHOD__ );
