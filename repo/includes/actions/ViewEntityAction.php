@@ -36,12 +36,13 @@ abstract class ViewEntityAction extends \ViewAction {
 	 */
 	protected function getContent() {
 		$queryValues = $this->getRequest()->getQueryValues();
+		$revisionId = 0;
 
 		if ( array_key_exists( 'oldid', $queryValues ) ) {
-			$revision = \Revision::newFromId( $queryValues['oldid'] );
-		} else {
-			$revision = \Revision::newFromTitle( $this->getTitle() );
+			$revisionId = $queryValues[ 'oldid' ];
 		}
+
+		$revision = \Revision::newFromTitle( $this->getTitle(), $revisionId );
 
 		if ( $revision !== null ) {
 			return $revision->getContent();
