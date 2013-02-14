@@ -56,34 +56,34 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		$siteId = $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' );
 		$page = $request->getVal( 'page', isset( $parts[1] ) ? $parts[1] : '' );
 
-		$pageTitle = '';
 		$itemContent = null;
 
-		if ( !empty( $page ) ) {
-			$title = \Title::newFromText( $page );
-
-			if ( $title !== null ) {
-				$pageTitle = $title->getFullText();
-			} else {
-				// TODO: throw error, page title contains invalid chars
-				$pageTitle = '';
+		// If ther are enough data, then try to lookup the item content
+		if ( isset( $siteId ) && isset( $page ) ) {
+			// Try to get a item content
+			$pageName = \Wikibase\Utils::squashToNFC( $page );
+			$itemHandler = new \Wikibase\ItemHandler();
+			$itemContent = $itemHandler->getFromSiteLink( $siteId, $pageName );
+			// Do we have an item content, and if not can we try harder?
+			if ( $itemContent === null && \Wikibase\Settings::get( 'normalizePageNames' ) === true ) {
+				// Try harder by requesting normalization on the external site
+				$site = \SiteSQLStore::newInstance()->getSite( $siteId );
+				if ( $site instanceof Site ) {
+					$pageName = $site->normalizePageName( $page );
+					$itemContent = $itemHandler->getFromSiteLink( $siteId, $pageName );
+				}
 			}
 
-			// Create an item view
-			if ( isset( $siteId ) && isset( $pageTitle ) ) {
-				$itemHandler = new \Wikibase\ItemHandler();
-				$itemContent = $itemHandler->getFromSiteLink( $siteId, $pageTitle );
-
-				if ( $itemContent !== null ) {
-					$itemUrl = $itemContent->getTitle()->getFullUrl();
-					$this->getOutput()->redirect( $itemUrl );
-				}
+			// Redirect to the item page if we found its content
+			if ( $itemContent !== null ) {
+				$itemUrl = $itemContent->getTitle()->getFullUrl();
+				$this->getOutput()->redirect( $itemUrl );
 			}
 		}
 
 		// If there is no item content post the switch form
 		if ( $itemContent === null ) {
-			$this->switchForm( $siteId, $pageTitle );
+			$this->switchForm( $siteId, $page );
 		}
 	}
 
