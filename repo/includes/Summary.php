@@ -12,7 +12,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author John Erling Blad
  */
-final class Autocomment {
+final class Summary {
 
 	/**
 	 * Pretty formating of autocomments.
@@ -226,7 +226,7 @@ final class Autocomment {
 	 *
 	 * @since 0.1
 	 *
-	 * @param ApiAutocomment $module an api module that support ApiAutocomment
+	 * @param ApiSummary $module an api module that support ApiSummary
 	 *
 	 * @param null|array $params
 	 * @param null|EntityContent $entityContent
@@ -261,6 +261,6 @@ final class Autocomment {
 		$comment = $module->getTextForComment( $params, $hits );
 
 		// format the overall string and return it
-		return Autocomment::formatTotalSummary( $comment, $summary, $lang );
+		return Summary::formatTotalSummary( $comment, $summary, $lang );
 	}
 }

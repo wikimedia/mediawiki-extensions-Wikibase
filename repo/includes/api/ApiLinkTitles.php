@@ -15,7 +15,7 @@ use ApiBase, User, Status;
  *
  * @licence GNU GPL v2+
  */
-class ApiLinkTitles extends Api implements ApiAutocomment {
+class ApiLinkTitles extends Api implements ApiSummary {
 
 	/**
 	 * @see  ApiModifyEntity::getRequiredPermissions()
@@ -28,20 +28,20 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			'wblinktitles-connect',
 			array( /*$plural*/ 2, $params['fromsite'], $params['tosite'] )
 		);
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
+		return Summary::formatAutoSummary(
 			array( $params['fromtitle'], $params['totitle'] )
 		);
 	}
@@ -142,7 +142,7 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 		}
 		else {
 			// Do the actual save, or if it don't exist yet create it.
-			$summary = Autocomment::buildApiSummary( $this, $params, $itemContent );
+			$summary = Summary::buildApiSummary( $this, $params, $itemContent );
 			$editEntity = $this->attemptSaveEntity( $itemContent,
 				$summary,
 				$flags );

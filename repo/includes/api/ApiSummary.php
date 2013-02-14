@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * ApiAutocomment interface. All Api modules that need autocomments
+ * ApiSummary interface. All Api modules that need autocomments
  * should either extend this directly or by subclassing. Note that
  * the generated content must still be properly delivered to
  * EditEntity::attemptedSave or any similar call.
@@ -31,7 +31,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-interface ApiAutocomment {
+interface ApiSummary {
 
 	/**
 	 * Make a string for an autocomment, that can be replaced through system messages.

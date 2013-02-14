@@ -11,7 +11,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\Statement;
 use Wikibase\References;
 use Wikibase\Settings;
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 
 /**
  * API module for removing one or more references of the same statement.
@@ -120,21 +120,21 @@ class RemoveReferences extends \Wikibase\ApiModifyClaim {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			$this->getModuleName(),
 			array( count( $params['references'] ) )
 		);
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'references' )
+		return Summary::formatAutoSummary(
+			Summary::pickValuesFromParams( $params, 'references' )
 		);
 	}
 

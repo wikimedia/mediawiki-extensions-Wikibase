@@ -12,7 +12,7 @@ use Wikibase\Claim;
 use Wikibase\Snaks;
 use Wikibase\SnakFactory;
 use Wikibase\Settings;
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -230,21 +230,21 @@ class SetQualifier extends \Wikibase\ApiModifyClaim {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			$this->getModuleName(),
 			array( 1 )
 		);
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'property' )
+		return Summary::formatAutoSummary(
+			Summary::pickValuesFromParams( $params, 'property' )
 		);
 	}
 

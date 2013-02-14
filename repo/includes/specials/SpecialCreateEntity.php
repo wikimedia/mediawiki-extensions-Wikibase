@@ -1,7 +1,7 @@
 <?php
 
 use Wikibase\EntityContent;
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 use Wikibase\Utils;
 
 /**
@@ -95,11 +95,11 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 				$status = $this->modifyEntity( $entityContent );
 
 				if ( $status->isGood() ) {
-					list( $counts, $summary, $lang ) = Autocomment::formatAutoSummary(
+					list( $counts, $summary, $lang ) = Summary::formatAutoSummary(
 						array( $this->label, $this->description ),
 						$this->getLanguage()
 					);
-					$comment = Autocomment::formatAutoComment(
+					$comment = Summary::formatAutoComment(
 						'special-create-' . $entityContent->getEntity()->getType(),
 						array( $counts, $this->getLanguage()->getCode() )
 					);

@@ -179,10 +179,10 @@ class ApiSetClaimValue extends ApiModifyClaim {
 
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			$this->getModuleName(),
 			array(
 				/*plural */ (int)isset( $params['claim'] )
@@ -191,11 +191,11 @@ class ApiSetClaimValue extends ApiModifyClaim {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'claim' )
+		return Summary::formatAutoSummary(
+			Summary::pickValuesFromParams( $params, 'claim' )
 		);
 	}
 }

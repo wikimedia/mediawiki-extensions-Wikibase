@@ -248,12 +248,12 @@ class ApiRemoveClaims extends ApiModifyClaim {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
 		$guids = $params['claim'];
 
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			$this->getModuleName(),
 			array(
 				/*plural */ count( $guids ),
@@ -262,11 +262,11 @@ class ApiRemoveClaims extends ApiModifyClaim {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'claim' )
+		return Summary::formatAutoSummary(
+			Summary::pickValuesFromParams( $params, 'claim' )
 		);
 	}
 }

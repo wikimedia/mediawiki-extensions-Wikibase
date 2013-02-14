@@ -16,7 +16,7 @@ use User, Title, ApiBase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-abstract class ApiModifyEntity extends Api implements ApiAutocomment {
+abstract class ApiModifyEntity extends Api implements ApiSummary {
 
 	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
@@ -180,7 +180,7 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 		//      not added to $this->flags explicitly, the save will fail.
 
 		// collect information and create an EditEntity
-		$summary = Autocomment::buildApiSummary( $this, $params, $entityContent );
+		$summary = Summary::buildApiSummary( $this, $params, $entityContent );
 		$editEntity = $this->attemptSaveEntity( $entityContent,
 			$summary,
 			$this->flags );
