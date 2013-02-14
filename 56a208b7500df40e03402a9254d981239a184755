@@ -213,6 +213,57 @@
     },
     {
       "key": {
+        "uuid": "DlXnbkno",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-14T17:59:19Z",
+      "side": 1,
+      "message": "entitites",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlZnePmk",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-14T17:59:19Z",
+      "side": 1,
+      "message": "lables",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlVno1hE",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-14T17:59:19Z",
+      "side": 1,
+      "message": "uncluding",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DldY9tYw",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -347,6 +398,23 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "DldZ6VXQ",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlTnlCjo",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-14T17:59:19Z",
+      "side": 1,
+      "message": "disfunctional (wonder if this is a common form, but my dictionary says dysfunctional)",
       "revId": "56a208b7500df40e03402a9254d981239a184755",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
