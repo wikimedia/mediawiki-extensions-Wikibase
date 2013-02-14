@@ -168,7 +168,12 @@
 			// add copyright warning to 'save' button if there is one:
 			if( mw.config.exists( 'wbCopyrightWarning' ) ) {
 
-				var $message = $( '<span>' + mw.config.get( 'wbCopyrightWarning' ) + '</span>' );
+				var $message = $( '<span>' + mw.config.get( 'wbCopyrightWarning' ) + '</span>' ),
+					messageText = $.trim( $message.text() ); // get this before adding $hideMessage link!
+
+				if( messageText === $.cookie( 'wikibase.acknowledgedentitycopyright' ) ) {
+					return;
+				}
 
 				var $activeToolbar = $( '.wb-edit' )
 					// label/description of EditableValue always in edit mode if empty, 2nd '.wb-edit'
@@ -180,7 +185,10 @@
 					return; // no toolbar for some reason, just stop
 				}
 
-				var toolbar = $activeToolbar.data( 'wb-toolbar' );
+				var toolbar = $activeToolbar.data( 'wb-toolbar' ),
+					$hideMessage = $( '<a/>', {
+						text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
+					} ).appendTo( $message );
 
 				var tooltip = new wb.ui.Tooltip(
 					toolbar.btnSave.getTooltipParent(), // adjust tooltip to save button
@@ -197,6 +205,11 @@
 				// The 'save' button can still have its own tooltip though.
 				var messageAnchor = new wb.ui.Toolbar.Label( $( '<span/>' ) );
 				messageAnchor.setTooltip( tooltip );
+
+				$hideMessage.on( 'click', function() {
+					messageAnchor.removeTooltip();
+					$.trim( $.cookie( 'wikibase.acknowledgedentitycopyright', messageText, { 'expires': null, 'path': '/' } ) );
+				} );
 
 				tooltip.show( true ); // show permanently, not just on hover!
 
