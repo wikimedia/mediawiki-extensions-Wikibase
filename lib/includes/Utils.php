@@ -56,6 +56,7 @@ final class Utils {
 	 * @since 0.1
 	 *
 	 * @param string $languageCode
+	 * @param string|null $inLanguage
 	 *
 	 * @return string
 	 */
