@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DlSJO9ME",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-14T09:43:45Z",
+      "side": 1,
+      "message": "Either way is okay, though \"is already\" might be slightly better than \"already is\", in my opinion.",
+      "parentUuid": "DleIVjJo",
+      "revId": "0f18d270da1ded0a02419f6d8bc22f911f509579",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DlSJDlLQ",
         "filename": "client/resources/wbclient.linkItem.js",
         "patchSetId": 1
