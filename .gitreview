@@ -2,5 +2,5 @@
 host=gerrit.wikimedia.org
 port=29418
 project=mediawiki/extensions/Wikibase.git
-defaultbranch=master
+defaultbranch=mw1.21-wmf10
 defaultrebase=0
