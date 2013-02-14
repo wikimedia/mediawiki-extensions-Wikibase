@@ -188,8 +188,11 @@ final class Utils {
 	 * @return string where whitespace possibly are removed.
 	 */
 	static public function squashWhitespace( $inputString ) {
-		$trimmed = preg_replace( '/^[\pZ\pC]+|[\pZ\pC]+$/u', '', $inputString );
-		return preg_replace('/[\pZ\pC]+/u', ' ', $trimmed );
+		// strip initial/trailing whitespace and control chars
+		$trimmed = preg_replace( '/^[\p{Z}\p{Cc}]+|[\p{Z}\p{Cc}]+$/u', '', $inputString );
+		// replace control chars with single space
+		$trimmed = preg_replace( '/[\p{Cc}]+/u', ' ', $trimmed );
+		return $trimmed;
 	}
 
 	/**

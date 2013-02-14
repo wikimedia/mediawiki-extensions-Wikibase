@@ -55,8 +55,8 @@ class UtilsTest extends \MediaWikiTestCase {
 	public static function providerSquashWhitespace() {
 		return array(
 			array( 'foo bar', 'foo bar'),
-			array( ' foo  bar ', 'foo bar'),
-			array( '  foo   bar  ', 'foo bar'),
+			array( ' foo  bar ', 'foo  bar'),
+			array( '  foo   bar  ', 'foo   bar'),
 			array( "foo\tbar", 'foo bar'),
 			array( "foo\nbar", 'foo bar'),
 			array( "foo\rbar", 'foo bar'),
@@ -95,10 +95,10 @@ class UtilsTest extends \MediaWikiTestCase {
 
 	public static function providerSquashToNFC() {
 		return array(
-			array( "  \xC3\x85land  øyene  ", 'Åland øyene' ),
-			array( "  A\xCC\x8Aland  øyene  ", 'Åland øyene' ),
-			array( "  \xC3\x85land    øyene  ", 'Åland øyene' ),
-			array( "  A\xCC\x8Aland    øyene  ", 'Åland øyene' ),
+			array( "  \xC3\x85land  øyene  ", 'Åland  øyene' ),
+			array( "  A\xCC\x8Aland  øyene  ", 'Åland  øyene' ),
+			array( "  \xC3\x85land    øyene  ", 'Åland    øyene' ),
+			array( "  A\xCC\x8Aland    øyene  ", 'Åland    øyene' ),
 		);
 	}
 
