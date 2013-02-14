@@ -111,6 +111,8 @@
 				value: wb.entity // only holds the claims of an entity page right now
 			} );
 
+
+
 			// removing site links heading to rebuild it with value counter
 			$( 'table.wb-sitelinks' ).each( function() {
 				$( this ).before(
@@ -167,6 +169,9 @@
 
 			// add copyright warning to 'save' button if there is one:
 			if( mw.config.exists( 'wbCopyrightWarning' ) ) {
+
+				var $message = $( '<span>' + mw.config.get( 'wbCopyrightWarning' ) + '</span>' );
+
 				var $activeToolbar = $( '.wb-edit' )
 					// label/description of EditableValue always in edit mode if empty, 2nd '.wb-edit'
 					// on PropertyEditTool only appended when really being edited by the user though
@@ -178,21 +183,32 @@
 				}
 
 				var toolbar = $activeToolbar.data( 'wb-toolbar' );
+
 				var tooltip = new wb.ui.Tooltip(
-					// TODO: make _getTooltipParent public or add a Toolbar.Label.getElement()
-					toolbar.btnSave._getTooltipParent(),
+					toolbar.btnSave.getTooltipParent(), // adjust tooltip to save button
 					{},
-					$( '<span>' + mw.config.get( 'wbCopyrightWarning' ) + '</span>' ),
+					$message,
 					// assuming the toolbar is used on the right side of some edit UI, we want to
 					// point the tooltip away from that so it won't overlap with it:
 					{ gravity: 'nw' }
 				);
-				toolbar.btnSave.setTooltip( tooltip );
+
+				// tooltip gets its own anchor since other elements might have their own tooltip.
+				// we don't even have to add this new toolbar element to the toolbar, we only use it
+				// to manage the tooltip which will have the 'save' button as element to point to.
+				// The 'save' button can still have its own tooltip though.
+				var messageAnchor = new wb.ui.Toolbar.Label( $( '<span/>' ) );
+				messageAnchor.setTooltip( tooltip );
+
 				tooltip.show( true ); // show permanently, not just on hover!
+				// don't display the arrow since tipsy will center the tooltip on the toolbar which
+				// looks weird with the arrow pointing to the remove button eventually.
+				//tooltip._tipsy.tip().find( '.tipsy-arrow' ).hide();
 
 				// destroy tooltip after edit mode gets closed again:
 				$( wb ).one( 'stopItemPageEditMode', function( event ) {
 					tooltip.destroy();
+					toolbar.removeElement( messageAnchor );
 				} );
 			}
 		} );
