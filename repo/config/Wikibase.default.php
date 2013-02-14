@@ -87,3 +87,6 @@ $wgWBRepoSettings['multilang-limits'] = array(
 );
 
 $wgWBRepoSettings['multilang-truncate-length'] = 32;
+
+// Should the page names (titles) be normalized against the external site
+$wgWBRepoSettings['normalizeItemByTitlePageNames'] = false;
