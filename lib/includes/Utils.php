@@ -188,7 +188,7 @@ final class Utils {
 	 * @return string where whitespace possibly are removed.
 	 */
 	static public function squashWhitespace( $inputString ) {
-		$trimmed = preg_replace( '/^[\pZ\pC]+|[\pZ\pC]+$/u', '', $inputString );
+		$trimmed = preg_replace( '/^[\pZ\pC]+|:[\pZ\pC]+|[\pZ\pC]+:|[\pZ\pC]+$/u', '', $inputString );
 		return preg_replace('/[\pZ\pC]+/u', ' ', $trimmed );
 	}
 
