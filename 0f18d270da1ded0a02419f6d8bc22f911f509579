@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DleIVjJo",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-14T09:13:10Z",
+      "side": 1,
+      "message": "I think \"already is\" should be changed to \"is already\". Can\u0027t be 100%; I\u0027m not a native speaker.",
+      "revId": "0f18d270da1ded0a02419f6d8bc22f911f509579",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlSJDlLQ",
+        "filename": "client/resources/wbclient.linkItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-14T09:13:10Z",
+      "side": 1,
+      "message": "I don\u0027t think you can be certain that index.php is your entry point, so that should be taken from mw.config( \u0027wgScript\u0027 ).",
+      "revId": "0f18d270da1ded0a02419f6d8bc22f911f509579",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
