@@ -15,13 +15,9 @@
 	border-right: 1px solid black;
 }
 
-#wbclient-linkItem-siteLinks a {
+#wbclient-linkItem-dialog a {
 	color: #0645AD;
 }
 .wbclient-linkItem-Input {
 	margin: 20px;
-}
-.wbclient-linkItem-not-loggedin-message a,
-.wbclient-linkItem-success-message a {
-	color: #0645AD;
 }
