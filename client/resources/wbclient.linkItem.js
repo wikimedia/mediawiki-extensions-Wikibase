@@ -67,7 +67,7 @@
 	function notLoggedin() {
 		$( '#wbc-linkToItem-link' ).show();
 
-		var userLogin = mw.config.get( 'wbRepoUrl' ) + mw.config.get( 'wbRepoScriptPath' ) + '/index.php?title=Special:UserLogin';
+		var userLogin = linkRepoTitle( 'Special:UserLogin' );
 		$( '<div>' )
 			.dialog( {
 				title: mw.msg( 'wikibase-linkitem-not-loggedin-title' ),
@@ -87,6 +87,7 @@
 	 */
 	function createDialog() {
 		$dialog = $( '<div>' )
+			.attr( 'id', 'wbclient-linkItem-dialog' )
 			.dialog( {
 				title: mw.message( 'wikibase-linkitem-title' ).escaped(),
 				width: 700,
@@ -357,7 +358,7 @@
 	 * @param {object} data
 	 */
 	function onEntityLoad( data ) {
-		var i, entity;
+		var i, entity, itemLink;
 
 		if ( !data.entities['-1'] ) {
 			removeSpinner();
@@ -370,10 +371,19 @@
 					break;
 				}
 			}
+			itemLink = linkRepoTitle( entity.title );
 
+			// Count site links and abort in case the entity already is linked with a page on this wiki
 			for ( i in entity.sitelinks ) {
 				if ( entity.sitelinks[ i ].site ) {
 					siteLinkCount += 1;
+				}
+				if ( entity.sitelinks[ i ].site === mw.config.get( 'wbCurrentSite' ).globalSiteId ) {
+					// Abort as the entity already is linked with a page on this wiki
+					onError(
+						mw.message( 'wikibase-linkitem-alreadylinked', itemLink, entity.sitelinks[ i ].title ).parse()
+					);
+					return;
 				}
 			}
 
@@ -386,7 +396,7 @@
 					.empty()
 					.append(
 						$( '<div>' )
-							.text( mw.msg( 'wikibase-linkitem-confirmitem-text' ) )
+							.html( mw.message( 'wikibase-linkitem-confirmitem-text', itemLink ).parse() )
 					).append(
 						$( '<br />' )
 					)
@@ -557,8 +567,7 @@
 	 */
 	function onSuccess( type ) {
 		var mwApi = new mw.Api(),
-			itemUri = mw.config.get( 'wbRepoUrl' ) + mw.config.get( 'wbRepoScriptPath' ) + '/index.php?title=' +
-			encodeURIComponent( 'Special:ItemByTitle/' + mw.config.get( 'wbCurrentSite' ).globalSiteId + '/' + mw.config.get( 'wgPageName' ) );
+			itemUri = linkRepoTitle( 'Special:ItemByTitle/' + mw.config.get( 'wbCurrentSite' ).globalSiteId + '/' + mw.config.get( 'wgPageName' ) );
 
 		$dialog
 			.empty()
@@ -590,33 +599,41 @@
 	}
 
 	/**
-	 * Called in case an error occurs during an API request. Aborts the process
-	 * and displays a (hopefully) useful error message.
+	 * Called in case an error occurs and displays an error message.
+	 * 
+	 * Can either show a given errorCode (as html) or use data from an
+	 * API failure (pass two parameters in this case).
 	 *
 	 * @param {string} errorCode
 	 * @param {object} errorInfo
 	 */
 	function onError( errorCode, errorInfo ) {
-		var $elem;
+		var $elem, tooltip, error;
 		if ( $( '#wbclient-linkItem-page' ).length ) {
 			$elem = $( '#wbclient-linkItem-page' );
 		} else {
 			$elem = $( '#wbclient-linkItem-siteLinks' );
 		}
-		var error = wb.RepoApiError.newFromApiResponse( errorCode, errorInfo ),
-			tooltip = new wb.ui.Tooltip( $elem, {}, error, { gravity: 'nw' } );
+
+		if ( errorInfo ) {
+			error = wb.RepoApiError.newFromApiResponse( errorCode, errorInfo );
+		} else {
+			error = errorCode;
+		}
+
+		tooltip = new wb.ui.Tooltip( $elem, {}, error, { gravity: 'nw' } );
 
 		removeSpinner();
 		tooltip.show();
 
-		$elem.one( 'focus', function() {
+		$elem.one( ['click', 'focus'], function() {
 			// Remove the tooltip by the time the user tries to correct the input
 			tooltip.destroy();
 		} );
 	}
 
 	/**
-	 * Let the user know that the site give is invalid
+	 * Let the user know that the site given is invalid
 	 *
 	 */
 	function invalidSiteGiven() {
@@ -628,6 +645,16 @@
 			// Remove the tooltip by the time the user tries to correct the input
 			tooltip.destroy();
 		} );
+	}
+
+	/**
+	 * Returns a link to the given title on the repo.
+	 *
+	 * @param {string} title
+	 * @return {string}
+	 */
+	function linkRepoTitle( title ) {
+		return mw.config.get( 'wbRepoUrl' ) + mw.config.get( 'wbRepoArticlePath' ).replace( /\$1/, encodeURIComponent( title ) );
 	}
 
 	/**
