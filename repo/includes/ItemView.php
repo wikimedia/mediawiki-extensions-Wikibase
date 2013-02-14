@@ -44,7 +44,11 @@ class ItemView extends EntityView {
 		$siteLinks = $item->getItem()->getSiteLinks();
 		$html = $thead = $tbody = $tfoot = '';
 
-		$html .= wfTemplate( 'wb-section-heading', wfMessage( 'wikibase-sitelinks' ) );
+		$html .= wfTemplate(
+				'wb-section-heading',
+				wfMessage( 'wikibase-sitelinks' ),
+				$item->getEntity()->getPrefixedId() . '/sitelinks'
+			);
 
 		if( !empty( $siteLinks ) ) {
 			$thead = wfTemplate( 'wb-sitelinks-thead',

@@ -41,7 +41,7 @@ HTML;
 
 	$templates['wb-section-heading'] =
 <<<HTML
-<h2 class="wb-section-heading" dir="auto">$1</h2>
+<h2 id="$2" class="wb-section-heading" dir="auto">$1</h2>
 HTML;
 
 	// TODO: rename this to 'wb-claimlist' or 'wb-claims' (in which case the widget should also be renamed)
