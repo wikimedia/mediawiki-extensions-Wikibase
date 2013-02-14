@@ -93,7 +93,6 @@ $wgExtensionMessagesFiles['WikibaseNS'] 	= $dir . 'Wikibase.i18n.namespaces.php'
 $wgAutoloadClasses['Wikibase\RepoHooks'] 				= $dir . 'Wikibase.hooks.php';
 
 // includes
-$wgAutoloadClasses['Wikibase\Autocomment']				= $dir . 'includes/Autocomment.php';
 $wgAutoloadClasses['Wikibase\CachingEntityLoader']      = $dir . 'includes/CachingEntityLoader.php';
 $wgAutoloadClasses['Wikibase\DataTypeSelector']			= $dir . 'includes/DataTypeSelector.php';
 $wgAutoloadClasses['Wikibase\EditEntity'] 				= $dir . 'includes/EditEntity.php';
@@ -106,6 +105,7 @@ $wgAutoloadClasses['Wikibase\LabelDescriptionDuplicateDetector'] = $dir . 'inclu
 $wgAutoloadClasses['Wikibase\MultiLangConstraintDetector'] = $dir . 'includes/MultiLangConstraintDetector.php';
 $wgAutoloadClasses['Wikibase\NamespaceUtils']           = $dir . 'includes/NamespaceUtils.php';
 $wgAutoloadClasses['Wikibase\PropertyView']				= $dir . 'includes/PropertyView.php';
+$wgAutoloadClasses['Wikibase\Summary']					= $dir . 'includes/Summary.php';
 
 // includes/actions
 $wgAutoloadClasses['Wikibase\HistoryEntityAction'] 		= $dir . 'includes/actions/HistoryEntityAction.php';
@@ -127,7 +127,6 @@ $wgAutoloadClasses['Wikibase\SubmitQueryAction'] 		= $dir . 'includes/actions/Ed
 
 // includes/api
 $wgAutoloadClasses['Wikibase\Api'] 						= $dir . 'includes/api/Api.php';
-$wgAutoloadClasses['Wikibase\ApiAutocomment'] 			= $dir . 'includes/api/ApiAutocomment.php';
 $wgAutoloadClasses['Wikibase\ApiEditEntity'] 			= $dir . 'includes/api/ApiEditEntity.php';
 $wgAutoloadClasses['Wikibase\ApiGetEntities'] 			= $dir . 'includes/api/ApiGetEntities.php';
 $wgAutoloadClasses['Wikibase\ApiLinkTitles'] 			= $dir . 'includes/api/ApiLinkTitles.php';
@@ -138,6 +137,7 @@ $wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAli
 $wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSetDescription.php';
 $wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabel.php';
 $wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
+$wgAutoloadClasses['Wikibase\ApiSummary'] 				= $dir . 'includes/api/ApiSummary.php';
 $wgAutoloadClasses['Wikibase\ApiCreateClaim'] 			= $dir . 'includes/api/ApiCreateClaim.php';
 $wgAutoloadClasses['Wikibase\ApiGetClaims'] 			= $dir . 'includes/api/ApiGetClaims.php';
 $wgAutoloadClasses['Wikibase\ApiRemoveClaims'] 			= $dir . 'includes/api/ApiRemoveClaims.php';
@@ -257,9 +257,9 @@ $wgHooks['ArticleUndelete'][]						= 'Wikibase\RepoHooks::onArticleUndelete';
 $wgHooks['LinkBegin'][] 							= 'Wikibase\RepoHooks::onLinkBegin';
 $wgHooks['OutputPageBodyAttributes'][] 				= 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
 //FIXME: handle other types of entities with autocomments too!
-$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_ITEM, "wikibase-item" ) );
-$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_PROPERTY, "wikibase-property" ) );
-$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_QUERY, "wikibase-query" ) );
+$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Summary::onFormat', array( CONTENT_MODEL_WIKIBASE_ITEM, "wikibase-item" ) );
+$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Summary::onFormat', array( CONTENT_MODEL_WIKIBASE_PROPERTY, "wikibase-property" ) );
+$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Summary::onFormat', array( CONTENT_MODEL_WIKIBASE_QUERY, "wikibase-query" ) );
 $wgHooks['PageHistoryLineEnding'][]					= 'Wikibase\RepoHooks::onPageHistoryLineEnding';
 $wgHooks['WikibaseRebuildData'][] 					= 'Wikibase\RepoHooks::onWikibaseRebuildData';
 $wgHooks['WikibaseDeleteData'][] 					= 'Wikibase\RepoHooks::onWikibaseDeleteData';

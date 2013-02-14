@@ -29,7 +29,7 @@ use ApiBase, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiCreateClaim extends Api implements ApiAutocomment {
+class ApiCreateClaim extends Api implements ApiSummary {
 
 	// TODO: automcomment
 	// TODO: rights
@@ -312,10 +312,10 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			'wbcreateclaim-' . $params['snaktype'],
 			array(
 				/*plural */ (int)isset( $params['value'] ) + (int)isset( $params['property'] )
@@ -324,11 +324,11 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'property', 'value' )
+		return Summary::formatAutoSummary(
+			Summary::pickValuesFromParams( $params, 'property', 'value' )
 		);
 	}
 
