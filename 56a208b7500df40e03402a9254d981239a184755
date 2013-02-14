@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DlXZuAZk",
+        "filename": "client/includes/SortUtils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-14T13:53:56Z",
+      "side": 1,
+      "message": "!empty( $sortPrepend ) \u0026\u0026 is_array( $sortPrepend ) ?  or else someone can put whatever in the settings (hopefully the correct thing) but otherwise might cause a problem here.",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DlcIU0E4",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -47,6 +64,57 @@
       "writtenOn": "2013-02-14T13:36:15Z",
       "side": 1,
       "message": "determins \u003d\u003e determines",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlRY0Xak",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-14T13:53:56Z",
+      "side": 1,
+      "message": "hah.  is there nothing better to use?",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DldY9tYw",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-14T13:53:56Z",
+      "side": 1,
+      "message": "deprecated",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlbZCKRE",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-14T13:53:56Z",
+      "side": 1,
+      "message": "it could be nasty to always load the site stuff to get this.  would seriously need to be cached in a smart way",
       "revId": "56a208b7500df40e03402a9254d981239a184755",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
