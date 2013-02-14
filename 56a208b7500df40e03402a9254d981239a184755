@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DlXb3IdM",
+        "filename": "client/includes/SortUtils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-14T14:03:38Z",
+      "side": 1,
+      "message": "we don\u0027t check the type of configuration values anywhere else either. the important bit here is to see whether it\u0027s empty.",
+      "parentUuid": "DlXZuAZk",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DlcIU0E4",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-02-14T13:36:15Z",
       "side": 1,
       "message": "confugured \u003d\u003e configured",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlVYEJcI",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-14T14:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DlcIU0E4",
       "revId": "56a208b7500df40e03402a9254d981239a184755",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DlTYBmbI",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-14T14:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DlaIZxIQ",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DlfaFUVw",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-02-14T13:36:15Z",
       "side": 1,
       "message": "determins \u003d\u003e determines",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlbbeqTk",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-14T14:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DlfaFUVw",
       "revId": "56a208b7500df40e03402a9254d981239a184755",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "DldbZNVU",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-14T14:03:38Z",
+      "side": 1,
+      "message": "i didn\u0027t want a grey monospaced block, so... nope :)",
+      "parentUuid": "DlRY0Xak",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DldY9tYw",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2013-02-14T13:53:56Z",
       "side": 1,
       "message": "deprecated",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlZYjrVk",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-14T14:03:38Z",
+      "side": 1,
+      "message": "still used, but i\u0027ll change the default to false.",
+      "parentUuid": "DldY9tYw",
       "revId": "56a208b7500df40e03402a9254d981239a184755",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "DlVYdRQo",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-14T14:03:38Z",
+      "side": 1,
+      "message": "yea. can figure that out later. it\u0027s certainly doable.",
+      "parentUuid": "DlbZCKRE",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DlZaV7Yg",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "DlRYvvUE",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-14T14:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DlZaV7Yg",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DldZ6VXQ",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -149,6 +293,24 @@
       "writtenOn": "2013-02-14T13:36:15Z",
       "side": 1,
       "message": "Possibel \u003d\u003e Possible",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlfYzEak",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-14T14:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DldZ6VXQ",
       "revId": "56a208b7500df40e03402a9254d981239a184755",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
