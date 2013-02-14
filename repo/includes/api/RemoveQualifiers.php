@@ -10,7 +10,7 @@ use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claim;
 use Wikibase\Settings;
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 
 /**
  * API module for removing qualifiers from a claim.
@@ -109,21 +109,21 @@ class RemoveQualifiers extends \Wikibase\ApiModifyClaim {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			$this->getModuleName(),
 			array( count( $params['qualifiers'] ) )
 		);
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'qualifiers' )
+		return Summary::formatAutoSummary(
+			Summary::pickValuesFromParams( $params, 'qualifiers' )
 		);
 	}
 

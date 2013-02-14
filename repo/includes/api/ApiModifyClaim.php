@@ -30,7 +30,7 @@ use ApiBase, MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class ApiModifyClaim extends Api implements ApiAutocomment {
+abstract class ApiModifyClaim extends Api implements ApiSummary {
 
 	/**
 	 * @since 0.4
@@ -45,7 +45,7 @@ abstract class ApiModifyClaim extends Api implements ApiAutocomment {
 		$params = $this->extractRequestParams();
 
 		if ( $summary === null ) {
-			$summary = Autocomment::buildApiSummary( $this, $params, $content );
+			$summary = Summary::buildApiSummary( $this, $params, $content );
 		}
 
 		$editEntity = $this->attemptSaveEntity( $content,

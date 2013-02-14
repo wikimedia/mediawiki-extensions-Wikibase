@@ -10,7 +10,7 @@ use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Statement;
 use Wikibase\Settings;
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 
 use Wikibase\Lib\Serializers\ClaimSerializer;
 
@@ -110,21 +110,21 @@ class SetStatementRank extends \Wikibase\ApiModifyClaim {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			$this->getModuleName(),
 			array( 1 )
 		);
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'statement' )
+		return Summary::formatAutoSummary(
+			Summary::pickValuesFromParams( $params, 'statement' )
 		);
 	}
 

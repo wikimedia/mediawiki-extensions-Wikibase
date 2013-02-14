@@ -10,7 +10,7 @@ use Wikibase\EntityContent;
 use Wikibase\Claim;
 use Wikibase\EntityId;
 use Wikibase\EntityContentFactory;
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 
 /**
  * API module for creating or updating an entire Claim.
@@ -124,21 +124,21 @@ class SetClaim extends \Wikibase\ApiModifyClaim {
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForComment()
+	 * @see  ApiSummary::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
+		return Summary::formatAutoComment(
 			$this->getModuleName(),
 			array( 1 )
 		);
 	}
 
 	/**
-	 * @see  ApiAutocomment::getTextForSummary()
+	 * @see  ApiSummary::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'claim' )
+		return Summary::formatAutoSummary(
+			Summary::pickValuesFromParams( $params, 'claim' )
 		);
 	}
 
