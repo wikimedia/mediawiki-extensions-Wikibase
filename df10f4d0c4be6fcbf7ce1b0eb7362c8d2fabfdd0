@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DlZYmDdA",
+        "filename": "lib/includes/ClaimDiffView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-14T17:21:19Z",
+      "side": 1,
+      "message": "IDiff is deprecated. Just use Diff\n\nY U NO USE DECENT IDE? ;p",
+      "revId": "df10f4d0c4be6fcbf7ce1b0eb7362c8d2fabfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlbZA6Vo",
+        "filename": "lib/includes/ClaimDiffView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-14T17:21:19Z",
+      "side": 1,
+      "message": "There is no int type hint. This will fatal :)\n\nY U NO USE DECENT IDE? ;p",
+      "revId": "df10f4d0c4be6fcbf7ce1b0eb7362c8d2fabfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlbYZCYU",
+        "filename": "lib/includes/ClaimDiffer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-14T17:21:19Z",
+      "side": 1,
+      "message": "Not sure why you are using toArray here. Why not just get the parts of the claim you want to compare in some way?\n\nfor instance\n\nif ( $oldClaim-\u003egetRank() !\u003d\u003d $newClaim-\u003egetRank() ) {\n    $difference[\u0027rank\u0027] \u003d new DiffOpChange( $oldClaim-\u003egetRank(), $newClaim-\u003egetRank() );\n}",
+      "revId": "df10f4d0c4be6fcbf7ce1b0eb7362c8d2fabfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlZYPLTg",
+        "filename": "lib/includes/ClaimDiffer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-14T17:21:19Z",
+      "side": 1,
+      "message": "Returning which keys in the toArray structure are different is somewhat odd - you have a ClaimDifference class which would contain this stuff I would think",
+      "revId": "df10f4d0c4be6fcbf7ce1b0eb7362c8d2fabfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlRYbPYA",
+        "filename": "lib/includes/ClaimDiffer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-14T17:21:19Z",
+      "side": 1,
+      "message": "Why is this a field? Can just be a var in this method no?",
+      "revId": "df10f4d0c4be6fcbf7ce1b0eb7362c8d2fabfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlTYtGak",
+        "filename": "lib/includes/ClaimDiffer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-14T17:21:19Z",
+      "side": 1,
+      "message": "throw new MWException( \u0027diffop unknown\u0027 );",
+      "revId": "df10f4d0c4be6fcbf7ce1b0eb7362c8d2fabfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlXYMwUI",
+        "filename": "lib/includes/ClaimDifference.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-14T17:21:19Z",
+      "side": 1,
+      "message": "what is this type thing about?",
+      "revId": "df10f4d0c4be6fcbf7ce1b0eb7362c8d2fabfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DldkF5hM",
+        "filename": "lib/includes/entity/EntityDiffView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-14T17:21:19Z",
+      "side": 1,
+      "message": "Not sure why this is static. Why not use non-static fields that get set in the constructor? Seems way less evil.",
+      "revId": "df10f4d0c4be6fcbf7ce1b0eb7362c8d2fabfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
