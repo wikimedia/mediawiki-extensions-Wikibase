@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "DlbmmmhA",
+        "filename": "client/includes/SortUtils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-14T17:42:51Z",
+      "side": 1,
+      "message": "We have several settings in Wikibase and dozens in core that take an array as a value. I don\u0027t think many of them protect against being set to a string or a boolean. Much less are options that are supposed to be strings checked.\n\nThe Settings class could implement some check like this, perhaps based on the type of the default value or something. But this is not the time and place for that. If the \u0027sortPrepend\u0027 option is set, it\u0027s expected to be an array, that\u0027s it. This is the same as for the \u0027entityPrefixes\u0027 setting, or for $wgNamespaceAliases.",
+      "parentUuid": "DlTbZmR8",
+      "revId": "56a208b7500df40e03402a9254d981239a184755",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DlcIU0E4",
         "filename": "docs/options.wiki",
         "patchSetId": 1
