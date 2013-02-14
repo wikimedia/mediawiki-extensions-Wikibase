@@ -50,29 +50,24 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
+		# 10 seconds server-side caching max
+		$this->getOutput()->setSquidMaxage( 10 );
+
 		// Setup
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 		$siteId = $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' );
 		$page = $request->getVal( 'page', isset( $parts[1] ) ? $parts[1] : '' );
 
-		$pageTitle = '';
 		$itemContent = null;
 
 		if ( !empty( $page ) ) {
-			$title = \Title::newFromText( $page );
-
-			if ( $title !== null ) {
-				$pageTitle = $title->getFullText();
-			} else {
-				// TODO: throw error, page title contains invalid chars
-				$pageTitle = '';
-			}
+			$sitelink = \Wikibase\SiteLink::newFromText( $siteId, $page, \Wikibase\Settings::get( 'normalizePageNames' ) );
 
 			// Create an item view
-			if ( isset( $siteId ) && isset( $pageTitle ) ) {
+			if ( isset( $siteId ) && isset( $page ) ) {
 				$itemHandler = new \Wikibase\ItemHandler();
-				$itemContent = $itemHandler->getFromSiteLink( $siteId, $pageTitle );
+				$itemContent = $itemHandler->getFromSiteLink( $siteId, $sitelink->getPage() );
 
 				if ( $itemContent !== null ) {
 					$itemUrl = $itemContent->getTitle()->getFullUrl();
@@ -83,7 +78,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 
 		// If there is no item content post the switch form
 		if ( $itemContent === null ) {
-			$this->switchForm( $siteId, $pageTitle );
+			$this->switchForm( $siteId, $page );
 		}
 	}
 

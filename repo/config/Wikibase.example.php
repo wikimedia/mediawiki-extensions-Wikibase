@@ -67,13 +67,16 @@ $wgWBRepoSettings['apiWithTokens'] = true;
 
 $wgGroupPermissions['wbeditor']['item-set'] = true;
 
+$wgWBRepoSettings['normalizePageNames'] = true;
+
+
 if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	define( 'WB_NS_QUERY', $baseNs + 4 );
 	define( 'WB_NS_QUERY_TALK', $baseNs + 5 );
 
 	$wgExtraNamespaces[WB_NS_QUERY] = 'Query';
 	$wgExtraNamespaces[WB_NS_QUERY_TALK] = 'Query_talk';
-	
+
 	$wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY;
 }
 
