@@ -13,6 +13,10 @@
 .wb-ui-toolbar, .wb-ui-toolbar-group {
 	display: inline-block;
 	white-space: nowrap;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .wb-ui-toolbar-label,
