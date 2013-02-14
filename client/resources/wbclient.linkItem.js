@@ -78,7 +78,7 @@
 			.append(
 				$( '<p>' )
 					.addClass( 'wbclient-linkItem-not-loggedin-message' )
-					.html( mw.msg( 'wikibase-linkitem-not-loggedin', userLogin ) )
+					.html( mw.message( 'wikibase-linkitem-not-loggedin', userLogin ).parse() )
 			);
 	}
 
@@ -565,7 +565,8 @@
 			.append(
 				$( '<p>' )
 					.addClass( 'wbclient-linkItem-success-message' )
-					.html( mw.msg( 'wikibase-linkitem-success-' + type, itemUri ) )
+					// Messages: wikibase-linkitem-success-create wikibase-linkitem-success-link
+					.html( mw.message( 'wikibase-linkitem-success-' + type, itemUri ).parse() )
 			)
 			.append(
 				$( '<p>' )
