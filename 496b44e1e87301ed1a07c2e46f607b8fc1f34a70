@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DldmhZvw",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-14T17:44:03Z",
+      "side": 1,
+      "message": "It will break pretty often if we don\u0027t do normalization.\n\nNormalization is turned OFF in default and back ON in example settings.",
+      "parentUuid": "DlRaWne8",
+      "revId": "496b44e1e87301ed1a07c2e46f607b8fc1f34a70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DlXb.ATc",
         "filename": "repo/includes/specials/SpecialItemByTitle.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-02-14T16:35:50Z",
       "side": 1,
       "message": "ugly :o",
+      "revId": "496b44e1e87301ed1a07c2e46f607b8fc1f34a70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlVm2lj4",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-14T17:44:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DlXb.ATc",
       "revId": "496b44e1e87301ed1a07c2e46f607b8fc1f34a70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
