@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dl0toBbs",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-15T17:36:00Z",
+      "side": 1,
+      "message": "oops",
+      "parentUuid": "DlwtJ3WA",
+      "revId": "d0aceffb5b1c6ea87b05f09cbabb6e52d562fec5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dlyszefc",
         "filename": "lib/includes/changes/DiffChange.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2013-02-15T17:24:39Z",
       "side": 1,
       "message": "we need a switch here, with the setting.\n\nthe client in wmf9 expects an object in the ItemChange class and perhaps elsewhere",
+      "revId": "d0aceffb5b1c6ea87b05f09cbabb6e52d562fec5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl2trwbk",
+        "filename": "lib/includes/changes/DiffChange.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-15T17:36:00Z",
+      "side": 1,
+      "message": "The switch is in ChangeRow::serializeInfo (called below), since it applies for the entire $info array, not just the diff.",
+      "parentUuid": "Dlyszefc",
       "revId": "d0aceffb5b1c6ea87b05f09cbabb6e52d562fec5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
