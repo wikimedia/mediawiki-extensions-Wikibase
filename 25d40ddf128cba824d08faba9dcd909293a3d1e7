@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DlSXTmWE",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-02-15T08:31:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DlcV-NWI",
+      "revId": "25d40ddf128cba824d08faba9dcd909293a3d1e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DlaWVSYg",
         "filename": "repo/includes/api/ApiSetClaimValue.php",
         "patchSetId": 4
