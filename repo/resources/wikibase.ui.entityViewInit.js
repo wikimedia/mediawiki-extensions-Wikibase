@@ -168,7 +168,7 @@
 			// add copyright warning to 'save' button if there is one:
 			if( mw.config.exists( 'wbCopyrightWarning' ) ) {
 
-				var $message = $( '<span>' + mw.config.get( 'wbCopyrightWarning' ) + '</span>' ),
+				var $message = $( '<span><p>' + mw.config.get( 'wbCopyrightWarning' ) + '</p></span>' ),
 					messageText = $.trim( $message.text() ); // get this before adding $hideMessage link!
 
 				if( messageText === $.cookie( 'wikibase.acknowledgedentitycopyright' ) ) {
@@ -187,6 +187,7 @@
 
 				var toolbar = $activeToolbar.data( 'wb-toolbar' ),
 					$hideMessage = $( '<a/>', {
+						href: 'javascript:void(0);',
 						text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
 					} ).appendTo( $message );
 
@@ -208,7 +209,7 @@
 
 				$hideMessage.on( 'click', function() {
 					messageAnchor.removeTooltip();
-					$.trim( $.cookie( 'wikibase.acknowledgedentitycopyright', messageText, { 'expires': null, 'path': '/' } ) );
+					$.cookie( 'wikibase.acknowledgedentitycopyright', messageText, { 'expires': null, 'path': '/' } );
 				} );
 
 				tooltip.show( true ); // show permanently, not just on hover!
