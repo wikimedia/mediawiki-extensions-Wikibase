@@ -32,8 +32,20 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, M
  * @author Nikola Smolenski
  * @author Daniel Werner
  * @author Michał Łazowik
+ * @author Jens Ohlig
  */
 final class RepoHooks {
+	/**
+	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
+	 *
+	 * @since 0.4
+	 *
+	 * @return boolean
+	 */
+	public static function onBeforePageDisplay( \OutputPage &$out, \Skin &$skin ) {
+		$out->addModules( 'wikibase.ui.entitysearch' );
+		return true;
+	}
 
 	/**
 	 * Handler for the SetupAfterCache hook, completing setup of
@@ -961,4 +973,5 @@ final class RepoHooks {
 
 		return false;
 	}
+
 }
