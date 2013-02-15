@@ -34,6 +34,10 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, M
  * @author Michał Łazowik
  */
 final class RepoHooks {
+    public static function onBeforePageDisplay( \OutputPage &$out, \Skin &$skin ) {
+        $out->addModules( 'wikibase.ui.entityselector' );
+        return true;
+    }
 
 	/**
 	 * Handler for the SetupAfterCache hook, completing setup of
@@ -961,4 +965,5 @@ final class RepoHooks {
 
 		return false;
 	}
+
 }

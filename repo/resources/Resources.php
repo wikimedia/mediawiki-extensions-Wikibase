@@ -39,7 +39,7 @@ return call_user_func( function() {
 	return array(
 		'wikibase.ui.entityViewInit' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.ui.entityViewInit.js' // should probably be adjusted for more modularity
+                'wikibase.ui.entityViewInit.js',
 			),
 			'dependencies' => array(
 				'mediawiki.user',
@@ -53,7 +53,15 @@ return call_user_func( function() {
 				'wikibase-sitelinks',
 				'wikibase-statements',
 				'wikibase-copyrighttooltip-acknowledge',
-			)
+            ),
+		),
+		'wikibase.ui.entityselector' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.ui.entityselector.js'
+			),
+			'dependencies' => array(
+				'jquery.ui.entityselector',
+			),
 		),
 
 		/* Wikibase special pages */
