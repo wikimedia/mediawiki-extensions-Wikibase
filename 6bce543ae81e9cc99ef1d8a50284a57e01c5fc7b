@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DlYDhGwI",
+        "filename": "lib/includes/ClaimDiffView.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-02-15T14:47:29Z",
+      "side": 1,
+      "message": "I changed this and made all methods private where it was possible. The methods for generating the HTML for the diff header are called from outside (from EntityDiffView), so they remain public.",
+      "parentUuid": "DlQAL69g",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DlSAG59E",
         "filename": "lib/includes/ClaimDiffView.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2013-02-15T14:00:52Z",
       "side": 1,
       "message": "This code seems to assume only a single part of the claim changed",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlaDkFxE",
+        "filename": "lib/includes/ClaimDiffView.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-02-15T14:47:29Z",
+      "side": 1,
+      "message": "I\u0027ve put a TODO in here since we are currently only showing atomic changes in the diff view. this can be extended later.",
+      "parentUuid": "DlSAG59E",
       "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DlWDuL-A",
+        "filename": "lib/includes/ClaimDiffer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-02-15T14:47:29Z",
+      "side": 1,
+      "message": "I\u0027ve put a TODO in here since we are currently only showing atomic changes in the diff view. this can be extended later.",
+      "parentUuid": "DlUAB87A",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DlSAvB0I",
         "filename": "lib/includes/ClaimDiffer.php",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2013-02-15T14:00:52Z",
       "side": 1,
       "message": "Huh... Reference lists are lists... And you are using a listDiffer... so I\u0027d expect to get a Diff (ie array of DiffOp) rather then a single atomic DiffOp.",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlQC.S9E",
+        "filename": "lib/includes/ClaimDiffer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-02-15T14:47:29Z",
+      "side": 1,
+      "message": "Added a TODO here. For now we are just handling atomic changes of references in the diff view.",
+      "parentUuid": "DlSAvB0I",
       "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "DlWDHT2g",
+        "filename": "lib/includes/ClaimDifference.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-02-15T14:47:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DlQA0C5A",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DleAo3zc",
         "filename": "lib/includes/entity/EntityDiffView.php",
         "patchSetId": 11
@@ -98,6 +188,24 @@
       "writtenOn": "2013-02-15T14:00:52Z",
       "side": 1,
       "message": "please do get rid of the staticness here. Very odd, and very likely to confuse the *** out of people.\n\nThink about what happens when you construct an EntityDiffView with some claim differ and then construct another one with a distinct claim differ. Then you call getHtml on both. What happens?",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlQCna8E",
+        "filename": "lib/includes/entity/EntityDiffView.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-02-15T14:47:29Z",
+      "side": 1,
+      "message": "This is constructed statically (see further down) and this is nothing I introduced. Should I add these fields to the parent class? I\u0027m a bit confused, sorry.",
+      "parentUuid": "DleAo3zc",
       "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
