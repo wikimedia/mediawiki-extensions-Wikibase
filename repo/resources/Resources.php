@@ -56,6 +56,15 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.ui.entitysearch' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.ui.entitysearch.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.entityselector',
+			),
+		),
+
 		/* Wikibase special pages */
 
 		'wikibase.special' => $moduleTemplate + array(
