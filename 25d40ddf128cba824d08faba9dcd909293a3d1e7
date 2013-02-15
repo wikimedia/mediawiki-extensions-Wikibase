@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DlcV-NWI",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-15T08:21:03Z",
+      "side": 1,
+      "message": "Its not necessary to set this as a member if it is only used here, but it is according to what we do in other modules. There we need to access this flag from other subclasses.\n\nI think some of the other devs would prefer it to be a local var in this method if possible.",
+      "revId": "25d40ddf128cba824d08faba9dcd909293a3d1e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlaWVSYg",
+        "filename": "repo/includes/api/ApiSetClaimValue.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-15T08:21:03Z",
+      "side": 1,
+      "message": "See comment for ApiCreateClaim.php",
+      "revId": "25d40ddf128cba824d08faba9dcd909293a3d1e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
