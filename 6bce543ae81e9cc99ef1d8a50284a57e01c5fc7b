@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DlQAL69g",
+        "filename": "lib/includes/ClaimDiffView.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-15T14:00:52Z",
+      "side": 1,
+      "message": "All methods except one are public - not intentional I suppose?",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlSAG59E",
+        "filename": "lib/includes/ClaimDiffView.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-15T14:00:52Z",
+      "side": 1,
+      "message": "This code seems to assume only a single part of the claim changed",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlUAB87A",
+        "filename": "lib/includes/ClaimDiffer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-15T14:00:52Z",
+      "side": 1,
+      "message": "This is also assuming only one part bchanged",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlSAvB0I",
+        "filename": "lib/includes/ClaimDiffer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-15T14:00:52Z",
+      "side": 1,
+      "message": "Huh... Reference lists are lists... And you are using a listDiffer... so I\u0027d expect to get a Diff (ie array of DiffOp) rather then a single atomic DiffOp.",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlQA0C5A",
+        "filename": "lib/includes/ClaimDifference.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-15T14:00:52Z",
+      "side": 1,
+      "message": "Why not require all info in the constructor and get rid of the setters? Then you have a nice immutable object.",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DleAo3zc",
+        "filename": "lib/includes/entity/EntityDiffView.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-15T14:00:52Z",
+      "side": 1,
+      "message": "please do get rid of the staticness here. Very odd, and very likely to confuse the *** out of people.\n\nThink about what happens when you construct an EntityDiffView with some claim differ and then construct another one with a distinct claim differ. Then you call getHtml on both. What happens?",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
