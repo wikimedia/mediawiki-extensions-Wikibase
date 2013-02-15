@@ -694,6 +694,8 @@ abstract class EntityView extends \ContextSource {
 	public function registerJsConfigVars( OutputPage $out, EntityContent $entityContent, $langCode, $editableView = false  ) {
 		wfProfileIn( __METHOD__ );
 
+		global $wgRightsUrl, $wgRightsText;
+
 		$parser = new \Parser();
 		$user = $this->getUser();
 		$entity = $entityContent->getEntity();
@@ -712,14 +714,14 @@ abstract class EntityView extends \ContextSource {
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $entity->getPrefixedId() );
 
+		$rightsWarning = $this->msg( 'wikibase-shortcopyrightwarning',
+			$this->msg( 'wikibase-save' )->inContentLanguage()->text(),
+			$this->msg( 'copyrightpage' )->inContentLanguage()->text(),
+			"[$wgRightsUrl $wgRightsText]"
+		)->parse();
+
 		// copyright warning message
-		$out->addJsConfigVars( 'wbCopyrightWarning',
-			$parser->parse( // copyright warning will be wikitext, we need HTML!
-				\EditPage::getCopyrightWarning( $title ),
-				$title,
-				new ParserOptions()
-			)->getText()
-		);
+		$out->addJsConfigVars( 'wbCopyrightWarning', $rightsWarning );
 
 		$serializationOptions = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
 		$serializationOptions->addProp( 'sitelinks' );
