@@ -144,13 +144,12 @@ class ChangeHandler {
 		$latestRevId = $firstmeta['rev_id'];
 
 		$entity = $this->entityLookup->getEntity( $entityId, $latestRevId );
-		$parent = $parentRevId ? $this->entityLookup->getEntity( $entityId, $parentRevId ) : null;
-
-		$entity = null;
 
 		if ( !$entity ) {
 			throw new \MWException( "Failed to load revision $latestRevId of $entityId" );
 		}
+
+		$parent = $parentRevId ? $this->entityLookup->getEntity( $entityId, $parentRevId ) : null;
 
 		//XXX: we could avoid loading the entity data by merging the diffs programatically
 		//     instead of re-calculating.

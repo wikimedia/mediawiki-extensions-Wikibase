@@ -300,6 +300,25 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			)
 		));
 
+		$change0 = self::makeChange( array(
+			'id' => 1,
+			'type' => 'wikibase-item~add',
+			'time' => '20130101010101',
+			'object_id' => $entity1,
+			'revision_id' => 0xdeadbeef, // invalid
+			'user_id' => 1,
+			'info' => array(
+				'metadata' => array (
+					'user_text' => 'User1',
+					'bot' => 0,
+					'page_id' => 1,
+					'rev_id' => 0xdeadbeef, // invalid
+					'parent_id' => 0,
+					'comment' => 'wikibase-comment-add',
+				),
+			)
+		));
+
 		$changeMerged = self::makeChange( array(
 			'id' => null,
 			'type' => 'wikibase-item~add', // because the first change has no parent
@@ -334,19 +353,37 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				array( $change1, $change2, $change3 ), // $changes
 				$changeMerged, // $expected
 			),
+
+			array( // #3: bad
+				array( $change0, $change2, $change3 ), // $changes
+				null, // $expected
+				'MWException', // $error
+			),
 		);
 	}
 
 	/**
 	 * @dataProvider provideMergeChanges
 	 */
-	public function testMergeChanges( $changes, $expected ) {
-		$merged = $this->handler->mergeChanges( $changes );
+	public function testMergeChanges( $changes, $expected, $error = null ) {
+		try {
+			$merged = $this->handler->mergeChanges( $changes );
 
-		if ( !$expected ) {
-			$this->assertEquals( $expected, $merged );
-		} else {
-			$this->assertChangeEquals( $expected, $merged );
+			if ( $error ) {
+				$this->fail( "error expected: $error" );
+			}
+
+			if ( !$expected ) {
+				$this->assertEquals( $expected, $merged );
+			} else {
+				$this->assertChangeEquals( $expected, $merged );
+			}
+		} catch ( \MWException $ex ) {
+			if ( !$error ) {
+				throw $ex;
+			}
+
+			$this->assertInstanceOf( $error, $ex, "expected error" );
 		}
 	}
 
