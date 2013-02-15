@@ -961,4 +961,9 @@ final class RepoHooks {
 
 		return false;
 	}
+    public static function onBeforePageDisplay( \OutputPage &$out, \Skin &$skin ) {
+        $out->addModules( 'wikibase.ui.entityselector' );
+        return true;
+    }
+
 }
