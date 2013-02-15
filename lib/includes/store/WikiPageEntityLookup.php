@@ -49,11 +49,6 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	protected $cacheKeyPrefix;
 
 	/**
-	 * @var int $cacheTimeout
-	 */
-	protected $cacheTimeout = 3600;
-
-	/**
 	 * @param String|bool $wiki           The name of thw wiki database to use, in a form
 	 *                                    that wfGetLB() understands. Use false to indicate the local wiki.
 	 * @param bool        $cacheType      The cache type ID for the cache to use for
@@ -218,10 +213,10 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 
 			if ( $cachedRev !== false ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Updating cached version of " . $entityId->getPrefixedId() );
-				$cache->replace( $cacheKey, array( $row->rev_id, $entity ), $this->cacheTimeout );
+				$cache->replace( $cacheKey, array( $row->rev_id, $entity ) );
 			} else {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Adding cached version of " . $entityId->getPrefixedId() );
-				$cache->add( $cacheKey, array( $row->rev_id, $entity ), $this->cacheTimeout );
+				$cache->add( $cacheKey, array( $row->rev_id, $entity ) );
 			}
 		} else if ( $cachedRev !== false ) {
 			// no longer the latest version
