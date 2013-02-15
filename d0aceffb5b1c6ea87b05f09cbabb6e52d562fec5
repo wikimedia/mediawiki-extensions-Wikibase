@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DlwtJ3WA",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-15T17:24:39Z",
+      "side": 1,
+      "message": "this fails, as there is no such test",
+      "revId": "d0aceffb5b1c6ea87b05f09cbabb6e52d562fec5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dlyszefc",
+        "filename": "lib/includes/changes/DiffChange.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-15T17:24:39Z",
+      "side": 1,
+      "message": "we need a switch here, with the setting.\n\nthe client in wmf9 expects an object in the ItemChange class and perhaps elsewhere",
+      "revId": "d0aceffb5b1c6ea87b05f09cbabb6e52d562fec5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlQCb6xY",
+        "filename": "lib/includes/changes/DiffChange.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-15T17:24:39Z",
+      "side": 1,
+      "message": "can ignore this for now but prefer this be in a separate class file.",
+      "revId": "d0aceffb5b1c6ea87b05f09cbabb6e52d562fec5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
