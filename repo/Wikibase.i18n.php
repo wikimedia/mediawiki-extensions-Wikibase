@@ -82,7 +82,8 @@ $messages['en'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'custom value',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'unknown value',
 	'wikibase-snakview-snaktypeselector-novalue' => 'no value',
-	'wikibase-copyrighttooltip-acknowledge' => 'I acknowledge and do not want to see this message again.',
+	'wikibase-copyrighttooltip-acknowledge' => 'I accept these terms for my future edits. Do not show this message again.',
+	'wikibase-shortcopyrightwarning' => 'By clicking "$1", you agree to the [[$2|terms of use]], and you irrevocably agree to release your contribution under the $3.',
 
 	'wikibase-entityselector-more' => 'more',
 
@@ -420,6 +421,11 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-ui-pendingquantityc
 	'wikibase-snakview-snaktypeselector-somevalue' => "Short descriptive title of a some-value snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that a value exists but it is unknown.",
 	'wikibase-snakview-snaktypeselector-novalue' => "A short descriptive title of a no-value snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that no value exists.",
 	'wikibase-copyrighttooltip-acknowledge' => 'Label of the link to not show the copyright warning again. A copyright warning is presented to the user whenever the user is about to alter any data unless the warning is not suppressed permanently by clicking this link.',
+	'wikibase-shortcopyrightwarning' => 'A short copyright warning displayed during editing in the JavaScript UI. The copyright warning is displayed within a tooltip next to the save button. Paramerters:
+* $1: the name of the button the message is referring to. Usually "save".
+* $2: the name of the wiki\'s page describing the terms of use.
+* $3: an external link to the licence with the licene\'s name as link text.
+',
 	'wikibase-entityselector-more' => 'The entity selector is a user interface widget that allows selecting an entity (see [[d:Wikidata/Glossary]]). It consists out of an input field and a list of suggestions that is filled according to the text typed into the input field. Initially, the list of suggestions is filled with a certain number of suggestions. Clicking the link labeled with this message will fill the list of suggestions with additional suggestions. If there are no additional suggestions or no suggestions at all, the link does not show up.
 {{Identical|More}}',
 	'wikibase-anonymouseditwarning-item' => 'Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on an item (see [[d:Wikidata/Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in.
