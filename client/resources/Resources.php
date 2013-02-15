@@ -53,6 +53,7 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'wikibase-linkitem-addlinks',
+				'wikibase-linkitem-alreadylinked',
 				'wikibase-linkitem-title',
 				'wikibase-linkitem-linkpage',
 				'wikibase-linkitem-selectlink',
