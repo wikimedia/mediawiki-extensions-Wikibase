@@ -148,13 +148,17 @@ class RemoveReferences extends \Wikibase\Api {
 	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();
 
+		$user = $this->getUser();
+		$flags = 0;
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+		$flags |= EDIT_UPDATE;
+		$editEntity = new EditEntity( $content, $user, $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: automcomment
-			EDIT_UPDATE,
+			$flags,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);
 
@@ -195,6 +199,7 @@ class RemoveReferences extends \Wikibase\Api {
 			'baserevid' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
+			'bot' => null,
 		);
 	}
 
@@ -212,6 +217,9 @@ class RemoveReferences extends \Wikibase\Api {
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
+			),
+			'bot' => array( 'Mark this edit as bot',
+				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),
 		);
 	}
