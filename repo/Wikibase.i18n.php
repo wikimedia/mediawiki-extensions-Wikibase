@@ -933,7 +933,7 @@ $messages['be'] = array(
  */
 $messages['be-tarask'] = array(
 	'wikibase-desc' => 'Сховішча структураваных зьвестак',
-	'specialpages-group-wikibaserepo' => 'Рэпазыторый Вікізьвестак',
+	'specialpages-group-wikibaserepo' => 'Рэпазыторый Вікізьвестак', # Fuzzy
 	'wikibase-edit' => 'рэдагаваць',
 	'wikibase-save' => 'захаваць',
 	'wikibase-cancel' => 'скасаваць',
@@ -1489,7 +1489,7 @@ $messages['da'] = array(
  */
 $messages['de'] = array(
 	'wikibase-desc' => 'Ermöglicht ein Repositorium strukturierter Daten',
-	'specialpages-group-wikibaserepo' => 'Wikidata-Repositorium',
+	'specialpages-group-wikibaserepo' => 'Wikibase-Repositorium',
 	'wikibase-edit' => 'bearbeiten',
 	'wikibase-save' => 'speichern',
 	'wikibase-cancel' => 'abbrechen',
@@ -1547,6 +1547,7 @@ $messages['de'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'Benutzerdefinierter Wert',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'Unbekannter Wert',
 	'wikibase-snakview-snaktypeselector-novalue' => 'Kein Wert',
+	'wikibase-copyrighttooltip-acknowledge' => 'Zustimmen und diese Nachricht nicht mehr anzeigen.', # Fuzzy
 	'wikibase-entityselector-more' => 'mehr',
 	'wikibase-anonymouseditwarning-item' => 'Hinweis: Du bist nicht angemeldet.
 Es wird deine IP-Adresse in der Versionsgeschichte dieses Elements aufgezeichnet.',
@@ -1769,7 +1770,7 @@ $messages['diq'] = array(
  */
 $messages['dsb'] = array(
 	'wikibase-desc' => 'Repozitorium strukturěrowanych datow',
-	'specialpages-group-wikibaserepo' => 'Repozitorium Wikidata',
+	'specialpages-group-wikibaserepo' => 'Repozitorium Wikidata', # Fuzzy
 	'wikibase-edit' => 'wobźěłaś',
 	'wikibase-save' => 'składowaś',
 	'wikibase-cancel' => 'pśetergnuś',
@@ -2300,7 +2301,7 @@ $messages['eu'] = array(
  */
 $messages['fa'] = array(
 	'wikibase-desc' => 'مخزن داده‌های ساخت‌یافته',
-	'specialpages-group-wikibaserepo' => 'مخزن ویکی‌داده',
+	'specialpages-group-wikibaserepo' => 'مخزن ویکی‌داده', # Fuzzy
 	'wikibase-edit' => 'ویرایش',
 	'wikibase-save' => 'ذخیره',
 	'wikibase-cancel' => 'لغو',
@@ -2513,7 +2514,7 @@ $messages['fa'] = array(
  */
 $messages['fi'] = array(
 	'wikibase-desc' => 'Säilö jäsennetylle datalle',
-	'specialpages-group-wikibaserepo' => 'Wikidata-säilö',
+	'specialpages-group-wikibaserepo' => 'Wikibase-säilö',
 	'wikibase-edit' => 'muokkaa',
 	'wikibase-save' => 'tallenna',
 	'wikibase-cancel' => 'peru',
@@ -2727,7 +2728,7 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
  */
 $messages['fr'] = array(
 	'wikibase-desc' => 'Référentiel de données structurées',
-	'specialpages-group-wikibaserepo' => 'Référentiel Wikidata',
+	'specialpages-group-wikibaserepo' => 'Référentiel Wikidata', # Fuzzy
 	'wikibase-edit' => 'modifier',
 	'wikibase-save' => 'enregistrer',
 	'wikibase-cancel' => 'annuler',
@@ -2785,6 +2786,7 @@ $messages['fr'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'valeur personnalisée',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valeur inconnue',
 	'wikibase-snakview-snaktypeselector-novalue' => 'aucune valeur',
+	'wikibase-copyrighttooltip-acknowledge' => 'J’acquitte ce message et ne veut plus le voir de nouveau.', # Fuzzy
 	'wikibase-entityselector-more' => 'plus',
 	'wikibase-anonymouseditwarning-item' => 'Attention : Vous n’êtes pas connecté.
 Votre adresse IP sera enregistrée dans l’historique des modifications de cet élément.',
@@ -3099,7 +3101,7 @@ $messages['ga'] = array(
  */
 $messages['gl'] = array(
 	'wikibase-desc' => 'Repositorio de datos estruturados',
-	'specialpages-group-wikibaserepo' => 'Repositorio de Wikidata',
+	'specialpages-group-wikibaserepo' => 'Repositorio de Wikibase',
 	'wikibase-edit' => 'editar',
 	'wikibase-save' => 'gardar',
 	'wikibase-cancel' => 'cancelar',
@@ -3156,6 +3158,7 @@ $messages['gl'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'valor personalizado',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valor descoñecido',
 	'wikibase-snakview-snaktypeselector-novalue' => 'sen valor',
+	'wikibase-copyrighttooltip-acknowledge' => 'Comprendo o aviso. Non quero ver a mensaxe de novo.', # Fuzzy
 	'wikibase-entityselector-more' => 'máis',
 	'wikibase-anonymouseditwarning-item' => 'Aviso: Non accedeu ao sistema.
 O seu enderezo IP quedará rexistrado no historial de revisións deste elemento.',
@@ -3344,7 +3347,7 @@ $messages['gu'] = array(
  */
 $messages['he'] = array(
 	'wikibase-desc' => 'מאגר נתונים מובנה',
-	'specialpages-group-wikibaserepo' => 'מאגר ויקינתונים',
+	'specialpages-group-wikibaserepo' => 'מאגר ויקינתונים', # Fuzzy
 	'wikibase-edit' => 'עריכה',
 	'wikibase-save' => 'שמירה',
 	'wikibase-cancel' => 'ביטול',
@@ -3559,7 +3562,7 @@ $messages['hr'] = array(
  */
 $messages['hsb'] = array(
 	'wikibase-desc' => 'Repozitorij strukturowanych datow',
-	'specialpages-group-wikibaserepo' => 'Repozitorij Wikidata',
+	'specialpages-group-wikibaserepo' => 'Repozitorij Wikidata', # Fuzzy
 	'wikibase-edit' => 'wobdźěłać',
 	'wikibase-save' => 'składować',
 	'wikibase-cancel' => 'přetorhnyć',
@@ -4013,7 +4016,7 @@ $messages['id'] = array(
  */
 $messages['ilo'] = array(
 	'wikibase-desc' => 'Nabalabala a pagidulinan ti datos',
-	'specialpages-group-wikibaserepo' => 'Repositorio ti Wikidata',
+	'specialpages-group-wikibaserepo' => 'Repositorio ti Wikidata', # Fuzzy
 	'wikibase-edit' => 'urnosen',
 	'wikibase-save' => 'idulin',
 	'wikibase-cancel' => 'ukasen',
@@ -4438,7 +4441,7 @@ alla hluti.',
  */
 $messages['it'] = array(
 	'wikibase-desc' => 'Archivio di dati strutturati',
-	'specialpages-group-wikibaserepo' => 'Archivio Wikidata',
+	'specialpages-group-wikibaserepo' => 'Archivio Wikidata', # Fuzzy
 	'wikibase-edit' => 'modifica',
 	'wikibase-save' => 'salva',
 	'wikibase-cancel' => 'annulla',
@@ -4493,6 +4496,7 @@ $messages['it'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'valore personalizzato',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valore sconosciuto',
 	'wikibase-snakview-snaktypeselector-novalue' => 'nessun valore',
+	'wikibase-entityselector-more' => 'altro',
 	'wikibase-anonymouseditwarning-item' => "Attenzione: Accesso non effettuato.
 Nella cronologia dell'elemento verrà registrato il tuo indirizzo IP.",
 	'wikibase-anonymouseditwarning-property' => 'Attenzione: Accesso non effettuato.
@@ -4648,7 +4652,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
  */
 $messages['ja'] = array(
 	'wikibase-desc' => '構造化されたデータリポジトリ',
-	'specialpages-group-wikibaserepo' => 'ウィキデータ リポジトリ',
+	'specialpages-group-wikibaserepo' => 'ウィキデータ リポジトリ', # Fuzzy
 	'wikibase-edit' => '編集',
 	'wikibase-save' => '保存',
 	'wikibase-cancel' => 'キャンセル',
@@ -4933,7 +4937,7 @@ $messages['ka'] = array(
  */
 $messages['ko'] = array(
 	'wikibase-desc' => '구조화한 데이터 저장소',
-	'specialpages-group-wikibaserepo' => '위키데이터 저장소',
+	'specialpages-group-wikibaserepo' => '위키데이터 저장소', # Fuzzy
 	'wikibase-edit' => '편집',
 	'wikibase-save' => '저장',
 	'wikibase-cancel' => '취소',
@@ -5268,7 +5272,7 @@ $messages['lt'] = array(
  */
 $messages['mk'] = array(
 	'wikibase-desc' => 'Складиште на структурирани податоци',
-	'specialpages-group-wikibaserepo' => 'Складиште Википодатоци',
+	'specialpages-group-wikibaserepo' => 'Складиште Википодатоци', # Fuzzy
 	'wikibase-edit' => 'уреди',
 	'wikibase-save' => 'зачувај',
 	'wikibase-cancel' => 'откажи',
@@ -5326,6 +5330,7 @@ $messages['mk'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'прилагодена вредност',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'непозната вредност',
 	'wikibase-snakview-snaktypeselector-novalue' => 'нема вредност',
+	'wikibase-copyrighttooltip-acknowledge' => 'Потврдувам дека повеќе не сакам да ја гледам поракава.', # Fuzzy
 	'wikibase-entityselector-more' => 'уште',
 	'wikibase-anonymouseditwarning-item' => "'''Предупредување:''' Не сте најавени.
 Вашата IP-адреса ќе биде заведена во историјата на предметов.",
@@ -5481,7 +5486,7 @@ $messages['mk'] = array(
  */
 $messages['ml'] = array(
 	'wikibase-desc' => 'വിന്യസിത ഡേറ്റാ റെപ്പോസിറ്ററി',
-	'specialpages-group-wikibaserepo' => 'വിക്കിഡേറ്റാ റെപ്പോസിറ്ററി',
+	'specialpages-group-wikibaserepo' => 'വിക്കിഡേറ്റാ റെപ്പോസിറ്ററി', # Fuzzy
 	'wikibase-edit' => 'തിരുത്തുക',
 	'wikibase-save' => 'സേവ് ചെയ്യുക',
 	'wikibase-cancel' => 'റദ്ദാക്കുക',
@@ -5570,10 +5575,12 @@ $messages['mr'] = array(
  */
 $messages['ms'] = array(
 	'wikibase-desc' => 'Repositori data berstruktur',
+	'specialpages-group-wikibaserepo' => 'Repositori Wikibase',
 	'wikibase-edit' => 'sunting',
 	'wikibase-save' => 'simpan',
 	'wikibase-cancel' => 'batalkan',
 	'wikibase-add' => 'tambah',
+	'wikibase-addreference' => 'tambah sumber',
 	'wikibase-save-inprogress' => 'Menyimpan…',
 	'wikibase-remove-inprogress' => 'Membuang…',
 	'wikibase-label-empty' => 'Label belum ditetapkan.',
@@ -5586,6 +5593,7 @@ $messages['ms'] = array(
 	'wikibase-label-input-help-message' => 'Taipkan tajuk set data ini di $1.',
 	'wikibase-description-input-help-message' => 'Taipkan keterangan ringkas di $1.',
 	'wikibase-statements' => 'Kenyataan',
+	'wikibase-terms' => 'Dalam bahasa lain',
 	'wikibase-sitelinks-add' => 'tambahkan pautan pada pautan tapak',
 	'wikibase-sitelinks-empty' => 'Perkara ini belum ada pautan tapak.',
 	'wikibase-sitelinks-input-help-message' => 'Tetapkan pautan kepada halaman yang berkaitan dengan perkara ini.',
@@ -5601,6 +5609,7 @@ $messages['ms'] = array(
 	'wikibase-undo-firstrev' => 'Penciptaan halaman tidak boleh dibalikkan',
 	'wikibase-propertyedittool-full' => 'Senarai nilai telah dilengkapkan.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Satu|$1}} nilai belum disimpan',
+	'wikibase-propertyedittool-counter-entrieslabel' => '$1 entri',
 	'wikibase-sitelinksedittool-full' => 'Pautan ke halaman sudah ditetapkan untuk semua tapak yang dikenali.',
 	'wikibase-disambiguation-title' => 'Penyahkekaburan untuk "$1"',
 	'wb-special-createitem-new-item-notification' => 'Perkara baru $1 dicipta lalu dilencongkan ke halamannya. Kembali ke $2.',
@@ -5608,10 +5617,31 @@ $messages['ms'] = array(
 	'wikibase-aliases-input-help-message' => 'Jika set data ini dikenali dengan lebih daripada satu nama, anda boleh menaipkan nama lain dan sinonim supaya ia boleh dicari dengan nama-nama alternatifnya.',
 	'wikibase-aliases-empty' => 'Tiada nama lain diberikan.',
 	'wikibase-datatype-label' => 'Jenis data:',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|sumber|sumber-sumber}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Satu|$1}} sumber belum disimpan',
 	'wikibase-snakview-property-input-placeholder' => 'sifat',
+	'wikibase-snakview-unsupportedsnaktype' => 'Snak jenis "$1". Pengelolaan untuk jenis Snak ini belum disokong.',
+	'wikibase-snakview-choosesnaktype' => 'Pilih jenis nilai.',
+	'wikibase-snakview-variation-unsupporteddatatype' => 'Pengelolaan nilai-nilai untuk jenis data "$1" belum disokong.',
+	'wikibase-snakview-variation-datavaluetypemismatch' => 'Nilai ini tidak mematuhi takrifan sifat ini.',
+	'wikibase-snakview-variations-somevalue-label' => 'nilai tidak diketahui',
+	'wikibase-snakview-variations-novalue-label' => 'tiada nilai',
+	'wikibase-snakview-snaktypeselector-value' => 'nilai tersuai',
+	'wikibase-snakview-snaktypeselector-somevalue' => 'nilai tidak diketahui',
+	'wikibase-snakview-snaktypeselector-novalue' => 'tiada nilai',
+	'wikibase-copyrighttooltip-acknowledge' => 'Saya terima dan tidak ingin melihat pesanan ini lagi.', # Fuzzy
+	'wikibase-entityselector-more' => 'lagi',
+	'wikibase-anonymouseditwarning-item' => 'Amaran: Anda tidak log masuk.
+Alamat IP anda akan direkodkan dalam sejarah suntingan perkara ini.',
+	'wikibase-anonymouseditwarning-property' => 'Amaran: Anda tidak log masuk.
+Alamat IP anda akan direkodkan dalam sejarah suntingan sifat ini.',
 	'wikibase-restrictionedit-tooltip-message' => 'Halaman ini dilindungi. Dilarang menyunting.',
 	'wikibase-blockeduser-tooltip-message' => 'Anda disekat daripada menyunting.',
 	'wikibase-move-error' => 'Anda tidak boleh memindahkan halaman-halaman yang terdapat dalam ruang nama data, dan anda tidak boleh memindahkan halaman-halaman ke dalamnya.',
+	'wikibase-warning-constraint-violation-length' => 'Batas kepanjangan dicetus untuk kod bahasa "$1".',
+	'wikibase-error-constraint-violation-label' => 'Terdapat pencabulan {{PLURAL:$1|batas}} untuk {{PLURAL:$1|label|label-label}} "$3" untuk {{PLURAL:$1|kod|kod-kod}} bahasa "$2".',
+	'wikibase-error-constraint-violation-description' => 'Terdapat pencabulan {{PLURAL:$1|batas}} untuk {{PLURAL:$1|keterangan|keterangan-keterangan}} "$3" untuk {{PLURAL:$1|kod|kod-kod}} bahasa "$2".',
+	'wikibase-error-constraint-violation-aliases' => 'Terdapat pencabulan {{PLURAL:$1|batas}} untuk {{PLURAL:$1|alias|alias-alias}} "$3" untuk {{PLURAL:$1|kod|kod-kod}} bahasa "$2".',
 	'wikibase-error-sitelink-already-used' => 'Pautan tapak [[$1:$2]] sudah digunakan oleh perkara [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Satu lagi sifat ($3) sudah ada label "$1" yang berkaitan dengan kod bahasa $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Satu lagi pertanyaan ($3) sudah ada label "$1" yang berkaitan dengan kod bahasa $2',
@@ -5635,6 +5665,7 @@ $messages['ms'] = array(
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Maaf, kod bahasa yang anda berikan itu tidak dikenali oleh sistem. Sila gunakan kod yang sah seperti "en".',
 	'wikibase-itemdisambiguation-description' => 'Nilai-nilai yang digunakan untuk mencari mestilah entri teks yang lengkap. Bahasa itu sekadar pengenal, seperti "en".',
 	'special-newproperty' => 'Cipta sifat baru',
+	'wikibase-newproperty-summary' => 'Pastikan supaya [[Special:PropertyDisambiguation|sifat itu sudah wujud]]!<br />Anda harus membuat [[Help:Label|label]] dan [[Help:Description|keterangan]] untuk semua sifat baru, dan juga jenis sifat yang sah.',
 	'wikibase-newproperty-fieldset' => 'Cipta sifat baru',
 	'wikibase-newproperty-datatype' => 'Jenis data:',
 	'wikibase-newproperty-invalid-datatype' => 'Jenis data yang dinyatakan tidak sah',
@@ -5651,10 +5682,17 @@ $messages['ms'] = array(
 	'special-setlabel' => 'Tetapkan label',
 	'wikibase-setlabel-introfull' => 'Anda sedang menetapkan label dalam $2 untuk [[$1]].',
 	'wikibase-setlabel-intro' => 'Borang ini membolehkan anda untuk menetapkan label sesuatu entiti. Anda perlu memberikan ID entiti itu (cth. Q23), kod bahasa (cth. en) dan label yang hendak ditetapkan.',
-	'wikibase-setlabel-label' => 'Label', # Fuzzy
+	'wikibase-setlabel-label' => 'Label:',
 	'wikibase-setlabel-submit' => 'Tetapkan label',
-	'wikibase-setentity-id' => 'ID', # Fuzzy
-	'wikibase-setentity-language' => 'Bahasa', # Fuzzy
+	'wikibase-setlabel-warning-remove' => 'Adakah anda benar-benar mahu menggugurkan label [[$1]]?',
+	'special-setdescription' => 'Tetapkan keterangan',
+	'wikibase-setdescription-introfull' => 'Anda sedang menetapkan keterangan dalam $2 untuk [[$1]].',
+	'wikibase-setdescription-label' => 'Keterangan:',
+	'wikibase-setdescription-warning-remove' => 'Adakah anda benar-benar mahu memadamkan keterangan [[$1]]?',
+	'wikibase-setaliases-label' => 'Alias:',
+	'wikibase-setaliases-warning-remove' => 'Adakah anda benar-benar mahu menggugurkan semua alias [[$1]]?',
+	'wikibase-setentity-id' => 'ID:',
+	'wikibase-setentity-language' => 'Bahasa:',
 	'wikibase-setentity-invalid-langcode' => 'Kod bahasa "$1" tidak diketahui. Sila gunakan kod bahasa yang dikenali oleh sistem, contohnya "en".',
 	'wikibase-setentity-invalid-id' => 'ID "$1" tidak dikenali oleh sistem. Sila gunakan ID entiti yang sah.',
 	'special-listdatatypes' => 'Senarai semua jenis data yang ada',
@@ -5668,6 +5706,7 @@ $messages['ms'] = array(
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" bukan kod bahasa yang sah.',
 	'special-entitydata' => 'Data entiti',
 	'wikibase-entitydata-not-found' => 'Tiada entiti dengan ID $1 dijumpai.',
+	'wikibase-entitydata-bad-revision' => 'Semakan $2 entiti $1 tidak boleh dipaparkan.',
 	'wikibase-entitydata-unsupported-format' => 'Format data $1 tidak disokong oleh antaramuka ini.',
 	'wikibase-entitydata-title' => 'Data Entiti',
 	'wikibase-entitydata-text' => 'Halaman ini menyediakan antaramuka data yang berpautan kepada nilai-nilai entiti. Sila berikan ID entiti di dalam URL dengan menggunakan sintaks subhalaman.',
@@ -5920,7 +5959,7 @@ for å finne ut hva som har skjedd.',
  */
 $messages['nl'] = array(
 	'wikibase-desc' => 'Repository voor gestructureerde gegevens',
-	'specialpages-group-wikibaserepo' => 'Wikidatarepository',
+	'specialpages-group-wikibaserepo' => 'Wikidatarepository', # Fuzzy
 	'wikibase-edit' => 'bewerken',
 	'wikibase-save' => 'opslaan',
 	'wikibase-cancel' => 'annuleren',
@@ -6129,7 +6168,7 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
  */
 $messages['nn'] = array(
 	'wikibase-desc' => 'Strukturert datalager',
-	'specialpages-group-wikibaserepo' => 'Wikidata-datalageret',
+	'specialpages-group-wikibaserepo' => 'Wikidata-datalageret', # Fuzzy
 	'wikibase-edit' => 'endre',
 	'wikibase-save' => 'lagre',
 	'wikibase-cancel' => 'avbryt',
@@ -6394,7 +6433,7 @@ $messages['pl'] = array(
  */
 $messages['pms'] = array(
 	'wikibase-desc' => 'Depòsit ëd dat struturà',
-	'specialpages-group-wikibaserepo' => 'Depòsit ëd Wikidata',
+	'specialpages-group-wikibaserepo' => 'Depòsit ëd Wikidata', # Fuzzy
 	'wikibase-edit' => 'modìfica',
 	'wikibase-save' => 'salva',
 	'wikibase-cancel' => 'scancela',
@@ -6654,7 +6693,7 @@ $messages['pt'] = array(
  */
 $messages['pt-br'] = array(
 	'wikibase-desc' => 'Repositório de dados estruturados',
-	'specialpages-group-wikibaserepo' => 'Repositório Wikidata',
+	'specialpages-group-wikibaserepo' => 'Repositório Wikidata', # Fuzzy
 	'wikibase-edit' => 'editar',
 	'wikibase-save' => 'salvar',
 	'wikibase-cancel' => 'cancelar',
@@ -6908,7 +6947,7 @@ $messages['roa-tara'] = array(
  */
 $messages['ru'] = array(
 	'wikibase-desc' => 'Хранилище структурированных данных',
-	'specialpages-group-wikibaserepo' => 'Репозиторий Викиданных',
+	'specialpages-group-wikibaserepo' => 'Репозиторий Викиданных', # Fuzzy
 	'wikibase-edit' => 'редактировать',
 	'wikibase-save' => 'сохранить',
 	'wikibase-cancel' => 'отменить',
@@ -7496,7 +7535,7 @@ $messages['ug-arab'] = array(
  */
 $messages['uk'] = array(
 	'wikibase-desc' => 'Сховище структурованих даних',
-	'specialpages-group-wikibaserepo' => 'Сховище Вікіданих',
+	'specialpages-group-wikibaserepo' => 'Сховище Вікіданих', # Fuzzy
 	'wikibase-edit' => 'редагувати',
 	'wikibase-save' => 'зберегти',
 	'wikibase-cancel' => 'скасувати',
@@ -7653,7 +7692,7 @@ $messages['uz'] = array(
  */
 $messages['vi'] = array(
 	'wikibase-desc' => 'Kho dữ liệu có cấu trúc',
-	'specialpages-group-wikibaserepo' => 'Kho Wikidata',
+	'specialpages-group-wikibaserepo' => 'Kho Wikidata', # Fuzzy
 	'wikibase-edit' => 'sửa',
 	'wikibase-save' => 'lưu',
 	'wikibase-cancel' => 'hủy bỏ',
@@ -7883,7 +7922,7 @@ $messages['yi'] = array(
  */
 $messages['zh-hans'] = array(
 	'wikibase-desc' => '结构化数据知识库',
-	'specialpages-group-wikibaserepo' => '维基数据存储库',
+	'specialpages-group-wikibaserepo' => '维基数据存储库', # Fuzzy
 	'wikibase-edit' => '编辑',
 	'wikibase-save' => '保存',
 	'wikibase-cancel' => '取消',
