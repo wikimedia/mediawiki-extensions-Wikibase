@@ -97,13 +97,17 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();
 
+		$user = $this->getUser();
+		$this->flags = 0;
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		$this->flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+		$this->flags |= EDIT_UPDATE;
+		$editEntity = new EditEntity( $content, $user, $baseRevisionId, $this->getContext() );
 
 		$status = $editEntity->attemptSave(
 			'', // TODO: autocomment
-			EDIT_UPDATE,
+			$this->flags,
 			isset( $params['token'] ) ? $params['token'] : ''
 		);
 
@@ -238,6 +242,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 			'baserevid' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
+			'bot' => null,
 		);
 	}
 
@@ -257,6 +262,9 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
+			),
+			'bot' => array( 'Mark this edit as bot',
+				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),
 		);
 	}
