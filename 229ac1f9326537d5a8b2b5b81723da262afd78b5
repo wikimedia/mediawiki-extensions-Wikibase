@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DlaDJt10",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-15T15:17:53Z",
+      "side": 1,
+      "message": "?",
+      "revId": "229ac1f9326537d5a8b2b5b81723da262afd78b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
