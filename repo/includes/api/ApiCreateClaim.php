@@ -217,27 +217,27 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
-			'entity' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'snaktype' => array(
-				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'property' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'value' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
+		return array_merge(
+			parent::getAllowedParams(),
+			parent::getAllowedParamsForEntity(),
+			array(
+				'entity' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'snaktype' => array(
+					ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'property' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => false,
+				),
+				'value' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => false,
+				),
+			)
 		);
 	}
 
@@ -249,15 +249,15 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
-			'entity' => 'Id of the entity you are adding the claim to',
-			'property' => 'Id of the snaks property',
-			'value' => 'Value of the snak when creating a claim with a snak that has a value',
-			'snaktype' => 'The type of the snak',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
+		return array_merge(
+			parent::getParamDescription(),
+			parent::getParamDescriptionForEntity(),
+			array(
+				'entity' => 'Id of the entity you are adding the claim to',
+				'property' => 'Id of the snaks property',
+				'value' => 'Value of the snak when creating a claim with a snak that has a value',
+				'snaktype' => 'The type of the snak',
+			)
 		);
 	}
 

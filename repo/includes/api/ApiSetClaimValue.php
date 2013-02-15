@@ -188,24 +188,27 @@ class ApiSetClaimValue extends Api {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
-			'claim' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'value' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'snaktype' => array(
-				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
+		return array_merge(
+			parent::getAllowedParams(),
+			parent::getAllowedParamsForEntity(),
+			parent::getAllowedParamsForId(),
+			parent::getAllowedParamsForSiteLink(),
+			array(
+				'claim' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'value' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_REQUIRED => false,
+				),
+				'snaktype' => array(
+					ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
+					ApiBase::PARAM_REQUIRED => true,
+				),
+			)
 		);
+
 	}
 
 	/**
@@ -216,14 +219,16 @@ class ApiSetClaimValue extends Api {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
-			'claim' => 'A GUID identifying the claim',
-			'snaktype' => 'The type of the snak',
-			'value' => 'The value to set the datavalue of the the main snak of the claim to',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
+		return array_merge(
+			parent::getParamDescription(),
+			parent::getParamDescriptionForId(),
+			parent::getParamDescriptionForSiteLink(),
+			parent::getParamDescriptionForEntity(),
+			array(
+				'claim' => 'A GUID identifying the claim',
+				'snaktype' => 'The type of the snak',
+				'value' => 'The value to set the datavalue of the the main snak of the claim to',
+			)
 		);
 	}
 
