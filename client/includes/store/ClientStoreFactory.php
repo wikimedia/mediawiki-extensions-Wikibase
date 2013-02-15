@@ -36,7 +36,7 @@ class ClientStoreFactory {
 	 *
 	 * @since 0.1
 	 *
-	 * @param boolean $store
+	 * @param boolean|string $store
 	 *
 	 * @return ClientStore
 	 */

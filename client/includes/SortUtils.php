@@ -168,7 +168,7 @@ class SortUtils {
 		}
 
 		$sortPrepend = Settings::get( 'sortPrepend' );
-		if( is_array( $sortPrepend ) ) {
+		if( !empty( $sortPrepend ) ) {
 			self::$sortOrder = array_unique( array_merge( $sortPrepend, self::$sortOrder ) );
 		}
 		self::$sortOrder = array_flip( self::$sortOrder );
