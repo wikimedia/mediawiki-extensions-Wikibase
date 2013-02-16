@@ -42,7 +42,7 @@ $messages['en'] = array(
  */
 $messages['qqq'] = array(
 	'datavalues-desc' => '{{desc|name=Data Values|url=http://www.mediawiki.org/wiki/Extension:DataValues}}',
-	'version-datavalues' => 'Name of the DataValues extension collection, used on Special:Version',
+	'version-datavalues' => 'Name of the DataValues extension collection, used on [[Special:Version]]',
 );
 
 /** Asturian (asturianu)
