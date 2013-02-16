@@ -248,6 +248,7 @@ $messages['de'] = array(
 	'wikibase-editlinks' => 'Links bearbeiten',
 	'wikibase-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
 	'wikibase-linkitem-addlinks' => 'Links hinzufügen',
+	'wikibase-linkitem-alreadylinked' => 'Die Seite, die du verlinken willst, ist bereits einem [$1 Objekt] in unserem zentralen Datenrepositorium zugeordnet, das auf $2 auf dieser Website verlinkt. Es kann nur eine Seite pro Website einem Objekt zugeordnet werden. Bitte wähle eine andere Seite, die verlinkt werden soll.',
 	'wikibase-linkitem-close' => 'Dialog schließen und Seite neu laden',
 	'wikibase-linkitem-failure' => 'Beim Verlinken der angegebenen Seite ist ein unbekannter Fehler aufgetreten.',
 	'wikibase-linkitem-title' => 'Mit Seite verlinken',
@@ -256,7 +257,7 @@ $messages['de'] = array(
 	'wikibase-linkitem-input-site' => 'Sprache:',
 	'wikibase-linkitem-input-page' => 'Seite:',
 	'wikibase-linkitem-invalidsite' => 'Unbekannte oder ungültige Website ausgewählt',
-	'wikibase-linkitem-confirmitem-text' => 'Bitte bestätige, dass die unten stehenden Seiten diejenigen sind, die du mit dieser Seite verlinken willst.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Die ausgewählte Seite ist bereits mit einem [$1 Objekt in unserem zentralen Datenrepositorium] verlinkt. Bitte bestätige, dass die unten stehenden Seiten diejenigen sind, die du mit dieser Seite verlinken willst.',
 	'wikibase-linkitem-confirmitem-button' => 'Bestätigen',
 	'wikibase-linkitem-not-loggedin-title' => 'Du musst angemeldet sein',
 	'wikibase-linkitem-not-loggedin' => 'Du musst auf diesem Wiki und im [$1 zentralen Datenrepositorium] angemeldet sein, um diese Funktion nutzen zu können.',
@@ -405,6 +406,7 @@ $messages['fr'] = array(
 	'wikibase-editlinks' => 'Modifier les liens',
 	'wikibase-editlinkstitle' => 'Modifier les liens interlangue',
 	'wikibase-linkitem-addlinks' => 'Ajouter des liens',
+	'wikibase-linkitem-alreadylinked' => 'La page à laquelle vous voulez vous lier est déjà attachée à un [$1 élément] du dépôt de données central qui se lie à $2 sur ce site. Les éléments ne peuvent avoir qu’une page attachée par site. Veuillez choisir une autre page pour vous lier avec.',
 	'wikibase-linkitem-close' => 'Fermer la boîte de dialogue et recharger la page',
 	'wikibase-linkitem-failure' => 'Une erreur inconnue est survenue en essayant de lier la page fournie.',
 	'wikibase-linkitem-title' => 'Se lier avec la page',
@@ -413,7 +415,7 @@ $messages['fr'] = array(
 	'wikibase-linkitem-input-site' => 'Langue:',
 	'wikibase-linkitem-input-page' => 'Page:',
 	'wikibase-linkitem-invalidsite' => 'Site sélectionné inconnu ou invalide',
-	'wikibase-linkitem-confirmitem-text' => 'Veuillez confirmer que les pages affichées ci-dessous sont celles que vous voulez lier avec cette page.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'La page que vous avez choisie est déjà liée à un [$1 élément dans notre dépôt de données central]. Veuillez confirmer que les pages affichées ci-dessous sont celles que vous voulez lier avec cette page.',
 	'wikibase-linkitem-confirmitem-button' => 'Confirmer',
 	'wikibase-linkitem-not-loggedin-title' => 'Vous devez être connecté',
 	'wikibase-linkitem-not-loggedin' => 'Vous devez être connecté sur ce wiki et dans l’[$1 entrepôt central de données] pour utiliser cette fonctionnalité.',
@@ -583,6 +585,13 @@ $messages['ia'] = array(
 	'wikibase-editlinkstitle' => 'Modificar ligamines interlingua',
 );
 
+/** Indonesian (Bahasa Indonesia)
+ * @author Iwan Novirion
+ */
+$messages['id'] = array(
+	'wikibase-client-desc' => 'Klien untuk ekstensi Wikibase',
+);
+
 /** Iloko (Ilokano)
  * @author Lam-ang
  */
@@ -720,7 +729,7 @@ $messages['ja'] = array(
 	'wikibase-linkitem-input-site' => '言語:',
 	'wikibase-linkitem-input-page' => 'ページ:',
 	'wikibase-linkitem-invalidsite' => '不明なサイトまたは無効なサイトを選択しました',
-	'wikibase-linkitem-confirmitem-text' => 'このページと以下に列挙したページをリンクしていいか確認してください。', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'The page you chose is already linked to an [$1 item on our central data repository]. このページと以下に列挙したページをリンクしていいか確認してください。', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => '確認',
 	'wikibase-linkitem-not-loggedin-title' => 'ログインする必要があります',
 	'wikibase-rc-hide-wikidata' => 'ウィキデータを$1',
@@ -752,7 +761,7 @@ $messages['ko'] = array(
 	'wikibase-comment-sitelink-add' => '언어 링크를 추가함: $1',
 	'wikibase-comment-sitelink-change' => '언어 링크를 $1에서 $2로 바꿈',
 	'wikibase-comment-sitelink-remove' => '언어 링크를 제거함: $1',
-	'wikibase-comment-multi' => '$1개 바뀜', # Fuzzy
+	'wikibase-comment-multi' => '$1개 {{PLURAL:$1|바뀜}}',
 	'wikibase-nolanglinks' => '없음',
 	'wikibase-editlinks' => '링크 편집',
 	'wikibase-editlinkstitle' => '인터언어 링크 편집',
@@ -765,7 +774,8 @@ $messages['ko'] = array(
 	'wikibase-linkitem-input-site' => '언어:',
 	'wikibase-linkitem-input-page' => '문서:',
 	'wikibase-linkitem-invalidsite' => '알 수 없거나 잘못된 사이트를 선택했습니다',
-	'wikibase-linkitem-confirmitem-text' => '이 문서와 아래에 나타난 문서를 링크해야 할지 확인하세요.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => '선택한 문서는 이미 [$1 중앙 데이터 저장소에 항목]에 링크되어 있습니다.
+이 문서와 아래에 나타난 문서를 링크해야 할지 확인하세요.',
 	'wikibase-linkitem-confirmitem-button' => '확인',
 	'wikibase-linkitem-not-loggedin-title' => '로그인 필요',
 	'wikibase-linkitem-not-loggedin' => '이 기능을 사용하려면 이 위키와 [$1 중앙 데이터 저장소]에 로그인해야 합니다.',
@@ -817,6 +827,7 @@ $messages['mk'] = array(
 	'wikibase-editlinks' => 'Уреди врски',
 	'wikibase-editlinkstitle' => 'Уредување на меѓујазични врски',
 	'wikibase-linkitem-addlinks' => 'Додај врски',
+	'wikibase-linkitem-alreadylinked' => 'Страницата што сакате да ја сврзете е веќе поврзана со [$1 единица] во централното складиште, што води до $2 на ова мрежно место. Единиците можат да имаат само една сврзана страница по мреж. место. Изберете друга страница за сврзување.',
 	'wikibase-linkitem-close' => 'Затвори го дијалогот и превчитај ја страницата',
 	'wikibase-linkitem-failure' => 'Се појави непозната грешка при обидот да ја сврзам дадената страница.',
 	'wikibase-linkitem-title' => 'Сврзување со страница',
@@ -825,7 +836,7 @@ $messages['mk'] = array(
 	'wikibase-linkitem-input-site' => 'Јазици:',
 	'wikibase-linkitem-input-page' => 'Страница:',
 	'wikibase-linkitem-invalidsite' => 'Избран е непознато или неважечко мреж. место',
-	'wikibase-linkitem-confirmitem-text' => 'Потврдете дека долуприкажаните страници се тие што сакате да ги сврзете со страницава.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Избраната страница е веќе сврзана со [$1 единица во нашето централно складиште]. Потврдете дека долуприкажаните страници се тие што сакате да ги сврзете со страницава.',
 	'wikibase-linkitem-confirmitem-button' => 'Потврди',
 	'wikibase-linkitem-not-loggedin-title' => 'Треба да сте најавени',
 	'wikibase-linkitem-not-loggedin' => 'За да ја користите функцијава, треба да сте најавени на ова вики и на [$1 централното складиште на податоци].',
@@ -889,6 +900,7 @@ $messages['ms'] = array(
 	'wikibase-editlinkstitle' => 'Sunting pautan antara bahasa',
 	'wikibase-linkitem-addlinks' => 'Tambah pautan',
 	'wikibase-linkitem-close' => 'Tutup dialog dan muat semula halaman',
+	'wikibase-linkitem-failure' => 'Ralat di luar jangkaan berlaku apabila cuba memautkan halaman yang diberikan.',
 	'wikibase-linkitem-title' => 'Pautan dengan halaman',
 	'wikibase-linkitem-linkpage' => 'Pautan dengan halaman',
 	'wikibase-linkitem-input-site' => 'Bahasa:',
