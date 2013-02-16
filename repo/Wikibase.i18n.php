@@ -258,9 +258,12 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Added site-specific [$2] link',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed site-specific [$2] link',
 	'wikibase-item-summary-wblinktitles-connect' => 'Connected [$2↔$3] {{PLURAL:$1|page|pages}}',
-	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{PLURAL:$1|a value claim|value claims}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created {{PLURAL:$1|a novalue claim|novalue claims}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created {{PLURAL:$1|a somevalue claim|somevalue claims}}',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
+	'wikibase-item-summary-wbcreateclaim' => 'Created {{PLURAL:$1|a claim|claims}}',
+	'wikibase-item-summary-wbsetclaimvalue' => 'Set {{PLURAL:$1|a claim value|claim values}}',
+	'wikibase-item-summary-wbremoveclaims' => 'Removed {{PLURAL:$1|a claim|claims}}',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{PLURAL:$1|value|values}}',
 
 	// property - summary and autocomment
@@ -675,9 +678,13 @@ This module generates a slightly different summary (autocomment) than the other 
 * $1 is the number of pages that were connected;
 * $2 is the site code for the from-page;
 * $3 is the site code for the to-page.',
-	'wikibase-item-summary-wbcreateclaim-value' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is created and a value is used. The values can be of various types, including but not limited to defined properties.}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => "{{wikibase summary messages|item-claims|Automatic edit summary when ''no value'' is supplied to the claim. A ''no value'' means that there are no valid value to be set for this claim, or that there are no existing value.}}",
-	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when there should be a value but it is unknown. This is different from the case where there are no valid or existing value.}}',
+
+	'wikibase-item-summary-wbcreateclaim-value' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is created and a value is used. The values can be of various types, including but not limited to defined properties. This is a LEGACY value, needed for old log entries!}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => "{{wikibase summary messages|item-claims|Automatic edit summary when ''no value'' is supplied to the claim. A ''no value'' means that there are no valid value to be set for this claim, or that there are no existing value. This is a LEGACY value, needed for old log entries!}}",
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when there should be a value but it is unknown. This is different from the case where there are no valid or existing value. This is a LEGACY value, needed for old log entries!}}',
+	'wikibase-item-summary-wbcreateclaim' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is created.}}',
+	'wikibase-item-summary-wbsetclaimvalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when the main value of one or more claim is changed.}}',
+	'wikibase-item-summary-wbremoveclaims' => '{{wikibase summary messages|item-claims|Automatic edit summary when one or more claim is removed.}}',
 	'wikibase-item-summary-special-create-item' => '{{wikibase summary messages|item|Automatic edit summary when creating an item, and supplying one or more values. This page can take an additional sitelink, but this does not reflect in the autocomment.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
