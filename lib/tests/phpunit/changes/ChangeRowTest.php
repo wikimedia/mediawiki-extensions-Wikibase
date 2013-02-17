@@ -57,8 +57,10 @@ class ChangeRowTest extends \ORMRowTest {
 	}
 
 	public function constructorTestProvider() {
+		$testChanges = new TestChanges();
+
 		return array(
-			array( TestChanges::getChange(), true ),
+			array( $testChanges->getChange(), true ),
 		);
 	}
 

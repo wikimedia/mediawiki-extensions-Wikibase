@@ -40,11 +40,13 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
 		$class = $this->getClass();
+		$testChanges = new TestChanges();
+
 		return array_map(
 			function( Entity $entity ) use ( $class ) {
 				return array( $class::newFromUpdate( EntityChange::UPDATE, null, $entity ) );
 			},
-			TestChanges::getEntities()
+			$testChanges->getEntities()
 		);
 	}
 
@@ -53,11 +55,13 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	}
 
 	public function entityProvider() {
+		$testChanges = new TestChanges();
+
 		return array_map(
 			function( Entity $entity ) {
 				return array( $entity );
 			},
-			TestChanges::getEntities()
+			$testChanges->getEntities()
 		);
 	}
 

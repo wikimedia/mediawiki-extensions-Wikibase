@@ -1,7 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
+use \Wikibase\EntityChange;
+use \Wikibase\EntityId;
 use \Wikibase\Item;
+use \Wikibase\SiteLink;
 
 /**
  * Test change data for ChangeRowTest
@@ -36,25 +39,42 @@ use \Wikibase\Item;
  */
 final class TestChanges {
 
-	protected static function getItem() {
+	public function getItem() {
 		$item = Item::newEmpty();
+		$item->setId( new EntityId( Item::ENTITY_TYPE, 102 ) );
 		$item->setLabel( 'en', 'Venezuela' );
 		$item->setDescription( 'en', 'a country' );
 		$item->addAliases( 'en', array( 'Bolivarian Republic of Venezuela' ) );
 
-		$site = new \Site();
-		$site->setGlobalId( 'enwiki' );
-		$item->addSiteLink( new \Wikibase\SiteLink( $site, 'Venezuela' )  );
+		$siteLinks = array(
+			SiteLink::newFromText( 'enwiki', 'Venezuela' ),
+			SiteLink::newFromText( 'jawiki', 'ベネズエラ' ),
+			SiteLink::newFromText( 'cawiki', 'Veneçuela' )
+		);
 
-		$site = new \Site();
-		$site->setGlobalId( 'jawiki' );
-		$item->addSiteLink( new \Wikibase\SiteLink( $site, 'ベネズエラ' )  );
-
-		$site = new \Site();
-		$site->setGlobalId( 'cawiki' );
-		$item->addSiteLink( new \Wikibase\SiteLink( $site, 'Veneçuela' )  );
+		foreach( $siteLinks as $siteLink ) {
+			$item->addSiteLink( $siteLink );
+		}
 
 		return $item;
+	}
+
+	public function getSiteLinkChanges() {
+		$changes = array();
+
+		$oldItem = $this->getItem();
+		$newItem = $oldItem->copy();
+		$newItem->addSiteLink( SiteLink::newFromText( 'afwiki', 'Venezuela' ) );
+
+		$changes[] = EntityChange::newFromUpdate( EntityChange::UPDATE, $oldItem, $newItem );
+
+		$oldItem = $this->getItem();
+		$newItem = $oldItem->copy();
+		$newItem->removeSiteLink( 'cawiki' );
+
+		$changes[] = EntityChange::newFromUpdate( EntityChange::UPDATE, $oldItem, $newItem );
+
+		return $changes;
 	}
 
 	public static function getChange() {
