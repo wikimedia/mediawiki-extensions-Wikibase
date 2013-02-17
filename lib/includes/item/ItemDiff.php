@@ -54,4 +54,12 @@ class ItemDiff extends EntityDiff {
 			&& $this->getSiteLinkDiff()->isEmpty();
 	}
 
+	/**
+	 * @see DiffOp::getType();
+	 *
+	 * @return string 'diff/' . Item::ENTITY_TYPE
+	 */
+	public function getType() {
+		return 'diff/' . Item::ENTITY_TYPE;
+	}
 }
