@@ -173,8 +173,7 @@
 						var apiUrl;
 
 						$( '#wbclient-linkItem-page' )
-							.val( '' )
-							.suggester( 'destroy' );
+							.val( '' );
 
 						try {
 							apiUrl = $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ).getApi();
@@ -578,6 +577,11 @@
 
 		$dialog
 			.empty()
+			// Don't reshow the "Add links" link but reload the page on dialog close
+			.off( 'dialogclose' )
+			.on( 'dialogclose', function() {
+				window.location.reload( true );
+			} )
 			.append(
 				$( '<p>' )
 					.addClass( 'wbclient-linkItem-success-message' )
@@ -634,8 +638,13 @@
 		removeSpinner();
 		tooltip.show();
 
+		// Remove the tooltip if the user tries to correct the input
 		$elem.one( ['click', 'focus'], function() {
-			// Remove the tooltip by the time the user tries to correct the input
+			tooltip.destroy();
+		} );
+		$( '#wbclient-linkItem-Site' ).one( 'click focus', function() {
+			// Do the same if there's a site input...
+			// We don't have to check whether this exists as jQuery is smart
 			tooltip.destroy();
 		} );
 	}
@@ -662,7 +671,7 @@
 	 * @return {string}
 	 */
 	function linkRepoTitle( title ) {
-		return mw.config.get( 'wbRepoUrl' ) + mw.config.get( 'wbRepoArticlePath' ).replace( /\$1/, encodeURIComponent( title ) );
+		return mw.config.get( 'wbRepoUrl' ) + mw.config.get( 'wbRepoArticlePath' ).replace( /\$1/g, encodeURIComponent( title ) );
 	}
 
 	/**
