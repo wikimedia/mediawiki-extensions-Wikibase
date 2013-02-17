@@ -15,7 +15,8 @@
 	border-right: 1px solid black;
 }
 
-#wbclient-linkItem-dialog a {
+#wbclient-linkItem-dialog a,
+.wbclient-linkItem-not-loggedin-message a {
 	color: #0645AD;
 }
 .wbclient-linkItem-Input {
