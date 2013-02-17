@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dl78ovzY",
+        "filename": "lib/includes/changes/DiffChange.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-17T12:40:16Z",
+      "side": 1,
+      "message": "if ( isset( $info[\u0027diff\u0027] ) \u0026\u0026 Settings::get( \u0027changesAsJson\u0027 ) \u003d\u003d\u003d true \u0026\u0026 $info[\u0027diff\u0027] instanceof \\Diff\\DiffOp ) \n\nwill work here with wmf9 client",
+      "revId": "fc6a6edb2e2235df48d42dd8c57b960204fcaa8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
