@@ -209,6 +209,24 @@
       "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl-.0B9Q",
+        "filename": "lib/includes/entity/EntityDiffView.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-17T15:10:30Z",
+      "side": 1,
+      "message": "This dependent service should be an instance field, else stuff will go horribly wrong. No need to push it to a class closer to the root, doing so would be bad.\n\nI should have spotted the initial introduction of this pattern in https://gerrit.wikimedia.org/r/#/c/47852/ Guess I did not review the last patchset closely enough",
+      "parentUuid": "DlQCna8E",
+      "revId": "6bce543ae81e9cc99ef1d8a50284a57e01c5fc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
