@@ -53,6 +53,57 @@
     },
     {
       "key": {
+        "uuid": "Dl2Xb6no",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-17T21:08:23Z",
+      "side": 1,
+      "message": "also tabs. I guess you should configure your vim to keep tabs...",
+      "revId": "26ec675af245715ccfe2eda88b30d98b2610f201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl2XECpQ",
+        "filename": "repo/resources/wikibase.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-17T21:08:23Z",
+      "side": 1,
+      "message": "this whole mw.loader.using is pretty pointless since you already have this as a dependency in your modules definition!",
+      "revId": "26ec675af245715ccfe2eda88b30d98b2610f201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl4VIFjE",
+        "filename": "repo/resources/wikibase.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-17T21:08:23Z",
+      "side": 1,
+      "message": "To avoid the problem with the two suggestion menus on top of each other you could just destroy the #searchInput and create a new one.\n\nOr, you figure out what widget is representing that other dropdown and destroy just the widget.",
+      "revId": "26ec675af245715ccfe2eda88b30d98b2610f201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dl-9Ih40",
         "filename": "repo/resources/wikibase.ui.entityselector.js",
         "patchSetId": 1
@@ -64,6 +115,24 @@
       "writtenOn": "2013-02-17T19:08:16Z",
       "side": 1,
       "message": "When I am on http://wikidata.org/wiki/Q3941979, wgServer is \"//www.wikidata.org\". Could this be a problem?\n\n(of course, we are trying to get rid of the no subdomain)",
+      "revId": "26ec675af245715ccfe2eda88b30d98b2610f201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DlyVPIjc",
+        "filename": "repo/resources/wikibase.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-17T21:08:23Z",
+      "side": 1,
+      "message": "I am not sure, if so, there could be more issues already. But shouldn\u0027t \"/api.php\" just be enough? Someone just had to try this out.",
+      "parentUuid": "Dl-9Ih40",
       "revId": "26ec675af245715ccfe2eda88b30d98b2610f201",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
