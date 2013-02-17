@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 use Html;
-use Diff\IDiff;
+use Diff\Diff;
 use Diff\DiffOp;
 
 /**
@@ -45,7 +45,7 @@ class DiffView extends \ContextSource {
 	/**
 	 * @since 0.1
 	 *
-	 * @var IDiff
+	 * @var Diff
 	 */
 	protected $diff;
 
@@ -55,10 +55,10 @@ class DiffView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param array $path
-	 * @param IDiff $diff
+	 * @param Diff $diff
 	 * @param \IContextSource|null $contextSource
 	 */
-	public function __construct( array $path, IDiff $diff, \IContextSource $contextSource = null ) {
+	public function __construct( array $path, Diff $diff, \IContextSource $contextSource = null ) {
 		$this->path = $path;
 		$this->diff = $diff;
 
