@@ -16,6 +16,24 @@
       "revId": "6e82468a5553d91d7fd9bbb55c8e1afb6767090b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl98Li44",
+        "filename": "lib/includes/changes/DiffChange.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-17T16:55:29Z",
+      "side": 1,
+      "message": "agree and already asked about it.\n\nI can do it in a followup patch, just so we get this patch in now.",
+      "parentUuid": "Dl-.Kxxs",
+      "revId": "6e82468a5553d91d7fd9bbb55c8e1afb6767090b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
