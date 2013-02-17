@@ -843,7 +843,7 @@ $messages['ms'] = array(
 	'datatypes-type-commonsMedia' => 'Fail media Commons',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Danmichaelo
  * @author Event
  * @author Jeblad
@@ -853,10 +853,28 @@ $messages['nb'] = array(
 	'wikibase-entity-item' => 'datasett',
 	'wikibase-entity-property' => 'egenskap',
 	'wikibase-entity-query' => 'spørring',
+	'wikibase-error-unexpected' => 'En uventet feil oppsto.',
+	'wikibase-error-save-generic' => 'En feil oppstod under forsøket på å lagre oppføringen, og på grunn av dette så kunne ikke endringen gjennomføres.',
+	'wikibase-error-remove-generic' => 'En feil oppstod under forsøket på å fjerne oppføringen, og på grunn av dette så kunne ikke endringen gjennomføres.',
+	'wikibase-error-save-connection' => 'En feil oppstod under forsøket på å lagre oppføringen, og på grunn av dette så kunne ikke endringen gjennomføres. Sjekk din tilknytting til internett.',
+	'wikibase-error-remove-connection' => 'En feil oppstod under forsøket på å fjerne oppføringen, og på grunn av dette så kunne ikke endringen gjennomføres. Sjekk din tilknytting til internett.',
+	'wikibase-error-save-timeout' => 'Vi har tekniske problemer, og på grunn av dette så kan vi ikke gjennomføre lagring av oppføringen.',
+	'wikibase-error-remove-timeout' => 'Vi har tekniske problemer, og på grunn av dette så kan vi ikke gjennomføre fjerning av oppføringen.',
+	'wikibase-error-autocomplete-connection' => 'Kunne ikke spørre mot Wikipedias API. Prøv igjen senere.',
+	'wikibase-error-autocomplete-response' => 'Tjeneren svarte: $1',
+	'wikibase-error-ui-client-error' => 'Kontakten med klientsiden feilet. Forsøk på nytt senere.',
+	'wikibase-error-ui-no-external-page' => 'Den angitte artikkelen ble ikke funnet på det tilhørende nettstedet.',
+	'wikibase-error-ui-cant-edit' => 'Du har ikke lov til å utføre denne handlingen.',
+	'wikibase-error-ui-no-permissions' => 'Du har ikke tilstrekkelige rettigheter til å utføre denne handlingen.',
+	'wikibase-error-ui-link-exists' => 'Du kan ikke lenke til denne siden fordi et annet datasett lenker allerede til den.',
+	'wikibase-error-ui-session-failure' => 'Din arbeidsøkt er avsluttet, logg inn på nytt om du vil fortsette.',
+	'wikibase-error-ui-edit-conflict' => 'Det er påvist en redigeringskonflikt. Kopier dine endringer, last siden på nytt, endre og lagre på nytt.',
+	'wikibase-replicationnote' => 'Vær oppmerksom på at det kan ta flere minutter før endringene er synlig på alle wikier',
 	'wikibase-sitelinks' => 'Sider som lenkes til dette datasettet',
 	'wikibase-sitelinks-sitename-columnheading' => 'Språk',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
 	'wikibase-sitelinks-link-columnheading' => 'Lenket artikkel',
+	'wikibase-tooltip-error-details' => 'Detaljer',
 	'datatypes-type-wikibase-item' => 'Datasett',
 	'datatypes-type-commonsMedia' => 'Commons mediafil',
 );
@@ -1217,7 +1235,7 @@ $messages['vi'] = array(
  * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
-	'wikibase-lib-desc' => '储存维基基础及其客户端的共同功能',
+	'wikibase-lib-desc' => '储存Wikibase及其客户端的共同功能',
 	'wikibase-entity-item' => '项目',
 	'wikibase-entity-property' => '属性',
 	'wikibase-entity-query' => '查询',
