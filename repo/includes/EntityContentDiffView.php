@@ -125,24 +125,25 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		return $header;
 	}
 
+	// FIXME: can haz visibility?
 	function generateContentDiffBody( Content $old, Content $new ) {
 		/**
 		 * @var EntityContent $old
 		 * @var EntityContent $new
 		 */
-
 		$diff = $old->getEntity()->getDiff( $new->getEntity() );
-		$diffView = EntityDiffView::newForDiff(
-			$diff,
+
+		// TODO: derp inject the EntityDiffVisualizer
+		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new ListDiffer() ),
-			new ClaimDiffView( new WikiPageEntityLookup() )
+			new ClaimDifferenceVisualizer( new WikiPageEntityLookup() )
 		);
 
-		return $diffView->getHtml();
+		return $diffVisualizer->visualizeDiff( $diff );
 	}
 
-	protected function getParserOutput( \WikiPage $page, \Revision $rev ) { //NOTE: needs a core change to work
+	protected function getParserOutput( \WikiPage $page, \Revision $rev ) {
 		$parserOptions = \ParserOptions::newFromContext( $this->getContext() );
 		$parserOptions->enableLimitReport();
 		$parserOptions->setTidy( true );
