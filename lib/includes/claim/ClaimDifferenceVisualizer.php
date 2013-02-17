@@ -59,7 +59,69 @@ class ClaimDifferenceVisualizer {
 	 * @return string
 	 */
 	public function visualizeDiff( ClaimDifference $claimDifference ) {
-		return 'TODO'; // TODO
+		$html = $this->generateHeaderHtml( 'TODO: claim difference' ); // TODO
+
+		if ( $claimDifference->getMainSnakChange() !== null ) {
+			$mainSnakChange = $claimDifference->getMainSnakChange();
+			$html .= $this->generateChangeOpHtml( $mainSnakChange->getOldValue(), $mainSnakChange->getNewValue() );
+		}
+
+		if ( $claimDifference->getRankChange() !== null ) {
+			$rankChange = $claimDifference->getRankChange();
+			$html .= $this->generateChangeOpHtml( $rankChange->getOldValue(), $rankChange->getNewValue() );
+		}
+
+		// TODO: html for qualifier changes
+
+		// TODO: html for reference changes
+
+		return $html;
+	}
+
+	/**
+	 * Generates HTML for the header of the diff operation
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $name
+	 *
+	 * @return string
+	 */
+	protected function generateHeaderHtml( $name ) {
+		$html = Html::openElement( 'tr' );
+		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
+		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
+		$html .= Html::closeElement( 'tr' );
+
+		return $html;
+	}
+
+	/**
+	 * Generates HTML for an change diffOp
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $oldValue
+	 * @param string $newValue
+	 *
+	 * @return string
+	 */
+	protected function generateChangeOpHtml( $oldValue, $newValue ) {
+		$html = Html::openElement( 'tr' );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
+			Html::rawElement( 'div', array(),
+				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+					$oldValue ) ) );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
+			Html::rawElement( 'div', array(),
+				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+					$newValue ) ) );
+		$html .= Html::closeElement( 'tr' );
+		$html .= Html::closeElement( 'tr' );
+
+		return $html;
 	}
 
 }
