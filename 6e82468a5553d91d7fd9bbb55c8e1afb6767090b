@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dl-.Kxxs",
+        "filename": "lib/includes/changes/DiffChange.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-17T14:32:41Z",
+      "side": 1,
+      "message": "own file",
+      "revId": "6e82468a5553d91d7fd9bbb55c8e1afb6767090b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
