@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use \Diff\DiffOpFactory;
 
 /**
  * This program is free software; you can redistribute it and/or modify
@@ -31,16 +32,29 @@ class ItemChange extends EntityChange {
 	/**
 	 * @since 0.3
 	 *
-	 * @return \Diff\MapDiff|bool
+	 * @return \Diff\MapDiff - either empty diff or with sitelinks diff
 	 * @throws \MWException
 	 */
 	public function getSiteLinkDiff() {
 		$diff = $this->getDiff();
 
-		if ( !$diff instanceof ItemDiff ) {
+		// backwards compatibility
+		if ( $diff instanceof ItemDiff ) {
+			$itemDiff = $diff;
+		} else if ( is_array( $diff ) ) {
+			// @todo: put in a nicer place
+			$diffOpFactory = new DiffOpFactory();
+			$diffOps = array();
+
+			foreach( $diff['operations'] as $key => $opArray ) {
+				$diffOps[$key] = $diffOpFactory->newFromArray( $opArray );
+			}
+
+			$itemDiff = new ItemDiff( $diffOps );
+		} else {
 			throw new \MWException( 'Cannot get sitelink diff for ' . get_class( $diff ) . '.' );
 		}
 
-		return $this->getDiff()->getSiteLinkDiff();
+		return $itemDiff->getSiteLinkDiff();
 	}
 }
