@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dl59HQ3o",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-17T19:08:16Z",
+      "side": 1,
+      "message": "tabs",
+      "revId": "26ec675af245715ccfe2eda88b30d98b2610f201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl39dt0Q",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-17T19:08:16Z",
+      "side": 1,
+      "message": "tabs not quite right",
+      "revId": "26ec675af245715ccfe2eda88b30d98b2610f201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl-9Ih40",
+        "filename": "repo/resources/wikibase.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-17T19:08:16Z",
+      "side": 1,
+      "message": "When I am on http://wikidata.org/wiki/Q3941979, wgServer is \"//www.wikidata.org\". Could this be a problem?\n\n(of course, we are trying to get rid of the no subdomain)",
+      "revId": "26ec675af245715ccfe2eda88b30d98b2610f201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
