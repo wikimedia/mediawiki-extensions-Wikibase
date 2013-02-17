@@ -38,7 +38,9 @@ abstract class ViewEntityAction extends \ViewAction {
 		$queryValues = $this->getRequest()->getQueryValues();
 		$revisionId = 0;
 
-		if ( array_key_exists( 'oldid', $queryValues ) ) {
+		if ( array_key_exists( 'diff', $queryValues ) ) {
+			$revisionId = $queryValues[ 'diff' ];
+		} elseif ( array_key_exists( 'oldid', $queryValues ) ) {
 			$revisionId = $queryValues[ 'oldid' ];
 		}
 
