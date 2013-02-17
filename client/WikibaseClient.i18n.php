@@ -74,7 +74,9 @@ See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wikibase-comment-sitelink-add' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets added on the repository. This change appears on the client as a new language link in the sidebar. $1 is the wikilink that was added, in form of [[:de:Berlin|de:Berlin]].',
 	'wikibase-comment-sitelink-change' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets changed on the repository.  $1 is the wikilink for the old link and $2 is the new wikilink.  Format of wikilink is [[:de:Berlin|de:Berlin]].',
 	'wikibase-comment-sitelink-remove' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets removed on the repository.  $1 is the wikilink for the link removed, in format [[:de:Berlin|de:Berlin]].',
-	'wikibase-comment-multi' => 'Summary shown in Special:RecentChanges and on Special:WatchList for an entry that represents multiple changes on the Wikibase repository. Parameters:
+	'wikibase-comment-multi' => 'Summary shown in [[Special:RecentChanges]] and on [[Special:WatchList]] for an entry that represents multiple changes on the Wikibase repository.
+
+Parameters:
 * $1 - the number of changes; is always at least 2.',
 	'wikibase-nolanglinks' => 'Shown in the "Languages" box in case the page exists but hasn\'t got any langlinks.
 {{Identical|None}}',
@@ -142,6 +144,14 @@ $messages['be-tarask'] = array(
 	'wikibase-linkitem-input-page' => 'Старонка:',
 	'wikibase-rc-hide-wikidata' => '$1 Вікізьвесткі',
 	'wikibase-rc-show-wikidata-pref' => 'Паказваць праўкі Вікізьвестак у сьпісе апошніх зьменаў',
+);
+
+/** Bengali (বাংলা)
+ * @author Sankarshan
+ */
+$messages['bn'] = array(
+	'wikibase-linkitem-input-site' => 'ভাষা:',
+	'wikibase-rc-hide-wikidata' => '$1 উইকিডাটা',
 );
 
 /** Breton (brezhoneg)
@@ -458,6 +468,7 @@ $messages['gl'] = array(
 	'wikibase-editlinks' => 'Editar as ligazóns',
 	'wikibase-editlinkstitle' => 'Editar as ligazóns interlingüísticas',
 	'wikibase-linkitem-addlinks' => 'Engadir ligazóns',
+	'wikibase-linkitem-alreadylinked' => 'A páxina coa que quería ligar xa está anexada a un [$1 elemento] no repositorio central de datos, que liga con "$2" neste sitio. Os elementos unicamente poden ter unha páxina por sitio. Escolla unha páxina diferente coa que ligar.',
 	'wikibase-linkitem-close' => 'Pechar o diálogo e recargar a páxina',
 	'wikibase-linkitem-failure' => 'Houbo un erro ao intentar ligar a páxina achegada.',
 	'wikibase-linkitem-title' => 'Ligar coa páxina',
@@ -466,7 +477,7 @@ $messages['gl'] = array(
 	'wikibase-linkitem-input-site' => 'Lingua:',
 	'wikibase-linkitem-input-page' => 'Páxina:',
 	'wikibase-linkitem-invalidsite' => 'Seleccionouse un sitio descoñecido ou non válido',
-	'wikibase-linkitem-confirmitem-text' => 'Confirme que as páxinas que aparecen a continuación son aquelas que quere ligar con esta páxina.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'A páxina que escolleu xa está ligada cun [$1 elemento do noso respositorio central de datos]. Confirme que as páxinas que aparecen a continuación son aquelas que quere ligar con esta páxina.',
 	'wikibase-linkitem-confirmitem-button' => 'Confirmar',
 	'wikibase-linkitem-not-loggedin-title' => 'Cómpre acceder ao sistema',
 	'wikibase-linkitem-not-loggedin' => 'Debe acceder ao sistema neste wiki e no [$1 repositorio central de datos] para utilizar esta característica.',
@@ -501,11 +512,12 @@ $messages['he'] = array(
 	'wikibase-comment-sitelink-add' => 'קישור שפה הוסף: $1',
 	'wikibase-comment-sitelink-change' => 'קישור השפה שוּנה מ־$1 אל $2',
 	'wikibase-comment-sitelink-remove' => 'קישור השפה הוסר: $1',
-	'wikibase-comment-multi' => '$1 שינויים', # Fuzzy
+	'wikibase-comment-multi' => '{{PLURAL:$1|שינוי אחד|$1 שינויים}}',
 	'wikibase-nolanglinks' => 'אין',
 	'wikibase-editlinks' => 'עריכת קישורים',
 	'wikibase-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
 	'wikibase-linkitem-addlinks' => 'הוספת קישורים',
+	'wikibase-linkitem-alreadylinked' => 'הדף שניסית לקשר אליו כבר משויך ל[$1 פריט] במאגר הנתונים המרכזי שמקשר אל $2 באתר הזה. אפשר לשייך רק דף אחד לפריט. נא לבחור דף אחר.',
 	'wikibase-linkitem-close' => 'סגירה ורענון',
 	'wikibase-linkitem-failure' => 'שגיאה בלתי־ידועה אירעה בעת ניסיון לקשר את הדף הנתון.',
 	'wikibase-linkitem-title' => 'קישור עם דף',
@@ -514,7 +526,7 @@ $messages['he'] = array(
 	'wikibase-linkitem-input-site' => 'שפה:',
 	'wikibase-linkitem-input-page' => 'דף:',
 	'wikibase-linkitem-invalidsite' => 'בחרת אתר בלתי־ידוע או בלתי־תקין',
-	'wikibase-linkitem-confirmitem-text' => 'נא לאשר שהדפים להלן הם אלה בשרצית לקשר אל הדף הזה.',
+	'wikibase-linkitem-confirmitem-text' => 'הדף שבחרת כבר מקושר ל[$1 פריט במאגר הנתונים המרכזי]. נא לאשר שהדפים להלן הם אלה בשרצית לקשר אל הדף הזה.',
 	'wikibase-linkitem-confirmitem-button' => 'אישור',
 	'wikibase-linkitem-not-loggedin-title' => 'יש להיכנס לחשבון',
 	'wikibase-linkitem-not-loggedin' => 'יש להיכנס לחשבון בוויקי הזה וב[$1 מאגר הנתונים המרכזי] כדי להשתמש באפשרות הזאת.',
@@ -766,6 +778,7 @@ $messages['ko'] = array(
 	'wikibase-editlinks' => '링크 편집',
 	'wikibase-editlinkstitle' => '인터언어 링크 편집',
 	'wikibase-linkitem-addlinks' => '링크 추가',
+	'wikibase-linkitem-alreadylinked' => '링크하고자 하는 문서는 이미 이 사이트에 $2(으)로 링크한 중앙 데이터 저장소의 [$1항목]에 연결되어 있습니다. 항목은 사이트마다 문서 하나만 연결할 수 있습니다. 링크할 다른 문서를 선택하세요.',
 	'wikibase-linkitem-close' => '대화 상자를 닫고 문서를 다시 불러오기',
 	'wikibase-linkitem-failure' => '주어진 문서에 링크하는 동안 알 수 없는 오류가 발생했습니다.',
 	'wikibase-linkitem-title' => '문서에 링크',
@@ -911,7 +924,7 @@ $messages['ms'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Paparkan suntingan Wikidata dalam perubahan terkini',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Danmichaelo
  * @author Event
  * @author Jeblad
@@ -927,8 +940,26 @@ $messages['nb'] = array(
 	'wikibase-comment-sitelink-add' => 'Språklenke tilført: $1',
 	'wikibase-comment-sitelink-change' => 'Språklenke endret fra $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Språklenke fjernet: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|endring|endringer}}',
+	'wikibase-nolanglinks' => 'ingen',
 	'wikibase-editlinks' => 'Rediger lenker',
 	'wikibase-editlinkstitle' => 'Rediger språklenker – lenker til artikkelen på andre språk',
+	'wikibase-linkitem-addlinks' => 'Legg til lenke',
+	'wikibase-linkitem-alreadylinked' => 'Siden du vil lenke med er allerede koblet til et [$1 datasett] på det sentrale datalageret, som lenker til $2 på dette nettstedet. Datasett kan bare koble til én side per nettområde. Vennligst velg en annen side å lenke med.',
+	'wikibase-linkitem-close' => 'Lukk dialogboksen og last side på nytt',
+	'wikibase-linkitem-failure' => 'Det oppstod en ukjent feil under forsøket på å lenke med angitt side.',
+	'wikibase-linkitem-title' => 'Lenk til side',
+	'wikibase-linkitem-linkpage' => 'Lenk til side',
+	'wikibase-linkitem-selectlink' => 'Vennligst velg et nettsted og en side som du vil lenke med denne siden.',
+	'wikibase-linkitem-input-site' => 'Språk:',
+	'wikibase-linkitem-input-page' => 'Side:',
+	'wikibase-linkitem-invalidsite' => 'Ukjent eller ugyldig nettsted er valgt',
+	'wikibase-linkitem-confirmitem-text' => 'Siden du valgte, er allerede lenket til [$1 element på vårt sentrale dataregister]. Bekreft at siden(e) som er vist nedenfor er de(n) du vil lenke med valgt side.',
+	'wikibase-linkitem-confirmitem-button' => 'Bekreft',
+	'wikibase-linkitem-not-loggedin-title' => 'Du må være logget inn',
+	'wikibase-linkitem-not-loggedin' => 'Du må være logget inn på denne wikien og på det [$1 sentrale dataregister] for å bruke denne funksjonen.',
+	'wikibase-linkitem-success-create' => 'Sidene er lenket. Du kan finne det nyopprettede datasettet med nettstedlenkene i vårt [$1 sentrale dataregister].',
+	'wikibase-linkitem-success-link' => 'Sidene er koblet. Du kan finne datasettet med nettstedlenkene i vårt [$1 sentrale dataregister].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata-redigeringer i siste endringer',
 );
@@ -1311,23 +1342,24 @@ $messages['zh-hans'] = array(
 	'wikibase-comment-sitelink-remove' => '删除语言链接：$1',
 	'wikibase-comment-multi' => '$1 个更改',
 	'wikibase-nolanglinks' => '无',
-	'wikibase-editlinks' => '编辑连接',
+	'wikibase-editlinks' => '编辑链接',
 	'wikibase-editlinkstitle' => '编辑跨语言链接',
-	'wikibase-linkitem-addlinks' => '添加连接',
+	'wikibase-linkitem-addlinks' => '添加链接',
+	'wikibase-linkitem-alreadylinked' => '你要链接的这个页面已经在中央数据知识库中的一个[$1 项目]里，并且已经链接到了本站的$2。每个链接的站点上的页面只能在一个项目里。请选择其他的页面来链接。',
 	'wikibase-linkitem-close' => '关闭视窗和刷新页面',
-	'wikibase-linkitem-failure' => '在连接页面时出现了一个未知的问题。',
-	'wikibase-linkitem-title' => '与页面连接',
-	'wikibase-linkitem-linkpage' => '与页面连接',
-	'wikibase-linkitem-selectlink' => '请选择一个您想连接这个页面的网站与页面。',
+	'wikibase-linkitem-failure' => '在链接页面时出现了一个未知的问题。',
+	'wikibase-linkitem-title' => '与页面链接',
+	'wikibase-linkitem-linkpage' => '与页面链接',
+	'wikibase-linkitem-selectlink' => '请选择一个您想链接这个页面的网站与页面。',
 	'wikibase-linkitem-input-site' => '语言：',
 	'wikibase-linkitem-input-page' => '页面：',
 	'wikibase-linkitem-invalidsite' => '选择了一个未知或无效的网站',
-	'wikibase-linkitem-confirmitem-text' => '请确认以下是您想在这个页面上连接的页面。', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => '您选择的页面已链接到[ $1 我们中央数据知识库中的项目]。请确认如下所示的页面都是您想要与此页面链接的。',
 	'wikibase-linkitem-confirmitem-button' => '确认',
 	'wikibase-linkitem-not-loggedin-title' => '您必须要登入',
-	'wikibase-linkitem-not-loggedin' => '您必须要在此维基上和[$1 中央数据存储库]登入才能使用此功能。',
-	'wikibase-linkitem-success-create' => '页面以成功地被连接了。您可以在我们的[$1 中央数据存储库]找到包含连接的新项目。',
-	'wikibase-linkitem-success-link' => '页面以成功地被连接了。您可以在我们的[$1 中央数据存储库]找到包含连接的项目。',
+	'wikibase-linkitem-not-loggedin' => '您必须要在此维基上和[$1 中央数据知识库]登入才能使用此功能。',
+	'wikibase-linkitem-success-create' => '页面以成功地被链接了。您可以在我们的[$1 中央数据知识库]找到包含该链接的新项目。',
+	'wikibase-linkitem-success-link' => '页面已成功地被链接了。您可以在我们的[$1 中央数据知识库]找到包含该链接的项目。',
 	'wikibase-rc-hide-wikidata' => '$1维基数据',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
 );
