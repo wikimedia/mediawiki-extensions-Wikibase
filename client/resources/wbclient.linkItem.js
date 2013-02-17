@@ -169,21 +169,26 @@
 					.siteselector( {
 						resultSet: getLinkableSites()
 					} )
-					.on( 'siteselectorselect', function() {
+					.on( 'siteselectoropen siteselectorclose siteselectorautocomplete blur', function() {
 						var apiUrl;
+
+						$( '#wbclient-linkItem-page' )
+							.val( '' )
+							.suggester( 'destroy' );
+
 						try {
 							apiUrl = $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ).getApi();
 						} catch( e ) {
-							// Invalid input (likely incomplete)
-							invalidSiteGiven();
+							// Invalid input (likely incomplete). Disable the page input an re-disable to button
+							$( '#wbclient-linkItem-page' )
+								.attr( 'disabled', 'disabled' );
+							$goButton.button( 'disable' );
 							return;
 						}
 						// If the language gets changed the yet selected page is no longer available so we clear the input element.
 						// Furthermore we remove the old suggestor (if there's one) and create a new one working on the right wiki
 						$( '#wbclient-linkItem-page' )
 							.removeAttr( 'disabled' )
-							.val( '' )
-							.suggester( 'destroy' )
 							.suggester( {
 								ajax: {
 									url: apiUrl,
@@ -213,7 +218,7 @@
 						disabled: 'disabled',
 						'class' : 'wbclient-linkItem-Input'
 					} )
-					.one( 'focus', function() {
+					.on( 'focus', function() {
 						// Enable the button by the time the user uses this field
 						$goButton.button( 'enable' );
 					} )
@@ -275,6 +280,8 @@
 		if ( $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ) ) {
 			targetSite = $( '#wbclient-linkItem-Site' ).siteselector( 'getSelectedSite' ).getGlobalSiteId();
 		} else {
+			// This should never happen because the button shouldn't be enabled if the site isn't valid
+			// ...keeping this for sanity and paranoia
 			invalidSiteGiven();
 			return;
 		}
@@ -377,13 +384,13 @@
 			for ( i in entity.sitelinks ) {
 				if ( entity.sitelinks[ i ].site ) {
 					siteLinkCount += 1;
-				}
-				if ( entity.sitelinks[ i ].site === mw.config.get( 'wbCurrentSite' ).globalSiteId ) {
-					// Abort as the entity already is linked with a page on this wiki
-					onError(
-						mw.message( 'wikibase-linkitem-alreadylinked', itemLink, entity.sitelinks[ i ].title ).parse()
-					);
-					return;
+					if ( entity.sitelinks[ i ].site === mw.config.get( 'wbCurrentSite' ).globalSiteId ) {
+						// Abort as the entity already is linked with a page on this wiki
+						onError(
+							mw.message( 'wikibase-linkitem-alreadylinked', itemLink, entity.sitelinks[ i ].title ).parse()
+						);
+						return;
+					}
 				}
 			}
 
