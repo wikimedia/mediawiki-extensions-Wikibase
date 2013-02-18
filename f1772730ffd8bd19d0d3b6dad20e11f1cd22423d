@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dl3RrmSA",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-18T17:37:03Z",
+      "side": 1,
+      "message": "we should check for the WB_EXPERIMENTAL_FEATURES constant and include the below stuff if the wiki is in experimental mode.\n\nthe change is good enough though for the deployment branch",
+      "revId": "f1772730ffd8bd19d0d3b6dad20e11f1cd22423d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
