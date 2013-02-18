@@ -31,11 +31,9 @@ class SetAliases extends ModifyEntity {
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
 
-		if ( isset( $params['add'] ) ) {
-			$permissions[] = 'alias-add';
-		}
-		if ( isset( $params['set'] ) ) {
-			$permissions[] = 'alias-set';
+		if ( isset( $params['add'] ) || isset( $params['set'] ) ) {
+			// add and set has a common permission due to the special page SetAliases
+			$permissions[] = 'alias-update';
 		}
 		if ( isset( $params['remove'] ) ) {
 			$permissions[] = 'alias-remove';

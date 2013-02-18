@@ -34,7 +34,7 @@ class SpecialSetLabel extends SpecialSetEntity {
 	 * @since 0.4
 	 */
 	public function __construct() {
-		parent::__construct( 'SetLabel' );
+		parent::__construct( 'SetLabel', 'label-update' );
 	}
 
 	/**

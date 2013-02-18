@@ -44,7 +44,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	 * @since 0.1
 	 */
 	public function __construct() {
-		parent::__construct( 'NewItem' );
+		parent::__construct( 'NewItem', 'item-create' );
 	}
 
 	/**
