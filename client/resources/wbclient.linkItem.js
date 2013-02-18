@@ -680,15 +680,12 @@
 	 */
 	$( document ).ready( function() {
 		$( '#wbc-linkToItem' )
-			.text( '' )
-			.append(
-				$( '<a>' )
-					.attr( {
-						href: '#',
-						id: 'wbc-linkToItem-link'
-					} )
-					.text( mw.msg( 'wikibase-linkitem-addlinks' ) )
-					.click( checkLoggedin )
-			);
+			.find( 'a' )
+				.attr( {
+					href: '#',
+					id: 'wbc-linkToItem-link'
+				} )
+				.text( mw.msg( 'wikibase-linkitem-addlinks' ) )
+				.click( checkLoggedin );
 	} );
 } )( wikibase, mediaWiki, jQuery );
