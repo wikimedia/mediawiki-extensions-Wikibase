@@ -147,9 +147,7 @@ abstract class EntityView extends \ContextSource {
 			$claims = $this->getHtmlForClaims( $entity, $lang, $editable );
 		}
 
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) { // still experimental
-			$languageTerms = $this->getHtmlForLanguageTerms( $entity, $lang, $editable );
-		}
+		$languageTerms = $this->getHtmlForLanguageTerms( $entity, $lang, $editable );
 
 		$html = wfTemplate( 'wb-entity-content',
 			$this->getHtmlForLabel( $entity, $lang, $editable ),
