@@ -4,9 +4,7 @@
 ( function ( mw, $ ) {
 'use strict';
 
-var watchlist;
-
-watchlist = {
+var watchlist = {
 
 	/**
 	 * @type bool
@@ -21,15 +19,14 @@ watchlist = {
 		if ( toggleOn ) {
 			$linkMsg = 'hide';
 		}
-		var $link = '<a id="wb-toggle-link" href="javascript:void(0);">'
-            + mw.message( $linkMsg ).escaped() + '</a>';
-		return $link;
+		return '<a id="wb-toggle-link" href="javascript:void(0);">' +
+			mw.message( $linkMsg ).escaped() + '</a>';
 	},
 
 	getToggle: function( toggleLink ) {
-		return '<span id="wb-toggle">'
-            +  mw.message( 'wikibase-rc-hide-wikidata' ).escaped().replace( '$1', toggleLink )
-            + '</span>';
+		return '<span id="wb-toggle">' +
+			mw.message( 'wikibase-rc-hide-wikidata' ).escaped().replace( '$1', toggleLink ) +
+			'</span>';
 	},
 
 	addFilter: function() {
@@ -80,10 +77,12 @@ watchlist = {
 	 * edits and the date section heading if the section has wikibase only edits.
 	 */
 	toggleWikibase: function() {
-		watchlist.toggleOn = !watchlist.toggleOn
+		watchlist.toggleOn = !watchlist.toggleOn;
 		$( '.wikibase-edit' ).toggle();
 		watchlist.toggleSections( watchlist.getSections() );
-		$( '#wb-toggle-link' ).html( watchlist.getShowHideLink( watchlist.toggleOn ) );
+		$( '#wb-toggle-link' ).html(
+			watchlist.getShowHideLink( watchlist.toggleOn )
+		);
 	},
 
 	/**
