@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DlxSLNSI",
+        "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-18T16:35:34Z",
+      "side": 1,
+      "message": "need to investigate this more.  I took out the if/else in what we are deploying and we just list the changes.  they don\u0027t line up perfectly for a reference change, but show up as one removed and another added.",
+      "parentUuid": "DlxSiFbI",
+      "revId": "84d828924b604eba67084d3e5a9dd4cf59f0be30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dl-SmacM",
         "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "DlzSdEWM",
+        "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-18T16:35:34Z",
+      "side": 1,
+      "message": "yes can be improved, agree",
+      "parentUuid": "Dl-SmacM",
+      "revId": "84d828924b604eba67084d3e5a9dd4cf59f0be30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dl7Sw4fQ",
         "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2013-02-18T16:32:29Z",
       "side": 1,
       "message": "I think the diff should dive into this and generate a ListDiff of the snaks... Comparing all the Snaks as an atomic entity doesn\u0027t make sense visually, I think.",
+      "revId": "84d828924b604eba67084d3e5a9dd4cf59f0be30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl1SgnaI",
+        "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-18T16:35:34Z",
+      "side": 1,
+      "message": "agree and todo...",
+      "parentUuid": "Dl7Sw4fQ",
       "revId": "84d828924b604eba67084d3e5a9dd4cf59f0be30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
