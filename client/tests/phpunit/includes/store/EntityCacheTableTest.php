@@ -69,10 +69,12 @@ class EntityCacheTableTest extends \ORMTableTest {
 		$entity->setLabel( 'en', 'foobar' );
 		$entities[] = $entity;
 
-		$entity = \Wikibase\Query::newEmpty();
-		$entity->setId( 9001 );
-		$entity->setLabel( 'en', 'foobar' );
-		$entities[] = $entity;
+		if ( class_exists( '\Wikibase\Query' ) ) {
+			$entity = \Wikibase\Query::newEmpty();
+			$entity->setId( 9001 );
+			$entity->setLabel( 'en', 'foobar' );
+			$entities[] = $entity;
+		}
 
 		return array_map( function( Entity $entity ) { return array( $entity ); }, $entities );
 	}
