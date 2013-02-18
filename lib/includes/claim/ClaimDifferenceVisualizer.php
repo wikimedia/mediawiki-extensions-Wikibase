@@ -6,6 +6,8 @@ use Html;
 /**
  * Class for generating HTML for Claim Diffs.
  *
+ * @todo we might want a SnakFormatter class and others that handle specific stuff
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -63,60 +65,100 @@ class ClaimDifferenceVisualizer {
 		$html = '';
 
 		if ( $claimDifference->getMainSnakChange() !== null ) {
-			$mainSnakChange = $claimDifference->getMainSnakChange();
-			$valueFormatter = new DiffOpValueFormatter(
-				// todo: should shoe specific headers for both columns
-				$this->getMainSnakHeader( $mainSnakChange->getNewValue() ),
-				$this->getMainSnakValue( $mainSnakChange->getOldValue() ),
-				$this->getMainSnakValue( $mainSnakChange->getNewValue() )
-			);
-			$html .= $valueFormatter->generateHtml();
+			$html .= $this->visualizeMainSnakChange( $claimDifference->getMainSnakChange() );
 		}
 
 		if ( $claimDifference->getRankChange() !== null ) {
-			$rankChange = $claimDifference->getRankChange();
-			$valueFormatter = new DiffOpValueFormatter(
-				wfMessage( 'wikibase-diffview-rank' ),
-				$rankChange->getOldValue(),
-				$rankChange->getNewValue()
-			);
-			$html .= $valueFormatter->generateHtml();
+			$html .= $this->visualizeRankChange( $claimDifference->getRankChange() );
 		}
 
 		// TODO: html for qualifier changes
 
 		if ( $claimDifference->getReferenceChanges() !== null ) {
-			$referenceChanges = $claimDifference->getReferenceChanges();
+			$html .= $this->visualizeReferenceChanges( $claimDifference->getReferenceChanges() );
+		}
 
-			// somehow changing a reference value is treated as a diffop add and diffop remove
-			// for diff visualization, it should be more like a change
-			// @todo assert that both reference changes refer to the same reference
-			if ( count( $referenceChanges ) === 2 ) {
+		return $html;
+	}
 
-				$oldValue = $newValue = null;
+	/**
+	 * Get Html for a main snak change
+	 *
+	 * @since 0.4
+	 *
+	 * @param $mainSnakChange
+	 *
+	 * @return string
+	 */
+	protected function visualizeMainSnakChange( $mainSnakChange ) {
+		$valueFormatter = new DiffOpValueFormatter(
+			// todo: should shoe specific headers for both columns
+			$this->getMainSnakHeader( $mainSnakChange->getNewValue() ),
+			$this->getMainSnakValue( $mainSnakChange->getOldValue() ),
+			$this->getMainSnakValue( $mainSnakChange->getNewValue() )
+		);
 
-				foreach( $referenceChanges as $referenceChange ) {
-					if ( $referenceChange instanceof \Diff\DiffOpAdd ) {
-						$newValue = $referenceChange->getNewValue();
-					} else if ( $referenceChange instanceof \Diff\DiffOpRemove ) {
-						$oldValue = $referenceChange->getOldValue();
-					}
-				}
+		return $valueFormatter->generateHtml();
+	}
 
-				$html .= $this->getRefHtml( $oldValue, $newValue, 'change' );
-			} else {
-				foreach( $referenceChanges as $referenceChange ) {
-					if ( $referenceChange instanceof \Diff\DiffOpAdd ) {
-						$html .= $this->getRefHtml( null, $referenceChange->getNewValue(), 'add' );
-					} else if ( $referenceChange instanceof \Diff\DiffOpRemove ) {
-						$html .= $this->getRefHtml( $referenceChange->getOldValue(), null, 'remove' );
-					} else if ( $referenceChange instanceof \Diff\DiffOpChange ) {
-						$html .= $this->getRefHtml( $referenceChange->getOldValue(),
-							$reference->getNewValue(), 'change' );
-					}
+	/**
+	 * Get Html for rank change
+	 *
+	 * @since 0.4
+	 *
+	 * @param $rankChange
+	 *
+	 * @return string
+	 */
+	protected function visualizeRankChange( $rankChange ) {
+		$valueFormatter = new DiffOpValueFormatter(
+			wfMessage( 'wikibase-diffview-rank' ),
+			$rankChange->getOldValue(),
+			$rankChange->getNewValue()
+		);
+		return $valueFormatter->generateHtml();
+	}
+
+	/**
+	 * Get Html for reference changes
+	 *
+	 * @since 0.4
+	 *
+	 * @param $referenceChanges
+	 *
+	 * @return string
+	 */
+	protected function visualizeReferenceChanges( $referenceChanges ) {
+		// somehow changing a reference value is treated as a diffop add and diffop remove
+		// for diff visualization, it should be more like a change
+		// @todo assert that both reference changes refer to the same reference
+/*		if ( count( $referenceChanges ) === 2 ) {
+			$oldValue = $newValue = null;
+
+			foreach( $referenceChanges as $referenceChange ) {
+				var_export( $referenceChange );
+
+				if ( $referenceChange instanceof \Diff\DiffOpAdd ) {
+					$newValue = $referenceChange->getNewValue();
+				} else if ( $referenceChange instanceof \Diff\DiffOpRemove ) {
+					$oldValue = $referenceChange->getOldValue();
 				}
 			}
-		}
+
+			$html .= $this->getRefHtml( $oldValue, $newValue, 'change' );
+		} else {
+*/
+			foreach( $referenceChanges as $referenceChange ) {
+				if ( $referenceChange instanceof \Diff\DiffOpAdd ) {
+					$html .= $this->getRefHtml( null, $referenceChange->getNewValue(), 'add' );
+				} else if ( $referenceChange instanceof \Diff\DiffOpRemove ) {
+					$html .= $this->getRefHtml( $referenceChange->getOldValue(), null, 'remove' );
+				} else if ( $referenceChange instanceof \Diff\DiffOpChange ) {
+					$html .= $this->getRefHtml( $referenceChange->getOldValue(),
+						$reference->getNewValue(), 'change' );
+				}
+			}
+//		}
 
 		return $html;
 	}
@@ -224,7 +266,7 @@ class ClaimDifferenceVisualizer {
 		if ( $snakType === 'value' ) {
 			$dataValue = $snak->getDataValue();
 
-			// FIXME!
+			// FIXME! should use some value formatter
 			if ( $dataValue instanceof EntityId ) {
 				$diffValueString = $this->getEntityLabel( $dataValue );
 			} else {
