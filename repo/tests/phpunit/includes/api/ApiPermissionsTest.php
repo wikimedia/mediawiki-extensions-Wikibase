@@ -207,10 +207,8 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 			'labels' => array("en" => array( "language" => 'en', "value" => 'Test' ) ),
 		);
 
-		$json = new \Services_JSON();
-
 		$params = array(
-			'data' => $json->encode( $itemData ),
+			'data' => \FormatJson::encode( $itemData ),
 		);
 
 		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
