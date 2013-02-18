@@ -282,6 +282,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 
 	/**
 	 * Returns the aliases for the item in the language with the specified code.
+	 * TODO: decide on how to deal with duplicates, it is assumed all duplicates should be removed
 	 *
 	 * @since 0.1
 	 *
@@ -291,12 +292,13 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 */
 	public function getAliases( $languageCode ) {
 		return array_key_exists( $languageCode, $this->data['aliases'] ) ?
-			$this->data['aliases'][$languageCode] : array();
+			array_unique( $this->data['aliases'][$languageCode] ) : array();
 	}
 
 	/**
 	 * Returns all the aliases for the item.
 	 * The result is an array with language codes pointing to an array of aliases in the language they specify.
+	 * TODO: decide on how to deal with duplicates, it is assumed all duplicates should be removed
 	 *
 	 * @since 0.1
 	 *
@@ -311,11 +313,17 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			$textList = array_intersect_key( $textList, array_flip( $languages ) );
 		}
 
+		$textList = array_map(
+			'array_unique',
+			$textList
+		);
+
 		return $textList;
 	}
 
 	/**
 	 * Sets the aliases for the item in the language with the specified code.
+	 * TODO: decide on how to deal with duplicates, it is assumed all duplicates should be removed
 	 *
 	 * @since 0.1
 	 *
@@ -323,12 +331,12 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @param array $aliases
 	 */
 	public function setAliases( $languageCode, array $aliases ) {
-		$this->data['aliases'][$languageCode] = $aliases;
+		$this->data['aliases'][$languageCode] = array_unique( $aliases );
 	}
 
 	/**
 	 * Add the provided aliases to the aliases list of the item in the language with the specified code.
-	 * TODO: decide on how to deal with duplicates
+	 * TODO: decide on how to deal with duplicates, it is assumed all duplicates should be removed
 	 *
 	 * @since 0.1
 	 *
@@ -347,6 +355,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 
 	/**
 	 * Removed the provided aliases from the aliases list of the item in the language with the specified code.
+	 * TODO: decide on how to deal with duplicates, it is assumed all duplicates should be removed
 	 *
 	 * @since 0.1
 	 *
