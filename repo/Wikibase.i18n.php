@@ -350,7 +350,7 @@ This is a generic placeholder message used while a save is in progress, and repl
 This is a generic placeholder message used while a remove is in progress, and replaces the edit and remove.',
 	'wikibase-label-empty' => "Placeholder message displayed instead of the item's label in case no label has been specified yet. This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
 	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
-This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [https://www.wikidata.org/wiki/Wikidata:Glossary#languageattribute-label label].',
+This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-label|label]].',
 	'wikibase-description-empty' => "Placeholder message displayed instead of the item's description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
@@ -366,7 +366,7 @@ Bubble help message for entering the description of the data set used for a spec
 	'wikibase-statements' => "Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata's glossary for [[m:d:Wikidata:Glossary#Statement|statements]] and [[m:d:Wikidata:Glossary#Item|item]].",
 	'wikibase-terms' => 'Heading for the table with the labels and descriptions in other languages.
 {{Identical|Otherlanguages}}',
-	'wikibase-sitelinks-add' => "Add a sitelink to a language specific page on the cluster. See also Wikidata's glossary for [//wikidata.org/wiki/Wikidata:Glossary#Sitelink sitelinks].",
+	'wikibase-sitelinks-add' => "Add a sitelink to a language specific page on the cluster. See also Wikidata's glossary for [[d:Wikidata:Glossary#Sitelink|sitelinks]].",
 	'wikibase-sitelinks-empty' => 'There are no site links for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
 	'wikibase-sitelinks-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 D.png|right|0x150px]]
 Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
@@ -2299,6 +2299,7 @@ $messages['eu'] = array(
 );
 
 /** Persian (فارسی)
+ * @author Calak
  * @author Dalba
  * @author Mahan
  * @author Mjbmr
@@ -2310,7 +2311,7 @@ $messages['eu'] = array(
  */
 $messages['fa'] = array(
 	'wikibase-desc' => 'مخزن داده‌های ساخت‌یافته',
-	'specialpages-group-wikibaserepo' => 'مخزن ویکی‌داده', # Fuzzy
+	'specialpages-group-wikibaserepo' => 'مخزن ویکی‌داده',
 	'wikibase-edit' => 'ویرایش',
 	'wikibase-save' => 'ذخیره',
 	'wikibase-cancel' => 'لغو',
@@ -2367,6 +2368,9 @@ $messages['fa'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'مقدار سفارشی',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'مقدار ناشناخته',
 	'wikibase-snakview-snaktypeselector-novalue' => 'بدون مقدار',
+	'wikibase-shortcopyrightwarning' => 'با کلیک کردن روی "$1"، شما با [[$2|قوانین استفاده]] موافقت می‌کنید، و اینکه اجازه می‌دهید ویرایش‌های شما با اجازه‌نامهٔ $3 منتشر شوند.',
+	'wikibase-copyrighttooltip-acknowledge' => 'من این شرایط را برای ویرایش‌های آینده قبول می‌کنم. این پیام را دوباره نشان ندهید.',
+	'wikibase-entityselector-more' => 'بیشتر',
 	'wikibase-anonymouseditwarning-item' => 'هشدار: شما به سامانه وارد نشده‌اید. 
 نشانی آی‌پی شما در تاریخچهٔ ویرایش این مورد ثبت خواهد شد.',
 	'wikibase-anonymouseditwarning-property' => "'''هشدار:''' شما به سامانه وارد نشده‌اید.
@@ -2477,9 +2481,12 @@ $messages['fa'] = array(
 	'wikibase-item-summary-wbsetsitelink-set' => 'افزودن پیوند مشخص‌کنندهٔ وب‌گاه [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'حذف پیوند مشخص‌کنندهٔ وب‌گاه [$2]',
 	'wikibase-item-summary-wblinktitles-connect' => 'ارتباط‌دادن {{PLURAL:$1|صفحه|صفحه‌ها}} [$2↔$3]',
-	'wikibase-item-summary-wbcreateclaim-value' => 'ایجاد {{PLURAL:$1|یک ادعای مقداری|ادعاهای مقداری}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-novalue' => 'ایجاد {{PLURAL:$1|یک ادعای بدون مقدار|ادعاهای بدون مقدار}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'ایجاد {{PLURAL:$1|یک ادعای چندمقداری|ادعاهای چندمقداری}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-value' => 'ایجاد {{PLURAL:$1|یک ادعا|ادعا}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'ایجاد {{PLURAL:$1|یک ادعای بدون مقدار|ادعاهای بدون مقدار}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'ایجاد {{PLURAL:$1|یک ادعای چندمقداری|ادعاهای چندمقداری}}',
+	'wikibase-item-summary-wbcreateclaim' => 'ایجاد  {{PLURAL:$1| ادعا|ادعا}}',
+	'wikibase-item-summary-wbsetclaimvalue' => 'ثبت {{PLURAL:$1|یک مقدار ادعا|مقدار ادعا}}',
+	'wikibase-item-summary-wbremoveclaims' => 'حذف  {{PLURAL:$1| ادعا|ادعا}}',
 	'wikibase-item-summary-special-create-item' => 'ایجاد یک آیتم [$2] با {{PLURAL:$1|مقدار|مقدارها}}',
 	'wikibase-property-summary-wbeditentity-create' => 'ایجاد یک ویژگی جدید',
 	'wikibase-property-summary-wbeditentity-update' => 'به‌روز رسانی یک ویژگی',
@@ -2912,9 +2919,12 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de la p
 	'wikibase-item-summary-wbsetsitelink-set' => 'Lien spécifique au site [$2] ajouté',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Lien spécifique au site [$2] supprimé',
 	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] {{PLURAL:$1|page connectée|pages connectées}}',
-	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|une valeur revendiquée créée|valeurs revendiquées créées}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|une revendication sans valeur créée|revendications sans valeur créées}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-somevalue' => "{{PLURAL:$1|une revendication d'une valeur quelconque créée|revendications d'une valeur quelconque créées}}", # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Une revendication créée|Revendications créées}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Une revendication créée|Revendications créées}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Une revendication créée|Revendications créées}}',
+	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|Une revendication créée|Revendications créées}}',
+	'wikibase-item-summary-wbsetclaimvalue' => 'Définir {{PLURAL:$1|une valeur de revendication|des valeurs de revendication}}',
+	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Une revendication supprimée|Revendications supprimées}}',
 	'wikibase-item-summary-special-create-item' => 'Un élément [$2] créé avec {{PLURAL:$1|une valeur|des valeurs}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Création d’une nouvelle propriété',
 	'wikibase-property-summary-wbeditentity-update' => 'Mise à jour d’une propriété',
@@ -3656,6 +3666,8 @@ $messages['hsb'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'swójska hódnota',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'njeznata hódnota',
 	'wikibase-snakview-snaktypeselector-novalue' => 'žana hódnota',
+	'wikibase-shortcopyrightwarning' => 'Přez kliknjenje na "$1" zwoliš do [[$2|wužiwanskich wuměnjenjow]] a sy definitiwnje z tym přezjedny, swój přinošk pod $3 stajić.',
+	'wikibase-copyrighttooltip-acknowledge' => 'Akceptuju tute wuměnjenja za swoje přichodne změny. Njepokazaj tutu zdźělenku hišće raz.',
 	'wikibase-entityselector-more' => 'wjace',
 	'wikibase-anonymouseditwarning-item' => 'Kedźbu: Njejsy přizjewjeny. Twoja IP-adresa budźe so do wersijowych stawiznow elementa přijimać.',
 	'wikibase-anonymouseditwarning-property' => 'Kedźbu: Njejsy přizjewjeny. Twoja IP-adresa budźe so do wersijowych stawiznow tuteje kajkosće přijimać.',
@@ -3686,10 +3698,12 @@ $messages['hsb'] = array(
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Bohužel rěčny identifikator, kotryž sy podał, je systemej njeznaty. Prošu wužij płaćiwy identifikator kaž "hsb".',
 	'wikibase-itemdisambiguation-description' => 'Hódnoty, kotrež so za pytanje wužiwaja, dyrbja dospołne tekstowe zapiski być. Rěč je identifikator, na přikład "hsb".',
 	'special-newproperty' => 'Nowu kajkosć wutworić',
+	'wikibase-newproperty-summary' => 'Skontroluj, [[Special:PropertyDisambiguation|hač kajkosć hižo eksistuje]]!<br />Ty měł [[Help:Label|pomjenowanje]] a [[Help:Description|wopisanje]] za wšě nowe kajkosće wutworić, a nimo toho w płaćiwym kajkostnym typje.',
 	'wikibase-newproperty-fieldset' => 'Nowu kajkosć wutworić',
 	'wikibase-newproperty-datatype' => 'Datowy typ:',
 	'wikibase-newproperty-invalid-datatype' => 'Njepłaćiwy datowy typ podaty',
 	'special-createitem' => 'Nowy element wutworić',
+	'wikibase-createitem-summary' => 'Skontroluj, [[Special:ItemByTitle|hač element hižo eksistuje]]!<br />Ty měł [[Help:Label|pomjenowanje]] a [[Help:Description|wopisanje]] za wšě nowe elementy wutworić.',
 	'wikibase-createitem-fieldset' => 'Nowy element wutworić',
 	'wikibase-createitem-site' => 'Sydło prěnjeje wotkazaneje strony',
 	'wikibase-createitem-page' => 'Mjeno prěnjeje wotkazaneje strony',
@@ -4483,7 +4497,7 @@ alla hluti.',
  */
 $messages['it'] = array(
 	'wikibase-desc' => 'Archivio di dati strutturati',
-	'specialpages-group-wikibaserepo' => 'Archivio Wikidata', # Fuzzy
+	'specialpages-group-wikibaserepo' => 'Archivio Wikibase',
 	'wikibase-edit' => 'modifica',
 	'wikibase-save' => 'salva',
 	'wikibase-cancel' => 'annulla',
@@ -4538,6 +4552,8 @@ $messages['it'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'valore personalizzato',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valore sconosciuto',
 	'wikibase-snakview-snaktypeselector-novalue' => 'nessun valore',
+	'wikibase-shortcopyrightwarning' => 'Cliccando su "$1", accetti le [[$2|condizioni d\'uso]], ed accetti irrevocabilmente a rilasciare il tuo contributo in base alla $3.',
+	'wikibase-copyrighttooltip-acknowledge' => 'Accetto questi termini per le mie future modifiche. Non mostrare di nuovo questo messaggio.',
 	'wikibase-entityselector-more' => 'altro',
 	'wikibase-anonymouseditwarning-item' => "Attenzione: Accesso non effettuato.
 Nella cronologia dell'elemento verrà registrato il tuo indirizzo IP.",
@@ -4653,9 +4669,12 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetsitelink-set' => 'Aggiunto collegamento al sito [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Rimosso collegamento al sito [$2]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Connessioni [$2↔$3] {{PLURAL:$1|pagina|pagine}}',
-	'wikibase-item-summary-wbcreateclaim-value' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}} con valore indicato", # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-novalue' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}} senza valore previsto", # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-somevalue' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}} con valore previsto ma sconosciuto", # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-value' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}}",
+	'wikibase-item-summary-wbcreateclaim-novalue' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}}",
+	'wikibase-item-summary-wbcreateclaim-somevalue' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}}",
+	'wikibase-item-summary-wbcreateclaim' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}}",
+	'wikibase-item-summary-wbsetclaimvalue' => "{{PLURAL:$1|Impostato un valore|Impostati valori}} per l'asserzione",
+	'wikibase-item-summary-wbremoveclaims' => "{{PLURAL:$1|Rimosso un valore|Rimossi valori}} per l'asserzione",
 	'wikibase-item-summary-special-create-item' => 'Creato un elemento [$2] con {{PLURAL:$1|valore|valori}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Creata una nuova proprietà',
 	'wikibase-property-summary-wbeditentity-update' => 'Aggiornata una proprietà',
@@ -8139,6 +8158,7 @@ $messages['zh-hans'] = array(
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|来源|来源}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|1个来源|$1个来源}}还未保存',
 	'wikibase-snakview-property-input-placeholder' => '属性',
+	'wikibase-snakview-choosesnaktype' => '选择一个值类型。',
 	'wikibase-snakview-variations-somevalue-label' => '未知值',
 	'wikibase-snakview-variations-novalue-label' => '无值',
 	'wikibase-snakview-snaktypeselector-value' => '自定义值',

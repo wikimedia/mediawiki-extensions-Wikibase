@@ -111,6 +111,26 @@ Parameters:
 	'wikibase-rc-show-wikidata-pref' => 'Option in the Recent changes section of preferences to show wikibase changes by default in recent changes',
 );
 
+/** Arabic (العربية)
+ * @author Ali1
+ * @author Tarawneh
+ */
+$messages['ar'] = array(
+	'wikibase-after-page-move' => 'يمكنك أيضا [ $1  تحديث] بند ويكيبيانات المرتبط بها للحفاظ على روابط اللغة ضمن الصفحة المنقولة.',
+	'wikibase-comment-remove' => 'تم حذف بند ويكيبيانات المرتبطة. و تم إزالة ارتباطات اللغة.',
+	'wikibase-nolanglinks' => 'لا شيء',
+	'wikibase-linkitem-addlinks' => 'إضافة روابط',
+	'wikibase-linkitem-title' => 'اربط مع الصفحة',
+	'wikibase-linkitem-linkpage' => 'اربط مع الصفحة',
+	'wikibase-linkitem-selectlink' => 'رجاء اختر موقعا و صفحة للربط مع هذه الصفحة.',
+	'wikibase-linkitem-input-site' => 'اللغة:',
+	'wikibase-linkitem-input-page' => 'صفحة:',
+	'wikibase-linkitem-invalidsite' => 'تم اختيار موقع غير معروف أو غير صحيح',
+	'wikibase-linkitem-confirmitem-button' => 'أكّد',
+	'wikibase-linkitem-not-loggedin-title' => 'يتوجب عليك تسجيل الدخول',
+	'wikibase-rc-hide-wikidata' => '$1 ويكي بيانات',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -359,14 +379,43 @@ $messages['es'] = array(
 );
 
 /** Persian (فارسی)
+ * @author Calak
+ * @author Pouyana
  * @author Reza1615
  * @author ZxxZxxZ
+ * @author درفش کاویانی
  */
 $messages['fa'] = array(
 	'wikibase-client-desc' => 'کارخواه برای افزونهٔ ویکی‌بیس',
+	'wikibase-after-page-move' => 'شما ممکن است در عین حال بخواهید آیتم وابستهٔ ویکی‌داده را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.',
+	'wikibase-comment-remove' => 'پیوند آیتم ویکی‌داده حذف گردید. پیوند زبان حذف شد.',
+	'wikibase-comment-linked' => 'یک آیتم ویکی‌داده به این صفحه پیوند دارد.',
+	'wikibase-comment-unlink' => 'این صفحه به ویکی‌داده پیوند ندارد. پیوند زبان حذف شد.',
+	'wikibase-comment-restore' => 'پیوند آیتم ویکی‌داده بازیابی شد. پیوند زبان بازیابی شد.',
 	'wikibase-comment-update' => 'پیوندهای زبانی به‌روز شد.',
+	'wikibase-comment-sitelink-add' => 'پیوند زبان اضافه شده:$1',
+	'wikibase-comment-sitelink-change' => 'پیوند زبان از $1 به $2 تغییر کرده‌است.',
+	'wikibase-comment-sitelink-remove' => 'پیوند زبان حذف شد: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|تغییر|تغییرها}}',
+	'wikibase-nolanglinks' => 'هیچ',
 	'wikibase-editlinks' => 'ویرایش پیوندها',
 	'wikibase-editlinkstitle' => 'افزودن پیوندهای میان‌ویکی',
+	'wikibase-linkitem-addlinks' => 'افزودن پیوند',
+	'wikibase-linkitem-alreadylinked' => 'صفحه‌ای که شما به آن پیوند می‌دهید، از قبل به یک [$1 آیتم] در مخزن مرکزی داده که به $2 در این سایت مریوط می‌شود، متصل است. آیتم‌ها می‌توانند فقط به یک صفحه از وبگاه ارتباط داشته‌باشند. لطفا از یک صقحه برای پیوند استفاده کنید.',
+	'wikibase-linkitem-close' => 'گفتگو را ببندید و صفحه را مجدداً بارگذاری نمایید.',
+	'wikibase-linkitem-failure' => 'یک خطای ناشناخته در هنگام بارگذاری صفحهٔ پیوند داده‌شده رخ داد.',
+	'wikibase-linkitem-title' => 'پیوند به صفحه',
+	'wikibase-linkitem-linkpage' => 'پیوند با صفحه',
+	'wikibase-linkitem-selectlink' => 'لطفا سایت و صفحه‌ای که می‌خواهید به این صفحه پیوند دهید را انتخاب کنید.',
+	'wikibase-linkitem-input-site' => 'زبان:',
+	'wikibase-linkitem-input-page' => 'صفحه:',
+	'wikibase-linkitem-invalidsite' => 'سایت‌های ناشناخته و یا غیر معتبر انتخاب شده است.',
+	'wikibase-linkitem-confirmitem-text' => 'این صفحه که انتخاب کرده‌اید از قبل به [$1 یک آیتم روی مخزن مرکزی داده ما] متصل است. لطفا تایید کنید که صفحه‌های زیر همان‌هایی هستند که شما خواهان پیوند دادن به آن‌ها بودید.',
+	'wikibase-linkitem-confirmitem-button' => 'تأیید',
+	'wikibase-linkitem-not-loggedin-title' => 'باید وارد سیستم شوید.',
+	'wikibase-linkitem-not-loggedin' => 'شما نیاز است که در این ویکی و [$1 مخزن اصلی داده] وارد شوید تا بتوانید از این امکان استفاده کنید.',
+	'wikibase-linkitem-success-create' => 'این صفحه به‌درستی پیوند داده شد. شما می‌توانید آیتم حاوی پیوند را در [$1 مخزن مرکزی داده‌ها] ما بیابید.',
+	'wikibase-linkitem-success-link' => 'این صفحه به‌درستی پیوند داده شد. شما می‌توانید آیتم حاوی پیوند را در [$1 central data repository] بیابید.',
 	'wikibase-rc-hide-wikidata' => '$1 ویکی‌داده',
 	'wikibase-rc-show-wikidata-pref' => 'نمایش ویرایش‌های ویکی‌داده در تغییرات اخیر',
 );
@@ -706,7 +755,7 @@ $messages['it'] = array(
 	'wikibase-linkitem-input-site' => 'Lingua:',
 	'wikibase-linkitem-input-page' => 'Pagina:',
 	'wikibase-linkitem-invalidsite' => 'Sito selezionato sconosciuto o non valido',
-	'wikibase-linkitem-confirmitem-text' => 'Conferma che le pagine mostrate qui sotto sono quelle che si desidera collegare con questa pagina.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'La pagina che hai scelto è già collegata a un altro [$1 elemento nel nostro archivio centrale dei dati]. Conferma che le pagine mostrate qui sotto sono quelle che si desidera collegare con questa pagina.',
 	'wikibase-linkitem-confirmitem-button' => 'Conferma',
 	'wikibase-linkitem-not-loggedin-title' => "Devi aver effettuato l'accesso",
 	'wikibase-linkitem-not-loggedin' => "Devi aver effettuato l'accesso su questo wiki e nell'[$1 archivio dati centralizzato] per utilizzare questa funzionalità.",
@@ -802,9 +851,34 @@ $messages['ko'] = array(
  * @author Purodha
  */
 $messages['ksh'] = array(
-	'wikibase-client-desc' => 'Madd en Aanwendong vun däm WikiData Projrammzihsaz müjjelesch.',
+	'wikibase-client-desc' => 'Mäd en Aanwendong vun däm Projrammzohsaz „Wikibase“ müjjelesch.',
+	'wikibase-after-page-move' => 'Mer kann och dä zohjehüüreje Wikidata-Endraach [$1 aanpaße], öm de Lengks op Schprooche vun ömjenannte Sigge aschuur ze hallde.',
+	'wikibase-comment-remove' => 'Dä verbonge Wikidata-Endraach wood fottjeschmeße. Alle Lengks op ander Schprooche woodte fottjenumme.',
+	'wikibase-comment-linked' => 'Ene Wikidata-Endraach wood met heh dä Sigg verbonge.',
+	'wikibase-comment-unlink' => 'Heh di Sigg wood uß däm verbonge Wikidata-Endraach jenumme. Alle Lengks op ander Schprooche woodte fottjenumme.',
+	'wikibase-comment-restore' => 'Dä verbonge Wikidata-Endraach wood wider zerök jehollt. Alle Lengks op ander Schprooche woodte wider enejrescht.',
+	'wikibase-comment-update' => 'De Lengks op ander Schprooche sin aanjepaß woode.',
+	'wikibase-comment-sitelink-add' => 'Dä Lengk $1 ob en ander Schprooch es derbei jedonn woode.',
+	'wikibase-comment-sitelink-change' => 'Dä Lengk $1 ob en ander Schprooch es op $2 verändert woode.',
+	'wikibase-comment-sitelink-remove' => 'Dä Lengk $1 ob en ander Schprooch es eruß jenomme woode.',
+	'wikibase-comment-multi' => '{{PLURAL:$1|Ein Änderong|$1 Änderonge|Kein Änderong}}',
+	'wikibase-nolanglinks' => 'keine',
 	'wikibase-editlinks' => 'Lengks ändere',
 	'wikibase-editlinkstitle' => 'Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße',
+	'wikibase-linkitem-addlinks' => 'Lengks derbei donn',
+	'wikibase-linkitem-alreadylinked' => 'Di Sigg, di De verlenke wells, es ald med enem [$1 Endraach] en zäntraale Daatebeschtand verbonge, un dä es ald met $2 heh em Wiki verbonge, Mer kann bloß ein esu en Verbendong pro Endraach han. Dröm söhk Der en ander Sigg uß för heh die Sigg dermet ze verbenge,',
+	'wikibase-linkitem-close' => 'Finster zohmaache un Sigg neu laade',
+	'wikibase-linkitem-failure' => 'Ene onbikannte Fähler es beim Verlengke op di aanjejovve Sigg opjetrodde.',
+	'wikibase-linkitem-title' => 'Lengk met en ander Sigg',
+	'wikibase-linkitem-linkpage' => 'Lohß Jonn!',
+	'wikibase-linkitem-selectlink' => 'Donn en Wäbßait un en Sigg ußsöhkre, woh De heh di Sigg met verlengk han wells.',
+	'wikibase-linkitem-input-site' => 'De Schprooch:',
+	'wikibase-linkitem-input-page' => 'Sigg:',
+	'wikibase-linkitem-invalidsite' => 'Dat es en onbikannte udder onjöltije ẞait!',
+	'wikibase-linkitem-confirmitem-button' => 'Lohß jonn!',
+	'wikibase-linkitem-not-loggedin-title' => 'Do moß enjelogg sin',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Donn Änderonge aan Wikidata en de „{{int:recentchanges}}“ zeije',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
