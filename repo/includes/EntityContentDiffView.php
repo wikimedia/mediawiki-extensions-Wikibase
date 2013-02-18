@@ -132,12 +132,13 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		 * @var EntityContent $new
 		 */
 		$diff = $old->getEntity()->getDiff( $new->getEntity() );
+		$langCode = $this->getContext()->getLanguage()->getCode();
 
 		// TODO: derp inject the EntityDiffVisualizer
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new ListDiffer() ),
-			new ClaimDifferenceVisualizer( new WikiPageEntityLookup() )
+			new ClaimDifferenceVisualizer( new WikiPageEntityLookup(), $langCode )
 		);
 
 		return $diffVisualizer->visualizeDiff( $diff );
