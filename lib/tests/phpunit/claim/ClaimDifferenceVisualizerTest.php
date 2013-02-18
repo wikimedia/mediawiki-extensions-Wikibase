@@ -82,12 +82,14 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 	 *
 	 * @param ClaimDifference $claimDifference
 	 */
+// @todo, also takes a claim as second option
+/*
 	public function testVisualizeDiff( ClaimDifference $claimDifference ) {
-		$differenceVisualizer = new ClaimDifferenceVisualizer( new \Wikibase\CachingEntityLoader() );
+		$differenceVisualizer = new ClaimDifferenceVisualizer( new \Wikibase\CachingEntityLoader(), 'en' );
 
-		$visualization = $differenceVisualizer->visualizeDiff( $claimDifference );
+		$visualization = $differenceVisualizer->visualizeClaimChange( $claimDifference );
 
 		$this->assertInternalType( 'string', $visualization );
 	}
-
+*/
 }
