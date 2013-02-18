@@ -45,6 +45,14 @@ $messages['qqq'] = array(
 	'version-datavalues' => 'Name of the DataValues extension collection, used on [[Special:Version]]',
 );
 
+/** Arabic (العربية)
+ * @author Antime
+ */
+$messages['ar'] = array(
+	'datavalues-desc' => 'مجموعة من كائنات تمثل أنواع مختلفة من القيم',
+	'version-datavalues' => 'قيم البيانات',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -92,6 +100,14 @@ $messages['dsb'] = array(
 $messages['es'] = array(
 	'datavalues-desc' => 'Colección de objetos que representan varias clases de valores',
 	'version-datavalues' => 'Valores de datos',
+);
+
+/** Persian (فارسی)
+ * @author Calak
+ */
+$messages['fa'] = array(
+	'datavalues-desc' => 'مجموعه ای از اشیاء به نمایندگی از انواع مختلف ارزش',
+	'version-datavalues' => 'مقدارهای داده',
 );
 
 /** French (français)
