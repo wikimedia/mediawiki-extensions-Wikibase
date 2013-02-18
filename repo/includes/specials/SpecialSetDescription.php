@@ -34,7 +34,7 @@ class SpecialSetDescription extends SpecialSetEntity {
 	 * @since 0.4
 	 */
 	public function __construct() {
-		parent::__construct( 'SetDescription' );
+		parent::__construct( 'SetDescription', 'description-update' );
 	}
 
 	/**

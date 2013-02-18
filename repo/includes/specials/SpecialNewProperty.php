@@ -44,7 +44,7 @@ class SpecialNewProperty extends SpecialCreateEntity {
 	 * @since 0.2
 	 */
 	public function __construct() {
-		parent::__construct( 'NewProperty' );
+		parent::__construct( 'NewProperty', 'create-property' );
 	}
 
 	/**

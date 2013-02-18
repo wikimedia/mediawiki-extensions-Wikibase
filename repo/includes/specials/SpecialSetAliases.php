@@ -34,7 +34,7 @@ class SpecialSetAliases extends SpecialSetEntity {
 	 * @since 0.4
 	 */
 	public function __construct() {
-		parent::__construct( 'SetAliases' );
+		parent::__construct( 'SetAliases', 'alias-update' );
 	}
 
 	/**
