@@ -70,7 +70,8 @@ class EntityDiffVisualizer {
 	 * @param ClaimDiffer $claimDiffer
 	 * @param ClaimDifferenceVisualizer $claimDiffView
 	 */
-	public function __construct( IContextSource $contextSource, ClaimDiffer $claimDiffer, ClaimDifferenceVisualizer $claimDiffView ) {
+	public function __construct( IContextSource $contextSource, ClaimDiffer $claimDiffer,
+		ClaimDifferenceVisualizer $claimDiffView ) {
 		$this->context = $contextSource;
 		$this->claimDiffer = $claimDiffer;
 		$this->claimDiffVisualizer = $claimDiffView;
@@ -132,29 +133,35 @@ class EntityDiffVisualizer {
 	 */
 	protected function getClaimDiffHtml( DiffOp $claimDiffOp ) {
 		if ( $claimDiffOp instanceof DiffOpChange ) {
-			$claimDifference = $this->claimDiffer->diffClaims( $claimDiffOp->getOldValue(), $claimDiffOp->getNewValue() );
-			return $this->claimDiffVisualizer->visualizeDiff( $claimDifference );
+			$claimDifference = $this->claimDiffer->diffClaims(
+				$claimDiffOp->getOldValue(),
+				$claimDiffOp->getNewValue()
+			);
+			return $this->claimDiffVisualizer->visualizeDiff(
+				$claimDifference,
+				$this->context->getLanguage()->getCode()
+			);
 		}
 
 		if ( $claimDiffOp instanceof DiffOpAdd || $claimDiffOp instanceof DiffOpRemove ) {
-			$claim = $claimDiffOp instanceof DiffOpAdd ? $claimDiffOp->getNewValue() : $claimDiffOp->getOldValue();
-			return $this->getClaimHtml( $claim );
+			if ( $claimDiffOp instanceof DiffOpAdd ) {
+				$claim = $claimDiffOp->getNewValue();
+				$opType = 'add';
+			} else {
+				$claim = $claimDiffOp->getOldValue();
+				$opType = 'remove';
+			}
+
+			$mainSnak = $claim->getMainSnak();
+
+			return $this->claimDiffVisualizer->getSnakHtml(
+				$mainSnak,
+				$this->context->getLanguage()->getCode(),
+				$opType
+			);
 		}
 
 		throw new MWException( 'Encountered an unexpected diff operation type for a claim' );
-	}
-
-	/**
-	 * Returns the HTML for a single Claim.
-	 *
-	 * @since 0.4
-	 *
-	 * @param Claim $claim
-	 *
-	 * @return string
-	 */
-	protected function getClaimHtml( Claim $claim ) {
-		return 'TODO'; // TODO
 	}
 
 }

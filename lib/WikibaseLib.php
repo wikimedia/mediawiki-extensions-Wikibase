@@ -93,6 +93,7 @@ $wgAutoloadClasses['Wikibase\ByPropertyIdArray'] 		= $dir . 'includes/ByProperty
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 			= $dir . 'includes/ChangeNotifier.php';
 $wgAutoloadClasses['Wikibase\ChangeNotificationJob']	= $dir . 'includes/ChangeNotificationJob.php';
 $wgAutoloadClasses['Wikibase\ChangesTable'] 			= $dir . 'includes/ChangesTable.php';
+$wgAutoloadClasses['Wikibase\DiffOpValueVisualizer']	= $dir . 'includes/DiffOpValueVisualizer.php';
 $wgAutoloadClasses['Wikibase\DiffView'] 				= $dir . 'includes/DiffView.php';
 $wgAutoloadClasses['Wikibase\Lib\GuidGenerator'] 		= $dir . 'includes/GuidGenerator.php';
 $wgAutoloadClasses['Wikibase\Lib\V4GuidGenerator'] 		= $dir . 'includes/GuidGenerator.php';
