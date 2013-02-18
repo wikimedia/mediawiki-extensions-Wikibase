@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dl9SEjRA",
+        "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-18T16:45:00Z",
+      "side": 1,
+      "message": "wfMessage returns a Message object, but DiffOpValueFormatter expects a string here! It still works, but mostly by accident. \n\nDiffOpValueFormatter should support Message objects as a name, and use Message::parse() to get the HTML. As of now, we will see html-escaped wiki text from the __toString() methods, as far as I can tell.",
+      "revId": "087f0279e538a6d122a1c7ddcdf27fea09018c83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl7SJASc",
+        "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-18T16:45:00Z",
+      "side": 1,
+      "message": "It should be made very clear whether this function returns HTML or not. IF a value formatter is used, I suppose it would, while now it doesn\u0027t, right?",
+      "revId": "087f0279e538a6d122a1c7ddcdf27fea09018c83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl5R-JRI",
+        "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-18T16:45:00Z",
+      "side": 1,
+      "message": "We really need a better solution for this :/",
+      "revId": "087f0279e538a6d122a1c7ddcdf27fea09018c83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl3R8uRw",
+        "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-18T16:45:00Z",
+      "side": 1,
+      "message": "References should not be treated as atomic, but via a list diff.",
+      "revId": "087f0279e538a6d122a1c7ddcdf27fea09018c83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl1R5vSo",
+        "filename": "lib/includes/entity/EntityDiffVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-18T16:45:00Z",
+      "side": 1,
+      "message": "This is an odd nesting of conditionals. Would be better to do this in a single if-elseif-else chain.",
+      "revId": "087f0279e538a6d122a1c7ddcdf27fea09018c83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
