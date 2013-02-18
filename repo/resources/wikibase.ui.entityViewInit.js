@@ -72,20 +72,6 @@
 			termsValueTools.push( editTool.newFromDom( $termsRow, {}, toolbar ) );
 		} );
 
-		$( wb )
-		.on( 'startItemPageEditMode', function( event, origin ) {
-			$.each( termsValueTools, function( i, termValueTool ) {
-				if ( !origin || origin.getSubject() !== termValueTool.getSubject() ) {
-					termValueTool.disable();
-				}
-			} );
-		} )
-		.on( 'stopItemPageEditMode', function( event, origin ) {
-			$.each( termsValueTools, function( i, termValueTool ) {
-				termValueTool.enable();
-			} );
-		} );
-
 		if( mw.config.get( 'wbEntity' ) !== null ) {
 			var entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) ),
 				usedEntitiesJSON = $.evalJSON( mw.config.get( 'wbUsedEntities' ) );
@@ -175,7 +161,15 @@
 			$( wb ).triggerHandler( 'restrictEntityPageActions' );
 		}
 
-		$( wb ).on( 'startItemPageEditMode', function( event ) {
+		$( wb ).on( 'startItemPageEditMode', function( event, origin ) {
+			$.each( termsValueTools, function( i, termValueTool ) {
+				if ( !origin || origin.getSubject() !== termValueTool.getSubject() ) {
+					termValueTool.disable();
+				} else if ( origin && origin.getSubject() === termValueTool.getSubject() ) {
+					$( 'table.wb-terms' ).addClass( 'wb-edit' );
+				}
+			} );
+
 			// Display anonymous user edit warning:
 			if ( mw.user && mw.user.isAnon() ) {
 				mw.notify( mw.message( 'wikibase-anonymouseditwarning-' + wb.entity.type ) );
@@ -236,6 +230,13 @@
 					toolbar.removeElement( messageAnchor );
 				} );
 			}
+		} );
+
+		$( wb ).on( 'stopItemPageEditMode', function( event ) {
+			$( 'table.wb-terms' ).removeClass( 'wb-edit' );
+			$.each( termsValueTools, function( i, termValueTool ) {
+				termValueTool.enable();
+			} );
 		} );
 
 		// remove loading spinner after JavaScript has kicked in
