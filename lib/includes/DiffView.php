@@ -101,7 +101,7 @@ class DiffView extends \ContextSource {
 			} elseif ( $op->getType() === 'remove' ) {
 				$html .= $this->generateRemoveOpHtml( $op->getOldValue() );
 			} elseif ( $op->getType() === 'change' ) {
-				$html .= $this->generateChangeOpHtml( $op->getNewValue(), $op->getOldValue() );
+				$html .= $this->generateChangeOpHtml( $op->getOldValue(), $op->getNewValue() );
 			} else {
 				throw new \MWException( 'Invalid diffOp type' );
 			}
