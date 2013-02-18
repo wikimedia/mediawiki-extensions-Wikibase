@@ -56,7 +56,7 @@ final class ClientUtils {
 	 * @param string $target
 	 * @param string $text
 	 * @param array $attribs
-	 i*
+	 *
 	 * @return string
 	 */
 	public static function repoLink( $target, $text, $attribs = array() ) {

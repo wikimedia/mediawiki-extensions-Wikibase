@@ -573,9 +573,10 @@ final class ClientHooks {
 
 		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
 			$out->addModules( 'wikibase.client.init' );
-			if ( !$out->getLanguageLinks() && \Action::getActionName( $skin->getContext() ) === 'view' && $title->exists() ) {
-				$out->addModules( 'wbclient.linkItem' );
-			}
+			// Experimental for now
+			// if ( !$out->getLanguageLinks() && \Action::getActionName( $skin->getContext() ) === 'view' && $title->exists() ) {
+			//	$out->addModules( 'wbclient.linkItem' );
+			// }
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -598,10 +599,17 @@ final class ClientHooks {
 		$title = $skin->getContext()->getTitle();
 		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) && $title->exists() ) {
 
+			$title = $skin->getContext()->getTitle();
+
+			// gets the main part of the title, no underscores used in this db table
+			$titleText = $title->getPrefixedText();
+			$siteId = Settings::get( 'siteGlobalID' );
+
 			if ( empty( $template->data['language_urls'] ) && \Action::getActionName( $skin->getContext() ) === 'view' ) {
 				// Placeholder in case the page doesn't have any langlinks yet
 				// self::onBeforePageDisplay adds the JavaScript module which will overwrite this with a link
 				$template->data['language_urls'][] = array(
+					'href' => ClientUtils::repoArticleUrl( "Special:CreateItem/$siteId/$titleText" ),
 					'text' => wfMessage( 'parentheses', wfMessage( 'wikibase-nolanglinks' )->escaped() ),
 					'id' => 'wbc-linkToItem',
 					'class' => 'wbc-editpage',
@@ -610,12 +618,6 @@ final class ClientHooks {
 				wfProfileOut( __METHOD__ );
 				return true;
 			}
-
-			$title = $skin->getContext()->getTitle();
-
-			// gets the main part of the title, no underscores used in this db table
-			$titleText = $title->getPrefixedText();
-			$siteId = Settings::get( 'siteGlobalID' );
 
 			$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink( $siteId, $titleText );
 
