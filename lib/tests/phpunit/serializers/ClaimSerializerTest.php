@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 use Wikibase\Statement;
 use Wikibase\Claim;
-use Wikibase\ClaimSerializer;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**
  * Tests for the Wikibase\ClaimSerializer class.

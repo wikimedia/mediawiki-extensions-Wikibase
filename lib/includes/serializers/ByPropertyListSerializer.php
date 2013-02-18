@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Serializers;
 use Traversable, ApiResult, MWException;
+use Wikibase\EntityContentFactory;
 
 /**
  * Serializer for Traversable objects that need to be grouped

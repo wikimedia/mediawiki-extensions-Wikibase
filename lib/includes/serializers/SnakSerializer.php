@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Serializers;
 use MWException;
 use Wikibase\Snak;
 use Wikibase\SnakObject;
+use Wikibase\EntityContentFactory;
 
 /**
  * Serializer for Snak objects.
@@ -20,7 +21,7 @@ use Wikibase\SnakObject;
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * 51 Franklin Street, Fifth Floor, Boston, MA 021 10-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.2
