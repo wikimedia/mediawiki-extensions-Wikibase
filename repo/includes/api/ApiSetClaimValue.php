@@ -213,8 +213,9 @@ class ApiSetClaimValue extends ApiModifyClaim {
 	 * @see  ApiAutocomment::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'claim' )
-		);
+		// We should show the property ID or label here.
+		// The refactoring required for that is still pending.
+		// For now, we show nothing rather than cryptic GUIDs.
+		return array( 0, "", false );
 	}
 }
