@@ -44,7 +44,7 @@ class SpecialCreateItem extends SpecialCreateEntity {
 	 * @since 0.1
 	 */
 	public function __construct() {
-		parent::__construct( 'CreateItem' );
+		parent::__construct( 'CreateItem', 'item-create' );
 	}
 
 	/**
