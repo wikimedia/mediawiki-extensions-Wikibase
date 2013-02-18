@@ -156,6 +156,24 @@
     },
     {
       "key": {
+        "uuid": "Dl6Ca4F0",
+        "filename": "repo/resources/wikibase.ui.entityselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2013-02-18T11:11:48Z",
+      "side": 1,
+      "message": "Is this per style guide? I prefer to leave out the ; (which is correct JS) unless required.",
+      "parentUuid": "Dl2VuSpk",
+      "revId": "26ec675af245715ccfe2eda88b30d98b2610f201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dl4VxNnk",
         "filename": "repo/resources/wikibase.ui.entityselector.js",
         "patchSetId": 1
