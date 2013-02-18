@@ -291,7 +291,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 */
 	public function getAliases( $languageCode ) {
 		return array_key_exists( $languageCode, $this->data['aliases'] ) ?
-			$this->data['aliases'][$languageCode] : array();
+			array_unique( $this->data['aliases'][$languageCode] ) : array();
 	}
 
 	/**
@@ -311,11 +311,17 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			$textList = array_intersect_key( $textList, array_flip( $languages ) );
 		}
 
+		$textList = array_map(
+			'array_unique',
+			$textList
+		);
+
 		return $textList;
 	}
 
 	/**
 	 * Sets the aliases for the item in the language with the specified code.
+	 * TODO: decide on how to deal with duplicates
 	 *
 	 * @since 0.1
 	 *
@@ -323,7 +329,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @param array $aliases
 	 */
 	public function setAliases( $languageCode, array $aliases ) {
-		$this->data['aliases'][$languageCode] = $aliases;
+		$this->data['aliases'][$languageCode] = /*array_unique(*/ $aliases /*)*/;
 	}
 
 	/**
@@ -356,10 +362,10 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	public function removeAliases( $languageCode, array $aliases ) {
 		$this->setAliases(
 			$languageCode,
-			array_diff(
+			array_unique( array_diff(
 				$this->getAliases( $languageCode ),
-				$aliases
-			)
+				array_intersect( $this->getAliases( $languageCode ), $aliases )
+			) )
 		);
 	}
 
