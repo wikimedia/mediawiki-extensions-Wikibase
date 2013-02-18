@@ -712,11 +712,8 @@ abstract class EntityView extends \ContextSource {
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $entity->getPrefixedId() );
 
-		$rightsWarning = $this->msg( 'wikibase-shortcopyrightwarning',
-			$this->msg( 'wikibase-save' )->inContentLanguage()->text(),
-			$this->msg( 'copyrightpage' )->inContentLanguage()->text(),
-			"[$wgRightsUrl $wgRightsText]"
-		)->parse();
+		// @todo super evil hack for wmf10 deployment only
+		$rightsWarning = $this->msg( 'wikidata-shortcopyrightwarning' )->parse();
 
 		// copyright warning message
 		$out->addJsConfigVars( 'wbCopyrightWarning', $rightsWarning );
