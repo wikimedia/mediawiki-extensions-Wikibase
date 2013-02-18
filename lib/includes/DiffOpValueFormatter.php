@@ -6,7 +6,7 @@ use Html;
 use Diff;
 
 /**
- * Class for generating HTML for Claim Diffs.
+ * Class for formatting diffs, @todo might be renamed or something....
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,12 +34,36 @@ use Diff;
  */
 class DiffOpValueFormatter {
 
+	/**
+	 * @since 0.4
+	 *
+	 * @var string
+	 */
 	protected $name;
 
+	/**
+	 * @since 0.4
+	 *
+	 * @var string
+	 */
 	protected $oldValue;
 
+	/**
+	 * @since 0.4
+	 *
+	 * @var string
+	 */
 	protected $newValue;
 
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $name
+	 * @param string $oldValue
+	 * @param string $newValue
+	 */
 	public function __construct( $name, $oldValue, $newValue ) {
 		$this->name = $name;
 		$this->oldValue = $oldValue;
@@ -54,9 +78,12 @@ class DiffOpValueFormatter {
 	 * @return string
 	 */
 	protected function generateHeaderHtml() {
+		$oldHeader = is_string( $this->oldValue ) ? $this->name : '';
+		$newHeader = is_string( $this->newValue ) ? $this->name : '';
+
 		$html = Html::openElement( 'tr' );
-		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $this->name );
-		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $this->name );
+		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $oldHeader );
+		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $newHeader );
 		$html .= Html::closeElement( 'tr' );
 
 		return $html;
@@ -74,12 +101,12 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
 			Html::rawElement( 'div', array(),
-				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
 					$this->oldValue ) ) );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
 			Html::rawElement( 'div', array(),
-				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
 					$this->newValue ) ) );
 		$html .= Html::closeElement( 'tr' );
 		$html .= Html::closeElement( 'tr' );
@@ -100,7 +127,7 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
 			Html::rawElement( 'div', array(),
-				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
 					$this->newValue )
 			)
 		);
@@ -121,7 +148,7 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
 			Html::rawElement( 'div', array(),
-				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
 					$this->oldValue ) ) );
 		$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
 		$html .= Html::closeElement( 'tr' );
@@ -129,6 +156,13 @@ class DiffOpValueFormatter {
 		return $html;
 	}
 
+	/**
+	 * Generates HTML for a diffOP
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
 	public function generateHtml() {
 		$html = '';
 

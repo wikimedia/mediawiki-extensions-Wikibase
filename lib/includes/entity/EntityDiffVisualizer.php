@@ -137,31 +137,19 @@ class EntityDiffVisualizer {
 				$claimDiffOp->getOldValue(),
 				$claimDiffOp->getNewValue()
 			);
-			return $this->claimDiffVisualizer->visualizeDiff(
+			return $this->claimDiffVisualizer->visualizeClaimChange(
 				$claimDifference,
-				$this->context->getLanguage()->getCode()
+				$claimDiffOp->getNewValue()
 			);
 		}
 
-		if ( $claimDiffOp instanceof DiffOpAdd || $claimDiffOp instanceof DiffOpRemove ) {
-			if ( $claimDiffOp instanceof DiffOpAdd ) {
-				$claim = $claimDiffOp->getNewValue();
-				$opType = 'add';
-			} else {
-				$claim = $claimDiffOp->getOldValue();
-				$opType = 'remove';
-			}
-
-			$mainSnak = $claim->getMainSnak();
-
-			return $this->claimDiffVisualizer->getSnakHtml(
-				$mainSnak,
-				$this->context->getLanguage()->getCode(),
-				$opType
-			);
+		if ( $claimDiffOp instanceof DiffOpAdd ) {
+			return $this->claimDiffVisualizer->visualizeNewClaim( $claimDiffOp->getNewValue() );
+		} elseif ( $claimDiffOp instanceof DiffOpRemove ) {
+			return $this->claimDiffVisualizer->visualizeRemovedClaim( $claimDiffOp->getOldValue() );
+		} else {
+			throw new MWException( 'Encountered an unexpected diff operation type for a claim' );
 		}
-
-		throw new MWException( 'Encountered an unexpected diff operation type for a claim' );
 	}
 
 }
