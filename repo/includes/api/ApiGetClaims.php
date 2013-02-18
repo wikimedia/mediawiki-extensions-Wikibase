@@ -202,7 +202,6 @@ class ApiGetClaims extends Api {
 				),
 				ApiBase::PARAM_DFLT => 'references',
 			),
-			'token' => null,
 			'baserevid' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
@@ -223,7 +222,6 @@ class ApiGetClaims extends Api {
 			'claim' => 'A GUID identifying the claim. Required unless entity is provided.',
 			'rank' => 'Optional filter to return only the claims that have the specified rank',
 			'props' => 'Some parts of the claim are returned optionally. This parameter controls which ones are returned.',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
 			),
