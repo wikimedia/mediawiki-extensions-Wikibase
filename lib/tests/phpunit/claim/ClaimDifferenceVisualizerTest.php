@@ -83,7 +83,7 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 	 * @param ClaimDifference $claimDifference
 	 */
 	public function testVisualizeDiff( ClaimDifference $claimDifference ) {
-		$differenceVisualizer = new ClaimDifferenceVisualizer( new \Wikibase\CachingEntityLoader() );
+		$differenceVisualizer = new ClaimDifferenceVisualizer( new \Wikibase\CachingEntityLoader(), 'en' );
 
 		$visualization = $differenceVisualizer->visualizeDiff( $claimDifference );
 
