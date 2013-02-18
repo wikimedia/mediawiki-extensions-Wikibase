@@ -58,8 +58,124 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @return string
 	 */
-	public function visualizeDiff( ClaimDifference $claimDifference ) {
-		return 'TODO'; // TODO
+	public function visualizeDiff( ClaimDifference $claimDifference, $langCode ) {
+		$html = '';
+
+		if ( $claimDifference->getMainSnakChange() !== null ) {
+			$mainSnakChange = $claimDifference->getMainSnakChange();
+			$valueVisualizer = new DiffOpValueVisualizer(
+				$this->getMainSnakHeader( $mainSnakChange->getNewValue(), $langCode ),
+				$this->getMainSnakValue( $mainSnakChange->getOldValue(), $langCode ),
+				$this->getMainSnakValue( $mainSnakChange->getNewValue(), $langCode )
+			);
+			$html .= $valueVisualizer->generateHtml();
+		}
+
+		if ( $claimDifference->getRankChange() !== null ) {
+			$rankChange = $claimDifference->getRankChange();
+			$valueVisualizer = new DiffOpValueVisualizer(
+				wfMessage( 'wikibase-diffview-rank' ),
+				$rankChange->getOldValue(),
+				$rankChange->getNewValue()
+			);
+			$html .= $valueVisualizer->generateHtml();
+		}
+
+		// TODO: html for qualifier changes
+
+		if ( $claimDifference->getReferenceChanges() !== null ) {
+			$referenceChanges = $claimDifference->getReferenceChanges();
+
+			foreach( $referenceChanges as $referenceChange ) {
+				if ( $referenceChange instanceof \Diff\DiffOpAdd ) {
+					$html .= $this->getRefHtml( $referenceChange->getNewValue(), $langCode, 'add' );
+				} else if ( $referenceChange instanceof \Diff\DiffOpRemove ) {
+					$html .= $this->getRefHtml( $referenceChange->getOldValue(), $langCode, 'remove' );
+				}
+				// todo reference DiffOpChange
+			}
+		}
+
+		return $html;
+	}
+
+	public function getSnakHtml( Snak $mainSnak, $langCode, $type, $prependHeader = null ) {
+		$snakHeader = '';
+		if ( $prependHeader !== null ) {
+			$snakHeader = $prependHeader;
+		}
+		$snakHeader .= $this->getMainSnakHeader( $mainSnak, $langCode );
+
+		$snakValue = $this->getMainSnakValue( $mainSnak, $langCode );
+
+		if ( $type === 'add' ) {
+			$valueVisualizer = new DiffOpValueVisualizer( $snakHeader, null, $snakValue );
+		} else if ( $type === 'remove' ) {
+			$valueVisualizer = new DiffOpValueVisualizer( $snakHeader, $snakValue, null );
+		} else {
+			throw new \MWException( 'Unknown diffop type' );
+		}
+
+		return $valueVisualizer->generateHtml();
+	}
+
+	protected function getMainSnakHeader( Snak $mainSnak, $langCode ) {
+		$propertyId = $mainSnak->getPropertyId();
+		$property = $this->entityLookup->getEntity( $propertyId );
+		$dataTypeLabel = $property->getDataType()->getLabel( $langCode );
+
+		$label = $property->getLabel( $langCode );
+		$propertyLabel = $label !== false ? $label : $property->getPrefixedId();
+
+		$headerText = wfMessage( 'wikibase-entity-property' ) . ' / ' . $dataTypeLabel . ' / ' . $label;
+
+		return $headerText;
+	}
+
+	protected function getMainSnakValue( Snak $snak, $langCode ) {
+		$snakType = $snak->getType();
+
+		if ( $snakType === 'value' ) {
+			$dataValue = $snak->getDataValue();
+
+			// FIXME!
+			if ( $dataValue instanceof EntityId ) {
+				$diffValueString = $this->getEntityLabel( $dataValue, $langCode );
+			} else {
+				$diffValueString = $dataValue->getValue();
+			}
+
+			return $diffValueString;
+		}
+
+		return null;
+	}
+
+	protected function getEntityLabel( EntityId $entityId , $langCode ) {
+		$label = $entityId->getPrefixedId();
+
+		$lookedUpLabel = $this->entityLookup->getEntity( $entityId )->getLabel( $langCode );
+
+		if ( $lookedUpLabel !== false ) {
+			$label = $lookedUpLabel;
+		}
+
+		return $label;
+	}
+
+	protected function getRefHtml( Reference $ref, $langCode, $opType ) {
+		$html = '';
+
+		$refSnakList = $ref->getSnaks();
+		foreach ( $refSnakList as $snak ) {
+			if ( $html !== '' ) {
+				$html .= Html::rawElement( 'br', array(), '' );
+			}
+			$html .= $this->getSnakHtml( $snak, $langCode, $opType,
+				wfMessage( 'wikibase-diffview-reference' ) . ' / ' );
+		}
+
+		return $html;
 	}
 
 }
