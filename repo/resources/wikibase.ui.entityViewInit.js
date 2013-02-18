@@ -54,6 +54,8 @@
 			}
 		} );
 
+		var termsValueTools = [];
+
 		$( 'tr.wb-terms-label, tr.wb-terms-description' ).each( function() {
 			var $termsRow = $( this ),
 				editTool = wb.ui.PropertyEditTool[
@@ -67,7 +69,21 @@
 			toolbar.addElement( editGroup );
 			toolbar.editGroup = editGroup; // TODO: EditableLabel should not assume that this is set
 
-			editTool.newFromDom( $termsRow, {}, toolbar );
+			termsValueTools.push( editTool.newFromDom( $termsRow, {}, toolbar ) );
+		} );
+
+		$( wb )
+		.on( 'startItemPageEditMode', function( event, origin ) {
+			$.each( termsValueTools, function( i, termValueTool ) {
+				if ( !origin || origin.getSubject() !== termValueTool.getSubject() ) {
+					termValueTool.disable();
+				}
+			} );
+		} )
+		.on( 'stopItemPageEditMode', function( event, origin ) {
+			$.each( termsValueTools, function( i, termValueTool ) {
+				termValueTool.enable();
+			} );
 		} );
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {

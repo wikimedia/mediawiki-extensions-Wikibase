@@ -307,11 +307,13 @@ EditableValue's "edit" button when aliases exist) */
 
 /********** /ALIASES **********/
 
+
 /********** TERMS **********/
+
 h2.wb-terms-heading {
     float: left;
     width: 100%;
-    margin-top: 2em;
+    margin-top: 0.6em;
     margin-bottom: 0.2em;
     padding-left: 10px;
     border-bottom: none;
@@ -342,7 +344,6 @@ table.wb-terms {
 }
 
 table.wb-terms td {
-    height: 2.2em;
     border-top: 1px solid #C9C9C9;
 }
 
@@ -351,6 +352,16 @@ table.wb-terms .uneven td {
 }
 table.wb-terms .even td {
     background: #F8F8F8;
+}
+
+table.wb-terms td.wb-terms-label,
+table.wb-terms td.wb-terms-description {
+	padding: 10px;
+}
+
+table.wb-terms .wb-edit td.wb-terms-label,
+table.wb-terms .wb-edit td.wb-terms-description {
+	padding: 8px 8px 9px 7px;
 }
 
 /* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
@@ -373,6 +384,11 @@ table.wb-terms .wb-editsection .wb-ui-toolbar .wb-ui-toolbar-group {
 
 table.wb-terms .wb-editsection .wb-ui-toolbar .wb-ui-toolbar-group .wb-ui-toolbar-group {
     margin-left: 0; /* do not apply margin to nested toolbar groups */
+}
+
+table.wb-terms input {
+	font-family: inherit;
+	width: 100%;
 }
 
 /********** /TERMS **********/
