@@ -3,6 +3,7 @@
 namespace Wikibase;
 use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, MediaWikiSite;
 use MWException, FormatJson;
+use \Wikibase\Lib\Serializers\SerializerFactory;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
@@ -724,9 +725,9 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbCopyrightWarning', $rightsWarning );
 
 		$serializationOptions = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
-		$serializationOptions->addProp( 'sitelinks' );
 
-		$serializer = \Wikibase\Lib\Serializers\EntitySerializer::newForEntity( $entity, $serializationOptions );
+		$serializerFactory = new SerializerFactory();
+		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
 
 		$out->addJsConfigVars(
 			'wbEntity',
