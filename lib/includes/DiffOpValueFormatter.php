@@ -58,8 +58,8 @@ class DiffOpValueFormatter {
 		$newHeader = is_string( $this->newValue ) ? $this->name : '';
 
 		$html = Html::openElement( 'tr' );
-		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $oldHeader );
-		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $newHeader );
+		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $oldHeader );
+		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $newHeader );
 		$html .= Html::closeElement( 'tr' );
 
 		return $html;
@@ -77,12 +77,12 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
 			Html::rawElement( 'div', array(),
-				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
 					$this->oldValue ) ) );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
 			Html::rawElement( 'div', array(),
-				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
 					$this->newValue ) ) );
 		$html .= Html::closeElement( 'tr' );
 		$html .= Html::closeElement( 'tr' );
@@ -103,7 +103,7 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
 			Html::rawElement( 'div', array(),
-				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
 					$this->newValue )
 			)
 		);
@@ -124,7 +124,7 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
 			Html::rawElement( 'div', array(),
-				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+				Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
 					$this->oldValue ) ) );
 		$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
 		$html .= Html::closeElement( 'tr' );
