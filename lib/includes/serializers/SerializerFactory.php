@@ -37,30 +37,31 @@ class SerializerFactory {
 
 	/**
 	 * @param mixed $object
+	 * @param SerializationOptions $options
 	 *
 	 * @return Serializer
 	 * @throws MWException
 	 */
-	public function newSerializerForObject( $object ) {
+	public function newSerializerForObject( $object, $options = null ) {
 		if ( !is_object( $object ) ) {
 			throw new MWException( 'newSerializerForObject only accepts objects and got ' . gettype( $object ) );
 		}
 
 		switch ( true ) {
 			case ( $object instanceof \Wikibase\Snak ):
-				return new SnakSerializer();
+				return new SnakSerializer( $options );
 			case ( $object instanceof \Wikibase\Reference ):
-				return new ReferenceSerializer();
+				return new ReferenceSerializer( $options );
 			case ( $object instanceof \Wikibase\Item ):
-				return new ItemSerializer();
+				return new ItemSerializer( $options );
 			case ( $object instanceof \Wikibase\Property ):
-				return new PropertySerializer();
+				return new PropertySerializer( $options );
 			case ( $object instanceof \Wikibase\Entity ):
-				return new EntitySerializer();
+				return new EntitySerializer( $options );
 			case ( $object instanceof \Wikibase\Claim ):
-				return new ClaimSerializer();
+				return new ClaimSerializer( $options );
 			case ( $object instanceof \Wikibase\Claims ):
-				return new ClaimsSerializer();
+				return new ClaimsSerializer( $options );
 		}
 
 		throw new MWException( 'There is no serializer for the provided type of object "' . get_class( $object ) . '"' );
@@ -68,22 +69,23 @@ class SerializerFactory {
 
 	/**
 	 * @param string $className
+	 * @param SerializationOptions $options
 	 *
 	 * @return Unserializer
 	 * @throws MWException
 	 */
-	public function newUnserializerForClass( $className ) {
+	public function newUnserializerForClass( $className, $options = null ) {
 		if ( !is_string( $className ) ) {
 			throw new MWException( '$className needs to be a string' );
 		}
 
 		switch ( ltrim( $className, '\\' ) ) {
 			case 'Wikibase\Snak':
-				return new SnakSerializer();
+				return new SnakSerializer( $options );
 			case 'Wikibase\Reference':
-				return new ReferenceSerializer();
+				return new ReferenceSerializer( $options );
 			case 'Wikibase\Claim':
-				return new ClaimSerializer();
+				return new ClaimSerializer( $options );
 		}
 
 		throw new MWException( '"' . $className . '" has no associated unserializer' );
