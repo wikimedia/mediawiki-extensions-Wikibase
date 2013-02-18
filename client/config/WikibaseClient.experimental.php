@@ -33,3 +33,12 @@ if ( !defined( 'WBC_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
 
+// Add the JavaScript to link items locally
+$wgHooks['BeforePageDisplay'][] = function( OutputPage &$out, Skin &$skin ) {
+	$title = $out->getTitle();
+
+	if ( in_array( $title->getNamespace(), \Wikibase\Settings::get( 'namespaces' ) ) && !$out->getLanguageLinks() && Action::getActionName( $skin->getContext() ) === 'view' && $title->exists() ) {
+		$out->addModules( 'wbclient.linkItem' );
+	}
+	return true;
+};
