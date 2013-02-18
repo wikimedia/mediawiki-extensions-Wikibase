@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dl3SwOYo",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-18T18:38:12Z",
+      "side": 1,
+      "message": "spaces again",
+      "revId": "e4e585782edba570caea07c52b1d3ffd71115272",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl1StPTA",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-18T18:38:12Z",
+      "side": 1,
+      "message": "spaces",
+      "revId": "e4e585782edba570caea07c52b1d3ffd71115272",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl7Ruof8",
+        "filename": "repo/resources/wikibase.ui.entityselector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-18T18:38:12Z",
+      "side": 1,
+      "message": "You shouldn\u0027t put a comma after an arrays last entry in JavaScript, in PHP its fine though. I think it\u0027s not supported by some browser and my IDE complains about it.",
+      "revId": "e4e585782edba570caea07c52b1d3ffd71115272",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
