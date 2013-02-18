@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 /**
- * Tests for the SpecialCreateItem class.
+ * Tests for the SpecialSetAliases class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,13 +31,12 @@ namespace Wikibase\Test;
  * @group WikibaseSpecialPage
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
+ * @author John Erling Blad < jeblad@gmail.com >
  */
-class SpecialCreateItemTest extends SpecialPageTestBase {
+class SpecialSetAliasesTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \SpecialCreateItem();
+		return new \SpecialSetAliases();
 	}
 
 	public function testExecute() {
