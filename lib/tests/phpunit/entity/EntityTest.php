@@ -190,6 +190,13 @@ abstract class EntityTest extends \MediaWikiTestCase {
 				'en' => array( array( 'foo', 'bar', 'baz' ) ),
 				'de' => array( array( 'foobar' ), array( 'baz' ) ),
 			) ),
+			// with duplicates
+			array( array(
+				'en' => array( array( 'spam', 'ham', 'ham' ) )
+			) ),
+			array( array(
+				'en' => array( array( 'foo', 'bar' ), array( 'bar', 'spam' ) )
+			) ),
 		);
 	}
 
@@ -206,7 +213,7 @@ abstract class EntityTest extends \MediaWikiTestCase {
 		}
 
 		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			$expected = call_user_func_array( 'array_merge', $aliasesList );
+			$expected = array_unique( call_user_func_array( 'array_merge', $aliasesList ) );
 			asort( $expected );
 
 			$actual = $entity->getAliases( $langCode );
@@ -229,7 +236,7 @@ abstract class EntityTest extends \MediaWikiTestCase {
 		}
 
 		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			$expected = array_pop( $aliasesList );
+			$expected = array_unique( array_pop( $aliasesList ) );
 			asort( $aliasesList );
 
 			$actual = $entity->getAliases( $langCode );
@@ -246,7 +253,7 @@ abstract class EntityTest extends \MediaWikiTestCase {
 		$entity = $this->getNewEmpty();
 
 		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			$expected = array_shift( $aliasesList );
+			$expected = array_unique( array_shift( $aliasesList ) );
 			$entity->setAliases( $langCode, $expected );
 			$actual = $entity->getAliases( $langCode );
 
