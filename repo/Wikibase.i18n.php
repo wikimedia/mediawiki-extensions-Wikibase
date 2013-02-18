@@ -302,6 +302,20 @@ to find out where it went.',
 	'right-label-update' => 'Update labels',
 	'right-description-remove' => 'Remove descriptions',
 	'right-description-update' => 'Update descriptions',
+
+	// User actions
+	'action-item-override' => 'override items',
+	'action-item-create' => 'create items',
+	'action-item-remove' => 'remove items',
+	'action-alias-update' => 'update aliases',
+	'action-alias-remove' => 'remove aliases',
+	'action-sitelink-remove' => 'remove site links',
+	'action-sitelink-update' => 'update site links',
+	'action-linktitles-update' => 'update link titles',
+	'action-label-remove' => 'remove labels',
+	'action-label-update' => 'update labels',
+	'action-description-remove' => 'remove descriptions',
+	'action-description-update' => 'update descriptions',
 );
 
 /** Message documentation (Message documentation)
@@ -719,8 +733,7 @@ This module generates a slightly different summary (autocomment) than the other 
 	'right-item-override' => '{{doc-right|item-override}}',
 	'right-item-create' => '{{doc-right|item-create}}',
 	'right-item-remove' => '{{doc-right|item-remove}}',
-	'right-alias-add' => '{{doc-right|alias-add}}',
-	'right-alias-set' => '{{doc-right|alias-set}}',
+	'right-alias-update' => '{{doc-right|alias-update}}',
 	'right-alias-remove' => '{{doc-right|alias-remove}}',
 	'right-sitelink-remove' => '{{doc-right|sitelink-remove}}',
 	'right-sitelink-update' => '{{doc-right|sitelink-update}}',
@@ -729,6 +742,18 @@ This module generates a slightly different summary (autocomment) than the other 
 	'right-label-update' => '{{doc-right|label-update}}',
 	'right-description-remove' => '{{doc-right|description-remove}}',
 	'right-description-update' => '{{doc-right|description-update}}',
+	'action-item-override' => '{{doc-action|item-override}}',
+	'action-item-create' => '{{doc-action|item-create}}',
+	'action-item-remove' => '{{doc-action|item-remove}}',
+	'action-alias-update' => '{{doc-action|alias-update}}',
+	'action-alias-remove' => '{{doc-action|alias-remove}}',
+	'action-sitelink-remove' => '{{doc-action|sitelink-remove}}',
+	'action-sitelink-update' => '{{doc-action|sitelink-update}}',
+	'action-linktitles-update' => '{{doc-action|linktitles-update}}',
+	'action-label-remove' => '{{doc-action|label-remove}}',
+	'action-label-update' => '{{doc-action|label-update}}',
+	'action-description-remove' => '{{doc-action|description-remove}}',
+	'action-description-update' => '{{doc-action|description-update}}',
 );
 
 /** Achinese (Acèh)
