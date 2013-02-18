@@ -121,7 +121,11 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			$serialization['references'] = array();
 
 			foreach ( $claim->getReferences() as $reference ) {
-				$serialization['references'][] = $referenceSerializer->getSerialized( $reference );
+				// reference can be empty if options->getIncludeValuesWithMissingReferences is false
+				$serializedRef = $referenceSerializer->getSerialized( $reference );
+				if( !empty( $serializedRef ) ) {
+					$serialization['references'][] = $serializedRef;
+				}
 			}
 
 			if ( $serialization['references'] === array() ) {

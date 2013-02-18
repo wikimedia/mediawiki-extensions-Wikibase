@@ -85,7 +85,7 @@ class ChangesTable extends \ORMTable {
 
 			'type' => 'str',
 			'time' => 'str', // TS_MW
-			'info' => 'blob',
+			'info' => 'data', // handled specially by ChangeRow
 			'object_id' => 'str',
 			'user_id' => 'int',
 			'revision_id' => 'int',

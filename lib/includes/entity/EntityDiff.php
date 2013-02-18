@@ -116,4 +116,12 @@ class EntityDiff extends Diff {
 			&& $this->getClaimsDiff()->isEmpty();
 	}
 
+	/**
+	 * @see DiffOp::getType();
+	 *
+	 * @return string 'diff/entity'
+	 */
+	public function getType() {
+		return 'diff/entity'; // generic
+	}
 }

@@ -2,7 +2,8 @@
 
 namespace Wikibase\Test;
 use Wikibase\Statement;
-use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\Claim;
+use Wikibase\ClaimSerializer;
 
 /**
  * Tests for the Wikibase\ClaimSerializer class.
@@ -59,13 +60,13 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 		$id = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
 
-		$validArgs[] = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( $id ) );
+		$validArgs[] = new Claim( new \Wikibase\PropertyNoValueSnak( $id ) );
 
-		$validArgs[] = new \Wikibase\Claim( new \Wikibase\PropertySomeValueSnak( $id ) );
+		$validArgs[] = new Claim( new \Wikibase\PropertySomeValueSnak( $id ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
-		$claim = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( $id ) );
+		$claim = new Claim( new \Wikibase\PropertyNoValueSnak( $id ) );
 
 		$validArgs[] = array(
 			$claim,

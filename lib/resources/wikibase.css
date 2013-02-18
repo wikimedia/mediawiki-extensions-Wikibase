@@ -518,7 +518,7 @@ div.wb-claim-new {
 	background-color: #D6F3FF;
 }
 
-div.wb-claim-section .wb-error .wb-claim,
+div.wb-claims .wb-error .wb-error,
 .wb-error div.wb-claim-new {
 	background-color: #FFDFC9;
 }
@@ -615,6 +615,10 @@ div.wb-claim-new .wb-snak-value {
 
 .wb-statement-references-container .wb-statement-references-heading {
 	font-size: 90%;
+}
+
+.wb-statement-references .wb-error {
+	background-color: #E5C8B5;
 }
 
 .wb-referenceview {

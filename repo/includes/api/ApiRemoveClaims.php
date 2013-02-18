@@ -28,10 +28,10 @@ use ApiBase, MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-class ApiRemoveClaims extends Api {
+class ApiRemoveClaims extends ApiModifyClaim {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
@@ -108,7 +108,6 @@ class ApiRemoveClaims extends Api {
 			);
 
 			$entity->setClaims( $claims );
-
 			$this->saveChanges( $entityContent );
 		}
 
@@ -192,74 +191,33 @@ class ApiRemoveClaims extends Api {
 	}
 
 	/**
-	 * @since 0.3
-	 *
-	 * @param EntityContent $content
-	 */
-	protected function saveChanges( EntityContent $content ) {
-		$params = $this->extractRequestParams();
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
-
-		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
-			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : ''
-		);
-
-		if ( !$status->isGood() ) {
-			$this->dieUsage( 'Failed to save the change', 'save-failed' );
-		}
-
-		$statusValue = $status->getValue();
-
-		if ( isset( $statusValue['revision'] ) ) {
-			$this->getResult()->addValue(
-				'pageinfo',
-				'lastrevid',
-				(int)$statusValue['revision']->getId()
-			);
-		}
-	}
-
-	/**
 	 * @see ApiBase::getAllowedParams
 	 *
-	 * @since 0.3
+	 * @since 0.2
 	 *
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-		);
+		) );
 	}
 
 	/**
 	 * @see ApiBase::getParamDescription
 	 *
-	 * @since 0.3
+	 * @since 0.2
 	 *
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'claim' => 'A GUID identifying the claim',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-		);
+		) );
 	}
 
 	/**
@@ -290,46 +248,25 @@ class ApiRemoveClaims extends Api {
 	}
 
 	/**
-	 * @see ApiBase::getHelpUrls
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
+	 * @see  ApiAutocomment::getTextForComment()
 	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbremoveclaims';
+	public function getTextForComment( array $params, $plural = 1 ) {
+		$guids = $params['claim'];
+
+		return Autocomment::formatAutoComment(
+			$this->getModuleName(),
+			array(
+				/*plural */ count( $guids ),
+			)
+		);
 	}
 
 	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
+	 * @see  ApiAutocomment::getTextForSummary()
 	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WB_VERSION;
+	public function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'claim' )
+		);
 	}
-
-	/**
-	 * @see \ApiBase::needsToken()
-	 */
-	public function needsToken() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
-	}
-
-	/**
-	 * @see \ApiBase::mustBePosted()
-	 */
-	public function mustBePosted() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
-	}
-
-	/**
-	 * @see \ApiBase::isWriteMode()
-	 */
-	public function isWriteMode() {
-		return true;
-	}
-
 }

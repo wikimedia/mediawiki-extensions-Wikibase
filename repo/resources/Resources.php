@@ -46,11 +46,13 @@ return call_user_func( function() {
 				'wikibase.ui.PropertyEditTool',
 				'jquery.wikibase.entityview',
 				'wikibase.datamodel',
-				'jquery.json'
+				'jquery.json',
+				'jquery.cookie',
 			),
 			'messages' => array(
 				'wikibase-sitelinks',
-				'wikibase-statements'
+				'wikibase-statements',
+				'wikibase-copyrighttooltip-acknowledge',
 			)
 		),
 

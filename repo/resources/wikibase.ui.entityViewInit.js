@@ -183,6 +183,14 @@
 
 			// add copyright warning to 'save' button if there is one:
 			if( mw.config.exists( 'wbCopyrightWarning' ) ) {
+
+				var $message = $( '<span><p>' + mw.config.get( 'wbCopyrightWarning' ) + '</p></span>' ),
+					messageText = $.trim( $message.text() ); // get this before adding $hideMessage link!
+
+				if( messageText === $.cookie( 'wikibase.acknowledgedentitycopyright' ) ) {
+					return;
+				}
+
 				var $activeToolbar = $( '.wb-edit' )
 					// label/description of EditableValue always in edit mode if empty, 2nd '.wb-edit'
 					// on PropertyEditTool only appended when really being edited by the user though
@@ -193,22 +201,39 @@
 					return; // no toolbar for some reason, just stop
 				}
 
-				var toolbar = $activeToolbar.data( 'wb-toolbar' );
+				var toolbar = $activeToolbar.data( 'wb-toolbar' ),
+					$hideMessage = $( '<a/>', {
+						href: 'javascript:void(0);',
+						text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
+					} ).appendTo( $message );
+
 				var tooltip = new wb.ui.Tooltip(
-					// TODO: make _getTooltipParent public or add a Toolbar.Label.getElement()
-					toolbar.btnSave._getTooltipParent(),
+					toolbar.btnSave.getTooltipParent(), // adjust tooltip to save button
 					{},
-					$( '<span>' + mw.config.get( 'wbCopyrightWarning' ) + '</span>' ),
+					$message,
 					// assuming the toolbar is used on the right side of some edit UI, we want to
 					// point the tooltip away from that so it won't overlap with it:
 					{ gravity: 'nw' }
 				);
-				toolbar.btnSave.setTooltip( tooltip );
+
+				// Tooltip gets its own anchor since other elements might have their own tooltip.
+				// we don't even have to add this new toolbar element to the toolbar, we only use it
+				// to manage the tooltip which will have the 'save' button as element to point to.
+				// The 'save' button can still have its own tooltip though.
+				var messageAnchor = new wb.ui.Toolbar.Label( $( '<span/>' ) );
+				messageAnchor.setTooltip( tooltip );
+
+				$hideMessage.on( 'click', function() {
+					messageAnchor.removeTooltip();
+					$.cookie( 'wikibase.acknowledgedentitycopyright', messageText, { 'expires': null, 'path': '/' } );
+				} );
+
 				tooltip.show( true ); // show permanently, not just on hover!
 
 				// destroy tooltip after edit mode gets closed again:
 				$( wb ).one( 'stopItemPageEditMode', function( event ) {
 					tooltip.destroy();
+					toolbar.removeElement( messageAnchor );
 				} );
 			}
 		} );

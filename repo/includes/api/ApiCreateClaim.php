@@ -28,8 +28,9 @@ use ApiBase, MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-class ApiCreateClaim extends Api implements ApiAutocomment {
+class ApiCreateClaim extends ApiModifyClaim {
 
 	// TODO: automcomment
 	// TODO: rights
@@ -90,36 +91,24 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	}
 
 	/**
-	 * @since 0.3
+	 * @since 0.2
 	 *
-	 * @param EntityContent $content
+	 * @return EntityContent
 	 */
-	protected function saveChanges( EntityContent $content ) {
+	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
 
-		$status = $editEntity->attemptSave(
-			'', // TODO: autocomment
-			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : ''
-		);
+		$entityId = EntityId::newFromPrefixedId( $params['entity'] );
+		$entityTitle = $entityId ? EntityContentFactory::singleton()->getTitleForId( $entityId ) : null;
+		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
-		if ( !$status->isOK() ) {
-			$this->dieUsage( 'Failed to save the change', 'createclaim-save-failed' );
+		if ( $entityContent === null ) {
+			$this->dieUsage( 'Entity ' . $params['entity'] . ' not found', 'entity-not-found' );
 		}
 
-		$statusValue = $status->getValue();
-
-		if ( isset( $statusValue['revision'] ) ) {
-			$this->getResult()->addValue(
-				'pageinfo',
-				'lastrevid',
-				(int)$statusValue['revision']->getId()
-			);
-		}
+		return $entityContent;
 	}
 
 	/**
@@ -146,70 +135,6 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	}
 
 	/**
-	 * @since 0.2
-	 *
-	 * @return EntityContent
-	 */
-	protected function getEntityContent() {
-		$params = $this->extractRequestParams();
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		$entityId = EntityId::newFromPrefixedId( $params['entity'] );
-		$entityTitle = $entityId ? EntityContentFactory::singleton()->getTitleForId( $entityId ) : null;
-		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
-
-		if ( $entityContent === null ) {
-			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
-		}
-
-		return $entityContent;
-	}
-
-	/**
-	 * @since 0.2
-	 *
-	 * @return Snak
-	 * @throws MWException
-	 */
-	protected function getSnakInstance() {
-		$params = $this->extractRequestParams();
-
-		$factory = new SnakFactory();
-
-		$libRegistry = new LibRegistry( Settings::singleton() );
-		$parseResult = $libRegistry->getEntityIdParser()->parse( $params['property'] );
-
-		if ( !$parseResult->isValid() ) {
-			throw new MWException( $parseResult->getError()->getText() );
-		}
-
-		return $factory->newSnak(
-			$parseResult->getValue(),
-			$params['snaktype'],
-			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
-		);
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param Claim $claim
-	 */
-	protected function outputClaim( Claim $claim ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-
-		$serializer = $serializerFactory->newSerializerForObject( $claim );
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		$this->getResult()->addValue(
-			null,
-			'claim',
-			$serializer->getSerialized( $claim )
-		);
-	}
-
-	/**
 	 * @see ApiBase::getAllowedParams
 	 *
 	 * @since 0.2
@@ -217,13 +142,9 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'entity' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'snaktype' => array(
-				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'property' => array(
@@ -234,11 +155,11 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => false,
 			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
+			'snaktype' => array(
+				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
+				ApiBase::PARAM_REQUIRED => true,
 			),
-		);
+		) );
 	}
 
 	/**
@@ -249,16 +170,12 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'entity' => 'Id of the entity you are adding the claim to',
 			'property' => 'Id of the snaks property',
 			'value' => 'Value of the snak when creating a claim with a snak that has a value',
 			'snaktype' => 'The type of the snak',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-		);
+		) );
 	}
 
 	/**
@@ -290,35 +207,13 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	}
 
 	/**
-	 * @see ApiBase::getHelpUrls
-	 *
-	 * @since 0.2
-	 *
-	 * @return string
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbcreateclaim';
-	}
-
-	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.2
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WB_VERSION;
-	}
-
-	/**
 	 * @see  ApiAutocomment::getTextForComment()
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
 		return Autocomment::formatAutoComment(
-			'wbcreateclaim-' . $params['snaktype'],
+			$this->getModuleName(),
 			array(
-				/*plural */ (int)isset( $params['value'] ) + (int)isset( $params['property'] )
+				/*plural */ 1
 			)
 		);
 	}
@@ -328,29 +223,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 */
 	public function getTextForSummary( array $params ) {
 		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'property', 'value' )
+			Autocomment::pickValuesFromParams( $params, 'property' )
 		);
 	}
-
-	/**
-	 * @see \ApiBase::needsToken()
-	 */
-	public function needsToken() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
-	}
-
-	/**
-	 * @see \ApiBase::mustBePosted()
-	 */
-	public function mustBePosted() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
-	}
-
-	/**
-	 * @see \ApiBase::isWriteMode()
-	 */
-	public function isWriteMode() {
-		return true;
-	}
-
 }
