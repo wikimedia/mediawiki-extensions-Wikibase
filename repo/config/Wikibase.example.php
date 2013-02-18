@@ -106,4 +106,32 @@ $wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_P
 $wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY; // use custom namespace
 
 // No need to mess with $wgNamespacesToBeSearchedDefault, the main namespace will be searched per default.
+
+// Alternate setup for rights so editing of entities by default is off
+$wgGroupPermissions['*']['item-override']	= false;
+$wgGroupPermissions['*']['item-create']		= false;
+$wgGroupPermissions['*']['item-remove']		= false;
+$wgGroupPermissions['*']['alias-update']	= false;
+$wgGroupPermissions['*']['alias-remove']	= false;
+$wgGroupPermissions['*']['sitelink-remove']	= false;
+$wgGroupPermissions['*']['sitelink-update']	= false;
+$wgGroupPermissions['*']['linktitles-update']	= false;
+$wgGroupPermissions['*']['label-remove']	= false;
+$wgGroupPermissions['*']['label-update']	= false;
+$wgGroupPermissions['*']['description-remove']	= false;
+$wgGroupPermissions['*']['description-update']	= false;
+
+$wgGroupPermissions['user']['item-override']	= true;
+$wgGroupPermissions['user']['item-create']		= true;
+$wgGroupPermissions['user']['item-remove']		= true;
+$wgGroupPermissions['user']['alias-update']	= true;
+$wgGroupPermissions['user']['alias-remove']	= true;
+$wgGroupPermissions['user']['sitelink-remove']	= true;
+$wgGroupPermissions['user']['sitelink-update']	= true;
+$wgGroupPermissions['user']['linktitles-update']	= true;
+$wgGroupPermissions['user']['label-remove']	= true;
+$wgGroupPermissions['user']['label-update']	= true;
+$wgGroupPermissions['user']['description-remove']	= true;
+$wgGroupPermissions['user']['description-update']	= true;
+
 */
