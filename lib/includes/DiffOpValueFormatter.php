@@ -6,7 +6,7 @@ use Html;
 use Diff;
 
 /**
- * Class for generating HTML for Claim Diffs.
+ * Class for formatting diffs, @todo might be renamed or something....
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,9 +54,12 @@ class DiffOpValueFormatter {
 	 * @return string
 	 */
 	protected function generateHeaderHtml() {
+		$oldHeader = is_string( $this->oldValue ) ? $this->name : '';
+		$newHeader = is_string( $this->newValue ) ? $this->name : '';
+
 		$html = Html::openElement( 'tr' );
-		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $this->name );
-		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $this->name );
+		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $oldHeader );
+		$html .= Html::rawElement( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $newHeader );
 		$html .= Html::closeElement( 'tr' );
 
 		return $html;
