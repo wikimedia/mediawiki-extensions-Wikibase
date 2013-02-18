@@ -412,11 +412,13 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( Html::rawElement( 'td', array( 'colspan' => '2' ), Html::rawElement( 'div', array( 'id' => 'mw-diff-ntitle1' ), $new ) ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
 
+		$langCode = $this->getContext()->getLanguage()->getCode();
+
 		// TODO: derp inject the EntityDiffVisualizer
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new \Diff\ListDiffer() ),
-			new ClaimDifferenceVisualizer( new WikiPageEntityLookup() )
+			new ClaimDifferenceVisualizer( new WikiPageEntityLookup(), $langCode )
 		);
 
 		$this->getOutput()->addHTML( $diffVisualizer->visualizeDiff( $diff ) );
