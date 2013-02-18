@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DlxSiFbI",
+        "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-18T16:32:29Z",
+      "side": 1,
+      "message": "Yuck! Why doesn\u0027t this come through as a DiffOpChange?",
+      "revId": "84d828924b604eba67084d3e5a9dd4cf59f0be30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl-SmacM",
+        "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-18T16:32:29Z",
+      "side": 1,
+      "message": "Could just use type hinting in the function declaration, no? Much cleaner and easier to read.",
+      "revId": "84d828924b604eba67084d3e5a9dd4cf59f0be30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl7Sw4fQ",
+        "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-18T16:32:29Z",
+      "side": 1,
+      "message": "I think the diff should dive into this and generate a ListDiff of the snaks... Comparing all the Snaks as an atomic entity doesn\u0027t make sense visually, I think.",
+      "revId": "84d828924b604eba67084d3e5a9dd4cf59f0be30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
