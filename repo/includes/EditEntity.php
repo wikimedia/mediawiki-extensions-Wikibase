@@ -363,6 +363,7 @@ class EditEntity {
 	 *
 	 *  - new: bool whether the edit created a new page
 	 *  - revision: Revision the new revision object
+	 *  - errorFlags: bit field indicating errors, see the XXX_ERROR constants.
 	 *
 	 * @since 0.1
 	 *
@@ -416,6 +417,17 @@ class EditEntity {
 	 */
 	public function hasError( $errorType = self::ANY_ERROR ) {
 		return ( $this->errorType & $errorType ) > 0;
+	}
+
+	/**
+	 * Returns a bitfield indicating errors encountered while saving.
+	 *
+	 * @since 0.4
+	 *
+	 * @return int $errorType bit field using the EditEntity::XXX_ERROR constants.
+	 */
+	public function getErrors( ) {
+		return $this->errorType;
 	}
 
 	/**
@@ -563,14 +575,15 @@ class EditEntity {
 	/**
 	 * Attempts to save the new entity content, chile first checking for permissions, edit conflicts, etc.
 	 *
-	 * @param String $summary    The edit summary
-	 * @param int    $flags      The edit flags (see WikiPage::toEditContent)
-	 * @param String|bool $token Edit token to check, or false to disable the token check.
-	 *                           Null will fail the token text, as will the empty string.
+	 * @param String      $summary    The edit summary
+	 * @param int         $flags      The edit flags (see WikiPage::toEditContent)
+	 * @param String|bool $token      Edit token to check, or false to disable the token check.
+	 *                                Null will fail the token text, as will the empty string.
 	 *
+	 * @throws \ReadOnlyError
 	 * @return Status Indicates success and provides detailed warnings or error messages. See
 	 *         getStatus() for more details.
-	 * @see      WikiPage::toEditContent
+	 * @see    WikiPage::doEditContent
 	 */
 	public function attemptSave( $summary, $flags, $token ) {
 		wfProfileIn( __METHOD__ );
@@ -586,8 +599,9 @@ class EditEntity {
 			//@todo: This is redundant to the error code set in isTokenOK().
 			//       We should figure out which error codes the callers expect,
 			//       and only set the correct error code, in one place, probably here.
-			$this->status->fatal( 'session-failure' );
 			$this->errorType |= self::TOKEN_ERROR;
+			$this->status->fatal( 'session-failure' );
+			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
 
 			wfProfileOut( __METHOD__ );
 			return $this->status;
@@ -608,6 +622,8 @@ class EditEntity {
 		}
 
 		if ( !$this->status->isOK() ) {
+			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
+
 			wfProfileOut( __METHOD__ );
 			return $this->status;
 		}
@@ -637,6 +653,8 @@ class EditEntity {
 		$this->status->merge( $filterStatus );
 
 		if ( !$this->status->isOK() ) {
+			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
+
 			wfProfileOut( __METHOD__ );
 			return $this->status;
 		}
@@ -655,6 +673,12 @@ class EditEntity {
 
 		$this->status->setResult( $editStatus->isOK(), $editStatus->getValue() );
 		$this->status->merge( $editStatus );
+
+		if ( !$this->status->isOK() ) {
+			$value = $this->status->getValue();
+			$value['errorFlags'] = $this->errorType;
+			$this->status->setResult( false, $value );
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $this->status;
@@ -866,42 +890,5 @@ class EditEntity {
 
 		wfProfileOut( __METHOD__ );
 		return true;
-	}
-
-	/**
-	 * Die with an error corresponding to any errors that occurred during attemptSave(), if any.
-	 * Intended for use in API modules.
-	 *
-	 * If there is no error but there are warnings, they are added to the API module's result.
-	 *
-	 * @param \ApiBase $api          the API module to report the error for.
-	 * @param String   $errorCode    string Brief, arbitrary, stable string to allow easy
-	 *                               automated identification of the error, e.g., 'unknown_action'
-	 * @param int      $httpRespCode int HTTP response code
-	 * @param array    $extradata    array Data to add to the "<error>" element; array in ApiResult format
-	 */
-	public function reportApiErrors( \ApiBase $api, $errorCode, $httpRespCode = 0, $extradata = null ) {
-		wfProfileIn( __METHOD__ );
-		if ( $this->status === null ) {
-			wfProfileOut( __METHOD__ );
-			return;
-		}
-
-		// report all warnings
-		// XXX: also report all errors, in sequence, here, before failing on the error?
-		$errors = $this->status->getErrorsByType( 'warning' );
-		if ( is_array($errors) && $errors !== array() ) {
-			$path = array( null, 'warnings' );
-			$api->getResult()->addValue( null, 'warnings', $errors );
-			$api->getResult()->setIndexedTagName( $path, 'warning' );
-		}
-
-		if ( !$this->status->isOK() ) {
-			$description = $this->status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' );
-			wfProfileOut( __METHOD__ );
-			$api->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
-		}
-
-		wfProfileOut( __METHOD__ );
 	}
 }

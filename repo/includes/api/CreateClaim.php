@@ -103,38 +103,16 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 	/**
 	 * @since 0.3
 	 *
-	 * @return \Wikibase\EntityContent
+	 * @param \Wikibase\EntityContent $content
 	 */
 	protected function saveChanges( EntityContent $content ) {
-		$params = $this->extractRequestParams();
-
-		$user = $this->getUser();
-		$flags = 0;
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
-		$flags |= EDIT_UPDATE;
-		$editEntity = new \Wikibase\EditEntity( $content, $user, $baseRevisionId, $this->getContext() );
-
-		$status = $editEntity->attemptSave(
-			'', // TODO: autocomment
-			$flags,
-			isset( $params['token'] ) ? $params['token'] : ''
+		$status = $this->attemptSaveEntity(
+			$content,
+			'', // TODO: automcomment
+			EDIT_UPDATE
 		);
 
-		if ( !$status->isOK() ) {
-			$this->dieUsage( 'Failed to save the change', 'createclaim-save-failed' );
-		}
-
-		$statusValue = $status->getValue();
-
-		if ( isset( $statusValue['revision'] ) ) {
-			$this->getResult()->addValue(
-				'pageinfo',
-				'lastrevid',
-				(int)$statusValue['revision']->getId()
-			);
-		}
+		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
 	}
 
 	/**
