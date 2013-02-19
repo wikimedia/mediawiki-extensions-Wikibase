@@ -306,23 +306,4 @@ class ApiGetEntities extends Api {
 			=> 'Get the item for page "Berlin" on the site "enwiki", with language attributes in English language',
 		);
 	}
-
-	/**
-	 * @see ApiBase::getHelpUrls()
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbgetentities';
-	}
-
-	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WB_VERSION;
-	}
-
 }
