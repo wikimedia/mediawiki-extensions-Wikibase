@@ -27,6 +27,25 @@ class ApiGetEntities extends Api {
 
 		$params = $this->extractRequestParams();
 
+		$status = \Status::newGood();
+
+		$status->warning( 'wikibase-api-create-failed', 'abcde' );
+		$status->warning( wfMessage( 'wikibase-api-save-failed' )->params( "q1234" ) );
+
+		$t = isset( $params['fail'] ) ? $params['fail'] : '';
+
+		switch ( $t ) {
+			case "w":
+				$this->getResult()->setWarning( "foo" );
+				$this->handleStatus( $status, 'testing' );
+				return;
+			case "e":
+				$this->getResult()->setWarning( "foo" );
+				$status->fatal( wfMessage( 'wikibase-api-illegal-field' )->params( "xxx" ) );
+				$this->handleStatus( $status, 'testing' );
+				return;
+		}
+
 		if ( !( isset( $params['ids'] ) XOR ( isset( $params['sites'] ) && isset( $params['titles'] ) ) ) ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-ids-xor-wikititles' )->text(), 'id-xor-wikititle' );
@@ -200,6 +219,9 @@ class ApiGetEntities extends Api {
 			'ids' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
+			),
+			'fail' => array(
+				ApiBase::PARAM_TYPE => 'string',
 			),
 			'sites' => array(
 				ApiBase::PARAM_TYPE => $this->getSiteLinkTargetSites()->getGlobalIdentifiers(),

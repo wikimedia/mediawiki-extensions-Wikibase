@@ -18,6 +18,20 @@ use User, Status, ApiBase;
 abstract class Api extends \ApiBase {
 
 	/**
+	 * No wrapper for single error messages
+	 *
+	 * @var bool
+	 */
+	protected static $shortErrorConextMessage = false;
+
+	/**
+	 * Default wrapper for single error messages
+	 *
+	 * @var bool
+	 */
+	protected static $longErrorConextMessage = false;
+
+	/**
 	 * Figure out the instance-specific usekeys-state
 	 *
 	 * @deprecated
@@ -396,5 +410,178 @@ abstract class Api extends \ApiBase {
 		}
 
 		return $content;
+	}
+
+	/**
+	 * Handle a status object. If $status->isOK() returns false, this method will terminate via
+	 * the a call to $this->dieUsage(). Details from the Status object will be included in the
+	 * API call's output.
+	 *
+	 * @param \Status $status
+	 * @param string  $errorCode
+	 * @param array   $extradata
+	 * @param int     $httpRespCode
+	 */
+	protected function handleStatus( Status $status, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
+		wfProfileIn( __METHOD__ );
+
+		$res = $this->getResult();
+		$isError = ( !$status->isOK() || $httpRespCode >= 400 );
+
+		// report all warnings and errors
+		if ( $status->isGood() ) {
+			$description = null;
+		} else {
+			$description = $status->getWikiText( self::$shortErrorConextMessage, self::$longErrorConextMessage );
+		}
+
+		$errors = $status->getErrorsByType( $isError ? 'error' : 'warning' );
+		$messages = $this->compileStatusReport( $errors );
+
+		if ( $messages ) {
+			//NOTE: this doesn't work:
+			//$html = $status->getHTML( self::$shortErrorConextMessage, self::$longErrorConextMessage );
+			$html = $this->messageToHtml( $description );
+			$res->setContent( $messages, $html, 'html' );
+		}
+
+		if ( $isError ) {
+			$res->setElement( $extradata, 'messages', $messages );
+
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
+		} elseif ( $messages ) {
+			$res->disableSizeCheck();
+			$res->addValue( array( 'warnings' ), 'messages', $messages, true );
+			$res->enableSizeCheck();
+
+			wfProfileOut( __METHOD__ );
+		}
+	}
+
+	protected function messageToHtml( $text ) {
+		if ( $text === null || $text === false || $text === '' ) {
+			return $text;
+		}
+
+		$out = \MessageCache::singleton()->parse( $text, $this->getContext()->getTitle(), /*linestart*/true,
+			/*interface*/true, $this->getContext()->getLanguage() );
+
+		return $out->getText();
+	}
+
+	/**
+	 * Utility method for adding a list of messages to the result object.
+	 * Useful for error reporting.
+	 *
+	 * @param $errors array a list of errors, as returned by Status::getErrorsByType()
+	 * @param $messages array an result structure to add to (optional)
+	 *
+	 * @return array a result structure containing the given messages.
+	 */
+	protected function compileStatusReport( $errors, $messages = array() ) {
+		if ( !is_array($errors) || $errors === array() ) {
+			return $messages;
+		}
+
+		$res = $this->getResult();
+
+		foreach ( $errors as $m ) {
+			$type = null;
+			$name = null;
+			$params = null;
+
+			if ( is_string( $m ) ) {
+				// it's a plain string containing a message key
+				$name = $m;
+			} elseif ( is_array( $m ) ) {
+				if ( isset( $m[0]) ) {
+					// it's an indexed array, the first entriy is the message key, the rest are paramters
+					$name = $m[0];
+					$params = array_slice( $m, 1 );
+				} else{
+					// it's an assoc array, find message key and params in fields.
+					$type = isset( $m['type'] ) ? $m['type'] : null;
+					$params = isset( $m['params'] ) ? $m['params'] : null;
+
+					if( isset( $m['message'] ) ) {
+						if ( $m['message'] instanceof \Message ) {
+							// message object, handle below
+							$m = $m['message']; // NOTE: this triggers the "$m is an object" case below!
+						} else {
+							// plain key and param list
+							$name = strval( $m['message'] );
+						}
+					}
+				}
+			}
+
+			if ( $m instanceof \Message ) { //NOTE: no elsif, since $m can be manipulated
+				// a message object
+
+				$name = $m->getKey();
+				$params = $m->getParams();
+			}
+
+			if ( $name !== null ) {
+				// got at least a name
+
+				$row = array();
+
+				$res->setElement( $row, 'name', $name );
+
+				if ( $type !== null ) {
+					$res->setElement( $row, 'type', $type );
+				}
+
+				if ( $params !== null && !empty( $params ) ) {
+					$res->setElement( $row, 'parameters', $params );
+					$res->setIndexedTagName( $row['parameters'], 'parameter' );
+				}
+
+				$messages[] = $row;
+			}
+		}
+
+		$res->setIndexedTagName( $messages, 'message' );
+		return $messages;
+	}
+
+	protected function attemptSaveEntity( EntityContent $content, $summary, $flags = 0 ) {
+		$params = $this->extractRequestParams();
+		$user = $this->getUser();
+
+		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+
+		$editEntity = new EditEntity( $content, $user, $baseRevisionId, $this->getContext() );
+
+		if ( !$this->needsToken() ) {
+			// false disabled the token check
+			$token = false;
+		} else {
+			// null fails the token check
+			$token = isset( $params['token'] ) ? $params['token'] : null;
+		}
+
+		$status = $editEntity->attemptSave(
+			$summary,
+			$flags,
+			$token
+		);
+
+		if ( $editEntity->hasError( EditEntity::TOKEN_ERROR ) ) {
+			$this->handleStatus( $status, 'session-failure' );
+		}
+		elseif ( $editEntity->hasError( EditEntity::EDIT_CONFLICT_ERROR ) ) {
+			$this->handleStatus( $status, 'edit-conflict' );
+		}
+		else {
+			$this->handleStatus( $status, 'save-failed' );
+		}
+
+		return $editEntity;
 	}
 }

@@ -8,7 +8,6 @@ use ApiBase;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
-use Wikibase\EditEntity;
 use Wikibase\EntityId;
 use Wikibase\EntityContentFactory;
 
@@ -152,27 +151,19 @@ class SetClaim extends \Wikibase\Api {
 	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();
 
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new EditEntity( $content, $this->getUser(), $baseRevisionId, $this->getContext() );
+		// collect information and create an EditEntity
+		$summary = '/* wbsetclaim */'; // TODO: automcomment;
+		$editEntity = $this->attemptSaveEntity( $content,
+			$summary,
+			EDIT_UPDATE );
 
-		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
-			EDIT_UPDATE,
-			isset( $params['token'] ) ? $params['token'] : ''
-		);
+		$revision = $editEntity->getNewRevision();
 
-		if ( !$status->isGood() ) {
-			$this->dieUsage( $status->getMessage(), 'setclaim-save-failed' );
-		}
-
-		$statusValue = $status->getValue();
-
-		if ( isset( $statusValue['revision'] ) ) {
+		if ( $revision ) {
 			$this->getResult()->addValue(
 				'pageinfo',
 				'lastrevid',
-				(int)$statusValue['revision']->getId()
+				$revision->getId()
 			);
 		}
 	}

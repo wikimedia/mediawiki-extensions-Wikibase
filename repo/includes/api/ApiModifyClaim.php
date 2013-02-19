@@ -48,32 +48,17 @@ abstract class ApiModifyClaim extends Api implements ApiAutocomment {
 			$summary = Autocomment::buildApiSummary( $this, $params, $content );
 		}
 
-		$user = $this->getUser();
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-
-		$flags = EDIT_UPDATE;
-		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
-
-		$editEntity = new EditEntity( $content, $user, $baseRevisionId, $this->getContext() );
-
-		$status = $editEntity->attemptSave(
+		$editEntity = $this->attemptSaveEntity( $content,
 			$summary,
-			$flags,
-			isset( $params['token'] ) ? $params['token'] : ''
-		);
+			EDIT_UPDATE );
 
-		if ( !$status->isOK() ) {
-			$this->dieUsage( $status->getHTML( 'wikibase-api-save-failed' ), 'save-failed' );
-		}
+		$revision = $editEntity->getNewRevision();
 
-		$statusValue = $status->getValue();
-
-		if ( isset( $statusValue['revision'] ) ) {
+		if ( $revision ) {
 			$this->getResult()->addValue(
 				'pageinfo',
 				'lastrevid',
-				(int)$statusValue['revision']->getId()
+				$revision->getId()
 			);
 		}
 	}
