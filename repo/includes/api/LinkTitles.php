@@ -138,38 +138,17 @@ class LinkTitles extends ApiWikibase {
 
 		$this->addSiteLinksToResult( $return, 'entity' );
 
-		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
-
 		if ( $itemContent === null ) {
 			// to not have an ItemContent isn't really bad at this point
 			$status = Status::newGood( true );
 		}
 		else {
 			// Do the actual save, or if it don't exist yet create it.
-			$editEntity = new \Wikibase\EditEntity( $itemContent, $user, false, $this->getContext() );
-			$status = $editEntity->attemptSave(
+			$status = $this->attemptSaveEntity( $itemContent,
 				$summary->toString(),
-				$flags,
-				( $this->needsToken() ? $params['token'] : '' )
-			);
+				$flags );
 
-			if ( $editEntity->hasError( \Wikibase\EditEntity::TOKEN_ERROR ) ) {
-				$editEntity->reportApiErrors( $this, 'session-failure' );
-			}
-			elseif ( $editEntity->hasError( \Wikibase\EditEntity::EDIT_CONFLICT_ERROR ) ) {
-				$editEntity->reportApiErrors( $this, 'edit-conflict' );
-			}
-			elseif ( $editEntity->hasError() ) {
-				$editEntity->reportApiErrors( $this, 'save-failed' );
-			}
-
-			$revision = $editEntity->getNewRevision();
-			if ( $revision ) {
-				$this->getResult()->addValue(
-					'entity',
-					'lastrevid', intval( $revision->getId() )
-				);
-			}
+			$this->addRevisionIdFromStatusToResult( 'entity', 'lastrevid', $status );
 		}
 
 		if ( $itemContent !== null ) {

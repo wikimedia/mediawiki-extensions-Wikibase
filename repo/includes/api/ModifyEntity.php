@@ -208,27 +208,10 @@ abstract class ModifyEntity extends ApiWikibase {
 		//NOTE: EDIT_NEW will not be set automatically. If the entity doesn't exist, and EDIT_NEW was
 		//      not added to $this->flags explicitly, the save will fail.
 
-		// Do the actual save, or if it don't exist yet create it.
-		// There will be exceptions but we just leak them out ;)
 		// collect information and create an EditEntity
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : false;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$editEntity = new \Wikibase\EditEntity( $entityContent, $user, $baseRevisionId, $this->getContext() );
-		$editEntity->attemptSave(
+		$status = $this->attemptSaveEntity( $entityContent,
 			$summary->toString(),
-			$this->flags,
-			( $this->needsToken() ? $params['token'] : '' )
-		);
-
-		if ( $editEntity->hasError( \Wikibase\EditEntity::TOKEN_ERROR ) ) {
-			$editEntity->reportApiErrors( $this, 'session-failure' );
-		}
-		elseif ( $editEntity->hasError( \Wikibase\EditEntity::EDIT_CONFLICT_ERROR ) ) {
-			$editEntity->reportApiErrors( $this, 'edit-conflict' );
-		}
-		elseif ( $editEntity->hasError() ) {
-			$editEntity->reportApiErrors( $this, 'save-failed' );
-		}
+			$this->flags );
 
 		$this->getResult()->addValue(
 			'entity',
@@ -240,13 +223,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			'type', $entityContent->getEntity()->getType()
 		);
 
-		$revision = $editEntity->getNewRevision();
-		if ( $revision ) {
-			$this->getResult()->addValue(
-				'entity',
-				'lastrevid', intval( $revision->getId() )
-			);
-		}
+		$this->addRevisionIdFromStatusToResult( 'entity', 'lastrevid', $status );
 
 		if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
 			$normalized = array();

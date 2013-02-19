@@ -7,6 +7,7 @@ use User, Status, ApiBase;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Settings;
+use Wikibase\EditEntity;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -21,6 +22,20 @@ use Wikibase\Settings;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 abstract class ApiWikibase extends \ApiBase {
+
+	/**
+	 * Wrapper message for single errors
+	 *
+	 * @var bool|string
+	 */
+	protected static $shortErrorContextMessage = false;
+
+	/**
+	 * Wrapper message for multiple errors
+	 *
+	 * @var bool|string
+	 */
+	protected static $longErrorContextMessage = false;
 
 	/**
 	 * Figure out the instance-specific usekeys-state
@@ -401,5 +416,303 @@ abstract class ApiWikibase extends \ApiBase {
 		}
 
 		return $content;
+	}
+
+	/**
+	 * Signal errors and warnings from a save operation to the API call's output.
+	 * This is much like handleStatus(), but specialized for Status objects returned by
+	 * EditEntity::attemptSave(). In particular, the 'errorFlags' field from the status
+	 * value is used to determine the error code to return to the called.
+	 *
+	 * @note: this function may or may not return normally, depending on whether
+	 *        the status is fatal or not.
+	 *
+	 * @see handleStatus().
+	 *
+	 * @param \Status $status The status to report
+	 */
+	protected function handleSaveStatus( Status $status ) {
+		$editError = 0;
+		$value = $status->getValue();
+
+		if ( is_array( $value ) && isset( $value['errorFlags'] ) ) {
+			$editError = $value['errorFlags'];
+		}
+
+		if ( ( $editError & EditEntity::TOKEN_ERROR ) > 0 ) {
+			$this->handleStatus( $status, 'session-failure' );
+		}
+		elseif ( ( $editError & EditEntity::EDIT_CONFLICT_ERROR ) > 0 ) {
+			$this->handleStatus( $status, 'edit-conflict' );
+		}
+		else {
+			//NOTE: will just add warnings or do nothing if there's no error
+			$this->handleStatus( $status, 'save-failed' );
+		}
+	}
+
+	/**
+	 * Include messages from a Status object in the API call's output.
+	 *
+	 * If $status->isOK() returns false, this method will terminate via the a call
+	 * to $this->dieUsage().
+	 *
+	 * If $status->isOK() returns false, any errors from the $status object will be included
+	 * in the error-section of the API response. Otherwise, any warnings from $status will be
+	 * included in the warnings-section of the API response. In both cases, a messages-section
+	 * is used that includes an HTML representation of the messages as well as a list of message
+	 * keys and parameters, for client side rendering and localization.
+	 *
+	 * @param \Status $status The status to report
+	 * @param string  $errorCode The API error code to use in case $status->isOK() returns false
+	 * @param array   $extradata Additional data to include the the error report,
+	 *                if $status->isOK() returns false
+	 * @param int     $httpRespCode the HTTP response code to use in case
+	 *                $status->isOK() returns false.
+	 *
+	 * @warning This is a temporary solution, pending a similar feature in MediaWiki core,
+	 *          see bug 45843.
+	 *
+	 * @see \ApiBase::dieUsage()
+	 */
+	protected function handleStatus( Status $status, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
+		wfProfileIn( __METHOD__ );
+
+		$res = $this->getResult();
+		$isError = !$status->isOK();
+
+		// report all warnings and errors
+		if ( $status->isGood() ) {
+			$description = null;
+		} else {
+			$description = $status->getWikiText( self::$shortErrorContextMessage, self::$longErrorContextMessage );
+		}
+
+		$errors = $status->getErrorsByType( $isError ? 'error' : 'warning' );
+		$messages = $this->compileStatusReport( $errors );
+
+		if ( $messages ) {
+			//NOTE: Status::getHTML() doesn't work, see bug 45844
+			//$html = $status->getHTML( self::$shortErrorContextMessage, self::$longErrorContextMessage );
+
+			// nasty workaround:
+			$html = $this->messageToHtml( $description );
+			$res->setContent( $messages, $html, 'html' );
+		}
+
+		if ( $isError ) {
+			$res->setElement( $extradata, 'messages', $messages );
+
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
+		} elseif ( $messages ) {
+			$res->disableSizeCheck();
+			$res->addValue( array( 'warnings' ), 'messages', $messages, true );
+			$res->enableSizeCheck();
+
+			wfProfileOut( __METHOD__ );
+		}
+	}
+
+	/**
+	 * Converts the given wiki text to HTML, using the parser mode for interface messages.
+	 *
+	 * @note: this is only needed as a temporary workaround for bug 45844
+	 *
+	 * @param string|null|bool $text The wikitext to parse.
+	 *
+	 * @return string|null|bool HTML of the wikitext if $text is a string; $text if it's false or null
+	 *
+	 * @see \MessageCache::parse()
+	 */
+	protected function messageToHtml( $text ) {
+		if ( $text === null || $text === false || $text === '' ) {
+			return $text;
+		}
+
+		$out = \MessageCache::singleton()->parse( $text, $this->getContext()->getTitle(), /*linestart*/true,
+			/*interface*/true, $this->getContext()->getLanguage() );
+
+		return $out->getText();
+	}
+
+	/**
+	 * Utility method for compiling a list of messages into a form suitable for use
+	 * in an API result structure.
+	 *
+	 * The $errors parameters is a list of (error) messages. Each entry in that array
+	 * represents on message; the message can be represented as:
+	 *
+	 * * a message key, as a string
+	 * * an indexed array with the message key as the first element, and the remaining elements
+	 *   acting as message parameters
+	 * * an associative array with the following fields:
+	 *   - message: the message key (as a string); may also be a Message object, see below for that.
+	 *   - params: a list of parameters (optional)
+	 *   - type: the type of message (warning or error) (optional)
+	 * * an associative array like above, but containing a Message object in the 'message' field.
+	 *   In that case, the 'params' field is ignored and the parameter list is taken from the
+	 *   Message object.
+	 *
+	 * This provides support for message lists coming from Status::getErrorsByType() as well as
+	 * Title::getUserPermissionsErrors() etc.
+	 *
+	 * @param $errors array a list of errors, as returned by Status::getErrorsByType()
+	 * @param $messages array an result structure to add to (optional)
+	 *
+	 * @return array a result structure containing the messages from $errors as well as what
+	 *         was already present in the $messages parameter.
+	 */
+	protected function compileStatusReport( $errors, $messages = array() ) {
+		if ( !is_array($errors) || $errors === array() ) {
+			return $messages;
+		}
+
+		$res = $this->getResult();
+
+		foreach ( $errors as $m ) {
+			$type = null;
+			$name = null;
+			$params = null;
+
+			if ( is_string( $m ) ) {
+				// it's a plain string containing a message key
+				$name = $m;
+			} elseif ( is_array( $m ) ) {
+				if ( isset( $m[0]) ) {
+					// it's an indexed array, the first entriy is the message key, the rest are paramters
+					$name = $m[0];
+					$params = array_slice( $m, 1 );
+				} else{
+					// it's an assoc array, find message key and params in fields.
+					$type = isset( $m['type'] ) ? $m['type'] : null;
+					$params = isset( $m['params'] ) ? $m['params'] : null;
+
+					if( isset( $m['message'] ) ) {
+						if ( $m['message'] instanceof \Message ) {
+							// message object, handle below
+							$m = $m['message']; // NOTE: this triggers the "$m is an object" case below!
+						} else {
+							// plain key and param list
+							$name = strval( $m['message'] );
+						}
+					}
+				}
+			}
+
+			if ( $m instanceof \Message ) { //NOTE: no elsif, since $m can be manipulated
+				// a message object
+
+				$name = $m->getKey();
+				$params = $m->getParams();
+			}
+
+			if ( $name !== null ) {
+				// got at least a name
+
+				$row = array();
+
+				$res->setElement( $row, 'name', $name );
+
+				if ( $type !== null ) {
+					$res->setElement( $row, 'type', $type );
+				}
+
+				if ( $params !== null && !empty( $params ) ) {
+					$res->setElement( $row, 'parameters', $params );
+					$res->setIndexedTagName( $row['parameters'], 'parameter' );
+				}
+
+				$messages[] = $row;
+			}
+		}
+
+		$res->setIndexedTagName( $messages, 'message' );
+		return $messages;
+	}
+
+	/**
+	 * Attempts to save the new entity content, chile first checking for permissions,
+	 * edit conflicts, etc. Saving is done via EditEntity::attemptSave().
+	 *
+	 * This method automatically takes into account several parameters:
+	 * * 'bot' for setting the bot flag
+	 * * 'baserevid' for determining the edit's base revision for conflict resolution
+	 * * 'token' for the edit token
+	 *
+	 * If an error occurs, it is automatically reported and execution of the API module
+	 * is terminated using a call to dieUsage() (via handleStatus()). If there were any
+	 * warnings, they will automatically be included in the API call's output (again, via
+	 * handleStatus()).
+	 *
+	 * @param EntityContent $content  The content to save
+	 * @param String $summary    The edit summary
+	 * @param int    $flags      The edit flags (see WikiPage::toEditContent)
+	 *
+	 * @return Status the status of the save operation, as returned by EditEntity::attemptSave()
+	 * @see  EditEntity::attemptSave()
+	 *
+	 * @todo: this could be factored out into a controller-like class, but that controller
+	 *        would still need knowledge of the API module to be useful. We'll put it here
+	 *        for now pending further discussion.
+	 */
+	protected function attemptSaveEntity( EntityContent $content, $summary, $flags = 0 ) {
+		$params = $this->extractRequestParams();
+		$user = $this->getUser();
+
+		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+
+		$editEntity = new EditEntity( $content, $user, $baseRevisionId, $this->getContext() );
+
+		if ( !$this->needsToken() ) {
+			// false disabled the token check
+			$token = false;
+		} else {
+			// null fails the token check
+			$token = isset( $params['token'] ) ? $params['token'] : null;
+		}
+
+		$status = $editEntity->attemptSave(
+			$summary,
+			$flags,
+			$token
+		);
+
+		$this->handleSaveStatus( $status );
+		return $status;
+	}
+
+	/**
+	 * Adds the ID of the new revision from the Status object to the API result structure.
+	 * The status value is expected to be structured in the way that EditEntity::attemptSave()
+	 * resp WikiPage::doEditContent() do it: as an array, with the new revision object in the
+	 * 'revision' field.
+	 *
+	 * If no revision is found the the Status object, this method does nothing.
+	 *
+	 * @see ApiResult::addValue()
+	 *
+	 * @param string|null|array  $path  Where in the result to put the revision idf
+	 * @param string  $name   The name to use for the revision id in the result structure
+	 * @param \Status $status The status to get the revision ID from.
+	 */
+	protected function addRevisionIdFromStatusToResult( $path, $name, Status $status ) {
+		$statusValue = $status->getValue();
+
+		/* @var \Revision $revision */
+		$revision = isset( $statusValue['revision'] )
+			? $statusValue['revision'] : null;
+
+		if ( $revision ) {
+			$this->getResult()->addValue(
+				$path,
+				$name,
+				intval( $revision->getId() )
+			);
+		}
+
 	}
 }
