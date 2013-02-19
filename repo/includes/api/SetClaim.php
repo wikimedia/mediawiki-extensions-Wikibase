@@ -57,12 +57,11 @@ class SetClaim extends ApiWikibase {
 
 		$newRevisionId = null;
 
-		try {
-			$newRevisionId = $claimSetter->saveClaim( $claim, $baseRevisionId, $token, $this->getUser() );
-		}
-		catch ( ExceptionWithCode $exception ) {
-			$this->dieUsage( $exception->getMessage(), $exception->getErrorCode() );
-		}
+		$status = $claimSetter->saveClaim( $claim, $baseRevisionId, $token, $this->getUser() );
+		$this->handleSaveStatus( $status ); // die on error, report warnings, etc
+
+		$statusValue = $status->getValue();
+		$newRevisionId = isset( $statusValue['revision'] ) ? $statusValue['revision']->getId() : null;
 
 		if ( $newRevisionId !== null ) {
 			$this->getResult()->addValue(
