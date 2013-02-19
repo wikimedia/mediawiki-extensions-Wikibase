@@ -617,8 +617,8 @@ div.wb-claim-new .wb-snak-value {
 	font-size: 90%;
 }
 
-.wb-statement-references .wb-error {
-	background-color: #E5C8B5;
+div.wb-statement-references .wb-error {
+	background-color: #FFDFC9;
 }
 
 .wb-referenceview {
