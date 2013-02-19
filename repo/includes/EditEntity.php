@@ -570,7 +570,7 @@ class EditEntity {
 	 *
 	 * @return Status Indicates success and provides detailed warnings or error messages. See
 	 *         getStatus() for more details.
-	 * @see      WikiPage::toEditContent
+	 * @see    WikiPage::doEditContent
 	 */
 	public function attemptSave( $summary, $flags, $token ) {
 		wfProfileIn( __METHOD__ );
@@ -866,42 +866,5 @@ class EditEntity {
 
 		wfProfileOut( __METHOD__ );
 		return true;
-	}
-
-	/**
-	 * Die with an error corresponding to any errors that occurred during attemptSave(), if any.
-	 * Intended for use in API modules.
-	 *
-	 * If there is no error but there are warnings, they are added to the API module's result.
-	 *
-	 * @param \ApiBase $api          the API module to report the error for.
-	 * @param String   $errorCode    string Brief, arbitrary, stable string to allow easy
-	 *                               automated identification of the error, e.g., 'unknown_action'
-	 * @param int      $httpRespCode int HTTP response code
-	 * @param array    $extradata    array Data to add to the "<error>" element; array in ApiResult format
-	 */
-	public function reportApiErrors( \ApiBase $api, $errorCode, $httpRespCode = 0, $extradata = null ) {
-		wfProfileIn( __METHOD__ );
-		if ( $this->status === null ) {
-			wfProfileOut( __METHOD__ );
-			return;
-		}
-
-		// report all warnings
-		// XXX: also report all errors, in sequence, here, before failing on the error?
-		$errors = $this->status->getErrorsByType( 'warning' );
-		if ( is_array($errors) && $errors !== array() ) {
-			$path = array( null, 'warnings' );
-			$api->getResult()->addValue( null, 'warnings', $errors );
-			$api->getResult()->setIndexedTagName( $path, 'warning' );
-		}
-
-		if ( !$this->status->isOK() ) {
-			$description = $this->status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' );
-			wfProfileOut( __METHOD__ );
-			$api->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
-		}
-
-		wfProfileOut( __METHOD__ );
 	}
 }
