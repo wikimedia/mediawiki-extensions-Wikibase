@@ -221,7 +221,9 @@ $wgAutoloadClasses['Wikibase\Test\EntityTestCase']          = $dir . 'tests/phpu
 $wgAutoloadClasses['Wikibase\Lib\Test\Serializers\UnserializerBaseTest'] = $dir . 'tests/phpunit/serializers/UnserializerBaseTest.php';
 
 // TODO: this is not nice, figure out a better design
-$wgExtensionFunctions[] = function() {
+$wgExtensionFunctions[] = 'efWikibaseLib';
+
+function efWikibaseLib() {
 	global $wgDataTypes;
 
 	$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
@@ -234,7 +236,7 @@ $wgExtensionFunctions[] = function() {
 	\Wikibase\TemplateRegistry::singleton()->addTemplates( include( __DIR__ . "/resources/templates.php" ) );
 
     return true;
-};
+}
 
 $wgValueParsers['wikibase-entityid'] = 'Wikibase\Lib\EntityIdParser';
 $wgDataValues['wikibase-entityid'] = 'Wikibase\EntityId';
