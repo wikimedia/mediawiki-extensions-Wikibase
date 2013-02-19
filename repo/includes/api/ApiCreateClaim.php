@@ -45,11 +45,12 @@ class ApiCreateClaim extends ApiModifyClaim {
 
 		$this->checkParameterRequirements();
 
-		$entityContent = $this->getEntityContent();
+		$params = $this->extractRequestParams();
+		$content = $this->getEntityContent( $params['entity'] );
 
-		$claim = $this->addClaim( $entityContent->getEntity() );
+		$claim = $this->addClaim( $content->getEntity() );
 
-		$this->saveChanges( $entityContent );
+		$this->saveChanges( $content );
 
 		$this->outputClaim( $claim );
 
@@ -93,22 +94,19 @@ class ApiCreateClaim extends ApiModifyClaim {
 	/**
 	 * @since 0.2
 	 *
-	 * @return EntityContent
+	 * @return Snak
+	 * @throws MWException
 	 */
-	protected function getEntityContent() {
+	protected function getSnakInstance() {
 		$params = $this->extractRequestParams();
 
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$factory = new SnakFactory();
 
-		$entityId = EntityId::newFromPrefixedId( $params['entity'] );
-		$entityTitle = $entityId ? EntityContentFactory::singleton()->getTitleForId( $entityId ) : null;
-		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
-
-		if ( $entityContent === null ) {
-			$this->dieUsage( 'Entity ' . $params['entity'] . ' not found', 'entity-not-found' );
-		}
-
-		return $entityContent;
+		return $factory->newSnak(
+			$this->getPropertyId(),
+			$params['snaktype'],
+			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
+		);
 	}
 
 	/**

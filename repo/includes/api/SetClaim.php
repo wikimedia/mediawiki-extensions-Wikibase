@@ -10,6 +10,7 @@ use Wikibase\EntityContent;
 use Wikibase\Claim;
 use Wikibase\EntityId;
 use Wikibase\EntityContentFactory;
+use Wikibase\Autocomment;
 
 /**
  * API module for creating or updating an entire Claim.
@@ -37,7 +38,7 @@ use Wikibase\EntityContentFactory;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetClaim extends \Wikibase\Api {
+class SetClaim extends \Wikibase\ApiModifyClaim {
 
 	// TODO: rights
 
@@ -123,65 +124,21 @@ class SetClaim extends \Wikibase\Api {
 	}
 
 	/**
-	 * @since 0.4
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return EntityContent
+	 * @see  ApiAutocomment::getTextForComment()
 	 */
-	protected function getEntityContent( EntityId $entityId ) {
-		$params = $this->extractRequestParams();
-
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setclaim-entity-not-found' );
-		}
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
+	public function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			$this->getModuleName(),
+			array( 1 )
+		);
 	}
 
 	/**
-	 * @since 0.4
-	 *
-	 * @param EntityContent $content
+	 * @see  ApiAutocomment::getTextForSummary()
 	 */
-	protected function saveChanges( EntityContent $content ) {
-		$params = $this->extractRequestParams();
-
-		// collect information and create an EditEntity
-		$summary = '/* wbsetclaim */'; // TODO: automcomment;
-		$editEntity = $this->attemptSaveEntity( $content,
-			$summary,
-			EDIT_UPDATE );
-
-		$revision = $editEntity->getNewRevision();
-
-		if ( $revision ) {
-			$this->getResult()->addValue(
-				'pageinfo',
-				'lastrevid',
-				$revision->getId()
-			);
-		}
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param Claim $claim
-	 */
-	protected function outputClaim( Claim $claim ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $claim );
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		$this->getResult()->addValue(
-			null,
-			'claim',
-			$serializer->getSerialized( $claim )
+	public function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'claim' )
 		);
 	}
 
@@ -193,16 +150,12 @@ class SetClaim extends \Wikibase\Api {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-		);
+		) );
 	}
 
 	/**
@@ -213,13 +166,9 @@ class SetClaim extends \Wikibase\Api {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'claim' => 'Claim serialization',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-		);
+		) );
 	}
 
 	/**

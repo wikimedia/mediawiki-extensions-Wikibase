@@ -64,30 +64,57 @@ abstract class ApiModifyClaim extends Api implements ApiAutocomment {
 	}
 
 	/**
+	 * Loads the entity containing the Claim with the given GUID.
+	 * If the baserevid parameter is specified, the specified revision of the entity is loaded.
+	 *
+	 * @since 0.4
+	 *
+	 * @param $claimGuid string
+	 *
+	 * @return EntityContent
+	 */
+	protected function getEntityContentForClaim( $claimGuid ) {
+		$entityId = Entity::getIdFromClaimGuid( $claimGuid );
+		$content = $this->getEntityContent( $entityId );
+
+		return $content;
+	}
+
+	/**
+	 * Loads the specified entity.
+	 * If the baserevid parameter is specified, the specified revision of the entity is loaded.
+	 *
+	 * @since 0.4
+	 *
+	 * @param $entityId string|EntityId Entitiy ID as a string or object
+	 *
+	 * @return EntityContent
+	 */
+	protected function getEntityContent( $entityId ) {
+		$params = $this->extractRequestParams();
+
+		if ( is_string( $entityId ) ) {
+			$entityId = EntityId::newFromPrefixedId( $entityId );
+		}
+
+		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
+
+		if ( $entityTitle === null ) {
+			$this->dieUsage( 'No such entity: ' . $entityId, 'entity-not-found' );
+		}
+
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+
+		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
+	}
+
+	/**
 	 * Checks if the required parameters are set and are valid and consistent.
 	 *
 	 * @since 0.2
 	 */
 	protected function checkParameterRequirements() {
 		// noop
-	}
-
-	/**
-	 * @since 0.2
-	 *
-	 * @return Snak
-	 * @throws MWException
-	 */
-	protected function getSnakInstance() {
-		$params = $this->extractRequestParams();
-
-		$factory = new SnakFactory();
-
-		return $factory->newSnak(
-			$this->getPropertyId(),
-			$params['snaktype'],
-			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
-		);
 	}
 
 	/**
