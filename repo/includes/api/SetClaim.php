@@ -249,26 +249,4 @@ class SetClaim extends \Wikibase\Api {
 		);
 	}
 
-	/**
-	 * @see ApiBase::getHelpUrls
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetclaimvalue';
-	}
-
-	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WB_VERSION;
-	}
-
 }

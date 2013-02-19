@@ -196,20 +196,6 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 	}
 
 	/**
-	 * @see \ApiBase::needsToken()
-	 */
-	public function needsToken() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
-	}
-
-	/**
-	 * @see \ApiBase::mustBePosted()
-	 */
-	public function mustBePosted() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
-	}
-
-	/**
 	 * @see \ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {
@@ -290,24 +276,6 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 			'api.php?action=wblinktitles&fromsite=enwiki&fromtitle=Hydrogen&tosite=dewiki&totitle=Wasserstoff'
 			=> 'Add a link "Hydrogen" from the English page to "Wasserstoff" at the German page',
 		);
-	}
-
-	/**
-	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wblinktitles';
-	}
-
-	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WB_VERSION;
 	}
 
 }

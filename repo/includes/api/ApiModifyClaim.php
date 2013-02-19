@@ -161,42 +161,6 @@ abstract class ApiModifyClaim extends Api implements ApiAutocomment {
 	}
 
 	/**
-	 * @see ApiBase::getHelpUrls
-	 *
-	 * @since 0.2
-	 *
-	 * @return string
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#' . $this->getModuleName();
-	}
-
-	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.2
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return get_class( $this ) . '-' . WB_VERSION;
-	}
-
-	/**
-	 * @see \ApiBase::needsToken()
-	 */
-	public function needsToken() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
-	}
-
-	/**
-	 * @see \ApiBase::mustBePosted()
-	 */
-	public function mustBePosted() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
-	}
-
-	/**
 	 * @see \ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {

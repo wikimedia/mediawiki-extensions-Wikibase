@@ -251,20 +251,6 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 	}
 
 	/**
-	 * @see \ApiBase::needsToken()
-	 */
-	public function needsToken() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
-	}
-
-	/**
-	 * @see \ApiBase::mustBePosted()
-	 */
-	public function mustBePosted() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
-	}
-
-	/**
 	 * @see \ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {

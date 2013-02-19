@@ -25,6 +25,7 @@ use ApiBase;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class ApiSearchEntities extends ApiBase {
+	//XXX: why not derive from Wikibase\Api?
 
 	/**
 	 * Get the entities corresponding to the provided language and term pair.
@@ -290,13 +291,6 @@ class ApiSearchEntities extends ApiBase {
 			'api.php?action=wbsearchentities&search=abc&language=en'
 			=> 'Search for "abc" in English language, with defaults for type and limit.',
 		);
-	}
-
-	/**
-	 * @see ApiBase::getHelpUrls
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsearchentities';
 	}
 
 	/**

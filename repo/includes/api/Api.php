@@ -14,6 +14,7 @@ use User, Status, ApiBase;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class Api extends \ApiBase {
 
@@ -67,6 +68,38 @@ abstract class Api extends \ApiBase {
 	public function getAllowedParams() {
 		return array(
 		);
+	}
+
+	/**
+	 * @see \ApiBase::needsToken()
+	 */
+	public function needsToken() {
+		return $this->isWriteMode() && ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithTokens' ) );
+	}
+
+	/**
+	 * @see \ApiBase::mustBePosted()
+	 */
+	public function mustBePosted() {
+		return $this->isWriteMode() && ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithPost' ) );
+	}
+
+	/**
+	 * @see ApiBase::getVersion
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	public function getVersion() {
+		return get_class( $this ) . '-' . WB_VERSION;
+	}
+
+	/**
+	 * @see ApiBase::getHelpUrls()
+	 */
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#' . $this->getModuleName();
 	}
 
 	/**
