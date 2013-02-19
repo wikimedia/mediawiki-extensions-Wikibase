@@ -47,9 +47,10 @@ $messages['qqq'] = array(
 
 /** Arabic (العربية)
  * @author Antime
+ * @author Tarawneh
  */
 $messages['ar'] = array(
-	'datavalues-desc' => 'مجموعة من كائنات تمثل أنواع مختلفة من القيم',
+	'datavalues-desc' => 'مجموعة كائنات تمثل أنواع قيم مختلفة',
 	'version-datavalues' => 'قيم البيانات',
 );
 
