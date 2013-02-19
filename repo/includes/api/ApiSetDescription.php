@@ -73,23 +73,4 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 				=> 'Set the string "An encyclopedia that everyone can edit" for page with id "42" as a decription in English language',
 		);
 	}
-
-	/**
-	 * @see ApiBase::getHelpUrls()
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetdescription';
-	}
-
-	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WB_VERSION;
-	}
-
 }
