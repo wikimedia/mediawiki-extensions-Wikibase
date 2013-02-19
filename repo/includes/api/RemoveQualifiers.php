@@ -6,11 +6,11 @@ use ApiBase;
 use MWException;
 
 use Wikibase\EntityContent;
-use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claim;
 use Wikibase\Settings;
+use Wikibase\Autocomment;
 
 /**
  * API module for removing qualifiers from a claim.
@@ -38,7 +38,7 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveQualifiers extends \Wikibase\Api {
+class RemoveQualifiers extends \Wikibase\ApiModifyClaim {
 
 	// TODO: automcomment
 	// TODO: example
@@ -54,33 +54,14 @@ class RemoveQualifiers extends \Wikibase\Api {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$content = $this->getEntityContent();
+		$params = $this->extractRequestParams();
+		$content = $this->getEntityContentForClaim( $params['claim'] );
 
 		$this->doRemoveQualifiers( $content->getEntity() );
 
 		$this->saveChanges( $content );
 
 		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @return EntityContent
-	 */
-	protected function getEntityContent() {
-		$params = $this->extractRequestParams();
-
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'removequalifiers-entity-not-found' );
-		}
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
 	/**
@@ -128,26 +109,22 @@ class RemoveQualifiers extends \Wikibase\Api {
 	}
 
 	/**
-	 * @since 0.3
-	 *
-	 * @param EntityContent $content
+	 * @see  ApiAutocomment::getTextForComment()
 	 */
-	protected function saveChanges( EntityContent $content ) {
-		// collect information and create an EditEntity
-		$summary = '/* wbremovequalifiers */'; //TODO: autosummary!
-		$editEntity = $this->attemptSaveEntity( $content,
-			$summary,
-			EDIT_UPDATE );
+	public function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			$this->getModuleName(),
+			array( count( $params['qualifiers'] ) )
+		);
+	}
 
-		$revision = $editEntity->getNewRevision();
-
-		if ( $revision ) {
-			$this->getResult()->addValue(
-				'pageinfo',
-				'lastrevid',
-				$revision->getId()
-			);
-		}
+	/**
+	 * @see  ApiAutocomment::getTextForSummary()
+	 */
+	public function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'qualifiers' )
+		);
 	}
 
 	/**
@@ -158,7 +135,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
@@ -168,12 +145,7 @@ class RemoveQualifiers extends \Wikibase\Api {
 				ApiBase::PARAM_REQUIRED => true,
 				ApiBase::PARAM_ISMULTI => true,
 			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-			'bot' => null,
-		);
+		) );
 	}
 
 	/**
@@ -184,18 +156,10 @@ class RemoveQualifiers extends \Wikibase\Api {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'claim' => 'A GUID identifying the claim from which to remove qualifiers',
 			'qualifiers' => 'Snak hashes of the querliers to remove',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array(
-				'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
-		);
+		) );
 	}
 
 	/**

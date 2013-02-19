@@ -6,13 +6,13 @@ use ApiBase;
 use MWException;
 
 use Wikibase\EntityContent;
-use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claim;
 use Wikibase\Snaks;
 use Wikibase\SnakFactory;
 use Wikibase\Settings;
+use Wikibase\Autocomment;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -40,7 +40,7 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetQualifier extends \Wikibase\Api {
+class SetQualifier extends \Wikibase\ApiModifyClaim {
 
 	// TODO: automcomment
 	// TODO: example
@@ -59,7 +59,8 @@ class SetQualifier extends \Wikibase\Api {
 
 		$this->checkParameterRequirements();
 
-		$content = $this->getEntityContent();
+		$params = $this->extractRequestParams();
+		$content = $this->getEntityContentForClaim( $params['claim'] );
 
 		$claim = $this->doSetQualifier(
 			$content->getEntity()
@@ -103,26 +104,6 @@ class SetQualifier extends \Wikibase\Api {
 				'setqualifier-value-required'
 			);
 		}
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @return EntityContent
-	 */
-	protected function getEntityContent() {
-		$params = $this->extractRequestParams();
-
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setqualifier-entity-not-found' );
-		}
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
 	/**
@@ -249,42 +230,21 @@ class SetQualifier extends \Wikibase\Api {
 	}
 
 	/**
-	 * @since 0.3
-	 *
-	 * @param EntityContent $content
+	 * @see  ApiAutocomment::getTextForComment()
 	 */
-	protected function saveChanges( EntityContent $content ) {
-		// collect information and create an EditEntity
-		$summary = '/* wbsetqualifier */'; // TODO: automcomment
-		$editEntity = $this->attemptSaveEntity( $content,
-			$summary,
-			EDIT_UPDATE );
-
-		$revision = $editEntity->getNewRevision();
-
-		if ( $revision ) {
-			$this->getResult()->addValue(
-				'pageinfo',
-				'lastrevid',
-				$revision->getId()
-			);
-		}
+	public function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			$this->getModuleName(),
+			array( 1 )
+		);
 	}
 
 	/**
-	 * @since 0.3
-	 *
-	 * @param Claim $claim
+	 * @see  ApiAutocomment::getTextForSummary()
 	 */
-	protected function outputClaim( Claim $claim ) {
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $claim );
-		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
-
-		$this->getResult()->addValue(
-			null,
-			'claim',
-			$serializer->getSerialized( $claim )
+	public function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'property' )
 		);
 	}
 
@@ -296,7 +256,7 @@ class SetQualifier extends \Wikibase\Api {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
@@ -317,12 +277,7 @@ class SetQualifier extends \Wikibase\Api {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => false,
 			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-			'bot' => null,
-		);
+		) );
 	}
 
 	/**
@@ -333,7 +288,7 @@ class SetQualifier extends \Wikibase\Api {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'claim' => 'A GUID identifying the claim for which a qualifier is being set',
 			'property' => array(
 				'Id of the snaks property.',
@@ -351,15 +306,7 @@ class SetQualifier extends \Wikibase\Api {
 				'The hash of the snak to modify.',
 				'Should only be provided for existing qualifiers'
 			),
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array(
-				'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
-		);
+		) );
 	}
 
 	/**

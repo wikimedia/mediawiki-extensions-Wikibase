@@ -29,7 +29,7 @@ use ApiBase, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiSetReference extends Api {
+class ApiSetReference extends ApiModifyClaim {
 
 	// TODO: automcomment
 	// TODO: example
@@ -44,8 +44,8 @@ class ApiSetReference extends Api {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$content = $this->getEntityContent();
 		$params = $this->extractRequestParams();
+		$content = $this->getEntityContentForClaim( $params['statement'] );
 
 		$reference = $this->updateReference(
 			$content->getEntity(),
@@ -59,26 +59,6 @@ class ApiSetReference extends Api {
 		$this->outputReference( $reference );
 
 		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @return EntityContent
-	 */
-	protected function getEntityContent() {
-		$params = $this->extractRequestParams();
-
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setreference-entity-not-found' );
-		}
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
 	/**
@@ -162,25 +142,22 @@ class ApiSetReference extends Api {
 	}
 
 	/**
-	 * @since 0.3
-	 *
-	 * @param EntityContent $content
+	 * @see  ApiAutocomment::getTextForComment()
 	 */
-	protected function saveChanges( EntityContent $content ) {
-		$summary = '/* wbsetreference */'; // TODO: automcomment
-		$editEntity = $this->attemptSaveEntity( $content,
-			$summary,
-			EDIT_UPDATE );
+	public function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			$this->getModuleName(),
+			array( count( $params['reference'] ) )
+		);
+	}
 
-		$revision = $editEntity->getNewRevision();
-
-		if ( $revision ) {
-			$this->getResult()->addValue(
-				'pageinfo',
-				'lastrevid',
-				$revision->getId()
-			);
-		}
+	/**
+	 * @see  ApiAutocomment::getTextForSummary()
+	 */
+	public function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'reference' )
+		);
 	}
 
 	/**
@@ -208,7 +185,7 @@ class ApiSetReference extends Api {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'statement' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
@@ -220,12 +197,7 @@ class ApiSetReference extends Api {
 			'reference' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			'token' => null,
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
-			'bot' => null,
-		);
+		) );
 	}
 
 	/**
@@ -236,18 +208,11 @@ class ApiSetReference extends Api {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'statement' => 'A GUID identifying the statement for which a reference is being set',
 			'snaks' => 'The snaks to set the reference to. JSON object with property ids pointing to arrays containing the snaks for that property',
 			'reference' => 'A hash of the reference that should be updated. Optional. When not provided, a new reference is created',
-			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
-			'bot' => array( 'Mark this edit as bot',
-				'This URL flag will only be respected if the user belongs to the group "bot".'
-			),
-		);
+		) );
 	}
 
 	/**

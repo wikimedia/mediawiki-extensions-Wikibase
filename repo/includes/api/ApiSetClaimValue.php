@@ -45,7 +45,8 @@ class ApiSetClaimValue extends ApiModifyClaim {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$content = $this->getEntityContent();
+		$params = $this->extractRequestParams();
+		$content = $this->getEntityContentForClaim( $params['claim'] );
 
 		$params = $this->extractRequestParams();
 
@@ -61,26 +62,6 @@ class ApiSetClaimValue extends ApiModifyClaim {
 		$this->outputClaim( $claim );
 
 		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @return EntityContent
-	 */
-	protected function getEntityContent() {
-		$params = $this->extractRequestParams();
-
-		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setclaimvalue-entity-not-found' );
-		}
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-
-		return $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
 	/**
