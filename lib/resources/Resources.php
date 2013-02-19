@@ -318,6 +318,15 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.wikibase.edittoolbar' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.edittoolbar.js',
+			),
+			'dependencies' => array(
+				'wikibase.ui.PropertyEditTool',
+			)
+		),
+
 		'wikibase.templates' => $moduleTemplate + array(
 			'class' => 'Wikibase\TemplateModule',
 			'scripts' => 'templates.js'
@@ -377,6 +386,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
+				'jquery.wikibase.edittoolbar'
 			)
 		),
 
@@ -463,7 +473,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.claimview',
-				'wikibase.templates'
+				'jquery.wikibase.edittoolbar',
+				'wikibase.templates',
 			),
 			'messages' => array(
 				'wikibase-label-empty'
