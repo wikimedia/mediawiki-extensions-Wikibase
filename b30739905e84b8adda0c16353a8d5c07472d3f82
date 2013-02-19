@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dl42W.Ek",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-19T13:51:32Z",
+      "side": 1,
+      "message": "SpecialRecentChanges line 143, but it could be that this only has effect if the page is transcluded in another page.\n\nRemoves this, end of discussion.",
+      "parentUuid": "Dl7Q2oU4",
+      "revId": "b30739905e84b8adda0c16353a8d5c07472d3f82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DlzTysZk",
         "filename": "repo/includes/specials/SpecialItemByTitle.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-02-18T17:19:17Z",
       "side": 1,
       "message": "Please try without normalization (or with only basic stripping / unicode normalization) first. Calling the target wiki to normalize is expensive, and if the title is already normalized, it can be avoided.\n\nNote that the unnormalized form of one page can never conflict with the normalized form of another page, so we should never get fals positive matches this way.",
+      "revId": "b30739905e84b8adda0c16353a8d5c07472d3f82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl40l2A4",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-19T13:51:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DlzTysZk",
       "revId": "b30739905e84b8adda0c16353a8d5c07472d3f82",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
