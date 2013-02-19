@@ -113,22 +113,42 @@ Parameters:
 
 /** Arabic (العربية)
  * @author Ali1
+ * @author Peadara
  * @author Tarawneh
  */
 $messages['ar'] = array(
+	'wikibase-client-desc' => 'عميل امتداد ويكيبيس',
 	'wikibase-after-page-move' => 'يمكنك أيضا [ $1  تحديث] بند ويكيبيانات المرتبط بها للحفاظ على روابط اللغة ضمن الصفحة المنقولة.',
 	'wikibase-comment-remove' => 'تم حذف بند ويكيبيانات المرتبطة. و تم إزالة ارتباطات اللغة.',
-	'wikibase-nolanglinks' => 'لا شيء',
+	'wikibase-comment-linked' => 'تم ربط عنصر ويكيبيانات مع هذه الصفحة.',
+	'wikibase-comment-unlink' => 'تم فصل ارتباط هذه الصفحة من البند ويكيبيانات. تم إزالة روابط اللغة.',
+	'wikibase-comment-restore' => 'تم استرجاع بند ويكيبيانات المرتبط. روابط اللغة أعيدت.',
+	'wikibase-comment-update' => 'روابط اللغة حُدثت.',
+	'wikibase-comment-sitelink-add' => 'وصلة اللغة المُضافة:$1',
+	'wikibase-comment-sitelink-change' => 'تم تعديل وصلة اللغة من $1 إلى $2',
+	'wikibase-comment-sitelink-remove' => 'وصلة اللغة المُلغاة:$1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|تعديل|تعديلات}}',
+	'wikibase-nolanglinks' => 'لا وصلات',
+	'wikibase-editlinks' => 'تعديل الارتباطات',
+	'wikibase-editlinkstitle' => 'تحرير ارتباطات اللغات البينية',
 	'wikibase-linkitem-addlinks' => 'إضافة روابط',
+	'wikibase-linkitem-alreadylinked' => 'هذه الصفحة التي تريد ربطها مرتبطة بالفعل إلى [ $1 عنصر] في المستودع المركزي للبيانات والذي يرتبط ب $2 على هذا الموقع. بإمكان العناصر إلحاق صفحة واحدة فقط لكل موقع. الرجاء اختيار صفحة مختلفة للربط.',
+	'wikibase-linkitem-close' => 'أغلق مربع الحوار وأعد تحميل الصفحة',
+	'wikibase-linkitem-failure' => 'حدث خطأ غير معروف أثناء محاولة الارتباط بالصفحة المعينة.',
 	'wikibase-linkitem-title' => 'اربط مع الصفحة',
 	'wikibase-linkitem-linkpage' => 'اربط مع الصفحة',
 	'wikibase-linkitem-selectlink' => 'رجاء اختر موقعا و صفحة للربط مع هذه الصفحة.',
 	'wikibase-linkitem-input-site' => 'اللغة:',
 	'wikibase-linkitem-input-page' => 'صفحة:',
 	'wikibase-linkitem-invalidsite' => 'تم اختيار موقع غير معروف أو غير صحيح',
+	'wikibase-linkitem-confirmitem-text' => 'الصفحة التي قمت باختيارها مرتبط بالفعل إلى [ $1  عنصر في المستودع المركزي للبيانات لدينا]. الرجاء التأكد من أن الصفحات المبينة أدناه هي تلك التي تريد ربطها مع هذه الصفحة.',
 	'wikibase-linkitem-confirmitem-button' => 'أكّد',
 	'wikibase-linkitem-not-loggedin-title' => 'يتوجب عليك تسجيل الدخول',
-	'wikibase-rc-hide-wikidata' => '$1 ويكي بيانات',
+	'wikibase-linkitem-not-loggedin' => 'لاستخدام هذه الميزة انت بحاجة إلى تسجيل الدخول على هذه الويكي وعلى [ $1   مستودع البيانات المركزي].',
+	'wikibase-linkitem-success-create' => 'تم ربط الصفحات بنجاح. يمكنك العثور على العنصر الذي يحتوي على الارتباطات الذي تم إنشاؤها حديثا على [ $1  مستودعنا المركزي للبيانات].',
+	'wikibase-linkitem-success-link' => 'تم ربط الصفحات بنجاح. يمكنك العثور على العنصر الذي يحتوي على الارتباطات على [ $1  مستودعنا المركزي للبيانات].',
+	'wikibase-rc-hide-wikidata' => '$1 ويكيبيانات',
+	'wikibase-rc-show-wikidata-pref' => 'إظهار عمليات تحرير ويكيبيانات في صفحة أحدث التغييرات',
 );
 
 /** Asturian (asturianu)
@@ -380,6 +400,7 @@ $messages['es'] = array(
 
 /** Persian (فارسی)
  * @author Calak
+ * @author Mehran
  * @author Pouyana
  * @author Reza1615
  * @author ZxxZxxZ
@@ -399,7 +420,7 @@ $messages['fa'] = array(
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|تغییر|تغییرها}}',
 	'wikibase-nolanglinks' => 'هیچ',
 	'wikibase-editlinks' => 'ویرایش پیوندها',
-	'wikibase-editlinkstitle' => 'افزودن پیوندهای میان‌ویکی',
+	'wikibase-editlinkstitle' => 'ویرایش پیوندهای میان‌ویکی',
 	'wikibase-linkitem-addlinks' => 'افزودن پیوند',
 	'wikibase-linkitem-alreadylinked' => 'صفحه‌ای که شما به آن پیوند می‌دهید، از قبل به یک [$1 آیتم] در مخزن مرکزی داده که به $2 در این سایت مریوط می‌شود، متصل است. آیتم‌ها می‌توانند فقط به یک صفحه از وبگاه ارتباط داشته‌باشند. لطفا از یک صقحه برای پیوند استفاده کنید.',
 	'wikibase-linkitem-close' => 'گفتگو را ببندید و صفحه را مجدداً بارگذاری نمایید.',
@@ -709,6 +730,7 @@ $messages['is'] = array(
 	'wikibase-editlinks' => 'Breyta tenglum',
 	'wikibase-editlinkstitle' => 'Breyta tungumálatenglum',
 	'wikibase-linkitem-addlinks' => 'Bæta við tenglum',
+	'wikibase-linkitem-alreadylinked' => 'Síðan sem þú vildir tengja við er þegar tengd við [$1 hlut] á miðlægum gagnagrunni sem tengir á $2 á þessari síðu. Hlutir geta eingöngu haft eina síðu per vefsvæði. Vinsamlegast veldu aðra síðu til að tengja við.',
 	'wikibase-linkitem-close' => 'Loka glugganum og endurhlaða síðunni',
 	'wikibase-linkitem-failure' => 'Óþekkt villa kom upp þegar reynt var að tengja í síðuna.',
 	'wikibase-linkitem-title' => 'Tengja í síðu',
@@ -717,7 +739,7 @@ $messages['is'] = array(
 	'wikibase-linkitem-input-site' => 'Tungumál:',
 	'wikibase-linkitem-input-page' => 'Síða:',
 	'wikibase-linkitem-invalidsite' => 'Óþekkt eða ógild síða valin',
-	'wikibase-linkitem-confirmitem-text' => 'Vinsamlegast staðfestu að síðurnar fyrir neðan eru þær sem þú vilt tengja við þessa síðu.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Síðan sem þú valdir er þegar tengd við [$1 hlut á miðlægum gagnagrunni]. Vinsamlegast staðfestu að síðurnar fyrir neðan séu þær sem þú vilt tengja við þessa síðu.',
 	'wikibase-linkitem-confirmitem-button' => 'Staðfesta',
 	'wikibase-linkitem-not-loggedin-title' => 'Þú þarft að vera skráð/ur inn',
 	'wikibase-linkitem-not-loggedin' => 'Þú þarft að vera skráð/ur inn á þennann wiki og á [$1 samnýtta þekkingargrunninn] til að nota þennan möguleika.',
