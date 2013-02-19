@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use User;
 use MWException;
+use Status;
 use Wikibase\ExceptionWithCode;
 
 /**
@@ -46,18 +47,33 @@ class ClaimSaver {
 	 * @param string $token
 	 * @param User $user
 	 *
-	 * @return int
+	 * @return Status The status. The status value is an array which may contain
+	 *         the following fields:
+	 *
+	 *         -revision: the revision object created by the save
+	 *         -errorFlags: error flags using the EditEntity::XXX_ERROR constants
+	 *         -errorCode: error code to use in API output
+	 *
+	 *         This status object can be used with ApiWikibase::handleSaveStatus().
 	 */
 	public function saveClaim( Claim $claim, $baseRevId, $token, User $user ) {
-		$entityId = $this->getEntityIdForClaim( $claim );
+		try {
+			$entityId = $this->getEntityIdForClaim( $claim );
 
-		$content = $this->getEntityContent( $entityId, $baseRevId );
+			$content = $this->getEntityContent( $entityId, $baseRevId );
 
-		$this->updateClaim( $content->getEntity(), $claim );
+			$this->updateClaim( $content->getEntity(), $claim );
 
-		$newRevisionId = $this->saveChanges( $content, $baseRevId, $token, $user );
+			$status = $this->saveChanges( $content, $baseRevId, $token, $user );
+		} catch ( ExceptionWithCode $ex ) {
+			// put the error code into the status
+			$value = array( 'errorCode' => $ex->getErrorCode() );
+			$status = Status::newGood();
+			$status->setResult( false, $value );
+			//TODO: add an error message localization key, perhaps derived from the error code.
+		}
 
-		return $newRevisionId;
+		return $status;
 	}
 
 	/**
@@ -151,8 +167,7 @@ class ClaimSaver {
 	 * @param string $token
 	 * @param User $user
 	 *
-	 * @return int
-	 * @throws ExceptionWithCode
+	 * @return Status
 	 */
 	protected function saveChanges( EntityContent $content, $baseRevisionId, $token, User $user ) {
 		$baseRevisionId = is_int( $baseRevisionId ) && $baseRevisionId > 0 ? $baseRevisionId : false;
@@ -164,12 +179,7 @@ class ClaimSaver {
 			$token
 		);
 
-		if ( !$status->isGood() ) {
-			throw new ExceptionWithCode( $status->getMessage(), 'setclaim-save-failed' );
-		}
-
-		$statusValue = $status->getValue();
-		return (int)$statusValue['revision']->getId();
+		return $status;
 	}
 
 }
