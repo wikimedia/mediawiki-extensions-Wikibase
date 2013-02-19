@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test\Api;
 use ApiTestCase;
-//use Wikibase\Test\ApiModifyItemBase;
+//use Wikibase\Test\ModifyItemBase;
 
 /**
  * Tests for the ApiSetAliases API module.

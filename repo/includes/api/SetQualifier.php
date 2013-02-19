@@ -257,33 +257,19 @@ class SetQualifier extends ApiWikibase {
 	 * @param EntityContent $content
 	 */
 	protected function saveChanges( EntityContent $content ) {
-		$params = $this->extractRequestParams();
+		// collect information and create an EditEntity
+		$summary = '/* wbsetqualifier */'; // TODO: automcomment
+		$editEntity = $this->attemptSaveEntity( $content,
+			$summary,
+			EDIT_UPDATE );
 
-		$user = $this->getUser();
-		$flags = 0;
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
-		$flags |= EDIT_UPDATE;
-		$editEntity = new \Wikibase\EditEntity( $content, $user, $baseRevisionId, $this->getContext() );
+		$revision = $editEntity->getNewRevision();
 
-		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
-			$flags,
-			isset( $params['token'] ) ? $params['token'] : false
-		);
-
-		if ( !$status->isOk() ) {
-			$this->dieUsage( 'Failed to save the change', 'save-failed' );
-		}
-
-		$statusValue = $status->getValue();
-
-		if ( isset( $statusValue['revision'] ) ) {
+		if ( $revision ) {
 			$this->getResult()->addValue(
 				'pageinfo',
 				'lastrevid',
-				(int)$statusValue['revision']->getId()
+				$revision->getId()
 			);
 		}
 	}

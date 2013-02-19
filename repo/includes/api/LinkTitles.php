@@ -151,30 +151,16 @@ class LinkTitles extends ApiWikibase implements IAutocomment {
 
 		$this->addSiteLinksToResult( $return, 'entity' );
 
-		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
-
 		if ( $itemContent === null ) {
 			// to not have an ItemContent isn't really bad at this point
 			$status = Status::newGood( true );
 		}
 		else {
 			// Do the actual save, or if it don't exist yet create it.
-			$editEntity = new \Wikibase\EditEntity( $itemContent, $user, false, $this->getContext() );
-			$status = $editEntity->attemptSave(
-				Autocomment::buildApiSummary( $this, $params, $itemContent ),
-				$flags,
-				( $this->needsToken() ? $params['token'] : '' )
-			);
-
-			if ( $editEntity->hasError( \Wikibase\EditEntity::TOKEN_ERROR ) ) {
-				$editEntity->reportApiErrors( $this, 'session-failure' );
-			}
-			elseif ( $editEntity->hasError( \Wikibase\EditEntity::EDIT_CONFLICT_ERROR ) ) {
-				$editEntity->reportApiErrors( $this, 'edit-conflict' );
-			}
-			elseif ( $editEntity->hasError() ) {
-				$editEntity->reportApiErrors( $this, 'save-failed' );
-			}
+			$summary = Autocomment::buildApiSummary( $this, $params, $itemContent );
+			$editEntity = $this->attemptSaveEntity( $itemContent,
+				$summary,
+				$flags );
 
 			$revision = $editEntity->getNewRevision();
 			if ( $revision ) {
@@ -183,6 +169,8 @@ class LinkTitles extends ApiWikibase implements IAutocomment {
 					'lastrevid', intval( $revision->getId() )
 				);
 			}
+
+			$status = $editEntity->getStatus();
 		}
 
 		if ( $itemContent !== null ) {

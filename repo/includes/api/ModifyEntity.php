@@ -181,9 +181,6 @@ abstract class ModifyEntity extends ApiWikibase implements IAutocomment {
 			$this->dieUsage( $this->msg( 'wikibase-api-modify-failed' )->text(), 'modify-failed' );
 		}
 
-		// This is similar to ApiEditPage.php and what it uses at line 314
-		$this->flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
-
 		// if the entity is not up for creation, set the EDIT_UPDATE flags
 		if ( !$entityContent->isNew() && ( $this->flags & EDIT_NEW ) === 0 ) {
 			$this->flags |= EDIT_UPDATE;
@@ -193,27 +190,10 @@ abstract class ModifyEntity extends ApiWikibase implements IAutocomment {
 		//      not added to $this->flags explicitly, the save will fail.
 
 		// collect information and create an EditEntity
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : null;
-		$editEntity = new \Wikibase\EditEntity( $entityContent, $user, $baseRevisionId, $this->getContext() );
-
-		// Do the actual save, or if it don't exist yet create it.
-		// There will be exceptions but we just leak them out ;)
-		$editEntity->attemptSave(
-			Autocomment::buildApiSummary( $this, $params, $entityContent ),
-			$this->flags,
-			( $this->needsToken() ? $params['token'] : '' )
-		);
-
-		if ( $editEntity->hasError( \Wikibase\EditEntity::TOKEN_ERROR ) ) {
-			$editEntity->reportApiErrors( $this, 'session-failure' );
-		}
-		elseif ( $editEntity->hasError( \Wikibase\EditEntity::EDIT_CONFLICT_ERROR ) ) {
-			$editEntity->reportApiErrors( $this, 'edit-conflict' );
-		}
-		elseif ( $editEntity->hasError() ) {
-			$editEntity->reportApiErrors( $this, 'save-failed' );
-		}
+		$summary = Autocomment::buildApiSummary( $this, $params, $entityContent );
+		$editEntity = $this->attemptSaveEntity( $entityContent,
+			$summary,
+			$this->flags );
 
 		$this->getResult()->addValue(
 			'entity',
