@@ -6,6 +6,7 @@ use Wikibase\Snak;
 use Wikibase\Statement;
 use Wikibase\Claim;
 use Wikibase\EntityId;
+use Wikibase\Test\ApiModifyItemBase;
 
 /**
  * Unit tests for the Wikibase\Repo\Api\SetQualifier class.
@@ -42,7 +43,7 @@ use Wikibase\EntityId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetQualifierTest extends \ApiTestCase {
+class SetQualifierTest extends ApiModifyItemBase {
 
 	/**
 	 * @return Snak[]
@@ -132,11 +133,14 @@ class SetQualifierTest extends \ApiTestCase {
 	}
 
 	protected function makeAddRequest( $statementGuid, Snak $qualifier, EntityId $entityId ) {
+		$token = $this->getItemToken();
+
 		$params = array(
 			'action' => 'wbsetqualifier',
 			'claim' => $statementGuid,
 			'snaktype' => $qualifier->getType(),
 			'property' => $qualifier->getPropertyId()->getPrefixedId(),
+			'token' => $token
 		);
 
 		if ( $qualifier instanceof \Wikibase\PropertyValueSnak ) {
