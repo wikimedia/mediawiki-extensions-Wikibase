@@ -63,13 +63,17 @@ class RemoveReferences extends \Wikibase\ApiModifyClaim {
 		$params = $this->extractRequestParams();
 		$content = $this->getEntityContentForClaim( $params['statement'] );
 
+		$summary = $this->createSummary( $params );
+		$summary->addAutoCommentArgs( count( $params['references'] ) );
+
 		$this->removeReferences(
 			$content->getEntity(),
 			$params['statement'],
+			$summary,
 			array_unique( $params['references'] )
 		);
 
-		$this->saveChanges( $content );
+		$this->saveChanges( $content, $summary );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -79,9 +83,10 @@ class RemoveReferences extends \Wikibase\ApiModifyClaim {
 	 *
 	 * @param Entity $entity
 	 * @param string $statementGuid
+	 * @param Summary $summary
 	 * @param string[] $refHashes
 	 */
-	protected function removeReferences( Entity $entity, $statementGuid, array $refHashes ) {
+	protected function removeReferences( Entity $entity, $statementGuid, Summary $summary, array $refHashes ) {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
@@ -97,15 +102,19 @@ class RemoveReferences extends \Wikibase\ApiModifyClaim {
 			);
 		}
 
+		$summary->addAutoSummaryArgs( $statement->getPropertyId()->getPrefixedId() );
+
 		/**
 		 * @var References $references
 		 */
 		$references = $statement->getReferences();
+		$count = 0;
 
 		foreach ( $refHashes as $refHash ) {
 			// TODO: perhaps we do not want to fail like this, as client cannot easily find which ref is not there
 			if ( $references->hasReferenceHash( $refHash ) ) {
 				$references->removeReferenceHash( $refHash );
+				$count++;
 			}
 			else {
 				$this->dieUsage(
@@ -116,26 +125,9 @@ class RemoveReferences extends \Wikibase\ApiModifyClaim {
 			}
 		}
 
+		$summary->addAutoCommentArgs( $count );
+
 		$entity->setClaims( $claims );
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			$this->getModuleName(),
-			array( count( $params['references'] ) )
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			Summary::pickValuesFromParams( $params, 'references' )
-		);
 	}
 
 	/**

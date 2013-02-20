@@ -257,11 +257,13 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{PLURAL:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Added site-specific [$2] link',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed site-specific [$2] link',
+	'wikibase-item-summary-wblinktitles-create' => 'Connected [$2↔$3] {{PLURAL:$1|page|pages}} using a new item',
 	'wikibase-item-summary-wblinktitles-connect' => 'Connected [$2↔$3] {{PLURAL:$1|page|pages}}',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
 	'wikibase-item-summary-wbcreateclaim' => 'Created {{PLURAL:$1|a claim|claims}}',
+	'wikibase-item-summary-wbsetclaim' => 'Updated claim',
 	'wikibase-item-summary-wbsetclaimvalue' => 'Set {{PLURAL:$1|a claim value|claim values}}',
 	'wikibase-item-summary-wbremoveclaims' => 'Removed {{PLURAL:$1|a claim|claims}}',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{PLURAL:$1|value|values}}',
@@ -670,6 +672,14 @@ This is an error message for a situation where the arguments to the API is incon
 	'wikibase-item-summary-wbsetaliases-remove' => '{{wikibase summary messages|item|Automatic edit summary when a user removes one or more aliases.}}',
 	'wikibase-item-summary-wbsetsitelink-set' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when adding or editing a language link. Such a summary could appear in English as "Added site-specific [itwiki] link:  Italia".}}',
 	'wikibase-item-summary-wbsetsitelink-remove' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when removing a language link from a Wikidata item (page). Such a summary could appear in English as "Removed site-specific [itwiki] link".}}',
+	'wikibase-item-summary-wblinktitles-create' => 'Automatic edit summary when connecting page(s) using a newly created item.
+
+This module generates a slightly different summary (autocomment) than the other ones.
+
+;Parameters:
+* $1 is the number of pages that were connected;
+* $2 is the site code for the from-page;
+* $3 is the site code for the to-page.',
 	'wikibase-item-summary-wblinktitles-connect' => 'Automatic edit summary when connecting page(s).
 
 This module generates a slightly different summary (autocomment) than the other ones.
@@ -682,6 +692,7 @@ This module generates a slightly different summary (autocomment) than the other 
 	'wikibase-item-summary-wbcreateclaim-novalue' => "{{wikibase summary messages|item-claims|Automatic edit summary when ''no value'' is supplied to the claim. A ''no value'' means that there are no valid value to be set for this claim, or that there are no existing value. This is a LEGACY value, needed for old log entries!}}",
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when there should be a value but it is unknown. This is different from the case where there are no valid or existing value. This is a LEGACY value, needed for old log entries!}}',
 	'wikibase-item-summary-wbcreateclaim' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is created.}}',
+	'wikibase-item-summary-wbsetclaim' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is updated.}}',
 	'wikibase-item-summary-wbsetclaimvalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when the main value of one or more claim is changed.}}',
 	'wikibase-item-summary-wbremoveclaims' => '{{wikibase summary messages|item-claims|Automatic edit summary when one or more claim is removed.}}',
 	'wikibase-item-summary-special-create-item' => '{{wikibase summary messages|item|Automatic edit summary when creating an item, and supplying one or more values. This page can take an additional sitelink, but this does not reflect in the autocomment.}}',

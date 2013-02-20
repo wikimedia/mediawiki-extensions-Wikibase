@@ -15,7 +15,7 @@ use ApiBase, User, Status;
  *
  * @licence GNU GPL v2+
  */
-class ApiLinkTitles extends Api implements ApiSummary {
+class ApiLinkTitles extends Api {
 
 	/**
 	 * @see  ApiModifyEntity::getRequiredPermissions()
@@ -25,25 +25,6 @@ class ApiLinkTitles extends Api implements ApiSummary {
 
 		$permissions[] = 'linktitles-update';
 		return $permissions;
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			'wblinktitles-connect',
-			array( /*$plural*/ 2, $params['fromsite'], $params['tosite'] )
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			array( $params['fromtitle'], $params['totitle'] )
-		);
 	}
 
 	/**
@@ -100,6 +81,10 @@ class ApiLinkTitles extends Api implements ApiSummary {
 		$flags = 0;
 		$itemContent = null;
 
+		$summary = new Summary( $this->getModuleName(), null, $this->getContext()->getLanguage() );
+		$summary->addAutoCommentArgs( 2 ); // kind of redundant, needed for old messages
+		$summary->addAutoSummaryArgs( $fromSite, $toSite );
+
 		// Figure out which parts to use and what to create anew
 		if ( !$fromId && !$toId ) {
 			// create new item
@@ -110,18 +95,21 @@ class ApiLinkTitles extends Api implements ApiSummary {
 			$return[] = $itemContent->getItem()->addSiteLink( $fromLink, 'set' );
 
 			$flags |= EDIT_NEW;
+			$summary->setAction( 'create' ); //FIXME: i18n
 		}
 		elseif ( !$fromId && $toId ) {
 			// reuse to-site's item
 			$itemContent = EntityContentFactory::singleton()->getFromId( new EntityId( Item::ENTITY_TYPE, $toId ) );
 			$fromLink = new SiteLink( $fromSite, $fromPage );
 			$return[] = $itemContent->getItem()->addSiteLink( $fromLink, 'set' );
+			$summary->setAction( 'connect' );
 		}
 		elseif ( $fromId && !$toId ) {
 			// reuse from-site's item
 			$itemContent = EntityContentFactory::singleton()->getFromId( new EntityId( Item::ENTITY_TYPE, $fromId ) );
 			$toLink = new SiteLink( $toSite, $toPage );
 			$return[] = $itemContent->getItem()->addSiteLink( $toLink, 'set' );
+			$summary->setAction( 'connect' );
 		}
 		elseif ( $fromId === $toId ) {
 			// no-op
@@ -142,7 +130,6 @@ class ApiLinkTitles extends Api implements ApiSummary {
 		}
 		else {
 			// Do the actual save, or if it don't exist yet create it.
-			$summary = Summary::buildApiSummary( $this, $params, $itemContent );
 			$editEntity = $this->attemptSaveEntity( $itemContent,
 				$summary,
 				$flags );

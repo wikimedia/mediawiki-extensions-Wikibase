@@ -64,13 +64,17 @@ class SetStatementRank extends \Wikibase\ApiModifyClaim {
 		$params = $this->extractRequestParams();
 		$content = $this->getEntityContentForClaim( $params['statement'] );
 
+		$summary = $this->createSummary( $params );
+		$summary->addAutoCommentArgs( 1 ); // one claim updated
+
 		$statement = $this->setStatementRank(
 			$content->getEntity(),
 			$params['statement'],
-			$params['rank']
+			$params['rank'],
+			$summary
 		);
 
-		$this->saveChanges( $content );
+		$this->saveChanges( $content, $summary );
 
 		$this->outputStatement( $statement );
 
@@ -83,10 +87,11 @@ class SetStatementRank extends \Wikibase\ApiModifyClaim {
 	 * @param Entity $entity
 	 * @param string $statementGuid
 	 * @param string $rank
+	 * @param Summary $summary
 	 *
 	 * @return Statement
 	 */
-	protected function setStatementRank( Entity $entity, $statementGuid, $rank ) {
+	protected function setStatementRank( Entity $entity, $statementGuid, $rank, Summary $summary ) {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
@@ -106,26 +111,10 @@ class SetStatementRank extends \Wikibase\ApiModifyClaim {
 
 		$entity->setClaims( $claims );
 
+		$summary->addAutoSummaryArgs( $statement->getPropertyId()->getPrefixedId() );
+		$summary->addAutoSummaryArgs( $rank );
+
 		return $statement;
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			$this->getModuleName(),
-			array( 1 )
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			Summary::pickValuesFromParams( $params, 'statement' )
-		);
 	}
 
 	/**

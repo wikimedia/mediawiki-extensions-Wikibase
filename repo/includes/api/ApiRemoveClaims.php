@@ -95,23 +95,48 @@ class ApiRemoveClaims extends ApiModifyClaim {
 	 * @return string[]
 	 */
 	protected function removeClaims( $entityContents, array $guids ) {
-		$removedClaims = array();
+		$params = $this->extractRequestParams();
+
+		$allRemovedClaims = array();
 
 		foreach ( $entityContents as $entityContent ) {
 			$entity = $entityContent->getEntity();
 
-			$claims = new Claims( $entity->getClaims() );
+			$originalClaims = new Claims( $entity->getClaims() );
+			$claims = clone $originalClaims;
 
-			$removedClaims = array_merge(
-				$removedClaims,
-				$this->removeClaimsFromList( $claims, $guids[$entity->getPrefixedId()] )
+			$removedClaims = $this->removeClaimsFromList( $claims, $guids[$entity->getPrefixedId()] );
+
+			$allRemovedClaims = array_merge(
+				$allRemovedClaims,
+				$removedClaims
 			);
 
 			$entity->setClaims( $claims );
-			$this->saveChanges( $entityContent );
+
+			$summary = $this->createSummary( $params );
+			$summary->addAutoCommentArgs( count( $removedClaims ) );
+
+			$removedProps = array_map(
+				function ( $guid ) use ( $originalClaims ) {
+					$claim = $originalClaims->getClaimWithGuid( $guid );
+
+					if ( !$claim ) {
+						wfWarn( "Claim not found in claims list: $guid" );
+						return null;
+					} else {
+						return $claim->getPropertyId()->getPrefixedId();
+					}
+				},
+				$removedClaims
+			);
+
+			$summary->addAutoSummaryArgs( array_unique( $removedProps ) );
+
+			$this->saveChanges( $entityContent, $summary );
 		}
 
-		return $removedClaims;
+		return $allRemovedClaims;
 	}
 
 	/**
@@ -244,29 +269,6 @@ class ApiRemoveClaims extends ApiModifyClaim {
 		return array(
 			// TODO
 			// 'ex' => 'desc'
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		$guids = $params['claim'];
-
-		return Summary::formatAutoComment(
-			$this->getModuleName(),
-			array(
-				/*plural */ count( $guids ),
-			)
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			Summary::pickValuesFromParams( $params, 'claim' )
 		);
 	}
 }

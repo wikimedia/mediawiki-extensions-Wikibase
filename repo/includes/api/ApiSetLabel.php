@@ -36,8 +36,11 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
+		$summary = $this->createSummary( $params );
 
 		if ( isset( $params['value'] ) ) {
+			$summary->addAutoSummaryArgs( $params['value'] );
+
 			$label = Utils::squashToNFC( $params['value'] );
 			$language = $params['language'];
 			if ( 0 < strlen( $label ) ) {
@@ -52,7 +55,7 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 		}
 
 		wfProfileOut( __METHOD__ );
-		return true;
+		return $summary;
 	}
 
 	/**

@@ -49,6 +49,7 @@ class ApiSetClaimValue extends ApiModifyClaim {
 		$content = $this->getEntityContentForClaim( $params['claim'] );
 
 		$params = $this->extractRequestParams();
+		$summary = $this->createSummary( $params );
 
 		$claim = $this->updateClaim(
 			$content->getEntity(),
@@ -57,7 +58,11 @@ class ApiSetClaimValue extends ApiModifyClaim {
 			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
 		);
 
-		$this->saveChanges( $content );
+		$summary->addAutoCommentArgs( 1 ); // always just one. //XXX: put the property ID here?
+		$summary->addAutoSummaryArgs( $claim->getPropertyId()->getPrefixedId() );
+		//TODO: for PropertyValueSnak, we could try to get smart and show some rendering of the DataValue
+
+		$this->saveChanges( $content, $summary );
 
 		$this->outputClaim( $claim );
 
@@ -174,28 +179,6 @@ class ApiSetClaimValue extends ApiModifyClaim {
 		return array(
 			// TODO
 			// 'ex' => 'desc'
-		);
-	}
-
-
-	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			$this->getModuleName(),
-			array(
-				/*plural */ (int)isset( $params['claim'] )
-			)
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			Summary::pickValuesFromParams( $params, 'claim' )
 		);
 	}
 }
