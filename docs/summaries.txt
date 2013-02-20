@@ -1,0 +1,49 @@
+Wikibase uses "magic" edit summaries that can later be parsed and localized for display.
+This is done via the Format-Autocomment hook, handled by Summary::onFormat.
+
+Below are examples of the magic summaries currently used.
+
+Note that the block between the /* and the */ (the "auto-comment") specify a system
+message and the parameters for that message.
+
+/* wbsetsitelink-set:1|site */ linktitle
+/* wbsetsitelink-remove:1|site */
+
+/* wbsetclaim:1 */ p123
+
+/* wbsetlabel-set:1|lang */ value
+/* wbsetlabel-remove:1|lang */ value
+
+/* wbsetdescription-set:1|lang */ value
+/* wbsetdescription-remove:1|lang */ value
+
+/* wbremovereferences:n */ p123
+
+/* wbsetclaimvalue:1 */ p123
+
+/* wbsetreference:1 */ p123
+
+/* wbremovequalifiers:n */ p123
+
+/* wbsetqualifier:1 */ p123(claim)|p567(qualifier)
+
+/* wbeditentity-update: */
+/* wbeditentity-override: */
+/* wbeditentity-create: */
+
+/* wbsetaliases-set:1|lang */ values...
+/* wbsetaliases-remove:1|lang */ values...
+/* wbsetaliases-add:1|lang */ values...
+
+/* wbremoveclaims:n */ props...
+
+/* wbcreateclaim-value: */ p123
+/* wbcreateclaim-novalue: */ p123
+/* wbcreateclaim-somevalue: */ p123
+
+/* wblinktitles-create:2 */ fromSite:fromPage|toSite:toPage
+/* wblinktitles-connect:2 */ fromSite:fromPage|toSite:toPage
+
+/* wbsetstatementrank-deprecated:1 */ p123
+/* wbsetstatementrank-normal:1 */ p123
+/* wbsetstatementrank-preferred:1 */ p123

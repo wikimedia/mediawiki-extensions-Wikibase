@@ -30,24 +30,30 @@ use ApiBase, MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class ApiModifyClaim extends Api implements ApiSummary {
+abstract class ApiModifyClaim extends Api {
+
+	/**
+	 * Create a new Summary instance suitable for representing the action performed by this module.
+	 *
+	 * @param array $params
+	 *
+	 * @return Summary
+	 */
+	protected function createSummary( array $params ) {
+		$summary = new Summary( $this->getModuleName() );
+		return $summary;
+	}
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param EntityContent $content The content to save
 	 * @param int           $flags   Edit flags, e.g. EDIT_NEW
-	 * @param string|null   $summary The summary to set. If null, the summary will be auto-generated.
+	 * @param Summary       $summary The summary to set.
 	 *
 	 * @return void
 	 */
-	protected function saveChanges( EntityContent $content, $summary = null ) {
-		$params = $this->extractRequestParams();
-
-		if ( $summary === null ) {
-			$summary = Summary::buildApiSummary( $this, $params, $content );
-		}
-
+	protected function saveChanges( EntityContent $content, Summary $summary ) {
 		$editEntity = $this->attemptSaveEntity( $content,
 			$summary,
 			EDIT_UPDATE );

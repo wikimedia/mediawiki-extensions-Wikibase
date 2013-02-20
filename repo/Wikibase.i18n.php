@@ -241,7 +241,7 @@ $1', # Do not translate
 to find out where it went.',
 	'wikibase-noentity-createone' => 'You can also [[$1|create a new one]].',
 
-	// item - summary and autocomment
+	// item - summary and autocomment, see docs/summaries.txt
 	'wikibase-item-summary-wbsetitem' => 'Created a new item', // legacy
 	'wikibase-item-summary-wbeditentity' => 'Created a new item', // legacy
 	'wikibase-item-summary-wbeditentity-create' => 'Created a new item',
@@ -255,18 +255,26 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{PLURAL:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{PLURAL:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{PLURAL:$1|alias|aliases}}',
-	'wikibase-item-summary-wbsetsitelink-set' => 'Added site-specific [$2] link',
-	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed site-specific [$2] link',
-	'wikibase-item-summary-wblinktitles-connect' => 'Connected [$2↔$3] {{PLURAL:$1|page|pages}}',
-	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
-	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
-	'wikibase-item-summary-wbcreateclaim' => 'Created {{PLURAL:$1|a claim|claims}}',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Added link to [$2]',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed link to [$2]',
+	'wikibase-item-summary-wblinktitles-create' => 'Created this item to connect pages [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-connect' => 'Added a language link to connect pages [$2↔$3]',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{PLURAL:$1|a claim|claims}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created {{PLURAL:$1|a claim|claims}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created {{PLURAL:$1|a claim|claims}}',
+	'wikibase-item-summary-wbsetclaim' => 'Updated {{PLURAL:$1|a claim|claims}}',
 	'wikibase-item-summary-wbsetclaimvalue' => 'Set {{PLURAL:$1|a claim value|claim values}}',
+	'wikibase-item-summary-wbsetreference' => 'Set {{PLURAL:$1|a reference|references}}',
+	'wikibase-item-summary-wbsetqualifier' => 'Set {{PLURAL:$1|a qualifier|qualifiers}}',
+	'wikibase-item-summary-wbsetstatementrank-deprecated' => 'Changed statement rank to "deprecated"',
+	'wikibase-item-summary-wbsetstatementrank-normal' => 'Changed statement rank to "normal"',
+	'wikibase-item-summary-wbsetstatementrank-preferred' => 'Changed statement rank to "preferred"',
 	'wikibase-item-summary-wbremoveclaims' => 'Removed {{PLURAL:$1|a claim|claims}}',
+	'wikibase-item-summary-wbremovereferences' => 'Removed {{PLURAL:$1|a reference|$1 references}} from claim',
+	'wikibase-item-summary-wbremovequalifiers' => 'Removed {{PLURAL:$1|a qualifier|$1 qualifiers}} from claim',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{PLURAL:$1|value|values}}',
 
-	// property - summary and autocomment
+	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbeditentity-create' => 'Created a new property',
 	'wikibase-property-summary-wbeditentity-update' => 'Updated a property',
 	'wikibase-property-summary-wbeditentity-override' => 'Overrided a property',
@@ -278,10 +286,15 @@ to find out where it went.',
 	'wikibase-property-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{PLURAL:$1|alias|aliases}}',
 	'wikibase-property-summary-wbsetaliases-add' => 'Added [$2] {{PLURAL:$1|alias|aliases}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Removed [$2] {{PLURAL:$1|alias|aliases}}',
-	'wikibase-property-summary-special-create-property' => 'Created a [$2] property with {{PLURAL:$1|value|values}}',
+	'wikibase-property-summary-special-create-property' => 'Created a [$2] property with {{PLURAL:$1|value|values}}', // legacy
+	'wikibase-property-summary-specialnewentity-create' => 'Created a [$2] property with {{PLURAL:$1|value|values}}',
 
-	// query - summary and autocomment
-	'wikibase-query-summary-special-create-query' => 'Created a [$2] query with {{PLURAL:$1|value|values}}',
+	// query - summary and autocomment, see docs/summaries.txt
+	'wikibase-query-summary-special-create-query' => 'Created a [$2] query with {{PLURAL:$1|value|values}}', // legacy
+	'wikibase-query-summary-specialnewentity-create' => 'Created a [$2] query with {{PLURAL:$1|value|values}}',
+
+	// entity - summary and autocomment if fallback if everything else fails - should not be used; see docs/summaries.txt
+	'wikibase-entity-summary-specialnewentity-create' => 'Created a [$2] query with {{PLURAL:$1|value|values}}',
 
 	//content model names
 	'content-model-wikibase-item' => 'Wikibase item',
@@ -655,22 +668,22 @@ This is an error message for a situation where the arguments to the API is incon
 * $1 is the name of the namespace for which direct editing was denied.',
 	'wikibase-noentity' => 'Of some reason the user tried to access an entity which then was detected as non-existing. This can happen when an entity is deleted and clients are not yet made aware of this.',
 	'wikibase-noentity-createone' => 'Put immediately after "wikibase-noentity" if the user has the right to create an entity of the given type. This message tells the user that he can create one and gives a link in $1 to the special page where this can be done.',
-	'wikibase-item-summary-wbsetitem' => 'Automatic edit summary generated when creating a new item. This is a legacy message.',
-	'wikibase-item-summary-wbeditentity' => 'Automatic edit summary generated when creating a new item. This is a legacy message.',
-	'wikibase-item-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new item.',
-	'wikibase-item-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing item.',
-	'wikibase-item-summary-wbeditentity-override' => 'Automatic edit summary generated when overriding an existing item.',
-	'wikibase-item-summary-wbsetlabel-set' => "{{wikibase summary messages|item|Automatic edit summary generated when editing an item label, which appears in the ''h1'' heading at top of the item-page. Example of a full edit summary is \"Updated [en] label:  Egypt\".}}",
-	'wikibase-item-summary-wbsetlabel-remove' => '{{wikibase summary messages|item|Automatic edit summary generated when removing an item label. Example edit summary is "Removed [en] label".}}',
-	'wikibase-item-summary-wbsetdescription-set' => '{{wikibase summary messages|item|Automatic edit summary when creating or editing an item description. Example edit summary is "Updated [en] description:  a country in Africa".}}',
-	'wikibase-item-summary-wbsetdescription-remove' => '{{wikibase summary messages|item|Automatic edit summary when removing an item description. Example edit summary is "Removed [en] description".}}',
+	'wikibase-item-summary-wbsetitem' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
+	'wikibase-item-summary-wbeditentity' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
+	'wikibase-item-summary-wbeditentity-create' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item.}}',
+	'wikibase-item-summary-wbeditentity-update' => '{{wikibase summary messages|item|Automatic edit summary generated when updating an existing item.}}',
+	'wikibase-item-summary-wbeditentity-override' => '{{wikibase summary messages|item|Automatic edit summary generated when overriding an existing item.}}',
+	'wikibase-item-summary-wbsetlabel-set' => "{{wikibase summary messages|label|Automatic edit summary generated when editing an item label, which appears in the ''h1'' heading at top of the item-page. Example of a full edit summary is \"Updated [en] label:  Egypt\".}}",
+	'wikibase-item-summary-wbsetlabel-remove' => '{{wikibase summary messages|label|Automatic edit summary generated when removing an item label. Example edit summary is "Removed [en] label".}}',
+	'wikibase-item-summary-wbsetdescription-set' => '{{wikibase summary messages|description|Automatic edit summary when creating or editing an item description. Example edit summary is "Updated [en] description:  a country in Africa".}}',
+	'wikibase-item-summary-wbsetdescription-remove' => '{{wikibase summary messages|description|Automatic edit summary when removing an item description. Example edit summary is "Removed [en] description".}}',
 	'wikibase-item-summary-wbsetaliases-set' => '{{wikibase summary messages|item|Automatic edit summary when adding or editing item aliases.  Example for adding aliases on the English item page for Italy: "Setting [en] aliases:  Italian Republic, Repubblica italiana".}}',
 	'wikibase-item-summary-wbsetaliases-add-remove' => '{{wikibase summary messages|item|Automatic edit summary when adding and removing item aliases. A user can be in edit mode for aliases and can remove one or more aliases, while adding others in the same edit.}}',
 	'wikibase-item-summary-wbsetaliases-add' => '{{wikibase summary messages|item|Automatic edit summary when adding one or more aliases.}}',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{wikibase summary messages|item|Automatic edit summary when a user removes one or more aliases.}}',
 	'wikibase-item-summary-wbsetsitelink-set' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when adding or editing a language link. Such a summary could appear in English as "Added site-specific [itwiki] link:  Italia".}}',
 	'wikibase-item-summary-wbsetsitelink-remove' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when removing a language link from a Wikidata item (page). Such a summary could appear in English as "Removed site-specific [itwiki] link".}}',
-	'wikibase-item-summary-wblinktitles-connect' => 'Automatic edit summary when connecting page(s).
+	'wikibase-item-summary-wblinktitles-connect' => '{{wikibase summary messages|item|Automatic edit summary when connecting page(s).}}
 
 This module generates a slightly different summary (autocomment) than the other ones.
 
@@ -678,12 +691,26 @@ This module generates a slightly different summary (autocomment) than the other 
 * $1 is the number of pages that were connected;
 * $2 is the site code for the from-page;
 * $3 is the site code for the to-page.',
-	'wikibase-item-summary-wbcreateclaim-value' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is created and a value is used. The values can be of various types, including but not limited to defined properties. This is a LEGACY value, needed for old log entries!}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => "{{wikibase summary messages|item-claims|Automatic edit summary when ''no value'' is supplied to the claim. A ''no value'' means that there are no valid value to be set for this claim, or that there are no existing value. This is a LEGACY value, needed for old log entries!}}",
-	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when there should be a value but it is unknown. This is different from the case where there are no valid or existing value. This is a LEGACY value, needed for old log entries!}}',
-	'wikibase-item-summary-wbcreateclaim' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is created.}}',
+	'wikibase-item-summary-wblinktitles-create' => '{{wikibase summary messages|item|Automatic edit summary when connecting page(s) by creating a new data item.}}
+
+This module generates a slightly different summary (autocomment) than the other ones.
+
+;Parameters:
+* $1 is the number of pages that were connected;
+* $2 is the site code for the from-page;
+* $3 is the site code for the to-page.',
+	'wikibase-item-summary-wbcreateclaim-value' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is created and a value is used. The values can be of various types, including but not limited to defined properties.}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => "{{wikibase summary messages|item-claims|Automatic edit summary when ''no value'' is supplied to the claim. A ''no value'' means that there are no valid value to be set for this claim, or that there are no existing value.}}",
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when there should be a value but it is unknown. This is different from the case where there are no valid or existing value.}}',
 	'wikibase-item-summary-wbsetclaimvalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when the main value of one or more claim is changed.}}',
+	'wikibase-item-summary-wbsetreference' => '{{wikibase summary messages|item-claims|Automatic edit summary when one or more reference for a claim is changed.}}',
+	'wikibase-item-summary-wbsetqualifier' => '{{wikibase summary messages|item-claims|Automatic edit summary when one or more qualifier for a claim is changed.}}',
+	'wikibase-item-summary-wbsetstatementrank-deprecated' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim\'s rank is changed to "deprecated".}}',
+	'wikibase-item-summary-wbsetstatementrank-normal' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim\'s rank is changed to "normal".}}',
+	'wikibase-item-summary-wbsetstatementrank-preferred' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim\'s rank is changed to "preferred".}}',
 	'wikibase-item-summary-wbremoveclaims' => '{{wikibase summary messages|item-claims|Automatic edit summary when one or more claim is removed.}}',
+	'wikibase-item-summary-wbremovereferences' => '{{wikibase summary messages|item-claims|Automatic edit summary when one or more reference is removed from a claim.}}',
+	'wikibase-item-summary-wbremovequalifiers' => '{{wikibase summary messages|item-claims|Automatic edit summary when one or more qualifier is removed from a claim.}}',
 	'wikibase-item-summary-special-create-item' => '{{wikibase summary messages|item|Automatic edit summary when creating an item, and supplying one or more values. This page can take an additional sitelink, but this does not reflect in the autocomment.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',

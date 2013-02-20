@@ -95,7 +95,7 @@ abstract class ApiLangAttributeBase extends ApiModifyItemBase {
 			}
 		}
 		catch ( \Exception $e ) {
-			if ( $exception !== null && ! $e instanceof \PHPUnit_Framework_AssertionFailedError ) {
+			if ( $exception !== null && ! $e instanceof \PHPUnit_Framework_Exception ) {
 				$this->assertTrue( is_a( $e, $exception ), "Not the expected exception" );
 				return;
 			}

@@ -121,6 +121,15 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 		$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();
 
 		$this->assertArrayEquals( $expected, $actual );
+
+		$warnings = $this->getMessageNames( $apiResponse, 'warnings' );
+
+		if ( !in_array( 'edit-no-change', $warnings ) ) {
+			//TODO: we should have such checks for all API modules!
+			$this->assertRevisionSummary(
+				array_merge( array( "wbsetaliases-$op", $langCode ), explode( '|', $value ) ),
+				$apiResponse['entity']['lastrevid'] );
+		}
 	}
 
 	public function testSetAliases_length( ) {
