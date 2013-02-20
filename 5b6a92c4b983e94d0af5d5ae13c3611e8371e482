@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dlx2bURc",
+        "filename": "lib/includes/entity/Entity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-20T14:06:25Z",
+      "side": 1,
+      "message": "this bit isn\u0027t needed, array_diff will, for indexed arrays, already do the right thing.",
+      "revId": "5b6a92c4b983e94d0af5d5ae13c3611e8371e482",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
