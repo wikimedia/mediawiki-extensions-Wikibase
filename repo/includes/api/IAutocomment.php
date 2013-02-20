@@ -30,6 +30,8 @@ namespace Wikibase\Api;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
+ *
+ * @deprecated use the Summary class to build summaries instead
  */
 interface IAutocomment {
 

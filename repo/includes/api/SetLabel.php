@@ -41,14 +41,20 @@ class SetLabel extends ModifyLangAttribute {
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
+		$summary = $this->createSummary( $params );
 
 		if ( isset( $params['value'] ) ) {
+
 			$label = Utils::trimToNFC( $params['value'] );
 			$language = $params['language'];
 			if ( 0 < strlen( $label ) ) {
+				$summary->addAutoSummaryArgs( $label );
 				$labels = array( $language => $entityContent->getEntity()->setLabel( $language, $label ) );
 			}
 			else {
+				$old = $entityContent->getEntity()->getLabel( $language );
+				$summary->addAutoSummaryArgs( $old );
+
 				$entityContent->getEntity()->removeLabel( $language );
 				$labels = array( $language => '' );
 			}
@@ -57,7 +63,7 @@ class SetLabel extends ModifyLangAttribute {
 		}
 
 		wfProfileOut( __METHOD__ );
-		return true;
+		return $summary;
 	}
 
 	/**
