@@ -162,6 +162,7 @@ final class RepoHooks {
 			'LazyDBConnectionProvider',
 			'MultiLangConstraintDetector',
 			'NamespaceUtils',
+			'Summary',
 
 			'actions/EditEntityAction',
 			'actions/ViewEntityAction',

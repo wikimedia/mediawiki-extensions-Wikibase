@@ -64,9 +64,9 @@ class SetAliasesTest extends ModifyItemBase {
 	public function paramProvider() {
 		return array(
 			// lang code, list name, list values, expected result
-			array( 'Oslo', 'en', 'set', 'Foo|bar', 'Foo|bar' ),
+			array( 'Oslo', 'en', 'set', 'Foo', 'Foo' ),
+			array( 'Oslo', 'en', 'add', 'Foo|bax', 'Foo|bax' ),
 			array( 'Oslo', 'en', 'set', 'Foo|bar|baz', 'Foo|bar|baz' ),
-			array( 'Oslo', 'en', 'add', 'Foo|bar', 'Foo|bar|baz' ),
 			array( 'Oslo', 'en', 'add', 'Foo|spam', 'Foo|bar|baz|spam' ),
 			array( 'Oslo', 'en', 'add', 'ohi', 'Foo|bar|baz|spam|ohi' ),
 
@@ -121,6 +121,11 @@ class SetAliasesTest extends ModifyItemBase {
 		$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();
 
 		$this->assertArrayEquals( $expected, $actual );
+
+		//TODO: we should have such checks for all API modules!
+		$this->assertRevisionSummary(
+			array_merge( array( "wbsetaliases-$op", $langCode ), explode( '|', $value ) ),
+			$apiResponse['entity']['lastrevid'] );
 	}
 
 	public function testSetAliases_length( ) {

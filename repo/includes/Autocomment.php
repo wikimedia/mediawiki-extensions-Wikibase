@@ -11,8 +11,53 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad
+ *
+ * @deprecated use the Summary class to build summaries instead
+ * @note before removing this class once it's phased out, make sure the doFormat hook handler
+ *       gets rescued to a new location.
  */
 final class Autocomment {
+
+	/**
+	 * @see Summary::formatAutoComment
+	 *
+	 * @since 0.1
+	 * @deprecated this is a B/C stub for Summary::formatAutoComment
+	 *
+	 * @return string
+	 */
+	public static function formatAutoComment( $messageKey, array $parts ) {
+		return Summary::formatAutoComment( $messageKey, $parts );
+	}
+
+	/**
+	 * @see Summary::formatAutoSummary
+	 *
+	 * @since 0.1
+	 * @deprecated this is a B/C stub for Summary::formatAutoSummary
+	 *
+	 * @return array
+	 */
+	public static function formatAutoSummary( $parts, \Language $lang = null ) {
+		global $wgContLang;
+
+		return array(
+			count( $parts ),
+			Summary::formatAutoSummary( $parts ),
+			$lang ? $lang : $wgContLang );
+	}
+
+	/**
+	 * @see Summary::formatTotalSummary
+	 *
+	 * @since 0.1
+	 * @deprecated this is a B/C stub for Summary::formatTotalSummary
+	 *
+	 * @return string
+	 */
+	public static function formatTotalSummary( $comment, $summary, $lang = false, $length = SUMMARY_MAX_LENGTH ) {
+		return Summary::formatTotalSummary( $comment, $summary, $length );
+	}
 
 	/**
 	 * Pretty formating of autocomments.
@@ -21,6 +66,8 @@ final class Autocomment {
 	 * could use them if links should be created that points to something.
 	 * Typically this could be links that moves to and highlight some
 	 * section within the item itself.
+	 *
+	 * @todo: move this elsewhere, it doesn't really belong in this class
 	 *
 	 * @param $data
 	 * @param string $comment reference to the finalized autocomment
@@ -137,89 +184,6 @@ final class Autocomment {
 	}
 
 	/**
-	 * Format the autocomment part of a full summary
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $messageKey the message key
-	 * @param array $parts parts to be stringed together
-	 * @return string with a formatted comment, or possibly an empty string
-	 */
-	public static function formatAutoComment( $messageKey, array $parts ) {
-		$joinedParts = implode( '|', $parts );
-		$composite = ( 0 < strlen($joinedParts) )
-			? implode( ':', array( $messageKey, $joinedParts ) )
-			: $messageKey;
-		return $composite;
-	}
-
-	/**
-	 * Format the autosummary part of a full summary
-	 *
-	 * This creates a comma list of entries, and to make the comma form
-	 * it is necessary to have a language. This can be a real problem as
-	 * guessing it will often fail.
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $parts parts to be stringed together
-	 * @param \Language|boolean $lang fallback for the language if its not set
-	 *
-	 * @return array of counts, an escaped string and the identified language
-	 */
-	public static function formatAutoSummary( array $parts, $lang = false ) {
-		global $wgContLang;
-
-		if ( $lang === false ) {
-			$lang = $wgContLang;
-		}
-
-		$count = count( $parts );
-
-		if ( $count === 0 ) {
-			return array( 0, '', $lang );
-		}
-		elseif ( $count === 1 ) {
-			return array( 1, $parts[0], $lang );
-		}
-		else {
-			$composite = $lang->commaList( $parts );
-			return array( count( $parts ), $composite, $lang );
-		}
-	}
-
-	/**
-	 * Merge the total summary
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $comment initial part to go in a comment
-	 * @param string $summary final part that is a easilly trucable string
-	 * @param bool|string $lang language to use when truncating the string
-	 * @param int $length total length of the string
-	 *
-	 * @return string to be used for the summary
-	 */
-	public static function formatTotalSummary( $comment, $summary, $lang = false, $length = SUMMARY_MAX_LENGTH ) {
-		global $wgContLang;
-		if ( $lang === null || $lang === false) {
-			$lang = $wgContLang;
-		}
-		$comment = Utils::trimToNFC( $comment );
-		$summary = Utils::trimToNFC( $summary );
-		$mergedString = '';
-		if ( $comment !== '' ) {
-			$mergedString .=  "/* $comment */";
-		}
-		if ( $summary !== "" ) {
-			$mergedString .= ($mergedString === "" ? "" : " ") . $lang->truncate( $summary, $length - strlen( $mergedString ) );
-		}
-
-		// leftover entities should be removed, but its not clear how this shall be done
-		return $mergedString;
-	}
-
-	/**
 	 * Build the summary by call to the module
 	 *
 	 * If this is used for other classes than api modules it could be necessary to change
@@ -227,7 +191,7 @@ final class Autocomment {
 	 *
 	 * @since 0.1
 	 *
-	 * @param ApiAutocomment $module an api module that support ApiAutocomment
+	 * @param \Wikibase\Api\IAutocomment $module an api module that support IAutocomment
 	 *
 	 * @param null|array $params
 	 * @param null|EntityContent $entityContent
@@ -262,6 +226,6 @@ final class Autocomment {
 		$comment = $module->getTextForComment( $params, $hits );
 
 		// format the overall string and return it
-		return Autocomment::formatTotalSummary( $comment, $summary, $lang );
+		return self::formatTotalSummary( $comment, $summary, $lang );
 	}
 }

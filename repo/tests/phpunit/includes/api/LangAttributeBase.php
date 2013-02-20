@@ -95,7 +95,7 @@ abstract class LangAttributeBase extends ModifyItemBase {
 			}
 		}
 		catch ( \Exception $e ) {
-			if ( $exception !== null && ! $e instanceof \PHPUnit_Framework_AssertionFailedError ) {
+			if ( $exception !== null && ! $e instanceof \PHPUnit_Framework_Exception ) {
 				$this->assertTrue( is_a( $e, $exception ), "Not the expected exception" );
 				return;
 			}
@@ -135,6 +135,10 @@ abstract class LangAttributeBase extends ModifyItemBase {
 		} else {
 			$this->assertArrayNotHasKey( $langCode, $values, "should have been removed" );
 		}
+
+		$this->assertRevisionSummary(
+			array( $action, "1", $langCode, "*/", $value ),
+			$apiResponse['entity']['lastrevid'] );
 
 		// cleanup ----------------------------------------------------------------
 		$this->resetItem( $handle );

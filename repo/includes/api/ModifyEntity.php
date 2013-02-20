@@ -9,7 +9,7 @@ use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\ItemHandler;
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 use Wikibase\Utils;
 use Wikibase\Settings;
 
@@ -25,8 +25,9 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler
  */
-abstract class ModifyEntity extends ApiWikibase implements IAutocomment {
+abstract class ModifyEntity extends ApiWikibase {
 
 	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
@@ -120,6 +121,18 @@ abstract class ModifyEntity extends ApiWikibase implements IAutocomment {
 	}
 
 	/**
+	 * Create a new Summary instance suitable for representing the action performed by this module.
+	 *
+	 * @param array $params
+	 *
+	 * @return Summary
+	 */
+	protected function createSummary( array $params ) {
+		$summary = new Summary( $this->getModuleName() );
+		return $summary;
+	}
+
+	/**
 	 * Actually modify the entity.
 	 *
 	 * @since 0.1
@@ -128,7 +141,7 @@ abstract class ModifyEntity extends ApiWikibase implements IAutocomment {
 	 * @param array       $params
 	 *
 	 * @internal param \Wikibase\EntityContent $entityContent
-	 * @return bool Success indicator
+	 * @return Summary|null a summary of the modification, or null to indicate failure.
 	 */
 	protected abstract function modifyEntity( EntityContent &$entity, array $params );
 
@@ -174,33 +187,32 @@ abstract class ModifyEntity extends ApiWikibase implements IAutocomment {
 			$this->dieUsage( $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' ), 'cant-edit' );
 		}
 
-		$success = $this->modifyEntity( $entityContent, $params );
+		$summary = $this->modifyEntity( $entityContent, $params );
 
-		if ( !$success ) {
+		if ( !$summary ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-modify-failed' )->text(), 'modify-failed' );
 		}
 
-		// This is similar to ApiEditPage.php and what it uses at line 314
-		$this->flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+		if ( $summary === true ) { // B/C, for implementations of modifyEntity that return true on success.
+			$summary = new Summary( $this->getModuleName() );
+		}
 
 		// if the entity is not up for creation, set the EDIT_UPDATE flags
 		if ( !$entityContent->isNew() && ( $this->flags & EDIT_NEW ) === 0 ) {
 			$this->flags |= EDIT_UPDATE;
 		}
 
+		$this->flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+
 		//NOTE: EDIT_NEW will not be set automatically. If the entity doesn't exist, and EDIT_NEW was
 		//      not added to $this->flags explicitly, the save will fail.
 
-		// collect information and create an EditEntity
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : null;
-		$editEntity = new \Wikibase\EditEntity( $entityContent, $user, $baseRevisionId, $this->getContext() );
-
 		// Do the actual save, or if it don't exist yet create it.
 		// There will be exceptions but we just leak them out ;)
+		$editEntity = new \Wikibase\EditEntity( $entityContent, $user, false, $this->getContext() );
 		$editEntity->attemptSave(
-			Autocomment::buildApiSummary( $this, $params, $entityContent ),
+			$summary->toString(),
 			$this->flags,
 			( $this->needsToken() ? $params['token'] : '' )
 		);
@@ -253,7 +265,7 @@ abstract class ModifyEntity extends ApiWikibase implements IAutocomment {
 		$this->getResult()->addValue(
 			null,
 			'success',
-			(int)$success
+			1
 		);
 
 		wfProfileOut( __METHOD__ );

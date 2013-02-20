@@ -11,7 +11,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 use Wikibase\StoreFactory;
-use Wikibase\Autocomment;
+use Wikibase\Summary;
 use Wikibase\Settings;
 
 /**
@@ -26,7 +26,7 @@ use Wikibase\Settings;
  *
  * @licence GNU GPL v2+
  */
-class LinkTitles extends ApiWikibase implements IAutocomment {
+class LinkTitles extends ApiWikibase {
 
 	/**
 	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()
@@ -36,25 +36,6 @@ class LinkTitles extends ApiWikibase implements IAutocomment {
 
 		$permissions[] = 'linktitles-update';
 		return $permissions;
-	}
-
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
-			'wblinktitles-connect',
-			array( /*$plural*/ 2, $params['fromsite'], $params['tosite'] )
-		);
-	}
-
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			array( $params['fromtitle'], $params['totitle'] )
-		);
 	}
 
 	/**
@@ -111,6 +92,9 @@ class LinkTitles extends ApiWikibase implements IAutocomment {
 		$flags = 0;
 		$itemContent = null;
 
+		$summary = new Summary( $this->getModuleName() );
+		$summary->addAutoSummaryArgs( $fromSite->getGlobalId() . ":$fromPage", $toSite->getGlobalId() . ":$toPage" );
+
 		// Figure out which parts to use and what to create anew
 		if ( !$fromId && !$toId ) {
 			// create new item
@@ -121,6 +105,7 @@ class LinkTitles extends ApiWikibase implements IAutocomment {
 			$return[] = $itemContent->getItem()->addSiteLink( $fromLink, 'set' );
 
 			$flags |= EDIT_NEW;
+			$summary->setAction( 'create' ); //FIXME: i18n
 		}
 		elseif ( !$fromId && $toId ) {
 			// reuse to-site's item
@@ -129,6 +114,7 @@ class LinkTitles extends ApiWikibase implements IAutocomment {
 			);
 			$fromLink = new SiteLink( $fromSite, $fromPage );
 			$return[] = $itemContent->getItem()->addSiteLink( $fromLink, 'set' );
+			$summary->setAction( 'connect' );
 		}
 		elseif ( $fromId && !$toId ) {
 			// reuse from-site's item
@@ -137,6 +123,7 @@ class LinkTitles extends ApiWikibase implements IAutocomment {
 			);
 			$toLink = new SiteLink( $toSite, $toPage );
 			$return[] = $itemContent->getItem()->addSiteLink( $toLink, 'set' );
+			$summary->setAction( 'connect' );
 		}
 		elseif ( $fromId === $toId ) {
 			// no-op
@@ -161,7 +148,7 @@ class LinkTitles extends ApiWikibase implements IAutocomment {
 			// Do the actual save, or if it don't exist yet create it.
 			$editEntity = new \Wikibase\EditEntity( $itemContent, $user, false, $this->getContext() );
 			$status = $editEntity->attemptSave(
-				Autocomment::buildApiSummary( $this, $params, $itemContent ),
+				$summary->toString(),
 				$flags,
 				( $this->needsToken() ? $params['token'] : '' )
 			);

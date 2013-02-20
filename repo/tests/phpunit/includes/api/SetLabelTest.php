@@ -64,7 +64,7 @@ class SetLabelTest extends LangAttributeBase {
 	public static function paramProvider() {
 		return array(
 			// $handle, $langCode, $value, $exception
-			array( 'Oslo', 'en', 'Oslo', null ),
+			array( 'Oslo', 'en', 'Osloooo', null ),
 			//array( 'Oslo', 'en', 'Oslo', 'UsageException' ),
 			//array( 'Oslo', 'en', 'Bergen', null ),
 			array( 'Oslo', 'en', '', null ),
