@@ -348,15 +348,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'jquery.inputAutoExpand' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery/jquery.inputAutoExpand.js',
-			),
-			'dependencies' => array(
-				'jquery.eachchange'
-			)
-		),
-
 		'jquery.ui.suggester' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.suggester.js'
