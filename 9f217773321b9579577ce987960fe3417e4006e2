@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dl73S-f0",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-20T12:37:32Z",
+      "side": 1,
+      "message": "I assume this is supposed to strip whitespace before and after colons. This is wrong for two reasons:\n\n1) this will remove the colon itself, too. \"2001: A Space Odysee\" will become \"2001A Space Odysee\".\n\n2) Even if it would preserve the colon (using a lookahead/lookbehind), it would still be wrong: \"2001: A Space Odysee\" would become \"2001:A Space Odysee\", which is not correct.\n\nThis kind of stripping must only be applied if we *know* we are dealing with a namespace prefix. We can\u0027t know that here. In fact, we don\u0027t even know whether we are dealing with a page title at all, or a label, a description, or whatever.",
+      "revId": "9f217773321b9579577ce987960fe3417e4006e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
