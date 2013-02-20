@@ -74,7 +74,7 @@ var // the following are a couple of var definitions used by the tests beyond
 			delete( proto.constructor ); // constructor is an extra thing, set by inherit()
 		}
 		if( members !== null ) {
-			assert.deepEqual(
+			QUnit.assert.deepEqual(
 				proto,
 				( members !== null ? members : {} ),
 				'Prototype of returned constructor has all extension properties set'

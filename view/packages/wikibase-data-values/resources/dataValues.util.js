@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( $, dv, undefined ) {
+( function( $, dv ) {
 	'use strict';
 
 	/**
