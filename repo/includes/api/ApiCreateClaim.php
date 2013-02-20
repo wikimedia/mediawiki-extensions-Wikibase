@@ -50,7 +50,10 @@ class ApiCreateClaim extends ApiModifyClaim {
 
 		$claim = $this->addClaim( $content->getEntity() );
 
-		$this->saveChanges( $content );
+		$summary = $this->createSummary( $params );
+		$summary->setAction( $claim->getMainSnak()->getType() );
+		$summary->addAutoSummaryArgs( $claim->getPropertyId()->getPrefixedId() );
+		$this->saveChanges( $content, $summary );
 
 		$this->outputClaim( $claim );
 
@@ -201,27 +204,6 @@ class ApiCreateClaim extends ApiModifyClaim {
 			'api.php?action=createclaim&entity=q42&property=p9001&snaktype=novalue&token=foobar&baserevid=7201010',
 			'api.php?action=createclaim&entity=q42&property=p9001&snaktype=value&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010',
 			// 'ex' => 'desc'
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			$this->getModuleName(),
-			array(
-				/*plural */ 1
-			)
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			Summary::pickValuesFromParams( $params, 'property' )
 		);
 	}
 }

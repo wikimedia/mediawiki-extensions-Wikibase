@@ -57,9 +57,11 @@ class RemoveQualifiers extends \Wikibase\ApiModifyClaim {
 		$params = $this->extractRequestParams();
 		$content = $this->getEntityContentForClaim( $params['claim'] );
 
-		$this->doRemoveQualifiers( $content->getEntity() );
+		$summary = $this->createSummary( $params );
 
-		$this->saveChanges( $content );
+		$this->doRemoveQualifiers( $content->getEntity(), $summary );
+
+		$this->saveChanges( $content, $summary );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -68,13 +70,17 @@ class RemoveQualifiers extends \Wikibase\ApiModifyClaim {
 	 * @since 0.3
 	 *
 	 * @param Entity $entity
+	 * @param Summary $summary a summary to report to
 	 */
-	protected function doRemoveQualifiers( Entity $entity ) {
+	protected function doRemoveQualifiers( Entity $entity, Summary $summary ) {
 		$params = $this->extractRequestParams();
 
 		$claim = $this->getClaim( $entity, $params['claim'] );
 
+		$summary->addAutoSummaryArgs( $claim->getPropertyId()->getPrefixedId() );
+
 		$qualifiers = $claim->getQualifiers();
+		$c = 0;
 
 		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
 			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
@@ -82,8 +88,14 @@ class RemoveQualifiers extends \Wikibase\ApiModifyClaim {
 				$this->dieUsage( 'There is no qualifier with hash ' . $qualifierHash, 'removequalifiers-qualifier-not-found' );
 			}
 
+			$snak = $qualifiers->getSnak( $qualifierHash );
 			$qualifiers->removeSnakHash( $qualifierHash );
+
+			$summary->addAutoSummaryArgs( $snak->getPropertyId()->getPrefixedId() );
+			$c++;
 		}
+
+		$summary->addAutoCommentArgs( $c );
 	}
 
 	/**
@@ -106,25 +118,6 @@ class RemoveQualifiers extends \Wikibase\ApiModifyClaim {
 		assert( $claim instanceof Claim );
 
 		return $claim;
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			$this->getModuleName(),
-			array( count( $params['qualifiers'] ) )
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			Summary::pickValuesFromParams( $params, 'qualifiers' )
-		);
 	}
 
 	/**

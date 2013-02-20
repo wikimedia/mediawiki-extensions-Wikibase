@@ -666,4 +666,49 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 		}
 	}
 
+	protected function getMessageNames( $apiResponse, $field ) {
+		$keys = array();
+
+		if ( !isset( $apiResponse[ $field ]['messages'] ) ) {
+			return $keys;
+		}
+
+		foreach ( $apiResponse[ $field ]['messages'] as $i => $message ) {
+			if ( !is_int( $i ) ) {
+				continue;
+			}
+
+			$keys[] = $message['name'];
+		}
+
+		return $keys;
+	}
+
+	/**
+	 * Asserts that the revision with the given ID has a summary matching $regex
+	 *
+	 * @param string $regex|array The regex to match, or an array to build a regex from
+	 * @param int $revid
+	 */
+	protected function assertRevisionSummary( $regex, $revid ) {
+		if ( is_array( $regex ) ) {
+			$r = '';
+
+			foreach ( $regex as $s ) {
+				if ( strlen( $r ) > 0 ) {
+					$r .= '.*';
+				}
+
+				$r .= preg_quote( $s, '!' );
+			}
+
+			$regex = "!$r!";
+		}
+
+		$rev = \Revision::newFromId( $revid );
+		$this->assertNotNull( $rev, "revision not found: $revid" );
+
+		$comment = $rev->getComment();
+		$this->assertRegExp( $regex, $comment );
+	}
 }

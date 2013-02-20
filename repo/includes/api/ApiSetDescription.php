@@ -36,8 +36,11 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
+		$summary = $this->createSummary( $params );
 
 		if ( isset( $params['value'] ) ) {
+			$summary->addAutoSummaryArgs( $params['value'] );
+
 			$description = Utils::squashToNFC( $params['value'] );
 			$language = $params['language'];
 			if ( 0 < strlen( $description ) ) {
@@ -52,7 +55,7 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 		}
 
 		wfProfileOut( __METHOD__ );
-		return true;
+		return $summary;
 	}
 
 	/**

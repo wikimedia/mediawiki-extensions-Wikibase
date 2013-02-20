@@ -547,7 +547,9 @@ abstract class Api extends \ApiBase {
 		return $messages;
 	}
 
-	protected function attemptSaveEntity( EntityContent $content, $summary, $flags = 0 ) {
+	// Documentation for this exists on some branch, wait for it to be merged here.
+	// Then, remember to update the docu for $summary to include Summary|string.
+	protected function attemptSaveEntity( EntityContent $content, /* string or Summary */ $summary, $flags = 0 ) {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
@@ -564,6 +566,10 @@ abstract class Api extends \ApiBase {
 		} else {
 			// null fails the token check
 			$token = isset( $params['token'] ) ? $params['token'] : null;
+		}
+
+		if ( $summary instanceof Summary ) {
+			$summary = $summary->toString();
 		}
 
 		$status = $editEntity->attemptSave(
