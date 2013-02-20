@@ -1,10 +1,13 @@
 <?php
 
 namespace Wikibase;
+
+use Language;
+
 /**
  * File defining the handler for autocomments and additional utility functions
  *
- * @since 0.1
+ * @since 0.1, major refactoring in 0.4
  *
  * @file
  * @ingroup WikibaseRepo
@@ -12,10 +15,158 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author John Erling Blad
  */
-final class Summary {
+class Summary {
 
 	/**
-	 * Pretty formating of autocomments.
+	 * @var string
+	 */
+	protected $moduleName;
+
+	/**
+	 * @var string
+	 */
+	protected $actionName;
+
+	/**
+	 * @var Language
+	 */
+	protected $language;
+
+	/**
+	 * @var array
+	 */
+	protected $commentArgs;
+
+	/**
+	 * @var array
+	 */
+	protected $summaryArgs;
+
+	/**
+	 * @var int
+	 */
+	protected $summaryType;
+
+	/**
+	 * indicates a specific type of formatting
+	 */
+	const USE_COMMENT = 2;
+	const USE_SUMMARY = 4;
+
+	/**
+	 * Constructs a new Summary
+	 *
+	 * @since 0.4
+	 *
+	 * @param string     $moduleName  the module part of the autocomment
+	 * @param string     $actionName  the action part of the autocomment
+	 * @param Language   $language    the language to use for the autosummary (like list separators)
+	 * @param array      $commentArgs the arguments to the autocomment
+	 * @param array|bool $summaryArgs the arguments to the autosummary
+	 */
+	public function __construct( $moduleName = null, $actionName = null, Language $language = null, $commentArgs = array(), $summaryArgs = false ) {
+		//global $wgContLang;
+
+		$this->moduleName = $moduleName;
+		$this->actionName = $actionName;
+		$this->language = isset( $language ) ? $language : null;
+		$this->commentArgs = $commentArgs;
+		$this->summaryArgs = $summaryArgs;
+		$this->formatType = self::USE_COMMENT | self::USE_SUMMARY;
+	}
+
+	/**
+	 * Set the language for the summary part
+	 *
+	 * @since 0.4
+	 *
+	 * @param \Language $lang
+	 */
+	public function setLanguage( \Language $lang = null ) {
+		$this->language = $lang;
+	}
+
+	/**
+	 * Set the module part of the autocomment
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $name
+	 */
+	public function setModuleName( $name ) {
+		$this->moduleName = (string)$name;
+	}
+
+	/**
+	 * Get the module part of the autocomment
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	public function getModuleName() {
+		return $this->moduleName;
+	}
+
+	/**
+	 * Set the action part of the autocomment
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $name
+	 */
+	public function setAction( $name ) {
+		$this->actionName = (string)$name;
+	}
+
+	/**
+	 * Get the action part of the autocomment
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	public function getActionName() {
+		return $this->actionName;
+	}
+
+	/**
+	 * Set the format flags
+	 *
+	 * @since 0.4
+	 *
+	 * @param int $flag
+	 */
+	public function setFormat( $flag ) {
+		$this->formatType |= (int)$flag;
+	}
+
+	/**
+	 * Remove the format flags
+	 *
+	 * @since 0.4
+	 *
+	 * @param int $flag
+	 */
+	public function removeFormat( $flag ) {
+		$this->formatType &= ~ (int)$flag;
+	}
+
+	/**
+	 * Get the formatting
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	public function getFormat() {
+		return $this->formatType;
+	}
+
+	/**
+	 * Pretty formatting of autocomments.
+	 *
+	 * See docs/summaries.txt for a brief overview of the format.
 	 *
 	 * Note that this function does _not_ use $title and $local but
 	 * could use them if links should be created that points to something.
@@ -136,6 +287,34 @@ final class Summary {
 	}
 
 	/**
+	 * Format the message key for an autocomment
+	 *
+	 * @since 0.3
+	 *
+	 * @param array $parts parts to be stringed together
+	 *
+	 * @return string with a message key, or possibly an empty string
+	 */
+	public static function formatMessageKey( array $parts ) {
+		return implode('-', $parts);
+	}
+
+	/**
+	 * Format the message key using the object-specific values
+	 *
+	 * @since 0.3
+	 *
+	 * @return string with a message key, or possibly an empty string
+	 */
+	public function getMessageKey() {
+		return self::formatMessageKey(
+			$this->actionName === null
+				? array( $this->moduleName )
+				: array( $this->moduleName, $this->actionName )
+		);
+	}
+
+	/**
 	 * Format the autocomment part of a full summary
 	 *
 	 * @since 0.1
@@ -153,6 +332,32 @@ final class Summary {
 	}
 
 	/**
+	 * Set the autocomment arguments using the object-specific values
+	 *
+	 * @since 0.4
+	 *
+	 * @param array|strings... parts to be stringed together
+	 */
+	public function addAutoCommentArgs( /*...*/ ) {
+		$args = is_array( func_get_arg( 0 ) ) ? func_get_arg( 0 ) : func_get_args();
+		$this->commentArgs = array_merge(
+			$this->commentArgs,
+			array_filter( $args, function ( $str ) { return 0 < strlen( $str ); } )
+		);
+	}
+
+	/**
+	 * Get the formatted autocomment using the object-specific values
+	 *
+	 * @since 0.4
+	 *
+	 * @return string with a formatted autocomment, or possibly an empty string
+	 */
+	public function getAutoComment() {
+		return self::formatAutoComment( $this->getMessageKey(), $this->commentArgs );
+	}
+
+	/**
 	 * Format the autosummary part of a full summary
 	 *
 	 * This creates a comma list of entries, and to make the comma form
@@ -162,29 +367,88 @@ final class Summary {
 	 * @since 0.1
 	 *
 	 * @param array $parts parts to be stringed together
-	 * @param \Language|boolean $lang fallback for the language if its not set
+	 * @param \Language|null $lang fallback for the language if its not set
 	 *
-	 * @return array of counts, an escaped string and the identified language
+	 * @return array of counts, an escaped string and the used language
 	 */
-	public static function formatAutoSummary( array $parts, $lang = false ) {
+	public static function formatAutoSummary( $parts, $lang = null ) {
 		global $wgContLang;
 
-		if ( $lang === false ) {
+		if ( !isset( $lang ) ) {
 			$lang = $wgContLang;
 		}
 
-		$count = count( $parts );
+		if ( $parts === false ) {
+			$count = $parts;
 
-		if ( $count === 0 ) {
 			return array( 0, '', $lang );
 		}
-		elseif ( $count === 1 ) {
-			return array( 1, $parts[0], $lang );
+		elseif ( is_array( $parts ) ) {
+			$count = count( $parts );
+
+			if ( $count === 0 ) {
+				return array( 0, '', $lang );
+			}
+			else {
+				return array( count( $parts ), $lang->commaList( $parts ), $lang );
+			}
 		}
 		else {
-			$composite = $lang->commaList( $parts );
-			return array( count( $parts ), $composite, $lang );
+			throw new \MWException( 'wrong type' );
 		}
+	}
+
+	/**
+	 * Set the autosummary arguments using the object-specific values
+	 *
+	 * @since 0.4
+	 *
+	 * @param array|strings... parts to be stringed together
+	 */
+	public function addAutoSummaryArgs( /*...*/ ) {
+		$args = is_array( func_get_arg( 0 ) ) ? func_get_arg( 0 ) : func_get_args();
+		$strings = array();
+
+		foreach ( $args as $arg ) {
+			// if we find that any arg is an object we shall not display them
+			switch ( true ) {
+			case is_string( $arg ):
+				$strings[] = $arg;
+				break;
+			case is_object( $arg ) && ($arg instanceof EntityId):
+				$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $arg );
+				$strings[] = '[[' . $title->getFullText() . ']]';
+				break;
+			case is_object( $arg ) && method_exists( $arg, '__toString' ):
+				$strings[] = (string)$arg;
+				break;
+			case is_object( $arg ) && !method_exists( $arg, '__toString' ):
+				$strings[] = '';
+				$this->removeFormat( self::USE_SUMMARY );
+				break;
+			default:
+				$strings[] = '';
+				$this->removeFormat( self::USE_SUMMARY );
+			}
+		}
+
+		$this->summaryArgs = array_merge(
+			$this->summaryArgs === false ? array() : $this->summaryArgs,
+			array_filter( $strings, function ( $str ) { return 0 < strlen( $str ); } )
+		);
+	}
+
+	/**
+	 * Get the preformatted autosummary using the object-specific values
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $parts parts to be stringed together
+	 *
+	 * @return array of counts, an escaped string and the used language
+	 */
+	public function getAutoSummary( array $parts ) {
+		return self::formatAutoSummary( $this->summaryArgs, $this->language );
 	}
 
 	/**
@@ -219,48 +483,29 @@ final class Summary {
 	}
 
 	/**
-	 * Build the summary by call to the module
+	 * Merge the total summary using the object specific values
 	 *
-	 * If this is used for other classes than api modules it could be necessary to change
-	 * its internal logic
+	 * @since 0.4
 	 *
-	 * @since 0.1
-	 *
-	 * @param ApiSummary $module an api module that support ApiSummary
-	 *
-	 * @param null|array $params
-	 * @param null|EntityContent $entityContent
 	 * @return string to be used for the summary
 	 */
-	public static function buildApiSummary( $module, $params = null, $entityContent = null ) {
-		// check if we must pull in the request params
-		if ( !isset( $params ) ) {
-			$params = $module->extractRequestParams();
-		}
-
-		// Is there a user supplied summary, then use it but get the hits first
-		if ( isset( $params['summary'] ) ) {
-			list( $hits, $summary, $lang ) = $module->getTextForSummary( $params );
-			$summary = $params['summary'];
-		}
-
-		// otherwise try to construct something
-		else {
-			list( $hits, $summary, $lang ) = $module->getTextForSummary( $params );
-			if ( !is_string( $summary ) ) {
-				if ( isset( $entityContent ) ) {
-					$summary = $entityContent->getTextForSummary( $params );
-				}
-				else {
-					$summary = '';
-				}
-			}
-		}
-
-		// Comments are newer user supplied
-		$comment = $module->getTextForComment( $params, $hits );
-
-		// format the overall string and return it
-		return Summary::formatTotalSummary( $comment, $summary, $lang );
+	public function toString( $length = SUMMARY_MAX_LENGTH ) {
+		list( $counts, $summary, $lang) = self::formatAutoSummary(
+			$this->summaryArgs,
+			$this->language
+		);
+		$comment = Summary::formatAutoComment(
+			$this->getMessageKey(),
+			array_merge(
+				$this->language === null
+					? array( $counts, '' )
+					: array( $counts, $this->language->getCode() ),
+				$this->commentArgs
+			)
+		);
+		$comment = ( $this->formatType & self::USE_COMMENT) ? Utils::squashToNFC( $comment ) : '';
+		$summary = ( $this->formatType & self::USE_SUMMARY) ? Utils::squashToNFC( $summary ) : '';
+		return self::formatTotalSummary( $comment, $summary, $lang, $length );
 	}
+
 }

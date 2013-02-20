@@ -48,7 +48,11 @@ class SetClaim extends \Wikibase\ApiModifyClaim {
 	 * @since 0.4
 	 */
 	public function execute() {
+		$summary = $this->createSummary( $this->extractRequestParams() );
+		$summary->addAutoCommentArgs( 1 ); // one claim updated
+
 		$claim = $this->getClaimFromRequest();
+		$summary->addAutoSummaryArgs( $claim->getPropertyId()->getPrefixedId() );
 
 		$entityId = $this->getEntityIdForClaim( $claim );
 
@@ -56,7 +60,7 @@ class SetClaim extends \Wikibase\ApiModifyClaim {
 
 		$this->setClaim( $content->getEntity(), $claim );
 
-		$this->saveChanges( $content );
+		$this->saveChanges( $content, $summary );
 
 		$this->outputClaim( $claim );
 	}
@@ -121,25 +125,6 @@ class SetClaim extends \Wikibase\ApiModifyClaim {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
 		$claims->addClaim( $claim );
 		$entity->setClaims( $claims );
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			$this->getModuleName(),
-			array( 1 )
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			Summary::pickValuesFromParams( $params, 'claim' )
-		);
 	}
 
 	/**

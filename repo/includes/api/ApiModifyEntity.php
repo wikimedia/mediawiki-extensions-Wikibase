@@ -15,8 +15,9 @@ use User, Title, ApiBase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler
  */
-abstract class ApiModifyEntity extends Api implements ApiSummary {
+abstract class ApiModifyEntity extends Api {
 
 	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
@@ -110,6 +111,18 @@ abstract class ApiModifyEntity extends Api implements ApiSummary {
 	}
 
 	/**
+	 * Create a new Summary instance suitable for representing the action performed by this module.
+	 *
+	 * @param array $params
+	 *
+	 * @return Summary
+	 */
+	protected function createSummary( array $params ) {
+		$summary = new Summary( $this->getModuleName() );
+		return $summary;
+	}
+
+	/**
 	 * Actually modify the entity.
 	 *
 	 * @since 0.1
@@ -118,7 +131,7 @@ abstract class ApiModifyEntity extends Api implements ApiSummary {
 	 * @param array       $params
 	 *
 	 * @internal param \Wikibase\EntityContent $entityContent
-	 * @return bool Success indicator
+	 * @return Summary|null a summary of the modification, or null to indicate failure.
 	 */
 	protected abstract function modifyEntity( EntityContent &$entity, array $params );
 
@@ -164,11 +177,15 @@ abstract class ApiModifyEntity extends Api implements ApiSummary {
 			$this->dieUsage( $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' ), 'cant-edit' );
 		}
 
-		$success = $this->modifyEntity( $entityContent, $params );
+		$summary = $this->modifyEntity( $entityContent, $params );
 
-		if ( !$success ) {
+		if ( !$summary ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-modify-failed' )->text(), 'modify-failed' );
+		}
+
+		if ( $summary === true ) { // B/C, for implementations of modifyEntity that return true on success.
+			$summary = new Summary( $this->getModuleName() );
 		}
 
 		// if the entity is not up for creation, set the EDIT_UPDATE flags
@@ -180,7 +197,6 @@ abstract class ApiModifyEntity extends Api implements ApiSummary {
 		//      not added to $this->flags explicitly, the save will fail.
 
 		// collect information and create an EditEntity
-		$summary = Summary::buildApiSummary( $this, $params, $entityContent );
 		$editEntity = $this->attemptSaveEntity( $entityContent,
 			$summary,
 			$this->flags );
@@ -223,7 +239,7 @@ abstract class ApiModifyEntity extends Api implements ApiSummary {
 		$this->getResult()->addValue(
 			null,
 			'success',
-			(int)$success
+			1
 		);
 
 		wfProfileOut( __METHOD__ );

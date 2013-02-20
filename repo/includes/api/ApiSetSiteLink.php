@@ -59,29 +59,12 @@ class ApiSetSiteLink extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			'wbsetsitelink-' . ( ( isset( $params['linktitle'] ) && $params['linktitle'] !== "" ) ? "set" : "remove" ),
-			array( /*$plural*/ 1, $params['linksite'] )
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			array( $params['linktitle'] )
-		);
-	}
-
-	/**
 	 * @see ApiModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
+		$summary = $this->createSummary( $params );
+		$summary->addAutoCommentArgs( 1, $params['linksite'] );
 
 		if ( isset( $params['linktitle'] ) ) {
 			$params['linktitle'] = Utils::squashToNFC( $params['linktitle'] );
@@ -98,8 +81,10 @@ class ApiSetSiteLink extends ApiModifyEntity {
 			$entityContent->getItem()->removeSiteLink( $params['linksite'] );
 			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
 
+			$summary->setAction( 'remove' );
+
 			wfProfileOut( __METHOD__ );
-			return true;
+			return $summary;
 		}
 		else {
 			$sites = $this->getSiteLinkTargetSites();
@@ -126,8 +111,12 @@ class ApiSetSiteLink extends ApiModifyEntity {
 			}
 
 			$this->addSiteLinksToResult( array( $ret ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
+
+			$summary->setAction( 'set' );
+			$summary->addAutoSummaryArgs( $params['linktitle'] );
+
 			wfProfileOut( __METHOD__ );
-			return $ret !== false;
+			return $ret === false ? null : $summary;
 		}
 	}
 

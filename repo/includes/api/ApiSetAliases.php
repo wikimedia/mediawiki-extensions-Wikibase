@@ -49,25 +49,6 @@ class ApiSetAliases extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			'wbsetaliases-' . implode( '-', Summary::pickKeysFromParams( $params, 'set', 'add', 'remove' ) ),
-			array( $plural, $params['language'] )
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			Summary::pickValuesFromParams( $params, 'set', 'add', 'remove' )
-		);
-	}
-
-	/**
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
@@ -80,7 +61,12 @@ class ApiSetAliases extends ApiModifyEntity {
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
 
+		$summary = $this->createSummary( $params );
+		$summary->addAutoCommentArgs( 1, $params['language'] );
+
 		if ( isset( $params['set'] ) ) {
+			$summary->setAction( 'set' );
+			$summary->addAutoSummaryArgs( $params['set'] );
 			$entityContent->getEntity()->setAliases(
 				$params['language'],
 				array_map(
@@ -91,6 +77,8 @@ class ApiSetAliases extends ApiModifyEntity {
 		}
 
 		if ( isset( $params['remove'] ) ) {
+			$summary->setAction( 'remove' );
+			$summary->addAutoSummaryArgs( $params['remove'] );
 			$entityContent->getEntity()->removeAliases(
 				$params['language'],
 				array_map(
@@ -101,6 +89,8 @@ class ApiSetAliases extends ApiModifyEntity {
 		}
 
 		if ( isset( $params['add'] ) ) {
+			$summary->setAction( 'add' );
+			$summary->addAutoSummaryArgs( $params['add'] );
 			$entityContent->getEntity()->addAliases(
 				$params['language'],
 				array_map(
@@ -116,7 +106,7 @@ class ApiSetAliases extends ApiModifyEntity {
 		}
 
 		wfProfileOut( __METHOD__ );
-		return true;
+		return $summary;
 	}
 
 	/**

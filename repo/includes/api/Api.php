@@ -600,7 +600,7 @@ abstract class Api extends \ApiBase {
 	 * handleStatus()).
 	 *
 	 * @param EntityContent $content  The content to save
-	 * @param String $summary    The edit summary
+	 * @param Summary|String $summary The edit summary
 	 * @param int    $flags      The edit flags (see WikiPage::toEditContent)
 	 *
 	 * @return EditEntity The EditEntity object used to perform the save operation.
@@ -623,6 +623,10 @@ abstract class Api extends \ApiBase {
 		} else {
 			// null fails the token check
 			$token = isset( $params['token'] ) ? $params['token'] : null;
+		}
+
+		if ( $summary instanceof Summary ) {
+			$summary = $summary->toString();
 		}
 
 		$status = $editEntity->attemptSave(

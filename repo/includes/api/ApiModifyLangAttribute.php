@@ -16,6 +16,7 @@ use ApiBase, Language;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 
@@ -30,23 +31,12 @@ abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 		// that signals a label to remove.
 	}
 
-	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			$this->getModuleName() . '-' . ( ( isset( $params['value'] ) && 0<strlen( $params['value'] ) ) ? 'set' : 'remove' ),
-			array( /* $plural */ 1, $params['language'] )
-		);
-	}
+	protected function createSummary( array $params ) {
+		$summary = parent::createSummary( $params );
+		$summary->addAutoCommentArgs( 1, $params['language'] );
+		$summary->setAction( ( isset( $params['value'] ) && 0<strlen( $params['value'] ) ) ? 'set' : 'remove' );
 
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			Summary::pickValuesFromParams( $params, 'value' )
-		);
+		return $summary;
 	}
 
 	/**

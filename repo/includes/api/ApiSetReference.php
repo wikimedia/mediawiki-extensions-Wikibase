@@ -47,14 +47,18 @@ class ApiSetReference extends ApiModifyClaim {
 		$params = $this->extractRequestParams();
 		$content = $this->getEntityContentForClaim( $params['statement'] );
 
+		$summary = $this->createSummary( $params );
+		$summary->addAutoCommentArgs( 1 ); // always one reference
+
 		$reference = $this->updateReference(
 			$content->getEntity(),
 			$params['statement'],
 			$this->getSnaks( $params['snaks'] ),
+			$summary,
 			$params['reference']
 		);
 
-		$this->saveChanges( $content );
+		$this->saveChanges( $content, $summary );
 
 		$this->outputReference( $reference );
 
@@ -91,11 +95,14 @@ class ApiSetReference extends ApiModifyClaim {
 	 * @param Entity $entity
 	 * @param string $statementGuid
 	 * @param Snaks $snaks
+	 * @param Summary $summary
 	 * @param string|null $refHash
 	 *
 	 * @return Reference
 	 */
-	protected function updateReference( Entity $entity, $statementGuid, Snaks $snaks, $refHash = null ) {
+	protected function updateReference( Entity $entity, $statementGuid, Snaks $snaks,
+		Summary $summary, $refHash = null ) {
+
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
@@ -111,7 +118,11 @@ class ApiSetReference extends ApiModifyClaim {
 			);
 		}
 
+		$summary->addAutoSummaryArgs( $statement->getPropertyId()->getPrefixedId() );
+
 		$reference = new Reference( $snaks );
+
+		//TODO: can we put something about the reference onto the summary?
 
 		/**
 		 * @var References $references
@@ -139,25 +150,6 @@ class ApiSetReference extends ApiModifyClaim {
 		$entity->setClaims( $claims );
 
 		return $reference;
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			$this->getModuleName(),
-			array( count( $params['reference'] ) )
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			Summary::pickValuesFromParams( $params, 'reference' )
-		);
 	}
 
 	/**

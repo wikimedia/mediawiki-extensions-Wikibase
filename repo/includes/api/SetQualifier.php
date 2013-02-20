@@ -62,11 +62,17 @@ class SetQualifier extends \Wikibase\ApiModifyClaim {
 		$params = $this->extractRequestParams();
 		$content = $this->getEntityContentForClaim( $params['claim'] );
 
+		$summary = $this->createSummary( $params );
+		$summary->addAutoCommentArgs( 1 ); // one claim updated
+
 		$claim = $this->doSetQualifier(
-			$content->getEntity()
+			$content->getEntity(),
+			$summary
 		);
 
-		$this->saveChanges( $content );
+		$summary->addAutoSummaryArgs( $params['property'] );
+
+		$this->saveChanges( $content, $summary );
 
 		$this->outputClaim( $claim );
 
@@ -110,10 +116,11 @@ class SetQualifier extends \Wikibase\ApiModifyClaim {
 	 * @since 0.3
 	 *
 	 * @param Entity $entity
+	 * @param Summary $summary
 	 *
 	 * @return Claim
 	 */
-	protected function doSetQualifier( Entity $entity ) {
+	protected function doSetQualifier( Entity $entity, Summary $summary ) {
 		$params = $this->extractRequestParams();
 
 		$claimGuid = $params['claim'];
@@ -127,6 +134,8 @@ class SetQualifier extends \Wikibase\ApiModifyClaim {
 		$claim = $claims->getClaimWithGuid( $claimGuid );
 
 		$this->updateQualifiers( $claim->getQualifiers() );
+
+		$summary->addAutoSummaryArgs( $claim->getPropertyId()->getPrefixedId() );
 
 		$entity->setClaims( $claims );
 
@@ -227,25 +236,6 @@ class SetQualifier extends \Wikibase\ApiModifyClaim {
 		);
 
 		return $qualifiers->addSnak( $newQualifier );
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Summary::formatAutoComment(
-			$this->getModuleName(),
-			array( 1 )
-		);
-	}
-
-	/**
-	 * @see  ApiSummary::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Summary::formatAutoSummary(
-			Summary::pickValuesFromParams( $params, 'property' )
-		);
 	}
 
 	/**
