@@ -16,6 +16,91 @@
       "revId": "9f217773321b9579577ce987960fe3417e4006e2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl33clQ8",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-20T13:11:41Z",
+      "side": 1,
+      "message": "This this only for ItemByTitle and has no effect on normali9zation when editing sitelinks, I assume? \n\nIf it\u0027s only for ItemByTitle, the name should indicate that\nIf it\u0027s for everything, it should default to true.",
+      "revId": "9f217773321b9579577ce987960fe3417e4006e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dlz0oTe8",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-20T13:11:41Z",
+      "side": 1,
+      "message": "This is not quite sufficient: $subPage is already mangled, any spaces have been replaced with underscores. So, we need to also strip leading and trailing underscores.",
+      "revId": "9f217773321b9579577ce987960fe3417e4006e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dlx0tkf4",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-20T13:11:41Z",
+      "side": 1,
+      "message": "Note that we need to make clear whether getFromSiteLink expects titles with underscores or with spaces. Currently, this is undocumented, and seems to be handled inconsistently by the code.\n\nI think any unambiguous and fast normalization of the title should be done just before lookup, perhaps in the SiteLinkTable class.",
+      "revId": "9f217773321b9579577ce987960fe3417e4006e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl13Z2R0",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-20T13:11:41Z",
+      "side": 1,
+      "message": "Adding \"return\" here would make the intention clearer. Just a thought.",
+      "revId": "9f217773321b9579577ce987960fe3417e4006e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dlz0HLYc",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-20T13:11:41Z",
+      "side": 1,
+      "message": "We could remove that check if we would return immediately above.",
+      "revId": "9f217773321b9579577ce987960fe3417e4006e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
