@@ -50,7 +50,9 @@ class PropertySerializer extends EntitySerializer {
 
 		$serialization = array();
 
-		$serialization['datatype'] = $property->getDataType()->getId();
+		if ( in_array( 'datatype', $this->options->getProps() ) ) {
+			$serialization['datatype'] = $property->getDataType()->getId();
+		}
 
 		return $serialization;
 	}
