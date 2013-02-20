@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Database;
 
+use MessageReporter;
+
 /**
  * Object that can create a table in a database given a table definition.
  *
@@ -30,12 +32,56 @@ namespace Wikibase\Repo\Database;
  */
 class TableBuilder {
 
-	public function __construct( QueryInterface $queryInterface ) {
+	/**
+	 * @since 0.4
+	 *
+	 * @var QueryInterface
+	 */
+	private $db;
 
+	/**
+	 * @since 0.4
+	 *
+	 * @var MessageReporter|null
+	 */
+	private $messageReporter;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.4
+	 *
+	 * @param QueryInterface $queryInterface
+	 */
+	public function __construct( QueryInterface $queryInterface, MessageReporter $messageReporter = null ) {
+		$this->db = $queryInterface;
+		$this->messageReporter = $messageReporter;
 	}
 
-	public function createTable( TableDefinition $table ) {
+	/**
+	 * @since 0.4
+	 *
+	 * @param string $message
+	 */
+	private function report( $message ) {
+		if ( $this->messageReporter !== null ) {
+			$this->messageReporter->reportMessage( $message );
+		}
+	}
 
+	/**
+	 * Creates a table if it does not exist yet.
+	 *
+	 * @since 0.4
+	 *
+	 * @param TableDefinition $table
+	 */
+	public function createTable( TableDefinition $table ) {
+		if ( $this->db->tableExists( $table->getName() ) ) {
+			$this->report( 'Table "' . $table->getName() . '" exists already, skipping.' );
+		}
+
+		// TODO
 	}
 
 }
