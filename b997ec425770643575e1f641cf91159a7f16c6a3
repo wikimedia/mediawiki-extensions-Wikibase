@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dl32UleA",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-20T14:14:38Z",
+      "side": 1,
+      "message": "shouldn\u0027t that be ( pp_page IS NULL )?",
+      "revId": "b997ec425770643575e1f641cf91159a7f16c6a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dl-24hXU",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-20T14:14:38Z",
+      "side": 1,
+      "message": "Joining the full result against the big langlink table may be very slow. Better get the limited result first, then add the langlink counts only for the max 500 pages to be shown in the result. Can be done with a sub query, a temp table, or a second query using a list of page ids.",
+      "revId": "b997ec425770643575e1f641cf91159a7f16c6a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
