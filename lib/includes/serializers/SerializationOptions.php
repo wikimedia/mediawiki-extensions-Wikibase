@@ -105,9 +105,6 @@ class EntitySerializationOptions extends SerializationOptions {
 	/**
 	 * The optional properties of the entity that should be included in the serialization.
 	 *
-	 * TODO: include all props by default, so callers don't have to go specify the
-	 * whole list (inc entity type specific props) all the time.
-	 *
 	 * @since 0.2
 	 *
 	 * @var array of string
@@ -117,6 +114,9 @@ class EntitySerializationOptions extends SerializationOptions {
 		'descriptions',
 		'labels',
 		'claims',
+		// TODO: the following properties are not part of all entities, listing them here is not nice
+		'datatype', // property specific
+		'sitelinks', // item specific
 	);
 
 	/**
@@ -203,9 +203,22 @@ class EntitySerializationOptions extends SerializationOptions {
 	 * Adds a prop to the list of optionally included elements of the entity.
 	 *
 	 * @since 0.3
+	 *
+	 * @param string $name
 	 */
 	public function addProp( $name ) {
 		$this->props[] = $name;
+	}
+
+	/**
+	 * Removes a prop from the list of optionally included elements of the entity.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $name
+	 */
+	public function removeProp ( $name ) {
+		$this->props = array_diff( $this->props, array( $name ) );
 	}
 
 	/**
