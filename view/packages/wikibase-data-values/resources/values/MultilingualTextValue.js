@@ -5,7 +5,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner
  */
-( function( dv, $, undefined ) {
+( function( dv, $ ) {
 'use strict';
 
 var PARENT = dv.DataValue,
@@ -24,7 +24,7 @@ var PARENT = dv.DataValue,
  *
  * @param {dv.MonolingualTextValue[]} monoLingualValues
  */
-dv.MultilingualTextValue = dv.util.inherit( PARENT, constructor, {
+dv.MultilingualTextValue = dv.util.inherit( 'DvMultilingualTextValue', PARENT, constructor, {
 
 	/**
 	 * @see dv.DataValue.getSortKey
