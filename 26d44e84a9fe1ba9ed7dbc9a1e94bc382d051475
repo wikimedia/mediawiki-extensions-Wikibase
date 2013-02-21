@@ -16,6 +16,24 @@
       "revId": "26d44e84a9fe1ba9ed7dbc9a1e94bc382d051475",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnObpHh0",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-21T14:24:29Z",
+      "side": 1,
+      "message": "See \n\nhttp://programmers.stackexchange.com/questions/65467/what-does-xxx-mean-in-a-comment \n\nand\n\nhttps://plone.org/documentation/glossary/xxx\n\nMy personal use for this is \"find out what to do here\". Can replace it with //TODO if you prefer, but personally, I prefer to use //TODO only if I know what to do. So I use //XXX if I don\u0027t :)",
+      "parentUuid": "DnEapEt4",
+      "revId": "26d44e84a9fe1ba9ed7dbc9a1e94bc382d051475",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
