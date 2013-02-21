@@ -318,12 +318,25 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.wikibase.addtoolbar' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.addtoolbar.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+				'wikibase.ui.Toolbar',
+			),
+			'messages' => array(
+				'wikibase-add'
+			)
+		),
+
 		'jquery.wikibase.edittoolbar' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.edittoolbar.js',
 			),
 			'dependencies' => array(
-				'wikibase.ui.PropertyEditTool',
+				'wikibase.ui.PropertyEditTool', // needs wikibase.ui.Toolbar.EditGroup
 			)
 		),
 
@@ -377,7 +390,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
-				'jquery.wikibase.edittoolbar'
+				'jquery.wikibase.edittoolbar',
 			)
 		),
 
@@ -446,6 +459,7 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.statementview.js',
 			),
 			'dependencies' => array(
+				'jquery.wikibase.addtoolbar',
 				'jquery.wikibase.claimview',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.referenceview',
@@ -477,6 +491,7 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.entityview.js'
 			),
 			'dependencies' => array(
+				'jquery.wikibase.addtoolbar',
 				'jquery.wikibase.statementview',
 				'jquery.wikibase.claimlistview',
 				'wikibase.templates'
