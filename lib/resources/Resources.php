@@ -258,7 +258,7 @@ return call_user_func( function() {
 				'jquery.inputAutoExpand',
 				'jquery.tablesorter',
 				'jquery.ui.suggester',
-				'jquery.ui.entityselector',
+				'jquery.wikibase.entityselector',
 				'jquery.wikibase.siteselector',
 				'mediawiki.api',
 				'mediawiki.language',
@@ -395,7 +395,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.eachchange',
 				'jquery.nativeEventHandler',
-				'jquery.ui.entityselector',
+				'jquery.wikibase.entityselector',
 				'wikibase.datamodel',
 				'dataTypes.jquery.valueview.views',
 				'wikibase.jquery.valueview.views',
@@ -487,12 +487,12 @@ return call_user_func( function() {
 			)
 		),
 
-		'jquery.ui.entityselector' => $moduleTemplate + array(
+		'jquery.wikibase.entityselector' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.ui/jquery.ui.entityselector.js'
+				'jquery.wikibase/jquery.wikibase.entityselector.js'
 			),
 			'styles' => array(
-				'jquery.ui/themes/default/jquery.ui.entityselector.css'
+				'jquery.wikibase/themes/default/jquery.wikibase.entityselector.css'
 			),
 			'dependencies' => array(
 				'jquery.ui.suggester',
