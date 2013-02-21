@@ -238,7 +238,7 @@
 			for ( i in constructorArgs ) {
 				instance = this.getInstance( constructorArgs[i] );
 
-				assert.strictEqual(
+				QUnit.assert.strictEqual(
 					instance[functionName].call( instance ),
 					constructorArgs[i][argNumber],
 					functionName + ' must return the value that was provided as argument ' + argNumber + ' in the constructor'
