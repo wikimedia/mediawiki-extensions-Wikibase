@@ -295,11 +295,14 @@ class TermSqlCache implements TermCache {
 
 		$numericIds = array();
 		foreach ( $ids as $id ) {
-			$numericIds[] = $id->getNumericId();
 			if ( $id->getEntityType() !== $entityType ) {
-				throw new Exception( 'Declared EntityType must match the actual EntityType of each Entity' );
+				throw new \MWException( "ID " . $id->getPrefixedId()
+					. " does not refer to an entity of type $entityType." );
 			}
+
+			$numericIds[] = $id->getNumericId();
 		}
+
 		$entityIdentifiers['term_entity_id'] = $numericIds;
 
 		$fields = array(
