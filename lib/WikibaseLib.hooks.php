@@ -153,7 +153,6 @@ final class LibHooks {
 				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
 				'tests/qunit/wikibase.ui.Tooltip.tests.js',
 
-				'tests/qunit/wikibase.utilities/wikibase.utilities.inherit.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.newExtension.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ObservableObject.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ui.StatableObject.tests.js',
