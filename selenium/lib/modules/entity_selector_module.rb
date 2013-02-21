@@ -13,7 +13,7 @@ module EntitySelectorPage
   link(:firstEntitySelectorLink, :xpath => "//ul[contains(@class, 'ui-entityselector-list')]/li/a")
   span(:firstEntitySelectorLabel, :xpath => "//ul[contains(@class, 'ui-entityselector-list')]/li/a/span/span[contains(@class, 'ui-entityselector-label')]")
   span(:firstEntitySelectorDescription, :xpath => "//ul[contains(@class, 'ui-entityselector-list')]/li/a/span/span[contains(@class, 'ui-entityselector-description')]")
-  text_field(:entitySelectorInput, :xpath => "//input[contains(@class, 'ui-entityselector-input')]")
+  text_field(:entitySelectorInput, :xpath => "//div[contains(@class, 'wb-claims-section')]//input[contains(@class, 'ui-entityselector-input')]")
 
   def wait_for_entity_selector_list
     wait_until do
