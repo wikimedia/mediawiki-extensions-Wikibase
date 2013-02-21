@@ -16,18 +16,5 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-// @codeCoverageIgnoreStart
-//call_user_func( function() {
-	$components = array(
-		'lib/WikibaseLib',
-		'client/WikibaseClient',
-		'repo/Wikibase',
-	);
-
-	foreach ( $components as $component ) {
-		// Load extensions in non-global scope.
-		require_once __DIR__ . '/' . $component . '.php';
-	}
-
-//} );
-// @codeCoverageIgnoreEnd
+require_once __DIR__ . '/lib/WikibaseLib.php';
+require_once __DIR__ . '/repo/Wikibase.php';
