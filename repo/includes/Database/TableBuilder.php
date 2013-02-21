@@ -52,6 +52,7 @@ class TableBuilder {
 	 * @since 0.4
 	 *
 	 * @param QueryInterface $queryInterface
+	 * @param MessageReporter|null $messageReporter
 	 */
 	public function __construct( QueryInterface $queryInterface, MessageReporter $messageReporter = null ) {
 		$this->db = $queryInterface;
