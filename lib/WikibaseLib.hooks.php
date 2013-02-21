@@ -166,7 +166,7 @@ final class LibHooks {
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
 
 				'tests/qunit/jquery.ui/jquery.ui.suggester.tests.js',
-				'tests/qunit/jquery.ui/jquery.ui.entityselector.tests.js',
+				'tests/qunit/jquery.wikibase/jquery.wikibase.entityselector.tests.js',
 				'tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js',
 
 			),
@@ -180,7 +180,7 @@ final class LibHooks {
 				'wikibase.ui.Toolbar',
 				'wikibase.ui.PropertyEditTool',
 				'jquery.ui.suggester',
-				'jquery.ui.entityselector',
+				'jquery.wikibase.entityselector',
 				'jquery.nativeEventHandler',
 				'jquery.client',
 				'jquery.eachchange',

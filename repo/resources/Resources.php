@@ -61,7 +61,7 @@ return call_user_func( function() {
 				'wikibase.ui.entitysearch.js',
 			),
 			'dependencies' => array(
-				'jquery.ui.entityselector',
+				'jquery.wikibase.entityselector',
 			),
 		),
 
