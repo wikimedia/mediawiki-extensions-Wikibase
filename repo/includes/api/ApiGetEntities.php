@@ -214,7 +214,7 @@ class ApiGetEntities extends Api {
 			'props' => array(
 				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'aliases', 'labels',
 					'descriptions', 'sitelinks/urls', 'claims', 'datatype' ),
-				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims',
+				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sort' => array(
