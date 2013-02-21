@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DnGbNLoc",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-21T15:35:21Z",
+      "side": 1,
+      "message": "@since 0.1 is wrong. The name Summary only exists since 0.4, same for most methods.",
+      "revId": "64689956ca772e5c502781e959fc6b86d5cfecfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnEbKMnE",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-02-21T15:35:21Z",
+      "side": 1,
+      "message": "Don\u0027t forget to add yourself",
+      "revId": "64689956ca772e5c502781e959fc6b86d5cfecfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
