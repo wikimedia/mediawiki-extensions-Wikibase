@@ -18,7 +18,7 @@
  *
  * @param {wb.Snak[]|wb.Snak|wb.SnakList} [snaks] One or more Snaks in the list initially.
  */
-wb.SnakList = function( snaks ) {
+wb.SnakList = function WbSnakList( snaks ) {
 	this._snaks = [];
 	this.length = 0;
 

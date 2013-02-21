@@ -16,7 +16,7 @@
  *
  * @param {String} propertyId
  */
-wb.Snak = function( propertyId ) {
+wb.Snak = function WbSnak( propertyId ) {
 	// check whether the Snak has a type, doesn't make sense to create an instance of wb.Snak!
 	if( !this.constructor.TYPE ) {
 		throw new Error( 'Can not create abstract Snak of no specific type' );

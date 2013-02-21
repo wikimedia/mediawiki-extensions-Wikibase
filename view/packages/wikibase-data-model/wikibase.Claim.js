@@ -18,7 +18,7 @@
  * @param {String|null} [guid] The Global Unique Identifier of this Claim. Can be omitted or null
  *        if this is a new Claim, not yet stored in the database and associated with some entity.
  */
-wb.Claim = function( mainSnak, qualifiers, guid ) {
+wb.Claim = function WbClaim( mainSnak, qualifiers, guid ) {
 	this.setMainSnak( mainSnak );
 	this.setQualifiers( qualifiers || [] );
 	this._guid = guid || null;

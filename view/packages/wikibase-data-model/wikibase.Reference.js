@@ -22,7 +22,7 @@
 	 * TODO: get rid of 'hash' parameter and introduce a method to generate the hash, but make sure
 	 *       it will be the same as it would be for a Reference in PHP.
 	 */
-	wb.Reference = function( snaks, hash ) {
+	wb.Reference = function WbReference( snaks, hash ) {
 		this.setSnaks( snaks );
 		this._hash = hash;
 	};

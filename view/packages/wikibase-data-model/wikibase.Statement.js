@@ -28,7 +28,7 @@ var PARENT = wb.Claim,
  * @param {String|null} [guid] The Global Unique Identifier of this Statement. Can be omitted or null
  *        if this is a new Statement, not yet stored in the database and associated with some entity.
  */
-wb.Statement = wb.utilities.inherit( PARENT, constructor, {
+wb.Statement = wb.utilities.inherit( 'WbStatement', PARENT, constructor, {
 	/**
 	 * @type Array
 	 * @todo determine whether we should rather model a Reference object for this
