@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DnEbP0lc",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-21T16:01:57Z",
+      "side": 1,
+      "message": "Yea, I was wondering how to handle renames. You think we should pretend this class was created only in 0.4?",
+      "parentUuid": "DnGbNLoc",
+      "revId": "64689956ca772e5c502781e959fc6b86d5cfecfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DnEbKMnE",
         "filename": "repo/includes/Summary.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-02-21T15:35:21Z",
       "side": 1,
       "message": "Don\u0027t forget to add yourself",
+      "revId": "64689956ca772e5c502781e959fc6b86d5cfecfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnGbSzgE",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-21T16:01:57Z",
+      "side": 1,
+      "message": "This is actually 99% John\u0027s code from I39048196, I don\u0027t claim credit here.",
+      "parentUuid": "DnEbKMnE",
       "revId": "64689956ca772e5c502781e959fc6b86d5cfecfe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
