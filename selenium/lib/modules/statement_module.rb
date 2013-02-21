@@ -12,7 +12,7 @@ module StatementPage
   include ReferencePage
   # statements UI elements
   link(:addStatement, :xpath => "//div[contains(@class, 'wb-claims-toolbar')]/div/span/span/a")
-  link(:addClaimToFirstStatement, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claim-add')]/div[contains(@class, 'wb-claim-toolbar')]/span/span/span/a")
+  link(:addClaimToFirstStatement, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claim-add')]/div[contains(@class, 'wb-claim-toolbar')]/div/span/span/a")
   link(:editFirstStatement, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-innoneditmode')]/span/a")
   link(:saveStatement, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='save']")
   link(:cancelStatement, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='cancel']")
