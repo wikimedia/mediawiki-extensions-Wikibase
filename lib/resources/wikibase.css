@@ -490,6 +490,9 @@ div.wb-claim-section .wb-claim-add {
 	background-color: #F8F8F8;
 	min-height: 3em;
 }
+div.wb-claim-section .wb-claim-add div.wb-editsection {
+	position: absolute;
+}
 
 /* General add new claim link */
 div.wb-claims-section div.wb-editsection {
