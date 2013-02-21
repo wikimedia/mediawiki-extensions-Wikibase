@@ -790,6 +790,13 @@ $messages['ksh'] = array(
 	'datatypes-type-commonsMedia' => 'Meedijedattei vun Wikkimeedija Commons',
 );
 
+/** Kurdish (Latin script) (Kurdî (latînî)‎)
+ * @author George Animal
+ */
+$messages['ku-latn'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'Ziman',
+);
+
 /** Kirghiz (Кыргызча)
  * @author Growingup
  */
@@ -880,6 +887,7 @@ $messages['ms'] = array(
 	'wikibase-error-ui-link-exists' => 'Anda tidak boleh membuat pautan ke halaman ini kerana satu lagi perkara sudah berpaut dengannya.',
 	'wikibase-error-ui-session-failure' => 'Sesi anda sudah berakhir. Sila log masuk semula.',
 	'wikibase-error-ui-edit-conflict' => 'Terdapat percanggahan suntingan. Sila muat semula dan simpan semula.',
+	'wikibase-replicationnote' => 'Sila ambil perhatian bahawa masa beberapa minit mungkin perlu diambil sehingga semua perubahan kelihatan di semua wiki',
 	'wikibase-sitelinks' => 'Senarai halaman yang berpaut pada perkara ini',
 	'wikibase-sitelinks-sitename-columnheading' => 'Bahasa',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',

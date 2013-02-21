@@ -246,6 +246,7 @@ $messages['ca'] = array(
 	'wikibase-comment-multi' => '{{PLURAL:$1|canvi|canvis}}', # Fuzzy
 	'wikibase-editlinks' => 'Modifica els enllaços',
 	'wikibase-editlinkstitle' => 'Modifica enllaços interlingües',
+	'wikibase-rc-show-wikidata-pref' => 'Mostra les modificacions de Wikidata en els canvis recents',
 );
 
 /** Czech (česky)
@@ -1034,14 +1035,21 @@ $messages['ms'] = array(
 	'wikibase-editlinks' => 'Sunting pautan',
 	'wikibase-editlinkstitle' => 'Sunting pautan antara bahasa',
 	'wikibase-linkitem-addlinks' => 'Tambah pautan',
+	'wikibase-linkitem-alreadylinked' => 'Halaman yang anda ingin pautkan itu sudah dilampirkan dengan satu [$1 perkara] di repositori data pusat yang berpaut dengan $2 di tapak ini. Setiap perkara hanya boleh berlampirkan satu halaman setapak. Sila pilih halaman yang lain untuk dipautkan.',
 	'wikibase-linkitem-close' => 'Tutup dialog dan muat semula halaman',
 	'wikibase-linkitem-failure' => 'Ralat di luar jangkaan berlaku apabila cuba memautkan halaman yang diberikan.',
 	'wikibase-linkitem-title' => 'Pautan dengan halaman',
 	'wikibase-linkitem-linkpage' => 'Pautan dengan halaman',
+	'wikibase-linkitem-selectlink' => 'Sila pilih tapak dan halaman yang mana ingin anda pautkan halaman ini.',
 	'wikibase-linkitem-input-site' => 'Bahasa:',
 	'wikibase-linkitem-input-page' => 'Halaman:',
+	'wikibase-linkitem-invalidsite' => 'Tapak yang tidak dikenali atau tidak sah terpilih',
+	'wikibase-linkitem-confirmitem-text' => 'Halaman yang telah anda pilih itu sudah dipautkan dengan satu [$1 perkara di repositori pusat kami]. Sila sahkan bahawa halaman-halaman yang ditunjukkan seperti berikut adalah yang ingin anda pautkan dengan halaman ini.',
 	'wikibase-linkitem-confirmitem-button' => 'Sahkan',
 	'wikibase-linkitem-not-loggedin-title' => 'Anda perlu log masuk',
+	'wikibase-linkitem-not-loggedin' => 'Anda perlu log masuk ke dalam wiki ini dan juga ke dalam [$1 repositori data pusat] untuk menggunakan ciri ini.',
+	'wikibase-linkitem-success-create' => 'Halaman-halaman ini telah berjaya dipautkan. Anda boleh mendapati perkara baru diwujudkan yang mengandungi pautan-pautannya di dalam [$1 repositori data pusat] kami.',
+	'wikibase-linkitem-success-link' => 'Halaman-halaman ini telah berjaya dipautkan. Anda boleh mendapati perkara yang mengandungi pautan-pautannya di dalam [$1 repositori data pusat] kami.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Paparkan suntingan Wikidata dalam perubahan terkini',
 );
@@ -1426,6 +1434,7 @@ $messages['vi'] = array(
 	'wikibase-editlinks' => 'Sửa liên kết',
 	'wikibase-editlinkstitle' => 'Sửa liên kết giữa ngôn ngữ',
 	'wikibase-linkitem-addlinks' => 'Thêm liên kết',
+	'wikibase-linkitem-alreadylinked' => 'Bạn không thể đặt liên kết đến trang được chọn vì nó đã được liên kết đến một [$1 khoản mục] trong kho dữ liệu chung, và khoản mục đó đã liên kết đến $2 tại site này. Các khoản mục chỉ có thể có liên kết đến mỗi site một trang. Xin vui lòng chọn một trang khác để liên kết.',
 	'wikibase-linkitem-close' => 'Đóng hộp thoại và tải lại trang',
 	'wikibase-linkitem-failure' => 'Đã xuất hiện lỗi bất ngờ khi đặt liên kết đến trang chỉ định.',
 	'wikibase-linkitem-title' => 'Đặt liên kết với trang',
@@ -1434,7 +1443,7 @@ $messages['vi'] = array(
 	'wikibase-linkitem-input-site' => 'Ngôn ngữ:',
 	'wikibase-linkitem-input-page' => 'Trang:',
 	'wikibase-linkitem-invalidsite' => 'Đã chọn site không rõ hoặc không hợp lệ',
-	'wikibase-linkitem-confirmitem-text' => 'Xin vui lòng xác nhận rằng bạn muốn liên kết trang này với các trang ở dưới.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Bạn đã chọn một trang đã được liên kết đến một [$1 khoản mục trong kho dữ liệu chung]. Xin vui lòng xác nhận rằng bạn muốn liên kết trang này với các trang ở dưới.',
 	'wikibase-linkitem-confirmitem-button' => 'Xác nhận',
 	'wikibase-linkitem-not-loggedin-title' => 'Bạn cần đăng nhập',
 	'wikibase-linkitem-not-loggedin' => 'Bạn cần đăng nhập vào cả wiki này lẫn [$1 kho dữ liệu chung] để sử dụng tính năng này.',
