@@ -81,7 +81,7 @@ abstract class ModifyEntity extends ApiWikibase implements IAutocomment {
 
 			$entityTitle = $itemHandler->getTitleFromSiteLink(
 				$params['site'],
-				Utils::squashToNFC( $params['title'] )
+				Utils::trimToNFC( $params['title'] )
 			);
 
 			if ( is_null( $entityTitle ) ) {
@@ -236,7 +236,7 @@ abstract class ModifyEntity extends ApiWikibase implements IAutocomment {
 		if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
 			$normalized = array();
 
-			$normTitle = Utils::squashToNFC( $params['title'] );
+			$normTitle = Utils::trimToNFC( $params['title'] );
 			if ( $normTitle !== $params['title'] ) {
 				$normalized['from'] = $params['title'];
 				$normalized['to'] = $normTitle;
