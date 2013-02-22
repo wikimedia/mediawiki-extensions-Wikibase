@@ -83,12 +83,8 @@ class ApiSetSiteLink extends ApiModifyEntity {
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( isset( $params['linktitle'] ) ) {
-			$params['linktitle'] = Utils::squashToNFC( $params['linktitle'] );
-		}
-
 		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
-			$link = $entityContent->getItem()->getSiteLink( $params['linksite'] );
+			$link = $entityContent->getItem()->getSiteLink( Utils::trimToNFC( $params['linksite'], false ) );
 
 			if ( !$link ) {
 				wfProfileOut( __METHOD__ );
@@ -110,7 +106,7 @@ class ApiSetSiteLink extends ApiModifyEntity {
 				$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-siteid' )->text(), 'not-recognized-siteid' );
 			}
 
-			$page = $site->normalizePageName( $params['linktitle'] );
+			$page = $site->normalizePageName( Utils::trimWhitespace( $params['linktitle'], false ) );
 
 			if ( $page === false ) {
 				wfProfileOut( __METHOD__ );
