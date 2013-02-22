@@ -38,7 +38,7 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 		wfProfileIn( __METHOD__ );
 
 		if ( isset( $params['value'] ) ) {
-			$description = Utils::squashToNFC( $params['value'] );
+			$description = Utils::trimToNFC( $params['value'] );
 			$language = $params['language'];
 			if ( 0 < strlen( $description ) ) {
 				$descriptions = array( $language => $entityContent->getEntity()->setDescription( $language, $description ) );
