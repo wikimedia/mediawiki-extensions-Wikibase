@@ -86,8 +86,6 @@ final class ClientHooks {
 			'includes/api/ApiClientInfo',
 
 			'includes/store/EntityCacheTable',
-			'includes/store/CachingSqlStore',
-			'includes/store/DirectSqlStore',
 
 			'MockRepository',
 		);
