@@ -46,21 +46,24 @@ class UtilsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseUtils
-	 * @dataProvider providerSquashWhitespace
+	 * @dataProvider providerTrimWhitespace
 	 */
-	public function testSquashWhitespace( $string, $expected ) {
-		$this->assertEquals( $expected, Utils::squashWhitespace( $string ) );
+	public function testTrimWhitespace( $string, $expected ) {
+		$this->assertEquals( $expected, Utils::trimWhitespace( $string ) );
 	}
 
-	public static function providerSquashWhitespace() {
+	public static function providerTrimWhitespace() {
 		return array(
-			array( 'foo bar', 'foo bar'),
-			array( ' foo  bar ', 'foo bar'),
-			array( '  foo   bar  ', 'foo bar'),
-			array( "foo\tbar", 'foo bar'),
-			array( "foo\nbar", 'foo bar'),
-			array( "foo\rbar", 'foo bar'),
-			array( "\r \t\nfoo\r\t\t\tbar\n\n\n\r\r", 'foo bar'),
+			array( 'foo bar', 'foo bar'), // #0
+			array( ' foo  bar ', 'foo  bar'), // #1
+			array( '  foo   bar  ', 'foo   bar'), // #2
+			array( "foo\tbar", 'foo bar'), // #3, both a space and control char
+			array( "foo\nbar", 'foo bar'), // #4, both a space and control char
+			array( "foo\rbar", 'foo bar'), // #5, both a space and control char
+			array( "\r \t\nfoo\r\t\t\tbar\n\n\n\r\r", 'foo bar'), // #6, both space and control chars
+			array( "\r \t\nfoo\r\t\t\t bar\n\n\n\r\r", 'foo  bar'), // #7, both space and control chars
+			array( html_entity_decode( "foo&#8204;bar", ENT_QUOTES, "utf-8"), html_entity_decode( "foo&#8204;bar", ENT_QUOTES, "utf-8") ), // #8
+			array( html_entity_decode( "foo&#8204;&#8204;bar", ENT_QUOTES, "utf-8"), html_entity_decode( "foo&#8204;&#8204;bar", ENT_QUOTES, "utf-8") ), // #9
 		);
 	}
 
@@ -87,18 +90,18 @@ class UtilsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseUtils
-	 * @dataProvider providerSquashToNFC
+	 * @dataProvider providerTrimToNFC
 	 */
-	public function testSquashToNFC( $src, $dst ) {
-		$this->assertEquals( $dst, Utils::squashToNFC( $src ), "String '$src' is not the same as the expected '$dst'" );
+	public function testTrimToNFC( $src, $dst ) {
+		$this->assertEquals( $dst, Utils::trimToNFC( $src ), "String '$src' is not the same as the expected '$dst'" );
 	}
 
-	public static function providerSquashToNFC() {
+	public static function providerTrimToNFC() {
 		return array(
-			array( "  \xC3\x85land  øyene  ", 'Åland øyene' ),
-			array( "  A\xCC\x8Aland  øyene  ", 'Åland øyene' ),
-			array( "  \xC3\x85land    øyene  ", 'Åland øyene' ),
-			array( "  A\xCC\x8Aland    øyene  ", 'Åland øyene' ),
+			array( "  \xC3\x85land  øyene  ", 'Åland  øyene' ), // #0
+			array( "  A\xCC\x8Aland  øyene  ", 'Åland  øyene' ), // #1
+			array( "  \xC3\x85land    øyene  ", 'Åland    øyene' ), // #2
+			array( "  A\xCC\x8Aland    øyene  ", 'Åland    øyene' ), // #3
 		);
 	}
 

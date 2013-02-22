@@ -198,7 +198,7 @@ class EditEntity extends ModifyEntity {
 							$entityContent->getEntity()->removeLabel( $arg['language'] );
 						}
 						else {
-							$entityContent->getEntity()->setLabel( $arg['language'], Utils::squashToNFC( $arg['value'] ) );
+							$entityContent->getEntity()->setLabel( $arg['language'], Utils::trimToNFC( $arg['value'] ) );
 						}
 					}
 
@@ -221,7 +221,7 @@ class EditEntity extends ModifyEntity {
 							$entityContent->getEntity()->removeDescription( $arg['language'] );
 						}
 						else {
-							$entityContent->getEntity()->setDescription( $arg['language'], Utils::squashToNFC( $arg['value'] ) );
+							$entityContent->getEntity()->setDescription( $arg['language'], Utils::trimToNFC( $arg['value'] ) );
 						}
 					}
 
@@ -256,13 +256,13 @@ class EditEntity extends ModifyEntity {
 						foreach ( $args as $arg ) {
 							$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
 							if ( array_key_exists( 'remove', $arg ) ) {
-								$remAliases[$arg['language']][] = Utils::squashToNFC( $arg['value'] );
+								$remAliases[$arg['language']][] = Utils::trimToNFC( $arg['value'] );
 							}
 							elseif ( array_key_exists( 'add', $arg ) ) {
-								$addAliases[$arg['language']][] = Utils::squashToNFC( $arg['value'] );
+								$addAliases[$arg['language']][] = Utils::trimToNFC( $arg['value'] );
 							}
 							else {
-								$setAliases[$arg['language']][] = Utils::squashToNFC( $arg['value'] );
+								$setAliases[$arg['language']][] = Utils::trimToNFC( $arg['value'] );
 							}
 						}
 					}
@@ -310,7 +310,7 @@ class EditEntity extends ModifyEntity {
 						}
 						else {
 							$linkSite = $sites->getSite( $arg['site'] );
-							$linkPage = $linkSite->normalizePageName( $arg['title'] );
+							$linkPage = $linkSite->normalizePageName( Utils::trimWhitespace( $arg['title'] ) );
 
 							if ( $linkPage === false ) {
 								wfProfileOut( __METHOD__ );
