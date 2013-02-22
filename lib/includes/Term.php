@@ -233,7 +233,7 @@ class Term {
 		//      But that requires us to load ALL the language objects,
 		//      which loads ALL the messages, which makes us run out
 		//      of RAM (see bug 41103).
-		return mb_strtolower( Utils::squashToNFC( $text ) );
+		return mb_strtolower( Utils::trimToNFC( $text ) );
 	}
 
 	/**

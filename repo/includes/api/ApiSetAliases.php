@@ -84,7 +84,7 @@ class ApiSetAliases extends ApiModifyEntity {
 			$entityContent->getEntity()->setAliases(
 				$params['language'],
 				array_map(
-					function( $str ) { return Utils::squashToNFC( $str ); },
+					function( $str ) { return Utils::trimToNFC( $str ); },
 					$params['set']
 				)
 			);
@@ -94,7 +94,7 @@ class ApiSetAliases extends ApiModifyEntity {
 			$entityContent->getEntity()->removeAliases(
 				$params['language'],
 				array_map(
-					function( $str ) { return Utils::squashToNFC( $str ); },
+					function( $str ) { return Utils::trimToNFC( $str ); },
 					$params['remove']
 				)
 			);
@@ -104,7 +104,7 @@ class ApiSetAliases extends ApiModifyEntity {
 			$entityContent->getEntity()->addAliases(
 				$params['language'],
 				array_map(
-					function( $str ) { return Utils::squashToNFC( $str ); },
+					function( $str ) { return Utils::trimToNFC( $str ); },
 					$params['add']
 				)
 			);
