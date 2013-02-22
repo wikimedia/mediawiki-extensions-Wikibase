@@ -38,7 +38,7 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 		wfProfileIn( __METHOD__ );
 
 		if ( isset( $params['value'] ) ) {
-			$label = Utils::squashToNFC( $params['value'] );
+			$label = Utils::trimToNFC( $params['value'] );
 			$language = $params['language'];
 			if ( 0 < strlen( $label ) ) {
 				$labels = array( $language => $entityContent->getEntity()->setLabel( $language, $label ) );
