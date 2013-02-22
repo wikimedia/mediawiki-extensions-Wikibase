@@ -90,7 +90,7 @@ class SetAliases extends ModifyEntity {
 			$entityContent->getEntity()->setAliases(
 				$params['language'],
 				array_map(
-					function( $str ) { return Utils::squashToNFC( $str ); },
+					function( $str ) { return Utils::trimToNFC( $str ); },
 					$params['set']
 				)
 			);
@@ -100,7 +100,7 @@ class SetAliases extends ModifyEntity {
 			$entityContent->getEntity()->removeAliases(
 				$params['language'],
 				array_map(
-					function( $str ) { return Utils::squashToNFC( $str ); },
+					function( $str ) { return Utils::trimToNFC( $str ); },
 					$params['remove']
 				)
 			);
@@ -110,7 +110,7 @@ class SetAliases extends ModifyEntity {
 			$entityContent->getEntity()->addAliases(
 				$params['language'],
 				array_map(
-					function( $str ) { return Utils::squashToNFC( $str ); },
+					function( $str ) { return Utils::trimToNFC( $str ); },
 					$params['add']
 				)
 			);

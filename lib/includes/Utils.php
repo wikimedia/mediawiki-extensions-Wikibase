@@ -189,17 +189,21 @@ final class Utils {
 	}
 
 	/**
-	 * Trim initial and trailing whitespace, and compress internal ones.
+	 * Trim initial and trailing whitespace and control chars, and optionally compress internal ones.
 	 *
 	 * @since 0.1
 	 *
 	 * @param string $inputString The actual string to process.
+	 * @param boolean $squashInternal If the internal spaces should also be fixed.
 	 *
 	 * @return string where whitespace possibly are removed.
 	 */
-	static public function squashWhitespace( $inputString ) {
-		$trimmed = preg_replace( '/^[\pZ\pC]+|[\pZ\pC]+$/u', '', $inputString );
-		return preg_replace('/[\pZ\pC]+/u', ' ', $trimmed );
+	static public function trimWhitespace( $inputString ) {
+		// strip initial/trailing whitespace and control chars
+		$trimmed = preg_replace( '/^[\p{Z}\p{Cc}]+|[\p{Z}\p{Cc}]+$/u', '', $inputString );
+		// replace control chars with single space
+		$trimmed = preg_replace( '/[\p{Cc}]+/u', ' ', $trimmed );
+		return $trimmed;
 	}
 
 	/**
@@ -221,11 +225,12 @@ final class Utils {
 	 * @since 0.1
 	 *
 	 * @param string $inputString
+	 * @param boolean $squashInternal If the internal spaces should also be fixed.
 	 *
 	 * @return string on NFC form
 	 */
-	static public function squashToNFC( $inputString ) {
-		return self::cleanupToNFC( self::squashWhitespace( $inputString ) );
+	static public function trimToNFC( $inputString ) {
+		return self::cleanupToNFC( self::trimWhitespace( $inputString ) );
 	}
 
 	/**
