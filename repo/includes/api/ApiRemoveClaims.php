@@ -28,9 +28,8 @@ use ApiBase, MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
  */
-class ApiRemoveClaims extends ApiModifyClaim {
+class ApiRemoveClaims extends Api {
 
 	// TODO: example
 	// TODO: rights
@@ -108,6 +107,7 @@ class ApiRemoveClaims extends ApiModifyClaim {
 			);
 
 			$entity->setClaims( $claims );
+
 			$this->saveChanges( $entityContent );
 		}
 
@@ -191,33 +191,82 @@ class ApiRemoveClaims extends ApiModifyClaim {
 	}
 
 	/**
+	 * @since 0.3
+	 *
+	 * @param EntityContent $content
+	 */
+	protected function saveChanges( EntityContent $content ) {
+		$params = $this->extractRequestParams();
+
+		$user = $this->getUser();
+		$flags = 0;
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+		$flags |= EDIT_UPDATE;
+		$editEntity = new EditEntity( $content, $user, $baseRevisionId, $this->getContext() );
+
+		$status = $editEntity->attemptSave(
+			'', // TODO: automcomment
+			$flags,
+			isset( $params['token'] ) ? $params['token'] : ''
+		);
+
+		if ( !$status->isGood() ) {
+			$this->dieUsage( 'Failed to save the change', 'save-failed' );
+		}
+
+		$statusValue = $status->getValue();
+
+		if ( isset( $statusValue['revision'] ) ) {
+			$this->getResult()->addValue(
+				'pageinfo',
+				'lastrevid',
+				(int)$statusValue['revision']->getId()
+			);
+		}
+	}
+
+	/**
 	 * @see ApiBase::getAllowedParams
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array_merge( parent::getAllowedParams(), array(
+		return array(
 			'claim' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
 				ApiBase::PARAM_REQUIRED => true,
 			),
-		) );
+			'token' => null,
+			'baserevid' => array(
+				ApiBase::PARAM_TYPE => 'integer',
+			),
+			'bot' => null,
+		);
 	}
 
 	/**
 	 * @see ApiBase::getParamDescription
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array_merge( parent::getParamDescription(), array(
+		return array(
 			'claim' => 'A GUID identifying the claim',
-		) );
+			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
+			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
+				"This is used for detecting conflicts during save."
+			),
+			'bot' => array( 'Mark this edit as bot',
+				'This URL flag will only be respected if the user belongs to the group "bot".'
+			),
+		);
 	}
 
 	/**
@@ -269,4 +318,5 @@ class ApiRemoveClaims extends ApiModifyClaim {
 			Autocomment::pickValuesFromParams( $params, 'claim' )
 		);
 	}
+
 }

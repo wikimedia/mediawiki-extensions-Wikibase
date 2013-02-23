@@ -259,12 +259,9 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Added site-specific [$2] link',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed site-specific [$2] link',
 	'wikibase-item-summary-wblinktitles-connect' => 'Connected [$2↔$3] {{PLURAL:$1|page|pages}}',
-	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
-	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created {{PLURAL:$1|a claim|claims}}', // legacy, used for old log entries!
-	'wikibase-item-summary-wbcreateclaim' => 'Created {{PLURAL:$1|a claim|claims}}',
-	'wikibase-item-summary-wbsetclaimvalue' => 'Set {{PLURAL:$1|a claim value|claim values}}',
-	'wikibase-item-summary-wbremoveclaims' => 'Removed {{PLURAL:$1|a claim|claims}}',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{PLURAL:$1|a value claim|value claims}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created {{PLURAL:$1|a novalue claim|novalue claims}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created {{PLURAL:$1|a somevalue claim|somevalue claims}}',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{PLURAL:$1|value|values}}',
 
 	// property - summary and autocomment
