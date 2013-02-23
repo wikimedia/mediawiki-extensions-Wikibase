@@ -63,13 +63,35 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 		$output = $this->getOutput();
 		$request = $this->getRequest();
 
-		$this->language = $request->getText( 'language', '' );
-		if ( $this->language === '' && $subPage !== null ) {
-			$this->language = $subPage;
+		$this->language = '';
+		$this->type = null;
+		if ( $subPage !== null ) {
+			$parts = explode( '/', $subPage );
+			if ( count( $parts >= 2 ) ) {
+				$this->type = $parts[1];
+			}
+			$this->language = $parts[0];
 		}
+
+		$this->language = $request->getText( 'language', $this->language );
 		if ( $this->language !== '' && !in_array( $this->language, \Wikibase\Utils::getLanguageCodes() ) ) {
 			$output->addWikiMsg( 'wikibase-entitieswithoutlabel-invalid-language', $this->language );
 			$this->language = '';
+		}
+
+		$this->type = $request->getText( 'type', $this->type );
+		$possibleTypes = array( 'item', 'property', 'query' );
+		if ( $this->type === '' ) {
+			$this->type = null;
+		}
+		if ( $this->type !== null && !in_array( $this->type, $possibleTypes ) ) {
+			$output->addWikiMsg( 'wikibase-entitieswithoutlabel-invalid-type', $this->type );
+			$this->type = null;
+		}
+		$typeSelect = new XmlSelect( 'type', 'wb-entitieswithoutlabel-type', $this->type );
+		$typeSelect->addOption( '', '' );
+		foreach( $possibleTypes as $possibleType ) {
+			$typeSelect->addOption( $this->msg( 'wikibase-entity-' . $possibleType )->text(), $possibleType );
 		}
 
 		$output->addHTML(
@@ -82,17 +104,35 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 				)
 			) .
 			Html::openElement( 'fieldset' ) .
-			Html::element( 'legend', array(), $this->msg( 'wikibase-entitieswithoutlabel-legend' )->text() ) .
+			Html::element(
+				'legend',
+				array(),
+				$this->msg( 'wikibase-entitieswithoutlabel-legend' )->text()
+			) .
 			Html::openElement( 'p' ) .
-			Html::element( 'label', array( 'for' => 'language' ), $this->msg( 'wikibase-entitieswithoutlabel-label-language' )->text() )  . ' ' .
+			Html::element(
+				'label',
+				array(
+					'for' => 'wb-entitieswithoutlabel-language'
+				),
+				$this->msg( 'wikibase-entitieswithoutlabel-label-language' )->text()
+			) . ' ' .
 			Html::input(
 				'language',
 				$this->language,
 				'text',
-					array(
-						'id' => 'language'
+				array(
+					'id' => 'wb-entitieswithoutlabel-language'
 				)
-			) .
+			) . ' ' .
+			Html::element(
+				'label',
+				array(
+					'for' => 'wb-entitieswithoutlabel-type'
+				),
+				$this->msg( 'wikibase-entitieswithoutlabel-label-type' )->text()
+			) . ' ' .
+			$typeSelect->getHTML() . ' ' .
 			Html::input(
 				'submit',
 				$this->msg( 'wikibase-entitieswithoutlabel-submit' )->text(),
@@ -143,7 +183,7 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$entityPerPage = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
-		return $entityPerPage->getEntitiesWithoutTerm( \Wikibase\Term::TYPE_LABEL, $this->language, null, $limit, $offset );
+		return $entityPerPage->getEntitiesWithoutTerm( \Wikibase\Term::TYPE_LABEL, $this->language, $this->type, $limit, $offset );
 	}
 
 
@@ -155,7 +195,7 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	 * @return Title
 	 */
 	protected function getTitleForNavigation() {
-		return $this->getTitle( $this->language );
+		return $this->getTitle( $this->language . '/' . $this->type );
 	}
 
 }
