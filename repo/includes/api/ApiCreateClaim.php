@@ -28,9 +28,8 @@ use ApiBase, MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
  */
-class ApiCreateClaim extends ApiModifyClaim {
+class ApiCreateClaim extends Api implements ApiAutocomment {
 
 	// TODO: automcomment
 	// TODO: rights
@@ -91,24 +90,40 @@ class ApiCreateClaim extends ApiModifyClaim {
 	}
 
 	/**
-	 * @since 0.2
+	 * @since 0.3
 	 *
-	 * @return EntityContent
+	 * @param EntityContent $content
 	 */
-	protected function getEntityContent() {
+	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();
 
+		$user = $this->getUser();
+		$flags = 0;
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+		$flags |= EDIT_UPDATE;
+		$editEntity = new EditEntity( $content, $user, $baseRevisionId, $this->getContext() );
 
-		$entityId = EntityId::newFromPrefixedId( $params['entity'] );
-		$entityTitle = $entityId ? EntityContentFactory::singleton()->getTitleForId( $entityId ) : null;
-		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$status = $editEntity->attemptSave(
+			'', // TODO: autocomment
+			$flags,
+			isset( $params['token'] ) ? $params['token'] : ''
+		);
 
-		if ( $entityContent === null ) {
-			$this->dieUsage( 'Entity ' . $params['entity'] . ' not found', 'entity-not-found' );
+		if ( !$status->isOK() ) {
+			$this->dieUsage( 'Failed to save the change', 'createclaim-save-failed' );
 		}
 
-		return $entityContent;
+		$statusValue = $status->getValue();
+
+		if ( isset( $statusValue['revision'] ) ) {
+			$this->getResult()->addValue(
+				'pageinfo',
+				'lastrevid',
+				(int)$statusValue['revision']->getId()
+			);
+		}
 	}
 
 	/**
@@ -135,6 +150,70 @@ class ApiCreateClaim extends ApiModifyClaim {
 	}
 
 	/**
+	 * @since 0.2
+	 *
+	 * @return EntityContent
+	 */
+	protected function getEntityContent() {
+		$params = $this->extractRequestParams();
+
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+
+		$entityId = EntityId::newFromPrefixedId( $params['entity'] );
+		$entityTitle = $entityId ? EntityContentFactory::singleton()->getTitleForId( $entityId ) : null;
+		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
+
+		if ( $entityContent === null ) {
+			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
+		}
+
+		return $entityContent;
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @return Snak
+	 * @throws MWException
+	 */
+	protected function getSnakInstance() {
+		$params = $this->extractRequestParams();
+
+		$factory = new SnakFactory();
+
+		$libRegistry = new LibRegistry( Settings::singleton() );
+		$parseResult = $libRegistry->getEntityIdParser()->parse( $params['property'] );
+
+		if ( !$parseResult->isValid() ) {
+			throw new MWException( $parseResult->getError()->getText() );
+		}
+
+		return $factory->newSnak(
+			$parseResult->getValue(),
+			$params['snaktype'],
+			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
+		);
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param Claim $claim
+	 */
+	protected function outputClaim( Claim $claim ) {
+		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+
+		$serializer = $serializerFactory->newSerializerForObject( $claim );
+		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
+
+		$this->getResult()->addValue(
+			null,
+			'claim',
+			$serializer->getSerialized( $claim )
+		);
+	}
+
+	/**
 	 * @see ApiBase::getAllowedParams
 	 *
 	 * @since 0.2
@@ -142,9 +221,13 @@ class ApiCreateClaim extends ApiModifyClaim {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array_merge( parent::getAllowedParams(), array(
+		return array(
 			'entity' => array(
 				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_REQUIRED => true,
+			),
+			'snaktype' => array(
+				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'property' => array(
@@ -155,11 +238,12 @@ class ApiCreateClaim extends ApiModifyClaim {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => false,
 			),
-			'snaktype' => array(
-				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
-				ApiBase::PARAM_REQUIRED => true,
+			'token' => null,
+			'baserevid' => array(
+				ApiBase::PARAM_TYPE => 'integer',
 			),
-		) );
+			'bot' => null,
+		);
 	}
 
 	/**
@@ -170,12 +254,19 @@ class ApiCreateClaim extends ApiModifyClaim {
 	 * @return array
 	 */
 	public function getParamDescription() {
-		return array_merge( parent::getParamDescription(), array(
+		return array(
 			'entity' => 'Id of the entity you are adding the claim to',
 			'property' => 'Id of the snaks property',
 			'value' => 'Value of the snak when creating a claim with a snak that has a value',
 			'snaktype' => 'The type of the snak',
-		) );
+			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
+			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
+				"This is used for detecting conflicts during save."
+			),
+			'bot' => array( 'Mark this edit as bot',
+				'This URL flag will only be respected if the user belongs to the group "bot".'
+			),
+		);
 	}
 
 	/**
@@ -226,4 +317,5 @@ class ApiCreateClaim extends ApiModifyClaim {
 			Autocomment::pickValuesFromParams( $params, 'property' )
 		);
 	}
+
 }
