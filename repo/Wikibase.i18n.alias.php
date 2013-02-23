@@ -190,10 +190,15 @@ $specialPageAliases['vi'] = array(
 
 /** Simplified Chinese (中文（简体）‎) */
 $specialPageAliases['zh-hans'] = array(
+	'EntityData' => array( '实体数据' ),
 	'CreateItem' => array( '创建项目' ),
 	'NewProperty' => array( '新建属性' ),
 	'ItemByTitle' => array( '按标题搜索项目' ),
 	'ItemDisambiguation' => array( '项目消歧义' ),
 	'ListDatatypes' => array( '列出数据类型' ),
 	'SetLabel' => array( '设置标签' ),
+	'SetDescription' => array( '设置描述' ),
+	'SetAliases' => array( '设置别名' ),
+	'EntitiesWithoutLabel' => array( '无标签实体' ),
+	'ItemsWithoutSitelinks' => array( '无站点链接项目' ),
 );

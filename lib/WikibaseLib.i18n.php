@@ -308,25 +308,61 @@ $messages['eo'] = array(
 /** Spanish (español)
  * @author Armando-Martin
  * @author Dalton2
+ * @author Pegna
+ * @author Savh
+ * @author Vivaelcelta
  */
 $messages['es'] = array(
 	'wikibase-lib-desc' => 'Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.',
 	'wikibase-entity-item' => 'elemento',
 	'wikibase-entity-property' => 'propiedad',
 	'wikibase-entity-query' => 'consulta',
+	'wikibase-error-unexpected' => 'Ocurrió un error inesperado.',
+	'wikibase-error-save-generic' => 'Hubo un error al intentar guardar, por lo que no se pudieron almacenar los cambios.',
+	'wikibase-error-remove-generic' => 'Hubo un error al intentar realizar la eliminación, y debido a esto no se pudieron completar los cambios.',
+	'wikibase-error-save-connection' => 'Ha ocurrido un error de conexión al intentar guardar, y debido a esto no se pudieron completar los cambios. Compruebe su conexión a internet.',
+	'wikibase-error-remove-connection' => 'Hubo un error de conexión al intentar eliminar, y debido a esto no se pudieron completar tus cambios. Comprueba tu conexión a internet.',
+	'wikibase-error-save-timeout' => 'Estamos experimentando dificultades técnicas, y debido a esto no se pudieron terminar de guardar tus cambios.',
+	'wikibase-error-remove-timeout' => 'Estamos experimentando dificultades técnicas, y debido a esto no se pudo finalizar la eliminación.',
+	'wikibase-error-autocomplete-connection' => 'No se pudo consultar en la API de Wikipedia. Inténtalo de nuevo más tarde.',
+	'wikibase-error-autocomplete-response' => 'Tu servidor respondió: $1',
+	'wikibase-error-ui-client-error' => 'Error en la conexión a la página del cliente. Por favor, inténtalo más tarde.',
+	'wikibase-error-ui-no-external-page' => 'No se encontró el artículo especificado en el sitio correspondiente.',
+	'wikibase-error-ui-cant-edit' => 'No estás autorizado para realizar esta acción.',
+	'wikibase-error-ui-no-permissions' => 'No tienes suficientes derechos para realizar esta acción.',
+	'wikibase-error-ui-link-exists' => 'No se puede vincular a esta página porque otro elemento ya se vincula a ella.',
+	'wikibase-error-ui-session-failure' => 'Tu sesión ha caducado. Inicia la sesión de nuevo.',
+	'wikibase-error-ui-edit-conflict' => 'Hay un conflicto de edición. Por favor, vuelve a cargar y guarda de nuevo.',
+	'wikibase-replicationnote' => 'Tenga en cuenta que puede tardar varios minutos, hasta que los cambios sean visibles en todas las wikis.',
 	'wikibase-sitelinks' => 'Lista de páginas enlazadas a este elemento',
 	'wikibase-sitelinks-sitename-columnheading' => 'Idioma',
 	'wikibase-sitelinks-siteid-columnheading' => 'Código',
 	'wikibase-sitelinks-link-columnheading' => 'Artículo enlazado',
+	'wikibase-tooltip-error-details' => 'Detalles',
 	'datatypes-type-wikibase-item' => 'Elemento',
 	'datatypes-type-commonsMedia' => 'Archivo multimedia de Commons',
 );
 
 /** Estonian (eesti)
  * @author Avjoska
+ * @author Pikne
  */
 $messages['et'] = array(
+	'wikibase-entity-item' => 'üksus',
+	'wikibase-entity-property' => 'omadus',
+	'wikibase-entity-query' => 'päring',
+	'wikibase-error-unexpected' => 'Ilmnes tundmatu tõrge.',
+	'wikibase-error-ui-cant-edit' => 'Sul pole lubatud seda toimingut sooritada.',
+	'wikibase-error-ui-no-permissions' => 'Sul pole selle toimingu sooritamiseks vajalikke õigusi.',
+	'wikibase-error-ui-session-failure' => 'Seanss on aegunud. Palun logi uuesti sisse.',
+	'wikibase-error-ui-edit-conflict' => 'Esines redigeerimiskonflikt. Palun värskenda lehekülge ja salvesta uuesti.',
+	'wikibase-sitelinks' => 'Sellele üksusele viitavate lehekülgede loend',
 	'wikibase-sitelinks-sitename-columnheading' => 'Keel',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kood',
+	'wikibase-sitelinks-link-columnheading' => 'Lingitud artikkel',
+	'wikibase-tooltip-error-details' => 'Üksikasjad',
+	'datatypes-type-wikibase-item' => 'Üksus',
+	'datatypes-type-commonsMedia' => 'Commonsi meediafail',
 );
 
 /** Persian (فارسی)
@@ -818,7 +854,7 @@ $messages['lb'] = array(
  */
 $messages['mk'] = array(
 	'wikibase-lib-desc' => 'Содржи почести функции за додатоците Викибаза и Клиент на Викибазата.',
-	'wikibase-entity-item' => 'предмет',
+	'wikibase-entity-item' => 'единица',
 	'wikibase-entity-property' => 'својство',
 	'wikibase-entity-query' => 'барање',
 	'wikibase-error-unexpected' => 'Се појави неочекувана грешка.',

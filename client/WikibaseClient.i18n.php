@@ -399,6 +399,7 @@ $messages['eo'] = array(
  * @author Armando-Martin
  * @author Dalton2
  * @author Hazard-SJ
+ * @author Pegna
  */
 $messages['es'] = array(
 	'wikibase-client-desc' => 'Cliente para la extensión Wikibase',
@@ -412,10 +413,47 @@ $messages['es'] = array(
 	'wikibase-comment-sitelink-change' => 'Se ha cambiado el enlace de idioma de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Se ha eliminado el enlace de idioma: $1',
 	'wikibase-comment-multi' => '$1 cambios', # Fuzzy
+	'wikibase-nolanglinks' => 'ninguno',
 	'wikibase-editlinks' => 'Editar los enlaces',
 	'wikibase-editlinkstitle' => 'Editar enlaces de interlengua',
+	'wikibase-linkitem-addlinks' => 'Añadir enlace',
+	'wikibase-linkitem-alreadylinked' => 'La página que quieres enlazar con esta, ya está enlazado en [$1 item] en el repositorio de datos central que une a $2 a este sitio. Los elementos sólo pueden tener una sola página por sitio enlazado. Por favor, elija una página diferente para enlazarlo.',
+	'wikibase-linkitem-close' => 'Cierre el cuadro de dialogo y recargue la página',
+	'wikibase-linkitem-failure' => 'Se produjo un error desconocido al intentar enlazar la página dada.',
+	'wikibase-linkitem-title' => 'Enlace con la página',
+	'wikibase-linkitem-linkpage' => 'Enlace con la página',
+	'wikibase-linkitem-selectlink' => 'Por favor, seleccione un sitio y una página que deseé vincultar a esta página.',
+	'wikibase-linkitem-input-site' => 'Idioma:',
+	'wikibase-linkitem-input-page' => 'Página:',
+	'wikibase-linkitem-invalidsite' => 'Seleccionó un sitio desconocido o no válido',
+	'wikibase-linkitem-confirmitem-text' => 'La página que usted eligió ya está enlazada a un [$1 item on our central data repository]. Confirme que las páginas que se muestran a continuación son los que desea enlazar con esta página.',
+	'wikibase-linkitem-confirmitem-button' => 'Confirmar',
+	'wikibase-linkitem-not-loggedin-title' => 'Necesita haberse identificado',
+	'wikibase-linkitem-not-loggedin' => 'Necesita haberse identificado en esta wiki y en el [$1 central data repository], para usar esta función.',
+	'wikibase-linkitem-success-create' => 'Las páginas han sido enlazadas con éxito. Puedes encontrar encontrar el elemento recién creado que contiene los enlaces en nuestro [$1 depósito central de datos].',
+	'wikibase-linkitem-success-link' => 'Las páginas han sido enlazadas con éxito. Puedes encontrar encontrar el elemento recién creado que contiene los enlaces en nuestro [$1 depósito central de datos].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar las ediciones Wikidata en la lista de cambios recientes',
+);
+
+/** Estonian (eesti)
+ * @author Pikne
+ */
+$messages['et'] = array(
+	'wikibase-comment-update' => 'Keelelingid uuendatud.',
+	'wikibase-comment-sitelink-add' => 'Keelelink lisatud: $1',
+	'wikibase-comment-sitelink-change' => 'Keelelink $1 muudetud kujule $2',
+	'wikibase-comment-sitelink-remove' => 'Keelelink eemaldatud: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|muudatus|muudatust}}',
+	'wikibase-nolanglinks' => 'puudub',
+	'wikibase-editlinks' => 'Redigeeri linke',
+	'wikibase-editlinkstitle' => 'Redigeeri keeltevahelisi linke',
+	'wikibase-linkitem-addlinks' => 'Lisa lingid',
+	'wikibase-linkitem-input-site' => 'Keel:',
+	'wikibase-linkitem-input-page' => 'Lehekülg:',
+	'wikibase-linkitem-invalidsite' => 'Valitud tundmatu või vigane võrgukoht',
+	'wikibase-linkitem-not-loggedin-title' => 'Pead olema sisse loginud',
+	'wikibase-linkitem-not-loggedin' => 'Et kasutada seda funktsiooni, pead olema sisse loginud siia vikisse ja [$1 kesksesse andmehoidlasse].',
 );
 
 /** Persian (فارسی)
