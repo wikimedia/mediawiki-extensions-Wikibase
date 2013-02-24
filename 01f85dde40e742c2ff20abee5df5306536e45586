@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DnU7oAhI",
+        "filename": "repo/config/Wikibase.experimental.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-24T23:40:43Z",
+      "side": 1,
+      "message": "Pleas add a comment about the magic number \"13\"",
+      "revId": "01f85dde40e742c2ff20abee5df5306536e45586",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
