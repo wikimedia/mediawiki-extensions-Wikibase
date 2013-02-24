@@ -8,7 +8,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( dv, $, QUnit, undefined ) {
+( function( dv, $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'dataValues.util.inherit', QUnit.newMwEnvironment() );
@@ -35,7 +35,13 @@ var // the following are a couple of var definitions used by the tests beyond
 		else if( constructor === null ) {
 			// constructor omitted, check for right param mapping:
 			C = dv.util.inherit( base, members );
-			var C2 = dv.util.inherit( base, C.prototype.constructor, members );
+			var C2 = dv.util.inherit( base, C.prototype.constructor, members ),
+				origConstructorOfC = C.prototype.constructor;
+
+			// constructors will never be the same since a new function will be created in inherit(),
+			// so we have to set them to the same to test for all the other prototype members.
+			C.prototype.constructor = null;
+			C2.prototype.constructor = null;
 
 			QUnit.assert.deepEqual(
 				C.prototype,
@@ -43,6 +49,7 @@ var // the following are a couple of var definitions used by the tests beyond
 				'inherit() works as expected if "constructor" parameter was omitted.'
 			);
 			C2 = null;
+			C.prototype.constructor = origConstructorOfC;
 		}
 		else if( members === null ) {
 			C = dv.util.inherit( base, constructor );
@@ -60,14 +67,6 @@ var // the following are a couple of var definitions used by the tests beyond
 			( new C() ) instanceof base && ( new C() ) instanceof C,
 			'"instanceof" is working like it should'
 		);
-
-		if( constructor !== null ) {
-			QUnit.assert.equal(
-				C,
-				constructor,
-				'prototypes constructor property is set to given constructor'
-			);
-		}
 
 		var proto = $.extend( {}, C.prototype );
 		if( members === null || !members.hasOwnProperty( 'constructor' ) ) {
@@ -89,7 +88,7 @@ var // the following are a couple of var definitions used by the tests beyond
 		foo: 'baa'
 	},
 
-	inheritConstructor = function() {
+	inheritConstructor = function InheritTestConstructor() {
 		this.foo = 'test';
 	},
 
@@ -120,15 +119,67 @@ var // the following are a couple of var definitions used by the tests beyond
 		var C1 = inheritTest( Object, inheritConstructor, null );
 		inheritConstructorTest( C1 );
 
+		QUnit.assert.equal(
+			C1.name,
+			inheritConstructor.name,
+			'Constructor returned by inherit() takes name of given constructor function'
+		);
+
 		// inherit from C2:
 		var C2 = inheritTest( C1, null, inheritMembers );
 		inheritConstructorTest( C2 );
+
+		QUnit.assert.ok(
+			C2.name.indexOf( inheritConstructor.name ) === 0,
+			'Constructor returned by inherit() uses name of given constructor plus suffix'
+		);
 	} );
 
 	QUnit.test( 'inherit( base, constructor, members )', function( assert ) {
 		// both:
 		var C = inheritTest( Object, inheritConstructor, inheritMembers );
 		inheritConstructorTest( C );
+	} );
+
+	QUnit.test( 'inherit( name, ... ) with different names', function( assert ) {
+		var names = [
+			[ '$' ],
+			[ '_' ],
+			[ '$foo' ],
+			[ '_foo' ],
+			[ 'foo' ],
+			[ 'foo42' ],
+			[ '42foo', 'foo' ],
+			[ 'function()xxx(){};', 'functionxxx' ],
+			[ 'xyz;${]123', 'xyz$123' ],
+			[ ';a;1;$;b;_;', 'a1$b_' ],
+			[ '();', false ],
+			[ '42', false ], // can't start function name with number
+			[ 'class', false ], // reserved word
+			[ 'function', false ] // reserved word
+		];
+
+		$.each( names, function( i, definition ) {
+			var testName = definition[0],
+				expectedName =  definition[1] || ( definition[1] === undefined ? testName : false );
+
+			if( !expectedName ) {
+				assert.throws(
+					function() {
+						dv.util.inherit( testName, Object );
+					},
+					'inherit( \'' + testName + '\', ... ); will throw and error because of malicious constructor name.'
+				);
+			} else {
+				assert.equal(
+					dv.util.inherit( testName, Object ).name,
+					expectedName,
+					'inherit( \'' + testName + '\', ... ); will use "' + expectedName + '" as name.'
+				);
+				
+			}
+
+		} );
 	} );
 
 }( dataValues, jQuery, QUnit ) );
