@@ -51,6 +51,24 @@
       "revId": "3a918d00ec9f721b4f4279627d3d62e7332f5f02",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnV.ws4k",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-24T19:25:30Z",
+      "side": 1,
+      "message": "Yes, list them in a comment.",
+      "parentUuid": "DnX8QD08",
+      "revId": "3a918d00ec9f721b4f4279627d3d62e7332f5f02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
