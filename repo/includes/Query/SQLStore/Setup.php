@@ -29,6 +29,7 @@ class Setup {
 	 *
 	 * @param Store $sqlStore
 	 * @param TableBuilder $tableBuilder
+	 * @param MessageReporter|null $messageReporter
 	 */
 	public function __construct( Store $sqlStore, TableBuilder $tableBuilder, MessageReporter $messageReporter = null ) {
 		$this->store = $sqlStore;

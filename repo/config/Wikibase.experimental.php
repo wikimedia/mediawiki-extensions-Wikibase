@@ -46,6 +46,18 @@ $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryC
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
 
 
+
+foreach ( array(
+			  'Wikibase\Repo\Database\FieldDefinition',
+			  'Wikibase\Repo\Database\MediaWikiQueryInterface',
+			  'Wikibase\Repo\Database\QueryInterface',
+			  'Wikibase\Repo\Database\TableBuilder',
+			  'Wikibase\Repo\Database\TableDefinition',
+		  ) as $class ) {
+
+	$wgAutoloadClasses[$class] = $dir . 'includes' . str_replace( '\\', '/', substr( $class, 13 ) ) . '.php';
+}
+
 if ( !class_exists( 'MessageReporter' ) ) {
 	$wgAutoloadClasses['MessageReporter'] = $dir . 'includes/MessageReporter.php';
 	$wgAutoloadClasses['ObservableMessageReporter'] = $dir . 'includes/MessageReporter.php';

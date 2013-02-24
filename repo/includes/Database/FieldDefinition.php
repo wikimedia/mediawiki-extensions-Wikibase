@@ -70,7 +70,7 @@ class FieldDefinition implements \Immutable {
 	/**
 	 * @since 0.4
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	private $index;
 
@@ -96,7 +96,7 @@ class FieldDefinition implements \Immutable {
 	 * @param mixed $default
 	 * @param string|null $attributes
 	 * @param boolean $null
-	 * @param string $index
+	 * @param string|null $index
 	 * @param boolean $autoIncrement
 	 *
 	 * @throws InvalidArgumentException
@@ -114,7 +114,7 @@ class FieldDefinition implements \Immutable {
 			throw new InvalidArgumentException( 'The $null parameter needs to be a boolean' );
 		}
 
-		if ( !is_string( $autoIncrement ) ) {
+		if ( !is_null( $index ) && !is_string( $index ) ) {
 			throw new InvalidArgumentException( 'The $index parameter needs to be a string' );
 		}
 
