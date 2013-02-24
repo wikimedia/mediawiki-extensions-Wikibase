@@ -45,6 +45,13 @@ $wgAutoloadClasses['SpecialEntityData'] 					= $dir . 'includes/specials/Special
 $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
 
+
+if ( !class_exists( 'MessageReporter' ) ) {
+	$wgAutoloadClasses['MessageReporter'] = $dir . 'includes/MessageReporter.php';
+	$wgAutoloadClasses['ObservableMessageReporter'] = $dir . 'includes/MessageReporter.php';
+}
+
+
 $wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Repo\Api\RemoveQualifiers';
 $wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Repo\Api\SetQualifier';
 $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
