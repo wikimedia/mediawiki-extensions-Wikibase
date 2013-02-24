@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DnRTyIpk",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-24T02:31:47Z",
+      "side": 1,
+      "message": "This should have a message for all types.",
+      "revId": "3a918d00ec9f721b4f4279627d3d62e7332f5f02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DndQsigQ",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-24T02:31:47Z",
+      "side": 1,
+      "message": "List possible types so it is possible to search for them.",
+      "revId": "3a918d00ec9f721b4f4279627d3d62e7332f5f02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
