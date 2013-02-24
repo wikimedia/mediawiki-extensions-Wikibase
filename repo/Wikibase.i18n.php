@@ -1026,6 +1026,7 @@ $messages['be-tarask'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'уласнае значэньне',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'невядомае значэньне',
 	'wikibase-snakview-snaktypeselector-novalue' => 'без значэньня',
+	'wikibase-entityselector-more' => 'болей',
 	'wikibase-anonymouseditwarning-item' => 'Папярэджаньне: Вы не ўвайшлі ў сыстэму.
 Ваш IP-адрас будзе запісаны ў гісторыі рэдагаваньняў гэтага аб’екту.',
 	'wikibase-anonymouseditwarning-property' => 'Папярэджаньне: Вы не ўвайшлі ў сыстэму.
@@ -1045,25 +1046,39 @@ $messages['be-tarask'] = array(
 	'wikibase-itemdisambiguation-lookup-language' => 'Мова:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Метка:',
 	'wikibase-itemdisambiguation-submit' => 'Шукаць',
+	'special-newproperty' => 'Стварыць новую ўласьцівасьць',
+	'wikibase-newproperty-fieldset' => 'Стварыць новую ўласьцівасьць',
 	'wikibase-newproperty-datatype' => 'Тып зьвестак:',
 	'wikibase-newproperty-invalid-datatype' => 'Пазначаны няслушны тып зьвестак',
 	'special-createitem' => 'Стварыць новы прадмет',
 	'wikibase-createitem-fieldset' => 'Стварыць новы прадмет',
+	'wikibase-createitem-site' => 'Сайт першай злучанай старонкі',
+	'wikibase-createitem-page' => 'Назва першай злучанай старонкі',
+	'wikibase-createitem-no-external-page' => 'Пазначаная старонка на адпаведным сайце ня знойдзеная.',
+	'wikibase-createitem-add-sitelink-failed' => 'Не ўдалося захаваць спасылку на сайт.',
+	'wikibase-createitem-not-recognized-siteid' => 'Ідэнтыфікатар сайта не распазнаны.',
 	'wikibase-createentity-label' => 'Метка:',
 	'wikibase-createentity-description' => 'Апісаньне:',
 	'wikibase-createentity-submit' => 'Стварыць',
 	'special-setlabel' => 'Вызначце метку',
 	'wikibase-setlabel-label' => 'Метка:',
 	'wikibase-setlabel-submit' => 'Вызначыць метку',
-	'wikibase-setentity-id' => 'Ідэнтыфікатар', # Fuzzy
-	'wikibase-setentity-language' => 'Мова', # Fuzzy
+	'special-setdescription' => 'Даданьне апісаньняў',
+	'wikibase-setdescription-label' => 'Апісаньне:',
+	'wikibase-setdescription-submit' => 'Дадаць апісаньне',
+	'wikibase-setentity-id' => 'Ідэнтыфікатар:',
+	'wikibase-setentity-language' => 'Мова:',
 	'wikibase-history-title-with-label' => '$2 ($1) — гісторыя зьменаў',
 	'wikibase-history-title-without-label' => '$1 — гісторыя зьменаў',
-	'special-entitieswithoutlabel' => 'Сьпіс тэмаў бязь метак', # Fuzzy
+	'special-entitieswithoutlabel' => 'Аб’екты бязь метак',
 	'wikibase-entitieswithoutlabel-label-language' => 'Мова:',
 	'wikibase-entitieswithoutlabel-submit' => 'Знайсьці',
+	'wikibase-entitieswithoutlabel-invalid-language' => '«$1» — няслушны код мовы.',
 	'wikibase-restoreold' => 'аднавіць',
 	'wikibase-item-summary-wbsetitem' => 'Створаны новы прадмет',
+	'wikibase-item-summary-wbeditentity-create' => 'Створаны новы аб’ект',
+	'wikibase-item-summary-wbeditentity-update' => 'Абноўлены аб’ект',
+	'wikibase-item-summary-wbeditentity-override' => 'Перавызначаны аб’ект',
 	'wikibase-item-summary-wbsetlabel-set' => 'Зьмененая метка для [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Выдаленая метка для [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Зьмененае апісаньне для [$2]',
@@ -1316,10 +1331,14 @@ $messages['cs'] = array(
 	'wikibase-undo-title' => 'Vrácení editace v „$1“ zpět',
 	'wikibase-restore-title' => 'Obnovení staré revize „$1“',
 	'wikibase-partial-undo' => 'Editaci lze částečně vrátit zpět.',
-	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|Změna byla vynechána|$ změny byly vynechány|změn bylo vynecháno}}, neboť příslušné  {{PLURAL:$1|hodnota|hodnoty}} se mezitím změnily.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1
+| změna byla vynechána, neboť příslušná hodnota se mezitím změnila
+| změny byly vynechány, neboť příslušné hodnoty se mezitím změnily
+| změn bylo vynecháno, neboť příslušné hodnoty se mezitím změnily
+}}.',
 	'wikibase-empty-undo' => 'Neexistuje nic, co by mohlo být vráceno zpět.',
 	'wikibase-undo-revision-error' => 'Vrácení editace zpět se nezdařilo',
-	'wikibase-undo-samerev' => 'Nelze vrátit zpět, stejné revize pro základ i cíl.',
+	'wikibase-undo-samerev' => 'Nelze vrátit zpět, stejné revize pro zdroj i cíl.',
 	'wikibase-undo-firstrev' => 'Nelze vrátit zpět vytvoření stránky',
 	'wikibase-propertyedittool-full' => 'Seznam hodnot je kompletní.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Jedna hodnota zatím nebyla uložena|$1 hodnoty zatím nebyly uloženy|$1 hodnot zatím nebylo uloženo}}',
@@ -1333,6 +1352,7 @@ $messages['cs'] = array(
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Jeden zdroj zatím nebyl uložen|$1 zdroje zatím nebyly uloženy|$1 zdrojů zatím nebylo uloženo}}',
 	'wikibase-snakview-property-input-placeholder' => 'vlastnost',
 	'wikibase-snakview-variations-somevalue-label' => 'neznámá hodnota',
+	'wikibase-entityselector-more' => 'více',
 	'wikibase-anonymouseditwarning-item' => 'Varování: Nejste přihlášen(a).
 Vaše IP adresa bude zaznamenána v historii úprav této položky.',
 	'wikibase-anonymouseditwarning-property' => 'Varování: Nejste přihlášen(a).
@@ -2291,6 +2311,7 @@ Su dirección IP quedará registrada en el historial de revisiones de esta propi
 	'wikibase-newproperty-fieldset' => 'Crear una nueva propiedad',
 	'wikibase-newproperty-datatype' => 'Tipo de dato:',
 	'special-createitem' => 'Crear un nuevo elemento',
+	'wikibase-createitem-summary' => '¡Asegúrate de [[Special:ItemByTitle|comprobar si el elemento ya existe]]!<br />Si eres nuev{{<includeonly>safesubst:</includeonly>GENDER:{{<includeonly>safesubst:</includeonly>#titleparts:{{<includeonly>safesubst:</includeonly>PAGENAME}}|1}}|o|a|o/a}} en el proyecto, entonces echa un vistazo a [[Help:Label/es|Label/es]] y [[Help:Description/es|Description/es]].',
 	'wikibase-createitem-fieldset' => 'Crear un nuevo elemento',
 	'wikibase-createitem-site' => 'Sitio de la primera página enlazada',
 	'wikibase-createitem-page' => 'Nombre de la primera página enlazada',
@@ -2934,6 +2955,7 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
  * @author DavidL
  * @author Dereckson
  * @author Gomoko
+ * @author Hazard-SJ
  * @author Hello71
  * @author Jean-Frédéric
  * @author Jitrixis
@@ -3047,7 +3069,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de la p
 	'wikibase-newproperty-datatype' => 'Type de données&nbsp;:',
 	'wikibase-newproperty-invalid-datatype' => 'Type de données spécifié non valide',
 	'special-createitem' => 'Créer un nouvel élément',
-	'wikibase-createitem-summary' => 'Assurez-vous que [[Special:ItemByTitle|l’élément n’existe pas déjà]] !<br />Vous devriez créer un [[Help:Label|libellé]] et une [[Help:Description|description]] pour tous les nouveaux éléments.',
+	'wikibase-createitem-summary' => 'Assurez-vous que [[Special:ItemByTitle|l’élément n’existe pas déjà]] !<br />Vous devriez créer un [[Help:Label/fr|libellé]] et une [[Help:Description/fr|description]] pour tous les nouveaux éléments.',
 	'wikibase-createitem-fieldset' => 'Créer un nouvel élément',
 	'wikibase-createitem-site' => 'Site de la première page liée',
 	'wikibase-createitem-page' => 'Nom de la première page liée',
@@ -4339,6 +4361,8 @@ $messages['ilo'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'naidumduma a pateg',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'di ammo a pateg',
 	'wikibase-snakview-snaktypeselector-novalue' => 'awan ti pateg',
+	'wikibase-shortcopyrightwarning' => 'Babaen ti panagpindut ti "$1", umannurotka kadagiti [[$2|termino ti panag-usar]], ken dika mawaswas nga umannurot a mangibbet kadagiti inparawadmo bababen ti $3.',
+	'wikibase-copyrighttooltip-acknowledge' => 'Awatek dagitoy a termino para kadagiti amin a masakbayan nga urnosek. Saanton nga iparang daytoy a mensahe.',
 	'wikibase-entityselector-more' => 'adu pay',
 	'wikibase-anonymouseditwarning-item' => "'''Ballaag:''' Saanka a nakastrek.
 Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a banag.",
@@ -4415,11 +4439,12 @@ Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a tagik
 	'wikibase-listdatatypes-intro' => 'Daytoy ket listaan a amina kita ti datos nga agdama nga inususar ti daytoy a pagikabilan:',
 	'wikibase-history-title-with-label' => 'Panagbalbaliw a pakasaritaan iti "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Panagbalbaliw a pakasaritaan iti ($1)',
-	'special-entitieswithoutlabel' => 'Listaan dagiti entidad nga awan ti etiketana',
+	'special-entitieswithoutlabel' => 'Listaan dagiti entidad nga awan ti etiketana', # Fuzzy
 	'wikibase-entitieswithoutlabel-legend' => 'Agala kadagiti entidad nga awan ti etiketana',
 	'wikibase-entitieswithoutlabel-label-language' => 'Pagsasao:',
 	'wikibase-entitieswithoutlabel-submit' => 'Biruken',
 	'wikibase-entitieswithoutlabel-invalid-language' => 'Ti "$1" ket saan nga umiso a kodigo ti pagsasao.',
+	'special-itemswithoutsitelinks' => 'Dagiti banag nga awan dagiti silpona ti sitio',
 	'special-entitydata' => 'Datos ti entidad',
 	'wikibase-entitydata-not-found' => 'Awan ti nabirukan nga entidad nga adda ti ID ti $1.',
 	'wikibase-entitydata-bad-revision' => 'Saam a mabalin nga ipakita ti panagbalbaliw ti $2 iti entidad ti $1.',
@@ -4455,6 +4480,9 @@ tapno birukem ti napananda.',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Nagpartuat {{PLURAL:$1|ti maysa a pateg ti panagtunton|kadagiti pateg ti panagtunton}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Nagpartuat {{PLURAL:$1|ti maysa nga awan pategna a panagtunton|kadagiti awan pategna a panagtunton}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Nagpartuat {{PLURAL:$1|ti adda bassit a pategna a panagtunton|kadagiti adda bassit a pategna a panagtunton}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim' => 'Nagpartuat ti {{PLURAL:$1|maysa a panagtunton|a panagtunton}}',
+	'wikibase-item-summary-wbsetclaimvalue' => 'Nangikabil ti {{PLURAL:$1|maysa a pateg ti panagtunton|a pateg ti panagtunton}}',
+	'wikibase-item-summary-wbremoveclaims' => 'Nagikkat ti {{PLURAL:$1|maysa a panagtunton|a panagtunton}}',
 	'wikibase-item-summary-special-create-item' => 'Nagpartuat ti [$2] ti banag iti {{PLURAL:$1|a pateg|a patpateg}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Nagpartuat ti baro a tagikua',
 	'wikibase-property-summary-wbeditentity-update' => 'Nagpabaro ti maysa a tagikua',
@@ -6067,11 +6095,12 @@ Alamat IP anda akan direkodkan dalam sejarah suntingan sifat ini.',
 	'wikibase-listdatatypes-intro' => 'Ini ialah senarai semua jenis data yang sedang digunakan dalam pemasangan ini:',
 	'wikibase-history-title-with-label' => 'Semakan sejarah "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Sejarah semakan ($1)',
-	'special-entitieswithoutlabel' => 'Senarai entiti tanpa label', # Fuzzy
+	'special-entitieswithoutlabel' => 'Entiti tanpa label',
 	'wikibase-entitieswithoutlabel-legend' => 'Dapatkan senarai entiti tanpa label',
 	'wikibase-entitieswithoutlabel-label-language' => 'Bahasa:',
 	'wikibase-entitieswithoutlabel-submit' => 'Cari',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" bukan kod bahasa yang sah.',
+	'special-itemswithoutsitelinks' => 'Perkara tanpa pautan tapak',
 	'special-entitydata' => 'Data entiti',
 	'wikibase-entitydata-not-found' => 'Tiada entiti dengan ID $1 dijumpai.',
 	'wikibase-entitydata-bad-revision' => 'Semakan $2 entiti $1 tidak boleh dipaparkan.',
@@ -6378,7 +6407,7 @@ for å finne ut hva som har skjedd.',
  */
 $messages['nl'] = array(
 	'wikibase-desc' => 'Repository voor gestructureerde gegevens',
-	'specialpages-group-wikibaserepo' => 'Wikidatarepository', # Fuzzy
+	'specialpages-group-wikibaserepo' => 'Wikibaserepository',
 	'wikibase-edit' => 'bewerken',
 	'wikibase-save' => 'opslaan',
 	'wikibase-cancel' => 'annuleren',
@@ -6511,11 +6540,12 @@ Uw IP-adres wordt opgenomen in de bewerkingsgeschiedenis van deze pagina.',
 	'wikibase-listdatatypes-intro' => 'Dit is een lijst met alle gegevenstypen die op dit moment in gebruik zijn in deze wiki:',
 	'wikibase-history-title-with-label' => '$2 ($1): versiegeschiedenis',
 	'wikibase-history-title-without-label' => '$1: versiegeschiedenis',
-	'special-entitieswithoutlabel' => 'Lijst met de entiteiten zonder label', # Fuzzy
+	'special-entitieswithoutlabel' => 'Entiteiten zonder label',
 	'wikibase-entitieswithoutlabel-legend' => 'Entiteiten zonder label opvragen',
 	'wikibase-entitieswithoutlabel-label-language' => 'Taal:',
 	'wikibase-entitieswithoutlabel-submit' => 'Zoeken',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" is geen geldige taalcode.',
+	'special-itemswithoutsitelinks' => 'Items zonder sitekoppelingen',
 	'special-entitydata' => 'Entiteitsgegevens',
 	'wikibase-entitydata-not-found' => 'Er is geen entiteit gevonden met het ID $1.',
 	'wikibase-entitydata-bad-revision' => 'Versie $2 van de entiteit $1 kan niet worden weergegeven.',
@@ -6547,9 +6577,10 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-item-summary-wbsetsitelink-set' => 'Sitespecifieke koppeling voor [$2] toegevoegd',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Sitespecifieke koppeling voor [$2] verwijderd',
 	'wikibase-item-summary-wblinktitles-connect' => "{{PLURAL:$1|Pagina|Pagina's}} gekoppeld [$2↔$3]",
-	'wikibase-item-summary-wbcreateclaim-value' => 'Waardeclaim{{PLURAL:$1||s}} aangemaakt', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-value' => 'Claim{{PLURAL:$1||s}} aangemaakt',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Claim{{PLURAL:$1||s}} zonder waarde aangemaakt', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Claim{{PLURAL:$1||s}} met waarde aangemaakt', # Fuzzy
+	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Claim|Claims}} verwijderd',
 	'wikibase-item-summary-special-create-item' => 'Item voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
 	'wikibase-property-summary-wbeditentity-create' => 'Nieuwe eigenschap aangemaakt',
 	'wikibase-property-summary-wbeditentity-update' => 'Eigenschap bijgewerkt',
