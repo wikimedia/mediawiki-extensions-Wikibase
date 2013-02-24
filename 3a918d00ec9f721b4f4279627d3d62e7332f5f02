@@ -33,6 +33,24 @@
       "revId": "3a918d00ec9f721b4f4279627d3d62e7332f5f02",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnX8QD08",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2013-02-24T12:34:48Z",
+      "side": 1,
+      "message": "I don\u0027t see exactly what you want to say, sorry :-(. Do you mean to list them in a PHP comment?",
+      "parentUuid": "DndQsigQ",
+      "revId": "3a918d00ec9f721b4f4279627d3d62e7332f5f02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
