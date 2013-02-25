@@ -96,10 +96,7 @@ Your IP address will be recorded in this property's edit history.",
 
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
-	'wikibase-warning-constraint-violation-length' => 'A length constraint is triggered for language code "$1".',
-	'wikibase-error-constraint-violation-label' => 'There is {{PLURAL:$1|a constraint|constraints}} violation for {{PLURAL:$1|label|labels}} "$3" for {{PLURAL:$1|language code|language codes}} "$2".',
-	'wikibase-error-constraint-violation-description' => 'There is {{PLURAL:$1|a constraint|constraints}} violation for {{PLURAL:$1|description|descriptions}} "$3" for {{PLURAL:$1|language code|language codes}} "$2".',
-	'wikibase-error-constraint-violation-aliases' => 'There is {{PLURAL:$1|a constraint|constraints}} violation for {{PLURAL:$1|alias|aliases}} "$3" for {{PLURAL:$1|language code|language codes}} "$2".',
+	'wikibase-constraint-violation' => 'A limit constraint is triggered for language code "$1.',
 
 	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Another property ($3) already has label "$1" associated with language code $2',
@@ -447,16 +444,8 @@ See also:
 	'wikibase-restrictionedit-tooltip-message' => 'When editing a page (a data item) is restricted for the current user, this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item.',
 	'wikibase-blockeduser-tooltip-message' => 'When the current user is blocked from editing a page (a data item), this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item or creating a new item.',
 	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|page]] and [[m:Wikidata/Glossary#item|item]].',
-	'wikibase-warning-constraint-violation-length' => 'A warning message that a length constraint is triggered. This will usually come together with a fatal error message.
+	'wikibase-constraint-violation' => 'A warning message that a length constraint is triggered. This will usually come together with a fatal error message.
 * $1 is the language code',
-	'wikibase-error-constraint-violation-label' => 'Error message shown when a user tries to save a multilabel label that has some constraint violation.
-* $1 is the count of violating languages
-* $2 is the violating languages
-* $3 is the violating string, but this is usually not very useful as the message is usually given in an edit window',
-	'wikibase-error-constraint-violation-description' => 'Error message shown when a user tries to save a multilabel description that has some constraint violation.
-* $1 is the count of violating languages
-* $2 is the violating languages
-* $3 is the violating string, but this is usually not very usefull as the message is usually given in an edit window',
 	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a site link already used by another item. Parameters:
 * $1 is the site id (interwiki prefix);
 * $2 is the title on the remote site;

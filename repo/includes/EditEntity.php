@@ -689,16 +689,7 @@ class EditEntity {
 			//XXX: havn't we calculated this diff already?
 			$itemDiff = $entity->getDiff( $this->getBaseContent()->getEntity() );
 		}
-		//XXX: ...else diff against an empty item?...
-
-		$multilangViolationDetector = new MultiLangConstraintDetector();
-		$multilangViolationDetector->addConstraintChecks(
-			$entity,
-			$this->status,
-			$itemDiff
-		);
-
-		if ( !$this->status->isOk() ) {
+		else {
 			return $this->status;
 		}
 
@@ -719,8 +710,8 @@ class EditEntity {
 				$entity,
 				$this->status,
 				StoreFactory::getStore()->newTermCache(),
-				$itemDiff === null ? null : $itemDiff->getLabelsDiff(),
-				$itemDiff === null ? null : $itemDiff->getDescriptionsDiff()
+				$itemDiff->getLabelsDiff(),
+				$itemDiff->getDescriptionsDiff()
 			);
 		}
 
