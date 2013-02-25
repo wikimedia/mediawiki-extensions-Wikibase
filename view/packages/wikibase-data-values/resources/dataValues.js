@@ -14,7 +14,7 @@
  * @since 0.1
  * @type Object
  */
-var dataValues = new( function( $, undefined ) {
+var dataValues = new( function Dv( $ ) {
 	'use strict';
 
 	var dvs = [];

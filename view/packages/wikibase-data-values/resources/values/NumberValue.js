@@ -6,7 +6,7 @@
  *
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( dv, $, undefined ) {
+( function( dv, $ ) {
 	'use strict';
 
 	var PARENT = dv.DataValue,
@@ -24,7 +24,7 @@
 	 *
 	 * @param {Number} value
 	 */
-	dv.NumberValue = dv.util.inherit( PARENT, constructor, {
+	dv.NumberValue = dv.util.inherit( 'DvNumberValue', PARENT, constructor, {
 		/**
 		 * @see dv.DataValue.getSortKey
 		 *

@@ -24,7 +24,7 @@ var PARENT = dv.DataValue,
  *
  * @param {String} value
  */
-dv.BoolValue = dv.util.inherit( PARENT, constructor, {
+dv.BoolValue = dv.util.inherit( 'DvBoolValue', PARENT, constructor, {
 
 	/**
 	 * @see dv.DataValue.getSortKey

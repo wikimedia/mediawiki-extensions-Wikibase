@@ -24,7 +24,7 @@
 	 *
 	 * @param {String} value
 	 */
-	dv.UnknownValue = dv.util.inherit( PARENT, constructor, {
+	dv.UnknownValue = dv.util.inherit( 'DvUnknownValue', PARENT, constructor, {
 
 		/**
 		 * @see dv.DataValue.getSortKey

@@ -15,7 +15,7 @@
  * @abstract
  * @since 0.1
  */
-dv.DataValue = function() {};
+dv.DataValue = function DvDataValue() {};
 dv.DataValue.prototype = {
 
 	/**
