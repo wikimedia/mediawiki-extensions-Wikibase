@@ -46,6 +46,16 @@ class ApiSetAliases extends ApiModifyEntity {
 		if ( !( ( isset( $params['add'] ) || isset( $params['remove'] ) ) XOR isset( $params['set'] ) ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-aliases-invalid-list' )->text(), 'aliases-invalid-list' );
 		}
+		foreach ( array( 'add', 'set' ) as $operation ) {
+			if ( !isset( $params['add'] ) ) {
+				continue;
+			}
+			foreach ( $params[$operation] as $alias ) {
+				if ( mb_strlen( $alias ) > Settings::get( 'multilang-limit' ) ) {
+					$this->dieUsage( $this->msg( 'wikibase-constraint-violation', $params['language'] )->text(), 'constraint-violation' );
+				}
+			}
+		}
 	}
 
 	/**
