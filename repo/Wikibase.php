@@ -228,29 +228,29 @@ $wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
 
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
+$wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
-$wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
-$wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
-$wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
-$wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
 $wgSpecialPages['ItemsWithoutSitelinks']		= 'SpecialItemsWithoutSitelinks';
-$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
+$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
+$wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
+$wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
+$wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
 
 
 // Special page groups
 $wgSpecialPageGroups['CreateItem']					= 'wikibaserepo';
-$wgSpecialPageGroups['NewProperty']					= 'wikibaserepo';
-$wgSpecialPageGroups['ItemByTitle']					= 'wikibaserepo';
-$wgSpecialPageGroups['ItemDisambiguation']			= 'wikibaserepo';
-$wgSpecialPageGroups['SetLabel']					= 'wikibaserepo';
-$wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
-$wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
 $wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
 $wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
+$wgSpecialPageGroups['ItemByTitle']					= 'wikibaserepo';
+$wgSpecialPageGroups['ItemDisambiguation']			= 'wikibaserepo';
 $wgSpecialPageGroups['ItemsWithoutSitelinks']		= 'wikibaserepo';
 $wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
+$wgSpecialPageGroups['NewProperty']					= 'wikibaserepo';
+$wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
+$wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
+$wgSpecialPageGroups['SetLabel']					= 'wikibaserepo';
 
 
 // Hooks
