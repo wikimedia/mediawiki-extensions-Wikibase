@@ -96,6 +96,10 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'content/QueryContent',
 		'content/QueryHandler',
 
+		'Database/FieldDefinition',
+		'Database/TableBuilder',
+		'Database/TableDefinition',
+
 		'specials/SpecialEntityData',
 
 	);
