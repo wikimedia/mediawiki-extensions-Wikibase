@@ -32,10 +32,13 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	/**
 	 * Constructor.
 	 *
+	 * @ see SpecialItemResolver::__construct
+	 *
 	 * @since 0.1
 	 */
 	public function __construct() {
-		parent::__construct( 'ItemByTitle' );
+		// args $name, $restriction, $listed
+		parent::__construct( 'ItemByTitle', '', true );
 	}
 
 	/**
