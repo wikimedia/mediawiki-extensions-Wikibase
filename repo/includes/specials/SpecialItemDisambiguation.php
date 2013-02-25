@@ -34,10 +34,13 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	/**
 	 * Constructor.
 	 *
+	 * @ see SpecialItemResolver::__construct
+	 *
 	 * @since 0.1
 	 */
 	public function __construct() {
-		parent::__construct( 'ItemDisambiguation' );
+		// args $name, $restriction, $listed
+		parent::__construct( 'ItemDisambiguation', '', true );
 	}
 
 	/**
