@@ -14,13 +14,13 @@
  * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Statements
  *
  * @param {wb.Snak} mainSnak
- * @param {wb.Snak[]} [qualifiers]
+ * @param {wb.SnakList|null} [qualifiers]
  * @param {String|null} [guid] The Global Unique Identifier of this Claim. Can be omitted or null
  *        if this is a new Claim, not yet stored in the database and associated with some entity.
  */
 wb.Claim = function WbClaim( mainSnak, qualifiers, guid ) {
 	this.setMainSnak( mainSnak );
-	this.setQualifiers( qualifiers || [] );
+	this.setQualifiers( qualifiers || new wb.SnakList() );
 	this._guid = guid || null;
 };
 
@@ -74,9 +74,9 @@ wb.Claim.prototype = {
 	},
 
 	/**
-	 * Returns all qualifiers as an array of Snaks.
+	 * Returns all qualifiers as a wb.SnakList object.
 	 *
-	 * @return wb.Snak[]
+	 * @return wb.SnakList
 	 */
 	getQualifiers: function() {
 		return this._qualifiers;
@@ -85,11 +85,11 @@ wb.Claim.prototype = {
 	/**
 	 * Overwrites the current set of qualifiers.
 	 *
-	 * @param {wb.Snak[]} qualifiers
+	 * @param {wb.SnakList} qualifiers
 	 */
 	setQualifiers: function( qualifiers ) {
-		if( !$.isArray( qualifiers ) ) {
-			throw new Error( 'Qualifiers have to be an array of snaks' );
+		if( !( qualifiers instanceof wb.SnakList ) ) {
+			throw new Error( 'Qualifiers have to be a wb.SnakList object' );
 		}
 		this._qualifiers = qualifiers;
 	}
@@ -103,7 +103,7 @@ wb.Claim.prototype = {
  */
 wb.Claim.newFromJSON = function( json ) {
 	var mainSnak = wb.Snak.newFromJSON( json.mainsnak ),
-		qualifiers = [],
+		qualifiers = new wb.SnakList(),
 		references = [],
 		rank,
 		guid,
@@ -111,7 +111,7 @@ wb.Claim.newFromJSON = function( json ) {
 
 	if ( json.qualifiers !== undefined ) {
 		$.each( json.qualifiers, function( i, qualifier ) {
-			qualifiers.push( wb.Snak.newFromJSON( qualifier ) );
+			qualifiers.addSnak( wb.Snak.newFromJSON( qualifier ) );
 		} );
 	}
 
