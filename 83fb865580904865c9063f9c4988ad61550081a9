@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DncSDs84",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-02-25T19:57:11Z",
+      "side": 0,
+      "message": "No need to remove qqq. Also would reduce merge conflict risk.",
+      "revId": "83fb865580904865c9063f9c4988ad61550081a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
