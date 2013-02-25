@@ -155,7 +155,6 @@ final class RepoHooks {
 			'ItemView',
 			'LabelDescriptionDuplicateDetector',
 			'LazyDBConnectionProvider',
-			'MultiLangConstraintDetector',
 			'NamespaceUtils',
 
 			'actions/EditEntityAction',

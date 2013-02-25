@@ -25,9 +25,9 @@ abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 	protected function validateParameters( array $params ) {
 		parent::validateParameters( $params );
 
-		// Note that language should always exist as a prerequisite for this
-		// call to succeede. The param value will not always exist because
-		// that signals a label to remove.
+		if ( isset( $params['language'] ) && mb_strlen( $params['value'] ) > Settings::get( 'multilang-limit' ) ) {
+			$this->dieUsage( $this->msg( 'wikibase-constraint-violation', $params['language'] )->text(), 'constraint-violation' );
+		}
 	}
 
 	/**
