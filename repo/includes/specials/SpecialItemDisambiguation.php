@@ -37,7 +37,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @since 0.1
 	 */
 	public function __construct() {
-		parent::__construct( 'ItemDisambiguation' );
+		parent::__construct( 'ItemDisambiguation', '', true );
 	}
 
 	/**

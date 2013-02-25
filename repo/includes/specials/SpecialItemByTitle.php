@@ -35,7 +35,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 * @since 0.1
 	 */
 	public function __construct() {
-		parent::__construct( 'ItemByTitle' );
+		parent::__construct( 'ItemByTitle', '', true );
 	}
 
 	/**

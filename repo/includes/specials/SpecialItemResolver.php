@@ -37,8 +37,8 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	 *
 	 * @param string $name
 	 */
-	public function __construct( $name ) {
-		parent::__construct( $name, '', false );
+	public function __construct( $name, $restricted, $listed ) {
+		parent::__construct( $name, $restricted, $listed );
 	}
 
 	/**
