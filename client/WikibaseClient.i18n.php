@@ -198,6 +198,25 @@ $messages['be-tarask'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Паказваць праўкі Вікізьвестак у сьпісе апошніх зьменаў',
 );
 
+/** Bulgarian (български)
+ * @author Spiritia
+ */
+$messages['bg'] = array(
+	'wikibase-after-page-move' => 'Можете да [$1 актуализирате] свързания обект от Уикиданните с цел поддръжка на междуезиковите препратки към преместената страница.',
+	'wikibase-comment-remove' => 'Асоциираният обект от Уикиданните е изтрит. Междуезиковите препратки са премахнати.',
+	'wikibase-comment-sitelink-add' => 'Добавена междуезикова препратка: $1',
+	'wikibase-comment-sitelink-change' => 'Променена междуезикова препратка: от $1 на $2',
+	'wikibase-comment-sitelink-remove' => 'Премахната междуезикова препратка: $1',
+	'wikibase-editlinkstitle' => 'Редактиране на междуезиковите препратки',
+	'wikibase-linkitem-failure' => 'При опита за свързване с дадената страница възникна неизвестна грешка.',
+	'wikibase-linkitem-selectlink' => 'Изберете сайта и страницата от него, с която искате да свържете тази.',
+	'wikibase-linkitem-input-site' => 'Език:',
+	'wikibase-linkitem-input-page' => 'Страница:',
+	'wikibase-linkitem-invalidsite' => 'Избран е неизвестен или невалиден сайт',
+	'wikibase-linkitem-confirmitem-text' => 'Избраната страница е вече свързана с [$1 обект от нашето централно хранилище с данни]. Потвърдете, ако страниците, показани по-долу, са онези, които искате да свържете с тази страница.',
+	'wikibase-linkitem-not-loggedin-title' => 'Трябва да сте влезли в системата',
+);
+
 /** Bengali (বাংলা)
  * @author Sankarshan
  */
@@ -1314,6 +1333,7 @@ $messages['ru'] = array(
 	'wikibase-comment-sitelink-add' => 'Интервики-ссылка добавлена: $1.',
 	'wikibase-comment-sitelink-change' => 'Интервики-ссылка изменена с $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Интервики-ссылка удалена: $1',
+	'wikibase-nolanglinks' => 'нет',
 	'wikibase-editlinks' => 'Править ссылки',
 	'wikibase-editlinkstitle' => 'Править межъязыковые ссылки',
 	'wikibase-linkitem-addlinks' => 'Добавить ссылки',
