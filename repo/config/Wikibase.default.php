@@ -71,5 +71,6 @@ $wgWBRepoSettings['entityNamespaces'] = array();
 $wgWBRepoSettings['multilang-limits'] = array(
 	'length' => 250,
 );
+$wgWBRepoSettings['multilang-limit'] = 250;
 
 $wgWBRepoSettings['multilang-truncate-length'] = 32;
