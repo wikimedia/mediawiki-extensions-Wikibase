@@ -2,11 +2,12 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Wikibase\Repo\Query\QueryStore;
-use Wikibase\Repo\Database\TableDefinition;
+use Ask\Language\Query;
+use Wikibase\Repo\Query\QueryEngineResult;
+use Wikibase\Repo\Query\QueryEngine;
 
 /**
- * Simple query store for relational SQL databases.
+ * Simple query engine that works on top of the SQLStore.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,37 +32,23 @@ use Wikibase\Repo\Database\TableDefinition;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Store implements QueryStore {
-
-	private $tablePrefix;
-
-	private $dvHandlers;
-
-	public function __construct( $tablePrefix, array $dataValueHandlers ) {
-		$this->tablePrefix = $tablePrefix;
-		$this->dvHandlers = $dataValueHandlers;
-	}
-
-	/**
-	 * @since wd.qe
-	 *
-	 * @return TableDefinition
-	 */
-	public function getTables() {
-		return array();
-	}
-
-	/**
-	 * @see QueryStore::getName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return 'Wikibase SQL store';
-	}
+class Engine implements QueryEngine {
 
 	// TODO
+
+	public function __construct() {
+		// TODO
+	}
+
+	/**
+	 * @see QueryEngine::runQuery
+	 *
+	 * @param Query $query
+	 *
+	 * @return QueryEngineResult
+	 */
+	public function runQuery( Query $query ) {
+		// TODO
+	}
 
 }
