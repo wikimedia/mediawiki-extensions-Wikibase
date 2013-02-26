@@ -31,10 +31,13 @@ namespace Wikibase\Repo\Query;
 class QueryEngineResult {
 
 	/**
+	 * @since wd.qe
+	 *
 	 * @return QueryResult
 	 */
 	public function getQueryResult() {
-
+		// TODO
+		return new QueryResult();
 	}
 
 }

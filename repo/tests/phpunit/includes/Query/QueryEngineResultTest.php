@@ -36,6 +36,36 @@ use Wikibase\Repo\Query\QueryEngineResult;
  */
 class QueryEngineResultTest extends \MediaWikiTestCase {
 
-	// TODO
+	/**
+	 * @since wd.qe
+	 *
+	 * @return QueryEngineResult[]
+	 */
+	protected function getInstances() {
+		$instances = array();
+
+		$instances[] = new QueryEngineResult();
+
+		return $instances;
+	}
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @return QueryEngineResult[][]
+	 */
+	public function instanceProvider() {
+		return $this->arrayWrap( $this->getInstances() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param QueryEngineResult $engineResult
+	 */
+	public function testGetResultReturnType( QueryEngineResult $engineResult ) {
+		// TODO: switch type check to real object
+		$this->assertInstanceOf( 'Wikibase\Repo\Query\QueryResult', $engineResult->getQueryResult() );
+	}
 
 }
