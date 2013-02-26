@@ -36,6 +36,42 @@ use Wikibase\Repo\Query\SQLStore\Setup;
  */
 class SetupTest extends \MediaWikiTestCase {
 
-	// TODO
+	/**
+	 * @since wd.qe
+	 *
+	 * @return Setup[]
+	 */
+	protected function getInstances() {
+		$instances = array();
+
+		$instances[] = new Setup(
+			new \Wikibase\Repo\Query\SQLStore\Store( 'foo', array() ),
+			new \Wikibase\Repo\Database\TableBuilder( new \Wikibase\Repo\Database\ObservableQueryInterface() )
+		);
+
+		return $instances;
+	}
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @return Setup[][]
+	 */
+	public function instanceProvider() {
+		return $this->arrayWrap( $this->getInstances() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param Setup $storeSetup
+	 */
+	public function testExecutionOfRun( Setup $storeSetup ) {
+		$storeSetup->run();
+
+		$this->assertTrue( true );
+	}
+
+	// TODO: add more detailed tests
 
 }
