@@ -37,6 +37,15 @@ use Wikibase\Repo\Test\Query\QueryEngineTest;
  */
 class EngineTest extends QueryEngineTest {
 
-	// TODO
+	/**
+	 * @see QueryEngineTest::getInstances
+	 */
+	protected function getInstances() {
+		$instances = array();
+
+		$instances[] = new Engine();
+
+		return $instances;
+	}
 
 }
