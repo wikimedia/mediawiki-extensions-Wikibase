@@ -46,33 +46,45 @@ $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryC
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
 
 
+$classes = array(
+	'Wikibase\Repo\Database\FieldDefinition',
+	'Wikibase\Repo\Database\MediaWikiQueryInterface',
+	'Wikibase\Repo\Database\QueryInterface',
+	'Wikibase\Repo\Database\TableBuilder',
+	'Wikibase\Repo\Database\TableDefinition',
 
-foreach ( array(
-			  'Wikibase\Repo\Database\FieldDefinition',
-			  'Wikibase\Repo\Database\MediaWikiQueryInterface',
-			  'Wikibase\Repo\Database\QueryInterface',
-			  'Wikibase\Repo\Database\TableBuilder',
-			  'Wikibase\Repo\Database\TableDefinition',
+	'Wikibase\Repo\Query\QueryEngine',
+	'Wikibase\Repo\Query\QueryEngineResult',
+	'Wikibase\Repo\Query\QueryResult',
+	'Wikibase\Repo\Query\QueryStore',
 
-			  'Wikibase\Repo\Query\QueryEngine',
-			  'Wikibase\Repo\Query\QueryEngineResult',
-			  'Wikibase\Repo\Query\QueryResult',
-			  'Wikibase\Repo\Query\QueryStore',
+	'Wikibase\Repo\Query\SQLStore\DataValueHandler',
+	'Wikibase\Repo\Query\SQLStore\Engine',
+	'Wikibase\Repo\Query\SQLStore\Setup',
+	'Wikibase\Repo\Query\SQLStore\Store',
+);
 
-			  'Wikibase\Repo\Query\SQLStore\DataValueHandler',
-			  'Wikibase\Repo\Query\SQLStore\Engine',
-			  'Wikibase\Repo\Query\SQLStore\Setup',
-			  'Wikibase\Repo\Query\SQLStore\Store',
-		  ) as $class ) {
-
+foreach ( $classes as $class ) {
+	// This enforces partial PSR-0 compliance
 	$wgAutoloadClasses[$class] = $dir . 'includes' . str_replace( '\\', '/', substr( $class, 13 ) ) . '.php';
 }
+
+unset( $classes );
 
 if ( !class_exists( 'MessageReporter' ) ) {
 	$wgAutoloadClasses['MessageReporter'] = $dir . 'includes/MessageReporter.php';
 	$wgAutoloadClasses['ObservableMessageReporter'] = $dir . 'includes/MessageReporter.php';
 }
 
+if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+	$wgAutoloadClasses['Wikibase\Repo\Test\Query\QueryEngineTest']
+		= $dir . 'tests/phpunit/includes/Query/QueryEngineTest.php';
+
+	$wgAutoloadClasses['Wikibase\Repo\Test\Query\QueryStoreTest']
+		= $dir . 'tests/phpunit/includes/Query/QueryStoreTest.php';
+}
+
+unset( $dir );
 
 $wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Repo\Api\RemoveQualifiers';
 $wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Repo\Api\SetQualifier';
@@ -82,8 +94,6 @@ $wgAPIModules['wbsetclaim'] 						= 'Wikibase\Repo\Api\SetClaim';
 $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
-
-unset( $dir );
 
 /**
  * Hook to add PHPUnit test cases.
@@ -109,6 +119,12 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'Database/FieldDefinition',
 		'Database/TableBuilder',
 		'Database/TableDefinition',
+
+		'Query/QueryEngineResult',
+
+		'Query/SQLStore/Engine',
+		'Query/SQLStore/Setup',
+		'Query/SQLStore/Store',
 
 		'specials/SpecialEntityData',
 

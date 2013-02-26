@@ -6,7 +6,7 @@ use Wikibase\Repo\Database\FieldDefinition;
 use Wikibase\Repo\Database\TableDefinition;
 
 /**
- * Unit test Wikibase\Repo\Database\TableDefinition class.
+ * Unit tests for the Wikibase\Repo\Database\TableDefinition class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ use Wikibase\Repo\Database\TableDefinition;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.4
+ * @since wd.db
  *
  * @ingroup WikibaseRepoTest
  *
