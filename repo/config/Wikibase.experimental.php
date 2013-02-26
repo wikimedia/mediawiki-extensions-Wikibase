@@ -53,6 +53,16 @@ foreach ( array(
 			  'Wikibase\Repo\Database\QueryInterface',
 			  'Wikibase\Repo\Database\TableBuilder',
 			  'Wikibase\Repo\Database\TableDefinition',
+
+			  'Wikibase\Repo\Query\QueryEngine',
+			  'Wikibase\Repo\Query\QueryEngineResult',
+			  'Wikibase\Repo\Query\QueryResult',
+			  'Wikibase\Repo\Query\QueryStore',
+
+			  'Wikibase\Repo\Query\SQLStore\DataValueHandler',
+			  'Wikibase\Repo\Query\SQLStore\Engine',
+			  'Wikibase\Repo\Query\SQLStore\Setup',
+			  'Wikibase\Repo\Query\SQLStore\Store',
 		  ) as $class ) {
 
 	$wgAutoloadClasses[$class] = $dir . 'includes' . str_replace( '\\', '/', substr( $class, 13 ) ) . '.php';
