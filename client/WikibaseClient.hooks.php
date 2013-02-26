@@ -607,7 +607,6 @@ final class ClientHooks {
 				// Placeholder in case the page doesn't have any langlinks yet
 				// self::onBeforePageDisplay adds the JavaScript module which will overwrite this with a link
 				$template->data['language_urls'][] = array(
-					'href' => ClientUtils::repoArticleUrl( "Special:CreateItem/$siteId/$titleText" ),
 					'text' => wfMessage( 'parentheses', wfMessage( 'wikibase-nolanglinks' )->escaped() ),
 					'id' => 'wbc-linkToItem',
 					'class' => 'wbc-editpage',
