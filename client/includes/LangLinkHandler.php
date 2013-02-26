@@ -117,7 +117,7 @@ class LangLinkHandler {
 
 		// use repoLinks in only the namespaces specified in settings
 		if ( in_array( $title->getNamespace(), $this->namespaces ) ) {
-			$nel = self::getNoExternalLangLinks( $out );
+			$nel = $this->getNoExternalLangLinks( $out );
 
 			if( in_array( '*', $nel ) ) {
 				wfProfileOut( __METHOD__ );
@@ -151,7 +151,7 @@ class LangLinkHandler {
 	public function suppressRepoLinks( ParserOutput $out, $repoLinks ) {
 		wfProfileIn( __METHOD__ );
 
-		$nel = self::getNoExternalLangLinks( $out );
+		$nel = $this->getNoExternalLangLinks( $out );
 
 		foreach ( $nel as $code ) {
 			$site = $this->getSiteByNavigationId( $code );
@@ -179,7 +179,7 @@ class LangLinkHandler {
 	 * @return Array A list of language codes, identifying which repository links to ignore.
 	 *         Empty if {{#noexternallanglinks}} was not used on the page.
 	 */
-	public static function getNoExternalLangLinks( ParserOutput $out ) {
+	public function getNoExternalLangLinks( ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
 		$nel = $out->getProperty( 'noexternallanglinks' );
 
@@ -202,7 +202,7 @@ class LangLinkHandler {
 	 * @param \ParserOutput $out
 	 * @param array $noexternallanglinks a list of languages to suppress
 	 */
-	public static function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
+	public function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
 		wfProfileIn( __METHOD__ );
 		$out->setProperty( 'noexternallanglinks', serialize( $noexternallanglinks )  );
 		wfProfileOut( __METHOD__ );
