@@ -126,6 +126,12 @@
 				// actual initialization
 				new wb.ui.SiteLinksEditTool( $( this ) );
 			} );
+
+			// BUILD TOOLBARS
+			$( '.wb-entity' ).toolbarcontroller(
+				{ addtoolbar: ['claimlistview', 'listview', 'claimsection'] },
+				{ edittoolbar: ['statementview', 'referenceview'] }
+			);
 		}
 
 		// handle edit restrictions
