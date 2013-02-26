@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "DnbOJGyc",
+        "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-02-26T15:40:27Z",
+      "side": 1,
+      "message": "references have no ids, only hashes. and the hash will change every time you modify the reference. nothing we can do about that right now.",
+      "parentUuid": "DlxSLNSI",
+      "revId": "84d828924b604eba67084d3e5a9dd4cf59f0be30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dl-SmacM",
         "filename": "lib/includes/claim/ClaimDifferenceVisualizer.php",
         "patchSetId": 1
