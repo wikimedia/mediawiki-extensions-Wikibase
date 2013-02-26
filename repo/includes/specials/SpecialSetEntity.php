@@ -208,7 +208,7 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 			$id = $entityContent ? $entityContent->getTitle()->getText() : '';
 			$value = $this->getValue( $entityContent, $language ? $language : $this->getLanguage()->getCode() );
 			$this->getOutput()->addHTML(
-				Html::element(
+				Html::rawElement(
 					'p',
 					array(),
 					$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->text()
