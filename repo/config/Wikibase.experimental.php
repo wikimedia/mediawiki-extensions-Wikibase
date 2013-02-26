@@ -122,6 +122,7 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 
 		'Query/QueryEngineResult',
 
+		'Query/SQLStore/DataValueHandler',
 		'Query/SQLStore/Engine',
 		'Query/SQLStore/Setup',
 		'Query/SQLStore/Store',
