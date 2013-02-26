@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Test\Database;
 use Wikibase\Repo\Database\TableBuilder;
 use Wikibase\Repo\Database\FieldDefinition;
 use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Repo\Database\ObservableQueryInterface;
+use NullMessageReporter;
 
 /**
  * Unit tests for the Wikibase\Repo\Database\TableBuilder class.
@@ -78,59 +80,6 @@ class TableBuilderTest extends \MediaWikiTestCase {
 
 		$builder->createTable( $table );
 		$this->assertEquals( 1, $callCount );
-	}
-
-}
-
-use Wikibase\Repo\Database\QueryInterface;
-
-class ObservableQueryInterface implements QueryInterface {
-
-	/**
-	 * @var callable[]
-	 */
-	private $callbacks = array();
-
-	/**
-	 * @param string $method
-	 * @param callable $callback
-	 */
-	public function registerCallback( $method, $callback ) {
-		$this->callbacks[$method] = $callback;
-	}
-
-	private function runCallbacks( $method, $args ) {
-		if ( array_key_exists( $method, $this->callbacks ) ) {
-			call_user_func_array( $this->callbacks[$method], $args );
-		}
-	}
-
-	/**
-	 * @see QueryInterface::tableExists
-	 *
-	 * @param string $tableName
-	 *
-	 * @return boolean
-	 */
-	public function tableExists( $tableName ) {
-		$this->runCallbacks( __FUNCTION__, func_get_args() );
-	}
-
-}
-
-use MessageReporter;
-
-class NullMessageReporter implements MessageReporter {
-
-	/**
-	 * @see MessageReporter::reportMessage
-	 *
-	 * @since wd.db
-	 *
-	 * @param string $message
-	 */
-	public function reportMessage( $message ) {
-		// no-op
 	}
 
 }
