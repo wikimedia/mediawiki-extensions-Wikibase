@@ -182,10 +182,14 @@ $specialPageAliases['vi'] = array(
 	'EntityData' => array( 'Dữ_liệu_thực_thể' ),
 	'CreateItem' => array( 'Tạo_khoản_mục' ),
 	'NewProperty' => array( 'Thuộc_tính_mới' ),
+	'ItemByTitle' => array( 'Khoản_mục_theo_tên' ),
 	'ItemDisambiguation' => array( 'Định_hướng_khoản_mục' ),
 	'ListDatatypes' => array( 'Danh_sách_kiểu_dữ_liệu' ),
 	'SetLabel' => array( 'Đặt_nhãn' ),
+	'SetDescription' => array( 'Đặt_miêu_tả', 'Đặt_mô_tả' ),
+	'SetAliases' => array( 'Đặt_tên_khác' ),
 	'EntitiesWithoutLabel' => array( 'Thực_thể_không_nhãn' ),
+	'ItemsWithoutSitelinks' => array( 'Khoản_mục_không_có_liên_kết_site' ),
 );
 
 /** Simplified Chinese (中文（简体）‎) */
