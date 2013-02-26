@@ -318,6 +318,16 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.wikibase.toolbarcontroller' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase./jquery.wikibase.toolbarcontroller.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.addtoolbar',
+				'jquery.wikibase.edittoolbar',
+			)
+		),
+
 		'jquery.wikibase.addtoolbar' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.addtoolbar.js',
@@ -390,7 +400,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
-				'jquery.wikibase.edittoolbar',
+				'jquery.wikibase.toolbarcontroller',
 			)
 		),
 
@@ -451,6 +461,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.claimview',
+				'jquery.wikibase.toolbarcontroller',
 			)
 		),
 
@@ -459,10 +470,10 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.statementview.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.addtoolbar',
 				'jquery.wikibase.claimview',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.referenceview',
+				'jquery.wikibase.toolbarcontroller',
 				'wikibase.utilities',
 			),
 			'messages' => array(
@@ -478,7 +489,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.claimview',
-				'jquery.wikibase.edittoolbar',
+				'jquery.wikibase.toolbarcontroller',
 				'wikibase.templates',
 			),
 			'messages' => array(
@@ -491,9 +502,9 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.entityview.js'
 			),
 			'dependencies' => array(
-				'jquery.wikibase.addtoolbar',
 				'jquery.wikibase.statementview',
 				'jquery.wikibase.claimlistview',
+				'jquery.wikibase.toolbarcontroller',
 				'wikibase.templates'
 			),
 			'messages' => array(
