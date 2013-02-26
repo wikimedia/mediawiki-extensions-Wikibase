@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Test\Query;
 
+use Wikibase\Repo\Query\QueryStore;
+
 /**
  * Base test class for Wikibase\Repo\Query\QueryStore implementing classes.
  *
@@ -30,6 +32,29 @@ namespace Wikibase\Repo\Test\Query;
  */
 abstract class QueryStoreTest extends \MediaWikiTestCase {
 
-	// TODO
+	/**
+	 * @since wd.qe
+	 *
+	 * @return QueryStore[]
+	 */
+	protected abstract function getInstances();
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @return QueryStore[][]
+	 */
+	public function instanceProvider() {
+		return $this->arrayWrap( $this->getInstances() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param QueryStore $queryStore
+	 */
+	public function testGetNameReturnType( QueryStore $queryStore ) {
+		$this->assertInternalType( 'string', $queryStore->getName() );
+	}
 
 }
