@@ -141,8 +141,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 	protected function makeParserOutput( $langlinks, $noexternallanglinks = array() ) {
 		$out = new \ParserOutput();
-
-		LangLinkHandler::setNoExternalLangLinks( $out, $noexternallanglinks );
+		$this->langLinkHandler->setNoExternalLangLinks( $out, $noexternallanglinks );
 
 		foreach ( $langlinks as $lang => $link ) {
 			$out->addLanguageLink( "$lang:$link" );
@@ -156,8 +155,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 */
 	public function testGetNoExternalLangLinks( $noexternallanglinks ) {
 		$out = $this->makeParserOutput( array(), $noexternallanglinks );
-
-		$nel = LangLinkHandler::getNoExternalLangLinks( $out );
+		$nel = $this->langLinkHandler->getNoExternalLangLinks( $out );
 
 		$this->assertEquals( $noexternallanglinks, $nel );
 	}

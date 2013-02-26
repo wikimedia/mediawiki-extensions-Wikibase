@@ -71,9 +71,16 @@ class NoLangLinkHandler {
 		array_shift( $langs );
 
 		$out = $parser->getOutput();
-		$nel = LangLinkHandler::getNoExternalLangLinks( $out );
+		$langLinkHandler = new LanguageLinkHandler(
+			Settings::get( 'siteGlobalID' ),
+			Settings::get( 'namespaces' ),
+			ClientStoreFactory::getStore()->newSiteLinkTable(),
+			\Sites::singleton()
+		);
+
+		$nel = $langLinkHandler->getNoExternalLangLinks( $out );
 		$nel += $langs;
-		LangLinkHandler::setNoExternalLangLinks( $out, $nel );
+		$langLinkHandler->setNoExternalLangLinks( $out, $nel );
 
 		return "";
 	}
