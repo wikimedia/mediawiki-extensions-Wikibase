@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use SiteStore;
+use Sites;
 use Site;
 use Title;
 use ParserOutput;
@@ -80,18 +81,21 @@ class LangLinkHandler {
 		wfProfileIn( __METHOD__ );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking for sitelinks defined by the corresponding item on the wikibase repo." );
 
-		$itemId = $this->siteLinksLookup->getItemIdForLink(
-			$this->siteId,
-			$title->getFullText()
-		);
+		$links = array();
 
-		$links =  array();
+		$site = $this->sites->getSite( $this->siteId );
 
-		if ( $itemId !== false ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $title->getFullText() . " is " . $itemId );
+		if ( $site === null ) {
+			wfWarn( 'Site not found for ' . $this->siteId );
+			return $links;
+		}
 
-			$links = $this->siteLinksLookup->getSiteLinksForItem(
-				new EntityId( Item::ENTITY_TYPE, $itemId ) );
+		$siteLink = new SiteLink( $site, $title->getFullText() );
+		$itemId = $this->siteLinksLookup->getEntityIdForSiteLink( $siteLink );
+
+		if ( $itemId instanceof EntityId ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $title->getFullText() . " is " . $itemId->getPrefixedId() );
+			$links = $this->siteLinksLookup->getSiteLinksForItem( $itemId );
 		} else {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": No corresponding item found for " . $title->getFullText() );
 		}
@@ -124,7 +128,7 @@ class LangLinkHandler {
 		);
 
 		// use repoLinks in only the namespaces specified in settings
-		if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+		if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) === true ) {
 			$nel = self::getNoExternalLangLinks( $out );
 
 			if( in_array( '*', $nel ) ) {
@@ -203,7 +207,7 @@ class LangLinkHandler {
 	 */
 	public function getNoExternalLangLinks( ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
-		$nel = $out->getProperty( 'noexternallanglinks' );
+		$nel = unserialize( $out->getProperty( 'noexternallanglinks' ) );
 
 		if( empty( $nel ) ) {
 			$nel = array();
@@ -224,7 +228,7 @@ class LangLinkHandler {
 	 */
 	public function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
 		wfProfileIn( __METHOD__ );
-		$out->setProperty( 'noexternallanglinks', $noexternallanglinks );
+		$out->setProperty( 'noexternallanglinks', serialize( $noexternallanglinks ) );
 		wfProfileOut( __METHOD__ );
 	}
 
@@ -355,6 +359,7 @@ class LangLinkHandler {
 		$onPageLinks = $this->localLinksToArray( $onPageLinks );
 
 		$repoLinks = $this->getEntityLinks( $title );
+
 		$repoLinks = $this->repoLinksToArray( $repoLinks );
 		$repoLinks = $this->suppressRepoLinks( $out, $repoLinks );
 
@@ -379,17 +384,23 @@ class LangLinkHandler {
 	public function addLinksFromRepository( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
 
+		$site = $this->sites->getSite( $this->siteId );
+
+		if ( $site === null ) {
+			wfWarn( 'Site not found for ' . $this->siteId . '. Cannot add links from repository.' );
+			return;
+		}
+
 		$repoLinks = $this->getEffectiveRepoLinks( $title, $out );
 
 		foreach ( $repoLinks as $wiki => $page ) {
-			$site = $this->sites->getSite( $wiki );
-
-			if ( !$site ) {
+			$targetSite = $this->sites->getSite( $wiki );
+			if ( !$targetSite ) {
 				trigger_error( "Unknown wiki '$wiki' used as sitelink target", E_USER_WARNING );
 				continue;
 			}
 
-			$nav = $site->getNavigationIds();
+			$nav = $targetSite->getNavigationIds();
 			$nav = array_values( $nav );
 
 			if ( isset( $nav[0] ) ) {
@@ -401,6 +412,11 @@ class LangLinkHandler {
 				wfWarn( "No interlanguage prefix found for $wiki." );
 			}
 		}
+
+        $siteLink = new SiteLink( $site, $title->getFullText() );
+
+        $propertyHandler = new EntityIdPropertyHandler( $this->siteLinksLookup );
+        $propertyHandler->updateItemIdProperty( $out, $siteLink );
 
 		wfProfileOut( __METHOD__ );
 	}
