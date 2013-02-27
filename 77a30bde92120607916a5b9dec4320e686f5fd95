@@ -16,6 +16,24 @@
       "revId": "77a30bde92120607916a5b9dec4320e686f5fd95",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnUgw6ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-02-27T19:06:43Z",
+      "side": 1,
+      "message": "I noticed that as well so I changed the message already. Didn\u0027t really think about just putting the line into my localsettings before.",
+      "parentUuid": "Dna08Dy4",
+      "revId": "77a30bde92120607916a5b9dec4320e686f5fd95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
