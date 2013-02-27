@@ -125,7 +125,8 @@ abstract class EntityContent extends \AbstractContent {
 	public abstract function getEntity();
 
 	/**
-	 * @return String a string representing the content in a way useful for building a full text search index.
+	 * @return String a string representing the content in a way useful for building a full text
+	 *         search index.
 	 */
 	public function getTextForSearchIndex() {
 		wfProfileIn( __METHOD__ );
@@ -194,15 +195,16 @@ abstract class EntityContent extends \AbstractContent {
 	}
 
 	/**
-	 * @return String the wikitext to include when another page includes this  content, or false if the content is not
-	 *		 includable in a wikitext page.
+	 * @return String the wikitext to include when another page includes this  content, or false if
+	 *         the content is not includable in a wikitext page.
 	 */
 	public function getWikitextForTransclusion() {
 		return false;
 	}
 
 	/**
-	 * Returns a textual representation of the content suitable for use in edit summaries and log messages.
+	 * Returns a textual representation of the content suitable for use in edit summaries and log
+	 * messages.
 	 *
 	 * @param int $maxlength maximum length of the summary text
 	 * @return String the summary text
@@ -232,7 +234,11 @@ abstract class EntityContent extends \AbstractContent {
 	}
 
 	/**
-	 * @see Content::equals()
+	 * Both contents will be considered equal if they have the same ID and equal Entity data. If
+	 * one of the contents is considered "new", then matching IDs is not a criteria for them to be
+	 * considered equal.
+	 *
+	 * @see Content::equals
 	 */
 	public function equals( \Content $that = null ) {
 		if ( is_null( $that ) ) {
@@ -247,24 +253,24 @@ abstract class EntityContent extends \AbstractContent {
 			return false;
 		}
 
-		$thisId = $this->getEntity()->getPrefixedId();
-		$thatId = $that->getEntity()->getPrefixedId();
+		$thisEntity = $this->getEntity();
+		$thatEntity = $that->getEntity();
 
-		if ( $thisId !== null && $thatId !== null ) {
-			if ( $thisId !== $thatId ) {
-				return false;
-			}
+		if ( !$this->isNew() && !$that->isNew()
+			&& $thisEntity->getPrefixedId() !== $thatEntity->getPrefixedId()
+		) {
+			return false;
 		}
 
-		return $this->getEntity()->equals( $that->getEntity() );
+		return $thisEntity->equals( $thatEntity );
 	}
 
 	/**
 	 * Returns true if this content is countable as a "real" wiki page, provided
 	 * that it's also in a countable location (e.g. a current revision in the main namespace).
 	 *
-	 * @param boolean $hasLinks: if it is known whether this content contains links, provide this information here,
-	 *						to avoid redundant parsing to find out.
+	 * @param boolean $hasLinks: if it is known whether this content contains links, provide this
+	 *        information here, to avoid redundant parsing to find out.
 	 * @return boolean
 	 */
 	public function isCountable( $hasLinks = null ) {
@@ -305,8 +311,8 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @param String    $permission         the permission to check
 	 * @param null|User $user               the user to check for. If omitted, $wgUser is checked.
-	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May be set to false for
-	 *                                      non-critical checks.
+	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May
+	 *                                      be set to false for non-critical checks.
 	 *
 	 * @return bool True if the user has the given permission, false otherwise.
 	 */
@@ -321,8 +327,8 @@ abstract class EntityContent extends \AbstractContent {
 	 * Shorthand for $this->userCan( 'edit' );
 	 *
 	 * @param null|User $user               the user to check for. If omitted, $wgUser is checked.
-	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May be set to false for
-	 *                                      non-critical checks.
+	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May
+	 *                                      be set to false for non-critical checks.
 	 *
 	 * @return bool whether the user is allowed to edit this item.
 	 */
@@ -335,8 +341,8 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @param String    $permission         the permission to check
 	 * @param null|User $user               the user to check for. If omitted, $wgUser is checked.
-	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May be set to false for
-	 *                                      non-critical checks.
+	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May
+	 *                                      be set to false for non-critical checks.
 	 *
 	 * @return \Status a status object representing the check's result.
 	 */
@@ -386,8 +392,9 @@ abstract class EntityContent extends \AbstractContent {
 	/**
 	 * Assigns a fresh ID to this entity.
 	 *
-	 * @throws \MWException if this entity already has an ID assigned, or something goes wrong while generating a new ID.
-	 * @return int the new ID
+	 * @throws \MWException if this entity already has an ID assigned, or something goes wrong while
+	 *         generating a new ID.
+	 * @return int The new ID
 	 */
 	protected function grabFreshId() {
 		if ( !$this->isNew() ) {
@@ -408,18 +415,20 @@ abstract class EntityContent extends \AbstractContent {
 
 	/**
 	 * Saves this item.
-	 * If this item does not exist yet, it will be created (ie a new ID will be determined and a new page in the
-	 * data NS created).
+	 * If this item does not exist yet, it will be created (ie a new ID will be determined and a new
+	 * page in the data NS created).
 	 *
-	 * @note: if the item does not have an ID yet (i.e. it was not yet created in the database), save() will
-	 *        fail with a edit-gone-missing message unless the EDIT_NEW bit is set in $flags.
+	 * @note: if the item does not have an ID yet (i.e. it was not yet created in the database),
+	 *        save() will fail with a edit-gone-missing message unless the EDIT_NEW bit is set in
+	 *        $flags.
 	 *
-	 * @note: if the save is triggered by any kind of user interaction, consider using EditEntity::attemptSave(), which
-	 *        automatically handles edit conflicts, permission checks, etc.
+	 * @note: if the save is triggered by any kind of user interaction, consider using
+	 *        EditEntity::attemptSave(), which automatically handles edit conflicts, permission
+	 *        checks, etc.
 	 *
-	 * @note: this method should not be overloaded, and should not be extended to save additional information to the
-	 *        database. Such things should be done in a way that will also be triggered when the save is performed by
-	 *        calling WikiPage::doEditContent.
+	 * @note: this method should not be overloaded, and should not be extended to save additional
+	 *        information to the database. Such things should be done in a way that will also be
+	 *        triggered when the save is performed by calling WikiPage::doEditContent.
 	 *
 	 * @since 0.1
 	 *
@@ -434,7 +443,13 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return \Status Success indicator, like the one returned by WikiPage::doEditContent().
 	 */
-	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false, EditEntity $editEntity = null ) {
+	public function save(
+		$summary = '',
+		User $user = null,
+		$flags = 0,
+		$baseRevId = false,
+		EditEntity $editEntity = null
+	) {
 		wfProfileIn( __METHOD__ );
 
 		if ( ( $flags & EDIT_NEW ) == EDIT_NEW ) {
