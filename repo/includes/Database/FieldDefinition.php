@@ -22,7 +22,7 @@ use InvalidArgumentException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
+ * @since wd.db
  *
  * @file
  * @ingroup WikibaseRepo
@@ -33,49 +33,49 @@ use InvalidArgumentException;
 class FieldDefinition implements \Immutable {
 
 	/**
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @var string
 	 */
 	private $name;
 
 	/**
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @var string
 	 */
 	private $type;
 
 	/**
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @var mixed
 	 */
 	private $default;
 
 	/**
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @var string|null
 	 */
 	private $attributes;
 
 	/**
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @var boolean
 	 */
 	private $null;
 
 	/**
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @var string|null
 	 */
 	private $index;
 
 	/**
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @var boolean
 	 */

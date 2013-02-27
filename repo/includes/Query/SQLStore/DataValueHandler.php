@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Wikibase\Repo\Query\QueryStore;
-use Wikibase\Repo\Database\TableDefinition;
-
 /**
- * Simple query store for relational SQL databases.
+ * Represents the mapping between a DataValue type and the
+ * associated implementation in the store.
+ *
+ * Based on SMWDataItemHandler by Nischay Nahata and Markus Krötzsch.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,37 +31,6 @@ use Wikibase\Repo\Database\TableDefinition;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Store implements QueryStore {
-
-	private $tablePrefix;
-
-	private $dvHandlers;
-
-	public function __construct( $tablePrefix, array $dataValueHandlers ) {
-		$this->tablePrefix = $tablePrefix;
-		$this->dvHandlers = $dataValueHandlers;
-	}
-
-	/**
-	 * @since wd.qe
-	 *
-	 * @return TableDefinition
-	 */
-	public function getTables() {
-		return array();
-	}
-
-	/**
-	 * @see QueryStore::getName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return 'Wikibase SQL store';
-	}
-
-	// TODO
+abstract class DataValueHandler {
 
 }

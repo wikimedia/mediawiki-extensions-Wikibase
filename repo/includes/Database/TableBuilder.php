@@ -22,7 +22,7 @@ use MessageReporter;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
+ * @since wd.db
  *
  * @file
  * @ingroup WikibaseRepo
@@ -33,14 +33,14 @@ use MessageReporter;
 class TableBuilder {
 
 	/**
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @var QueryInterface
 	 */
 	private $db;
 
 	/**
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @var MessageReporter|null
 	 */
@@ -49,7 +49,7 @@ class TableBuilder {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @param QueryInterface $queryInterface
 	 * @param MessageReporter|null $messageReporter
@@ -60,7 +60,7 @@ class TableBuilder {
 	}
 
 	/**
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @param string $message
 	 */
@@ -73,7 +73,7 @@ class TableBuilder {
 	/**
 	 * Creates a table if it does not exist yet.
 	 *
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @param TableDefinition $table
 	 */
