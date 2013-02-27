@@ -47,6 +47,10 @@ class TableDefinition implements \Immutable {
 	private $fields;
 
 	/**
+	 * Constructor.
+	 *
+	 * @since wd.db
+	 *
 	 * @param string $name
 	 * @param FieldDefinition[] $fields
 	 *
@@ -66,6 +70,10 @@ class TableDefinition implements \Immutable {
 	}
 
 	/**
+	 * Returns the name of the table.
+	 *
+	 * @since wd.db
+	 *
 	 * @return string
 	 */
 	public function getName() {
@@ -73,10 +81,16 @@ class TableDefinition implements \Immutable {
 	}
 
 	/**
+	 * Returns the fields that make up this table.
+	 *
+	 * @since wd.db
+	 *
 	 * @return FieldDefinition[]
 	 */
 	public function getFields() {
 		return $this->fields;
 	}
+
+	// TODO: multiple field indices
 
 }
