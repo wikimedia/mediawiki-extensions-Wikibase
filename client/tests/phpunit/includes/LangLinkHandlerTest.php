@@ -49,18 +49,18 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			'id' => 1,
 			'label' => array( 'en' => 'Foo' ),
 			'links' => array(
-				'testwiki' => 'Foo',
 				'dewiki' => 'Foo_de',
 				'enwiki' => 'Foo_en',
+				'srwiki' => 'Foo_sr',
 			)
 		),
 		array( // matches, but not in a namespace with external langlinks enabled
 			'id' => 2,
 			'label' => array( 'en' => 'Talk:Foo' ),
 			'links' => array(
-				'testwiki' => 'Talk:Foo',
 				'dewiki' => 'Talk:Foo_de',
 				'enwiki' => 'Talk:Foo_en',
+				'srwiki' => 'Talk:Foo_sr',
 			)
 		)
 	);
@@ -84,9 +84,9 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		}
 
 		$this->langLinkHandler = new \Wikibase\LangLinkHandler(
-			'testwiki',
-			array( NS_MAIN ),
+			'srwiki',
 			array(),
+			array( NS_TALK ),
 			$this->mockRepo,
 			\SiteSQLStore::newInstance()
 		);
@@ -99,11 +99,11 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 				array() // expected links
 			),
 			array( // #1
-				'Foo', // page
+				'Foo_sr', // page
 				array( // expected links
-					'testwiki' => 'Foo',
 					'dewiki' => 'Foo_de',
 					'enwiki' => 'Foo_en',
+					'srwiki' => 'Foo_sr',
 				)
 			),
 		);
@@ -201,22 +201,22 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	public static function provideUseRepoLinks() {
 		return array(
 			array( // #0
-				'Foo',
+				'Foo_sr',
 				array(),
 				true
 			),
 			array( // #1
-				'Foo',
+				'Foo_sr',
 				array( '*' ),
 				false
 			),
 			array( // #2
-				'Foo',
+				'Foo_sr',
 				array( 'de' ),
 				true
 			),
 			array( // #3
-				'Talk:Foo',
+				'Talk:Foo_sr',
 				array(),
 				false
 			),
@@ -229,6 +229,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	public function testUseRepoLinks( $title, $noexternallanglinks, $expected ) {
 		if ( is_string( $title ) ) {
 			$title = \Title::newFromText( $title );
+			$title->resetArticleID( 1 );
 		}
 
 		$out = $this->makeParserOutput( array(), $noexternallanglinks );
@@ -241,7 +242,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	public static function provideGetEffectiveRepoLinks() {
 		return array(
 			array( // #0: local overrides remote
-				'Foo', // title
+				'Foo_sr', // title
 				array( // langlinks
 					'de' => 'Xoo_de',
 					'nl' => 'Foo_nl',
@@ -253,7 +254,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 				)
 			),
 			array( // #1: namespace not covered
-				'Talk:Foo', // title
+				'Talk:Foo_sr', // title
 				array( // langlinks
 					'de' => 'Talk:Foo_de',
 					'nl' => 'Talk:Foo_nl',
@@ -264,7 +265,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 				)
 			),
 			array( // #2: disabled
-				'Foo', // title
+				'Foo_sr', // title
 				array( // langlinks
 					'de' => 'Foo_de',
 					'nl' => 'Foo_nl',
@@ -276,7 +277,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 				)
 			),
 			array( // #3: suppressed
-				'Foo', // title
+				'Foo_sr', // title
 				array( // langlinks
 					'de' => 'Foo_de',
 					'nl' => 'Foo_nl',
@@ -288,7 +289,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 				)
 			),
 			array( // #4: suppressed redundantly
-				'Foo', // title
+				'Foo_sr', // title
 				array( // langlinks
 					'de' => 'Foo_de',
 					'nl' => 'Foo_nl',

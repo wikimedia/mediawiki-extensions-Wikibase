@@ -143,6 +143,26 @@ class MockRepository implements \Wikibase\SiteLinkLookup, \Wikibase\EntityLookup
 	}
 
 	/**
+	 * Gets an EntityId for a SiteLink
+	 *
+	 * @since 0.4
+	 *
+	 * @param SiteLink $siteLink
+	 *
+	 * @return EntityId
+	 */
+	public function getEntityIdForSiteLink( SiteLink $siteLink ) {
+		$globalSiteId = $siteLink->getSite()->getGlobalId();
+
+		// @todo: fix test data to use titles with underscores, like the site link table does it
+		$title = \Title::newFromText( $siteLink->getPage() );
+		$pageTitle = $title->getDBkey();
+
+		$numericItemId = $this->getItemIdForLink( $globalSiteId, $pageTitle );
+		return is_int( $numericItemId ) ? new EntityId( Item::ENTITY_TYPE, $numericItemId ) : null;
+	}
+
+	/**
 	 * Registers the sitelinsk of the given Item so they can later be found with getLinks, etc
 	 *
 	 * @param \Wikibase\Item $item
