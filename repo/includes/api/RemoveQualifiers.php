@@ -2,13 +2,15 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, MWException;
+use ApiBase;
+use MWException;
 
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claim;
+use Wikibase\Claims;
 use Wikibase\Settings;
 
 /**
@@ -107,13 +109,13 @@ class RemoveQualifiers extends ApiWikibase {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \Wikibase\Entity $entity
+	 * @param Entity $entity
 	 * @param string $claimGuid
 	 *
-	 * @return \Wikibase\Claim
+	 * @return Claim
 	 */
 	protected function getClaim( Entity $entity, $claimGuid ) {
-		$claims = new \Wikibase\Claims( $entity->getClaims() );
+		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
 			$this->dieUsage( 'No such claim', 'removequalifiers-claim-not-found' );
@@ -129,7 +131,7 @@ class RemoveQualifiers extends ApiWikibase {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \Wikibase\EntityContent $content
+	 * @param EntityContent $content
 	 */
 	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();

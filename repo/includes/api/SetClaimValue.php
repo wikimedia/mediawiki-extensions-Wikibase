@@ -11,9 +11,7 @@ use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\SnakObject;
 use Wikibase\Claim;
-use Wikibase\ClaimSerializer;
 use Wikibase\Claims;
-use Wikibase\Settings;
 
 /**
  * API module for setting the DataValue contained by the main snak of a claim.

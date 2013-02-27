@@ -11,7 +11,6 @@ use Wikibase\EntityContentFactory;
 use Wikibase\SnakFactory;
 use Wikibase\LibRegistry;
 use Wikibase\Claim;
-use Wikibase\ClaimSerializer;
 use Wikibase\Autocomment;
 use Wikibase\Settings;
 
@@ -164,7 +163,7 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 	/**
 	 * @since 0.2
 	 *
-	 * @return \Wikibase\EntityContent
+	 * @return EntityContent
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
@@ -185,7 +184,7 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 	/**
 	 * @since 0.2
 	 *
-	 * @return \Wikibase\Snak
+	 * @return Snak
 	 * @throws MWException
 	 */
 	protected function getSnakInstance() {
@@ -210,7 +209,7 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \Wikibase\Claim $claim
+	 * @param Claim $claim
 	 */
 	protected function outputClaim( Claim $claim ) {
 		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();

@@ -10,11 +10,8 @@ use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Statement;
 use Wikibase\Reference;
-use Wikibase\ReferenceObject;
-use Wikibase\ReferenceSerializer;
 use Wikibase\Snaks;
 use Wikibase\SnakList;
-use Wikibase\SnakSerializer;
 use Wikibase\Claims;
 use Wikibase\Settings;
 

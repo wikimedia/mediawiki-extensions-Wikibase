@@ -11,6 +11,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\Statement;
 use Wikibase\References;
 use Wikibase\Settings;
+use Wikibase\Claims;
 
 /**
  * API module for removing one or more references of the same statement.
@@ -101,7 +102,7 @@ class RemoveReferences extends ApiWikibase {
 	 * @param string[] $refHashes
 	 */
 	protected function removeReferences( Entity $entity, $statementGuid, array $refHashes ) {
-		$claims = new \Wikibase\Claims( $entity->getClaims() );
+		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
 			$this->dieUsage( 'No such statement', 'removereferences-statement-not-found' );
