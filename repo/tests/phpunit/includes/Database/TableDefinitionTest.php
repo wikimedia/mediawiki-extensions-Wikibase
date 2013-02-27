@@ -85,6 +85,14 @@ class TableDefinitionTest extends \MediaWikiTestCase {
 		$this->assertInternalType( 'array', $table->getFields() );
 		$this->assertContainsOnlyInstancesOf( 'Wikibase\Repo\Database\FieldDefinition', $table->getFields() );
 
+		foreach ( $table->getFields() as $expectedName => $field ) {
+			$this->assertEquals(
+				$expectedName,
+				$field->getName(),
+				'The array key matches the corresponding field name'
+			);
+		}
+
 		$newTable = new TableDefinition( $table->getName(), $table->getFields() );
 
 		$this->assertEquals(
@@ -92,6 +100,15 @@ class TableDefinitionTest extends \MediaWikiTestCase {
 			$newTable->getFields(),
 			'The TableDefinition fields are set and obtained correctly'
 		);
+	}
+
+	public function testReturnValueOfHasField( TableDefinition $table ) {
+		foreach ( $table->getFields() as $field ) {
+			$this->assertTrue( $table->hasFieldWithName( $field->getName() ) );
+		}
+
+		$this->assertFalse( $table->hasFieldWithName( 'zsfrcvbxuyiyrewrbmndsrbtfocszdf' ) );
+		$this->assertFalse( $table->hasFieldWithName( '' ) );
 	}
 
 }

@@ -66,7 +66,16 @@ class TableDefinition implements \Immutable {
 		}
 
 		$this->name = $name;
-		$this->fields = $fields;
+
+		$this->fields = array();
+
+		foreach ( $fields as $field ) {
+			if ( array_key_exists( $field->getName(), $this->fields ) ) {
+				throw new InvalidArgumentException( 'A table cannot have two fields with the same name' );
+			}
+
+			$this->fields[$field->getName()] = $field;
+		}
 	}
 
 	/**
@@ -82,6 +91,8 @@ class TableDefinition implements \Immutable {
 
 	/**
 	 * Returns the fields that make up this table.
+	 * The array keys in the returned array correspond to the names
+	 * of the fields defined by the value they point to.
 	 *
 	 * @since wd.db
 	 *
@@ -89,6 +100,19 @@ class TableDefinition implements \Immutable {
 	 */
 	public function getFields() {
 		return $this->fields;
+	}
+
+	/**
+	 * Returns if the table has a field with the provided name.
+	 *
+	 * @since wd.db
+	 *
+	 * @param string $fieldName
+	 *
+	 * @return boolean
+	 */
+	public function hasFieldWithName( $fieldName ) {
+		return array_key_exists( $fieldName, $this->fields );
 	}
 
 	// TODO: multiple field indices
