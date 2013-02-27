@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DndyaY18",
+        "filename": "repo/config/Wikibase.experimental.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-02-27T01:27:01Z",
+      "side": 1,
+      "message": "nice! :)",
+      "revId": "523fc99742583bf467479ed8f79f55ee81b85273",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
