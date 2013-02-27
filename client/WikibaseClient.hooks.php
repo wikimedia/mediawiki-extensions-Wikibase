@@ -582,12 +582,33 @@ final class ClientHooks {
 	}
 
 	/**
+	 * Add output page property if repo links are suppressed, and property for item id
+	 *
+	 * @since 0.4
+	 *
+	 * @param \OutputPage &$out
+	 * @param \ParserOutput $pout
+	 *
+ 	 * @return bool
+	 */
+	public static function onOutputPageParserOutput( \OutputPage &$out, \ParserOutput $pout ) {
+		$out->setProperty( 'hasrepolinks', $pout->getProperty( 'hasrepolinks' ) );
+
+		$itemId = $pout->getProperty( 'wikibase-itemid' );
+		if ( $itemId !== false ) {
+			$out->setProperty( 'wikibase-itemid', $itemId );
+		}
+
+		return true;
+	}
+
+	/**
 	 * Displays a list of links to pages on the central wiki at the end of the language box.
+	 *
+	 * @since 0.1
 	 *
 	 * @param \Skin $skin
 	 * @param \QuickTemplate $template
-	 *
-	 * @since 0.1
 	 *
 	 * @return bool
 	 */
@@ -595,19 +616,12 @@ final class ClientHooks {
 		wfProfileIn( __METHOD__ );
 
 		$title = $skin->getContext()->getTitle();
-		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) && $title->exists() ) {
-
-			$title = $skin->getContext()->getTitle();
-
-			// gets the main part of the title, no underscores used in this db table
-			$titleText = $title->getPrefixedText();
-			$siteId = Settings::get( 'siteGlobalID' );
+		if ( $title->exists() && $skin->getOutput()->getProperty( 'hasrepolinks' ) === true ) {
 
 			if ( empty( $template->data['language_urls'] ) && \Action::getActionName( $skin->getContext() ) === 'view' ) {
 				// Placeholder in case the page doesn't have any langlinks yet
 				// self::onBeforePageDisplay adds the JavaScript module which will overwrite this with a link
 				$template->data['language_urls'][] = array(
-					'href' => ClientUtils::repoArticleUrl( "Special:CreateItem/$siteId/$titleText" ),
 					'text' => wfMessage( 'parentheses', wfMessage( 'wikibase-nolanglinks' )->escaped() ),
 					'id' => 'wbc-linkToItem',
 					'class' => 'wbc-editpage',
@@ -617,12 +631,13 @@ final class ClientHooks {
 				return true;
 			}
 
-			$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink( $siteId, $titleText );
+			$itemId = $skin->getOutput()->getProperty( 'wikibase-itemid' );
 
-			if ( $itemId ) {
+			if ( $itemId !== null ) {
 				// links to the special page
 				$template->data['language_urls'][] = array(
-					'href' => ClientUtils::repoArticleUrl( "Special:ItemByTitle/$siteId/$titleText" ),
+					// todo: make nicer without strtoupper here
+					'href' => ClientUtils::repoArticleUrl( strtoupper( $itemId ) ),
 					'text' => wfMessage( 'wikibase-editlinks' )->text(),
 					'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
 					'class' => 'wbc-editpage',
