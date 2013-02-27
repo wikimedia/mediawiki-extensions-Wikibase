@@ -569,4 +569,14 @@ abstract class EntityContent extends \AbstractContent {
 		}
 	}
 
+	/**
+	 * @see Content::getRedirectTarget()
+	 *
+	 * @return null|\Title
+	 */
+	public function getRedirectTarget() {
+		$id = $this->getEntity()->getRedirectTarget();
+		$page = $id === null ? null : EntityContentFactory::singleton()->getWikiPageForId( $id );
+		return $page === null ? null : $page->getTitle();
+	}
 }

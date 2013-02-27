@@ -41,6 +41,7 @@ $wgAutoloadClasses['Wikibase\Api\SetStatementRank']			= $dir . 'includes/api/Set
 $wgAutoloadClasses['Wikibase\Repo\Api\SetClaim']			= $dir . 'includes/api/SetClaim.php';
 
 $wgAutoloadClasses['SpecialEntityData'] 					= $dir . 'includes/specials/SpecialEntityData.php';
+$wgAutoloadClasses['SpecialMergeEntities'] 					= $dir . 'includes/specials/SpecialMergeEntities.php';
 
 $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
@@ -51,6 +52,7 @@ $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
 $wgAPIModules['wbsetclaim'] 						= 'Wikibase\Repo\Api\SetClaim';
 
 $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
+$wgSpecialPages['MergeEntities'] 					= 'SpecialMergeEntities';
 
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
 

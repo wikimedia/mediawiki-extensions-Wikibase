@@ -183,6 +183,9 @@ Your IP address will be recorded in this property's edit history.",
 	'wikibase-entitydata-unsupported-format' => "The data format $1 is not supported by this interface.",
 	'wikibase-entitydata-title' => 'Entity Data',
 	'wikibase-entitydata-text' => 'This page provides a linked data interface to entity values. Please provide the entity ID in the URL, using subpage syntax.',
+	'special-mergeentities' => 'Merge entities',
+	'wikibase-mergeentities-title' => 'Merge Entities',
+	'wikibase-mergeentities-summary' => 'This page allows two entities to be merged by turning one into an alias of the other.',
 
 	// API errors - these messages should not be translated
 	'wikibase-api-aliases-invalid-list' => 'Use either one of "set", "add" and "remove" parameters.', # Do not translate

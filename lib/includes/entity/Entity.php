@@ -327,6 +327,71 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	}
 
 	/**
+	 * Whether this entity is a redirect, that is, whether a redirect
+	 * target is defined for this entity.
+	 *
+	 * @see getRedirectTarget()
+	 *
+	 * @return bool
+	 */
+	public function isRedirect() {
+		return isset( $this->data['redirect'] )
+			&& intval( $this->data['redirect'] ) > 0;
+	}
+
+	/**
+	 * Removes the redirect target for this entity, turning this entity into a regular entity.
+	 *
+	 * @see getRedirectTarget()
+	 *
+	 * @param EntityId $id
+	 */
+	public function removeRedirectTarget() {
+		unset( $this->data['redirect'] );
+	}
+getEntityType
+	/**
+	 * Sets the redirect target for this entity, turning this entity into a redirect.
+	 *
+	 * @see getRedirectTarget()
+	 *
+	 * @param EntityId $id
+	 */
+	public function setRedirectTarget( EntityId $id ) {
+		if ( $id->getEntityType() !== $this->getType() ) {
+			throw new \MWException( "Can't redirect from entity type "
+				. $this->getType() . " to type " . $id->getType()  );
+		}
+
+		if ( $id->getEntityType() !== $this->getType() ) {
+			throw new \MWException( "Can't redirect "
+				. $this->getId()->getPrefixedId() . " to itself!" );
+		}
+
+		$this->data['redirect'] = $id->getNumericId();
+	}
+
+	/**
+	 * Returns the redirect target defined for this entity, or null if this entity
+	 * is not a redirect.
+	 *
+	 * @see Content::getRedirectTarget()
+	 *
+	 * @return null|EntityId
+	 */
+	public function getRedirectTarget() {
+		if ( isset( $this->data['redirect'] ) ) {
+			$id = intval( $this->data['redirect'] );
+
+			if ( $id > 0 ) {
+				return new EntityId( $this->getType(), $id );
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * Add the provided aliases to the aliases list of the item in the language with the specified code.
 	 * TODO: decide on how to deal with duplicates
 	 *
