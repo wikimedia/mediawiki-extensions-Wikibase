@@ -153,8 +153,8 @@ abstract class ApiWikibase extends \ApiBase {
 						$siteLinks,
 						function( $a, $b ) {
 							/**
-							 * @var SiteLink $a
-							 * @var SiteLink $b
+							 * @var \Wikibase\SiteLink $a
+							 * @var \Wikibase\SiteLink $b
 							 */
 							return strcmp( $a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
 						}
@@ -164,8 +164,8 @@ abstract class ApiWikibase extends \ApiBase {
 						$siteLinks,
 						function( $a, $b ) {
 							/**
-							 * @var SiteLink $a
-							 * @var SiteLink $b
+							 * @var \Wikibase\SiteLink $a
+							 * @var \Wikibase\SiteLink $b
 							 */
 							return strcmp( $b->getSite()->getGlobalId(), $a->getSite()->getGlobalId() );
 						}

@@ -51,13 +51,13 @@ class SearchEntities extends ApiBase {
 
 		$ids = StoreFactory::getStore()->newTermCache()->getMatchingIDs(
 			array(
-				new Term( array(
-					'termType' 		=> Term::TYPE_LABEL,
+				new \Wikibase\Term( array(
+					'termType' 		=> \Wikibase\Term::TYPE_LABEL,
 					'termLanguage' 	=> $language,
 					'termText' 		=> $term
 				) ),
-				new Term( array(
-					'termType' 		=> Term::TYPE_ALIAS,
+				new \Wikibase\Term( array(
+					'termType' 		=> \Wikibase\Term::TYPE_ALIAS,
 					'termLanguage' 	=> $language,
 					'termText' 		=> $term
 				) )
@@ -93,12 +93,12 @@ class SearchEntities extends ApiBase {
 		$limit = $params['limit'] + $params['continue'] + 1;
 		$ids = array();
 		// Gets exact match for the search term as an id if it can be found
-		$entityId = EntityId::newFromPrefixedId( $params['search'] );
+		$entityId = \Wikibase\EntityId::newFromPrefixedId( $params['search'] );
 		if ( $entityId ) {
 			$page = EntityContentFactory::singleton()->getWikiPageForId( $entityId );
 			if ( $page->exists() ) {
 				$entityContent = $page->getContent();
-				if ( $entityContent instanceof EntityContent ) {
+				if ( $entityContent instanceof \Wikibase\EntityContent ) {
 					$ids[] = $entityId;
 				}
 			}

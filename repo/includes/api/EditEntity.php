@@ -89,9 +89,9 @@ class EditEntity extends ModifyEntity {
 				case 'item':
 					return ItemContent::newEmpty();
 				case 'property':
-					return PropertyContent::newEmpty();
+					return \Wikibase\PropertyContent::newEmpty();
 				case 'query':
-					return QueryContent::newEmpty();
+					return \Wikibase\QueryContent::newEmpty();
 				default:
 					$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 				}
@@ -166,7 +166,7 @@ class EditEntity extends ModifyEntity {
 					}
 					break;
 				case 'ns':
-					// not completly convinced that we can use title to get the namespace in this case
+					// not completely convinced that we can use title to get the namespace in this case
 					if ( isset( $data[$props] ) && ( is_object( $title ) ? $title->getNamespace() !== $data[$props] : true ) ) {
 						wfProfileOut( __METHOD__ );
 						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'namespace' )->text(), 'illegal-field' );

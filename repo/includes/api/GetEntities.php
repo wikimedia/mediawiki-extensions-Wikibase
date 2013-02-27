@@ -146,7 +146,7 @@ class GetEntities extends ApiWikibase {
 
 				// as long as getWikiPageForId only returns ids for legal items this holds
 				/**
-				 * @var $entityContent EntityContent
+				 * @var $entityContent \Wikibase\EntityContent
 				 */
 				$entityContent = $page->getContent();
 
