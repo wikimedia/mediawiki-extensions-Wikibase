@@ -27,15 +27,70 @@ use Wikibase\Repo\Query\SQLStore\DataValueHandler;
  *
  * @ingroup WikibaseRepoTest
  *
- * @group Wikibase
- * @group WikibaseRepo
- * @group WikibaseQuery
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DataValueHandlerTest extends \MediaWikiTestCase {
+abstract class DataValueHandlerTest extends \MediaWikiTestCase {
 
-	// TODO
+	/**
+	 * @since wd.qe
+	 *
+	 * @return DataValueHandler[]
+	 */
+	protected abstract function getInstances();
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @return DataValueHandler[][]
+	 */
+	public function instanceProvider() {
+		return $this->arrayWrap( $this->getInstances() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param DataValueHandler $dvHandler
+	 */
+	public function testGetTableDefinitionReturnType( DataValueHandler $dvHandler ) {
+		// TODO
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param DataValueHandler $dvHandler
+	 */
+	public function testGetValueFieldReturnValue( DataValueHandler $dvHandler ) {
+		// TODO
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param DataValueHandler $dvHandler
+	 */
+	public function testGetSortFieldReturnValue( DataValueHandler $dvHandler ) {
+		// TODO
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param DataValueHandler $dvHandler
+	 */
+	public function testNewDataValueFromDbValue( DataValueHandler $dvHandler ) {
+		// TODO
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param DataValueHandler $dvHandler
+	 */
+	public function testGetLabelFieldReturnValue( DataValueHandler $dvHandler ) {
+		// TODO
+	}
 
 }
