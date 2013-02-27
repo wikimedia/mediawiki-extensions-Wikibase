@@ -2,7 +2,8 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, MWException;
+use ApiBase;
+use MWException;
 
 use Wikibase\Autocomment;
 use Wikibase\EntityId;
@@ -10,7 +11,6 @@ use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claims;
-use Wikibase\Settings;
 
 /**
  * API module for removing claims.
@@ -128,7 +128,7 @@ class RemoveClaims extends ApiWikibase implements IAutocomment {
 	 *
 	 * @param string[] $ids
 	 *
-	 * @return \Wikibase\EntityContent[]
+	 * @return EntityContent[]
 	 */
 	protected function getEntityContents( array $ids ) {
 		$contents = array();
@@ -160,7 +160,7 @@ class RemoveClaims extends ApiWikibase implements IAutocomment {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \Wikibase\Claims $claims
+	 * @param Claims $claims
 	 * @param string[] $guids
 	 *
 	 * @return string[]
@@ -202,7 +202,7 @@ class RemoveClaims extends ApiWikibase implements IAutocomment {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \Wikibase\EntityContent $content
+	 * @param EntityContent $content
 	 */
 	protected function saveChanges( EntityContent $content ) {
 		$params = $this->extractRequestParams();

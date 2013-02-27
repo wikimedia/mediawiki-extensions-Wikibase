@@ -2,11 +2,10 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, MWException;
-use Wikibase\Lib\Serializers\EntitySerializer;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use ApiBase;
+use MWException;
 
+use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Utils;
 use Wikibase\StoreFactory;
 use Wikibase\EntityId;
@@ -175,7 +174,7 @@ class GetEntities extends ApiWikibase {
 
 				$entity = $entityContent->getEntity();
 
-				$options = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
+				$options = new EntitySerializationOptions();
 				$options->setLanguages( $params['languages'] );
 				$options->setSortDirection( $params['dir'] );
 				$options->setProps( $props );

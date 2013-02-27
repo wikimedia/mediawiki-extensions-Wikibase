@@ -2,15 +2,17 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, MWException;
-use Wikibase\Lib\Serializers\ClaimSerializer;
-use Wikibase\Lib\Serializers\ClaimsSerializer;
+use ApiBase;
+use MWException;
 
+use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Statement;
 use Wikibase\Claims;
+use Wikibase\Claim;
 
 /**
  * API module for getting claims.
@@ -75,7 +77,7 @@ class GetClaims extends ApiWikibase {
 	protected function outputClaims( array $claims ) {
 		$claims = new Claims( $claims );
 
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializerFactory = new SerializerFactory();
 		$serializer = $serializerFactory->newSerializerForObject( $claims );
 
 		// TODO: hold into account props parameter
@@ -93,9 +95,9 @@ class GetClaims extends ApiWikibase {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \Wikibase\EntityId $id
+	 * @param EntityId $id
 	 *
-	 * @return \Wikibase\Entity
+	 * @return Entity
 	 */
 	protected function getEntity( EntityId $id ) {
 		$content = EntityContentFactory::singleton()->getFromId( $id );
@@ -110,7 +112,7 @@ class GetClaims extends ApiWikibase {
 	/**
 	 * @since 0.3
 	 *
-	 * @param \Wikibase\Entity $entity
+	 * @param Entity $entity
 	 * @param null|string $claimGuid
 	 *
 	 * @return Claim[]

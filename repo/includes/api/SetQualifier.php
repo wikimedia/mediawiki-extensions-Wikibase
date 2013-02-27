@@ -2,7 +2,8 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, MWException;
+use ApiBase;
+use MWException;
 
 use Wikibase\EntityContent;
 use Wikibase\EntityId;
