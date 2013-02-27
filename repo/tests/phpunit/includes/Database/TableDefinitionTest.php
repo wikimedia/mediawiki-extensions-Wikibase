@@ -52,7 +52,7 @@ class TableDefinitionTest extends \MediaWikiTestCase {
 			array(
 				new FieldDefinition( 'o', FieldDefinition::TYPE_TEXT ),
 				new FieldDefinition( 'h', FieldDefinition::TYPE_TEXT ),
-				new FieldDefinition( 'i', FieldDefinition::TYPE_INTEGER, 42 ),
+				new FieldDefinition( 'i', FieldDefinition::TYPE_INTEGER, false, 42 ),
 			)
 		);
 

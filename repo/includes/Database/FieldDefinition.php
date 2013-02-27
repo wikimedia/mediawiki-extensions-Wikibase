@@ -93,15 +93,15 @@ class FieldDefinition implements \Immutable {
 	/**
 	 * @param string $name
 	 * @param string $type
+	 * @param boolean $null
 	 * @param mixed $default
 	 * @param string|null $attributes
-	 * @param boolean $null
 	 * @param string|null $index
 	 * @param boolean $autoIncrement
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $name, $type, $default = null, $attributes = null, $null = true, $index = null, $autoIncrement = false ) {
+	public function __construct( $name, $type, $null = true, $default = null, $attributes = null, $index = null, $autoIncrement = false ) {
 		if ( !is_string( $name ) ) {
 			throw new InvalidArgumentException( 'The field $name needs to be a string' );
 		}
