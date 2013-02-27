@@ -52,25 +52,25 @@ class FieldDefinitionTest extends \MediaWikiTestCase {
 		$instances[] = new FieldDefinition(
 			'stuffs',
 			FieldDefinition::TYPE_INTEGER,
+			false,
 			42,
-			FieldDefinition::ATTRIB_UNSIGNED,
-			false
+			FieldDefinition::ATTRIB_UNSIGNED
 		);
 
 		$instances[] = new FieldDefinition(
 			'stuffs',
 			FieldDefinition::TYPE_INTEGER,
-			null,
-			null,
-			true
-		);
-
-		$instances[] = new FieldDefinition(
-			'stuffs',
-			FieldDefinition::TYPE_INTEGER,
-			null,
-			null,
 			true,
+			null,
+			null
+		);
+
+		$instances[] = new FieldDefinition(
+			'stuffs',
+			FieldDefinition::TYPE_INTEGER,
+			true,
+			null,
+			null,
 			null,
 			true
 		);

@@ -81,11 +81,11 @@ abstract class DataValueHandler {
 	 */
 	abstract public function newDataValueFromDbValue( $dbValue );
 
-		/**
+	/**
 	 * Return the label field for this type of DataValue. This should be
 	 * a string column in the database table that can be used for selecting
 	 * values using criteria such as "starts with". The return value can be
-	 * empty if this is not supported. This is preferred for SMWDataItem
+	 * empty if this is not supported. This is preferred for DataValue
 	 * classes that do not have an obvious canonical string writing anyway.
 	 *
 	 * The return value can be a column name or the empty string (if the
