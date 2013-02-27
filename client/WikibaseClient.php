@@ -59,12 +59,13 @@ $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.m
 $wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php';
 
 $wgAutoloadClasses['Wikibase\CachedEntity'] 		= $dir . 'includes/CachedEntity.php';
-$wgAutoloadClasses['Wikibase\ClientUtils']		= $dir . 'includes/ClientUtils.php';
 $wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCacheUpdater.php';
+$wgAutoloadClasses['Wikibase\EntityIdPropertyUpdater'] = $dir . 'includes/EntityIdPropertyUpdater.php';
 $wgAutoloadClasses['Wikibase\InterwikiSorter']      = $dir . 'includes/InterwikiSorter.php';
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\NamespaceChecker']		= $dir . 'includes/NamespaceChecker.php';
+$wgAutoloadClasses['Wikibase\RepoLinker']			= $dir . 'includes/RepoLinker.php';
 $wgAutoloadClasses['Scribunto_LuaWikibaseLibrary']      = $dir . 'includes/WikibaseLibrary.php';
 
 // includes/api
@@ -99,6 +100,7 @@ $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/En
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
 $wgHooks['LoadExtensionSchemaUpdates'][] 		= '\Wikibase\ClientHooks::onSchemaUpdate';
 $wgHooks['OldChangesListRecentChangesLine'][]		= '\Wikibase\ClientHooks::onOldChangesListRecentChangesLine';
+$wgHooks['OutputPageParserOutput'][]		= '\Wikibase\ClientHooks::onOutputPageParserOutput';
 $wgHooks['ParserAfterParse'][]				= '\Wikibase\ClientHooks::onParserAfterParse';
 $wgHooks['ParserFirstCallInit'][]			= '\Wikibase\ClientHooks::onParserFirstCallInit';
 $wgHooks['MagicWordwgVariableIDs'][]			= '\Wikibase\ClientHooks::onMagicWordwgVariableIDs';
