@@ -68,7 +68,7 @@ abstract class DataValueHandler {
 	 *
 	 * @return string
 	 */
-	abstract public function getSortField();
+	abstract public function getSortFieldName();
 
 	/**
 	 * Create a DataValue from a cell value in the tables value field.
@@ -95,7 +95,7 @@ abstract class DataValueHandler {
 	 *
 	 * @return string|null
 	 */
-	public function getLabelField() {
+	public function getLabelFieldName() {
 		return null;
 	}
 

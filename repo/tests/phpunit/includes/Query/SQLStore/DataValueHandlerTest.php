@@ -30,7 +30,7 @@ use Wikibase\Repo\Query\SQLStore\DataValueHandler;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class DataValueHandlerTest extends \MediaWikiTestCase {
+abstract class DataValueHandlerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @since wd.qe
@@ -48,13 +48,22 @@ abstract class DataValueHandlerTest extends \MediaWikiTestCase {
 		return $this->arrayWrap( $this->getInstances() );
 	}
 
+	protected function arrayWrap( array $elements ) {
+		return array_map(
+			function ( $element ) {
+				return array( $element );
+			},
+			$elements
+		);
+	}
+
 	/**
 	 * @dataProvider instanceProvider
 	 *
 	 * @param DataValueHandler $dvHandler
 	 */
 	public function testGetTableDefinitionReturnType( DataValueHandler $dvHandler ) {
-		// TODO
+		$this->assertInstanceOf( 'Wikibase\Repo\Database\TableDefinition', $dvHandler->getTableDefinition() );
 	}
 
 	/**
@@ -62,8 +71,15 @@ abstract class DataValueHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @param DataValueHandler $dvHandler
 	 */
-	public function testGetValueFieldReturnValue( DataValueHandler $dvHandler ) {
-		// TODO
+	public function testGetValueFieldNameReturnValue( DataValueHandler $dvHandler ) {
+		$valueFieldName = $dvHandler->getValueFieldName();
+
+		$this->assertInternalType( 'string', $valueFieldName );
+
+		$this->assertTrue(
+			$dvHandler->getTableDefinition()->hasFieldWithName( $valueFieldName ),
+			'The value field is present in the table'
+		);
 	}
 
 	/**
@@ -71,8 +87,15 @@ abstract class DataValueHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @param DataValueHandler $dvHandler
 	 */
-	public function testGetSortFieldReturnValue( DataValueHandler $dvHandler ) {
-		// TODO
+	public function testGetSortFieldNameReturnValue( DataValueHandler $dvHandler ) {
+		$sortFieldName = $dvHandler->getSortFieldName();
+
+		$this->assertInternalType( 'string', $sortFieldName );
+
+		$this->assertTrue(
+			$dvHandler->getTableDefinition()->hasFieldWithName( $sortFieldName ),
+			'The sort field is present in the table'
+		);
 	}
 
 	/**
@@ -89,8 +112,20 @@ abstract class DataValueHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @param DataValueHandler $dvHandler
 	 */
-	public function testGetLabelFieldReturnValue( DataValueHandler $dvHandler ) {
-		// TODO
+	public function testGetLabelFieldNameReturnValue( DataValueHandler $dvHandler ) {
+		$labelFieldName = $dvHandler->getLabelFieldName();
+
+		$this->assertTrue(
+			$labelFieldName === null || is_string( $labelFieldName ),
+			'The label field name needs to be either string or null'
+		);
+
+		if ( is_string( $labelFieldName ) ) {
+			$this->assertTrue(
+				$dvHandler->getTableDefinition()->hasFieldWithName( $labelFieldName ),
+				'The label field is present in the table'
+			);
+		}
 	}
 
 }
