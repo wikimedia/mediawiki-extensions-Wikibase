@@ -71,7 +71,7 @@ class NoLangLinkHandler {
 		array_shift( $langs );
 
 		$out = $parser->getOutput();
-		$langLinkHandler = new LanguageLinkHandler(
+		$langLinkHandler = new LangLinkHandler(
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
 			ClientStoreFactory::getStore()->newSiteLinkTable(),
