@@ -37,9 +37,12 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, M
 final class RepoHooks {
 	/**
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
+	 * replacing the native search box with the entity selector widget.
 	 *
 	 * @since 0.4
 	 *
+	 * @param \OutputPage $out
+	 * @param \Skin $skin
 	 * @return boolean
 	 */
 	public static function onBeforePageDisplay( \OutputPage &$out, \Skin &$skin ) {

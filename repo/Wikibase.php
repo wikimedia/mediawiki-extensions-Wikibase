@@ -253,7 +253,8 @@ $wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
 
 
 // Hooks
-$wgHooks['WikibaseDefaultSettings'][] 			    = 'Wikibase\RepoHooks::onWikibaseDefaultSettings';
+$wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
+$wgHooks['WikibaseDefaultSettings'][] 				= 'Wikibase\RepoHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\RepoHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'Wikibase\RepoHooks::registerUnitTests';
 $wgHooks['NamespaceIsMovable'][]					= 'Wikibase\RepoHooks::onNamespaceIsMovable';
