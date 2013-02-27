@@ -21,6 +21,11 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * StatementObject class and Statement interface changed to Statement class
 * Moved all Serializer code into Wikibase\Lib\Serializers
 
+; Requirements
+
+* If experimental features are enabled, then this will depends on "Ask" extension now. See Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Ask
+
+
 === Version 0.3 ===
 (???)
 
@@ -36,6 +41,7 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * Added reference hash based methods to References
 * Added unserialization support to SnakSerializer
 
+
 === Version 0.2 ===
 (???)
 
@@ -44,6 +50,7 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * Added ByPropertyIdArray
 * Added TemplateStore
 * Added Term interface
+
 
 === Version 0.1 ===
 (2012-11-01)

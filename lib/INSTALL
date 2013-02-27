@@ -11,6 +11,7 @@ WikibaseLib requires:
 * MediaWiki 1.21 or later
 * PHP 5.3 or later
 * Diff 0.1 or later
+* Ask 0.1 or later (if experimental features are enabled)
 * DataValues 0.1 or later
 * DataTypes 0.1 or later
 * ValueParsers 0.1 or later
