@@ -417,18 +417,22 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-ui-pendingquantityc
 {{Identical|Property}}',
 	'wikibase-snakview-choosesnaktype' => 'Message prompting the user to select a Snak type (see [[d:Wikidata/Glossary]]) when adding or editing a Snak. Since a default Snak type should always be selected when adding a Snak, the message is visible on rare occasions only. Since "Snak" or "Snak type" does not express any meaning for the user, these phrases should be avoided in the message.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => "Warning displayed if the data value type used by a Snak's (see [[d:Wikidata/Glossary]]) property's data type is different from the data value type of the same Snak's actual value. This should only appear after internal changes or after a property's data type has changed and no scripts for updating the data were executed (there might not even be any scripts for handling all possible causes of this).",
-	'wikibase-snakview-variation-datavaluetypemismatch-details' => "Details of the warning displayed if the data value type used by a Snak's (see [[d:Wikidata:Glossary]]) property's data type is different from the data value type of the same Snak's actual value. Parameters:
-* $1: data value type of the property-value Snak's value.
-* $2: data value type used by the data type used in the property which is used by the property-value Snak.",
+	'wikibase-snakview-variation-datavaluetypemismatch-details' => "Details of the warning displayed if the data value type used by a Snak's (see [[d:Wikidata:Glossary]]) property's data type is different from the data value type of the same Snak's actual value.
+
+Parameters:
+* $1 - data value type of the property-value Snak's value.
+* $2 - data value type used by the data type used in the property which is used by the property-value Snak",
 	'wikibase-snakview-variations-somevalue-label' => "Message displayed for 'some value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
 	'wikibase-snakview-variations-novalue-label' => "Message displayed for 'no value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
 	'wikibase-snakview-snaktypeselector-value' => "Short descriptive title of a 'value' snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option - which is the default when adding a claim - is allowing the user to specify a value.",
 	'wikibase-snakview-snaktypeselector-somevalue' => "Short descriptive title of a some-value snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that a value exists but it is unknown.",
 	'wikibase-snakview-snaktypeselector-novalue' => "A short descriptive title of a no-value snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that no value exists.",
-	'wikibase-shortcopyrightwarning' => 'A short copyright warning displayed during editing in the JavaScript UI. The copyright warning is displayed within a tooltip next to the save button. Parameters:
-* $1: the name of the button the message is referring to. Usually "save".
-* $2: the name of the wiki\'s page describing the terms of use.
-* $3: an external link to the license with the license\'s name as link text.',
+	'wikibase-shortcopyrightwarning' => 'A short copyright warning displayed during editing in the JavaScript UI. The copyright warning is displayed within a tooltip next to the save button.
+
+Parameters:
+* $1 - the name of the button the message is referring to. Usually "save".
+* $2 - the name of the wiki\'s page describing the terms of use
+* $3 - an external link to the license with the license\'s name as link text',
 	'wikibase-copyrighttooltip-acknowledge' => 'Label of the link to not show the copyright warning again. A copyright warning is presented to the user whenever the user is about to alter any data unless the warning is not suppressed permanently by clicking this link.',
 	'wikibase-entityselector-more' => 'The entity selector is a user interface widget that allows selecting an entity (see [[d:Wikidata/Glossary]]). It consists out of an input field and a list of suggestions that is filled according to the text typed into the input field. Initially, the list of suggestions is filled with a certain number of suggestions. Clicking the link labeled with this message will fill the list of suggestions with additional suggestions. If there are no additional suggestions or no suggestions at all, the link does not show up.
 {{Identical|More}}',
@@ -1427,6 +1431,9 @@ Vaše IP adresa bude zaznamenána v historii úprav této vlastnosti.',
 	'wikibase-itemdisambiguation-submit' => 'Hledat',
 	'wikibase-itemdisambiguation-create' => 'Můžete [{{fullurl:Special:CreateItem|label=$1}} vytvořit položku].',
 	'special-newproperty' => 'Vytvořit novou vlastnost',
+	'wikibase-newproperty-summary' => "'''Prosíme, nové vlastnosti nejprve prodiskutujte na [[Wikidata:Property proposal]] a počkejte 2-3 dny, než návrh dosáhne konsensu.'''
+
+Vytvořené valstnosti přidejte na [[Wikidata:List of properties|seznam]]. Některé vlastnosti zatím nelze založit, protože není k dispozici vhodný datatyp. Seznam existujících vlastností je [https://www.wikidata.org/w/index.php?title=Special%3AAllPages&from=&to=&namespace=120 zde]",
 	'wikibase-newproperty-fieldset' => 'Vytvořit novou vlastnost',
 	'wikibase-newproperty-datatype' => 'Typ dat:',
 	'wikibase-newproperty-invalid-datatype' => 'Zadán neplatný typ dat',
@@ -2591,16 +2598,16 @@ $messages['fa'] = array(
 	'wikibase-save' => 'ذخیره',
 	'wikibase-cancel' => 'لغو',
 	'wikibase-add' => 'افزودن',
-	'wikibase-addreference' => 'اضافه کردن منبع',
-	'wikibase-save-inprogress' => 'در حال ذخیره‌کردن...',
+	'wikibase-addreference' => 'افزودن منبع',
+	'wikibase-save-inprogress' => 'در حال ذخیره کردن...',
 	'wikibase-remove-inprogress' => 'در حال حذف کردن...',
 	'wikibase-label-empty' => 'هنوز نامی تعریف نشده‌است.',
-	'wikibase-label-edit-placeholder' => 'واردکردن نام',
+	'wikibase-label-edit-placeholder' => 'وارد کردن نام',
 	'wikibase-description-empty' => 'هنوز توضیحاتی تعریف نشده‌است.',
-	'wikibase-description-edit-placeholder' => 'واردکردن توضیحات',
+	'wikibase-description-edit-placeholder' => 'وارد کردن توضیحات',
 	'wikibase-sitelink-site-edit-placeholder' => 'وب‌گاه',
 	'wikibase-sitelink-page-edit-placeholder' => 'مقاله',
-	'wikibase-alias-edit-placeholder' => 'واردکردن نام مستعار',
+	'wikibase-alias-edit-placeholder' => 'وارد کردن نام مستعار',
 	'wikibase-label-input-help-message' => 'عنوان این مجموعه‌داده‌ها را به $1 وارد کنید.',
 	'wikibase-description-input-help-message' => 'توضیحات کوتاهی به $1 وارد کنید.',
 	'wikibase-statements' => 'اظهارات',
@@ -2628,23 +2635,23 @@ $messages['fa'] = array(
 	'wikibase-aliases-input-help-message' => 'اگر این مجموعه‌داده با بیش از یک نام خاص شناخته می‌شود، می‌توانید نام‌های مستعار و هم‌معنی‌هایش را وارد کنید تا بتوان آن را با نام‌های دیگرش نیز پیدا کرد.',
 	'wikibase-aliases-empty' => 'هیچ نام مستعاری تعریف نشده‌است.',
 	'wikibase-datatype-label' => 'نوع داده:',
-	'wikibase-claimview-snak-tooltip' => 'مقدار مربوط به ویژگی "$1" را وارد کنید. اگر ویژگی فاقد مقدار بود یا مقدار کنونی در دسترس نیست، شما می‌توانید مقدار موازی خود را با کلیک کردن روی دکمهٔ کنار جعبه مقدار وارد کنید.',
+	'wikibase-claimview-snak-tooltip' => 'مقدار مربوط به ویژگی «$1» را وارد کنید. اگر ویژگی فاقد مقدار است یا مقدار کنونی در دسترس نیست، می‌توانید مقدار موازی خود را با کلیک کردن روی دکمهٔ کنار جعبهٔ مقدار وارد کنید.',
 	'wikibase-claimview-snak-new-tooltip' => 'بعد از تعیین یک ویژگی، شما می‌توانید مقدار مربوطه را نیز وارد کنید. اگر ویژگی فاقد مقدار بود یا مقدار در دسترس نبود، شما می‌توانید با کلیک کردن روی دکمهٔ کنار جعبه مقدار، مقدار مورد نظر خود را وارد کنید.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|منبع|منبع}}',
-	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|منبع| $1  منابع}} ذخیره نشده',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'هنوز {{PLURAL:$1|یک منبع|$1 منبع}} ذخیره نشده‌است',
 	'wikibase-snakview-property-input-placeholder' => 'خاصیت',
-	'wikibase-snakview-unsupportedsnaktype' => 'اسنک نوع "$1". کار با این نوع اسنک هنوز پشتیبانی نمی‌شود.',
+	'wikibase-snakview-unsupportedsnaktype' => 'اسنک نوع «$1». کار با این نوع اسنک هنوز پشتیبانی نشده‌است.',
 	'wikibase-snakview-choosesnaktype' => 'نوع مقدار را انتخاب کنید.',
-	'wikibase-snakview-variation-unsupporteddatatype' => 'عدم پشتیبانی از تغییر مقدار "$1" داده',
+	'wikibase-snakview-variation-unsupporteddatatype' => 'پشتیبانی از مقدار نوع دادهٔ «$1» هنوز پشتیبانی نشده‌است.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'مفدار از تعریف ویژگی پیروی نمی‌کند.',
-	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'مفدار نوع مقدار داده "$1" با مقدار ویژگی نوع مقدار داده "$2" همگونی ندارد.',
+	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'نوع مقدار دادهٔ مقدار «$1» با نوع مقدار دادهٔ نوع دادهٔ ویژگی «$2» همگونی ندارد.',
 	'wikibase-snakview-variations-somevalue-label' => 'مقدار ناشناخته',
 	'wikibase-snakview-variations-novalue-label' => 'بدون مقدار',
 	'wikibase-snakview-snaktypeselector-value' => 'مقدار سفارشی',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'مقدار ناشناخته',
 	'wikibase-snakview-snaktypeselector-novalue' => 'بدون مقدار',
-	'wikibase-shortcopyrightwarning' => 'با کلیک کردن روی "$1"، شما با [[$2|قوانین استفاده]] موافقت می‌کنید، و اینکه اجازه می‌دهید ویرایش‌های شما با اجازه‌نامهٔ $3 منتشر شوند.',
-	'wikibase-copyrighttooltip-acknowledge' => 'من این شرایط را برای ویرایش‌های آینده قبول می‌کنم. این پیام را دوباره نشان ندهید.',
+	'wikibase-shortcopyrightwarning' => 'با کلیک کردن روی «$1»، شما با [[$2|قوانین استفاده]] موافقت می‌کنید، و اجازه می‌دهید ویرایش‌هایتان با اجازه‌نامهٔ $3 منتشر شوند.',
+	'wikibase-copyrighttooltip-acknowledge' => 'این شرایط را برای ویرایش‌های بعدی‌ام قبول می‌کنم. این پیام را دوباره نشان ندهید.',
 	'wikibase-entityselector-more' => 'بیشتر',
 	'wikibase-anonymouseditwarning-item' => 'هشدار: شما به سامانه وارد نشده‌اید. 
 نشانی آی‌پی شما در تاریخچهٔ ویرایش این مورد ثبت خواهد شد.',
@@ -2653,10 +2660,10 @@ $messages['fa'] = array(
 	'wikibase-restrictionedit-tooltip-message' => 'این صفحه محافظت شده‌است. ویرایش مجاز نیست.',
 	'wikibase-blockeduser-tooltip-message' => 'دسترسی شما برای ویرایش بسته شده‌است.',
 	'wikibase-move-error' => 'نمی‌توانید صفحه‌هایی را که در فضای نام داده هستند منتقل کنید، همچنین نمی‌توانید صفحه‌ها را به این فضای نام منتقل کنید.',
-	'wikibase-warning-constraint-violation-length' => 'محدودیت طول برای کد زبانی " $1 " اعمال شد.',
-	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|یک محدودیت|محدودیت}} برای {{PLURAL:$1|برچسب|برچسب}} "$3" for {{PLURAL:$1|کد زبانی |کد زبانی}} "$2" نقض شد.',
+	'wikibase-warning-constraint-violation-length' => 'محدودیت طول برای کد زبانی «$1» اعمال شد.',
+	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|یک محدودیت|محدودیت‌هایی}} برای {{PLURAL:$1|برچسب|برچسب‌های}} «$3» {{PLURAL:$1|کد زبانی|کدهای زبانی}} «$2» نقض شد.',
 	'wikibase-error-constraint-violation-description' => '{{PLURAL:$1|یک محدودیت|محدودیت}} برای  {{PLURAL:$1|توضیحات|توضیحات}} "$3" for {{PLURAL:$1|کد زبانی |کد زبانی}} "$2" نقض شد.',
-	'wikibase-error-constraint-violation-aliases' => '{{PLURAL:$1|یک محدودیت|محدودیت}} برای  {{PLURAL:$1|نام مستعار|نام مستعار}} "$3" for {{PLURAL:$1|کد زبانی |کد زبانی}} "$2" نقض شد.',
+	'wikibase-error-constraint-violation-aliases' => '{{PLURAL:$1|یک محدودیت|محدودیت‌هایی}} برای {{PLURAL:$1|نام مستعار|نام‌های مستعار}} «$3» {{PLURAL:$1|کد زبانی|کدهای زبانی}} «$2» نقض شد.',
 	'wikibase-error-sitelink-already-used' => 'پیوند وبگاهی [[$1:$2]] از قبل در آیتم [[$3]] به کار رفته‌است.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'ویژگی دیگری ($3) از قبل دارای نام «$1» مربوط به کد زبان $2 است',
 	'wikibase-error-label-not-unique-wikibase-query' => 'کوئری دیگری ($3) از قبل دارای نام «$1» مربوط به کد زبان $2 است',
@@ -2715,7 +2722,7 @@ $messages['fa'] = array(
 	'wikibase-setaliases-warning-remove' => 'آیا می‌خواهید تمامی نام‌های مستعار [[$1]] را حذف کنید؟',
 	'wikibase-setentity-id' => 'شناسه:',
 	'wikibase-setentity-language' => 'زبان:',
-	'wikibase-setentity-invalid-langcode' => 'شناسهٔ زبان «$1ة ناشناخته است. لطفاً از یک شناسهٔ زبان که برای سامانه شناخته‌شده است (مثل en) استفاده کنید.',
+	'wikibase-setentity-invalid-langcode' => 'شناسهٔ زبان «$1» ناشناخته است. لطفاً از یک شناسهٔ زبان که برای سامانه شناخته‌شده است (مثل «en») استفاده کنید.',
 	'wikibase-setentity-invalid-id' => 'شناسهٔ «$1» برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.',
 	'special-listdatatypes' => 'فهرست همهٔ نوع‌های دادهٔ موجود',
 	'wikibase-listdatatypes-intro' => 'این فهرست همهٔ نوع‌های دادهٔ موجود در این نصب است:',
@@ -2726,6 +2733,7 @@ $messages['fa'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'زبان:',
 	'wikibase-entitieswithoutlabel-submit' => 'یافتن',
 	'wikibase-entitieswithoutlabel-invalid-language' => '«$1» یک کد زبان نامعتبر است.',
+	'special-itemswithoutsitelinks' => 'آیتم‌های بدون پیوند میان‌ویکی',
 	'special-entitydata' => 'داده‌های موضوع',
 	'wikibase-entitydata-not-found' => 'هیچ موضوعی با شناسهٔ «$1» یافت نشد.',
 	'wikibase-entitydata-bad-revision' => 'عدم نمابش تغییر نسخه‌ $2 مورد $1',
@@ -5089,7 +5097,7 @@ $messages['ja'] = array(
 	'wikibase-itemdisambiguation-create' => '[{{fullurl:Special:CreateItem|label=$1}} 項目を新規作成]することもできます。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '申し訳ありませんが、指定した言語コードはこのシステムでは不明です。有効な言語コード (「en」など) を指定してください。',
 	'special-newproperty' => 'プロパティの新規作成',
-	'wikibase-newproperty-summary' => '[[Special:PropertyDisambiguation|プロパティが既に存在することを確認]]してください!<br />すべての新規プロパティについて[[Help:Label|ラベル]]および[[Help:Description|説明]]を作成する必要があり、さらにプロパティの型が有効である必要があります。',
+	'wikibase-newproperty-summary' => 'プロパティが既に存在することを確認してください!<br />すべての新規プロパティについて[[Help:Label|ラベル]]および[[Help:Description|説明]]を作成する必要があり、さらにプロパティの型が有効である必要があります。',
 	'wikibase-newproperty-fieldset' => 'プロパティの新規作成',
 	'wikibase-newproperty-datatype' => 'データの型:',
 	'wikibase-newproperty-invalid-datatype' => '指定したデータの型は無効です',
@@ -6968,6 +6976,7 @@ $messages['pl'] = array(
 );
 
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  * @author Dragonòt
  * @author පසිඳු කාවින්ද
  */
@@ -6978,27 +6987,27 @@ $messages['pms'] = array(
 	'wikibase-save' => 'salva',
 	'wikibase-cancel' => 'scancela',
 	'wikibase-add' => 'gionta',
-	'wikibase-save-inprogress' => 'An salvand...',
-	'wikibase-remove-inprogress' => 'An gavand...',
+	'wikibase-save-inprogress' => "An cors d'argistrassion...",
+	'wikibase-remove-inprogress' => 'Sganfura an cors...',
 	'wikibase-label-empty' => "Gnun-e tichëtte anco' definìe",
-	'wikibase-label-edit-placeholder' => 'anseriss tichëtta',
+	'wikibase-label-edit-placeholder' => 'anserì na tichëtta',
 	'wikibase-description-empty' => "Gnun-e descrission anco' definìe",
-	'wikibase-description-edit-placeholder' => 'anseriss descrission',
+	'wikibase-description-edit-placeholder' => 'anserì na descrission',
 	'wikibase-sitelink-site-edit-placeholder' => 'sit',
 	'wikibase-sitelink-page-edit-placeholder' => 'artìcol',
-	'wikibase-alias-edit-placeholder' => "anseriss n'alias",
+	'wikibase-alias-edit-placeholder' => 'anserì na variant',
 	'wikibase-label-input-help-message' => "Anseriss ël tìtol dë st'ansem ëd dat an $1.",
 	'wikibase-description-input-help-message' => 'Anseriss na curta descrission an $1.',
 	'wikibase-statements' => 'Istrussion',
 	'wikibase-sitelinks-add' => 'gionta un colegament a un sit',
-	'wikibase-sitelinks-empty' => "Gnun sit anco' për sto element.",
-	'wikibase-sitelinks-input-help-message' => 'Ampòsta un colegament a na pagina relativa a sto element.',
+	'wikibase-sitelinks-empty' => "Ancor gnun-a liura a 'n sit për cost element.",
+	'wikibase-sitelinks-input-help-message' => 'Creé na liura a na pàgina relativa a cost element.',
 	'wikibase-remove' => 'gava',
-	'wikibase-undo-title' => 'Anulé modìfica a "$1".',
-	'wikibase-restore-title' => 'Rirpistiné veja revision ëd "$1"',
+	'wikibase-undo-title' => 'Anulé la modìfica a «$1».',
+	'wikibase-restore-title' => 'Rirpistiné na veja revision ëd «$1»',
 	'wikibase-partial-undo' => 'la modìfica a peul esse anulà parsialment.',
-	'wikibase-omitted-undo-ops' => "$1 cambi {{PLURAL:$1|a l'é|a son}} stàit pa fàit përchè {{PLURAL:$1|ël rispetiv valor a l'ha|ij rispetiv valor a l'han}} cangià torna d'antlora.",
-	'wikibase-empty-undo' => 'A-i é gnente che a peussa esse anulà ambelessì.',
+	'wikibase-omitted-undo-ops' => "$1 cambi {{PLURAL:$1|a l'é|a son}} stàit stralassà përchè {{PLURAL:$1|ël rispetiv valor a l'ha|ij rispetiv valor a l'han}} cangià torna d'antlora.",
+	'wikibase-empty-undo' => 'A-i é gnente che a peula esse anulà ambelessì.',
 	'wikibase-undo-revision-error' => 'Anulament falì.',
 	'wikibase-undo-samerev' => 'As peul pa anulé, midema revision dàita për anulé la base e anulé la destinassion.',
 	'wikibase-undo-badpage' => 'Revision pa bon-a: Revision $2 a aparten pa a [[$1]].',
@@ -7076,7 +7085,7 @@ Soa adrëssa IP a sarà memorisà ant la stòria dle modìfiche ëd sa propietà
 	'wikibase-listdatatypes-intro' => "Costa a l'é na lista ëd tute le sòrt ëd dat corentement an usagi dzor sta istalassion:",
 	'wikibase-history-title-with-label' => 'Stòria dle revision ëd "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Stòria dle revision ëd ($1)',
-	'special-entitieswithoutlabel' => 'Lista dle entità sensa tichëtta',
+	'special-entitieswithoutlabel' => 'Lista dle entità sensa tichëtta', # Fuzzy
 	'wikibase-entitieswithoutlabel-legend' => 'Pija la lista dle entità sensa tichëtta',
 	'wikibase-entitieswithoutlabel-label-language' => 'Lenga:',
 	'wikibase-entitieswithoutlabel-submit' => 'Treuva',
@@ -9071,6 +9080,7 @@ $messages['zh-hans'] = array(
 /** Traditional Chinese (中文（繁體）‎)
  * @author Justincheng12345
  * @author Shirayuki
+ * @author Simon Shek
  * @author Stevenliuyi
  */
 $messages['zh-hant'] = array(
@@ -9185,7 +9195,7 @@ $messages['zh-hant'] = array(
 	'wikibase-listdatatypes-intro' => '此列表為目前安裝中使用的所有數據類型：',
 	'wikibase-history-title-with-label' => '「$2」($1)的歷史記錄',
 	'wikibase-history-title-without-label' => '($1)的歷史記錄',
-	'special-entitieswithoutlabel' => '沒有標籤的實體列表',
+	'special-entitieswithoutlabel' => '沒有標籤的實體',
 	'wikibase-entitieswithoutlabel-legend' => '獲取沒有標籤的實體的列表',
 	'wikibase-entitieswithoutlabel-label-language' => '語言：',
 	'wikibase-entitieswithoutlabel-submit' => '尋找',
@@ -9219,9 +9229,9 @@ $messages['zh-hant'] = array(
 	'wikibase-item-summary-wbsetsitelink-set' => '添加指定維基項目[$2]的連接',
 	'wikibase-item-summary-wbsetsitelink-remove' => '刪除指定維基項目[$2]的連接',
 	'wikibase-item-summary-wblinktitles-connect' => '連接[$2↔$3]{{PLURAL:$1|頁面}}',
-	'wikibase-item-summary-wbcreateclaim-value' => '已創建{{PLURAL:$1|數值聲稱}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-novalue' => '已創建{{PLURAL:$1|無數值聲稱}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-somevalue' => '已創建{{PLURAL:$1|半數值聲稱}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-value' => '已創建{{PLURAL:$1|聲稱}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => '已創建{{PLURAL:$1|聲稱}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '已創建{{PLURAL:$1|聲稱}}',
 	'wikibase-item-summary-special-create-item' => '創建含{{PLURAL:$1|數值}}的[$2]項目',
 	'wikibase-property-summary-wbeditentity-create' => '創建新屬性',
 	'wikibase-property-summary-wbeditentity-update' => '更新屬性',

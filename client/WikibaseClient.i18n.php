@@ -1317,6 +1317,18 @@ $messages['ro'] = array(
 	'wikibase-editlinkstitle' => 'Editează legăturile interlingvistice',
 );
 
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'wikibase-nolanglinks' => 'ninde',
+	'wikibase-editlinks' => 'Cange le collegaminde',
+	'wikibase-linkitem-title' => "Collegate cu 'a pàgene",
+	'wikibase-linkitem-linkpage' => "Collegate cu 'a pàgene",
+	'wikibase-linkitem-input-site' => 'Lènghe:',
+	'wikibase-linkitem-input-page' => 'Pàgene:',
+);
+
 /** Russian (русский)
  * @author Kaganer
  * @author Ole Yves
