@@ -3,6 +3,8 @@
 namespace Wikibase;
 
 /**
+ * @todo remove static stuff and refactor
+ *
  * Generates a changes line for including changes from the Wikibase repo in
  * the client's recent changes, watchlist and related changes special pages.
  *
@@ -70,7 +72,14 @@ class ExternalChangesLine {
 		$line = '';
 
 		if ( in_array( $changeType, array( 'remove', 'restore' ) ) ) {
-			$deletionLog = ClientUtils::repoLink( 'Special:Log/delete', wfMessage( 'dellogpage' )->text() );
+			$repoLinker = new RepoLinker(
+				Settings::get( 'repoUrl' ),
+				Settings::get( 'repoArticlePath' ),
+				Settings::get( 'repoScriptPath' ),
+				Settings::get( 'repoNamespaces' )
+			);
+
+			$deletionLog = $repoLinker->repoLink( 'Special:Log/delete', wfMessage( 'dellogpage' )->text() );
 			$line .= wfMessage( 'parentheses' )->rawParams( $deletionLog );
 		} else if ( in_array( $changeType, array( 'add', 'update' ) ) ) {
 
@@ -210,7 +219,14 @@ class ExternalChangesLine {
 	 * @return string
 	 */
 	protected static function diffLink( $titleText, $entityData, $rc ) {
-		return ClientUtils::repoLink(
+		$repoLinker = new RepoLinker(
+			Settings::get( 'repoUrl' ),
+			Settings::get( 'repoArticlePath' ),
+			Settings::get( 'repoScriptPath' ),
+			Settings::get( 'repoNamespaces' )
+		);
+
+		return $repoLinker->repoLink(
 			null,
 			wfMessage( 'diff' )->text(),
 			array(
@@ -238,7 +254,14 @@ class ExternalChangesLine {
 	 * @return string
 	 */
 	protected static function historyLink( $titleText, $entityData ) {
-		$link = ClientUtils::repoLink(
+		$repoLinker = new RepoLinker(
+			Settings::get( 'repoUrl' ),
+			Settings::get( 'repoArticlePath' ),
+			Settings::get( 'repoScriptPath' ),
+			Settings::get( 'repoNamespaces' )
+		);
+
+		$link = $repoLinker->repoLink(
 			null,
 			wfMessage( 'hist' )->text(),
 			array(
@@ -283,12 +306,19 @@ class ExternalChangesLine {
 	 * @return string
 	 */
 	protected static function userLink( $userName ) {
+		$repoLinker = new RepoLinker(
+			Settings::get( 'repoUrl' ),
+			Settings::get( 'repoArticlePath' ),
+			Settings::get( 'repoScriptPath' ),
+			Settings::get( 'repoNamespaces' )
+		);
+
 		// @todo: localise this once namespaces are localised on the repo
 		$link = "User:$userName";
 		$attribs = array(
 			 'class' => 'mw-userlink'
 		);
-		return ClientUtils::repoLink( $link, $userName, $attribs );
+		return $repoLinker->repoLink( $link, $userName, $attribs );
 	}
 
 	/**
@@ -306,7 +336,15 @@ class ExternalChangesLine {
 		if ( $text === null ) {
 			$text = wfMessage( 'contribslink' );
 		}
-		return ClientUtils::repoLink( $link, $text );
+
+		$repoLinker = new RepoLinker(
+			Settings::get( 'repoUrl' ),
+			Settings::get( 'repoArticlePath' ),
+			Settings::get( 'repoScriptPath' ),
+			Settings::get( 'repoNamespaces' )
+		);
+
+		return $repoLinker->repoLink( $link, $text );
 	}
 
 	/**
@@ -317,10 +355,17 @@ class ExternalChangesLine {
 	 * @return string
 	 */
 	protected static function userTalkLink( $userName ) {
+		$repoLinker = new RepoLinker(
+			Settings::get( 'repoUrl' ),
+			Settings::get( 'repoArticlePath' ),
+			Settings::get( 'repoScriptPath' ),
+			Settings::get( 'repoNamespaces' )
+		);
+
 		// @todo: localize this once we can localize namespaces on the repo
 		$link = "User_talk:$userName";
 		$text = wfMessage( 'talkpagelinktext' )->text();
-		return ClientUtils::repoLink( $link, $text );
+		return $repoLinker->repoLink( $link, $text );
 	}
 
 	/**
@@ -366,41 +411,14 @@ class ExternalChangesLine {
 			return false;
 		}
 
-		return ClientUtils::repoLink( $entityText, $entityId, array( 'class' => 'wb-entity-link' ) );
-	}
+		$repoLinker = new RepoLinker(
+			Settings::get( 'repoUrl' ),
+			Settings::get( 'repoArticlePath' ),
+			Settings::get( 'repoScriptPath' ),
+			Settings::get( 'repoNamespaces' )
+		);
 
-	/**
-	 * TODO: returning a string as namespace like this is odd.
-	 * Returning the namespace ID would make more sense.
-	 * If the result of this is not handled to a Title object
-	 * we miss out on proper localization and stuff.
-	 *
-	 * @since 0.2
-	 *
-	 * @param array $entityData
-	 *
-	 * @return string
-	 */
-	protected static function getNamespace( $entityData ) {
-		$nsList = Settings::get( 'repoNamespaces' );
-		$ns = null;
-
-		switch( $entityData['entity_type'] ) {
-			case 'item':
-				$ns = $nsList['wikibase-item'];
-				break;
-			case 'property':
-				$ns = $nsList['wikibase-property'];
-				break;
-			default:
-				// invalid entity type
-				// todo: query data type
-				return false;
-		}
-		if ( ! empty( $ns ) ) {
-			$ns = $ns . ':';
-		}
-		return $ns;
+		return $repoLinker->repoLink( $entityText, $entityId, array( 'class' => 'wb-entity-link' ) );
 	}
 
 	/**
@@ -416,6 +434,7 @@ class ExternalChangesLine {
 			$id = $entityData['object_id'];
 
 			if ( ctype_digit( $id ) || is_numeric( $id ) ) {
+				// @deprecated
 				// FIXME: this is evil; we seem to have lost all encapsulation at this point,
 				// so some refactoring is needed to have sane access to the info here.
 				$entityType = explode( '-', $entityData['entity_type'], 2 );
@@ -426,12 +445,20 @@ class ExternalChangesLine {
 				$entityId = EntityId::newFromPrefixedId( $id );
 			}
 
-			// TODO: ideally the uppercasing would be handled by a Title object
-			$titleText = $entityId ? strtoupper( $entityId->getPrefixedId() ) : $id;
+			$titleText = strtoupper( $entityId->getPrefixedId() );
 
 			if ( $includeNamespace ) {
-				$ns = self::getNamespace( $entityData );
-				$titleText = $ns . $titleText;
+				$repoLinker = new RepoLinker(
+					Settings::get( 'repoUrl' ),
+					Settings::get( 'repoArticlePath' ),
+					Settings::get( 'repoScriptPath' ),
+					Settings::get( 'repoNamespaces' )
+				);
+
+				$ns = $repoLinker->getNamespace( $entityId );
+				if ( !empty( $ns ) ) {
+					$titleText = $ns . ':' . $titleText;
+				}
 			}
 
 			return $titleText;
