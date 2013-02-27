@@ -49,7 +49,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			'id' => 1,
 			'label' => array( 'en' => 'Foo' ),
 			'links' => array(
-				'testwiki' => 'Foo',
+				'srwiki' => 'Foo',
 				'dewiki' => 'Foo_de',
 				'enwiki' => 'Foo_en',
 			)
@@ -58,7 +58,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			'id' => 2,
 			'label' => array( 'en' => 'Talk:Foo' ),
 			'links' => array(
-				'testwiki' => 'Talk:Foo',
+				'srwiki' => 'Talk:Foo',
 				'dewiki' => 'Talk:Foo_de',
 				'enwiki' => 'Talk:Foo_en',
 			)
@@ -84,7 +84,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		}
 
 		$this->langLinkHandler = new \Wikibase\LangLinkHandler(
-			'testwiki',
+			'srwiki',
 			array( NS_MAIN ),
 			array(),
 			$this->mockRepo,
@@ -101,7 +101,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			array( // #1
 				'Foo', // page
 				array( // expected links
-					'testwiki' => 'Foo',
+					'srwiki' => 'Foo',
 					'dewiki' => 'Foo_de',
 					'enwiki' => 'Foo_en',
 				)
@@ -229,6 +229,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	public function testUseRepoLinks( $title, $noexternallanglinks, $expected ) {
 		if ( is_string( $title ) ) {
 			$title = \Title::newFromText( $title );
+			$title->resetArticleID( 1 );
 		}
 
 		$out = $this->makeParserOutput( array(), $noexternallanglinks );
