@@ -45,6 +45,11 @@ if ( !defined( 'DataValues_VERSION' ) ) {
 	@include_once( __DIR__ . '/../../DataValues/DataValues.php' );
 }
 
+// Include the Ask extension if that hasn't been done yet, since it's required for WikibaseLib to work.
+if ( !defined( 'Ask_VERSION' ) ) {
+	@include_once( __DIR__ . '/../../Ask/Ask.php' );
+}
+
 $dependencies = array(
 	'Diff_VERSION' => 'Diff',
 	'DataValues_VERSION' => 'DataValues',
