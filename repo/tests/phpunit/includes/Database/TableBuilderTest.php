@@ -7,7 +7,7 @@ use Wikibase\Repo\Database\FieldDefinition;
 use Wikibase\Repo\Database\TableDefinition;
 
 /**
- * Unit test Wikibase\Repo\Database\TableBuilder class.
+ * Unit tests for the Wikibase\Repo\Database\TableBuilder class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ use Wikibase\Repo\Database\TableDefinition;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.4
+ * @since wd.db
  *
  * @ingroup WikibaseRepoTest
  *
@@ -125,7 +125,7 @@ class NullMessageReporter implements MessageReporter {
 	/**
 	 * @see MessageReporter::reportMessage
 	 *
-	 * @since 0.4
+	 * @since wd.db
 	 *
 	 * @param string $message
 	 */
