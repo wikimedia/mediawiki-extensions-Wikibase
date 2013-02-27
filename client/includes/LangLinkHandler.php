@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use SiteStore;
+use Sites;
 use Site;
 use Title;
 use ParserOutput;
@@ -80,18 +81,24 @@ class LangLinkHandler {
 		wfProfileIn( __METHOD__ );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking for sitelinks defined by the corresponding item on the wikibase repo." );
 
-		$itemId = $this->siteLinksLookup->getItemIdForLink(
-			$this->siteId,
-			$title->getFullText()
-		);
+		$links = array();
+
+		$site = Sites::singleton()->getSite( $this->siteId );
+
+		if ( $site === null ) {
+			wfWarn( 'Site not found for ' . $this->siteId );
+			return $links;
+		}
+
+		$siteLink = new SiteLink( $site, $title->getFullText() );
+
+		$itemId = $this->siteLinksLookup->getEntityIdForSiteLink( $siteLink );
 
 		$links =  array();
 
-		if ( $itemId !== false ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $title->getFullText() . " is " . $itemId );
-
-			$links = $this->siteLinksLookup->getSiteLinksForItem(
-				new EntityId( Item::ENTITY_TYPE, $itemId ) );
+		if ( $itemId instanceof EntityId ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $title->getFullText() . " is " . $itemId->getPrefixedId() );
+			$links = $this->siteLinksLookup->getSiteLinksForItem( $itemId );
 		} else {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": No corresponding item found for " . $title->getFullText() );
 		}
@@ -124,7 +131,7 @@ class LangLinkHandler {
 		);
 
 		// use repoLinks in only the namespaces specified in settings
-		if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+		if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) === true ) {
 			$nel = self::getNoExternalLangLinks( $out );
 
 			if( in_array( '*', $nel ) ) {
@@ -203,7 +210,7 @@ class LangLinkHandler {
 	 */
 	public function getNoExternalLangLinks( ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
-		$nel = $out->getProperty( 'noexternallanglinks' );
+		$nel = unserialize( $out->getProperty( 'noexternallanglinks' ) );
 
 		if( empty( $nel ) ) {
 			$nel = array();
@@ -224,7 +231,7 @@ class LangLinkHandler {
 	 */
 	public function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
 		wfProfileIn( __METHOD__ );
-		$out->setProperty( 'noexternallanglinks', $noexternallanglinks );
+		$out->setProperty( 'noexternallanglinks', serialize( $noexternallanglinks ) );
 		wfProfileOut( __METHOD__ );
 	}
 
@@ -355,6 +362,7 @@ class LangLinkHandler {
 		$onPageLinks = $this->localLinksToArray( $onPageLinks );
 
 		$repoLinks = $this->getEntityLinks( $title );
+
 		$repoLinks = $this->repoLinksToArray( $repoLinks );
 		$repoLinks = $this->suppressRepoLinks( $out, $repoLinks );
 
@@ -362,6 +370,36 @@ class LangLinkHandler {
 
 		wfProfileOut( __METHOD__ );
 		return $repoLinks;
+	}
+
+	/**
+	 * Set parser output property with item id
+	 *
+	 * @since 0.4
+	 *
+	 * @param ParserOutput $out
+	 * @param SiteLink $siteLink
+	 */
+	protected function setItemIdProperty( ParserOutput $out, SiteLink $siteLink ) {
+		// todo: do we really want to fetch item id twice during parsing?
+		$itemId = $this->siteLinksLookup->getEntityIdForSiteLink( $siteLink );
+
+		if ( $itemId instanceof EntityId ) {
+			// @todo get prefixed id in nicer way, or maybe we want it to be numeric id
+			$out->setProperty( 'wikibase_item', $itemId->getPrefixedId() );
+		} else {
+			// unset property, if it was set
+			$properties = $out->getProperties();
+
+			if ( array_key_exists( 'wikibase_item', $properties ) ) {
+				unset( $properties['wikibase_item'] );
+				$out->mProperties = $properties;
+			}
+
+			wfDebugLog( __CLASS__, __FUNCTION__ . 'Trying to set wikibase_item property for '
+				. $siteLink->getSite()->getGlobalId() . ':' . $siteLink->getPage()
+				. ' but $itemId is not an EntityId object.' );
+		}
 	}
 
 	/**
@@ -378,6 +416,17 @@ class LangLinkHandler {
 	 */
 	public function addLinksFromRepository( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
+
+		$site = Sites::singleton()->getSite( $this->siteId );
+
+		if ( $site === null ) {
+			wfWarn( 'Site not found for ' . $this->siteId . '. Cannot add links from repository.' );
+			return;
+		}
+
+		$siteLink = new SiteLink( $site, $title->getFullText() );
+
+		$this->setItemIdProperty( $out, $siteLink );
 
 		$repoLinks = $this->getEffectiveRepoLinks( $title, $out );
 
@@ -401,6 +450,10 @@ class LangLinkHandler {
 				wfWarn( "No interlanguage prefix found for $wiki." );
 			}
 		}
+
+		// @todo: perhaps a better place to do this
+		$linksUpdate = new \LinksUpdate( $title, $out );
+		$linksUpdate->doUpdate();
 
 		wfProfileOut( __METHOD__ );
 	}
