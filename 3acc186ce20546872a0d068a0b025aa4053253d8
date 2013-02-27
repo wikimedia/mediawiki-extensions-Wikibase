@@ -189,6 +189,23 @@
     },
     {
       "key": {
+        "uuid": "DnZzby3k",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-27T00:43:56Z",
+      "side": 1,
+      "message": "We need some kind of escaping here. Currently, this will return the label of the referenced item, and labels can contain anything.\n\nThis is treated as wikitext, so it\u0027s not an injection vector, but a \u0027\u0027 in the label should stay as it is. Raw values should probably be wrapped in \u003cnowiki\u003e, and any \u003c and \u003e in the raw value should be replaced by \u0026lt; and \u0026gt;",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//3kM\u003d",
         "filename": "client/includes/parserhooks/PropertyParser.php",
         "patchSetId": 1
