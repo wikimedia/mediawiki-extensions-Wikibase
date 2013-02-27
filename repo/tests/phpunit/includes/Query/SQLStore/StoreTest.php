@@ -37,6 +37,15 @@ use Wikibase\Repo\Test\Query\QueryStoreTest;
  */
 class StoreTest extends QueryStoreTest {
 
-	// TODO
+	/**
+	 * @see QueryStoreTest::getInstances
+	 */
+	protected function getInstances() {
+		$instances = array();
+
+		$instances[] = new Store( 'foo', array() );
+
+		return $instances;
+	}
 
 }
