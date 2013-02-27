@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Test\Query;
 
-use Wikibase\Repo\Database\FieldDefinition;
+use Wikibase\Repo\Query\QueryEngine;
 
 /**
  * Base test class for Wikibase\Repo\Query\QueryEngine implementing classes.
@@ -32,6 +32,34 @@ use Wikibase\Repo\Database\FieldDefinition;
  */
 abstract class QueryEngineTest extends \MediaWikiTestCase {
 
-	// TODO
+	/**
+	 * @since wd.qe
+	 *
+	 * @return QueryEngine[]
+	 */
+	protected abstract function getInstances();
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @return QueryEngine[][]
+	 */
+	public function instanceProvider() {
+		return $this->arrayWrap( $this->getInstances() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param QueryEngine $queryEngine
+	 */
+	public function testGetNameReturnType( QueryEngine $queryEngine ) {
+		// TODO
+
+//		$query = new \Ask\Language\Query(  );
+//		$this->assertInstanceOf( 'Wikibase\Repo\Query\QueryEngineResult', $queryEngine->runQuery() );
+
+		$this->assertTrue( true );
+	}
 
 }

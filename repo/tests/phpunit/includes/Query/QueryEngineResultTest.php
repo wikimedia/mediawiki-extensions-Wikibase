@@ -34,7 +34,7 @@ use Wikibase\Repo\Query\QueryEngineResult;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class QueryEngineResultTest extends QueryEngineTest {
+class QueryEngineResultTest extends \MediaWikiTestCase {
 
 	// TODO
 
