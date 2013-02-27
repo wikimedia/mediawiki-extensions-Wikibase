@@ -171,6 +171,19 @@ class LangLinkHandler {
 	}
 
 	/**
+	 * Suppress external language links
+	 *
+	 * @since 0.4
+	 *
+	 * @param \ParserOutput $out
+	 * @param $langs[]
+	 */
+	public function excludeRepoLangLinks( ParserOutput $out, array $langs ) {
+		$nel = array_merge( $this->getNoExternalLangLinks( $out ), $langs );
+		$this->setNoExternalLangLinks( $out, $nel );
+	}
+
+	/**
 	 * Get the noexternallanglinks page property from the ParserOutput,
 	 * which is set by the {{#noexternallanglinks}} parser function.
 	 *
@@ -185,8 +198,6 @@ class LangLinkHandler {
 
 		if( empty( $nel ) ) {
 			$nel = array();
-		} else {
-			$nel = unserialize( $nel );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -204,7 +215,7 @@ class LangLinkHandler {
 	 */
 	public function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
 		wfProfileIn( __METHOD__ );
-		$out->setProperty( 'noexternallanglinks', serialize( $noexternallanglinks )  );
+		$out->setProperty( 'noexternallanglinks', $noexternallanglinks );
 		wfProfileOut( __METHOD__ );
 	}
 
