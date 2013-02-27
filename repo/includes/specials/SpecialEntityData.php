@@ -44,6 +44,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 		'statements',
 	);
 
+	private static $rdfContentType = array ( "rdf" => "application/rdf+xml", "nt" => "text/plain" );
+
 	/**
 	 * Constructor.
 	 *
@@ -98,7 +100,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$apiFormat = self::getApiFormatName( $format );
 		$printer = $apiFormat === null ? null : $this->createApiPrinter( $apiFormat );
 
-		if ( !$printer ) {
+		if ( !$printer && !array_key_exists( $apiFormat, self::$rdfContentType ) ) {
 			throw new \HttpError( 415, wfMessage( 'wikibase-entitydata-unsupported-format' )->params( $format ) );
 		}
 
@@ -140,7 +142,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$rev = $page->getRevision();
 		}
 
-		$this->showData( $entity, $printer, $rev );
+		if ( array_key_exists( $apiFormat, self::$rdfContentType ) ) {
+			$this->showRdfData( $entity, $apiFormat, $rev );
+		} else {
+			$this->showData( $entity, $printer, $rev );
+		}
 	}
 
 	/**
@@ -354,6 +360,47 @@ class SpecialEntityData extends SpecialWikibasePage {
 		//FIXME: Cache-Control and Expires headers are apparently overwritten later!
 
 		$this->output( $entity, $printer, $revision );
+	}
+
+	/**
+	 * Output the entity data as RDF and set the appropriate HTTP response headers.
+	 *
+	 * @param Wikibase\EntityContent $entity the entity to output.
+	 * @param string $apiFormat
+	 * @param Revision $revision the entity's revision (optional)
+	 *
+	 * @throws HttpError If an unsupported format is requested.
+	 */
+	public function showRdfData( EntityContent $entity, $apiFormat, Revision $revision = null ) {
+		global $wgSquidMaxage;
+
+		// NOTE: similar code as in RawAction::onView, keep in sync.
+
+		$request = $this->getRequest();
+		$response = $request->response();
+
+		$maxage = $request->getInt( 'maxage', $wgSquidMaxage );
+		$smaxage = $request->getInt( 'smaxage', $wgSquidMaxage );
+
+		// Sanity: 0 to 30 days. // todo: Hard maximum could be configurable somehow.
+		$maxage  = max( 0, min( 60 * 60 * 24 * 30, $maxage ) );
+		$smaxage = max( 0, min( 60 * 60 * 24 * 30, $smaxage ) );
+
+		//TODO: set Last-Modified header? Why doesn't mediawiki set that for article pages?
+
+		// make sure we are reporting the correct content type
+		$contentType = self::$rdfContentType[$apiFormat];
+		$response->header( 'Content-Type: ' . $contentType . '; charset=UTF-8' );
+
+		// allow the client to cache this
+		$mode = 'public';
+		$response->header( 'Cache-Control: ' . $mode . ', s-maxage=' . $smaxage . ', max-age=' . $maxage );
+		//FIXME: Cache-Control and Expires headers are apparently overwritten later!
+
+		$this->getOutput()->disable();
+
+		$linkedDataSerializer = new \Wikibase\LinkedDataSerializer();
+		echo $linkedDataSerializer->getRdfForItem( $entity, $apiFormat );
 	}
 
 }

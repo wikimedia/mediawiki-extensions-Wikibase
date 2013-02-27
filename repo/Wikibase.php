@@ -154,6 +154,7 @@ $wgAutoloadClasses['Wikibase\EntityContentFactory'] 	= $dir . 'includes/content/
 $wgAutoloadClasses['Wikibase\EntityHandler'] 			= $dir . 'includes/content/EntityHandler.php';
 $wgAutoloadClasses['Wikibase\ItemContent'] 				= $dir . 'includes/content/ItemContent.php';
 $wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/content/ItemHandler.php';
+$wgAutoloadClasses['Wikibase\LinkedDataSerializer'] 	= $dir . 'includes/content/LinkedDataSerializer.php';
 $wgAutoloadClasses['Wikibase\PropertyContent'] 			= $dir . 'includes/content/PropertyContent.php';
 $wgAutoloadClasses['Wikibase\PropertyHandler'] 			= $dir . 'includes/content/PropertyHandler.php';
 $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
