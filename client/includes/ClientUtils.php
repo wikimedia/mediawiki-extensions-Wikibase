@@ -51,6 +51,40 @@ final class ClientUtils {
 	}
 
 	/**
+	 * TODO: returning a string as namespace like this is odd.
+	 * Returning the namespace ID would make more sense.
+	 * If the result of this is not handled to a Title object
+	 * we miss out on proper localization and stuff.
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $entityData
+	 *
+	 * @return string
+	 */
+	public static function getNamespace( $entityType ) {
+		$nsList = Settings::get( 'repoNamespaces' );
+		$ns = null;
+
+		switch( $entityType ) {
+			case 'item':
+				$ns = $nsList['wikibase-item'];
+				break;
+			case 'property':
+				$ns = $nsList['wikibase-property'];
+				break;
+			default:
+				// invalid entity type
+				// todo: query data type
+				return false;
+		}
+		if ( ! empty( $ns ) ) {
+			$ns = $ns . ':';
+		}
+		return $ns;
+	}
+
+	/**
 	 * @since 0.3
 	 *
 	 * @param string $target
