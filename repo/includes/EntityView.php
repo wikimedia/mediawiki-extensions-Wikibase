@@ -760,23 +760,29 @@ abstract class EntityView extends \ContextSource {
 	protected static function getBasicEntityInfo( EntityLookup $entityLoader, array $entityIds, $langCode ) {
 		wfProfileIn( __METHOD__ );
 
+		$entityContentFactory = EntityContentFactory::singleton();
 		$entities = $entityLoader->getEntities( $entityIds );
 		$entityInfo = array();
+
+		$serializerFactory = new SerializerFactory();
+		$serializationOptions = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
+		$serializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
+
+		$serializationOptions->setLanguages( array( $langCode ) );
 
 		foreach( $entities as $prefixedId => $entity ) {
 			if( $entity === null ) {
 				continue;
 			}
-			$entities[ $prefixedId ] = $entity->getLabel( $langCode );
+			$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
+			$entityInfo[ $prefixedId ] = $serializer->getSerialized( $entity );
 
-			$entityInfo[ $prefixedId ] = array(
-				'label' => $entity->getLabel( $langCode ),
-				'url' => EntityContentFactory::singleton()->getTitleForId( $entity->getId() )->getFullUrl()
-			);
+			$entityContent = $entityContentFactory->getFromId( $entity->getId() );
 
-			if( $entity instanceof Property ) {
-				$entityInfo[ $prefixedId ]['datatype'] = $entity->getDataType()->getId();
-			}
+			// TODO: should perhaps implement and use a EntityContentSerializer since this is mixed,
+			//  serialized Entity and EntityContent data because of adding the URL:
+			$entityInfo[ $prefixedId ]['title'] = $entityContent->getTitle()->getPrefixedText();
+			$entityInfo[ $prefixedId ]['lastrevid'] = $entityContent->getWikiPage()->getRevision()->getId();
 		}
 
 		wfProfileOut( __METHOD__ );
