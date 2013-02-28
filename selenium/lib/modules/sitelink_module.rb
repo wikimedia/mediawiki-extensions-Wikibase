@@ -22,9 +22,10 @@ module SitelinkPage
   text_field(:pageInputField, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tfoot/tr/td[contains(@class, 'wb-sitelinks-link')]/input")
   text_field(:pageInputFieldExistingSiteLink, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody/tr/td[contains(@class, 'wb-sitelinks-link')]/input")
   span(:saveSitelinkLinkDisabled, :class => "wb-ui-toolbar-button-disabled")
-  unordered_list(:siteIdAutocompleteList, :class => "ui-autocomplete", :index => 0)
-  unordered_list(:pageAutocompleteList, :class => "ui-autocomplete", :index => 1)
-  unordered_list(:editSitelinkAutocompleteList, :class => "ui-autocomplete", :index => 0)
+  unordered_list(:siteIdAutocompleteList, :class => "wikibase-siteselector-list")
+  #todo: this is not a nice way to get the suggestion list, we should find a better way
+  unordered_list(:pageAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']")
+  unordered_list(:editSitelinkAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']")
   link(:saveSitelinkLink, :text => "save")
   link(:cancelSitelinkLink, :text => "cancel")
   link(:removeSitelinkLink, :text => "remove")
