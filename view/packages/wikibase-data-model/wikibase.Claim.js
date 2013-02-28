@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( wb, $, undefined ) {
+( function( wb, $ ) {
 'use strict';
 
 /**
@@ -92,6 +92,25 @@ wb.Claim.prototype = {
 			throw new Error( 'Qualifiers have to be a wb.SnakList object' );
 		}
 		this._qualifiers = qualifiers;
+	},
+
+	/**
+	 * Returns whether this Claim is equal to another Claim. Two Claims are considered equal
+	 * if they are of the same type and have the same value. The value does not include the guid,
+	 * so Claims with the same value but different guids are still considered equal.
+	 *
+	 * @since 0.4
+	 *
+	 * @param {wb.Claim|*} claim If this is not a wb.Claim, false will be returned.
+	 * @return boolean
+	 */
+	equals: function( claim ) {
+		return this === claim
+			|| ( // snaks have no IDs, so we don't have to worry about comparing any
+				claim instanceof wb.Claim
+				&& this._mainSnak.equals( claim.getMainSnak() )
+				&& this._qualifiers.equals( claim.getQualifiers() )
+			);
 	}
 };
 
@@ -127,9 +146,7 @@ wb.Claim.newFromJSON = function( json ) {
 		rank = wb.Statement.RANK[ json.rank.toUpperCase() ];
 		return new wb.Statement( mainSnak, qualifiers, references, rank, guid );
 	}
-	else {
-		return new wb.Claim( mainSnak, qualifiers, guid );
-	}
+	return new wb.Claim( mainSnak, qualifiers, guid );
 };
 
 }( wikibase, jQuery ) );

@@ -124,8 +124,8 @@ wb.Snak.newFromJSON = function( json ) {
 };
 
 /**
- * Creates a new Snak Object from a given Object with certain keys and values, what a certain Snak
- * would return when calling toMap().
+ * Creates a new Snak Object from a given Object with certain keys and values, what an actual Snak
+ * would return when calling its toMap().
  *
  * @since 0.4
  *
