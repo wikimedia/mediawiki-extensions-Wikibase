@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DnfUPbYc",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-02-28T16:09:00Z",
+      "side": 1,
+      "message": "oh noez, whitespace!\n\ncan fix in follow up",
+      "revId": "b944150295823f8d08080844351223847bea3db5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
