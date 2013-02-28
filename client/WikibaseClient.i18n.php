@@ -64,15 +64,25 @@ $messages['en'] = array(
 $messages['qqq'] = array(
 	'wikibase-client-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
 See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
-	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfuly move, inviting user to update associated Wikibase repo item to maintain language links on the moved page on the client.
-* Parameter $1 is the link for the associated Wikibase item.',
+	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfully move, inviting user to update associated Wikibase repository item to maintain language links on the moved page on the client.
+
+Parameters:
+* $1 - the link for the associated Wikibase item.',
 	'wikibase-comment-remove' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item connected to a page gets deleted. This results in all the language links being removed from the page on the client.',
 	'wikibase-comment-linked' => 'Autocomment message in the client for when a Wikidata item is linked to a page in the client.',
 	'wikibase-comment-unlink' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a site link to a page gets removed. This results in the associated item being disconnected from the client page and all the language links being removed.',
 	'wikibase-comment-restore' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item gets undeleted and has a site link to this page. Language links get readded to the client page.',
 	'wikibase-comment-update' => 'Autocomment message for client (e.g. Wikipedia) recent changes when site links for a linked Wikidata item get changed. This results in language links being updated on the client page.',
-	'wikibase-comment-sitelink-add' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets added on the repository. This change appears on the client as a new language link in the sidebar. $1 is the wikilink that was added, in form of [[:de:Berlin|de:Berlin]].',
-	'wikibase-comment-sitelink-change' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets changed on the repository.  $1 is the wikilink for the old link and $2 is the new wikilink.  Format of wikilink is [[:de:Berlin|de:Berlin]].',
+	'wikibase-comment-sitelink-add' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets added on the repository. This change appears on the client as a new language link in the sidebar.
+
+Parameters:
+* $1 - the wikilink that was added, in form of [[:de:Berlin|de:Berlin]]',
+	'wikibase-comment-sitelink-change' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets changed on the repository.
+
+Parameters:
+* $1 - the wikilink for the old link
+* $2 - the new wikilink
+Format of wikilink is [[:de:Berlin|de:Berlin]].',
 	'wikibase-comment-sitelink-remove' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets removed on the repository.  $1 is the wikilink for the link removed, in format [[:de:Berlin|de:Berlin]].',
 	'wikibase-comment-multi' => 'Summary shown in [[Special:RecentChanges]] and on [[Special:WatchList]] for an entry that represents multiple changes on the Wikibase repository.
 
@@ -87,7 +97,10 @@ Parameters:
 	'wikibase-linkitem-addlinks' => 'Link in the sidebar asking to add language links and link the current page with pages on other sites. Only visible in case the current page has no langlinks.
 {{Identical|Add link}}',
 	'wikibase-linkitem-alreadylinked' => 'Tells that the page which the user wanted to link with the current one is already attached to an item on the central data repository. That item already links to an article on this site while items can only have one page per site attached.
-	$1 is a link to the item, $2 is the name of the page in the current wiki the item already links to',
+
+Parameters:
+* $1 - a link to the item
+* $2 - the name of the page in the current wiki the item already links to',
 	'wikibase-linkitem-close' => 'Button text asking to close the current dialog and to reload the page.',
 	'wikibase-linkitem-failure' => 'Shown in case an error occurred which is not an API error (like a linking conflict)',
 	'wikibase-linkitem-title' => 'Title for the dialog which allows linking the current page with a page on another site.',
@@ -99,15 +112,22 @@ Parameters:
 {{Identical|Page}}',
 	'wikibase-linkitem-invalidsite' => 'Tooltip shown if the user entered an invalid site to link pages with',
 	'wikibase-linkitem-confirmitem-text' => 'Text shown above a table containing links to other pages. Asks the user to confirm that the links are correct and should be linked with the current page.
-	$1 is the URL to the item which links to the shown pages',
+
+Parameters:
+* $1 - the URL to the item which links to the shown pages',
 	'wikibase-linkitem-confirmitem-button' => 'Button label below a table containing links to other pages. Asks the user to confirm that he wants to link them with the current page.
 {{Identical|Confirm}}',
 	'wikibase-linkitem-not-loggedin-title' => 'Title of the dialog telling the user that he needs to login on both the repo and client to use this feature.',
-	'wikibase-linkitem-not-loggedin' => 'This messages informs the user that he needs to be logged in on both this wiki and the repo to use this feature. $1 is the URI to the login form of the repo',
+	'wikibase-linkitem-not-loggedin' => 'This messages informs the user that he needs to be logged in on both this wiki and the repository to use this feature.
+
+Parameters:
+* $1 - the URI to the login form of the repository',
 	'wikibase-linkitem-success-create' => 'Success message after a new item has been created which contains links to the page the user is currently on and the one entered. $1 holds a URL pointing to the new item.',
 	'wikibase-linkitem-success-link' => 'Success message after the page the user currently is on has been linked with an item. $1 holds a URL pointing to the item.',
 	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
-* Parameter $1 is a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
+
+Parameters:
+* $1 - a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
 	'wikibase-rc-show-wikidata-pref' => 'Option in the Recent changes section of preferences to show wikibase changes by default in recent changes',
 );
 
@@ -262,9 +282,34 @@ $messages['bs'] = array(
 $messages['ca'] = array(
 	'wikibase-client-desc' => "Client per l'extensió Wikibase",
 	'wikibase-after-page-move' => "Podeu també [$1 actualitzar] l'element associat de Wikidata per a mantenir els enllaços d'idioma a la pàgina moguda.",
-	'wikibase-comment-multi' => '{{PLURAL:$1|canvi|canvis}}', # Fuzzy
+	'wikibase-comment-remove' => 'Element associat de Wikidata eliminat. Enllaços de llengua suprimits.',
+	'wikibase-comment-linked' => 'Un element de Wikidata ha estat enllaçat a aquesta pàgina.',
+	'wikibase-comment-unlink' => "Aquesta pàgina ha estat deslligada de l'element Wikidata. Enllaços de llengua suprimits.",
+	'wikibase-comment-restore' => 'Element associat de Wikidata recuperat. Enllaços de llengua restaurats.',
+	'wikibase-comment-update' => 'Enllaços de llengua actualitzats.',
+	'wikibase-comment-sitelink-add' => 'Afegit enllaç de llengua: $1',
+	'wikibase-comment-sitelink-change' => 'Enllaç de llengua canviat de $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Tret enllaç de llengua: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|canvi|canvis}}',
+	'wikibase-nolanglinks' => 'cap',
 	'wikibase-editlinks' => 'Modifica els enllaços',
 	'wikibase-editlinkstitle' => 'Modifica enllaços interlingües',
+	'wikibase-linkitem-addlinks' => 'Afegeix enllaços',
+	'wikibase-linkitem-alreadylinked' => 'La pàgina amb la que voleu enllaçar ja està definida en un [$1 element] del repositori central de dades que enllaça a $2 en aquest lloc. Els elements només poden estar relacionats amb una pàgina per lloc. Escolliu una pàgina diferent per enllaçar-hi.',
+	'wikibase-linkitem-close' => 'Tanca la caixa de diàleg i recarrega la pàgina',
+	'wikibase-linkitem-failure' => "S'ha produït un error desconegut en intentar enllaçar a la pàgina indicada.",
+	'wikibase-linkitem-linkpage' => 'Enllaça amb la pàgina',
+	'wikibase-linkitem-selectlink' => 'Seleccioneu un lloc i una pàgina que vulgueu lligar a aquesta pàgina.',
+	'wikibase-linkitem-input-site' => 'Llengua:',
+	'wikibase-linkitem-input-page' => 'Pàgina:',
+	'wikibase-linkitem-invalidsite' => 'Lloc seleccionat no conegut o no vàlid',
+	'wikibase-linkitem-confirmitem-text' => 'La pàgina que heu indicat ja està enllaçada a un [$1 element del repositori central de dades]. Confirmeu que les pàgines que es mostren a continuació són les que voleu enllaçar amb aquesta pàgina.',
+	'wikibase-linkitem-confirmitem-button' => 'Confirmat',
+	'wikibase-linkitem-not-loggedin-title' => 'Cal iniciar una sessió',
+	'wikibase-linkitem-not-loggedin' => 'Cal que inicieu una sessió en aquest wiki i en el [$1 repositori central de dades] per utilitzar aquesta funcionalitat.',
+	'wikibase-linkitem-success-create' => 'Les pàgines han estat lligades correctament. Podeu trobar el nou element creat amb els enllaços en el [$1 repositori central de dades].',
+	'wikibase-linkitem-success-link' => "Les pàgines han estat lligades correctament. Podeu trobar l'element que conté els enllaços en el [$1 repositori central de dades].",
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostra les modificacions de Wikidata en els canvis recents',
 );
 
@@ -852,7 +897,7 @@ $messages['it'] = array(
 	'wikibase-comment-sitelink-change' => 'Collegamento linguistico modificato da $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Collegamento linguistico rimosso: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|modifica|modifiche}}',
-	'wikibase-nolanglinks' => 'nessuno',
+	'wikibase-nolanglinks' => 'nessuna',
 	'wikibase-editlinks' => 'Modifica link',
 	'wikibase-editlinkstitle' => 'Modifica collegamenti interlinguistici',
 	'wikibase-linkitem-addlinks' => 'Aggiungi link',
@@ -873,6 +918,7 @@ $messages['it'] = array(
 );
 
 /** Japanese (日本語)
+ * @author Fryed-peach
  * @author Shirayuki
  */
 $messages['ja'] = array(
@@ -891,15 +937,21 @@ $messages['ja'] = array(
 	'wikibase-editlinks' => 'リンクを編集',
 	'wikibase-editlinkstitle' => '言語間リンクを編集',
 	'wikibase-linkitem-addlinks' => 'リンクを追加',
+	'wikibase-linkitem-alreadylinked' => 'あなたがリンクしようとしたページは既に中央データリポジトリの[$1 項目]と結びついており、このサイトの$2へリンクしています。項目には1つのサイトにつき1つのページしか結びつけることができません。別のページを選んでください。',
 	'wikibase-linkitem-close' => 'ダイアログを閉じてページを再読み込み',
 	'wikibase-linkitem-failure' => '指定したページをリンクする際に不明なエラーが発生しました。',
+	'wikibase-linkitem-title' => 'ページとのリンク',
+	'wikibase-linkitem-linkpage' => 'ページとリンク',
 	'wikibase-linkitem-selectlink' => 'このページとリンクするサイトやページを選択してください。',
 	'wikibase-linkitem-input-site' => '言語:',
 	'wikibase-linkitem-input-page' => 'ページ:',
 	'wikibase-linkitem-invalidsite' => '不明なサイトまたは無効なサイトを選択しました',
-	'wikibase-linkitem-confirmitem-text' => 'The page you chose is already linked to an [$1 item on our central data repository]. このページと以下に列挙したページをリンクしていいか確認してください。', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => '指定したページは既に[$1 中央データリポジトリ上の項目]とリンクされています。このページと以下に列挙したページをリンクしていいか確認してください。',
 	'wikibase-linkitem-confirmitem-button' => '確認',
 	'wikibase-linkitem-not-loggedin-title' => 'ログインする必要があります',
+	'wikibase-linkitem-not-loggedin' => 'この機能を使用するには、このウィキおよび[$1 中央データリポジトリ]の両方にログインする必要があります。',
+	'wikibase-linkitem-success-create' => 'ページのリンクに成功しました。リンクを含んで新しく作成された項目は[$1 中央データリポジトリ]にあります。',
+	'wikibase-linkitem-success-link' => 'ページのリンクに成功しました。リンクを含んだ項目は[$1 中央データリポジトリ]にあります。',
 	'wikibase-rc-hide-wikidata' => 'ウィキデータを$1',
 	'wikibase-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
 );
@@ -1204,7 +1256,7 @@ $messages['nn'] = array(
 	'wikibase-comment-sitelink-add' => 'Språklenkje lagd til: $1',
 	'wikibase-comment-sitelink-change' => 'Språklenkje endra frå $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Språklenkje fjerna: $1',
-	'wikibase-comment-multi' => '$1 endringar', # Fuzzy
+	'wikibase-comment-multi' => '{{PLURAL:$1|éi endring|$1 endringar}}',
 	'wikibase-nolanglinks' => 'ingen',
 	'wikibase-editlinks' => 'Endra lenkjer',
 	'wikibase-editlinkstitle' => 'Endra mellomspråklege lenkjer',
