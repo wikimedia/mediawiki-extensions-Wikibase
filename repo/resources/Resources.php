@@ -48,6 +48,8 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 				'jquery.json',
 				'jquery.cookie',
+				'wikibase.serialization.entities',
+				'wikibase.serialization.fetchedcontent'
 			),
 			'messages' => array(
 				'wikibase-sitelinks',
