@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DndBCP0E",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-28T19:00:42Z",
+      "side": 1,
+      "message": "This option is gone.",
+      "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnfBcGyQ",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-28T19:00:42Z",
+      "side": 1,
+      "message": "This parameter doesn\u0027t exist.",
+      "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnbA-w7A",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-28T19:00:42Z",
+      "side": 1,
+      "message": "This options doesn\u0027t exist.",
+      "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnXBJS2A",
+        "filename": "lib/tests/phpunit/UtilsTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-28T19:00:42Z",
+      "side": 1,
+      "message": "Something is very odd about the numbers given here. Why only even numbers? Also, #12 is here twice...",
+      "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnTB8838",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-02-28T19:00:42Z",
+      "side": 1,
+      "message": "normalizePageName() should already be doing this, no? Also, why no NFC?",
+      "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
