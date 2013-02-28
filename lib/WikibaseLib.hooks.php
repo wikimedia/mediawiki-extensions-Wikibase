@@ -128,6 +128,9 @@ final class LibHooks {
 				'tests/qunit/wikibase.datamodel/Wikibase.reference.tests.js',
 				'tests/qunit/wikibase.datamodel/Wikibase.snak.tests.js',
 				'tests/qunit/wikibase.datamodel/Wikibase.SnakList.tests.js',
+				'tests/qunit/wikibase.datamodel/datamodel.Entity.tests.js',
+				'tests/qunit/wikibase.datamodel/datamodel.Item.tests.js',
+				'tests/qunit/wikibase.datamodel/datamodel.Property.tests.js',
 
 				'tests/qunit/wikibase.Site.tests.js',
 
