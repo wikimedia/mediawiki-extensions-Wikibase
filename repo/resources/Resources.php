@@ -45,6 +45,7 @@ return call_user_func( function() {
 				'mediawiki.user',
 				'wikibase.ui.PropertyEditTool',
 				'jquery.wikibase.entityview',
+				'jquery.wikibase.toolbarcontroller',
 				'wikibase.datamodel',
 				'jquery.json',
 				'jquery.cookie',
