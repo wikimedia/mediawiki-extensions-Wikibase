@@ -43,7 +43,7 @@
 		.entityselector( {
 			url: mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) + '/api.php',
 			language: mw.config.get( 'wgUserLanguage' ),
-			emulateSearch: true
+			emulateSearchBox: true
 		} );
 
 	} );
