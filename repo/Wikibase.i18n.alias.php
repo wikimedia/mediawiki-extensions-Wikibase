@@ -61,6 +61,7 @@ $specialPageAliases['de'] = array(
 	'SetDescription' => array( 'Beschreibung_festlegen' ),
 	'SetAliases' => array( 'Aliasse_festlegen' ),
 	'EntitiesWithoutLabel' => array( 'Objekte_ohne_Bezeichnung' ),
+	'ItemsWithoutSitelinks' => array( 'Objekte_ohne_Websitelinks' ),
 );
 
 /** Zazaki (Zazaki) */
@@ -141,13 +142,15 @@ $specialPageAliases['ko'] = array(
 
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = array(
-	'EntityData' => array( 'ЕдиницаПодаток' ),
+	'EntityData' => array( 'ЕдиницаПодатоци' ),
 	'CreateItem' => array( 'СоздајПредмет' ),
 	'NewProperty' => array( 'НовоСвојство' ),
 	'ItemByTitle' => array( 'ПредметПоНаслов' ),
 	'ItemDisambiguation' => array( 'ПредметПоЕтикета' ),
 	'ListDatatypes' => array( 'СписокПодаточниТипови' ),
 	'SetLabel' => array( 'ЗадајЕтикета' ),
+	'SetDescription' => array( 'ЗадајОпис' ),
+	'SetAliases' => array( 'ЗадајАлијаси' ),
 	'EntitiesWithoutLabel' => array( 'ЕдинициБезЕтикета' ),
 );
 
