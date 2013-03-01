@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dnyl.6aw",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-03-01T13:38:31Z",
+      "side": 1,
+      "message": "this does not respect repo namespace settings. this wont work when items are not in main namespace on the repo.",
+      "revId": "ecc6e7cd0d8c61c01c13f18ef01ff7726a33eafd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
