@@ -67,6 +67,9 @@ return call_user_func( function() {
 
 		'wikibase.datamodel' => $moduleTemplate + array(
 			'scripts' => array(
+				'wikibase.datamodel/datamodel.entities/wikibase.Entity.js',
+				'wikibase.datamodel/datamodel.entities/wikibase.Item.js',
+				'wikibase.datamodel/datamodel.entities/wikibase.Property.js',
 				'wikibase.datamodel/wikibase.EntityId.js',
 				'wikibase.datamodel/wikibase.Snak.js',
 				'wikibase.datamodel/wikibase.SnakList.js',
@@ -80,14 +83,51 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase',
 				'wikibase.utilities',
-				'dataValues.values' // DataValues extension
+				'dataValues.values', // DataValues extension
+				'dataTypes', // DataTypes extension
+			)
+		),
+
+		'wikibase.serialization' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.serialization/serialization.js',
+				'wikibase.serialization/serialization.Serializer.js',
+				'wikibase.serialization/serialization.Unserializer.js',
+				'wikibase.serialization/serialization.SerializerFactory.js',
+			),
+			'dependencies' => array(
+				'wikibase',
+				'wikibase.utilities',
+			)
+		),
+
+		'wikibase.serialization.entities' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.serialization/serialization.EntityUnserializer.js',
+				'wikibase.serialization/serialization.EntityUnserializer.propertyExpert.js',
+			),
+			'dependencies' => array(
+				'wikibase.serialization',
+				'wikibase.datamodel',
+			)
+		),
+
+		'wikibase.serialization.fetchedcontent' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.serialization/serialization.FetchedContentUnserializer.js',
+			),
+			'dependencies' => array(
+				'wikibase.serialization',
+				'wikibase.store.FetchedContent',
 			)
 		),
 
 		'wikibase.store' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.store/wikibase.EntityStore.js',
-				'wikibase.store/wikibase.RepoApi.js',
+				'wikibase.store/store.js',
+				'wikibase.store/store.FetchedContent.js',
+				'wikibase.store/wikibase.EntityStore.js', // TODO: get rid of this
+				'wikibase.store/wikibase.RepoApi.js', // TODO: move
 			),
 			'dependencies' => array(
 				'jquery.json',
@@ -95,6 +135,17 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 				'wikibase.repoAccess',
 				'wikibase.RepoApiError',
+				'mediawiki.Title',
+			)
+		),
+
+		'wikibase.store.FetchedContent' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.store/store.FetchedContent.js',
+			),
+			'dependencies' => array(
+				'wikibase.store',
+				'mediawiki.Title',
 			)
 		),
 
