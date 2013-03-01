@@ -57,7 +57,7 @@ class GetEntities extends ApiWikibase {
 
 				for ( $k = 0; $k < $max; $k++ ) {
 					$siteId = $params['sites'][$idxSites++ % $numSites];
-					$title = Utils::squashToNFC( $params['titles'][$idxTitles++ % $numTitles] );
+					$title = Utils::trimToNFC( $params['titles'][$idxTitles++ % $numTitles] );
 
 					$id = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $title );
 

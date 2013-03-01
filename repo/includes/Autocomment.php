@@ -204,8 +204,8 @@ final class Autocomment {
 		if ( $lang === null || $lang === false) {
 			$lang = $wgContLang;
 		}
-		$comment = Utils::squashToNFC( $comment );
-		$summary = Utils::squashToNFC( $summary );
+		$comment = Utils::trimToNFC( $comment );
+		$summary = Utils::trimToNFC( $summary );
 		$mergedString = '';
 		if ( $comment !== '' ) {
 			$mergedString .=  "/* $comment */";
