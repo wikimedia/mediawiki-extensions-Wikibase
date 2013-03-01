@@ -160,6 +160,43 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $noexternallanglinks, $nel );
 	}
 
+	public static function provideExcludeRepoLinks() {
+		return array(
+			array( // #0
+				array(),
+				array(),
+				array()
+			),
+			array( // #1
+				array( 'de' ),
+				array( 'cs' ),
+				array( 'de', 'cs' )
+			),
+			array(
+				array( 'de' ),
+				array( '*' ),
+				array( 'de', '*' )
+			),
+			array( // #3
+				array( 'xy', 'de', 'en' ),
+				array(),
+				array( 'xy', 'de', 'en' )
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider provideExcludeRepoLinks
+	 */
+	public function testExcludeRepoLinks( $alreadyExcluded, $toExclude, $expected ) {
+		$out = new \ParserOutput();
+		$this->langLinkHandler->setNoExternalLangLinks( $out, $alreadyExcluded );
+		$this->langLinkHandler->excludeRepoLangLinks( $out, $toExclude );
+		$nel = $this->langLinkHandler->getNoExternalLangLinks( $out );
+
+		$this->assertEquals( $expected, $nel );
+	}
+
 	public static function provideUseRepoLinks() {
 		return array(
 			array( // #0

@@ -27,50 +27,22 @@ use Wikibase\LangLinkHandler;
  * @ingroup WikibaseClient
  *
  * @licence GNU GPL v2+
+ *
  * @author Nikola Smolenski <smolensk@eunet.rs>
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class NoLangLinkHandler {
 
 	/**
-	 * Register the parser function.
-	 * @param $parser \Parser
-	 * @return bool
-	 */
-	public static function onParserFirstCallInit( &$parser ) {
-		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::noExternalLangLinks', SFH_NO_HASH );
-		return true;
-	}
-
-	/**
-	 * Register the magic word.
-	 */
-	public static function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {
-		$aCustomVariableIds[] = 'noexternallanglinks';
-		return true;
-	}
-
-	/**
-	 * Apply the magic word.
-	 */
-	public static function onParserGetVariableValueSwitch( &$parser, &$cache, &$magicWordId, &$ret ) {
-		if( $magicWordId == 'noexternallanglinks' ) {
-			self::noExternalLangLinks( $parser, '*' );
-		}
-
-		return true;
-	}
-
-	/**
-	 * Actual parser function.
-	 * @param $parser \Parser
+	 * Parser function
+	 *
+	 * @since 0.4
+	 *
+	 * @param \Parser &$parser
+	 *
 	 * @return string
 	 */
-	public static function noExternalLangLinks( &$parser ) {
-		$langs = func_get_args();
-		// Remove the first member, which is the parser.
-		array_shift( $langs );
-
-		$out = $parser->getOutput();
+	public static function handle( &$parser ) {
 		$langLinkHandler = new LangLinkHandler(
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
@@ -78,11 +50,15 @@ class NoLangLinkHandler {
 			\Sites::singleton()
 		);
 
-		$nel = $langLinkHandler->getNoExternalLangLinks( $out );
-		$nel += $langs;
-		$langLinkHandler->setNoExternalLangLinks( $out, $nel );
+		$langs = func_get_args();
+		// Remove the first member, which is the parser.
+		array_shift( $langs );
 
-		return "";
+		$output = $parser->getOutput();
+
+		$langLinkHandler->excludeRepoLangLinks( $output, $langs );
+
+		return '';
 	}
 
 }
