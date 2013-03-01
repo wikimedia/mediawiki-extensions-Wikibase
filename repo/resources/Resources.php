@@ -60,9 +60,16 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.ui.entitysearch.js',
 			),
+			'styles' => array(
+				'themes/default/wikibase.ui.entitysearch.css',
+			),
 			'dependencies' => array(
+				'jquery.eachchange',
 				'jquery.wikibase.entityselector',
 			),
+			'messages' => array(
+				'searchsuggest-containing',
+			)
 		),
 
 		/* Wikibase special pages */

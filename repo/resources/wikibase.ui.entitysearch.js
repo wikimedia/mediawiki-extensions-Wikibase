@@ -16,6 +16,14 @@
 			$input = $( '#searchInput' );
 
 		/**
+		 * Updates the suggestion list special item that triggers a full-text search.
+		 */
+		function updateSuggestionSpecial() {
+			var $suggestionsSpecial = $( '.wb-entitysearch-suggestions .suggestions-special' );
+			$suggestionsSpecial.find( '.special-query' ).text( $input.val() );
+		}
+
+		/**
 		 * Removes the native search box suggestion list.
 		 *
 		 * @param {Object} input Search box node
@@ -45,7 +53,25 @@
 		.entityselector( {
 			url: mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) + '/api.php',
 			language: mw.config.get( 'wgUserLanguage' ),
-			emulateSearch: true
+			emulateSearch: true,
+			customListItem: {
+				content: $( '<div/>' ).addClass( 'suggestions-special' )
+					.append( $( '<div/>' ).addClass( 'special-label ' ).text(
+						mw.msg( 'searchsuggest-containing' ) )
+					)
+					.append( $( '<div/>' ).addClass( 'special-query' )
+				),
+				action: function( event, entityselector ) {
+					$form.submit();
+				},
+				cssClass: 'wb-entitysearch-suggestions'
+			}
+		} )
+		.on( 'entityselectoropen', function( event ) {
+			updateSuggestionSpecial();
+		} )
+		.eachchange( function( event, oldVal ) {
+			updateSuggestionSpecial();
 		} );
 
 		// TODO: Re-evaluate entity selector input (e.g. hitting "Go" after having hit "Search"
