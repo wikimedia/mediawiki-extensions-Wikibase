@@ -16,6 +16,24 @@
       "revId": "ecc6e7cd0d8c61c01c13f18ef01ff7726a33eafd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoKKD-s4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-01T18:55:33Z",
+      "side": 1,
+      "message": "that happens in the parser processing now, but can double check that this is adequate or not (and add comments)",
+      "parentUuid": "Dnyl.6aw",
+      "revId": "ecc6e7cd0d8c61c01c13f18ef01ff7726a33eafd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
