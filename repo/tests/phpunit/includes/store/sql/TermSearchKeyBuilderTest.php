@@ -41,13 +41,13 @@ use Wikibase\Term;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermSqlCacheTest extends \MediaWikiTestCase {
+class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 
 	public function termProvider() {
 		$argLists = array();
 
 		$argLists[] = array( 'en', 'FoO', 'fOo', true );
-		$argLists[] = array( 'ru', 'Берлин', 'берлин', true );
+		$argLists[] = array( 'ru', 'Берлин', '  берлин  ', true );
 
 		$argLists[] = array( 'en', 'FoO', 'bar', false );
 		$argLists[] = array( 'ru', 'Берлин', 'бе55585рлин', false );
@@ -62,25 +62,32 @@ class TermSqlCacheTest extends \MediaWikiTestCase {
 	 * @param $searchText
 	 * @param boolean $matches
 	 */
-	public function testGetMatchingTerms( $languageCode, $termText, $searchText, $matches ) {
+	public function testRebuildSearchKey( $languageCode, $termText, $searchText, $matches ) {
 		if ( \Wikibase\Settings::get( 'withoutTermSearchKey' ) ) {
 			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
 		}
 
-		/**
-		 * @var TermSqlCache $termCache
-		 */
-		$termCache = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newTermCache();
-
-		$termCache->clear();
-
+		// make term in item
 		$item = \Wikibase\Item::newEmpty();
 		$item->setId( 42 );
-
 		$item->setLabel( $languageCode, $termText );
 
+		// save term
+		/* @var TermSqlCache $termCache */
+		$termCache = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newTermCache();
+		$termCache->clear();
 		$termCache->saveTermsOfEntity( $item );
 
+		// remove search key
+		$dbw = wfGetDB( DB_MASTER );
+		$dbw->update( $termCache->getTableName(), array( 'term_search_key' => '' ), array(), __METHOD__ );
+
+		// rebuild search key
+		$builder = new \Wikibase\TermSearchKeyBuilder( $termCache );
+		$builder->setRebuildAll( true );
+		$builder->rebuildSearchKey();
+
+		// remove search key
 		$term = new Term();
 		$term->setLanguage( $languageCode );
 		$term->setText( $searchText );
