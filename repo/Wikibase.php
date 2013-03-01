@@ -182,6 +182,7 @@ $wgAutoloadClasses['Wikibase\StoreFactory'] 			= $dir . 'includes/store/StoreFac
 $wgAutoloadClasses['Wikibase\TermCache'] 				= $dir . 'includes/store/TermCache.php';
 $wgAutoloadClasses['Wikibase\TermCombinationMatchFinder'] = $dir . 'includes/store/TermCombinationMatchFinder.php';
 $wgAutoloadClasses['Wikibase\TermMatchScoreCalculator'] = $dir . 'includes/store/TermMatchScoreCalculator.php';
+$wgAutoloadClasses['Wikibase\TermSearchKeyBuilder']     = $dir . 'includes/store/sql/TermSearchKeyBuilder.php';
 
 // includes/store/sql
 $wgAutoloadClasses['Wikibase\SqlIdGenerator'] 			= $dir . 'includes/store/sql/SqlIdGenerator.php';
