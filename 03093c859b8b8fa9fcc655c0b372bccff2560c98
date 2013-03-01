@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dn8kL1Y4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-01T11:17:54Z",
+      "side": 1,
+      "message": "Let\u0027s do this part of the change in a follow up patch.\n\nWe are making these q### links and eliminating the link via special page",
+      "revId": "03093c859b8b8fa9fcc655c0b372bccff2560c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
