@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dn2asEPA",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-01T00:32:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DndBCP0E",
+      "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DnfBcGyQ",
         "filename": "lib/includes/Utils.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2013-02-28T19:00:42Z",
       "side": 1,
       "message": "This parameter doesn\u0027t exist.",
+      "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnyOgSqI",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-01T00:32:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DnfBcGyQ",
       "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "Dn0OTRls",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-01T00:32:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DnbA-w7A",
+      "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DnXBJS2A",
         "filename": "lib/tests/phpunit/UtilsTest.php",
         "patchSetId": 6
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "Dn8OQVkQ",
+        "filename": "lib/tests/phpunit/UtilsTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-01T00:32:55Z",
+      "side": 1,
+      "message": "Because some stuff are thrown out. I can update the numbers.",
+      "parentUuid": "DnXBJS2A",
+      "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DnTB8838",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 6
@@ -81,6 +153,24 @@
       "writtenOn": "2013-02-28T19:00:42Z",
       "side": 1,
       "message": "normalizePageName() should already be doing this, no? Also, why no NFC?",
+      "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DnyYE2ME",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-01T00:32:55Z",
+      "side": 1,
+      "message": "First note that MediaWikiSite::normalizePageName( $pageName ) sets $pageName \u003d UtfNormal::cleanUp( $pageName ) during its execution.\n\nThe earlier call to the function in Utils at line 259 in this file for example is like this\nstatic public function trimToNFC( $inputString ) {\n\treturn self::cleanupToNFC( self::trimWhitespace( $inputString ) );\n}\n\nwhere cleanupTo NFC is a wrapper for UtfNormal::cleanUp( $pageName ) which is already called in MediaWikiSite::normalizePageName( $pageName ) so removing it in the later call is just a matter of efficiency as this call is rather expensive.",
+      "parentUuid": "DnTB8838",
       "revId": "eb5fe33ddcbfbf9ee329c731643f64295982d7a5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
