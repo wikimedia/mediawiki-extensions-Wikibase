@@ -133,6 +133,7 @@ return call_user_func( function() {
 				'jquery.json',
 				'user.tokens',
 				'wikibase.datamodel',
+				'wikibase.serialization.entities',
 				'wikibase.repoAccess',
 				'wikibase.RepoApiError',
 				'mediawiki.Title',
