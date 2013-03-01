@@ -74,13 +74,29 @@
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
 			var entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) ),
-				usedEntitiesJSON = $.evalJSON( mw.config.get( 'wbUsedEntities' ) );
+				usedEntitiesJSON = $.evalJSON( mw.config.get( 'wbUsedEntities' ) ),
+				unserializerFactory = new wb.serialization.SerializerFactory(),
+				entityUnserializer = unserializerFactory.newUnserializerFor( wb.Entity );
+
+			// unserializer for fetched content whose content is a wb.Entity:
+			var fetchedEntityUnserializer = unserializerFactory.newUnserializerFor(
+				wb.store.FetchedContent, {
+					contentUnserializer: entityUnserializer
+				}
+			);
+
+			wb.entity = entityUnserializer.unserialize( entityJSON );
+			entityJSON = null;
+
+			$.each( usedEntitiesJSON, function( id, fetchedEntityJSON ) {
+				wb.fetchedEntities[ id ] = fetchedEntityUnserializer.unserialize( fetchedEntityJSON );
+			} );
 
 			// if there are no aliases yet, the DOM structure for creating new ones is created manually since it is not
 			// needed for running the page without JS
 			$( '.wb-aliases-empty' )
 			.each( function() {
-				$( this ).replaceWith( wikibase.ui.AliasesEditTool.getEmptyStructure() );
+				$( this ).replaceWith( wb.ui.AliasesEditTool.getEmptyStructure() );
 			} );
 
 			// edit tool for aliases:
@@ -88,29 +104,12 @@
 				new wb.ui.AliasesEditTool( this );
 			} );
 
-			// Information about used properties:
-			$.each( usedEntitiesJSON, function( id, entity ) {
-				entity.id = id; // we don't get that in the JSON but it is essential for wb.entities
-				wb.entities[ id ] = entity;
-			} );
-
-			// Definition of the views entity:
-			if ( entityJSON.claims !== undefined ) {
-				$.each( entityJSON.claims, function( propertyId, claims ) {
-					$.each( claims, function( i, claim ) {
-						wb.entity.claims.push( wb.Claim.newFromJSON( claim ) );
-					} );
-				} );
-			}
-			wb.entity.id = entityJSON.id;
-			wb.entity.type = entityJSON.type;
-
 			$( '.wb-section-heading' ).remove();
 
 			// BUILD CLAIMS VIEW:
 			// Note: $.entityview() only works for claims right now, the goal is to use it for more
 			var $claims = $( '.wb-claims' ).entityview( {
-				value: wb.entity // only holds the claims of an entity page right now
+				value: wb.entity
 			} );
 
 			// removing site links heading to rebuild it with value counter
