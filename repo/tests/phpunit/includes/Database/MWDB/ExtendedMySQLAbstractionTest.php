@@ -1,9 +1,12 @@
 <?php
 
-namespace Wikibase\Repo\Database;
+namespace Wikibase\Repo\Test\Database\MWDB;
+
+use Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction;
+use Wikibase\Repo\LazyDBConnectionProvider;
 
 /**
- * Interface for objects that provide a database query service.
+ * Unit tests for the Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,47 +23,28 @@ namespace Wikibase\Repo\Database;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @file
  * @since wd.db
  *
- * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseRepoTest
+ *
+ * @group Wikibase
+ * @group WikibaseRepo
+ * @group WikibaseDatabase
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface QueryInterface {
+class ExtendedMySQLAbstractionTest extends ExtendedAbstractionTest {
 
 	/**
-	 * Returns if the table exists in the database.
+	 * @see ExtendedAbstractionTest::newInstance
 	 *
-	 * @since wd.db
-	 *
-	 * @param string $tableName
-	 *
-	 * @return boolean Success indicator
+	 * @return ExtendedMySQLAbstraction
 	 */
-	public function tableExists( $tableName );
-
-	/**
-	 * Creates a table based on the provided definition in the store.
-	 *
-	 * @since wd.db
-	 *
-	 * @param TableDefinition $table
-	 *
-	 * @return boolean Success indicator
-	 */
-	public function createTable( TableDefinition $table );
-
-	/**
-	 * Removes the table with provided name from the store.
-	 *
-	 * @since wd.db
-	 *
-	 * @param string $tableName
-	 *
-	 * @return boolean Success indicator
-	 */
-	public function dropTable( $tableName );
+	protected function newInstance() {
+		return new ExtendedMySQLAbstraction( new LazyDBConnectionProvider( DB_MASTER ) );
+	}
 
 }

@@ -47,6 +47,9 @@ $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryH
 
 
 $classes = array(
+	'Wikibase\Repo\Database\MWDB\ExtendedAbstraction',
+	'Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction',
+
 	'Wikibase\Repo\Database\FieldDefinition',
 	'Wikibase\Repo\Database\MediaWikiQueryInterface',
 	'Wikibase\Repo\Database\ObservableQueryInterface',
@@ -84,6 +87,9 @@ if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 
 	$wgAutoloadClasses['Wikibase\Repo\Test\Query\QueryStoreTest']
 		= $dir . 'tests/phpunit/includes/Query/QueryStoreTest.php';
+
+	$wgAutoloadClasses['Wikibase\Repo\Test\Database\MWDB\ExtendedAbstractionTest']
+		= $dir . 'tests/phpunit/includes/Database/MWDB/ExtendedAbstractionTest.php';
 }
 
 unset( $dir );
@@ -118,7 +124,10 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'content/QueryContent',
 		'content/QueryHandler',
 
+		'Database/MWDB/ExtendedMySQLAbstraction',
+
 		'Database/FieldDefinition',
+		'Database/MediaWikiQueryInterface',
 		'Database/TableBuilder',
 		'Database/TableDefinition',
 

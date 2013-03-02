@@ -1,14 +1,23 @@
 <?php
 
-namespace Wikibase\Repo\Database;
+namespace Wikibase\Repo\Database\MWDB;
 
-use Wikibase\Repo\DBConnectionProvider;
 use Wikibase\Repo\Database\TableDefinition;
-use Wikibase\Repo\Database\MWDB\ExtendedAbstraction;
+use Wikibase\Repo\DBConnectionProvider;
+use InvalidArgumentException;
+use DatabaseBase;
 
 /**
- * Implementation of the QueryInterface interface using the MediaWiki
- * database abstraction layer where possible.
+ * Base database abstraction class to put stuff into that is not present
+ * in the MW core db abstraction layer.
+ *
+ * Like to core class DatabaseBase, each deriving class provides support
+ * for a specific type of database.
+ *
+ * Everything implemented in these classes could go into DatabaseBase and
+ * deriving classes, though this might take quite some time, hence implementation
+ * is first done here. If you feel like taking core CR crap and waiting a few
+ * months, by all means try to get the functionality into core.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,53 +42,42 @@ use Wikibase\Repo\Database\MWDB\ExtendedAbstraction;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MediaWikiQueryInterface implements QueryInterface {
+abstract class ExtendedAbstraction {
 
 	/**
+	 * @since wd.db
+	 *
 	 * @var DBConnectionProvider
 	 */
 	private $connectionProvider;
 
 	/**
-	 * @var ExtendedAbstraction
-	 */
-	private $extendedAbstraction;
-
-	/**
-	 * Constructor.
-	 *
 	 * @since wd.db
 	 *
 	 * @param DBConnectionProvider $connectionProvider
-	 * @param ExtendedAbstraction $extendedAbstraction
 	 */
-	public function __construct( DBConnectionProvider $connectionProvider, ExtendedAbstraction $extendedAbstraction ) {
+	public function __construct( DBConnectionProvider $connectionProvider ) {
 		$this->connectionProvider = $connectionProvider;
-		$this->extendedAbstraction = $extendedAbstraction;
 	}
 
 	/**
-	 * @return \DatabaseBase
-	 */
-	private function getDB() {
-		return $this->connectionProvider->getConnection();
-	}
-
-	/**
-	 * @see QueryInterface::tableExists
-	 *
 	 * @since wd.db
 	 *
-	 * @param string $tableName
-	 *
-	 * @return boolean
+	 * @return DatabaseBase
+	 * @throws InvalidArgumentException
 	 */
-	public function tableExists( $tableName ) {
-		return $this->getDB()->tableExists( $tableName, __METHOD__ );
+	public function getDB() {
+		$db = $this->connectionProvider->getConnection();
+
+		if ( $db->getType() !== $this->getType() ) {
+			throw new InvalidArgumentException();
+		}
+
+		return $db;
 	}
 
 	/**
-	 * @see QueryInterface::createTable
+	 * Create the provided table.
 	 *
 	 * @since wd.db
 	 *
@@ -87,21 +85,15 @@ class MediaWikiQueryInterface implements QueryInterface {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function createTable( TableDefinition $table ) {
-		return $this->extendedAbstraction->createTable( $table );
-	}
+	public abstract function createTable( TableDefinition $table );
 
 	/**
-	 * @see QueryInterface::dropTable
+	 * Returns the type of the supported MW DB abstraction class.
 	 *
 	 * @since wd.db
 	 *
-	 * @param string $tableName
-	 *
-	 * @return boolean Success indicator
+	 * @return string
 	 */
-	public function dropTable( $tableName ) {
-		return $this->getDB()->dropTable( $tableName, __METHOD__ ) !== false;
-	}
+	protected abstract function getType();
 
 }
