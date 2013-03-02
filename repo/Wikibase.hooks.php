@@ -590,6 +590,20 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Reorder the groups for the special pages
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $groups
+	 *
+	 * @return boolean
+	 */
+	public static function onSpecialPage_reorderPages( &$groups ) {
+		$groups = array_merge( array( 'wikibaserepo' => null ), $groups );
+		return true;
+	}
+
+	/**
 	 * Deletes all the data stored on the repository.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/WikibaseDeleteData
 	 *
