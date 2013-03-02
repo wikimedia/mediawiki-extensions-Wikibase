@@ -582,6 +582,10 @@ $messages['fi'] = array(
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|muutos|muutosta}}',
 	'wikibase-editlinks' => 'Muokkaa linkkejä',
 	'wikibase-editlinkstitle' => 'Muokkaa kieltenvälisiä linkkejä',
+	'wikibase-linkitem-addlinks' => 'Lisää linkkejä',
+	'wikibase-linkitem-close' => 'Sulje ikkuna ja lataa sivu uudelleen',
+	'wikibase-linkitem-input-site' => 'Kieli',
+	'wikibase-linkitem-input-page' => 'Sivu',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
 );
