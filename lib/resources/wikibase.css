@@ -582,8 +582,9 @@ div.wb-claim-new .wb-snak-value {
 }
 
 .wb-snakview-unsupportedsnaktype,
-.wb-snakview-variation-valuesnak-unsupporteddatatype,
+.wb-snakview-variation-valuesnak-unsupporteddatavalue,
 .wb-snakview-variation-valuesnak-datavaluetypemismatch,
+.wb-snakview-variation-valuesnak-nonewvaluefordeletedproperty,
 .wb-snakview-variation-somevaluesnak,
 .wb-snakview-variation-novaluesnak {
 	color: #565656;
@@ -591,7 +592,8 @@ div.wb-claim-new .wb-snak-value {
 	line-height: 1.2;
 }
 
-.wb-snakview-variation-valuesnak-datavaluetypemismatch {
+.wb-snakview-variation-valuesnak-datavaluetypemismatch,
+.wb-snakview-variation-valuesnak-nonewvaluefordeletedproperty {
 	color: red;
 }
 .wb-snakview-variation-valuesnak-datavaluetypemismatch-message div {
