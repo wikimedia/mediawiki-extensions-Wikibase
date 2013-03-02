@@ -1,9 +1,11 @@
 <?php
 
-namespace Wikibase\Repo\Database;
+namespace Wikibase\Repo\Test\Database;
+
+use Wikibase\Repo\Database\MediaWikiQueryInterface;
 
 /**
- * Interface for objects that provide a database query service.
+ * Unit tests for the Wikibase\Repo\Database\MediaWikiQueryInterface class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,36 +22,22 @@ namespace Wikibase\Repo\Database;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @file
  * @since wd.db
  *
- * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseRepoTest
+ *
+ * @group Wikibase
+ * @group WikibaseRepo
+ * @group WikibaseDatabase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface QueryInterface {
+class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
 
-	/**
-	 * Returns if the table exists in the database.
-	 *
-	 * @since wd.db
-	 *
-	 * @param string $tableName
-	 *
-	 * @return boolean
-	 */
-	public function tableExists( $tableName );
-
-	/**
-	 * @see QueryInterface::createTable
-	 *
-	 * @since wd.db
-	 *
-	 * @param TableDefinition $table
-	 *
-	 * @return boolean
-	 */
-	public function createTable( TableDefinition $table );
+	protected function getInstance() {
+		return new MediaWikiQueryInterface();
+	}
 
 }

@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Database;
 
 use Wikibase\Repo\DBConnectionProvider;
+use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Repo\Database\MWDB\ExtendedAbstraction;
 
 /**
  * Implementation of the QueryInterface interface using the MediaWiki
@@ -39,9 +41,19 @@ class MediaWikiQueryInterface implements QueryInterface {
 	private $connectionProvider;
 
 	/**
-	 * @param DBConnectionProvider $connectionProvider
+	 * @var ExtendedAbstraction
 	 */
-	public function __construct( DBConnectionProvider $connectionProvider ) {
+	private $extendedAbstraction;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since wd.db
+	 *
+	 * @param DBConnectionProvider $connectionProvider
+	 * @param ExtendedAbstraction $extendedAbstraction
+	 */
+	public function __construct( DBConnectionProvider $connectionProvider, ExtendedAbstraction $extendedAbstraction ) {
 		$this->connectionProvider = $connectionProvider;
 	}
 
@@ -55,12 +67,27 @@ class MediaWikiQueryInterface implements QueryInterface {
 	/**
 	 * @see QueryInterface::tableExists
 	 *
+	 * @since wd.db
+	 *
 	 * @param string $tableName
 	 *
 	 * @return boolean
 	 */
 	public function tableExists( $tableName ) {
 		return $this->getDB()->tableExists( $tableName, __METHOD__ );
+	}
+
+	/**
+	 * @see QueryInterface::createTable
+	 *
+	 * @since wd.db
+	 *
+	 * @param TableDefinition $table
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function createTable( TableDefinition $table ) {
+		$this->extendedAbstraction->createTable( $table );
 	}
 
 }
