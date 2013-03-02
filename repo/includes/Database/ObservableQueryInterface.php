@@ -39,6 +39,11 @@ class ObservableQueryInterface implements QueryInterface {
 	private $callbacks = array();
 
 	/**
+	 * Register a callback that should be called whenever the methods
+	 * which name is provided is called with the arguments this method got.
+	 *
+	 * @since wd.db
+	 *
 	 * @param string $method
 	 * @param callable $callback
 	 */
@@ -46,7 +51,13 @@ class ObservableQueryInterface implements QueryInterface {
 		$this->callbacks[$method] = $callback;
 	}
 
-	private function runCallbacks( $method, $args ) {
+	/**
+	 * @since wd.db
+	 *
+	 * @param string $method
+	 * @param array $args
+	 */
+	private function runCallbacks( $method, array $args ) {
 		if ( array_key_exists( $method, $this->callbacks ) ) {
 			call_user_func_array( $this->callbacks[$method], $args );
 		}
@@ -55,11 +66,26 @@ class ObservableQueryInterface implements QueryInterface {
 	/**
 	 * @see QueryInterface::tableExists
 	 *
+	 * @since wd.db
+	 *
 	 * @param string $tableName
 	 *
 	 * @return boolean
 	 */
 	public function tableExists( $tableName ) {
+		$this->runCallbacks( __FUNCTION__, func_get_args() );
+	}
+
+	/**
+	 * @see QueryInterface::createTable
+	 *
+	 * @since wd.db
+	 *
+	 * @param TableDefinition $table
+	 *
+	 * @return boolean
+	 */
+	public function createTable( TableDefinition $table ) {
 		$this->runCallbacks( __FUNCTION__, func_get_args() );
 	}
 

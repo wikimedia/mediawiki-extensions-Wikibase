@@ -33,10 +33,23 @@ interface QueryInterface {
 	/**
 	 * Returns if the table exists in the database.
 	 *
+	 * @since wd.db
+	 *
 	 * @param string $tableName
 	 *
 	 * @return boolean
 	 */
 	public function tableExists( $tableName );
+
+	/**
+	 * @see QueryInterface::createTable
+	 *
+	 * @since wd.db
+	 *
+	 * @param TableDefinition $table
+	 *
+	 * @return boolean
+	 */
+	public function createTable( TableDefinition $table );
 
 }
