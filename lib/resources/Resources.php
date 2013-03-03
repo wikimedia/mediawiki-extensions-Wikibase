@@ -602,6 +602,10 @@ return call_user_func( function() {
 				'wikibase.parsers',
 				'jquery.eachchange',
 			),
+			'messages' => array(
+				'parentheses',
+				'wikibase-entity-item',
+			)
 		),
 
 	);
