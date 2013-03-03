@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DoFz41UY",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-03T22:21:19Z",
+      "side": 1,
+      "message": "The previous will make the item id stuck and will make it impossible to change the associated item id. Once set it will continue being set, and later on the in the handler the loop is never broken.\n\nYou need to somehow break the association, for example when new changes arrive.\n\nYou should also clear and recreate this page prop if the user do an explicit purge. The handler is only called on save even if the docs says it is called on purge. Perhaps my caching scheme interferes, but I doubt it. A purge of the page prop during purge can\u0027t be done in this handler, it must be done somewhere else, before this handler is called and in a hook that is called on page purge.\n\nAnd a minor issue, try to name the page props in a similar fashion as the other page props.",
+      "revId": "ecc6e7cd0d8c61c01c13f18ef01ff7726a33eafd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dnyl.6aw",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 3
