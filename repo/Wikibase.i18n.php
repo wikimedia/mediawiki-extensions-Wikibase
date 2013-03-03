@@ -766,6 +766,7 @@ $messages['ace'] = array(
 
 /** Arabic (العربية)
  * @author Aude
+ * @author Calak
  * @author Majid KSA
  * @author Meno25
  * @author Tarawneh
@@ -779,6 +780,7 @@ $messages['ar'] = array(
 	'wikibase-remove-inprogress' => 'إزالة...',
 	'wikibase-sitelink-site-edit-placeholder' => 'موقع',
 	'wikibase-sitelink-page-edit-placeholder' => 'مقال',
+	'wikibase-statements' => 'بيانات',
 	'wikibase-remove' => 'ألغ',
 	'wikibase-undo-revision-error' => 'فشل عملية الرجوع',
 	'wikibase-propertyedittool-full' => 'قائمة القيم اكتملت',
@@ -1418,7 +1420,23 @@ $messages['ca'] = array(
  * @author Calak
  */
 $messages['ckb'] = array(
+	'specialpages-group-wikibaserepo' => 'ئەمباری ویکیدراوە',
+	'wikibase-add' => 'زیاد بکە',
+	'wikibase-addreference' => 'سەرچاوە زیاد بکە',
+	'wikibase-description-empty' => 'ھێشتا شیکردنەوەیەک دیاری نەکراوە',
+	'wikibase-alias-edit-placeholder' => 'نازناوێک بنووسە',
+	'wikibase-statements' => 'ئاخاوتەکان',
+	'wikibase-terms' => 'بە زمانەکانی تر',
+	'wikibase-aliases-label' => 'ھەروەھا ناسراوە بە:',
+	'wikibase-aliases-empty' => 'نازناوێک دیاری نەکراوە.',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|سەرچاوە}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'ھێشتا {{PLURAL:$1|یەک سەرچاوە|$1 سەرچاوە}} پاشەکەوت نەکراوە',
+	'wikibase-anonymouseditwarning-item' => 'ھۆشیار بە: نەچوویتە ژوورەوە.
+ناونیشانی IPی تۆ لە مێژووی دەستکارییەکانی ئەم بڕگەیەدا تۆمار دەکرێت.',
+	'wikibase-anonymouseditwarning-property' => 'ھۆشیار بە: نەچوویتە ژوورەوە.
+ناونیشانی IPی تۆ لە مێژووی دەستکارییەکانی ئەم تایبەتمەندییەدا تۆمار دەکرێت.',
 	'special-itembytitle' => 'بڕگەکان پە پێی سەردێر',
+	'wikibase-itemdisambiguation-nothing-found' => 'ببورە، بڕگەیەک بەم ناوەوە نەدۆزرایەوە.',
 	'special-createitem' => 'بڕگەیەکی نوێ دروست بکە',
 	'wikibase-createitem-fieldset' => 'بڕگەیەکی نوێ دروست بکە',
 );
@@ -7170,8 +7188,8 @@ Soa adrëssa IP a sarà memorisà ant la stòria dle modìfiche dë sto element.
 Soa adrëssa IP a sarà memorisà ant la stòria dle modìfiche ëd sa propietà.",
 	'wikibase-restrictionedit-tooltip-message' => "Costa pàgina a l'é protegiùa. As peul pa modifichesse.",
 	'wikibase-blockeduser-tooltip-message' => "Chiel a l'é blocà, gnun-e modìfiche.",
-	'wikibase-move-error' => 'It peule pa tramudé le pagine che a son ant lë spassi nominal dij dat, e it peule pa tramudé pagine lì drinta.',
-	'wikibase-error-sitelink-already-used' => "Colegament al sit [[$1:$2]] già dovrà da l'element [[$3]].",
+	'wikibase-move-error' => 'A peul pa tramudé dle pàgine che a son ant lë spassi nominal dij dat, e a peul pa tramudé dle pàgine là andrinta.',
+	'wikibase-error-sitelink-already-used' => "Liura al sit [[$1:$2]] già dovrà da l'element [[$3]].",
 	'wikibase-error-label-not-unique-wikibase-property' => 'N\'àutra propietà ($3) a l\'ha già la tichëtta "$1" associà con ël còdes ëd lenga $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'N\'àutra query ($3) a l\'ha già la tichëtta "$1" associà con ël còdes ëd lenga $2',
 	'wikibase-error-label-not-unique-item' => 'N\'àutr element ($3) a l\'ha già la tichëtta "$1" e descrission "$4" associà con ël còdes ëd lenga $2',
@@ -8213,6 +8231,8 @@ $messages['sr-ec'] = array(
 	'wikibase-empty-undo' => 'Не постоји ништа што може бити поништено овде.',
 	'wikibase-undo-revision-error' => 'Поништавање није успело',
 	'wikibase-propertyedittool-full' => 'Списак вредности је потпун.',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Једна вредност|$1 вредности}} још није сачувано',
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|унос|уноса}}',
 	'wikibase-disambiguation-title' => 'Вишезначност за „$1“',
 	'wikibase-aliases-label' => 'Такође познато и као:',
 	'wikibase-aliases-empty' => 'Ниједан псеудоним није дефинисан.',
@@ -8222,6 +8242,8 @@ $messages['sr-ec'] = array(
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Један извор|$1 извора}} није {{PLURAL:$1|сачуван|сачувано}}',
 	'wikibase-snakview-property-input-placeholder' => 'својство',
 	'wikibase-snakview-choosesnaktype' => 'Изаберите врсту вредности.',
+	'wikibase-snakview-variation-unsupporteddatatype' => 'Начин управљања вредностима за „$1“ врсту података још није подржан.',
+	'wikibase-snakview-variation-datavaluetypemismatch' => 'Вредност није у складу са дефиницијом својства.',
 	'wikibase-snakview-variations-somevalue-label' => 'непозната вредност',
 	'wikibase-snakview-variations-novalue-label' => 'нема вредности',
 	'wikibase-snakview-snaktypeselector-value' => 'прилагођена вредност',
@@ -8236,7 +8258,7 @@ $messages['sr-ec'] = array(
 Ваша ИП адреса ће бити забележена у историји ове ставке.',
 	'wikibase-restrictionedit-tooltip-message' => 'Ова страна је заштићена. Уређивање није дозвољено.',
 	'wikibase-blockeduser-tooltip-message' => 'Блокирани сте од уређивања.',
-	'special-itembytitle' => 'Ставке према наслову', # Fuzzy
+	'special-itembytitle' => 'Ставке према везама до сајтова',
 	'wikibase-itembytitle-lookup-fieldset' => 'Претрага ставки према сајту и називу',
 	'wikibase-itembytitle-lookup-site' => 'Сајт:',
 	'wikibase-itembytitle-lookup-page' => 'Страна:',

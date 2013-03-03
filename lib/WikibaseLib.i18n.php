@@ -217,6 +217,21 @@ $messages['ca'] = array(
 	'datatypes-type-commonsMedia' => 'Fitxer multimèdia de Commons',
 );
 
+/** Sorani Kurdish (کوردی)
+ * @author Calak
+ */
+$messages['ckb'] = array(
+	'wikibase-entity-item' => 'بڕگە',
+	'wikibase-entity-property' => 'تایبەتمەندی',
+	'wikibase-replicationnote' => 'تکایە ئاگادار بن چەند خولەک دەگرێ ھەتا گۆڕانکارییەکان لە ھەموو ویکییەکاندا دەربکەوێ.',
+	'wikibase-sitelinks' => 'پێرستی پەڕە بەسراوەکان بەم بڕگەیە',
+	'wikibase-sitelinks-sitename-columnheading' => 'زمان',
+	'wikibase-sitelinks-siteid-columnheading' => 'کۆد',
+	'wikibase-sitelinks-link-columnheading' => 'وتاری بەستەردراو',
+	'wikibase-tooltip-error-details' => 'وردەکارییەکان',
+	'datatypes-type-wikibase-item' => 'بڕگە',
+);
+
 /** Czech (česky)
  * @author Danny B.
  * @author JAn Dudík
@@ -1144,9 +1159,9 @@ $messages['pms'] = array(
 	'wikibase-error-ui-no-external-page' => 'La vos specificà a peul pa esse trovà dzor ël sit corispondent.',
 	'wikibase-error-ui-cant-edit' => "It peule pa fé st'assion-sì.",
 	'wikibase-error-ui-no-permissions' => "A l'ha pa a basta 'd drit për fé st'assion.",
-	'wikibase-error-ui-link-exists' => "It peule pa coleghé sta pagina përchè n'àutr element a l'é già colegà.",
-	'wikibase-error-ui-session-failure' => "Toa session a l'é finìa. Për piasì intra torna.",
-	'wikibase-error-ui-edit-conflict' => 'A-i è un conflit ëd modìfiche. Për piasì torna carié e salva torna.',
+	'wikibase-error-ui-link-exists' => "A peul pa buté na liura a sta pàgina përchè n'àutr element a l'é già colegà.",
+	'wikibase-error-ui-session-failure' => "Soa session a l'é finìa. Për piasì, ch'a intra torna ant ël sistema.",
+	'wikibase-error-ui-edit-conflict' => "A-i é un conflit ëd modìfiche. Për piasì, ch'a caria e ch'a salva torna.",
 	'wikibase-sitelinks' => "Lista ëd le pàgine gropà a st'element",
 	'wikibase-sitelinks-sitename-columnheading' => 'Lenga',
 	'wikibase-sitelinks-siteid-columnheading' => 'Còdes',

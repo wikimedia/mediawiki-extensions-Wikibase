@@ -313,6 +313,19 @@ $messages['ca'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Mostra les modificacions de Wikidata en els canvis recents',
 );
 
+/** Sorani Kurdish (کوردی)
+ * @author Calak
+ */
+$messages['ckb'] = array(
+	'wikibase-after-page-move' => 'باشترە ھەروەھا برگەی ویکیدراوی پەیوەندیداریش [$1 نوێ بکەیەوە] ھەتا پەیوەندەکانی زمان لە پەڕە گوازراوەکەدا بمێنێتەوە.',
+	'wikibase-comment-remove' => 'بڕگەی ویکیدراوەی پەیوەندیدار سڕایەوە. بەستەرەکانی زمان لابران.',
+	'wikibase-comment-linked' => 'بڕگەیەکی ویکیدراوە بەم پەڕەیە بەستەر دراوە.',
+	'wikibase-comment-unlink' => 'ئەم پەڕەیە بە بڕگەی ویکیدراوە بەستەر نەدراوە. بەستەرەکانی زمان لابران.',
+	'wikibase-comment-restore' => 'بڕگەی ویکیدراوەی پەیوەندیدار گەڕایەوە. بەستەرەکانی زمان ھێنرایەوە.',
+	'wikibase-rc-hide-wikidata' => '$1 ویکیدراوه',
+	'wikibase-rc-show-wikidata-pref' => 'دەستکارییەکانی ویکیدراوە لە دوایین گۆڕانکارییەکاندا نیشان بدە',
+);
+
 /** Czech (česky)
  * @author JAn Dudík
  */
