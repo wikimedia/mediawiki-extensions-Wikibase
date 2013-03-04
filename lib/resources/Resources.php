@@ -484,8 +484,10 @@ return call_user_func( function() {
 				'wikibase-snakview-unsupportedsnaktype',
 				'wikibase-snakview-choosesnaktype',
 				'wikibase-snakview-variation-unsupporteddatatype',
+				'wikibase-snakview-variation-unsupporteddatavalue',
 				'wikibase-snakview-variation-datavaluetypemismatch',
 				'wikibase-snakview-variation-datavaluetypemismatch-details',
+				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
 				'datatypes-type-wikibase-item',
 				'wikibase-snakview-variations-somevalue-label',
 				'wikibase-snakview-variations-novalue-label',
@@ -546,7 +548,10 @@ return call_user_func( function() {
 				'wikibase.templates',
 			),
 			'messages' => array(
-				'wikibase-label-empty'
+				'wikibase-label-empty',
+				'parentheses',
+				'wikibase-deletedentity',
+				'wikibase-entity-property',
 			)
 		),
 

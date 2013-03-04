@@ -33,6 +33,7 @@ $messages['en'] = array(
 	'wikibase-label-empty' => 'No label defined yet',
 	'wikibase-label-edit-placeholder' => 'enter label',
 	'wikibase-description-empty' => 'No description defined yet',
+	'wikibase-deletedentity' => 'Deleted $1',
 	'wikibase-description-edit-placeholder' => 'enter description',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'article',
@@ -75,8 +76,10 @@ $messages['en'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak of type "$1". Handling for this kind of Snak is not yet supported.',
 	'wikibase-snakview-choosesnaktype' => 'Choose a value type.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Handling of values for "$1" data type is not yet supported.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Handling of "$1" data values is not yet supported.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'The value does not comply with the property\'s definition.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'The value\'s data value type "$1" does not match the property\'s data type\'s data value type "$2".',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'It is not possible to define a new value for a deleted property.',
 	'wikibase-snakview-variations-somevalue-label' => 'unknown value',
 	'wikibase-snakview-variations-novalue-label' => 'no value',
 	'wikibase-snakview-snaktypeselector-value' => 'custom value',
@@ -357,6 +360,7 @@ This is a generic placeholder message used while a remove is in progress, and re
 	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-label|label]].',
 	'wikibase-description-empty' => "Placeholder message displayed instead of the item's description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
+	'wikibase-deletedentity' => 'Message displayed instead of an Entity\'s label if the Entity has been deleted (see [[d:Wikidata:Glossary]]). Usually this message is used with some other message pointing to the entity. $1 is the kind of entity which got deleted (e.g. "property").',
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
 	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
@@ -432,6 +436,7 @@ Since "Snak" or "Snak type" does not express any meaning for the user, these phr
 Parameters:
 * $1 - data value type of the property-value Snak's value.
 * $2 - data value type used by the data type used in the property which is used by the property-value Snak",
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'If the user is editing a Snak whose Property has been deleted, this warning will be displayed if tue user changes the Snak\'s type from any other Snak type to a value Snak. Since the Property has been deleted, there is absolutely no indication for what kind of value the user wants to enter. So this action simply makes no sense.',
 	'wikibase-snakview-variations-somevalue-label' => "Message displayed for 'some value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
 	'wikibase-snakview-variations-novalue-label' => "Message displayed for 'no value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
 	'wikibase-snakview-snaktypeselector-value' => "Short descriptive title of a 'value' snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option - which is the default when adding a claim - is allowing the user to specify a value.",
@@ -616,6 +621,8 @@ See also:
 	'wikibase-entitydata-unsupported-format' => 'Error shown when the requested output format is not supported for entity data.',
 	'wikibase-entitydata-title' => 'Title shown on the special page when a form or text is presented',
 	'wikibase-entitydata-text' => 'Explanatory text shown on the special page.',
+	'wikibase-snakview-variation-unsupporteddatatype' => 'Error shown if a data value for a certain data type (see [[d:Wikidata/Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values for that data type has not yet been implemented). $1 is the name of the data type which lacks support.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Error shown if a data value of a certain data value type (see [[d:Wikidata/Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values of that type has not yet been implemented). $1 is the name of the data value type which lacks support.',
 	'wikibase-api-aliases-invalid-list' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions.
 
 {{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
