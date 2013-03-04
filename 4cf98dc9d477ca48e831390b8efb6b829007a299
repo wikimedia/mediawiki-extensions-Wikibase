@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DoEn7MkU",
+        "filename": "client/includes/NamespaceChecker.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-04T14:48:47Z",
+      "side": 1,
+      "message": "ws",
+      "revId": "4cf98dc9d477ca48e831390b8efb6b829007a299",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
