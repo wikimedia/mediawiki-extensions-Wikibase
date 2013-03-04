@@ -245,6 +245,12 @@ $1', # Do not translate
 to find out where it went.',
 	'wikibase-noentity-createone' => 'You can also [[$1|create a new one]].',
 
+	'wikibase-parserfunction-unknown-entity' => 'Label: The entity <code>$1</code> is unknown',
+	'wikibase-parserfunction-unkown-content' => 'Label: The type of <code>$1</code> is unknown',
+	'wikibase-parserfunction-unkown-serialization' => 'Label: The content of <code>$1</code> is broken',
+	'wikibase-parserfunction-label' => '$3',
+	'wikibase-parserfunction-description' => '$3',
+
 	// item - summary and autocomment
 	'wikibase-item-summary-wbsetitem' => 'Created a new item', // legacy
 	'wikibase-item-summary-wbeditentity' => 'Created a new item', // legacy
@@ -678,6 +684,22 @@ This is an error message for a situation where the arguments to the API is incon
 * $1 is the name of the namespace for which direct editing was denied.',
 	'wikibase-noentity' => 'Of some reason the user tried to access an entity which then was detected as non-existing. This can happen when an entity is deleted and clients are not yet made aware of this.',
 	'wikibase-noentity-createone' => 'Put immediately after "wikibase-noentity" if the user has the right to create an entity of the given type. This message tells the user that he can create one and gives a link in $1 to the special page where this can be done.',
+
+	'wikibase-parserfunction-unknown-entity' => 'Failed lookup of an item from a parser function. In this case something is wrong with the id, perhaps illegal characters are added to the string.
+* $1 is the failing item id',
+	'wikibase-parserfunction-unkown-content' => 'Failed lookup of an item from a parser function. In this case something was found, but it was not recognized as something of valid type.
+* $1 is the actual label',
+	'wikibase-parserfunction-unkown-serialization' => 'Failed lookup of an item from a parser function. In this case the unserialization failed, for example due to incompatible versions of the Wikibase extension or because of corrupt database.
+* $1 is the actual label',
+	'wikibase-parserfunction-label' => 'The lookup of a label succeded and this is how it will be formatted. Usually this should be an identity function
+* $1 is the item id
+* $2 is the failing language
+* $3 is the actual label',
+	'wikibase-parserfunction-description' => 'The lookup of a description succeded and this is how it will be formatted. Usually this should be an identity function
+* $1 is the item id
+* $2 is the failing language
+* $3 is the actual description',
+
 	'wikibase-item-summary-wbsetitem' => 'Automatic edit summary generated when creating a new item. This is a legacy message.
 {{Identical|Create new item}}',
 	'wikibase-item-summary-wbeditentity' => 'Automatic edit summary generated when creating a new item. This is a legacy message.',

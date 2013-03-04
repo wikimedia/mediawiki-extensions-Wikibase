@@ -980,4 +980,64 @@ final class RepoHooks {
 
 		return false;
 	}
+
+	/**
+	 * Register parser functions.
+	 *
+	 * @since 0.5
+	 *
+	 * @param &$parser \Parser
+	 *
+	 * @return bool
+	 */
+	public static function onParserFirstCallInit( &$parser ) {
+		$parser->setFunctionHook( 'link', '\Wikibase\ParserFunction\LinkFunction::handle', SFH_NO_HASH );
+		$parser->setFunctionHook( 'label', '\Wikibase\ParserFunction\LabelFunction::handle', SFH_NO_HASH );
+		$parser->setFunctionHook( 'description', '\Wikibase\ParserFunction\DescriptionFunction::handle', SFH_NO_HASH );
+		return true;
+	}
+
+	/**
+	 * Register the magic words.
+	 *
+	 * @since 0.5
+	 *
+	 * @param &$aCustomVariableIds
+	 *
+	 * @return bool
+	 */
+	public static function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {
+		$aCustomVariableIds[] = 'link';
+		$aCustomVariableIds[] = 'label';
+		$aCustomVariableIds[] = 'description';
+		return true;
+	}
+
+	/**
+	 * Apply the magic word.
+	 *
+	 * @since 0.5
+	 *
+	 * @param &$parser \Parser
+	 * @param &$cache
+	 * @param &$magicWordId
+	 * @param &$ret
+	 *
+	 * @return bool
+	 */
+	public static function onParserGetVariableValueSwitch( &$parser, &$cache, &$magicWordId, &$ret ) {
+		switch( $magicWordId ) {
+		case 'link':
+			\Wikibase\ParserFunction\LinkFunction::handle( $parser, '' );
+			break;
+		case 'label':
+			\Wikibase\ParserFunction\LabelFunction::handle( $parser, '' );
+			break;
+		case 'description':
+			\Wikibase\ParserFunction\DescriptionFunction::handle( $parser, '' );
+			break;
+		}
+
+		return true;
+	}
 }
