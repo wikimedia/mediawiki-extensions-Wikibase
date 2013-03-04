@@ -1,0 +1,8 @@
+Verified+1: jenkins-bot
+Code-Review+2: Daniel Werner <daniel.werner@wikimedia.de>
+Verified+2: Daniel Werner <daniel.werner@wikimedia.de>
+Submitted-by: Daniel Werner <daniel.werner@wikimedia.de>
+Submitted-at: Mon, 04 Mar 2013 16:02:12 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/52041
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/mw1.21-wmf11
