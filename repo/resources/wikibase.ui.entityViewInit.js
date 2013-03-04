@@ -177,7 +177,11 @@
 
 			// Display anonymous user edit warning:
 			if ( mw.user && mw.user.isAnon() ) {
-				mw.notify( mw.message( 'wikibase-anonymouseditwarning-' + wb.entity.type ) );
+				mw.notify(
+					mw.msg( 'wikibase-anonymouseeditwarning',
+						mw.msg( 'wikibase-entity-' + wb.entity.getType() )
+					)
+				);
 			}
 
 			// add copyright warning to 'save' button if there is one:
