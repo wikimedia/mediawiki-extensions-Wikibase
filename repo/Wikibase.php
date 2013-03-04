@@ -87,6 +87,7 @@ $wgGroupPermissions['*']['description-update']	= true;
 $wgExtensionMessagesFiles['Wikibase'] 		= $dir . 'Wikibase.i18n.php';
 $wgExtensionMessagesFiles['WikibaseAlias'] 	= $dir . 'Wikibase.i18n.alias.php';
 $wgExtensionMessagesFiles['WikibaseNS'] 	= $dir . 'Wikibase.i18n.namespaces.php';
+$wgExtensionMessagesFiles['wikibaseMagic']	= $dir . 'Wikibase.i18n.magic.php';
 
 
 // Autoloading
@@ -158,6 +159,9 @@ $wgAutoloadClasses['Wikibase\PropertyContent'] 			= $dir . 'includes/content/Pro
 $wgAutoloadClasses['Wikibase\PropertyHandler'] 			= $dir . 'includes/content/PropertyHandler.php';
 $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
+
+// includes/parserfunction
+$wgAutoloadClasses['Wikibase\ParserFunction\Label'] 	= $dir . 'includes/parserfunction/Label.php';
 
 // includes/specials
 $wgAutoloadClasses['SpecialCreateEntity'] 				= $dir . 'includes/specials/SpecialCreateEntity.php';
@@ -277,6 +281,9 @@ $wgHooks['SetupAfterCache'][] 						= 'Wikibase\RepoHooks::onSetupAfterCache';
 $wgHooks['ShowSearchHit'][] 						= 'Wikibase\RepoHooks::onShowSearchHit';
 $wgHooks['TitleGetRestrictionTypes'][]				= 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
 $wgHooks['AbuseFilter-contentToString'][]			= 'Wikibase\RepoHooks::onAbuseFilterContentToString';
+$wgHooks['ParserFirstCallInit'][]					= '\Wikibase\RepoHooks::onParserFirstCallInit';
+$wgHooks['MagicWordwgVariableIDs'][]				= '\Wikibase\RepoHooks::onMagicWordwgVariableIDs';
+$wgHooks['ParserGetVariableValueSwitch'][]		= '\Wikibase\ClientHooks::onParserGetVariableValueSwitch';
 
 // Resource Loader Modules:
 $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );

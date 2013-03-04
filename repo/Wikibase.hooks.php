@@ -980,4 +980,52 @@ final class RepoHooks {
 
 		return false;
 	}
+
+	/**
+	 * Register parser functions.
+	 *
+	 * @since 0.5
+	 *
+	 * @param &$parser \Parser
+	 *
+	 * @return bool
+	 */
+	public static function onParserFirstCallInit( &$parser ) {
+		$parser->setFunctionHook( 'label', '\Wikibase\ParserFunction\Label::handle', SFH_NO_HASH );
+		return true;
+	}
+
+	/**
+	 * Register the magic words.
+	 *
+	 * @since 0.5
+	 *
+	 * @param &$aCustomVariableIds
+	 *
+	 * @return bool
+	 */
+	public static function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {
+		$aCustomVariableIds[] = 'label';
+		return true;
+	}
+
+	/**
+	 * Apply the magic word.
+	 *
+	 * @since 0.5
+	 *
+	 * @param &$parser \Parser
+	 * @param &$cache
+	 * @param &$magicWordId
+	 * @param &$ret
+	 *
+	 * @return bool
+	 */
+	public static function onParserGetVariableValueSwitch( &$parser, &$cache, &$magicWordId, &$ret ) {
+		if( $magicWordId == 'label' ) {
+			\Wikibase\ParserFunction\Label::handle( $parser, '' );
+		}
+
+		return true;
+	}
 }
