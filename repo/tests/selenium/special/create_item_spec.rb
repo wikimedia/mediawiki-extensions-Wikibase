@@ -71,7 +71,7 @@ describe "Check CreateItem special page" do
     end
   end
 
-  context "create check error behaviour on item creation" do
+  context "create check error behavior on item creation" do
     it "should fail to create item with empty label & description" do
       visit_page(CreateItemPage) do |page|
         page.createEntitySubmit

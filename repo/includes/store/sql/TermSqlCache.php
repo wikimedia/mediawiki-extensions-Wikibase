@@ -754,7 +754,7 @@ class TermSqlCache implements TermCache {
 	 * Takes the result of a query with joins and turns it into a row per term.
 	 *
 	 * Also ditches any successive results PDO manages to add to the first one,
-	 * so the behaviour appears to be the same as when running the query against
+	 * so the behavior appears to be the same as when running the query against
 	 * the database directly without PDO messing the the result up.
 	 *
 	 * @since 0.2

@@ -22,7 +22,7 @@ describe "Check functionality of edit description" do
   end
 
   context "Check for item description UI" do
-    it "should check behaviour of cancel-link" do
+    it "should check behavior of cancel-link" do
       on_page(ItemPage) do |page|
         page.entityDescriptionSpan.should be_true
         page.entityDescriptionSpan.should == description
@@ -43,7 +43,7 @@ describe "Check functionality of edit description" do
         page.entityDescriptionSpan.should == description
       end
     end
-    it "should check behaviour of ESC-key" do
+    it "should check behavior of ESC-key" do
       on_page(ItemPage) do |page|
         page.editDescriptionLink
         page.descriptionInputField = description_changed
@@ -101,7 +101,7 @@ describe "Check functionality of edit description" do
         page.entityDescriptionSpan.should == description_normalized
       end
     end
-    it "should check for correct behaviour on '0'" do
+    it "should check for correct behavior on '0'" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load

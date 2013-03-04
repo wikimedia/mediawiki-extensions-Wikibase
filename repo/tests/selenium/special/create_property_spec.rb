@@ -56,7 +56,7 @@ describe "Check NewProperty special page" do
     end
   end
 
-  context "create property error behaviour" do
+  context "create property error behavior" do
     it "should fail to create item with empty label & description" do
       visit_page(NewPropertyPage) do |page|
         page.createEntitySubmit

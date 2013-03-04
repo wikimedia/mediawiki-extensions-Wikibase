@@ -98,7 +98,7 @@ interface Snaks extends \Traversable, \ArrayAccess, \Countable, \Serializable, \
 	 * Roundtrips with SnakList::newFromArray
 	 *
 	 * This method can be used for serialization when passing the array to for
-	 * instance json_encode which created behaviour similar to
+	 * instance json_encode which created behavior similar to
 	 * @see Serializable::serialize but different in that it uses the
 	 * snak type identifier rather then it's class name.
 	 *
