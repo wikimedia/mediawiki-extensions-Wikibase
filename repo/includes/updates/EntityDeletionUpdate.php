@@ -97,7 +97,7 @@ class EntityDeletionUpdate extends \DataUpdate {
 	 * @param Entity $entity
 	 */
 	protected function doTypeSpecificStuff( Store $store, Entity $entity ) {
-		// Override to add behaviour.
+		// Override to add behavior.
 	}
 
 }

@@ -70,7 +70,7 @@ class EntityCacheUpdaterTest extends \MediaWikiTestCase {
 
 			$cacheUpdater->handleChange( $change );
 
-			// TODO: test if the result matches expected behaviour
+			// TODO: test if the result matches expected behavior
 			$this->assertTrue( true );
 		}
 	}

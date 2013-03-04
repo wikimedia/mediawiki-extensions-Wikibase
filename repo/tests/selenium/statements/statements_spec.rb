@@ -57,7 +57,7 @@ describe "Check statements UI" do
   end
 
   context "Check statements UI" do
-    it "should check statement buttons behaviour" do
+    it "should check statement buttons behavior" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
@@ -76,7 +76,7 @@ describe "Check statements UI" do
         page.statementValueInput?.should be_false
       end
     end
-    it "should check snaktype selector behaviour", :exclude_firefox => true do
+    it "should check snaktype selector behavior", :exclude_firefox => true do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
@@ -104,7 +104,7 @@ describe "Check statements UI" do
         page.snaktypeSelectorIcon?.should be_false
       end
     end
-    it "should check entity suggestor behaviour" do
+    it "should check entity suggestor behavior" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
@@ -210,7 +210,7 @@ describe "Check statements UI" do
         page.statement1ClaimValue1?.should be_false
       end
     end
-    it "should check ESC/RETURN button behaviour" do
+    it "should check ESC/RETURN button behavior" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
@@ -324,7 +324,7 @@ describe "Check statements UI" do
         page.statement1Name?.should be_false
       end
     end
-    it "should check button behaviour when editing a statement" do
+    it "should check button behavior when editing a statement" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load

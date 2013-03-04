@@ -63,7 +63,7 @@ describe "Check references UI" do
   end
 
   context "Check references UI" do
-    it "should check references buttons behaviour" do
+    it "should check references buttons behavior" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load

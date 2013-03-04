@@ -100,7 +100,7 @@ describe "Check functionality of client-repo connection" do
     end
   end
 
-  context "client-repo check behaviour on changing connecting sitelink" do
+  context "client-repo check behavior on changing connecting sitelink" do
     it "should change the connecting sitelink to a nonexisting article" do
       on_page(ItemPage) do |page|
         page.navigate_to_item

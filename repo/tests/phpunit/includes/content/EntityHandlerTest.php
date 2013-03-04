@@ -134,7 +134,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$title = \Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
 
 		//NOTE: currently, this tests whether getPageLanguage will always return the content language, even
-		//      if the user language is different. It's unclear whether this is actually the desired behaviour,
+		//      if the user language is different. It's unclear whether this is actually the desired behavior,
 		//      since Wikibase Entities are inherently multilingual, so they have no actual "page language".
 
 		// test whatever is there

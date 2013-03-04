@@ -28,7 +28,7 @@ describe "Check edit-conflicts" do
     end
   end
 
-  context "check behaviour on edit conflicts (descriptions)" do
+  context "check behavior on edit conflicts (descriptions)" do
     it "should login as user 1, change description and save revid" do
       visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
@@ -121,7 +121,7 @@ describe "Check edit-conflicts" do
     end
   end
 
-  context "check normal behaviour" do
+  context "check normal behavior" do
     it "should be possible to edit description again after a reload" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
@@ -138,7 +138,7 @@ describe "Check edit-conflicts" do
     end
   end
 
-  context "check behaviour on edit conflicts (claims)" do
+  context "check behavior on edit conflicts (claims)" do
     prop_label = generate_random_string(10)
     prop_description = generate_random_string(20)
     prop_datatype = "Commons media file"

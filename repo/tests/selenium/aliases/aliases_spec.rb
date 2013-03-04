@@ -58,7 +58,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.cancelAliases
         page.addAliases?.should be_true
 
-        # checking behaviour of ESC key
+        # checking behavior of ESC key
         page.addAliases
         page.aliasesInputEmpty= generate_random_string(8)
         page.aliasesInputEmpty_element.send_keys :escape
@@ -108,7 +108,7 @@ describe "Check functionality of add/edit/remove aliases" do
     end
   end
 
-  context "Check functionality and behaviour of aliases edit mode" do
+  context "Check functionality and behavior of aliases edit mode" do
     it "should check that the edit mode of aliases behaves properly" do
       on_page(ItemPage) do |page|
         page.wait_for_entity_to_load

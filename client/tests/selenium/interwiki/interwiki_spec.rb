@@ -43,7 +43,7 @@ describe "Check client interwiki links" do
         page.clientEditLinksLink?.should be_true
       end
     end
-    it "should check correct behaviour of editLinks-Link" do
+    it "should check correct behavior of editLinks-Link" do
       on_page(ClientPage) do |page|
         page.navigate_to_article(article_title)
         page.clientEditLinksLink
@@ -56,7 +56,7 @@ describe "Check client interwiki links" do
     end
   end
 
-  context "Check noexternallanglinks magic word behaviour" do
+  context "Check noexternallanglinks magic word behavior" do
     it "should check noexternallanglinks zh|af" do
       on_page(ClientPage) do |page|
         page.change_article(article_title, article_text + nell_zhaf)

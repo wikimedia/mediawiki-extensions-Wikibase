@@ -171,7 +171,7 @@ class Claim implements \Hashable, \Serializable {
 	 * Roundtrips with Claim::newFromArray
 	 *
 	 * This method can be used for serialization when passing the array to for
-	 * instance json_encode which created behaviour similar to
+	 * instance json_encode which created behavior similar to
 	 * @see Serializable::serialize but different in that it uses the
 	 * type identifiers rather then class names.
 	 *

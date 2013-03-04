@@ -104,7 +104,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	public function serialize() {
 		$data = $this->toArray();
 
-		// Add an identifier for the serialization version so we can switch behaviour in
+		// Add an identifier for the serialization version so we can switch behavior in
 		// the unserializer to avoid breaking compatibility after certain changes.
 		$data['v'] = 1;
 
@@ -869,7 +869,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @param Patcher $patcher
 	 */
 	protected function patchSpecificFields( EntityDiff $patch, Patcher $patcher ) {
-		// No-op, meant to be overridden in deriving classes to add specific behaviour
+		// No-op, meant to be overridden in deriving classes to add specific behavior
 	}
 
 	/**

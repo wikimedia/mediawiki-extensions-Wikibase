@@ -130,7 +130,7 @@ class GetEntities extends ApiWikibase {
 			$this->dieUsage( "Invalid id: $id", 'no-such-entity-id' );
 		}
 
-		// key should be numeric to get the correct behaviour
+		// key should be numeric to get the correct behavior
 		// note that this setting depends upon "setIndexedTagName_internal"
 		//FIXME: if we get different kinds of entities at once, $entityId->getNumericId() may not be unique.
 		$entityPath = array(

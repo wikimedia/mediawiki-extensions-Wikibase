@@ -22,7 +22,7 @@ describe "Check functionality of edit label" do
   end
 
   context "Check for edit label" do
-    it "should check behaviour of cancel-link" do
+    it "should check behavior of cancel-link" do
       on_page(ItemPage) do |page|
         page.firstHeading.should be_true
         page.entityLabelSpan.should be_true
@@ -44,7 +44,7 @@ describe "Check functionality of edit label" do
         page.entityLabelSpan.should == label
       end
     end
-    it "should check behaviour of ESC-key" do
+    it "should check behavior of ESC-key" do
       on_page(ItemPage) do |page|
         page.editLabelLink
         page.labelInputField = label_changed
@@ -104,7 +104,7 @@ describe "Check functionality of edit label" do
         page.entityLabelSpan.should == label_normalized
       end
     end
-    it "should check for correct behaviour on '0'" do
+    it "should check for correct behavior on '0'" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
