@@ -56,6 +56,9 @@ return call_user_func( function() {
 				'wikibase-sitelinks',
 				'wikibase-statements',
 				'wikibase-copyrighttooltip-acknowledge',
+				'wikibase-anonymouseditwarning',
+				'wikibase-entity-item',
+				'wikibase-entity-property',
 			)
 		),
 
