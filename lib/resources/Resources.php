@@ -552,10 +552,6 @@ return call_user_func( function() {
 				'jquery.wikibase.statementview',
 				'jquery.wikibase.claimlistview',
 				'wikibase.templates'
-			),
-			'messages' => array(
-				'wikibase-anonymouseditwarning-item',
-				'wikibase-anonymouseditwarning-property'
 			)
 		),
 

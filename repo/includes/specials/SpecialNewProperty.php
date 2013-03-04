@@ -136,7 +136,10 @@ class SpecialNewProperty extends SpecialCreateEntity {
 		$warnings = array();
 
 		if ( $this->getUser()->isAnon() ) {
-			$warnings[] = $this->msg( 'wikibase-anonymouseditwarning-property' );
+			$warnings[] = $this->msg(
+				'wikibase-anonymouseditwarning',
+				$this->msg( 'wikibase-entity-property' )
+			);
 		}
 
 		return $warnings;
