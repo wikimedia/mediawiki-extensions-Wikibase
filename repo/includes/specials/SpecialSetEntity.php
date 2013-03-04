@@ -162,7 +162,10 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 
 		if ( $this->getUser()->isAnon() ) {
-			$this->showError( $this->msg( 'wikibase-anonymouseditwarning-item' ), 'warning' );
+			$this->showError(
+				$this->msg( 'wikibase-anonymouseditwarning', $this->msg( 'wikibase-entity-item' ) ),
+				'warning'
+			);
 		}
 
 		if ( $value === null ) {

@@ -564,10 +564,6 @@ return call_user_func( function() {
 				'jquery.wikibase.claimlistview',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.templates'
-			),
-			'messages' => array(
-				'wikibase-anonymouseditwarning-item',
-				'wikibase-anonymouseditwarning-property'
 			)
 		),
 

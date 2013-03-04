@@ -174,7 +174,10 @@ class SpecialCreateItem extends SpecialCreateEntity {
 		$warnings = array();
 
 		if ( $this->getUser()->isAnon() ) {
-			$warnings[] = $this->msg( 'wikibase-anonymouseditwarning-item' );
+			$warnings[] = $this->msg(
+				'wikibase-anonymouseditwarning',
+				$this->msg( 'wikibase-entity-item' )
+			);
 		}
 
 		return $warnings;
