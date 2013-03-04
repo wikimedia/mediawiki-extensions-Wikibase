@@ -12,6 +12,10 @@ return call_user_func( function() {
 			'position' => 'top',
 			'styles' => 'wikibase.client.css',
 		),
+		'wikibase.client.nolanglinks' => $moduleTemplate + array(
+			'position' => 'top',
+			'styles' => 'wikibase.client.nolanglinks.css',
+		),
 		'wikibase.client.currentSite' => $moduleTemplate + array(
 			'class' => 'Wikibase\SiteModule'
 		),

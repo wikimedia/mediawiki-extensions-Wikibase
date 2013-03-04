@@ -680,12 +680,16 @@
 	 */
 	$( document ).ready( function() {
 		$( '#wbc-linkToItem' )
-			.find( 'a' )
+			.empty()
+			.append(
+				$( '<a>' )
 				.attr( {
 					href: '#',
 					id: 'wbc-linkToItem-link'
 				} )
 				.text( mw.msg( 'wikibase-linkitem-addlinks' ) )
-				.click( checkLoggedin );
+				.click( checkLoggedin )
+			);
+		$( '#p-lang' ).show();
 	} );
 } )( wikibase, mediaWiki, jQuery );

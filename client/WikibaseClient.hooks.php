@@ -581,10 +581,16 @@ final class ClientHooks {
 
 		if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			$out->addModules( 'wikibase.client.init' );
-			// Experimental for now
-			// if ( !$out->getLanguageLinks() && \Action::getActionName( $skin->getContext() ) === 'view' && $title->exists() ) {
-			//	$out->addModules( 'wbclient.linkItem' );
-			// }
+
+			if ( !$out->getLanguageLinks() && \Action::getActionName( $skin->getContext() ) === 'view' && $title->exists() ) {
+				// Module with the sole purpose to hide #p-lang
+				// Needed as we can't do that in the regular CSS nor in JavaScript
+				// (as that only runs after the element initially appeared).
+				$out->addModules( 'wikibase.client.nolanglinks' );
+
+				// Experimental for now
+				//	$out->addModules( 'wbclient.linkItem' );
+			}
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -617,9 +623,8 @@ final class ClientHooks {
 				// Placeholder in case the page doesn't have any langlinks yet
 				// self::onBeforePageDisplay adds the JavaScript module which will overwrite this with a link
 				$template->data['language_urls'][] = array(
-					'text' => wfMessage( 'parentheses', wfMessage( 'wikibase-nolanglinks' )->escaped() ),
 					'id' => 'wbc-linkToItem',
-					'class' => 'wbc-editpage',
+					'class' => 'wbc-editpage wbc-nolanglinks',
 				);
 
 				wfProfileOut( __METHOD__ );
