@@ -358,7 +358,10 @@ This is a generic placeholder message used while a remove is in progress, and re
 	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-label|label]].',
 	'wikibase-description-empty' => "Placeholder message displayed instead of the item's description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
-	'wikibase-deletedentity' => 'Message displayed instead of an Entity\'s label if the Entity has been deleted (see [[d:Wikidata:Glossary]]). Usually this message is used with some other message pointing to the entity. $1 is the kind of entity which got deleted (e.g. "property").',
+	'wikibase-deletedentity' => 'Message displayed instead of an Entity\'s label if the Entity has been deleted (see [[d:Wikidata:Glossary]]). Usually this message is used with some other message pointing to the entity.
+
+Parameters:
+* $1 - the kind of entity which got deleted (e.g. "property")',
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
 	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
@@ -428,13 +431,15 @@ Parameters:
 Since a default Snak type should always be selected when adding a Snak, the message is visible on rare occasions only.
 
 Since "Snak" or "Snak type" does not express any meaning for the user, these phrases should be avoided in the message.',
+	'wikibase-snakview-variation-unsupporteddatatype' => 'Error shown if a data value for a certain data type (see [[d:Wikidata/Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values for that data type has not yet been implemented). $1 is the name of the data type which lacks support.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Error shown if a data value of a certain data value type (see [[d:Wikidata/Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values of that type has not yet been implemented). $1 is the name of the data value type which lacks support.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => "Warning displayed if the data value type used by a Snak's (see [[d:Wikidata/Glossary]]) property's data type is different from the data value type of the same Snak's actual value. This should only appear after internal changes or after a property's data type has changed and no scripts for updating the data were executed (there might not even be any scripts for handling all possible causes of this).",
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => "Details of the warning displayed if the data value type used by a Snak's (see [[d:Wikidata:Glossary]]) property's data type is different from the data value type of the same Snak's actual value.
 
 Parameters:
 * $1 - data value type of the property-value Snak's value.
 * $2 - data value type used by the data type used in the property which is used by the property-value Snak",
-	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'If the user is editing a Snak whose Property has been deleted, this warning will be displayed if tue user changes the Snak\'s type from any other Snak type to a value Snak. Since the Property has been deleted, there is absolutely no indication for what kind of value the user wants to enter. So this action simply makes no sense.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => "If the user is editing a Snak whose Property has been deleted, this warning will be displayed if tue user changes the Snak's type from any other Snak type to a value Snak. Since the Property has been deleted, there is absolutely no indication for what kind of value the user wants to enter. So this action simply makes no sense.",
 	'wikibase-snakview-variations-somevalue-label' => "Message displayed for 'some value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
 	'wikibase-snakview-variations-novalue-label' => "Message displayed for 'no value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
 	'wikibase-snakview-snaktypeselector-value' => "Short descriptive title of a 'value' snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option - which is the default when adding a claim - is allowing the user to specify a value.",
@@ -449,11 +454,11 @@ Parameters:
 	'wikibase-copyrighttooltip-acknowledge' => 'Label of the link to not show the copyright warning again. A copyright warning is presented to the user whenever the user is about to alter any data unless the warning is not suppressed permanently by clicking this link.',
 	'wikibase-entityselector-more' => 'The entity selector is a user interface widget that allows selecting an entity (see [[d:Wikidata/Glossary]]). It consists out of an input field and a list of suggestions that is filled according to the text typed into the input field. Initially, the list of suggestions is filled with a certain number of suggestions. Clicking the link labeled with this message will fill the list of suggestions with additional suggestions. If there are no additional suggestions or no suggestions at all, the link does not show up.
 {{Identical|More}}',
-	'wikibase-anonymouseditwarning' => 'Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on an entity (see [[d:Wikidata/Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in. $1 is the entity\'s name.
+	'wikibase-anonymouseditwarning' => "Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on an entity (see [[d:Wikidata/Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in. $1 is the entity's name.
 
 See also:
 * {{msg-mw|Anoneditwarning}}
-* {{msg-mw|Sf autoedit anoneditwarning}}',
+* {{msg-mw|Sf autoedit anoneditwarning}}",
 	'wikibase-restrictionedit-tooltip-message' => 'When editing a page (a data item) is restricted for the current user, this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item.',
 	'wikibase-blockeduser-tooltip-message' => 'When the current user is blocked from editing a page (a data item), this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item or creating a new item.',
 	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|page]] and [[m:Wikidata/Glossary#item|item]].',
@@ -612,8 +617,6 @@ See also:
 	'wikibase-entitydata-unsupported-format' => 'Error shown when the requested output format is not supported for entity data.',
 	'wikibase-entitydata-title' => 'Title shown on the special page when a form or text is presented',
 	'wikibase-entitydata-text' => 'Explanatory text shown on the special page.',
-	'wikibase-snakview-variation-unsupporteddatatype' => 'Error shown if a data value for a certain data type (see [[d:Wikidata/Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values for that data type has not yet been implemented). $1 is the name of the data type which lacks support.',
-	'wikibase-snakview-variation-unsupporteddatavalue' => 'Error shown if a data value of a certain data value type (see [[d:Wikidata/Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values of that type has not yet been implemented). $1 is the name of the data value type which lacks support.',
 	'wikibase-api-aliases-invalid-list' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions.
 
 {{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
@@ -1048,23 +1051,20 @@ $messages['be-tarask'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'уласнае значэньне',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'невядомае значэньне',
 	'wikibase-snakview-snaktypeselector-novalue' => 'без значэньня',
+	'wikibase-copyrighttooltip-acknowledge' => 'Я згодны зьдзяйсьняць наступныя праўкі паводле гэтых умоваў. Не паказвайце больш гэтае паведамленьне.',
 	'wikibase-entityselector-more' => 'болей',
-	'wikibase-anonymouseditwarning-item' => 'Папярэджаньне: Вы не ўвайшлі ў сыстэму.
-Ваш IP-адрас будзе запісаны ў гісторыі рэдагаваньняў гэтага аб’екту.',
-	'wikibase-anonymouseditwarning-property' => 'Папярэджаньне: Вы не ўвайшлі ў сыстэму.
-Ваш IP-адрас будзе запісаны ў гісторыі рэдагаваньняў гэтай уласьцівасьці.',
 	'wikibase-restrictionedit-tooltip-message' => 'Гэтая старонка абароненая. Рэдагаваньне не дазволенае.',
 	'wikibase-blockeduser-tooltip-message' => 'Вам было забароненае рэдагаваньне.',
 	'wikibase-move-error' => 'Вы ня можаце пераносіць старонкі, якія знаходзяцца ў прасторы назваў зьвестак, як і ня можаце пераносіць старонкі ў прастору.',
-	'special-itembytitle' => 'Аб’ект паводле назвы', # Fuzzy
+	'special-itembytitle' => 'Аб’ект паводле спасылкі',
 	'wikibase-itembytitle-lookup-fieldset' => 'Пошук аб’ектаў паводле сайту і назвы',
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
 	'wikibase-itembytitle-lookup-page' => 'Старонка:',
 	'wikibase-itembytitle-submit' => 'Шукаць',
 	'wikibase-itembytitle-description' => 'Пад «сайтам» разумеюць яго код-ідэнтыфікатар, напрыклад «enwiki».',
 	'wikibase-itembytitle-create' => 'Вы можаце таксама [{{fullurl:Special:CreateItem|site=$1&page=$2}} стварыць новы аб’ект].',
-	'special-itemdisambiguation' => 'Неадназначнасьць: аб’екты з аднолькавымі меткамі', # Fuzzy
-	'wikibase-itemdisambiguation-lookup-fieldset' => 'Пошук аб’ектаў паводле меткі', # Fuzzy
+	'special-itemdisambiguation' => 'Неадназначнасьць аб’ектаў',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Пошук аб’ектаў паводле мовы і меткі',
 	'wikibase-itemdisambiguation-lookup-language' => 'Мова:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Метка:',
 	'wikibase-itemdisambiguation-submit' => 'Шукаць',
@@ -1100,8 +1100,10 @@ $messages['be-tarask'] = array(
 	'special-entitieswithoutlabel' => 'Аб’екты бязь метак',
 	'wikibase-entitieswithoutlabel-legend' => 'Атрымасьць сьпіс аб’ектаў бязь метак',
 	'wikibase-entitieswithoutlabel-label-language' => 'Мова:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'усе',
 	'wikibase-entitieswithoutlabel-submit' => 'Знайсьці',
 	'wikibase-entitieswithoutlabel-invalid-language' => '«$1» — няслушны код мовы.',
+	'wikibase-entitieswithoutlabel-invalid-type' => '«$1» ня ёсьць слушным тыпам аб’екта.',
 	'special-itemswithoutsitelinks' => 'Аб’екты без спасылак на сайты',
 	'special-entitydata' => 'Зьвесткі аб’екта',
 	'wikibase-entitydata-not-found' => 'Аб’ект з ідэнтыфікатарам $1 ня знойдзены.',
@@ -1179,8 +1181,6 @@ $messages['bg'] = array(
 	'wikibase-snakview-snaktypeselector-somevalue' => 'неразпозната стойност',
 	'wikibase-shortcopyrightwarning' => 'Натискайки "$1", се съгласявате с  [[$2|Условията за ползване]] и безвъзвратно публикувате приноса си под условията на $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Приемам тези условия за моите бъдещи редакции. Не показвай повече това съобщение.',
-	'wikibase-anonymouseditwarning-item' => 'Внимание: Не сте влезли в системата.
-В историята ще бъде записан вашият IP-адрес.',
 	'wikibase-error-sitelink-already-used' => 'Препратката [[$1:$2]] вече се използва от обект [[$3]].',
 	'wikibase-itembytitle-lookup-fieldset' => 'Търсене на обекти по сайт и заглавие',
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
@@ -1429,10 +1429,6 @@ $messages['ckb'] = array(
 	'wikibase-aliases-empty' => 'نازناوێک دیاری نەکراوە.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|سەرچاوە}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'ھێشتا {{PLURAL:$1|یەک سەرچاوە|$1 سەرچاوە}} پاشەکەوت نەکراوە',
-	'wikibase-anonymouseditwarning-item' => 'ھۆشیار بە: نەچوویتە ژوورەوە.
-ناونیشانی IPی تۆ لە مێژووی دەستکارییەکانی ئەم بڕگەیەدا تۆمار دەکرێت.',
-	'wikibase-anonymouseditwarning-property' => 'ھۆشیار بە: نەچوویتە ژوورەوە.
-ناونیشانی IPی تۆ لە مێژووی دەستکارییەکانی ئەم تایبەتمەندییەدا تۆمار دەکرێت.',
 	'special-itembytitle' => 'بڕگەکان پە پێی سەردێر',
 	'wikibase-itemdisambiguation-nothing-found' => 'ببورە، بڕگەیەک بەم ناوەوە نەدۆزرایەوە.',
 	'special-createitem' => 'بڕگەیەکی نوێ دروست بکە',
@@ -1496,10 +1492,6 @@ $messages['cs'] = array(
 	'wikibase-snakview-property-input-placeholder' => 'vlastnost',
 	'wikibase-snakview-variations-somevalue-label' => 'neznámá hodnota',
 	'wikibase-entityselector-more' => 'více',
-	'wikibase-anonymouseditwarning-item' => 'Varování: Nejste přihlášen(a).
-Vaše IP adresa bude zaznamenána v historii úprav této položky.',
-	'wikibase-anonymouseditwarning-property' => 'Varování: Nejste přihlášen(a).
-Vaše IP adresa bude zaznamenána v historii úprav této vlastnosti.',
 	'wikibase-restrictionedit-tooltip-message' => 'Tato stránka je zamčena. Úprava není dovolena.',
 	'wikibase-blockeduser-tooltip-message' => 'Vaše editování je zablokováno.',
 	'special-itembytitle' => 'Položky podle názvu', # Fuzzy
@@ -1738,6 +1730,7 @@ $messages['de'] = array(
 	'wikibase-label-empty' => 'Bislang wurde noch keine Bezeichnung angegeben.',
 	'wikibase-label-edit-placeholder' => 'Bezeichnung eingeben',
 	'wikibase-description-empty' => 'Bislang wurde noch keine Beschreibung angegeben.',
+	'wikibase-deletedentity' => 'Löschte $1',
 	'wikibase-description-edit-placeholder' => 'Beschreibung eingeben',
 	'wikibase-sitelink-site-edit-placeholder' => 'Website',
 	'wikibase-sitelink-page-edit-placeholder' => 'Artikel',
@@ -1778,8 +1771,10 @@ $messages['de'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak des Typs „$1“. Das Bearbeiten für diese Snakart wird noch nicht unterstützt.',
 	'wikibase-snakview-choosesnaktype' => 'Wähle einen Wertetyp aus.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Das Bearbeiten von Werten für den Datentyp „$1“ wird noch nicht unterstützt.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Das Bearbeiten von Datenwerten mit dem Typ „$1“ wird noch nicht unterstützt.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Der Wert entspricht nicht der Eigenschaftsdefinition.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Der Wertedatenwertetyp „$1” stimmt nicht mit dem Datentypdatenwertetyp „$2” der Eigenschaft überein.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Es ist nicht möglich, einen neuen Wert für eine gelöschte Eigenschaft zu definieren.',
 	'wikibase-snakview-variations-somevalue-label' => 'Unbekannter Wert',
 	'wikibase-snakview-variations-novalue-label' => 'Kein Wert',
 	'wikibase-snakview-snaktypeselector-value' => 'Benutzerdefinierter Wert',
@@ -1788,10 +1783,6 @@ $messages['de'] = array(
 	'wikibase-shortcopyrightwarning' => 'Durch Klicken auf „$1“ stimmst du den [[$2|Nutzungsbedingungen]] und unwiderruflich der Veröffentlichung deines Beitrags unter der $3 zu.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Ich akzeptiere diese Bedingungen für meine zukünftigen Bearbeitungen. Diese Nachricht nicht mehr anzeigen.',
 	'wikibase-entityselector-more' => 'mehr',
-	'wikibase-anonymouseditwarning-item' => 'Hinweis: Du bist nicht angemeldet.
-Es wird deine IP-Adresse in der Versionsgeschichte dieses Elements aufgezeichnet.',
-	'wikibase-anonymouseditwarning-property' => 'Hinweis: Du bist nicht angemeldet.
-Es wird deine IP-Adresse in der Versionsgeschichte dieser Eigenschaft aufgezeichnet.',
 	'wikibase-restrictionedit-tooltip-message' => 'Diese Seite wurde geschützt, so dass Bearbeitungen nicht möglich sind.',
 	'wikibase-blockeduser-tooltip-message' => 'Du wurdest gesperrt und kannst daher keine Bearbeitungen machen.',
 	'wikibase-move-error' => 'Du kannst keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
@@ -2076,8 +2067,6 @@ $messages['dsb'] = array(
 	'wikibase-shortcopyrightwarning' => 'Pśez kliknjenje na "$1" zwólijoš do [[$2|wužywańskich wuměnjenjow]] a sy definitiwnje z tym wobjadny, swój pśinosk pód $3 stajiś.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Akceptěruju toś te wuměnjenja za swóje pśiduce změny. Njepokaž toś tu powěźeńku hyšći raz.',
 	'wikibase-entityselector-more' => 'wěcej',
-	'wikibase-anonymouseditwarning-item' => 'Glědaj: Njejsy pśizjawjony. Twója IP-adresa buźo se do wersijoweje historije elementa registrěrowaś.',
-	'wikibase-anonymouseditwarning-property' => 'Glědaj: Njejsy pśizjawjony. Twója IP-adresa buźo se do wersijoweje historije kakosći registrěrowaś.',
 	'wikibase-restrictionedit-tooltip-message' => 'Toś ten bok jo šćitany, wobźěłowanje njejo dowólone.',
 	'wikibase-blockeduser-tooltip-message' => 'Sy blokěrowany a njamóžoš togodla wobźěłaś.',
 	'wikibase-move-error' => 'Njamóžoš boki pśesunuś, kótarež su w datowem mjenjowem rumje, a njamóžoš boki do njego pśesunuś.',
@@ -2237,6 +2226,7 @@ $messages['en-ca'] = array(
  * @author Amire80
  * @author Anakmalaysia
  * @author ArnoLagrange
+ * @author KuboF
  * @author Yekrats
  */
 $messages['eo'] = array(
@@ -2245,6 +2235,7 @@ $messages['eo'] = array(
 	'wikibase-save' => 'Konservu',
 	'wikibase-cancel' => 'Nuligu',
 	'wikibase-add' => 'aldonu',
+	'wikibase-addreference' => 'aldoni fonton',
 	'wikibase-save-inprogress' => 'Konservante',
 	'wikibase-remove-inprogress' => 'Forigante',
 	'wikibase-label-empty' => 'Neniu etikedo difinita',
@@ -2273,6 +2264,7 @@ $messages['eo'] = array(
 	'wikibase-undo-firstrev' => 'Ne eblas malfari kreadon de la paĝo',
 	'wikibase-propertyedittool-full' => 'La listo de valoroj estas plena',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Unu valoro|$1 valoroj}} ne jam konservita{{PLURAL:$1||j}}',
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|ero|eroj}}',
 	'wikibase-sitelinksedittool-full' => 'Ligiloj al paĝoj jam estis kreitaj por ĉiuj konataj vikioj',
 	'wikibase-disambiguation-title' => 'Apartigilo por "$1"',
 	'wb-special-createitem-new-item-notification' => 'Nova ero $1 kreita kaj alidirektita al ties paĝo. Reveni al $2.',
@@ -2280,9 +2272,13 @@ $messages['eo'] = array(
 	'wikibase-aliases-input-help-message' => 'Se ĉi tiu datumaro estas konata per pli ol unu nomo, vi povas enigi kromnomojn kaj sinonimojn, tiel ke ĝi povu esti trovata per ties alternativaj nomoj.',
 	'wikibase-aliases-empty' => 'Neniu kromnomo difinita',
 	'wikibase-datatype-label' => 'Datumtipo',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|fonto|fontoj}}',
 	'wikibase-snakview-property-input-placeholder' => 'atributo',
+	'wikibase-snakview-variations-somevalue-label' => 'nekonata valoro',
 	'wikibase-snakview-variations-novalue-label' => 'sen valoro',
+	'wikibase-snakview-snaktypeselector-somevalue' => 'nekonata valoro',
 	'wikibase-snakview-snaktypeselector-novalue' => 'sen valoro',
+	'wikibase-entityselector-more' => 'pli',
 	'wikibase-restrictionedit-tooltip-message' => 'Ĉi tiu paĝo estas protektita kontraŭ redaktado',
 	'wikibase-blockeduser-tooltip-message' => 'Vi estas forbarita de redaktado.',
 	'wikibase-move-error' => 'Vi ne povas alinomi paĝojn el la datuma nomspaco, nek povas alinomi paĝojn ene de ĝi.',
@@ -2429,11 +2425,8 @@ $messages['es'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'valor personalizado',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valor desconocido',
 	'wikibase-snakview-snaktypeselector-novalue' => 'sin valor',
+	'wikibase-shortcopyrightwarning' => 'Al hacer clic en "$1", aceptas [[$2|los términos de uso]] y aceptas liberar irrevocablemente tus contribuciones bajo la $3.',
 	'wikibase-entityselector-more' => 'más',
-	'wikibase-anonymouseditwarning-item' => 'Aviso: No ha iniciado sesión en el sistema.
-Su dirección IP quedará registrada en el historial de revisiones de esta ítem.',
-	'wikibase-anonymouseditwarning-property' => 'Aviso: No ha iniciado sesión en el sistema.
-Su dirección IP quedará registrada en el historial de revisiones de esta propiedad.',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta página está protegida, no se permite editar.',
 	'wikibase-blockeduser-tooltip-message' => 'Usted ha sido bloqueado para edición.',
 	'wikibase-move-error' => 'No puedes trasladar las páginas que se encuentran en el espacio de nombres de datos, y no puedes trasladar páginas hacia allí.',
@@ -2478,6 +2471,13 @@ Su dirección IP quedará registrada en el historial de revisiones de esta propi
 	'wikibase-setlabel-intro' => 'Este formulario permite definir la etiqueta de una entidad. Debes proporcionar el identificador ID de la entidad (por ejemplo, Q23), un código de idioma (por ejemplo, es) y la propia etiqueta.',
 	'wikibase-setlabel-label' => 'Etiqueta', # Fuzzy
 	'wikibase-setlabel-submit' => 'Definir la etiqueta',
+	'special-setdescription' => 'Establecer una descripción',
+	'wikibase-setdescription-label' => 'Descripción:',
+	'wikibase-setdescription-submit' => 'Establecer la descripción',
+	'wikibase-setdescription-warning-remove' => '¿Estás {{GENDER:|seguro|segura}} de que quieres eliminar la descripción de [[$1]]?',
+	'special-setaliases' => 'Establecer alias',
+	'wikibase-setaliases-introfull' => 'Estás estableciendo los alias en $2 para [[$1]]. Los diferentes alias se separan por <code>|</code>.',
+	'wikibase-setaliases-intro' => 'Este formulario permite definir los alias de una entidad. Necesitas proporcionar el ID de la entidad (por ejemplo, Q23) el código de un idioma (por ejemplo, "gl") y los alias a definir. Los diferentes alias se separan por <code>|</code>.',
 	'wikibase-setaliases-label' => 'Alias:',
 	'wikibase-setaliases-submit' => 'Establecer o alias',
 	'wikibase-setaliases-warning-remove' => '¿Estás {{GENDER:|seguro|segura}} de que quieres eliminar todos los alias de [[$1]]?',
@@ -2492,8 +2492,12 @@ Su dirección IP quedará registrada en el historial de revisiones de esta propi
 	'special-entitieswithoutlabel' => 'Lista de entidades sin etiqueta', # Fuzzy
 	'wikibase-entitieswithoutlabel-legend' => 'Obtener la lista de entidades sin etiqueta',
 	'wikibase-entitieswithoutlabel-label-language' => 'Idioma:',
+	'wikibase-entitieswithoutlabel-label-type' => 'Tipo:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'todos',
 	'wikibase-entitieswithoutlabel-submit' => 'Encontrar',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" no es un código de idioma válido.',
+	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" no es un tipo de entidad válido.',
+	'special-itemswithoutsitelinks' => 'Elementos sin enlaces lingüísticos',
 	'special-entitydata' => 'Datos de la entidad',
 	'wikibase-entitydata-not-found' => 'No se encontró ninguna entidad con identificador ID $1.',
 	'wikibase-entitydata-bad-revision' => 'No se puede mostrar la revisión  $2  de la entidad $1.',
@@ -2551,7 +2555,7 @@ Su dirección IP quedará registrada en el historial de revisiones de esta propi
 	'right-item-create' => 'Crear elementos',
 	'right-item-remove' => 'Eliminar elementos',
 	'right-alias-add' => 'Añadir alias',
-	'right-alias-set' => 'Establecer alias o pseudónimos',
+	'right-alias-set' => 'Establecer alias o seudónimos',
 	'right-alias-remove' => 'Quitar alias',
 	'right-sitelink-remove' => 'Quitar enlaces de sitios',
 	'right-sitelink-update' => 'Actualizar enlaces de sitios',
@@ -2742,10 +2746,6 @@ $messages['fa'] = array(
 	'wikibase-shortcopyrightwarning' => 'با کلیک کردن روی «$1»، شما با [[$2|قوانین استفاده]] موافقت می‌کنید، و اجازه می‌دهید ویرایش‌هایتان با اجازه‌نامهٔ $3 منتشر شوند.',
 	'wikibase-copyrighttooltip-acknowledge' => 'این شرایط را برای ویرایش‌های بعدی‌ام قبول می‌کنم. این پیام را دوباره نشان ندهید.',
 	'wikibase-entityselector-more' => 'بیشتر',
-	'wikibase-anonymouseditwarning-item' => 'هشدار: شما به سامانه وارد نشده‌اید. 
-نشانی آی‌پی شما در تاریخچهٔ ویرایش این مورد ثبت خواهد شد.',
-	'wikibase-anonymouseditwarning-property' => "'''هشدار:''' شما به سامانه وارد نشده‌اید.
-نشانی آی‌پی شما در تاریخچهٔ ویرایش این ویژگی ثبت خواهد شد.",
 	'wikibase-restrictionedit-tooltip-message' => 'این صفحه محافظت شده‌است. ویرایش مجاز نیست.',
 	'wikibase-blockeduser-tooltip-message' => 'دسترسی شما برای ویرایش بسته شده‌است.',
 	'wikibase-move-error' => 'نمی‌توانید صفحه‌هایی را که در فضای نام داده هستند منتقل کنید، همچنین نمی‌توانید صفحه‌ها را به این فضای نام منتقل کنید.',
@@ -2961,10 +2961,6 @@ $messages['fi'] = array(
 	'wikibase-shortcopyrightwarning' => 'Klikkaamalla "$1", hyväksyt [[$2|käyttöehdot]], ja suostut siihen, että muokkauksesi julkaistaan lisenssin $3 alaisena.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Hyväksyn nämä ehdot tulevissa muokkauksissani. Älä näytä tätä viestiä uudelleen.',
 	'wikibase-entityselector-more' => 'lisää',
-	'wikibase-anonymouseditwarning-item' => 'Varoitus: Et ole kirjautunut sisään.
-IP-osoitteesi kirjataan tämän kohteen muokkaushistoriaan.',
-	'wikibase-anonymouseditwarning-property' => 'Varoitus: Et ole kirjautunut sisään.
-IP-osoitteesi kirjataan tämän ominaisuuden muokkaushistoriaan.',
 	'wikibase-restrictionedit-tooltip-message' => 'Tämä sivu on suojattu. Muokkaaminen ei ole sallittua.',
 	'wikibase-blockeduser-tooltip-message' => 'Sinut on estetty muokkaamasta.',
 	'wikibase-warning-constraint-violation-length' => 'Kielikoodi $1 on liian pitkä.',
@@ -3137,6 +3133,7 @@ $messages['fr'] = array(
 	'wikibase-label-empty' => 'Pas de libellé défini',
 	'wikibase-label-edit-placeholder' => 'saisir un libellé',
 	'wikibase-description-empty' => 'Aucune description pour le moment',
+	'wikibase-deletedentity' => '$1 supprimé',
 	'wikibase-description-edit-placeholder' => 'saisir une description',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'article',
@@ -3177,8 +3174,10 @@ $messages['fr'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak de type « $1 ». La gestion de ce type de Snak n’est pas encore prise en charge.',
 	'wikibase-snakview-choosesnaktype' => 'Choisir un type de valeur.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'La gestion des valeurs pour le type de données « $1 » n’est pas encore pris en charge.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'La manipulation des valeurs de données "$1" n’est pas encore supportée.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'La valeur n’est pas conforme à la définition de la propriété.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Le type de valeur de donnée de la valeur « $1 » ne correspond pas au type de valeur de donnée du type de donnée de la propriété « $2 ».',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Il n’est pas possible de définir une nouvelle valeur pour une propriété supprimée.',
 	'wikibase-snakview-variations-somevalue-label' => 'valeur inconnue',
 	'wikibase-snakview-variations-novalue-label' => 'aucune valeur',
 	'wikibase-snakview-snaktypeselector-value' => 'valeur personnalisée',
@@ -3187,10 +3186,6 @@ $messages['fr'] = array(
 	'wikibase-shortcopyrightwarning' => "En cliquant sur « $1 » , vous acceptez les [[$2|conditions d'utilisation]] et acceptez acceptez de placer irrévocablement votre contribution sous $3.",
 	'wikibase-copyrighttooltip-acknowledge' => 'J’accepte ces conditions pour mes prochaines modifications. Ne plus afficher ce message.',
 	'wikibase-entityselector-more' => 'plus',
-	'wikibase-anonymouseditwarning-item' => 'Attention : Vous n’êtes pas connecté.
-Votre adresse IP sera enregistrée dans l’historique des modifications de cet élément.',
-	'wikibase-anonymouseditwarning-property' => 'Attention : Vous n’êtes pas connecté.
-Votre adresse IP sera enregistrée dans l’historique des modifications de la propriété.',
 	'wikibase-restrictionedit-tooltip-message' => "Cette page est protégée. L'édition n'est pas autorisée.",
 	'wikibase-blockeduser-tooltip-message' => 'Vous êtes bloqué(e) en édition.',
 	'wikibase-move-error' => "Vous ne pouvez pas déplacer des pages situées dans l'espace des données, ni déplacer des pages vers cet espace.",
@@ -3568,10 +3563,6 @@ $messages['gl'] = array(
 	'wikibase-shortcopyrightwarning' => 'Ao premer en "$1", acepta os [[$2|termos de uso]] e acepta liberar irrevogablemente as súas achegas baixo a $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Acepto estes termos para as miñas futuras edicións. Non quero ver a mensaxe de novo.',
 	'wikibase-entityselector-more' => 'máis',
-	'wikibase-anonymouseditwarning-item' => 'Aviso: Non accedeu ao sistema.
-O seu enderezo IP quedará rexistrado no historial de revisións deste elemento.',
-	'wikibase-anonymouseditwarning-property' => 'Aviso: Non accedeu ao sistema.
-O seu enderezo IP quedará rexistrado no historial de revisións desta propiedade.',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta páxina está protexida. Non se permite a edición.',
 	'wikibase-blockeduser-tooltip-message' => 'Está bloqueado fronte á edición.',
 	'wikibase-move-error' => 'Non pode trasladar as páxinas que se atopan no espazo de nomes de datos, e tampouco pode mover páxinas a este espazo de nomes.',
@@ -4059,8 +4050,6 @@ $messages['hsb'] = array(
 	'wikibase-shortcopyrightwarning' => 'Přez kliknjenje na "$1" zwoliš do [[$2|wužiwanskich wuměnjenjow]] a sy definitiwnje z tym přezjedny, swój přinošk pod $3 stajić.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Akceptuju tute wuměnjenja za swoje přichodne změny. Njepokazaj tutu zdźělenku hišće raz.',
 	'wikibase-entityselector-more' => 'wjace',
-	'wikibase-anonymouseditwarning-item' => 'Kedźbu: Njejsy přizjewjeny. Twoja IP-adresa budźe so do wersijowych stawiznow elementa přijimać.',
-	'wikibase-anonymouseditwarning-property' => 'Kedźbu: Njejsy přizjewjeny. Twoja IP-adresa budźe so do wersijowych stawiznow tuteje kajkosće přijimać.',
 	'wikibase-restrictionedit-tooltip-message' => 'Tuta strona je škitana, wobdźěłowanje njeje dowolene.',
 	'wikibase-blockeduser-tooltip-message' => 'Sy zablokowany a njemóžeš tohodla ničo wobdźěłać.',
 	'wikibase-move-error' => 'Njemóžeš strony přesunyć, kotrež su w datowym mjenowym rumje, a njemóžeš strony do njeho přesunyć.',
@@ -4266,10 +4255,6 @@ $messages['hu'] = array(
 	'wikibase-snakview-snaktypeselector-novalue' => 'nincs érték',
 	'wikibase-shortcopyrightwarning' => 'A "$1" gombra kattintással elfogadod a [[$2|felhasználási feltételeket]] és visszavonhatatlan engedélyt adsz szerkesztéseid felhasználására a $3 szerint',
 	'wikibase-copyrighttooltip-acknowledge' => 'A további szerkesztéseim során elfogadom a fenti feltételeket. Ez az üzenet ne jelenjen meg újra.',
-	'wikibase-anonymouseditwarning-item' => 'Figyelem: Nem vagy bejelentkezve.
-Ha szerkesztesz, az IP-címed látható lesz a laptörténetben.',
-	'wikibase-anonymouseditwarning-property' => 'Figyelem: Nem vagy bejelentkezve.
-Ha szerkesztesz, az IP-címed látható lesz a tulajdonság történetben.',
 	'wikibase-restrictionedit-tooltip-message' => 'Ez egy védett lap, nem lehet szerkeszteni.',
 	'wikibase-blockeduser-tooltip-message' => 'El vagy tiltva a szerkesztéstől.',
 	'wikibase-move-error' => 'Nem lehet lapokat mozgatni az adat névtéren belül, vagy abba bele.',
@@ -4747,10 +4732,6 @@ $messages['is'] = array(
 	'wikibase-shortcopyrightwarning' => 'Með því að smella á „$1”, samþykkir þú [[$2|notendaskilmálana]]. Þú samþykkir einnig óafturkræft að þú gefir breytinguna þína út undir $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Ég samþykki þessa skilmála fyrir allar breytingar mínar í framtíðinni. Ekki sýna þessi skilaboð aftur.',
 	'wikibase-entityselector-more' => 'meira',
-	'wikibase-anonymouseditwarning-item' => 'Viðvörun: Þú ert ekki innskráð(ur).
-Vistfang þitt skráist í breytingaskrá hlutsins.',
-	'wikibase-anonymouseditwarning-property' => 'Viðvörun: Þú ert ekki innskráð(ur).
-Vistfang þitt skráist í breytingaskrá eiginleikans.',
 	'wikibase-restrictionedit-tooltip-message' => 'Þessi síða er vernduð, breytingar eru óheimilar.',
 	'wikibase-blockeduser-tooltip-message' => 'Þér er bannað að breyta síðum.',
 	'wikibase-move-error' => 'Ekki er mögulegt að færa síður í data nafnrýminu, né færa síður þangað.',
@@ -4973,10 +4954,6 @@ $messages['it'] = array(
 	'wikibase-shortcopyrightwarning' => 'Cliccando su "$1", accetti le [[$2|condizioni d\'uso]], ed accetti irrevocabilmente a rilasciare il tuo contributo in base alla $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Accetto questi termini per le mie future modifiche. Non mostrare di nuovo questo messaggio.',
 	'wikibase-entityselector-more' => 'altro',
-	'wikibase-anonymouseditwarning-item' => "Attenzione: Accesso non effettuato.
-Nella cronologia dell'elemento verrà registrato il tuo indirizzo IP.",
-	'wikibase-anonymouseditwarning-property' => 'Attenzione: Accesso non effettuato.
-Nella cronologia della proprietà verrà registrato il tuo indirizzo IP.',
 	'wikibase-restrictionedit-tooltip-message' => 'Questa pagina è protetta, la modifica non è consentita.',
 	'wikibase-blockeduser-tooltip-message' => 'Sei stato bloccato, non puoi fare modifiche.',
 	'wikibase-move-error' => 'Non è possibile spostare le pagine che sono nel namespace dei dati e non è possibile spostare le pagine in esso.',
@@ -5148,6 +5125,7 @@ $messages['ja'] = array(
 	'wikibase-label-empty' => 'ラベルはまだ設定されていません',
 	'wikibase-label-edit-placeholder' => 'ラベルを入力',
 	'wikibase-description-empty' => '説明はまだ設定されていません',
+	'wikibase-deletedentity' => '削除済みの$1',
 	'wikibase-description-edit-placeholder' => '説明を入力',
 	'wikibase-sitelink-site-edit-placeholder' => 'サイト',
 	'wikibase-sitelink-page-edit-placeholder' => 'ページ',
@@ -5180,6 +5158,7 @@ $messages['ja'] = array(
 	'wikibase-snakview-choosesnaktype' => '値の型を指定してください。',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'プロパティの定義に従っていない値です。',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => '値のデータ値の型「$1」は、プロパティのデータ型のデータ値の型「$2」と一致しません。',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => '削除済みのプロパティについて新しい値を定義することはできません。',
 	'wikibase-snakview-variations-somevalue-label' => '不明な値',
 	'wikibase-snakview-variations-novalue-label' => '値なし',
 	'wikibase-snakview-snaktypeselector-value' => 'カスタム値',
@@ -5187,10 +5166,6 @@ $messages['ja'] = array(
 	'wikibase-snakview-snaktypeselector-novalue' => '値なし',
 	'wikibase-shortcopyrightwarning' => '「$1」をクリックすることで、あなたは[[$2|利用規約]]に同意し、自分の投稿内容を$3のもとで公開することに撤回不可能な形で同意することになります。',
 	'wikibase-copyrighttooltip-acknowledge' => '今後の編集についてこれらの規約に同意します。次回からこのメッセージを表示しないでください。',
-	'wikibase-anonymouseditwarning-item' => '警告: ログインしていません。
-編集すると、IPアドレスがこのページの編集履歴に記録されます。',
-	'wikibase-anonymouseditwarning-property' => '警告: ログインしていません。
-編集すると、IPアドレスがこのページの編集履歴に記録されます。',
 	'wikibase-restrictionedit-tooltip-message' => 'このページは保護されています。編集は許可されていません。',
 	'wikibase-blockeduser-tooltip-message' => 'あなたは編集ブロックされています。',
 	'wikibase-move-error' => 'データ名前空間内のページは移動できず、データ名前空間内にページを移動させることもできません。',
@@ -5877,6 +5852,7 @@ $messages['mk'] = array(
 	'wikibase-label-empty' => 'Сè уште нема зададено етикета.',
 	'wikibase-label-edit-placeholder' => 'внесете натпис',
 	'wikibase-description-empty' => 'Сè уште нема зададено опис.',
+	'wikibase-deletedentity' => 'Избришано $1',
 	'wikibase-description-edit-placeholder' => 'внесете опис',
 	'wikibase-sitelink-site-edit-placeholder' => 'вики',
 	'wikibase-sitelink-page-edit-placeholder' => 'статија',
@@ -5917,8 +5893,10 @@ $messages['mk'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'Спојница од типот „$1“. Работата со вакви спојници сè уште не е поддржана.',
 	'wikibase-snakview-choosesnaktype' => 'Изберете тип на вредност.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Засега не е поддржано работењето со вредности за податочниот тип „$1“.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Работата со податочни вредности од типот „$1“ сè уште не е поддржана.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Вредноста не е складна со определбата на својството.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Податочниот тип „$1“ на вредноста  не се совпаѓа со податочниот тип „$2“ на својството.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Не можете да му зададете нова вредност на избришано својство.',
 	'wikibase-snakview-variations-somevalue-label' => 'непозната вредност',
 	'wikibase-snakview-variations-novalue-label' => 'нема вредност',
 	'wikibase-snakview-snaktypeselector-value' => 'прилагодена вредност',
@@ -5927,10 +5905,8 @@ $messages['mk'] = array(
 	'wikibase-shortcopyrightwarning' => 'Стискајќи на „$1“, се согласувате со [[$2|условите на употреба]] и неотповикливо се согласувате вашите придонеси да се нудат под $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Ги прифаќам овие услови што ќе важат за идните уредувања. Повеќе не ја прикажувај поракава.',
 	'wikibase-entityselector-more' => 'уште',
-	'wikibase-anonymouseditwarning-item' => "'''Предупредување:''' Не сте најавени.
-Вашата IP-адреса ќе биде заведена во историјата на предметов.",
-	'wikibase-anonymouseditwarning-property' => 'Предупредување: Не сте најавени. 
-Вашата IP-адреса ќе биде заведена во историјата на својствово.',
+	'wikibase-anonymouseditwarning' => 'Предупредување: Не сте најавени.
+Вашата IP-адреса ќе биде заведена во историјата на оваа $1.',
 	'wikibase-restrictionedit-tooltip-message' => 'Страницава е заштитена. Уредувањето не е дозволено.',
 	'wikibase-blockeduser-tooltip-message' => 'Блокирани сте од уредување.',
 	'wikibase-move-error' => 'Не можете да преместувате страници што се наоѓаат во податочниот именски простор. Исто така не можете да преместувате други страници во него.',
@@ -6237,10 +6213,6 @@ $messages['ms'] = array(
 	'wikibase-shortcopyrightwarning' => 'Sambil mengklik "$1", anda bersetuju dengan [[$2|syarat-syarat]] dan sudi melepaskan sumbangan anda tanpa di bawah $3 tanpa boleh ditarik balik.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Saya menerima syarat-syarat ini untuk suntingan saya yang akan datang. Jangan paparkan pesanan ini lagi.',
 	'wikibase-entityselector-more' => 'lagi',
-	'wikibase-anonymouseditwarning-item' => 'Amaran: Anda tidak log masuk.
-Alamat IP anda akan direkodkan dalam sejarah suntingan perkara ini.',
-	'wikibase-anonymouseditwarning-property' => 'Amaran: Anda tidak log masuk.
-Alamat IP anda akan direkodkan dalam sejarah suntingan sifat ini.',
 	'wikibase-restrictionedit-tooltip-message' => 'Halaman ini dilindungi. Dilarang menyunting.',
 	'wikibase-blockeduser-tooltip-message' => 'Anda disekat daripada menyunting.',
 	'wikibase-move-error' => 'Anda tidak boleh memindahkan halaman-halaman yang terdapat dalam ruang nama data, dan anda tidak boleh memindahkan halaman-halaman ke dalamnya.',
@@ -6252,7 +6224,7 @@ Alamat IP anda akan direkodkan dalam sejarah suntingan sifat ini.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Satu lagi sifat ($3) sudah ada label "$1" yang berkaitan dengan kod bahasa $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Satu lagi pertanyaan ($3) sudah ada label "$1" yang berkaitan dengan kod bahasa $2',
 	'wikibase-error-label-not-unique-item' => 'Satu lagi perkara ($3) sudah ada label "$1" dan keterangan "$4" yang berkaitan dengan kod bahasa $2',
-	'special-itembytitle' => 'Perkara mengikut tajuk', # Fuzzy
+	'special-itembytitle' => 'Perkara mengikut pautan tapak',
 	'wikibase-itembytitle-lookup-fieldset' => 'Cari perkara mengikut tapak dan tajuk',
 	'wikibase-itembytitle-lookup-site' => 'Tapak:',
 	'wikibase-itembytitle-lookup-page' => 'Halaman:',
@@ -6261,8 +6233,8 @@ Alamat IP anda akan direkodkan dalam sejarah suntingan sifat ini.',
 	'wikibase-itembytitle-invalid-site' => 'Pertanyaan yang terdahulu tidak boleh digunakan sebagai carian. Sila nyatakan pengenal tapak yang sah.',
 	'wikibase-itembytitle-description' => 'Tapak merupakan kod pengenal, misalnya "enwiki".',
 	'wikibase-itembytitle-create' => 'Anda juga boleh [{{fullurl:Special:CreateItem|site=$1&page=$2}} mencipta perkara].',
-	'special-itemdisambiguation' => 'Penyahkekaburan: Perkara-perkara yang sama label', # Fuzzy
-	'wikibase-itemdisambiguation-lookup-fieldset' => 'Cari perkara mengikut label', # Fuzzy
+	'special-itemdisambiguation' => 'Penyahkekaburan perkara',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Cari perkara mengikut bahasa dan label',
 	'wikibase-itemdisambiguation-lookup-language' => 'Bahasa:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Label',
 	'wikibase-itemdisambiguation-submit' => 'Cari',
@@ -6315,8 +6287,11 @@ Alamat IP anda akan direkodkan dalam sejarah suntingan sifat ini.',
 	'special-entitieswithoutlabel' => 'Entiti tanpa label',
 	'wikibase-entitieswithoutlabel-legend' => 'Dapatkan senarai entiti tanpa label',
 	'wikibase-entitieswithoutlabel-label-language' => 'Bahasa:',
+	'wikibase-entitieswithoutlabel-label-type' => 'Jenis:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'semua',
 	'wikibase-entitieswithoutlabel-submit' => 'Cari',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" bukan kod bahasa yang sah.',
+	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" bukan jenis entiti yang sah.',
 	'special-itemswithoutsitelinks' => 'Perkara tanpa pautan tapak',
 	'special-entitydata' => 'Data entiti',
 	'wikibase-entitydata-not-found' => 'Tiada entiti dengan ID $1 dijumpai.',
@@ -6682,10 +6657,6 @@ $messages['nl'] = array(
 	'wikibase-snakview-snaktypeselector-somevalue' => 'onbekende waarde',
 	'wikibase-snakview-snaktypeselector-novalue' => 'geen waarde',
 	'wikibase-entityselector-more' => 'meer',
-	'wikibase-anonymouseditwarning-item' => 'Waarschuwing: u bent niet aangemeld.
-Uw IP-adres wordt opgenomen in de bewerkingsgeschiedenis van deze pagina.',
-	'wikibase-anonymouseditwarning-property' => 'Waarschuwing: u bent niet aangemeld.
-Uw IP-adres wordt opgenomen in de bewerkingsgeschiedenis van deze pagina.',
 	'wikibase-restrictionedit-tooltip-message' => 'Deze pagina is beveiligd, bewerken is niet toegestaan.',
 	'wikibase-blockeduser-tooltip-message' => 'U bent geblokkeerd en kunt niet bewerken.',
 	'wikibase-move-error' => "U kunt pagina's in de gegevensnaamruimte niet hernoemen en u kunt er geen pagina naartoe hernoemen.",
@@ -6893,10 +6864,6 @@ $messages['nn'] = array(
 	'wikibase-shortcopyrightwarning' => 'Ved å trykkja «$1», godtek du [[$2|bruksvilkåra]], og du gjev endeleg samtykke til å gje ut bidraget ditt under $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Eg godtek desse vilkåra for endringar eg gjer i framtida. Ikkje vis denne meldinga meir.',
 	'wikibase-entityselector-more' => 'meir',
-	'wikibase-anonymouseditwarning-item' => "'''Åtvaring:''' Du er ikkje innlogga.
-IP-adressa di vert lagra i endringshistorikken til datasettet.",
-	'wikibase-anonymouseditwarning-property' => "'''Åtvaring:''' Du er ikkje innlogga.
-IP-adressa di vert lagra i endringshistorikken til eigenskapen.",
 	'wikibase-restrictionedit-tooltip-message' => 'Denne sida er verna. Endring er ikkje tillate.',
 	'wikibase-blockeduser-tooltip-message' => 'Du er blokkert og kan ikkje endre.',
 	'wikibase-move-error' => 'Du kan ikkje flytte sider i datanamnerommet, og du kan ikkje flytte sider inn i det.',
@@ -7180,42 +7147,38 @@ $messages['pms'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'valor përsonalisà',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valor pa conossù',
 	'wikibase-snakview-snaktypeselector-novalue' => 'gnun valor',
-	'wikibase-anonymouseditwarning-item' => "Atension: a l'é nen intrà ant ël sistema.
-Soa adrëssa IP a sarà memorisà ant la stòria dle modìfiche dë sto element.",
-	'wikibase-anonymouseditwarning-property' => "Atension: a l'é nen intrà ant ël sistema. 
-Soa adrëssa IP a sarà memorisà ant la stòria dle modìfiche ëd sa propietà.",
 	'wikibase-restrictionedit-tooltip-message' => "Costa pàgina a l'é protegiùa. As peul pa modifichesse.",
 	'wikibase-blockeduser-tooltip-message' => "Chiel a l'é blocà, gnun-e modìfiche.",
 	'wikibase-move-error' => 'A peul pa tramudé dle pàgine che a son ant lë spassi nominal dij dat, e a peul pa tramudé dle pàgine là andrinta.',
 	'wikibase-error-sitelink-already-used' => "Liura al sit [[$1:$2]] già dovrà da l'element [[$3]].",
 	'wikibase-error-label-not-unique-wikibase-property' => 'N\'àutra propietà ($3) a l\'ha già la tichëtta "$1" associà con ël còdes ëd lenga $2',
-	'wikibase-error-label-not-unique-wikibase-query' => 'N\'àutra query ($3) a l\'ha già la tichëtta "$1" associà con ël còdes ëd lenga $2',
-	'wikibase-error-label-not-unique-item' => 'N\'àutr element ($3) a l\'ha già la tichëtta "$1" e descrission "$4" associà con ël còdes ëd lenga $2',
-	'special-itembytitle' => 'Element për tìtol', # Fuzzy
-	'wikibase-itembytitle-lookup-fieldset' => 'Serca element për sit e tìtol',
+	'wikibase-error-label-not-unique-wikibase-query' => "N'àutra arcesta ($3) a l'ha già la tichëtta «$1» associà al còdes ëd lenga $2",
+	'wikibase-error-label-not-unique-item' => "N'àutr element ($3) a l'ha già la tichëtta «$1» e la descrission «$4» associà al còdes ëd lenga $2",
+	'special-itembytitle' => 'Element për liura ëd sit',
+	'wikibase-itembytitle-lookup-fieldset' => "Sërché dj'element për sit e për tìtol",
 	'wikibase-itembytitle-lookup-site' => 'Sit:',
 	'wikibase-itembytitle-lookup-page' => 'Pàgina:',
 	'wikibase-itembytitle-submit' => 'Sërca',
-	'wikibase-itembytitle-nothing-found' => "Gnun element a son stàit trovà da l'arserca ëd prima. Për piasì rafin-a la query con na melior identificassion ëd la pagina esterna.",
-	'wikibase-itembytitle-invalid-site' => "La query ëd prima a peul pa esse dovrà për n'arserca. Për piasì dà n'identificator bon dël sit.",
-	'wikibase-itembytitle-description' => 'Sit a l\'é un còdes identificator, tal com "enwiki".',
+	'wikibase-itembytitle-nothing-found' => "Gnun element a l'é stàit trovà da l'arserca ëd prima. Për piasì, ch'a rafin-a l'arcesta con na mej identificassion ëd la pàgina esterna.",
+	'wikibase-itembytitle-invalid-site' => "L'arcesta ëd prima a l'ha nen podù esse dovrà për fé n'arserca. Për piasì, ch'a fornissa n'identificator ëd sit bon.",
+	'wikibase-itembytitle-description' => "Ël sit a l'é un còdes d'identificassion, parèj ëd «pmswiki».",
 	'wikibase-itembytitle-create' => "It peule ëdcò [{{fullurl:Special:CreateItem|site=$1&page=$2}} creé n'element].",
-	'special-itemdisambiguation' => 'Disambiguassion: Element con la midema tichëtta', # Fuzzy
-	'wikibase-itemdisambiguation-lookup-fieldset' => 'Serca element për tichëtta', # Fuzzy
+	'special-itemdisambiguation' => "Omonimìa d'element",
+	'wikibase-itemdisambiguation-lookup-fieldset' => "Sërché dj'element për lenga e tichëtta",
 	'wikibase-itemdisambiguation-lookup-language' => 'Lenga:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Tichëtta:',
 	'wikibase-itemdisambiguation-submit' => 'Sërca',
-	'wikibase-itemdisambiguation-nothing-found' => "Spiasent, gnun element con cola tichëtta a l'era stàita trovà.",
+	'wikibase-itemdisambiguation-nothing-found' => "An dëspias, gnun element con costa tichëtta a l'é stàit trovà.",
 	'wikibase-itemdisambiguation-create' => "It peule [{{fullurl:Special:CreateItem|label=$1}} creé l'element].",
-	'wikibase-itemdisambiguation-invalid-langcode' => "Spiasent, l'identificator ëd lenga ch'it l'has dàit a l'é pa conossù al sistem. për piasì dòvra un bon identificator con \"en\".",
-	'wikibase-itemdisambiguation-description' => 'Ij valor dovrà për serché a deuvo esse la vos ëd test completa. Lenga a l\'é n\'identificator, tal com "en".',
+	'wikibase-itemdisambiguation-invalid-langcode' => "An dëspias, l'identificator ëd lenga ch'a l'ha fornì a l'é nen conossù dal sistema. Për piasì, ch'a deuvra n'identificator bon, coma «en».",
+	'wikibase-itemdisambiguation-description' => "Ij valor dovrà për serché a devo esse ël test complet. La lenga a l'é n'identificator, coma «en».",
 	'special-newproperty' => 'crea un proget neuv.',
 	'wikibase-newproperty-fieldset' => 'Crea na propietà neuva.',
 	'wikibase-newproperty-datatype' => 'Sòrt ëd dat:',
 	'wikibase-newproperty-invalid-datatype' => 'Sòrt ëd dat specificà pa bon',
 	'special-createitem' => "Creé n'element neuv",
 	'wikibase-createitem-fieldset' => "Creé n'element neuv",
-	'wikibase-createitem-site' => 'Sit dla prima pagina colegà',
+	'wikibase-createitem-site' => 'Sit dla prima pàgina colegà',
 	'wikibase-createitem-page' => 'Nòm ëd la prima pagina colegà',
 	'wikibase-createitem-no-external-page' => 'La pagina specificà a peul pa esse trovà dzor ël sit corispondent.',
 	'wikibase-createitem-add-sitelink-failed' => 'Ël colegament dël sit a peul pa esse salvà.',
@@ -7701,10 +7664,6 @@ $messages['ru'] = array(
 	'wikibase-snakview-snaktypeselector-somevalue' => 'неизвестное значение',
 	'wikibase-snakview-snaktypeselector-novalue' => 'значение не задано',
 	'wikibase-entityselector-more' => 'ещё',
-	'wikibase-anonymouseditwarning-item' => 'Внимание! Вы не авторизованы.
-В истории изменений этого элемента будет записан ваш IP-адрес.',
-	'wikibase-anonymouseditwarning-property' => 'Внимание! Вы не авторизованы.
-В истории изменений этого свойства будет записан ваш IP-адрес.',
 	'wikibase-restrictionedit-tooltip-message' => 'Эта страница защищена. Её редактирование не допускается.',
 	'wikibase-blockeduser-tooltip-message' => 'Возможность редактирования для вас была заблокирована.',
 	'wikibase-move-error' => 'Вы не можете переименовывать страницы, которые находятся в пространстве данных, и вы не можете перемещать страницы в него.',
@@ -8198,6 +8157,38 @@ $messages['si'] = array(
 	'right-description-update' => 'විස්තරයන් යාවත්කාලීන කරන්න',
 );
 
+/** Slovak (slovenčina)
+ * @author KuboF
+ */
+$messages['sk'] = array(
+	'wikibase-desc' => 'Úložisko štruktúrovaných údajov',
+	'wikibase-edit' => 'upraviť',
+	'wikibase-save' => 'uložiť',
+	'wikibase-cancel' => 'zrušiť',
+	'wikibase-add' => 'pridať',
+	'wikibase-addreference' => 'pridať zdroj',
+	'wikibase-save-inprogress' => 'ukladá sa',
+	'wikibase-remove-inprogress' => 'Odstraňovanie...',
+	'wikibase-label-empty' => 'Menovka zatiaľ nebola definovaná',
+	'wikibase-label-edit-placeholder' => 'zadaj menovku',
+	'wikibase-description-empty' => 'Popis zatiaľ nebol definovaný',
+	'wikibase-description-edit-placeholder' => 'zadaj popis',
+	'wikibase-sitelink-site-edit-placeholder' => 'projekt',
+	'wikibase-sitelink-page-edit-placeholder' => 'článok',
+	'wikibase-alias-edit-placeholder' => 'zadaj alias',
+	'wikibase-remove' => 'odstrániť',
+	'wikibase-propertyedittool-full' => 'Zoznam hodnôt je kompletný.',
+	'wikibase-aliases-label' => 'Tiež známy ako:',
+	'wikibase-datatype-label' => 'Typ údaju:',
+	'wikibase-snakview-snaktypeselector-somevalue' => 'neznáma hodnota',
+	'wikibase-itembytitle-submit' => 'Hľadať',
+	'wikibase-itembytitle-create' => 'Tiež môžeš [{{fullurl:Special:CreateItem|site=$1&page=$2}} vytvoriť položku].',
+	'wikibase-itemdisambiguation-lookup-language' => 'Jazyk:',
+	'wikibase-itemdisambiguation-submit' => 'Hľadať',
+	'wikibase-newproperty-datatype' => 'Typ údaju:',
+	'special-createitem' => 'Vytvoriť novú položku',
+);
+
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
  * @author Милан Јелисавчић
  */
@@ -8250,10 +8241,6 @@ $messages['sr-ec'] = array(
 	'wikibase-shortcopyrightwarning' => 'Кликом на „$1“, прихватате [[$2|услове коришћења]], и неопозиво прихватате да ваше измене буду лиценциране под $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Прихватам ове услове за све моје будуће измене. Не приказуј више ову поруку.',
 	'wikibase-entityselector-more' => 'још',
-	'wikibase-anonymouseditwarning-item' => "'''Упозорење:''' нисте пријављени.
-Ваша ИП адреса ће бити забележена у историји ове ставке.",
-	'wikibase-anonymouseditwarning-property' => 'Упозорење: Нисте пријављени.
-Ваша ИП адреса ће бити забележена у историји ове ставке.',
 	'wikibase-restrictionedit-tooltip-message' => 'Ова страна је заштићена. Уређивање није дозвољено.',
 	'wikibase-blockeduser-tooltip-message' => 'Блокирани сте од уређивања.',
 	'special-itembytitle' => 'Ставке према везама до сајтова',
@@ -8680,10 +8667,6 @@ $messages['uk'] = array(
 	'wikibase-shortcopyrightwarning' => 'Натиснувши «$1», Ви погоджуєтесь із [[$2|умовами використання]], і погоджуєтесь поширювати Ваше редагування на умовах $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Я згідний редагувати дальше на цих умовах. Більше не показувати це повідомлення.',
 	'wikibase-entityselector-more' => 'більше',
-	'wikibase-anonymouseditwarning-item' => 'Попередження: ви не ввійшли в систему.
-Редагування буде пов’язано з Вашою IP-адресою.',
-	'wikibase-anonymouseditwarning-property' => 'Попередження: ви не ввійшли в систему.
-Редагування буде пов’язано з Вашою IP-адресою.',
 	'wikibase-restrictionedit-tooltip-message' => 'Цю сторінку захищено. Редагування не дозволено.',
 	'wikibase-blockeduser-tooltip-message' => 'Ви заблоковані від редагування.',
 	'wikibase-move-error' => 'Ви не можете заносити сторінки у простір даних, ані виносити сторінки з нього.',
@@ -8920,10 +8903,6 @@ $messages['vi'] = array(
 	'wikibase-shortcopyrightwarning' => 'Với việc bấm nút “$1”, bạn chấp nhận [[$2|các điều khoản sử dụng]], và bạn đồng ý phát hành, không thể hủy bỏ, đóng góp của mình theo $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Tôi chấp nhận các điều khoản này đối với các sửa đổi của tôi trong tương lai. Từ nay bỏ qua thông báo này.',
 	'wikibase-entityselector-more' => 'thêm',
-	'wikibase-anonymouseditwarning-item' => 'Cảnh báo: Bạn chưa đăng nhập.
-Địa chỉ IP của bạn sẽ được ghi lại trong lịch sử sửa đổi của khoản mục này.',
-	'wikibase-anonymouseditwarning-property' => 'Cảnh báo: Bạn chưa đăng nhập.
-Địa chỉ IP của bạn sẽ được ghi lại trong lịch sử sửa đổi của thuộc tính này.',
 	'wikibase-restrictionedit-tooltip-message' => 'Trang này bị khóa không cho phép sửa đổi.',
 	'wikibase-blockeduser-tooltip-message' => 'Bạn đã bị cấm không được sửa đổi.',
 	'wikibase-move-error' => 'Không thể di chuyển các trang trong không gian tên dữ liệu và không thể di chuyển trang khác vào không gian tên này.',
@@ -9150,10 +9129,6 @@ $messages['zh-hans'] = array(
 	'wikibase-snakview-snaktypeselector-value' => '自定义值',
 	'wikibase-snakview-snaktypeselector-somevalue' => '未知值',
 	'wikibase-snakview-snaktypeselector-novalue' => '无值',
-	'wikibase-anonymouseditwarning-item' => '警告：您没有登录。
-您的IP地址将记录在此项目的编辑历史中。',
-	'wikibase-anonymouseditwarning-property' => '警告：您没有登录。
-您的IP地址将记录在此属性的编辑历史中。',
 	'wikibase-restrictionedit-tooltip-message' => '此页面已被保护。不允许编辑。',
 	'wikibase-blockeduser-tooltip-message' => '您已被封禁，不能编辑。',
 	'wikibase-move-error' => '您不能移动数据（data）命名空间中的页面，您也不能移动页面到这里。',
@@ -9345,10 +9320,6 @@ $messages['zh-hant'] = array(
 	'wikibase-snakview-snaktypeselector-value' => '自訂值',
 	'wikibase-snakview-snaktypeselector-somevalue' => '未知值',
 	'wikibase-snakview-snaktypeselector-novalue' => '無值',
-	'wikibase-anonymouseditwarning-item' => '警告：您沒有登錄。
-您的IP地址將記錄在此項目的編輯歷史中。',
-	'wikibase-anonymouseditwarning-property' => '警告：您沒有登錄。
-您的IP地址將記錄在此屬性的編輯歷史中。',
 	'wikibase-restrictionedit-tooltip-message' => '此頁面已被保護。不容許編輯。',
 	'wikibase-blockeduser-tooltip-message' => '您已被封禁，不能編輯。',
 	'wikibase-move-error' => '您不能移動數據（data）名字空間中的頁面，您也不能移動頁面到這裡。',

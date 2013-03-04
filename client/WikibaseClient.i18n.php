@@ -810,7 +810,7 @@ $messages['hu'] = array(
 $messages['ia'] = array(
 	'wikibase-client-desc' => 'Cliente pro le extension Wikibase',
 	'wikibase-editlinks' => 'Modificar ligamines',
-	'wikibase-editlinkstitle' => 'Modificar ligamines interlingua',
+	'wikibase-editlinkstitle' => 'Modificar ligamines a altere linguas',
 );
 
 /** Indonesian (Bahasa Indonesia)
@@ -1452,11 +1452,18 @@ $messages['si'] = array(
 
 /** Slovak (slovenčina)
  * @author JAn Dudík
+ * @author KuboF
  */
 $messages['sk'] = array(
 	'wikibase-client-desc' => 'Klient pre rozšírenie Wikibase',
+	'wikibase-comment-sitelink-add' => 'Pridaný medzijazykový odkaz: $1',
 	'wikibase-editlinks' => 'Upraviť odkazy',
 	'wikibase-editlinkstitle' => 'Upraviť medzijazykové odkazy',
+	'wikibase-linkitem-addlinks' => 'Pridať odkazy',
+	'wikibase-linkitem-input-site' => 'Jazyk:',
+	'wikibase-linkitem-input-page' => 'Stránka:',
+	'wikibase-linkitem-confirmitem-button' => 'Potvrdiť',
+	'wikibase-linkitem-not-loggedin-title' => 'Musíš byť prihlásený',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Zobraziť úpravy Wikidat v posledných zmienách',
 );
