@@ -723,5 +723,44 @@ final class ClientHooks {
 
 		return true;
 	}
+	
+	/**
+	 * Called at the end of Parser::clearState()
+	 *
+	 * @todo This can be replace with pulling out the item id from the page prop
+	 *
+	 * @since 0.5
+	 *
+	 * @param $parser \Parser
+	 * @return bool
+	 */
+
+	 public static function onParserClearState( &$parser ) {
+	 	global $wgTitle, $wgOut;
+
+		$titleText = $wgTitle->getPrefixedText();
+		$siteId = Settings::get( 'siteGlobalID' );
+
+		$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink( $siteId, $titleText );
+
+		if ( $itemId ) {
+		 	$wgOut->addHeadItem( 'wikibase-item-id', "<meta name='wikibase/item-id' content='{$itemId}'>" );
+		}
+		
+		/*
+		// Something similar to this should produce a meta entry refering to the revision
+		$entityContentFactory = \Wikibase\EntityContentFactory::singleton();
+		$entityId = new \Wikibase\EntityId( Item::ENTITY_TYPE, $id );
+		$entityContent = $entityContentFactory->getFromId( $entityId );
+		$page = $entityContent->getWikiPage();
+		$revisionId = $page->getLatest();
+		
+		if ( $revisionId ) {
+			$wgOut->addHeadItem( 'wikibase-item-latest', "<meta name='wikibase/item-latest' content='{$revisionId}'>" );
+		}
+		*/
+
+		return true;
+	}
 
 }
