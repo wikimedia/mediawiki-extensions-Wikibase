@@ -3,12 +3,12 @@
 namespace Wikibase\Repo\Test\Query\SQLStore\DVHandler;
 
 use Wikibase\Repo\Query\SQLStore\DataValueHandler;
-use Wikibase\Repo\Query\SQLStore\DVHandler\EntityIdHandler;
+use Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler;
 use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
-use Wikibase\EntityId;
+use DataValues\StringValue;
 
 /**
- * Unit tests for the Wikibase\Repo\Query\SQLStore\DVHandler\EntityIdHandler class.
+ * Unit tests for the Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ use Wikibase\EntityId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityIdHandlerTest extends DataValueHandlerTest {
+class StringHandlerTest extends DataValueHandlerTest {
 
 	/**
 	 * @see DataValueHandlerTest::getInstances
@@ -49,7 +49,7 @@ class EntityIdHandlerTest extends DataValueHandlerTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$instances[] = new EntityIdHandler();
+		$instances[] = new StringHandler();
 
 		return $instances;
 	}
@@ -59,15 +59,15 @@ class EntityIdHandlerTest extends DataValueHandlerTest {
 	 *
 	 * @since wd.qe
 	 *
-	 * @return EntityId[]
+	 * @return StringValue[]
 	 */
 	protected function getValues() {
 		$values = array();
 
-		$values[] = new EntityId( 'item', 42 );
-		$values[] = new EntityId( 'item', 9001 );
-		$values[] = new EntityId( 'property', 23 );
-		$values[] = new EntityId( 'query', 7201010 );
+		$values[] = new StringValue( 'foo' );
+		$values[] = new StringValue( '' );
+		$values[] = new StringValue( ' foo ' );
+		$values[] = new StringValue( ' foo bar baz bah! hax ~=[,,_,,]:3' );
 
 		return $values;
 	}
