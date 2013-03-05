@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DoE4zMPY",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-05T15:10:31Z",
+      "side": 1,
+      "message": "getPrefixedDBkey so it works with category pages, etc.",
+      "revId": "a5e2ccf0ac23a0eef6dceca62eecd014fb5c6741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoK42fOQ",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-05T15:10:31Z",
+      "side": 1,
+      "message": "we can make this $title-\u003egetPrefixedDbkey() instead of $titleText",
+      "revId": "a5e2ccf0ac23a0eef6dceca62eecd014fb5c6741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
