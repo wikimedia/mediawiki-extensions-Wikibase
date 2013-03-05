@@ -43,7 +43,7 @@ class EngineTest extends QueryEngineTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$instances[] = new Engine();
+		$instances[] = new Engine( new \Wikibase\Repo\Query\SQLStore\Store( 'foo', array() ) );
 
 		return $instances;
 	}
