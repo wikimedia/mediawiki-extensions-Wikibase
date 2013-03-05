@@ -91,17 +91,6 @@ class EntityIdHandler extends DataValueHandler {
 	}
 
 	/**
-	 * @see DataValueHandler::getLabelFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string|null
-	 */
-	public function getLabelFieldName() {
-		return null;
-	}
-
-	/**
 	 * @see DataValueHandler::getWhereConditions
 	 *
 	 * @since wd.qe

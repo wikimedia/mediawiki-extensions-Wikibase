@@ -96,7 +96,7 @@ class StringHandler extends DataValueHandler {
 	 * @return string|null
 	 */
 	public function getLabelFieldName() {
-		return null;
+		return 'value';
 	}
 
 	/**
