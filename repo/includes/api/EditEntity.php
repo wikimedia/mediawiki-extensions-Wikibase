@@ -118,7 +118,7 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
-		$status = Status::newGood();
+
 		if ( isset( $params['data'] ) ) {
 			$data = json_decode( $params['data'], true );
 			if ( is_null( $data ) ) {
@@ -193,18 +193,13 @@ class EditEntity extends ModifyEntity {
 					}
 
 					foreach ( $list as $langCode => $arg ) {
-						$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
+						$this->checkMultilangArgs( $arg, $langCode, $languages );
 						if ( array_key_exists( 'remove', $arg ) || $arg['value'] === "" ) {
 							$entityContent->getEntity()->removeLabel( $arg['language'] );
 						}
 						else {
 							$entityContent->getEntity()->setLabel( $arg['language'], Utils::trimToNFC( $arg['value'] ) );
 						}
-					}
-
-					if ( !$status->isOk() ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 					}
 
 					break;
@@ -216,18 +211,13 @@ class EditEntity extends ModifyEntity {
 					}
 
 					foreach ( $list as $langCode => $arg ) {
-						$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
+						$this->checkMultilangArgs( $arg, $langCode, $languages );
 						if ( array_key_exists( 'remove', $arg ) || $arg['value'] === "" ) {
 							$entityContent->getEntity()->removeDescription( $arg['language'] );
 						}
 						else {
 							$entityContent->getEntity()->setDescription( $arg['language'], Utils::trimToNFC( $arg['value'] ) );
 						}
-					}
-
-					if ( !$status->isOk() ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 					}
 
 					break;
@@ -254,7 +244,7 @@ class EditEntity extends ModifyEntity {
 
 					foreach ( $aliases as $langCode => $args ) {
 						foreach ( $args as $arg ) {
-							$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
+							$this->checkMultilangArgs( $arg, $langCode, $languages );
 							if ( array_key_exists( 'remove', $arg ) ) {
 								$remAliases[$arg['language']][] = Utils::trimToNFC( $arg['value'] );
 							}
@@ -274,11 +264,6 @@ class EditEntity extends ModifyEntity {
 					}
 					foreach ( $addAliases as $langCode => $strings ) {
 							$entityContent->getEntity()->addAliases( $langCode, $strings );
-					}
-
-					if ( !$status->isOk() ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 					}
 
 					unset( $aliases );
@@ -304,7 +289,7 @@ class EditEntity extends ModifyEntity {
 					$sites = $this->getSiteLinkTargetSites();
 
 					foreach ( $list as $siteId => $arg ) {
-						$status->merge( $this->checkSiteLinks( $arg, $siteId, $sites ) );
+						$this->checkSiteLinks( $arg, $siteId, $sites );
 						if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
 							$entityContent->getEntity()->removeSiteLink( $arg['site'] );
 						}
@@ -330,11 +315,6 @@ class EditEntity extends ModifyEntity {
 							unset( $link );
 							unset( $ret );
 						}
-					}
-
-					if ( !$status->isOk() ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 					}
 
 					unset( $sites );
