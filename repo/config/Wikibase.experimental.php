@@ -67,6 +67,7 @@ $classes = array(
 	'Wikibase\Repo\Query\SQLStore\Engine',
 	'Wikibase\Repo\Query\SQLStore\Setup',
 	'Wikibase\Repo\Query\SQLStore\Store',
+	'Wikibase\Repo\Query\SQLStore\Writer',
 );
 
 foreach ( $classes as $class ) {
