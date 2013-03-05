@@ -118,7 +118,7 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
-		$status = Status::newGood();
+
 		if ( isset( $params['data'] ) ) {
 			$data = json_decode( $params['data'], true );
 			if ( is_null( $data ) ) {
@@ -187,13 +187,10 @@ class EditEntity extends ModifyEntity {
 
 				// ordinary entries
 				case 'labels':
-					if ( !is_array( $list ) ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Key 'labels' must refer to an array", 'not-recognized-array' );
-					}
+					$this->checkListArgs( $list );
 
 					foreach ( $list as $langCode => $arg ) {
-						$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
+						$this->checkMultilangArgs( $arg, $langCode, $languages );
 						if ( array_key_exists( 'remove', $arg ) || $arg['value'] === "" ) {
 							$entityContent->getEntity()->removeLabel( $arg['language'] );
 						}
@@ -202,21 +199,13 @@ class EditEntity extends ModifyEntity {
 						}
 					}
 
-					if ( !$status->isOk() ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
-					}
-
 					break;
 
 				case 'descriptions':
-					if ( !is_array( $list ) ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Key 'descriptions' must refer to an array", 'not-recognized-array' );
-					}
+					$this->checkListArgs( $list );
 
 					foreach ( $list as $langCode => $arg ) {
-						$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
+						$this->checkMultilangArgs( $arg, $langCode, $languages );
 						if ( array_key_exists( 'remove', $arg ) || $arg['value'] === "" ) {
 							$entityContent->getEntity()->removeDescription( $arg['language'] );
 						}
@@ -225,18 +214,10 @@ class EditEntity extends ModifyEntity {
 						}
 					}
 
-					if ( !$status->isOk() ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
-					}
-
 					break;
 
 				case 'aliases':
-					if ( !is_array( $list ) ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Key 'aliases' must refer to an array", 'not-recognized-array' );
-					}
+					$this->checkListArgs( $list );
 
 					$aliases = array();
 
@@ -254,7 +235,7 @@ class EditEntity extends ModifyEntity {
 
 					foreach ( $aliases as $langCode => $args ) {
 						foreach ( $args as $arg ) {
-							$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
+							$this->checkMultilangArgs( $arg, $langCode, $languages );
 							if ( array_key_exists( 'remove', $arg ) ) {
 								$remAliases[$arg['language']][] = Utils::trimToNFC( $arg['value'] );
 							}
@@ -276,11 +257,6 @@ class EditEntity extends ModifyEntity {
 							$entityContent->getEntity()->addAliases( $langCode, $strings );
 					}
 
-					if ( !$status->isOk() ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
-					}
-
 					unset( $aliases );
 					unset( $setAliases );
 					unset( $addAliases );
@@ -295,16 +271,12 @@ class EditEntity extends ModifyEntity {
 						wfProfileOut( __METHOD__ );
 						$this->dieUsage( "key can't be handled: $props", 'not-recognized' );
 					}
-
-					if ( !is_array( $list ) ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Key 'sitelinks' must refer to an array", 'not-recognized-array' );
-					}
+					$this->checkListArgs( $list );
 
 					$sites = $this->getSiteLinkTargetSites();
 
 					foreach ( $list as $siteId => $arg ) {
-						$status->merge( $this->checkSiteLinks( $arg, $siteId, $sites ) );
+						$this->checkSiteLinks( $arg, $siteId, $sites );
 						if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
 							$entityContent->getEntity()->removeSiteLink( $arg['site'] );
 						}
@@ -330,11 +302,6 @@ class EditEntity extends ModifyEntity {
 							unset( $link );
 							unset( $ret );
 						}
-					}
-
-					if ( !$status->isOk() ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 					}
 
 					unset( $sites );
@@ -479,16 +446,31 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
+	 * Check if the supplied data is an array
+	 *
+	 * @since 0.4
+	 *
+	 * @param $arg Array: The argument array to verify
+	 * @param $langCode string: The language code used in the value part
+	 * @param &$languages array: The valid language codes as an assoc array
+	 *
+	 */
+	public function checkListArgs( $arg ) {
+		if ( !is_array( $arg ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( "Key 'descriptions' must refer to an array", 'not-recognized-array' );
+		}
+	}
+
+	/**
 	 * Check some of the supplied data for multilang arg
 	 *
 	 * @param $arg Array: The argument array to verify
 	 * @param $langCode string: The language code used in the value part
 	 * @param &$languages array: The valid language codes as an assoc array
 	 *
-	 * @return Status: The result from the comparison (always true)
 	 */
 	public function checkMultilangArgs( $arg, $langCode, &$languages = null ) {
-		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
 		}
@@ -506,7 +488,6 @@ class EditEntity extends ModifyEntity {
 		if ( !is_string( $arg['value'] ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
 		}
-		return $status;
 	}
 
 	/**
@@ -516,10 +497,8 @@ class EditEntity extends ModifyEntity {
 	 * @param $siteCode string: The site code used in the argument
 	 * @param &$sites \SiteList: The valid site codes as an assoc array
 	 *
-	 * @return Status: Always a good status
 	 */
 	public function checkSiteLinks( $arg, $siteCode, SiteList &$sites = null ) {
-		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
 		}
@@ -537,7 +516,6 @@ class EditEntity extends ModifyEntity {
 		if ( !is_string( $arg['title'] ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
 		}
-		return $status;
 	}
 
 }
