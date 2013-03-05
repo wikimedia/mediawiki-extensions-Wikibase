@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Test\Query\SQLStore\DVHandler;
 use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 use Wikibase\Repo\Query\SQLStore\DVHandler\GeoCoordinateHandler;
 use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
+use DataValues\GeoCoordinateValue;
 
 /**
  * Unit tests for the Wikibase\Repo\Query\SQLStore\DVHandler\GeoCoordinateHandler class.
@@ -39,6 +40,8 @@ use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 class GeoCoordinateHandlerTest extends DataValueHandlerTest {
 
 	/**
+	 * @see DataValueHandlerTest::getInstances
+	 *
 	 * @since wd.qe
 	 *
 	 * @return DataValueHandler[]
@@ -49,6 +52,24 @@ class GeoCoordinateHandlerTest extends DataValueHandlerTest {
 		$instances[] = new GeoCoordinateHandler();
 
 		return $instances;
+	}
+
+	/**
+	 * @see DataValueHandlerTest::getValues
+	 *
+	 * @since wd.qe
+	 *
+	 * @return GeoCoordinateValue[]
+	 */
+	protected function getValues() {
+		$values = array();
+
+		$values[] = new GeoCoordinateValue( 0, 0 );
+		$values[] = new GeoCoordinateValue( 23, 42 );
+		$values[] = new GeoCoordinateValue( 2.3, 4.2, 9000.1 );
+		$values[] = new GeoCoordinateValue( -2.3, -4.2, -9000.1, 'mars' );
+
+		return $values;
 	}
 
 }
