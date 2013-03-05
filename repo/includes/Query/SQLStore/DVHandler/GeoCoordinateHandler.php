@@ -6,6 +6,8 @@ use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 use Wikibase\Repo\Database\TableDefinition;
 use Wikibase\Repo\Database\FieldDefinition;
 use DataValues\DataValue;
+use DataValues\GeoCoordinateValue;
+use InvalidArgumentException;
 
 /**
  * Represents the mapping between DataValues\GeoCoordinateValue and
@@ -48,6 +50,7 @@ class GeoCoordinateHandler extends DataValueHandler {
 			new FieldDefinition( 'lat', FieldDefinition::TYPE_FLOAT, false ),
 			new FieldDefinition( 'lon', FieldDefinition::TYPE_FLOAT, false ),
 			new FieldDefinition( 'alt', FieldDefinition::TYPE_FLOAT, true ),
+			new FieldDefinition( 'globe', FieldDefinition::TYPE_TEXT, true ),
 			new FieldDefinition( 'json', FieldDefinition::TYPE_TEXT, false ),
 		);
 
@@ -77,16 +80,16 @@ class GeoCoordinateHandler extends DataValueHandler {
 	}
 
 	/**
-	 * @see DataValueHandler::newDataValueFromDbValue
+	 * @see DataValueHandler::newDataValueFromValueField
 	 *
 	 * @since wd.qe
 	 *
-	 * @param $dbValue // TODO: mixed or string?
+	 * @param $valueFieldValue // TODO: mixed or string?
 	 *
 	 * @return DataValue
 	 */
-	public function newDataValueFromDbValue( $dbValue ) {
-		// TODO
+	public function newDataValueFromValueField( $valueFieldValue ) {
+		return GeoCoordinateValue::newFromArray( json_decode( $valueFieldValue, true ) );
 	}
 
 	/**
@@ -98,6 +101,63 @@ class GeoCoordinateHandler extends DataValueHandler {
 	 */
 	public function getLabelFieldName() {
 		return null;
+	}
+
+	/**
+	 * @see DataValueHandler::getWhereConditions
+	 *
+	 * @since wd.qe
+	 *
+	 * @param DataValue $value
+	 *
+	 * @return array
+	 * @throws InvalidArgumentException
+	 */
+	public function getWhereConditions( DataValue $value ) {
+		if ( !( $value instanceof GeoCoordinateValue ) ) {
+			throw new InvalidArgumentException( 'Value is not a GeoCoordinateValue' );
+		}
+
+		return array(
+			// Note: the code in this package is not dependent on MW.
+			// So do not replace this with FormatJSON::encode.
+			'json' => json_encode( $value->getArrayValue() ),
+		);
+	}
+
+	/**
+	 * @see DataValueHandler::getInsertValues
+	 *
+	 * @since wd.qe
+	 *
+	 * @param DataValue $value
+	 *
+	 * @return array
+	 * @throws InvalidArgumentException
+	 */
+	public function getInsertValues( DataValue $value ) {
+		if ( !( $value instanceof GeoCoordinateValue ) ) {
+			throw new InvalidArgumentException( 'Value is not a GeoCoordinateValue' );
+		}
+
+		$values = array(
+			'lat' => $value->getLatitude(),
+			'lon' => $value->getLongitude(),
+
+			// Note: the code in this package is not dependent on MW.
+			// So do not replace this with FormatJSON::encode.
+			'json' => json_encode( $value->getArrayValue() ),
+		);
+
+		if ( $value->getAltitude() !== null ) {
+			$values['alt'] = $value->getAltitude();
+		}
+
+		if ( $value->getGlobe() !== null ) {
+			$values['globe'] = $value->getGlobe();
+		}
+
+		return $values;
 	}
 
 }

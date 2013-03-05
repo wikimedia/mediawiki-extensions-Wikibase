@@ -9,7 +9,8 @@ use DataValues\DataValue;
  * Represents the mapping between a DataValue type and the
  * associated implementation in the store.
  *
- * Based on SMWDataItemHandler by Nischay Nahata and Markus Krötzsch.
+ * Based on, and containing snippets from, SMWDataItemHandler from Semantic MediaWiki.
+ * SMWDataItemHandler was written by Nischay Nahata and Markus Krötzsch.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -75,11 +76,11 @@ abstract class DataValueHandler {
 	 *
 	 * @since wd.qe
 	 *
-	 * @param $dbValue // TODO: mixed or string?
+	 * @param $valueFieldValue // TODO: mixed or string?
 	 *
 	 * @return DataValue
 	 */
-	abstract public function newDataValueFromDbValue( $dbValue );
+	abstract public function newDataValueFromValueField( $valueFieldValue );
 
 	/**
 	 * Return the label field for this type of DataValue. This should be
@@ -99,6 +100,32 @@ abstract class DataValueHandler {
 		return null;
 	}
 
-	// TODO: getInsertValues and getWhereConds
+	/**
+	 * Return an array of fields=>values to conditions (WHERE part) in SQL
+	 * queries for the given DataValue. This method can return fewer
+	 * fields than getInsertValues as long as they are enough to identify
+	 * an item for search.
+	 *
+	 * @since wd.qe
+	 *
+	 * @param DataValue $value
+	 *
+	 * @return array
+	 */
+	abstract public function getWhereConditions( DataValue $value );
+
+	/**
+	 * Return an array of fields=>values that is to be inserted when
+	 * writing the given DataValue to the database. Values should be set
+	 * for all columns, even if NULL. This array is used to perform all
+	 * insert operations into the DB.
+	 *
+	 * @since wd.qe
+	 *
+	 * @param DataValue $value
+	 *
+	 * @return array
+	 */
+	abstract public function getInsertValues( DataValue $value );
 
 }

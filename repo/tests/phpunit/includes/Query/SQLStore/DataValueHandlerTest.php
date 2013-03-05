@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Test\Query\SQLStore;
 
 use Wikibase\Repo\Query\SQLStore\DataValueHandler;
+use DataValues\DataValue;
 
 /**
  * Unit tests for the Wikibase\Repo\Query\SQLStore\DataValueHandler implementing classes.
@@ -42,10 +43,36 @@ abstract class DataValueHandlerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @since wd.qe
 	 *
+	 * @return DataValue[]
+	 */
+	protected abstract function getValues();
+
+	/**
+	 * @since wd.qe
+	 *
 	 * @return DataValueHandler[][]
 	 */
 	public function instanceProvider() {
 		return $this->arrayWrap( $this->getInstances() );
+	}
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @return DataValue[][]
+	 */
+	public function valueProvider() {
+		return $this->arrayWrap( $this->getValues() );
+	}
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @return DataValueHandler
+	 */
+	protected function newInstance() {
+		$instances = $this->getInstances();
+		return reset( $instances );
 	}
 
 	protected function arrayWrap( array $elements ) {
@@ -103,16 +130,6 @@ abstract class DataValueHandlerTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @param DataValueHandler $dvHandler
 	 */
-	public function testNewDataValueFromDbValue( DataValueHandler $dvHandler ) {
-		// TODO
-		$this->assertTrue( true );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param DataValueHandler $dvHandler
-	 */
 	public function testGetLabelFieldNameReturnValue( DataValueHandler $dvHandler ) {
 		$labelFieldName = $dvHandler->getLabelFieldName();
 
@@ -127,6 +144,60 @@ abstract class DataValueHandlerTest extends \PHPUnit_Framework_TestCase {
 				'The label field is present in the table'
 			);
 		}
+	}
+
+	/**
+	 * @dataProvider valueProvider
+	 *
+	 * @param DataValue $value
+	 */
+	public function testGetWhereConditionsReturnType( DataValue $value ) {
+		$instance = $this->newInstance();
+
+		$whereConditions = $instance->getWhereConditions( $value );
+
+		$this->assertInternalType( 'array', $whereConditions );
+		$this->assertNotEmpty( $whereConditions );
+	}
+
+	/**
+	 * @dataProvider valueProvider
+	 *
+	 * @param DataValue $value
+	 */
+	public function testGetInsertValuesReturnType( DataValue $value ) {
+		$instance = $this->newInstance();
+
+		$insertValues = $instance->getInsertValues( $value );
+
+		$this->assertInternalType( 'array', $insertValues );
+		$this->assertNotEmpty( $insertValues );
+
+		$this->assertArrayHasKey( $instance->getValueFieldName(), $insertValues );
+		$this->assertArrayHasKey( $instance->getSortFieldName(), $insertValues );
+
+		if ( $instance->getLabelFieldName() !== null ) {
+			$this->assertArrayHasKey( $instance->getLabelFieldName(), $insertValues );
+		}
+	}
+
+	/**
+	 * @dataProvider valueProvider
+	 *
+	 * @param DataValue $value
+	 */
+	public function testNewDataValueFromValueFieldValue( DataValue $value ) {
+		$instance = $this->newInstance();
+
+		$fieldValues = $instance->getInsertValues( $value );
+		$valueFieldValue = $fieldValues[$instance->getValueFieldName()];
+
+		$newValue = $instance->newDataValueFromValueField( $valueFieldValue );
+
+		$this->assertTrue(
+			$value->equals( $newValue ),
+			'Newly constructed DataValue equals the old one'
+		);
 	}
 
 }
