@@ -382,7 +382,7 @@ final class ClientHooks {
 		);
 
 		if ( $itemId !== false ) {
-			$itemByTitle = 'Special:ItemByTitle/' . $globalId . '/' . $oldTitle->getDBkey();
+			$itemByTitle = 'Special:ItemByTitle/' . $globalId . '/' . wfUrlencode( $oldTitle->getPrefixedDBkey() );
 			$itemByTitleLink = ClientUtils::repoArticleUrl( $itemByTitle );
 			$out = $movePage->getOutput();
 			$out->addModules( 'wikibase.client.page-move' );
@@ -613,12 +613,6 @@ final class ClientHooks {
 		$title = $skin->getContext()->getTitle();
 		if ( !in_array( $title->getNamespace(), Settings::get( 'excludeNamespaces' ) ) && $title->exists() ) {
 
-			$title = $skin->getContext()->getTitle();
-
-			// gets the main part of the title, no underscores used in this db table
-			$titleText = $title->getPrefixedText();
-			$siteId = Settings::get( 'siteGlobalID' );
-
 			if ( empty( $template->data['language_urls'] ) && \Action::getActionName( $skin->getContext() ) === 'view' ) {
 				// Placeholder in case the page doesn't have any langlinks yet
 				// self::onBeforePageDisplay adds the JavaScript module which will overwrite this with a link
@@ -631,12 +625,19 @@ final class ClientHooks {
 				return true;
 			}
 
+			$title = $skin->getContext()->getTitle();
+
+			// gets the main part of the title, no underscores used in this db table
+			// TODO: use the item id from the page props when they are available
+			$titleText = $title->getPrefixedText();
+			$siteId = Settings::get( 'siteGlobalID' );
+
 			$itemId = ClientStoreFactory::getStore()->newSiteLinkTable()->getItemIdForLink( $siteId, $titleText );
 
 			if ( $itemId ) {
 				// links to the special page
 				$template->data['language_urls'][] = array(
-					'href' => ClientUtils::repoArticleUrl( "Special:ItemByTitle/$siteId/$titleText" ),
+					'href' => ClientUtils::repoArticleUrl( "Special:ItemByTitle/$siteId/" . wfUrlencode( $title->getPrefixedDBkey() ) ),
 					'text' => wfMessage( 'wikibase-editlinks' )->text(),
 					'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
 					'class' => 'wbc-editpage',
