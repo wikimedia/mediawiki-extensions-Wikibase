@@ -105,6 +105,7 @@ abstract class DataValueHandlerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testNewDataValueFromDbValue( DataValueHandler $dvHandler ) {
 		// TODO
+		$this->assertTrue( true );
 	}
 
 	/**

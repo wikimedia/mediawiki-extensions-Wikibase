@@ -62,6 +62,8 @@ $classes = array(
 	'Wikibase\Repo\Query\QueryResult',
 	'Wikibase\Repo\Query\QueryStore',
 
+	'Wikibase\Repo\Query\SQLStore\DVHandler\GeoCoordinateHandler',
+
 	'Wikibase\Repo\Query\SQLStore\DataValueHandler',
 	'Wikibase\Repo\Query\SQLStore\Engine',
 	'Wikibase\Repo\Query\SQLStore\Setup',
@@ -82,6 +84,9 @@ if ( !class_exists( 'MessageReporter' ) ) {
 }
 
 if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+	$wgAutoloadClasses['Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest']
+		= $dir . 'tests/phpunit/includes/Query/SQLStore/DataValueHandlerTest.php';
+
 	$wgAutoloadClasses['Wikibase\Repo\Test\Query\QueryEngineTest']
 		= $dir . 'tests/phpunit/includes/Query/QueryEngineTest.php';
 
@@ -132,6 +137,8 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'Database/TableDefinition',
 
 		'Query/QueryEngineResult',
+
+		'Query/SQLStore/DVHandler/GeoCoordinateHandler',
 
 		'Query/SQLStore/DataValueHandler',
 		'Query/SQLStore/Engine',
