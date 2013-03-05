@@ -2,12 +2,8 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Ask\Language\Query;
-use Wikibase\Repo\Query\QueryEngineResult;
-use Wikibase\Repo\Query\QueryEngine;
-
 /**
- * Simple query engine that works on top of the SQLStore.
+ * Class responsible for writing information to the SQLStore.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +28,7 @@ use Wikibase\Repo\Query\QueryEngine;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Engine implements QueryEngine {
+class Writer {
 
 	/**
 	 * @since wd.qe
@@ -52,17 +48,6 @@ class Engine implements QueryEngine {
 		$this->store = $store;
 	}
 
-	/**
-	 * @see QueryEngine::runQuery
-	 *
-	 * @since wd.qe
-	 *
-	 * @param Query $query
-	 *
-	 * @return QueryEngineResult
-	 */
-	public function runQuery( Query $query ) {
-		// TODO
-	}
+	// TODO: write methods
 
 }
