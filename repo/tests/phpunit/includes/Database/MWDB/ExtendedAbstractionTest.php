@@ -66,12 +66,12 @@ abstract class ExtendedAbstractionTest extends \MediaWikiTestCase {
 		) );
 
 		$tables[] = new TableDefinition( 'defaultfieldvalues', array(
-			new FieldDefinition( 'intfield', FieldDefinition::TYPE_INTEGER, 42 ),
+			new FieldDefinition( 'intfield', FieldDefinition::TYPE_INTEGER, true, 42 ),
 		) );
 
 		$tables[] = new TableDefinition( 'notnullfields', array(
-			new FieldDefinition( 'intfield', FieldDefinition::TYPE_INTEGER, null, null, false ),
-			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, null, null, false ),
+			new FieldDefinition( 'intfield', FieldDefinition::TYPE_INTEGER, false ),
+			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, false ),
 		) );
 
 		return $this->arrayWrap( $tables );
