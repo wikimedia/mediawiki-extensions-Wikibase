@@ -93,4 +93,5 @@ $wgWBSettings['changeHandlers'] = array(
 $wgWBSettings['dataTypes'] = array(
 	'wikibase-item',
 	'commonsMedia',
+	'string',
 );

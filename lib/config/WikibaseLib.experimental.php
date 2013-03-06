@@ -41,7 +41,6 @@ $wgWBSettings['dataTypes'] = array_merge( $wgWBSettings['dataTypes'], array(
 	'monolingual-text',
 	'multilingual-text',
 	'time',
-	'string',
 ) );
 
 $wgAutoloadClasses['Wikibase\Query'] = __DIR__ . '/../includes/query/Query.php';
