@@ -713,11 +713,17 @@ abstract class EntityView extends \ContextSource {
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $entity->getPrefixedId() );
 
-		$rightsWarning = $this->msg( 'wikibase-shortcopyrightwarning',
-			$this->msg( 'wikibase-save' )->inContentLanguage()->text(),
-			$this->msg( 'copyrightpage' )->inContentLanguage()->text(),
-			"[$wgRightsUrl $wgRightsText]"
-		)->parse();
+		if ( $this->msg( 'wikidata-shortcopyrightwarning' )->exists() ) {
+			// if this is a wiki using the WikimediaMessages extension (i.e. Wikidata) it will use the
+			// shortcopyrightwarning message from that extension instead.
+			$rightsWarning = $this->msg( 'wikidata-shortcopyrightwarning' )->parse();
+		} else {
+			$rightsWarning = $this->msg( 'wikibase-shortcopyrightwarning',
+				$this->msg( 'wikibase-save' )->inContentLanguage()->text(),
+				$this->msg( 'copyrightpage' )->inContentLanguage()->text(),
+				"[$wgRightsUrl $wgRightsText]"
+			)->parse();
+		}
 
 		// copyright warning message
 		$out->addJsConfigVars( 'wbCopyrightWarning', $rightsWarning );
