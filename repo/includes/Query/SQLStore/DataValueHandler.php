@@ -106,6 +106,9 @@ abstract class DataValueHandler {
 	 * fields than getInsertValues as long as they are enough to identify
 	 * an item for search.
 	 *
+	 * The passed DataValue needs to be of a type supported by the DataValueHandler.
+	 * If it is not supported, an InvalidArgumentException might be thrown.
+	 *
 	 * @since wd.qe
 	 *
 	 * @param DataValue $value
@@ -119,6 +122,9 @@ abstract class DataValueHandler {
 	 * writing the given DataValue to the database. Values should be set
 	 * for all columns, even if NULL. This array is used to perform all
 	 * insert operations into the DB.
+	 *
+	 * The passed DataValue needs to be of a type supported by the DataValueHandler.
+	 * If it is not supported, an InvalidArgumentException might be thrown.
 	 *
 	 * @since wd.qe
 	 *
