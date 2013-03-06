@@ -2,10 +2,14 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Ask\Language\Query;
 use Wikibase\Repo\Query\QueryEngineResult;
 use Wikibase\Repo\Query\QueryEngine;
 use Wikibase\Repo\Database\QueryInterface;
+
+use Ask\Language\Query;
+use Ask\Language\Description\Description;
+use Ask\Language\Option\QueryOptions;
+use Ask\Language\Selection\SelectionRequest;
 
 /**
  * Simple query engine that works on top of the SQLStore.
@@ -72,6 +76,40 @@ class Engine implements QueryEngine {
 	 * @return QueryEngineResult
 	 */
 	public function runQuery( Query $query ) {
+		$internalEntityIds = $this->findQueryMatches( $query->getDescription(), $query->getOptions() );
+
+		$result = $this->selectRequestedFields( $internalEntityIds, $query->getSelectionRequests() );
+
+		return $result;
+	}
+
+	/**
+	 * Finds all entities that match the selection criteria.
+	 * The matching entities are returned as an array of internal entity ids.
+	 *
+	 * @since wd.qe
+	 *
+	 * @param Description $description
+	 * @param QueryOptions $options
+	 *
+	 * @return int[]
+	 */
+	private function findQueryMatches( Description $description, QueryOptions $options ) {
+		// TODO
+	}
+
+	/**
+	 * Selects all the quested data from the matching entities.
+	 * This data is put in a QueryEngineResult object which is then returned.
+	 *
+	 * @since wd.qe
+	 *
+	 * @param array $internalEntityIds
+	 * @param array $query
+	 *
+	 * @return QueryEngineResult
+	 */
+	private function selectRequestedFields( array $internalEntityIds, array $query ) {
 		// TODO
 	}
 
