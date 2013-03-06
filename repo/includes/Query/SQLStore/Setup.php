@@ -34,9 +34,9 @@ use MessageReporter;
 class Setup {
 
 	/**
-	 * @var Store
+	 * @var StoreConfig
 	 */
-	private $store;
+	private $config;
 
 	/**
 	 * @var TableBuilder
@@ -53,12 +53,12 @@ class Setup {
 	/**
 	 * @since wd.qe
 	 *
-	 * @param Store $sqlStore
+	 * @param StoreConfig $storeConfig
 	 * @param TableBuilder $tableBuilder
 	 * @param MessageReporter|null $messageReporter
 	 */
-	public function __construct( Store $sqlStore, TableBuilder $tableBuilder, MessageReporter $messageReporter = null ) {
-		$this->store = $sqlStore;
+	public function __construct( StoreConfig $storeConfig, TableBuilder $tableBuilder, MessageReporter $messageReporter = null ) {
+		$this->config = $storeConfig;
 		$this->tableBuilder = $tableBuilder;
 	}
 
@@ -79,13 +79,13 @@ class Setup {
 	 * @since wd.qe
 	 */
 	public function run() {
-		$this->report( 'Starting setup of ' . $this->store->getName() );
+		$this->report( 'Starting setup of ' . $this->config->getStoreName() );
 
 		$this->setupTables();
 
-		// TODO
+		// TODO: initialize basic content
 
-		$this->report( 'Finished setup of ' . $this->store->getName() );
+		$this->report( 'Finished setup of ' . $this->config->getStoreName() );
 	}
 
 	/**
@@ -94,11 +94,16 @@ class Setup {
 	 * @since wd.qe
 	 */
 	private function setupTables() {
-		foreach ( $this->store->getTables() as $table ) {
-			$this->tableBuilder->createTable( $table );
+		/**
+		 * @var DataValueHandler $dataValueHandler
+		 */
+		foreach ( $this->config->getDataValueHandlers() as $dataValueHandler ) {
+			$this->tableBuilder->createTable( $dataValueHandler->getTableDefinition() );
 		}
-	}
 
-	// TODO
+		// TODO: setup dv tables for different levels of snaks
+		// TODO: setup id tracking tables
+		// TODO: setup stats tables
+	}
 
 }

@@ -43,7 +43,14 @@ class EngineTest extends QueryEngineTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$instances[] = new Engine( new \Wikibase\Repo\Query\SQLStore\Store( 'foo', array() ) );
+		$connectionProvider = new \Wikibase\Repo\LazyDBConnectionProvider( DB_MASTER );
+		$storeConfig = new \Wikibase\Repo\Query\SQLStore\StoreConfig( 'foo', 'bar', array() );
+		$queryInterface = new \Wikibase\Repo\Database\MediaWikiQueryInterface(
+			$connectionProvider,
+			new \Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction( $connectionProvider )
+		);
+
+		$instances[] = new Engine( $storeConfig, $queryInterface );
 
 		return $instances;
 	}

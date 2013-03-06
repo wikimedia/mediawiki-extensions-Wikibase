@@ -2,6 +2,9 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
+use Wikibase\Repo\Query\QueryStoreUpdater;
+use Wikibase\Repo\Database\QueryInterface;
+
 /**
  * Class responsible for writing information to the SQLStore.
  *
@@ -28,24 +31,33 @@ namespace Wikibase\Repo\Query\SQLStore;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Writer {
+class Updater implements QueryStoreUpdater {
 
 	/**
 	 * @since wd.qe
 	 *
-	 * @var Store
+	 * @var StoreConfig
 	 */
-	private $store;
+	private $storeConfig;
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @var QueryInterface
+	 */
+	private $queryInterface;
 
 	/**
 	 * Constructor.
 	 *
 	 * @since wd.qe
 	 *
-	 * @param Store $store
+	 * @param StoreConfig $storeConfig
+	 * @param QueryInterface $queryInterface
 	 */
-	public function __construct( Store $store ) {
-		$this->store = $store;
+	public function __construct( StoreConfig $storeConfig, QueryInterface $queryInterface ) {
+		$this->storeConfig = $storeConfig;
+		$this->queryInterface = $queryInterface;
 	}
 
 	// TODO: write methods

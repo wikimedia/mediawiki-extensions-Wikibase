@@ -1,12 +1,11 @@
 <?php
 
-namespace Wikibase\Repo\Test\Query\SQLStore;
+namespace Wikibase\Repo\Test\Query;
 
-use Wikibase\Repo\Query\SQLStore\Store;
-use Wikibase\Repo\Test\Query\QueryStoreTest;
+use Wikibase\Repo\Query\QueryStore;
 
 /**
- * Unit tests for the Wikibase\Repo\Query\SQLStore\Store class.
+ * Base test class for Wikibase\Repo\Query\QueryStore implementing classes.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,31 +27,30 @@ use Wikibase\Repo\Test\Query\QueryStoreTest;
  *
  * @ingroup WikibaseRepoTest
  *
- * @group Wikibase
- * @group WikibaseRepo
- * @group WikibaseQuery
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StoreTest extends QueryStoreTest {
+abstract class QueryStoreUpdaterTest extends \MediaWikiTestCase {
 
 	/**
-	 * @see QueryStoreTest::getInstances
+	 * @since wd.qe
+	 *
+	 * @return QueryStore[]
 	 */
-	protected function getInstances() {
-		$instances = array();
+	protected abstract function getInstances();
 
-		$connectionProvider = new \Wikibase\Repo\LazyDBConnectionProvider( DB_MASTER );
-		$storeConfig = new \Wikibase\Repo\Query\SQLStore\StoreConfig( 'foo', 'bar', array() );
-		$queryInterface = new \Wikibase\Repo\Database\MediaWikiQueryInterface(
-			$connectionProvider,
-			new \Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction( $connectionProvider )
-		);
+	/**
+	 * @since wd.qe
+	 *
+	 * @return QueryStore[][]
+	 */
+	public function instanceProvider() {
+		return $this->arrayWrap( $this->getInstances() );
+	}
 
-		$instances[] = new Store( $storeConfig, $queryInterface );
-
-		return $instances;
+	public function testFoo() {
+		// TODO
+		$this->assertTrue( true );
 	}
 
 }

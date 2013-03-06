@@ -2,13 +2,10 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Ask\Language\Query;
-use Wikibase\Repo\Query\QueryEngineResult;
-use Wikibase\Repo\Query\QueryEngine;
-use Wikibase\Repo\Database\QueryInterface;
+use Wikibase\Repo\Database\TableDefinition;
 
 /**
- * Simple query engine that works on top of the SQLStore.
+ * StoreConfiguration for the SQL Store.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,46 +30,66 @@ use Wikibase\Repo\Database\QueryInterface;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Engine implements QueryEngine {
+class StoreConfig {
 
 	/**
 	 * @since wd.qe
 	 *
-	 * @var StoreConfig
+	 * @var string
 	 */
-	private $config;
+	private $name;
 
 	/**
 	 * @since wd.qe
 	 *
-	 * @var QueryInterface
+	 * @var string
 	 */
-	private $queryInterface;
+	private $tablePrefix;
+
+	/**
+	 * The DataValueHandlers for the DataValue types supported by this configuration.
+	 * Array keys are DataValue type identifiers (string) pointing to the corresponding
+	 * DataValueHandler.
+	 *
+	 * @since wd.qe
+	 *
+	 * @var DataValueHandler[]
+	 */
+	private $dvHandlers;
 
 	/**
 	 * Constructor.
 	 *
 	 * @since wd.qe
 	 *
-	 * @param StoreConfig $storeConfig
-	 * @param QueryInterface $queryInterface
+	 * @param string $storeName
+	 * @param string $tablePrefix
+	 * @param DataValueHandler[] $dataValueHandlers
 	 */
-	public function __construct( StoreConfig $storeConfig, QueryInterface $queryInterface ) {
-		$this->config = $storeConfig;
-		$this->queryInterface = $queryInterface;
+	public function __construct( $storeName, $tablePrefix, array $dataValueHandlers ) {
+		$this->name = $storeName;
+		$this->tablePrefix = $tablePrefix;
+		$this->dvHandlers = $dataValueHandlers;
 	}
 
 	/**
-	 * @see QueryEngine::runQuery
-	 *
 	 * @since wd.qe
 	 *
-	 * @param Query $query
-	 *
-	 * @return QueryEngineResult
+	 * @return DataValueHandler
 	 */
-	public function runQuery( Query $query ) {
-		// TODO
+	public function getDataValueHandlers() {
+		return $this->dvHandlers;
 	}
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @return string
+	 */
+	public function getStoreName() {
+		return $this->name;
+	}
+
+	// TODO
 
 }

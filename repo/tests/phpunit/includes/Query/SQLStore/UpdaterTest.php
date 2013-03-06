@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore;
 
-use Wikibase\Repo\Query\SQLStore\Store;
-use Wikibase\Repo\Test\Query\QueryStoreTest;
+use Wikibase\Repo\Query\SQLStore\Updater;
+use Wikibase\Repo\Test\Query\QueryStoreUpdaterTest;
 
 /**
- * Unit tests for the Wikibase\Repo\Query\SQLStore\Store class.
+ * Unit tests for the Wikibase\Repo\Query\SQLStore\Updater class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,10 +35,14 @@ use Wikibase\Repo\Test\Query\QueryStoreTest;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StoreTest extends QueryStoreTest {
+class UpdaterTest extends QueryStoreUpdaterTest {
 
 	/**
-	 * @see QueryStoreTest::getInstances
+	 * @see QueryStoreUpdaterTest::getInstances
+	 *
+	 * @since wd.qe
+	 *
+	 * @return Updater[]
 	 */
 	protected function getInstances() {
 		$instances = array();
@@ -50,9 +54,14 @@ class StoreTest extends QueryStoreTest {
 			new \Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction( $connectionProvider )
 		);
 
-		$instances[] = new Store( $storeConfig, $queryInterface );
+		$instances[] = new Updater( $storeConfig, $queryInterface );
 
 		return $instances;
+	}
+
+	public function testFoo() {
+		// TODO
+		$this->assertTrue( true );
 	}
 
 }

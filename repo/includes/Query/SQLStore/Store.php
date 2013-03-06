@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Query\SQLStore;
 
 use Wikibase\Repo\Query\QueryStore;
-use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Repo\Database\QueryInterface;
+use Wikibase\Repo\Database\TableBuilder;
+use MessageReporter;
 
 /**
  * Simple query store for relational SQL databases.
@@ -33,22 +35,49 @@ use Wikibase\Repo\Database\TableDefinition;
  */
 class Store implements QueryStore {
 
-	private $tablePrefix;
-
-	private $dvHandlers;
-
-	public function __construct( $tablePrefix, array $dataValueHandlers ) {
-		$this->tablePrefix = $tablePrefix;
-		$this->dvHandlers = $dataValueHandlers;
-	}
+	/**
+	 * @since wd.qe
+	 *
+	 * @var StoreConfig
+	 */
+	private $config;
 
 	/**
 	 * @since wd.qe
 	 *
-	 * @return TableDefinition
+	 * @var QueryInterface
 	 */
-	public function getTables() {
-		return array();
+	private $queryInterface;
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @var TableBuilder|null
+	 */
+	private $tableBuilder;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since wd.qe
+	 *
+	 * @param StoreConfig $config
+	 * @param QueryInterface $queryInterface
+	 */
+	public function __construct( StoreConfig $config, QueryInterface $queryInterface ) {
+		$this->config = $config;
+		$this->queryInterface = $queryInterface;
+	}
+
+	/**
+	 * Sets the table builder to use for creating tables.
+	 *
+	 * @since wd.qe
+	 *
+	 * @param TableBuilder $tableBuilder
+	 */
+	public function setTableBuilder( TableBuilder $tableBuilder ) {
+		$this->tableBuilder = $tableBuilder;
 	}
 
 	/**
@@ -62,6 +91,56 @@ class Store implements QueryStore {
 		return 'Wikibase SQL store';
 	}
 
-	// TODO
+	/**
+	 * @see QueryStore::getQueryEngine
+	 *
+	 * @since wd.qe
+	 *
+	 * @return \Wikibase\Repo\Query\QueryEngine
+	 */
+	public function getQueryEngine() {
+		return new Engine( $this->config, $this->queryInterface );
+	}
+
+	/**
+	 * @see QueryStore::getUpdater
+	 *
+	 * @since wd.qe
+	 *
+	 * @return \Wikibase\Repo\Query\QueryStoreUpdater
+	 */
+	public function getUpdater() {
+		return new Updater( $this->config, $this->queryInterface );
+	}
+
+	/**
+	 * @see QueryStore::setup
+	 *
+	 * @since wd.qe
+	 *
+	 * @param MessageReporter $messageReporter
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function setup( MessageReporter $messageReporter ) {
+		$setup = new Setup( $this->config, $this->tableBuilder, $messageReporter );
+
+		$setup->run();
+
+		return true;
+	}
+
+	/**
+	 * @see QueryStore::drop
+	 *
+	 * @since wd.qe
+	 *
+	 * @param MessageReporter $messageReporter
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function drop( MessageReporter $messageReporter ) {
+		// TODO
+	}
 
 }

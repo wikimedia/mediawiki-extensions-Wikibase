@@ -61,6 +61,7 @@ $classes = array(
 	'Wikibase\Repo\Query\QueryEngineResult',
 	'Wikibase\Repo\Query\QueryResult',
 	'Wikibase\Repo\Query\QueryStore',
+	'Wikibase\Repo\Query\QueryStoreUpdater',
 
 	'Wikibase\Repo\Query\SQLStore\DVHandler\BooleanHandler',
 	'Wikibase\Repo\Query\SQLStore\DVHandler\EntityIdHandler',
@@ -72,7 +73,8 @@ $classes = array(
 	'Wikibase\Repo\Query\SQLStore\Engine',
 	'Wikibase\Repo\Query\SQLStore\Setup',
 	'Wikibase\Repo\Query\SQLStore\Store',
-	'Wikibase\Repo\Query\SQLStore\Writer',
+	'Wikibase\Repo\Query\SQLStore\StoreConfig',
+	'Wikibase\Repo\Query\SQLStore\Updater',
 );
 
 foreach ( $classes as $class ) {
@@ -97,6 +99,9 @@ if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 
 	$wgAutoloadClasses['Wikibase\Repo\Test\Query\QueryStoreTest']
 		= $dir . 'tests/phpunit/includes/Query/QueryStoreTest.php';
+
+	$wgAutoloadClasses['Wikibase\Repo\Test\Query\QueryStoreUpdaterTest']
+		= $dir . 'tests/phpunit/includes/Query/QueryStoreUpdaterTest.php';
 
 	$wgAutoloadClasses['Wikibase\Repo\Test\Database\MWDB\ExtendedAbstractionTest']
 		= $dir . 'tests/phpunit/includes/Database/MWDB/ExtendedAbstractionTest.php';
@@ -153,6 +158,8 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'Query/SQLStore/Engine',
 		'Query/SQLStore/Setup',
 		'Query/SQLStore/Store',
+		'Query/SQLStore/StoreConfig',
+		'Query/SQLStore/Updater',
 
 		'specials/SpecialEntityData',
 
