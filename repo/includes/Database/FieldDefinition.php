@@ -106,6 +106,10 @@ class FieldDefinition implements \Immutable {
 
 
 	/**
+	 * Constructor.
+	 *
+	 * @since wd.db
+	 *
 	 * @param string $name
 	 * @param string $type
 	 * @param boolean $null
@@ -146,30 +150,83 @@ class FieldDefinition implements \Immutable {
 		$this->autoIncrement = $autoIncrement;
 	}
 
+	/**
+	 * Returns the name of the field.
+	 *
+	 * @since wd.db
+	 *
+	 * @return string
+	 */
 	public function getName() {
 		return $this->name;
 	}
 
+	/**
+	 * Returns the type of the field.
+	 * This is one of the TYPE_ constants.
+	 *
+	 * @since wd.db
+	 *
+	 * @return string
+	 */
 	public function getType() {
 		return $this->type;
 	}
 
+	/**
+	 * Returns the default value of the field.
+	 * Null for no default value.
+	 *
+	 * @since wd.db
+	 *
+	 * @return mixed
+	 */
 	public function getDefault() {
 		return $this->default;
 	}
 
+	/**
+	 * Returns the attributes of the field.
+	 * This is one of the ATTRIB_ constants or null.
+	 *
+	 * @since wd.db
+	 *
+	 * @return string|null
+	 */
 	public function getAttributes() {
 		return $this->attributes;
 	}
 
+	/**
+	 * Returns if the field allows for the value to be null.
+	 *
+	 * @since wd.db
+	 *
+	 * @return boolean
+	 */
 	public function allowsNull() {
 		return $this->null;
 	}
 
+	/**
+	 * Returns the index type of the field.
+	 * This is one of the INDEX_ constants or null.
+	 *
+	 * @since wd.db
+	 *
+	 * @return string|null
+	 */
 	public function getIndex() {
 		return $this->index;
 	}
 
+	/**
+	 * Returns if the field has auto increment.
+	 *
+	 * @since wd.db
+	 *
+	 * @return boolean
+	 */
 	public function hasAutoIncrement() {
 		return $this->autoIncrement;
 	}
