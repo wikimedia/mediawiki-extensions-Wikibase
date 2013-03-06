@@ -121,16 +121,39 @@ class TableDefinitionTest extends \MediaWikiTestCase {
 	 *
 	 * @param TableDefinition $table
 	 */
-	public function testGetClone( TableDefinition $table ) {
-		$newTable = $table->getClone( $table->getName() );
+	public function testMutateName( TableDefinition $table ) {
+		$newTable = $table->mutateName( $table->getName() );
 
 		$this->assertInstanceOf( get_class( $table ), $newTable );
 		$this->assertEquals( $table, $newTable );
 
-		$newTable = $table->getClone( 'foobarbaz' );
+		$newTable = $table->mutateName( 'foobarbaz' );
 
 		$this->assertEquals( 'foobarbaz', $newTable->getName() );
 		$this->assertEquals( $table->getFields(), $newTable->getFields() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param TableDefinition $table
+	 */
+	public function testMutateFields( TableDefinition $table ) {
+		$newTable = $table->mutateFields( $table->getFields() );
+
+		$this->assertInstanceOf( get_class( $table ), $newTable );
+		$this->assertEquals( $table, $newTable );
+
+		$fields = array(
+			new FieldDefinition( 'h', FieldDefinition::TYPE_TEXT ),
+			new FieldDefinition( 'a', FieldDefinition::TYPE_BOOLEAN ),
+			new FieldDefinition( 'x', FieldDefinition::TYPE_INTEGER ),
+		);
+
+		$newTable = $table->mutateFields( $fields );
+
+		$this->assertEquals( $fields, array_values( $newTable->getFields() ) );
+		$this->assertEquals( $table->getName(), $newTable->getName() );
 	}
 
 }
