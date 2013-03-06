@@ -90,6 +90,15 @@ class StoreConfig {
 		return $this->name;
 	}
 
+	/**
+	 * @since wd.qe
+	 *
+	 * @return string
+	 */
+	public function getTablePrefix() {
+		return $this->tablePrefix;
+	}
+
 	// TODO
 
 }

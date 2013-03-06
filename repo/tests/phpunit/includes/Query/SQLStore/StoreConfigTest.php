@@ -64,6 +64,7 @@ class StoreConfigTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $storeName, $instance->getStoreName(), 'Store name got set correctly' );
 		$this->assertEquals( $dvHandlers, $instance->getDataValueHandlers(), 'DataValueHandlers got set correctly' );
+		$this->assertEquals( $tablePrefix, $instance->getTablePrefix(), 'Table prefix got set correctly' );
 	}
 
 }

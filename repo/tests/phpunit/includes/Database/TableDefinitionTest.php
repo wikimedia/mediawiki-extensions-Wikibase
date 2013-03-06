@@ -116,4 +116,21 @@ class TableDefinitionTest extends \MediaWikiTestCase {
 		$this->assertFalse( $table->hasFieldWithName( '' ) );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param TableDefinition $table
+	 */
+	public function testGetClone( TableDefinition $table ) {
+		$newTable = $table->getClone( $table->getName() );
+
+		$this->assertInstanceOf( get_class( $table ), $newTable );
+		$this->assertEquals( $table, $newTable );
+
+		$newTable = $table->getClone( 'foobarbaz' );
+
+		$this->assertEquals( 'foobarbaz', $newTable->getName() );
+		$this->assertEquals( $table->getFields(), $newTable->getFields() );
+	}
+
 }
