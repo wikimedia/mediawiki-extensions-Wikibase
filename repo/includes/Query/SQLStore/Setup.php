@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Query\SQLStore;
 use Wikibase\Repo\Database\TableBuilder;
 use Wikibase\Repo\Database\QueryInterface;
 use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Repo\Database\FieldDefinition;
 use MessageReporter;
 
 /**
@@ -128,6 +129,121 @@ class Setup {
 		}
 
 		return $dvTables;
+	}
+
+	/**
+	 * TODO
+	 *
+	 * @return TableDefinition[]
+	 */
+	private function getNonDVTables() {
+		$tables = array();
+
+		// Id map with Wikibase EntityId to internal SQL store id
+		$tables[] = new TableDefinition(
+			'entities',
+			array(
+				// Internal id
+				new FieldDefinition(
+					'id',
+					FieldDefinition::TYPE_INTEGER,
+					FieldDefinition::NOT_NULL,
+					FieldDefinition::NO_DEFAULT,
+					FieldDefinition::ATTRIB_UNSIGNED,
+					FieldDefinition::INDEX_PRIMARY,
+					FieldDefinition::AUTOINCREMENT
+				),
+
+				// EntityId type part
+				new FieldDefinition(
+					'type',
+					FieldDefinition::TYPE_TEXT,
+					FieldDefinition::NOT_NULL,
+					FieldDefinition::NO_DEFAULT,
+					FieldDefinition::NO_ATTRIB,
+					FieldDefinition::INDEX
+				),
+
+				// EntityId numerical part
+				new FieldDefinition(
+					'number',
+					FieldDefinition::TYPE_INTEGER,
+					FieldDefinition::NOT_NULL,
+					FieldDefinition::NO_DEFAULT,
+					FieldDefinition::ATTRIB_UNSIGNED,
+					FieldDefinition::INDEX
+				),
+			)
+		);
+
+		// Claim id table
+		$tables[] = new TableDefinition(
+			'claims',
+			array(
+				// Internal id
+				new FieldDefinition(
+					'id',
+					FieldDefinition::TYPE_INTEGER,
+					FieldDefinition::NOT_NULL,
+					FieldDefinition::NO_DEFAULT,
+					FieldDefinition::ATTRIB_UNSIGNED,
+					FieldDefinition::INDEX_PRIMARY,
+					FieldDefinition::AUTOINCREMENT
+				),
+
+				// External id
+				new FieldDefinition(
+					'guid',
+					FieldDefinition::TYPE_TEXT,
+					FieldDefinition::NOT_NULL,
+					FieldDefinition::NO_DEFAULT,
+					FieldDefinition::ATTRIB_UNSIGNED,
+					FieldDefinition::INDEX
+				),
+
+				// Internal id of the claims subject
+				new FieldDefinition(
+					'subject_id',
+					FieldDefinition::TYPE_INTEGER,
+					FieldDefinition::NOT_NULL,
+					FieldDefinition::NO_DEFAULT,
+					FieldDefinition::ATTRIB_UNSIGNED,
+					FieldDefinition::INDEX
+				),
+
+				// Internal id of the property of the main snak
+				new FieldDefinition(
+					'property_id',
+					FieldDefinition::TYPE_INTEGER,
+					FieldDefinition::NOT_NULL,
+					FieldDefinition::NO_DEFAULT,
+					FieldDefinition::ATTRIB_UNSIGNED,
+					FieldDefinition::INDEX
+				),
+
+				// Rank
+				new FieldDefinition(
+					'rank',
+					FieldDefinition::TYPE_INTEGER,
+					FieldDefinition::NOT_NULL,
+					FieldDefinition::NO_DEFAULT,
+					FieldDefinition::ATTRIB_UNSIGNED,
+					FieldDefinition::INDEX
+				),
+
+				// Hash
+				new FieldDefinition(
+					'hash',
+					FieldDefinition::TYPE_TEXT,
+					FieldDefinition::NOT_NULL,
+					FieldDefinition::NO_DEFAULT,
+					FieldDefinition::NO_ATTRIB,
+					FieldDefinition::INDEX
+				),
+			)
+		);
+
+		return $tables;
 	}
 
 	/**

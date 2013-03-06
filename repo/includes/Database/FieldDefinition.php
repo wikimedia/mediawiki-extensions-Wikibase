@@ -86,8 +86,23 @@ class FieldDefinition implements \Immutable {
 	const TYPE_INTEGER = 'int';
 	const TYPE_FLOAT = 'float';
 
+	const NOT_NULL = false;
+	const NULL = true;
+
+	const NO_DEFAULT = null;
+
+	const NO_ATTRIB = null;
 	const ATTRIB_BINARY = 'binary';
 	const ATTRIB_UNSIGNED = 'unsigned';
+
+	const NO_INDEX = null;
+	const INDEX = 'index';
+	const INDEX_UNIQUE = 'unique';
+	const INDEX_FULLTEXT = 'fulltext';
+	const INDEX_PRIMARY = 'primary';
+
+	const AUTOINCREMENT = true;
+	const NO_AUTOINCREMENT = false;
 
 
 	/**
@@ -101,7 +116,7 @@ class FieldDefinition implements \Immutable {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $name, $type, $null = true, $default = null, $attributes = null, $index = null, $autoIncrement = false ) {
+	public function __construct( $name, $type, $null = self::NULL, $default = self::NO_DEFAULT, $attributes = null, $index = null, $autoIncrement = false ) {
 		if ( !is_string( $name ) ) {
 			throw new InvalidArgumentException( 'The field $name needs to be a string' );
 		}
