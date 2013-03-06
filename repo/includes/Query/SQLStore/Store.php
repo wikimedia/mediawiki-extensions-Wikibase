@@ -88,7 +88,7 @@ class Store implements QueryStore {
 	 * @return string
 	 */
 	public function getName() {
-		return 'Wikibase SQL store';
+		return $this->config->getStoreName();
 	}
 
 	/**
