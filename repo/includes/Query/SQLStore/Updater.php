@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Query\SQLStore;
 
 use Wikibase\Repo\Query\QueryStoreUpdater;
 use Wikibase\Repo\Database\QueryInterface;
+use Wikibase\Entity;
 
 /**
  * Class responsible for writing information to the SQLStore.
@@ -58,6 +59,39 @@ class Updater implements QueryStoreUpdater {
 	public function __construct( StoreConfig $storeConfig, QueryInterface $queryInterface ) {
 		$this->storeConfig = $storeConfig;
 		$this->queryInterface = $queryInterface;
+	}
+
+	/**
+	 * @see QueryStoreUpdater::insertEntity
+	 *
+	 * @since wd.qe
+	 *
+	 * @param Entity $entity
+	 */
+	public function insertEntity( Entity $entity ) {
+		// TODO
+	}
+
+	/**
+	 * @see QueryStoreUpdater::updateEntity
+	 *
+	 * @since wd.qe
+	 *
+	 * @param Entity $entity
+	 */
+	public function updateEntity( Entity $entity ) {
+		// TODO
+	}
+
+	/**
+	 * @see QueryStoreUpdater::deleteEntity
+	 *
+	 * @since wd.qe
+	 *
+	 * @param Entity $entity
+	 */
+	public function deleteEntity( Entity $entity ) {
+		// TODO
 	}
 
 	// TODO: write methods

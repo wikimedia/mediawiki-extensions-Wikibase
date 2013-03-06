@@ -48,7 +48,17 @@ abstract class QueryStoreUpdaterTest extends \MediaWikiTestCase {
 		return $this->arrayWrap( $this->getInstances() );
 	}
 
-	public function testFoo() {
+	public function testInsertEntity() {
+		// TODO
+		$this->assertTrue( true );
+	}
+
+	public function testUpdateEntity() {
+		// TODO
+		$this->assertTrue( true );
+	}
+
+	public function testDeleteEntity() {
 		// TODO
 		$this->assertTrue( true );
 	}
