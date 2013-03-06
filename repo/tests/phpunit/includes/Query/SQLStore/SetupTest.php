@@ -44,9 +44,16 @@ class SetupTest extends \MediaWikiTestCase {
 	protected function getInstances() {
 		$instances = array();
 
+		$connectionProvider = new \Wikibase\Repo\LazyDBConnectionProvider( DB_MASTER );
+		$storeConfig = new \Wikibase\Repo\Query\SQLStore\StoreConfig( 'foo', 'bar', array() );
+		$queryInterface = new \Wikibase\Repo\Database\MediaWikiQueryInterface(
+			$connectionProvider,
+			new \Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction( $connectionProvider )
+		);
+
 		$instances[] = new Setup(
-			new \Wikibase\Repo\Query\SQLStore\Store( 'foo', array() ),
-			new \Wikibase\Repo\Database\TableBuilder( new \Wikibase\Repo\Database\ObservableQueryInterface() )
+			$storeConfig,
+			new \Wikibase\Repo\Database\TableBuilder( $queryInterface )
 		);
 
 		return $instances;

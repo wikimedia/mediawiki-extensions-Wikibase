@@ -2,13 +2,14 @@
 
 namespace Wikibase\Repo\Query;
 
+use MessageReporter;
+
 /**
- * Interface for objects that can act as query store.
+ * Interface for query stores providing access to all needed sub components
+ * such as updaters, query engines and setup/teardown operations.
  *
- * A query store is a storage interface that indexes information in such
- * a way that a query engine can compute query results against it.
- *
- * TODO: clearly define responsibilities
+ * This interface somewhat acts as facade to the query component.
+ * All access to a specific store should typically happen via this interface.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,13 +36,62 @@ namespace Wikibase\Repo\Query;
  */
 interface QueryStore {
 
-	// TODO
+	// TODO: create store factory and figure out how to inject dependencies
+	// for the typical Wikibase repo use case.
 
 	/**
+	 * Returns the name of the query store. This name can be configuration dependent
+	 * and is thus not always the same for a certain store type. For instance, you can
+	 * have "Wikibase SQL store" and "Wikibase SQL store for update to new config".
+	 *
 	 * @since 0.4
 	 *
 	 * @return string
 	 */
 	public function getName();
+
+	/**
+	 * Returns the query engine for this store.
+	 * The query engine allows running queries against the store.
+	 *
+	 * @since wd.qe
+	 *
+	 * @return QueryEngine
+	 */
+	public function getQueryEngine();
+
+	/**
+	 * Returns the updater for this store.
+	 * The updater allows for updating the data in the store.
+	 *
+	 * @since wd.qe
+	 *
+	 * @return QueryStoreUpdater
+	 */
+	public function getUpdater();
+
+	/**
+	 * Sets up the store.
+	 * This means creating and initializing the storage structures
+	 * required for storing data in the store.
+	 *
+	 * @since wd.qe
+	 *
+	 * @param MessageReporter $messageReporter
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function setup( MessageReporter $messageReporter );
+
+	/**
+	 * Drop (delete) all storage structures created by setup().
+	 *
+	 * @since wd.qe
+	 *
+	 * @param MessageReporter $messageReporter
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function drop( MessageReporter $messageReporter );
 
 }
