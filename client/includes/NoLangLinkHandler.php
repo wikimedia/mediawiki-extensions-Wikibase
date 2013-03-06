@@ -74,6 +74,7 @@ class NoLangLinkHandler {
 		$langLinkHandler = new LangLinkHandler(
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
+			Settings::get( 'excludeNamespaces' ),
 			ClientStoreFactory::getStore()->newSiteLinkTable(),
 			\Sites::singleton()
 		);
