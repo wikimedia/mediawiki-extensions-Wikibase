@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DoNreFGo",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-03-06T23:17:50Z",
+      "side": 1,
+      "message": "Don\u0027t do this, but use mw.user.options.get in JS",
+      "revId": "ee7e0901d7ea15237a6a6687ce329ef51c29663e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
