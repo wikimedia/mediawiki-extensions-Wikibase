@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Query;
 
+use Wikibase\Entity;
+
 /**
  * Updater for a query store.
  * Implementing objects provide an interface via which new data can be inserted
@@ -32,6 +34,31 @@ namespace Wikibase\Repo\Query;
  */
 interface QueryStoreUpdater {
 
-	// TODO
+	/**
+	 * @see QueryStoreUpdater::insertEntity
+	 *
+	 * @since wd.qe
+	 *
+	 * @param Entity $entity
+	 */
+	public function insertEntity( Entity $entity );
+
+	/**
+	 * @see QueryStoreUpdater::updateEntity
+	 *
+	 * @since wd.qe
+	 *
+	 * @param Entity $entity
+	 */
+	public function updateEntity( Entity $entity );
+
+	/**
+	 * @see QueryStoreUpdater::deleteEntity
+	 *
+	 * @since wd.qe
+	 *
+	 * @param Entity $entity
+	 */
+	public function deleteEntity( Entity $entity );
 
 }
