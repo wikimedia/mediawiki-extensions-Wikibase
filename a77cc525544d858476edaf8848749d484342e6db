@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DoH9oHYk",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-06T12:55:36Z",
+      "side": 1,
+      "message": "The message is overwritten and that is inefficient. It should test for the message and choose one of the two, that is use a full if-then-else .",
+      "revId": "a77cc525544d858476edaf8848749d484342e6db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
