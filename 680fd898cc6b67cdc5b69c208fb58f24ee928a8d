@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DoF.2eT4",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-06T11:52:07Z",
+      "side": 1,
+      "message": "Several projects use localized language names. Sort order based on the native name will then not apply very well.",
+      "revId": "680fd898cc6b67cdc5b69c208fb58f24ee928a8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
