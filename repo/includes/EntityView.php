@@ -719,6 +719,12 @@ abstract class EntityView extends \ContextSource {
 			"[$wgRightsUrl $wgRightsText]"
 		)->parse();
 
+		// if this is a wiki using the WikimediaMessages extension (i.e. Wikidata) it will use the
+		// shortcopyrightwarning message from that extension instead.
+		if ( $this->msg( 'wikidata-shortcopyrightwarning' )->exists() ) {
+			$rightsWarning = $this->msg( 'wikidata-shortcopyrightwarning' )->parse();
+		}
+
 		// copyright warning message
 		$out->addJsConfigVars( 'wbCopyrightWarning', $rightsWarning );
 
