@@ -128,18 +128,17 @@ class InterwikiSorter {
 
 		if ( $sort === 'alphabetic' ) {
 			// do nothing
-		} else if ( $sort === 'alphabetic_revised' ) {
-			$sortOrder = $sortOrders['alphabetic_revised'];
-		} else if ( $sort === 'alphabetic_sr' ) {
-			$sortOrder = $sortOrders['alphabetic_sr'];
 		} else if ( $sort === 'code' ) {
-			// default code sort order
 			sort( $sortOrder );
 		} else {
-			// something went wrong but we can use default order
-			trigger_error( __CLASS__
-				. ' : invalid sort order specified for interwiki links.', E_USER_WARNING );
-           sort( $sortOrder );
+			if ( array_key_exists( $sort, $sortOrders ) ) {
+				$sortOrder = $sortOrders[$sort];
+			} else {
+				// something went wrong but we can use default order
+				trigger_error( __CLASS__
+					. ' : invalid or unknown sort order specified for interwiki links.', E_USER_WARNING );
+				sort( $sortOrder );
+			}
 		}
 
 		if( !empty( $sortPrepend ) ) {
