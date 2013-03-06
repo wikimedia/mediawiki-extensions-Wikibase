@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DoH8tfac",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 1615,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2013-03-06T17:08:12Z",
+      "side": 1,
+      "message": "Contains translations unrelated to above key changes. Per accident or indention?",
+      "revId": "814ed9279675c0644a2acf0d04dd297f0de3e759",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
