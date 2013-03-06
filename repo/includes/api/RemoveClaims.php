@@ -131,6 +131,7 @@ class RemoveClaims extends ApiWikibase implements IAutocomment {
 	 * @return EntityContent[]
 	 */
 	protected function getEntityContents( array $ids ) {
+		$params = $this->extractRequestParams();
 		$contents = array();
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
