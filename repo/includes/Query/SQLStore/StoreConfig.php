@@ -75,7 +75,7 @@ class StoreConfig {
 	/**
 	 * @since wd.qe
 	 *
-	 * @return DataValueHandler
+	 * @return DataValueHandler[]
 	 */
 	public function getDataValueHandlers() {
 		return $this->dvHandlers;
