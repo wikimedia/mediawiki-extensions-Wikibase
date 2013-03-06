@@ -123,7 +123,7 @@ class Setup {
 		 */
 		foreach ( $this->config->getDataValueHandlers() as $dataValueHandler ) {
 			$table = $dataValueHandler->getTableDefinition();
-			$table = $table->getClone( $this->config->getTablePrefix() . $table->getName() );
+			$table = $table->mutateName( $this->config->getTablePrefix() . $table->getName() );
 
 			$dvTables[] = $table;
 		}

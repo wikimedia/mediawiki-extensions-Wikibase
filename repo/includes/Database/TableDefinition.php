@@ -70,6 +70,10 @@ class TableDefinition implements \Immutable {
 		$this->fields = array();
 
 		foreach ( $fields as $field ) {
+			if ( !( $field instanceof FieldDefinition ) ) {
+				throw new InvalidArgumentException( 'All table fields should be of type FieldDefinition' );
+			}
+
 			if ( array_key_exists( $field->getName(), $this->fields ) ) {
 				throw new InvalidArgumentException( 'A table cannot have two fields with the same name' );
 			}
@@ -124,8 +128,21 @@ class TableDefinition implements \Immutable {
 	 *
 	 * @return TableDefinition
 	 */
-	public function getClone( $cloneName ) {
+	public function mutateName( $cloneName ) {
 		return new self( $cloneName, $this->fields );
+	}
+
+	/**
+	 * Returns a clone of the table, though with the provided fields rather then the original ones.
+	 *
+	 * @since wd.db
+	 *
+	 * @param FieldDefinition[] $fields
+	 *
+	 * @return TableDefinition
+	 */
+	public function mutateFields( array $fields ) {
+		return new self( $this->name, $fields );
 	}
 
 	// TODO: multiple field indices
