@@ -90,6 +90,10 @@ var watchlist = {
 	 */
 	init: function () {
 		watchlist.addFilter();
+
+		if ( mw.config.get( 'wgWBShowWikidataPref' ) ) {
+			watchlist.toggleWikibase();
+		}
 	}
 };
 
