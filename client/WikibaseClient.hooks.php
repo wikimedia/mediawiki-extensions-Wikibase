@@ -594,9 +594,6 @@ final class ClientHooks {
 				// Needed as we can't do that in the regular CSS nor in JavaScript
 				// (as that only runs after the element initially appeared).
 				$out->addModules( 'wikibase.client.nolanglinks' );
-
-				// Experimental for now
-				//	$out->addModules( 'wbclient.linkItem' );
 			}
 		}
 
