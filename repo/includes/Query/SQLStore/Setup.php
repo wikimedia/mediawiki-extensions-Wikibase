@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Query\SQLStore;
 
 use Wikibase\Repo\Database\TableBuilder;
+use Wikibase\Repo\Database\QueryInterface;
+use Wikibase\Repo\Database\TableDefinition;
 use MessageReporter;
 
 /**
@@ -34,11 +36,22 @@ use MessageReporter;
 class Setup {
 
 	/**
+	 * @since wd.qe
+	 *
 	 * @var StoreConfig
 	 */
 	private $config;
 
 	/**
+	 * @since wd.qe
+	 *
+	 * @var QueryInterface
+	 */
+	private $queryInterface;
+
+	/**
+	 * @since wd.qe
+	 *
 	 * @var TableBuilder
 	 */
 	private $tableBuilder;
@@ -54,12 +67,16 @@ class Setup {
 	 * @since wd.qe
 	 *
 	 * @param StoreConfig $storeConfig
+	 * @param QueryInterface $queryInterface
 	 * @param TableBuilder $tableBuilder
 	 * @param MessageReporter|null $messageReporter
 	 */
-	public function __construct( StoreConfig $storeConfig, TableBuilder $tableBuilder, MessageReporter $messageReporter = null ) {
+	public function __construct( StoreConfig $storeConfig, QueryInterface $queryInterface,
+								 TableBuilder $tableBuilder, MessageReporter $messageReporter = null ) {
 		$this->config = $storeConfig;
 		$this->tableBuilder = $tableBuilder;
+		$this->queryInterface = $queryInterface;
+		$this->messageReporter = $messageReporter;
 	}
 
 	/**
@@ -74,36 +91,103 @@ class Setup {
 	}
 
 	/**
-	 * Run the setup.
+	 * Install the store.
 	 *
 	 * @since wd.qe
+	 *
+	 * @return boolean Success indicator
 	 */
-	public function run() {
-		$this->report( 'Starting setup of ' . $this->config->getStoreName() );
+	public function install() {
+		$this->report( 'Starting install of ' . $this->config->getStoreName() );
 
-		$this->setupTables();
+		$success = $this->setupTables();
 
 		// TODO: initialize basic content
 
-		$this->report( 'Finished setup of ' . $this->config->getStoreName() );
+		$this->report( 'Finished install of ' . $this->config->getStoreName() );
+
+		return $success;
+	}
+
+	/**
+	 * TODO
+	 *
+	 * @return TableDefinition[]
+	 */
+	private function getDVTables() {
+		$dvTables = array();
+
+		/**
+		 * @var DataValueHandler $dataValueHandler
+		 */
+		foreach ( $this->config->getDataValueHandlers() as $dataValueHandler ) {
+			$table = $dataValueHandler->getTableDefinition();
+			$table = $table->getClone( $this->config->getTablePrefix() . $table->getName() );
+
+			$dvTables[] = $table;
+		}
+
+		return $dvTables;
 	}
 
 	/**
 	 * Sets up the tables of the store.
 	 *
 	 * @since wd.qe
+	 *
+	 * @return boolean Success indicator
 	 */
 	private function setupTables() {
-		/**
-		 * @var DataValueHandler $dataValueHandler
-		 */
-		foreach ( $this->config->getDataValueHandlers() as $dataValueHandler ) {
-			$this->tableBuilder->createTable( $dataValueHandler->getTableDefinition() );
+		$success = true;
+
+		foreach ( $this->getDVTables() as $table ) {
+			$success = $this->tableBuilder->createTable( $table ) && $success;
 		}
 
 		// TODO: setup dv tables for different levels of snaks
 		// TODO: setup id tracking tables
 		// TODO: setup stats tables
+
+		return $success;
+	}
+
+	/**
+	 * Uninstall the store.
+	 *
+	 * @since wd.qe
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function uninstall() {
+		$this->report( 'Starting uninstall of ' . $this->config->getStoreName() );
+
+		$success = $this->dropTables();
+
+		$this->report( 'Finished uninstall of ' . $this->config->getStoreName() );
+
+		return $success;
+	}
+
+	/**
+	 * Removes the tables belonging to the store.
+	 *
+	 * @since wd.qe
+	 *
+	 * @return boolean Success indicator
+	 */
+	private function dropTables() {
+		$success = true;
+
+		/**
+		 * @var DataValueHandler $dataValueHandler
+		 */
+		foreach ( $this->getDVTables() as $table ) {
+			$success = $this->queryInterface->dropTable( $table->getName() ) && $success;
+		}
+
+		// TODO: match changes to setup TODOs
+
+		return $success;
 	}
 
 }

@@ -115,6 +115,19 @@ class TableDefinition implements \Immutable {
 		return array_key_exists( $fieldName, $this->fields );
 	}
 
+	/**
+	 * Returns a clone of the table, though with the provided name instead.
+	 *
+	 * @since wd.db
+	 *
+	 * @param string $cloneName
+	 *
+	 * @return TableDefinition
+	 */
+	public function getClone( $cloneName ) {
+		return new self( $cloneName, $this->fields );
+	}
+
 	// TODO: multiple field indices
 
 }

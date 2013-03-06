@@ -76,13 +76,18 @@ class TableBuilder {
 	 * @since wd.db
 	 *
 	 * @param TableDefinition $table
+	 *
+	 * @return boolean Success indicator
 	 */
 	public function createTable( TableDefinition $table ) {
 		if ( $this->db->tableExists( $table->getName() ) ) {
 			$this->report( 'Table "' . $table->getName() . '" exists already, skipping.' );
+			return true;
 		}
 
-		// TODO
+		$this->report( 'Table "' . $table->getName() . '" not found, creating.' );
+
+		return $this->db->createTable( $table );
 	}
 
 }

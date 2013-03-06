@@ -123,11 +123,9 @@ class Store implements QueryStore {
 	 * @return boolean Success indicator
 	 */
 	public function setup( MessageReporter $messageReporter ) {
-		$setup = new Setup( $this->config, $this->tableBuilder, $messageReporter );
+		$setup = new Setup( $this->config, $this->queryInterface, $this->tableBuilder, $messageReporter );
 
-		$setup->run();
-
-		return true;
+		return $setup->install();
 	}
 
 	/**
@@ -140,7 +138,9 @@ class Store implements QueryStore {
 	 * @return boolean Success indicator
 	 */
 	public function drop( MessageReporter $messageReporter ) {
-		// TODO
+		$setup = new Setup( $this->config, $this->queryInterface, $this->tableBuilder, $messageReporter );
+
+		return $setup->uninstall();
 	}
 
 }

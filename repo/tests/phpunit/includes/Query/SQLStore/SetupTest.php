@@ -44,8 +44,13 @@ class SetupTest extends \MediaWikiTestCase {
 	protected function getInstances() {
 		$instances = array();
 
+		$storeConfig = new \Wikibase\Repo\Query\SQLStore\StoreConfig( 'foo', 'bar', array(
+			'string' => new \Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler(),
+			'number' => new \Wikibase\Repo\Query\SQLStore\DVHandler\NumberHandler(),
+		) );
+
 		$connectionProvider = new \Wikibase\Repo\LazyDBConnectionProvider( DB_MASTER );
-		$storeConfig = new \Wikibase\Repo\Query\SQLStore\StoreConfig( 'foo', 'bar', array() );
+
 		$queryInterface = new \Wikibase\Repo\Database\MediaWikiQueryInterface(
 			$connectionProvider,
 			new \Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction( $connectionProvider )
@@ -53,6 +58,7 @@ class SetupTest extends \MediaWikiTestCase {
 
 		$instances[] = new Setup(
 			$storeConfig,
+			$queryInterface,
 			new \Wikibase\Repo\Database\TableBuilder( $queryInterface )
 		);
 
@@ -74,9 +80,8 @@ class SetupTest extends \MediaWikiTestCase {
 	 * @param Setup $storeSetup
 	 */
 	public function testExecutionOfRun( Setup $storeSetup ) {
-		$storeSetup->run();
-
-		$this->assertTrue( true );
+		$this->assertTrue( $storeSetup->install() );
+		$this->assertTrue( $storeSetup->uninstall() );
 	}
 
 	// TODO: add more detailed tests
