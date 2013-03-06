@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DoKXNMok",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-06T20:38:08Z",
+      "side": 1,
+      "message": "Why serialize? $value is declared as \"mixed\" by OutputPage::setProperty.",
+      "revId": "155054ca42097e94dae9823703d3f91f1c9f0e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoGXHKmg",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-06T20:38:08Z",
+      "side": 1,
+      "message": "serialize/unserialize should not be needed here.",
+      "revId": "155054ca42097e94dae9823703d3f91f1c9f0e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoCXTYmE",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-06T20:38:08Z",
+      "side": 1,
+      "message": "Please avoid hard coded identifiers, use Item::ENTITY_TYPE instead.",
+      "revId": "155054ca42097e94dae9823703d3f91f1c9f0e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoKXHcpg",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-06T20:38:08Z",
+      "side": 1,
+      "message": "If $itemNamespace is not empty, we need an \u0027:\u0027 between it and the ID here.",
+      "revId": "155054ca42097e94dae9823703d3f91f1c9f0e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoCUGAtI",
+        "filename": "client/includes/ClientUtils.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-06T20:38:08Z",
+      "side": 1,
+      "message": "how about simply:\n\n  $contentType \u003d \"wikibase-$entityType\";\n  $nsList[ $contentType ];\n\nIdeally, we would have the info that is currently available in EntityContentFactory::$typeMap available here, to get $contentType. There should be at least a //TODO marker.\n\n(this is not essential, and the code just got moved here, but still wanted to mention it)",
+      "revId": "155054ca42097e94dae9823703d3f91f1c9f0e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoGUECsM",
+        "filename": "client/includes/ClientUtils.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-06T20:38:08Z",
+      "side": 1,
+      "message": "Please don\u0027t append the \u0027:\u0027 here, that\u0027s unexpected and tailored for one specific use case of this function! Please keep it generic and self contained. Just return the namespace.",
+      "revId": "155054ca42097e94dae9823703d3f91f1c9f0e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoKUj8lg",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-06T20:38:08Z",
+      "side": 1,
+      "message": "This makes LangLinkHandler stateful and bound to one specific item. Why? That seems contrary to our design principles. \n\nEven if it turns out we need this, this should not be an obscure side effect of calling a getter.",
+      "revId": "155054ca42097e94dae9823703d3f91f1c9f0e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoMXhVgE",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-06T20:38:08Z",
+      "side": 1,
+      "message": "This modifies a ParserOutput supplied to a getter for extraction. That\u0027s quite surprising and seems contrary to design principles. The code should be restructured such that this happens in addLinksFromRepository, which is expected to modify the ParserOutput.",
+      "revId": "155054ca42097e94dae9823703d3f91f1c9f0e66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
