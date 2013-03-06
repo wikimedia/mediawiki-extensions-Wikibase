@@ -707,6 +707,7 @@ final class ClientHooks {
 	public static function onSpecialPageBeforeExecute( \SpecialPage $special, $subpage ) {
 		if ( $special->getName() === 'Watchlist' ) {
 			$context = $special->getContext();
+
 		  	if ( $context->getRequest()->getBool( 'enhanced', $context->getUser()->getOption( 'usenewrc' ) ) === false ) {
 				$special->getOutput()->addModules( array(
 					'wbclient.watchlist.css',
