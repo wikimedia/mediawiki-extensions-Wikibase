@@ -51,6 +51,7 @@ $messages['en'] = array(
 	'wikibase-linkitem-success-link' => 'The pages have successfully been linked. You can find the item containing the links in our [$1 central data repository].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
+	'wikibase-watchlist-show-changes-pref' => 'Show Wikidata edits in your watchlist',
 );
 
 /** Message documentation (Message documentation)
@@ -127,7 +128,8 @@ Parameters:
 
 Parameters:
 * $1 - a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
-	'wikibase-rc-show-wikidata-pref' => 'Option in the Recent changes section of preferences to show wikibase changes by default in recent changes',
+	'wikibase-rc-show-wikidata-pref' => 'Option in the recent changes section of preferences to show wikibase changes by default in recent changes.',
+	'wikibase-watchlist-show-changes-pref' => 'Option in the watchlist section of preferences to always show wikibase edits by default in the watchlist.',
 );
 
 /** Arabic (العربية)
