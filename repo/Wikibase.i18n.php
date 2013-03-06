@@ -358,10 +358,14 @@ This is a generic placeholder message used while a remove is in progress, and re
 	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-label|label]].',
 	'wikibase-description-empty' => "Placeholder message displayed instead of the item's description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
-	'wikibase-deletedentity' => 'Message displayed instead of an Entity\'s label if the Entity has been deleted (see [[d:Wikidata:Glossary]]). Usually this message is used with some other message pointing to the entity.
+	'wikibase-deletedentity' => "Message displayed instead of an Entity's label if the Entity has been deleted (see [[d:Wikidata:Glossary]]).
+
+Usually this message is used with some other message pointing to the entity.
 
 Parameters:
-* $1 - the kind of entity which got deleted (e.g. "property")',
+* $1 - the kind of entity which got deleted. any one of the following messages:
+** {{msg-mw|Wikibase-entity-item}}
+** {{msg-mw|Wikibase-entity-property}}",
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
 	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
@@ -421,18 +425,24 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-ui-pendingquantityc
 Parameters:
 * $1 - the property name the user is about to edit a value of or add another value to',
 	'wikibase-claimview-snak-new-tooltip' => 'Tooltip message displayed when hovering/clicking the help icon next to the save, cancel and remove links of a claim (see [[d:Wikidata/Glossary]]) when about to add a completely new claim which includes specifying the property.',
-	'wikibase-statementview-referencesheading-pendingcountersubject' => "Used in the heading for the references associated with a statement (see [[d:Wikidata/Glossary]]). The heading is giving information about how many references exist for that statement. This is just the label for the counter's subject, the references, the number of references is not part of the message. $1 is the number of references for plural usage.",
+	'wikibase-statementview-referencesheading-pendingcountersubject' => "Used in the heading for the references associated with a statement (see [[d:Wikidata/Glossary]]). The heading is giving information about how many references exist for that statement. This is just the label for the counter's subject, the references, the number of references is not part of the message.
+
+Parameters:
+* $1 - the number of references for plural usage",
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'Tooltip displayed in the references heading when there are references (see [[d:Wikidata/Glossary]]) in edit mode which are not saved yet. Parameters:
 * $1 is the number of elements not saved yet.',
 	'wikibase-snakview-property-input-placeholder' => 'Placeholder message that is initially displayed within the property input element when adding a new snak. See also [[m:Wikidata/Glossary]].
 {{Identical|Property}}',
-	'wikibase-snakview-choosesnaktype' => 'Message prompting the user to select a Snak type (see [[d:Wikidata/Glossary]]) when adding or editing a Snak.
+	'wikibase-snakview-choosesnaktype' => 'Message prompting the user to select a Snak type (see [[d:Wikidata:Glossary]]) when adding or editing a Snak.
 
 Since a default Snak type should always be selected when adding a Snak, the message is visible on rare occasions only.
 
 Since "Snak" or "Snak type" does not express any meaning for the user, these phrases should be avoided in the message.',
-	'wikibase-snakview-variation-unsupporteddatatype' => 'Error shown if a data value for a certain data type (see [[d:Wikidata/Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values for that data type has not yet been implemented). $1 is the name of the data type which lacks support.',
-	'wikibase-snakview-variation-unsupporteddatavalue' => 'Error shown if a data value of a certain data value type (see [[d:Wikidata/Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values of that type has not yet been implemented). $1 is the name of the data value type which lacks support.',
+	'wikibase-snakview-variation-unsupporteddatatype' => 'Error shown if a data value for a certain data type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values for that data type has not yet been implemented).
+
+Parameters:
+* $1 - the name of the data type which lacks support',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Error shown if a data value of a certain data value type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values of that type has not yet been implemented). $1 is the name of the data value type which lacks support.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => "Warning displayed if the data value type used by a Snak's (see [[d:Wikidata/Glossary]]) property's data type is different from the data value type of the same Snak's actual value. This should only appear after internal changes or after a property's data type has changed and no scripts for updating the data were executed (there might not even be any scripts for handling all possible causes of this).",
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => "Details of the warning displayed if the data value type used by a Snak's (see [[d:Wikidata:Glossary]]) property's data type is different from the data value type of the same Snak's actual value.
 
@@ -444,7 +454,7 @@ Parameters:
 	'wikibase-snakview-variations-novalue-label' => "Message displayed for 'no value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
 	'wikibase-snakview-snaktypeselector-value' => "Short descriptive title of a 'value' snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option - which is the default when adding a claim - is allowing the user to specify a value.",
 	'wikibase-snakview-snaktypeselector-somevalue' => "Short descriptive title of a some-value snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that a value exists but it is unknown.",
-	'wikibase-snakview-snaktypeselector-novalue' => "A short descriptive title of a no-value snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that no value exists.",
+	'wikibase-snakview-snaktypeselector-novalue' => "A short descriptive title of a no-value snak (see [[d:Wikidata:Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that no value exists.",
 	'wikibase-shortcopyrightwarning' => 'A short copyright warning displayed during editing in the JavaScript UI. The copyright warning is displayed within a tooltip next to the save button.
 
 Parameters:
@@ -452,9 +462,12 @@ Parameters:
 * $2 - the name of the wiki\'s page describing the terms of use
 * $3 - an external link to the license with the license\'s name as link text',
 	'wikibase-copyrighttooltip-acknowledge' => 'Label of the link to not show the copyright warning again. A copyright warning is presented to the user whenever the user is about to alter any data unless the warning is not suppressed permanently by clicking this link.',
-	'wikibase-entityselector-more' => 'The entity selector is a user interface widget that allows selecting an entity (see [[d:Wikidata/Glossary]]). It consists out of an input field and a list of suggestions that is filled according to the text typed into the input field. Initially, the list of suggestions is filled with a certain number of suggestions. Clicking the link labeled with this message will fill the list of suggestions with additional suggestions. If there are no additional suggestions or no suggestions at all, the link does not show up.
+	'wikibase-entityselector-more' => 'The entity selector is a user interface widget that allows selecting an entity (see [[d:Wikidata:Glossary]]). It consists out of an input field and a list of suggestions that is filled according to the text typed into the input field. Initially, the list of suggestions is filled with a certain number of suggestions. Clicking the link labeled with this message will fill the list of suggestions with additional suggestions. If there are no additional suggestions or no suggestions at all, the link does not show up.
 {{Identical|More}}',
-	'wikibase-anonymouseditwarning' => "Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on an entity (see [[d:Wikidata/Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in. $1 is the entity's name.
+	'wikibase-anonymouseditwarning' => "Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on an entity (see [[d:Wikidata:Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in.
+
+Parameters:
+* $1 - the entity's name
 
 See also:
 * {{msg-mw|Anoneditwarning}}
@@ -463,7 +476,9 @@ See also:
 	'wikibase-blockeduser-tooltip-message' => 'When the current user is blocked from editing a page (a data item), this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item or creating a new item.',
 	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|page]] and [[m:Wikidata/Glossary#item|item]].',
 	'wikibase-warning-constraint-violation-length' => 'A warning message that a length constraint is triggered. This will usually come together with a fatal error message.
-* $1 is the language code',
+
+Parameters:
+* $1 - the language code',
 	'wikibase-error-constraint-violation-label' => 'Error message shown when a user tries to save a multilabel label that has some constraint violation.
 * $1 is the count of violating languages
 * $2 is the violating languages
@@ -516,8 +531,8 @@ Title attribute set in links to an item. $1 is the items label or (if not availa
 	'wikibase-itembytitle-create' => 'Information about how to proceede to create a new item. This message is presented when a user searched (or requested by URL) for an item by site and page title (e.g. item, linked to a particular Wikipedia page in a particular language), but no item was found that linked to that page.  This gives the user the option to create a new item with the page title as the item label.  The user will be sent to the Create Item page and the label would be pre-populated.
 
 Parameters:
-* $1 is the site identifier used in the URL.
-* $2 is the page name on escaped form for use in the URL.',
+* $1 - the site identifier used in the URL
+* $2 - the page name on escaped form for use in the URL',
 	'special-itemdisambiguation' => "This special page returns all items with a given label. It provides an interface to disambiguate them. See also Wikidata's glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].",
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by language and label.',
 	'wikibase-itemdisambiguation-lookup-language' => 'Label for the textfield holding the language id.',
@@ -558,8 +573,8 @@ See also:
 {{Identical|Create}}',
 	'special-setlabel' => 'Title of the special page that allows the user to set a label for an entity',
 	'wikibase-setlabel-introfull' => 'Intro text when a label is to be set. Parameters:
-* $1 is the ID that links to the entity;
-* $2 is the translated language name (possibly autonym) the label is to be set in.',
+* $1 - the ID that links to the entity
+* $2 - the translated language name (possibly autonym) the label is to be set in',
 	'wikibase-setlabel-intro' => 'A short text at the top of the page that allows users to set the label of an entity, explaining the form.',
 	'wikibase-setlabel-label' => 'Label for the input field to type the label to set the entity to.
 {{Identical|Label}}',
@@ -567,8 +582,8 @@ See also:
 	'wikibase-setlabel-warning-remove' => 'A warning message to ask the user if he wants to remove the label. $1 is the id that links to the entity.',
 	'special-setdescription' => 'Title of the special page that allows the user to set a discription for an entity',
 	'wikibase-setdescription-introfull' => 'Intro text when a discription is to be set. Parameters:
-* $1 is the ID that links to the entity;
-* $2 is the translated language name (possibly autonym) the discription is to be set in.',
+* $1 - the ID that links to the entity
+* $2 - the translated language name (possibly autonym) the discription is to be set in',
 	'wikibase-setdescription-intro' => 'A short text at the top of the page that allows users to set the discription of an entity, explaining the form.',
 	'wikibase-setdescription-label' => 'Label for the input field to type the discription to set the entity to.
 {{Identical|Description}}',
@@ -593,11 +608,11 @@ See also:
 	'wikibase-setentity-invalid-id' => 'Response informing that the selected entity ID is not valid. $1 is the invalid ID.',
 	'special-listdatatypes' => 'This special page returns a list of available datatypes (such as commonsMedia)',
 	'wikibase-listdatatypes-intro' => 'Intro text for the ListDatatypes special page.',
-	'wikibase-history-title-with-label' => 'The title of the history page with label and prefixed id
-* $1 is the prefixed id, the id is usually in parenthesis
-* $2 is the localized label, it is usually in quotes',
-	'wikibase-history-title-without-label' => 'The title of the history page with only a prefixed id
-* $1 is the prefixed id, the id is usually in parenthesis',
+	'wikibase-history-title-with-label' => 'The title of the history page with label and prefixed id. Parameters:
+* $1 - the prefixed id, the id is usually in parenthesis
+* $2 - the localized label, it is usually in quotes',
+	'wikibase-history-title-without-label' => 'The title of the history page with only a prefixed id. Parameters:
+* $1 - the prefixed id, the id is usually in parenthesis',
 	'special-entitieswithoutlabel' => 'This special page returns a list of entities without label for a given language',
 	'wikibase-entitieswithoutlabel-legend' => 'Legend of the form that allow to change the language.',
 	'wikibase-entitieswithoutlabel-label-language' => 'Label for the input field to change the language.',
@@ -610,10 +625,12 @@ See also:
 	'special-itemswithoutsitelinks' => 'This special page returns a list of items without any site link',
 	'special-entitydata' => 'Title for special page that provides a linked data interface and easy way to get the JSON data representation for an entity.',
 	'wikibase-entitydata-not-found' => 'Error shown when no entity with the given ID could be found. Paramters:
-* $1 is the given ID',
-	'wikibase-entitydata-bad-revision' => 'Error shown when the requested revision of a data entity was not found or was not suitable. Paramters:
-* $1 the the entity ID
-* $2 is the requested revision ID',
+* $1 - the given ID',
+	'wikibase-entitydata-bad-revision' => 'Error shown when the requested revision of a data entity was not found or was not suitable.
+
+Paramters:
+* $1 - the the entity ID
+* $2 - the requested revision ID',
 	'wikibase-entitydata-unsupported-format' => 'Error shown when the requested output format is not supported for entity data.',
 	'wikibase-entitydata-title' => 'Title shown on the special page when a form or text is presented',
 	'wikibase-entitydata-text' => 'Explanatory text shown on the special page.',
@@ -673,10 +690,12 @@ This is an error message for a situation where the arguments to the API is incon
 	'wikibase-conflict-patched' => 'Warning issued when an edit is made based on an old revision, but the edit conflict could be resolved by patching. This warning is usually not displayed.',
 	'wikibase-restoreold' => "Link text shown on the link that lets the user restore the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
 	'wikibase-restore-summary' => 'Edit summary for a restore action. Parameters:
-* $1 is the revision id number;
-* $2 is the username whose changes are being undone.',
-	'wikibase-no-direct-editing' => 'Error messages if a direct (full-text) edit is attempted in an entity names. Parameters:
-* $1 is the name of the namespace for which direct editing was denied.',
+* $1 - the revision id number
+* $2 - the username whose changes are being undone',
+	'wikibase-no-direct-editing' => 'Error messages if a direct (full-text) edit is attempted in an entity names.
+
+Parameters:
+* $1 - the name of the namespace for which direct editing was denied',
 	'wikibase-noentity' => 'Of some reason the user tried to access an entity which then was detected as non-existing. This can happen when an entity is deleted and clients are not yet made aware of this.',
 	'wikibase-noentity-createone' => 'Put immediately after "wikibase-noentity" if the user has the right to create an entity of the given type. This message tells the user that he can create one and gives a link in $1 to the special page where this can be done.',
 	'wikibase-item-summary-wbsetitem' => 'Automatic edit summary generated when creating a new item. This is a legacy message.
@@ -700,10 +719,10 @@ This is an error message for a situation where the arguments to the API is incon
 
 This module generates a slightly different summary (autocomment) than the other ones.
 
-;Parameters:
-* $1 is the number of pages that were connected;
-* $2 is the site code for the from-page;
-* $3 is the site code for the to-page.',
+Parameters:
+* $1 - the number of pages that were connected
+* $2 - the site code for the from-page
+* $3 - the site code for the to-page',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{wikibase summary messages|item-claims|Automatic edit summary when a claim is created and a value is used. The values can be of various types, including but not limited to defined properties. This is a LEGACY value, needed for old log entries!}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => "{{wikibase summary messages|item-claims|Automatic edit summary when ''no value'' is supplied to the claim. A ''no value'' means that there are no valid value to be set for this claim, or that there are no existing value. This is a LEGACY value, needed for old log entries!}}",
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{wikibase summary messages|item-claims|Automatic edit summary when there should be a value but it is unknown. This is different from the case where there are no valid or existing value. This is a LEGACY value, needed for old log entries!}}',
@@ -1174,6 +1193,7 @@ $messages['bg'] = array(
 	'wikibase-sitelinks-empty' => 'За този обект все още липсват междуезикови препратки.',
 	'wikibase-remove' => 'премахване',
 	'wikibase-restore-title' => 'Възстановяване на стара версия на "$1"',
+	'wikibase-aliases-label' => 'Среща се и като:',
 	'wikibase-datatype-label' => 'Тип на данните:',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|източник|източници}}',
 	'wikibase-snakview-property-input-placeholder' => 'свойство',
@@ -1429,8 +1449,8 @@ $messages['ckb'] = array(
 	'wikibase-aliases-empty' => 'نازناوێک دیاری نەکراوە.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|سەرچاوە}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'ھێشتا {{PLURAL:$1|یەک سەرچاوە|$1 سەرچاوە}} پاشەکەوت نەکراوە',
-	'special-itembytitle' => 'بڕگەکان پە پێی سەردێر',
-	'wikibase-itemdisambiguation-nothing-found' => 'ببورە، بڕگەیەک بەم ناوەوە نەدۆزرایەوە.',
+	'special-itembytitle' => 'بەندەکان پە پێی سەردێر',
+	'wikibase-itemdisambiguation-nothing-found' => 'ببورە، بەندێک بەم ناوەوە نەدۆزرایەوە.',
 	'special-createitem' => 'بڕگەیەکی نوێ دروست بکە',
 	'wikibase-createitem-fieldset' => 'بڕگەیەکی نوێ دروست بکە',
 );
@@ -1783,6 +1803,8 @@ $messages['de'] = array(
 	'wikibase-shortcopyrightwarning' => 'Durch Klicken auf „$1“ stimmst du den [[$2|Nutzungsbedingungen]] und unwiderruflich der Veröffentlichung deines Beitrags unter der $3 zu.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Ich akzeptiere diese Bedingungen für meine zukünftigen Bearbeitungen. Diese Nachricht nicht mehr anzeigen.',
 	'wikibase-entityselector-more' => 'mehr',
+	'wikibase-anonymouseditwarning' => 'Warnung: Du bist nicht angemeldet.
+Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespeichert.',
 	'wikibase-restrictionedit-tooltip-message' => 'Diese Seite wurde geschützt, so dass Bearbeitungen nicht möglich sind.',
 	'wikibase-blockeduser-tooltip-message' => 'Du wurdest gesperrt und kannst daher keine Bearbeitungen machen.',
 	'wikibase-move-error' => 'Du kannst keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
@@ -2018,6 +2040,7 @@ $messages['dsb'] = array(
 	'wikibase-label-empty' => 'Hyšći njejo se žedne pomjenjenje definěrowało.',
 	'wikibase-label-edit-placeholder' => 'pomjenjenje zapódaś',
 	'wikibase-description-empty' => 'Hyšće njejo se žedne wopisanje definěrowało',
+	'wikibase-deletedentity' => 'Jo $1 wulašował',
 	'wikibase-description-edit-placeholder' => 'wopisanje zapódaś',
 	'wikibase-sitelink-site-edit-placeholder' => 'sedło',
 	'wikibase-sitelink-page-edit-placeholder' => 'nastwk',
@@ -2057,8 +2080,10 @@ $messages['dsb'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak typa "$1". Wobźěłowanje za toś tu družynu Snak hyšći se njepódpěra.',
 	'wikibase-snakview-choosesnaktype' => 'Wubjeŕ gódnotowy typ.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Wobźěłowanje gódnotow za datowy typ "$1" hyšći se njepódpěra.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Wobźěłowanje datowych gódnotow "$1" hyšći se njepódpěra.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Gódnota njewótpowědujo definiciji kakosći.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Datowy gódnotowy typ "$1" gódnoty njewótpowědujo datowemu gódnotowemu typoju "$2" kakosći.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Njejo móžno, nowu gódnotu za wulašowanu kakosć definěrowaś.',
 	'wikibase-snakview-variations-somevalue-label' => 'njeznata gódnota',
 	'wikibase-snakview-variations-novalue-label' => 'žedna gódnota',
 	'wikibase-snakview-snaktypeselector-value' => 'swójska gódnota',
@@ -2067,6 +2092,7 @@ $messages['dsb'] = array(
 	'wikibase-shortcopyrightwarning' => 'Pśez kliknjenje na "$1" zwólijoš do [[$2|wužywańskich wuměnjenjow]] a sy definitiwnje z tym wobjadny, swój pśinosk pód $3 stajiś.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Akceptěruju toś te wuměnjenja za swóje pśiduce změny. Njepokaž toś tu powěźeńku hyšći raz.',
 	'wikibase-entityselector-more' => 'wěcej',
+	'wikibase-anonymouseditwarning' => 'Warnowanje: Njejsy pśizjawjony. Twója IP-adresa buźo se we wersijowej historiji toś teje $1 registrěrowaś.',
 	'wikibase-restrictionedit-tooltip-message' => 'Toś ten bok jo šćitany, wobźěłowanje njejo dowólone.',
 	'wikibase-blockeduser-tooltip-message' => 'Sy blokěrowany a njamóžoš togodla wobźěłaś.',
 	'wikibase-move-error' => 'Njamóžoš boki pśesunuś, kótarež su w datowem mjenjowem rumje, a njamóžoš boki do njego pśesunuś.',
@@ -2215,11 +2241,49 @@ $messages['dsb'] = array(
 	'right-description-update' => 'Wopisanja aktualizěrowaś',
 );
 
+/** Greek (Ελληνικά)
+ * @author Geraki
+ */
+$messages['el'] = array(
+	'specialpages-group-wikibaserepo' => 'Wikibase αποθετήριο',
+	'wikibase-edit' => 'επεξεργασία',
+	'wikibase-save' => 'αποθήκευση',
+	'wikibase-cancel' => 'άκυρο',
+	'wikibase-add' => 'προσθήκη',
+	'wikibase-addreference' => 'προσθήκη πηγής',
+	'wikibase-save-inprogress' => 'Αποθηκεύεται...',
+	'wikibase-remove-inprogress' => 'Αφαιρείται...',
+	'wikibase-label-empty' => 'Δεν έχει ορισθεί ακόμη ετικέτα',
+	'wikibase-label-edit-placeholder' => 'προσθέστε ετικέτα',
+	'wikibase-description-empty' => 'Δεν ορίστηκε ακόμα περιγραφή',
+	'wikibase-deletedentity' => 'Διαγράφηκε το $1',
+	'wikibase-description-edit-placeholder' => 'προσθέστε περιγραφή',
+	'wikibase-description-input-help-message' => 'Πληκτρολογήστε μια σύντομη περιγραφή στα $1 .',
+	'wikibase-terms' => 'Σε άλλες γλώσσες',
+	'wikibase-remove' => 'αφαίρεση',
+	'wikibase-disambiguation-title' => 'Αποσαφήνιση για "$1"',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|Πηγή|πηγές}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Μια πηγή|$1 πηγές}} δεν έχουν ακόμη αποθηκευτεί',
+	'special-createitem' => 'Δημιουργία νέου αντικείμενου',
+);
+
 /** Canadian English (Canadian English)
  * @author Aude
  */
 $messages['en-ca'] = array(
 	'wikibase-desc' => 'Structured data repository',
+);
+
+/** British English (British English)
+ * @author Shirayuki
+ * @author Thehelpfulone
+ */
+$messages['en-gb'] = array(
+	'wikibase-deletedentity' => 'Deleted $1',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Handling of "$1" data values is not yet supported.',
+	'wikibase-anonymouseditwarning' => 'Warning: You are not logged in.
+Your IP address will be recorded in the edit history of this $1.',
+	'wikibase-createitem-not-recognized-siteid' => 'The supplied site identifier was not recognised.',
 );
 
 /** Esperanto (Esperanto)
@@ -2913,6 +2977,7 @@ $messages['fi'] = array(
 	'wikibase-label-empty' => 'Nimeä ei ole vielä lisätty',
 	'wikibase-label-edit-placeholder' => 'kirjoita nimi',
 	'wikibase-description-empty' => 'Kuvausta ei ole vielä lisätty',
+	'wikibase-deletedentity' => '$1 poistettu',
 	'wikibase-description-edit-placeholder' => 'kirjoita kuvaus',
 	'wikibase-sitelink-site-edit-placeholder' => 'sivusto',
 	'wikibase-sitelink-page-edit-placeholder' => 'artikkeli',
@@ -2961,6 +3026,8 @@ $messages['fi'] = array(
 	'wikibase-shortcopyrightwarning' => 'Klikkaamalla "$1", hyväksyt [[$2|käyttöehdot]], ja suostut siihen, että muokkauksesi julkaistaan lisenssin $3 alaisena.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Hyväksyn nämä ehdot tulevissa muokkauksissani. Älä näytä tätä viestiä uudelleen.',
 	'wikibase-entityselector-more' => 'lisää',
+	'wikibase-anonymouseditwarning' => 'Varoitus: Et ole kirjautunut sisään.
+IP-osoitteesi kirjataan sivun $1 muokkaushistoriaan.',
 	'wikibase-restrictionedit-tooltip-message' => 'Tämä sivu on suojattu. Muokkaaminen ei ole sallittua.',
 	'wikibase-blockeduser-tooltip-message' => 'Sinut on estetty muokkaamasta.',
 	'wikibase-warning-constraint-violation-length' => 'Kielikoodi $1 on liian pitkä.',
@@ -3034,6 +3101,7 @@ $messages['fi'] = array(
 	'special-entitieswithoutlabel' => 'Aiheet ilman nimeä',
 	'wikibase-entitieswithoutlabel-legend' => 'Hae luettelo aiheista ilman nimeä',
 	'wikibase-entitieswithoutlabel-label-language' => 'Kieli',
+	'wikibase-entitieswithoutlabel-label-type' => 'Tyyppi',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'kaikki',
 	'wikibase-entitieswithoutlabel-submit' => 'Etsi',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" ei ole kelvollinen kielikoodi.',
@@ -3186,6 +3254,8 @@ $messages['fr'] = array(
 	'wikibase-shortcopyrightwarning' => "En cliquant sur « $1 » , vous acceptez les [[$2|conditions d'utilisation]] et acceptez acceptez de placer irrévocablement votre contribution sous $3.",
 	'wikibase-copyrighttooltip-acknowledge' => 'J’accepte ces conditions pour mes prochaines modifications. Ne plus afficher ce message.',
 	'wikibase-entityselector-more' => 'plus',
+	'wikibase-anonymouseditwarning' => 'Attention: Vous n’êtes pas connecté.
+Votre adresse IP sera enregistrée dans l’historique des modifications de ce $1.',
 	'wikibase-restrictionedit-tooltip-message' => "Cette page est protégée. L'édition n'est pas autorisée.",
 	'wikibase-blockeduser-tooltip-message' => 'Vous êtes bloqué(e) en édition.',
 	'wikibase-move-error' => "Vous ne pouvez pas déplacer des pages situées dans l'espace des données, ni déplacer des pages vers cet espace.",
@@ -3553,8 +3623,10 @@ $messages['gl'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak de tipo "$1". A manipulación deste tipo de Snak aínda non está soportada.',
 	'wikibase-snakview-choosesnaktype' => 'Escolla un tipo de valor.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'A manipulación de valores para o tipo de datos "$1" aínda non está soportada.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'A manipulación de valores de datos "$1" aínda non está soportada.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'O valor non se axusta á definición da propiedade.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'O tipo de valor de datos do valor "$1" non coincide co tipo de valor de datos do tipo de datos da propiedade "$2".',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Non é posible definir un novo valor para unha propiedade borrada.',
 	'wikibase-snakview-variations-somevalue-label' => 'valor descoñecido',
 	'wikibase-snakview-variations-novalue-label' => 'sen valor',
 	'wikibase-snakview-snaktypeselector-value' => 'valor personalizado',
@@ -3750,6 +3822,7 @@ $messages['gu'] = array(
 /** Hebrew (עברית)
  * @author Amire80
  * @author Inkbug
+ * @author ערן
  */
 $messages['he'] = array(
 	'wikibase-desc' => 'מאגר נתונים מובנה',
@@ -3803,8 +3876,10 @@ $messages['he'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'סנאק מסוג "$1". עדיין אין תמיכה בטיפול בסוג כזה של סנאק.',
 	'wikibase-snakview-choosesnaktype' => 'נא לבחור את סוג הערך.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'עדיין אין תמיכה בטיפול בערכים מסוג "$1".',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'טיפול בערכי נתונים מסוג "$1" אינו נתמך עדיין.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'הערך אינו מתאים להגדרת המאפיין.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'סוג הנתונים "$1" של הערך אינו תואם את סוג הנתונים של המאפיין "$2".',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'אין זה אפשרי להגדיר ערך חדש למאפיין שנמחק.',
 	'wikibase-snakview-variations-somevalue-label' => 'ערך בלתי־ידוע',
 	'wikibase-snakview-variations-novalue-label' => 'אין ערך',
 	'wikibase-snakview-snaktypeselector-value' => 'ערך מותאם אישית',
@@ -3813,9 +3888,8 @@ $messages['he'] = array(
 	'wikibase-shortcopyrightwarning' => 'בלחיצה על "$1" היא הסכמה ל[[$2|תנאי השימוש]] ולשחרור של תרומתך לפי $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'קיבלתי את התנאים האלה לכל העריכות העתידיות שלי. אל תראו לי את ההודעה הזאת שוב.',
 	'wikibase-entityselector-more' => 'עוד',
-	'wikibase-anonymouseditwarning-item' => 'אזהרה: לא נכנסתם לחשבון.
-כתובת ה־IP שלכם תירשם בהיסטוריית הדף הזה.',
-	'wikibase-anonymouseditwarning-property' => 'אזהרה: לא נכנסת לחשבון. כתובת ה־IP שלך תירשם בהיסטוריית העריכות של המאפיין הזה.',
+	'wikibase-anonymouseditwarning' => 'אזהרה: לא נכנסת לחשבון.
+כתובת ה־IP שלך תירשם בהיסטוריית העריכות של ה{{GRAMMAR:תחילית|$1}}.',
 	'wikibase-restrictionedit-tooltip-message' => 'הדף הזה מוגן. לא ניתן לערוך.',
 	'wikibase-blockeduser-tooltip-message' => 'נחסמת מעריכה.',
 	'wikibase-move-error' => 'לא ניתן להעביר דפים במרחב נתונים, ולא ניתן להעביר דפים אליו.',
@@ -3827,7 +3901,7 @@ $messages['he'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'למאפיין אחר ($3) כבר יש תווית "$1" שמזוהה עם קוד השפה $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'לשאילתה אחרת ($3) כבר יש תווית "$1" שמזוהה עם קוד השפה $2',
 	'wikibase-error-label-not-unique-item' => 'לפריט אחר ($3) כבר יש תווית "$1" ותיאור "$4" שמזוהה עם קוד השפה $2',
-	'special-itembytitle' => 'פריט לפי כותרת',
+	'special-itembytitle' => 'פריט לפי קישור אתר',
 	'wikibase-itembytitle-lookup-fieldset' => 'חיפוש פריטים לפי אתר וכותרת',
 	'wikibase-itembytitle-lookup-site' => 'אתר:',
 	'wikibase-itembytitle-lookup-page' => 'דף:',
@@ -3836,9 +3910,9 @@ $messages['he'] = array(
 	'wikibase-itembytitle-invalid-site' => 'לא ניתן להשתמש השאילתה הקודמת לחיפוש. יש לספק מזהה אתר תקין.',
 	'wikibase-itembytitle-description' => 'אתר הוא קוד מזהה, כגון "enwiki".',
 	'wikibase-itembytitle-create' => 'אפשר גם [{{fullurl:Special:CreateItem|site=$1&page=$2}} ליצור פריט].',
-	'special-itemdisambiguation' => 'פירושונים: פריטים עם אותה תווית',
-	'wikibase-itemdisambiguation-lookup-fieldset' => 'חיפוש פריטים לפי תווית',
-	'wikibase-itemdisambiguation-lookup-language' => 'שפה¹&rlm;²:',
+	'special-itemdisambiguation' => 'הבהרת פירוש של פריט',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'חיפוש פריטים לפי שפה ותווית',
+	'wikibase-itemdisambiguation-lookup-language' => 'שפה:',
 	'wikibase-itemdisambiguation-lookup-label' => 'תווית:',
 	'wikibase-itemdisambiguation-submit' => 'חיפוש',
 	'wikibase-itemdisambiguation-nothing-found' => 'מצטערים, לא נמצא שום פריט עם התווית הזאת.',
@@ -3887,11 +3961,15 @@ $messages['he'] = array(
 	'wikibase-listdatatypes-intro' => 'זוהי רשימה של כל סוגי הנתונים שמשמשים בהתקנה הזאת:',
 	'wikibase-history-title-with-label' => 'היסטוריית הגרסאות של "$2" (מזהה: $1)',
 	'wikibase-history-title-without-label' => 'היסטוריית הגרסאות של ($1)',
-	'special-entitieswithoutlabel' => 'רשימת ישויות ללא תווית', # Fuzzy
+	'special-entitieswithoutlabel' => 'ישויות ללא תווית',
 	'wikibase-entitieswithoutlabel-legend' => 'לקבל רשימת ישויות ללא תווית',
 	'wikibase-entitieswithoutlabel-label-language' => 'שפה:',
+	'wikibase-entitieswithoutlabel-label-type' => 'סוג:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'הכול',
 	'wikibase-entitieswithoutlabel-submit' => 'למצוא',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" אינו קוד שפה תקין.',
+	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" הוא לא סוג ישות תקין.',
+	'special-itemswithoutsitelinks' => 'פריטים ללא קישורי אתר',
 	'special-entitydata' => 'נתוני ישות',
 	'wikibase-entitydata-not-found' => 'לא נמצאה ישות עם המזהה $1.',
 	'wikibase-entitydata-bad-revision' => 'לא ניתן להציג את הגרסה $2 של הישות $1.',
@@ -4001,6 +4079,7 @@ $messages['hsb'] = array(
 	'wikibase-label-empty' => 'Hišće njeje so žane woznamjenjenje definowało.',
 	'wikibase-label-edit-placeholder' => 'pomjenowanje zapodać',
 	'wikibase-description-empty' => 'Hišće njeje so žane wopisanje definowało.',
+	'wikibase-deletedentity' => 'Jo $1 zhašał',
 	'wikibase-description-edit-placeholder' => 'wopisanje zapodać',
 	'wikibase-sitelink-site-edit-placeholder' => 'sydło',
 	'wikibase-sitelink-page-edit-placeholder' => 'nastawk',
@@ -4040,8 +4119,10 @@ $messages['hsb'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak typa "$1". Wobdźěłowanje za tutu družinu Snak hišće so njepodpěruje.',
 	'wikibase-snakview-choosesnaktype' => 'Wubjer hódnotowy typ.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Wobdźěłowanje hódnotow za datowy typ "$1" hišće so njepodpěruje.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Wobdźěłowanje datowych hódnotow "$1" so hišće njepodpěruje.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Hódnota definiciji kajkosće njewotpowěduje.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Datowy hódnotowy typ "$1" hódnoty datowemu hódnotowemu typej "$2" kajkosće njewotpowěduje.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Njeje móžno, nowu hódnotu za zhašanu kajkosć definować.',
 	'wikibase-snakview-variations-somevalue-label' => 'njeznata hódnota',
 	'wikibase-snakview-variations-novalue-label' => 'žana hódnota',
 	'wikibase-snakview-snaktypeselector-value' => 'swójska hódnota',
@@ -4050,6 +4131,7 @@ $messages['hsb'] = array(
 	'wikibase-shortcopyrightwarning' => 'Přez kliknjenje na "$1" zwoliš do [[$2|wužiwanskich wuměnjenjow]] a sy definitiwnje z tym přezjedny, swój přinošk pod $3 stajić.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Akceptuju tute wuměnjenja za swoje přichodne změny. Njepokazaj tutu zdźělenku hišće raz.',
 	'wikibase-entityselector-more' => 'wjace',
+	'wikibase-anonymouseditwarning' => 'Warnowanje: Njejsy přizjewjeny. Twoja IP-adresa budźe so do wersijowych stawiznow tuteje $1 přijimać.',
 	'wikibase-restrictionedit-tooltip-message' => 'Tuta strona je škitana, wobdźěłowanje njeje dowolene.',
 	'wikibase-blockeduser-tooltip-message' => 'Sy zablokowany a njemóžeš tohodla ničo wobdźěłać.',
 	'wikibase-move-error' => 'Njemóžeš strony přesunyć, kotrež su w datowym mjenowym rumje, a njemóžeš strony do njeho přesunyć.',
@@ -4469,6 +4551,7 @@ $messages['ilo'] = array(
 	'wikibase-label-empty' => 'Awan pay ti etiketa a naipalawag',
 	'wikibase-label-edit-placeholder' => 'ikabil ti etiketa',
 	'wikibase-description-empty' => 'Awan pay ti deskripsion a naipalawag',
+	'wikibase-deletedentity' => 'Inikkat ti $1',
 	'wikibase-description-edit-placeholder' => 'ikabil ti deskripsion',
 	'wikibase-sitelink-site-edit-placeholder' => 'sitio',
 	'wikibase-sitelink-page-edit-placeholder' => 'artikulo',
@@ -4477,7 +4560,7 @@ $messages['ilo'] = array(
 	'wikibase-description-input-help-message' => 'Agikabil ti ababa a deskripsion ti $1.',
 	'wikibase-statements' => 'Insasao',
 	'wikibase-terms' => 'Kadagiti sabali a pagsasao',
-	'wikibase-sitelinks-add' => 'agnayon ti silpo iti sitio a silpo',
+	'wikibase-sitelinks-add' => 'agnayon ti silpo iti maysa a silpo ti sitio',
 	'wikibase-sitelinks-empty' => 'Awan pay ti sitio a silpo para iti daytoy a banag.',
 	'wikibase-sitelinks-input-help-message' => 'Idisso ti silpo iti maysa a panid a mainaig ti daytoy a banag.',
 	'wikibase-remove' => 'ikkaten',
@@ -4508,8 +4591,10 @@ $messages['ilo'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak ti kita ti "$1". Ti panagtengngel para iti kastoy a kita ti Snak ket saan pay a nasuportaran.',
 	'wikibase-snakview-choosesnaktype' => 'Agpili ti maysa a kita ti pateg.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Ti panagtengngel kadagiti pateg para iti "$1" a kita ti datos ket saan pay a nasuportaran.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Ti panagtengngel ti "$1" a patpateg ti datos ket saan pay a nasuportaran.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Ti pateg ket saan nga agtungpal iti panagipalpalawag ti tagikua.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Ti datos a kita ti pateg ti "$1" ti pateg ket saan a maipada ti datos a kita ti pateg ti "$2" ti kita a datos ti tagikua.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Saan a mabalin a naganan ti maysa a baro a pateg para iti maysa a naikkat a tagikua.',
 	'wikibase-snakview-variations-somevalue-label' => 'di ammo a pateg',
 	'wikibase-snakview-variations-novalue-label' => 'awan ti pateg',
 	'wikibase-snakview-snaktypeselector-value' => 'naidumduma a pateg',
@@ -4518,10 +4603,8 @@ $messages['ilo'] = array(
 	'wikibase-shortcopyrightwarning' => 'Babaen ti panagpindut ti "$1", umannurotka kadagiti [[$2|termino ti panag-usar]], ken dika mawaswas nga umannurot a mangibbet kadagiti inparawadmo bababen ti $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Awatek dagitoy a termino para kadagiti amin a masakbayan nga urnosek. Saanton nga iparang daytoy a mensahe.',
 	'wikibase-entityselector-more' => 'adu pay',
-	'wikibase-anonymouseditwarning-item' => "'''Ballaag:''' Saanka a nakastrek.
-Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a banag.",
-	'wikibase-anonymouseditwarning-property' => "'''Ballaag:''' Saanka a nakastrek.
-Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a tagikua.",
+	'wikibase-anonymouseditwarning' => 'Ballaag: Saanka a nakastrek.
+Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a $1.',
 	'wikibase-restrictionedit-tooltip-message' => 'Daytoy a panid ket nasalakniban. Saan a maipalubos ti agurnos.',
 	'wikibase-blockeduser-tooltip-message' => 'Naseraanka manipud ti panagurnos.',
 	'wikibase-move-error' => 'Saanmo a mabalin nga iyalis dagiti panid nga adda datos a nagan ti lugar, ken saanmo a mabalin ti agiyalis kadagiti panid iti daytoy.',
@@ -4541,7 +4624,7 @@ Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a tagik
 	'wikibase-itembytitle-nothing-found' => 'Awan ti banag a nabirukan babaen ti dati a panabiruk. Pangngaasi a pasayaatan ti panagsapul nga adda ti nasaysayaat a panagilasin ti akin-ruar a panid.',
 	'wikibase-itembytitle-invalid-site' => 'Ti dati a panagsapul ket saan amabalin nga usaren para iti maysa apanagbiruk. Pangngaasi a mangited ti umiso a panagilasin ti sitio.',
 	'wikibase-itembytitle-description' => 'Ti sitio ket panagilasin akodigo, a kas ti "enwiki".',
-	'wikibase-itembytitle-create' => 'Mabalinmo pay ti [{{fullurl:Special:CreateItem|site=$1&page=$2}} agpartuat ti maysa abanag].',
+	'wikibase-itembytitle-create' => 'Mabalinmo pay ti [{{fullurl:Special:CreateItem|site=$1&page=$2}} agpartuat ti maysa a banag].',
 	'special-itemdisambiguation' => 'Panagipalpalawag: Dagiti banag nga adda ti agpapada nga etiketa', # Fuzzy
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'Agbiruk para kadagiti banag babaen ti etiketa', # Fuzzy
 	'wikibase-itemdisambiguation-lookup-language' => 'Pagsasao:',
@@ -4581,7 +4664,7 @@ Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a tagik
 	'wikibase-setdescription-warning-remove' => 'Agpayso kadi a kayatmo nga ikkaten ti deskripsion ti [[$1]]?',
 	'special-setaliases' => 'Agidisso ti sabali a nagnagan',
 	'wikibase-setaliases-introfull' => 'Agidisdissoka ti sabali a nagnagan iti $2 para iti [[$1]]. Dagiti nadumaduma a sabali a nagnagan ket naisinsina babaen ti <code>|</code>.',
-	'wikibase-setaliases-intro' => 'Daytoy a porma ket mangpalubos kaniam nga agidisso ti sabsabali a nagan ti maysa nga entidad. Nasken a mangitedka ti ID ti entidad (e.g. Q23), ti maysa a kodigo ti pagsasao (e.g. "en") ken ti sabsabali a nagan a pagidissoan. Dagiti nadumaduma a sabali a nagnagan ket naisinsina babaen ti <code>|</code>.',
+	'wikibase-setaliases-intro' => 'Daytoy a porma ket mangpalubos kaniam nga agidisso ti sabsabali a nagan ti maysa nga entidad. Nasken a mangitedka ti ID ti entidad (a kas ti Q23), ti maysa a kodigo ti pagsasao (a kas ti "en") ken ti sabsabali a nagan a pagidissoan. Dagiti nadumaduma a sabali a nagnagan ket naisinsina babaen ti <code>|</code>.',
 	'wikibase-setaliases-label' => 'Sabali a nagnagan:',
 	'wikibase-setaliases-submit' => 'Agidisso ti sabali a nagnagan',
 	'wikibase-setaliases-warning-remove' => 'Agpayso kadi a kayatmo nga ikkaten ti sabali a nagnagan ti [[$1]]?',
@@ -4596,8 +4679,11 @@ Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a tagik
 	'special-entitieswithoutlabel' => 'Listaan dagiti entidad nga awan ti etiketana', # Fuzzy
 	'wikibase-entitieswithoutlabel-legend' => 'Agala kadagiti entidad nga awan ti etiketana',
 	'wikibase-entitieswithoutlabel-label-language' => 'Pagsasao:',
+	'wikibase-entitieswithoutlabel-label-type' => 'Kita:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'amin',
 	'wikibase-entitieswithoutlabel-submit' => 'Biruken',
 	'wikibase-entitieswithoutlabel-invalid-language' => 'Ti "$1" ket saan nga umiso a kodigo ti pagsasao.',
+	'wikibase-entitieswithoutlabel-invalid-type' => 'Ti "$1" ket saan nga husto a kita ti entidad.',
 	'special-itemswithoutsitelinks' => 'Dagiti banag nga awan dagiti silpona ti sitio',
 	'special-entitydata' => 'Datos ti entidad',
 	'wikibase-entitydata-not-found' => 'Awan ti nabirukan nga entidad nga adda ti ID ti $1.',
@@ -4610,7 +4696,7 @@ Mairehistro ti IP a pagtaengam iti pakasaritaan ti panagurnos iti daytoy a tagik
 	'wikibase-conflict-patched' => 'Ti inurnosmo ket natakupan idiay kinaudi a bersion.',
 	'wikibase-restoreold' => 'isubli',
 	'wikibase-restore-summary' => 'Isubli ti panagbalbaliw ti $1 babaen ti [[Special:Contributions/$2|$2]]',
-	'wikibase-no-direct-editing' => 'Ti dagus apanagurnos ket nabaldado idiay nagan ti lugar ti $1',
+	'wikibase-no-direct-editing' => 'Ti dagus a panagurnos ket nabaldado idiay nagan ti lugar ti $1',
 	'wikibase-noentity' => 'Daytoy nga agsmang ti datos ket awan. Mabalinmo ti
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} kadagiti mainaig a listaan]</span>
 tapno birukem ti napananda.',
@@ -4906,6 +4992,7 @@ $messages['it'] = array(
 	'wikibase-label-empty' => 'Nessuna etichetta ancora definita.',
 	'wikibase-label-edit-placeholder' => 'inserisci etichetta',
 	'wikibase-description-empty' => 'Nessuna descrizione ancora definita.',
+	'wikibase-deletedentity' => '$1 cancellato/a',
 	'wikibase-description-edit-placeholder' => 'inserisci descrizione',
 	'wikibase-sitelink-site-edit-placeholder' => 'sito',
 	'wikibase-sitelink-page-edit-placeholder' => 'voce',
@@ -4946,6 +5033,7 @@ $messages['it'] = array(
 	'wikibase-snakview-choosesnaktype' => 'Scegli un tipo di valore.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'La gestione dei valori per il tipo di dati "$1" non è ancora supportata.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Il valore non è conforme con la definizione della proprietà.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Non è possibile definire un nuovo valore per una proprietà cancellata.',
 	'wikibase-snakview-variations-somevalue-label' => 'valore sconosciuto',
 	'wikibase-snakview-variations-novalue-label' => 'nessun valore',
 	'wikibase-snakview-snaktypeselector-value' => 'valore personalizzato',
@@ -4954,6 +5042,8 @@ $messages['it'] = array(
 	'wikibase-shortcopyrightwarning' => 'Cliccando su "$1", accetti le [[$2|condizioni d\'uso]], ed accetti irrevocabilmente a rilasciare il tuo contributo in base alla $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Accetto questi termini per le mie future modifiche. Non mostrare di nuovo questo messaggio.',
 	'wikibase-entityselector-more' => 'altro',
+	'wikibase-anonymouseditwarning' => 'Attenzione: Accesso non effettuato.
+Nella cronologia di $1 verrà registrato il tuo indirizzo IP.',
 	'wikibase-restrictionedit-tooltip-message' => 'Questa pagina è protetta, la modifica non è consentita.',
 	'wikibase-blockeduser-tooltip-message' => 'Sei stato bloccato, non puoi fare modifiche.',
 	'wikibase-move-error' => 'Non è possibile spostare le pagine che sono nel namespace dei dati e non è possibile spostare le pagine in esso.',
@@ -5012,13 +5102,13 @@ $messages['it'] = array(
 	'wikibase-setdescription-introfull' => 'Stai impostando la descrizione in $2 per [[$1]].',
 	'wikibase-setdescription-intro' => 'Questo modulo ti consente di impostare la descrizione per un\'entità. È necessario fornire l\'ID dell\'entità (per esempio "Q23"), il codice della lingua (per esempio "it") e la descrizione da impostare.',
 	'wikibase-setdescription-label' => 'Descrizione:',
-	'wikibase-setdescription-submit' => 'Imposta la descrizione',
+	'wikibase-setdescription-submit' => 'Imposta descrizione',
 	'wikibase-setdescription-warning-remove' => 'Vuoi davvero rimuovere la descrizione da [[$1]]?',
-	'special-setaliases' => 'Imposta alias',
+	'special-setaliases' => 'Imposta gli alias',
 	'wikibase-setaliases-introfull' => 'Stai impostando gli alias in $2 per [[$1]]. Alias diversi sono separati da <code>|</code>.',
 	'wikibase-setaliases-intro' => 'Questo modulo ti consente di impostare gli alias per un\'entità. È necessario fornire l\'ID dell\'entità (per esempio "Q23"), il codice della lingua (per esempio "it") e gli alias da impostare. Alias diversi sono separati da <code>|</code>.',
 	'wikibase-setaliases-label' => 'Alias:',
-	'wikibase-setaliases-submit' => 'Imposta gli alias',
+	'wikibase-setaliases-submit' => 'Imposta alias',
 	'wikibase-setaliases-warning-remove' => 'Vuoi davvero rimuovere gli alias da [[$1]]?',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Lingua:',
@@ -5152,7 +5242,7 @@ $messages['ja'] = array(
 	'wikibase-aliases-label' => '別名:',
 	'wikibase-aliases-empty' => '別名は定義されていません。',
 	'wikibase-datatype-label' => 'データの型:',
-	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|情報源}}',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '個の{{PLURAL:$1|情報源}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|$1件の情報源}}がまだ保存されていません',
 	'wikibase-snakview-property-input-placeholder' => 'プロパティ',
 	'wikibase-snakview-choosesnaktype' => '値の型を指定してください。',
@@ -5778,11 +5868,13 @@ $messages['lv'] = array(
 	'wikibase-terms' => 'Citās valodās',
 	'wikibase-remove' => 'dzēst',
 	'wikibase-undo-title' => 'Atceļ "$1" labojumu',
+	'wikibase-partial-undo' => 'Labojumu daļēji var atcelt.',
 	'wikibase-undo-revision-error' => 'Atcelšana neizdevās',
 	'wikibase-undo-firstrev' => 'Nevar atcelt lapas izveidi',
 	'wikibase-propertyedittool-full' => 'Vērtību saraksts ir pilnīgs.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Viena vērtība vēl nav saglabāta|$1 vērtības vēl nav saglabātas}}',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|ieraksts|ieraksti}}',
+	'wikibase-sitelinksedittool-full' => 'Saites uz lapām jau ir norādītas visām zināmajām vietnēm.',
 	'wikibase-disambiguation-title' => '"$1" nozīmju atdalīšana',
 	'wikibase-aliases-label' => 'Zināms arī kā:',
 	'wikibase-datatype-label' => 'Datu tips:',
@@ -5797,6 +5889,7 @@ $messages['lv'] = array(
 	'wikibase-snakview-snaktypeselector-novalue' => 'nav vērtības',
 	'wikibase-copyrighttooltip-acknowledge' => 'Es piekrītu šiem noteikumiem saviem nākotnes labojumiem. Turpmāk nerādīt šo ziņojumu.',
 	'wikibase-entityselector-more' => 'vairāk',
+	'wikibase-restrictionedit-tooltip-message' => 'Šī lapa ir aizsargāta. Rediģēšana nav atļauta.',
 	'wikibase-itembytitle-lookup-site' => 'Vietne:',
 	'wikibase-itembytitle-lookup-page' => 'Lapa:',
 	'wikibase-itembytitle-submit' => 'Meklēt',
@@ -7179,89 +7272,89 @@ $messages['pms'] = array(
 	'special-createitem' => "Creé n'element neuv",
 	'wikibase-createitem-fieldset' => "Creé n'element neuv",
 	'wikibase-createitem-site' => 'Sit dla prima pàgina colegà',
-	'wikibase-createitem-page' => 'Nòm ëd la prima pagina colegà',
-	'wikibase-createitem-no-external-page' => 'La pagina specificà a peul pa esse trovà dzor ël sit corispondent.',
-	'wikibase-createitem-add-sitelink-failed' => 'Ël colegament dël sit a peul pa esse salvà.',
-	'wikibase-createitem-not-recognized-siteid' => "L'identificator dàit dël sit a l'é pa stàit arconossù.",
+	'wikibase-createitem-page' => 'Nòm ëd la prima pàgina colegà',
+	'wikibase-createitem-no-external-page' => "La pàgina specificà a l'é nen podusse trové an sël sit corëspondent.",
+	'wikibase-createitem-add-sitelink-failed' => "La liura dël sit a l'ha nen podù esse salvà.",
+	'wikibase-createitem-not-recognized-siteid' => "L'identificator dël sit dàit a l'é nen ëstàit arconossù.",
 	'wikibase-createentity-label' => 'Tichëtta:',
 	'wikibase-createentity-description' => 'Descrission:',
 	'wikibase-createentity-submit' => 'Crea',
 	'special-setlabel' => 'Ampòsta na tichëtta',
-	'wikibase-setlabel-introfull' => 'It të stas ampostand la tichëtta an $2 për [[$1]].',
-	'wikibase-setlabel-intro' => "Ato formolari a përmëtt d'amposté la tichëtta ëd na entità. It deuve dé l'ID ëd n'entità (esempi Q23), un còdes ëd lenga (esempi \"en\") e la tichëtta d'amposté.",
+	'wikibase-setlabel-introfull' => "A l'é an camin a amposté la tichëtta an $2 për [[$1]].",
+	'wikibase-setlabel-intro' => "Ës formolari a-j përmët d'amposté la tichëtta ëd n'entità. A dev fornì l'ID ëd l'entità (për esempi Q23), un còdes ëd lenga (për esempi «en») e la tichëtta da amposté.",
 	'wikibase-setlabel-label' => 'Tichëtta', # Fuzzy
 	'wikibase-setlabel-submit' => 'Ampòsta la tichëtta',
 	'wikibase-setentity-id' => 'ID', # Fuzzy
 	'wikibase-setentity-language' => 'Lenga', # Fuzzy
-	'wikibase-setentity-invalid-langcode' => 'L\'identificator ëd lenga "$1" a l\'é pa conossù. Për piasì dòvra n\'identificator ëd lenga conossù al sistem, tal com "en".',
-	'wikibase-setentity-invalid-id' => "L'ID \"\$1\" a l'é pa conossù al sistem. Për piasì dòvra n'ID d'entità bon.",
+	'wikibase-setentity-invalid-langcode' => "L'identificator ëd lenga «$1» a l'é pa conossù. Për piasì, ch'a deuvra n'identificator ëd lenga conossù dal sistema, për esempi «pms».",
+	'wikibase-setentity-invalid-id' => "L'ID «$1» a l'é pa conossù dal sistema. Për piasì, ch'a deuvra n'ID d'entità bon.",
 	'special-listdatatypes' => 'Lista ëd tute le sòrt ëd dat disponìbij.',
-	'wikibase-listdatatypes-intro' => "Costa a l'é na lista ëd tute le sòrt ëd dat corentement an usagi dzor sta istalassion:",
+	'wikibase-listdatatypes-intro' => "Costa a l'é na lista ëd tute le sòrt ëd dat an cors d'usagi an st'istalassion:",
 	'wikibase-history-title-with-label' => 'Stòria dle revision ëd "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Stòria dle revision ëd ($1)',
-	'special-entitieswithoutlabel' => 'Lista dle entità sensa tichëtta', # Fuzzy
-	'wikibase-entitieswithoutlabel-legend' => 'Pija la lista dle entità sensa tichëtta',
+	'special-entitieswithoutlabel' => 'Entità sensa tichëtta',
+	'wikibase-entitieswithoutlabel-legend' => "Arcuperé la lista dj'entità sensa tichëtta",
 	'wikibase-entitieswithoutlabel-label-language' => 'Lenga:',
 	'wikibase-entitieswithoutlabel-submit' => 'Treuva',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" a l\'é pa un còdes ëd lenga bon.',
 	'special-entitydata' => "Dat ëd l'entità",
-	'wikibase-entitydata-not-found' => "Gnun-e entità con ID $1 a l'é stàit trovà.",
-	'wikibase-entitydata-unsupported-format' => "Ël formà ëd dat $1 a l'é pa apogià da sta antërfacia.",
+	'wikibase-entitydata-not-found' => "Gnun-a entità con ID $1 a l'é stàita trovà.",
+	'wikibase-entitydata-unsupported-format' => "Ël formà ëd dat $1 a l'é mantnù da costa antërfacia.",
 	'wikibase-entitydata-title' => "Dat ëd l'Entità",
-	'wikibase-entitydata-text' => "Sta pagina a dà n'antërfacia ëd dat colegà a valor d'entità. Për piasì dà l'ID entità ant l'anliura, dovrand la sintass ëd sot-pagina.",
-	'wikibase-api-patch-incomplete' => "La patch generà a l'é rivelasse esse ancompleta.",
-	'wikibase-self-conflict-patched' => "Toa modìfica a l'é stàita anserìa ant l'ùltima vërsion, coatand quaidun dij tò cambi antërmedi.",
-	'wikibase-conflict-patched' => "Toa modìfica a l'é stàita anserìa ant l'ùltima vërsion.",
+	'wikibase-entitydata-text' => "Sta pàgina a smon n'antërfacia ëd dat colegà a dij valor d'entità. Për piasì, ch'a fornissa l'ID ëd l'entità ant l'anliura, an dovrand la sintassi ëd sot-pàgina.",
+	'wikibase-api-patch-incomplete' => "Ël pachèt generà a l'é rivelasse esse incomplet.",
+	'wikibase-self-conflict-patched' => "Soa modìfica a l'é stàita anserìa ant l'ùltima version, coatand quaidun dij sò cambi antërmedi.",
+	'wikibase-conflict-patched' => "Soa modìfica a l'é stàita anserìa ant l'ùltima version.",
 	'wikibase-restoreold' => "buté 'me ch'a l'era",
-	'wikibase-restore-summary' => 'Riprìstina revision $1 da [[Special:Contributions/$2|$2]]',
+	'wikibase-restore-summary' => 'Riprìstin ëd la revision $1 da part ëd [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => "La modìfica direta a l'é disabilità ant lë spassi nominal $1",
-	'wikibase-noentity' => 'Sto ansem ëd dat a esist pa. It peule <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} serché ij registr relativ]</span> për trové anté l\'é andàit.',
+	'wikibase-noentity' => "St'ansem ëd dat a esist nen. A peul <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} sërché ij registr relativ]</span> për trové anté ch'a l'é finì.",
 	'wikibase-noentity-createone' => 'It peule ëdcò [[$1|creene un neuv]].',
 	'wikibase-item-summary-wbsetitem' => "Creà n'element neuv",
 	'wikibase-item-summary-wbeditentity' => "Creà n'element neuv",
 	'wikibase-item-summary-wbeditentity-create' => "Creà n'element neuv",
 	'wikibase-item-summary-wbeditentity-update' => "Modificà n'element",
-	'wikibase-item-summary-wbeditentity-override' => "Dzorscrivù n'element",
-	'wikibase-item-summary-wbsetlabel-set' => 'Cangià tichëtta [$2]',
-	'wikibase-item-summary-wbsetlabel-remove' => 'Gavà tichëtta [$2]',
-	'wikibase-item-summary-wbsetdescription-set' => 'Cangià [$2] descrission',
-	'wikibase-item-summary-wbsetdescription-remove' => 'gavà [$2] descrission',
-	'wikibase-item-summary-wbsetaliases-set' => 'Amposté [$2] {{PLURAL:$1|alias}}',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Giontà e gavà [$2] {{PLURAL:$1|alias}}',
-	'wikibase-item-summary-wbsetaliases-add' => 'Giontà [$2] {{PLURAL:$1|alias}}',
-	'wikibase-item-summary-wbsetaliases-remove' => 'gavà [$2] {{PLURAL:$1|alias}}',
-	'wikibase-item-summary-wbsetsitelink-set' => 'Giontà colegament specìfich dël [$2]',
-	'wikibase-item-summary-wbsetsitelink-remove' => 'Gavà colegament specìfich dël [$2]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Colegà [$2↔$3] {{PLURAL:$1|pagina|pagine}}',
-	'wikibase-item-summary-wbcreateclaim-value' => 'Creà {{PLURAL:$1|un valor andicà|valor andicà}}', # Fuzzy
+	'wikibase-item-summary-wbeditentity-override' => "Passé dnans a n'element",
+	'wikibase-item-summary-wbsetlabel-set' => 'Cangiament ëd la tichëtta [$2]',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Gavà la tichëtta [$2]',
+	'wikibase-item-summary-wbsetdescription-set' => 'Cangià la descrission [$2]',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Gavà descrission [$2]',
+	'wikibase-item-summary-wbsetaliases-set' => "Ampostassion {{PLURAL:$1|dl'alternativa|dj'alternative}} [$2]",
+	'wikibase-item-summary-wbsetaliases-add-remove' => "Giontà e gavà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
+	'wikibase-item-summary-wbsetaliases-add' => "Giontà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
+	'wikibase-item-summary-wbsetaliases-remove' => "Gavà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
+	'wikibase-item-summary-wbsetsitelink-set' => 'Giontà na liura spessìfica al sit [$2]',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Gavà na liura spessìfica al sit [$2]',
+	'wikibase-item-summary-wblinktitles-connect' => 'Colegà [$2↔$3] {{PLURAL:$1|pàgina|pàgine}}',
+	'wikibase-item-summary-wbcreateclaim-value' => "Creà {{PLURAL:$1|n'arvendicassion|d'arvendicassion}}",
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Creà {{PLURAL:$1|sensa valor andicà}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Creà {{PLURAL:$1|un quaich valor|quaich valor andicà}}', # Fuzzy
-	'wikibase-item-summary-special-create-item' => 'Creà un [$2] element con {{PLURAL:$1|valor}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => "Creà {{PLURAL:$1|n'arvendicassion|d'arvendicassion}}",
+	'wikibase-item-summary-special-create-item' => "Creà n'element [$2] con {{PLURAL:$1|un valor|dij valor}}",
 	'wikibase-property-summary-wbeditentity-create' => 'Creà na propietà neuva',
 	'wikibase-property-summary-wbeditentity-update' => 'Modificà na proprietà',
-	'wikibase-property-summary-wbeditentity-override' => 'Dzorscrivù na propietà',
-	'wikibase-property-summary-wbsetlabel-set' => 'Cangià tichëtta [$2]',
-	'wikibase-property-summary-wbsetlabel-remove' => 'Gavà tichëtta [$2]',
-	'wikibase-property-summary-wbsetdescription-set' => 'Cangià [$2] descrission',
-	'wikibase-property-summary-wbsetdescription-remove' => 'Gavà [$2] descrission',
-	'wikibase-property-summary-wbsetaliases-set' => 'Amposté [$2] {{PLURAL:$1|alias}}',
-	'wikibase-property-summary-wbsetaliases-add-remove' => 'Giontà e gavà [$2] {{PLURAL:$1|alias}}',
-	'wikibase-property-summary-wbsetaliases-add' => 'Giontà [$2] {{PLURAL:$1|alias}}',
-	'wikibase-property-summary-wbsetaliases-remove' => 'Gavà [$2] {{PLURAL:$1|alias}}',
-	'wikibase-property-summary-special-create-property' => 'Creà na [$2] propietà con {{PLURAL:$1|valor}}',
-	'wikibase-query-summary-special-create-query' => 'Creà na [$2] query con {{PLURAL:$1|valor}}',
+	'wikibase-property-summary-wbeditentity-override' => 'Dzor-ëscrivù na propietà',
+	'wikibase-property-summary-wbsetlabel-set' => 'Cangià la tichëtta [$2]',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Gavà la tichëtta [$2]',
+	'wikibase-property-summary-wbsetdescription-set' => 'Modificà la descrission [$2]',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Gavà la descrission [$2]',
+	'wikibase-property-summary-wbsetaliases-set' => "Ampostassion d'{{PLURAL:$1|alternativa|alternative}} [$2]",
+	'wikibase-property-summary-wbsetaliases-add-remove' => "Giontà e gavà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
+	'wikibase-property-summary-wbsetaliases-add' => "Giontà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
+	'wikibase-property-summary-wbsetaliases-remove' => "Gavà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
+	'wikibase-property-summary-special-create-property' => 'Creà na propietà [$2] con {{PLURAL:$1|un valor|dij valor}}',
+	'wikibase-query-summary-special-create-query' => "Creà n'arcesta [$2] con {{PLURAL:$1|un|dij}} valor",
 	'content-model-wikibase-item' => 'Element ëd Wikibase',
 	'content-model-wikibase-property' => 'Propietà ëd Wikibase',
-	'content-model-wikibase-query' => 'Query ëd Wikibase',
-	'right-item-override' => 'Dzorscriv element',
-	'right-item-create' => 'Crea element',
-	'right-item-remove' => 'Gavé element',
-	'right-alias-add' => 'Gionta alias',
-	'right-alias-set' => 'Ampòsta alia',
-	'right-alias-remove' => 'Gava alias',
-	'right-sitelink-remove' => 'Gava colegament dij sit',
-	'right-sitelink-update' => 'Modìfica colegament dij sit',
-	'right-linktitles-update' => 'Modìfica tìtoj dij colegament',
+	'content-model-wikibase-query' => 'Arcesta ëd Wikibase',
+	'right-item-override' => "Dzorascrive j'element",
+	'right-item-create' => "Creé dj'element",
+	'right-item-remove' => "Gavé j'element",
+	'right-alias-add' => "Gionté dj'alternative",
+	'right-alias-set' => "Amposté dj'alternative",
+	'right-alias-remove' => "Gavé dj'alternative",
+	'right-sitelink-remove' => 'Gavé dle liure ëd sit',
+	'right-sitelink-update' => 'Agiorné dle liure ëd sit',
+	'right-linktitles-update' => 'Agiorné ij tìtoj ëd le liure',
 	'right-label-remove' => 'Gava tichëtte',
 	'right-label-update' => 'Agiorna le tichëtte',
 	'right-description-remove' => 'Gava descrission',
@@ -8205,6 +8298,7 @@ $messages['sr-ec'] = array(
 	'wikibase-label-empty' => 'Ниједан назив није још дефинисан',
 	'wikibase-label-edit-placeholder' => 'унесите назив',
 	'wikibase-description-empty' => 'Ниједан опис није још дефинисан',
+	'wikibase-deletedentity' => 'Обрисано $1',
 	'wikibase-description-edit-placeholder' => 'унесите опис',
 	'wikibase-sitelink-site-edit-placeholder' => 'сајт',
 	'wikibase-sitelink-page-edit-placeholder' => 'чланак',
@@ -8618,6 +8712,7 @@ $messages['uk'] = array(
 	'wikibase-label-empty' => 'Не названо.',
 	'wikibase-label-edit-placeholder' => 'введіть назву',
 	'wikibase-description-empty' => 'Жодного опису ще не визначено.',
+	'wikibase-deletedentity' => '$1 вилучено',
 	'wikibase-description-edit-placeholder' => 'введіть опис',
 	'wikibase-sitelink-site-edit-placeholder' => 'сайт',
 	'wikibase-sitelink-page-edit-placeholder' => 'стаття',
@@ -8696,10 +8791,12 @@ $messages['uk'] = array(
 	'wikibase-itemdisambiguation-create' => 'Ви можете [{{fullurl:Special:CreateItem|label=$1}} створити такий елемент].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Вибачте, система не знаю введеного ідентифікатора мови. Правильним ідентифікатором є, наприклад, «uk».',
 	'special-newproperty' => 'Створити нову властивість',
+	'wikibase-newproperty-summary' => 'Упевніться, що такої властивості ще не існує!br />Для нової властивості треба вказати [[Help:Назва|назву]] and a [[Help:Опис|опис]], а також правильний тип даних.',
 	'wikibase-newproperty-fieldset' => 'Створити нову властивість',
 	'wikibase-newproperty-datatype' => 'Тип даних:',
 	'wikibase-newproperty-invalid-datatype' => 'Задано недопустимий тип даних',
 	'special-createitem' => 'Створити новий елемент',
+	'wikibase-createitem-summary' => 'Упевніться, що [[Special:ItemByTitle|такого елемента не існує]]!<br />Для нового елемента треба вказати [[Help:Назву|назву]] й[[Help:Опис|опис]].',
 	'wikibase-createitem-fieldset' => 'Створити новий елемент',
 	'wikibase-createitem-site' => "Сайт першої зв'язаної сторінки",
 	'wikibase-createitem-page' => "Ім'я першої зв'язаної сторінки",
@@ -8735,6 +8832,8 @@ $messages['uk'] = array(
 	'special-entitieswithoutlabel' => 'Список сутностей без назви', # Fuzzy
 	'wikibase-entitieswithoutlabel-legend' => 'Вивести список сутностей без назви',
 	'wikibase-entitieswithoutlabel-label-language' => 'Мова:',
+	'wikibase-entitieswithoutlabel-label-type' => 'Тип:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'усі',
 	'wikibase-entitieswithoutlabel-submit' => 'Знайти',
 	'wikibase-entitieswithoutlabel-invalid-language' => '«$1» неправильний мовний код.',
 	'special-entitydata' => 'Дані про сутність',

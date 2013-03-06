@@ -87,8 +87,6 @@ Format of wikilink is [[:de:Berlin|de:Berlin]].',
 
 Parameters:
 * $1 - the number of changes; is always at least 2.',
-	'wikibase-nolanglinks' => 'Shown in the "Languages" box in case the page exists but hasn\'t got any langlinks.
-{{Identical|None}}',
 	'wikibase-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.
 {{Identical|Edit link}}',
@@ -290,7 +288,6 @@ $messages['ca'] = array(
 	'wikibase-comment-sitelink-change' => 'Enllaç de llengua canviat de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Tret enllaç de llengua: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|canvi|canvis}}',
-	'wikibase-nolanglinks' => 'cap',
 	'wikibase-editlinks' => 'Modifica els enllaços',
 	'wikibase-editlinkstitle' => 'Modifica enllaços interlingües',
 	'wikibase-linkitem-addlinks' => 'Afegeix enllaços',
@@ -317,10 +314,10 @@ $messages['ca'] = array(
  */
 $messages['ckb'] = array(
 	'wikibase-after-page-move' => 'باشترە ھەروەھا برگەی ویکیدراوی پەیوەندیداریش [$1 نوێ بکەیەوە] ھەتا پەیوەندەکانی زمان لە پەڕە گوازراوەکەدا بمێنێتەوە.',
-	'wikibase-comment-remove' => 'بڕگەی ویکیدراوەی پەیوەندیدار سڕایەوە. بەستەرەکانی زمان لابران.',
+	'wikibase-comment-remove' => 'بەندی ویکیدراوەی پەیوەندیدار سڕایەوە. بەستەرەکانی زمان لابران.',
 	'wikibase-comment-linked' => 'بڕگەیەکی ویکیدراوە بەم پەڕەیە بەستەر دراوە.',
-	'wikibase-comment-unlink' => 'ئەم پەڕەیە بە بڕگەی ویکیدراوە بەستەر نەدراوە. بەستەرەکانی زمان لابران.',
-	'wikibase-comment-restore' => 'بڕگەی ویکیدراوەی پەیوەندیدار گەڕایەوە. بەستەرەکانی زمان ھێنرایەوە.',
+	'wikibase-comment-unlink' => 'ئەم پەڕەیە بە بەندی ویکیدراوە بەستەر نەدراوە. بەستەرەکانی زمان لابران.',
+	'wikibase-comment-restore' => 'بەندی ویکیدراوەی پەیوەندیدار گەڕایەوە. بەستەرەکانی زمان ھێنرایەوە.',
 	'wikibase-rc-hide-wikidata' => '$1 ویکیدراوه',
 	'wikibase-rc-show-wikidata-pref' => 'دەستکارییەکانی ویکیدراوە لە دوایین گۆڕانکارییەکاندا نیشان بدە',
 );
@@ -449,6 +446,29 @@ $messages['dsb'] = array(
 	'wikibase-linkitem-success-link' => 'Boki su se wuspěšnje zwězali. Móžoš element, kótaryž wopśimujo wótkaze, w našom [$1 centralnem datowem repozitoriumje] namakaś.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Změny Wikidata w aktualnych změnach pokazaś',
+);
+
+/** Greek (Ελληνικά)
+ * @author Geraki
+ */
+$messages['el'] = array(
+	'wikibase-editlinks' => 'Επεξεργασία συνδέσμων',
+	'wikibase-editlinkstitle' => 'Επεξεργασία διαγλωσσικών συνδέσεων',
+	'wikibase-linkitem-addlinks' => 'Προσθήκη συνδέσεων',
+	'wikibase-linkitem-title' => 'Σύνδεση με σελίδα',
+	'wikibase-linkitem-linkpage' => 'Σύνδεση με σελίδα',
+	'wikibase-linkitem-selectlink' => 'Παρακαλούμε επιλέξτε ένα ιστότοπο και μια σελίδα που θέλετε να συνδέσετε με αυτή τη σελίδα.',
+	'wikibase-linkitem-input-site' => 'Γλώσσα:',
+	'wikibase-linkitem-input-page' => 'Σελίδα:',
+	'wikibase-linkitem-invalidsite' => 'Άγνωστο ή μη έγκυρο site επιλέχτηκε',
+	'wikibase-linkitem-confirmitem-text' => 'Η σελίδα που επιλέξατε είναι ήδη συνδεδεμένη με ένα [$1 αντικείμενο στο κεντρικό μας αποθετήριο δεδομένων]. Παρακαλούμε βεβαιωθείτε ότι οι σελίδες που φαίνεται παρακάτω είναι αυτές που θέλετε να συνδέσετε με την παρούσα σελίδα.',
+	'wikibase-linkitem-confirmitem-button' => 'Επιβεβαίωση',
+	'wikibase-linkitem-not-loggedin-title' => 'Πρέπει να έχετε συνδεθεί',
+	'wikibase-linkitem-not-loggedin' => 'Πρέπει να έχετε συνδεθεί σε αυτό το wiki και στο [$1 κεντρικό αποθετήριο δεδομένων] για να χρησιμοποιήσετε αυτή τη δυνατότητα.',
+	'wikibase-linkitem-success-create' => 'Οι σελίδες έχουν συνδεθεί με επιτυχία. Μπορείτε να βρείτε το μόλις δημιουργημένο αντικείμενο που περιέχει τους συνδέσεις στο [$1 κεντρικό αποθετήριο δεδομένων].',
+	'wikibase-linkitem-success-link' => 'Οι σελίδες έχουν συνδεθεί με επιτυχία. Μπορείτε να βρείτε το αντικείμενο που περιέχει τους συνδέσεις στο [$1 κεντρικό αποθετήριο δεδομένων].',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Εμφάνιση των επεξεργασιών στο Wikidata στις πρόσφατες αλλαγές',
 );
 
 /** Esperanto (Esperanto)
@@ -834,7 +854,6 @@ $messages['ilo'] = array(
 	'wikibase-comment-sitelink-change' => 'Ti silpo ti pagsasao ket nasukatan manipud ti $1 iti $2',
 	'wikibase-comment-sitelink-remove' => 'Naikkat ti silpo ti pagsasao: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|a sinukatan|a sinuksukatan}}',
-	'wikibase-nolanglinks' => 'awan',
 	'wikibase-editlinks' => 'Urnosen dagiti silpo',
 	'wikibase-editlinkstitle' => 'Urnosen dagiti sangkapagsasaoan a silpo',
 	'wikibase-linkitem-addlinks' => 'Agnayon kadagiti silpo',
@@ -851,7 +870,7 @@ $messages['ilo'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Pasingkedan',
 	'wikibase-linkitem-not-loggedin-title' => 'Masapul a nakastrekka',
 	'wikibase-linkitem-not-loggedin' => 'Masapul a nakastrekka iti daytoy a wiki ken idiay [$1 sentro a resipotorio ti datos] tapno makausar ti daytoy a pagpilian.',
-	'wikibase-linkitem-success-create' => 'Dagiti panid ket balligi a naisilpo. Mabalinmo a biruken ti baro a napartuat a banag nga aglaon kadagiti silpo idiay [$1 sentro a resipotorio ti datos].',
+	'wikibase-linkitem-success-create' => 'Dagiti panid ket balligi a naisilpo. Mabalinmo a biruken ti baro a napartuat a banag nga aglaon kadagiti silpo idiay [$1 sentro a repositorio ti datos].',
 	'wikibase-linkitem-success-link' => 'Dagiti panid ket balligi a naisilpo. Mabalinmo a biruken ti banag nga aglaon kadagiti silpo idiay [$1 sentro a resipotorio ti datos].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Ipakita dagiti Wikidata nga inurnos idiay kinaudi a binalbaliwan',
@@ -913,12 +932,14 @@ $messages['it'] = array(
 	'wikibase-comment-sitelink-change' => 'Collegamento linguistico modificato da $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Collegamento linguistico rimosso: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|modifica|modifiche}}',
-	'wikibase-nolanglinks' => 'nessuna',
 	'wikibase-editlinks' => 'Modifica link',
 	'wikibase-editlinkstitle' => 'Modifica collegamenti interlinguistici',
 	'wikibase-linkitem-addlinks' => 'Aggiungi link',
+	'wikibase-linkitem-alreadylinked' => "La pagina che si vuole collegare è già associata ad un altro [$1 elemento] nell'archivio centrale dei dati che punta su $2 in questo sito. Gli elementi possono essere collegati ad una sola pagina per sito. Scegli una pagina diversa a cui collegarla.",
 	'wikibase-linkitem-close' => 'Chiudi la finestra di dialogo e ricarica la pagina',
 	'wikibase-linkitem-failure' => 'Si è verificato un errore sconosciuto durante il tentativo di collegare la pagina indicata.',
+	'wikibase-linkitem-title' => "Collega con un'altra pagina",
+	'wikibase-linkitem-linkpage' => 'Collega con la pagina',
 	'wikibase-linkitem-selectlink' => 'Seleziona un sito e una pagina che vuoi collegare con questa.',
 	'wikibase-linkitem-input-site' => 'Lingua:',
 	'wikibase-linkitem-input-page' => 'Pagina:',
@@ -949,7 +970,6 @@ $messages['ja'] = array(
 	'wikibase-comment-sitelink-change' => '言語リンクを $1 から $2 に変更',
 	'wikibase-comment-sitelink-remove' => '言語リンクを除去: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|件の変更}}',
-	'wikibase-nolanglinks' => 'なし',
 	'wikibase-editlinks' => 'リンクを編集',
 	'wikibase-editlinkstitle' => '言語間リンクを編集',
 	'wikibase-linkitem-addlinks' => 'リンクを追加',
@@ -1085,7 +1105,6 @@ $messages['mk'] = array(
 	'wikibase-comment-sitelink-change' => 'Изменета јазична врска од $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Отстранета јазична врска: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|промена|промени}}',
-	'wikibase-nolanglinks' => 'нема',
 	'wikibase-editlinks' => 'Уреди врски',
 	'wikibase-editlinkstitle' => 'Уредување на меѓујазични врски',
 	'wikibase-linkitem-addlinks' => 'Додај врски',
@@ -1235,7 +1254,6 @@ $messages['nl'] = array(
 	'wikibase-comment-sitelink-change' => 'Taalkoppeling gewijzigd van $1 naar $2',
 	'wikibase-comment-sitelink-remove' => 'Taalkoppeling verwijderd: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|wijziging|wijzigingen}}',
-	'wikibase-nolanglinks' => 'geen',
 	'wikibase-editlinks' => 'Koppelingen bewerken',
 	'wikibase-editlinkstitle' => 'Intertaalkoppelingen bewerken',
 	'wikibase-linkitem-addlinks' => 'Koppelingen toevoegen',
@@ -1273,7 +1291,6 @@ $messages['nn'] = array(
 	'wikibase-comment-sitelink-change' => 'Språklenkje endra frå $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Språklenkje fjerna: $1',
 	'wikibase-comment-multi' => '{{PLURAL:$1|éi endring|$1 endringar}}',
-	'wikibase-nolanglinks' => 'ingen',
 	'wikibase-editlinks' => 'Endra lenkjer',
 	'wikibase-editlinkstitle' => 'Endra mellomspråklege lenkjer',
 	'wikibase-linkitem-addlinks' => 'Legg til lenkjer',
@@ -1389,7 +1406,6 @@ $messages['ro'] = array(
  * @author Joetaras
  */
 $messages['roa-tara'] = array(
-	'wikibase-nolanglinks' => 'ninde',
 	'wikibase-editlinks' => 'Cange le collegaminde',
 	'wikibase-linkitem-title' => "Collegate cu 'a pàgene",
 	'wikibase-linkitem-linkpage' => "Collegate cu 'a pàgene",
@@ -1549,8 +1565,7 @@ $messages['uk'] = array(
 	'wikibase-comment-sitelink-change' => 'Мовне посилання змінено з $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Мовне посилання видалено: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|зміна|зміни|змін}}',
-	'wikibase-nolanglinks' => 'не вказано',
-	'wikibase-editlinks' => 'Редагувати посилання',
+	'wikibase-editlinks' => "Редагувати зв'язки",
 	'wikibase-editlinkstitle' => 'Редагувати міжмовні посилання',
 	'wikibase-linkitem-addlinks' => 'Додати посилання',
 	'wikibase-linkitem-close' => 'Закрити діалог і оновити сторінку',

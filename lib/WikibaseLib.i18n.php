@@ -51,6 +51,7 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Amire80
  * @author Jeblad
  * @author Nemo bis
  * @author Nnemo
@@ -66,7 +67,7 @@ $messages['qqq'] = array(
 {{Identical|Property}}',
 	'wikibase-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].
 {{Identical|Query}}',
-	'wikibase-diffview-reference' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects a reference. Will be shown as e.g. "claim / property q1 / referenece".
+	'wikibase-diffview-reference' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects a reference. Will be shown as e.g. "claim / property q1 / reference".
 {{Identical|Reference}}',
 	'wikibase-diffview-rank' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects the rank of the statement. Will be shown as e.g. "claim / property q1 / rank".
 {{Identical|Rank}}',
@@ -222,15 +223,15 @@ $messages['ca'] = array(
  * @author Calak
  */
 $messages['ckb'] = array(
-	'wikibase-entity-item' => 'بڕگە',
+	'wikibase-entity-item' => 'بەند',
 	'wikibase-entity-property' => 'تایبەتمەندی',
 	'wikibase-replicationnote' => 'تکایە ئاگادار بن چەند خولەک دەگرێ ھەتا گۆڕانکارییەکان لە ھەموو ویکییەکاندا دەربکەوێ.',
-	'wikibase-sitelinks' => 'پێرستی پەڕە بەسراوەکان بەم بڕگەیە',
+	'wikibase-sitelinks' => 'پێرستی پەڕە بەسراوەکان بەم بەندەوە',
 	'wikibase-sitelinks-sitename-columnheading' => 'زمان',
 	'wikibase-sitelinks-siteid-columnheading' => 'کۆد',
 	'wikibase-sitelinks-link-columnheading' => 'وتاری بەستەردراو',
 	'wikibase-tooltip-error-details' => 'وردەکارییەکان',
-	'datatypes-type-wikibase-item' => 'بڕگە',
+	'datatypes-type-wikibase-item' => 'بەند',
 );
 
 /** Czech (česky)
@@ -622,6 +623,9 @@ $messages['he'] = array(
 	'wikibase-entity-item' => 'פריט',
 	'wikibase-entity-property' => 'מאפיין',
 	'wikibase-entity-query' => 'שאילתה',
+	'wikibase-diffview-reference' => 'הפניה',
+	'wikibase-diffview-rank' => 'דירוג',
+	'wikibase-diffview-qualifier' => 'מבחין',
 	'wikibase-error-unexpected' => 'אירעה שגיאה בלתי־צפויה.',
 	'wikibase-error-save-generic' => 'אירעה שגיאה בעת ניסיון לבצע שמירה ובגלל זה לא ניתן להשלים את השינויים שלך.',
 	'wikibase-error-remove-generic' => 'אירעה שגיאה בעת ניסיון לבצע הסרה ובגלל זה לא ניתן להשלים את השינויים שלך.',
@@ -724,6 +728,9 @@ $messages['ilo'] = array(
 	'wikibase-entity-item' => 'banag',
 	'wikibase-entity-property' => 'tagikua',
 	'wikibase-entity-query' => 'panagbiruk',
+	'wikibase-diffview-reference' => 'nagibasaran',
+	'wikibase-diffview-rank' => 'ranggo',
+	'wikibase-diffview-qualifier' => 'kababalin',
 	'wikibase-error-unexpected' => 'Adda rimsua a maysa a saan a nanamnama a biddut.',
 	'wikibase-error-save-generic' => 'Ada biddut a napasamak bayat nga agar-aramidka ti panagidulin iti daytoy, saan a malpas dagiti panagibalbaliwmo.',
 	'wikibase-error-remove-generic' => 'Adda biddut a napasamak bayat nga agar-aramidka ti panagikkat ti daytoy, saan a malpas dagiti panagibalbaliwmo.',
