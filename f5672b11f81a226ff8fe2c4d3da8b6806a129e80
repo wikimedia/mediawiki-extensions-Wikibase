@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DoB-EcQ8",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-06T15:51:08Z",
+      "side": 1,
+      "message": "We are using the same base revision ID for all items. That does not make sense and will cause loadEntityContent to return null for a valid item id (or maybe it even throws an exception, not sure).\n\nIf we have multiple items, we need one base rev ID per item. I prefer to simply restrict this module to updating a single item, I see no use case for removing statements from multiple items at once.",
+      "revId": "f5672b11f81a226ff8fe2c4d3da8b6806a129e80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
