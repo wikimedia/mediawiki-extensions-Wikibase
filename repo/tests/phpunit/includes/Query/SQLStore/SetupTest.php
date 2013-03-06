@@ -37,18 +37,9 @@ use Wikibase\Repo\Query\SQLStore\Setup;
 class SetupTest extends \MediaWikiTestCase {
 
 	/**
-	 * @since wd.qe
-	 *
-	 * @return Setup[]
+	 * @return \Wikibase\Repo\Database\QueryInterface
 	 */
-	protected function getInstances() {
-		$instances = array();
-
-		$storeConfig = new \Wikibase\Repo\Query\SQLStore\StoreConfig( 'foo', 'bar', array(
-			'string' => new \Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler(),
-			'number' => new \Wikibase\Repo\Query\SQLStore\DVHandler\NumberHandler(),
-		) );
-
+	protected function getQueryInterface() {
 		$connectionProvider = new \Wikibase\Repo\LazyDBConnectionProvider( DB_MASTER );
 
 		$queryInterface = new \Wikibase\Repo\Database\MediaWikiQueryInterface(
@@ -56,31 +47,37 @@ class SetupTest extends \MediaWikiTestCase {
 			new \Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction( $connectionProvider )
 		);
 
-		$instances[] = new Setup(
+		return $queryInterface;
+	}
+
+	public function testExecutionOfRun() {
+		$storeConfig = new \Wikibase\Repo\Query\SQLStore\StoreConfig( 'foo', 'wbsql_', array(
+			'string' => new \Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler(),
+			'number' => new \Wikibase\Repo\Query\SQLStore\DVHandler\NumberHandler(),
+		) );
+
+		$queryInterface = $this->getQueryInterface();
+
+		$storeSetup = new Setup(
 			$storeConfig,
 			$queryInterface,
 			new \Wikibase\Repo\Database\TableBuilder( $queryInterface )
 		);
 
-		return $instances;
-	}
-
-	/**
-	 * @since wd.qe
-	 *
-	 * @return Setup[][]
-	 */
-	public function instanceProvider() {
-		return $this->arrayWrap( $this->getInstances() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param Setup $storeSetup
-	 */
-	public function testExecutionOfRun( Setup $storeSetup ) {
 		$this->assertTrue( $storeSetup->install() );
+
+		foreach ( $storeConfig->getDataValueHandlers() as $dvHandler ) {
+			foreach ( array( 'msnak_', 'qualifier_' ) as $snakLevel ) {
+				$table = $dvHandler->getTableDefinition();
+				$tableName = $storeConfig->getTablePrefix() . $snakLevel . $table->getName();
+
+				$this->assertTrue(
+					$queryInterface->tableExists( $tableName ),
+					'Table "' . $tableName . '" should exist after store setup'
+				);
+			}
+		}
+
 		$this->assertTrue( $storeSetup->uninstall() );
 	}
 

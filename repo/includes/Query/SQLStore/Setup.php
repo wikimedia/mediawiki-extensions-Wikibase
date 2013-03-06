@@ -115,6 +115,19 @@ class Setup {
 	 *
 	 * @return TableDefinition[]
 	 */
+	private function getTables() {
+		// TODO: setup dv tables for different levels of snaks
+		// TODO: setup id tracking tables
+		// TODO: setup stats tables
+
+		return array_merge( $this->getNonDVTables(), $this->getDVTables() );
+	}
+
+	/**
+	 * TODO
+	 *
+	 * @return TableDefinition[]
+	 */
 	private function getDVTables() {
 		$dvTables = array();
 
@@ -122,10 +135,39 @@ class Setup {
 		 * @var DataValueHandler $dataValueHandler
 		 */
 		foreach ( $this->config->getDataValueHandlers() as $dataValueHandler ) {
-			$table = $dataValueHandler->getTableDefinition();
-			$table = $table->mutateName( $this->config->getTablePrefix() . $table->getName() );
+			foreach ( array( 'msnak_', 'qualifier_' ) as $snakLevel ) {
+				$table = $dataValueHandler->getTableDefinition();
+				$table = $table->mutateName( $snakLevel . $table->getName() );
 
-			$dvTables[] = $table;
+				$table = $table->mutateFields(
+					array_merge(
+						array(
+							// Internal claim id
+							new FieldDefinition(
+								'claim_id',
+								FieldDefinition::TYPE_INTEGER,
+								FieldDefinition::NOT_NULL,
+								FieldDefinition::NO_DEFAULT,
+								FieldDefinition::ATTRIB_UNSIGNED,
+								FieldDefinition::INDEX
+							),
+
+							// Internal property id
+							new FieldDefinition(
+								'property_id',
+								FieldDefinition::TYPE_INTEGER,
+								FieldDefinition::NOT_NULL,
+								FieldDefinition::NO_DEFAULT,
+								FieldDefinition::ATTRIB_UNSIGNED,
+								FieldDefinition::INDEX
+							),
+						),
+						$table->getFields()
+					)
+				);
+
+				$dvTables[] = $table;
+			}
 		}
 
 		return $dvTables;
@@ -138,6 +180,9 @@ class Setup {
 	 */
 	private function getNonDVTables() {
 		$tables = array();
+
+		// TODO: multi field indexes
+		// TODO: more optimal types
 
 		// Id map with Wikibase EntityId to internal SQL store id
 		$tables[] = new TableDefinition(
@@ -247,6 +292,19 @@ class Setup {
 	}
 
 	/**
+	 * Returns the provided table with the configs table prefix prepended to the name of the table.
+	 *
+	 * @since wd.qe
+	 *
+	 * @param TableDefinition $tableDefinition
+	 *
+	 * @return TableDefinition
+	 */
+	private function getPrefixedTable( TableDefinition $tableDefinition ) {
+		return $tableDefinition->mutateName( $this->config->getTablePrefix() . $tableDefinition->getName() );
+	}
+
+	/**
 	 * Sets up the tables of the store.
 	 *
 	 * @since wd.qe
@@ -256,13 +314,10 @@ class Setup {
 	private function setupTables() {
 		$success = true;
 
-		foreach ( $this->getDVTables() as $table ) {
+		foreach ( $this->getTables() as $table ) {
+			$table = $this->getPrefixedTable( $table );
 			$success = $this->tableBuilder->createTable( $table ) && $success;
 		}
-
-		// TODO: setup dv tables for different levels of snaks
-		// TODO: setup id tracking tables
-		// TODO: setup stats tables
 
 		return $success;
 	}
@@ -294,14 +349,10 @@ class Setup {
 	private function dropTables() {
 		$success = true;
 
-		/**
-		 * @var DataValueHandler $dataValueHandler
-		 */
-		foreach ( $this->getDVTables() as $table ) {
+		foreach ( $this->getTables() as $table ) {
+			$table = $this->getPrefixedTable( $table );
 			$success = $this->queryInterface->dropTable( $table->getName() ) && $success;
 		}
-
-		// TODO: match changes to setup TODOs
 
 		return $success;
 	}
