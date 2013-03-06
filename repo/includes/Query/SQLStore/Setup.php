@@ -141,27 +141,7 @@ class Setup {
 
 				$table = $table->mutateFields(
 					array_merge(
-						array(
-							// Internal claim id
-							new FieldDefinition(
-								'claim_id',
-								FieldDefinition::TYPE_INTEGER,
-								FieldDefinition::NOT_NULL,
-								FieldDefinition::NO_DEFAULT,
-								FieldDefinition::ATTRIB_UNSIGNED,
-								FieldDefinition::INDEX
-							),
-
-							// Internal property id
-							new FieldDefinition(
-								'property_id',
-								FieldDefinition::TYPE_INTEGER,
-								FieldDefinition::NOT_NULL,
-								FieldDefinition::NO_DEFAULT,
-								FieldDefinition::ATTRIB_UNSIGNED,
-								FieldDefinition::INDEX
-							),
-						),
+						$this->getPropertySnakFields(),
 						$table->getFields()
 					)
 				);
@@ -171,6 +151,35 @@ class Setup {
 		}
 
 		return $dvTables;
+	}
+
+	/**
+	 * TODO
+	 *
+	 * @return FieldDefinition[]
+	 */
+	private function getPropertySnakFields() {
+		return array(
+			// Internal claim id
+			new FieldDefinition(
+				'claim_id',
+				FieldDefinition::TYPE_INTEGER,
+				FieldDefinition::NOT_NULL,
+				FieldDefinition::NO_DEFAULT,
+				FieldDefinition::ATTRIB_UNSIGNED,
+				FieldDefinition::INDEX
+			),
+
+			// Internal property id
+			new FieldDefinition(
+				'property_id',
+				FieldDefinition::TYPE_INTEGER,
+				FieldDefinition::NOT_NULL,
+				FieldDefinition::NO_DEFAULT,
+				FieldDefinition::ATTRIB_UNSIGNED,
+				FieldDefinition::INDEX
+			),
+		);
 	}
 
 	/**
@@ -285,6 +294,35 @@ class Setup {
 					FieldDefinition::NO_ATTRIB,
 					FieldDefinition::INDEX
 				),
+			)
+		);
+
+		// Table for snaks without a value
+		$tables[] = new TableDefinition(
+			'valueless_snaks',
+			array_merge(
+				$this->getPropertySnakFields(),
+				array(
+					// Type of the snak
+					new FieldDefinition(
+						'type',
+						FieldDefinition::TYPE_INTEGER,
+						FieldDefinition::NOT_NULL,
+						FieldDefinition::NO_DEFAULT,
+						FieldDefinition::ATTRIB_UNSIGNED,
+						FieldDefinition::INDEX
+					),
+
+					// Level at which the snak is used (ie "main snak" or "qualifier")
+					new FieldDefinition(
+						'level',
+						FieldDefinition::TYPE_INTEGER,
+						FieldDefinition::NOT_NULL,
+						FieldDefinition::NO_DEFAULT,
+						FieldDefinition::ATTRIB_UNSIGNED,
+						FieldDefinition::INDEX
+					),
+				)
 			)
 		);
 
