@@ -552,7 +552,14 @@ final class ClientHooks {
 
 		if ( $useRepoLinks || Settings::get( 'alwaysSort' ) ) {
 			// sort links
-			SortUtils::sortLinks( $parserOutput->getLanguageLinks() );
+			$interwikiSorter = new InterwikiSorter(
+				Settings::get( 'sort' ),
+				Settings::get( 'interwikiSortOrders' ),
+				Settings::get( 'sortPrepend' )
+			);
+			$interwikiLinks = $parserOutput->getLanguageLinks();
+			$sortedLinks = $interwikiSorter->sortLinks( $interwikiLinks );
+			$parserOutput->setLanguageLinks( $sortedLinks );
 		}
 
 		wfProfileOut( __METHOD__ );
