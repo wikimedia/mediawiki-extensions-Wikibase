@@ -40,6 +40,7 @@ $messages['en'] = array(
 	'wikibase-alias-edit-placeholder' => 'enter an alias',
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
+	'wikibase-datatype' => 'Datatype',
 	'wikibase-statements' => 'Statements',
 	'wikibase-terms' => 'In other languages',
 	'wikibase-sitelinks-add' => 'add a link to a site-link',
@@ -444,6 +445,7 @@ This is a generic text used as a placeholder while defining the page for a possi
 Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, i.e. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Item|item]].',
 	'wikibase-description-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 H.png|right|0x150px]]
 Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata:Glossary#languageattribute-description|description]] and [[d:Wikidata:Glossary#Item|item]].',
+	'wikibase-datatype' => "Heading for the datatype entry in the currently viewed property. Note that the actual datatype entry doesn't have a section header. iSee also Wikidata's glossary for [[m:d:Wikidata:Glossary#Property|property]] and [[m:d:Wikidata:Glossary#Property|property]].",
 	'wikibase-statements' => "Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata's glossary for [[m:d:Wikidata:Glossary#Statement|statements]] and [[m:d:Wikidata:Glossary#Item|item]].",
 	'wikibase-terms' => 'Heading for the table with the labels and descriptions in other languages.
 {{Identical|Otherlanguages}}',
@@ -3553,16 +3555,16 @@ $messages['fa'] = array(
 	'wikibase-listdatatypes-wikibase-item-body' => 'به آیتم‌های دیگر موجود در این پروژه پیوند بدهید. هنگامی که در حال واردکردن آیتم هستید، ویکی‌داده به صورت خودکار به یافتن ورودی‌های که با آن بخوانند اقدام می‌کند. ورودی مد نظر، فقط باید متن خام(بدون عدد) باشد.
 * شمای کلی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
 * بخش سلسله مراتبی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته ای غیرمستقیم به آن ارجاع می‌دهد
-* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد 
+* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
 * تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد',
 	'wikibase-listdatatypes-commonsmedia-head' => 'رسانه‌های ویکی‌انبار',
 	'wikibase-listdatatypes-commonsmedia-body' => 'به فایل های موجود در این ویکی انبار پیوند بدهید. هنگامی که در حال واردکردن نام فایل هستید، ویکی‌انبار به صورت خودکار به یافتن ورودی‌های که با آن بخوانند اقدام می‌کند. ورودی مد نظر، فقط باید متن خام(بدون عدد) باشد.
 * شمای کلی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
 * بخش سلسله مراتبی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته ای غیرمستقیم به آن ارجاع می‌دهد
-* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد 
+* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
 * تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'مختصات جغرافیایی',
-	'wikibase-listdatatypes-geo-coordinate-body' => 'داده حروفی برای مکان جغرافیایی یک جرم درخشان آسمانی که به صورت طول جغرافیایی-عرض جغرافیایی بر حسب درجه یا بوسیله سیستم های زئومتریک بیان می شود. 
+	'wikibase-listdatatypes-geo-coordinate-body' => 'داده حروفی برای مکان جغرافیایی یک جرم درخشان آسمانی که به صورت طول جغرافیایی-عرض جغرافیایی بر حسب درجه یا بوسیله سیستم های زئومتریک بیان می شود.
 * عرض جغرافیایی - بخش اول مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (شمالی/جنوبی) مشخص می شود
 * طول جغرافیایی - بخش دوم مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (خاوری/باختریی) مشخص می شود
 * ارتفاع(اختیاری) - مقدار مشخص(؟)ارتفاع از سطح مرجع، برای کره "زمین" که کره مرجع آن "WGS84" است
@@ -3570,18 +3572,18 @@ $messages['fa'] = array(
 	'wikibase-listdatatypes-quantity-head' => 'کمیت',
 	'wikibase-listdatatypes-quantity-body' => 'داده های حروفی برای یک کمیت که به یک نوع یکای دقیق مربوط می شود. یکا، در واقع با مقدار وارد شده همراه می آید.
 * مقدار - بخشی نامعلوم از رشته(اندازه گیری شده با پیشوندی نامعلوم)
-* یکا - بخشی نامعلوم از رشته(اندازه گیری شده با جسمی غیر استاندارد) 
+* یکا - بخشی نامعلوم از رشته(اندازه گیری شده با جسمی غیر استاندارد)
 * دقت(اختیاری) - مقداری معلوم(مشخص) که یکای آن همان یکای مقدار است',
 	'wikibase-listdatatypes-monolingual-text-head' => 'متن تک‌زبانه',
 	'wikibase-listdatatypes-monolingual-text-body' => 'داده حروفی به صورت رشته ای که در زبان های دیگر واژه جدیدی برای آن ابداع نشده باشد. این نوع داده رشته ای فقط یک بار تعریف شده و در تمام زبان ها از همان تعریف استفاده می شود. نمونه های بارز این نوع رشته، نام های جغرافیایی هستند که با یک زبان محلی نوشته می شوند و نام های شناسه ای که به یک فرمول شیمیایی یا نام علمی لاتین اختصاص داده می شوند.
 * زبان - مقداری مشخص برای شناساندن متن
 * متن - مقداری مشخص برای رشته ای به زبانی مشخص',
 	'wikibase-listdatatypes-multilingual-text-head' => 'متن چندزبانه',
-	'wikibase-listdatatypes-multilingual-text-body' => 'داده حروفی برای رشته ای که می بایست آنرا به سایر زبان ها ترجمه نمود. معمولا برای چیزهایی به کار می رود که مورد اقبال عمومی است ولی فاقد صورت نوشتاری محلی است. چیزهایی که در زبان های مختلف و با سیستم های نوشتاری مختلف نمود پیدا می کنند. 
+	'wikibase-listdatatypes-multilingual-text-body' => 'داده حروفی برای رشته ای که می بایست آنرا به سایر زبان ها ترجمه نمود. معمولا برای چیزهایی به کار می رود که مورد اقبال عمومی است ولی فاقد صورت نوشتاری محلی است. چیزهایی که در زبان های مختلف و با سیستم های نوشتاری مختلف نمود پیدا می کنند.
 * زبان - مقداری معین(معلوم)که زبان به کار رفته در بخش متن را می شناساند
 * متن - مقداری معین برای رشته متغیر مختص آن زبان',
 	'wikibase-listdatatypes-string-head' => 'رشته',
-	'wikibase-listdatatypes-string-body' => 'داده حروفی برای یک رشته کارکتر. در مواقعی که صورت نوشتاری یک شناسه بدون تبعیت از زبانی معین نوشته شده باشد، این نوع داده ها زیاد به کار می روند. بعضی اوقات این نوع داده ها در قالب سیستم های نوشتاری غیر حرف نگاری می شوند. 
+	'wikibase-listdatatypes-string-body' => 'داده حروفی برای یک رشته کارکتر. در مواقعی که صورت نوشتاری یک شناسه بدون تبعیت از زبانی معین نوشته شده باشد، این نوع داده ها زیاد به کار می روند. بعضی اوقات این نوع داده ها در قالب سیستم های نوشتاری غیر حرف نگاری می شوند.
 * زبان - مقداری معین برای شناساندن زبان بخش متن
 * متن - مقداری معین برای رشته متغیر مختص آن زبان',
 	'wikibase-listdatatypes-time-head' => 'زمان',
@@ -5837,13 +5839,13 @@ Vistfang þitt skráist í breytingaskrá $1.',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Því miður þekkti kerfið ekki kennimerki tungumálsins. Vinsamlegast notaðu gilt kennimerki, eins og „en".',
 	'wikibase-itemdisambiguation-description' => 'Þau gildi sem eru notuð við leit þurfa að vera tæmandi texta færsla. Tungumál er kennimerki, eins og „en".',
 	'special-newproperty' => 'Búa til nýjan eiginleika',
-	'wikibase-newproperty-summary' => 'Sjáðu til þess að þú [[Special:PropertyDisambiguation|athugir hvort eiginleikinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Label/is|merkimiða]] og [[Help:Description/is|lýsingu]] fyrir 
+	'wikibase-newproperty-summary' => 'Sjáðu til þess að þú [[Special:PropertyDisambiguation|athugir hvort eiginleikinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Label/is|merkimiða]] og [[Help:Description/is|lýsingu]] fyrir
 alla eiginleika og þar að auki gilda gagnagerð.',
 	'wikibase-newproperty-fieldset' => 'Búa til nýjan eiginleika',
 	'wikibase-newproperty-datatype' => 'Gagnagerð:',
 	'wikibase-newproperty-invalid-datatype' => 'Ógild gagnagerð tilgreind',
 	'special-newitem' => 'Stofna nýjan hlut',
-	'wikibase-newitem-summary' => 'Sjáðu til þess að þú [[Special:ItemByTitle|athugir hvort hluturinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Label/is|merkimiða]] og [[Help:Description/is|lýsingu]] fyrir 
+	'wikibase-newitem-summary' => 'Sjáðu til þess að þú [[Special:ItemByTitle|athugir hvort hluturinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Label/is|merkimiða]] og [[Help:Description/is|lýsingu]] fyrir
 alla hluti.',
 	'wikibase-newitem-fieldset' => 'Búa til nýjan hlut',
 	'wikibase-newitem-site' => 'Vefsíða fyrsta vefsvæðistengilsins',
@@ -6957,7 +6959,7 @@ $messages['lb'] = array(
 	'wikibase-snakview-snaktypeselector-novalue' => 'kee Wäert',
 	'wikibase-copyrighttooltip-acknowledge' => 'Ech akzeptéieren dës Bedingunge fir meng zukünfteg Ännerungen. Dëse Message net nach eng Kéier weisen.',
 	'wikibase-entityselector-more' => 'méi',
-	'wikibase-anonymouseditwarning' => 'Opgepasst: Dir sidd net ageloggt. 
+	'wikibase-anonymouseditwarning' => 'Opgepasst: Dir sidd net ageloggt.
 Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-restrictionedit-tooltip-message' => 'Dës Säit ass gespaart. Änneren ass net erlaabt.',
 	'wikibase-blockeduser-tooltip-message' => 'Dir gouft gespaart a  kënnt dofir keng Ännerunge maachen.',

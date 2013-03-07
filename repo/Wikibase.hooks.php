@@ -153,6 +153,7 @@ final class RepoHooks {
 		$testFiles = array(
 			'Autocomment',
 			'EditEntity',
+			'EntityView',
 			'ItemMove',
 			'ItemContentDiffView',
 			'ItemMove',
