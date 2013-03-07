@@ -70,6 +70,23 @@
     },
     {
       "key": {
+        "uuid": "DnfW9LWM",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-07T13:32:13Z",
+      "side": 1,
+      "message": "Should probably use getPrefixedText(). getFullText() includes #fragements, though that probably can\u0027t happen here.",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//3nU\u003d",
         "filename": "client/includes/parserhooks/PropertyParser.php",
         "patchSetId": 1
