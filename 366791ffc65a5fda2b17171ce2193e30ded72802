@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DoCb5Jec",
+        "filename": "client/resources/wbclient.watchlist.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-07T19:19:04Z",
+      "side": 1,
+      "message": "toggleWikibase() does what, exactly? *enable* wikibase, or invert the current state? If the latter is the case, this may not always do what is expected. Better to set the checkbox state to the value of the setting directly...",
+      "revId": "366791ffc65a5fda2b17171ce2193e30ded72802",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
