@@ -12,7 +12,7 @@ module ReferencePage
   div(:referenceContainer, :class => "wb-statement-references-container")
   div(:referenceHeading, :class => "wb-statement-references-heading")
   link(:referenceHeadingToggleLink, :css => ".wb-statement-references-heading a")
-  div(:referenceListItems, :xpath => "//div[contains(@class, 'wb-statement-references')]/div[contains(@class, 'wb-listview-items')]")
+  div(:referenceListItems, :xpath => "//div[contains(@class, 'wb-statement-references')]/div[contains(@class, 'wb-snaklistview')]")
   div(:reference1Property, :xpath => "//div[contains(@class, 'wb-referenceview')][1]/div[contains(@class, 'wb-reference-snaks')]/div[contains(@class, 'wb-snak-property-container')]/div")
   div(:reference2Property, :xpath => "//div[contains(@class, 'wb-referenceview')][2]/div[contains(@class, 'wb-reference-snaks')]/div[contains(@class, 'wb-snak-property-container')]/div")
   div(:reference3Property, :xpath => "//div[contains(@class, 'wb-referenceview')][3]/div[contains(@class, 'wb-reference-snaks')]/div[contains(@class, 'wb-snak-property-container')]/div")
@@ -25,7 +25,7 @@ module ReferencePage
   link(:saveReference, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='save']")
   link(:cancelReference, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='cancel']")
   link(:removeReference, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='remove']")
-  link(:addReferenceToFirstClaim, :xpath => "//div[contains(@class, 'wb-statement-references-container')][1]/div[contains(@class, 'wb-statement-references')]/div[contains(@class, 'wb-listview-toolbar')]/div/span/span/a")
+  link(:addReferenceToFirstClaim, :xpath => "//div[contains(@class, 'wb-statement-references-container')][1]/div[contains(@class, 'wb-statement-references')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-listview-toolbar')]/div/span/span/a")
   link(:editReference1, :xpath => "//div[contains(@class, 'wb-referenceview')][1]/div[contains(@class, 'wb-claim-toolbar')]/span/span/span/span/a[text()='edit']")
 
   def wait_for_reference_value_box

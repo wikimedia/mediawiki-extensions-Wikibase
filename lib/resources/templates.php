@@ -125,8 +125,13 @@ HTML;
 
 	$templates['wb-listview'] =
 <<<HTML
-<div>
-	<div class="wb-listview-items">$1</div> <!-- list members -->
+<div>$1</div>
+HTML;
+
+	$templates['wb-snaklistview'] =
+<<<HTML
+<div class="wb-snaklistview">
+	<div class="wb-snaklistview-listview">$1</div> <!-- listview -->
 	<div class="wb-listview-toolbar">$2</div> <!-- edit section -->
 </div>
 HTML;
