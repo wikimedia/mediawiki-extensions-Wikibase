@@ -320,6 +320,10 @@ to find out where it went.',
 	'wikibase-listdatatypes-multilingual-text-body' => 'Literal data field for a string that must be translated into other languages. Typical use is a entity name of global interest that has non-local written forms. Those can differ both in languages and script systems.
 * language – explicit value for identifying the language for the text part
 * text – explicit value for the language specific variant string',
+	'wikibase-listdatatypes-string-head' => 'String',
+	'wikibase-listdatatypes-string-body' => 'Literal data field for a string of characters. Typical use is identifiers that has written forms that does not depend on the language. Such strings can in some cases be transliterated into other script systems.
+* language – explicit value for identifying the language for the text part
+* text – explicit value for the language specific variant string',
 	'wikibase-listdatatypes-time-head' => 'Time',
 	'wikibase-listdatatypes-time-body' => 'Literal data field for a time value. Given as a time with some precision and boundaries. The time are always saved internally in proleptic Gregorian, but can use other formats during parsing and formating.(?)
 * time – explicit value for point in time, represented per ISO8601, they year always having 11 digits, the date always be signed, in the format +00000002013-01-01T00:00:00Z
@@ -828,6 +832,10 @@ Parameters:
 	'wikibase-listdatatypes-monolingual-text-body' => '{{Wikibase-datatype-body|Monolingual text}}',
 	'wikibase-listdatatypes-multilingual-text-head' => '{{Wikibase-datatype-head|Multilingual text}}',
 	'wikibase-listdatatypes-multilingual-text-body' => '{{Wikibase-datatype-body|Multilingual text}}',
+	'wikibase-listdatatypes-string-head' => '{{Wikibase-datatype-head|String}}',
+	'wikibase-listdatatypes-string-body' => '{{Wikibase-datatype-body|String}}',
+	'wikibase-listdatatypes-time-head' => '{{Wikibase-datatype-head|Time}}',
+	'wikibase-listdatatypes-time-body' => '{{Wikibase-datatype-body|Time}}',
 );
 
 /** Achinese (Acèh)
