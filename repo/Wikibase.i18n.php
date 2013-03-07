@@ -113,7 +113,7 @@ Your IP address will be recorded in the edit history of this $1.",
 	'wikibase-itemlink-title' => '$1 | $2',
 
 	// Special pages
-	'special-itembytitle' => 'Item by sitelink',
+	'special-itembytitle' => 'Item by title',
 	'wikibase-itembytitle-lookup-fieldset' => 'Search for items by site and title',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
 	'wikibase-itembytitle-lookup-page' => 'Page:',
