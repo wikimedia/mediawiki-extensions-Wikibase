@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DoIsdnA0",
+        "filename": "lib/includes/Term.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-07T16:14:39Z",
+      "side": 1,
+      "message": "This was quite intentional. normalizing a search key is not the same as normalizing a label. In the label, we want to preserve stuff like directionality markers and other \"invisible\" characters. in a sort key, we want to ignore (and thus, strip) them.",
+      "parentUuid": "DoEt3lJ8",
+      "revId": "00541d79788038df1007fbc032742ece89e5b666",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DoOto6Lw",
         "filename": "lib/includes/Term.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "DoGvVuBg",
+        "filename": "lib/includes/Term.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-07T16:14:39Z",
+      "side": 1,
+      "message": "This is the \"dumb\" way, hence the comment above. I think it will be good enough for now, anyway a lot better than nothing. \n\nAlso, for really \"nice\" matching, we will later use Solr anyway. For now we just need something that improves the user experience in most cases.",
+      "parentUuid": "DoOto6Lw",
+      "revId": "00541d79788038df1007fbc032742ece89e5b666",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DoEuB1E8",
         "filename": "lib/tests/phpunit/TermTest.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2013-03-07T15:18:17Z",
       "side": 1,
       "message": "There should be a collection of known problematic diacritics here.",
+      "revId": "00541d79788038df1007fbc032742ece89e5b666",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoAva7Eg",
+        "filename": "lib/tests/phpunit/TermTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-07T16:14:39Z",
+      "side": 1,
+      "message": "Sure, whenever we find a problem with one, a test case for that should be added. I don\u0027t see how we can know in advance.",
+      "parentUuid": "DoEuB1E8",
       "revId": "00541d79788038df1007fbc032742ece89e5b666",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
