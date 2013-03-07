@@ -141,6 +141,16 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 /********** /BASIC LAYOUT **********/
 
 
+/********** TOC **********/
+
+.toctainer {
+	clear: both;
+	width: 100%;
+	float: right;
+	padding-top: 1em;
+}
+
+
 /********** LABEL & DESCRIPTION **********/
 
 .wb-ui-labeledittool .wb-value-container,

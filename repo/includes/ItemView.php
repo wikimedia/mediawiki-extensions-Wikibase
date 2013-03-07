@@ -19,14 +19,25 @@ use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
 class ItemView extends EntityView {
 
 	/**
+	 * @see EntityView::addSectionToTOC
+	 */
+	public function addSectionToTOC( EntityContent $entity, Language $lang = null, array &$toc ) {
+		$toc[] = 'statements';
+		$toc[] = 'sitelinks';
+	}
+
+	/**
 	 * @see EntityView::getInnerHtml
 	 */
-	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
-		$html = parent::getInnerHtml( $entity, $lang, $editable );
+	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true, array &$toc ) {
+		wfProfileIn( __METHOD__ );
 
-		// add site-links to default entity stuff
+		$html = parent::getInnerHtml( $entity, $lang, $editable, $toc );
+
+		$html .= $this->getHtmlForClaims( $entity, $lang, $editable );
 		$html .= $this->getHtmlForSiteLinks( $entity, $lang, $editable );
 
+		wfProfileOut( __METHOD__ );
 		return $html;
 	}
 
@@ -44,7 +55,12 @@ class ItemView extends EntityView {
 		$siteLinks = $item->getItem()->getSiteLinks();
 		$html = $thead = $tbody = $tfoot = '';
 
-		$html .= wfTemplate( 'wb-section-heading', wfMessage( 'wikibase-sitelinks' ) );
+		$html .= wfTemplate(
+			'wb-section-heading',
+			wfMessage( 'wikibase-sitelinks' ),
+			$item->getEntity()->getPrefixedId(),
+			'sitelinks'
+		);
 
 		if( !empty( $siteLinks ) ) {
 			$thead = wfTemplate( 'wb-sitelinks-thead',
