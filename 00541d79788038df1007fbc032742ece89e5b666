@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DoEt3lJ8",
+        "filename": "lib/includes/Term.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-07T15:18:17Z",
+      "side": 1,
+      "message": "Fails for farsi, zwnj is in formatting control chars. I guess what you try to do is to handle the lower block \\p{Cc}, which is basically what Utils::trimWhitespace does, but together with the following is Utils::trimToNFC( $text )",
+      "revId": "00541d79788038df1007fbc032742ece89e5b666",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoOto6Lw",
+        "filename": "lib/includes/Term.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-07T15:18:17Z",
+      "side": 1,
+      "message": "If I remember correct some upper case letters are different in various language, that is they are usually not regarded as an upper case letter and because of this will remain so unless you handle them in a language specific way. Could be that mb_strtolower does that, I have no idea. I\u0027ll ask an expert when I see him online.\n\nI think we can do it this way for now, but I\u0027m quite sure it will create problems later on.",
+      "revId": "00541d79788038df1007fbc032742ece89e5b666",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoEuB1E8",
+        "filename": "lib/tests/phpunit/TermTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-07T15:18:17Z",
+      "side": 1,
+      "message": "There should be a collection of known problematic diacritics here.",
+      "revId": "00541d79788038df1007fbc032742ece89e5b666",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
