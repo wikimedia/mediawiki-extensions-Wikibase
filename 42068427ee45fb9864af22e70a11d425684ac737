@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DoLAGzyA",
+        "filename": "repo/includes/Database/MediaWikiQueryInterface.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-07T14:45:15Z",
+      "side": 1,
+      "message": "This name seems to be legal, its only a bit oddly marked by gerrit",
+      "revId": "42068427ee45fb9864af22e70a11d425684ac737",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoEv8dAk",
+        "filename": "repo/includes/Database/ObservableQueryInterface.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-07T14:45:15Z",
+      "side": 1,
+      "message": "This name seems to be legal, its only a bit oddly marked by gerrit",
+      "revId": "42068427ee45fb9864af22e70a11d425684ac737",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DoCsLMCc",
+        "filename": "repo/includes/Database/QueryInterface.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-07T14:45:15Z",
+      "side": 1,
+      "message": "This name seems to be legal, its only a bit oddly marked by gerrit",
+      "revId": "42068427ee45fb9864af22e70a11d425684ac737",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
