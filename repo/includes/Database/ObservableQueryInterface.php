@@ -102,4 +102,47 @@ class ObservableQueryInterface implements QueryInterface {
 		$this->runCallbacks( __FUNCTION__, func_get_args() );
 	}
 
+	/**
+	 * @see QueryInterface::insert
+	 *
+	 * @since wd.db
+	 *
+	 * @param string $tableName
+	 * @param array $values
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function insert( $tableName, array $values ) {
+		$this->runCallbacks( __FUNCTION__, func_get_args() );
+	}
+
+	/**
+	 * @see QueryInterface::update
+	 *
+	 * @since wd.db
+	 *
+	 * @param string $tableName
+	 * @param array $values
+	 * @param array $conditions
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function update( $tableName, array $values, array $conditions ) {
+		$this->runCallbacks( __FUNCTION__, func_get_args() );
+	}
+
+	/**
+	 * @see QueryInterface::delete
+	 *
+	 * @since wd.db
+	 *
+	 * @param string $tableName
+	 * @param array $conditions
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function delete( $tableName, array $conditions ) {
+		$this->runCallbacks( __FUNCTION__, func_get_args() );
+	}
+
 }

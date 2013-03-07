@@ -63,4 +63,47 @@ interface QueryInterface {
 	 */
 	public function dropTable( $tableName );
 
+	/**
+	 * Inserts the provided values into the specified table.
+	 * The values are provided as an associative array in
+	 * which the keys are the field names.
+	 *
+	 * @since wd.db
+	 *
+	 * @param string $tableName
+	 * @param array $values
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function insert( $tableName, array $values );
+
+	/**
+	 * Updates the rows that match the conditions with the provided values.
+	 * The values and conditions are provided as an associative array in
+	 * which the keys are the field names.
+	 *
+	 * @since wd.db
+	 *
+	 * @param string $tableName
+	 * @param array $values
+	 * @param array $conditions
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function update( $tableName, array $values, array $conditions );
+
+	/**
+	 * Removes the rows matching the provided conditions from the specified table.
+	 * The conditions are provided as an associative array in
+	 * which the keys are the field names.
+	 *
+	 * @since wd.db
+	 *
+	 * @param string $tableName
+	 * @param array $conditions
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function delete( $tableName, array $conditions );
+
 }
