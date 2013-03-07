@@ -252,6 +252,7 @@ $wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
 $wgSpecialPageGroups['SetLabel']					= 'wikibaserepo';
 
 
+
 // Hooks
 $wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
 $wgHooks['WikibaseDefaultSettings'][] 				= 'Wikibase\RepoHooks::onWikibaseDefaultSettings';
@@ -277,6 +278,7 @@ $wgHooks['SetupAfterCache'][] 						= 'Wikibase\RepoHooks::onSetupAfterCache';
 $wgHooks['ShowSearchHit'][] 						= 'Wikibase\RepoHooks::onShowSearchHit';
 $wgHooks['TitleGetRestrictionTypes'][]				= 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
 $wgHooks['AbuseFilter-contentToString'][]			= 'Wikibase\RepoHooks::onAbuseFilterContentToString';
+$wgHooks['SpecialPage_reorderPages'][]			= 'Wikibase\RepoHooks::onSpecialPage_reorderPages';
 
 // Resource Loader Modules:
 $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
