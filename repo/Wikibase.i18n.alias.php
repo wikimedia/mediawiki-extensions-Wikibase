@@ -196,7 +196,7 @@ $specialPageAliases['vi'] = array(
 );
 
 /** Simplified Chinese (中文（简体）‎) */
-	$specialPageAliases['zh-hans'] = array(
+$specialPageAliases['zh-hans'] = array(
 	'EntityData' => array( '实体数据' ),
 	'NewItem' => array( '创建项目' ),
 	'NewProperty' => array( '新建属性' ),

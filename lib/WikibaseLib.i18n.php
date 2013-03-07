@@ -102,6 +102,23 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
 );
 
+/** Afrikaans (Afrikaans)
+ * @author Naudefj
+ */
+$messages['af'] = array(
+	'wikibase-entity-item' => 'item',
+	'wikibase-entity-property' => 'eienskap',
+	'wikibase-entity-query' => 'soekopdrag',
+	'wikibase-diffview-reference' => 'verwysing',
+	'wikibase-diffview-rank' => 'rang',
+	'wikibase-diffview-qualifier' => 'kwalifiseerder',
+	'wikibase-sitelinks-sitename-columnheading' => 'Taal',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
+	'wikibase-sitelinks-link-columnheading' => 'Geskakelde artikel',
+	'wikibase-tooltip-error-details' => 'Details',
+	'datatypes-type-wikibase-item' => 'Item',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -116,6 +133,38 @@ $messages['ast'] = array(
 	'wikibase-sitelinks-link-columnheading' => 'Artículu enllazáu',
 	'datatypes-type-wikibase-item' => 'Elementu',
 	'datatypes-type-commonsMedia' => 'Ficheru multimedia de Commons',
+);
+
+/** Belarusian (беларуская)
+ * @author Чаховіч Уладзіслаў
+ */
+$messages['be'] = array(
+	'wikibase-lib-desc' => 'Утрымлівае агульны функцыянал пашырэнняў Wikibase і Wikibase Client.',
+	'wikibase-entity-item' => "аб'ект",
+	'wikibase-entity-property' => 'уласцівасць',
+	'wikibase-entity-query' => 'запыт',
+	'wikibase-diffview-reference' => 'крыніца',
+	'wikibase-error-unexpected' => 'Узнікла нечаканая памылка.',
+	'wikibase-error-save-generic' => 'Падчас спробы захавання адбылася памылка, з-за чаго змены не былі ўнесеныя цалкам.',
+	'wikibase-error-remove-generic' => 'Падчас спробы выдалення адбылася памылка, з-за чаго змены не былі ўнесеныя цалкам.',
+	'wikibase-error-save-connection' => 'Падчас спробы захавання адбылася памылка злучэння, з-за чаго вашыя змены не былі захаваны. Калі ласка, праверце ваша злучэнне з Інтэрнэтам.',
+	'wikibase-error-remove-connection' => 'Пры выдаленні ўзнікла памылка сувязі, з-за гэтага вашы змены маглі не захавацца. Калі ласка, праверце ваша злучэнне з Інтэрнэтам.',
+	'wikibase-error-save-timeout' => 'Мы маем тэхнічныя праблемы, з-за чаго немагчыма завершыць захаванне.',
+	'wikibase-error-remove-timeout' => 'Мы маем тэхнічныя праблемы, з-за чаго немагчыма завершыць выдаленне.',
+	'wikibase-error-autocomplete-connection' => 'Не атрымалася запытаць Wikipedia API. Калі ласка, паспрабуйце пазней.',
+	'wikibase-error-autocomplete-response' => 'Адказ сервера: $1',
+	'wikibase-error-ui-client-error' => 'Знікла сувязь з кліенцкай старонкай. Калі ласка, паспрабуйце пазней.',
+	'wikibase-error-ui-no-external-page' => 'Не атрымалася знайсці ўказаную старонку на адпаведным праекце.',
+	'wikibase-error-ui-link-exists' => "Вы не можаце спаслацца на гэту старонку, бо іншы аб'ект ужо на яе спасылаецца.",
+	'wikibase-error-ui-session-failure' => 'Вашая сесія скончылася. Калі ласка, увайдзіце ў сістэму зноў.',
+	'wikibase-error-ui-edit-conflict' => 'Адбыўся канфлікт правак. Калі ласка, абнавіце старонку і захавайце зноў.',
+	'wikibase-sitelinks' => "Спіс старонак, што спасылаюцца на гэты аб'ект",
+	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
+	'wikibase-sitelinks-siteid-columnheading' => 'Код',
+	'wikibase-sitelinks-link-columnheading' => 'Злучаны артыкул',
+	'wikibase-tooltip-error-details' => 'Падрабязнасці',
+	'datatypes-type-wikibase-item' => 'Элемент',
+	'datatypes-type-commonsMedia' => 'Медыяфайл з Вікісховішча',
 );
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
@@ -1423,6 +1472,9 @@ $messages['zh-hans'] = array(
 	'wikibase-entity-item' => '项目',
 	'wikibase-entity-property' => '属性',
 	'wikibase-entity-query' => '查询',
+	'wikibase-diffview-reference' => '参考',
+	'wikibase-diffview-rank' => '分级',
+	'wikibase-diffview-qualifier' => '限定语',
 	'wikibase-error-unexpected' => '发生意外错误。',
 	'wikibase-error-save-generic' => '进行保存时发生错误，因此您所做的变更可能未被完成。',
 	'wikibase-error-remove-generic' => '进行删除时发生错误，因此您所做的变更可能未被完成。',
