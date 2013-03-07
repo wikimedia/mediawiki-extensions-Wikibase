@@ -117,6 +117,7 @@ $wgAutoloadClasses['Wikibase\Settings'] 				= $dir . 'includes/Settings.php';
 $wgAutoloadClasses['Wikibase\SettingsArray'] 			= $dir . 'includes/SettingsArray.php';
 $wgAutoloadClasses['Wikibase\SiteLink'] 				= $dir . 'includes/SiteLink.php';
 $wgAutoloadClasses['Wikibase\Term'] 					= $dir . 'includes/Term.php';
+$wgAutoloadClasses['Wikibase\Lib\TermsToClaimsTranslator'] = $dir . 'includes/TermsToClaimsTranslator.php';
 $wgAutoloadClasses['Wikibase\Utils'] 					= $dir . 'includes/Utils.php';
 $wgAutoloadClasses['Wikibase\WikibaseDiffOpFactory']	= $dir . 'includes/WikibaseDiffOpFactory.php';
 
