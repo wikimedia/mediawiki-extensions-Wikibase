@@ -48,7 +48,14 @@ $messages['en'] = array(
 	'wikibase-tooltip-error-details' => 'Details',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Commons media file',
-);
+
+	// toc stuff
+	'wikibase-toc-title' => 'Contents',
+	'wikibase-toc-section-other' => 'Other languages',
+	'wikibase-toc-section-statements' => 'Statements',
+	'wikibase-toc-section-sitelinks' => 'Sitelinks',
+	'wikibase-toc-section-datatype' => 'Datatype',
+	);
 
 /** Message documentation (Message documentation)
  * @author Amire80
@@ -100,6 +107,13 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
+
+	// toc stuff
+	'wikibase-toc-title' => 'Overall header on the "Table of Contents".',
+	'wikibase-toc-section-other' => 'Section header in the "Table of Contents" for the section "In other languages".',
+	'wikibase-toc-section-statements' => 'Section header in the "Table of Contents" for the section "Statements".',
+	'wikibase-toc-section-sitelinks' => 'Section header in the "Table of Contents" for the section "Sitelinks".',
+	'wikibase-toc-section-datatype' => 'Section header in the "Table of Contents" for the section "Datatype". Note that this section does not have a proper header.',
 );
 
 /** Asturian (asturianu)
