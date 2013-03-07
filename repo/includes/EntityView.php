@@ -90,12 +90,18 @@ abstract class EntityView extends \ContextSource {
 		$entityId = $entity->getEntity()->getPrefixedId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 		$html = '';
 
+		$toc = array();
+		if ( class_exists( 'Babel' ) && !$this->getUser()->isAnon() ) {
+			$toc[] = 'other';
+		}
+		$this->addTokenToTOC( $entity, $lang, $toc );
+
 		$html .= wfTemplate( 'wb-entity',
 			$entity->getEntity()->getType(),
 			$entityId,
 			$info['lang']->getCode(),
 			$info['lang']->getDir(),
-			$this->getInnerHtml( $entity, $lang, $editable )
+			$this->getInnerHtml( $entity, $lang, $editable, $toc )
 		);
 
 		// show loading spinner as long as JavaScript is initialising;
@@ -128,6 +134,56 @@ abstract class EntityView extends \ContextSource {
 	}
 
 	/**
+	 * Adds tokens to the table of contents.
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityContent $entity the entity to render
+	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param array &$toc a collection of tokens to turn into the table of contents
+	 */
+	abstract public function addTokenToTOC( EntityContent $entity, Language $lang = null, array &$toc );
+
+	/**
+	 * Builds and returns the HTML representing the table of contents.
+	 *
+	 * @since 0.1
+	 *
+	 * @param EntityContent $entity the entity to render
+	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param array &$toc a collection of tokens to turn into the table of contents
+	 * @return string
+	 */
+	public function getHtmlForTOC( EntityContent $entity, Language $lang = null, array &$toc ) {
+		wfProfileIn( __METHOD__ );
+
+		$prefixedId = $entity->getEntity()->getPrefixedId();
+
+		$count = 1;
+		$entries = array_map(
+			function( $token ) use ( &$count, $prefixedId ) {
+				return $token === false
+					? ''
+					: wfTemplate( 'wb-entity-toc-entry',
+						$count++,
+						$prefixedId === null ? '' : $prefixedId,
+						$token,
+						wfMessage( 'wikibase-toc-section-' . $token )->escaped()
+					);
+			},
+			$toc
+		);
+
+		$html = wfTemplate( 'wb-entity-toc',
+			wfMessage( 'wikibase-toc-title' )->text(),
+			implode('', $entries)
+		);
+
+		wfProfileOut( __METHOD__ );
+		return $html;
+	}
+
+	/**
 	 * Builds and returns the inner HTML for representing a whole WikibaseEntity. The difference to getHtml() is that
 	 * this does not group all the HTMl within one parent node as one entity.
 	 *
@@ -136,26 +192,38 @@ abstract class EntityView extends \ContextSource {
 	 * @param EntityContent $entity
 	 * @param \Language $lang
 	 * @param bool $editable
+	 * @param array &$toc
 	 * @return string
 	 */
-	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true, array &$toc ) {
 		wfProfileIn( __METHOD__ );
 
 		$claims = '';
 		$languageTerms = '';
 
-		if ( $entity->getEntity()->getType() === 'item' ) {
-			$claims = $this->getHtmlForClaims( $entity, $lang, $editable );
-		}
-
-		$languageTerms = $this->getHtmlForLanguageTerms( $entity, $lang, $editable );
-
-		$html = wfTemplate( 'wb-entity-content',
+		$entries = array(
 			$this->getHtmlForLabel( $entity, $lang, $editable ),
 			$this->getHtmlForDescription( $entity, $lang, $editable ),
 			$this->getHtmlForAliases( $entity, $lang, $editable ),
-			$languageTerms,
-			$claims
+			!empty( $toc )
+				? $this->getHtmlForTOC( $entity, $lang, $toc )
+				: false,
+			class_exists( 'Babel' ) && !$this->getUser()->isAnon()
+				? $this->getHtmlForLanguageTerms( $entity, $lang, $editable )
+				: false
+		);
+
+		// TODO: Move this out into an abstract method
+		switch ( $entity->getEntity()->getType() ) {
+		case 'item':
+			$entries[] = $this->getHtmlForClaims( $entity, $lang, $editable );
+			break;
+		default:
+			$entries[] = false;
+		}
+
+		$html = wfTemplate( 'wb-entity-content',
+			$entries
 		);
 
 		wfProfileOut( __METHOD__ );
@@ -350,7 +418,7 @@ abstract class EntityView extends \ContextSource {
 		$result = array();
 
 		// if the Babel extension is installed, add all languages of the user
-		if ( class_exists( 'Babel' ) && ( ! $user->isAnon() ) ) {
+		if ( class_exists( 'Babel' ) && !$user->isAnon() ) {
 			$result = \Babel::getUserLanguages( $user );
 			if( $lang !== null ) {
 				$result = array_diff( $result, array( $lang->getCode() ) );
@@ -388,7 +456,11 @@ abstract class EntityView extends \ContextSource {
 		$labels = $entity->getEntity()->getLabels();
 		$descriptions = $entity->getEntity()->getDescriptions();
 
-		$html .= wfTemplate( 'wb-terms-heading', wfMessage( 'wikibase-terms' ) );
+		$html .= wfTemplate(
+			'wb-terms-heading',
+			wfMessage( 'wikibase-terms' ),
+			$entity->getEntity()->getPrefixedId(),
+			'other'	);
 
 		$languages = $this->selectTerms( $entity->getEntity(), $lang, $this->getUser() );
 
@@ -452,9 +524,13 @@ abstract class EntityView extends \ContextSource {
 		$languageCode = isset( $lang ) ? $lang->getCode() : $wgLang->getCode();
 
 		$claims = $entity->getEntity()->getClaims();
-		$html = '';
 
-		$html .= wfTemplate( 'wb-section-heading', wfMessage( 'wikibase-statements' ) );
+		$html = wfTemplate(
+			'wb-section-heading',
+			wfMessage( 'wikibase-statements' ),
+			$entity->getEntity()->getPrefixedId(),
+			'statements'
+		);
 
 		// aggregate claims by properties
 		$claimsByProperty = array();

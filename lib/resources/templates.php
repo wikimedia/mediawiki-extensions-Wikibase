@@ -35,13 +35,34 @@ $1 <!-- label -->
 $2 <!-- description -->
 <hr class="wb-hr" />
 $3 <!-- aliases -->
-$4 <!-- terms -->
-$5 <!-- claims -->
+$4 <!-- toc -->
+$5 <!-- terms -->
+$6 <!-- claims -->
+HTML;
+
+	$templates['wb-entity-toc'] =
+<<<HTML
+<table id="toc" class="toc">
+<tbody><tr>
+<td>
+<div id="toctitle">
+<h2>$1<!-- title --></h2>
+<span class="toctoggle" />
+</div>
+<ul class="large">$2<!-- entries --></ul>
+</td>
+</tr>
+</tbody></table>
+HTML;
+
+	$templates['wb-entity-toc-entry'] =
+<<<HTML
+<li class="toclevel-1 tocsection-$1"><a href="#$2/$3"><span class="tocnumber">$1</span> <span class="toctext">$4</span></a></li>
 HTML;
 
 	$templates['wb-section-heading'] =
 <<<HTML
-<h2 class="wb-section-heading" dir="auto">$1</h2>
+<h2 id="$2/$3" class="wb-section-heading" dir="auto">$1</h2>
 HTML;
 
 	// TODO: rename this to 'wb-claimlist' or 'wb-claims' (in which case the widget should also be renamed)
@@ -209,7 +230,7 @@ HTML;
 
 	$templates['wb-terms-heading'] =
 		<<<HTML
-		<h2 class="wb-terms-heading">$1</h2>
+		<h2 id="$2/$3" class="wb-terms-heading">$1</h2>
 HTML;
 
 	$templates['wb-terms-table'] =
@@ -320,7 +341,7 @@ HTML;
 
 	$templates['wb-property-datatype'] =
 <<<HTML
-<div class="wb-datatype wb-value-row">
+<div id="$3/$4" class="wb-datatype wb-value-row">
 	<span class="wb-datatype-label">$1</span>
 	<span class="wb-value">$2</span>
 </div>

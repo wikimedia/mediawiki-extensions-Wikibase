@@ -19,14 +19,19 @@ use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
 class ItemView extends EntityView {
 
 	/**
+	 * @see EntityView::addTokenToTOC
+	 */
+	public function addTokenToTOC( EntityContent $entity, Language $lang = null, array &$toc ) {
+		$toc[] = 'statements';
+		$toc[] = 'sitelinks';
+	}
+
+	/**
 	 * @see EntityView::getInnerHtml
 	 */
-	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
-		$html = parent::getInnerHtml( $entity, $lang, $editable );
-
-		// add site-links to default entity stuff
+	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true, array &$toc ) {
+		$html = parent::getInnerHtml( $entity, $lang, $editable, $toc );
 		$html .= $this->getHtmlForSiteLinks( $entity, $lang, $editable );
-
 		return $html;
 	}
 
@@ -44,7 +49,12 @@ class ItemView extends EntityView {
 		$siteLinks = $item->getItem()->getSiteLinks();
 		$html = $thead = $tbody = $tfoot = '';
 
-		$html .= wfTemplate( 'wb-section-heading', wfMessage( 'wikibase-sitelinks' ) );
+		$html .= wfTemplate(
+			'wb-section-heading',
+			wfMessage( 'wikibase-sitelinks' ),
+			$item->getEntity()->getPrefixedId(),
+			'sitelinks'
+		);
 
 		if( !empty( $siteLinks ) ) {
 			$thead = wfTemplate( 'wb-sitelinks-thead',

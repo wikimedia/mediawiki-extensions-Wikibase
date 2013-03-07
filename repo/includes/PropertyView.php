@@ -34,6 +34,13 @@ use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
 class PropertyView extends EntityView {
 
 	/**
+	 * @see EntityView::addTokenToTOC
+	 */
+	public function addTokenToTOC( EntityContent $entity, Language $lang = null, array &$toc ) {
+		$toc[] = 'datatype';
+	}
+
+	/**
 	 * @see EntityView::getInnerHtml
 	 *
 	 * @param EntityContent $property
@@ -41,14 +48,14 @@ class PropertyView extends EntityView {
 	 * @param bool $editable
 	 * @return string
 	 */
-	public function getInnerHtml( EntityContent $property, Language $lang = null, $editable = true ) {
+	public function getInnerHtml( EntityContent $property, Language $lang = null, $editable = true, array &$toc ) {
 		wfProfileIn( __METHOD__ );
 
-		$html = parent::getInnerHtml( $property, $lang, $editable );
+		$html = parent::getInnerHtml( $property, $lang, $editable, $toc );
 
 		// add data value to default entity stuff
 		/** @var PropertyContent $property */
-		$html .= $this->getHtmlForDataType( $property->getProperty()->getDataType(), $lang, $editable );
+		$html .= $this->getHtmlForDataType( $property, $lang, $editable );
 		// TODO: figure out where to display type information more nicely
 
 		wfProfileOut( __METHOD__ );
@@ -60,18 +67,35 @@ class PropertyView extends EntityView {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \DataTypes\DataType $dataType the data type to render
+	 * @param EntityContent $property
 	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForDataType( \DataTypes\DataType $dataType, Language $lang = null, $editable = true ) {
+	public function getHtmlForDataType( EntityContent $property, Language $lang = null, $editable = true ) {
 		if( $lang === null ) {
 			$lang = $this->getLanguage();
 		}
-		return wfTemplate( 'wb-property-datatype',
-			wfMessage( 'wikibase-datatype-label' )->text(),
-			htmlspecialchars( $dataType->getLabel( $lang->getCode() ) )
+
+		/*
+		// TODO: Add a proper header for the datatype
+		$html = wfTemplate(
+			'wb-section-heading',
+			wfMessage( 'wikibase-datatype' ),
+			$property->getEntity()->getPrefixedId(),
+			'datatype'
 		);
+		*/
+
+		$dataType = $property->getProperty()->getDataType();
+
+		$html = wfTemplate( 'wb-property-datatype',
+			wfMessage( 'wikibase-datatype-label' )->text(),
+			htmlspecialchars( $dataType->getLabel( $lang->getCode() ) ),
+			$property->getEntity()->getPrefixedId(), // added for the toc
+			'datatype' // added for the toc
+		);
+
+		return $html;
 	}
 }

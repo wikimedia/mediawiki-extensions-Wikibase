@@ -40,6 +40,7 @@ $messages['en'] = array(
 	'wikibase-alias-edit-placeholder' => 'enter an alias',
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
+	'wikibase-datatype' => 'Datatype',
 	'wikibase-statements' => 'Statements',
 	'wikibase-terms' => 'In other languages',
 	'wikibase-sitelinks-add' => 'add a link to a site-link',
@@ -351,6 +352,7 @@ to find out where it went.',
 	'right-label-update' => 'Update labels',
 	'right-description-remove' => 'Remove descriptions',
 	'right-description-update' => 'Update descriptions',
+
 );
 
 /** Message documentation (Message documentation)
