@@ -43,12 +43,11 @@ $wgWBSettings['dataTypes'] = array_merge( $wgWBSettings['dataTypes'], array(
 	'time',
 ) );
 
-$wgAutoloadClasses['Wikibase\Query'] = __DIR__ . '/../includes/query/Query.php';
 
 $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreStart
 	$testFiles = array(
-		'query/Query',
+
 	);
 
 	foreach ( $testFiles as $file ) {
