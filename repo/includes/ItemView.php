@@ -22,11 +22,14 @@ class ItemView extends EntityView {
 	 * @see EntityView::getInnerHtml
 	 */
 	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( __METHOD__ );
+
 		$html = parent::getInnerHtml( $entity, $lang, $editable );
 
-		// add site-links to default entity stuff
+		$html .= $this->getHtmlForClaims( $entity, $lang, $editable );
 		$html .= $this->getHtmlForSiteLinks( $entity, $lang, $editable );
 
+		wfProfileOut( __METHOD__ );
 		return $html;
 	}
 
@@ -44,7 +47,11 @@ class ItemView extends EntityView {
 		$siteLinks = $item->getItem()->getSiteLinks();
 		$html = $thead = $tbody = $tfoot = '';
 
-		$html .= wfTemplate( 'wb-section-heading', wfMessage( 'wikibase-sitelinks' ) );
+		$html .= wfTemplate(
+			'wb-section-heading',
+			wfMessage( 'wikibase-sitelinks' ),
+			'sitelinks'
+		);
 
 		if( !empty( $siteLinks ) ) {
 			$thead = wfTemplate( 'wb-sitelinks-thead',

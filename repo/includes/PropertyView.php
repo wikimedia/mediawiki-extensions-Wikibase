@@ -36,7 +36,7 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 *
-	 * @param EntityContent $property
+	 * @param EntityContent $property (really PropertyContent but is abstract)
 	 * @param \Language|null $lang
 	 * @param bool $editable
 	 * @return string
@@ -46,10 +46,11 @@ class PropertyView extends EntityView {
 
 		$html = parent::getInnerHtml( $property, $lang, $editable );
 
+		//$html .= $this->getHtmlForClaims( $entity, $lang, $editable );
+
 		// add data value to default entity stuff
 		/** @var PropertyContent $property */
-		$html .= $this->getHtmlForDataType( $property->getProperty()->getDataType(), $lang, $editable );
-		// TODO: figure out where to display type information more nicely
+		$html .= $this->getHtmlForDataType( $property, $lang, $editable );
 
 		wfProfileOut( __METHOD__ );
 		return $html;
@@ -60,18 +61,30 @@ class PropertyView extends EntityView {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \DataTypes\DataType $dataType the data type to render
+	 * @param EntityContent $property
 	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForDataType( \DataTypes\DataType $dataType, Language $lang = null, $editable = true ) {
+	public function getHtmlForDataType( PropertyContent $property, Language $lang = null, $editable = true ) {
 		if( $lang === null ) {
 			$lang = $this->getLanguage();
 		}
-		return wfTemplate( 'wb-property-datatype',
-			wfMessage( 'wikibase-datatype-label' )->text(),
-			htmlspecialchars( $dataType->getLabel( $lang->getCode() ) )
+
+		$html = wfTemplate(
+			'wb-section-heading',
+			wfMessage( 'wikibase-datatype' ),
+			'datatype'
 		);
+
+		$dataType = $property->getProperty()->getDataType();
+
+		$html .= wfTemplate( 'wb-property-datatype',
+			wfMessage( 'wikibase-datatype-label' )->text(),
+			htmlspecialchars( $dataType->getLabel( $lang->getCode() ) ),
+			'datatype'
+		);
+
+		return $html;
 	}
 }

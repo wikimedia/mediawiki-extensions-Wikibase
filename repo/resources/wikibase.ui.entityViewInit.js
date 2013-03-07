@@ -118,7 +118,10 @@
 			// removing site links heading to rebuild it with value counter
 			$( 'table.wb-sitelinks' ).each( function() {
 				$( this ).before(
-					mw.template( 'wb-section-heading', mw.msg( 'wikibase-sitelinks' ) )
+					mw.template(
+						'wb-section-heading',
+						mw.msg( 'wikibase-sitelinks' ),
+						'sitelinks')
 					.append(
 						$( '<span/>' )
 						.attr( 'id', 'wb-item-' + mw.config.get('wbEntityId') + '-sitelinks-counter' )

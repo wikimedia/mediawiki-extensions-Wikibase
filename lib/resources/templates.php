@@ -30,18 +30,40 @@ HTML;
 
 
 	$templates['wb-entity-content'] =
+// This is only for the header content and not for the complete page. Sections after the toc
+// is just appended to the generated html.
 <<<HTML
 $1 <!-- label -->
 $2 <!-- description -->
 <hr class="wb-hr" />
 $3 <!-- aliases -->
-$4 <!-- terms -->
-$5 <!-- claims -->
+HTML;
+
+	$templates['wb-toc-entity'] =
+<<<HTML
+<div class="toctainer">
+<table id="toc" class="toc">
+<tbody><tr>
+<td>
+<div id="toctitle">
+<h2>$1<!-- title --></h2>
+<span class="toctoggle" />
+</div>
+<ul class="large">$2<!-- entries --></ul>
+</td>
+</tr>
+</tbody></table>
+</div>
+HTML;
+
+	$templates['wb-toc-entity-entry'] =
+<<<HTML
+<li class="toclevel-1 tocsection-$1"><a href="#$2"><span class="tocnumber">$1</span> <span class="toctext">$3</span></a></li>
 HTML;
 
 	$templates['wb-section-heading'] =
 <<<HTML
-<h2 class="wb-section-heading" dir="auto">$1</h2>
+<h2 id="$2" class="wb-section-heading" dir="auto">$1</h2>
 HTML;
 
 	$templates['wb-claimlist'] =
@@ -195,7 +217,7 @@ HTML;
 
 	$templates['wb-terms-heading'] =
 		<<<HTML
-		<h2 class="wb-terms-heading">$1</h2>
+		<h2 id="$2" class="wb-terms-heading">$1</h2>
 HTML;
 
 	$templates['wb-terms-table'] =
@@ -306,7 +328,7 @@ HTML;
 
 	$templates['wb-property-datatype'] =
 <<<HTML
-<div class="wb-datatype wb-value-row">
+<div id="$3" class="wb-datatype wb-value-row">
 	<span class="wb-datatype-label">$1</span>
 	<span class="wb-value">$2</span>
 </div>

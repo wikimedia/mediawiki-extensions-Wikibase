@@ -41,6 +41,7 @@ $messages['en'] = array(
 	'wikibase-alias-edit-placeholder' => 'enter an alias',
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
+	'wikibase-datatype' => 'Datatype',
 	'wikibase-statements' => 'Statements',
 	'wikibase-terms' => 'In other languages',
 	'wikibase-sitelinks-add' => 'add a link to a site-link',
@@ -472,6 +473,7 @@ This is a generic text used as a placeholder while defining the page for a possi
 Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument ($1) that is the sub site identifier, i.e. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Item|item]].',
 	'wikibase-description-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 H.png|right|0x150px]]
 Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata:Glossary#languageattribute-description|description]] and [[d:Wikidata:Glossary#Item|item]].',
+	'wikibase-datatype' => "Heading for the datatype entry in the currently viewed property. Note that the actual datatype entry doesn't have a section header. iSee also Wikidata's glossary for [[m:d:Wikidata:Glossary#Property|property]] and [[m:d:Wikidata:Glossary#Property|property]].",
 	'wikibase-statements' => "Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata's glossary for [[m:d:Wikidata:Glossary#Statement|statements]] and [[m:d:Wikidata:Glossary#Item|item]].",
 	'wikibase-terms' => 'Heading for the table with the labels and descriptions in other languages.
 {{Identical|Otherlanguages}}',
