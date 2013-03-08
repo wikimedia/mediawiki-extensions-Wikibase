@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DoAuWbD0",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-08T13:23:22Z",
+      "side": 1,
+      "message": "to do in separate patch, introduce magic word that gives the repo project name",
+      "revId": "366791ffc65a5fda2b17171ce2193e30ded72802",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DoCb5Jec",
         "filename": "client/resources/wbclient.watchlist.js",
         "patchSetId": 5
