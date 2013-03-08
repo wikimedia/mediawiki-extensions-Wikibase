@@ -1,0 +1,26 @@
+/**
+ * Styles for the entity selector search box replacement.
+ *
+ * @since 0.4
+ * @file
+ * @ingroup WikibaseRepo
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+
+.ui-entityselector-list .wb-entitysearch-suggestions {
+	border-top: 1px solid #C9C9C9;
+}
+
+.ui-entityselector-list .wb-entitysearch-suggestions .suggestions-special {
+	display: block;
+	border: none;
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+}
+
+.ui-entityselector-list .wb-entitysearch-suggestions .ui-state-hover div {
+	color: #FFFFFF;
+}

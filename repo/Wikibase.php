@@ -160,8 +160,8 @@ $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryC
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
 
 // includes/specials
-$wgAutoloadClasses['SpecialCreateEntity'] 				= $dir . 'includes/specials/SpecialCreateEntity.php';
-$wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
+$wgAutoloadClasses['SpecialNewEntity'] 				= $dir . 'includes/specials/SpecialNewEntity.php';
+$wgAutoloadClasses['SpecialNewItem'] 				= $dir . 'includes/specials/SpecialNewItem.php';
 $wgAutoloadClasses['SpecialNewProperty'] 				= $dir . 'includes/specials/SpecialNewProperty.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
@@ -226,30 +226,32 @@ $wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
 
 
 // Special page registration
-$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
-$wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
+$wgSpecialPages['NewItem'] 						= 'SpecialNewItem';
+$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 $wgSpecialPages['ItemsWithoutSitelinks']		= 'SpecialItemsWithoutSitelinks';
-$wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
-$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
-$wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
-$wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
 $wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
+$wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
+$wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
+$wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
+$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
+$wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
 
 
 // Special page groups
-$wgSpecialPageGroups['CreateItem']					= 'wikibaserepo';
-$wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
-$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
+$wgSpecialPageGroups['NewItem']					= 'wikibaserepo';
+$wgSpecialPageGroups['NewProperty']					= 'wikibaserepo';
 $wgSpecialPageGroups['ItemByTitle']					= 'wikibaserepo';
 $wgSpecialPageGroups['ItemDisambiguation']			= 'wikibaserepo';
 $wgSpecialPageGroups['ItemsWithoutSitelinks']		= 'wikibaserepo';
-$wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
-$wgSpecialPageGroups['NewProperty']					= 'wikibaserepo';
-$wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
-$wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
 $wgSpecialPageGroups['SetLabel']					= 'wikibaserepo';
+$wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
+$wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
+$wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
+$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
+$wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
+
 
 
 // Hooks
@@ -277,6 +279,7 @@ $wgHooks['SetupAfterCache'][] 						= 'Wikibase\RepoHooks::onSetupAfterCache';
 $wgHooks['ShowSearchHit'][] 						= 'Wikibase\RepoHooks::onShowSearchHit';
 $wgHooks['TitleGetRestrictionTypes'][]				= 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
 $wgHooks['AbuseFilter-contentToString'][]			= 'Wikibase\RepoHooks::onAbuseFilterContentToString';
+$wgHooks['SpecialPage_reorderPages'][]			= 'Wikibase\RepoHooks::onSpecialPage_reorderPages';
 
 // Resource Loader Modules:
 $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );

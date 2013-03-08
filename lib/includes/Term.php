@@ -229,11 +229,19 @@ class Term {
 	 * @return string
 	 */
 	public static function normalizeText( $text, $lang = 'en' ) {
+		// \p{Z} - whitespace
+		// \p{C} - control chars
+		$text = preg_replace( '/^[\p{Z}\p{C}]+|[\p{Z}\p{C}]+$/u', '', $text );
+		$text = preg_replace( '/[\p{C}]+/u', ' ', $text );
+
+		// composed normal form
+		$text = Utils::cleanupToNFC( $text );
+
 		//TODO: Use Language::lc to convert to lower case.
 		//      But that requires us to load ALL the language objects,
 		//      which loads ALL the messages, which makes us run out
 		//      of RAM (see bug 41103).
-		return mb_strtolower( Utils::trimToNFC( $text ) );
+		return mb_strtolower( $text, 'UTF-8' );
 	}
 
 	/**

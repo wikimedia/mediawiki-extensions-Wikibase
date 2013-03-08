@@ -29,7 +29,7 @@ use Wikibase\EntityContent;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class SpecialNewProperty extends SpecialCreateEntity {
+class SpecialNewProperty extends SpecialNewEntity {
 
 	/**
 	 * @since 0.2
@@ -48,7 +48,7 @@ class SpecialNewProperty extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::prepareArguments()
+	 * @see SpecialNewEntity::prepareArguments()
 	 */
 	protected function prepareArguments() {
 		parent::prepareArguments();
@@ -57,7 +57,7 @@ class SpecialNewProperty extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::hasSufficientArguments()
+	 * @see SpecialNewEntity::hasSufficientArguments()
 	 */
 	protected function hasSufficientArguments() {
 		// TODO: Needs refinement
@@ -65,14 +65,14 @@ class SpecialNewProperty extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::createEntityContent
+	 * @see SpecialNewEntity::createEntityContent
 	 */
 	protected function createEntityContent() {
 		return \Wikibase\PropertyContent::newEmpty();
 	}
 
 	/**
-	 * @see SpecialCreateEntity::modifyEntity()
+	 * @see SpecialNewEntity::modifyEntity()
 	 *
 	 * @param EntityContent $propertyContent
 	 *
@@ -101,7 +101,7 @@ class SpecialNewProperty extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::additionalFormElements()
+	 * @see SpecialNewEntity::additionalFormElements()
 	 */
 	protected function additionalFormElements() {
 		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
@@ -123,7 +123,7 @@ class SpecialNewProperty extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::getLegend()
+	 * @see SpecialNewEntity::getLegend()
 	 */
 	protected function getLegend() {
 		return $this->msg( 'wikibase-newproperty-fieldset' );

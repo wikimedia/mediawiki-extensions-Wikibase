@@ -36,9 +36,16 @@ if ( !defined( 'WBC_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 // Add the JavaScript to link items locally
 $wgHooks['BeforePageDisplay'][] = function( OutputPage &$out, Skin &$skin ) {
 	$title = $out->getTitle();
+	$namespaceChecker = new \Wikibase\NamespaceChecker(
+		\Wikibase\Settings::get( 'excludeNamespaces' ),
+		\Wikibase\Settings::get( 'namespaces' )
+	);
 
-	if ( in_array( $title->getNamespace(), \Wikibase\Settings::get( 'namespaces' ) ) && !$out->getLanguageLinks() && Action::getActionName( $skin->getContext() ) === 'view' && $title->exists() ) {
-		$out->addModules( 'wbclient.linkItem' );
+	if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+		if ( !$out->getLanguageLinks() && \Action::getActionName( $skin->getContext() ) === 'view' && $title->exists() ) {
+			$out->addModules( 'wbclient.linkItem' );
+		}
 	}
+
 	return true;
 };

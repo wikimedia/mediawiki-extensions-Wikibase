@@ -50,7 +50,7 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'special-createitem',
-				'wb-special-createitem-new-item-notification'
+				'wb-special-newitem-new-item-notification'
 			)
 		),
 

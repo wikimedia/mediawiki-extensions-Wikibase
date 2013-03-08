@@ -36,9 +36,9 @@ if ( !defined( 'WB_REPO_EXAMPLE_ENTRY' ) ) {
 
 $wgContentHandlerUseDB = true;
 
-// Define custom namespaces. Use these exact constant names.
-$baseNs = 100;
+$baseNs = 120;
 
+// Define custom namespaces. Use these exact constant names.
 define( 'WB_NS_ITEM', $baseNs );
 define( 'WB_NS_ITEM_TALK', $baseNs + 1 );
 define( 'WB_NS_PROPERTY', $baseNs + 2 );
@@ -82,7 +82,7 @@ if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 // Alternative settings, using the main namespace for items.
 // Note: if you do that, several core tests may fail. Parser tests for instance
 // assume that the main namespace contains wikitext.
-$baseNs = 100;
+$baseNs = 120;
 
 // NOTE: do *not* define WB_NS_ITEM and WB_NS_ITEM_TALK when using a core namespace for items!
 define( 'WB_NS_PROPERTY', $baseNs +2 );

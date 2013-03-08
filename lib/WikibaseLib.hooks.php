@@ -93,8 +93,9 @@ final class LibHooks {
 			'MapValueHasher',
 			'SettingsArray',
 			'SiteLink',
-			'Utils',
+			'TermsToClaimsTranslator',
 			'Term',
+			'Utils',
 		);
 
 		foreach ( $testFiles as $file ) {

@@ -104,4 +104,60 @@ class MediaWikiQueryInterface implements QueryInterface {
 		return $this->getDB()->dropTable( $tableName, __METHOD__ ) !== false;
 	}
 
+	/**
+	 * @see QueryInterface::insert
+	 *
+	 * @since wd.db
+	 *
+	 * @param string $tableName
+	 * @param array $values
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function insert( $tableName, array $values ) {
+		return $this->getDB()->insert(
+			$tableName,
+			$values,
+			__METHOD__
+		) !== false;
+	}
+
+	/**
+	 * @see QueryInterface::update
+	 *
+	 * @since wd.db
+	 *
+	 * @param string $tableName
+	 * @param array $values
+	 * @param array $conditions
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function update( $tableName, array $values, array $conditions ) {
+		return $this->getDB()->update(
+			$tableName,
+			$values,
+			$conditions,
+			__METHOD__
+		) !== false;
+	}
+
+	/**
+	 * @see QueryInterface::delete
+	 *
+	 * @since wd.db
+	 *
+	 * @param string $tableName
+	 * @param array $conditions
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function delete( $tableName, array $conditions ) {
+		return $this->getDB()->delete(
+			$tableName,
+			$conditions,
+			__METHOD__
+		) !== false;
+	}
+
 }

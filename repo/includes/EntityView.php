@@ -222,7 +222,7 @@ abstract class EntityView extends \ContextSource {
 		// make sure required client sided resources will be loaded:
 		$pout->addModules( 'wikibase.ui.entityViewInit' );
 
-		//FIXME: some places, like Special:CreateItem, don't want to override the page title.
+		//FIXME: some places, like Special:NewItem, don't want to override the page title.
 		//       But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
 		//       So, for now, we leave it to the caller to override the display title, if desired.
 		// set the display title

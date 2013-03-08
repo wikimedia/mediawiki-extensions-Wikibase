@@ -47,3 +47,8 @@ $magicWords['ml'] = array(
 $magicWords['nl'] = array(
 	'noexternallanglinks' => array( 0, 'geenexternetaalkoppelingen', 'geenexternetaalverwijzingen' ),
 );
+
+/** Vietnamese (Tiếng Việt) */
+$magicWords['vi'] = array(
+	'noexternallanglinks' => array( 0, 'khôngliênkếtngônngữngoài' ),
+);

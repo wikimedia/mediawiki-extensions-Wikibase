@@ -9,9 +9,9 @@
 class CreateEntityPage < EntityPage
   include PageObject
 
-  text_field(:createEntityLabelField, :id => "wb-createentity-label")
-  text_field(:createEntityDescriptionField, :id => "wb-createentity-description")
-  button(:createEntitySubmit, :id => "wb-createentity-submit")
+  text_field(:createEntityLabelField, :id => "wb-newentity-label")
+  text_field(:createEntityDescriptionField, :id => "wb-newentity-description")
+  button(:createEntitySubmit, :id => "wb-newentity-submit")
   div(:ipWarning, :xpath => "//div[@id='mw-content-text']/div[contains(@class, 'warning')]")
 
 end

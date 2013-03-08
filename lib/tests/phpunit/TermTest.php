@@ -13,6 +13,7 @@ use \Wikibase\Term;
  * @ingroup Test
  *
  * @group Wikibase
+ * @group WikibaseTerm
  * @group WikibaseLib
  *
  * @licence GNU GPL v2+
@@ -83,13 +84,31 @@ class TermTest extends \MediaWikiTestCase {
 			),
 
 			array( // #2: lower case of non-ascii character
-				'Äpfel', // raw
+				'ÄpFEl', // raw
 				'äpfel', // normalized
 			),
 
 			array( // #3: lower case of decomposed character
 				"A\xCC\x88pfel", // raw
 				'äpfel', // normalized
+			),
+
+			array( // #4: lower case of cyrillic character
+				'Берлин', // raw
+				'берлин', // normalized
+			),
+
+			array( // #5: lower case of greek character
+				'Τάχιστη', // raw
+				'τάχιστη', // normalized
+			),
+
+			array( // #6: nasty unicode whitespace
+				// ZWNJ: U+200C \xE2\x80\x8C
+				// RTLM: U+200F \xE2\x80\x8F
+				// PSEP: U+2029 \xE2\x80\xA9
+				"\xE2\x80\x8F\xE2\x80\x8Cfoo\xE2\x80\x8Cbar\xE2\x80\xA9", // raw
+				"foo bar", // normalized
 			),
 		);
 	}

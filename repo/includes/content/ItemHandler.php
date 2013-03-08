@@ -155,7 +155,7 @@ class ItemHandler extends EntityHandler {
 	 * @return string
 	 */
 	public function getSpecialPageForCreation() {
-		return 'CreateItem';
+		return 'NewItem';
 	}
 }
 

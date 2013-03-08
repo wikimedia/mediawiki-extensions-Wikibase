@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Test\Database;
 
 use Wikibase\Repo\Database\MediaWikiQueryInterface;
+use Wikibase\Repo\Database\QueryInterface;
 use Wikibase\Repo\Database\TableDefinition;
 use Wikibase\Repo\Database\FieldDefinition;
 
@@ -56,7 +57,7 @@ class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return MediaWikiQueryInterface
+	 * @return QueryInterface
 	 */
 	protected function newInstance() {
 		$conn = new \Wikibase\Repo\LazyDBConnectionProvider( DB_MASTER );
@@ -145,6 +146,120 @@ class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
 			$queryInterface->tableExists( $table->getName() ),
 			'Table should not exist after deletion'
 		);
+	}
+
+	public function testInsert() {
+		$queryInterface = $this->newInstance();
+
+		$table = new TableDefinition( 'testinsert', array(
+			new FieldDefinition( 'intfield', FieldDefinition::TYPE_INTEGER, FieldDefinition::NULL ),
+			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, FieldDefinition::NOT_NULL ),
+		) );
+
+		$this->assertTrue( $queryInterface->createTable( $table ) );
+
+		$this->assertTrue( $queryInterface->insert(
+			$table->getName(),
+			array(
+				'intfield' => 42,
+				'textfield' => 'foobar baz',
+			)
+		) );
+
+		$this->assertTrue( $queryInterface->insert(
+			$table->getName(),
+			array(
+				'textfield' => '~=[,,_,,]:3',
+			)
+		) );
+
+		// TODO: assert present
+
+		$this->assertTrue( $queryInterface->dropTable( $table->getName() ) );
+	}
+
+	public function testUpdate() {
+		$queryInterface = $this->newInstance();
+
+		$table = new TableDefinition( 'testupdate', array(
+			new FieldDefinition( 'intfield', FieldDefinition::TYPE_INTEGER, FieldDefinition::NULL ),
+			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, FieldDefinition::NOT_NULL ),
+		) );
+
+		$this->assertTrue( $queryInterface->createTable( $table ) );
+
+		$this->assertTrue( $queryInterface->insert(
+			$table->getName(),
+			array(
+				'intfield' => 42,
+				'textfield' => 'foobar baz',
+			)
+		) );
+
+		$this->assertTrue( $queryInterface->update(
+			$table->getName(),
+			array(
+				'textfield' => '~=[,,_,,]:3',
+			),
+			array(
+				'intfield' => 0
+			)
+		) );
+
+		// TODO: assert no change
+
+		$this->assertTrue( $queryInterface->update(
+			$table->getName(),
+			array(
+				'textfield' => '~=[,,_,,]:3',
+			),
+			array(
+				'intfield' => 42
+			)
+		) );
+
+		// TODO: assert change
+
+		$this->assertTrue( $queryInterface->dropTable( $table->getName() ) );
+	}
+
+	public function testDelete() {
+		$queryInterface = $this->newInstance();
+
+		$table = new TableDefinition( 'testdelete', array(
+			new FieldDefinition( 'intfield', FieldDefinition::TYPE_INTEGER, FieldDefinition::NULL ),
+			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, FieldDefinition::NOT_NULL ),
+		) );
+
+		$this->assertTrue( $queryInterface->createTable( $table ) );
+
+		$this->assertTrue( $queryInterface->insert(
+			$table->getName(),
+			array(
+				'intfield' => 42,
+				'textfield' => 'foobar baz',
+			)
+		) );
+
+		$this->assertTrue( $queryInterface->delete(
+			$table->getName(),
+			array(
+				'intfield' => 0
+			)
+		) );
+
+		// TODO: assert no change
+
+		$this->assertTrue( $queryInterface->delete(
+			$table->getName(),
+			array(
+				'intfield' => 42
+			)
+		) );
+
+		// TODO: assert change
+
+		$this->assertTrue( $queryInterface->dropTable( $table->getName() ) );
 	}
 
 }
