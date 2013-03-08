@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "DpQAgqK4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-08T07:31:23Z",
+      "side": 1,
+      "message": "Having a\n\n$wgHooks[\u0027ParserFirstCallInit\u0027][] \u003d function( Parser $parser ) {\n    $parser-\u003esetFunctionHook( \u0027property\u0027, array( \u0027\\Wikibase\\PropertyParser\u0027, \u0027render\u0027 ) );\n};\n\nin the experimental file would be cleaner",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//3no\u003d",
         "filename": "client/includes/parserhooks/PropertyParser.php",
         "patchSetId": 1
