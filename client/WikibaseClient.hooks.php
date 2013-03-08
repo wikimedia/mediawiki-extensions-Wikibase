@@ -525,7 +525,7 @@ final class ClientHooks {
 
 					// links to the associated item on the repo
 					$template->data['language_urls'][] = array(
-						'href' => $repoLinker->repoItemUrl( $entityId ),
+						'href' => $repoLinker->repoItemUrl( $entityId ) . '#sitelinks',
 						'text' => wfMessage( 'wikibase-editlinks' )->text(),
 						'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
 						'class' => 'wbc-editpage',
