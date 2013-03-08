@@ -631,60 +631,49 @@ div.wb-statement-references .wb-error {
 	background: #F0F0F0;
 	overflow: hidden;
 	margin-bottom: 10px;
+	min-height: 3.2em;
 }
 
-.wb-referenceview .wb-reference-snaks {
-	min-height: 1.7em;
-}
-
-.wb-referenceview .wb-reference-snaks .wb-snak-property {
+.wb-referenceview .wb-snaklistview-listview .wb-snak-property {
 	width: 12em;
 	position: absolute;
 	font-size: 90%;
 }
 
-.wb-referenceview .wb-reference-snaks .wb-snak-property input {
+.wb-referenceview .wb-snaklistview-listview .wb-snak-property input {
 	width: 100%;
 	font-size: 100%;
 	top: 0;
 	position: absolute;
 }
 
-.wb-referenceview .wb-reference-snaks .wb-snak-value-container {
+.wb-referenceview .wb-snaklistview-listview .wb-snak-value-container {
 	margin-left: 12em;
 	position: relative;
 }
 
-.wb-referenceview .wb-reference-snaks .wb-snak-value-container .wb-snak-value {
+.wb-referenceview .wb-snaklistview-listview .wb-snak-value-container .wb-snak-value {
 	margin-left: 16px;
 	margin-right: 18em;
 	word-wrap: break-word;
 }
 
-.wb-referenceview .wb-reference-snaks .wb-snak-value-container .wb-snak-value .valueview-value {
+.wb-referenceview .wb-snaklistview-listview .wb-snak-value-container .wb-snak-value .valueview-value {
 	font-size: 90%;
 }
 
-.wb-referenceview .wb-reference-snaks .wb-snak-value-container .wb-snak-typeselector {
+.wb-referenceview .wb-snaklistview-listview .wb-snak-value-container .wb-snak-typeselector {
 	left: 0;
 }
 
-.wb-referenceview .wb-reference-snaks .wb-snak-value-container .wb-snak-value .valueview-value textarea {
+.wb-referenceview .wb-snaklistview-listview .wb-snak-value-container .wb-snak-value .valueview-value textarea {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-.wb-referenceview .wb-claim-toolbar {
-	width: 18em;
-	position: absolute;
-	top: 10px;
-	right: 0;
-}
-
-.wb-referenceview .wb-claim-toolbar .wb-editsection {
-	font-size: 100%;
-	top: 0;
+.wb-statement-references > .wb-ui-toolbar {
+	float: right;
 }
 
 /***** /REFERENCES *****/

@@ -115,14 +115,6 @@ HTML;
 </div>
 HTML;
 
-	$templates['wb-reference'] =
-<<<HTML
-<div class="wb-reference">
-	<div class="wb-reference-snaks">$1</div> <!-- [0,*] wb-snak -->
-	<div class="wb-claim-toolbar">$2</div> <!-- edit section -->
-</div>
-HTML;
-
 	$templates['wb-listview'] =
 <<<HTML
 <div>$1</div>
@@ -131,8 +123,8 @@ HTML;
 	$templates['wb-snaklistview'] =
 <<<HTML
 <div class="wb-snaklistview">
-	<div class="wb-snaklistview-listview">$1</div> <!-- listview -->
-	<div class="wb-listview-toolbar">$2</div> <!-- edit section -->
+	<div class="wb-snaklistview-listview">$1</div> <!-- wb-listview -->
+	<div class="wb-snaklistview-toolbar">$2</div> <!-- edit section -->
 </div>
 HTML;
 
