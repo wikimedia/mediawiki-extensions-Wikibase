@@ -57,12 +57,13 @@ $messages['en'] = array(
  * @author Jeblad
  * @author Katie Filbert
  * @author Marius Hoch
+ * @author Metalhead64
  * @author Raymond
  * @author Shirayuki
  */
 $messages['qqq'] = array(
 	'wikibase-client-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
-See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
+See also [[d:Wikidata:Glossary#Wikidata|Wikidata]].',
 	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfully move, inviting user to update associated Wikibase repository item to maintain language links on the moved page on the client.
 
 Parameters:
@@ -132,19 +133,27 @@ Parameters:
  * @author Naudefj
  */
 $messages['af'] = array(
+	'wikibase-client-desc' => 'Kliënt vir die Wikibase-uitbreiding',
 	'wikibase-comment-update' => 'Taalskakels is opgedateer.',
 	'wikibase-comment-sitelink-add' => 'Taalskakel bygevoeg: $1',
+	'wikibase-comment-sitelink-change' => 'Taalskakel is van $1 na $2 verander',
+	'wikibase-comment-sitelink-remove' => 'Taalskakel is verwyder: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|wysiging|wysigings}}',
 	'wikibase-editlinks' => 'Wysig skales',
+	'wikibase-editlinkstitle' => 'Wysig skakels tussen tale',
 	'wikibase-linkitem-addlinks' => 'Skakels byvoeg',
+	'wikibase-linkitem-close' => 'Sluit venster en herlaai die bladsy',
+	'wikibase-linkitem-failure' => "'n Onbekende fout het tydens die skakeling na die gegewe bladsy voorgekom.",
 	'wikibase-linkitem-title' => 'Skakel met bladsy',
 	'wikibase-linkitem-linkpage' => 'Skakel met bladsy',
+	'wikibase-linkitem-selectlink' => 'Kies werf en bladsy na waarheen u die bladsy wil skakel.',
 	'wikibase-linkitem-input-site' => 'Taal:',
 	'wikibase-linkitem-input-page' => 'Bladsy:',
 	'wikibase-linkitem-invalidsite' => 'Onbekende of ongeldige werf gekies',
 	'wikibase-linkitem-confirmitem-button' => 'Bevestig',
 	'wikibase-linkitem-not-loggedin-title' => 'U moet aangemeld wees',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-show-wikidata-pref' => 'Wys Wikidata opdaterings in onlangse wysigings',
 );
 
 /** Arabic (العربية)
@@ -306,11 +315,17 @@ $messages['bn'] = array(
 );
 
 /** Breton (brezhoneg)
+ * @author Fohanno
  * @author Fulup
  */
 $messages['br'] = array(
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|kemm|kemm}}', # Fuzzy
 	'wikibase-editlinks' => 'Kemmañ al liammoù',
 	'wikibase-editlinkstitle' => 'Kemmañ al liammoù etreyezhel',
+	'wikibase-linkitem-addlinks' => 'Ouzhpennañ liammoù',
+	'wikibase-linkitem-input-site' => 'Yezh :',
+	'wikibase-linkitem-input-page' => 'Pajenn :',
+	'wikibase-linkitem-confirmitem-button' => 'Kadarnaat',
 );
 
 /** Bosnian (bosanski)
@@ -378,7 +393,7 @@ $messages['ca'] = array(
 $messages['ckb'] = array(
 	'wikibase-after-page-move' => 'باشترە ھەروەھا برگەی ویکیدراوی پەیوەندیداریش [$1 نوێ بکەیەوە] ھەتا پەیوەندەکانی زمان لە پەڕە گوازراوەکەدا بمێنێتەوە.',
 	'wikibase-comment-remove' => 'بەندی ویکیدراوەی پەیوەندیدار سڕایەوە. بەستەرەکانی زمان لابران.',
-	'wikibase-comment-linked' => 'بڕگەیەکی ویکیدراوە بەم پەڕەیە بەستەر دراوە.',
+	'wikibase-comment-linked' => 'بەندێکی ویکیدراوە بەم پەڕەیە بەستەر دراوە.',
 	'wikibase-comment-unlink' => 'ئەم پەڕەیە بە بەندی ویکیدراوە بەستەر نەدراوە. بەستەرەکانی زمان لابران.',
 	'wikibase-comment-restore' => 'بەندی ویکیدراوەی پەیوەندیدار گەڕایەوە. بەستەرەکانی زمان ھێنرایەوە.',
 	'wikibase-editlinks' => 'بەستەرەکان دەستکاری بکە',
@@ -661,6 +676,7 @@ $messages['fa'] = array(
 );
 
 /** Finnish (suomi)
+ * @author Harriv
  * @author Nike
  * @author Stryn
  * @author VezonThunder
@@ -681,8 +697,12 @@ $messages['fi'] = array(
 	'wikibase-editlinkstitle' => 'Muokkaa kieltenvälisiä linkkejä',
 	'wikibase-linkitem-addlinks' => 'Lisää linkkejä',
 	'wikibase-linkitem-close' => 'Sulje ikkuna ja lataa sivu uudelleen',
+	'wikibase-linkitem-failure' => 'Annettua sivua linkitettäessä tapahtui tuntematon virhe.',
+	'wikibase-linkitem-title' => 'Linkitä sivulle',
+	'wikibase-linkitem-linkpage' => 'Linkitä sivulle',
 	'wikibase-linkitem-input-site' => 'Kieli',
 	'wikibase-linkitem-input-page' => 'Sivu',
+	'wikibase-linkitem-not-loggedin-title' => 'Sinun täytyy olla sisäänkirjautuneena',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
 );
@@ -834,14 +854,32 @@ $messages['he'] = array(
  */
 $messages['hi'] = array(
 	'wikibase-client-desc' => 'विकिबेस एक्सटेंशन के लिए क्लाइन्ट',
+	'wikibase-after-page-move' => 'स्थान्तरित पृष्ठ पर भाषा कड़ियो को बनाए रखने के लिए आप सम्बन्धित विकिडेटा आइटम का भी [$1 अद्यतन] कर सकते हैं।',
+	'wikibase-comment-remove' => 'सम्बन्धित विकिडेटा आइटम हटाया गया। भाषा कड़ियाँ हटाईं।',
+	'wikibase-comment-linked' => 'विकिडेटा आइटम इस पृष्ठ के साथ जोड़ा गया।',
+	'wikibase-comment-unlink' => 'इस पृष्ठ को विकिडेटा आइटम से हटा दिया गया। भाषा कड़ियाँ हटाईं।',
+	'wikibase-comment-restore' => 'सम्बन्धित विकिडेटा आइटम अनष्ट किया गया। भाषा कड़ियाँ बहाल हुईं।',
 	'wikibase-comment-update' => 'भाषा कड़ियाँ अद्यतन हुईं।',
+	'wikibase-comment-sitelink-add' => 'भाषा कड़ी जोड़ी: $1',
+	'wikibase-comment-sitelink-change' => 'भाषा कड़ी $1 से $2 में बदल दी गई',
+	'wikibase-comment-sitelink-remove' => 'भाषा कड़ी हटा दी: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|परिवर्तन}}',
 	'wikibase-editlinks' => 'कड़ी संपादित करें',
 	'wikibase-editlinkstitle' => 'अन्तरभाषा कड़ी संपादित करें',
 	'wikibase-linkitem-addlinks' => 'कड़ी जोड़ें',
+	'wikibase-linkitem-alreadylinked' => 'पृष्ठ जिसे आप जोड़ना चाहते थे वह पहले से ही केन्द्रीय डेटा रिपोज़िटरी के [$1 आइटम] से जुड़ा हुआ है जो इस साइट के $2 से जुड़ता है। आइटम में एक साइट का केवल एक ही पृष्ठ जुड़ सकता है। कृपया किसी अन्य पृष्ठ को जोड़ने के लिए चुने।',
+	'wikibase-linkitem-close' => 'संवाद बंद करें और पृष्ठ पुनः लोड करें',
+	'wikibase-linkitem-failure' => 'दिए गए पृष्ठ को जोड़ते वक्त अज्ञात त्रुटि उत्पन्न हुई।',
+	'wikibase-linkitem-title' => 'पृष्ठ के साथ कड़ी',
+	'wikibase-linkitem-linkpage' => 'पृष्ठ के साथ कड़ी',
+	'wikibase-linkitem-selectlink' => 'इस पृष्ठ के साथ जोड़ने के लिए कृपया साइट और पृष्ठ का चयन करें।',
 	'wikibase-linkitem-input-site' => 'भाषा:',
 	'wikibase-linkitem-input-page' => 'पृष्ठ:',
+	'wikibase-linkitem-invalidsite' => 'अज्ञात या अमान्य साइट का चयन',
+	'wikibase-linkitem-confirmitem-text' => 'जिस पृष्ठ को आपने चुना था वह [हमारी केन्द्रीय डेटा रिपोज़िटरी के $1 आइटम] के साथ पहले से ही जुड़ा हुआ है। कृपया सुनिश्चित करें कि नीचे दिखाए गए पृष्ठ वही हैं जिन्हें आप इस पृष्ठ के साथ जोड़ना चाहते है।',
 	'wikibase-linkitem-confirmitem-button' => 'पुष्टि करें',
 	'wikibase-linkitem-not-loggedin-title' => 'आप को लॉग इन होने की आवश्यकता है',
+	'wikibase-linkitem-not-loggedin' => 'इस सुविधा के उपयोग के लिए आपका इस विकि और [$1 केन्द्रीय डेटा रिपोज़िटरी] पर लॉग इन होना आवश्यक है।',
 	'wikibase-linkitem-success-create' => 'पृष्ठ सफलतापूर्वक जुड़ गया है। आप नव निर्मित कड़ियाँ युक्त आइटम को हमारी [$1 केन्द्रीय डेटा रिपोज़िटरी] में पा सकते हैं।',
 	'wikibase-linkitem-success-link' => 'पृष्ठ सफलतापूर्वक जुड़ गया है। आप कड़ियाँ युक्त आइटम को हमारी [$1 केन्द्रीय डेटा रिपोज़िटरी] में पा सकते हैं।',
 	'wikibase-rc-hide-wikidata' => '$1विकिडेटा',
@@ -936,6 +974,36 @@ $messages['ia'] = array(
  */
 $messages['id'] = array(
 	'wikibase-client-desc' => 'Klien untuk ekstensi Wikibase',
+	'wikibase-after-page-move' => 'Anda juga perlu memperbarui [item $1] yang terkait di Wikidata dalam hal interwiki saat pemindahan halaman',
+	'wikibase-comment-remove' => 'Item Wikidata terkait dihapus. Interwiki dihapus.',
+	'wikibase-comment-linked' => 'Item Wikidata telah tertaut ke halaman ini.',
+	'wikibase-comment-unlink' => 'Halaman ini sudah tidak tertaut pada item Wikidata. Interwiki dihapus.',
+	'wikibase-comment-restore' => 'Terkait pembatalan penghapusan item Wikidata, interwiki dipulihkan.',
+	'wikibase-comment-update' => 'Interwiki diperbarui',
+	'wikibase-comment-sitelink-add' => 'Penambahan interwiki: $1',
+	'wikibase-comment-sitelink-change' => 'Interwiki berubah dari $1 ke $2',
+	'wikibase-comment-sitelink-remove' => 'Pengurangan interwiki: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|perubahan}}',
+	'wikibase-editlinks' => 'Sunting interwiki',
+	'wikibase-editlinkstitle' => 'Sunting pranala interwiki',
+	'wikibase-linkitem-addlinks' => 'Tambahkan pranala',
+	'wikibase-linkitem-alreadylinked' => 'Halaman yang ingin Anda tautkan sudah tertaut ke [item $1] pada pusat penyimpanan data yang terhubung pada $2 di situs ini. Item hanya dapat memiliki satu halaman per situs yang tertaut. Silakan pilih halaman lain untuk ditautkan.',
+	'wikibase-linkitem-close' => 'Tutup dan muat ulang halaman',
+	'wikibase-linkitem-failure' => 'Kesalahan tidak diketahui terjadi saat mencoba menautkan halaman.',
+	'wikibase-linkitem-title' => 'Tautkan dengan halaman',
+	'wikibase-linkitem-linkpage' => 'Tautkan dengan halaman',
+	'wikibase-linkitem-selectlink' => 'Silakan pilih sebuah kode bahasa dan halaman yang Anda ingin tautkan dengan halaman ini.',
+	'wikibase-linkitem-input-site' => 'Bahasa:',
+	'wikibase-linkitem-input-page' => 'Halaman:',
+	'wikibase-linkitem-invalidsite' => 'Situs tidak diketahui atau tidak valid yang dipilih',
+	'wikibase-linkitem-confirmitem-text' => 'Halaman yang anda pilih telah terpaut pada [item $1 di pusat penyimpanan data kami]. Silahkan dikonfirmasi halaman yang ditampilkan dibawah ini adalah halaman yang ingin anda tautkan.',
+	'wikibase-linkitem-confirmitem-button' => 'Terima',
+	'wikibase-linkitem-not-loggedin-title' => 'Anda harus masuk log',
+	'wikibase-linkitem-not-loggedin' => 'Anda harus masuk log pada wiki ini dan pada [pusat penyimpanan data $1] untuk menggunakan fitur ini.',
+	'wikibase-linkitem-success-create' => 'Halaman telah ditautkan. Anda dapat menemukan item baru berisi tautan tersebut pada [pusat penyimpanan data $1] kami.',
+	'wikibase-linkitem-success-link' => 'Halaman telah berhasil ditautkan. Anda dapat menemukan item berisi tautan tersebut pada [pusat penyimpanan data $1] kami.',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Tampilkan suntingan Wikidata di perubahan terbaru',
 );
 
 /** Iloko (Ilokano)
@@ -1204,6 +1272,13 @@ $messages['lv'] = array(
 $messages['mg'] = array(
 	'wikibase-editlinks' => 'Hanova ny rohy',
 	'wikibase-editlinkstitle' => 'Hanova ny rohy iraisam-piteny',
+);
+
+/** Minangkabau (Baso Minangkabau)
+ * @author Iwan Novirion
+ */
+$messages['min'] = array(
+	'wikibase-editlinks' => 'Suntiang interwiki',
 );
 
 /** Macedonian (македонски)
@@ -1743,6 +1818,26 @@ $messages['vi'] = array(
 	'wikibase-linkitem-success-link' => 'Các trang đã được liên kết với nhau thành công. Xem khoản mục chứa các liên kết trong [$1 kho dữ liệu chung].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Hiện các sửa đổi Wikidata trong thay đổi gần đây',
+);
+
+/** Yiddish (ייִדיש)
+ * @author פוילישער
+ */
+$messages['yi'] = array(
+	'wikibase-comment-linked' => "מ'האט פארלינקט א וויקידאטן איינס צו דעם בלאט",
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|ענדערונג|ענדערונגען}}',
+	'wikibase-editlinks' => 'רעדאקטירן לינקען',
+	'wikibase-editlinkstitle' => 'רעדאקטירן אינטערשפראך לינקען',
+	'wikibase-linkitem-addlinks' => 'צולייגן לינקען',
+	'wikibase-linkitem-title' => 'פארלינקען מיט בלאט',
+	'wikibase-linkitem-linkpage' => 'פארלינקען מיט בלאט',
+	'wikibase-linkitem-input-site' => 'שפּראַך:',
+	'wikibase-linkitem-input-page' => 'בלאַט:',
+	'wikibase-linkitem-invalidsite' => 'אומבאוואוסט אדער אומגילטיק זייטל אויסגעוויילט',
+	'wikibase-linkitem-confirmitem-button' => 'באַשטעטיקן',
+	'wikibase-linkitem-not-loggedin-title' => 'איר דארפט זיין אריינלאגירט',
+	'wikibase-rc-hide-wikidata' => '$1 וויקידאטן',
+	'wikibase-rc-show-wikidata-pref' => 'ווייזן וויקידאטן רעדאקטירונגען אין לעצטע ענדערונגען',
 );
 
 /** Simplified Chinese (中文（简体）‎)

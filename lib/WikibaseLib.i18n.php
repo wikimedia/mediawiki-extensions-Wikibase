@@ -53,6 +53,7 @@ $messages['en'] = array(
 /** Message documentation (Message documentation)
  * @author Amire80
  * @author Jeblad
+ * @author Metalhead64
  * @author Nemo bis
  * @author Nnemo
  * @author Raymond
@@ -61,11 +62,11 @@ $messages['en'] = array(
  */
 $messages['qqq'] = array(
 	'wikibase-lib-desc' => '{{desc|name=Wikibase Lib|url=http://www.mediawiki.org/wiki/Extension:WikibaseLib}}',
-	'wikibase-entity-item' => "How we refer to entities of type item. See also Wikidata's glossary on [[m:Wikidata/Glossary#item|item]].
+	'wikibase-entity-item' => "How we refer to entities of type item. See also Wikidata's glossary on [[d:Wikidata:Glossary#item|item]].
 {{Identical|Item}}",
-	'wikibase-entity-property' => 'How we refer to entities of type property. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].
+	'wikibase-entity-property' => 'How we refer to entities of type property. See also Wikidatas glossary on [[d:Wikidata:Glossary#entity|entity]].
 {{Identical|Property}}',
-	'wikibase-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].
+	'wikibase-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[d:Wikidata:Glossary#entity|entity]].
 {{Identical|Query}}',
 	'wikibase-diffview-reference' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects a reference. Will be shown as e.g. "claim / property q1 / reference".
 {{Identical|Reference}}',
@@ -91,7 +92,7 @@ $messages['qqq'] = array(
 Note that the default message says the user shall "reload and save", but after a reload the content that should be saved will be lost.',
 	'wikibase-replicationnote' => 'Note telling the user that it can take a few minutes until the made changes are visible on all wikis.',
 	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
-Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#Item|item]].',
+Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#Item|item]].',
 	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.
 {{Identical|Language}}',
 	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.',
@@ -112,11 +113,16 @@ $messages['af'] = array(
 	'wikibase-diffview-reference' => 'verwysing',
 	'wikibase-diffview-rank' => 'rang',
 	'wikibase-diffview-qualifier' => 'kwalifiseerder',
+	'wikibase-error-unexpected' => "'n Onverwagte fout het voorgekom.",
+	'wikibase-error-autocomplete-response' => 'Antwoord van bediener: $1',
+	'wikibase-error-ui-cant-edit' => 'U mag nie hierdie handeling uitvoer nie.',
+	'wikibase-sitelinks' => 'Lys van blaaie wat aan die item gekoppel is',
 	'wikibase-sitelinks-sitename-columnheading' => 'Taal',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
 	'wikibase-sitelinks-link-columnheading' => 'Geskakelde artikel',
 	'wikibase-tooltip-error-details' => 'Details',
 	'datatypes-type-wikibase-item' => 'Item',
+	'datatypes-type-commonsMedia' => 'Medialêer van Commons',
 );
 
 /** Asturian (asturianu)
@@ -232,6 +238,18 @@ $messages['bg'] = array(
 	'wikibase-tooltip-error-details' => 'Подробности',
 	'datatypes-type-wikibase-item' => 'Обект',
 	'datatypes-type-commonsMedia' => 'Файл от Общомедия',
+);
+
+/** Breton (brezhoneg)
+ * @author Fohanno
+ * @author Fulup
+ */
+$messages['br'] = array(
+	'wikibase-diffview-reference' => 'dave',
+	'wikibase-diffview-rank' => 'renk',
+	'wikibase-sitelinks-sitename-columnheading' => 'Yezh',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
+	'wikibase-tooltip-error-details' => 'Munudoù',
 );
 
 /** Bosnian (bosanski)
@@ -517,6 +535,7 @@ $messages['fa'] = array(
 
 /** Finnish (suomi)
  * @author Crt
+ * @author Harriv
  * @author Nike
  * @author Stryn
  * @author VezonThunder
@@ -527,6 +546,7 @@ $messages['fi'] = array(
 	'wikibase-entity-property' => 'ominaisuus',
 	'wikibase-entity-query' => 'kysely',
 	'wikibase-diffview-reference' => 'lähde',
+	'wikibase-diffview-rank' => 'sija',
 	'wikibase-diffview-qualifier' => 'tarkenne',
 	'wikibase-error-unexpected' => 'Odottamaton virhe.',
 	'wikibase-error-save-generic' => 'Tallennus epäonnistui. Muutoksiasi ei voitu toteuttaa.',
@@ -763,10 +783,21 @@ $messages['ia'] = array(
 );
 
 /** Indonesian (Bahasa Indonesia)
+ * @author Farras
  * @author පසිඳු කාවින්ද
  */
 $messages['id'] = array(
+	'wikibase-entity-item' => 'item',
+	'wikibase-entity-property' => 'properti',
+	'wikibase-entity-query' => 'kueri',
+	'wikibase-diffview-reference' => 'referensi',
+	'wikibase-sitelinks' => 'Daftar halaman yang tertaut ke item ini',
 	'wikibase-sitelinks-sitename-columnheading' => 'Bahasa',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
+	'wikibase-sitelinks-link-columnheading' => 'Artikel tertaut',
+	'wikibase-tooltip-error-details' => 'Rincian',
+	'datatypes-type-wikibase-item' => 'Item',
+	'datatypes-type-commonsMedia' => 'Berkas media Commons',
 );
 
 /** Iloko (Ilokano)
@@ -1458,6 +1489,19 @@ $messages['vi'] = array(
 	'wikibase-tooltip-error-details' => 'Chi tiết',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
 	'datatypes-type-commonsMedia' => 'Tập tin phương tiện Commons',
+);
+
+/** Yiddish (ייִדיש)
+ * @author פוילישער
+ * @author පසිඳු කාවින්ද
+ */
+$messages['yi'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'שפראַך',
+	'wikibase-sitelinks-siteid-columnheading' => 'קאד',
+	'wikibase-sitelinks-link-columnheading' => 'פארלינקטער ארטיקל',
+	'wikibase-tooltip-error-details' => 'פרטים',
+	'datatypes-type-wikibase-item' => 'איינהייט',
+	'datatypes-type-commonsMedia' => 'קאמאנס מעדיע טעקע',
 );
 
 /** Simplified Chinese (中文（简体）‎)

@@ -366,6 +366,7 @@ to find out where it went.',
  * @author Lokal Profil
  * @author Ltrlg
  * @author McDutchie
+ * @author Metalhead64
  * @author Minh Nguyen
  * @author Nemo bis
  * @author Nike
@@ -378,7 +379,7 @@ to find out where it went.',
  */
 $messages['qqq'] = array(
 	'wikibase-desc' => '{{desc|name=Wikibase|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}
-See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
+See also [[d:Wikidata:Glossary#Wikidata|Wikidata]].',
 	'specialpages-group-wikibaserepo' => 'Title of group of special pages related to the Wikibase (repository) extension',
 	'wikibase-edit' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
 [[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
@@ -411,23 +412,23 @@ Parameters:
 ** {{msg-mw|Wikibase-entity-item}}
 ** {{msg-mw|Wikibase-entity-property}}",
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
-This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
+This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-description|description]].',
 	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
-This is a generic text used as a placeholder while defining the site for a new sitelink. See also Wikidatas glossary on [[m:Wikidata/Glossary#sitelink|sitelink]].',
+This is a generic text used as a placeholder while defining the site for a new sitelink. See also Wikidatas glossary on [[d:Wikidata:Glossary#sitelink|sitelink]].',
 	'wikibase-sitelink-page-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
-This is a generic text used as a placeholder while defining the page for a possibly new sitelink. See also Wikidatas glossary on [[m:Wikidata/Glossary#sitelink|sitelink]].',
+This is a generic text used as a placeholder while defining the page for a possibly new sitelink. See also Wikidatas glossary on [[d:Wikidata:Glossary#sitelink|sitelink]].',
 	'wikibase-alias-edit-placeholder' => 'This is a generic placeholder message used while editing the list of aliases of an item. It is displayed in an empty input box which can be used to define a new alias.',
 	'wikibase-label-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 I.png|right|0x150px]]
-Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, i.e. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Item|item]].',
+Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, i.e. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Item|item]].',
 	'wikibase-description-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 H.png|right|0x150px]]
-Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#Item|item]].',
+Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[d:Wikidata:Glossary#languageattribute-description|description]] and [[d:Wikidata:Glossary#Item|item]].',
 	'wikibase-statements' => "Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata's glossary for [[m:d:Wikidata:Glossary#Statement|statements]] and [[m:d:Wikidata:Glossary#Item|item]].",
 	'wikibase-terms' => 'Heading for the table with the labels and descriptions in other languages.
 {{Identical|Otherlanguages}}',
 	'wikibase-sitelinks-add' => "Add a sitelink to a language specific page on the cluster. See also Wikidata's glossary for [[d:Wikidata:Glossary#Sitelink|sitelinks]].",
-	'wikibase-sitelinks-empty' => 'There are no site links for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
+	'wikibase-sitelinks-empty' => 'There are no site links for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|sitelinks]] and [[d:Wikidata:Glossary#sitelinks-title|title]].',
 	'wikibase-sitelinks-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 D.png|right|0x150px]]
-Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|site links]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
+Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#sitelinks-title|title]].',
 	'wikibase-remove' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface being put in edit mode.',
 	'wikibase-undo-title' => 'Title shown on the form for undoing edits. Example is Undoing edit to "Spain". Parameters:
@@ -457,10 +458,10 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-ui-pendingquantityc
 	'wikibase-propertyedittool-counter-pending-tooltip' => 'Parameters:
 * $1 is the number of elements not saved yet.',
 	'wikibase-propertyedittool-counter-entrieslabel' => "Used in the counter on top of the site-links table. The counter is giving information about how many site-links exist in the following table. This is just the label for the counter's subject, the site-links. The number of site-links is not part of the message but they are given as parameter $1 for plural usage in the label.",
-	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
+	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available. See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|sitelinks]].',
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'wb-special-newitem-new-item-notification' => 'Message displayed when a new item was created on [[Special:NewItem]] and the user has been redirected to the new items page. $1 is the new items id, $2 is a link back to the special page with "special-newitem" as label',
-	'wikibase-aliases-label' => 'Label for list of aliases, displayed in front of the list. Aliases are alternate names and nicknames for the item. See also [[m:Wikidata/Glossary]].',
+	'wikibase-aliases-label' => 'Label for list of aliases, displayed in front of the list. Aliases are alternate names and nicknames for the item. See also [[d:Wikidata:Glossary]].',
 	'wikibase-aliases-input-help-message' => 'Bubble help message for entering the aliases of the data set used for a specific item.',
 	'wikibase-aliases-empty' => 'Placeholder message when no aliases for this data set representing a specific item have been defined.',
 	'wikibase-datatype-label' => 'Label for the data type name/label on a property page.',
@@ -468,14 +469,14 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-ui-pendingquantityc
 
 Parameters:
 * $1 - the property name the user is about to edit a value of or add another value to',
-	'wikibase-claimview-snak-new-tooltip' => 'Tooltip message displayed when hovering/clicking the help icon next to the save, cancel and remove links of a claim (see [[d:Wikidata/Glossary]]) when about to add a completely new claim which includes specifying the property.',
-	'wikibase-statementview-referencesheading-pendingcountersubject' => "Used in the heading for the references associated with a statement (see [[d:Wikidata/Glossary]]). The heading is giving information about how many references exist for that statement. This is just the label for the counter's subject, the references, the number of references is not part of the message.
+	'wikibase-claimview-snak-new-tooltip' => 'Tooltip message displayed when hovering/clicking the help icon next to the save, cancel and remove links of a claim (see [[d:Wikidata:Glossary]]) when about to add a completely new claim which includes specifying the property.',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => "Used in the heading for the references associated with a statement (see [[d:Wikidata:Glossary]]). The heading is giving information about how many references exist for that statement. This is just the label for the counter's subject, the references, the number of references is not part of the message.
 
 Parameters:
 * $1 - the number of references for plural usage",
-	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'Tooltip displayed in the references heading when there are references (see [[d:Wikidata/Glossary]]) in edit mode which are not saved yet. Parameters:
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'Tooltip displayed in the references heading when there are references (see [[d:Wikidata:Glossary]]) in edit mode which are not saved yet. Parameters:
 * $1 is the number of elements not saved yet.',
-	'wikibase-snakview-property-input-placeholder' => 'Placeholder message that is initially displayed within the property input element when adding a new snak. See also [[m:Wikidata/Glossary]].
+	'wikibase-snakview-property-input-placeholder' => 'Placeholder message that is initially displayed within the property input element when adding a new snak. See also [[d:Wikidata:Glossary]].
 {{Identical|Property}}',
 	'wikibase-snakview-choosesnaktype' => 'Message prompting the user to select a Snak type (see [[d:Wikidata:Glossary]]) when adding or editing a Snak.
 
@@ -487,17 +488,17 @@ Since "Snak" or "Snak type" does not express any meaning for the user, these phr
 Parameters:
 * $1 - the name of the data type which lacks support',
 	'wikibase-snakview-variation-unsupporteddatavalue' => 'Error shown if a data value of a certain data value type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values of that type has not yet been implemented). $1 is the name of the data value type which lacks support.',
-	'wikibase-snakview-variation-datavaluetypemismatch' => "Warning displayed if the data value type used by a Snak's (see [[d:Wikidata/Glossary]]) property's data type is different from the data value type of the same Snak's actual value. This should only appear after internal changes or after a property's data type has changed and no scripts for updating the data were executed (there might not even be any scripts for handling all possible causes of this).",
+	'wikibase-snakview-variation-datavaluetypemismatch' => "Warning displayed if the data value type used by a Snak's (see [[d:Wikidata:Glossary]]) property's data type is different from the data value type of the same Snak's actual value. This should only appear after internal changes or after a property's data type has changed and no scripts for updating the data were executed (there might not even be any scripts for handling all possible causes of this).",
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => "Details of the warning displayed if the data value type used by a Snak's (see [[d:Wikidata:Glossary]]) property's data type is different from the data value type of the same Snak's actual value.
 
 Parameters:
 * $1 - data value type of the property-value Snak's value.
 * $2 - data value type used by the data type used in the property which is used by the property-value Snak",
 	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => "If the user is editing a Snak whose Property has been deleted, this warning will be displayed if tue user changes the Snak's type from any other Snak type to a value Snak. Since the Property has been deleted, there is absolutely no indication for what kind of value the user wants to enter. So this action simply makes no sense.",
-	'wikibase-snakview-variations-somevalue-label' => "Message displayed for 'some value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
-	'wikibase-snakview-variations-novalue-label' => "Message displayed for 'no value' Snaks (see [[d:Wikidata/Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
-	'wikibase-snakview-snaktypeselector-value' => "Short descriptive title of a 'value' snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option - which is the default when adding a claim - is allowing the user to specify a value.",
-	'wikibase-snakview-snaktypeselector-somevalue' => "Short descriptive title of a some-value snak (see [[d:Wikidata/Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that a value exists but it is unknown.",
+	'wikibase-snakview-variations-somevalue-label' => "Message displayed for 'some value' Snaks (see [[d:Wikidata:Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
+	'wikibase-snakview-variations-novalue-label' => "Message displayed for 'no value' Snaks (see [[d:Wikidata:Glossary]]) instead of the input element(s) that are displayed for 'value' Snaks.",
+	'wikibase-snakview-snaktypeselector-value' => "Short descriptive title of a 'value' snak (see [[d:Wikidata:Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option - which is the default when adding a claim - is allowing the user to specify a value.",
+	'wikibase-snakview-snaktypeselector-somevalue' => "Short descriptive title of a some-value snak (see [[d:Wikidata:Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that a value exists but it is unknown.",
 	'wikibase-snakview-snaktypeselector-novalue' => "A short descriptive title of a no-value snak (see [[d:Wikidata:Glossary]]) used in a drop-down menu allowing to select the snak type when adding or editing a snak. The drop-down menu can be opened by clicking an anchor right next to the input element(s) used to specify a claim's value. Although this is regarded a 'special', seldom used feature, the term 'snak' should be avoided here since the concept of snaks is a technical abstraction that does not give any additional meaning within the user interface. The basic meaning of this option is that no value exists.",
 	'wikibase-shortcopyrightwarning' => 'A short copyright warning displayed during editing in the JavaScript UI. The copyright warning is displayed within a tooltip next to the save button.
 
@@ -518,7 +519,7 @@ See also:
 * {{msg-mw|Sf autoedit anoneditwarning}}",
 	'wikibase-restrictionedit-tooltip-message' => 'When editing a page (a data item) is restricted for the current user, this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item.',
 	'wikibase-blockeduser-tooltip-message' => 'When the current user is blocked from editing a page (a data item), this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item or creating a new item.',
-	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|page]] and [[m:Wikidata/Glossary#item|item]].',
+	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[d:Wikidata:Glossary#page|page]] and [[d:Wikidata:Glossary#item|item]].',
 	'wikibase-warning-constraint-violation-length' => 'A warning message that a length constraint is triggered. This will usually come together with a fatal error message.
 
 Parameters:
@@ -563,10 +564,10 @@ Used to wrap the language and label for an additional entry when the language ar
 Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description. Parameters:
 * $1 label as a directional string
 * $2 description as a directional string',
-	'special-itembytitle' => "The item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also Wikidata's glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].",
+	'special-itembytitle' => "The item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also Wikidata's glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Items|items]].",
 	'wikibase-itembytitle-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by site and title.',
-	'wikibase-itembytitle-lookup-site' => "Label for the textfield holding the site id. See also Wikidata's glossary for [[m:Wikidata/Glossary#sitelinks|site links]].",
-	'wikibase-itembytitle-lookup-page' => "Label for the textfield holding the external page title. See also Wikidata's glossary for [[m:Wikidata/Glossary#sitelinks|site links]].
+	'wikibase-itembytitle-lookup-site' => "Label for the textfield holding the site id. See also Wikidata's glossary for [[d:Wikidata:Glossary#sitelinks|site links]].",
+	'wikibase-itembytitle-lookup-page' => "Label for the textfield holding the external page title. See also Wikidata's glossary for [[d:Wikidata:Glossary#sitelinks|site links]].
 {{Identical|Page}}",
 	'wikibase-itembytitle-submit' => 'Text for the submit button in the search form.',
 	'wikibase-itembytitle-nothing-found' => 'Informative text that the previous search failed for some reason, and that the search arguments must be refined.',
@@ -577,10 +578,10 @@ Title attribute set in links to an item. $1 is the items label or (if not availa
 Parameters:
 * $1 - the site identifier used in the URL
 * $2 - the page name on escaped form for use in the URL',
-	'special-itemdisambiguation' => "This special page returns all items with a given label. It provides an interface to disambiguate them. See also Wikidata's glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].",
+	'special-itemdisambiguation' => "This special page returns all items with a given label. It provides an interface to disambiguate them. See also Wikidata's glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Items|items]].",
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by language and label.',
 	'wikibase-itemdisambiguation-lookup-language' => 'Label for the textfield holding the language id.',
-	'wikibase-itemdisambiguation-lookup-label' => 'Label for the textfield holding the language specific label. See also Wikidatas glossary for [[m:Wikidata/Glossary#label|label]].
+	'wikibase-itemdisambiguation-lookup-label' => 'Label for the textfield holding the language specific label. See also Wikidatas glossary for [[d:Wikidata:Glossary#label|label]].
 {{Identical|Label}}',
 	'wikibase-itemdisambiguation-submit' => 'Text for the submit button in the search form.',
 	'wikibase-itemdisambiguation-nothing-found' => 'Response if the search failed because no such items have been found.',
@@ -885,19 +886,50 @@ $messages['af'] = array(
 	'wikibase-propertyedittool-full' => 'Dei lys van waardes is volledig.',
 	'wikibase-propertyedittool-counter-entrieslabel' => '$1 {{PLURAL:$1|inskrywing|inskrywings}}',
 	'wikibase-aliases-label' => 'Ook bekend as:',
+	'wikibase-aliases-empty' => 'Geen aliases gestel nie',
 	'wikibase-datatype-label' => 'Datatipe:',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|bron|bronne}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Eén bron|$1 bronne}} nog nie gestoor nie',
+	'wikibase-snakview-property-input-placeholder' => 'eienskap',
+	'wikibase-snakview-choosesnaktype' => "Kies 'n tipe waarde.",
 	'wikibase-snakview-variations-somevalue-label' => 'onbekende waarde',
 	'wikibase-snakview-variations-novalue-label' => 'geen waarde',
+	'wikibase-snakview-snaktypeselector-value' => 'aangepaste waarde',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'onbekende waarde',
 	'wikibase-snakview-snaktypeselector-novalue' => 'geen waarde',
 	'wikibase-entityselector-more' => 'meer',
+	'special-itembytitle' => 'Item gesorteer op naam',
 	'wikibase-itembytitle-lookup-site' => 'Werf:',
 	'wikibase-itembytitle-lookup-page' => 'Bladsy:',
 	'wikibase-itembytitle-submit' => 'Soek',
 	'wikibase-itemdisambiguation-lookup-language' => 'Taal:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiket:',
 	'wikibase-itemdisambiguation-submit' => 'Soek',
+	'special-newproperty' => "Skep 'n nuwe eienskap",
 	'wikibase-newproperty-datatype' => 'Datatipe:',
+	'special-newitem' => "Skep 'n nuwe item",
+	'wikibase-newentity-label' => 'Etiket:',
+	'wikibase-newentity-description' => 'Beskrywing:',
+	'wikibase-newentity-submit' => 'Skep',
+	'special-setlabel' => "Stel 'n etiket",
+	'wikibase-setlabel-label' => 'Etiket:',
+	'wikibase-setlabel-submit' => 'Stel die etiket',
+	'wikibase-setdescription-label' => 'Beskrywing:',
+	'wikibase-setdescription-submit' => 'Stel die beskrywing',
+	'wikibase-setaliases-label' => 'Aliasse:',
+	'wikibase-setentity-id' => 'ID:',
+	'wikibase-setentity-language' => 'Taal:',
+	'wikibase-entitieswithoutlabel-label-language' => 'Taal:',
+	'wikibase-entitieswithoutlabel-label-type' => 'Tipe:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'alle',
+	'wikibase-entitieswithoutlabel-submit' => 'Vind',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
+	'wikibase-listdatatypes-string-head' => 'String',
+	'wikibase-listdatatypes-time-head' => 'Tyd',
+	'content-model-wikibase-item' => 'Wikibase-item',
+	'content-model-wikibase-property' => 'Wikibase-eienskap',
+	'content-model-wikibase-query' => 'Wikibase-soekopdrag',
+	'right-item-override' => 'Oorskryf items',
 );
 
 /** Arabic (العربية)
@@ -1189,7 +1221,7 @@ $messages['be-tarask'] = array(
 	'wikibase-restrictionedit-tooltip-message' => 'Гэтая старонка абароненая. Рэдагаваньне не дазволенае.',
 	'wikibase-blockeduser-tooltip-message' => 'Вам было забароненае рэдагаваньне.',
 	'wikibase-move-error' => 'Вы ня можаце пераносіць старонкі, якія знаходзяцца ў прасторы назваў зьвестак, як і ня можаце пераносіць старонкі ў прастору.',
-	'special-itembytitle' => 'Аб’ект паводле спасылкі', # Fuzzy
+	'special-itembytitle' => 'Аб’ект паводле назвы',
 	'wikibase-itembytitle-lookup-fieldset' => 'Пошук аб’ектаў паводле сайту і назвы',
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
 	'wikibase-itembytitle-lookup-page' => 'Старонка:',
@@ -1207,7 +1239,8 @@ $messages['be-tarask'] = array(
 	'wikibase-newproperty-fieldset' => 'Стварыць новую ўласьцівасьць',
 	'wikibase-newproperty-datatype' => 'Тып зьвестак:',
 	'wikibase-newproperty-invalid-datatype' => 'Пазначаны няслушны тып зьвестак',
-	'special-newitem' => 'Стварыць новы прадмет',
+	'special-newitem' => 'Стварыць новы аб’ект',
+	'wikibase-newitem-summary' => 'Упэўніцеся, што [[Special:ItemByTitle|гэты аб’ект яшчэ не існуе]]!<br />Новым аб’ектам трэба надаць [[Help:Label|метку]] і [[Help:Description|апісаньне]].',
 	'wikibase-newitem-fieldset' => 'Стварыць новы прадмет',
 	'wikibase-newitem-site' => 'Сайт першай злучанай старонкі',
 	'wikibase-newitem-page' => 'Назва першай злучанай старонкі',
@@ -1349,6 +1382,7 @@ $messages['bg'] = array(
 );
 
 /** Breton (brezhoneg)
+ * @author Fohanno
  * @author Fulup
  */
 $messages['br'] = array(
@@ -1358,12 +1392,28 @@ $messages['br'] = array(
 	'wikibase-add' => 'ouzhpennañ',
 	'wikibase-save-inprogress' => "Oc'h enrollañ...",
 	'wikibase-remove-inprogress' => 'O tiverkañ...',
-	'wikibase-sitelink-site-edit-placeholder' => "spisaat al lec'hienn", # Fuzzy
-	'wikibase-sitelink-page-edit-placeholder' => 'spisaat ar bajenn', # Fuzzy
+	'wikibase-description-edit-placeholder' => 'ebarzhiñ un deskrivadur',
+	'wikibase-sitelink-site-edit-placeholder' => "lec'hienn",
+	'wikibase-sitelink-page-edit-placeholder' => 'pennad',
+	'wikibase-alias-edit-placeholder' => 'ebarzhiñ un alias',
 	'wikibase-remove' => 'Dilemel',
-	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-aliases-label' => 'Anvet ivez :',
-	'wikibase-tooltip-error-details' => 'Munudoù',
+	'wikibase-entityselector-more' => "muioc'h",
+	'wikibase-restrictionedit-tooltip-message' => "Gwarezet eo ar bajenn-mañ. N'eo ket aotreet aozañ anezhi.",
+	'wikibase-itembytitle-lookup-site' => "Lec'hienn :",
+	'wikibase-itembytitle-lookup-page' => 'Pajenn :',
+	'wikibase-itembytitle-submit' => 'Klask',
+	'wikibase-itemdisambiguation-lookup-language' => 'Yezh :',
+	'wikibase-newentity-description' => 'Deskrivadur :',
+	'wikibase-newentity-submit' => 'Krouiñ',
+	'wikibase-setdescription-label' => 'Deskrivadur :',
+	'wikibase-setaliases-label' => 'Aliasoù :',
+	'wikibase-setentity-language' => 'Yezh :',
+	'wikibase-entitieswithoutlabel-label-language' => 'Yezh :',
+	'wikibase-entitieswithoutlabel-label-type' => 'Seurt :',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'pep tra',
+	'right-alias-add' => 'Ouzhpennañ aliasoù',
+	'right-alias-remove' => 'Lemel aliasoù',
 );
 
 /** Bosnian (bosanski)
@@ -1555,6 +1605,7 @@ $messages['ca'] = array(
  */
 $messages['ckb'] = array(
 	'specialpages-group-wikibaserepo' => 'ئەمباری ویکیدراوە',
+	'wikibase-edit' => 'دەستکاریی بکە',
 	'wikibase-add' => 'زیاد بکە',
 	'wikibase-addreference' => 'سەرچاوە زیاد بکە',
 	'wikibase-description-empty' => 'ھێشتا شیکردنەوەیەک دیاری نەکراوە',
@@ -1567,8 +1618,10 @@ $messages['ckb'] = array(
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'ھێشتا {{PLURAL:$1|یەک سەرچاوە|$1 سەرچاوە}} پاشەکەوت نەکراوە',
 	'special-itembytitle' => 'بەندەکان پە پێی سەردێر', # Fuzzy
 	'wikibase-itemdisambiguation-nothing-found' => 'ببورە، بەندێک بەم ناوەوە نەدۆزرایەوە.',
-	'special-newitem' => 'بڕگەیەکی نوێ دروست بکە',
-	'wikibase-newitem-fieldset' => 'بڕگەیەکی نوێ دروست بکە',
+	'special-newitem' => 'بەندێکی نوێ دروست بکە',
+	'wikibase-newitem-fieldset' => 'بەندێکی نوێ دروست بکە',
+	'wikibase-item-summary-wbsetitem' => 'بەندێکی نوێ دروست کرا',
+	'wikibase-item-summary-wbeditentity-create' => 'بەندێکی نوێ دروست کرا',
 );
 
 /** Czech (česky)
@@ -2058,13 +2111,49 @@ Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPA
 	'wikibase-property-summary-wbsetaliases-remove' => 'Entfernte {{PLURAL:$1|Alias|Aliasse}} für [$2]',
 	'wikibase-property-summary-special-create-property' => 'Erstellte eine Eigenschaft für [$2] mit {{PLURAL:$1|Wert|Werten}}',
 	'wikibase-query-summary-special-create-query' => 'Erstellte eine Abfrage für [$2] mit {{PLURAL:$1|Wert|Werten}}',
-	'wikibase-listdatatypes-wikibase-item-head' => 'Objekt',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Datenobjekt',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Link zu anderen Objekten im Projekt. Es wird der „Objekt“-Namensraum auf Wikidata für passende Einträge durchsucht. Er besteht aus einem einfachen Texteintragsfeld.
+* scheme – impliziter Teil der Iri-Zeichenkette.
+* hierarchicalpart – impliziter Teil der Iri-Zeichenkette.
+* query – impliziter Teil der Iri-Zeichenkette.
+* fragment – impliziter Teil der Iri-Zeichenkette.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Mediendatei auf Commons',
-	'wikibase-listdatatypes-geo-coordinate-head' => 'Geo-Koordinate',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Link zu Dateien, die auf Wikimedia Commons gespeichert sind. Es wird der „Datei“-Namensraum auf Commons für passende Einträge durchsucht.
+* scheme – impliziter Teil der Iri-Zeichenkette.
+* hierarchicalpart – impliziter Teil der Iri-Zeichenkette.
+* query – impliziter Teil der Iri-Zeichenkette.
+* fragment – impliziter Teil der Iri-Zeichenkette.',
+	'wikibase-listdatatypes-geo-coordinate-head' => 'Geokoordinate',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'Literale Daten für eine geografische Position, die als Breitengrad-Längengrad-Paar in GMS oder Dezimalgrad für den Sternenkörper angegeben ist. Standards sind „Erde“, anschließend „WGS84“. Es wird eine Auflösung und ein Bereich hinzugefügt.
+* latitude – impliziter erster Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „N/S“ angegeben.
+* longitude – impliziter zweiter Teil (float, dms, dm, dd) der Koordinatenkette. Die Richtung wird entweder mit einem Präfixzeichen oder mit dem Postfix „O/W“ angegeben.
+* altitude (optional) – ausdrücklicher (?) Wert für die Höhe über einer Bezugsebene. Für den Globus „Erde“ ist der Bezugsglobus „WGS84“.
+* globe (optional) – ausdrücklicher (?) Datenwert, angegeben als Sternenkörper. Standards sind „Erde“, anschließend „WGS84“.',
 	'wikibase-listdatatypes-quantity-head' => 'Menge',
+	'wikibase-listdatatypes-quantity-body' => 'Literales Datenfeld für eine Menge, die sich auf eine Art einer klar definierten Einheit bezieht. Die tatsächliche Einheit geht in die Datenwerte, die eingegeben werden.
+* value – impliziter Teil der Zeichenkette (Mapping des Einheitspräfixes ist unklar).
+* unit – impliziter Teil der Zeichenkette (Mapping zum Standardisieren des Körpers ist unklar).
+* accuracy (optional) – ausdrücklicher Datenwert. Hat die gleiche Einheit als der Wert.',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Einsprachiger Text',
+	'wikibase-listdatatypes-monolingual-text-body' => 'Literales Datenfeld für eine Zeichenkette, die nicht in andere Sprachen übersetzt ist. Diese Art von Zeichenkette ist einmal definiert und wird auf allen Sprachen verwendet. Typische Verwendung sind geografische Namen, die in der lokalen Sprache geschrieben sind, eine Kennung gleicher Art, eine chemische Formel oder ein lateinischer wissenschaftlicher Name.
+* language – ausdrücklicher Wert zur Identifizierung der Sprache für den Textabschnitt.
+* text – ausdrücklicher Wert für die sprachspezifische Variantenkette.',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Mehrsprachiger Text',
+	'wikibase-listdatatypes-multilingual-text-body' => 'Literales Datenfeld für eine Zeichenkette, die in andere Sprachen übersetzt werden muss. Typische Verwendung ist ein Objektname mit globaler Interesse, der nicht-lokal geschriebene Formulare hat. Dies kann in Sprachen und Skriptsystemen abweichen.
+* language – ausdrücklicher Wert zur Identifizierung der Sprache des Textabschnitts.
+* text – ausdrücklicher Wert für die sprachspezifische Variantenkette.',
+	'wikibase-listdatatypes-string-head' => 'Zeichenkette',
+	'wikibase-listdatatypes-string-body' => 'Literales Datenfeld für eine Zeichenkette. Typische Verwendung sind Kennungen, die geschriebene Formulare haben, die nicht von der Sprache abhängig sind. Solche Zeichenketten können in einigen Fällen in andere Skriptsysteme transliteriert werden.
+* language – ausdrücklicher Wert zur Identifizierung der Sprache für den Textabschnitt.
+* text – ausdrücklicher Wert für die sprachspezifische Variantenkette.',
 	'wikibase-listdatatypes-time-head' => 'Zeit',
+	'wikibase-listdatatypes-time-body' => 'Literales Datenfeld für einen Zeitwert, angegeben als Zeit mit Genauigkeit und Begrenzungen. Die Zeit wird immer intern als gregorianisch gespeichert, kann jedoch andere Formate beim Parsen und Formatieren benutzen (?).
+* time – ausdrücklicher Wert für einen Zeitpunkt, dargestellt in ISO8601. Das Jahr hat immer 11 Zeichen. Das Datum ist immer signiert im Format +00000002013-01-01T00:00:00Z.
+* timezone – ausdrücklicher Wert als signierte Ganzzahl. Zeitzoneninformationen als Unterschied zu UTC in Minuten.
+* before – ausdrücklicher Ganzzahlwert für eine Anzahl an Einheiten nach der angegebenen Zeit. Die Einheit wird von der Genauigkeit angegeben.
+* after – ausdrücklicher Ganzzahlwert für eine Anzahl an Einheiten vor der angegebenen Zeit. Die Einheit wird von der Genauigkeit angegeben.
+* precision – ausdrücklicher Wert, kodiert in Shortint. Die Zahlen haben die folgende Bedeutung: 0: Milliarde Jahre; 1: Hundert Millionen Jahre … 6: Jahrtausend; 7: Jahrhundert; 8: Jahrzehnt; 9: Jahr; 10: Monat; 11: Tag; 12: Stunde; 13: Minute; 14: Sekunde.
+* calendarmodel – ausdrücklicher Wert, angegeben als URI. Er identifiziert das Kalendermodell, das zur Anzeige dieses Zeitwertes verwendet werden soll.',
 	'content-model-wikibase-item' => 'Wikibase-Datenobjekt',
 	'content-model-wikibase-property' => 'Wikibase-Eigenschaft',
 	'content-model-wikibase-query' => 'Wikibase-Abfrage',
@@ -2630,7 +2719,7 @@ $messages['es'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Otra propiedad ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Otra consulta ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2',
 	'wikibase-error-label-not-unique-item' => 'Otro elemento ($3) ya tiene la etiqueta "$1" y la descripción "$4" asociada con el código de idioma $2',
-	'special-itembytitle' => 'Elemento por enlace de sitio', # Fuzzy
+	'special-itembytitle' => 'Elemento por título',
 	'wikibase-itembytitle-lookup-fieldset' => 'Búsqueda de artículos por sitio y título',
 	'wikibase-itembytitle-lookup-site' => 'Sitio:',
 	'wikibase-itembytitle-lookup-page' => 'Página:',
@@ -2745,6 +2834,7 @@ $messages['es'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => 'Ha eliminado {{PLURAL:$1|el alias|los alias}} de [$2]',
 	'wikibase-property-summary-special-create-property' => 'Se ha creado una propiedad de [$2] con {{PLURAL:$1|valor|valores}}',
 	'wikibase-query-summary-special-create-query' => 'Se ha creado una consulta en [$2] con {{PLURAL:$1|valor|valores}}',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
 	'content-model-wikibase-item' => 'Elemento de Wikibase',
 	'content-model-wikibase-property' => 'Propiedad de Wikibase',
 	'content-model-wikibase-query' => 'Consulta de Wikibase',
@@ -3165,7 +3255,7 @@ IP-osoitteesi kirjataan sivun $1 muokkaushistoriaan.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Toinen ominaisuus ($3) käyttää jo nimeä "$1" kielikoodilla $2.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Toinen kysely ($3) käyttää jo nimeä "$1" kielikoodilla $2.',
 	'wikibase-error-label-not-unique-item' => 'Toinen kohde ($3) käyttää jo nimeä "$1" ja kuvausta "$4" kielikoodilla $2.',
-	'special-itembytitle' => 'Hae kohdetta sivustolinkillä', # Fuzzy
+	'special-itembytitle' => 'Hae kohdetta otsikolla',
 	'wikibase-itembytitle-lookup-fieldset' => 'Etsi kohteita sivuston ja otsikon mukaan',
 	'wikibase-itembytitle-lookup-site' => 'Sivusto:',
 	'wikibase-itembytitle-lookup-page' => 'Sivu:',
@@ -3276,6 +3366,9 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-property-summary-wbsetaliases-remove' => 'Poistettiin [$2]-{{PLURAL:$1|alias|aliaksia}}',
 	'wikibase-property-summary-special-create-property' => 'Luotiin [$2]-ominaisuus {{PLURAL:$1|arvolla|arvoilla}}',
 	'wikibase-query-summary-special-create-query' => 'Luotiin [$2]-kysely {{PLURAL:$1|arvolla|arvoilla}}',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Kohde',
+	'wikibase-listdatatypes-geo-coordinate-head' => 'Geo-koordinaatti',
+	'wikibase-listdatatypes-time-head' => 'Aika',
 	'content-model-wikibase-item' => 'Wikibase-kohde',
 	'content-model-wikibase-property' => 'Wikibase-ominaisuus',
 	'content-model-wikibase-query' => 'Wikibase-kysely',
@@ -3392,7 +3485,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de ce $
 	'wikibase-error-label-not-unique-wikibase-property' => 'Une autre propriété ($3) a déjà un libellé «&nbsp;$1&nbsp;» associé au code de langue $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Une autre requête ($3) a déjà le libellé « $1 » associé au code de langue $2',
 	'wikibase-error-label-not-unique-item' => 'Un autre élément ($3) a déjà le libellé «&nbsp;$1&nbsp;» et la description «&nbsp;$4&nbsp;» associés au code de langue $2',
-	'special-itembytitle' => 'Élément par lien de site', # Fuzzy
+	'special-itembytitle' => 'Élément par titre',
 	'wikibase-itembytitle-lookup-fieldset' => 'Rechercher des éléments par site et par titre',
 	'wikibase-itembytitle-lookup-site' => 'Site&nbsp;:&nbsp;',
 	'wikibase-itembytitle-lookup-page' => 'Page&nbsp;:&nbsp;',
@@ -3421,6 +3514,8 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de ce $
 	'wikibase-newitem-site' => 'Site de la première page liée',
 	'wikibase-newitem-page' => 'Nom de la première page liée',
 	'wikibase-newitem-no-external-page' => 'La page spécifiée est introuvable sur le site correspondant.',
+	'wikibase-newitem-add-sitelink-failed' => 'Le lien du site n’a pas pu être enregistré.',
+	'wikibase-newitem-not-recognized-siteid' => 'L’identifiant de site fourni n’a pas été reconnu.',
 	'wikibase-newentity-label' => 'Libellé&nbsp;:',
 	'wikibase-newentity-description' => 'Description&nbsp;:',
 	'wikibase-newentity-submit' => 'Créer',
@@ -3510,6 +3605,49 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de ce $
 	'wikibase-property-summary-wbsetaliases-remove' => 'Retrait {{PLURAL:$1|d’un alias|d’alias}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Propriété [$2] créée avec {{PLURAL:$1|une valeur|des valeurs}}',
 	'wikibase-query-summary-special-create-query' => 'Requête [$2] créée avec {{PLURAL:$1|une valeur|des valeurs}}',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Élément',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Lien vers d’autres éléments du projet. Lors de la saisie, l’espace de noms "Élément" sur Wikidata sera scruté à la recherche des entrées correspondantes. Cela consiste en un simple champ de saisie de texte.
+* scheme — partie implicite de Iri-string
+* hierarchicalpart — partie implicite de Iri-string
+* query — partie implicite de Iri-string
+* fragment — partie implicite de Iri-string',
+	'wikibase-listdatatypes-commonsmedia-head' => 'Médias communs',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Lien vers les fichiers stockés dans Communs de Wikimédia. Lors de la saisie, l’espace de noms "Fichier" de Communs sera scruté à la recherche des entrées correspondantes.
+* scheme — partie implicite de Iri-string
+* hierarchicalpart — partie implicite de Iri-string
+* query — partie implicite de Iri-string
+* fragment — partie implicite de Iri-string',
+	'wikibase-listdatatypes-geo-coordinate-head' => 'Coordonnées géographiques',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'Données littérales pour une position géographique donnée sous forme de paire latitude-longitude en GMS ou en degrés décimaux pour le corps céleste concerné. Par défaut, "Terre" puis "WGS84". Cela ajoute une résolution et une portée.
+* latitude — première partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe ou par le N/S en suffixe
+* longitude – seconde partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe soit par le E/W en suffixe
+* altitude (facultatif) – valeur explicite (?) pour l’élévation au-dessus d’un plan de référence, pour le globe "Terre" qui serait le globe de référence "WGS84"
+* globe (facultatif) – valeur de donnée explicite (?), fournissant le corps céleste, par défaut à "Terre" puis "WGS84"',
+	'wikibase-listdatatypes-quantity-head' => 'Quantité',
+	'wikibase-listdatatypes-quantity-body' => 'Champ de donnée littérale pour une quantité qui se rapporte à un type d’unité bien défini. L’unité réelle va dans les valeurs de donnée qui sont entrées.
+* value — partie implicite de la chaîne (l’application du préfixe de l’unité n’est pas clair)
+* unit — partie implicite de la chaîne (l’application du corps standardisé n’est pas claire)
+* accuracy (facultatif) — valeur de donnée explicite, ayant la même unité que la valeur',
+	'wikibase-listdatatypes-monolingual-text-head' => 'Texte monolingue',
+	'wikibase-listdatatypes-monolingual-text-body' => 'Champ de donnée littéral pour une chaîne qui n’est pas traduite dans d’autres langues. Ce type de chaîne est défini une fois et réutilisé dans toutes les langues. Une utilisation typique concerne les noms géographiques écrits dans la langue locale, un identifiant de type quelconque, une formule chimique ou un nom scientifique latin.
+* langue — valeur explicite pour identifier la langue de la partie texte
+* text — valeur explicite pour la chaîne dans la variante spécifique de la langue',
+	'wikibase-listdatatypes-multilingual-text-head' => 'Texte multilingue',
+	'wikibase-listdatatypes-multilingual-text-body' => 'Champ de donnée littéral pour une chaîne qui doit être traduite en d’autres langues. Une utilisation typique concerne un nom d’entité d’intérêt global qui a des formes écrites non locales. Elles peuvent différer à la fois dans les langues et les systèmes de script.
+* language — valeur explicite pour identifier la langue de la partie texte
+* text — valeur explicite pour la chaîne dans la variante spécifique de la langue',
+	'wikibase-listdatatypes-string-head' => 'Chaîne',
+	'wikibase-listdatatypes-string-body' => 'Champ de donnée littéral pour une chaîne de caractères. Une utilisation typique concerne les identifiants qui ont des formes écrites ne dépendant pas de la langue. De telles chaînes peuvent dans certains cas être traduites en d’autres systèmes de script.
+* language — valeur explicite pour identifier la langue de la partie texte
+* text — valeur explicite pour la chaîne dans la variante spécifique de la langue',
+	'wikibase-listdatatypes-time-head' => 'Horodatage',
+	'wikibase-listdatatypes-time-body' => 'Champ de donnée littéral pour une valeur d’horodatage. Fournit un horodatage avec certaines précision et limites. L’horodatage est toujours enregistré en interne au format grégorien, mais peut utiliser d’autres formats lors de l’analyse et la mise en forme. (?)
+* time — valeur explicite pour le point dans le temps, représenté en ISO8601, avec toujours 11 chiffres, la date toujours signée, au format +00000002013-01-01T00:00:00Z
+* timezone — valeur explicite sous forme d’entier signé. L’information de fuseau horaire est un décalage de l’UTC en minutes.
+* before — valeur entière explicite pour le nombre d’unités possible après l’horodatage fourni. L’unité est indiquée par la précision.
+* after — valeur entière explicite pour le nombre d’unités possible avant l’horodatage fourni. L’unité est indiquée par la précision.
+* precision — valeur explicite encodée en entier court. Les nombres ont la signification suivante: 0 — milliard d’années, 1 — centaine de million d’années, …, 6 — millénaire, 7 — siècle, 8 — décennie, 9 — année, 10 — mois, 11 — jour, 12 — heure, 13 — minute, 14 — seconde.
+* calendarmodel — valeur explicite fournie sous forme d’URI. Elle identifie le modèle de calendrier qui doit être utilisé pour afficher cette valeur d’horodatage.',
 	'content-model-wikibase-item' => 'Élément Wikibase',
 	'content-model-wikibase-property' => 'Propriété de Wikibase',
 	'content-model-wikibase-query' => 'Requête de Wikibase',
@@ -3768,7 +3906,7 @@ $messages['gl'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Outra propiedade ($3) xa ten a etiqueta "$1" asociada ao código de lingua $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Outra pescuda ($3) xa ten a etiqueta "$1" asociada ao código de lingua $2',
 	'wikibase-error-label-not-unique-item' => 'Outro elemento ($3) xa ten a etiqueta "$1" e a descrición "$4" asociadas ao código de lingua $2',
-	'special-itembytitle' => 'Elemento por ligazón', # Fuzzy
+	'special-itembytitle' => 'Elemento por título',
 	'wikibase-itembytitle-lookup-fieldset' => 'Procurar elementos por sitio e título',
 	'wikibase-itembytitle-lookup-site' => 'Sitio:',
 	'wikibase-itembytitle-lookup-page' => 'Páxina:',
@@ -3886,6 +4024,7 @@ $messages['gl'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => 'Elimino {{PLURAL:$1|un pseudónimo|pseudónimos}} en [$2]',
 	'wikibase-property-summary-special-create-property' => 'Creo unha propiedade en [$2] {{PLURAL:$1|cun valor|con valores}}',
 	'wikibase-query-summary-special-create-query' => 'Creo unha pescuda en [$2] {{PLURAL:$1|cun valor|con valores}}',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
 	'content-model-wikibase-item' => 'Elemento de Wikibase',
 	'content-model-wikibase-property' => 'Propiedade de Wikibase',
 	'content-model-wikibase-query' => 'Consulta de Wikibase',
@@ -4642,21 +4781,134 @@ $messages['ia'] = array(
 );
 
 /** Indonesian (Bahasa Indonesia)
+ * @author Farras
  * @author පසිඳු කාවින්ද
  */
 $messages['id'] = array(
+	'wikibase-desc' => 'Penyimpanan data berstruktur',
+	'specialpages-group-wikibaserepo' => 'Penyimpanan Wikibase',
 	'wikibase-edit' => 'sunting',
 	'wikibase-save' => 'simpan',
 	'wikibase-cancel' => 'Batalkan',
 	'wikibase-add' => 'tambahkan',
+	'wikibase-addreference' => 'tambah sumber',
+	'wikibase-save-inprogress' => 'Menyimpan...',
+	'wikibase-remove-inprogress' => 'Menghapus...',
+	'wikibase-label-empty' => 'Belum ada label',
+	'wikibase-label-edit-placeholder' => 'masukkan label',
+	'wikibase-description-empty' => 'Belum ada keterangan',
+	'wikibase-deletedentity' => 'Menghapus $1',
+	'wikibase-description-edit-placeholder' => 'masukkan keterangan',
+	'wikibase-sitelink-site-edit-placeholder' => 'situs',
 	'wikibase-sitelink-page-edit-placeholder' => 'Artikel',
+	'wikibase-alias-edit-placeholder' => 'masukkan alias',
+	'wikibase-description-input-help-message' => 'Masukkan keterangan singkat di $1.',
+	'wikibase-statements' => 'Pernyataan',
+	'wikibase-terms' => 'Dalam bahasa lain',
+	'wikibase-sitelinks-add' => 'tambahkan pranala ke pranala situs',
+	'wikibase-sitelinks-empty' => 'Belum ada pranala situs untuk item ini.',
+	'wikibase-sitelinks-input-help-message' => 'Buat pranala ke halaman yang terkait dengan item ini.',
 	'wikibase-remove' => 'hapus',
-	'wikibase-tooltip-error-details' => 'Rincian',
+	'wikibase-undo-title' => 'Membatalkan suntingan di "$1"',
+	'wikibase-restore-title' => 'Mengembalikan revisi lama "$1"',
+	'wikibase-empty-undo' => 'Tidak ada yang dapat dibatalkan di sini.',
+	'wikibase-undo-revision-error' => 'Pembatalan gagal',
+	'wikibase-undo-badpage' => 'Revisi salah: Reveisi $2 bukan milik [[$1]].',
+	'wikibase-undo-firstrev' => 'Tidak dapat membatalkan pembuatan halaman',
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|entri|entri}}',
+	'wikibase-sitelinksedittool-full' => 'Pranala ke halaman sudah ditetapkan untuk semua situs.',
+	'wikibase-disambiguation-title' => 'Disambiguasi untuk "$1"',
+	'wikibase-aliases-label' => 'Nama lain:',
+	'wikibase-datatype-label' => 'Jenis data:',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|sumber|sumber}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Satu sumber|$1 sumber}} belum tersimpan',
+	'wikibase-snakview-property-input-placeholder' => 'properti',
+	'wikibase-entityselector-more' => 'kembangkan',
+	'wikibase-anonymouseditwarning' => 'Peringatan: Anda belum masuk log.
+Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.',
+	'wikibase-blockeduser-tooltip-message' => 'Anda diblokir dari penyuntingan.',
+	'wikibase-error-sitelink-already-used' => 'Pranala situs [[$1:$2]] sudah dipakai oleh item [[$3]].',
+	'special-itembytitle' => 'Item menurut judul',
+	'wikibase-itembytitle-lookup-fieldset' => 'Cari item menurut situs dan judul',
+	'wikibase-itembytitle-lookup-site' => 'Situs:',
 	'wikibase-itembytitle-lookup-page' => 'Halaman:',
+	'wikibase-itembytitle-submit' => 'Cari',
+	'wikibase-itembytitle-description' => 'Situs adalah kode pengenal, seperti "enwiki".',
+	'wikibase-itembytitle-create' => 'Anda juga dapat [{{fullurl:Special:NewItem|site=$1&page=$2}} membuat item baru].',
+	'special-itemdisambiguation' => 'Disambiguasi item',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Cari item menurut bahasa dan label',
 	'wikibase-itemdisambiguation-lookup-language' => 'Bahasa:',
-	'wikibase-createentity-description' => 'Deskripsi:',
+	'wikibase-itemdisambiguation-lookup-label' => 'Label:',
+	'wikibase-itemdisambiguation-submit' => 'Cari',
+	'wikibase-itemdisambiguation-nothing-found' => 'Maaf, item dengan label tersebut tidak ditemukan.',
+	'wikibase-itemdisambiguation-create' => 'Anda dapat [{{fullurl:Special:NewItem|label=$1}} membuat item ini].',
+	'wikibase-itemdisambiguation-invalid-langcode' => 'Maag, pengenal bahasa yang Anda masukkan tidak dikenal sistem. Gunakan pengenal yang benar seperti "en".',
+	'special-newproperty' => 'Buat properti baru',
+	'wikibase-newproperty-fieldset' => 'Buat properti baru',
+	'wikibase-newproperty-datatype' => 'Jenis data:',
+	'wikibase-newproperty-invalid-datatype' => 'Jenis data yang dimasukkan salah',
+	'special-newitem' => 'Buat item baru',
+	'wikibase-newitem-summary' => 'Pastikan Anda [[Special:ItemByTitle|memerika jika item tersebut sudah ada]]!<br />Buatlah [[Help:Label|label]] dan [[Help:Description|keterangan]] untuk semua item baru.',
+	'wikibase-newitem-fieldset' => 'Buat item baru',
+	'wikibase-newitem-site' => 'Situs halaman tertaut pertama',
+	'wikibase-newitem-page' => 'Nama halaman tertaut pertama',
+	'wikibase-newitem-no-external-page' => 'Halaman yang dicari tidak ditemukan di situs bersangkutan.',
+	'wikibase-newitem-add-sitelink-failed' => 'Pranala situs tidak dapat disimpan.',
+	'wikibase-newentity-label' => 'Label:',
+	'wikibase-newentity-description' => 'Deskripsi:',
+	'wikibase-newentity-submit' => 'Buat',
+	'special-setlabel' => 'Buat label',
+	'wikibase-setlabel-label' => 'Label:',
+	'wikibase-setlabel-submit' => 'Buat label',
+	'wikibase-setlabel-warning-remove' => 'Apakah Anda ingin menghapus label [[$1]]?',
+	'special-setdescription' => 'Buat keterangan',
+	'wikibase-setdescription-label' => 'Keterangan:',
+	'wikibase-setdescription-submit' => 'Buat keterangan',
+	'wikibase-setdescription-warning-remove' => 'Apakah Anda ingin menghapus keterangan [[$1]]?',
+	'special-setaliases' => 'Buat alias',
+	'wikibase-setaliases-label' => 'Alias:',
+	'wikibase-setaliases-submit' => 'Buat alias',
+	'wikibase-setaliases-warning-remove' => 'Apakah Anda ingin menghapus semua alias [[$1]]?',
+	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Bahasa', # Fuzzy
+	'special-listdatatypes' => 'Daftar semua jenis data yang tersedia',
+	'wikibase-history-title-with-label' => 'Riwayat revisi "$2" ($1)',
+	'wikibase-history-title-without-label' => 'Riwayat revisi ($1)',
+	'special-entitieswithoutlabel' => 'Entitas tanpa label',
+	'wikibase-entitieswithoutlabel-legend' => 'Dapatkan daftar entitas tanpa label',
 	'wikibase-entitieswithoutlabel-label-language' => 'Bahasa:',
+	'wikibase-entitieswithoutlabel-label-type' => 'Jenis:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'semua',
+	'wikibase-entitieswithoutlabel-submit' => 'Temukan',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" bukan kode bahasa yang sah.',
+	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" bukan jenis entitas yang sah.',
+	'special-itemswithoutsitelinks' => 'Item tanpa pranala situs',
+	'special-entitydata' => 'Data entitas',
+	'wikibase-entitydata-title' => 'Data Entitas',
+	'wikibase-no-direct-editing' => 'Penyuntingan langsung dinonaktifkan di ruang nama $1',
+	'wikibase-noentity-createone' => 'Amda juga dapat [[$1|membuat yang baru]].',
+	'wikibase-item-summary-wbsetitem' => 'Membuat item baru',
+	'wikibase-item-summary-wbeditentity' => 'Membuat item baru',
+	'wikibase-item-summary-wbeditentity-create' => 'Membuat item baru',
+	'wikibase-item-summary-wbeditentity-update' => 'Memperbarui item',
+	'wikibase-item-summary-wbsetlabel-set' => 'Mengubah label [$2]',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Menghapus label [$2]',
+	'wikibase-item-summary-wbsetdescription-set' => 'Mengubah keterangan [$2]',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Menghapus keterangan [$2]',
+	'wikibase-property-summary-wbeditentity-create' => 'Membuat properti baru',
+	'wikibase-property-summary-wbeditentity-update' => 'Memperbarui properti',
+	'wikibase-property-summary-wbsetlabel-set' => 'Mengubah label [$2]',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Menghapus label [$2]',
+	'wikibase-property-summary-wbsetdescription-set' => 'Mengubah keterangan [$2]',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Menghapus keterangan [$2]',
+	'wikibase-property-summary-wbsetaliases-set' => 'Membuat {{PLURAL:$1|alias|alias}} [$2]',
+	'wikibase-property-summary-wbsetaliases-add-remove' => 'Menambahkan dan menghapus {{PLURAL:$1|alias|alias}} [$2]',
+	'wikibase-property-summary-wbsetaliases-add' => 'Menambahkan {{PLURAL:$1|alias|alias}} [$2]',
+	'wikibase-property-summary-wbsetaliases-remove' => 'Menghapus {{PLURAL:$1|alias|alias}} [$2]',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
+	'wikibase-listdatatypes-commonsmedia-head' => 'Media Commons',
+	'wikibase-listdatatypes-geo-coordinate-head' => 'Koordinat geografis',
+	'wikibase-listdatatypes-quantity-head' => 'Jumlah',
 );
 
 /** Iloko (Ilokano)
@@ -4930,8 +5182,10 @@ $messages['is'] = array(
 	'wikibase-snakview-property-input-placeholder' => 'eiginleiki',
 	'wikibase-snakview-choosesnaktype' => 'Veldu gagnagerð.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Gildi af gagnagerð „$1” eru ekki studd ennþá.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Gagnagerðin „$1” er ekki enn studd.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Þetta gildi samræmist ekki skilgreiningu eiginleikans.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Gagnagerð „$1” gildisins passar ekki við gagnagerð „$2” eiginleikans.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Það er ekki hægt að tilgreina nýtt gildi fyrir eyddann eiginleika.',
 	'wikibase-snakview-variations-somevalue-label' => 'óþekkt gildi',
 	'wikibase-snakview-variations-novalue-label' => 'ekkert gildi',
 	'wikibase-snakview-snaktypeselector-value' => 'sérstakt gildi',
@@ -4940,6 +5194,8 @@ $messages['is'] = array(
 	'wikibase-shortcopyrightwarning' => 'Með því að smella á „$1”, samþykkir þú [[$2|notendaskilmálana]]. Þú samþykkir einnig óafturkræft að þú gefir breytinguna þína út undir $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Ég samþykki þessa skilmála fyrir allar breytingar mínar í framtíðinni. Ekki sýna þessi skilaboð aftur.',
 	'wikibase-entityselector-more' => 'meira',
+	'wikibase-anonymouseditwarning' => 'Viðvörun: Þú ert ekki innskráð(ur).
+Vistfang þitt skráist í breytingaskrá $1.',
 	'wikibase-restrictionedit-tooltip-message' => 'Þessi síða er vernduð, breytingar eru óheimilar.',
 	'wikibase-blockeduser-tooltip-message' => 'Þér er bannað að breyta síðum.',
 	'wikibase-move-error' => 'Ekki er mögulegt að færa síður í data nafnrýminu, né færa síður þangað.',
@@ -4951,7 +5207,7 @@ $messages['is'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Annar eiginleiki ($3) hefur þegar merkimiðan „$1” tengdan við tungumálakóðann $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Önnur fyrirspurn ($3) hefur þegar merkimiðan „$1” tengdan við tungumálakóðann $2',
 	'wikibase-error-label-not-unique-item' => 'Annar hlutur ($3) hefur þegar merkimiðann „$1” og lýsinguna „$4” tengdan við tungumálakóðann $2',
-	'special-itembytitle' => 'Hlutur eftir vefsíðutengli', # Fuzzy
+	'special-itembytitle' => 'Hlutur eftir titli',
 	'wikibase-itembytitle-lookup-fieldset' => 'Leita eftir hlutum eftir vefsíðu og titli',
 	'wikibase-itembytitle-lookup-site' => 'Vefsíða:',
 	'wikibase-itembytitle-lookup-page' => 'Síða:',
@@ -4982,6 +5238,8 @@ alla hluti.',
 	'wikibase-newitem-site' => 'Vefsíða fyrsta vefsvæðistengilsins',
 	'wikibase-newitem-page' => 'Nafn fyrsta vefsvæðistengilsins',
 	'wikibase-newitem-no-external-page' => 'Síðan sem tilgreind var fannst ekki á vefsíðunni.',
+	'wikibase-newitem-add-sitelink-failed' => 'Mistókst að vista vefsíðutengilinn.',
+	'wikibase-newitem-not-recognized-siteid' => 'Tilgreint kennimerki tengilsins þekktist ekki.',
 	'wikibase-newentity-label' => 'Merkimiði:',
 	'wikibase-newentity-description' => 'Lýsing:',
 	'wikibase-newentity-submit' => 'Búa til',
@@ -5070,6 +5328,8 @@ alla hluti.',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Fjarlægði [$2] {{PLURAL:$1|samnefni}}',
 	'wikibase-property-summary-special-create-property' => 'Bjó til [$2] eiginleika með {{PLURAL:$1|gildi|gildum}}',
 	'wikibase-query-summary-special-create-query' => 'Bjó til [$2] fyrirspurn með {{PLURAL:$1|gildi|gildum}}',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Hlutur',
+	'wikibase-listdatatypes-string-head' => 'Strengur',
 	'content-model-wikibase-item' => 'Wikibase hlutur',
 	'content-model-wikibase-property' => 'Wikibase eiginleiki',
 	'content-model-wikibase-query' => 'Wikibase fyrirspurn',
@@ -5178,7 +5438,7 @@ Nella cronologia di $1 verrà registrato il tuo indirizzo IP.',
 	'wikibase-itemlink' => '$1 $2',
 	'wikibase-itemlink-id-wrapper' => '($1)',
 	'wikibase-itemlink-title' => '$1 | $2',
-	'special-itembytitle' => 'Elementi per sitelink', # Fuzzy
+	'special-itembytitle' => 'Elementi per titolo',
 	'wikibase-itembytitle-lookup-fieldset' => 'Ricerca elementi per sito e titolo',
 	'wikibase-itembytitle-lookup-site' => 'Sito:',
 	'wikibase-itembytitle-lookup-page' => 'Pagina:',
@@ -5207,6 +5467,8 @@ Nella cronologia di $1 verrà registrato il tuo indirizzo IP.',
 	'wikibase-newitem-site' => 'Sito della prima pagina collegata',
 	'wikibase-newitem-page' => 'Nome della prima pagina collegata',
 	'wikibase-newitem-no-external-page' => 'La pagina specificata non è stata trovata sul sito corrispondente.',
+	'wikibase-newitem-add-sitelink-failed' => 'Il collegamento al sito non può essere salvato.',
+	'wikibase-newitem-not-recognized-siteid' => "L'identificatore del sito fornito non è stato riconosciuto.",
 	'wikibase-newentity-label' => 'Etichetta:',
 	'wikibase-newentity-description' => 'Descrizione:',
 	'wikibase-newentity-submit' => 'Crea',
@@ -5296,6 +5558,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Rimosso|Rimossi}} alias [$2]',
 	'wikibase-property-summary-special-create-property' => 'Creata una proprietà [$2] con {{PLURAL:$1|valore|valori}}',
 	'wikibase-query-summary-special-create-query' => "Creata un'interrogazione [$2] con {{PLURAL:$1|valore|valori}}",
+	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
 	'content-model-wikibase-item' => 'Elemento Wikibase',
 	'content-model-wikibase-property' => 'Proprietà Wikibase',
 	'content-model-wikibase-query' => 'Interrogazione Wikibase',
@@ -6154,6 +6417,8 @@ $messages['mk'] = array(
 	'wikibase-newitem-site' => 'Вики на првата сврзана страница',
 	'wikibase-newitem-page' => 'Име на првата врзана страница',
 	'wikibase-newitem-no-external-page' => 'Укажаната страница не е најдена на соодветното вики.',
+	'wikibase-newitem-add-sitelink-failed' => 'Не можев да го зачувам викито.',
+	'wikibase-newitem-not-recognized-siteid' => 'Не можев да ја препознаам укажаната назнака на викито.',
 	'wikibase-newentity-label' => 'Етикета:',
 	'wikibase-newentity-description' => 'Опис:',
 	'wikibase-newentity-submit' => 'Создај',
@@ -6244,6 +6509,49 @@ $messages['mk'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Отстранет алијас|Отстранети алијаси}} на [$2]',
 	'wikibase-property-summary-special-create-property' => 'Создадено својство за [$2] со {{PLURAL:$1|вредноста|вредностите}}',
 	'wikibase-query-summary-special-create-query' => 'Создадено барање за [$2] со {{PLURAL:$1|вредноста|вредностите}}',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Предмет',
+	'wikibase-listdatatypes-wikibase-item-body' => "Врска до други предмети во проектот. При внесување на нешто во именскиот простор „Предмет“ (Item), системот на Википодатоците ќе пребара дали има ставки што се совпаѓаат. Се состои од едно поле за внос на текст.
+* шема (''scheme'') – содржан дел од Iri-низата
+* хиерархиски дел (''hierarchicalpart'') – содржан дел од Iri-низата
+* барање (''query'') – содржан дел од Iri-низата
+* делче (''fragment'') – содржан дел од Iri-низата",
+	'wikibase-listdatatypes-commonsmedia-head' => 'Медиумска содржина од Ризницата',
+	'wikibase-listdatatypes-commonsmedia-body' => "Врска до податотеки складирани на Заедничката Ризница. При внесување на нешто во именскиот простор „Податотека“ (File), системот на Википодатоците ќе пребара дали има ставки што се совпаѓаат. Се состои од едно поле за внос на текст.
+* шема (''scheme'') – содржан дел од Iri-низата
+* хиерархиски дел (''hierarchicalpart'') – содржан дел од Iri-низата
+* барање (''query'') – содржан дел од Iri-низата
+* делче (''fragment'') – содржан дел од Iri-низата",
+	'wikibase-listdatatypes-geo-coordinate-head' => 'Геокоордината',
+	'wikibase-listdatatypes-geo-coordinate-body' => "Дословни податоци за географска положба се задаваат како пар „геог. ширина-геог. должина“ во GMS или како децимални степени за дадено небесно тело. Како основно зададено стои „Земја“ (''Earth'') и потоа „WGS84“. Додава резолуција и опсег.
+* географска ширина (''latitude'') – поздразбран прв дел (float, dms, dm, dd) of the coordinate string, direction is either given by prefixed sign or by postfixed N/S
+* географска должина (''longitude'') – поздразбран втор дел (float, dms, dm, dd) of the coordinate string, direction is either given by prefixed sign or by postfixed E/W
+* висина (''altitude'') [незадолжително] – искажана (?) вредност за висината над подјовната рамнина; за глобусот „Земја“ тоа е појдовниот глобус „WGS84“
+* глобус (''globe'') [незадолжително] – искажана (?) податочна вредност, дадена како небесно тело; како основно зададено стои „Земја“ и потоа „WGS84“",
+	'wikibase-listdatatypes-quantity-head' => 'Количина',
+	'wikibase-listdatatypes-quantity-body' => "Дословно податочно поле за количина што се однесува на некој вид на добро утврдена единица. Самата единица оди во податочната вредност што се внесува.
+* вредност (''value'') – содржан дел од низата (пресликувањето на префиксот на единицата е нејасно)
+* единица (''unit'') – содржан дел од низата (пресликувањето во стандардизација на телото е нејасно)
+* точност (''accuracy'') [незадолжително] – изречена податочна вредност; има иста единица како вредноста",
+	'wikibase-listdatatypes-monolingual-text-head' => 'Еднојазичен текст',
+	'wikibase-listdatatypes-monolingual-text-body' => "Дословно податочно поле за низа што не се преведува на други јазици. Ваквата низа се задава еднаш и се користи кај сите јазици. Типичен пример би биле географските називи напишани на локалниот јазик, некаква назнака, хемиска формула или латинско научно име.
+* јазик (''language'') – содржана вредност за одредување на јазикот на текстуалниот дел
+* текст (''text'') – искажана вредност на низата на дадениот јазик",
+	'wikibase-listdatatypes-multilingual-text-head' => 'Повеќејазичен текст',
+	'wikibase-listdatatypes-multilingual-text-body' => "Дословно податочно поле за низа што мора да се преведе на други јазици. Се користи кај називите на единиците од глобален интерес што имаат нелокален пишан облик. Може да се разликуваат и по јазици и по писма.
+* јазик (''language'') – содржана вредност за одредување на јазикот на текстуалниот дел
+* текст (''text'') – искажана вредност на низата на дадениот јазик",
+	'wikibase-listdatatypes-string-head' => 'Низа',
+	'wikibase-listdatatypes-string-body' => "Дословно податочно поле за низа од знаци. Обично се користи кај назнаки чиј пишан облик не зависи од јазикот. Во некои случаи ваквите низи можат да се транслитерираат во друго писмо.
+* јазик (''language'') – содржана вредност за одредување на јазикот на текстуалниот дел
+* текст (''text'') – искажана вредност на низата на дадениот јазик",
+	'wikibase-listdatatypes-time-head' => 'Време',
+	'wikibase-listdatatypes-time-body' => "Дословно податочно поле за временска вредност. Се дава како време со извесна точност и граници. The time are always saved internally in пролептички грегоријански стил, но може да користи и други формати во текот на прекопирањето и форматирањето.(?)
+* време (''time'') – explicit value for point in time, represented per ISO8601, they year always having 11 digits, the date always знак плус или миус, in the format +00000002013-01-01T00:00:00Z
+*часовен појас (''timezone'') – искажана целобројна вредност со знак плус или минус, како отстапување од UTC во минути.
+*пред (''before'') – искажана целобројна вредност за тоа колку единици по даденото време би можело да биде. Единицата е дадена во точноста.
+*по (''after'') – искажана целобројна вредност за тоа колку единици пред даденото време би можело да биде. Единицата е дадена во точноста.
+*точност (''precision'') – искажана вредност изразена како скратен цел број (shortint). Бројките ги имаат следниве значења: 0 - милијарда години, 1 - сто милиони години, ..., 6 - милениуми, 7 - век, 8 - деценија, 9 - година, 10 - месец, 11 - ден, 12 - час, 13 - минута, 14 - секунда.
+*календарски модел (''calendarmodel'') – искажана вредност дадена како URI. Укажува кој календарски модел да се корсти за прикажување на таа временска вредност.",
 	'content-model-wikibase-item' => 'Ставка во Викибазата',
 	'content-model-wikibase-property' => 'Својство од Викибазата',
 	'content-model-wikibase-query' => 'Барање за Викибазата',
@@ -6266,6 +6574,7 @@ $messages['mk'] = array(
  * @author Manuspanicker
  * @author Praveenp
  * @author Santhosh.thottingal
+ * @author Vssun
  */
 $messages['ml'] = array(
 	'wikibase-desc' => 'വിന്യസിത ഡേറ്റാ റെപ്പോസിറ്ററി',
@@ -6307,7 +6616,7 @@ $messages['ml'] = array(
 	'wikibase-sitelinksedittool-full' => 'താളുകളിലേയ്ക്കുള്ള കണ്ണികൾ, അറിയാവുന്ന എല്ലാ സൈറ്റുകളിലേയ്ക്കമായി സജ്ജീകരിച്ചിരിക്കുന്നു.',
 	'wikibase-disambiguation-title' => '"$1" എന്നതിനുള്ള വിവക്ഷകൾ',
 	'wb-special-newitem-new-item-notification' => 'പുതിയ ഇനം $1 സൃഷ്ടിക്കപ്പെട്ടു, അതിന്റെ താളിലേയ്ക്ക് തിരിച്ചുവിടപ്പെട്ടു. $2 എന്നതിലേക്ക് മടങ്ങുക.',
-	'wikibase-aliases-label' => 'എങ്ങനെയും അറിയുന്നു:',
+	'wikibase-aliases-label' => 'ഇങ്ങനെയും അറിയപ്പെടുന്നു:',
 	'wikibase-aliases-input-help-message' => 'ഈ ഡേറ്റാ ഗണം ഒന്നിലധികം പേരുകളിൽ അറിയപ്പെടുന്നുണ്ടെങ്കിൽ, താങ്കൾക്കവ ഇവിടെ പര്യായങ്ങളായോ അപരനാമങ്ങളായോ ചേർക്കാവുന്നതാണ്, അങ്ങനെ ചെയ്യുമ്പോൾ അവയുടെ ഇതരനാമങ്ങൾ ഉപയോഗിച്ചും അവ കണ്ടെത്താനാവും.',
 	'wikibase-aliases-empty' => 'അപരനാമങ്ങളൊന്നും കണ്ടെത്താനായില്ല.',
 	'wikibase-datatype-label' => 'ഡേറ്റാ തരം:',
@@ -8886,12 +9195,12 @@ $messages['uk'] = array(
 	'wikibase-itemdisambiguation-create' => 'Ви можете [{{fullurl:Special:NewItem|label=$1}} створити такий елемент].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Вибачте, система не знаю введеного ідентифікатора мови. Правильним ідентифікатором є, наприклад, «uk».',
 	'special-newproperty' => 'Створити нову властивість',
-	'wikibase-newproperty-summary' => 'Упевніться, що такої властивості ще не існує!br />Для нової властивості треба вказати [[Help:Назва|назву]] and a [[Help:Опис|опис]], а також правильний тип даних.',
+	'wikibase-newproperty-summary' => 'Упевніться, що такої властивості ще не існує!br />Для нової властивості треба вказати [[Help:Назва|назву]] й [[Help:Опис|опис]], а також правильний тип даних.',
 	'wikibase-newproperty-fieldset' => 'Створити нову властивість',
 	'wikibase-newproperty-datatype' => 'Тип даних:',
 	'wikibase-newproperty-invalid-datatype' => 'Задано недопустимий тип даних',
 	'special-newitem' => 'Створити новий елемент',
-	'wikibase-newitem-summary' => 'Упевніться, що [[Special:ItemByTitle|такого елемента не існує]]!<br />Для нового елемента треба вказати [[Help:Назву|назву]] й[[Help:Опис|опис]].',
+	'wikibase-newitem-summary' => 'Упевніться, що [[Special:ItemByTitle|такого елемента не існує]]!<br />Для нового елемента треба вказати [[Help:Назву|назву]] й [[Help:Опис|опис]].', # Fuzzy
 	'wikibase-newitem-fieldset' => 'Створити новий елемент',
 	'wikibase-newitem-site' => "Сайт першої зв'язаної сторінки",
 	'wikibase-newitem-page' => "Ім'я першої зв'язаної сторінки",
@@ -9046,6 +9355,7 @@ $messages['vi'] = array(
 	'wikibase-label-empty' => 'Chưa định rõ nhãn.',
 	'wikibase-label-edit-placeholder' => 'nhập nhãn',
 	'wikibase-description-empty' => 'Chưa định rõ lời miêu tả.',
+	'wikibase-deletedentity' => 'Đã xóa $1',
 	'wikibase-description-edit-placeholder' => 'nhập miêu tả',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'bài',
@@ -9085,8 +9395,10 @@ $messages['vi'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'Quan hệ kiểu “$1”. Chưa hỗ trợ kiểu quan hệ này.',
 	'wikibase-snakview-choosesnaktype' => 'Chọn kiểu giá trị.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Chưa hỗ trợ các giá trị có kiểu dữ liệu “$1”.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'Chưa hỗ trợ các giá trị dữ liệu “$1”.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Giá trị không phù hợp với định nghĩa của thuộc tính.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Kiểu giá trị dữ liệu của giá trị, tức “$1”, không phù hợp với kiểu giá trị dữ liệu của kiểu dữ liệu của thuộc tính, tức “$2”.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Không thể định rõ giá trị mới cho một thuộc tính đã bị xóa.',
 	'wikibase-snakview-variations-somevalue-label' => 'giá trị không xác định',
 	'wikibase-snakview-variations-novalue-label' => 'vô giá trị',
 	'wikibase-snakview-snaktypeselector-value' => 'giá trị tùy biến',
@@ -9095,6 +9407,8 @@ $messages['vi'] = array(
 	'wikibase-shortcopyrightwarning' => 'Với việc bấm nút “$1”, bạn chấp nhận [[$2|các điều khoản sử dụng]], và bạn đồng ý phát hành, không thể hủy bỏ, đóng góp của mình theo $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Tôi chấp nhận các điều khoản này đối với các sửa đổi của tôi trong tương lai. Từ nay bỏ qua thông báo này.',
 	'wikibase-entityselector-more' => 'thêm',
+	'wikibase-anonymouseditwarning' => 'Cảnh báo: Bạn chưa đăng nhập.
+Địa chỉ IP của bạn sẽ được ghi lại trong lịch sử sửa đổi của $1 này.',
 	'wikibase-restrictionedit-tooltip-message' => 'Trang này bị khóa không cho phép sửa đổi.',
 	'wikibase-blockeduser-tooltip-message' => 'Bạn đã bị cấm không được sửa đổi.',
 	'wikibase-move-error' => 'Không thể di chuyển các trang trong không gian tên dữ liệu và không thể di chuyển trang khác vào không gian tên này.',
@@ -9106,7 +9420,7 @@ $messages['vi'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Một thuộc tính khác ($3) đã có nhãn “$1” ứng với mã ngôn ngữ $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Một truy vấn khác ($3) đã có nhãn “$1” ứng với mã ngôn ngữ $2',
 	'wikibase-error-label-not-unique-item' => 'Một khoản mục khác ($3) đã có nhãn “$1” và lời miêu tả “$4” ứng với mã ngôn ngữ $2',
-	'special-itembytitle' => 'Khoản mục theo liên kết site', # Fuzzy
+	'special-itembytitle' => 'Khoản mục theo tên',
 	'wikibase-itembytitle-lookup-fieldset' => 'Tìm khoản mục theo site và tiêu đề',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
 	'wikibase-itembytitle-lookup-page' => 'Trang:',
@@ -9135,6 +9449,8 @@ $messages['vi'] = array(
 	'wikibase-newitem-site' => 'Site của trang liên kết đầu tiên',
 	'wikibase-newitem-page' => 'Tên của trang liên kết đầu tiên',
 	'wikibase-newitem-no-external-page' => 'Không tìm thấy trang chỉ định trên site tương ứng.',
+	'wikibase-newitem-add-sitelink-failed' => 'Không thể lưu liên kết site.',
+	'wikibase-newitem-not-recognized-siteid' => 'Không nhận được định danh site được cung cấp.',
 	'wikibase-newentity-label' => 'Nhãn:',
 	'wikibase-newentity-description' => 'Miêu tả:',
 	'wikibase-newentity-submit' => 'Tạo',
@@ -9224,6 +9540,49 @@ $messages['vi'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1}}Đã loại bỏ tên khác [$2]',
 	'wikibase-property-summary-special-create-property' => '{{PLURAL:$1}}Đã tạo thuộc tính [$2] có giá trị',
 	'wikibase-query-summary-special-create-query' => '{{PLURAL:$1}}Đã tạo truy vấn [$2] có giá trị',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Khoản mục',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Liên kết đến khoản mục khác tại dự án. Không gian tên “Item” tại Wikidata sẽ được tìm cho mục phù hợp khi nhập tên vào hộp văn bản.
+* scheme – phần ẩn của chuỗi IRI
+* hierarchicalpart – phần ẩn của chuỗi IRI
+* query – phần ẩn của chuỗi IRI
+* fragment – phần ẩn của chuỗi IRI',
+	'wikibase-listdatatypes-commonsmedia-head' => 'Phương tiện Commons',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Liên kết đến tập tin được lưu tại Wikimedia Commons. Không gian tên “File” tại Commons sẽ được tìm cho mục phù hợp khi nhập văn bản.
+* scheme – phần ẩn của chuỗi IRI
+* hierarchicalpart – phần ẩn của chuỗi IRI
+* query – phần ẩn của chuỗi IRI
+* fragment – phần ẩn của chuỗi IRI',
+	'wikibase-listdatatypes-geo-coordinate-head' => 'Tọa độ địa lý',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'Dữ liệu trực tiếp cho một địa điểm vĩ độ–kinh độ dưới dạng độ-phút-giây hoặc độ thập phân cho thiên thể. Mặc định là “Earth” và “WGS84”. Nó thêm độ phân giải và dãy.
+* latitude – phần đầu tiên ẩn (float, dms, dm, dd) của chuỗi tọa độ; hướng được định rõ qua dấu đại số hoặc hậu tố N/S
+* longitude – phần thứ hai ẩn (float, dms, dm, dd) của chuỗi tọa độ; hướng được định rõ qua dấu đại số hoặc hậu tố N/S
+* altitude (tùy chọn) – giá trị hiện (?) của cao độ trên mặt phẳng tham khảo; thí dụ trên địa cầu “Earth” thì mặt phẳng tham khảo là “WGS84”
+* globe (tùy chọn) – giá trị dữ liệu hiện (?) được định rõ là thiên thể; mặc định là “Earth” và “WGS84”',
+	'wikibase-listdatatypes-quantity-head' => 'Số lượng',
+	'wikibase-listdatatypes-quantity-body' => 'Trường dữ liệu trực tiếp cho số lượng có liên quan đến một đơn vị xác định nào đó. Đơn vị dứt khoát được bao gồm trong các giá trị dữ liệu được nhập.
+* value – phần ẩn của chuỗi (tương quan đến tiền tố đơn vị không rõ)
+* unit – phần ẩn của chuỗi (tương quan đến cơ quan tiêu chuẩn không rõ)
+* accuracy (tùy chọn) – giá trị dữ liệu hiện; có cùng đơn vị với value',
+	'wikibase-listdatatypes-monolingual-text-head' => 'Văn bản đơn ngữ',
+	'wikibase-listdatatypes-monolingual-text-body' => 'Trường dữ liệu trực tiếp cho chuỗi không được dịch ra ngôn ngữ khác. Kiểu chuỗi này được định rõ một lần rồi được sử dụng lại trong mọi ngôn ngữ. Thí dụ địa danh trong ngôn ngữ địa phương, các định danh nào đó, công thức hóa học, hoặc tên khoa học Latinh.
+* language – giá trị hiện định rõ ngôn ngữ của phần text
+* text – giá trị hiện của chuỗi tùy ngôn ngữ',
+	'wikibase-listdatatypes-multilingual-text-head' => 'Văn bản đa ngữ',
+	'wikibase-listdatatypes-multilingual-text-body' => 'Trường dữ liệu trực tiếp cho chuỗi được dịch ra các ngôn ngữ khác. Thí dụ thuật ngữ quan trọng ở khắp thế giới có tên khác nhau trong nhiều ngôn ngữ. Các tên có thể tùy theo ngôn ngữ hoặc hệ thống viết.
+* language – giá trị hiện định rõ ngôn ngữ của phần text
+* text – giá trị hiện của chuỗi tùy ngôn ngữ',
+	'wikibase-listdatatypes-string-head' => 'Chuỗi',
+	'wikibase-listdatatypes-string-body' => 'Trường dữ liệu trực tiếp cho chuỗi ký tự. Thí dụ định danh không thay đổi tùy ngôn ngữ. Những chuỗi này có thể được chuyển tự ra hệ thống viết khác.
+* language – giá trị hiện định rõ ngôn ngữ của phần text
+* text – giá trị hiện của chuỗi tùy ngôn ngữ',
+	'wikibase-listdatatypes-time-head' => 'Thời điểm',
+	'wikibase-listdatatypes-time-body' => 'Trường dữ liệu trực tiếp cho giá trị thời điểm có độ chính xác và các giới hạn. Thời điểm luôn được lưu nội bộ theo lịch Gregory đón trước nhưng có thể sử dụng định dạng khác trong việc phân tích và định dạng hóa (?).
+* time – giá trị hiện của thời điểm theo ISO 8601; năm luôn có 11 con số và ngày tháng luôn có dấu đại số theo dạng +00000002013-01-01T00:00:00Z
+* timezone – giá trị hiện dưới dạng số nguyên có dấu đại số; thông tin múi giờ là số phút chệch UTC
+* before – giá trị hiện của độ dung sai sau, tức bao nhiêu đơn vị sau thời điểm được chỉ định, cùng đơn vị với precision
+* after – giá trị hiện của độ dung sai trước, tức bao nhiêu đơn vị trước thời điểm được chỉ định, cùng đơn vị với precision
+* precision – giá trị hiện được lưu trong shortint. Các số có ý nghĩa sau: 0 là tỷ năm, 1 trăm triệu năm, …, 6 thiên niên kỷ, 7 thế kỷ, 8 thập kỷ, 9 năm, 10 tháng, 11 ngày, 12 giờ, 13 phút, 14 giây
+* calendarmodel – giá trị hiện dưới dạng URI định rõ mô hình lịch được sử dụng để hiển thị giá trị lịch này',
 	'content-model-wikibase-item' => 'khoản mục Wikibase',
 	'content-model-wikibase-property' => 'thuộc tính Wikibase',
 	'content-model-wikibase-query' => 'truy vấn Wikibase',
@@ -9243,13 +9602,17 @@ $messages['vi'] = array(
 );
 
 /** Yiddish (ייִדיש)
+ * @author פוילישער
  * @author පසිඳු කාවින්ද
  */
 $messages['yi'] = array(
+	'specialpages-group-wikibaserepo' => 'וויקיבאזע רעפאזיטאריום',
+	'wikibase-edit' => 'רעדאַקטירן',
 	'wikibase-save' => 'אויפֿהיטן',
+	'wikibase-cancel' => 'אַנולירן',
+	'wikibase-add' => 'צולייגן',
+	'wikibase-sitelink-page-edit-placeholder' => 'ארטיקל',
 	'wikibase-remove' => 'אַראָפּנעמען',
-	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
-	'wikibase-tooltip-error-details' => 'פרטים',
 	'wikibase-itembytitle-lookup-page' => 'בלאט:',
 	'wikibase-itembytitle-submit' => 'זוכן',
 	'wikibase-itemdisambiguation-lookup-language' => 'שפּראַך:',
