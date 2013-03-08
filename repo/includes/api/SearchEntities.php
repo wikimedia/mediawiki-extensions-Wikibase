@@ -69,7 +69,7 @@ class SearchEntities extends ApiBase {
 				'LIMIT' => $limit,
 			)
 		);
-
+wfDebug(">>>>>" . print_r($ids,true));
 		wfProfileOut( __METHOD__ );
 		return $ids;
 	}
@@ -98,7 +98,7 @@ class SearchEntities extends ApiBase {
 			$page = EntityContentFactory::singleton()->getWikiPageForId( $entityId );
 			if ( $page->exists() ) {
 				$entityContent = $page->getContent();
-				if ( $entityContent instanceof \Wikibase\EntityContent ) {
+				if ( ( $entityContent instanceof \Wikibase\EntityContent ) && ( $entityContent->getEntity()->getType() === $params['type'] ) ) {
 					$ids[] = $entityId;
 				}
 			}
@@ -115,6 +115,7 @@ class SearchEntities extends ApiBase {
 			$ids = array_merge( $ids, $this->searchEntities( $params['language'], $params['search'], $params['type'], $limit, true ) );
 			$ids = array_unique( $ids );
 		}
+
 		// reduce any overflow
 		$ids = array_slice ( $ids, 0, $limit );
 
