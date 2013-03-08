@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DpUAtUKc",
+        "filename": "client/WikibaseClient.experimental.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-08T07:25:40Z",
+      "side": 1,
+      "message": "A second experimental file in the client?! Already got one in /config/",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//3no\u003d",
         "filename": "client/includes/parserhooks/PropertyParser.php",
         "patchSetId": 1
