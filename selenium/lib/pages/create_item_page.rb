@@ -8,7 +8,7 @@
 
 class CreateItemPage < CreateEntityPage
   include PageObject
-  page_url WIKI_REPO_URL + "Special:CreateItem"
+  page_url WIKI_REPO_URL + "Special:NewItem"
 
   def create_new_item(label, description, switch_lang = true)
     if switch_lang

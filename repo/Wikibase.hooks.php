@@ -191,7 +191,7 @@ final class RepoHooks {
 			'content/PropertyContent',
 			'content/PropertyHandler',
 
-			'specials/SpecialCreateItem',
+			'specials/SpecialNewItem',
 			'specials/SpecialItemDisambiguation',
 			'specials/SpecialItemByTitle',
 
@@ -586,6 +586,21 @@ final class RepoHooks {
 		$reportMessage( "done!\n" );
 
 		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * Reorder the groups for the special pages
+	 *
+	 * @since 0.4
+	 *
+	 * @param array &$groups
+	 * @param bool &$moveOther
+	 *
+	 * @return boolean
+	 */
+	public static function onSpecialPage_reorderPages( &$groups, &$moveOther ) {
+		$groups = array_merge( array( 'wikibaserepo' => null ), $groups );
 		return true;
 	}
 

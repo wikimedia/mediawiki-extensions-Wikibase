@@ -398,6 +398,20 @@ final class ClientHooks {
 		return true;
 	}
 
+    /**
+     * Hooks for Scribunto
+     *
+     * @return bool
+     */
+    public static function onScribuntoExternalLibraries ( string $engine, array &$extraLibraries ) {
+        $extraLibraries[] = array( "mw.wikibase.lua" );
+        return true;
+    }
+
+    public static function onScribuntoExternalLibraryPaths ( string $engine, array &$extraLibraryPaths ) {
+        $extraLibraryPath[] = array( $dir . 'resources/' );
+        return true;
+    }
 	/**
 	 * Hook for modifying the query for fetching recent changes
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialRecentChangesQuery
@@ -552,7 +566,14 @@ final class ClientHooks {
 
 		if ( $useRepoLinks || Settings::get( 'alwaysSort' ) ) {
 			// sort links
-			SortUtils::sortLinks( $parserOutput->getLanguageLinks() );
+			$interwikiSorter = new InterwikiSorter(
+				Settings::get( 'sort' ),
+				Settings::get( 'interwikiSortOrders' ),
+				Settings::get( 'sortPrepend' )
+			);
+			$interwikiLinks = $parserOutput->getLanguageLinks();
+			$sortedLinks = $interwikiSorter->sortLinks( $interwikiLinks );
+			$parserOutput->setLanguageLinks( $sortedLinks );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -587,9 +608,6 @@ final class ClientHooks {
 				// Needed as we can't do that in the regular CSS nor in JavaScript
 				// (as that only runs after the element initially appeared).
 				$out->addModules( 'wikibase.client.nolanglinks' );
-
-				// Experimental for now
-				//	$out->addModules( 'wbclient.linkItem' );
 			}
 		}
 
@@ -617,6 +635,7 @@ final class ClientHooks {
 				// Placeholder in case the page doesn't have any langlinks yet
 				// self::onBeforePageDisplay adds the JavaScript module which will overwrite this with a link
 				$template->data['language_urls'][] = array(
+					'text' => '',
 					'id' => 'wbc-linkToItem',
 					'class' => 'wbc-editpage wbc-nolanglinks',
 				);

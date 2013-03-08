@@ -51,6 +51,7 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Amire80
  * @author Jeblad
  * @author Nemo bis
  * @author Nnemo
@@ -66,7 +67,7 @@ $messages['qqq'] = array(
 {{Identical|Property}}',
 	'wikibase-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].
 {{Identical|Query}}',
-	'wikibase-diffview-reference' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects a reference. Will be shown as e.g. "claim / property q1 / referenece".
+	'wikibase-diffview-reference' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects a reference. Will be shown as e.g. "claim / property q1 / reference".
 {{Identical|Reference}}',
 	'wikibase-diffview-rank' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects the rank of the statement. Will be shown as e.g. "claim / property q1 / rank".
 {{Identical|Rank}}',
@@ -101,6 +102,23 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
 );
 
+/** Afrikaans (Afrikaans)
+ * @author Naudefj
+ */
+$messages['af'] = array(
+	'wikibase-entity-item' => 'item',
+	'wikibase-entity-property' => 'eienskap',
+	'wikibase-entity-query' => 'soekopdrag',
+	'wikibase-diffview-reference' => 'verwysing',
+	'wikibase-diffview-rank' => 'rang',
+	'wikibase-diffview-qualifier' => 'kwalifiseerder',
+	'wikibase-sitelinks-sitename-columnheading' => 'Taal',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
+	'wikibase-sitelinks-link-columnheading' => 'Geskakelde artikel',
+	'wikibase-tooltip-error-details' => 'Details',
+	'datatypes-type-wikibase-item' => 'Item',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -115,6 +133,38 @@ $messages['ast'] = array(
 	'wikibase-sitelinks-link-columnheading' => 'Artículu enllazáu',
 	'datatypes-type-wikibase-item' => 'Elementu',
 	'datatypes-type-commonsMedia' => 'Ficheru multimedia de Commons',
+);
+
+/** Belarusian (беларуская)
+ * @author Чаховіч Уладзіслаў
+ */
+$messages['be'] = array(
+	'wikibase-lib-desc' => 'Утрымлівае агульны функцыянал пашырэнняў Wikibase і Wikibase Client.',
+	'wikibase-entity-item' => "аб'ект",
+	'wikibase-entity-property' => 'уласцівасць',
+	'wikibase-entity-query' => 'запыт',
+	'wikibase-diffview-reference' => 'крыніца',
+	'wikibase-error-unexpected' => 'Узнікла нечаканая памылка.',
+	'wikibase-error-save-generic' => 'Падчас спробы захавання адбылася памылка, з-за чаго змены не былі ўнесеныя цалкам.',
+	'wikibase-error-remove-generic' => 'Падчас спробы выдалення адбылася памылка, з-за чаго змены не былі ўнесеныя цалкам.',
+	'wikibase-error-save-connection' => 'Падчас спробы захавання адбылася памылка злучэння, з-за чаго вашыя змены не былі захаваны. Калі ласка, праверце ваша злучэнне з Інтэрнэтам.',
+	'wikibase-error-remove-connection' => 'Пры выдаленні ўзнікла памылка сувязі, з-за гэтага вашы змены маглі не захавацца. Калі ласка, праверце ваша злучэнне з Інтэрнэтам.',
+	'wikibase-error-save-timeout' => 'Мы маем тэхнічныя праблемы, з-за чаго немагчыма завершыць захаванне.',
+	'wikibase-error-remove-timeout' => 'Мы маем тэхнічныя праблемы, з-за чаго немагчыма завершыць выдаленне.',
+	'wikibase-error-autocomplete-connection' => 'Не атрымалася запытаць Wikipedia API. Калі ласка, паспрабуйце пазней.',
+	'wikibase-error-autocomplete-response' => 'Адказ сервера: $1',
+	'wikibase-error-ui-client-error' => 'Знікла сувязь з кліенцкай старонкай. Калі ласка, паспрабуйце пазней.',
+	'wikibase-error-ui-no-external-page' => 'Не атрымалася знайсці ўказаную старонку на адпаведным праекце.',
+	'wikibase-error-ui-link-exists' => "Вы не можаце спаслацца на гэту старонку, бо іншы аб'ект ужо на яе спасылаецца.",
+	'wikibase-error-ui-session-failure' => 'Вашая сесія скончылася. Калі ласка, увайдзіце ў сістэму зноў.',
+	'wikibase-error-ui-edit-conflict' => 'Адбыўся канфлікт правак. Калі ласка, абнавіце старонку і захавайце зноў.',
+	'wikibase-sitelinks' => "Спіс старонак, што спасылаюцца на гэты аб'ект",
+	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
+	'wikibase-sitelinks-siteid-columnheading' => 'Код',
+	'wikibase-sitelinks-link-columnheading' => 'Злучаны артыкул',
+	'wikibase-tooltip-error-details' => 'Падрабязнасці',
+	'datatypes-type-wikibase-item' => 'Элемент',
+	'datatypes-type-commonsMedia' => 'Медыяфайл з Вікісховішча',
 );
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
@@ -222,15 +272,15 @@ $messages['ca'] = array(
  * @author Calak
  */
 $messages['ckb'] = array(
-	'wikibase-entity-item' => 'بڕگە',
+	'wikibase-entity-item' => 'بەند',
 	'wikibase-entity-property' => 'تایبەتمەندی',
 	'wikibase-replicationnote' => 'تکایە ئاگادار بن چەند خولەک دەگرێ ھەتا گۆڕانکارییەکان لە ھەموو ویکییەکاندا دەربکەوێ.',
-	'wikibase-sitelinks' => 'پێرستی پەڕە بەسراوەکان بەم بڕگەیە',
+	'wikibase-sitelinks' => 'پێرستی پەڕە بەسراوەکان بەم بەندەوە',
 	'wikibase-sitelinks-sitename-columnheading' => 'زمان',
 	'wikibase-sitelinks-siteid-columnheading' => 'کۆد',
 	'wikibase-sitelinks-link-columnheading' => 'وتاری بەستەردراو',
 	'wikibase-tooltip-error-details' => 'وردەکارییەکان',
-	'datatypes-type-wikibase-item' => 'بڕگە',
+	'datatypes-type-wikibase-item' => 'بەند',
 );
 
 /** Czech (česky)
@@ -622,6 +672,9 @@ $messages['he'] = array(
 	'wikibase-entity-item' => 'פריט',
 	'wikibase-entity-property' => 'מאפיין',
 	'wikibase-entity-query' => 'שאילתה',
+	'wikibase-diffview-reference' => 'הפניה',
+	'wikibase-diffview-rank' => 'דירוג',
+	'wikibase-diffview-qualifier' => 'מבחין',
 	'wikibase-error-unexpected' => 'אירעה שגיאה בלתי־צפויה.',
 	'wikibase-error-save-generic' => 'אירעה שגיאה בעת ניסיון לבצע שמירה ובגלל זה לא ניתן להשלים את השינויים שלך.',
 	'wikibase-error-remove-generic' => 'אירעה שגיאה בעת ניסיון לבצע הסרה ובגלל זה לא ניתן להשלים את השינויים שלך.',
@@ -724,6 +777,9 @@ $messages['ilo'] = array(
 	'wikibase-entity-item' => 'banag',
 	'wikibase-entity-property' => 'tagikua',
 	'wikibase-entity-query' => 'panagbiruk',
+	'wikibase-diffview-reference' => 'nagibasaran',
+	'wikibase-diffview-rank' => 'ranggo',
+	'wikibase-diffview-qualifier' => 'kababalin',
 	'wikibase-error-unexpected' => 'Adda rimsua a maysa a saan a nanamnama a biddut.',
 	'wikibase-error-save-generic' => 'Ada biddut a napasamak bayat nga agar-aramidka ti panagidulin iti daytoy, saan a malpas dagiti panagibalbaliwmo.',
 	'wikibase-error-remove-generic' => 'Adda biddut a napasamak bayat nga agar-aramidka ti panagikkat ti daytoy, saan a malpas dagiti panagibalbaliwmo.',
@@ -1416,6 +1472,9 @@ $messages['zh-hans'] = array(
 	'wikibase-entity-item' => '项目',
 	'wikibase-entity-property' => '属性',
 	'wikibase-entity-query' => '查询',
+	'wikibase-diffview-reference' => '参考',
+	'wikibase-diffview-rank' => '分级',
+	'wikibase-diffview-qualifier' => '限定语',
 	'wikibase-error-unexpected' => '发生意外错误。',
 	'wikibase-error-save-generic' => '进行保存时发生错误，因此您所做的变更可能未被完成。',
 	'wikibase-error-remove-generic' => '进行删除时发生错误，因此您所做的变更可能未被完成。',
