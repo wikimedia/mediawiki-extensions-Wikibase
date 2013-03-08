@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DpWNXNlg",
+        "filename": "client/WikibaseClient.experimental.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-08T13:48:27Z",
+      "side": 1,
+      "message": "not at the time this patch was made, but done now",
+      "parentUuid": "DpUAtUKc",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DpQAgqK4",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-08T07:31:23Z",
       "side": 1,
       "message": "Having a\n\n$wgHooks[\u0027ParserFirstCallInit\u0027][] \u003d function( Parser $parser ) {\n    $parser-\u003esetFunctionHook( \u0027property\u0027, array( \u0027\\Wikibase\\PropertyParser\u0027, \u0027render\u0027 ) );\n};\n\nin the experimental file would be cleaner",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DpQNosh0",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-08T13:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DpQAgqK4",
       "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DpePDRgg",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-08T13:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH//3no\u003d",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADiH//3ng\u003d",
         "filename": "client/includes/parserhooks/PropertyParser.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-01-30T19:39:56Z",
       "side": 1,
       "message": "These should be optional constructor parameters, so we can supply mock stores for testing.",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DpQPJkiY",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-08T13:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH//3ng\u003d",
       "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -132,6 +204,24 @@
       "writtenOn": "2013-01-30T19:39:56Z",
       "side": 1,
       "message": "Please use Item::ENTITY_TYPE, not \u0027item\u0027.",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DpWPYlu4",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-08T13:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH//3nU\u003d",
       "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -234,6 +324,24 @@
       "writtenOn": "2013-01-30T19:39:56Z",
       "side": 1,
       "message": "What about what we are doing here is \"parsing\"? How about \"evaluate\"?",
+      "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DpQPy8m4",
+        "filename": "client/includes/parserhooks/PropertyParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-08T13:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAADiH//3kI\u003d",
       "revId": "3acc186ce20546872a0d068a0b025aa4053253d8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
