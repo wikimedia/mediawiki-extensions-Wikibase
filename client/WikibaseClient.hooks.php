@@ -642,7 +642,10 @@ final class ClientHooks {
 			if ( $itemId ) {
 				// links to the special page
 				$template->data['language_urls'][] = array(
-					'href' => ClientUtils::repoArticleUrl( "Special:ItemByTitle/$siteId/" . wfUrlencode( $title->getPrefixedDBkey() ) ),
+					'href' => ClientUtils::repoArticleUrl(
+							"Special:ItemByTitle/$siteId/"
+							. wfUrlencode( $title->getPrefixedDBkey() )
+							. '#q' . $itemId .  '/sitelinks' ),
 					'text' => wfMessage( 'wikibase-editlinks' )->text(),
 					'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
 					'class' => 'wbc-editpage',
