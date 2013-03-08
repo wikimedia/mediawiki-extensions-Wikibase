@@ -94,6 +94,9 @@ $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/En
 // test
 $wgAutoloadClasses['Wikibase\Test\MockRepository'] 		= $dir . 'tests/phpunit/MockRepository.php';
 
+// Scribunto
+$wgAutoloadClasses['Scribunto_LuaWikibaseLibrary']      = $dir . 'includes/WikibaseLibrary.php';
+
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
 $wgHooks['LoadExtensionSchemaUpdates'][] 		= '\Wikibase\ClientHooks::onSchemaUpdate';
@@ -111,7 +114,8 @@ $wgHooks['SpecialRecentChangesFilters'][]			= '\Wikibase\ClientHooks::onSpecialR
 $wgHooks['GetPreferences'][]						= '\Wikibase\ClientHooks::onGetPreferences';
 $wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay';
 $wgHooks['SpecialPageBeforeExecute'][]		= '\Wikibase\ClientHooks::onSpecialPageBeforeExecute';
-
+$wgHooks['ScribuntoExternalLibraryPaths'][]      = '\Wikibase\ClientHooks::onScribuntoExternalLibraryPaths';
+$wgHooks['ScribuntoExternalLibraries'][]      = '\Wikibase\ClientHooks::onScribuntoExternalLibraries';
 // extension hooks
 $wgHooks['WikibasePollHandle'][]                        = '\Wikibase\ClientHooks::onWikibasePollHandle';
 $wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';

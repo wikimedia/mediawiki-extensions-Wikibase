@@ -119,7 +119,7 @@ $wgAutoloadClasses['Wikibase\SiteLink'] 				= $dir . 'includes/SiteLink.php';
 $wgAutoloadClasses['Wikibase\Term'] 					= $dir . 'includes/Term.php';
 $wgAutoloadClasses['Wikibase\Utils'] 					= $dir . 'includes/Utils.php';
 $wgAutoloadClasses['Wikibase\WikibaseDiffOpFactory']	= $dir . 'includes/WikibaseDiffOpFactory.php';
-
+$wgAutoloadClasses['Scribunto_LuaWikibaseLibrary']      = $dir . 'includes/WikibaseLibrary.php';
 // includes/changes
 $wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php';
 $wgAutoloadClasses['Wikibase\ChangeRow'] 			= $dir . 'includes/changes/ChangeRow.php';

@@ -398,6 +398,20 @@ final class ClientHooks {
 		return true;
 	}
 
+    /**
+     * Hooks for Scribunto
+     *
+     * @return bool
+     */
+    public static function onScribuntoExternalLibraries ( string $engine, array &$extraLibraries ) {
+        $extraLibraries[] = array( "mw.wikibase.lua" );
+        return true;
+    }
+
+    public static function onScribuntoExternalLibraryPaths ( string $engine, array &$extraLibraryPaths ) {
+        $extraLibraryPath[] = array( $dir . 'resources/' );
+        return true;
+    }
 	/**
 	 * Hook for modifying the query for fetching recent changes
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialRecentChangesQuery
