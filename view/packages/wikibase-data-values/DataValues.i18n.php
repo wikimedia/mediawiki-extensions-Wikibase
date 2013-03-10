@@ -159,6 +159,14 @@ $messages['id'] = array(
 	'version-datavalues' => 'DataValues',
 );
 
+/** Iloko (Ilokano)
+ * @author Lam-ang
+ */
+$messages['ilo'] = array(
+	'datavalues-desc' => 'Urnong dagiti banag a mangirepresenta kadagiti nadumaduma a kita dagiti pateg',
+	'version-datavalues' => 'DataValues',
+);
+
 /** Italian (italiano)
  * @author Beta16
  */
