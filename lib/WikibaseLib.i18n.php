@@ -507,6 +507,9 @@ $messages['fa'] = array(
 	'wikibase-entity-item' => 'آیتم',
 	'wikibase-entity-property' => 'ویژگی',
 	'wikibase-entity-query' => 'کوئری',
+	'wikibase-diffview-reference' => 'منبع',
+	'wikibase-diffview-rank' => 'رتبه',
+	'wikibase-diffview-qualifier' => 'ارزش‌یاب',
 	'wikibase-error-unexpected' => 'یک خطای غیرمنتظره رخ داد.',
 	'wikibase-error-save-generic' => 'خطایی هنگام تلاش برای انجام ذخیره‌سازی رخ داد و به این خاطر تکمیل تغییراتتان ناموفق بود.',
 	'wikibase-error-remove-generic' => 'خطایی هنگام تلاش برای حذف‌کردن رخ داد و به این خاطر تکمیل تغییراتتان ناموفق بود.',
@@ -939,8 +942,15 @@ $messages['ja'] = array(
  * @author David1010
  */
 $messages['ka'] = array(
+	'wikibase-entity-item' => 'ელემენტი',
+	'wikibase-entity-property' => 'თვისება',
+	'wikibase-entity-query' => 'მოთხოვნა',
 	'wikibase-sitelinks-sitename-columnheading' => 'ენა',
 	'wikibase-sitelinks-siteid-columnheading' => 'კოდი',
+	'wikibase-sitelinks-link-columnheading' => 'დაკავშირებული სტატიები',
+	'wikibase-tooltip-error-details' => 'დეტალები',
+	'datatypes-type-wikibase-item' => 'ელემენტი',
+	'datatypes-type-commonsMedia' => 'მედიაფაილი ვიკისაწყობში',
 );
 
 /** Korean (한국어)
@@ -1010,8 +1020,15 @@ $messages['ky'] = array(
  * @author Robby
  */
 $messages['lb'] = array(
+	'wikibase-entity-item' => 'Element',
+	'wikibase-diffview-reference' => 'Referenz',
+	'wikibase-error-ui-edit-conflict' => "Et gëtt en Editiounskonflikt. Lued d'Säit nach eng Kéier a späichert nach eng Kéier.",
 	'wikibase-sitelinks' => 'Lëscht vun de Säiten déi mat dësem Objet verlinkt sinn',
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprooch',
+	'wikibase-sitelinks-siteid-columnheading' => 'Code',
+	'wikibase-tooltip-error-details' => 'Detailer',
+	'datatypes-type-wikibase-item' => 'Element',
+	'datatypes-type-commonsMedia' => 'Media-Fichier op Commons',
 );
 
 /** Macedonian (македонски)
@@ -1496,6 +1513,7 @@ $messages['vi'] = array(
  * @author පසිඳු කාවින්ද
  */
 $messages['yi'] = array(
+	'wikibase-sitelinks' => 'ליסטע פון בלעטער פארבונדן מיט דעם דאטנאביעקט',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפראַך',
 	'wikibase-sitelinks-siteid-columnheading' => 'קאד',
 	'wikibase-sitelinks-link-columnheading' => 'פארלינקטער ארטיקל',

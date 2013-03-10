@@ -60,6 +60,7 @@ $messages['en'] = array(
  * @author Metalhead64
  * @author Raymond
  * @author Shirayuki
+ * @author Vadgt
  */
 $messages['qqq'] = array(
 	'wikibase-client-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
@@ -90,7 +91,7 @@ Parameters:
 * $1 - the number of changes; is always at least 2.',
 	'wikibase-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.
-{{Identical|Edit link}}',
+{{Identical|Փոխել հղումները}}',
 	'wikibase-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizard to edit interlanguage links.',
 	'wikibase-linkitem-addlinks' => 'Link in the sidebar asking to add language links and link the current page with pages on other sites. Only visible in case the current page has no langlinks.
 {{Identical|Add link}}',
@@ -396,8 +397,22 @@ $messages['ckb'] = array(
 	'wikibase-comment-linked' => 'بەندێکی ویکیدراوە بەم پەڕەیە بەستەر دراوە.',
 	'wikibase-comment-unlink' => 'ئەم پەڕەیە بە بەندی ویکیدراوە بەستەر نەدراوە. بەستەرەکانی زمان لابران.',
 	'wikibase-comment-restore' => 'بەندی ویکیدراوەی پەیوەندیدار گەڕایەوە. بەستەرەکانی زمان ھێنرایەوە.',
+	'wikibase-comment-update' => 'بەستەرەکانی زمان نوێ کرایەوە.',
+	'wikibase-comment-sitelink-add' => 'بەستەری زمانی زیادکراو: $1',
+	'wikibase-comment-sitelink-change' => 'بەستەری زمان لە $1 گۆڕدرا بۆ $2',
+	'wikibase-comment-sitelink-remove' => 'بەستەری زمانی سڕدراو: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|گۆڕانکاری}}',
 	'wikibase-editlinks' => 'بەستەرەکان دەستکاری بکە',
 	'wikibase-editlinkstitle' => 'بەستەرەکانی نێوانویکی دەستکاری بکە',
+	'wikibase-linkitem-addlinks' => 'بەستەرەکان زیاد بکە',
+	'wikibase-linkitem-close' => 'وتووێژەکە ببەستە و دیسان پەڕەکە بار بکەوە',
+	'wikibase-linkitem-title' => 'بەستەر بدە بۆ پەڕە',
+	'wikibase-linkitem-linkpage' => 'بەستەر بدە بۆ پەڕە',
+	'wikibase-linkitem-selectlink' => 'تکایە پێگە و پەڕەیەک کە دەتەوێ بەم پەڕەیە بەستەر بدرێ ھەڵبژێرە.',
+	'wikibase-linkitem-input-site' => 'زمان:',
+	'wikibase-linkitem-input-page' => 'پەڕە:',
+	'wikibase-linkitem-invalidsite' => 'پێگەیەکی نەناسراو یان نادروست ھەڵبژێردراوە',
+	'wikibase-linkitem-confirmitem-button' => 'پشتدار بکەرەوە',
 	'wikibase-rc-hide-wikidata' => 'ویکیدراوه $1',
 	'wikibase-rc-show-wikidata-pref' => 'دەستکارییەکانی ویکیدراوە لە دوایین گۆڕانکارییەکاندا نیشان بدە',
 );
@@ -420,6 +435,13 @@ $messages['cs'] = array(
 	'wikibase-editlinkstitle' => 'Editovat mezijazykové odkazy',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Zobrazit změny Wikidat v posledních změnách',
+);
+
+/** Church Slavic (словѣ́ньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ)
+ * @author ОйЛ
+ */
+$messages['cu'] = array(
+	'wikibase-editlinks' => 'исправи съвѧꙁи',
 );
 
 /** Danish (dansk)
@@ -621,10 +643,10 @@ $messages['et'] = array(
 	'wikibase-comment-sitelink-change' => 'Keelelink $1 muudetud kujule $2',
 	'wikibase-comment-sitelink-remove' => 'Keelelink eemaldatud: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|muudatus|muudatust}}',
-	'wikibase-nolanglinks' => 'puudub',
 	'wikibase-editlinks' => 'Redigeeri linke',
 	'wikibase-editlinkstitle' => 'Redigeeri keeltevahelisi linke',
 	'wikibase-linkitem-addlinks' => 'Lisa lingid',
+	'wikibase-linkitem-close' => 'Sule dialoogiaken ja laadi lehekülg uuesti',
 	'wikibase-linkitem-input-site' => 'Keel:',
 	'wikibase-linkitem-input-page' => 'Lehekülg:',
 	'wikibase-linkitem-invalidsite' => 'Valitud tundmatu või vigane võrgukoht',
@@ -702,6 +724,7 @@ $messages['fi'] = array(
 	'wikibase-linkitem-linkpage' => 'Linkitä sivulle',
 	'wikibase-linkitem-input-site' => 'Kieli',
 	'wikibase-linkitem-input-page' => 'Sivu',
+	'wikibase-linkitem-confirmitem-button' => 'Vahvista',
 	'wikibase-linkitem-not-loggedin-title' => 'Sinun täytyy olla sisäänkirjautuneena',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
@@ -1033,7 +1056,7 @@ $messages['ilo'] = array(
 	'wikibase-linkitem-input-site' => 'Pagsasao:',
 	'wikibase-linkitem-input-page' => 'Panid:',
 	'wikibase-linkitem-invalidsite' => 'Di ammo wenno saan nga umiso a sitio ti napili',
-	'wikibase-linkitem-confirmitem-text' => 'Pangngaasi a pasingkedan dagiti naipakita a panid dita baba ket isu dagiti kaytamo nga isilpo ti daytoy a panid.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Ti panid a napilim ket naisilpon iti [$1 a banag idiay sentro a pagipenpan ti datosmi]. Pangngaasi a pasingkedan a dagiti panid a naipakita dita baba ket dagiti kayatmo nga isilpo iti daytoy a panid.',
 	'wikibase-linkitem-confirmitem-button' => 'Pasingkedan',
 	'wikibase-linkitem-not-loggedin-title' => 'Masapul a nakastrekka',
 	'wikibase-linkitem-not-loggedin' => 'Masapul a nakastrekka iti daytoy a wiki ken idiay [$1 sentro a resipotorio ti datos] tapno makausar ti daytoy a pagpilian.',
@@ -1163,11 +1186,15 @@ $messages['ja'] = array(
  * @author David1010
  */
 $messages['ka'] = array(
+	'wikibase-comment-update' => 'ენათშორისი ბმულები განახლდა.',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|ცვლილება|ცვლილება}}',
-	'wikibase-nolanglinks' => 'არა',
 	'wikibase-editlinks' => 'ბმულების რედაქტირება',
+	'wikibase-editlinkstitle' => 'ენათშორისი ბმულების რედაქტირება',
+	'wikibase-linkitem-addlinks' => 'ბმულების დამატება',
 	'wikibase-linkitem-input-site' => 'ენა:',
 	'wikibase-linkitem-input-page' => 'გვერდი:',
+	'wikibase-linkitem-confirmitem-button' => 'დადასტურება',
+	'wikibase-rc-hide-wikidata' => 'ვიკიმონაცემების $1',
 );
 
 /** Korean (한국어)
@@ -1207,6 +1234,42 @@ $messages['ko'] = array(
 	'wikibase-linkitem-success-link' => '문서를 성공적으로 링크했습니다. [$1 중앙 데이터 저장소]에 링크를 포함하는 항목을 찾을 수 있습니다.',
 	'wikibase-rc-hide-wikidata' => '위키데이터 $1',
 	'wikibase-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
+);
+
+/** Karachay-Balkar (къарачай-малкъар)
+ * @author Iltever
+ */
+$messages['krc'] = array(
+	'wikibase-client-desc' => "Wikibase'ни кенгертирге клиент",
+	'wikibase-after-page-move' => 'Аты тюрленнген бетдеги тил джибериулени тюзетир ючюн Викибилгилени байламлы элементин [$1 джангыртыргъа] да боллукъсуз.',
+	'wikibase-comment-remove' => 'Викибилгилени байламлы элементин кетерилди. Тил джибериуле къоратылдыла.',
+	'wikibase-comment-linked' => 'Викибилгилени элементи бу бет бла байламлы эди',
+	'wikibase-comment-unlink' => 'Бу бетни Викибилгилени элементи бла байламы юзюлдю. Тил джибериуле кетерилдиле.',
+	'wikibase-comment-restore' => 'Викибилгилени байламлы элементин кетериу ызына алынды. Тил джибериуле ызларына салындыла.',
+	'wikibase-comment-update' => 'Тил джибериуле джангыртылдыла',
+	'wikibase-comment-sitelink-add' => 'Интервики-джибериу къошулду: $1.',
+	'wikibase-comment-sitelink-change' => '$1 интервики-джибериу $2 бла ауушулду',
+	'wikibase-comment-sitelink-remove' => 'Интервики-джибериу кетерилди: $1.',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|тюрлениу|тюрлениу}}', # Fuzzy
+	'wikibase-editlinks' => 'Джибериулени тюрлендир',
+	'wikibase-editlinkstitle' => 'Тилле арасы джибериулени тюрлендириу',
+	'wikibase-linkitem-addlinks' => 'Джибериулени къош',
+	'wikibase-linkitem-close' => 'Диалогну джаб эм бетни джангырт',
+	'wikibase-linkitem-failure' => 'Бу бетни байламлы этерге кюрешген сагъатда белгили болмагъан халат чыкъды.',
+	'wikibase-linkitem-title' => 'Бет бла байлам',
+	'wikibase-linkitem-linkpage' => 'Бет бла байла',
+	'wikibase-linkitem-selectlink' => 'Былайдан аннга джибериу салыргъа излеген сайтны неда бетни айырыгъыз',
+	'wikibase-linkitem-input-site' => 'Тил:',
+	'wikibase-linkitem-input-page' => 'Бет:',
+	'wikibase-linkitem-invalidsite' => 'Тюз неда белгили болмагъан сайт сайланнганды',
+	'wikibase-linkitem-confirmitem-text' => 'Сиз сайлагъан бет [$1 билгилени ара репозиторийини элементи] бла алгъадан байламлыды. Тюбюнде кёргюзюлген бетлени ичинде сиз аннга джибериу салыргъа излеген болгъанын бегитигиз.',
+	'wikibase-linkitem-confirmitem-button' => 'Къабыл эт',
+	'wikibase-linkitem-not-loggedin-title' => 'Авторизацияны ётерге керексиз',
+	'wikibase-linkitem-not-loggedin' => 'Бу функцияны хайырландырыр ючюн бу викиде эм [$1 билгилени ара репозиторийинде] авторизация ётерге керексиз.',
+	'wikibase-linkitem-success-create' => 'Бу бет тыйыншлы байламлы этилди. Джибериулени тутхан джангы къуралгъан элементни [$1 билгилени ара репозиторийинде] табаргъа боллукъсуз.',
+	'wikibase-linkitem-success-link' => 'Бу бет тыйыншлы байламлы этилди. Джибериулени тутхан элементни [$1 билгилени ара репозиторийинде] табаргъа боллукъсуз.',
+	'wikibase-rc-hide-wikidata' => 'Викибилгилени $1',
+	'wikibase-rc-show-wikidata-pref' => 'Викибилгилени тюрлениулерин джангы тюрлениулени тизмесинде кёргюз',
 );
 
 /** Colognian (Ripoarisch)
@@ -1251,10 +1314,27 @@ $messages['ku-latn'] = array(
 );
 
 /** Luxembourgish (Lëtzebuergesch)
+ * @author Les Meloures
  * @author Robby
  */
 $messages['lb'] = array(
 	'wikibase-client-desc' => "Client fir d'Wikibase Erweiderung",
+	'wikibase-comment-unlink' => 'Dës Säit gouf vum Wikidata-Element entlinkt. Interwiki-Linke goufen ewechgeholl.',
+	'wikibase-comment-update' => 'Sproochlinke sinn aktualiséiert',
+	'wikibase-comment-sitelink-remove' => 'Sproochlink ewechgeholl: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|Ännerung|Ännerungen}}',
+	'wikibase-editlinks' => 'Linken änneren',
+	'wikibase-editlinkstitle' => 'Interwiki-Linken änneren',
+	'wikibase-linkitem-addlinks' => 'Link derbäisetzen',
+	'wikibase-linkitem-close' => "Maacht den Dialog zou a luet d'Säit nei",
+	'wikibase-linkitem-title' => 'Mat der Säit verlinken',
+	'wikibase-linkitem-linkpage' => 'Mat der Säit verlinken',
+	'wikibase-linkitem-input-site' => 'Sprooch:',
+	'wikibase-linkitem-input-page' => 'Säit:',
+	'wikibase-linkitem-confirmitem-button' => 'Confirméieren',
+	'wikibase-linkitem-not-loggedin-title' => 'Dir musst ageloggt sinn',
+	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Ännerungen an de rezenten Ännerunge weisen',
 );
 
 /** Latvian (latviešu)
@@ -1508,6 +1588,7 @@ $messages['nn'] = array(
  * @author Lazowik
  * @author Maćko
  * @author Odie2
+ * @author WTM
  */
 $messages['pl'] = array(
 	'wikibase-client-desc' => 'Klient rozszerzenia Wikibase',
@@ -1516,6 +1597,22 @@ $messages['pl'] = array(
 	'wikibase-comment-sitelink-remove' => 'Łącze języka usunięte: $1',
 	'wikibase-editlinks' => 'Edytuj linki',
 	'wikibase-editlinkstitle' => 'Edytuj linki wersji językowych',
+	'wikibase-linkitem-close' => 'Zamknij okno i odśwież stronę',
+	'wikibase-linkitem-failure' => 'Wystąpił nieznany błąd podczas próby powiązania podanej strony.',
+	'wikibase-linkitem-title' => 'Powiąż ze stroną',
+	'wikibase-linkitem-linkpage' => 'Powiąż ze stroną',
+	'wikibase-linkitem-selectlink' => 'Wybierz serwis i stronę z którą chcesz powiązać tę stronę.',
+	'wikibase-linkitem-input-site' => 'Język:',
+	'wikibase-linkitem-input-page' => 'Strona:',
+	'wikibase-linkitem-invalidsite' => 'Wybrano nieznaną lub niepoprawną stronę',
+	'wikibase-linkitem-confirmitem-text' => 'Wybrana strona jest już powiązana z [$1 elementem w naszym centralnym repozytorium danych]. Potwierdź, że strony wymienione poniżej są tymi, z którymi chcesz powiązać tę stronę.',
+	'wikibase-linkitem-confirmitem-button' => 'Potwierdź',
+	'wikibase-linkitem-not-loggedin-title' => 'Musisz być zalogowany.',
+	'wikibase-linkitem-not-loggedin' => 'Aby użyć tej opcji musisz być zalogowany na tej wiki oraz [$1 centralnym repozytorium danych].',
+	'wikibase-linkitem-success-create' => 'Strony zostały pomyślnie powiązane. Utworzony element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].',
+	'wikibase-linkitem-success-link' => 'Strony zostały pomyślnie powiązane. Element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Pokazuj edycje Wikidata w ostatnich zmianach',
 );
 
 /** Piedmontese (Piemontèis)
