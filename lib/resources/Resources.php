@@ -462,7 +462,9 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.snaklistview.js',
 			),
 			'dependencies' => array(
+				'jquery.wikibase.listview',
 				'jquery.wikibase.snakview',
+				'jquery.wikibase.toolbarcontroller',
 				'wikibase.utilities',
 			),
 			'messages' => array(
