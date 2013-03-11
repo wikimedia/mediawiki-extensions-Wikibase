@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dp3VraLk",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-11T12:07:34Z",
+      "side": 1,
+      "message": "$oldid should be $revisionId here.",
+      "revId": "e8e4c29889c1d034e3a6be95e9fc728fa1f7fa27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dp5VodLw",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-11T12:07:34Z",
+      "side": 1,
+      "message": "like above.",
+      "revId": "e8e4c29889c1d034e3a6be95e9fc728fa1f7fa27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
