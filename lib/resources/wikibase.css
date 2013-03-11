@@ -628,10 +628,28 @@ div.wb-statement-references .wb-error {
 
 .wb-referenceview {
 	position: relative;
-	background: #F0F0F0;
+	background: #F8F8F8;
 	overflow: hidden;
 	margin-bottom: 10px;
 	min-height: 3.2em;
+}
+
+.wb-referenceview .wb-snaklistview-heading {
+	min-height: 1.5em;
+	padding: 5px;
+	background-color: #F0F0F0;
+}
+
+.wb-referenceview .wb-snaklistview-heading .wb-snaklistview-toolbar .wb-editsection {
+	top: 5px;
+}
+
+.wb-statement-references .wb-edit > .wb-snaklistview-heading {
+	background-color: #C0DAE5;
+}
+
+.wb-statement-references .wb-error > .wb-snaklistview-heading {
+	background-color: #E5C8B5;
 }
 
 .wb-referenceview .wb-snaklistview-listview .wb-snak-property {
@@ -675,17 +693,14 @@ div.wb-statement-references .wb-error {
 .wb-referenceview .wb-snaklistview-listview .wb-snakview {
 	position: relative;
 	min-height: 1.8em;
-}
-
-/* Highlighting a reference's "main snak" */
-.wb-referenceview .wb-snaklistview-listview .wb-snakview:first-child {
-	font-weight: bold;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 /* "remove" link at each reference's snak */
 .wb-referenceview .wb-snaklistview-listview .wb-snakview > .wb-ui-toolbar {
 	position: absolute;
-	top: 10px;
+	top: 5px;
 	right: 0;
 }
 

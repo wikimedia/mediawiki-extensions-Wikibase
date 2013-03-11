@@ -123,8 +123,10 @@ HTML;
 	$templates['wb-snaklistview'] =
 <<<HTML
 <div class="wb-snaklistview">
+	<div class="wb-snaklistview-heading">
+		<div class="wb-snaklistview-toolbar">$2</div> <!-- edit section -->
+	</div>
 	<div class="wb-snaklistview-listview">$1</div> <!-- wb-listview -->
-	<div class="wb-snaklistview-toolbar">$2</div> <!-- edit section -->
 </div>
 HTML;
 
