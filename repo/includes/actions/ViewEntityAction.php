@@ -37,14 +37,24 @@ abstract class ViewEntityAction extends \ViewAction {
 	protected function getContent() {
 		$queryValues = $this->getRequest()->getQueryValues();
 		$revisionId = 0;
+		$title = $this->getTitle();
+
+		$oldid = array_key_exists( 'oldid', $queryValues ) ? $queryValues['oldid'] : null;
 
 		if ( array_key_exists( 'diff', $queryValues ) ) {
-			$revisionId = $queryValues[ 'diff' ];
-		} elseif ( array_key_exists( 'oldid', $queryValues ) ) {
-			$revisionId = $queryValues[ 'oldid' ];
+			$diffValue = $queryValues['diff'];
+			$diffRev = is_int( $diffValue ) ? $diffValue : null;
+
+			if ( $diffValue === 'prev' && $oldid !== null ) {
+				$diffRev = $title->getPreviousRevisionID( $oldid );
+			}
+
+			$revisionId = $diffRev;
+		} elseif ( $oldid !== null ) {
+			$revisionId = $oldid;
 		}
 
-		$revision = \Revision::newFromTitle( $this->getTitle(), $revisionId );
+		$revision = \Revision::newFromTitle( $title, $revisionId );
 
 		if ( $revision !== null ) {
 			return $revision->getContent();
