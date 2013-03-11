@@ -32,19 +32,30 @@ abstract class ViewEntityAction extends \ViewAction {
 	/**
 	 * Returns the content of the page in the revision being viewed.
 	 *
+	 * @todo split out the get revision id stuff, add tests and see if
+	 * any core code can be shared here
+	 *
 	 * @return EntityContent|null
 	 */
 	protected function getContent() {
 		$queryValues = $this->getRequest()->getQueryValues();
-		$revisionId = 0;
+		$title = $this->getTitle();
+		$revisionId = array_key_exists( 'oldid', $queryValues ) && is_int( $queryValues['oldid'] ) ?
+			$queryValues['oldid'] : $title->getLatestRevID();
 
 		if ( array_key_exists( 'diff', $queryValues ) ) {
-			$revisionId = $queryValues[ 'diff' ];
-		} elseif ( array_key_exists( 'oldid', $queryValues ) ) {
-			$revisionId = $queryValues[ 'oldid' ];
+			$diffValue = $queryValues['diff'];
+
+			if ( $diffValue === 'prev' ) {
+				$revisionId = $title->getPreviousRevisionID( $revisionId );
+			} else if ( $diffValue === 'next' ) {
+				$revisionId = $title->getNextRevisionID( $revisionId );
+			} else {
+				$revisionId = intval( $diffValue );
+			}
 		}
 
-		$revision = \Revision::newFromTitle( $this->getTitle(), $revisionId );
+		$revision = \Revision::newFromTitle( $title, $revisionId );
 
 		if ( $revision !== null ) {
 			return $revision->getContent();
