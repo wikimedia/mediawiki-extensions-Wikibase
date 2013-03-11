@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dp0qqSxs",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-11T10:41:03Z",
+      "side": 1,
+      "message": "... else { $diffRev \u003d intval( $diffValue ); }\n\nnicer than doing that above.",
+      "revId": "2a44d4ce6850ab041a7b4c757e3b7b887dd166cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DpwplIx8",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-11T10:41:03Z",
+      "side": 1,
+      "message": "Line 46 initializes to false, though. In case $diffValue is \"xyz\", $diffRev would still be null, and $revisionId would become null instead of 0. Not sure whether it matters, but the current logic seems somewhat brittle.",
+      "revId": "2a44d4ce6850ab041a7b4c757e3b7b887dd166cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dp4pxM.A",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-11T10:41:03Z",
+      "side": 1,
+      "message": "Can we just use $revisionId all the way, and get rid of $oldId?  I find it confusing to have two variables for the same thing. It would be initialized at the top of this function, and we wouldn\u0027t need this else-branch.",
+      "revId": "2a44d4ce6850ab041a7b4c757e3b7b887dd166cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
