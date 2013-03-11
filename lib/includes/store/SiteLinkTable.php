@@ -163,6 +163,8 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	/**
 	 * @see SiteLinkLookup::getItemIdForLink
 	 *
+	 * @todo may want to deprecate this or change it to always return entity id object only
+	 *
 	 * @since 0.1
 	 *
 	 * @param string $globalSiteId
@@ -184,6 +186,22 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 
 		$this->releaseConnection( $db );
 		return $result === false ? false : (int)$result->ips_item_id;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param SiteLink $siteLink
+	 *
+	 * return EntityId|null
+	 */
+	public function getEntityIdForSiteLink( SiteLink $siteLink ) {
+		$numericItemId = $this->getItemIdForLink(
+			$siteLink->getSite()->getGlobalId(),
+			$siteLink->getPage()
+		);
+
+		return is_int( $numericItemId ) ? new EntityId( Item::ENTITY_TYPE, $numericItemId ) : null;
 	}
 
 	/**

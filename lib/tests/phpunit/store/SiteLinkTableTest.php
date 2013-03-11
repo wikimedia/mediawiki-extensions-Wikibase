@@ -25,6 +25,15 @@ use \Wikibase\Item;
  */
 class SiteLinkTableTest extends \MediaWikiTestCase {
 
+	protected $siteLinkTable;
+
+	public function setUp() {
+		parent::setUp();
+
+		// @todo mock object
+		$this->siteLinkTable = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
+	}
+
 	public function constructorProvider() {
 		return array(
 			array( 'its_a_table_name' ),
@@ -73,9 +82,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
 		}
 
-		$siteLinkTable = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
-
-		$res = $siteLinkTable->saveLinksOfItem( $item );
+		$res = $this->siteLinkTable->saveLinksOfItem( $item );
 		$this->assertTrue( $res );
 	}
 
@@ -84,9 +91,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	 public function testGetSiteLinksOfItem( $item ) {
-	 	$siteLinkTable = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
-
-		$siteLinks = $siteLinkTable->getSiteLinksForItem( $item->getId() );
+		$siteLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
 
 		$this->assertEquals(
 			$item->getSiteLinks(),
@@ -98,12 +103,22 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
-	public function testCountLinks( $item ) {
-		$siteLinkTable = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
+	public function testGetEntityIdForSiteLink( Item $item ) {
+		$siteLinks = $item->getSiteLinks();
 
+		foreach( $siteLinks as $siteLink ) {
+			$this->assertEquals( $item->getId(), $this->siteLinkTable->getEntityIdForSiteLink( $siteLink ) );
+		}
+	}
+
+	/**
+	 * @depends testSaveLinksOfItem
+	 * @dataProvider itemProvider
+	 */
+	public function testCountLinks( $item ) {
 		$this->assertEquals(
 			count( $item->getSiteLinks() ),
-			$siteLinkTable->countLinks( array( $item->getId()->getNumericId() ) )
+			$this->siteLinkTable->countLinks( array( $item->getId()->getNumericId() ) )
 		);
 	}
 
@@ -112,15 +127,13 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	 public function testDeleteLinksOfItem( $item ) {
-	 	$siteLinkTable = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
-
 		$this->assertTrue(
-			$siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false
+			$this->siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false
 		);
 
 		$this->assertEquals(
 			array(),
-			$siteLinkTable->getSiteLinksForItem( $item->getId() )
+			$this->siteLinkTable->getSiteLinksForItem( $item->getId() )
 		);
 	}
 }
