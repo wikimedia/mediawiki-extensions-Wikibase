@@ -17,7 +17,9 @@ module StatementPage
   link(:saveStatement, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='save']")
   link(:cancelStatement, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='cancel']")
   link(:removeClaimButton, :xpath => "//div[contains(@class, 'wb-claim-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='remove']")
-  text_area(:statementValueInput, :xpath => "//div[contains(@class, 'valueview-ineditmode')]/div/a/textarea[contains(@class, 'valueview-input')]")
+  # TODO: could this lead to problems? for CM & item type properties there is an additional "a" element around the textbox; this is not the case for string type properies
+  #text_area(:statementValueInput, :xpath => "//div[contains(@class, 'valueview-ineditmode')]/div/a/textarea[contains(@class, 'valueview-input')]")
+  text_area(:statementValueInput, :class => "valueview-input")
   div(:claimEditMode, :xpath => "//div[contains(@class, 'wb-claim-section')]/div[contains(@class, 'wb-edit')]")
   div(:statement1Name, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]")
   div(:statement2Name, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]")
