@@ -457,6 +457,19 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.wikibase.snaklistview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.snaklistview.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.snakview',
+			),
+			'messages' => array(
+				'wikibase-claimview-snak-tooltip',
+				'wikibase-claimview-snak-new-tooltip',
+			)
+		),
+
 		'jquery.wikibase.snakview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.snakview/snakview.js',
@@ -515,7 +528,7 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.referenceview.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.claimview',
+				'jquery.wikibase.snaklistview',
 				'jquery.wikibase.toolbarcontroller',
 			)
 		),
