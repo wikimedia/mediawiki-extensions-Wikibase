@@ -257,7 +257,19 @@ class DispatchChanges extends \Maintenance {
 
 		$n = count( $changes );
 
-		$this->log( "Posted $n changes to $wikiDB" );
+		if ( $n === 0 ) {
+			$this->log( "Posted no changes to $wikiDB (nothing to do). "
+						. "Next ID is $continueAfter." );
+		} else {
+			/* @var Change $last */
+			$last = end( $changes );
+
+			$this->log( "Posted $n changes to $wikiDB, "
+				. "up to ID " . $last->getId() . ", timestamp " . $last->getTime() . ". "
+				. "Lag is " . $last->getAge() . " seconds. "
+				. "Next ID is $continueAfter." );
+		}
+
 		return $n;
 	}
 

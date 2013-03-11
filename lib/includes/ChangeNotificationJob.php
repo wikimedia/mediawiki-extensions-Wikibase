@@ -131,6 +131,18 @@ class ChangeNotificationJob extends \Job {
 		//TODO: allow mock handler for testing
 		ChangeHandler::singleton()->handleChanges( $changes );
 
+		if ( $changes ) {
+			/* @var Change $last */
+			$n = count( $changes );
+			$last = end( $changes );
+
+			wfDebugLog( __CLASS__, __METHOD__ . ": processed $n notifications, "
+						. "up to " . $last->getId() . ", timestamp " . $last->getTime() . "; "
+						. "Lag is " . $last->getAge() . " seconds." );
+		} else {
+			wfDebugLog( __CLASS__, __METHOD__ . ": processed no notifications." );
+		}
+
 		return true;
 	}
 
