@@ -672,6 +672,30 @@ div.wb-statement-references .wb-error {
 	box-sizing: border-box;
 }
 
+.wb-referenceview .wb-snaklistview-listview .wb-snakview {
+	position: relative;
+	min-height: 1.8em;
+}
+
+/* Highlighting a reference's "main snak" */
+.wb-referenceview .wb-snaklistview-listview .wb-snakview:first-child {
+	font-weight: bold;
+}
+
+/* "remove" link at each reference's snak */
+.wb-referenceview .wb-snaklistview-listview .wb-snakview > .wb-ui-toolbar {
+	position: absolute;
+	top: 10px;
+	right: 0;
+}
+
+/* "add" link in one reference's snak list */
+.wb-referenceview > .wb-ui-toolbar {
+	float: right;
+	margin-bottom: 1em;
+}
+
+/* "add source" link */
 .wb-statement-references > .wb-ui-toolbar {
 	float: right;
 }
