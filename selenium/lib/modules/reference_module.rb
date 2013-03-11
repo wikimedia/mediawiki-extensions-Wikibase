@@ -26,7 +26,7 @@ module ReferencePage
   link(:cancelReference, :xpath => "//div[contains(@class, 'wb-snaklistview-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='cancel']")
   link(:removeReference, :xpath => "//div[contains(@class, 'wb-snaklistview-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='remove']")
   link(:addReferenceToFirstClaim, :xpath => "//div[contains(@class, 'wb-statement-references-container')][1]/div[contains(@class, 'wb-statement-references')]/span[contains(@class, 'wb-ui-toolbar')]/div/span/span/a")
-  link(:editReference1, :xpath => "//div[contains(@class, 'wb-referenceview')][1]/div[contains(@class, 'wb-snaklistview-toolbar')]/span/span/span/span/a[text()='edit']")
+  link(:editReference1, :xpath => "//div[contains(@class, 'wb-referenceview')][1]/div[contains(@class, 'wb-snaklistview-heading')]/div[contains(@class, 'wb-snaklistview-toolbar')]/span/span/span/span/a[text()='edit']")
 
   def wait_for_reference_value_box
     wait_until do
