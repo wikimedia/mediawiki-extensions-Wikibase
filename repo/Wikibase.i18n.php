@@ -1211,6 +1211,7 @@ $messages['be-tarask'] = array(
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Апрацоўка значэньняў тыпу «$1» яшчэ не падтрымліваецца.',
 	'wikibase-snakview-variation-unsupporteddatavalue' => 'Апрацоўка зьвестак тыпу «$1» пакуль не падтрымліваецца.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Значэньне не адпавядае вызначэньню ўласьцівасьці.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Немагчыма вызначыць новае значэньне для выдаленай уласьцівасьці.',
 	'wikibase-snakview-variations-somevalue-label' => 'невядомае значэньне',
 	'wikibase-snakview-variations-novalue-label' => 'без значэньня',
 	'wikibase-snakview-snaktypeselector-value' => 'уласнае значэньне',
@@ -1252,9 +1253,12 @@ $messages['be-tarask'] = array(
 	'special-setlabel' => 'Вызначце метку',
 	'wikibase-setlabel-label' => 'Метка:',
 	'wikibase-setlabel-submit' => 'Вызначыць метку',
+	'wikibase-setlabel-warning-remove' => 'Ці сапраўды хочаце выдаліць метку для [[$1]]?',
 	'special-setdescription' => 'Даданьне апісаньняў',
+	'wikibase-setdescription-introfull' => 'Вы задаеце апісаньне для [[$1]] на мове $2.',
 	'wikibase-setdescription-label' => 'Апісаньне:',
 	'wikibase-setdescription-submit' => 'Дадаць апісаньне',
+	'wikibase-setdescription-warning-remove' => 'Ці сапраўды хочаце выдаліць апісаньне для [[$1]]?',
 	'special-setaliases' => 'Вызначэньне псэўданімаў',
 	'wikibase-setaliases-label' => 'Псэўданімы:',
 	'wikibase-setaliases-submit' => 'Вызначыць псэўданімы:',
@@ -3084,6 +3088,7 @@ $messages['eu'] = array(
  * @author Nojan Madinehi
  * @author Pouyana
  * @author Reza1615
+ * @author Rtemis
  * @author ZxxZxxZ
  * @author درفش کاویانی
  */
@@ -3140,8 +3145,10 @@ $messages['fa'] = array(
 	'wikibase-snakview-unsupportedsnaktype' => 'اسنک نوع «$1». کار با این نوع اسنک هنوز پشتیبانی نشده‌است.',
 	'wikibase-snakview-choosesnaktype' => 'نوع مقدار را انتخاب کنید.',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'پشتیبانی از مقدار نوع دادهٔ «$1» هنوز پشتیبانی نشده‌است.',
+	'wikibase-snakview-variation-unsupporteddatavalue' => 'دستکاری داده "$1" فعلا امکان پذیر نیست',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'مفدار از تعریف ویژگی پیروی نمی‌کند.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'نوع مقدار دادهٔ مقدار «$1» با نوع مقدار دادهٔ نوع دادهٔ ویژگی «$2» همگونی ندارد.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'این خصوصیت حذف شده و دیگر نمی‌توانید مقدار جدیدی برای آن بیافزایید.',
 	'wikibase-snakview-variations-somevalue-label' => 'مقدار ناشناخته',
 	'wikibase-snakview-variations-novalue-label' => 'بدون مقدار',
 	'wikibase-snakview-snaktypeselector-value' => 'مقدار سفارشی',
@@ -3150,6 +3157,8 @@ $messages['fa'] = array(
 	'wikibase-shortcopyrightwarning' => 'با کلیک کردن روی «$1»، شما با [[$2|قوانین استفاده]] موافقت می‌کنید، و اجازه می‌دهید ویرایش‌هایتان با اجازه‌نامهٔ $3 منتشر شوند.',
 	'wikibase-copyrighttooltip-acknowledge' => 'این شرایط را برای ویرایش‌های بعدی‌ام قبول می‌کنم. این پیام را دوباره نشان ندهید.',
 	'wikibase-entityselector-more' => 'بیشتر',
+	'wikibase-anonymouseditwarning' => 'هشدار: شما با نام کاربری وارد نشده‌اید.
+نشانی آی‌پی شما در تاریخچهٔ ویرایش‌های این $1 ثبت خواهد شد.',
 	'wikibase-restrictionedit-tooltip-message' => 'این صفحه محافظت شده‌است. ویرایش مجاز نیست.',
 	'wikibase-blockeduser-tooltip-message' => 'دسترسی شما برای ویرایش بسته شده‌است.',
 	'wikibase-move-error' => 'نمی‌توانید صفحه‌هایی را که در فضای نام داده هستند منتقل کنید، همچنین نمی‌توانید صفحه‌ها را به این فضای نام منتقل کنید.',
@@ -3181,7 +3190,7 @@ $messages['fa'] = array(
 	'wikibase-itemdisambiguation-description' => 'مقدارهای به‌کاررفته برای جستجو باید کل متن ورودی باشند. زبان یک شناسه است، مانند «en».',
 	'special-newproperty' => 'ایجاد یک ویژگی جدید',
 	'wikibase-newproperty-summary' => 'مطمئن شوید که [[Special:PropertyDisambiguation|ویژگی مربوطه از قبل وجود دارد]]! <br /> شما باید یک [[Help:Label|برچسب]] و یک [[Help:Description|توضیح]] برای همهٔ ویژگی‌های جدید ایجاد کنید. به همراه نوع قابل قبول ویژگی.',
-	'wikibase-newproperty-fieldset' => 'ایجاد یک ویژگی جدید',
+	'wikibase-newproperty-fieldset' => 'ایجاد یک خصوصیت جدید',
 	'wikibase-newproperty-datatype' => 'نوع داده:',
 	'wikibase-newproperty-invalid-datatype' => 'نوع داده غیر معتبر',
 	'special-newitem' => 'ایجاد یک آیتم جدید',
@@ -3190,6 +3199,8 @@ $messages['fa'] = array(
 	'wikibase-newitem-site' => 'وب‌گاه نخستین صفحهٔ پیوندداده‌شده',
 	'wikibase-newitem-page' => 'نام نخستین صفحهٔ پیوندداده‌شده',
 	'wikibase-newitem-no-external-page' => 'صفحهٔ مشخص‌شده را نمی‌توان در وب‌گاه مربوطه یافت.',
+	'wikibase-newitem-add-sitelink-failed' => 'نشانی وبگاه ذخیره نمی‌شود.',
+	'wikibase-newitem-not-recognized-siteid' => 'نشانی وبگاه درخواستی یافت نشد.',
 	'wikibase-newentity-label' => 'نام:',
 	'wikibase-newentity-description' => 'توضیحات:',
 	'wikibase-newentity-submit' => 'ایجاد',
@@ -3226,6 +3237,7 @@ $messages['fa'] = array(
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'همه',
 	'wikibase-entitieswithoutlabel-submit' => 'یافتن',
 	'wikibase-entitieswithoutlabel-invalid-language' => '«$1» یک کد زبان نامعتبر است.',
+	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" به دلیل نوع ورودی قابل پذیرش نیست',
 	'special-itemswithoutsitelinks' => 'آیتم‌های بدون پیوند میان‌ویکی',
 	'special-entitydata' => 'داده‌های موضوع',
 	'wikibase-entitydata-not-found' => 'هیچ موضوعی با شناسهٔ «$1» یافت نشد.',
@@ -3278,13 +3290,48 @@ $messages['fa'] = array(
 	'wikibase-property-summary-special-create-property' => 'ایجاد یک ویژگی [$2] با {{PLURAL:$1|مقدار|مقدارها}}',
 	'wikibase-query-summary-special-create-query' => 'ایجاد یک کوئری [$2] با {{PLURAL:$1|مقدار|مقدارها}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'آیتم',
+	'wikibase-listdatatypes-wikibase-item-body' => 'به آیتم‌های دیگر موجود در این پروژه پیوند بدهید. هنگامی که در حال واردکردن آیتم هستید، ویکی‌داده به صورت خودکار به یافتن ورودی‌های که با آن بخوانند اقدام می‌کند. ورودی مد نظر، فقط باید متن خام(بدون عدد) باشد.
+* شمای کلی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
+* بخش سلسله مراتبی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته ای غیرمستقیم به آن ارجاع می‌دهد
+* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد 
+* تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد',
 	'wikibase-listdatatypes-commonsmedia-head' => 'رسانه‌های ویکی‌انبار',
+	'wikibase-listdatatypes-commonsmedia-body' => 'به فایل های موجود در این ویکی انبار پیوند بدهید. هنگامی که در حال واردکردن نام فایل هستید، ویکی‌انبار به صورت خودکار به یافتن ورودی‌های که با آن بخوانند اقدام می‌کند. ورودی مد نظر، فقط باید متن خام(بدون عدد) باشد.
+* شمای کلی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
+* بخش سلسله مراتبی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته ای غیرمستقیم به آن ارجاع می‌دهد
+* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد 
+* تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'مختصات جغرافیایی',
-	'wikibase-listdatatypes-quantity-head' => 'مقدار',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'داده حروفی برای مکان جغرافیایی یک جرم درخشان آسمانی که به صورت طول جغرافیایی-عرض جغرافیایی بر حسب درجه یا بوسیله سیستم های زئومتریک بیان می شود. 
+* عرض جغرافیایی - بخش اول مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (شمالی/جنوبی) مشخص می شود
+* طول جغرافیایی - بخش دوم مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (خاوری/باختریی) مشخص می شود
+* ارتفاع(اختیاری) - مقدار مشخص(؟)ارتفاع از سطح مرجع، برای کره "زمین" که کره مرجع آن "WGS84" است
+* کره(اختیاری) - مقداری مشخص(؟)که بر حسب جسم آسمانی تعیین شده، به صورت پیشفرض کره "زمین" و "WGS84" است',
+	'wikibase-listdatatypes-quantity-head' => 'کمیت',
+	'wikibase-listdatatypes-quantity-body' => 'داده های حروفی برای یک کمیت که به یک نوع یکای دقیق مربوط می شود. یکا، در واقع با مقدار وارد شده همراه می آید.
+* مقدار - بخشی نامعلوم از رشته(اندازه گیری شده با پیشوندی نامعلوم)
+* یکا - بخشی نامعلوم از رشته(اندازه گیری شده با جسمی غیر استاندارد) 
+* دقت(اختیاری) - مقداری معلوم(مشخص) که یکای آن همان یکای مقدار است',
 	'wikibase-listdatatypes-monolingual-text-head' => 'متن تک‌زبانه',
+	'wikibase-listdatatypes-monolingual-text-body' => 'داده حروفی به صورت رشته ای که در زبان های دیگر واژه جدیدی برای آن ابداع نشده باشد. این نوع داده رشته ای فقط یک بار تعریف شده و در تمام زبان ها از همان تعریف استفاده می شود. نمونه های بارز این نوع رشته، نام های جغرافیایی هستند که با یک زبان محلی نوشته می شوند و نام های شناسه ای که به یک فرمول شیمیایی یا نام علمی لاتین اختصاص داده می شوند.
+* زبان - مقداری مشخص برای شناساندن متن
+* متن - مقداری مشخص برای رشته ای به زبانی مشخص',
 	'wikibase-listdatatypes-multilingual-text-head' => 'متن چندزبانه',
+	'wikibase-listdatatypes-multilingual-text-body' => 'داده حروفی برای رشته ای که می بایست آنرا به سایر زبان ها ترجمه نمود. معمولا برای چیزهایی به کار می رود که مورد اقبال عمومی است ولی فاقد صورت نوشتاری محلی است. چیزهایی که در زبان های مختلف و با سیستم های نوشتاری مختلف نمود پیدا می کنند. 
+* زبان - مقداری معین(معلوم)که زبان به کار رفته در بخش متن را می شناساند
+* متن - مقداری معین برای رشته متغیر مختص آن زبان',
 	'wikibase-listdatatypes-string-head' => 'رشته',
+	'wikibase-listdatatypes-string-body' => 'داده حروفی برای یک رشته کارکتر. در مواقعی که صورت نوشتاری یک شناسه بدون تبعیت از زبانی معین نوشته شده باشد، این نوع داده ها زیاد به کار می روند. بعضی اوقات این نوع داده ها در قالب سیستم های نوشتاری غیر حرف نگاری می شوند. 
+* زبان - مقداری معین برای شناساندن زبان بخش متن
+* متن - مقداری معین برای رشته متغیر مختص آن زبان',
 	'wikibase-listdatatypes-time-head' => 'زمان',
+	'wikibase-listdatatypes-time-body' => 'داده حروفی برای مقداری از زمان. این داده به صورت دقیق و با قاعده هایی بیان می شود. زمان را طبق گاه‌شماری میلادی ویژه تاریخ نگاری وارد کرده ولی می توان برای جدا کردن و نیز در شکل نوشتن تغییرهایی نیز انجام داد.(؟)
+* زمان - مقداری معین برای اشاره به برهه ای از زمان که با استاندارد ایزو 8601 وارد می شود، سال به صورت 11 رقمی و با علامت مثبت یا منفی در قالب +00000002013-01-01T00:00:00Z وارد می شود
+* منطقه زمانی - مقداری معین در قالب عدد صحیح با علامت مثبت یا منفی، برحسب دقیقه و بنا به فاصله ای که از مبدای زمانی گرینویچ(با دقت تصحیح شده) دارد، منطقه زمانی بیان می شود
+* پیش از - مقدار عددی صحیح که نشان می دهد که چند واحد پس از زمان بیان شده، رخ داده است. واحد باید به دقت بیان شود
+* پس از - مقدار عددی صحیح که نشان می دهد که چند واحد پیش از زمان بیان شده، رخ داده است. واحد باید به دقت بیان شود
+* دقت - مقداری معین(مشخص) که به صورت مخفف عددی است. عددها به صورت زیر معنی می شوند: 0-میلیارد سال، 1-صد میلیون سال،...،6-هزاره، 7-قرن، 8-دهه، 9-سال، 10-ماه، 11-روز، 12-ساعت، 13-دقیقه، 14-ثانیه.
+* شیوه گاهشماری - مقداری معلوم(مشخص) که به صورت یوآرآی بیان می شود و نوع گاهشماری را که برای بیان مقدار زمان مورد استفاده قرار گرفته است، به ما می شناساند',
 	'content-model-wikibase-item' => 'آیتم ویکی‌بیس',
 	'content-model-wikibase-property' => 'ویژگی ویکی‌بیس',
 	'content-model-wikibase-query' => 'کوئری ویکی‌بیس',
@@ -4324,6 +4371,8 @@ $messages['he'] = array(
 	'wikibase-newitem-site' => 'האתר של הדף המקושר הראשון',
 	'wikibase-newitem-page' => 'שם הדף המקושר הראשון',
 	'wikibase-newitem-no-external-page' => 'הדף שצין לא נמצא באתר המתאים.',
+	'wikibase-newitem-add-sitelink-failed' => 'לא הייתה אפשרות לשמור את הקישור לאתר.',
+	'wikibase-newitem-not-recognized-siteid' => 'מזהה האתר שסופק אינו מזוהה.',
 	'wikibase-newentity-label' => 'תווית:',
 	'wikibase-newentity-description' => 'תיאור:',
 	'wikibase-newentity-submit' => 'יצירה',
@@ -4413,6 +4462,10 @@ $messages['he'] = array(
 	'wikibase-property-summary-special-create-property' => 'נוצר מאפיין תחת [$2] עם {{PLURAL:$1|ערך|ערכים}}',
 	'wikibase-query-summary-special-create-query' => 'נוצרה שאילתה תחת [$2] עם {{PLURAL:$1|ערך|ערכים}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'פריט',
+	'wikibase-listdatatypes-geo-coordinate-head' => 'קואורדינטה גאוגרפית',
+	'wikibase-listdatatypes-quantity-head' => 'כמות',
+	'wikibase-listdatatypes-monolingual-text-head' => 'טקסט חד־לשוני',
+	'wikibase-listdatatypes-multilingual-text-head' => 'טקסט רב־לשוני',
 	'wikibase-listdatatypes-time-head' => 'שעה',
 	'content-model-wikibase-item' => 'פריט Wikibase',
 	'content-model-wikibase-property' => 'מאפיין Wikibase',
@@ -6339,7 +6392,25 @@ $messages['ku-latn'] = array(
 	'wikibase-edit' => 'biguherîne',
 	'wikibase-save' => 'tomar bike',
 	'wikibase-cancel' => 'betal bike',
+	'wikibase-add' => 'lê zêde bike',
+	'wikibase-save-inprogress' => 'Tê tomarkirin...',
+	'wikibase-remove-inprogress' => 'Tê jêbirin...',
+	'wikibase-description-edit-placeholder' => 'danasînekê binivîse',
+	'wikibase-sitelink-page-edit-placeholder' => 'gotar',
 	'wikibase-description-input-help-message' => 'Danasîneka kurt têkeve $1',
+	'wikibase-terms' => 'Bi zimanên din',
+	'wikibase-remove' => 'jê bibe',
+	'wikibase-aliases-label' => 'Herwiha tê zanîn wek:',
+	'wikibase-itembytitle-lookup-page' => 'Rûpel:',
+	'wikibase-itembytitle-submit' => 'Lêgerîn',
+	'wikibase-itemdisambiguation-lookup-language' => 'Ziman:',
+	'wikibase-itemdisambiguation-submit' => 'Lêgerîn',
+	'wikibase-newentity-description' => 'Danasîn:',
+	'wikibase-setentity-language' => 'Ziman:',
+	'wikibase-entitieswithoutlabel-label-language' => 'Ziman:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'hemû',
+	'right-description-remove' => 'Danasînan jê bibe',
+	'right-description-update' => 'Danasînan rojane bike',
 );
 
 /** Kirghiz (Кыргызча)
@@ -6380,9 +6451,12 @@ $messages['lb'] = array(
 	'wikibase-description-edit-placeholder' => 'Beschreiwung aginn',
 	'wikibase-sitelink-site-edit-placeholder' => 'Site',
 	'wikibase-sitelink-page-edit-placeholder' => 'Artikel',
+	'wikibase-alias-edit-placeholder' => 'Alias aginn',
+	'wikibase-statements' => 'Declaratiounen',
 	'wikibase-terms' => 'An anere Sproochen',
 	'wikibase-sitelinks-add' => 'e Link bäi e Link vum Site derbäisetzen',
 	'wikibase-remove' => 'ewechhuelen',
+	'wikibase-undo-badpage' => "Falsch Versioun: D'Versioun $2 gehéiert net zu [[$1]].",
 	'wikibase-propertyedittool-full' => "D'Lëscht vun de Wäerter ass komplett.",
 	'wikibase-sitelinksedittool-full' => "D'Linken op d'Säiten si schonn agestallt fir all bekannte Siten.",
 	'wikibase-disambiguation-title' => 'Homonymie fir "$1"',
@@ -6409,10 +6483,16 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-itemdisambiguation-lookup-language' => 'Sprooch:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiquette:',
 	'wikibase-itemdisambiguation-submit' => 'Sichen',
+	'wikibase-itemdisambiguation-nothing-found' => 'Pardon, en Element mat där Etiquette gouf net fonnt.',
+	'special-newitem' => 'En neit Element uleeën',
+	'wikibase-newitem-fieldset' => 'En neit Element uleeën',
 	'wikibase-newitem-page' => 'Numm vun der éischter verlinkter Säit',
 	'wikibase-newentity-label' => 'Etiquette:',
 	'wikibase-newentity-description' => 'Beschreiwung:',
+	'wikibase-newentity-submit' => 'Uleeën',
+	'special-setlabel' => 'Eng Etiquette festleeën',
 	'wikibase-setlabel-label' => 'Etiquette:',
+	'wikibase-setlabel-submit' => "D'Etiquette festleeën",
 	'special-setdescription' => 'Eng Beschreiwung festleeën',
 	'wikibase-setdescription-label' => 'Beschreiwung:',
 	'wikibase-setdescription-submit' => 'Beschreiwung festleeën',
@@ -6424,6 +6504,9 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" ass kee valabele Sproochecode.',
 	'wikibase-entitydata-bad-revision' => "D'Versioun $2 vun der Eenheet $1 kann net gewise ginn.",
 	'wikibase-restoreold' => 'restauréieren',
+	'wikibase-item-summary-wbsetitem' => 'En neit Element gouf ugeluecht',
+	'wikibase-item-summary-wbeditentity' => 'En neit Element gouf ugeluecht',
+	'wikibase-item-summary-wbeditentity-create' => 'En neit Element gouf ugeluecht',
 	'wikibase-item-summary-wbeditentity-update' => 'Huet en Objet aktualiséiert',
 	'wikibase-item-summary-wbsetlabel-set' => "Huet d'Etiquette fir [$2] geännert",
 	'wikibase-item-summary-wbsetlabel-remove' => "Huet d'Etiquette fir [$2] ewechgeholl",
@@ -6431,6 +6514,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2]-Beschreiwung ewechgeholl',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Huet e spezifesche Link fir [$2] derbäigesat',
 	'wikibase-property-summary-wbsetlabel-set' => "Huet d'Etiquette fir $2 geännert",
+	'wikibase-property-summary-wbsetdescription-set' => '[$2]-Beschreiwung geännert',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Element',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Mediefichier op Commons',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Geokoordinaten',
@@ -6439,6 +6523,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Text a méi Sproochen',
 	'wikibase-listdatatypes-time-head' => 'Zäit',
 	'right-item-remove' => 'Elementer ewechhuelen',
+	'right-sitelink-update' => 'Website-Linken aktualiséieren',
 	'right-label-remove' => 'Etiquetten ewechhuelen',
 	'right-label-update' => 'Etiquetten aktualiséieren',
 	'right-description-remove' => 'Beschreiwungen ewechhuelen',
@@ -6542,6 +6627,7 @@ $messages['lv'] = array(
 	'wikibase-property-summary-wbsetlabel-remove' => 'Nodzēsa [$2] nosaukumu',
 	'wikibase-property-summary-wbsetdescription-set' => 'Izmainīja [$2] aprakstu',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Nodzēsa [$2] aprakstu',
+	'wikibase-listdatatypes-geo-coordinate-head' => 'Ģeogrāfiskās koordinātas',
 	'right-label-remove' => 'Nodzēst nosaukumus',
 	'right-label-update' => 'Izmainīt nosaukumus',
 	'right-description-remove' => 'Dzēst aprakstus',

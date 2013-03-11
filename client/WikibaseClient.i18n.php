@@ -91,7 +91,7 @@ Parameters:
 * $1 - the number of changes; is always at least 2.',
 	'wikibase-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.
-{{Identical|Փոխել հղումները}}',
+{{Identical|Edit link}}',
 	'wikibase-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizard to edit interlanguage links.',
 	'wikibase-linkitem-addlinks' => 'Link in the sidebar asking to add language links and link the current page with pages on other sites. Only visible in case the current page has no langlinks.
 {{Identical|Add link}}',
@@ -447,10 +447,11 @@ $messages['cu'] = array(
 /** Danish (dansk)
  * @author Christian List
  * @author Poul G
+ * @author Steenth
  */
 $messages['da'] = array(
 	'wikibase-client-desc' => 'Klient til Wikibase udvidelse',
-	'wikibase-after-page-move' => 'Du kan også [ $1  opdatere] det tilknyttede Wikidata emne for at bevare sprog-link til den flyttede side.',
+	'wikibase-after-page-move' => 'Du kan også [$1 opdatere] det tilknyttede Wikidata emne for at opdatere sproglink til den flyttet side.',
 	'wikibase-comment-remove' => 'Det tilknyttede Wikidata emne er slettet. Sprog-links fjernet.',
 	'wikibase-comment-linked' => 'Et Wikidata emne er blevet knyttet til denne side.',
 	'wikibase-comment-unlink' => 'Denne side er ikke længere linket fra et Wikidata emne. Sprog-links fjernet.',
@@ -459,8 +460,25 @@ $messages['da'] = array(
 	'wikibase-comment-sitelink-add' => 'Sprog-link tilføjet: $1',
 	'wikibase-comment-sitelink-change' => 'Sprog-link ændret fra $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Sprog-link fjernet: $1',
+	'wikibase-comment-multi' => '{{PLURAL:$1|en ændring|$1 ændringer}}',
 	'wikibase-editlinks' => 'Rediger links',
 	'wikibase-editlinkstitle' => 'Rediger sprog-link',
+	'wikibase-linkitem-addlinks' => 'Tilføje links',
+	'wikibase-linkitem-alreadylinked' => 'Siden du ønskede at sammenkæde med er allerede knyttet til et andet [$1 emne] på central data repository, som linker til $2 på dette websted. Emnet kan kun have én side pr. websted knyttet. Vælg venligst en anden side at linke sammen med.',
+	'wikibase-linkitem-close' => 'Luk dialogboksen og genindlæs siden igen',
+	'wikibase-linkitem-failure' => 'Der opstod en ukendt fejl under forsøget på at sammenkæde en given side.',
+	'wikibase-linkitem-title' => 'Link til side',
+	'wikibase-linkitem-linkpage' => 'Link til side',
+	'wikibase-linkitem-selectlink' => 'Vælg et websted og en side, du vil sammenkæde denne side med.',
+	'wikibase-linkitem-input-site' => 'Sprog:',
+	'wikibase-linkitem-input-page' => 'Side:',
+	'wikibase-linkitem-invalidsite' => 'Ugyldig eller ukendt websted valgt',
+	'wikibase-linkitem-confirmitem-text' => 'Den side, du har valgt, er allerede knyttet til et [$1 emne på vores central data repository]. Bekræft, at siderne vises nedenfor er dem, du vil sammenkæde med.',
+	'wikibase-linkitem-confirmitem-button' => 'Bekræft',
+	'wikibase-linkitem-not-loggedin-title' => 'Du skal være logget ind',
+	'wikibase-linkitem-not-loggedin' => 'Du skal være logget ind på denne wiki og i det [$1 central data repository] at bruge denne funktion.',
+	'wikibase-linkitem-success-create' => 'Siderne er blevet linket. Du kan finde det nyoprettet element, der indeholder links i vores [$1 central data repository].',
+	'wikibase-linkitem-success-link' => 'Siderne er blevet linket. Du kan finde det element, der indeholder links i vores [$1 central data repository].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata redigeringer i de seneste ændringer',
 );
@@ -1308,9 +1326,13 @@ $messages['ksh'] = array(
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
  * @author George Animal
+ * @author Ghybu
  */
 $messages['ku-latn'] = array(
+	'wikibase-comment-update' => 'Girêdanên ziman hatin rojanekirin.',
 	'wikibase-editlinks' => 'Girêdanan biguherîne',
+	'wikibase-linkitem-input-page' => 'Rûpel:',
+	'wikibase-rc-hide-wikidata' => 'Wikidatayê $1',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
@@ -1841,6 +1863,7 @@ $messages['tl'] = array(
 
 /** Ukrainian (українська)
  * @author AS
+ * @author Microcell
  * @author Ата
  */
 $messages['uk'] = array(
@@ -1855,9 +1878,10 @@ $messages['uk'] = array(
 	'wikibase-comment-sitelink-change' => 'Мовне посилання змінено з $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Мовне посилання видалено: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|зміна|зміни|змін}}',
-	'wikibase-editlinks' => "Редагувати зв'язки",
+	'wikibase-editlinks' => 'Редагувати посилання',
 	'wikibase-editlinkstitle' => 'Редагувати міжмовні посилання',
 	'wikibase-linkitem-addlinks' => 'Додати посилання',
+	'wikibase-linkitem-alreadylinked' => "Сторінка, до якої Ви хотіли прив'язатись, уже прикріплена до [$1 елемента] у центральному сховищі даних, що посилається на сторінку $2 цього сайту. До елемента можна прикріпити тільки одну сторінку з сайту. Будь ласка, оберіть іншу сторінку для зв'язку.",
 	'wikibase-linkitem-close' => 'Закрити діалог і оновити сторінку',
 	'wikibase-linkitem-failure' => "При спробі прив'язати вибрану сторінку сталася невідома помилка.",
 	'wikibase-linkitem-title' => "Прив'язати до сторінки",
@@ -1866,10 +1890,22 @@ $messages['uk'] = array(
 	'wikibase-linkitem-input-site' => 'Мова:',
 	'wikibase-linkitem-input-page' => 'Сторінка:',
 	'wikibase-linkitem-invalidsite' => 'Вибрано невідомий або недопустимий сайт',
-	'wikibase-linkitem-confirmitem-text' => "Підтвердіть, що наведений нижче список сторінок до прив'язання складено правильно.", # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => "Сторінка, до якої Ви хотіли прив'язатись, уже прикріплена до [$1 елемента у центральному сховищі даних]. Підтвердіть, що наведений нижче список сторінок до прив'язання складено правильно.",
 	'wikibase-linkitem-confirmitem-button' => 'Підтвердити',
+	'wikibase-linkitem-not-loggedin-title' => 'Вам необхідно увійти в систему',
+	'wikibase-linkitem-not-loggedin' => 'Вам необхідно увійти в систему на цій вікі і на [$1 центральному сховищі даних], щоб скористатись цією функцією.',
+	'wikibase-linkitem-success-create' => "Сторінки було успішно пов'язано. Ви можете знайти новостворений елемент, який містить ці посилання, у нашому [$1 центральному сховищі даних].",
+	'wikibase-linkitem-success-link' => "Сторінки було успішно пов'язано. Ви можете знайти елемент, який містить ці посилання, у нашому [$1 центральному сховищі даних].",
 	'wikibase-rc-hide-wikidata' => '$1 Вікідані',
 	'wikibase-rc-show-wikidata-pref' => 'Показати зміни Вікіданих у списку нових редагувань',
+);
+
+/** Uzbek (oʻzbekcha)
+ * @author CoderSI
+ */
+$messages['uz'] = array(
+	'wikibase-editlinks' => 'Havolalarni tahrirlash',
+	'wikibase-editlinkstitle' => 'Tillararo havolalarni tahrirlash',
 );
 
 /** vèneto (vèneto)

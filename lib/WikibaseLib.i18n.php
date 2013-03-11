@@ -1006,6 +1006,9 @@ $messages['ksh'] = array(
  */
 $messages['ku-latn'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Ziman',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
+	'wikibase-sitelinks-link-columnheading' => 'Gotara girêdayî',
+	'wikibase-tooltip-error-details' => 'Detay',
 );
 
 /** Kirghiz (Кыргызча)
@@ -1513,6 +1516,7 @@ $messages['vi'] = array(
  * @author පසිඳු කාවින්ද
  */
 $messages['yi'] = array(
+	'wikibase-diffview-reference' => 'רעפערענץ',
 	'wikibase-sitelinks' => 'ליסטע פון בלעטער פארבונדן מיט דעם דאטנאביעקט',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפראַך',
 	'wikibase-sitelinks-siteid-columnheading' => 'קאד',
