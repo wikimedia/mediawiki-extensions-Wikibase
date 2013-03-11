@@ -58,7 +58,7 @@ class PruneChanges extends Maintenance {
 			exit( 5 );
 		}
 
-		$this->pruneChanges( $numDays, $force );
+		$this->pruneChanges( $numDays );
 
 		$this->output( date( 'H:i:s' ) . " done, exiting\n" );
 		unlink( $pidfile ); // delete lockfile on normal exit
