@@ -463,6 +463,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.snakview',
+				'wikibase.utilities',
 			),
 			'messages' => array(
 				'wikibase-claimview-snak-tooltip',
