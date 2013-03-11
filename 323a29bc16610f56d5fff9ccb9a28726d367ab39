@@ -33,6 +33,23 @@
       "revId": "323a29bc16610f56d5fff9ccb9a28726d367ab39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dp1UtDKc",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-11T16:15:23Z",
+      "side": 1,
+      "message": "We need to decide whether this is returning wikitext or raw HTML.\n\nIf it\u0027s wikitext, we should use \n  return array( $output, \u0027noparse\u0027 \u003d\u003e false );\n\nIf it\u0027s raw HTML, we should use\n  return array( $output, \u0027noparse\u0027 \u003d\u003e true, \u0027isHTML\u0027 \u003d\u003e true );\n\nI suggest to go for wikitext. It\u0027s more versatile, though less powerful.",
+      "revId": "323a29bc16610f56d5fff9ccb9a28726d367ab39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
