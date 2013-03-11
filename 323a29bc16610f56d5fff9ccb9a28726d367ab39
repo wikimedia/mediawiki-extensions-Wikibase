@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dp-UxuAs",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-11T16:10:01Z",
+      "side": 1,
+      "message": "Return null or false in this case, and generate the error in the evaluate() function. Otherwise, we get into a mess wrt escaping (labels need escaping, error messages must not be escaped).\n\nConceptually, getSnakValue() is an operation on the data model level, while evaluate is an operation in HTML generation.",
+      "revId": "323a29bc16610f56d5fff9ccb9a28726d367ab39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DpxU3hP8",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-11T16:10:01Z",
+      "side": 1,
+      "message": "The escaping goes wrong in case of an error, see comment above.",
+      "revId": "323a29bc16610f56d5fff9ccb9a28726d367ab39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
