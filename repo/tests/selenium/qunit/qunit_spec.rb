@@ -42,6 +42,13 @@ describe "Running repo QUnit tests" do
         page.qunitTestFail?.should be_false
       end
     end
+    it "run eachchange tests" do
+      on_page(QUnitPage) do |page|
+        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=eachchange")
+        page.wait_for_qunit_tests
+        page.qunitTestFail?.should be_false
+      end
+    end
     it "run jQuery.ui tests" do
       on_page(QUnitPage) do |page|
         page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=jQuery.ui")
