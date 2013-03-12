@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqK5Wj8s",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-12T13:16:04Z",
+      "side": 1,
+      "message": "Not sure that this is an error situation at all, but with a wfWarn it will get visible if warnings are on.\n\n\u003cb\u003eNotice\u003c/b\u003e:  Trying to set wikibase_item property, but item id is not an EntityId [Called from Wikibase\\LangLinkHandler::setItemIdProperty in /home/john/Workspace/Wikibase/client/includes/LangLinkHandler.php at line 385] in \u003cb\u003e/home/john/Workspace/core/includes/debug/Debug.php\u003c/b\u003e on line \u003cb\u003e283\u003c/b\u003e",
+      "revId": "1e97861567a3b6ba41ca702557326a7cdb94d517",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqE4B87A",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-12T13:16:04Z",
+      "side": 1,
+      "message": "What is $siteLink if there are no registered sitelink for the given title on this site in the item? That is the following method is always called and it will not always have a sitelink that can be used for a lookup.",
+      "revId": "1e97861567a3b6ba41ca702557326a7cdb94d517",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
