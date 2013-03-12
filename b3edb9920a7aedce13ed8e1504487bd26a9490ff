@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "DqK5wz6U",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-12T11:59:31Z",
+      "side": 1,
+      "message": "My guess is $itemId is something else than false, but still not what you expect. Perhaps a null value? Perhaps use is_object() or instanceof?\n\nFatal error: Call to a member function getPrefixedId() on a non-object in /home/john/Workspace/Wikibase/client/includes/LangLinkHandler.php on line 383",
+      "revId": "b3edb9920a7aedce13ed8e1504487bd26a9490ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqA4qG4A",
         "filename": "client/includes/LangLinkHandler.php",
         "patchSetId": 12
