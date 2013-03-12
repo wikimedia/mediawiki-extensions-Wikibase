@@ -151,7 +151,11 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			'text'
 		);
 
-		$vars = 'page.*, revision.*, text.*';
+		$pageTable = $db->tableName( 'page' );
+		$revisionTable = $db->tableName( 'revision' );
+		$textTable = $db->tableName( 'text' );
+
+		$vars = "$pageTable.*, $revisionTable.*, $textTable.*";
 
 		$where = array();
 		$join = array();
