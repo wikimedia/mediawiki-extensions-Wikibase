@@ -142,7 +142,7 @@ $messages['af'] = array(
 	'wikibase-comment-sitelink-change' => 'Taalskakel is van $1 na $2 verander',
 	'wikibase-comment-sitelink-remove' => 'Taalskakel is verwyder: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|wysiging|wysigings}}',
-	'wikibase-editlinks' => 'Wysig skales',
+	'wikibase-editlinks' => 'Wysig skakels',
 	'wikibase-editlinkstitle' => 'Wysig skakels tussen tale',
 	'wikibase-linkitem-addlinks' => 'Skakels byvoeg',
 	'wikibase-linkitem-close' => 'Sluit venster en herlaai die bladsy',
@@ -404,7 +404,7 @@ $messages['ckb'] = array(
 	'wikibase-comment-sitelink-change' => 'بەستەری زمان لە $1 گۆڕدرا بۆ $2',
 	'wikibase-comment-sitelink-remove' => 'بەستەری زمانی سڕدراو: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|گۆڕانکاری}}',
-	'wikibase-editlinks' => 'بەستەرەکان دەستکاری بکە',
+	'wikibase-editlinks' => '<span style="white-space:nowrap">بەستەرەکان دەستکاری بکە</span>',
 	'wikibase-editlinkstitle' => 'بەستەرەکانی نێوانویکی دەستکاری بکە',
 	'wikibase-linkitem-addlinks' => 'بەستەرەکان زیاد بکە',
 	'wikibase-linkitem-close' => 'وتووێژەکە ببەستە و دیسان پەڕەکە بار بکەوە',
@@ -502,7 +502,6 @@ $messages['de'] = array(
 	'wikibase-comment-sitelink-change' => 'Sprachlink $1 geändert in $2',
 	'wikibase-comment-sitelink-remove' => 'Sprachlink entfernt: $1',
 	'wikibase-comment-multi' => '{{PLURAL:$1|Eine Änderung|$1 Änderungen}}',
-	'wikibase-nolanglinks' => 'keine',
 	'wikibase-editlinks' => 'Links bearbeiten',
 	'wikibase-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
 	'wikibase-linkitem-addlinks' => 'Links hinzufügen',
@@ -523,6 +522,7 @@ $messages['de'] = array(
 	'wikibase-linkitem-success-link' => 'Die Seiten wurden erfolgreich verlinkt. Du findest das Objekt, das die Links enthält, in unserem [$1 zentralen Datenrepositorium].',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Bearbeitungen in den „Letzten Änderungen“ anzeigen',
+	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Bearbeitungen in deiner Beobachtungsliste anzeigen',
 );
 
 /** Zazaki (Zazaki)
@@ -1420,6 +1420,7 @@ $messages['mk'] = array(
 	'wikibase-linkitem-success-link' => 'Страниците се успешно сврзани. Новосоздадената единица со врските ќе ја најдете на нашето [$1 централно складиште на податоци].',
 	'wikibase-rc-hide-wikidata' => '$1 Википодатоци',
 	'wikibase-rc-show-wikidata-pref' => 'Прикажувај ги уредувањата на Википодатоците во скорешните промени',
+	'wikibase-watchlist-show-changes-pref' => 'Прикажи уредувања на Википодатоци во набљудувањата',
 );
 
 /** Malayalam (മലയാളം)
@@ -1568,6 +1569,7 @@ $messages['nl'] = array(
 	'wikibase-linkitem-success-link' => "De pagina's zijn gekoppeld. U kunt het item met de koppelingen vinden in de [$1 centrale gegevensrepository].",
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
+	'wikibase-watchlist-show-changes-pref' => 'Wikidatabewerkingen weergeven in uw volglijst',
 );
 
 /** Norwegian Nynorsk (norsk nynorsk)
