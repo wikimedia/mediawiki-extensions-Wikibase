@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqCN4WO8",
+        "filename": "client/includes/parserhooks/ParserError.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-12T10:51:14Z",
+      "side": 1,
+      "message": "Think this should be @param string[] $params, assuming it actually holds strings",
+      "revId": "b163c152ea9d525ada505fd3acc73d98bced7481",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqEN1TPY",
+        "filename": "client/includes/parserhooks/ParserError.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-12T10:51:14Z",
+      "side": 1,
+      "message": "global state :|\n\nGuess you cannot easily get rid of that with the current form of this class. Thinking about it, this class is somewhat odd. It represents a message, so the name is a bit confusing. It also (second responsibility) has HTML formatting for that message. Perhaps this needs some more thought.",
+      "revId": "b163c152ea9d525ada505fd3acc73d98bced7481",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqIP.BDQ",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-12T10:51:14Z",
+      "side": 1,
+      "message": "Please add type hinting docs for the fields",
+      "revId": "b163c152ea9d525ada505fd3acc73d98bced7481",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqGMBcDw",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-12T10:51:14Z",
+      "side": 1,
+      "message": "this $siteLinkLookup field is not used",
+      "revId": "b163c152ea9d525ada505fd3acc73d98bced7481",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqONiYEE",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-12T10:51:14Z",
+      "side": 1,
+      "message": "Why is this step here needed? Looks like the $id key is not actually used later on",
+      "revId": "b163c152ea9d525ada505fd3acc73d98bced7481",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqANotB0",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-12T10:51:14Z",
+      "side": 1,
+      "message": "Please add some description. Else it is not clear at all what \"evaluate\" does",
+      "revId": "b163c152ea9d525ada505fd3acc73d98bced7481",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqMOk-Fs",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-12T10:51:14Z",
+      "side": 1,
+      "message": "Had to check the php docs to verity the evaluation order here is correct. Perhaps you want to add brackets to make it more obvious",
+      "revId": "b163c152ea9d525ada505fd3acc73d98bced7481",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
