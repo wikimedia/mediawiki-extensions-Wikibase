@@ -97,6 +97,7 @@ $wgAutoloadClasses['Wikibase\RepoHooks'] 				= $dir . 'Wikibase.hooks.php';
 // includes
 $wgAutoloadClasses['Wikibase\Autocomment']				= $dir . 'includes/Autocomment.php';
 $wgAutoloadClasses['Wikibase\CachingEntityLoader']      = $dir . 'includes/CachingEntityLoader.php';
+$wgAutoloadClasses['Wikibase\ClaimSaver']      			= $dir . 'includes/ClaimSaver.php';
 $wgAutoloadClasses['Wikibase\DataTypeSelector']			= $dir . 'includes/DataTypeSelector.php';
 $wgAutoloadClasses['Wikibase\Repo\DBConnectionProvider']		= $dir . 'includes/DBConnectionProvider.php';
 $wgAutoloadClasses['Wikibase\EditEntity'] 				= $dir . 'includes/EditEntity.php';
@@ -104,6 +105,7 @@ $wgAutoloadClasses['Wikibase\EntityContentDiffView'] 	= $dir . 'includes/EntityC
 $wgAutoloadClasses['Wikibase\ItemContentDiffView'] 		= $dir . 'includes/ItemContentDiffView.php';
 $wgAutoloadClasses['Wikibase\ItemDisambiguation'] 		= $dir . 'includes/ItemDisambiguation.php';
 $wgAutoloadClasses['Wikibase\EntityView']				= $dir . 'includes/EntityView.php';
+$wgAutoloadClasses['Wikibase\ExceptionWithCode']		= $dir . 'includes/ExceptionWithCode.php';
 $wgAutoloadClasses['Wikibase\ItemView'] 				= $dir . 'includes/ItemView.php';
 $wgAutoloadClasses['Wikibase\LabelDescriptionDuplicateDetector'] = $dir . 'includes/LabelDescriptionDuplicateDetector.php';
 $wgAutoloadClasses['Wikibase\Repo\LazyDBConnectionProvider']	= $dir . 'includes/LazyDBConnectionProvider.php';
