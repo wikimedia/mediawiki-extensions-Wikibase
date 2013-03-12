@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqK4ej1o",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-12T11:43:50Z",
+      "side": 1,
+      "message": "should this be wikibase_item, that is with underscore and no \"id\"?",
+      "revId": "b3edb9920a7aedce13ed8e1504487bd26a9490ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqA4qG4A",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-12T11:43:50Z",
+      "side": 1,
+      "message": "Indentation, seems like you are using spaces here.",
+      "revId": "b3edb9920a7aedce13ed8e1504487bd26a9490ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
