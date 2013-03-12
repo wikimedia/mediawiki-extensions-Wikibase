@@ -95,7 +95,6 @@ $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/En
 $wgAutoloadClasses['Wikibase\Test\MockRepository'] 		= $dir . 'tests/phpunit/MockRepository.php';
 
 // Hooks
-$wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
 $wgHooks['LoadExtensionSchemaUpdates'][] 		= '\Wikibase\ClientHooks::onSchemaUpdate';
 $wgHooks['OldChangesListRecentChangesLine'][]		= '\Wikibase\ClientHooks::onOldChangesListRecentChangesLine';
 $wgHooks['ParserAfterParse'][]				= '\Wikibase\ClientHooks::onParserAfterParse';
@@ -110,7 +109,7 @@ $wgHooks['SpecialRecentChangesQuery'][]				= '\Wikibase\ClientHooks::onSpecialRe
 $wgHooks['SpecialRecentChangesFilters'][]			= '\Wikibase\ClientHooks::onSpecialRecentChangesFilters';
 $wgHooks['GetPreferences'][]						= '\Wikibase\ClientHooks::onGetPreferences';
 $wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay';
-$wgHooks['SpecialPageBeforeExecute'][]		= '\Wikibase\ClientHooks::onSpecialPageBeforeExecute';
+$wgHooks['SpecialWatchlistFilters'][]		= '\Wikibase\ClientHooks::onSpecialWatchlistFilters';
 
 // extension hooks
 $wgHooks['WikibasePollHandle'][]                        = '\Wikibase\ClientHooks::onWikibasePollHandle';
