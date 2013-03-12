@@ -128,4 +128,15 @@ class NamespaceChecker {
 		return $this->excludedNamespaces;
 	}
 
+	/**
+	 * Get valid namespaces
+	 *
+	 * @since 0.4
+	 *
+	 * @return array
+	 */
+	public function getValidNamespaces() {
+		return array_diff( $this->enabledNamespaces, $this->excludedNamespaces);
+	}
+
 }
