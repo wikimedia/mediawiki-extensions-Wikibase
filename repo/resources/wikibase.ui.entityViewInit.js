@@ -166,7 +166,7 @@
 			$( wb ).triggerHandler( 'restrictEntityPageActions' );
 		}
 
-		$( wb ).on( 'startItemPageEditMode', function( event, origin ) {
+		$( wb ).on( 'startItemPageEditMode', function( event, origin, options ) {
 			$.each( termsValueTools, function( i, termValueTool ) {
 				if ( !origin || origin.getSubject() !== termValueTool.getSubject() ) {
 					termValueTool.disable();
@@ -210,13 +210,17 @@
 						text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
 					} ).appendTo( $message );
 
+				var gravity = ( options && options.wbCopyrightWarningGravity )
+					? options.wbCopyrightWarningGravity
+					: 'nw';
+
 				var tooltip = new wb.ui.Tooltip(
 					toolbar.btnSave.getTooltipParent(), // adjust tooltip to save button
 					{},
 					$message,
 					// assuming the toolbar is used on the right side of some edit UI, we want to
 					// point the tooltip away from that so it won't overlap with it:
-					{ gravity: 'nw' }
+					{ gravity: gravity }
 				);
 
 				// Tooltip gets its own anchor since other elements might have their own tooltip.
