@@ -39,6 +39,8 @@ end
 cm_statement_value = "Louisiana 462.svg"
 cm_reference_value = "Lousiana Red Kammgarn.jpg"
 cm_reference_value_changed = "Denkmal.png"
+# TODO: silly workaround; the tooltip should really not hide any UI elements!
+set_copyright_ack_cookie = "$.cookie( 'wikibase.acknowledgedentitycopyright', 'By clicking \"save\", you agree to the terms of use, and you irrevocably agree to release your contribution under the [ ].', { 'expires': null, 'path': '/' } );"
 
 describe "Check references UI" do
   before :all do
@@ -56,6 +58,8 @@ describe "Check references UI" do
       end
     end
     on_page(ItemPage) do |page|
+      # TODO: silly workaround; see other TODO above;
+      @browser.execute_script(set_copyright_ack_cookie)
       page.navigate_to items[0]["url"]
       page.wait_for_entity_to_load
       page.add_statement(properties_cm[0]["label"], cm_statement_value)
@@ -69,42 +73,104 @@ describe "Check references UI" do
         page.wait_for_entity_to_load
         page.referenceContainer?.should be_true
         page.referenceHeading?.should be_true
+        page.referenceEditHeading?.should be_false
         page.addReferenceToFirstClaim?.should be_true
+
         page.addReferenceToFirstClaim
+        page.referenceEditHeading?.should be_true
         page.addReferenceToFirstClaim?.should be_false
         page.saveReference?.should be_false
         page.removeReference?.should be_false
         page.cancelReference?.should be_true
+        page.addReferenceLine?.should be_false
+        page.entitySelectorInput?.should be_true
+        page.removeReferenceLine1?.should be_true
+        page.removeReferenceLine1
+        page.removeReferenceLine1?.should be_false
+        page.entitySelectorInput?.should be_false
+        # TODO: bug -> add should be true in that case
+        #page.addReferenceLine?.should be_true
         page.cancelReference
+        page.addReferenceToFirstClaim
+        # TODO end
+        page.referenceEditHeading?.should be_true
+        page.addReferenceToFirstClaim?.should be_false
+        page.saveReference?.should be_false
+        page.removeReference?.should be_false
+        page.cancelReference?.should be_true
+        page.addReferenceLine?.should be_false
+        page.entitySelectorInput?.should be_true
+        page.removeReferenceLine1?.should be_true
+        page.cancelReference
+
         page.addReferenceToFirstClaim?.should be_true
         page.saveReference?.should be_false
         page.removeReference?.should be_false
         page.cancelReference?.should be_false
+        page.addReferenceLine?.should be_false
+        page.removeReferenceLine1?.should be_false
+        page.entitySelectorInput?.should be_false
         page.addReferenceToFirstClaim
         page.saveReference?.should be_false
         page.entitySelectorInput = generate_random_string(10)
         page.saveReference?.should be_false
+        page.referenceValueInput?.should be_false
+        page.addReferenceLine?.should be_false
+        page.removeReferenceLine1?.should be_true
+
         page.entitySelectorInput_element.clear
         page.entitySelectorInput = properties_cm[1]["label"]
         ajax_wait
         page.wait_for_reference_value_box
-        page.referenceValueInput.should be_true
+        page.referenceValueInput?.should be_true
         page.saveReference?.should be_false
         page.cancelReference?.should be_true
         page.removeReference?.should be_false
-        page.referenceValueInput = generate_random_string(10)
+        page.addReferenceLine?.should be_false
+        page.removeReferenceLine1?.should be_true
+        random_ref_value = generate_random_string(10)
+        page.referenceValueInput = random_ref_value
         page.saveReference?.should be_true
         page.cancelReference?.should be_true
+        page.addReferenceLine?.should be_true
+        page.removeReferenceLine1?.should be_true
+        page.addReferenceLine
+        page.removeReferenceLine1?.should be_true
+        page.removeReferenceLine2?.should be_true
+        page.addReferenceLine?.should be_false
+        page.removeReferenceLine2
+        page.removeReferenceLine1?.should be_true
+        page.removeReferenceLine2?.should be_false
+        page.addReferenceLine?.should be_true
+        page.entitySelectorInput?.should be_true
+        page.referenceValueInput?.should be_true
+        page.entitySelectorInput.should == properties_cm[1]["label"]
+        page.referenceValueInput.should == random_ref_value
+
         page.entitySelectorInput_element.clear
         page.entitySelectorInput = " "
         # TODO: this will fail because of bug 44543
-        # page.saveReference?.should be_false
+        #page.saveReference?.should be_false
+        #page.addReferenceLine?.should be_false
         page.referenceValueInput?.should be_false
         page.entitySelectorInput = properties_cm[1]["label"]
         ajax_wait
         page.wait_for_reference_value_box
+        page.referenceValueInput_element.clear
         page.referenceValueInput = generate_random_string(10)
         page.saveReference?.should be_true
+        page.cancelReference?.should be_true
+
+        page.addReferenceLine
+        page.addReferenceLine?.should be_false
+        page.removeReferenceLine1?.should be_true
+        page.removeReferenceLine2?.should be_true
+        page.removeReferenceLine1
+        page.removeReferenceLine1?.should be_true
+        page.removeReferenceLine2?.should be_false
+        page.entitySelectorInput.should == ''
+        page.referenceValueInput?.should be_false
+        page.addReferenceLine?.should be_false
         page.cancelReference?.should be_true
         page.cancelReference
       end
