@@ -16,6 +16,24 @@
       "revId": "2fbd4222a1cdd12fb700dcb10142ae986ee83fec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqG5-FxM",
+        "filename": "lib/includes/store/WikiPageEntityLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-12T13:25:05Z",
+      "side": 1,
+      "message": "No new assumption was introduced here. The prefix was already getting added in other parts of the query. It is just done consistently now. And now I can use this thing without getting fatals.",
+      "parentUuid": "DqM6wo-Y",
+      "revId": "2fbd4222a1cdd12fb700dcb10142ae986ee83fec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
