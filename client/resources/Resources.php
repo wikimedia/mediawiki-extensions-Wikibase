@@ -26,19 +26,6 @@ return call_user_func( function() {
 			'styles' => 'wbclient.watchlist.css',
 			'position' => 'top',
 		),
-		'wbclient.watchlist' => $moduleTemplate + array(
-			'scripts' => array(
-				'wbclient.watchlist.js'
-			),
-			'dependencies' => array(
-				'user.options'
-			),
-			'messages' => array(
-				'hide',
-				'show',
-				'wikibase-rc-hide-wikidata',
-			),
-		),
 		'wbclient.linkItem' => $moduleTemplate + array(
 			'scripts' => array(
 				'wbclient.linkItem.js'
