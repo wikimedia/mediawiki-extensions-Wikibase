@@ -491,7 +491,7 @@ abstract class EntityContent extends \AbstractContent {
 			$user
 		);
 
-		if( $status->isGood() && ( $flags & EDIT_NEW ) ) {
+		if( $status->isGood() && isset ( $status->value['new'] ) && $status->value['new'] ) {
 			StoreFactory::getStore()->newEntityPerPage()->addEntityContent( $this );
 		}
 

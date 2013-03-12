@@ -30,26 +30,11 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		// @todo mock object
-		$this->siteLinkTable = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
-	}
+		if ( defined( 'WBC_VERSION' ) ) {
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local site link table." );
+		}
 
-	public function constructorProvider() {
-		return array(
-			array( 'its_a_table_name' ),
-		);
-	}
-
-	/**
-	 * @dataProvider constructorProvider
-	 */
-	public function testConstructor( $tableName ) {
-		$instance = new SiteLinkTable( $tableName, false );
-
-		// @todo: what kind of test is this?
-		$this->assertTrue( true );
-
-		// TODO: migrate tests from ItemDeletionUpdate and ItemStructuredSave
+		$this->siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
 	}
 
 	public function itemProvider() {

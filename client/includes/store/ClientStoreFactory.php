@@ -37,11 +37,14 @@ class ClientStoreFactory {
 	 * @since 0.1
 	 *
 	 * @param boolean|string $store
+	 * @param string         $reset set to 'reset' to force a fresh instance to be returned.
 	 *
 	 * @return ClientStore
 	 */
-	public static function getStore( $store = false ) {
+	public static function getStore( $store = false, $reset = 'no' ) {
 		global $wgWBClientStores;
+		static $instances = array();
+
 		$store = ( $store === false || !array_key_exists( $store, $wgWBClientStores ) ) ? Settings::get( 'defaultClientStore' ) : $store;
 
 		if ( !$store ) {
@@ -54,6 +57,12 @@ class ClientStoreFactory {
 
 		$class = $wgWBClientStores[$store];
 
+		if ( $reset !== true && $reset !== 'reset'
+			&& isset( $instances[$store] ) ) {
+
+			return $instances[$store];
+		}
+
 		if ( Settings::get( 'repoDatabase' ) ) {
 			//FIXME: use the same setting for wb_changes
 			$instance = new $class( Settings::get( 'repoDatabase' ) );
@@ -63,6 +72,8 @@ class ClientStoreFactory {
 		}
 
 		assert( $instance instanceof ClientStore );
+
+		$instances[$store] = $instance;
 		return $instance;
 	}
 

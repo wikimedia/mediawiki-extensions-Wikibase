@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use \Wikibase\EntityId;
+use \Wikibase\EntityLookup;
 use \Wikibase\WikiPageEntityLookup;
 
 /**
@@ -28,125 +29,95 @@ use \Wikibase\WikiPageEntityLookup;
  * @ingroup WikibaseClient
  * @ingroup Test
  *
- * @group Broken
- *        ^--- broken because it needs to wb_entity_per_page from the repo database.
- *
  * @group Database
  * @group Wikibase
- * @group WikibaseClient
+ * @group WikibaseLib
  * @group WikibaseEntityLookup
+ *
+ * @todo: test behavior for old revisions
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikipageEntityLookupTest extends EntityTestCase {
+class WikipageEntityLookupTest extends EntityLookupTest {
 
-	static $testEntityDefinitions = array(
-		'foo' => array( // handle "foo"
-			'type' => 'item',
-			'label' => array(
-				'en' => 'Foo',
-				'de' => 'Bar',
-			)
-		)
-	);
+	protected static $testEntities = array();
 
-	static $testEntities = null;
+	public function setUp( ) {
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->markTestSkipped( "Only works on the repository (can't do foreign db access in unit tests)." );
+		}
 
-	protected static function getTestEntityId( $handle ) {
-		$entity = self::getTestEntityData( $handle );
-
-		return new EntityId( $entity['type'], $entity['id'] );
+		parent::setUp();
 	}
 
-	protected static function getTestEntityData( $handle ) {
+	/**
+	 * @see EntityLookupTest::newEntityLoader()
+	 *
+	 * @return EntityLookup
+	 */
+	protected function newEntityLoader( array $entities ) {
+		// make sure all test entities are in the database, but only do that once.
+		/* @var \Wikibase\Entity $entity */
+		foreach ( $entities as $entity ) {
+			if ( !isset( self::$testEntities[$entity->getPrefixedId()] ) ) {
+				self::storeTestEntity( $entity );
+				$testEntities[$entity->getPrefixedId()] = $entity->getPrefixedId();
+			}
+		}
+
+		return new WikiPageEntityLookup( false, CACHE_DB );
+	}
+
+	/*
+	protected static function getTestEntityId( $handle ) {
 		$entities = self::getTestEntities();
+
+		if ( !isset( $entities[$handle] ) ) {
+			return null;
+		}
+
+		return $entities[$handle]->getId();
+	}
+
+	protected static function getTestEntity( $handle ) {
+		$entities = self::initTestEntities();
 
 		return $entities[$handle];
 	}
 
-	protected static function getTestEntities() {
-		if ( self::$testEntities === null ) {
-			self::$testEntities = array();
+	protected static function initTestEntities() {
+		static $initialized = false;
 
-			foreach ( self::$testEntityDefinitions as $handle => $def ) {
-				$entity = self::storeTestEntity( $def );
+		if ( !$initialized ) {
+			$entities = self::getTestEntities();
 
-				self::$testEntities[$handle] = $entity;
+			foreach ( $entities as $handle => $entity ) {
+				self::storeTestEntity( $entity );
+				$testEntities[$handle] = $entity->getPrefixedId();
 			}
+
+			$initialized = true;
 		}
 
 		return self::$testEntities;
 	}
+	*/
 
-	protected static function storeTestEntity( $def ) {
-		static $idCounter = 0;
+	protected static function storeTestEntity( \Wikibase\Entity $entity ) {
+		//NOTE: We are using EntityContent here, which is not available on the client.
+		//      For now, this test case will only work on the repository.
 
-		//NOTE: we are doing a little dance here, using knowledge about how EntityContent
-		//      is stored, but not using EntityContent, because that is part of the repository
-		//      extension, not the client. We can not assume EntityContent to be present.
-		//      So, we disguise serialized entity data as text.
-
-		$type = $def['type'];
-
-		$entity = \Wikibase\EntityFactory::singleton()->newFromArray( $type, $def );
-		$data = $entity->toArray();
-		$blob = json_encode( $data );
-
-		$idCounter += 1;
-		$id = new EntityId( $type, $idCounter );
-
-		// XXX: hoping we can store text there
-		$title = \Title::newFromText( __CLASS__ . '_' . $id->getPrefixedId(), NS_HELP );
-
-		$page = \WikiPage::factory( $title );
-		$status = $page->doEditContent( new \WikiTextContent( $blob ),
-				"storeTestEntity $idCounter", EDIT_NEW );
-
-		//FIXME: we need to write to wb_entity_per_page here, but that table
-		//       doesn't even exist on the client. Ugh.
-
-		if ( !$status->isOK() ) {
-			throw new \MWException( "couldn't create " . $title->getFullText() );
+		if ( !defined( 'WB_VERSION' ) ) {
+			throw new \MWException( "Can't generate test entities in a client database." );
 		}
 
-		$data['id'] = $idCounter;
-		$data['revision'] = $status->value['revision']->getId();
-		return $data;
-	}
+		$content = \Wikibase\EntityContentFactory::singleton()->newFromEntity( $entity );
+		$status = $content->save( "storeTestEntity" );
 
-	public static function provideGetEntity() {
-		return array(
-			array( // #0
-				CACHE_NONE,
-				'foo'
-			),
-			array( // #1
-				CACHE_DB, //XXX: can't we just configure an in-memory BagOfStuff?
-				'foo'
-			),
-			array( // #2  (try again, should come from cache)
-				CACHE_DB,
-				'foo'
-			),
-
-			//TODO: test with revision IDs (several cases, check the source!)
-		);
-	}
-
-	/**
-	 * @dataProvider provideGetEntity
-	 */
-	public function testGetEntity( $cacheType, $handle, $revision = false ) {
-		//TODO: find a way to test this with an actual foreign database
-		$lookup = new WikiPageEntityLookup( false, $cacheType );
-
-		$id = self::getTestEntityId( $handle );
-
-		$entity = $lookup->getEntity( $id );
-
-		// TODO: test fetching specific revisions
-		$expectedData = self::getTestEntityData( $handle );
-		$this->assertEntityStructureEquals( $expectedData, $entity );
+		if ( !$status->isOK() ) {
+			throw new \MWException( "couldn't create " . $content->getTitle()->getFullText()
+				. ":\n" . $status->getWikiText() );
+		}
 	}
 }

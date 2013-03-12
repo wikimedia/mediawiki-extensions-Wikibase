@@ -32,6 +32,11 @@ namespace Wikibase;
 class SqlStore implements Store {
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup = null;
+
+	/**
 	 * @see Store::newTermCache
 	 *
 	 * @since 0.1
@@ -182,7 +187,7 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @see Store::EntityPerPage
+	 * @see Store::newEntityPerPage
 	 *
 	 * @since 0.3
 	 *
@@ -190,6 +195,34 @@ class SqlStore implements Store {
 	 */
 	public function newEntityPerPage() {
 		return new EntityPerPageTable();
+	}
+
+	/**
+	 * @see Store::getEntityLookup
+	 *
+	 * @since 0.4
+	 *
+	 * @return EntityLookup
+	 */
+	public function getEntityLookup() {
+		if ( !$this->entityLookup ) {
+			$this->entityLookup = $this->newEntityLookup();
+		}
+
+		return $this->entityLookup;
+	}
+
+	/**
+	 * Creates a new EntityLookup
+	 *
+	 * @return CachingEntityLoader
+	 */
+	protected function newEntityLookup() {
+		//TODO: get cache type etc from config
+		//NOTE: two layers of caching: persistent external cache in WikiPageEntityLookup;
+		//      transient local cache in CachingEntityLoader.
+		$lookup = new WikiPageEntityLookup( false );
+		return new CachingEntityLoader( $lookup );
 	}
 
 }
