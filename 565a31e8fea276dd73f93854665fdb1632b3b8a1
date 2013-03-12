@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqOHslco",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-12T22:59:46Z",
+      "side": 1,
+      "message": "Unsetting of the property should be added to core. This way of unsetting through a getter is not what I would say is a predictable behavior. :)",
+      "revId": "565a31e8fea276dd73f93854665fdb1632b3b8a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
