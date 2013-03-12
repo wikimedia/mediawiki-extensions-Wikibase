@@ -34,6 +34,24 @@
       "revId": "2fbd4222a1cdd12fb700dcb10142ae986ee83fec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqO4QB60",
+        "filename": "lib/includes/store/WikiPageEntityLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-12T14:15:20Z",
+      "side": 1,
+      "message": "The underlying issue is that the table prefix comes from a global, instead of being a member of the Database object. But if this works as a workaround, I suppose it\u0027s fine for now.\n\nDid you verify that this works with a foreign database setup that actually uses a different server? That is, did you test compatibility with LBFactory_multi?",
+      "parentUuid": "DqG5-FxM",
+      "revId": "2fbd4222a1cdd12fb700dcb10142ae986ee83fec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
