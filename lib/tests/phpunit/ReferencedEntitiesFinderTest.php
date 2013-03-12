@@ -13,7 +13,6 @@ use Wikibase\Property;
 use Wikibase\Item;
 use Wikibase\SnakList;
 use DataValues\StringValue;
-use Wikibase\CachingEntityLoader;
 use Wikibase\LibRegistry;
 use Wikibase\Settings;
 use Wikibase\ReferenceList;
@@ -164,7 +163,7 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 	 * @return \Wikibase\EntityLookup
 	 */
 	protected function getMockEntityLoader() {
-		$entityLoader = new CachingEntityLoader();
+		$entityLoader = new \Wikibase\Test\MockRepository();
 
 		$libRegistry = new LibRegistry( Settings::singleton() );
 		$dataTypeFactory = $libRegistry->getDataTypeFactory();
@@ -172,12 +171,12 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 		$stringProp = Property::newEmpty();
 		$stringProp->setId( 1 );
 		$stringProp->setDataType( $dataTypeFactory->getType( 'commonsMedia' ) );
+		$entityLoader->putEntity( $stringProp );
 
 		$itemProp = Property::newEmpty();
 		$itemProp->setId( 2 );
 		$itemProp->setDataType( $dataTypeFactory->getType( 'wikibase-item' ) );
-
-		$entityLoader->setEntities( array( $stringProp, $itemProp ) );
+		$entityLoader->putEntity( $itemProp );
 
 		return $entityLoader;
 	}

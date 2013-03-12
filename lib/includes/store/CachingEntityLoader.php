@@ -5,8 +5,7 @@ use MWException;
 
 /**
  * Implementation of EntityLookup that caches the obtained entities in memory.
- *
- * It ignores the revision parameter and is mainly meant as a semi-mock for testing.
+ * The cache is never invalidated or purged. There is no size limit.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,6 +29,9 @@ use MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
+ *
+ * @todo: rename to CachingEntityLookup
  */
 class CachingEntityLoader implements EntityLookup {
 
@@ -37,6 +39,36 @@ class CachingEntityLoader implements EntityLookup {
 	 * @var Entity|null[]
 	 */
 	protected $loadedEntities = array();
+
+	/**
+	 * @var EntityLookup
+	 */
+	protected $lookup;
+
+	/**
+	 * @param EntityLookup $lookup The Lookup to use to load entities.
+	 */
+	public function __construct( EntityLookup $lookup ) {
+		$this->lookup = $lookup;
+	}
+
+	/**
+	 * Returns a cache key for the given item ID and optional revision
+	 *
+	 * @param EntityId $entityId
+	 * @param int|bool $revision
+	 *
+	 * @return string
+	 */
+	protected function getCacheKey( $entityId, $revision = false ) {
+		$key = $entityId->getPrefixedId();
+
+		if ( $revision ) {
+			$key .= ( '@' . $revision );
+		}
+
+		return $key;
+	}
 
 	/**
 	 * @see EntityLookup::getEntity
@@ -49,18 +81,16 @@ class CachingEntityLoader implements EntityLookup {
 	 * @return Entity|null
 	 */
 	public function getEntity( EntityId $entityId, $revision = false ) {
-		if ( !array_key_exists( $entityId->getPrefixedId(), $this->loadedEntities ) ) {
-			$content = EntityContentFactory::singleton()->getFromId( $entityId );
+		wfProfileIn( __METHOD__ );
+		$key = $this->getCacheKey( $entityId, $revision );
 
-			if ( $content === null ) {
-				$this->setNonExistingEntity( $entityId );
-			}
-			else {
-				$this->setEntities( array( $content->getEntity() ) );
-			}
+		if ( !array_key_exists( $key, $this->loadedEntities ) ) {
+			$entity = $this->lookup->getEntity( $entityId, $revision );
+			$this->loadedEntities[$key] = $entity;
 		}
 
-		return $this->loadedEntities[$entityId->getPrefixedId()];
+		wfProfileOut( __METHOD__ );
+		return $this->loadedEntities[$key];
 	}
 
 	/**
@@ -74,39 +104,52 @@ class CachingEntityLoader implements EntityLookup {
 	 * @return Entity|null[]
 	 */
 	public function getEntities( array $entityIds, $revision = false ) {
-		$loadedProps = array();
-		$propsToLoad = array();
+		wfProfileIn( __METHOD__ );
+
+		$loaded = array();
+		$todo = array();
 
 		foreach ( $entityIds as $entityId ) {
 			if ( !( $entityId instanceof EntityId ) ) {
+				wfProfileOut( __METHOD__ );
 				throw new MWException( 'All entity ids passed to loadEntities must be an instance of EntityId' );
 			}
 
 			$prefixedId = $entityId->getPrefixedId();
+			$key = $this->getCacheKey( $entityId );
 
-			if ( array_key_exists( $prefixedId, $this->loadedEntities ) ) {
-				$loadedProps[$prefixedId] = $this->loadedEntities[$prefixedId];
+			if ( array_key_exists( $key, $this->loadedEntities ) ) {
+				$loaded[$prefixedId] = $this->loadedEntities[$key];
 			}
 			else {
-				$propsToLoad[] = $entityId;
+				$todo[] = $entityId;
 			}
 		}
 
-		// TODO: we really want batch lookup here :)
-		foreach ( $propsToLoad as $entityId ) {
-			$loadedProps[$entityId->getPrefixedId()] = $this->getEntity( $entityId );
+		if ( $todo ) {
+			$newlyLoaded = $this->lookup->getEntities( $todo );
+			$loaded = array_merge( $loaded, $newlyLoaded );
+
+			$this->loadedEntities = array_merge( $this->loadedEntities, $newlyLoaded );
 		}
 
-		return $loadedProps;
+		wfProfileOut( __METHOD__ );
+		return $loaded;
 	}
 
 	/**
+	 * Removes any entity with the given combination of ID and revision from the cache
+	 *
 	 * @since 0.4
 	 *
 	 * @param EntityId $entityId
+	 * @param int|bool $revision
+	 *
+	 * @return void
 	 */
-	protected function setNonExistingEntity( EntityId $entityId ) {
-		$this->loadedEntities[$entityId->getPrefixedId()] = null;
+	public function purgeEntity( EntityId $entityId, $revision = false ) {
+		$key = $this->getCacheKey( $entityId, $revision );
+		unset( $this->loadedEntities[$key] );
 	}
 
 	/**
@@ -125,7 +168,8 @@ class CachingEntityLoader implements EntityLookup {
 				throw new MWException( 'All entities passed to setEntities must be an instance of Entity' );
 			}
 
-			$this->loadedEntities[$entity->getPrefixedId()] = $entity;
+			$key = $this->getCacheKey( $entity->getId() );
+			$this->loadedEntities[$key] = $entity;
 		}
 	}
 

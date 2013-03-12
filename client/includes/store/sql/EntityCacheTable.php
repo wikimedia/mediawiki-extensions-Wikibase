@@ -31,6 +31,8 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ *
+ * @todo: rename to EntityMirrorTable
  */
 class EntityCacheTable extends ORMTable implements EntityCache {
 

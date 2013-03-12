@@ -198,7 +198,8 @@ abstract class EntityView extends \ContextSource {
 		// fresh parser output with entity markup
 		$pout = new ParserOutput();
 
-		$entityLoader = new CachingEntityLoader();
+		$entityLoader = StoreFactory::getStore()->getEntityLookup();
+
 		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
 		$contentFactory = EntityContentFactory::singleton();
 
@@ -739,7 +740,7 @@ abstract class EntityView extends \ContextSource {
 		);
 
 		// make information about other entities used in this entity available in JavaScript view:
-		$entityLoader = new CachingEntityLoader();
+		$entityLoader = StoreFactory::getStore()->getEntityLookup();
 		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
 
 		$usedEntityIds = $refFinder->findClaimLinks( $entity->getClaims() );
