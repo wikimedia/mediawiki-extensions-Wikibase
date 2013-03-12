@@ -97,32 +97,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Add new javascript testing modules. This is called after the addition of MediaWiki core test suites.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
-	 *
-	 * @since 0.4
-	 *
-	 * @param array &$testModules
-	 * @param \ResourceLoader &$resourceLoader
-	 *
-	 * @return boolean
-	 */
-	 public static function onRegisterQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
-		$testModules['qunit']['wikibase.client.watchlist.test'] = array(
-			'scripts' => array(
-				'tests/qunit/wbclient.watchlist.tests.js'
-			),
-			'dependencies' => array(
-				'wbclient.watchlist',
-				'wbclient.watchlist.css'
-			),
-			'localBasePath' => __DIR__,
-			'remoteExtPath' => 'Wikibase/client'
-		);
-		return true;
-	}
-
-	/**
 	 * Deletes all the data stored on the repository.
 	 *
 	 * @since 0.2
@@ -503,7 +477,12 @@ final class ClientHooks {
 
 		wfProfileIn( __METHOD__ );
 
-		if ( $wgRequest->getBool( 'enhanced', $wgUser->getOption( 'usenewrc' ) ) === false ) {
+		if (
+			// Don't act on activated enhanced watchlist
+			$wgRequest->getBool( 'enhanced', $wgUser->getOption( 'usenewrc' ) ) === false &&
+			// Or in case the user disabled it
+			$wgRequest->getBool( 'hideWikibase', !$wgUser->getOption( 'wlshowwikibase' ) ) === false
+		) {
 			$dbr = wfGetDB( DB_SLAVE );
 
 			$newConds = array();
@@ -716,29 +695,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Adds a JS stuff that provides a toggle for wikibase edits on the watchlist
-	 *
-	 * @param \SpecialPage $special
-	 * @param string $subpage
-	 *
-	 * @return bool
-	 */
-	public static function onSpecialPageBeforeExecute( \SpecialPage $special, $subpage ) {
-		if ( $special->getName() === 'Watchlist' ) {
-			$context = $special->getContext();
-
-			if ( $context->getRequest()->getBool( 'enhanced', $context->getUser()->getOption( 'usenewrc' ) ) === false ) {
-				$special->getOutput()->addModules( array(
-					'wbclient.watchlist.css',
-					'wbclient.watchlist',
-				) );
-			}
-		}
-
-		return true;
-	}
-
-	/**
 	 * Register the parser functions.
 	 *
 	 * @param $parser \Parser
@@ -774,4 +730,27 @@ final class ClientHooks {
 		return true;
 	}
 
+	/**
+	 * Modifies watchlist options to show a toggle for Wikibase changes
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialWatchlistFilters
+	 *
+	 * @since 0.4
+	 *
+	 * @param SpecialWatchlist $special
+	 * @param array $filters
+	 *
+	 * @return bool
+	 */
+	public static function onSpecialWatchlistFilters( $special, &$filters ) {
+		$user = $special->getContext()->getUser();
+
+		if ( $special->getContext()->getRequest()->getBool( 'enhanced', $user->getOption( 'usenewrc' ) ) === false ) {
+			// Allow toggling wikibase changes in case the enhanced watchlist is disabled
+			$filters['hideWikibase'] = array(
+				'msg' => 'wikibase-rc-hide-wikidata',
+				'default' => !$user->getBoolOption( 'wlshowwikibase' )
+			);
+		}
+		return true;
+	}
 }

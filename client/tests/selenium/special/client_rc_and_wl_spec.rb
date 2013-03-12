@@ -41,9 +41,8 @@ describe "Check client RC & WL" do
         page.watch_article(article_title)
       end
       visit_page(WatchlistPage) do |page|
-        page.wlFirstResultUserLink_element.text.downcase.include?(WIKI_ADMIN_USERNAME.downcase).should be_false
-		    page.wlShowWikidataToggle?.should be_true
-        page.wlShowWikidataToggle
+        page.wlFirstResultUserLinkNoWikidata_element.text.downcase.include?(WIKI_ADMIN_USERNAME.downcase).should be_false
+        page.show_wikibase
         page.wlFirstResultDiffLink?.should be_true
         page.wlFirstResultUserLink?.should be_true
         page.wlFirstResultUserLink_element.text.downcase.include?(WIKI_ADMIN_USERNAME.downcase).should be_true
@@ -54,14 +53,14 @@ describe "Check client RC & WL" do
         page.wlFirstResultIDLink_element.text.include?(item_id).should be_true
       end
       visit_page(WatchlistPage) do |page|
-        page.wlShowWikidataToggle
+        page.show_wikibase
         page.wlFirstResultUserLink
       end
       on_page(ItemPage) do |page|
         page.mwFirstHeading.downcase.should == "user:" + WIKI_ADMIN_USERNAME.downcase
       end
       visit_page(WatchlistPage) do |page|
-        page.wlShowWikidataToggle
+        page.show_wikibase
         page.wlFirstResultHistoryLink
       end
       on_page(ClientPage) do |page|
@@ -69,7 +68,7 @@ describe "Check client RC & WL" do
         page.current_url.include?("action=history").should == true
       end
       visit_page(WatchlistPage) do |page|
-        page.wlShowWikidataToggle
+        page.show_wikibase
         page.wlFirstResultDiffLink
       end
       on_page(ClientPage) do |page|
@@ -77,14 +76,14 @@ describe "Check client RC & WL" do
         page.clientArticleTitle.include?("Difference").should == true
       end
       visit_page(WatchlistPage) do |page|
-        page.wlShowWikidataToggle
+        page.show_wikibase
         page.wlFirstResultLabelLink
       end
       on_page(ClientPage) do |page|
         page.clientArticleTitle.should == article_title
       end
       visit_page(WatchlistPage) do |page|
-        page.wlShowWikidataToggle
+        page.show_wikibase
         page.wlFirstResultIDLink
       end
       on_page(ItemPage) do |page|
@@ -98,7 +97,7 @@ describe "Check client RC & WL" do
       end
       visit_page(WatchlistPage) do |page|
         @browser.refresh
-        page.wlShowWikidataToggle
+        page.show_wikibase
         page.wait_until do
           page.clientFirstResultComment?
         end
@@ -125,7 +124,7 @@ describe "Check client RC & WL" do
       end
       visit_page(WatchlistPage) do |page|
         @browser.refresh
-        page.wlShowWikidataToggle
+        page.show_wikibase
         page.wait_until do
           page.clientFirstResultComment?
         end
@@ -234,10 +233,13 @@ describe "Check client RC & WL" do
       page.logout_user
     end
     visit_page(ClientLoginPage) do |page|
-      page.logout_user
+      page.login_with(CLIENT_ADMIN_USERNAME, CLIENT_ADMIN_PASSWORD)
     end
     visit_page(ClientPage) do |page|
       page.unwatch_article(article_title)
+    end
+    visit_page(ClientLoginPage) do |page|
+      page.logout_user
     end
   end
 end

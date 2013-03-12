@@ -103,7 +103,6 @@ $wgHooks['ParserAfterParse'][]				= '\Wikibase\ClientHooks::onParserAfterParse';
 $wgHooks['ParserFirstCallInit'][]			= '\Wikibase\ClientHooks::onParserFirstCallInit';
 $wgHooks['MagicWordwgVariableIDs'][]			= '\Wikibase\ClientHooks::onMagicWordwgVariableIDs';
 $wgHooks['ParserGetVariableValueSwitch'][]		= '\Wikibase\ClientHooks::onParserGetVariableValueSwitch';
-$wgHooks['ResourceLoaderTestModules'][]             = 'Wikibase\ClientHooks::onRegisterQUnitTests';
 $wgHooks['SkinTemplateOutputPageBeforeExec'][]		= '\Wikibase\ClientHooks::onSkinTemplateOutputPageBeforeExec';
 $wgHooks['SpecialMovepageAfterMove'][]				= '\Wikibase\ClientHooks::onSpecialMovepageAfterMove';
 $wgHooks['SpecialWatchlistQuery'][]			= '\Wikibase\ClientHooks::onSpecialWatchlistQuery';
@@ -111,8 +110,9 @@ $wgHooks['SpecialRecentChangesQuery'][]				= '\Wikibase\ClientHooks::onSpecialRe
 $wgHooks['SpecialRecentChangesFilters'][]			= '\Wikibase\ClientHooks::onSpecialRecentChangesFilters';
 $wgHooks['GetPreferences'][]						= '\Wikibase\ClientHooks::onGetPreferences';
 $wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay';
-$wgHooks['SpecialPageBeforeExecute'][]		= '\Wikibase\ClientHooks::onSpecialPageBeforeExecute';
 $wgHooks['ScribuntoExternalLibraries'][]      = '\Wikibase\ClientHooks::onScribuntoExternalLibraries';
+$wgHooks['SpecialWatchlistFilters'][]          = '\Wikibase\ClientHooks::onSpecialWatchlistFilters';
+
 // extension hooks
 $wgHooks['WikibasePollHandle'][]                        = '\Wikibase\ClientHooks::onWikibasePollHandle';
 $wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
