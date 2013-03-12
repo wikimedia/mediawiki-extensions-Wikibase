@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "DqO5NZ3Q",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-12T11:51:17Z",
+      "side": 1,
+      "message": "I guess I have more warnings turned on\n\n\u003cb\u003eNotice\u003c/b\u003e:  Undefined variable: numericItemId in \u003cb\u003e/home/john/Workspace/Wikibase/client/includes/LangLinkHandler.php\u003c/b\u003e on line \u003cb\u003e94\u003c/b\u003e",
+      "revId": "b3edb9920a7aedce13ed8e1504487bd26a9490ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqA4qG4A",
         "filename": "client/includes/LangLinkHandler.php",
         "patchSetId": 12
