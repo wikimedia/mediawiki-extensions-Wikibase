@@ -18,9 +18,11 @@ $messages = array();
  * @author Jeroen De Dauw
  * @author Nikola Smolenski
  * @author Marius Hoch
+ * @author Jeblad
  */
 $messages['en'] = array(
 	'wikibase-client-desc' => 'Client for the Wikibase extension',
+	'specialpages-group-wikibaseclient' => 'Wikidata client',
 	'wikibase-after-page-move' => 'You may also [$1 update] the associated Wikidata item to maintain language links on moved page.',
 	'wikibase-comment-remove' => 'Associated Wikidata item deleted. Language links removed.',
 	'wikibase-comment-linked' => 'A Wikidata item has been linked to this page.',
@@ -55,6 +57,14 @@ $messages['en'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
 	'wikibase-watchlist-show-changes-pref' => 'Show Wikidata edits in your watchlist',
 	'wikibase-error-invalid-entity-id' => 'The ID entered is unknown to the system. Please use a valid entity ID.',
+	'special-unconnectedpages' => 'Pages not connected to items',
+	'wikibase-unconnectedpages-legend' => 'Unconnected pages options',
+	'wikibase-unconnectedpages-page' => 'Start page:',
+	'wikibase-unconnectedpages-submit' => 'Go',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" is not a valid language code.',
+	'wikibase-unconnectedpages-page-warning' => 'The page title could not be used for the query and is ignored.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Only pages with interlanguagelinks',
+	'wikibase-unconnectedpages-format-row' => '($1 interlanguagelinks on the page)',
 );
 
 /** Message documentation (Message documentation)
@@ -69,6 +79,7 @@ $messages['en'] = array(
 $messages['qqq'] = array(
 	'wikibase-client-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
 See also [[d:Wikidata:Glossary#Wikidata|Wikidata]].',
+	'specialpages-group-wikibaseclient' => 'Title of group of special pages related to Wikidata clients',
 	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfully move, inviting user to update associated Wikibase repository item to maintain language links on the moved page on the client.
 
 Parameters:
@@ -138,6 +149,14 @@ Parameters:
 	'wikibase-rc-show-wikidata-pref' => 'Option in the recent changes section of preferences to show wikibase changes by default in recent changes.',
 	'wikibase-watchlist-show-changes-pref' => 'Option in the watchlist section of preferences to always show wikibase edits by default in the watchlist.',
 	'wikibase-error-invalid-entity-id' => 'Generic error message when an invalid entity ID was entered.',
+	'special-unconnectedpages' => 'Title of the special page for listing unconnected items.',
+	'wikibase-unconnectedpages-page-warning' => 'The title that is typed in could not be used of some kind of reason. This can happen for example when the title has an interwiki prefix to another language, or a namespace that is not used for Wikibase entities.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Text for the checkbox. Should say that only pages without interlanguage-links should be listed.',
+	'wikibase-unconnectedpages-legend' => 'Legend for the options box at the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-page' => 'Label for the start page field in the options box of the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-submit' => 'Text for the submit button in the options box of the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-invalid-language' => 'Warning message about invalid language used at the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-format-row' => 'Formating of the additional data for each row in the result set on the special page for pages not connected to sitelinks.',
 );
 
 /** Afrikaans (Afrikaans)
