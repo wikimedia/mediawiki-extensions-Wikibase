@@ -61,7 +61,7 @@ class ChangeHandler {
 
 	public function __construct( EntityLookup $entityLookup = null, $siteGlobalId = null ) {
 		if ( !$entityLookup ) {
-			$entityLookup = ClientStoreFactory::getStore()->newEntityLookup();
+			$entityLookup = ClientStoreFactory::getStore()->getEntityLookup();
 		}
 
 		if ( !$siteGlobalId ) {

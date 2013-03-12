@@ -64,7 +64,11 @@ abstract class EntityTestCase extends \MediaWikiTestCase {
 					$this->fail( "$k should not be empty; $message" );
 				}
 
-				$this->assertArrayEquals( $expected[ $k ], $actual[ $k ], false, true );
+				if ( is_array( $expected[ $k ] ) && is_array( $actual[ $k ] ) ) {
+					$this->assertArrayEquals( $expected[ $k ], $actual[ $k ], false, true );
+				} else {
+					$this->assertEquals( $expected[ $k ], $actual[ $k ], "field $k" );
+				}
 			}
 		}
 	}

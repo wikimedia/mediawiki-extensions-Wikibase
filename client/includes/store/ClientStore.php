@@ -22,6 +22,8 @@ namespace Wikibase;
  *
  * @since 0.1
  *
+ * @todo: provide getXXX() methods for getting local pseudo-singletons (shared service objects).
+ *
  * @file
  * @ingroup WikibaseClient
  *
@@ -45,8 +47,10 @@ interface ClientStore {
 	 * @since 0.1
 	 *
 	 * @return EntityLookup
+	 *
+	 * @todo: rename to newEntityMirror
 	 */
-	public function newEntityLookup();
+	public function getEntityLookup();
 
 	/**
 	 * Returns a new ChangesTable for this store.

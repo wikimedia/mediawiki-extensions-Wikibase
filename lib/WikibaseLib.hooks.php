@@ -81,6 +81,7 @@ final class LibHooks {
 			'store/SiteLinkLookup',
 			'store/SiteLinkTable',
 			'store/WikiPageEntityLookup',
+			'store/CachingEntityLoader',
 
 			'ByPropertyIdArray',
 			'ChangesTable',
@@ -91,6 +92,7 @@ final class LibHooks {
 			'TemplateRegistry',
 			'LibHooks',
 			'MapValueHasher',
+			'MockRepository',
 			'SettingsArray',
 			'SiteLink',
 			'TermsToClaimsTranslator',

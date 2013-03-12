@@ -53,7 +53,7 @@ class EntityCacheUpdater {
 		$id = $change->getEntityId();
 
 		$store = ClientStoreFactory::getStore();
-		$entityCache = $store->newEntityLookup(); //TODO: make sure we get an EntityCache instance
+		$entityCache = $store->getEntityLookup(); //TODO: make sure we get an EntityCache instance
 
 		switch ( $updateType ) {
 			case 'remove':
