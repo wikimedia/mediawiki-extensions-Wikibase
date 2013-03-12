@@ -8,12 +8,13 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
 
 ( function( wb, dv, $, QUnit, undefined ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.datamodel.reference.js', QUnit.newMwEnvironment() );
+	QUnit.module( 'wikibase.datamodel.Reference', QUnit.newWbEnvironment() );
 
 	var snakLists = [
 		new wb.SnakList( [
@@ -71,6 +72,69 @@
 			null,
 			'Reference without initial hash will return null in getHash()'
 		);
+	} );
+
+	QUnit.test( 'toJSON()', function( assert ) {
+		var reference = new wb.Reference(
+			new wb.SnakList(
+				[
+					new wb.PropertyValueSnak( 42, new dv.StringValue( 'string' ) ),
+					new wb.PropertySomeValueSnak( 9001 )
+				]
+			),
+			'hash12390213'
+		);
+
+		assert.ok(
+			reference.equals( wb.Reference.newFromJSON( reference.toJSON() ) ),
+			'Exported reference to JSON.'
+		);
+	} );
+
+	QUnit.test( 'equals()', function( assert ) {
+		var references = [
+			new wb.Reference(),
+			new wb.Reference(
+				new wb.SnakList(
+					[
+						new wb.PropertyValueSnak( 42, new dv.StringValue( 'string' ) ),
+						new wb.PropertySomeValueSnak( 9001 )
+					]
+				),
+				'hash12390213'
+			),
+			new wb.Reference(
+				new wb.SnakList(
+					[
+						new wb.PropertyValueSnak( 345, new dv.StringValue( 'string' ) ),
+						new wb.PropertySomeValueSnak( 9001 )
+					]
+				)
+			)
+		];
+
+		// Compare references:
+		$.each( references, function( i, reference ) {
+			var clonedReference = wb.Reference.newFromJSON( reference.toJSON() );
+
+			// Check if "cloned" reference is equal:
+			assert.ok(
+				reference.equals( clonedReference ),
+				'Verified reference "' + i + '" on equality.'
+			);
+
+			// Compare to all other references:
+			$.each( references, function( j, otherReference ) {
+				if ( j !== i ) {
+					assert.ok(
+						!reference.equals( otherReference ),
+						'Reference "' + i + '" is not equal to reference "'+ j + '".'
+					);
+				}
+			} );
+
+		} );
+
 	} );
 
 }( wikibase, dataValues, jQuery, QUnit ) );
