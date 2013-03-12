@@ -32,9 +32,9 @@ namespace Wikibase\Test;
  */
 abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 
-	public function testConstructor() {
-		$this->assertInstanceOf( 'SpecialPage', new \SpecialItemDisambiguation() );
-	}
+	//public function testConstructor() {
+		//$this->assertInstanceOf( 'SpecialPage', new \SpecialItemDisambiguation() );
+	//}
 
 	/**
 	 * Returns a new instance of the special page under test.
