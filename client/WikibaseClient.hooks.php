@@ -488,14 +488,19 @@ final class ClientHooks {
 
 		wfProfileIn( __METHOD__ );
 
-		if ( $wgRequest->getBool( 'enhanced', $wgUser->getOption( 'usenewrc' ) ) === false ) {
+		if (
+			// Don't act on activated enhanced watchlist
+			$wgRequest->getBool( 'enhanced', $wgUser->getOption( 'usenewrc' ) ) === false &&
+			// Or in case the user disabled it
+			$wgRequest->getBool( 'hideWikibase', !$wgUser->getOption( 'wlshowwikibase' ) ) === false
+		) {
 			$dbr = wfGetDB( DB_SLAVE );
 
 			$newConds = array();
 			foreach( $conds as $k => $v ) {
 				if ( $v ===  'rc_this_oldid=page_latest OR rc_type=3' ) {
 					$where = array(
-						'rc_this_oldid=page_latest',
+						'rc_this_oldid' => 'page_latest',
 						'rc_type' => array( 3, 5 )
 					);
 					$newConds[$k] = $dbr->makeList( $where, LIST_OR );
@@ -701,29 +706,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Adds a JS stuff that provides a toggle for wikibase edits on the watchlist
-	 *
-	 * @param \SpecialPage $special
-	 * @param string $subpage
-	 *
-	 * @return bool
-	 */
-	public static function onSpecialPageBeforeExecute( \SpecialPage $special, $subpage ) {
-		if ( $special->getName() === 'Watchlist' ) {
-			$context = $special->getContext();
-
-		  	if ( $context->getRequest()->getBool( 'enhanced', $context->getUser()->getOption( 'usenewrc' ) ) === false ) {
-				$special->getOutput()->addModules( array(
-					'wbclient.watchlist.css',
-					'wbclient.watchlist',
-				) );
-			}
-		}
-
-		return true;
-	}
-
-	/**
 	 * Register the parser function.
 	 * @param $parser \Parser
 	 * @return bool
@@ -752,4 +734,25 @@ final class ClientHooks {
 		return true;
 	}
 
+	/**
+	 * Modifies watchlist options to show a toggle for Wikibase changes
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialWatchlistFilters
+	 *
+	 * @since 0.4
+	 *
+	 * @param SpecialWatchlist $special
+	 * @param array $filters
+	 *
+	 * @return bool
+	 */
+	public static function onSpecialWatchlistFilters( $special, &$filters ) {
+		$user = $special->getContext()->getUser();
+
+		$filters['hideWikibase'] = array(
+			'msg' => 'wikibase-rc-hide-wikidata',
+			'default' => !$user->getBoolOption( 'wlshowwikibase' )
+		);
+
+		return true;
+	}
 }
