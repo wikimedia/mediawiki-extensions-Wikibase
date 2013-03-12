@@ -30,6 +30,9 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wbclient.watchlist.js'
 			),
+			'dependencies' => array(
+				'user.options'
+			),
 			'messages' => array(
 				'hide',
 				'show',
