@@ -214,7 +214,6 @@ $wgAutoloadClasses['Wikibase\Test\Api\ModifyItemBase'] 			= $dir . 'tests/phpuni
 $wgAutoloadClasses['Wikibase\Test\Api\LangAttributeBase'] 	= $dir . 'tests/phpunit/includes/api/LangAttributeBase.php';
 $wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/includes/content/EntityContentTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 		= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
-$wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/includes/specials/SpecialPageTestBase.php';
 
 // API module registration
 $wgAPIModules['wbgetentities'] 						= 'Wikibase\Api\GetEntities';

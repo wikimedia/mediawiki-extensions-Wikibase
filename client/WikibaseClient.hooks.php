@@ -86,6 +86,8 @@ final class ClientHooks {
 			'includes/api/ApiClientInfo',
 
 			'includes/store/EntityCacheTable',
+
+			'includes/specials/SpecialUnconnectedPages',
 		);
 
 		foreach ( $testFiles as $file ) {
