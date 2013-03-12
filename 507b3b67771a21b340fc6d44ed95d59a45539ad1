@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DqC4Ev8E",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-12T12:49:54Z",
+      "side": 1,
+      "message": "Really? I like stuff like \"Change[] $changes\", but \"$params[]\" seems less clear to me than \"array $params\".",
+      "parentUuid": "DqKOfiP8",
+      "revId": "507b3b67771a21b340fc6d44ed95d59a45539ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqAOb1BY",
         "filename": "repo/includes/api/ModifyEntity.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-12T11:25:44Z",
       "side": 1,
       "message": "return new Summary( $this-\u003egetModuleName() );",
+      "revId": "507b3b67771a21b340fc6d44ed95d59a45539ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqO4ux0M",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-12T12:49:54Z",
+      "side": 1,
+      "message": "Splitting it makes it easier to debug and to extend.\nSame reason as always using blocks for ifs and loops.",
+      "parentUuid": "DqAOb1BY",
       "revId": "507b3b67771a21b340fc6d44ed95d59a45539ad1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DqC4dnws",
+        "filename": "repo/includes/api/ModifyLangAttribute.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-12T12:49:54Z",
+      "side": 1,
+      "message": "oops, will do!",
+      "parentUuid": "DqGOK0MI",
+      "revId": "507b3b67771a21b340fc6d44ed95d59a45539ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqIOH5Lc",
         "filename": "repo/includes/api/ModifyLangAttribute.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-03-12T11:25:44Z",
       "side": 1,
       "message": "spaces\n\n0 \u003c strlen( $params[\u0027value\u0027] );\n\neasier to read the code",
+      "revId": "507b3b67771a21b340fc6d44ed95d59a45539ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqG4jl1o",
+        "filename": "repo/includes/api/ModifyLangAttribute.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-12T12:49:54Z",
+      "side": 1,
+      "message": "oh yes. Did I write this? I think I just moved it around or copied it from somewhere... \n\nanyway, will fix.",
+      "parentUuid": "DqIOH5Lc",
       "revId": "507b3b67771a21b340fc6d44ed95d59a45539ad1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
