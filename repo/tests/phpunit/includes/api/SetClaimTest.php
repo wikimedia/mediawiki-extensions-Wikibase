@@ -103,17 +103,17 @@ class SetClaimTest extends \ApiTestCase {
 			$claim->setGuid( $guid );
 
 			// Addition request
-			$this->makeRequest( $claim, $item->getId() );
+			$this->makeRequest( $claim, $item->getId(), 1 );
 
 			$claim = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( 1234 ) );
 			$claim->setGuid( $guid );
 
 			// Update request
-			$this->makeRequest( $claim, $item->getId() );
+			$this->makeRequest( $claim, $item->getId(), 1 );
 		}
 	}
 
-	protected function makeRequest( Claim $claim, \Wikibase\EntityId $entityId ) {
+	protected function makeRequest( Claim $claim, \Wikibase\EntityId $entityId, $claimCount ) {
 		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
 		$serializer = $serializerFactory->newSerializerForObject( $claim );
 
@@ -132,6 +132,8 @@ class SetClaimTest extends \ApiTestCase {
 		$claims = new \Wikibase\Claims( $content->getEntity()->getClaims() );
 
 		$this->assertTrue( $claims->hasClaim( $claim ) );
+
+		$this->assertEquals( $claimCount, $claims->count() );
 	}
 
 	protected function makeValidRequest( array $params ) {

@@ -101,6 +101,9 @@ class SetClaimValueTest extends \ApiTestCase {
 	}
 
 	public function doTestValidRequest( Entity $entity, $claimGuid, $value ) {
+		$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
+		$claimCount = count( $content->getEntity()->getClaims() );
+
 		$params = array(
 			'action' => 'wbsetclaimvalue',
 			'claim' => $claimGuid,
@@ -122,6 +125,8 @@ class SetClaimValueTest extends \ApiTestCase {
 		$obtainedEntity = $content->getEntity();
 
 		$claims = new \Wikibase\Claims( $obtainedEntity->getClaims() );
+
+		$this->assertEquals( $claimCount, $claims->count(), 'Claim count should not change after doing a setclaimvalue request' );
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $claimGuid ) );
 
