@@ -12,12 +12,20 @@ class WatchlistPage
   page_url WIKI_CLIENT_URL + 'Special:Watchlist'
 
   list_item(:wlFirstResult, :xpath => "//ul[@class='special']/li")
+  link(:wlFirstResultUserLinkNoWikidata, :xpath => "//ul[@class='special']/li/a[3]")
   link(:wlFirstResultDiffLink, :xpath => "//ul[@class='special']/li/a[1]")
   link(:wlFirstResultHistoryLink, :xpath => "//ul[@class='special']/li/a[2]")
   link(:wlFirstResultLabelLink, :xpath => "//ul[@class='special']/li/a[3]")
   link(:wlFirstResultIDLink, :xpath => "//ul[@class='special']/li/a[4]")
   link(:wlFirstResultUserLink, :xpath => "//ul[@class='special']/li/a[5]")
-  link(:wlShowWikidataToggle, :id => "wb-toggle-link")
   span(:clientFirstResultComment, :xpath => "//ul[@class='special']/li/span[contains(@class,'comment')]")
+
+  def hide_wikibase
+    navigate_to WIKI_CLIENT_URL + "Special:Watchlist" + "?hideWikibase=1"
+  end
+
+  def show_wikibase
+    navigate_to WIKI_CLIENT_URL + "Special:Watchlist" + "?hideWikibase=0"
+  end
 
 end
