@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqGluMTI",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-12T16:19:12Z",
+      "side": 1,
+      "message": "should document that this returns wikitext.",
+      "revId": "011e417ff68e80526003dda2cc934f6e4470644e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqMmInes",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-12T16:19:12Z",
+      "side": 1,
+      "message": "needs wfEscapeWikiText - or am I missing something?",
+      "revId": "011e417ff68e80526003dda2cc934f6e4470644e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
