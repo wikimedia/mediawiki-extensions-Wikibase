@@ -54,6 +54,7 @@ $dir = __DIR__ . '/';
 
 // i18n
 $wgExtensionMessagesFiles['wikibaseclient'] 		= $dir . 'WikibaseClient.i18n.php';
+$wgExtensionMessagesFiles['Wikibaseclientalias']	= $dir . 'WikibaseClient.i18n.alias.php';
 $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.magic.php';
 
 // Autoloading
@@ -86,6 +87,9 @@ $wgAutoloadClasses['Wikibase\PropertyParserFunction'] = $dir . 'includes/parserh
 $wgAutoloadClasses['Wikibase\ExternalChangesLine']	= $dir . 'includes/recentchanges/ExternalChangesLine.php';
 $wgAutoloadClasses['Wikibase\ExternalRecentChange'] = $dir . 'includes/recentchanges/ExternalRecentChange.php';
 $wgAutoloadClasses['Wikibase\RecentChangesFilterOptions'] 	= $dir . 'includes/recentchanges/RecentChangesFilterOptions.php';
+
+// includes/specials
+$wgAutoloadClasses['SpecialUnconnectedPages']			= $dir . 'includes/specials/SpecialUnconnectedPages.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
@@ -125,6 +129,12 @@ $wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWiki
 
 // api modules
 $wgAPIMetaModules['wikibase'] = 'Wikibase\ApiClientInfo';
+
+// Special page registration
+$wgSpecialPages['UnconnectedPages']						= 'SpecialUnconnectedPages';
+
+// Special page groups
+$wgSpecialPageGroups['UnconnectedPages']				= 'wikibaseclient';
 
 // Resource loader modules
 $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
