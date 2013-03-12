@@ -41,14 +41,21 @@ class SetDescription extends ModifyLangAttribute {
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
+		$summary = $this->createSummary( $params );
 
 		if ( isset( $params['value'] ) ) {
+
 			$description = Utils::trimToNFC( $params['value'] );
 			$language = $params['language'];
+
 			if ( 0 < strlen( $description ) ) {
+				$summary->addAutoSummaryArgs( $description );
 				$descriptions = array( $language => $entityContent->getEntity()->setDescription( $language, $description ) );
 			}
 			else {
+				$old = $entityContent->getEntity()->getDescription( $language );
+				$summary->addAutoSummaryArgs( $old );
+
 				$entityContent->getEntity()->removeDescription( $language );
 				$descriptions = array( $language => '' );
 			}
@@ -57,7 +64,7 @@ class SetDescription extends ModifyLangAttribute {
 		}
 
 		wfProfileOut( __METHOD__ );
-		return true;
+		return $summary;
 	}
 
 	/**

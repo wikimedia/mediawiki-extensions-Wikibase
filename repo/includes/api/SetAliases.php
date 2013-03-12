@@ -55,26 +55,7 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
-			'wbsetaliases-' . implode( '-', Autocomment::pickKeysFromParams( $params, 'set', 'add', 'remove' ) ),
-			array( $plural, $params['language'] )
-		);
-	}
-
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'set', 'add', 'remove' )
-		);
-	}
-
-	/**
-	 * @see \Wikibase\Api\ModifyEntity::createEntity()
+	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
 		$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-item' );
@@ -86,7 +67,12 @@ class SetAliases extends ModifyEntity {
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
 
+		$summary = $this->createSummary( $params );
+		$summary->setLanguage( $params['language'] );
+
 		if ( isset( $params['set'] ) ) {
+			$summary->setAction( 'set' );
+			$summary->addAutoSummaryArgs( $params['set'] );
 			$entityContent->getEntity()->setAliases(
 				$params['language'],
 				array_map(
@@ -97,6 +83,8 @@ class SetAliases extends ModifyEntity {
 		}
 
 		if ( isset( $params['remove'] ) ) {
+			$summary->setAction( 'remove' );
+			$summary->addAutoSummaryArgs( $params['remove'] );
 			$entityContent->getEntity()->removeAliases(
 				$params['language'],
 				array_map(
@@ -107,6 +95,8 @@ class SetAliases extends ModifyEntity {
 		}
 
 		if ( isset( $params['add'] ) ) {
+			$summary->setAction( 'add' );
+			$summary->addAutoSummaryArgs( $params['add'] );
 			$entityContent->getEntity()->addAliases(
 				$params['language'],
 				array_map(
@@ -122,7 +112,7 @@ class SetAliases extends ModifyEntity {
 		}
 
 		wfProfileOut( __METHOD__ );
-		return true;
+		return $summary;
 	}
 
 	/**

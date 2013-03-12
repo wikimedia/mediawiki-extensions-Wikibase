@@ -20,6 +20,7 @@ use Wikibase\Utils;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class ModifyLangAttribute extends ModifyEntity {
 
@@ -35,22 +36,24 @@ abstract class ModifyLangAttribute extends ModifyEntity {
 	}
 
 	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForComment()
+	 * Creates a Summary object based on the given API call parameters.
+	 * The Summary will be initializes with the appropriate action name
+	 * and target language. It will not have any summary arguments set.
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $params
+	 *
+	 * @return \Wikibase\Summary
 	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
-			$this->getModuleName() . '-' . ( ( isset( $params['value'] ) && 0<strlen( $params['value'] ) ) ? 'set' : 'remove' ),
-			array( /* $plural */ 1, $params['language'] )
-		);
-	}
+	protected function createSummary( array $params ) {
+		$set = isset( $params['value'] ) && 0 < strlen( $params['value'] );
 
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'value' )
-		);
+		$summary = parent::createSummary( $params );
+		$summary->setAction( ( $set ? 'set' : 'remove' ) );
+		$summary->setLanguage( $params['language'] );
+
+		return $summary;
 	}
 
 	/**

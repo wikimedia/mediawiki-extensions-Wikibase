@@ -54,32 +54,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 'none' ) {
-		if ( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
-			$action = $params['clear'] === false ? 'update' : 'override';
-		}
-		else {
-			$action = 'create';
-		}
-		return Autocomment::formatAutoComment(
-			'wbeditentity-' . $action,
-			array() // TODO: this could list all languages and/or sites (how to do this for claims?)
-		);
-	}
-
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			array() // TODO: this could list values (how to do this for claims?)
-		);
-	}
-
-	/**
-	 * @see \Wikibase\Api\ModifyEntity::createEntity()
+	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
 		if ( isset( $params['data'] ) ) {
@@ -119,6 +94,18 @@ class EditEntity extends ModifyEntity {
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
 		$status = Status::newGood();
+		$summary = $this->createSummary( $params );
+
+		if ( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
+			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
+		}
+		else {
+			$summary->setAction( 'create' );
+		}
+
+		//TODO: Construct a nice and meaningful summary from the changes that get applied!
+		//      Perhaps that could be based on the resulting diff?
+
 		if ( isset( $params['data'] ) ) {
 			$data = json_decode( $params['data'], true );
 			if ( is_null( $data ) ) {
@@ -366,7 +353,7 @@ class EditEntity extends ModifyEntity {
 		}
 
 		wfProfileOut( __METHOD__ );
-		return true;
+		return $summary;
 	}
 
 	/**

@@ -67,29 +67,12 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
-			'wbsetsitelink-' . ( ( isset( $params['linktitle'] ) && $params['linktitle'] !== "" ) ? "set" : "remove" ),
-			array( /*$plural*/ 1, $params['linksite'] )
-		);
-	}
-
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			array( $params['linktitle'] )
-		);
-	}
-
-	/**
-	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
+	 * @see ApiModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
+		$summary = $this->createSummary( $params );
+		$summary->setLanguage( $params['linksite'] ); //XXX: not really a language!
 
 		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
 			$link = $entityContent->getItem()->getSiteLink( Utils::trimToNFC( $params['linksite'] ) );
@@ -102,8 +85,10 @@ class SetSiteLink extends ModifyEntity {
 			$entityContent->getItem()->removeSiteLink( $params['linksite'] );
 			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
 
+			$summary->setAction( 'remove' );
+
 			wfProfileOut( __METHOD__ );
-			return true;
+			return $summary;
 		}
 		else {
 			$sites = $this->getSiteLinkTargetSites();
@@ -130,8 +115,12 @@ class SetSiteLink extends ModifyEntity {
 			}
 
 			$this->addSiteLinksToResult( array( $ret ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
+
+			$summary->setAction( 'set' );
+			$summary->addAutoSummaryArgs( $params['linktitle'] );
+
 			wfProfileOut( __METHOD__ );
-			return $ret !== false;
+			return $ret === false ? null : $summary;
 		}
 	}
 
