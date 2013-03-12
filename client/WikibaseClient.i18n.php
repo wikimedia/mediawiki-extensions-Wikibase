@@ -18,9 +18,11 @@ $messages = array();
  * @author Jeroen De Dauw
  * @author Nikola Smolenski
  * @author Marius Hoch
+ * @author Jeblad
  */
 $messages['en'] = array(
 	'wikibase-client-desc' => 'Client for the Wikibase extension',
+	'specialpages-group-wikibaseclient' => 'Wikidata client',
 	'wikibase-after-page-move' => 'You may also [$1 update] the associated Wikidata item to maintain language links on moved page.',
 	'wikibase-comment-remove' => 'Associated Wikidata item deleted. Language links removed.',
 	'wikibase-comment-linked' => 'A Wikidata item has been linked to this page.',
@@ -55,6 +57,14 @@ $messages['en'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
 	'wikibase-watchlist-show-changes-pref' => 'Show Wikidata edits in your watchlist',
 	'wikibase-error-invalid-entity-id' => 'The ID entered is unknown to the system. Please use a valid entity ID.',
+	'special-unconnectedpages' => 'Pages not connected to items',
+	'wikibase-unconnectedpages-legend' => 'Unconnected pages options',
+	'wikibase-unconnectedpages-page' => 'Start page:',
+	'wikibase-unconnectedpages-submit' => 'Go',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" is not a valid language code.',
+	'wikibase-unconnectedpages-page-warning' => 'The page title could not be used for the query and is ignored.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Only pages with interlanguagelinks',
+	'wikibase-unconnectedpages-format-row' => '($1 interlanguagelinks on the page)',
 );
 
 /** Message documentation (Message documentation)
@@ -69,6 +79,7 @@ $messages['en'] = array(
 $messages['qqq'] = array(
 	'wikibase-client-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
 See also [[d:Wikidata:Glossary#Wikidata|Wikidata]].',
+	'specialpages-group-wikibaseclient' => 'Title of group of special pages related to Wikidata clients',
 	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfully move, inviting user to update associated Wikibase repository item to maintain language links on the moved page on the client.
 
 Parameters:
@@ -138,6 +149,14 @@ Parameters:
 	'wikibase-rc-show-wikidata-pref' => 'Option in the recent changes section of preferences to show wikibase changes by default in recent changes.',
 	'wikibase-watchlist-show-changes-pref' => 'Option in the watchlist section of preferences to always show wikibase edits by default in the watchlist.',
 	'wikibase-error-invalid-entity-id' => 'Generic error message when an invalid entity ID was entered.',
+	'special-unconnectedpages' => 'Title of the special page for listing unconnected items.',
+	'wikibase-unconnectedpages-page-warning' => 'The title that is typed in could not be used of some kind of reason. This can happen for example when the title has an interwiki prefix to another language, or a namespace that is not used for Wikibase entities.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Text for the checkbox. Should say that only pages without interlanguage-links should be listed.',
+	'wikibase-unconnectedpages-legend' => 'Legend for the options box at the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-page' => 'Label for the start page field in the options box of the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-submit' => 'Text for the submit button in the options box of the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-invalid-language' => 'Warning message about invalid language used at the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-format-row' => 'Formating of the additional data for each row in the result set on the special page for pages not connected to sitelinks.',
 );
 
 /** Afrikaans (Afrikaans)
@@ -685,7 +704,6 @@ $messages['es'] = array(
 	'wikibase-comment-sitelink-change' => 'Se ha cambiado el enlace de idioma de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Se ha eliminado el enlace de idioma: $1',
 	'wikibase-comment-multi' => '$1 cambios', # Fuzzy
-	'wikibase-nolanglinks' => 'ninguno',
 	'wikibase-editlinks' => 'Editar los enlaces',
 	'wikibase-editlinkstitle' => 'Editar enlaces de interlengua',
 	'wikibase-linkitem-addlinks' => 'Añadir enlace',
@@ -748,7 +766,6 @@ $messages['fa'] = array(
 	'wikibase-comment-sitelink-change' => 'پیوند زبان از $1 به $2 تغییر کرده‌است.',
 	'wikibase-comment-sitelink-remove' => 'پیوند زبان حذف شد: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|تغییر|تغییرها}}',
-	'wikibase-nolanglinks' => 'هیچ',
 	'wikibase-editlinks' => 'ویرایش پیوندها',
 	'wikibase-editlinkstitle' => 'ویرایش پیوندهای میان‌ویکی',
 	'wikibase-linkitem-addlinks' => 'افزودن پیوند',
@@ -1385,7 +1402,6 @@ $messages['ksh'] = array(
 	'wikibase-comment-sitelink-change' => 'Dä Lengk $1 ob en ander Schprooch es op $2 verändert woode.',
 	'wikibase-comment-sitelink-remove' => 'Dä Lengk $1 ob en ander Schprooch es eruß jenomme woode.',
 	'wikibase-comment-multi' => '{{PLURAL:$1|Ein Änderong|$1 Änderonge|Kein Änderong}}',
-	'wikibase-nolanglinks' => 'keine',
 	'wikibase-editlinks' => 'Lengks ändere',
 	'wikibase-editlinkstitle' => 'Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße',
 	'wikibase-linkitem-addlinks' => 'Lengks derbei donn',
@@ -1531,7 +1547,6 @@ $messages['ml'] = array(
 	'wikibase-comment-sitelink-add' => 'ഭാഷാ കണ്ണി ചേർത്തു: $1',
 	'wikibase-comment-sitelink-change' => 'ഭാഷാ കണ്ണി $1 എന്നതിൽ നിന്ന് $2 എന്നാക്കി മാറ്റിയിരിക്കുന്നു',
 	'wikibase-comment-sitelink-remove' => 'ഭാഷാ കണ്ണി നീക്കം ചെയ്തു: $1',
-	'wikibase-nolanglinks' => 'ഒന്നുമില്ല',
 	'wikibase-editlinks' => 'കണ്ണികൾ തിരുത്തുക',
 	'wikibase-editlinkstitle' => 'അന്തർഭാഷാ കണ്ണികൾ തിരുത്തുക',
 	'wikibase-linkitem-addlinks' => 'കണ്ണികൾ ചേർക്കുക',
@@ -1565,7 +1580,6 @@ $messages['ms'] = array(
 	'wikibase-comment-sitelink-change' => 'Pautan bahasa diubah daripada $1 kepada $2',
 	'wikibase-comment-sitelink-remove' => 'Pautan bahasa dibuang: $1',
 	'wikibase-comment-multi' => '$1 perubahan',
-	'wikibase-nolanglinks' => 'tiada',
 	'wikibase-editlinks' => 'Sunting pautan',
 	'wikibase-editlinkstitle' => 'Sunting pautan antara bahasa',
 	'wikibase-linkitem-addlinks' => 'Tambah pautan',
@@ -1618,7 +1632,6 @@ $messages['nb'] = array(
 	'wikibase-comment-sitelink-change' => 'Språklenke endret fra $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Språklenke fjernet: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|endring|endringer}}',
-	'wikibase-nolanglinks' => 'ingen',
 	'wikibase-editlinks' => 'Rediger lenker',
 	'wikibase-editlinkstitle' => 'Rediger språklenker – lenker til artikkelen på andre språk',
 	'wikibase-linkitem-addlinks' => 'Legg til lenke',
@@ -1851,7 +1864,6 @@ $messages['ru'] = array(
 	'wikibase-comment-sitelink-change' => 'Интервики-ссылка изменена с $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Интервики-ссылка удалена: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|изменение|изменения|изменений}}',
-	'wikibase-nolanglinks' => 'нет',
 	'wikibase-editlinks' => 'Править ссылки',
 	'wikibase-editlinkstitle' => 'Править межъязыковые ссылки',
 	'wikibase-linkitem-addlinks' => 'Добавить ссылки',

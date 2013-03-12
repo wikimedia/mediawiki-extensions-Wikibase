@@ -182,6 +182,8 @@ $wgAutoloadClasses['Wikibase\SiteLinkTable'] 			= $dir . 'includes/store/SiteLin
 $wgAutoloadClasses['Wikibase\WikiPageEntityLookup'] 	= $dir . 'includes/store/WikiPageEntityLookup.php';
 
 // tests
+$wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/specials/SpecialPageTestBase.php';
+
 $wgAutoloadClasses['Wikibase\Test\HashArrayTest'] 			= $dir . 'tests/phpunit/hasharray/HashArrayTest.php';
 $wgAutoloadClasses['Wikibase\Test\HashArrayElement'] 		= $dir . 'tests/phpunit/hasharray/HashArrayElement.php';
 $wgAutoloadClasses['Wikibase\Test\TemplateTest'] 			= $dir . 'tests/phpunit/TemplateTest.php';
