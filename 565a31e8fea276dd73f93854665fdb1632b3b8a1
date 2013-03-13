@@ -52,6 +52,24 @@
       "revId": "565a31e8fea276dd73f93854665fdb1632b3b8a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqBWLAyI",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T15:16:04Z",
+      "side": 1,
+      "message": "issue is that the page_props table does not get purged.  by unsetting it and running linksupdate, then it gets purged.\n\noddly, it appears ApiPurge runs link update but not action\u003dpurge\n\n@todo: see what in core can be improved, but until then, this will work",
+      "parentUuid": "DqFqqChs",
+      "revId": "565a31e8fea276dd73f93854665fdb1632b3b8a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
