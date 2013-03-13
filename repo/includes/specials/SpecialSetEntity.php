@@ -172,6 +172,25 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 			$value = $this->getValue( $entityContent, $language );
 		}
 
+		if ( ( $entityContent !== null ) && ( $language !== null ) ) {
+			$this->getOutput()->addHTML(
+				Html::rawElement(
+					'p',
+					array(),
+					$this->getIntrofull( $entityContent, $language )
+				)
+			);
+		}
+		else {
+			$this->getOutput()->addHTML(
+				Html::rawElement(
+					'p',
+					array(),
+					$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
+				)
+			);
+		}
+
 		$this->getOutput()->addHTML(
 			Html::openElement(
 				'form',
@@ -195,13 +214,6 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 		);
 
 		if ( ( $entityContent !== null ) && ( $language !== null ) ) {
-			$this->getOutput()->addHtml(
-				Html::rawElement(
-					'p',
-					array(),
-					$this->getIntrofull( $entityContent, $language )
-				)
-			);
 			$this->getOutput()->addHTML(
 				Html::input( 'language', $language, 'hidden' )
 				. Html::input( 'id', $entityContent->getTitle()->getText(), 'hidden' )
@@ -211,12 +223,7 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 			$id = $entityContent ? $entityContent->getTitle()->getText() : '';
 			$value = $this->getValue( $entityContent, $language ? $language : $this->getLanguage()->getCode() );
 			$this->getOutput()->addHTML(
-				Html::rawElement(
-					'p',
-					array(),
-					$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
-				)
-				. Html::element(
+				Html::element(
 					'label',
 					array(
 						'for' => 'wb-setentity-id',
