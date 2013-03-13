@@ -104,6 +104,24 @@
       "revId": "00541d79788038df1007fbc032742ece89e5b666",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqJVIczE",
+        "filename": "lib/tests/phpunit/TermTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-13T14:22:32Z",
+      "side": 1,
+      "message": "At least öøæàáåščžđŋŧðíóþúý",
+      "parentUuid": "DoAva7Eg",
+      "revId": "00541d79788038df1007fbc032742ece89e5b666",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
