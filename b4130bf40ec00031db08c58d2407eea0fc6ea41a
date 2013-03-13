@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqFTfRNM",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T08:47:37Z",
+      "side": 1,
+      "message": "did you mean for this to be $shortErrorContextMessage ? (same for below)",
+      "revId": "b4130bf40ec00031db08c58d2407eea0fc6ea41a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqBTyLG8",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T08:47:37Z",
+      "side": 1,
+      "message": "$longErrorConextMessage ?",
+      "revId": "b4130bf40ec00031db08c58d2407eea0fc6ea41a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqLTm4LE",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T08:47:37Z",
+      "side": 1,
+      "message": "nitpick... camelCase for variable name",
+      "revId": "b4130bf40ec00031db08c58d2407eea0fc6ea41a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqDRXMCc",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T08:47:37Z",
+      "side": 1,
+      "message": "Conext?",
+      "revId": "b4130bf40ec00031db08c58d2407eea0fc6ea41a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqNTrVHg",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T08:47:37Z",
+      "side": 1,
+      "message": "?",
+      "revId": "b4130bf40ec00031db08c58d2407eea0fc6ea41a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqHQBKDw",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T08:47:37Z",
+      "side": 1,
+      "message": "elsif?",
+      "revId": "b4130bf40ec00031db08c58d2407eea0fc6ea41a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqDT7sEY",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T08:47:37Z",
+      "side": 1,
+      "message": "chile? :)",
+      "revId": "b4130bf40ec00031db08c58d2407eea0fc6ea41a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
