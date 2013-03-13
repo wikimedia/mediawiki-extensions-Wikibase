@@ -36,9 +36,13 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 
 	public function __construct() {
+		parent::__construct();
+
 		$this->mDescription = 'Rebuild the search key of the TermSQLCache';
 
-		parent::__construct();
+		$this->addOption( 'only-missing', "Update only missing keys (per default, all keys are updated)" );
+		$this->addOption( 'start-row', "The ID of the first row to update (useful for continuing aborted runs)", false, true );
+		$this->addOption( 'batch-size', "Number of rows to update per database transaction (100 per default)", false, true );
 	}
 
 	/**
@@ -52,7 +56,23 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 			exit;
 		}
 
-		StoreFactory::getStore( 'sqlstore' )->newTermCache()->rebuildSearchKey();
+		$reporter = new \ObservableMessageReporter();
+		$reporter->registerReporterCallback(
+			array( $this, 'report' )
+		);
+
+		$table = StoreFactory::getStore( 'sqlstore' )->newTermCache();
+		$builder = new TermSearchKeyBuilder( $table );
+		$builder->setReporter( $reporter );
+
+		$builder->setBatchSize( intval( $this->getOption( 'batch-size', 100 ) ) );
+		$builder->setRebuildAll( !$this->getOption( 'only-missing', false ) );
+		$builder->setFromId( intval( $this->getOption( 'start-row', 1 ) ) );
+
+		$n = $builder->rebuildSearchKey();
+
+		$this->output( "Done. Updated $n search keys.\n" );
+
 		return true;
 	}
 
@@ -63,6 +83,17 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 	 */
 	public function getUpdateKey() {
 		return 'Wikibase\RebuildTermsSearchKey';
+	}
+
+	/**
+	 * Outputs a message vis the output() method.
+	 *
+	 * @since 0.4
+	 *
+	 * @param $msg
+	 */
+	public function report( $msg ) {
+		$this->output( "$msg\n" );
 	}
 
 }

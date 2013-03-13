@@ -75,6 +75,18 @@ class TermSqlCache implements TermCache {
 	}
 
 	/**
+	 * Returns the name of the database table used to store the terms.
+	 * This is the logical table name, subject to prefixing by the Database object.
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	public function getTableName() {
+		return $this->tableName;
+	}
+
+	/**
 	 * @see TermCache::saveTermsOfEntity
 	 *
 	 * @since 0.1
@@ -326,14 +338,25 @@ class TermSqlCache implements TermCache {
 	}
 
 	/**
-	 * Returns the Database from which to read.
+	 * Returns the Database connection from which to read.
 	 *
 	 * @since 0.1
 	 *
 	 * @return \DatabaseBase
 	 */
-	protected function getReadDb() {
-		return wfGetDB( $this->readDb );
+	public function getReadDb() {
+		return wfGetDB( $this->readDb ); // TODO: allow foreign db
+	}
+
+	/**
+	 * Returns the Database connection to wich to write.
+	 *
+	 * @since 0.4
+	 *
+	 * @return \DatabaseBase
+	 */
+	public function getWriteDb() {
+		return wfGetDB( DB_MASTER ); // TODO: allow foreign db
 	}
 
 	/**
@@ -790,112 +813,4 @@ class TermSqlCache implements TermCache {
 
 		return $resultTerms;
 	}
-
-	/**
-	 * Rebuild the search key field term_search_key from the source term_text field.
-	 *
-	 * FIXME: for some unknown reason some rows are skipped in the rebuild
-	 *
-	 * @since 0.2
-	 */
-	public function rebuildSearchKey() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$entityId = -1;
-		$entityType = '';
-		$language = '';
-		$type = '';
-		$text = '';
-
-		$limit = 10;
-
-		$hasMoreResults = true;
-
-		while ( $hasMoreResults ) {
-			$terms = $dbw->select(
-				$this->tableName,
-				array(
-					'term_entity_id',
-					'term_entity_type',
-					'term_language',
-					'term_type',
-					'term_text',
-				),
-				array(
-					'term_entity_id >= ' . $dbw->addQuotes( $entityId ),
-					'term_entity_type >= ' . $dbw->addQuotes( $entityType ),
-					'term_language >= ' . $dbw->addQuotes( $language ),
-					'term_type >= ' . $dbw->addQuotes( $type ),
-					'term_text >= ' . $dbw->addQuotes( $text ),
-				),
-				__METHOD__,
-				array(
-					'LIMIT' => $limit,
-					'ORDER BY term_entity_id, term_entity_type, term_language, term_type, term_text ASC, ASC, ASC, ASC, ASC'
-				)
-			);
-
-			$continuationTerm = $this->rebuildSearchKeyForTerms( $terms, $dbw, $limit );
-
-			if ( $continuationTerm === null ) {
-				$hasMoreResults = false;
-			}
-			else {
-				$entityId = $continuationTerm->term_entity_id;
-				$entityType = $continuationTerm->term_entity_type;
-				$language = $continuationTerm->term_language;
-				$type = $continuationTerm->term_type;
-				$text = $continuationTerm->term_text;
-			}
-		}
-	}
-
-	/**
-	 * @since 0.2
-	 *
-	 * @param Iterator $terms
-	 * @param DatabaseBase $dbw
-	 * @param integer $limit
-	 *
-	 * @return object|null The continuation term if there is one or null
-	 */
-	protected function rebuildSearchKeyForTerms( Iterator $terms, DatabaseBase $dbw, $limit ) {
-		$termNumber = 0;
-
-		$doTrx = $dbw->trxLevel() === 0;
-
-		if ( $doTrx ) {
-			$dbw->begin();
-		}
-
-		$hasMoreResults = false;
-
-		foreach ( $terms as $term ) {
-			$dbw->update(
-				$this->tableName,
-				array(
-					'term_search_key' => Term::normalizeText( $term->term_text, $term->term_language )
-				),
-				array(
-					'term_entity_id' => $term->term_entity_id,
-					'term_entity_type' => $term->term_entity_type,
-					'term_language' => $term->term_language,
-					'term_type' => $term->term_type,
-					'term_text' => $term->term_text,
-				),
-				__METHOD__
-			);
-
-			if ( ++$termNumber >= $limit ) {
-				$hasMoreResults = true;
-			}
-		}
-
-		if ( $doTrx ) {
-			$dbw->commit();
-		}
-
-		return $hasMoreResults ? $term : null;
-	}
-
 }
