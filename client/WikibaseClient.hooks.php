@@ -397,6 +397,20 @@ final class ClientHooks {
 	}
 
 	/**
+	 * External library for Scribunto
+	 *
+	 * @since 0.4
+	 *
+	 * @param $engine
+	 * @param array $extraLibraries
+	 * @return bool
+	 */
+	public static function onScribuntoExternalLibraries ( $engine, array &$extraLibraries ) {
+		$extraLibraries['mw.wikibase'] = 'Scribunto_LuaWikibaseLibrary';
+		return true;
+	}
+
+	/**
 	 * Hook for modifying the query for fetching recent changes
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialRecentChangesQuery
 	 *
@@ -710,7 +724,7 @@ final class ClientHooks {
 		if ( $special->getName() === 'Watchlist' ) {
 			$context = $special->getContext();
 
-		  	if ( $context->getRequest()->getBool( 'enhanced', $context->getUser()->getOption( 'usenewrc' ) ) === false ) {
+			if ( $context->getRequest()->getBool( 'enhanced', $context->getUser()->getOption( 'usenewrc' ) ) === false ) {
 				$special->getOutput()->addModules( array(
 					'wbclient.watchlist.css',
 					'wbclient.watchlist',
