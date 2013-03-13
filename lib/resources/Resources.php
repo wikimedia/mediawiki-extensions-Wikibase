@@ -197,6 +197,16 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.utilities.GuidGenerator' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.utilities/wikibase.utilities.GuidGenerator.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel',
+				'wikibase.utilities',
+			)
+		),
+
 		'wikibase.utilities.jQuery' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
