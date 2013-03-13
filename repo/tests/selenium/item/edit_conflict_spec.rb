@@ -169,7 +169,7 @@ describe "Check edit-conflicts" do
         page.saveStatement
         ajax_wait
         page.wait_for_statement_request_finished
-        first_claim_guid = @browser.execute_script("return $('.wb-claimview').first().data('wikibaseStatementview').value().getGuid()");
+        first_claim_guid = @browser.execute_script("return $('.wb-claimview').first().data('statementview').value().getGuid()");
         old_revid = @browser.execute_script("return wb.getRevisionStore().getClaimRevision('" + first_claim_guid + "');")
         old_revid.should > 0
       end
