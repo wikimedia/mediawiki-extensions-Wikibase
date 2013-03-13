@@ -37,7 +37,8 @@ class InterwikiSorterTest extends \MediaWikiTestCase {
 		return array(
 			'alphabetic' => array( 'ar', 'de', 'en', 'fr', 'ks', 'rn', 'ky', 'hu', 'ja', 'pt' ),
 			'alphabetic_revised' => array( 'ar', 'de', 'en', 'fr', 'ks', 'ky', 'rn', 'hu', 'ja', 'pt' ),
-			'alphabetic_sr' => array( 'ar', 'de', 'en', 'fr', 'ky', 'rn', 'ks', 'ja', 'hu', 'pt' )
+			'alphabetic_sr' => array( 'ar', 'de', 'en', 'fr', 'ky', 'rn', 'ks', 'ja', 'hu', 'pt' ),
+			'mycustomorder' => array( 'de', 'ja', 'pt', 'hu', 'en' ),
 		);
 	}
 
@@ -85,7 +86,11 @@ class InterwikiSorterTest extends \MediaWikiTestCase {
 			array(
 				$links, 'alphabetic_revised', $sortOrders, array( 'hu' ),
 				array( 'hu', 'ar', 'de', 'en', 'fr', 'ks', 'ky', 'rn', 'ja', 'pt' )
-			)
+			),
+			array(
+				array( 'ja', 'de', 'pt', 'en', 'hu' ), 'mycustomorder', $sortOrders, array(),
+				$sortOrders['mycustomorder']
+			),
 		);
 	}
 
