@@ -16,6 +16,24 @@
       "revId": "565a31e8fea276dd73f93854665fdb1632b3b8a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqPeVN.M",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T08:44:49Z",
+      "side": 1,
+      "message": "yes, I would like Daniel\u0027s opinion on what\u0027s best to do here or elsewhere.   this works as far as I can tell but it\u0027s not really how I\u0027d like to do this.",
+      "parentUuid": "DqOHslco",
+      "revId": "565a31e8fea276dd73f93854665fdb1632b3b8a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
