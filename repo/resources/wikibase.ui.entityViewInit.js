@@ -168,7 +168,10 @@
 
 		$( wb ).on( 'startItemPageEditMode', function( event, origin, options ) {
 			$.each( termsValueTools, function( i, termValueTool ) {
-				if ( !origin || origin.getSubject() !== termValueTool.getSubject() ) {
+				if (
+					!origin || !origin.getSubject
+					|| origin.getSubject() !== termValueTool.getSubject()
+				) {
 					termValueTool.disable();
 				} else if ( origin && origin.getSubject() === termValueTool.getSubject() ) {
 					$( 'table.wb-terms' ).addClass( 'wb-edit' );
