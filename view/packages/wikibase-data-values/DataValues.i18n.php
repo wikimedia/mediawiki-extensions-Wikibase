@@ -70,6 +70,14 @@ $messages['be-tarask'] = array(
 	'version-datavalues' => 'DataValues',
 );
 
+/** Czech (česky)
+ * @author Mormegil
+ */
+$messages['cs'] = array(
+	'datavalues-desc' => 'Sbírka objektů reprezentujících různé druhy hodnot',
+	'version-datavalues' => 'DataValues',
+);
+
 /** German (Deutsch)
  * @author Kghbln
  * @author Metalhead64
