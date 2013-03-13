@@ -398,6 +398,16 @@ final class ClientHooks {
 		return true;
 	}
 
+    /**
+     * External library for Scribunto
+     *
+     * @return bool
+     */
+    public static function onScribuntoExternalLibraries ( $engine, array &$extraLibraries ) {
+        $extraLibraries['mw.wikibase'] = 'Scribunto_LuaWikibaseLibrary';
+        return true;
+    }
+
 	/**
 	 * Hook for modifying the query for fetching recent changes
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialRecentChangesQuery
