@@ -36,19 +36,8 @@ if ( !defined( 'WBC_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 // includes/parserhooks
 $wgAutoloadClasses['Wikibase\PropertyParserFunction'] = $dir . 'includes/parserhooks/PropertyParserFunction.php';
 
-// Add the JavaScript to link items locally
-$wgHooks['BeforePageDisplay'][] = function( OutputPage &$out, Skin &$skin ) {
-	$title = $out->getTitle();
-	$namespaceChecker = new \Wikibase\NamespaceChecker(
-		\Wikibase\Settings::get( 'excludeNamespaces' ),
-		\Wikibase\Settings::get( 'namespaces' )
-	);
-
-	if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
-		if ( !$out->getLanguageLinks() && \Action::getActionName( $skin->getContext() ) === 'view' && $title->exists() ) {
-			$out->addModules( 'wbclient.linkItem' );
-		}
-	}
+$wgHooks['ParserFirstCallInit'][] = function( \Parser &$parser ) {
+	$parser->setFunctionHook( 'property', array( '\Wikibase\PropertyParserFunction', 'render' ) );
 
 	return true;
 };
