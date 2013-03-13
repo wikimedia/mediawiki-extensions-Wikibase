@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqFDuae8",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-03-13T17:29:48Z",
+      "side": 1,
+      "message": "Since I am having trouble on my machine, I guess the specified path should be different. See Scribunto_LuaEngine::normalizeModuleFileName in LuaCommon.php which prepends the Lua lib directory to the file name.",
+      "revId": "06455bb00d31342d03735ecdbd08aebd36ce6656",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
