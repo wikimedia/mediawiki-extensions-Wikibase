@@ -69,6 +69,24 @@
       "revId": "669c28a17281323dffd45fb3fe560a74224eecb3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqBrYEng",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T10:12:13Z",
+      "side": 1,
+      "message": "i\u0027m looking for a way with action\u003dpurge to that would update the page props.  that doesn\u0027t happen without either links update or some more specific code that updates the page_props table.",
+      "parentUuid": "DqNr4WuU",
+      "revId": "669c28a17281323dffd45fb3fe560a74224eecb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
