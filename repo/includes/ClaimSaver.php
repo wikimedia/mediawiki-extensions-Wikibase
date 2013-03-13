@@ -164,7 +164,7 @@ class ClaimSaver {
 			$token
 		);
 
-		if ( !$status->isGood() ) {
+		if ( !$status->isOK() ) {
 			throw new ExceptionWithCode( $status->getMessage(), 'setclaim-save-failed' );
 		}
 
