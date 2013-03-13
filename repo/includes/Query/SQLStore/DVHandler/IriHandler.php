@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\Query\SQLStore\DVHandler;
 
-use Wikibase\Repo\Query\SQLStore\DataValueHandler;
-use Wikibase\Repo\Database\TableDefinition;
-use Wikibase\Repo\Database\FieldDefinition;
-use Wikibase\Repo\Database\FieldDefinition as FD;
 use DataValues\DataValue;
 use DataValues\IriValue;
 use InvalidArgumentException;
+use Wikibase\Repo\Database\FieldDefinition;
+use Wikibase\Repo\Database\FieldDefinition as FD;
+use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 
 /**
  * Represents the mapping between DataValues\IriValue and

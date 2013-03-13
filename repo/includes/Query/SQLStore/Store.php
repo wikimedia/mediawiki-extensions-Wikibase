@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Wikibase\Repo\Query\QueryStore;
+use MessageReporter;
 use Wikibase\Repo\Database\QueryInterface;
 use Wikibase\Repo\Database\TableBuilder;
-use MessageReporter;
+use Wikibase\Repo\Query\QueryStore;
 
 /**
  * Simple query store for relational SQL databases.

@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Wikibase\Repo\Database\TableBuilder;
-use Wikibase\Repo\Database\QueryInterface;
-use Wikibase\Repo\Database\TableDefinition;
-use Wikibase\Repo\Database\FieldDefinition;
 use MessageReporter;
+use Wikibase\Repo\Database\FieldDefinition;
+use Wikibase\Repo\Database\QueryInterface;
+use Wikibase\Repo\Database\TableBuilder;
+use Wikibase\Repo\Database\TableDefinition;
 
 /**
  * Setup for the SQLStore.
