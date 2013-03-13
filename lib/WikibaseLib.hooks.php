@@ -143,6 +143,8 @@ final class LibHooks {
 				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
 				'tests/qunit/wikibase.ui.Tooltip.tests.js',
 
+				'tests/qunit/wikibase.utilities/wikibase.utilities.ClaimGuidGenerator.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.GuidGenerator.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.newExtension.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ObservableObject.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ui.StatableObject.tests.js',
@@ -165,6 +167,8 @@ final class LibHooks {
 				'wikibase.parsers',
 				'wikibase.store',
 				'wikibase.utilities',
+				'wikibase.utilities.ClaimGuidGenerator',
+				'wikibase.utilities.GuidGenerator',
 				'wikibase.utilities.jQuery',
 				'wikibase.ui.Toolbar',
 				'wikibase.ui.PropertyEditTool',
