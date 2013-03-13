@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DqBrvsiA",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-13T10:09:57Z",
+      "side": 1,
+      "message": "You mean something like ParserOutput::unsetProperty()? No, but it would be easy to add that. Suggest a patch, I\u0027ll merge it :)",
+      "parentUuid": "DqFeq4xo",
+      "revId": "669c28a17281323dffd45fb3fe560a74224eecb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqJewe4s",
         "filename": "client/includes/LangLinkHandler.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-13T08:59:38Z",
       "side": 1,
       "message": "is there a nicer way to handle this?",
+      "revId": "669c28a17281323dffd45fb3fe560a74224eecb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqNr4WuU",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-13T10:09:57Z",
+      "side": 1,
+      "message": "Not really, but I\u0027m quite confused about why that should be needed. When is this called? Usually, a re-parse would construct a ParserOutput object, which would get all the extra language links, and the extra language links would go into the database along with the others, like normal...",
+      "parentUuid": "DqJewe4s",
       "revId": "669c28a17281323dffd45fb3fe560a74224eecb3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
