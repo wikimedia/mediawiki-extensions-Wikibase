@@ -59,6 +59,11 @@ $magicWords['nn'] = array(
 	'noexternallanglinks' => array( 0, 'ingenspråklenkjerutanfrå' ),
 );
 
+/** Ukrainian (українська) */
+$magicWords['uk'] = array(
+	'noexternallanglinks' => array( 0, 'беззовнішніхпосилань' ),
+);
+
 /** Vietnamese (Tiếng Việt) */
 $magicWords['vi'] = array(
 	'noexternallanglinks' => array( 0, 'khôngliênkếtngônngữngoài' ),

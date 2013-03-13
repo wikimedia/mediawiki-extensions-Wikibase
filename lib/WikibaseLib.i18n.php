@@ -1403,6 +1403,30 @@ $messages['si'] = array(
 	'datatypes-type-commonsMedia' => 'කොමන්ස් මාධ්‍ය ගොනුව',
 );
 
+/** Serbian (Cyrillic script) (српски (ћирилица)‎)
+ * @author Милан Јелисавчић
+ */
+$messages['sr-ec'] = array(
+	'wikibase-entity-item' => 'ставка',
+	'wikibase-entity-property' => 'својство',
+	'wikibase-entity-query' => 'упит',
+	'wikibase-diffview-reference' => 'референца',
+	'wikibase-diffview-rank' => 'ниво',
+	'wikibase-diffview-qualifier' => 'квалификатор',
+	'wikibase-error-unexpected' => 'Дошло је до неочекиване грешке.',
+	'wikibase-error-autocomplete-response' => 'Одговор сервера: $1',
+	'wikibase-error-ui-cant-edit' => 'Немате дозволу да извршите ову радњу.',
+	'wikibase-error-ui-no-permissions' => 'Немате потребна овлашћења да извршите ову радњу.',
+	'wikibase-error-ui-edit-conflict' => 'Дошло је до сукоба измена. Молимо учитајте и сачувајте поново страну.',
+	'wikibase-sitelinks' => 'Списак страна повезаних са овом ставком',
+	'wikibase-sitelinks-sitename-columnheading' => 'Језик',
+	'wikibase-sitelinks-siteid-columnheading' => 'Код',
+	'wikibase-sitelinks-link-columnheading' => 'Повезани чланак',
+	'wikibase-tooltip-error-details' => 'Детаљи',
+	'datatypes-type-wikibase-item' => 'Ставка',
+	'datatypes-type-commonsMedia' => 'Датотека са Оставе',
+);
+
 /** Swedish (svenska)
  * @author Lokal Profil
  */

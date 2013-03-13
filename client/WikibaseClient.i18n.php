@@ -127,7 +127,6 @@ Parameters:
 	'wikibase-linkitem-success-create' => 'Success message after a new item has been created which contains links to the page the user is currently on and the one entered. $1 holds a URL pointing to the new item.',
 	'wikibase-linkitem-success-link' => 'Success message after the page the user currently is on has been linked with an item. $1 holds a URL pointing to the item.',
 	'wikibase-property-notfound' => 'Message for property parser function when a property is not found. $1 is the name of the property.',
-	'wikibase-property-notsupportedyet' => 'Message for property parser function for property types not supported yet. $1 is the name of the property.',
 	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
 
 Parameters:
@@ -208,6 +207,10 @@ $messages['ar'] = array(
  */
 $messages['arc'] = array(
 	'wikibase-editlinks' => 'ܫܚܠܦ ܐܣܘܪ̈ܐ',
+	'wikibase-linkitem-input-site' => 'ܠܫܢܐ:',
+	'wikibase-linkitem-input-page' => 'ܦܐܬܐ:',
+	'wikibase-linkitem-confirmitem-button' => 'ܫܪܪ',
+	'wikibase-rc-hide-wikidata' => '$1 ܘܝܩܝܓܠܝܬ̈ܐ',
 );
 
 /** Asturian (asturianu)
@@ -271,7 +274,6 @@ $messages['be-tarask'] = array(
 	'wikibase-comment-sitelink-change' => 'Моўная спасылка зьмененая з $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Моўная спасылка выдаленая: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|зьмена|зьмены|зьменаў}}',
-	'wikibase-nolanglinks' => 'няма',
 	'wikibase-editlinks' => 'Зьмяніць спасылкі',
 	'wikibase-editlinkstitle' => 'Рэдагаваць міжмоўныя спасылкі',
 	'wikibase-linkitem-addlinks' => 'Дадаць спасылкі',
@@ -292,6 +294,7 @@ $messages['be-tarask'] = array(
 	'wikibase-linkitem-success-link' => 'Старонкі былі пасьпяхова злучаныя. Новы аб’ект са спасылкамі вы можаце пабачыць у нашым [$1 цэнтральным рэпазыторыі].',
 	'wikibase-rc-hide-wikidata' => '$1 Вікізьвесткі',
 	'wikibase-rc-show-wikidata-pref' => 'Паказваць праўкі Вікізьвестак у сьпісе апошніх зьменаў',
+	'wikibase-watchlist-show-changes-pref' => 'Паказваць зьмены Вікізьвестак у вашым сьпісе назіраньня',
 );
 
 /** Bulgarian (български)
@@ -524,6 +527,8 @@ $messages['de'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Du musst auf diesem Wiki und im [$1 zentralen Datenrepositorium] angemeldet sein, um diese Funktion nutzen zu können.',
 	'wikibase-linkitem-success-create' => 'Die Seiten wurden erfolgreich verlinkt. Du findest das neu erstellte Objekt, das die Links enthält, in unserem [$1 zentralen Datenrepositorium].',
 	'wikibase-linkitem-success-link' => 'Die Seiten wurden erfolgreich verlinkt. Du findest das Objekt, das die Links enthält, in unserem [$1 zentralen Datenrepositorium].',
+	'wikibase-property-notfound' => 'Die Eigenschaft „$1“ wurde nicht gefunden.',
+	'wikibase-property-notsupportedyet' => 'Wikibase unterstützt den Eigenschaftstyp der Eigenschaft „$1“ noch nicht.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Bearbeitungen in den „Letzten Änderungen“ anzeigen',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Bearbeitungen in deiner Beobachtungsliste anzeigen',
@@ -1018,10 +1023,11 @@ $messages['ia'] = array(
 
 /** Indonesian (Bahasa Indonesia)
  * @author Iwan Novirion
+ * @author Kenrick95
  */
 $messages['id'] = array(
 	'wikibase-client-desc' => 'Klien untuk ekstensi Wikibase',
-	'wikibase-after-page-move' => 'Anda juga perlu memperbarui [item $1] yang terkait di Wikidata dalam hal interwiki saat pemindahan halaman',
+	'wikibase-after-page-move' => 'Anda juga perlu [$1 memperbarui item] yang terkait di Wikidata dalam hal interwiki saat pemindahan halaman',
 	'wikibase-comment-remove' => 'Item Wikidata terkait dihapus. Interwiki dihapus.',
 	'wikibase-comment-linked' => 'Item Wikidata telah tertaut ke halaman ini.',
 	'wikibase-comment-unlink' => 'Halaman ini sudah tidak tertaut pada item Wikidata. Interwiki dihapus.',
@@ -1051,6 +1057,7 @@ $messages['id'] = array(
 	'wikibase-linkitem-success-link' => 'Halaman telah berhasil ditautkan. Anda dapat menemukan item berisi tautan tersebut pada [pusat penyimpanan data $1] kami.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Tampilkan suntingan Wikidata di perubahan terbaru',
+	'wikibase-watchlist-show-changes-pref' => 'Tampilkan suntingan Wikidata pada daftar pantauan Anda',
 );
 
 /** Iloko (Ilokano)
@@ -1204,6 +1211,7 @@ $messages['ja'] = array(
 	'wikibase-linkitem-success-link' => 'ページのリンクに成功しました。リンクを含んだ項目は[$1 中央データリポジトリ]にあります。',
 	'wikibase-rc-hide-wikidata' => 'ウィキデータを$1',
 	'wikibase-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
+	'wikibase-watchlist-show-changes-pref' => 'ウィキデータの編集をウォッチリストに表示',
 );
 
 /** Georgian (ქართული)
@@ -1222,6 +1230,7 @@ $messages['ka'] = array(
 );
 
 /** Korean (한국어)
+ * @author ChongDae
  * @author 아라
  */
 $messages['ko'] = array(
@@ -1236,7 +1245,6 @@ $messages['ko'] = array(
 	'wikibase-comment-sitelink-change' => '언어 링크를 $1에서 $2로 바꿈',
 	'wikibase-comment-sitelink-remove' => '언어 링크를 제거함: $1',
 	'wikibase-comment-multi' => '$1개 {{PLURAL:$1|바뀜}}',
-	'wikibase-nolanglinks' => '없음',
 	'wikibase-editlinks' => '링크 편집',
 	'wikibase-editlinkstitle' => '인터언어 링크 편집',
 	'wikibase-linkitem-addlinks' => '링크 추가',
@@ -1258,6 +1266,7 @@ $messages['ko'] = array(
 	'wikibase-linkitem-success-link' => '문서를 성공적으로 링크했습니다. [$1 중앙 데이터 저장소]에 링크를 포함하는 항목을 찾을 수 있습니다.',
 	'wikibase-rc-hide-wikidata' => '위키데이터 $1',
 	'wikibase-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
+	'wikibase-watchlist-show-changes-pref' => '주시문서 목록에서 위키데이터 편집을 보기',
 );
 
 /** Karachay-Balkar (къарачай-малкъар)
@@ -1336,7 +1345,11 @@ $messages['ksh'] = array(
  */
 $messages['ku-latn'] = array(
 	'wikibase-comment-update' => 'Girêdanên ziman hatin rojanekirin.',
+	'wikibase-comment-sitelink-add' => 'Girêdana ziman lê hat zêdekirin:$1',
+	'wikibase-comment-sitelink-remove' => 'Girêdana ziman hat jêbirin:$1',
 	'wikibase-editlinks' => 'Girêdanan biguherîne',
+	'wikibase-linkitem-addlinks' => 'Girêdanan lê zêde bike',
+	'wikibase-linkitem-input-site' => 'Ziman:',
 	'wikibase-linkitem-input-page' => 'Rûpel:',
 	'wikibase-rc-hide-wikidata' => 'Wikidatayê $1',
 );
@@ -1805,11 +1818,22 @@ $messages['sk'] = array(
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
  * @author Nikola Smolenski
  * @author Rancher
+ * @author Милан Јелисавчић
  */
 $messages['sr-ec'] = array(
 	'wikibase-client-desc' => 'Клијент за проширење Викибаза',
+	'wikibase-comment-update' => 'Ажуриране везе ка језицима.',
+	'wikibase-comment-sitelink-add' => 'Додата веза за језик: $1',
 	'wikibase-editlinks' => 'Уреди везе',
 	'wikibase-editlinkstitle' => 'Уређивање међујезичких веза',
+	'wikibase-linkitem-addlinks' => 'Додај везе',
+	'wikibase-linkitem-title' => 'Веза са страницом',
+	'wikibase-linkitem-linkpage' => 'Повежи са страном',
+	'wikibase-linkitem-input-site' => 'Језик:',
+	'wikibase-linkitem-input-page' => 'Страница:',
+	'wikibase-linkitem-confirmitem-button' => 'Потврди',
+	'wikibase-linkitem-not-loggedin-title' => 'Морате бити пријављени',
+	'wikibase-rc-hide-wikidata' => '$1 Википодаци',
 );
 
 /** Serbian (Latin script) (srpski (latinica)‎)
