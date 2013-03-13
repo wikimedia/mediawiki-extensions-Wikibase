@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqDW6x74",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T15:25:25Z",
+      "side": 1,
+      "message": "needs\n\n@since 0.4\n\nand @param documentation\n\nalso, what type of variable is $engine?  unless it\u0027s a string or something, it probably needs a type hint below.",
+      "revId": "c3c2ea488cb3897732f713a9ba366714e9b1c157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqFWq23M",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T15:25:25Z",
+      "side": 1,
+      "message": "tabs :)",
+      "revId": "c3c2ea488cb3897732f713a9ba366714e9b1c157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqJWgc5Y",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T15:25:25Z",
+      "side": 1,
+      "message": "can we rename $entity to $prefixedEntityId or $prefixedId ?",
+      "revId": "c3c2ea488cb3897732f713a9ba366714e9b1c157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqBWMYy4",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T15:25:25Z",
+      "side": 1,
+      "message": "tabs needed :)",
+      "revId": "c3c2ea488cb3897732f713a9ba366714e9b1c157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqNWVizE",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-13T15:25:25Z",
+      "side": 1,
+      "message": "space",
+      "revId": "c3c2ea488cb3897732f713a9ba366714e9b1c157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
