@@ -49,6 +49,8 @@ $messages['en'] = array(
 	'wikibase-linkitem-not-loggedin' => 'You need to be logged in on this wiki and in the [$1 central data repository] to use this feature.',
 	'wikibase-linkitem-success-create' => 'The pages have successfully been linked. You can find the newly created item containing the links in our [$1 central data repository].',
 	'wikibase-linkitem-success-link' => 'The pages have successfully been linked. You can find the item containing the links in our [$1 central data repository].',
+	'wikibase-property-notfound' => '$1 property not found.',
+	'wikibase-property-notsupportedyet' => 'Wikibase does not yet support property type for $1 property.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
 	'wikibase-watchlist-show-changes-pref' => 'Show Wikidata edits in your watchlist',
@@ -124,6 +126,8 @@ Parameters:
 * $1 - the URI to the login form of the repository',
 	'wikibase-linkitem-success-create' => 'Success message after a new item has been created which contains links to the page the user is currently on and the one entered. $1 holds a URL pointing to the new item.',
 	'wikibase-linkitem-success-link' => 'Success message after the page the user currently is on has been linked with an item. $1 holds a URL pointing to the item.',
+	'wikibase-property-notfound' => 'Message for property parser function when a property is not found. $1 is the name of the property.',
+	'wikibase-property-notsupportedyet' => 'Message for property parser function for property types not supported yet. $1 is the name of the property.',
 	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
 
 Parameters:
