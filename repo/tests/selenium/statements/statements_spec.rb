@@ -104,7 +104,7 @@ describe "Check statements UI" do
         page.snaktypeSelectorIcon?.should be_false
       end
     end
-    it "should check entity suggestor behavior" do
+    it "should check entity suggester behavior" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
@@ -366,6 +366,7 @@ describe "Check statements UI" do
         page.saveStatement
         ajax_wait
         page.wait_for_statement_request_finished
+        page.addReferenceToFirstClaim?.should be_true
         page.statement1Name?.should be_true
         page.statement1ClaimValue1?.should be_true
         page.addStatement?.should be_true
