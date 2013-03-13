@@ -210,7 +210,10 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		// Do the actual save, or if it don't exist yet create it.
 		// There will be exceptions but we just leak them out ;)
-		$editEntity = new \Wikibase\EditEntity( $entityContent, $user, false, $this->getContext() );
+		// collect information and create an EditEntity
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : false;
+		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+		$editEntity = new \Wikibase\EditEntity( $entityContent, $user, $baseRevisionId, $this->getContext() );
 		$editEntity->attemptSave(
 			$summary->toString(),
 			$this->flags,
