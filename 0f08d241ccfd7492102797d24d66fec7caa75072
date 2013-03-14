@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DqI4wXek",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-14T13:31:51Z",
+      "side": 1,
+      "message": "There was some talk on wikitech-l that extensions should put themselves into something like \"mw.ext.wikibase\". I\u0027m personally ambivalent on that, but see http://lists.wikimedia.org/pipermail/wikitech-l/2013-February/066149.html",
+      "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqEs3l-4",
         "filename": "client/includes/WikibaseLibrary.php",
         "patchSetId": 5
@@ -31,6 +48,40 @@
       "side": 1,
       "message": "Will be added.",
       "parentUuid": "DqEs3l-4",
+      "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqC530aA",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-14T13:31:51Z",
+      "side": 1,
+      "message": "This is unused here.\n\nThe unit testing base class, Scribunto_LuaEngineTestBase, does have this variable.",
+      "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqA52jaA",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-14T13:31:51Z",
+      "side": 1,
+      "message": "If you\u0027re not supporting PHP \u003c 5.3, you could just use \"__DIR__\" instead of \"dirname( __FILE__ )\"",
       "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -137,6 +188,57 @@
       "side": 1,
       "message": "It\u0027s not global. I\u0027m sticking to the style in the Scribunto extension here. It\u0027ll end up in the mw.wikibase namespace after being slurped it.",
       "parentUuid": "DqEtOt5g",
+      "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqG62KT8",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-14T13:31:51Z",
+      "side": 1,
+      "message": "This should be \"local wikibase \u003d {}\". If you were to run Scribunto\u0027s unit tests with this loaded like this, it should fail Scribunto_LuaCommonTests::testNoLeakedGlobals",
+      "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqI6zfUw",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-14T13:31:51Z",
+      "side": 1,
+      "message": "Doing it like this can lead to PHP warnings, if someone calls your method with an insufficient number of parameters. There are two ways to fix it:\n* Wrap the PHP call in a Lua function that first checks the number of arguments, as is done by mw.ustring and mw.language.\n* Make all parameters to the PHP function optional, as is done by mw.site.",
+      "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqC6BEVE",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-14T13:31:51Z",
+      "side": 1,
+      "message": "You forgot to assign nil to mw_interface after you\u0027re done using it in wikibase.setupInterface.",
       "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
