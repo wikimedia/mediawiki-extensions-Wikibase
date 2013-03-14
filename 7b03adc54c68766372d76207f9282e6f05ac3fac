@@ -50,6 +50,57 @@
       "revId": "7b03adc54c68766372d76207f9282e6f05ac3fac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqI5DfbI",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-14T16:34:29Z",
+      "side": 1,
+      "message": "We want to remove the $prefixedEntityId param for now, because we can\u0027t track \"free\" item usage yet. Can we somehow get the title of the page the script is executed on, so we can look up the associated item?\n\nThis could be done in a follow up, just wanting to make sure it\u0027s possible.",
+      "revId": "7b03adc54c68766372d76207f9282e6f05ac3fac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqE4Wxac",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-14T16:34:29Z",
+      "side": 1,
+      "message": "$entityObject may be null now if it was not found, handle that somehow. Also, check what happens if the ID is malformed.",
+      "revId": "7b03adc54c68766372d76207f9282e6f05ac3fac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqG4fCbU",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-14T16:34:29Z",
+      "side": 1,
+      "message": "The serialize doesn\u0027t serialize, but returns an array, right?",
+      "revId": "7b03adc54c68766372d76207f9282e6f05ac3fac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
