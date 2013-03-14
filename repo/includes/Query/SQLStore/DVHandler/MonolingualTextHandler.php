@@ -39,56 +39,6 @@ use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 class MonolingualTextHandler extends DataValueHandler {
 
 	/**
-	 * @see DataValueHandler::getTableDefinition
-	 *
-	 * @since wd.qe
-	 *
-	 * @return TableDefinition
-	 */
-	public function getTableDefinition() {
-		$fields = array(
-			new FieldDefinition( 'text', FieldDefinition::TYPE_TEXT, false ),
-			new FieldDefinition( 'language', FieldDefinition::TYPE_TEXT, false ),
-			new FieldDefinition( 'json', FieldDefinition::TYPE_TEXT, false ),
-		);
-
-		return new TableDefinition( 'mono_text', $fields );
-	}
-
-	/**
-	 * @see DataValueHandler::getValueFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getValueFieldName() {
-		return 'json';
-	}
-
-	/**
-	 * @see DataValueHandler::getSortFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getSortFieldName() {
-		return 'text';
-	}
-
-	/**
-	 * @see DataValueHandler::getLabelFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string|null
-	 */
-	public function getLabelFieldName() {
-		return 'text';
-	}
-
-	/**
 	 * @see DataValueHandler::newDataValueFromValueField
 	 *
 	 * @since wd.qe

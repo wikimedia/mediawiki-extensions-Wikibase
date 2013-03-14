@@ -67,14 +67,23 @@ class Setup {
 	/**
 	 * @since wd.qe
 	 *
+	 * @var Schema
+	 */
+	private $storeSchema;
+
+	/**
+	 * @since wd.qe
+	 *
 	 * @param StoreConfig $storeConfig
+	 * @param Schema $storeSchema
 	 * @param QueryInterface $queryInterface
 	 * @param TableBuilder $tableBuilder
 	 * @param MessageReporter|null $messageReporter
 	 */
-	public function __construct( StoreConfig $storeConfig, QueryInterface $queryInterface,
+	public function __construct( StoreConfig $storeConfig, Schema $storeSchema, QueryInterface $queryInterface,
 								 TableBuilder $tableBuilder, MessageReporter $messageReporter = null ) {
 		$this->config = $storeConfig;
+		$this->storeSchema = $storeSchema;
 		$this->tableBuilder = $tableBuilder;
 		$this->queryInterface = $queryInterface;
 		$this->messageReporter = $messageReporter;
@@ -111,238 +120,6 @@ class Setup {
 	}
 
 	/**
-	 * TODO
-	 *
-	 * @return TableDefinition[]
-	 */
-	private function getTables() {
-		// TODO: setup dv tables for different levels of snaks
-		// TODO: setup id tracking tables
-		// TODO: setup stats tables
-
-		return array_merge( $this->getNonDVTables(), $this->getDVTables() );
-	}
-
-	/**
-	 * TODO
-	 *
-	 * @return TableDefinition[]
-	 */
-	private function getDVTables() {
-		$dvTables = array();
-
-		/**
-		 * @var DataValueHandler $dataValueHandler
-		 */
-		foreach ( $this->config->getDataValueHandlers() as $dataValueHandler ) {
-			foreach ( array( 'msnak_', 'qualifier_' ) as $snakLevel ) {
-				$table = $dataValueHandler->getTableDefinition();
-				$table = $table->mutateName( $snakLevel . $table->getName() );
-
-				$table = $table->mutateFields(
-					array_merge(
-						$this->getPropertySnakFields(),
-						$table->getFields()
-					)
-				);
-
-				$dvTables[] = $table;
-			}
-		}
-
-		return $dvTables;
-	}
-
-	/**
-	 * TODO
-	 *
-	 * @return FieldDefinition[]
-	 */
-	private function getPropertySnakFields() {
-		return array(
-			// Internal claim id
-			new FieldDefinition(
-				'claim_id',
-				FieldDefinition::TYPE_INTEGER,
-				FieldDefinition::NOT_NULL,
-				FieldDefinition::NO_DEFAULT,
-				FieldDefinition::ATTRIB_UNSIGNED,
-				FieldDefinition::INDEX
-			),
-
-			// Internal property id
-			new FieldDefinition(
-				'property_id',
-				FieldDefinition::TYPE_INTEGER,
-				FieldDefinition::NOT_NULL,
-				FieldDefinition::NO_DEFAULT,
-				FieldDefinition::ATTRIB_UNSIGNED,
-				FieldDefinition::INDEX
-			),
-		);
-	}
-
-	/**
-	 * TODO
-	 *
-	 * @return TableDefinition[]
-	 */
-	private function getNonDVTables() {
-		$tables = array();
-
-		// TODO: multi field indexes
-		// TODO: more optimal types
-
-		// Id map with Wikibase EntityId to internal SQL store id
-		$tables[] = new TableDefinition(
-			'entities',
-			array(
-				// Internal id
-				new FieldDefinition(
-					'id',
-					FieldDefinition::TYPE_INTEGER,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX_PRIMARY,
-					FieldDefinition::AUTOINCREMENT
-				),
-
-				// EntityId type part
-				new FieldDefinition(
-					'type',
-					FieldDefinition::TYPE_TEXT,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::NO_ATTRIB,
-					FieldDefinition::INDEX
-				),
-
-				// EntityId numerical part
-				new FieldDefinition(
-					'number',
-					FieldDefinition::TYPE_INTEGER,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX
-				),
-			)
-		);
-
-		// Claim id table
-		$tables[] = new TableDefinition(
-			'claims',
-			array(
-				// Internal id
-				new FieldDefinition(
-					'id',
-					FieldDefinition::TYPE_INTEGER,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX_PRIMARY,
-					FieldDefinition::AUTOINCREMENT
-				),
-
-				// External id
-				new FieldDefinition(
-					'guid',
-					FieldDefinition::TYPE_TEXT,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX
-				),
-
-				// Internal id of the claims subject
-				new FieldDefinition(
-					'subject_id',
-					FieldDefinition::TYPE_INTEGER,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX
-				),
-
-				// Internal id of the property of the main snak
-				new FieldDefinition(
-					'property_id',
-					FieldDefinition::TYPE_INTEGER,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX
-				),
-
-				// Rank
-				new FieldDefinition(
-					'rank',
-					FieldDefinition::TYPE_INTEGER,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX
-				),
-
-				// Hash
-				new FieldDefinition(
-					'hash',
-					FieldDefinition::TYPE_TEXT,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::NO_ATTRIB,
-					FieldDefinition::INDEX
-				),
-			)
-		);
-
-		// Table for snaks without a value
-		$tables[] = new TableDefinition(
-			'valueless_snaks',
-			array_merge(
-				$this->getPropertySnakFields(),
-				array(
-					// Type of the snak
-					new FieldDefinition(
-						'type',
-						FieldDefinition::TYPE_INTEGER,
-						FieldDefinition::NOT_NULL,
-						FieldDefinition::NO_DEFAULT,
-						FieldDefinition::ATTRIB_UNSIGNED,
-						FieldDefinition::INDEX
-					),
-
-					// Level at which the snak is used (ie "main snak" or "qualifier")
-					new FieldDefinition(
-						'level',
-						FieldDefinition::TYPE_INTEGER,
-						FieldDefinition::NOT_NULL,
-						FieldDefinition::NO_DEFAULT,
-						FieldDefinition::ATTRIB_UNSIGNED,
-						FieldDefinition::INDEX
-					),
-				)
-			)
-		);
-
-		return $tables;
-	}
-
-	/**
-	 * Returns the provided table with the configs table prefix prepended to the name of the table.
-	 *
-	 * @since wd.qe
-	 *
-	 * @param TableDefinition $tableDefinition
-	 *
-	 * @return TableDefinition
-	 */
-	private function getPrefixedTable( TableDefinition $tableDefinition ) {
-		return $tableDefinition->mutateName( $this->config->getTablePrefix() . $tableDefinition->getName() );
-	}
-
-	/**
 	 * Sets up the tables of the store.
 	 *
 	 * @since wd.qe
@@ -352,8 +129,7 @@ class Setup {
 	private function setupTables() {
 		$success = true;
 
-		foreach ( $this->getTables() as $table ) {
-			$table = $this->getPrefixedTable( $table );
+		foreach ( $this->storeSchema->getTables() as $table ) {
 			$success = $this->tableBuilder->createTable( $table ) && $success;
 		}
 
@@ -387,8 +163,7 @@ class Setup {
 	private function dropTables() {
 		$success = true;
 
-		foreach ( $this->getTables() as $table ) {
-			$table = $this->getPrefixedTable( $table );
+		foreach ( $this->storeSchema->getTables() as $table ) {
 			$success = $this->queryInterface->dropTable( $table->getName() ) && $success;
 		}
 

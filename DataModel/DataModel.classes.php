@@ -51,6 +51,7 @@ return call_user_func( function() {
 		'Wikibase\SnakFactory' => 'DataModel/Snak/SnakFactory.php',
 		'Wikibase\SnakList' => 'DataModel/Snak/SnakList.php',
 		'Wikibase\SnakObject' => 'DataModel/Snak/SnakObject.php',
+		'Wikibase\SnakRole' => 'DataModel/Snak/SnakRole.php',
 		'Wikibase\Snaks' => 'DataModel/Snak/Snaks.php',
 
 		'Wikibase\Reference' => 'DataModel/Reference.php',

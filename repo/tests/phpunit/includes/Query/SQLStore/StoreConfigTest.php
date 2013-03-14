@@ -2,8 +2,11 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore;
 
-use Wikibase\Repo\Query\SQLStore\StoreConfig;
+use Wikibase\Repo\Query\SQLStore\DVHandler\NumberHandler;
+use Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler;
 use Wikibase\Repo\Query\SQLStore\DataValueHandler;
+use Wikibase\Repo\Query\SQLStore\DataValueTables;
+use Wikibase\Repo\Query\SQLStore\StoreConfig;
 
 /**
  * Unit tests for the Wikibase\Repo\Query\SQLStore\StoreConfig class.
@@ -40,13 +43,15 @@ class StoreConfigTest extends \PHPUnit_Framework_TestCase {
 	public function constructorProvider() {
 		$argLists = array();
 
+		$tableCollection = new DataValueTables();
+
 		$argLists[] = array( 'Wikibase SQL Store', 'wbsql_', array(
-			'string' => new \Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler()
+			'string' => new StringHandler( $tableCollection->getTable( 'string' ) )
 		) );
 
 		$argLists[] = array( 'SQL store with new config for migration', '', array(
-			'string' => new \Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler(),
-			'number' => new \Wikibase\Repo\Query\SQLStore\DVHandler\NumberHandler(),
+			'string' => new StringHandler( $tableCollection->getTable( 'string' ) ),
+			'number' => new NumberHandler( $tableCollection->getTable( 'number' ) ),
 		) );
 
 		return $argLists;

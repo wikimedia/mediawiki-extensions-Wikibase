@@ -2,9 +2,14 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
+use Wikibase\Claim;
 use Wikibase\Entity;
+use Wikibase\EntityId;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Repo\Database\QueryInterface;
 use Wikibase\Repo\Query\QueryStoreUpdater;
+use Wikibase\Snak;
+use Wikibase\SnakRole;
 
 /**
  * Class responsible for writing information to the SQLStore.
@@ -37,9 +42,9 @@ class Updater implements QueryStoreUpdater {
 	/**
 	 * @since wd.qe
 	 *
-	 * @var StoreConfig
+	 * @var Schema
 	 */
-	private $storeConfig;
+	private $schema;
 
 	/**
 	 * @since wd.qe
@@ -53,11 +58,11 @@ class Updater implements QueryStoreUpdater {
 	 *
 	 * @since wd.qe
 	 *
-	 * @param StoreConfig $storeConfig
+	 * @param Schema $schema
 	 * @param QueryInterface $queryInterface
 	 */
-	public function __construct( StoreConfig $storeConfig, QueryInterface $queryInterface ) {
-		$this->storeConfig = $storeConfig;
+	public function __construct( Schema $schema, QueryInterface $queryInterface ) {
+		$this->schema = $schema;
 		$this->queryInterface = $queryInterface;
 	}
 
@@ -69,6 +74,65 @@ class Updater implements QueryStoreUpdater {
 	 * @param Entity $entity
 	 */
 	public function insertEntity( Entity $entity ) {
+		// TODO: insert entity info into entities table
+		// TODO: insert info of linked entities into entities table
+
+		foreach ( $entity->getClaims() as $claim ) {
+			$this->insertClaim( $entity->getId(), $claim );
+		}
+
+		// TODO: obtain and insert virtual claims
+	}
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @param EntityId $entityId
+	 * @param Claim $claim
+	 */
+	private function insertClaim( EntityId $entityId, Claim $claim ) {
+		// TODO: insert claim info into claims table
+
+		$this->insertSnak(
+			$claim->getMainSnak(),
+			SnakRole::MAIN_SNAK,
+			42, // TODO
+			9001 // TODO
+		);
+
+		foreach ( $claim->getQualifiers() as $qualifierSnak ) {
+			$this->insertSnak(
+				$qualifierSnak,
+				SnakRole::QUALIFIER,
+				42, // TODO
+				9001 // TODO
+			);
+		}
+	}
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @param Snak $snak
+	 * @param int $snakRole
+	 * @param int $internalClaimId
+	 * @param int $internalPropertyId
+	 */
+	private function insertSnak( Snak $snak, $snakRole, $internalClaimId, $internalPropertyId ) {
+		if ( $snak instanceof PropertyValueSnak ) {
+			$this->insertPropertyValueSnak( $snak, $snakRole, $internalClaimId, $internalPropertyId );
+		}
+
+
+		// TODO
+	}
+
+	private function insertPropertyValueSnak( PropertyValueSnak $snak, $snakRole, $internalClaimId, $internalPropertyId ) {
+		$dataValueHandler = $this->schema->getDataValueHandler(
+			$snak->getDataValue()->getType(),
+			$snakRole
+		);
+
 		// TODO
 	}
 

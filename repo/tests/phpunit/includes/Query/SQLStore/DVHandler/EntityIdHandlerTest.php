@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore\DVHandler;
 
-use Wikibase\Repo\Query\SQLStore\DataValueHandler;
-use Wikibase\Repo\Query\SQLStore\DVHandler\EntityIdHandler;
-use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 use Wikibase\EntityId;
+use Wikibase\Repo\Query\SQLStore\DVHandler\EntityIdHandler;
+use Wikibase\Repo\Query\SQLStore\DataValueHandler;
+use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 
 /**
  * Unit tests for the Wikibase\Repo\Query\SQLStore\DVHandler\EntityIdHandler class.

@@ -2,15 +2,9 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore;
 
-use Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction;
-use Wikibase\Repo\Database\MediaWikiQueryInterface;
-use Wikibase\Repo\LazyDBConnectionProvider;
-use Wikibase\Repo\Query\SQLStore\Engine;
-use Wikibase\Repo\Query\SQLStore\StoreConfig;
-use Wikibase\Repo\Test\Query\QueryEngineTest;
 
 /**
- * Unit tests for the Wikibase\Repo\Query\SQLStore\Engine class.
+ * Unit tests for the Wikibase\Repo\Query\SQLStore\Schema class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,24 +33,8 @@ use Wikibase\Repo\Test\Query\QueryEngineTest;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EngineTest extends QueryEngineTest {
+class SchemaTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @see QueryEngineTest::getInstances
-	 */
-	protected function getInstances() {
-		$instances = array();
 
-		$connectionProvider = new LazyDBConnectionProvider( DB_MASTER );
-		$storeConfig = new StoreConfig( 'foo', 'bar', array() );
-		$queryInterface = new MediaWikiQueryInterface(
-			$connectionProvider,
-			new ExtendedMySQLAbstraction( $connectionProvider )
-		);
-
-		$instances[] = new Engine( $storeConfig, $queryInterface );
-
-		return $instances;
-	}
 
 }
