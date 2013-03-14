@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+use ValueFormatters\FormatterOptions;
+use DataValues\DataValue;
 
 /**
  * {{#property}} parser function
@@ -30,11 +32,8 @@ namespace Wikibase;
  */
 class PropertyParserFunction {
 
-	/* @var Site */
-	protected $site;
-
-	/* @var EntityId */
-	protected $entityId;
+	/* @var Language */
+	protected $language;
 
 	/* @var WikiPageEntityLookup */
 	protected $entityLookup;
@@ -42,55 +41,25 @@ class PropertyParserFunction {
 	/* @var ParserErrorMessageFormatter */
 	protected $errorFormatter;
 
+	/* @var array */
+	protected $availableDataTypes;
+
 	/**
 	 * @since 0.4
 	 *
-	 * @param \Site                       $site
-	 * @param EntityId                    $entityId
-	 * @param EntityLookup                $entityLookup
+	 * @param \Language $language
+	 * @param WikiPageEntityLookup $entityLookup
+	 * @param PropertyByLabelLookup $propertyByLabelLookup
 	 * @param ParserErrorMessageFormatter $errorFormatter
+	 * @param string $dataTypes[]
 	 */
-	public function __construct( \Site $site, EntityId $entityId,
-		EntityLookup $entityLookup, ParserErrorMessageFormatter $errorFormatter ) {
-		$this->site = $site;
-		$this->entityId = $entityId;
+	public function __construct( \Language $language, WikiPageEntityLookup $entityLookup,
+		PropertyByLabelLookup $propertyByLabelLookup, ParserErrorMessageFormatter $errorFormatter, array $dataTypes ) {
+		$this->language = $language;
 		$this->entityLookup = $entityLookup;
+		$this->propertyByLabelLookup = $propertyByLabelLookup;
 		$this->errorFormatter = $errorFormatter;
-	}
-
-	/**
-	 * Get data value for a property of item associated with client wiki page
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
-	 * @param string $propertyLabel
-	 *
-	 * @return Snak
-	 */
-	public function getMainSnak( Entity $entity, $propertyLabel ) {
-		$claimsByProperty = array();
-
-		foreach( $entity->getClaims() as $claim ) {
-			$propertyId = $claim->getMainSnak()->getPropertyId();
-			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
-		}
-
-		if ( $claimsByProperty !== array() ) {
-			foreach( $claimsByProperty as $id => $claims ) {
-				foreach( $claims as $claim ) {
-					$mainSnak = $claim->getMainSnak();
-					$property = $this->entityLookup->getEntity( $mainSnak->getPropertyId() );
-
-					// @todo allow lookup by entity id, in addition to label?
-					if ( $property->getLabel( $this->site->getLanguageCode() ) === $propertyLabel ) {
-						return $mainSnak;
-					}
-				}
-			}
-		}
-
-		return false;
+		$this->availableDataTypes = $dataTypes;
 	}
 
 	/**
@@ -104,21 +73,104 @@ class PropertyParserFunction {
 	 *
 	 * @return string
 	 */
-	protected function getSnakValue( Snak $snak, $propertyLabel ) {
-		$propertyValue = $snak->getDataValue();
+	protected function getSnakValue( Snak $snak ) {
+		wfProfileIn( __METHOD__ );
+		$snakValue = $snak->getDataValue();
 
-		if ( $propertyValue instanceof \Wikibase\EntityId ) {
-			$langCode = $this->site->getLanguageCode();
+		if ( $snakValue instanceof \Wikibase\EntityId ) {
 			// @todo we could use the terms table to lookup label
 			// we would need to have some store lookup code in WikibaseLib
-			$entity = $this->entityLookup->getEntity( $propertyValue );
-			$label = $entity->getLabel( $this->site->getLanguageCode() );
+			$entity = $this->entityLookup->getEntity( $snakValue );
+			$label = $entity->getLabel( $this->language->getCode() );
 
 			// @todo ick! handle when there is no label...
-			return $label !== false ? $label : $entity->getPrefixedId();
+			$labelValue = $label !== false ? $label : '';
+
+			wfProfileOut( __METHOD__ );
+			return $labelValue;
+		} else {
+			wfProfileOut( __METHOD__ );
+			return $snakValue;
 		}
 
+		wfProfileOut( __METHOD__ );
 		return null;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param Snak $snak
+	 *
+	 * @return string
+	 */
+	public function formatDataValue( DataValue $dataValue ) {
+		wfProfileIn( __METHOD__ );
+		$dataType = $dataValue->getType();
+
+		// @fixme why is $dataType inconsistent with data type settings?
+		if ( !in_array( $dataType, $this->availableDataTypes ) && $dataType !== 'wikibase-entityid' ) {
+			// @todo error handling, data type not supported
+			return '';
+		}
+
+		$formatterOptions = new FormatterOptions( array( 'lang' => $this->language->getCode() ) );
+		$formattedValue = '';
+
+		switch ( $dataType ) {
+			case 'wikibase-entityid':
+				$valueFormatter = new ItemFormatter( $formatterOptions, $this->entityLookup );
+				$formattedValue = $valueFormatter->format( $dataValue );
+				break;
+			case 'commonsMedia':
+				$valueFormatter = new StringFormatter( $formatterOptions );
+				$formattedValue = $valueFormatter->format( $dataValue );
+				break;
+			case 'string':
+				$valueFormatter = new StringFormatter( $formatterOptions );
+				$formattedValue = $valueFormatter->format( $dataValue );
+				break;
+			default:
+				break;
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $formattedValue;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param SnakList $snakList
+	 *
+	 * @return string - wikitext format
+	 */
+	public function formatSnakList( SnakList $snakList, $propertyLabel ) {
+		wfProfileIn( __METHOD__ );
+		$values = array();
+
+		foreach( $snakList as $snak ) {
+			$values[] = $snak->getDataValue();
+		}
+
+		if ( $values !== array() ) {
+			wfProfileOut( __METHOD__ );
+			$formattedValues = array();
+
+			foreach( $values as $dataValue ) {
+				$formattedValues[] = $this->formatDataValue( $dataValue );
+			}
+
+			return $this->language->commaList( $formattedValues );
+		}
+
+		if ( ! isset( $errorMessage ) ) {
+			// formatted as empty string
+			$errorMessage = new \Message( 'wikibase-property-notfound', array( wfEscapeWikiText( $propertyLabel ) ) );
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $this->errorFormatter->format( $errorMessage );
 	}
 
 	/**
@@ -128,27 +180,17 @@ class PropertyParserFunction {
 	 *
 	 * @return string - wikitext format
 	 */
-	public function evaluate( $propertyLabel ) {
-		$snak = $this->getMainSnak(
-			$this->entityLookup->getEntity( $this->entityId ),
-			$propertyLabel
-		);
+    public function evaluate( EntityId $entityId, $propertyLabel ) {
+		wfProfileIn( __METHOD__ );
+		$snakList = $this->propertyByLabelLookup->getSnaksByPropertyLabel( $entityId, $propertyLabel );
 
-		if ( $snak instanceof \Wikibase\Snak ) {
-			$snakValue = $this->getSnakValue( $snak, $propertyLabel );
-
-			if ( $snakValue !== null ) {
-				return wfEscapeWikiText( $snakValue );
-			}
-
-			$errorMessage = new \Message( 'wikibase-property-notsupportedyet', array( wfEscapeWikiText( $propertyLabel ) ) );
+		if ( $snakList->isEmpty() ) {
+			wfProfileOut( __METHOD__ );
+			return '';
 		}
 
-		if ( ! isset( $errorMessage ) ) {
-			$errorMessage = new \Message( 'wikibase-property-notfound', array( wfEscapeWikiText( $propertyLabel ) ) );
-		}
-
-		return $this->errorFormatter->format( $errorMessage );
+		wfProfileOut( __METHOD__ );
+		return $this->formatSnakList( $snakList, $propertyLabel );
 	}
 
 	/**
@@ -159,6 +201,7 @@ class PropertyParserFunction {
 	 * @return string
 	 */
 	public static function render( \Parser $parser, $propertyLabel ) {
+		wfProfileIn( __METHOD__ );
 		$site = \Sites::singleton()->getSite( Settings::get( 'siteGlobalID' ) );
 
 		$siteLinkLookup = ClientStoreFactory::getStore()->newSiteLinkTable();
@@ -168,19 +211,27 @@ class PropertyParserFunction {
 
 		// @todo handle when site link is not there, such as site link / entity has been deleted...
 		if ( $entityId === null ) {
+			wfProfileOut( __METHOD__ );
 			return '';
 		}
 
 		$entityLookup = ClientStoreFactory::getStore()->getEntityLookup();
 
-		$errorFormatter = new ParserErrorMessageFormatter( $parser->getTargetLanguage() );
+		$targetLanguage = $parser->getTargetLanguage();
+		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
 
-		$instance = new self( $site, $entityId, $entityLookup, $errorFormatter );
+		$propertyByLabelLookup = new PropertyByLabelLookup( $targetLanguage, $entityId, $entityLookup );
 
-		return array(
-			$instance->evaluate( $propertyLabel ),
+		$instance = new self( $targetLanguage, $entityLookup, $propertyByLabelLookup,
+			$errorFormatter, Settings::get( 'dataTypes' ) );
+
+		$result = array(
+			$instance->evaluate( $entityId, $propertyLabel ),
 			'noparse' => false
 		);
+
+		wfProfileOut( __METHOD__ );
+		return $result;
 	}
 
 }
