@@ -5,7 +5,10 @@ namespace Wikibase\Repo\Query\SQLStore;
 use Wikibase\Repo\Database\TableDefinition;
 
 /**
- * StoreConfiguration for the SQL Store.
+ * Configuration for the SQL Store.
+ * This is purely a value object containing the configuration declaration.
+ * Access to things config specific (such as the database tables) should
+ * happen through specific objects (such as the Schema class).
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -48,14 +51,16 @@ class StoreConfig {
 
 	/**
 	 * The DataValueHandlers for the DataValue types supported by this configuration.
-	 * Array keys are DataValue type identifiers (string) pointing to the corresponding
-	 * DataValueHandler.
+	 * Array keys are DataValue type identifiers (string) pointing to the corresponding DataValueHandler.
 	 *
 	 * @since wd.qe
 	 *
 	 * @var DataValueHandler[]
 	 */
-	private $dvHandlers;
+	private $dvHandlers = array();
+
+	const SNAK_MAIN = 0;
+	const SNAK_QUALIFIER = 1;
 
 	/**
 	 * Constructor.
@@ -75,15 +80,6 @@ class StoreConfig {
 	/**
 	 * @since wd.qe
 	 *
-	 * @return DataValueHandler[]
-	 */
-	public function getDataValueHandlers() {
-		return $this->dvHandlers;
-	}
-
-	/**
-	 * @since wd.qe
-	 *
 	 * @return string
 	 */
 	public function getStoreName() {
@@ -97,6 +93,15 @@ class StoreConfig {
 	 */
 	public function getTablePrefix() {
 		return $this->tablePrefix;
+	}
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @return DataValueHandler[]
+	 */
+	public function getDataValueHandlers() {
+		return $this->dvHandlers;
 	}
 
 	// TODO

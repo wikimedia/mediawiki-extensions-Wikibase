@@ -2,9 +2,12 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
+use Wikibase\Claim;
 use Wikibase\Entity;
+use Wikibase\EntityId;
 use Wikibase\Repo\Database\QueryInterface;
 use Wikibase\Repo\Query\QueryStoreUpdater;
+use Wikibase\Snak;
 
 /**
  * Class responsible for writing information to the SQLStore.
@@ -69,8 +72,41 @@ class Updater implements QueryStoreUpdater {
 	 * @param Entity $entity
 	 */
 	public function insertEntity( Entity $entity ) {
-		// TODO
+		// TODO: insert entity info into entities table
+		// TODO: insert info of linked entities into entities table
+
+		foreach ( $entity->getClaims() as $claim ) {
+			$this->insertClaim( $entity->getId(), $claim );
+		}
+
+		// TODO: obtain and insert virtual claims
 	}
+
+	private function insertClaim( EntityId $entityId, Claim $claim ) {
+		// TODO: insert claim info into claims table
+
+		$this->insertSnak(
+			$claim->getMainSnak(),
+			$this->storeConfig->getMainSnakPrefix(),
+			42, // TODO
+			9001 // TODO
+		);
+
+		foreach ( $claim->getQualifiers() as $qualifierSnak ) {
+			$this->insertSnak(
+				$qualifierSnak,
+				$this->storeConfig->getQualifierPrefix(),
+				42, // TODO
+				9001 // TODO
+			);
+		}
+	}
+
+	private function insertSnak( Snak $snak, $tablePrefix, $internalClaimId, $internalPropertyId ) {
+
+	}
+
+
 
 	/**
 	 * @see QueryStoreUpdater::updateEntity
