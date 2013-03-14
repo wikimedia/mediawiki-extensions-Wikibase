@@ -101,6 +101,40 @@
       "revId": "7b03adc54c68766372d76207f9282e6f05ac3fac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqNFrWB4",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-14T19:37:22Z",
+      "side": 1,
+      "message": "This will still give PHP warnings. See comment in PS5.",
+      "revId": "7b03adc54c68766372d76207f9282e6f05ac3fac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqJEcAMA",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-14T19:37:22Z",
+      "side": 1,
+      "message": "You also need to set wikibase.setupInterface \u003d nil, so users can\u0027t call the setup method again.",
+      "revId": "7b03adc54c68766372d76207f9282e6f05ac3fac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
