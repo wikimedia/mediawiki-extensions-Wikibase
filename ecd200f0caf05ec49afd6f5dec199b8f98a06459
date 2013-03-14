@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqO5COWs",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-14T17:32:19Z",
+      "side": 1,
+      "message": "spaces! :o \n\nprefer not using spaces here and not changing it",
+      "revId": "ecd200f0caf05ec49afd6f5dec199b8f98a06459",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqM5xdd8",
+        "filename": "lib/includes/store/CachingEntityLoader.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-14T17:32:19Z",
+      "side": 1,
+      "message": "$todo is slightly confusing as a variable name\n\n$toCache? $toLoad?",
+      "revId": "ecd200f0caf05ec49afd6f5dec199b8f98a06459",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
