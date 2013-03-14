@@ -16,6 +16,24 @@
       "revId": "06455bb00d31342d03735ecdbd08aebd36ce6656",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqKhueS4",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2013-03-14T02:35:39Z",
+      "side": 1,
+      "message": "Scribunto_LuaEngine::normalizeModuleFileName checks for the filename beginning with \"/\". This may not be the case on Windows. It should be fixed in the Scribunto extension, IMHO.",
+      "parentUuid": "DqFDuae8",
+      "revId": "06455bb00d31342d03735ecdbd08aebd36ce6656",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
