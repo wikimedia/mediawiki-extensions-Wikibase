@@ -112,18 +112,29 @@ $specialPageAliases['is'] = array(
 /** Italian (italiano) */
 $specialPageAliases['it'] = array(
 	'EntityData' => array( 'DatiEntità' ),
-	'NewItem' => array( 'CreaElemento' ),
+	'NewItem' => array( 'CreaElemento', 'NuovoElemento' ),
 	'NewProperty' => array( 'NuovaProprietà' ),
 	'ItemByTitle' => array( 'ElementiPerTitolo' ),
 	'ItemDisambiguation' => array( 'ElementiDisambigui' ),
 	'ListDatatypes' => array( 'ElencaTipiDati' ),
 	'SetLabel' => array( 'ImpostaEtichetta' ),
+	'SetDescription' => array( 'ImpostaDescrizione' ),
+	'SetAliases' => array( 'ImpostaAlias' ),
 	'EntitiesWithoutLabel' => array( 'EntitàSenzaEtichetta' ),
+	'ItemsWithoutSitelinks' => array( 'ElementiSenzaSitelinks' ),
 );
 
 /** Japanese (日本語) */
 $specialPageAliases['ja'] = array(
+	'EntityData' => array( 'エンティティデータ' ),
+	'NewItem' => array( '新規項目' ),
 	'NewProperty' => array( '新規プロパティ' ),
+	'ItemDisambiguation' => array( '項目の曖昧さ回避' ),
+	'SetLabel' => array( 'ラベルの設定' ),
+	'SetDescription' => array( '説明の設定' ),
+	'SetAliases' => array( '別名の設定' ),
+	'EntitiesWithoutLabel' => array( 'ラベルのないエンティティ' ),
+	'ItemsWithoutSitelinks' => array( 'サイトリンクのない項目' ),
 );
 
 /** Korean (한국어) */

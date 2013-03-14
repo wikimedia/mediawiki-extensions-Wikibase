@@ -126,7 +126,10 @@ Parameters:
 * $1 - the URI to the login form of the repository',
 	'wikibase-linkitem-success-create' => 'Success message after a new item has been created which contains links to the page the user is currently on and the one entered. $1 holds a URL pointing to the new item.',
 	'wikibase-linkitem-success-link' => 'Success message after the page the user currently is on has been linked with an item. $1 holds a URL pointing to the item.',
-	'wikibase-property-notfound' => 'Message for property parser function when a property is not found. $1 is the name of the property.',
+	'wikibase-property-notfound' => 'Message for property parser function when a property is not found. Parameters:
+* $1 - the name of the property',
+	'wikibase-property-notsupportedyet' => 'Used as error message. Parameters:
+* $1 - property label',
 	'wikibase-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
 
 Parameters:
@@ -274,7 +277,7 @@ $messages['be-tarask'] = array(
 	'wikibase-comment-sitelink-change' => 'Моўная спасылка зьмененая з $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Моўная спасылка выдаленая: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|зьмена|зьмены|зьменаў}}',
-	'wikibase-editlinks' => 'Зьмяніць спасылкі',
+	'wikibase-editlinks' => 'Правіць спасылкі',
 	'wikibase-editlinkstitle' => 'Рэдагаваць міжмоўныя спасылкі',
 	'wikibase-linkitem-addlinks' => 'Дадаць спасылкі',
 	'wikibase-linkitem-alreadylinked' => 'Старонку, якую вы хочаце злучыць, ужо далучаная да [$1 аб’екта] ў цэнтральным рэпазыторыі, які спасылаецца на $2 на гэтым сайце. Аб’екты могуць мець толькі па адной старонцы з аднаго сайту. Выберыце, калі ласка, інушю старонку.',
@@ -292,6 +295,8 @@ $messages['be-tarask'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Для карыстаньня гэтай функцыяй вы мусіце ўвайсьці ў гэтую вікі і [$1 цэнтральны рэпазыторый].',
 	'wikibase-linkitem-success-create' => 'Старонкі былі пасьпяхова злучаныя. Новы аб’ект са спасылкамі вы можаце знайсьці ў нашым [$1 цэнтральным рэпазыторыі].',
 	'wikibase-linkitem-success-link' => 'Старонкі былі пасьпяхова злучаныя. Новы аб’ект са спасылкамі вы можаце пабачыць у нашым [$1 цэнтральным рэпазыторыі].',
+	'wikibase-property-notfound' => 'Уласьцівасьць «$1» ня знойдзеная.',
+	'wikibase-property-notsupportedyet' => 'Вікізьвесткі пакуль не падтрымліваюць тып уласьцівасьці «$1».',
 	'wikibase-rc-hide-wikidata' => '$1 Вікізьвесткі',
 	'wikibase-rc-show-wikidata-pref' => 'Паказваць праўкі Вікізьвестак у сьпісе апошніх зьменаў',
 	'wikibase-watchlist-show-changes-pref' => 'Паказваць зьмены Вікізьвестак у вашым сьпісе назіраньня',
@@ -306,6 +311,7 @@ $messages['bg'] = array(
 	'wikibase-comment-sitelink-add' => 'Добавена междуезикова препратка: $1',
 	'wikibase-comment-sitelink-change' => 'Променена междуезикова препратка: от $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Премахната междуезикова препратка: $1',
+	'wikibase-editlinks' => 'Редактиране',
 	'wikibase-editlinkstitle' => 'Редактиране на междуезиковите препратки',
 	'wikibase-linkitem-failure' => 'При опита за свързване с дадената страница възникна неизвестна грешка.',
 	'wikibase-linkitem-selectlink' => 'Изберете сайта и страницата от него, с която искате да свържете тази.',
@@ -411,7 +417,7 @@ $messages['ckb'] = array(
 	'wikibase-comment-sitelink-change' => 'بەستەری زمان لە $1 گۆڕدرا بۆ $2',
 	'wikibase-comment-sitelink-remove' => 'بەستەری زمانی سڕدراو: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|گۆڕانکاری}}',
-	'wikibase-editlinks' => '<span style="white-space:nowrap">بەستەرەکان دەستکاری بکە</span>',
+	'wikibase-editlinks' => 'بەستەرەکان دەستکاری بکە',
 	'wikibase-editlinkstitle' => 'بەستەرەکانی نێوانویکی دەستکاری بکە',
 	'wikibase-linkitem-addlinks' => 'بەستەرەکان زیاد بکە',
 	'wikibase-linkitem-close' => 'وتووێژەکە ببەستە و دیسان پەڕەکە بار بکەوە',
@@ -1209,6 +1215,7 @@ $messages['ja'] = array(
 	'wikibase-linkitem-not-loggedin' => 'この機能を使用するには、このウィキおよび[$1 中央データリポジトリ]の両方にログインする必要があります。',
 	'wikibase-linkitem-success-create' => 'ページのリンクに成功しました。リンクを含んで新しく作成された項目は[$1 中央データリポジトリ]にあります。',
 	'wikibase-linkitem-success-link' => 'ページのリンクに成功しました。リンクを含んだ項目は[$1 中央データリポジトリ]にあります。',
+	'wikibase-property-notfound' => 'プロパティ $1 が見つかりません。',
 	'wikibase-rc-hide-wikidata' => 'ウィキデータを$1',
 	'wikibase-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
 	'wikibase-watchlist-show-changes-pref' => 'ウィキデータの編集をウォッチリストに表示',
@@ -1822,8 +1829,12 @@ $messages['sk'] = array(
  */
 $messages['sr-ec'] = array(
 	'wikibase-client-desc' => 'Клијент за проширење Викибаза',
+	'wikibase-after-page-move' => 'Можете такође [$1 ажурирати] придружене ставке на Википодацима ради одржавања језичких веза на премештеној страници.',
 	'wikibase-comment-update' => 'Ажуриране везе ка језицима.',
 	'wikibase-comment-sitelink-add' => 'Додата веза за језик: $1',
+	'wikibase-comment-sitelink-change' => 'Веза на језику промењена са $1 на $2',
+	'wikibase-comment-sitelink-remove' => 'Уклоњена веза за језик: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|измена}}',
 	'wikibase-editlinks' => 'Уреди везе',
 	'wikibase-editlinkstitle' => 'Уређивање међујезичких веза',
 	'wikibase-linkitem-addlinks' => 'Додај везе',
@@ -1833,7 +1844,12 @@ $messages['sr-ec'] = array(
 	'wikibase-linkitem-input-page' => 'Страница:',
 	'wikibase-linkitem-confirmitem-button' => 'Потврди',
 	'wikibase-linkitem-not-loggedin-title' => 'Морате бити пријављени',
+	'wikibase-linkitem-not-loggedin' => 'Морате бити пријављени на овом вики-сајту и на [$1 главном складишту података] како бисте користили ову могућност.',
+	'wikibase-property-notfound' => '$1 својство није пронађено.',
+	'wikibase-property-notsupportedyet' => 'Викибаза још не подржава врсту својства за $1 својство.',
 	'wikibase-rc-hide-wikidata' => '$1 Википодаци',
+	'wikibase-rc-show-wikidata-pref' => 'Прикажи измене на Википодацима у скорашњим изменама',
+	'wikibase-watchlist-show-changes-pref' => 'Прикажи измене на Википодацима у списку надгледања',
 );
 
 /** Serbian (Latin script) (srpski (latinica)‎)
@@ -1962,7 +1978,6 @@ $messages['vi'] = array(
 	'wikibase-comment-sitelink-change' => 'Đã đổi liên kết ngôn ngữ từ $1 thành $2',
 	'wikibase-comment-sitelink-remove' => 'Đã loại bỏ liên kết ngôn ngữ: $1',
 	'wikibase-comment-multi' => '$1 thay đổi',
-	'wikibase-nolanglinks' => 'không có',
 	'wikibase-editlinks' => 'Sửa liên kết',
 	'wikibase-editlinkstitle' => 'Sửa liên kết giữa ngôn ngữ',
 	'wikibase-linkitem-addlinks' => 'Thêm liên kết',
@@ -1981,8 +1996,11 @@ $messages['vi'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Bạn cần đăng nhập vào cả wiki này lẫn [$1 kho dữ liệu chung] để sử dụng tính năng này.',
 	'wikibase-linkitem-success-create' => 'Các trang đã được liên kết với nhau thành công. Một khoản mục chứa các liên kết mới được tạo ra trong [$1 kho dữ liệu chung].',
 	'wikibase-linkitem-success-link' => 'Các trang đã được liên kết với nhau thành công. Xem khoản mục chứa các liên kết trong [$1 kho dữ liệu chung].',
+	'wikibase-property-notfound' => 'Không tìm thấy thuộc tính $1.',
+	'wikibase-property-notsupportedyet' => 'Wikibase chưa hỗ trợ kiểu của thuộc tính $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Hiện các sửa đổi Wikidata trong thay đổi gần đây',
+	'wikibase-watchlist-show-changes-pref' => 'Hiện các sửa đổi tại Wikidata trong danh sách theo dõi',
 );
 
 /** Yiddish (ייִדיש)
@@ -2005,6 +2023,21 @@ $messages['yi'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'ווייזן וויקידאטן רעדאקטירונגען אין לעצטע ענדערונגען',
 );
 
+/** Cantonese (粵語)
+ * @author Waihorace
+ */
+$messages['yue'] = array(
+	'wikibase-client-desc' => 'Wikibase擴展客戶端',
+	'wikibase-after-page-move' => '你仲可以[$1 更新]有關嘅維基數據項目，將佢連結去搬咗之後嘅頁面。',
+	'wikibase-editlinks' => '修改連結',
+	'wikibase-editlinkstitle' => '修改跨語言連結',
+	'wikibase-linkitem-addlinks' => '加新連結',
+	'wikibase-linkitem-input-site' => '語言:',
+	'wikibase-linkitem-input-page' => '頁面：',
+	'wikibase-linkitem-confirmitem-button' => '確認',
+	'wikibase-linkitem-not-loggedin-title' => '你要登入先',
+);
+
 /** Simplified Chinese (中文（简体）‎)
  * @author Hydra
  * @author Linforest
@@ -2024,7 +2057,6 @@ $messages['zh-hans'] = array(
 	'wikibase-comment-sitelink-change' => '语言链接从$1更改为$2',
 	'wikibase-comment-sitelink-remove' => '删除语言链接：$1',
 	'wikibase-comment-multi' => '$1 个更改',
-	'wikibase-nolanglinks' => '无',
 	'wikibase-editlinks' => '编辑链接',
 	'wikibase-editlinkstitle' => '编辑跨语言链接',
 	'wikibase-linkitem-addlinks' => '添加链接',
@@ -2043,8 +2075,11 @@ $messages['zh-hans'] = array(
 	'wikibase-linkitem-not-loggedin' => '您必须要在此维基上和[$1 中央数据知识库]登入才能使用此功能。',
 	'wikibase-linkitem-success-create' => '页面以成功地被链接了。您可以在我们的[$1 中央数据知识库]找到包含该链接的新项目。',
 	'wikibase-linkitem-success-link' => '页面已成功地被链接了。您可以在我们的[$1 中央数据知识库]找到包含该链接的项目。',
+	'wikibase-property-notfound' => '$1属性未找到。',
+	'wikibase-property-notsupportedyet' => 'Wikibase对$1属性不支持属性类型。',
 	'wikibase-rc-hide-wikidata' => '$1维基数据',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
+	'wikibase-watchlist-show-changes-pref' => '在您的监视列表中显示Wikidata的编辑',
 );
 
 /** Traditional Chinese (中文（繁體）‎)
