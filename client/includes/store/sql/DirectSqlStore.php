@@ -40,6 +40,11 @@ class DirectSqlStore implements ClientStore {
 	private $entityLookup = null;
 
 	/**
+	 * @var PropertyLookup
+	 */
+	private $propertyLookup = null;
+
+	/**
 	 * @var String|bool $repoWiki
 	 */
 	protected $repoWiki;
@@ -87,6 +92,36 @@ class DirectSqlStore implements ClientStore {
 		//TODO: get config for persistent cache from config
 		$lookup = new WikiPageEntityLookup( $this->repoWiki ); // entities are stored in wiki pages
 		return new CachingEntityLoader( $lookup );
+	}
+
+	/**
+	 * Get a PropertyLookup object
+	 *
+	 * @return PropertyLookup
+	 */
+	public function getPropertyLookup() {
+		if ( !$this->propertyLookup ) {
+			$this->propertyLookup = $this->newPropertyLookup();
+		}
+
+		return $this->propertyLookup;
+	}
+
+	/**
+	 * Create a new PropertyLookup instance
+	 *
+	 * @return PropertyLookup
+	 */
+	protected function newPropertyLookup() {
+		$entityLookup = $this->getEntityLookup();
+
+        if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+            $propertyLookup = new PropertyByLabelLookup( $entityLookup );
+        } else {
+            $propertyLookup = new PropertyByIdLookup( $entityLookup );
+		}
+
+		return $propertyLookup;
 	}
 
 	/**
