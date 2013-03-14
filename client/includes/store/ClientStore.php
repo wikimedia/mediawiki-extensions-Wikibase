@@ -53,6 +53,15 @@ interface ClientStore {
 	public function getEntityLookup();
 
 	/**
+	 * Returns a new PropertyLookup
+	 *
+	 * @since 0.4
+	 *
+	 * @return PropertyLookup
+	 */
+	public function getPropertyLookup();
+
+	/**
 	 * Returns a new ChangesTable for this store.
 	 *
 	 * @since 0.4
