@@ -1,11 +1,12 @@
 <?php
 
 namespace Wikibase;
+use ValueFormatters\ValueFormatterBase;
 
 /**
- * Formats a parser error message
+ * Formatter for string values
  *
- * @todo is there nothing like this in core? if not, move to core
+ * @todo generalize and put with ValueFormatters stuff
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,41 +26,20 @@ namespace Wikibase;
  * @since 0.4
  *
  * @file
- * @ingroup WikibaseClient
+ * @ingroup ValueFormatters
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ParserErrorMessageFormatter {
+class StringFormatter extends ValueFormatterBase {
 
-	/* @var \Language $language */
-	protected $language;
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param \Message $message
-	 */
-	public function __construct( \Language $language ) {
-		$this->language = $language;
+	public function format( $dataValue ) {
+		$string = $dataValue->getValue();
+		return $this->formatString( $string );
 	}
 
-	/**
-	 * Formats an error message
-	 * @todo is there really nothing like this function in core?
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	public function format( \Message $message ) {
-		return '';
-	/*	return \Html::rawElement(
-			'span',
-			array( 'class' => 'error' ),
-            $message->inLanguage( $this->language )->text()
-		);
-	*/
+	protected function formatString( $string ) {
+		return is_string( $string ) ? wfEscapeWikiText( $string ) : '';
 	}
 
 }
