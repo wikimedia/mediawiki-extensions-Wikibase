@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DqEsWt6c",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2013-03-14T10:00:31Z",
+      "side": 1,
+      "message": "Fixed in patch set 5.",
+      "parentUuid": "DqCuMoy4",
+      "revId": "06455bb00d31342d03735ecdbd08aebd36ce6656",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqFDuae8",
         "filename": "client/includes/WikibaseLibrary.php",
         "patchSetId": 4
