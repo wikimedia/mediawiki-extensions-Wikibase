@@ -3,9 +3,10 @@
 namespace Wikibase;
 
 /**
- * Formats a parser error message
+ * Holds key => value data for property id (numeric) and labels;
+ * language code is specified in the constructor
  *
- * @todo is there nothing like this in core? if not, move to core
+ * @todo integrate better with the terms table and add caching
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,41 +26,41 @@ namespace Wikibase;
  * @since 0.4
  *
  * @file
- * @ingroup WikibaseClient
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ParserErrorMessageFormatter {
+class PropertyIdLabelArray extends \ArrayObject {
 
-	/* @var \Language $language */
-	protected $language;
+	protected $langCode;
 
-	/**
-	 * @since 0.4
-	 *
-	 * @param \Message $message
-	 */
-	public function __construct( \Language $language ) {
-		$this->language = $language;
+	public function __construct( $langCode ) {
+		$this->langCode = $langCode;
 	}
 
-	/**
-	 * Formats an error message
-	 * @todo is there really nothing like this function in core?
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	public function format( \Message $message ) {
-		return '';
-	/*	return \Html::rawElement(
-			'span',
-			array( 'class' => 'error' ),
-            $message->inLanguage( $this->language )->text()
-		);
-	*/
+	public function getLanguageCode() {
+		return $this->langCode;
+	}
+
+	public function setProperty( $numericId, $label ) {
+		$this[$numericId] = $label;
+	}
+
+	public function getPropertyById( $numericId ) {
+		if ( !$this->hasProperty( $numericId ) ) {
+			throw new MWException( 'Property not found' );
+		}
+
+		return $this[$numericId];
+	}
+
+	public function hasProperty( $numericId ) {
+		return $this->offsetExists( $numericId );
+	}
+
+	public function getByLabel( $label ) {
+		return array_keys( $this->getArrayCopy(), $label );
 	}
 
 }
