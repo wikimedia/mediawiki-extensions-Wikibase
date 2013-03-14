@@ -39,43 +39,6 @@ use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 class BooleanHandler extends DataValueHandler {
 
 	/**
-	 * @see DataValueHandler::getTableDefinition
-	 *
-	 * @since wd.qe
-	 *
-	 * @return TableDefinition
-	 */
-	public function getTableDefinition() {
-		$fields = array(
-			new FieldDefinition( 'value', FieldDefinition::TYPE_BOOLEAN, false ),
-		);
-
-		return new TableDefinition( 'boolean', $fields );
-	}
-
-	/**
-	 * @see DataValueHandler::getValueFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getValueFieldName() {
-		return 'value';
-	}
-
-	/**
-	 * @see DataValueHandler::getSortFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getSortFieldName() {
-		return 'value';
-	}
-
-	/**
 	 * @see DataValueHandler::newDataValueFromValueField
 	 *
 	 * @since wd.qe

@@ -48,14 +48,17 @@ class StoreConfig {
 
 	/**
 	 * The DataValueHandlers for the DataValue types supported by this configuration.
-	 * Array keys are DataValue type identifiers (string) pointing to the corresponding
-	 * DataValueHandler.
+	 * Array keys are DataValue type identifiers (string) pointing to the corresponding DataValueHandler.
 	 *
 	 * @since wd.qe
 	 *
 	 * @var DataValueHandler[]
 	 */
-	private $dvHandlers;
+	private $dvHandlers = array();
+
+
+	const SNAK_MAIN = 0;
+	const SNAK_QUALIFIER = 1;
 
 	/**
 	 * Constructor.
@@ -70,15 +73,6 @@ class StoreConfig {
 		$this->name = $storeName;
 		$this->tablePrefix = $tablePrefix;
 		$this->dvHandlers = $dataValueHandlers;
-	}
-
-	/**
-	 * @since wd.qe
-	 *
-	 * @return DataValueHandler[]
-	 */
-	public function getDataValueHandlers() {
-		return $this->dvHandlers;
 	}
 
 	/**
@@ -99,6 +93,87 @@ class StoreConfig {
 		return $this->tablePrefix;
 	}
 
+	/**
+	 * @since wd.qe
+	 *
+	 * @return DataValueHandler[]
+	 */
+	public function getDataValueHandlers() {
+		return $this->dvHandlers;
+	}
+
 	// TODO
+
+}
+
+
+class Schema {
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @var StoreConfig
+	 */
+	private $config;
+
+	/**
+	 * The DataValueHandlers for the DataValue types supported by this configuration.
+	 * Array keys are snak types pointing to arrays where array keys are DataValue type
+	 * identifiers (string) pointing to the corresponding DataValueHandler.
+	 *
+	 * @since wd.qe
+	 *
+	 * @var DataValueHandler[]
+	 */
+	private $dvHandlers = array();
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @param StoreConfig $config
+	 */
+	public function __construct( StoreConfig $config ) {
+		$this->config = $config;
+		$this->expandDataValueHandlers( $config->getDataValueHandlers() );
+	}
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @param DataValueHandler[] $dataValueHandlers
+	 */
+	private function expandDataValueHandlers( array $dataValueHandlers ) {
+		foreach ( $this->snakTypes as $snakType => $snakPrefix ) {
+			$handlers = array();
+
+			foreach ( $dataValueHandlers as $dataValueHandler ) {
+				$table = $dataValueHandler->getTableDefinition();
+				$table = $table->mutateName( $snakPrefix . $table->getName() );
+
+
+			}
+
+			$this->dvHandlers[$snakType] = $handlers;
+		}
+	}
+
+	public function getHandlerForType( $dataType, $snakType ) {
+
+
+		// TODO: checks
+
+
+
+
+	}
+
+	/**
+	 * @since wd.qe
+	 *
+	 * @return DataValueHandler[]
+	 */
+	public function getDataValueHandlers() {
+		return $this->dvHandlers;
+	}
 
 }

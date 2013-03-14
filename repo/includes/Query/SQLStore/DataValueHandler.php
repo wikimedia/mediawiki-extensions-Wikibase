@@ -38,40 +38,6 @@ use Wikibase\Repo\Database\TableDefinition;
 abstract class DataValueHandler {
 
 	/**
-	 * Returns the definition of a table to hold DataValue objects of
-	 * the type handled by this DataValueHandler.
-	 *
-	 * @since wd.qe
-	 *
-	 * @return TableDefinition
-	 */
-	abstract public function getTableDefinition();
-
-	/**
-	 * Returns the name of the field that holds the value from which
-	 * a DataValue instance can be (re)constructed.
-	 *
-	 * The field should clearly be part of the table returned
-	 * by @see getTableDefinition.
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	abstract public function getValueFieldName();
-
-	/**
-	 * Return the field used to select this type of DataValue. In
-	 * particular, this identifies the column that is used to sort values
-	 * of this kind. Every type of data returns a non-empty string here.
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	abstract public function getSortFieldName();
-
-	/**
 	 * Create a DataValue from a cell value in the tables value field.
 	 *
 	 * @since wd.qe
@@ -81,24 +47,6 @@ abstract class DataValueHandler {
 	 * @return DataValue
 	 */
 	abstract public function newDataValueFromValueField( $valueFieldValue );
-
-	/**
-	 * Return the label field for this type of DataValue. This should be
-	 * a string column in the database table that can be used for selecting
-	 * values using criteria such as "starts with". The return value can be
-	 * empty if this is not supported. This is preferred for DataValue
-	 * classes that do not have an obvious canonical string writing anyway.
-	 *
-	 * The return value can be a column name or the empty string (if the
-	 * give type of DataValue does not have a label field).
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string|null
-	 */
-	public function getLabelFieldName() {
-		return null;
-	}
 
 	/**
 	 * Return an array of fields=>values to conditions (WHERE part) in SQL

@@ -135,7 +135,12 @@ class Setup {
 		 * @var DataValueHandler $dataValueHandler
 		 */
 		foreach ( $this->config->getDataValueHandlers() as $dataValueHandler ) {
-			foreach ( array( 'msnak_', 'qualifier_' ) as $snakLevel ) {
+			$snakLevels = array(
+				$this->config->getMainSnakPrefix(),
+				$this->config->getQualifierPrefix(),
+			);
+
+			foreach ( $snakLevels as $snakLevel ) {
 				$table = $dataValueHandler->getTableDefinition();
 				$table = $table->mutateName( $snakLevel . $table->getName() );
 
