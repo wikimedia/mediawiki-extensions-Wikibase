@@ -203,11 +203,8 @@ class LangLinkHandler {
 	 */
 	public function getNoExternalLangLinks( ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
-		$nel = $out->getProperty( 'noexternallanglinks' );
-
-		if( empty( $nel ) ) {
-			$nel = array();
-		}
+		$property = $out->getProperty( 'noexternallanglinks' );
+		$nel = is_string( $property ) ? unserialize( $property ) : array();
 
 		wfProfileOut( __METHOD__ );
 		return $nel;
@@ -224,7 +221,7 @@ class LangLinkHandler {
 	 */
 	public function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
 		wfProfileIn( __METHOD__ );
-		$out->setProperty( 'noexternallanglinks', $noexternallanglinks );
+		$out->setProperty( 'noexternallanglinks', serialize( $noexternallanglinks ) );
 		wfProfileOut( __METHOD__ );
 	}
 
