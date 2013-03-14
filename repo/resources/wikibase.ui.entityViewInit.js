@@ -167,8 +167,12 @@
 		}
 
 		$( wb ).on( 'startItemPageEditMode', function( event, origin, options ) {
+			// disable language terms table's editable value or mark it as the active one if it is
+			// the one being edited by the user and therefore the origin of the event
 			$.each( termsValueTools, function( i, termValueTool ) {
-				if ( !origin || origin.getSubject() !== termValueTool.getSubject() ) {
+				if ( !( origin instanceof wb.ui.PropertyEditTool.EditableValue )
+					|| origin.getSubject() !== termValueTool.getSubject()
+				) {
 					termValueTool.disable();
 				} else if ( origin && origin.getSubject() === termValueTool.getSubject() ) {
 					$( 'table.wb-terms' ).addClass( 'wb-edit' );
