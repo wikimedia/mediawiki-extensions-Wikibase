@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Wikibase\Repo\Query\QueryStoreUpdater;
-use Wikibase\Repo\Database\QueryInterface;
 use Wikibase\Entity;
+use Wikibase\Repo\Database\QueryInterface;
+use Wikibase\Repo\Query\QueryStoreUpdater;
 
 /**
  * Class responsible for writing information to the SQLStore.

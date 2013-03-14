@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Query\SQLStore\DVHandler;
 
-use Wikibase\Repo\Query\SQLStore\DataValueHandler;
-use Wikibase\Repo\Database\TableDefinition;
-use Wikibase\Repo\Database\FieldDefinition;
 use DataValues\DataValue;
 use DataValues\MonolingualTextValue;
 use InvalidArgumentException;
+use Wikibase\Repo\Database\FieldDefinition;
+use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 
 /**
  * Represents the mapping between DataValues\MonolingualTextValue and

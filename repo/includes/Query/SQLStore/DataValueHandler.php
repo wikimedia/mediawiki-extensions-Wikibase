@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Wikibase\Repo\Database\TableDefinition;
 use DataValues\DataValue;
+use Wikibase\Repo\Database\TableDefinition;
 
 /**
  * Represents the mapping between a DataValue type and the

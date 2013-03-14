@@ -2,14 +2,12 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Wikibase\Repo\Query\QueryEngineResult;
-use Wikibase\Repo\Query\QueryEngine;
-use Wikibase\Repo\Database\QueryInterface;
-
-use Ask\Language\Query;
 use Ask\Language\Description\Description;
 use Ask\Language\Option\QueryOptions;
-use Ask\Language\Selection\SelectionRequest;
+use Ask\Language\Query;
+use Wikibase\Repo\Database\QueryInterface;
+use Wikibase\Repo\Query\QueryEngine;
+use Wikibase\Repo\Query\QueryEngineResult;
 
 /**
  * Simple query engine that works on top of the SQLStore.
