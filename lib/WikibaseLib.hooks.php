@@ -68,6 +68,7 @@ final class LibHooks {
 			'DataTypes',
 			'ReferencedEntitiesFinder',
 			'HashableObjectStorage',
+			'PropertyIdLabelMapping',
 			'Template',
 			'TemplateRegistry',
 			'LibHooks',

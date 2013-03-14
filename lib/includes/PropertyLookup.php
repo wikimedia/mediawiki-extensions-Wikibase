@@ -3,9 +3,9 @@
 namespace Wikibase;
 
 /**
- * Formats a parser error message
+ * Property lookup by label
  *
- * @todo is there nothing like this in core? if not, move to core
+ * @todo use terms table to do lookups, add caching and tests
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,41 +25,32 @@ namespace Wikibase;
  * @since 0.4
  *
  * @file
- * @ingroup WikibaseClient
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ParserErrorMessageFormatter {
-
-	/* @var \Language $language */
-	protected $language;
+interface PropertyLookup {
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param \Message $message
+	 * @param EntityId $entityId
+	 * @param string $propertyLabel
+	 *
+	 * @return SnakList
 	 */
-	public function __construct( \Language $language ) {
-		$this->language = $language;
-	}
+	public function getMainSnaksByPropertyId( EntityId $entityId, EntityId $propertyId );
 
 	/**
-	 * Formats an error message
-	 * @todo is there really nothing like this function in core?
-	 *
 	 * @since 0.4
 	 *
-	 * @return string
+	 * @param EntityId $entityId
+	 * @param string $propertyLabel
+	 *
+	 * @return SnakList
 	 */
-	public function format( \Message $message ) {
-		return '';
-	/*	return \Html::rawElement(
-			'span',
-			array( 'class' => 'error' ),
-            $message->inLanguage( $this->language )->text()
-		);
-	*/
-	}
+	public function getMainSnaksByPropertyLabel( EntityID $entityId, $propertyLabel );
+
 
 }
