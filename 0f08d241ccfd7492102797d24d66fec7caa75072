@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DqK7HYZg",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2013-03-14T13:52:45Z",
+      "side": 1,
+      "message": "I will discuss this with Daniel Werner when he comes back from lunch :)",
+      "parentUuid": "DqI4wXek",
+      "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqEs3l-4",
         "filename": "client/includes/WikibaseLibrary.php",
         "patchSetId": 5
