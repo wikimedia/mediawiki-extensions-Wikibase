@@ -39,6 +39,11 @@ class CachingSqlStore implements ClientStore {
 	private $entityLookup = null;
 
 	/**
+	 * @var PropertyLookup
+	 */
+	private $propertyLookup = null;
+
+	/**
 	 * @see Store::newSiteLinkTable
 	 *
 	 * @since 0.3
@@ -85,6 +90,32 @@ class CachingSqlStore implements ClientStore {
 	protected function newEntityLookup() {
 		$mirror = $this->newEntityCache();
 		return new CachingEntityLoader( $mirror );
+	}
+
+	/**
+	 * Get a PropertyLookup object
+	 *
+	 * @since 0.4
+	 *
+	 * @return PropertyLookup
+	 */
+	public function getPropertyLookup() {
+		if ( !$this->propertyLookup ) {
+			$this->propertyLookup = $this->newPropertyLookup();
+		}
+
+		return $this->propertyLookup;
+	}
+
+	/**
+	 * Create a new PropertyLookup instance
+	 *
+	 * @return PropertyLookup
+	 */
+	protected function newPropertyLookup() {
+		$entityLookup = $this->getEntityLookup();
+
+		return new PropertySQLLookup( $entityLookup );
 	}
 
 	/**
