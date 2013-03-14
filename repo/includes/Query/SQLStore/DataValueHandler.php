@@ -35,41 +35,32 @@ use Wikibase\Repo\Database\TableDefinition;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class DataValueHandler {
+abstract class DataValueHandler implements \Immutable {
 
 	/**
-	 * Returns the definition of a table to hold DataValue objects of
-	 * the type handled by this DataValueHandler.
-	 *
 	 * @since wd.qe
 	 *
-	 * @return TableDefinition
+	 * @var DataValueTable
 	 */
-	abstract public function getTableDefinition();
+	protected $dataValueTable;
 
 	/**
-	 * Returns the name of the field that holds the value from which
-	 * a DataValue instance can be (re)constructed.
-	 *
-	 * The field should clearly be part of the table returned
-	 * by @see getTableDefinition.
-	 *
 	 * @since wd.qe
 	 *
-	 * @return string
+	 * @param DataValueTable $dataValueTable
 	 */
-	abstract public function getValueFieldName();
+	public function __construct( DataValueTable $dataValueTable ) {
+		$this->dataValueTable = $dataValueTable;
+	}
 
 	/**
-	 * Return the field used to select this type of DataValue. In
-	 * particular, this identifies the column that is used to sort values
-	 * of this kind. Every type of data returns a non-empty string here.
-	 *
 	 * @since wd.qe
 	 *
-	 * @return string
+	 * @return DataValueTable
 	 */
-	abstract public function getSortFieldName();
+	public function getDataValueTable() {
+		return $this->dataValueTable;
+	}
 
 	/**
 	 * Create a DataValue from a cell value in the tables value field.
@@ -81,24 +72,6 @@ abstract class DataValueHandler {
 	 * @return DataValue
 	 */
 	abstract public function newDataValueFromValueField( $valueFieldValue );
-
-	/**
-	 * Return the label field for this type of DataValue. This should be
-	 * a string column in the database table that can be used for selecting
-	 * values using criteria such as "starts with". The return value can be
-	 * empty if this is not supported. This is preferred for DataValue
-	 * classes that do not have an obvious canonical string writing anyway.
-	 *
-	 * The return value can be a column name or the empty string (if the
-	 * give type of DataValue does not have a label field).
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string|null
-	 */
-	public function getLabelFieldName() {
-		return null;
-	}
 
 	/**
 	 * Return an array of fields=>values to conditions (WHERE part) in SQL
@@ -133,5 +106,18 @@ abstract class DataValueHandler {
 	 * @return array
 	 */
 	abstract public function getInsertValues( DataValue $value );
+
+	/**
+	 * Returns a clone of the DataValueHandler, though with the provided DataValue table rather then the original one.
+	 *
+	 * @since wd.db
+	 *
+	 * @param DataValueTable $dataValueTable
+	 *
+	 * @return DataValueHandler
+	 */
+	public function mutateDataValueTable( DataValueTable $dataValueTable ) {
+		return new static( $dataValueTable );
+	}
 
 }

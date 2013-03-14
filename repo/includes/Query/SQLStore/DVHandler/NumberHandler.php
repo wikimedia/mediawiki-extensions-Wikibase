@@ -39,44 +39,6 @@ use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 class NumberHandler extends DataValueHandler {
 
 	/**
-	 * @see DataValueHandler::getTableDefinition
-	 *
-	 * @since wd.qe
-	 *
-	 * @return TableDefinition
-	 */
-	public function getTableDefinition() {
-		$fields = array(
-			new FieldDefinition( 'value', FieldDefinition::TYPE_FLOAT, false ),
-			new FieldDefinition( 'json', FieldDefinition::TYPE_TEXT, false ),
-		);
-
-		return new TableDefinition( 'number', $fields );
-	}
-
-	/**
-	 * @see DataValueHandler::getValueFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getValueFieldName() {
-		return 'json';
-	}
-
-	/**
-	 * @see DataValueHandler::getSortFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getSortFieldName() {
-		return 'value';
-	}
-
-	/**
 	 * @see DataValueHandler::newDataValueFromValueField
 	 *
 	 * @since wd.qe
@@ -87,17 +49,6 @@ class NumberHandler extends DataValueHandler {
 	 */
 	public function newDataValueFromValueField( $valueFieldValue ) {
 		return new NumberValue( $valueFieldValue );
-	}
-
-	/**
-	 * @see DataValueHandler::getLabelFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string|null
-	 */
-	public function getLabelFieldName() {
-		return 'value';
 	}
 
 	/**
