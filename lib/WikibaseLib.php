@@ -119,6 +119,10 @@ $wgAutoloadClasses['Wikibase\MapHasher'] 				= $dir . 'includes/MapHasher.php';
 $wgAutoloadClasses['Wikibase\MapValueHasher'] 			= $dir . 'includes/MapValueHasher.php';
 $wgAutoloadClasses['Wikibase\ReferencedEntitiesFinder'] = $dir . 'includes/ReferencedEntitiesFinder.php';
 $wgAutoloadClasses['Wikibase\ObjectComparer'] 			= $dir . 'includes/ObjectComparer.php';
+$wgAutoloadClasses['Wikibase\PropertyByIdLookup']		= $dir . 'includes/PropertyByIdLookup.php';
+$wgAutoloadClasses['Wikibase\PropertyByLabelLookup']	= $dir . 'includes/PropertyByLabelLookup.php';
+$wgAutoloadClasses['Wikibase\PropertyIdLabelMapping']	= $dir . 'includes/PropertyIdLabelMapping.php';
+$wgAutoloadClasses['Wikibase\PropertyLookup']			= $dir . 'includes/PropertyLookup.php';
 $wgAutoloadClasses['Wikibase\Settings'] 				= $dir . 'includes/Settings.php';
 $wgAutoloadClasses['Wikibase\SettingsArray'] 			= $dir . 'includes/SettingsArray.php';
 $wgAutoloadClasses['Wikibase\Term'] 					= $dir . 'includes/Term.php';
@@ -142,6 +146,10 @@ $wgAutoloadClasses['Wikibase\EntityDiff'] 			= $dir . 'includes/EntityDiff.php';
 $wgAutoloadClasses['Wikibase\EntityDiffVisualizer'] = $dir . 'includes/EntityDiffVisualizer.php';
 $wgAutoloadClasses['Wikibase\EntityFactory'] 		= $dir . 'includes/EntityFactory.php';
 $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/ItemDiff.php';
+
+// includes/formatters
+$wgAutoloadClasses['Wikibase\ItemFormatter']		= $dir . 'includes/formatters/ItemFormatter.php';
+$wgAutoloadClasses['Wikibase\StringFormatter']		= $dir . 'includes/formatters/StringFormatter.php';
 
 // includes/modules
 $wgAutoloadClasses['Wikibase\RepoAccessModule'] 		= $dir . 'includes/modules/RepoAccessModule.php';
