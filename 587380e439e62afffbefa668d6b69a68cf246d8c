@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqBEGsIY",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-14T19:13:58Z",
+      "side": 1,
+      "message": "sad spaces :(",
+      "revId": "587380e439e62afffbefa668d6b69a68cf246d8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
