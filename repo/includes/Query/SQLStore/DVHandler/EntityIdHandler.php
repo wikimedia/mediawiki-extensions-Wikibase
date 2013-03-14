@@ -39,45 +39,6 @@ use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 class EntityIdHandler extends DataValueHandler {
 
 	/**
-	 * @see DataValueHandler::getTableDefinition
-	 *
-	 * @since wd.qe
-	 *
-	 * @return TableDefinition
-	 */
-	public function getTableDefinition() {
-		$fields = array(
-			new FieldDefinition( 'type', FieldDefinition::TYPE_TEXT, false ),
-			new FieldDefinition( 'number', FieldDefinition::TYPE_INTEGER, false ),
-			new FieldDefinition( 'json', FieldDefinition::TYPE_TEXT, false ),
-		);
-
-		return new TableDefinition( 'entityid', $fields );
-	}
-
-	/**
-	 * @see DataValueHandler::getValueFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getValueFieldName() {
-		return 'json';
-	}
-
-	/**
-	 * @see DataValueHandler::getSortFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getSortFieldName() {
-		return 'number';
-	}
-
-	/**
 	 * @see DataValueHandler::newDataValueFromValueField
 	 *
 	 * @since wd.qe

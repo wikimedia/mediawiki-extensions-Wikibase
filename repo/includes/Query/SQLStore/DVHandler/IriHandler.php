@@ -40,60 +40,6 @@ use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 class IriHandler extends DataValueHandler {
 
 	/**
-	 * @see DataValueHandler::getTableDefinition
-	 *
-	 * @since wd.qe
-	 *
-	 * @return TableDefinition
-	 */
-	public function getTableDefinition() {
-		$fields = array(
-			new FieldDefinition( 'scheme', FD::TYPE_TEXT, FD::NOT_NULL ),
-			new FieldDefinition( 'fragment', FD::TYPE_TEXT, FD::NOT_NULL ),
-			new FieldDefinition( 'query', FD::TYPE_TEXT, FD::NOT_NULL ),
-			new FieldDefinition( 'hierp', FD::TYPE_TEXT, FD::NOT_NULL ),
-
-			new FieldDefinition( 'iri', FD::TYPE_TEXT, FD::NOT_NULL ),
-			new FieldDefinition( 'json', FD::TYPE_TEXT, FD::NOT_NULL ),
-		);
-
-		return new TableDefinition( 'iri', $fields );
-	}
-
-	/**
-	 * @see DataValueHandler::getValueFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getValueFieldName() {
-		return 'json';
-	}
-
-	/**
-	 * @see DataValueHandler::getSortFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getSortFieldName() {
-		return 'iri';
-	}
-
-	/**
-	 * @see DataValueHandler::getLabelFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string|null
-	 */
-	public function getLabelFieldName() {
-		return 'iri';
-	}
-
-	/**
 	 * @see DataValueHandler::newDataValueFromValueField
 	 *
 	 * @since wd.qe
