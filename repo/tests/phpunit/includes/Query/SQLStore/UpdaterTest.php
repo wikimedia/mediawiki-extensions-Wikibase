@@ -2,6 +2,11 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore;
 
+use Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction;
+use Wikibase\Repo\Database\MediaWikiQueryInterface;
+use Wikibase\Repo\LazyDBConnectionProvider;
+use Wikibase\Repo\Query\SQLStore\Schema;
+use Wikibase\Repo\Query\SQLStore\StoreConfig;
 use Wikibase\Repo\Query\SQLStore\Updater;
 use Wikibase\Repo\Test\Query\QueryStoreUpdaterTest;
 
@@ -47,14 +52,14 @@ class UpdaterTest extends QueryStoreUpdaterTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$connectionProvider = new \Wikibase\Repo\LazyDBConnectionProvider( DB_MASTER );
-		$storeConfig = new \Wikibase\Repo\Query\SQLStore\StoreConfig( 'foo', 'bar', array() );
-		$queryInterface = new \Wikibase\Repo\Database\MediaWikiQueryInterface(
+		$connectionProvider = new LazyDBConnectionProvider( DB_MASTER );
+		$storeSchema = new Schema( new StoreConfig( 'foo', 'bar', array() ) );
+		$queryInterface = new MediaWikiQueryInterface(
 			$connectionProvider,
-			new \Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction( $connectionProvider )
+			new ExtendedMySQLAbstraction( $connectionProvider )
 		);
 
-		$instances[] = new Updater( $storeConfig, $queryInterface );
+		$instances[] = new Updater( $storeSchema, $queryInterface );
 
 		return $instances;
 	}

@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore\DVHandler;
 
-use Wikibase\Repo\Query\SQLStore\DataValueHandler;
-use Wikibase\Repo\Query\SQLStore\DVHandler\IriHandler;
-use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 use DataValues\IriValue;
+use Wikibase\Repo\Query\SQLStore\DataValueHandler;
+use Wikibase\Repo\Query\SQLStore\DataValueHandlers;
+use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 
 /**
  * Unit tests for the Wikibase\Repo\Query\SQLStore\DVHandler\IriHandler class.
@@ -49,7 +49,8 @@ class IriHandlerTest extends DataValueHandlerTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$instances[] = new IriHandler();
+		$defaultHandlers = new DataValueHandlers();
+		$instances[] = $defaultHandlers->getHandler( 'iri' );
 
 		return $instances;
 	}

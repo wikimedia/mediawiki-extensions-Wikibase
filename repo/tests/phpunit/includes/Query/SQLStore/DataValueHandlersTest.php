@@ -1,14 +1,11 @@
 <?php
 
-namespace Wikibase\Repo\Test\Query\SQLStore\DVHandler;
+namespace Wikibase\Repo\Test\Query\SQLStore;
 
-use DataValues\StringValue;
-use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 use Wikibase\Repo\Query\SQLStore\DataValueHandlers;
-use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 
 /**
- * Unit tests for the Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler class.
+ * Unit tests for the Wikibase\Repo\Query\SQLStore\DataValueHandlers class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,47 +27,17 @@ use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
  *
  * @ingroup WikibaseRepoTest
  *
- * @group Wikibase
- * @group WikibaseRepo
- * @group WikibaseQuery
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StringHandlerTest extends DataValueHandlerTest {
+class DataValueHandlersTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @see DataValueHandlerTest::getInstances
-	 *
-	 * @since wd.qe
-	 *
-	 * @return DataValueHandler[]
-	 */
-	protected function getInstances() {
-		$instances = array();
-
+	public function testGetHandlersReturnType() {
 		$defaultHandlers = new DataValueHandlers();
-		$instances[] = $defaultHandlers->getHandler( 'string' );
+		$defaultHandlers = $defaultHandlers->getHandlers();
 
-		return $instances;
-	}
-
-	/**
-	 * @see DataValueHandlerTest::getValues
-	 *
-	 * @since wd.qe
-	 *
-	 * @return StringValue[]
-	 */
-	protected function getValues() {
-		$values = array();
-
-		$values[] = new StringValue( 'foo' );
-		$values[] = new StringValue( '' );
-		$values[] = new StringValue( ' foo ' );
-		$values[] = new StringValue( ' foo bar baz bah! hax ~=[,,_,,]:3' );
-
-		return $values;
+		$this->assertInternalType( 'array', $defaultHandlers );
+		$this->assertContainsOnlyInstancesOf( 'Wikibase\Repo\Query\SQLStore\DataValueHandler', $defaultHandlers );
 	}
 
 }

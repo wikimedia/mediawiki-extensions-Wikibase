@@ -2,7 +2,11 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore;
 
+use Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction;
+use Wikibase\Repo\Database\MediaWikiQueryInterface;
+use Wikibase\Repo\LazyDBConnectionProvider;
 use Wikibase\Repo\Query\SQLStore\Engine;
+use Wikibase\Repo\Query\SQLStore\StoreConfig;
 use Wikibase\Repo\Test\Query\QueryEngineTest;
 
 /**
@@ -43,11 +47,11 @@ class EngineTest extends QueryEngineTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$connectionProvider = new \Wikibase\Repo\LazyDBConnectionProvider( DB_MASTER );
-		$storeConfig = new \Wikibase\Repo\Query\SQLStore\StoreConfig( 'foo', 'bar', array() );
-		$queryInterface = new \Wikibase\Repo\Database\MediaWikiQueryInterface(
+		$connectionProvider = new LazyDBConnectionProvider( DB_MASTER );
+		$storeConfig = new StoreConfig( 'foo', 'bar', array() );
+		$queryInterface = new MediaWikiQueryInterface(
 			$connectionProvider,
-			new \Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction( $connectionProvider )
+			new ExtendedMySQLAbstraction( $connectionProvider )
 		);
 
 		$instances[] = new Engine( $storeConfig, $queryInterface );

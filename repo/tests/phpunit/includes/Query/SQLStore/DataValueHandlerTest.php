@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore;
 
-use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 use DataValues\DataValue;
+use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 
 /**
  * Unit tests for the Wikibase\Repo\Query\SQLStore\DataValueHandler implementing classes.
@@ -89,61 +89,8 @@ abstract class DataValueHandlerTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @param DataValueHandler $dvHandler
 	 */
-	public function testGetTableDefinitionReturnType( DataValueHandler $dvHandler ) {
-		$this->assertInstanceOf( 'Wikibase\Repo\Database\TableDefinition', $dvHandler->getTableDefinition() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param DataValueHandler $dvHandler
-	 */
-	public function testGetValueFieldNameReturnValue( DataValueHandler $dvHandler ) {
-		$valueFieldName = $dvHandler->getValueFieldName();
-
-		$this->assertInternalType( 'string', $valueFieldName );
-
-		$this->assertTrue(
-			$dvHandler->getTableDefinition()->hasFieldWithName( $valueFieldName ),
-			'The value field is present in the table'
-		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param DataValueHandler $dvHandler
-	 */
-	public function testGetSortFieldNameReturnValue( DataValueHandler $dvHandler ) {
-		$sortFieldName = $dvHandler->getSortFieldName();
-
-		$this->assertInternalType( 'string', $sortFieldName );
-
-		$this->assertTrue(
-			$dvHandler->getTableDefinition()->hasFieldWithName( $sortFieldName ),
-			'The sort field is present in the table'
-		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param DataValueHandler $dvHandler
-	 */
-	public function testGetLabelFieldNameReturnValue( DataValueHandler $dvHandler ) {
-		$labelFieldName = $dvHandler->getLabelFieldName();
-
-		$this->assertTrue(
-			$labelFieldName === null || is_string( $labelFieldName ),
-			'The label field name needs to be either string or null'
-		);
-
-		if ( is_string( $labelFieldName ) ) {
-			$this->assertTrue(
-				$dvHandler->getTableDefinition()->hasFieldWithName( $labelFieldName ),
-				'The label field is present in the table'
-			);
-		}
+	public function testGetDataValueTableReturnType( DataValueHandler $dvHandler ) {
+		$this->assertInstanceOf( 'Wikibase\Repo\Query\SQLStore\DataValueTable', $dvHandler->getDataValueTable() );
 	}
 
 	/**
@@ -173,11 +120,11 @@ abstract class DataValueHandlerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'array', $insertValues );
 		$this->assertNotEmpty( $insertValues );
 
-		$this->assertArrayHasKey( $instance->getValueFieldName(), $insertValues );
-		$this->assertArrayHasKey( $instance->getSortFieldName(), $insertValues );
+		$this->assertArrayHasKey( $instance->getDataValueTable()->getValueFieldName(), $insertValues );
+		$this->assertArrayHasKey( $instance->getDataValueTable()->getSortFieldName(), $insertValues );
 
-		if ( $instance->getLabelFieldName() !== null ) {
-			$this->assertArrayHasKey( $instance->getLabelFieldName(), $insertValues );
+		if ( $instance->getDataValueTable()->getLabelFieldName() !== null ) {
+			$this->assertArrayHasKey( $instance->getDataValueTable()->getLabelFieldName(), $insertValues );
 		}
 	}
 
@@ -190,7 +137,7 @@ abstract class DataValueHandlerTest extends \PHPUnit_Framework_TestCase {
 		$instance = $this->newInstance();
 
 		$fieldValues = $instance->getInsertValues( $value );
-		$valueFieldValue = $fieldValues[$instance->getValueFieldName()];
+		$valueFieldValue = $fieldValues[$instance->getDataValueTable()->getValueFieldName()];
 
 		$newValue = $instance->newDataValueFromValueField( $valueFieldValue );
 

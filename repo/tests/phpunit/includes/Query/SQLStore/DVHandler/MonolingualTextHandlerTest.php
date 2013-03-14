@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore\DVHandler;
 
-use Wikibase\Repo\Query\SQLStore\DataValueHandler;
-use Wikibase\Repo\Query\SQLStore\DVHandler\MonolingualTextHandler;
-use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 use DataValues\MonolingualTextValue;
+use Wikibase\Repo\Query\SQLStore\DataValueHandler;
+use Wikibase\Repo\Query\SQLStore\DataValueHandlers;
+use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 
 /**
  * Unit tests for the Wikibase\Repo\Query\SQLStore\DVHandler\MonolingualTextHandler class.
@@ -49,7 +49,8 @@ class MonolingualTextHandlerTest extends DataValueHandlerTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$instances[] = new MonolingualTextHandler();
+		$defaultHandlers = new DataValueHandlers();
+		$instances[] = $defaultHandlers->getHandler( 'monolingualtext' );
 
 		return $instances;
 	}
