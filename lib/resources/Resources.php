@@ -572,6 +572,7 @@ return call_user_func( function() {
 				'jquery.wikibase.claimview',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.templates',
+				'wikibase.utilities.GuidGenerator',
 			),
 			'messages' => array(
 				'wikibase-label-empty',
