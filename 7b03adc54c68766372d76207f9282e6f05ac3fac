@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqE4tZf0",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-14T16:29:43Z",
+      "side": 1,
+      "message": "Naming of the Lua-libs are weird, but thats nothing special for this changeset",
+      "revId": "7b03adc54c68766372d76207f9282e6f05ac3fac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqA43bU0",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-14T16:29:43Z",
+      "side": 1,
+      "message": "Weird-weird-weird-names",
+      "revId": "7b03adc54c68766372d76207f9282e6f05ac3fac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqK48QS4",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-14T16:29:43Z",
+      "side": 1,
+      "message": "Needs a way to get to the default entity for an article. How would an empty call look like from Lua? Could be in a follow-up.",
+      "revId": "7b03adc54c68766372d76207f9282e6f05ac3fac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
