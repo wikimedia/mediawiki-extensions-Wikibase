@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqEs3l-4",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-14T12:07:51Z",
+      "side": 1,
+      "message": "There should be some documentation here.",
+      "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqItUzyA",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-14T12:07:51Z",
+      "side": 1,
+      "message": "Function documentation missing",
+      "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqEtOt5g",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-14T12:07:51Z",
+      "side": 1,
+      "message": "is this a global? If so, it should probably be mediaWiki.wikibase, or even better, mediaWiki.ext.wikibase or something similar.",
+      "revId": "0f08d241ccfd7492102797d24d66fec7caa75072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
