@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DqCuMoy4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-03-14T08:02:59Z",
+      "side": 1,
+      "message": "That crashes. $engine appears to be a string.",
+      "revId": "06455bb00d31342d03735ecdbd08aebd36ce6656",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqFDuae8",
         "filename": "client/includes/WikibaseLibrary.php",
         "patchSetId": 4
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "Scribunto_LuaEngine::normalizeModuleFileName checks for the filename beginning with \"/\". This may not be the case on Windows. It should be fixed in the Scribunto extension, IMHO.",
       "parentUuid": "DqFDuae8",
+      "revId": "06455bb00d31342d03735ecdbd08aebd36ce6656",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqGt5Oys",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-03-14T08:02:59Z",
+      "side": 1,
+      "message": "Indeed... just had a quick glance.",
+      "parentUuid": "DqKhueS4",
       "revId": "06455bb00d31342d03735ecdbd08aebd36ce6656",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
