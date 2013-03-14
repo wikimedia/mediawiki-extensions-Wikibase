@@ -21,17 +21,30 @@ class StoreFactory {
 	 *
 	 * @since 0.1
 	 *
-	 * @param boolean $store
+	 * @param boolean|string $store
+	 * @param string         $reset set to 'reset' to force a fresh instance to be returned.
 	 *
 	 * @return Store
 	 */
-	public static function getStore( $store = false ) {
+	public static function getStore( $store = false, $reset = 'no' ) {
 		global $wgWBStores;
+		static $instances = array();
+
 		$store = $store === false || !array_key_exists( $store, $wgWBStores ) ? Settings::get( 'defaultStore' ) : $store;
 
-		$class = $wgWBStores[$store];
+		if ( $reset !== true && $reset !== 'reset'
+			&& isset( $instances[$store] ) ) {
 
-		return new $class;
+			return $instances[$store];
+		}
+
+		$class = $wgWBStores[$store];
+		$instance = new $class();
+
+		assert( $instance instanceof Store );
+
+		$instances[$store] = $instance;
+		return $instance;
 	}
 
 }

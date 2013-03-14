@@ -56,10 +56,11 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	/**
 	 * @param String|bool $wiki           The name of thw wiki database to use, in a form
 	 *                                    that wfGetLB() understands. Use false to indicate the local wiki.
-	 * @param bool        $cacheType      The cache type ID for the cache to use for
+	 * @param bool|int|null $cacheType      The cache type ID for the cache to use for
 	 *                                    caching entities in memory. Defaults to $wgMainCacheType.
 	 *                                    Set it to false to disable caching, or specify a different
-	 *                                    cache type using the CACHE_XXX constants.
+	 *                                    cache type using the CACHE_XXX constants. Set to false to
+	 *                                    disable caching.
 	 *                                    Note that the $wiki parameter determines the cache compartment,
 	 *                                    so multiple wikis loading entities from the same repository
 	 *                                    will share the cache.

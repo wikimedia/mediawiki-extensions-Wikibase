@@ -360,6 +360,10 @@ class MockRepository implements \Wikibase\SiteLinkLookup, \Wikibase\EntityLookup
 		foreach ( $entityIds as $key => $entityId ) {
 			$rev = $revision;
 
+			if ( is_string( $entityId ) ) {
+				$entityId = EntityId::newFromPrefixedId( $entityId );
+			}
+
 			if ( is_array( $rev ) ) {
 				if ( !array_key_exists( $key, $rev ) ) {
 					throw new \MWException( '$entityId has no revision specified' );

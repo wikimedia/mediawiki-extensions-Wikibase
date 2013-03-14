@@ -29,8 +29,15 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ *
+ * @todo: share code with CachingSqlStore
  * */
 class DirectSqlStore implements ClientStore {
+
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup = null;
 
 	/**
 	 * @var String|bool $repoWiki
@@ -55,15 +62,31 @@ class DirectSqlStore implements ClientStore {
 		return new SiteLinkTable( 'wb_items_per_site', true, $this->repoWiki );
 	}
 
+
 	/**
-	 * @see Store::newEntityLookup
+	 * @see Store::getEntityLookup
 	 *
-	 * @since 0.3
+	 * @since 0.4
 	 *
 	 * @return EntityLookup
 	 */
-	public function newEntityLookup() {
-		return new WikiPageEntityLookup( $this->repoWiki ); // entities are stored in wiki pages
+	public function getEntityLookup() {
+		if ( !$this->entityLookup ) {
+			$this->entityLookup = $this->newEntityLookup();
+		}
+
+		return $this->entityLookup;
+	}
+
+	/**
+	 * Create a new EntityLookup
+	 *
+	 * @return CachingEntityLoader
+	 */
+	protected function newEntityLookup() {
+		//TODO: get config for persistent cache from config
+		$lookup = new WikiPageEntityLookup( $this->repoWiki ); // entities are stored in wiki pages
+		return new CachingEntityLoader( $lookup );
 	}
 
 	/**

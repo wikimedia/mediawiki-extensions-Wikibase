@@ -1,9 +1,15 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Test;
+use Wikibase\CachingEntityLoader;
+use Wikibase\Item;
+use Wikibase\Query;
+use Wikibase\EntityLookup;
+use Wikibase\EntityId;
+use Wikibase\Property;
 
 /**
- * Contains methods for interaction with the entity cache.
+ * Tests for the Wikibase\EntityLoader class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,49 +26,36 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.4
  *
  * @file
  * @ingroup WikibaseLib
+ * @ingroup Test
+ *
+ * @group WikibaseLib
+ * @group WikibaseEntityLookup
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  *
- * @todo: rename to SiteLinkIndex
+ * @todo: turn this into a base class for tests for different EntityLookup tests
  */
-interface SiteLinkCache extends SiteLinkLookup {
+class CachingEntityLoaderTest extends EntityLookupTest {
 
 	/**
-	 * Saves the links for the provided item.
+	 * @see EntityLookupTest::newEntityLoader()
 	 *
-	 * @since 0.1
-	 *
-	 * @param Item $item
-	 * @param string|null $function
-	 *
-	 * @return boolean Success indicator
+	 * @return EntityLookup
 	 */
-	public function saveLinksOfItem( Item $item, $function = null );
+	protected function newEntityLoader( array $entities ) {
+		$mock = new MockRepository();
 
-	/**
-	 * Removes the links for the provided item.
-	 *
-	 * @since 0.1
-	 *
-	 * @param EntityId $itemId
-	 * @param string|null $function
-	 *
-	 * @return boolean Success indicator
-	 */
-	public function deleteLinksOfItem( EntityId $itemId, $function = null );
+		foreach ( $entities as $entity ) {
+			$mock->putEntity( $entity );
+		}
 
-	/**
-	 * Clears all sitelinks from the cache.
-	 *
-	 * @since 0.2
-	 *
-	 * @return boolean Success indicator
-	 */
-	public function clear();
+		return new CachingEntityLoader( $mock );
+	}
 
 }
+

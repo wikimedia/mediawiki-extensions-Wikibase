@@ -45,12 +45,13 @@ class PropertyParserFunction {
 	/**
 	 * @since 0.4
 	 *
-	 * @param \Site $site
-	 * @param EntityId $entityId
-	 * @param WikiPageEntityLookup $entityLookup
+	 * @param \Site                       $site
+	 * @param EntityId                    $entityId
+	 * @param EntityLookup                $entityLookup
+	 * @param ParserErrorMessageFormatter $errorFormatter
 	 */
 	public function __construct( \Site $site, EntityId $entityId,
-		WikiPageEntityLookup $entityLookup, ParserErrorMessageFormatter $errorFormatter ) {
+		EntityLookup $entityLookup, ParserErrorMessageFormatter $errorFormatter ) {
 		$this->site = $site;
 		$this->entityId = $entityId;
 		$this->entityLookup = $entityLookup;
@@ -170,7 +171,7 @@ class PropertyParserFunction {
 			return '';
 		}
 
-		$entityLookup = ClientStoreFactory::getStore()->newEntityLookup();
+		$entityLookup = ClientStoreFactory::getStore()->getEntityLookup();
 
 		$errorFormatter = new ParserErrorMessageFormatter( $parser->getTargetLanguage() );
 

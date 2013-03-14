@@ -22,6 +22,8 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @todo: provide getXXX() methods for getting local pseudo-singletons (shared service objects).
+ *
  * @since 0.1
  *
  * @file
@@ -38,6 +40,8 @@ interface Store {
 	 * @since 0.1
 	 *
 	 * @return SiteLinkCache
+	 *
+	 * @todo: rename to newSiteLinkIndex
 	 */
 	public function newSiteLinkCache();
 
@@ -61,6 +65,8 @@ interface Store {
 	 * @since 0.1
 	 *
 	 * @return TermCache
+	 *
+	 * @todo: rename to newTermIndex
 	 */
 	public function newTermCache();
 
@@ -81,5 +87,14 @@ interface Store {
 	 * @return EntityPerPage
 	 */
 	public function newEntityPerPage();
+
+	/**
+	 * Returns an EntityLookup
+	 *
+	 * @since 0.4
+	 *
+	 * @return EntityLookup
+	 */
+	public function getEntityLookup();
 
 }

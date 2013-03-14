@@ -28,8 +28,15 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ *
+ * @todo: rename to MirrorSqlStore
  */
 class CachingSqlStore implements ClientStore {
+
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup = null;
 
 	/**
 	 * @see Store::newSiteLinkTable
@@ -48,22 +55,36 @@ class CachingSqlStore implements ClientStore {
 	 * @since 0.3
 	 *
 	 * @return EntityCache
+	 *
+	 * @todo: rename to newEntityMirror
 	 */
 	public function newEntityCache() {
 		return new EntityCacheTable();
 	}
 
 	/**
-	 * returns newEntityCache().
+	 * @see Store::getEntityLookup
 	 *
-	 * @see Store::newEntityLookup
+	 * @since 0.4
 	 *
-	 * @since 0.3
-	 *
-	 * @return EntityCache
+	 * @return EntityLookup
 	 */
-	public function newEntityLookup() {
-		return $this->newEntityCache();
+	public function getEntityLookup() {
+		if ( !$this->entityLookup ) {
+			$this->entityLookup = $this->newEntityLookup();
+		}
+
+		return $this->entityLookup;
+	}
+
+	/**
+	 * Create a new EntityLookup
+	 *
+	 * @return CachingEntityLoader
+	 */
+	protected function newEntityLookup() {
+		$mirror = $this->newEntityCache();
+		return new CachingEntityLoader( $mirror );
 	}
 
 	/**

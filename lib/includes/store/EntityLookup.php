@@ -50,17 +50,12 @@ interface EntityLookup {
 	 * The result array contains the prefixed entity ids as keys.
 	 * The values are either an Entity or null, if there is no entity with the associated id.
 	 *
-	 * The revisions can be specified as an array holding an integer element for each
-	 * id in the $entityIds array or false for latest. If all should be latest, false
-	 * can be provided instead of an array.
-	 *
 	 * @since 0.4
 	 *
 	 * @param EntityID[] $entityIds
-	 * @param array|bool $revision
 	 *
 	 * @return Entity|null[]
 	 */
-	public function getEntities( array $entityIds, $revision = false );
+	public function getEntities( array $entityIds );
 
 }
