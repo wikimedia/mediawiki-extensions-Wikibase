@@ -43,6 +43,28 @@ class ItemDiff extends EntityDiff {
 	}
 
 	/**
+	 * Returns a Diff object with the sitelink differences.
+	 *
+	 * @since 0.1
+	 *
+	 * @return Diff
+	 */
+	public function getClaimDiff() {
+		return isset( $this['claim'] ) ? $this['claim'] : new Diff( array(), true );
+	}
+
+	/**
+	 * Returns a Diff object with the sitelink differences.
+	 *
+	 * @since 0.1
+	 *
+	 * @return Diff
+	 */
+	public function getLabelDiff() {
+		return isset( $this['label'] ) ? $this['label'] : new Diff( array(), true );
+	}
+
+	/**
 	 * @see EntityDiff::isEmpty
 	 *
 	 * @since 0.1
