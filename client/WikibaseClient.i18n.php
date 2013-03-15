@@ -53,7 +53,7 @@ $messages['en'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase does not yet support property type for $1 property.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
-	'wikibase-watchlist-show-changes-pref' => 'Show Wikidata edits in your watchlist',
+	'wikibase-watchlist-show-changes-pref' => 'Show Wikidata edits in my watchlist',
 );
 
 /** Message documentation (Message documentation)
