@@ -406,7 +406,10 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onScribuntoExternalLibraries ( $engine, array &$extraLibraries ) {
-		$extraLibraries['mw.wikibase'] = 'Scribunto_LuaWikibaseLibrary';
+		if ( Settings::get( 'allowDataTransclusion' ) === true ) {
+			$extraLibraries['mw.wikibase'] = 'Scribunto_LuaWikibaseLibrary';
+		}
+
 		return true;
 	}
 
@@ -744,6 +747,10 @@ final class ClientHooks {
 	 */
 	public static function onParserFirstCallInit( &$parser ) {
 		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::handle', SFH_NO_HASH );
+
+		if ( Settings::get( 'allowDataTransclusion' ) === true ) {
+			$parser->setFunctionHook( 'property', array( '\Wikibase\PropertyParserFunction', 'render' ) );
+		}
 
 		return true;
 	}
