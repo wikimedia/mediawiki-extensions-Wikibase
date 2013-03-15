@@ -224,11 +224,12 @@ class ClaimDifferenceVisualizer {
 		$html = '';
 
 		foreach ( $snakList as $snak ) {
-
 			if ( $html !== '' ) {
 				$html .= Html::rawElement( 'br', array(), '' );
 			}
-			// @fixme
+
+			$html .= $this->getEntityLabel( $snak->getPropertyId() );
+			$html .= ' / ';
 			$html .= $this->getMainSnakValue( $snak );
 		}
 
@@ -276,8 +277,7 @@ class ClaimDifferenceVisualizer {
 
 			return $diffValueString;
 		} else {
-			// TODO: should be differenced visually (e.g. italic)
-			return $snakType;
+			return Html::element( 'i', array(), $snakType );
 		}
 	}
 
@@ -330,13 +330,10 @@ class ClaimDifferenceVisualizer {
 		// @todo assert that both reference changes refer to the same reference
 		foreach( $referenceChanges as $referenceChange ) {
 			if ( $referenceChange instanceof \Diff\DiffOpAdd ) {
-				$header = $this->getRefHeader( $referenceChange->getNewValue() );
 				$newRef = $this->getRefHtml( $referenceChange->getNewValue() );
 			} else if ( $referenceChange instanceof \Diff\DiffOpRemove ) {
-				$header = $this->getRefHeader( $referenceChange->getOldValue() );
 				$oldRef = $this->getRefHtml( $referenceChange->getOldValue() );
 			} else if ( $referenceChange instanceof \Diff\DiffOpChange ) {
-				$header = $this->getRefHeader( $referenceChange->getNewValue() );
 				$oldRef = $this->getRefHtml( $referenceChange->getOldValue() );
 				$newRef = $this->getRefHtml( $referenceChange->getNewValue() );
 			} else {
@@ -345,7 +342,7 @@ class ClaimDifferenceVisualizer {
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
-				$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-reference' ) . ' / ' . $header,
+				$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-reference' ),
 				$oldRef,
 				$newRef
 			);
