@@ -148,6 +148,8 @@ class MockRepository implements \Wikibase\SiteLinkLookup, \Wikibase\EntityLookup
 	 * @param \Wikibase\Item $item
 	 */
 	protected function registerSiteLinks( Item $item ) {
+		$this->unregisterSiteLinks( $item );
+
 		$numId = $item->getId()->getNumericId();
 
 		/* @var SiteLink $link */
@@ -165,10 +167,12 @@ class MockRepository implements \Wikibase\SiteLinkLookup, \Wikibase\EntityLookup
 	protected function unregisterSiteLinks( Item $item ) {
 		// clean up old sitelinks
 
-		/* @var SiteLink $link */
-		foreach ( $item->getSiteLinks() as $link ) {
-			$key = $link->getSite()->getGlobalId() . ':' . $link->getPage();
-			unset( $this->itemByLink[$key] );
+		$numId = $item->getId()->getNumericId();
+
+		foreach ( $this->itemByLink as $key => $n ) {
+			if ( $n === $numId ) {
+				unset( $this->itemByLink[$key] );
+			}
 		}
 	}
 

@@ -65,12 +65,11 @@ $wgAutoloadClasses['Wikibase\InterwikiSorter']      = $dir . 'includes/Interwiki
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\NamespaceChecker']		= $dir . 'includes/NamespaceChecker.php';
+$wgAutoloadClasses['Wikibase\PageUpdater'] 	= $dir . 'includes/PageUpdater.php';
+$wgAutoloadClasses['Wikibase\WikiPageUpdater'] 	= $dir . 'includes/WikiPageUpdater.php';
 
 // includes/api
 $wgAutoloadClasses['Wikibase\ApiClientInfo']		= $dir . 'includes/api/ApiClientInfo.php';
-
-// includes/handlers
-$wgAutoloadClasses['Wikibase\ClientChangeHandler']  = $dir . 'includes/ClientChangeHandler.php';
 
 // includes/modules
 $wgAutoloadClasses['Wikibase\SiteModule']  = $dir . 'includes/modules/SiteModule.php';
@@ -96,6 +95,7 @@ $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/En
 
 // test
 $wgAutoloadClasses['Wikibase\Test\MockRepository'] 		= $dir . 'tests/phpunit/MockRepository.php';
+$wgAutoloadClasses['Wikibase\Test\MockPageUpdater'] 	= $dir . 'tests/phpunit/MockPageUpdater.php';
 
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
@@ -116,7 +116,6 @@ $wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay
 $wgHooks['SpecialPageBeforeExecute'][]		= '\Wikibase\ClientHooks::onSpecialPageBeforeExecute';
 
 // extension hooks
-$wgHooks['WikibasePollHandle'][]                        = '\Wikibase\ClientHooks::onWikibasePollHandle';
 $wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
 $wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
 
