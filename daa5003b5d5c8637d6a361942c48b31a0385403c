@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqO9usJY",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T10:49:34Z",
+      "side": 1,
+      "message": "newEntityLookup() is gone, use getEntityLookup() instead.",
+      "revId": "daa5003b5d5c8637d6a361942c48b31a0385403c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
