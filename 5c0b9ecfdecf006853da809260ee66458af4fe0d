@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqI9SlNw",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-15T10:45:31Z",
+      "side": 1,
+      "message": "this does not work and means omitting non-wikidata edits.\n\nthe query becomes:\n\nSELECT rc_id,rc_timestamp,rc_cur_time,rc_user,rc_user_text,rc_namespace,rc_title,rc_comment,rc_minor,rc_bot,rc_new,rc_cur_id,rc_this_oldid,rc_last_oldid,rc_type,rc_patrolled,rc_ip,rc_old_len,rc_new_len,rc_deleted,rc_logid,rc_log_type,rc_log_action,rc_params,wl_notificationtimestamp,page_latest,ts_tags FROM `recentchanges` INNER JOIN `watchlist` ON (wl_user \u003d \u00272\u0027 AND (wl_namespace\u003drc_namespace) AND (wl_title\u003drc_title)) LEFT JOIN `page` ON ((rc_cur_id\u003dpage_id)) LEFT JOIN `tag_summary` ON ((ts_rc_id\u003drc_id)) WHERE (rc_timestamp \u003e \u002720130312104301\u0027) AND (rc_this_oldid \u003d \u0027page_latest\u0027 OR rc_type IN (\u00273\u0027,\u00275\u0027) ) ORDER BY rc_timestamp DESC\n\nputting quotes around \u0027page_latest\u0027.  probably something that should be fixed in core.  Until then, we need to keep it \u0027rc_this_oldid\u003dpage_latest\u0027",
+      "revId": "5c0b9ecfdecf006853da809260ee66458af4fe0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
