@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqCX5J.c",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-15T17:44:07Z",
+      "side": 1,
+      "message": "While in practice it doesn\u0027t often make a difference, it would make more sense here to return array( null ) (which returns one nil value to Lua) rather than null (which returns zero values to Lua).",
+      "revId": "9031963dc3f2e0ecba147c21ad0a8c745da26e2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
