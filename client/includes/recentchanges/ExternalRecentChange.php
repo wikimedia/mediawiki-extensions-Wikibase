@@ -45,6 +45,8 @@ class ExternalRecentChange {
 			$userText = $metadata['rc_user_text'];
 		}
 
+		$time = isset( $metadata['time'] ) ? $metadata['time'] : wfTimestamp( TS_MW );
+
 		$this->mAttribs = array(
 			'rc_namespace' => $title->getNamespace(),
 			'rc_title' => $title->getDBkey(),
@@ -61,8 +63,8 @@ class ExternalRecentChange {
 			'rc_params' => serialize( $attribs ),
 			'rc_cur_id' => $title->getArticleID(),
 			'rc_comment' => '',
-			'rc_timestamp' => $metadata['time'],
-			'rc_cur_time' => $metadata['time'],
+			'rc_timestamp' => $time,
+			'rc_cur_time' => $time,
 			'rc_log_action' => ''
 		);
 	}

@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 use Wikibase\ChangeHandler;
 use Wikibase\Item;
+use Wikibase\Property;
 use Wikibase\EntityChange;
 use Wikibase\EntityId;
 use Wikibase\EntityDiff;
@@ -33,10 +34,25 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	/** @var ChangeHandler $handler */
 	protected $handler;
 
+	/** @var MockPageUpdater $updater */
+	protected $updater;
+
+	/** @var Site $site */
+	protected $site;
+
 	public function setUp() {
 		parent::setUp();
 
-		$this->handler = new ChangeHandler( self::getMockRepo(), 'enwiki' );
+		$this->site = \Sites::singleton()->getSite( 'enwiki' );
+
+		$this->updater = new MockPageUpdater();
+		$this->handler = new ChangeHandler( $this->updater,
+					self::getMockRepo(),
+					self::getMockRepo(),
+					$this->site );
+
+		$this->handler->setNamespaces( array( NS_MAIN ) );
+		$this->handler->setCheckPageExistence( false );
 	}
 
 	protected static function getMockRepo() {
@@ -131,7 +147,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 	/*
 	public static function makeSiteLink( $siteId, $page ) {
-		$site = \Sites::newSite( $siteId );
+		$site = \Sites::singleton()->getSite( $siteId );
 
 		$link = new SiteLink( $site, $page );
 
@@ -672,7 +688,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$this->assertTrue( ChangeHandler::singleton() === ChangeHandler::singleton() );
 	}
 
-	public function changeProvider() {
+	public static function provideHandleChanges() {
 		$empty = Item::newEmpty();
 		$empty->setId( new \Wikibase\EntityId( Item::ENTITY_TYPE, 0 ) );
 
@@ -691,7 +707,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider changeProvider
+	 * @dataProvider provideHandleChanges
 	 */
 	public function testHandleChanges() {
 		$changes = func_get_args();
@@ -700,36 +716,563 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 		$wgHooksOriginal = $wgHooks;
 
-		global $changeHandlerHookCallCount, $changeHandlerBeforeHookCallCount, $changeHandlerAfterHookCallCount;
-		$changeHandlerHookCallCount = 0;
-		$changeHandlerBeforeHookCallCount = 0;
-		$changeHandlerAfterHookCallCount = 0;
+		global $handleChangeCallCount, $handleChangesCallCount;
+		$handleChangeCallCount = 0;
+		$handleChangesCallCount = 0;
 
-		$wgHooks['WikibasePollHandle'] = array( function( Change $change ) {
-			global $changeHandlerHookCallCount;
-			$changeHandlerHookCallCount++;
+		$wgHooks['WikibaseHandleChange'] = array( function( Change $change ) {
+			global $handleChangeCallCount;
+			$handleChangeCallCount++;
 			return true;
 		} );
 
-		$wgHooks['WikibasePollBeforeHandle'] = array( function( array $changes ) {
-			global $changeHandlerBeforeHookCallCount;
-			$changeHandlerBeforeHookCallCount++;
-			return true;
-		} );
-
-		$wgHooks['WikibasePollAfterHandle'] = array( function( array $changes ) {
-			global $changeHandlerAfterHookCallCount;
-			$changeHandlerAfterHookCallCount++;
+		$wgHooks['WikibaseHandleChanges'] = array( function( array $changes ) {
+			global $handleChangesCallCount;
+			$handleChangesCallCount++;
 			return true;
 		} );
 
 		ChangeHandler::singleton()->handleChanges( $changes );
 
-		$this->assertEquals( count( $changes ), $changeHandlerHookCallCount );
-		$this->assertEquals( 1, $changeHandlerBeforeHookCallCount );
-		$this->assertEquals( 1, $changeHandlerAfterHookCallCount );
+		$this->assertEquals( count( $changes ), $handleChangeCallCount );
+		$this->assertEquals( 1, $handleChangesCallCount );
 
 		$wgHooks = $wgHooksOriginal;
 	}
 
+	// ==========================================================================================
+
+
+	protected static function getTestChanges() {
+		static $changes = array();
+
+		if ( empty( $changes ) ) {
+			$empty = Property::newEmpty();
+			$empty->setId( new \Wikibase\EntityId( Property::ENTITY_TYPE, 100 ) );
+
+			$changes['property-creation'] = EntityChange::newFromUpdate( EntityChange::ADD, null, $empty );
+			$changes['property-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $empty, null );
+
+			// -----
+			$old = Property::newEmpty();
+			$old->setId( new \Wikibase\EntityId( Property::ENTITY_TYPE, 100 ) );
+			$new = $old->copy();
+
+			$new->setLabel( "de", "dummy" );
+			$changes['property-set-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			// -----
+			$old = Item::newEmpty();
+			$old->setId( new \Wikibase\EntityId( Item::ENTITY_TYPE, 100 ) );
+			$new = $old->copy();
+
+			$changes['item-creation'] = EntityChange::newFromUpdate( EntityChange::ADD, null, $new );
+			$changes['item-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $old, null );
+
+			// -----
+			$dewiki = \Sites::singleton()->getSite( 'dewiki' );
+			$link = new \Wikibase\SiteLink( $dewiki, "Dummy" );
+			$new->addSiteLink( $link, 'add' );
+			$changes['set-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$enwiki = \Sites::singleton()->getSite( 'enwiki' );
+			$link = new \Wikibase\SiteLink( $enwiki, "Emmy" );
+			$new->addSiteLink( $link, 'add' );
+			$changes['set-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			// -----
+			$link = new \Wikibase\SiteLink( $dewiki, "Dummy2" );
+			$new->addSiteLink( $link, 'set' );
+			$changes['change-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$link = new \Wikibase\SiteLink( $enwiki, "Emmy2" );
+			$new->addSiteLink( $link, 'set' );
+			$changes['change-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$new->removeSiteLink( 'dewiki', false );
+			$changes['remove-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			// -----
+			$new->setLabel( "de", "dummy" );
+			$changes['set-de-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$new->setLabel( "en", "emmy" );
+			$changes['set-en-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$new->setAliases( "en", array( "foo", "bar" ) );
+			$changes['set-en-aliases'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			// -----
+			$propertyId = new EntityId( \Wikibase\Property::ENTITY_TYPE, 23 );
+			$snak = new \Wikibase\PropertyNoValueSnak( $propertyId );
+			$claim = new \Wikibase\Claim( $snak );
+
+			$claims = new \Wikibase\Claims( array( $claim ) );
+			$new->setClaims( $claims );
+			$changes['add-claim'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$claims = new \Wikibase\Claims();
+			$new->setClaims( $claims );
+			$changes['remove-claim'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			// -----
+			$changes['item-deletion-linked'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $old, null );
+
+			// -----
+			$new->removeSiteLink( 'enwiki', false );
+			$changes['remove-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+		}
+
+		$rev = 1000;
+
+		/* @var EntityChange $change */
+		foreach ( $changes as $key => $change ) {
+			$change->setComment( "$key:1|" );
+
+			$meta = array(
+				'comment' => '',
+				'page_id' => 23,
+				'bot' => false,
+				'rev_id' => $rev,
+				'parent_id' => $rev -1,
+				'user_text' => 'Some User',
+				'time' => wfTimestamp( TS_MW ),
+			);
+
+			$change->setMetadata( $meta );
+			$rev += 1;
+		}
+
+		return $changes;
+	}
+
+	public static function provideGetActions() {
+		$changes = self::getTestChanges();
+
+		$none = 0;
+		$any = 0xFFFF;
+		$all = ChangeHandler::HISTORY_ENTRY_ACTION
+			| ChangeHandler::LINKS_UPDATE_ACTION
+			| ChangeHandler::PARSER_PURGE_ACTION
+			| ChangeHandler::RC_ENTRY_ACTION
+			| ChangeHandler::WEB_PURGE_ACTION;
+
+		return array(
+			array( // #0
+				$changes['property-creation'], $none, $any
+			),
+			array( // #1
+				$changes['property-deletion'], $none, $any
+			),
+			array( // #2
+				$changes['property-set-label'], $none, $any
+			),
+
+			array( // #3
+				$changes['item-creation'], $none, $any
+			),
+			array( // #4
+				$changes['item-deletion'], $none, $any
+			),
+			array( // #5
+				$changes['item-deletion-linked'], $all, $none
+			),
+
+			array( // #6
+				$changes['set-de-label'], $all, $none
+			),
+			array( // #7
+				$changes['set-en-label'], $all, $none // may change
+			),
+			array( // #8
+				$changes['set-en-aliases'], $none, $any
+			),
+
+			array( // #9
+				$changes['add-claim'], $all, $none
+			),
+			array( // #10
+				$changes['remove-claim'], $all, $none
+			),
+
+			array( // #11
+				$changes['set-dewiki-sitelink'], $all, $none // may change
+			),
+			array( // #12
+				$changes['set-enwiki-sitelink'], $all, $none // may change
+			),
+
+			array( // #13
+				$changes['change-dewiki-sitelink'], $all, $none // may change
+			),
+			array( // #14
+				$changes['change-enwiki-sitelink'], $all, $none // may change
+			),
+
+			array( // #15
+				$changes['remove-dewiki-sitelink'], $all, $none // may change
+			),
+			array( // #16
+				$changes['remove-enwiki-sitelink'], $all, $none // may change
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetActions
+	 */
+	public function testGetActions( Change $change, $expected, $unexpected ) {
+		$actions = $this->handler->getActions( $change );
+
+		$this->assertEquals( $expected, ( $actions & $expected ), "expected actions" );
+		$this->assertEquals( 0, ( $actions & $unexpected ), "unexpected actions" );
+	}
+
+	public static function provideGetEditComment() {
+		$changes = self::getTestChanges();
+
+		$dummy = \Title::newFromText( "Dummy" );
+
+		return array(
+			array( // #0
+				$changes['item-deletion-linked'],
+				$dummy,
+				array( 'q100' => array( 'Emmy' ) ),
+				array( 'message' => 'wikibase-comment-remove' )
+			),
+			array( // #1
+				$changes['set-de-label'],
+				$dummy,
+				array( 'q100' => array( 'Emmy' ) ),
+				'set-de-label:1|'
+			),
+			array( // #2
+				$changes['add-claim'],
+				$dummy,
+				array( 'q100' => array( 'Emmy' ) ),
+				'add-claim:1|'
+			),
+			array( // #3
+				$changes['remove-claim'],
+				$dummy,
+				array( 'q100' => array( 'Emmy' ) ),
+				'remove-claim:1|'
+			),
+			array( // #4
+				$changes['set-dewiki-sitelink'],
+				$dummy,
+				array( 'q100' => array( 'Emmy' ) ),
+				array(
+					'sitelink' => array(
+						'newlink' => array( 'lang' => 'de', 'page' => 'Dummy' ),
+					),
+					'message' => 'wikibase-comment-sitelink-add'
+				)
+			),
+			array( // #5
+				$changes['change-dewiki-sitelink'],
+				$dummy,
+				array( 'q100' => array( 'Emmy' ) ),
+				array(
+					'sitelink' => array(
+						'oldlink' => array( 'lang' => 'de', 'page' => 'Dummy' ),
+						'newlink' => array( 'lang' => 'de', 'page' => 'Dummy2' ),
+					),
+					'message' => 'wikibase-comment-sitelink-change'
+				)
+			),
+			array( // #6
+				$changes['change-enwiki-sitelink'],
+				$dummy,
+				array( 'q100' => array( 'Emmy' ) ),
+				array(
+					'sitelink' => array(
+						'oldlink' => array( 'lang' => 'en', 'page' => 'Emmy' ),
+						'newlink' => array( 'lang' => 'en', 'page' => 'Emmy2' ),
+					),
+					'message' => 'wikibase-comment-sitelink-change'
+				)
+			),
+			array( // #7
+				$changes['remove-dewiki-sitelink'],
+				$dummy,
+				array( 'q100' => array( 'Emmy2' ) ),
+				array(
+					'sitelink' => array(
+						'oldlink' => array( 'lang' => 'de', 'page' => 'Dummy2' ),
+					),
+					'message' => 'wikibase-comment-sitelink-remove'
+				)
+			),
+			array( // #8
+				$changes['remove-enwiki-sitelink'],
+				$dummy,
+				array( 'q100' => array( 'Emmy2' ) ),
+				array(
+					'message' => 'wikibase-comment-unlink'
+				)
+			),
+			array( // #9
+				$changes['remove-enwiki-sitelink'],
+				$dummy,
+				array( 'q100' => array() ),
+				array(
+					'message' => 'wikibase-comment-unlink'
+				)
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetEditComment
+	 */
+	public function testGetEditComment( Change $change, \Title $title, $entities, $expected ) {
+		$this->updateMockRepo( $entities );
+
+		$comment = $this->handler->getEditComment( $change, $title );
+
+		if ( is_array( $comment ) && is_array( $expected ) ) {
+			$this->assertArrayEquals( $expected, $comment, false, true );
+		} else {
+			$this->assertEquals( $expected, $comment );
+		}
+	}
+
+	public static function provideGetPagesToUpdate() {
+		$changes = self::getTestChanges();
+
+		$id = new \Wikibase\EntityId( Item::ENTITY_TYPE, 100 );
+
+		return array(
+			array( // #0
+				$changes['property-creation'],
+				array( 'q100' => array() ),
+				array()
+			),
+			array( // #1
+				$changes['property-deletion'],
+				array( 'q100' => array() ),
+				array()
+			),
+			array( // #2
+				$changes['property-set-label'],
+				array( 'q100' => array() ),
+				array()
+			),
+
+			array( // #3
+				$changes['item-creation'],
+				array( 'q100' => array() ),
+				array()
+			),
+			array( // #4
+				$changes['item-deletion'],
+				array( 'q100' => array() ),
+				array()
+			),
+			array( // #5
+				$changes['item-deletion-linked'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				array( 'Emmy2' )
+			),
+
+			array( // #6
+				$changes['set-de-label'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				array( 'Emmy2' )
+			),
+			array( // #7
+				$changes['set-de-label'],
+				array( 'q100' => array( 'enwiki' => 'User:Emmy2' ) ), // bad namespace
+				array( )
+			),
+			array( // #8
+				$changes['set-en-label'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				array( 'Emmy2' )
+			),
+			array( // #9
+				$changes['set-en-aliases'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				array( 'Emmy2' ), // or nothing, may change
+				array(), // because no actions are to be taken, the effective list is empty.
+			),
+
+			array( // #10
+				$changes['add-claim'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				array( 'Emmy2' )
+			),
+			array( // #11
+				$changes['remove-claim'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				array( 'Emmy2' )
+			),
+
+			array( // #12
+				$changes['set-dewiki-sitelink'],
+				array( 'q100' => array() ),
+				array( ) // not yet linked
+			),
+			array( // #13
+				$changes['set-enwiki-sitelink'],
+				array( 'q100' => array( 'enwiki' => 'Emmy' ) ),
+				array( 'Emmy' )
+			),
+
+			array( // #14
+				$changes['change-dewiki-sitelink'],
+				array( 'q100' => array( 'enwiki' => 'Emmy' ) ),
+				array( 'Emmy' )
+			),
+			array( // #15
+				$changes['change-enwiki-sitelink'],
+				array( 'q100' => array( 'enwiki' => 'Emmy' ) ),
+				array( 'Emmy', 'Emmy2' )
+			),
+
+			array( // #16
+				$changes['remove-dewiki-sitelink'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				array( 'Emmy2' )
+			),
+			array( // #17
+				$changes['remove-enwiki-sitelink'],
+				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				array( 'Emmy2' )
+			),
+		);
+	}
+
+	protected function updateMockRepo( $entities ) {
+		$repo = self::getMockRepo();
+
+		foreach ( $entities as $k => $v ) {
+			if ( !( $v instanceof \Wikibase\Entity ) ) {
+				$entity = Item::newEmpty();
+				$entity->setId( EntityId::newFromPrefixedId( $k ) );
+
+				foreach ( $v as $site => $page ) {
+					if ( is_int( $site ) ) {
+						$site = $this->site;
+					} else {
+						$site = \Sites::singleton()->getSite( $site );
+					}
+
+					$link = new \Wikibase\SiteLink( $site, $page );
+					$entity->addSiteLink( $link, "add" );
+				}
+			} else {
+				$entity = $v;
+			}
+
+			$repo->putEntity( $entity );
+		}
+	}
+
+	protected static function titles2strings( $titles ) {
+		return array_map(
+			function ( $title ) {
+				return $title->getPrefixedDBKey();
+			},
+			$titles
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetPagesToUpdate
+	 */
+	public function testGetPagesToUpdate( Change $change, $entities, array $expected ) {
+		$this->updateMockRepo( $entities );
+
+		$toUpdate = $this->handler->getPagesToUpdate( $change );
+		$toUpdate = self::titles2strings( $toUpdate );
+
+		$this->assertArrayEquals( $expected, $toUpdate );
+	}
+
+	public static function provideUpdatePages() {
+		$rc = \Wikibase\Settings::get( 'injectRecentChanges' );
+
+		$pto = self::provideGetPagesToUpdate();
+
+		$cases = array();
+
+		foreach ( $pto as $case ) {
+			// $case[2] is the list of pages to update,
+			// $case[3] may be a list filtered according to the actions that apply.
+			$updated = isset( $case[3] ) ? $case[3] : $case[2];
+
+			$cases[] = array(
+				$case[0], // $change
+				$case[1], // $entities
+				array(    // $expected // todo: depend on getAction()
+					'purgeParserCache' => $updated,
+					'purgeWebCache' => $updated,
+					'scheduleRefreshLinks' => $updated,
+					'injectRCRecord' => ( $rc ? $updated : array() ),
+				)
+			);
+		}
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider provideUpdatePages
+	 */
+	public function testUpdatePages( Change $change, $entities, array $expected ) {
+		$this->updateMockRepo( $entities );
+
+		$toUpdate = $this->handler->getPagesToUpdate( $change );
+		$actions = $this->handler->getActions( $change );
+
+		$this->handler->updatePages( $change, $actions, $toUpdate );
+		$updates = $this->updater->getUpdates();
+
+		foreach ( $expected as $k => $exp ) {
+			$up = array_keys( $updates[$k] );
+			$this->assertArrayEquals( $exp, $up );
+		}
+
+		if ( isset( $updates['injectRCRecord'] ) ) {
+			foreach ( $updates['injectRCRecord'] as $page => $rcAttr ) {
+				$this->assertType( 'array', $rcAttr );
+				$this->assertArrayHasKey( 'wikibase-repo-change', $rcAttr );
+				$this->assertType( 'array', $rcAttr['wikibase-repo-change'] );
+				$this->assertArrayHasKey( 'entity_type', $rcAttr['wikibase-repo-change'] );
+			}
+		}
+	}
+
+	public static function provideHandleChange() {
+		return self::provideUpdatePages();
+	}
+
+	/**
+	 * @dataProvider provideHandleChange
+	 */
+	public function testHandleChange( Change $change, $entities, array $expected ) {
+		$this->updateMockRepo( $entities );
+
+		$this->handler->handleChange( $change );
+		$updates = $this->updater->getUpdates();
+
+		foreach ( $expected as $k => $exp ) {
+			$up = array_keys( $updates[$k] );
+			$this->assertArrayEquals( $exp, $up );
+		}
+	}
 }
