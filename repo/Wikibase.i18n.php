@@ -850,7 +850,9 @@ Parameters:
 
 For information about "Iri" and related terms, see [[:w:Internationalized resource identifier|Internationalized resource identifier]] and [[:w:URI scheme|URI scheme]].',
 	'wikibase-listdatatypes-commonsmedia-head' => '{{Wikibase-datatype-head|Commons media|commonsMedia}}',
-	'wikibase-listdatatypes-commonsmedia-body' => '{{Wikibase-datatype-body|Commons media}}',
+	'wikibase-listdatatypes-commonsmedia-body' => '{{Wikibase-datatype-body|Commons media}}
+
+For information about "Iri" and related terms, see [[:w:Internationalized resource identifier|Internationalized resource identifier]] and [[:w:URI scheme|URI scheme]].',
 	'wikibase-listdatatypes-geo-coordinate-head' => '{{Wikibase-datatype-head|Geo coordinate|geo-coordinate}}',
 	'wikibase-listdatatypes-geo-coordinate-body' => '{{Wikibase-datatype-body|Geo coordinate}}',
 	'wikibase-listdatatypes-quantity-head' => '{{Wikibase-datatype-head|Quantity}}
