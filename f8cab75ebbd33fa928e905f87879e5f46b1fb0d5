@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqE.MfC8",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T12:12:12Z",
+      "side": 1,
+      "message": "This is very specific arcane knowledge. We should have a better way to figure out which sections exist.",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqA.WhD0",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T12:12:12Z",
+      "side": 1,
+      "message": "What\u0027s a \"token\" in this context?",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqK.nWKk",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T12:12:12Z",
+      "side": 1,
+      "message": "Again, magic arcane knowledge. Very brittle.",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqE.1XM0",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T12:12:12Z",
+      "side": 1,
+      "message": "this method is not abstract. \"generic\"?",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqO-PkFU",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T12:12:12Z",
+      "side": 1,
+      "message": "Why? All entities can have claims. At least in theory...",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqG8M4KY",
+        "filename": "repo/includes/PropertyView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T12:12:12Z",
+      "side": 1,
+      "message": "I suppose \"token\" here means a section ID?",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqC8G6IY",
+        "filename": "repo/includes/PropertyView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T12:12:12Z",
+      "side": 1,
+      "message": "Why is this an EntityContent, not a PropertyContent?",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
