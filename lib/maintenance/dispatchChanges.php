@@ -675,7 +675,7 @@ class DispatchChanges extends \Maintenance {
 	 * @return bool
 	 */
 	protected function isRelevantChange( Change $change, $siteID ) {
-		if ( $change instanceof ItemChange ) {
+		if ( $change instanceof ItemChange && !$change->isEmpty() ) {
 			$siteLinkDiff = $change->getSiteLinkDiff();
 
 			if ( isset( $siteLinkDiff[ $siteID ] ) ) {
@@ -734,7 +734,7 @@ class DispatchChanges extends \Maintenance {
 				$itemId = $change->getEntityId()->getNumericId();
 
 				// The change is relevant if it alters any sitelinks refering to $siteID,
-				// of the item is currently links to $siteID.
+				// or the item currently links to $siteID.
 				if ( isset( $linkedItems[$itemId] )
 					|| $this->isRelevantChange( $change, $siteID ) !== null ) {
 					$keep[] = $change;

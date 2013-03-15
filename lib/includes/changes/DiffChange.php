@@ -29,6 +29,7 @@ use Diff\Diff;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class DiffChange extends ChangeRow {
 
@@ -36,15 +37,18 @@ class DiffChange extends ChangeRow {
 	 * @since 0.1
 	 *
 	 * @return IDiff
-	 * @throws \MWException
 	 */
 	public function getDiff() {
 		$info = $this->getField( 'info' );
 
 		if ( !array_key_exists( 'diff', $info ) ) {
-			throw new \MWException( 'Cannot get the diff when it has not been set yet.' );
+			// This shouldn't happen, but we should be robust against corrupt, incomplete
+			// obsolete instances in the database, etc.
+			trigger_error( 'Cannot get the diff when it has not been set yet.', E_USER_WARNING );
+			return new Diff();
+		} else {
+			return $info['diff'];
 		}
-		return $info['diff'];
 	}
 
 	/**
