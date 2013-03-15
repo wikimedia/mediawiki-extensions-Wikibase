@@ -2,6 +2,91 @@
   "comments": [
     {
       "key": {
+        "uuid": "DqNJu8y8",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-15T16:26:22Z",
+      "side": 1,
+      "message": "looks like this class is now doing multiple things",
+      "revId": "f715470cd455993d90727c19d12bf685108fc09a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqHJ-590",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-15T16:26:22Z",
+      "side": 1,
+      "message": "IDiff is deprecated, use Diff",
+      "revId": "f715470cd455993d90727c19d12bf685108fc09a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqBKEa9U",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-15T16:26:22Z",
+      "side": 1,
+      "message": "this method is scary",
+      "revId": "f715470cd455993d90727c19d12bf685108fc09a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqLJ1f-k",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-15T16:26:22Z",
+      "side": 1,
+      "message": "Why not just have the caller call $this-\u003egetDiff()-\u003egetClaimDiff() ?",
+      "revId": "f715470cd455993d90727c19d12bf685108fc09a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqFJjw0U",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-15T16:26:22Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "f715470cd455993d90727c19d12bf685108fc09a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqNIlkw0",
         "filename": "lib/includes/item/ItemDiff.php",
         "patchSetId": 1
