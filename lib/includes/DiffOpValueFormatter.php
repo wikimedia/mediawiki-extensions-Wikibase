@@ -44,16 +44,16 @@ class DiffOpValueFormatter {
 	/**
 	 * @since 0.4
 	 *
-	 * @var string
+	 * @var string|string[]
 	 */
-	protected $oldValue;
+	protected $oldValues;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @var string
+	 * @var string|string[]
 	 */
-	protected $newValue;
+	protected $newValues;
 
 	/**
 	 * Constructor.
@@ -61,13 +61,13 @@ class DiffOpValueFormatter {
 	 * @since 0.4
 	 *
 	 * @param string $name
-	 * @param string $oldValue
-	 * @param string $newValue
+	 * @param string|string[] $oldValues
+	 * @param string|string[] $newValues
 	 */
-	public function __construct( $name, $oldValue, $newValue ) {
+	public function __construct( $name, $oldValues, $newValues ) {
 		$this->name = $name;
-		$this->oldValue = $oldValue;
-		$this->newValue = $newValue;
+		$this->oldValues = $oldValues;
+		$this->newValues = $newValues;
 	}
 
 	/**
@@ -78,8 +78,8 @@ class DiffOpValueFormatter {
 	 * @return string
 	 */
 	protected function generateHeaderHtml() {
-		$oldHeader = is_string( $this->oldValue ) ? $this->name : '';
-		$newHeader = is_string( $this->newValue ) ? $this->name : '';
+		$oldHeader = is_array( $this->oldValues ) || is_string( $this->oldValues ) ? $this->name : '';
+		$newHeader = is_array( $this->newValues ) || is_string( $this->newValues ) ? $this->name : '';
 
 		$html = Html::openElement( 'tr' );
 		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $oldHeader );
@@ -101,13 +101,13 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
 			Html::rawElement( 'div', array(),
-				Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->oldValue ) ) );
+				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+					$this->generateSafeValueHtml( $this->oldValues ) ) ) );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
 			Html::rawElement( 'div', array(),
-				Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->newValue ) ) );
+				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+					$this->generateSafeValueHtml( $this->newValues ) ) ) );
 		$html .= Html::closeElement( 'tr' );
 		$html .= Html::closeElement( 'tr' );
 
@@ -127,8 +127,8 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
 			Html::rawElement( 'div', array(),
-				Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->newValue )
+				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+					$this->generateSafeValueHtml( $this->newValues ) )
 			)
 		);
 		$html .= Html::closeElement( 'tr' );
@@ -148,10 +148,34 @@ class DiffOpValueFormatter {
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
 			Html::rawElement( 'div', array(),
-				Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->oldValue ) ) );
+				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
+					$this->generateSafeValueHtml( $this->oldValues ) ) ) );
 		$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
 		$html .= Html::closeElement( 'tr' );
+
+		return $html;
+	}
+
+	/**
+	 * Generates safe HTML from a given value or array of values
+	 *
+	 * @since 0.4
+	 *
+	 * @param string|string[] $values
+	 *
+	 * @return string
+	 */
+	protected function generateSafeValueHtml( $values ) {
+		if ( is_string( $values ) ) {
+			return Html::Element( 'span', array(), $values );
+		}
+		$html = '';
+		foreach ( $values as $value ) {
+			if ( $html !== '' ) {
+				$html .= Html::rawElement( 'br', array(), '' );
+			}
+			$html .= Html::Element( 'span', array(), $value );
+		}
 
 		return $html;
 	}
@@ -170,11 +194,12 @@ class DiffOpValueFormatter {
 			$html .= $this->generateHeaderHtml();
 		}
 
-		if ( is_string( $this->oldValue ) && is_string( $this->newValue ) ) {
+		if ( is_array( $this->oldValues ) && is_array( $this->newValues )
+			|| is_string( $this->oldValues ) && is_string( $this->newValues ) ) {
 			$html .= $this->generateChangeOpHtml();
-		} else if ( is_string( $this->newValue ) ) {
+		} else if ( is_array( $this->newValues ) || is_string( $this->newValues ) ) {
 			$html .= $this->generateAddOpHtml();
-		} else if ( is_string( $this->oldValue ) ) {
+		} else if ( is_array( $this->oldValues ) || is_string( $this->oldValues ) ) {
 			$html .= $this->generateRemoveOpHtml();
 		}
 
