@@ -32,33 +32,19 @@ final class LibHooks {
 			'changes/DiffChange',
 			'changes/EntityChange',
 
-			'claim/ClaimAggregate',
 			'claim/ClaimDifference',
 			'claim/ClaimDifferenceVisualizer',
 			'claim/ClaimDiffer',
-			'claim/ClaimListAccess',
-			'claim/Claims',
-			'claim/Claim',
 
 			'entity/EntityDiff',
 			'entity/EntityFactory',
-			'entity/EntityId',
 
 			'hasharray/HashArrayWithoutDuplicates',
 			'hasharray/HashArrayWithDuplicates',
 
 			'item/ItemDiff',
-			'item/ItemMultilangTexts',
-			'item/ItemNewEmpty',
-			'item/ItemNewFromArray',
-			'item/Item',
 
 			'parsers/EntityIdParser',
-
-			'property/Property',
-
-			'reference/ReferenceList',
-			'reference/Reference',
 
 			'serializers/ByPropertyListSerializer',
 			'serializers/ByPropertyListUnserializer',
@@ -71,12 +57,6 @@ final class LibHooks {
 			'serializers/SerializerFactory',
 			'serializers/Serializer',
 			'serializers/SnakSerializer',
-
-			'snak/PropertyValueSnak',
-			'snak/SnakList',
-			'snak/Snak',
-
-			'statement/Statement',
 
 			'store/SiteLinkLookup',
 			'store/SiteLinkTable',
@@ -94,7 +74,7 @@ final class LibHooks {
 			'MapValueHasher',
 			'MockRepository',
 			'SettingsArray',
-			'SiteLink',
+
 			'TermsToClaimsTranslator',
 			'Term',
 			'Utils',
