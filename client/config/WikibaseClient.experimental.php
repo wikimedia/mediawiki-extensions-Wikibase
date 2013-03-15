@@ -52,9 +52,3 @@ $wgHooks['BeforePageDisplay'][] = function( OutputPage &$out, Skin &$skin ) {
 
 	return true;
 };
-
-$wgHooks['ParserFirstCallInit'][] = function( \Parser &$parser ) {
-	$parser->setFunctionHook( 'property', array( '\Wikibase\PropertyParserFunction', 'render' ) );
-
-	return true;
-};
