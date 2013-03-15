@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues;
+
 use InvalidArgumentException;
 
 /**
@@ -267,7 +268,7 @@ class GeoCoordinateValue extends DataValueObject {
 	 *
 	 * @param array $data
 	 *
-	 * @return DataValue
+	 * @return GeoCoordinateValue
 	 */
 	public static function newFromArray( array $data ) {
 		return new static( $data['latitude'], $data['longitude'], $data['altitude'], $data['globe'] );

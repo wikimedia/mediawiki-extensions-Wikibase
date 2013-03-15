@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues;
+
 use InvalidArgumentException;
 
 /**
@@ -281,7 +282,7 @@ class IriValue extends DataValueObject {
 	 *
 	 * @param array $data
 	 *
-	 * @return DataValue
+	 * @return IriValue
 	 */
 	public static function newFromArray( array $data ) {
 		return new static( $data['scheme'], $data['hierarchicalpart'], $data['query'], $data['fragment'] );

@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues;
+
 use InvalidArgumentException;
 
 /**
@@ -213,7 +214,7 @@ class QuantityValue extends DataValueObject {
 	 *
 	 * @param array $data
 	 *
-	 * @return DataValue
+	 * @return QuantityValue
 	 */
 	public static function newFromArray( array $data ) {
 		return new static( $data['value'], $data['unit'], $data['accuracy'] );

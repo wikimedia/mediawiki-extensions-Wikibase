@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues;
+
 use InvalidArgumentException;
 
 /**
@@ -178,7 +179,7 @@ class MonolingualTextValue extends DataValueObject {
 	 *
 	 * @param array $data
 	 *
-	 * @return DataValue
+	 * @return MonolingualTextValue
 	 */
 	public static function newFromArray( array $data ) {
 		return new static( $data['language'], $data['text'] );

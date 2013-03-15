@@ -1,7 +1,9 @@
 <?php
 
 namespace DataValues;
-use InvalidArgumentException, Title;
+
+use InvalidArgumentException;
+use Title;
 
 /**
  * Class representing a MediaWiki title value.
@@ -117,7 +119,7 @@ class MediaWikiTitleValue extends DataValueObject {
 	 *
 	 * @param mixed $data
 	 *
-	 * @return DataValue
+	 * @return MediaWikiTitleValue
 	 */
 	public static function newFromArray( $data ) {
 		return new static( $data );

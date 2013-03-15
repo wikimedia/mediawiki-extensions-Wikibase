@@ -1,7 +1,9 @@
 <?php
 
 namespace DataValues;
-use InvalidArgumentException, OutOfBoundsException;
+
+use InvalidArgumentException;
+use OutOfBoundsException;
 
 /**
  * Class representing a time value.
@@ -315,7 +317,7 @@ class TimeValue extends DataValueObject {
 	 *
 	 * @param array $data
 	 *
-	 * @return DataValue
+	 * @return TimeValue
 	 */
 	public static function newFromArray( array $data ) {
 		return new static(

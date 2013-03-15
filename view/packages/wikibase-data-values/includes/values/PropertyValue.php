@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues;
+
 use InvalidArgumentException;
 
 /**
@@ -142,7 +143,7 @@ class PropertyValue extends DataValueObject {
 	 *
 	 * @param mixed $data
 	 *
-	 * @return DataValue
+	 * @return PropertyValue
 	 * @throws InvalidArgumentException
 	 */
 	public static function newFromArray( $data ) {

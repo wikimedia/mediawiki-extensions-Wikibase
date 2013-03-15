@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues;
+
 use InvalidArgumentException;
 
 /**
@@ -124,7 +125,7 @@ class NumberValue extends DataValueObject {
 	 *
 	 * @param mixed $data
 	 *
-	 * @return DataValue
+	 * @return NumberValue
 	 */
 	public static function newFromArray( $data ) {
 		return new static( $data );

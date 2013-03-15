@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues;
+
 use InvalidArgumentException;
 
 /**
@@ -162,7 +163,7 @@ class MultilingualTextValue extends DataValueObject {
 	 *
 	 * @param array $data
 	 *
-	 * @return DataValue
+	 * @return MultilingualTextValue
 	 */
 	public static function newFromArray( array $data ) {
 		$values = array();

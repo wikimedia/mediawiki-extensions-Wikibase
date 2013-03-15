@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues;
+
 use InvalidArgumentException;
 
 /**
@@ -121,7 +122,7 @@ class BooleanValue extends DataValueObject {
 	 *
 	 * @param mixed $data
 	 *
-	 * @return DataValue
+	 * @return BooleanValue
 	 */
 	public static function newFromArray( $data ) {
 		return new static( $data );
