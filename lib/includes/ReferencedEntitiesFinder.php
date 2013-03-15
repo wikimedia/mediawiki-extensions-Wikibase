@@ -27,6 +27,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 class ReferencedEntitiesFinder {
 
@@ -80,43 +81,31 @@ class ReferencedEntitiesFinder {
 	 */
 	protected function findSnakLinks( array $snaks ) {
 		$foundEntities = array();
-		$propertyIds = array();
 
 		foreach ( $snaks as $snak ) {
+			// all of the Snak's properties are referenced entities, add them:
 			$foundEntities[] = $snak->getPropertyId();
 
-			if ( $snak instanceof PropertyValueSnak ) {
-				$propertyIds[] = $snak->getPropertyId();
-			}
-		}
+			// PropertyValueSnaks might have a value referencing an Entity, find those as well:
+			if( $snak instanceof PropertyValueSnak ) {
+				$snakValue = $snak->getDataValue();
 
-		$propertyIds = array_unique( $propertyIds );
-
-		$properties = $this->entityLoader->getEntities( $propertyIds );
-
-		foreach ( $snaks as $snak ) {
-			if ( $snak instanceof PropertyValueSnak ) {
-				$prefixedId = $snak->getPropertyId()->getPrefixedId();
-
-				if ( array_key_exists( $prefixedId, $properties ) && $properties[$prefixedId] !== null ) {
-					$dataType = $properties[$prefixedId]->getDataType()->getId();
-
-					if ( $dataType === 'wikibase-item' ) {
-						$entityId = $snak->getDataValue();
-
-						if ( $entityId === null ) {
-							// TODO: handle ref to non-existing item
-						}
-						else if ( $entityId instanceof EntityId ) {
-							$foundEntities[] = $entityId;
-						}
-						else {
-							// TODO: handle values in other formats
-						}
-					}
+				if( $snakValue === null ) {
+					// shouldn't ever run into this, but make sure!
+					continue;
 				}
-				else {
-					// TODO: handle ref to non-existing property
+
+				switch( $snakValue->getType() ) {
+					case 'wikibase-entityid':
+						if( $snakValue instanceof EntityId ) {
+							$foundEntities[] = $snakValue;
+						}
+						break;
+					// TODO: handle values in other formats. E.g. in an earlier version the
+					//  'wikibase-entity' data type has been using 'string' values to store its ID.
+
+					// TODO: we might want to allow extensions to add handling for their custom
+					//  data value types here. Either use a hook or a proper registration for that.
 				}
 			}
 		}
