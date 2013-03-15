@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqM9rrLc",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T10:35:25Z",
+      "side": 1,
+      "message": "If $prefixedEntityId is null, it should find the page\u0027s connected item instead. \n\nActually, for now, it should *always* do that. Can be done in a follow up, controlled by a setting.",
+      "revId": "7aed629975f70784714189fd7a42ff6028bc5dfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqC.nyA8",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T10:35:25Z",
+      "side": 1,
+      "message": "Can\u0027t you get the entity ID from the $parseResult? Isn\u0027t that what EntityIdParser does?\n\nAlso: long line, please split.",
+      "revId": "7aed629975f70784714189fd7a42ff6028bc5dfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqC926KA",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T10:35:25Z",
+      "side": 1,
+      "message": "please always use code block, makes it easier to set breakpoints etc.",
+      "revId": "7aed629975f70784714189fd7a42ff6028bc5dfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
