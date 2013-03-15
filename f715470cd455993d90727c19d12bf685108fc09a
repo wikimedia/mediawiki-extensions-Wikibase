@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqNIlkw0",
+        "filename": "lib/includes/item/ItemDiff.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-15T16:20:55Z",
+      "side": 1,
+      "message": "Methods already in base class",
+      "revId": "f715470cd455993d90727c19d12bf685108fc09a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
