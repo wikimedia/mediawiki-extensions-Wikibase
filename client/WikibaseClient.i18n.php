@@ -145,6 +145,8 @@ Parameters:
  */
 $messages['af'] = array(
 	'wikibase-client-desc' => 'Kliënt vir die Wikibase-uitbreiding',
+	'wikibase-comment-remove' => 'Die gekoppelde Wikidata-item is geskrap. Taalskakels is verwyder.',
+	'wikibase-comment-linked' => "'n Wikidata-item is aan hierdie bladsy gekoppel.",
 	'wikibase-comment-update' => 'Taalskakels is opgedateer.',
 	'wikibase-comment-sitelink-add' => 'Taalskakel bygevoeg: $1',
 	'wikibase-comment-sitelink-change' => 'Taalskakel is van $1 na $2 verander',
@@ -163,8 +165,9 @@ $messages['af'] = array(
 	'wikibase-linkitem-invalidsite' => 'Onbekende of ongeldige werf gekies',
 	'wikibase-linkitem-confirmitem-button' => 'Bevestig',
 	'wikibase-linkitem-not-loggedin-title' => 'U moet aangemeld wees',
-	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-hide-wikidata' => '$1 wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Wys Wikidata opdaterings in onlangse wysigings',
+	'wikibase-watchlist-show-changes-pref' => 'Wys Wikidata-wysigings in my dophoulys', # Fuzzy
 );
 
 /** Arabic (العربية)
@@ -301,7 +304,7 @@ $messages['be-tarask'] = array(
 	'wikibase-property-notsupportedyet' => 'Вікізьвесткі пакуль не падтрымліваюць тып уласьцівасьці «$1».',
 	'wikibase-rc-hide-wikidata' => '$1 Вікізьвесткі',
 	'wikibase-rc-show-wikidata-pref' => 'Паказваць праўкі Вікізьвестак у сьпісе апошніх зьменаў',
-	'wikibase-watchlist-show-changes-pref' => 'Паказваць зьмены Вікізьвестак у вашым сьпісе назіраньня',
+	'wikibase-watchlist-show-changes-pref' => 'Паказваць зьмены Вікізьвестак у вашым сьпісе назіраньня', # Fuzzy
 );
 
 /** Bulgarian (български)
@@ -436,10 +439,11 @@ $messages['ckb'] = array(
 
 /** Czech (česky)
  * @author JAn Dudík
+ * @author Mormegil
  */
 $messages['cs'] = array(
 	'wikibase-client-desc' => 'Klient pro rozšíření Wikibase',
-	'wikibase-after-page-move' => 'Můžete také [ $1  aktualizovat] související položku Wikidat pro údržbu mezijazykových odkazů na přesunuté stránce.',
+	'wikibase-after-page-move' => 'Můžete také [$1 aktualizovat] související položku Wikidat, abyste na přesunuté stránce zachovali jazykové odkazy.',
 	'wikibase-comment-remove' => 'Související položka Wikidat odstraněna. Mezijazykové odkazy odstraněny.',
 	'wikibase-comment-linked' => 'Položka Wikidat odkazovala na tuto stránku.',
 	'wikibase-comment-unlink' => 'Odkaz na tuto stránku byl odstraněn z Wikidat. Mezijazykové odkazy odstraněny.',
@@ -540,6 +544,7 @@ $messages['de'] = array(
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Bearbeitungen in den „Letzten Änderungen“ anzeigen',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Bearbeitungen in deiner Beobachtungsliste anzeigen',
+	'wikibase-error-invalid-entity-id' => 'Die eingegebene Kennung ist für das System unbekannt. Bitte verwende eine gültige Objektkennung.',
 );
 
 /** Zazaki (Zazaki)
@@ -785,7 +790,6 @@ $messages['fr'] = array(
 	'wikibase-comment-sitelink-change' => 'Lien de langue modifié de $1 à $2',
 	'wikibase-comment-sitelink-remove' => 'Lien de langue supprimé : $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|modification|modifications}}',
-	'wikibase-nolanglinks' => 'aucun',
 	'wikibase-editlinks' => 'Modifier les liens',
 	'wikibase-editlinkstitle' => 'Modifier les liens interlangue',
 	'wikibase-linkitem-addlinks' => 'Ajouter des liens',
@@ -806,6 +810,7 @@ $messages['fr'] = array(
 	'wikibase-linkitem-success-link' => 'Les pages ont bien été liées. Vous pouvez trouver l’élément contenant les liens dans notre [$1 entrepôt central de données].',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Afficher les modifications de Wikidata dans les modifications récentes',
+	'wikibase-watchlist-show-changes-pref' => 'Voir les modifications de Wikidata dans votre liste de suivi',
 );
 
 /** Franco-Provençal (arpetan)
@@ -827,17 +832,16 @@ $messages['frp'] = array(
  */
 $messages['gl'] = array(
 	'wikibase-client-desc' => 'Cliente para a extensión Wikibase',
-	'wikibase-after-page-move' => 'Tamén pode [$1 actualizar] o elemento de Wikidata asociado para manter as ligazóns lingüísticas na páxina trasladada.',
-	'wikibase-comment-remove' => 'Borrouse un elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas.',
-	'wikibase-comment-linked' => 'Esta páxina foi ligada desde un elemento de Wikidata.',
-	'wikibase-comment-unlink' => 'Esta páxina foi desligada do elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas.',
-	'wikibase-comment-restore' => 'Restaurouse un elemento de Wikidata asociado. Recuperáronse as ligazóns lingüísticas.',
+	'wikibase-after-page-move' => 'Tamén pode [$1 actualizar] o elemento asociado do Wikidata para manter as ligazóns lingüísticas na páxina trasladada.',
+	'wikibase-comment-remove' => 'Borrouse un elemento asociado do Wikidata. Elimináronse as ligazóns lingüísticas.',
+	'wikibase-comment-linked' => 'Esta páxina foi ligada desde un elemento do Wikidata.',
+	'wikibase-comment-unlink' => 'Esta páxina foi desligada do elemento asociado do Wikidata. Elimináronse as ligazóns lingüísticas.',
+	'wikibase-comment-restore' => 'Restaurouse un elemento asociado do Wikidata. Recuperáronse as ligazóns lingüísticas.',
 	'wikibase-comment-update' => 'Actualizáronse as ligazóns lingüísticas.',
 	'wikibase-comment-sitelink-add' => 'Engadiuse unha ligazón lingüística: $1',
 	'wikibase-comment-sitelink-change' => 'Cambiouse unha ligazón lingüística de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Eliminouse unha ligazón lingüística: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|modificación|modificacións}}',
-	'wikibase-nolanglinks' => 'ningunha',
 	'wikibase-editlinks' => 'Editar as ligazóns',
 	'wikibase-editlinkstitle' => 'Editar as ligazóns interlingüísticas',
 	'wikibase-linkitem-addlinks' => 'Engadir ligazóns',
@@ -856,8 +860,11 @@ $messages['gl'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Debe acceder ao sistema neste wiki e no [$1 repositorio central de datos] para utilizar esta característica.',
 	'wikibase-linkitem-success-create' => 'As páxinas ligáronse correctamente. Pode atopar o novo elemento coas ligazóns no noso [$1 repositorio central de datos].',
 	'wikibase-linkitem-success-link' => 'As páxinas ligáronse correctamente. Pode atopar o elemento coas ligazóns no noso [$1 repositorio central de datos].',
+	'wikibase-property-notfound' => 'Non se atopou a propiedade "$1".',
+	'wikibase-property-notsupportedyet' => 'Wikibase aínda non soporta o tipo de propiedade da propiedade "$1".',
 	'wikibase-rc-hide-wikidata' => '$1 o Wikidata',
-	'wikibase-rc-show-wikidata-pref' => 'Mostrar as modificacións de Wikidata nos cambios recentes',
+	'wikibase-rc-show-wikidata-pref' => 'Mostrar as modificacións do Wikidata nos cambios recentes',
+	'wikibase-watchlist-show-changes-pref' => 'Mostrar as modificacións do Wikidata na súa lista de vixilancia', # Fuzzy
 );
 
 /** Swiss German (Alemannisch)
@@ -886,7 +893,6 @@ $messages['he'] = array(
 	'wikibase-comment-sitelink-change' => 'קישור השפה שוּנה מ־$1 אל $2',
 	'wikibase-comment-sitelink-remove' => 'קישור השפה הוסר: $1',
 	'wikibase-comment-multi' => '{{PLURAL:$1|שינוי אחד|$1 שינויים}}',
-	'wikibase-nolanglinks' => 'אין',
 	'wikibase-editlinks' => 'עריכת קישורים',
 	'wikibase-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
 	'wikibase-linkitem-addlinks' => 'הוספת קישורים',
@@ -905,8 +911,12 @@ $messages['he'] = array(
 	'wikibase-linkitem-not-loggedin' => 'יש להיכנס לחשבון בוויקי הזה וב[$1 מאגר הנתונים המרכזי] כדי להשתמש באפשרות הזאת.',
 	'wikibase-linkitem-success-create' => 'הדפים קושרו בהצלחה. אפשר למצוא את הפריט החדש שמכיל את הקישורים ב[$1 מאגר הנתונים המרכזי].',
 	'wikibase-linkitem-success-link' => 'הדפים קושרו בהצלחה. אפשר למצוא את הפריט החדש שמכיל את הקישורים ב[$1 מאגר הנתונים המרכזי].',
+	'wikibase-property-notfound' => 'המאפיין $1 לא נמצא.',
+	'wikibase-property-notsupportedyet' => 'ההרחבה ויקיביסס עדיין לא תומכת בסוג המאפיין של המאפיין $1.',
 	'wikibase-rc-hide-wikidata' => '$1 ויקינתונים',
 	'wikibase-rc-show-wikidata-pref' => 'הצגת עריכות ויקינתונים בשינויים אחרונים',
+	'wikibase-watchlist-show-changes-pref' => 'להציג עריכות בוויקינתונים ברשימת המעקב שלך',
+	'wikibase-error-invalid-entity-id' => 'המזהה שהוזן אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.',
 );
 
 /** Hindi (हिन्दी)
@@ -1065,7 +1075,7 @@ $messages['id'] = array(
 	'wikibase-linkitem-success-link' => 'Halaman telah berhasil ditautkan. Anda dapat menemukan item berisi tautan tersebut pada [pusat penyimpanan data $1] kami.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Tampilkan suntingan Wikidata di perubahan terbaru',
-	'wikibase-watchlist-show-changes-pref' => 'Tampilkan suntingan Wikidata pada daftar pantauan Anda',
+	'wikibase-watchlist-show-changes-pref' => 'Tampilkan suntingan Wikidata pada daftar pantauan Anda', # Fuzzy
 );
 
 /** Iloko (Ilokano)
@@ -1240,6 +1250,7 @@ $messages['ka'] = array(
 
 /** Korean (한국어)
  * @author ChongDae
+ * @author Kwj2772
  * @author 아라
  */
 $messages['ko'] = array(
@@ -1273,9 +1284,11 @@ $messages['ko'] = array(
 	'wikibase-linkitem-not-loggedin' => '이 기능을 사용하려면 이 위키와 [$1 중앙 데이터 저장소]에 로그인해야 합니다.',
 	'wikibase-linkitem-success-create' => '문서를 성공적으로 링크했습니다. [$1 중앙 데이터 저장소]에 링크를 포함하는 새로 만든 항목을 찾을 수 있습니다.',
 	'wikibase-linkitem-success-link' => '문서를 성공적으로 링크했습니다. [$1 중앙 데이터 저장소]에 링크를 포함하는 항목을 찾을 수 있습니다.',
+	'wikibase-property-notfound' => '$1 속성이 없습니다.',
+	'wikibase-property-notsupportedyet' => '위키베이스에서 $1 속성에 대한 유형을 지원하지 않습니다.',
 	'wikibase-rc-hide-wikidata' => '위키데이터 $1',
 	'wikibase-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
-	'wikibase-watchlist-show-changes-pref' => '주시문서 목록에서 위키데이터 편집을 보기',
+	'wikibase-watchlist-show-changes-pref' => '주시문서 목록에서 위키데이터 편집을 보기', # Fuzzy
 );
 
 /** Karachay-Balkar (къарачай-малкъар)
@@ -1371,6 +1384,8 @@ $messages['lb'] = array(
 	'wikibase-client-desc' => "Client fir d'Wikibase Erweiderung",
 	'wikibase-comment-unlink' => 'Dës Säit gouf vum Wikidata-Element entlinkt. Interwiki-Linke goufen ewechgeholl.',
 	'wikibase-comment-update' => 'Sproochlinke sinn aktualiséiert',
+	'wikibase-comment-sitelink-add' => 'Sproochlink derbäigesat: $1',
+	'wikibase-comment-sitelink-change' => 'Sproochlink vun $1 op $2 geännert',
 	'wikibase-comment-sitelink-remove' => 'Sproochlink ewechgeholl: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|Ännerung|Ännerungen}}',
 	'wikibase-editlinks' => 'Linken änneren',
@@ -1385,6 +1400,7 @@ $messages['lb'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'Dir musst ageloggt sinn',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Ännerungen an de rezenten Ännerunge weisen',
+	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Ännerungen an Ärer Iwwerwaachungslëscht weisen', # Fuzzy
 );
 
 /** Latvian (latviešu)
@@ -1394,6 +1410,8 @@ $messages['lv'] = array(
 	'wikibase-editlinks' => 'Labot saites',
 	'wikibase-editlinkstitle' => 'Labot starpvalodu saites',
 	'wikibase-linkitem-addlinks' => 'Pievienot saites',
+	'wikibase-linkitem-input-site' => 'Valoda:',
+	'wikibase-linkitem-input-page' => 'Lapa:',
 );
 
 /** Malagasy (Malagasy)
@@ -1446,7 +1464,7 @@ $messages['mk'] = array(
 	'wikibase-linkitem-success-link' => 'Страниците се успешно сврзани. Новосоздадената единица со врските ќе ја најдете на нашето [$1 централно складиште на податоци].',
 	'wikibase-rc-hide-wikidata' => '$1 Википодатоци',
 	'wikibase-rc-show-wikidata-pref' => 'Прикажувај ги уредувањата на Википодатоците во скорешните промени',
-	'wikibase-watchlist-show-changes-pref' => 'Прикажи уредувања на Википодатоци во набљудувањата',
+	'wikibase-watchlist-show-changes-pref' => 'Прикажи уредувања на Википодатоци во набљудувањата', # Fuzzy
 );
 
 /** Malayalam (മലയാളം)
@@ -1595,7 +1613,7 @@ $messages['nl'] = array(
 	'wikibase-linkitem-success-link' => "De pagina's zijn gekoppeld. U kunt het item met de koppelingen vinden in de [$1 centrale gegevensrepository].",
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
-	'wikibase-watchlist-show-changes-pref' => 'Wikidatabewerkingen weergeven in uw volglijst',
+	'wikibase-watchlist-show-changes-pref' => 'Wikidatabewerkingen weergeven in uw volglijst', # Fuzzy
 );
 
 /** Norwegian Nynorsk (norsk nynorsk)
@@ -1851,7 +1869,7 @@ $messages['sr-ec'] = array(
 	'wikibase-property-notsupportedyet' => 'Викибаза још не подржава врсту својства за $1 својство.',
 	'wikibase-rc-hide-wikidata' => '$1 Википодаци',
 	'wikibase-rc-show-wikidata-pref' => 'Прикажи измене на Википодацима у скорашњим изменама',
-	'wikibase-watchlist-show-changes-pref' => 'Прикажи измене на Википодацима у списку надгледања',
+	'wikibase-watchlist-show-changes-pref' => 'Прикажи измене на Википодацима у списку надгледања', # Fuzzy
 );
 
 /** Serbian (Latin script) (srpski (latinica)‎)
@@ -2002,7 +2020,7 @@ $messages['vi'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase chưa hỗ trợ kiểu của thuộc tính $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Hiện các sửa đổi Wikidata trong thay đổi gần đây',
-	'wikibase-watchlist-show-changes-pref' => 'Hiện các sửa đổi tại Wikidata trong danh sách theo dõi',
+	'wikibase-watchlist-show-changes-pref' => 'Hiện các sửa đổi tại Wikidata trong danh sách theo dõi', # Fuzzy
 );
 
 /** Yiddish (ייִדיש)
@@ -2081,7 +2099,7 @@ $messages['zh-hans'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase对$1属性不支持属性类型。',
 	'wikibase-rc-hide-wikidata' => '$1维基数据',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
-	'wikibase-watchlist-show-changes-pref' => '在您的监视列表中显示Wikidata的编辑',
+	'wikibase-watchlist-show-changes-pref' => '在您的监视列表中显示Wikidata的编辑', # Fuzzy
 );
 
 /** Traditional Chinese (中文（繁體）‎)

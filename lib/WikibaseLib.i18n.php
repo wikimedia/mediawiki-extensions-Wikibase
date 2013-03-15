@@ -1037,6 +1037,14 @@ $messages['lb'] = array(
 	'datatypes-type-commonsMedia' => 'Media-Fichier op Commons',
 );
 
+/** Latvian (latviešu)
+ * @author Papuass
+ */
+$messages['lv'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'Valoda',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kods',
+);
+
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
