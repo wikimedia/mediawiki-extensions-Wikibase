@@ -1,0 +1,8 @@
+The Wikibase DataModel component is dependent on:
+
+* WikibaseLib (this dependency is something we want to get rid of)
+* MediaWiki (this dependency is something we want to get rid of)
+* DataValues library
+* Ask library (only the Query class has this dependency)
+
+And nothing else.
