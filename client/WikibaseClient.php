@@ -66,12 +66,11 @@ $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHand
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\NamespaceChecker']		= $dir . 'includes/NamespaceChecker.php';
 $wgAutoloadClasses['Scribunto_LuaWikibaseLibrary']      = $dir . 'includes/WikibaseLibrary.php';
+$wgAutoloadClasses['Wikibase\PageUpdater'] 	= $dir . 'includes/PageUpdater.php';
+$wgAutoloadClasses['Wikibase\WikiPageUpdater'] 	= $dir . 'includes/WikiPageUpdater.php';
 
 // includes/api
 $wgAutoloadClasses['Wikibase\ApiClientInfo']		= $dir . 'includes/api/ApiClientInfo.php';
-
-// includes/handlers
-$wgAutoloadClasses['Wikibase\ClientChangeHandler']  = $dir . 'includes/ClientChangeHandler.php';
 
 // includes/modules
 $wgAutoloadClasses['Wikibase\SiteModule']  = $dir . 'includes/modules/SiteModule.php';
@@ -95,6 +94,9 @@ $wgAutoloadClasses['Wikibase\CachingSqlStore'] 		= $dir . 'includes/store/sql/Ca
 $wgAutoloadClasses['Wikibase\DirectSqlStore'] 		= $dir . 'includes/store/sql/DirectSqlStore.php';
 $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/EntityCacheTable.php';
 
+// test
+$wgAutoloadClasses['Wikibase\Test\MockPageUpdater'] 	= $dir . 'tests/phpunit/MockPageUpdater.php';
+
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
 $wgHooks['LoadExtensionSchemaUpdates'][] 		= '\Wikibase\ClientHooks::onSchemaUpdate';
@@ -114,7 +116,6 @@ $wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay
 $wgHooks['SpecialPageBeforeExecute'][]		= '\Wikibase\ClientHooks::onSpecialPageBeforeExecute';
 $wgHooks['ScribuntoExternalLibraries'][]      = '\Wikibase\ClientHooks::onScribuntoExternalLibraries';
 // extension hooks
-$wgHooks['WikibasePollHandle'][]                        = '\Wikibase\ClientHooks::onWikibasePollHandle';
 $wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
 $wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
 
