@@ -405,4 +405,36 @@ class EntityChange extends DiffChange {
 
 		return $data;
 	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return \Diff\MapDiff|bool
+	 * @throws \MWException
+	 */
+	public function getClaimDiff() {
+		$diff = $this->getDiff();
+
+		if ( !$diff instanceof ItemDiff ) {
+			throw new \MWException( 'Cannot get sitelink diff for ' . get_class( $diff ) . '.' );
+		}
+
+		return $this->getDiff()->getClaimDiff();
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return \Diff\MapDiff|bool
+	 * @throws \MWException
+	 */
+	public function getLabelDiff() {
+		$diff = $this->getDiff();
+
+		if ( !$diff instanceof ItemDiff ) {
+			throw new \MWException( 'Cannot get sitelink diff for ' . get_class( $diff ) . '.' );
+		}
+
+		return $this->getDiff()->getLabelDiff();
+	}
 }
