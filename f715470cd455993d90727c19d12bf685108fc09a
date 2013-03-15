@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DqOU2z.U",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T17:22:04Z",
+      "side": 1,
+      "message": "Yes, well, maybe. I can see two:\n\n1) coalescing changes\n2) deciding how to react to to a change\n\nHow changes can be coalesced depends on how we shall react to that change. It seems a good idea to centralize this knowledge.\n\nWe could perhaps have a ChangeCoalescer that uses a ChangeHandler to determine the actions, and coalescs based on that.\n\nI\u0027d like to leave that as a follow up though, because the coalescing logic used to be in the ChangeHandler class. Moving the logic to another class, and having the ChangeHandler class do something else, seem like two things that should be done in separate changes.",
+      "parentUuid": "DqNJu8y8",
+      "revId": "f715470cd455993d90727c19d12bf685108fc09a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqHJ-590",
         "filename": "client/includes/ChangeHandler.php",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "DqMVCq0E",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T17:22:04Z",
+      "side": 1,
+      "message": "Yea, I didn\u0027t write it, just moved it. Used to be ClientChangeHandler::siteLinkComment. The entire logic for generating comments for the injected changes will be rewritten, see bug 45279.",
+      "parentUuid": "DqBKEa9U",
+      "revId": "f715470cd455993d90727c19d12bf685108fc09a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqLJ1f-k",
         "filename": "lib/includes/changes/EntityChange.php",
         "patchSetId": 1
@@ -64,6 +100,24 @@
       "writtenOn": "2013-03-15T16:26:22Z",
       "side": 1,
       "message": "Why not just have the caller call $this-\u003egetDiff()-\u003egetClaimDiff() ?",
+      "revId": "f715470cd455993d90727c19d12bf685108fc09a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqIVMs3I",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T17:22:04Z",
+      "side": 1,
+      "message": "Would work I guess. I added these to be consistent with ItemChange::getSiteLinkDiff()",
+      "parentUuid": "DqLJ1f-k",
       "revId": "f715470cd455993d90727c19d12bf685108fc09a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -98,6 +152,24 @@
       "writtenOn": "2013-03-15T16:20:55Z",
       "side": 1,
       "message": "Methods already in base class",
+      "revId": "f715470cd455993d90727c19d12bf685108fc09a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqMVri7c",
+        "filename": "lib/includes/item/ItemDiff.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T17:22:04Z",
+      "side": 1,
+      "message": "oops :)",
+      "parentUuid": "DqNIlkw0",
       "revId": "f715470cd455993d90727c19d12bf685108fc09a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
