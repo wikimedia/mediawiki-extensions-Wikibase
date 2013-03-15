@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqM8jrFg",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T11:38:00Z",
+      "side": 1,
+      "message": "should be\n( $noExternalLangLinks \u003d\u003d\u003d null || !in_array( \u0027*\u0027, $noExternalLangLinks ) )",
+      "revId": "0b1d9e2f3d22bfa419eb9b8a1e62a6deadcaa33b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqA-aBEk",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T11:38:00Z",
+      "side": 1,
+      "message": "we should have repoEntityUrl() or some such to do all the namespace stuff, upper casing, etc right, once and for all.",
+      "revId": "0b1d9e2f3d22bfa419eb9b8a1e62a6deadcaa33b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqE-Q-Co",
+        "filename": "client/includes/ClientUtils.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T11:38:00Z",
+      "side": 1,
+      "message": "This could take a separate namespace arg.",
+      "revId": "0b1d9e2f3d22bfa419eb9b8a1e62a6deadcaa33b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqG-VwBg",
+        "filename": "client/includes/ClientUtils.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T11:38:00Z",
+      "side": 1,
+      "message": "needs URLEscape",
+      "revId": "0b1d9e2f3d22bfa419eb9b8a1e62a6deadcaa33b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqI8dtA0",
+        "filename": "client/includes/ClientUtils.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T11:38:00Z",
+      "side": 1,
+      "message": "Would need a Title object that uses the config of the target wiki for that. Not easily done.",
+      "revId": "0b1d9e2f3d22bfa419eb9b8a1e62a6deadcaa33b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqK8a.BE",
+        "filename": "client/includes/ClientUtils.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T11:38:00Z",
+      "side": 1,
+      "message": "Please don\u0027t put the connextor char here, it\u0027s not part of the namespace.",
+      "revId": "0b1d9e2f3d22bfa419eb9b8a1e62a6deadcaa33b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqC.4KOI",
+        "filename": "client/includes/EntityIdPropertyHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T11:38:00Z",
+      "side": 1,
+      "message": "It seems odd to me that we use a SiteLink Object to set an ItemId.\n\nIt\u0027s fine to use it internally, for getEntityIdForSiteLink, but that\u0027s an implementation detail. The updateItemIdProperty() should just take a Title object, since essentially, we want to put the item ID for a page into the parser output.\n\nIn fact, the parser output already has the title, no?",
+      "revId": "0b1d9e2f3d22bfa419eb9b8a1e62a6deadcaa33b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqE.53Og",
+        "filename": "client/includes/EntityIdPropertyHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T11:38:00Z",
+      "side": 1,
+      "message": "nasty hack - probably the best we can do for now, but should be marked as a nasty hack.",
+      "revId": "0b1d9e2f3d22bfa419eb9b8a1e62a6deadcaa33b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqM-N7Ig",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T11:38:00Z",
+      "side": 1,
+      "message": "checking !\u003d\u003d null would be clearer, I think",
+      "revId": "0b1d9e2f3d22bfa419eb9b8a1e62a6deadcaa33b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqO-KMG8",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-15T11:38:00Z",
+      "side": 1,
+      "message": "Please use tabs to indent.",
+      "revId": "0b1d9e2f3d22bfa419eb9b8a1e62a6deadcaa33b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
