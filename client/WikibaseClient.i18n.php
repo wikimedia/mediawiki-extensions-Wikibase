@@ -569,7 +569,6 @@ $messages['dsb'] = array(
 	'wikibase-comment-sitelink-change' => 'Mjazyrěcny wótkaz změnjony wót $1 do $2',
 	'wikibase-comment-sitelink-remove' => 'Mjazyrěcny wótkaz wótpórany: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|změna|změnje|změny|změnow}}',
-	'wikibase-nolanglinks' => 'žeden',
 	'wikibase-editlinks' => 'Wótkaze wobźěłaś',
 	'wikibase-editlinkstitle' => 'Mjazyrěcne wótkaze wobźěłaś',
 	'wikibase-linkitem-addlinks' => 'Wótkaze pśidaś',
@@ -588,8 +587,12 @@ $messages['dsb'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Musyš w toś tom wikiju a w [$1 centralnem datowem repozitoriumje] pśizjawjony byś, aby toś tu funkciju wužywał.',
 	'wikibase-linkitem-success-create' => 'Boki su se wuspěšnje zwězali. Móžoš nowy element, kótaryž wopśimujo wótkaze, w našom [$1 centralnem datowem repozitoriumje] namakaś.',
 	'wikibase-linkitem-success-link' => 'Boki su se wuspěšnje zwězali. Móžoš element, kótaryž wopśimujo wótkaze, w našom [$1 centralnem datowem repozitoriumje] namakaś.',
+	'wikibase-property-notfound' => 'Kakosć $1 njejo se namakała.',
+	'wikibase-property-notsupportedyet' => 'Wikibase hyšći njepóděra kakosćowy typ za kakosć $1.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Změny Wikidata w aktualnych změnach pokazaś',
+	'wikibase-watchlist-show-changes-pref' => 'Změny Wikidata w twójich wobglědowańkach pokazaś',
+	'wikibase-error-invalid-entity-id' => 'Zapódany ID jo systemoju njeznaty. Pšosym wužyj płaśiwy entitowy ID.',
 );
 
 /** Greek (Ελληνικά)
@@ -978,7 +981,6 @@ $messages['hsb'] = array(
 	'wikibase-comment-sitelink-change' => 'Mjezyrěčny wotkaz změnjeny wot $1 do $2',
 	'wikibase-comment-sitelink-remove' => 'Mjezyrěčny wotkaz wotstronjeny: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|změna|změnje|změny|změnow}}',
-	'wikibase-nolanglinks' => 'žadyn',
 	'wikibase-editlinks' => 'Wotkazy wobdźěłać',
 	'wikibase-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
 	'wikibase-linkitem-addlinks' => 'Wotkazy přidać',
@@ -997,8 +999,12 @@ $messages['hsb'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Dyrbiš w tutym wikiju a w [$1 centralnym datowym repozitoriju] přizjewjeny być, zo by tutu funkciju wužiwał.',
 	'wikibase-linkitem-success-create' => 'Strony su so wuspěšnje zwjazali. Móžeš nowy element, kotryž wotkazy wobsahuje, w našim [$1 centralnym datowym repozitoriju] namakać.',
 	'wikibase-linkitem-success-link' => 'Strony su so wuspěšnje zwjazali. Móžeš element, kotryž wotkazy wobsahuje, w našim [$1 centralnym datowym repozitoriju] namakać.',
+	'wikibase-property-notfound' => 'Kajkosć $1 njeje so namakała.',
+	'wikibase-property-notsupportedyet' => 'Wikibase hišće njepoděruje kajkostny typ za kajkosć $1.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Změny Wikidata w aktualnych změnach pokazać',
+	'wikibase-watchlist-show-changes-pref' => 'Změny Wikidata w twojich wobkedźbowankach pokazać',
+	'wikibase-error-invalid-entity-id' => 'Zapodaty ID je systemej njeznaty. Prošu wužij płaćiwy entitowy ID.',
 );
 
 /** Hungarian (magyar)
@@ -1130,7 +1136,6 @@ $messages['is'] = array(
 	'wikibase-comment-sitelink-change' => 'Tungumálatengli breytt frá $1 í $2',
 	'wikibase-comment-sitelink-remove' => 'Tungumálatengill fjarlægður: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|breyting|breytingar}}',
-	'wikibase-nolanglinks' => 'engir',
 	'wikibase-editlinks' => 'Breyta tenglum',
 	'wikibase-editlinkstitle' => 'Breyta tungumálatenglum',
 	'wikibase-linkitem-addlinks' => 'Bæta við tenglum',
@@ -1149,8 +1154,10 @@ $messages['is'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Þú þarft að vera skráð/ur inn á þennann wiki og á [$1 samnýtta þekkingargrunninn] til að nota þennan möguleika.',
 	'wikibase-linkitem-success-create' => 'Síðurnar hafa verið tengdar saman. Þú getur fundið hlutinn, sem var nýlega búinn til með tenglunum, í [$1 samnýtta þekkingargrunninum].',
 	'wikibase-linkitem-success-link' => 'Síðurnar hafa verið tengdar saman. Þú getur fundið hlutinn með tenglunum í [$1 samnýtta þekkingargrunninum].',
+	'wikibase-property-notfound' => 'Eginleikinn „$1“ fannst ekki.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Sýna Wikidata breytingar í nýjustu breytingum',
+	'wikibase-watchlist-show-changes-pref' => 'Sýna Wikidata breytingar í vaktlistanum þínum',
 );
 
 /** Italian (italiano)
@@ -1231,6 +1238,7 @@ $messages['ja'] = array(
 	'wikibase-rc-hide-wikidata' => 'ウィキデータを$1',
 	'wikibase-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
 	'wikibase-watchlist-show-changes-pref' => 'ウィキデータの編集をウォッチリストに表示',
+	'wikibase-error-invalid-entity-id' => '入力した ID はシステムに登録されていません。有効なエンティティ ID を使用してください。',
 );
 
 /** Georgian (ქართული)
@@ -1288,7 +1296,8 @@ $messages['ko'] = array(
 	'wikibase-property-notsupportedyet' => '위키베이스에서 $1 속성에 대한 유형을 지원하지 않습니다.',
 	'wikibase-rc-hide-wikidata' => '위키데이터 $1',
 	'wikibase-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
-	'wikibase-watchlist-show-changes-pref' => '주시문서 목록에서 위키데이터 편집을 보기', # Fuzzy
+	'wikibase-watchlist-show-changes-pref' => '주시문서 목록에서 위키데이터 편집을 보기',
+	'wikibase-error-invalid-entity-id' => '입력한 ID는 시스템에서 알 수 없습니다. 올바른 항목 ID를 사용하세요.',
 );
 
 /** Karachay-Balkar (къарачай-малкъар)
@@ -1464,7 +1473,7 @@ $messages['mk'] = array(
 	'wikibase-linkitem-success-link' => 'Страниците се успешно сврзани. Новосоздадената единица со врските ќе ја најдете на нашето [$1 централно складиште на податоци].',
 	'wikibase-rc-hide-wikidata' => '$1 Википодатоци',
 	'wikibase-rc-show-wikidata-pref' => 'Прикажувај ги уредувањата на Википодатоците во скорешните промени',
-	'wikibase-watchlist-show-changes-pref' => 'Прикажи уредувања на Википодатоци во набљудувањата', # Fuzzy
+	'wikibase-watchlist-show-changes-pref' => 'Нема уредувања на Википодатоци во набљудувањата',
 );
 
 /** Malayalam (മലയാളം)
@@ -1537,6 +1546,19 @@ $messages['ms'] = array(
 	'wikibase-linkitem-success-link' => 'Halaman-halaman ini telah berjaya dipautkan. Anda boleh mendapati perkara yang mengandungi pautan-pautannya di dalam [$1 repositori data pusat] kami.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Paparkan suntingan Wikidata dalam perubahan terkini',
+);
+
+/** Maltese (Malti)
+ * @author Chrisportelli
+ */
+$messages['mt'] = array(
+	'wikibase-client-desc' => 'Klijent għall-estensjoni Wikibase',
+	'wikibase-comment-update' => 'Ħoloq għal-lingwi aġġornati.',
+	'wikibase-editlinks' => 'Immodifika l-ħoloq',
+	'wikibase-editlinkstitle' => 'Immodifika l-ħoloq interlingwi',
+	'wikibase-linkitem-addlinks' => 'Żid ħoloq',
+	'wikibase-linkitem-not-loggedin-title' => 'Trid tkun dħalt fil-kont tiegħek',
+	'wikibase-linkitem-not-loggedin' => "Sabiex tuża' din il-funzjoni trid tkun dħalt fil-kont tiegħek u fir-[$1repożitorju tad-data ċentralizzata].",
 );
 
 /** Norwegian Bokmål (norsk bokmål)

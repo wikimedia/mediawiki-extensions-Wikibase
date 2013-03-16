@@ -97,7 +97,8 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
 {{Identical|Language}}',
 	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.',
 	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (Wikipedia) page.',
-	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).',
+	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).
+{{Identical|Details}}',
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
@@ -1362,6 +1363,7 @@ $messages['roa-tara'] = array(
 /** Russian (русский)
  * @author Amire80
  * @author Kaganer
+ * @author Lockal
  * @author Ole Yves
  * @author ShinePhantom
  */
@@ -1393,7 +1395,7 @@ $messages['ru'] = array(
 	'wikibase-sitelinks-link-columnheading' => 'Связанные статьи',
 	'wikibase-tooltip-error-details' => 'Подробности',
 	'datatypes-type-wikibase-item' => 'Элемент',
-	'datatypes-type-commonsMedia' => 'Медиафайл на Викисклде',
+	'datatypes-type-commonsMedia' => 'Медиафайл на Викискладе',
 );
 
 /** Sinhala (සිංහල)
