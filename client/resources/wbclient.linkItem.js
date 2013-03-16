@@ -638,13 +638,9 @@
 		removeSpinner();
 		tooltip.show();
 
-		// Remove the tooltip if the user tries to correct the input
-		$elem.one( ['click', 'focus'], function() {
-			tooltip.destroy();
-		} );
-		$( '#wbclient-linkItem-Site' ).one( 'click focus', function() {
-			// Do the same if there's a site input...
-			// We don't have to check whether this exists as jQuery is smart
+		// Remove the tooltip if the user clicks onto the dialog trying to correct the input
+		// Also remove the tooltip in case the dialog is getting closed
+		$dialog.on( 'dialogclose click', function() {
 			tooltip.destroy();
 		} );
 	}
