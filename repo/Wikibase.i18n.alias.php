@@ -151,6 +151,15 @@ $specialPageAliases['ko'] = array(
 	'EntitiesWithoutLabel' => array( '레이블없는항목' ),
 );
 
+/** Luxembourgish (Lëtzebuergesch) */
+$specialPageAliases['lb'] = array(
+	'ItemByTitle' => array( 'Element_nom_Titel' ),
+	'SetLabel' => array( 'Etiquette_festleeën' ),
+	'SetDescription' => array( 'Beschreiwung_festleeën' ),
+	'SetAliases' => array( 'Aliase_festleeën' ),
+	'ItemsWithoutSitelinks' => array( 'Elementer_ouni_Weblinken' ),
+);
+
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = array(
 	'EntityData' => array( 'ЕдиницаПодатоци' ),
