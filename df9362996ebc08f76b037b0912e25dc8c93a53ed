@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqP6DwM0",
+        "filename": "client/includes/EntityIdPropertyHandler.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-16T09:31:31Z",
+      "side": 1,
+      "message": "\"handler\" is very generic. \"updater\"? \"controller\"?",
+      "revId": "df9362996ebc08f76b037b0912e25dc8c93a53ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqB4Q9KY",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-16T09:31:31Z",
+      "side": 1,
+      "message": "nice!",
+      "revId": "df9362996ebc08f76b037b0912e25dc8c93a53ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqD56mO8",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-16T09:31:31Z",
+      "side": 1,
+      "message": "Please document the keys that are well known for $attribs. There is some magic going on here that is not obvious to the caller.",
+      "revId": "df9362996ebc08f76b037b0912e25dc8c93a53ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqF5-TN0",
+        "filename": "client/includes/recentchanges/ExternalChangesLine.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-16T09:31:31Z",
+      "side": 1,
+      "message": "Since there is no way to inject an alternative instance, we can just as well use a static member that can be re-used. In fact, doing that will make it easier to refactor later to allow injection.",
+      "revId": "df9362996ebc08f76b037b0912e25dc8c93a53ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
