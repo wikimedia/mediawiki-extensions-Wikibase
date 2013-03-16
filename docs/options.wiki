@@ -86,6 +86,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
               'wikibase-property' => 'Property'
           )
 </poem>
+;allowDataTransclusion: switch to enable data transclusion features like the <nowiki>{{#property}}</nowiki> parser function and the <tt>wikibase</tt> Scribunto module. Defaults to <tt>true</tt>.
 
 === Expert Settings ===
 ;siteGroup: This site's group ID, as used in the sites table. Default: <tt>'wikipedia'</tt>. '''Note:''' this setting will be removed once we can take this information from the sites table.

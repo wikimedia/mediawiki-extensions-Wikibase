@@ -57,7 +57,8 @@ $wgWBClientSettings = array(
 	'repoNamespaces' => array(
 		'wikibase-item' => '',
 		'wikibase-property' => 'Property'
-	)
+	),
+	'allowDataTransclusion' => true,
 );
 
 /**
