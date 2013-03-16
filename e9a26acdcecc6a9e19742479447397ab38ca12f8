@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqBm0js4",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-16T20:40:17Z",
+      "side": 1,
+      "message": "I am not sure, but I think that it isn\u0027t good to generate and add the GUID here.\n\nThe GUID should rather be added by the setClaim API module, which should also take the Entity ID, just like the old \"createClaim\" API module.\n\nThe Claim given to the store is a new one, it is the stores task to make the connection to some Entity and generate the guid. Especially since the GUID is supposed to contain the Entity ID (what\u0027s the good in that anyhow?), which is something only the store should have to care about. The workflow the API requires now seems simply weird.\nJust as a remark, nothing this patchset should change but maybe it would just be better to improve the API first.",
+      "revId": "e9a26acdcecc6a9e19742479447397ab38ca12f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
