@@ -50,6 +50,23 @@
       "revId": "0bb358678817e27848f19bf44facd043684e7c76",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqJmnPqo",
+        "filename": "lib/resources/wikibase.utilities/wikibase.utilities.GuidGenerator.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-16T20:31:20Z",
+      "side": 1,
+      "message": "I am not sure whether the Constructor is really useful like this, with an Entity ID in its constructor. The reason for having a GUID generator as constructor instead of just a static function is for dependency injection.\nNow with putting this into the constructor, you restrict your generator instance to generating guids for just one entity\u0027s claims. This just makes it useless for certain use cases of dependency injection.\n\nI am aware that this is just how it is done in the PHP version, but we can and should think whether it makes sense anyhow.\n\nThere are a few ways I see how we could deal with this. Not sure which one is the best right now. Especially since the whole GUID thing on the client side seems like a little design flaw in itself at this time.\n\n1. Use a jQuery widget like \"options\" parameter in the constructor and add a setOptions or simply a setEntityId instead of the whole options thing. This would still be weird though if you think about dependency injection where you don\u0027t know for which entity the generator will be used.\n\n2. ClaimGuidGenerator doesn\u0027t have to inherit from GuidGenerator and would then simply get a parameter for its newGuid function.\n\n3. Leave it like this and live with the fact that a GuidGenerator instance is just made for generating guids for one Entity.\n\nI would probably prefere not using inheritance here. I see no point in doing so.",
+      "revId": "0bb358678817e27848f19bf44facd043684e7c76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
