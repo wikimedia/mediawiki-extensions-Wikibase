@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqH54EPA",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-16T09:56:06Z",
+      "side": 1,
+      "message": "\"not unequal\"? how about just saying \"equal\"? am I missing some subtle difference here?",
+      "revId": "a6801548835299460ac966bcd8f511f7dbd6ac76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqF5orB4",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-16T09:56:06Z",
+      "side": 1,
+      "message": "maybe i\u0027m missing something, but it seems to ma that a page that has a pp entry with pp_name \u003d \"wikibase_item\" and one with pp_name \u003d \"somethingelse\", it will show as \"unconnected\". That\u0027s wrong.",
+      "revId": "a6801548835299460ac966bcd8f511f7dbd6ac76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqJ515Pk",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-16T09:56:06Z",
+      "side": 1,
+      "message": "to avoid the issue mentioned above, I think we\u0027d have to use RIGHT JOIN ON page_id \u003d pp_page AND pp_name \u003d \"wikibase_item\" WHERE pp_page IS NULL.",
+      "revId": "a6801548835299460ac966bcd8f511f7dbd6ac76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqD5jeEc",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-16T09:56:06Z",
+      "side": 1,
+      "message": "Might be more efficient to make this a subquery, especially if we have a limit on the base set (pages with no item id set).",
+      "revId": "a6801548835299460ac966bcd8f511f7dbd6ac76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
