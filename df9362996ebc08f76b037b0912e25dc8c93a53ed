@@ -67,6 +67,24 @@
       "revId": "df9362996ebc08f76b037b0912e25dc8c93a53ed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqP5C4Go",
+        "filename": "client/includes/recentchanges/ExternalChangesLine.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-16T12:36:22Z",
+      "side": 1,
+      "message": "could do that but refactoring and/or eliminating this class is the next thing to do.  prefer that to be another change. :)",
+      "parentUuid": "DqF5-TN0",
+      "revId": "df9362996ebc08f76b037b0912e25dc8c93a53ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
