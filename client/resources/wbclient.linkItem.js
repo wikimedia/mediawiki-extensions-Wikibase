@@ -667,7 +667,7 @@
 	 * @return {string}
 	 */
 	function linkRepoTitle( title ) {
-		return mw.config.get( 'wbRepoUrl' ) + mw.config.get( 'wbRepoArticlePath' ).replace( /\$1/g, encodeURIComponent( title ) );
+		return mw.config.get( 'wbRepoUrl' ) + mw.config.get( 'wbRepoArticlePath' ).replace( /\$1/g, mw.util.wikiUrlencode( title ) );
 	}
 
 	/**

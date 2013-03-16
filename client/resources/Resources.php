@@ -52,6 +52,7 @@ return call_user_func( function() {
 				'jquery.ui.suggester',
 				'jquery.wikibase.siteselector',
 				'mediawiki.api',
+				'mediawiki.util',
 				'mediawiki.jqueryMsg',
 				'wikibase.client.currentSite',
 				'wikibase.sites',
