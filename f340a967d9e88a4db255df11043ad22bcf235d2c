@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqL5uqC4",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-16T09:36:58Z",
+      "side": 1,
+      "message": "How about the Property itself? It\u0027s also a referenced entity... though maybe this method is not the right place for these.",
+      "revId": "f340a967d9e88a4db255df11043ad22bcf235d2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
