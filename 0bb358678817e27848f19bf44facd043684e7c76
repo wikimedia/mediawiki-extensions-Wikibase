@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqJl2Xjs",
+        "filename": "lib/resources/Resources.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-16T19:45:49Z",
+      "side": 1,
+      "message": "Just a GuidGenerator would not require those dependencies. Since there is a Claim specific guid generator, those two should be splitted into two files so that the one without any dependencies can be in its own module without those dependencies.\n\nThis makes it more transparent and therefore easier to see the dependencies if the guid generator should be moved for example into mw core or its own library wherever.",
+      "revId": "0bb358678817e27848f19bf44facd043684e7c76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqFmRpkQ",
+        "filename": "lib/resources/wikibase.utilities/wikibase.utilities.GuidGenerator.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-16T19:45:49Z",
+      "side": 1,
+      "message": "you could use a name for the constructor, I have added this feature recently to the inherit function. So the first parameter in inherit could just be a string \u0027V4GuidGenerator\u0027.\n\nSame of course for the second usage of inherit",
+      "revId": "0bb358678817e27848f19bf44facd043684e7c76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqPmVGjE",
+        "filename": "lib/resources/wikibase.utilities/wikibase.utilities.GuidGenerator.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-16T19:45:49Z",
+      "side": 1,
+      "message": "I don\u0027t think this function makes much sense as a public one, so it could as well be moved out of here as a helper in the outer closure.",
+      "revId": "0bb358678817e27848f19bf44facd043684e7c76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
