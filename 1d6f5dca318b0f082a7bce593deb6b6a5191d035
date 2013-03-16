@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqDmYcsk",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-16T14:28:54Z",
+      "side": 1,
+      "message": "this normalization should not only happen for the subpage syntax, but also if the page-parameter is used. Otherwise, Tom_Jones will not be found when entered into the form.",
+      "revId": "1d6f5dca318b0f082a7bce593deb6b6a5191d035",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqFmdJrc",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-16T14:28:54Z",
+      "side": 1,
+      "message": "apply normalization to $page (and maybe also to $siteid) here.",
+      "revId": "1d6f5dca318b0f082a7bce593deb6b6a5191d035",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
