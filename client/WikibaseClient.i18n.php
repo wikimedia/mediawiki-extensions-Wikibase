@@ -437,6 +437,20 @@ $messages['ckb'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'دەستکارییەکانی ویکیدراوە لە دوایین گۆڕانکارییەکاندا نیشان بدە',
 );
 
+/** Crimean Turkish (Cyrillic script) (къырымтатарджа (Кирилл)‎)
+ * @author Don Alessandro
+ */
+$messages['crh-cyrl'] = array(
+	'wikibase-editlinks' => 'Багълантыларны денъиштир',
+);
+
+/** Crimean Turkish (Latin script) (qırımtatarca (Latin)‎)
+ * @author Don Alessandro
+ */
+$messages['crh-latn'] = array(
+	'wikibase-editlinks' => 'Bağlantılarnı deñiştir',
+);
+
 /** Czech (česky)
  * @author JAn Dudík
  * @author Mormegil
@@ -467,41 +481,46 @@ $messages['cu'] = array(
 
 /** Danish (dansk)
  * @author Christian List
+ * @author Hede2000
  * @author Poul G
  * @author Steenth
  */
 $messages['da'] = array(
-	'wikibase-client-desc' => 'Klient til Wikibase udvidelse',
-	'wikibase-after-page-move' => 'Du kan også [$1 opdatere] det tilknyttede Wikidata emne for at opdatere sproglink til den flyttet side.',
-	'wikibase-comment-remove' => 'Det tilknyttede Wikidata emne er slettet. Sprog-links fjernet.',
-	'wikibase-comment-linked' => 'Et Wikidata emne er blevet knyttet til denne side.',
-	'wikibase-comment-unlink' => 'Denne side er ikke længere linket fra et Wikidata emne. Sprog-links fjernet.',
-	'wikibase-comment-restore' => 'Det tilknyttede Wikidata emne er genskabt. Sprog-links gendannet.',
+	'wikibase-client-desc' => 'Klient til Wikibase-udvidelsen',
+	'wikibase-after-page-move' => 'Du kan også [$1 opdatere] det tilknyttede Wikidata-emne for at fastholde sproglinks på den flyttede side.',
+	'wikibase-comment-remove' => 'Det tilknyttede Wikidata-emne er slettet. Sproglinks fjernet.',
+	'wikibase-comment-linked' => 'Et Wikidata-emne er blevet knyttet til denne side.',
+	'wikibase-comment-unlink' => 'Denne side er ikke længere linket fra et Wikidata-emne. Sproglinks fjernet.',
+	'wikibase-comment-restore' => 'Det tilknyttede Wikidata-emne er genskabt. Sproglinks gendannet.',
 	'wikibase-comment-update' => 'Sprog-link opdateret.',
 	'wikibase-comment-sitelink-add' => 'Sprog-link tilføjet: $1',
 	'wikibase-comment-sitelink-change' => 'Sprog-link ændret fra $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Sprog-link fjernet: $1',
-	'wikibase-comment-multi' => '{{PLURAL:$1|en ændring|$1 ændringer}}',
+	'wikibase-comment-multi' => '{{PLURAL:$1|ændring|ændringer}}',
 	'wikibase-editlinks' => 'Rediger links',
-	'wikibase-editlinkstitle' => 'Rediger sprog-link',
-	'wikibase-linkitem-addlinks' => 'Tilføje links',
-	'wikibase-linkitem-alreadylinked' => 'Siden du ønskede at sammenkæde med er allerede knyttet til et andet [$1 emne] på central data repository, som linker til $2 på dette websted. Emnet kan kun have én side pr. websted knyttet. Vælg venligst en anden side at linke sammen med.',
+	'wikibase-editlinkstitle' => 'Rediger sproglinks',
+	'wikibase-linkitem-addlinks' => 'Tilføj links',
+	'wikibase-linkitem-alreadylinked' => 'Siden du ønskede at sammenkæde med er allerede knyttet til et andet [$1 emne] i det centrale datadepot, som linker til $2 på dette websted. Emner kan kun knyttes til én side for hvert websted. Vælg venligst en anden side, der skal linkes med.',
 	'wikibase-linkitem-close' => 'Luk dialogboksen og genindlæs siden igen',
-	'wikibase-linkitem-failure' => 'Der opstod en ukendt fejl under forsøget på at sammenkæde en given side.',
+	'wikibase-linkitem-failure' => 'Der opstod en ukendt fejl under forsøget på at sammenkæde den angivne side.',
 	'wikibase-linkitem-title' => 'Link til side',
 	'wikibase-linkitem-linkpage' => 'Link til side',
 	'wikibase-linkitem-selectlink' => 'Vælg et websted og en side, du vil sammenkæde denne side med.',
 	'wikibase-linkitem-input-site' => 'Sprog:',
 	'wikibase-linkitem-input-page' => 'Side:',
-	'wikibase-linkitem-invalidsite' => 'Ugyldig eller ukendt websted valgt',
-	'wikibase-linkitem-confirmitem-text' => 'Den side, du har valgt, er allerede knyttet til et [$1 emne på vores central data repository]. Bekræft, at siderne vises nedenfor er dem, du vil sammenkæde med.',
+	'wikibase-linkitem-invalidsite' => 'Ugyldigt eller ukendt websted valgt',
+	'wikibase-linkitem-confirmitem-text' => 'Den side, du har valgt, er allerede knyttet til et [$1 emne i vores centrale datadepot]. Bekræft, at siderne, der vises nedenfor, er dem, du vil sammenkæde med.',
 	'wikibase-linkitem-confirmitem-button' => 'Bekræft',
 	'wikibase-linkitem-not-loggedin-title' => 'Du skal være logget ind',
-	'wikibase-linkitem-not-loggedin' => 'Du skal være logget ind på denne wiki og i det [$1 central data repository] at bruge denne funktion.',
-	'wikibase-linkitem-success-create' => 'Siderne er blevet linket. Du kan finde det nyoprettet element, der indeholder links i vores [$1 central data repository].',
-	'wikibase-linkitem-success-link' => 'Siderne er blevet linket. Du kan finde det element, der indeholder links i vores [$1 central data repository].',
+	'wikibase-linkitem-not-loggedin' => 'Du skal være logget ind på denne wiki og i det [$1 centrale datadepot] for at bruge denne funktion.',
+	'wikibase-linkitem-success-create' => 'Siderne er blevet linket. Du kan finde det nyoprettede emne, der indeholder links, i vores [$1 centrale datadepot].',
+	'wikibase-linkitem-success-link' => 'Siderne er blevet linket. Du kan finde det emne, der indeholder links, i vores [$1 centrale datadepot].',
+	'wikibase-property-notfound' => 'Egenskaben $1 ikke fundet.',
+	'wikibase-property-notsupportedyet' => 'Wikibase understøtter endnu ikke egenskabstypen for egenskaben $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
-	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata redigeringer i de seneste ændringer',
+	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata-redigeringer i seneste ændringer',
+	'wikibase-watchlist-show-changes-pref' => 'Vis Wikidata-redigeringer på din overvågningsliste',
+	'wikibase-error-invalid-entity-id' => 'Den indtastede ID er ukendt i systemet. Anvend venligst en gyldig ID.',
 );
 
 /** German (Deutsch)
@@ -599,9 +618,17 @@ $messages['dsb'] = array(
  * @author Geraki
  */
 $messages['el'] = array(
+	'wikibase-comment-update' => 'Οι γλωσσικοί σύνδεσμοι ενημερώθηκαν.',
+	'wikibase-comment-sitelink-add' => 'Γλωσσικός σύνδεσμος προστέθηκε: $1',
+	'wikibase-comment-sitelink-change' => 'Γλωσσικός σύνδεσμος άλλαξε από $1 σε $2',
+	'wikibase-comment-sitelink-remove' => 'Γλωσσικός σύνδεσμος αφαιρέθηκε: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|αλλαγή|αλλαγές}}',
 	'wikibase-editlinks' => 'Επεξεργασία συνδέσμων',
 	'wikibase-editlinkstitle' => 'Επεξεργασία διαγλωσσικών συνδέσεων',
 	'wikibase-linkitem-addlinks' => 'Προσθήκη συνδέσεων',
+	'wikibase-linkitem-alreadylinked' => 'Η σελίδα με την οποία θέλατε να συνδέσετε έχει ήδη προσαρτηθεί σε ένα [$1 αντικείμενο] του κεντρικού αποθετηρίου δεδομένων που συνδέει στο $2 σε αυτό το site. Τα αντικείμενα μπορούν να έχουν μόνο μία συνδεμένη σελίδα ανά site. Παρακαλούμε επιλέξτε μια διαφορετική σελίδα για να συνδέσετε.',
+	'wikibase-linkitem-close' => 'Κλείσετε το παράθυρο διαλόγου και φορτώσετε εκ νέου τη σελίδα',
+	'wikibase-linkitem-failure' => 'Ένα άγνωστο σφάλμα παρουσιάστηκε κατά την προσπάθεια να συνδεθεί η συγκεκριμένη σελίδα.',
 	'wikibase-linkitem-title' => 'Σύνδεση με σελίδα',
 	'wikibase-linkitem-linkpage' => 'Σύνδεση με σελίδα',
 	'wikibase-linkitem-selectlink' => 'Παρακαλούμε επιλέξτε ένα ιστότοπο και μια σελίδα που θέλετε να συνδέσετε με αυτή τη σελίδα.',
@@ -614,8 +641,10 @@ $messages['el'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Πρέπει να έχετε συνδεθεί σε αυτό το wiki και στο [$1 κεντρικό αποθετήριο δεδομένων] για να χρησιμοποιήσετε αυτή τη δυνατότητα.',
 	'wikibase-linkitem-success-create' => 'Οι σελίδες έχουν συνδεθεί με επιτυχία. Μπορείτε να βρείτε το μόλις δημιουργημένο αντικείμενο που περιέχει τους συνδέσεις στο [$1 κεντρικό αποθετήριο δεδομένων].',
 	'wikibase-linkitem-success-link' => 'Οι σελίδες έχουν συνδεθεί με επιτυχία. Μπορείτε να βρείτε το αντικείμενο που περιέχει τους συνδέσεις στο [$1 κεντρικό αποθετήριο δεδομένων].',
+	'wikibase-property-notfound' => 'Η ιδιότητα $1 δεν βρέθηκε.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Εμφάνιση των επεξεργασιών στο Wikidata στις πρόσφατες αλλαγές',
+	'wikibase-watchlist-show-changes-pref' => 'Εμφάνιση αλλαγών στα Wikidata στη λίστα παρακολούθησης σας',
 );
 
 /** Esperanto (Esperanto)
@@ -867,7 +896,8 @@ $messages['gl'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase aínda non soporta o tipo de propiedade da propiedade "$1".',
 	'wikibase-rc-hide-wikidata' => '$1 o Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar as modificacións do Wikidata nos cambios recentes',
-	'wikibase-watchlist-show-changes-pref' => 'Mostrar as modificacións do Wikidata na súa lista de vixilancia', # Fuzzy
+	'wikibase-watchlist-show-changes-pref' => 'Mostrar as modificacións do Wikidata na súa lista de vixilancia',
+	'wikibase-error-invalid-entity-id' => 'O sistema descoñece o ID inserido. Utilice un identificador de entidade válido.',
 );
 
 /** Swiss German (Alemannisch)
@@ -1117,8 +1147,12 @@ $messages['ilo'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Masapul a nakastrekka iti daytoy a wiki ken idiay [$1 sentro a resipotorio ti datos] tapno makausar ti daytoy a pagpilian.',
 	'wikibase-linkitem-success-create' => 'Dagiti panid ket balligi a naisilpo. Mabalinmo a biruken ti baro a napartuat a banag nga aglaon kadagiti silpo idiay [$1 sentro a repositorio ti datos].',
 	'wikibase-linkitem-success-link' => 'Dagiti panid ket balligi a naisilpo. Mabalinmo a biruken ti banag nga aglaon kadagiti silpo idiay [$1 sentro a resipotorio ti datos].',
+	'wikibase-property-notfound' => 'Ti $1 a tagikua ket saan a nabirukan.',
+	'wikibase-property-notsupportedyet' => 'Ti Wikibase ket saanna pay a suportaran ti tagikua a kita para iti $1 a tagikua.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Ipakita dagiti Wikidata nga inurnos idiay kinaudi a binalbaliwan',
+	'wikibase-watchlist-show-changes-pref' => 'Ipakita dagiti Wikidata a panagurnos iti bukodmo a bambantayan',
+	'wikibase-error-invalid-entity-id' => 'Ti ID a naikabil ket di ammo ti sistema. Pangngaasi nga agusar ti umiso nga entidad ti ID.',
 );
 
 /** Icelandic (íslenska)
@@ -1391,7 +1425,10 @@ $messages['ku-latn'] = array(
  */
 $messages['lb'] = array(
 	'wikibase-client-desc' => "Client fir d'Wikibase Erweiderung",
+	'wikibase-comment-remove' => 'Associéiert Wikidata-Element geläscht. Sproochlinken ewechgeholl.',
+	'wikibase-comment-linked' => 'E Wikidata-Element gouf mat dëser Säit verlinkt.',
 	'wikibase-comment-unlink' => 'Dës Säit gouf vum Wikidata-Element entlinkt. Interwiki-Linke goufen ewechgeholl.',
+	'wikibase-comment-restore' => 'Associéiert Wikidata-Element restauréiert. Sproochlinken restauréiert.',
 	'wikibase-comment-update' => 'Sproochlinke sinn aktualiséiert',
 	'wikibase-comment-sitelink-add' => 'Sproochlink derbäigesat: $1',
 	'wikibase-comment-sitelink-change' => 'Sproochlink vun $1 op $2 geännert',
@@ -1409,7 +1446,7 @@ $messages['lb'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'Dir musst ageloggt sinn',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Ännerungen an de rezenten Ännerunge weisen',
-	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Ännerungen an Ärer Iwwerwaachungslëscht weisen', # Fuzzy
+	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Ännerungen an Ärer Iwwerwaachungslëscht weisen',
 );
 
 /** Latvian (latviešu)
@@ -1892,6 +1929,7 @@ $messages['sr-ec'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Википодаци',
 	'wikibase-rc-show-wikidata-pref' => 'Прикажи измене на Википодацима у скорашњим изменама',
 	'wikibase-watchlist-show-changes-pref' => 'Прикажи измене на Википодацима у списку надгледања', # Fuzzy
+	'wikibase-error-invalid-entity-id' => 'Унети идентификатор је непознат систему. Молимо унесите важећи ИД.',
 );
 
 /** Serbian (Latin script) (srpski (latinica)‎)
@@ -2113,15 +2151,16 @@ $messages['zh-hans'] = array(
 	'wikibase-linkitem-invalidsite' => '选择了一个未知或无效的网站',
 	'wikibase-linkitem-confirmitem-text' => '您选择的页面已链接到[ $1 我们中央数据知识库中的项目]。请确认如下所示的页面都是您想要与此页面链接的。',
 	'wikibase-linkitem-confirmitem-button' => '确认',
-	'wikibase-linkitem-not-loggedin-title' => '您必须要登入',
-	'wikibase-linkitem-not-loggedin' => '您必须要在此维基上和[$1 中央数据知识库]登入才能使用此功能。',
+	'wikibase-linkitem-not-loggedin-title' => '您必须登录',
+	'wikibase-linkitem-not-loggedin' => '您必须在此维基和[$1 中央数据知识库]上登录才能使用此功能。',
 	'wikibase-linkitem-success-create' => '页面以成功地被链接了。您可以在我们的[$1 中央数据知识库]找到包含该链接的新项目。',
 	'wikibase-linkitem-success-link' => '页面已成功地被链接了。您可以在我们的[$1 中央数据知识库]找到包含该链接的项目。',
 	'wikibase-property-notfound' => '$1属性未找到。',
 	'wikibase-property-notsupportedyet' => 'Wikibase对$1属性不支持属性类型。',
 	'wikibase-rc-hide-wikidata' => '$1维基数据',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
-	'wikibase-watchlist-show-changes-pref' => '在您的监视列表中显示Wikidata的编辑', # Fuzzy
+	'wikibase-watchlist-show-changes-pref' => '在您的监视列表中显示Wikidata的编辑',
+	'wikibase-error-invalid-entity-id' => '输入的ID在系统中是未知的。请使用一个有效的实体ID。',
 );
 
 /** Traditional Chinese (中文（繁體）‎)

@@ -320,17 +320,39 @@ $messages['cs'] = array(
 );
 
 /** Danish (dansk)
+ * @author Hede2000
  * @author Poul G
  */
 $messages['da'] = array(
-	'wikibase-lib-desc' => 'Fælles funktionalitet for Wikibase og Wikibase klient udvidelser',
+	'wikibase-lib-desc' => 'Fælles funktionalitet for Wikibase og Wikibase-klientudvidelser',
 	'wikibase-entity-item' => 'emne',
 	'wikibase-entity-property' => 'egenskab',
 	'wikibase-entity-query' => 'forespørgsel',
+	'wikibase-diffview-reference' => 'fodnote',
+	'wikibase-diffview-rank' => 'rang',
+	'wikibase-diffview-qualifier' => 'operator',
+	'wikibase-error-unexpected' => 'Der opstod en uventet fejl.',
+	'wikibase-error-save-generic' => 'Der opstod en fejl under forsøget på at gemme og derfor kan ændringerne ikke gennemføres.',
+	'wikibase-error-remove-generic' => 'Der opstod en fejl under forsøget på at fjerne og derfor kan ændringerne ikke gennemføres.',
+	'wikibase-error-save-connection' => 'En forbindelsesfejl opstod under forsøget på at gemme og derfor kunne dine ændringer ikke gennemføres. Kontroller forbindelsen til internettet.',
+	'wikibase-error-remove-connection' => 'En forbindelsesfejl opstod under forsøget på at fjerne og derfor kunne dine ændringer ikke gennemføres. Kontroller forbindelsen til internettet.',
+	'wikibase-error-save-timeout' => 'Vi oplever tekniske problemer og derfor kunne dit ønske om at gemme ikke gennemføres.',
+	'wikibase-error-remove-timeout' => 'Vi oplever tekniske problemer og derfor kunne dit ønske om at fjerne ikke gennemføres.',
+	'wikibase-error-autocomplete-connection' => 'Wikipedia API kunne ikke forespørges. Prøv igen senere.',
+	'wikibase-error-autocomplete-response' => 'Serveren svarede: $1',
+	'wikibase-error-ui-client-error' => 'Forbindelsen til side-klienten mislykkedes. Prøv igen senere.',
+	'wikibase-error-ui-no-external-page' => 'Den angivne artikel blev ikke fundet på det tilsvarende websted.',
+	'wikibase-error-ui-cant-edit' => 'Du har ikke tilladelse til at udføre denne handling.',
+	'wikibase-error-ui-no-permissions' => 'Du har ikke tilstrækkelige rettigheder til at udføre denne handling.',
+	'wikibase-error-ui-link-exists' => 'Du kan ikke sammenkæde med denne side, fordi et andet emne allerede er forbundet til den.',
+	'wikibase-error-ui-session-failure' => 'Din session er udløbet. Log venligst ind igen.',
+	'wikibase-error-ui-edit-conflict' => 'Der er en redigeringskonflikt. Genindlæs og gem igen.',
+	'wikibase-replicationnote' => 'Vær opmærksom på, at der kan gå flere minutter før ændringerne er synlige på alle wikier.',
 	'wikibase-sitelinks' => 'Liste over sider, der er knyttet til dette emne',
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprog',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
 	'wikibase-sitelinks-link-columnheading' => 'Linket artikel',
+	'wikibase-tooltip-error-details' => 'Detaljer',
 	'datatypes-type-wikibase-item' => 'Emne',
 	'datatypes-type-commonsMedia' => 'Commons media-fil',
 );
@@ -1028,11 +1050,18 @@ $messages['ky'] = array(
  */
 $messages['lb'] = array(
 	'wikibase-entity-item' => 'Element',
+	'wikibase-entity-query' => 'Ufro',
 	'wikibase-diffview-reference' => 'Referenz',
+	'wikibase-diffview-rank' => 'Classement',
+	'wikibase-error-unexpected' => 'En onerwaarte Feeler ass geschitt.',
+	'wikibase-error-ui-no-external-page' => 'De spezifizéierten Artikel konnt op dem korrespondéierte Site net fonnt ginn.',
+	'wikibase-error-ui-cant-edit' => 'Dir däerft dës Aktioun net maachen.',
+	'wikibase-error-ui-no-permissions' => 'Dir hutt net genuch Rechter fir dës Aktioun ze maachen.',
 	'wikibase-error-ui-edit-conflict' => "Et gëtt en Editiounskonflikt. Lued d'Säit nach eng Kéier a späichert nach eng Kéier.",
 	'wikibase-sitelinks' => 'Lëscht vun de Säiten déi mat dësem Objet verlinkt sinn',
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprooch',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
+	'wikibase-sitelinks-link-columnheading' => 'Verlinkten Artikel',
 	'wikibase-tooltip-error-details' => 'Detailer',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Media-Fichier op Commons',
