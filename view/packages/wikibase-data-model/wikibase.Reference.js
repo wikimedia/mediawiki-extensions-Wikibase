@@ -83,6 +83,8 @@
 		 * Returns a JSON structure representing this reference.
 		 * @since 0.4
 		 *
+		 * TODO: implement this as a wb.serialization.Serializer
+		 *
 		 * @return {Object}
 		 */
 		toJSON: function() {

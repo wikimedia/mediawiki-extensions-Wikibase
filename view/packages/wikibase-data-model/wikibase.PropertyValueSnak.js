@@ -57,6 +57,7 @@ var SELF = wb.PropertyValueSnak = wb.utilities.inherit( 'WbPropertyValueSnak', P
 
 	/**
 	 * @see wb.Snak.toJSON
+	 * TODO: implement this as a wb.serialization.Serializer
 	 */
 	toJSON: function() {
 		var json = this.toMap();

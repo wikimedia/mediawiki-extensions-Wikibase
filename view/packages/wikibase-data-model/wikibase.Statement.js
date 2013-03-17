@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( wb, $, undefined ) {
+( function( wb, $ ) {
 'use strict';
 
 var PARENT = wb.Claim,
@@ -93,43 +93,40 @@ var SELF = wb.Statement = wb.utilities.inherit( 'WbStatement', PARENT, construct
 	 * @see wb.Claim.equals
 	 * @since 0.4
 	 *
-	 * @param {wb.Statement} statement
+	 * @param {wb.Statement|*} other
 	 * @return {boolean}
 	 */
-	equals: function( statement ) {
-		if ( this === statement ) {
-			return true;
-		} else if (
-			!( statement instanceof wb.Statement )
-			|| !PARENT.prototype.equals.call( this, statement )
-			|| this._references.length !== statement.getReferences().length
-			|| this._rank !== statement.getRank()
+	equals: function( other ) {
+		if(
+			!PARENT.prototype.equals.call( this, other )
+			|| this._references.length !== other.getReferences().length
+			|| this._rank !== other.getRank()
 		) {
 			return false;
 		}
 
-		// Check if references are equal:
-		var equals = true;
-		$.each( this._references, function( myI, myReference ) {
-			var found = false;
-			$.each( statement.getReferences(), function( yourI, yourReference ) {
-				if ( myReference.equals( yourReference ) ) {
-					found = true;
-					return false;
-				}
-			} );
-			if ( !found ) {
-				equals = false;
-				return false;
-			}
-		} );
+		// Check whether references are equal:
+		var ownRefs = this._references,
+			otherRefs = other.getReferences();
 
-		return equals;
+		checkOwnRefs: for( var i in ownRefs ) {
+			var ownRef = ownRefs[i];
+
+			for( var j in otherRefs ) {
+				if( ownRef.equals( otherRefs[j] ) ) {
+					continue checkOwnRefs;
+				}
+			}
+			return false;
+		}
+		return true;
 	},
 
 	/**
 	 * Returns a JSON structure representing this statement.
 	 * @since 0.4
+	 *
+	 * TODO: implement this as a wb.serialization.Serializer
 	 *
 	 * @return {Object}
 	 */

@@ -107,21 +107,23 @@ $.extend( SELF.prototype, {
 	 *
 	 * @since 0.4
 	 *
-	 * @param {wb.Claim|*} claim If this is not a wb.Claim, false will be returned.
+	 * @param {wb.Claim|*} other If this is not a wb.Claim, false will be returned.
 	 * @return boolean
 	 */
-	equals: function( claim ) {
-		return this === claim
+	equals: function( other ) {
+		return this === other
 			|| ( // snaks have no IDs, so we don't have to worry about comparing any
-				claim instanceof wb.Claim
-				&& this._mainSnak.equals( claim.getMainSnak() )
-				&& this._qualifiers.equals( claim.getQualifiers() )
+				other instanceof this.constructor
+				&& this._mainSnak.equals( other.getMainSnak() )
+				&& this._qualifiers.equals( other.getQualifiers() )
 			);
 	},
 
 	/**
 	 * Returns a JSON structure representing this claim.
 	 * @since 0.4
+	 *
+	 * TODO: implement this as a wb.serialization.Serializer
 	 *
 	 * @return {Object}
 	 */
@@ -145,6 +147,8 @@ $.extend( SELF.prototype, {
 
 /**
  * Creates a new Claim object from a given JSON structure.
+ *
+ * TODO: implement this as a wb.serialization.Unserializer
  *
  * @param {Object} json
  * @return {wb.Claim}

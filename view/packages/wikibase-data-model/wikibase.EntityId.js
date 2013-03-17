@@ -143,6 +143,9 @@
 
 	} );
 
+/**
+ * @see dv.DataValue.newFromJSON
+ */
 wb.EntityId.newFromJSON = function( json ) {
 	return new wb.EntityId( json['entity-type'], json['numeric-id'] );
 };
