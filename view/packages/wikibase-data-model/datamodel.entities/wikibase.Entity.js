@@ -414,6 +414,6 @@
 			throw new Error( 'Unkown entity type "' + type + '"' );
 		}
 		return entity;
-	}
+	};
 
 }( wikibase, jQuery ) );
