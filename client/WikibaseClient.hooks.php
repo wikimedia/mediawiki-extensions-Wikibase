@@ -476,10 +476,11 @@ final class ClientHooks {
 	 * @param array &$tables
 	 * @param array &$join_conds
 	 * @param array &$fields
+	 * @param array $values
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialWatchlistQuery( array &$conds, array &$tables, array &$join_conds, array &$fields ) {
+	public static function onSpecialWatchlistQuery( array &$conds, array &$tables, array &$join_conds, array &$fields, array $values ) {
 		global $wgRequest, $wgUser;
 
 		wfProfileIn( __METHOD__ );
@@ -488,7 +489,7 @@ final class ClientHooks {
 			// Don't act on activated enhanced watchlist
 			$wgRequest->getBool( 'enhanced', $wgUser->getOption( 'usenewrc' ) ) === false &&
 			// Or in case the user disabled it
-			$wgRequest->getBool( 'hideWikibase', !$wgUser->getOption( 'wlshowwikibase' ) ) === false
+			$values['hideWikibase'] === 0
 		) {
 			$dbr = wfGetDB( DB_SLAVE );
 
