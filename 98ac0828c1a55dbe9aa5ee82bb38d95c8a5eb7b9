@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqFm.g2A",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T03:42:52Z",
+      "side": 1,
+      "message": "it\u0027s not part of this change, but yuck!",
+      "revId": "98ac0828c1a55dbe9aa5ee82bb38d95c8a5eb7b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqPmK978",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T03:42:52Z",
+      "side": 1,
+      "message": "huh?",
+      "revId": "98ac0828c1a55dbe9aa5ee82bb38d95c8a5eb7b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqLmUf.E",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T03:42:52Z",
+      "side": 1,
+      "message": "no passing this in the constructor?",
+      "revId": "98ac0828c1a55dbe9aa5ee82bb38d95c8a5eb7b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqBmIC8Y",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T03:42:52Z",
+      "side": 1,
+      "message": "why don\u0027t we pass a site object in the constructor? or at least Sites and a global identifier for the wiki\n\nthis is yucky but might work for *now*",
+      "revId": "98ac0828c1a55dbe9aa5ee82bb38d95c8a5eb7b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqNmRM-E",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T03:42:52Z",
+      "side": 1,
+      "message": "how about the settings array can be passed, such as mock settings?",
+      "revId": "98ac0828c1a55dbe9aa5ee82bb38d95c8a5eb7b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqDm5T3g",
+        "filename": "client/includes/PageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T03:42:52Z",
+      "side": 1,
+      "message": "?",
+      "revId": "98ac0828c1a55dbe9aa5ee82bb38d95c8a5eb7b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqJnEG-k",
+        "filename": "client/includes/WikiPageUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T03:42:52Z",
+      "side": 1,
+      "message": "?",
+      "revId": "98ac0828c1a55dbe9aa5ee82bb38d95c8a5eb7b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
