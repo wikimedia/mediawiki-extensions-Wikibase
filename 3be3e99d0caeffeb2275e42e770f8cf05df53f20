@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqJ-vGx8",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.Claim.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-03-18T11:48:12Z",
+      "side": 1,
+      "message": "I guess this will always be true since you are building another constructor in dv.util.inherit: new wb.Reference() instance of this \u003d\u003d\u003d true while new wb.Reference() instanceof wb.Claim \u003d\u003d\u003d false. This is actually why I have been using wb.Claim in the first place...",
+      "revId": "3be3e99d0caeffeb2275e42e770f8cf05df53f20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
