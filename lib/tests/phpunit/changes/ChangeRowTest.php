@@ -42,6 +42,15 @@ use \Wikibase\Settings;
  */
 class ChangeRowTest extends \ORMRowTest {
 
+	public function setUp() {
+		if ( defined( 'WBC_VERSION' ) ) {
+			//TODO: remove this once ChangeRow no longer needs the ChangesTable as a factory.
+			$this->markTestSkipped( "Can't test changes table on client" );
+		}
+
+		parent::setUp();
+	}
+
 	/**
 	 * @since 1.20
 	 * @return array
