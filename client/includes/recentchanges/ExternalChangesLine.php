@@ -174,6 +174,8 @@ class ExternalChangesLine {
 			if ( $message === null ) {
 				$message = wfMessage( $comment['message'] )->text();
 			}
+		} else {
+			$message = $comment;
 		}
 
 		return $message;
