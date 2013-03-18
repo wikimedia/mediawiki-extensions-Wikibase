@@ -378,6 +378,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
 				'jquery.wikibase.edittoolbar',
+				'jquery.wikibase.removetoolbar',
 			)
 		),
 
@@ -397,6 +398,15 @@ return call_user_func( function() {
 		'jquery.wikibase.edittoolbar' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.edittoolbar.js',
+			),
+			'dependencies' => array(
+				'wikibase.ui.PropertyEditTool', // needs wikibase.ui.Toolbar.EditGroup
+			)
+		),
+
+		'jquery.wikibase.removetoolbar' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.removetoolbar.js',
 			),
 			'dependencies' => array(
 				'wikibase.ui.PropertyEditTool', // needs wikibase.ui.Toolbar.EditGroup
