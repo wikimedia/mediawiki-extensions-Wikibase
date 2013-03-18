@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DnTP4i0Y",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2013-03-18T16:53:06Z",
+      "side": 1,
+      "message": "$summary is passed by reference ( \u0026$summary ) so it will be saved there.",
+      "revId": "bf69a3d42322c951c039061155e085a86ff51999",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
