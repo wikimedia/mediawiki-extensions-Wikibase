@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DqIoll7I",
+        "filename": "lib/includes/PropertyByLabelLookup.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T14:20:30Z",
+      "side": 1,
+      "message": "will keep working on this but can make it so the code doesn\u0027t use this yet or this is experimental",
+      "parentUuid": "DqD-ODy8",
+      "revId": "afb14fc506821e9a3f863c6f6765b7661e0fda47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqF-Tw9Q",
         "filename": "lib/includes/PropertyByLabelLookup.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-18T14:05:21Z",
       "side": 1,
       "message": "This should go into the Entity class.",
+      "revId": "afb14fc506821e9a3f863c6f6765b7661e0fda47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqL8JvzM",
+        "filename": "lib/includes/PropertyByLabelLookup.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T14:20:30Z",
+      "side": 1,
+      "message": "the statements by property array also in Entity? and load the entity object each time to get the statements.  get rid of the indexing?",
+      "parentUuid": "DqF-Tw9Q",
       "revId": "afb14fc506821e9a3f863c6f6765b7661e0fda47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DqIr8two",
+        "filename": "lib/includes/PropertyByLabelLookup.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T14:20:30Z",
+      "side": 1,
+      "message": "MainSnaks would work",
+      "parentUuid": "DqB-Wq8I",
+      "revId": "afb14fc506821e9a3f863c6f6765b7661e0fda47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqL-iH6I",
         "filename": "lib/includes/PropertyIdLabelArray.php",
         "patchSetId": 7
@@ -64,6 +118,24 @@
       "writtenOn": "2013-03-18T14:05:21Z",
       "side": 1,
       "message": "I wouldn\u0027t call this an array - even if functionally, it is, conceptually, it\u0027s rather a mapping, right?\n\nIs it really meaningful to extend ArrayObject here? Do we ever need to iterate over this mapping? Wouldn\u0027t it be nicer to wrap an array object? Or even wrap a plain old array?",
+      "revId": "afb14fc506821e9a3f863c6f6765b7661e0fda47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqOpJs2E",
+        "filename": "lib/includes/PropertyIdLabelArray.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T14:20:30Z",
+      "side": 1,
+      "message": "not changing it now, but could call it PropertyIdLabelMapping if you prefer.\n\nthe entire implementation is evolving and the terms table serves as a store.  we\u0027ll need some kind of object to load that data in, and translate it into something that memcached uses, and have something that can take memcached data.  \n\nthere\u0027s the lookup that does the service stuff and we need some kind of list and not sure about a plain old array is really what we need.",
+      "parentUuid": "DqL-iH6I",
       "revId": "afb14fc506821e9a3f863c6f6765b7661e0fda47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "DqJ9l2yE",
+        "filename": "lib/includes/formatters/ItemFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T14:20:30Z",
+      "side": 1,
+      "message": "where? not that I find",
+      "parentUuid": "DqJ-yu20",
+      "revId": "afb14fc506821e9a3f863c6f6765b7661e0fda47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqP8Bdz0",
         "filename": "lib/tests/phpunit/PropertyByLabelLookupTest.php",
         "patchSetId": 7
@@ -132,6 +222,24 @@
       "writtenOn": "2013-03-18T14:05:21Z",
       "side": 1,
       "message": "This is redundant, --filter PropertyByLabelLookupTest gives you the same result. It would be much more useful to have @group WikibaseDataTransclusion or some such.",
+      "revId": "afb14fc506821e9a3f863c6f6765b7661e0fda47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqCpp674",
+        "filename": "lib/tests/phpunit/PropertyByLabelLookupTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-18T14:20:30Z",
+      "side": 1,
+      "message": "sure, we can do that .... and this test is incomplete, so i\u0027ll discard it now and reintroduce it when ready",
+      "parentUuid": "DqP8Bdz0",
       "revId": "afb14fc506821e9a3f863c6f6765b7661e0fda47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
