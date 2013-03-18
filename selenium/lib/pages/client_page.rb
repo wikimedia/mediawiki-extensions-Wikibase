@@ -25,6 +25,7 @@ class ClientPage < RubySelenium
   text_area(:clientCreateArticleInput, :id => "wpTextbox1")
   button(:clientCreateArticleSubmit, :id => "wpSave")
   span(:clientArticleTitle, :xpath => "//h1[@id='firstHeading']/span")
+  paragraph(:clientArticleText, :xpath => "//div[@id='mw-content-text']/p")
   unordered_list(:clientInterwikiLinkList, :xpath => "//div[@id='p-lang']/div/ul")
   button(:clientActionConfirmationButton, :xpath => "//form[@class='visualClear']/input[@class='mw-htmlform-submit']")
 
