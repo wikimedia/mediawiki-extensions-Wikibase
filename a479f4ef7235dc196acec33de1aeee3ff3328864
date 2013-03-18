@@ -172,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "DqCpyS.M",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2013-03-18T15:57:59Z",
+      "side": 1,
+      "message": "In any case, these errors would be relevant to the mw.title module in Scribunto and should be addressed there...",
+      "parentUuid": "DqGrsw5A",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqOrfc9E",
         "filename": "client/resources/mw.wikibase.lua",
         "patchSetId": 1
