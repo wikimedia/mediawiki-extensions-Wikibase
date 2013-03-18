@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqD-aj0k",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2013-03-18T12:24:51Z",
+      "side": 1,
+      "message": "Spurious. Why are these in the commit message anyway?",
+      "revId": "b5d467dea33ca06ce80ffdce42b27ec9b8485dc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
