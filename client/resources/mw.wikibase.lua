@@ -26,14 +26,20 @@
 local wikibase = {}
 
 function wikibase.setupInterface()
-  for k, v in pairs( mw_interface ) do
-    wikibase[k] = v
+  local title  = require('mw.title')
+  local site = require('mw.site')
+  local php = mw_interface
+  mw_interface = nil
+  wikibase.getEntity = function()
+    id = php.getEntityByTitle(tostring(title.getCurrentTitle()))
+    if (id == nil) then return nil end
+    entity = php.getEntity(id)
+    return entity
   end
   mw = mw or {}
   mw.wikibase = wikibase
   package.loaded['mw.wikibase'] = wikibase
-  mw_interface = nil
   wikibase.setupInterface = nil
-end
+end 
 
 return wikibase

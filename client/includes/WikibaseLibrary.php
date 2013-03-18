@@ -32,7 +32,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @since 0.4
 	 */
 	public function register() {
-		$lib = array( 'getEntity' => array( $this, 'getEntity' ) );
+        $lib = array( 
+            'getEntity' => array( $this, 'getEntity' ), 
+            'getEntityByTitle' => array( $this, 'getEntityByTitle' ) 
+        );
 		$this->getEngine()->registerInterface( dirname( __FILE__ ) . '/../resources/' . 'mw.wikibase.lua', $lib, array() );
 	}
 	/**
@@ -58,7 +61,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			Wikibase\EntityId::newFromPrefixedId( $prefixedEntityId )
 		);
 		if ( $entityObject == null ) {
-			return null;
+			return ( null );
 		}
 		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
 		$serializer = $serializerFactory->newSerializerForObject( $entityObject );
@@ -69,4 +72,21 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$entityArr = $serializer->getSerialized( $entityObject );
 		return array( $entityArr );
 	}
+    public function getEntityByTitle( $pageTitle = null ) {
+		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
+        $globalSiteId = \Wikibase\Settings::get("siteGlobalID");
+        $table = \Wikibase\ClientStoreFactory::getStore( 'sqlstore' )->newSiteLinkTable();
+        if ( $table == null ) {
+            return array( null );
+        }
+        $numericId = $table->getItemIdForLink( $globalSiteId, $pageTitle );
+        if ( !is_int( $numericId ) ) {
+            return array( null );
+        }
+        $id = new Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, $numericId );
+        if ( $id == null ) {
+            return array( null );
+        }
+        return array( $id->getPrefixedId() );
+    }
 }
