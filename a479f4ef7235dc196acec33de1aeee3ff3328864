@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqEpdP3Y",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-18T15:45:32Z",
+      "side": 1,
+      "message": "trailing WS",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqGrTY9U",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-18T15:45:32Z",
+      "side": 1,
+      "message": "we really only want to expose one function, getEntity(), without any parameters, for now.",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqKpomx8",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-18T15:45:32Z",
+      "side": 1,
+      "message": "getEntityByTitle spounds like it should return an entity, especially since getEntity does. But it returns an ID. I suggest to call it getEntityId( $title );\n\nAlso, missing documentation.",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqMpRT2I",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-18T15:45:32Z",
+      "side": 1,
+      "message": "bad indent",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqIpjV0U",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-18T15:45:32Z",
+      "side": 1,
+      "message": "spaces after ( and before )",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqOpOk8A",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-18T15:45:32Z",
+      "side": 1,
+      "message": "Declare your classes, so you don\u0027t have to use fully qualified names everywhere (backslashes are so ugly).",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqIrEtxE",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-18T15:45:32Z",
+      "side": 1,
+      "message": "I, for one, like a blank line after my closing curlies...",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqKrJeyg",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-18T15:45:32Z",
+      "side": 1,
+      "message": "Needs underscores-to-spaces normalization of the title.\nAlso, I think we have getEntityIdForLink now, which returns an EntityId object.",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqIrtl5E",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-18T15:45:32Z",
+      "side": 1,
+      "message": "tabs or spaces?",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqGrsw5A",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-18T15:45:32Z",
+      "side": 1,
+      "message": "does that include the namespace prefix? please test on a page not in the main namespace.\n\nAlso, please test with a title that contains spaces, to make sure we are using underscores resp. spaces in the correct places.",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqOrfc9E",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-18T15:45:32Z",
+      "side": 1,
+      "message": "trailing ws",
+      "revId": "a479f4ef7235dc196acec33de1aeee3ff3328864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
