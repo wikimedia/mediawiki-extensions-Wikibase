@@ -41,6 +41,11 @@ class DispatchChanges extends \Maintenance {
 	protected $stateTable;
 
 	/**
+	 * @var ChangesTable: access to the changes table
+	 */
+	protected $changesTable;
+
+	/**
 	 * @var string: the logical name of the repository's database
 	 */
 	protected $repoDB;
@@ -78,9 +83,27 @@ class DispatchChanges extends \Maintenance {
 	protected $delay;
 
 	/**
-	 * @var int: the number of times to try to lock a client wiki before giving up.
+	 * @var int: Number of seconds to wait before dispatching to the same wiki again.
+	 *           This affects the effective batch size, and this influences how changes
+	 *           can be coalesced.
 	 */
-	protected $maxSelectTries;
+	protected $dispatchInterval = 60;
+
+	/**
+	 * @var int: Number of seconds to wait before testing a lock. Any target with a lock
+	 *           timestamp newer than this will not be considered for selection.
+	 */
+	protected $lockGraceInterval = 60;
+
+	/**
+	 * @var int: Number of target wikis to select as a base set for random selection.
+	 *           Setting this to 1 causes strict "oldest first" behavior, with the possibility
+	 *           of grind/starvation if dispatching to the oldest wiki fails.
+	 *           Setting this equal to (or greater than) the number of target wikis
+	 *           causes a completely random selection of the target, regardless of when it
+	 *           was last selected for dispatch.
+	 */
+	protected $randomness = 5;
 
 	/**
 	 * @var bool: whether output should be version.
@@ -98,9 +121,15 @@ class DispatchChanges extends \Maintenance {
 			and dispatches them to any client wikis using their job queue.';
 
 		$this->addOption( 'verbose', "Report activity." );
-		$this->addOption( 'max-select-tries', "How often to try to find an idle client wiki before giving up. Default: 10", false, true );
-		$this->addOption( 'pass-delay', "Seconds to sleep between passes. Default: 1", false, true );
-		$this->addOption( 'max-passes', "The number of passes to do before exiting. Default: the number of client wikis if max-time isn't given. Infinite if it is.", false, true );
+		$this->addOption( 'idle-delay', "Seconds to sleep when idle. Default: 10", false, true );
+		$this->addOption( 'dispatch-interval', "How often to dispatch to each target wiki. "
+					. "Default: every 60 seconds", false, true );
+		$this->addOption( 'lock-grace-interval', "Seconds after wich to probe for orphaned locks. "
+					. "Default: 60", false, true );
+		$this->addOption( 'randomness', "Number of least current target wikis to pick from at random. "
+					. "Default: 5.", false, true );
+		$this->addOption( 'max-passes', "The number of passes to do before exiting. "
+					. "Default: the number of client wikis if max-time isn't given. Infinite if it is.", false, true );
 		$this->addOption( 'max-time', "The number of seconds before exiting. Default: infinite.", false, true );
 		$this->addOption( 'batch-size', "Max number of changes to pass to a client at a time. Default: 1000", false, true );
 	}
@@ -108,8 +137,9 @@ class DispatchChanges extends \Maintenance {
 	/**
 	 * Initializes members from command line options and configuration settings.
 	 */
-	protected function handleOptions() {
-		$this->stateTable = 'wb_changes_dispatch';
+	protected function init() {
+		$this->stateTable = 'wb_changes_dispatch'; //TODO: allow alternate table name for testing
+		$this->changesTable = new ChangesTable(); //TODO: allow injection of a mock instance for testing
 
 		$this->repoDB = Settings::get( 'changesDatabase' );
 		$this->clientWikis = Settings::get( 'localClientDatabases' );
@@ -118,9 +148,8 @@ class DispatchChanges extends \Maintenance {
 		$this->batchSize = intval( $this->getOption( 'batch-size', 1000 ) );
 		$this->maxTime = intval( $this->getOption( 'max-time', PHP_INT_MAX ) );
 		$this->maxPasses = intval( $this->getOption( 'max-passes', $this->maxTime < PHP_INT_MAX ? PHP_INT_MAX : count( $this->clientWikis ) ) );
-		$this->delay = intval( $this->getOption( 'pass-delay', 1 ) );
+		$this->delay = intval( $this->getOption( 'idle-delay', 10 ) );
 
-		$this->maxSelectTries = intval( $this->getOption( 'max-select-tries', 10 ) );
 		$this->verbose = $this->getOption( 'verbose', false );
 
 		// make sure we have a mapping from siteId to database name in clientWikis:
@@ -192,11 +221,13 @@ class DispatchChanges extends \Maintenance {
 			throw new \MWException( "WikibaseLib has not been loaded." );
 		}
 
-		$this->handleOptions();
+		$this->init();
 
 		if ( empty( $this->clientWikis ) ) {
 			throw new \MWException( "No client wikis configured! Please set \$wgWBSettings['localClientDatabases']." );
 		}
+
+		$this->initStateTable();
 
 		$passes = $this->maxPasses === PHP_INT_MAX ? "unlimited" : $this->maxPasses;
 		$time = $this->maxTime === PHP_INT_MAX ? "unlimited" : $this->maxTime;
@@ -205,57 +236,69 @@ class DispatchChanges extends \Maintenance {
 
 		$startTime = time();
 		$t = 0;
+		$c = 0;
 
-		//run passes in a loop, and sleep between passes.
-		for ( $i = 0; $i < $this->maxPasses; $i++ ) {
-			if ( $i && $this->delay > 0 ) {
-				// sleep before all but the first pass
-				sleep( $this->delay );
+		//run passes in a loop, sleeping when idle.
+		while ( $c < $this->maxPasses ) {
+			if ( $t  > $this->maxTime ) {
+				// timed out
+				break;
 			}
 
 			try {
-				$this->runPass();
+				$this->trace( "Picking a client wiki..." );
+				$wikiState = $this->selectClient();
+
+				if ( !$wikiState ) {
+					// try again later
+					$this->trace( "Idle: No client wiki found for dispatching. Sleeping." );
+					sleep( $this->delay );
+					continue;
+				}
+
+				$this->dispatchTo( $wikiState  );
+
+				$c++;
 			} catch ( \Exception $ex ) {
-				$this->log( "ERROR: $ex" );
+				$this->log( "ERROR: $ex; sleeping" );
+				sleep( $this->delay );
 			}
 
 			$t = ( time() - $startTime );
-
-			if ( ( $t  + $this->delay ) > $this->maxTime ) {
-				break;
-			}
 		}
 
-		$this->log( "Done, exiting after $i passes and $t seconds." );
+		$this->log( "Done, exiting after $c passes and $t seconds." );
 	}
 
 	/**
 	 * Performs one update pass. This involves the following steps:
 	 *
-	 * 1) Pick a client wiki at random and lock it against other dispatch processes.
-	 * 2) Get a batch of changes for the client wiki.
-	 * 3) Post a notification job to the client wiki's job queue.
-	 * 4) Update the dispatch log for the client wiki, and release it.
+	 * 1) Get a batch of changes for the client wiki.
+	 * 2) Post a notification job to the client wiki's job queue.
+	 * 3) Update the dispatch log for the client wiki, and release it.
+	 *
+	 * @param array $wikiState the dispatch state of a client wiki, as returned by lockClient()
+	 * @return int The number of changes dispatched
 	 */
-	public function runPass() {
-		$this->trace( "Picking a client wiki..." );
-		$wikiState = $this->selectClient();
-
+	public function dispatchTo( $wikiState ) {
 		$wikiDB = $wikiState['chd_db'];
 		$siteID = $wikiState['chd_site'];
 		$after = intval( $wikiState['chd_seen'] );
 
-		$this->log( "Processing changes for $wikiDB" );
-
 		// get relevant changes
+		$this->trace( "Finding pending changes for $wikiDB" );
 		list( $changes, $continueAfter ) = $this->getPendingChanges( $siteID, $wikiDB, $after );
 
-		// notify the client wiki about the changes
-		$this->postChangeJobs( $siteID, $wikiDB, $changes ); // does nothing if $changes is empty
+		$n = count( $changes );
+
+		if ( $n > 0 ) {
+			$this->trace( "Dispatching $n changes to $wikiDB, up to #$continueAfter" );
+
+			// notify the client wiki about the changes
+			$this->postChangeJobs( $siteID, $wikiDB, $changes );
+		}
 
 		$this->releaseClient( $continueAfter, $wikiState );
-
-		$n = count( $changes );
 
 		if ( $n === 0 ) {
 			$this->trace( "Posted no changes to $wikiDB (nothing to do). "
@@ -274,11 +317,14 @@ class DispatchChanges extends \Maintenance {
 	}
 
 	/**
-	 * Selects a client wiki at random and locks it. If no unlocked client wiki can be found after
-	 * $this->maxSelectTries, this method throws a MWException.
+	 * Selects a client wiki and locks it. If no suitable client wiki can be found,
+	 * this method returns null.
 	 *
-	 * @return array An associative array containing the state of the selected client wiki.
-	 *               Fields are:
+	 * Note: this implementation will try a wiki from the list returned by getCandidateClients()
+	 * at random. If all have been tried and failed, it returns null.
+	 *
+	 * @return array An associative array containing the state of the selected client wiki
+	 *               (or null, if no target could be locked). Fields are:
 	 *
 	 * * chd_site:     the client wiki's global site ID
 	 * * chd_db:       the client wiki's logical database name
@@ -291,40 +337,153 @@ class DispatchChanges extends \Maintenance {
 	 * @see releaseWiki()
 	 */
 	protected function selectClient() {
-		for ( $i=0; $i < $this->maxSelectTries; $i++ ) {
-			try {
-				$state = $this->trySelectClient();
+		$candidates = $this->getCandidateClients();
 
-				if ( $state ) {
-					// got one
-					return $state;
-				}
-			} catch ( \DBError $ex ) {
-				$this->log( "ERROR: $ex" );
+		while ( $candidates ) {
+			// pick one
+			$k = array_rand( $candidates );
+			$wiki = $candidates[ $k ];
+			unset( $candidates[$k] );
+
+			// lock it
+			$state = $this->lockClient( $wiki );
+
+			if ( $state ) {
+				// got one
+				return $state;
 			}
+
+			// try again
 		}
 
-		throw new \MWException( "Could not lock a client wiki after " . $this->maxSelectTries . " tries!" );
+		// we ran out of candidates
+		return null;
 	}
 
 	/**
-	 * Selects a client wiki at random and tries to lock it. If it can't be locked because
-	 * another dispatch process is working on it, this method returns false.
+	 * Returns a list of possible client for the next pass.
+	 * If no suitable clients are found, the resulting list will be empty.
 	 *
-	 * @return array An associative array containing the state of the selected client wiki
-	 *               (see selectClient()) or false of the client wiki is not available.
+	 * @return array
 	 *
 	 * @see selectClient()
-	 * @throws \MWException if there are no client wikis to chose from.
 	 */
-	protected function trySelectClient() {
-		if ( empty( $this->clientWikis ) ) {
-			throw new \MWException( "No client wikis configured! Please set \$wgWBSettings['localClientDatabases']." );
+	protected function getCandidateClients() {
+		$db = $this->getRepoMaster();
+
+		// XXX: subject to clock skew. Use DB based "now" time?
+		$freshDispatchTime = wfTimestamp( TS_MW, time() - $this->dispatchInterval );
+		$staleLockTime = wfTimestamp( TS_MW, time() - $this->lockGraceInterval );
+
+		$row = $db->selectRow(
+			$this->changesTable->getName(),
+			'max( change_id ) as maxid',
+			array(),
+			__METHOD__ );
+
+		$maxId = $row ? $row->maxid : 0;
+
+		// Select all clients that:
+		//   have not been touched for $dispatchInterval seconds
+		//      ( or are lagging by more changes than given by batchSize )
+		//   and are not locked
+		//      ( or the lock is older than $lockGraceInterval ).
+		//   and have not seen all changes
+		//   and are not disabled
+		// Limit the list to $randomness items. Candidates will be picked
+		// from the resulting list at random.
+
+		$res = $db->select(
+			$this->stateTable,
+			array( 'chd_site' ),
+			array( '( chd_lock is NULL ' . // not locked or...
+					' OR chd_touched < ' . $db->addQuotes( $staleLockTime ) . ' ) ', // ...the log is old
+				'( chd_touched < ' . $db->addQuotes( $freshDispatchTime ) . // and wasn't touched too recently or...
+					' OR ( ' . (int)$maxId. ' - chd_seen ) > ' . (int)$this->batchSize . ') ' , // or it's lagging by more changes than batchSite
+				'chd_seen < ' . (int)$maxId, // and not fully up to day.
+				'chd_disabled = 0' ) // and not disabled
+			,
+			__METHOD__,
+			array(
+				'ORDER BY chd_seen ASC',
+				'FOR UPDATE',
+				'LIMIT ' . (int)$this->randomness
+			)
+		);
+
+		//TODO: also exclude targets with chd_seen = max( change_id )
+		//TODO: also include targets with ( max( change_id ) - chd_seen ) > batch_size
+
+		$candidates = array();
+		while ( $row = $res->fetchRow() ) {
+			$candidates[] = $row['chd_site'];
 		}
 
-		// pick a client at random
-		// XXX: use weights?!
-		$siteID = array_rand( $this->clientWikis );
+		return $candidates;
+	}
+
+	/**
+	 * Initializes the dispatch table by injecting dummy records for all target wikis
+	 * that are in the configuration but not yet in the dispatch table.
+	 */
+	protected function initStateTable() {
+		$db = $this->getRepoMaster();
+
+		$res = $db->select( $this->stateTable,
+			array( 'chd_site' ),
+			array(),
+			__METHOD__ );
+
+		$tracked = array();
+
+		while ( $row = $res->fetchRow() ) {
+			$k = $row[ 'chd_site' ];
+			$tracked[$k] = $k;
+		}
+
+		$untracked = array_diff_key( $this->clientWikis, $tracked );
+
+		foreach ( $untracked as $siteID => $wikiDB ) {
+			$state = array(
+				'chd_site' => $siteID,
+				'chd_db' => $wikiDB,
+				'chd_seen' => 0,
+				'chd_touched' => '00000000000000',
+				'chd_lock' => null,
+				'chd_disabled' => 0,
+			);
+
+			$db->insert(
+				$this->stateTable,
+				$state,
+				__METHOD__,
+				array( 'IGNORE' )
+			);
+
+			$this->log( "Initialized dispatch state for $siteID" );
+		}
+
+		$this->releaseRepoMaster( $db );
+	}
+
+	/**
+	 * Attempt to lock the given target wiki. If it can't be locked because
+	 * another dispatch process is working on it, this method returns false.
+	 *
+	 * @param string $siteID The ID of the client wiki to lock.
+	 *
+	 * @throws \MWException if there are no client wikis to chose from.
+	 * @throws \Exception
+	 * @return array An associative array containing the state of the selected client wiki
+	 *               (see selectClient()) or false if the client wiki could not be locked.
+	 *
+	 * @see selectClient()
+	 */
+	protected function lockClient( $siteID ) {
+		if ( !isset( $this->clientWikis[ $siteID ] ) ) {
+			throw new \MWException( "wiki not configured: $siteID" );
+		}
+
 		$wikiDB = $this->clientWikis[ $siteID ];
 		$isNew = false;
 
@@ -346,38 +505,19 @@ class DispatchChanges extends \Maintenance {
 			);
 
 			if ( !$state ) {
-				// if that client wiki isn't in the DB yet, pretend and using defaults.
-				$state = array(
-					'chd_site' => $siteID,
-					'chd_db' => $wikiDB,
-					'chd_seen' => 0,
-					'chd_touched' => '00000000000000',
-					'chd_lock' => null,
-					'chd_disabled' => 0,
-				);
-
-				$this->trace( "$siteID is not in the dispatch table yet." );
-				$isNew = true;
+				$this->log( "ERROR: $siteID is not in the dispatch table." );
+				return false;
 			} else {
 				// turn the row object into an array
 				$state = get_object_vars( $state );
-			}
-
-			if ( $state['chd_disabled'] ) {
-				// this wiki is disabled
-				$this->trace( "Updates to $siteID are disabled." );
-
-				$db->rollback( __METHOD__ );
-				$this->releaseRepoMaster( $db );
-
-				return false;
 			}
 
 			if ( $state['chd_lock'] !== null ) {
 
 				// bail out if another dispatcher instance is holding a lock for that wiki
 				if ( $this->isClientLockUsed( $wikiDB, $state['chd_lock'] ) ) {
-					$this->trace( "$siteID is already being handled by another process." );
+					$this->trace( "$siteID is already being handled by another process."
+								. " (lock: " . $state['chd_lock'] . ")" );
 
 					$db->rollback( __METHOD__ );
 					$this->releaseRepoMaster( $db );
@@ -392,10 +532,10 @@ class DispatchChanges extends \Maintenance {
 				// This really shouldn't happen, since we already checked if another process has a lock.
 				// The write lock we are holding on the wb_changes_dispatch table should be preventing
 				// any race conditions.
-				// However, another process may still hold the lock if it grabed it without locking
+				// However, another process may still hold the lock if it grabbed it without locking
 				// wb_changes_dispatch, or if it didn't record the lock in wb_changes_dispatch.
 
-				$this->log( "Failed to acquire lock on $wikiDB for site $siteID!" );
+				$this->log( "Warning: Failed to acquire lock on $wikiDB for site $siteID!" );
 
 				$db->rollback( __METHOD__ );
 				$this->releaseRepoMaster( $db );
@@ -404,23 +544,15 @@ class DispatchChanges extends \Maintenance {
 			}
 
 			$state['chd_lock'] = $lock;
+			$state['chd_touched'] = wfTimestamp( TS_MW ); // XXX: use DB time
 
-			if ( $isNew ) {
-				// insert state record for previously unknown client wiki
-				$db->insert(
-					$this->stateTable,
-					$state,
-					__METHOD__
-				);
-			} else {
-				// update state record for already known client wiki
-				$db->update(
-					$this->stateTable,
-					$state,
-					array( 'chd_site' => $state['chd_site'] ),
-					__METHOD__
-				);
-			}
+			// update state record for already known client wiki
+			$db->update(
+				$this->stateTable,
+				$state,
+				array( 'chd_site' => $state['chd_site'] ),
+				__METHOD__
+			);
 		} catch ( \Exception $ex ) {
 			$db->rollback( __METHOD__ );
 			$this->releaseRepoMaster( $db );
@@ -460,7 +592,7 @@ class DispatchChanges extends \Maintenance {
 			$state['chd_lock'] = null;
 			$state['chd_seen'] = $seen;
 			$state['chd_touched'] = wfTimestamp( TS_MW, time() );
-			//XXX: use the DB's time to avoid clock skew? But that timestamp is just informative anyway.
+			//XXX: use the DB's time to avoid clock skew?
 
 			// insert state record with the new state.
 			$db->update(
@@ -571,9 +703,6 @@ class DispatchChanges extends \Maintenance {
 	 *         for use as a continuation marker.
 	 */
 	public function getPendingChanges( $siteID, $wikiDB, $after ) {
-		//TODO: allow a mock ChangesTable for testing
-		$table = new ChangesTable( $this->repoDB );
-
 		// Loop until we have a full batch of size $this->batchSize,
 		// or there are no more changes to process.
 
@@ -590,7 +719,7 @@ class DispatchChanges extends \Maintenance {
 
 		while ( count( $batch ) < $this->batchSize ) {
 			// get a chunk of changes
-			$chunk = $this->selectChanges( $table, $after, $chunkSize );
+			$chunk = $this->selectChanges( $after, $chunkSize );
 
 			if ( empty( $chunk ) ) {
 				break; // no more changes
@@ -624,12 +753,6 @@ class DispatchChanges extends \Maintenance {
 			//     $chunkSize = ( $this->batchSize - count( $batch ) ) * ( count_before / count_after );
 		}
 
-		if ( $batch === array() ) {
-			$this->trace( "Found no new changes for $siteID, at $seen." );
-		} else {
-			$this->trace( "Loaded a batch of " . count( $batch ) . " changes for $siteID, up to $seen." );
-		}
-
 		return array( $batch, $seen );
 	}
 
@@ -638,14 +761,13 @@ class DispatchChanges extends \Maintenance {
 	 * The list will have at most $limit entries, all IDs will be greater than $after,
 	 * and it will be sorted with IDs in ascending order.
 	 *
-	 * @param ChangesTable $table The ChangesTable to query.
 	 * @param int $after: The change ID from which to start
 	 * @param int $limit: The maximum number of changes to return
 	 *
 	 * @return Change[] any changes matching the above criteria.
 	 */
-	public function selectChanges( ChangesTable $table, $after, $limit ) {
-		$changes = $table->selectObjects(
+	public function selectChanges( $after, $limit ) {
+		$changes = $this->changesTable->selectObjects(
 			null,
 			array(
 				'id > ' . intval( $after )
