@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore\DVHandler;
 
-use Wikibase\Repo\Query\SQLStore\DataValueHandler;
-use Wikibase\Repo\Query\SQLStore\DVHandler\BooleanHandler;
-use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 use DataValues\BooleanValue;
+use Wikibase\Repo\Query\SQLStore\DataValueHandler;
+use Wikibase\Repo\Query\SQLStore\DataValueHandlers;
+use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 
 /**
  * Unit tests for the Wikibase\Repo\Query\SQLStore\DVHandler\BooleanHandler class.
@@ -49,7 +49,8 @@ class BooleanHandlerTest extends DataValueHandlerTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$instances[] = new BooleanHandler();
+		$defaultHandlers = new DataValueHandlers();
+		$instances[] = $defaultHandlers->getHandler( 'boolean' );
 
 		return $instances;
 	}

@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore\DVHandler;
 
-use Wikibase\Repo\Query\SQLStore\DataValueHandler;
-use Wikibase\Repo\Query\SQLStore\DVHandler\EntityIdHandler;
-use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 use Wikibase\EntityId;
+use Wikibase\Repo\Query\SQLStore\DataValueHandler;
+use Wikibase\Repo\Query\SQLStore\DataValueHandlers;
+use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 
 /**
  * Unit tests for the Wikibase\Repo\Query\SQLStore\DVHandler\EntityIdHandler class.
@@ -49,7 +49,8 @@ class EntityIdHandlerTest extends DataValueHandlerTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$instances[] = new EntityIdHandler();
+		$defaultHandlers = new DataValueHandlers();
+		$instances[] = $defaultHandlers->getHandler( 'wikibase-entityid' );
 
 		return $instances;
 	}

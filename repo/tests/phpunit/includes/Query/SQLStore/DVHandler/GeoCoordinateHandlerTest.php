@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore\DVHandler;
 
-use Wikibase\Repo\Query\SQLStore\DataValueHandler;
-use Wikibase\Repo\Query\SQLStore\DVHandler\GeoCoordinateHandler;
-use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 use DataValues\GeoCoordinateValue;
+use Wikibase\Repo\Query\SQLStore\DataValueHandler;
+use Wikibase\Repo\Query\SQLStore\DataValueHandlers;
+use Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest;
 
 /**
  * Unit tests for the Wikibase\Repo\Query\SQLStore\DVHandler\GeoCoordinateHandler class.
@@ -49,7 +49,8 @@ class GeoCoordinateHandlerTest extends DataValueHandlerTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$instances[] = new GeoCoordinateHandler();
+		$defaultHandlers = new DataValueHandlers();
+		$instances[] = $defaultHandlers->getHandler( 'geocoordinate' );
 
 		return $instances;
 	}

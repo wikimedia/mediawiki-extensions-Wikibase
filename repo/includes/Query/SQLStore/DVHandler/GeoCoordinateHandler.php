@@ -39,47 +39,6 @@ use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 class GeoCoordinateHandler extends DataValueHandler {
 
 	/**
-	 * @see DataValueHandler::getTableDefinition
-	 *
-	 * @since wd.qe
-	 *
-	 * @return TableDefinition
-	 */
-	public function getTableDefinition() {
-		$fields = array(
-			new FieldDefinition( 'lat', FieldDefinition::TYPE_FLOAT, false ),
-			new FieldDefinition( 'lon', FieldDefinition::TYPE_FLOAT, false ),
-			new FieldDefinition( 'alt', FieldDefinition::TYPE_FLOAT, true ),
-			new FieldDefinition( 'globe', FieldDefinition::TYPE_TEXT, true ),
-			new FieldDefinition( 'json', FieldDefinition::TYPE_TEXT, false ),
-		);
-
-		return new TableDefinition( 'geo', $fields );
-	}
-
-	/**
-	 * @see DataValueHandler::getValueFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getValueFieldName() {
-		return 'json';
-	}
-
-	/**
-	 * @see DataValueHandler::getSortFieldName
-	 *
-	 * @since wd.qe
-	 *
-	 * @return string
-	 */
-	public function getSortFieldName() {
-		return 'lat';
-	}
-
-	/**
 	 * @see DataValueHandler::newDataValueFromValueField
 	 *
 	 * @since wd.qe

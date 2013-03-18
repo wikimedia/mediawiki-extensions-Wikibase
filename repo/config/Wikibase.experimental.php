@@ -71,8 +71,11 @@ $classes = array(
 	'Wikibase\Repo\Query\SQLStore\DVHandler\NumberHandler',
 	'Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler',
 
+	'Wikibase\Repo\Query\SQLStore\DataValueHandlers',
 	'Wikibase\Repo\Query\SQLStore\DataValueHandler',
+	'Wikibase\Repo\Query\SQLStore\DataValueTable',
 	'Wikibase\Repo\Query\SQLStore\Engine',
+	'Wikibase\Repo\Query\SQLStore\Schema',
 	'Wikibase\Repo\Query\SQLStore\Setup',
 	'Wikibase\Repo\Query\SQLStore\Store',
 	'Wikibase\Repo\Query\SQLStore\StoreConfig',
@@ -158,8 +161,10 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'Query/SQLStore/DVHandler/NumberHandler',
 		'Query/SQLStore/DVHandler/StringHandler',
 
+		'Query/SQLStore/DataValueHandlers',
 		'Query/SQLStore/DataValueHandler',
 		'Query/SQLStore/Engine',
+		'Query/SQLStore/Schema',
 		'Query/SQLStore/Setup',
 		'Query/SQLStore/Store',
 		'Query/SQLStore/StoreConfig',

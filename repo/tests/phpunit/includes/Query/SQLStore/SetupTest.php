@@ -2,7 +2,16 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore;
 
+use Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction;
+use Wikibase\Repo\Database\MediaWikiQueryInterface;
+use Wikibase\Repo\Database\TableBuilder;
+use Wikibase\Repo\LazyDBConnectionProvider;
+use Wikibase\Repo\Query\SQLStore\DVHandler\NumberHandler;
+use Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler;
+use Wikibase\Repo\Query\SQLStore\DataValueHandlers;
+use Wikibase\Repo\Query\SQLStore\Schema;
 use Wikibase\Repo\Query\SQLStore\Setup;
+use Wikibase\Repo\Query\SQLStore\StoreConfig;
 
 /**
  * Unit tests for the Wikibase\Repo\Query\SQLStore\Setup class.
@@ -40,35 +49,37 @@ class SetupTest extends \MediaWikiTestCase {
 	 * @return \Wikibase\Repo\Database\QueryInterface
 	 */
 	protected function getQueryInterface() {
-		$connectionProvider = new \Wikibase\Repo\LazyDBConnectionProvider( DB_MASTER );
+		$connectionProvider = new LazyDBConnectionProvider( DB_MASTER );
 
-		$queryInterface = new \Wikibase\Repo\Database\MediaWikiQueryInterface(
+		$queryInterface = new MediaWikiQueryInterface(
 			$connectionProvider,
-			new \Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction( $connectionProvider )
+			new ExtendedMySQLAbstraction( $connectionProvider )
 		);
 
 		return $queryInterface;
 	}
 
 	public function testExecutionOfRun() {
-		$storeConfig = new \Wikibase\Repo\Query\SQLStore\StoreConfig( 'foo', 'wbsql_', array(
-			'string' => new \Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler(),
-			'number' => new \Wikibase\Repo\Query\SQLStore\DVHandler\NumberHandler(),
-		) );
+		$defaultHandlers = new DataValueHandlers();
+
+		$storeConfig = new StoreConfig( 'foo', 'wbsql_', $defaultHandlers->getHandlers() );
+
+		$schema = new Schema( $storeConfig );
 
 		$queryInterface = $this->getQueryInterface();
 
 		$storeSetup = new Setup(
 			$storeConfig,
+			$schema,
 			$queryInterface,
-			new \Wikibase\Repo\Database\TableBuilder( $queryInterface )
+			new TableBuilder( $queryInterface )
 		);
 
 		$this->assertTrue( $storeSetup->install() );
 
 		foreach ( $storeConfig->getDataValueHandlers() as $dvHandler ) {
-			foreach ( array( 'msnak_', 'qualifier_' ) as $snakLevel ) {
-				$table = $dvHandler->getTableDefinition();
+			foreach ( array( 'mainsnak_', 'qualifier_' ) as $snakLevel ) {
+				$table = $dvHandler->getDataValueTable()->getTableDefinition();
 				$tableName = $storeConfig->getTablePrefix() . $snakLevel . $table->getName();
 
 				$this->assertTrue(
