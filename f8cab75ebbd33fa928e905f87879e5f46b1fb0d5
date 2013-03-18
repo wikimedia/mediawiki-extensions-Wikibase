@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DqN45HD4",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-18T14:42:41Z",
+      "side": 1,
+      "message": "The test is the same as at line 421 (selectTerms), so I think it make sense to use the same test here. Yes it is brittle as in \"will not work if there are no other box\".\n\nWe made a decision to use Babel for this purpose and to get that information in a very specific way. I think the general idea is good but how we get the information from the Babel extension is wrong. A more general solution would be to get this information from the preferences, as this is user specific and not Babel specific.\n\nIn my opinion the Babel extension should make this information available in some generic way, now it is available as a special feature given the existence of the Babel extension. This should be fixed, but the fix must first be available in the Babel extension.\n\nAnother way to build the toc is to peek into the generated html and strip out what we want, but that has other problems as we stuff the entries with unrelated content that does not belong in the toc. Not to say that not all sections have valid headers.",
+      "parentUuid": "DqE.MfC8",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqA.WhD0",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-15T12:12:12Z",
       "side": 1,
       "message": "What\u0027s a \"token\" in this context?",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqH5G0MQ",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-18T14:42:41Z",
+      "side": 1,
+      "message": "A token in the list of entries? Its not a section as such, it is not a message, it is a marker used for building the entries. I don\u0027t think the name is very important in a local function like this. We could call it \"entry\" as it is one of several \"entries\". Or you could propose an other name.\n\nPerhaps $section creates an approx idea for the reader..",
+      "parentUuid": "DqA.WhD0",
       "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DqJ5DpLI",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-18T14:42:41Z",
+      "side": 1,
+      "message": "I would say \"very close to what we have decided to do\". If we say we want to use Babel for this specific functionality, then it is valid to test for its existence. We will have no box of alternate languages unless the Babel extension is available. This is actually how that box is implemented.\n\n\"Brittle\" in this case means \"will fail if the box itself fails\". See line 421.",
+      "parentUuid": "DqK.nWKk",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqE.1XM0",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2013-03-15T12:12:12Z",
       "side": 1,
       "message": "this method is not abstract. \"generic\"?",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqD4ROK8",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-18T14:42:41Z",
+      "side": 1,
+      "message": "No, its not abstract. Thats why it is in a TODO.\nChanged the flow.",
+      "parentUuid": "DqE.1XM0",
       "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "DqL4lSA4",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-18T14:42:41Z",
+      "side": 1,
+      "message": "Yes. This is in a entity view.\nChanged the flow.",
+      "parentUuid": "DqO-PkFU",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqG8M4KY",
         "filename": "repo/includes/PropertyView.php",
         "patchSetId": 6
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "DqJ4cBMA",
+        "filename": "repo/includes/PropertyView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-18T14:42:41Z",
+      "side": 1,
+      "message": "Yes you could also call it a section id.",
+      "parentUuid": "DqG8M4KY",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqC8G6IY",
         "filename": "repo/includes/PropertyView.php",
         "patchSetId": 6
@@ -115,6 +223,24 @@
       "writtenOn": "2013-03-15T12:12:12Z",
       "side": 1,
       "message": "Why is this an EntityContent, not a PropertyContent?",
+      "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqJ9-G90",
+        "filename": "repo/includes/PropertyView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-18T14:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DqC8G6IY",
       "revId": "f8cab75ebbd33fa928e905f87879e5f46b1fb0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
