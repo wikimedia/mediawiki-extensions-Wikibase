@@ -1425,6 +1425,7 @@ $messages['ku-latn'] = array(
  */
 $messages['lb'] = array(
 	'wikibase-client-desc' => "Client fir d'Wikibase Erweiderung",
+	'wikibase-after-page-move' => "Dir kënnt och dat associéiert Wikidata-Element [$1 aktualiséiere] fir d'Interwikilinken op der geréckelter Säit bäizebehalen.",
 	'wikibase-comment-remove' => 'Associéiert Wikidata-Element geläscht. Sproochlinken ewechgeholl.',
 	'wikibase-comment-linked' => 'E Wikidata-Element gouf mat dëser Säit verlinkt.',
 	'wikibase-comment-unlink' => 'Dës Säit gouf vum Wikidata-Element entlinkt. Interwiki-Linke goufen ewechgeholl.',
@@ -1442,11 +1443,13 @@ $messages['lb'] = array(
 	'wikibase-linkitem-linkpage' => 'Mat der Säit verlinken',
 	'wikibase-linkitem-input-site' => 'Sprooch:',
 	'wikibase-linkitem-input-page' => 'Säit:',
+	'wikibase-linkitem-invalidsite' => 'Onbekannten oder net valabele Site erausgesicht',
 	'wikibase-linkitem-confirmitem-button' => 'Confirméieren',
 	'wikibase-linkitem-not-loggedin-title' => 'Dir musst ageloggt sinn',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Ännerungen an de rezenten Ännerunge weisen',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Ännerungen an Ärer Iwwerwaachungslëscht weisen',
+	'wikibase-error-invalid-entity-id' => "D'ID déi Dir aginn hutt ass am System net bekannt. Benotzt w.e.g. en valabel ID.",
 );
 
 /** Latvian (latviešu)
@@ -2030,9 +2033,10 @@ $messages['uk'] = array(
 
 /** Uzbek (oʻzbekcha)
  * @author CoderSI
+ * @author Nataev
  */
 $messages['uz'] = array(
-	'wikibase-editlinks' => 'Havolalarni tahrirlash',
+	'wikibase-editlinks' => 'Ishoratlarni tahrirla',
 	'wikibase-editlinkstitle' => 'Tillararo havolalarni tahrirlash',
 );
 

@@ -1969,6 +1969,16 @@ $messages['cy'] = array(
 	'wikibase-save-inprogress' => "Wrthi'n rhoi ar gadw...",
 	'wikibase-remove-inprogress' => "Wrthi'n cael ei wared...",
 	'wikibase-label-empty' => 'Ni phenwyd label eto',
+	'wikibase-label-edit-placeholder' => 'gosod label',
+	'wikibase-description-empty' => 'Ni phenwyd unrhyw ddisgrifiad eto',
+	'wikibase-deletedentity' => 'Dilëwyd $1',
+	'wikibase-sitelink-site-edit-placeholder' => 'gwefan',
+	'wikibase-sitelink-page-edit-placeholder' => 'erthygl',
+	'wikibase-alias-edit-placeholder' => 'rhoi arallenw',
+	'wikibase-label-input-help-message' => 'Rhoi teitl y set data yn $1.',
+	'wikibase-description-input-help-message' => 'Rhoi disgrifiad byr yn $1.',
+	'wikibase-statements' => 'Gosodiadau',
+	'wikibase-terms' => 'Mewn ieithoedd eraill',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Iaith:',
 	'wikibase-entitieswithoutlabel-label-language' => 'Iaith:',
@@ -2019,6 +2029,7 @@ $messages['da'] = array(
 	'wikibase-undo-firstrev' => 'Kan ikke fortryde sidens oprettelse',
 	'wikibase-propertyedittool-full' => 'Listen med værdier er komplet.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|en værdi|$1 værdier}} ikke gemt endnu',
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|værdi|værdier}}',
 	'wikibase-sitelinksedittool-full' => 'Links til sider er allerede angivet for alle kendte websteder.',
 	'wikibase-disambiguation-title' => 'Flertydig for "$1"',
 	'wb-special-newitem-new-item-notification' => 'Nyt emne $1 oprettet og omdirigeret til sin side. Tilbage til $2.',
@@ -2026,23 +2037,35 @@ $messages['da'] = array(
 	'wikibase-aliases-input-help-message' => 'Hvis dette datasæt er kendt under mere end ét bestemt navn, kan du angive alias og synonymer, så det kan findes ved de alternative navne.',
 	'wikibase-aliases-empty' => 'Ingen definerede aliasser.',
 	'wikibase-datatype-label' => 'Datatype:',
+	'wikibase-claimview-snak-tooltip' => 'Angiv en værdi, der svarer til egenskaben med navnet " $1 ". Hvis egenskaben ikke har en udpeget værdi eller den faktiske værdi ikke er kendt, kan du vælge et alternativ til at angive en brugerdefineret værdi ved at klikke på ikonet ud for værdi input boksen.',
+	'wikibase-claimview-snak-new-tooltip' => 'Efter angivelse af en egenskab kan du angive en tilsvarende værdi. Hvis egenskaben ikke har en faktisk værdi eller den faktiske værdi ikke er kendt, kan du vælge et alternativ til at angive en brugerdefineret værdi ved at klikke på ikonet ud for værdi input boksen.',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|kilde|kilder}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|En kilde|$1 kilder}} er endnu ikke gemt',
 	'wikibase-snakview-property-input-placeholder' => 'egenskab',
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak af typen "$1". Håndtering af denne slags Snak understøttes ikke endnu.',
 	'wikibase-snakview-choosesnaktype' => 'Vælg en værditype',
 	'wikibase-snakview-variation-unsupporteddatatype' => 'Håndtering af værdier for "$1" datatype understøttes ikke endnu.',
 	'wikibase-snakview-variation-unsupporteddatavalue' => 'Håndtering af "$1" dataværdier understøttes ikke endnu.',
+	'wikibase-snakview-variation-datavaluetypemismatch' => 'Værdien opfylder ikke egenskabsdefinitionen.',
+	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Værdiens dataværditype " $1 "svarer ikke til egenskabens datatypes dataværditype " $2 ".',
 	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Det er ikke muligt at definere en ny værdi for en slettet egenskab.',
 	'wikibase-snakview-variations-somevalue-label' => 'ukendt værdi',
 	'wikibase-snakview-variations-novalue-label' => 'ingen værdi',
 	'wikibase-snakview-snaktypeselector-value' => 'brugerdefineret værdi',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'ukendt værdi',
 	'wikibase-snakview-snaktypeselector-novalue' => 'ingen værdi',
+	'wikibase-shortcopyrightwarning' => 'Ved at klikke på "$1", accepterer du [[$2|brugervilkårene]], og du accepterer uigenkaldeligt at frigive dit bidrag under $3 .',
+	'wikibase-copyrighttooltip-acknowledge' => 'Jeg accepterer disse vilkår for mine fremtidige redigeringer. Vis ikke denne meddelelse igen.',
 	'wikibase-entityselector-more' => 'mere',
 	'wikibase-anonymouseditwarning' => 'Advarsel: Du er ikke logget på.
 Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-restrictionedit-tooltip-message' => 'Denne side er beskyttet. Redigering er ikke tilladt.',
 	'wikibase-blockeduser-tooltip-message' => 'Du er blokeret fra at redigere.',
 	'wikibase-move-error' => 'Du kan ikke flytte sider, der er i navneområdet for data, og du kan ikke flytte sider ind i det.',
+	'wikibase-warning-constraint-violation-length' => 'En længdebegrænsning er udløst for sprogkode "$1".',
+	'wikibase-error-constraint-violation-label' => 'Der er {{PLURAL:$1|en begrænsning|begrænsninger}} for krænkelse {{PLURAL:$1|etiket|etiketter}} "$3" for  {{PLURAL:$1|sprogkode|sprogkoder}} "$2"',
+	'wikibase-error-constraint-violation-description' => 'Der er {{PLURAL:$1|en begrænsning|begrænsninger}} for krænkelse {{PLURAL:$1|beskrivelse|beskrivelser}} "$3" for  {{PLURAL:$1|sprogkode|sprogkoder}} "$2"',
+	'wikibase-error-constraint-violation-aliases' => 'Der er {{PLURAL:$1|en begrænsning|begrænsninger}} for krænkelse {{PLURAL:$1|kaldenavn|kaldenavne}} "$3" for {{PLURAL:$1|sprogkode|sprogkoder}} "$2"',
 	'wikibase-error-sitelink-already-used' => 'Linket [[$1:$2]] anvendes allerede af emnet [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'En anden egenskab ($3) har allerede etiketten "$1" indenfor sprogkode $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'En anden søgning ($3) har allerede etiketten "$1" indenfor sprogkode $2',
@@ -2057,7 +2080,7 @@ Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-itembytitle-description' => 'Webstedet er en id-kode, som fx "enwiki".',
 	'wikibase-itembytitle-create' => 'Du kan også [{{fullurl:Special:NewItem|site=$1&page=$2}} oprette et emne].',
 	'special-itemdisambiguation' => 'Flertydig: Emner med den samme etiket', # Fuzzy
-	'wikibase-itemdisambiguation-lookup-fieldset' => 'Søg efter emner med etiket', # Fuzzy
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Søg emner efter sprog og etiket',
 	'wikibase-itemdisambiguation-lookup-language' => 'Sprog:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiket:',
 	'wikibase-itemdisambiguation-submit' => 'Søg',
@@ -2076,6 +2099,8 @@ Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-newitem-site' => 'Webstedet for den første sammenkædede side',
 	'wikibase-newitem-page' => 'Navnet på den første sammenkædede side',
 	'wikibase-newitem-no-external-page' => 'Den angivne side blev ikke fundet på det tilsvarende websted.',
+	'wikibase-newitem-add-sitelink-failed' => 'Webstedshenvisningen kunne ikke gemmes.',
+	'wikibase-newitem-not-recognized-siteid' => 'Det angivne websteds-id blev ikke genkendt.',
 	'wikibase-newentity-label' => 'Etiket:',
 	'wikibase-newentity-description' => 'Beskrivelse:',
 	'wikibase-newentity-submit' => 'Opret',
@@ -2086,11 +2111,14 @@ Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-setlabel-submit' => 'Gem etiketten',
 	'wikibase-setlabel-warning-remove' => 'Er du sikker på, at du ønsker at fjerne etiketten for [[$1]]?',
 	'special-setdescription' => 'Angiv en beskrivelse',
+	'wikibase-setdescription-introfull' => 'Du angiver beskrivelsen $2 for [[$1]].',
+	'wikibase-setdescription-intro' => 'Denne formular giver dig mulighed for, at angive en beskrivelse for et emne. Du skal angive et ID for enheden (f.eks. Q23), en sprogkode (f.eks. "en") og en beskrivelse at indstille til.',
 	'wikibase-setdescription-label' => 'Beskrivelse:',
 	'wikibase-setdescription-submit' => 'Angiv beskrivelsen',
 	'wikibase-setdescription-warning-remove' => 'Vil du virkelig fjerne etiketten for [[$1]]?',
 	'special-setaliases' => 'Angiv kaldenavn',
-	'wikibase-setaliases-introfull' => "Du er ved at indstille alias'erne $2 for [[$1]]. Flere alias'er er adskilt med et pipe ( <code>|</code> ) tegn.",
+	'wikibase-setaliases-introfull' => "Du er ved at indstille alias'erne $2 for [[$1]]. Flere alias'er er adskilt med et pipe (<code>|</code>) tegn.",
+	'wikibase-setaliases-intro' => 'Denne formular giver dig mulighed for at angive kaldenavne til en enhed.  Du skal angive et ID for enheden (f.eks. Q23), en sprogkode (f.eks. "en") og de kaldenavne, som skal indstilles. Flere kaldenavne adskilles med et pipe (<code>|</code>) tegn.',
 	'wikibase-setaliases-label' => 'Aliasser:',
 	'wikibase-setaliases-submit' => 'Angiv aliasserne',
 	'wikibase-setaliases-warning-remove' => 'Vil du virkelig fjerne alle kaldenavne for [[$1]]?',
@@ -2124,9 +2152,9 @@ Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-restore-summary' => 'Gendan revision $1 af [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Direkte redigering er deaktiveret i navneområdet $1',
 	'wikibase-noentity' => 'Dette datasæt findes ikke. Du kan
-<span class="plainlinks">[{{fullurl: {{#Special:Log}} |page = {{FULLPAGENAMEE}}} søge relaterede logfiler]</span>
+<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}} søge efter relaterede logfiler]</span>
  for at finde ud af hvad skete.', # Fuzzy
-	'wikibase-noentity-createone' => 'Du kan også [[ $1 |oprette et nyt]].', # Fuzzy
+	'wikibase-noentity-createone' => 'Du kan også [[$1|oprette et nyt]].',
 	'wikibase-item-summary-wbsetitem' => 'Oprettede et nyt emne',
 	'wikibase-item-summary-wbeditentity' => 'Oprettede et nyt emne',
 	'wikibase-item-summary-wbeditentity-create' => 'Oprettede et nyt emne',
@@ -2136,17 +2164,20 @@ Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Fjernede [$2] etiket',
 	'wikibase-item-summary-wbsetdescription-set' => 'Ændrede [$2] beskrivelse',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Fjernede [$2] beskrivelse',
-	'wikibase-item-summary-wbsetaliases-set' => 'Sætter [$2] alias', # Fuzzy
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Tilføjet og fjernet [$2] $1 alias', # Fuzzy
+	'wikibase-item-summary-wbsetaliases-set' => 'Sætter [$2] {{PLURAL:$1|kaldenavn|kaldenavne}}',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Tilføjet og fjernet [$2] {{PLURAL:$1|kaldenavn|kaldenavne}}',
 	'wikibase-item-summary-wbsetaliases-add' => 'Tilføjede [$2] {{PLURAL:$1|alias|aliasser}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Fjernede [$2] {{PLURAL:$1|alias|aliasser}}',
-	'wikibase-item-summary-wbsetsitelink-set' => 'Tilføjede websted-specifik [$2] link', # Fuzzy
-	'wikibase-item-summary-wbsetsitelink-remove' => 'Fjernet websted-specifik [$2] link', # Fuzzy
+	'wikibase-item-summary-wbsetsitelink-set' => 'Tilføjede websted-specifik [$2] henvisning',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Fjernet websted-specifik [$2] henvisning',
 	'wikibase-item-summary-wblinktitles-create' => 'Oprettede dette element for at forbinde siderne [$2↔$3]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Tilsluttet [$2↔$3] {{PLURAL:$1|side|sider}}', # Fuzzy
+	'wikibase-item-summary-wblinktitles-connect' => 'Tilknyttede en sprog henvisning for at sammenknytte sider [$2↔$3]',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Oprettet {{PLURAL:$1|egenskab|egenskaber}}, som kan tildeles værdi', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Oprettede {{PLURAL:$1|egenskab|egenskaber}} uden værdi', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Oprettede {{PLURAL:$1|egenskab|egenskaber}} med ukendt værdi', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Oprettede {{PLURAL:$1|en påstand|påstande}}',
+	'wikibase-item-summary-wbcreateclaim' => 'Oprettet {{PLURAL:$1|en påstand|påstande}}',
+	'wikibase-item-summary-wbsetclaimvalue' => 'Oprettede en {{PLURAL:$1|påstand|påstande}}',
+	'wikibase-item-summary-wbremoveclaims' => 'Fjernede {{PLURAL:$1|en påstand|påstande}}',
 	'wikibase-item-summary-special-create-item' => 'Oprettede et [$2] emne med {{PLURAL:$1|værdi|værdier}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Oprettede en ny egenskab',
 	'wikibase-property-summary-wbeditentity-update' => 'Opdaterede en egenskab',
@@ -2162,11 +2193,48 @@ Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-property-summary-special-create-property' => 'Oprettede en [$2] egenskab med {{PLURAL:$1|værdi|værdier}}',
 	'wikibase-query-summary-special-create-query' => 'Oprettede en [$2] forespørgsel med {{PLURAL:$1|værdi|værdier}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Emne',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Henvisning til andre elementer på projektet. Ved indgang bliver "Vare" navneområdet på Wikidata eftersøgt for tilsvarende poster. Den består af et enkelt tekstfelt.
+* ordning – implicit del af Iri-streng
+* hierarkisk del – implicit del af Iri-streng
+* forespørgsel – implicit del af Iri-streng
+* fragment – implicit del af Iri-streng',
+	'wikibase-listdatatypes-commonsmedia-head' => 'Commons medier',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Henvisning til filer gemt på Wikimedia Commons. Ved indgang vil "Fil" navneområdet på Commons blive eftersøgt for tilsvarende poster.
+* ordning – implicit del af Iri-streng
+* hierarkisk del – implicit del af Iri-streng
+* forespørgsel – implicit del af Iri-streng
+* fragment – implicit del af Iri-streng',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Geokoordinat',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'Bogstavelige data for geografisk position givet parvis som breddegrad-længdegrad par i dms eller decimale grader for den angivne stjernerne. Standard er "Jorden" og derefter "WGS84". Det tilføjer en opløsning og en afstand.
+* breddegrad – implicitte første del (float, dms, dm, dd) af den koordinerende streng, retning er enten givet ved fortegn eller ved efterstillet N/S
+* længdegrad – implicitte anden del (float, dms, dm, dd) af den koordinerende streng, retning er enten givet ved fortegn eller ved efterstillet E/W
+* højde (valgfrit) – eksplicit (?) værdi for højden over en referenceplanet, for kloden "jorden", som ville være "WGS84" reference kloden
+* globe (valgfri) – eksplicit (?) dataværdi, givet som stjerne, der som standard er sat til "Jorden" og derefter "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Mængde',
+	'wikibase-listdatatypes-quantity-body' => 'Bogstaveligt datafelt for en mængde, der relaterer sig til en veldefineret enhed. Den faktiske enhed indgår i de dataværdier, der indtastes.
+* værdi – implicit del af strengen (mapping af enhedspræfiks er uklart)
+* enhed – implicit del af strengen (mapping til standardiseringsorgan er uklart)
+* nøjagtighed (valgfri) – eksplicit dataværdi, har den samme enhed som værdien',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Tekst på ét sprog',
+	'wikibase-listdatatypes-monolingual-text-body' => 'Bogstaveligt datafelt for en streng der ikke er oversat til andre sprog. Denne type streng er defineret en gang og bliver herefter genbrugt på alle sprog. Typisk brug er geografiske navne skrevet på lokalsproget, et id af en eller anden slags, en kemisk formel eller et videnskabeligt latinsk navn.
+* sprog – eksplicit værdi for at identificere sproget for tekst delen
+* tekst – eksplicit værdi for den specifikke variant af streng sproget',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Tekst på flere sprog',
+	'wikibase-listdatatypes-multilingual-text-body' => 'Bogstaveligt datafelt for en streng der skal oversættes til et andet sprog. Typisk brug er et enhedsnavn af global interesse, der har ikke-lokale skrevne formularer. Disse kan adskilles både i sprog og script systemer.
+* sprog – eksplicit værdi for at identificere sproget for tekst delen
+* tekst – eksplicit værdi for den specifikke variant af streng sproget',
+	'wikibase-listdatatypes-string-head' => 'Streng',
+	'wikibase-listdatatypes-string-body' => "Bogstaveligt datafelt for en streng af tegn. Typisk brug er id'er, der har skrevne formularer, der ikke er sprogafhængige . Sådanne strenge kan i nogle tilfælde være translittereret i andre script systemer.
+* sprog – eksplicit værdi for at identificere sproget for tekst delen
+* tekst – eksplicit værdi for den specifikke variant af streng sproget",
 	'wikibase-listdatatypes-time-head' => 'Tid',
+	'wikibase-listdatatypes-time-body' => 'Bogstavelige datafelt for en klokkeslætsværdi. Givet som en tid med nogen præcision og grænser. Tidspunktet gemmes altid internt i proleptic gregoriansk, men kan bruge andre formater under parsing og formattering.(?)
+* tid – eksplicit værdi for punkt i tid, repræsenteret pr. ISO8601, de år altid have 11 cifre, datoen altid underskrives i formatet +00000002013-01-01T00:00:00Z
+* tidszone – eksplicit værdi som et signeret heltal. Tidszone oplysninger som en forskydning fra UTC i minutter.
+* før – eksplicit heltalsværdi for hvor mange enheder efter den tid, det kunne være. Enheden er givet ved præcision.
+* efter – eksplicit heltalsværdi for hvor mange enheder før den tid, det kunne være. Enheden er givet ved præcision.
+* præcision – eksplicit værdi kodet i en shortint. Tallene har følgende betydning: 0 - milliarder år, 1 - hundrede millioner år,..., 6 - årtusinde, 7 - århundrede, 8 - årti, 9 - år, 10 - måned, 11 - dag, 12 - time, 13 - minut, 14 - sekund.
+* kalendermodel – eksplicit værdi givet som en URI. Den vil identificere den kalender-model, der skal bruges til at vise denne tidsværdi.',
 	'content-model-wikibase-item' => 'Wikibase-emne',
 	'content-model-wikibase-property' => 'Wikibase-egenskab',
 	'content-model-wikibase-query' => 'Wikibase-forespørgsel',
@@ -3151,7 +3219,7 @@ $messages['es'] = array(
 	'wikibase-item-summary-wbsetaliases-remove' => 'Eliminando {{PLURAL:$1|el alias|los alias}} de [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Se ha añadido un enlace específico al sitio [$2]', # Fuzzy
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Se ha eliminado un enlace específico al sitio [$2]', # Fuzzy
-	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] {{PLURAL:$1|página conectada|páginas conectadas}}', # Fuzzy
+	'wikibase-item-summary-wblinktitles-connect' => 'Añado un enlace lingüístico para conectar las páginas [$2↔$3]',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Creo {{PLURAL:$1|una afirmación|varias afirmaciones}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Creo {{PLURAL:$1|una afirmación|varias afirmaciones}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Creo {{PLURAL:$1|una afirmación|varias afirmaciones}}',
@@ -3173,12 +3241,16 @@ $messages['es'] = array(
 	'wikibase-property-summary-special-create-property' => 'Se ha creado una propiedad de [$2] con {{PLURAL:$1|valor|valores}}',
 	'wikibase-query-summary-special-create-query' => 'Se ha creado una consulta en [$2] con {{PLURAL:$1|valor|valores}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
+	'wikibase-listdatatypes-time-head' => 'Hora',
 	'content-model-wikibase-item' => 'Elemento de Wikibase',
 	'content-model-wikibase-property' => 'Propiedad de Wikibase',
 	'content-model-wikibase-query' => 'Consulta de Wikibase',
 	'right-item-override' => 'Sobreescribir elementos',
 	'right-item-create' => 'Crear elementos',
 	'right-item-remove' => 'Eliminar elementos',
+	'right-property-override' => 'Reemplazar propiedades',
+	'right-property-create' => 'Crear propiedades',
+	'right-property-remove' => 'Borrar propiedades',
 	'right-alias-add' => 'Añadir alias',
 	'right-alias-set' => 'Establecer alias o seudónimos',
 	'right-alias-remove' => 'Quitar alias',
@@ -3189,6 +3261,21 @@ $messages['es'] = array(
 	'right-label-update' => 'Actualizar etiquetas',
 	'right-description-remove' => 'Quitar descripciones',
 	'right-description-update' => 'Actualizar descripciones',
+	'action-item-override' => 'reemplazar elementos',
+	'action-item-create' => 'crear elementos',
+	'action-item-remove' => 'eliminar elementos',
+	'action-property-override' => 'reemplazar propiedades',
+	'action-property-create' => 'crear propiedades',
+	'action-property-remove' => 'borrar propiedades',
+	'action-alias-update' => 'actualizar alias',
+	'action-alias-remove' => 'borrar alias',
+	'action-sitelink-remove' => 'borrar enlaces de sitio',
+	'action-sitelink-update' => 'actualizar enlaces de sitio',
+	'action-linktitles-update' => 'actualizar títulos de enlace',
+	'action-label-remove' => 'eliminar etiquetas',
+	'action-label-update' => 'actualizar etiquetas',
+	'action-description-remove' => 'eliminar descripciones',
+	'action-description-update' => 'eliminar descripciones',
 );
 
 /** Estonian (eesti)
@@ -8064,8 +8151,8 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van de entiteit $1.',
 	'special-newitem' => 'Nieuw item aanmaken',
 	'wikibase-newitem-summary' => 'Zorg ervoor dat u [[Special:ItemByTitle|controleert of de eigenschap al bestaat]]!<br />U moet een [[Help:Label|label]] en een [[Help:Description|beschrijving]] opgeven voor alle nieuwe items.',
 	'wikibase-newitem-fieldset' => 'Nieuw item aanmaken',
-	'wikibase-newitem-site' => 'Site van de eerst verwijzende pagina',
-	'wikibase-newitem-page' => 'Naam van de eerste verwezen pagina',
+	'wikibase-newitem-site' => 'Site van de eerste gekoppelde pagina',
+	'wikibase-newitem-page' => 'Naam van de eerste gekoppelde pagina',
 	'wikibase-newitem-no-external-page' => 'De opgegeven pagina kon niet worden gevonden op de overeenkomende site.',
 	'wikibase-newitem-add-sitelink-failed' => 'De sitekoppeling kon niet worden opgeslagen.',
 	'wikibase-newitem-not-recognized-siteid' => 'Het opgegeven site-ID is niet herkend.',
@@ -9638,6 +9725,7 @@ $messages['sr-ec'] = array(
 	'wikibase-partial-undo' => 'Измена може бити делимично поништена.',
 	'wikibase-empty-undo' => 'Не постоји ништа што може бити поништено овде.',
 	'wikibase-undo-revision-error' => 'Поништавање није успело',
+	'wikibase-undo-firstrev' => 'Не може се поништити прављење странице',
 	'wikibase-propertyedittool-full' => 'Списак вредности је потпун.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Једна вредност|$1 вредности}} још није сачувано',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|унос|уноса}}',
@@ -9667,6 +9755,9 @@ $messages['sr-ec'] = array(
 Ваша ИП адреса ће бити забележена у историји измена за $1.',
 	'wikibase-restrictionedit-tooltip-message' => 'Ова страна је заштићена. Уређивање није дозвољено.',
 	'wikibase-blockeduser-tooltip-message' => 'Блокирани сте од уређивања.',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Друго својство ($3) већ има назив „$1“ повезан са језичким кодом $2',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Други упит ($3) већ има назив „$1“ повезан са језичким кодом $2',
+	'wikibase-error-label-not-unique-item' => 'Друга ставка ($3) већ има назив „$1“ и опис „$4“ повезан са језичким кодом $2',
 	'special-itembytitle' => 'Ставке према везама до сајтова', # Fuzzy
 	'wikibase-itembytitle-lookup-fieldset' => 'Претрага ставки према сајту и називу',
 	'wikibase-itembytitle-lookup-site' => 'Сајт:',

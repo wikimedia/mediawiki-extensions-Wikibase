@@ -319,6 +319,17 @@ $messages['cs'] = array(
 	'datatypes-type-commonsMedia' => 'Commons multimediální soubor',
 );
 
+/** Welsh (Cymraeg)
+ * @author Lloffiwr
+ */
+$messages['cy'] = array(
+	'wikibase-entity-item' => 'yr eitem',
+	'wikibase-entity-property' => 'y nodwedd',
+	'wikibase-entity-query' => 'chwiliad',
+	'wikibase-diffview-reference' => 'ffynhonnell',
+	'wikibase-diffview-rank' => 'gradd',
+);
+
 /** Danish (dansk)
  * @author Hede2000
  * @author Poul G
@@ -1050,6 +1061,7 @@ $messages['ky'] = array(
  */
 $messages['lb'] = array(
 	'wikibase-entity-item' => 'Element',
+	'wikibase-entity-property' => 'Eegeschaft',
 	'wikibase-entity-query' => 'Ufro',
 	'wikibase-diffview-reference' => 'Referenz',
 	'wikibase-diffview-rank' => 'Classement',
@@ -1057,7 +1069,10 @@ $messages['lb'] = array(
 	'wikibase-error-ui-no-external-page' => 'De spezifizéierten Artikel konnt op dem korrespondéierte Site net fonnt ginn.',
 	'wikibase-error-ui-cant-edit' => 'Dir däerft dës Aktioun net maachen.',
 	'wikibase-error-ui-no-permissions' => 'Dir hutt net genuch Rechter fir dës Aktioun ze maachen.',
+	'wikibase-error-ui-link-exists' => 'Dir kënnt kee Link mat dëser Säit maachen well schonn een anert Element hei hinner linkt.',
+	'wikibase-error-ui-session-failure' => 'Är Sessioun ass ofgelaf. Loggt Iech w.e.g. nees an.',
 	'wikibase-error-ui-edit-conflict' => "Et gëtt en Editiounskonflikt. Lued d'Säit nach eng Kéier a späichert nach eng Kéier.",
+	'wikibase-replicationnote' => "Denkt w.e.g. dorun datt et e puer Minutten dauere ka bis d'Ännerungen op alle Wikien ze gesi sinn.",
 	'wikibase-sitelinks' => 'Lëscht vun de Säiten déi mat dësem Objet verlinkt sinn',
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprooch',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
