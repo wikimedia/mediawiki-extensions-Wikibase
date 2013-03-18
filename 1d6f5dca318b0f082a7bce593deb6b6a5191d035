@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DqJ-Ye3o",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-18T11:53:41Z",
+      "side": 1,
+      "message": "In my opinion underscores can be used in the URL, but should not be used in the form. I can move it to make it work everywhere, the discussion about how this should work can be taken another time.",
+      "parentUuid": "DqDmYcsk",
+      "revId": "1d6f5dca318b0f082a7bce593deb6b6a5191d035",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqFmdJrc",
         "filename": "repo/includes/specials/SpecialItemByTitle.php",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-16T14:28:54Z",
       "side": 1,
       "message": "apply normalization to $page (and maybe also to $siteid) here.",
+      "revId": "1d6f5dca318b0f082a7bce593deb6b6a5191d035",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqH-TJ2A",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-18T11:53:41Z",
+      "side": 1,
+      "message": "Can\u0027t see any reason for additional normalization of siteid? That should be a plain string given in latin script? Still added to get thing moving.",
+      "parentUuid": "DqFmdJrc",
       "revId": "1d6f5dca318b0f082a7bce593deb6b6a5191d035",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
