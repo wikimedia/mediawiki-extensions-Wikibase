@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqdPeDDs",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-19T20:05:24Z",
+      "side": 1,
+      "message": "Missing blank line",
+      "revId": "5797330b1978368959bda9eeaa1a9b74e2a82c53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqXPk4BA",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-19T20:05:24Z",
+      "side": 1,
+      "message": "Use tabs for indent.",
+      "revId": "5797330b1978368959bda9eeaa1a9b74e2a82c53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqTPuaO8",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-19T20:05:24Z",
+      "side": 1,
+      "message": "\"sitelink\" is technically correct, but since it\u0027s always the link to *this* site, \"page\" or \"link\" would probably be more appropriate.",
+      "revId": "5797330b1978368959bda9eeaa1a9b74e2a82c53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqVPr3N0",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-19T20:05:24Z",
+      "side": 1,
+      "message": "This needs to be sitelink.title, sitelink.value isn\u0027t defined!",
+      "revId": "5797330b1978368959bda9eeaa1a9b74e2a82c53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
