@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dqe2XrZk",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-19T11:43:58Z",
+      "side": 1,
+      "message": "missing ( spaces )",
+      "revId": "c32556af989add3faf4b6c9db4fddcd8d95debe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqQ2dQbg",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-19T11:43:58Z",
+      "side": 1,
+      "message": "$pageTitle needs to be using spaces, not underscores. Works at the moment, but should be documented.",
+      "revId": "c32556af989add3faf4b6c9db4fddcd8d95debe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqa2htfw",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-19T11:43:58Z",
+      "side": 1,
+      "message": "The bahavior of tostring is underspecified here. We should use a function that is defined to be returning the page title including the namespace, using spaces, not underscored.",
+      "revId": "c32556af989add3faf4b6c9db4fddcd8d95debe3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
