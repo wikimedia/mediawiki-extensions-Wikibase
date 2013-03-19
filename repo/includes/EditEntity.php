@@ -265,11 +265,11 @@ class EditEntity {
 	 * Returns the Title of the page to be edited.
 	 * Shorthand for $this->getPage()->getTitle().
 	 *
-	 * @return Title
+	 * @return Title|bool
 	 */
 	public function getTitle() {
 		if ( $this->isNew() ) {
-			return null;
+			return false;
 		}
 
 		return $this->newContent->getTitle();
@@ -611,17 +611,23 @@ class EditEntity {
 	 * @param int         $flags      The edit flags (see WikiPage::toEditContent)
 	 * @param String|bool $token      Edit token to check, or false to disable the token check.
 	 *                                Null will fail the token text, as will the empty string.
+	 * @param bool|null $watch        Whether the user wants to watch the entity.
+	 *                                Set to null to apply default according to getWatchDefault().
 	 *
 	 * @throws \ReadOnlyError
 	 * @return Status Indicates success and provides detailed warnings or error messages. See
 	 *         getStatus() for more details.
 	 * @see    WikiPage::doEditContent
 	 */
-	public function attemptSave( $summary, $flags, $token ) {
+	public function attemptSave( $summary, $flags, $token, $watch = null ) {
 		wfProfileIn( __METHOD__ );
 
 		if ( wfReadOnly() ) {
 			throw new \ReadOnlyError();
+		}
+
+		if ( $watch === null ) {
+			$watch = $this->getWatchDefault();
 		}
 
 		$this->status = Status::newGood();
@@ -719,6 +725,8 @@ class EditEntity {
 			$value = $this->status->getValue();
 			$value['errorFlags'] = $this->errorType;
 			$this->status->setResult( false, $value );
+		} else {
+			$this->updateWatchlist( $watch );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -931,5 +939,69 @@ class EditEntity {
 
 		wfProfileOut( __METHOD__ );
 		return true;
+	}
+
+	/**
+	 * Returns whether the present edit would, per default,
+	 * lead to the user watching the page.
+	 *
+	 * This uses the user's watchdefault and watchcreations settings
+	 * and considers whether the entity is already watched by the user.
+	 *
+	 * @return bool
+	 *
+	 * @note: keep in sync with logic in EditPage
+	 */
+	public function getWatchDefault() {
+		$user = $this->getUser();
+		$title = $this->getTitle();
+
+		if ( $title && !$title->exists() ) {
+			$title = false;
+		}
+
+		if ( $user->getOption( 'watchdefault' ) ) {
+			# Watch all edits
+			return true;
+		} elseif ( $user->getOption( 'watchcreations' ) && !$title ) {
+			# Watch creations
+			return true;
+		}
+
+		// keep current state
+		return ( $title !== false ) && $user->isWatched( $title );
+	}
+
+	/**
+	 * Watches or unwatches the entity.
+	 *
+	 * @param bool $watch whether to watch or unwatch the page.
+	 *
+	 * @throws \MWException
+	 * @return void : keep in sync with logic in EditPage
+	 */
+	public function updateWatchlist( $watch ) {
+		$user = $this->getUser();
+		$title = $this->getTitle();
+
+		if ( !$title ) {
+			throw new \MWException( "Title not yet known!" );
+		}
+
+		if ( $user->isLoggedIn() && $watch != $user->isWatched( $title ) ) {
+			$fname = __METHOD__;
+
+			// Do this in its own transaction to reduce contention...
+			$dbw = wfGetDB( DB_MASTER );
+			$dbw->onTransactionIdle( function() use ( $dbw, $title, $watch, $user, $fname ) {
+				$dbw->begin( $fname );
+				if ( $watch ) {
+					\WatchAction::doWatch( $title, $user );
+				} else {
+					\WatchAction::doUnwatch( $title, $user );
+				}
+				$dbw->commit( $fname );
+			} );
+		}
 	}
 }

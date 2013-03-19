@@ -6,6 +6,7 @@ use \Wikibase\EntityContent;
 use \Wikibase\EditEntity;
 use Wikibase\Item;
 use \Wikibase\ItemContent;
+use \Wikibase\Item;
 use \Status;
 use Wikibase\Test\Api\ModifyItemBase;
 
@@ -54,15 +55,21 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 	private static $testRevisions = null;
 
+	protected static function getUser( $name ) {
+		$user = \User::newFromName( $name );
+
+		if ( $user->getId() === 0 ) {
+			$user = \User::createNew( $user->getName() );
+		}
+
+		return $user;
+	}
+
 	protected static function getTestRevisions() {
 		global $wgUser;
 
 		if ( self::$testRevisions === null ) {
-			$otherUser = \User::newFromName( "EditEntityTestUser2" );
-
-			if ( $otherUser->getId() === 0 ) {
-				$otherUser = \User::createNew( $otherUser->getName() );
-			}
+			$otherUser = self::getUser( "EditEntityTestUser2" );
 
 			$itemContent = ItemContent::newEmpty();
 			$itemContent->getEntity()->setLabel('en', "foo");
@@ -701,5 +708,172 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertEquals( $shouldWork, $edit->getStatus()->isOK() );
 		$this->assertNotEquals( $shouldWork, $edit->hasError( EditEntity::TOKEN_ERROR ) );
 		$this->assertNotEquals( $shouldWork, $edit->showErrorPage() );
+	}
+
+	public static function provideGetWatchDefault() {
+		// $watchdefault, $watchcreations, $new, $watched, $expected
+
+		return array(
+			array( false, false, false, false, false ),
+			array( false, false, false, true,  true ),
+			array( false, false, true,  false, false ),
+			//array( false, false, true,  true,  true ), // can't happen, a new pages is never watched
+
+			array( false, true,  false, false, false ),
+			array( false, true,  false, true,  true ),
+			array( false, true,  true,  false, true ),
+			//array( false, true,  true,  true,  true ), // can't happen, a new pages is never watched
+
+			array( true,  false, false, false, true ),
+			array( true,  false, false, true,  true ),
+			array( true,  false, true,  false, true ),
+			//array( true,  false, true,  true,  true ), // can't happen, a new pages is never watched
+
+			array( true,  true,  false, false, true ),
+			array( true,  true,  false, true,  true ),
+			array( true,  true,  true,  false, true ),
+			//array( true,  true,  true,  true,  true ), // can't happen, a new pages is never watched
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetWatchDefault
+	 */
+	public function testGetWatchDefault( $watchdefault, $watchcreations, $new, $watched, $expected ) {
+		$user = self::getUser( "EditEntityTestUser2" );
+
+		$user->setOption( 'watchdefault', $watchdefault );
+		$user->setOption( 'watchcreations', $watchcreations );
+
+		$item = Item::newEmpty();
+		$item->setLabel( "en", "Test" );
+
+		if ( $new ) {
+			$item->setId( 33224477 );
+			$content = ItemContent::newFromItem( $item );
+		} else {
+			$content = ItemContent::newFromItem( $item );
+			$stats = $content->save( "testing", null, EDIT_NEW );
+			$this->assertTrue( $stats->isOK(), "failed to save" ); // sanity
+		}
+
+		$title = $content->getTitle();
+		$this->assertType( 'object', $title ); // sanity
+
+		if ( $watched ) {
+			\WatchAction::doWatch( $title, $user );
+		} else {
+			\WatchAction::doUnwatch( $title, $user );
+		}
+
+		$edit = new EditEntity( $content, $user );
+		$watch = $edit->getWatchDefault();
+		$this->assertEquals( $expected, $watch, "getWatchDefault" );
+
+		if ( $title && $title->exists() ) {
+			// clean up
+			$page = \WikiPage::factory( $title );
+			$page->doDeleteArticle( "testing" );
+		}
+	}
+
+	public static function provideUpdateWatchlist() {
+		// $wasWatched, $watch, $expected
+
+		return array(
+			array( false, false, false ),
+			array( false, true,  true ),
+			array( true,  false, false ),
+			array( true,  true,  true ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideUpdateWatchlist
+	 */
+	public function testUpdateWatchlist( $wasWatched, $watch, $expected ) {
+		$user = self::getUser( "EditEntityTestUser2" );
+
+		$content = ItemContent::newEmpty();
+		$content->getEntity()->setLabel( "en", "Test" );
+		$content->getEntity()->setId( 33224477 );
+
+		$title = $content->getTitle();
+
+		if ( $wasWatched ) {
+			\WatchAction::doWatch( $title, $user );
+		} else {
+			\WatchAction::doUnwatch( $title, $user );
+		}
+
+		$edit = new EditEntity( $content, $user );
+		$edit->updateWatchlist( $watch );
+
+		$this->assertEquals( $expected, $user->isWatched( $title ) );
+	}
+
+
+	public static function provideAttemptSaveWatch() {
+		// $watchdefault, $watchcreations, $new, $watched, $watch, $expected
+
+		return array(
+			array( true, true, true, false, null, true ), // watch new
+			array( true, true, true, false, false, false ), // override watch new
+
+			array( true, true, false, false, null, true ), // watch edit
+			array( true, true, false, false, false, false ), // override watch edit
+
+			array( false, false, false, false, null, false ), // don't watch edit
+			array( false, false, false, false, true, true ), // override don't watch edit
+
+			array( false, false, false, true, null, true ), // watch watched
+			array( false, false, false, true, false, false ), // override don't watch edit
+		);
+	}
+
+	/**
+	 * @dataProvider provideAttemptSaveWatch
+	 */
+	public function testAttemptSaveWatch( $watchdefault, $watchcreations, $new, $watched, $watch, $expected ) {
+		$user = self::getUser( "EditEntityTestUser2" );
+
+		$user->setOption( 'watchdefault', $watchdefault );
+		$user->setOption( 'watchcreations', $watchcreations );
+
+		$item = Item::newEmpty();
+		$item->setLabel( "en", "Test" );
+
+		if ( $new ) {
+			$content = ItemContent::newFromItem( $item );
+		} else {
+			$content = ItemContent::newFromItem( $item );
+			$stats = $content->save( "testing", null, EDIT_NEW );
+			$this->assertTrue( $stats->isOK(), "failed to save" ); // sanity
+		}
+
+		if ( !$new ) {
+			$title = $content->getTitle();
+			$this->assertType( 'object', $title ); // sanity
+
+			if ( $watched ) {
+				\WatchAction::doWatch( $title, $user );
+			} else {
+				\WatchAction::doUnwatch( $title, $user );
+			}
+		}
+
+		$edit = new EditEntity( $content, $user );
+		$status = $edit->attemptSave( "testing", $new ? EDIT_NEW : EDIT_UPDATE, false, $watch );
+
+		$this->assertTrue( $status->isOK(), "edit failed: " . $status->getWikiText() ); // sanity
+
+		$title = $content->getTitle();
+		$this->assertEquals( $expected, $user->isWatched( $title ), "watched" );
+
+		if ( $title && $title->exists() ) {
+			// clean up
+			$page = \WikiPage::factory( $title );
+			$page->doDeleteArticle( "testing" );
+		}
 	}
 }
