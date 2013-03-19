@@ -103,8 +103,7 @@ describe "Check deleted properties in statements UI" do
         ajax_wait
         page.wbErrorDiv?.should be_true
         page.cancelStatement
-        page.referenceHeadingToggleLink
-        page.wait_for_referencesToggle
+        page.toggle_reference_section
         page.reference1Property.should_not == properties_cm[0]["label"]
         page.reference1Property.include?(properties_cm[0]["id"]).should be_true
         page.reference1Property.include?("Deleted property").should be_true
@@ -159,8 +158,7 @@ describe "Check deleted properties in statements UI" do
         #ajax_wait
         #page.wbErrorDiv?.should be_true
         #page.cancelStatement
-        page.referenceHeadingToggleLink
-        page.wait_for_referencesToggle
+        page.toggle_reference_section
         page.reference1Property.should_not == properties_item[0]["label"]
         page.reference1Property.include?(properties_item[0]["id"]).should be_true
         page.reference1Property.include?("Deleted property").should be_true
