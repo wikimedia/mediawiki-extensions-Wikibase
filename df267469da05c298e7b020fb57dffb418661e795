@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "DqS2qhXM",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-19T13:30:43Z",
+      "side": 1,
+      "message": "You forgot to rename the function in the checkType call here.",
+      "revId": "df267469da05c298e7b020fb57dffb418661e795",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqa2ulYA",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-19T13:30:43Z",
+      "side": 1,
+      "message": "No need to require these. They\u0027re loaded automatically as part of Scribunto, and if they\u0027re not already loaded this won\u0027t actually work.\n\nYou can just use mw.title and mw.site below where you need them.",
+      "revId": "df267469da05c298e7b020fb57dffb418661e795",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqS3DZT0",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-19T13:30:43Z",
+      "side": 1,
+      "message": "While there\u0027s nothing *wrong* with doing it this way, it might be easier to read to declare this below instead of assigning it in the middle of the setup function.",
+      "revId": "df267469da05c298e7b020fb57dffb418661e795",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqc34qeU",
         "filename": "client/resources/mw.wikibase.lua",
         "patchSetId": 3
@@ -13,6 +64,41 @@
       "writtenOn": "2013-03-19T12:10:48Z",
       "side": 1,
       "message": "i knew it :)",
+      "revId": "df267469da05c298e7b020fb57dffb418661e795",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqU2nuao",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-19T13:30:43Z",
+      "side": 1,
+      "message": "id should be local.\n\ntitle.getCurrentTitle().prefixedText is already a string, no need for tostring()\n\nBTW, regarding the comment on an earlier patchset, tostring(title.getCurrentTitle()) is documented to return title.getCurrentTitle().prefixedText. ;)",
+      "parentUuid": "Dqc34qeU",
+      "revId": "df267469da05c298e7b020fb57dffb418661e795",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqY3GMUs",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-19T13:30:43Z",
+      "side": 1,
+      "message": "entity should be local.",
       "revId": "df267469da05c298e7b020fb57dffb418661e795",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
