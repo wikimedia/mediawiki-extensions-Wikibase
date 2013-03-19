@@ -44,14 +44,12 @@ HTML;
 <h2 class="wb-section-heading" dir="auto">$1</h2>
 HTML;
 
-	// TODO: rename this to 'wb-claimlist' or 'wb-claims' (in which case the widget should also be renamed)
-	$templates['wb-claims-section'] =
+	$templates['wb-claimlist'] =
 <<<HTML
-<div class="wb-claims-section">
+<div class="wb-claimlist">
 	<div class="wb-claims">
 		$1 <!-- [0,*] wb-claim-section -->
 	</div>
-	<div class="wb-claims-toolbar">$2</div> <!-- edit section -->
 </div>
 HTML;
 
