@@ -59,8 +59,7 @@ class NamespaceChecker {
 	 */
 	public function isWikibaseEnabled( $namespace ) {
 		if( !is_int( $namespace ) ) {
-			wfDebug( 'Invalid namespace in Wikibase namespace checker.' );
-			return false;
+			throw new \MWException( __METHOD__ . " expected a namespace ID." );
 		}
 
 		if ( $this->excludedNamespaces !== array() ) {
