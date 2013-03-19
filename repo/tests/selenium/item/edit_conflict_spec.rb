@@ -14,7 +14,7 @@ description_user1 = description + " changed by user 1!"
 description_user2 = description + " changed by user 2!"
 alias_a = generate_random_string(5)
 sitelinks = ["it", "Pizza"]
-edit_conflict_msg = "Edit not allowed: Edit conflict."
+edit_conflict_msg = "Edit conflict."
 old_revid = 0
 
 describe "Check edit-conflicts" do
