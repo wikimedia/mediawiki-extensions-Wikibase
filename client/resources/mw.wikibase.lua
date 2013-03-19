@@ -28,6 +28,7 @@ local wikibase = {}
 function wikibase.setupInterface()
   local title  = require('mw.title')
   local site = require('mw.site')
+  local language = require('mw.language')
   local php = mw_interface
   mw_interface = nil
   wikibase.getEntity = function()
@@ -35,6 +36,10 @@ function wikibase.setupInterface()
     if (id == nil) then return nil end
     entity = php.getEntity(id)
     return entity
+  end
+  wikibase.label = function(id)
+    code = language.getContentLanguage().code
+    return php.getEntity(id).labels[code].value
   end
   mw = mw or {}
   mw.wikibase = wikibase
