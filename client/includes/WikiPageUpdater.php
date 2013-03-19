@@ -59,7 +59,7 @@ class WikiPageUpdater implements PageUpdater {
 	public function purgeWebCache( array $titles ) {
 		/* @var \Title $title */
 		foreach ( $titles as $title ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": purging page " . $title->getText() );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": purging web cache for " . $title->getText() );
 			$title->purgeSquid();
 		}
 	}
@@ -74,7 +74,8 @@ class WikiPageUpdater implements PageUpdater {
 	public function scheduleRefreshLinks( array $titles ) {
 		/* @var \Title $title */
 		foreach ( $titles as $title ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling page " . $title->getText() );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling refresh links for "
+				. $title->getText() );
 
 			//XXX: use \RefreshLinksJob2 ?!
 			$job = new \RefreshLinksJob(
