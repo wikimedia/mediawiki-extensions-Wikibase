@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqU1O2cI",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-19T14:37:46Z",
+      "side": 1,
+      "message": "y u no like blank lines?",
+      "revId": "017e5ee40fd66abbac719cdf638410132705fb40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqe3sjZU",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-19T14:37:46Z",
+      "side": 1,
+      "message": "please check the return value of getEntity. It will be null in case the entity isn\u0027t found.",
+      "revId": "017e5ee40fd66abbac719cdf638410132705fb40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
