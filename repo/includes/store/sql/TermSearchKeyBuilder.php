@@ -184,10 +184,35 @@ class TermSearchKeyBuilder {
 			if ( $c < $this->batchSize ) {
 				// we are done.
 				break;
+			} else {
+				$this->waitForSlaves( $dbw );
 			}
 		}
 
 		return $total;
+	}
+
+	/**
+	 * Wait for slaves (quietly)
+	 *
+	 * @todo: this should be in the Database class.
+	 * @todo: thresholds should be configurable
+	 *
+	 * @author Tim Starling (stolen from recompressTracked.php)
+	 */
+	protected function waitForSlaves() {
+		$lb = wfGetLB(); //TODO: allow foreign DB, get from $this->table
+
+		while ( true ) {
+			list( $host, $maxLag ) = $lb->getMaxLag();
+			if ( $maxLag < 2 ) {
+				break;
+			}
+
+			$this->report( "Slaves are lagged by $maxLag seconds, sleeping..." );
+			sleep( 5 );
+			$this->report( "Resuming..." );
+		}
 	}
 
 	/**
