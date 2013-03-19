@@ -67,7 +67,15 @@ return call_user_func( function() {
 				'wikibase-sitelinks-sitename-columnheading',
 				'wikibase-sitelinks-link-columnheading'
 			),
-		)
+		),
+		'wbclient.linkItem.init' => $moduleTemplate + array(
+			'scripts' => array(
+				'wbclient.linkItem.init.js'
+			),
+			'messages' => array(
+				'wikibase-linkitem-addlinks'
+			),
+		),
 	);
 
 } );

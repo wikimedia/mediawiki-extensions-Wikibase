@@ -426,7 +426,7 @@ final class ClientHooks {
 				// (as that only runs after the element initially appeared).
 				$out->addModules( 'wikibase.client.nolanglinks' );
 				// Add the JavaScript to link pages locally
-				$out->addModules( 'wbclient.linkItem' );
+				$out->addModules( 'wbclient.linkItem.init' );
 			}
 		}
 
