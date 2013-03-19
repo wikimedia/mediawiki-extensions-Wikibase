@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dqc34qeU",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-19T12:10:48Z",
+      "side": 1,
+      "message": "i knew it :)",
+      "revId": "df267469da05c298e7b020fb57dffb418661e795",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
