@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DqU0cmb4",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2013-03-19T14:00:51Z",
+      "side": 1,
+      "message": "Thank you! Addressed in the next patchset.",
+      "parentUuid": "DqQ3jAd4",
+      "revId": "e5026d3fcb51bc23db9b6ac99472c7b02afbe69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqa3ndeY",
         "filename": "client/resources/mw.wikibase.lua",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "DqS0f5bU",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2013-03-19T14:00:51Z",
+      "side": 1,
+      "message": "Fixed in next patchset.",
+      "parentUuid": "Dqa3ndeY",
+      "revId": "e5026d3fcb51bc23db9b6ac99472c7b02afbe69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqc3sKcs",
         "filename": "client/resources/mw.wikibase.lua",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2013-03-19T13:37:29Z",
       "side": 1,
       "message": "label should be local.",
+      "revId": "e5026d3fcb51bc23db9b6ac99472c7b02afbe69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqY0isQM",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2013-03-19T14:00:51Z",
+      "side": 1,
+      "message": "Done. Addressed in next patchset, along with style conventions.",
+      "parentUuid": "Dqc3sKcs",
       "revId": "e5026d3fcb51bc23db9b6ac99472c7b02afbe69d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
