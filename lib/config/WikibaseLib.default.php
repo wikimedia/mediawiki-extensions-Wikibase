@@ -38,12 +38,6 @@ $wgWBSettings = array();
 // alternative: application/vnd.php.serialized
 $wgWBSettings['serializationFormat'] = CONTENT_FORMAT_JSON;
 
-$wgWBSettings['pollDefaultInterval'] = 1;
-
-$wgWBSettings['pollDefaultLimit'] = 100;
-
-$wgWBSettings['pollContinueInterval'] = 0;
-
 // whether changes get recorded to wb_changes
 $wgWBSettings['useChangesTable'] = true;
 
