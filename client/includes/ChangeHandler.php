@@ -141,8 +141,8 @@ class ChangeHandler {
 
 		// TODO: allow these to be passed in as parameters!
 		$this->setNamespaces(
-			Settings::get( 'excludeNamespaces' ),
-			Settings::get( 'namespaces' )
+			Settings::get( 'namespaces' ),
+			Settings::get( 'excludeNamespaces' )
 		);
 
 		$this->injectRC = Settings::get( 'injectRecentChanges' );
@@ -237,7 +237,10 @@ class ChangeHandler {
 		$minor = true;
 		$bot = true;
 
+		$ids = array();
+
 		foreach ( $changes as $change ) {
+			$ids[] = $change->getId();
 			$meta = $change->getMetadata();
 
 			$minor &= isset( $meta['minor'] ) && (bool)$meta['minor'];
@@ -289,6 +292,7 @@ class ChangeHandler {
 		) );
 
 		$info = $change->hasField( 'info' ) ? $change->getField( 'info' ) : array();
+		$info['change-ids'] = $ids;
 		$info['changes'] = $changes;
 		$change->setField( 'info', $info );
 
@@ -397,6 +401,10 @@ class ChangeHandler {
 		}
 
 		usort( $coalesced, 'Wikibase\ChangeHandler::compareChangesByTimestamp' );
+
+		wfDebugLog( __CLASS__, __METHOD__ . ": coalesced "
+			. count( $changes ) . " into " . count( $coalesced ) . " changes"  );
+
 		return $coalesced;
 	}
 
@@ -466,7 +474,10 @@ class ChangeHandler {
 	 */
 	public function handleChange( Change $change ) {
 		wfProfileIn( __METHOD__ );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #" . $change->getId() );
+
+		$chid = self::getChangeIdForLog( $change );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$chid"
+			. " (" . $change->getType() . ")" );
 
 		//TODO: Actions may be per-title, depending on how the change applies to that page.
 		//      We'll need on list of titles per action.
@@ -474,6 +485,7 @@ class ChangeHandler {
 
 		if ( $actions === 0 ) {
 			// nothing to do
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": No actions to take for change #$chid." );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
@@ -487,11 +499,13 @@ class ChangeHandler {
 
 		if ( empty( $titlesToUpdate ) ) {
 			// nothing to do
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": No pages to update for change #$chid." );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": " . count( $titlesToUpdate ) . " pages to update." );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": updating " . count( $titlesToUpdate )
+			. " pages (actions: " . dechex( $actions ). ") for change #$chid." );
 
 		$this->updatePages( $change, $actions, $titlesToUpdate );
 
@@ -597,7 +611,7 @@ class ChangeHandler {
 				if ( $rcAttribs !== false ) {
 					$this->updater->injectRCRecord( $title, $rcAttribs );
 				} else {
-					trigger_error( "change #" . $change->getId() . " did not provide RC info", E_USER_WARNING );
+					trigger_error( "change #" . self::getChangeIdForLog( $change ) . " did not provide RC info", E_USER_WARNING );
 				}
 			}
 
@@ -606,6 +620,26 @@ class ChangeHandler {
 		}
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Returns a human readable change ID, containing multiple IDs in case of a
+	 * coalesced change.
+	 *
+	 * @param Change $change
+	 *
+	 * @return string
+	 */
+	protected static function getChangeIdForLog( Change $change ) {
+		$fields = $change->getFields(); //@todo: add getFields() to the interface, or provide getters!
+
+		if ( isset( $fields['info']['change-ids'] ) ) {
+			$chid = implode( '|', $fields['info']['change-ids'] );
+		} else {
+			$chid = $change->getId();
+		}
+
+		return $chid;
 	}
 
 	/**
@@ -649,16 +683,6 @@ class ChangeHandler {
 		$params = array(
 			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
 		);
-
-		//XXX: The same change may be reported to several target pages;
-		//       The comment we generate should be adapted to the role that page
-		//       plays in the change, e.g. when a sitelink changes from one page to another,
-		//       the link was effectively removed from one and added to the other page.
-		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
-
-		// @todo batch these
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
-		$rc->save();
 
 		wfProfileOut( __METHOD__ );
 		return $params;
