@@ -69,8 +69,8 @@ final class TestChanges {
 			'info' => array(
 				//NOTE: we no longer put Entity objects into the change, they are just too big.
 				'metadata' => array(
-					'rc_user' => 0,
-					'rc_user_text' => '208.80.152.201'
+					'user' => 0,
+					'user_text' => '208.80.152.201'
 				)
 			 )
 		);
