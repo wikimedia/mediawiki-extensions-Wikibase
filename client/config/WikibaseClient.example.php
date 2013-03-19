@@ -55,16 +55,18 @@ $wgWBSettings['repoScriptPath'] = "/w";
 // The global site ID by which this wiki is known on the repo.
 $wgWBSettings['siteGlobalID'] = "mywiki";
 
-// Database name of the repository, for use by the pollForChanges script.
+// Database name of the repository, for direct access from the client.
+// repoDatabase and changesDatabase will generally be the same.
 // This requires the given database name to be known to LBFactory, see
 // $wgLBFactoryConf below.
+$wgWBSettings['repoDatabase'] = "repo";
 $wgWBSettings['changesDatabase'] = "repo";
 
 $wgWBSettings['injectRecentChanges'] = true;
 $wgWBSettings['showExternalRecentChanges'] = true;
 
 $wgLBFactoryConf = array(
-	// In order to seamlessly access a remote wiki, as the pollForChanges script needs to do,
+	// In order to seamlessly access a remote wiki, to fetch entity data,
 	// LBFactory_Multi must be used.
 	'class' => 'LBFactory_Multi',
 
