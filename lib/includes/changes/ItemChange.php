@@ -42,7 +42,9 @@ class ItemChange extends EntityChange {
 			// obsolete instances in the database, etc.
 
 			$cls = $diff === null ? 'null' : get_class( $diff );
-			trigger_error( 'Cannot get sitelink diff from ' . $cls . '.', E_USER_WARNING );
+			trigger_error(
+				'Cannot get sitelink diff from ' . $cls . '. Change # ' . $this->getId()
+				. ", type " . $this->getType(), E_USER_WARNING );
 
 			return new \Diff\Diff();
 		} else {

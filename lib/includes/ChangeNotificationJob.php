@@ -117,10 +117,14 @@ class ChangeNotificationJob extends \Job {
 			$table = ClientStoreFactory::getStore()->newChangesTable();
 			$this->changes = $table->selectObjects( null, array( 'id' => $ids ), array(), __METHOD__ );
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": loaded " . count( $this->changes ) . " changes." );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": loaded " . count( $this->changes )
+				. " of " . count( $ids ) . " changes." );
 
 			if ( count( $this->changes ) != count( $ids ) ) {
-				wfWarn( "Number of changes loaded mismatches the number of change IDs provided." );
+				trigger_error( "Number of changes loaded mismatches the number of change IDs provided: "
+					. count( $this->changes ) . " != " . count( $ids ) . ". "
+					. " Some changes were lost, possibly due to premature pruning.",
+					E_USER_WARNING );
 			}
 		}
 

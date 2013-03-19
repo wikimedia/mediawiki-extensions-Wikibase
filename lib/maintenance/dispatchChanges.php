@@ -258,7 +258,7 @@ class DispatchChanges extends \Maintenance {
 		$n = count( $changes );
 
 		if ( $n === 0 ) {
-			$this->log( "Posted no changes to $wikiDB (nothing to do). "
+			$this->trace( "Posted no changes to $wikiDB (nothing to do). "
 						. "Next ID is $continueAfter." );
 		} else {
 			/* @var Change $last */
