@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqUinp6o",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-19T17:54:54Z",
+      "side": 0,
+      "message": "These are not used in the code and are removed. Some made their way into the changeset, some comes from a rebase, some is in master. There are no code that use them according to a search.",
+      "revId": "5199359dda52d551731593ed69f68e3224b83219",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
