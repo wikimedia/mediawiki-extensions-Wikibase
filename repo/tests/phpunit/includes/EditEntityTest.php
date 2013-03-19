@@ -532,4 +532,105 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertNotEquals( $shouldWork, $edit->hasError( EditEntity::TOKEN_ERROR ) );
 		$this->assertNotEquals( $shouldWork, $edit->showErrorPage() );
 	}
+
+	public static function provideGetWatchDefault() {
+		// $watchdefault, $watchcreations, $new, $watched, $expected
+
+		return array(
+			array( false, false, false, false, false ),
+			array( false, false, false, true,  true ),
+			array( false, false, true,  false, false ),
+			array( false, false, true,  true,  true ),
+
+			array( false, true,  false, false, false ),
+			array( false, true,  false, true,  true ),
+			array( false, true,  true,  false, true ),
+			array( false, true,  true,  true,  true ),
+
+			array( true,  false, false, false, true ),
+			array( true,  false, false, true,  true ),
+			array( true,  false, true,  false, true ),
+			array( true,  false, true,  true,  true ),
+
+			array( true,  true,  false, false, true ),
+			array( true,  true,  false, true,  true ),
+			array( true,  true,  true,  false, true ),
+			array( true,  true,  true,  true,  true ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetWatchDefault
+	 */
+	public function testGetWatchDefault( $watchdefault, $watchcreations, $new, $watched, $expected ) {
+		global $wgUser;
+		$user = $wgUser;
+
+		$user->setOption( 'watchdefault', $watchdefault );
+		$user->setOption( 'watchcreations', $watchcreations );
+
+		$content = ItemContent::newEmpty();
+		$content->getEntity()->setLabel( "en", "Test" );
+
+		if ( $new ) {
+			$content->getEntity()->setId( 33224477 );
+		} else {
+			$content->save( "testing" );
+		}
+
+		$title = $content->getTitle();
+
+		if ( $title ) {
+			if ( $watched ) {
+				\WatchAction::doWatch( $title, $user );
+			} else {
+				\WatchAction::doUnwatch( $title, $user );
+			}
+		}
+
+		$edit = new EditEntity( ItemContent::newEmpty() );
+		$this->assertEquals( $expected, $edit->getWatchDefault() );
+
+		if ( $title && $title->exists() ) {
+			// clean up
+			$page = \WikiPage::factory( $title );
+			$page->doDeleteArticle( "testing" );
+		}
+	}
+
+	public static function provideUpdateWatchlist() {
+		// $wasWatched, $watch, $expected
+
+		return array(
+			array( false, false, false ),
+			array( false, true,  true ),
+			array( true,  false, false ),
+			array( true,  true,  true ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideUpdateWatchlist
+	 */
+	public function testUpdateWatchlist( $wasWatched, $watch, $expected ) {
+		global $wgUser;
+		$user = $wgUser;
+
+		$content = ItemContent::newEmpty();
+		$content->getEntity()->setLabel( "en", "Test" );
+		$content->getEntity()->setId( 33224477 );
+
+		$title = $content->getTitle();
+
+		if ( $wasWatched ) {
+			\WatchAction::doWatch( $title, $user );
+		} else {
+			\WatchAction::doUnwatch( $title, $user );
+		}
+
+		$edit = new EditEntity( ItemContent::newEmpty() );
+		$edit->updateWatchlist( $watch );
+
+		$this->assertEquals( $expected, $user->isWatched( $title ) );
+	}
 }
