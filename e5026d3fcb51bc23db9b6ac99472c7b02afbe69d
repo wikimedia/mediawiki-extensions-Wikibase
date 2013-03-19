@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqQ3jAd4",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-19T13:37:29Z",
+      "side": 1,
+      "message": "No need to require these. They\u0027re loaded automatically as part of Scribunto, and if they\u0027re not already loaded this won\u0027t actually work.\n\nYou can just use mw.title, mw.site, etc below where you need them.",
+      "revId": "e5026d3fcb51bc23db9b6ac99472c7b02afbe69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqa3ndeY",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-19T13:37:29Z",
+      "side": 1,
+      "message": "Note using \".code\" is undocumented. Use :getCode() instead.\n\nAlso, your code variable here should be local.",
+      "revId": "e5026d3fcb51bc23db9b6ac99472c7b02afbe69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqc3sKcs",
+        "filename": "client/resources/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2013-03-19T13:37:29Z",
+      "side": 1,
+      "message": "label should be local.",
+      "revId": "e5026d3fcb51bc23db9b6ac99472c7b02afbe69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
