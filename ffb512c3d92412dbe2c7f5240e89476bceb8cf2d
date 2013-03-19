@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqciJdyY",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-19T17:45:12Z",
+      "side": 1,
+      "message": "what is the reason for having this be a static method?",
+      "revId": "ffb512c3d92412dbe2c7f5240e89476bceb8cf2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
