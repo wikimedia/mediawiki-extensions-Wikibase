@@ -321,6 +321,7 @@ $messages['cs'] = array(
 
 /** Welsh (Cymraeg)
  * @author Lloffiwr
+ * @author Robin Owain
  */
 $messages['cy'] = array(
 	'wikibase-entity-item' => 'yr eitem',
@@ -328,6 +329,10 @@ $messages['cy'] = array(
 	'wikibase-entity-query' => 'chwiliad',
 	'wikibase-diffview-reference' => 'ffynhonnell',
 	'wikibase-diffview-rank' => 'gradd',
+	'wikibase-diffview-qualifier' => 'Cymhwysydd',
+	'wikibase-error-unexpected' => 'Cafwyd nam annisgwyl',
+	'wikibase-error-remove-connection' => 'Cafwyd nam ar y cysylltiad wrth geisio diddymu, ac oherwydd hyn ni allwyd cadw eich newidiadau. Gwirwch cysylltiad eich Rhyngrwyd.',
+	'wikibase-error-save-timeout' => 'Mae nam technegol yn bodoli, ac oherwydd hyn ni allwyd "cadw" eich newidiadau.',
 );
 
 /** Danish (dansk)

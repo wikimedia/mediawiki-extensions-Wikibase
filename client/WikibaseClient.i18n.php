@@ -304,7 +304,8 @@ $messages['be-tarask'] = array(
 	'wikibase-property-notsupportedyet' => 'Вікізьвесткі пакуль не падтрымліваюць тып уласьцівасьці «$1».',
 	'wikibase-rc-hide-wikidata' => '$1 Вікізьвесткі',
 	'wikibase-rc-show-wikidata-pref' => 'Паказваць праўкі Вікізьвестак у сьпісе апошніх зьменаў',
-	'wikibase-watchlist-show-changes-pref' => 'Паказваць зьмены Вікізьвестак у вашым сьпісе назіраньня', # Fuzzy
+	'wikibase-watchlist-show-changes-pref' => 'Паказваць зьмены Вікізьвестак у вашым сьпісе назіраньня',
+	'wikibase-error-invalid-entity-id' => 'Уведзены ідэнтыфікатар не вядомы сыстэме. Калі ласка, выкарыстоўвайце існыя ідэнтыфікатары аб’ектаў.',
 );
 
 /** Bulgarian (български)
@@ -840,9 +841,12 @@ $messages['fr'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Vous devez être connecté sur ce wiki et dans l’[$1 entrepôt central de données] pour utiliser cette fonctionnalité.',
 	'wikibase-linkitem-success-create' => 'Les pages ont bien été liées. Vous pouvez trouver l’élément nouvellement créé contenant les liens dans notre [$1 entrepôt central de données].',
 	'wikibase-linkitem-success-link' => 'Les pages ont bien été liées. Vous pouvez trouver l’élément contenant les liens dans notre [$1 entrepôt central de données].',
+	'wikibase-property-notfound' => 'Propriété $1 non trouvée.',
+	'wikibase-property-notsupportedyet' => 'Wikibase ne supporte pas encore de type de propriété pour la propriété $1.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Afficher les modifications de Wikidata dans les modifications récentes',
 	'wikibase-watchlist-show-changes-pref' => 'Voir les modifications de Wikidata dans votre liste de suivi',
+	'wikibase-error-invalid-entity-id' => 'L’ID saisi est inconnu du système. Veuillez utiliser un ID d’entité valide.',
 );
 
 /** Franco-Provençal (arpetan)
@@ -1511,9 +1515,12 @@ $messages['mk'] = array(
 	'wikibase-linkitem-not-loggedin' => 'За да ја користите функцијава, треба да сте најавени на ова вики и на [$1 централното складиште на податоци].',
 	'wikibase-linkitem-success-create' => 'Страниците се успешно сврзани. Новосоздадената единица со врските ќе ја најдете на нашето [$1 централно складиште на податоци].',
 	'wikibase-linkitem-success-link' => 'Страниците се успешно сврзани. Новосоздадената единица со врските ќе ја најдете на нашето [$1 централно складиште на податоци].',
+	'wikibase-property-notfound' => 'Својството „$1“ не е пронајдено.',
+	'wikibase-property-notsupportedyet' => 'Викибазата сè уште не поддржува својства од типот „$1“.',
 	'wikibase-rc-hide-wikidata' => '$1 Википодатоци',
 	'wikibase-rc-show-wikidata-pref' => 'Прикажувај ги уредувањата на Википодатоците во скорешните промени',
 	'wikibase-watchlist-show-changes-pref' => 'Нема уредувања на Википодатоци во набљудувањата',
+	'wikibase-error-invalid-entity-id' => 'Назнаката не му е позната на системот. Внесете важечка назнака.',
 );
 
 /** Malayalam (മലയാളം)
@@ -1827,6 +1834,7 @@ $messages['ro'] = array(
  * @author Joetaras
  */
 $messages['roa-tara'] = array(
+	'wikibase-comment-update' => "Collegaminde 'a lènghe aggiornate.",
 	'wikibase-editlinks' => 'Cange le collegaminde',
 	'wikibase-linkitem-title' => "Collegate cu 'a pàgene",
 	'wikibase-linkitem-linkpage' => "Collegate cu 'a pàgene",
