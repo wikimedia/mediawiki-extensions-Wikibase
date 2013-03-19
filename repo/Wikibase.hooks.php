@@ -626,6 +626,7 @@ final class RepoHooks {
 
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->delete( 'wb_changes', '*', __METHOD__ );
+		$dbw->delete( 'wb_changes_dispatch', '*', __METHOD__ );
 
 		$reportMessage( "done!\n" );
 
