@@ -90,8 +90,7 @@
 			.attr( 'id', 'wbclient-linkItem-dialog' )
 			.dialog( {
 				title: mw.message( 'wikibase-linkitem-title' ).escaped(),
-				width: 700,
-				height: 400,
+				width: 500,
 				resizable: false,
 				buttons: [ {
 					text: mw.message( 'wikibase-linkitem-linkpage' ).escaped(),
@@ -612,7 +611,7 @@
 
 	/**
 	 * Called in case an error occurs and displays an error message.
-	 * 
+	 *
 	 * Can either show a given errorCode (as html) or use data from an
 	 * API failure (pass two parameters in this case).
 	 *
