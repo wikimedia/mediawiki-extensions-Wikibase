@@ -531,10 +531,8 @@ abstract class EntityView extends \ContextSource {
 
 		}
 
-		$html = $html . wfTemplate( 'wb-claims-section',
-			$claimsHtml,
-			$this->getHtmlForEditSection( $entity, $lang, '', 'div', 'add' ) // TODO: add link to SpecialPage
-		);
+		// TODO: Add link to SpecialPage that allows adding a new claim.
+		$html = $html . wfTemplate( 'wb-claimlist', $claimsHtml );
 
 		wfProfileOut( __METHOD__ );
 		return $html;
