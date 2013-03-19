@@ -133,7 +133,6 @@ final class ClientHooks {
 	 * Rebuilds all the data stored on the repository.
 	 * This hook will probably be called manually when the
 	 * rebuildAllData script is run on the client.
-	 * @todo Be smarter and call this hook from pollForChanges
 	 *
 	 * @since 0.2
 	 *
