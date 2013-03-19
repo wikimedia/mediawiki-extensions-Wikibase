@@ -47,7 +47,8 @@ if ( !defined( 'WBL_VERSION' ) ) {
 	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:WikibaseLib">WikibaseLib</a> extension.' );
 }
 
-define( 'WB_VERSION', '0.4 alpha' );
+define( 'WB_VERSION', '0.4 alpha'
+	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __DIR__,

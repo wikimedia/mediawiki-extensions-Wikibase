@@ -73,7 +73,8 @@ foreach ( $dependencies as $constant => $name ) {
 
 unset( $dependencies );
 
-define( 'WBL_VERSION', '0.4 alpha' );
+define( 'WBL_VERSION', '0.4 alpha'
+	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __DIR__,
