@@ -97,6 +97,7 @@
 						disabled: 'disabled',
 						click: secondStep
 					} ],
+					modal: true,
 					close: onDialogClose
 				} )
 				.append(
