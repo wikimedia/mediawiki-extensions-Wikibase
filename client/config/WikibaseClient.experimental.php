@@ -33,9 +33,6 @@ if ( !defined( 'WBC_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
 
-// includes/parserhooks
-$wgAutoloadClasses['Wikibase\PropertyParserFunction'] = $dir . 'includes/parserhooks/PropertyParserFunction.php';
-
 // Sporious code from a merge conflict, but should probably be left in due to line above
 //$wgHooks['ParserFirstCallInit'][] = function( \Parser &$parser ) {
 //	$parser->setFunctionHook( 'property', array( '\Wikibase\PropertyParserFunction', 'render' ) );

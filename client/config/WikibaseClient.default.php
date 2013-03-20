@@ -181,3 +181,4 @@ $wgWBClientSettings['interwikiSortOrders'] = array(
 		'zh-tw', 'zu'
 	),
 );
+
