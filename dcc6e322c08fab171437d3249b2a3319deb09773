@@ -16,6 +16,24 @@
       "revId": "dcc6e322c08fab171437d3249b2a3319deb09773",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqYUlpQ4",
+        "filename": "repo/includes/store/sql/TermSearchKeyBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T08:38:36Z",
+      "side": 1,
+      "message": "Good idea!",
+      "parentUuid": "DqYUQRVA",
+      "revId": "dcc6e322c08fab171437d3249b2a3319deb09773",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
