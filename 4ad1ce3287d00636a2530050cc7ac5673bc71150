@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqZhubJY",
+        "filename": "repo/includes/content/LinkedDataHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T13:53:56Z",
+      "side": 1,
+      "message": "Please use the AutoLoader",
+      "revId": "4ad1ce3287d00636a2530050cc7ac5673bc71150",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqVho1Ig",
+        "filename": "repo/includes/content/LinkedDataHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T13:53:56Z",
+      "side": 1,
+      "message": "\"Handler\" is very non-descript. I\u0027d call this a \"Serializer\". A high level serializer for entities, building on a low level serializer for triples.",
+      "revId": "4ad1ce3287d00636a2530050cc7ac5673bc71150",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqbiEkA8",
+        "filename": "repo/includes/content/LinkedDataHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T13:53:56Z",
+      "side": 1,
+      "message": "No Sitelinks? mainSubject or some such would be nice... Isn\u0027t that in the spec?",
+      "revId": "4ad1ce3287d00636a2530050cc7ac5673bc71150",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqbgPsOE",
+        "filename": "repo/includes/content/LinkedDataHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T13:53:56Z",
+      "side": 1,
+      "message": "Please factor this into a separate function, for ease of reading and testing.\n\nAs a rule of thumb, I found that nested loops should generally be factored out. The same is true for deeply nested conditional sections (more than two levels).",
+      "revId": "4ad1ce3287d00636a2530050cc7ac5673bc71150",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqdi3BPM",
+        "filename": "repo/includes/content/LinkedDataHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T13:53:56Z",
+      "side": 1,
+      "message": "huh?",
+      "revId": "4ad1ce3287d00636a2530050cc7ac5673bc71150",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqXj6eLw",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T13:53:56Z",
+      "side": 1,
+      "message": "\"nt\" is n-triples? Why is it served as text/plain?\n\nAlso, it would be nice to register the handler class based on the content type, instead of hardcoding it. But that\u0027s for later.",
+      "revId": "4ad1ce3287d00636a2530050cc7ac5673bc71150",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqfjPaIo",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T13:53:56Z",
+      "side": 1,
+      "message": "$apiFormat is the minor mime type, e.g. \"rdf+xml\" if format\u003dapplication/rdf+xml is given. Maybe getApiFormatName can be changed to ignore anything after a \"+\"?\n\nNote that we really want to support 3 things:\n\n1) full mime type: format\u003dapplication/rdf+xml. May also come from an HTTP Accept header.\n\n2) An API-Like format: format\u003drdf\n3) A file-extension: q1234.rdf\n\n2 and 3 will use the same format Identifier, but the relationship to 1 is a bit hacky.",
+      "revId": "4ad1ce3287d00636a2530050cc7ac5673bc71150",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqVgBtLA",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T13:53:56Z",
+      "side": 1,
+      "message": "Do we really need to duplicate the HTTP header code? Or is it substantially different for RDF?",
+      "revId": "4ad1ce3287d00636a2530050cc7ac5673bc71150",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqXgjWFo",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T13:53:56Z",
+      "side": 1,
+      "message": "These two lines are the only code that is substantially different from showData(), right? So perhaps the switch between API based output and RDF based output should be here, instead of calling two different \"showXXX\" functions?",
+      "revId": "4ad1ce3287d00636a2530050cc7ac5673bc71150",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
