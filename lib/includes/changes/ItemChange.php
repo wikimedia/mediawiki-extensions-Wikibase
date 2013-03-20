@@ -25,6 +25,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class ItemChange extends EntityChange {
 
@@ -32,15 +33,20 @@ class ItemChange extends EntityChange {
 	 * @since 0.3
 	 *
 	 * @return \Diff\MapDiff|bool
-	 * @throws \MWException
 	 */
 	public function getSiteLinkDiff() {
 		$diff = $this->getDiff();
 
 		if ( !$diff instanceof ItemDiff ) {
-			throw new \MWException( 'Cannot get sitelink diff for ' . get_class( $diff ) . '.' );
-		}
+			// This shouldn't happen, but we should be robust against corrupt, incomplete
+			// obsolete instances in the database, etc.
 
-		return $this->getDiff()->getSiteLinkDiff();
+			$cls = $diff === null ? 'null' : get_class( $diff );
+			trigger_error( 'Cannot get sitelink diff from ' . $cls . '.', E_USER_WARNING );
+
+			return new \Diff\Diff();
+		} else {
+			return $this->getDiff()->getSiteLinkDiff();
+		}
 	}
 }

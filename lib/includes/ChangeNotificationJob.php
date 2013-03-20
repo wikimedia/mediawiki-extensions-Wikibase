@@ -68,6 +68,13 @@ class ChangeNotificationJob extends \Job {
 		$params['repo'] = $repo;
 		$params['changeIds'] = $changeIds;
 
+		$params = array_merge(
+			\Job::newRootJobParams(
+				$repo . ':' . implode( ',', $changeIds )
+			),
+			$params
+		);
+
 		return new ChangeNotificationJob( $dummyTitle, $params );
 	}
 
@@ -128,7 +135,7 @@ class ChangeNotificationJob extends \Job {
 	public function run() {
 		$changes = $this->getChanges();
 
-		//TODO: allow mock handler for testing
+		//TODO: allow mock handler for testing?
 		ChangeHandler::singleton()->handleChanges( $changes );
 
 		if ( $changes ) {
