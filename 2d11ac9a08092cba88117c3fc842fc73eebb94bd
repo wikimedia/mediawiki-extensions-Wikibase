@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqRh8nH8",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T11:51:59Z",
+      "side": 1,
+      "message": "Please kill the \\r :)",
+      "revId": "2d11ac9a08092cba88117c3fc842fc73eebb94bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqfh2iKI",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-20T11:51:59Z",
+      "side": 1,
+      "message": "Please make this public and write a unit test for it.",
+      "revId": "2d11ac9a08092cba88117c3fc842fc73eebb94bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
