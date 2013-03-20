@@ -181,3 +181,6 @@ $wgWBClientSettings['interwikiSortOrders'] = array(
 		'zh-tw', 'zu'
 	),
 );
+
+// includes/parserhooks
+$wgAutoloadClasses['Wikibase\PropertyParserFunction'] = $dir . 'includes/parserhooks/PropertyParserFunction.php';
