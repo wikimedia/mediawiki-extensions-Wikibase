@@ -80,6 +80,7 @@ $wgAutoloadClasses['Wikibase\SiteModule']  = $dir . 'includes/modules/SiteModule
 // include/parserhooks
 $wgAutoloadClasses['Wikibase\NoLangLinkHandler']    = $dir . 'includes/parserhooks/NoLangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\ParserErrorMessageFormatter']	= $dir . 'includes/parserhooks/ParserErrorMessageFormatter.php';
+$wgAutoloadClasses['Wikibase\PropertyParserFunction'] = $dir . 'includes/parserhooks/PropertyParserFunction.php';
 
 // includes/recentchanges
 $wgAutoloadClasses['Wikibase\ExternalChangesLine']	= $dir . 'includes/recentchanges/ExternalChangesLine.php';
