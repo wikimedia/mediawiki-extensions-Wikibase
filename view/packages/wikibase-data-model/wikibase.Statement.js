@@ -28,7 +28,7 @@ var PARENT = wb.Claim,
  * @param {String|null} [guid] The Global Unique Identifier of this Statement. Can be omitted or null
  *        if this is a new Statement, not yet stored in the database and associated with some entity.
  */
-wb.Statement = wb.utilities.inherit( 'WbStatement', PARENT, constructor, {
+var SELF = wb.Statement = wb.utilities.inherit( 'WbStatement', PARENT, constructor, {
 	/**
 	 * @type {wb.Reference[]}
 	 * @todo think about implementing a ReferenceList/ClaimList rather than having an Array here
@@ -79,8 +79,8 @@ wb.Statement = wb.utilities.inherit( 'WbStatement', PARENT, constructor, {
 	 */
 	setRank: function( rank ) {
 		// check if given rank is a known rank, then set it. Otherwise, throw error!
-		for( var i in wb.Statement.RANK ) {
-			if( wb.Statement.RANK[i] === rank ) {
+		for( var i in SELF.RANK ) {
+			if( SELF.RANK[i] === rank ) {
 				this._rank = rank;
 				return;
 			}
@@ -137,8 +137,6 @@ wb.Statement = wb.utilities.inherit( 'WbStatement', PARENT, constructor, {
 		var self = this,
 			json = PARENT.prototype.toJSON.call( this );
 
-		json.type = wb.Statement.TYPE;
-
 		if ( this._references && this._references.length > 0 ) {
 			json.references = [];
 			$.each( this._references, function( i, reference ) {
@@ -147,7 +145,7 @@ wb.Statement = wb.utilities.inherit( 'WbStatement', PARENT, constructor, {
 		}
 
 		if ( this._rank ) {
-			$.each( wb.Statement.RANK, function ( rank, i ) {
+			$.each( SELF.RANK, function ( rank, i ) {
 				if ( self._rank === i ) {
 					json.rank = rank.toLowerCase();
 					return false;
@@ -164,7 +162,7 @@ wb.Statement = wb.utilities.inherit( 'WbStatement', PARENT, constructor, {
  * Rank enum. Higher values are more preferred.
  * @type Object
  */
-wb.Statement.RANK = {
+SELF.RANK = {
 	PREFERRED: 2,
 	NORMAL: 1,
 	DEPRECATED: 0
@@ -173,6 +171,6 @@ wb.Statement.RANK = {
 /**
  * @see wb.Claim.TYPE
  */
-wb.Statement.TYPE = 'statement';
+SELF.TYPE = 'statement';
 
 }( wikibase, jQuery ) );

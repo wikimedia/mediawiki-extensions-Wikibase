@@ -3,8 +3,9 @@
  * @ingroup WikibaseLib
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( wb, $, undefined ) {
+( function( wb, $ ) {
 	'use strict';
 
 	/**
@@ -22,12 +23,12 @@
 	 * TODO: get rid of 'hash' parameter and introduce a method to generate the hash, but make sure
 	 *       it will be the same as it would be for a Reference in PHP.
 	 */
-	wb.Reference = function WbReference( snaks, hash ) {
+	var SELF = wb.Reference = function WbReference( snaks, hash ) {
 		this.setSnaks( snaks );
 		this._hash = hash;
 	};
 
-	wb.Reference.prototype = {
+	$.extend( SELF.prototype, {
 		/**
 		 * @type string|null
 		 */
@@ -95,11 +96,10 @@
 
 			return json;
 		}
+	} );
 
-	};
-
-	wb.Reference.newFromJSON = function( json ) {
-		return new wb.Reference(
+	SELF.newFromJSON = function( json ) {
+		return new SELF(
 			wb.SnakList.newFromJSON( json.snaks ),
 			json.hash
 		);

@@ -2,9 +2,9 @@
  * @file
  * @ingroup WikibaseLib
  * @licence GNU GPL v2+
- * @author Daniel Werner
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( wb, dv, $, undefined ) {
+( function( wb, dv, $ ) {
 'use strict';
 
 /**
@@ -16,7 +16,7 @@
  *
  * @param {String} propertyId
  */
-wb.Snak = function WbSnak( propertyId ) {
+var SELF = wb.Snak = function WbSnak( propertyId ) {
 	// check whether the Snak has a type, doesn't make sense to create an instance of wb.Snak!
 	if( !this.constructor.TYPE ) {
 		throw new Error( 'Can not create abstract Snak of no specific type' );
@@ -32,9 +32,9 @@ wb.Snak = function WbSnak( propertyId ) {
  * @since 0.3
  * @type String
  */
-wb.Snak.TYPE = null;
+SELF.TYPE = null;
 
-wb.Snak.prototype = {
+$.extend( SELF.prototype, {
 	/**
 	 * @type Number
 	 */
@@ -105,7 +105,7 @@ wb.Snak.prototype = {
 			property: this.getPropertyId()
 		};
 	}
-};
+} );
 
 // TODO: make newFromJSON and newFromMap abstract factories with registration for new Snak types!
 /**
@@ -114,7 +114,7 @@ wb.Snak.prototype = {
  * @param {String} json
  * @return wb.Snak|null
  */
-wb.Snak.newFromJSON = function( json ) {
+SELF.newFromJSON = function( json ) {
 	// don't alter given Object in case of 'value' Snak by copying structure into new Object
 	var map = $.extend( {}, json );
 
@@ -124,7 +124,7 @@ wb.Snak.newFromJSON = function( json ) {
 			json.datavalue.value
 		);
 	}
-	return wb.Snak.newFromMap( map );
+	return SELF.newFromMap( map );
 };
 
 /**
@@ -136,7 +136,7 @@ wb.Snak.newFromJSON = function( json ) {
  * @param {Object} map Requires at least 'snaktype' and 'property' fields.
  * @return wb.Snak|null
  */
-wb.Snak.newFromMap = function( map ) {
+SELF.newFromMap = function( map ) {
 	switch( map.snaktype ) {
 		case 'value':
 			return new wb.PropertyValueSnak( map.property, map.datavalue );

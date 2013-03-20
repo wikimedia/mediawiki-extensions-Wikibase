@@ -2,7 +2,7 @@
  * @file
  * @ingroup WikibaseLib
  * @licence GNU GPL v2+
- * @author Daniel Werner
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 ( function( wb, $ ) {
 'use strict';
@@ -18,13 +18,20 @@
  * @param {String|null} [guid] The Global Unique Identifier of this Claim. Can be omitted or null
  *        if this is a new Claim, not yet stored in the database and associated with some entity.
  */
-wb.Claim = function WbClaim( mainSnak, qualifiers, guid ) {
+var SELF = wb.Claim = function WbClaim( mainSnak, qualifiers, guid ) {
 	this.setMainSnak( mainSnak );
 	this.setQualifiers( qualifiers || new wb.SnakList() );
 	this._guid = guid || null;
 };
 
-wb.Claim.prototype = {
+/**
+ * String to identify if the object is a statement or a claim.
+ * @since 0.4
+ * @type {string}
+ */
+SELF.TYPE = 'claim';
+
+$.extend( SELF.prototype, {
 	/**
 	 * @type wb.Snak
 	 */
@@ -120,7 +127,7 @@ wb.Claim.prototype = {
 	 */
 	toJSON: function() {
 		var json = {
-			type: wb.Claim.TYPE,
+			type: this.constructor.TYPE,
 			mainsnak: this._mainSnak.toJSON()
 		};
 
@@ -134,15 +141,15 @@ wb.Claim.prototype = {
 
 		return json;
 	}
-};
+} );
 
 /**
  * Creates a new Claim object from a given JSON structure.
  *
- * @param {String} json
+ * @param {Object} json
  * @return {wb.Claim}
  */
-wb.Claim.newFromJSON = function( json ) {
+SELF.newFromJSON = function( json ) {
 	var mainSnak = wb.Snak.newFromJSON( json.mainsnak ),
 		qualifiers = new wb.SnakList(),
 		references = [],
@@ -168,12 +175,5 @@ wb.Claim.newFromJSON = function( json ) {
 	}
 	return new wb.Claim( mainSnak, qualifiers, guid );
 };
-
-/**
- * String to identify if the object is a statement or a claim.
- * @since 0.4
- * @type {string}
- */
-wb.Claim.TYPE = 'claim';
 
 }( wikibase, jQuery ) );

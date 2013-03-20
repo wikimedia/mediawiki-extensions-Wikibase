@@ -2,9 +2,9 @@
  * @file
  * @ingroup WikibaseLib
  * @licence GNU GPL v2+
- * @author Daniel Werner
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( wb, $, undefined ) {
+( function( wb, $ ) {
 'use strict';
 
 var PARENT = wb.Snak;
@@ -18,12 +18,12 @@ var PARENT = wb.Snak;
  *
  * @param {Number} propertyId
  */
-wb.PropertyNoValueSnak = wb.utilities.inherit( 'WbPropertyNoValueSnak', PARENT, {} );
+var SELF = wb.PropertyNoValueSnak = wb.utilities.inherit( 'WbPropertyNoValueSnak', PARENT, {} );
 
 /**
  * @see wb.Snak.TYPE
  * @type String
  */
-wb.PropertyNoValueSnak.TYPE = 'novalue';
+SELF.TYPE = 'novalue';
 
 }( wikibase, jQuery ) );
