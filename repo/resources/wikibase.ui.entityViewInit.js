@@ -108,9 +108,12 @@
 
 			// BUILD CLAIMS VIEW:
 			// Note: $.entityview() only works for claims right now, the goal is to use it for more
-			var $claims = $( '.wb-claims' ).entityview( {
+			var $claims = $( '.wb-claims' ).first(),
+				$claimsParent = $claims.parent();
+
+			$claims.detach().entityview( { // take widget subject out of DOM while initializing
 				value: wb.entity
-			} );
+			} ).appendTo( $claimsParent );
 
 			// removing site links heading to rebuild it with value counter
 			$( 'table.wb-sitelinks' ).each( function() {
