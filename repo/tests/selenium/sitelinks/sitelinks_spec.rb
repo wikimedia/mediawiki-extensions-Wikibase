@@ -75,7 +75,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.addSitelinkLink
         page.siteIdInputField_element.should be_true
         page.pageInputField_element.enabled?.should be_false
-        page.siteIdInputField="en"
+        page.siteIdInputField="English (en)"
         ajax_wait
         page.wait_until do
           page.siteIdAutocompleteList_element.visible?
