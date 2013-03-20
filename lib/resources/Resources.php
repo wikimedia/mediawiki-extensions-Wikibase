@@ -193,7 +193,11 @@ return call_user_func( function() {
 			'messages' => array(
 				'wikibase-ui-pendingquantitycounter-nonpending',
 				'wikibase-ui-pendingquantitycounter-pending',
-				'wikibase-ui-pendingquantitycounter-pending-pendingsubpart'
+				'wikibase-ui-pendingquantitycounter-pending-pendingsubpart',
+				'wikibase-label-empty',
+				'wikibase-deletedentity',
+				'word-separator',
+				'parentheses',
 			)
 		),
 
@@ -564,10 +568,8 @@ return call_user_func( function() {
 				'wikibase.templates',
 			),
 			'messages' => array(
-				'wikibase-label-empty',
-				'parentheses',
-				'wikibase-deletedentity',
 				'wikibase-entity-property',
+				'wikibase.utilities'
 			)
 		),
 
@@ -613,9 +615,9 @@ return call_user_func( function() {
 				'dataTypes.jquery.valueview',
 				'wikibase.parsers',
 				'jquery.eachchange',
+				'wikibase.utilities',
 			),
 			'messages' => array(
-				'parentheses',
 				'wikibase-entity-item',
 			)
 		),
