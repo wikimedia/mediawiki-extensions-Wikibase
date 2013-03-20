@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqaXKKW4",
+        "filename": "client/resources/wbclient.LinkItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-20T05:00:21Z",
+      "side": 1,
+      "message": "column",
+      "revId": "6db385564086008f3ab77338457ac56f49017b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqUXHjWc",
+        "filename": "client/resources/wbclient.LinkItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-20T05:00:21Z",
+      "side": 1,
+      "message": "column",
+      "revId": "6db385564086008f3ab77338457ac56f49017b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqcUofTg",
+        "filename": "client/resources/wbclient.LinkItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-20T05:00:21Z",
+      "side": 1,
+      "message": "I don\u0027t think it should auto init() like this here",
+      "revId": "6db385564086008f3ab77338457ac56f49017b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
