@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqcWV3TE",
+        "filename": "client/includes/NamespaceChecker.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-20T05:48:33Z",
+      "side": 1,
+      "message": "the default setting for both are empty arrays\n\nfor excluded namespaces, that means the setting is not used and nothing is excluded\n\nfor enabled namespaces, it also means the setting is not used and is ignored. (e.g. everything included)\n\narray_diff means returning an empty array with no valid namespaces, whereas in fact, all namespaces are enabled.  If we really want an array of all namespaces, then we\u0027d need to provide the checker with more knowledge of the client namespaces.\n\nexclude namespaces takes precedent over \"include\" namespace (and the include \"namespace\" setting is deprecated)",
+      "revId": "29ad96e17fd2b1a3ace9c33a536a36c8400f69d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
