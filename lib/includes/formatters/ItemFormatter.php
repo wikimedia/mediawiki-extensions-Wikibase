@@ -1,11 +1,10 @@
 <?php
 
 namespace Wikibase;
+use ValueFormatters\FormatterOptions;
 
 /**
- * Formats a parser error message
- *
- * @todo is there nothing like this in core? if not, move to core
+ * Formatter for Wikibase Item values
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,41 +24,42 @@ namespace Wikibase;
  * @since 0.4
  *
  * @file
- * @ingroup WikibaseClient
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ParserErrorMessageFormatter {
+class ItemFormatter extends StringFormatter {
 
-	/* @var \Language $language */
-	protected $language;
+	protected $entityLookup;
 
-	/**
-	 * @since 0.4
-	 *
-	 * @param \Message $message
-	 */
-	public function __construct( \Language $language ) {
-		$this->language = $language;
+	public function __construct( FormatterOptions $options, EntityLookup $entityLookup ) {
+		parent::__construct( $options );
+		$this->entityLookup = $entityLookup;
 	}
 
-	/**
-	 * Formats an error message
-	 * @todo is there really nothing like this function in core?
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	public function format( \Message $message ) {
+	public function format( $value ) {
+		if ( !$value instanceof EntityId ) {
+			// @todo: error!
+			return '';
+		}
+
+		$label = $this->lookupItemLabel( $value );
+
+		if ( is_string( $label ) ) {
+			return $this->formatString( $label );
+		}
+
+		// did not find label
 		return '';
-	/*	return \Html::rawElement(
-			'span',
-			array( 'class' => 'error' ),
-            $message->inLanguage( $this->language )->text()
-		);
-	*/
+	}
+
+	protected function lookupItemLabel( $entityId ) {
+		$entity = $this->entityLookup->getEntity( $entityId );
+
+		$langCode = $this->getOption( 'lang' );
+
+		return $entity->getLabel( $langCode );
 	}
 
 }

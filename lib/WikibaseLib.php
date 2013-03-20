@@ -143,6 +143,10 @@ $wgAutoloadClasses['Wikibase\EntityDiffVisualizer'] = $dir . 'includes/EntityDif
 $wgAutoloadClasses['Wikibase\EntityFactory'] 		= $dir . 'includes/EntityFactory.php';
 $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/ItemDiff.php';
 
+// includes/formatters
+$wgAutoloadClasses['Wikibase\ItemFormatter']		= $dir . 'includes/formatters/ItemFormatter.php';
+$wgAutoloadClasses['Wikibase\StringFormatter']		= $dir . 'includes/formatters/StringFormatter.php';
+
 // includes/modules
 $wgAutoloadClasses['Wikibase\RepoAccessModule'] 		= $dir . 'includes/modules/RepoAccessModule.php';
 $wgAutoloadClasses['Wikibase\SitesModule'] 				= $dir . 'includes/modules/SitesModule.php';
@@ -175,6 +179,8 @@ $wgAutoloadClasses['Wikibase\Lib\Serializers\Unserializer'] 			= $dir . 'include
 
 // includes/store
 $wgAutoloadClasses['Wikibase\EntityLookup'] 			= $dir . 'includes/store/EntityLookup.php';
+$wgAutoloadClasses['Wikibase\PropertyLookup']           = $dir . 'includes/store/PropertyLookup.php';
+$wgAutoloadClasses['Wikibase\PropertySQLLookup']		= $dir . 'includes/store/PropertySQLLookup.php';
 $wgAutoloadClasses['Wikibase\SiteLinkCache'] 			= $dir . 'includes/store/SiteLinkCache.php';
 $wgAutoloadClasses['Wikibase\SiteLinkLookup'] 			= $dir . 'includes/store/SiteLinkLookup.php';
 
