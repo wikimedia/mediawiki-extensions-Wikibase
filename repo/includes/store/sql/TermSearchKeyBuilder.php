@@ -147,6 +147,10 @@ class TermSearchKeyBuilder {
 		$total = 0;
 
 		while ( true ) {
+			// Make sure we are not running too far ahead of the slaves,
+			// as that would cause the site to be rendered read only.
+			$this->waitForSlaves( $dbw );
+
 			$dbw->begin();
 
 			$terms = $dbw->select(
@@ -188,6 +192,29 @@ class TermSearchKeyBuilder {
 		}
 
 		return $total;
+	}
+
+	/**
+	 * Wait for slaves (quietly)
+	 *
+	 * @todo: this should be in the Database class.
+	 * @todo: thresholds should be configurable
+	 *
+	 * @author Tim Starling (stolen from recompressTracked.php)
+	 */
+	protected function waitForSlaves() {
+		$lb = wfGetLB(); //TODO: allow foreign DB, get from $this->table
+
+		while ( true ) {
+			list( $host, $maxLag ) = $lb->getMaxLag();
+			if ( $maxLag < 2 ) {
+				break;
+			}
+
+			$this->report( "Slaves are lagged by $maxLag seconds, sleeping..." );
+			sleep( 5 );
+			$this->report( "Resuming..." );
+		}
 	}
 
 	/**
