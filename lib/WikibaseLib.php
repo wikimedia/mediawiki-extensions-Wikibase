@@ -102,7 +102,6 @@ $wgAutoloadClasses['Wikibase\LibHooks'] 			= $dir . 'WikibaseLib.hooks.php';
 // includes
 $wgAutoloadClasses['Wikibase\Arrayalizer'] 				= $dir . 'includes/Arrayalizer.php';
 $wgAutoloadClasses['Wikibase\ByPropertyIdArray'] 		= $dir . 'includes/ByPropertyIdArray.php';
-$wgAutoloadClasses['Wikibase\CachingEntityLoader']      = $dir . 'includes/store/CachingEntityLoader.php';
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 			= $dir . 'includes/ChangeNotifier.php';
 $wgAutoloadClasses['Wikibase\ChangeNotificationJob']	= $dir . 'includes/ChangeNotificationJob.php';
 $wgAutoloadClasses['Wikibase\ChangesTable'] 			= $dir . 'includes/ChangesTable.php';
@@ -174,13 +173,15 @@ $wgAutoloadClasses['Wikibase\Lib\Serializers\SerializerObject'] 		= $dir . 'incl
 $wgAutoloadClasses['Wikibase\Lib\Serializers\SnakSerializer'] 			= $dir . 'includes/serializers/SnakSerializer.php';
 $wgAutoloadClasses['Wikibase\Lib\Serializers\Unserializer'] 			= $dir . 'includes/serializers/Unserializer.php';
 
-
 // includes/store
 $wgAutoloadClasses['Wikibase\EntityLookup'] 			= $dir . 'includes/store/EntityLookup.php';
 $wgAutoloadClasses['Wikibase\SiteLinkCache'] 			= $dir . 'includes/store/SiteLinkCache.php';
 $wgAutoloadClasses['Wikibase\SiteLinkLookup'] 			= $dir . 'includes/store/SiteLinkLookup.php';
-$wgAutoloadClasses['Wikibase\SiteLinkTable'] 			= $dir . 'includes/store/SiteLinkTable.php';
-$wgAutoloadClasses['Wikibase\WikiPageEntityLookup'] 	= $dir . 'includes/store/WikiPageEntityLookup.php';
+
+// includes/store/sql
+$wgAutoloadClasses['Wikibase\CachingEntityLoader']      = $dir . 'includes/store/sql/CachingEntityLoader.php';
+$wgAutoloadClasses['Wikibase\SiteLinkTable'] 			= $dir . 'includes/store/sql/SiteLinkTable.php';
+$wgAutoloadClasses['Wikibase\WikiPageEntityLookup'] 	= $dir . 'includes/store/sql/WikiPageEntityLookup.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\HashArrayTest'] 			= $dir . 'tests/phpunit/hasharray/HashArrayTest.php';
