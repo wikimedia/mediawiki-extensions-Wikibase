@@ -2,6 +2,91 @@
   "comments": [
     {
       "key": {
+        "uuid": "DqSWQWUk",
+        "filename": "client/resources/wbclient.LinkItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-20T05:35:42Z",
+      "side": 1,
+      "message": "I think this is not needed.\n\nAssuming we implement https://bugzilla.wikimedia.org/46232, then anons won\u0027t have the widget anyway.\n\nif they are logged in on the repo, but not the client, then is there a reason that can\u0027t work?",
+      "revId": "6db385564086008f3ab77338457ac56f49017b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqQWL1SE",
+        "filename": "client/resources/wbclient.LinkItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-20T05:35:42Z",
+      "side": 1,
+      "message": "space please after this line, to improve code readability",
+      "revId": "6db385564086008f3ab77338457ac56f49017b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqWWd8WE",
+        "filename": "client/resources/wbclient.LinkItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-20T05:35:42Z",
+      "side": 1,
+      "message": "space after this line",
+      "revId": "6db385564086008f3ab77338457ac56f49017b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqYV-5RE",
+        "filename": "client/resources/wbclient.LinkItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-20T05:35:42Z",
+      "side": 1,
+      "message": "although at this point, the user does not have permission... it\u0027s odd that the \"Add links\" link does not reappear.\n\nwhat if the user goes to login on the repo?  then it should work, right?",
+      "revId": "6db385564086008f3ab77338457ac56f49017b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqaV8aR0",
+        "filename": "client/resources/wbclient.LinkItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-20T05:35:42Z",
+      "side": 1,
+      "message": "don\u0027t think we need to specify height",
+      "revId": "6db385564086008f3ab77338457ac56f49017b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqaXKKW4",
         "filename": "client/resources/wbclient.LinkItem.js",
         "patchSetId": 1
