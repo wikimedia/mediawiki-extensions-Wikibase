@@ -424,8 +424,8 @@ final class ClientHooks {
 				// Needed as we can't do that in the regular CSS nor in JavaScript
 				// (as that only runs after the element initially appeared).
 				$out->addModules( 'wikibase.client.nolanglinks' );
-				// Add the JavaScript to link pages locally
-				$out->addModules( 'wbclient.linkItem' );
+				// Add the JavaScript which lazy-loads the link item dialog (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
+				$out->addModules( 'wikibase.client.linkitem.init' );
 			}
 		}
 

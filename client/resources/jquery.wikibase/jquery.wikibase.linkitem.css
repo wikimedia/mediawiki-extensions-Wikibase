@@ -6,12 +6,12 @@
 #wbclient-linkItem-siteLinks table {
 	width: 100%;
 }
-.wbclient-linkItem-colum-site,
-.wbclient-linkItem-colum-page {
+.wbclient-linkItem-column-site,
+.wbclient-linkItem-column-page {
 	border-bottom: 1px solid black;
 	text-align: center;
 }
-.wbclient-linkItem-colum-site {
+.wbclient-linkItem-column-site {
 	border-right: 1px solid black;
 }
 
