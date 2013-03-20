@@ -413,7 +413,7 @@ $messages['ca'] = array(
  * @author Calak
  */
 $messages['ckb'] = array(
-	'wikibase-after-page-move' => 'باشترە ھەروەھا برگەی ویکیدراوی پەیوەندیداریش [$1 نوێ بکەیەوە] ھەتا پەیوەندەکانی زمان لە پەڕە گوازراوەکەدا بمێنێتەوە.',
+	'wikibase-after-page-move' => 'باشترە ھەروەھا برگەی ویکیدراوەی پەیوەندیداریش [$1 نوێ بکەیەوە] ھەتا پەیوەندەکانی زمان لە پەڕە گوازراوەکەدا بمێنێتەوە.',
 	'wikibase-comment-remove' => 'بەندی ویکیدراوەی پەیوەندیدار سڕایەوە. بەستەرەکانی زمان لابران.',
 	'wikibase-comment-linked' => 'بەندێکی ویکیدراوە بەم پەڕەیە بەستەر دراوە.',
 	'wikibase-comment-unlink' => 'ئەم پەڕەیە بە بەندی ویکیدراوە بەستەر نەدراوە. بەستەرەکانی زمان لابران.',
@@ -1649,6 +1649,7 @@ $messages['nb'] = array(
 );
 
 /** Dutch (Nederlands)
+ * @author Konovalov
  * @author Siebrand
  */
 $messages['nl'] = array(
@@ -1680,9 +1681,10 @@ $messages['nl'] = array(
 	'wikibase-linkitem-not-loggedin' => 'U moet aangemeld zijn bij deze wiki en de [$1 centrale gegevensrepository] om deze functie te kunnen gebruiken.',
 	'wikibase-linkitem-success-create' => "De pagina's zijn gekoppeld. U kunt het nieuw aangemaakte item met de koppelingen vinden in de [$1 centrale gegevensrepository].",
 	'wikibase-linkitem-success-link' => "De pagina's zijn gekoppeld. U kunt het item met de koppelingen vinden in de [$1 centrale gegevensrepository].",
+	'wikibase-property-notfound' => '$1 eigenschap niet gevonden.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
-	'wikibase-watchlist-show-changes-pref' => 'Wikidatabewerkingen weergeven in uw volglijst', # Fuzzy
+	'wikibase-watchlist-show-changes-pref' => 'Wikidata bewerkingen weergeven in uw volglijst',
 );
 
 /** Norwegian Nynorsk (norsk nynorsk)

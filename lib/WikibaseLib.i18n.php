@@ -331,8 +331,12 @@ $messages['cy'] = array(
 	'wikibase-diffview-rank' => 'gradd',
 	'wikibase-diffview-qualifier' => 'Cymhwysydd',
 	'wikibase-error-unexpected' => 'Cafwyd nam annisgwyl',
+	'wikibase-error-save-generic' => "Cafwyd nam tra'n ceisio diddymu ac oherwydd hyn ni allwyd cadw eich newidiadau.",
+	'wikibase-error-remove-generic' => "Cafwyd nam tra'n ceisio diddymu ac oherwydd hyn ni allwyd cwbwlhau eich newidiadau.",
+	'wikibase-error-save-connection' => 'Cafwyd nam ar y cysylltiad wrth geisio cadw eich gwaith, ac oherwydd hyn ni allwyd cadw eich newidiadau. Gwirwch cysylltiad eich Rhyngrwyd.',
 	'wikibase-error-remove-connection' => 'Cafwyd nam ar y cysylltiad wrth geisio diddymu, ac oherwydd hyn ni allwyd cadw eich newidiadau. Gwirwch cysylltiad eich Rhyngrwyd.',
 	'wikibase-error-save-timeout' => 'Mae nam technegol yn bodoli, ac oherwydd hyn ni allwyd "cadw" eich newidiadau.',
+	'wikibase-error-remove-timeout' => 'Mae nam technegol yn bodoli, ac oherwydd hyn ni allwyd cwbwlhau eich "diddymiad".',
 );
 
 /** Danish (dansk)
