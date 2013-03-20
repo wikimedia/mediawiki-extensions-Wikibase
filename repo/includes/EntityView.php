@@ -512,15 +512,9 @@ abstract class EntityView extends \ContextSource {
 				);
 			}
 
-			// add a new claim with this property
-			$additionalCssClasses = 'wb-claim-add';
-
-			$propertyHtml .= wfTemplate( 'wb-claim',
-				$additionalCssClasses,
-				$claim->getGuid(),
-				// dummy snak to keep layout consistent
-				wfTemplate( 'wb-snak', '', '', '&nbsp;' ),
-				$this->getHtmlForEditSection( $entity, $lang, '', 'span', 'add' ) // TODO: add link to SpecialPage
+			$propertyHtml .= wfTemplate( 'wb-toolbar',
+				// TODO: add link to SpecialPage
+				$this->getHtmlForEditSection( $entity, $lang, '', 'span', 'add' )
 			);
 
 			$claimsHtml .= wfTemplate( 'wb-claim-section',
