@@ -26,12 +26,25 @@ return call_user_func( function() {
 			'styles' => 'wbclient.watchlist.css',
 			'position' => 'top',
 		),
-		'wbclient.linkItem' => $moduleTemplate + array(
+		'wikibase.client.linkitem.init' => $moduleTemplate + array(
 			'scripts' => array(
-				'wbclient.linkItem.js'
+				'wikibase.client.linkitem.init.js'
+			),
+			'messages' => array(
+				'wikibase-linkitem-addlinks',
+				'unknown-error'
+			),
+			'dependencies' => array(
+				'jquery.spinner',
+				'mediawiki.notify'
+			),
+		),
+		'jquery.wikibase.linkitem' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.linkitem.js'
 			),
 			'styles' => array(
-				'wbclient.linkItem.css'
+				'jquery.wikibase/jquery.wikibase.linkitem.css'
 			),
 			'dependencies' => array(
 				'jquery.spinner',
@@ -47,7 +60,6 @@ return call_user_func( function() {
 				'wikibase.ui.Tooltip'
 			),
 			'messages' => array(
-				'wikibase-linkitem-addlinks',
 				'wikibase-linkitem-alreadylinked',
 				'wikibase-linkitem-title',
 				'wikibase-linkitem-linkpage',
