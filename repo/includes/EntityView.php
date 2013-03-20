@@ -504,11 +504,14 @@ abstract class EntityView extends \ContextSource {
 					( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value )
 				);
 
-				$propertyHtml .= wfTemplate( 'wb-claim',
+				// TODO: Use 'wb-claim' or 'wb-statement' template accordingly
+				$propertyHtml .= wfTemplate( 'wb-statement',
 					$additionalCssClasses,
 					$claim->getGuid(),
 					$mainSnakHtml,
-					$this->getHtmlForEditSection( $entity, $lang, '', 'span' ) // TODO: add link to SpecialPage
+					$this->getHtmlForEditSection( $entity, $lang, '', 'span' ), // TODO: add link to SpecialPage
+					'', // TODO: References heading
+					'' // TODO: References
 				);
 			}
 
