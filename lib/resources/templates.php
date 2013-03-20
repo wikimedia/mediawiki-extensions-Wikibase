@@ -76,7 +76,6 @@ HTML;
 			$3 <!-- wb-snak (Main Snak) -->
 		</div>
 	</div>
-	<div class="wb-claim-toolbar">$4</div> <!-- edit section -->
 </div>
 HTML;
 
