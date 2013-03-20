@@ -73,11 +73,14 @@ class PropertySQLLookup implements PropertyLookup {
 			$statementsByProperty[$propertyId->getNumericId()][] = $statement;
 
 			$property = $this->entityLookup->getEntity( $propertyId );
-			$propertyLabel = $property->getLabel( $langCode );
 
-			if ( $propertyLabel !== false ) {
-				$id = $property->getPrefixedId();
-				$propertyList[$id] = $propertyLabel;
+			if ( $property !== null ) {
+				$propertyLabel = $property->getLabel( $langCode );
+
+				if ( $propertyLabel !== false ) {
+					$id = $property->getPrefixedId();
+					$propertyList[$id] = $propertyLabel;
+				}
 			}
 		}
 
