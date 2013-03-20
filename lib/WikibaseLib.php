@@ -50,9 +50,11 @@ if ( !defined( 'DataValues_VERSION' ) ) {
 	@include_once( __DIR__ . '/../../DataValues/DataValues.php' );
 }
 
-// Include the Ask extension if that hasn't been done yet, since it's required for WikibaseLib to work.
-if ( !defined( 'Ask_VERSION' ) ) {
-	@include_once( __DIR__ . '/../../Ask/Ask.php' );
+if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+	// Include the Ask extension if that hasn't been done yet, since it's required for WikibaseLib to work.
+	if ( !defined( 'Ask_VERSION' ) ) {
+		@include_once( __DIR__ . '/../../Ask/Ask.php' );
+	}
 }
 
 $dependencies = array(
