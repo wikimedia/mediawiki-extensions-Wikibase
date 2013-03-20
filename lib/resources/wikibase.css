@@ -434,14 +434,6 @@ div.wb-claim-section .wb-claim-section-name .wb-claim-name {
 	padding: 10px;
 }
 
-/* Container for a single claim */
-div.wb-claim-container {
-	border-bottom: 1px dashed #AAA;
-	float: left;
-	width: 100%;
-	position: relative;
-}
-
 /* A single claim */
 div.wb-claim {
 	width: 100%;
@@ -478,10 +470,6 @@ div.wb-snak {
 
 div.wb-snak .wb-snak-value-container {
 	margin-left: 16px;
-}
-
-div.wb-claim-container .wb-editsection {
-	top: 10px; /* even out padding */
 }
 
 /* Link to add claim to section */
@@ -615,8 +603,17 @@ div.wb-claim-new .wb-snak-value {
 
 /********** STATEMENTS **********/
 
-.wb-statementview {
+/* Container for a single statement */
+.wb-statement {
+	border-bottom: 1px dashed #AAA;
+	float: left;
+	width: 100%;
+	position: relative;
 	padding-bottom: 1em;
+}
+
+div.wb-statement .wb-editsection {
+	top: 10px; /* even out padding */
 }
 
 /***** REFERENCES *****/
