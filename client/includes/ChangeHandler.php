@@ -701,10 +701,9 @@ class ChangeHandler {
 		$actions = 0;
 
 		if ( $change instanceof ItemChange ) {
-			/* @var ItemDiff $diff */
 			$diff = $change->getDiff();
 
-			if ( !$diff->getSiteLinkDiff()->isEmpty() ) {
+			if ( $diff instanceof ItemDiff && !$diff->getSiteLinkDiff()->isEmpty() ) {
 				//TODO: make it so we don't have to re-render
 				//      if only the site links changed (see bug 45534)
 				$actions |= self::PARSER_PURGE_ACTION | self::WEB_PURGE_ACTION | self::LINKS_UPDATE_ACTION
@@ -712,12 +711,12 @@ class ChangeHandler {
 			}
 
 			if ( $this->dataTransclusionAllowed ) {
-				if ( !$diff->getClaimDiff()->isEmpty() ) {
+				if ( $diff instanceof EntityDiff && !$diff->getClaimDiff()->isEmpty() ) {
 					$actions |= self::PARSER_PURGE_ACTION | self::WEB_PURGE_ACTION | self::LINKS_UPDATE_ACTION
 						| self::RC_ENTRY_ACTION | self::HISTORY_ENTRY_ACTION;
 				}
 
-				if ( !$diff->getLabelDiff()->isEmpty() ) {
+				if ( $diff instanceof EntityDiff && !$diff->getLabelDiff()->isEmpty() ) {
 					$actions |= self::PARSER_PURGE_ACTION | self::WEB_PURGE_ACTION | self::LINKS_UPDATE_ACTION
 						| self::RC_ENTRY_ACTION | self::HISTORY_ENTRY_ACTION;
 				}
