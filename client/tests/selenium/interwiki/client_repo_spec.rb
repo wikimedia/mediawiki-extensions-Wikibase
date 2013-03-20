@@ -252,8 +252,23 @@ describe "Check functionality of client-repo connection" do
     it "should check that no sitelinks are displayed for article a & b" do
       on_page(ClientPage) do |page|
         page.navigate_to_article(article_title_a)
+        # tooks soome time until the removing of all the sitelinks show up
+        sleep 2
+        @browser.refresh
+        page.interwiki_de?.should be_false
+        page.interwiki_it?.should be_false
+        page.interwiki_fi?.should be_false
+        page.interwiki_hu?.should be_false
+        page.interwiki_fr?.should be_false
+        page.interwiki_en?.should be_false
         page.interwiki_xxx?.should be_false
         page.navigate_to_article(article_title_b)
+        page.interwiki_de?.should be_false
+        page.interwiki_it?.should be_false
+        page.interwiki_fi?.should be_false
+        page.interwiki_hu?.should be_false
+        page.interwiki_fr?.should be_false
+        page.interwiki_en?.should be_false
         page.interwiki_xxx?.should be_false
       end
     end
