@@ -63,18 +63,11 @@ HTML;
 </div>
 HTML;
 
-	// TODO: should put 'wb-claim' class to root node for consistency. This will also result in
-	//       the 'wb-claim-$2' which results in 'wb-claim-new' being on top.
-	// TODO: There should be another template wrapping the claim template when adding a new claim
-	//       via the general "add" link. That would allow more consistent styling using the wb-edit
-	//       class only.
 	$templates['wb-claim'] =
 <<<HTML
-<div class="wb-claim-container $1">
-	<div class="wb-claim wb-claim-$2">
-		<div class="wb-claim-mainsnak" dir="auto">
-			$3 <!-- wb-snak (Main Snak) -->
-		</div>
+<div class="wb-claim wb-claim-$1 $2">
+	<div class="wb-claim-mainsnak" dir="auto">
+		$3 <!-- wb-snak (Main Snak) -->
 	</div>
 </div>
 HTML;
@@ -96,7 +89,7 @@ HTML;
 
 	$templates['wb-statement'] =
 <<<HTML
-<div class="wb-statement wb-claim-container $1">
+<div class="wb-statement $1">
 	<div class="wb-statement-claim">
 		<div class="wb-claim wb-claim-$2">
 			<div class="wb-claim-mainsnak" dir="auto">
