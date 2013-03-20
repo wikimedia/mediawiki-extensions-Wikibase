@@ -65,7 +65,37 @@
 		 */
 		setSnaks: function( snaks ) {
 			this._snaks = new wb.SnakList( snaks );
+		},
+
+		/**
+		 * Will return whether a given reference equals this one. This will compare the reference's
+		 * snaks only and not involve checking the hash.
+		 *
+		 * @param {wb.Reference} reference
+		 * @return {boolean}
+		 */
+		equals: function( reference ) {
+			return ( this._snaks.equals( reference.getSnaks() ) );
+		},
+
+		/**
+		 * Returns a JSON structure representing this reference.
+		 * @since 0.4
+		 *
+		 * @return {Object}
+		 */
+		toJSON: function() {
+			var json = {
+				snaks: this._snaks.toJSON()
+			};
+
+			if ( this._hash ) {
+				json.hash = this._hash;
+			}
+
+			return json;
 		}
+
 	};
 
 	wb.Reference.newFromJSON = function( json ) {
