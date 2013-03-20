@@ -40,12 +40,15 @@ describe "Check revert/rollback" do
       page.saveAliases
       ajax_wait
       page.wait_for_api_callback
+      page.sitelinksHeaderCode_element.click
+      page.sitelinksHeaderCode_element.click
       page.editSitelinkLink
       page.pageInputFieldExistingSiteLink= sitelink_changed
       ajax_wait
       page.saveSitelinkLink
       ajax_wait
       page.wait_for_api_callback
+      sleep 20
     end
     visit_page(RepoLoginPage) do |page|
       page.logout_user
