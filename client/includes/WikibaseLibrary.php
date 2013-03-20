@@ -34,7 +34,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function register() {
 		$lib = array(
 			'getEntity' => array( $this, 'getEntity' ),
-			'getEntityId' => array( $this, 'getEntityId' )
+			'getEntityId' => array( $this, 'getEntityId' ),
+			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' )
 		);
 		$this->getEngine()->registerInterface( dirname( __FILE__ ) . '/../resources/' . 'mw.wikibase.lua', $lib, array() );
 	}
@@ -103,4 +104,15 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		return array( $id->getPrefixedId() );
 	}
+    /**
+     * Get global site ID (e.g. "enwiki")
+     * This is basically a helper function.
+     * I can see this becoming part of mw.site in the Scribunto extension.
+     *
+     * @since 0.4
+     *
+     */
+    public function getGlobalSiteId() {
+        return array( \Wikibase\Settings::get( 'siteGlobalID' ) );
+    }
 }

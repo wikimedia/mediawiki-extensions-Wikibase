@@ -43,6 +43,15 @@ function wikibase.setupInterface()
     if label == nil then return nil end
     return label.value
   end
+  wikibase.sitelink = function ( id )
+    local entity = php.getEntity( id )
+    if entity == nil then return nil end
+    local globalSiteId = php.getGlobalSiteId()
+    if globalSiteId == nil then return nil end
+    local sitelink = entity.sitelinks[globalSiteId]
+    if sitelink == nil then return nil end
+    return sitelink.title
+  end
   mw = mw or {}
   mw.wikibase = wikibase
   package.loaded['mw.wikibase'] = wikibase
