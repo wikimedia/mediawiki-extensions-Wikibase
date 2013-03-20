@@ -26,7 +26,7 @@
 		}
 	};
 
-	SELF.prototype = {
+	$.extend( SELF.prototype, {
 		/**
 		 * @type Object
 		 */
@@ -63,6 +63,6 @@
 		getOptions: function() {
 			return $.extend( {}, this._options );
 		}
-	};
+	} );
 
 }( wikibase, jQuery ) );
