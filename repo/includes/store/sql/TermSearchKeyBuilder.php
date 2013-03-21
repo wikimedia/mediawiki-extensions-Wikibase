@@ -167,7 +167,7 @@ class TermSearchKeyBuilder {
 				__METHOD__,
 				array(
 					'LIMIT' => $this->batchSize,
-					'ORDER BY term_row_id ASC',
+					'ORDER BY' => 'term_row_id ASC',
 					'FOR UPDATE'
 				)
 			);

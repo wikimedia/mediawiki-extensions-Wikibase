@@ -652,7 +652,7 @@ class DispatchChanges extends \Maintenance {
 			),
 			array(
 				'LIMIT' => $limit,
-				'ORDER BY ' . $table->getPrefixedField( 'id' ) . ' ASC'
+				'ORDER BY ' => $table->getPrefixedField( 'id' ) . ' ASC'
 			),
 			__METHOD__
 		);
