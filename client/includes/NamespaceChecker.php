@@ -26,6 +26,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class NamespaceChecker {
 
@@ -37,7 +38,7 @@ class NamespaceChecker {
 	 * @since 0.4
 	 *
 	 * @param $excluded[]
-	 * @param $enabled[]|false - if false, then setting not in use and all namespaces enabled
+	 * @param $enabled[] - if empty, setting not in use and all namespaces enabled
 	 *
 	 * @throws \MWException
 	 */
@@ -55,6 +56,7 @@ class NamespaceChecker {
 	 *
 	 * @param int $namespace
 	 *
+	 * @throws \MWException
 	 * @return bool
 	 */
 	public function isWikibaseEnabled( $namespace ) {
@@ -62,8 +64,8 @@ class NamespaceChecker {
 			throw new \MWException( __METHOD__ . " expected a namespace ID." );
 		}
 
-		if ( $this->excludedNamespaces !== array() ) {
-			return !$this->isExcluded( $namespace );
+		if ( $this->isExcluded( $namespace ) ) {
+			return false;
 		}
 
 		return $this->isEnabled( $namespace );
@@ -80,15 +82,14 @@ class NamespaceChecker {
 	 * @return bool
 	 */
 	protected function isExcluded( $namespace ) {
-		if ( is_int( $namespace ) && ! in_array( $namespace, $this->excludedNamespaces ) ) {
-			return false;
-		}
-
-		return true;
+		return in_array( $namespace, $this->excludedNamespaces );
 	}
 
 	/**
-	 * Check if namespace is enabled for Wikibase, based on Settings::get( 'namespaces' )
+	 * Check if namespace is enabled for Wikibase, based on Settings::get( 'namespaces' ).
+	 *
+	 * Note: If no list of enabled namespaces is configured, all namespaces are considered
+	 * to be enabled for Wikibase.
 	 *
 	 * @since 0.4
 	 *
@@ -97,12 +98,8 @@ class NamespaceChecker {
 	 * @return bool
 	 */
 	protected function isEnabled( $namespace ) {
-		if ( is_array( $this->enabledNamespaces ) && $this->enabledNamespaces !== array()
-			&& !in_array( $namespace, $this->enabledNamespaces ) ) {
-			return false;
-		}
-
-		return true;
+		return empty( $this->enabledNamespaces )
+			|| in_array( $namespace, $this->enabledNamespaces );
 	}
 
 	/**
@@ -125,6 +122,23 @@ class NamespaceChecker {
 	 */
 	public function getExcludedNamespaces() {
 		return $this->excludedNamespaces;
+	}
+
+	/**
+	 * Get the namespaces Wikibase is effectively enabled in.
+	 *
+	 * @since 0.4
+	 *
+	 * @return array
+	 */
+	public function getWikibaseNamespaces() {
+		$enabled = $this->enabledNamespaces;
+
+		if ( empty( $enabled ) ) {
+			$enabled = \MWNamespace::getValidNamespaces();
+		}
+
+		return array_diff( $enabled, $this->excludedNamespaces );
 	}
 
 }
