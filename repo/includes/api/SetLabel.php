@@ -80,8 +80,8 @@ class SetLabel extends ModifyLangAttribute {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetlabel&id=42&language=en&value=Wikimedia&format=jsonfm'
-				=> 'Set the string "Wikimedia" for page with id "42" as a label in English language and report it as pretty printed json',
+			'api.php?action=wbsetlabel&id=Q42&language=en&value=Wikimedia&format=jsonfm'
+				=> 'Set the string "Wikimedia" for page with id "Q42" as a label in English language and report it as pretty printed json',
 		);
 	}
 
