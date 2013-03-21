@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dqr51YZU",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.Claim.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-21T12:40:57Z",
+      "side": 1,
+      "message": "Just moved this up here for consistency with Snak and Entity. Since this is very important to have in subtypes, I think the chance of seing it here is bigger than seeing it behind the prototype definition.",
+      "revId": "b51a3666dfdb6916b73f735a66593830481b0b51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
