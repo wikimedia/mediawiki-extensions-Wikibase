@@ -241,6 +241,22 @@ $messages['bg'] = array(
 	'datatypes-type-commonsMedia' => 'Файл от Общомедия',
 );
 
+/** Bengali (বাংলা)
+ * @author Leemon2010
+ */
+$messages['bn'] = array(
+	'wikibase-entity-item' => 'আইটেম',
+	'wikibase-diffview-reference' => 'তথ্যসূত্র',
+	'wikibase-error-autocomplete-response' => 'সার্ভারের প্রতিক্রিয়া: $1',
+	'wikibase-sitelinks' => 'এই আইটেমটির সাথে সংযুক্ত পৃষ্ঠাসমূহের তালিকা',
+	'wikibase-sitelinks-sitename-columnheading' => 'ভাষা',
+	'wikibase-sitelinks-siteid-columnheading' => 'কোড',
+	'wikibase-sitelinks-link-columnheading' => 'লিঙ্কযুক্ত নিবন্ধ',
+	'wikibase-tooltip-error-details' => 'বিস্তারিত',
+	'datatypes-type-wikibase-item' => 'আইটেম',
+	'datatypes-type-commonsMedia' => 'কমন্স মিডিয়া ফাইল',
+);
+
 /** Breton (brezhoneg)
  * @author Fohanno
  * @author Fulup
@@ -623,6 +639,7 @@ $messages['fi'] = array(
 /** French (français)
  * @author Alno
  * @author Arkanosis
+ * @author Boniface
  * @author Crochet.david
  * @author DavidL
  * @author Gomoko
@@ -638,7 +655,7 @@ $messages['fr'] = array(
 	'wikibase-entity-query' => 'requête',
 	'wikibase-diffview-reference' => 'référence',
 	'wikibase-diffview-rank' => 'rang',
-	'wikibase-diffview-qualifier' => 'qualifieur',
+	'wikibase-diffview-qualifier' => 'qualificateur',
 	'wikibase-error-unexpected' => 'Une erreur inattendue s’est produite.',
 	'wikibase-error-save-generic' => "Une erreur est survenue lors de l'enregistrement, en conséquence, vos modifications n'ont pas pu être prises en compte.",
 	'wikibase-error-remove-generic' => "Une erreur est survenue lors de la suppression, en conséquence, vos modifications n'ont pas pu être prises en compte.",
@@ -1051,6 +1068,8 @@ $messages['ksh'] = array(
  * @author George Animal
  */
 $messages['ku-latn'] = array(
+	'wikibase-entity-item' => 'obje',
+	'wikibase-sitelinks' => 'Lîsteya rûpelên girêdayî vê objeyê',
 	'wikibase-sitelinks-sitename-columnheading' => 'Ziman',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
 	'wikibase-sitelinks-link-columnheading' => 'Gotara girêdayî',

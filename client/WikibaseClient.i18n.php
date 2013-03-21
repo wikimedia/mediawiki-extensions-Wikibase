@@ -569,9 +569,10 @@ $messages['de'] = array(
 
 /** Zazaki (Zazaki)
  * @author Erdemaslancan
+ * @author Mirzali
  */
 $messages['diq'] = array(
-	'wikibase-editlinks' => 'Gri bıvurnê',
+	'wikibase-editlinks' => 'Gırey bıvurne',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -1845,6 +1846,7 @@ $messages['roa-tara'] = array(
 );
 
 /** Russian (русский)
+ * @author Ignatus
  * @author Kaganer
  * @author Ole Yves
  * @author Александр Сигачёв
@@ -1861,10 +1863,10 @@ $messages['ru'] = array(
 	'wikibase-comment-sitelink-change' => 'Интервики-ссылка изменена с $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Интервики-ссылка удалена: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|изменение|изменения|изменений}}',
-	'wikibase-nolanglinks' => 'нет',
 	'wikibase-editlinks' => 'Править ссылки',
 	'wikibase-editlinkstitle' => 'Править межъязыковые ссылки',
 	'wikibase-linkitem-addlinks' => 'Добавить ссылки',
+	'wikibase-linkitem-alreadylinked' => 'Cтранице, c которую вы хотели установить связь, уже прикреплена к [$1 элементу] в центральном хранилище данных, который ссылается на $2 на этом сайте. Элементы могут иметь только по одной прикреплённой странице с каждого сайта. Пожалуйста, выберите другую страницу для установления связи.',
 	'wikibase-linkitem-close' => 'Закрыть диалог и перезагрузить страницу',
 	'wikibase-linkitem-failure' => 'При попытке привязать данную страницу произошла неизвестная ошибка.',
 	'wikibase-linkitem-title' => 'Связь со страницей',
@@ -1877,8 +1879,14 @@ $messages['ru'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Подтвердить',
 	'wikibase-linkitem-not-loggedin-title' => 'Вы должны авторизоваться',
 	'wikibase-linkitem-not-loggedin' => 'Чтобы воспользоваться этой функцией, вы должны быть авторизованы в этой вики и в [$1 центральном репозитории данных].',
+	'wikibase-linkitem-success-create' => 'Страница успешно связана. Вновь созданный элемент, содержащий связи, находится на нашем [$1 центральном хранилище данных].',
+	'wikibase-linkitem-success-link' => 'Страницы были успешно связаны. Элемент, содержащий связи, находится на нашем [$1 центральном хранилище данных].',
+	'wikibase-property-notfound' => 'Свойство «$1» не найдено',
+	'wikibase-property-notsupportedyet' => 'Wikibase пока не поддерживает тип свойства $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Викиданные',
 	'wikibase-rc-show-wikidata-pref' => 'Показать изменения Викиданных в списке свежих правок',
+	'wikibase-watchlist-show-changes-pref' => 'Показать изменения на Викиданных в вашем списке наблюдения',
+	'wikibase-error-invalid-entity-id' => 'Введённый идентификатор системе не известен. Используйте один из действующих идентификаторов сущностей.',
 );
 
 /** Sinhala (සිංහල)

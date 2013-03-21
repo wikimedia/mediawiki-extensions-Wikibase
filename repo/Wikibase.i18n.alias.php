@@ -126,14 +126,16 @@ $specialPageAliases['it'] = array(
 
 /** Japanese (日本語) */
 $specialPageAliases['ja'] = array(
-	'EntityData' => array( 'エンティティデータ' ),
+	'EntityData' => array( '実体データ', 'エンティティデータ' ),
 	'NewItem' => array( '新規項目' ),
-	'NewProperty' => array( '新規プロパティ' ),
+	'NewProperty' => array( '新規プロパティ', '新規特性' ),
+	'ItemByTitle' => array( 'タイトルから項目を探す' ),
 	'ItemDisambiguation' => array( '項目の曖昧さ回避' ),
+	'ListDatatypes' => array( 'データ型一覧' ),
 	'SetLabel' => array( 'ラベルの設定' ),
 	'SetDescription' => array( '説明の設定' ),
 	'SetAliases' => array( '別名の設定' ),
-	'EntitiesWithoutLabel' => array( 'ラベルのないエンティティ' ),
+	'EntitiesWithoutLabel' => array( 'ラベルのない実体', 'ラベルのないエンティティ' ),
 	'ItemsWithoutSitelinks' => array( 'サイトリンクのない項目' ),
 );
 
