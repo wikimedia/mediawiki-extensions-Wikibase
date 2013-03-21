@@ -40,7 +40,7 @@ define( 'WBC_VERSION', '0.4 alpha'
 	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
 $wgExtensionCredits['other'][] = array(
-	'path' => __FILE__,
+	'path' => __DIR__,
 	'name' => 'Wikibase Client',
 	'version' => WBC_VERSION,
 	'author' => array(
