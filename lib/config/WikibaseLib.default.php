@@ -53,8 +53,7 @@ $wgWBSettings['changesDatabase'] = false;
 
 // JSON is more robust against version differences between repo and client,
 // but only once the client can cope with the JSON form of the change.
-// TODO: make this default to true!
-$wgWBSettings['changesAsJson'] = false;
+$wgWBSettings['changesAsJson'] = true;
 
 // list of logical database names of local client wikis.
 // may contain mappings from site-id to db-name.
