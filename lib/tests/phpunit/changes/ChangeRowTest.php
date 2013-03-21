@@ -82,9 +82,18 @@ class ChangeRowTest extends \ORMRowTest {
 	}
 
 	public function constructorTestProvider() {
-		return array(
-			array( TestChanges::getChange(), true ),
-		);
+		$changes = TestChanges::getChanges();
+		$cases = array();
+
+		/* @var \Wikibase\EntityChange $change */
+		foreach ( $changes as $change ) {
+			$cases[] = array(
+				$change->toArray(),
+				true
+			);
+		}
+
+		return $cases;
 	}
 
 	/**
@@ -99,7 +108,7 @@ class ChangeRowTest extends \ORMRowTest {
 	 */
 	public function testGetAge( $changeRow ) {
 		$this->assertEquals(
-			time() - (int)wfTimestamp( TS_UNIX, '20120515104713' ),
+			time() - (int)wfTimestamp( TS_UNIX, '20130101000000' ),
 			$changeRow->getAge()
 		);
 	}
@@ -109,7 +118,7 @@ class ChangeRowTest extends \ORMRowTest {
 	 */
 	public function testGetTime( $changeRow ) {
 		$this->assertEquals(
-			'20120515104713',
+			'20130101000000',
 			$changeRow->getTime()
 		);
 	}
@@ -119,7 +128,7 @@ class ChangeRowTest extends \ORMRowTest {
 	 */
 	public function testGetObjectId( $changeRow ) {
 		$this->assertEquals(
-			'q182',
+			'p100',
 			$changeRow->getObjectId()
 		);
 	}
