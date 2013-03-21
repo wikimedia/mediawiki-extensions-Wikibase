@@ -96,7 +96,7 @@ HTML;
 				$3 <!-- wb-snak (Main Snak) -->
 			</div>
 		</div>
-		<div class="wb-claim-toolbar">$4</div> <!-- edit section -->
+		<div class="wb-ui-toolbar-container">$4</div> <!-- edit section -->
 	</div>
 	<div class="wb-statement-references-container">
 		<div class="wb-statement-references-heading">$5</div>
