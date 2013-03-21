@@ -178,6 +178,7 @@ $wgAutoloadClasses['SpecialSetAliases'] 				= $dir . 'includes/specials/SpecialS
 $wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	    = $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
 $wgAutoloadClasses['SpecialItemsWithoutSitelinks'] 	    = $dir . 'includes/specials/SpecialItemsWithoutSitelinks.php';
 $wgAutoloadClasses['SpecialListDatatypes'] 				= $dir . 'includes/specials/SpecialListDatatypes.php';
+$wgAutoloadClasses['SpecialDispatchStats'] 				= $dir . 'includes/specials/SpecialDispatchStats.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\EntityPerPage']			= $dir . 'includes/store/EntityPerPage.php';
@@ -194,6 +195,7 @@ $wgAutoloadClasses['Wikibase\SqlIdGenerator'] 			= $dir . 'includes/store/sql/Sq
 $wgAutoloadClasses['Wikibase\SqlStore'] 				= $dir . 'includes/store/sql/SqlStore.php';
 $wgAutoloadClasses['Wikibase\TermSqlCache'] 			= $dir . 'includes/store/sql/TermSqlCache.php';
 $wgAutoloadClasses['Wikibase\EntityPerPageTable']		= $dir . 'includes/store/sql/EntityPerPageTable.php';
+$wgAutoloadClasses['Wikibase\DispatchStats']			= $dir . 'includes/store/sql/DispatchStats.php';
 
 // includes/updates
 $wgAutoloadClasses['Wikibase\EntityDeletionUpdate'] 	= $dir . 'includes/updates/EntityDeletionUpdate.php';
@@ -243,7 +245,7 @@ $wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
 $wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
 $wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
-
+$wgSpecialPages['DispatchStats']					= 'SpecialDispatchStats';
 
 // Special page groups
 $wgSpecialPageGroups['NewItem']					= 'wikibaserepo';
@@ -257,8 +259,7 @@ $wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
 $wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
 $wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
 $wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
-
-
+$wgSpecialPageGroups['DispatchStats']				= 'wikibaserepo';
 
 // Hooks
 $wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';

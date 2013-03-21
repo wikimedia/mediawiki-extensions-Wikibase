@@ -169,6 +169,22 @@ Your IP address will be recorded in the edit history of this $1.",
 	'wikibase-setentity-language' => 'Language:',
 	'wikibase-setentity-invalid-langcode' => 'The language identifier "$1" is unknown. Please use a language identifier known to the system, such as "en".',
 	'wikibase-setentity-invalid-id' => 'The ID "$1" is unknown to the system. Please use a valid entity ID.',
+	'special-dispatchstats' => 'Change dispatch statistics',
+	'wikibase-dispatchstats-intro' => 'This page provides statistics about change dispatching to the clients.',
+	'wikibase-dispatchstats-no-stats' => 'There are currently no statistics available.',
+	'wikibase-dispatchstats-changes' => 'Change Log Statistics',
+	'wikibase-dispatchstats-stats' => 'Dispatch Statistics',
+	'wikibase-dispatchstats-change-id' => 'ID',
+	'wikibase-dispatchstats-change-timestamp' => 'Timestamp',
+	'wikibase-dispatchstats-oldest-change' => 'Oldest',
+	'wikibase-dispatchstats-newest-change' => 'Newest',
+	'wikibase-dispatchstats-site-id' => 'Site',
+	'wikibase-dispatchstats-lag-num' => 'Pending',
+	'wikibase-dispatchstats-lag-time' => 'Lag',
+	'wikibase-dispatchstats-freshest' => 'Freshest',
+	'wikibase-dispatchstats-stalest' => 'Stalest',
+	'wikibase-dispatchstats-median'  => 'Median',
+	'wikibase-dispatchstats-average' => 'Average',
 	'special-listdatatypes' => 'List of all datatypes available',
 	'wikibase-listdatatypes-intro' => 'This is a list of all datatypes currently in use on this installation:',
 	'wikibase-history-title-with-label' => 'Revision history of "$2" ($1)',
@@ -679,6 +695,22 @@ See also:
 
 "language identifier" is the same as "language code".',
 	'wikibase-setentity-invalid-id' => 'Response informing that the selected entity ID is not valid. $1 is the invalid ID.',
+	'special-dispatchstats' => 'This special page shows statistics about the process used to notify client wikis about changes on the repository.',
+	'wikibase-dispatchstats-intro' => 'Intro text for the DispatchStats special page.',
+	'wikibase-dispatchstats-no-stats' => 'Message shown when there are no statistics to be shown.',
+	'wikibase-dispatchstats-changes' => 'Section header for statistics about the change log',
+	'wikibase-dispatchstats-stats' => 'Section header for statistics about the dispatcher',
+	'wikibase-dispatchstats-change-id' => 'Column header for change IDs',
+	'wikibase-dispatchstats-change-timestamp' => 'Column header for change timestamps',
+	'wikibase-dispatchstats-oldest-change' => 'Row header for the oldest recorded change',
+	'wikibase-dispatchstats-newest-change' => 'Row header for the newest recorded change',
+	'wikibase-dispatchstats-site-id' => 'Column header for site IDs',
+	'wikibase-dispatchstats-lag-num' => 'Column header for the number of changes not yet dispatched to this client wiki',
+	'wikibase-dispatchstats-lag-time' => 'Column header for the time since a dispatcher visited this client wiki',
+	'wikibase-dispatchstats-freshest' => 'Row header for the freshest (most recently updated) client wiki',
+	'wikibase-dispatchstats-stalest' => 'Row header for the stalest (least recently updated) client wiki',
+	'wikibase-dispatchstats-median'   => 'Row header for the median client wiki, such that half of the client wikis are fresher and half are staler than this one.',
+	'wikibase-dispatchstats-average' => 'Row header for average lag values',
 	'special-listdatatypes' => 'This special page returns a list of available datatypes (such as commonsMedia)',
 	'wikibase-listdatatypes-intro' => 'Intro text for the ListDatatypes special page.',
 	'wikibase-history-title-with-label' => 'The title of the history page with label and prefixed id. Parameters:
@@ -3702,16 +3734,16 @@ $messages['fa'] = array(
 	'wikibase-listdatatypes-wikibase-item-body' => 'به آیتم‌های دیگر موجود در این پروژه پیوند بدهید. هنگامی که در حال واردکردن آیتم هستید، ویکی‌داده به صورت خودکار به یافتن ورودی‌های که با آن بخوانند اقدام می‌کند. ورودی مد نظر، فقط باید متن خام(بدون عدد) باشد.
 * شمای کلی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
 * بخش سلسله مراتبی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته ای غیرمستقیم به آن ارجاع می‌دهد
-* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد 
+* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
 * تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد',
 	'wikibase-listdatatypes-commonsmedia-head' => 'رسانه‌های ویکی‌انبار',
 	'wikibase-listdatatypes-commonsmedia-body' => 'به فایل های موجود در این ویکی انبار پیوند بدهید. هنگامی که در حال واردکردن نام فایل هستید، ویکی‌انبار به صورت خودکار به یافتن ورودی‌های که با آن بخوانند اقدام می‌کند. ورودی مد نظر، فقط باید متن خام(بدون عدد) باشد.
 * شمای کلی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
 * بخش سلسله مراتبی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته ای غیرمستقیم به آن ارجاع می‌دهد
-* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد 
+* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
 * تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'مختصات جغرافیایی',
-	'wikibase-listdatatypes-geo-coordinate-body' => 'داده حروفی برای مکان جغرافیایی یک جرم درخشان آسمانی که به صورت طول جغرافیایی-عرض جغرافیایی بر حسب درجه یا بوسیله سیستم های زئومتریک بیان می شود. 
+	'wikibase-listdatatypes-geo-coordinate-body' => 'داده حروفی برای مکان جغرافیایی یک جرم درخشان آسمانی که به صورت طول جغرافیایی-عرض جغرافیایی بر حسب درجه یا بوسیله سیستم های زئومتریک بیان می شود.
 * عرض جغرافیایی - بخش اول مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (شمالی/جنوبی) مشخص می شود
 * طول جغرافیایی - بخش دوم مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (خاوری/باختریی) مشخص می شود
 * ارتفاع(اختیاری) - مقدار مشخص(؟)ارتفاع از سطح مرجع، برای کره "زمین" که کره مرجع آن "WGS84" است
@@ -3719,18 +3751,18 @@ $messages['fa'] = array(
 	'wikibase-listdatatypes-quantity-head' => 'کمیت',
 	'wikibase-listdatatypes-quantity-body' => 'داده های حروفی برای یک کمیت که به یک نوع یکای دقیق مربوط می شود. یکا، در واقع با مقدار وارد شده همراه می آید.
 * مقدار - بخشی نامعلوم از رشته(اندازه گیری شده با پیشوندی نامعلوم)
-* یکا - بخشی نامعلوم از رشته(اندازه گیری شده با جسمی غیر استاندارد) 
+* یکا - بخشی نامعلوم از رشته(اندازه گیری شده با جسمی غیر استاندارد)
 * دقت(اختیاری) - مقداری معلوم(مشخص) که یکای آن همان یکای مقدار است',
 	'wikibase-listdatatypes-monolingual-text-head' => 'متن تک‌زبانه',
 	'wikibase-listdatatypes-monolingual-text-body' => 'داده حروفی به صورت رشته ای که در زبان های دیگر واژه جدیدی برای آن ابداع نشده باشد. این نوع داده رشته ای فقط یک بار تعریف شده و در تمام زبان ها از همان تعریف استفاده می شود. نمونه های بارز این نوع رشته، نام های جغرافیایی هستند که با یک زبان محلی نوشته می شوند و نام های شناسه ای که به یک فرمول شیمیایی یا نام علمی لاتین اختصاص داده می شوند.
 * زبان - مقداری مشخص برای شناساندن متن
 * متن - مقداری مشخص برای رشته ای به زبانی مشخص',
 	'wikibase-listdatatypes-multilingual-text-head' => 'متن چندزبانه',
-	'wikibase-listdatatypes-multilingual-text-body' => 'داده حروفی برای رشته ای که می بایست آنرا به سایر زبان ها ترجمه نمود. معمولا برای چیزهایی به کار می رود که مورد اقبال عمومی است ولی فاقد صورت نوشتاری محلی است. چیزهایی که در زبان های مختلف و با سیستم های نوشتاری مختلف نمود پیدا می کنند. 
+	'wikibase-listdatatypes-multilingual-text-body' => 'داده حروفی برای رشته ای که می بایست آنرا به سایر زبان ها ترجمه نمود. معمولا برای چیزهایی به کار می رود که مورد اقبال عمومی است ولی فاقد صورت نوشتاری محلی است. چیزهایی که در زبان های مختلف و با سیستم های نوشتاری مختلف نمود پیدا می کنند.
 * زبان - مقداری معین(معلوم)که زبان به کار رفته در بخش متن را می شناساند
 * متن - مقداری معین برای رشته متغیر مختص آن زبان',
 	'wikibase-listdatatypes-string-head' => 'رشته',
-	'wikibase-listdatatypes-string-body' => 'داده حروفی برای یک رشته کارکتر. در مواقعی که صورت نوشتاری یک شناسه بدون تبعیت از زبانی معین نوشته شده باشد، این نوع داده ها زیاد به کار می روند. بعضی اوقات این نوع داده ها در قالب سیستم های نوشتاری غیر حرف نگاری می شوند. 
+	'wikibase-listdatatypes-string-body' => 'داده حروفی برای یک رشته کارکتر. در مواقعی که صورت نوشتاری یک شناسه بدون تبعیت از زبانی معین نوشته شده باشد، این نوع داده ها زیاد به کار می روند. بعضی اوقات این نوع داده ها در قالب سیستم های نوشتاری غیر حرف نگاری می شوند.
 * زبان - مقداری معین برای شناساندن زبان بخش متن
 * متن - مقداری معین برای رشته متغیر مختص آن زبان',
 	'wikibase-listdatatypes-time-head' => 'زمان',
@@ -6011,13 +6043,13 @@ Vistfang þitt skráist í breytingaskrá $1.',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Því miður þekkti kerfið ekki kennimerki tungumálsins. Vinsamlegast notaðu gilt kennimerki, eins og „en".',
 	'wikibase-itemdisambiguation-description' => 'Þau gildi sem eru notuð við leit þurfa að vera tæmandi texta færsla. Tungumál er kennimerki, eins og „en".',
 	'special-newproperty' => 'Búa til nýjan eiginleika',
-	'wikibase-newproperty-summary' => 'Sjáðu til þess að þú [[Special:PropertyDisambiguation|athugir hvort eiginleikinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Label/is|merkimiða]] og [[Help:Description/is|lýsingu]] fyrir 
+	'wikibase-newproperty-summary' => 'Sjáðu til þess að þú [[Special:PropertyDisambiguation|athugir hvort eiginleikinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Label/is|merkimiða]] og [[Help:Description/is|lýsingu]] fyrir
 alla eiginleika og þar að auki gilda gagnagerð.',
 	'wikibase-newproperty-fieldset' => 'Búa til nýjan eiginleika',
 	'wikibase-newproperty-datatype' => 'Gagnagerð:',
 	'wikibase-newproperty-invalid-datatype' => 'Ógild gagnagerð tilgreind',
 	'special-newitem' => 'Stofna nýjan hlut',
-	'wikibase-newitem-summary' => 'Sjáðu til þess að þú [[Special:ItemByTitle|athugir hvort hluturinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Label/is|merkimiða]] og [[Help:Description/is|lýsingu]] fyrir 
+	'wikibase-newitem-summary' => 'Sjáðu til þess að þú [[Special:ItemByTitle|athugir hvort hluturinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Label/is|merkimiða]] og [[Help:Description/is|lýsingu]] fyrir
 alla hluti.',
 	'wikibase-newitem-fieldset' => 'Búa til nýjan hlut',
 	'wikibase-newitem-site' => 'Vefsíða fyrsta vefsvæðistengilsins',
@@ -7131,7 +7163,7 @@ $messages['lb'] = array(
 	'wikibase-snakview-snaktypeselector-novalue' => 'kee Wäert',
 	'wikibase-copyrighttooltip-acknowledge' => 'Ech akzeptéieren dës Bedingunge fir meng zukünfteg Ännerungen. Dëse Message net nach eng Kéier weisen.',
 	'wikibase-entityselector-more' => 'méi',
-	'wikibase-anonymouseditwarning' => 'Opgepasst: Dir sidd net ageloggt. 
+	'wikibase-anonymouseditwarning' => 'Opgepasst: Dir sidd net ageloggt.
 Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-restrictionedit-tooltip-message' => 'Dës Säit ass gespaart. Änneren ass net erlaabt.',
 	'wikibase-blockeduser-tooltip-message' => 'Dir gouft gespaart a  kënnt dofir keng Ännerunge maachen.',
