@@ -184,11 +184,12 @@ $messages['it'] = array(
 );
 
 /** Japanese (日本語)
+ * @author Fryed-peach
  * @author Shirayuki
  */
 $messages['ja'] = array(
 	'datavalues-desc' => 'さまざまな型の値を表現するオブジェクトのコレクション',
-	'version-datavalues' => 'データの値',
+	'version-datavalues' => 'DataValues',
 );
 
 /** Korean (한국어)
