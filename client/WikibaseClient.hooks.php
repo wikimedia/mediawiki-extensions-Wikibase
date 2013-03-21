@@ -82,10 +82,12 @@ final class ClientHooks {
 			'includes/ChangeHandler',
 			'includes/RepoLinker',
 			'includes/EntityCacheUpdater',
+			'includes/NamespaceChecker',
 
 			'includes/api/ApiClientInfo',
 
 			'includes/store/EntityCacheTable',
+
 		);
 
 		foreach ( $testFiles as $file ) {
