@@ -113,9 +113,7 @@ HTML;
 	$templates['wb-snaklistview'] =
 <<<HTML
 <div class="wb-snaklistview">
-	<div class="wb-snaklistview-heading">
-		<div class="wb-snaklistview-toolbar">$2</div> <!-- edit section -->
-	</div>
+	<div class="wb-snaklistview-heading"></div>
 	<div class="wb-snaklistview-listview">$1</div> <!-- wb-listview -->
 </div>
 HTML;
@@ -169,6 +167,11 @@ HTML;
 	$templates['wb-editsection'] =
 <<<HTML
 <$1 class="wb-editsection">$2</$1>
+HTML;
+
+	$templates['wb-toolbar-container'] =
+<<<HTML
+	<div class="wb-ui-toolbar-container $1">$2</div>
 HTML;
 
 	$templates['wb-toolbar'] =

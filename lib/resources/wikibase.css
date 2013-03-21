@@ -473,7 +473,7 @@ div.wb-snak .wb-snak-value-container {
 }
 
 /* Link to add claim to section */
-div.wb-claim-section > .wb-ui-toolbar {
+div.wb-claim-section > .wb-addtoolbar {
 	min-height: 3em;
 	background-color: #F8F8F8;
 	width: 100%;
@@ -481,13 +481,13 @@ div.wb-claim-section > .wb-ui-toolbar {
 	display: block;
 	float: left;
 }
-div.wb-claim-section > .wb-ui-toolbar .wb-editsection {
+div.wb-claim-section > .wb-addtoolbar .wb-editsection {
 	position: absolute;
 	top: 10px;
 }
 
 /* General add new claim link */
-div.wb-claimlist > span.wb-ui-toolbar {
+div.wb-claimlist > .wb-addtoolbar {
 	display: block;
 }
 div.wb-claimlist div.wb-editsection {
@@ -701,15 +701,25 @@ div.wb-statement-references .wb-error {
 	padding-bottom: 5px;
 }
 
+/* a reference's "edit" toolbar */
+.wb-referenceview .wb-edittoolbar {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.wb-referenceview span.wb-editsection {
+	top: 5px;
+}
+
 /* "remove" link at each reference's snak */
-.wb-referenceview .wb-snaklistview-listview .wb-snakview > .wb-ui-toolbar {
+.wb-referenceview .wb-snaklistview-listview .wb-snakview > .wb-removetoolbar {
 	position: absolute;
 	top: 5px;
 	right: 0;
 }
 
 /* "add" link in one reference's snak list */
-.wb-referenceview > .wb-ui-toolbar {
+.wb-referenceview > .wb-addtoolbar {
 	float: right;
 	margin-bottom: 1em;
 }
