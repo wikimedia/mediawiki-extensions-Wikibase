@@ -32,9 +32,9 @@ namespace Wikibase;
 interface EntityLookup {
 
 	/**
-	 * Returns the entity with the provided id or null is there is no such
+	 * Returns the entity with the provided id or null if there is no such
 	 * entity. If a $revision is given, the requested revision of the entity is loaded.
-	 * The the revision does not belong to the given entity, null is returned.
+	 * If the revision does not belong to the given entity, null is returned.
 	 *
 	 * @since 0.3
 	 *
