@@ -96,7 +96,7 @@ HTML;
 				$3 <!-- wb-snak (Main Snak) -->
 			</div>
 		</div>
-		<div class="wb-ui-toolbar-container">$4</div> <!-- edit section -->
+		<span class="wb-ui-toolbar">$4</span> <!-- edit section -->
 	</div>
 	<div class="wb-statement-references-container">
 		<div class="wb-statement-references-heading">$5</div>
@@ -169,14 +169,9 @@ HTML;
 <$1 class="wb-editsection">$2</$1>
 HTML;
 
-	$templates['wb-toolbar-container'] =
-<<<HTML
-	<div class="wb-ui-toolbar-container $1">$2</div>
-HTML;
-
 	$templates['wb-toolbar'] =
 <<<HTML
-<span class="wb-ui-toolbar">$1</span>
+<span class="wb-ui-toolbar $1">$2</span>
 HTML;
 
 	$templates['wb-toolbar-group'] =

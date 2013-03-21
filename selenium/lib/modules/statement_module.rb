@@ -11,12 +11,12 @@ module StatementPage
   include EntitySelectorPage
   include ReferencePage
   # statements UI elements
-  link(:addStatement, :xpath => "//div[contains(@class, 'wb-claimlist')]/div[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
-  link(:addClaimToFirstStatement, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
-  link(:editFirstStatement, :xpath => "//div[contains(@class, 'wb-ui-toolbar-container')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-innoneditmode')]/span/a")
-  link(:saveStatement, :xpath => "//div[contains(@class, 'wb-ui-toolbar-container')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='save']")
-  link(:cancelStatement, :xpath => "//div[contains(@class, 'wb-ui-toolbar-container')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='cancel']")
-  link(:removeClaimButton, :xpath => "//div[contains(@class, 'wb-ui-toolbar-container')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='remove']")
+  link(:addStatement, :xpath => "//div[contains(@class, 'wb-claimlist')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
+  link(:addClaimToFirstStatement, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
+  link(:editFirstStatement, :xpath => "//span[contains(@class, 'wb-ui-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-innoneditmode')]/span/a")
+  link(:saveStatement, :xpath => "//span[contains(@class, 'wb-ui-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='save']")
+  link(:cancelStatement, :xpath => "//span[contains(@class, 'wb-ui-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='cancel']")
+  link(:removeClaimButton, :xpath => "//span[contains(@class, 'wb-ui-toolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='remove']")
   # TODO: could this lead to problems? for CM & item type properties there is an additional "a" element around the textbox; this is not the case for string type properies
   #text_area(:statementValueInput, :xpath => "//div[contains(@class, 'valueview-ineditmode')]/div/a/textarea[contains(@class, 'valueview-input')]")
   text_area(:statementValueInput, :class => "valueview-input")

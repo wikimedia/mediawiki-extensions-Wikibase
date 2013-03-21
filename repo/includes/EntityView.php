@@ -515,7 +515,7 @@ abstract class EntityView extends \ContextSource {
 				);
 			}
 
-			$propertyHtml .= wfTemplate( 'wb-toolbar-container',
+			$propertyHtml .= wfTemplate( 'wb-toolbar',
 				'wb-addtoolbar',
 				// TODO: add link to SpecialPage
 				$this->getHtmlForEditSection( $entity, $lang, '', 'span', 'add' )
@@ -570,6 +570,7 @@ abstract class EntityView extends \ContextSource {
 		$html = wfTemplate( 'wb-editsection',
 			$tag,
 			wfTemplate( 'wb-toolbar',
+				'',
 				wfTemplate( 'wb-toolbar-group', $button )
 			)
 		);
