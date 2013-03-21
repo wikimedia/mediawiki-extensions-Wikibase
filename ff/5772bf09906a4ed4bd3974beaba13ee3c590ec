@@ -1,0 +1,9 @@
+Verified+1: jenkins-bot
+Code-Review+2: Nikerabbit <niklas.laxstrom@gmail.com>
+Code-Review+2: John Erling Blad <john.blad@wikimedia.de>
+Verified+2: John Erling Blad <john.blad@wikimedia.de>
+Submitted-by: John Erling Blad <john.blad@wikimedia.de>
+Submitted-at: Thu, 21 Mar 2013 10:39:39 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/55032
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
