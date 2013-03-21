@@ -405,4 +405,21 @@ class EntityChange extends DiffChange {
 
 		return $data;
 	}
+	/**
+	 * @see ChangeRow::serializeInfo()
+	 *
+	 * Overwritten to use the array representation of the diff.
+	 *
+	 * @since 0.4
+	 * @param array $info
+	 * @return string
+	 */
+	protected function serializeInfo( array $info ) {
+		if ( isset( $info['entity'] ) ) {
+			// never serialize full entity data in a change, it's huge.
+			unset( $info['entity'] );
+		}
+
+		return parent::serializeInfo( $info );
+	}
 }

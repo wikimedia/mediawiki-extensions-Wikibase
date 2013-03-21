@@ -28,6 +28,7 @@ use Wikibase\Entity;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group Database
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseChange
@@ -35,20 +36,43 @@ use Wikibase\Entity;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
-class EntityChangeTest extends \MediaWikiTestCase {
+class EntityChangeTest extends DiffChangeTest {
 
-	public function instanceProvider() {
-		$class = $this->getClass();
-		return array_map(
-			function( Entity $entity ) use ( $class ) {
-				return array( $class::newFromUpdate( EntityChange::UPDATE, null, $entity ) );
-			},
-			TestChanges::getEntities()
+	public function __construct( $name = null, $data = array(), $dataName = '' ) {
+		parent::__construct( $name, $data, $dataName );
+
+		// don't include entity data, it's skipped during serialization!
+		// $this->allowedInfoKeys[] = 'entity';
+
+		$this->allowedChangeKeys = array( // see TestChanges::getChanges()
+			'property-creation',
+			'property-deletion',
+			'property-set-label',
+			'item-creation',
+			'item-deletion',
+			'set-dewiki-sitelink',
+			'set-enwiki-sitelink',
+			'change-dewiki-sitelink',
+			'change-enwiki-sitelink',
+			'remove-dewiki-sitelink',
+			'set-de-label',
+			'set-en-label',
+			'set-en-aliases',
+			'add-claim',
+			'remove-claim',
+			'item-deletion-linked',
+			'remove-enwiki-sitelink',
 		);
 	}
 
-	protected function getClass() {
+	/**
+	 * @see ORMRowTest::getRowClass
+	 * @since 0.4
+	 * @return string
+	 */
+	protected function getRowClass() {
 		return 'Wikibase\EntityChange';
 	}
 
@@ -68,7 +92,7 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	 */
 	public function testNewFromUpdate( Entity $entity ) {
 		/* @var EntityChange $entityChange */
-		$class = $this->getClass();
+		$class = $this->getRowClass();
 		$entityChange = $class::newFromUpdate( EntityChange::UPDATE, null, $entity );
 		$this->assertInstanceOf( $class, $entityChange );
 
@@ -91,7 +115,7 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	 * @param \Wikibase\Entity $entity
 	 */
 	public function testSetAndGetEntity( Entity $entity ) {
-		$class = $this->getClass();
+		$class = $this->getRowClass();
         $entityChange = $class::newFromUpdate( EntityChange::UPDATE, null, $entity );
 		$entityChange->setEntity( $entity );
 		$this->assertEquals( $entity, $entityChange->getEntity() );

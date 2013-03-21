@@ -34,13 +34,53 @@ use \Wikibase\Settings;
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseChange
- * @group WikibaseChangeRowTest
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
 class ChangeRowTest extends \ORMRowTest {
+
+	/**
+	 * A list of names of test changes to use. Refers to keys in the array
+	 * returned by TestChanges::getChanges().
+	 *
+	 * Subclasses should add to this array as appropriate.
+	 *
+	 * @var array
+	 */
+	protected $allowedInfoKeys;
+
+	/**
+	 * A list of keys to allow in change's info field.
+	 *
+	 * Subclasses should add to this array as appropriate.
+	 *
+	 * @var array
+	 */
+	protected $allowedChangeKeys;
+
+	/**
+	 * Constructs a new ChangeRowTest.
+	 *
+	 * Subclasses may want to add entries to $this->allowedInfoKeys and $this->allowedChangeKeys,
+	 * as appropriate.
+	 *
+	 * @param null   $name
+	 * @param array  $data
+	 * @param string $dataName
+	 */
+	public function __construct( $name = null, $data = array(), $dataName = '' ) {
+		parent::__construct( $name, $data, $dataName );
+
+		$this->allowedInfoKeys = array( 'metadata' );
+
+		$this->allowedChangeKeys = array( // see TestChanges::getChanges()
+			'property-creation',
+			'property-deletion',
+			'property-set-label',
+		);
+	}
 
 	public function setUp() {
 		if ( defined( 'WBC_VERSION' ) ) {
@@ -81,10 +121,24 @@ class ChangeRowTest extends \ORMRowTest {
 		return ChangesTable::singleton();
 	}
 
+	protected function getTestChanges() {
+		$changes = TestChanges::getChanges( $this->allowedChangeKeys, $this->allowedInfoKeys );
+		return $changes;
+	}
+
 	public function constructorTestProvider() {
-		return array(
-			array( TestChanges::getChange(), true ),
-		);
+		$changes = $this->getTestChanges();
+		$cases = array();
+
+		/* @var \Wikibase\EntityChange $change */
+		foreach ( $changes as $change ) {
+			$cases[] = array(
+				$change->toArray(),
+				true
+			);
+		}
+
+		return $cases;
 	}
 
 	/**
@@ -99,7 +153,7 @@ class ChangeRowTest extends \ORMRowTest {
 	 */
 	public function testGetAge( $changeRow ) {
 		$this->assertEquals(
-			time() - (int)wfTimestamp( TS_UNIX, '20120515104713' ),
+			time() - (int)wfTimestamp( TS_UNIX, '20130101000000' ),
 			$changeRow->getAge()
 		);
 	}
@@ -109,18 +163,18 @@ class ChangeRowTest extends \ORMRowTest {
 	 */
 	public function testGetTime( $changeRow ) {
 		$this->assertEquals(
-			'20120515104713',
+			'20130101000000',
 			$changeRow->getTime()
 		);
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetObjectId( $changeRow ) {
+	public function testGetObjectId( ) {
+		$data = array( 'object_id' => 'p100' );
+		$change = $this->getRowInstance( $data, true );
+
 		$this->assertEquals(
-			'q182',
-			$changeRow->getObjectId()
+			'p100',
+			$change->getObjectId()
 		);
 	}
 
@@ -164,7 +218,8 @@ class ChangeRowTest extends \ORMRowTest {
 		$this->assertEquals( 1, count( $rows ), "Expected exactly one object with the given ID" );
 		$loadedRow = reset( $rows );
 
-		$this->verifyFields( $loadedRow, $changeRow->getFields() );
+		$expected = $changeRow->getFields();
+		$this->verifyFields( $loadedRow, $expected );
 	}
 
 }

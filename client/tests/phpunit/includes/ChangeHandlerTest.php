@@ -403,6 +403,9 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
+	/**
+	 * @todo: move to TestChanges, unify with TestChanges::getChanges()
+	 */
 	public static function makeTestChanges( $userId, $entityId ) {
 		$entity = Item::newEmpty();
 		$entity->setId( new EntityId( Item::ENTITY_TYPE, $entityId ) );
@@ -742,124 +745,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 	// ==========================================================================================
 
-
-	protected static function getTestChanges() {
-		static $changes = array();
-
-		if ( empty( $changes ) ) {
-			$empty = Property::newEmpty();
-			$empty->setId( new \Wikibase\EntityId( Property::ENTITY_TYPE, 100 ) );
-
-			$changes['property-creation'] = EntityChange::newFromUpdate( EntityChange::ADD, null, $empty );
-			$changes['property-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $empty, null );
-
-			// -----
-			$old = Property::newEmpty();
-			$old->setId( new \Wikibase\EntityId( Property::ENTITY_TYPE, 100 ) );
-			$new = $old->copy();
-
-			$new->setLabel( "de", "dummy" );
-			$changes['property-set-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-
-			// -----
-			$old = Item::newEmpty();
-			$old->setId( new \Wikibase\EntityId( Item::ENTITY_TYPE, 100 ) );
-			$new = $old->copy();
-
-			$changes['item-creation'] = EntityChange::newFromUpdate( EntityChange::ADD, null, $new );
-			$changes['item-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $old, null );
-
-			// -----
-			$dewiki = \Sites::singleton()->getSite( 'dewiki' );
-			$link = new \Wikibase\SiteLink( $dewiki, "Dummy" );
-			$new->addSiteLink( $link, 'add' );
-			$changes['set-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-
-			$enwiki = \Sites::singleton()->getSite( 'enwiki' );
-			$link = new \Wikibase\SiteLink( $enwiki, "Emmy" );
-			$new->addSiteLink( $link, 'add' );
-			$changes['set-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-
-			// -----
-			$link = new \Wikibase\SiteLink( $dewiki, "Dummy2" );
-			$new->addSiteLink( $link, 'set' );
-			$changes['change-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-
-			$link = new \Wikibase\SiteLink( $enwiki, "Emmy2" );
-			$new->addSiteLink( $link, 'set' );
-			$changes['change-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-
-			$new->removeSiteLink( 'dewiki', false );
-			$changes['remove-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-
-			// -----
-			$new->setLabel( "de", "dummy" );
-			$changes['set-de-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-
-			$new->setLabel( "en", "emmy" );
-			$changes['set-en-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-
-			$new->setAliases( "en", array( "foo", "bar" ) );
-			$changes['set-en-aliases'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-
-			// -----
-			$propertyId = new EntityId( \Wikibase\Property::ENTITY_TYPE, 23 );
-			$snak = new \Wikibase\PropertyNoValueSnak( $propertyId );
-			$claim = new \Wikibase\Claim( $snak );
-
-			$claims = new \Wikibase\Claims( array( $claim ) );
-			$new->setClaims( $claims );
-			$changes['add-claim'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-
-			$claims = new \Wikibase\Claims();
-			$new->setClaims( $claims );
-			$changes['remove-claim'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-
-			// -----
-			$changes['item-deletion-linked'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $old, null );
-
-			// -----
-			$new->removeSiteLink( 'enwiki', false );
-			$changes['remove-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
-		}
-
-		$rev = 1000;
-
-		/* @var EntityChange $change */
-		foreach ( $changes as $key => $change ) {
-			$change->setComment( "$key:1|" );
-
-			$meta = array(
-				'comment' => '',
-				'page_id' => 23,
-				'bot' => false,
-				'rev_id' => $rev,
-				'parent_id' => $rev -1,
-				'user_text' => 'Some User',
-				'time' => wfTimestamp( TS_MW ),
-			);
-
-			$change->setMetadata( $meta );
-			$rev += 1;
-		}
-
-		return $changes;
-	}
-
 	public static function provideGetActions() {
-		$changes = self::getTestChanges();
+		$changes = TestChanges::getChanges();
 
 		$none = 0;
 		$any = 0xFFFF;
@@ -941,7 +828,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public static function provideGetEditComment() {
-		$changes = self::getTestChanges();
+		$changes = TestChanges::getChanges();
 
 		$dummy = \Title::newFromText( "Dummy" );
 
@@ -1051,7 +938,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public static function provideGetPagesToUpdate() {
-		$changes = self::getTestChanges();
+		$changes = TestChanges::getChanges();
 
 		$id = new \Wikibase\EntityId( Item::ENTITY_TYPE, 100 );
 

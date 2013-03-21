@@ -39,6 +39,30 @@ use Diff\MapDiffer;
  */
 class DiffChangeTest extends ChangeRowTest {
 
+	public function __construct( $name = null, $data = array(), $dataName = '' ) {
+		parent::__construct( $name, $data, $dataName );
+
+		$this->allowedInfoKeys[] = 'diff';
+
+		$this->allowedChangeKeys = array( // see TestChanges::getChanges()
+			'property-creation',
+			'property-deletion',
+			'property-set-label',
+			'item-creation',
+			'item-deletion',
+			'set-dewiki-sitelink',
+			'set-enwiki-sitelink',
+			'change-dewiki-sitelink',
+			'change-enwiki-sitelink',
+			'remove-dewiki-sitelink',
+			'set-de-label',
+			'set-en-label',
+			'set-en-aliases',
+			'item-deletion-linked',
+			'remove-enwiki-sitelink',
+		);
+	}
+
 	/**
 	 * @see ORMRowTest::getRowClass
 	 * @since 0.4
@@ -48,29 +72,12 @@ class DiffChangeTest extends ChangeRowTest {
 		return '\Wikibase\DiffChange';
 	}
 
-	public function diffProvider() {
-		$differ = new MapDiffer();
-
-		return array(
-			array( new Diff( array(), true ) ),
-			array( new Diff( $differ->doDiff( array(), array( 'en' => 'foo' ) ), true ) ),
-			array( new Diff( $differ->doDiff( array( 'en' => 'bar' ), array( 'en' => 'foo' ) ), true ) ),
-			array( new Diff( $differ->doDiff( array( 'en' => 'bar' ), array( 'de' => 'bar' ) ), true ) ),
-		);
-	}
-
-	public function constructorTestProvider() {
-		$data = TestChanges::getChange();
-
-		$diffCases = $this->diffProvider();
+	public static function provideNewFromDiff() {
+		$diffs = TestChanges::getDiffs();
 		$cases = array();
 
-		foreach ( $diffCases as $diffCase ) {
-			$case = $data;
-			$diff = $diffCase[0];
-			$case['info']['diff'] = $diff;
-
-			$cases[] = array( $case, true );
+		foreach ( $diffs as $diff ) {
+			$cases[] = array( $diff );
 		}
 
 		return $cases;
@@ -78,7 +85,7 @@ class DiffChangeTest extends ChangeRowTest {
 
 	/**
 	 * @param Diff $diff
-	 * @dataProvider diffProvider
+	 * @dataProvider provideNewFromDiff
 	 */
 	public function testNewFromDiff( Diff $diff ) {
 		$change = \Wikibase\DiffChange::newFromDiff( $diff );

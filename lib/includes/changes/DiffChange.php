@@ -52,6 +52,16 @@ class DiffChange extends ChangeRow {
 	}
 
 	/**
+	 * @since 0.4
+	 *
+	 * @return bool
+	 */
+	public function hasDiff() {
+		$info = $this->getField( 'info' );
+		return !empty( $info ) && isset( $info['diff'] );
+	}
+
+	/**
 	 * @since 0.1
 	 *
 	 * @param IDiff $diff
