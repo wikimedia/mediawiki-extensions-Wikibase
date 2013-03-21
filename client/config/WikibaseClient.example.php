@@ -36,7 +36,7 @@ if ( !defined( 'WB_CLIENT_EXAMPLE_ENTRY' ) ) {
 
 // Base URL for building links to the repository.
 // Assumes your wiki is setup as "http://repo.example.org/wiki/"
-// This can be protocol relative, such as "//wikidata.org"
+// This can be protocol relative, such as "//www.wikidata.org"
 $wgWBSettings['repoUrl'] = "http://repo.example.org";
 
 // This setting is optional if you have the same type of setup for your

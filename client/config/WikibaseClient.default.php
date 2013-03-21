@@ -38,7 +38,7 @@ global $wgScriptPath, $wgArticlePath, $wgLanguageCode, $wgDBname;
 $wgWBClientSettings = array(
 	'namespaces' => array(), // by default, include all namespaces; deprecated as of 0.4
 	'excludeNamespaces' => array(),
-	'repoUrl' => '//wikidata.org',
+	'repoUrl' => '//www.wikidata.org',
 	'repoScriptPath' => $wgScriptPath,
 	'repoArticlePath' => $wgArticlePath,
 	'sort' => 'code',
