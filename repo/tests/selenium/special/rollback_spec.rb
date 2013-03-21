@@ -40,6 +40,8 @@ describe "Check revert/rollback" do
       page.saveAliases
       ajax_wait
       page.wait_for_api_callback
+      page.sitelinksHeaderCode_element.click
+      page.sitelinksHeaderCode_element.click
       page.editSitelinkLink
       page.pageInputFieldExistingSiteLink= sitelink_changed
       ajax_wait
