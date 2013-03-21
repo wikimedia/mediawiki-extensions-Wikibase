@@ -5,10 +5,6 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-.ui-entityselector-input {
-	padding: .2em;
-}
-
 .ui-entityselector-list {
 	padding: 0;
 	overflow-x: hidden;
