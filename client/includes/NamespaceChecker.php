@@ -26,11 +26,18 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author John Erling Blad < jeblad@gmail.com >
  */
 class NamespaceChecker {
 
+	/**
+	 * @var array
+	 */
 	protected $excludedNamespaces;
 
+	/**
+	 * @var array
+	 */
 	protected $enabledNamespaces;
 
 	/**
@@ -41,10 +48,15 @@ class NamespaceChecker {
 	 *
 	 * @throws \MWException
 	 */
-	public function __construct( array $excludedNamespaces, array $enabledNamespaces ) {
+	public function __construct( array $excludedNamespaces, array $enabledNamespaces = null, array $defaultNamespaces = null ) {
 		$this->excludedNamespaces = $excludedNamespaces;
-
-		$this->enabledNamespaces = $enabledNamespaces;
+		$this->enabledNamespaces = array_filter(
+			isset( $defaultNamespaces ) ? $defaultNamespaces : array(),
+			function ( $ns ) {
+				return $ns % 2 === 0;
+			}
+		);
+		$this->enabledNamespaces = array_unique( array_merge( $this->enabledNamespaces, $enabledNamespaces ) );
 	}
 
 	/**
@@ -125,6 +137,17 @@ class NamespaceChecker {
 	 */
 	public function getExcludedNamespaces() {
 		return $this->excludedNamespaces;
+	}
+
+	/**
+	 * Get valid namespaces
+	 *
+	 * @since 0.4
+	 *
+	 * @return array|bool
+	 */
+	public function getValidNamespaces() {
+		return array_diff( $this->enabledNamespaces, $this->excludedNamespaces );
 	}
 
 }
