@@ -46,9 +46,7 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onBeforePageDisplay( \OutputPage &$out, \Skin &$skin ) {
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-			$out->addModules( 'wikibase.ui.entitysearch' );
-		}
+		$out->addModules( 'wikibase.ui.entitysearch' );
 		return true;
 	}
 
