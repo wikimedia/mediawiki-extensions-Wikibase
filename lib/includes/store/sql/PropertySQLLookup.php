@@ -55,7 +55,7 @@ class PropertySQLLookup implements PropertyLookup {
 	 *
 	 * @param EntityId $entityId
 	 */
-	public function indexPropertiesByLabel( EntityId $entityId, $langCode ) {
+	protected function indexPropertiesByLabel( EntityId $entityId, $langCode ) {
 		wfProfileIn( __METHOD__ );
 
 		$propertyList = array();
@@ -73,11 +73,14 @@ class PropertySQLLookup implements PropertyLookup {
 			$statementsByProperty[$propertyId->getNumericId()][] = $statement;
 
 			$property = $this->entityLookup->getEntity( $propertyId );
-			$propertyLabel = $property->getLabel( $langCode );
 
-			if ( $propertyLabel !== false ) {
-				$id = $property->getPrefixedId();
-				$propertyList[$id] = $propertyLabel;
+			if ( $property !== null ) {
+				$propertyLabel = $property->getLabel( $langCode );
+
+				if ( $propertyLabel !== false ) {
+					$id = $property->getPrefixedId();
+					$propertyList[$id] = $propertyLabel;
+				}
 			}
 		}
 
@@ -122,8 +125,13 @@ class PropertySQLLookup implements PropertyLookup {
 	 */
 	public function getPropertyLabel( EntityId $propertyId, $langCode ) {
 		wfProfileIn( __METHOD__ );
+
 		$property = $this->entityLookup->getEntity( $propertyId );
-		$propertyLabel = $property->getLabel( $langCode );
+		$propertyLabel = false;
+
+		if ( $property !== null ) {
+			$propertyLabel = $property->getLabel( $langCode );
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $propertyLabel;
@@ -136,7 +144,7 @@ class PropertySQLLookup implements PropertyLookup {
 	 *
 	 * @return Statement[]
 	 */
-	public function getStatementsByProperty( EntityId $propertyId ) {
+	protected function getStatementsByProperty( EntityId $propertyId ) {
 		wfProfileIn( __METHOD__ );
 		$numericId = $propertyId->getNumericId();
 
