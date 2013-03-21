@@ -59,9 +59,10 @@ final class LibHooks {
 			'serializers/SnakSerializer',
 
 			'store/SiteLinkLookup',
-			'store/SiteLinkTable',
-			'store/WikiPageEntityLookup',
-			'store/CachingEntityLoader',
+			'store/sql/CachingEntityLoader',
+			'store/sql/PropertySQLLookup',
+			'store/sql/SiteLinkTable',
+			'store/sql/WikiPageEntityLookup',
 
 			'ByPropertyIdArray',
 			'ChangesTable',
