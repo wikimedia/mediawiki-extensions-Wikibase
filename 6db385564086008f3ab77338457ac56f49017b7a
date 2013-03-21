@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "Dqlt0V84",
+        "filename": "client/resources/wbclient.LinkItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-21T10:49:40Z",
+      "side": 1,
+      "message": "Whether height is needed depends on several factors. It is needed if a resize is triggered without the content being well-defined. That is a dialog defined before any content is injected into it. Some browsers are known to produce zero height in those cases. It is possible to use tricks in those cases, and I guess jQuery do something like that.",
+      "parentUuid": "DqaV8aR0",
+      "revId": "6db385564086008f3ab77338457ac56f49017b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqaXKKW4",
         "filename": "client/resources/wbclient.LinkItem.js",
         "patchSetId": 1
