@@ -182,12 +182,12 @@ $wgAutoloadClasses['Wikibase\Lib\Serializers\Unserializer'] 			= $dir . 'include
 // includes/store
 $wgAutoloadClasses['Wikibase\EntityLookup'] 			= $dir . 'includes/store/EntityLookup.php';
 $wgAutoloadClasses['Wikibase\PropertyLookup']           = $dir . 'includes/store/PropertyLookup.php';
-$wgAutoloadClasses['Wikibase\PropertySQLLookup']		= $dir . 'includes/store/PropertySQLLookup.php';
 $wgAutoloadClasses['Wikibase\SiteLinkCache'] 			= $dir . 'includes/store/SiteLinkCache.php';
 $wgAutoloadClasses['Wikibase\SiteLinkLookup'] 			= $dir . 'includes/store/SiteLinkLookup.php';
 
 // includes/store/sql
 $wgAutoloadClasses['Wikibase\CachingEntityLoader']      = $dir . 'includes/store/sql/CachingEntityLoader.php';
+$wgAutoloadClasses['Wikibase\PropertySQLLookup']        = $dir . 'includes/store/sql/PropertySQLLookup.php';
 $wgAutoloadClasses['Wikibase\SiteLinkTable'] 			= $dir . 'includes/store/sql/SiteLinkTable.php';
 $wgAutoloadClasses['Wikibase\WikiPageEntityLookup'] 	= $dir . 'includes/store/sql/WikiPageEntityLookup.php';
 
