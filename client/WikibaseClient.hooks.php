@@ -380,6 +380,8 @@ final class ClientHooks {
 			$langLinkHandler->addLinksFromRepository( $parser->getTitle(), $parser->getOutput() );
 		}
 
+		$langLinkHandler->updateItemIdProperty( $parser->getTitle(), $parser->getOutput() );
+
 		if ( $useRepoLinks || Settings::get( 'alwaysSort' ) ) {
 			// sort links
 			$interwikiSorter = new InterwikiSorter(
@@ -452,11 +454,13 @@ final class ClientHooks {
 			\Sites::singleton() );
 
 		$noExternalLangLinks = $langLinkHandler->getNoExternalLangLinks( $pout );
+
 		if ( $noExternalLangLinks !== array() ) {
 			$out->setProperty( 'noexternallanglinks', $noExternalLangLinks );
 		}
 
 		$itemId = $pout->getProperty( 'wikibase_item' );
+
 		if ( $itemId !== false ) {
 			$out->setProperty( 'wikibase_item', $itemId );
 		}
@@ -477,6 +481,11 @@ final class ClientHooks {
 	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
 		wfProfileIn( __METHOD__ );
 
+		if ( \Action::getActionName( $skin->getContext() ) !== 'view' ) {
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
 		$title = $skin->getContext()->getTitle();
 		$namespaceChecker = new NamespaceChecker(
 			Settings::get( 'excludeNamespaces' ),
@@ -484,43 +493,47 @@ final class ClientHooks {
 		);
 
 		if ( $title->exists() && $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
-			if ( empty( $template->data['language_urls'] ) && \Action::getActionName( $skin->getContext() ) === 'view' ) {
-				// if property is not set, it will return null
-				$noExternalLangLinks = $skin->getOutput()->getProperty( 'noexternallanglinks' );
+			// if property is not set, these will return null
+			$prefixedId = $skin->getOutput()->getProperty( 'wikibase_item' );
+			$noExternalLangLinks = $skin->getOutput()->getProperty( 'noexternallanglinks' );
 
-				if ( $noExternalLangLinks === null || !in_array( '*', $noExternalLangLinks ) ) {
+			// @todo: may want a data link somewhere, even if the links are suppressed
+			if ( $noExternalLangLinks === null || !in_array( '*', $noExternalLangLinks ) ) {
+				if ( $prefixedId !== null ) {
+					$entityId = EntityId::newFromPrefixedId( $prefixedId );
+
+					// should not happen but just in case
+					if ( $entityId === null ) {
+						wfWarn( 'Wikibase $entityId is is set as output page property but is not valid.' );
+						wfProfileOut( __METHOD__ );
+						return true;
+					}
+
+					$repoLinker = new RepoLinker(
+						Settings::get( 'repoUrl' ),
+						Settings::get( 'repoArticlePath' ),
+						Settings::get( 'repoScriptPath' ),
+						Settings::get( 'repoNamespaces' )
+					);
+
+					// links to the associated item on the repo
+					$template->data['language_urls'][] = array(
+						'href' => $repoLinker->repoItemUrl( $entityId ),
+						'text' => wfMessage( 'wikibase-editlinks' )->text(),
+						'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
+						'class' => 'wbc-editpage',
+					);
+				} else {
 					// Placeholder in case the page doesn't have any langlinks yet
 					// self::onBeforePageDisplay adds the JavaScript module which will overwrite this with a link
+					// We can leave this here in case people want to use it for gadgets, css or whatnot,
+					// even if the widget is not enabled.
 					$template->data['language_urls'][] = array(
 						'text' => '',
 						'id' => 'wbc-linkToItem',
 						'class' => 'wbc-editpage wbc-nolanglinks',
 					);
 				}
-
-				wfProfileOut( __METHOD__ );
-				return true;
-			}
-
-			$prefixedId = $skin->getOutput()->getProperty( 'wikibase_item' );
-
-			if ( $prefixedId !== null ) {
-				$entityId = EntityId::newFromPrefixedId( $prefixedId );
-
-				$repoLinker = new RepoLinker(
-					Settings::get( 'repoUrl' ),
-					Settings::get( 'repoArticlePath' ),
-					Settings::get( 'repoScriptPath' ),
-					Settings::get( 'repoNamespaces' )
-				);
-
-				// links to the special page
-				$template->data['language_urls'][] = array(
-					'href' => $repoLinker->repoItemUrl( $entityId ),
-					'text' => wfMessage( 'wikibase-editlinks' )->text(),
-					'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
-					'class' => 'wbc-editpage',
-				);
 			}
 		}
 

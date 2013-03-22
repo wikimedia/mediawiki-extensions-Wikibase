@@ -382,10 +382,12 @@ class LangLinkHandler {
 	public function addLinksFromRepository( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
 
+		// @todo: inject this as a parameter
 		$site = $this->sites->getSite( $this->siteId );
 
 		if ( $site === null ) {
 			wfWarn( 'Site not found for ' . $this->siteId . '. Cannot add links from repository.' );
+			wfProfileOut( __METHOD__ );
 			return;
 		}
 
@@ -409,6 +411,29 @@ class LangLinkHandler {
 			} else {
 				wfWarn( "No interlanguage prefix found for $wiki." );
 			}
+		}
+
+		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Add wikibase_item parser output property
+	 *
+	 * @since 0.4
+	 *
+	 * @param Title $title
+	 * @param ParserOutput $out
+	 */
+	public function updateItemIdProperty( Title $title, ParserOutput $out ) {
+		wfProfileIn( __METHOD__ );
+
+		// @todo inject this as a parameter
+		$site = $this->sites->getSite( $this->siteId );
+
+		if ( $site === null ) {
+			wfWarn( 'Site not found for ' . $this->siteId . '. Cannot add links from repository.' );
+			wfProfileOut( __METHOD__ );
+			return;
 		}
 
 		$propertyHandler = new EntityIdPropertyUpdater( $this->siteLinksLookup, $site );
