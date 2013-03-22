@@ -212,27 +212,27 @@ class ClaimDifferenceVisualizer {
 	}
 
 	/**
-	 * Get formatted SnakList
+	 * Get formatted values of SnakList in an array
 	 *
 	 * @since 0.4
 	 *
 	 * @param SnakList $snakList
 	 *
-	 * @return string
+	 * @return string[]
 	 */
-	 protected function getSnakListHtml( $snakList ) {
-		$html = '';
+	 protected function getSnakListValues( $snakList ) {
+		$values = array();
 
 		foreach ( $snakList as $snak ) {
-
-			if ( $html !== '' ) {
-				$html .= Html::rawElement( 'br', array(), '' );
-			}
-			// @fixme
-			$html .= $this->getMainSnakValue( $snak );
+			// TODO: change hardcoded ": " so something like wfMessage( 'colon-separator' ),
+			// but this will require further refactoring as it would add HTML which gets escaped
+			$values[] =
+				$this->getEntityLabel( $snak->getPropertyId() ) .
+				': '.
+				$this->getMainSnakValue( $snak );
 		}
 
-		return $html;
+		return $values;
 	}
 
 	/**
@@ -276,7 +276,6 @@ class ClaimDifferenceVisualizer {
 
 			return $diffValueString;
 		} else {
-			// TODO: should be differenced visually (e.g. italic)
 			return $snakType;
 		}
 	}
@@ -330,22 +329,19 @@ class ClaimDifferenceVisualizer {
 		// @todo assert that both reference changes refer to the same reference
 		foreach( $referenceChanges as $referenceChange ) {
 			if ( $referenceChange instanceof \Diff\DiffOpAdd ) {
-				$header = $this->getRefHeader( $referenceChange->getNewValue() );
-				$newRef = $this->getRefHtml( $referenceChange->getNewValue() );
+				$newRef = $this->getSnakListValues( $referenceChange->getNewValue()->getSnaks() );
 			} else if ( $referenceChange instanceof \Diff\DiffOpRemove ) {
-				$header = $this->getRefHeader( $referenceChange->getOldValue() );
-				$oldRef = $this->getRefHtml( $referenceChange->getOldValue() );
+				$oldRef = $this->getSnakListValues( $referenceChange->getOldValue()->getSnaks() );
 			} else if ( $referenceChange instanceof \Diff\DiffOpChange ) {
-				$header = $this->getRefHeader( $referenceChange->getNewValue() );
-				$oldRef = $this->getRefHtml( $referenceChange->getOldValue() );
-				$newRef = $this->getRefHtml( $referenceChange->getNewValue() );
+				$oldRef = $this->getSnakListValues( $referenceChange->getOldValue()->getSnaks() );
+				$newRef = $this->getSnakListValues( $referenceChange->getNewValue()->getSnaks() );
 			} else {
 				// something went wrong, never should happen
 				throw new \MWException( 'There are no references in the reference change.' );
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
-				$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-reference' ) . ' / ' . $header,
+				$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-reference' ),
 				$oldRef,
 				$newRef
 			);
@@ -357,19 +353,6 @@ class ClaimDifferenceVisualizer {
 		}
 
 		return $html;
-	}
-
-	/**
-	 * Format reference change
-	 *
-	 * @since 0.4
-	 *
-	 * @param $ref Reference
-	 *
-	 * @return string
-	 */
-	protected function getRefHtml( $ref ) {
-		return $this->getSnakListHtml( $ref->getSnaks() );
 	}
 
 	/**
