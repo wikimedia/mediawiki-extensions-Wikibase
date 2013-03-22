@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dqs3sKcs",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-22T12:10:38Z",
+      "side": 1,
+      "message": "we could preserve the property but still hide the links and edit/add link\n\nsee https://bugzilla.wikimedia.org/45037",
+      "parentUuid": "Dqq2VNTI",
+      "revId": "1993b80487672f7528e2cca517d69703644743bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqs2a6V8",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "Dqg3jAd4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-22T12:10:38Z",
+      "side": 1,
+      "message": "not doing that in this changeset, but good suggestion",
+      "parentUuid": "Dqs2a6V8",
+      "revId": "1993b80487672f7528e2cca517d69703644743bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqm2gfZU",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2013-03-22T11:57:47Z",
       "side": 1,
       "message": "I\u0027m confused - on a page that is not connected to any item (wikibase_item property is not set), why would one use or care about {{noexternallanglinks}}?\n\nIf I read the core correctly, it means that if {{noexternallanglinks:*}} is on the page, I will not get a link to connect the page to a data item. \n\nI don\u0027t think that\u0027s a good idea, I may want to connect to an item so I can use the data, never mind the language links.",
+      "revId": "1993b80487672f7528e2cca517d69703644743bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqu3dbRI",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-22T12:10:38Z",
+      "side": 1,
+      "message": "disagree",
+      "parentUuid": "Dqm2gfZU",
       "revId": "1993b80487672f7528e2cca517d69703644743bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
