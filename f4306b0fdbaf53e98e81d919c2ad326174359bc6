@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dqm1IfTA",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-22T10:25:33Z",
+      "side": 1,
+      "message": "If the user has no babel info set, the \"other languages\" section will not be added, see the code in getHtmlForLanguageTerms(). So, in case the babel extension is installed but not used by the current user, the TOC will contain an entry for \"other languages\", but there will be no such section.\n\nPerhaps it would be best to do this the other way around: generate the html for each section, and if it\u0027s not empty, add the section identifier to the list. Build the TOC last, from that list, and prepend it.",
+      "revId": "f4306b0fdbaf53e98e81d919c2ad326174359bc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqo1F0Rk",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-22T10:25:33Z",
+      "side": 1,
+      "message": "It would be best to build $toc in this method, instead of passing that in, and then call getHtmlForTOC() last, wehn we know which sections are actually present. \n\nThere is no requirement to generate the HTML in the order it will appear in the output.",
+      "revId": "f4306b0fdbaf53e98e81d919c2ad326174359bc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqi1Shd4",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-22T10:25:33Z",
+      "side": 1,
+      "message": "It would be really nice to have a central \"getUserLanguages()\" (or similar) function, that will deal with all the Babel stuff in a single central place. Here, we\u0027d just check whether it returns a non-empty list.",
+      "revId": "f4306b0fdbaf53e98e81d919c2ad326174359bc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqs1C6RI",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-22T10:25:33Z",
+      "side": 1,
+      "message": "If the user has no babel box set, this will return an empty string.",
+      "revId": "f4306b0fdbaf53e98e81d919c2ad326174359bc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
