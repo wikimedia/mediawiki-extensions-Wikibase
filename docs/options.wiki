@@ -84,6 +84,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
           )
 </poem>
 ;allowDataTransclusion: switch to enable data transclusion features like the <nowiki>{{#property}}</nowiki> parser function and the <tt>wikibase</tt> Scribunto module. Defaults to <tt>true</tt>.
+;enableSiteLinkWidget: switch to enable or disable add site link widget. Defaults to <tt>false</tt>.
 
 === Expert Settings ===
 ;siteGroup: This site's group ID, as used in the sites table. Default: <tt>'wikipedia'</tt>. '''Note:''' this setting will be removed once we can take this information from the sites table.

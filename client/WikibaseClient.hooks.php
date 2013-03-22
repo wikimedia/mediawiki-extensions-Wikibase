@@ -411,6 +411,8 @@ final class ClientHooks {
 		wfProfileIn( __METHOD__ );
 
 		$title = $out->getTitle();
+		$user = $skin->getContext()->getUser();
+
 		$namespaceChecker = new NamespaceChecker(
 			Settings::get( 'excludeNamespaces' ),
 			Settings::get( 'namespaces' )
@@ -424,8 +426,11 @@ final class ClientHooks {
 				// Needed as we can't do that in the regular CSS nor in JavaScript
 				// (as that only runs after the element initially appeared).
 				$out->addModules( 'wikibase.client.nolanglinks' );
-				// Add the JavaScript to link pages locally
-				$out->addModules( 'wbclient.linkItem' );
+
+				if ( Settings::get( 'enableSiteLinkWidget' ) === true && $user->isLoggedIn() === true ) {
+					// Add the JavaScript to link pages locally
+					$out->addModules( 'wbclient.linkItem' );
+				}
 			}
 		}
 
