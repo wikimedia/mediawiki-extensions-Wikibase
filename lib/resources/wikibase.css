@@ -612,6 +612,10 @@ div.wb-claim-new .wb-snak-value {
 	padding-bottom: 1em;
 }
 
+div.wb-statement .wb-statement-claim > .wb-ui-toolbar {
+	display: block;
+}
+
 div.wb-statement .wb-editsection {
 	top: 10px; /* even out padding */
 }
