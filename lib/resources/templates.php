@@ -87,6 +87,8 @@ HTML;
 </div>
 HTML;
 
+	// TODO: This template should be split up and make use of the wb-claim template. $4 is used for
+	// the non-JS toolbar to attach to. This parameter should be removed.
 	$templates['wb-statement'] =
 <<<HTML
 <div class="wb-statement $1">
@@ -96,7 +98,7 @@ HTML;
 				$3 <!-- wb-snak (Main Snak) -->
 			</div>
 		</div>
-		<span class="wb-ui-toolbar">$4</span> <!-- edit section -->
+		$4
 	</div>
 	<div class="wb-statement-references-container">
 		<div class="wb-statement-references-heading">$5</div>
