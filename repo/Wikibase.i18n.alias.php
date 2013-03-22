@@ -16,6 +16,7 @@ $specialPageAliases = array();
 
 /** English (English) */
 $specialPageAliases['en'] = array(
+	'DispatchStats' => array( 'DispatchStats' ),
 	'EntityData' => array( 'EntityData' ),
 	'NewItem' => array( 'NewItem', 'CreateItem' ),
 	'NewProperty' => array( 'NewProperty', 'CreateProperty' ),
