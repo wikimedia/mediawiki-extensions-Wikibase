@@ -75,6 +75,13 @@ $specialPageAliases['diq'] = array(
 	'SetLabel' => array( 'SazêEtiketan' ),
 );
 
+/** Esperanto (Esperanto) */
+$specialPageAliases['eo'] = array(
+	'NewItem' => array( 'Nova_ero' ),
+	'NewProperty' => array( 'Nova_eco' ),
+	'ItemByTitle' => array( 'Eroj_laŭ_titolo' ),
+);
+
 /** Spanish (español) */
 $specialPageAliases['es'] = array(
 	'EntityData' => array( 'DatosDeEntidad' ),

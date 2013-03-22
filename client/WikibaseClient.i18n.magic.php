@@ -29,6 +29,12 @@ $magicWords['de'] = array(
 	'noexternallanglinks' => array( 0, 'keineexternensprachlinks', 'keine_externen_sprachlinks' ),
 );
 
+/** Esperanto (Esperanto) */
+$magicWords['eo'] = array(
+	'noexternallanglinks' => array( 0, 'neniuligiloalalialingvo' ),
+	'property' => array( 0, 'eco' ),
+);
+
 /** Estonian (eesti) */
 $magicWords['et'] = array(
 	'noexternallanglinks' => array( 0, 'välistekeelelinkideta' ),
