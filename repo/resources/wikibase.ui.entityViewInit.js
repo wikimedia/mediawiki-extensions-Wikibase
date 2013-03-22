@@ -132,7 +132,8 @@
 			// BUILD TOOLBARS
 			$( '.wb-entity' ).toolbarcontroller( {
 				addtoolbar: ['claimlistview', 'claimsection', 'references', 'referenceview-snakview'],
-				edittoolbar: ['statementview', 'referenceview']
+				edittoolbar: ['statementview', 'referenceview'],
+				removetoolbar: ['referenceview-snakview-remove']
 			} );
 		}
 
