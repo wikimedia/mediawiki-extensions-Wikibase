@@ -169,6 +169,57 @@
       "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqo2TkVo",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:30:01Z",
+      "side": 1,
+      "message": "howRdfData and showData share too much duplicate code for my taste. This should be solved in a more generic way than having two functions doing almost the same stuff. How about implementing the rdf support as a API printer, wouldn\u0027t that allow more generic and flexible handling of the whole? Just thinking out loud without having too much insight of how the whole API printing works.",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqu2h7a0",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:30:01Z",
+      "side": 1,
+      "message": "$apiFormat sounds a little missleading here, why not simply \"format\".",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqs2wqfY",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:30:01Z",
+      "side": 1,
+      "message": "having that echo here doesn\u0027t seem too healthy.",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
