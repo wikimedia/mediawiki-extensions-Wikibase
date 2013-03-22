@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dqm0BXTw",
+        "filename": "lib/includes/ClaimDifferenceVisualizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-03-22T13:05:20Z",
+      "side": 1,
+      "message": "I used \"/\" because it is consistent with what we\u0027re using in the header.",
+      "parentUuid": "Dqi31pYA",
+      "revId": "64d628bc0706cf3366d9bf44884958f07387be3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqg2Q4Ug",
         "filename": "lib/includes/DiffOpValueFormatter.php",
         "patchSetId": 3
