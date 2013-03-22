@@ -59,6 +59,7 @@ $wgWBClientSettings = array(
 		'wikibase-property' => 'Property'
 	),
 	'allowDataTransclusion' => true,
+	'enableSiteLinkWidget' => false,
 );
 
 /**
