@@ -477,6 +477,11 @@ final class ClientHooks {
 	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
 		wfProfileIn( __METHOD__ );
 
+		if ( \Action::getActionName( $skin->getContext() ) !== 'view' ) {
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
 		$title = $skin->getContext()->getTitle();
 		$namespaceChecker = new NamespaceChecker(
 			Settings::get( 'excludeNamespaces' ),
@@ -484,7 +489,27 @@ final class ClientHooks {
 		);
 
 		if ( $title->exists() && $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
-			if ( empty( $template->data['language_urls'] ) && \Action::getActionName( $skin->getContext() ) === 'view' ) {
+			$prefixedId = $skin->getOutput()->getProperty( 'wikibase_item' );
+
+			// this will be null if noexternallanglinks suppresses the links on a page
+			if ( $prefixedId !== null ) {
+				$entityId = EntityId::newFromPrefixedId( $prefixedId );
+
+				$repoLinker = new RepoLinker(
+					Settings::get( 'repoUrl' ),
+					Settings::get( 'repoArticlePath' ),
+					Settings::get( 'repoScriptPath' ),
+					Settings::get( 'repoNamespaces' )
+				);
+
+				// links to the associated item on the repo
+				$template->data['language_urls'][] = array(
+					'href' => $repoLinker->repoItemUrl( $entityId ),
+					'text' => wfMessage( 'wikibase-editlinks' )->text(),
+					'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
+					'class' => 'wbc-editpage',
+				);
+			} else {
 				// if property is not set, it will return null
 				$noExternalLangLinks = $skin->getOutput()->getProperty( 'noexternallanglinks' );
 
@@ -497,30 +522,6 @@ final class ClientHooks {
 						'class' => 'wbc-editpage wbc-nolanglinks',
 					);
 				}
-
-				wfProfileOut( __METHOD__ );
-				return true;
-			}
-
-			$prefixedId = $skin->getOutput()->getProperty( 'wikibase_item' );
-
-			if ( $prefixedId !== null ) {
-				$entityId = EntityId::newFromPrefixedId( $prefixedId );
-
-				$repoLinker = new RepoLinker(
-					Settings::get( 'repoUrl' ),
-					Settings::get( 'repoArticlePath' ),
-					Settings::get( 'repoScriptPath' ),
-					Settings::get( 'repoNamespaces' )
-				);
-
-				// links to the special page
-				$template->data['language_urls'][] = array(
-					'href' => $repoLinker->repoItemUrl( $entityId ),
-					'text' => wfMessage( 'wikibase-editlinks' )->text(),
-					'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
-					'class' => 'wbc-editpage',
-				);
 			}
 		}
 
