@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dqq0o1TY",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:15:34Z",
+      "side": 1,
+      "message": "should be 0.4",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqm0jnVo",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:15:34Z",
+      "side": 1,
+      "message": "Doing this here looks like very bad practice.\nThis should probably be done using the regular class registration.\n\nI just took a look on EasyRdf.php though and that one is just requiring several files like this.\n\nI would suggest to create something like EasyRdf.classes.php which should just return an array of all required classes ( name \u003d\u003e relativepath ). The EasyRdf.php will reference this file and include them as it does not, when using EasyRdf in MediaWiki though, you can incluede EasyRdf.classes.php, iterate over the classes and register them with the proper class registration of MW. Basically something like:\n\n$easyRdfPath \u003d \u0027xxx\u0027\nforeach ( include( \"{$easyRdfPath}/EasyRdf.classes.php\" ) as $class \u003d\u003e $file ) {\n\t$wgAutoloadClasses[ $class ] \u003d \"{$easyRdfPath}/{$file}\";\n}",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqu3PrYo",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:15:34Z",
+      "side": 1,
+      "message": "When I read this class name, I wouldn\u0027t get the idea that this is responsible for creating a RDF version of an Entity.",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqg00YZA",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:15:34Z",
+      "side": 1,
+      "message": "Coding conventions would require this to be $rdfSerializer\n\nAlso, I can\u0027t see where this is used right now and the name of the field seems missleading since this doesn\u0027t exactly look like a serializer object or anything.\n\nProbably this is meant as a constant mapping formats to some classes in EasyRdf?",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqs0tCUY",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:15:34Z",
+      "side": 1,
+      "message": "why is all this stuff hard-coded to wikidata?\n\nIf this really is just specific to wikidata, then it should probably be done in a separate extension.",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqi0dpQs",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:15:34Z",
+      "side": 1,
+      "message": "please add documentation",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqg3VQRk",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:15:34Z",
+      "side": 1,
+      "message": "Please add documentation about return value and what the function is doing.",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqm3N3YY",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:15:34Z",
+      "side": 1,
+      "message": "I am not entirely sure, but why not implement this using the Serializer interface we already have? Either use the existing implementation of EntitySerializer, or if the required structure is much different (it seems so), create a EntityRdfSerializer.",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqs23SfM",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:15:34Z",
+      "side": 1,
+      "message": "If you call getRdfForItem a second time, the EasyRdf_Graph object still has its old state from being called the first time, no? At least I see nothing in this code resetting it or anything. Isn\u0027t that a problem? All the resources etc. already added are not necessarily required or the same for a different entity given to the function.",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqq3ZtVU",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-22T11:15:34Z",
+      "side": 1,
+      "message": "please add documentation. Also, why private, why not protected?",
+      "revId": "4b54e9df12249fda4f54909b256c85e30ef8e40c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
