@@ -104,7 +104,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		$snakSerializer = new SnakSerializer( $this->options );
 		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
 
-		$snaksSerializer = new ByPropertyListSerializer( 'qualifier', $snakSerializer, $this->options );
+		$snaksSerializer = new ByPropertyListSerializer( 'qualifiers', $snakSerializer, $this->options );
 		$qualifiers = $snaksSerializer->getSerialized( $claim->getQualifiers() );
 
 		if ( $qualifiers !== array() ) {
@@ -168,26 +168,22 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			}
 		}
 
-		$snakDeserializer = new SnakSerializer(); // FIXME: derp injection
+		$snakUnserializer = new SnakSerializer(); // FIXME: derp injection
 
 		$claimClass = $isStatement ? '\Wikibase\Statement' : '\Wikibase\Claim';
 
 		/**
 		 * @var Claim $claim
 		 */
-		$claim = new $claimClass( $snakDeserializer->newFromSerialization( $serialization['mainsnak'] ) );
+		$claim = new $claimClass( $snakUnserializer->newFromSerialization( $serialization['mainsnak'] ) );
 		assert( $claim instanceof Claim );
 
 		$claim->setGuid( $serialization['id'] );
 
 		if ( array_key_exists( 'qualifiers', $serialization ) ) {
-			$qualifiers = array();
-
-			foreach ( $serialization['qualifiers'] as $qualifier ) {
-				$qualifiers[] = $snakDeserializer->newFromSerialization( $qualifier );
-			}
-
-			$claim->setQualifiers( new \Wikibase\SnakList( $qualifiers ) );
+			$snaksUnserializer = new ByPropertyListUnserializer( $snakUnserializer );
+			$snaks = $snaksUnserializer->newFromSerialization( $serialization['qualifiers'] );
+			$claim->setQualifiers( new \Wikibase\SnakList( $snaks ) );
 		}
 
 		if ( $isStatement ) {
