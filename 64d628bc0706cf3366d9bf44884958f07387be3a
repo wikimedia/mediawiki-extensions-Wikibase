@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "Dqi31pYA",
+        "filename": "lib/includes/ClaimDifferenceVisualizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-22T12:30:56Z",
+      "side": 1,
+      "message": "\"/\" isn\u0027t really appropriate, \": \" would be good - or even better: use wfMessage( \u0027colon-separator\u0027 ). Probably best stuff that into a member of this object.",
+      "revId": "64d628bc0706cf3366d9bf44884958f07387be3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqg2Q4Ug",
         "filename": "lib/includes/DiffOpValueFormatter.php",
         "patchSetId": 3
