@@ -21,8 +21,11 @@ describe "Check functionality of editing sitelinks on client" do
     visit_page(ClientPage) do |page|
       page.create_article(article_title, article_text, true)
     end
-    visit_page(ClientLoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
+    end
+    visit_page(ClientLoginPage) do |page|
+      page.login_with(CLIENT_ADMIN_USERNAME, CLIENT_ADMIN_PASSWORD)
     end
   end
 
@@ -49,9 +52,6 @@ describe "Check functionality of editing sitelinks on client" do
       end
     end
     it "check button behavior of sitelink editor (logged in)" do
-      visit_page(ClientLoginPage) do |page|
-        page.login_with(CLIENT_ADMIN_USERNAME, CLIENT_ADMIN_PASSWORD)
-      end
       visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
