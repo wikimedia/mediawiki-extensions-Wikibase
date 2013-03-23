@@ -452,7 +452,8 @@ Parameters:
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-description|description]].',
 	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
-This is a generic text used as a placeholder while defining the site for a new sitelink. See also Wikidatas glossary on [[d:Wikidata:Glossary#sitelink|sitelink]].',
+This is a generic text used as a placeholder while defining the site for a new sitelink. See also Wikidatas glossary on [[d:Wikidata:Glossary#sitelink|sitelink]].
+{{Identical|Site}}',
 	'wikibase-sitelink-page-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
 This is a generic text used as a placeholder while defining the page for a possibly new sitelink. See also Wikidatas glossary on [[d:Wikidata:Glossary#sitelink|sitelink]].',
 	'wikibase-alias-edit-placeholder' => 'This is a generic placeholder message used while editing the list of aliases of an item. It is displayed in an empty input box which can be used to define a new alias.',
@@ -704,19 +705,32 @@ See also:
 	'special-dispatchstats' => 'This special page shows statistics about the process used to notify client wikis about changes on the repository.',
 	'wikibase-dispatchstats-intro' => 'Intro text for the DispatchStats special page.',
 	'wikibase-dispatchstats-no-stats' => 'Message shown when there are no statistics to be shown.',
-	'wikibase-dispatchstats-changes' => 'Section header for statistics about the change log',
+	'wikibase-dispatchstats-changes' => 'Section header (<code><nowiki><h2></nowiki></code>) for statistics about the change log',
 	'wikibase-dispatchstats-stats' => 'Section header for statistics about the dispatcher',
-	'wikibase-dispatchstats-change-id' => 'Column header for change IDs',
-	'wikibase-dispatchstats-change-timestamp' => 'Column header for change timestamps',
-	'wikibase-dispatchstats-oldest-change' => 'Row header for the oldest recorded change',
-	'wikibase-dispatchstats-newest-change' => 'Row header for the newest recorded change',
-	'wikibase-dispatchstats-site-id' => 'Column header for site IDs',
-	'wikibase-dispatchstats-lag-num' => 'Column header for the number of changes not yet dispatched to this client wiki',
+	'wikibase-dispatchstats-change-id' => 'Column header for change IDs.
+{{Identical|ID}}',
+	'wikibase-dispatchstats-change-timestamp' => 'Column header for change timestamps.
+{{Identical|Timestamp}}',
+	'wikibase-dispatchstats-oldest-change' => 'Row header for the oldest recorded change.
+{{Identical|Oldest}}',
+	'wikibase-dispatchstats-newest-change' => 'Row header for the newest recorded change.
+{{Identical|Newest}}',
+	'wikibase-dispatchstats-site-id' => 'Column header for site IDs.
+{{Identical|Site}}',
+	'wikibase-dispatchstats-lag-num' => 'Column header for the number of changes not yet dispatched to this client wiki.
+{{Identical|Pending}}',
 	'wikibase-dispatchstats-lag-time' => 'Column header for the time since a dispatcher visited this client wiki',
-	'wikibase-dispatchstats-freshest' => 'Row header for the freshest (most recently updated) client wiki',
-	'wikibase-dispatchstats-stalest' => 'Row header for the stalest (least recently updated) client wiki',
-	'wikibase-dispatchstats-median' => 'Row header for the median client wiki, such that half of the client wikis are fresher and half are staler than this one.',
-	'wikibase-dispatchstats-average' => 'Row header for average lag values',
+	'wikibase-dispatchstats-freshest' => 'Row header for the freshest (most recently updated) client wiki.
+
+See also:
+* {{msg-mw|Wikibase-dispatchstats-stalest}}',
+	'wikibase-dispatchstats-stalest' => 'Row header for the stalest (least recently updated) client wiki.
+
+See also:
+* {{msg-mw|Wikibase-dispatchstats-freshest}}',
+	'wikibase-dispatchstats-median' => "Row header for the median client wiki, such that half of the client wikis are fresher and half are staler than this one, so it's differ from {{msg-mw|Wikibase-dispatchstats-average}}.",
+	'wikibase-dispatchstats-average' => 'Row header for average lag values
+{{Identical|Average}}',
 	'special-listdatatypes' => 'This special page returns a list of available datatypes (such as commonsMedia)',
 	'wikibase-listdatatypes-intro' => 'Intro text for the ListDatatypes special page.',
 	'wikibase-history-title-with-label' => 'The title of the history page with label and prefixed id. Parameters:
@@ -1591,15 +1605,19 @@ $messages['bn'] = array(
 	'wikibase-remove' => 'অপসারণ',
 	'wikibase-undo-revision-error' => 'পূর্বাবস্থায় ফেরা ব্যর্থ হয়েছে',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|টি ভুক্তি|টি ভুক্তি}}', # Fuzzy
+	'wikibase-disambiguation-title' => '"$1"-এর দ্ব্যর্থতা নিরসন',
 	'wikibase-aliases-label' => 'আরও যে নামে পরিচিত:',
 	'wikibase-shortcopyrightwarning' => '"$1"-এ ক্লিকের মাধ্যমে, আপনি [[$2|ব্যবহারের শর্তাবলীর]] সাথে একমত হচ্ছেন, এবং $3-এর অধীনে আপনার অবদান প্রকাশে সম্মত হচ্ছেন।',
 	'wikibase-copyrighttooltip-acknowledge' => 'আমি আমার ভবিষ্যত সম্পাদনাগুলি জন্য এই শর্তাবলী গ্রহণ করলাম। পুনরায় এই বার্তাটি দেখাবেন না।',
 	'wikibase-entityselector-more' => 'আরও',
+	'wikibase-restrictionedit-tooltip-message' => 'এই পৃষ্ঠাটি সুরক্ষিত আছে। সম্পাদনার অনুমতি নেই।',
+	'wikibase-blockeduser-tooltip-message' => 'আপনি সম্পাদনা করা থেকে অবরুদ্ধ।',
 	'special-itembytitle' => 'শিরোনাম অনুযায়ী আইটেম',
 	'wikibase-itembytitle-lookup-fieldset' => 'সাইট এবং শিরোনাম অনুযায়ী আইটেমের জন্য অনুসন্ধান',
 	'wikibase-itembytitle-lookup-site' => 'সাইট:',
 	'wikibase-itembytitle-lookup-page' => 'পাতা:',
 	'wikibase-itembytitle-submit' => 'অনুসন্ধান',
+	'wikibase-itembytitle-create' => 'এছাড়াও আপনি [{{fullurl:Special:NewItem|site=$1&page=$2}} একটি আইটেম তৈরি] করতে পারেন।',
 	'special-itemdisambiguation' => 'আইটেম দ্ব্যর্থতা নিরসন',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'ভাষা এবং লেবেল অনুযায়ী আইটেমের জন্য অনুসন্ধান',
 	'wikibase-itemdisambiguation-lookup-language' => 'ভাষা:',
@@ -1607,6 +1625,7 @@ $messages['bn'] = array(
 	'wikibase-itemdisambiguation-submit' => 'অনুসন্ধান',
 	'wikibase-itemdisambiguation-nothing-found' => 'দুঃখিত, ঐ লেবেলের সাথে কোনো আইটেম পাওয়া যায়নি।',
 	'wikibase-itemdisambiguation-create' => 'আপনি [{{fullurl:Special:NewItem|label=$1}} আইটেমটি তৈরি করতে] পারেন।',
+	'special-newitem' => 'নতুন একটি আইটেম তৈরি করুন',
 	'wikibase-newitem-fieldset' => 'নতুন আইটেম তৈরি করুন',
 	'wikibase-newentity-label' => 'লেবেল:',
 	'wikibase-newentity-description' => 'বিবরণ:',
@@ -1619,16 +1638,34 @@ $messages['bn'] = array(
 	'wikibase-setdescription-submit' => 'বিবরণ নির্ধারণ করুন',
 	'wikibase-setentity-id' => 'আইডি:',
 	'wikibase-setentity-language' => 'ভাষা:',
+	'wikibase-dispatchstats-no-stats' => 'বর্তমানে কোন পরিসংখ্যান প্রাপ্তিসাধ্য নয়।',
 	'wikibase-dispatchstats-change-id' => 'আইডি',
+	'wikibase-dispatchstats-change-timestamp' => 'সময়বার্তা',
+	'wikibase-dispatchstats-oldest-change' => 'পুরাতন',
+	'wikibase-dispatchstats-newest-change' => 'নতুন',
+	'wikibase-dispatchstats-site-id' => 'সাইট',
+	'wikibase-dispatchstats-average' => 'গড়',
+	'wikibase-history-title-with-label' => '"$2" ($1) এর সংশোধনের ইতিহাস',
+	'wikibase-history-title-without-label' => '($1) এর সংশোধনের ইতিহাস',
 	'wikibase-entitieswithoutlabel-label-language' => 'ভাষা:',
 	'wikibase-entitieswithoutlabel-label-type' => 'ধরণ:',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'সমস্ত',
 	'wikibase-entitieswithoutlabel-submit' => 'অনুসন্ধান করুন',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" বৈধ ভাষা কোড নয়।',
+	'special-itemswithoutsitelinks' => 'সাইটলিংক বিহীন আইটেম',
+	'wikibase-restoreold' => 'পুনরুদ্ধার',
+	'wikibase-restore-summary' => '[[Special:Contributions/$2|$2]] কর্তৃক $1-এর সংশোধনটি পুনরুদ্ধার করা হয়েছে',
 	'wikibase-noentity-createone' => 'এছাড়াও আপনি [[$1|নতুন একটি তৈরি করতে]] পারেন',
 	'wikibase-item-summary-wbsetitem' => 'নতুন একটি আইটেম তৈরি হয়েছে',
 	'wikibase-item-summary-wbeditentity' => 'নতুন একটি আইটেম তৈরি হয়েছে',
 	'wikibase-item-summary-wbeditentity-create' => 'নতুন আইটেম তৈরি করুন',
+	'wikibase-item-summary-wbeditentity-update' => 'আইটেম হালনাগাদ করা হয়েছে',
+	'wikibase-item-summary-wbsetlabel-set' => '[$2] লেভেল পরিবর্তন হয়েছে',
+	'wikibase-item-summary-wbsetlabel-remove' => '[$2] লেভেল সরানো হয়েছে',
+	'wikibase-item-summary-wbsetdescription-set' => '[$2]-এর বিবরণ পরিবর্তন',
+	'wikibase-item-summary-wbsetdescription-remove' => '[$2]-এর বিবরণ অপসারিত',
 	'wikibase-property-summary-wbsetlabel-set' => '[$2] লেভেল পরিবর্তন',
+	'wikibase-property-summary-wbsetlabel-remove' => '[$2] লেভেল সরানো হয়েছে',
 	'wikibase-listdatatypes-wikibase-item-head' => 'আইটেম',
 	'wikibase-listdatatypes-commonsmedia-head' => 'কমন্স মিডিয়া',
 	'wikibase-listdatatypes-quantity-head' => 'পরিমাণ',
@@ -1637,6 +1674,7 @@ $messages['bn'] = array(
 	'right-item-create' => 'আইটেম তৈরি করুন',
 	'right-item-remove' => 'আইটেম সরিয়ে ফেলা হোক',
 	'right-sitelink-remove' => 'সাইট লিঙ্ক সরান',
+	'right-sitelink-update' => 'সংযোগ সাইট হালনাগাদ',
 	'right-linktitles-update' => 'সংযোগ শিরোনাম হালনাগাদ',
 	'right-label-remove' => 'লেবেল সরান',
 	'right-label-update' => 'লেবেলসমূহ হালনাগাদ',
@@ -2754,6 +2792,8 @@ Sie können die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULL
 
 /** Zazaki (Zazaki)
  * @author Erdemaslancan
+ * @author Gorizon
+ * @author Mirzali
  */
 $messages['diq'] = array(
 	'wikibase-edit' => 'bıvurne',
@@ -2762,28 +2802,26 @@ $messages['diq'] = array(
 	'wikibase-add' => 'Deke',
 	'wikibase-save-inprogress' => 'Starêno...',
 	'wikibase-remove-inprogress' => 'Wedarêno',
+	'wikibase-deletedentity' => '$1 bestere',
 	'wikibase-sitelink-site-edit-placeholder' => 'sita',
 	'wikibase-sitelink-page-edit-placeholder' => 'wesiqe',
 	'wikibase-remove' => 'wedarne',
-	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|cı kewtış|cı kewtışi}})',
-	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|cı kewtış|cı kewtışi}})',
-	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
-	'wikibase-tooltip-error-details' => 'Detayi',
 	'wikibase-itembytitle-lookup-site' => 'Sita:',
-	'wikibase-itembytitle-lookup-page' => 'Per:',
+	'wikibase-itembytitle-lookup-page' => 'Pele:',
 	'wikibase-itembytitle-submit' => 'Cı geyre',
 	'wikibase-itemdisambiguation-lookup-language' => 'Zıwan:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiket:',
 	'wikibase-itemdisambiguation-submit' => 'Cı geyre',
-	'wikibase-createentity-label' => 'Etiket:',
-	'wikibase-createentity-description' => 'Şınasiyen:',
-	'wikibase-createentity-submit' => 'Vıraze',
+	'wikibase-newentity-label' => 'Etiket:',
+	'wikibase-newentity-description' => 'Şınasiyen:',
+	'wikibase-newentity-submit' => 'Vıraze',
 	'wikibase-setlabel-label' => 'Etiket', # Fuzzy
 	'wikibase-setentity-id' => 'ID', # Fuzzy
 	'wikibase-setentity-language' => 'Zıwan', # Fuzzy
 	'wikibase-entitieswithoutlabel-label-language' => 'Zıwan:',
 	'wikibase-entitieswithoutlabel-submit' => 'Bıvin',
 	'wikibase-restoreold' => 'reset kerê',
+	'wikibase-listdatatypes-string-head' => 'La',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -4554,7 +4592,6 @@ $messages['ga'] = array(
 	'wikibase-edit' => 'cur in eagar',
 	'wikibase-save' => 'Sábháil',
 	'wikibase-cancel' => 'Cealaigh',
-	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-itembytitle-lookup-page' => 'Leathanach:',
 	'wikibase-itembytitle-submit' => 'Cuardaigh',
 	'wikibase-itemdisambiguation-lookup-language' => 'Teanga:',
@@ -5119,7 +5156,7 @@ $messages['hi'] = array(
 	'wikibase-itembytitle-lookup-page' => 'प्ण्णा',
 	'wikibase-itembytitle-submit' => 'खोजे',
 	'wikibase-itemdisambiguation-submit' => 'खहोजे',
-	'special-createitem' => 'एक नया सामान बानाए',
+	'special-newitem' => 'एक नया सामान बानाए',
 );
 
 /** Croatian (hrvatski)
@@ -5590,36 +5627,18 @@ $messages['ia'] = array(
 	'wikibase-sitelinks-input-help-message' => 'Definir un ligamine a un pagina que tracta de iste thema.',
 	'wikibase-remove' => 'remover',
 	'wikibase-propertyedittool-full' => 'Le lista de valores es complete.',
-	'wikibase-propertyedittool-counter' => '$1 {{PLURAL:$1|entrata|entratas}}',
-	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entrata|entratas}})',
-	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Un valor|$1 valores}} non ancora salveguardate',
 	'wikibase-sitelinksedittool-full' => 'Ligamines a paginas es jam definite pro tote le sitos cognoscite.',
 	'wikibase-disambiguation-title' => 'Disambiguation pro "$1"',
-	'wb-special-createitem-new-item-notification' => 'Nove elemento $1 create e redirigite a su pagina. Retornar a $2.',
+	'wb-special-newitem-new-item-notification' => 'Nove elemento $1 create e redirigite a su pagina. Retornar a $2.',
 	'wikibase-aliases-label' => 'Etiam cognoscite como:',
 	'wikibase-aliases-input-help-message' => 'Si iste gruppo de datos es cognoscite per plus de un particular nomine, tu pote specificar aliases e synonymos, a fin que illo pote esser trovate per su nomines alternative.',
 	'wikibase-aliases-empty' => 'Nulle alias definite.',
-	'wikibase-tooltip-error-details' => 'Detalios',
-	'wikibase-error-save-generic' => 'Un error occurreva durante le salveguarda. A causa de isto, le cambiamentos non poteva esser completate.',
-	'wikibase-error-remove-generic' => 'Un error occurreva durante le remotion. A causa de isto, le cambiamentos non poteva esser completate.',
-	'wikibase-error-save-connection' => 'Un error de connexion occurreva durante le salveguarda. A causa de isto, le cambiamentos non poteva esser completate. Per favor verifica tu connexion a internet.',
-	'wikibase-error-remove-connection' => 'Un error de connexion occurreva durante le remotion. A causa de isto, le cambiamentos non poteva esser completate. Per favor verifica tu connexion a internet.',
-	'wikibase-error-save-timeout' => 'Nos ha incontrate difficultates technic. A causa de isto, tu commando "save" (salveguardar) non poteva esser completate.',
-	'wikibase-error-remove-timeout' => 'Nos ha incontrate difficultates technic. A causa de isto, tu commando "remove" (remover) non poteva esser completate.',
-	'wikibase-error-autocomplete-connection' => 'Non poteva consultar le API de Wikipedia. Per favor reproba plus tarde.',
-	'wikibase-error-autocomplete-response' => 'Le servitor respondeva: $1',
-	'wikibase-error-ui-client-error' => 'Le connexion al pagina cliente ha fallite. Per favor reproba plus tarde.',
-	'wikibase-error-ui-no-external-page' => 'Le articulo specificate non poteva esser trovate in le pagina correspondente.', # Fuzzy
-	'wikibase-error-ui-cant-edit' => 'Tu non es autorisate a exequer iste action.',
-	'wikibase-error-ui-no-permissions' => 'Tu non ha derectos sufficiente pro exequer iste action.',
-	'wikibase-error-ui-link-exists' => 'Tu non pote ligar a iste pagina perque un altere elemento jam es ligate a illo.',
-	'wikibase-error-ui-session-failure' => 'Le session ha expirate. Per favor aperi session de novo.',
 	'wikibase-move-error' => 'Tu non pote renominar paginas que es in le spatio de nomines de datos, e tu non pote displaciar paginas a in illo.',
 	'wikibase-error-sitelink-already-used' => 'Le ligamine de sito [[$1:$2]] es jam usate per le elemento con ID $3.', # Fuzzy
-	'special-itembytitle' => 'Objecto per titulo',
+	'special-itembytitle' => 'Objecto per titulo', # Fuzzy
 	'special-itemdisambiguation' => 'Objecto per etiquetta', # Fuzzy
-	'special-createitem' => 'Crear un nove objecto',
+	'special-newitem' => 'Crear un nove objecto',
 	'wikibase-restoreold' => 'reinitialisar',
 );
 
@@ -6214,8 +6233,7 @@ alla eiginleika og þar að auki gilda gagnagerð.',
 	'wikibase-newproperty-datatype' => 'Gagnagerð:',
 	'wikibase-newproperty-invalid-datatype' => 'Ógild gagnagerð tilgreind',
 	'special-newitem' => 'Stofna nýjan hlut',
-	'wikibase-newitem-summary' => 'Sjáðu til þess að þú [[Special:ItemByTitle|athugir hvort hluturinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Label/is|merkimiða]] og [[Help:Description/is|lýsingu]] fyrir
-alla hluti.', # Fuzzy
+	'wikibase-newitem-summary' => 'Sjáðu til þess að þú [[Special:ItemByTitle|athugir hvort hluturinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Label/is|merkimiða]] og [[Help:Description/is|lýsingu]] fyrir alla hluti.', # Fuzzy
 	'wikibase-newitem-fieldset' => 'Búa til nýjan hlut',
 	'wikibase-newitem-site' => 'Vefsíða fyrsta vefsvæðistengilsins',
 	'wikibase-newitem-page' => 'Nafn fyrsta vefsvæðistengilsins',
@@ -6729,6 +6747,16 @@ $messages['ja'] = array(
 	'wikibase-setentity-language' => '言語:',
 	'wikibase-setentity-invalid-langcode' => '言語コード「$1」は不明です。システムに登録されている言語コード (「en」など) を使用してください。',
 	'wikibase-setentity-invalid-id' => 'ID「$1」はシステムに登録されていません。有効なエンティティ ID を使用してください。',
+	'wikibase-dispatchstats-no-stats' => '現在利用できる統計はありません。',
+	'wikibase-dispatchstats-changes' => '変更記録の統計',
+	'wikibase-dispatchstats-change-id' => 'ID',
+	'wikibase-dispatchstats-change-timestamp' => '日時',
+	'wikibase-dispatchstats-oldest-change' => '最古',
+	'wikibase-dispatchstats-newest-change' => '最新',
+	'wikibase-dispatchstats-site-id' => 'サイト',
+	'wikibase-dispatchstats-lag-num' => '保留中',
+	'wikibase-dispatchstats-median' => '中央値',
+	'wikibase-dispatchstats-average' => '平均',
 	'special-listdatatypes' => '利用できるすべてのデータ型の一覧',
 	'wikibase-listdatatypes-intro' => 'ここでは、インストールされているもので現在使用しているデータ型をすべて列挙しています:',
 	'wikibase-history-title-with-label' => '「$2」($1) の変更履歴',
@@ -7208,8 +7236,8 @@ $messages['ksh'] = array(
 	'wikibase-itemdisambiguation-submit' => 'Söhke',
 	'special-newproperty' => 'En neu Eijeschaff aanlääje',
 	'wikibase-newproperty-fieldset' => 'En neu Eijeschaff aanlääje',
-	'wikibase-createentity-label' => 'Bezeijschnong',
-	'wikibase-createentity-submit' => 'Aanlääje',
+	'wikibase-newentity-label' => 'Bezeijschnong',
+	'wikibase-newentity-submit' => 'Aanlääje',
 	'wikibase-setentity-id' => 'Kännong', # Fuzzy
 	'wikibase-setentity-language' => 'Schprooch', # Fuzzy
 	'wikibase-entitieswithoutlabel-label-language' => 'De Schprooch:',
@@ -7222,7 +7250,7 @@ $messages['ksh'] = array(
 	'wikibase-item-summary-wbeditentity-create' => 'Ene neue Daatesaz aanjelaat.',
 	'wikibase-item-summary-wbeditentity-update' => 'Dä Daatesaz op ene neue Schtand jebraat.',
 	'wikibase-item-summary-wbeditentity-override' => 'Dä Daatesaz övverschrevve.',
-	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] &mdash; {{PLURAL:$1|Sigg|Sigge|kein Sigge}} verbonge',
+	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] &mdash; {{PLURAL:$1|Sigg|Sigge|kein Sigge}} verbonge', # Fuzzy
 	'wikibase-property-summary-wbeditentity-create' => 'En neu Eijeschaff aanjelaat',
 	'wikibase-property-summary-wbeditentity-update' => 'En Eijeschaff obb ene neue Schtand jebraat',
 	'wikibase-property-summary-wbeditentity-override' => 'En Eijeschaff ußjetuusch',
@@ -7282,7 +7310,7 @@ $messages['ky'] = array(
 	'wikibase-itembytitle-submit' => 'Табуу',
 	'wikibase-itemdisambiguation-lookup-language' => 'Тил:',
 	'wikibase-itemdisambiguation-submit' => 'Табуу',
-	'wikibase-createentity-description' => 'Баяндама:',
+	'wikibase-newentity-description' => 'Баяндама:',
 	'wikibase-setentity-language' => 'Тил', # Fuzzy
 	'wikibase-entitieswithoutlabel-label-language' => 'Тил:',
 	'wikibase-entitieswithoutlabel-submit' => 'Издөө',
@@ -7417,9 +7445,7 @@ $messages['lt'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'svetainė',
 	'wikibase-sitelink-page-edit-placeholder' => 'straipsnis',
 	'wikibase-remove' => 'pašalinti',
-	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-aliases-label' => 'Taip pat žinomas kaip:',
-	'wikibase-tooltip-error-details' => 'Detalės',
 	'wikibase-restoreold' => 'perkrauti',
 );
 
@@ -7671,6 +7697,22 @@ $messages['mk'] = array(
 	'wikibase-setentity-language' => 'Јазик:',
 	'wikibase-setentity-invalid-langcode' => 'Јазичниот код „$1“ е непознат. Внесете назнака што му е позната на системот, како на пр. „mk“.',
 	'wikibase-setentity-invalid-id' => 'Назнаката „$1“ не му е позната на системот. Внесете важечка назнака.',
+	'special-dispatchstats' => 'Статистики за спроведување на измените',
+	'wikibase-dispatchstats-intro' => 'На страницава се прикажани статистики за спроведувањето на измените во клиентите.',
+	'wikibase-dispatchstats-no-stats' => 'Засега нема статистики.',
+	'wikibase-dispatchstats-changes' => 'Статистики na дневникот на измени',
+	'wikibase-dispatchstats-stats' => 'Статистики за спроведување',
+	'wikibase-dispatchstats-change-id' => 'Назнака',
+	'wikibase-dispatchstats-change-timestamp' => 'Време и датум',
+	'wikibase-dispatchstats-oldest-change' => 'Најстаро',
+	'wikibase-dispatchstats-newest-change' => 'Најново',
+	'wikibase-dispatchstats-site-id' => 'Вики',
+	'wikibase-dispatchstats-lag-num' => 'Во исчекување',
+	'wikibase-dispatchstats-lag-time' => 'Заостаток',
+	'wikibase-dispatchstats-freshest' => 'Најсвежо',
+	'wikibase-dispatchstats-stalest' => 'Најзастарено',
+	'wikibase-dispatchstats-median' => 'Средно',
+	'wikibase-dispatchstats-average' => 'Просечно',
 	'special-listdatatypes' => 'Список на сите податочни типови на располагање',
 	'wikibase-listdatatypes-intro' => 'Ова е список на сите податочни типови што моментално се користат во оваа инсталација:',
 	'wikibase-history-title-with-label' => 'Историја на ревизиите на „$2“ ($1)',
@@ -8509,6 +8551,15 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van de entiteit $1.',
 	'wikibase-setentity-language' => 'Taal:',
 	'wikibase-setentity-invalid-langcode' => 'De taalcode "$1" is niet bekend. Gebruik een taalcode die bekend is in het systeem, zoals "en".',
 	'wikibase-setentity-invalid-id' => 'Het ID is "$1" is niet bekend in het systeem. Gebruik een geldig entiteits-ID.',
+	'wikibase-dispatchstats-change-id' => 'ID',
+	'wikibase-dispatchstats-change-timestamp' => 'Tijdstip',
+	'wikibase-dispatchstats-oldest-change' => 'Oudste',
+	'wikibase-dispatchstats-newest-change' => 'Nieuwste',
+	'wikibase-dispatchstats-site-id' => 'Website',
+	'wikibase-dispatchstats-lag-num' => 'In behandeling',
+	'wikibase-dispatchstats-lag-time' => 'Vertraging',
+	'wikibase-dispatchstats-freshest' => 'Meest recent',
+	'wikibase-dispatchstats-stalest' => 'Langst geleden',
 	'wikibase-dispatchstats-median' => 'Mediaan',
 	'wikibase-dispatchstats-average' => 'Gemiddelde',
 	'special-listdatatypes' => 'Lijst met alle beschikbare gegevenstypen',
@@ -8880,6 +8931,7 @@ $messages['pl'] = array(
 	'wikibase-aliases-empty' => 'Nie zdefiniowano aliasów.',
 	'wikibase-datatype-label' => 'Typ danych:',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|źródło|źródła|źródeł}}',
+	'wikibase-entityselector-more' => 'więcej',
 	'wikibase-restrictionedit-tooltip-message' => 'Ta strona jest chroniona. Edytowanie nie jest dozwolone.',
 	'wikibase-blockeduser-tooltip-message' => 'Jesteś zablokowany.',
 	'wikibase-move-error' => 'Nie można przenieść stron, które znajdują się w obszarze nazw data i nie można przenieść stron do niego.',
@@ -8903,6 +8955,8 @@ $messages['pl'] = array(
 	'wikibase-newentity-description' => 'Opis:',
 	'wikibase-newentity-submit' => 'Utwórz',
 	'wikibase-setentity-language' => 'Język:',
+	'wikibase-entitieswithoutlabel-label-language' => 'Język:',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" jest nie prawidłowym kodem języka.',
 	'wikibase-restoreold' => 'przywróć',
 	'wikibase-noentity' => 'Ten element nie istnieje. Możesz <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} przeszukać rejestry operacji]</span>.',
 	'wikibase-noentity-createone' => 'Możesz także [[$1|utworzyć nowy]].',
@@ -9097,14 +9151,13 @@ $messages['ps'] = array(
 	'wikibase-save-inprogress' => 'خوندي کېدنې کې دی...',
 	'wikibase-sitelink-site-edit-placeholder' => 'وېبځی',
 	'wikibase-sitelink-page-edit-placeholder' => 'ليکنه',
-	'wikibase-tooltip-error-details' => 'تفصيلات',
 	'wikibase-itembytitle-lookup-site' => 'وېبځی:',
 	'wikibase-itembytitle-lookup-page' => 'مخ:',
 	'wikibase-itembytitle-submit' => 'پلټل',
 	'wikibase-itemdisambiguation-lookup-language' => 'ژبه:',
 	'wikibase-itemdisambiguation-submit' => 'پلټل',
-	'wikibase-createentity-description' => 'څرګندونه:',
-	'wikibase-createentity-submit' => 'جوړول',
+	'wikibase-newentity-description' => 'څرګندونه:',
+	'wikibase-newentity-submit' => 'جوړول',
 	'wikibase-setentity-id' => 'پېژند', # Fuzzy
 	'wikibase-setentity-language' => 'ژبه', # Fuzzy
 	'wikibase-entitieswithoutlabel-label-language' => 'ژبه:',
@@ -9380,6 +9433,18 @@ para descobrir para onde ele foi.',
 	'right-label-update' => 'Atualizar rótulos',
 	'right-description-remove' => 'Remover descrições',
 	'right-description-update' => 'Atualizar descrições',
+);
+
+/** Quechua (Runa Simi)
+ * @author AlimanRuna
+ */
+$messages['qu'] = array(
+	'wikibase-desc' => "Allichasqa willakunayuq hallch'a",
+	'wikibase-edit' => "llamk'apuy",
+	'wikibase-save' => 'waqaychay',
+	'wikibase-cancel' => 'ama niy',
+	'wikibase-add' => 'yapay',
+	'wikibase-remove' => 'qichuy',
 );
 
 /** Romanian (română)
@@ -10300,9 +10365,9 @@ $messages['sv'] = array(
 	'wikibase-itemdisambiguation-submit' => 'Sök',
 	'wikibase-newproperty-datatype' => 'Datatyp:',
 	'wikibase-newproperty-invalid-datatype' => 'Ogiltig datatyp angiven',
-	'wikibase-createentity-label' => 'Etikett:',
-	'wikibase-createentity-description' => 'Beskrivning:',
-	'wikibase-createentity-submit' => 'Skapa',
+	'wikibase-newentity-label' => 'Etikett:',
+	'wikibase-newentity-description' => 'Beskrivning:',
+	'wikibase-newentity-submit' => 'Skapa',
 	'special-setlabel' => 'Ange en etikett',
 	'wikibase-setlabel-label' => 'Etikett:',
 	'wikibase-setlabel-submit' => 'Ange en etikett',
@@ -10344,25 +10409,20 @@ $messages['ta'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'தளம்',
 	'wikibase-sitelink-page-edit-placeholder' => 'கட்டுரை',
 	'wikibase-remove' => 'நீக்கு',
-	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|பதிவு|பதிவுகள்}})',
-	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|பதிவு|பதிவுகள்}})',
-	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-disambiguation-title' => '"$1" க்கான பக்க நெறிப்படுத்தல்',
 	'wikibase-datatype-label' => 'தரவு வகை:',
 	'wikibase-restrictionedit-tooltip-message' => 'இந்தப் பக்கம் காக்கப்பட்டுள்ளது. தொகுப்பது அனுமதிக்கப்படவில்லை.',
 	'wikibase-blockeduser-tooltip-message' => 'நீங்கள் தொகுப்பதிலிருந்து தடுக்கப்பட்டுள்ளீர்கள்.',
-	'wikibase-tooltip-error-details' => 'விவரங்கள்',
-	'wikibase-error-autocomplete-response' => 'வழங்கி பதிலளித்தது: $1',
-	'special-itembytitle' => 'தலைப்பு வாரியாக உருப்படி',
+	'special-itembytitle' => 'தலைப்பு வாரியாக உருப்படி', # Fuzzy
 	'wikibase-itembytitle-lookup-site' => 'தளம்:',
 	'wikibase-itembytitle-lookup-page' => 'பக்கம்:',
 	'wikibase-itembytitle-submit' => 'தேடு',
 	'wikibase-itemdisambiguation-lookup-language' => 'மொழி:',
 	'wikibase-itemdisambiguation-submit' => 'தேடு',
 	'wikibase-newproperty-datatype' => 'தரவு வகை:',
-	'special-createitem' => 'ஒரு புது உருப்படியை உருவாக்குக',
-	'wikibase-createitem-fieldset' => 'ஒரு புது உருப்படியை உருவாக்குக',
-	'wikibase-createentity-description' => 'விளக்கம்:',
+	'special-newitem' => 'ஒரு புது உருப்படியை உருவாக்குக',
+	'wikibase-newitem-fieldset' => 'ஒரு புது உருப்படியை உருவாக்குக',
+	'wikibase-newentity-description' => 'விளக்கம்:',
 	'wikibase-setentity-id' => 'அடையாளவிலக்கம்', # Fuzzy
 	'wikibase-setentity-language' => 'மொழி', # Fuzzy
 	'wikibase-entitieswithoutlabel-label-language' => 'மொழி:',
@@ -10386,13 +10446,10 @@ $messages['te'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'సైటు',
 	'wikibase-sitelink-page-edit-placeholder' => 'వ్యాసం',
 	'wikibase-remove' => 'తొలగించు',
-	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|పద్దు|పద్దులు}})',
-	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
-	'wikibase-tooltip-error-details' => 'వివరాలు',
 	'wikibase-itembytitle-submit' => 'వెతుకు',
 	'wikibase-itemdisambiguation-lookup-language' => 'భాష:',
 	'wikibase-itemdisambiguation-submit' => 'వెతుకు',
-	'wikibase-createentity-description' => 'వివరణ:',
+	'wikibase-newentity-description' => 'వివరణ:',
 	'wikibase-setentity-language' => 'భాష', # Fuzzy
 	'wikibase-entitieswithoutlabel-label-language' => 'భాష:',
 );
@@ -10498,7 +10555,6 @@ $messages['ug-arab'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'ماقالىلەر',
 	'wikibase-remove' => 'چىقىرىۋەت',
 	'wikibase-datatype-label' => 'سانلىق-مەلۇمات تىپى:',
-	'wikibase-tooltip-error-details' => 'تەپسىلاتى',
 	'wikibase-itemlink-id-wrapper' => '($1)',
 	'wikibase-itembytitle-lookup-site' => 'تور بېكەت:',
 	'wikibase-itembytitle-lookup-page' => 'بەت:',
@@ -10507,9 +10563,9 @@ $messages['ug-arab'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'ئەن:',
 	'wikibase-itemdisambiguation-submit' => 'ئىزدە',
 	'wikibase-newproperty-datatype' => 'سانلىق-مەلۇمات تىپى:',
-	'wikibase-createentity-label' => 'ئەن:',
-	'wikibase-createentity-description' => 'چۈشەندۈرۈش:',
-	'wikibase-createentity-submit' => 'قۇر',
+	'wikibase-newentity-label' => 'ئەن:',
+	'wikibase-newentity-description' => 'چۈشەندۈرۈش:',
+	'wikibase-newentity-submit' => 'قۇر',
 	'wikibase-setlabel-label' => 'ئەن', # Fuzzy
 	'wikibase-setentity-id' => 'كىملىكى', # Fuzzy
 	'wikibase-setentity-language' => 'تىل', # Fuzzy
@@ -10733,7 +10789,6 @@ $messages['ur'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'ویب سائٹ',
 	'wikibase-sitelink-page-edit-placeholder' => 'مضمون',
 	'wikibase-remove' => 'حذف کریں',
-	'wikibase-tooltip-error-details' => 'تفصیلات',
 	'wikibase-itembytitle-lookup-site' => 'ویب سائٹ:',
 	'wikibase-itembytitle-lookup-page' => 'صفحہ:',
 	'wikibase-itembytitle-submit' => 'تلاش',
@@ -10757,7 +10812,7 @@ $messages['uz'] = array(
 	'wikibase-itembytitle-submit' => 'Qidiruv',
 	'wikibase-itemdisambiguation-lookup-language' => 'Til:',
 	'wikibase-itemdisambiguation-submit' => 'Qidiruv',
-	'wikibase-createentity-submit' => 'Yaratish',
+	'wikibase-newentity-submit' => 'Yaratish',
 	'wikibase-setentity-language' => 'Til', # Fuzzy
 );
 
@@ -11203,6 +11258,21 @@ $messages['zh-hans'] = array(
 	'wikibase-setentity-language' => '语言：',
 	'wikibase-setentity-invalid-langcode' => '未知的语言标识符“$1”。请使用一个系统已知的语言标识符，例如“zh”。',
 	'wikibase-setentity-invalid-id' => 'ID“$1”是未知的。请使用一个有效的实体ID。',
+	'special-dispatchstats' => '变更调度统计',
+	'wikibase-dispatchstats-intro' => '本页提供有关变更调度到客户端的统计信息。',
+	'wikibase-dispatchstats-no-stats' => '目前没有统计数据可用。',
+	'wikibase-dispatchstats-changes' => '变更日志统计',
+	'wikibase-dispatchstats-stats' => '调度统计数据',
+	'wikibase-dispatchstats-change-id' => 'ID',
+	'wikibase-dispatchstats-change-timestamp' => '时间戳',
+	'wikibase-dispatchstats-oldest-change' => '最旧',
+	'wikibase-dispatchstats-newest-change' => '最新',
+	'wikibase-dispatchstats-site-id' => '站点',
+	'wikibase-dispatchstats-lag-time' => '滞后',
+	'wikibase-dispatchstats-freshest' => '新进',
+	'wikibase-dispatchstats-stalest' => '过时',
+	'wikibase-dispatchstats-median' => '中央',
+	'wikibase-dispatchstats-average' => '平均值',
 	'special-listdatatypes' => '所有可用数据类型的列表',
 	'wikibase-listdatatypes-intro' => '这是目前此安装副本上所有可用数据类型的列表：',
 	'wikibase-history-title-with-label' => '“$2”($1)的历史记录',

@@ -329,11 +329,25 @@ $messages['bg'] = array(
 );
 
 /** Bengali (বাংলা)
+ * @author Leemon2010
  * @author Sankarshan
  */
 $messages['bn'] = array(
+	'wikibase-after-page-move' => 'এছাড়া আপনি স্থানান্তর করা পাতাতে ভাষার লিংক বজায় রাখার জন্য সংশ্লিষ্ট উইকিউপাত্তের আইটেমটি [$1 হালনাগাদ] করতে পারেন।',
+	'wikibase-comment-update' => 'ভাষার লিংক হালনাগাদ হয়েছে।',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|পরিবর্তন|পরিবর্তনসমূহ}}',
+	'wikibase-editlinkstitle' => 'আন্তঃভাষার লিংকগুলি সম্পাদনা করুন',
+	'wikibase-linkitem-addlinks' => 'লিঙ্কগুলি জুড়ুন',
+	'wikibase-linkitem-title' => 'পাতার সাথে লিংক',
+	'wikibase-linkitem-linkpage' => 'পাতার সাথে লিংক',
 	'wikibase-linkitem-input-site' => 'ভাষা:',
-	'wikibase-rc-hide-wikidata' => '$1 উইকিডাটা',
+	'wikibase-linkitem-input-page' => 'পাতা:',
+	'wikibase-linkitem-invalidsite' => 'অজানা বা অবৈধ সাইট নির্বাচন করা হয়েছে',
+	'wikibase-linkitem-confirmitem-button' => 'নিশ্চিত করুন',
+	'wikibase-linkitem-not-loggedin-title' => 'আপনার লগ ইন করা প্রয়োজন',
+	'wikibase-rc-hide-wikidata' => '$1 উইকিউপাত্ত',
+	'wikibase-rc-show-wikidata-pref' => 'উইকিউপাত্তের সম্পাদনাগুলো সাম্প্রতিক পরিবর্তনে দেখানো হোক',
+	'wikibase-watchlist-show-changes-pref' => 'উইকিউপাত্তের সম্পাদনাগুলো নজরতালিকায় দেখাও',
 );
 
 /** Breton (brezhoneg)
@@ -569,10 +583,14 @@ $messages['de'] = array(
 
 /** Zazaki (Zazaki)
  * @author Erdemaslancan
+ * @author Gorizon
  * @author Mirzali
  */
 $messages['diq'] = array(
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|vurnayış|vurnayışi}}',
 	'wikibase-editlinks' => 'Gırey bıvurne',
+	'wikibase-linkitem-input-site' => 'Zıwan:',
+	'wikibase-linkitem-input-page' => 'Pele:',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -687,7 +705,6 @@ $messages['es'] = array(
 	'wikibase-comment-sitelink-change' => 'Se ha cambiado el enlace de idioma de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Se ha eliminado el enlace de idioma: $1',
 	'wikibase-comment-multi' => '$1 cambios', # Fuzzy
-	'wikibase-nolanglinks' => 'ninguno',
 	'wikibase-editlinks' => 'Editar los enlaces',
 	'wikibase-editlinkstitle' => 'Editar enlaces de interlengua',
 	'wikibase-linkitem-addlinks' => 'Añadir enlace',
@@ -750,7 +767,6 @@ $messages['fa'] = array(
 	'wikibase-comment-sitelink-change' => 'پیوند زبان از $1 به $2 تغییر کرده‌است.',
 	'wikibase-comment-sitelink-remove' => 'پیوند زبان حذف شد: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|تغییر|تغییرها}}',
-	'wikibase-nolanglinks' => 'هیچ',
 	'wikibase-editlinks' => 'ویرایش پیوندها',
 	'wikibase-editlinkstitle' => 'ویرایش پیوندهای میان‌ویکی',
 	'wikibase-linkitem-addlinks' => 'افزودن پیوند',
@@ -1197,6 +1213,7 @@ $messages['is'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Sýna Wikidata breytingar í nýjustu breytingum',
 	'wikibase-watchlist-show-changes-pref' => 'Sýna Wikidata breytingar í vaktlistanum þínum',
+	'wikibase-error-invalid-entity-id' => 'Tilgreint auðkenni þekkist ekki. Vinsamlegast notaðu gilt auðkenni einingarinnar.',
 );
 
 /** Italian (italiano)
@@ -1390,7 +1407,6 @@ $messages['ksh'] = array(
 	'wikibase-comment-sitelink-change' => 'Dä Lengk $1 ob en ander Schprooch es op $2 verändert woode.',
 	'wikibase-comment-sitelink-remove' => 'Dä Lengk $1 ob en ander Schprooch es eruß jenomme woode.',
 	'wikibase-comment-multi' => '{{PLURAL:$1|Ein Änderong|$1 Änderonge|Kein Änderong}}',
-	'wikibase-nolanglinks' => 'keine',
 	'wikibase-editlinks' => 'Lengks ändere',
 	'wikibase-editlinkstitle' => 'Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße',
 	'wikibase-linkitem-addlinks' => 'Lengks derbei donn',
@@ -1407,6 +1423,13 @@ $messages['ksh'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'Do moß enjelogg sin',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Donn Änderonge aan Wikidata en de „{{int:recentchanges}}“ zeije',
+);
+
+/** Kurdish (Kurdî)
+ * @author Ghybu
+ */
+$messages['ku'] = array(
+	'wikibase-rc-hide-wikidata' => 'Wikidatayê $1',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
@@ -1539,7 +1562,6 @@ $messages['ml'] = array(
 	'wikibase-comment-sitelink-add' => 'ഭാഷാ കണ്ണി ചേർത്തു: $1',
 	'wikibase-comment-sitelink-change' => 'ഭാഷാ കണ്ണി $1 എന്നതിൽ നിന്ന് $2 എന്നാക്കി മാറ്റിയിരിക്കുന്നു',
 	'wikibase-comment-sitelink-remove' => 'ഭാഷാ കണ്ണി നീക്കം ചെയ്തു: $1',
-	'wikibase-nolanglinks' => 'ഒന്നുമില്ല',
 	'wikibase-editlinks' => 'കണ്ണികൾ തിരുത്തുക',
 	'wikibase-editlinkstitle' => 'അന്തർഭാഷാ കണ്ണികൾ തിരുത്തുക',
 	'wikibase-linkitem-addlinks' => 'കണ്ണികൾ ചേർക്കുക',
@@ -1573,7 +1595,6 @@ $messages['ms'] = array(
 	'wikibase-comment-sitelink-change' => 'Pautan bahasa diubah daripada $1 kepada $2',
 	'wikibase-comment-sitelink-remove' => 'Pautan bahasa dibuang: $1',
 	'wikibase-comment-multi' => '$1 perubahan',
-	'wikibase-nolanglinks' => 'tiada',
 	'wikibase-editlinks' => 'Sunting pautan',
 	'wikibase-editlinkstitle' => 'Sunting pautan antara bahasa',
 	'wikibase-linkitem-addlinks' => 'Tambah pautan',
@@ -1626,7 +1647,6 @@ $messages['nb'] = array(
 	'wikibase-comment-sitelink-change' => 'Språklenke endret fra $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Språklenke fjernet: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|endring|endringer}}',
-	'wikibase-nolanglinks' => 'ingen',
 	'wikibase-editlinks' => 'Rediger lenker',
 	'wikibase-editlinkstitle' => 'Rediger språklenker – lenker til artikkelen på andre språk',
 	'wikibase-linkitem-addlinks' => 'Legg til lenke',
@@ -1682,7 +1702,7 @@ $messages['nl'] = array(
 	'wikibase-linkitem-not-loggedin' => 'U moet aangemeld zijn bij deze wiki en de [$1 centrale gegevensrepository] om deze functie te kunnen gebruiken.',
 	'wikibase-linkitem-success-create' => "De pagina's zijn gekoppeld. U kunt het nieuw aangemaakte item met de koppelingen vinden in de [$1 centrale gegevensrepository].",
 	'wikibase-linkitem-success-link' => "De pagina's zijn gekoppeld. U kunt het item met de koppelingen vinden in de [$1 centrale gegevensrepository].",
-	'wikibase-property-notfound' => '$1 eigenschap niet gevonden.',
+	'wikibase-property-notfound' => 'Eigenschap $1 niet gevonden.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata bewerkingen weergeven in uw volglijst',
@@ -1734,11 +1754,19 @@ $messages['nn'] = array(
  */
 $messages['pl'] = array(
 	'wikibase-client-desc' => 'Klient rozszerzenia Wikibase',
+	'wikibase-after-page-move' => 'Możesz także [$1 zaktualizować] powiązany element Wikidata w celu zachowania linków do innych wersji językowych na przeniesionej stronie.',
+	'wikibase-comment-remove' => 'Powiązany element Wikidata skasowany. Linki do innych wersji językowych usunięte.',
+	'wikibase-comment-linked' => 'Element Wikidata był powiązany z tą stroną.',
+	'wikibase-comment-unlink' => 'Zostało zerwane powiązanie elementu Wikidata z tą stroną. Linki do innych wersji językowych usunięte.',
+	'wikibase-comment-restore' => 'Powiązany element Wikidata odtworzony. Linki do innych wersji językowych przywrócone.',
+	'wikibase-comment-update' => 'Linki do innych wersji językowych zaktualizowane.',
 	'wikibase-comment-sitelink-add' => 'Łącze języka dodane: $1',
 	'wikibase-comment-sitelink-change' => 'Łącze języka zmienione z $1 na $2',
 	'wikibase-comment-sitelink-remove' => 'Łącze języka usunięte: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|zmiana|zmiany|zmian}}',
 	'wikibase-editlinks' => 'Edytuj linki',
 	'wikibase-editlinkstitle' => 'Edytuj linki wersji językowych',
+	'wikibase-linkitem-addlinks' => 'Dodaj linki',
 	'wikibase-linkitem-close' => 'Zamknij okno i odśwież stronę',
 	'wikibase-linkitem-failure' => 'Wystąpił nieznany błąd podczas próby powiązania podanej strony.',
 	'wikibase-linkitem-title' => 'Powiąż ze stroną',
@@ -1755,6 +1783,7 @@ $messages['pl'] = array(
 	'wikibase-linkitem-success-link' => 'Strony zostały pomyślnie powiązane. Element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Pokazuj edycje Wikidata w ostatnich zmianach',
+	'wikibase-watchlist-show-changes-pref' => 'Pokazuj edycje na Wikidata w obserwowanych',
 );
 
 /** Piedmontese (Piemontèis)
@@ -1817,11 +1846,19 @@ $messages['pt-br'] = array(
 	'wikibase-comment-sitelink-add' => 'Link de idioma adicionado: $1',
 	'wikibase-comment-sitelink-change' => 'Link de idioma alterado de $1 para $2',
 	'wikibase-comment-sitelink-remove' => 'Link de idioma removido: $1',
-	'wikibase-comment-multi' => '$1 alterações',
+	'wikibase-comment-multi' => '$1 alterações', # Fuzzy
 	'wikibase-editlinks' => 'Editar links',
 	'wikibase-editlinkstitle' => 'Editar links para outros idiomas',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar as edições do Wikidata nas mudanças recentes',
+);
+
+/** Quechua (Runa Simi)
+ * @author AlimanRuna
+ */
+$messages['qu'] = array(
+	'wikibase-editlinks' => "T'inkikunata llamk'apuy",
+	'wikibase-editlinkstitle' => "Wikipura t'inkikunata llamk'apuy",
 );
 
 /** Romanian (română)
