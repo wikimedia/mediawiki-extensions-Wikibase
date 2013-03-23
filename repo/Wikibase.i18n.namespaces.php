@@ -67,6 +67,20 @@ $namespaceNames['en'] = array(
 	WB_NS_QUERY_TALK => 'Query_talk',
 );
 
+$namespaceNames['be-tarask'] = array(
+	WB_NS_DATA      => 'Зьвесткі',      // legacy
+	WB_NS_DATA_TALK => 'Абмеркаваньне_зьвестак', // legacy
+
+	WB_NS_ITEM      => 'Аб’ект',
+	WB_NS_ITEM_TALK => 'Абмеркаваньне_аб’екта',
+
+	WB_NS_PROPERTY      => 'Уласьцівасьць',
+	WB_NS_PROPERTY_TALK => 'Абмеркаваньне_ўласьцівасьці',
+
+	WB_NS_QUERY      => 'Запыт',
+	WB_NS_QUERY_TALK => 'Абмеркаваньне_запыту',
+);
+
 $namespaceNames['de'] = array(
 	WB_NS_DATA      => 'Daten',           // legacy
 	WB_NS_DATA_TALK => 'Datendiskussion', // legacy
