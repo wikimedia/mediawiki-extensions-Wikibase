@@ -66,7 +66,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		// If ther are enough data, then try to lookup the item content
 		if ( isset( $site ) && isset( $page ) ) {
 			// Try to get a item content
-			$siteId = \Wikibase\Utils::trimToNFC( str_replace( '_', ' ', $site ) );
+			$siteId = \Wikibase\Utils::trimToNFC( $site ); // no stripping of underscores here!
 			$pageName = \Wikibase\Utils::trimToNFC( str_replace( '_', ' ', $page ) );
 			$itemHandler = new \Wikibase\ItemHandler();
 			$itemContent = $itemHandler->getFromSiteLink( $siteId, $pageName );
