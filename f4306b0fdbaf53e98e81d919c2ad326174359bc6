@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "DqnN2Fz4",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-23T03:32:48Z",
+      "side": 1,
+      "message": "If you only want to allow for addition, a simple getStuff method that returns the stuff to add is cleaner.",
+      "revId": "f4306b0fdbaf53e98e81d919c2ad326174359bc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqo1F0Rk",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 8
