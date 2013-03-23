@@ -218,8 +218,8 @@ Your IP address will be recorded in the edit history of this $1.",
 $1', # Do not translate
 	'wikibase-api-json-invalid' => 'The supplied JSON structure could not be parsed or recreated as a valid structure.', # Do not translate
 	'wikibase-api-not-recognized' => 'An invalid property was requested: $1.', # Do not translate
-	'wikibase-api-not-recognized-string' => 'A string was expected but not found.', # Do not translate
-	'wikibase-api-not-recognized-array' => 'An array was expected but not found.', # Do not translate
+	'wikibase-api-not-recognized-string' => 'A string was expected, but not found.', # Do not translate
+	'wikibase-api-not-recognized-array' => 'An array was expected, but not found.', # Do not translate
 	'wikibase-api-not-recognized-language' => 'The supplied language identifier was not recognized.', # Do not translate
 	'wikibase-api-not-recognized-siteid' => 'The supplied site identifier was not recognized.', # Do not translate
 	'wikibase-api-no-permissions' => 'The logged in user does not have sufficient rights.', # Do not translate
