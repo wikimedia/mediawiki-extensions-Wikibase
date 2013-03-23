@@ -2,6 +2,10 @@
 
 namespace Wikibase\Test;
 use \Wikibase\Item;
+use \Wikibase\Property;
+use \Wikibase\EntityChange;
+use \Wikibase\DiffChange;
+use \Wikibase\EntityId;
 
 /**
  * Test change data for ChangeRowTest
@@ -33,6 +37,7 @@ use \Wikibase\Item;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 final class TestChanges {
 
@@ -58,25 +63,194 @@ final class TestChanges {
 	}
 
 	public static function getChange() {
-		$id = new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 182 );
+		$changes = self::getInstances();
 
-		return array(
-			'type' => 'wikibase-item~add',
-			'time' => '20120515104713',
-			'object_id' => $id->getPrefixedId(),
-			'revision_id' => 452,
-			'user_id' => 0,
-			'info' => array(
-				//NOTE: we no longer put Entity objects into the change, they are just too big.
-				'metadata' => array(
-					'user' => 0,
-					'user_text' => '208.80.152.201'
-				)
-			 )
-		);
+		return $changes['set-de-label']->toArray();
 	}
 
-    public static function getEntities() {
+	protected static function getInstances() {
+		static $changes = array();
+
+		if ( empty( $changes ) ) {
+			$empty = Property::newEmpty();
+			$empty->setId( new \Wikibase\EntityId( Property::ENTITY_TYPE, 100 ) );
+
+			$changes['property-creation'] = EntityChange::newFromUpdate( EntityChange::ADD, null, $empty );
+			$changes['property-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $empty, null );
+
+			// -----
+			$old = Property::newEmpty();
+			$old->setId( new \Wikibase\EntityId( Property::ENTITY_TYPE, 100 ) );
+			$new = $old->copy();
+
+			$new->setLabel( "de", "dummy" );
+			$changes['property-set-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			// -----
+			$old = Item::newEmpty();
+			$old->setId( new \Wikibase\EntityId( Item::ENTITY_TYPE, 100 ) );
+			$new = $old->copy();
+
+			$changes['item-creation'] = EntityChange::newFromUpdate( EntityChange::ADD, null, $new );
+			$changes['item-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $old, null );
+
+			// -----
+			$dewiki = \Sites::singleton()->getSite( 'dewiki' );
+			$link = new \Wikibase\SiteLink( $dewiki, "Dummy" );
+			$new->addSiteLink( $link, 'add' );
+			$changes['set-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$enwiki = \Sites::singleton()->getSite( 'enwiki' );
+			$link = new \Wikibase\SiteLink( $enwiki, "Emmy" );
+			$new->addSiteLink( $link, 'add' );
+			$changes['set-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			// -----
+			$link = new \Wikibase\SiteLink( $dewiki, "Dummy2" );
+			$new->addSiteLink( $link, 'set' );
+			$changes['change-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$link = new \Wikibase\SiteLink( $enwiki, "Emmy2" );
+			$new->addSiteLink( $link, 'set' );
+			$changes['change-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$new->removeSiteLink( 'dewiki', false );
+			$changes['remove-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			// -----
+			$new->setLabel( "de", "dummy" );
+			$changes['set-de-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$new->setLabel( "en", "emmy" );
+			$changes['set-en-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$new->setAliases( "en", array( "foo", "bar" ) );
+			$changes['set-en-aliases'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			// -----
+			$propertyId = new EntityId( \Wikibase\Property::ENTITY_TYPE, 23 );
+			$snak = new \Wikibase\PropertyNoValueSnak( $propertyId );
+			$claim = new \Wikibase\Claim( $snak );
+
+			$claims = new \Wikibase\Claims( array( $claim ) );
+			$new->setClaims( $claims );
+			$changes['add-claim'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			$claims = new \Wikibase\Claims();
+			$new->setClaims( $claims );
+			$changes['remove-claim'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+
+			// -----
+			$changes['item-deletion-linked'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $old, null );
+
+			// -----
+			$new->removeSiteLink( 'enwiki', false );
+			$changes['remove-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$old = $new->copy();
+		}
+
+		$defaults = array(
+			'user_id' => 0,
+			'time' => '20130101000000',
+			'type' => 'test',
+		);
+
+		$rev = 1000;
+
+		/* @var EntityChange $change */
+		foreach ( $changes as $key => $change ) {
+			$change->setComment( "$key:1|" );
+
+			$meta = array(
+				'comment' => '',
+				'page_id' => 23,
+				'bot' => false,
+				'rev_id' => $rev,
+				'parent_id' => $rev -1,
+				'user_text' => 'Some User',
+				'time' => wfTimestamp( TS_MW ),
+			);
+
+			$change->setMetadata( $meta );
+			self::applyDefaults( $change, $defaults );
+
+			$rev += 1;
+		}
+
+		return $changes;
+	}
+
+	/**
+	 * Returns a list of Change objects for testing. Instances are not cloned.
+	 *
+	 * @param string[]|null $changeFilter The changes to include, as a list if change names
+	 *
+	 * @param string[]|null $infoFilter The info to include in each change, as
+	 *        a list of keys to the info array.
+	 *
+	 * @return \Wikibase\ChangeRow[] a list of changes
+	 */
+	public static function getChanges( $changeFilter = null, $infoFilter = null ) {
+		$changes = self::getInstances();
+
+		// filter changes by key
+		if ( $changeFilter!== null ) {
+			$changes = array_intersect_key( $changes, array_flip( $changeFilter ) );
+		}
+
+		// filter info field by key
+		if ( $infoFilter !== null ) {
+			$infoFilter = array_flip( $infoFilter );
+
+			/* @var \Wikibase\ChangeRow $change */
+			foreach ( $changes as $change ) {
+				if ( $change->hasField( 'info' ) ) {
+					$info = $change->getField( 'info' );
+
+					$info = array_intersect_key( $info, $infoFilter );
+
+					$change->setField( 'info', $info );
+				}
+			}
+		}
+
+		return $changes;
+	}
+
+	protected static function applyDefaults( \Wikibase\Change $change, array $defaults ) {
+		foreach ( $defaults as $name => $value ) {
+			if ( !$change->hasField( $name ) ) {
+				$change->setField( $name, $value );
+			}
+		}
+	}
+
+	public static function getDiffs() {
+		$changes = self::getChanges();
+		$diffs = array();
+
+		foreach ( $changes as $change ) {
+			if ( $change instanceof \Wikibase\DiffChange
+				&& $change->hasDiff() ) {
+				$diffs[] = $change->getDiff();
+			}
+		}
+
+		return $diffs;
+	}
+
+	public static function getEntities() {
 		$entityList = array();
 
 		$entities = array(

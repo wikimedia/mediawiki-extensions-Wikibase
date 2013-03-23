@@ -197,6 +197,7 @@ $wgAutoloadClasses['Wikibase\Test\HashArrayElement'] 		= $dir . 'tests/phpunit/h
 $wgAutoloadClasses['Wikibase\Test\TemplateTest'] 			= $dir . 'tests/phpunit/TemplateTest.php';
 $wgAutoloadClasses['Wikibase\Test\TemplateRegistryTest'] 	= $dir . 'tests/phpunit/TemplateRegistryTest.php';
 $wgAutoloadClasses['Wikibase\Test\ChangeRowTest']			= $dir . 'tests/phpunit/changes/ChangeRowTest.php';
+$wgAutoloadClasses['Wikibase\Test\DiffChangeTest']			= $dir . 'tests/phpunit/changes/DiffChangeTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityChangeTest']		= $dir . 'tests/phpunit/changes/EntityChangeTest.php';
 $wgAutoloadClasses['Wikibase\Test\TestChanges']				= $dir . 'tests/phpunit/changes/TestChanges.php';
 
