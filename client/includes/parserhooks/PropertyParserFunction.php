@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase;
-use ValueFormatters\FormatterOptions;
 use DataValues\DataValue;
 
 /**
@@ -44,8 +43,8 @@ class PropertyParserFunction {
 	/* @var ParserErrorMessageFormatter */
 	protected $errorFormatter;
 
-	/* @var array */
-	protected $availableDataTypes;
+	/* @var WikibaseFormatterFactory */
+	protected $formatterFactory;
 
 	/**
 	 * @since 0.4
@@ -54,74 +53,45 @@ class PropertyParserFunction {
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyLookup $propertyLookup
 	 * @param ParserErrorMessageFormatter $errorFormatter
-	 * @param string $dataTypes[]
+	 * @param string[] $dataTypeFormatters
 	 */
 	public function __construct( \Language $language, EntityLookup $entityLookup, PropertyLookup $propertyLookup,
-		ParserErrorMessageFormatter $errorFormatter, array $dataTypes ) {
+		ParserErrorMessageFormatter $errorFormatter, WikibaseFormatterFactory $formatterFactory ) {
 		$this->language = $language;
 		$this->entityLookup = $entityLookup;
 		$this->propertyLookup = $propertyLookup;
 		$this->errorFormatter = $errorFormatter;
-		$this->availableDataTypes = $dataTypes;
+		$this->formatterFactory = $formatterFactory;
 	}
 
 	/**
-	 * Get value of EntityId DataValue
+	 * Format a data value
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return string
-	 */
-	protected function getEntityIdValue( EntityId $entityId ) {
-		wfProfileIn( __METHOD__ );
-
-		// @todo we could use the terms table to lookup label
-		// we would need to have some store lookup code in WikibaseLib
-		$entity = $this->entityLookup->getEntity( $entityId );
-		$label = $entity->getLabel( $this->language->getCode() );
-
-		// @todo ick! handle when there is no label...
-		$labelValue = $label !== false ? $label : '';
-
-		wfProfileOut( __METHOD__ );
-		return $labelValue;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param Snak $snak
+	 * @param DataValue $dataValue
 	 *
 	 * @return string
 	 */
 	public function formatDataValue( DataValue $dataValue ) {
-		wfProfileIn( __METHOD__ );
 		$dataType = $dataValue->getType();
 
-		// @fixme why is $dataType inconsistent with data type settings?
-		if ( !in_array( $dataType, $this->availableDataTypes ) && $dataType !== 'wikibase-entityid' ) {
-			// @todo error handling, data type not supported
-			return '';
-		}
+		$options = array( 'wikibase-entityid' => array(
+			'entityLookup' => $this->entityLookup,
+			'labelFallback' => 'emptyString'
+		) );
 
-		$formatterOptions = new FormatterOptions( array( 'lang' => $this->language->getCode() ) );
-		$formattedValue = '';
-
-		if ( $dataType === 'wikibase-entityid' ) {
-			$valueFormatter = new ItemFormatter( $formatterOptions, $this->entityLookup );
-			$formattedValue = $valueFormatter->format( $dataValue );
-		} else if ( in_array( $dataType, array( 'commonsMedia', 'string' ) ) ) {
-			$valueFormatter = new StringFormatter( $formatterOptions );
-			$formattedValue = $valueFormatter->format( $dataValue );
-		}
+		$valueFormatter = $this->formatterFactory->newValueFormatterForDataType( $dataType, $options );
+		$formattedValue = $valueFormatter->format( $dataValue );
 
 		wfProfileOut( __METHOD__ );
 		return $formattedValue;
 	}
 
 	/**
+	 * Formats data values in a SnakList as comma separated list
+	 * @todo this belongs elsewhere, such as with formatters
+	 *
 	 * @since 0.4
 	 *
 	 * @param SnakList $snakList
@@ -219,8 +189,10 @@ class PropertyParserFunction {
 		// returns lookup with full label and id lookup (experimental) or just id lookup
 		$propertyLookup = ClientStoreFactory::getStore()->getPropertyLookup();
 
-		$instance = new self( $targetLanguage, $entityLookup, $propertyLookup,
-			$errorFormatter, Settings::get( 'dataTypes' ) );
+		$formatterFactory = new WikibaseFormatterFactory( Settings::get( 'dataTypeFormatters' ),
+			$GLOBALS['wgValueFormatters'], $targetLanguage->getCode() );
+
+		$instance = new self( $targetLanguage, $entityLookup, $propertyLookup, $errorFormatter, $formatterFactory );
 
 		$result = array(
 			$instance->evaluate( $entityId, $propertyLabel ),
