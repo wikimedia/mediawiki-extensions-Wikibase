@@ -29,19 +29,43 @@ use ValueFormatters\FormatterOptions;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ItemFormatter extends StringFormatter {
+class EntityIdFormatter extends StringFormatter {
 
 	protected $entityLookup;
 
-	public function __construct( FormatterOptions $options, EntityLookup $entityLookup ) {
+	protected $labelFallback;
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param FormatterOptions $options
+	 *	 expects 'lang', 'entityLookup', and 'labelFallback' options
+	 *   labelFallback can be prefixedId or emptyString (prefixedId is default)
+	 *
+	 * @throws \MWException
+	 */
+	public function __construct( FormatterOptions $options ) {
 		parent::__construct( $options );
-		$this->entityLookup = $entityLookup;
+
+		$this->entityLookup = $options->getOption( 'entityLookup' );
+		$this->labelFallback = $options->hasOption( 'labelFallback' ) ?
+			$options->getOption( 'labelFallback' ) : 'prefixedId';
 	}
 
+	/**
+	 * Format an EntityId data value
+	 *
+	 * @since 0.4
+	 *
+	 * @param mixed $value The value to format
+	 *
+	 * @throws \InvalidArgumentException
+	 *
+	 * @return string
+	 */
 	public function format( $value ) {
-		if ( !$value instanceof EntityId ) {
-			// @todo: error!
-			return '';
+		if ( ! $value instanceof EntityId ) {
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId.' );
 		}
 
 		$label = $this->lookupItemLabel( $value );
@@ -50,11 +74,25 @@ class ItemFormatter extends StringFormatter {
 			return $this->formatString( $label );
 		}
 
-		// did not find label
-		return '';
+		// did not find a label, using fallback
+		if ( $this->labelFallback === 'emptyString' ) {
+			return '';
+		}
+
+		return $value->getPrefixedId();
 	}
 
-	protected function lookupItemLabel( $entityId ) {
+	/**
+	 * Lookup a label for an entity
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityId
+	 *
+	 * @return string|false
+	 */
+	protected function lookupItemLabel( EntityId $entityId ) {
+		// @todo: use terms table lookup
 		$entity = $this->entityLookup->getEntity( $entityId );
 
 		$langCode = $this->getOption( 'lang' );
