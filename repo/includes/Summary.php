@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Language;
+use DataValues\StringValue;
 
 /**
  * File defining the handler for autocomments and additional utility functions
@@ -243,7 +244,10 @@ class Summary {
 				return '';
 			}
 			else {
-				return $wgContLang->commaList( $parts );
+				return implode(
+					wfMessage( 'colon-separator' )->inLanguage( $wgContLang )->escaped(),
+					$parts
+				);
 			}
 		}
 		else {
@@ -263,6 +267,7 @@ class Summary {
 		$strings = array();
 
 		foreach ( $args as $arg ) {
+			wfDebugLog( 'wikidata', get_class( $arg ) );
 			// if we find that any arg is an object we shall not display them
 			switch ( true ) {
 			case is_string( $arg ):
@@ -272,19 +277,23 @@ class Summary {
 				$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $arg );
 				$strings[] = '[[' . $title->getFullText() . ']]';
 				break;
+			case is_object( $arg ) && ( $arg instanceof StringValue ):
+				wfDebugLog( 'wikidata', 'we haz string' );
+				$strings[] = htmlspecialchars( $arg->getValue() );
+				break;
 			case is_object( $arg ) && method_exists( $arg, '__toString' ):
 				$strings[] = (string)$arg;
 				break;
 			case is_object( $arg ) && !method_exists( $arg, '__toString' ):
 				$strings[] = '';
-				$this->removeFormat( self::USE_SUMMARY );
+				// $this->removeFormat( self::USE_SUMMARY ); @fixme unreferenced function
 				break;
 			case $arg === false || $arg === null:
 				$strings[] = '';
 				break;
 			default:
 				$strings[] = '';
-				$this->removeFormat( self::USE_SUMMARY );
+				// $this->removeFormat( self::USE_SUMMARY ); @fixme unreferenced function
 			}
 		}
 

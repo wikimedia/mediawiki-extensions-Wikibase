@@ -13,6 +13,8 @@ use Wikibase\LibRegistry;
 use Wikibase\Claim;
 use Wikibase\Autocomment;
 use Wikibase\Settings;
+use Wikibase\Summary;
+use Wikibase\Snak;
 
 /**
  * API module for creating claims.
@@ -40,7 +42,7 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class CreateClaim extends ApiWikibase implements IAutocomment {
+class CreateClaim extends ApiWikibase {
 
 	// TODO: automcomment
 	// TODO: rights
@@ -57,30 +59,6 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 
 		$entityContent = $this->getEntityContent();
 
-		$claim = $this->addClaim( $entityContent->getEntity() );
-
-		$this->saveChanges( $entityContent );
-
-		$this->outputClaim( $claim );
-
-		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * Constructs a new Claim based on the arguments provided to the API,
-	 * adds it to the Entity and saves it.
-	 *
-	 * On success, the added Claim is returned as part of the Status object.
-	 *
-	 * @since 0.2
-	 *
-	 * @param \Wikibase\Entity $entity
-	 *
-	 * @return Claim
-	 */
-	protected function addClaim( Entity $entity ) {
-		wfProfileIn( __METHOD__ );
-
 		// It is possible we get an exception from this method because of specifying
 		// a non existing-property, specifying an entity id for an entity with wrong
 		// entity type or providing an invalid DataValue.
@@ -92,6 +70,38 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 			$this->dieUsageMsg( $ex->getMessage() );
 		}
 
+		$claim = $this->addClaim( $entityContent->getEntity(), $snak );
+		$summary = $this->createSummary( $snak );
+
+		$this->saveChanges( $entityContent, $summary );
+
+		$this->outputClaim( $claim );
+
+		wfProfileOut( __METHOD__ );
+	}
+
+	protected function createSummary( Snak $snak ) {
+		$summary = new Summary( $this->getModuleName() );
+		$summary->setAction( 'create' );
+		$summary->addAutoSummaryArgs( $snak->getPropertyId(), $snak->getDataValue() );
+		return $summary;
+	}
+
+	/**
+	 * Constructs a new Claim based on the arguments provided to the API,
+	 * adds it to the Entity and saves it.
+	 *
+	 * On success, the added Claim is returned as part of the Status object.
+	 *
+	 * @since 0.2
+	 *
+	 * @param \Wikibase\Entity $entity
+	 * @param \Wikibase\Snak $snak
+	 *
+	 * @return Claim
+	 */
+	protected function addClaim( Entity $entity, Snak $snak ) {
+		wfProfileIn( __METHOD__ );
 		$claim = $entity->newClaim( $snak );
 
 		$entity->addClaim( $claim );
@@ -104,11 +114,12 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 	 * @since 0.3
 	 *
 	 * @param \Wikibase\EntityContent $content
+	 * @param \Wikibase\Summary $summary
 	 */
-	protected function saveChanges( EntityContent $content ) {
+	protected function saveChanges( EntityContent $content, Summary $summary ) {
 		$status = $this->attemptSaveEntity(
 			$content,
-			'', // TODO: automcomment
+			$summary->toString(),
 			EDIT_UPDATE
 		);
 
@@ -285,26 +296,4 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 			// 'ex' => 'desc'
 		);
 	}
-
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
-			$this->getModuleName(),
-			array(
-				/*plural */ 1
-			)
-		);
-	}
-
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'property' )
-		);
-	}
-
 }
