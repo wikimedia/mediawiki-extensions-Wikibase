@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Language;
+use DataValues\StringValue;
 
 /**
  * File defining the handler for autocomments and additional utility functions
@@ -243,7 +244,11 @@ class Summary {
 				return '';
 			}
 			else {
-				return $wgContLang->commaList( $parts );
+				// @todo have some sort of key value formatter
+				return implode(
+					wfMessage( 'colon-separator' )->inLanguage( $wgContLang )->escaped(),
+					$parts
+				);
 			}
 		}
 		else {
@@ -272,19 +277,23 @@ class Summary {
 				$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $arg );
 				$strings[] = '[[' . $title->getFullText() . ']]';
 				break;
+			case is_object( $arg ) && ( $arg instanceof StringValue ):
+				$strings[] = htmlspecialchars( $arg->getValue() );
+				break;
 			case is_object( $arg ) && method_exists( $arg, '__toString' ):
 				$strings[] = (string)$arg;
 				break;
 			case is_object( $arg ) && !method_exists( $arg, '__toString' ):
 				$strings[] = '';
-				$this->removeFormat( self::USE_SUMMARY );
+				break;
+			case is_int( $arg ):
+				$strings[] = (string) $arg;
 				break;
 			case $arg === false || $arg === null:
 				$strings[] = '';
 				break;
 			default:
 				$strings[] = '';
-				$this->removeFormat( self::USE_SUMMARY );
 			}
 		}
 
@@ -357,7 +366,10 @@ class Summary {
 
 		$comment = ( $format & self::USE_COMMENT) ? Utils::trimToNFC( $comment ) : '';
 		$summary = ( $format & self::USE_SUMMARY) ? Utils::trimToNFC( $summary ) : '';
-		return self::formatTotalSummary( $comment, $summary, $length );
+
+		$totalSummary = self::formatTotalSummary( $comment, $summary, $length );
+
+		return $totalSummary;
 	}
 
 }

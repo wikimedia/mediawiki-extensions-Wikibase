@@ -11,6 +11,8 @@ use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claims;
+use Wikibase\Summary;
+use Wikibase\PropertyValueSnak;
 
 /**
  * API module for removing claims.
@@ -38,7 +40,7 @@ use Wikibase\Claims;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveClaims extends ApiWikibase implements IAutocomment {
+class RemoveClaims extends ApiWikibase {
 
 	// TODO: example
 	// TODO: rights
@@ -62,6 +64,49 @@ class RemoveClaims extends ApiWikibase implements IAutocomment {
 		$this->outputResult( $removedClaimKeys );
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Create a summary
+	 *
+	 * @since 0.4
+	 *
+	 * @param Claims $claims
+	 * @param string[] $guids
+	 * @param string $action
+	 *
+	 * @return Summary
+	 */
+	protected function createSummary( Claims $claims, array $guids, $action ) {
+		if ( !is_string( $action ) ) {
+			throw new \MWException( 'action is invalid or unknown type.' );
+		}
+
+		$summary = new Summary( $this->getModuleName() );
+		$summary->setAction( $action );
+
+		$count = count( $guids );
+
+		$summary->addAutoCommentArgs( $count );
+		$summaryArgs = array();
+
+		foreach( $guids as $guid ) {
+			if ( $claims->hasClaimWithGuid( $guid ) ) {
+				$snak = $claims->getClaimWithGuid( $guid )->getMainSnak();
+				$summaryArgs[] = $snak->getPropertyId();
+				if ( $snak instanceof PropertyValueSnak ) {
+					$summaryArgs[] = $snak->getDataValue();
+				} else {
+					$summaryArgs[] = '-'; // todo handle no values in general way (needed elsewhere)
+				}
+			}
+		}
+
+		if ( $summaryArgs !== array() ) {
+			$summary->addAutoSummaryArgs( $summaryArgs );
+		}
+
+		return $summary;
 	}
 
 	/**
@@ -96,31 +141,33 @@ class RemoveClaims extends ApiWikibase implements IAutocomment {
 	 * the claims that actually got removed.
 	 *
 	 * @since 0.3
-	 *
+	 i*
 	 * @param \Wikibase\EntityContent[] $entityContents
 	 * @param array $guids
 	 *
 	 * @return string[]
 	 */
 	protected function removeClaims( $entityContents, array $guids ) {
-		$removedClaims = array();
+		$removedClaims = new Claims();
 
 		foreach ( $entityContents as $entityContent ) {
 			$entity = $entityContent->getEntity();
 
 			$claims = new Claims( $entity->getClaims() );
 
-			$removedClaims = array_merge(
-				$removedClaims,
-				$this->removeClaimsFromList( $claims, $guids[$entity->getPrefixedId()] )
-			);
+			$removedBatch = $this->removeClaimsFromList( $claims, $guids[$entity->getPrefixedId()] );
+			foreach( $removedBatch as $claim ) {
+				$removedClaims->addClaim( $claim );
+			}
 
 			$entity->setClaims( $claims );
 
-			$this->saveChanges( $entityContent );
+			$summary = $this->createSummary( $removedClaims, $guids[$entity->getPrefixedId()], 'remove' );
+
+			$this->saveChanges( $entityContent, $summary );
 		}
 
-		return $removedClaims;
+		return $removedClaims->getGuids();
 	}
 
 	/**
@@ -164,19 +211,19 @@ class RemoveClaims extends ApiWikibase implements IAutocomment {
 	 * @param Claims $claims
 	 * @param string[] $guids
 	 *
-	 * @return string[]
+	 * @return Claims
 	 */
 	protected function removeClaimsFromList( Claims &$claims, array $guids ) {
-		$removedGuids = array();
+		$removedClaims = new Claims();
 
 		foreach ( $guids as $guid ) {
 			if ( $claims->hasClaimWithGuid( $guid ) ) {
+				$removedClaims->addClaim( $claims->getClaimWithGuid( $guid ) );
 				$claims->removeClaimWithGuid( $guid );
-				$removedGuids[] = $guid;
 			}
 		}
 
-		return $removedGuids;
+		return $removedClaims;
 	}
 
 	/**
@@ -205,10 +252,10 @@ class RemoveClaims extends ApiWikibase implements IAutocomment {
 	 *
 	 * @param EntityContent $content
 	 */
-	protected function saveChanges( EntityContent $content ) {
+	protected function saveChanges( EntityContent $content, Summary $summary ) {
 		$status = $this->attemptSaveEntity(
 			$content,
-			'', // TODO: automcomment
+			$summary->toString(),
 			EDIT_UPDATE
 		);
 
@@ -281,29 +328,6 @@ class RemoveClaims extends ApiWikibase implements IAutocomment {
 		return array(
 			// TODO
 			// 'ex' => 'desc'
-		);
-	}
-
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		$guids = $params['claim'];
-
-		return Autocomment::formatAutoComment(
-			$this->getModuleName(),
-			array(
-				/*plural */ count( $guids ),
-			)
-		);
-	}
-
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'claim' )
 		);
 	}
 
