@@ -88,3 +88,12 @@ $wgWBSettings['dataTypes'] = array(
 	'commonsMedia',
 	'string',
 );
+
+$wgWBSettings['dataTypeFormatters'] = array(
+	'wikibase-entityid' => 'wikibase-entityid',
+	'commonsMedia' => 'string',
+	'string' => 'string'
+);
+
+$wgValueFormatters['wikibase-entityid'] = 'Wikibase\EntityIdFormatter';
+$wgValueFormatters['string'] = 'Wikibase\StringFormatter'; // @todo move to ValueFormatters
