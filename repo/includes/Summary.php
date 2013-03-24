@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Language;
+use DataValues\StringValue;
 
 /**
  * File defining the handler for autocomments and additional utility functions
@@ -243,6 +244,7 @@ class Summary {
 				return '';
 			}
 			else {
+				// @todo have some sort of key value formatter
 				return $wgContLang->commaList( $parts );
 			}
 		}
@@ -263,35 +265,70 @@ class Summary {
 		$strings = array();
 
 		foreach ( $args as $arg ) {
-			// if we find that any arg is an object we shall not display them
-			switch ( true ) {
-			case is_string( $arg ):
-				$strings[] = $arg;
-				break;
-			case is_object( $arg ) && ($arg instanceof EntityId):
-				$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $arg );
-				$strings[] = '[[' . $title->getFullText() . ']]';
-				break;
-			case is_object( $arg ) && method_exists( $arg, '__toString' ):
-				$strings[] = (string)$arg;
-				break;
-			case is_object( $arg ) && !method_exists( $arg, '__toString' ):
-				$strings[] = '';
-				$this->removeFormat( self::USE_SUMMARY );
-				break;
-			case $arg === false || $arg === null:
-				$strings[] = '';
-				break;
-			default:
-				$strings[] = '';
-				$this->removeFormat( self::USE_SUMMARY );
+			$strings[] = $this->formatArg( $arg );
+		}
+
+        $this->summaryArgs = array_merge(
+            $this->summaryArgs === false ? array() : $this->summaryArgs,
+            array_filter( $strings, function ( $str ) { return 0 < strlen( $str ); } )
+        );
+	}
+
+	/**
+	 * Format an autosummary argument
+	 *
+	 * @since 0.4
+	 *
+	 * @param mixed $arg
+ 	 *
+	 * @return string
+	 */
+	protected function formatArg( $arg ) {
+		$string = '';
+
+		wfDebugLog( 'wikidata', __CLASS__ . ':' . __FUNCTION__ );
+		wfDebugLog( 'wikidata', var_export( $arg, true ) );
+
+		if ( is_string( $arg ) ) {
+			$entityId = EntityId::newFromPrefixedId( $arg );
+			if ( $entityId instanceof EntityId ) {
+				$arg = $entityId;
 			}
 		}
 
-		$this->summaryArgs = array_merge(
-			$this->summaryArgs === false ? array() : $this->summaryArgs,
-			array_filter( $strings, function ( $str ) { return 0 < strlen( $str ); } )
-		);
+		// if we find that any arg is an object we shall not display them
+		switch ( true ) {
+			case is_array( $arg ):
+				$key = key( $arg );
+				// @todo i18n for colon in onFormat
+				$string = $this->formatArg( $key ) . ':' . $this->formatArg( $arg[$key] );
+				break;
+			case is_string( $arg ):
+				$string = $arg;
+				break;
+			case is_object( $arg ) && ($arg instanceof EntityId):
+				$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $arg );
+				$string = '[[' . $title->getFullText() . ']]';
+				break;
+			case is_object( $arg ) && ( $arg instanceof StringValue ):
+				$string = htmlspecialchars( $arg->getValue() );
+				break;
+			case is_object( $arg ) && method_exists( $arg, '__toString' ):
+				$string = (string)$arg;
+				break;
+			case is_object( $arg ) && !method_exists( $arg, '__toString' ):
+				$string = '';
+				break;
+			case is_int( $arg ):
+				$string = (string) $arg;
+				break;
+			case $arg === false || $arg === null:
+				break;
+			default:
+				$string = '';
+		}
+
+		return $string;
 	}
 
 	/**
@@ -357,7 +394,10 @@ class Summary {
 
 		$comment = ( $format & self::USE_COMMENT) ? Utils::trimToNFC( $comment ) : '';
 		$summary = ( $format & self::USE_SUMMARY) ? Utils::trimToNFC( $summary ) : '';
-		return self::formatTotalSummary( $comment, $summary, $length );
+
+		$totalSummary = self::formatTotalSummary( $comment, $summary, $length );
+
+		return $totalSummary;
 	}
 
 }

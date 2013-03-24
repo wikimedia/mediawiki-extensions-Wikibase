@@ -149,6 +149,17 @@ class Claims extends HashArray implements ClaimListAccess {
 	}
 
 	/**
+	 * Get array of Claim guids
+	 *
+	 * @since 0.4
+	 *
+	 * @return string[]
+	 */
+	public function getGuids() {
+		return array_keys( $this->guidIndex );
+	}
+
+	/**
 	 * @see GenericArrayObject::preSetElement
 	 *
 	 * @since 0.3

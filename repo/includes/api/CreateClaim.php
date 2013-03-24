@@ -13,6 +13,8 @@ use Wikibase\LibRegistry;
 use Wikibase\Claim;
 use Wikibase\Autocomment;
 use Wikibase\Settings;
+use Wikibase\Summary;
+use Wikibase\Snak;
 
 /**
  * API module for creating claims.
@@ -40,9 +42,8 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class CreateClaim extends ApiWikibase implements IAutocomment {
+class CreateClaim extends ModifyClaim {
 
-	// TODO: automcomment
 	// TODO: rights
 
 	/**
@@ -57,9 +58,21 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 
 		$entityContent = $this->getEntityContent();
 
-		$claim = $this->addClaim( $entityContent->getEntity() );
+		// It is possible we get an exception from this method because of specifying
+		// a non existing-property, specifying an entity id for an entity with wrong
+		// entity type or providing an invalid DataValue.
+		try {
+			$snak = $this->getSnakInstance();
+		}
+		catch ( \Exception $ex ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsageMsg( $ex->getMessage() );
+		}
 
-		$this->saveChanges( $entityContent );
+		$claim = $this->addClaim( $entityContent->getEntity(), $snak );
+		$summary = $this->createSummary( $snak, 'create' );
+
+		$this->saveChanges( $entityContent, $summary );
 
 		$this->outputClaim( $claim );
 
@@ -75,23 +88,12 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 	 * @since 0.2
 	 *
 	 * @param \Wikibase\Entity $entity
+	 * @param \Wikibase\Snak $snak
 	 *
 	 * @return Claim
 	 */
-	protected function addClaim( Entity $entity ) {
+	protected function addClaim( Entity $entity, Snak $snak ) {
 		wfProfileIn( __METHOD__ );
-
-		// It is possible we get an exception from this method because of specifying
-		// a non existing-property, specifying an entity id for an entity with wrong
-		// entity type or providing an invalid DataValue.
-		try {
-			$snak = $this->getSnakInstance();
-		}
-		catch ( \Exception $ex ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsageMsg( $ex->getMessage() );
-		}
-
 		$claim = $entity->newClaim( $snak );
 
 		$entity->addClaim( $claim );
@@ -104,11 +106,12 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 	 * @since 0.3
 	 *
 	 * @param \Wikibase\EntityContent $content
+	 * @param \Wikibase\Summary $summary
 	 */
-	protected function saveChanges( EntityContent $content ) {
+	protected function saveChanges( EntityContent $content, Summary $summary ) {
 		$status = $this->attemptSaveEntity(
 			$content,
-			'', // TODO: automcomment
+			$summary->toString(),
 			EDIT_UPDATE
 		);
 
@@ -285,26 +288,4 @@ class CreateClaim extends ApiWikibase implements IAutocomment {
 			// 'ex' => 'desc'
 		);
 	}
-
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
-			$this->getModuleName(),
-			array(
-				/*plural */ 1
-			)
-		);
-	}
-
-	/**
-	 * @see  \Wikibase\Api\IAutocomment::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'property' )
-		);
-	}
-
 }
