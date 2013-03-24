@@ -138,6 +138,7 @@ $wgAutoloadClasses['Wikibase\Api\IAutocomment'] 			= $dir . 'includes/api/IAutoc
 $wgAutoloadClasses['Wikibase\Api\EditEntity'] 				= $dir . 'includes/api/EditEntity.php';
 $wgAutoloadClasses['Wikibase\Api\GetEntities'] 				= $dir . 'includes/api/GetEntities.php';
 $wgAutoloadClasses['Wikibase\Api\LinkTitles'] 				= $dir . 'includes/api/LinkTitles.php';
+$wgAutoloadClasses['Wikibase\Api\ModifyClaim']				= $dir . 'includes/api/ModifyClaim.php';
 $wgAutoloadClasses['Wikibase\Api\ModifyEntity'] 			= $dir . 'includes/api/ModifyEntity.php';
 $wgAutoloadClasses['Wikibase\Api\ModifyLangAttribute'] 		= $dir . 'includes/api/ModifyLangAttribute.php';
 $wgAutoloadClasses['Wikibase\Api\SearchEntities'] 			= $dir . 'includes/api/SearchEntities.php';

@@ -287,6 +287,8 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetclaimvalue' => 'Set {{PLURAL:$1|a claim value|claim values}}',
 	'wikibase-item-summary-wbremoveclaims' => 'Removed {{PLURAL:$1|a claim|claims}}',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{PLURAL:$1|value|values}}',
+	'wikibase-item-summary-wbcreateclaim-create' => 'Created claim',
+	'wikibase-item-summary-wbremoveclaims-remove' => 'Removed {{PLURAL:$3|claim|claims}}',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbeditentity-create' => 'Created a new property',
