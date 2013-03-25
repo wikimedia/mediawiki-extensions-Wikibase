@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqooajRI",
+        "filename": "client/includes/recentchanges/ExternalChangesLine.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T11:12:53Z",
+      "side": 1,
+      "message": "we could even do better:\n\n$msg \u003d wfMessage( $comment );\n$message \u003d $msg-\u003eexists() ? $msg-\u003etext() : $comment;",
+      "revId": "cea37991b5e872cbe764ed34162475028a68c1f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
