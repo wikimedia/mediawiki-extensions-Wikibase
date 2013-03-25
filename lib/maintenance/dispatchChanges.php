@@ -87,13 +87,13 @@ class DispatchChanges extends \Maintenance {
 	 *           This affects the effective batch size, and this influences how changes
 	 *           can be coalesced.
 	 */
-	protected $dispatchInterval = 60;
+	protected $dispatchInterval;
 
 	/**
 	 * @var int: Number of seconds to wait before testing a lock. Any target with a lock
 	 *           timestamp newer than this will not be considered for selection.
 	 */
-	protected $lockGraceInterval = 60;
+	protected $lockGraceInterval;
 
 	/**
 	 * @var int: Number of target wikis to select as a base set for random selection.
@@ -151,6 +151,8 @@ class DispatchChanges extends \Maintenance {
 		$this->maxTime = intval( $this->getOption( 'max-time', PHP_INT_MAX ) );
 		$this->maxPasses = intval( $this->getOption( 'max-passes', $this->maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 ) );
 		$this->delay = intval( $this->getOption( 'idle-delay', 10 ) );
+		$this->dispatchInterval = intval( $this->getOption( 'dispatch-interval', 60 ) );
+		$this->lockGraceInterval = intval( $this->getOption( 'lock-grace-interval', 60 ) );
 
 		$this->verbose = $this->getOption( 'verbose', false );
 
