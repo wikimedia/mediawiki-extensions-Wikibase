@@ -128,10 +128,12 @@ class DispatchChanges extends \Maintenance {
 					. "Default: 60", false, true );
 		$this->addOption( 'randomness', "Number of least current target wikis to pick from at random. "
 					. "Default: 5.", false, true );
-		$this->addOption( 'max-passes', "The number of passes to do before exiting. "
-					. "Default: the number of client wikis if max-time isn't given. Infinite if it is.", false, true );
-		$this->addOption( 'max-time', "The number of seconds before exiting. Default: infinite.", false, true );
-		$this->addOption( 'batch-size', "Max number of changes to pass to a client at a time. Default: 1000", false, true );
+		$this->addOption( 'max-passes', "The number of passes to perform. "
+					. "Default: 1 if --max-time is not set, infinite if it is.", false, true );
+		$this->addOption( 'max-time', "The number of seconds to run before exiting, "
+					. "if --max-passes is not reached. Default: infinite.", false, true );
+		$this->addOption( 'batch-size', "Max number of changes to pass to a client at a time. "
+					. "Default: 1000", false, true );
 	}
 
 	/**
@@ -147,7 +149,7 @@ class DispatchChanges extends \Maintenance {
 
 		$this->batchSize = intval( $this->getOption( 'batch-size', 1000 ) );
 		$this->maxTime = intval( $this->getOption( 'max-time', PHP_INT_MAX ) );
-		$this->maxPasses = intval( $this->getOption( 'max-passes', $this->maxTime < PHP_INT_MAX ? PHP_INT_MAX : count( $this->clientWikis ) ) );
+		$this->maxPasses = intval( $this->getOption( 'max-passes', $this->maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 ) );
 		$this->delay = intval( $this->getOption( 'idle-delay', 10 ) );
 
 		$this->verbose = $this->getOption( 'verbose', false );
@@ -493,11 +495,11 @@ class DispatchChanges extends \Maintenance {
 	 */
 	protected function lockClient( $siteID ) {
 		if ( !isset( $this->clientWikis[ $siteID ] ) ) {
-			throw new \MWException( "wiki not configured: $siteID" );
+			throw new \MWException( "Wiki not configured: $siteID; "
+					."consider removing it from the " . $this->stateTable );
 		}
 
 		$wikiDB = $this->clientWikis[ $siteID ];
-		$isNew = false;
 
 		$this->trace( "Trying $siteID" );
 
