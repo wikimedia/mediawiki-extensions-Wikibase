@@ -211,9 +211,10 @@ class DispatchChanges extends \Maintenance {
 	/**
 	 * Maintenance script entry point.
 	 *
-	 * This will run $this->runPass() in a loop, the number of times specified by $this->maxPasses,
-	 * sleeping $this->delay seconds between passes. If $this->maxTime is exceeded before all passes
-	 * are run, execution is also terminated.
+	 * This will run $this->runPass() in a loop, the number of times specified by $this->maxPasses.
+	 * If $this->maxTime is exceeded before all passes are run, execution is also terminated.
+	 * If no suitable target wiki can be found for a pass, we sleep for $this->delay seconds
+	 * instead of dispatching.
 	 */
 	public function execute() {
 		if ( !defined( 'WBL_VERSION' ) ) {
@@ -236,32 +237,43 @@ class DispatchChanges extends \Maintenance {
 
 		$startTime = time();
 		$t = 0;
-		$c = 0;
 
-		//run passes in a loop, sleeping when idle.
-		while ( $c < $this->maxPasses ) {
+		// Run passes in a loop, sleeping when idle.
+		// Note that idle passes need to be counted to avoid processes staying alive
+		// for an indefinite time, potentially leading to a pile up when used with cron.
+		for ( $c = 0; $c < $this->maxPasses; ) {
 			if ( $t  > $this->maxTime ) {
+				$this->trace( "Reached max time after $t seconds." );
 				// timed out
 				break;
 			}
+
+			$c++;
 
 			try {
 				$this->trace( "Picking a client wiki..." );
 				$wikiState = $this->selectClient();
 
-				if ( !$wikiState ) {
-					// try again later
-					$this->trace( "Idle: No client wiki found for dispatching. Sleeping." );
-					sleep( $this->delay );
-					continue;
+				if ( $wikiState ) {
+					$this->dispatchTo( $wikiState  );
+				} else {
+					// Try again later, unless we have already reached the limit.
+					if ( $c < $this->maxPasses ) {
+						$this->trace( "Idle: No client wiki found in need of dispatching. "
+							. "Sleeping for {$this->delay} seconds." );
+
+						sleep( $this->delay );
+					} else {
+						$this->trace( "Idle: No client wiki found in need of dispatching. " );
+					}
 				}
-
-				$this->dispatchTo( $wikiState  );
-
-				$c++;
 			} catch ( \Exception $ex ) {
-				$this->log( "ERROR: $ex; sleeping" );
-				sleep( $this->delay );
+				if ( $c < $this->maxPasses ) {
+					$this->log( "ERROR: $ex; sleeping for {$this->delay} seconds" );
+					sleep( $this->delay );
+				} else {
+					$this->log( "ERROR: $ex" );
+				}
 			}
 
 			$t = ( time() - $startTime );
