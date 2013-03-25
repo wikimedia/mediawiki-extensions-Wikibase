@@ -16,6 +16,24 @@
       "revId": "29ad96e17fd2b1a3ace9c33a536a36c8400f69d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqqoQsU8",
+        "filename": "client/includes/NamespaceChecker.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T09:07:38Z",
+      "side": 1,
+      "message": "Changed by DanielK, now in master",
+      "parentUuid": "DqcWV3TE",
+      "revId": "29ad96e17fd2b1a3ace9c33a536a36c8400f69d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
