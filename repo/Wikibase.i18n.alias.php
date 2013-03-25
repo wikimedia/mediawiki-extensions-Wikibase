@@ -172,16 +172,18 @@ $specialPageAliases['lb'] = array(
 
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = array(
+	'DispatchStats' => array( 'СтатистикиСпроведување' ),
 	'EntityData' => array( 'ЕдиницаПодатоци' ),
 	'NewItem' => array( 'СоздајПредмет' ),
 	'NewProperty' => array( 'НовоСвојство' ),
 	'ItemByTitle' => array( 'ПредметПоНаслов' ),
-	'ItemDisambiguation' => array( 'ПредметПоЕтикета' ),
+	'ItemDisambiguation' => array( 'ПојаснувањеНаПредмет' ),
 	'ListDatatypes' => array( 'СписокПодаточниТипови' ),
 	'SetLabel' => array( 'ЗадајЕтикета' ),
 	'SetDescription' => array( 'ЗадајОпис' ),
 	'SetAliases' => array( 'ЗадајАлијаси' ),
 	'EntitiesWithoutLabel' => array( 'ЕдинициБезЕтикета' ),
+	'ItemsWithoutSitelinks' => array( 'ПредметиБезВикиврски' ),
 );
 
 /** Dutch (Nederlands) */
@@ -227,6 +229,7 @@ $specialPageAliases['vi'] = array(
 
 /** Simplified Chinese (中文（简体）‎) */
 $specialPageAliases['zh-hans'] = array(
+	'DispatchStats' => array( '派遣统计' ),
 	'EntityData' => array( '实体数据' ),
 	'NewItem' => array( '创建项目' ),
 	'NewProperty' => array( '新建属性' ),

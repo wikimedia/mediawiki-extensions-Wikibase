@@ -106,9 +106,10 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
 
 /** Afrikaans (Afrikaans)
  * @author Naudefj
+ * @author Robby
  */
 $messages['af'] = array(
-	'wikibase-entity-item' => 'item',
+	'wikibase-entity-item' => 'Item',
 	'wikibase-entity-property' => 'eienskap',
 	'wikibase-entity-query' => 'soekopdrag',
 	'wikibase-diffview-reference' => 'verwysing',
@@ -372,13 +373,13 @@ $messages['cy'] = array(
 	'wikibase-entity-query' => 'chwiliad',
 	'wikibase-diffview-reference' => 'ffynhonnell',
 	'wikibase-diffview-rank' => 'gradd',
-	'wikibase-diffview-qualifier' => 'Cymhwysydd',
+	'wikibase-diffview-qualifier' => 'goleddfwr',
 	'wikibase-error-unexpected' => 'Cafwyd nam annisgwyl',
-	'wikibase-error-save-generic' => "Cafwyd nam tra'n ceisio diddymu ac oherwydd hyn ni allwyd cadw eich newidiadau.",
+	'wikibase-error-save-generic' => "Cafwyd nam tra'n ceisio rhoi ar gadw ac oherwydd hyn ni allwyd cadw eich newidiadau.",
 	'wikibase-error-remove-generic' => "Cafwyd nam tra'n ceisio diddymu ac oherwydd hyn ni allwyd cwbwlhau eich newidiadau.",
-	'wikibase-error-save-connection' => 'Cafwyd nam ar y cysylltiad wrth geisio cadw eich gwaith, ac oherwydd hyn ni allwyd cadw eich newidiadau. Gwirwch cysylltiad eich Rhyngrwyd.',
-	'wikibase-error-remove-connection' => 'Cafwyd nam ar y cysylltiad wrth geisio diddymu, ac oherwydd hyn ni allwyd cadw eich newidiadau. Gwirwch cysylltiad eich Rhyngrwyd.',
-	'wikibase-error-save-timeout' => 'Mae nam technegol yn bodoli, ac oherwydd hyn ni allwyd "cadw" eich newidiadau.',
+	'wikibase-error-save-connection' => "Cafwyd nam ar y cysylltiad wrth geisio cadw eich gwaith, ac oherwydd hyn ni allwyd cadw eich newidiadau. Gwirwch eich cysylltiad â'r Rhyngrwyd.",
+	'wikibase-error-remove-connection' => "Cafwyd nam ar y cysylltiad wrth geisio diddymu, ac oherwydd hyn ni allwyd cadw eich newidiadau. Gwirwch eich cysylltiad â'r Rhyngrwyd.",
+	'wikibase-error-save-timeout' => 'Mae nam technegol yn bodoli, ac oherwydd hyn ni allwyd cadw eich newidiadau.',
 	'wikibase-error-remove-timeout' => 'Mae nam technegol yn bodoli, ac oherwydd hyn ni allwyd cwbwlhau eich "diddymiad".',
 );
 
@@ -602,10 +603,13 @@ $messages['et'] = array(
 	'wikibase-entity-property' => 'omadus',
 	'wikibase-entity-query' => 'päring',
 	'wikibase-error-unexpected' => 'Ilmnes tundmatu tõrge.',
+	'wikibase-error-autocomplete-response' => 'Serveri vastus: $1',
 	'wikibase-error-ui-cant-edit' => 'Sul pole lubatud seda toimingut sooritada.',
 	'wikibase-error-ui-no-permissions' => 'Sul pole selle toimingu sooritamiseks vajalikke õigusi.',
+	'wikibase-error-ui-link-exists' => 'Sellele leheküljele ei saa linkida, sest teine üksus juba lingib sellele.',
 	'wikibase-error-ui-session-failure' => 'Seanss on aegunud. Palun logi uuesti sisse.',
 	'wikibase-error-ui-edit-conflict' => 'Esines redigeerimiskonflikt. Palun värskenda lehekülge ja salvesta uuesti.',
+	'wikibase-replicationnote' => 'Palun pane tähele, et võib kuluda mitu minutit, enne kui muudatused on kõigis vikides nähtavad.',
 	'wikibase-sitelinks' => 'Sellele üksusele viitavate lehekülgede loend',
 	'wikibase-sitelinks-sitename-columnheading' => 'Keel',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kood',
@@ -1194,6 +1198,7 @@ $messages['lb'] = array(
 	'wikibase-diffview-reference' => 'Referenz',
 	'wikibase-diffview-rank' => 'Classement',
 	'wikibase-error-unexpected' => 'En onerwaarte Feeler ass geschitt.',
+	'wikibase-error-save-timeout' => 'Mir hunn technesch Schwieregkeeten an dofir konnt Är Ännerung net "gespäichert" ginn.',
 	'wikibase-error-ui-no-external-page' => 'De spezifizéierten Artikel konnt op dem korrespondéierte Site net fonnt ginn.',
 	'wikibase-error-ui-cant-edit' => 'Dir däerft dës Aktioun net maachen.',
 	'wikibase-error-ui-no-permissions' => 'Dir hutt net genuch Rechter fir dës Aktioun ze maachen.',
@@ -1270,6 +1275,10 @@ $messages['ml'] = array(
 	'wikibase-entity-item' => 'ഇനം',
 	'wikibase-entity-property' => 'ഗുണഗണങ്ങൾ',
 	'wikibase-entity-query' => 'ആവശ്യം',
+	'wikibase-diffview-reference' => 'അവലംബം',
+	'wikibase-error-unexpected' => 'അപ്രതീക്ഷിതമായ പിഴവ് ഉണ്ടായി.',
+	'wikibase-error-save-generic' => 'സേവ് ചെയ്യാൻ ശ്രമിച്ചപ്പോൾ ഒരു പിഴവുണ്ടായതിനാൽ താങ്കൾ വരുത്തിയ മാറ്റങ്ങൾ പൂർണ്ണമാക്കാനായിട്ടില്ല.',
+	'wikibase-error-remove-generic' => 'നീക്കം ചെയ്യാൻ ശ്രമിച്ചപ്പോൾ ഒരു പിഴവുണ്ടായതിനാൽ താങ്കൾ വരുത്തിയ മാറ്റങ്ങൾ പൂർണ്ണമാക്കാനായിട്ടില്ല.',
 	'wikibase-sitelinks' => 'ഈ ഇനത്തിലേയ്ക്ക് കണ്ണി ചേർത്തിട്ടുള്ള താളുകളുടെ പട്ടിക',
 	'wikibase-sitelinks-sitename-columnheading' => 'ഭാഷ',
 	'wikibase-sitelinks-siteid-columnheading' => 'കോഡ്',

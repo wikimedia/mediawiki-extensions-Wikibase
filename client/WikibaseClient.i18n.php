@@ -60,6 +60,7 @@ $messages['en'] = array(
 /** Message documentation (Message documentation)
  * @author Jeblad
  * @author Katie Filbert
+ * @author Lloffiwr
  * @author Marius Hoch
  * @author Metalhead64
  * @author Raymond
@@ -96,7 +97,7 @@ Parameters:
 	'wikibase-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.
 {{Identical|Edit link}}',
-	'wikibase-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizard to edit interlanguage links.',
+	'wikibase-editlinkstitle' => 'This is the tooltip text on a link in the sidebar that opens a wizard to edit interlanguage links.',
 	'wikibase-linkitem-addlinks' => 'Link in the sidebar asking to add language links and link the current page with pages on other sites. Only visible in case the current page has no langlinks.
 {{Identical|Add link}}',
 	'wikibase-linkitem-alreadylinked' => 'Tells that the page which the user wanted to link with the current one is already attached to an item on the central data repository. That item already links to an article on this site while items can only have one page per site attached.
@@ -230,6 +231,13 @@ $messages['ast'] = array(
 	'wikibase-editlinkstitle' => "Editar los enllaces d'interllingua",
 );
 
+/** Bashkir (башҡортса)
+ * @author Comp1089
+ */
+$messages['ba'] = array(
+	'wikibase-editlinks' => 'Һылтанмаларҙы төҙәт',
+);
+
 /** Belarusian (беларуская)
  * @author Чаховіч Уладзіслаў
  */
@@ -277,7 +285,7 @@ $messages['be-tarask'] = array(
 	'wikibase-comment-linked' => 'Аб’ект Вікізьвестак быў злучаны з гэтай старонкай.',
 	'wikibase-comment-unlink' => 'Гэтая старонка была адлучаная ад аб’екта Вікізьвестак. Моўныя спасылкі выдаленыя.',
 	'wikibase-comment-restore' => 'Выдаленьне злучанага аб’екта Вікізьвестак скасавана. Моўныя спасылкі адноўленыя.',
-	'wikibase-comment-update' => 'Моўныя спасылкі абноўленыя.',
+	'wikibase-comment-update' => 'Моўныя спасылкі абноўленыя.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Дададзеная моўная спасылка: $1',
 	'wikibase-comment-sitelink-change' => 'Моўная спасылка зьмененая з $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Моўная спасылка выдаленая: $1',
@@ -329,22 +337,24 @@ $messages['bg'] = array(
 );
 
 /** Bengali (বাংলা)
+ * @author Bellayet
  * @author Leemon2010
  * @author Sankarshan
  */
 $messages['bn'] = array(
 	'wikibase-after-page-move' => 'এছাড়া আপনি স্থানান্তর করা পাতাতে ভাষার লিংক বজায় রাখার জন্য সংশ্লিষ্ট উইকিউপাত্তের আইটেমটি [$1 হালনাগাদ] করতে পারেন।',
-	'wikibase-comment-update' => 'ভাষার লিংক হালনাগাদ হয়েছে।',
+	'wikibase-comment-update' => 'ভাষার সংযোগ হালনাগাদ হয়েছে।', # Fuzzy
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|পরিবর্তন|পরিবর্তনসমূহ}}',
+	'wikibase-editlinks' => 'সংযোগ সম্পাদনা',
 	'wikibase-editlinkstitle' => 'আন্তঃভাষার লিংকগুলি সম্পাদনা করুন',
-	'wikibase-linkitem-addlinks' => 'লিঙ্কগুলি জুড়ুন',
+	'wikibase-linkitem-addlinks' => 'সংযোগ যোগ',
 	'wikibase-linkitem-title' => 'পাতার সাথে লিংক',
 	'wikibase-linkitem-linkpage' => 'পাতার সাথে লিংক',
 	'wikibase-linkitem-input-site' => 'ভাষা:',
 	'wikibase-linkitem-input-page' => 'পাতা:',
 	'wikibase-linkitem-invalidsite' => 'অজানা বা অবৈধ সাইট নির্বাচন করা হয়েছে',
 	'wikibase-linkitem-confirmitem-button' => 'নিশ্চিত করুন',
-	'wikibase-linkitem-not-loggedin-title' => 'আপনার লগ ইন করা প্রয়োজন',
+	'wikibase-linkitem-not-loggedin-title' => 'আপনার লগইন করা প্রয়োজন',
 	'wikibase-rc-hide-wikidata' => '$1 উইকিউপাত্ত',
 	'wikibase-rc-show-wikidata-pref' => 'উইকিউপাত্তের সম্পাদনাগুলো সাম্প্রতিক পরিবর্তনে দেখানো হোক',
 	'wikibase-watchlist-show-changes-pref' => 'উইকিউপাত্তের সম্পাদনাগুলো নজরতালিকায় দেখাও',
@@ -432,7 +442,7 @@ $messages['ckb'] = array(
 	'wikibase-comment-linked' => 'بەندێکی ویکیدراوە بەم پەڕەیە بەستەر دراوە.',
 	'wikibase-comment-unlink' => 'ئەم پەڕەیە بە بەندی ویکیدراوە بەستەر نەدراوە. بەستەرەکانی زمان لابران.',
 	'wikibase-comment-restore' => 'بەندی ویکیدراوەی پەیوەندیدار گەڕایەوە. بەستەرەکانی زمان ھێنرایەوە.',
-	'wikibase-comment-update' => 'بەستەرەکانی زمان نوێ کرایەوە.',
+	'wikibase-comment-update' => 'بەستەرەکانی زمان نوێ کرایەوە.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'بەستەری زمانی زیادکراو: $1',
 	'wikibase-comment-sitelink-change' => 'بەستەری زمان لە $1 گۆڕدرا بۆ $2',
 	'wikibase-comment-sitelink-remove' => 'بەستەری زمانی سڕدراو: $1',
@@ -494,6 +504,34 @@ $messages['cu'] = array(
 	'wikibase-editlinks' => 'исправи съвѧꙁи',
 );
 
+/** Welsh (Cymraeg)
+ * @author Lloffiwr
+ */
+$messages['cy'] = array(
+	'wikibase-after-page-move' => "Gallwch [$1 ddiweddaru]'r eitem berthnasol ar Wikidata er mwyn cynnal y cysylltiadau rhwng ieithoedd ar y dudalen a symudwyd.",
+	'wikibase-comment-linked' => "Cysylltwyd eitem Wikidata â'r dudalen hon.",
+	'wikibase-comment-update' => 'Diweddarwyd y cysylltau rhwng ieithoedd.', # Fuzzy
+	'wikibase-comment-sitelink-add' => 'Ychwanegwyd y cyswllt rhwng ieithoedd $1',
+	'wikibase-comment-sitelink-change' => 'Newidiwyd y cyswllt rhwng ieithoedd o $1 i $2',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|newid}}',
+	'wikibase-editlinks' => 'Golygu cysylltau',
+	'wikibase-editlinkstitle' => 'Golygu cysylltau rhyngwici rhwng ieithoedd',
+	'wikibase-linkitem-addlinks' => 'Ychwanegu cysylltau',
+	'wikibase-linkitem-alreadylinked' => "Mae'r dudalen yr ydych am gysylltu â hi eisoes wedi ei chysylltu ag [$1 eitem] ar y cof data canolog, a honno'n cysylltu â'r dudalen $2 ar y wefan hon. Dim ond un dudalen y wici sy'n gallu cael ei chysylltu ag eitem. Dewiswch dudalen arall i gysylltu â hi.",
+	'wikibase-linkitem-title' => 'Cysylltu â thudalen',
+	'wikibase-linkitem-linkpage' => "Cysyllter â'r dudalen",
+	'wikibase-linkitem-input-site' => 'Iaith:',
+	'wikibase-linkitem-input-page' => 'Tudalen:',
+	'wikibase-linkitem-invalidsite' => 'Dewiswyd gwefan anhysbys neu annilys',
+	'wikibase-linkitem-confirmitem-button' => 'Cadarnhaer',
+	'wikibase-linkitem-not-loggedin-title' => 'Rhaid mewngofnodi i barhau',
+	'wikibase-property-notfound' => "Ni ddaethpwyd o hyd i'r nodwedd $1.",
+	'wikibase-rc-hide-wikidata' => '$1 y golygiadau ar Wiciddata',
+	'wikibase-rc-show-wikidata-pref' => 'Dangos golygiadau i Wiciddata ymhlith y newidiadau diweddar',
+	'wikibase-watchlist-show-changes-pref' => 'Dangos golygiadau Wiciddata ar eich rhestr wylio',
+	'wikibase-error-invalid-entity-id' => "Mae'r ID a roddwyd yn anhysbys i'r system. Defnyddiwch ID dilys i'r endid data.",
+);
+
 /** Danish (dansk)
  * @author Christian List
  * @author Hede2000
@@ -507,7 +545,7 @@ $messages['da'] = array(
 	'wikibase-comment-linked' => 'Et Wikidata-emne er blevet knyttet til denne side.',
 	'wikibase-comment-unlink' => 'Denne side er ikke længere linket fra et Wikidata-emne. Sproglinks fjernet.',
 	'wikibase-comment-restore' => 'Det tilknyttede Wikidata-emne er genskabt. Sproglinks gendannet.',
-	'wikibase-comment-update' => 'Sprog-link opdateret.',
+	'wikibase-comment-update' => 'Sprog-link opdateret.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Sprog-link tilføjet: $1',
 	'wikibase-comment-sitelink-change' => 'Sprog-link ændret fra $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Sprog-link fjernet: $1',
@@ -550,7 +588,7 @@ $messages['de'] = array(
 	'wikibase-comment-linked' => 'Ein Wikidata-Objekt wurde mit dieser Seite verknüpft.',
 	'wikibase-comment-unlink' => 'Diese Seite wurde vom Wikidata-Objekt entlinkt. Sprachlinks wurden entfernt.',
 	'wikibase-comment-restore' => 'Zugeordnetes Wikidata-Objekt wurde wiederhergestellt. Sprachlinks wurden wiederhergestellt.',
-	'wikibase-comment-update' => 'Sprachlinks wurden aktualisiert',
+	'wikibase-comment-update' => 'Das Wikidata-Objekt wurde geändert',
 	'wikibase-comment-sitelink-add' => 'Sprachlink hinzugefügt: $1',
 	'wikibase-comment-sitelink-change' => 'Sprachlink $1 geändert in $2',
 	'wikibase-comment-sitelink-remove' => 'Sprachlink entfernt: $1',
@@ -731,7 +769,7 @@ $messages['es'] = array(
  * @author Pikne
  */
 $messages['et'] = array(
-	'wikibase-comment-update' => 'Keelelingid uuendatud.',
+	'wikibase-comment-update' => 'Keelelingid uuendatud.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Keelelink lisatud: $1',
 	'wikibase-comment-sitelink-change' => 'Keelelink $1 muudetud kujule $2',
 	'wikibase-comment-sitelink-remove' => 'Keelelink eemaldatud: $1',
@@ -743,8 +781,11 @@ $messages['et'] = array(
 	'wikibase-linkitem-input-site' => 'Keel:',
 	'wikibase-linkitem-input-page' => 'Lehekülg:',
 	'wikibase-linkitem-invalidsite' => 'Valitud tundmatu või vigane võrgukoht',
+	'wikibase-linkitem-confirmitem-button' => 'Kinnita',
 	'wikibase-linkitem-not-loggedin-title' => 'Pead olema sisse loginud',
 	'wikibase-linkitem-not-loggedin' => 'Et kasutada seda funktsiooni, pead olema sisse loginud siia vikisse ja [$1 kesksesse andmehoidlasse].',
+	'wikibase-property-notfound' => 'Omadust $1 ei leitud.',
+	'wikibase-error-invalid-entity-id' => 'Sisestatud identifikaator on süsteemis tundmatu. Palun sisesta sobiv olemi identifikaator.',
 );
 
 /** Persian (فارسی)
@@ -792,6 +833,7 @@ $messages['fa'] = array(
 /** Finnish (suomi)
  * @author Harriv
  * @author Nike
+ * @author Silvonen
  * @author Stryn
  * @author VezonThunder
  */
@@ -802,7 +844,7 @@ $messages['fi'] = array(
 	'wikibase-comment-linked' => 'Wikidata-kohde liitettiin tähän sivuun.',
 	'wikibase-comment-unlink' => 'Tämä sivu ei ole enää liitettynä Wikidata-kohteeseen. Kielilinkit poistettu.',
 	'wikibase-comment-restore' => 'Sivuun liittyvä Wikidata-kohde palautettu. Kielilinkit palautettu.',
-	'wikibase-comment-update' => 'Kielilinkit päivitetty.',
+	'wikibase-comment-update' => 'Kielilinkit päivitetty.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Kielilinkki lisätty: $1',
 	'wikibase-comment-sitelink-change' => 'Kielilinkki $1 muutettu muotoon $2',
 	'wikibase-comment-sitelink-remove' => 'Kielilinkki poistettu: $1',
@@ -814,18 +856,23 @@ $messages['fi'] = array(
 	'wikibase-linkitem-failure' => 'Annettua sivua linkitettäessä tapahtui tuntematon virhe.',
 	'wikibase-linkitem-title' => 'Linkitä sivulle',
 	'wikibase-linkitem-linkpage' => 'Linkitä sivulle',
+	'wikibase-linkitem-selectlink' => 'Valitse sivusto ja sivu, johon haluat linkittää tämän sivun.',
 	'wikibase-linkitem-input-site' => 'Kieli',
 	'wikibase-linkitem-input-page' => 'Sivu',
+	'wikibase-linkitem-invalidsite' => 'Tuntematon tai virheellinen sivusto valittu',
 	'wikibase-linkitem-confirmitem-button' => 'Vahvista',
 	'wikibase-linkitem-not-loggedin-title' => 'Sinun täytyy olla sisäänkirjautuneena',
+	'wikibase-property-notfound' => 'Ominaisuutta $1 ei löydy.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
+	'wikibase-watchlist-show-changes-pref' => 'Näytä Wikidata-muokkaukset tarkkailulistallasi',
 );
 
 /** French (français)
  * @author Crochet.david
  * @author Gomoko
  * @author Ltrlg
+ * @author Peter17
  * @author Wyz
  */
 $messages['fr'] = array(
@@ -835,7 +882,7 @@ $messages['fr'] = array(
 	'wikibase-comment-linked' => 'Un élément Wikidata a été lié à cette page.',
 	'wikibase-comment-unlink' => 'Cette page a été dissociée de l’élément Wikidata. Liens de langue supprimés.',
 	'wikibase-comment-restore' => 'Suppression de l’élément Wikidata associé annulée. Liens de langue rétablis.',
-	'wikibase-comment-update' => 'Liens de langue mis à jour.',
+	'wikibase-comment-update' => "L'élément Wikidata a changé",
 	'wikibase-comment-sitelink-add' => 'Lien de langue ajouté : $1',
 	'wikibase-comment-sitelink-change' => 'Lien de langue modifié de $1 à $2',
 	'wikibase-comment-sitelink-remove' => 'Lien de langue supprimé : $1',
@@ -890,7 +937,7 @@ $messages['gl'] = array(
 	'wikibase-comment-linked' => 'Esta páxina foi ligada desde un elemento do Wikidata.',
 	'wikibase-comment-unlink' => 'Esta páxina foi desligada do elemento asociado do Wikidata. Elimináronse as ligazóns lingüísticas.',
 	'wikibase-comment-restore' => 'Restaurouse un elemento asociado do Wikidata. Recuperáronse as ligazóns lingüísticas.',
-	'wikibase-comment-update' => 'Actualizáronse as ligazóns lingüísticas.',
+	'wikibase-comment-update' => 'Actualizáronse as ligazóns lingüísticas.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Engadiuse unha ligazón lingüística: $1',
 	'wikibase-comment-sitelink-change' => 'Cambiouse unha ligazón lingüística de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Eliminouse unha ligazón lingüística: $1',
@@ -1145,7 +1192,7 @@ $messages['ilo'] = array(
 	'wikibase-comment-linked' => 'Ti Wikidata a banag ket naisilpon iti daytoy a panid.',
 	'wikibase-comment-unlink' => 'Daytoy a panid ket naikkat ti silpona manipud ti Wikidata a banag. Dagiti silpo ti pagsasao ket naikkaten.',
 	'wikibase-comment-restore' => 'Ti mainaig a banag ti Wikidata ket naisubli ti pannakaikkatna. Dagiti silpo ti pagsasao ket naipasubli.',
-	'wikibase-comment-update' => 'Naipabaro dagiti silpo ti pagsasao.',
+	'wikibase-comment-update' => 'Naipabaro dagiti silpo ti pagsasao.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Nanayonan ti silpo ti pagsasao: $1',
 	'wikibase-comment-sitelink-change' => 'Ti silpo ti pagsasao ket nasukatan manipud ti $1 iti $2',
 	'wikibase-comment-sitelink-remove' => 'Naikkat ti silpo ti pagsasao: $1',
@@ -1186,7 +1233,7 @@ $messages['is'] = array(
 	'wikibase-comment-linked' => 'Wikidata hlutur hefur tengst þessari síðu.',
 	'wikibase-comment-unlink' => 'Þessi síða hefur verið aftengd Wikidata hlut. Tungumálatenglar fjarlægðir.',
 	'wikibase-comment-restore' => 'Tengdur Wikidata hlutur endurvakinn. Tungumálatenglar endurvaktir.',
-	'wikibase-comment-update' => 'Vefsvæðis tenglar uppfærðir.',
+	'wikibase-comment-update' => 'Vefsvæðis tenglar uppfærðir.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Tungumálatengli bætt við: $1',
 	'wikibase-comment-sitelink-change' => 'Tungumálatengli breytt frá $1 í $2',
 	'wikibase-comment-sitelink-remove' => 'Tungumálatengill fjarlægður: $1',
@@ -1229,7 +1276,7 @@ $messages['it'] = array(
 	'wikibase-comment-linked' => 'Un elemento di Wikidata è stato collegato a questa pagina.',
 	'wikibase-comment-unlink' => "Questa pagina è stata scollegata dall'elemento di Wikidata. I collegamenti interlinguistici sono stati rimossi.",
 	'wikibase-comment-restore' => "L'elemento di Wikidata associato è stato recuperato. I collegamenti interlinguistici sono stati ripristinati.",
-	'wikibase-comment-update' => 'Collegamento linguistico aggiornato.',
+	'wikibase-comment-update' => 'Collegamento linguistico aggiornato.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Collegamento linguistico aggiunto: $1',
 	'wikibase-comment-sitelink-change' => 'Collegamento linguistico modificato da $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Collegamento linguistico rimosso: $1',
@@ -1252,8 +1299,11 @@ $messages['it'] = array(
 	'wikibase-linkitem-not-loggedin' => "Devi aver effettuato l'accesso su questo wiki e nell'[$1 archivio dati centralizzato] per utilizzare questa funzionalità.",
 	'wikibase-linkitem-success-create' => "Le pagine sono state collegate correttamente. Puoi trovare l'elemento appena creato contenente i link nel nostro [$1 archivio dati centralizzato].",
 	'wikibase-linkitem-success-link' => "Le pagine sono state collegate correttamente. Puoi trovare l'elemento contenente i link nel nostro [$1 archivio dati centralizzato].",
+	'wikibase-property-notfound' => 'Proprietà $1 non trovata.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostra le modifiche di Wikidata nelle ultime modifiche',
+	'wikibase-watchlist-show-changes-pref' => 'Mostra le modifiche su Wikidata nella tua lista degli osservati speciali',
+	'wikibase-error-invalid-entity-id' => "L'ID specificato è sconosciuto al sistema. Utilizza un ID di entità valido.",
 );
 
 /** Japanese (日本語)
@@ -1267,7 +1317,7 @@ $messages['ja'] = array(
 	'wikibase-comment-linked' => 'ウィキデータ項目をこのページにリンクしました。',
 	'wikibase-comment-unlink' => 'このページをウィキデータ項目からリンク解除しました。言語リンクを除去しました。',
 	'wikibase-comment-restore' => '関連付けられたウィキデータ項目を復元しました。言語リンクを復元しました。',
-	'wikibase-comment-update' => '言語リンクを更新しました。',
+	'wikibase-comment-update' => 'ウィキデータ項目を更新しました',
 	'wikibase-comment-sitelink-add' => '言語リンクを追加: $1',
 	'wikibase-comment-sitelink-change' => '言語リンクを $1 から $2 に変更',
 	'wikibase-comment-sitelink-remove' => '言語リンクを除去: $1',
@@ -1301,7 +1351,7 @@ $messages['ja'] = array(
  * @author David1010
  */
 $messages['ka'] = array(
-	'wikibase-comment-update' => 'ენათშორისი ბმულები განახლდა.',
+	'wikibase-comment-update' => 'ვიკიმონაცემების ელემენტი შეცვლილია',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|ცვლილება|ცვლილება}}',
 	'wikibase-editlinks' => 'ბმულების რედაქტირება',
 	'wikibase-editlinkstitle' => 'ენათშორისი ბმულების რედაქტირება',
@@ -1324,7 +1374,7 @@ $messages['ko'] = array(
 	'wikibase-comment-linked' => '위키데이터 항목을 이 문서에 연결했습니다.',
 	'wikibase-comment-unlink' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다.',
 	'wikibase-comment-restore' => '연결한 위키데이터 항목을 복구했습니다. 언어 링크를 복구했습니다.',
-	'wikibase-comment-update' => '언어 링크를 업데이트했습니다.',
+	'wikibase-comment-update' => '언어 링크를 업데이트했습니다.', # Fuzzy
 	'wikibase-comment-sitelink-add' => '언어 링크를 추가함: $1',
 	'wikibase-comment-sitelink-change' => '언어 링크를 $1에서 $2로 바꿈',
 	'wikibase-comment-sitelink-remove' => '언어 링크를 제거함: $1',
@@ -1353,7 +1403,7 @@ $messages['ko'] = array(
 	'wikibase-rc-hide-wikidata' => '위키데이터 $1',
 	'wikibase-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
 	'wikibase-watchlist-show-changes-pref' => '주시문서 목록에서 위키데이터 편집을 보기',
-	'wikibase-error-invalid-entity-id' => '입력한 ID는 시스템에서 알 수 없습니다. 올바른 항목 ID를 사용하세요.',
+	'wikibase-error-invalid-entity-id' => '입력한 ID는 시스템에서 알 수 없습니다. 올바른 개체 ID를 사용하세요.',
 );
 
 /** Karachay-Balkar (къарачай-малкъар)
@@ -1458,7 +1508,7 @@ $messages['lb'] = array(
 	'wikibase-comment-linked' => 'E Wikidata-Element gouf mat dëser Säit verlinkt.',
 	'wikibase-comment-unlink' => 'Dës Säit gouf vum Wikidata-Element entlinkt. Interwiki-Linke goufen ewechgeholl.',
 	'wikibase-comment-restore' => 'Associéiert Wikidata-Element restauréiert. Sproochlinken restauréiert.',
-	'wikibase-comment-update' => 'Sproochlinke sinn aktualiséiert',
+	'wikibase-comment-update' => 'Sproochlinke sinn aktualiséiert', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Sproochlink derbäigesat: $1',
 	'wikibase-comment-sitelink-change' => 'Sproochlink vun $1 op $2 geännert',
 	'wikibase-comment-sitelink-remove' => 'Sproochlink ewechgeholl: $1',
@@ -1467,6 +1517,7 @@ $messages['lb'] = array(
 	'wikibase-editlinkstitle' => 'Interwiki-Linken änneren',
 	'wikibase-linkitem-addlinks' => 'Link derbäisetzen',
 	'wikibase-linkitem-close' => "Maacht den Dialog zou a luet d'Säit nei",
+	'wikibase-linkitem-failure' => 'En onbekannte Feeler ass beim Versuch fir déi Säit déi Dir uginn hutt ze verlinken.',
 	'wikibase-linkitem-title' => 'Mat der Säit verlinken',
 	'wikibase-linkitem-linkpage' => 'Mat der Säit verlinken',
 	'wikibase-linkitem-input-site' => 'Sprooch:',
@@ -1474,6 +1525,7 @@ $messages['lb'] = array(
 	'wikibase-linkitem-invalidsite' => 'Onbekannten oder net valabele Site erausgesicht',
 	'wikibase-linkitem-confirmitem-button' => 'Confirméieren',
 	'wikibase-linkitem-not-loggedin-title' => 'Dir musst ageloggt sinn',
+	'wikibase-linkitem-not-loggedin' => 'Dir musst op dëser Wiki an am [$1 zentralen Daterepertoire] ageloggt sinn fir dës Fonctioun ze benotzen.',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Ännerungen an de rezenten Ännerunge weisen',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Ännerungen an Ärer Iwwerwaachungslëscht weisen',
@@ -1516,7 +1568,7 @@ $messages['mk'] = array(
 	'wikibase-comment-linked' => 'Со страницава е поврзан предмет од Википодатоците.',
 	'wikibase-comment-unlink' => 'На оваа страница ѝ е раскината врската со елементот од Википодатоците. Јазичните врски се отстранети.',
 	'wikibase-comment-restore' => 'Здружениот предмет од Википодатоците е повратен. Јазичните врски се повратени.',
-	'wikibase-comment-update' => 'Јазичните врски се подновени',
+	'wikibase-comment-update' => 'Јазичните врски се подновени', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Додадена јазична врска: $1',
 	'wikibase-comment-sitelink-change' => 'Изменета јазична врска од $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Отстранета јазична врска: $1',
@@ -1558,13 +1610,16 @@ $messages['ml'] = array(
 	'wikibase-comment-linked' => 'ഒരു വിക്കിഡേറ്റ ഇനം ഈ താളിൽ കണ്ണി ചേർത്തിരിക്കുന്നു.',
 	'wikibase-comment-unlink' => 'ഈ താൾ വിക്കിഡേറ്റാ ഇനത്തിൽ നിന്നും കണ്ണി മാറ്റിയിരിക്കുന്നു. ഭാഷാ കണ്ണികൾ നീക്കം ചെയ്തു.',
 	'wikibase-comment-restore' => 'ബന്ധപ്പെട്ട വിക്കിഡേറ്റ ഇനം പുനഃസ്ഥാപിച്ചിരിക്കുന്നു. ഭാഷാ കണ്ണികൾ പുനഃസ്ഥാപിച്ചു.',
-	'wikibase-comment-update' => 'ഭാഷാ കണ്ണികൾ പുതുക്കപ്പെട്ടു.',
+	'wikibase-comment-update' => 'ഭാഷാ കണ്ണികൾ പുതുക്കപ്പെട്ടു.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'ഭാഷാ കണ്ണി ചേർത്തു: $1',
 	'wikibase-comment-sitelink-change' => 'ഭാഷാ കണ്ണി $1 എന്നതിൽ നിന്ന് $2 എന്നാക്കി മാറ്റിയിരിക്കുന്നു',
 	'wikibase-comment-sitelink-remove' => 'ഭാഷാ കണ്ണി നീക്കം ചെയ്തു: $1',
+	'wikibase-comment-multi' => '{{PLURAL:$1|ഒരു മാറ്റം|$1 മാറ്റങ്ങൾ}}',
 	'wikibase-editlinks' => 'കണ്ണികൾ തിരുത്തുക',
 	'wikibase-editlinkstitle' => 'അന്തർഭാഷാ കണ്ണികൾ തിരുത്തുക',
 	'wikibase-linkitem-addlinks' => 'കണ്ണികൾ ചേർക്കുക',
+	'wikibase-linkitem-title' => 'താളുമായി കണ്ണി ചേർക്കുക',
+	'wikibase-linkitem-linkpage' => 'താളുമായി കണ്ണി ചേർക്കുക',
 	'wikibase-linkitem-input-site' => 'ഭാഷ:',
 	'wikibase-linkitem-input-page' => 'താൾ:',
 	'wikibase-linkitem-invalidsite' => 'അപരിചിതമോ അസാധുവോ ആയ സൈറ്റാണ് തിരഞ്ഞെടുത്തത്',
@@ -1680,7 +1735,7 @@ $messages['nl'] = array(
 	'wikibase-comment-linked' => 'Er is een Wikidataitem gekoppeld aan deze pagina.',
 	'wikibase-comment-unlink' => 'Deze pagina is ontkoppeld van het Wikidataitem. De taalkoppelingen zijn verwijderd.',
 	'wikibase-comment-restore' => 'Het gekoppelde Wikidataitem is teruggeplaatst. De taalkoppelingen zijn hersteld.',
-	'wikibase-comment-update' => 'De taalkoppelingen zijn bijgewerkt.',
+	'wikibase-comment-update' => 'De taalkoppelingen zijn bijgewerkt.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Taalkoppeling toegevoegd: $1',
 	'wikibase-comment-sitelink-change' => 'Taalkoppeling gewijzigd van $1 naar $2',
 	'wikibase-comment-sitelink-remove' => 'Taalkoppeling verwijderd: $1',
@@ -1719,7 +1774,7 @@ $messages['nn'] = array(
 	'wikibase-comment-linked' => 'Eit Wikidata-sett har vorte lenkja til sida.',
 	'wikibase-comment-unlink' => 'Lenkinga til sida har vorte fjerna frå Wikidata-settet. Språklenkjer fjerna.',
 	'wikibase-comment-restore' => 'Tilknytt Wikidata-sett attoppretta. Språklenkjer lagde inn att.',
-	'wikibase-comment-update' => 'Språklenkjer oppdaterte.',
+	'wikibase-comment-update' => 'Språklenkjer oppdaterte.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Språklenkje lagd til: $1',
 	'wikibase-comment-sitelink-change' => 'Språklenkje endra frå $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Språklenkje fjerna: $1',
@@ -1741,6 +1796,7 @@ $messages['nn'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Du lyt vera innlogga på denne wikien og på det [$1 sentrale datalageret] for å nytta denne funksjonen.',
 	'wikibase-linkitem-success-create' => 'Sidene vart lenkja til kvarandre. Du kan finna det nyoppretta objektet som inneheld lenkjene i det [$1 sentrale datalageret] vårt.',
 	'wikibase-linkitem-success-link' => 'Sidene vart lenkja til kvarandre. Du kan finna objektet som inneheld lenkjene i det [$1 sentrale datalageret] vårt.',
+	'wikibase-property-notfound' => 'Eigenskapen $1 vart ikkje funnen.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata-endringar i siste endringane',
 );
@@ -1759,7 +1815,7 @@ $messages['pl'] = array(
 	'wikibase-comment-linked' => 'Element Wikidata był powiązany z tą stroną.',
 	'wikibase-comment-unlink' => 'Zostało zerwane powiązanie elementu Wikidata z tą stroną. Linki do innych wersji językowych usunięte.',
 	'wikibase-comment-restore' => 'Powiązany element Wikidata odtworzony. Linki do innych wersji językowych przywrócone.',
-	'wikibase-comment-update' => 'Linki do innych wersji językowych zaktualizowane.',
+	'wikibase-comment-update' => 'Linki do innych wersji językowych zaktualizowane.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Łącze języka dodane: $1',
 	'wikibase-comment-sitelink-change' => 'Łącze języka zmienione z $1 na $2',
 	'wikibase-comment-sitelink-remove' => 'Łącze języka usunięte: $1',
@@ -1792,12 +1848,12 @@ $messages['pl'] = array(
  */
 $messages['pms'] = array(
 	'wikibase-client-desc' => "Client për l'estension Wikibase",
-	'wikibase-after-page-move' => "It peule ëdcò [$1 modifiché] j'element Wikidata associà për goerné le ëd lenga an sla pàgine tramudà.",
+	'wikibase-after-page-move' => "It peule ëdcò [$1 modifiché] j'element Wikidata associà për goerné ij colegament antërwiki an sla pàgina tramudà.",
 	'wikibase-comment-remove' => 'Element Wikidata associà scancelà. Liura ëd lenga gavà.',
 	'wikibase-comment-linked' => "N'element Wikidata a l'é stàit colegà a sta pàgina.",
 	'wikibase-comment-unlink' => "Sta pàgina a l'é stàita dëscolegà da l'element Wikidata. Liure ëd lenga gavà.",
 	'wikibase-comment-restore' => 'Element associà Wikidata ripristinà. Liure ëd lenga ripristinà.',
-	'wikibase-comment-update' => 'Liure ëd lenga agiornà.',
+	'wikibase-comment-update' => 'Liure ëd lenga agiornà.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Liure ëd lenga giontà: $1',
 	'wikibase-comment-sitelink-change' => 'Liure ëd lenga modificà da $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Liure ëd lenga gavà: $1',
@@ -1857,6 +1913,7 @@ $messages['pt-br'] = array(
  * @author AlimanRuna
  */
 $messages['qu'] = array(
+	'wikibase-after-page-move' => "T'inkisqa Wikidata qallawatapas [$1 musuqchaytam] atinki astasqa p'anqapi rimay t'inkikunata hat'allinaykipaq.",
 	'wikibase-editlinks' => "T'inkikunata llamk'apuy",
 	'wikibase-editlinkstitle' => "Wikipura t'inkikunata llamk'apuy",
 );
@@ -1874,7 +1931,7 @@ $messages['ro'] = array(
  * @author Joetaras
  */
 $messages['roa-tara'] = array(
-	'wikibase-comment-update' => "Collegaminde 'a lènghe aggiornate.",
+	'wikibase-comment-update' => "Collegaminde 'a lènghe aggiornate.", # Fuzzy
 	'wikibase-editlinks' => 'Cange le collegaminde',
 	'wikibase-linkitem-title' => "Collegate cu 'a pàgene",
 	'wikibase-linkitem-linkpage' => "Collegate cu 'a pàgene",
@@ -1895,7 +1952,7 @@ $messages['ru'] = array(
 	'wikibase-comment-linked' => 'Элемент Викиданных был связан с данной страницей.',
 	'wikibase-comment-unlink' => 'Связь этой страницы с элементом Викиданных была разорвана. Языковые ссылки удалены.',
 	'wikibase-comment-restore' => 'Удаление связанного элемента Викиданных отменено. Языковые ссылки восстановлены.',
-	'wikibase-comment-update' => 'Языковые ссылки обновлены.',
+	'wikibase-comment-update' => 'Языковые ссылки обновлены.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Интервики-ссылка добавлена: $1.',
 	'wikibase-comment-sitelink-change' => 'Интервики-ссылка изменена с $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Интервики-ссылка удалена: $1',
@@ -2103,6 +2160,7 @@ $messages['vec'] = array(
 );
 
 /** Vietnamese (Tiếng Việt)
+ * @author Cheers!
  * @author Minh Nguyen
  */
 $messages['vi'] = array(
@@ -2112,7 +2170,7 @@ $messages['vi'] = array(
 	'wikibase-comment-linked' => 'Một khoản mục Wikidata đã được liên kết đến trang này.',
 	'wikibase-comment-unlink' => 'Đã gỡ liên kết đến khoản mục Wikidata khỏi trang này. Đã dời các liên kết ngôn ngữ.',
 	'wikibase-comment-restore' => 'Đã phục hồi khoản mục liên kết Wikidata. Đã phục hồi các liên kết ngôn ngữ.',
-	'wikibase-comment-update' => 'Đã cập nhật các liên kết ngôn ngữ.',
+	'wikibase-comment-update' => 'Đã cập nhật các liên kết ngôn ngữ.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Đã thêm liên kết ngôn ngữ: $1',
 	'wikibase-comment-sitelink-change' => 'Đã đổi liên kết ngôn ngữ từ $1 thành $2',
 	'wikibase-comment-sitelink-remove' => 'Đã loại bỏ liên kết ngôn ngữ: $1',
@@ -2139,7 +2197,8 @@ $messages['vi'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase chưa hỗ trợ kiểu của thuộc tính $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Hiện các sửa đổi Wikidata trong thay đổi gần đây',
-	'wikibase-watchlist-show-changes-pref' => 'Hiện các sửa đổi tại Wikidata trong danh sách theo dõi', # Fuzzy
+	'wikibase-watchlist-show-changes-pref' => 'Hiện các sửa đổi tại Wikidata trong danh sách theo dõi của bạn',
+	'wikibase-error-invalid-entity-id' => 'ID nhập vào không có trên hệ thống. Xin vui lòng sử dụng ID đã được cấp.',
 );
 
 /** Yiddish (ייִדיש)

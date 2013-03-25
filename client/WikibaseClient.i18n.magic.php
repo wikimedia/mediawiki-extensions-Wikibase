@@ -73,4 +73,5 @@ $magicWords['uk'] = array(
 /** Vietnamese (Tiếng Việt) */
 $magicWords['vi'] = array(
 	'noexternallanglinks' => array( 0, 'khôngliênkếtngônngữngoài' ),
+	'property' => array( 0, 'thuộctính' ),
 );
