@@ -509,6 +509,7 @@ abstract class EntityView extends \ContextSource {
 					$additionalCssClasses,
 					$claim->getGuid(),
 					$mainSnakHtml,
+					'', // TODO: Qualifiers
 					$this->getHtmlForEditSection( $entity, $lang, '', 'span' ), // TODO: add link to SpecialPage
 					'', // TODO: References heading
 					'' // TODO: References
