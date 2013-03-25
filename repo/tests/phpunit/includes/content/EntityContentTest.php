@@ -122,7 +122,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testSaveFlags() {
-		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+		\Wikibase\StoreFactory::getStore()->getTermIndex()->clear();
 
 		$entityContent = $this->newEmpty();
 
@@ -163,7 +163,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testRepeatedSave() {
-		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+		\Wikibase\StoreFactory::getStore()->getTermIndex()->clear();
 
 		$entityContent = $this->newEmpty();
 

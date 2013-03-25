@@ -34,7 +34,7 @@ class LabelDescriptionDuplicateDetector {
 
 	/**
 	 * Looks for label+description violations in the provided Entity using
-	 * the provided TermCache. If there is no such conflict, an empty array is returned.
+	 * the provided TermIndex. If there is no such conflict, an empty array is returned.
 	 * If there is, an array with first label and then description is returned,
 	 * both objects being a Term.
 	 *
@@ -83,7 +83,7 @@ class LabelDescriptionDuplicateDetector {
 	}
 
 	/**
-	 * Looks for label+description violations in the provided Entity using the provided TermCache.
+	 * Looks for label+description violations in the provided Entity using the provided TermIndex.
 	 * If there is a conflict affected by the provided label and description diffs, a fatal error
 	 * will be added to the provided status. If both diffs are not provided, any conflict will
 	 * result in a fatal error being added.
@@ -92,7 +92,7 @@ class LabelDescriptionDuplicateDetector {
 	 *
 	 * @param Entity $entity The Entity for which to check if it has any non-unique label+description pairs
 	 * @param Status $status The status to which to add an error if there is a violation
-	 * @param TermCombinationMatchFinder $termCache The TermCache to use for conflict detection
+	 * @param TermCombinationMatchFinder $termCache The TermIndex to use for conflict detection
 	 * @param Diff|null $labelsDiff
 	 * @param Diff|null $descriptionDiff
 	 */

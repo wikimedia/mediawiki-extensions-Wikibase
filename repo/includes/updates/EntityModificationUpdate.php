@@ -73,7 +73,7 @@ class EntityModificationUpdate extends \DataUpdate {
 		$store = StoreFactory::getStore();
 		$entity = $this->content->getEntity();
 
-		$store->newTermCache()->saveTermsOfEntity( $entity );
+		$store->getTermIndex()->saveTermsOfEntity( $entity );
 		$this->doTypeSpecificStuff( $store, $entity );
 
 		/**

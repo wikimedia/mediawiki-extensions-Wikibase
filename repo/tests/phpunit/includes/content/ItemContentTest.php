@@ -60,7 +60,7 @@ class ItemContentTest extends EntityContentTest {
 			return;
 		}
 
-		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+		\Wikibase\StoreFactory::getStore()->getTermIndex()->clear();
 
 		$content = ItemContent::newEmpty();
 		$content->getItem()->setLabel( 'en', 'label' );

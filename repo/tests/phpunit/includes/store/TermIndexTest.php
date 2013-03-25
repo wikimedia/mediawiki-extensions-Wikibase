@@ -1,13 +1,13 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\TermCache;
+use Wikibase\TermIndex;
 use Wikibase\ItemContent;
 use Wikibase\Item;
 use Wikibase\Term;
 
 /**
- * Tests for the Wikibase\TermCache implementing classes.
+ * Base class for tests for calsses implementing Wikibase\TermIndex.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,28 +33,25 @@ use Wikibase\Term;
  * @group Wikibase
  * @group WikibaseStore
  * @group Database
- * @group TermCacheTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
+ * @author Daniel Kinzler
  */
-class TermCacheTest extends \MediaWikiTestCase {
-
-	public function instanceProvider() {
-		$instance = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newTermCache();
-
-		$instances = array( $instance );
-
-		return $this->arrayWrap( $instances );
-	}
+abstract class TermIndexTest extends \MediaWikiTestCase {
 
 	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param TermCache $lookup
+	 * @return \Wikibase\TermIndex
 	 */
-	public function testGetEntityIdsForLabel( TermCache $lookup ) {
+	public abstract function getTermIndex();
+
+	/**
+	 * @param TermIndex $lookup
+	 */
+	public function testGetEntityIdsForLabel() {
+		$lookup = $this->getTermIndex();
+
 		$item0 = Item::newEmpty();
 
 		$item0->setLabel( 'en', 'foobar' );
@@ -94,7 +91,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 		// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
 		if ( !defined( 'MW_PHPUNIT_TEST' )
 			|| wfGetDB( DB_MASTER )->getType() !== 'mysql'
-			|| get_class( $lookup ) !== 'Wikibase\TermSqlCache' ) {
+			|| get_class( $lookup ) !== 'Wikibase\TermSqlIndex' ) {
 
 			$ids = $lookup->getEntityIdsForLabel( 'foobar', 'en', 'foo bar baz' );
 			$this->assertInternalType( 'array', $ids );
@@ -113,12 +110,9 @@ class TermCacheTest extends \MediaWikiTestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param TermCache $lookup
-	 */
-	public function testTermExists( TermCache $lookup ) {
+	public function testTermExists() {
+		$lookup = $this->getTermIndex();
+
 		$item = Item::newEmpty();
 
 		$item->setLabel( 'en', 'foobarz' );
@@ -163,11 +157,11 @@ class TermCacheTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param TermCache $lookup
+	 * @fixme: this test is broken (and has been for a long time); will be fixed in a follow up.
 	 */
-	public function testGetMatchingTerms( TermCache $lookup ) {
+	public function testGetMatchingTerms() {
+		$lookup = $this->getTermIndex();
+
 		$item0 = Item::newEmpty();
 		$item0->setLabel( 'en', 'getmatchingterms-0' );
 
@@ -201,8 +195,6 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 		$actual = $lookup->getMatchingTerms( $terms );
 
-		$terms[$id1]->setLanguage( 'nl' );
-
 		$this->assertInternalType( 'array', $actual );
 		$this->assertEquals( 2, count( $actual ) );
 		
@@ -222,12 +214,9 @@ class TermCacheTest extends \MediaWikiTestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param TermCache $lookup
-	 */
-	public function testGetMatchingPrefixTerms( TermCache $lookup ) {
+	public function testGetMatchingPrefixTerms() {
+		$lookup = $this->getTermIndex();
+
 		$item0 = Item::newEmpty();
 		$item0->setLabel( 'en', 'prefix' );
 
@@ -298,12 +287,9 @@ class TermCacheTest extends \MediaWikiTestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param TermCache $lookup
-	 */
-	public function testDeleteTermsForEntity( TermCache $lookup ) {
+	public function testDeleteTermsForEntity() {
+		$lookup = $this->getTermIndex();
+
 		$item = Item::newEmpty();
 
 		$item->setLabel( 'en', 'abc' );
@@ -328,12 +314,9 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$this->assertTrue( !in_array( $content->getItem()->getId()->getNumericId(), $ids, true ) );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param TermCache $lookup
-	 */
-	public function testSaveTermsOfEntity( TermCache $lookup ) {
+	public function testSaveTermsOfEntity() {
+		$lookup = $this->getTermIndex();
+
 		$item = Item::newEmpty();
 		$item->setId( 568431314 );
 
@@ -418,15 +401,12 @@ class TermCacheTest extends \MediaWikiTestCase {
 		) );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param TermCache $lookup
-	 */
-	public function testGetMatchingTermCombination( TermCache $lookup ) {
+	public function testGetMatchingTermCombination() {
+		$lookup = $this->getTermIndex();
+
 		if ( defined( 'MW_PHPUNIT_TEST' )
 			&& wfGetDB( DB_MASTER )->getType() === 'mysql'
-			&& get_class( $lookup ) === 'Wikibase\TermSqlCache' ) {
+			&& get_class( $lookup ) === 'Wikibase\TermSqlIndex' ) {
 			// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
 			$this->assertTrue( true );
 			return;
@@ -479,12 +459,9 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$this->assertTrue( $actual === array() );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param TermCache $lookup
-	 */
-	public function testGetTermsOfEntity( TermCache $lookup ) {
+	public function testGetTermsOfEntity() {
+		$lookup = $this->getTermIndex();
+
 		$item = Item::newEmpty();
 		$item->setId( 568234314 );
 

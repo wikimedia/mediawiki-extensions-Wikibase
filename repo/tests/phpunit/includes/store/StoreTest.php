@@ -69,7 +69,7 @@ class StoreTest extends \MediaWikiTestCase {
 	 * @param Store $store
 	 */
 	public function testNewTermCache( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\TermCache', $store->newTermCache() );
+		$this->assertInstanceOf( '\Wikibase\TermIndex', $store->getTermIndex() );
 	}
 
 	/**

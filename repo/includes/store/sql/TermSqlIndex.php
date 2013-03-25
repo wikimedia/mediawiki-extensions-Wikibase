@@ -30,7 +30,7 @@ use Iterator, DatabaseBase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */
-class TermSqlCache implements TermCache {
+class TermSqlIndex implements TermIndex {
 
 	/**
 	 * @since 0.1
@@ -47,7 +47,7 @@ class TermSqlCache implements TermCache {
 	protected $tableName;
 
 	/**
-	 * Maps table fields to TermCache interface field names.
+	 * Maps table fields to TermIndex interface field names.
 	 *
 	 * @since 0.2
 	 *

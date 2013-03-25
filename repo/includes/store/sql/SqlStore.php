@@ -37,14 +37,32 @@ class SqlStore implements Store {
 	private $entityLookup = null;
 
 	/**
-	 * @see Store::newTermCache
+	 * @var TermIndex
+	 */
+	private $termIndex = null;
+
+	/**
+	 * @see Store::getTermIndex
 	 *
+	 * @since 0.4
+	 *
+	 * @return TermIndex
+	 */
+	public function getTermIndex() {
+		if ( !$this->termIndex ) {
+			$this->termIndex = $this->newTermIndex();
+		}
+
+		return $this->termIndex;
+	}
+
+	/**
 	 * @since 0.1
 	 *
-	 * @return TermCache
+	 * @return TermIndex
 	 */
-	public function newTermCache() {
-		return new TermSqlCache( 'wb_terms' );
+	protected function newTermIndex() {
+		return new TermSqlIndex( 'wb_terms' );
 	}
 
 	/**
@@ -54,7 +72,7 @@ class SqlStore implements Store {
 	 */
 	public function clear() {
 		$this->newSiteLinkCache()->clear();
-		$this->newTermCache()->clear();
+		$this->getTermIndex()->clear();
 		$this->newEntityPerPage()->clear();
 	}
 
