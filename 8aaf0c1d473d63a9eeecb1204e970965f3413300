@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dqo3ZRyE",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:23:16Z",
+      "side": 1,
+      "message": "They are needed for testing, otherwise it must be made mock objects for testng which is a pest.",
+      "parentUuid": "Dqk3Vbxg",
+      "revId": "8aaf0c1d473d63a9eeecb1204e970965f3413300",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqi3QOyo",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-25T15:20:01Z",
       "side": 1,
       "message": "This is not true",
+      "revId": "8aaf0c1d473d63a9eeecb1204e970965f3413300",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqg03d00",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:23:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dqi3QOyo",
       "revId": "8aaf0c1d473d63a9eeecb1204e970965f3413300",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "Dqu0x41k",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:23:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dqo0apxI",
+      "revId": "8aaf0c1d473d63a9eeecb1204e970965f3413300",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqs0gn04",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 13
@@ -64,6 +118,24 @@
       "writtenOn": "2013-03-25T15:20:01Z",
       "side": 1,
       "message": "Still must not be a left join. Or did the requirements change and we want to include pages with no on-page langlinks?",
+      "revId": "8aaf0c1d473d63a9eeecb1204e970965f3413300",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqi0oO.8",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:23:16Z",
+      "side": 1,
+      "message": "The purpose have the whole time been to return the number of langlinks if they exist. There is even a check box to filter out pages that have langlinks from the pages that ave or have\u0027nt langlinks.",
+      "parentUuid": "Dqs0gn04",
       "revId": "8aaf0c1d473d63a9eeecb1204e970965f3413300",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
