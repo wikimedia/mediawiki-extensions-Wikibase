@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dqmr1uX8",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T12:56:50Z",
+      "side": 1,
+      "message": "Just do $this-\u003estartTitle \u003d \\Title::newFromText( $this-\u003estartPage );\nIf it fails, it\u0027s null.\nSame effect, easier to read.",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqorZLSE",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T12:56:50Z",
+      "side": 1,
+      "message": "Please document the use of this (paging/continuation, I suppose).\nAlso document the other parameters.",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqioHwYY",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T12:56:50Z",
+      "side": 1,
+      "message": "$checker isn\u0027t really needed, it seems; we could just use getNamespaceChecker(), no?",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqkqR1UQ",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T12:56:50Z",
+      "side": 1,
+      "message": "This seems quite wrong. You are saying \"if the title used for paging doesn\u0027t have wikibase enabled, then go on but ignore paging AND also ignore the namespace filter\". \n\nIf the name used for paging doesn\u0027t have wikibase enabled, so what? It\u0027s odd, but it doesn\u0027t hurt. Just accept it.",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqiqMoS4",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T12:56:50Z",
+      "side": 1,
+      "message": "No, the namespace filter must *always* apply, also when we have a start title set for paging.",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqmqqmXQ",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T12:56:50Z",
+      "side": 1,
+      "message": "If $checker-\u003egetWikibaseNamespaces() returns an empty array, wikibase is enabled nowhere. Returning array() however means \"no limits\". We\u0027d need to return \"2 \u003d 3\" or something instead, to make sure the query has no reults.",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqkq6Nb8",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T12:56:50Z",
+      "side": 1,
+      "message": "would be clearer to do this before the select call.",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqoqn7ak",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T12:56:50Z",
+      "side": 1,
+      "message": "sure we need this?",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqiq1gc4",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T12:56:50Z",
+      "side": 1,
+      "message": "Should be an INNER JOIN i think; a LEFT JOIN will include pages with no entries in langlinks.",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
