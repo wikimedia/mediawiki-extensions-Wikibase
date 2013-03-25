@@ -36,7 +36,7 @@ class TermSearchKeyBuilder {
 	/**
 	 * @since 0.4
 	 *
-	 * @var TermSqlCache $table
+	 * @var TermSqlIndex $table
 	 */
 	protected $table;
 
@@ -73,9 +73,9 @@ class TermSearchKeyBuilder {
 	 *
 	 * @since 0.4
 	 *
-	 * @param TermSqlCache $table
+	 * @param TermSqlIndex $table
 	 */
-	public function __construct( TermSqlCache $table ) {
+	public function __construct( TermSqlIndex $table ) {
 		$this->table = $table;
 	}
 

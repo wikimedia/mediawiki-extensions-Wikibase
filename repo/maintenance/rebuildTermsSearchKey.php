@@ -61,7 +61,7 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 			array( $this, 'report' )
 		);
 
-		$table = StoreFactory::getStore( 'sqlstore' )->newTermCache();
+		$table = StoreFactory::getStore( 'sqlstore' )->getTermIndex();
 		$builder = new TermSearchKeyBuilder( $table );
 		$builder->setReporter( $reporter );
 

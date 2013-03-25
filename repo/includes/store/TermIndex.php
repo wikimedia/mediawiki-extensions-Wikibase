@@ -30,7 +30,7 @@ namespace Wikibase;
  *
  * @todo: rename to TermIndex
  */
-interface TermCache extends TermCombinationMatchFinder {
+interface TermIndex extends TermCombinationMatchFinder {
 
 	/**
 	 * Returns the type, id tuples for the entities with the provided label in the specified language.
