@@ -175,7 +175,7 @@ class ExternalChangesLine {
 				$message = wfMessage( $comment['message'] )->text();
 			}
 		} else {
-			$message = $comment;
+			$message = $comment === 'wikibase-comment-update' ? wfMessage( $comment ) : $comment;
 		}
 
 		return $message;
@@ -191,7 +191,6 @@ class ExternalChangesLine {
 	public static function getComment( $entityData ) {
 		//TODO: If $entityData['changes'] is set, this is a coalesced change.
 		//      Combine all the comments! Up to some max length?
-
 		if ( array_key_exists( 'composite-comment', $entityData ) ) {
 			$commentText = wfMessage( 'wikibase-comment-multi' )->numParams( count( $entityData['composite-comment'] ) )->text();
 		} else if ( array_key_exists( 'comment', $entityData  ) ) {
@@ -199,6 +198,7 @@ class ExternalChangesLine {
 		} else {
 			$commentText = '';
 		}
+
 		return \Linker::commentBlock( $commentText );
 	}
 
