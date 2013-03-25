@@ -26,7 +26,7 @@ $messages['en'] = array(
 	'wikibase-comment-linked' => 'A Wikidata item has been linked to this page.',
 	'wikibase-comment-unlink' => 'This page has been unlinked from Wikidata item. Language links removed.',
 	'wikibase-comment-restore' => 'Associated Wikidata item undeleted. Language links restored.',
-	'wikibase-comment-update' => 'Language links updated.',
+	'wikibase-comment-update' => 'Wikidata item changed',
 	'wikibase-comment-sitelink-add' => 'Language link added: $1',
 	'wikibase-comment-sitelink-change' => 'Language link changed from $1 to $2',
 	'wikibase-comment-sitelink-remove' => 'Language link removed: $1',
@@ -77,7 +77,7 @@ Parameters:
 	'wikibase-comment-linked' => 'Autocomment message in the client for when a Wikidata item is linked to a page in the client.',
 	'wikibase-comment-unlink' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a site link to a page gets removed. This results in the associated item being disconnected from the client page and all the language links being removed.',
 	'wikibase-comment-restore' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item gets undeleted and has a site link to this page. Language links get readded to the client page.',
-	'wikibase-comment-update' => 'Autocomment message for client (e.g. Wikipedia) recent changes when site links for a linked Wikidata item get changed. This results in language links being updated on the client page.',
+	'wikibase-comment-update' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a linked Wikidata item get changed. This can include label changes and statements.',
 	'wikibase-comment-sitelink-add' => 'Autocomment message for client (e.g. Wikipedia) when a particular site link gets added on the repository. This change appears on the client as a new language link in the sidebar.
 
 Parameters:
