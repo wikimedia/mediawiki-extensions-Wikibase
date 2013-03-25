@@ -70,7 +70,7 @@ class EntityDeletionUpdate extends \DataUpdate {
 		$store = StoreFactory::getStore();
 		$entity = $this->content->getEntity();
 
-		$store->newTermCache()->deleteTermsOfEntity( $entity );
+		$store->getTermIndex()->deleteTermsOfEntity( $entity );
 		$this->doTypeSpecificStuff( $store, $entity );
 
 		$store->newEntityPerPage()->deleteEntityContent( $this->content );

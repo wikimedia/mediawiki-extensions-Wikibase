@@ -563,7 +563,7 @@ abstract class EntityContent extends \AbstractContent {
 			$labels[] = $label;
 		}
 
-		$foundLabels = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
+		$foundLabels = StoreFactory::getStore()->getTermIndex()->getMatchingTerms(
 			$labels,
 			Term::TYPE_LABEL,
 			$entity->getType()

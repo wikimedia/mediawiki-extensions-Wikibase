@@ -89,7 +89,7 @@ class EntityContentFactory {
 	 * @return EntityContent[]
 	 */
 	public function getFromLabel( $language, $label, $description = null, $entityType = null, $fuzzySearch = false ) {
-		$entityIds = StoreFactory::getStore()->newTermCache()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );
+		$entityIds = StoreFactory::getStore()->getTermIndex()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );
 		$entities = array();
 
 		foreach ( $entityIds as $entityId ) {

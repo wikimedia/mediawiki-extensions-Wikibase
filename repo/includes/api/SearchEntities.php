@@ -49,7 +49,7 @@ class SearchEntities extends ApiBase {
 	protected function searchEntities( $language, $term, $entityType, $limit, $prefixSearch  ) {
 		wfProfileIn( __METHOD__ );
 
-		$ids = StoreFactory::getStore()->newTermCache()->getMatchingIDs(
+		$ids = StoreFactory::getStore()->getTermIndex()->getMatchingIDs(
 			array(
 				new \Wikibase\Term( array(
 					'termType' 		=> \Wikibase\Term::TYPE_LABEL,
@@ -120,7 +120,7 @@ class SearchEntities extends ApiBase {
 		$ids = array_slice ( $ids, 0, $limit );
 
 		// Find all the remaining terms for the given entities
-		$terms = StoreFactory::getStore()->newTermCache()->getTermsOfEntities( $ids, $params['type'], $params['language'] );
+		$terms = StoreFactory::getStore()->getTermIndex()->getTermsOfEntities( $ids, $params['type'], $params['language'] );
 
 		$entries = array();
 
