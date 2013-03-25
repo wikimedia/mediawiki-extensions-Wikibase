@@ -153,7 +153,7 @@ class ChangeHandler {
 			$this->mirrorUpdater = null;
 		}
 
-		$this->dataTransclusionAllowed = true; //TODO: use allowDataTransclusion setting
+		$this->dataTransclusionAllowed = Settings::get( 'allowDataTransclusion' );
 		$this->actionMask = 0xFFFF; //TODO: use changeHanderActions setting
 	}
 
