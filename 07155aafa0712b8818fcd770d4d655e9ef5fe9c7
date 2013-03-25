@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DqoqRLfI",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dqmr1uX8",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqorZLSE",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-25T12:56:50Z",
       "side": 1,
       "message": "Please document the use of this (paging/continuation, I suppose).\nAlso document the other parameters.",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqkrEdfc",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:15:26Z",
+      "side": 1,
+      "message": "paging/continuation?",
+      "parentUuid": "DqorZLSE",
       "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "Dqm1rk4c",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DqioHwYY",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqkqR1UQ",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 12
@@ -64,6 +118,24 @@
       "writtenOn": "2013-03-25T12:56:50Z",
       "side": 1,
       "message": "This seems quite wrong. You are saying \"if the title used for paging doesn\u0027t have wikibase enabled, then go on but ignore paging AND also ignore the namespace filter\". \n\nIf the name used for paging doesn\u0027t have wikibase enabled, so what? It\u0027s odd, but it doesn\u0027t hurt. Just accept it.",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqq3SC-4",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:15:26Z",
+      "side": 1,
+      "message": "This isn\u0027t paging, but code is changed.",
+      "parentUuid": "DqkqR1UQ",
       "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "Dqs1uX5c",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DqiqMoS4",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqmqqmXQ",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 12
@@ -98,6 +188,24 @@
       "writtenOn": "2013-03-25T12:56:50Z",
       "side": 1,
       "message": "If $checker-\u003egetWikibaseNamespaces() returns an empty array, wikibase is enabled nowhere. Returning array() however means \"no limits\". We\u0027d need to return \"2 \u003d 3\" or something instead, to make sure the query has no reults.",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqs3PP1Y",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:15:26Z",
+      "side": 1,
+      "message": "Changed code so $checker is optional.",
+      "parentUuid": "DqmqqmXQ",
       "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "DqspxZd8",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dqkq6Nb8",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqoqn7ak",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 12
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "Dqsr.RTU",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:15:26Z",
+      "side": 1,
+      "message": "Yes, a redirect will not have the wikibase_item set and will otherwise be listed.",
+      "parentUuid": "Dqoqn7ak",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqiq1gc4",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 12
@@ -149,6 +293,24 @@
       "writtenOn": "2013-03-25T12:56:50Z",
       "side": 1,
       "message": "Should be an INNER JOIN i think; a LEFT JOIN will include pages with no entries in langlinks.",
+      "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqqoBkT4",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-25T16:15:26Z",
+      "side": 1,
+      "message": "It is intentional, it should include them.",
+      "parentUuid": "Dqiq1gc4",
       "revId": "07155aafa0712b8818fcd770d4d655e9ef5fe9c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
