@@ -39,7 +39,21 @@ use Wikibase\Term;
 class TermSqlIndexTest extends TermIndexTest {
 
 	public function getTermIndex() {
-		return new \Wikibase\TermSqlIndex( 'wb_terms' );
+		$index = new \Wikibase\TermSqlIndex( 'wb_terms' );
+
+		return $index;
+	}
+
+	protected function fillTestIndex( \Wikibase\TermIndex $index, $reset = false ) {
+		static $ids = null;
+
+		// since this gets stored in the DB, we only need to do this once
+		if ( $ids === null || $reset ) {
+			$index->clear(); // make sure the DB is empty
+			$ids = parent::fillTestIndex( $index );
+		}
+
+		return $ids;
 	}
 
 	public function termProvider() {

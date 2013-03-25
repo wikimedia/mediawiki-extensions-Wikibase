@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\TermIndex;
 use Wikibase\ItemContent;
 use Wikibase\Item;
+use Wikibase\Entity;
 use Wikibase\Term;
 
 /**
@@ -30,10 +31,6 @@ use Wikibase\Term;
  * @ingroup WikibaseRepoTest
  * @ingroup Test
  *
- * @group Wikibase
- * @group WikibaseStore
- * @group Database
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
@@ -47,72 +44,30 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	public abstract function getTermIndex();
 
 	/**
-	 * @param TermIndex $lookup
+	 * @return Entity[]
 	 */
-	public function testGetEntityIdsForLabel() {
-		$lookup = $this->getTermIndex();
+	protected function getTestEntities() {
+		static $entities = null;
 
-		$item0 = Item::newEmpty();
-
-		$item0->setLabel( 'en', 'foobar' );
-		$item0->setLabel( 'de', 'foobar' );
-		$item0->setLabel( 'nl', 'baz' );
-
-		$item1 = $item0->copy();
-		$item1->setLabel( 'nl', 'o_O' );
-		$item1->setDescription( 'en', 'foo bar baz' );
-
-		$content0 = ItemContent::newEmpty();
-		$content0->setItem( $item0 );
-		$content0->save( '', null, EDIT_NEW );
-		$id0 = $content0->getItem()->getId()->getNumericId();
-
-		$content1 = ItemContent::newEmpty();
-		$content1->setItem( $item1 );
-
-		$content1->save( '', null, EDIT_NEW );
-		$id1 = $content1->getItem()->getId()->getNumericId();
-
-		$ids = $lookup->getEntityIdsForLabel( 'foobar' );
-		$this->assertInternalType( 'array', $ids );
-		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
-		$this->assertArrayEquals( array( $id0, $id1 ), $ids );
-
-		$ids = $lookup->getEntityIdsForLabel( 'baz', 'nl' );
-		$this->assertInternalType( 'array', $ids );
-		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
-		$this->assertArrayEquals( array( $id0 ), $ids );
-
-		$ids = $lookup->getEntityIdsForLabel( 'o_O', 'nl' );
-		$this->assertInternalType( 'array', $ids );
-		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
-		$this->assertArrayEquals( array( $id1 ), $ids );
-
-		// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
-		if ( !defined( 'MW_PHPUNIT_TEST' )
-			|| wfGetDB( DB_MASTER )->getType() !== 'mysql'
-			|| get_class( $lookup ) !== 'Wikibase\TermSqlIndex' ) {
-
-			$ids = $lookup->getEntityIdsForLabel( 'foobar', 'en', 'foo bar baz' );
-			$this->assertInternalType( 'array', $ids );
-			$ids = array_map( function( $id ) { return $id[1]; }, $ids );
-			$this->assertArrayEquals( array( $id1 ), $ids );
-
-			$ids = $lookup->getEntityIdsForLabel( 'foobar', null, 'foo bar baz' );
-			$this->assertInternalType( 'array', $ids );
-			$ids = array_map( function( $id ) { return $id[1]; }, $ids );
-			$this->assertArrayEquals( array( $id1 ), $ids );
-
-			$ids = $lookup->getEntityIdsForLabel( 'foobar', 'nl', 'foo bar baz' );
-			$this->assertInternalType( 'array', $ids );
-			$ids = array_map( function( $id ) { return $id[1]; }, $ids );
-			$this->assertArrayEquals( array(), $ids );
+		if ( $entities !== null ) {
+			return $entities;
 		}
-	}
 
-	public function testTermExists() {
-		$lookup = $this->getTermIndex();
+		// foobar -----
+		$item = Item::newEmpty();
 
+		$item->setLabel( 'en', 'foobar' );
+		$item->setLabel( 'de', 'foobar' );
+		$item->setLabel( 'nl', 'baz' );
+		$entities['foobar'] = $item;
+
+		// o_O -----
+		$item = $item->copy();
+		$item->setLabel( 'nl', 'o_O' );
+		$item->setDescription( 'en', 'foo bar baz' );
+		$entities['o_O'] = $item;
+
+		// foobarz ---
 		$item = Item::newEmpty();
 
 		$item->setLabel( 'en', 'foobarz' );
@@ -122,38 +77,204 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item->setDescription( 'fr', 'fooz barz bazz' );
 		$item->setAliases( 'nl', array( 'a42', 'b42', 'c42' ) );
 
-		$content = ItemContent::newEmpty();
-		$content->setItem( $item );
-		$content->save( '', null, EDIT_NEW );
+		$entities['foobarz'] = $item;
 
-		$this->assertFalse( $lookup->termExists( 'foobarz', 'does-not-exist' ) );
-		$this->assertFalse( $lookup->termExists( 'foobarz', null, 'does-not-exist' ) );
-		$this->assertFalse( $lookup->termExists( 'foobarz', null, null, 'does-not-exist' ) );
+		return $entities;
+	}
 
-		$this->assertTrue( $lookup->termExists( 'foobarz' ) );
-		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_LABEL ) );
-		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'en' ) );
-		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'de' ) );
-		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'de', $item::ENTITY_TYPE ) );
+	/**
+	 * @param \Wikibase\TermIndex $index
+	 *
+	 * @return Entity[]
+	 */
+	protected function fillTestIndex( TermIndex $index ) {
+		$entities = $this->getTestEntities();
+		$ids = array();
 
-		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'de', \Wikibase\Property::ENTITY_TYPE ) );
-		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'nl' ) );
-		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION, 'de' ) );
-		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION, null, \Wikibase\Property::ENTITY_TYPE ) );
-		$this->assertFalse( $lookup->termExists( 'dzxfzdtrgfdrtgryfth', Term::TYPE_LABEL ) );
+		$i = 1;
 
-		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION ) );
-		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION, 'en' ) );
-		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION, 'fr' ) );
+		foreach ( $entities as $handle => $entity ) {
+			if ( $entity->getId() === null ) {
+				$entity->setId( $i++ );
+			}
 
-		$this->assertFalse( $lookup->termExists( 'a42', Term::TYPE_DESCRIPTION ) );
-		$this->assertFalse( $lookup->termExists( 'b42', Term::TYPE_LABEL ) );
-		$this->assertTrue( $lookup->termExists( 'a42' ) );
-		$this->assertTrue( $lookup->termExists( 'b42' ) );
-		$this->assertTrue( $lookup->termExists( 'a42', Term::TYPE_ALIAS ) );
-		$this->assertTrue( $lookup->termExists( 'b42', Term::TYPE_ALIAS ) );
-		$this->assertFalse( $lookup->termExists( 'b42', Term::TYPE_ALIAS, 'de' ) );
-		$this->assertTrue( $lookup->termExists( 'b42', null, 'nl' ) );
+			$index->saveTermsOfEntity( $entity );
+			$ids[$handle] = $entity->getId()->getPrefixedId();
+		}
+
+		return $ids;
+	}
+
+	public static function provideGetEntityIdsForLabel() {
+		return array(
+			array( // #0
+				'foobar', // label
+				null, // languageCode
+				null, // description
+				null, // entityType
+				false, // fuzzy
+				array( 'foobar', 'o_O' )
+			),
+			array( // #1
+				'baz', // label
+				'nl', // languageCode
+				null, // description
+				Item::ENTITY_TYPE, // entityType
+				false, // fuzzy
+				array( 'foobar' )
+			),
+			array( // #2
+				'o_O', // label
+				'nl', // languageCode
+				null, // description
+				null, // entityType
+				false, // fuzzy
+				array( 'o_O' )
+			),
+			array( // #3
+				'o_O', // label
+				'fr', // languageCode
+				null, // description
+				null, // entityType
+				false, // fuzzy
+				array()
+			),
+			array( // #4: mismatch because sensitive
+				'FooBar', // label
+				null, // languageCode
+				null, // description
+				null, // entityType
+				false, // fuzzy
+				array()
+			),
+			array( // #5: match because insensitive
+				'FooBar', // label
+				'en', // languageCode
+				null, // description
+				null, // entityType
+				true, // fuzzy
+				array( 'foobar' )
+			),
+			array( // #6: match because prefix
+				'foo', // label
+				'en', // languageCode
+				null, // description
+				null, // entityType
+				true, // fuzzy
+				array( 'foobar' )
+			),
+			array( // #7: mismatch because entity type
+				'foobar', // label
+				null, // languageCode
+				null, // description
+				\Wikibase\Property::ENTITY_TYPE, // entityType
+				false, // fuzzy
+				array()
+			),
+			array( // #8: match description
+				'foobar', // label
+				'en', // languageCode
+				'foo bar baz', // description
+				null, // entityType
+				false, // fuzzy
+				array( 'foobar' )
+			),
+			array( // #9: match description
+				'foobar', // label
+				null, // languageCode
+				'foo bar baz', // description
+				null, // entityType
+				false, // fuzzy
+				array( 'foobar' )
+			),
+			array( // #10: match description fails
+				'foobar', // label
+				'nl', // languageCode
+				'foo bar baz', // description
+				null, // entityType
+				false, // fuzzy
+				array()
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetEntityIdsForLabel
+	 */
+	public function testGetEntityIdsForLabel( $label, $languageCode, $description,
+										$entityType, $fuzzySearch,
+										$expected ) {
+
+		if ( $fuzzySearch && \Wikibase\Settings::get( 'withoutTermSearchKey' ) ) {
+			$this->markTestSkipped( "skipping test for fuzzy search because withoutTermSearchKey is off" );
+		}
+
+		$lookup = $this->getTermIndex();
+		$idsByHandle = $this->fillTestIndex( $lookup );
+
+		// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
+		if ( $description !== null
+			&& wfGetDB( DB_MASTER )->getType() === 'mysql'
+			&& get_class( $lookup ) === 'Wikibase\TermSqlIndex' ) {
+
+			$this->markTestSkipped( "skipping test that requires a self-join" );
+		}
+
+		$result = $lookup->getEntityIdsForLabel( $label, $languageCode, $description,
+					$entityType, $fuzzySearch );
+
+		$this->assertInternalType( 'array', $result );
+		$ids = array_map( function( $id ) {
+			$id = new \Wikibase\EntityId( $id[0], $id[1] );
+			return $id->getPrefixedId();
+		}, $result );
+
+		$expectedIds = array_intersect_key( $idsByHandle, array_flip( $expected ) );
+		$this->assertArrayEquals( $expectedIds, $ids );
+	}
+
+	public static function provideTermExists() {
+		return array(
+			array( 'foobarz', 'does-not-exist', null, null, false ),
+			array( 'foobarz', null, 'does-not-exist', null, false ),
+			array( 'foobarz', null, null, 'does-not-exist', false ),
+
+			array( 'foobarz', null, null, null, true ),
+			array( 'foobarz', Term::TYPE_LABEL, null, null, true ),
+			array( 'foobarz', Term::TYPE_LABEL, 'en', null, true ),
+			array( 'foobarz', Term::TYPE_LABEL, 'de', null, true ),
+			array( 'foobarz', Term::TYPE_LABEL, 'de', Item::ENTITY_TYPE, true ),
+
+			array( 'foobarz', Term::TYPE_LABEL, 'de', \Wikibase\Property::ENTITY_TYPE, false ),
+			array( 'foobarz', Term::TYPE_LABEL, 'nl', null, false ),
+			array( 'foobarz', Term::TYPE_DESCRIPTION, 'de', null, false ),
+			array( 'foobarz', Term::TYPE_DESCRIPTION, null, \Wikibase\Property::ENTITY_TYPE, false ),
+			array( 'dzxfzdtrgfdrtgryfth', Term::TYPE_LABEL, null, null, false ),
+
+			array( 'foobarz', Term::TYPE_DESCRIPTION, null, null, true ),
+			array( 'foobarz', Term::TYPE_DESCRIPTION, 'en', null, true ),
+			array( 'foobarz', Term::TYPE_DESCRIPTION, 'fr', null, false ),
+
+			array( 'a42', Term::TYPE_DESCRIPTION, null, null, false ),
+			array( 'b42', Term::TYPE_LABEL, null, null, false ),
+			array( 'a42', null, null, null, true ),
+			array( 'b42', null, null, null, true ),
+			array( 'a42', Term::TYPE_ALIAS, null, null, true ),
+			array( 'b42', Term::TYPE_ALIAS, null, null, true ),
+			array( 'b42', Term::TYPE_ALIAS, 'de', null, false ),
+			array( 'b42', null, 'nl', null, true ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideTermExists
+	 */
+	public function testTermExists( $termValue, $termType, $termLanguage, $entityType, $expected ) {
+		$lookup = $this->getTermIndex();
+		$this->fillTestIndex( $lookup );
+
+		$res = $lookup->termExists( $termValue, $termType, $termLanguage, $entityType );
+		$this->assertEquals( $expected, $res );
 	}
 
 	/**
