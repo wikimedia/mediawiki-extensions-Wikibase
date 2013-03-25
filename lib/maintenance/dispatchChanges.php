@@ -757,7 +757,8 @@ class DispatchChanges extends \Maintenance {
 	}
 
 	/**
-	 * Returns a list of Change objects loaded from $table.
+	 * Returns a list of Change objects loaded from the changes table.
+	 *
 	 * The list will have at most $limit entries, all IDs will be greater than $after,
 	 * and it will be sorted with IDs in ascending order.
 	 *
@@ -774,7 +775,7 @@ class DispatchChanges extends \Maintenance {
 			),
 			array(
 				'LIMIT' => $limit,
-				'ORDER BY ' => $table->getPrefixedField( 'id' ) . ' ASC'
+				'ORDER BY ' => $this->changesTable->getPrefixedField( 'id' ) . ' ASC'
 			),
 			__METHOD__
 		);
