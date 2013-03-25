@@ -69,6 +69,7 @@ HTML;
 	<div class="wb-claim-mainsnak" dir="auto">
 		$3 <!-- wb-snak (Main Snak) -->
 	</div>
+	<div class="wb-claim-qualifiers">$4</div>
 </div>
 HTML;
 
@@ -97,12 +98,13 @@ HTML;
 			<div class="wb-claim-mainsnak" dir="auto">
 				$3 <!-- wb-snak (Main Snak) -->
 			</div>
+			<div class="wb-claim-qualifiers wb-statement-qualifiers">$4</div>
 		</div>
-		$4
+		$5
 	</div>
 	<div class="wb-statement-references-container">
-		<div class="wb-statement-references-heading">$5</div>
-		<div class="wb-statement-references">$6 <!-- [0,*] wb-reference --></div>
+		<div class="wb-statement-references-heading">$6</div>
+		<div class="wb-statement-references">$7 <!-- [0,*] wb-reference --></div>
 	</div>
 </div>
 HTML;
