@@ -458,7 +458,7 @@ class ExternalChangesLine {
 					Settings::get( 'repoNamespaces' )
 				);
 
-				$ns = $repoLinker->getNamespace( $entityId );
+				$ns = $repoLinker->getNamespace( 'wikibase-' . $entityId->getEntityType() );
 				if ( !empty( $ns ) ) {
 					$titleText = $ns . ':' . $titleText;
 				}
