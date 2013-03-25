@@ -598,6 +598,72 @@ div.wb-claim-new .wb-snak-value {
 
 /***** /EDIT/NEW CLAIM *****/
 
+/***** QUALIFIERS *****/
+
+.wb-claim-qualifiers {
+	padding-left: 17em;
+}
+
+.wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snak-property {
+	width: 12em;
+	position: absolute;
+	font-size: 90%;
+}
+
+.wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snak-property input {
+	width: 100%;
+	font-size: 100%;
+	top: 0;
+	position: absolute;
+}
+
+.wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snak-value-container {
+	margin-left: 12em;
+	position: relative;
+}
+
+.wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snak-value-container .wb-snak-value {
+	margin-left: 16px;
+	margin-right: 18em;
+	word-wrap: break-word;
+}
+
+.wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snak-value-container .wb-snak-value .valueview-value {
+	font-size: 90%;
+}
+
+.wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snak-value-container .wb-snak-typeselector {
+	left: 0;
+}
+
+.wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snak-value-container .wb-snak-value .valueview-value textarea {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snakview {
+	position: relative;
+	min-height: 1.8em;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+/* "remove" link at each reference's snak */
+.wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snakview > .wb-removetoolbar {
+	position: absolute;
+	top: 5px;
+	right: 0;
+}
+
+/* "add" link in one reference's snak list */
+.wb-claim-qualifiers .wb-snaklistview > .wb-addtoolbar {
+	float: right;
+	margin-bottom: 1em;
+}
+
+/***** /QUALIFIERS *****/
+
 /********** /CLAIMS **********/
 
 
@@ -624,6 +690,7 @@ div.wb-statement .wb-editsection {
 
 .wb-statement-references-container {
 	padding-left: 17em;
+	clear: both;
 }
 
 .wb-statement-references-container .wb-statement-references-heading {

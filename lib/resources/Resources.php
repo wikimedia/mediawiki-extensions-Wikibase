@@ -554,6 +554,7 @@ return call_user_func( function() {
 				'jquery.wikibase.snakview'
 			),
 			'messages' => array(
+				'wikibase-addqualifier',
 				'wikibase-claimview-snak-tooltip',
 				'wikibase-claimview-snak-new-tooltip'
 			)
