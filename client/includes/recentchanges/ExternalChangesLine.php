@@ -175,7 +175,8 @@ class ExternalChangesLine {
 				$message = wfMessage( $comment['message'] )->text();
 			}
 		} else {
-			$message = $comment === 'wikibase-comment-update' ? wfMessage( $comment ) : $comment;
+			$msg = wfMessage( $comment );
+			$message = $msg->exists() ? $msg->text() : $comment;
 		}
 
 		return $message;
