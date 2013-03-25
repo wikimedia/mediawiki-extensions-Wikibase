@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqirEoQ8",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T13:45:22Z",
+      "side": 1,
+      "message": "This is usually a lit of things, not a key/value pair. I\u0027d recommend to build the pair when constructing the summary, e.g. have a addSummaryPair() function or some such.\n\nAlternatively, the key/value mode could be triggered by a parameter to this function, and based on a member in Summary.",
+      "revId": "14d768312f0f277d5b9a34299b6eb12d984c5fb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqurNSTI",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T13:45:22Z",
+      "side": 1,
+      "message": "please use wfDebugLog( __CLASS__, __FUNCTION__ . \": arg class: \" . get_class( $arg ) );",
+      "revId": "14d768312f0f277d5b9a34299b6eb12d984c5fb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqgrT3dU",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T13:45:22Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "14d768312f0f277d5b9a34299b6eb12d984c5fb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqsrV5bY",
+        "filename": "repo/includes/Summary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-25T13:45:22Z",
+      "side": 1,
+      "message": "Just kill it.",
+      "revId": "14d768312f0f277d5b9a34299b6eb12d984c5fb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
