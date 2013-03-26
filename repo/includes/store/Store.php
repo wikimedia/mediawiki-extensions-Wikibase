@@ -62,7 +62,7 @@ interface Store {
 	/**
 	 * Returns a TermIndex for this store.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @return TermIndex
 	 */
