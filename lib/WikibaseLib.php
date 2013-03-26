@@ -62,6 +62,7 @@ $dependencies = array(
 	'DataValues_VERSION' => 'DataValues',
 	'ValueParsers_VERSION' => 'ValueParsers',
 	'DataTypes_VERSION' => 'DataTypes',
+	'ValueView_VERSION' => 'ValueView',
 );
 
 foreach ( $dependencies as $constant => $name ) {

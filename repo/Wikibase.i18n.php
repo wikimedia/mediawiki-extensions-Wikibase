@@ -76,8 +76,6 @@ $messages['en'] = array(
 	'wikibase-snakview-property-input-placeholder' => 'property',
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak of type "$1". Handling for this kind of Snak is not yet supported.',
 	'wikibase-snakview-choosesnaktype' => 'Choose a value type.',
-	'wikibase-snakview-variation-unsupporteddatatype' => 'Handling of values for "$1" data type is not yet supported.',
-	'wikibase-snakview-variation-unsupporteddatavalue' => 'Handling of "$1" data values is not yet supported.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'The value does not comply with the property\'s definition.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'The value\'s data value type "$1" does not match the property\'s data type\'s data value type "$2".',
 	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'It is not possible to define a new value for a deleted property.',
@@ -537,11 +535,6 @@ Parameters:
 Since a default Snak type should always be selected when adding a Snak, the message is visible on rare occasions only.
 
 Since "Snak" or "Snak type" does not express any meaning for the user, these phrases should be avoided in the message.',
-	'wikibase-snakview-variation-unsupporteddatatype' => 'Error shown if a data value for a certain data type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values for that data type has not yet been implemented).
-
-Parameters:
-* $1 - the name of the data type which lacks support',
-	'wikibase-snakview-variation-unsupporteddatavalue' => 'Error shown if a data value of a certain data value type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a widget handling data values of that type has not yet been implemented). $1 is the name of the data value type which lacks support.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => "Warning displayed if the data value type used by a Snak's (see [[d:Wikidata:Glossary]]) property's data type is different from the data value type of the same Snak's actual value. This should only appear after internal changes or after a property's data type has changed and no scripts for updating the data were executed (there might not even be any scripts for handling all possible causes of this).",
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => "Details of the warning displayed if the data value type used by a Snak's (see [[d:Wikidata:Glossary]]) property's data type is different from the data value type of the same Snak's actual value.
 
