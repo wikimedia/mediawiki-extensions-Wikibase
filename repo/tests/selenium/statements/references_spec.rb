@@ -226,6 +226,25 @@ describe "Check references UI" do
         page.wait_for_statement_request_finished
         page.reference1Property.should == properties_cm[1]["label"]
         page.reference1Value.should == cm_reference_value_changed
+
+        # try to edit the reference twice in a row
+        page.editReference1
+        page.referenceValueInput_element.clear
+        page.referenceValueInput = cm_reference_value
+        page.saveReference
+        ajax_wait
+        page.wait_for_statement_request_finished
+        page.reference1Property.should == properties_cm[1]["label"]
+        page.reference1Value.should == cm_reference_value
+        page.editReference1
+        page.referenceValueInput_element.clear
+        page.referenceValueInput = cm_reference_value_changed
+        page.saveReference
+        ajax_wait
+        page.wait_for_statement_request_finished
+        page.reference1Property.should == properties_cm[1]["label"]
+        page.reference1Value.should == cm_reference_value_changed
+
         page.reference1ValueLink
         page.articleTitle.include?("File:" + cm_reference_value_changed).should be_true
         page.navigate_to items[0]["url"]
