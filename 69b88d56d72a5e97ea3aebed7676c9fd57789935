@@ -16,6 +16,23 @@
       "revId": "69b88d56d72a5e97ea3aebed7676c9fd57789935",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqnQ0s5E",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-03-26T17:33:48Z",
+      "side": 1,
+      "message": "This should probably be:\n\n $this-\u003emsg( \u0027wikibase-unconnectedpages-format-row\u0027 )-\u003enumParams( $entry[\u0027num\u0027] )-\u003etext();\n\nThis will ensure that proper number formatting and conversion is performed.",
+      "revId": "69b88d56d72a5e97ea3aebed7676c9fd57789935",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
