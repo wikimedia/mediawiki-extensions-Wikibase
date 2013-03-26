@@ -37,22 +37,27 @@ use Wikibase\DispatchStats;
 class EntityChangeTest extends \MediaWikiTestCase {
 
 	/**
-	 * Injects the given $changes and $states into the database,
-	 * then creates and loads a DispatchStats object.
-	 *
-	 * @param array $changes
-	 * @param array $states
-	 * @param string|int $now the value of now.
+	 * Creates and loads a DispatchStats object, injecting test data into
+	 * the database as needed.
 	 *
 	 * @return DispatchStats
 	 */
-	protected function getDispatchStats( $changes, $states ) {
+	protected function getDispatchStats() {
+		$data = self::getTestData();
+		$now = $data['now'];
+		$changes = $data['changes'];
+		$states = $data['states'];
+
 		$dbw = wfGetDB( DB_MASTER ); // write to dummy tables
 
 		$dbw->query( "truncate " . $dbw->tableName( 'wb_changes' ) );
 		$dbw->query( "truncate " . $dbw->tableName( 'wb_changes_dispatch' ) );
 
 		foreach ( $changes as $row ) {
+			if ( $row === null ) {
+				continue;
+			}
+
 			$dbw->insert( 'wb_changes',
 				$row,
 				__METHOD__
@@ -60,6 +65,10 @@ class EntityChangeTest extends \MediaWikiTestCase {
 		}
 
 		foreach ( $states as $row ) {
+			if ( $row === null ) {
+				continue;
+			}
+
 			$dbw->insert( 'wb_changes_dispatch',
 				$row,
 				__METHOD__
@@ -67,7 +76,7 @@ class EntityChangeTest extends \MediaWikiTestCase {
 		}
 
 		$stats = new DispatchStats();
-		$stats->load();
+		$stats->load( $now );
 		return $stats;
 	}
 
@@ -108,19 +117,19 @@ class EntityChangeTest extends \MediaWikiTestCase {
 				),
 			),
 			'changes' => array(
-				array(
+				2 => array(
 					'change_id' => 2,
 					'change_time' => '20130303000200',
 					'change_type' => 'test',
 					'change_object_id' => 'test',
 				),
-				array(
+				3 => array(
 					'change_id' => 3,
 					'change_time' => '20130303000300',
 					'change_type' => 'test',
 					'change_object_id' => 'test',
 				),
-				array(
+				1 => array(
 					'change_id' => 1,
 					'change_time' => '20130303000100',
 					'change_type' => 'test',
@@ -128,28 +137,33 @@ class EntityChangeTest extends \MediaWikiTestCase {
 				),
 			),
 
+			'now' => '20130303000400',
+
 			'expected' => array(
 				'getClientStates' => array(
 					array(
 						'chd_site' => 'frwiki',
 						'chd_seen' => 1,
 						'chd_touched' => '20130303000110',
-						'chd_lag' => 110,
-						'chd_dist' => 2,
+						'chd_untouched' => 170,
+						'chd_pending' => 2,
+						'chd_lag' => 120,
 					),
 					array(
 						'chd_site' => 'dewiki',
 						'chd_seen' => 2,
 						'chd_touched' => '20130303000220',
-						'chd_lag' => 40,
-						'chd_dist' => 1,
+						'chd_untouched' => 100,
+						'chd_pending' => 1,
+						'chd_lag' => 60,
 					),
 					array(
 						'chd_site' => 'enwiki',
 						'chd_seen' => 3,
 						'chd_touched' => '20130303000330',
+						'chd_untouched' => 30,
+						'chd_pending' => 0,
 						'chd_lag' => 0,
-						'chd_dist' => 0,
 					),
 				),
 
@@ -165,26 +179,30 @@ class EntityChangeTest extends \MediaWikiTestCase {
 					'chd_site' => 'enwiki',
 					'chd_seen' => 3,
 					'chd_touched' => '20130303000330',
+					'chd_untouched' => 30,
+					'chd_pending' => 0,
 					'chd_lag' => 0,
-					'chd_dist' => 0,
 				),
 				'getStalest' => array(
 					'chd_site' => 'frwiki',
 					'chd_seen' => 1,
 					'chd_touched' => '20130303000110',
-					'chd_lag' => 110,
-					'chd_dist' => 2,
+					'chd_untouched' => 170,
+					'chd_pending' => 2,
+					'chd_lag' => 120,
 				),
 				'getMedian' => array(
 					'chd_site' => 'dewiki',
 					'chd_seen' => 2,
 					'chd_touched' => '20130303000220',
-					'chd_lag' => 40,
-					'chd_dist' => 1,
+					'chd_untouched' => 100,
+					'chd_pending' => 1,
+					'chd_lag' => 60,
 				),
 				'getAverage' => array(
-					'chd_lag' => 30,
-					'chd_dist' => 1,
+					'chd_untouched' => 100,
+					'chd_pending' => 1,
+					'chd_lag' => 60,
 				),
 			),
 		);
@@ -195,8 +213,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				$data['changes'],
-				$data['states'],
 				$data['expected']['getClientStates'],
 			)
 		);
@@ -205,8 +221,8 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetClientStates
 	 */
-	public function testGetClientStates( $changes, $states, $expected ) {
-		$stats = $this->getDispatchStats( $changes, $states );
+	public function testGetClientStates( $expected ) {
+		$stats = $this->getDispatchStats();
 
 		$states = $stats->getClientStates();
 
@@ -240,11 +256,11 @@ class EntityChangeTest extends \MediaWikiTestCase {
 		}
 
 		if ( isset( $expected['lag'] ) ) {
-			$this->assertEquals( $expected['lag'], $actual>chd_lag, "lag/$suffix" );
+			$this->assertEquals( $expected['lag'], $actual>chd_untouched, "lag/$suffix" );
 		}
 
 		if ( isset( $expected['dist'] ) ) {
-			$this->assertEquals( $expected['dist'], $actual>chd_dist, "dist/$suffix" );
+			$this->assertEquals( $expected['dist'], $actual>chd_pending, "dist/$suffix" );
 		}
 	}
 
@@ -253,7 +269,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				$data['states'],
 				$data['expected']['getClientCount'],
 			)
 		);
@@ -262,8 +277,8 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetClientCount
 	 */
-	public function testGetClientCount( $states, $expected ) {
-		$stats = $this->getDispatchStats( array(), $states );
+	public function testGetClientCount( $expected ) {
+		$stats = $this->getDispatchStats( );
 
 		$this->assertEquals( $expected, $stats->getClientCount() );
 	}
@@ -273,7 +288,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				$data['states'],
 				$data['expected']['getLockedCount'],
 			)
 		);
@@ -282,8 +296,8 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetLockedCount
 	 */
-	public function testGetLockedCount( $states, $expected ) {
-		$stats = $this->getDispatchStats( array(), $states );
+	public function testGetLockedCount( $expected ) {
+		$stats = $this->getDispatchStats();
 
 		$this->assertEquals( $expected, $stats->getLockedCount() );
 	}
@@ -293,7 +307,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				$data['changes'],
 				$data['expected']['getMinChangeId'],
 			)
 		);
@@ -302,8 +315,8 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetMinChangeId
 	 */
-	public function testGetMinChangeId( $changes, $expected ) {
-		$stats = $this->getDispatchStats( $changes, array() );
+	public function testGetMinChangeId( $expected ) {
+		$stats = $this->getDispatchStats();
 
 		$this->assertEquals( $expected, $stats->getMinChangeId() );
 	}
@@ -313,7 +326,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				$data['changes'],
 				$data['expected']['getMaxChangeId'],
 			)
 		);
@@ -322,8 +334,8 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetMaxChangeId
 	 */
-	public function testGetMaxChangeId( $changes, $expected ) {
-		$stats = $this->getDispatchStats( $changes, array() );
+	public function testGetMaxChangeId( $expected ) {
+		$stats = $this->getDispatchStats();
 
 		$this->assertEquals( $expected, $stats->getMaxChangeId() );
 	}
@@ -333,7 +345,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				$data['changes'],
 				$data['expected']['getMinChangeTimestamp'],
 			)
 		);
@@ -342,8 +353,8 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetMinChangeTimestamp
 	 */
-	public function testGetMinChangeTimestamp( $changes, $expected ) {
-		$stats = $this->getDispatchStats( $changes, array() );
+	public function testGetMinChangeTimestamp( $expected ) {
+		$stats = $this->getDispatchStats();
 
 		$this->assertEquals( $expected, $stats->getMinChangeTimestamp() );
 	}
@@ -353,7 +364,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				$data['changes'],
 				$data['expected']['getMaxChangeTimestamp'],
 			)
 		);
@@ -362,8 +372,8 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetMaxChangeTimestamp
 	 */
-	public function testGetMaxChangeTimestamp( $changes, $expected ) {
-		$stats = $this->getDispatchStats( $changes, array() );
+	public function testGetMaxChangeTimestamp( $expected ) {
+		$stats = $this->getDispatchStats();
 
 		$this->assertEquals( $expected, $stats->getMaxChangeTimestamp() );
 	}
@@ -373,7 +383,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				$data['states'],
 				$data['expected']['getFreshest'],
 			)
 		);
@@ -382,8 +391,8 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetFreshest
 	 */
-	public function testGetFreshest( $states, $expected ) {
-		$stats = $this->getDispatchStats( array(), $states );
+	public function testGetFreshest( $expected ) {
+		$stats = $this->getDispatchStats();
 
 		$this->assertStateEquals( $expected, $stats->getFreshest());
 	}
@@ -393,7 +402,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				$data['states'],
 				$data['expected']['getStalest'],
 			)
 		);
@@ -402,8 +410,8 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetStalest
 	 */
-	public function testGetStalest( $states, $expected ) {
-		$stats = $this->getDispatchStats( array(), $states );
+	public function testGetStalest( $expected ) {
+		$stats = $this->getDispatchStats();
 
 		$this->assertStateEquals( $expected, $stats->getStalest());
 	}
@@ -413,7 +421,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				$data['states'],
 				$data['expected']['getAverage'],
 			)
 		);
@@ -422,8 +429,8 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetAverage
 	 */
-	public function testGetAverage( $states, $expected ) {
-		$stats = $this->getDispatchStats( array(), $states );
+	public function testGetAverage( $expected ) {
+		$stats = $this->getDispatchStats();
 
 		$this->assertStateEquals( $expected, $stats->getStalest());
 	}
@@ -433,7 +440,6 @@ class EntityChangeTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				$data['states'],
 				$data['expected']['getMedian'],
 			)
 		);
@@ -442,8 +448,8 @@ class EntityChangeTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetMedian
 	 */
-	public function testGetMedian( $states, $expected ) {
-		$stats = $this->getDispatchStats( array(), $states );
+	public function testGetMedian( $expected ) {
+		$stats = $this->getDispatchStats();
 
 		$this->assertStateEquals( $expected, $stats->getStalest());
 	}
