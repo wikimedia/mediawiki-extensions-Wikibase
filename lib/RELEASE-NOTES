@@ -24,6 +24,7 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 ; Requirements
 
 * If experimental features are enabled, then this will depends on "Ask" extension now. See Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Ask
+* Requires "ValueView" extension now which can be found in the "DataValues" GIT repo.
 
 
 === Version 0.3 ===

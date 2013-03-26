@@ -522,8 +522,7 @@ return call_user_func( function() {
 				'jquery.nativeEventHandler',
 				'jquery.wikibase.entityselector',
 				'wikibase.datamodel',
-				'dataTypes.jquery.valueview.views',
-				'wikibase.jquery.valueview.views',
+				'mw.ext.valueView',
 				'wikibase.store', // required for getting datatype from entityselector selected property
 				'mediawiki.legacy.shared',
 				'jquery.ui.TemplatedWidget'
@@ -532,8 +531,6 @@ return call_user_func( function() {
 				'wikibase-snakview-property-input-placeholder',
 				'wikibase-snakview-unsupportedsnaktype',
 				'wikibase-snakview-choosesnaktype',
-				'wikibase-snakview-variation-unsupporteddatatype',
-				'wikibase-snakview-variation-unsupporteddatavalue',
 				'wikibase-snakview-variation-datavaluetypemismatch',
 				'wikibase-snakview-variation-datavaluetypemismatch-details',
 				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
@@ -643,7 +640,7 @@ return call_user_func( function() {
 				'jquery.valueview.views/views.css',
 			),
 			'dependencies' => array(
-				'dataTypes.jquery.valueview',
+				'jquery.valueview',
 				'wikibase.parsers',
 				'jquery.eachchange',
 				'wikibase.utilities',
