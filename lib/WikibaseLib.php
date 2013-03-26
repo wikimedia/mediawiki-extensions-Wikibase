@@ -184,6 +184,10 @@ $wgAutoloadClasses['Wikibase\EntityLookup'] 			= $dir . 'includes/store/EntityLo
 $wgAutoloadClasses['Wikibase\PropertyLookup']           = $dir . 'includes/store/PropertyLookup.php';
 $wgAutoloadClasses['Wikibase\SiteLinkCache'] 			= $dir . 'includes/store/SiteLinkCache.php';
 $wgAutoloadClasses['Wikibase\SiteLinkLookup'] 			= $dir . 'includes/store/SiteLinkLookup.php';
+$wgAutoloadClasses['Wikibase\TermIndex'] 				= $dir . 'includes/store/TermIndex.php';
+$wgAutoloadClasses['Wikibase\TermCombinationMatchFinder'] = $dir . 'includes/store/TermCombinationMatchFinder.php';
+$wgAutoloadClasses['Wikibase\TermMatchScoreCalculator'] = $dir . 'includes/store/TermMatchScoreCalculator.php';
+$wgAutoloadClasses['Wikibase\TermSqlIndex'] 			= $dir . 'includes/store/sql/TermSqlIndex.php';
 
 // includes/store/sql
 $wgAutoloadClasses['Wikibase\CachingEntityLoader']      = $dir . 'includes/store/sql/CachingEntityLoader.php';
