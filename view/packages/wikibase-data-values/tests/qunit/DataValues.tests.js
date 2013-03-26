@@ -4,8 +4,13 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( dv, $, QUnit, undefined ) {
+( function( dv, $, QUnit ) {
 	'use strict';
+
+	// Fix for msot of our tests no having the number of required assertions.
+	// This is required since I214b3d4 got merged into core.
+	// TODO: figure out some non-global alternative to deal with this.
+	QUnit.config.requireExpects = false;
 
 	QUnit.module( 'DataValues.js', QUnit.newMwEnvironment() );
 
