@@ -151,12 +151,12 @@ Parameters:
 	'wikibase-watchlist-show-changes-pref' => 'Option in the watchlist section of preferences to always show wikibase edits by default in the watchlist.',
 	'wikibase-error-invalid-entity-id' => 'Generic error message when an invalid entity ID was entered.',
 	'special-unconnectedpages' => 'Title of the special page for listing unconnected items.',
-	'wikibase-unconnectedpages-page-warning' => 'The title that is typed in could not be used of some kind of reason. This can happen for example when the title has an interwiki prefix to another language, or a namespace that is not used for Wikibase entities.',
-	'wikibase-unconnectedpages-iwdata-label' => 'Text for the checkbox. Should say that only pages without interlanguage-links should be listed.',
 	'wikibase-unconnectedpages-legend' => 'Legend for the options box at the special page for pages not connected to sitelinks.',
 	'wikibase-unconnectedpages-page' => 'Label for the start page field in the options box of the special page for pages not connected to sitelinks.',
 	'wikibase-unconnectedpages-submit' => 'Text for the submit button in the options box of the special page for pages not connected to sitelinks.',
 	'wikibase-unconnectedpages-invalid-language' => 'Warning message about invalid language used at the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-page-warning' => 'The title that is typed in could not be used of some kind of reason. This can happen for example when the title has an interwiki prefix to another language, or a namespace that is not used for Wikibase entities.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Text for the checkbox. Should say that only pages without interlanguage-links should be listed.',
 	'wikibase-unconnectedpages-format-row' => 'Formating of the additional data for each row in the result set on the special page for pages not connected to sitelinks.',
 );
 
@@ -602,6 +602,7 @@ $messages['da'] = array(
  */
 $messages['de'] = array(
 	'wikibase-client-desc' => 'Ermöglicht einen Client für die Erweiterung Wikibase',
+	'specialpages-group-wikibaseclient' => 'Wikidata-Client',
 	'wikibase-after-page-move' => 'Du kannst auch das zugeordnete Wikidata-Element [$1 aktualisieren], um Sprachlinks von verschobenen Seiten zu verwalten.',
 	'wikibase-comment-remove' => 'Zugeordnetes Wikidata-Objekt wurde gelöscht. Sprachlinks wurden entfernt.',
 	'wikibase-comment-linked' => 'Ein Wikidata-Objekt wurde mit dieser Seite verknüpft.',
@@ -636,6 +637,14 @@ $messages['de'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Bearbeitungen in den „Letzten Änderungen“ anzeigen',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Bearbeitungen in deiner Beobachtungsliste anzeigen',
 	'wikibase-error-invalid-entity-id' => 'Die eingegebene Kennung ist für das System unbekannt. Bitte verwende eine gültige Objektkennung.',
+	'special-unconnectedpages' => 'Seiten, die nicht mit Objekten verbunden sind',
+	'wikibase-unconnectedpages-legend' => 'Optionen für nicht verbundene Seiten',
+	'wikibase-unconnectedpages-page' => 'Startseite:',
+	'wikibase-unconnectedpages-submit' => 'Los',
+	'wikibase-unconnectedpages-invalid-language' => '„$1“ ist kein gültiger Sprachcode.',
+	'wikibase-unconnectedpages-page-warning' => 'Der Seitenname kann nicht für die Abfrage verwendet werden und wurde ignoriert.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Nur Seiten mit Interlanguagelinks',
+	'wikibase-unconnectedpages-format-row' => '($1 Interlanguagelinks auf der Seite)',
 );
 
 /** Zazaki (Zazaki)
@@ -1173,7 +1182,7 @@ $messages['id'] = array(
 	'wikibase-comment-linked' => 'Item Wikidata telah tertaut ke halaman ini.',
 	'wikibase-comment-unlink' => 'Halaman ini sudah tidak tertaut pada item Wikidata. Interwiki dihapus.',
 	'wikibase-comment-restore' => 'Terkait pembatalan penghapusan item Wikidata, interwiki dipulihkan.',
-	'wikibase-comment-update' => 'Interwiki diperbarui',
+	'wikibase-comment-update' => 'Item wikidata berubah',
 	'wikibase-comment-sitelink-add' => 'Penambahan interwiki: $1',
 	'wikibase-comment-sitelink-change' => 'Interwiki berubah dari $1 ke $2',
 	'wikibase-comment-sitelink-remove' => 'Pengurangan interwiki: $1',
@@ -1189,16 +1198,19 @@ $messages['id'] = array(
 	'wikibase-linkitem-selectlink' => 'Silakan pilih sebuah kode bahasa dan halaman yang Anda ingin tautkan dengan halaman ini.',
 	'wikibase-linkitem-input-site' => 'Bahasa:',
 	'wikibase-linkitem-input-page' => 'Halaman:',
-	'wikibase-linkitem-invalidsite' => 'Situs tidak diketahui atau tidak valid yang dipilih',
+	'wikibase-linkitem-invalidsite' => 'Wiki tidak diketahui atau tidak valid yang dipilih',
 	'wikibase-linkitem-confirmitem-text' => 'Halaman yang anda pilih telah terpaut pada [item $1 di pusat penyimpanan data kami]. Silahkan dikonfirmasi halaman yang ditampilkan dibawah ini adalah halaman yang ingin anda tautkan.',
 	'wikibase-linkitem-confirmitem-button' => 'Terima',
 	'wikibase-linkitem-not-loggedin-title' => 'Anda harus masuk log',
 	'wikibase-linkitem-not-loggedin' => 'Anda harus masuk log pada wiki ini dan pada [pusat penyimpanan data $1] untuk menggunakan fitur ini.',
 	'wikibase-linkitem-success-create' => 'Halaman telah ditautkan. Anda dapat menemukan item baru berisi tautan tersebut pada [pusat penyimpanan data $1] kami.',
 	'wikibase-linkitem-success-link' => 'Halaman telah berhasil ditautkan. Anda dapat menemukan item berisi tautan tersebut pada [pusat penyimpanan data $1] kami.',
+	'wikibase-property-notfound' => '$1 properti tidak ditemukan.',
+	'wikibase-property-notsupportedyet' => 'Wikibase belum mendukung tipe properti untuk $1 properti.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Tampilkan suntingan Wikidata di perubahan terbaru',
-	'wikibase-watchlist-show-changes-pref' => 'Tampilkan suntingan Wikidata pada daftar pantauan Anda', # Fuzzy
+	'wikibase-watchlist-show-changes-pref' => 'Tampilkan suntiangan Wikidata pada daftar pantauan Anda',
+	'wikibase-error-invalid-entity-id' => 'ID yang dimasukkan tidak dikenal sistem. Gunakan entitas ID yang valid.',
 );
 
 /** Iloko (Ilokano)
@@ -1370,15 +1382,41 @@ $messages['ja'] = array(
  * @author David1010
  */
 $messages['ka'] = array(
+	'wikibase-client-desc' => 'ვიკიბაზის გაფართოების კლიენტი',
+	'wikibase-after-page-move' => 'გადარქმეულ გვერდზე ენის ბმულების გასასწორებლად, თქვენ აგრეთვე შეგიძლიათ [$1 განაახლოთ] ვიკიმონაცემების დაკავშირებული ელემენტი.',
+	'wikibase-comment-remove' => 'ვიკიმონაცემების დაკავშირებული ელემენტი წაშლილია. ენის ბმულები წაშლია.',
+	'wikibase-comment-linked' => 'ვიკიმონაცემების ელემენტი დაკავშირებული იყო ამ გვერდთან.',
+	'wikibase-comment-unlink' => 'ამ გვერდის კავშირი ვიკიმონაცემების ელემენტთან გაწყვეტილია. ენის ბმულები წაშლილია.',
+	'wikibase-comment-restore' => 'ვიკიმონაცემებთან დაკავშირებული ელემენტის წაშლა გაუქმებულია. ენის ბმულები აღდგენილია.',
 	'wikibase-comment-update' => 'ვიკიმონაცემების ელემენტი შეცვლილია',
+	'wikibase-comment-sitelink-add' => 'ენის ბმული დამატებულია: $1',
+	'wikibase-comment-sitelink-change' => 'ენის ბმული შეცვლილია $1-დან $2-ზე',
+	'wikibase-comment-sitelink-remove' => 'ენის ბმული წაშლილია: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|ცვლილება|ცვლილება}}',
 	'wikibase-editlinks' => 'ბმულების რედაქტირება',
 	'wikibase-editlinkstitle' => 'ენათშორისი ბმულების რედაქტირება',
 	'wikibase-linkitem-addlinks' => 'ბმულების დამატება',
+	'wikibase-linkitem-alreadylinked' => 'გვერდი, რომელთან დაკავშირებასაც ცდილობდით, უკვე მიბმულია [$1 ელემენტთან] მონაცემების ცენტრალურ საცავში, რომელიც მისამართდება $2-ზე ამ საიტზე. ელემენტებს შესაძლოა ჰქონდეთ მხოლოდ თითო მიბმული გვერდი ყოველი საიტიდან. გთხოვთ, კავშირის დასამყარებლად აირჩიოთ სხვა გვერდი.',
+	'wikibase-linkitem-close' => 'დიალოგის დახურვა და გვერდის გადატვირთვა',
+	'wikibase-linkitem-failure' => 'აღნიშნული გვერდის მიბმის მცდელობისას მოხდა უცნობი შეცდომა.',
+	'wikibase-linkitem-title' => 'კავშირი გვერდიდან',
+	'wikibase-linkitem-linkpage' => 'კავშირი გვერდიდან',
+	'wikibase-linkitem-selectlink' => 'გთხოვთ, აირჩიოთ საიტი და გვერდი, რომელზეც გსურთ აქედან ბმულის გაკეთება.',
 	'wikibase-linkitem-input-site' => 'ენა:',
 	'wikibase-linkitem-input-page' => 'გვერდი:',
+	'wikibase-linkitem-invalidsite' => 'არჩეულია უცნობი ან არაკორექტული საიტი',
+	'wikibase-linkitem-confirmitem-text' => 'თქვენ მიერ არჩეული გვერდი უკვე დაკავშირებულია [$1 ჩვენი მონაცემების ცენტრალური რეპოზიტორიის ელემენტთან]. გთხოვთ, დაადასტუროთ, რომ ქვემოთ ნაჩვენებ გვერდებს შორის არის ის, რომელზეც გსურთ ბმულის გაკეთება აქედან.',
 	'wikibase-linkitem-confirmitem-button' => 'დადასტურება',
+	'wikibase-linkitem-not-loggedin-title' => 'თქვენ უნდა გაიაროთ ავტორიზაცია',
+	'wikibase-linkitem-not-loggedin' => 'ამ ფუნქციის გამოყენებისათვის, თქვენ უნდა გაიაროთ ავტორიზაცია ამ ვიკისა და [$1 მონაცემების ცენტრალურ რეპოზიტორიაში].',
+	'wikibase-linkitem-success-create' => 'გვერდი წარმატებით დაუკავშირდა. კავშირის შემცველი ახლად შექმნილი ელემენტი, მდებარეობს ჩვენი [$1 მონაცემების ცენტრალურ საცავში].',
+	'wikibase-linkitem-success-link' => 'გვერდები წარმატებით დაუკავშირდნენ. კავშირის შემცველი ელემენტი, მდებარეობს ჩვენი [$1 მონაცემების ცენტრალურ საცავში].',
+	'wikibase-property-notfound' => 'თვისება „$1“ ვერ მოიძებნა.',
+	'wikibase-property-notsupportedyet' => 'ვიკიბაზას ჯერ არ აქვს $1 თვისების ტიპის მხარდაჭერა.',
 	'wikibase-rc-hide-wikidata' => 'ვიკიმონაცემების $1',
+	'wikibase-rc-show-wikidata-pref' => 'ვიკიმონაცემების რედაქტირებების ჩვენება ბოლო ცვლილებების სიაში',
+	'wikibase-watchlist-show-changes-pref' => 'ვიკიმონაცემების რედაქტირებების ჩვენება თქვენი კონტროლის სიაში',
+	'wikibase-error-invalid-entity-id' => 'მითითებული ID სისტემისთვის უცნობია. გთხოვთ, გამოიყენოთ მოქმედი ID.',
 );
 
 /** Korean (한국어)
@@ -1582,12 +1620,13 @@ $messages['min'] = array(
  */
 $messages['mk'] = array(
 	'wikibase-client-desc' => 'Клиент за додатокот „Викибаза“',
+	'specialpages-group-wikibaseclient' => 'Клиент на Википодатоците',
 	'wikibase-after-page-move' => 'Можете и да го [$1 подновите] поврзаниот предмет на Википодатоци за да ги одржите јазичните врски на преместената страница.',
 	'wikibase-comment-remove' => 'Здружениот предмет од Википодатоците е избришан. Јазичните врски се избришани.',
 	'wikibase-comment-linked' => 'Со страницава е поврзан предмет од Википодатоците.',
 	'wikibase-comment-unlink' => 'На оваа страница ѝ е раскината врската со елементот од Википодатоците. Јазичните врски се отстранети.',
 	'wikibase-comment-restore' => 'Здружениот предмет од Википодатоците е повратен. Јазичните врски се повратени.',
-	'wikibase-comment-update' => 'Јазичните врски се подновени', # Fuzzy
+	'wikibase-comment-update' => 'Изменет предмет во Википодатоците',
 	'wikibase-comment-sitelink-add' => 'Додадена јазична врска: $1',
 	'wikibase-comment-sitelink-change' => 'Изменета јазична врска од $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Отстранета јазична врска: $1',
@@ -1616,6 +1655,14 @@ $messages['mk'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Прикажувај ги уредувањата на Википодатоците во скорешните промени',
 	'wikibase-watchlist-show-changes-pref' => 'Нема уредувања на Википодатоци во набљудувањата',
 	'wikibase-error-invalid-entity-id' => 'Назнаката не му е позната на системот. Внесете важечка назнака.',
+	'special-unconnectedpages' => 'Страници што не се врзани со предмети',
+	'wikibase-unconnectedpages-legend' => 'Можности за неврзани страници',
+	'wikibase-unconnectedpages-page' => 'Почетна страница:',
+	'wikibase-unconnectedpages-submit' => 'Оди',
+	'wikibase-unconnectedpages-invalid-language' => '„$1“ не претставува важечки јазичен код.',
+	'wikibase-unconnectedpages-page-warning' => 'Насловот на страницата не може да се употреби во барање, па затоа е занемарен.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Само страници со меѓујазични врски',
+	'wikibase-unconnectedpages-format-row' => '($1 меѓујазични врски на страницата)',
 );
 
 /** Malayalam (മലയാളം)

@@ -159,6 +159,7 @@ $specialPageAliases['ko'] = array(
 	'SetDescription' => array( '설명설정' ),
 	'SetAliases' => array( '별명설정' ),
 	'EntitiesWithoutLabel' => array( '레이블없는항목' ),
+	'ItemsWithoutSitelinks' => array( '사이트링크없는항목' ),
 );
 
 /** Luxembourgish (Lëtzebuergesch) */

@@ -950,13 +950,34 @@ $messages['ia'] = array(
 
 /** Indonesian (Bahasa Indonesia)
  * @author Farras
+ * @author Iwan Novirion
  * @author පසිඳු කාවින්ද
  */
 $messages['id'] = array(
+	'wikibase-lib-desc' => 'Menangani fungsi umum untuk Wikibase dan ekstensi klien Wikibase',
 	'wikibase-entity-item' => 'item',
 	'wikibase-entity-property' => 'properti',
-	'wikibase-entity-query' => 'kueri',
+	'wikibase-entity-query' => 'permintaan',
 	'wikibase-diffview-reference' => 'referensi',
+	'wikibase-diffview-rank' => 'peringkat',
+	'wikibase-diffview-qualifier' => 'kualifikasi',
+	'wikibase-error-unexpected' => 'Terjadi kesalahan tak terduga.',
+	'wikibase-error-save-generic' => 'Masalah terjadi saat mencoba untuk melakukan Simpan dan karenanya perubahan Anda tidak dapat diselesaikan.',
+	'wikibase-error-remove-generic' => 'Masalah terjadi saat mencoba untuk melakukan Hapus dan karenanya perubahan Anda tidak dapat diselesaikan.',
+	'wikibase-error-save-connection' => 'Koneksi bermasalah ketika mencoba melakukan Simpan, dan karenanya perubahan tidak dapat diselesaikan. Periksa koneksi Internet Anda.',
+	'wikibase-error-remove-connection' => 'Koneksi bermasalah ketika mencoba melakukan Hapus, dan karenanya perubahan tidak dapat diselesaikan. Periksa koneksi Internet Anda.',
+	'wikibase-error-save-timeout' => 'Kita sedang mengalami masalah teknis, dan karenanya proses yang sedang Anda "simpan" tidak dapat diselesaikan.',
+	'wikibase-error-remove-timeout' => 'Kita sedang mengalami masalah teknis, dan karenanya proses yang sedang Anda "hapus" tidak dapat diselesaikan.',
+	'wikibase-error-autocomplete-connection' => 'Tidak bisa melakukan permintaan API Wikipedia. Harap coba lagi kemudian.',
+	'wikibase-error-autocomplete-response' => 'Respon server: $1',
+	'wikibase-error-ui-client-error' => 'Koneksi ke halaman klien gagal. Harap coba lagi kemudian.',
+	'wikibase-error-ui-no-external-page' => 'Artikel yang dicari tidak ditemukan pada wiki bersangkutan.',
+	'wikibase-error-ui-cant-edit' => 'Anda tidak dibolehkan melakukan tindakan ini.',
+	'wikibase-error-ui-no-permissions' => 'Anda tidak memiliki hak untuk melakukan tindakan ini.',
+	'wikibase-error-ui-link-exists' => 'Anda tidak dapat menautkan ke halaman ini karena item lain sudah tertaut padanya.',
+	'wikibase-error-ui-session-failure' => 'Sesi Anda telah berakhir. Silakan masuk log lagi.',
+	'wikibase-error-ui-edit-conflict' => 'Ada konflik penyuntingan. Silakan muat ulang dan simpan kembali.',
+	'wikibase-replicationnote' => 'Harap diperhatikan bahwa memerlukan beberapa menit sampai perubahan terlihat pada semua wiki',
 	'wikibase-sitelinks' => 'Daftar halaman yang tertaut ke item ini',
 	'wikibase-sitelinks-sitename-columnheading' => 'Bahasa',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
@@ -1105,9 +1126,14 @@ $messages['ja'] = array(
  * @author David1010
  */
 $messages['ka'] = array(
+	'wikibase-lib-desc' => 'ვიკიბაზისა და ვიკიბაზის კლიენტის გაფართოებების საერთო ფუნქციები',
 	'wikibase-entity-item' => 'ელემენტი',
 	'wikibase-entity-property' => 'თვისება',
 	'wikibase-entity-query' => 'მოთხოვნა',
+	'wikibase-diffview-reference' => 'მინიშნება',
+	'wikibase-diffview-rank' => 'ადგილი',
+	'wikibase-diffview-qualifier' => 'შესარჩევი',
+	'wikibase-error-unexpected' => 'მოხდა გაუთვალისწინებელი შეცდომა.',
 	'wikibase-sitelinks-sitename-columnheading' => 'ენა',
 	'wikibase-sitelinks-siteid-columnheading' => 'კოდი',
 	'wikibase-sitelinks-link-columnheading' => 'დაკავშირებული სტატიები',
