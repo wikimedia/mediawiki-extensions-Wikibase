@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( dv, $, QUnit, undefined ) {
+( function( dv, $, QUnit ) {
 	'use strict';
 
 	dv.tests = {};
@@ -16,9 +16,9 @@
 	 * @abstract
 	 * @since 0.1
 	 */
-	dv.tests.DataValueTest = function() {};
-	dv.tests.DataValueTest.prototype = {
+	var SELF = dv.tests.DataValueTest = function() {};
 
+	$.extend( SELF.prototype, {
 		/**
 		 * Data provider that provides valid constructor arguments.
 		 *
@@ -47,13 +47,12 @@
 		 * @return dv.DataValue
 		 */
 		getInstance: function( constructorArguments ) {
-			var
-				self = this,
+			var self = this,
 				DataValueInstance = function( constructorArguments ) {
 					self.getObject().apply( this, constructorArguments );
 				};
 
-			DataValueInstance.prototype = this.getObject().prototype;
+			$.extend( DataValueInstance.prototype, this.getObject().prototype );
 
 			return new DataValueInstance( constructorArguments );
 		},
@@ -105,8 +104,7 @@
 		 * @param {QUnit} assert
 		 */
 		testConstructor: function( assert ) {
-			var
-				constructorArgs = this.getConstructorArguments(),
+			var constructorArgs = this.getConstructorArguments(),
 				i,
 				instance;
 
@@ -134,8 +132,7 @@
 		 * @param {QUnit} assert
 		 */
 		testGetSortKey: function( assert ) {
-			var
-				instances = this.getInstances(),
+			var instances = this.getInstances(),
 				i,
 				keyType;
 
@@ -157,8 +154,7 @@
 		 * @param {QUnit} assert
 		 */
 		testToJSON: function( assert ) {
-			var
-				instances = this.getInstances(),
+			var instances = this.getInstances(),
 				i,
 				jsonValue;
 
@@ -176,8 +172,7 @@
 		 * @param {QUnit} assert
 		 */
 		testGetValue: function( assert ) {
-			var
-				instances = this.getInstances(),
+			var instances = this.getInstances(),
 				i,
 				value;
 
@@ -195,8 +190,7 @@
 		 * @param {QUnit} assert
 		 */
 		testEquals: function( assert ) {
-			var
-				instances = this.getInstances(),
+			var instances = this.getInstances(),
 				instances2 = this.getInstances(),
 				i;
 
@@ -215,7 +209,7 @@
 			}
 		}
 
-	};
+	} );
 
 	/**
 	 * Creates and returns a test method for a getter.
@@ -228,7 +222,7 @@
 	 *
 	 * @return {Function}
 	 */
-	dv.tests.DataValueTest.createGetterTest = function( argNumber, functionName ) {
+	SELF.createGetterTest = function( argNumber, functionName ) {
 		return function() {
 			var
 				constructorArgs = this.getConstructorArguments(),

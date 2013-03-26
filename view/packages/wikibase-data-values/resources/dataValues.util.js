@@ -66,8 +66,8 @@
 
 		NewConstructor.prototype = $.extend(
 			new NewPrototype(),
-			{ constructor: NewConstructor }, // make sure constructor property is set properly, can be overwritten from members
-			members
+			members,
+			{ constructor: NewConstructor } // make sure constructor property is set properly
 		);
 		return NewConstructor;
 	};

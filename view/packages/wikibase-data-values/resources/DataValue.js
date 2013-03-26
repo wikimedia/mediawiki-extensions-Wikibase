@@ -15,9 +15,16 @@
  * @abstract
  * @since 0.1
  */
-dv.DataValue = function DvDataValue() {};
-dv.DataValue.prototype = {
+var SELF = dv.DataValue = function DvDataValue() {};
 
+/**
+ * Type of the DataValue. A static definition of the type like this has to be defined for all
+ * DataValue implementations.
+ * @type String
+ */
+SELF.TYPE = null;
+
+$.extend( SELF.prototype, {
 	/**
 	 * Returns the most basic representation of this Object's value.
 	 *
@@ -70,13 +77,6 @@ dv.DataValue.prototype = {
 	getType: function() {
 		return this.constructor.TYPE;
 	}
-};
-
-/**
- * Type of the DataValue. A static definition of the type like this has to be defined for all
- * DataValue implementations.
- * @type String
- */
-dv.DataValue.TYPE = null;
+} );
 
 }( dataValues, jQuery ) );
