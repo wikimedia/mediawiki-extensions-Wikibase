@@ -6,7 +6,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( dv, $, QUnit, undefined ) {
+( function( dv, $, QUnit ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
@@ -21,9 +21,9 @@
 	dv.tests.BoolValueTest = dv.util.inherit( PARENT, {
 
 		/**
-		 * @see dv.tests.DataValueTest.getObject
+		 * @see dv.tests.DataValueTest.getConstructor
 		 */
-		getObject: function() {
+		getConstructor: function() {
 			return dv.BoolValue;
 		},
 

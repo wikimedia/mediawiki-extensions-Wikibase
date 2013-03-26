@@ -7,7 +7,7 @@
 ( function( dv, $, QUnit ) {
 	'use strict';
 
-	// Fix for msot of our tests no having the number of required assertions.
+	// Fix for most of our tests no having the number of required assertions.
 	// This is required since I214b3d4 got merged into core.
 	// TODO: figure out some non-global alternative to deal with this.
 	QUnit.config.requireExpects = false;

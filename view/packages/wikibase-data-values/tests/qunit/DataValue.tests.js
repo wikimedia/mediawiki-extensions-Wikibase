@@ -29,13 +29,13 @@
 		getConstructorArguments: dv.util.abstractMember,
 
 		/**
-		 * Returns the dataValue object to be tested (ie dv.StringValue).
+		 * Returns the dataValue constructor to be tested (ie dv.StringValue).
 		 *
 		 * @since 0.1
 		 *
-		 * @return dv.DataValue
+		 * @return Function
 		 */
-		getObject: dv.util.abstractMember,
+		getConstructor: dv.util.abstractMember,
 
 		/**
 		 * Returns the dataValue object to be tested (ie dv.StringValue).
@@ -48,13 +48,14 @@
 		 */
 		getInstance: function( constructorArguments ) {
 			var self = this,
-				DataValueInstance = function( constructorArguments ) {
-					self.getObject().apply( this, constructorArguments );
+				OriginalConstructor = self.getConstructor(),
+				DataValueConstructor = function( constructorArguments ) {
+					OriginalConstructor.apply( this, constructorArguments );
 				};
 
-			$.extend( DataValueInstance.prototype, this.getObject().prototype );
+			DataValueConstructor.prototype = OriginalConstructor.prototype;
 
-			return new DataValueInstance( constructorArguments );
+			return new DataValueConstructor( constructorArguments );
 		},
 
 		/**
