@@ -310,7 +310,7 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialWatchlistQuery( array &$conds, array &$tables, array &$join_conds, array &$fields, array $values ) {
+	public static function onSpecialWatchlistQuery( array &$conds, array &$tables, array &$join_conds, array &$fields, array $values = array() ) {
 		global $wgRequest, $wgUser;
 
 		wfProfileIn( __METHOD__ );
