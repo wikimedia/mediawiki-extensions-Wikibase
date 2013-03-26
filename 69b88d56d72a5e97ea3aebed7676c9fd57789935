@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqtRIHzI",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2013-03-26T17:18:58Z",
+      "side": 1,
+      "message": "Please document the possible values of $1 in the message documantation.\n\nIf $1 is a number (what I guess), $1 needs PLURAL",
+      "revId": "69b88d56d72a5e97ea3aebed7676c9fd57789935",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
