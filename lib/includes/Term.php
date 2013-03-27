@@ -65,6 +65,10 @@ class Term {
 	 */
 	public function __construct( array $fields = array() ) {
 		foreach ( $fields as $name => $value ) {
+			if ( $value === null ) {
+				continue;
+			}
+
 			switch ( $name ) {
 				case 'termType':
 					$this->setType( $value );
@@ -89,6 +93,21 @@ class Term {
 	}
 
 	/**
+	 * @since 0.4
+	 *
+	 * @return array
+	 */
+	public function getFields() {
+		return array(
+			'termType' => $this->getType(),
+			'termLanguage' => $this->getLanguage(),
+			'entityId' => $this->getEntityId(),
+			'entityType' => $this->getEntityType(),
+			'termText' => $this->getText(),
+		);
+	}
+
+	/**
 	 * @since 0.2
 	 *
 	 * @param string $type
@@ -96,8 +115,8 @@ class Term {
 	 * @throws MWException
 	 */
 	public function setType( $type ) {
-		if ( !in_array( $type, array( self::TYPE_ALIAS, self::TYPE_LABEL, self::TYPE_DESCRIPTION ), true ) ) {
-			throw new MWException( 'Invalid term type provided' );
+		if ( !is_string( $type ) ) {
+			throw new MWException( 'Term type can only be a string' );
 		}
 
 		$this->fields['termType'] = $type;
