@@ -88,12 +88,6 @@ foreach ( $classes as $class ) {
 
 unset( $classes );
 
-if ( !class_exists( 'MessageReporter' ) ) {
-	$wgAutoloadClasses['MessageReporter'] 			= $dir . 'includes/MessageReporter.php';
-	$wgAutoloadClasses['ObservableMessageReporter'] = $dir . 'includes/MessageReporter.php';
-	$wgAutoloadClasses['NullMessageReporter'] 		= $dir . 'includes/MessageReporter.php';
-}
-
 if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 	$wgAutoloadClasses['Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest']
 		= $dir . 'tests/phpunit/includes/Query/SQLStore/DataValueHandlerTest.php';

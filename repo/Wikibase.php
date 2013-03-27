@@ -212,6 +212,12 @@ $wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/
 $wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 		= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
 $wgAutoloadClasses['Wikibase\Test\TermIndexTest'] 			= $dir . 'tests/phpunit/includes/store/TermIndexTest.php';
 
+if ( !class_exists( 'MessageReporter' ) ) {
+	$wgAutoloadClasses['MessageReporter'] 			= $dir . 'includes/MessageReporter.php';
+	$wgAutoloadClasses['ObservableMessageReporter'] = $dir . 'includes/MessageReporter.php';
+	$wgAutoloadClasses['NullMessageReporter'] 		= $dir . 'includes/MessageReporter.php';
+}
+
 // API module registration
 $wgAPIModules['wbgetentities'] 						= 'Wikibase\Api\GetEntities';
 $wgAPIModules['wbsetlabel'] 						= 'Wikibase\Api\SetLabel';
