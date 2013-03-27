@@ -36,6 +36,7 @@ use MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class Claims extends HashArray implements ClaimListAccess {
 
@@ -158,6 +159,46 @@ class Claims extends HashArray implements ClaimListAccess {
 	 */
 	public function getGuids() {
 		return array_keys( $this->guidIndex );
+	}
+
+	/**
+	 * Returns the claims for the given property.
+	 *
+	 * @since 0.4
+	 *
+	 * @param int $propertyId
+	 *
+	 * @throws \MWException if $propertyId isn't valid
+	 * @return Claims
+	 */
+	public function getClaimsForProperty( $propertyId ) {
+		if ( !is_int( $propertyId ) ) {
+			throw new MWException( "ID must be an int." );
+		}
+
+		$claimsByProp = new ByPropertyIdArray( $this );
+		$claimsByProp->buildIndex();
+
+		$claimsForProperty = new Claims( $claimsByProp->getByPropertyId( $propertyId ) );
+		return $claimsForProperty;
+	}
+
+	/**
+	 * Returns the main Snaks of the claims in this list.
+	 *
+	 * @since 0.4
+	 *
+	 * @return Snak[]
+	 */
+	public function getMainSnaks() {
+		$snaks = array();
+
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			$snaks[] = $claim->getMainSnak();
+		}
+
+		return $snaks;
 	}
 
 	/**

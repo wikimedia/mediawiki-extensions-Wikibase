@@ -44,6 +44,9 @@ class PropertyParserFunction {
 	/* @var \Language */
 	protected $language;
 
+	/* @var EntityLookup */
+	protected $entityLookup;
+
 	/* @var PropertyLookup */
 	protected $propertyLookup;
 
@@ -54,54 +57,45 @@ class PropertyParserFunction {
 	protected $snaksFormatter;
 
 	/**
-	 * @since 0.4
+	 * @since    0.4
 	 *
-	 * @param \Language $language
-	 * @param PropertyLookup $propertyLookup
+	 * @param \Language                   $language
+	 * @param EntityLookup                $entityLookup
+	 * @param PropertyLookup              $propertyLookup
 	 * @param ParserErrorMessageFormatter $errorFormatter
-	 * @param SnakFormatter $dataTypeFactory
+	 * @param Lib\SnakFormatter           $snaksFormatter
 	 */
-	public function __construct( \Language $language, PropertyLookup $propertyLookup,
+	public function __construct( \Language $language,
+		EntityLookup $entityLookup, PropertyLookup $propertyLookup,
 		ParserErrorMessageFormatter $errorFormatter, SnakFormatter $snaksFormatter ) {
 		$this->language = $language;
+		$this->entityLookup = $entityLookup;
 		$this->propertyLookup = $propertyLookup;
 		$this->errorFormatter = $errorFormatter;
 		$this->snaksFormatter = $snaksFormatter;
 	}
 
 	/**
-	 * @since 0.4
+	 * Returns such Claims from $entity that have a main Snak for the property that
+	 * is specified by $propertyLabel.
 	 *
-	 * @param EntityId $entityId
-	 * @param string $propertyLabel
+	 * @param Entity $entity The Entity from which to get the clams
+	 * @param string $propertyLabel A property label (in the wiki's content language) or a prefixed property ID.
 	 *
-	 * @return string - wikitext format
+	 * @return Claims The claims for the given property.
 	 */
-    public function renderForEntityId( EntityId $entityId, $propertyLabel ) {
-		$snakList = $this->getSnaksForProperty( $entityId, $propertyLabel );
-
-		if ( $snakList->isEmpty() ) {
-			return '';
-		}
-
-		$snaks = array();
-
-		foreach( $snakList as $snak ) {
-			$snaks[] = $snak;
-		}
-
-		return $this->formatSnakList( $snaks );
-	}
-
-	private function getSnaksForProperty( EntityId $entityId, $propertyLabel ) {
+	private function getClaimsForProperty( Entity $entity, $propertyLabel ) {
 		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
 
-		if ( $propertyIdToFind === null ) {
+		if ( $propertyIdToFind !== null ) {
+			$allClaims = new Claims( $entity->getClaims() );
+			$claims = $allClaims->getClaimsForProperty( $propertyIdToFind->getNumericId() );
+		} else {
 			$langCode = $this->language->getCode();
-			return $this->propertyLookup->getMainSnaksByPropertyLabel( $entityId, $propertyLabel, $langCode );
+			$claims = $this->propertyLookup->getClaimsByPropertyLabel( $entity, $propertyLabel, $langCode );
 		}
 
-		return $this->propertyLookup->getMainSnaksByPropertyId( $entityId, $propertyIdToFind );
+		return $claims;
 	}
 
 	/**
@@ -114,6 +108,38 @@ class PropertyParserFunction {
 	private function formatSnakList( $snaks ) {
 		$formattedValues = $this->snaksFormatter->formatSnaks( $snaks );
 		return $this->language->commaList( $formattedValues );
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param EntityId $entityId
+	 * @param string   $propertyLabel
+	 *
+	 * @return string - wikitext format
+	 */
+	public function renderForEntityId( EntityId $entityId, $propertyLabel ) {
+		wfProfileIn( __METHOD__ );
+
+		$entity = $this->entityLookup->getEntity( $entityId );
+
+		if ( !$entity ) {
+			wfProfileOut( __METHOD__ );
+			return '';
+		}
+
+		$claims = $this->getClaimsForProperty( $entity, $propertyLabel );
+
+		if ( $claims->isEmpty() ) {
+			wfProfileOut( __METHOD__ );
+			return '';
+		}
+
+		$snakList = $claims->getMainSnaks();
+		$text = $this->formatSnakList( $snakList, $propertyLabel );
+
+		wfProfileOut( __METHOD__ );
+		return $text;
 	}
 
 	/**
@@ -143,10 +169,13 @@ class PropertyParserFunction {
 
 		$wikibaseClient = WikibaseClient::newInstance();
 
+		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$propertyLookup = $wikibaseClient->getStore()->getPropertyLookup();
 		$formatter = $wikibaseClient->newSnakFormatter();
 
-		$instance = new self( $targetLanguage, $propertyLookup, $errorFormatter, $formatter );
+		$instance = new self( $targetLanguage,
+			$entityLookup, $propertyLookup,
+			$errorFormatter, $formatter );
 
 		$result = array(
 			$instance->renderForEntityId( $entityId, $propertyLabel ),

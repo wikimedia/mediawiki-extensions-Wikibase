@@ -29,28 +29,22 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 interface PropertyLookup {
 
 	/**
-	 * @since 0.4
+	 * Returns these claims from the given entity that have a main Snak for the property
+	 * identified by $propertyLabel in the language given by $langCode.
 	 *
-	 * @param EntityId $entityId
-	 * @param string $propertyLabel
+	 * @since    0.4
 	 *
-	 * @return SnakList
-	 */
-	public function getMainSnaksByPropertyId( EntityId $entityId, EntityId $propertyId );
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param EntityId $entityId
+	 * @param Entity $entity
 	 * @param string $propertyLabel
 	 * @param string $langCode
 	 *
-	 * @return SnakList
+	 * @return Claims
 	 */
-	public function getMainSnaksByPropertyLabel( EntityID $entityId, $propertyLabel, $langCode );
+	public function getClaimsByPropertyLabel( Entity $entity, $propertyLabel, $langCode );
 
 }

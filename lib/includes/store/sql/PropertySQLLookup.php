@@ -90,36 +90,6 @@ class PropertySQLLookup implements PropertyLookup {
 	/**
 	 * @since 0.4
 	 *
-	 * @param EntityId $entityId
-	 * @param string $propertyLabel
-	 *
-	 * @return SnakList
-	 */
-	public function getMainSnaksByPropertyId( EntityId $entityId, EntityId $propertyId ) {
-		$entity = $this->entityLookup->getEntity( $entityId );
-		if ( !$entity ) {
-			// Unknown entity, just return an empty SnakList
-			return new SnakList();
-		}
-		$statements = $entity->getClaims();
-
-		$snakList = new SnakList();
-
-		foreach( $statements as $statement ) {
-			$snak = $statement->getMainSnak();
-			$snakPropertyId = $snak->getPropertyId();
-
-			if ( $snakPropertyId->getPrefixedId()  === $propertyId->getPrefixedId() ) {
-				$snakList->addSnak( $snak );
-			}
-		}
-
-		return $snakList;
-	}
-
-	/**
-	 * @since 0.4
-	 *
 	 * @param EntityId $propertyId
 	 *
 	 * @return string|false
@@ -159,26 +129,6 @@ class PropertySQLLookup implements PropertyLookup {
 	/**
 	 * @since 0.4
 	 *
-	 * @param EntityId $propertyId
-	 *
-	 * @return SnakList
-	 */
-	protected function getSnakListForProperty( EntityId $propertyId ) {
-		wfProfileIn( __METHOD__ );
-		$statements = $this->getStatementsByProperty( $propertyId );
-		$snakList = new SnakList();
-
-		foreach( $statements as $statement ) {
-			$snakList->addSnak( $statement->getMainSnak() );
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $snakList;
-	}
-
-	/**
-	 * @since 0.4
-	 *
 	 * @param string $propertyLabel
 	 * @param string $langCode
 	 *
@@ -205,16 +155,16 @@ class PropertySQLLookup implements PropertyLookup {
 	/**
 	 * @since 0.4
 	 *
-	 * @param EntityId $entityId
+	 * @param Entity $entity
 	 * @param string $propertyLabel
 	 * @param string $langCode
 	 *
-	 * @return SnakList
+	 * @return Claims
 	 */
-	public function getMainSnaksByPropertyLabel( EntityId $entityId, $propertyLabel, $langCode ) {
+	public function getClaimsByPropertyLabel( Entity $entity, $propertyLabel, $langCode ) {
 		wfProfileIn( __METHOD__ );
 
-		$snakList = new SnakList();
+		$claims = null;
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 			$propertyId = $this->getPropertyIdByLabel( $propertyLabel, $langCode );
@@ -224,15 +174,22 @@ class PropertySQLLookup implements PropertyLookup {
 				//      in the item, we'll always try to re-index the item's properties.
 				//      We just hope that this is rare, because people notice when a label
 				//      doesn't work.
-				$this->indexPropertiesByLabel( $entityId, $langCode );
+				$this->indexPropertiesByLabel( $entity->getId(), $langCode );
 				$propertyId = $this->getPropertyIdByLabel( $propertyLabel, $langCode );
 			}
 
-			$snakList = $propertyId !== null ? $this->getSnakListForProperty( $propertyId ) : $snakList;
+			if ( $propertyId !== null ) {
+				$allClaims = new Claims( $entity->getClaims() );
+				$claims = $allClaims->getClaimsForProperty( $propertyId->getNumericId() );
+			}
+		}
+
+		if ( $claims === null ) {
+			$claims = new Claims();
 		}
 
 		wfProfileOut( __METHOD__ );
-		return $snakList;
+		return $claims;
 	}
 
 }

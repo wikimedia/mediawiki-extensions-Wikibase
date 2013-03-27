@@ -52,26 +52,27 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 	private function newInstance() {
 		$wikibaseClient = WikibaseClient::newInstance();
 
-		$targetLanguage = new \Language();
+		$targetLanguage = \Language::factory( 'en' );
 		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
 		$dataTypeFactory = $wikibaseClient->getDataTypeFactory();
-		$entityLookup = $this->newEntityLookup();
+		$mockRepo = $this->newMockRepository();
 
 		$formatter = new SnakFormatter(
-			new EntityRetrievingDataTypeLookup( $entityLookup ),
+			new EntityRetrievingDataTypeLookup( $mockRepo ),
 			new TypedValueFormatter(),
 			$dataTypeFactory
 		);
 
 		return new PropertyParserFunction(
 			$targetLanguage,
-			new PropertySQLLookup( $entityLookup ),
+			$mockRepo,
+			$mockRepo,
 			$errorFormatter,
 			$formatter
 		);
 	}
 
-	private function newEntityLookup() {
+	private function newMockRepository() {
 		$propertyId = new EntityId( Property::ENTITY_TYPE, 1337 );
 
 		$entityLookup = new MockRepository();
@@ -80,12 +81,18 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$item->setId( 42 );
 		$item->addClaim( new Claim( new PropertyValueSnak(
 			$propertyId,
-			new StringValue( 'Please write tests before merging your code, or kittens will die' )
+			new StringValue( 'Please write tests before merging your code' )
+		) ) );
+		$item->addClaim( new Claim( new PropertyValueSnak(
+			$propertyId,
+			new StringValue( 'or kittens will die' )
 		) ) );
 
 		$property = Property::newEmpty();
 		$property->setId( $propertyId );
+
 		$property->setDataTypeId( 'string' );
+		$property->setLabel( 'en', 'kitten' );
 
 		$entityLookup->putEntity( $item );
 		$entityLookup->putEntity( $property );
@@ -93,20 +100,38 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		return $entityLookup;
 	}
 
-	public function testRenderForEntityId() {
+	public static function provideRenderForEntityId() {
+		return array(
+			array(
+				'p1337',
+				'Please write tests before merging your code, or kittens will die',
+				'Congratulations, you just killed a kitten'
+			),
+			array(
+				'kitten',
+				'Please write tests before merging your code, or kittens will die',
+				'Congratulations, you just killed a kitten'
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideRenderForEntityId
+	 */
+	public function testRenderForEntityId( $name, $expected, $info ) {
 		$parserFunction = $this->newInstance();
 
 		$result = $parserFunction->renderForEntityId(
 			new EntityId( Item::ENTITY_TYPE, 42 ),
-			'p1337'
+			$name
 		);
 
 		$this->assertInternalType( 'string', $result );
 
 		$this->assertEquals(
-			'Please write tests before merging your code, or kittens will die',
+			$expected,
 			$result,
-			'Congratulations, you just killed a kitten'
+			$info
 		);
 	}
 
