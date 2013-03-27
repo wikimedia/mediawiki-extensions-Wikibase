@@ -197,7 +197,7 @@ $wgAutoloadClasses['Wikibase\TermSqlIndex'] 			= $dir . 'includes/store/sql/Term
 
 // includes/store/sql
 $wgAutoloadClasses['Wikibase\CachingEntityLoader']      = $dir . 'includes/store/sql/CachingEntityLoader.php';
-$wgAutoloadClasses['Wikibase\PropertySQLLookup']        = $dir . 'includes/store/sql/PropertySQLLookup.php';
+$wgAutoloadClasses['Wikibase\PropertyEntityLookup']        = $dir . 'includes/store/sql/PropertyEntityLookup.php';
 $wgAutoloadClasses['Wikibase\SiteLinkTable'] 			= $dir . 'includes/store/sql/SiteLinkTable.php';
 $wgAutoloadClasses['Wikibase\WikiPageEntityLookup'] 	= $dir . 'includes/store/sql/WikiPageEntityLookup.php';
 
