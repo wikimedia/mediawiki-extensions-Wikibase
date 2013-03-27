@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase;
+
 use MWException;
+use InvalidArgumentException;
 
 /**
  * Represents an ID of an Entity.
@@ -256,10 +258,7 @@ class EntityId extends \DataValues\DataValueObject {
 	 * @return EntityId
 	 */
 	public function getArrayValue() {
-		return array(
-			'entity-type' => $this->entityType,
-			'numeric-id' => $this->numericId,
-		);
+		return $this->getPrefixedId();
 	}
 
 	/**
@@ -271,9 +270,19 @@ class EntityId extends \DataValues\DataValueObject {
 	 * @param mixed $data
 	 *
 	 * @return \DataValues\DataValue
+	 * @throws InvalidArgumentException
 	 */
 	public static function newFromArray( $data ) {
-		return new static( $data['entity-type'], $data['numeric-id'] );
+		if ( is_array( $data ) ) {
+			return new static( $data['entity-type'], $data['numeric-id'] );
+		}
+		else {
+			if( !is_string( $data ) ) {
+				throw new InvalidArgumentException( 'EntityId::newFromArray expects a string' );
+			}
+
+			return static::newFromPrefixedId( $data );
+		}
 	}
 
 }
