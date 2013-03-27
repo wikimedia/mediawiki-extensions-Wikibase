@@ -133,7 +133,7 @@ $wgAutoloadClasses['Wikibase\SubmitPropertyAction'] 	= $dir . 'includes/actions/
 $wgAutoloadClasses['Wikibase\SubmitQueryAction'] 		= $dir . 'includes/actions/EditQueryAction.php';
 
 // includes/api
-$wgAutoloadClasses['Wikibase\Api\ApiWikibase'] 						= $dir . 'includes/api/ApiWikibase.php';
+$wgAutoloadClasses['Wikibase\Api\ApiWikibase'] 				= $dir . 'includes/api/ApiWikibase.php';
 $wgAutoloadClasses['Wikibase\Api\IAutocomment'] 			= $dir . 'includes/api/IAutocomment.php';
 $wgAutoloadClasses['Wikibase\Api\EditEntity'] 				= $dir . 'includes/api/EditEntity.php';
 $wgAutoloadClasses['Wikibase\Api\GetEntities'] 				= $dir . 'includes/api/GetEntities.php';
@@ -145,13 +145,13 @@ $wgAutoloadClasses['Wikibase\Api\SetAliases'] 				= $dir . 'includes/api/SetAlia
 $wgAutoloadClasses['Wikibase\Api\SetDescription'] 			= $dir . 'includes/api/SetDescription.php';
 $wgAutoloadClasses['Wikibase\Api\SetLabel'] 				= $dir . 'includes/api/SetLabel.php';
 $wgAutoloadClasses['Wikibase\Api\SetSiteLink'] 				= $dir . 'includes/api/SetSiteLink.php';
-$wgAutoloadClasses['Wikibase\Api\CreateClaim'] 			= $dir . 'includes/api/CreateClaim.php';
-$wgAutoloadClasses['Wikibase\Api\GetClaims'] 			= $dir . 'includes/api/GetClaims.php';
+$wgAutoloadClasses['Wikibase\Api\CreateClaim'] 				= $dir . 'includes/api/CreateClaim.php';
+$wgAutoloadClasses['Wikibase\Api\GetClaims'] 				= $dir . 'includes/api/GetClaims.php';
 $wgAutoloadClasses['Wikibase\Api\RemoveClaims'] 			= $dir . 'includes/api/RemoveClaims.php';
-$wgAutoloadClasses['Wikibase\Api\SetClaimValue'] 		= $dir . 'includes/api/SetClaimValue.php';
+$wgAutoloadClasses['Wikibase\Api\SetClaimValue'] 			= $dir . 'includes/api/SetClaimValue.php';
 $wgAutoloadClasses['Wikibase\Api\SetReference'] 			= $dir . 'includes/api/SetReference.php';
-$wgAutoloadClasses['Wikibase\Api\RemoveReferences'] 	= $dir . 'includes/api/RemoveReferences.php';
-
+$wgAutoloadClasses['Wikibase\Api\RemoveReferences'] 		= $dir . 'includes/api/RemoveReferences.php';
+$wgAutoloadClasses['Wikibase\Api\SetClaim']					= $dir . 'includes/api/SetClaim.php';
 
 // includes/content
 $wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/content/EntityContent.php';
@@ -227,7 +227,7 @@ $wgAPIModules['wbremoveclaims'] 					= 'Wikibase\Api\RemoveClaims';
 $wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\Api\SetClaimValue';
 $wgAPIModules['wbsetreference'] 					= 'Wikibase\Api\SetReference';
 $wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
-
+$wgAPIModules['wbsetclaim'] 						= 'Wikibase\Api\SetClaim';
 
 // Special page registration
 $wgSpecialPages['NewItem'] 						= 'SpecialNewItem';
