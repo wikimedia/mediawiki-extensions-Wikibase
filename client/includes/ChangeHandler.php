@@ -569,7 +569,9 @@ class ChangeHandler {
 				continue;
 			}
 
-			if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+			$ns = $title->getNamespace();
+
+			if ( !is_int( $ns ) || !$this->namespaceChecker->isWikibaseEnabled( $ns ) ) {
 				continue;
 			}
 
