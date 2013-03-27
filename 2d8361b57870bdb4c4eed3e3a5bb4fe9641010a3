@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqrvSNv4",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-27T11:11:25Z",
+      "side": 1,
+      "message": "There is already a message for this in core, it\u0027s simply called \u0027toc\u0027. We should reuse that for consistency.",
+      "revId": "2d8361b57870bdb4c4eed3e3a5bb4fe9641010a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqhvtYsQ",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-27T11:11:25Z",
+      "side": 1,
+      "message": "There are already messages for generating the actual section headings. I think we should use them for consistency, I don\u0027t think we would ever want a ToC entry to be different from the actual heading, right?\n\nThe messages are called:\n\n wikibase-terms\n wikibase-statements\n wikibase-sitelinks\n wikibase-datatype-label\n\nPlease use them in the ToC.",
+      "revId": "2d8361b57870bdb4c4eed3e3a5bb4fe9641010a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqhs3ok0",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-27T11:11:25Z",
+      "side": 1,
+      "message": "ugh... is that really necessary? I was more thinking of something like this:\n\n  $html .\u003d $this-\u003emakeHtmlForStuff();\n  $toc[\"stuff\"] \u003d wfMessage( \"wikibase-stuff\" );\n  ...\n  $html \u003d $this-\u003emakeToC( $toc ) . $html;\n\nCan be made a bit nicer if makeHtmlStuff modifies the toc array:\n\n  function makeHtmlForStuff( \u0026$toc ) {\n    ....\n    $html .\u003d \"\u003ch2\u003e\" . wfMessage( \"wikibase-stuff\" ) . \"\u003c/h2\u003e\";\n    $toc[\"stuff\"] \u003d wfMessage( \"wikibase-stuff\" );\n    ....\n  }\n\nOr, even better, using an accumulator class:\n\n  $content \u003d new PageContent();\n  $content-\u003eaddSection( \u0027stuff\u0027, $this-\u003emakeHtmlForStuff());\n\n  $html \u003d $content-\u003egetHtml(); // automatically adds the ToC",
+      "revId": "2d8361b57870bdb4c4eed3e3a5bb4fe9641010a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqvsxjlk",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-27T11:11:25Z",
+      "side": 1,
+      "message": "This isn\u0027t specific to items, all entities can have claims.",
+      "revId": "2d8361b57870bdb4c4eed3e3a5bb4fe9641010a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
