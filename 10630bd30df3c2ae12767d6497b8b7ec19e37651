@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqvufTv4",
+        "filename": "lib/includes/formatters/WikibaseFormatterFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-27T11:49:34Z",
+      "side": 1,
+      "message": "The /** is used as a marker.\nSo do something like \n\n/**\n * @var array\n */\n  protected....",
+      "revId": "10630bd30df3c2ae12767d6497b8b7ec19e37651",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqlub2hU",
+        "filename": "lib/includes/formatters/WikibaseFormatterFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-27T11:49:34Z",
+      "side": 1,
+      "message": "Please use the same argument names",
+      "revId": "10630bd30df3c2ae12767d6497b8b7ec19e37651",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
