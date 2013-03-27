@@ -1,10 +1,15 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\Entity;
-use \Wikibase\EntityId;
-use \Wikibase\Item;
-use \Wikibase\SiteLink;
+use Wikibase\Claims;
+use Wikibase\Entity;
+use Wikibase\EntityId;
+use Wikibase\EntityLookup;
+use Wikibase\Item;
+use Wikibase\PropertyLookup;
+use Wikibase\SiteLink;
+use Wikibase\SiteLinkLookup;
+use Wikibase\Property;
 
 /**
  * Mock repository for use in tests.
@@ -33,7 +38,7 @@ use \Wikibase\SiteLink;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MockRepository implements \Wikibase\SiteLinkLookup, \Wikibase\EntityLookup {
+class MockRepository implements SiteLinkLookup, EntityLookup, PropertyLookup {
 
 	protected $entities = array();
 	protected $itemByLink = array();
@@ -421,5 +426,69 @@ class MockRepository implements \Wikibase\SiteLinkLookup, \Wikibase\EntityLookup
 		}
 
 		return $entity->getSiteLinks();
+
+	}
+
+	/**
+	 * Returns these claims from the given entity that have a main Snak for the property
+	 * identified by $propertyLabel in the language given by $langCode.
+	 *
+	 * @since    0.4
+	 *
+	 * @param Entity $entity
+	 * @param string $propertyLabel
+	 * @param string $langCode
+	 *
+	 * @return Claims
+	 */
+	public function getClaimsByPropertyLabel( Entity $entity, $propertyLabel, $langCode ) {
+		$prop = $this->getPropertyByLabel( $propertyLabel, $langCode );
+
+		if ( !$prop ) {
+			return new Claims();
+		}
+
+		$allClaims = new Claims( $entity->getClaims() );
+		$theClaims = $allClaims->getClaimsForProperty( $prop->getId()->getNumericId() );
+
+		return $theClaims;
+	}
+
+	/**
+	 * Returns the Property that has the given label in the given language.
+	 *
+	 * @since    0.4
+	 *
+	 * @param string $propertyLabel
+	 * @param string $langCode
+	 *
+	 * @return Property|null
+	 */
+	protected function getPropertyByLabel( $propertyLabel, $langCode ) {
+		$ids = array_keys( $this->entities );
+
+		foreach ( $ids as $id ) {
+			$id = EntityId::newFromPrefixedId( $id );
+			$entity = $this->getEntity( $id );
+
+			if ( $entity->getType() !== Property::ENTITY_TYPE ) {
+				continue;
+			}
+
+			$labels = $entity->getLabels( array( $langCode) );
+
+			if ( empty( $labels ) ) {
+					continue;
+			}
+
+			$label = reset( $labels );
+			if ( $label !== $propertyLabel ) {
+				continue;
+			}
+
+			return $entity;
+		}
+
+		return null;
 	}
 }

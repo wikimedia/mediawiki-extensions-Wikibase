@@ -44,6 +44,9 @@ class PropertyParserFunction {
 	/* @var \Language */
 	protected $language;
 
+	/* @var EntityLookup */
+	protected $entityLookup;
+
 	/* @var PropertyLookup */
 	protected $propertyLookup;
 
@@ -54,54 +57,22 @@ class PropertyParserFunction {
 	protected $snaksFormatter;
 
 	/**
-	 * @since 0.4
+	 * @since    0.4
 	 *
-	 * @param \Language $language
-	 * @param PropertyLookup $propertyLookup
+	 * @param \Language                   $language
+	 * @param EntityLookup                $entityLookup
+	 * @param PropertyLookup              $propertyLookup
 	 * @param ParserErrorMessageFormatter $errorFormatter
-	 * @param SnakFormatter $dataTypeFactory
+	 * @param Lib\SnakFormatter           $snaksFormatter
 	 */
-	public function __construct( \Language $language, PropertyLookup $propertyLookup,
+	public function __construct( \Language $language,
+		EntityLookup $entityLookup, PropertyLookup $propertyLookup,
 		ParserErrorMessageFormatter $errorFormatter, SnakFormatter $snaksFormatter ) {
 		$this->language = $language;
+		$this->entityLookup = $entityLookup;
 		$this->propertyLookup = $propertyLookup;
 		$this->errorFormatter = $errorFormatter;
 		$this->snaksFormatter = $snaksFormatter;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param EntityId $entityId
-	 * @param string $propertyLabel
-	 *
-	 * @return string - wikitext format
-	 */
-    public function renderForEntityId( EntityId $entityId, $propertyLabel ) {
-		$snakList = $this->getSnaksForProperty( $entityId, $propertyLabel );
-
-		if ( $snakList->isEmpty() ) {
-			return '';
-		}
-
-		$snaks = array();
-
-		foreach( $snakList as $snak ) {
-			$snaks[] = $snak;
-		}
-
-		return $this->formatSnakList( $snaks );
-	}
-
-	private function getSnaksForProperty( EntityId $entityId, $propertyLabel ) {
-		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
-
-		if ( $propertyIdToFind === null ) {
-			$langCode = $this->language->getCode();
-			return $this->propertyLookup->getMainSnaksByPropertyLabel( $entityId, $propertyLabel, $langCode );
-		}
-
-		return $this->propertyLookup->getMainSnaksByPropertyId( $entityId, $propertyIdToFind );
 	}
 
 	/**
@@ -114,6 +85,46 @@ class PropertyParserFunction {
 	private function formatSnakList( $snaks ) {
 		$formattedValues = $this->snaksFormatter->formatSnaks( $snaks );
 		return $this->language->commaList( $formattedValues );
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param EntityId $entityId
+	 * @param string   $propertyLabel
+	 *
+	 * @return string - wikitext format
+	 */
+	public function evaluate( EntityId $entityId, $propertyLabel ) {
+		wfProfileIn( __METHOD__ );
+
+		$entity = $this->entityLookup->getEntity( $entityId );
+
+		if ( !$entity ) {
+			wfProfileOut( __METHOD__ );
+			return '';
+		}
+
+		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
+
+		if ( $propertyIdToFind !== null ) {
+			$allClaims = new Claims( $entity->getClaims() );
+			$claims = $allClaims->getClaimsForProperty( $propertyIdToFind->getNumericId() );
+		} else {
+			$langCode = $this->language->getCode();
+			$claims = $this->propertyLookup->getClaimsByPropertyLabel( $entity, $propertyLabel, $langCode );
+		}
+
+		if ( $claims->isEmpty() ) {
+			wfProfileOut( __METHOD__ );
+			return '';
+		}
+
+		$snakList = $claims->getMainSnaks();
+		$text = $this->formatSnakList( $snakList, $propertyLabel );
+
+		wfProfileOut( __METHOD__ );
+		return $text;
 	}
 
 	/**
@@ -143,13 +154,16 @@ class PropertyParserFunction {
 
 		$wikibaseClient = WikibaseClient::newInstance();
 
+		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$propertyLookup = $wikibaseClient->getStore()->getPropertyLookup();
 		$formatter = $wikibaseClient->newSnakFormatter();
 
-		$instance = new self( $targetLanguage, $propertyLookup, $errorFormatter, $formatter );
+		$instance = new self( $targetLanguage,
+			$entityLookup, $propertyLookup,
+			$errorFormatter, $formatter );
 
 		$result = array(
-			$instance->renderForEntityId( $entityId, $propertyLabel ),
+			$instance->evaluate( $entityId, $propertyLabel ),
 			'noparse' => false,
 			'nowiki' => true,
 		);
