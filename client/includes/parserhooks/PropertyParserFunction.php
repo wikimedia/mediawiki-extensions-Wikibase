@@ -132,31 +132,41 @@ class PropertyParserFunction {
 	/**
 	 * @since 0.4
 	 *
-	 * @param string $propertyLabel
+	 * @param EntityId $entityId
+	 * @param string   $propertyLabel
 	 *
 	 * @return string - wikitext format
 	 */
-    public function evaluate( EntityId $entityId, $propertyLabel ) {
+	public function evaluate( EntityId $entityId, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
 
-		$snakList = new SnakList();
+		$entity = $this->entityLookup->getEntity( $entityId );
 
-		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
-
-		if ( $propertyIdToFind !== null ) {
-			$snakList = $this->propertyLookup->getMainSnaksByPropertyId( $entityId, $propertyIdToFind );
-		} else {
-			$langCode = $this->language->getCode();
-			$snakList = $this->propertyLookup->getMainSnaksByPropertyLabel( $entityId, $propertyLabel, $langCode );
-		}
-
-		if ( $snakList->isEmpty() ) {
+		if ( !$entity ) {
 			wfProfileOut( __METHOD__ );
 			return '';
 		}
 
+		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
+
+		if ( $propertyIdToFind !== null ) {
+			$allClaims = new Claims( $entity->getClaims() );
+			$claims = $allClaims->getClaimsForProperty( $propertyIdToFind->getNumericId() );
+		} else {
+			$langCode = $this->language->getCode();
+			$claims = $this->propertyLookup->getClaimsByPropertyLabel( $entity, $propertyLabel, $langCode );
+		}
+
+		if ( $claims->isEmpty() ) {
+			wfProfileOut( __METHOD__ );
+			return '';
+		}
+
+		$snakList = $claims->getMainSnaks();
+		$text = $this->formatSnakList( $snakList, $propertyLabel );
+
 		wfProfileOut( __METHOD__ );
-		return $this->formatSnakList( $snakList, $propertyLabel );
+		return $text;
 	}
 
 	/**
