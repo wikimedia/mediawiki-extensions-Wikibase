@@ -110,6 +110,8 @@ class ChangeHandler {
 			SiteLinkLookup $siteLinkLookup = null,
 			\Site $localSite = null ) {
 
+		wfProfileIn( __METHOD__ );
+
 		$this->sites = \Sites::singleton(); // TODO: get from param
 
 		if ( !$updater ) {
@@ -155,6 +157,8 @@ class ChangeHandler {
 
 		$this->dataTransclusionAllowed = Settings::get( 'allowDataTransclusion' );
 		$this->actionMask = 0xFFFF; //TODO: use changeHanderActions setting
+
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -189,6 +193,7 @@ class ChangeHandler {
 	 *         entity ID is the list of changes performed on that entity.
 	 */
 	public function groupChangesByEntity( array $changes ) {
+		wfProfileIn( __METHOD__ );
 		$groups = array();
 
 		foreach ( $changes as $change ) {
@@ -201,6 +206,7 @@ class ChangeHandler {
 			$groups[$id][] = $change;
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $groups;
 	}
 
@@ -225,6 +231,8 @@ class ChangeHandler {
 		} else if ( count( $changes ) === 1 )  {
 			return reset( $changes );
 		}
+
+		wfProfileIn( __METHOD__ );
 
 		// we now assume that we have a list if EntityChanges,
 		// all done by the same user on the same entity.
@@ -296,6 +304,7 @@ class ChangeHandler {
 		$info['changes'] = $changes;
 		$change->setField( 'info', $info );
 
+		wfProfileOut( __METHOD__ );
 		return $change;
 	}
 
@@ -313,6 +322,8 @@ class ChangeHandler {
 	 * @return EntityChange[] grouped changes
 	 */
 	public function coalesceRuns( array $changes ) {
+		wfProfileIn( __METHOD__ );
+
 		$coalesced = array();
 
 		$currentRun = array();
@@ -379,6 +390,7 @@ class ChangeHandler {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $coalesced;
 	}
 
@@ -392,6 +404,7 @@ class ChangeHandler {
 	 * @return Change[] grouped changes
 	 */
 	public function coalesceChanges( array $changes ) {
+		wfProfileIn( __METHOD__ );
 		$coalesced = array();
 
 		$changesByEntity = $this->groupChangesByEntity( $changes );
@@ -405,6 +418,7 @@ class ChangeHandler {
 		wfDebugLog( __CLASS__, __METHOD__ . ": coalesced "
 			. count( $changes ) . " into " . count( $coalesced ) . " changes"  );
 
+		wfProfileOut( __METHOD__ );
 		return $coalesced;
 	}
 
@@ -444,6 +458,8 @@ class ChangeHandler {
 	 * @param Change[] $changes
 	 */
 	public function handleChanges( array $changes ) {
+		wfProfileIn( __METHOD__ );
+
 		$changes = $this->coalesceChanges( $changes );
 
 		if ( !wfRunHooks( 'WikibaseHandleChanges', array( $changes ) ) ) {
@@ -457,6 +473,8 @@ class ChangeHandler {
 
 			$this->handleChange( $change );
 		}
+
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -523,6 +541,8 @@ class ChangeHandler {
 	 * @return \Title[] the titles of the pages to update
 	 */
 	public function getPagesToUpdate( Change $change ) {
+		wfProfileIn( __METHOD__ );
+
 		$pagesToUpdate = array();
 
 		if ( $change instanceof ItemChange ) {
@@ -576,6 +596,7 @@ class ChangeHandler {
 			$titlesToUpdate[] = $title;
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $titlesToUpdate;
 	}
 
@@ -698,6 +719,8 @@ class ChangeHandler {
 	 * @return int actions to take, as a bit field using the XXX_ACTION flags
 	 */
 	public function getActions( Change $change ) {
+		wfProfileIn( __METHOD__ );
+
 		$actions = 0;
 
 		if ( $change instanceof ItemChange ) {
@@ -725,6 +748,7 @@ class ChangeHandler {
 
 		$actions = $actions & $this->actionMask;
 
+		wfProfileOut( __METHOD__ );
 		return $actions;
 	}
 
@@ -740,6 +764,8 @@ class ChangeHandler {
 	 * @return array|null|string
 	 */
 	public function getEditComment( Change $change, \Title $title ) {
+		wfProfileIn( __METHOD__ );
+
 		if ( $change instanceof EntityChange ) {
 			$siteLinkDiff = ( $change instanceof ItemChange ) ? $change->getSiteLinkDiff() : null;
 
@@ -752,6 +778,7 @@ class ChangeHandler {
 			$comment = null; //TODO: some nice default comment?
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $comment;
 	}
 
@@ -773,6 +800,8 @@ class ChangeHandler {
 		if ( $siteLinkDiff->isEmpty() ) {
 			return null;
 		}
+
+		wfProfileIn( __METHOD__ );
 
 		//TODO: Implement comments specific to the affected page.
 		//       Different pages may be affected in different ways by the same change.
@@ -862,6 +891,7 @@ class ChangeHandler {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $params;
 	}
 }
