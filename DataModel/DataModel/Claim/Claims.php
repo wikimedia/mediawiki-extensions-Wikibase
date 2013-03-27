@@ -36,6 +36,7 @@ use MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class Claims extends HashArray implements ClaimListAccess {
 
@@ -158,6 +159,60 @@ class Claims extends HashArray implements ClaimListAccess {
 	 */
 	public function getGuids() {
 		return array_keys( $this->guidIndex );
+	}
+
+	/**
+	 * @see   ClaimListAccess::getClaimsForProperty
+	 *
+	 * @since 0.4
+	 *
+	 * @param int|EntityId $propertyId
+	 *
+	 * @throws \MWException if $propertyId isn't valid
+	 * @return Claims
+	 */
+	public function getClaimsForProperty( $propertyId ) {
+		$claims = new Claims();
+
+		if ( $propertyId instanceof EntityId) {
+			if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
+				throw new MWException( "ID must refer to a property, not "
+					. $propertyId->getEntityType() );
+			}
+
+			$propertyId = $propertyId->getNumericId();
+		}
+
+		if ( !is_int( $propertyId ) ) {
+			throw new MWException( "ID must an int." );
+		}
+
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			if ( $propertyId == $claim->getPropertyId()->getNumericId() ) {
+				$claims[] = $claim;
+			}
+		}
+
+		return $claims;
+	}
+
+	/**
+	 * @see ClaimListAccess::getMainSnaks
+	 *
+	 * @since 0.4
+	 *
+	 * @return SnakList
+	 */
+	public function getMainSnaks() {
+		$snaks = new SnakList();
+
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			$snaks[] = $claim->getMainSnak();
+		}
+
+		return $snaks;
 	}
 
 	/**

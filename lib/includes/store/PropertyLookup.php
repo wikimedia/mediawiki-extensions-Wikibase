@@ -29,28 +29,19 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 interface PropertyLookup {
 
 	/**
-	 * @since 0.4
+	 * @since    0.4
 	 *
-	 * @param EntityId $entityId
-	 * @param string $propertyLabel
-	 *
-	 * @return SnakList
-	 */
-	public function getMainSnaksByPropertyId( EntityId $entityId, EntityId $propertyId );
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param EntityId $entityId
+	 * @param Entity $entity
 	 * @param string $propertyLabel
 	 * @param string $langCode
 	 *
-	 * @return SnakList
+	 * @return Claims
 	 */
-	public function getMainSnaksByPropertyLabel( EntityID $entityId, $propertyLabel, $langCode );
+	public function getClaimsByPropertyLabel( Entity $entity, $propertyLabel, $langCode );
 
 }

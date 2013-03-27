@@ -27,6 +27,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 interface ClaimListAccess {
 
@@ -89,5 +90,25 @@ interface ClaimListAccess {
 	 * @return Claim|null
 	 */
 	public function getClaimWithGuid( $claimGuid );
+
+	/**
+	 * Returns the claims for the given property.
+	 *
+	 * @since 0.4
+	 *
+	 * @param int $propertyId
+	 *
+	 * @return Claims
+	 */
+	public function getClaimsForProperty( $propertyId );
+
+	/**
+	 * Returns the main Snaks of the claims in this list.
+	 *
+	 * @since 0.4
+	 *
+	 * @return SnakList
+	 */
+	public function getMainSnaks();
 
 }

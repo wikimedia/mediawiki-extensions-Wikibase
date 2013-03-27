@@ -119,6 +119,46 @@ class PropertyParserFunction {
 	/**
 	 * @since 0.4
 	 *
+	 * @param EntityId $entityId
+	 * @param string   $propertyLabel
+	 *
+	 * @return string - wikitext format
+	 */
+	public function evaluate( EntityId $entityId, $propertyLabel ) {
+		wfProfileIn( __METHOD__ );
+
+		$entity = $this->entityLookup->getEntity( $entityId );
+
+		if ( !$entity ) {
+			wfProfileOut( __METHOD__ );
+			return '';
+		}
+
+		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
+
+		if ( $propertyIdToFind !== null ) {
+			$allClaims = new Claims( $entity->getClaims() );
+			$claims = $allClaims->getClaimsForProperty( $propertyIdToFind->getNumericId() );
+		} else {
+			$langCode = $this->language->getCode();
+			$claims = $this->propertyLookup->getClaimsByPropertyLabel( $entity, $propertyLabel, $langCode );
+		}
+
+		if ( $claims->isEmpty() ) {
+			wfProfileOut( __METHOD__ );
+			return '';
+		}
+
+		$snakList = $claims->getMainSnaks();
+		$text = $this->formatSnakList( $snakList, $propertyLabel );
+
+		wfProfileOut( __METHOD__ );
+		return $text;
+	}
+
+	/**
+	 * @since 0.4
+	 *
 	 * @param \Parser &$parser
 	 *
 	 * @return string

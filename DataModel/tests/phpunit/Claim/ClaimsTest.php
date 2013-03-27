@@ -58,8 +58,17 @@ class ClaimsTest extends \MediaWikiTestCase {
 		$instances = array();
 
 		$instances[] = new \Wikibase\Claim(
-			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) )
-		);
+			new \Wikibase\PropertyNoValueSnak(
+				new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 23 ) ) );
+
+		$instances[] = new \Wikibase\Claim(
+			new \Wikibase\PropertySomeValueSnak(
+				new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) ) );
+
+		$instances[] = new \Wikibase\Claim(
+			new \Wikibase\PropertyValueSnak(
+				new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ),
+				new \DataValues\StringValue( "foo" ) ) );
 
 		return $instances;
 	}
@@ -135,6 +144,30 @@ class ClaimsTest extends \MediaWikiTestCase {
 		$array->addClaim( $element );
 
 		$this->assertEquals( $elementCount, count( $array ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\Claims $array
+	 */
+	public function testGetMainSnaks( Claims $array ) {
+		$snaks = $array->getMainSnaks();
+		$this->assertInstanceOf( 'Wikibase\SnakList', $snaks );
+		$this->assertEquals( count( $array ), count( $snaks ) );
+	}
+
+	public function testGetClaimsForProperty() {
+		$array = new Claims( $this->getElementInstances() );
+
+		$claims = $array->getClaimsForProperty( 42 );
+		$this->assertInstanceOf( 'Wikibase\Claims', $claims );
+		$this->assertEquals( 2, count( $claims ) );
+
+		$propId = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 23 );
+		$claims = $array->getClaimsForProperty( $propId );
+		$this->assertInstanceOf( 'Wikibase\Claims', $claims );
+		$this->assertEquals( 1, count( $claims ) );
 	}
 
 	public function testDuplicateClaims() {

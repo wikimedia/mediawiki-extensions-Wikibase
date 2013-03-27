@@ -133,7 +133,7 @@ class Claim implements \Hashable, \Serializable {
 	 *
 	 * @since 0.2
 	 *
-	 * @return integer
+	 * @return EntityId
 	 */
 	public function getPropertyId() {
 		return $this->getMainSnak()->getPropertyId();
