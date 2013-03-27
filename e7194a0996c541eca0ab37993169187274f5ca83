@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqpaRR-I",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-03-27T14:29:00Z",
+      "side": 1,
+      "message": "this is not part of the patch but curious if remove qualifiers is used at all? (in experimental?)\n\nI can add/remove qualifiers in the UI in non-experimental",
+      "revId": "e7194a0996c541eca0ab37993169187274f5ca83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
