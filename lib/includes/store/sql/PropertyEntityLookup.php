@@ -3,9 +3,9 @@
 namespace Wikibase;
 
 /**
- * Property lookup by id and label
+ * Implementation of PropertyLookup based on an EntityLookup
  *
- * @todo use terms table to do lookups, add caching and tests
+ * @todo add caching
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ namespace Wikibase;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class PropertySQLLookup implements PropertyLookup {
+class PropertyEntityLookup implements PropertyLookup {
 
 	/* @var WikiPageEntityLookup */
 	protected $entityLookup;
