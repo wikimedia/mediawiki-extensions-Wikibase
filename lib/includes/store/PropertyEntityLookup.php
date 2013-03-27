@@ -33,7 +33,7 @@ namespace Wikibase;
  */
 class PropertyEntityLookup implements PropertyLookup {
 
-	/* @var WikiPageEntityLookup */
+	/* @var EntityLookup */
 	protected $entityLookup;
 
 	/* @var array */
@@ -106,24 +106,6 @@ class PropertyEntityLookup implements PropertyLookup {
 
 		wfProfileOut( __METHOD__ );
 		return $propertyLabel;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param EntityId $propertyId
-	 *
-	 * @return Statement[]
-	 */
-	protected function getStatementsByProperty( EntityId $propertyId ) {
-		wfProfileIn( __METHOD__ );
-		$numericId = $propertyId->getNumericId();
-
-		$statements = array_key_exists( $numericId, $this->statementsByProperty )
-			? $this->statementsByProperty[$numericId] : array();
-
-		wfProfileOut( __METHOD__ );
-		return $statements;
 	}
 
 	/**

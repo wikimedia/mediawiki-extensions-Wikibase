@@ -65,6 +65,7 @@ final class LibHooks {
 			'store/SiteLinkTable',
 			'store/WikiPageEntityLookup',
 			'store/CachingEntityLoader',
+			'store/MockTermIndex',
 
 			'store/PropertyEntityLookup',
 
