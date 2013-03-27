@@ -68,7 +68,7 @@ class PropertyContentTest extends EntityContentTest {
 	}
 
 	public function testLabelUniquenessRestriction() {
-		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+		\Wikibase\StoreFactory::getStore()->getTermIndex()->clear();
 
 		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
 		$dataTypeFactory = $libRegistry->getDataTypeFactory();

@@ -1,11 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\TermSqlCache;
+use Wikibase\Item;
 use Wikibase\Term;
 
 /**
- * Tests for the Wikibase\TermSqlCache class.
+ * Tests for the Wikibase\TermSqlIndex class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,25 +23,24 @@ use Wikibase\Term;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.2
+ * @since 0.1
  *
  * @ingroup WikibaseRepoTest
  * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseStore
- * @group WikibaseTerm
  * @group Database
- *
- * Some of the tests takes more time, and needs therefor longer time before they can be aborted
- * as non-functional. The reason why tests are aborted is assumed to be set up of temporal databases
- * that hold the first tests in a pending state awaiting access to the database.
- * @group medium
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-class TermSqlCacheTest extends \MediaWikiTestCase {
+class TermSqlIndexTest extends TermIndexTest {
+
+	public function getTermIndex() {
+		return new \Wikibase\TermSqlIndex( 'wb_terms' );
+	}
 
 	public function termProvider() {
 		$argLists = array();
@@ -62,24 +61,24 @@ class TermSqlCacheTest extends \MediaWikiTestCase {
 	 * @param $searchText
 	 * @param boolean $matches
 	 */
-	public function testGetMatchingTerms( $languageCode, $termText, $searchText, $matches ) {
+	public function testGetMatchingTerms2( $languageCode, $termText, $searchText, $matches ) {
 		if ( \Wikibase\Settings::get( 'withoutTermSearchKey' ) ) {
 			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
 		}
 
 		/**
-		 * @var TermSqlCache $termCache
+		 * @var \Wikibase\TermSqlIndex $termIndex
 		 */
-		$termCache = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newTermCache();
+		$termIndex = \Wikibase\StoreFactory::getStore( 'sqlstore' )->getTermIndex();
 
-		$termCache->clear();
+		$termIndex->clear();
 
 		$item = \Wikibase\Item::newEmpty();
 		$item->setId( 42 );
 
 		$item->setLabel( $languageCode, $termText );
 
-		$termCache->saveTermsOfEntity( $item );
+		$termIndex->saveTermsOfEntity( $item );
 
 		$term = new Term();
 		$term->setLanguage( $languageCode );
@@ -89,7 +88,7 @@ class TermSqlCacheTest extends \MediaWikiTestCase {
 			'caseSensitive' => false,
 		);
 
-		$obtainedTerms = $termCache->getMatchingTerms( array( $term ), Term::TYPE_LABEL, \Wikibase\Item::ENTITY_TYPE, $options );
+		$obtainedTerms = $termIndex->getMatchingTerms( array( $term ), Term::TYPE_LABEL, \Wikibase\Item::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
 
@@ -99,5 +98,4 @@ class TermSqlCacheTest extends \MediaWikiTestCase {
 			$this->assertEquals( $termText, $obtainedTerm->getText() );
 		}
 	}
-
 }

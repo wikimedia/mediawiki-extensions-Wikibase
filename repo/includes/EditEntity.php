@@ -742,7 +742,7 @@ class EditEntity {
 			$termViolationDetector->addLabelDescriptionConflicts(
 				$entity,
 				$this->status,
-				StoreFactory::getStore()->newTermCache(),
+				StoreFactory::getStore()->getTermIndex(),
 				$itemDiff === null ? null : $itemDiff->getLabelsDiff(),
 				$itemDiff === null ? null : $itemDiff->getDescriptionsDiff()
 			);

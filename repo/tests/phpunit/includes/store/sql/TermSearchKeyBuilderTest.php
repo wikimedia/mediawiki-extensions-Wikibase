@@ -1,11 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\TermSqlCache;
+use Wikibase\TermSqlIndex;
 use Wikibase\Term;
 
 /**
- * Tests for the Wikibase\TermSqlCache class.
+ * Tests for the Wikibase\TermSqlIndex class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -73,8 +73,8 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 		$item->setLabel( $languageCode, $termText );
 
 		// save term
-		/* @var TermSqlCache $termCache */
-		$termCache = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newTermCache();
+		/* @var \Wikibase\TermSqlIndex $termCache */
+		$termCache = \Wikibase\StoreFactory::getStore( 'sqlstore' )->getTermIndex();
 		$termCache->clear();
 		$termCache->saveTermsOfEntity( $item );
 

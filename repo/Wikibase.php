@@ -185,7 +185,7 @@ $wgAutoloadClasses['Wikibase\EntityPerPage']			= $dir . 'includes/store/EntityPe
 $wgAutoloadClasses['Wikibase\IdGenerator'] 				= $dir . 'includes/store/IdGenerator.php';
 $wgAutoloadClasses['Wikibase\Store'] 					= $dir . 'includes/store/Store.php';
 $wgAutoloadClasses['Wikibase\StoreFactory'] 			= $dir . 'includes/store/StoreFactory.php';
-$wgAutoloadClasses['Wikibase\TermCache'] 				= $dir . 'includes/store/TermCache.php';
+$wgAutoloadClasses['Wikibase\TermIndex'] 				= $dir . 'includes/store/TermIndex.php';
 $wgAutoloadClasses['Wikibase\TermCombinationMatchFinder'] = $dir . 'includes/store/TermCombinationMatchFinder.php';
 $wgAutoloadClasses['Wikibase\TermMatchScoreCalculator'] = $dir . 'includes/store/TermMatchScoreCalculator.php';
 $wgAutoloadClasses['Wikibase\TermSearchKeyBuilder']     = $dir . 'includes/store/sql/TermSearchKeyBuilder.php';
@@ -193,7 +193,7 @@ $wgAutoloadClasses['Wikibase\TermSearchKeyBuilder']     = $dir . 'includes/store
 // includes/store/sql
 $wgAutoloadClasses['Wikibase\SqlIdGenerator'] 			= $dir . 'includes/store/sql/SqlIdGenerator.php';
 $wgAutoloadClasses['Wikibase\SqlStore'] 				= $dir . 'includes/store/sql/SqlStore.php';
-$wgAutoloadClasses['Wikibase\TermSqlCache'] 			= $dir . 'includes/store/sql/TermSqlCache.php';
+$wgAutoloadClasses['Wikibase\TermSqlIndex'] 			= $dir . 'includes/store/sql/TermSqlIndex.php';
 $wgAutoloadClasses['Wikibase\EntityPerPageTable']		= $dir . 'includes/store/sql/EntityPerPageTable.php';
 $wgAutoloadClasses['Wikibase\DispatchStats']			= $dir . 'includes/store/sql/DispatchStats.php';
 
@@ -210,10 +210,12 @@ $wgAutoloadClasses['Wikibase\RebuildEntityPerPage'] 	= $dir . 'maintenance/rebui
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';
 $wgAutoloadClasses['Wikibase\Test\ActionTestCase'] 			= $dir . 'tests/phpunit/includes/actions/ActionTestCase.php';
-$wgAutoloadClasses['Wikibase\Test\Api\ModifyItemBase'] 			= $dir . 'tests/phpunit/includes/api/ModifyItemBase.php';
+$wgAutoloadClasses['Wikibase\Test\Api\ModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ModifyItemBase.php';
 $wgAutoloadClasses['Wikibase\Test\Api\LangAttributeBase'] 	= $dir . 'tests/phpunit/includes/api/LangAttributeBase.php';
 $wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/includes/content/EntityContentTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 		= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
+$wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/includes/specials/SpecialPageTestBase.php';
+$wgAutoloadClasses['Wikibase\Test\TermIndexTest'] 			= $dir . 'tests/phpunit/includes/store/TermIndexTest.php';
 
 // API module registration
 $wgAPIModules['wbgetentities'] 						= 'Wikibase\Api\GetEntities';

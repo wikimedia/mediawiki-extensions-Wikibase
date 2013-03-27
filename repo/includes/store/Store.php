@@ -60,15 +60,13 @@ interface Store {
 	public function rebuild();
 
 	/**
-	 * Returns a new TermCache for this store.
+	 * Returns a TermIndex for this store.
 	 *
 	 * @since 0.1
 	 *
-	 * @return TermCache
-	 *
-	 * @todo: rename to newTermIndex
+	 * @return TermIndex
 	 */
-	public function newTermCache();
+	public function getTermIndex();
 
 	/**
 	 * Returns a new IdGenerator for this store.
