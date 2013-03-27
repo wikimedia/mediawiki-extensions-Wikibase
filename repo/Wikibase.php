@@ -185,17 +185,13 @@ $wgAutoloadClasses['Wikibase\EntityPerPage']			= $dir . 'includes/store/EntityPe
 $wgAutoloadClasses['Wikibase\IdGenerator'] 				= $dir . 'includes/store/IdGenerator.php';
 $wgAutoloadClasses['Wikibase\Store'] 					= $dir . 'includes/store/Store.php';
 $wgAutoloadClasses['Wikibase\StoreFactory'] 			= $dir . 'includes/store/StoreFactory.php';
-$wgAutoloadClasses['Wikibase\TermIndex'] 				= $dir . 'includes/store/TermIndex.php';
-$wgAutoloadClasses['Wikibase\TermCombinationMatchFinder'] = $dir . 'includes/store/TermCombinationMatchFinder.php';
-$wgAutoloadClasses['Wikibase\TermMatchScoreCalculator'] = $dir . 'includes/store/TermMatchScoreCalculator.php';
-$wgAutoloadClasses['Wikibase\TermSearchKeyBuilder']     = $dir . 'includes/store/sql/TermSearchKeyBuilder.php';
 
 // includes/store/sql
 $wgAutoloadClasses['Wikibase\SqlIdGenerator'] 			= $dir . 'includes/store/sql/SqlIdGenerator.php';
 $wgAutoloadClasses['Wikibase\SqlStore'] 				= $dir . 'includes/store/sql/SqlStore.php';
-$wgAutoloadClasses['Wikibase\TermSqlIndex'] 			= $dir . 'includes/store/sql/TermSqlIndex.php';
 $wgAutoloadClasses['Wikibase\EntityPerPageTable']		= $dir . 'includes/store/sql/EntityPerPageTable.php';
 $wgAutoloadClasses['Wikibase\DispatchStats']			= $dir . 'includes/store/sql/DispatchStats.php';
+$wgAutoloadClasses['Wikibase\TermSearchKeyBuilder'] 	= $dir . 'includes/store/sql/TermSearchKeyBuilder.php';
 
 // includes/updates
 $wgAutoloadClasses['Wikibase\EntityDeletionUpdate'] 	= $dir . 'includes/updates/EntityDeletionUpdate.php';
