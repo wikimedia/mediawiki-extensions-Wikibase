@@ -56,12 +56,12 @@ class NamespaceChecker {
 	 *
 	 * @param int $namespace
 	 *
-	 * @throws \MWException
 	 * @return bool
 	 */
 	public function isWikibaseEnabled( $namespace ) {
 		if( !is_int( $namespace ) ) {
-			throw new \MWException( __METHOD__ . " expected a namespace ID." );
+			wfDebugLog( __CLASS__, __METHOD__ . " expected a namespace ID." );
+			return false;
 		}
 
 		if ( $this->isExcluded( $namespace ) ) {
