@@ -75,12 +75,18 @@ class ClaimDifferenceVisualizer {
 			$html .= $this->visualizeRankChange( $claimDifference->getRankChange() );
 		}
 
-		// TODO: html for qualifier changes
+		if ( $claimDifference->getQualifierChanges() !== null ) {
+			$html .= $this->visualizeQualifierChanges(
+				$claimDifference->getQualifierChanges(),
+				$baseClaim
+			);
+		}
 
 		if ( $claimDifference->getReferenceChanges() !== null ) {
-			$html .= $this->visualizeReferenceChanges(
+			$html .= $this->visualizeSnakListChanges(
 				$claimDifference->getReferenceChanges(),
-				$baseClaim
+				$baseClaim,
+				wfMessage( 'wikibase-diffview-reference' )
 			);
 		}
 
@@ -143,9 +149,9 @@ class ClaimDifferenceVisualizer {
 	protected function visualizeMainSnakChange( $mainSnakChange ) {
 		$valueFormatter = new DiffOpValueFormatter(
 			// todo: should show specific headers for both columns
-			$this->getMainSnakHeader( $mainSnakChange->getNewValue() ),
-			$this->getMainSnakValue( $mainSnakChange->getOldValue() ),
-			$this->getMainSnakValue( $mainSnakChange->getNewValue() )
+			$this->getSnakHeader( $mainSnakChange->getNewValue() ),
+			$this->getSnakValue( $mainSnakChange->getOldValue() ),
+			$this->getSnakValue( $mainSnakChange->getNewValue() )
 		);
 
 		return $valueFormatter->generateHtml();
@@ -189,7 +195,7 @@ class ClaimDifferenceVisualizer {
 
 		if ( $newSnak instanceof Snak || $oldSnak instanceof Snak ) {
 			$headerSnak = $newSnak instanceof Snak ? $newSnak : $oldSnak;
-			$snakHeader .= $this->getMainSnakHeader( $headerSnak );
+			$snakHeader .= $this->getSnakHeader( $headerSnak );
 		} else {
 			// something went wrong
 			throw new \MWException( 'Snak parameters not provided.' );
@@ -199,11 +205,11 @@ class ClaimDifferenceVisualizer {
 		$newValue = null;
 
 		if ( $oldSnak instanceof Snak ) {
-			$oldValue = $this->getMainSnakValue( $oldSnak );
+			$oldValue = $this->getSnakValue( $oldSnak );
 		}
 
 		if ( $newSnak instanceof Snak ) {
-			$newValue = $this->getMainSnakValue( $newSnak );
+			$newValue = $this->getSnakValue( $newSnak );
 		}
 
 		$valueFormatter = new DiffOpValueFormatter( $snakHeader, $oldValue, $newValue );
@@ -229,7 +235,7 @@ class ClaimDifferenceVisualizer {
 			$values[] =
 				$this->getEntityLabel( $snak->getPropertyId() ) .
 				': '.
-				$this->getMainSnakValue( $snak );
+				$this->getSnakValue( $snak );
 		}
 
 		return $values;
@@ -240,12 +246,12 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Snak $mainSnak
+	 * @param Snak $snak
 	 *
 	 * @return string
  	 */
-	protected function getMainSnakHeader( Snak $mainSnak ) {
-		$propertyId = $mainSnak->getPropertyId();
+	protected function getSnakHeader( Snak $snak ) {
+		$propertyId = $snak->getPropertyId();
 		$propertyLabel = $this->getEntityLabel( $propertyId );
 		$headerText = wfMessage( 'wikibase-entity-property' ) . ' / ' . $propertyLabel;
 
@@ -253,7 +259,7 @@ class ClaimDifferenceVisualizer {
 	}
 
 	/**
-	 * Get main snak value in string form
+	 * Get snak value in string form
 	 *
 	 * @since 0.4
 	 *
@@ -261,7 +267,7 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @return string
  	 */
-	protected function getMainSnakValue( Snak $snak ) {
+	protected function getSnakValue( Snak $snak ) {
 		$snakType = $snak->getType();
 
 		if ( $snakType === 'value' ) {
@@ -306,73 +312,103 @@ class ClaimDifferenceVisualizer {
 	}
 
 	/**
-	 * Get Html for reference changes
+	 * Get Html for snaklist changes
 	 *
 	 * @since 0.4
 	 *
-	 * @param Diff $referenceChanges
+	 * @param Diff[] $changes
 	 * @param Claim $claim
 	 *
 	 * @return string
 	 */
-	protected function visualizeReferenceChanges( Diff $referenceChanges, Claim $claim ) {
+	protected function visualizeSnakListChanges( Diff $changes, Claim $claim, $breadcrumb ) {
 		$html = '';
 
 		$claimMainSnak = $claim->getMainSnak();
-		$claimHeader = $this->getMainSnakHeader( $claimMainSnak );
+		$claimHeader = $this->getSnakHeader( $claimMainSnak );
+		$newVal = $oldVal = null;
 
-		$newRef = $oldRef = null;
-
-		// Because references only have hashes and no ids,
-		// changing a reference value is treated as a diffop add and diffop remove;
-		// For diff visualization, it should be more like a change
-		// @todo assert that both reference changes refer to the same reference
-		foreach( $referenceChanges as $referenceChange ) {
-			if ( $referenceChange instanceof \Diff\DiffOpAdd ) {
-				$newRef = $this->getSnakListValues( $referenceChange->getNewValue()->getSnaks() );
-			} else if ( $referenceChange instanceof \Diff\DiffOpRemove ) {
-				$oldRef = $this->getSnakListValues( $referenceChange->getOldValue()->getSnaks() );
-			} else if ( $referenceChange instanceof \Diff\DiffOpChange ) {
-				$oldRef = $this->getSnakListValues( $referenceChange->getOldValue()->getSnaks() );
-				$newRef = $this->getSnakListValues( $referenceChange->getNewValue()->getSnaks() );
+		foreach( $changes as $change ) {
+			if ( $change instanceof \Diff\DiffOpAdd ) {
+				$newVal = $this->getSnakListValues( $change->getNewValue()->getSnaks() );
+			} else if ( $change instanceof \Diff\DiffOpRemove ) {
+				$oldVal = $this->getSnakListValues( $change->getOldValue()->getSnaks() );
+			} else if ( $change instanceof \Diff\DiffOpChange ) {
+				$oldVal = $this->getSnakListValues( $change->getOldValue()->getSnaks() );
+				$newVal = $this->getSnakListValues( $change->getNewValue()->getSnaks() );
 			} else {
 				// something went wrong, never should happen
-				throw new \MWException( 'There are no references in the reference change.' );
+				throw new \MWException( 'Unknown change operation.' );
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
-				$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-reference' ),
-				$oldRef,
-				$newRef
+				$claimHeader . ' / ' . $breadcrumb,
+				$oldVal,
+				$newVal
 			);
 
-			$oldRef = $newRef = null;
-
+			$oldVal = $newVal = null;
 			$html .= $valueFormatter->generateHtml();
-
 		}
 
 		return $html;
 	}
 
 	/**
-	 * Format diff header for a reference
+	 * Get Html for qualifier changes
 	 *
 	 * @since 0.4
 	 *
-	 * @param Reference $ref
+	 * @param Diff[] $changes
+	 * @param Claim $claim
 	 *
 	 * @return string
 	 */
-	protected function getRefHeader( $ref ) {
-		$headerSnaks = $ref->getSnaks();
+	protected function visualizeQualifierChanges( Diff $changes, Claim $claim ) {
+		$html = '';
 
-		foreach( $headerSnaks as $headerSnak ) {
-			$header = $this->getMainSnakHeader( $headerSnak );
-			break;
+		$claimMainSnak = $claim->getMainSnak();
+		$claimHeader = $this->getSnakHeader( $claimMainSnak );
+		$newVal = $oldVal = null;
+
+		foreach( $changes as $change ) {
+			// TODO: change hardcoded ": " so something like wfMessage( 'colon-separator' ),
+			// but this will require further refactoring as it would add HTML which gets escaped
+			if ( $change instanceof \Diff\DiffOpAdd ) {
+				$newVal =
+					$this->getEntityLabel( $change->getNewValue()->getPropertyId() ) .
+					': ' .
+					$this->getSnakValue( $change->getNewValue() );
+			} else if ( $change instanceof \Diff\DiffOpRemove ) {
+				$oldVal =
+					$this->getEntityLabel( $change->getOldValue()->getPropertyId() ) .
+					': ' .
+					$this->getSnakValue( $change->getOldValue() );
+			} else if ( $change instanceof \Diff\DiffOpChange ) {
+				$oldVal =
+					$this->getEntityLabel( $change->getOldValue()->getPropertyId() ) .
+					': ' .
+					$this->getSnakValue( $change->getOldValue() );
+				$newVal =
+					$this->getEntityLabel( $change->getNewValue()->getPropertyId() ) .
+					': ' .
+					$this->getSnakValue( $change->getNewValue() );
+			} else {
+				// something went wrong, never should happen
+				throw new \MWException( 'Unknown change operation.' );
+			}
+
+			$valueFormatter = new DiffOpValueFormatter(
+					$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-qualifier' ),
+					$oldVal,
+					$newVal
+			);
+
+			$oldVal = $newVal = null;
+			$html .= $valueFormatter->generateHtml();
 		}
 
-		return $header;
+		return $html;
 	}
 
 }
