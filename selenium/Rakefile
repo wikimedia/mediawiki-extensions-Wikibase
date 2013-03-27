@@ -258,6 +258,11 @@ RSpec::Core::RakeTask.new(:references) do |spec|
   spec.pattern = '../repo/tests/selenium/statements/references_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:qualifiers) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/statements/qualifiers_spec.rb'
+end
+
 RSpec::Core::RakeTask.new(:ip_notification) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/ip_notification_spec.rb'
