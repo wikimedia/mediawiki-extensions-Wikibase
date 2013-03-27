@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\PropertySQLLookup;
+use Wikibase\PropertyEntityLookup;
 use Wikibase\EntityFactory;
 use Wikibase\EntityId;
 use Wikibase\Property;
@@ -12,7 +12,7 @@ use Wikibase\PropertyValueSnak;
 use DataValues\StringValue;
 
 /**
- * Tests for the Wikibase\PropertySQLLookup class.
+ * Tests for the Wikibase\PropertyEntityLookup class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ use DataValues\StringValue;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class PropertySQLLookupTest extends \MediaWikiTestCase {
+class PropertyEntityLookupTest extends \MediaWikiTestCase {
 
 	/**
 	 * @var \Wikibase\EntityLookup
@@ -50,7 +50,7 @@ class PropertySQLLookupTest extends \MediaWikiTestCase {
 	protected $entityLookup;
 
 	/**
-	 * @var \Wikibase\PropertySQLLookup
+	 * @var \Wikibase\PropertyEntityLookup
 	 */
 	protected $propertyLookup;
 
@@ -176,12 +176,12 @@ class PropertySQLLookupTest extends \MediaWikiTestCase {
 			$this->entityLookup->putEntity( $item );
 		}
 
-		$this->propertyLookup = new PropertySQLLookup( $this->entityLookup );
+		$this->propertyLookup = new PropertyEntityLookup( $this->entityLookup );
 	}
 
 	public function testConstructor() {
-		$instance = new PropertySQLLookup( $this->entityLookup );
-		$this->assertInstanceOf( '\Wikibase\PropertySQLLookup', $instance );
+		$instance = new PropertyEntityLookup( $this->entityLookup );
+		$this->assertInstanceOf( '\Wikibase\PropertyEntityLookup', $instance );
 	}
 
 	public function getMainSnaksByPropertyLabelProvider() {

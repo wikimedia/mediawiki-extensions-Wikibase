@@ -115,7 +115,7 @@ class CachingSqlStore implements ClientStore {
 	protected function newPropertyLookup() {
 		$entityLookup = $this->getEntityLookup();
 
-		return new PropertySQLLookup( $entityLookup );
+		return new PropertyEntityLookup( $entityLookup );
 	}
 
 	/**
