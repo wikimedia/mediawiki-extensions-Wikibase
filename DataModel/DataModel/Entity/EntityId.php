@@ -256,10 +256,7 @@ class EntityId extends \DataValues\DataValueObject {
 	 * @return EntityId
 	 */
 	public function getArrayValue() {
-		return array(
-			'entity-type' => $this->entityType,
-			'numeric-id' => $this->numericId,
-		);
+		return $this->getPrefixedId();
 	}
 
 	/**
@@ -273,7 +270,13 @@ class EntityId extends \DataValues\DataValueObject {
 	 * @return \DataValues\DataValue
 	 */
 	public static function newFromArray( $data ) {
-		return new static( $data['entity-type'], $data['numeric-id'] );
+		if ( is_array( $data ) ) {
+			return new static( $data['entity-type'], $data['numeric-id'] );
+		}
+		else {
+			assert( is_string( $data ) );
+			return static::newFromPrefixedId( $data );
+		}
 	}
 
 }
