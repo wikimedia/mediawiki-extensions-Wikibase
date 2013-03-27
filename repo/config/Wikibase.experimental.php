@@ -37,9 +37,9 @@ $dir = __DIR__ . '/../';
 
 $wgAutoloadClasses['Wikibase\Api\RemoveQualifiers'] 	= $dir . 'includes/api/RemoveQualifiers.php';
 $wgAutoloadClasses['Wikibase\Api\SetQualifier'] 		= $dir . 'includes/api/SetQualifier.php';
-$wgAutoloadClasses['Wikibase\Api\SetStatementRank']			= $dir . 'includes/api/SetStatementRank.php';
+$wgAutoloadClasses['Wikibase\Api\SetStatementRank']		= $dir . 'includes/api/SetStatementRank.php';
 
-$wgAutoloadClasses['SpecialEntityData'] 					= $dir . 'includes/specials/SpecialEntityData.php';
+$wgAutoloadClasses['SpecialEntityData'] 				= $dir . 'includes/specials/SpecialEntityData.php';
 
 $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
@@ -89,9 +89,9 @@ foreach ( $classes as $class ) {
 unset( $classes );
 
 if ( !class_exists( 'MessageReporter' ) ) {
-	$wgAutoloadClasses['MessageReporter'] = $dir . 'includes/MessageReporter.php';
+	$wgAutoloadClasses['MessageReporter'] 			= $dir . 'includes/MessageReporter.php';
 	$wgAutoloadClasses['ObservableMessageReporter'] = $dir . 'includes/MessageReporter.php';
-	$wgAutoloadClasses['NullMessageReporter'] = $dir . 'includes/MessageReporter.php';
+	$wgAutoloadClasses['NullMessageReporter'] 		= $dir . 'includes/MessageReporter.php';
 }
 
 if ( defined( 'MW_PHPUNIT_TEST' ) ) {
@@ -119,7 +119,7 @@ $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
 
 $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] 	= '\Wikibase\QueryHandler';
 
 /**
  * Hook to add PHPUnit test cases.

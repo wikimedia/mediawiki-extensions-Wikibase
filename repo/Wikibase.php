@@ -70,19 +70,19 @@ $dir = __DIR__ . '/';
 
 // rights
 // names should be according to other naming scheme
-$wgGroupPermissions['*']['item-override']	= true;
-$wgGroupPermissions['*']['item-create']		= true;
-$wgGroupPermissions['*']['item-remove']		= true;
+$wgGroupPermissions['*']['item-override']		= true;
+$wgGroupPermissions['*']['item-create']			= true;
+$wgGroupPermissions['*']['item-remove']			= true;
 $wgGroupPermissions['*']['property-override']	= true;
 $wgGroupPermissions['*']['property-create']		= true;
 $wgGroupPermissions['*']['property-remove']		= true;
-$wgGroupPermissions['*']['alias-update']	= true;
-$wgGroupPermissions['*']['alias-remove']	= true;
-$wgGroupPermissions['*']['sitelink-remove']	= true;
-$wgGroupPermissions['*']['sitelink-update']	= true;
+$wgGroupPermissions['*']['alias-update']		= true;
+$wgGroupPermissions['*']['alias-remove']		= true;
+$wgGroupPermissions['*']['sitelink-remove']		= true;
+$wgGroupPermissions['*']['sitelink-update']		= true;
 $wgGroupPermissions['*']['linktitles-update']	= true;
-$wgGroupPermissions['*']['label-remove']	= true;
-$wgGroupPermissions['*']['label-update']	= true;
+$wgGroupPermissions['*']['label-remove']		= true;
+$wgGroupPermissions['*']['label-update']		= true;
 $wgGroupPermissions['*']['description-remove']	= true;
 $wgGroupPermissions['*']['description-update']	= true;
 
@@ -91,28 +91,27 @@ $wgExtensionMessagesFiles['Wikibase'] 		= $dir . 'Wikibase.i18n.php';
 $wgExtensionMessagesFiles['WikibaseAlias'] 	= $dir . 'Wikibase.i18n.alias.php';
 $wgExtensionMessagesFiles['WikibaseNS'] 	= $dir . 'Wikibase.i18n.namespaces.php';
 
-
 // Autoloading
 $wgAutoloadClasses['Wikibase\RepoHooks'] 				= $dir . 'Wikibase.hooks.php';
 
 // includes
-$wgAutoloadClasses['Wikibase\Autocomment']				= $dir . 'includes/Autocomment.php';
-$wgAutoloadClasses['Wikibase\ClaimSaver']      			= $dir . 'includes/ClaimSaver.php';
-$wgAutoloadClasses['Wikibase\DataTypeSelector']			= $dir . 'includes/DataTypeSelector.php';
-$wgAutoloadClasses['Wikibase\Repo\DBConnectionProvider']		= $dir . 'includes/DBConnectionProvider.php';
-$wgAutoloadClasses['Wikibase\EditEntity'] 				= $dir . 'includes/EditEntity.php';
-$wgAutoloadClasses['Wikibase\EntityContentDiffView'] 	= $dir . 'includes/EntityContentDiffView.php';
-$wgAutoloadClasses['Wikibase\ItemContentDiffView'] 		= $dir . 'includes/ItemContentDiffView.php';
-$wgAutoloadClasses['Wikibase\ItemDisambiguation'] 		= $dir . 'includes/ItemDisambiguation.php';
-$wgAutoloadClasses['Wikibase\EntityView']				= $dir . 'includes/EntityView.php';
-$wgAutoloadClasses['Wikibase\ExceptionWithCode']		= $dir . 'includes/ExceptionWithCode.php';
-$wgAutoloadClasses['Wikibase\ItemView'] 				= $dir . 'includes/ItemView.php';
-$wgAutoloadClasses['Wikibase\LabelDescriptionDuplicateDetector'] = $dir . 'includes/LabelDescriptionDuplicateDetector.php';
-$wgAutoloadClasses['Wikibase\Repo\LazyDBConnectionProvider']	= $dir . 'includes/LazyDBConnectionProvider.php';
-$wgAutoloadClasses['Wikibase\MultiLangConstraintDetector'] = $dir . 'includes/MultiLangConstraintDetector.php';
-$wgAutoloadClasses['Wikibase\NamespaceUtils']           = $dir . 'includes/NamespaceUtils.php';
-$wgAutoloadClasses['Wikibase\PropertyView']				= $dir . 'includes/PropertyView.php';
-$wgAutoloadClasses['Wikibase\Summary']					= $dir . 'includes/Summary.php';
+$wgAutoloadClasses['Wikibase\Autocomment']							= $dir . 'includes/Autocomment.php';
+$wgAutoloadClasses['Wikibase\ClaimSaver']							= $dir . 'includes/ClaimSaver.php';
+$wgAutoloadClasses['Wikibase\DataTypeSelector']						= $dir . 'includes/DataTypeSelector.php';
+$wgAutoloadClasses['Wikibase\Repo\DBConnectionProvider']			= $dir . 'includes/DBConnectionProvider.php';
+$wgAutoloadClasses['Wikibase\EditEntity'] 							= $dir . 'includes/EditEntity.php';
+$wgAutoloadClasses['Wikibase\EntityContentDiffView'] 				= $dir . 'includes/EntityContentDiffView.php';
+$wgAutoloadClasses['Wikibase\ItemContentDiffView'] 					= $dir . 'includes/ItemContentDiffView.php';
+$wgAutoloadClasses['Wikibase\ItemDisambiguation'] 					= $dir . 'includes/ItemDisambiguation.php';
+$wgAutoloadClasses['Wikibase\EntityView']							= $dir . 'includes/EntityView.php';
+$wgAutoloadClasses['Wikibase\ExceptionWithCode']					= $dir . 'includes/ExceptionWithCode.php';
+$wgAutoloadClasses['Wikibase\ItemView'] 							= $dir . 'includes/ItemView.php';
+$wgAutoloadClasses['Wikibase\LabelDescriptionDuplicateDetector'] 	= $dir . 'includes/LabelDescriptionDuplicateDetector.php';
+$wgAutoloadClasses['Wikibase\Repo\LazyDBConnectionProvider']		= $dir . 'includes/LazyDBConnectionProvider.php';
+$wgAutoloadClasses['Wikibase\MultiLangConstraintDetector'] 			= $dir . 'includes/MultiLangConstraintDetector.php';
+$wgAutoloadClasses['Wikibase\NamespaceUtils']						= $dir . 'includes/NamespaceUtils.php';
+$wgAutoloadClasses['Wikibase\PropertyView']							= $dir . 'includes/PropertyView.php';
+$wgAutoloadClasses['Wikibase\Summary']								= $dir . 'includes/Summary.php';
 
 // includes/actions
 $wgAutoloadClasses['Wikibase\HistoryEntityAction'] 		= $dir . 'includes/actions/HistoryEntityAction.php';
@@ -133,26 +132,26 @@ $wgAutoloadClasses['Wikibase\SubmitPropertyAction'] 	= $dir . 'includes/actions/
 $wgAutoloadClasses['Wikibase\SubmitQueryAction'] 		= $dir . 'includes/actions/EditQueryAction.php';
 
 // includes/api
-$wgAutoloadClasses['Wikibase\Api\ApiWikibase'] 				= $dir . 'includes/api/ApiWikibase.php';
-$wgAutoloadClasses['Wikibase\Api\IAutocomment'] 			= $dir . 'includes/api/IAutocomment.php';
-$wgAutoloadClasses['Wikibase\Api\EditEntity'] 				= $dir . 'includes/api/EditEntity.php';
-$wgAutoloadClasses['Wikibase\Api\GetEntities'] 				= $dir . 'includes/api/GetEntities.php';
-$wgAutoloadClasses['Wikibase\Api\LinkTitles'] 				= $dir . 'includes/api/LinkTitles.php';
-$wgAutoloadClasses['Wikibase\Api\ModifyClaim']				= $dir . 'includes/api/ModifyClaim.php';
-$wgAutoloadClasses['Wikibase\Api\ModifyEntity'] 			= $dir . 'includes/api/ModifyEntity.php';
-$wgAutoloadClasses['Wikibase\Api\ModifyLangAttribute'] 		= $dir . 'includes/api/ModifyLangAttribute.php';
-$wgAutoloadClasses['Wikibase\Api\SearchEntities'] 			= $dir . 'includes/api/SearchEntities.php';
-$wgAutoloadClasses['Wikibase\Api\SetAliases'] 				= $dir . 'includes/api/SetAliases.php';
-$wgAutoloadClasses['Wikibase\Api\SetDescription'] 			= $dir . 'includes/api/SetDescription.php';
-$wgAutoloadClasses['Wikibase\Api\SetLabel'] 				= $dir . 'includes/api/SetLabel.php';
-$wgAutoloadClasses['Wikibase\Api\SetSiteLink'] 				= $dir . 'includes/api/SetSiteLink.php';
-$wgAutoloadClasses['Wikibase\Api\CreateClaim'] 				= $dir . 'includes/api/CreateClaim.php';
-$wgAutoloadClasses['Wikibase\Api\GetClaims'] 				= $dir . 'includes/api/GetClaims.php';
-$wgAutoloadClasses['Wikibase\Api\RemoveClaims'] 			= $dir . 'includes/api/RemoveClaims.php';
-$wgAutoloadClasses['Wikibase\Api\SetClaimValue'] 			= $dir . 'includes/api/SetClaimValue.php';
-$wgAutoloadClasses['Wikibase\Api\SetReference'] 			= $dir . 'includes/api/SetReference.php';
-$wgAutoloadClasses['Wikibase\Api\RemoveReferences'] 		= $dir . 'includes/api/RemoveReferences.php';
-$wgAutoloadClasses['Wikibase\Api\SetClaim']					= $dir . 'includes/api/SetClaim.php';
+$wgAutoloadClasses['Wikibase\Api\ApiWikibase'] 			= $dir . 'includes/api/ApiWikibase.php';
+$wgAutoloadClasses['Wikibase\Api\IAutocomment'] 		= $dir . 'includes/api/IAutocomment.php';
+$wgAutoloadClasses['Wikibase\Api\EditEntity'] 			= $dir . 'includes/api/EditEntity.php';
+$wgAutoloadClasses['Wikibase\Api\GetEntities'] 			= $dir . 'includes/api/GetEntities.php';
+$wgAutoloadClasses['Wikibase\Api\LinkTitles'] 			= $dir . 'includes/api/LinkTitles.php';
+$wgAutoloadClasses['Wikibase\Api\ModifyClaim']			= $dir . 'includes/api/ModifyClaim.php';
+$wgAutoloadClasses['Wikibase\Api\ModifyEntity'] 		= $dir . 'includes/api/ModifyEntity.php';
+$wgAutoloadClasses['Wikibase\Api\ModifyLangAttribute'] 	= $dir . 'includes/api/ModifyLangAttribute.php';
+$wgAutoloadClasses['Wikibase\Api\SearchEntities'] 		= $dir . 'includes/api/SearchEntities.php';
+$wgAutoloadClasses['Wikibase\Api\SetAliases'] 			= $dir . 'includes/api/SetAliases.php';
+$wgAutoloadClasses['Wikibase\Api\SetDescription'] 		= $dir . 'includes/api/SetDescription.php';
+$wgAutoloadClasses['Wikibase\Api\SetLabel'] 			= $dir . 'includes/api/SetLabel.php';
+$wgAutoloadClasses['Wikibase\Api\SetSiteLink'] 			= $dir . 'includes/api/SetSiteLink.php';
+$wgAutoloadClasses['Wikibase\Api\CreateClaim'] 			= $dir . 'includes/api/CreateClaim.php';
+$wgAutoloadClasses['Wikibase\Api\GetClaims'] 			= $dir . 'includes/api/GetClaims.php';
+$wgAutoloadClasses['Wikibase\Api\RemoveClaims'] 		= $dir . 'includes/api/RemoveClaims.php';
+$wgAutoloadClasses['Wikibase\Api\SetClaimValue'] 		= $dir . 'includes/api/SetClaimValue.php';
+$wgAutoloadClasses['Wikibase\Api\SetReference'] 		= $dir . 'includes/api/SetReference.php';
+$wgAutoloadClasses['Wikibase\Api\RemoveReferences'] 	= $dir . 'includes/api/RemoveReferences.php';
+$wgAutoloadClasses['Wikibase\Api\SetClaim']				= $dir . 'includes/api/SetClaim.php';
 
 // includes/content
 $wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/content/EntityContent.php';
@@ -166,8 +165,8 @@ $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryC
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
 
 // includes/specials
-$wgAutoloadClasses['SpecialNewEntity'] 				= $dir . 'includes/specials/SpecialNewEntity.php';
-$wgAutoloadClasses['SpecialNewItem'] 				= $dir . 'includes/specials/SpecialNewItem.php';
+$wgAutoloadClasses['SpecialNewEntity'] 					= $dir . 'includes/specials/SpecialNewEntity.php';
+$wgAutoloadClasses['SpecialNewItem'] 					= $dir . 'includes/specials/SpecialNewItem.php';
 $wgAutoloadClasses['SpecialNewProperty'] 				= $dir . 'includes/specials/SpecialNewProperty.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
@@ -231,11 +230,11 @@ $wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
 $wgAPIModules['wbsetclaim'] 						= 'Wikibase\Api\SetClaim';
 
 // Special page registration
-$wgSpecialPages['NewItem'] 						= 'SpecialNewItem';
+$wgSpecialPages['NewItem'] 							= 'SpecialNewItem';
 $wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
-$wgSpecialPages['ItemsWithoutSitelinks']		= 'SpecialItemsWithoutSitelinks';
+$wgSpecialPages['ItemsWithoutSitelinks']			= 'SpecialItemsWithoutSitelinks';
 $wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
 $wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
 $wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
@@ -245,7 +244,7 @@ $wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
 $wgSpecialPages['DispatchStats']					= 'SpecialDispatchStats';
 
 // Special page groups
-$wgSpecialPageGroups['NewItem']					= 'wikibaserepo';
+$wgSpecialPageGroups['NewItem']						= 'wikibaserepo';
 $wgSpecialPageGroups['NewProperty']					= 'wikibaserepo';
 $wgSpecialPageGroups['ItemByTitle']					= 'wikibaserepo';
 $wgSpecialPageGroups['ItemDisambiguation']			= 'wikibaserepo';
@@ -283,15 +282,15 @@ $wgHooks['SetupAfterCache'][] 						= 'Wikibase\RepoHooks::onSetupAfterCache';
 $wgHooks['ShowSearchHit'][] 						= 'Wikibase\RepoHooks::onShowSearchHit';
 $wgHooks['TitleGetRestrictionTypes'][]				= 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
 $wgHooks['AbuseFilter-contentToString'][]			= 'Wikibase\RepoHooks::onAbuseFilterContentToString';
-$wgHooks['SpecialPage_reorderPages'][]			= 'Wikibase\RepoHooks::onSpecialPage_reorderPages';
+$wgHooks['SpecialPage_reorderPages'][]				= 'Wikibase\RepoHooks::onSpecialPage_reorderPages';
 
 // Resource Loader Modules:
 $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
 
 // register hooks and handlers
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = '\Wikibase\PropertyHandler';
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] 		= '\Wikibase\ItemHandler';
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] 	= '\Wikibase\PropertyHandler';
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] 		= '\Wikibase\QueryHandler';
 
 $wgWBStores = array();
 
