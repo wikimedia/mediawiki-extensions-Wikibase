@@ -297,6 +297,8 @@ class DispatchChanges extends \Maintenance {
 	 * @return int The number of changes dispatched
 	 */
 	public function dispatchTo( $wikiState ) {
+		wfProfileIn( __METHOD__ );
+
 		$wikiDB = $wikiState['chd_db'];
 		$siteID = $wikiState['chd_site'];
 		$after = intval( $wikiState['chd_seen'] );
@@ -329,6 +331,7 @@ class DispatchChanges extends \Maintenance {
 				. "Next ID is $continueAfter." );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $n;
 	}
 
@@ -353,6 +356,8 @@ class DispatchChanges extends \Maintenance {
 	 * @see releaseWiki()
 	 */
 	protected function selectClient() {
+		wfProfileIn( __METHOD__ );
+
 		$candidates = $this->getCandidateClients();
 
 		while ( $candidates ) {
@@ -366,6 +371,7 @@ class DispatchChanges extends \Maintenance {
 
 			if ( $state ) {
 				// got one
+				wfProfileOut( __METHOD__ );
 				return $state;
 			}
 
@@ -373,6 +379,7 @@ class DispatchChanges extends \Maintenance {
 		}
 
 		// we ran out of candidates
+		wfProfileOut( __METHOD__ );
 		return null;
 	}
 
@@ -385,6 +392,7 @@ class DispatchChanges extends \Maintenance {
 	 * @see selectClient()
 	 */
 	protected function getCandidateClients() {
+		wfProfileIn( __METHOD__ );
 		$db = $this->getRepoMaster();
 
 		// XXX: subject to clock skew. Use DB based "now" time?
@@ -435,6 +443,7 @@ class DispatchChanges extends \Maintenance {
 			$candidates[] = $row['chd_site'];
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $candidates;
 	}
 
@@ -443,6 +452,7 @@ class DispatchChanges extends \Maintenance {
 	 * that are in the configuration but not yet in the dispatch table.
 	 */
 	protected function initStateTable() {
+		wfProfileIn( __METHOD__ );
 		$db = $this->getRepoMaster();
 
 		$res = $db->select( $this->stateTable,
@@ -480,6 +490,8 @@ class DispatchChanges extends \Maintenance {
 		}
 
 		$this->releaseRepoMaster( $db );
+
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -501,6 +513,7 @@ class DispatchChanges extends \Maintenance {
 					."consider removing it from the " . $this->stateTable );
 		}
 
+		wfProfileIn( __METHOD__ );
 		$wikiDB = $this->clientWikis[ $siteID ];
 
 		$this->trace( "Trying $siteID" );
@@ -522,6 +535,8 @@ class DispatchChanges extends \Maintenance {
 
 			if ( !$state ) {
 				$this->log( "ERROR: $siteID is not in the dispatch table." );
+
+				wfProfileOut( __METHOD__ );
 				return false;
 			} else {
 				// turn the row object into an array
@@ -538,6 +553,7 @@ class DispatchChanges extends \Maintenance {
 					$db->rollback( __METHOD__ );
 					$this->releaseRepoMaster( $db );
 
+					wfProfileOut( __METHOD__ );
 					return false;
 				}
 			}
@@ -556,6 +572,7 @@ class DispatchChanges extends \Maintenance {
 				$db->rollback( __METHOD__ );
 				$this->releaseRepoMaster( $db );
 
+				wfProfileOut( __METHOD__ );
 				return false;
 			}
 
@@ -572,6 +589,8 @@ class DispatchChanges extends \Maintenance {
 		} catch ( \Exception $ex ) {
 			$db->rollback( __METHOD__ );
 			$this->releaseRepoMaster( $db );
+			wfProfileOut( __METHOD__ );
+
 			throw $ex;
 		}
 
@@ -581,6 +600,8 @@ class DispatchChanges extends \Maintenance {
 		$this->trace( "Locked $wikiDB for site $siteID at {$state['chd_seen']}." );
 
 		unset( $state['chd_disabled'] ); // don't mess with this.
+
+		wfProfileOut( __METHOD__ );
 		return $state;
 	}
 
@@ -595,6 +616,8 @@ class DispatchChanges extends \Maintenance {
 	 * @see selectWiki()
 	 */
 	protected function releaseClient( $seen, array $state ) {
+		wfProfileIn( __METHOD__ );
+
 		$siteID = $state['chd_site'];
 		$wikiDB = $state['chd_db'];
 
@@ -620,6 +643,8 @@ class DispatchChanges extends \Maintenance {
 		} catch ( \Exception $ex ) {
 			$db->rollback( __METHOD__ );
 			$this->releaseRepoMaster( $db );
+
+			wfProfileOut( __METHOD__ );
 			throw $ex;
 		}
 
@@ -627,6 +652,7 @@ class DispatchChanges extends \Maintenance {
 		$this->releaseRepoMaster( $db );
 
 		$this->trace( "Released $wikiDB for site $siteID at $seen." );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -652,6 +678,8 @@ class DispatchChanges extends \Maintenance {
 	 * @return String|bool The lock name if the lock was acquired, false otherwise.
 	 */
 	protected function getClientLock( $wikiDB, $lock = null ) {
+		wfProfileIn( __METHOD__ );
+
 		if ( $lock === null ) {
 			$lock = $this->getClientLockName( $wikiDB );
 		}
@@ -660,6 +688,7 @@ class DispatchChanges extends \Maintenance {
 		$ok = $db->lock( $lock, __METHOD__ );
 		$this->releaseClientMaster( $wikiDB, $db );
 
+		wfProfileOut( __METHOD__ );
 		return $ok ? $lock : false;
 	}
 
@@ -674,10 +703,13 @@ class DispatchChanges extends \Maintenance {
 	 * @return bool whether the lock was released successfully.
 	 */
 	protected function releaseClientLock( $wikiDB, $lock ) {
+		wfProfileIn( __METHOD__ );
+
 		$db = $this->getClientMaster( $wikiDB );
 		$ok = $db->unlock( $lock, __METHOD__ );
 		$this->releaseClientMaster( $wikiDB, $db );
 
+		wfProfileOut( __METHOD__ );
 		return $ok;
 	}
 
@@ -692,10 +724,13 @@ class DispatchChanges extends \Maintenance {
 	 * @return bool true if the given lock is currently held by another process, false otherwise.
 	 */
 	protected function isClientLockUsed( $wikiDB, $lock ) {
+		wfProfileIn( __METHOD__ );
+
 		$db = $this->getClientMaster( $wikiDB );
 		$free = $db->lockIsFree( $lock, __METHOD__ );
 		$this->releaseClientMaster( $wikiDB, $db );
 
+		wfProfileOut( __METHOD__ );
 		return !$free;
 	}
 
@@ -719,6 +754,8 @@ class DispatchChanges extends \Maintenance {
 	 *         for use as a continuation marker.
 	 */
 	public function getPendingChanges( $siteID, $wikiDB, $after ) {
+		wfProfileIn( __METHOD__ );
+
 		// Loop until we have a full batch of size $this->batchSize,
 		// or there are no more changes to process.
 
@@ -769,6 +806,7 @@ class DispatchChanges extends \Maintenance {
 			//     $chunkSize = ( $this->batchSize - count( $batch ) ) * ( count_before / count_after );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return array( $batch, $seen );
 	}
 
@@ -784,6 +822,8 @@ class DispatchChanges extends \Maintenance {
 	 * @return Change[] any changes matching the above criteria.
 	 */
 	public function selectChanges( $after, $limit ) {
+		wfProfileIn( __METHOD__ );
+
 		$changes = $this->changesTable->selectObjects(
 			null,
 			array(
@@ -796,6 +836,7 @@ class DispatchChanges extends \Maintenance {
 			__METHOD__
 		);
 
+		wfProfileOut( __METHOD__ );
 		return $changes;
 	}
 
@@ -814,6 +855,8 @@ class DispatchChanges extends \Maintenance {
 	 * @return bool
 	 */
 	protected function isRelevantChange( Change $change, $siteID ) {
+		wfProfileIn( __METHOD__ );
+
 		if ( $change instanceof ItemChange && !$change->isEmpty() ) {
 			$siteLinkDiff = $change->getSiteLinkDiff();
 
@@ -822,6 +865,7 @@ class DispatchChanges extends \Maintenance {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return false;
 	}
 
@@ -838,6 +882,8 @@ class DispatchChanges extends \Maintenance {
 	 * @return Change[] list of Change object from $changes that are relevant to $siteID.
 	 */
 	protected function filterChanges( $siteID, $wikiDB, $changes ) {
+		wfProfileIn( __METHOD__ );
+
 		// collect all item IDs mentioned in the changes
 		$itemSet = array();
 		foreach ( $changes as $change ) {
@@ -885,6 +931,7 @@ class DispatchChanges extends \Maintenance {
 
 		$this->trace( "found " . count( $changes ) . " changes for items with relevant sitelinks." );
 
+		wfProfileOut( __METHOD__ );
 		return $changes;
 	}
 
@@ -905,22 +952,34 @@ class DispatchChanges extends \Maintenance {
 			return; // nothing to do
 		}
 
+		wfProfileIn( __METHOD__ );
+
 		//TODO: allow a mock JQG for testing
+		wfProfileIn( __METHOD__ . '#queue' );
 		$qgroup = \JobQueueGroup::singleton( $wikiDB );
+		wfProfileOut( __METHOD__ . '#queue' );
 
 		if ( !$qgroup ) {
 			throw new \MWException( "Failed to acquire a JobQueueGroup for $wikiDB" );
 		}
 
+		wfProfileIn( __METHOD__ . '#job' );
 		$job = ChangeNotificationJob::newFromChanges( $changes, $this->repoDB );
+		wfProfileOut( __METHOD__ . '#job' );
+
+		wfProfileIn( __METHOD__ . '#push' );
 		$ok = $qgroup->push( $job );
+		wfProfileOut( __METHOD__ . '#push' );
 
 		if ( !$ok ) {
+			wfProfileOut( __METHOD__ );
 			throw new \MWException( "Failed to push to job queue for $wikiDB" );
 		}
 
 		$this->trace( "Posted notification job for " . count( $changes )
 			. " changes to $wikiDB for site $siteID." );
+
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**

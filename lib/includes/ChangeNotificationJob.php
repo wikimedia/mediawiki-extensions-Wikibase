@@ -46,6 +46,7 @@ class ChangeNotificationJob extends \Job {
 	 */
 	public static function newFromChanges( array $changes, $repo = '', $params = false ) {
 		static $dummyTitle = null;
+		wfProfileIn( __METHOD__ );
 
 		// Note: we don't really care about the title and will use a dummy
 		if ( $dummyTitle === null ) {
@@ -75,7 +76,10 @@ class ChangeNotificationJob extends \Job {
 			$params
 		);
 
-		return new ChangeNotificationJob( $dummyTitle, $params );
+		$job = new ChangeNotificationJob( $dummyTitle, $params );
+
+		wfProfileOut( __METHOD__ );
+		return $job;
 	}
 
 	/**
@@ -106,6 +110,8 @@ class ChangeNotificationJob extends \Job {
 	 */
 	public function getChanges() {
 		if ( $this->changes === null ) {
+			wfProfileIn( __METHOD__ . '#load' );
+
 			$params = $this->getParams();
 			$ids = $params['changeIds'];
 
@@ -126,6 +132,8 @@ class ChangeNotificationJob extends \Job {
 					. " Some changes were lost, possibly due to premature pruning.",
 					E_USER_WARNING );
 			}
+
+			wfProfileOut( __METHOD__ . '#load' );
 		}
 
 		return $this->changes;
