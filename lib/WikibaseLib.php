@@ -146,8 +146,10 @@ $wgAutoloadClasses['Wikibase\EntityFactory'] 		= $dir . 'includes/EntityFactory.
 $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/ItemDiff.php';
 
 // includes/formatters
-$wgAutoloadClasses['Wikibase\ItemFormatter']		= $dir . 'includes/formatters/ItemFormatter.php';
+$wgAutoloadClasses['Wikibase\EntityIdFormatter']	= $dir . 'includes/formatters/EntityIdFormatter.php';
+$wgAutoloadClasses['Wikibase\SnakFormatter']		= $dir . 'includes/formatters/SnakFormatter.php';
 $wgAutoloadClasses['Wikibase\StringFormatter']		= $dir . 'includes/formatters/StringFormatter.php';
+$wgAutoloadClasses['Wikibase\WikibaseFormatterFactory'] = $dir . 'includes/formatters/WikibaseFormatterFactory.php';
 
 // includes/modules
 $wgAutoloadClasses['Wikibase\RepoAccessModule'] 		= $dir . 'includes/modules/RepoAccessModule.php';
