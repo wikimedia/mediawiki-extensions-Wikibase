@@ -73,10 +73,14 @@ class DispatchStats {
 	 * Loads the current dispatch status from the database and calculates statistics.
 	 * Before this method is called, the behavior of the getters is undefined.
 	 *
+	 * @param int|string $now: Timestamp to consider the current time. Mostly useful for testing.
+	 *
 	 * @return int the number of client wikis.
 	 */
-	public function load() {
+	public function load( $now = 0 ) {
 		$db = wfGetDB( DB_SLAVE ); // XXX: use master?
+
+		$now = wfTimestamp( TS_UNIX, $now );
 
 		$this->changeStats = $db->selectRow(
 			$this->changesTableName,
@@ -90,13 +94,18 @@ class DispatchStats {
 			__METHOD__
 		);
 
-		$res = $db->select( $this->dispatchTableName,
+		$res = $db->select(
+			array (
+				$this->dispatchTableName,
+				$this->changesTableName
+			),
 			array( 'chd_site',
 					'chd_db',
 					'chd_seen',
 					'chd_touched',
 					'chd_lock',
 					'chd_disabled',
+					'change_time',
 			),
 			array(
 				'chd_disabled' => 0
@@ -104,29 +113,51 @@ class DispatchStats {
 			__METHOD__,
 			array(
 				'ORDER BY' => 'chd_seen ASC'
+			),
+			array(
+				$this->changesTableName => array( 'LEFT JOIN', 'chd_seen = change_id' )
 			)
 		);
 
 		$this->average = new \stdClass();
+		$this->average->chd_untouched = 0;
+		$this->average->chd_pending = 0;
 		$this->average->chd_lag = 0;
-		$this->average->chd_dist = 0;
 
 		$this->clientStates = array();
 
 		while ( $row = $res->fetchObject() ) {
 			if ( $this->changeStats ) {
-				$row->chd_lag = max( 0, (int)wfTimestamp( TS_UNIX, $this->changeStats->max_time )
+				// time between last dispatch and now
+				$row->chd_untouched = max( 0, $now
 					- (int)wfTimestamp( TS_UNIX, $row->chd_touched ) );
 
-				$row->chd_dist = (int)$this->changeStats->max_id - $row->chd_seen;
+				// time between the timestamp of the last changed processed and the last change recorded.
+				if ( $row->change_time === null ) {
+					// the change was already pruned, lag is "big".
+					$row->chd_lag = null;
+				} else {
+					$row->chd_lag = max( 0, (int)wfTimestamp( TS_UNIX, $this->changeStats->max_time )
+						- (int)wfTimestamp( TS_UNIX, $row->change_time ) );
+				}
+
+				// number of changes that have not been processed yet
+				$row->chd_pending = (int)$this->changeStats->max_id - $row->chd_seen;
 			} else {
 				// if there are no changes, there is no lag
+				$row->chd_untouched = 0;
+				$row->chd_pending = 0;
 				$row->chd_lag = 0;
-				$row->chd_dist = 0;
 			}
 
-			$this->average->chd_lag += $row->chd_lag;
-			$this->average->chd_dist += $row->chd_dist;
+			$this->average->chd_untouched += $row->chd_untouched;
+			$this->average->chd_pending += $row->chd_pending;
+
+			if ( $row->chd_lag === null || $this->average->chd_lag === null ) {
+				$this->average->chd_lag = null;
+			} else {
+				$this->average->chd_lag += $row->chd_lag;
+			}
 
 			$this->clientStates[] = $row;
 		}
@@ -134,8 +165,10 @@ class DispatchStats {
 		$n = count( $this->clientStates );
 
 		if ( $n > 0 ) {
-			$this->average->chd_lag = intval( $this->average->chd_lag / $n );
-			$this->average->chd_dist = intval( $this->average->chd_dist / $n );
+			$this->average->chd_untouched = intval( $this->average->chd_untouched / $n );
+			$this->average->chd_pending = intval( $this->average->chd_pending / $n );
+			$this->average->chd_lag = $this->average->chd_lag === null
+										? null : intval( $this->average->chd_lag / $n );
 		}
 
 		return $n;
@@ -150,8 +183,12 @@ class DispatchStats {
 	 * The state for each wiki is returned as an object containing the following fields:
 	 *
 	 * * chd_site: the client wiki's site ID
-	 * * chd_lag:  seconds since that client was last touched by a dispatcher
-	 * * chd_dist: number of changes not yet dispatched to that client
+	 * * chd_untouched:  seconds since that client was last touched by a dispatcher
+	 * * chd_pending: number of changes not yet dispatched to that client
+	 * * chd_lag: seconds between the timestamp of the last change that got dispatched
+	 *            and the latest change recorded. May be null if some of the pending changes
+	 *            have already been pruned. This indicates that the average could not be
+	 *            determined, but the lag is large.
 	 * * chd_lock: the name of the lock currently in effect for that wiki
 	 *
 	 * @return array|null A list of objects representing the dispatch state
@@ -218,8 +255,12 @@ class DispatchStats {
 	 * Returns a pseudo-status object representing the average (mean) dispatch
 	 * lag. The status object has the following fields:
 	 *
-	 * * chd_lag:  seconds since that client was last touched by a dispatcher
-	 * * chd_dist: number of changes not yet dispatched to that client
+	 * * chd_untouched:  seconds since that client was last touched by a dispatcher
+	 * * chd_pending: number of changes not yet dispatched to that client
+	 * * chd_lag: seconds between the timestamp of the last change that got dispatched
+	 *            and the latest change recorded. May be null if some of the pending changes
+	 *            have already been pruned. This indicates that the average could not be
+	 *            determined, but the lag is large.
 	 *
 	 * @return object
 	 */

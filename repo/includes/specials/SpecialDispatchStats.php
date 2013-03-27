@@ -61,9 +61,15 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 
 		$this->outputRow( array(
 			$label,
-			isset( $state->chd_site ) ? $state->chd_site : '',
-			$lang->formatNum( $state->chd_dist ),
-			$lang->formatDuration( $state->chd_lag ),
+			isset( $state->chd_site ) ? $state->chd_site : '-',
+			isset( $state->chd_seen ) ? $state->chd_seen : '-',
+			$lang->formatNum( $state->chd_pending ),
+			$state->chd_lag === null
+				? wfMessage( 'wikibase-dispatchstats-large-lag' )->text()
+				: $lang->formatDuration( $state->chd_lag, array( 'days', 'hours', 'minutes' ) ),
+			isset( $state->chd_touched )
+				? $lang->timeanddate( $state->chd_touched )
+				: '-',
 		) );
 	}
 
@@ -118,8 +124,10 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 		$this->outputRow( array(
 			'',
 			$this->msg( 'wikibase-dispatchstats-site-id' )->text(),
+			$this->msg( 'wikibase-dispatchstats-pos' )->text(),
 			$this->msg( 'wikibase-dispatchstats-lag-num' )->text(),
 			$this->msg( 'wikibase-dispatchstats-lag-time' )->text(),
+			$this->msg( 'wikibase-dispatchstats-touched' )->text(),
 		), 'th' );
 
 		$this->outputStateRow(
