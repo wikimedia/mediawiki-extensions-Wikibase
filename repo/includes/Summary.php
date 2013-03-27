@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Language;
+use DataValues\StringValue;
 
 /**
  * File defining the handler for autocomments and additional utility functions
@@ -67,8 +68,6 @@ class Summary {
 	 * @param array|bool $summaryArgs the arguments to the autosummary
 	 */
 	public function __construct( $moduleName = null, $actionName = null, $language = null, $commentArgs = array(), $summaryArgs = false ) {
-		//global $wgContLang;
-
 		$this->moduleName = $moduleName;
 		$this->actionName = $actionName;
 		$this->language = $language === null ? null : (string)$language;
@@ -243,6 +242,7 @@ class Summary {
 				return '';
 			}
 			else {
+				// @todo have some sort of key value formatter
 				return $wgContLang->commaList( $parts );
 			}
 		}
@@ -263,35 +263,91 @@ class Summary {
 		$strings = array();
 
 		foreach ( $args as $arg ) {
-			// if we find that any arg is an object we shall not display them
-			switch ( true ) {
-			case is_string( $arg ):
-				$strings[] = $arg;
-				break;
-			case is_object( $arg ) && ($arg instanceof EntityId):
-				$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $arg );
-				$strings[] = '[[' . $title->getFullText() . ']]';
-				break;
-			case is_object( $arg ) && method_exists( $arg, '__toString' ):
-				$strings[] = (string)$arg;
-				break;
-			case is_object( $arg ) && !method_exists( $arg, '__toString' ):
-				$strings[] = '';
-				$this->removeFormat( self::USE_SUMMARY );
-				break;
-			case $arg === false || $arg === null:
-				$strings[] = '';
-				break;
-			default:
-				$strings[] = '';
-				$this->removeFormat( self::USE_SUMMARY );
+			$strings[] = $this->formatArg( $arg );
+		}
+
+        $this->summaryArgs = array_merge(
+            $this->summaryArgs === false ? array() : $this->summaryArgs,
+            array_filter( $strings, function ( $str ) { return 0 < strlen( $str ); } )
+        );
+	}
+
+	/**
+	 * Format an autosummary argument
+	 *
+	 * @since 0.4
+	 *
+	 * @param mixed $arg
+	 *
+	 * @return string
+	 */
+	protected function formatArg( $arg ) {
+		global $wgContLang;
+
+		$string = '';
+
+		if ( is_string( $arg ) ) {
+			$entityId = EntityId::newFromPrefixedId( $arg );
+			if ( $entityId instanceof EntityId ) {
+				$arg = $entityId;
 			}
 		}
 
-		$this->summaryArgs = array_merge(
-			$this->summaryArgs === false ? array() : $this->summaryArgs,
-			array_filter( $strings, function ( $str ) { return 0 < strlen( $str ); } )
-		);
+		// if we find that any arg is an object we shall not display them
+		switch ( true ) {
+			case is_array( $arg ):
+				$string = '';
+
+				$key = key( $arg );
+				$value = $arg[$key];
+
+				if ( !is_int( $key ) ) {
+					// @todo i18n for colon in onFormat
+					$string .= $this->formatArg( $key ) . ': ';
+				}
+
+				// @todo this is crufty!
+				$dataValueStrings = array();
+
+				if ( is_array( $value ) ) {
+					foreach( $value as $i ) {
+						$dataValueStrings[] = $this->formatArg( $i );
+					}
+
+					if ( $dataValueStrings !== array() ) {
+						$string .= $wgContLang->commaList( $dataValueStrings );
+					}
+				} else if ( is_string( $value ) ) {
+					$string .= $this->formatArg( $value );
+
+				}
+				break;
+			case is_string( $arg ):
+				$string = $arg;
+				break;
+			case is_object( $arg ) && ($arg instanceof EntityId):
+				$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $arg );
+				$string = '[[' . $title->getFullText() . ']]';
+				break;
+			case is_object( $arg ) && ( $arg instanceof StringValue ):
+				$string = htmlspecialchars( $arg->getValue() );
+				break;
+			case is_object( $arg ) && method_exists( $arg, '__toString' ):
+				$string = (string)$arg;
+				break;
+			case is_object( $arg ) && !method_exists( $arg, '__toString' ):
+				$string = '';
+				break;
+			case is_int( $arg ):
+				$string = (string) $arg;
+				break;
+			case $arg === false || $arg === null:
+				break;
+			default:
+				$string = '';
+		}
+
+		return $string;
 	}
 
 	/**
@@ -357,7 +413,10 @@ class Summary {
 
 		$comment = ( $format & self::USE_COMMENT) ? Utils::trimToNFC( $comment ) : '';
 		$summary = ( $format & self::USE_SUMMARY) ? Utils::trimToNFC( $summary ) : '';
-		return self::formatTotalSummary( $comment, $summary, $length );
+
+		$totalSummary = self::formatTotalSummary( $comment, $summary, $length );
+
+		return $totalSummary;
 	}
 
 }
