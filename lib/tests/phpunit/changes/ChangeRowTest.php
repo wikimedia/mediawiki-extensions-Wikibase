@@ -152,9 +152,11 @@ class ChangeRowTest extends \ORMRowTest {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetAge( $changeRow ) {
-		$this->assertEquals(
-			time() - (int)wfTimestamp( TS_UNIX, '20130101000000' ),
-			$changeRow->getAge()
+		// Don't assert on equalness because all previous code takes time!
+		$this->assertTrue(
+			// the time used is one above the minimum run time (4s) for the test,
+			// still the normal difference to observe would be 1s.
+			abs( ( time() - (int)wfTimestamp( TS_UNIX, '20130101000000' ) ) - $changeRow->getAge() ) <= 5
 		);
 	}
 
