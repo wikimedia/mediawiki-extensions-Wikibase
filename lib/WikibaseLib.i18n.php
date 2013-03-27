@@ -109,7 +109,7 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
  * @author Robby
  */
 $messages['af'] = array(
-	'wikibase-entity-item' => 'Item',
+	'wikibase-entity-item' => 'item',
 	'wikibase-entity-property' => 'eienskap',
 	'wikibase-entity-query' => 'soekopdrag',
 	'wikibase-diffview-reference' => 'verwysing',
@@ -1096,6 +1096,7 @@ $messages['it'] = array(
 );
 
 /** Japanese (日本語)
+ * @author Fryed-peach
  * @author Shirayuki
  */
 $messages['ja'] = array(
@@ -1103,9 +1104,19 @@ $messages['ja'] = array(
 	'wikibase-entity-item' => '項目',
 	'wikibase-entity-property' => 'プロパティ',
 	'wikibase-entity-query' => 'クエリ',
+	'wikibase-diffview-reference' => '情報源',
 	'wikibase-diffview-rank' => 'ランク',
+	'wikibase-diffview-qualifier' => '修飾子',
 	'wikibase-error-unexpected' => '予期しないエラーが発生しました。',
+	'wikibase-error-save-generic' => '保存を実行している最中にエラーが発生したため、あなたの変更を反映させることができませんでした。',
+	'wikibase-error-remove-generic' => '除去を実行している最中にエラーが発生したため、あなたの変更を反映させることができませんでした。',
+	'wikibase-error-save-connection' => '保存を実行している最中に接続エラーが発生したため、あなたの変更を反映させることができませんでした。自身のインターネット接続を確認してください。',
+	'wikibase-error-remove-connection' => '除去を実行している最中に接続エラーが発生したため、あなたの変更を反映させることができませんでした。自身のインターネット接続を確認してください。',
+	'wikibase-error-save-timeout' => '技術的な障害が発生しているため、保存を完了できませんでした。',
+	'wikibase-error-remove-timeout' => '技術的な障害が発生しているため、除去を完了できませんでした。',
+	'wikibase-error-autocomplete-connection' => 'ウィキペディアの API に問い合わせすることができませんでした。後で再度実行してください。',
 	'wikibase-error-autocomplete-response' => 'サーバーの応答: $1',
+	'wikibase-error-ui-client-error' => 'クライアントページへの接続に失敗しました。後で再度実行してください。',
 	'wikibase-error-ui-no-external-page' => '指定した記事は、対応するサイト内で見つかりませんでした。',
 	'wikibase-error-ui-cant-edit' => 'この操作を行うことは許可されていません。',
 	'wikibase-error-ui-no-permissions' => 'あなたにはこの操作を実行する権限がありません。',
@@ -1134,6 +1145,21 @@ $messages['ka'] = array(
 	'wikibase-diffview-rank' => 'ადგილი',
 	'wikibase-diffview-qualifier' => 'შესარჩევი',
 	'wikibase-error-unexpected' => 'მოხდა გაუთვალისწინებელი შეცდომა.',
+	'wikibase-error-save-generic' => 'შენახვის მცდელობისას მოხდა შეცდომა, ამიტომ თქვენი ცვლილებები ვერ შესრულდება.',
+	'wikibase-error-remove-generic' => 'წაშლის მცდელობისას მოხდა შეცდომა, ამიტომ თქვენი ცვლილებები ვერ შესრულდება.',
+	'wikibase-error-save-connection' => 'შენახვის მცდელობისას მოხდა დაკავშირების შეცდომა, ამიტომ თქვენი ცვლილებები ვერ შესრულდება. გთხოვთ, შეამოწმოთ თქვენი კავშირი ინტერნეტთან.',
+	'wikibase-error-remove-connection' => 'წაშლის მცდელობისას მოხდა დაკავშირების შეცდომა, ამიტომ თქვენი ცვლილებები ვერ შესრულდება. გთხოვთ, შეამოწმოთ თქვენი კავშირი ინტერნეტთან.',
+	'wikibase-error-save-timeout' => 'ჩვენ განვიცდით ტექნიკურ სირთულეებს, ამიტომ თქვენი ცვლილებები ვერ შესრულდება.',
+	'wikibase-error-remove-timeout' => 'ჩვენ განვიცდით ტექნიკურ სირთულეებს, ამიტომ თქვენი წაშლა ვერ შესრულდება.',
+	'wikibase-error-autocomplete-response' => 'სერვერის პასუხი: $1',
+	'wikibase-error-ui-client-error' => 'კლიენტის გვერდთან დაკავშირების შეცდომა. გთხოვთ, სცადოთ მოგვიანებით.',
+	'wikibase-error-ui-no-external-page' => 'შესაბამის საიტზე მითითებული სტატიის მოძებნა ვერ მოხერხდა.',
+	'wikibase-error-ui-cant-edit' => 'თქვენ არ შეგიძლიათ ამ მოქმედების შესრულება.',
+	'wikibase-error-ui-no-permissions' => 'თქვენ არ გაქვთ საკმარი უფლებები ამ მოქმედების შესასრულებლად.',
+	'wikibase-error-ui-session-failure' => 'თქვენი სესიის დრო ამოიწურა. გთხოვთ, თავიდან შეხვიდეთ სისტემაში.',
+	'wikibase-error-ui-edit-conflict' => 'რედაქტირების კონფლიქტი. გადატვირთეთ და თავიდან შეინახეთ.',
+	'wikibase-replicationnote' => 'გთხოვთ, მიაქციოთ ყურადღება, რომ შეიძლება გავიდეს რამდენიმე წუთი, სანამ ცვლილებები ხილული გახდება ყველა ვიკი-პროექტში',
+	'wikibase-sitelinks' => 'ამ ელემენტზე გადამისამართებული გვერდების სია',
 	'wikibase-sitelinks-sitename-columnheading' => 'ენა',
 	'wikibase-sitelinks-siteid-columnheading' => 'კოდი',
 	'wikibase-sitelinks-link-columnheading' => 'დაკავშირებული სტატიები',

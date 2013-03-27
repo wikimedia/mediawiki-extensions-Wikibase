@@ -215,6 +215,7 @@ $specialPageAliases['scn'] = array(
 
 /** Vietnamese (Tiếng Việt) */
 $specialPageAliases['vi'] = array(
+	'DispatchStats' => array( 'Thống_kê_truyền_bá' ),
 	'EntityData' => array( 'Dữ_liệu_thực_thể' ),
 	'NewItem' => array( 'Tạo_khoản_mục' ),
 	'NewProperty' => array( 'Thuộc_tính_mới' ),
