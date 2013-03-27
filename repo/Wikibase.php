@@ -203,7 +203,6 @@ $wgAutoloadClasses['Wikibase\Test\Api\ModifyItemBase'] 		= $dir . 'tests/phpunit
 $wgAutoloadClasses['Wikibase\Test\Api\LangAttributeBase'] 	= $dir . 'tests/phpunit/includes/api/LangAttributeBase.php';
 $wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/includes/content/EntityContentTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 		= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
-$wgAutoloadClasses['Wikibase\Test\TermIndexTest'] 			= $dir . 'tests/phpunit/includes/store/TermIndexTest.php';
 
 if ( !class_exists( 'MessageReporter' ) ) {
 	$wgAutoloadClasses['MessageReporter'] 			= $dir . 'includes/MessageReporter.php';

@@ -59,12 +59,6 @@ $wgWBRepoSettings['idBlacklist'] = array(
 	720101010,
 );
 
-// Allow the TermIndex table to work without the term_search_key field,
-// for sites that can not easily roll out schema changes on large tables.
-// This means that all searches will use exact matching
-// (depending on the database's collation).
-$wgWBRepoSettings['withoutTermSearchKey'] = false;
-
 $wgWBRepoSettings['entityNamespaces'] = array();
 
 // These are used for multilanguage strings that should have a soft length constraint

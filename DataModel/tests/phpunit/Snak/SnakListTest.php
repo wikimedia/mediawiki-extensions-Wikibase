@@ -183,4 +183,24 @@ class SnakListTest extends HashArrayTest {
 		}
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param SnakList $snaks
+	 */
+	public function testGetIDs( SnakList $snaks ) {
+		$ids = $snaks->getPropertyIds();
+
+		$this->assertInternalType( 'array', $ids,
+			'getPropertyIds() should return array' );
+
+		$this->assertTrue( count( $ids ) <= count($snaks), $ids,
+			'the number of properties can\'t be greater than the number of snaks' );
+
+		foreach ( $ids as $n => $id ) {
+			$this->assertEquals( \Wikibase\Property::ENTITY_TYPE, $id->getEntityType(), "entity type" );
+			$this->assertEquals( $n, $id->getNumericId(), "array key vs. numeric ID" );
+		}
+	}
+
 }

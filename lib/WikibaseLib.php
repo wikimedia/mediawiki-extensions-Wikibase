@@ -196,13 +196,15 @@ $wgAutoloadClasses['Wikibase\TermMatchScoreCalculator'] = $dir . 'includes/store
 $wgAutoloadClasses['Wikibase\TermSqlIndex'] 			= $dir . 'includes/store/sql/TermSqlIndex.php';
 
 // includes/store/sql
-$wgAutoloadClasses['Wikibase\CachingEntityLoader']      = $dir . 'includes/store/sql/CachingEntityLoader.php';
-$wgAutoloadClasses['Wikibase\PropertyEntityLookup']        = $dir . 'includes/store/sql/PropertyEntityLookup.php';
+$wgAutoloadClasses['Wikibase\CachingEntityLoader']		= $dir . 'includes/store/sql/CachingEntityLoader.php';
+$wgAutoloadClasses['Wikibase\PropertyEntityLookup']		= $dir . 'includes/store/PropertyEntityLookup.php';
+$wgAutoloadClasses['Wikibase\PropertyTermLookup']		= $dir . 'includes/store/PropertyTermLookup.php';
 $wgAutoloadClasses['Wikibase\SiteLinkTable'] 			= $dir . 'includes/store/sql/SiteLinkTable.php';
 $wgAutoloadClasses['Wikibase\WikiPageEntityLookup'] 	= $dir . 'includes/store/sql/WikiPageEntityLookup.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/specials/SpecialPageTestBase.php';
+$wgAutoloadClasses['Wikibase\Test\PropertyLookupTest'] 		= $dir . 'tests/phpunit/store/PropertyLookupTest.php';
 
 $wgAutoloadClasses['Wikibase\Test\HashArrayTest'] 			= $dir . 'tests/phpunit/hasharray/HashArrayTest.php';
 $wgAutoloadClasses['Wikibase\Test\HashArrayElement'] 		= $dir . 'tests/phpunit/hasharray/HashArrayElement.php';
@@ -221,6 +223,9 @@ $wgAutoloadClasses['Wikibase\Test\EntityTestCase']			= $dir . 'tests/phpunit/ent
 $wgAutoloadClasses['Wikibase\Lib\Test\Serializers\UnserializerBaseTest'] = $dir . 'tests/phpunit/serializers/UnserializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\MockRepository'] 			= $dir . 'tests/phpunit/MockRepository.php';
 $wgAutoloadClasses['Wikibase\Test\EntityLookupTest'] 		= $dir . 'tests/phpunit/EntityLookupTest.php';
+
+$wgAutoloadClasses['Wikibase\Test\TermIndexTest'] 			= $dir . 'tests/phpunit/store/TermIndexTest.php';
+$wgAutoloadClasses['Wikibase\Test\MockTermIndex'] 			= $dir . 'tests/phpunit/store/MockTermIndex.php';
 
 // TODO: this is not nice, figure out a better design
 $wgExtensionFunctions[] = function() {

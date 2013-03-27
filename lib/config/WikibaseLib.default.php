@@ -89,4 +89,10 @@ $wgWBSettings['dataTypes'] = array(
 	'string',
 );
 
+// Allow the TermIndex table to work without the term_search_key field,
+// for sites that can not easily roll out schema changes on large tables.
+// This means that all searches will use exact matching
+// (depending on the database's collation).
+$wgWBSettings['withoutTermSearchKey'] = false;
+
 $wgValueFormatters['wikibase-entityid'] = 'Wikibase\Lib\EntityIdFormatter';
