@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DqtsiigQ",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-27T11:29:01Z",
+      "side": 1,
+      "message": "I guess it wont make any harm, but usually you should never reuse localized messages unless they\u0027re purpose is to be generic and reusable.",
+      "parentUuid": "DqrvSNv4",
+      "revId": "2d8361b57870bdb4c4eed3e3a5bb4fe9641010a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DqhvtYsQ",
         "filename": "lib/WikibaseLib.i18n.php",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-27T11:11:25Z",
       "side": 1,
       "message": "There are already messages for generating the actual section headings. I think we should use them for consistency, I don\u0027t think we would ever want a ToC entry to be different from the actual heading, right?\n\nThe messages are called:\n\n wikibase-terms\n wikibase-statements\n wikibase-sitelinks\n wikibase-datatype-label\n\nPlease use them in the ToC.",
+      "revId": "2d8361b57870bdb4c4eed3e3a5bb4fe9641010a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqrslVg4",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-27T11:29:01Z",
+      "side": 1,
+      "message": "These are not used and should be removed",
+      "parentUuid": "DqhvtYsQ",
       "revId": "2d8361b57870bdb4c4eed3e3a5bb4fe9641010a3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "Dqlt-Wt0",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-27T11:29:01Z",
+      "side": 1,
+      "message": "First solution is really use of tokens once more. Second will end in a rewrite of EntityView just to get a TOC in.. Yes EntityView needs a rewrite but I don\u0027t think that should be done to get the TOC working. If this is the wanted slution then the EntityView should be refactored first, and then a TOC added afterwards. Otherwise this rather small fix will be a much larger rewrite.\n\nThis solution has the added benefit that it uses the existing content to create the TOC. That means there are no additional structures to maintain. It is also comparable to the current way to do this, only difference is that this use html as source and not wikitext.",
+      "parentUuid": "Dqhs3ok0",
+      "revId": "2d8361b57870bdb4c4eed3e3a5bb4fe9641010a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqvsxjlk",
         "filename": "repo/includes/ItemView.php",
         "patchSetId": 14
@@ -64,6 +118,24 @@
       "writtenOn": "2013-03-27T11:11:25Z",
       "side": 1,
       "message": "This isn\u0027t specific to items, all entities can have claims.",
+      "revId": "2d8361b57870bdb4c4eed3e3a5bb4fe9641010a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqrtuti4",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-27T11:29:01Z",
+      "side": 1,
+      "message": "Not for the moment. Moving this to EntityView means testing for subclasses inside EntityView, that is bad.\n\nAn alternative is rewriting getHtmlForClaims, as it now will always post a header because there is always an [add] link. In short it will fail for PropertyView.",
+      "parentUuid": "Dqvsxjlk",
       "revId": "2d8361b57870bdb4c4eed3e3a5bb4fe9641010a3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
