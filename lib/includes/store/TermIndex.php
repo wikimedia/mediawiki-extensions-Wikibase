@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * Interface to a cache for terms with both write and lookup methods.
+ * Interface to a index for terms with both write and lookup methods.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,8 +27,6 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- *
- * @todo: rename to TermIndex
  */
 interface TermIndex extends TermCombinationMatchFinder {
 
@@ -50,7 +48,7 @@ interface TermIndex extends TermCombinationMatchFinder {
 	public function getEntityIdsForLabel( $label, $languageCode = null, $description = null, $entityType = null, $fuzzySearch = false );
 
 	/**
-	 * Saves the terms of the provided entity in the term cache.
+	 * Saves the terms of the provided entity in the term index.
 	 *
 	 * @since 0.1
 	 *
@@ -61,7 +59,7 @@ interface TermIndex extends TermCombinationMatchFinder {
 	public function saveTermsOfEntity( Entity $entity );
 
 	/**
-	 * Deletes the terms of the provided entity from the term cache.
+	 * Deletes the terms of the provided entity from the term index.
 	 *
 	 * @since 0.1
 	 *
@@ -159,7 +157,7 @@ interface TermIndex extends TermCombinationMatchFinder {
 
 
 	/**
-	 * Clears all terms from the cache.
+	 * Clears all terms from the index.
 	 *
 	 * @since 0.2
 	 *

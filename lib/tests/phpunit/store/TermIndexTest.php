@@ -5,6 +5,7 @@ use Wikibase\TermIndex;
 use Wikibase\ItemContent;
 use Wikibase\Item;
 use Wikibase\Term;
+use Wikibase\EntityId;
 
 /**
  * Base class for tests for calsses implementing Wikibase\TermIndex.
@@ -62,16 +63,17 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item1->setLabel( 'nl', 'o_O' );
 		$item1->setDescription( 'en', 'foo bar baz' );
 
-		$content0 = ItemContent::newEmpty();
-		$content0->setItem( $item0 );
-		$content0->save( '', null, EDIT_NEW );
-		$id0 = $content0->getItem()->getId()->getNumericId();
+		$eid0 = new EntityId( Item::ENTITY_TYPE, 11 );
+		$eid1 = new EntityId( Item::ENTITY_TYPE, 21 );
 
-		$content1 = ItemContent::newEmpty();
-		$content1->setItem( $item1 );
+		$item0->setId( $eid0 );
+		$item1->setId( $eid1 );
 
-		$content1->save( '', null, EDIT_NEW );
-		$id1 = $content1->getItem()->getId()->getNumericId();
+		$id0 = $eid0->getNumericId();
+		$id1 = $eid1->getNumericId();
+
+		$lookup->saveTermsOfEntity( $item0 );
+		$lookup->saveTermsOfEntity( $item1 );
 
 		$ids = $lookup->getEntityIdsForLabel( 'foobar' );
 		$this->assertInternalType( 'array', $ids );
@@ -122,9 +124,9 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item->setDescription( 'fr', 'fooz barz bazz' );
 		$item->setAliases( 'nl', array( 'a42', 'b42', 'c42' ) );
 
-		$content = ItemContent::newEmpty();
-		$content->setItem( $item );
-		$content->save( '', null, EDIT_NEW );
+		$id = new EntityId( Item::ENTITY_TYPE, 11 );
+		$item->setId( $id );
+		$lookup->saveTermsOfEntity( $item );
 
 		$this->assertFalse( $lookup->termExists( 'foobarz', 'does-not-exist' ) );
 		$this->assertFalse( $lookup->termExists( 'foobarz', null, 'does-not-exist' ) );
@@ -169,23 +171,21 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item1->setLabel( 'nl', 'getmatchingterms-1' );
 		$item1->setLabel( 'de', 'GeTMAtchingterms-2' );
 
-		$content0 = ItemContent::newEmpty();
-		$content0->setItem( $item0 );
-		$content0->save( '', null, EDIT_NEW );
-		$id0 = $content0->getItem()->getId()->getNumericId();
+		$eid0 = new EntityId( Item::ENTITY_TYPE, 11 );
+		$eid1 = new EntityId( Item::ENTITY_TYPE, 21 );
 
-		$content1 = ItemContent::newEmpty();
-		$content1->setItem( $item1 );
+		$item0->setId( $eid0 );
+		$item1->setId( $eid1 );
 
-		$content1->save( '', null, EDIT_NEW );
-		$id1 = $content1->getItem()->getId()->getNumericId();
+		$lookup->saveTermsOfEntity( $item0 );
+		$lookup->saveTermsOfEntity( $item1 );
 
 		$terms = array(
-			$id0 => new Term( array(
+			11 => new Term( array(
 				'termLanguage' => 'en',
 				'termText' => 'getmatchingterms-0',
 			) ),
-			$id1 => new Term( array(
+			21 => new Term( array(
 				'termText' => 'getmatchingterms-1',
 			) ),
 			new Term( array(
@@ -197,6 +197,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$this->assertInternalType( 'array', $actual );
 		$this->assertEquals( 2, count( $actual ) );
+
+		$expIds = array( $eid0->getNumericId(), $eid1->getNumericId() );
 		
 		/**
 		 * @var Term $term
@@ -205,7 +207,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		foreach ( $actual as $term ) {
 			$id = $term->getEntityId();
 
-			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
+			$this->assertTrue( in_array( $id, $expIds, true ) );
 
 			$expected = $terms[$id];
 
@@ -228,16 +230,17 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item1 = Item::newEmpty();
 		$item1->setLabel( 'nl', 'postfix' );
 
-		$content0 = ItemContent::newEmpty();
-		$content0->setItem( $item0 );
-		$content0->save( '', null, EDIT_NEW );
-		$id0 = $content0->getItem()->getId()->getNumericId();
+		$eid0 = new EntityId( Item::ENTITY_TYPE, 11 );
+		$eid1 = new EntityId( Item::ENTITY_TYPE, 21 );
 
-		$content1 = ItemContent::newEmpty();
-		$content1->setItem( $item1 );
+		$item0->setId( $eid0 );
+		$item1->setId( $eid1 );
 
-		$content1->save( '', null, EDIT_NEW );
-		$id1 = $content1->getItem()->getId()->getNumericId();
+		$lookup->saveTermsOfEntity( $item0 );
+		$lookup->saveTermsOfEntity( $item1 );
+
+		$id0 = $eid0->getNumericId();
+		$id1 = $eid1->getNumericId();
 
 		$terms = array(
 			$id0 => new Term( array(
@@ -303,9 +306,9 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item->setDescription( 'en', 'testDeleteTermsForEntity' );
 		$item->setAliases( 'fr', array( 'o', '_', 'O' ) );
 
-		$content = ItemContent::newEmpty();
-		$content->setItem( $item );
-		$content->save( '', null, EDIT_NEW );
+		$eid = new EntityId( Item::ENTITY_TYPE, 11 );
+		$item->setId( $eid );
+		$lookup->saveTermsOfEntity( $item );
 
 		$this->assertTrue( $lookup->termExists( 'testDeleteTermsForEntity' ) );
 
@@ -316,7 +319,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$ids = $lookup->getEntityIdsForLabel( 'abc' );
 		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 
-		$this->assertTrue( !in_array( $content->getItem()->getId()->getNumericId(), $ids, true ) );
+		$this->assertTrue( !in_array( $eid->getNumericId(), $ids, true ) );
 	}
 
 	public function testSaveTermsOfEntity() {
@@ -421,10 +424,10 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item0->setLabel( 'en', 'joinedterms-0' );
 		$item0->setDescription( 'de', 'joinedterms-d0' );
 
-		$content0 = ItemContent::newEmpty();
-		$content0->setItem( $item0 );
-		$content0->save( '', null, EDIT_NEW );
-		$id0 = $content0->getItem()->getId()->getNumericId();
+		$eid0 = new EntityId( Item::ENTITY_TYPE, 11 );
+		$item0->setId( $eid0 );
+		$lookup->saveTermsOfEntity( $item0 );
+		$id0 = $eid0->getNumericId();
 
 		$terms = array(
 			$id0 => array(
@@ -460,7 +463,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			$this->assertEquals( $expected->getLanguage(), $term->getLanguage() );
 		}
 
-		$actual = $lookup->getMatchingTermCombination( $terms, null, null, $content0->getItem()->getId(), Item::ENTITY_TYPE );
+		$actual = $lookup->getMatchingTermCombination( $terms, null, null, $eid0 );
 		$this->assertTrue( $actual === array() );
 	}
 

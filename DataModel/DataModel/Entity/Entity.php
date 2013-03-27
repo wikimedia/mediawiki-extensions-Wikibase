@@ -640,12 +640,17 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	public function getTerms() {
 		$terms = array();
 
+		$id = $this->getId()->getNumericId();
+		$type = $this->getType();
+
 		foreach ( $this->getDescriptions() as $languageCode => $description ) {
 			$term = new Term();
 
 			$term->setLanguage( $languageCode );
 			$term->setType( Term::TYPE_DESCRIPTION );
 			$term->setText( $description );
+			$term->setEntityType( $type );
+			$term->setEntityId( $id );
 
 			$terms[] = $term;
 		}
@@ -656,6 +661,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			$term->setLanguage( $languageCode );
 			$term->setType( Term::TYPE_LABEL );
 			$term->setText( $label );
+			$term->setEntityType( $type );
+			$term->setEntityId( $id );
 
 			$terms[] = $term;
 		}
@@ -667,6 +674,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 				$term->setLanguage( $languageCode );
 				$term->setType( Term::TYPE_ALIAS );
 				$term->setText( $alias );
+				$term->setEntityType( $type );
+				$term->setEntityId( $id );
 
 				$terms[] = $term;
 			}

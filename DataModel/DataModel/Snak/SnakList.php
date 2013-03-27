@@ -137,6 +137,26 @@ class SnakList extends HashArray implements Snaks {
 	}
 
 	/**
+	 * Returns an array of EntityIds, containing the IDs of all properties used by
+	 * the Snaks in this list. The array keys will be the numeric IDs of the properties.
+	 *
+	 * @since 0.4
+	 *
+	 * @return EntityId[]
+	 */
+	public function getPropertyIds() {
+		$ids = array();
+
+		/* @var Snak $snak */
+		foreach ( $this as $snak ) {
+			$id = $snak->getPropertyId()->getNumericId();
+			$ids[$id] = $snak->getPropertyId();
+		}
+
+		return $ids;
+	}
+
+	/**
 	 * Factory for constructing a SnakList from its array representation.
 	 *
 	 * @since 0.3
@@ -154,5 +174,4 @@ class SnakList extends HashArray implements Snaks {
 
 		return new static( $snaks );
 	}
-
 }
