@@ -6,10 +6,6 @@ use Wikibase\EntityFactory;
 use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\Item;
-use Wikibase\Statement;
-use Wikibase\Claims;
-use Wikibase\PropertyValueSnak;
-use DataValues\StringValue;
 
 /**
  * Tests for the Wikibase\PropertyEntityLookup class.
@@ -42,7 +38,7 @@ use DataValues\StringValue;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class PropertyEntityLookupTest extends \MediaWikiTestCase {
+class PropertyEntityLookupTest extends PropertyLookupTest {
 
 	/**
 	 * @var \Wikibase\EntityLookup
@@ -54,126 +50,13 @@ class PropertyEntityLookupTest extends \MediaWikiTestCase {
 	 */
 	protected $propertyLookup;
 
-	public function getPropertyData() {
-		$propertyData = array(
-			array(
-				'id' => 4,
-				'type' => 'wikibase-item',
-				'lang' => 'en',
-				'label' => 'capital'
-			),
-			array(
-				'id' => 6,
-				'type' => 'wikibase-item',
-				'lang' => 'en',
-				'label' => 'currency'
-			),
-			array(
-				'id' => 7,
-				'type' => 'commonsMedia',
-				'lang' => 'en',
-				'label' => 'flag',
-			),
-			array(
-				'id' => 9,
-				'type' => 'string',
-				'lang' => 'en',
-				'label' => 'country code'
-			),
-			array(
-				'id' => 10,
-				'type' => 'wikibase-item',
-			)
-		);
-
-		$properties = array();
-
-		foreach( $propertyData as $data ) {
-			$property = Property::newFromType( $data['type'] );
-			$property->setId( new EntityId( Property::ENTITY_TYPE, $data['id'] ) );
-
-			if ( array_key_exists( 'label', $data ) ) {
-				$property->setLabel( $data['lang'], $data['label'] );
-			}
-
-			$properties[] = $property;
-		}
-
-		return $properties;
-	}
-
-	public function getItems() {
-		$items = array();
-
-		$properties = $this->getPropertyData();
-
-		$snakData = array(
-			array( 'property' => clone $properties[0], 'value' => new EntityId( Item::ENTITY_TYPE, 42 ) ),
-			array( 'property' => clone $properties[0], 'value' => new EntityId( Item::ENTITY_TYPE, 44 ) ),
-			array( 'property' => clone $properties[1], 'value' => new EntityId( Item::ENTITY_TYPE, 45 ) ),
-			array( 'property' => clone $properties[2], 'value' => new StringValue( 'Flag of Canada.svg' ) ),
-			array( 'property' => clone $properties[4], 'value' => new EntityId( Item::ENTITY_TYPE, 46 ) ),
-		);
-
-		$statements = array();
-
-		foreach( $snakData as $data ) {
-			$property = $data['property'];
-			$statements[] = new Statement(
-				new PropertyValueSnak( $property->getId(), $data['value'] )
-			);
-		}
-
-		$item = Item::newEmpty();
-		$itemId = new EntityId( Item::ENTITY_TYPE, 126 );
-		$item->setId( $itemId );
-		$item->setLabel( 'en', 'Canada' );
-
-		$claims = new Claims();
-
-		foreach( $statements as $statement ) {
-			$claims->addClaim( $statement );
-		}
-
-		$item->setClaims( $claims );
-
-		$items[] = $item;
-
-		// -------------
-		$item = $item->copy();
-
-		$itemId = new EntityId( Item::ENTITY_TYPE, 128 );
-		$item->setId( $itemId );
-		$item->setLabel( 'en', 'Nanada' );
-
-		$statement = new Statement(
-			new \Wikibase\PropertyNoValueSnak( $properties[3]->getId() )
-		);
-
-		$claims = new Claims();
-		$claims->addClaim( $statement );
-		$item->setClaims( $claims );
-
-		$items[] = $item;
-
-		return $items;
-	}
-
 	public function setUp() {
 		parent::setUp();
 
 		$this->entityLookup = new \Wikibase\Test\MockRepository();
 
-		$properties = $this->getPropertyData();
-
-		foreach( $properties as $property ) {
-			$this->entityLookup->putEntity( $property );
-		}
-
-		$items = $this->getItems();
-
-		foreach ( $items as $item ) {
-			$this->entityLookup->putEntity( $item );
+		foreach ( $this->entities as $entity ) {
+			$this->entityLookup->putEntity( $entity );
 		}
 
 		$this->propertyLookup = new PropertyEntityLookup( $this->entityLookup );
@@ -184,51 +67,23 @@ class PropertyEntityLookupTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Wikibase\PropertyEntityLookup', $instance );
 	}
 
-	public function getMainSnaksByPropertyLabelProvider() {
-		$entity126 = new EntityId( Item::ENTITY_TYPE, 126 );
-		$entity128 = new EntityId( Item::ENTITY_TYPE, 128 );
-
-		return array(
-			array( $entity126, 'capital', 'en', 2 ),
-			array( $entity126, 'currency', 'en', 1 ),
-			array( $entity126, 'president', 'en', 0 ),
-			array( $entity128, 'country code', 'en', 1 )
-		);
-	}
-
 	/**
-	 * @dataProvider getMainSnaksByPropertyLabelProvider
+	 * @dataProvider getClaimsByPropertyLabelProvider
 	 */
-	public function testGetMainSnaksByPropertyLabel( $entityId, $propertyLabel, $langCode, $expected ) {
+	public function testGetClaimsByPropertyLabel( $entityId, $propertyLabel, $langCode, $expected ) {
 		if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) || !WB_EXPERIMENTAL_FEATURES ) {
-			$this->markTestSkipped( "getMainSnaksByPropertyLabel is experimental" );
+			$this->markTestSkipped( "getClaimsByPropertyLabel is experimental" );
 		}
 
-		$entity = $this->entityLookup->getEntity( $entityId );
-		$claims = $this->propertyLookup->getClaimsByPropertyLabel( $entity, $propertyLabel, $langCode );
-
-		$this->assertInstanceOf( '\Wikibase\Claims', $claims );
-		$this->assertEquals( $expected, count( $claims ) );
+		parent::testGetClaimsByPropertyLabel( $entityId, $propertyLabel, $langCode, $expected );
 	}
 
-	public function testGetMainSnaksByPropertyLabel2( ) {
+	public function testGetClaimsByPropertyLabel2( ) {
 		if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) || !WB_EXPERIMENTAL_FEATURES ) {
-			$this->markTestSkipped( "getMainSnaksByPropertyLabel is experimental" );
+			$this->markTestSkipped( "getClaimsByPropertyLabel is experimental" );
 		}
 
-		$entity126 = $this->entityLookup->getEntity( new EntityId( Item::ENTITY_TYPE, 126 ) );
-
-		$claims = $this->propertyLookup->getClaimsByPropertyLabel( $entity126, 'capital', 'en' );
-		$this->assertEquals( 2, count( $claims ) );
-
-		$claims = $this->propertyLookup->getClaimsByPropertyLabel( $entity126, 'country code', 'en' );
-		$this->assertEquals( 0, count( $claims ) );
-
-		// try to find a property in another entity, if that property wasn't used by the previous entity.
-		$entity128 = $this->entityLookup->getEntity( new EntityId( Item::ENTITY_TYPE, 128 ) );
-
-		$claims = $this->propertyLookup->getClaimsByPropertyLabel( $entity128, 'country code', 'en' );
-		$this->assertEquals( 1, count( $claims ), "property unknown to the first item" );
+		parent::testGetClaimsByPropertyLabel2();
 	}
 
 	public function getPropertyLabelProvider() {
@@ -240,7 +95,7 @@ class PropertyEntityLookupTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @depends testGetMainSnaksByPropertyLabel
+	 * @depends testGetClaimsByPropertyLabel
 	 * @dataProvider getPropertyLabelProvider
 	 */
 	public function testGetPropertyLabel( $expected, $lang, $id ) {

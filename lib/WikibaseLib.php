@@ -199,6 +199,7 @@ $wgAutoloadClasses['Wikibase\WikiPageEntityLookup'] 	= $dir . 'includes/store/sq
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/specials/SpecialPageTestBase.php';
+$wgAutoloadClasses['Wikibase\Test\PropertyLookupTest'] 		= $dir . 'tests/phpunit/store/PropertyLookupTest.php';
 
 $wgAutoloadClasses['Wikibase\Test\HashArrayTest'] 			= $dir . 'tests/phpunit/hasharray/HashArrayTest.php';
 $wgAutoloadClasses['Wikibase\Test\HashArrayElement'] 		= $dir . 'tests/phpunit/hasharray/HashArrayElement.php';
