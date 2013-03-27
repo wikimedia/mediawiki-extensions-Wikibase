@@ -16,6 +16,24 @@
       "revId": "3492344330797706d830aefde335dd6091ea3b3e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DqvYKA3o",
+        "filename": "lib/tests/phpunit/changes/ChangeRowTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2013-03-27T14:12:14Z",
+      "side": 1,
+      "message": "The time can actually be more than 1s (the clock tick) as it is influenced by other code. Tests running for a short time are killed after 4s, so 5s should be more than enough.",
+      "parentUuid": "DqvYxo1k",
+      "revId": "3492344330797706d830aefde335dd6091ea3b3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
