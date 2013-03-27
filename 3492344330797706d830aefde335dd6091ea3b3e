@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DqvYxo1k",
+        "filename": "lib/tests/phpunit/changes/ChangeRowTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-03-27T14:00:51Z",
+      "side": 1,
+      "message": "I would suggest to put an extra set of () around time() - (int)wfTimestamp( TS_UNIX, \u002720130101000000\u0027 ), and to increase delta to, don\u0027t know, maybe 5 or whatever?",
+      "revId": "3492344330797706d830aefde335dd6091ea3b3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
