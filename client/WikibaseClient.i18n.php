@@ -961,7 +961,7 @@ $messages['fr'] = array(
 	'wikibase-unconnectedpages-legend' => 'Options de pages non reliées',
 	'wikibase-unconnectedpages-page' => 'Page de démarrage:',
 	'wikibase-unconnectedpages-submit' => 'Démarrer',
-	'wikibase-unconnectedpages-invalid-language' => '"$1" n’est pas un code de langue valide.',
+	'wikibase-unconnectedpages-invalid-language' => '« $1 » n’est pas un code de langue valide.',
 	'wikibase-unconnectedpages-page-warning' => 'Le titre de la page ne peut pas être utilisé pour la recherche et est ignoré',
 	'wikibase-unconnectedpages-iwdata-label' => 'Uniquement les pages avec des liens inter-langues',
 	'wikibase-unconnectedpages-format-row' => '($1 liens inter-langues sur la page)',
@@ -986,12 +986,13 @@ $messages['frp'] = array(
  */
 $messages['gl'] = array(
 	'wikibase-client-desc' => 'Cliente para a extensión Wikibase',
+	'specialpages-group-wikibaseclient' => 'Cliente do Wikidata',
 	'wikibase-after-page-move' => 'Tamén pode [$1 actualizar] o elemento asociado do Wikidata para manter as ligazóns lingüísticas na páxina trasladada.',
 	'wikibase-comment-remove' => 'Borrouse un elemento asociado do Wikidata. Elimináronse as ligazóns lingüísticas.',
 	'wikibase-comment-linked' => 'Esta páxina foi ligada desde un elemento do Wikidata.',
 	'wikibase-comment-unlink' => 'Esta páxina foi desligada do elemento asociado do Wikidata. Elimináronse as ligazóns lingüísticas.',
 	'wikibase-comment-restore' => 'Restaurouse un elemento asociado do Wikidata. Recuperáronse as ligazóns lingüísticas.',
-	'wikibase-comment-update' => 'Actualizáronse as ligazóns lingüísticas.', # Fuzzy
+	'wikibase-comment-update' => 'Cambiou o elemento do Wikidata',
 	'wikibase-comment-sitelink-add' => 'Engadiuse unha ligazón lingüística: $1',
 	'wikibase-comment-sitelink-change' => 'Cambiouse unha ligazón lingüística de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Eliminouse unha ligazón lingüística: $1',
@@ -1020,6 +1021,14 @@ $messages['gl'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar as modificacións do Wikidata nos cambios recentes',
 	'wikibase-watchlist-show-changes-pref' => 'Mostrar as modificacións do Wikidata na súa lista de vixilancia',
 	'wikibase-error-invalid-entity-id' => 'O sistema descoñece o ID inserido. Utilice un identificador de entidade válido.',
+	'special-unconnectedpages' => 'Páxinas non conectadas con elementos',
+	'wikibase-unconnectedpages-legend' => 'Opcións para as páxinas non conectadas',
+	'wikibase-unconnectedpages-page' => 'Páxina de inicio:',
+	'wikibase-unconnectedpages-submit' => 'Continuar',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" non é un código de lingua válido.',
+	'wikibase-unconnectedpages-page-warning' => 'O título da páxina non se puido utilizar para a pescuda e ignorouse.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Só as páxinas con ligazóns interlingüísticas',
+	'wikibase-unconnectedpages-format-row' => '($1 ligazóns interlingüísticas na páxina)',
 );
 
 /** Swiss German (Alemannisch)
@@ -1412,7 +1421,7 @@ $messages['ja'] = array(
 	'wikibase-linkitem-success-create' => 'ページのリンクに成功しました。リンクを含んで新しく作成された項目は[$1 中央データリポジトリ]にあります。',
 	'wikibase-linkitem-success-link' => 'ページのリンクに成功しました。リンクを含んだ項目は[$1 中央データリポジトリ]にあります。',
 	'wikibase-property-notfound' => 'プロパティ $1 が見つかりません。',
-	'wikibase-property-notsupportedyet' => 'ウィキベースはまだプロパティ「$1」のプロパティ種別に対応していません。',
+	'wikibase-property-notsupportedyet' => 'ウィキベースはプロパティ「$1」のプロパティ種別にまだ対応していません。',
 	'wikibase-rc-hide-wikidata' => 'ウィキデータを$1',
 	'wikibase-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
 	'wikibase-watchlist-show-changes-pref' => 'ウィキデータの編集をウォッチリストに表示',
