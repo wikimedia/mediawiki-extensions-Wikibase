@@ -121,7 +121,7 @@ class DiffChange extends ChangeRow {
 	 * @param array $info
 	 * @return string
 	 */
-	protected function serializeInfo( array $info ) {
+	public function serializeInfo( array $info ) {
 		if ( isset( $info['diff'] ) && $info['diff'] instanceof \Diff\DiffOp ) {
 			if ( Settings::get( "changesAsJson" ) === true  ) {
 				/* @var \Diff\DiffOp $op */
@@ -142,7 +142,7 @@ class DiffChange extends ChangeRow {
 	 * @param string $str
 	 * @return array the info array
 	 */
-	protected function unserializeInfo( $str ) {
+	public function unserializeInfo( $str ) {
 		static $factory = null;
 
 		if ( $factory == null ) {
