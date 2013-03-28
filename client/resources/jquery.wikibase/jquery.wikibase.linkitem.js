@@ -136,7 +136,8 @@ $.widget( 'wikibase.linkitem', {
 					id: 'wbclient-linkItem-goButton',
 					disabled: 'disabled',
 					click: $.proxy( this._onSecondStep, this )
-				} ]
+				} ],
+				modal: true
 			} )
 			// Use .on instead of passing this to dialog() as close: as we want to be able to remove it later
 			.on( 'dialogclose', $.proxy( this._onDialogClose, this ) )
