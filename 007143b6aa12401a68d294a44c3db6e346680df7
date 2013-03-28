@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dqi6qX9Q",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-28T11:31:10Z",
+      "side": 1,
+      "message": "This looks like something perfect for being injected as a widget option, so you don\u0027t have to get it within the widget code, assuming that you are on a page where the node is available. Assuming that $( \u0027#wbclient-linkItem-page\u0027 ) is set on the page is just like accessing a global.",
+      "revId": "007143b6aa12401a68d294a44c3db6e346680df7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqo6BK1M",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-28T11:31:10Z",
+      "side": 1,
+      "message": "imho, $.proxy creates a lot of overhead, using var self \u003d this; makes stuff clearer.",
+      "revId": "007143b6aa12401a68d294a44c3db6e346680df7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqg6We5M",
+        "filename": "client/resources/wikibase.client.linkitem.init.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-28T11:31:10Z",
+      "side": 1,
+      "message": "I am wondering about the consistency in your style here.\n\nAbove you indent the line when chaining jQuery commands, beyond you don\u0027t indent. Personally, I like the non-indented style better since you end up with less levels of indention and use indention where it really benefits readability; mainly for control structures and long function calls where the chained functions don\u0027t relate to the chain\u0027s bottom object.",
+      "revId": "007143b6aa12401a68d294a44c3db6e346680df7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dqo7qiw8",
+        "filename": "client/resources/wikibase.client.linkitem.init.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-28T11:31:10Z",
+      "side": 1,
+      "message": "I would try to put callbacks like this on the first level of indention and make them named functions, then only put the function identifier in here. Would benefit readabilty.\n\nThis one could be\n\nfunction showLlinkItemDialog() {...}\n\nused as \n\n.click( function( event ) {\n  event.preventDefault();\n  showLlinkItemDialog();\n} )\n\nNote that showLlinkItemDialog has no concerns about the event, so the prevent default shouldn\u0027t be handled in that function.",
+      "revId": "007143b6aa12401a68d294a44c3db6e346680df7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
