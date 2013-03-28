@@ -130,6 +130,18 @@ abstract class EditEntityAction extends ViewEntityAction {
 			return Status::newFatal( 'wikibase-undo-badpage', $this->getTitle(), $olderRevision->getId() );
 		}
 
+		if ( $olderRevision->getContent() === null ) {
+			return Status::newFatal( 'wikibase-undo-nocontent', $this->getTitle(), $olderRevision->getId() );
+		}
+
+		if ( $newerRevision->getContent() === null ) {
+			return Status::newFatal( 'wikibase-undo-nocontent', $this->getTitle(), $newerRevision->getId() );
+		}
+
+		if ( $latestRevision->getContent() === null ) {
+			return Status::newFatal( 'wikibase-undo-nocontent', $this->getTitle(), $latestRevision->getId() );
+		}
+
 		return Status::newGood( array(
 			$olderRevision, $newerRevision, $latestRevision,
 		) );
