@@ -166,6 +166,9 @@ class ChangeRow extends ORMRow implements Change {
 	/**
 	 * @see ORMRow::getWriteValues()
 	 *
+	 * @todo: remove this once core no longer uses ORMRow::getWriteValues().
+	 *        Use ChangesTable::getWriteValues() instead.
+	 *
 	 * @since 0.4
 	 *
 	 * @return array
@@ -190,9 +193,10 @@ class ChangeRow extends ORMRow implements Change {
 	 *
 	 * @param array $info
 	 *
+	 * @throws \MWException
 	 * @return string
 	 */
-	protected function serializeInfo( array $info ) {
+	public function serializeInfo( array $info ) {
 		if ( Settings::get( "changesAsJson" ) === true ) {
 			// Make sure we never serialize objects.
 			// This is a lot of overhead, so we only do it during testing.
@@ -227,7 +231,7 @@ class ChangeRow extends ORMRow implements Change {
 	 *
 	 * @return array the info array
 	 */
-	protected function unserializeInfo( $str ) {
+	public function unserializeInfo( $str ) {
 		if ( $str[0] === '{' ) { // json
 			$info = json_decode( $str, true );
 		} else {
