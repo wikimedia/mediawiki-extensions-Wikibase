@@ -29,8 +29,9 @@ use Iterator, DatabaseBase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
+ * @author Daniel Kinzler
  */
-class TermSqlIndex implements TermIndex {
+class TermSqlIndex extends \DBAccessBase implements TermIndex {
 
 	/**
 	 * @since 0.1
@@ -61,17 +62,39 @@ class TermSqlIndex implements TermIndex {
 		'term_entity_id' => 'entityId',
 	);
 
+
+	/**
+	 * @since 0.3
+	 *
+	 * @var bool
+	 */
+	protected $readonly;
+
+	/**
+	 * @since 0.3
+	 *
+	 * @var bool|string
+	 */
+	protected $wiki;
+
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $tableName
-	 * @param integer $readDb
+	 * @param string $table The table to use for the sitelinks
+	 * @param bool $readonly Whether the table can be modified.
+	 * @param string|bool $wiki The wiki's database to connect to.
+	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 */
-	public function __construct( $tableName, $readDb = DB_SLAVE ) {
-		$this->readDb = $readDb;
-		$this->tableName = $tableName;
+	public function __construct( $table, $readonly = false, $wiki = false ) {
+		parent::__construct( $wiki );
+
+		$this->tableName = $table;
+		$this->readonly = $readonly;
+		$this->readDb = DB_SLAVE;
+
+		assert( is_bool( $this->readonly ) );
 	}
 
 	/**
@@ -122,10 +145,13 @@ class TermSqlIndex implements TermIndex {
 			}
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = $this->getWriteDb();
 		$dbw->commit( __METHOD__, "flush" ); // flush to make sure we are not in some explicit transaction
 
-		return $dbw->deadlockLoop( array( $this, 'saveTermsOfEntityInternal' ), $entity, $dbw );
+		$ok = $dbw->deadlockLoop( array( $this, 'saveTermsOfEntityInternal' ), $entity, $dbw );
+
+		$this->releaseConnection( $dbw );
+		return $ok;
 	}
 
 	/**
@@ -209,7 +235,7 @@ class TermSqlIndex implements TermIndex {
 	 * @return boolean Success indicator
 	 */
 	public function deleteTermsOfEntity( Entity $entity ) {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = $this->getWriteDb();
 
 		//TODO: do this via deadlockLoop. Currently triggers warnings, because deleteTermsOfEntity
 		//      is called from EntityDeletionUpdate, which is called from within the transaction
@@ -219,7 +245,10 @@ class TermSqlIndex implements TermIndex {
 		return $dbw->deadlockLoop( array( $this, 'deleteTermsOfEntityInternal' ), $entity, $dbw );
 		*/
 
-		return $this->deleteTermsOfEntityInternal( $entity, $dbw );
+		$ok = $this->deleteTermsOfEntityInternal( $entity, $dbw );
+
+		$this->releaseConnection( $dbw );
+		return $ok;
 	}
 
 	/**
@@ -279,7 +308,10 @@ class TermSqlIndex implements TermIndex {
 			__METHOD__
 		);
 
-		return $this->buildTermResult( $res );
+		$terms = $this->buildTermResult( $res );
+
+		$this->releaseConnection( $dbr );
+		return $terms;
 	}
 
 	/**
@@ -334,7 +366,10 @@ class TermSqlIndex implements TermIndex {
 			__METHOD__
 		);
 
-		return $this->buildTermResult( $res );
+		$terms = $this->buildTermResult( $res );
+
+		$this->releaseConnection( $dbr );
+		return $terms;
 	}
 
 	/**
@@ -345,18 +380,23 @@ class TermSqlIndex implements TermIndex {
 	 * @return \DatabaseBase
 	 */
 	public function getReadDb() {
-		return wfGetDB( $this->readDb ); // TODO: allow foreign db
+		return $this->getConnection( $this->readDb );
 	}
 
 	/**
-	 * Returns the Database connection to wich to write.
+	 * Returns the Database connection to which to write.
 	 *
 	 * @since 0.4
 	 *
+	 * @throws \MWException if this instance is in readonly mode
 	 * @return \DatabaseBase
 	 */
 	public function getWriteDb() {
-		return wfGetDB( DB_MASTER ); // TODO: allow foreign db
+		if ( $this->readonly ) {
+			throw new \MWException( "This TermSqlIndex is in readonly mode!" );
+		}
+
+		return $this->getConnection( DB_MASTER );
 	}
 
 	/**
@@ -388,7 +428,9 @@ class TermSqlIndex implements TermIndex {
 			$conditions['term_entity_type'] = $entityType;
 		}
 
-		$result = $this->getReadDb()->selectRow(
+		$dbr = $this->getReadDb();
+
+		$result = $dbr->selectRow(
 			$this->tableName,
 			array(
 				'term_entity_id',
@@ -397,6 +439,7 @@ class TermSqlIndex implements TermIndex {
 			__METHOD__
 		);
 
+		$this->releaseConnection( $dbr );
 		return $result !== false;
 	}
 
@@ -464,6 +507,8 @@ class TermSqlIndex implements TermIndex {
 			$joinConds
 		);
 
+		$this->releaseConnection( $db );
+
 		return array_map(
 			function( $entity ) {
 				return array( $entity->term_entity_type, intval( $entity->term_entity_id ) );
@@ -509,7 +554,10 @@ class TermSqlIndex implements TermIndex {
 			$queryOptions
 		);
 
-		return $this->buildTermResult( $obtainedTerms );
+		$terms = $this->buildTermResult( $obtainedTerms );
+
+		$this->releaseConnection( $dbr );
+		return $terms;
 	}
 
 	/**
@@ -552,6 +600,8 @@ class TermSqlIndex implements TermIndex {
 		foreach ( $obtainedIDs as $obtainedID ) {
 			$result[] = new EntityId( $entityType, (int)$obtainedID->term_entity_id );
 		}
+
+		$this->releaseConnection( $dbr );
 		return $result;
 	}
 
@@ -644,6 +694,7 @@ class TermSqlIndex implements TermIndex {
 			$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
 		}
 
+		$this->releaseConnection( $dbr );
 		return $conditions;
 	}
 
@@ -690,7 +741,10 @@ class TermSqlIndex implements TermIndex {
 	 * @return boolean Success indicator
 	 */
 	public function clear() {
-		return wfGetDB( DB_MASTER )->delete( $this->tableName, '*', __METHOD__ );
+		$dbw = $this->getWriteDb();
+		$ok = $dbw->delete( $this->tableName, '*', __METHOD__ );
+		$this->releaseConnection( $dbw );
+		return $ok;
 	}
 
 	/**
@@ -770,7 +824,10 @@ class TermSqlIndex implements TermIndex {
 			$joinConds
 		);
 
-		return $this->buildTermResult( $this->getNormalizedJoinResult( $obtainedTerms, $joinCount ) );
+		$terms = $this->buildTermResult( $this->getNormalizedJoinResult( $obtainedTerms, $joinCount ) );
+
+		$this->releaseConnection( $dbr );
+		return $terms;
 	}
 
 	/**
