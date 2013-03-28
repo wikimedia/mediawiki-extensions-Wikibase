@@ -66,9 +66,13 @@
 
 		NewConstructor.prototype = $.extend(
 			new NewPrototype(),
-			members,
-			{ constructor: NewConstructor } // make sure constructor property is set properly
+			members
 		);
+
+		// Make sure constructor property is set properly. The constructor has to be assigned
+		// explicitly since doing it along the $.extend() above will be ignored in IE8.
+		NewConstructor.prototype.constructor = NewConstructor;
+
 		return NewConstructor;
 	};
 
