@@ -127,4 +127,26 @@ class ChangesTable extends \ORMTable {
 		return new $class( $this, $data, $loadDefaults );
 	}
 
+	/**
+	 * @see ORMTable::getWriteValues()
+	 *
+	 * @since 0.4
+	 *
+	 * @param \IORMRow $row
+	 *
+	 * @return array
+	 */
+	protected function getWriteValues( \IORMRow $row ) {
+		$values = parent::getWriteValues( $row );
+
+		if ( $row instanceof ChangeRow ) {
+			$infoField = $this->getPrefixedField( 'info' );
+
+			if ( isset( $values[$infoField] ) ) {
+				$values[$infoField] = $row->serializeInfo( $values[$infoField] );
+			}
+		}
+
+		return $values;
+	}
 }
