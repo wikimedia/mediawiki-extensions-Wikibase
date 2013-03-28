@@ -45,6 +45,11 @@ class DirectSqlStore implements ClientStore {
 	private $propertyLookup = null;
 
 	/**
+	 * @var TermIndex
+	 */
+	private $termIndex = null;
+
+	/**
 	 * @var String|bool $repoWiki
 	 */
 	protected $repoWiki;
@@ -113,9 +118,31 @@ class DirectSqlStore implements ClientStore {
 	 * @return PropertyLookup
 	 */
 	protected function newPropertyLookup() {
-		$entityLookup = $this->getEntityLookup();
+		$termIndex = $this->getTermIndex();
 
-		return new PropertyEntityLookup( $entityLookup );
+		return new PropertyTermLookup( $termIndex );
+	}
+
+	/**
+	 * Get a TermIndex object
+	 *
+	 * @return TermIndex
+	 */
+	public function getTermIndex() {
+		if ( !$this->termIndex ) {
+			$this->termIndex = $this->newTermIndex();
+		}
+
+		return $this->termIndex;
+	}
+
+	/**
+	 * Create a new TermIndex instance accessing the repository's database.
+	 *
+	 * @return TermIndex
+	 */
+	protected function newTermIndex() {
+		return new TermSqlIndex( 'wb_terms', true, $this->repoWiki );
 	}
 
 	/**

@@ -48,6 +48,13 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	protected $readonly;
 
 	/**
+	 * @since 0.3
+	 *
+	 * @var bool|string
+	 */
+	protected $wiki;
+
+	/**
 	 * @since 0.1
 	 *
 	 * @param string $table The table to use for the sitelinks
