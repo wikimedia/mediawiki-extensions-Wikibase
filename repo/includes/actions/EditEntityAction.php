@@ -45,7 +45,11 @@ abstract class EditEntityAction extends ViewEntityAction {
 	public function showPermissionError( $action ) {
 		if ( !$this->getTitle()->userCan( $action, $this->getUser() ) ) {
 
-			$this->getOutput()->showPermissionsErrorPage( array( array( "wikibase-cant-undo" ) ), $action ); //TODO: define message
+			$this->getOutput()->showPermissionsErrorPage(
+				array( $this->getTitle()->getUserPermissionsErrors( $action, $this->getUser() ) ),
+				$action
+			);
+
 			return true;
 		}
 
