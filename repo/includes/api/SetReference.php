@@ -82,6 +82,11 @@ class SetReference extends ApiWikibase {
 		$params = $this->extractRequestParams();
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
+
+		if ( $entityId === null ) {
+			$this->dieUsage( 'No such entity', 'setreference-entity-not-found' );
+		}
+
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
