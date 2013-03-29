@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "DrLa9iGQ",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-03-29T23:18:56Z",
+      "side": 1,
+      "message": "This would be a design improvement regardless on whether there will be more JS. If code could easily avoid relying on globals, then it simply should. This makes it easier and more likely for other coders extending this code to write good code on top of it. They wouldn\u0027t have to identify and refactor this issue first.\n\nYou might also enjoy this presentation of Jeroen which is kind of related:\nhttps://semantic-mediawiki.org/wiki/User:Jeroen_De_Dauw/Static:_The_S_in_STUPID",
+      "parentUuid": "DqtvYQPA",
+      "revId": "007143b6aa12401a68d294a44c3db6e346680df7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqo6BK1M",
         "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
         "patchSetId": 5
