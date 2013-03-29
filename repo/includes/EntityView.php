@@ -424,7 +424,8 @@ abstract class EntityView extends \ContextSource {
 				$this->getHtmlForEditSection( $entity, $lang, $editLabelLink ),
 				$this->getHtmlForEditSection( $entity, $lang, $editDescriptionLink ),
 				$label !== false ? '' : 'wb-value-empty',
-				$description !== false ? '' : 'wb-value-empty'
+				$description !== false ? '' : 'wb-value-empty',
+				$this->getTitle()->getLocalURL() . '?setlang=' . $language
 			);
 		}
 
