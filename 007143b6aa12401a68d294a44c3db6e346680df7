@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "DrBxrPYg",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-03-29T23:35:17Z",
+      "side": 1,
+      "message": "The rest of this widget is far from being ready for this kind of thing... I of course can refactor it to get independence of output and item handling logic, but that would probably blow this change set.",
+      "parentUuid": "DrLa9iGQ",
+      "revId": "007143b6aa12401a68d294a44c3db6e346680df7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dqo6BK1M",
         "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
         "patchSetId": 5
