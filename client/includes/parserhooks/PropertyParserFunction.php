@@ -132,6 +132,7 @@ class PropertyParserFunction {
 	/**
 	 * @since 0.4
 	 *
+	 * @param EntityId $entityId
 	 * @param string $propertyLabel
 	 *
 	 * @return string - wikitext format
