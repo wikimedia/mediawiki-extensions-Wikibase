@@ -100,6 +100,10 @@ class PropertySQLLookup implements PropertyLookup {
 	 */
 	public function getMainSnaksByPropertyId( EntityId $entityId, EntityId $propertyId ) {
 		$entity = $this->entityLookup->getEntity( $entityId );
+		if ( !$entity ) {
+			// Unknown entity, just return an empty SnakList
+			return new SnakList();
+		}
 		$statements = $entity->getClaims();
 
 		$snakList = new SnakList();
