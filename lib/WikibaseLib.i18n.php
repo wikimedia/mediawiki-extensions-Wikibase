@@ -524,6 +524,18 @@ $messages['dsb'] = array(
 	'datatypes-type-commonsMedia' => 'Medijowa dataja na Wikimedia Commons',
 );
 
+/** Greek (Ελληνικά)
+ * @author Nikosguard
+ */
+$messages['el'] = array(
+	'wikibase-entity-item' => 'αντικείμενο',
+	'wikibase-entity-property' => 'ιδιότητα',
+	'wikibase-diffview-reference' => 'πηγή',
+	'wikibase-error-ui-cant-edit' => 'Δεν σας επιτρέπεται να εκτελέσετε αυτήν την ενέργεια.',
+	'wikibase-sitelinks-sitename-columnheading' => 'Γλώσσα',
+	'datatypes-type-wikibase-item' => 'Αντικείμενο',
+);
+
 /** Esperanto (Esperanto)
  * @author ArnoLagrange
  */
@@ -1252,6 +1264,7 @@ $messages['lb'] = array(
 	'wikibase-diffview-rank' => 'Classement',
 	'wikibase-error-unexpected' => 'En onerwaarte Feeler ass geschitt.',
 	'wikibase-error-save-timeout' => 'Mir hunn technesch Schwieregkeeten an dofir konnt Är Ännerung net "gespäichert" ginn.',
+	'wikibase-error-remove-timeout' => 'Mir hunn technesch Schwieregkeeten an dofir konnt Är "Läschung" net "gespäichert" ginn.',
 	'wikibase-error-ui-no-external-page' => 'De spezifizéierten Artikel konnt op dem korrespondéierte Site net fonnt ginn.',
 	'wikibase-error-ui-cant-edit' => 'Dir däerft dës Aktioun net maachen.',
 	'wikibase-error-ui-no-permissions' => 'Dir hutt net genuch Rechter fir dës Aktioun ze maachen.',
@@ -1602,6 +1615,9 @@ $messages['pt-br'] = array(
 	'wikibase-entity-item' => 'item',
 	'wikibase-entity-property' => 'propriedade',
 	'wikibase-entity-query' => 'consulta',
+	'wikibase-diffview-reference' => 'referência',
+	'wikibase-diffview-rank' => 'rank',
+	'wikibase-diffview-qualifier' => 'qualificador',
 	'wikibase-error-unexpected' => 'Ocorreu um erro inesperado.',
 	'wikibase-error-save-generic' => 'Ocorreu um erro ao tentar salvar e, por isso, as alterações não puderam ser completadas.',
 	'wikibase-error-remove-generic' => 'Ocorreu um erro ao tentar remover e, por isso, as alterações não puderam ser completadas.',
@@ -1618,6 +1634,7 @@ $messages['pt-br'] = array(
 	'wikibase-error-ui-link-exists' => 'Você não pode vincular a esta página porque outro item já possui link para ele.',
 	'wikibase-error-ui-session-failure' => 'Sua sessão expirou. Por favor, efetue login novamente.',
 	'wikibase-error-ui-edit-conflict' => 'Há um conflito de edição. Por favor, recarregue a página e salve novamente.',
+	'wikibase-replicationnote' => 'Por favor, note que é possível que leve vários minutos até que as mudanças sejam visíveis em todos os wikis',
 	'wikibase-sitelinks' => 'Lista de páginas com links para este item',
 	'wikibase-sitelinks-sitename-columnheading' => 'Idioma',
 	'wikibase-sitelinks-siteid-columnheading' => 'Código',
