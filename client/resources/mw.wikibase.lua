@@ -38,14 +38,14 @@ function wikibase.setupInterface()
     local code = mw.language.getContentLanguage():getCode()
     if code == nil then return nil end
     local entity = php.getEntity( id )
-    if entity == nil then return nil end
+    if entity == nil or entity.labels == nil then return nil end
     local label = entity.labels[code]
     if label == nil then return nil end
     return label.value
   end
   wikibase.sitelink = function ( id )
     local entity = php.getEntity( id )
-    if entity == nil then return nil end
+    if entity == nil or entity.sitelinks == nil then return nil end
     local globalSiteId = php.getGlobalSiteId()
     if globalSiteId == nil then return nil end
     local sitelink = entity.sitelinks[globalSiteId]
