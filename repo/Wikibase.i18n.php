@@ -1868,6 +1868,7 @@ $messages['bs'] = array(
  * @author Grondin
  * @author Pginer
  * @author Toniher
+ * @author Vogone
  * @author Vriullop
  * @author පසිඳු කාවින්ද
  */
@@ -1922,6 +1923,7 @@ $messages['ca'] = array(
 	'wikibase-newproperty-fieldset' => 'Crea una propietat nova',
 	'wikibase-newproperty-datatype' => 'Tipus de dades:',
 	'special-newitem' => 'Crea un element nou',
+	'wikibase-newitem-summary' => "Assegureu-vos de [[Special:ItemByTitle|verificar si l'element ja no existeix]]!<br />Si contribuïu per primera vegada en aquest projecte, doneu un cop d'ull a [[Special:MyLanguage/Help:Label|Help:Label]] i [[Special:MyLanguage/Help:Description|Help:Description]].", # Fuzzy
 	'wikibase-newitem-fieldset' => 'Crea un element nou',
 	'wikibase-newitem-site' => 'Nom de la primera pàgina enllaçada',
 	'wikibase-newitem-page' => 'Nom de la primera pàgina enllaçada',
@@ -2262,6 +2264,7 @@ Fe fydd eich cyfeiriad IP yn ymddangos ar hanes golygu $1.',
 );
 
 /** Danish (dansk)
+ * @author Byrial
  * @author Christian List
  * @author Hede2000
  * @author HenrikKbh
@@ -2338,7 +2341,7 @@ $messages['da'] = array(
 Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-restrictionedit-tooltip-message' => 'Denne side er beskyttet. Redigering er ikke tilladt.',
 	'wikibase-blockeduser-tooltip-message' => 'Du er blokeret fra at redigere.',
-	'wikibase-move-error' => 'Du kan ikke flytte sider, der er i navneområdet for data, og du kan ikke flytte sider ind i det.',
+	'wikibase-move-error' => 'Du kan ikke flytte sider, der er i data-navnerummet, og du kan ikke flytte sider ind i det.',
 	'wikibase-warning-constraint-violation-length' => 'En længdebegrænsning er udløst for sprogkode "$1".',
 	'wikibase-error-constraint-violation-label' => 'Der er {{PLURAL:$1|en begrænsning|begrænsninger}} for krænkelse {{PLURAL:$1|etiket|etiketter}} "$3" for  {{PLURAL:$1|sprogkode|sprogkoder}} "$2"',
 	'wikibase-error-constraint-violation-description' => 'Der er {{PLURAL:$1|en begrænsning|begrænsninger}} for krænkelse {{PLURAL:$1|beskrivelse|beskrivelser}} "$3" for  {{PLURAL:$1|sprogkode|sprogkoder}} "$2"',
@@ -2414,7 +2417,7 @@ Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-dispatchstats-large-lag' => '(meget stor)',
 	'wikibase-dispatchstats-freshest' => 'Nyeste',
 	'wikibase-dispatchstats-stalest' => 'Ældste',
-	'wikibase-dispatchstats-median' => 'Middel',
+	'wikibase-dispatchstats-median' => 'Median',
 	'wikibase-dispatchstats-average' => 'Gennemsnit',
 	'special-listdatatypes' => 'Liste over alle tilgængelige datatyper',
 	'wikibase-listdatatypes-intro' => 'Dette er en liste over alle de datatyper, som i øjeblikket anvendes på denne installation:',
@@ -2440,7 +2443,7 @@ Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-conflict-patched' => 'Din redigering blev føjet til den nyeste version',
 	'wikibase-restoreold' => 'gendan',
 	'wikibase-restore-summary' => 'Gendan revision $1 af [[Special:Contributions/$2|$2]]',
-	'wikibase-no-direct-editing' => 'Direkte redigering er deaktiveret i navneområdet $1',
+	'wikibase-no-direct-editing' => 'Direkte redigering er deaktiveret i navnerummet $1',
 	'wikibase-noentity' => 'Dette datasæt findes ikke. Du kan
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søge efter relaterede logfiler]</span>
 for at finde ud af, hvad der er sket med det.',
@@ -2485,13 +2488,13 @@ for at finde ud af, hvad der er sket med det.',
 	'wikibase-property-summary-special-create-property' => 'Oprettede en [$2] egenskab med {{PLURAL:$1|værdi|værdier}}',
 	'wikibase-query-summary-special-create-query' => 'Oprettede en [$2] forespørgsel med {{PLURAL:$1|værdi|værdier}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Emne',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Henvisning til andre elementer på projektet. Ved indgang bliver "Vare" navneområdet på Wikidata eftersøgt for tilsvarende poster. Den består af et enkelt tekstfelt.
+	'wikibase-listdatatypes-wikibase-item-body' => 'Henvisning til andre emner på projektet. Ved indgang bliver emnenavnerummet på Wikidata eftersøgt for tilsvarende poster. Den består af et enkelt tekstfelt.
 * ordning – implicit del af Iri-streng
 * hierarkisk del – implicit del af Iri-streng
 * forespørgsel – implicit del af Iri-streng
 * fragment – implicit del af Iri-streng',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons medier',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Henvisning til filer gemt på Wikimedia Commons. Ved indgang vil "Fil" navneområdet på Commons blive eftersøgt for tilsvarende poster.
+	'wikibase-listdatatypes-commonsmedia-body' => 'Henvisning til filer gemt på Wikimedia Commons. Ved indgang vil "Fil"-navnerummet på Commons blive eftersøgt for tilsvarende poster.
 * ordning – implicit del af Iri-streng
 * hierarkisk del – implicit del af Iri-streng
 * forespørgsel – implicit del af Iri-streng
@@ -3372,6 +3375,7 @@ por trovi de kie ĝi venis.',
 /** Spanish (español)
  * @author Armando-Martin
  * @author Dalton2
+ * @author Gustronico
  * @author Hazard-SJ
  * @author Jewbask
  * @author Maor X
@@ -3433,6 +3437,7 @@ $messages['es'] = array(
 	'wikibase-snakview-variation-unsupporteddatatype' => 'La manipulación de valores para el tipo de datos "$1" aún no está soportada.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'El valor no cumple con la definición de la propiedad.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'El tipo de valor de datos del valor "$1" no coincide con el tipo de valor de datos del tipo de valor de la propiedad "$2".',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'No es posible definir un nuevo valor para una propiedad borrada.',
 	'wikibase-snakview-variations-somevalue-label' => 'valor desconocido',
 	'wikibase-snakview-variations-novalue-label' => 'sin valor',
 	'wikibase-snakview-snaktypeselector-value' => 'valor personalizado',
@@ -3441,9 +3446,12 @@ $messages['es'] = array(
 	'wikibase-shortcopyrightwarning' => 'Al hacer clic en "$1", aceptas [[$2|los términos de uso]] y aceptas liberar irrevocablemente tus contribuciones bajo la $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Acepto estos términos para mis futuras contribuciones. No volver a mostrar este mensaje otra vez.',
 	'wikibase-entityselector-more' => 'más',
+	'wikibase-anonymouseditwarning' => 'Aviso: No has iniciado sesión. 
+Tu dirección IP quedará registrada en el historial de revisiones de $1.',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta página está protegida, no se permite editar.',
 	'wikibase-blockeduser-tooltip-message' => 'Usted ha sido bloqueado para edición.',
 	'wikibase-move-error' => 'No puedes trasladar las páginas que se encuentran en el espacio de nombres de datos, y no puedes trasladar páginas hacia allí.',
+	'wikibase-warning-constraint-violation-length' => 'Se activó una restricción de longitud para el código de idioma "$1".',
 	'wikibase-error-sitelink-already-used' => 'El enlace del sitio [[$1:$2]] ya es usado por el elemento [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Otra propiedad ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Otra consulta ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2',
@@ -3471,7 +3479,7 @@ $messages['es'] = array(
 	'wikibase-newproperty-datatype' => 'Tipo de dato:',
 	'wikibase-newproperty-invalid-datatype' => 'El tipo de datos no es válido',
 	'special-newitem' => 'Crear un nuevo elemento',
-	'wikibase-newitem-summary' => '¡Asegúrate de [[Special:ItemByTitle|comprobar si el elemento ya existe]]!<br />Si eres nuev{{<includeonly>safesubst:</includeonly>GENDER:{{<includeonly>safesubst:</includeonly>#titleparts:{{<includeonly>safesubst:</includeonly>PAGENAME}}|1}}|o|a|o/a}} en el proyecto, entonces echa un vistazo a [[Help:Label/es|Label/es]] y [[Help:Description/es|Description/es]].',
+	'wikibase-newitem-summary' => '¡Asegúrate de [[Special:ItemByTitle|comprobar si el elemento ya existe]]!<br />Debes crear una [[Help:Label/es|etiqueta]] y una [[Help:Description/es|descripción]] para todos los elementos nuevos.', # Fuzzy
 	'wikibase-newitem-fieldset' => 'Crear un nuevo elemento',
 	'wikibase-newitem-site' => 'Sitio de la primera página enlazada',
 	'wikibase-newitem-page' => 'Nombre de la primera página enlazada',
@@ -3550,6 +3558,8 @@ $messages['es'] = array(
 	'wikibase-item-summary-wbsetclaimvalue' => 'Defino {{PLURAL:$1|una afirmación|varias afirmaciones}}',
 	'wikibase-item-summary-wbremoveclaims' => 'Elimino {{PLURAL:$1|una afirmación|varias afirmaciones}}',
 	'wikibase-item-summary-special-create-item' => 'Se ha creado un elemento de [$2] con {{PLURAL:$1|valor|valores}}',
+	'wikibase-item-summary-wbcreateclaim-create' => 'Creo una afirmación',
+	'wikibase-item-summary-wbremoveclaims-remove' => 'Elimino {{PLURAL:$3|una afirmación|varias afirmaciones}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Ha creado una nueva propiedad',
 	'wikibase-property-summary-wbeditentity-update' => 'Ha actualizado una propiedad',
 	'wikibase-property-summary-wbeditentity-override' => 'Ha sobreescrito una propiedad',
@@ -3564,6 +3574,10 @@ $messages['es'] = array(
 	'wikibase-property-summary-special-create-property' => 'Se ha creado una propiedad de [$2] con {{PLURAL:$1|valor|valores}}',
 	'wikibase-query-summary-special-create-query' => 'Se ha creado una consulta en [$2] con {{PLURAL:$1|valor|valores}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
+	'wikibase-listdatatypes-quantity-head' => 'Cantidad',
+	'wikibase-listdatatypes-monolingual-text-head' => 'Texto monolingüe',
+	'wikibase-listdatatypes-multilingual-text-head' => 'Texto multilingüe',
+	'wikibase-listdatatypes-string-head' => 'Cadena de caracteres',
 	'wikibase-listdatatypes-time-head' => 'Hora',
 	'content-model-wikibase-item' => 'Elemento de Wikibase',
 	'content-model-wikibase-property' => 'Propiedad de Wikibase',
@@ -3598,7 +3612,7 @@ $messages['es'] = array(
 	'action-label-remove' => 'eliminar etiquetas',
 	'action-label-update' => 'actualizar etiquetas',
 	'action-description-remove' => 'eliminar descripciones',
-	'action-description-update' => 'eliminar descripciones',
+	'action-description-update' => 'actualizar descripciones',
 );
 
 /** Estonian (eesti)
@@ -5367,11 +5381,13 @@ $messages['hi'] = array(
 
 /** Croatian (hrvatski)
  * @author Denny
+ * @author Vivaelcelta
  */
 $messages['hr'] = array(
 	'wikibase-edit' => 'uredi',
 	'wikibase-save' => 'spremi',
 	'wikibase-cancel' => 'odustani',
+	'wikibase-newitem-summary' => 'Svakako provjerite da li [[Special:ItemByTitle|takva stavka već postoji]]!<br/>Ako ste se uključili u projekt nedavno, onda pročitajte Najčešća pitanja po [[Special:MyLanguage/Help:Label|nazivu]] i [[Special:MyLanguage/Help:Description|opisu]].', # Fuzzy
 );
 
 /** Upper Sorbian (hornjoserbsce)
@@ -5634,6 +5650,7 @@ $messages['hsb'] = array(
 /** Hungarian (magyar)
  * @author Csigabi
  * @author Tgr
+ * @author Vivaelcelta
  */
 $messages['hu'] = array(
 	'wikibase-desc' => 'Strukturált adattár',
@@ -5721,6 +5738,7 @@ $messages['hu'] = array(
 	'wikibase-newproperty-datatype' => 'Adattípus:',
 	'wikibase-newproperty-invalid-datatype' => 'Érvénytelen adattípus',
 	'special-newitem' => 'Új fogalom létrehozása',
+	'wikibase-newitem-summary' => 'Ellenőrizd, hogy [[Special:ItemByTitle|nem létezik-e már]] az elem!<br/>Ha még új vagy a projektben, további információkat a [[Help:Label|címkékről]] és a [[Help:Description|leírásokról]] szóló segítségoldalakon találsz.', # Fuzzy
 	'wikibase-newitem-fieldset' => 'Új fogalom létrehozása',
 	'wikibase-newitem-site' => 'Az első kapcsolt lapot tartalmazó wiki',
 	'wikibase-newitem-page' => 'Az első kapcsolt lap neve',
@@ -6974,7 +6992,7 @@ $messages['ja'] = array(
 	'wikibase-description-input-help-message' => '短い説明を$1で入力してください。',
 	'wikibase-statements' => '文',
 	'wikibase-terms' => '他の言語',
-	'wikibase-sitelinks-add' => 'site-link へのリンクを追加',
+	'wikibase-sitelinks-add' => 'サイトリンクへのリンクを追加',
 	'wikibase-sitelinks-empty' => 'この項目にはサイトリンクがまだありません。',
 	'wikibase-sitelinks-input-help-message' => 'この項目に関連するページヘのリンクを設定してください。',
 	'wikibase-remove' => '除去',
@@ -7021,6 +7039,10 @@ $messages['ja'] = array(
 	'wikibase-restrictionedit-tooltip-message' => 'このページは保護されています。編集は許可されていません。',
 	'wikibase-blockeduser-tooltip-message' => 'あなたは編集ブロックされています。',
 	'wikibase-move-error' => 'データ名前空間内のページは移動できず、データ名前空間内にページを移動させることもできません。',
+	'wikibase-warning-constraint-violation-length' => '言語コード「$1」にて長さ制限に引っかかりました。',
+	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|言語コード}}「$2」にて{{PLURAL:$1|ラベル}}「$3」が{{PLURAL:$1|制限}}に違反しています。',
+	'wikibase-error-constraint-violation-description' => '{{PLURAL:$1|言語コード}}「$2」にて{{PLURAL:$1|説明}}「$3」が{{PLURAL:$1|制限}}に違反しています。',
+	'wikibase-error-constraint-violation-aliases' => '{{PLURAL:$1|言語コード}}「$2」にて{{PLURAL:$1|別名}}「$3」が{{PLURAL:$1|制限}}に違反しています。',
 	'wikibase-error-sitelink-already-used' => 'サイトリンク [[$1:$2]] は項目 [[$3]] が既に使用しています。',
 	'wikibase-error-label-not-unique-wikibase-property' => '言語コード $2 に関連付けられたラベル「$1」を持つ他のプロパティ ($3) が既に存在します',
 	'wikibase-error-label-not-unique-wikibase-query' => '言語コード $2 に関連付けられたラベル「$1」を持つ他のクエリ ($3) が既に存在します',
@@ -7030,6 +7052,8 @@ $messages['ja'] = array(
 	'wikibase-itembytitle-lookup-site' => 'サイト:',
 	'wikibase-itembytitle-lookup-page' => 'ページ:',
 	'wikibase-itembytitle-submit' => '検索',
+	'wikibase-itembytitle-nothing-found' => '前回の検索では一致する項目がありませんでした。対応する外部ページを確認し検索条件を見直してください。',
+	'wikibase-itembytitle-invalid-site' => '前回の検索条件では検索を実行できませんでした。サイトのIDとして正しいものを指定してください。',
 	'wikibase-itembytitle-description' => 'サイトは「enwiki」のような識別コードです。',
 	'wikibase-itembytitle-create' => '[{{fullurl:Special:NewItem|site=$1&page=$2}} 項目を新規作成]することもできます。',
 	'special-itemdisambiguation' => '項目の曖昧さ回避',
@@ -7040,6 +7064,7 @@ $messages['ja'] = array(
 	'wikibase-itemdisambiguation-nothing-found' => '申し訳ありませんが、指定したラベルを持つ項目は見つかりませんでした。',
 	'wikibase-itemdisambiguation-create' => '[{{fullurl:Special:NewItem|label=$1}} 項目を新規作成]することもできます。',
 	'wikibase-itemdisambiguation-invalid-langcode' => '申し訳ありませんが、指定した言語コードはこのシステムでは不明です。有効な言語コード (「en」など) を指定してください。',
+	'wikibase-itemdisambiguation-description' => '検索に用いる値は名前全体でなければなりません。言語は「en」などのIDを指定してください。',
 	'special-newproperty' => 'プロパティの新規作成',
 	'wikibase-newproperty-summary' => 'プロパティが既に存在することを確認してください!<br />すべての新規プロパティについて[[Help:Label|ラベル]]および[[Help:Description|説明]]を作成する必要があり、さらにプロパティの型が有効である必要があります。',
 	'wikibase-newproperty-fieldset' => 'プロパティの新規作成',
@@ -7251,6 +7276,7 @@ $messages['ka'] = array(
 	'wikibase-restrictionedit-tooltip-message' => 'ეს გვერდი დაცულია. მისი რედაქტირება დაუშვებელია.',
 	'wikibase-blockeduser-tooltip-message' => 'თქვენთვის რედაქტირება დაბლოკილია.',
 	'wikibase-move-error' => 'თქვენ არ შეგიძლიათ გვერდების გადატანა, რომლებიც მდებარეობს მონაცემების სახელთა სივრცეში და თქვენ არ შეგიძლიათ გვერდების მასში გადატანა.',
+	'wikibase-error-sitelink-already-used' => 'საიტის ბმულს [[$1:$2]] უკვე იყენებს ელემენტი [[$3]].',
 	'special-itembytitle' => 'ელემენტი სათაურის მიხედვით',
 	'wikibase-itembytitle-lookup-fieldset' => 'ელემენტების ძიება საიტისა და სახელწოდების მიხედვით',
 	'wikibase-itembytitle-lookup-site' => 'ვებ-გვერდი:',
@@ -7342,10 +7368,36 @@ $messages['ka'] = array(
 	'wikibase-item-summary-wbsetlabel-remove' => 'წაშლილია სახელი [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'შეცვლილია აღწერა [$2]',
 	'wikibase-item-summary-wbsetdescription-remove' => 'წაშლილია აღწერა [$2]',
+	'wikibase-item-summary-wbsetaliases-set' => 'დაყენებულია [$2] {{PLURAL:$1|ფსევდონიმი}}',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'დაემატა და წაიშალა [$2] {{PLURAL:$1|ფსევდონიმი}}',
+	'wikibase-item-summary-wbsetaliases-add' => 'დაემატა [$2] {{PLURAL:$1|ფსევდონიმი}}',
+	'wikibase-item-summary-wbsetaliases-remove' => 'წაიშალა [$2] {{PLURAL:$1|ფსევდონიმი}}',
+	'wikibase-item-summary-wbsetsitelink-set' => 'დაემატა ბმული [$2]-ზე',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'წაიშალა ბმული [$2]-ზე',
+	'wikibase-item-summary-wblinktitles-create' => 'ეს ელემენტი შექმნილია გვერდების დასაკავშირებლად [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-connect' => 'დაკავშირებულ გვერდებზე დაემატა ენის ბმულები [$2↔$3]',
+	'wikibase-item-summary-wbcreateclaim-value' => 'შეიქმნა {{PLURAL:$1|განცხადება}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'შეიქმნა {{PLURAL:$1|განცხადება}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'შეიქმნა {{PLURAL:$1|განცხადება}}',
+	'wikibase-item-summary-wbcreateclaim' => 'შეიქმნა {{PLURAL:$1|განცხადება}}',
+	'wikibase-item-summary-wbsetclaimvalue' => 'დაყენებულია {{PLURAL:$1|განცხადების მნიშვნელობა}}',
+	'wikibase-item-summary-wbremoveclaims' => 'წაიშალა {{PLURAL:$1|განცხადება}}',
+	'wikibase-item-summary-special-create-item' => 'შეიქმნა ელემენტი [$2] {{PLURAL:$1|მნიშვნელობით}}',
+	'wikibase-item-summary-wbcreateclaim-create' => 'შეიქმნა განცხადება',
+	'wikibase-item-summary-wbremoveclaims-remove' => 'წაიშალა {{PLURAL:$3|განცხადება}}',
+	'wikibase-property-summary-wbeditentity-create' => 'შექმნილია ახალი თვისება',
+	'wikibase-property-summary-wbeditentity-update' => 'თვისება განახლებულია',
+	'wikibase-property-summary-wbeditentity-override' => 'არსებული თვისება გადაკეტილია',
 	'wikibase-property-summary-wbsetlabel-set' => 'შეცვლილია [$2] სახელი',
 	'wikibase-property-summary-wbsetlabel-remove' => 'წაშლილია [$2] სახელი',
 	'wikibase-property-summary-wbsetdescription-set' => 'შეცვლილია [$2] აღწერა',
 	'wikibase-property-summary-wbsetdescription-remove' => 'წაშლილია [$2] აღწერა',
+	'wikibase-property-summary-wbsetaliases-set' => 'დაყენებულია [$2] {{PLURAL:$1|ფსევდონიმი}}',
+	'wikibase-property-summary-wbsetaliases-add-remove' => 'დაემატა და წაიშალა [$2] {{PLURAL:$1|ფსევდონიმი}}',
+	'wikibase-property-summary-wbsetaliases-add' => 'დაემატა [$2] {{PLURAL:$1|ფსევდონიმი}}',
+	'wikibase-property-summary-wbsetaliases-remove' => 'წაიშალა [$2] {{PLURAL:$1|ფსევდონიმი}}',
+	'wikibase-property-summary-special-create-property' => 'შეიქმნა თვისება [$2] {{PLURAL:$1|მნიშვნელობით}}',
+	'wikibase-query-summary-special-create-query' => 'შეიქმნა მოთხოვნა [$2] {{PLURAL:$1|მნიშვნელობით}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'ელემენტი',
 	'wikibase-listdatatypes-commonsmedia-head' => 'ვიკისაწყობის მედიაფაილი',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'გეოკოორდინატი',
@@ -7775,11 +7827,13 @@ $messages['lb'] = array(
 	'wikibase-sitelinks-add' => 'e Link bäi e Link vum Site derbäisetzen',
 	'wikibase-sitelinks-input-help-message' => 'Setzt e Link op eng Säit déi mat dësem Element verbonn sinn.',
 	'wikibase-remove' => 'ewechhuelen',
+	'wikibase-undo-title' => 'Ännerung un "$1" zrécksetzen',
 	'wikibase-restore-title' => 'Al Versioun vun "$1" restauréieren',
 	'wikibase-empty-undo' => 'Hei kann näischt réckgängeg gemaach ginn.',
 	'wikibase-undo-badpage' => "Falsch Versioun: D'Versioun $2 gehéiert net zu [[$1]].",
 	'wikibase-undo-firstrev' => "D'Uleeë vun der Säit kann net réckgängeg gemaach ginn",
 	'wikibase-propertyedittool-full' => "D'Lëscht vun de Wäerter ass komplett.",
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Ee Wäert gouf|$1 Wäerter goufen}} nach net gespäichert',
 	'wikibase-sitelinksedittool-full' => "D'Linken op d'Säiten si schonn agestallt fir all bekannte Siten.",
 	'wikibase-disambiguation-title' => 'Homonymie fir "$1"',
 	'wikibase-aliases-label' => 'Och bekannt als:',
@@ -7788,6 +7842,7 @@ $messages['lb'] = array(
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Eng Quell|$1 Quellen}} goufen nach net gespäichert',
 	'wikibase-snakview-variations-somevalue-label' => 'onbekannte Wäert',
 	'wikibase-snakview-variations-novalue-label' => 'kee Wäert',
+	'wikibase-snakview-snaktypeselector-value' => 'personaliséierte Wäert',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'onbekannte Wäert',
 	'wikibase-snakview-snaktypeselector-novalue' => 'kee Wäert',
 	'wikibase-copyrighttooltip-acknowledge' => 'Ech akzeptéieren dës Bedingunge fir meng zukünfteg Ännerungen. Dëse Message net nach eng Kéier weisen.',
@@ -7797,6 +7852,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-restrictionedit-tooltip-message' => 'Dës Säit ass gespaart. Änneren ass net erlaabt.',
 	'wikibase-blockeduser-tooltip-message' => 'Dir gouft gespaart a  kënnt dofir keng Ännerunge maachen.',
 	'wikibase-error-sitelink-already-used' => 'Link op de Site [[$1:$2]] gëtt scho vum Element [[$3]] benotzt.',
+	'wikibase-error-label-not-unique-item' => 'En anert Element ($3) huet schonn d\'Etiquette "$1" an d\'Beschreiwung "$4" associéiert mam Sproochecode $2',
 	'special-itembytitle' => 'Element no Titel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Sicht no Elementer mam Site a mam Titel',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -7807,10 +7863,13 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiquette:',
 	'wikibase-itemdisambiguation-submit' => 'Sichen',
 	'wikibase-itemdisambiguation-nothing-found' => 'Pardon, en Element mat där Etiquette gouf net fonnt.',
+	'wikibase-itemdisambiguation-create' => "Dir kënnt [{{fullurl:Special:NewItem|label=$1}} d'Element uleeën].",
+	'wikibase-itemdisambiguation-invalid-langcode' => 'Pardon, de Sproochecode deen Dir uginn hutt ass dem System net bekannt. Benotzt w.e.g. e valabele Code wéi "lb".',
 	'special-newitem' => 'En neit Element uleeën',
 	'wikibase-newitem-fieldset' => 'En neit Element uleeën',
 	'wikibase-newitem-site' => 'Site vun der éischter verlinkter Säit',
 	'wikibase-newitem-page' => 'Numm vun der éischter verlinkter Säit',
+	'wikibase-newitem-no-external-page' => 'Déi spezifizéiert Säit konnt op dem korrespondéierte Site net fonnt ginn.',
 	'wikibase-newitem-add-sitelink-failed' => 'De Link op de Site konnt net gespäichert ginn.',
 	'wikibase-newentity-label' => 'Etiquette:',
 	'wikibase-newentity-description' => 'Beschreiwung:',
@@ -7818,9 +7877,12 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'special-setlabel' => 'Eng Etiquette festleeën',
 	'wikibase-setlabel-label' => 'Etiquette:',
 	'wikibase-setlabel-submit' => "D'Etiquette festleeën",
+	'wikibase-setlabel-warning-remove' => "Wëllt Dir wierklech d'Etiquette vun [[$1]] ewechhuelen?",
 	'special-setdescription' => 'Eng Beschreiwung festleeën',
+	'wikibase-setdescription-introfull' => 'Dir gitt elo eng Beschreiwung op $2 fir [[$1]] an.',
 	'wikibase-setdescription-label' => 'Beschreiwung:',
 	'wikibase-setdescription-submit' => 'Beschreiwung festleeën',
+	'wikibase-setdescription-warning-remove' => "Wëllt Dir wierklech d'Beschreiwung vun [[$1]] ewechhuelen?",
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Sprooch:',
 	'wikibase-dispatchstats-change-id' => 'Nummer (ID)',
@@ -7828,7 +7890,9 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-dispatchstats-oldest-change' => 'Eelzt',
 	'wikibase-dispatchstats-newest-change' => 'Neist',
 	'wikibase-dispatchstats-site-id' => 'Site',
+	'wikibase-dispatchstats-pos' => 'Positioun',
 	'wikibase-dispatchstats-lag-num' => 'Am Suspens',
+	'wikibase-dispatchstats-large-lag' => '(ganz grouss)',
 	'wikibase-dispatchstats-freshest' => 'Neist',
 	'wikibase-dispatchstats-stalest' => 'Eelzt',
 	'wikibase-dispatchstats-median' => 'Mëtt',
@@ -7839,6 +7903,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'all',
 	'wikibase-entitieswithoutlabel-submit' => 'Sichen',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" ass kee valabele Sproochecode.',
+	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" ass kee valabelen Typ vun Eenheet.',
 	'special-itemswithoutsitelinks' => 'Elementer ouni Linke mat Siten',
 	'wikibase-entitydata-bad-revision' => "D'Versioun $2 vun der Eenheet $1 kann net gewise ginn.",
 	'wikibase-restoreold' => 'restauréieren',
@@ -7854,6 +7919,8 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2]-Beschreiwung ewechgeholl',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Huet e Link op [$2] derbäigesat',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Huet e Link op [$2] ewechgeholl',
+	'wikibase-item-summary-special-create-item' => 'Huet en Element op [$2] ugeluecht mat {{PLURAL:$1|dem Wäert|de Wäerter}}',
+	'wikibase-property-summary-wbeditentity-update' => 'Huet eng Eegeschaft aktualiséiert',
 	'wikibase-property-summary-wbsetlabel-set' => "Huet d'Etiquette fir $2 geännert",
 	'wikibase-property-summary-wbsetlabel-remove' => 'Etiquette fir [$2] ewechgeholl',
 	'wikibase-property-summary-wbsetdescription-set' => '[$2]-Beschreiwung geännert',
@@ -7865,7 +7932,10 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Text an enger Sprooch',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Text a méi Sproochen',
 	'wikibase-listdatatypes-time-head' => 'Zäit',
+	'content-model-wikibase-item' => 'Wikibase-Element',
+	'content-model-wikibase-query' => 'Wikibase-Ufro',
 	'right-item-override' => 'Elementer iwwerschreiwen',
+	'right-item-create' => 'Elementer uleeën',
 	'right-item-remove' => 'Elementer ewechhuelen',
 	'right-sitelink-remove' => 'Linken op Siten ewechhuelen',
 	'right-sitelink-update' => 'Website-Linken aktualiséieren',
@@ -9486,6 +9556,7 @@ $messages['or'] = array(
  * @author Maćko
  * @author Odie2
  * @author Rzuwig
+ * @author Vivaelcelta
  * @author WTM
  * @author Wizardist
  */
@@ -9507,7 +9578,7 @@ $messages['pl'] = array(
 	'wikibase-alias-edit-placeholder' => 'podaj alternatywną nazwę',
 	'wikibase-label-input-help-message' => 'Podaj tytuł tego zbioru danych w języku: $1.',
 	'wikibase-description-input-help-message' => 'Podaj krótki opis w języku: $1.',
-	'wikibase-statements' => 'Oświadczenia',
+	'wikibase-statements' => 'Charakterystyka',
 	'wikibase-terms' => 'W innych językach',
 	'wikibase-sitelinks-empty' => 'Brak odnośników do tego elementu.',
 	'wikibase-sitelinks-input-help-message' => 'Podaj link do strony związanej z tą rzeczą.',
@@ -9549,6 +9620,8 @@ $messages['pl'] = array(
 	'wikibase-newproperty-fieldset' => 'Utwórz nową właściwość',
 	'wikibase-newproperty-datatype' => 'Typ danych:',
 	'special-newitem' => 'Utwórz nowy element',
+	'wikibase-newitem-summary' => 'Upewnij się czy dany element już istnieje!<br/>
+Jeżeli jesteś nowicjuszem w tym projekcie przeczytaj strony: [[Help:Label]] oraz [[Help:Description]].', # Fuzzy
 	'wikibase-newitem-fieldset' => 'Utwórz nowy element',
 	'wikibase-newentity-label' => 'Etykieta:',
 	'wikibase-newentity-description' => 'Opis:',
@@ -9770,6 +9843,7 @@ $messages['ps'] = array(
  * @author Malafaya
  * @author SandroHc
  * @author Sarilho1
+ * @author Vivaelcelta
  */
 $messages['pt'] = array(
 	'wikibase-desc' => 'Repositório de dados estruturados',
@@ -9823,6 +9897,7 @@ $messages['pt'] = array(
 	'wikibase-itemdisambiguation-submit' => 'Pesquisa',
 	'special-newproperty' => 'Criar uma nova propriedade',
 	'special-newitem' => 'Criar um novo item',
+	'wikibase-newitem-summary' => 'Por favor, [[Special:ItemByTitle|confira se o item já existe]]!<br/>Se é novo no projeto, consulte [[Help:Label]] e [[Help:Description]].', # Fuzzy
 	'wikibase-newentity-label' => 'Rótulo:',
 	'wikibase-newentity-description' => 'Descrição:',
 	'wikibase-newentity-submit' => 'Criar',
@@ -9841,6 +9916,7 @@ $messages['pt'] = array(
  * @author Helder.wiki
  * @author Jaideraf
  * @author MisterSanderson
+ * @author Vivaelcelta
  * @author 555
  */
 $messages['pt-br'] = array(
@@ -9931,6 +10007,7 @@ $messages['pt-br'] = array(
 	'wikibase-newproperty-datatype' => 'Tipo de dados:',
 	'wikibase-newproperty-invalid-datatype' => 'O tipo de dados especificado é inválido',
 	'special-newitem' => 'Criar um novo item',
+	'wikibase-newitem-summary' => 'Por favor, [[Special:ItemByTitle|confira se o item já existe]]!<br/>Se é novo no projeto, consulte [[Help:Label]] e [[Help:Description]].', # Fuzzy
 	'wikibase-newitem-fieldset' => 'Criar um novo item',
 	'wikibase-newitem-site' => 'Site da primeira página linkada',
 	'wikibase-newitem-page' => 'Nome da primeira página linkada',
@@ -11089,6 +11166,7 @@ $messages['sr-ec'] = array(
 /** Swedish (svenska)
  * @author Ainali
  * @author Lokal Profil
+ * @author Vivaelcelta
  * @author WikiPhoenix
  */
 $messages['sv'] = array(
@@ -11131,6 +11209,7 @@ $messages['sv'] = array(
 	'wikibase-itemdisambiguation-submit' => 'Sök',
 	'wikibase-newproperty-datatype' => 'Datatyp:',
 	'wikibase-newproperty-invalid-datatype' => 'Ogiltig datatyp angiven',
+	'wikibase-newitem-summary' => 'Försäkra dig om att detta item inte redan [[Special:ItemByTitle|existerar]]!<br/>Om du är nybörjare på projektet, ta då gärna en titt på [[Help:Label]] och [[Help:Description]].', # Fuzzy
 	'wikibase-newentity-label' => 'Etikett:',
 	'wikibase-newentity-description' => 'Beskrivning:',
 	'wikibase-newentity-submit' => 'Skapa',
@@ -12057,7 +12136,10 @@ $messages['zh-hans'] = array(
 	'wikibase-dispatchstats-oldest-change' => '最旧',
 	'wikibase-dispatchstats-newest-change' => '最新',
 	'wikibase-dispatchstats-site-id' => '站点',
+	'wikibase-dispatchstats-pos' => '位置',
 	'wikibase-dispatchstats-lag-time' => '滞后',
+	'wikibase-dispatchstats-touched' => '接触',
+	'wikibase-dispatchstats-large-lag' => '（非常大）',
 	'wikibase-dispatchstats-freshest' => '新进',
 	'wikibase-dispatchstats-stalest' => '过时',
 	'wikibase-dispatchstats-median' => '中央',

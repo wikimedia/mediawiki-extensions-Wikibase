@@ -923,6 +923,7 @@ $messages['fi'] = array(
 /** French (français)
  * @author Crochet.david
  * @author Gomoko
+ * @author Linedwell
  * @author Ltrlg
  * @author Peter17
  * @author Wyz
@@ -960,7 +961,7 @@ $messages['fr'] = array(
 	'wikibase-linkitem-success-link' => 'Les pages ont bien été liées. Vous pouvez trouver l’élément contenant les liens dans notre [$1 entrepôt central de données].',
 	'wikibase-property-notfound' => 'Propriété $1 non trouvée.',
 	'wikibase-property-notsupportedyet' => 'Wikibase ne supporte pas encore de type de propriété pour la propriété $1.',
-	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Afficher les modifications de Wikidata dans les modifications récentes',
 	'wikibase-watchlist-show-changes-pref' => 'Voir les modifications de Wikidata dans votre liste de suivi',
 	'wikibase-error-invalid-entity-id' => 'L’ID saisi est inconnu du système. Veuillez utiliser un ID d’entité valide.',
@@ -1634,12 +1635,13 @@ $messages['ku-latn'] = array(
  */
 $messages['lb'] = array(
 	'wikibase-client-desc' => "Client fir d'Wikibase Erweiderung",
+	'specialpages-group-wikibaseclient' => 'Wikidata-Client',
 	'wikibase-after-page-move' => "Dir kënnt och dat associéiert Wikidata-Element [$1 aktualiséiere] fir d'Interwikilinken op der geréckelter Säit bäizebehalen.",
 	'wikibase-comment-remove' => 'Associéiert Wikidata-Element geläscht. Sproochlinken ewechgeholl.',
 	'wikibase-comment-linked' => 'E Wikidata-Element gouf mat dëser Säit verlinkt.',
 	'wikibase-comment-unlink' => 'Dës Säit gouf vum Wikidata-Element entlinkt. Interwiki-Linke goufen ewechgeholl.',
 	'wikibase-comment-restore' => 'Associéiert Wikidata-Element restauréiert. Sproochlinken restauréiert.',
-	'wikibase-comment-update' => 'Sproochlinke sinn aktualiséiert', # Fuzzy
+	'wikibase-comment-update' => 'Wikidata-Element geännert',
 	'wikibase-comment-sitelink-add' => 'Sproochlink derbäigesat: $1',
 	'wikibase-comment-sitelink-change' => 'Sproochlink vun $1 op $2 geännert',
 	'wikibase-comment-sitelink-remove' => 'Sproochlink ewechgeholl: $1',
@@ -1661,6 +1663,10 @@ $messages['lb'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Ännerungen an de rezenten Ännerunge weisen',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Ännerungen an Ärer Iwwerwaachungslëscht weisen',
 	'wikibase-error-invalid-entity-id' => "D'ID déi Dir aginn hutt ass am System net bekannt. Benotzt w.e.g. en valabel ID.",
+	'special-unconnectedpages' => 'Säiten déi net mat Elementer verbonn sinn',
+	'wikibase-unconnectedpages-page' => 'Ufankssäit:',
+	'wikibase-unconnectedpages-submit' => 'Lass',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" ass kee valabele Sproochecode.',
 );
 
 /** Lezghian (лезги)
@@ -2466,12 +2472,13 @@ $messages['yue'] = array(
  */
 $messages['zh-hans'] = array(
 	'wikibase-client-desc' => 'Wikibase扩展客户端',
+	'specialpages-group-wikibaseclient' => 'Wikidata客户端',
 	'wikibase-after-page-move' => '您还可以[$1 更新]关联的维基数据项目，使其链接至移动后的页面。',
 	'wikibase-comment-remove' => '关联的维基数据项目已删除。语言链接已移除。',
 	'wikibase-comment-linked' => '一个维基数据项目已链接至此页面。',
 	'wikibase-comment-unlink' => '本页已解除维基数据项目的链接。语言链接已移除。',
 	'wikibase-comment-restore' => '关联的维基数据项目已还原。语言链接已恢复。',
-	'wikibase-comment-update' => '语言链接已更新。',
+	'wikibase-comment-update' => 'Wikidata项目已变更',
 	'wikibase-comment-sitelink-add' => '添加语言链接：$1',
 	'wikibase-comment-sitelink-change' => '语言链接从$1更改为$2',
 	'wikibase-comment-sitelink-remove' => '删除语言链接：$1',
@@ -2500,6 +2507,13 @@ $messages['zh-hans'] = array(
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中显示维基数据的编辑',
 	'wikibase-watchlist-show-changes-pref' => '在您的监视列表中显示Wikidata的编辑',
 	'wikibase-error-invalid-entity-id' => '输入的ID在系统中是未知的。请使用一个有效的实体ID。',
+	'special-unconnectedpages' => '未连接到项目的页面',
+	'wikibase-unconnectedpages-legend' => '未连接页面的选项',
+	'wikibase-unconnectedpages-page' => '开始页面：',
+	'wikibase-unconnectedpages-invalid-language' => '“$1”不是有效的语言代码。',
+	'wikibase-unconnectedpages-page-warning' => '该页面标题不能被用于查询并已被忽略。',
+	'wikibase-unconnectedpages-iwdata-label' => '仅有跨语言链接的页面',
+	'wikibase-unconnectedpages-format-row' => '（该页面有$1个跨语言链接）',
 );
 
 /** Traditional Chinese (中文（繁體）‎)
