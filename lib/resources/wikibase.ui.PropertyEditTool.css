@@ -261,8 +261,6 @@ table.wb-sitelinks .wb-ui-toolbar {
 			padding-bottom:1em;
 		}
 		.wb-tooltip-error-details {
-			/* These error messages are always displayed in English. */
-			/* @noflip */ text-align:left;
 			margin-top:.2em;
 			margin-bottom:.5em;
 			font-family:'Courier New', Courier, 'Andale Mono', serif;
