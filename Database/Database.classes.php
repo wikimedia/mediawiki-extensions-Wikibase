@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Entry point for the DataModel component of Wikibase.
+ * Class registration file for the Database component of Wikibase.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,21 +18,36 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseDataModel
+ * @ingroup WikibaseDatabase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
+return call_user_func( function() {
 
-define( 'WIKIBASE_DATAMODEL_VERSION', '0.4 alpha'  );
+	$classes = array(
+		'Wikibase\Database\MWDB\ExtendedAbstraction',
+		'Wikibase\Database\MWDB\ExtendedMySQLAbstraction',
 
-// @codeCoverageIgnoreStart
-call_user_func( function() {
-	if ( defined( 'MEDIAWIKI' ) ) {
-		require_once __DIR__ . '/DataModel.mw.php';
+		'Wikibase\Database\FieldDefinition',
+		'Wikibase\Database\MediaWikiQueryInterface',
+		'Wikibase\Database\ObservableQueryInterface',
+		'Wikibase\Database\QueryInterface',
+		'Wikibase\Database\TableBuilder',
+		'Wikibase\Database\TableDefinition',
+	);
+
+	$paths = array();
+
+	foreach ( $classes as $class ) {
+		$path = str_replace( '\\', '/', substr( $class, 9 ) ) . '.php';
+
+		$paths[$class] = $path;
 	}
+
+	return $paths;
+
 } );
-// @codeCoverageIgnoreEnd

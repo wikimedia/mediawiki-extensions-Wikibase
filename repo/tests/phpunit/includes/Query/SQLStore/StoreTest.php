@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore;
 
-use Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction;
-use Wikibase\Repo\Database\MediaWikiQueryInterface;
+use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
+use Wikibase\Database\MediaWikiQueryInterface;
 use Wikibase\Repo\LazyDBConnectionProvider;
 use Wikibase\Repo\Query\SQLStore\Store;
 use Wikibase\Repo\Query\SQLStore\StoreConfig;

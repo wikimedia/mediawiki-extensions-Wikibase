@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Repo\Database\MWDB;
+namespace Wikibase\Database\MWDB;
 
-use Wikibase\Repo\Database\TableDefinition;
-use Wikibase\Repo\Database\FieldDefinition;
+use Wikibase\Database\TableDefinition;
+use Wikibase\Database\FieldDefinition;
 use RuntimeException;
 
 /**
@@ -24,10 +24,10 @@ use RuntimeException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since wd.db
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseDatabase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -37,7 +37,7 @@ class ExtendedMySQLAbstraction extends ExtendedAbstraction {
 	/**
 	 * @see ExtendedAbstraction::getType
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return string
 	 */
@@ -48,7 +48,7 @@ class ExtendedMySQLAbstraction extends ExtendedAbstraction {
 	/**
 	 * @see ExtendedAbstraction::createTable
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param TableDefinition $table
 	 *
@@ -78,7 +78,7 @@ class ExtendedMySQLAbstraction extends ExtendedAbstraction {
 	}
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param FieldDefinition $field
 	 *

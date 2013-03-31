@@ -1,0 +1,6 @@
+The Wikibase Database component is dependent on:
+
+* MediaWiki 1.21 or later
+* WikibaseLib (MessageReporter, DBConnectionProvider)
+
+And nothing else.

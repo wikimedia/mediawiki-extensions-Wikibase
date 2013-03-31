@@ -6,7 +6,7 @@ use Wikibase\Claim;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\PropertyValueSnak;
-use Wikibase\Repo\Database\QueryInterface;
+use Wikibase\Database\QueryInterface;
 use Wikibase\Repo\Query\QueryStoreUpdater;
 use Wikibase\Snak;
 use Wikibase\SnakRole;

@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Query\SQLStore\DVHandler;
 use DataValues\DataValue;
 use DataValues\MonolingualTextValue;
 use InvalidArgumentException;
-use Wikibase\Repo\Database\FieldDefinition;
-use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Database\FieldDefinition;
+use Wikibase\Database\TableDefinition;
 use Wikibase\Repo\Query\SQLStore\DataValueHandler;
 
 /**

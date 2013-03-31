@@ -1,15 +1,15 @@
 <?php
 
-namespace Wikibase\Repo\Test\Database;
+namespace Wikibase\Test\Database;
 
-use Wikibase\Repo\Database\TableBuilder;
-use Wikibase\Repo\Database\FieldDefinition;
-use Wikibase\Repo\Database\TableDefinition;
-use Wikibase\Repo\Database\ObservableQueryInterface;
+use Wikibase\Database\TableBuilder;
+use Wikibase\Database\FieldDefinition;
+use Wikibase\Database\TableDefinition;
+use Wikibase\Database\ObservableQueryInterface;
 use NullMessageReporter;
 
 /**
- * Unit tests for the Wikibase\Repo\Database\TableBuilder class.
+ * Unit tests for the Wikibase\Database\TableBuilder class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ use NullMessageReporter;
  * @file
  * @since wd.db
  *
- * @ingroup WikibaseRepoTest
+ * @ingroup WikibaseDatabaseTest
  *
  * @group Wikibase
  * @group WikibaseRepo

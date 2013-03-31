@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Repo\Test\Database;
+namespace Wikibase\Test\Database;
 
-use Wikibase\Repo\Database\MediaWikiQueryInterface;
-use Wikibase\Repo\Database\QueryInterface;
-use Wikibase\Repo\Database\TableDefinition;
-use Wikibase\Repo\Database\FieldDefinition;
+use Wikibase\Database\MediaWikiQueryInterface;
+use Wikibase\Database\QueryInterface;
+use Wikibase\Database\TableDefinition;
+use Wikibase\Database\FieldDefinition;
 
 /**
- * Unit tests for the Wikibase\Repo\Database\MediaWikiQueryInterface class.
+ * Unit tests for the Wikibase\Database\MediaWikiQueryInterface class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use Wikibase\Repo\Database\FieldDefinition;
  * @file
  * @since wd.db
  *
- * @ingroup WikibaseRepoTest
+ * @ingroup WikibaseDatabaseTest
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -64,7 +64,7 @@ class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
 
 		return new MediaWikiQueryInterface(
 			$conn,
-			new \Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction( $conn )
+			new \Wikibase\Database\MWDB\ExtendedMySQLAbstraction( $conn )
 		);
 	}
 

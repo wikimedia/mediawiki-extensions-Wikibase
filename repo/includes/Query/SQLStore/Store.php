@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Query\SQLStore;
 
 use MessageReporter;
-use Wikibase\Repo\Database\QueryInterface;
-use Wikibase\Repo\Database\TableBuilder;
+use Wikibase\Database\QueryInterface;
+use Wikibase\Database\TableBuilder;
 use Wikibase\Repo\Query\QueryStore;
 
 /**

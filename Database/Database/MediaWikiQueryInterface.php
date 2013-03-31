@@ -1,12 +1,14 @@
 <?php
 
-namespace Wikibase\Repo\Database;
+namespace Wikibase\Database;
 
-use Wikibase\Repo\Database\QueryInterface;
+use Wikibase\Repo\DBConnectionProvider;
+use Wikibase\Database\TableDefinition;
+use Wikibase\Database\MWDB\ExtendedAbstraction;
 
 /**
- * Mock implementation of the QueryInterface interface that allows
- * tests to assert that certain methods where called.
+ * Implementation of the QueryInterface interface using the MediaWiki
+ * database abstraction layer where possible.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,89 +25,89 @@ use Wikibase\Repo\Database\QueryInterface;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since wd.db
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseDatabase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ObservableQueryInterface implements QueryInterface {
+class MediaWikiQueryInterface implements QueryInterface {
 
 	/**
-	 * @var callable[]
+	 * @var DBConnectionProvider
 	 */
-	private $callbacks = array();
+	private $connectionProvider;
 
 	/**
-	 * Register a callback that should be called whenever the methods
-	 * which name is provided is called with the arguments this method got.
-	 *
-	 * @since wd.db
-	 *
-	 * @param string $method
-	 * @param callable $callback
+	 * @var ExtendedAbstraction
 	 */
-	public function registerCallback( $method, $callback ) {
-		$this->callbacks[$method] = $callback;
+	private $extendedAbstraction;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1
+	 *
+	 * @param DBConnectionProvider $connectionProvider
+	 * @param ExtendedAbstraction $extendedAbstraction
+	 */
+	public function __construct( DBConnectionProvider $connectionProvider, ExtendedAbstraction $extendedAbstraction ) {
+		$this->connectionProvider = $connectionProvider;
+		$this->extendedAbstraction = $extendedAbstraction;
 	}
 
 	/**
-	 * @since wd.db
-	 *
-	 * @param string $method
-	 * @param array $args
+	 * @return \DatabaseBase
 	 */
-	private function runCallbacks( $method, array $args ) {
-		if ( array_key_exists( $method, $this->callbacks ) ) {
-			call_user_func_array( $this->callbacks[$method], $args );
-		}
+	private function getDB() {
+		return $this->connectionProvider->getConnection();
 	}
 
 	/**
 	 * @see QueryInterface::tableExists
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $tableName
 	 *
 	 * @return boolean
 	 */
 	public function tableExists( $tableName ) {
-		$this->runCallbacks( __FUNCTION__, func_get_args() );
+		return $this->getDB()->tableExists( $tableName, __METHOD__ );
 	}
 
 	/**
 	 * @see QueryInterface::createTable
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param TableDefinition $table
 	 *
-	 * @return boolean
+	 * @return boolean Success indicator
 	 */
 	public function createTable( TableDefinition $table ) {
-		$this->runCallbacks( __FUNCTION__, func_get_args() );
+		return $this->extendedAbstraction->createTable( $table );
 	}
 
 	/**
 	 * @see QueryInterface::dropTable
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $tableName
 	 *
 	 * @return boolean Success indicator
 	 */
 	public function dropTable( $tableName ) {
-		$this->runCallbacks( __FUNCTION__, func_get_args() );
+		return $this->getDB()->dropTable( $tableName, __METHOD__ ) !== false;
 	}
 
 	/**
 	 * @see QueryInterface::insert
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $tableName
 	 * @param array $values
@@ -113,13 +115,17 @@ class ObservableQueryInterface implements QueryInterface {
 	 * @return boolean Success indicator
 	 */
 	public function insert( $tableName, array $values ) {
-		$this->runCallbacks( __FUNCTION__, func_get_args() );
+		return $this->getDB()->insert(
+			$tableName,
+			$values,
+			__METHOD__
+		) !== false;
 	}
 
 	/**
 	 * @see QueryInterface::update
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $tableName
 	 * @param array $values
@@ -128,13 +134,18 @@ class ObservableQueryInterface implements QueryInterface {
 	 * @return boolean Success indicator
 	 */
 	public function update( $tableName, array $values, array $conditions ) {
-		$this->runCallbacks( __FUNCTION__, func_get_args() );
+		return $this->getDB()->update(
+			$tableName,
+			$values,
+			$conditions,
+			__METHOD__
+		) !== false;
 	}
 
 	/**
 	 * @see QueryInterface::delete
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $tableName
 	 * @param array $conditions
@@ -142,7 +153,11 @@ class ObservableQueryInterface implements QueryInterface {
 	 * @return boolean Success indicator
 	 */
 	public function delete( $tableName, array $conditions ) {
-		$this->runCallbacks( __FUNCTION__, func_get_args() );
+		return $this->getDB()->delete(
+			$tableName,
+			$conditions,
+			__METHOD__
+		) !== false;
 	}
 
 }

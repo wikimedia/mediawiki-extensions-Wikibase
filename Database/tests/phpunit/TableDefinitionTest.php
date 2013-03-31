@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Repo\Test\Database;
+namespace Wikibase\Test\Database;
 
-use Wikibase\Repo\Database\FieldDefinition;
-use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Database\FieldDefinition;
+use Wikibase\Database\TableDefinition;
 
 /**
- * Unit tests for the Wikibase\Repo\Database\TableDefinition class.
+ * Unit tests for the Wikibase\Database\TableDefinition class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ use Wikibase\Repo\Database\TableDefinition;
  * @file
  * @since wd.db
  *
- * @ingroup WikibaseRepoTest
+ * @ingroup WikibaseDatabaseTest
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -83,7 +83,7 @@ class TableDefinitionTest extends \MediaWikiTestCase {
 	 */
 	public function testReturnValueOfGetFields( TableDefinition $table ) {
 		$this->assertInternalType( 'array', $table->getFields() );
-		$this->assertContainsOnlyInstancesOf( 'Wikibase\Repo\Database\FieldDefinition', $table->getFields() );
+		$this->assertContainsOnlyInstancesOf( 'Wikibase\Database\FieldDefinition', $table->getFields() );
 
 		foreach ( $table->getFields() as $expectedName => $field ) {
 			$this->assertEquals(

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Test\Query\SQLStore;
 
-use Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction;
-use Wikibase\Repo\Database\MediaWikiQueryInterface;
-use Wikibase\Repo\Database\TableBuilder;
+use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
+use Wikibase\Database\MediaWikiQueryInterface;
+use Wikibase\Database\TableBuilder;
 use Wikibase\Repo\LazyDBConnectionProvider;
 use Wikibase\Repo\Query\SQLStore\DVHandler\NumberHandler;
 use Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler;
@@ -46,7 +46,7 @@ use Wikibase\Repo\Query\SQLStore\StoreConfig;
 class SetupTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return \Wikibase\Repo\Database\QueryInterface
+	 * @return \Wikibase\Database\QueryInterface
 	 */
 	protected function getQueryInterface() {
 		$connectionProvider = new LazyDBConnectionProvider( DB_MASTER );

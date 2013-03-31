@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Wikibase\Repo\Database\FieldDefinition;
-use Wikibase\Repo\Database\FieldDefinition as FD;
-use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Database\FieldDefinition;
+use Wikibase\Database\FieldDefinition as FD;
+use Wikibase\Database\TableDefinition;
 use Wikibase\Repo\Query\SQLStore\DVHandler\BooleanHandler;
 use Wikibase\Repo\Query\SQLStore\DVHandler\EntityIdHandler;
 use Wikibase\Repo\Query\SQLStore\DVHandler\GeoCoordinateHandler;

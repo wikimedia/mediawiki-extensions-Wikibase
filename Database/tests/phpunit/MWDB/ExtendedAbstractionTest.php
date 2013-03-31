@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Repo\Test\Database\MWDB;
+namespace Wikibase\Test\Database\MWDB;
 
-use Wikibase\Repo\Database\MWDB\ExtendedAbstraction;
-use Wikibase\Repo\Database\TableDefinition;
-use Wikibase\Repo\Database\FieldDefinition;
+use Wikibase\Database\MWDB\ExtendedAbstraction;
+use Wikibase\Database\TableDefinition;
+use Wikibase\Database\FieldDefinition;
 
 /**
- * Base class with tests for the Wikibase\Repo\Database\MWDB\ExtendedAbstraction deriving classes.
+ * Base class with tests for the Wikibase\Database\MWDB\ExtendedAbstraction deriving classes.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ use Wikibase\Repo\Database\FieldDefinition;
  * @file
  * @since wd.db
  *
- * @ingroup WikibaseRepoTest
+ * @ingroup WikibaseDatabaseTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

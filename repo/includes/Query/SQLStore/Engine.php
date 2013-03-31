@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Query\SQLStore;
 use Ask\Language\Description\Description;
 use Ask\Language\Option\QueryOptions;
 use Ask\Language\Query;
-use Wikibase\Repo\Database\QueryInterface;
+use Wikibase\Database\QueryInterface;
 use Wikibase\Repo\Query\QueryEngine;
 use Wikibase\Repo\Query\QueryEngineResult;
 

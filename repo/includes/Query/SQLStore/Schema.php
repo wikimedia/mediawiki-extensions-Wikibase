@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Wikibase\Repo\Database\FieldDefinition;
-use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Database\FieldDefinition;
+use Wikibase\Database\TableDefinition;
 use Wikibase\SnakRole;
 use OutOfRangeException;
 use OutOfBoundsException;

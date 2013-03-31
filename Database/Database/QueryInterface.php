@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Database;
+namespace Wikibase\Database;
 
 /**
  * Interface for objects that provide a database query service.
@@ -20,10 +20,10 @@ namespace Wikibase\Repo\Database;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since wd.db
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseDatabase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -33,7 +33,7 @@ interface QueryInterface {
 	/**
 	 * Returns if the table exists in the database.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $tableName
 	 *
@@ -44,7 +44,7 @@ interface QueryInterface {
 	/**
 	 * Creates a table based on the provided definition in the store.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param TableDefinition $table
 	 *
@@ -55,7 +55,7 @@ interface QueryInterface {
 	/**
 	 * Removes the table with provided name from the store.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $tableName
 	 *
@@ -68,7 +68,7 @@ interface QueryInterface {
 	 * The values are provided as an associative array in
 	 * which the keys are the field names.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $tableName
 	 * @param array $values
@@ -82,7 +82,7 @@ interface QueryInterface {
 	 * The values and conditions are provided as an associative array in
 	 * which the keys are the field names.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $tableName
 	 * @param array $values
@@ -97,7 +97,7 @@ interface QueryInterface {
 	 * The conditions are provided as an associative array in
 	 * which the keys are the field names.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $tableName
 	 * @param array $conditions

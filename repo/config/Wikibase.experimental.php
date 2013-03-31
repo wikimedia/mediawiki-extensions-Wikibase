@@ -33,6 +33,11 @@ if ( !defined( 'WB_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
 
+// Include the Database component if that hasn't been done yet.
+if ( !defined( 'WIKIBASE_DATABASE' ) ) {
+	@include_once( __DIR__ . '/../../Database/Database.php' );
+}
+
 $dir = __DIR__ . '/../';
 
 $wgAutoloadClasses['Wikibase\Api\RemoveQualifiers'] 	= $dir . 'includes/api/RemoveQualifiers.php';
@@ -46,16 +51,6 @@ $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryH
 
 
 $classes = array(
-	'Wikibase\Repo\Database\MWDB\ExtendedAbstraction',
-	'Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction',
-
-	'Wikibase\Repo\Database\FieldDefinition',
-	'Wikibase\Repo\Database\MediaWikiQueryInterface',
-	'Wikibase\Repo\Database\ObservableQueryInterface',
-	'Wikibase\Repo\Database\QueryInterface',
-	'Wikibase\Repo\Database\TableBuilder',
-	'Wikibase\Repo\Database\TableDefinition',
-
 	'Wikibase\Repo\Query\QueryEngine',
 	'Wikibase\Repo\Query\QueryEngineResult',
 	'Wikibase\Repo\Query\QueryResult',
@@ -100,9 +95,6 @@ if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 
 	$wgAutoloadClasses['Wikibase\Repo\Test\Query\QueryStoreUpdaterTest']
 		= $dir . 'tests/phpunit/includes/Query/QueryStoreUpdaterTest.php';
-
-	$wgAutoloadClasses['Wikibase\Repo\Test\Database\MWDB\ExtendedAbstractionTest']
-		= $dir . 'tests/phpunit/includes/Database/MWDB/ExtendedAbstractionTest.php';
 }
 
 unset( $dir );
@@ -134,13 +126,6 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 
 		'content/QueryContent',
 		'content/QueryHandler',
-
-		'Database/MWDB/ExtendedMySQLAbstraction',
-
-		'Database/FieldDefinition',
-		'Database/MediaWikiQueryInterface',
-		'Database/TableBuilder',
-		'Database/TableDefinition',
 
 		'Query/QueryEngineResult',
 

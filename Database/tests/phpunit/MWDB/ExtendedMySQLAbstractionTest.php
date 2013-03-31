@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Repo\Test\Database\MWDB;
+namespace Wikibase\Test\Database\MWDB;
 
-use Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction;
+use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
 use Wikibase\Repo\LazyDBConnectionProvider;
 
 /**
- * Unit tests for the Wikibase\Repo\Database\MWDB\ExtendedMySQLAbstraction class.
+ * Unit tests for the Wikibase\Database\MWDB\ExtendedMySQLAbstraction class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ use Wikibase\Repo\LazyDBConnectionProvider;
  * @file
  * @since wd.db
  *
- * @ingroup WikibaseRepoTest
+ * @ingroup WikibaseDatabaseTest
  *
  * @group Wikibase
  * @group WikibaseRepo

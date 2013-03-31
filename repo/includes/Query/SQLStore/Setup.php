@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Query\SQLStore;
 
 use MessageReporter;
-use Wikibase\Repo\Database\FieldDefinition;
-use Wikibase\Repo\Database\QueryInterface;
-use Wikibase\Repo\Database\TableBuilder;
-use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Database\FieldDefinition;
+use Wikibase\Database\QueryInterface;
+use Wikibase\Database\TableBuilder;
+use Wikibase\Database\TableDefinition;
 
 /**
  * Setup for the SQLStore.

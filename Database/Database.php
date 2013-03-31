@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Entry point for the DataModel component of Wikibase.
+ * Entry point for the Database component of Wikibase.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,21 +18,21 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseDataModel
+ * @ingroup WikibaseDatabase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-define( 'WIKIBASE_DATAMODEL_VERSION', '0.4 alpha'  );
+define( 'WIKIBASE_Database', '0.1 alpha' );
 
 // @codeCoverageIgnoreStart
 call_user_func( function() {
 	if ( defined( 'MEDIAWIKI' ) ) {
-		require_once __DIR__ . '/DataModel.mw.php';
+		require_once __DIR__ . '/Database.mw.php';
 	}
 } );
 // @codeCoverageIgnoreEnd

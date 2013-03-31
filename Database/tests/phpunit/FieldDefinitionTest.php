@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Repo\Test\Database;
+namespace Wikibase\Test\Database;
 
-use Wikibase\Repo\Database\FieldDefinition;
+use Wikibase\Database\FieldDefinition;
 
 /**
- * Unit tests for the Wikibase\Repo\Database\FieldDefinition class.
+ * Unit tests for the Wikibase\Database\FieldDefinition class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ use Wikibase\Repo\Database\FieldDefinition;
  * @file
  * @since wd.db
  *
- * @ingroup WikibaseRepoTest
+ * @ingroup WikibaseDatabaseTest
  *
  * @group Wikibase
  * @group WikibaseRepo

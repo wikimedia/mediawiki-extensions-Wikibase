@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Database;
+namespace Wikibase\Database;
 
 use InvalidArgumentException;
 
@@ -22,10 +22,10 @@ use InvalidArgumentException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since wd.db
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseDatabase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -33,14 +33,14 @@ use InvalidArgumentException;
 class TableDefinition implements \Immutable {
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var string
 	 */
 	private $name;
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var FieldDefinition[]
 	 */
@@ -49,7 +49,7 @@ class TableDefinition implements \Immutable {
 	/**
 	 * Constructor.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $name
 	 * @param FieldDefinition[] $fields
@@ -85,7 +85,7 @@ class TableDefinition implements \Immutable {
 	/**
 	 * Returns the name of the table.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return string
 	 */
@@ -98,7 +98,7 @@ class TableDefinition implements \Immutable {
 	 * The array keys in the returned array correspond to the names
 	 * of the fields defined by the value they point to.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return FieldDefinition[]
 	 */
@@ -109,7 +109,7 @@ class TableDefinition implements \Immutable {
 	/**
 	 * Returns if the table has a field with the provided name.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $fieldName
 	 *
@@ -122,7 +122,7 @@ class TableDefinition implements \Immutable {
 	/**
 	 * Returns a clone of the table, though with the provided name instead.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $cloneName
 	 *
@@ -135,7 +135,7 @@ class TableDefinition implements \Immutable {
 	/**
 	 * Returns a clone of the table, though with the provided fields rather then the original ones.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param FieldDefinition[] $fields
 	 *

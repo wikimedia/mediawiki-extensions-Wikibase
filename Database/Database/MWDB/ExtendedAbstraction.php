@@ -1,8 +1,8 @@
 <?php
 
-namespace Wikibase\Repo\Database\MWDB;
+namespace Wikibase\Database\MWDB;
 
-use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Database\TableDefinition;
 use Wikibase\Repo\DBConnectionProvider;
 use InvalidArgumentException;
 use DatabaseBase;
@@ -34,10 +34,10 @@ use DatabaseBase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since wd.db
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseDatabase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -45,14 +45,14 @@ use DatabaseBase;
 abstract class ExtendedAbstraction {
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var DBConnectionProvider
 	 */
 	private $connectionProvider;
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param DBConnectionProvider $connectionProvider
 	 */
@@ -61,7 +61,7 @@ abstract class ExtendedAbstraction {
 	}
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return DatabaseBase
 	 * @throws InvalidArgumentException
@@ -79,7 +79,7 @@ abstract class ExtendedAbstraction {
 	/**
 	 * Create the provided table.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param TableDefinition $table
 	 *
@@ -90,7 +90,7 @@ abstract class ExtendedAbstraction {
 	/**
 	 * Returns the type of the supported MW DB abstraction class.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return string
 	 */

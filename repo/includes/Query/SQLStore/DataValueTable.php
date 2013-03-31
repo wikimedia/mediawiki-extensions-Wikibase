@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Query\SQLStore;
 
-use Wikibase\Repo\Database\TableDefinition;
+use Wikibase\Database\TableDefinition;
 
 /**
  * Declaration of a table in which data values can be stored.

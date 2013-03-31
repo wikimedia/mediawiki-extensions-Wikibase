@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Database;
+namespace Wikibase\Database;
 
 use MessageReporter;
 
@@ -22,10 +22,10 @@ use MessageReporter;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since wd.db
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseDatabase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -33,14 +33,14 @@ use MessageReporter;
 class TableBuilder {
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var QueryInterface
 	 */
 	private $db;
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var MessageReporter|null
 	 */
@@ -49,7 +49,7 @@ class TableBuilder {
 	/**
 	 * Constructor.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param QueryInterface $queryInterface
 	 * @param MessageReporter|null $messageReporter
@@ -60,7 +60,7 @@ class TableBuilder {
 	}
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $message
 	 */
@@ -73,7 +73,7 @@ class TableBuilder {
 	/**
 	 * Creates a table if it does not exist yet.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param TableDefinition $table
 	 *

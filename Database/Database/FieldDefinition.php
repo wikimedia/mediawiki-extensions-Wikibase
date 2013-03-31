@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Database;
+namespace Wikibase\Database;
 
 use InvalidArgumentException;
 
@@ -22,10 +22,10 @@ use InvalidArgumentException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since wd.db
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseDatabase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -33,49 +33,49 @@ use InvalidArgumentException;
 class FieldDefinition implements \Immutable {
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var string
 	 */
 	private $name;
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var string
 	 */
 	private $type;
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var mixed
 	 */
 	private $default;
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var string|null
 	 */
 	private $attributes;
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var boolean
 	 */
 	private $null;
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var string|null
 	 */
 	private $index;
 
 	/**
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @var boolean
 	 */
@@ -108,7 +108,7 @@ class FieldDefinition implements \Immutable {
 	/**
 	 * Constructor.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @param string $name
 	 * @param string $type
@@ -153,7 +153,7 @@ class FieldDefinition implements \Immutable {
 	/**
 	 * Returns the name of the field.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return string
 	 */
@@ -165,7 +165,7 @@ class FieldDefinition implements \Immutable {
 	 * Returns the type of the field.
 	 * This is one of the TYPE_ constants.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return string
 	 */
@@ -177,7 +177,7 @@ class FieldDefinition implements \Immutable {
 	 * Returns the default value of the field.
 	 * Null for no default value.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return mixed
 	 */
@@ -189,7 +189,7 @@ class FieldDefinition implements \Immutable {
 	 * Returns the attributes of the field.
 	 * This is one of the ATTRIB_ constants or null.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return string|null
 	 */
@@ -200,7 +200,7 @@ class FieldDefinition implements \Immutable {
 	/**
 	 * Returns if the field allows for the value to be null.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return boolean
 	 */
@@ -212,7 +212,7 @@ class FieldDefinition implements \Immutable {
 	 * Returns the index type of the field.
 	 * This is one of the INDEX_ constants or null.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return string|null
 	 */
@@ -223,7 +223,7 @@ class FieldDefinition implements \Immutable {
 	/**
 	 * Returns if the field has auto increment.
 	 *
-	 * @since wd.db
+	 * @since 0.1
 	 *
 	 * @return boolean
 	 */
