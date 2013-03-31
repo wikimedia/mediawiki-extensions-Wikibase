@@ -27,7 +27,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-define( 'WIKIBASE_Database', '0.1 alpha' );
+define( 'WIKIBASE_DATABASE_VERSION', '0.1 alpha' );
 
 // @codeCoverageIgnoreStart
 call_user_func( function() {

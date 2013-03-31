@@ -1,13 +1,9 @@
 <?php
 
-namespace Wikibase\Repo;
-
-use DatabaseBase;
+namespace Wikibase\Query;
 
 /**
- * Interface for database connection providers.
- *
- * TODO: move to lib
+ * Result of running a query against the query engine.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,31 +20,24 @@ use DatabaseBase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseQueryStore
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface DBConnectionProvider {
+class QueryEngineResult {
 
 	/**
-	 * Returns the database connection.
-	 * Initialization of this connection is done if it was not already initialized.
+	 * @since 0.1
 	 *
-	 * @since 0.4
-	 *
-	 * @return DatabaseBase
+	 * @return QueryResult
 	 */
-	public function getConnection();
-
-	/**
-	 * Releases the connection if doing so makes any sense resource wise.
-	 *
-	 * @since 0.4
-	 */
-	public function releaseConnection();
+	public function getQueryResult() {
+		// TODO
+		return new QueryResult();
+	}
 
 }

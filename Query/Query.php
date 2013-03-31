@@ -1,13 +1,7 @@
 <?php
 
-namespace Wikibase\Repo;
-
-use DatabaseBase;
-
 /**
- * Interface for database connection providers.
- *
- * TODO: move to lib
+ * Entry point for the Query component of Wikibase.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,31 +18,21 @@ use DatabaseBase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseQuery
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface DBConnectionProvider {
 
-	/**
-	 * Returns the database connection.
-	 * Initialization of this connection is done if it was not already initialized.
-	 *
-	 * @since 0.4
-	 *
-	 * @return DatabaseBase
-	 */
-	public function getConnection();
+define( 'WIKIBASE_Query', '0.1 alpha' );
 
-	/**
-	 * Releases the connection if doing so makes any sense resource wise.
-	 *
-	 * @since 0.4
-	 */
-	public function releaseConnection();
-
-}
+// @codeCoverageIgnoreStart
+call_user_func( function() {
+	if ( defined( 'MEDIAWIKI' ) ) {
+		require_once __DIR__ . '/Query.mw.php';
+	}
+} );
+// @codeCoverageIgnoreEnd

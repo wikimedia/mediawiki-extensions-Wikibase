@@ -1,13 +1,11 @@
 <?php
 
-namespace Wikibase\Repo;
+namespace Wikibase\Test\Query\SQLStore;
 
-use DatabaseBase;
+use Wikibase\Query\SQLStore\DataValueHandlers;
 
 /**
- * Interface for database connection providers.
- *
- * TODO: move to lib
+ * Unit tests for the Wikibase\Query\SQLStore\DataValueHandlers class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,31 +22,22 @@ use DatabaseBase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
- *
  * @file
- * @ingroup WikibaseRepo
+ * @since 0.1
+ *
+ * @ingroup WikibaseQueryTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface DBConnectionProvider {
+class DataValueHandlersTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * Returns the database connection.
-	 * Initialization of this connection is done if it was not already initialized.
-	 *
-	 * @since 0.4
-	 *
-	 * @return DatabaseBase
-	 */
-	public function getConnection();
+	public function testGetHandlersReturnType() {
+		$defaultHandlers = new DataValueHandlers();
+		$defaultHandlers = $defaultHandlers->getHandlers();
 
-	/**
-	 * Releases the connection if doing so makes any sense resource wise.
-	 *
-	 * @since 0.4
-	 */
-	public function releaseConnection();
+		$this->assertInternalType( 'array', $defaultHandlers );
+		$this->assertContainsOnlyInstancesOf( 'Wikibase\Query\SQLStore\DataValueHandler', $defaultHandlers );
+	}
 
 }

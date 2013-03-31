@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MediaWiki setup for the Database component of Wikibase.
+ * MediaWiki setup for the Query component of Wikibase.
  * The component should be included via the main entry point, Database.php.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,13 +22,13 @@
  * @since 0.1
  *
  * @file
- * @ingroup WikibaseDatabase
+ * @ingroup WikibaseQuery
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-if ( !defined( 'WIKIBASE_DATABASE_VERSION' ) ) {
+if ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
 	die( 'Not an entry point.' );
 }
 
@@ -39,14 +39,24 @@ global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHo
 //$wgExtensionMessagesFiles['WikibaseDataModel'] = __DIR__ . '/DataModel.i18n.php';
 
 // Autoloading
-foreach ( include( __DIR__ . '/Database.classes.php' ) as $class => $file ) {
+foreach ( include( __DIR__ . '/Query.classes.php' ) as $class => $file ) {
 	$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
 }
 
+$dir = __DIR__ . '/';
+
 if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-	$wgAutoloadClasses['Wikibase\Test\Database\MWDB\ExtendedAbstractionTest']
-		= __DIR__ . '/tests/phpunit/MWDB/ExtendedAbstractionTest.php';
-}
+	$wgAutoloadClasses['Wikibase\Test\Query\SQLStore\DataValueHandlerTest']
+		= $dir . 'tests/phpunit/SQLStore/DataValueHandlerTest.php';
+
+	$wgAutoloadClasses['Wikibase\Test\Query\QueryEngineTest']
+		= $dir . 'tests/phpunit/QueryEngineTest.php';
+
+	$wgAutoloadClasses['Wikibase\Test\Query\QueryStoreTest']
+		= $dir . 'tests/phpunit/QueryStoreTest.php';
+
+	$wgAutoloadClasses['Wikibase\Test\Query\QueryStoreUpdaterTest']
+		= $dir . 'tests/phpunit/QueryStoreUpdaterTest.php';}
 
 /**
  * Hook to add PHPUnit test cases.
@@ -61,12 +71,24 @@ if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreStart
 	$testFiles = array(
-		'MWDB/ExtendedMySQLAbstraction',
+		'QueryEngineResult',
 
-		'FieldDefinition',
-		'MediaWikiQueryInterface',
-		'TableBuilder',
-		'TableDefinition',
+		'SQLStore/DVHandler/BooleanHandler',
+		'SQLStore/DVHandler/EntityIdHandler',
+		'SQLStore/DVHandler/GeoCoordinateHandler',
+		'SQLStore/DVHandler/IriHandler',
+		'SQLStore/DVHandler/MonolingualTextHandler',
+		'SQLStore/DVHandler/NumberHandler',
+		'SQLStore/DVHandler/StringHandler',
+
+		'SQLStore/DataValueHandlers',
+		'SQLStore/DataValueHandler',
+		'SQLStore/Engine',
+		'SQLStore/Schema',
+		'SQLStore/Setup',
+		'SQLStore/Store',
+		'SQLStore/StoreConfig',
+		'SQLStore/Updater',
 	);
 
 	foreach ( $testFiles as $file ) {

@@ -1,13 +1,11 @@
 <?php
 
-namespace Wikibase\Repo;
+namespace Wikibase\Test\Query;
 
-use DatabaseBase;
+use Wikibase\Query\QueryEngineResult;
 
 /**
- * Interface for database connection providers.
- *
- * TODO: move to lib
+ * Unit tests for the Wikibase\Query\QueryEngineResult class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,31 +22,49 @@ use DatabaseBase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
- *
  * @file
- * @ingroup WikibaseRepo
+ * @since 0.1
+ *
+ * @ingroup WikibaseQueryTest
+ *
+ * @group Wikibase
+ * @group WikibaseQuery
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface DBConnectionProvider {
+class QueryEngineResultTest extends \MediaWikiTestCase {
 
 	/**
-	 * Returns the database connection.
-	 * Initialization of this connection is done if it was not already initialized.
+	 * @since 0.1
 	 *
-	 * @since 0.4
-	 *
-	 * @return DatabaseBase
+	 * @return QueryEngineResult[]
 	 */
-	public function getConnection();
+	protected function getInstances() {
+		$instances = array();
+
+		$instances[] = new QueryEngineResult();
+
+		return $instances;
+	}
 
 	/**
-	 * Releases the connection if doing so makes any sense resource wise.
+	 * @since 0.1
 	 *
-	 * @since 0.4
+	 * @return QueryEngineResult[][]
 	 */
-	public function releaseConnection();
+	public function instanceProvider() {
+		return $this->arrayWrap( $this->getInstances() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param QueryEngineResult $engineResult
+	 */
+	public function testGetResultReturnType( QueryEngineResult $engineResult ) {
+		// TODO: switch type check to real object
+		$this->assertInstanceOf( 'Wikibase\Query\QueryResult', $engineResult->getQueryResult() );
+	}
 
 }

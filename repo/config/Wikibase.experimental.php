@@ -34,8 +34,13 @@ if ( !defined( 'WB_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 }
 
 // Include the Database component if that hasn't been done yet.
-if ( !defined( 'WIKIBASE_DATABASE' ) ) {
+if ( !defined( 'WIKIBASE_DATABASE_VERSION' ) && defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	@include_once( __DIR__ . '/../../Database/Database.php' );
+}
+
+// Include the Query component if that hasn't been done yet.
+if ( !defined( 'WIKIBASE_QUERY_VERSION' ) && defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
+	@include_once( __DIR__ . '/../../Query/Query.php' );
 }
 
 $dir = __DIR__ . '/../';
@@ -51,29 +56,7 @@ $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryH
 
 
 $classes = array(
-	'Wikibase\Repo\Query\QueryEngine',
-	'Wikibase\Repo\Query\QueryEngineResult',
-	'Wikibase\Repo\Query\QueryResult',
-	'Wikibase\Repo\Query\QueryStore',
-	'Wikibase\Repo\Query\QueryStoreUpdater',
 
-	'Wikibase\Repo\Query\SQLStore\DVHandler\BooleanHandler',
-	'Wikibase\Repo\Query\SQLStore\DVHandler\EntityIdHandler',
-	'Wikibase\Repo\Query\SQLStore\DVHandler\GeoCoordinateHandler',
-	'Wikibase\Repo\Query\SQLStore\DVHandler\IriHandler',
-	'Wikibase\Repo\Query\SQLStore\DVHandler\MonolingualTextHandler',
-	'Wikibase\Repo\Query\SQLStore\DVHandler\NumberHandler',
-	'Wikibase\Repo\Query\SQLStore\DVHandler\StringHandler',
-
-	'Wikibase\Repo\Query\SQLStore\DataValueHandlers',
-	'Wikibase\Repo\Query\SQLStore\DataValueHandler',
-	'Wikibase\Repo\Query\SQLStore\DataValueTable',
-	'Wikibase\Repo\Query\SQLStore\Engine',
-	'Wikibase\Repo\Query\SQLStore\Schema',
-	'Wikibase\Repo\Query\SQLStore\Setup',
-	'Wikibase\Repo\Query\SQLStore\Store',
-	'Wikibase\Repo\Query\SQLStore\StoreConfig',
-	'Wikibase\Repo\Query\SQLStore\Updater',
 );
 
 foreach ( $classes as $class ) {
@@ -82,20 +65,6 @@ foreach ( $classes as $class ) {
 }
 
 unset( $classes );
-
-if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-	$wgAutoloadClasses['Wikibase\Repo\Test\Query\SQLStore\DataValueHandlerTest']
-		= $dir . 'tests/phpunit/includes/Query/SQLStore/DataValueHandlerTest.php';
-
-	$wgAutoloadClasses['Wikibase\Repo\Test\Query\QueryEngineTest']
-		= $dir . 'tests/phpunit/includes/Query/QueryEngineTest.php';
-
-	$wgAutoloadClasses['Wikibase\Repo\Test\Query\QueryStoreTest']
-		= $dir . 'tests/phpunit/includes/Query/QueryStoreTest.php';
-
-	$wgAutoloadClasses['Wikibase\Repo\Test\Query\QueryStoreUpdaterTest']
-		= $dir . 'tests/phpunit/includes/Query/QueryStoreUpdaterTest.php';
-}
 
 unset( $dir );
 
@@ -126,25 +95,6 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 
 		'content/QueryContent',
 		'content/QueryHandler',
-
-		'Query/QueryEngineResult',
-
-		'Query/SQLStore/DVHandler/BooleanHandler',
-		'Query/SQLStore/DVHandler/EntityIdHandler',
-		'Query/SQLStore/DVHandler/GeoCoordinateHandler',
-		'Query/SQLStore/DVHandler/IriHandler',
-		'Query/SQLStore/DVHandler/MonolingualTextHandler',
-		'Query/SQLStore/DVHandler/NumberHandler',
-		'Query/SQLStore/DVHandler/StringHandler',
-
-		'Query/SQLStore/DataValueHandlers',
-		'Query/SQLStore/DataValueHandler',
-		'Query/SQLStore/Engine',
-		'Query/SQLStore/Schema',
-		'Query/SQLStore/Setup',
-		'Query/SQLStore/Store',
-		'Query/SQLStore/StoreConfig',
-		'Query/SQLStore/Updater',
 
 		'specials/SpecialEntityData',
 

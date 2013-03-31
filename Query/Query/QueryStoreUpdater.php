@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Repo;
+namespace Wikibase\Query;
 
-use DatabaseBase;
+use Wikibase\Entity;
 
 /**
- * Interface for database connection providers.
- *
- * TODO: move to lib
+ * Updater for a query store.
+ * Implementing objects provide an interface via which new data can be inserted
+ * into the query store, existing data can be updated and existing data can be removed.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,31 +24,41 @@ use DatabaseBase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
+ * @since 0.1
  *
  * @file
- * @ingroup WikibaseRepo
+ * @ingroup WikibaseQueryStore
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface DBConnectionProvider {
+interface QueryStoreUpdater {
 
 	/**
-	 * Returns the database connection.
-	 * Initialization of this connection is done if it was not already initialized.
+	 * @see QueryStoreUpdater::insertEntity
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 *
-	 * @return DatabaseBase
+	 * @param Entity $entity
 	 */
-	public function getConnection();
+	public function insertEntity( Entity $entity );
 
 	/**
-	 * Releases the connection if doing so makes any sense resource wise.
+	 * @see QueryStoreUpdater::updateEntity
 	 *
-	 * @since 0.4
+	 * @since 0.1
+	 *
+	 * @param Entity $entity
 	 */
-	public function releaseConnection();
+	public function updateEntity( Entity $entity );
+
+	/**
+	 * @see QueryStoreUpdater::deleteEntity
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $entity
+	 */
+	public function deleteEntity( Entity $entity );
 
 }
