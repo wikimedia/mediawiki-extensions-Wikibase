@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "DrGUPMDk",
+        "filename": "DataModel/DataModel/Claim/ClaimListAccess.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-31T19:48:11Z",
+      "side": 1,
+      "message": "classnamer.com sais: BasicLolcatGenerator. Don\u0027t blame me!\n\nAnyway, the obvious alternative place to put this functionality would be the Entity class. Which, of course, is indeed a bucket of everything related to Entitites.",
+      "parentUuid": "DrIVajEw",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrH8Mo0I",
         "filename": "DataModel/DataModel/Claim/Claims.php",
         "patchSetId": 1
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Well, make up your mind then and pick one. Not specifying the interface properly and accenting multiple formats is just plain bad",
       "parentUuid": "DrEpPozU",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrIUMzEM",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-31T19:48:11Z",
+      "side": 1,
+      "message": "Actually, it\u0027s just PHP\u0027s lack of support for overloading that makes this icky. Specifying multiple signature for the same function to support this kind of thing is wide spread and considered good practice in other languages. \n\nSo, I don\u0027t think it\u0027s bad in principle. There\u0027s just no very nice way to do it in PHP. Which is a reason not to do it, I suppose.",
+      "parentUuid": "DrCVX.CY",
       "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
