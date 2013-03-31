@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DrF8PZzg",
+        "filename": "DataModel/DataModel/Claim/ClaimListAccess.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-31T02:36:08Z",
+      "side": 1,
+      "message": "Please do not bloat this interface. It is not a bin to throw every possible access method on a list of claims into.",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrH8Mo0I",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-31T02:36:08Z",
+      "side": 1,
+      "message": "This is inconsistent with the interface definition. Accepting both forms is also not something I think this method should do - since it means this method is doing different tasks. Looks like you can require an int here.",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrD8GKyM",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-31T02:36:08Z",
+      "side": 1,
+      "message": "You might be able to use ByPropertyidArray instead of this new code",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrB8J7zE",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-31T02:36:08Z",
+      "side": 1,
+      "message": "I suggest returning this as a list of Snak. If some user wants to use SnakList for access, they can always construct one.",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
