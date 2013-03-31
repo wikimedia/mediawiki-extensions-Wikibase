@@ -27,8 +27,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-define( 'WIKIBASE_DATAMODEL_VERSION', '0.4 alpha'
-	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
+define( 'WIKIBASE_DATAMODEL_VERSION', '0.4 alpha'  );
 
 // @codeCoverageIgnoreStart
 call_user_func( function() {
