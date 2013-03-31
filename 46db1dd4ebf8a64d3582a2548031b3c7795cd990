@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DrCpSZ94",
+        "filename": "DataModel/DataModel/Claim/ClaimListAccess.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-31T13:35:56Z",
+      "side": 1,
+      "message": "Not every possible access method, just every access method useful in our context. \n\nIn principle, I agree that it clutters the interface - why should we force every implementing class to implement that functionality? But then - why is this an interface at all, it\u0027s a simple data object, right?\n\nAnyway. Where would you put functions for generating projections like the blow? Into a ClaimListAccessProjectionGenerator, which you get from a ClaimListAccessProjectionGeneratorFactory? That sounds Javaesque...",
+      "parentUuid": "DrF8PZzg",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrH8Mo0I",
         "filename": "DataModel/DataModel/Claim/Claims.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-03-31T02:36:08Z",
       "side": 1,
       "message": "This is inconsistent with the interface definition. Accepting both forms is also not something I think this method should do - since it means this method is doing different tasks. Looks like you can require an int here.",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrEpPozU",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-31T13:35:56Z",
+      "side": 1,
+      "message": "Yes, an int would work, and the implementation would be cleaner.\n\nOn the other hand: it would expose the fact that we use numbers as IDs. I very much like the idea of opaque identifiers that could be changed to be represented in an entirely different way. Which is why I\u0027d prefer to use EntityId consistently, everywhere.",
+      "parentUuid": "DrH8Mo0I",
       "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DrOpcb.8",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-31T13:35:56Z",
+      "side": 1,
+      "message": "Ah, will have a look at that.",
+      "parentUuid": "DrD8GKyM",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrB8J7zE",
         "filename": "DataModel/DataModel/Claim/Claims.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-03-31T02:36:08Z",
       "side": 1,
       "message": "I suggest returning this as a list of Snak. If some user wants to use SnakList for access, they can always construct one.",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrApiC7E",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-03-31T13:35:56Z",
+      "side": 1,
+      "message": "can do.",
+      "parentUuid": "DrB8J7zE",
       "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
