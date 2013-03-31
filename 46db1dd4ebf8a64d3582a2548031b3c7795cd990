@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "DrIVajEw",
+        "filename": "DataModel/DataModel/Claim/ClaimListAccess.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-31T19:29:42Z",
+      "side": 1,
+      "message": "\u003e But then - why is this an interface at all, it\u0027s a simple data object, right?\n\nIf you have a use case where it makes no sense to use this interface, then why are you adding things to the interface?\n\n\u003e Where would you put functions for generating projections like the blow?\n\nThat is a question you apparently need to answer in order to complete whatever you are doing, though it seems to have little to do with my interface bloat concern.\n\n\u003e Into a ClaimListAccessProjectionGenerator, which you get from a ClaimListAccessProjectionGeneratorFactory? That sounds Javaesque..\n\nPerhaps you can find a better name on classnamer.com?",
+      "parentUuid": "DrCpSZ94",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrH8Mo0I",
         "filename": "DataModel/DataModel/Claim/Claims.php",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Yes, an int would work, and the implementation would be cleaner.\n\nOn the other hand: it would expose the fact that we use numbers as IDs. I very much like the idea of opaque identifiers that could be changed to be represented in an entirely different way. Which is why I\u0027d prefer to use EntityId consistently, everywhere.",
       "parentUuid": "DrH8Mo0I",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrCVX.CY",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-31T19:29:42Z",
+      "side": 1,
+      "message": "Well, make up your mind then and pick one. Not specifying the interface properly and accenting multiple formats is just plain bad",
+      "parentUuid": "DrEpPozU",
       "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -136,6 +172,40 @@
       "side": 1,
       "message": "can do.",
       "parentUuid": "DrB8J7zE",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrEV7FLw",
+        "filename": "DataModel/tests/phpunit/Claim/ClaimsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-31T19:29:42Z",
+      "side": 1,
+      "message": "assertSameSize",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrOVIII4",
+        "filename": "DataModel/tests/phpunit/Claim/ClaimsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-31T19:29:42Z",
+      "side": 1,
+      "message": "assertSize",
       "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
