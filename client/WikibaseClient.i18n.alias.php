@@ -24,6 +24,11 @@ $specialPageAliases['de'] = array(
 	'UnconnectedPages' => array( 'Nicht_verbundene_Seiten' ),
 );
 
+/** Korean (한국어) */
+$specialPageAliases['ko'] = array(
+	'UnconnectedPages' => array( '연결안된문서' ),
+);
+
 /** Vietnamese (Tiếng Việt) */
 $specialPageAliases['vi'] = array(
 	'UnconnectedPages' => array( 'Trang_không_kết_nối', 'Trang_không_có_liên_kết_site' ),

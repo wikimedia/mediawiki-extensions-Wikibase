@@ -73,6 +73,7 @@ $messages['en'] = array(
  * @author Lloffiwr
  * @author Marius Hoch
  * @author Metalhead64
+ * @author Minh Nguyen
  * @author Raymond
  * @author Shirayuki
  * @author Vadgt
@@ -80,7 +81,7 @@ $messages['en'] = array(
 $messages['qqq'] = array(
 	'wikibase-client-desc' => '{{desc|name=Wikibase Client|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Client}}
 See also [[d:Wikidata:Glossary#Wikidata|Wikidata]].',
-	'specialpages-group-wikibaseclient' => '{{doc-special-group|that=is related to Wikidata clients|like=[[Speciak:UnconnectedPages]]}}',
+	'specialpages-group-wikibaseclient' => '{{doc-special-group|that=is related to Wikidata clients|like=[[Special:UnconnectedPages]]}}',
 	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfully move, inviting user to update associated Wikibase repository item to maintain language links on the moved page on the client.
 
 Parameters:
@@ -173,9 +174,11 @@ Parameters:
  */
 $messages['af'] = array(
 	'wikibase-client-desc' => 'Kliënt vir die Wikibase-uitbreiding',
+	'specialpages-group-wikibaseclient' => 'Wikidata-kliënt',
+	'wikibase-after-page-move' => 'U kan ook die gekoppelde Wikidata-item [$1 wysig] om die taalskakels op die geskuifde bladsy by te werk.',
 	'wikibase-comment-remove' => 'Die gekoppelde Wikidata-item is geskrap. Taalskakels is verwyder.',
 	'wikibase-comment-linked' => "'n Wikidata-item is aan hierdie bladsy gekoppel.",
-	'wikibase-comment-update' => 'Taalskakels is opgedateer.',
+	'wikibase-comment-update' => 'Taalskakels is opgedateer.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Taalskakel bygevoeg: $1',
 	'wikibase-comment-sitelink-change' => 'Taalskakel is van $1 na $2 verander',
 	'wikibase-comment-sitelink-remove' => 'Taalskakel is verwyder: $1',
@@ -193,9 +196,20 @@ $messages['af'] = array(
 	'wikibase-linkitem-invalidsite' => 'Onbekende of ongeldige werf gekies',
 	'wikibase-linkitem-confirmitem-button' => 'Bevestig',
 	'wikibase-linkitem-not-loggedin-title' => 'U moet aangemeld wees',
+	'wikibase-property-notfound' => 'Eienskap $1 nie gevind nie.',
+	'wikibase-property-notsupportedyet' => 'Wikibase ondersteun nog nie die eienskapstipe vir die eienskap $1 nie.',
 	'wikibase-rc-hide-wikidata' => '$1 wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Wys Wikidata opdaterings in onlangse wysigings',
 	'wikibase-watchlist-show-changes-pref' => 'Wys Wikidata-wysigings in my dophoulys', # Fuzzy
+	'wikibase-error-invalid-entity-id' => "Die opgegewe ID is nie op die stelsel nie. Gebruik 'n geldig entiteit-ID.",
+	'special-unconnectedpages' => 'Bladsye wat nie aan items gekoppel is nie',
+	'wikibase-unconnectedpages-legend' => 'Voorkeure vir ongekoppelde bladsye',
+	'wikibase-unconnectedpages-page' => 'Beginbladsy:',
+	'wikibase-unconnectedpages-submit' => 'OK',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" is nie \'n geldige taalkode nie.',
+	'wikibase-unconnectedpages-page-warning' => 'Die bladsynaam kan nie vir die soekopdrag gebruik word nie en is geïgnoreer.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Slegs bladsye met taalskakels',
+	'wikibase-unconnectedpages-format-row' => '($1 taalskakel{{PLURAL:$1||s}} op die bladsy)',
 );
 
 /** Arabic (العربية)
@@ -779,15 +793,17 @@ $messages['eo'] = array(
  * @author Dalton2
  * @author Hazard-SJ
  * @author Pegna
+ * @author Vivaelcelta
  */
 $messages['es'] = array(
 	'wikibase-client-desc' => 'Cliente para la extensión Wikibase',
+	'specialpages-group-wikibaseclient' => 'Cliente de Wikidata',
 	'wikibase-after-page-move' => 'También puedes [$1 actualizar] el elemento Wikidata asociado para mantener los vínculos de idioma en la página que se ha movido.',
 	'wikibase-comment-remove' => 'Se ha borrado un elemento asociado a Wikidata. Se han eliminado los enlaces lingüísticos.',
 	'wikibase-comment-linked' => 'Un artículo de Wikidata ha sido enlazado a esta página.',
 	'wikibase-comment-unlink' => 'Esta página ha sido desenlazada de un elemento de Wikidata. Se han eliminado los enlaces lingüísticos.',
 	'wikibase-comment-restore' => 'Se ha restaurado un elemento asociado a Wikidata. Se han restaurado los enlaces de idioma.',
-	'wikibase-comment-update' => 'Los enlaces de idioma se han actualizado.',
+	'wikibase-comment-update' => 'Los enlaces de idioma se han actualizado.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Se ha añadido un enlace de idioma: $1',
 	'wikibase-comment-sitelink-change' => 'Se ha cambiado el enlace de idioma de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Se ha eliminado el enlace de idioma: $1',
@@ -812,6 +828,7 @@ $messages['es'] = array(
 	'wikibase-linkitem-success-link' => 'Las páginas han sido enlazadas con éxito. Puedes encontrar encontrar el elemento recién creado que contiene los enlaces en nuestro [$1 depósito central de datos].',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar las ediciones Wikidata en la lista de cambios recientes',
+	'wikibase-watchlist-show-changes-pref' => 'Mostrar las modificaciones de Wikidata en tu lista de seguimiento',
 );
 
 /** Estonian (eesti)
@@ -1316,7 +1333,7 @@ $messages['is'] = array(
 	'wikibase-comment-linked' => 'Wikidata hlutur hefur tengst þessari síðu.',
 	'wikibase-comment-unlink' => 'Þessi síða hefur verið aftengd Wikidata hlut. Tungumálatenglar fjarlægðir.',
 	'wikibase-comment-restore' => 'Tengdur Wikidata hlutur endurvakinn. Tungumálatenglar endurvaktir.',
-	'wikibase-comment-update' => 'Vefsvæðis tenglar uppfærðir.', # Fuzzy
+	'wikibase-comment-update' => 'Wikidata hlutinum var breytt.',
 	'wikibase-comment-sitelink-add' => 'Tungumálatengli bætt við: $1',
 	'wikibase-comment-sitelink-change' => 'Tungumálatengli breytt frá $1 í $2',
 	'wikibase-comment-sitelink-remove' => 'Tungumálatengill fjarlægður: $1',
@@ -1344,6 +1361,14 @@ $messages['is'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Sýna Wikidata breytingar í nýjustu breytingum',
 	'wikibase-watchlist-show-changes-pref' => 'Sýna Wikidata breytingar í vaktlistanum þínum',
 	'wikibase-error-invalid-entity-id' => 'Tilgreint auðkenni þekkist ekki. Vinsamlegast notaðu gilt auðkenni einingarinnar.',
+	'special-unconnectedpages' => 'Síður sem tengjast ekki hlutum',
+	'wikibase-unconnectedpages-legend' => 'Stillingar fyrir ótengdar síður',
+	'wikibase-unconnectedpages-page' => 'Upphafsíða:',
+	'wikibase-unconnectedpages-submit' => 'Áfram',
+	'wikibase-unconnectedpages-invalid-language' => '„$1” er ógildur tungumálakóði.',
+	'wikibase-unconnectedpages-page-warning' => 'Síðutitilinn var ekki hægt að nota fyrir fyrirspurnina og hann var hunsaður.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Aðeins síður með tungumálatengla',
+	'wikibase-unconnectedpages-format-row' => '($1 tungumálatenglar á síðunni)',
 );
 
 /** Italian (italiano)
@@ -1500,12 +1525,13 @@ $messages['ka'] = array(
  */
 $messages['ko'] = array(
 	'wikibase-client-desc' => '위키베이스 확장 기능을 위한 클라이언트',
+	'specialpages-group-wikibaseclient' => '위키데이터 클라이언트',
 	'wikibase-after-page-move' => '또한 이동한 문서에 언어 링크를 유지하기 위해 관련된 위키데이터 항목을 [$1 업데이트]할 수 있습니다.',
 	'wikibase-comment-remove' => '연결한 위키데이터 항목을 삭제했습니다. 언어 링크를 제거했습니다.',
 	'wikibase-comment-linked' => '위키데이터 항목을 이 문서에 연결했습니다.',
 	'wikibase-comment-unlink' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다.',
 	'wikibase-comment-restore' => '연결한 위키데이터 항목을 복구했습니다. 언어 링크를 복구했습니다.',
-	'wikibase-comment-update' => '언어 링크를 업데이트했습니다.', # Fuzzy
+	'wikibase-comment-update' => '위키데이터 항목을 바꿈',
 	'wikibase-comment-sitelink-add' => '언어 링크를 추가함: $1',
 	'wikibase-comment-sitelink-change' => '언어 링크를 $1에서 $2로 바꿈',
 	'wikibase-comment-sitelink-remove' => '언어 링크를 제거함: $1',
@@ -1535,6 +1561,14 @@ $messages['ko'] = array(
 	'wikibase-rc-show-wikidata-pref' => '최근 바뀜에서 위키데이터 편집 보기',
 	'wikibase-watchlist-show-changes-pref' => '주시문서 목록에서 위키데이터 편집을 보기',
 	'wikibase-error-invalid-entity-id' => '입력한 ID는 시스템에서 알 수 없습니다. 올바른 개체 ID를 사용하세요.',
+	'special-unconnectedpages' => '항목에 연결되지 않은 문서',
+	'wikibase-unconnectedpages-legend' => '연결되지 않은 문서 옵션',
+	'wikibase-unconnectedpages-page' => '시작 문서:',
+	'wikibase-unconnectedpages-submit' => '보기',
+	'wikibase-unconnectedpages-invalid-language' => '"$1"(은)는 올바른 언어 코드가 아닙니다.',
+	'wikibase-unconnectedpages-page-warning' => '문서 제목은 쿼리에 사용할 수 없고 무시됩니다.',
+	'wikibase-unconnectedpages-iwdata-label' => '언어 인터위키 링크가 있는 문서만',
+	'wikibase-unconnectedpages-format-row' => '(문서에 있는 언어 인터위키 링크 $1개)',
 );
 
 /** Karachay-Balkar (къарачай-малкъар)
@@ -1985,12 +2019,13 @@ $messages['nn'] = array(
  */
 $messages['pl'] = array(
 	'wikibase-client-desc' => 'Klient rozszerzenia Wikibase',
-	'wikibase-after-page-move' => 'Możesz także [$1 zaktualizować] powiązany element Wikidata w celu zachowania linków do innych wersji językowych na przeniesionej stronie.',
-	'wikibase-comment-remove' => 'Powiązany element Wikidata skasowany. Linki do innych wersji językowych usunięte.',
-	'wikibase-comment-linked' => 'Element Wikidata był powiązany z tą stroną.',
-	'wikibase-comment-unlink' => 'Zostało zerwane powiązanie elementu Wikidata z tą stroną. Linki do innych wersji językowych usunięte.',
-	'wikibase-comment-restore' => 'Powiązany element Wikidata odtworzony. Linki do innych wersji językowych przywrócone.',
-	'wikibase-comment-update' => 'Linki do innych wersji językowych zaktualizowane.', # Fuzzy
+	'specialpages-group-wikibaseclient' => 'Klient Wikidanych',
+	'wikibase-after-page-move' => 'Możesz także [$1 zaktualizować] powiązany element Wikidanych w celu zachowania linków do innych wersji językowych na przeniesionej stronie.',
+	'wikibase-comment-remove' => 'Powiązany element Wikidanych skasowany. Linki do innych wersji językowych usunięte.',
+	'wikibase-comment-linked' => 'Element Wikidanych był powiązany z tą stroną.',
+	'wikibase-comment-unlink' => 'Zostało zerwane powiązanie elementu Wikidanych z tą stroną. Linki do innych wersji językowych usunięte.',
+	'wikibase-comment-restore' => 'Powiązany element Wikidanych odtworzony. Linki do innych wersji językowych przywrócone.',
+	'wikibase-comment-update' => 'Element Wikidanych zmieniony',
 	'wikibase-comment-sitelink-add' => 'Łącze języka dodane: $1',
 	'wikibase-comment-sitelink-change' => 'Łącze języka zmienione z $1 na $2',
 	'wikibase-comment-sitelink-remove' => 'Łącze języka usunięte: $1',
@@ -2012,9 +2047,9 @@ $messages['pl'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Aby użyć tej opcji musisz być zalogowany na tej wiki oraz [$1 centralnym repozytorium danych].',
 	'wikibase-linkitem-success-create' => 'Strony zostały pomyślnie powiązane. Utworzony element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].',
 	'wikibase-linkitem-success-link' => 'Strony zostały pomyślnie powiązane. Element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].',
-	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
-	'wikibase-rc-show-wikidata-pref' => 'Pokazuj edycje Wikidata w ostatnich zmianach',
-	'wikibase-watchlist-show-changes-pref' => 'Pokazuj edycje na Wikidata w obserwowanych',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidane',
+	'wikibase-rc-show-wikidata-pref' => 'Pokazuj edycje na Wikidanych w ostatnich zmianach',
+	'wikibase-watchlist-show-changes-pref' => 'Pokazuj edycje na Wikidanych w obserwowanych',
 );
 
 /** Piedmontese (Piemontèis)
@@ -2383,13 +2418,13 @@ $messages['vec'] = array(
  */
 $messages['vi'] = array(
 	'wikibase-client-desc' => 'Trình khách của phần mở rộng Wikibase',
-	'specialpages-group-wikibaseclient' => 'Wikidata nhánh',
+	'specialpages-group-wikibaseclient' => 'Trình khách Wikidata',
 	'wikibase-after-page-move' => 'Bạn cũng có thể [$1 cập nhật] khoản mục Wikidata liên kết để duy trì các liên kết ngôn ngữ trên trang được di chuyển.',
 	'wikibase-comment-remove' => 'Đã xóa khoản mục liên kết Wikidata. Đã loại bỏ các liên kết ngôn ngữ.',
 	'wikibase-comment-linked' => 'Một khoản mục Wikidata đã được liên kết đến trang này.',
 	'wikibase-comment-unlink' => 'Đã gỡ liên kết đến khoản mục Wikidata khỏi trang này. Đã dời các liên kết ngôn ngữ.',
 	'wikibase-comment-restore' => 'Đã phục hồi khoản mục liên kết Wikidata. Đã phục hồi các liên kết ngôn ngữ.',
-	'wikibase-comment-update' => 'Mục Wikidata đã thay đổi',
+	'wikibase-comment-update' => 'Khoản mục Wikidata đã thay đổi',
 	'wikibase-comment-sitelink-add' => 'Đã thêm liên kết ngôn ngữ: $1',
 	'wikibase-comment-sitelink-change' => 'Đã đổi liên kết ngôn ngữ từ $1 thành $2',
 	'wikibase-comment-sitelink-remove' => 'Đã loại bỏ liên kết ngôn ngữ: $1',
@@ -2418,12 +2453,12 @@ $messages['vi'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Hiện các sửa đổi Wikidata trong thay đổi gần đây',
 	'wikibase-watchlist-show-changes-pref' => 'Hiện các sửa đổi tại Wikidata trong danh sách theo dõi của bạn',
 	'wikibase-error-invalid-entity-id' => 'ID nhập vào không có trên hệ thống. Xin vui lòng sử dụng ID đã được cấp.',
-	'special-unconnectedpages' => 'Trang không kết nối với các mục',
-	'wikibase-unconnectedpages-legend' => 'Tùy chọn các trang không liên kết',
-	'wikibase-unconnectedpages-page' => 'Bắt đầu trang:',
-	'wikibase-unconnectedpages-submit' => 'Tiến lên',
-	'wikibase-unconnectedpages-invalid-language' => '"$1" không phải là một mã ngôn ngữ hợp lệ.',
-	'wikibase-unconnectedpages-page-warning' => 'Tên trang không thể sử dụng để truy vấn và đã được bỏ qua.',
+	'special-unconnectedpages' => 'Trang không kết nối với khoản mục',
+	'wikibase-unconnectedpages-legend' => 'Tùy chọn danh sách trang không kết nối',
+	'wikibase-unconnectedpages-page' => 'Trang đầu tiên:',
+	'wikibase-unconnectedpages-submit' => 'Xem',
+	'wikibase-unconnectedpages-invalid-language' => '“$1” không phải là mã ngôn ngữ hợp lệ.',
+	'wikibase-unconnectedpages-page-warning' => 'Tên trang không thể sử dụng để truy vấn nên đã được bỏ qua.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Chỉ những trang có liên kết ngôn ngữ',
 	'wikibase-unconnectedpages-format-row' => '($1 liên kết ngôn ngữ trên trang)',
 );
