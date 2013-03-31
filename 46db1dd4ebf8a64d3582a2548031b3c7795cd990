@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "DrDAa2G0",
+        "filename": "DataModel/DataModel/Claim/ClaimListAccess.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-31T20:19:37Z",
+      "side": 1,
+      "message": "I have no big objection to you adding in these methods to Claims. That would be better then adding them to Entity. What I am objecting against is you adding them in this interface.",
+      "parentUuid": "DrGUPMDk",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrH8Mo0I",
         "filename": "DataModel/DataModel/Claim/Claims.php",
         "patchSetId": 1
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "Actually, it\u0027s just PHP\u0027s lack of support for overloading that makes this icky. Specifying multiple signature for the same function to support this kind of thing is wide spread and considered good practice in other languages. \n\nSo, I don\u0027t think it\u0027s bad in principle. There\u0027s just no very nice way to do it in PHP. Which is a reason not to do it, I suppose.",
       "parentUuid": "DrCVX.CY",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrFAXVEQ",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-03-31T20:19:37Z",
+      "side": 1,
+      "message": "As a PHP dev you need to write proper PHP code. Hiding behind features the language lacks is not very constructive. In this case, the lack of support for overloading in no way mitigates the problems you are creating.\n\nIf you have overloading, you have multiple methods. This is one method, not multiple. If you want to do something like overloading, you can always use two methods with a meaningful difference in the name. In this particular case it seems to me you can just pick one form and stick with it. The caller can always convert.",
+      "parentUuid": "DrIUMzEM",
       "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
