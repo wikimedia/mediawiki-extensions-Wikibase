@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DrGCM.4A",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2013-04-01T19:01:10Z",
+      "side": 1,
+      "message": "For security I think you want htmlspecialchars( $this-\u003egetTitle()-\u003egetLocalUrl( array( \u0027setlang\u0027 \u003d\u003e $language ) ) );",
+      "revId": "961007023b35c0ba9c9836a092fc8dcc13c9f527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
