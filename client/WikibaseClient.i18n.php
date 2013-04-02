@@ -59,7 +59,7 @@ $messages['en'] = array(
 	'wikibase-error-invalid-entity-id' => 'The ID entered is unknown to the system. Please use a valid entity ID.',
 	'special-unconnectedpages' => 'Pages not connected to items',
 	'wikibase-unconnectedpages-legend' => 'Unconnected pages options',
-	'wikibase-unconnectedpages-page' => 'Start page:',
+	'wikibase-unconnectedpages-page' => 'Start result list with article:',
 	'wikibase-unconnectedpages-submit' => 'Go',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" is not a valid language code.',
 	'wikibase-unconnectedpages-page-warning' => 'The page title could not be used for the query and is ignored.',
@@ -155,12 +155,12 @@ Parameters:
 	'wikibase-error-invalid-entity-id' => 'Generic error message when an invalid entity ID was entered.',
 	'special-unconnectedpages' => '{{doc-special|UnconnectedPages}}',
 	'wikibase-unconnectedpages-legend' => 'Legend for the options box at the special page for pages not connected to sitelinks.',
-	'wikibase-unconnectedpages-page' => 'Label for the start page field in the options box of the special page for pages not connected to sitelinks.',
+	'wikibase-unconnectedpages-page' => 'Label for the input field to specify the title of the article at which the search result list should start. This belongs to the options box of the special page for pages not connected to sitelinks.',
 	'wikibase-unconnectedpages-submit' => 'Text for the submit button in the options box of the special page for pages not connected to sitelinks.
 {{Identical|Go}}',
 	'wikibase-unconnectedpages-invalid-language' => 'Warning message about invalid language used at the special page for pages not connected to sitelinks.',
 	'wikibase-unconnectedpages-page-warning' => 'The title that is typed in could not be used of some kind of reason. This can happen for example when the title has an interwiki prefix to another language, or a namespace that is not used for Wikibase entities.',
-	'wikibase-unconnectedpages-iwdata-label' => 'Text for the checkbox. Should say that only pages without interlanguage-links should be listed.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Text for the checkbox. Should say that only pages that have interlanguage-links should be listed.',
 	'wikibase-unconnectedpages-format-row' => 'Formatting of the additional data for each row in the result set on the special page for pages not connected to sitelinks.
 
 This message follows the page title (with link).
