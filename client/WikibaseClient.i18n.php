@@ -63,7 +63,7 @@ $messages['en'] = array(
 	'wikibase-unconnectedpages-submit' => 'Go',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" is not a valid language code.',
 	'wikibase-unconnectedpages-page-warning' => 'The page title could not be used for the query and is ignored.',
-	'wikibase-unconnectedpages-iwdata-label' => 'Only pages with interlanguagelinks',
+	'wikibase-unconnectedpages-iwdata-label' => 'Only pages without interlanguagelinks',
 	'wikibase-unconnectedpages-format-row' => '($1 interlanguagelinks on the page)',
 );
 
