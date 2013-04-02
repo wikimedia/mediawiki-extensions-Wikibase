@@ -70,6 +70,7 @@ return call_user_func( function() {
 		'dataValues.util' => $moduleTemplate + array(
 			'scripts' => array(
 				'dataValues.util.js',
+				'dataValues.util.Notify.js',
 			),
 			'dependencies' => array(
 				'dataValues',

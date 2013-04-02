@@ -15,7 +15,11 @@
  * @abstract
  * @since 0.1
  */
-var SELF = dv.DataValue = function DvDataValue() {};
+var SELF = dv.DataValue = function DvDataValue() {
+	if( !this.constructor.TYPE ) {
+		throw new Error( 'Can not create abstract DataValue of no specific type' );
+	}
+}
 
 /**
  * Type of the DataValue. A static definition of the type like this has to be defined for all
@@ -25,6 +29,7 @@ var SELF = dv.DataValue = function DvDataValue() {};
 SELF.TYPE = null;
 
 $.extend( SELF.prototype, {
+
 	/**
 	 * Returns the most basic representation of this Object's value.
 	 *

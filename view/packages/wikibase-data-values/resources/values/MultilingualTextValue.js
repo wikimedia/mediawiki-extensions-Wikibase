@@ -2,8 +2,9 @@
  * @file
  * @ingroup DataValues
  * @licence GNU GPL v2+
+ *
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Werner
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 ( function( dv, $ ) {
 'use strict';
