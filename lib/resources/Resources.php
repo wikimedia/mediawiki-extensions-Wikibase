@@ -41,6 +41,7 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.js',
 				'wikibase.Site.js',
+				'wikibase.support.js',
 				'wikibase.RevisionStore.js'
 			),
 			'dependencies' => array(
