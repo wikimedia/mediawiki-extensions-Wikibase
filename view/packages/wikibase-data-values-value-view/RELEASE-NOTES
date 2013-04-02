@@ -1,0 +1,11 @@
+These are the release notes for the "ValueView" extension.
+
+Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:ValueView
+Latest version of the release notes file: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/DataValues.git;a=blob;f=ValueView/RELEASE-NOTES
+
+
+
+=== Version 0.1 ===
+(master)
+
+Initial release.

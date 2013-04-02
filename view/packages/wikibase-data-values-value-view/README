@@ -1,0 +1,20 @@
+These is the readme file for the "ValueView" library.
+
+Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:ValueView
+Latest version of the readme file: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/DataValues.git;a=blob;f=ValueView/README
+
+== About ==
+
+"ValueView" introduces the jQuery.ui.widget based frontend component jQuery.valueview which allows
+to display and edit data values defined by the "DataValues" extension. When added as a dependency in
+a resource loader definition, the following components introduced by this extension will be available:
+
+* jQuery.valueview: Widget definition for displaying and editing data values. Each data value which
+  should be supported by the valueview widget has to be implemented as a jQuery.valueview.Expert.
+* jQuery.fn.valueview: jQuery widget bridge to instantiate a jQuery.valueview widget in the DOM.
+* mediaWiki.ext.valueView: Object representing the "ValueView" MediaWiki extension.
+* Support of valueview for some basic data value types. These valueview experts can be found in
+  jQuery.valueview.experts.<constructor-name>.
+* other jQuery extensions required by this library which are not available in MediaWiki itself:
+  - jQuery.eachchange
+  - jQuery.inputAutoExpand
