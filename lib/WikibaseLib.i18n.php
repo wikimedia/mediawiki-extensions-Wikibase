@@ -531,9 +531,18 @@ $messages['el'] = array(
 	'wikibase-entity-item' => 'αντικείμενο',
 	'wikibase-entity-property' => 'ιδιότητα',
 	'wikibase-diffview-reference' => 'πηγή',
+	'wikibase-error-unexpected' => 'Παρουσιάστηκε ένα απροσδόκητο σφάλμα.',
+	'wikibase-error-save-generic' => 'Παρουσιάστηκε σφάλμα κατά την προσπάθειά σας να αποθηκεύσετε και εξαιτίας αυτού, οι αλλαγές σας μπορεί να μην ολοκληρώθηκαν.',
 	'wikibase-error-ui-cant-edit' => 'Δεν σας επιτρέπεται να εκτελέσετε αυτήν την ενέργεια.',
+	'wikibase-error-ui-no-permissions' => 'Δεν διαθέτετε επαρκή δικαιώματα για να εκτελέσετε αυτήν την ενέργεια.',
+	'wikibase-error-ui-link-exists' => 'Δεν μπορείτε να συνδέσετε αυτή τη σελίδα επειδή ένα άλλο αντικείμενο ήδη συνδέει σε αυτό.',
+	'wikibase-error-ui-edit-conflict' => 'Υπάρχει σύγκρουση επεξεργασίας. Παρακαλούμε  φορτώσετε εκ νέου και αποθηκεύστε ξανά.',
+	'wikibase-replicationnote' => 'Παρακαλώ να λάβετε υπόψη ότι έως ότου οι αλλαγές γίνουν ορατές σε όλα τα wiki μπορεί να περάσουν μερικά λεπτά.',
+	'wikibase-sitelinks' => 'Κατάλογος συνδεδεμένων σελίδων σε αυτό το αντικείμενο',
 	'wikibase-sitelinks-sitename-columnheading' => 'Γλώσσα',
+	'wikibase-tooltip-error-details' => 'Λεπτομέρειες',
 	'datatypes-type-wikibase-item' => 'Αντικείμενο',
+	'datatypes-type-commonsMedia' => 'αρχείο πολυμέσων των Commons',
 );
 
 /** Esperanto (Esperanto)

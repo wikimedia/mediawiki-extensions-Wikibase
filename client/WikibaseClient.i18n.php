@@ -900,6 +900,7 @@ $messages['fa'] = array(
 );
 
 /** Finnish (suomi)
+ * @author Crt
  * @author Harriv
  * @author Nike
  * @author Silvonen
@@ -908,12 +909,13 @@ $messages['fa'] = array(
  */
 $messages['fi'] = array(
 	'wikibase-client-desc' => 'Wikibase-laajennuksen asiakasohjelma',
+	'specialpages-group-wikibaseclient' => 'Wikidata-asiakas',
 	'wikibase-after-page-move' => 'Voit myös [$1 päivittää] sivuun liittyvän Wikidatan kohteen säilyttääksesi kielilinkit siirretyllä sivulla.',
 	'wikibase-comment-remove' => 'Sivuun liittyvä Wikidata-kohde poistettu. Kielilinkit poistettu.',
 	'wikibase-comment-linked' => 'Wikidata-kohde liitettiin tähän sivuun.',
 	'wikibase-comment-unlink' => 'Tämä sivu ei ole enää liitettynä Wikidata-kohteeseen. Kielilinkit poistettu.',
 	'wikibase-comment-restore' => 'Sivuun liittyvä Wikidata-kohde palautettu. Kielilinkit palautettu.',
-	'wikibase-comment-update' => 'Kielilinkit päivitetty.', # Fuzzy
+	'wikibase-comment-update' => 'Wikidata-kohdetta muutettu',
 	'wikibase-comment-sitelink-add' => 'Kielilinkki lisätty: $1',
 	'wikibase-comment-sitelink-change' => 'Kielilinkki $1 muutettu muotoon $2',
 	'wikibase-comment-sitelink-remove' => 'Kielilinkki poistettu: $1',
@@ -921,6 +923,7 @@ $messages['fi'] = array(
 	'wikibase-editlinks' => 'Muokkaa linkkejä',
 	'wikibase-editlinkstitle' => 'Muokkaa kieltenvälisiä linkkejä',
 	'wikibase-linkitem-addlinks' => 'Lisää linkkejä',
+	'wikibase-linkitem-alreadylinked' => 'Sivu, johon halusit linkittää, on jo liitetty keskustietovaraston [$1 kohteeseen], joka on linkitetty tämän sivuston sivuun $2. Kohteisiin voidaan liittää vain yksi sivu kustakin sivustosta. Linkitä johonkin muuhun sivuun.',
 	'wikibase-linkitem-close' => 'Sulje ikkuna ja lataa sivu uudelleen',
 	'wikibase-linkitem-failure' => 'Annettua sivua linkitettäessä tapahtui tuntematon virhe.',
 	'wikibase-linkitem-title' => 'Linkitä sivulle',
@@ -929,12 +932,20 @@ $messages['fi'] = array(
 	'wikibase-linkitem-input-site' => 'Kieli',
 	'wikibase-linkitem-input-page' => 'Sivu',
 	'wikibase-linkitem-invalidsite' => 'Tuntematon tai virheellinen sivusto valittu',
+	'wikibase-linkitem-confirmitem-text' => 'Valitsemasi sivu on jo liitetty [$1 keskustietovaraston kohteeseen]. Vahvista, että haluat linkittää tämän sivun alla näkyviin sivuihin.',
 	'wikibase-linkitem-confirmitem-button' => 'Vahvista',
 	'wikibase-linkitem-not-loggedin-title' => 'Sinun täytyy olla sisäänkirjautuneena',
+	'wikibase-linkitem-not-loggedin' => 'Sinun täytyy olla kirjautuneena tässä wikissä ja [$1 keskustietovarastossa] käyttääksesi tätä toimintoa.',
+	'wikibase-linkitem-success-create' => 'Sivujen linkittäminen onnistui. Uusi, linkit sisältävä kohde on [$1 keskustietovarastossa].',
+	'wikibase-linkitem-success-link' => 'Sivujen linkittäminen onnistui. Linkit sisältävä kohde on [$1 keskustietovarastossa].',
 	'wikibase-property-notfound' => 'Ominaisuutta $1 ei löydy.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
 	'wikibase-watchlist-show-changes-pref' => 'Näytä Wikidata-muokkaukset tarkkailulistallasi',
+	'special-unconnectedpages' => 'Sivut, joita ei ole liitetty kohteisiin',
+	'wikibase-unconnectedpages-submit' => 'Siirry',
+	'wikibase-unconnectedpages-invalid-language' => '”$1” ei ole kelvollinen kielikoodi.',
+	'wikibase-unconnectedpages-page-warning' => 'Sivun otsikkoa ei voitu käyttää kyselyssä ja se jätettiin huomiotta.',
 );
 
 /** French (français)
@@ -1072,12 +1083,13 @@ $messages['gsw'] = array(
  */
 $messages['he'] = array(
 	'wikibase-client-desc' => 'לקוח להרחבה Wikibase',
+	'specialpages-group-wikibaseclient' => 'לקוח ויקינתונים',
 	'wikibase-after-page-move' => 'אפשר גם [$1 לעדכן] את הפריט המשויך בוויקיפדיה כדי לתחזק את קישורי השפה בדף שהועבר.',
 	'wikibase-comment-remove' => 'פריט הוויקינתונים המשויך נמחק. קישורי שפה הוסרו.',
 	'wikibase-comment-linked' => 'פריט ויקינתונים קוּשר לדף הזה.',
 	'wikibase-comment-unlink' => 'הדף הזה נותק מִפריט ויקינתונים. קישורי השפה הוסרו.',
 	'wikibase-comment-restore' => 'פריט הוויקינתונים המשויך שוחזר. קישורי השפה שוחזרו.',
-	'wikibase-comment-update' => 'קישורי השפה עודכנו.',
+	'wikibase-comment-update' => 'פריט ויקינתונים השתנה',
 	'wikibase-comment-sitelink-add' => 'קישור שפה הוסף: $1',
 	'wikibase-comment-sitelink-change' => 'קישור השפה שוּנה מ־$1 אל $2',
 	'wikibase-comment-sitelink-remove' => 'קישור השפה הוסר: $1',
@@ -1106,6 +1118,12 @@ $messages['he'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'הצגת עריכות ויקינתונים בשינויים אחרונים',
 	'wikibase-watchlist-show-changes-pref' => 'להציג עריכות בוויקינתונים ברשימת המעקב שלך',
 	'wikibase-error-invalid-entity-id' => 'המזהה שהוזן אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.',
+	'special-unconnectedpages' => 'דפים שלא מקושרים לפריטים',
+	'wikibase-unconnectedpages-legend' => 'אפשרויות לדפים לא מקושרים',
+	'wikibase-unconnectedpages-page' => 'דף התחלה:',
+	'wikibase-unconnectedpages-submit' => 'הרצה',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" הוא לא קוד שפה תקין.',
+	'wikibase-unconnectedpages-page-warning' => 'לא ניתן היה להשתמש בכותרת הדף לשאילתה והמערכת תתעלם ממנה.',
 );
 
 /** Hindi (हिन्दी)
@@ -2022,13 +2040,13 @@ $messages['pl'] = array(
 	'specialpages-group-wikibaseclient' => 'Klient Wikidanych',
 	'wikibase-after-page-move' => 'Możesz także [$1 zaktualizować] powiązany element Wikidanych w celu zachowania linków do innych wersji językowych na przeniesionej stronie.',
 	'wikibase-comment-remove' => 'Powiązany element Wikidanych skasowany. Linki do innych wersji językowych usunięte.',
-	'wikibase-comment-linked' => 'Element Wikidanych był powiązany z tą stroną.',
+	'wikibase-comment-linked' => 'Element Wikidanych został powiązany z tą stroną.',
 	'wikibase-comment-unlink' => 'Zostało zerwane powiązanie elementu Wikidanych z tą stroną. Linki do innych wersji językowych usunięte.',
 	'wikibase-comment-restore' => 'Powiązany element Wikidanych odtworzony. Linki do innych wersji językowych przywrócone.',
 	'wikibase-comment-update' => 'Element Wikidanych zmieniony',
-	'wikibase-comment-sitelink-add' => 'Łącze języka dodane: $1',
-	'wikibase-comment-sitelink-change' => 'Łącze języka zmienione z $1 na $2',
-	'wikibase-comment-sitelink-remove' => 'Łącze języka usunięte: $1',
+	'wikibase-comment-sitelink-add' => 'Dodano link interwiki: $1',
+	'wikibase-comment-sitelink-change' => 'Zmieniono link interwiki z $1 na $2',
+	'wikibase-comment-sitelink-remove' => 'Usunięto link interwiki: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|zmiana|zmiany|zmian}}',
 	'wikibase-editlinks' => 'Edytuj linki',
 	'wikibase-editlinkstitle' => 'Edytuj linki wersji językowych',
@@ -2545,6 +2563,7 @@ $messages['zh-hans'] = array(
 	'special-unconnectedpages' => '未连接到项目的页面',
 	'wikibase-unconnectedpages-legend' => '未连接页面的选项',
 	'wikibase-unconnectedpages-page' => '开始页面：',
+	'wikibase-unconnectedpages-submit' => '前往',
 	'wikibase-unconnectedpages-invalid-language' => '“$1”不是有效的语言代码。',
 	'wikibase-unconnectedpages-page-warning' => '该页面标题不能被用于查询并已被忽略。',
 	'wikibase-unconnectedpages-iwdata-label' => '仅有跨语言链接的页面',

@@ -189,6 +189,7 @@ $specialPageAliases['mk'] = array(
 
 /** Dutch (Nederlands) */
 $specialPageAliases['nl'] = array(
+	'DispatchStats' => array( 'Verwerkingsstatistieken' ),
 	'EntityData' => array( 'Entiteitsgegevens' ),
 	'NewItem' => array( 'ItemAanmaken' ),
 	'NewProperty' => array( 'NieuweEigenschap' ),
@@ -199,6 +200,7 @@ $specialPageAliases['nl'] = array(
 	'SetDescription' => array( 'BeschrijvingInstellen' ),
 	'SetAliases' => array( 'AliassenInstellen' ),
 	'EntitiesWithoutLabel' => array( 'EntiteitenZonderLabel' ),
+	'ItemsWithoutSitelinks' => array( 'ItemsZonderSitekoppelingen' ),
 );
 
 /** Sicilian (sicilianu) */
