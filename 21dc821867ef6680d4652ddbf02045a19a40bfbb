@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DrMcivgQ",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-02T22:51:01Z",
+      "side": 1,
+      "message": "There should probably be a util function to handle this. The code really looks too funny now, there is no point in the whole check anymore and it makes me wanna ignore IE8 completely.",
+      "revId": "21dc821867ef6680d4652ddbf02045a19a40bfbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
