@@ -200,6 +200,14 @@ $messages['ko'] = array(
 	'version-datavalues' => '데이터값',
 );
 
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'datavalues-desc' => 'En Versammlong von Projramm-Objäkte för ongerscheidlijje Zoote vun Wääte un Daate.',
+	'version-datavalues' => 'DaateWääte',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
