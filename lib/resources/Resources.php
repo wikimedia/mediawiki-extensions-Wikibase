@@ -523,6 +523,7 @@ return call_user_func( function() {
 				'jquery.wikibase.entityselector',
 				'wikibase.datamodel',
 				'mw.ext.valueView',
+				'jquery.valueview.experts.wikibase',
 				'wikibase.store', // required for getting datatype from entityselector selected property
 				'mediawiki.legacy.shared',
 				'jquery.ui.TemplatedWidget'
@@ -632,17 +633,17 @@ return call_user_func( function() {
 		),
 
 		// jQuery.valueview views for Wikibase specific DataValues/DataTypes
-		'wikibase.jquery.valueview.views' => $moduleTemplate + array(
+		'jquery.valueview.experts.wikibase' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.valueview.views/wikibaseItem.js',
-			),
-			'styles' => array(
-				'jquery.valueview.views/views.css',
+				'jquery.valueview.experts.wikibase/experts.wikibase.js',
+				'jquery.valueview.experts.wikibase/experts.wikibase.EntityIdInput.js',
+				'jquery.valueview.experts.wikibase/experts.wikibase.EntityIdValue.js',
 			),
 			'dependencies' => array(
 				'jquery.valueview',
 				'wikibase.parsers',
 				'jquery.eachchange',
+				'jquery.inputAutoExpand',
 				'wikibase.utilities',
 			),
 			'messages' => array(
