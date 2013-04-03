@@ -71,8 +71,6 @@ describe "Check deleted properties in statements UI" do
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
         page.add_statement(properties_cm[0]["label"], cm_string)
-        # TODO: refresh needed because of bug 44101 & bug 44547
-        #@browser.refresh
         page.add_reference_to_first_claim(properties_cm[0]["label"], cm_string)
         page.statement1Name.should == properties_cm[0]["label"]
         page.statement1ClaimValue1.should == cm_string
@@ -152,23 +150,12 @@ describe "Check deleted properties in statements UI" do
         page.statement1Name.should_not == properties_item[0]["label"]
         page.statement1Name.include?(properties_item[0]["id"]).should be_true
         page.statement1Name.include?("Deleted property").should be_true
-        # TODO: there's still a bug in the UI showing the referenced item as "deleted": bug 45904
-        #page.editFirstStatement
-        #page.statementValueInput.should == cm_string
-        #page.statementValueInput_element.clear
-        #page.statementValueInput = items[0]["label"]
-        #page.saveStatement
-        #ajax_wait
-        #page.wbErrorDiv?.should be_true
-        #page.cancelStatement
+
         page.toggle_reference_section
         page.reference1Property.should_not == properties_item[0]["label"]
         page.reference1Property.include?(properties_item[0]["id"]).should be_true
         page.reference1Property.include?("Deleted property").should be_true
-        # TODO: there's still a bug in the UI showing the referenced item as "deleted": bug 45904
-        #page.reference1ValueLink?.should be_false
-        #page.editReference1
-        #page.referenceValueInput.should == cm_string
+
         # TODO: should it be allowed to edit a reference whose property was deleted?
         #page.referenceValueInput_element.clear
         #page.referenceValueInput = "changed"
