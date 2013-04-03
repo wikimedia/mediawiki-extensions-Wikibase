@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DrZWhZP0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-03T21:41:57Z",
+      "side": 1,
+      "message": "what is a \"custom prototype\"?\n\nWhich of the following do you consider a \"constructor with a custom prototype\"?\n\nA) function a() {}; a.prototype \u003d {};\nB) function a() {}; a.prototype.foo \u003d function() {};\nC) function a() { this.foo \u003d function(); };\n\nAlso, I don\u0027t get what you mean by \"extend on an object containing a constructor\". How does the object contain a constructor? or do you mean the constructor property of a constructor\u0027s prototype?\nIf so, do you simply mean:\n\n\"Checking instanceof in IE8 will fail on instances of constructors with a prototype whose \"constructor\" property has been overwritten\"\n\nBut then again, I missed the deep extend in there I guess. Please clarify! This is a quite complex subject, so confusion is inevitable ;)",
+      "revId": "21dc821867ef6680d4652ddbf02045a19a40bfbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrMcivgQ",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.listview.js",
         "patchSetId": 2
