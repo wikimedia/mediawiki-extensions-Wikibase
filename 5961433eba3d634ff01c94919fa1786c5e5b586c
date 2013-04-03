@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DrLMiZAM",
+        "filename": "DataModel/DataModel/Entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-03T18:02:40Z",
+      "side": 1,
+      "message": "yeah - I\u0027m guessing we\u0027d like to still be able to interpret the entityids already stored? :D",
+      "parentUuid": "DrCfE0g8",
+      "revId": "5961433eba3d634ff01c94919fa1786c5e5b586c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrAdi9j4",
         "filename": "DataModel/DataModel/Entity/EntityId.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-04-02T23:03:03Z",
       "side": 1,
       "message": "shouldn\u0027t this rather throw an invalid argument exception?",
+      "revId": "5961433eba3d634ff01c94919fa1786c5e5b586c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrHMczL4",
+        "filename": "DataModel/DataModel/Entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-03T18:02:40Z",
+      "side": 1,
+      "message": "that would be better. No harm done with the assert though",
+      "parentUuid": "DrAdi9j4",
       "revId": "5961433eba3d634ff01c94919fa1786c5e5b586c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
