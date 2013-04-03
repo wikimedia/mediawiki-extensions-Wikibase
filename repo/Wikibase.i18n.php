@@ -56,6 +56,7 @@ $messages['en'] = array(
 	'wikibase-undo-samerev' => 'Cannot undo, same revision given for undo base and undo target.',
 	'wikibase-undo-badpage' => 'Bad revision: Revision $2 does not belong to [[$1]].',
 	'wikibase-undo-firstrev' => "Cannot undo the page's creation",
+	'wikibase-undo-nocontent' => "Cannot load content of revision $2 of page $1",
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
 	'wikibase-ui-pendingquantitycounter-nonpending' => '$2 $1',
 	'wikibase-ui-pendingquantitycounter-pending' => '$2$3 $1',
@@ -496,6 +497,10 @@ Parameters:
 * $1 is the title of the page;
 * $2 is the revision id number.',
 	'wikibase-undo-firstrev' => "Message shown when the user attempts to undo the very first revision of a page, that is, the page's creation.",
+	'wikibase-undo-nocontent' => "Message shown when the content of one of the revisions needed for undo could not be loaded.
+This may happen if there is an error ion the storage backend, or if the respective revision has been hidden (oversighted) or deleted.
+* $1 is the title of the page;
+* $2 is the revision id number.",
 	'wikibase-propertyedittool-full' => 'A list of elements the user is assumed to enter is now complete.',
 	'wikibase-ui-pendingquantitycounter-nonpending' => "Message for a generic counter which will display a quantity and of what nature that quantity is. Parameters:
 * $1 is the label of the counter's subject. E.g. 'sources' in an item's statement's references counter displayed in the heading above the references.
