@@ -16,6 +16,24 @@
       "revId": "1923308f6f0063e78a80f3640192ab4f980e0334",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dr7OaeF4",
+        "filename": "lib/resources/wikibase.support.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-04T22:29:52Z",
+      "side": 1,
+      "message": "See Ie9653a0e12804ffcd258a4a72ea278760b107315 which fixes the problem mentioned above in other WB constructors.",
+      "parentUuid": "Dr7N-2GI",
+      "revId": "1923308f6f0063e78a80f3640192ab4f980e0334",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
