@@ -33,8 +33,14 @@ use ValueFormatters\FormatterOptions;
  */
 class EntityIdFormatter extends StringFormatter {
 
+	/**
+	 * @var EntityLookup
+	 */
 	protected $entityLookup;
 
+	/**
+	 * @var string
+	 */
 	protected $labelFallback;
 
 	/**
@@ -91,14 +97,16 @@ class EntityIdFormatter extends StringFormatter {
 	 *
 	 * @param EntityId
 	 *
-	 * @return string|false
+	 * @return string|boolean
 	 */
 	protected function lookupItemLabel( EntityId $entityId ) {
-		// @todo: use terms table lookup
 		$entity = $this->entityLookup->getEntity( $entityId );
 
 		$langCode = $this->getOption( 'lang' );
 
+		/**
+		 * @var Entity $entity
+		 */
 		return $entity->getLabel( $langCode );
 	}
 
