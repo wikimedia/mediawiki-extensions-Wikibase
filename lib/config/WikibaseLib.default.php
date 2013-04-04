@@ -96,4 +96,3 @@ $wgWBSettings['dataTypeFormatters'] = array(
 );
 
 $wgValueFormatters['wikibase-entityid'] = 'Wikibase\EntityIdFormatter';
-$wgValueFormatters['string'] = 'Wikibase\StringFormatter'; // @todo move to ValueFormatters
