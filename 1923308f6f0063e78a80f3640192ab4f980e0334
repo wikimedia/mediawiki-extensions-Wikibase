@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dr7N-2GI",
+        "filename": "lib/resources/wikibase.support.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-04T21:39:17Z",
+      "side": 1,
+      "message": "Not surprised this won\u0027t work in IE8 since this way you are overwriting the prototype\u0027s constructor property to the one of \"{ ... }\" which is the native \"Object\" constructor (before it was the \"Test\" constructor).\n\nProbably IE requires the constructor prototype to be set correctly but this is something that should always be done anyhow.\n\nAlso see bug 46383 where we had this problem before.",
+      "revId": "1923308f6f0063e78a80f3640192ab4f980e0334",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
