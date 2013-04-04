@@ -137,7 +137,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 	 */
 	public function testSaveSelectCountAndDelete( array $data, $loadDefaults = false ) {
 		if ( defined( 'WBC_VERSION' ) ) {
-			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
+			$this->markTestSkipped( "Skipping because Wikibase Client should not write to foreign database table." );
 		}
 
 		$changesTable = ChangesTable::singleton();

@@ -63,10 +63,6 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testSaveLinksOfItem( $item ) {
-		if ( defined( 'WBC_VERSION' ) ) {
-			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
-		}
-
 		$res = $this->siteLinkTable->saveLinksOfItem( $item );
 		$this->assertTrue( $res );
 	}

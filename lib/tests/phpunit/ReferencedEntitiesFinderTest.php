@@ -148,10 +148,6 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 	 * @param EntityId[] $expected
 	 */
 	public function testFindClaimLinks( array $claims, array $expected ) {
-		if ( defined( 'WBC_VERSION' ) ) {
-			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
-		}
-
 		$linkFinder = new ReferencedEntitiesFinder( $this->getMockEntityLoader() );
 
 		$actual = $linkFinder->findClaimLinks( new Claims( $claims ) );
