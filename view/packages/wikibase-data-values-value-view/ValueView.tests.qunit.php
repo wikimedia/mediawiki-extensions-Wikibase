@@ -22,7 +22,7 @@
  * @since 0.1
  *
  * @file
- * @ingroup DataTypes
+ * @ingroup ValueView
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
@@ -43,7 +43,7 @@ return call_user_func( function() {
 				'jquery.eachchange',
 			),
 		),
-	
+
 		'jquery.inputAutoExpand.tests' => array(
 			'scripts' => array(
 				"$bp/jquery/jquery.inputAutoExpand.tests.js",
@@ -51,7 +51,16 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.inputAutoExpand',
 			),
-		)
+		),
+
+		'jquery.ui.suggester.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.ui/jquery.ui.suggester.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.ui.suggester',
+			),
+		),
 	);
 
 } );

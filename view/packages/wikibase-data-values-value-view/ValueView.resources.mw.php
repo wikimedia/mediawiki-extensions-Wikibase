@@ -27,7 +27,7 @@
  * @since 0.1
  *
  * @file
- * @ingroup DataValues
+ * @ingroup ValueView
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
@@ -68,6 +68,18 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.eachchange'
+			)
+		),
+
+		'jquery.ui.suggester' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.suggester.js'
+			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.suggester.css'
+			),
+			'dependencies' => array(
+				'jquery.ui.autocomplete'
 			)
 		),
 	);
