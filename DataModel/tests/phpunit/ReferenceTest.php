@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+
 use DataValues\StringValue;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;

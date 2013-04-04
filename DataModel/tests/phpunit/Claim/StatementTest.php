@@ -1,10 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Statement;
+
+use DataValues\StringValue;
 use Wikibase\Claim;
 use Wikibase\Reference;
-use \DataValues\StringValue;
+use Wikibase\Statement;
 
 /**
  * Tests for the Wikibase\Statement class.

@@ -1,8 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ClaimAggregate;
+
 use Wikibase\Claim;
+use Wikibase\ClaimAggregate;
 
 /**
  * Tests for the Wikibase\ClaimAggregate implementing classes.

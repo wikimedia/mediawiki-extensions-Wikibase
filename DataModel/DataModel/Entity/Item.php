@@ -1,8 +1,9 @@
 <?php
 
 namespace Wikibase;
-use MWException;
+
 use Diff\Patcher;
+use MWException;
 
 /**
  * Represents a single Wikibase item.

@@ -1,11 +1,12 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\SnakList;
-use Wikibase\PropertyValueSnak;
+
 use DataValues\StringValue;
-use Wikibase\Snak;
 use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertyValueSnak;
+use Wikibase\Snak;
+use Wikibase\SnakList;
 
 /**
  * Tests for the Wikibase\SnakList class.

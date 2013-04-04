@@ -1,9 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ReferenceList;
-use Wikibase\Reference;
+
 use Hashable;
+use Wikibase\Reference;
+use Wikibase\ReferenceList;
 
 /**
  * Tests for the Wikibase\ReferenceList class.

@@ -1,8 +1,12 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Claim, Wikibase\Snak, Wikibase\SnakList, Wikibase\Snaks;
+
 use DataValues\StringValue;
+use Wikibase\Claim;
+use Wikibase\Snak;
+use Wikibase\SnakList;
+use Wikibase\Snaks;
 
 /**
  * Tests for the Wikibase\Claim class.

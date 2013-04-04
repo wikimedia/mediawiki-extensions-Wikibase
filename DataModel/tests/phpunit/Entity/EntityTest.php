@@ -1,9 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\Entity;
-use Wikibase\EntityId;
 use Wikibase\EntityDiff;
+use Wikibase\EntityId;
 
 /**
  * Tests for the Wikibase\Entity deriving classes.

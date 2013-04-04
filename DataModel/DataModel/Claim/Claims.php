@@ -1,8 +1,9 @@
 <?php
 
 namespace Wikibase;
-use MWException;
+
 use Diff\Differ;
+use MWException;
 
 /**
  * Implementation of the Claims interface.

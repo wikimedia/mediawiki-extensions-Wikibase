@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\SiteLink;
-use Sites;
+
+use Wikibase\SiteLink;
 
 /**
  * Tests for the Wikibase\SiteLink class.

@@ -1,8 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\SiteLink;
+
 use Wikibase\Item;
+use Wikibase\SiteLink;
 
 /**
  * Holds Item objects for testing proposes.

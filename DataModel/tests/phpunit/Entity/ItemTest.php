@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\Item;
 use Wikibase\SiteLink;
 
