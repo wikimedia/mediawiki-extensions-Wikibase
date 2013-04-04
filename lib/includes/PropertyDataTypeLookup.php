@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase;
-use ValueFormatters\ValueFormatterBase;
+namespace Wikibase\Lib;
+
+use Wikibase\EntityId;
 
 /**
- * Formatter for string values
- *
- * @todo generalize and put with ValueFormatters stuff
+ * Interface for objects that can find the if of the DataType
+ * for the Property of which the id is given.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,17 +29,19 @@ use ValueFormatters\ValueFormatterBase;
  * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
- * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StringFormatter extends ValueFormatterBase {
+interface PropertyDataTypeLookup {
 
-	public function format( $dataValue ) {
-		$string = $dataValue->getValue();
-		return $this->formatString( $string );
-	}
-
-	protected function formatString( $string ) {
-		return is_string( $string ) ? wfEscapeWikiText( $string ) : '';
-	}
+	/**
+	 * Returns the DataType for the Property of which the id is given.
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getDataTypeIdForProperty( EntityId $propertyId );
 
 }
