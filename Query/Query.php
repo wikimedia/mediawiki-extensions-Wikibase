@@ -30,9 +30,9 @@
 define( 'WIKIBASE_Query', '0.1 alpha' );
 
 // @codeCoverageIgnoreStart
-call_user_func( function() {
-	if ( defined( 'MEDIAWIKI' ) ) {
+if ( defined( 'MEDIAWIKI' ) ) {
+	call_user_func( function() {
 		require_once __DIR__ . '/Query.mw.php';
-	}
-} );
+	} );
+}
 // @codeCoverageIgnoreEnd
