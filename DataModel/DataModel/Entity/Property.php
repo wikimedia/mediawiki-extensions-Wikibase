@@ -4,7 +4,9 @@ namespace Wikibase;
 
 use DataTypes\DataType;
 use DataValues\DataValue;
+use InvalidArgumentException;
 use MWException;
+use RuntimeException;
 
 /**
  * Represents a single Wikibase property.
@@ -48,6 +50,7 @@ class Property extends Entity {
 	 * Returns the DataType of the property.
 	 *
 	 * @since 0.2
+	 * @deprecated since 0.4
 	 *
 	 * @return DataType
 	 * @throws MWException
@@ -75,28 +78,43 @@ class Property extends Entity {
 	 * Sets the DataType of the property.
 	 *
 	 * @since 0.2
+	 * @deprecated since 0.4
 	 *
 	 * @param DataType $dataType
 	 */
 	public function setDataType( DataType $dataType ) {
 		$this->dataType = $dataType;
+		$this->setDataTypeId( $dataType->getId() );
 	}
 
 	/**
-	 * @see Entity::toArray
+	 * @since 0.4
 	 *
-	 * @since 0.2
+	 * @param string $dataTypeId
 	 *
-	 * @return array
+	 * @throws InvalidArgumentException
 	 */
-	public function toArray() {
-		$data = parent::toArray();
-
-		if ( $this->dataType !== null ) {
-			$data['datatype'] = $this->dataType->getId();
+	public function setDataTypeId( $dataTypeId ) {
+		if ( !is_string( $dataTypeId ) ) {
+			throw new InvalidArgumentException( '$dataTypeId needs to be a string' );
 		}
 
-		return $data;
+		$this->data['datatype'] = $dataTypeId;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return string
+	 * @throws RuntimeException
+	 */
+	public function getDataTypeId() {
+		if ( array_key_exists( 'datatype', $this->data ) ) {
+			assert( is_string( $this->data['datatype'] ) );
+			return $this->data['datatype'];
+		}
+
+		throw new RuntimeException( 'Cannot obtain the properties DataType as it has not been set' );
 	}
 
 	/**
@@ -147,6 +165,7 @@ class Property extends Entity {
 	 * Factory for creating new DataValue objects for the property.
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.4
 	 *
 	 * @param mixed $rawDataValue
 	 *
