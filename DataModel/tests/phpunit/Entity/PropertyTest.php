@@ -2,7 +2,11 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Claim;
+use Wikibase\EntityId;
+use Wikibase\Item;
 use Wikibase\Property;
+use Wikibase\PropertyNoValueSnak;
 
 /**
  * Tests for the Wikibase\Property class.
@@ -43,7 +47,7 @@ class PropertyTest extends EntityTest {
 	 *
 	 * @since 0.1
 	 *
-	 * @return \Wikibase\Property
+	 * @return Property
 	 */
 	protected function getNewEmpty() {
 		return Property::newEmpty();
@@ -116,8 +120,8 @@ class PropertyTest extends EntityTest {
 		$objects[] = $entity;
 
 		$entity = $entity->copy();
-		$entity->addClaim( new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak(
-			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 )
+		$entity->addClaim( new Claim( new PropertyNoValueSnak(
+			new EntityId( Property::ENTITY_TYPE, 42 )
 		) ) );
 		$objects[] = $entity;
 
@@ -127,15 +131,15 @@ class PropertyTest extends EntityTest {
 	public function newDataValueProvider() {
 		$argLists = array();
 
-		$property = \Wikibase\Property::newFromType( 'wikibase-item' );
+		$property = Property::newFromType( 'wikibase-item' );
 		$property->setId( 852645 );
 
-		$argLists[] = array( clone $property, new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 42 ) );
-		$argLists[] = array( clone $property, new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 9001 ) );
+		$argLists[] = array( clone $property, new EntityId( Item::ENTITY_TYPE, 42 ) );
+		$argLists[] = array( clone $property, new EntityId( Item::ENTITY_TYPE, 9001 ) );
 
 		$property->setId( 852642 );
 
-		$argLists[] = array( clone $property, new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 9001 ) );
+		$argLists[] = array( clone $property, new EntityId( Item::ENTITY_TYPE, 9001 ) );
 
 		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
 		$property->setDataType( $libRegistry->getDataTypeFactory()->getType( 'commonsMedia' ) );
@@ -146,13 +150,28 @@ class PropertyTest extends EntityTest {
 	/**
 	 * @dataProvider newDataValueProvider
 	 *
-	 * @param \Wikibase\Property $property
+	 * @param Property $property
 	 * @param \DataValues\DataValue $dataValue
 	 */
 	public function testNewDataValue( Property $property, \DataValues\DataValue $dataValue ) {
 		$newDataValue = $property->newDataValue( $dataValue->getArrayValue() );
 
 		$this->assertTrue( $dataValue->equals( $newDataValue ) );
+	}
+
+	public function testNewFromType() {
+		$property = Property::newFromType( 'string' );
+		$this->assertInstanceOf( 'Wikibase\Property', $property );
+		$this->assertEquals( 'string', $property->getDataTypeId() );
+	}
+
+	public function testSetAndGetDataTypeId() {
+		$property = Property::newFromType( 'string' );
+
+		foreach ( array( 'string', 'foobar', 'nyan', 'string' ) as $typeId ) {
+			$property->setDataTypeId( $typeId );
+			$this->assertEquals( $typeId, $property->getDataTypeId() );
+		}
 	}
 
 }

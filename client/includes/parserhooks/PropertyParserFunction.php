@@ -1,10 +1,19 @@
 <?php
 
 namespace Wikibase;
+
+use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
+use ValueFormatters\ValueFormatter;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\TypedValueFormatter;
 
 /**
- * {{#property}} parser function
+ * Handler of the {{#property}} parser function.
+ *
+ * TODO: cleanup injection of dependencies
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,14 +37,12 @@ use DataValues\DataValue;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class PropertyParserFunction {
 
-	/* @var Language */
+	/* @var \Language */
 	protected $language;
-
-	/* @var EntityLookup */
-	protected $entityLookup;
 
 	/* @var PropertyLookup */
 	protected $propertyLookup;
@@ -43,90 +50,23 @@ class PropertyParserFunction {
 	/* @var ParserErrorMessageFormatter */
 	protected $errorFormatter;
 
-	/* @var WikibaseFormatterFactory */
-	protected $formatterFactory;
+	/* @var SnakFormatter */
+	protected $snaksFormatter;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param \Language $language
-	 * @param EntityLookup $entityLookup
 	 * @param PropertyLookup $propertyLookup
 	 * @param ParserErrorMessageFormatter $errorFormatter
-	 * @param string[] $dataTypeFormatters
+	 * @param SnakFormatter $dataTypeFactory
 	 */
-	public function __construct( \Language $language, EntityLookup $entityLookup, PropertyLookup $propertyLookup,
-		ParserErrorMessageFormatter $errorFormatter, WikibaseFormatterFactory $formatterFactory ) {
+	public function __construct( \Language $language, PropertyLookup $propertyLookup,
+		ParserErrorMessageFormatter $errorFormatter, SnakFormatter $snaksFormatter ) {
 		$this->language = $language;
-		$this->entityLookup = $entityLookup;
 		$this->propertyLookup = $propertyLookup;
 		$this->errorFormatter = $errorFormatter;
-		$this->formatterFactory = $formatterFactory;
-	}
-
-	/**
-	 * Format a data value
-	 *
-	 * @since 0.4
-	 *
-	 * @param DataValue $dataValue
-	 *
-	 * @return string
-	 */
-	public function formatDataValue( DataValue $dataValue ) {
-		$dataType = $dataValue->getType();
-
-		$options = array( 'wikibase-entityid' => array(
-			'entityLookup' => $this->entityLookup,
-			'labelFallback' => 'emptyString'
-		) );
-
-		$valueFormatter = $this->formatterFactory->newValueFormatterForDataType( $dataType, $options );
-		$formattedValue = $valueFormatter->format( $dataValue );
-
-		wfProfileOut( __METHOD__ );
-		return $formattedValue;
-	}
-
-	/**
-	 * Formats data values in a SnakList as comma separated list
-	 * @todo this belongs elsewhere, such as with formatters
-	 *
-	 * @since 0.4
-	 *
-	 * @param SnakList $snakList
-	 *
-	 * @return string - wikitext format
-	 */
-	public function formatSnakList( SnakList $snakList, $propertyLabel ) {
-		wfProfileIn( __METHOD__ );
-		$values = array();
-
-		foreach( $snakList as $snak ) {
-			// @todo handle other snak types
-			if ( $snak instanceof PropertyValueSnak ) {
-				$values[] = $snak->getDataValue();
-			}
-		}
-
-		if ( $values !== array() ) {
-			wfProfileOut( __METHOD__ );
-			$formattedValues = array();
-
-			foreach( $values as $dataValue ) {
-				$formattedValues[] = $this->formatDataValue( $dataValue );
-			}
-
-			return $this->language->commaList( $formattedValues );
-		}
-
-		if ( ! isset( $errorMessage ) ) {
-			// formatted as empty string
-			$errorMessage = new \Message( 'wikibase-property-notfound', array( wfEscapeWikiText( $propertyLabel ) ) );
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $this->errorFormatter->format( $errorMessage );
+		$this->snaksFormatter = $snaksFormatter;
 	}
 
 	/**
@@ -137,27 +77,43 @@ class PropertyParserFunction {
 	 *
 	 * @return string - wikitext format
 	 */
-    public function evaluate( EntityId $entityId, $propertyLabel ) {
-		wfProfileIn( __METHOD__ );
-
-		$snakList = new SnakList();
-
-		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
-
-		if ( $propertyIdToFind !== null ) {
-			$snakList = $this->propertyLookup->getMainSnaksByPropertyId( $entityId, $propertyIdToFind );
-		} else {
-			$langCode = $this->language->getCode();
-			$snakList = $this->propertyLookup->getMainSnaksByPropertyLabel( $entityId, $propertyLabel, $langCode );
-		}
+    public function renderForEntityId( EntityId $entityId, $propertyLabel ) {
+		$snakList = $this->getSnaksForProperty( $entityId, $propertyLabel );
 
 		if ( $snakList->isEmpty() ) {
-			wfProfileOut( __METHOD__ );
 			return '';
 		}
 
-		wfProfileOut( __METHOD__ );
-		return $this->formatSnakList( $snakList, $propertyLabel );
+		$snaks = array();
+
+		foreach( $snakList as $snak ) {
+			$snaks[] = $snak;
+		}
+
+		return $this->formatSnakList( $snaks );
+	}
+
+	private function getSnaksForProperty( EntityId $entityId, $propertyLabel ) {
+		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
+
+		if ( $propertyIdToFind === null ) {
+			$langCode = $this->language->getCode();
+			return $this->propertyLookup->getMainSnaksByPropertyLabel( $entityId, $propertyLabel, $langCode );
+		}
+
+		return $this->propertyLookup->getMainSnaksByPropertyId( $entityId, $propertyIdToFind );
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param Snak[] $snaks
+	 *
+	 * @return string - wikitext format
+	 */
+	private function formatSnakList( $snaks ) {
+		$formattedValues = $this->snaksFormatter->formatSnaks( $snaks );
+		return $this->language->commaList( $formattedValues );
 	}
 
 	/**
@@ -182,22 +138,20 @@ class PropertyParserFunction {
 			return '';
 		}
 
-		$entityLookup = ClientStoreFactory::getStore()->getEntityLookup();
-
 		$targetLanguage = $parser->getTargetLanguage();
 		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
 
-		// returns lookup with full label and id lookup (experimental) or just id lookup
-		$propertyLookup = ClientStoreFactory::getStore()->getPropertyLookup();
+		$wikibaseClient = WikibaseClient::newInstance();
 
-		$formatterFactory = new WikibaseFormatterFactory( Settings::get( 'dataTypeFormatters' ),
-			$GLOBALS['wgValueFormatters'], $targetLanguage->getCode() );
+		$propertyLookup = $wikibaseClient->getStore()->getPropertyLookup();
+		$formatter = $wikibaseClient->newSnakFormatter();
 
-		$instance = new self( $targetLanguage, $entityLookup, $propertyLookup, $errorFormatter, $formatterFactory );
+		$instance = new self( $targetLanguage, $propertyLookup, $errorFormatter, $formatter );
 
 		$result = array(
-			$instance->evaluate( $entityId, $propertyLabel ),
-			'noparse' => false
+			$instance->renderForEntityId( $entityId, $propertyLabel ),
+			'noparse' => false,
+			'nowiki' => true,
 		);
 
 		wfProfileOut( __METHOD__ );
