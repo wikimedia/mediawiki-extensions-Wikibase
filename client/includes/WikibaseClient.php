@@ -1,24 +1,20 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client;
 
 use DataTypes\DataTypeFactory;
+use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
+use Wikibase\ClientStore;
+use Wikibase\ClientStoreFactory;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
+use Wikibase\Settings;
+use Wikibase\SettingsArray;
 
 /**
- * Application registry for Wikibase Lib.
- *
- * TODO: migrate out this class; code should be in client or repo and
- * use their respective settings. Same rationale as for moving settings out of lib.
- *
- * @deprecated
- *
- * NOTE:
- * This application registry is a workaround for design problems in existing code.
- * It should only be used to improve existing usage of code and ideally just be
- * a stepping stone towards using proper dependency injection where possible.
- * This means you should be very careful when adding new components to the registry.
+ * Top level factory for the WikibaseClient extension.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,12 +32,12 @@ use Wikibase\Lib\EntityIdParser;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.4
- * @ingroup WikibaseLib
+ * @ingroup WikibaseClient
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-final class LibRegistry {
+final class WikibaseClient {
 
 	/**
 	 * @since 0.4
@@ -90,7 +86,7 @@ final class LibRegistry {
 	public function getEntityIdParser() {
 		if ( $this->entityIdParser === null ) {
 			$options = new ParserOptions( array(
-				 EntityIdParser::OPT_PREFIX_MAP => $this->settings->getSetting( 'entityPrefixes' )
+				EntityIdParser::OPT_PREFIX_MAP => $this->settings->getSetting( 'entityPrefixes' )
 			) );
 
 			$this->entityIdParser = new EntityIdParser( $options );
@@ -100,17 +96,60 @@ final class LibRegistry {
 	}
 
 	/**
+	 * @since 0.4
+	 *
+	 * @param string $languageCode
+	 *
+	 * @return EntityIdLabelFormatter
+	 */
+	public function newEntityIdLabelFormatter( $languageCode ) {
+		$options = new FormatterOptions( array(
+			EntityIdLabelFormatter::OPT_LANGUAGE => $languageCode
+		) );
+
+		$entityLookup = ClientStoreFactory::getStore()->getEntityLookup();
+
+		$labelFormatter = new EntityIdLabelFormatter( $options, $entityLookup );
+
+		$options = new FormatterOptions( array(
+			EntityIdFormatter::OPT_PREFIX_MAP => $this->settings->getSetting( 'entityPrefixes' )
+		) );
+
+		$idFormatter = new EntityIdFormatter( $options );
+
+		$labelFormatter->setIdFormatter( $idFormatter );
+
+		return $labelFormatter;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return ClientStore
+	 */
+	public function getStore() {
+		return ClientStoreFactory::getStore();
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return SettingsArray
+	 */
+	public function getSettings() {
+		return $this->settings;
+	}
+
+	/**
 	 * Returns a new instance constructed from global settings.
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @since 0.4
 	 *
-	 * @return LibRegistry
+	 * @return WikibaseClient
 	 */
 	public static function newInstance() {
 		return new self( Settings::singleton() );
 	}
-
-	// Do not add new stuff here without reading the notice at the top first.
 
 }
