@@ -60,8 +60,6 @@ class StoreConfig {
 	private $dvHandlers = array();
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param string $storeName

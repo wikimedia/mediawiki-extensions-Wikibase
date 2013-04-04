@@ -47,8 +47,6 @@ class TableBuilder {
 	private $messageReporter;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param QueryInterface $queryInterface

@@ -47,8 +47,6 @@ class TableDefinition implements \Immutable {
 	private $fields;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param string $name

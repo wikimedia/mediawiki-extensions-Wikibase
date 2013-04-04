@@ -54,8 +54,6 @@ class Updater implements QueryStoreUpdater {
 	private $queryInterface;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param Schema $schema

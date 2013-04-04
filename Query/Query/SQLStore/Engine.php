@@ -52,8 +52,6 @@ class Engine implements QueryEngine {
 	private $queryInterface;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param StoreConfig $storeConfig

@@ -46,8 +46,6 @@ class MediaWikiQueryInterface implements QueryInterface {
 	private $extendedAbstraction;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param DBConnectionProvider $connectionProvider

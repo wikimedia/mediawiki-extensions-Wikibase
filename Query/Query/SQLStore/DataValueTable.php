@@ -64,8 +64,6 @@ final class DataValueTable implements \Immutable {
 	private $labelFieldName;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param TableDefinition $table
