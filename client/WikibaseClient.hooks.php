@@ -76,18 +76,20 @@ final class ClientHooks {
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
-			'includes/LangLinkHandler',
-
-			'includes/CachedEntity',
-			'includes/ChangeHandler',
-			'includes/RepoLinker',
-			'includes/EntityCacheUpdater',
-
 			'includes/api/ApiClientInfo',
+
+			'includes/parserhooks/PropertyParserFunction',
+
+			'includes/specials/SpecialUnconnectedPages',
 
 			'includes/store/EntityCacheTable',
 
-			'includes/specials/SpecialUnconnectedPages',
+			'includes/CachedEntity',
+			'includes/ChangeHandler',
+			'includes/EntityCacheUpdater',
+			'includes/LangLinkHandler',
+			'includes/RepoLinker',
+			'includes/WikibaseClient',
 		);
 
 		foreach ( $testFiles as $file ) {
