@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Drd4FucU",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-04-04T15:20:57Z",
+      "side": 1,
+      "message": "interesting concept but ugh! confusing class name.  please choose something better.\n\nif we are removing the formatter factory from lib, then the repo needs a class corresponding to this one, as there is need for entity id and label formatting, etc. there",
+      "revId": "1668d483d5d84184a12868b817f69686b37e08dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DrX73xdI",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-04-04T15:20:57Z",
+      "side": 1,
+      "message": "no escaping!",
+      "revId": "1668d483d5d84184a12868b817f69686b37e08dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Drf69FdU",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-04-04T15:20:57Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "1668d483d5d84184a12868b817f69686b37e08dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Drb4tXUY",
+        "filename": "client/tests/phpunit/includes/parserhooks/PropertyParserFunctionTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-04-04T15:20:57Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "1668d483d5d84184a12868b817f69686b37e08dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
