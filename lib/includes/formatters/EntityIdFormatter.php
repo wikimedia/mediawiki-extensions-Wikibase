@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatterBase;
 
 /**
  * Formatter for Wikibase Item values
@@ -31,7 +32,7 @@ use ValueFormatters\FormatterOptions;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class EntityIdFormatter extends StringFormatter {
+class EntityIdFormatter extends ValueFormatterBase {
 
 	/**
 	 * @var EntityLookup
@@ -79,7 +80,7 @@ class EntityIdFormatter extends StringFormatter {
 		$label = $this->lookupItemLabel( $value );
 
 		if ( is_string( $label ) ) {
-			return $this->formatString( $label );
+			return $label;
 		}
 
 		// did not find a label, using fallback
