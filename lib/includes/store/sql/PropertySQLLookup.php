@@ -29,6 +29,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class PropertySQLLookup implements PropertyLookup {
 
@@ -72,15 +73,11 @@ class PropertySQLLookup implements PropertyLookup {
 
 			$statementsByProperty[$propertyId->getNumericId()][] = $statement;
 
-			$property = $this->entityLookup->getEntity( $propertyId );
+			$propertyLabel = $this->getPropertyLabel( $propertyId, $langCode );
 
-			if ( $property !== null ) {
-				$propertyLabel = $property->getLabel( $langCode );
-
-				if ( $propertyLabel !== false ) {
-					$id = $property->getPrefixedId();
-					$propertyList[$id] = $propertyLabel;
-				}
+			if ( $propertyLabel !== false ) {
+				$id = $propertyId->getPrefixedId();
+				$propertyList[$id] = $propertyLabel;
 			}
 		}
 
@@ -188,6 +185,10 @@ class PropertySQLLookup implements PropertyLookup {
 	 * @return EntityId|null
 	 */
 	protected function getPropertyIdByLabel( $propertyLabel, $langCode ) {
+		if ( $this->propertiesByLabel === null ) {
+			return null;
+		}
+
 		wfProfileIn( __METHOD__ );
 		$propertyId = array_search( $propertyLabel, $this->propertiesByLabel[$langCode] );
 		if ( $propertyId !== false ) {
@@ -216,11 +217,17 @@ class PropertySQLLookup implements PropertyLookup {
 		$snakList = new SnakList();
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-			if ( $this->propertiesByLabel === null ) {
+			$propertyId = $this->getPropertyIdByLabel( $propertyLabel, $langCode );
+
+			if ( $propertyId === null ) {
+				//NOTE: No negative caching. If we are looking up a label that can't be found
+				//      in the item, we'll always try to re-index the item's properties.
+				//      We just hope that this is rare, because people notice when a label
+				//      doesn't work.
 				$this->indexPropertiesByLabel( $entityId, $langCode );
+				$propertyId = $this->getPropertyIdByLabel( $propertyLabel, $langCode );
 			}
 
-			$propertyId = $this->getPropertyIdByLabel( $propertyLabel, $langCode );
 			$snakList = $propertyId !== null ? $this->getSnakListForProperty( $propertyId ) : $snakList;
 		}
 
