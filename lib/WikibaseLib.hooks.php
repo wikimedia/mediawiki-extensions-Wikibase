@@ -39,6 +39,9 @@ final class LibHooks {
 			'entity/EntityDiff',
 			'entity/EntityFactory',
 
+			'formatters/EntityIdFormatter',
+			'formatters/EntityIdLabelFormatter',
+
 			'hasharray/HashArrayWithoutDuplicates',
 			'hasharray/HashArrayWithDuplicates',
 
@@ -69,15 +72,19 @@ final class LibHooks {
 			'ChangesTable',
 			'DataTypes',
 			'ReferencedEntitiesFinder',
+			'EntityRetrievingDataTypeLookup',
 			'HashableObjectStorage',
+			'InMemoryDataTypeLookup',
 			'Template',
 			'TemplateRegistry',
 			'LibHooks',
 			'MapValueHasher',
 			'MockRepository',
 			'SettingsArray',
+			'SnakFormatter',
 
 			'TermsToClaimsTranslator',
+			'TypedValueFormatter',
 			'Term',
 			'Utils',
 		);

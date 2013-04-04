@@ -28,7 +28,6 @@ namespace Wikibase\Test;
  *
  * @group Database
  * @group Wikibase
- * @group WikibaseQuery
  * @group WikibaseRepo
  * @group WikibaseContent
  *
