@@ -1,10 +1,11 @@
 <?php
 
 namespace Wikibase;
+
+use Diff\Differ;
+use Diff\Patcher;
 use MWException;
 use Wikibase\Lib\GuidGenerator;
-use Diff\Patcher;
-use Diff\Differ;
 
 /**
  * Represents a single Wikibase entity.

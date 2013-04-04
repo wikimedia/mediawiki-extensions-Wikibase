@@ -1,8 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\PropertyValueSnak;
+
 use DataValues\StringValue;
+use Wikibase\PropertyValueSnak;
 
 /**
  * Tests for the Wikibase\PropertyValueSnak class.

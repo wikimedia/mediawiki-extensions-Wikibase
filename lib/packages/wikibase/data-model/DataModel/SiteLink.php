@@ -1,7 +1,10 @@
 <?php
 
 namespace Wikibase;
-use Sites, Site, MWException;
+
+use MWException;
+use Site;
+use Sites;
 
 /**
  * Class representing a link to another site, based upon the Sites class.

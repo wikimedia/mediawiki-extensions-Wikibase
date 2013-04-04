@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ClaimListAccess;
+
+use Wikibase\ClaimListAccess;
 
 /**
  * Tests for the Wikibase\ClaimListAccess implementing classes.

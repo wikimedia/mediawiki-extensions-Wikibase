@@ -1,8 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Claims;
+
 use Wikibase\Claim;
+use Wikibase\Claims;
 
 /**
  * Tests for the Wikibase\Claims class.

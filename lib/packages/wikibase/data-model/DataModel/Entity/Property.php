@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use DataTypes\DataType;
 use DataValues\DataValue;
 use MWException;

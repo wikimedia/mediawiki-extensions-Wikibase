@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\Item;
+
+use Wikibase\Item;
 
 /**
  * Tests for the Wikibase\Item class.
