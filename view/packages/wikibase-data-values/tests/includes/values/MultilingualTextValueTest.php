@@ -1,8 +1,9 @@
 <?php
 
 namespace DataValues\Test;
-use DataValues\MultilingualTextValue;
+
 use DataValues\MonolingualTextValue;
+use DataValues\MultilingualTextValue;
 
 /**
  * Tests for the DataValues\MultilingualTextValue class.

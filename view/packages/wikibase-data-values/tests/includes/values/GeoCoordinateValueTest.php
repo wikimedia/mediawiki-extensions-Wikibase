@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues\Test;
+
 use DataValues\GeoCoordinateValue;
 
 /**

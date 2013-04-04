@@ -1,7 +1,6 @@
 <?php
 
 namespace DataValues\Test;
-use DataValues\PropertyValue;
 
 /**
  * Tests for the DataValues\PropertyValue class.
