@@ -41,8 +41,6 @@ class MediaWikiTitleValue extends DataValueObject {
 	protected $title;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param Title $title

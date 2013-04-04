@@ -81,8 +81,6 @@ class IriValue extends DataValueObject {
 	protected $fragment;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param string $scheme

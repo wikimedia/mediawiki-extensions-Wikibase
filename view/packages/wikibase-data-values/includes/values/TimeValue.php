@@ -109,8 +109,6 @@ class TimeValue extends DataValueObject {
 	protected $calendarModel;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param string $time

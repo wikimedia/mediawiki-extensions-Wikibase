@@ -41,8 +41,6 @@ class UnknownValue extends DataValueObject {
 	protected $value;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param mixed $value

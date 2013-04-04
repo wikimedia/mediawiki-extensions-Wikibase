@@ -42,8 +42,6 @@ class MultilingualTextValue extends DataValueObject {
 	protected $texts = array();
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param MonolingualTextValue[] $monolingualValues

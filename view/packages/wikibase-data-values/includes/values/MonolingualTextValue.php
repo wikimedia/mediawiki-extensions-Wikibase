@@ -51,8 +51,6 @@ class MonolingualTextValue extends DataValueObject {
 	protected $language;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param string $languageCode

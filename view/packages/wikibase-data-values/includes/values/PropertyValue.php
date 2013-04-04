@@ -42,8 +42,6 @@ class PropertyValue extends DataValueObject {
 	protected $id;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param string $propertyId

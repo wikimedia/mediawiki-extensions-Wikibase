@@ -40,8 +40,6 @@ class BooleanValue extends DataValueObject {
 	protected $value;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param string $value

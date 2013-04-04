@@ -69,8 +69,6 @@ class GeoCoordinateValue extends DataValueObject {
 	protected $globe;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param float|int $latitude

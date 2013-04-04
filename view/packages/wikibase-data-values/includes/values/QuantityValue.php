@@ -56,8 +56,6 @@ class QuantityValue extends DataValueObject {
 	protected $accuracy;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param int|float $amount
