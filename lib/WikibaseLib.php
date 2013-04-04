@@ -112,9 +112,11 @@ $wgAutoloadClasses['Wikibase\DiffOpValueFormatter']		= $dir . 'includes/DiffOpVa
 $wgAutoloadClasses['Wikibase\DiffView'] 				= $dir . 'includes/DiffView.php';
 $wgAutoloadClasses['Wikibase\Lib\GuidGenerator'] 		= $dir . 'includes/GuidGenerator.php';
 $wgAutoloadClasses['Wikibase\Lib\V4GuidGenerator'] 		= $dir . 'includes/GuidGenerator.php';
+$wgAutoloadClasses['Wikibase\Lib\EntityRetrievingDataTypeLookup']	= $dir . 'includes/EntityRetrievingDataTypeLookup.php';
 $wgAutoloadClasses['Wikibase\Lib\ClaimGuidGenerator'] 	= $dir . 'includes/GuidGenerator.php';
 $wgAutoloadClasses['Wikibase\HashableObjectStorage']	= $dir . 'includes/HashableObjectStorage.php';
 $wgAutoloadClasses['Wikibase\HashArray'] 				= $dir . 'includes/HashArray.php';
+$wgAutoloadClasses['Wikibase\Lib\InMemoryDataTypeLookup']	= $dir . 'includes/InMemoryDataTypeLookup.php';
 $wgAutoloadClasses['Wikibase\LibRegistry'] 				= $dir . 'includes/LibRegistry.php';
 $wgAutoloadClasses['Wikibase\Template'] 				= $dir . 'includes/TemplateRegistry.php';
 $wgAutoloadClasses['Wikibase\TemplateRegistry'] 		= $dir . 'includes/TemplateRegistry.php';
@@ -122,10 +124,13 @@ $wgAutoloadClasses['Wikibase\MapHasher'] 				= $dir . 'includes/MapHasher.php';
 $wgAutoloadClasses['Wikibase\MapValueHasher'] 			= $dir . 'includes/MapValueHasher.php';
 $wgAutoloadClasses['Wikibase\ReferencedEntitiesFinder'] = $dir . 'includes/ReferencedEntitiesFinder.php';
 $wgAutoloadClasses['Wikibase\ObjectComparer'] 			= $dir . 'includes/ObjectComparer.php';
+$wgAutoloadClasses['Wikibase\Lib\PropertyDataTypeLookup'] = $dir . 'includes/PropertyDataTypeLookup.php';
 $wgAutoloadClasses['Wikibase\Settings'] 				= $dir . 'includes/Settings.php';
 $wgAutoloadClasses['Wikibase\SettingsArray'] 			= $dir . 'includes/SettingsArray.php';
+$wgAutoloadClasses['Wikibase\Lib\SnakFormatter'] 		= $dir . 'includes/SnakFormatter.php';
 $wgAutoloadClasses['Wikibase\Term'] 					= $dir . 'includes/Term.php';
 $wgAutoloadClasses['Wikibase\Lib\TermsToClaimsTranslator'] = $dir . 'includes/TermsToClaimsTranslator.php';
+$wgAutoloadClasses['Wikibase\Lib\TypedValueFormatter'] = $dir . 'includes/TypedValueFormatter.php';
 $wgAutoloadClasses['Wikibase\Utils'] 					= $dir . 'includes/Utils.php';
 $wgAutoloadClasses['Wikibase\WikibaseDiffOpFactory']	= $dir . 'includes/WikibaseDiffOpFactory.php';
 
@@ -147,10 +152,8 @@ $wgAutoloadClasses['Wikibase\EntityFactory'] 		= $dir . 'includes/EntityFactory.
 $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/ItemDiff.php';
 
 // includes/formatters
-$wgAutoloadClasses['Wikibase\EntityIdFormatter']	= $dir . 'includes/formatters/EntityIdFormatter.php';
-$wgAutoloadClasses['Wikibase\SnakFormatter']		= $dir . 'includes/formatters/SnakFormatter.php';
-$wgAutoloadClasses['Wikibase\StringFormatter']		= $dir . 'includes/formatters/StringFormatter.php';
-$wgAutoloadClasses['Wikibase\WikibaseFormatterFactory'] = $dir . 'includes/formatters/WikibaseFormatterFactory.php';
+$wgAutoloadClasses['Wikibase\Lib\EntityIdFormatter']	= $dir . 'includes/formatters/EntityIdFormatter.php';
+$wgAutoloadClasses['Wikibase\Lib\EntityIdLabelFormatter']	= $dir . 'includes/formatters/EntityIdLabelFormatter.php';
 
 // includes/modules
 $wgAutoloadClasses['Wikibase\RepoAccessModule'] 		= $dir . 'includes/modules/RepoAccessModule.php';
@@ -219,7 +222,6 @@ $wgAutoloadClasses['Wikibase\Lib\Test\Serializers\UnserializerBaseTest'] = $dir 
 $wgAutoloadClasses['Wikibase\Test\MockRepository'] 			= $dir . 'tests/phpunit/MockRepository.php';
 $wgAutoloadClasses['Wikibase\Test\EntityLookupTest'] 		= $dir . 'tests/phpunit/EntityLookupTest.php';
 
-
 // TODO: this is not nice, figure out a better design
 $wgExtensionFunctions[] = function() {
 	global $wgDataTypes;
@@ -229,6 +231,7 @@ $wgExtensionFunctions[] = function() {
 	$wgDataTypes['wikibase-item'] = array(
 		'datavalue' => 'wikibase-entityid',
 		'parser' => $libRegistry->getEntityIdParser(),
+		//'formatter' => evilGetEntityidFormatter(), // TODO
 	);
 
 	\Wikibase\TemplateRegistry::singleton()->addTemplates( include( __DIR__ . "/resources/templates.php" ) );
