@@ -314,7 +314,7 @@ to find out where it went.',
 
 	// datatype descriptions
 	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Link to other items at the project. During entry the "Item" namespace on Wikidata will be searced for matching entries. It consists of a single text entry field.
+	'wikibase-listdatatypes-wikibase-item-body' => 'Link to other items at the project. During entry the "Item" namespace on Wikidata will be searched for matching entries. It consists of a single text entry field.
 * scheme – implicit part of the Iri-string
 * hierarchicalpart – implicit part of the Iri-string
 * query – implicit part of the Iri-string
