@@ -1,10 +1,16 @@
 <?php
 
 namespace Wikibase;
+
+use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
+use ValueFormatters\ValueFormatter;
+use Wikibase\Client\WikibaseClient;
 
 /**
- * {{#property}} parser function
+ * Handler of the {{#property}} parser function.
+ *
+ * TODO: cleanup injection of dependencies
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +37,7 @@ use DataValues\DataValue;
  */
 class PropertyParserFunction {
 
-	/* @var Language */
+	/* @var \Language */
 	protected $language;
 
 	/* @var EntityLookup */
@@ -43,8 +49,8 @@ class PropertyParserFunction {
 	/* @var ParserErrorMessageFormatter */
 	protected $errorFormatter;
 
-	/* @var WikibaseFormatterFactory */
-	protected $formatterFactory;
+	/* @var DataTypeFactory */
+	protected $dataTypeFactory;
 
 	/**
 	 * @since 0.4
@@ -53,39 +59,70 @@ class PropertyParserFunction {
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyLookup $propertyLookup
 	 * @param ParserErrorMessageFormatter $errorFormatter
-	 * @param string[] $dataTypeFormatters
+	 * @param string[] $dataTypeFactory
 	 */
 	public function __construct( \Language $language, EntityLookup $entityLookup, PropertyLookup $propertyLookup,
-		ParserErrorMessageFormatter $errorFormatter, WikibaseFormatterFactory $formatterFactory ) {
+		ParserErrorMessageFormatter $errorFormatter, DataTypeFactory $dataTypeFactory ) {
 		$this->language = $language;
 		$this->entityLookup = $entityLookup;
 		$this->propertyLookup = $propertyLookup;
 		$this->errorFormatter = $errorFormatter;
-		$this->formatterFactory = $formatterFactory;
+		$this->dataTypeFactory = $dataTypeFactory;
 	}
 
 	/**
 	 * Format a data value
+	 *
+	 * TODO: this method should go into its own class
 	 *
 	 * @since 0.4
 	 *
 	 * @param DataValue $dataValue
 	 *
 	 * @return string
+	 * @throws \RuntimeException
 	 */
-	public function formatDataValue( DataValue $dataValue ) {
-		$dataType = $dataValue->getType();
+	private function formatDataValue( DataValue $dataValue ) {
+		$dataType = $this->dataTypeFactory->getType( $dataValue->getType() );
 
-		$options = array( 'wikibase-entityid' => array(
-			'entityLookup' => $this->entityLookup,
-			'labelFallback' => 'emptyString'
-		) );
+		if ( $dataType === null ) {
+			throw new \RuntimeException( "Value of unsupported datatype '$dataType' cannot be formatted" );
+		}
 
-		$valueFormatter = $this->formatterFactory->newValueFormatterForDataType( $dataType, $options );
-		$formattedValue = $valueFormatter->format( $dataValue );
+		// TODO: update this code to obtain the string formatter as soon as corresponding changes
+		// in the DataTypes library have been made.
+		$valueFormatters = $dataType->getFormatters();
+		$valueFormatter = reset( $valueFormatters );
+
+		if ( $valueFormatter === false ) {
+			$value = $dataValue->getValue();
+
+			if ( is_string( $value ) ) {
+				wfProfileOut( __METHOD__ );
+				return $value;
+			}
+
+			wfProfileOut( __METHOD__ );
+
+			// TODO: implement: error message or other error handling
+			return 'ERROR: TODO';
+		}
+
+		/**
+		 * @var ValueFormatter $valueFormatter
+		 */
+		$formattingResult = $valueFormatter->format( $dataValue );
+
+		if ( $formattingResult->isValid() ) {
+			wfProfileOut( __METHOD__ );
+			return $formattingResult->getValue();
+		}
+
 
 		wfProfileOut( __METHOD__ );
-		return $formattedValue;
+
+		// TODO: implement: error message or other error handling
+		return 'ERROR: TODO';
 	}
 
 	/**
@@ -95,10 +132,11 @@ class PropertyParserFunction {
 	 * @since 0.4
 	 *
 	 * @param SnakList $snakList
+	 * @param string $propertyLabel
 	 *
 	 * @return string - wikitext format
 	 */
-	public function formatSnakList( SnakList $snakList, $propertyLabel ) {
+	private function formatSnakList( SnakList $snakList, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
 		$values = array();
 
@@ -139,8 +177,6 @@ class PropertyParserFunction {
 	 */
     public function evaluate( EntityId $entityId, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
-
-		$snakList = new SnakList();
 
 		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
 
@@ -190,10 +226,9 @@ class PropertyParserFunction {
 		// returns lookup with full label and id lookup (experimental) or just id lookup
 		$propertyLookup = ClientStoreFactory::getStore()->getPropertyLookup();
 
-		$formatterFactory = new WikibaseFormatterFactory( Settings::get( 'dataTypeFormatters' ),
-			$GLOBALS['wgValueFormatters'], $targetLanguage->getCode() );
+		$dataTypeFactory = WikibaseClient::newInstance()->getDataTypeFactory();
 
-		$instance = new self( $targetLanguage, $entityLookup, $propertyLookup, $errorFormatter, $formatterFactory );
+		$instance = new self( $targetLanguage, $entityLookup, $propertyLookup, $errorFormatter, $dataTypeFactory );
 
 		$result = array(
 			$instance->evaluate( $entityId, $propertyLabel ),

@@ -39,6 +39,9 @@ final class LibHooks {
 			'entity/EntityDiff',
 			'entity/EntityFactory',
 
+			'formatters/EntityIdFormatter',
+			'formatters/EntityIdLabelFormatter',
+
 			'hasharray/HashArrayWithoutDuplicates',
 			'hasharray/HashArrayWithDuplicates',
 

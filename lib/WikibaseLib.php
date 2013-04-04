@@ -146,10 +146,8 @@ $wgAutoloadClasses['Wikibase\EntityFactory'] 		= $dir . 'includes/EntityFactory.
 $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/ItemDiff.php';
 
 // includes/formatters
-$wgAutoloadClasses['Wikibase\EntityIdFormatter']	= $dir . 'includes/formatters/EntityIdFormatter.php';
-$wgAutoloadClasses['Wikibase\SnakFormatter']		= $dir . 'includes/formatters/SnakFormatter.php';
-$wgAutoloadClasses['Wikibase\StringFormatter']		= $dir . 'includes/formatters/StringFormatter.php';
-$wgAutoloadClasses['Wikibase\WikibaseFormatterFactory'] = $dir . 'includes/formatters/WikibaseFormatterFactory.php';
+$wgAutoloadClasses['Wikibase\Lib\EntityIdFormatter']	= $dir . 'includes/formatters/EntityIdFormatter.php';
+$wgAutoloadClasses['Wikibase\Lib\EntityIdLabelFormatter']	= $dir . 'includes/formatters/EntityIdLabelFormatter.php';
 
 // includes/modules
 $wgAutoloadClasses['Wikibase\RepoAccessModule'] 		= $dir . 'includes/modules/RepoAccessModule.php';
@@ -228,6 +226,7 @@ $wgExtensionFunctions[] = function() {
 	$wgDataTypes['wikibase-item'] = array(
 		'datavalue' => 'wikibase-entityid',
 		'parser' => $libRegistry->getEntityIdParser(),
+		'formatter' => $libRegistry->getEntityIdParser(),
 	);
 
 	\Wikibase\TemplateRegistry::singleton()->addTemplates( include( __DIR__ . "/resources/templates.php" ) );
