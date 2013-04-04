@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+
+use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 
 /**
@@ -64,7 +66,7 @@ class EntityIdFormatter extends StringFormatter {
 	 * @return string
 	 */
 	public function format( $value ) {
-		if ( ! $value instanceof EntityId ) {
+		if ( !( $value instanceof EntityId ) ) {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId.' );
 		}
 
