@@ -4,9 +4,9 @@ namespace Wikibase\Query\SQLStore\DVHandler;
 
 use DataValues\DataValue;
 use InvalidArgumentException;
-use Wikibase\EntityId;
 use Wikibase\Database\FieldDefinition;
 use Wikibase\Database\TableDefinition;
+use Wikibase\EntityId;
 use Wikibase\Query\SQLStore\DataValueHandler;
 
 /**

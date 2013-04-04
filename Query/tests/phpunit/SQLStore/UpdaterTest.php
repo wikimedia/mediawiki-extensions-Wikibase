@@ -4,10 +4,10 @@ namespace Wikibase\Test\Query\SQLStore;
 
 use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
 use Wikibase\Database\MediaWikiQueryInterface;
-use Wikibase\Repo\LazyDBConnectionProvider;
 use Wikibase\Query\SQLStore\Schema;
 use Wikibase\Query\SQLStore\StoreConfig;
 use Wikibase\Query\SQLStore\Updater;
+use Wikibase\Repo\LazyDBConnectionProvider;
 use Wikibase\Test\Query\QueryStoreUpdaterTest;
 
 /**

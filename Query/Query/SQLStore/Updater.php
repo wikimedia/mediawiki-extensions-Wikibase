@@ -3,10 +3,10 @@
 namespace Wikibase\Query\SQLStore;
 
 use Wikibase\Claim;
+use Wikibase\Database\QueryInterface;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\PropertyValueSnak;
-use Wikibase\Database\QueryInterface;
 use Wikibase\Query\QueryStoreUpdater;
 use Wikibase\Snak;
 use Wikibase\SnakRole;

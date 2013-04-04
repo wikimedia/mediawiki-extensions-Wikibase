@@ -2,11 +2,11 @@
 
 namespace Wikibase\Query\SQLStore;
 
+use OutOfBoundsException;
+use OutOfRangeException;
 use Wikibase\Database\FieldDefinition;
 use Wikibase\Database\TableDefinition;
 use Wikibase\SnakRole;
-use OutOfRangeException;
-use OutOfBoundsException;
 
 /**
  * Contains the tables and table interactors for a given SQLStore configuration.

@@ -4,9 +4,9 @@ namespace Wikibase\Test\Query\SQLStore;
 
 use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
 use Wikibase\Database\MediaWikiQueryInterface;
-use Wikibase\Repo\LazyDBConnectionProvider;
 use Wikibase\Query\SQLStore\Engine;
 use Wikibase\Query\SQLStore\StoreConfig;
+use Wikibase\Repo\LazyDBConnectionProvider;
 use Wikibase\Test\Query\QueryEngineTest;
 
 /**

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Query\SQLStore;
 
+use OutOfBoundsException;
 use Wikibase\Database\FieldDefinition;
 use Wikibase\Database\FieldDefinition as FD;
 use Wikibase\Database\TableDefinition;
@@ -13,7 +14,6 @@ use Wikibase\Query\SQLStore\DVHandler\MonolingualTextHandler;
 use Wikibase\Query\SQLStore\DVHandler\NumberHandler;
 use Wikibase\Query\SQLStore\DVHandler\StringHandler;
 use Wikibase\Query\SQLStore\DataValueTable;
-use OutOfBoundsException;
 
 /**
  * A collection of DataValueHandler objects to be used by the store.

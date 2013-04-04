@@ -5,11 +5,11 @@ namespace Wikibase\Test\Query\SQLStore;
 use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
 use Wikibase\Database\MediaWikiQueryInterface;
 use Wikibase\Database\TableBuilder;
-use Wikibase\Repo\LazyDBConnectionProvider;
 use Wikibase\Query\SQLStore\DataValueHandlers;
 use Wikibase\Query\SQLStore\Schema;
 use Wikibase\Query\SQLStore\Setup;
 use Wikibase\Query\SQLStore\StoreConfig;
+use Wikibase\Repo\LazyDBConnectionProvider;
 
 /**
  * Unit tests for the Wikibase\Query\SQLStore\Setup class.

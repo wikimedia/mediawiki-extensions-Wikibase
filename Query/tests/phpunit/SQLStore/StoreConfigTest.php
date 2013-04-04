@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test\Query\SQLStore;
 
-use Wikibase\Query\SQLStore\DVHandler\NumberHandler;
-use Wikibase\Query\SQLStore\DVHandler\StringHandler;
 use Wikibase\Query\SQLStore\DataValueHandler;
 use Wikibase\Query\SQLStore\DataValueHandlers;
 use Wikibase\Query\SQLStore\StoreConfig;
