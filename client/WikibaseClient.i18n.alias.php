@@ -29,6 +29,11 @@ $specialPageAliases['ko'] = array(
 	'UnconnectedPages' => array( '연결안된문서' ),
 );
 
+/** Macedonian (македонски) */
+$specialPageAliases['mk'] = array(
+	'UnconnectedPages' => array( 'НесврзаниСтраници' ),
+);
+
 /** Dutch (Nederlands) */
 $specialPageAliases['nl'] = array(
 	'UnconnectedPages' => array( 'OngekoppeldePaginas', 'OngekoppeldePagina\'s' ),

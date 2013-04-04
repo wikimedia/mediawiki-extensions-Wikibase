@@ -67,7 +67,10 @@ $messages['en'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 interlanguagelinks on the page)',
 );
 
-/** Message documentation (Message documentation)
+/** Message documentation (This is the name of the message documentation language code (qqq). Follow the rules of your languages and use small first letter if it doesn't capitalize language names always.
+
+It might be easier to translate it as "translation guidelines" or "translation help".
+{{Identical|Message documentation}})
  * @author Jeblad
  * @author Katie Filbert
  * @author Lloffiwr
@@ -1289,6 +1292,8 @@ $messages['id'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Tampilkan suntingan Wikidata di perubahan terbaru',
 	'wikibase-watchlist-show-changes-pref' => 'Tampilkan suntiangan Wikidata pada daftar pantauan Anda',
 	'wikibase-error-invalid-entity-id' => 'ID yang dimasukkan tidak dikenal sistem. Gunakan entitas ID yang valid.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Hanya halaman dengan interwiki',
+	'wikibase-unconnectedpages-format-row' => '($1 interwiki pada halaman)',
 );
 
 /** Iloko (Ilokano)
@@ -2573,20 +2578,37 @@ $messages['zh-hans'] = array(
 /** Traditional Chinese (中文（繁體）‎)
  * @author Bencmq
  * @author Stevenliuyi
+ * @author Tntchn
  */
 $messages['zh-hant'] = array(
 	'wikibase-client-desc' => 'Wikibase擴展客戶端',
+	'specialpages-group-wikibaseclient' => '維基數據客戶端',
 	'wikibase-after-page-move' => '您還可以[$1 更新]關聯的維基數據項目，使其連結至移動後的頁面。',
 	'wikibase-comment-remove' => '關聯的維基數據項目已刪除。語言連結已移除。',
 	'wikibase-comment-linked' => '一個維基數據項目已連結至此頁面。',
 	'wikibase-comment-unlink' => '本頁已解除維基數據項目的連結。語言連結已移除。',
 	'wikibase-comment-restore' => '關聯的維基數據項目已還原。語言連結已恢復。',
-	'wikibase-comment-update' => '語言連結已更新。',
+	'wikibase-comment-update' => '維基數據項目已變更。',
 	'wikibase-comment-sitelink-add' => '添加語言連結：$1',
 	'wikibase-comment-sitelink-change' => '語言連結從$1更改為$2',
 	'wikibase-comment-sitelink-remove' => '刪除語言連結：$1',
+	'wikibase-comment-multi' => '$1次{{PLURAL:$1|更改|更改}}',
 	'wikibase-editlinks' => '編輯連結',
-	'wikibase-editlinkstitle' => '編輯跨語言鏈接',
+	'wikibase-editlinkstitle' => '編輯跨語言連結',
+	'wikibase-linkitem-addlinks' => '添加連結',
+	'wikibase-linkitem-title' => '與頁面連結',
+	'wikibase-linkitem-linkpage' => '與頁面連結',
+	'wikibase-linkitem-input-site' => '語言：',
+	'wikibase-linkitem-input-page' => '頁面：',
+	'wikibase-linkitem-invalidsite' => '所選的網站未知或無效。',
+	'wikibase-linkitem-confirmitem-button' => '確認',
+	'wikibase-linkitem-not-loggedin-title' => '您必須登入。',
+	'wikibase-property-notfound' => '$1屬性未找到。',
 	'wikibase-rc-hide-wikidata' => '$1維基數據',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中顯示維基數據的編輯',
+	'wikibase-unconnectedpages-page' => '開始頁面：',
+	'wikibase-unconnectedpages-submit' => '前往',
+	'wikibase-unconnectedpages-invalid-language' => '"$1"不是有效的語言代碼。',
+	'wikibase-unconnectedpages-iwdata-label' => '僅有跨語言連結的頁面',
+	'wikibase-unconnectedpages-format-row' => '（該頁面有$1個跨語言連結）',
 );

@@ -381,6 +381,12 @@ $messages['cy'] = array(
 	'wikibase-error-remove-connection' => "Cafwyd nam ar y cysylltiad wrth geisio diddymu, ac oherwydd hyn ni allwyd cadw eich newidiadau. Gwirwch eich cysylltiad â'r Rhyngrwyd.",
 	'wikibase-error-save-timeout' => 'Mae nam technegol yn bodoli, ac oherwydd hyn ni allwyd cadw eich newidiadau.',
 	'wikibase-error-remove-timeout' => 'Mae nam technegol yn bodoli, ac oherwydd hyn ni allwyd cwbwlhau eich "diddymiad".',
+	'wikibase-sitelinks-sitename-columnheading' => 'Iaith',
+	'wikibase-sitelinks-siteid-columnheading' => 'Cod',
+	'wikibase-sitelinks-link-columnheading' => 'Erthygl a gysylltwyd',
+	'wikibase-tooltip-error-details' => 'Manylion',
+	'datatypes-type-wikibase-item' => 'Eitem',
+	'datatypes-type-commonsMedia' => 'Ffeil cyfrwng ar y Comin',
 );
 
 /** Danish (dansk)
@@ -1970,12 +1976,17 @@ $messages['zh-hans'] = array(
 
 /** Traditional Chinese (中文（繁體）‎)
  * @author Justincheng12345
+ * @author Tntchn
  */
 $messages['zh-hant'] = array(
 	'wikibase-lib-desc' => '儲存維基基礎及其客戶端的共同功能',
 	'wikibase-entity-item' => '項目',
 	'wikibase-entity-property' => '屬性',
 	'wikibase-entity-query' => '查詢',
+	'wikibase-diffview-reference' => '參考',
+	'wikibase-diffview-rank' => '分級',
+	'wikibase-diffview-qualifier' => '修飾成分',
+	'wikibase-error-unexpected' => '發生意外錯誤。',
 	'wikibase-error-save-generic' => '儲存時發生錯誤，因此您所作的更變可能未完成。',
 	'wikibase-error-remove-generic' => '刪除時發生錯誤，因此您所作的更變可能未完成。',
 	'wikibase-error-save-connection' => '儲存時發生錯誤，因此您所作的更變可能未完成。請檢查您的網絡連接。',
@@ -1991,6 +2002,7 @@ $messages['zh-hant'] = array(
 	'wikibase-error-ui-link-exists' => '因為另一項目已連接，您不能再連接到此頁。',
 	'wikibase-error-ui-session-failure' => '您的資料已過期。請重新登入。',
 	'wikibase-error-ui-edit-conflict' => '發生編輯衝突。請重新整理再儲存。',
+	'wikibase-replicationnote' => '所做的更改可能需要幾分鐘的時間才能在所有的維基上看到，敬請留意。',
 	'wikibase-sitelinks' => '鏈接到此項目的頁面清單',
 	'wikibase-sitelinks-sitename-columnheading' => '語言',
 	'wikibase-sitelinks-siteid-columnheading' => '代碼',
