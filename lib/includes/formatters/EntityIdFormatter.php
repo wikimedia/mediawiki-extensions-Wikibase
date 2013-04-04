@@ -1,13 +1,14 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib;
 
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatterBase;
+use ValueFormatters\Result;
+use Wikibase\EntityId;
 
 /**
- * Formatter for Wikibase Item values
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -29,35 +30,37 @@ use ValueFormatters\FormatterOptions;
  * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
- * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityIdFormatter extends StringFormatter {
+class EntityIdFormatter extends ValueFormatterBase {
 
 	/**
-	 * @var EntityLookup
+	 * Option name for the required prefixmap option.
+	 * The value of this option should be an array of
+	 * prefixes (string) pointing to the entity type
+	 * (string) they map to.
+	 *
+	 * @since 0.4
 	 */
-	protected $entityLookup;
-
-	/**
-	 * @var string
-	 */
-	protected $labelFallback;
+	const OPT_PREFIX_MAP = 'prefixmap';
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param FormatterOptions $options
-	 *	 expects 'lang', 'entityLookup', and 'labelFallback' options
-	 *   labelFallback can be prefixedId or emptyString (prefixedId is default)
 	 *
-	 * @throws \MWException
+	 * @throws \InvalidArgumentException
 	 */
 	public function __construct( FormatterOptions $options ) {
 		parent::__construct( $options );
 
-		$this->entityLookup = $options->getOption( 'entityLookup' );
-		$this->labelFallback = $options->hasOption( 'labelFallback' ) ?
-			$options->getOption( 'labelFallback' ) : 'prefixedId';
+		// TODO: figure out if we want to require this option or not
+		//$this->requireOption( self::OPT_PREFIX_MAP );
+		$this->defaultOption( self::OPT_PREFIX_MAP, array() );
+
+		if ( !is_array( $this->getOption( self::OPT_PREFIX_MAP ) ) ) {
+			throw new InvalidArgumentException( 'The prefix map option needs to be set to an array' );
+		}
 	}
 
 	/**
@@ -69,45 +72,24 @@ class EntityIdFormatter extends StringFormatter {
 	 *
 	 * @throws \InvalidArgumentException
 	 *
-	 * @return string
+	 * @return Result
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof EntityId ) ) {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId.' );
 		}
 
-		$label = $this->lookupItemLabel( $value );
+		$prefixMap = $this->getOption( self::OPT_PREFIX_MAP );
 
-		if ( is_string( $label ) ) {
-			return $this->formatString( $label );
+		if ( array_key_exists( $value->getEntityType(), $prefixMap ) ) {
+			$entityTypePrefix = $prefixMap[$value->getEntityType()];
+
+			return $this->newSuccess( $entityTypePrefix . $value->getNumericId() );
 		}
 
-		// did not find a label, using fallback
-		if ( $this->labelFallback === 'emptyString' ) {
-			return '';
-		}
-
-		return $value->getPrefixedId();
-	}
-
-	/**
-	 * Lookup a label for an entity
-	 *
-	 * @since 0.4
-	 *
-	 * @param EntityId
-	 *
-	 * @return string|boolean
-	 */
-	protected function lookupItemLabel( EntityId $entityId ) {
-		$entity = $this->entityLookup->getEntity( $entityId );
-
-		$langCode = $this->getOption( 'lang' );
-
-		/**
-		 * @var Entity $entity
-		 */
-		return $entity->getLabel( $langCode );
+		// TODO: implement: return formatting error
+		return $this->newSuccess( 'TODO: ERROR: entity type not found' );
 	}
 
 }
+

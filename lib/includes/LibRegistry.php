@@ -1,11 +1,21 @@
 <?php
 
 namespace Wikibase;
+
 use DataTypes\DataTypeFactory;
+use ValueFormatters\FormatterOptions;
+use ValueParsers\ParserOptions;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
 
 /**
  * Application registry for Wikibase Lib.
+ *
+ * TODO: migrate out this class; code should be in client or repo and
+ * use their respective settings. Same rationale as for moving settings out of lib.
+ *
+ * @deprecated
  *
  * NOTE:
  * This application registry is a workaround for design problems in existing code.
@@ -34,7 +44,7 @@ use Wikibase\Lib\EntityIdParser;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LibRegistry {
+final class LibRegistry {
 
 	/**
 	 * @since 0.4
@@ -44,7 +54,6 @@ class LibRegistry {
 	protected $settings;
 
 	protected $dataTypeFactory = null;
-	protected $entityIdParser = null;
 
 	/**
 	 * @since 0.4
@@ -81,16 +90,23 @@ class LibRegistry {
 	 * @return EntityIdParser
 	 */
 	public function getEntityIdParser() {
-		if ( $this->entityIdParser === null ) {
-			$options = new \ValueParsers\ParserOptions( array(
-				\Wikibase\Lib\EntityIdParser::OPT_PREFIX_MAP => $this->settings->getSetting( 'entityPrefixes' )
-			) );
+		$options = new ParserOptions( array(
+			EntityIdParser::OPT_PREFIX_MAP => $this->settings->getSetting( 'entityPrefixes' )
+		) );
 
-			$this->entityIdParser = new \Wikibase\Lib\EntityIdParser( $options );
-		}
+		return new EntityIdParser( $options );
+	}
 
-		return $this->entityIdParser;
-
+	/**
+	 * Returns a new instance constructed from global settings.
+	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
+	 *
+	 * @since 0.4
+	 *
+	 * @return LibRegistry
+	 */
+	public static function newInstance() {
+		return new self( Settings::singleton() );
 	}
 
 	// Do not add new stuff here without reading the notice at the top first.
