@@ -42,7 +42,6 @@ class WikibaseFormatterFactoryTest extends \MediaWikiTestCase {
 
 	protected static $valueFormatters = array(
 		'wikibase-entityid' => 'Wikibase\EntityIdFormatter',
-		'string' => 'Wikibase\StringFormatter'
 	);
 
 	public static function constructorProvider() {
@@ -70,7 +69,6 @@ class WikibaseFormatterFactoryTest extends \MediaWikiTestCase {
 		);
 
 		return array(
-			array( 'en', 'string', array(), 'Wikibase\StringFormatter', true ),
 			array( 'es', 'wikibase-entityid', $entityOptions, 'Wikibase\EntityIdFormatter', true )
 		);
 	}
