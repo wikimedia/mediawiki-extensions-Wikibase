@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\NamespaceUtils;
 use \Wikibase\ItemContent;
 use WikiPage, Title, WikitextContent;
