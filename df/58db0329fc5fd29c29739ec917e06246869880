@@ -1,0 +1,9 @@
+Verified+1: jenkins-bot
+Code-Review+2: Daniel Werner <daniel.werner@wikimedia.de>
+Verified+2: Daniel Werner <daniel.werner@wikimedia.de>
+Code-Review+1: John Erling Blad <jeblad@gmail.com>
+Submitted-by: Daniel Werner <daniel.werner@wikimedia.de>
+Submitted-at: Fri, 05 Apr 2013 12:27:58 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/57453
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
