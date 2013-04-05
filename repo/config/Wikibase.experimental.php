@@ -54,18 +54,6 @@ $wgAutoloadClasses['SpecialEntityData'] 				= $dir . 'includes/specials/SpecialE
 $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
 
-
-$classes = array(
-
-);
-
-foreach ( $classes as $class ) {
-	// This enforces partial PSR-0 compliance
-	$wgAutoloadClasses[$class] = $dir . 'includes' . str_replace( '\\', '/', substr( $class, 13 ) ) . '.php';
-}
-
-unset( $classes );
-
 unset( $dir );
 
 $wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Api\RemoveQualifiers';
