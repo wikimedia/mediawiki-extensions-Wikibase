@@ -143,6 +143,19 @@ return call_user_func( function() {
 				'jquery.inputAutoExpand',
 			),
 		),
+
+		'jquery.valueview.experts.commonsmediatype' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.BifidExpert.js', // todo: define separate modules
+				'jquery.valueview/valueview.experts/experts.StaticDom.js',
+				'jquery.valueview/valueview.experts/experts.SuggestedStringValue.js',
+				'jquery.valueview/valueview.experts/experts.CommonsMediaType.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts.stringvalue',
+				'jquery.ui.suggester',
+			),
+		),
 	);
 
 } );

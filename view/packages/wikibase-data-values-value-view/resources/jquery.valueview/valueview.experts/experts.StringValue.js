@@ -97,11 +97,8 @@
 				this._newValue = false;
 
 				// Display value and resize textarea to fit for the value:
-				this.$input.val( textValue ).inputAutoExpand( {
-					expandWidth: false, // TODO: make this optional on valueview level
-					expandHeight:true,
-					suppressNewLine: true // TODO: make this optional/leave it to parser options
-				} );
+				this.$input.val( textValue );
+				this._resizeInput();
 			}
 
 			// We always use the textare for displaying the value, only in edit mode we format the
@@ -125,6 +122,18 @@
 					placeholder: '' // don't want to see any placeholder text in static mode
 				} ).removeProp( 'disabled' );
 			}
+		},
+
+		/**
+		 * Will resize the input box to fit its current content.
+		 * @since 0.1
+		 */
+		_resizeInput: function() {
+			this.$input.inputAutoExpand( {
+				expandWidth: false, // TODO: make this optional on valueview level
+				expandHeight:true,
+				suppressNewLine: true // TODO: make this optional/leave it to parser options
+			} );
 		},
 
 		/**

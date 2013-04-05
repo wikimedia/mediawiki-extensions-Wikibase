@@ -20,6 +20,11 @@
 		vv.experts.StringValue
 	);
 
+	expertProvider.registerExpert(
+		dt.getDataType( 'commonsMedia' ),
+		vv.experts.CommonsMediaType
+	);
+
 	/**
 	 * Object representing the MeidaWiki "ValueView" extension.
 	 *
