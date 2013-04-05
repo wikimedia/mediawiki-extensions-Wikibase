@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dr5bMCr8",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-05T02:18:19Z",
+      "side": 1,
+      "message": "In what way do you find the class name confusing? I can\u0027t think of anything more appropriate - do you have any suggestion?\n\nThe phasing out of LibRegistry does not affect this change much, and an introduction of a similar thing in repo does even less :)",
+      "parentUuid": "Drd4FucU",
+      "revId": "1668d483d5d84184a12868b817f69686b37e08dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrX73xdI",
         "filename": "client/includes/parserhooks/PropertyParserFunction.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-04-04T15:20:57Z",
       "side": 1,
       "message": "no escaping!",
+      "revId": "1668d483d5d84184a12868b817f69686b37e08dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dr7bRBlY",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-05T02:18:19Z",
+      "side": 1,
+      "message": "why would we put escaping here? At this point we do not even know what the text is used for, so we don\u0027t know how to escape it even if this was the correct place to do it, which I think it is not",
+      "parentUuid": "DrX73xdI",
       "revId": "1668d483d5d84184a12868b817f69686b37e08dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
