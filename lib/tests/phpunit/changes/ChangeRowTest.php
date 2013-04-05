@@ -85,7 +85,7 @@ class ChangeRowTest extends \ORMRowTest {
 	public function setUp() {
 		if ( defined( 'WBC_VERSION' ) ) {
 			//TODO: remove this once ChangeRow no longer needs the ChangesTable as a factory.
-			$this->markTestSkipped( "Can't test changes table on client" );
+			$this->markTestSkipped( "Skipping because cannot test changes table on client" );
 		}
 
 		parent::setUp();
@@ -178,17 +178,6 @@ class ChangeRowTest extends \ORMRowTest {
 			'p100',
 			$change->getObjectId()
 		);
-	}
-
-	/**
-	 * @dataProvider constructorTestProvider
-	 */
-	public function testSaveAndRemove( array $data, $loadDefaults ) {
-		if ( !defined( 'WBC_VERSION' ) ) {
-			parent::testSaveAndRemove( $data, $loadDefaults );
-		} else {
-			$this->markTestSkipped( "Skipping because you're running it on a WikibaseClient instance." );
-		}
 	}
 
 	public function provideSaveAndLoad() {
