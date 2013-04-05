@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+
 use \Wikibase\EntityContent;
 use \Wikibase\EditEntity;
 use \Wikibase\ItemContent;
