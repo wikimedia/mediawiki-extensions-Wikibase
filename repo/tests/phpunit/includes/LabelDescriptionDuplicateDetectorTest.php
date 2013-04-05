@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Repo\Test;
+
 use Wikibase\Term;
 use Wikibase\EntityId;
 use Diff\Diff;
