@@ -36,9 +36,33 @@ $messages['en'] = array(
 	'valueview-desc' => 'UI components for displaying and editing data values',
 );
 
-/** Message documentation (Message documentation)
+/** Message documentation (This is the name of the message documentation language code (qqq). Follow the rules of your languages and use small first letter if it doesn't capitalize language names always.
+
+It might be easier to translate it as "translation guidelines" or "translation help".
+{{Identical|Message documentation}})
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 $messages['qqq'] = array(
 	'valueview-desc' => '{{desc|name=ValueView|url=http://www.mediawiki.org/wiki/Extension:ValueView}}',
+);
+
+/** German (Deutsch)
+ * @author Metalhead64
+ */
+$messages['de'] = array(
+	'valueview-desc' => 'Ergänzt Komponenten zur Benutzeroberfläche zum Anzeigen und Bearbeiten von Datenwerten',
+);
+
+/** French (français)
+ * @author Urhixidur
+ */
+$messages['fr'] = array(
+	'valueview-desc' => 'Composants graphiques pour l’affichage et la modification des données',
+);
+
+/** Japanese (日本語)
+ * @author Shirayuki
+ */
+$messages['ja'] = array(
+	'valueview-desc' => 'データ値を表示/編集するユーザーインターフェイスコンポーネント',
 );
