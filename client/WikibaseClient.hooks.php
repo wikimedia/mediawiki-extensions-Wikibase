@@ -425,15 +425,24 @@ final class ClientHooks {
 		if ( $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			$out->addModules( 'wikibase.client.init' );
 
-			if ( !$out->getLanguageLinks() && \Action::getActionName( $skin->getContext() ) === 'view' && $title->exists() ) {
-				// Module with the sole purpose to hide #p-lang
-				// Needed as we can't do that in the regular CSS nor in JavaScript
-				// (as that only runs after the element initially appeared).
-				$out->addModules( 'wikibase.client.nolanglinks' );
+			$prefixedId = $out->getProperty( 'wikibase_item' );
+			if ( $prefixedId === null && \Action::getActionName( $skin->getContext() ) === 'view'
+				&& $title->exists() ) {
 
-				if ( Settings::get( 'enableSiteLinkWidget' ) === true && $user->isLoggedIn() === true ) {
-					// Add the JavaScript to link pages locally
-					$out->addModules( 'wbclient.linkItem' );
+				$noExternalLangLinks = $skin->getOutput()->getProperty( 'noexternallanglinks' );
+
+				// @todo: may want a data link somewhere, even if the links are suppressed
+				if ( $noExternalLangLinks === null || !in_array( '*', $noExternalLangLinks ) ) {
+
+					// Module with the sole purpose to hide #p-lang
+					// Needed as we can't do that in the regular CSS nor in JavaScript
+					// (as that only runs after the element initially appeared).
+					$out->addModules( 'wikibase.client.nolanglinks' );
+
+					if ( Settings::get( 'enableSiteLinkWidget' ) === true && $user->isLoggedIn() === true ) {
+						// Add the JavaScript to link pages locally
+						$out->addModules( 'wbclient.linkItem' );
+					}
 				}
 			}
 		}
