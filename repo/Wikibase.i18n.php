@@ -2428,10 +2428,10 @@ Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-setentity-language' => 'Sprog:',
 	'wikibase-setentity-invalid-langcode' => 'Sprog-id "$1" er ukendt. Brug venligst et sprog-id, der er kendt i systemet, såsom "da".',
 	'wikibase-setentity-invalid-id' => 'ID "$1" er ukendt for systemet. Brug et gyldigt ID.',
-	'special-dispatchstats' => 'Ændre afsendelsesstatistik',
-	'wikibase-dispatchstats-intro' => 'Denne side indeholder statistikker om ændringer af afsendelser til klienterne.',
+	'special-dispatchstats' => 'Statistik for udbredelse af ændringer',
+	'wikibase-dispatchstats-intro' => 'Denne side giver statistikker om udsendelse af ændringer klienterne.',
 	'wikibase-dispatchstats-no-stats' => 'I øjeblikket er der ingen tilgængelige statistikker.',
-	'wikibase-dispatchstats-changes' => 'Ændr logstatistik',
+	'wikibase-dispatchstats-changes' => 'Udbredelseslogstatistik',
 	'wikibase-dispatchstats-stats' => 'Position',
 	'wikibase-dispatchstats-change-id' => 'ID',
 	'wikibase-dispatchstats-change-timestamp' => 'Tidsstempel',
@@ -2441,7 +2441,7 @@ Din IP adresse vil blive registreret i redigeringshistorien for dette  $1 .',
 	'wikibase-dispatchstats-pos' => 'Placering',
 	'wikibase-dispatchstats-lag-num' => 'Udestående',
 	'wikibase-dispatchstats-lag-time' => 'Forsinkelse',
-	'wikibase-dispatchstats-touched' => 'Rørt',
+	'wikibase-dispatchstats-touched' => 'Besøgt',
 	'wikibase-dispatchstats-large-lag' => '(meget stor)',
 	'wikibase-dispatchstats-freshest' => 'Nyeste',
 	'wikibase-dispatchstats-stalest' => 'Ældste',
@@ -4309,6 +4309,9 @@ IP-osoitteesi kirjataan sivun $1 muokkaushistoriaan.',
 	'wikibase-dispatchstats-newest-change' => 'Uusin',
 	'wikibase-dispatchstats-site-id' => 'Sivusto',
 	'wikibase-dispatchstats-lag-num' => 'Odottaa',
+	'wikibase-dispatchstats-lag-time' => 'Viive',
+	'wikibase-dispatchstats-freshest' => 'Tuorein',
+	'wikibase-dispatchstats-stalest' => 'Vanhentunein',
 	'wikibase-dispatchstats-median' => 'Mediaani',
 	'wikibase-dispatchstats-average' => 'Keskiarvo',
 	'special-listdatatypes' => 'Luettelo saatavilla olevista tietotyypeistä',
@@ -7412,6 +7415,11 @@ $messages['ja'] = array(
 * query - IRI文字列の非明示部分
 * fragment - IRI文字列の非明示部分',
 	'wikibase-listdatatypes-geo-coordinate-head' => '緯度経度',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'ある星における地理座標を緯度経度の組として度分秒または少数形式で指定したリテラルデータ。既定では「地球」それから「WGS84」です。分解能と範囲が指定されます。
+* latitude – 座標文字列の1番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の N か S で指定されます
+* longitude – 座標文字列の2番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の E か W で指定されます
+* altitude (省略可) – ある参考面からの高さを表した明示 (?) の値。地球については「WGS84」準拠楕円体が使われる
+* globe (省略可) – 星を表す明示 (?) のデータ値。既定は「地球」それから「WGS84」',
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-monolingual-text-head' => '単一言語のテキスト',
 	'wikibase-listdatatypes-multilingual-text-head' => '多言語のテキスト',
@@ -8222,6 +8230,7 @@ $messages['lt'] = array(
 );
 
 /** Latvian (latviešu)
+ * @author Admresdeserv.
  * @author Papuass
  */
 $messages['lv'] = array(
@@ -8249,6 +8258,7 @@ $messages['lv'] = array(
 	'wikibase-partial-undo' => 'Labojumu daļēji var atcelt.',
 	'wikibase-undo-revision-error' => 'Atcelšana neizdevās',
 	'wikibase-undo-firstrev' => 'Nevar atcelt lapas izveidi',
+	'wikibase-undo-nocontent' => 'Nevar ielādēt $2 pārskatīšana no $1 lapas.',
 	'wikibase-propertyedittool-full' => 'Vērtību saraksts ir pilnīgs.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Viena vērtība vēl nav saglabāta|$1 vērtības vēl nav saglabātas}}',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|ieraksts|ieraksti}}',
@@ -9964,9 +9974,18 @@ $messages['pl'] = array(
 	'wikibase-listdatatypes-multilingual-text-head' => 'Tekst wielojęzyczny',
 	'wikibase-listdatatypes-time-head' => 'Czas',
 	'content-model-wikibase-item' => 'Element Wikibase',
+	'right-item-create' => 'Tworzenie elementów',
+	'right-item-remove' => 'Usuwanie elementów',
+	'right-property-create' => 'Tworzenie właściwości',
+	'right-property-remove' => 'Usuwanie właściwości',
 	'right-alias-add' => 'Dodaj aliasy',
 	'right-sitelink-remove' => 'Usuń łącza strony',
-	'right-sitelink-update' => 'Uaktualnij łącza strony',
+	'right-sitelink-update' => 'Aktualizacja łączy strony',
+	'right-linktitles-update' => 'Aktualizacja tytułów linków',
+	'right-label-remove' => 'Usuwanie etykiet',
+	'right-label-update' => 'Aktualizacja etykiet',
+	'right-description-remove' => 'Usuwanie opisów',
+	'right-description-update' => 'Aktualizacja opisów',
 );
 
 /** Piedmontese (Piemontèis)
@@ -12028,6 +12047,7 @@ $messages['uz'] = array(
 /** Vietnamese (Tiếng Việt)
  * @author Cheers!
  * @author Minh Nguyen
+ * @author Vinhtantran
  * @author පසිඳු කාවින්ද
  */
 $messages['vi'] = array(
@@ -12037,7 +12057,7 @@ $messages['vi'] = array(
 	'wikibase-save' => 'lưu',
 	'wikibase-cancel' => 'hủy bỏ',
 	'wikibase-add' => 'thêm',
-	'wikibase-addqualifier' => 'thêm hạn định',
+	'wikibase-addqualifier' => 'thêm từ hạn định',
 	'wikibase-addreference' => 'thêm nguồn',
 	'wikibase-save-inprogress' => 'Đang lưu…',
 	'wikibase-remove-inprogress' => 'Đang loại bỏ…',
@@ -12218,6 +12238,7 @@ $messages['vi'] = array(
 	'wikibase-item-summary-wbeditentity-create' => 'Đã tạo khoản mục mới',
 	'wikibase-item-summary-wbeditentity-update' => 'Đã cập nhật khoản mục',
 	'wikibase-item-summary-wbeditentity-override' => 'Đã ghi đè khoản mục',
+	'wikibase-item-summary-wbsetreference' => 'Đã đặt nguồn gốc',
 	'wikibase-item-summary-wbsetlabel-set' => 'Đã thay đổi nhãn [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Đã loại bỏ nhãn [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Đã thay đổi lời miêu tả [$2]',

@@ -134,6 +134,7 @@ $specialPageAliases['it'] = array(
 
 /** Japanese (日本語) */
 $specialPageAliases['ja'] = array(
+	'DispatchStats' => array( '発送統計' ),
 	'EntityData' => array( '実体データ', 'エンティティデータ' ),
 	'NewItem' => array( '新規項目' ),
 	'NewProperty' => array( '新規プロパティ', '新規特性' ),
