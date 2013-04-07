@@ -67,6 +67,19 @@ class SetLabel extends ModifyLangAttribute {
 	}
 
 	/**
+	 * @see \ApiBase::getParamDescription()
+	 */
+	public function getParamDescription() {
+		return array_merge(
+			parent::getParamDescription(),
+			array(
+				'language' => 'Language of the label',
+				'value' => 'The value of the label',
+			)
+		);
+	}
+
+	/**
 	 * @see \ApiBase::getDescription()
 	 */
 	public function getDescription() {

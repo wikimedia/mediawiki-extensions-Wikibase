@@ -129,7 +129,6 @@ class SetAliases extends ModifyEntity {
 		return array_merge(
 			parent::getAllowedParams(),
 			parent::getAllowedParamsForId(),
-			parent::getAllowedParamsForSiteLink(),
 			parent::getAllowedParamsForEntity(),
 			array(
 				'add' => array(
@@ -159,7 +158,6 @@ class SetAliases extends ModifyEntity {
 		return array_merge(
 			parent::getParamDescription(),
 			parent::getParamDescriptionForId(),
-			parent::getParamDescriptionForSiteLink(),
 			parent::getParamDescriptionForEntity(),
 			array(
 				'add' => 'List of aliases to add',
