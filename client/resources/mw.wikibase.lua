@@ -48,6 +48,7 @@ function wikibase.setupInterface()
     if entity == nil then return nil end
     local globalSiteId = php.getGlobalSiteId()
     if globalSiteId == nil then return nil end
+    if entity.sitelinks == nil then return nil end
     local sitelink = entity.sitelinks[globalSiteId]
     if sitelink == nil then return nil end
     return sitelink.title
