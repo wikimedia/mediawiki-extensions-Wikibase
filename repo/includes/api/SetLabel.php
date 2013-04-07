@@ -67,6 +67,19 @@ class SetLabel extends ModifyLangAttribute {
 	}
 
 	/**
+	 * @see \ApiBase::getParamDescription()
+	 */
+	public function getParamDescription() {
+		return array_merge(
+			parent::getParamDescription(),
+			array(
+				'language' => 'Language of the label',
+				'value' => 'The value of the label',
+			)
+		);
+	}
+
+	/**
 	 * @see \ApiBase::getDescription()
 	 */
 	public function getDescription() {
@@ -82,6 +95,8 @@ class SetLabel extends ModifyLangAttribute {
 		return array(
 			'api.php?action=wbsetlabel&id=Q42&language=en&value=Wikimedia&format=jsonfm'
 				=> 'Set the string "Wikimedia" for page with id "Q42" as a label in English language and report it as pretty printed json',
+			'api.php?action=wbsetlabel&site=enwiki&title=Earth&language=en&value=Earth'
+				=> 'Set the English language label to "Earth" for the item with site link enwiki => "Earth".',
 		);
 	}
 

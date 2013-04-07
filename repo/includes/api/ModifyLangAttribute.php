@@ -31,7 +31,7 @@ abstract class ModifyLangAttribute extends ModifyEntity {
 		parent::validateParameters( $params );
 
 		// Note that language should always exist as a prerequisite for this
-		// call to succeede. The param value will not always exist because
+		// call to succeed. The param value will not always exist because
 		// that signals a label to remove.
 	}
 
@@ -85,11 +85,7 @@ abstract class ModifyLangAttribute extends ModifyEntity {
 			parent::getParamDescription(),
 			parent::getParamDescriptionForId(),
 			parent::getParamDescriptionForSiteLink(),
-			parent::getParamDescriptionForEntity(),
-			array(
-				'language' => 'Language for the label and description',
-				'value' => 'The value to set for the language attribute',
-			)
+			parent::getParamDescriptionForEntity()
 		);
 	}
 
