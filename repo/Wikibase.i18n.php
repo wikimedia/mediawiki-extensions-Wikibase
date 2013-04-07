@@ -398,10 +398,7 @@ to find out where it went.',
 	'action-description-update' => 'update descriptions',
 );
 
-/** Message documentation (This is the name of the message documentation language code (qqq). Follow the rules of your languages and use small first letter if it doesn't capitalize language names always.
-
-It might be easier to translate it as "translation guidelines" or "translation help".
-{{Identical|Message documentation}})
+/** Message documentation (Message documentation)
  * @author AS
  * @author Amire80
  * @author Aude
@@ -1667,6 +1664,7 @@ $messages['bg'] = array(
 );
 
 /** Bengali (বাংলা)
+ * @author Aftab1995
  * @author Leemon2010
  */
 $messages['bn'] = array(
@@ -1678,27 +1676,47 @@ $messages['bn'] = array(
 	'wikibase-addreference' => 'উৎস যোগ',
 	'wikibase-save-inprogress' => 'সংরক্ষণ হচ্ছে ...',
 	'wikibase-remove-inprogress' => 'সরানো হচ্ছে ...',
+	'wikibase-label-empty' => 'এখনও কোন লেভেল সংজ্ঞায়িত করা হয়নি',
 	'wikibase-label-edit-placeholder' => 'লেবেল প্রবেশ করান',
+	'wikibase-description-empty' => 'এখনও কোন বিবরণ সংজ্ঞায়িত করা হয়নি',
 	'wikibase-deletedentity' => '$1 অপসারণ',
 	'wikibase-description-edit-placeholder' => 'বর্ণনা প্রবেশ করান',
 	'wikibase-sitelink-site-edit-placeholder' => 'সাইট',
 	'wikibase-sitelink-page-edit-placeholder' => 'নিবন্ধ',
+	'wikibase-alias-edit-placeholder' => 'উপনাম লিখুন',
+	'wikibase-description-input-help-message' => '$1 -তে একটি সংক্ষিপ্ত বিবরণ লিখুন।',
+	'wikibase-statements' => 'বিবৃতিসমূহ',
 	'wikibase-terms' => 'অন্যান্য ভাষাসমূহে',
+	'wikibase-sitelinks-add' => 'সাইট লিঙ্কে একটি লিঙ্ক যুক্ত করুন',
+	'wikibase-sitelinks-empty' => 'এখনও এই আইটেমটির কোন সাইট লিঙ্ক নেই।',
+	'wikibase-sitelinks-input-help-message' => 'এই আইটেম সম্পর্কিত একটি পৃষ্ঠার লিঙ্ক সেট করুন।',
 	'wikibase-remove' => 'অপসারণ',
+	'wikibase-empty-undo' => 'এখানে কিছুই নেই যা পূর্বাবস্থায় আনা যাবে।',
 	'wikibase-undo-revision-error' => 'পূর্বাবস্থায় ফেরা ব্যর্থ হয়েছে',
+	'wikibase-undo-firstrev' => 'পাতা সৃষ্টি পূর্বাবস্থায় ফেরাতে পারবেন না',
+	'wikibase-undo-nocontent' => '$1 পাতার $2 নং সংস্করণের বিষয়বস্তুর লোড করা যাচ্ছে না',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|একটি মান|$1 টি মান}} এখনও সংরক্ষিত হয়নি',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|টি ভুক্তি|টি ভুক্তি}}', # Fuzzy
 	'wikibase-disambiguation-title' => '"$1"-এর দ্ব্যর্থতা নিরসন',
 	'wikibase-aliases-label' => 'আরও যে নামে পরিচিত:',
-	'wikibase-shortcopyrightwarning' => '"$1"-এ ক্লিকের মাধ্যমে, আপনি [[$2|ব্যবহারের শর্তাবলীর]] সাথে একমত হচ্ছেন, এবং $3-এর অধীনে আপনার অবদান প্রকাশে সম্মত হচ্ছেন।',
+	'wikibase-datatype-label' => 'উপাত্তের ধরণ:',
+	'wikibase-snakview-choosesnaktype' => 'একটি মানের ধরণ নির্বাচন করুন।',
+	'wikibase-snakview-variations-somevalue-label' => 'অজানা মান',
+	'wikibase-snakview-snaktypeselector-somevalue' => 'অজানা মান',
+	'wikibase-shortcopyrightwarning' => '"$1" -এ ক্লিকের মাধ্যমে, আপনি [[$2|ব্যবহারের শর্তাবলীর]] সাথে একমত হচ্ছেন, এবং $3 -এর অধীনে আপনার অবদান প্রকাশে সম্মত হচ্ছেন।',
 	'wikibase-copyrighttooltip-acknowledge' => 'আমি আমার ভবিষ্যত সম্পাদনাগুলি জন্য এই শর্তাবলী গ্রহণ করলাম। পুনরায় এই বার্তাটি দেখাবেন না।',
 	'wikibase-entityselector-more' => 'আরও',
+	'wikibase-anonymouseditwarning' => 'সতর্কতা: আপনি লগ ইন করেননি।
+এই $1 পাতার সম্পাদনার ইতিহাসে আপনার আইপি ঠিকানা সংরক্ষিত হবে।',
 	'wikibase-restrictionedit-tooltip-message' => 'এই পৃষ্ঠাটি সুরক্ষিত আছে। সম্পাদনার অনুমতি নেই।',
 	'wikibase-blockeduser-tooltip-message' => 'আপনি সম্পাদনা করা থেকে অবরুদ্ধ।',
+	'wikibase-error-sitelink-already-used' => 'আইটেম [[$3]] -এ ইতিমধ্যেই সাইট লিংক [[$1:$2]] ব্যবহৃত হয়েছে।',
 	'special-itembytitle' => 'শিরোনাম অনুযায়ী আইটেম',
 	'wikibase-itembytitle-lookup-fieldset' => 'সাইট এবং শিরোনাম অনুযায়ী আইটেমের জন্য অনুসন্ধান',
 	'wikibase-itembytitle-lookup-site' => 'সাইট:',
 	'wikibase-itembytitle-lookup-page' => 'পাতা:',
 	'wikibase-itembytitle-submit' => 'অনুসন্ধান',
+	'wikibase-itembytitle-description' => 'সাইট একটি সনাক্তকারী কোড, যেমন "bnwiki"।',
 	'wikibase-itembytitle-create' => 'এছাড়াও আপনি [{{fullurl:Special:NewItem|site=$1&page=$2}} একটি আইটেম তৈরি] করতে পারেন।',
 	'special-itemdisambiguation' => 'আইটেম দ্ব্যর্থতা নিরসন',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'ভাষা এবং লেবেল অনুযায়ী আইটেমের জন্য অনুসন্ধান',
@@ -1707,6 +1725,7 @@ $messages['bn'] = array(
 	'wikibase-itemdisambiguation-submit' => 'অনুসন্ধান',
 	'wikibase-itemdisambiguation-nothing-found' => 'দুঃখিত, ঐ লেবেলের সাথে কোনো আইটেম পাওয়া যায়নি।',
 	'wikibase-itemdisambiguation-create' => 'আপনি [{{fullurl:Special:NewItem|label=$1}} আইটেমটি তৈরি করতে] পারেন।',
+	'wikibase-newproperty-datatype' => 'উপাত্তের ধরণ:',
 	'special-newitem' => 'নতুন একটি আইটেম তৈরি করুন',
 	'wikibase-newitem-fieldset' => 'নতুন আইটেম তৈরি করুন',
 	'wikibase-newentity-label' => 'লেবেল:',
@@ -1746,6 +1765,7 @@ $messages['bn'] = array(
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2] লেভেল সরানো হয়েছে',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2]-এর বিবরণ পরিবর্তন',
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2]-এর বিবরণ অপসারিত',
+	'wikibase-item-summary-wbsetsitelink-set' => '[$2]-এ লিঙ্ক যোগ',
 	'wikibase-property-summary-wbsetlabel-set' => '[$2] লেভেল পরিবর্তন',
 	'wikibase-property-summary-wbsetlabel-remove' => '[$2] লেভেল সরানো হয়েছে',
 	'wikibase-listdatatypes-wikibase-item-head' => 'আইটেম',
@@ -5243,6 +5263,7 @@ $messages['gu'] = array(
 
 /** Hebrew (עברית)
  * @author Amire80
+ * @author ExampleTomer
  * @author Inkbug
  * @author חיים
  * @author ערן
@@ -5386,7 +5407,7 @@ $messages['he'] = array(
 	'wikibase-dispatchstats-intro' => 'הדף הזה מספק סטטיסטיקות על הפצת שינויים ללקוחות.',
 	'wikibase-dispatchstats-no-stats' => 'הסטטיסטיקות אינן זמינות כעת.',
 	'wikibase-dispatchstats-changes' => 'סטטיסטיקות של יומן שינויים',
-	'wikibase-dispatchstats-stats' => 'סטטיסטיקות של הפצה',
+	'wikibase-dispatchstats-stats' => 'סטטיסטיקות הפצה',
 	'wikibase-dispatchstats-change-id' => 'מזהה',
 	'wikibase-dispatchstats-change-timestamp' => 'חותם זמן',
 	'wikibase-dispatchstats-oldest-change' => 'הישן ביותר',
@@ -6389,6 +6410,7 @@ $messages['ilo'] = array(
 	'wikibase-undo-samerev' => 'Saan a maibabawi, kapadpada ti naited a panagbalbaliw para iti panagibabawi a nagibatayan ken puntaan a panagibabawi.',
 	'wikibase-undo-badpage' => 'Madi a panagibalbaliw: Ti panagbalbaliw a $2 ket saan a tagikua ti [[$1]].',
 	'wikibase-undo-firstrev' => 'Saan a mabalin nga ibabawi ti panagpartuat ti panid',
+	'wikibase-undo-nocontent' => 'Saan a maikarga ti panagbaliw ti $2 iti panid ti $1',
 	'wikibase-propertyedittool-full' => 'Nalpasen ti listaan dagiti pateg.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Maysa a pateg|$1 a patpateg}} ket saan pay a naidulin',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|a naikabil|a naikabkabil}}',
@@ -6541,6 +6563,7 @@ tapno birukem ti napananda.',
 	'wikibase-item-summary-wbeditentity-create' => 'Nagpartuat ti baro a banag',
 	'wikibase-item-summary-wbeditentity-update' => 'Nagpabaro ti maysa a banag',
 	'wikibase-item-summary-wbeditentity-override' => 'Nagwaswas ti maysa a banag',
+	'wikibase-item-summary-wbsetreference' => 'Agikabil ti reperensia',
 	'wikibase-item-summary-wbsetlabel-set' => 'Sinukatan ti [$2] nga etiketa',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Inikkat ti [$2] nga etiketa',
 	'wikibase-item-summary-wbsetdescription-set' => 'Sinukatan ti [$2] a deskripsion',
@@ -6942,6 +6965,7 @@ $messages['it'] = array(
 	'wikibase-undo-samerev' => 'Impossibile annullare, la versione da annullare e la versione da ripristinare sono la stessa.',
 	'wikibase-undo-badpage' => 'Versione sbagliata: la versione $2 non appartiene a [[$1]].',
 	'wikibase-undo-firstrev' => 'Impossibile annullare la creazione della pagina',
+	'wikibase-undo-nocontent' => 'Non è possibile caricare il contenuto della versione $2 della pagina $1',
 	'wikibase-propertyedittool-full' => "L'elenco dei valori è completo.",
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Un valore non ancora salvato|$1 valori non ancora salvati}}',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|sito|siti}}',
@@ -7046,13 +7070,20 @@ Nella cronologia di $1 verrà registrato il tuo indirizzo IP.',
 	'special-dispatchstats' => 'Statistiche propagazione modifiche',
 	'wikibase-dispatchstats-intro' => 'Questa pagina fornisce le statistiche sulla propagazione delle modifiche ai client.',
 	'wikibase-dispatchstats-no-stats' => 'Attualmente non ci sono statistiche disponibili.',
+	'wikibase-dispatchstats-changes' => 'Statistiche registro delle modifiche',
+	'wikibase-dispatchstats-stats' => 'Statistiche di propagazione',
 	'wikibase-dispatchstats-change-id' => 'ID',
 	'wikibase-dispatchstats-change-timestamp' => 'Data e ora',
 	'wikibase-dispatchstats-oldest-change' => 'Più vecchio',
 	'wikibase-dispatchstats-newest-change' => 'Più recente',
 	'wikibase-dispatchstats-site-id' => 'Sito',
+	'wikibase-dispatchstats-pos' => 'Posizione',
 	'wikibase-dispatchstats-lag-num' => 'In attesa',
 	'wikibase-dispatchstats-lag-time' => 'Ritardo',
+	'wikibase-dispatchstats-touched' => 'Aggiornato',
+	'wikibase-dispatchstats-large-lag' => '(molto grande)',
+	'wikibase-dispatchstats-freshest' => 'Più aggiornato',
+	'wikibase-dispatchstats-stalest' => 'Meno aggiornato',
 	'wikibase-dispatchstats-median' => 'Mediana',
 	'wikibase-dispatchstats-average' => 'Media',
 	'special-listdatatypes' => 'Elenco di tutti i tipi di dati disponibili',
@@ -7088,6 +7119,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbeditentity-create' => 'Creato un nuovo elemento',
 	'wikibase-item-summary-wbeditentity-update' => 'Aggiornato un elemento',
 	'wikibase-item-summary-wbeditentity-override' => 'Sovrascritto un elemento',
+	'wikibase-item-summary-wbsetreference' => 'Impostato una fonte',
 	'wikibase-item-summary-wbsetlabel-set' => 'Cambiata etichetta [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Rimossa etichetta [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Cambiata descrizione [$2]',
@@ -7098,7 +7130,8 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Rimosso|Rimossi}} alias [$2]',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Aggiunto collegamento a [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Rimosso collegamento a [$2]',
-	'wikibase-item-summary-wblinktitles-connect' => 'Connessioni [$2↔$3] {{PLURAL:$1|pagina|pagine}}', # Fuzzy
+	'wikibase-item-summary-wblinktitles-create' => 'Creato questo elemento per collegare pagine [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-connect' => 'Aggiunto un collegamento linguistico per collegare pagine [$2↔$3]',
 	'wikibase-item-summary-wbcreateclaim-value' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}}",
 	'wikibase-item-summary-wbcreateclaim-novalue' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}}",
 	'wikibase-item-summary-wbcreateclaim-somevalue' => "{{PLURAL:$1|Creata un'asserzione|Create asserzioni}}",
@@ -7156,7 +7189,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'right-alias-remove' => 'Rimuove alias',
 	'right-sitelink-remove' => 'Rimuove link di lingua',
 	'right-sitelink-update' => 'Aggiorna link di lingua',
-	'right-linktitles-update' => 'Aggiorna link del titolo',
+	'right-linktitles-update' => 'Aggiorna titolo del collegamento',
 	'right-label-remove' => 'Rimuove etichette',
 	'right-label-update' => 'Aggiorna etichette',
 	'right-description-remove' => 'Rimuove descrizioni',
@@ -7169,6 +7202,9 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'action-property-remove' => 'rimuovere le proprietà',
 	'action-alias-update' => 'aggiornare gli alias',
 	'action-alias-remove' => 'rimuovere gli alias',
+	'action-sitelink-remove' => 'rimuovere link di lingua',
+	'action-sitelink-update' => 'aggiornare link di lingua',
+	'action-linktitles-update' => 'aggiornare titolo del collegamento',
 	'action-label-remove' => 'rimuovere le etichette',
 	'action-label-update' => 'aggiornare le etichette',
 	'action-description-remove' => 'rimuovere le descrizioni',

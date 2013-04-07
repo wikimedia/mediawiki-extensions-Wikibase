@@ -67,10 +67,7 @@ $messages['en'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 interlanguagelinks on the page)',
 );
 
-/** Message documentation (This is the name of the message documentation language code (qqq). Follow the rules of your languages and use small first letter if it doesn't capitalize language names always.
-
-It might be easier to translate it as "translation guidelines" or "translation help".
-{{Identical|Message documentation}})
+/** Message documentation (Message documentation)
  * @author Jeblad
  * @author Katie Filbert
  * @author Lloffiwr
@@ -1087,6 +1084,7 @@ $messages['gsw'] = array(
 
 /** Hebrew (עברית)
  * @author Amire80
+ * @author ExampleTomer
  */
 $messages['he'] = array(
 	'wikibase-client-desc' => 'לקוח להרחבה Wikibase',
@@ -1129,7 +1127,7 @@ $messages['he'] = array(
 	'wikibase-unconnectedpages-legend' => 'אפשרויות לדפים לא מקושרים',
 	'wikibase-unconnectedpages-page' => 'דף התחלה:', # Fuzzy
 	'wikibase-unconnectedpages-submit' => 'הרצה',
-	'wikibase-unconnectedpages-invalid-language' => '"$1" הוא לא קוד שפה תקין.',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" אינו קוד שפה תקין.',
 	'wikibase-unconnectedpages-page-warning' => 'לא ניתן היה להשתמש בכותרת הדף לשאילתה והמערכת תתעלם ממנה.',
 );
 
@@ -1311,7 +1309,7 @@ $messages['ilo'] = array(
 	'wikibase-comment-linked' => 'Ti Wikidata a banag ket naisilpon iti daytoy a panid.',
 	'wikibase-comment-unlink' => 'Daytoy a panid ket naikkat ti silpona manipud ti Wikidata a banag. Dagiti silpo ti pagsasao ket naikkaten.',
 	'wikibase-comment-restore' => 'Ti mainaig a banag ti Wikidata ket naisubli ti pannakaikkatna. Dagiti silpo ti pagsasao ket naipasubli.',
-	'wikibase-comment-update' => 'Naipabaro dagiti silpo ti pagsasao.', # Fuzzy
+	'wikibase-comment-update' => 'Nasukatan ti Widata a banag',
 	'wikibase-comment-sitelink-add' => 'Nanayonan ti silpo ti pagsasao: $1',
 	'wikibase-comment-sitelink-change' => 'Ti silpo ti pagsasao ket nasukatan manipud ti $1 iti $2',
 	'wikibase-comment-sitelink-remove' => 'Naikkat ti silpo ti pagsasao: $1',
@@ -1342,7 +1340,7 @@ $messages['ilo'] = array(
 	'wikibase-error-invalid-entity-id' => 'Ti ID a naikabil ket di ammo ti sistema. Pangngaasi nga agusar ti umiso nga entidad ti ID.',
 	'special-unconnectedpages' => 'Dagiti panid a saan a naikapet kadagiti banag',
 	'wikibase-unconnectedpages-legend' => 'Dagiti pagpilian kadagiti saan a naikapet a panid',
-	'wikibase-unconnectedpages-page' => 'Pagrugian a panid:',
+	'wikibase-unconnectedpages-page' => 'Rugian ti resulta ti listaan iti artikulo:',
 	'wikibase-unconnectedpages-submit' => 'Inkan',
 	'wikibase-unconnectedpages-invalid-language' => 'Ti "$1" ket saan nga umiso a kodigo ti pagsasao.',
 	'wikibase-unconnectedpages-page-warning' => 'Ti titulo ti panid ket saan a mabalin a mausar iti panangbiruk ken saan a naikaskaso.',
@@ -1401,6 +1399,7 @@ $messages['is'] = array(
 /** Italian (italiano)
  * @author Beta16
  * @author Gianfranco
+ * @author Gloria sah
  * @author Raoli
  * @author Sannita
  */
@@ -1440,9 +1439,14 @@ $messages['it'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Mostra le modifiche di Wikidata nelle ultime modifiche',
 	'wikibase-watchlist-show-changes-pref' => 'Mostra le modifiche su Wikidata nella tua lista degli osservati speciali',
 	'wikibase-error-invalid-entity-id' => "L'ID specificato è sconosciuto al sistema. Utilizza un ID di entità valido.",
+	'special-unconnectedpages' => 'Pagine non collegate agli elementi',
+	'wikibase-unconnectedpages-legend' => 'Opzioni per le pagine non collegate',
+	'wikibase-unconnectedpages-page' => "Inizia l'elenco dei risultati dalla voce:",
 	'wikibase-unconnectedpages-submit' => 'Vai',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" non è un codice di lingua valido.',
 	'wikibase-unconnectedpages-page-warning' => 'Il titolo della pagina non può essere utilizzato per la query e viene ignorato.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Solo le pagine con collegamenti interlinguistici',
+	'wikibase-unconnectedpages-format-row' => '($1 collegamenti interlinguistici nella pagina)',
 );
 
 /** Japanese (日本語)
