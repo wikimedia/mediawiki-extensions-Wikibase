@@ -26,8 +26,6 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 	protected $snaks;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param Snaks|null $snaks
