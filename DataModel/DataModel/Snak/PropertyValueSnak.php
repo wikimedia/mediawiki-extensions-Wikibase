@@ -42,8 +42,6 @@ class PropertyValueSnak extends SnakObject {
 	protected $dataValue;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param EntityId|integer $propertyId
