@@ -432,9 +432,10 @@ final class ClientHooks {
 				$out->addModules( 'wikibase.client.nolanglinks' );
 
 				if ( Settings::get( 'enableSiteLinkWidget' ) === true && $user->isLoggedIn() === true ) {
-					// Add the JavaScript to link pages locally
-					$out->addModules( 'wbclient.linkItem' );
+					// Add the JavaScript which lazy-loads the link item widget (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
+					$out->addModules( 'wikibase.client.linkitem.init' );
 				}
+
 			}
 		}
 
