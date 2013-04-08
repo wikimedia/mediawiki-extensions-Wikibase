@@ -40,7 +40,7 @@ cm_statement_value = "Vespa_crabro_head_01.jpg"
 cm_qualifier_value = "Blason_CH_Canton_Valais_3D.svg"
 cm_qualifier_value_changed = "BlueFeather.jpg"
 
-describe "Check references UI" do
+describe "Check qualifiers UI" do
   before :all do
     # set up: create items & properties & add statement
     items.each do |item|
