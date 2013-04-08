@@ -126,16 +126,9 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.store/store.js',
 				'wikibase.store/store.FetchedContent.js',
-				'wikibase.store/wikibase.EntityStore.js', // TODO: get rid of this
-				'wikibase.store/wikibase.RepoApi.js', // TODO: move
 			),
 			'dependencies' => array(
-				'jquery.json',
-				'user.tokens',
-				'wikibase.datamodel',
-				'wikibase.serialization.entities',
-				'wikibase.repoAccess',
-				'wikibase.RepoApiError',
+				'wikibase',
 				'mediawiki.Title',
 			)
 		),
@@ -150,9 +143,33 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.AbstractedRepoApi' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.RepoApi/wikibase.AbstractedRepoApi.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel',
+				'wikibase.serialization.entities',
+				'wikibase.RepoApi',
+				'wikibase.utilities',
+			)
+		),
+
+		'wikibase.RepoApi' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.RepoApi/wikibase.RepoApi.js',
+			),
+			'dependencies' => array(
+				'jquery.json',
+				'user.tokens',
+				'wikibase.repoAccess',
+				'wikibase',
+			)
+		),
+
 		'wikibase.RepoApiError' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.store/wikibase.RepoApiError.js',
+				'wikibase.RepoApi/wikibase.RepoApiError.js',
 			),
 			'messages' => array(
 				'wikibase-error-unexpected',
@@ -186,6 +203,7 @@ return call_user_func( function() {
 				'wikibase.utilities/wikibase.utilities.ui.css',
 			),
 			'dependencies' => array(
+				'dataValues.util',
 				'wikibase',
 				'jquery.tipsy',
 				'mediawiki.language',
@@ -345,7 +363,7 @@ return call_user_func( function() {
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
 				'wikibase.utilities.jQuery.ui.tagadata',
-				'wikibase.store',
+				'wikibase.AbstractedRepoApi',
 			),
 			'messages' => array(
 				'wikibase-cancel',
@@ -524,6 +542,7 @@ return call_user_func( function() {
 				'jquery.nativeEventHandler',
 				'jquery.wikibase.entityselector',
 				'wikibase.datamodel',
+				'wikibase.AbstractedRepoApi',
 				'wikibase.store', // required for getting datatype from entityselector selected property
 				'mediawiki.legacy.shared',
 				'jquery.ui.TemplatedWidget',
@@ -555,6 +574,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.snakview',
 				'jquery.wikibase.snaklistview',
+				'wikibase.AbstractedRepoApi',
 			),
 			'messages' => array(
 				'wikibase-addqualifier',
@@ -570,6 +590,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.snaklistview',
 				'jquery.wikibase.toolbarcontroller',
+				'wikibase.AbstractedRepoApi',
 			)
 		),
 
@@ -582,6 +603,7 @@ return call_user_func( function() {
 				'jquery.wikibase.listview',
 				'jquery.wikibase.referenceview',
 				'jquery.wikibase.toolbarcontroller',
+				'wikibase.AbstractedRepoApi',
 				'wikibase.utilities',
 			),
 			'messages' => array(
@@ -598,6 +620,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.claimview',
 				'jquery.wikibase.toolbarcontroller',
+				'wikibase.AbstractedRepoApi',
 				'wikibase.templates',
 				'wikibase.utilities.ClaimGuidGenerator',
 			),
