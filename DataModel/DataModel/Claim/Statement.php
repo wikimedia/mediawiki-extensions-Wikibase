@@ -55,8 +55,6 @@ class Statement extends Claim {
 	protected $rank = Statement::RANK_NORMAL;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param Snak $mainSnak
