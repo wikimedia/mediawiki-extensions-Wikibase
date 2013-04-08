@@ -41,7 +41,109 @@ return call_user_func( function() {
 		'remoteExtPath' =>  'DataValues/ValueView/resources',
 	);
 
-	return array();
+	return array(
+		// The actual jQuery.valueview object, but put this into '.base' because 'jquery.valueview'
+		// will overwrite this object with the Widget constructor when loaded. This module is just
+		// good as a dependency for experts without them requiring a dependency on 'jquery.valueview'
+		// which does require two of the experts.
+		'jquery.valueview.base' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.base.js',
+			),
+			'dependencies' => array(
+				'jquery',
+			),
+		),
+
+		// Loads the actual valueview widget into jQuery.valueview.valueview and maps
+		// jQuery.valueview to jQuery.valueview.valueview without loosing any properties.
+		'jquery.valueview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.base',
+				'jquery.valueview.valueview',
+			),
+		),
+
+		// The actual valueview (vv) widget:
+		'jquery.valueview.valueview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.valueview.js', // the actual widget definition
+				'jquery.valueview/valueview.ViewState.js',
+			),
+			'styles' => array(
+				'jquery.valueview/valueview.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+				'jquery.valueview.base',
+				'jquery.valueview.experts', // because vv deals with ExpertFactory
+				'jquery.valueview.experts.unsupportedvalue', // for displaying unsupported values
+				'jquery.valueview.experts.emptyvalue', // for displaying empty values
+			),
+		),
+
+		// Facility for creating valueview experts and the namespace for experts supported natively:
+		'jquery.valueview.experts' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.ExpertFactory.js',
+				'jquery.valueview/valueview.Expert.js',
+				'jquery.valueview/valueview.experts/experts.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.base',
+				'dataValues.util',
+				'dataValues.values',
+				'dataTypes',
+				'valueParsers.parsers',
+			),
+		),
+
+		// ACTUAL EXPERTS IMPLEMENTATIONS:
+		'jquery.valueview.experts.unsupportedvalue' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.experts/experts.UnsupportedValue.js',
+			),
+			'styles' => array(
+				'jquery.valueview/valueview.experts/experts.UnsupportedValue.css',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts',
+			),
+			'messages' => array(
+				'valueview-expert-unsupportedvalue-unsupporteddatavalue',
+				'valueview-expert-unsupportedvalue-unsupporteddatatype',
+			)
+		),
+
+		'jquery.valueview.experts.emptyvalue' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.experts/experts.EmptyValue.js',
+			),
+			'styles' => array(
+				'jquery.valueview/valueview.experts/experts.EmptyValue.css',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts',
+			),
+			'messages' => array(
+				'valueview-expert-emptyvalue-empty',
+			)
+		),
+
+		'jquery.valueview.experts.stringvalue' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.experts/experts.StringValue.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts',
+				'jquery.eachchange',
+				'jquery.inputAutoExpand',
+			),
+		),
+	);
 
 } );
 // @codeCoverageIgnoreEnd
