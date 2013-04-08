@@ -56,7 +56,8 @@ return call_user_func( function() {
 				'mediawiki.jqueryMsg',
 				'wikibase.client.currentSite',
 				'wikibase.sites',
-				'wikibase.store',
+				'wikibase.RepoApi',
+				'wikibase.RepoApiError',
 				'wikibase.ui.Tooltip'
 			),
 			'messages' => array(
