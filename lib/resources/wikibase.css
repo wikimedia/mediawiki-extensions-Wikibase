@@ -596,6 +596,10 @@ div.wb-claim-new .wb-snak-value {
 	margin-top: 0.4em;
 }
 
+.wb-snakview-variation-valuesnak textarea {
+	width: 100%;
+}
+
 /***** /EDIT/NEW CLAIM *****/
 
 /***** QUALIFIERS *****/
