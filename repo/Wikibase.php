@@ -154,6 +154,7 @@ $wgAutoloadClasses['Wikibase\EntityContentFactory'] 	= $dir . 'includes/content/
 $wgAutoloadClasses['Wikibase\EntityHandler'] 			= $dir . 'includes/content/EntityHandler.php';
 $wgAutoloadClasses['Wikibase\ItemContent'] 				= $dir . 'includes/content/ItemContent.php';
 $wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/content/ItemHandler.php';
+$wgAutoloadClasses['Wikibase\LinkedDataSerializer'] 	= $dir . 'includes/content/LinkedDataSerializer.php';
 $wgAutoloadClasses['Wikibase\PropertyContent'] 			= $dir . 'includes/content/PropertyContent.php';
 $wgAutoloadClasses['Wikibase\PropertyHandler'] 			= $dir . 'includes/content/PropertyHandler.php';
 $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
@@ -207,6 +208,29 @@ $wgAutoloadClasses['Wikibase\Test\Api\LangAttributeBase'] 	= $dir . 'tests/phpun
 $wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/includes/content/EntityContentTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 		= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
 $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/includes/specials/SpecialPageTestBase.php';
+
+// EasyRdf
+$wgAutoloadClasses['EasyRdf_Exception'] 				= $dir . 'includes/content/easyRdf/EasyRdf/Exception.php';
+$wgAutoloadClasses['EasyRdf_Format'] 					= $dir . 'includes/content/easyRdf/EasyRdf/Format.php';
+$wgAutoloadClasses['EasyRdf_Graph'] 					= $dir . 'includes/content/easyRdf/EasyRdf/Graph.php';
+$wgAutoloadClasses['EasyRdf_Namespace'] 				= $dir . 'includes/content/easyRdf/EasyRdf/Namespace.php';
+$wgAutoloadClasses['EasyRdf_Literal'] 					= $dir . 'includes/content/easyRdf/EasyRdf/Literal.php';
+$wgAutoloadClasses['EasyRdf_Literal_Boolean'] 			= $dir . 'includes/content/easyRdf/EasyRdf/Literal/Boolean.php';
+$wgAutoloadClasses['EasyRdf_Literal_Date'] 				= $dir . 'includes/content/easyRdf/EasyRdf/Literal/Date.php';
+$wgAutoloadClasses['EasyRdf_Literal_DateTime'] 			= $dir . 'includes/content/easyRdf/EasyRdf/Literal/DateTime.php';
+$wgAutoloadClasses['EasyRdf_Literal_Decimal'] 			= $dir . 'includes/content/easyRdf/EasyRdf/Literal/Decimal.php';
+$wgAutoloadClasses['EasyRdf_Literal_HexBinary'] 		= $dir . 'includes/content/easyRdf/EasyRdf/Literal/HexBinary.php';
+$wgAutoloadClasses['EasyRdf_Literal_Integer'] 			= $dir . 'includes/content/easyRdf/EasyRdf/Literal/Integer.php';
+$wgAutoloadClasses['EasyRdf_Resource'] 					= $dir . 'includes/content/easyRdf/EasyRdf/Resource.php';
+$wgAutoloadClasses['EasyRdf_Serialiser'] 				= $dir . 'includes/content/easyRdf/EasyRdf/Serialiser.php';
+$wgAutoloadClasses['EasyRdf_Serialiser_GraphViz'] 		= $dir . 'includes/content/easyRdf/EasyRdf/Serialiser/GraphViz.php';
+$wgAutoloadClasses['EasyRdf_Serialiser_RdfPhp'] 		= $dir . 'includes/content/easyRdf/EasyRdf/Serialiser/RdfPhp.php';
+$wgAutoloadClasses['EasyRdf_Serialiser_Ntriples'] 		= $dir . 'includes/content/easyRdf/EasyRdf/Serialiser/Ntriples.php';
+$wgAutoloadClasses['EasyRdf_Serialiser_Json'] 			= $dir . 'includes/content/easyRdf/EasyRdf/Serialiser/Json.php';
+$wgAutoloadClasses['EasyRdf_Serialiser_RdfXml'] 		= $dir . 'includes/content/easyRdf/EasyRdf/Serialiser/RdfXml.php';
+$wgAutoloadClasses['EasyRdf_Serialiser_Turtle'] 		= $dir . 'includes/content/easyRdf/EasyRdf/Serialiser/Turtle.php';
+$wgAutoloadClasses['EasyRdf_TypeMapper'] 				= $dir . 'includes/content/easyRdf/EasyRdf/TypeMapper.php';
+$wgAutoloadClasses['EasyRdf_Utils'] 					= $dir . 'includes/content/easyRdf/EasyRdf/Utils.php';
 
 // API module registration
 $wgAPIModules['wbgetentities'] 						= 'Wikibase\Api\GetEntities';
