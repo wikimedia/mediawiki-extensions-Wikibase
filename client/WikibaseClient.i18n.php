@@ -425,11 +425,11 @@ $messages['bs'] = array(
 	'wikibase-comment-linked' => 'Neka Wikidata stavka je povezana prema ovoj stranici.',
 	'wikibase-comment-unlink' => 'Ova stranica je odvojena od Wikidata stavke. Jezične veze su uklonjene.',
 	'wikibase-comment-restore' => 'Asocirana Wikidata stavka je vraćena. Jezične veze su sada isto vraćene.',
-	'wikibase-comment-update' => 'Jezične veze su ažurirane.',
+	'wikibase-comment-update' => 'Jezične veze su ažurirane.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Jezična veza dodana: $1',
 	'wikibase-comment-sitelink-change' => 'Jezična veza izmjenjena sa $1 u $2',
 	'wikibase-comment-sitelink-remove' => 'Jezična veza uklonjena: $1',
-	'wikibase-editlinks' => 'Izmjeni veze',
+	'wikibase-editlinks' => 'Izmijeni veze',
 	'wikibase-editlinkstitle' => 'Izmjeni međujezične veze',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Pokaži Wikidata izmjene u nedavnim izmjenama',
@@ -1986,7 +1986,7 @@ $messages['nl'] = array(
 	'wikibase-error-invalid-entity-id' => 'Het opgegeven ID is niet bekend in het systeem. Gebruik een geldig entiteits-ID.',
 	'special-unconnectedpages' => "Pagina's niet niet gekoppeld zijn aan items",
 	'wikibase-unconnectedpages-legend' => "Instellingen voor ongekoppelde pagina's",
-	'wikibase-unconnectedpages-page' => 'Beginpagina:',
+	'wikibase-unconnectedpages-page' => 'Lijst beginnen met pagina:',
 	'wikibase-unconnectedpages-submit' => 'OK',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" is geen geldige taalcode.',
 	'wikibase-unconnectedpages-page-warning' => 'De paginanaam kan niet worden gebruikt voor de zoekopdracht en wordt genegeerd.',
@@ -2346,6 +2346,7 @@ $messages['sr-el'] = array(
  * @author Ainali
  * @author Lokal Profil
  * @author Stryn
+ * @author WikiPhoenix
  */
 $messages['sv'] = array(
 	'wikibase-client-desc' => 'Klient för tillägget Wikibase',
@@ -2353,7 +2354,7 @@ $messages['sv'] = array(
 	'wikibase-comment-linked' => 'Ett Wikidata-objekt har länkats till den här sidan.',
 	'wikibase-comment-unlink' => 'Denna sida har gjorts olänkad från Wikidata-objektet. Språklänkar togs bort.',
 	'wikibase-comment-restore' => 'Tillhörande Wikidata-objekt togs bort. Språklänkar togs bort.',
-	'wikibase-comment-update' => 'Språklänkar uppdaterades.',
+	'wikibase-comment-update' => 'Wikidataobjekt ändrades',
 	'wikibase-comment-sitelink-add' => 'Språklänk lades till: $1',
 	'wikibase-comment-sitelink-change' => 'Språklänk ändrades från $1 till $2',
 	'wikibase-comment-sitelink-remove' => 'Språklänk togs bort: $1',
@@ -2501,13 +2502,27 @@ $messages['vi'] = array(
  * @author פוילישער
  */
 $messages['yi'] = array(
+	'wikibase-client-desc' => 'קליענט פארן Wikibase פארברייטערונג',
+	'specialpages-group-wikibaseclient' => 'וויקידאטן קליענט',
+	'wikibase-after-page-move' => 'איר קענט אויך [$1 דערהיינטיקן] דעם אסאציאירטן וויקידאטן־עלעמענט כדי אויסהאלטן שפראכלינקען אויפן באוועגטן בלאט.',
+	'wikibase-comment-remove' => 'אסאציאירטער וויקידאטן־עלעמענט אויסגעמעקט. שפראכלינקען אראפגענומען.',
 	'wikibase-comment-linked' => "מ'האט פארלינקט א וויקידאטן איינס צו דעם בלאט",
+	'wikibase-comment-unlink' => 'מען האט אויפגעלינקט דעם בלאט פון וויקידאטן־אביעקט. שפראכלינקען אראפגענומען.',
+	'wikibase-comment-restore' => 'אסאציאירטער וויקידאטן־עלעמענט צוריקגעשטעלט. שפראכלינקען צוריקגעשטעלט.',
+	'wikibase-comment-update' => 'וויקידאטן־עלעמענט געענדערט.',
+	'wikibase-comment-sitelink-add' => 'שפראכלינק צוגעלייגט: $1',
+	'wikibase-comment-sitelink-change' => 'שפראכלינק געענדערט פון $1 אויף $2',
+	'wikibase-comment-sitelink-remove' => 'שפראך לינק אראפגענומען: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|ענדערונג|ענדערונגען}}',
 	'wikibase-editlinks' => 'רעדאקטירן לינקען',
 	'wikibase-editlinkstitle' => 'רעדאקטירן אינטערשפראך לינקען',
 	'wikibase-linkitem-addlinks' => 'צולייגן לינקען',
+	'wikibase-linkitem-alreadylinked' => 'דער בלאט מיט וואס איר ווילט פארלינקען איז שוין צוגעבונדן צו אן [$1 אביעקט] אויפן צענטראלן רעפאזיטאריום וואס פארלינקט מיט $2 אויף דעם וועבזייטל. אן אביעקט קען נאר זיין צוגעבונדן צו איין בלאט אויף א געוויסן וועבזייטל. זייט אזוי גוט קלויבט אויס אן אנדער בלאט צו פארלינקען.',
+	'wikibase-linkitem-close' => 'צומאכן דיאלאג און ווידערלאדן בלאט',
+	'wikibase-linkitem-failure' => "אן אומבאוואוסטער גרייז האט פאסירט ווען מ'האט פראבירט פארלינקען מיט יענעם בלאט.",
 	'wikibase-linkitem-title' => 'פארלינקען מיט בלאט',
 	'wikibase-linkitem-linkpage' => 'פארלינקען מיט בלאט',
+	'wikibase-linkitem-selectlink' => 'זייט אזוי גוט קלויבט אויס אן וועבזייטל און א בלאט מיט וואס איר ווילט פארלינקען דעם דאזיקן בלאט.',
 	'wikibase-linkitem-input-site' => 'שפּראַך:',
 	'wikibase-linkitem-input-page' => 'בלאַט:',
 	'wikibase-linkitem-invalidsite' => 'אומבאוואוסט אדער אומגילטיק זייטל אויסגעוויילט',
@@ -2515,6 +2530,9 @@ $messages['yi'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'איר דארפט זיין אריינלאגירט',
 	'wikibase-rc-hide-wikidata' => '$1 וויקידאטן',
 	'wikibase-rc-show-wikidata-pref' => 'ווייזן וויקידאטן רעדאקטירונגען אין לעצטע ענדערונגען',
+	'wikibase-unconnectedpages-submit' => 'גיין',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" איז נישט קיין גילטיקער שפראך־קאד.',
+	'wikibase-unconnectedpages-format-row' => '($1 אינטערשפראך לינקען אויפן בלאט)',
 );
 
 /** Cantonese (粵語)
@@ -2534,6 +2552,7 @@ $messages['yue'] = array(
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Hydra
+ * @author Liangent
  * @author Linforest
  * @author Shizhao
  * @author Stevenliuyi
@@ -2578,7 +2597,7 @@ $messages['zh-hans'] = array(
 	'wikibase-error-invalid-entity-id' => '输入的ID在系统中是未知的。请使用一个有效的实体ID。',
 	'special-unconnectedpages' => '未连接到项目的页面',
 	'wikibase-unconnectedpages-legend' => '未连接页面的选项',
-	'wikibase-unconnectedpages-page' => '开始页面：', # Fuzzy
+	'wikibase-unconnectedpages-page' => '从此条目开始显示结果列表：',
 	'wikibase-unconnectedpages-submit' => '前往',
 	'wikibase-unconnectedpages-invalid-language' => '“$1”不是有效的语言代码。',
 	'wikibase-unconnectedpages-page-warning' => '该页面标题不能被用于查询并已被忽略。',
