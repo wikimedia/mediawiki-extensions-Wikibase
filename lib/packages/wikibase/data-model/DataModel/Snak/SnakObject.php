@@ -41,8 +41,6 @@ abstract class SnakObject implements Snak {
 	protected $propertyId;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param EntityId|integer $propertyId
