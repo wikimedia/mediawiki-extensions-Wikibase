@@ -34,8 +34,9 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-class WikibaseRepoTest extends \PHPUnit_Framework_TestCase {
+class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	/**
 	 * @return WikibaseRepo
@@ -59,4 +60,21 @@ class WikibaseRepoTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdParser', $returnValue );
 	}
 
+	public static function provideGetRdfBaseURI() {
+		return array(
+			array ( 'http://acme.test', 'http://acme.test' ),
+			array ( 'https://acme.test', 'https://acme.test' ),
+			array ( '//acme.test', 'http://acme.test' ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetRdfBaseURI
+	 */
+	public function testGetRdfBaseURI( $server, $expected ) {
+		$this->setMwGlobals( 'wgServer', $server );
+
+		$returnValue = $this->newInstance()->getRdfBaseURI();
+		$this->assertEquals( $expected, $returnValue );
+	}
 }
