@@ -115,6 +115,9 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			),
 			'!^a:\d+.*Raarr!', // output regex
 			200,       // http code
+			array( // headers
+				'Content-Type' => 'application/vnd.php.serialized; charset=UTF-8'
+			)
 		);
 
 		$cases[] = array( // #6: mime type
@@ -125,6 +128,9 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			),
 			'!^\{.*Raarr!', // output regex
 			200,       // http code
+			array( // headers
+				'Content-Type' => 'application/json; charset=UTF-8'
+			)
 		);
 
 		$cases[] = array( // #7: bad format
@@ -145,6 +151,9 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			),
 			'!<entity!', // output regex
 			200,       // http code
+			array( // headers
+				'Content-Type' => 'text/xml; charset=UTF-8'
+			)
 		);
 
 		$cases[] = array( // #9: evil stuff
@@ -156,6 +165,19 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			),
 			'!!', // output regex
 			404,  // http code
+		);
+
+		$cases[] = array( // #10: RDF+XML
+			'',      // subpage
+			array( // parameters
+				'id' => '{testitemid}',
+				'format' => 'rdf',
+			),
+			'!<rdf:RDF.*rdf:about.*</rdf:RDF>!s', // output regex
+			200,       // http code
+			array( // headers
+				'Content-Type' => 'application/rdf+xml; charset=UTF-8'
+			)
 		);
 
 		$subpageCases = array();
