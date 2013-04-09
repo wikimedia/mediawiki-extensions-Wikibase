@@ -45,12 +45,14 @@ $messages['en'] = array(
 
 /** Message documentation (Message documentation)
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author Shirayuki
  */
 $messages['qqq'] = array(
 	'valueview-desc' => '{{desc|name=ValueView|url=http://www.mediawiki.org/wiki/Extension:ValueView}}',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Error shown if a data value of a certain data value type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a valueview widget expert handling data values of that type has not yet been implemented). $1 is the name of the data value type which lacks support.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Error shown if a data value for a certain data type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a valueview widget expert handling data values for that data type has not yet been implemented). Parameter $1 is the name of the data type which lacks support',
-	'valueview-expert-emptyvalue-empty' => 'Message expressing that there is currently no value set in a jQuery valueview.',
+	'valueview-expert-emptyvalue-empty' => 'Message expressing that there is currently no value set in a jQuery valueview.
+{{Identical|Empty}}',
 );
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
@@ -72,8 +74,9 @@ $messages['da'] = array(
  */
 $messages['de'] = array(
 	'valueview-desc' => 'Ergänzt Komponenten zur Benutzeroberfläche zum Anzeigen und Bearbeiten von Datenwerten',
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Das Bearbeiten von Datenwerten mit dem Typ „$1“ wird noch nicht unterstützt.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Das Bearbeiten von Werten für den Datentyp „$1“ wird noch nicht unterstützt.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Das Bearbeiten von Werten mit dem Typ „$1“ wird noch nicht unterstützt.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Das Bearbeiten von Werten für den Datentyp „$1“ wird noch nicht unterstützt.',
+	'valueview-expert-emptyvalue-empty' => 'leer',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -103,12 +106,15 @@ $messages['fi'] = array(
 );
 
 /** French (français)
+ * @author Metroitendo
+ * @author Peter17
  * @author Urhixidur
  */
 $messages['fr'] = array(
 	'valueview-desc' => 'Composants graphiques pour l’affichage et la modification des données',
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'La manipulation des valeurs de données "$1" n’est pas encore supportée.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestion des valeurs pour le type de données « $1 » n’est pas encore pris en charge.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'La manipulation des valeurs de données « $1 » n’est pas encore supportée.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestion des valeurs pour le type de données « $1 » n’est pas encore pris en charge.',
+	'valueview-expert-emptyvalue-empty' => 'vide',
 );
 
 /** Galician (galego)
@@ -116,15 +122,18 @@ $messages['fr'] = array(
  */
 $messages['gl'] = array(
 	'valueview-desc' => 'Compoñentes da interface para mostrar e editar valores de datos',
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'A manipulación de valores de datos "$1" aínda non está soportada.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'A manipulación de valores para o tipo de datos "$1" aínda non está soportada.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'A manipulación de valores "$1" aínda non está soportada.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'A manipulación de valores para o tipo de datos "$1" aínda non está soportada.',
+	'valueview-expert-emptyvalue-empty' => 'baleiro',
 );
 
 /** Hebrew (עברית)
+ * @author Orsa
  */
 $messages['he'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'טיפול בערכי נתונים מסוג "$1" אינו נתמך עדיין.', # Fuzzy
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'עדיין אין תמיכה בטיפול בערכים מסוג "$1".', # Fuzzy
+	'valueview-expert-emptyvalue-empty' => 'ריק',
 );
 
 /** Upper Sorbian (hornjoserbsce)
@@ -166,8 +175,9 @@ $messages['is'] = array(
  */
 $messages['it'] = array(
 	'valueview-desc' => "Componenti dell'interfaccia utente per la visualizzazione e la modifica dei valori dei dati",
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'La gestione dei valori dei dati "$1" non è ancora supportata.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestione dei valori per il tipo di dati "$1" non è ancora supportata.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'La gestione dei valori "$1" non è ancora supportata.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestione dei valori per il tipo di dati "$1" non è ancora supportata.',
+	'valueview-expert-emptyvalue-empty' => 'vuoto',
 );
 
 /** Japanese (日本語)
@@ -175,8 +185,9 @@ $messages['it'] = array(
  */
 $messages['ja'] = array(
 	'valueview-desc' => 'データ値を表示/編集するユーザーインターフェイスコンポーネント',
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '「$1」のデータ値の処理にはまだ対応していません。', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '「$1」の値の処理にはまだ対応していません。',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'データ型「$1」の値の処理にはまだ対応していません。', # Fuzzy
+	'valueview-expert-emptyvalue-empty' => '空',
 );
 
 /** Korean (한국어)
@@ -191,8 +202,9 @@ $messages['ko'] = array(
  */
 $messages['mk'] = array(
 	'valueview-desc' => 'Посреднички компоненти за приказ и уредување на податочни вредности',
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Работата со податочни вредности од типот „$1“ сè уште не е поддржана.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Засега не е поддржано работењето со вредности за податочниот тип „$1“.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Работата со вредности од типот „$1“ сè уште не е поддржана.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Работата со вредности за податочниот тип „$1“ сè уште не е поддржана.',
+	'valueview-expert-emptyvalue-empty' => 'празно',
 );
 
 /** Malay (Bahasa Melayu)
@@ -266,4 +278,14 @@ $messages['vi'] = array(
 $messages['zh-hans'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '“$1”数据值的操作尚不支持。', # Fuzzy
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '对“$1”数据类型的值的操作尚不支持。', # Fuzzy
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Simon Shek
+ */
+$messages['zh-hant'] = array(
+	'valueview-desc' => '顯示和編輯數據值的用戶介面',
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '尚未支援「$1」值的操作。',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '尚未支援「$1」數據值的操作。',
+	'valueview-expert-emptyvalue-empty' => '空',
 );
