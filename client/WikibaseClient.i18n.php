@@ -321,12 +321,13 @@ $messages['be'] = array(
  */
 $messages['be-tarask'] = array(
 	'wikibase-client-desc' => 'Кліент для пашырэньня Wikibase',
+	'specialpages-group-wikibaseclient' => 'Кліент Вікізьвестак',
 	'wikibase-after-page-move' => 'Каб захаваць міжмоўныя спасылкі на перанесеную старонку, вы можаце [$1 абнавіць] злучаны аб’ект у Вікізьвестках.',
 	'wikibase-comment-remove' => 'Злучаны аб’ект выдалены зь Вікізьвестак. Моўныя спасылкі былі выдаленыя.',
 	'wikibase-comment-linked' => 'Аб’ект Вікізьвестак быў злучаны з гэтай старонкай.',
 	'wikibase-comment-unlink' => 'Гэтая старонка была адлучаная ад аб’екта Вікізьвестак. Моўныя спасылкі выдаленыя.',
 	'wikibase-comment-restore' => 'Выдаленьне злучанага аб’екта Вікізьвестак скасавана. Моўныя спасылкі адноўленыя.',
-	'wikibase-comment-update' => 'Моўныя спасылкі абноўленыя.', # Fuzzy
+	'wikibase-comment-update' => 'Зьменены аб’ект Вікізьвестак',
 	'wikibase-comment-sitelink-add' => 'Дададзеная моўная спасылка: $1',
 	'wikibase-comment-sitelink-change' => 'Моўная спасылка зьмененая з $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Моўная спасылка выдаленая: $1',
@@ -355,6 +356,14 @@ $messages['be-tarask'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Паказваць праўкі Вікізьвестак у сьпісе апошніх зьменаў',
 	'wikibase-watchlist-show-changes-pref' => 'Паказваць зьмены Вікізьвестак у вашым сьпісе назіраньня',
 	'wikibase-error-invalid-entity-id' => 'Уведзены ідэнтыфікатар не вядомы сыстэме. Калі ласка, выкарыстоўвайце існыя ідэнтыфікатары аб’ектаў.',
+	'special-unconnectedpages' => 'Старонкі, ня злучаныя з аб’ектамі',
+	'wikibase-unconnectedpages-legend' => 'Налады нязлучаных старонак',
+	'wikibase-unconnectedpages-page' => 'Паказваць вынікі ад гэтага артыкула:',
+	'wikibase-unconnectedpages-submit' => 'Паказаць',
+	'wikibase-unconnectedpages-invalid-language' => '«$1» — няслушны код мовы.',
+	'wikibase-unconnectedpages-page-warning' => 'Назва старонкі ня можа быць скарыстаная ў запыце, таму ігнаруецца.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Толькі старонкі зь міжмоўнымі спасылкамі',
+	'wikibase-unconnectedpages-format-row' => '(на старонцы $1 {{PLURAL:$1|міжмоўная спасылка|міжмоўныя спасылкі|міжмоўных спасылак}})',
 );
 
 /** Bulgarian (български)
@@ -1864,7 +1873,7 @@ $messages['ms'] = array(
 	'wikibase-comment-linked' => 'Satu perkara Wikidata telah dipautkan ke halaman ini.',
 	'wikibase-comment-unlink' => 'Halaman ini telah dinyahpautkan dari perkara Wikidata. Pautan bahasa dibuang.',
 	'wikibase-comment-restore' => 'Perkara Wikidata yang berkenaan dinyahhapus. Pautan bahasa dipulihkan.',
-	'wikibase-comment-update' => 'Pautan bahasa dikemaskinikan.',
+	'wikibase-comment-update' => 'Perkara wikidata diubah',
 	'wikibase-comment-sitelink-add' => 'Pautan bahasa dibubuh: $1',
 	'wikibase-comment-sitelink-change' => 'Pautan bahasa diubah daripada $1 kepada $2',
 	'wikibase-comment-sitelink-remove' => 'Pautan bahasa dibuang: $1',
@@ -1887,8 +1896,20 @@ $messages['ms'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Anda perlu log masuk ke dalam wiki ini dan juga ke dalam [$1 repositori data pusat] untuk menggunakan ciri ini.',
 	'wikibase-linkitem-success-create' => 'Halaman-halaman ini telah berjaya dipautkan. Anda boleh mendapati perkara baru diwujudkan yang mengandungi pautan-pautannya di dalam [$1 repositori data pusat] kami.',
 	'wikibase-linkitem-success-link' => 'Halaman-halaman ini telah berjaya dipautkan. Anda boleh mendapati perkara yang mengandungi pautan-pautannya di dalam [$1 repositori data pusat] kami.',
+	'wikibase-property-notfound' => 'Sifat $1 tidak dijumpai.',
+	'wikibase-property-notsupportedyet' => 'Wikibase belum menyokong jenis sifat $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Paparkan suntingan Wikidata dalam perubahan terkini',
+	'wikibase-watchlist-show-changes-pref' => 'Paparkan suntingan Wikidata dalam senarai pantau anda',
+	'wikibase-error-invalid-entity-id' => 'ID yang diberikan itu tidak dikenali oleh sistem. Sila gunakan ID entiti yang sah.',
+	'special-unconnectedpages' => 'Halaman yang tidak bersambung dengan perkara',
+	'wikibase-unconnectedpages-legend' => 'Pilihan untuk halaman tak tersambung',
+	'wikibase-unconnectedpages-page' => 'Mulakan senarai hasil dengan rencana:',
+	'wikibase-unconnectedpages-submit' => 'Pergi',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" bukan kod bahasa yang sah.',
+	'wikibase-unconnectedpages-page-warning' => 'Tajuk halaman tidak dapat digunakan untuk pertanyaan, oleh itu diabaikan.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Hanya halaman dengan pautan antara bahasa',
+	'wikibase-unconnectedpages-format-row' => '($1 pautan antara bahasa pada halaman ini)',
 );
 
 /** Maltese (Malti)

@@ -1396,6 +1396,7 @@ $messages['be-tarask'] = array(
 	'wikibase-save' => 'захаваць',
 	'wikibase-cancel' => 'скасаваць',
 	'wikibase-add' => 'дадаць',
+	'wikibase-addqualifier' => 'дадаць кваліфікатар',
 	'wikibase-addreference' => 'дадаць крыніцу',
 	'wikibase-save-inprogress' => 'Захаваньне…',
 	'wikibase-remove-inprogress' => 'Выдаленьне…',
@@ -1441,8 +1442,6 @@ $messages['be-tarask'] = array(
 	'wikibase-snakview-property-input-placeholder' => 'уласьцівасьць',
 	'wikibase-snakview-unsupportedsnaktype' => 'Злучнік тыпу «$1». Апрацоўка падобнага злучніка яшчэ не падтрымліваецца.',
 	'wikibase-snakview-choosesnaktype' => 'Выберыце тып значэньня.',
-	'wikibase-snakview-variation-unsupporteddatatype' => 'Апрацоўка значэньняў тыпу «$1» яшчэ не падтрымліваецца.',
-	'wikibase-snakview-variation-unsupporteddatavalue' => 'Апрацоўка зьвестак тыпу «$1» пакуль не падтрымліваецца.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Значэньне не адпавядае вызначэньню ўласьцівасьці.',
 	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Немагчыма вызначыць новае значэньне для выдаленай уласьцівасьці.',
 	'wikibase-snakview-variations-somevalue-label' => 'невядомае значэньне',
@@ -1504,6 +1503,15 @@ $messages['be-tarask'] = array(
 	'wikibase-setentity-id' => 'Ідэнтыфікатар:',
 	'wikibase-setentity-language' => 'Мова:',
 	'wikibase-setentity-invalid-langcode' => 'Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце только вядомыя сыстэме моўныя коды, як то «en».',
+	'wikibase-dispatchstats-change-id' => 'Ідэнтыфікатар',
+	'wikibase-dispatchstats-change-timestamp' => 'Дата/час',
+	'wikibase-dispatchstats-oldest-change' => 'Найстарэйшыя',
+	'wikibase-dispatchstats-newest-change' => 'Найнавейшыя',
+	'wikibase-dispatchstats-site-id' => 'Сайт',
+	'wikibase-dispatchstats-lag-time' => 'Затрымка',
+	'wikibase-dispatchstats-large-lag' => '(завялікі)',
+	'wikibase-dispatchstats-median' => 'Мэдыяна',
+	'wikibase-dispatchstats-average' => 'Сярэдняе',
 	'special-listdatatypes' => 'Сьпіс усіх даступных тыпаў зьвестак',
 	'wikibase-history-title-with-label' => '$2 ($1) — гісторыя зьменаў',
 	'wikibase-history-title-without-label' => '$1 — гісторыя зьменаў',
@@ -1543,6 +1551,7 @@ $messages['be-tarask'] = array(
 	'wikibase-item-summary-wblinktitles-create' => 'Аб’ект створаны для злучэньня старонак [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Дададзеная моўная спасылка для злучэньня старонак [$2↔$3]',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Створанае сьцверджаньне|Створаныя сьцверджаньні}}',
+	'wikibase-item-summary-wbcreateclaim-create' => 'Створана сьцьверджаньне',
 	'wikibase-property-summary-wbeditentity-create' => 'Створаная новая ўласьцівасьць',
 	'wikibase-property-summary-wbeditentity-update' => 'Абноўленая ўласьцівасьць',
 	'wikibase-property-summary-wbeditentity-override' => 'Перавызначаная ўласьцівасьць',
@@ -3873,22 +3882,25 @@ Sinu IP-aadress talletatakse üksuse $1 ajaloos.',
 
 /** Basque (euskara)
  * @author An13sa
+ * @author Xabier Armendaritz
  * @author පසිඳු කාවින්ද
  */
 $messages['eu'] = array(
 	'wikibase-edit' => 'aldatu',
 	'wikibase-save' => 'gorde',
-	'wikibase-cancel' => 'Utzi',
+	'wikibase-cancel' => 'utzi',
 	'wikibase-add' => 'gehitu',
 	'wikibase-remove' => 'kendu',
-	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'Jatorriak:', # Fuzzy
-	'wikibase-itembytitle-lookup-page' => 'Orrialdea:',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|iturri|iturri}}', # Fuzzy
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Iturri bat ez da|$1 iturri ez dira}} gorde oraindik',
+	'wikibase-snakview-property-input-placeholder' => 'ezaugarri',
+	'wikibase-itembytitle-lookup-page' => 'Orria:',
 	'wikibase-itembytitle-submit' => 'Bilatu',
 	'wikibase-itemdisambiguation-lookup-language' => 'Hizkuntza:',
 	'wikibase-itemdisambiguation-submit' => 'Bilatu',
 	'wikibase-setlabel-label' => 'Etiketa:',
 	'wikibase-setentity-id' => 'ID:',
-	'wikibase-restoreold' => 'Leheneratu',
+	'wikibase-restoreold' => 'leheneratu',
 );
 
 /** Persian (فارسی)
@@ -10333,16 +10345,19 @@ $messages['pt-br'] = array(
 	'wikibase-aliases-input-help-message' => 'Se esse conjunto de dados é conhecido por mais de um nome específico, você pode inserir nomes alternativos e sinônimos, assim ele pode ser encontrado por seus outros nomes.',
 	'wikibase-aliases-empty' => 'Não há nomes alternativos definidos.',
 	'wikibase-datatype-label' => 'Tipo de dados:',
+	'wikibase-claimview-snak-tooltip' => 'Entre um valor correspondente à propriedade nomeada "$1". Se a propriedade não possui valor designado ou o atual valor não é conhecido, você pode escolher uma alternativa a especificar um valor personalizado por clicar no ícone próximo à caixa de entrada de valores.',
 	'wikibase-claimview-snak-new-tooltip' => 'Depois de especificar uma propriedade você pode entrar um valor correspondente. Se a propriedade não possui valor designado ou o valor atual não é conhecido, você pode selecionar uma alternativa para especificar um valor customizado por clicar no ícone próximo à caixa de entrada de valor.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|fonte|fontes}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Uma fonte não salva ainda|$1 fontes não salvas ainda}}',
 	'wikibase-snakview-property-input-placeholder' => 'propriedade',
 	'wikibase-snakview-choosesnaktype' => 'Escolha um tipo de valor.',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Não é possível definir um novo valor para uma propriedade deletada.',
 	'wikibase-snakview-variations-somevalue-label' => 'valor desconhecido',
 	'wikibase-snakview-variations-novalue-label' => 'nenhum valor',
 	'wikibase-snakview-snaktypeselector-value' => 'valor personalizado',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valor desconhecido',
 	'wikibase-snakview-snaktypeselector-novalue' => 'nenhum valor',
+	'wikibase-shortcopyrightwarning' => 'Ao clicar "$1", você concorda com os [[$2|termos de uso]], e você irrevogavelmente aceita disponibilizar sua contribuição sob $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Eu aceito estes termos para minhas futuras edições. Não mostre esta mensagem novamente.',
 	'wikibase-entityselector-more' => 'mais',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta página está protegida, a edição não é permitida.',
@@ -10375,7 +10390,7 @@ $messages['pt-br'] = array(
 	'wikibase-newproperty-datatype' => 'Tipo de dados:',
 	'wikibase-newproperty-invalid-datatype' => 'O tipo de dados especificado é inválido',
 	'special-newitem' => 'Criar um novo item',
-	'wikibase-newitem-summary' => 'Por favor, [[Special:ItemByTitle|confira se o item já existe]]!<br/>Se é novo no projeto, consulte [[Help:Label]] e [[Help:Description]].', # Fuzzy
+	'wikibase-newitem-summary' => 'Tenha certeza de [[Special:ItemByTitle|conferir se o item já existe]]!<br/>Você deve criar um [[Help:Label|rótulo]] e uma [[Help:Description|descrição]] para todos os novos itens.', # Fuzzy
 	'wikibase-newitem-fieldset' => 'Criar um novo item',
 	'wikibase-newitem-site' => 'Site da primeira página linkada',
 	'wikibase-newitem-page' => 'Nome da primeira página linkada',
