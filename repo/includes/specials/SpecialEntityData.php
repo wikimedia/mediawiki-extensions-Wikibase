@@ -44,6 +44,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 		'statements',
 	);
 
+	protected static $rdfAllowedTypes = array(
+		'rdfxml',
+		'ntriples'
+	);
+
 	/**
 	 * Constructor.
 	 *
@@ -95,8 +100,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		//TODO: handle IfModifiedSince!
 
 
-		$apiFormat = self::getApiFormatName( $format );
-		$printer = $apiFormat === null ? null : $this->createApiPrinter( $apiFormat );
+		$printer = $this->createApiPrinter( $format );
 
 		if ( !$printer ) {
 			throw new \HttpError( 415, wfMessage( 'wikibase-entitydata-unsupported-format' )->params( $format ) );
@@ -206,21 +210,30 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 * Creates a printer that can generate the given output format.
 	 *
 	 * @param String $format The desired serialization format,
-	 *   as a format name understood by ApiBase.
+	 *   as a format name understood by ApiBase or EasyRdf_Format
 	 *
-	 * @return ApiFormatBase|null A suitable result printer, or null
+	 * @return ApiFormatBase|EasyRdf_Format|null A suitable result printer, or null
 	 *   if the given format is not supported.
 	 */
 	protected function createApiPrinter( $format ) {
+		//MediaWiki formats
 		$api = $this->getApiMain( $format );
-
 		$formats = $api->getFormats();
-		if ( !array_key_exists( $format, $formats ) ) {
-			return null;
+		$formatName = self::getApiFormatName( $format );
+		if ( $formatName !== null && array_key_exists( $formatName, $formats ) ) {
+			return $api->createPrinterByName( $formatName );;
 		}
 
-		$printer = $api->createPrinterByName( $format );
-		return $printer;
+		//EasyRdf formats
+		try {
+			$rdfFormat = EasyRdf_Format::getFormat( $format );
+			if ( !in_array( $rdfFormat->getName(), self::$rdfAllowedTypes ) ) {
+				return null;
+			}
+			return $rdfFormat;
+		} catch ( EasyRdf_Exception $e ) { //Unknown format
+			return null;
+		}
 	}
 
 	/**
@@ -318,16 +331,32 @@ class SpecialEntityData extends SpecialWikibasePage {
 		//FIXME: Content-Length is bogus! Where does it come from?!
 	}
 
+
+	/**
+	 * Serialize the entity data in RDF using the provided format and send it as the HTTP response body.
+	 *
+	 * @param Wikibase\EntityContent $entity the entity to output.
+	 * @param ApiFormatBase $format the format to use to generate the output
+	 * @param Revision $revision the entity's revision (optional)
+	 */
+	public function outputRdf( EntityContent $entity, EasyRdf_Format $format, Revision $revision ) {
+		$this->getOutput()->disable(); // don't generate HTML
+
+		$linkedDataSerializer = new \Wikibase\LinkedDataSerializer();
+		$linkedDataSerializer->addEntity( $entity );
+		echo $linkedDataSerializer->outputRdf( $format );
+	}
+
 	/**
 	 * Output the entity data and set the appropriate HTTP response headers.
 	 *
 	 * @param Wikibase\EntityContent $entity the entity to output.
-	 * @param ApiFormatBase $printer the printer to use to generate the output
+	 * @param ApiFormatBase|EasyRdf_Format $printer the printer to use to generate the output
 	 * @param Revision $revision the entity's revision (optional)
 	 *
 	 * @throws HttpError If an unsupported format is requested.
 	 */
-	public function showData( EntityContent $entity, ApiFormatBase $printer, Revision $revision = null ) {
+	public function showData( EntityContent $entity, $printer, Revision $revision = null ) {
 		global $wgSquidMaxage;
 
 		// NOTE: similar code as in RawAction::onView, keep in sync.
@@ -345,7 +374,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 		//TODO: set Last-Modified header? Why doesn't mediawiki set that for article pages?
 
 		// make sure we are reporting the correct content type
-		$contentType = $printer->getIsHtml() ? 'text/html' : $printer->getMimeType();
+		if( $printer instanceof EasyRdf_Format ) {
+			$contentType = $printer->getDefaultMimeType();
+		} else {
+			$contentType = $printer->getIsHtml() ? 'text/html' : $printer->getMimeType();
+		}
 		$response->header( 'Content-Type: ' . $contentType . '; charset=UTF-8' );
 
 		// allow the client to cache this
@@ -353,7 +386,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$response->header( 'Cache-Control: ' . $mode . ', s-maxage=' . $smaxage . ', max-age=' . $maxage );
 		//FIXME: Cache-Control and Expires headers are apparently overwritten later!
 
-		$this->output( $entity, $printer, $revision );
+		if( $printer instanceof EasyRdf_Format ) {
+			$this->outputRdf( $entity, $printer, $revision );
+		} else {
+			$this->output( $entity, $printer, $revision );
+		}
 	}
 
 }
