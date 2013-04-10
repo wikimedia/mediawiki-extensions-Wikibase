@@ -549,7 +549,8 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.claimview.js'
 			),
 			'dependencies' => array(
-				'jquery.wikibase.snakview'
+				'jquery.wikibase.snakview',
+				'jquery.wikibase.snaklistview',
 			),
 			'messages' => array(
 				'wikibase-addqualifier',
