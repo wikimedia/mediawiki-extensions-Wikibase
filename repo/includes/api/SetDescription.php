@@ -68,6 +68,19 @@ class SetDescription extends ModifyLangAttribute {
 	}
 
 	/**
+	 * @see \ApiBase::getParamDescription()
+	 */
+	public function getParamDescription() {
+		return array_merge(
+			parent::getParamDescription(),
+			array(
+				'language' => 'Language of the description',
+				'value' => 'The value to set for the description',
+			)
+		);
+	}
+
+	/**
 	 * @see \ApiBase::getDescription()
 	 */
 	public function getDescription() {
