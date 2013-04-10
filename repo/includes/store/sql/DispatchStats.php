@@ -29,6 +29,13 @@ namespace Wikibase;
  */
 class DispatchStats {
 
+	public static $states = array(
+		'complete',
+		'locked',
+		'fresh',
+		'pending'
+	);
+
 	/**
 	 * @var string
 	 */
@@ -53,6 +60,19 @@ class DispatchStats {
 	 * @var null|object
 	 */
 	protected $average;
+
+	/**
+	 * @var int: Number of seconds to wait before dispatching to the same wiki again.
+	 *           This affects the effective batch size, and this influences how changes
+	 *           can be coalesced.
+	 */
+	protected $dispatchInterval = 60; //XXX: keep default synced with dispatchChanges.php
+
+	/**
+	 * @var int: Number of seconds to wait before testing a lock. Any target with a lock
+	 *           timestamp newer than this will not be considered for selection.
+	 */
+	protected $lockGraceInterval = 60; //XXX: keep default synced with dispatchChanges.php
 
 	/**
 	 * creates a new DispatchStats instance.
@@ -128,6 +148,8 @@ class DispatchStats {
 
 		while ( $row = $res->fetchObject() ) {
 			if ( $this->changeStats ) {
+				$time = (int)wfTimestamp( TS_UNIX, $row->change_time );
+
 				// time between last dispatch and now
 				$row->chd_untouched = max( 0, $now
 					- (int)wfTimestamp( TS_UNIX, $row->chd_touched ) );
@@ -138,16 +160,27 @@ class DispatchStats {
 					$row->chd_lag = null;
 				} else {
 					$row->chd_lag = max( 0, (int)wfTimestamp( TS_UNIX, $this->changeStats->max_time )
-						- (int)wfTimestamp( TS_UNIX, $row->change_time ) );
+						- $time );
 				}
 
 				// number of changes that have not been processed yet
 				$row->chd_pending = (int)$this->changeStats->max_id - $row->chd_seen;
+
+				if ( $row->chd_pending === 0 ) {
+					$row->chd_state = "complete";
+				} else if ( ( $time + $this->dispatchInterval ) > $now ) {
+					$row->chd_state = "fresh";
+				} else if ( $row->chd_lock && ( ( $time + $this->lockGraceInterval ) > $now ) ) {
+					$row->chd_state = "locked";
+				} else {
+					$row->chd_state = "pending";
+				}
 			} else {
 				// if there are no changes, there is no lag
 				$row->chd_untouched = 0;
 				$row->chd_pending = 0;
 				$row->chd_lag = 0;
+				$row->chd_state = "complete";
 			}
 
 			$this->average->chd_untouched += $row->chd_untouched;
@@ -320,6 +353,25 @@ class DispatchStats {
 	 */
 	public function getMinChangeTimestamp() {
 		return $this->changeStats->min_time;
+	}
+
+	/**
+	 * returns the number of clients with the given dispatch state.
+	 *
+	 * @param string $state one of "complete", "locked", "fresh" or "pending".
+	 *
+	 * @return string
+	 */
+	public function getStateCount( $state ) {
+		$c = 0;
+
+		foreach ( $this->clientStates as $row ) {
+			if ( $row->chd_state === $state ) {
+				$c++;
+			}
+		}
+
+		return $c;
 	}
 
 }
