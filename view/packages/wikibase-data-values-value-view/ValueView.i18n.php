@@ -127,6 +127,13 @@ $messages['gl'] = array(
 	'valueview-expert-emptyvalue-empty' => 'baleiro',
 );
 
+/** Gujarati (ગુજરાતી)
+ * @author KartikMistry
+ */
+$messages['gu'] = array(
+	'valueview-expert-emptyvalue-empty' => 'ખાલી',
+);
+
 /** Hebrew (עברית)
  * @author Orsa
  */
@@ -186,7 +193,7 @@ $messages['it'] = array(
 $messages['ja'] = array(
 	'valueview-desc' => 'データ値を表示/編集するユーザーインターフェイスコンポーネント',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '「$1」の値の処理にはまだ対応していません。',
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'データ型「$1」の値の処理にはまだ対応していません。', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'データ型「$1」の値の処理にはまだ対応していません。',
 	'valueview-expert-emptyvalue-empty' => '空',
 );
 
@@ -228,6 +235,13 @@ $messages['nl'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Het verwerken van waarden van het gegevenstype "$1" wordt nog niet ondersteund.', # Fuzzy
 );
 
+/** Polish (polski)
+ * @author Ty221
+ */
+$messages['pl'] = array(
+	'valueview-expert-emptyvalue-empty' => 'pusty',
+);
+
 /** Piedmontese (Piemontèis)
  */
 $messages['pms'] = array(
@@ -255,9 +269,12 @@ $messages['sh'] = array(
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
+ * @author Милан Јелисавчић
  */
 $messages['sr-ec'] = array(
+	'valueview-desc' => 'УИ компоненте за приказ и уређивање података',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Начин управљања вредностима за „$1“ врсту података још није подржан.', # Fuzzy
+	'valueview-expert-emptyvalue-empty' => 'празно',
 );
 
 /** Ukrainian (українська)
