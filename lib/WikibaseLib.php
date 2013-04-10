@@ -79,7 +79,7 @@ unset( $dependencies );
 define( 'WBL_VERSION', '0.4 alpha'
 	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
-$wgExtensionCredits['other'][] = array(
+$wgExtensionCredits['wikibase'][] = array(
 	'path' => __DIR__,
 	'name' => 'WikibaseLib',
 	'version' => WBL_VERSION,
@@ -246,6 +246,24 @@ $wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 // Hooks
 $wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerPhpUnitTests';
 $wgHooks['ResourceLoaderTestModules'][]				= 'Wikibase\LibHooks::registerQUnitTests';
+
+/**
+ * Called when generating the extensions credits, use this to change the tables headers.
+ * @see https://www.mediawiki.org/wiki/Manual:Hooks/ExtensionTypes
+ *
+ * @since 0.1
+ *
+ * @param array &$extensionTypes
+ *
+ * @return boolean
+ */
+$wgHooks['ExtensionTypes'][] = function( array &$extensionTypes ) {
+	// @codeCoverageIgnoreStart
+	$extensionTypes['wikibase'] = wfMessage( 'version-wikibase' )->text();
+
+	return true;
+	// @codeCoverageIgnoreEnd
+};
 
 /**
  * Shorthand function to retrieve a template filled with the specified parameters.
