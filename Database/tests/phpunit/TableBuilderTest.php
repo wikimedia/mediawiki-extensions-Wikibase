@@ -5,7 +5,6 @@ namespace Wikibase\Test\Database;
 use Wikibase\Database\TableBuilder;
 use Wikibase\Database\FieldDefinition;
 use Wikibase\Database\TableDefinition;
-use Wikibase\Database\ObservableQueryInterface;
 use NullMessageReporter;
 
 /**
