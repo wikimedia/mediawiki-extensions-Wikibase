@@ -2,12 +2,17 @@
 
 namespace Wikibase\Test\Query\SQLStore;
 
-use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
-use Wikibase\Database\MediaWikiQueryInterface;
+use Wikibase\Database\FieldDefinition;
+use Wikibase\Database\ObservableQueryInterface;
+use Wikibase\Database\TableDefinition;
+use Wikibase\Item;
+use Wikibase\QueryEngine\SQLStore\DVHandler\BooleanHandler;
+use Wikibase\QueryEngine\SQLStore\DVHandler\MonolingualTextHandler;
+use Wikibase\QueryEngine\SQLStore\DVHandler\StringHandler;
+use Wikibase\QueryEngine\SQLStore\DataValueTable;
 use Wikibase\QueryEngine\SQLStore\Schema;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
 use Wikibase\QueryEngine\SQLStore\Updater;
-use Wikibase\Repo\LazyDBConnectionProvider;
 use Wikibase\Test\Query\QueryStoreUpdaterTest;
 
 /**
@@ -51,20 +56,56 @@ class UpdaterTest extends QueryStoreUpdaterTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$connectionProvider = new LazyDBConnectionProvider( DB_MASTER );
 		$storeSchema = new Schema( new StoreConfig( 'foo', 'bar', array() ) );
-		$queryInterface = new MediaWikiQueryInterface(
-			$connectionProvider,
-			new ExtendedMySQLAbstraction( $connectionProvider )
-		);
+		$queryInterface = new ObservableQueryInterface();
 
 		$instances[] = new Updater( $storeSchema, $queryInterface );
 
 		return $instances;
 	}
 
-	public function testFoo() {
-		// TODO
+	protected function newStoreSchema() {
+		$dataValueHandlers = array();
+
+		$dataValueHandlers['boolean'] = new BooleanHandler( new DataValueTable(
+			new TableDefinition(
+				'boolean',
+				array(
+					new FieldDefinition( 'value', FieldDefinition::TYPE_BOOLEAN, false ),
+				)
+			),
+			'value',
+			'value'
+		) );
+
+		$dataValueHandlers['monolingualtext'] = new MonolingualTextHandler( new DataValueTable(
+			new TableDefinition(
+				'mono_text',
+				array(
+					new FieldDefinition( 'text', FieldDefinition::TYPE_TEXT, false ),
+					new FieldDefinition( 'language', FieldDefinition::TYPE_TEXT, false ),
+					new FieldDefinition( 'json', FieldDefinition::TYPE_TEXT, false ),
+				)
+			),
+			'json',
+			'text',
+			'text'
+		) );
+
+		return new Schema( new StoreConfig( 'foo', 'bar', $dataValueHandlers ) );
+	}
+
+	public function testInsertEntity() {
+		$item = Item::newEmpty();
+		$item->setId( 42 );
+
+		$queryInterface = new ObservableQueryInterface();
+
+		$updater = new Updater( $this->newStoreSchema(), $queryInterface );
+
+		$updater->insertEntity( $item );
+
+		// TODO: further implement
 		$this->assertTrue( true );
 	}
 
