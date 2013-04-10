@@ -63,23 +63,15 @@ class TableBuilderTest extends \MediaWikiTestCase {
 
 		$reporter = new NullMessageReporter();
 
-		$queryInterface = new ObservableQueryInterface();
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
 
-		$assertEquals = array( $this, 'assertEquals' );
-		$callCount = 0;
-
-		$queryInterface->registerCallback(
-			'tableExists',
-			function( $tableName ) use ( $table, &$callCount, $assertEquals ) {
-				call_user_func( $assertEquals, $table->getName(), $tableName );
-				$callCount += 1;
-			}
-		);
+		$queryInterface->expects( $this->once() )
+			->method( 'tableExists' )
+			->with( $table->getName() );
 
 		$builder = new TableBuilder( $queryInterface, $reporter );
 
 		$builder->createTable( $table );
-		$this->assertEquals( 1, $callCount );
 	}
 
 }
