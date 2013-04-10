@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dtwj8Vgg",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T09:22:54Z",
+      "side": 1,
+      "message": "would be nice if we could configure this explicitley. $wgServer is a decent default, though.",
+      "revId": "fcdd4cbb20c510a9facb3adbc52c0f26e25b2d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DtygBEgg",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T09:22:54Z",
+      "side": 1,
+      "message": "Maybe we\u0027d want config options for each of these namespaces?",
+      "revId": "fcdd4cbb20c510a9facb3adbc52c0f26e25b2d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dt4gQRlA",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T09:22:54Z",
+      "side": 1,
+      "message": "Why do we take an EntityContent object here? An Entity object would make more sense, I think.",
+      "revId": "fcdd4cbb20c510a9facb3adbc52c0f26e25b2d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dt6gNAjg",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T09:22:54Z",
+      "side": 1,
+      "message": "getId() returns an EntityId() object. Best call getPrefixedId() on that.\n\nThe ucfirst thing is odd... IMHO the canonical for of the URI should have a lower case q; The upper case Q is an artifact of mapping to wiki page names.  Please ask Denny about this.",
+      "revId": "fcdd4cbb20c510a9facb3adbc52c0f26e25b2d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dt0gaXm4",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T09:22:54Z",
+      "side": 1,
+      "message": "why indeed?",
+      "revId": "fcdd4cbb20c510a9facb3adbc52c0f26e25b2d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dt2gXGkU",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T09:22:54Z",
+      "side": 1,
+      "message": "This pattern of attaching prefixes should be wrapped in a function. makeShortEntityURI() or some such.",
+      "revId": "fcdd4cbb20c510a9facb3adbc52c0f26e25b2d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dt8geTlw",
+        "filename": "repo/includes/content/LinkedDataSerializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T09:22:54Z",
+      "side": 1,
+      "message": "Uh, what? This is just for debugging, right? If $data isn\u0027t scalar, what is it?",
+      "revId": "fcdd4cbb20c510a9facb3adbc52c0f26e25b2d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dt0gzPvY",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T09:22:54Z",
+      "side": 1,
+      "message": "Note that formats can be specified as mime types using the format\u003d parameter. We have to support mime types (in addition to file extensions) here, so we can in the future use the Accept header for content negotiation.",
+      "revId": "fcdd4cbb20c510a9facb3adbc52c0f26e25b2d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dt4g5Jtg",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T09:22:54Z",
+      "side": 1,
+      "message": "Maybe it should be called \"createPrinter\" now? Do ApiFormatBase|EasyRdf_Format expose a compatible interface? If not, they should probably not be treated the same.",
+      "revId": "fcdd4cbb20c510a9facb3adbc52c0f26e25b2d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dt6g2YuQ",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T09:22:54Z",
+      "side": 1,
+      "message": "Ick... can we create a wrapper around the EasyRdf_Format that is compatible to the interface of ApiFormatBase (or the parts of that we actually use)? Special-casing with instanceof should really be a last resort...",
+      "revId": "fcdd4cbb20c510a9facb3adbc52c0f26e25b2d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
