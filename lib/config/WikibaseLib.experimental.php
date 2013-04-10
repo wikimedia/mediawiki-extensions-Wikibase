@@ -58,4 +58,4 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreEnd
 };
 
-$wgWBSettings['entityPrefixes']['y'] = \Wikibase\Query::ENTITY_TYPE;
+
