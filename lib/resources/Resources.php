@@ -395,8 +395,8 @@ return call_user_func( function() {
 
 		'jquery.wikibase.toolbarcontroller' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase/jquery.wikibase.toolbarcontroller/toolbarcontroller.js',
-				'jquery.wikibase/jquery.wikibase.toolbarcontroller/toolbarcontroller.definitions.js',
+				'jquery.wikibase/toolbar/toolbarcontroller.js',
+				'jquery.wikibase/toolbar/toolbarcontroller.definitions.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
@@ -407,7 +407,7 @@ return call_user_func( function() {
 
 		'jquery.wikibase.toolbarbase' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase/jquery.wikibase.toolbarbase.js',
+				'jquery.wikibase/toolbar/toolbarbase.js',
 			),
 			'dependencies' => array(
 				'jquery.ui.widget',
@@ -417,7 +417,7 @@ return call_user_func( function() {
 
 		'jquery.wikibase.addtoolbar' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase/jquery.wikibase.addtoolbar.js',
+				'jquery.wikibase/toolbar/addtoolbar.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.toolbarbase',
@@ -429,7 +429,7 @@ return call_user_func( function() {
 
 		'jquery.wikibase.edittoolbar' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase/jquery.wikibase.edittoolbar.js',
+				'jquery.wikibase/toolbar/edittoolbar.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.toolbarbase',
@@ -439,11 +439,14 @@ return call_user_func( function() {
 
 		'jquery.wikibase.removetoolbar' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase/jquery.wikibase.removetoolbar.js',
+				'jquery.wikibase/toolbar/removetoolbar.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.toolbarbase',
-			)
+			),
+			'messages' => array(
+				'wikibase-remove',
+			),
 		),
 
 		'wikibase.templates' => $moduleTemplate + array(
