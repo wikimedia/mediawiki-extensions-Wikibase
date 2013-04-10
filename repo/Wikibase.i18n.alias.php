@@ -169,6 +169,7 @@ $specialPageAliases['lb'] = array(
 	'SetLabel' => array( 'Etiquette_festleeën' ),
 	'SetDescription' => array( 'Beschreiwung_festleeën' ),
 	'SetAliases' => array( 'Aliase_festleeën' ),
+	'EntitiesWithoutLabel' => array( 'Elementer_ouni_Etiquette' ),
 	'ItemsWithoutSitelinks' => array( 'Elementer_ouni_Weblinken' ),
 );
 

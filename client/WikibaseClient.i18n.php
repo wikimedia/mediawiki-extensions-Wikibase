@@ -1091,6 +1091,13 @@ $messages['gsw'] = array(
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 );
 
+/** Gujarati (ગુજરાતી)
+ * @author KartikMistry
+ */
+$messages['gu'] = array(
+	'wikibase-unconnectedpages-submit' => 'જાઓ',
+);
+
 /** Hebrew (עברית)
  * @author Amire80
  * @author ExampleTomer
@@ -2551,8 +2558,10 @@ $messages['yi'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'איר דארפט זיין אריינלאגירט',
 	'wikibase-rc-hide-wikidata' => '$1 וויקידאטן',
 	'wikibase-rc-show-wikidata-pref' => 'ווייזן וויקידאטן רעדאקטירונגען אין לעצטע ענדערונגען',
+	'wikibase-unconnectedpages-page' => 'אנהייבן רעזולטאט ליסטער מיט ארטיקל:',
 	'wikibase-unconnectedpages-submit' => 'גיין',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" איז נישט קיין גילטיקער שפראך־קאד.',
+	'wikibase-unconnectedpages-iwdata-label' => 'נאר בלעטער מיט אינטערשפראך לינקען',
 	'wikibase-unconnectedpages-format-row' => '($1 אינטערשפראך לינקען אויפן בלאט)',
 );
 
