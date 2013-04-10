@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "Dt6iwooo",
+        "filename": "DataModel/DataModel/Claim/ClaimListAccess.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T16:04:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DrDAa2G0",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrH8Mo0I",
         "filename": "DataModel/DataModel/Claim/Claims.php",
         "patchSetId": 1
@@ -215,6 +233,24 @@
     },
     {
       "key": {
+        "uuid": "Dt2iquhs",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T16:04:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DrD8GKyM",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrB8J7zE",
         "filename": "DataModel/DataModel/Claim/Claims.php",
         "patchSetId": 1
@@ -250,6 +286,24 @@
     },
     {
       "key": {
+        "uuid": "Dt0itfjA",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T16:04:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DrB8J7zE",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrEV7FLw",
         "filename": "DataModel/tests/phpunit/Claim/ClaimsTest.php",
         "patchSetId": 1
@@ -267,6 +321,24 @@
     },
     {
       "key": {
+        "uuid": "Dt.i9SmM",
+        "filename": "DataModel/tests/phpunit/Claim/ClaimsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T16:04:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DrEV7FLw",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DrOVIII4",
         "filename": "DataModel/tests/phpunit/Claim/ClaimsTest.php",
         "patchSetId": 1
@@ -278,6 +350,24 @@
       "writtenOn": "2013-03-31T19:29:42Z",
       "side": 1,
       "message": "assertSize",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dt4izZpc",
+        "filename": "DataModel/tests/phpunit/Claim/ClaimsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-10T16:04:41Z",
+      "side": 1,
+      "message": "doesn\u0027t seem to exist",
+      "parentUuid": "DrOVIII4",
       "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
