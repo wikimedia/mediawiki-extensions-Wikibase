@@ -371,6 +371,24 @@
       "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dt8OhUfw",
+        "filename": "DataModel/tests/phpunit/Claim/ClaimsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-10T16:19:56Z",
+      "side": 1,
+      "message": "assertCount",
+      "parentUuid": "Dt4izZpc",
+      "revId": "46db1dd4ebf8a64d3582a2548031b3c7795cd990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
