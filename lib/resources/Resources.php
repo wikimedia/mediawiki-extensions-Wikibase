@@ -447,7 +447,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.templates',
-				'jquery.ui.widget'
+				'jquery.ui.widget',
+				'wikibase.utilities'
 			)
 		),
 
