@@ -82,6 +82,9 @@ return call_user_func( function() {
 				'jquery.valueview.experts', // because vv deals with ExpertFactory
 				'jquery.valueview.experts.unsupportedvalue', // for displaying unsupported values
 				'jquery.valueview.experts.emptyvalue', // for displaying empty values
+				'jquery.valueview.experts.stringvalue',
+				'jquery.valueview.experts.entityidvalue',
+				'jquery.valueview.experts.commonsmediatype',
 			),
 		),
 
@@ -131,6 +134,16 @@ return call_user_func( function() {
 			'messages' => array(
 				'valueview-expert-emptyvalue-empty',
 			)
+		),
+
+		'jquery.valueview.experts.entityidvalue' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.BifidExpert.js', // todo: define separate modules
+				'jquery.valueview/valueview.experts/experts.StaticDom.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts.stringvalue',
+			),
 		),
 
 		'jquery.valueview.experts.stringvalue' => $moduleTemplate + array(
