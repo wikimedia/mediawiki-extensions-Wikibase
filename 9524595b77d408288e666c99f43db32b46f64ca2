@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dt8jmTrM",
+        "filename": "repo/includes/store/sql/DispatchStats.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-10T14:43:49Z",
+      "side": 1,
+      "message": "Looks like something to use constants for",
+      "revId": "9524595b77d408288e666c99f43db32b46f64ca2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dt.jrCng",
+        "filename": "repo/includes/store/sql/DispatchStats.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-10T14:43:49Z",
+      "side": 1,
+      "message": "I already explained that I think this class is doing 3 distinct things. This might first with one of them, but not with the other two. ...",
+      "revId": "9524595b77d408288e666c99f43db32b46f64ca2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
