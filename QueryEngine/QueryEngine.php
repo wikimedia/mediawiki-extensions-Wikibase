@@ -21,7 +21,7 @@
  * @since 0.1
  *
  * @file
- * @ingroup WikibaseQuery
+ * @ingroup WikibaseQueryEngine
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -32,7 +32,7 @@ define( 'WIKIBASE_Query', '0.1 alpha' );
 // @codeCoverageIgnoreStart
 if ( defined( 'MEDIAWIKI' ) ) {
 	call_user_func( function() {
-		require_once __DIR__ . '/Query.mw.php';
+		require_once __DIR__ . '/QueryEngine.mw.php';
 	} );
 }
 // @codeCoverageIgnoreEnd
