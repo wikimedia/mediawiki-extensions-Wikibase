@@ -21,6 +21,7 @@ define( 'WB_EXPERIMENTAL_FEATURES', true );
 require_once __DIR__ . '/lib/WikibaseLib.php';
 require_once __DIR__ . '/repo/Wikibase.php';
 require_once __DIR__ . '/client/WikibaseClient.php';
+require_once __DIR__ . '/Query/WikibaseQuery.php';
 
-require_once( __DIR__ . "/client/ExampleSettings.php" );
+require_once __DIR__ . '/client/ExampleSettings.php';
 require_once __DIR__ . '/repo/ExampleSettings.php';
