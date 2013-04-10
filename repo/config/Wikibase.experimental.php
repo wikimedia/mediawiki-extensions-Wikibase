@@ -40,7 +40,7 @@ if ( !defined( 'WIKIBASE_DATABASE_VERSION' ) && defined( 'WB_EXPERIMENTAL_FEATUR
 
 // Include the Query component if that hasn't been done yet.
 if ( !defined( 'WIKIBASE_QUERY_VERSION' ) && defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
-	@include_once( __DIR__ . '/../../Query/Query.php' );
+	@include_once( __DIR__ . '/../../QueryEngine/Query.php' );
 }
 
 $dir = __DIR__ . '/../';
