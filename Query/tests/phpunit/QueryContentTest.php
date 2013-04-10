@@ -1,7 +1,9 @@
 <?php
 
+namespace Wikibase\Test;
+
 /**
- * Class registration file for the Wikibase Query extension.
+ * Tests for the Wikibase\QueryContent class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,30 +20,31 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @file
  * @since 0.1
  *
- * @file
- * @ingroup WikibaseQuery
+ * @ingroup WikibaseRepoTest
+ * @ingroup Test
+ *
+ * @group Database
+ * @group Wikibase
+ * @group WikibaseQuery
+ * @group WikibaseContent
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-return call_user_func( function() {
+class QueryContentTest extends EntityContentTest {
 
-	$classes = array(
-//		'Wikibase\Query\',
-	);
-
-	$paths = array();
-
-	foreach ( $classes as $class ) {
-		$path = str_replace( '\\', '/', substr( $class, 9 ) ) . '.php';
-
-		$paths[$class] = $path;
+	/**
+	 * @see EntityContentTest::getContentClass
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	protected function getContentClass() {
+		return '\Wikibase\QueryContent';
 	}
 
-	$paths['Wikibase\Query'] = 'Query/Query.php';
-
-	return $paths;
-
-} );
+}

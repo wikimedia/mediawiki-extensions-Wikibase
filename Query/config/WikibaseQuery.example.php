@@ -1,9 +1,10 @@
 <?php
 
-namespace Wikibase\Test;
-
 /**
- * Tests for the Wikibase\QueryContent class.
+ * Example configuration for the Wikibase Query extension.
+ *
+ * This file is NOT an entry point the Wikibase Query extension. Use WikibaseQuery.php.
+ * It should furthermore not be included from outside the extension.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,31 +21,18 @@ namespace Wikibase\Test;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @file
  * @since 0.1
  *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
- * @group Database
- * @group Wikibase
- * @group WikibaseRepo
- * @group WikibaseContent
+ * @file
+ * @ingroup WikibaseQuery
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class QueryContentTest extends EntityContentTest {
 
-	/**
-	 * @see EntityContentTest::getContentClass
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	protected function getContentClass() {
-		return '\Wikibase\QueryContent';
-	}
-
+if ( !defined( 'WIKIBASE_QUERY_EXAMPLE_ENTRY' ) ) {
+	die( 'Not an entry point.' );
 }
+
+define( 'WB_NS_QUERY', 124 );
+define( 'WB_NS_QUERY_TALK', 125 );

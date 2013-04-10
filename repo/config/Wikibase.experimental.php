@@ -51,9 +51,6 @@ $wgAutoloadClasses['Wikibase\Api\SetStatementRank']		= $dir . 'includes/api/SetS
 
 $wgAutoloadClasses['SpecialEntityData'] 				= $dir . 'includes/specials/SpecialEntityData.php';
 
-$wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
-$wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
-
 unset( $dir );
 
 $wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Api\RemoveQualifiers';
@@ -61,8 +58,6 @@ $wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Api\SetQualifier';
 $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
 
 $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
-
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] 	= '\Wikibase\QueryHandler';
 
 /**
  * Hook to add PHPUnit test cases.
@@ -80,9 +75,6 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'api/RemoveQualifiers',
 		'api/SetStatementRank',
 		'api/SetQualifier',
-
-		'content/QueryContent',
-		'content/QueryHandler',
 
 		'specials/SpecialEntityData',
 

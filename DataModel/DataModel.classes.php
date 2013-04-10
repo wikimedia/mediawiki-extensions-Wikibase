@@ -41,7 +41,6 @@ return call_user_func( function() {
 		'Wikibase\Item' => 'DataModel/Entity/Item.php',
 		'Wikibase\ItemObject' => 'DataModel/Entity/Item.php',
 		'Wikibase\Property' => 'DataModel/Entity/Property.php',
-		'Wikibase\Query' => 'DataModel/Entity/Query.php',
 
 		'Wikibase\PropertyNoValueSnak' => 'DataModel/Snak/PropertyNoValueSnak.php',
 		'Wikibase\PropertySnak' => 'DataModel/Snak/PropertySnak.php',

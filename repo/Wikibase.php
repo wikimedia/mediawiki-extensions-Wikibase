@@ -64,7 +64,6 @@ $wgExtensionCredits['wikibase'][] = array(
 // constants
 define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
 define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
-define( 'CONTENT_MODEL_WIKIBASE_QUERY', "wikibase-query" );
 
 $dir = __DIR__ . '/';
 
@@ -117,19 +116,15 @@ $wgAutoloadClasses['Wikibase\Summary']								= $dir . 'includes/Summary.php';
 $wgAutoloadClasses['Wikibase\HistoryEntityAction'] 		= $dir . 'includes/actions/HistoryEntityAction.php';
 $wgAutoloadClasses['Wikibase\HistoryItemAction'] 		= $dir . 'includes/actions/HistoryItemAction.php';
 $wgAutoloadClasses['Wikibase\HistoryPropertyAction'] 	= $dir . 'includes/actions/HistoryPropertyAction.php';
-$wgAutoloadClasses['Wikibase\HistoryQueryAction'] 		= $dir . 'includes/actions/HistoryQueryAction.php';
 $wgAutoloadClasses['Wikibase\EditEntityAction'] 		= $dir . 'includes/actions/EditEntityAction.php';
 $wgAutoloadClasses['Wikibase\EditItemAction'] 			= $dir . 'includes/actions/EditItemAction.php';
 $wgAutoloadClasses['Wikibase\EditPropertyAction'] 		= $dir . 'includes/actions/EditPropertyAction.php';
-$wgAutoloadClasses['Wikibase\EditQueryAction'] 			= $dir . 'includes/actions/EditQueryAction.php';
 $wgAutoloadClasses['Wikibase\ViewEntityAction'] 		= $dir . 'includes/actions/ViewEntityAction.php';
 $wgAutoloadClasses['Wikibase\ViewItemAction'] 			= $dir . 'includes/actions/ViewItemAction.php';
 $wgAutoloadClasses['Wikibase\ViewPropertyAction'] 		= $dir . 'includes/actions/ViewPropertyAction.php';
-$wgAutoloadClasses['Wikibase\ViewQueryAction'] 			= $dir . 'includes/actions/ViewQueryAction.php';
 $wgAutoloadClasses['Wikibase\SubmitEntityAction'] 		= $dir . 'includes/actions/EditEntityAction.php';
 $wgAutoloadClasses['Wikibase\SubmitItemAction'] 		= $dir . 'includes/actions/EditItemAction.php';
 $wgAutoloadClasses['Wikibase\SubmitPropertyAction'] 	= $dir . 'includes/actions/EditPropertyAction.php';
-$wgAutoloadClasses['Wikibase\SubmitQueryAction'] 		= $dir . 'includes/actions/EditQueryAction.php';
 
 // includes/api
 $wgAutoloadClasses['Wikibase\Api\ApiWikibase'] 			= $dir . 'includes/api/ApiWikibase.php';
@@ -161,8 +156,6 @@ $wgAutoloadClasses['Wikibase\ItemContent'] 				= $dir . 'includes/content/ItemCo
 $wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/content/ItemHandler.php';
 $wgAutoloadClasses['Wikibase\PropertyContent'] 			= $dir . 'includes/content/PropertyContent.php';
 $wgAutoloadClasses['Wikibase\PropertyHandler'] 			= $dir . 'includes/content/PropertyHandler.php';
-$wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
-$wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
 
 // includes/specials
 $wgAutoloadClasses['SpecialNewEntity'] 					= $dir . 'includes/specials/SpecialNewEntity.php';
@@ -279,7 +272,6 @@ $wgHooks['OutputPageBodyAttributes'][] 				= 'Wikibase\RepoHooks::onOutputPageBo
 //FIXME: handle other types of entities with autocomments too!
 $wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_ITEM, "wikibase-item" ) );
 $wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_PROPERTY, "wikibase-property" ) );
-$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_QUERY, "wikibase-query" ) );
 $wgHooks['PageHistoryLineEnding'][]					= 'Wikibase\RepoHooks::onPageHistoryLineEnding';
 $wgHooks['WikibaseRebuildData'][] 					= 'Wikibase\RepoHooks::onWikibaseRebuildData';
 $wgHooks['WikibaseDeleteData'][] 					= 'Wikibase\RepoHooks::onWikibaseDeleteData';
@@ -296,7 +288,6 @@ $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/R
 // register hooks and handlers
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] 		= '\Wikibase\ItemHandler';
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] 	= '\Wikibase\PropertyHandler';
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] 		= '\Wikibase\QueryHandler';
 
 $wgWBStores = array();
 
