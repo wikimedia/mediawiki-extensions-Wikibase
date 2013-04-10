@@ -405,13 +405,22 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.wikibase.toolbarbase' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.toolbarbase.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+				'wikibase.ui.Toolbar',
+			),
+		),
+
 		'jquery.wikibase.addtoolbar' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.addtoolbar.js',
 			),
 			'dependencies' => array(
-				'jquery.ui.widget',
-				'wikibase.ui.Toolbar',
+				'jquery.wikibase.toolbarbase',
 			),
 			'messages' => array(
 				'wikibase-add'
@@ -423,6 +432,7 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.edittoolbar.js',
 			),
 			'dependencies' => array(
+				'jquery.wikibase.toolbarbase',
 				'wikibase.ui.PropertyEditTool', // needs wikibase.ui.Toolbar.EditGroup
 			)
 		),
@@ -432,7 +442,7 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.removetoolbar.js',
 			),
 			'dependencies' => array(
-				'wikibase.ui.PropertyEditTool', // needs wikibase.ui.Toolbar.EditGroup
+				'jquery.wikibase.toolbarbase',
 			)
 		),
 
