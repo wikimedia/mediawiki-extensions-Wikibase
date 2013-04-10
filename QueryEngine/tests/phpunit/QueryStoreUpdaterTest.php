@@ -2,10 +2,11 @@
 
 namespace Wikibase\Test\Query;
 
-use Wikibase\QueryEngine\QueryStore;
+use Wikibase\Item;
+use Wikibase\QueryEngine\QueryStoreUpdater;
 
 /**
- * Base test class for Wikibase\QueryEngine\QueryStore implementing classes.
+ * Base test class for Wikibase\QueryEngine\QueryStoreUpdater implementing classes.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,31 +36,58 @@ abstract class QueryStoreUpdaterTest extends \MediaWikiTestCase {
 	/**
 	 * @since 0.1
 	 *
-	 * @return QueryStore[]
+	 * @return QueryStoreUpdater[]
 	 */
 	protected abstract function getInstances();
 
 	/**
 	 * @since 0.1
 	 *
-	 * @return QueryStore[][]
+	 * @return QueryStoreUpdater[][]
 	 */
 	public function instanceProvider() {
 		return $this->arrayWrap( $this->getInstances() );
 	}
 
-	public function testInsertEntity() {
-		// TODO
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param QueryStoreUpdater $updater
+	 */
+	public function testInsertEntityDoesNotFatal( QueryStoreUpdater $updater ) {
+		$item = Item::newEmpty();
+		$item->setId( 42 );
+
+		$updater->insertEntity( $item );
+
 		$this->assertTrue( true );
 	}
 
-	public function testUpdateEntity() {
-		// TODO
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param QueryStoreUpdater $updater
+	 */
+	public function testUpdateEntityDoesNotFatal( QueryStoreUpdater $updater ) {
+		$item = Item::newEmpty();
+		$item->setId( 42 );
+
+		$updater->updateEntity( $item );
+
 		$this->assertTrue( true );
 	}
 
-	public function testDeleteEntity() {
-		// TODO
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param QueryStoreUpdater $updater
+	 */
+	public function testDeleteEntityDoesNotFatal( QueryStoreUpdater $updater ) {
+		$item = Item::newEmpty();
+		$item->setId( 42 );
+
+		$updater->deleteEntity( $item );
+
 		$this->assertTrue( true );
 	}
 
