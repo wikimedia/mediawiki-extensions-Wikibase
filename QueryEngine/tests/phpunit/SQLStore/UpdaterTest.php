@@ -5,10 +5,11 @@ namespace Wikibase\Test\Query\SQLStore;
 use Wikibase\Database\FieldDefinition;
 use Wikibase\Database\ObservableQueryInterface;
 use Wikibase\Database\TableDefinition;
+use Wikibase\Entity;
 use Wikibase\Item;
+use Wikibase\Property;
 use Wikibase\QueryEngine\SQLStore\DVHandler\BooleanHandler;
 use Wikibase\QueryEngine\SQLStore\DVHandler\MonolingualTextHandler;
-use Wikibase\QueryEngine\SQLStore\DVHandler\StringHandler;
 use Wikibase\QueryEngine\SQLStore\DataValueTable;
 use Wikibase\QueryEngine\SQLStore\Schema;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
@@ -92,21 +93,54 @@ class UpdaterTest extends QueryStoreUpdaterTest {
 			'text'
 		) );
 
-		return new Schema( new StoreConfig( 'foo', 'bar', $dataValueHandlers ) );
+		return new Schema( new StoreConfig( 'foobar', 'nyan_', $dataValueHandlers ) );
 	}
 
-	public function testInsertEntity() {
+	public function entityWithoutClaimsProvider() {
+		$argLists = array();
+
 		$item = Item::newEmpty();
 		$item->setId( 42 );
 
-		$queryInterface = new ObservableQueryInterface();
+		$argLists[] = array( $item );
+
+
+		$item = Item::newEmpty();
+		$item->setId( 31337 );
+
+		$argLists[] = array( $item );
+
+
+		$property = Property::newEmpty();
+		$property->setDataTypeId( 'string' );
+		$property->setId( 9001 );
+
+		$argLists[] = array( $property );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider entityWithoutClaimsProvider
+	 */
+	public function testInsertEntityWithoutClaims( Entity $entity ) {
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
+
+		$queryInterface->expects( $this->once() )
+			->method( 'insert' )
+			->with(
+				$this->equalTo( 'nyan_entities' ),
+				$this->equalTo(
+					array(
+						'type' => $entity->getType(),
+						'number' => $entity->getId()->getNumericId(),
+					)
+				)
+			);
 
 		$updater = new Updater( $this->newStoreSchema(), $queryInterface );
 
-		$updater->insertEntity( $item );
-
-		// TODO: further implement
-		$this->assertTrue( true );
+		$updater->insertEntity( $entity );
 	}
 
 }
