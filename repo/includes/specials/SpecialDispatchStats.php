@@ -114,6 +114,8 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 			$lang->timeanddate( $stats->getMaxChangeTimestamp() ),
 		) );
 
+		//TODO: calculate changes/minute over the last hour. Cache it for a minute or so.
+
 		$this->getOutput()->addHTML( Html::closeElement( 'table' ));
 
 		// dispatch stats ------
@@ -149,6 +151,28 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 			$this->msg( 'wikibase-dispatchstats-average' )->text(),
 			$stats->getAverage()
 		);
+
+		$this->getOutput()->addHTML( Html::closeElement( 'table' ));
+
+		// client states ------
+		$this->getOutput()->addHTML( Html::openElement( 'table', array( 'class' => 'wikitable' ) ));
+
+		$this->outputRow( array(
+			$this->msg( 'wikibase-dispatchstats-state' )->text(),
+			$this->msg( 'wikibase-dispatchstats-count' )->text(),
+		), 'th' );
+
+		$this->outputRow( array(
+			$this->msg( 'wikibase-dispatchstats-total' )->text(),
+			$stats->getClientCount()
+		) );
+
+		foreach ( \Wikibase\DispatchStats::$states as $state ) {
+			$this->outputRow( array(
+				$this->msg( 'wikibase-dispatchstats-state-' . $state )->text(),
+				$stats->getStateCount( $state )
+			) );
+		}
 
 		$this->getOutput()->addHTML( Html::closeElement( 'table' ));
 	}
