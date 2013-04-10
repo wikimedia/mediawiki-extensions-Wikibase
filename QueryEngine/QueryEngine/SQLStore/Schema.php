@@ -229,21 +229,13 @@ class Schema {
 	}
 
 	/**
-	 * TODO
-	 *
 	 * @since 0.1
 	 *
-	 * @return TableDefinition[]
+	 * @return TableDefinition
 	 */
-	private function getNonDvTables() {
-		$tables = array();
-
-		// TODO: multi field indexes
-		// TODO: more optimal types
-
-		// Id map with Wikibase EntityId to internal SQL store id
-		$tables[] = new TableDefinition(
-			'entities',
+	public function getEntitiesTable() {
+		return new TableDefinition(
+			$this->config->getTablePrefix() . 'entities',
 			array(
 				// Internal id
 				new FieldDefinition(
@@ -277,10 +269,27 @@ class Schema {
 				),
 			)
 		);
+	}
+
+	/**
+	 * TODO
+	 *
+	 * @since 0.1
+	 *
+	 * @return TableDefinition[]
+	 */
+	private function getNonDvTables() {
+		$tables = array();
+
+		// TODO: multi field indexes
+		// TODO: more optimal types
+
+		// Id map with Wikibase EntityId to internal SQL store id
+		$tables[] = $this->getEntitiesTable();
 
 		// Claim id table
 		$tables[] = new TableDefinition(
-			'claims',
+			$this->config->getTablePrefix() . 'claims',
 			array(
 				// Internal id
 				new FieldDefinition(
@@ -347,7 +356,7 @@ class Schema {
 
 		// Table for snaks without a value
 		$tables[] = new TableDefinition(
-			'valueless_snaks',
+			$this->config->getTablePrefix() . 'valueless_snaks',
 			array_merge(
 				$this->getPropertySnakFields(),
 				array(
