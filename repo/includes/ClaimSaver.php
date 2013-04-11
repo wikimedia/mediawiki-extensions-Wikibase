@@ -6,6 +6,7 @@ use User;
 use MWException;
 use Status;
 use ValueParsers\ParseException;
+use Wikibase\Claims;
 use Wikibase\ExceptionWithCode;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -36,9 +37,9 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class ClaimSaver {
-
 	/**
 	 * @see ApiBase::execute
 	 *
@@ -48,6 +49,7 @@ class ClaimSaver {
 	 * @param int|null $baseRevId
 	 * @param string $token
 	 * @param User $user
+	 * @param ClaimSummaryBuilder|null $claimSummaryBuilder
 	 *
 	 * @return Status The status. The status value is an array which may contain
 	 *         the following fields:
@@ -58,15 +60,24 @@ class ClaimSaver {
 	 *
 	 *         This status object can be used with ApiWikibase::handleSaveStatus().
 	 */
-	public function saveClaim( Claim $claim, $baseRevId, $token, User $user ) {
+	public function saveClaim( Claim $claim, $baseRevId, $token, User $user, ClaimSummaryBuilder $claimSummaryBuilder = null ) {
 		try {
 			$entityId = $this->getEntityIdForClaim( $claim );
 
 			$content = $this->getEntityContent( $entityId, $baseRevId );
 
+			$summary = null;
+
+			if ( $claimSummaryBuilder !== null ) {
+				$summary = $claimSummaryBuilder->buildClaimSummary(
+						new Claims( $content->getEntity()->getClaims() ),
+						$claim
+				);
+			}
+
 			$this->updateClaim( $content->getEntity(), $claim );
 
-			$status = $this->saveChanges( $content, $baseRevId, $token, $user );
+			$status = $this->saveChanges( $content, $baseRevId, $token, $user, $summary );
 		} catch ( ExceptionWithCode $ex ) {
 			// put the error code into the status
 			$value = array( 'errorCode' => $ex->getErrorCode() );
@@ -116,16 +127,16 @@ class ClaimSaver {
 	 *
 	 * @param Entity $entity
 	 * @param Claim $claim
+	 *
 	 */
 	protected function updateClaim( Entity $entity, Claim $claim ) {
-		$claims = new \Wikibase\Claims( $entity->getClaims() );
+		$claims = new Claims( $entity->getClaims() );
 
 		if ( $claims->hasClaimWithGuid( $claim->getGuid() ) ) {
 			$claims->removeClaimWithGuid( $claim->getGuid() );
 		}
 
 		$claims->addClaim( $claim );
-
 		$entity->setClaims( $claims );
 	}
 
@@ -167,15 +178,16 @@ class ClaimSaver {
 	 * @param int|null $baseRevisionId
 	 * @param string $token
 	 * @param User $user
+	 * @param Summary|null $summary
 	 *
 	 * @return Status
 	 */
-	protected function saveChanges( EntityContent $content, $baseRevisionId, $token, User $user ) {
+	protected function saveChanges( EntityContent $content, $baseRevisionId, $token, User $user, Summary $summary ) {
 		$baseRevisionId = is_int( $baseRevisionId ) && $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new \Wikibase\EditEntity( $content, $user, $baseRevisionId );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$summary !== null ? $summary->toString() : '',
 			EDIT_UPDATE,
 			$token
 		);
