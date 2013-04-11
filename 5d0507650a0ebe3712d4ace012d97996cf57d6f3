@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DuG2HMbk",
+        "filename": "lib/maintenance/dispatchChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-11T09:59:46Z",
+      "side": 1,
+      "message": "Why trace, if we are already logging? That seems redundant.",
+      "revId": "5d0507650a0ebe3712d4ace012d97996cf57d6f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DuA2Udd8",
+        "filename": "lib/maintenance/dispatchChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-11T09:59:46Z",
+      "side": 1,
+      "message": "Perhaps this should go into getClientLock()?",
+      "revId": "5d0507650a0ebe3712d4ace012d97996cf57d6f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DuC2ROfA",
+        "filename": "lib/maintenance/dispatchChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-11T09:59:46Z",
+      "side": 1,
+      "message": "trace+log is redundant",
+      "revId": "5d0507650a0ebe3712d4ace012d97996cf57d6f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
