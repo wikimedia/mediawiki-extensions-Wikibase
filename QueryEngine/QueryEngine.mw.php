@@ -85,7 +85,9 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		'SQLStore/DVHandler/NumberHandler',
 		'SQLStore/DVHandler/StringHandler',
 
+		'SQLStore/SnakStore/NoValueSnakStore',
 		'SQLStore/SnakStore/PropertyValueSnakStore',
+		'SQLStore/SnakStore/SomeValueSnakStore',
 
 		'SQLStore/DataValueHandlers',
 		'SQLStore/DataValueHandler',
