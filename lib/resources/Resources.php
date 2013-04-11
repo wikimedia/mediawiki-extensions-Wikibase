@@ -458,18 +458,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'jquery.ui.suggester' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.ui/jquery.ui.suggester.js'
-			),
-			'styles' => array(
-				'jquery.ui/themes/default/jquery.ui.suggester.css'
-			),
-			'dependencies' => array(
-				'jquery.ui.autocomplete'
-			)
-		),
-
 		'jquery.wikibase.siteselector' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.siteselector.js'
