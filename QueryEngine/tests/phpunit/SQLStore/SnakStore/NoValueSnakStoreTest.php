@@ -41,7 +41,14 @@ use Wikibase\QueryEngine\SQLStore\SnakStore\NoValueSnakStore;
 class NoValueSnakStoreTest extends SnakStoreTest {
 
 	protected function getInstance() {
-		return new NoValueSnakStore();
+		return new NoValueSnakStore(
+			$this->getMock( 'Wikibase\Database\QueryInterface' ),
+			$this->getTableDefinition()
+		);
+	}
+
+	protected function getTableDefinition() {
+		return $this->newStoreSchema()->
 	}
 
 	public function canStoreProvider() {
@@ -55,6 +62,15 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 		$argLists[] = array( false, new PropertySomeValueSnak( 720101 ) );
 
 		return $argLists;
+	}
+
+	/**
+	 * @dataProvider storeSnakProvider
+	 */
+	public function testStoreSnak( PropertyNoValueSnak $snak ) {
+		$this->getInstance()->storeSnak( $snak );
+
+
 	}
 
 }
