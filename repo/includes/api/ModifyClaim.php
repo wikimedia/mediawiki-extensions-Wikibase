@@ -2,6 +2,8 @@
 namespace Wikibase\Api;
 
 use ApiBase, MWException;
+use Wikibase\Claims;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 use Wikibase\Summary;
 
@@ -33,6 +35,7 @@ use Wikibase\Summary;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 abstract class ModifyClaim extends ApiWikibase {
 
@@ -41,19 +44,17 @@ abstract class ModifyClaim extends ApiWikibase {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Snak $snak
 	 * @param string $action
 	 *
 	 * @return Summary
 	 */
-	protected function createSummary( Snak $snak, $action ) {
+	protected function createSummary( $action ) {
 		if ( !is_string( $action ) ) {
 			throw new \MWException( 'action is invalid or unknown type.' );
 		}
 
 		$summary = new Summary( $this->getModuleName() );
 		$summary->setAction( $action );
-		$summary->addAutoSummaryArgs( $snak->getPropertyId(), $snak->getDataValue() );
 
 		return $summary;
 	}
