@@ -4,11 +4,14 @@ namespace Wikibase\Api;
 
 use MWException;
 use ApiBase;
-
+use Diff\ListDiffer;
 use Wikibase\EntityContent;
 use Wikibase\Claim;
 use Wikibase\EntityContentFactory;
+use Wikibase\ClaimDiffer;
 use Wikibase\ClaimSaver;
+use Wikibase\ClaimSummary;
+use Wikibase\Summary;
 
 /**
  * API module for creating or updating an entire Claim.
@@ -35,6 +38,7 @@ use Wikibase\ClaimSaver;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetClaim extends ApiWikibase {
 
@@ -48,7 +52,8 @@ class SetClaim extends ApiWikibase {
 	public function execute() {
 		$claim = $this->getClaimFromRequest();
 
-		$claimSetter = new ClaimSaver();
+		$claimSaver = new ClaimSaver();
+		$claimDiffer = new ClaimDiffer( new ListDiffer() );
 
 		$params = $this->extractRequestParams();
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -56,7 +61,14 @@ class SetClaim extends ApiWikibase {
 
 		$newRevisionId = null;
 
-		$status = $claimSetter->saveClaim( $claim, $baseRevisionId, $token, $this->getUser() );
+		$status = $claimSaver->saveClaim(
+			$claim,
+			$claimDiffer,
+			$baseRevisionId,
+			$token,
+			$this->getUser(),
+			new Summary( $this->getModuleName() )
+		);
 		$this->handleSaveStatus( $status ); // die on error, report warnings, etc
 
 		$statusValue = $status->getValue();

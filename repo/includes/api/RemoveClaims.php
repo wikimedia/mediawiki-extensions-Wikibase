@@ -12,7 +12,6 @@ use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claims;
 use Wikibase\Summary;
-use Wikibase\PropertyValueSnak;
 
 /**
  * API module for removing claims.
@@ -39,8 +38,9 @@ use Wikibase\PropertyValueSnak;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class RemoveClaims extends ApiWikibase {
+class RemoveClaims extends ModifyClaim {
 
 	// TODO: example
 	// TODO: rights
@@ -64,73 +64,6 @@ class RemoveClaims extends ApiWikibase {
 		$this->outputResult( $removedClaimKeys );
 
 		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * Create a summary
-	 *
-	 * @since 0.4
-	 *
-	 * @param Claims $claims
-	 * @param string[] $guids
-	 * @param string $action
-	 *
-	 * @return Summary
-	 */
-	protected function createSummary( Claims $claims, array $guids, $action ) {
-		if ( !is_string( $action ) ) {
-			throw new \MWException( 'action is invalid or unknown type.' );
-		}
-
-		$summary = new Summary( $this->getModuleName() );
-		$summary->setAction( $action );
-
-		$count = count( $guids );
-
-		$summary->addAutoCommentArgs( $count );
-
-		$summaryArgs = $this->buildSummaryArgs( $claims, $guids );
-
-		if ( $summaryArgs !== array() ) {
-			$summary->addAutoSummaryArgs( $summaryArgs );
-		}
-
-		return $summary;
-	}
-
-	/**
-	 * Build key (property) => value pairs for summary arguments
-	 *
-	 * @todo see if this can be more generic and put elsewhere...
-	 *
-	 * @param Claims $claims
-	 * @param string[] $guids
-	 *
-	 * @return mixed[] // propertyId (prefixed) => array of values
-	 */
-	protected function buildSummaryArgs( Claims $claims, array $guids ) {
-		$pairs = array();
-
-		foreach( $guids as $guid ) {
-			if ( $claims->hasClaimWithGuid( $guid ) ) {
-				$snak = $claims->getClaimWithGuid( $guid )->getMainSnak();
-				$key = $snak->getPropertyId()->getPrefixedId();
-
-				if ( !array_key_exists( $key, $pairs ) ) {
-					$pairs[$key] = array();
-				}
-
-				if ( $snak instanceof PropertyValueSnak ) {
-					$value = $snak->getDataValue();
-				} else {
-					$value = '-'; // todo handle no values in general way (needed elsewhere)
-				}
-
-				$pairs[$key][] = $value;
-			}
-		}
-
-		return array( $pairs );
 	}
 
 	/**
@@ -186,7 +119,14 @@ class RemoveClaims extends ApiWikibase {
 
 			$entity->setClaims( $claims );
 
-			$summary = $this->createSummary( $removedClaims, $guids[$entity->getPrefixedId()], 'remove' );
+			$summary = $this->createSummary( 'remove' );
+
+			$count = count( $guids[$entity->getPrefixedId()] );
+			$summary->addAutoCommentArgs( $count );
+			$summaryArgs = $this->buildSummaryArgs( $removedClaims, $guids[$entity->getPrefixedId()] );
+			if ( $summaryArgs !== array() ) {
+				$summary->addAutoSummaryArgs( $summaryArgs );
+			}
 
 			$this->saveChanges( $entityContent, $summary );
 		}
