@@ -65,3 +65,53 @@ foreach ( include( __DIR__ . '/WikibaseQuery.classes.php' ) as $class => $file )
 	$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
 }
 
+/**
+ * Hook to add PHPUnit test cases.
+ * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
+ *
+ * @since 0.1
+ *
+ * @param array $files
+ *
+ * @return boolean
+ */
+$wgHooks['UnitTestsList'][]	= function( array &$files ) {
+	// @codeCoverageIgnoreStart
+	$testFiles = array(
+		'Query',
+
+		// TODO: below tests are disabled since the EntityContentFactory has no proper registration
+		// system for new types of entities yet
+//		'QueryContent',
+//		'QueryHandler',
+	);
+
+	foreach ( $testFiles as $file ) {
+		$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';
+	}
+
+	return true;
+	// @codeCoverageIgnoreEnd
+};
+
+$wgWBSettings['entityPrefixes']['y'] = 'query';
+
+define( 'CONTENT_MODEL_WIKIBASE_QUERY', "wikibase-query" );
+
+$wgHooks['FormatAutocomments'][] = array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_QUERY, "wikibase-query" ) );
+
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
+
+$wgExtraNamespaces[WB_NS_QUERY] = 'Query';
+$wgExtraNamespaces[WB_NS_QUERY_TALK] = 'Query_talk';
+
+$wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY;
+
+
+$wgAutoloadClasses['Wikibase\HistoryQueryAction'] 		= __DIR__ . '/Query/HistoryQueryAction.php';
+$wgAutoloadClasses['Wikibase\EditQueryAction'] 			= __DIR__ . '/Query/EditQueryAction.php';
+$wgAutoloadClasses['Wikibase\ViewQueryAction'] 			= __DIR__ . '/Query/ViewQueryAction.php';
+$wgAutoloadClasses['Wikibase\SubmitQueryAction'] 		= __DIR__ . '/Query/EditQueryAction.php';
+
+$wgAutoloadClasses['Wikibase\QueryContent'] 			= __DIR__ . '/Query/QueryContent.php';
+$wgAutoloadClasses['Wikibase\QueryHandler'] 			= __DIR__ . '/Query/QueryHandler.php';

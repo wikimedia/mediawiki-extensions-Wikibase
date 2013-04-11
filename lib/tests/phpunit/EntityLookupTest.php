@@ -66,21 +66,9 @@ abstract class EntityLookupTest extends EntityTestCase {
 			$prop->setId( 753 );
 			$prop->setDataType( $dtf->getType( "string" ) );
 			$entities[$prop->getPrefixedId()] = $prop;
-
-			if ( self::queryEntitiesSupported() ) {
-				$query = Query::newEmpty();
-				$query->setId( 9001 );
-				$entities[$query->getPrefixedId()] = $query;
-			}
 		}
 
 		return $entities;
-	}
-
-	protected static function queryEntitiesSupported() {
-		$prefixes = \Wikibase\Settings::get( 'entityPrefixes' );
-		return class_exists( '\Wikibase\Query' )
-			&& in_array( Query::ENTITY_TYPE, $prefixes );
 	}
 
 	protected function getLookup() {
@@ -102,12 +90,6 @@ abstract class EntityLookupTest extends EntityTestCase {
 				'p753', false, true,
 			),
 		);
-
-		if ( self::queryEntitiesSupported() ) {
-			$cases[] = array( // #3
-				'y9001', false, true,
-			);
-		}
 
 		return $cases;
 	}

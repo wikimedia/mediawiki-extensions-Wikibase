@@ -28,7 +28,6 @@ use \Wikibase\QueryContent;
  * @ingroup Test
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseQuery
  * @group WikibaseEntity
  * @group WikibaseEntityHandler
