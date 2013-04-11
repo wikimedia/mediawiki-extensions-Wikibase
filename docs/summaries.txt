@@ -35,6 +35,11 @@ message when needed. The second argument, if present, is a language code.
 /* wbcreateclaim-novalue: */ p123
 /* wbcreateclaim-somevalue: */ p123
 
+/* wbsetclaim-update: */ p123
+/* wbsetclaim-create: */ p123
+/* wbsetclaim-update-qualifiers: */ p123 (claim)|p4 (qualifier)
+/* wbsetclaim-update-references: */ p123 (claim)|p4 (reference)
+/* wbsetclaim-update-rank: */ p123
 
 The following summaries are not yet fully implemented and just included for reference:
 
