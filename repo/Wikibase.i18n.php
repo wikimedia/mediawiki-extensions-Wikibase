@@ -293,6 +293,9 @@ to find out where it went.',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{PLURAL:$1|value|values}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Created claim',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Removed {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbsetclaim-update' => 'Changed {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbsetclaim-create' => 'Created {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbsetqualifier-update' => 'Changed $1 {{PLURAL:$3|qualifier|qualifiers}}',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbeditentity-create' => 'Created a new property',

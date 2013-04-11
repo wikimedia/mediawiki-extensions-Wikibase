@@ -71,7 +71,8 @@ class CreateClaim extends ModifyClaim {
 		}
 
 		$claim = $this->addClaim( $entityContent->getEntity(), $snak );
-		$summary = $this->createSummary( $snak, 'create' );
+		$summary = $this->createSummary( 'create' );
+		$summary->addAutoSummaryArgs( $snak->getPropertyId(), $snak->getDataValue() );
 
 		$this->saveChanges( $entityContent, $summary );
 

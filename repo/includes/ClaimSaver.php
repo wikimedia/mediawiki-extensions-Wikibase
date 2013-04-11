@@ -39,6 +39,22 @@ use Wikibase\ExceptionWithCode;
 class ClaimSaver {
 
 	/**
+	 * @var Summary
+	 */
+	protected $summary;
+
+	/**
+	 * Constructs a new ClaimSaver
+	 *
+	 * @since 0.4
+	 *
+	 * @param Summary|null $summary
+	 */
+	public function __construct( $summary = null ) {
+		$this->summary = $summary;
+	}
+
+	/**
 	 * @see ApiBase::execute
 	 *
 	 * @since 0.4
@@ -57,13 +73,13 @@ class ClaimSaver {
 	 *
 	 *         This status object can be used with ApiWikibase::handleSaveStatus().
 	 */
-	public function saveClaim( Claim $claim, $baseRevId, $token, User $user ) {
+	public function saveClaim( Claim $claim, ClaimDiffer $claimDiffer, $baseRevId, $token, User $user ) {
 		try {
 			$entityId = $this->getEntityIdForClaim( $claim );
 
 			$content = $this->getEntityContent( $entityId, $baseRevId );
 
-			$this->updateClaim( $content->getEntity(), $claim );
+			$this->updateClaim( $content->getEntity(), $claim, $claimDiffer );
 
 			$status = $this->saveChanges( $content, $baseRevId, $token, $user );
 		} catch ( ExceptionWithCode $ex ) {
@@ -116,17 +132,77 @@ class ClaimSaver {
 	 *
 	 * @param Entity $entity
 	 * @param Claim $claim
+	 * @param ClaimDiffer $claimDiffer
 	 */
-	protected function updateClaim( Entity $entity, Claim $claim ) {
+	protected function updateClaim( Entity $entity, Claim $claim, ClaimDiffer $claimDiffer ) {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
+		$this->summary->addAutoCommentArgs( 1 ); // we're always having singular here
 
 		if ( $claims->hasClaimWithGuid( $claim->getGuid() ) ) {
+			//claim is changed
+			$oldClaim = $claims->getClaimWithGuid( $claim->getGuid() );
+			$claimDifference = $claimDiffer->diffClaims( $oldClaim, $claim );
+
+			$this->summary->setAction( 'update' );
+
+			if ( $claimDifference->getMainSnakChange() !== null ) {
+				$summaryArgs = $this->buildSummaryArgs( new \Wikibase\Claims( array( $claim ) ), array( $claim->getGuid() ) );
+				$this->summary->addAutoSummaryArgs( $summaryArgs );
+			}
+
+			if ( $claimDifference->getQualifierChanges()->isEmpty() === false ) {
+				$pair = array();
+				$pair[$claim->getMainSnak()->getPropertyId()->getPrefixedId()][] = '/* wikibase-item-summary-wbsetqualifier-update */'; #"Modified qualifiers";
+				$summaryArgs = array( $pair );
+				$this->summary->addAutoSummaryArgs( $summaryArgs );
+			}
+
 			$claims->removeClaimWithGuid( $claim->getGuid() );
+		} else {
+			//new claim is added
+			$summaryArgs = $this->buildSummaryArgs( new \Wikibase\Claims( array( $claim ) ), array( $claim->getGuid() ) );
+			$this->summary->addAutoSummaryArgs( $summaryArgs );
+			$this->summary->setAction( 'create' );
 		}
 
 		$claims->addClaim( $claim );
 
 		$entity->setClaims( $claims );
+	}
+	
+	/**
+	 * Build key (property) => value pairs for summary arguments
+	 *
+	 * @todo see if this can be more generic and put elsewhere...
+	 *
+	 * @param Claims $claims
+	 * @param string[] $guids
+	 *
+	 * @return mixed[] // propertyId (prefixed) => array of values
+	 */
+	protected function buildSummaryArgs( Claims $claims, array $guids ) {
+		$pairs = array();
+
+		foreach( $guids as $guid ) {
+			if ( $claims->hasClaimWithGuid( $guid ) ) {
+				$snak = $claims->getClaimWithGuid( $guid )->getMainSnak();
+				$key = $snak->getPropertyId()->getPrefixedId();
+
+				if ( !array_key_exists( $key, $pairs ) ) {
+					$pairs[$key] = array();
+				}
+
+				if ( $snak instanceof PropertyValueSnak ) {
+					$value = $snak->getDataValue();
+				} else {
+					$value = '-'; // todo handle no values in general way (needed elsewhere)
+				}
+
+				$pairs[$key][] = $value;
+			}
+		}
+
+		return array( $pairs );
 	}
 
 	/**
@@ -175,7 +251,7 @@ class ClaimSaver {
 		$editEntity = new \Wikibase\EditEntity( $content, $user, $baseRevisionId );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$this->summary ? $this->summary->toString() : '',
 			EDIT_UPDATE,
 			$token
 		);
