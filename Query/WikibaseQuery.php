@@ -48,7 +48,7 @@ if ( !defined( 'WB_VERSION' ) ) {
 
 define( 'WIKIBASE_QUERY_VERSION', '0.1 alpha' );
 
-$wgExtensionCredits['other'][] = array(
+$wgExtensionCredits['wikibase'][] = array(
 	'path' => __DIR__,
 	'name' => 'Wikibase Query',
 	'version' => WIKIBASE_QUERY_VERSION,
@@ -64,3 +64,4 @@ $wgExtensionMessagesFiles['WikibaseQuery'] = __DIR__ . '/WikibaseQuery.i18n.php'
 foreach ( include( __DIR__ . '/WikibaseQuery.classes.php' ) as $class => $file ) {
 	$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
 }
+

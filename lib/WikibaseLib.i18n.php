@@ -48,6 +48,7 @@ $messages['en'] = array(
 	'wikibase-tooltip-error-details' => 'Details',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Commons media file',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Message documentation (Message documentation)
@@ -102,6 +103,7 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
+	'version-wikibase' => 'Name of the Wikibase extension collection, used on [[Special:Version]]',
 );
 
 /** Afrikaans (Afrikaans)

@@ -50,7 +50,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 define( 'WB_VERSION', '0.4 alpha'
 	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
-$wgExtensionCredits['other'][] = array(
+$wgExtensionCredits['wikibase'][] = array(
 	'path' => __DIR__,
 	'name' => 'Wikibase Repository',
 	'version' => WB_VERSION,
