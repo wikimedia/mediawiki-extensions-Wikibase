@@ -35,9 +35,9 @@ use Wikibase\ExceptionWithCode;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class ClaimSaver {
-
 	/**
 	 * @see ApiBase::execute
 	 *
@@ -47,6 +47,7 @@ class ClaimSaver {
 	 * @param int|null $baseRevId
 	 * @param string $token
 	 * @param User $user
+	 * @param Summary $summary
 	 *
 	 * @return Status The status. The status value is an array which may contain
 	 *         the following fields:
@@ -57,15 +58,15 @@ class ClaimSaver {
 	 *
 	 *         This status object can be used with ApiWikibase::handleSaveStatus().
 	 */
-	public function saveClaim( Claim $claim, $baseRevId, $token, User $user ) {
+	public function saveClaim( Claim $claim, ClaimDiffer $claimDiffer, $baseRevId, $token, User $user, Summary $summary ) {
 		try {
 			$entityId = $this->getEntityIdForClaim( $claim );
 
 			$content = $this->getEntityContent( $entityId, $baseRevId );
 
-			$this->updateClaim( $content->getEntity(), $claim );
+			$summary = $this->updateClaim( $content->getEntity(), $claim, $claimDiffer, $summary );
 
-			$status = $this->saveChanges( $content, $baseRevId, $token, $user );
+			$status = $this->saveChanges( $content, $baseRevId, $token, $user, $summary );
 		} catch ( ExceptionWithCode $ex ) {
 			// put the error code into the status
 			$value = array( 'errorCode' => $ex->getErrorCode() );
@@ -116,17 +117,71 @@ class ClaimSaver {
 	 *
 	 * @param Entity $entity
 	 * @param Claim $claim
+	 * @param ClaimDiffer $claimDiffer
+	 * @param Summary $summary
+	 *
+	 * @return Summary $summary
 	 */
-	protected function updateClaim( Entity $entity, Claim $claim ) {
+	protected function updateClaim( Entity $entity, Claim $claim, ClaimDiffer $claimDiffer, Summary $summary ) {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
 
+		$summary->addAutoCommentArgs( 1 ); // only one claim touched, so we're always having singular here
+		$summaryArgs = $this->buildSummaryArgs( $claim->getMainSnak() );
+		$summary->addAutoSummaryArgs( $summaryArgs );
+
 		if ( $claims->hasClaimWithGuid( $claim->getGuid() ) ) {
+			//claim is changed
+			$oldClaim = $claims->getClaimWithGuid( $claim->getGuid() );
+			$claimDifference = $claimDiffer->diffClaims( $oldClaim, $claim );
+
+			if ( $claimDifference->isAtomic() !== true ) {
+				// TODO: decide what to do if changes affect multiple party of the claim
+				// e.g. concat several autocomments into one?
+				$summary->setAction( 'update' );
+			} else {
+				if ( $claimDifference->getMainSnakChange() !== null ) {
+					$summary->setAction( 'update' );
+				} elseif ( $claimDifference->getQualifierChanges()->isEmpty() === false ) {
+					$summary->addAutoCommentArgs( $claimDifference->getQualifierChanges()->count() );
+					$summary->setAction( 'update-qualifiers' );
+				} elseif ( $claimDifference->getReferenceChanges()->isEmpty() === false ) {
+					$summary->addAutoCommentArgs( $claimDifference->getReferenceChanges()->count() );
+					$summary->setAction( 'update-references' );
+				} elseif ( $claimDifference->getRankChange() !== null ) {
+					$summary->setAction( 'update-rank' );
+				}
+			}
+
 			$claims->removeClaimWithGuid( $claim->getGuid() );
+		} else {
+			//new claim is added
+			$summary->setAction( 'create' );
 		}
 
 		$claims->addClaim( $claim );
-
 		$entity->setClaims( $claims );
+
+		return $summary;
+	}
+
+	/**
+	 * Build the args for the autosummary
+	 *
+	 * @param Snak $snak
+	 *
+	 * @return mixed[] // propertyId (prefixed) => array of values
+	 */
+	protected function buildSummaryArgs( Snak $snak ) {
+		$args = array();
+		$propertyId = $snak->getPropertyId()->getPrefixedId();
+
+		if ( $snak instanceof PropertyValueSnak ) {
+			$args[$propertyId] = array( $snak->getDataValue() );
+		} else {
+			$args[$propertyId] = array( $snak->getType() );
+		}
+
+		return array( $args );
 	}
 
 	/**
@@ -167,15 +222,16 @@ class ClaimSaver {
 	 * @param int|null $baseRevisionId
 	 * @param string $token
 	 * @param User $user
+	 * @param Summary $summary
 	 *
 	 * @return Status
 	 */
-	protected function saveChanges( EntityContent $content, $baseRevisionId, $token, User $user ) {
+	protected function saveChanges( EntityContent $content, $baseRevisionId, $token, User $user, Summary $summary ) {
 		$baseRevisionId = is_int( $baseRevisionId ) && $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new \Wikibase\EditEntity( $content, $user, $baseRevisionId );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$summary->toString(),
 			EDIT_UPDATE,
 			$token
 		);
