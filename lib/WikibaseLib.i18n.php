@@ -468,6 +468,7 @@ $messages['de'] = array(
 	'wikibase-tooltip-error-details' => 'Einzelheiten',
 	'datatypes-type-wikibase-item' => 'Datenobjekt',
 	'datatypes-type-commonsMedia' => 'Mediendatei auf Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** German (formal address) (Deutsch (Sie-Form)‎)
@@ -835,6 +836,7 @@ $messages['gl'] = array(
 	'wikibase-tooltip-error-details' => 'Detalles',
 	'datatypes-type-wikibase-item' => 'Elemento',
 	'datatypes-type-commonsMedia' => 'Ficheiro multimedia de Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Swiss German (Alemannisch)
@@ -1484,6 +1486,7 @@ $messages['nl'] = array(
 	'wikibase-tooltip-error-details' => 'Details',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Mediabestand van Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Norwegian Nynorsk (norsk nynorsk)

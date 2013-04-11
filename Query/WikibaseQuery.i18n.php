@@ -42,3 +42,24 @@ $messages['en'] = array(
 $messages['qqq'] = array(
 	'wikibasequery-desc' => '{{desc|name=Wikibase Query|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Query}}',
 );
+
+/** German (Deutsch)
+ * @author Metalhead64
+ */
+$messages['de'] = array(
+	'wikibasequery-desc' => 'Ergänzt Abfragemöglichkeiten zu Wikibase',
+);
+
+/** Galician (galego)
+ * @author Toliño
+ */
+$messages['gl'] = array(
+	'wikibasequery-desc' => 'Engade capacidades de pescuda a Wikibase',
+);
+
+/** Dutch (Nederlands)
+ * @author Siebrand
+ */
+$messages['nl'] = array(
+	'wikibasequery-desc' => 'Voegt zoekmogelijkheden toe aan Wikibase',
+);
