@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Test;
 
-use DataTypes\DataType;
 use Wikibase\EntityId;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Property;

@@ -1,6 +1,5 @@
 <?php
 namespace Wikibase\Test;
-use Wikibase\Change;
 use Wikibase\ChangeNotificationJob;
 
 /**
