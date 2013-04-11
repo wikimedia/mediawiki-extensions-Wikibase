@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DuPAA2AU",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.AbstractedRepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-11T12:03:21Z",
+      "side": 1,
+      "message": "no need for the undefined (don\u0027t know if it was there before but you could remove it while you\u0027re at it).",
+      "revId": "c8086c0b2e08bfbef9759173483fbbf00808293d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DuJAPHOI",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.AbstractedRepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-11T12:03:21Z",
+      "side": 1,
+      "message": "The whole design is somewhat twisted now if you consider these points:\n\n1. the normal RepoApi should already have all the public functions defined here, just without the abstraction. So a getEntities in the normal RepoApi would simply return the JSON structure instead of the abstraction (unserialized wb.Entity objects).\n\n2. if you would consider 1 and still use inheritance between AbstractedRepoApi and RepoApi, you would have Liscov Substitution Principle violations all over the place since some function\u0027s interfaces would suddenly require different parameters (e.g. abstracted claim instead of JSON of a claim). This does actually show that inheritance might not be the best solution in this case.\n\nI conclude that when considering those points, you should probably just use composition here instead. Meaning that wb.AbstractRepoApi does not inherit but is using a self-instantiated wb.RepoApi internally, then forwarding function calls to that instance and taking care of the \"abstraction\".",
+      "revId": "c8086c0b2e08bfbef9759173483fbbf00808293d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DuDAXUEY",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.AbstractedRepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-11T12:03:21Z",
+      "side": 1,
+      "message": "no blank line required",
+      "revId": "c8086c0b2e08bfbef9759173483fbbf00808293d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
