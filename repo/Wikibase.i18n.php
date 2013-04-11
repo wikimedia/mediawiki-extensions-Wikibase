@@ -301,6 +301,11 @@ to find out where it went.',
 	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{PLURAL:$1|value|values}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Created claim',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Removed {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbsetclaim-update' => 'Changed {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbsetclaim-create' => 'Created {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Changed {{PLURAL:$4|one|$4}} {{PLURAL:$4|qualifier|qualifiers}} of {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbsetclaim-update-references' => 'Changed {{PLURAL:$4|one|$4}} {{PLURAL:$4|reference|references}} of {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Changed rank of {{PLURAL:$3|claim|claims}}',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbeditentity-create' => 'Created a new property',
@@ -911,6 +916,18 @@ Parameters:
 	'wikibase-item-summary-special-create-item' => '{{wikibase summary messages|item|Automatic edit summary when creating an item, and supplying one or more values. This page can take an additional sitelink, but this does not reflect in the autocomment.}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Automatic edit summary generated when creating a new claim.',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Automatic edit summary generated when removing claims.',
+	'wikibase-item-summary-wbsetclaim-update' => 'Automatic edit summary generated when modifying a claim using setclaim. Parameters:
+* $3 - number of claims changed',
+	'wikibase-item-summary-wbsetclaim-create' => 'Automatic edit summary generated when creating a new claim using setclaim. Parameters:
+* $3 - number of claims changed',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Automatic edit summary generated when modifying the qualifiers of a claim using setclaim. Parameters:
+* $3 - number of claims changed
+* $4 - number of qualifiers changed',
+	'wikibase-item-summary-wbsetclaim-update-references' => 'Automatic edit summary generated when modifying the references of a claim using setclaim. Parameters:
+* $3 - number of claims changed
+* $4 - number of references changed',
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Automatic edit summary generated when modifying the rank of a claim using setclaim. Parameters:
+* $3 - number of claims changed',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
 	'wikibase-property-summary-wbeditentity-override' => 'Automatic edit summary generated when overriding an existing property.',
