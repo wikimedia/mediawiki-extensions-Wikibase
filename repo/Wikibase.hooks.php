@@ -150,6 +150,7 @@ final class RepoHooks {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'Autocomment',
+			'ClaimSummaryBuilder',
 			'EditEntity',
 			'ItemMove',
 			'ItemContentDiffView',
