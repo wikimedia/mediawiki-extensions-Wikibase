@@ -6,7 +6,9 @@ use DataValues\StringValue;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
+use Wikibase\QueryEngine\SQLStore\Schema;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore;
+use Wikibase\QueryEngine\SQLStore\StoreConfig;
 use Wikibase\Snak;
 
 /**
@@ -44,6 +46,18 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 
 	protected abstract function canStoreProvider();
 
+	public function storeSnakProvider() {
+		$argLists = array();
+
+		foreach ( $this->canStoreProvider() as $argList ) {
+			if ( $argList[0] ) {
+				$argLists[] = array( $argList[1] );
+			}
+		}
+
+		return $argLists;
+	}
+
 	public function differentSnaksProvider() {
 		$argLists = array();
 
@@ -72,6 +86,10 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testCanStore( $canStore, Snak $snak ) {
 		$this->assertEquals( $canStore, $this->getInstance()->canStore( $snak ) );
+	}
+
+	protected function newStoreSchema() {
+		return new Schema( new StoreConfig( 'foobar', 'nyan_', array() ) );
 	}
 
 }

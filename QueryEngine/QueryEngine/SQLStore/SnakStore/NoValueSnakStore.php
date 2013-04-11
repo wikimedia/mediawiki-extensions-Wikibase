@@ -2,6 +2,8 @@
 
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
+use Wikibase\Database\QueryInterface;
+use Wikibase\Database\TableDefinition;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\Snak;
 
@@ -30,6 +32,14 @@ use Wikibase\Snak;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class NoValueSnakStore extends SnakStore {
+
+	protected $queryInterface;
+	protected $table;
+
+	public function __construct( QueryInterface $queryInterface, TableDefinition $table ) {
+		$this->queryInterface = $queryInterface;
+		$this->table = $table;
+	}
 
 	public function canStore( Snak $snak ) {
 		return $snak instanceof PropertyNoValueSnak;
