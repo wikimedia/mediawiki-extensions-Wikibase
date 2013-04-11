@@ -28,7 +28,6 @@ namespace Wikibase;
  * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  *
  * @fixme: ChangeNotification, ChangeHandler, ClientHooks::onWikibasePollHandle
