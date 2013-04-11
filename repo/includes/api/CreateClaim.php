@@ -42,6 +42,7 @@ use Wikibase\Snak;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class CreateClaim extends ModifyClaim {
 
@@ -71,7 +72,8 @@ class CreateClaim extends ModifyClaim {
 		}
 
 		$claim = $this->addClaim( $entityContent->getEntity(), $snak );
-		$summary = $this->createSummary( $snak, 'create' );
+		$summary = $this->createSummary( 'create' );
+		$summary->addAutoSummaryArgs( $snak->getPropertyId(), $snak->getDataValue() );
 
 		$this->saveChanges( $entityContent, $summary );
 
