@@ -43,6 +43,9 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\SQLStore\DVHandler\NumberHandler',
 		'Wikibase\QueryEngine\SQLStore\DVHandler\StringHandler',
 
+		'Wikibase\QueryEngine\SQLStore\SnakStore\PropertyValueSnakStore',
+		'Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore',
+
 		'Wikibase\QueryEngine\SQLStore\DataValueHandlers',
 		'Wikibase\QueryEngine\SQLStore\DataValueHandler',
 		'Wikibase\QueryEngine\SQLStore\DataValueTable',
