@@ -43,7 +43,9 @@ abstract class SnakStore {
 	 * @since 0.1
 	 *
 	 * @param Snak $snak
+	 * @param int $internalClaimId
+	 * @param int $snakRole
 	 */
-	public abstract function storeSnak( Snak $snak );
+	public abstract function storeSnak( Snak $snak, $internalClaimId, $snakRole );
 
 }
