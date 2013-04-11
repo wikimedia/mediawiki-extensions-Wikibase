@@ -1,4 +1,4 @@
-The Wikibase Query component is dependent on:
+The Wikibase QueryEngine component is dependent on:
 
 * Wikibase DataModel
 * WikibaseLib

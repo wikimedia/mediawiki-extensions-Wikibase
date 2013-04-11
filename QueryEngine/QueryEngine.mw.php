@@ -22,7 +22,7 @@
  * @since 0.1
  *
  * @file
- * @ingroup WikibaseQuery
+ * @ingroup WikibaseQueryEngine
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -39,7 +39,7 @@ global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHo
 //$wgExtensionMessagesFiles['WikibaseDataModel'] = __DIR__ . '/DataModel.i18n.php';
 
 // Autoloading
-foreach ( include( __DIR__ . '/Query.classes.php' ) as $class => $file ) {
+foreach ( include( __DIR__ . '/QueryEngine.classes.php' ) as $class => $file ) {
 	$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
 }
 
