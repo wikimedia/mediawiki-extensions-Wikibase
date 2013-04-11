@@ -198,10 +198,12 @@ $messages['ja'] = array(
 );
 
 /** Korean (한국어)
+ * @author Kwj2772
  */
 $messages['ko'] = array(
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '"$1" 데이터 값의 처리는 아직 지원하지 않습니다.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '"$1" 데이터 유형에 대한 값의 처리는 아직 지원하지 않습니다.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '"$1" 값의 처리는 아직 지원하지 않습니다.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '"$1" 데이터 유형에 대한 값의 처리는 아직 지원하지 않습니다.',
+	'valueview-expert-emptyvalue-empty' => '비어 있음',
 );
 
 /** Macedonian (македонски)
@@ -231,8 +233,9 @@ $messages['nb'] = array(
  */
 $messages['nl'] = array(
 	'valueview-desc' => 'Gebruikersinterface-elementen voor het weergeven en bewerken van gegevenswaarden',
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Het verwerken van gegevenswaarden van het type "$1" wordt nog niet ondersteund.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Het verwerken van waarden van het gegevenstype "$1" wordt nog niet ondersteund.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Het verwerken van waarden van het type "$1" wordt nog niet ondersteund.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Het verwerken van waarden van het gegevenstype "$1" wordt nog niet ondersteund.',
+	'valueview-expert-emptyvalue-empty' => 'leeg',
 );
 
 /** Polish (polski)
