@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DuDCMMIA",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-11T11:18:54Z",
+      "side": 1,
+      "message": "The methods where better named, had better a defined responsibility and lower complexity then in this new version.",
+      "revId": "c3ec949b7b01b5578cb082ac08749814aa7e3ef8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
