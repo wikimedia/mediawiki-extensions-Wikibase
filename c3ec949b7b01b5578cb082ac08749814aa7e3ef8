@@ -16,6 +16,24 @@
       "revId": "c3ec949b7b01b5578cb082ac08749814aa7e3ef8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DuJDM-L4",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-11T11:28:39Z",
+      "side": 1,
+      "message": "That\u0027s an artifact of rebasing. The version I started from had evaluate(), and no renderForEntityId, getSnaksForProperty or renderForEntityId. So, the split \u0026 rename got lost in the rebase. I\u0027ll have another look at this.",
+      "parentUuid": "DuDCMMIA",
+      "revId": "c3ec949b7b01b5578cb082ac08749814aa7e3ef8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
