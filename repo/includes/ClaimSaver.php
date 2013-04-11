@@ -36,8 +36,31 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class ClaimSaver {
+	/**
+	 * @var ClaimDiffer
+	 */
+	protected $claimDiffer;
+
+	/**
+	 * @var ClaimSummary|null
+	 */
+	protected $claimSummary;
+
+	/**
+	 * Constructs a new ClaimSaver
+	 *
+	 * @since 0.4
+	 *
+	 * @param ClaimDiffer $claimDiffer
+	 * @param ClaimSummary|null $claimSummary
+	 */
+	public function __construct( ClaimDiffer $claimDiffer, ClaimSummary $claimSummary = null ) {
+		$this->claimDiffer = $claimDiffer;
+		$this->claimSummary = $claimSummary;
+	}
 
 	/**
 	 * @see ApiBase::execute
@@ -116,16 +139,20 @@ class ClaimSaver {
 	 *
 	 * @param Entity $entity
 	 * @param Claim $claim
+	 *
 	 */
 	protected function updateClaim( Entity $entity, Claim $claim ) {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
+
+		if ( $this->claimSummary !== null ) {
+			$this->claimSummary->buildClaimSummary( $this->claimDiffer, $claims, $claim);
+		}
 
 		if ( $claims->hasClaimWithGuid( $claim->getGuid() ) ) {
 			$claims->removeClaimWithGuid( $claim->getGuid() );
 		}
 
 		$claims->addClaim( $claim );
-
 		$entity->setClaims( $claims );
 	}
 
@@ -175,7 +202,7 @@ class ClaimSaver {
 		$editEntity = new \Wikibase\EditEntity( $content, $user, $baseRevisionId );
 
 		$status = $editEntity->attemptSave(
-			'', // TODO: automcomment
+			$this->claimSummary !== null ? $this->claimSummary->toString() : '',
 			EDIT_UPDATE,
 			$token
 		);
