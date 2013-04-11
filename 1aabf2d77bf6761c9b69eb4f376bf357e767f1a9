@@ -16,6 +16,24 @@
       "revId": "1aabf2d77bf6761c9b69eb4f376bf357e767f1a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DuFP77nY",
+        "filename": "lib/resources/wikibase.store/wikibase.RepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-04-11T18:36:03Z",
+      "side": 0,
+      "message": "I think I did that... going to have a look",
+      "parentUuid": "DuK0ZqYQ",
+      "revId": "1aabf2d77bf6761c9b69eb4f376bf357e767f1a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

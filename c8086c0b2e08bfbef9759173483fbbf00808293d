@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DuJMAhmw",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.AbstractedRepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-04-11T18:36:03Z",
+      "side": 1,
+      "message": "I indeed just copied this part",
+      "parentUuid": "DuPAA2AU",
+      "revId": "c8086c0b2e08bfbef9759173483fbbf00808293d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DuJAPHOI",
         "filename": "lib/resources/wikibase.RepoApi/wikibase.AbstractedRepoApi.js",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-04-11T12:03:21Z",
       "side": 1,
       "message": "The whole design is somewhat twisted now if you consider these points:\n\n1. the normal RepoApi should already have all the public functions defined here, just without the abstraction. So a getEntities in the normal RepoApi would simply return the JSON structure instead of the abstraction (unserialized wb.Entity objects).\n\n2. if you would consider 1 and still use inheritance between AbstractedRepoApi and RepoApi, you would have Liscov Substitution Principle violations all over the place since some function\u0027s interfaces would suddenly require different parameters (e.g. abstracted claim instead of JSON of a claim). This does actually show that inheritance might not be the best solution in this case.\n\nI conclude that when considering those points, you should probably just use composition here instead. Meaning that wb.AbstractRepoApi does not inherit but is using a self-instantiated wb.RepoApi internally, then forwarding function calls to that instance and taking care of the \"abstraction\".",
+      "revId": "c8086c0b2e08bfbef9759173483fbbf00808293d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DuLM26k4",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.AbstractedRepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-04-11T18:36:03Z",
+      "side": 1,
+      "message": "Yes... which name would you suggest for the abstracted vs. \"lightweight\" API? I\u0027m not really looking forward to replace all usages of wikibase.RepoApi again, but if it\u0027s better, I\u0027m fine with that either.",
+      "parentUuid": "DuJAPHOI",
       "revId": "c8086c0b2e08bfbef9759173483fbbf00808293d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
