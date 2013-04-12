@@ -1164,6 +1164,7 @@ $messages['ja'] = array(
 	'wikibase-tooltip-error-details' => '詳細',
 	'datatypes-type-wikibase-item' => '項目',
 	'datatypes-type-commonsMedia' => 'コモンズのメディアファイル',
+	'version-wikibase' => 'ウィキベース',
 );
 
 /** Georgian (ქართული)
@@ -1203,6 +1204,7 @@ $messages['ka'] = array(
 );
 
 /** Korean (한국어)
+ * @author Kwj2772
  * @author 아라
  */
 $messages['ko'] = array(
@@ -1237,6 +1239,7 @@ $messages['ko'] = array(
 	'wikibase-tooltip-error-details' => '자세한 사항',
 	'datatypes-type-wikibase-item' => '항목',
 	'datatypes-type-commonsMedia' => '공용 미디어 파일',
+	'version-wikibase' => '위키베이스',
 );
 
 /** Colognian (Ripoarisch)
@@ -1885,6 +1888,22 @@ $messages['uk'] = array(
  */
 $messages['ur'] = array(
 	'wikibase-tooltip-error-details' => 'تفصیلات',
+);
+
+/** vèneto (vèneto)
+ * @author Candalua
+ */
+$messages['vec'] = array(
+	'wikibase-entity-item' => 'elemento',
+	'wikibase-entity-property' => 'proprietà',
+	'wikibase-diffview-reference' => 'riferimento',
+	'wikibase-error-autocomplete-response' => 'Risposta del server: $1',
+	'wikibase-sitelinks-sitename-columnheading' => 'Lengua',
+	'wikibase-sitelinks-siteid-columnheading' => 'Còdese',
+	'wikibase-tooltip-error-details' => 'Detaji',
+	'datatypes-type-wikibase-item' => 'Elemento',
+	'datatypes-type-commonsMedia' => 'File multimediale su Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Vietnamese (Tiếng Việt)

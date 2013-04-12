@@ -40,7 +40,14 @@ $messages['en'] = array(
  * @author Shirayuki
  */
 $messages['qqq'] = array(
-	'wikibasequery-desc' => '{{desc|name=Wikibase Query|url=http://www.mediawiki.org/wiki/Extension:Wikibase_Query}}',
+	'wikibasequery-desc' => '{{desc|name=Wikibase Query|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}',
+);
+
+/** Asturian (asturianu)
+ * @author Xuacu
+ */
+$messages['ast'] = array(
+	'wikibasequery-desc' => 'Amiesta capacidaes de consulta a Wikibase',
 );
 
 /** German (Deutsch)
@@ -57,9 +64,30 @@ $messages['gl'] = array(
 	'wikibasequery-desc' => 'Engade capacidades de pescuda a Wikibase',
 );
 
+/** Japanese (日本語)
+ * @author Shirayuki
+ */
+$messages['ja'] = array(
+	'wikibasequery-desc' => 'ウィキベースにクエリ機能を追加する',
+);
+
+/** Korean (한국어)
+ * @author Kwj2772
+ */
+$messages['ko'] = array(
+	'wikibasequery-desc' => '위키베이스에 쿼리 기능을 추가',
+);
+
 /** Dutch (Nederlands)
  * @author Siebrand
  */
 $messages['nl'] = array(
 	'wikibasequery-desc' => 'Voegt zoekmogelijkheden toe aan Wikibase',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'wikibasequery-desc' => "Aggiunge le capacità de l'inderrogazione sus a Uicchibase",
 );

@@ -425,6 +425,7 @@ $messages['br'] = array(
 );
 
 /** Bosnian (bosanski)
+ * @author DzWiki
  * @author Edinwiki
  */
 $messages['bs'] = array(
@@ -438,8 +439,8 @@ $messages['bs'] = array(
 	'wikibase-comment-sitelink-add' => 'Jezična veza dodana: $1',
 	'wikibase-comment-sitelink-change' => 'Jezična veza izmjenjena sa $1 u $2',
 	'wikibase-comment-sitelink-remove' => 'Jezična veza uklonjena: $1',
-	'wikibase-editlinks' => 'Izmijeni veze',
-	'wikibase-editlinkstitle' => 'Izmjeni međujezične veze',
+	'wikibase-editlinks' => 'Uredi veze',
+	'wikibase-editlinkstitle' => 'Uredi međujezične veze',
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Pokaži Wikidata izmjene u nedavnim izmjenama',
 );
@@ -2183,6 +2184,7 @@ $messages['pt'] = array(
 /** Brazilian Portuguese (português do Brasil)
  * @author Helder.wiki
  * @author Jaideraf
+ * @author TheGabrielZaum
  * @author Tuliouel
  */
 $messages['pt-br'] = array(
@@ -2193,11 +2195,11 @@ $messages['pt-br'] = array(
 	'wikibase-comment-linked' => 'Um item do Wikidata foi associado a esta página.',
 	'wikibase-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para os outros idiomas foram removidos.',
 	'wikibase-comment-restore' => 'O item associado no Wikidata foi restaurado. Os links para os outros idiomas foram restaurados.',
-	'wikibase-comment-update' => 'Os links para outros idiomas foram atualizados.', # Fuzzy
+	'wikibase-comment-update' => 'O item no Wikidata foi modificado',
 	'wikibase-comment-sitelink-add' => 'Link de idioma adicionado: $1',
 	'wikibase-comment-sitelink-change' => 'Link de idioma alterado de $1 para $2',
 	'wikibase-comment-sitelink-remove' => 'Link de idioma removido: $1',
-	'wikibase-comment-multi' => '$1 alterações', # Fuzzy
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|mudança|mudanças}}',
 	'wikibase-editlinks' => 'Editar links',
 	'wikibase-editlinkstitle' => 'Editar links para outros idiomas',
 	'wikibase-linkitem-addlinks' => 'Adicionar links',
@@ -2224,7 +2226,7 @@ $messages['pt-br'] = array(
 	'wikibase-error-invalid-entity-id' => 'O ID inserido é desconhecido pelo sistema. Por favor, utilize um ID de entidade válido.',
 	'special-unconnectedpages' => 'Páginas não conectadas a itens',
 	'wikibase-unconnectedpages-legend' => 'Opções de páginas não conectadas',
-	'wikibase-unconnectedpages-page' => 'Página inicial:', # Fuzzy
+	'wikibase-unconnectedpages-page' => 'Iniciar lista de resultados com o artículo:',
 	'wikibase-unconnectedpages-submit' => 'Ir',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" não é um código de idioma válido.',
 	'wikibase-unconnectedpages-page-warning' => 'O título da página não pôde ser utilizado para a consulta e foi ignorado.',
@@ -2494,10 +2496,18 @@ $messages['uz'] = array(
 );
 
 /** vèneto (vèneto)
+ * @author Candalua
  * @author Frigotoni
  */
 $messages['vec'] = array(
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|canbiamento|canbiamenti}}',
 	'wikibase-editlinks' => 'Canbia link',
+	'wikibase-linkitem-input-site' => 'Lengua:',
+	'wikibase-linkitem-input-page' => 'Pagina:',
+	'wikibase-linkitem-confirmitem-button' => 'Va ben',
+	'wikibase-property-notfound' => 'Proprietà $1 mia catà.',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-unconnectedpages-submit' => 'Và',
 );
 
 /** Vietnamese (Tiếng Việt)
