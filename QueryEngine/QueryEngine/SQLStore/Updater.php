@@ -72,7 +72,8 @@ class Updater implements QueryStoreUpdater {
 	 * @param Entity $entity
 	 */
 	public function insertEntity( Entity $entity ) {
-		// TODO: insert entity info into entities table
+		$this->insertIntoEntitiesTable( $entity );
+
 		// TODO: insert info of linked entities into entities table
 
 		foreach ( $entity->getClaims() as $claim ) {
@@ -80,6 +81,16 @@ class Updater implements QueryStoreUpdater {
 		}
 
 		// TODO: obtain and insert virtual claims
+	}
+
+	private function insertIntoEntitiesTable( Entity $entity ) {
+		$this->queryInterface->insert(
+			$this->schema->getEntitiesTable()->getName(),
+			array(
+				'type' => $entity->getType(),
+				'number' => $entity->getId()->getNumericId(),
+			)
+		);
 	}
 
 	/**
