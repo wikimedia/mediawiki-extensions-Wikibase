@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use MWException;
+use ValueParsers\ParseException;
 
 /**
  * Represents an ID of an Entity.
@@ -62,8 +63,13 @@ class EntityId extends \DataValues\DataValueObject {
 	 */
 	public static function newFromPrefixedId( $prefixedId ) {
 		$libRegistry = new LibRegistry( Settings::singleton() );
-		$result = $libRegistry->getEntityIdParser()->parse( $prefixedId );
-		return $result->isValid() ? $result->getValue() : null;
+
+		try {
+			return $libRegistry->getEntityIdParser()->parse( $prefixedId );
+		}
+		catch ( ParseException $parseException ) {
+			return null;
+		}
 	}
 
 	/**
