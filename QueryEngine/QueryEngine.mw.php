@@ -56,7 +56,11 @@ if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 		= $dir . 'tests/phpunit/QueryStoreTest.php';
 
 	$wgAutoloadClasses['Wikibase\Test\Query\QueryStoreUpdaterTest']
-		= $dir . 'tests/phpunit/QueryStoreUpdaterTest.php';}
+		= $dir . 'tests/phpunit/QueryStoreUpdaterTest.php';
+
+	$wgAutoloadClasses['Wikibase\Tests\Query\SQLStore\SnakStore\SnakStoreTest']
+		= $dir . 'tests/phpunit/SQLStore/SnakStore/SnakStoreTest.php';
+}
 
 /**
  * Hook to add PHPUnit test cases.
@@ -80,6 +84,8 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		'SQLStore/DVHandler/MonolingualTextHandler',
 		'SQLStore/DVHandler/NumberHandler',
 		'SQLStore/DVHandler/StringHandler',
+
+		'SQLStore/SnakStore/PropertyValueSnakStore',
 
 		'SQLStore/DataValueHandlers',
 		'SQLStore/DataValueHandler',
