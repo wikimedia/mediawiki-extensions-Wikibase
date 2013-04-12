@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
+use RuntimeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatterBase;
 use ValueFormatters\Result;
@@ -96,10 +97,9 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 	 *
 	 * @param mixed $value The value to format
 	 *
-	 * @throws \InvalidArgumentException
-	 *
 	 * @return Result
-	 * @throws \RuntimeException
+	 * @throws RuntimeException
+	 * @throws InvalidArgumentException
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof EntityId ) ) {
@@ -115,10 +115,10 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 					break;
 				case self::FALLBACK_PREFIXED_ID:
 					if ( $this->idFormatter === null ) {
-						throw new \RuntimeException( 'Cannot format the id using a prefix without the EntityIdFormatter being set' );
+						throw new RuntimeException( 'Cannot format the id using a prefix without the EntityIdFormatter being set' );
 					}
 
-					$label = $this->idFormatter->format( $value )->getValue();
+					$label = $this->idFormatter->format( $value );
 					break;
 				default:
 					// TODO: implement: return formatting error
@@ -127,7 +127,7 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 		}
 
 		assert( is_string( $label ) );
-		return $this->newSuccess( $label );
+		return $label;
 	}
 
 	/**

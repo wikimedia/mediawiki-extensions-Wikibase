@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
+use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatterBase;
 use ValueFormatters\Result;
@@ -49,7 +50,7 @@ class EntityIdFormatter extends ValueFormatterBase {
 	 *
 	 * @param FormatterOptions $options
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( FormatterOptions $options ) {
 		parent::__construct( $options );
@@ -70,9 +71,9 @@ class EntityIdFormatter extends ValueFormatterBase {
 	 *
 	 * @param mixed $value The value to format
 	 *
-	 * @throws \InvalidArgumentException
-	 *
 	 * @return Result
+	 * @throws InvalidArgumentException
+	 * @throws OutOfBoundsException
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof EntityId ) ) {
@@ -80,15 +81,15 @@ class EntityIdFormatter extends ValueFormatterBase {
 		}
 
 		$prefixMap = $this->getOption( self::OPT_PREFIX_MAP );
+		$entityType = $value->getEntityType();
 
-		if ( array_key_exists( $value->getEntityType(), $prefixMap ) ) {
+		if ( array_key_exists( $entityType, $prefixMap ) ) {
 			$entityTypePrefix = $prefixMap[$value->getEntityType()];
 
-			return $this->newSuccess( $entityTypePrefix . $value->getNumericId() );
+			return $entityTypePrefix . $value->getNumericId();
 		}
 
-		// TODO: implement: return formatting error
-		return $this->newSuccess( 'TODO: ERROR: entity type not found' );
+		throw new OutOfBoundsException( "Entity type '$entityType' not found" );
 	}
 
 }
