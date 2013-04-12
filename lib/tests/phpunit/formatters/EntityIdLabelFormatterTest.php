@@ -133,13 +133,9 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 		$formatter = new EntityIdLabelFormatter( $formatterOptions, $this->newEntityLoader() );
 		$formatter->setIdFormatter( $this->newEntityIdFormatter() );
 
-		$formattingResult = $formatter->format( $entityId );
-		$this->assertInstanceOf( 'ValueFormatters\Result', $formattingResult );
-		$this->assertTrue( $formattingResult->isValid(), 'Formatting result should be valid' );
+		$formattedValue = $formatter->format( $entityId );
 
-		$formattedValue = $formattingResult->getValue();
 		$this->assertInternalType( 'string', $formattedValue );
-
 		$this->assertEquals( $expectedString, $formattedValue );
 	}
 

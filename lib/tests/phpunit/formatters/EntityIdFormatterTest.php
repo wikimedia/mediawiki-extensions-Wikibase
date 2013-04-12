@@ -84,11 +84,9 @@ class EntityIdFormatterTest extends \PHPUnit_Framework_TestCase {
 		$formatter = $this->newEntityIdFormatter();
 
 		$formattingResult = $formatter->format( $entityId );
-		$this->assertInstanceOf( 'ValueFormatters\Result', $formattingResult );
-		$this->assertTrue( $formattingResult->isValid(), 'Formatting result should be valid' );
 
-		$this->assertInternalType( 'string', $formattingResult->getValue() );
-		$this->assertEquals( $expectedString, $formattingResult->getValue() );
+		$this->assertInternalType( 'string', $formattingResult );
+		$this->assertEquals( $expectedString, $formattingResult );
 	}
 
 }
