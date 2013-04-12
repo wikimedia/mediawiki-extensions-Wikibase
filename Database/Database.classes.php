@@ -34,7 +34,6 @@ return call_user_func( function() {
 
 		'Wikibase\Database\FieldDefinition',
 		'Wikibase\Database\MediaWikiQueryInterface',
-		'Wikibase\Database\ObservableQueryInterface',
 		'Wikibase\Database\QueryInterface',
 		'Wikibase\Database\TableBuilder',
 		'Wikibase\Database\TableDefinition',
