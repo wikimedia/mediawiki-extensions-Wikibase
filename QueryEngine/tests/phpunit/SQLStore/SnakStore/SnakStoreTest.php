@@ -42,6 +42,8 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 	 */
 	protected abstract function getInstance();
 
+	protected abstract function canStoreProvider();
+
 	public function differentSnaksProvider() {
 		$argLists = array();
 
@@ -63,6 +65,13 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testReturnTypeOfCanUse( Snak $snak ) {
 		$canStore = $this->getInstance()->canStore( $snak );
 		$this->assertInternalType( 'boolean', $canStore );
+	}
+
+	/**
+	 * @dataProvider canStoreProvider
+	 */
+	public function testCanStore( $canStore, Snak $snak ) {
+		$this->assertEquals( $canStore, $this->getInstance()->canStore( $snak ) );
 	}
 
 }

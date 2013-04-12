@@ -7,7 +7,6 @@ use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\SQLStore\SnakStore\NoValueSnakStore;
-use Wikibase\Snak;
 
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakStore\NoValueSnakStore class.
@@ -56,13 +55,6 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 		$argLists[] = array( false, new PropertySomeValueSnak( 720101 ) );
 
 		return $argLists;
-	}
-
-	/**
-	 * @dataProvider canStoreProvider
-	 */
-	public function testCanStore( $canStore, Snak $snak ) {
-		$this->assertEquals( $canStore, $this->getInstance()->canStore( $snak ) );
 	}
 
 }
