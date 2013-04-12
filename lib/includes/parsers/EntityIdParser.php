@@ -1,9 +1,10 @@
 <?php
 
 namespace Wikibase\Lib;
-use ValueParsers\Result;
+use ValueParsers\ParseException;
 use ValueParsers\StringValueParser;
 use ValueParsers\ParserOptions;
+use Wikibase\EntityId;
 
 /**
  * Parser that parses entity id strings into EntityId objects.
@@ -72,22 +73,23 @@ class EntityIdParser extends StringValueParser {
 	 *
 	 * @param string $value
 	 *
-	 * @return Result
+	 * @return EntityId
+	 * @throws ParseException
 	 */
 	protected function stringParse( $value ) {
 		$idParts = $this->getIdParts( $value );
 
 		if ( count( $idParts ) < 3 || !ctype_digit( $idParts[2] ) ) {
-			return Result::newErrorText( 'Not an EntityId' );
+			throw new ParseException( 'Not an EntityId' );
 		}
 
 		$entityType = $this->getEntityTypeForPrefix( $idParts[1] );
 
 		if ( $entityType === null ) {
-			return Result::newErrorText( 'EntityId has an invalid prefix' );
+			throw new ParseException( 'EntityId has an invalid prefix' );
 		}
 
-		return Result::newSuccess( new \Wikibase\EntityId( $entityType, (int)$idParts[2] ) );
+		return new EntityId( $entityType, (int)$idParts[2] );
 	}
 
 	/**

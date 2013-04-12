@@ -1,7 +1,10 @@
 <?php
 
 namespace Wikibase\Lib\Test;
-use ValueParsers\Result;
+
+use ValueParsers\ParserOptions;
+use Wikibase\EntityId;
+use Wikibase\Lib\EntityIdParser;
 
 /**
  * Unit test Wikibase\Lib\EntityIdParser class.
@@ -40,11 +43,11 @@ class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 	 *
 	 * @since 0.4
 	 *
-	 * @return \ValueParsers\ParserOptions
+	 * @return ParserOptions
 	 */
 	protected function newParserOptions() {
-		return new \ValueParsers\ParserOptions( array(
-			\Wikibase\Lib\EntityIdParser::OPT_PREFIX_MAP => array(
+		return new ParserOptions( array(
+			EntityIdParser::OPT_PREFIX_MAP => array(
 				'a' => 'entity-type-a',
 				'b' => 'entity-type-b',
 				'x' => 'entity-type-a',
@@ -63,10 +66,10 @@ class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 	 *
 	 * @return array
 	 */
-	public function parseProvider() {
+	public function validInputProvider() {
 		$argLists = array();
 
-		$parser = new \Wikibase\Lib\EntityIdParser( $this->newParserOptions() );
+		$parser = new EntityIdParser( $this->newParserOptions() );
 
 		$valid = array(
 			'a1' => array( 'entity-type-a', 1 ),
@@ -84,9 +87,15 @@ class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 		);
 
 		foreach ( $valid as $value => $expected ) {
-			$expected = new \Wikibase\EntityId( $expected[0], $expected[1] );
-			$argLists[] = array( (string)$value, Result::newSuccess( $expected ), $parser );
+			$expected = new EntityId( $expected[0], $expected[1] );
+			$argLists[] = array( (string)$value, $expected, $parser );
 		}
+
+		return array_merge( $argLists );
+	}
+
+	public function invalidInputProvider() {
+		$argLists = parent::invalidInputProvider();
 
 		$invalid = array(
 			'foo',
@@ -101,10 +110,10 @@ class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 		);
 
 		foreach ( $invalid as $value ) {
-			$argLists[] = array( $value, Result::newErrorText( '' ), $parser );
+			$argLists[] = array( $value );
 		}
 
-		return array_merge( $argLists );
+		return $argLists;
 	}
 
 	/**

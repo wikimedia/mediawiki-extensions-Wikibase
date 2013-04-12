@@ -49,9 +49,7 @@ class DataTypesTest extends \MediaWikiTestCase {
 
 		$result = $parser->parse( $expected->getPrefixedId() );
 
-		$this->assertTrue( $result->isValid() );
-
-		$this->assertTrue( $expected->equals( $result->getValue() ) );
+		$this->assertTrue( $expected->equals( $result ) );
 	}
 
 }
