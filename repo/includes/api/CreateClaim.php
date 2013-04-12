@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase, MWException;
 
+use ValueParsers\ParseException;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
@@ -172,16 +173,17 @@ class CreateClaim extends ModifyClaim {
 		$params = $this->extractRequestParams();
 
 		$factory = new SnakFactory();
-
 		$libRegistry = new LibRegistry( Settings::singleton() );
-		$parseResult = $libRegistry->getEntityIdParser()->parse( $params['property'] );
 
-		if ( !$parseResult->isValid() ) {
-			throw new MWException( $parseResult->getError()->getText() );
+		try {
+			$entityId = $libRegistry->getEntityIdParser()->parse( $params['property'] );
+		}
+		catch ( ParseException $parseException ) {
+			throw new MWException( $parseException->getMessage(), 'setclaim-invalid-guid' );
 		}
 
 		return $factory->newSnak(
-			$parseResult->getValue(),
+			$entityId,
 			$params['snaktype'],
 			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
 		);

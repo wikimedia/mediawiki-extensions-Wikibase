@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiBase;
 use MWException;
 
+use ValueParsers\ParseException;
 use Wikibase\EntityContent;
 use Wikibase\EntityId;
 use Wikibase\Entity;
@@ -194,14 +195,7 @@ class SetQualifier extends ApiWikibase {
 		$propertyId = isset( $params['property'] ) ? $params['property'] : $snak->getPropertyId();
 
 		if ( is_string( $propertyId ) ) {
-			$libRegistry = new LibRegistry( Settings::singleton() );
-			$parseResult = $libRegistry->getEntityIdParser()->parse( $propertyId );
-
-			if ( !$parseResult->isValid() ) {
-				$this->dieUsage( $parseResult->getError()->getText(), 'invalid-property-id' );
-			}
-
-			$propertyId = $parseResult->getValue();
+			$propertyId = $this->getParsedEntityId( $propertyId, 'invalid-property-id' );
 		}
 
 		$snakType = isset( $params['snaktype'] ) ? $params['snaktype'] : $snak->getType();
@@ -222,6 +216,20 @@ class SetQualifier extends ApiWikibase {
 		return $qualifiers->addSnak( $newQualifier );
 	}
 
+	protected function getParsedEntityId( $prefixedId, $errorCode ) {
+		$libRegistry = new LibRegistry( Settings::singleton() );
+
+		try {
+			$entityId = $libRegistry->getEntityIdParser()->parse( $prefixedId );
+		}
+		catch ( ParseException $parseException ) {
+			$this->dieUsage( $parseException->getMessage(), $errorCode );
+			return null;
+		}
+
+		return $entityId;
+	}
+
 	/**
 	 * @since 0.3
 	 *
@@ -235,15 +243,10 @@ class SetQualifier extends ApiWikibase {
 		$params = $this->extractRequestParams();
 		$factory = new SnakFactory();
 
-		$libRegistry = new LibRegistry( Settings::singleton() );
-		$parseResult = $libRegistry->getEntityIdParser()->parse( $params['property'] );
-
-		if ( !$parseResult->isValid() ) {
-			throw new MWException( $parseResult->getError()->getText() );
-		}
+		$propertyId = $this->getParsedEntityId( $params['property'], 'invalid-property-id' );
 
 		$newQualifier = $factory->newSnak(
-			$parseResult->getValue(),
+			$propertyId,
 			$params['snaktype'],
 			isset( $params['value'] ) ? $params['value'] : null
 		);

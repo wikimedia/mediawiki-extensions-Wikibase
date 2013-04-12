@@ -24,6 +24,8 @@
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */
 
+use ValueParsers\ParseException;
+
 class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	/**
@@ -52,15 +54,18 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
 		$prefixedEntityId = trim( $prefixedEntityId );
 		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-		$parseResult = $libRegistry->getEntityIdParser()->parse( $prefixedEntityId );
 
-		if ( !$parseResult->isValid() ) {
+		try {
+			$entityId = $libRegistry->getEntityIdParser()->parse( $prefixedEntityId );
+		}
+		catch ( ParseException $parseException ) {
 			throw $this->getEngine()->newException( 'wikibase-error-invalid-entity-id' );
 		}
 
 		$entityObject = Wikibase\ClientStoreFactory::getStore()->getEntityLookup()->getEntity(
-			Wikibase\EntityId::newFromPrefixedId( $prefixedEntityId )
+			$entityId
 		);
+
 		if ( $entityObject == null ) {
 			return array( null );
 		}

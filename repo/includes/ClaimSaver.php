@@ -5,6 +5,7 @@ namespace Wikibase;
 use User;
 use MWException;
 use Status;
+use ValueParsers\ParseException;
 use Wikibase\ExceptionWithCode;
 
 /**
@@ -99,15 +100,15 @@ class ClaimSaver {
 		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
 		$idParser = $libRegistry->getEntityIdParser();
 
-		$parseResult = $idParser->parse( $entityId );
-
-		if ( $parseResult->isValid() ) {
-			$entityId = $parseResult->getValue();
-			assert( $entityId instanceof EntityId );
-			return $entityId;
+		try {
+			$entityId = $idParser->parse( $entityId );
+		}
+		catch ( ParseException $parseException ) {
+			throw new ExceptionWithCode( $parseException->getMessage(), 'setclaim-invalid-guid' );
 		}
 
-		throw new ExceptionWithCode( $parseResult->getError()->getText(), 'setclaim-invalid-guid' );
+		assert( $entityId instanceof EntityId );
+		return $entityId;
 	}
 
 	/**
