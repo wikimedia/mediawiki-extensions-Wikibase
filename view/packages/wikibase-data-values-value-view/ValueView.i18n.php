@@ -100,9 +100,11 @@ $messages['fa'] = array(
 );
 
 /** Finnish (suomi)
+ * @author Silvonen
  */
 $messages['fi'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Datatyypin "$1" arvojen käsittelyä ei vielä tueta.', # Fuzzy
+	'valueview-expert-emptyvalue-empty' => 'tyhjä',
 );
 
 /** French (français)
@@ -201,6 +203,7 @@ $messages['ja'] = array(
  * @author Kwj2772
  */
 $messages['ko'] = array(
+	'valueview-desc' => '데이터 값 표시와 편집을 위한 사용자 인터페이스 구성 요소',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '"$1" 값의 처리는 아직 지원하지 않습니다.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '"$1" 데이터 유형에 대한 값의 처리는 아직 지원하지 않습니다.',
 	'valueview-expert-emptyvalue-empty' => '비어 있음',
