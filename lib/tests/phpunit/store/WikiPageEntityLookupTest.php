@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\EntityId;
 use \Wikibase\EntityLookup;
 use \Wikibase\WikiPageEntityLookup;
 

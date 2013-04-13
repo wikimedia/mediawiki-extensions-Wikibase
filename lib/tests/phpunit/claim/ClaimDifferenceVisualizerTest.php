@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ClaimDifferenceVisualizer;
 use Wikibase\ClaimDifference;
 
 /**

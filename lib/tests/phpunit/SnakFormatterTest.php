@@ -16,7 +16,6 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\TypedValueFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyValueSnak;
-use Wikibase\Test\MockRepository;
 
 /**
  * Tests for the Wikibase\Lib\SnakFormatter class.

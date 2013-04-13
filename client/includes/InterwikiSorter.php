@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase;
-use Wikibase\Settings;
 
 /**
  * Language sorting utility functions.

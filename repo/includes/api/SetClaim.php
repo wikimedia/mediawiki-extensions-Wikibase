@@ -9,7 +9,6 @@ use Wikibase\EntityContent;
 use Wikibase\Claim;
 use Wikibase\EntityContentFactory;
 use Wikibase\ClaimSaver;
-use Wikibase\ExceptionWithCode;
 
 /**
  * API module for creating or updating an entire Claim.

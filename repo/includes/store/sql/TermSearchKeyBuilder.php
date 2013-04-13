@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Iterator, DatabaseBase;
+use DatabaseBase;
 
 /**
  * Utility class for rebuilding the term_search_key field.

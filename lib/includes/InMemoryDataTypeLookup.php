@@ -2,11 +2,9 @@
 
 namespace Wikibase\Lib;
 
-use DataTypes\DataType;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\EntityId;
-use Wikibase\EntityLookup;
 use Wikibase\Property;
 
 /**

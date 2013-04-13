@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ResourceLoaderModule, ResourceLoaderContext, MediaWikiSite, Site, Sites;
+use ResourceLoaderModule, ResourceLoaderContext, MediaWikiSite, Site;
 
 /**
  *
