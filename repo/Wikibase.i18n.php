@@ -170,7 +170,9 @@ Your IP address will be recorded in the edit history of this $1.",
 	'wikibase-setentity-invalid-langcode' => 'The language identifier "$1" is unknown. Please use a language identifier known to the system, such as "en".',
 	'wikibase-setentity-invalid-id' => 'The ID "$1" is unknown to the system. Please use a valid entity ID.',
 	'special-dispatchstats' => 'Change dispatch statistics',
-	'wikibase-dispatchstats-intro' => 'This page provides statistics about change dispatching to the clients.',
+	'wikibase-dispatchstats-intro' => 'This page provides statistics about change dispatching to the clients.
+* "{{int:wikibase-dispatchstats-changes}}" shows the number and the date for the oldest and the most recent items currently in the queue.
+* "{{int:wikibase-dispatchstats-stats}}" hints how much time is needed to process the queue: it shows three recently processed items and, for each of them, how many other items there are in the queue after them ("{{int:wikibase-dispatchstats-lag-num}}") and how long they waited in the queue ("{{int:wikibase-dispatchstats-lag-time}}"); it then calculates the average time they waited.',
 	'wikibase-dispatchstats-no-stats' => 'There are currently no statistics available.',
 	'wikibase-dispatchstats-changes' => 'Change log statistics',
 	'wikibase-dispatchstats-stats' => 'Dispatch statistics',
