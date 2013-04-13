@@ -3,7 +3,6 @@
 namespace Wikibase\Test\Query\SQLStore;
 
 use Wikibase\Database\FieldDefinition;
-use Wikibase\Database\ObservableQueryInterface;
 use Wikibase\Database\TableDefinition;
 use Wikibase\Entity;
 use Wikibase\Item;
@@ -58,7 +57,7 @@ class UpdaterTest extends QueryStoreUpdaterTest {
 		$instances = array();
 
 		$storeSchema = new Schema( new StoreConfig( 'foo', 'bar', array() ) );
-		$queryInterface = new ObservableQueryInterface();
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
 
 		$instances[] = new Updater( $storeSchema, $queryInterface );
 
