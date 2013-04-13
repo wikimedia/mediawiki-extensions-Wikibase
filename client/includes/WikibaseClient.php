@@ -12,7 +12,6 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
-use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\TypedValueFormatter;
