@@ -2,13 +2,8 @@
 
 namespace Wikibase;
 
-use DataTypes\DataTypeFactory;
-use DataValues\DataValue;
-use ValueFormatters\ValueFormatter;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\TypedValueFormatter;
 
 /**
  * Handler of the {{#property}} parser function.
