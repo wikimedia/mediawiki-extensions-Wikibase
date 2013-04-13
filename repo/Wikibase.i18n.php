@@ -170,7 +170,15 @@ Your IP address will be recorded in the edit history of this $1.",
 	'wikibase-setentity-invalid-langcode' => 'The language identifier "$1" is unknown. Please use a language identifier known to the system, such as "en".',
 	'wikibase-setentity-invalid-id' => 'The ID "$1" is unknown to the system. Please use a valid entity ID.',
 	'special-dispatchstats' => 'Change dispatch statistics',
-	'wikibase-dispatchstats-intro' => 'This page provides statistics about change dispatching to the clients.',
+	'wikibase-dispatchstats-intro' => 'This page provides statistics about dispatching changes to the clients.
+A client wiki is notified of a change on {{SITENAME}} once the change has been dispatched on that wiki, and the job queue on that wiki has processed that notification.
+* [[#{{int:wikibase-dispatchstats-changes}}|{{int:wikibase-dispatchstats-changes}}]] shows the number and the date for the oldest and the most recent items currently in the queue.
+* [[#{{int:wikibase-dispatchstats-stats}}|{{int:wikibase-dispatchstats-stats}}]] provides information about the most lagged and the least lagged client wiki, and one median one in between. For each wiki, the following information is provided:
+** "{{int:wikibase-dispatchstats-site-id}}" is the internal ID of the client wiki.
+** "{{int:wikibase-dispatchstats-pos}}" is the ID of the last change dispatched to that wiki.
+** "{{int:wikibase-dispatchstats-lag-num}}" is the number of changes not yet dispatched to that wiki.
+** "{{int:wikibase-dispatchstats-lag-time}}" is the time between the change last dispatched to the wiki, and the last change performed on {{SITENAME}}.
+** "{{int:wikibase-dispatchstats-touched}}" is the time when the last batch of changes got dispatched to the wiki.',
 	'wikibase-dispatchstats-no-stats' => 'There are currently no statistics available.',
 	'wikibase-dispatchstats-changes' => 'Change log statistics',
 	'wikibase-dispatchstats-stats' => 'Dispatch statistics',
