@@ -117,7 +117,7 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 					array(
 						'claim_id' => $snakRow->getInternalClaimId(),
 						'property_id' => $snakRow->getInternalPropertyId(),
-						'snak_type' => $snakRow->getSnak()->getType(),
+						'snak_type' => $snakRow->getInternalSnakType(),
 						'snak_role' => $snakRow->getSnakRole(),
 					)
 				)
