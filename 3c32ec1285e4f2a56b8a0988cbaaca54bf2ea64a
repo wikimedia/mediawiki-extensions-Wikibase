@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DuhdMfnA",
+        "filename": "lib/maintenance/dispatchChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-15T23:46:52Z",
+      "side": 1,
+      "message": "Then why do we behave behavior that only runs in this impossible situation?",
+      "revId": "3c32ec1285e4f2a56b8a0988cbaaca54bf2ea64a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Duldr1rg",
+        "filename": "lib/maintenance/dispatchChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-15T23:46:52Z",
+      "side": 1,
+      "message": "c is not a valid variable name. Seriously... -1 for that",
+      "revId": "3c32ec1285e4f2a56b8a0988cbaaca54bf2ea64a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
