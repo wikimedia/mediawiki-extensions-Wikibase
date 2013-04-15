@@ -7,6 +7,8 @@ use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SomeValueSnakStore;
+use Wikibase\QueryEngine\SQLStore\StoreSnak;
+use Wikibase\SnakRole;
 
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakStore\SomeValueSnakStore class.
@@ -47,12 +49,53 @@ class SomeValueSnakStoreTest extends SnakStoreTest {
 	public function canStoreProvider() {
 		$argLists = array();
 
-		$argLists[] = array( false, new PropertyValueSnak( 42, new StringValue( 'nyan' ) ) );
-		$argLists[] = array( false, new PropertyValueSnak( 9001, new StringValue( 'nyan' ) ) );
-		$argLists[] = array( false, new PropertyNoValueSnak( 1 ) );
-		$argLists[] = array( false, new PropertyNoValueSnak( 31337 ) );
-		$argLists[] = array( true, new PropertySomeValueSnak( 2 ) );
-		$argLists[] = array( true, new PropertySomeValueSnak( 720101 ) );
+		$argLists[] = array( new StoreSnak(
+			new PropertySomeValueSnak( 2 ),
+			1,
+			1,
+			SnakRole::QUALIFIER
+		) );
+
+		$argLists[] = array( new StoreSnak(
+			new PropertySomeValueSnak( 720101 ),
+			1,
+			1,
+			SnakRole::MAIN_SNAK
+		) );
+
+		return $argLists;
+	}
+
+	public function cannotStoreProvider() {
+		$argLists = array();
+
+		$argLists[] = array( new StoreSnak(
+			new PropertyValueSnak( 42, new StringValue( 'nyan' ) ),
+			1,
+			1,
+			SnakRole::QUALIFIER
+		) );
+
+		$argLists[] = array( new StoreSnak(
+			new PropertyValueSnak( 9001, new StringValue( 'nyan' ) ),
+			1,
+			1,
+			SnakRole::MAIN_SNAK
+		) );
+
+		$argLists[] = array( new StoreSnak(
+			new PropertyNoValueSnak( 1 ),
+			1,
+			1,
+			SnakRole::QUALIFIER
+		) );
+
+		$argLists[] = array( new StoreSnak(
+			new PropertyNoValueSnak( 31337 ),
+			1,
+			1,
+			SnakRole::MAIN_SNAK
+		) );
 
 		return $argLists;
 	}

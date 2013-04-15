@@ -5,6 +5,7 @@ namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 use Wikibase\Database\QueryInterface;
 use Wikibase\Database\TableDefinition;
 use Wikibase\PropertyNoValueSnak;
+use Wikibase\QueryEngine\SQLStore\StoreSnak;
 use Wikibase\Snak;
 
 /**
@@ -41,11 +42,11 @@ class NoValueSnakStore extends SnakStore {
 		$this->table = $table;
 	}
 
-	public function canStore( Snak $snak ) {
-		return $snak instanceof PropertyNoValueSnak;
+	public function canStore( StoreSnak $storeSnak ) {
+		return $storeSnak->getSnak() instanceof PropertyNoValueSnak;
 	}
 
-	public function storeSnak( Snak $snak, $internalClaimId, $snakRole ) {
+	public function storeSnak( StoreSnak $storeSnak ) {
 
 	}
 
