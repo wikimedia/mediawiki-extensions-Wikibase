@@ -61,6 +61,7 @@ final class LibHooks {
 			'serializers/Serializer',
 			'serializers/SnakSerializer',
 
+			'store/ChunkCacheTest',
 			'store/SiteLinkLookup',
 			'store/SiteLinkTable',
 			'store/WikiPageEntityLookup',
