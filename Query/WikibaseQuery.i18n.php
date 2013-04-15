@@ -50,11 +50,25 @@ $messages['ast'] = array(
 	'wikibasequery-desc' => 'Amiesta capacidaes de consulta a Wikibase',
 );
 
+/** Danish (dansk)
+ * @author Byrial
+ */
+$messages['da'] = array(
+	'wikibasequery-desc' => 'Tilføjer forespørgselsmuligheder til Wikibase',
+);
+
 /** German (Deutsch)
  * @author Metalhead64
  */
 $messages['de'] = array(
 	'wikibasequery-desc' => 'Ergänzt Abfragemöglichkeiten zu Wikibase',
+);
+
+/** French (français)
+ * @author Metroitendo
+ */
+$messages['fr'] = array(
+	'wikibasequery-desc' => 'Ajoute des capacités de requête à Wikibase',
 );
 
 /** Galician (galego)
@@ -78,6 +92,13 @@ $messages['ko'] = array(
 	'wikibasequery-desc' => '위키베이스에 쿼리 기능을 추가',
 );
 
+/** Macedonian (македонски)
+ * @author Bjankuloski06
+ */
+$messages['mk'] = array(
+	'wikibasequery-desc' => 'Додава можност за пребарување на Викибазата',
+);
+
 /** Dutch (Nederlands)
  * @author Siebrand
  */
@@ -90,4 +111,11 @@ $messages['nl'] = array(
  */
 $messages['roa-tara'] = array(
 	'wikibasequery-desc' => "Aggiunge le capacità de l'inderrogazione sus a Uicchibase",
+);
+
+/** Vietnamese (Tiếng Việt)
+ * @author Minh Nguyen
+ */
+$messages['vi'] = array(
+	'wikibasequery-desc' => 'Thêm khả năng truy vấn vào Wikibase',
 );

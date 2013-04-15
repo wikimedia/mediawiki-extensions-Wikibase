@@ -165,6 +165,8 @@ $specialPageAliases['ko'] = array(
 
 /** Luxembourgish (Lëtzebuergesch) */
 $specialPageAliases['lb'] = array(
+	'DispatchStats' => array( 'Statistike_verbreeden' ),
+	'NewItem' => array( 'Neit_Element', 'Element_uleeën' ),
 	'ItemByTitle' => array( 'Element_nom_Titel' ),
 	'SetLabel' => array( 'Etiquette_festleeën' ),
 	'SetDescription' => array( 'Beschreiwung_festleeën' ),

@@ -268,8 +268,49 @@ $messages['arc'] = array(
  */
 $messages['ast'] = array(
 	'wikibase-client-desc' => 'Cliente pa la estensión Wikibase',
+	'specialpages-group-wikibaseclient' => 'Cliente de Wikidata',
+	'wikibase-after-page-move' => "Tamién pue [$1 anovar] l'elementu asociáu de Wikidata pa caltener los enllaces d'idioma na páxina treslladada.",
+	'wikibase-comment-remove' => "Desanicióse l'elementu asociáu de Wikidata. Quitaronse los enllaces de llingua.",
+	'wikibase-comment-linked' => 'Enllazóse un elementu de Wikidata a esta páxina.',
+	'wikibase-comment-unlink' => "Desenllazóse esta páxina d'un elementu de Wikidata. Quitaronse los enllaces de llingua.",
+	'wikibase-comment-restore' => "Recuperóse l'elementu asociáu de Wikidata. Restauraronse los enllaces de llingua.",
+	'wikibase-comment-update' => "Camudó l'elementu de Wikidata",
+	'wikibase-comment-sitelink-add' => 'Amestóse un enllaz de llingua: $1',
+	'wikibase-comment-sitelink-change' => 'Camudó un enllaz de llingua de $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Desanicióse un enllaz de llingua: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|cambiu|cambios}}',
 	'wikibase-editlinks' => 'Editar los enllaces',
 	'wikibase-editlinkstitle' => "Editar los enllaces d'interllingua",
+	'wikibase-linkitem-addlinks' => 'Amestar enllaces',
+	'wikibase-linkitem-alreadylinked' => "La páxina que quería enllazar con esta, yá ta enllazada con un [$1 elementu] del depósitu central de datos qu'enllaza con $2 d'esti sitiu. Los elementos sólo pueden tener enllazada una páxina por sitiu. Por favor, escueya una páxina diferente pa enllazar.",
+	'wikibase-linkitem-close' => 'Zarrar el diálogu y recargar la páxina',
+	'wikibase-linkitem-failure' => 'Hebo un error desconocíu al intentar enllazar la páxina dada.',
+	'wikibase-linkitem-title' => 'Enllazar con páxina',
+	'wikibase-linkitem-linkpage' => 'Enllazar con páxina',
+	'wikibase-linkitem-selectlink' => 'Por favor, seleicione un sitiu y una páxina cola que quiera enllazar esta páxina.',
+	'wikibase-linkitem-input-site' => 'Llingua:',
+	'wikibase-linkitem-input-page' => 'Páxina:',
+	'wikibase-linkitem-invalidsite' => 'Seleicionóse un sitiu desconocíu o inválidu',
+	'wikibase-linkitem-confirmitem-text' => "La paxina qu'escoyó yá ta enllazada con un [$1 elementu del depósitu central de datos]. Confirme que les páxines que s'amuesen más abaxo son les que quier enllazar con esta páxina.",
+	'wikibase-linkitem-confirmitem-button' => 'Confirmar',
+	'wikibase-linkitem-not-loggedin-title' => "Tien d'aniciar sesión",
+	'wikibase-linkitem-not-loggedin' => "Tien d'aniciar sesión nesta wiki y nel [$1 depósitu central de datos] pa usar esta carauterística.",
+	'wikibase-linkitem-success-create' => "Les páxines enllazaronse correutamente. Pue alcontrar l'elementu recién creáu que contién los enllaces nel [$1 depósitu central de datos].",
+	'wikibase-linkitem-success-link' => "Les páxines enllazaronse correutamente. Pue alcontrar l'elementu que contién los enllaces nel [$1 depósitu central de datos].",
+	'wikibase-property-notfound' => "Nun s'alcontró la propiedá $1.",
+	'wikibase-property-notsupportedyet' => 'Wikibase inda nun sofita tipu de propiedá pa la propiedá $1.',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Amosar les ediciones de Wikidata nos cambios de recién',
+	'wikibase-watchlist-show-changes-pref' => 'Amosar les ediciones de Wikidata na so llista de vixilancia',
+	'wikibase-error-invalid-entity-id' => "La ID qu'escribió ye desconocida pal sistema. Por favor, use una ID d'entidá válida.",
+	'special-unconnectedpages' => 'Páxines nun coneutaes con elementos',
+	'wikibase-unconnectedpages-legend' => 'Opciones pa les páxines nun coneutaes',
+	'wikibase-unconnectedpages-page' => 'Principiar la llista de resultaos pola páxina:',
+	'wikibase-unconnectedpages-submit' => 'Dir',
+	'wikibase-unconnectedpages-invalid-language' => "«$1» nun ye un códigu d'idioma válidu.",
+	'wikibase-unconnectedpages-page-warning' => 'El títulu de la páxina nun pudo usase pa la consulta ya inoróse.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Namái páxines con enllaces interllingüísticos',
+	'wikibase-unconnectedpages-format-row' => '($1 enllaces interllingüísticos na páxina)',
 );
 
 /** Bashkir (башҡортса)
@@ -358,7 +399,7 @@ $messages['be-tarask'] = array(
 	'wikibase-error-invalid-entity-id' => 'Уведзены ідэнтыфікатар не вядомы сыстэме. Калі ласка, выкарыстоўвайце існыя ідэнтыфікатары аб’ектаў.',
 	'special-unconnectedpages' => 'Старонкі, ня злучаныя з аб’ектамі',
 	'wikibase-unconnectedpages-legend' => 'Налады нязлучаных старонак',
-	'wikibase-unconnectedpages-page' => 'Паказваць вынікі ад гэтага артыкула:',
+	'wikibase-unconnectedpages-page' => 'Паказваць вынікі ад гэтага артыкула:', # Fuzzy
 	'wikibase-unconnectedpages-submit' => 'Паказаць',
 	'wikibase-unconnectedpages-invalid-language' => '«$1» — няслушны код мовы.',
 	'wikibase-unconnectedpages-page-warning' => 'Назва старонкі ня можа быць скарыстаная ў запыце, таму ігнаруецца.',
@@ -387,13 +428,14 @@ $messages['bg'] = array(
 );
 
 /** Bengali (বাংলা)
+ * @author Aftab1995
  * @author Bellayet
  * @author Leemon2010
  * @author Sankarshan
  */
 $messages['bn'] = array(
 	'wikibase-after-page-move' => 'এছাড়া আপনি স্থানান্তর করা পাতাতে ভাষার লিংক বজায় রাখার জন্য সংশ্লিষ্ট উইকিউপাত্তের আইটেমটি [$1 হালনাগাদ] করতে পারেন।',
-	'wikibase-comment-update' => 'ভাষার সংযোগ হালনাগাদ হয়েছে।', # Fuzzy
+	'wikibase-comment-update' => 'উইকিউপাত্তের আইটেম পরিবর্তন হয়েছে।',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|পরিবর্তন|পরিবর্তনসমূহ}}',
 	'wikibase-editlinks' => 'সংযোগ সম্পাদনা',
 	'wikibase-editlinkstitle' => 'আন্তঃভাষার লিংকগুলি সম্পাদনা করুন',
@@ -405,7 +447,7 @@ $messages['bn'] = array(
 	'wikibase-linkitem-invalidsite' => 'অজানা বা অবৈধ সাইট নির্বাচন করা হয়েছে',
 	'wikibase-linkitem-confirmitem-button' => 'নিশ্চিত করুন',
 	'wikibase-linkitem-not-loggedin-title' => 'আপনার লগইন করা প্রয়োজন',
-	'wikibase-rc-hide-wikidata' => '$1 উইকিউপাত্ত',
+	'wikibase-rc-hide-wikidata' => 'উইকিউপাত্ত $1',
 	'wikibase-rc-show-wikidata-pref' => 'উইকিউপাত্তের সম্পাদনাগুলো সাম্প্রতিক পরিবর্তনে দেখানো হোক',
 	'wikibase-watchlist-show-changes-pref' => 'উইকিউপাত্তের সম্পাদনাগুলো নজরতালিকায় দেখাও',
 );
@@ -579,11 +621,13 @@ $messages['cu'] = array(
  * @author Lloffiwr
  */
 $messages['cy'] = array(
+	'specialpages-group-wikibaseclient' => 'Cleient Wiciddata',
 	'wikibase-after-page-move' => "Gallwch [$1 ddiweddaru]'r eitem berthnasol ar Wikidata er mwyn cynnal y cysylltiadau rhwng ieithoedd ar y dudalen a symudwyd.",
 	'wikibase-comment-linked' => "Cysylltwyd eitem Wikidata â'r dudalen hon.",
 	'wikibase-comment-update' => 'Diweddarwyd y cysylltau rhwng ieithoedd.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Ychwanegwyd y cyswllt rhwng ieithoedd $1',
 	'wikibase-comment-sitelink-change' => 'Newidiwyd y cyswllt rhwng ieithoedd o $1 i $2',
+	'wikibase-comment-sitelink-remove' => 'Tynnwyd cyswllt rhwng ieithoedd i ffwrdd: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|newid}}',
 	'wikibase-editlinks' => 'Golygu cysylltau',
 	'wikibase-editlinkstitle' => 'Golygu cysylltau rhyngwici rhwng ieithoedd',
@@ -601,6 +645,8 @@ $messages['cy'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Dangos golygiadau i Wiciddata ymhlith y newidiadau diweddar',
 	'wikibase-watchlist-show-changes-pref' => 'Dangos golygiadau Wiciddata ar eich rhestr wylio',
 	'wikibase-error-invalid-entity-id' => "Mae'r ID a roddwyd yn anhysbys i'r system. Defnyddiwch ID dilys i'r endid data.",
+	'wikibase-unconnectedpages-submit' => 'Gwneler',
+	'wikibase-unconnectedpages-invalid-language' => 'Nid yw "$1" yn gôd iaith dilys',
 );
 
 /** Danish (dansk)
@@ -700,7 +746,7 @@ $messages['de'] = array(
 	'wikibase-error-invalid-entity-id' => 'Die eingegebene Kennung ist für das System unbekannt. Bitte verwende eine gültige Objektkennung.',
 	'special-unconnectedpages' => 'Seiten, die nicht mit Objekten verbunden sind',
 	'wikibase-unconnectedpages-legend' => 'Optionen für nicht verbundene Seiten',
-	'wikibase-unconnectedpages-page' => 'Ergebnisliste mit Artikel starten:',
+	'wikibase-unconnectedpages-page' => 'Ergebnisliste mit Seite starten:',
 	'wikibase-unconnectedpages-submit' => 'Los',
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ ist kein gültiger Sprachcode.',
 	'wikibase-unconnectedpages-page-warning' => 'Der Seitenname kann nicht für die Abfrage verwendet werden und wurde ignoriert.',
@@ -818,6 +864,7 @@ $messages['eo'] = array(
  * @author Armando-Martin
  * @author Dalton2
  * @author Hazard-SJ
+ * @author Hereñu
  * @author Pegna
  * @author Vivaelcelta
  */
@@ -852,12 +899,12 @@ $messages['es'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Necesita haberse identificado en esta wiki y en el [$1 central data repository], para usar esta función.',
 	'wikibase-linkitem-success-create' => 'Las páginas han sido enlazadas con éxito. Puedes encontrar encontrar el elemento recién creado que contiene los enlaces en nuestro [$1 depósito central de datos].',
 	'wikibase-linkitem-success-link' => 'Las páginas han sido enlazadas con éxito. Puedes encontrar encontrar el elemento recién creado que contiene los enlaces en nuestro [$1 depósito central de datos].',
-	'wikibase-property-notfound' => 'No se encontró la propiedad "$1"',
+	'wikibase-property-notfound' => 'No se encuentra la propiedad "$1"',
 	'wikibase-property-notsupportedyet' => 'Wikibase aún no soporta el tipo de propiedad de la propiedad "$1".',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar las modificaciones de Wikidata en los cambios recientes',
 	'wikibase-watchlist-show-changes-pref' => 'Mostrar las modificaciones de Wikidata en tu lista de seguimiento',
-	'wikibase-error-invalid-entity-id' => 'El sistema desconoce el sistema el ID introducido. Utiliza un identificador de entidad válido.',
+	'wikibase-error-invalid-entity-id' => 'El ID ingresado es desconocido para el sistema. Utilice un identificador de entidad válido.',
 	'special-unconnectedpages' => 'Páginas no conectados con elementos',
 	'wikibase-unconnectedpages-legend' => 'Opciones para las páginas no conectadas',
 	'wikibase-unconnectedpages-submit' => 'Continuar',
@@ -979,7 +1026,7 @@ $messages['fi'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
 	'wikibase-watchlist-show-changes-pref' => 'Näytä Wikidata-muokkaukset tarkkailulistallasi',
 	'special-unconnectedpages' => 'Sivut, joita ei ole liitetty kohteisiin',
-	'wikibase-unconnectedpages-page' => 'Aloitussivu', # Fuzzy
+	'wikibase-unconnectedpages-page' => 'Aloita tulokset sivusta',
 	'wikibase-unconnectedpages-submit' => 'Siirry',
 	'wikibase-unconnectedpages-invalid-language' => '”$1” ei ole kelvollinen kielikoodi.',
 	'wikibase-unconnectedpages-page-warning' => 'Sivun otsikkoa ei voitu käyttää kyselyssä ja se jätettiin huomiotta.',
@@ -1098,7 +1145,7 @@ $messages['gl'] = array(
 	'wikibase-error-invalid-entity-id' => 'O sistema descoñece o ID inserido. Utilice un identificador de entidade válido.',
 	'special-unconnectedpages' => 'Páxinas non conectadas con elementos',
 	'wikibase-unconnectedpages-legend' => 'Opcións para as páxinas non conectadas',
-	'wikibase-unconnectedpages-page' => 'Comezar a lista de resultados co artigo:',
+	'wikibase-unconnectedpages-page' => 'Comezar a lista de resultados co artigo:', # Fuzzy
 	'wikibase-unconnectedpages-submit' => 'Continuar',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" non é un código de lingua válido.',
 	'wikibase-unconnectedpages-page-warning' => 'O título da páxina non se puido utilizar para a pescuda e ignorouse.',
@@ -1534,7 +1581,7 @@ $messages['ja'] = array(
 	'wikibase-error-invalid-entity-id' => '入力した ID はシステムに登録されていません。有効なエンティティ ID を使用してください。',
 	'special-unconnectedpages' => '項目に関連付けられていないページ',
 	'wikibase-unconnectedpages-legend' => '関連付けられていないページのオプション',
-	'wikibase-unconnectedpages-page' => '検索結果の先頭にする記事:',
+	'wikibase-unconnectedpages-page' => '検索結果の先頭にするページ:',
 	'wikibase-unconnectedpages-submit' => '表示',
 	'wikibase-unconnectedpages-invalid-language' => '「$1」は有効な言語コードではありません。',
 	'wikibase-unconnectedpages-page-warning' => 'ページ名は検索に使用できなかったため無視します。',
@@ -1937,7 +1984,7 @@ $messages['ms'] = array(
 	'wikibase-error-invalid-entity-id' => 'ID yang diberikan itu tidak dikenali oleh sistem. Sila gunakan ID entiti yang sah.',
 	'special-unconnectedpages' => 'Halaman yang tidak bersambung dengan perkara',
 	'wikibase-unconnectedpages-legend' => 'Pilihan untuk halaman tak tersambung',
-	'wikibase-unconnectedpages-page' => 'Mulakan senarai hasil dengan rencana:',
+	'wikibase-unconnectedpages-page' => 'Mulakan senarai hasil dengan rencana:', # Fuzzy
 	'wikibase-unconnectedpages-submit' => 'Pergi',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" bukan kod bahasa yang sah.',
 	'wikibase-unconnectedpages-page-warning' => 'Tajuk halaman tidak dapat digunakan untuk pertanyaan, oleh itu diabaikan.',
@@ -2040,7 +2087,7 @@ $messages['nl'] = array(
 	'wikibase-error-invalid-entity-id' => 'Het opgegeven ID is niet bekend in het systeem. Gebruik een geldig entiteits-ID.',
 	'special-unconnectedpages' => "Pagina's niet niet gekoppeld zijn aan items",
 	'wikibase-unconnectedpages-legend' => "Instellingen voor ongekoppelde pagina's",
-	'wikibase-unconnectedpages-page' => 'Lijst beginnen met pagina:',
+	'wikibase-unconnectedpages-page' => 'Lijst beginnen met pagina:', # Fuzzy
 	'wikibase-unconnectedpages-submit' => 'OK',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" is geen geldige taalcode.',
 	'wikibase-unconnectedpages-page-warning' => 'De paginanaam kan niet worden gebruikt voor de zoekopdracht en wordt genegeerd.',
@@ -2068,6 +2115,7 @@ $messages['nn'] = array(
 	'wikibase-editlinks' => 'Endra lenkjer',
 	'wikibase-editlinkstitle' => 'Endra mellomspråklege lenkjer',
 	'wikibase-linkitem-addlinks' => 'Legg til lenkjer',
+	'wikibase-linkitem-alreadylinked' => 'Sida du ynskte å lenkja med er alt knytt til eit [$1 datasett] på det sentrale datalageret som lenkjer til $2 på denne nettstaden. Datasett kan berre ha tilknytt éi side per nettstad. Vel ei anna side å lenkja med.',
 	'wikibase-linkitem-close' => 'Lat att dialog og last sida på nytt',
 	'wikibase-linkitem-failure' => 'Ein ukjend feil oppstod under lenkinga av sida.',
 	'wikibase-linkitem-title' => 'Lenk til side',
@@ -2083,14 +2131,17 @@ $messages['nn'] = array(
 	'wikibase-linkitem-success-create' => 'Sidene vart lenkja til kvarandre. Du kan finna det nyoppretta objektet som inneheld lenkjene i det [$1 sentrale datalageret] vårt.',
 	'wikibase-linkitem-success-link' => 'Sidene vart lenkja til kvarandre. Du kan finna objektet som inneheld lenkjene i det [$1 sentrale datalageret] vårt.',
 	'wikibase-property-notfound' => 'Eigenskapen $1 vart ikkje funnen.',
+	'wikibase-property-notsupportedyet' => 'Wikibase stør enno ikkje eigenskapstypen for eigenskapen $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata-endringar i siste endringane',
 	'wikibase-watchlist-show-changes-pref' => 'Vis Wikidata-endringar på overvakingslista di',
+	'wikibase-error-invalid-entity-id' => 'Den oppgjevne ID-en er ukjend for systemet. Bruk ein gild einings-ID.',
 	'special-unconnectedpages' => 'Sider som ikkje er kopa til datasett',
 	'wikibase-unconnectedpages-legend' => 'Val for ukopla sider',
-	'wikibase-unconnectedpages-page' => 'Startside:', # Fuzzy
+	'wikibase-unconnectedpages-page' => 'Byrja resultatlista med denne artikkelen:', # Fuzzy
 	'wikibase-unconnectedpages-submit' => 'Gå',
 	'wikibase-unconnectedpages-invalid-language' => '«$1» er ikkje ein gild språkkode.',
+	'wikibase-unconnectedpages-page-warning' => 'Sidetittelen kunne ikkje brukast med spørjinga og er ignorert.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Berre sider med mellomspråklege lenkjer',
 	'wikibase-unconnectedpages-format-row' => '($1 mellomspråklege lenkjer på sida)',
 );
@@ -2226,7 +2277,7 @@ $messages['pt-br'] = array(
 	'wikibase-error-invalid-entity-id' => 'O ID inserido é desconhecido pelo sistema. Por favor, utilize um ID de entidade válido.',
 	'special-unconnectedpages' => 'Páginas não conectadas a itens',
 	'wikibase-unconnectedpages-legend' => 'Opções de páginas não conectadas',
-	'wikibase-unconnectedpages-page' => 'Iniciar lista de resultados com o artículo:',
+	'wikibase-unconnectedpages-page' => 'Iniciar lista de resultados com o artículo:', # Fuzzy
 	'wikibase-unconnectedpages-submit' => 'Ir',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" não é um código de idioma válido.',
 	'wikibase-unconnectedpages-page-warning' => 'O título da página não pôde ser utilizado para a consulta e foi ignorado.',
@@ -2593,7 +2644,7 @@ $messages['yi'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'איר דארפט זיין אריינלאגירט',
 	'wikibase-rc-hide-wikidata' => '$1 וויקידאטן',
 	'wikibase-rc-show-wikidata-pref' => 'ווייזן וויקידאטן רעדאקטירונגען אין לעצטע ענדערונגען',
-	'wikibase-unconnectedpages-page' => 'אנהייבן רעזולטאט ליסטער מיט ארטיקל:',
+	'wikibase-unconnectedpages-page' => 'אנהייבן רעזולטאט ליסטער מיט ארטיקל:', # Fuzzy
 	'wikibase-unconnectedpages-submit' => 'גיין',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" איז נישט קיין גילטיקער שפראך־קאד.',
 	'wikibase-unconnectedpages-iwdata-label' => 'נאר בלעטער מיט אינטערשפראך לינקען',
@@ -2662,7 +2713,7 @@ $messages['zh-hans'] = array(
 	'wikibase-error-invalid-entity-id' => '输入的ID在系统中是未知的。请使用一个有效的实体ID。',
 	'special-unconnectedpages' => '未连接到项目的页面',
 	'wikibase-unconnectedpages-legend' => '未连接页面的选项',
-	'wikibase-unconnectedpages-page' => '从此条目开始显示结果列表：',
+	'wikibase-unconnectedpages-page' => '从此条目开始显示结果列表：', # Fuzzy
 	'wikibase-unconnectedpages-submit' => '前往',
 	'wikibase-unconnectedpages-invalid-language' => '“$1”不是有效的语言代码。',
 	'wikibase-unconnectedpages-page-warning' => '该页面标题不能被用于查询并已被忽略。',

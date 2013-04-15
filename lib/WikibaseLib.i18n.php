@@ -137,12 +137,34 @@ $messages['ast'] = array(
 	'wikibase-entity-item' => 'elementu',
 	'wikibase-entity-property' => 'propiedá',
 	'wikibase-entity-query' => 'consulta',
+	'wikibase-diffview-reference' => 'referencia',
+	'wikibase-diffview-rank' => 'rangu',
+	'wikibase-diffview-qualifier' => 'calificador',
+	'wikibase-error-unexpected' => 'Hebo un fallu inesperáu.',
+	'wikibase-error-save-generic' => 'Hebo un error al intentar el guardáu y, por eso, nun pudieron completase los cambios.',
+	'wikibase-error-remove-generic' => 'Hebo un error al intentar el desaniciu y, por eso, nun pudieron completase los cambios.',
+	'wikibase-error-save-connection' => 'Hebo un error de conexón al intentar el guardáu y, por eso, nun pudieron completase los cambios. Por favor, compruebe la so conexón a Internet.',
+	'wikibase-error-remove-connection' => 'Hebo un error de conexón al intentar el desaniciu y, por eso, nun pudieron completase los cambios. Por favor, compruebe la so conexón a Internet.',
+	'wikibase-error-save-timeout' => 'Tamos teniendo dificultaes téuniques, y por eso nun se pudo completar el guardáu.',
+	'wikibase-error-remove-timeout' => 'Tamos teniendo dificultaes téuniques, y por eso nun se pudo completar el desaniciu.',
+	'wikibase-error-autocomplete-connection' => 'Nun pudo consultase la API de Wikipedia. Por favor, vuelva a intentalo más sero.',
+	'wikibase-error-autocomplete-response' => 'El sirvidor respondió: $1',
+	'wikibase-error-ui-client-error' => 'Falló la conexón cola páxina del cliente. Por favor, vuelva a intentalo más sero.',
+	'wikibase-error-ui-no-external-page' => "Nun pudo alcontrase l'artículu especificáu nel sitiu correspondiente.",
+	'wikibase-error-ui-cant-edit' => 'Nun tien permisu pa facer esta aición.',
+	'wikibase-error-ui-no-permissions' => 'Nun tien permisos bastantes pa facer esta aición.',
+	'wikibase-error-ui-link-exists' => 'Nun pue enllazar con esta páxina porque otru elementu yá enllaza con ella.',
+	'wikibase-error-ui-session-failure' => 'Caducó la sesión. Vuelva a aniciar sesión.',
+	'wikibase-error-ui-edit-conflict' => "Hai un conflictu d'edición. Recargue la páxina y vuelva a guardar.",
+	'wikibase-replicationnote' => 'Tenga en cuenta que puen pasar dellos minutos fasta que los cambeos se vean en toles wikis',
 	'wikibase-sitelinks' => 'Llista de páxines enllazaes a esti elementu',
 	'wikibase-sitelinks-sitename-columnheading' => 'Llingua',
 	'wikibase-sitelinks-siteid-columnheading' => 'Códigu',
 	'wikibase-sitelinks-link-columnheading' => 'Artículu enllazáu',
+	'wikibase-tooltip-error-details' => 'Detalles',
 	'datatypes-type-wikibase-item' => 'Elementu',
 	'datatypes-type-commonsMedia' => 'Ficheru multimedia de Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Belarusian (беларуская)
@@ -634,8 +656,17 @@ $messages['et'] = array(
 	'wikibase-entity-item' => 'üksus',
 	'wikibase-entity-property' => 'omadus',
 	'wikibase-entity-query' => 'päring',
+	'wikibase-diffview-reference' => 'viide',
 	'wikibase-error-unexpected' => 'Ilmnes tundmatu tõrge.',
+	'wikibase-error-save-generic' => 'Salvestamisel ilmnes tõrge ja seetõttu ei saanud sinu muudatusi lõpule viia.',
+	'wikibase-error-remove-generic' => 'Eemaldamisel ilmnes tõrge ja seetõttu ei saanud sinu muudatusi lõpule viia.',
+	'wikibase-error-save-connection' => 'Salvestamisel ilmnes tõrge ja seetõttu ei saanud sinu muudatusi lõpule viia. Palun kontrolli oma internetiühendust.',
+	'wikibase-error-remove-connection' => 'Eemaldamisel ilmnes tõrge ja seetõttu ei saanud sinu muudatusi lõpule viia. Palun kontrolli oma internetiühendust.',
+	'wikibase-error-save-timeout' => 'Praegu esinevate tehniliste probleemide tõttu ei saa salvestamist lõpule viia.',
+	'wikibase-error-remove-timeout' => 'Praegu esinevate tehniliste probleemide tõttu ei saa eemaldamist lõpule viia.',
+	'wikibase-error-autocomplete-connection' => 'Vikipeedia API päringut ei saa teha. Palun proovi hiljem uuesti.',
 	'wikibase-error-autocomplete-response' => 'Serveri vastus: $1',
+	'wikibase-error-ui-no-external-page' => 'Määratud artiklit ei õnnestu vastavast võrgukohast leida.',
 	'wikibase-error-ui-cant-edit' => 'Sul pole lubatud seda toimingut sooritada.',
 	'wikibase-error-ui-no-permissions' => 'Sul pole selle toimingu sooritamiseks vajalikke õigusi.',
 	'wikibase-error-ui-link-exists' => 'Sellele leheküljele ei saa linkida, sest teine üksus juba lingib sellele.',
@@ -746,6 +777,7 @@ $messages['fi'] = array(
  * @author DavidL
  * @author Gomoko
  * @author Ltrlg
+ * @author Metroitendo
  * @author Nnemo
  * @author Tititou36
  * @author Wyz
@@ -782,6 +814,7 @@ $messages['fr'] = array(
 	'wikibase-tooltip-error-details' => 'Détails',
 	'datatypes-type-wikibase-item' => 'Élément',
 	'datatypes-type-commonsMedia' => 'Fichier multimédia de Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Franco-Provençal (arpetan)
@@ -1358,6 +1391,7 @@ $messages['mk'] = array(
 	'wikibase-tooltip-error-details' => 'Подробно',
 	'datatypes-type-wikibase-item' => 'Предмет',
 	'datatypes-type-commonsMedia' => 'Медиумска податотека од Ризницата',
+	'version-wikibase' => 'Викибаза',
 );
 
 /** Malayalam (മലയാളം)
@@ -1696,9 +1730,16 @@ $messages['ro'] = array(
 $messages['roa-tara'] = array(
 	'wikibase-entity-item' => 'vôsce',
 	'wikibase-entity-property' => 'probbietà',
+	'wikibase-entity-query' => 'inderrogazione',
+	'wikibase-diffview-reference' => 'referimende',
+	'wikibase-diffview-rank' => 'posizione',
+	'wikibase-diffview-qualifier' => 'qualificatore',
+	'wikibase-error-unexpected' => "S'ha verificate 'n'errore inaspettate.",
 	'wikibase-sitelinks-sitename-columnheading' => 'Lènghe',
 	'wikibase-sitelinks-siteid-columnheading' => 'Codece',
+	'wikibase-tooltip-error-details' => 'Dettaglie',
 	'datatypes-type-wikibase-item' => 'Vôsce',
+	'version-wikibase' => 'Uicchibase',
 );
 
 /** Russian (русский)
@@ -1907,6 +1948,7 @@ $messages['vec'] = array(
 );
 
 /** Vietnamese (Tiếng Việt)
+ * @author Cheers!
  * @author Minh Nguyen
  * @author පසිඳු කාවින්ද
  */
@@ -1942,6 +1984,7 @@ $messages['vi'] = array(
 	'wikibase-tooltip-error-details' => 'Chi tiết',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
 	'datatypes-type-commonsMedia' => 'Tập tin phương tiện Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Yiddish (ייִדיש)
