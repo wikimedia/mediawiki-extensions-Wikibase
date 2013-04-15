@@ -101,4 +101,13 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 		return new Schema( new StoreConfig( 'foobar', 'nyan_', array() ) );
 	}
 
+	/**
+	 * @dataProvider cannotStoreProvider
+	 */
+	public function testStoreSnakWithWrongSnakType( SnakRow $snakRow ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+
+		$this->getInstance()->storeSnakRow( $snakRow );
+	}
+
 }
