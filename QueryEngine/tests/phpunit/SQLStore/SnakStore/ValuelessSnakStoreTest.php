@@ -48,8 +48,7 @@ class ValuelessSnakStoreTest extends SnakStoreTest {
 	protected function newInstanceWithQueryInterface( QueryInterface $queryInterface ) {
 		return new ValuelessSnakStore(
 			$queryInterface,
-			'snaks_of_doom',
-			ValuelessSnakRow::TYPE_NO_VALUE
+			'snaks_of_doom'
 		);
 	}
 
@@ -65,6 +64,20 @@ class ValuelessSnakStoreTest extends SnakStoreTest {
 
 		$argLists[] = array( new ValuelessSnakRow(
 			ValuelessSnakRow::TYPE_NO_VALUE,
+			1,
+			1,
+			SnakRole::MAIN_SNAK
+		) );
+
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_SOME_VALUE,
+			1,
+			1,
+			SnakRole::QUALIFIER
+		) );
+
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_SOME_VALUE,
 			1,
 			1,
 			SnakRole::MAIN_SNAK
@@ -90,20 +103,6 @@ class ValuelessSnakStoreTest extends SnakStoreTest {
 			1,
 			SnakRole::MAIN_SNAK,
 			0
-		) );
-
-		$argLists[] = array( new ValuelessSnakRow(
-			ValuelessSnakRow::TYPE_SOME_VALUE,
-			1,
-			1,
-			SnakRole::QUALIFIER
-		) );
-
-		$argLists[] = array( new ValuelessSnakRow(
-			ValuelessSnakRow::TYPE_SOME_VALUE,
-			1,
-			1,
-			SnakRole::MAIN_SNAK
 		) );
 
 		return $argLists;
