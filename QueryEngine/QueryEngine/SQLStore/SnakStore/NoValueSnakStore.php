@@ -34,11 +34,11 @@ use Wikibase\QueryEngine\SQLStore\SnakRow;
 class NoValueSnakStore extends SnakStore {
 
 	protected $queryInterface;
-	protected $table;
+	protected $tableName;
 
-	public function __construct( QueryInterface $queryInterface, TableDefinition $table ) {
+	public function __construct( QueryInterface $queryInterface, $tableName ) {
 		$this->queryInterface = $queryInterface;
-		$this->table = $table;
+		$this->tableName = $tableName;
 	}
 
 	public function canStore( SnakRow $storeSnak ) {
@@ -47,7 +47,7 @@ class NoValueSnakStore extends SnakStore {
 
 	public function storeSnakRow( SnakRow $snakRow ) {
 		$this->queryInterface->insert(
-			$this->table->getName(),
+			$this->tableName,
 			array(
 				'claim_id' => $snakRow->getInternalClaimId(),
 				'property_id' => $snakRow->getInternalPropertyId(),
