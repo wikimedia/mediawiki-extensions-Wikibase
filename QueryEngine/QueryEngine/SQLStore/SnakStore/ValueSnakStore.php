@@ -2,6 +2,11 @@
 
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
+use InvalidArgumentException;
+use OutOfBoundsException;
+use Wikibase\Database\QueryInterface;
+use Wikibase\QueryEngine\SQLStore\DataValueHandler;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,12 +33,50 @@ namespace Wikibase\QueryEngine\SQLStore\SnakStore;
  */
 class ValueSnakStore extends SnakStore {
 
+	protected $queryInterface;
+	protected $dataValueHandlers;
+
+	/**
+	 * The array of DataValueHandlers must have DataValue types as array keys pointing to
+	 * the corresponding DataValueHandler.
+	 *
+	 * @param QueryInterface $queryInterface
+	 * @param DataValueHandler[] $dataValueHandlers
+	 */
+	public function __construct( QueryInterface $queryInterface, array $dataValueHandlers ) {
+		$this->queryInterface = $queryInterface;
+		$this->dataValueHandlers = $dataValueHandlers;
+	}
+
 	public function canStore( SnakRow $snakRow ) {
 		return $snakRow instanceof ValueSnakRow;
 	}
 
-	public function storeSnakRow( SnakRow $snakRow ) {
+	/**
+	 * @param string $dataValueType
+	 *
+	 * @return DataValueHandler
+	 * @throws OutOfBoundsException
+	 */
+	protected function getDataValueHandler( $dataValueType ) {
+		if ( !array_key_exists( $dataValueType, $this->dataValueHandlers ) ) {
+			throw new OutOfBoundsException( "There is no DataValueHandler set for '$dataValueType'" );
+		}
 
+		return $this->dataValueHandlers[$dataValueType];
+	}
+
+	public function storeSnakRow( SnakRow $snakRow ) {
+		if ( !( $snakRow instanceof ValueSnakRow ) ) {
+			throw new InvalidArgumentException( 'Can only store ValueSnakRow in ValueSnakStore' );
+		}
+
+		$dataValueHandler = $this->getDataValueHandler( $snakRow->getValue()->getType() );
+
+		$this->queryInterface->insert(
+			$dataValueHandler->getDataValueTable()->getTableDefinition()->getName(),
+			$dataValueHandler->getInsertValues( $snakRow->getValue() )
+		);
 	}
 
 }

@@ -3,6 +3,10 @@
 namespace Wikibase\Tests\Query\SQLStore\SnakStore;
 
 use DataValues\StringValue;
+use Wikibase\Database\FieldDefinition;
+use Wikibase\Database\TableDefinition;
+use Wikibase\QueryEngine\SQLStore\DVHandler\StringHandler;
+use Wikibase\QueryEngine\SQLStore\DataValueTable;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakStore;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
@@ -41,7 +45,26 @@ use Wikibase\SnakRole;
 class ValueSnakStoreTest extends SnakStoreTest {
 
 	protected function getInstance() {
-		return new ValueSnakStore();
+		return new ValueSnakStore(
+			$this->getMock( 'Wikibase\Database\QueryInterface' ),
+			array(
+				'string' => $this->newStringHandler()
+			)
+		);
+	}
+
+	protected function newStringHandler() {
+		return new StringHandler( new DataValueTable(
+			new TableDefinition(
+				'strings_of_doom',
+				array(
+					new FieldDefinition( 'value', FieldDefinition::TYPE_TEXT, false ),
+				)
+			),
+			'value',
+			'value',
+			'value'
+		) );
 	}
 
 	public function canStoreProvider() {
@@ -99,6 +122,29 @@ class ValueSnakStoreTest extends SnakStoreTest {
 		) );
 
 		return $argLists;
+	}
+
+	/**
+	 * @dataProvider canStoreProvider
+	 */
+	public function testStoreSnak( ValueSnakRow $snakRow ) {
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
+
+		$queryInterface->expects( $this->once() )
+			->method( 'insert' )
+			->with(
+				$this->equalTo( 'strings_of_doom' )
+				// TODO: assert correct inserts
+			);
+
+		$store = new ValueSnakStore(
+			$queryInterface,
+			array(
+				'string' => $this->newStringHandler()
+			)
+		);
+
+		$store->storeSnakRow( $snakRow );
 	}
 
 }
