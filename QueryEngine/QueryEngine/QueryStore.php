@@ -66,7 +66,7 @@ interface QueryStore {
 	 *
 	 * @since 0.1
 	 *
-	 * @return QueryStoreUpdater
+	 * @return QueryStoreWriter
 	 */
 	public function getUpdater();
 

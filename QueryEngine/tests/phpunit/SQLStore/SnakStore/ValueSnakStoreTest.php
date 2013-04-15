@@ -134,7 +134,6 @@ class ValueSnakStoreTest extends SnakStoreTest {
 			->method( 'insert' )
 			->with(
 				$this->equalTo( 'strings_of_doom' )
-				// TODO: assert correct inserts
 			);
 
 		$store = new ValueSnakStore(

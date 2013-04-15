@@ -32,7 +32,7 @@ use Wikibase\Entity;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface QueryStoreUpdater {
+interface QueryStoreWriter {
 
 	/**
 	 * @see QueryStoreUpdater::insertEntity

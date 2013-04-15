@@ -12,7 +12,7 @@ use Wikibase\QueryEngine\SQLStore\DVHandler\MonolingualTextHandler;
 use Wikibase\QueryEngine\SQLStore\DataValueTable;
 use Wikibase\QueryEngine\SQLStore\Schema;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
-use Wikibase\QueryEngine\SQLStore\Updater;
+use Wikibase\QueryEngine\SQLStore\Writer;
 use Wikibase\Test\Query\QueryStoreUpdaterTest;
 
 /**
@@ -44,14 +44,14 @@ use Wikibase\Test\Query\QueryStoreUpdaterTest;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class UpdaterTest extends QueryStoreUpdaterTest {
+class WriterTest extends QueryStoreUpdaterTest {
 
 	/**
 	 * @see QueryStoreUpdaterTest::getInstances
 	 *
 	 * @since 0.1
 	 *
-	 * @return Updater[]
+	 * @return Writer[]
 	 */
 	protected function getInstances() {
 		$instances = array();
@@ -59,7 +59,7 @@ class UpdaterTest extends QueryStoreUpdaterTest {
 		$storeSchema = new Schema( new StoreConfig( 'foo', 'bar', array() ) );
 		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
 
-		$instances[] = new Updater( $storeSchema, $queryInterface );
+		$instances[] = new Writer( $storeSchema, $queryInterface );
 
 		return $instances;
 	}
@@ -137,7 +137,7 @@ class UpdaterTest extends QueryStoreUpdaterTest {
 				)
 			);
 
-		$updater = new Updater( $this->newStoreSchema(), $queryInterface );
+		$updater = new Writer( $this->newStoreSchema(), $queryInterface );
 
 		$updater->insertEntity( $entity );
 	}
