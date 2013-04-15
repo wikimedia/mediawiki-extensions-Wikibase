@@ -2,6 +2,9 @@
 
 namespace Wikibase\QueryEngine\SQLStore;
 
+use InvalidArgumentException;
+use Wikibase\Database\QueryInterface;
+
 /**
  * Interface to the claims table.
  *
@@ -33,12 +36,37 @@ namespace Wikibase\QueryEngine\SQLStore;
  */
 class ClaimsTable {
 
-	public function __construct() {
+	protected $queryInterface;
+	protected $tableName;
 
+	/**
+	 * @param QueryInterface $queryInterface
+	 * @param string $tableName
+	 */
+	public function __construct( QueryInterface $queryInterface, $tableName ) {
+		$this->queryInterface = $queryInterface;
+		$this->tableName = $tableName;
 	}
 
 	public function insertClaimRow( ClaimRow $claimRow ) {
+		if ( $claimRow->getInternalId() !== null ) {
+			throw new InvalidArgumentException( 'Cannot insert a ClaimRow that already has an ID' );
+		}
 
+		$this->queryInterface->insert(
+			$this->tableName,
+			$this->getWriteValues( $claimRow )
+		);
+	}
+
+	protected function getWriteValues( ClaimRow $claimRow ) {
+		return array(
+			'guid' => $claimRow->getExternalGuid(),
+			'subject_id' => $claimRow->getInternalSubjectId(),
+			'property_id' => $claimRow->getInternalPropertyId(),
+			'rank' => $claimRow->getRank(),
+			'hash' => $claimRow->getHash(),
+		);
 	}
 
 }
