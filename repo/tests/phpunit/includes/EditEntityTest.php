@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use \Wikibase\EntityContent;
 use \Wikibase\EditEntity;
+use Wikibase\Item;
 use \Wikibase\ItemContent;
 use \Status;
 use Wikibase\Test\Api\ModifyItemBase;
@@ -490,6 +491,174 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
 		$this->assertNotEquals( $expectedOK, $edit->showErrorPage() );
+	}
+
+	/**
+	 * Forces the group membership of the given user
+	 *
+	 * @param \User  $user
+	 * @param array $groups
+	 */
+	protected function setUserGroups( \User $user, array $groups ) {
+		if ( $user->getId() === 0 ) {
+			$user = \User::createNew( $user->getName() );
+		}
+
+		$remove = array_diff( $user->getGroups(), $groups );
+		$add = array_diff( $groups, $user->getGroups() );
+
+		foreach ( $remove as $group ) {
+			$user->removeGroup( $group );
+		}
+
+		foreach ( $add as $group ) {
+			$user->addGroup( $group );
+		}
+	}
+
+	public static function dataAttemptSaveRateLimit() {
+		return array(
+
+			array( // #0: no limits
+				array(), // limits: none
+				array(), // groups: none
+				array(  // edits:
+					array( 'item' => 'foo', 'label' => 'foo', 'ok' => true ),
+					array( 'item' => 'bar', 'label' => 'bar', 'ok' => true ),
+					array( 'item' => 'foo', 'label' => 'Foo', 'ok' => true ),
+					array( 'item' => 'bar', 'label' => 'Bar', 'ok' => true ),
+				)
+			),
+
+			array( // #1: limits bypassed with noratelimit permission
+				array( // limits:
+					'edit' => array(
+						'user' => array( 1, 60 ), // one edit per minute
+					)
+				),
+				array( // groups:
+					'sysop' // assume sysop has the noratelimit permission, as per default
+				),
+				array(  // edits:
+					array( 'item' => 'foo', 'label' => 'foo', 'ok' => true ),
+					array( 'item' => 'bar', 'label' => 'bar', 'ok' => true ),
+					array( 'item' => 'foo', 'label' => 'Foo', 'ok' => true ),
+					array( 'item' => 'bar', 'label' => 'Bar', 'ok' => true ),
+				)
+			),
+
+			array( // #2: per-group limit overrides with less restrictive limit
+				array( // limits:
+					'edit' => array(
+						'user' => array( 1, 60 ), // one edit per minute
+						'kittens' => array( 10, 60 ), // one edit per minute
+					)
+				),
+				array( // groups:
+					'kittens'
+				),
+				array(  // edits:
+					array( 'item' => 'foo', 'label' => 'foo', 'ok' => true ),
+					array( 'item' => 'bar', 'label' => 'bar', 'ok' => true ),
+					array( 'item' => 'foo', 'label' => 'Foo', 'ok' => true ),
+					array( 'item' => 'bar', 'label' => 'Bar', 'ok' => true ),
+				)
+			),
+
+			array( // #3: edit limit applies
+				array( // limits:
+					'edit' => array(
+						'user' => array( 1, 60 ), // ten edits per minute
+					),
+				),
+				array(), // groups: none
+				array(  // edits:
+					array( 'item' => 'foo', 'label' => 'foo', 'ok' => true ),
+					array( 'item' => 'foo', 'label' => 'Foo', 'ok' => false ),
+				)
+			),
+
+			array( // #4: edit limit also applies to creations
+				array( // limits:
+					'edit' => array(
+						'user' => array( 1, 60 ), // one edit per minute
+					),
+					'create' => array(
+						'user' => array( 10, 60 ), // ten creations per minute
+					),
+				),
+				array(), // groups: none
+				array(  // edits:
+					array( 'item' => 'foo', 'label' => 'foo', 'ok' => true ),
+					array( 'item' => 'bar', 'label' => 'bar', 'ok' => false ),
+					array( 'item' => 'foo', 'label' => 'Foo', 'ok' => false ),
+				)
+			),
+
+			array( // #5: creation limit applies in addition to edit limit
+				array( // limits:
+					'edit' => array(
+						'user' => array( 10, 60 ), // ten edits per minute
+					),
+					'create' => array(
+						'user' => array( 1, 60 ), // ...but only one creation
+					),
+				),
+				array(), // groups: none
+				array(  // edits:
+					array( 'item' => 'foo', 'label' => 'foo', 'ok' => true ),
+					array( 'item' => 'foo', 'label' => 'Foo', 'ok' => true ),
+					array( 'item' => 'bar', 'label' => 'bar', 'ok' => false ),
+				)
+			)
+
+		);
+	}
+
+	/**
+	 * @dataProvider dataAttemptSaveRateLimit
+	 */
+	public function testAttemptSaveRateLimit( $limits, $groups, $edits ) {
+		$this->setMwGlobals(
+			'wgRateLimits',
+			$limits
+		);
+
+		// make sure we have a fresh, working cache
+		$this->setMwGlobals(
+			'wgMemc',
+			new \HashBagOStuff()
+		);
+
+		$user = \User::newFromName( "UserForTestAttemptSaveRateLimit" );
+		$this->setUserGroups( $user, $groups );
+
+		$items = array();
+
+		foreach ( $edits as $e ) {
+			$name = $e[ 'item' ];
+			$label = $e[ 'label' ];
+			$expectedOK = $e[ 'ok' ];
+
+			if ( isset( $items[$name] ) ) {
+				// re-use item
+				$item = $items[$name];
+			} else {
+				// create item
+				$item = Item::newEmpty();
+				$items[$name] = $item;
+			}
+
+			$item->setLabel( 'en', $label );
+
+			$content = ItemContent::newFromItem( $item );
+
+			$edit = new EditEntity( $content, $user );
+			$edit->attemptSave( "testing", ( $content->isNew() ? EDIT_NEW : 0 ), false );
+
+			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
+			$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::RATE_LIMIT ) );
+		}
 	}
 
 	public static function provideIsTokenOk() {
