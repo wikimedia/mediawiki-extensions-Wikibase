@@ -194,6 +194,7 @@ $wgAutoloadClasses['Wikibase\TermIndex'] 				= $dir . 'includes/store/TermIndex.
 $wgAutoloadClasses['Wikibase\TermCombinationMatchFinder'] = $dir . 'includes/store/TermCombinationMatchFinder.php';
 $wgAutoloadClasses['Wikibase\TermMatchScoreCalculator'] = $dir . 'includes/store/TermMatchScoreCalculator.php';
 $wgAutoloadClasses['Wikibase\TermSqlIndex'] 			= $dir . 'includes/store/sql/TermSqlIndex.php';
+$wgAutoloadClasses['Wikibase\EntityUsageIndex'] 		= $dir . 'includes/store/EntityUsageIndex.php';
 
 // includes/store/sql
 $wgAutoloadClasses['Wikibase\CachingEntityLoader']      = $dir . 'includes/store/sql/CachingEntityLoader.php';
