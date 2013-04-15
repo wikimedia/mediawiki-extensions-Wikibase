@@ -62,6 +62,13 @@ $messages['be-tarask'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Апрацоўка значэньняў тыпу «$1» яшчэ не падтрымліваецца.', # Fuzzy
 );
 
+/** Bengali (বাংলা)
+ * @author Aftab1995
+ */
+$messages['bn'] = array(
+	'valueview-expert-emptyvalue-empty' => 'খালি',
+);
+
 /** Danish (dansk)
  */
 $messages['da'] = array(
