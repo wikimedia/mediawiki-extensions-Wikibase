@@ -130,16 +130,19 @@ class ValueSnakStoreTest extends SnakStoreTest {
 	public function testStoreSnak( ValueSnakRow $snakRow ) {
 		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
 
+		$stringHandler = $this->newStringHandler();
+
 		$queryInterface->expects( $this->once() )
 			->method( 'insert' )
 			->with(
-				$this->equalTo( 'strings_of_doom' )
+				$this->equalTo( 'strings_of_doom' ),
+				$this->equalTo( $stringHandler->getInsertValues( $snakRow->getValue() ) )
 			);
 
 		$store = new ValueSnakStore(
 			$queryInterface,
 			array(
-				'string' => $this->newStringHandler()
+				'string' => $stringHandler
 			)
 		);
 
