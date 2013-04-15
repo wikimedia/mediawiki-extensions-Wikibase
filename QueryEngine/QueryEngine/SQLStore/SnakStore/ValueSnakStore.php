@@ -67,10 +67,13 @@ class ValueSnakStore extends SnakStore {
 	}
 
 	public function storeSnakRow( SnakRow $snakRow ) {
-		if ( !( $snakRow instanceof ValueSnakRow ) ) {
+		if ( !$this->canStore( $snakRow ) ) {
 			throw new InvalidArgumentException( 'Can only store ValueSnakRow in ValueSnakStore' );
 		}
 
+		/**
+		 * @var ValueSnakRow $snakRow
+		 */
 		$dataValueHandler = $this->getDataValueHandler( $snakRow->getValue()->getType() );
 
 		$this->queryInterface->insert(

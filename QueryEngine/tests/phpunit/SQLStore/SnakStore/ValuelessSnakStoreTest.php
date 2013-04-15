@@ -3,6 +3,7 @@
 namespace Wikibase\Tests\Query\SQLStore\SnakStore;
 
 use DataValues\StringValue;
+use Wikibase\Database\QueryInterface;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakStore;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
@@ -38,12 +39,17 @@ use Wikibase\SnakRole;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class NoValueSnakStoreTest extends SnakStoreTest {
+class ValuelessSnakStoreTest extends SnakStoreTest {
 
 	protected function getInstance() {
+		return $this->newInstanceWithQueryInterface( $this->getMock( 'Wikibase\Database\QueryInterface' ) );
+	}
+
+	protected function newInstanceWithQueryInterface( QueryInterface $queryInterface ) {
 		return new ValuelessSnakStore(
-			$this->getMock( 'Wikibase\Database\QueryInterface' ),
-			'snaks_of_doom'
+			$queryInterface,
+			'snaks_of_doom',
+			ValuelessSnakRow::TYPE_NO_VALUE
 		);
 	}
 
@@ -59,20 +65,6 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 
 		$argLists[] = array( new ValuelessSnakRow(
 			ValuelessSnakRow::TYPE_NO_VALUE,
-			1,
-			1,
-			SnakRole::MAIN_SNAK
-		) );
-
-		$argLists[] = array( new ValuelessSnakRow(
-			ValuelessSnakRow::TYPE_SOME_VALUE,
-			1,
-			1,
-			SnakRole::QUALIFIER
-		) );
-
-		$argLists[] = array( new ValuelessSnakRow(
-			ValuelessSnakRow::TYPE_SOME_VALUE,
 			1,
 			1,
 			SnakRole::MAIN_SNAK
@@ -100,6 +92,20 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 			0
 		) );
 
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_SOME_VALUE,
+			1,
+			1,
+			SnakRole::QUALIFIER
+		) );
+
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_SOME_VALUE,
+			1,
+			1,
+			SnakRole::MAIN_SNAK
+		) );
+
 		return $argLists;
 	}
 
@@ -123,10 +129,7 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 				)
 			);
 
-		$store = new ValuelessSnakStore(
-			$queryInterface,
-			'snaks_of_doom'
-		);
+		$store = $this->newInstanceWithQueryInterface( $queryInterface );
 
 		$store->storeSnakRow( $snakRow );
 	}
