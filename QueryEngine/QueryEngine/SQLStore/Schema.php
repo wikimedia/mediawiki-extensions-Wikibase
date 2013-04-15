@@ -272,8 +272,114 @@ class Schema {
 	}
 
 	/**
-	 * TODO
+	 * @since 0.1
 	 *
+	 * @return TableDefinition
+	 */
+	public function getClaimsTable() {
+		return new TableDefinition(
+			$this->config->getTablePrefix() . 'claims',
+			array(
+				 // Internal id
+				 new FieldDefinition(
+					 'id',
+					 FieldDefinition::TYPE_INTEGER,
+					 FieldDefinition::NOT_NULL,
+					 FieldDefinition::NO_DEFAULT,
+					 FieldDefinition::ATTRIB_UNSIGNED,
+					 FieldDefinition::INDEX_PRIMARY,
+					 FieldDefinition::AUTOINCREMENT
+				 ),
+
+				 // External id
+				 new FieldDefinition(
+					 'guid',
+					 FieldDefinition::TYPE_TEXT,
+					 FieldDefinition::NOT_NULL,
+					 FieldDefinition::NO_DEFAULT,
+					 FieldDefinition::ATTRIB_UNSIGNED,
+					 FieldDefinition::INDEX
+				 ),
+
+				 // Internal id of the claims subject
+				 new FieldDefinition(
+					 'subject_id',
+					 FieldDefinition::TYPE_INTEGER,
+					 FieldDefinition::NOT_NULL,
+					 FieldDefinition::NO_DEFAULT,
+					 FieldDefinition::ATTRIB_UNSIGNED,
+					 FieldDefinition::INDEX
+				 ),
+
+				 // Internal id of the property of the main snak
+				 new FieldDefinition(
+					 'property_id',
+					 FieldDefinition::TYPE_INTEGER,
+					 FieldDefinition::NOT_NULL,
+					 FieldDefinition::NO_DEFAULT,
+					 FieldDefinition::ATTRIB_UNSIGNED,
+					 FieldDefinition::INDEX
+				 ),
+
+				 // Rank
+				 new FieldDefinition(
+					 'rank',
+					 FieldDefinition::TYPE_INTEGER,
+					 FieldDefinition::NOT_NULL,
+					 FieldDefinition::NO_DEFAULT,
+					 FieldDefinition::ATTRIB_UNSIGNED,
+					 FieldDefinition::INDEX
+				 ),
+
+				 // Hash
+				 new FieldDefinition(
+					 'hash',
+					 FieldDefinition::TYPE_TEXT,
+					 FieldDefinition::NOT_NULL,
+					 FieldDefinition::NO_DEFAULT,
+					 FieldDefinition::NO_ATTRIB,
+					 FieldDefinition::INDEX
+				 ),
+			)
+		);
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @return TableDefinition
+	 */
+	public function getValuelessSnaksTable() {
+		return new TableDefinition(
+			$this->config->getTablePrefix() . 'valueless_snaks',
+			array_merge(
+				$this->getPropertySnakFields(),
+				array(
+					 // Type of the snak
+					 new FieldDefinition(
+						 'type',
+						 FieldDefinition::TYPE_INTEGER,
+						 FieldDefinition::NOT_NULL,
+						 FieldDefinition::NO_DEFAULT,
+						 FieldDefinition::ATTRIB_UNSIGNED,
+						 FieldDefinition::INDEX
+					 ),
+
+					 // Level at which the snak is used (ie "main snak" or "qualifier")
+					 new FieldDefinition(
+						 'level',
+						 FieldDefinition::TYPE_INTEGER,
+						 FieldDefinition::NOT_NULL,
+						 FieldDefinition::NO_DEFAULT,
+						 FieldDefinition::ATTRIB_UNSIGNED,
+						 FieldDefinition::INDEX
+					 ),
+				)
+			)
+		);
+	}
+
+	/**
 	 * @since 0.1
 	 *
 	 * @return TableDefinition[]
@@ -288,100 +394,10 @@ class Schema {
 		$tables[] = $this->getEntitiesTable();
 
 		// Claim id table
-		$tables[] = new TableDefinition(
-			$this->config->getTablePrefix() . 'claims',
-			array(
-				// Internal id
-				new FieldDefinition(
-					'id',
-					FieldDefinition::TYPE_INTEGER,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX_PRIMARY,
-					FieldDefinition::AUTOINCREMENT
-				),
-
-				// External id
-				new FieldDefinition(
-					'guid',
-					FieldDefinition::TYPE_TEXT,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX
-				),
-
-				// Internal id of the claims subject
-				new FieldDefinition(
-					'subject_id',
-					FieldDefinition::TYPE_INTEGER,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX
-				),
-
-				// Internal id of the property of the main snak
-				new FieldDefinition(
-					'property_id',
-					FieldDefinition::TYPE_INTEGER,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX
-				),
-
-				// Rank
-				new FieldDefinition(
-					'rank',
-					FieldDefinition::TYPE_INTEGER,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX
-				),
-
-				// Hash
-				new FieldDefinition(
-					'hash',
-					FieldDefinition::TYPE_TEXT,
-					FieldDefinition::NOT_NULL,
-					FieldDefinition::NO_DEFAULT,
-					FieldDefinition::NO_ATTRIB,
-					FieldDefinition::INDEX
-				),
-			)
-		);
+		$tables[] = $this->getClaimsTable();
 
 		// Table for snaks without a value
-		$tables[] = new TableDefinition(
-			$this->config->getTablePrefix() . 'valueless_snaks',
-			array_merge(
-				$this->getPropertySnakFields(),
-				array(
-					// Type of the snak
-					new FieldDefinition(
-						'type',
-						FieldDefinition::TYPE_INTEGER,
-						FieldDefinition::NOT_NULL,
-						FieldDefinition::NO_DEFAULT,
-						FieldDefinition::ATTRIB_UNSIGNED,
-						FieldDefinition::INDEX
-					),
-
-					// Level at which the snak is used (ie "main snak" or "qualifier")
-					new FieldDefinition(
-						'level',
-						FieldDefinition::TYPE_INTEGER,
-						FieldDefinition::NOT_NULL,
-						FieldDefinition::NO_DEFAULT,
-						FieldDefinition::ATTRIB_UNSIGNED,
-						FieldDefinition::INDEX
-					),
-				)
-			)
-		);
+		$tables[] = $this->getValuelessSnaksTable();
 
 		return $tables;
 	}

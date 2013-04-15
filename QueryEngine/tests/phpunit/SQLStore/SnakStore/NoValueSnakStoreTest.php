@@ -7,6 +7,7 @@ use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\SQLStore\SnakStore\NoValueSnakStore;
+use Wikibase\SnakRole;
 
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakStore\NoValueSnakStore class.
@@ -41,7 +42,14 @@ use Wikibase\QueryEngine\SQLStore\SnakStore\NoValueSnakStore;
 class NoValueSnakStoreTest extends SnakStoreTest {
 
 	protected function getInstance() {
-		return new NoValueSnakStore();
+		return new NoValueSnakStore(
+			$this->getMock( 'Wikibase\Database\QueryInterface' ),
+			$this->getTableDefinition()
+		);
+	}
+
+	protected function getTableDefinition() {
+		return $this->newStoreSchema()->getValuelessSnaksTable();
 	}
 
 	public function canStoreProvider() {
@@ -55,6 +63,34 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 		$argLists[] = array( false, new PropertySomeValueSnak( 720101 ) );
 
 		return $argLists;
+	}
+
+	/**
+	 * @dataProvider storeSnakProvider
+	 */
+	public function testStoreSnak( PropertyNoValueSnak $snak ) {
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
+
+//		$queryInterface->expects( $this->once() )
+//			->method( 'insert' )
+//			->with(
+//				$this->equalTo( $this->getTableDefinition()->getName() ),
+//				$this->equalTo(
+//					array(
+//						 'claim_id' => 31337,
+//						 'property_id' => $snak->getPropertyId()->getNumericId(),
+//						 'type' => ,
+//						 'level' => SnakRole::MAIN_SNAK,
+//					)
+//				)
+//			);
+
+		$store = new NoValueSnakStore(
+			$queryInterface,
+			$this->getTableDefinition()
+		);
+
+		$store->storeSnak( $snak, 31337, SnakRole::MAIN_SNAK );
 	}
 
 }

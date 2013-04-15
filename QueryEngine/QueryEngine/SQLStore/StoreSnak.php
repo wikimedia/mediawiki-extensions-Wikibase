@@ -1,13 +1,12 @@
 <?php
 
-namespace Wikibase\QueryEngine\SQLStore\SnakStore;
+namespace Wikibase\QueryEngine\SQLStore;
 
-use Wikibase\Database\QueryInterface;
-use Wikibase\Database\TableDefinition;
-use Wikibase\PropertyNoValueSnak;
 use Wikibase\Snak;
 
 /**
+ * Contains the information for a
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -31,22 +30,52 @@ use Wikibase\Snak;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class NoValueSnakStore extends SnakStore {
+class StoreSnak {
 
-	protected $queryInterface;
-	protected $table;
+	protected $snak;
+	protected $internalPropertyId;
+	protected $internalClaimId;
+	protected $snakRole;
 
-	public function __construct( QueryInterface $queryInterface, TableDefinition $table ) {
-		$this->queryInterface = $queryInterface;
-		$this->table = $table;
+	/**
+	 * @param Snak $snak
+	 * @param int $internalPropertyId
+	 * @param int $internalClaimId
+	 * @param int $snakRole
+	 */
+	public function __construct( Snak $snak, $internalPropertyId, $internalClaimId, $snakRole ) {
+		$this->snak = $snak;
+		$this->internalPropertyId = $internalPropertyId;
+		$this->internalClaimId = $internalClaimId;
+		$this->snakRole = $snakRole;
 	}
 
-	public function canStore( Snak $snak ) {
-		return $snak instanceof PropertyNoValueSnak;
+	/**
+	 * @return Snak
+	 */
+	public function getSnak() {
+		return $this->snak;
 	}
 
-	public function storeSnak( Snak $snak, $internalClaimId, $snakRole ) {
+	/**
+	 * @return int
+	 */
+	public function getInternalPropertyId() {
+		return $this->internalPropertyId;
+	}
 
+	/**
+	 * @return int
+	 */
+	public function getInternalClaimId() {
+		return $this->internalClaimId;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSnakRole() {
+		return $this->snakRole;
 	}
 
 }
