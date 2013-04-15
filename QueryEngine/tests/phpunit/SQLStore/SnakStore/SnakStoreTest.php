@@ -9,7 +9,7 @@ use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\SQLStore\Schema;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
-use Wikibase\QueryEngine\SQLStore\StoreSnak;
+use Wikibase\QueryEngine\SQLStore\SnakRow;
 use Wikibase\Snak;
 use Wikibase\SnakRole;
 
@@ -62,7 +62,7 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array( new PropertyValueSnak( 31337, new StringValue( '~=[,,_,,]:3' ) ) );
 
 		foreach ( $argLists as &$argList ) {
-			$argList = array( new StoreSnak(
+			$argList = array( new SnakRow(
 				$argList[0],
 				1,
 				2,
@@ -76,7 +76,7 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider differentSnaksProvider
 	 */
-	public function testReturnTypeOfCanUse( StoreSnak $snak ) {
+	public function testReturnTypeOfCanUse( SnakRow $snak ) {
 		$canStore = $this->getInstance()->canStore( $snak );
 		$this->assertInternalType( 'boolean', $canStore );
 	}
@@ -84,14 +84,14 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider canStoreProvider
 	 */
-	public function testCanStore( StoreSnak $snak ) {
+	public function testCanStore( SnakRow $snak ) {
 		$this->assertTrue( $this->getInstance()->canStore( $snak ) );
 	}
 
 	/**
 	 * @dataProvider cannotStoreProvider
 	 */
-	public function testCannotStore( StoreSnak $snak ) {
+	public function testCannotStore( SnakRow $snak ) {
 		$this->assertFalse( $this->getInstance()->canStore( $snak ) );
 	}
 

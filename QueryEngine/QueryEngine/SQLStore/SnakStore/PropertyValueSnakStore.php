@@ -3,7 +3,7 @@
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
 use Wikibase\PropertyValueSnak;
-use Wikibase\QueryEngine\SQLStore\StoreSnak;
+use Wikibase\QueryEngine\SQLStore\SnakRow;
 
 /**
  * This program is free software; you can redistribute it and/or modify
@@ -31,11 +31,11 @@ use Wikibase\QueryEngine\SQLStore\StoreSnak;
  */
 class PropertyValueSnakStore extends SnakStore {
 
-	public function canStore( StoreSnak $storeSnak ) {
+	public function canStore( SnakRow $storeSnak ) {
 		return $storeSnak->getSnak() instanceof PropertyValueSnak;
 	}
 
-	public function storeSnak( StoreSnak $storeSnak ) {
+	public function storeSnak( SnakRow $storeSnak ) {
 
 	}
 

@@ -54,9 +54,9 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\SQLStore\Engine',
 		'Wikibase\QueryEngine\SQLStore\Schema',
 		'Wikibase\QueryEngine\SQLStore\Setup',
+		'Wikibase\QueryEngine\SQLStore\SnakRow',
 		'Wikibase\QueryEngine\SQLStore\Store',
 		'Wikibase\QueryEngine\SQLStore\StoreConfig',
-		'Wikibase\QueryEngine\SQLStore\StoreSnak',
 		'Wikibase\QueryEngine\SQLStore\Updater',
 	);
 
