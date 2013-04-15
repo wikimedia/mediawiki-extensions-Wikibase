@@ -119,10 +119,10 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 				$this->equalTo( $this->getTableDefinition()->getName() ),
 				$this->equalTo(
 					array(
-						 'claim_id' => $snakRow->getInternalClaimId(),
-						 'property_id' => $snakRow->getInternalPropertyId(),
-						 'type' => $snakRow->getSnak()->getType(),
-						 'level' => $snakRow->getSnakRole(),
+						'claim_id' => $snakRow->getInternalClaimId(),
+						'property_id' => $snakRow->getInternalPropertyId(),
+						'snak_type' => $snakRow->getSnak()->getType(),
+						'snak_role' => $snakRow->getSnakRole(),
 					)
 				)
 			);
