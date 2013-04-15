@@ -1,11 +1,12 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore;
-
-use Wikibase\QueryEngine\SQLStore\DataValueHandlers;
+namespace Wikibase\QueryEngine\SQLStore;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\DataValueHandlers class.
+ * Interface to the claims table.
+ *
+ * This is not a "claims store" since it does not store whole claims,
+ * merely their id mapping and some other non-claim-value information.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,25 +23,18 @@ use Wikibase\QueryEngine\SQLStore\DataValueHandlers;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @file
  * @since 0.1
  *
- * @ingroup WikibaseQueryEngineTest
- *
- * @group Wikibase
- * @group WikibaseQueryEngine
+ * @file
+ * @ingroup WikibaseSQLStore
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DataValueHandlersTest extends \PHPUnit_Framework_TestCase {
+class ClaimsTable {
 
-	public function testGetHandlersReturnType() {
-		$defaultHandlers = new DataValueHandlers();
-		$defaultHandlers = $defaultHandlers->getHandlers();
+	public function __construct() {
 
-		$this->assertInternalType( 'array', $defaultHandlers );
-		$this->assertContainsOnlyInstancesOf( 'Wikibase\QueryEngine\SQLStore\DataValueHandler', $defaultHandlers );
 	}
 
 }

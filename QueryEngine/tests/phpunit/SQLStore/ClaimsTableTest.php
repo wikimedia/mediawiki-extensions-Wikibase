@@ -2,10 +2,8 @@
 
 namespace Wikibase\Test\Query\SQLStore;
 
-use Wikibase\QueryEngine\SQLStore\DataValueHandlers;
-
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\DataValueHandlers class.
+ * Unit tests for the Wikibase\QueryEngine\SQLStore\ClaimsTable class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,14 +31,8 @@ use Wikibase\QueryEngine\SQLStore\DataValueHandlers;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DataValueHandlersTest extends \PHPUnit_Framework_TestCase {
+class ClaimsTableTest extends \PHPUnit_Framework_TestCase {
 
-	public function testGetHandlersReturnType() {
-		$defaultHandlers = new DataValueHandlers();
-		$defaultHandlers = $defaultHandlers->getHandlers();
 
-		$this->assertInternalType( 'array', $defaultHandlers );
-		$this->assertContainsOnlyInstancesOf( 'Wikibase\QueryEngine\SQLStore\DataValueHandler', $defaultHandlers );
-	}
 
 }

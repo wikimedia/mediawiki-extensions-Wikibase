@@ -90,6 +90,8 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		'SQLStore/SnakStore/ValuelessSnakRow',
 		'SQLStore/SnakStore/ValueSnakStore',
 
+		'SQLStore/ClaimRow',
+		'SQLStore/ClaimsTable',
 		'SQLStore/DataValueHandlers',
 		'SQLStore/DataValueHandler',
 		'SQLStore/Engine',
