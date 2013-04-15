@@ -4,9 +4,9 @@ namespace Wikibase\Tests\Query\SQLStore\SnakStore;
 
 use DataValues\StringValue;
 use Wikibase\Database\QueryInterface;
-use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakStore;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakStore;
 use Wikibase\SnakRole;
 
 /**
