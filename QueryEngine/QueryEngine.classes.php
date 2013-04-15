@@ -50,6 +50,8 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakStore',
 
+		'Wikibase\QueryEngine\SQLStore\ClaimRow',
+		'Wikibase\QueryEngine\SQLStore\ClaimsTable',
 		'Wikibase\QueryEngine\SQLStore\DataValueHandlers',
 		'Wikibase\QueryEngine\SQLStore\DataValueHandler',
 		'Wikibase\QueryEngine\SQLStore\DataValueTable',
