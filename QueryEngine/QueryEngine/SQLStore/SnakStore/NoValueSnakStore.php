@@ -6,7 +6,6 @@ use Wikibase\Database\QueryInterface;
 use Wikibase\Database\TableDefinition;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\QueryEngine\SQLStore\StoreSnak;
-use Wikibase\Snak;
 
 /**
  * This program is free software; you can redistribute it and/or modify

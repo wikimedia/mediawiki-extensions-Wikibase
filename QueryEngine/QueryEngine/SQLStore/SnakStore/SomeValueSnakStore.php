@@ -4,7 +4,6 @@ namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\QueryEngine\SQLStore\StoreSnak;
-use Wikibase\Snak;
 
 /**
  * This program is free software; you can redistribute it and/or modify
