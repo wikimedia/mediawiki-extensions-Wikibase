@@ -93,7 +93,7 @@ $messages['en'] = array(
 	'wikibase-anonymouseditwarning' => "Warning: You are not logged in.
 Your IP address will be recorded in the edit history of this $1.",
 	'wikibase-restrictionedit-tooltip-message' => 'This page is protected. Editing is not allowed.',
-	'wikibase-blockeduser-tooltip-message' => 'You are blocked from editing.',
+	'wikibase-blockeduser-tooltip-message' => 'You do not have permission to edit because your username or IP address has been blocked.',
 
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
