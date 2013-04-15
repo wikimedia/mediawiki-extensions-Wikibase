@@ -357,7 +357,7 @@ class Schema {
 				array(
 					 // Type of the snak
 					 new FieldDefinition(
-						 'type',
+						 'snak_type',
 						 FieldDefinition::TYPE_INTEGER,
 						 FieldDefinition::NOT_NULL,
 						 FieldDefinition::NO_DEFAULT,
@@ -365,9 +365,9 @@ class Schema {
 						 FieldDefinition::INDEX
 					 ),
 
-					 // Level at which the snak is used (ie "main snak" or "qualifier")
+					 // Role of the snak (ie "main snak" or "qualifier")
 					 new FieldDefinition(
-						 'level',
+						 'snak_role',
 						 FieldDefinition::TYPE_INTEGER,
 						 FieldDefinition::NOT_NULL,
 						 FieldDefinition::NO_DEFAULT,

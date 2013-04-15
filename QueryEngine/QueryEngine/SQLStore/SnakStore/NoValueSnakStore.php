@@ -51,8 +51,8 @@ class NoValueSnakStore extends SnakStore {
 			array(
 				'claim_id' => $snakRow->getInternalClaimId(),
 				'property_id' => $snakRow->getInternalPropertyId(),
-				'type' => $snakRow->getSnak()->getType(),
-				'level' => $snakRow->getSnakRole(),
+				'snak_type' => $snakRow->getSnak()->getType(), // TODO: convert to int
+				'snak_role' => $snakRow->getSnakRole(),
 			)
 		);
 	}
