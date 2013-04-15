@@ -116,6 +116,7 @@ return call_user_func( function() {
 		'Wikibase\ChunkAccess' => 'includes/store/ChunkAccess.php',
 		'Wikibase\EntityLookup' => 'includes/store/EntityLookup.php',
 		'Wikibase\PropertyLabelResolver' => 'includes/store/PropertyLabelResolver.php',
+		'Wikibase\EntityUsageIndex' => 'includes/store/EntityUsageIndex.php',
 		'Wikibase\SiteLinkCache' => 'includes/store/SiteLinkCache.php',
 		'Wikibase\SiteLinkLookup' => 'includes/store/SiteLinkLookup.php',
 		'Wikibase\TermIndex' => 'includes/store/TermIndex.php',
