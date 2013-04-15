@@ -115,6 +115,7 @@ return call_user_func( function() {
 		'Wikibase\ChunkCache' => 'includes/store/ChunkCache.php',
 		'Wikibase\ChunkAccess' => 'includes/store/ChunkAccess.php',
 		'Wikibase\EntityLookup' => 'includes/store/EntityLookup.php',
+		'Wikibase\EntityUsageIndex' => 'includes/store/EntityUsageIndex.php',
 		'Wikibase\PropertyLookup' => 'includes/store/PropertyLookup.php',
 		'Wikibase\SiteLinkCache' => 'includes/store/SiteLinkCache.php',
 		'Wikibase\SiteLinkLookup' => 'includes/store/SiteLinkLookup.php',
