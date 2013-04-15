@@ -35,7 +35,7 @@ class SomeValueSnakStore extends SnakStore {
 		return $storeSnak->getSnak() instanceof PropertySomeValueSnak;
 	}
 
-	public function storeSnak( SnakRow $storeSnak ) {
+	public function storeSnakRow( SnakRow $storeSnak ) {
 
 	}
 

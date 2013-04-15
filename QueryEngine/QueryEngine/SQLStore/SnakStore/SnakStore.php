@@ -44,6 +44,6 @@ abstract class SnakStore {
 	 *
 	 * @param SnakRow $storeSnak
 	 */
-	public abstract function storeSnak( SnakRow $storeSnak );
+	public abstract function storeSnakRow( SnakRow $storeSnak );
 
 }
