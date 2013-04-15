@@ -31,11 +31,11 @@ use Wikibase\QueryEngine\SQLStore\SnakRow;
  */
 class PropertyValueSnakStore extends SnakStore {
 
-	public function canStore( SnakRow $storeSnak ) {
-		return $storeSnak->getSnak() instanceof PropertyValueSnak;
+	public function canStore( SnakRow $snakRow ) {
+		return $snakRow->getSnak() instanceof PropertyValueSnak;
 	}
 
-	public function storeSnakRow( SnakRow $storeSnak ) {
+	public function storeSnakRow( SnakRow $snakRow ) {
 
 	}
 

@@ -110,33 +110,29 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 	/**
 	 * @dataProvider canStoreProvider
 	 */
-	public function testStoreSnak( SnakRow $snak ) {
+	public function testStoreSnak( SnakRow $snakRow ) {
 		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
 
-//		$queryInterface->expects( $this->once() )
-//			->method( 'insert' )
-//			->with(
-//				$this->equalTo( $this->getTableDefinition()->getName() ),
-//				$this->equalTo(
-//					array(
-//						 'claim_id' => 31337,
-//						 'property_id' => $snak->getPropertyId()->getNumericId(),
-//						 'type' => ,
-//						 'level' => SnakRole::MAIN_SNAK,
-//					)
-//				)
-//			);
-
-
+		$queryInterface->expects( $this->once() )
+			->method( 'insert' )
+			->with(
+				$this->equalTo( $this->getTableDefinition()->getName() ),
+				$this->equalTo(
+					array(
+						 'claim_id' => $snakRow->getInternalClaimId(),
+						 'property_id' => $snakRow->getInternalPropertyId(),
+						 'type' => $snakRow->getSnak()->getType(),
+						 'level' => $snakRow->getSnakRole(),
+					)
+				)
+			);
 
 		$store = new NoValueSnakStore(
 			$queryInterface,
 			$this->getTableDefinition()
 		);
 
-		$store->storeSnakRow( $snak, 31337, SnakRole::MAIN_SNAK );
-
-		$this->assertTrue( true );
+		$store->storeSnakRow( $snakRow );
 	}
 
 }

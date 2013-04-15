@@ -33,17 +33,17 @@ abstract class SnakStore {
 	/**
 	 * @since 0.1
 	 *
-	 * @param SnakRow $storeSnak
+	 * @param SnakRow $snakRow
 	 *
 	 * @return boolean
 	 */
-	public abstract function canStore( SnakRow $storeSnak );
+	public abstract function canStore( SnakRow $snakRow );
 
 	/**
 	 * @since 0.1
 	 *
-	 * @param SnakRow $storeSnak
+	 * @param SnakRow $snakRow
 	 */
-	public abstract function storeSnakRow( SnakRow $storeSnak );
+	public abstract function storeSnakRow( SnakRow $snakRow );
 
 }
