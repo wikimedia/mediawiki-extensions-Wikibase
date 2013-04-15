@@ -48,21 +48,24 @@ class SnakRowTest extends \PHPUnit_Framework_TestCase {
 			new PropertyNoValueSnak( 42 ),
 			9001,
 			31337,
-			SnakRole::MAIN_SNAK
+			SnakRole::MAIN_SNAK,
+			0
 		);
 
 		$argLists[] = array(
 			new PropertySomeValueSnak( 23 ),
 			9002,
 			1337,
-			SnakRole::QUALIFIER
+			SnakRole::QUALIFIER,
+			0
 		);
 
 		$argLists[] = array(
 			new PropertyValueSnak( 1, new StringValue( 'foobar baz' ) ),
 			2,
 			3,
-			SnakRole::QUALIFIER
+			SnakRole::QUALIFIER,
+			0
 		);
 
 		return $argLists;
@@ -71,9 +74,14 @@ class SnakRowTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider constructorProvider
 	 */
-	public function testConstructor( Snak $snak, $internalPropertyId, $internalClaimId, $snakRole ) {
-		$storeSnak = new SnakRow( $snak, $internalPropertyId, $internalClaimId, $snakRole );
-		$this->assertTrue( true );
+	public function testConstructor( Snak $snak, $internalPropertyId, $internalClaimId, $snakRole, $internalSnakType ) {
+		$snakRow = new SnakRow( $snak, $internalPropertyId, $internalClaimId, $snakRole, $internalSnakType );
+
+		$this->assertTrue( $snak->equals( $snakRow->getSnak() ) );
+		$this->assertEquals( $internalPropertyId, $snakRow->getInternalPropertyId() );
+		$this->assertEquals( $internalClaimId, $snakRow->getInternalClaimId() );
+		$this->assertEquals( $snakRole, $snakRow->getSnakRole() );
+		$this->assertEquals( $internalSnakType, $snakRow->getInternalSnakType() );
 	}
 
 }

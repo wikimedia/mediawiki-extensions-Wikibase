@@ -36,18 +36,21 @@ class SnakRow {
 	protected $internalPropertyId;
 	protected $internalClaimId;
 	protected $snakRole;
+	protected $internalSnakType;
 
 	/**
 	 * @param Snak $snak
 	 * @param int $internalPropertyId
 	 * @param int $internalClaimId
 	 * @param int $snakRole
+	 * @param int $internalSnakType
 	 */
-	public function __construct( Snak $snak, $internalPropertyId, $internalClaimId, $snakRole ) {
+	public function __construct( Snak $snak, $internalPropertyId, $internalClaimId, $snakRole, $internalSnakType ) {
 		$this->snak = $snak;
 		$this->internalPropertyId = $internalPropertyId;
 		$this->internalClaimId = $internalClaimId;
 		$this->snakRole = $snakRole;
+		$this->internalSnakType = $internalSnakType;
 	}
 
 	/**
@@ -75,7 +78,7 @@ class SnakRow {
 	 * @return int
 	 */
 	public function getInternalSnakType() {
-		return 0; // TODO: implement
+		return $this->internalSnakType;
 	}
 
 	/**

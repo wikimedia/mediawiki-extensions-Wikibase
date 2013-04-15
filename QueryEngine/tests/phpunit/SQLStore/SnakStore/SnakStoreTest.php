@@ -66,7 +66,8 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 				$argList[0],
 				1,
 				2,
-				SnakRole::MAIN_SNAK
+				SnakRole::MAIN_SNAK,
+				0
 			) );
 		}
 

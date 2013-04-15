@@ -56,14 +56,16 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 			new PropertyNoValueSnak( 1 ),
 			1,
 			1,
-			SnakRole::QUALIFIER
+			SnakRole::QUALIFIER,
+			0
 		) );
 
 		$argLists[] = array( new SnakRow(
 			new PropertyNoValueSnak( 31337 ),
 			1,
 			1,
-			SnakRole::MAIN_SNAK
+			SnakRole::MAIN_SNAK,
+			0
 		) );
 
 		return $argLists;
@@ -76,28 +78,32 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 			new PropertyValueSnak( 42, new StringValue( 'nyan' ) ),
 			1,
 			1,
-			SnakRole::QUALIFIER
+			SnakRole::QUALIFIER,
+			0
 		) );
 
 		$argLists[] = array( new SnakRow(
 			new PropertyValueSnak( 9001, new StringValue( 'nyan' ) ),
 			1,
 			1,
-			SnakRole::MAIN_SNAK
+			SnakRole::MAIN_SNAK,
+			0
 		) );
 
 		$argLists[] = array( new SnakRow(
 			new PropertySomeValueSnak( 2 ),
 			1,
 			1,
-			SnakRole::QUALIFIER
+			SnakRole::QUALIFIER,
+			0
 		) );
 
 		$argLists[] = array( new SnakRow(
 			new PropertySomeValueSnak( 720101 ),
 			1,
 			1,
-			SnakRole::MAIN_SNAK
+			SnakRole::MAIN_SNAK,
+			0
 		) );
 
 		return $argLists;
