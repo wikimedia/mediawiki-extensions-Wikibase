@@ -141,6 +141,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function ( array &$testModules, \Resou
 	$testModules['qunit']['ext.dataValues.util'] = $moduleTemplate + array(
 		'scripts' => array(
 			'tests/qunit/dataValues.util.inherit.tests.js',
+			'tests/qunit/dataValues.util.Notifier.tests.js',
 		),
 		'dependencies' => array(
 			'dataValues.util',
