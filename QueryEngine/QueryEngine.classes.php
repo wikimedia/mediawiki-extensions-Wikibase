@@ -33,7 +33,7 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\QueryEngineResult',
 		'Wikibase\QueryEngine\QueryResult',
 		'Wikibase\QueryEngine\QueryStore',
-		'Wikibase\QueryEngine\QueryStoreUpdater',
+		'Wikibase\QueryEngine\QueryStoreWriter',
 
 		'Wikibase\QueryEngine\SQLStore\DVHandler\BooleanHandler',
 		'Wikibase\QueryEngine\SQLStore\DVHandler\EntityIdHandler',
@@ -58,7 +58,7 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\SQLStore\Setup',
 		'Wikibase\QueryEngine\SQLStore\Store',
 		'Wikibase\QueryEngine\SQLStore\StoreConfig',
-		'Wikibase\QueryEngine\SQLStore\Updater',
+		'Wikibase\QueryEngine\SQLStore\Writer',
 	);
 
 	$paths = array();

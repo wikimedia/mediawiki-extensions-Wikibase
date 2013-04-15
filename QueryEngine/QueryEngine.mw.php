@@ -97,7 +97,7 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		'SQLStore/Setup',
 		'SQLStore/Store',
 		'SQLStore/StoreConfig',
-		'SQLStore/Updater',
+		'SQLStore/Writer',
 	);
 
 	foreach ( $testFiles as $file ) {

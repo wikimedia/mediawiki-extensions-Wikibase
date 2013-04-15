@@ -3,7 +3,7 @@
 namespace Wikibase\Test\Query;
 
 use Wikibase\Item;
-use Wikibase\QueryEngine\QueryStoreUpdater;
+use Wikibase\QueryEngine\QueryStoreWriter;
 
 /**
  * Base test class for Wikibase\QueryEngine\QueryStoreUpdater implementing classes.
@@ -36,14 +36,14 @@ abstract class QueryStoreUpdaterTest extends \MediaWikiTestCase {
 	/**
 	 * @since 0.1
 	 *
-	 * @return QueryStoreUpdater[]
+	 * @return QueryStoreWriter[]
 	 */
 	protected abstract function getInstances();
 
 	/**
 	 * @since 0.1
 	 *
-	 * @return QueryStoreUpdater[][]
+	 * @return QueryStoreWriter[][]
 	 */
 	public function instanceProvider() {
 		return $this->arrayWrap( $this->getInstances() );
@@ -52,9 +52,9 @@ abstract class QueryStoreUpdaterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param QueryStoreUpdater $updater
+	 * @param QueryStoreWriter $updater
 	 */
-	public function testInsertEntityDoesNotFatal( QueryStoreUpdater $updater ) {
+	public function testInsertEntityDoesNotFatal( QueryStoreWriter $updater ) {
 		$item = Item::newEmpty();
 		$item->setId( 42 );
 
@@ -66,9 +66,9 @@ abstract class QueryStoreUpdaterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param QueryStoreUpdater $updater
+	 * @param QueryStoreWriter $updater
 	 */
-	public function testUpdateEntityDoesNotFatal( QueryStoreUpdater $updater ) {
+	public function testUpdateEntityDoesNotFatal( QueryStoreWriter $updater ) {
 		$item = Item::newEmpty();
 		$item->setId( 42 );
 
@@ -80,9 +80,9 @@ abstract class QueryStoreUpdaterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param QueryStoreUpdater $updater
+	 * @param QueryStoreWriter $updater
 	 */
-	public function testDeleteEntityDoesNotFatal( QueryStoreUpdater $updater ) {
+	public function testDeleteEntityDoesNotFatal( QueryStoreWriter $updater ) {
 		$item = Item::newEmpty();
 		$item->setId( 42 );
 

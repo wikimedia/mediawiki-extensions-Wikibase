@@ -105,10 +105,10 @@ class Store implements QueryStore {
 	 *
 	 * @since 0.1
 	 *
-	 * @return \Wikibase\QueryEngine\QueryStoreUpdater
+	 * @return \Wikibase\QueryEngine\QueryStoreWriter
 	 */
 	public function getUpdater() {
-		return new Updater( $this->config, $this->queryInterface );
+		return new Writer( $this->config, $this->queryInterface );
 	}
 
 	/**

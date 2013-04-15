@@ -7,7 +7,7 @@ use Wikibase\Database\QueryInterface;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\PropertyValueSnak;
-use Wikibase\QueryEngine\QueryStoreUpdater;
+use Wikibase\QueryEngine\QueryStoreWriter;
 use Wikibase\Snak;
 use Wikibase\SnakRole;
 
@@ -37,7 +37,7 @@ use Wikibase\SnakRole;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Updater implements QueryStoreUpdater {
+class Writer implements QueryStoreWriter {
 
 	/**
 	 * @since 0.1
