@@ -2,7 +2,9 @@
 
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
-use Wikibase\PropertyValueSnak;
+use InvalidArgumentException;
+use Wikibase\Database\QueryInterface;
+use Wikibase\Database\TableDefinition;
 
 /**
  * This program is free software; you can redistribute it and/or modify
@@ -28,14 +30,34 @@ use Wikibase\PropertyValueSnak;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyValueSnakStore extends SnakStore {
+class ValuelessSnakStore extends SnakStore {
+
+	protected $queryInterface;
+	protected $tableName;
+
+	public function __construct( QueryInterface $queryInterface, $tableName ) {
+		$this->queryInterface = $queryInterface;
+		$this->tableName = $tableName;
+	}
 
 	public function canStore( SnakRow $snakRow ) {
-		return $snakRow instanceof ValueSnakRow;
+		return $snakRow instanceof ValuelessSnakRow;
 	}
 
 	public function storeSnakRow( SnakRow $snakRow ) {
+		if ( !( $snakRow instanceof ValuelessSnakRow ) ) {
+			throw new InvalidArgumentException( 'Can only store ValuelessSnakRow in ValuelessSnakStore' );
+		}
 
+		$this->queryInterface->insert(
+			$this->tableName,
+			array(
+				'claim_id' => $snakRow->getInternalClaimId(),
+				'property_id' => $snakRow->getInternalPropertyId(),
+				'snak_type' => $snakRow->getInternalSnakType(),
+				'snak_role' => $snakRow->getSnakRole(),
+			)
+		);
 	}
 
 }

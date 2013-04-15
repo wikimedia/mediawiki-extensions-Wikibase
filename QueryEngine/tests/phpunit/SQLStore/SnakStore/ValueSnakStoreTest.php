@@ -3,16 +3,13 @@
 namespace Wikibase\Tests\Query\SQLStore\SnakStore;
 
 use DataValues\StringValue;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\QueryEngine\SQLStore\SnakStore\PropertyValueSnakStore;
-use Wikibase\QueryEngine\SQLStore\SnakRow;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakStore;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
 use Wikibase\SnakRole;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakStore\PropertyValueSnakStore class.
+ * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakStore class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,10 +38,10 @@ use Wikibase\SnakRole;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyValueSnakStoreTest extends SnakStoreTest {
+class ValueSnakStoreTest extends SnakStoreTest {
 
 	protected function getInstance() {
-		return new PropertyValueSnakStore();
+		return new ValueSnakStore();
 	}
 
 	public function canStoreProvider() {

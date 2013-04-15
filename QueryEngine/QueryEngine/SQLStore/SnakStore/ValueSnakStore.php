@@ -2,10 +2,6 @@
 
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
-use InvalidArgumentException;
-use Wikibase\Database\QueryInterface;
-use Wikibase\Database\TableDefinition;
-
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,34 +26,14 @@ use Wikibase\Database\TableDefinition;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class NoValueSnakStore extends SnakStore {
-
-	protected $queryInterface;
-	protected $tableName;
-
-	public function __construct( QueryInterface $queryInterface, $tableName ) {
-		$this->queryInterface = $queryInterface;
-		$this->tableName = $tableName;
-	}
+class ValueSnakStore extends SnakStore {
 
 	public function canStore( SnakRow $snakRow ) {
-		return $snakRow instanceof ValuelessSnakRow && $snakRow->getInternalSnakType() === ValuelessSnakRow::TYPE_NO_VALUE;
+		return $snakRow instanceof ValueSnakRow;
 	}
 
 	public function storeSnakRow( SnakRow $snakRow ) {
-		if ( !( $snakRow instanceof ValuelessSnakRow ) ) {
-			throw new InvalidArgumentException( 'Can only store ValuelessSnakRow in NoValueSnakStore' );
-		}
 
-		$this->queryInterface->insert(
-			$this->tableName,
-			array(
-				'claim_id' => $snakRow->getInternalClaimId(),
-				'property_id' => $snakRow->getInternalPropertyId(),
-				'snak_type' => $snakRow->getInternalSnakType(),
-				'snak_role' => $snakRow->getSnakRole(),
-			)
-		);
 	}
 
 }
