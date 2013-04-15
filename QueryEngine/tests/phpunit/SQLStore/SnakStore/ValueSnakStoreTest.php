@@ -147,4 +147,18 @@ class ValueSnakStoreTest extends SnakStoreTest {
 		$store->storeSnakRow( $snakRow );
 	}
 
+	/**
+	 * @dataProvider canStoreProvider
+	 */
+	public function testStoreSnakWithUnknownValueType( ValueSnakRow $snakRow ) {
+		$this->setExpectedException( 'OutOfBoundsException' );
+
+		$store = new ValueSnakStore(
+			$this->getMock( 'Wikibase\Database\QueryInterface' ),
+			array()
+		);
+
+		$store->storeSnakRow( $snakRow );
+	}
+
 }
