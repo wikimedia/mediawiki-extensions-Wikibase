@@ -3,16 +3,13 @@
 namespace Wikibase\Tests\Query\SQLStore\SnakStore;
 
 use DataValues\StringValue;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\QueryEngine\SQLStore\SnakStore\SomeValueSnakStore;
-use Wikibase\QueryEngine\SQLStore\SnakRow;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakStore;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
 use Wikibase\SnakRole;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakStore\SomeValueSnakStore class.
+ * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakStore\NoValueSnakStore class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,14 +38,31 @@ use Wikibase\SnakRole;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SomeValueSnakStoreTest extends SnakStoreTest {
+class NoValueSnakStoreTest extends SnakStoreTest {
 
 	protected function getInstance() {
-		return new SomeValueSnakStore();
+		return new ValuelessSnakStore(
+			$this->getMock( 'Wikibase\Database\QueryInterface' ),
+			'snaks_of_doom'
+		);
 	}
 
 	public function canStoreProvider() {
 		$argLists = array();
+
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_NO_VALUE,
+			1,
+			1,
+			SnakRole::QUALIFIER
+		) );
+
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_NO_VALUE,
+			1,
+			1,
+			SnakRole::MAIN_SNAK
+		) );
 
 		$argLists[] = array( new ValuelessSnakRow(
 			ValuelessSnakRow::TYPE_SOME_VALUE,
@@ -86,21 +100,35 @@ class SomeValueSnakStoreTest extends SnakStoreTest {
 			0
 		) );
 
-		$argLists[] = array( new ValuelessSnakRow(
-			ValuelessSnakRow::TYPE_NO_VALUE,
-			1,
-			1,
-			SnakRole::QUALIFIER
-		) );
-
-		$argLists[] = array( new ValuelessSnakRow(
-			ValuelessSnakRow::TYPE_NO_VALUE,
-			1,
-			1,
-			SnakRole::MAIN_SNAK
-		) );
-
 		return $argLists;
+	}
+
+	/**
+	 * @dataProvider canStoreProvider
+	 */
+	public function testStoreSnak( ValuelessSnakRow $snakRow ) {
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
+
+		$queryInterface->expects( $this->once() )
+			->method( 'insert' )
+			->with(
+				$this->equalTo( 'snaks_of_doom' ),
+				$this->equalTo(
+					array(
+						'claim_id' => $snakRow->getInternalClaimId(),
+						'property_id' => $snakRow->getInternalPropertyId(),
+						'snak_type' => $snakRow->getInternalSnakType(),
+						'snak_role' => $snakRow->getSnakRole(),
+					)
+				)
+			);
+
+		$store = new ValuelessSnakStore(
+			$queryInterface,
+			'snaks_of_doom'
+		);
+
+		$store->storeSnakRow( $snakRow );
 	}
 
 }
