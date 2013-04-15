@@ -134,7 +134,7 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 			$this->getTableDefinition()
 		);
 
-		$store->storeSnak( $snak, 31337, SnakRole::MAIN_SNAK );
+		$store->storeSnakRow( $snak, 31337, SnakRole::MAIN_SNAK );
 
 		$this->assertTrue( true );
 	}
