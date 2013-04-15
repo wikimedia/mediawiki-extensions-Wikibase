@@ -45,12 +45,8 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 	protected function getInstance() {
 		return new NoValueSnakStore(
 			$this->getMock( 'Wikibase\Database\QueryInterface' ),
-			$this->getTableDefinition()
+			'snaks_of_doom'
 		);
-	}
-
-	protected function getTableDefinition() {
-		return $this->newStoreSchema()->getValuelessSnaksTable();
 	}
 
 	public function canStoreProvider() {
@@ -116,7 +112,7 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 		$queryInterface->expects( $this->once() )
 			->method( 'insert' )
 			->with(
-				$this->equalTo( $this->getTableDefinition()->getName() ),
+				$this->equalTo( 'snaks_of_doom' ),
 				$this->equalTo(
 					array(
 						'claim_id' => $snakRow->getInternalClaimId(),
@@ -129,7 +125,7 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 
 		$store = new NoValueSnakStore(
 			$queryInterface,
-			$this->getTableDefinition()
+			'snaks_of_doom'
 		);
 
 		$store->storeSnakRow( $snakRow );
