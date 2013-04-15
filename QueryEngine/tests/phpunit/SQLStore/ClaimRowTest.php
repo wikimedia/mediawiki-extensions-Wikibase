@@ -39,8 +39,8 @@ class ClaimRowTest extends \PHPUnit_Framework_TestCase {
 	public function constructorProvider() {
 		$argLists = array();
 
-		$argLists[] = array( 1, 'foo-bar-guid', 2, 3, Statement::RANK_NORMAL, 'danweeds' );
-		$argLists[] = array( 2, 'foo-bar-guid', 2, 2, Statement::RANK_DEPRECATED, 'danweeds' );
+		$argLists[] = array( 1, 'foo-bar-baz-guid', 2, 3, Statement::RANK_NORMAL, sha1( 'danweeds' ) );
+		$argLists[] = array( 2, 'foo-bar-guid', 2, 2, Statement::RANK_DEPRECATED, sha1( 'NyanData' ) );
 
 		return $argLists;
 	}
