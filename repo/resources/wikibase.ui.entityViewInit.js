@@ -156,8 +156,12 @@
 			}
 		}
 
-		if ( mw.config.get( 'wbUserIsBlocked' ) || !mw.config.get( 'wbUserCanEdit' ) ) {
+		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
 			$( wb ).triggerHandler( 'blockEntityPageActions' );
+		}
+
+		if ( !mw.config.get( 'wbUserCanEdit' ) ) {
+			$( wb ).triggerHandler( 'restrictEntityPageActions' );
 		}
 
 		if( !mw.config.get( 'wbIsEditView' ) ) {
