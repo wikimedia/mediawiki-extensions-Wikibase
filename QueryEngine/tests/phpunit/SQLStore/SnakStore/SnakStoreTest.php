@@ -3,14 +3,12 @@
 namespace Wikibase\Tests\Query\SQLStore\SnakStore;
 
 use DataValues\StringValue;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\SQLStore\Schema;
+use Wikibase\QueryEngine\SQLStore\SnakStore\SnakRow;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
-use Wikibase\QueryEngine\SQLStore\SnakRow;
-use Wikibase\Snak;
 use Wikibase\SnakRole;
 
 /**
@@ -53,23 +51,26 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 	public function differentSnaksProvider() {
 		$argLists = array();
 
-		$argLists[] = array( new PropertyNoValueSnak( 42 ) );
-		$argLists[] = array( new PropertySomeValueSnak( 42 ) );
-		$argLists[] = array( new PropertyValueSnak( 42, new StringValue( '~=[,,_,,]:3' ) ) );
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_NO_VALUE,
+			1,
+			2,
+			SnakRole::QUALIFIER
+		) );
 
-		$argLists[] = array( new PropertyNoValueSnak( 31337 ) );
-		$argLists[] = array( new PropertySomeValueSnak( 31337 ) );
-		$argLists[] = array( new PropertyValueSnak( 31337, new StringValue( '~=[,,_,,]:3' ) ) );
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_SOME_VALUE,
+			3,
+			4,
+			SnakRole::MAIN_SNAK
+		) );
 
-		foreach ( $argLists as &$argList ) {
-			$argList = array( new SnakRow(
-				$argList[0],
-				1,
-				2,
-				SnakRole::MAIN_SNAK,
-				0
-			) );
-		}
+		$argLists[] = array( new ValueSnakRow(
+			new StringValue( '~=[,,_,,]:3' ),
+			42,
+			31337,
+			SnakRole::MAIN_SNAK
+		) );
 
 		return $argLists;
 	}

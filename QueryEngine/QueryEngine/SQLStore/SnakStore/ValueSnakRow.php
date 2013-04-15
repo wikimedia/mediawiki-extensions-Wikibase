@@ -2,6 +2,8 @@
 
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
+use DataValues\DataValue;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,22 +28,34 @@ namespace Wikibase\QueryEngine\SQLStore\SnakStore;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class SnakStore {
+class ValueSnakRow extends SnakRow {
+
+	protected $value;
 
 	/**
-	 * @since 0.1
-	 *
-	 * @param SnakRow $snakRow
-	 *
-	 * @return boolean
+	 * @param DataValue $value
+	 * @param int $internalPropertyId
+	 * @param int $internalClaimId
+	 * @param int $snakRole
 	 */
-	public abstract function canStore( SnakRow $snakRow );
+	public function __construct( DataValue $value, $internalPropertyId, $internalClaimId, $snakRole ) {
+		parent::__construct( $internalPropertyId, $internalClaimId, $snakRole );
+
+		$this->value = $value;
+	}
 
 	/**
-	 * @since 0.1
-	 *
-	 * @param SnakRow $snakRow
+	 * @return int
 	 */
-	public abstract function storeSnakRow( SnakRow $snakRow );
+	public function getInternalPropertyId() {
+		return $this->internalPropertyId;
+	}
+
+	/**
+	 * @return DataValue
+	 */
+	public function getValue() {
+		return $this->value;
+	}
 
 }

@@ -45,8 +45,11 @@ return call_user_func( function() {
 
 		'Wikibase\QueryEngine\SQLStore\SnakStore\NoValueSnakStore',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\PropertyValueSnakStore',
+		'Wikibase\QueryEngine\SQLStore\SnakStore\SnakRow',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\SomeValueSnakStore',
+		'Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow',
+		'Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow',
 
 		'Wikibase\QueryEngine\SQLStore\DataValueHandlers',
 		'Wikibase\QueryEngine\SQLStore\DataValueHandler',
@@ -54,7 +57,6 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\SQLStore\Engine',
 		'Wikibase\QueryEngine\SQLStore\Schema',
 		'Wikibase\QueryEngine\SQLStore\Setup',
-		'Wikibase\QueryEngine\SQLStore\SnakRow',
 		'Wikibase\QueryEngine\SQLStore\Store',
 		'Wikibase\QueryEngine\SQLStore\StoreConfig',
 		'Wikibase\QueryEngine\SQLStore\Updater',

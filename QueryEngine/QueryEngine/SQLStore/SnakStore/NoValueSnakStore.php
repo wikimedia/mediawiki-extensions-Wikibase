@@ -2,10 +2,9 @@
 
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
+use InvalidArgumentException;
 use Wikibase\Database\QueryInterface;
 use Wikibase\Database\TableDefinition;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\QueryEngine\SQLStore\SnakRow;
 
 /**
  * This program is free software; you can redistribute it and/or modify
@@ -41,11 +40,15 @@ class NoValueSnakStore extends SnakStore {
 		$this->tableName = $tableName;
 	}
 
-	public function canStore( SnakRow $storeSnak ) {
-		return $storeSnak->getSnak() instanceof PropertyNoValueSnak;
+	public function canStore( SnakRow $snakRow ) {
+		return $snakRow instanceof ValuelessSnakRow && $snakRow->getInternalSnakType() === ValuelessSnakRow::TYPE_NO_VALUE;
 	}
 
 	public function storeSnakRow( SnakRow $snakRow ) {
+		if ( !( $snakRow instanceof ValuelessSnakRow ) ) {
+			throw new InvalidArgumentException( 'Can only store ValuelessSnakRow in NoValueSnakStore' );
+		}
+
 		$this->queryInterface->insert(
 			$this->tableName,
 			array(
