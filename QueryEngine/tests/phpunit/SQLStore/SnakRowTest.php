@@ -6,12 +6,12 @@ use DataValues\StringValue;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\QueryEngine\SQLStore\StoreSnak;
+use Wikibase\QueryEngine\SQLStore\SnakRow;
 use Wikibase\Snak;
 use Wikibase\SnakRole;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\StoreSnak class.
+ * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakRow class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ use Wikibase\SnakRole;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StoreSnakTest extends \PHPUnit_Framework_TestCase {
+class SnakRowTest extends \PHPUnit_Framework_TestCase {
 
 	public function constructorProvider() {
 		$argLists = array();
@@ -72,7 +72,7 @@ class StoreSnakTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider constructorProvider
 	 */
 	public function testConstructor( Snak $snak, $internalPropertyId, $internalClaimId, $snakRole ) {
-		$storeSnak = new StoreSnak( $snak, $internalPropertyId, $internalClaimId, $snakRole );
+		$storeSnak = new SnakRow( $snak, $internalPropertyId, $internalClaimId, $snakRole );
 		$this->assertTrue( true );
 	}
 

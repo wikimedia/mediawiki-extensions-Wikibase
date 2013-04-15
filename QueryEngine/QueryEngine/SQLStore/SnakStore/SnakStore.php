@@ -2,7 +2,7 @@
 
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
-use Wikibase\QueryEngine\SQLStore\StoreSnak;
+use Wikibase\QueryEngine\SQLStore\SnakRow;
 
 /**
  * This program is free software; you can redistribute it and/or modify
@@ -33,17 +33,17 @@ abstract class SnakStore {
 	/**
 	 * @since 0.1
 	 *
-	 * @param StoreSnak $storeSnak
+	 * @param SnakRow $storeSnak
 	 *
 	 * @return boolean
 	 */
-	public abstract function canStore( StoreSnak $storeSnak );
+	public abstract function canStore( SnakRow $storeSnak );
 
 	/**
 	 * @since 0.1
 	 *
-	 * @param StoreSnak $storeSnak
+	 * @param SnakRow $storeSnak
 	 */
-	public abstract function storeSnak( StoreSnak $storeSnak );
+	public abstract function storeSnak( SnakRow $storeSnak );
 
 }

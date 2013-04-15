@@ -94,9 +94,9 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		'SQLStore/Engine',
 		'SQLStore/Schema',
 		'SQLStore/Setup',
+		'SQLStore/SnakRow',
 		'SQLStore/Store',
 		'SQLStore/StoreConfig',
-		'SQLStore/StoreSnak',
 		'SQLStore/Updater',
 	);
 
