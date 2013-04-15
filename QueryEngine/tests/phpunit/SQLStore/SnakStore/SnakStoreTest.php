@@ -9,7 +9,9 @@ use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\SQLStore\Schema;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
+use Wikibase\QueryEngine\SQLStore\StoreSnak;
 use Wikibase\Snak;
+use Wikibase\SnakRole;
 
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore implementing classes.
@@ -46,17 +48,7 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 
 	protected abstract function canStoreProvider();
 
-	public function storeSnakProvider() {
-		$argLists = array();
-
-		foreach ( $this->canStoreProvider() as $argList ) {
-			if ( $argList[0] ) {
-				$argLists[] = array( $argList[1] );
-			}
-		}
-
-		return $argLists;
-	}
+	protected abstract function cannotStoreProvider();
 
 	public function differentSnaksProvider() {
 		$argLists = array();
@@ -69,14 +61,22 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array( new PropertySomeValueSnak( 31337 ) );
 		$argLists[] = array( new PropertyValueSnak( 31337, new StringValue( '~=[,,_,,]:3' ) ) );
 
+		foreach ( $argLists as &$argList ) {
+			$argList = array( new StoreSnak(
+				$argList[0],
+				1,
+				2,
+				SnakRole::MAIN_SNAK
+			) );
+		}
+
 		return $argLists;
 	}
 
 	/**
 	 * @dataProvider differentSnaksProvider
-	 * @param Snak $snak
 	 */
-	public function testReturnTypeOfCanUse( Snak $snak ) {
+	public function testReturnTypeOfCanUse( StoreSnak $snak ) {
 		$canStore = $this->getInstance()->canStore( $snak );
 		$this->assertInternalType( 'boolean', $canStore );
 	}
@@ -84,8 +84,15 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider canStoreProvider
 	 */
-	public function testCanStore( $canStore, Snak $snak ) {
-		$this->assertEquals( $canStore, $this->getInstance()->canStore( $snak ) );
+	public function testCanStore( StoreSnak $snak ) {
+		$this->assertTrue( $this->getInstance()->canStore( $snak ) );
+	}
+
+	/**
+	 * @dataProvider cannotStoreProvider
+	 */
+	public function testCannotStore( StoreSnak $snak ) {
+		$this->assertFalse( $this->getInstance()->canStore( $snak ) );
 	}
 
 	protected function newStoreSchema() {

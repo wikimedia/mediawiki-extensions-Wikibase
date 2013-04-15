@@ -7,6 +7,7 @@ use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\SQLStore\SnakStore\NoValueSnakStore;
+use Wikibase\QueryEngine\SQLStore\StoreSnak;
 use Wikibase\SnakRole;
 
 /**
@@ -55,20 +56,61 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 	public function canStoreProvider() {
 		$argLists = array();
 
-		$argLists[] = array( false, new PropertyValueSnak( 42, new StringValue( 'nyan' ) ) );
-		$argLists[] = array( false, new PropertyValueSnak( 9001, new StringValue( 'nyan' ) ) );
-		$argLists[] = array( true, new PropertyNoValueSnak( 1 ) );
-		$argLists[] = array( true, new PropertyNoValueSnak( 31337 ) );
-		$argLists[] = array( false, new PropertySomeValueSnak( 2 ) );
-		$argLists[] = array( false, new PropertySomeValueSnak( 720101 ) );
+		$argLists[] = array( new StoreSnak(
+			new PropertyNoValueSnak( 1 ),
+			1,
+			1,
+			SnakRole::QUALIFIER
+		) );
+
+		$argLists[] = array( new StoreSnak(
+			new PropertyNoValueSnak( 31337 ),
+			1,
+			1,
+			SnakRole::MAIN_SNAK
+		) );
+
+		return $argLists;
+	}
+
+	public function cannotStoreProvider() {
+		$argLists = array();
+
+		$argLists[] = array( new StoreSnak(
+			new PropertyValueSnak( 42, new StringValue( 'nyan' ) ),
+			1,
+			1,
+			SnakRole::QUALIFIER
+		) );
+
+		$argLists[] = array( new StoreSnak(
+			new PropertyValueSnak( 9001, new StringValue( 'nyan' ) ),
+			1,
+			1,
+			SnakRole::MAIN_SNAK
+		) );
+
+		$argLists[] = array( new StoreSnak(
+			new PropertySomeValueSnak( 2 ),
+			1,
+			1,
+			SnakRole::QUALIFIER
+		) );
+
+		$argLists[] = array( new StoreSnak(
+			new PropertySomeValueSnak( 720101 ),
+			1,
+			1,
+			SnakRole::MAIN_SNAK
+		) );
 
 		return $argLists;
 	}
 
 	/**
-	 * @dataProvider storeSnakProvider
+	 * @dataProvider canStoreProvider
 	 */
-	public function testStoreSnak( PropertyNoValueSnak $snak ) {
+	public function testStoreSnak( StoreSnak $snak ) {
 		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
 
 //		$queryInterface->expects( $this->once() )
@@ -85,12 +127,16 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 //				)
 //			);
 
+
+
 		$store = new NoValueSnakStore(
 			$queryInterface,
 			$this->getTableDefinition()
 		);
 
 		$store->storeSnak( $snak, 31337, SnakRole::MAIN_SNAK );
+
+		$this->assertTrue( true );
 	}
 
 }

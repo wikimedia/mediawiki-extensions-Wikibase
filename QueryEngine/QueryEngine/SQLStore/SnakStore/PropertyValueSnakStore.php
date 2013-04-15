@@ -3,6 +3,7 @@
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
 use Wikibase\PropertyValueSnak;
+use Wikibase\QueryEngine\SQLStore\StoreSnak;
 use Wikibase\Snak;
 
 /**
@@ -31,11 +32,11 @@ use Wikibase\Snak;
  */
 class PropertyValueSnakStore extends SnakStore {
 
-	public function canStore( Snak $snak ) {
-		return $snak instanceof PropertyValueSnak;
+	public function canStore( StoreSnak $storeSnak ) {
+		return $storeSnak->getSnak() instanceof PropertyValueSnak;
 	}
 
-	public function storeSnak( Snak $snak, $internalClaimId, $snakRole ) {
+	public function storeSnak( StoreSnak $storeSnak ) {
 
 	}
 
