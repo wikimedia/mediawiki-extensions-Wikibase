@@ -221,7 +221,7 @@ describe "Check references UI" do
         page.cancelReference?.should be_true
         page.editReference1?.should be_false
         page.addReferenceToFirstClaim?.should be_false
-        page.saveReference
+        page.referenceValueInput_element.send_keys :return
         ajax_wait
         page.wait_for_statement_request_finished
         page.reference1Property.should == properties_cm[1]["label"]
