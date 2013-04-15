@@ -34,6 +34,24 @@
       "revId": "1aabf2d77bf6761c9b69eb4f376bf357e767f1a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DucMjiqk",
+        "filename": "lib/resources/wikibase.store/wikibase.RepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-15T12:45:19Z",
+      "side": 0,
+      "message": "Gerrit would list it at renamed then and the diffs would be a lot nicer.",
+      "parentUuid": "DuFP77nY",
+      "revId": "1aabf2d77bf6761c9b69eb4f376bf357e767f1a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

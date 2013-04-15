@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "DuaMello",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.AbstractedRepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-15T12:45:19Z",
+      "side": 1,
+      "message": "Definitely keep \"AbstractedRepoApi\" since that one might be deprecated at some later point when we\u0027re implementing some more sophisticated store abstraction. On the other hand, we might keep it anyhow.\n\nThis is independent from the design issues above though.",
+      "parentUuid": "DuLM26k4",
+      "revId": "c8086c0b2e08bfbef9759173483fbbf00808293d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DuDAXUEY",
         "filename": "lib/resources/wikibase.RepoApi/wikibase.AbstractedRepoApi.js",
         "patchSetId": 2
