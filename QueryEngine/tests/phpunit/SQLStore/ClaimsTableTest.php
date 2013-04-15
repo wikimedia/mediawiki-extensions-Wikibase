@@ -2,6 +2,10 @@
 
 namespace Wikibase\Test\Query\SQLStore;
 
+use Wikibase\QueryEngine\SQLStore\ClaimRow;
+use Wikibase\QueryEngine\SQLStore\ClaimsTable;
+use Wikibase\Statement;
+
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\ClaimsTable class.
  *
@@ -33,6 +37,43 @@ namespace Wikibase\Test\Query\SQLStore;
  */
 class ClaimsTableTest extends \PHPUnit_Framework_TestCase {
 
+	protected function getInstance() {
+		return new ClaimsTable();
+	}
 
+	public function claimRowProvider() {
+		$argLists = array();
+
+		$argLists[] = array( new ClaimRow(
+			1,
+			'foo-bar-guid',
+			2,
+			3,
+			Statement::RANK_NORMAL,
+			sha1( 'NyanData' )
+		) );
+
+		$argLists[] = array( new ClaimRow(
+			2,
+			'foo-bar-baz-guid',
+			2,
+			2,
+			Statement::RANK_PREFERRED,
+			sha1( 'danweeds' )
+		) );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider claimRowProvider
+	 */
+	public function testInsertClaimRow( ClaimRow $claimRow ) {
+		$table = $this->getInstance();
+
+		$table->insertClaimRow( $claimRow );
+
+		$this->assertTrue( true );
+	}
 
 }

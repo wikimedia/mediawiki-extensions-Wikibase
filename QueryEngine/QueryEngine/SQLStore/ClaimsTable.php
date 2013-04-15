@@ -37,4 +37,8 @@ class ClaimsTable {
 
 	}
 
+	public function insertClaimRow( ClaimRow $claimRow ) {
+
+	}
+
 }
