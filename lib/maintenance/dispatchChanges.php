@@ -764,13 +764,14 @@ class DispatchChanges extends \Maintenance {
 		//      for free-form use.
 
 		$batch = array();
+		$batchSize = 0;
 		$chunkSize = $this->batchSize * $this->batchChunkFactor;
 
 		// Track the change ID from which the next pass should start.
 		// Note that this is non-trivial due to programmatic filtering.
 		$seen = $after;
 
-		while ( count( $batch ) < $this->batchSize ) {
+		while ( $batchSize < $this->batchSize ) {
 			// get a chunk of changes
 			$chunk = $this->selectChanges( $after, $chunkSize );
 
@@ -784,22 +785,13 @@ class DispatchChanges extends \Maintenance {
 			reset( $chunk ); // don't leave the array pointer messy.
 
 			// filter the changes in the chunk and add the result to the batch
-			$chunk = $this->filterChanges( $siteID, $wikiDB, $chunk );
-			$batch = array_merge( $batch, $chunk );
+			list( $filtered, $seen ) = $this->filterChanges( $siteID, $wikiDB, $chunk, $this->batchSize - $batchSize );
 
-			// truncate the batch if needed.
-			if ( count( $batch ) > $this->batchSize ) {
-				// We need to find and remember the first change that gets cur off,
-				// so we can continue from that change on the next pass.
+			$batch = array_merge( $batch, $filtered );
+			$batchSize = count( $batch );
 
-				/* @var Change $anchor */
-				list( $anchor ) = array_slice( $batch, $this->batchSize, 1 );
-				$seen = $anchor->getId() -1;
-
+			if ( $batchSize > $this->batchSize ) { // shouldn't happen
 				$batch = array_slice( $batch, 0, $this->batchSize );
-				break;
-			} else {
-				$seen = $last->getId();
 			}
 
 			//XXX: We could try to adapt $chunkSize based on ratio of changes that get filtered out:
@@ -875,13 +867,16 @@ class DispatchChanges extends \Maintenance {
 	 * Currently, we only keep ItemChanges for items that have a sitelink to the
 	 * target client wiki.
 	 *
-	 * @param string $siteID:    The client wiki's global site identifier, as used by sitelinks.
-	 * @param string $wikiDB:    The logical database name of the target wiki.
+	 * @param string   $siteID : The client wiki's global site identifier, as used by sitelinks.
+	 * @param string   $wikiDB : The logical database name of the target wiki.
 	 * @param Change[] $changes: The list of changes to filter.
+	 * @param int      $limit:   The max number of changes to return
 	 *
-	 * @return Change[] list of Change object from $changes that are relevant to $siteID.
+	 * @return array ( $batch, $seen ), where $batch is the filtered list of Change objects,
+	 *         and $seen if the ID of the last change considered for the batch
+	 *         (even if that was filtered out), for use as a continuation marker.
 	 */
-	protected function filterChanges( $siteID, $wikiDB, $changes ) {
+	protected function filterChanges( $siteID, $wikiDB, $changes, $limit ) {
 		wfProfileIn( __METHOD__ );
 
 		// collect all item IDs mentioned in the changes
@@ -914,7 +909,11 @@ class DispatchChanges extends \Maintenance {
 
 		// find all changes that relate to an item that has a sitelink to $siteID.
 		$keep = array();
+		$c = 0;
+		$seen = 0;
 		foreach ( $changes as $change ) {
+			$seen = $change->getId();
+
 			if ( $change instanceof ItemChange) {
 				$itemId = $change->getEntityId()->getNumericId();
 
@@ -922,17 +921,21 @@ class DispatchChanges extends \Maintenance {
 				// or the item currently links to $siteID.
 				if ( isset( $linkedItems[$itemId] )
 					|| $this->isRelevantChange( $change, $siteID ) !== null ) {
+
 					$keep[] = $change;
+					$c++;
 				}
+			}
+
+			if ( $c >= $limit ) {
+				break;
 			}
 		}
 
-		$changes = $keep;
-
-		$this->trace( "found " . count( $changes ) . " changes for items with relevant sitelinks." );
+		$this->trace( "found " . count( $keep ) . " changes for items with relevant sitelinks." );
 
 		wfProfileOut( __METHOD__ );
-		return $changes;
+		return array( $keep, $seen );
 	}
 
 	/**
