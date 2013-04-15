@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Query\SQLStore;
 
+use Wikibase\Database\QueryInterface;
 use Wikibase\QueryEngine\SQLStore\ClaimRow;
 use Wikibase\QueryEngine\SQLStore\ClaimsTable;
 use Wikibase\Statement;
@@ -37,15 +38,15 @@ use Wikibase\Statement;
  */
 class ClaimsTableTest extends \PHPUnit_Framework_TestCase {
 
-	protected function getInstance() {
-		return new ClaimsTable();
+	protected function getInstance( QueryInterface $queryInterface ) {
+		return new ClaimsTable( $queryInterface, 'test_claims' );
 	}
 
 	public function claimRowProvider() {
 		$argLists = array();
 
 		$argLists[] = array( new ClaimRow(
-			1,
+			null,
 			'foo-bar-guid',
 			2,
 			3,
@@ -54,10 +55,10 @@ class ClaimsTableTest extends \PHPUnit_Framework_TestCase {
 		) );
 
 		$argLists[] = array( new ClaimRow(
-			2,
+			null,
 			'foo-bar-baz-guid',
-			2,
-			2,
+			31337,
+			7201010,
 			Statement::RANK_PREFERRED,
 			sha1( 'danweeds' )
 		) );
@@ -69,11 +70,32 @@ class ClaimsTableTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider claimRowProvider
 	 */
 	public function testInsertClaimRow( ClaimRow $claimRow ) {
-		$table = $this->getInstance();
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
+		$table = $this->getInstance( $queryInterface );
+
+		$queryInterface->expects( $this->once() )
+			->method( 'insert' )
+			->with(
+				$this->equalTo( 'test_claims' )
+			);
 
 		$table->insertClaimRow( $claimRow );
+	}
 
-		$this->assertTrue( true );
+	public function testInsertRowWithId() {
+		$claimRow = new ClaimRow(
+			42,
+			'foo-bar-baz-guid',
+			31337,
+			7201010,
+			Statement::RANK_PREFERRED,
+			sha1( 'danweeds' )
+		);
+
+		$table = $this->getInstance( $this->getMock( 'Wikibase\Database\QueryInterface' ) );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$table->insertClaimRow( $claimRow );
 	}
 
 }

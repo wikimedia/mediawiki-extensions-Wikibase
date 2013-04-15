@@ -38,7 +38,7 @@ class ClaimRow {
 	protected $hash;
 
 	/**
-	 * @param int $internalId
+	 * @param int|null $internalId
 	 * @param string $externalGuid
 	 * @param int $internalSubjectId
 	 * @param int $internalPropertyId
@@ -55,7 +55,7 @@ class ClaimRow {
 	}
 
 	/**
-	 * @return int
+	 * @return int|null
 	 */
 	public function getInternalId() {
 		return $this->internalId;
