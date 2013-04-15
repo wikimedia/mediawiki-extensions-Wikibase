@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DupdXDgE",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-15T23:43:20Z",
+      "side": 1,
+      "message": "lies!",
+      "revId": "da0a3e15ab757c30ce98bd3040c357d93b905524",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
