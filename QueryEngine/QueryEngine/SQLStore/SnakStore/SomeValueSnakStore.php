@@ -2,9 +2,6 @@
 
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\QueryEngine\SQLStore\SnakRow;
-
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +29,7 @@ use Wikibase\QueryEngine\SQLStore\SnakRow;
 class SomeValueSnakStore extends SnakStore {
 
 	public function canStore( SnakRow $snakRow ) {
-		return $snakRow->getSnak() instanceof PropertySomeValueSnak;
+		return $snakRow instanceof ValuelessSnakRow && $snakRow->getInternalSnakType() === ValuelessSnakRow::TYPE_SOME_VALUE;
 	}
 
 	public function storeSnakRow( SnakRow $snakRow ) {

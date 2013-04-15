@@ -1,11 +1,9 @@
 <?php
 
-namespace Wikibase\QueryEngine\SQLStore;
-
-use Wikibase\Snak;
+namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
 /**
- * Contains the information for a
+ * Represents a row in a snak table. Immutable.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,34 +28,21 @@ use Wikibase\Snak;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakRow {
+abstract class SnakRow {
 
-	protected $snak;
 	protected $internalPropertyId;
 	protected $internalClaimId;
 	protected $snakRole;
-	protected $internalSnakType;
 
 	/**
-	 * @param Snak $snak
 	 * @param int $internalPropertyId
 	 * @param int $internalClaimId
 	 * @param int $snakRole
-	 * @param int $internalSnakType
 	 */
-	public function __construct( Snak $snak, $internalPropertyId, $internalClaimId, $snakRole, $internalSnakType ) {
-		$this->snak = $snak;
+	public function __construct( $internalPropertyId, $internalClaimId, $snakRole ) {
 		$this->internalPropertyId = $internalPropertyId;
 		$this->internalClaimId = $internalClaimId;
 		$this->snakRole = $snakRole;
-		$this->internalSnakType = $internalSnakType;
-	}
-
-	/**
-	 * @return Snak
-	 */
-	public function getSnak() {
-		return $this->snak;
 	}
 
 	/**
@@ -72,13 +57,6 @@ class SnakRow {
 	 */
 	public function getInternalClaimId() {
 		return $this->internalClaimId;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getInternalSnakType() {
-		return $this->internalSnakType;
 	}
 
 	/**

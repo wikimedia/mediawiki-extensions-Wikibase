@@ -2,6 +2,8 @@
 
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
+use InvalidArgumentException;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,22 +28,36 @@ namespace Wikibase\QueryEngine\SQLStore\SnakStore;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class SnakStore {
+class ValuelessSnakRow extends SnakRow {
+
+	const TYPE_NO_VALUE = 0;
+	const TYPE_SOME_VALUE = 1;
+
+	protected $internalSnakType;
 
 	/**
-	 * @since 0.1
+	 * @param int $internalSnakType
+	 * @param int $internalPropertyId
+	 * @param int $internalClaimId
+	 * @param int $snakRole
 	 *
-	 * @param SnakRow $snakRow
-	 *
-	 * @return boolean
+	 * @throws InvalidArgumentException
 	 */
-	public abstract function canStore( SnakRow $snakRow );
+	public function __construct( $internalSnakType, $internalPropertyId, $internalClaimId, $snakRole ) {
+		if ( !in_array( $internalSnakType, array( self::TYPE_NO_VALUE, self::TYPE_SOME_VALUE ), true ) ) {
+			throw new InvalidArgumentException( 'Invalid internal snak type provided' );
+		}
+
+		parent::__construct( $internalPropertyId, $internalClaimId, $snakRole );
+
+		$this->internalSnakType = $internalSnakType;
+	}
 
 	/**
-	 * @since 0.1
-	 *
-	 * @param SnakRow $snakRow
+	 * @return int
 	 */
-	public abstract function storeSnakRow( SnakRow $snakRow );
+	public function getInternalSnakType() {
+		return $this->internalSnakType;
+	}
 
 }

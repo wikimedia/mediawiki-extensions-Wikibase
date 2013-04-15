@@ -1,17 +1,12 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore;
+namespace Wikibase\Test\Query\SQLStore\SnakStore;
 
-use DataValues\StringValue;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
-use Wikibase\QueryEngine\SQLStore\SnakRow;
-use Wikibase\Snak;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
 use Wikibase\SnakRole;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakRow class.
+ * Unit tests for the Wikibase\QueryEngine\SQLStore\ValuelessSnakRow class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,33 +34,23 @@ use Wikibase\SnakRole;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakRowTest extends \PHPUnit_Framework_TestCase {
+class ValuelessSnakRowTest extends \PHPUnit_Framework_TestCase {
 
 	public function constructorProvider() {
 		$argLists = array();
 
 		$argLists[] = array(
-			new PropertyNoValueSnak( 42 ),
+			ValuelessSnakRow::TYPE_NO_VALUE,
 			9001,
 			31337,
-			SnakRole::MAIN_SNAK,
-			0
+			SnakRole::MAIN_SNAK
 		);
 
 		$argLists[] = array(
-			new PropertySomeValueSnak( 23 ),
+			ValuelessSnakRow::TYPE_SOME_VALUE,
 			9002,
 			1337,
-			SnakRole::QUALIFIER,
-			0
-		);
-
-		$argLists[] = array(
-			new PropertyValueSnak( 1, new StringValue( 'foobar baz' ) ),
-			2,
-			3,
-			SnakRole::QUALIFIER,
-			0
+			SnakRole::QUALIFIER
 		);
 
 		return $argLists;
@@ -74,10 +59,9 @@ class SnakRowTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider constructorProvider
 	 */
-	public function testConstructor( Snak $snak, $internalPropertyId, $internalClaimId, $snakRole, $internalSnakType ) {
-		$snakRow = new SnakRow( $snak, $internalPropertyId, $internalClaimId, $snakRole, $internalSnakType );
+	public function testConstructor( $internalSnakType, $internalPropertyId, $internalClaimId, $snakRole ) {
+		$snakRow = new ValuelessSnakRow( $internalSnakType, $internalPropertyId, $internalClaimId, $snakRole );
 
-		$this->assertTrue( $snak->equals( $snakRow->getSnak() ) );
 		$this->assertEquals( $internalPropertyId, $snakRow->getInternalPropertyId() );
 		$this->assertEquals( $internalClaimId, $snakRow->getInternalClaimId() );
 		$this->assertEquals( $snakRole, $snakRow->getSnakRole() );

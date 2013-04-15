@@ -3,11 +3,10 @@
 namespace Wikibase\Tests\Query\SQLStore\SnakStore;
 
 use DataValues\StringValue;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\SQLStore\SnakStore\NoValueSnakStore;
-use Wikibase\QueryEngine\SQLStore\SnakRow;
+use Wikibase\QueryEngine\SQLStore\SnakStore\SnakRow;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
 use Wikibase\SnakRole;
 
 /**
@@ -52,20 +51,18 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 	public function canStoreProvider() {
 		$argLists = array();
 
-		$argLists[] = array( new SnakRow(
-			new PropertyNoValueSnak( 1 ),
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_NO_VALUE,
 			1,
 			1,
-			SnakRole::QUALIFIER,
-			0
+			SnakRole::QUALIFIER
 		) );
 
-		$argLists[] = array( new SnakRow(
-			new PropertyNoValueSnak( 31337 ),
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_NO_VALUE,
 			1,
 			1,
-			SnakRole::MAIN_SNAK,
-			0
+			SnakRole::MAIN_SNAK
 		) );
 
 		return $argLists;
@@ -74,36 +71,34 @@ class NoValueSnakStoreTest extends SnakStoreTest {
 	public function cannotStoreProvider() {
 		$argLists = array();
 
-		$argLists[] = array( new SnakRow(
-			new PropertyValueSnak( 42, new StringValue( 'nyan' ) ),
+		$argLists[] = array( new ValueSnakRow(
+			new StringValue( 'nyan' ),
 			1,
 			1,
 			SnakRole::QUALIFIER,
 			0
 		) );
 
-		$argLists[] = array( new SnakRow(
-			new PropertyValueSnak( 9001, new StringValue( 'nyan' ) ),
+		$argLists[] = array( new ValueSnakRow(
+			new StringValue( 'nyan' ),
 			1,
 			1,
 			SnakRole::MAIN_SNAK,
 			0
 		) );
 
-		$argLists[] = array( new SnakRow(
-			new PropertySomeValueSnak( 2 ),
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_SOME_VALUE,
 			1,
 			1,
-			SnakRole::QUALIFIER,
-			0
+			SnakRole::QUALIFIER
 		) );
 
-		$argLists[] = array( new SnakRow(
-			new PropertySomeValueSnak( 720101 ),
+		$argLists[] = array( new ValuelessSnakRow(
+			ValuelessSnakRow::TYPE_SOME_VALUE,
 			1,
 			1,
-			SnakRole::MAIN_SNAK,
-			0
+			SnakRole::MAIN_SNAK
 		) );
 
 		return $argLists;
