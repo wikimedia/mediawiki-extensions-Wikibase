@@ -45,8 +45,16 @@ class NoValueSnakStore extends SnakStore {
 		return $storeSnak->getSnak() instanceof PropertyNoValueSnak;
 	}
 
-	public function storeSnakRow( SnakRow $storeSnak ) {
-
+	public function storeSnakRow( SnakRow $snakRow ) {
+		$this->queryInterface->insert(
+			$this->table->getName(),
+			array(
+				'claim_id' => $snakRow->getInternalClaimId(),
+				'property_id' => $snakRow->getInternalPropertyId(),
+				'type' => $snakRow->getSnak()->getType(),
+				'level' => $snakRow->getSnakRole(),
+			)
+		);
 	}
 
 }
