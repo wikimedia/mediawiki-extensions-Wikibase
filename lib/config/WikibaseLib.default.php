@@ -60,6 +60,7 @@ $wgWBSettings['changesAsJson'] = true;
 $wgWBSettings['localClientDatabases'] = array();
 
 $wgWBSettings['dispatchBatchChunkFactor'] = 3;
+$wgWBSettings['dispatchBatchCacheFactor'] = 3;
 
 $wgWBSettings['changeHandlers'] = array(
 	'wikibase-item~add' => 'Wikibase\ItemChange',

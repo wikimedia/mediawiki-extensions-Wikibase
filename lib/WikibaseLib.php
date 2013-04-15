@@ -185,7 +185,9 @@ $wgAutoloadClasses['Wikibase\Lib\Serializers\SerializerObject'] 		= $dir . 'incl
 $wgAutoloadClasses['Wikibase\Lib\Serializers\SnakSerializer'] 			= $dir . 'includes/serializers/SnakSerializer.php';
 $wgAutoloadClasses['Wikibase\Lib\Serializers\Unserializer'] 			= $dir . 'includes/serializers/Unserializer.php';
 
-// includes/store
+// includes/rere
+$wgAutoloadClasses['Wikibase\ChunkCache'] 			= $dir . 'includes/store/ChunkCache.php';
+$wgAutoloadClasses['Wikibase\ChunkAccess'] 			= $dir . 'includes/store/ChunkAccess.php';
 $wgAutoloadClasses['Wikibase\EntityLookup'] 			= $dir . 'includes/store/EntityLookup.php';
 $wgAutoloadClasses['Wikibase\PropertyLookup']           = $dir . 'includes/store/PropertyLookup.php';
 $wgAutoloadClasses['Wikibase\SiteLinkCache'] 			= $dir . 'includes/store/SiteLinkCache.php';
@@ -220,6 +222,7 @@ $wgAutoloadClasses['Wikibase\Test\EntitySerializerBaseTest']= $dir . 'tests/phpu
 $wgAutoloadClasses['Wikibase\Test\EntityTestCase']			= $dir . 'tests/phpunit/entity/EntityTestCase.php';
 $wgAutoloadClasses['Wikibase\Lib\Test\Serializers\UnserializerBaseTest'] = $dir . 'tests/phpunit/serializers/UnserializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\MockRepository'] 			= $dir . 'tests/phpunit/MockRepository.php';
+$wgAutoloadClasses['Wikibase\Test\MockChunkAccess'] 		= $dir . 'tests/phpunit/store/MockChunkAccess.php';
 $wgAutoloadClasses['Wikibase\Test\EntityLookupTest'] 		= $dir . 'tests/phpunit/EntityLookupTest.php';
 
 // TODO: this is not nice, figure out a better design
