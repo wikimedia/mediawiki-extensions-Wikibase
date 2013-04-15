@@ -74,6 +74,13 @@ class SnakRow {
 	/**
 	 * @return int
 	 */
+	public function getInternalSnakType() {
+		return 0; // TODO: implement
+	}
+
+	/**
+	 * @return int
+	 */
 	public function getSnakRole() {
 		return $this->snakRole;
 	}
