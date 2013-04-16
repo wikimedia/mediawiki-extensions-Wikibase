@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Duh1rP4g",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-16T16:45:44Z",
+      "side": 1,
+      "message": "This is really just for reference, and only useful in conjunction with the stats below. Maybe this section could even be removed...",
+      "revId": "a1b825ae27f31051e47150b409f0d6a734374ac6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dun1u.5g",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-16T16:45:44Z",
+      "side": 1,
+      "message": "This is not correct. It shows the dispatch state for three client wikis, the most lagged one, the least lagged one, and a median one.",
+      "revId": "a1b825ae27f31051e47150b409f0d6a734374ac6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
