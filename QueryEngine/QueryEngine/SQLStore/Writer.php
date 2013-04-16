@@ -2,21 +2,15 @@
 
 namespace Wikibase\QueryEngine\SQLStore;
 
-use RuntimeException;
 use Wikibase\Claim;
 use Wikibase\Database\QueryInterface;
 use Wikibase\Entity;
 use Wikibase\EntityId;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\QueryStoreWriter;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore;
-use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakStore;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakStore;
-use Wikibase\Snak;
 use Wikibase\SnakRole;
 
 /**

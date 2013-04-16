@@ -4,11 +4,10 @@ namespace Wikibase\Test\Query\SQLStore;
 
 use DataValues\StringValue;
 use Wikibase\Claim;
+use Wikibase\EntityId;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\SQLStore\ClaimInserter;
-use Wikibase\QueryEngine\SQLStore\ClaimRow;
-use Wikibase\QueryEngine\SQLStore\EntityIdMap;
 use Wikibase\Reference;
 use Wikibase\ReferenceList;
 use Wikibase\SnakList;
@@ -90,17 +89,6 @@ class ClaimInserterTest extends \PHPUnit_Framework_TestCase {
 	public function insertClaimProvider() {
 		$argLists = array();
 
-//		foreach ( $this->getClaims() as $claim ) {
-//			$argLists[] = array( new ClaimRow(
-//				null,
-//				$claim->getGuid(),
-//				1, // TODO
-//				2, // TODO
-//				$claim instanceof Statement ? $claim->getRank() : 3, // TODO
-//				$claim->getHash()
-//			) );
-//		}
-
 		foreach ( $this->getClaims() as $claim ) {
 			$argLists[] = array( $claim, 1, 2 );
 		}
@@ -115,7 +103,7 @@ class ClaimInserterTest extends \PHPUnit_Framework_TestCase {
 		$claimTable = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\ClaimsTable' )
 			->disableOriginalConstructor()->getMock();
 
-		//$claimTable->expects( $this->once() )->method( 'insertClaim' );
+		$claimTable->expects( $this->once() )->method( 'insertClaimRow' );
 
 		$snakInserter = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter' )
 			->disableOriginalConstructor()->getMock();
@@ -128,7 +116,7 @@ class ClaimInserterTest extends \PHPUnit_Framework_TestCase {
 
 		$claimInserter = new ClaimInserter( $claimTable, $snakInserter, $idFinder );
 
-		$claimInserter->insertClaim( $claim, $internalSubjectId, $internalPropertyId );
+		$claimInserter->insertClaim( $claim, new EntityId( 'item', 1 ) );
 
 		$this->assertTrue( true );
 	}

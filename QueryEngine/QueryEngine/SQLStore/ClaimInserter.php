@@ -3,7 +3,9 @@
 namespace Wikibase\QueryEngine\SQLStore;
 
 use Wikibase\Claim;
+use Wikibase\EntityId;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter;
+use Wikibase\Statement;
 
 /**
  * Use case for inserting snaks into the store.
@@ -35,16 +37,45 @@ class ClaimInserter {
 
 	protected $claimsTable;
 	protected $snakInserter;
-	protected $idFinder;
+	protected $claimRowBuilder;
 
 	public function __construct( ClaimsTable $claimsTable, SnakInserter $snakInserter, InternalEntityIdFinder $idFinder ) {
 		$this->claimsTable = $claimsTable;
 		$this->snakInserter = $snakInserter;
+		$this->claimRowBuilder = new ClaimRowBuilder( $idFinder ); // TODO
+	}
+
+	public function insertClaim( Claim $claim, EntityId $subjectId ) {
+		$claimRow = $this->claimRowBuilder->newClaimRow( $claim, $subjectId );
+		$this->claimsTable->insertClaimRow( $claimRow );
+	}
+
+}
+
+class ClaimRowBuilder {
+
+	protected $idFinder;
+
+	public function __construct( InternalEntityIdFinder $idFinder ) {
 		$this->idFinder = $idFinder;
 	}
 
-	public function insertClaim( Claim $claim ) {
+	public function newClaimRow( Claim $claim, EntityId $subjectId ) {
+		return new ClaimRow(
+			null,
+			$claim->getGuid(),
+			$this->getInternalIdFor( $claim->getPropertyId() ),
+			$this->getInternalIdFor( $subjectId ),
+			$claim instanceof Statement ? $claim->getRank() : 3, // TODO
+			$claim->getHash()
+		);
+	}
 
+	protected function getInternalIdFor( EntityId $entityId ) {
+		return $this->idFinder->getInternalIdForEntity(
+			$entityId->getEntityType(),
+			$entityId->getNumericId()
+		);
 	}
 
 }
