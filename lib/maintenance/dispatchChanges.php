@@ -524,6 +524,8 @@ class DispatchChanges extends \Maintenance {
 
 		try {
 
+			$this->trace( 'Loaded repo db master' );
+
 			// get client state
 			$state = $db->selectRow(
 				$this->stateTable,
@@ -533,12 +535,15 @@ class DispatchChanges extends \Maintenance {
 				array( 'FOR UPDATE' )
 			);
 
+			$this->trace( "Loaded dispatch changes row for $siteID" );
+
 			if ( !$state ) {
 				$this->log( "ERROR: $siteID is not in the dispatch table." );
 
 				wfProfileOut( __METHOD__ );
 				return false;
 			} else {
+				$this->trace( "Loading state for $siteID" );
 				// turn the row object into an array
 				$state = get_object_vars( $state );
 			}
@@ -575,6 +580,8 @@ class DispatchChanges extends \Maintenance {
 				wfProfileOut( __METHOD__ );
 				return false;
 			}
+
+			$this->trace( "Locked client $siteID" );
 
 			$state['chd_lock'] = $lock;
 			$state['chd_touched'] = wfTimestamp( TS_MW ); // XXX: use DB time
@@ -677,19 +684,28 @@ class DispatchChanges extends \Maintenance {
 	 *
 	 * @return String|bool The lock name if the lock was acquired, false otherwise.
 	 */
-	protected function getClientLock( $wikiDB, $lock = null ) {
+	protected function getClientLock( $wikiDB, $lockName = null ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( $lock === null ) {
-			$lock = $this->getClientLockName( $wikiDB );
+		$this->trace( "Trying to get client lock for $wikiDB" );
+
+		if ( $lockName === null ) {
+			$lockName = $this->getClientLockName( $wikiDB );
+			$this->trace( "Lock name not defined for $wikiDB. Got lock name $lockName." );
 		}
 
+		$this->trace( "Trying to get client master for $wikiDB" );
+
 		$db = $this->getClientMaster( $wikiDB );
-		$ok = $db->lock( $lock, __METHOD__ );
+
+		$ok = $db->lock( $lockName, __METHOD__ );
 		$this->releaseClientMaster( $wikiDB, $db );
 
+		$msg = $ok ? "Set lock for $wikiDB" : "Failed to set lock for $wikiDB";
+		$this->trace( $msg );
+
 		wfProfileOut( __METHOD__ );
-		return $ok ? $lock : false;
+		return $ok ? $lockName : false;
 	}
 
 	/**
@@ -807,6 +823,9 @@ class DispatchChanges extends \Maintenance {
 		}
 
 		wfProfileOut( __METHOD__ );
+
+		$this->trace( "Got pending changes." );
+
 		return array( $batch, $seen );
 	}
 
@@ -822,6 +841,8 @@ class DispatchChanges extends \Maintenance {
 	 * @return Change[] any changes matching the above criteria.
 	 */
 	public function selectChanges( $after, $limit ) {
+		$this->trace( "Selecting $limit changes." );
+
 		wfProfileIn( __METHOD__ );
 
 		$changes = $this->changesTable->selectObjects(
@@ -837,6 +858,9 @@ class DispatchChanges extends \Maintenance {
 		);
 
 		wfProfileOut( __METHOD__ );
+
+		$this->trace( "Selected $limit changes." );
+
 		return $changes;
 	}
 
@@ -893,7 +917,7 @@ class DispatchChanges extends \Maintenance {
 			}
 		}
 
-		$this->trace( "checking sitelinks to $siteID for " . count( $itemSet ) . " items." );
+		$this->trace( "Checking sitelinks to $siteID for " . count( $itemSet ) . " items." );
 
 		// find all sitelinks from those items to $siteID
 		// TODO: allow mock SiteLinkTable for testing!
@@ -910,7 +934,7 @@ class DispatchChanges extends \Maintenance {
 			$linkedItems[ $item ] = true;
 		}
 
-		$this->trace( "retaining changes for  " . count( $linkedItems ) . " relevant items." );
+		$this->trace( "Retaining changes for " . count( $linkedItems ) . " relevant items." );
 
 		// find all changes that relate to an item that has a sitelink to $siteID.
 		$keep = array();
@@ -929,7 +953,7 @@ class DispatchChanges extends \Maintenance {
 
 		$changes = $keep;
 
-		$this->trace( "found " . count( $changes ) . " changes for items with relevant sitelinks." );
+		$this->trace( "Found " . count( $changes ) . " changes for items with relevant sitelinks." );
 
 		wfProfileOut( __METHOD__ );
 		return $changes;
@@ -976,8 +1000,8 @@ class DispatchChanges extends \Maintenance {
 			throw new \MWException( "Failed to push to job queue for $wikiDB" );
 		}
 
-		$this->trace( "Posted notification job for " . count( $changes )
-			. " changes to $wikiDB for site $siteID." );
+		$this->trace( "Posted notification job for site $siteID with "
+			. count( $changes ) . " changes to $wikiDB." );
 
 		wfProfileOut( __METHOD__ );
 	}

@@ -125,6 +125,11 @@ class EditEntity {
 	const FILTERED = 32;
 
 	/**
+	 * Indicates that the edit exceeded a rate limit.
+	 */
+	const RATE_LIMIT = 64;
+
+	/**
 	 * bit mask for asking for any error.
 	 */
 	const ANY_ERROR = 0xFFFFFFFF;
@@ -548,6 +553,33 @@ class EditEntity {
 	}
 
 	/**
+	 * Checks the necessary permissions to perform this edit.
+	 * Per default, the 'edit' permission (and if needed, the 'create' permission) is checked.
+	 * Use addRequiredPermission() to check more permissions.
+	 *
+	 * @throws \PermissionsError if the user's permissions are not sufficient
+	 */
+	public function checkRateLimits() {
+		wfProfileIn( __METHOD__ );
+
+		$exceeded = false;
+
+		if ( $this->getUser()->pingLimiter( 'edit' ) ) {
+			$exceeded = true;
+		} else if ( $this->isNew() && $this->getUser()->pingLimiter( 'create' ) ) {
+			$exceeded = true;
+		}
+
+		if ( $exceeded ) {
+			$this->errorType |= self::RATE_LIMIT;
+			$this->status->fatal( 'actionthrottledtext' );
+		}
+
+		wfProfileOut( __METHOD__ );
+	}
+
+
+	/**
 	 * Make sure the given WebRequest contains a valid edit token.
 	 *
 	 * @param String $token the token to check
@@ -608,6 +640,15 @@ class EditEntity {
 		}
 
 		$this->checkEditPermissions();
+
+		$this->checkRateLimits(); // modifies $this->status
+
+		if ( !$this->status->isOK() ) {
+			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
+
+			wfProfileOut( __METHOD__ );
+			return $this->status;
+		}
 
 		//NOTE: Make sure the current revision is loaded and cached.
 		//      Would happen on demand anyway, but we want a well-defined point at which "current" is frozen
