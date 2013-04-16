@@ -99,22 +99,4 @@ class SetDescription extends ModifyLangAttribute {
 		);
 	}
 
-	/**
-	 * @see \ApiBase::getHelpUrls()
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetdescription';
-	}
-
-	/**
-	 * @see \ApiBase::getVersion
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WB_VERSION;
-	}
-
 }
