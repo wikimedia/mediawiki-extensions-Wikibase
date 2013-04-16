@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore;
+namespace Wikibase\Tests\QueryEngine\SQLStore;
 
 use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
 use Wikibase\Database\MediaWikiQueryInterface;
 use Wikibase\QueryEngine\SQLStore\Engine;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
 use Wikibase\Repo\LazyDBConnectionProvider;
-use Wikibase\Test\Query\QueryEngineTest;
+use Wikibase\Tests\QueryEngine\QueryEngineTest;
 
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\Engine class.

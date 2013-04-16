@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore;
+namespace Wikibase\Tests\QueryEngine\SQLStore;
 
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakInserter class.

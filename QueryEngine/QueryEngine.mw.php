@@ -46,19 +46,19 @@ foreach ( include( __DIR__ . '/QueryEngine.classes.php' ) as $class => $file ) {
 $dir = __DIR__ . '/';
 
 if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-	$wgAutoloadClasses['Wikibase\Test\Query\SQLStore\DataValueHandlerTest']
+	$wgAutoloadClasses['Wikibase\Tests\QueryEngine\SQLStore\DataValueHandlerTest']
 		= $dir . 'tests/phpunit/SQLStore/DataValueHandlerTest.php';
 
-	$wgAutoloadClasses['Wikibase\Test\Query\QueryEngineTest']
+	$wgAutoloadClasses['Wikibase\Tests\QueryEngine\QueryEngineTest']
 		= $dir . 'tests/phpunit/QueryEngineTest.php';
 
-	$wgAutoloadClasses['Wikibase\Test\Query\QueryStoreTest']
+	$wgAutoloadClasses['Wikibase\Tests\QueryEngine\QueryStoreTest']
 		= $dir . 'tests/phpunit/QueryStoreTest.php';
 
-	$wgAutoloadClasses['Wikibase\Test\Query\QueryStoreUpdaterTest']
+	$wgAutoloadClasses['Wikibase\Tests\QueryEngine\QueryStoreUpdaterTest']
 		= $dir . 'tests/phpunit/QueryStoreUpdaterTest.php';
 
-	$wgAutoloadClasses['Wikibase\Tests\Query\SQLStore\SnakStore\SnakStoreTest']
+	$wgAutoloadClasses['Wikibase\Tests\QueryEngine\SQLStore\SnakStore\SnakStoreTest']
 		= $dir . 'tests/phpunit/SQLStore/SnakStore/SnakStoreTest.php';
 }
 

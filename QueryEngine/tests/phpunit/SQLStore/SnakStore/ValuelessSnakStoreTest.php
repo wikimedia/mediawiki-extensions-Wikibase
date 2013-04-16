@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\Query\SQLStore\SnakStore;
+namespace Wikibase\Tests\QueryEngine\SQLStore\SnakStore;
 
 use DataValues\StringValue;
 use Wikibase\Database\QueryInterface;

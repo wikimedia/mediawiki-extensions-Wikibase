@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore\ClaimStore;
+namespace Wikibase\Tests\QueryEngine\SQLStore\ClaimStore;
 
 use DataValues\StringValue;
 use Wikibase\Claim;

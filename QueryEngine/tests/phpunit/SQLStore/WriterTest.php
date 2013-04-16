@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore;
+namespace Wikibase\Tests\QueryEngine\SQLStore;
 
 use Wikibase\Database\FieldDefinition;
 use Wikibase\Database\TableDefinition;
@@ -13,7 +13,7 @@ use Wikibase\QueryEngine\SQLStore\DataValueTable;
 use Wikibase\QueryEngine\SQLStore\Schema;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
 use Wikibase\QueryEngine\SQLStore\Writer;
-use Wikibase\Test\Query\QueryStoreUpdaterTest;
+use Wikibase\Tests\QueryEngine\QueryStoreUpdaterTest;
 
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\Updater class.

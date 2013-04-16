@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore;
+namespace Wikibase\Tests\QueryEngine\SQLStore;
 
 use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
 use Wikibase\Database\MediaWikiQueryInterface;

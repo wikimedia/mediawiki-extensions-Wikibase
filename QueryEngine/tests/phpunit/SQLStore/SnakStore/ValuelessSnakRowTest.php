@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore\SnakStore;
+namespace Wikibase\Tests\QueryEngine\SQLStore\SnakStore;
 
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
 use Wikibase\SnakRole;

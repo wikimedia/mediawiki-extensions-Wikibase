@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Query;
+namespace Wikibase\Tests\QueryEngine;
 
 use Wikibase\Item;
 use Wikibase\QueryEngine\QueryStoreWriter;

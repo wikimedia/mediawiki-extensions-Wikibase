@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore\DVHandler;
+namespace Wikibase\Tests\QueryEngine\SQLStore\DVHandler;
 
 use DataValues\GeoCoordinateValue;
 use Wikibase\QueryEngine\SQLStore\DataValueHandler;
 use Wikibase\QueryEngine\SQLStore\DataValueHandlers;
-use Wikibase\Test\Query\SQLStore\DataValueHandlerTest;
+use Wikibase\Tests\QueryEngine\SQLStore\DataValueHandlerTest;
 
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\DVHandler\GeoCoordinateHandler class.
