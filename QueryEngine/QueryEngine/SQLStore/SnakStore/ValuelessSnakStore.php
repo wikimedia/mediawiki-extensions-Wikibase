@@ -34,6 +34,7 @@ class ValuelessSnakStore extends SnakStore {
 
 	protected $queryInterface;
 	protected $tableName;
+<<<<<<< HEAD
 
 	public function __construct( QueryInterface $queryInterface, $tableName ) {
 		$this->queryInterface = $queryInterface;
@@ -42,11 +43,30 @@ class ValuelessSnakStore extends SnakStore {
 
 	public function canStore( SnakRow $snakRow ) {
 		return $snakRow instanceof ValuelessSnakRow;
+=======
+	protected $internalSnakType;
+
+	public function __construct( QueryInterface $queryInterface, $tableName, $internalSnakType ) {
+		$this->queryInterface = $queryInterface;
+		$this->tableName = $tableName;
+		$this->internalSnakType = $internalSnakType;
+	}
+
+	public function canStore( SnakRow $snakRow ) {
+		return $snakRow instanceof ValuelessSnakRow
+			&& $snakRow->getInternalSnakType() === $this->internalSnakType;
+>>>>>>> 07485f714592ca0dcc27c5af2d0628de8bb3f56f
 	}
 
 	public function storeSnakRow( SnakRow $snakRow ) {
 		if ( !$this->canStore( $snakRow ) ) {
+<<<<<<< HEAD
 			throw new InvalidArgumentException( 'Can only store ValuelessSnakRow in ValuelessSnakStore' );
+=======
+			throw new InvalidArgumentException(
+				"Can only store ValuelessSnakRow with internal snak type '$this->internalSnakType' in ValuelessSnakStore"
+			);
+>>>>>>> 07485f714592ca0dcc27c5af2d0628de8bb3f56f
 		}
 
 		/**
