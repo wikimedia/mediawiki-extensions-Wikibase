@@ -61,14 +61,7 @@ class TypedValueFormatter {
 		/**
 		 * @var ValueFormatter $valueFormatter
 		 */
-		$formattingResult = $valueFormatter->format( $dataValue );
-
-		if ( $formattingResult->isValid() ) {
-			return $formattingResult->getValue();
-		}
-
-		// TODO: implement: error message or other error handling
-		return 'ERROR: TODO: formatting failed';
+		return $valueFormatter->format( $dataValue );
 	}
 
 	private function evilGetEntityIdFormatter() {
