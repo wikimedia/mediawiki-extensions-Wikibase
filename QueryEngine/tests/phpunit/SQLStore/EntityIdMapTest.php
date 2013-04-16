@@ -60,4 +60,30 @@ class EntityIdMapTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $internalId, $obtainedId );
 	}
 
+	public function testAddOverrides() {
+		$idMap = new EntityIdMap();
+
+		$idMap->addId( 'foo', 1, 42 );
+		$idMap->addId( 'foo', 1, 1337 );
+
+		$this->assertEquals( 1337, $idMap->getInternalIdForEntity( 'foo', 1 ) );
+	}
+
+	/**
+	 * @dataProvider idProvider
+	 */
+	public function testGetNonSet( $entityType, $entityNumber, $internalId ) {
+		$idMap = new EntityIdMap();
+
+		$idMap->addId( 'foo', 1, 42 );
+		$idMap->addId( 'bar', 2, 1337 );
+		$idMap->addId( 'baz', 3, $internalId );
+		$idMap->addId( 'baz', $entityNumber, $internalId );
+		$idMap->addId( $entityType, 0, $internalId );
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+
+		$idMap->getInternalIdForEntity( $entityType, $entityNumber );
+	}
+
 }

@@ -2,6 +2,8 @@
 
 namespace Wikibase\QueryEngine\SQLStore;
 
+use OutOfBoundsException;
+
 /**
  * Map from external entity ids to internal entity ids.
  *
@@ -39,8 +41,16 @@ class EntityIdMap implements InternalEntityIdFinder {
 	 * @param int $entityNumber
 	 *
 	 * @return int
+	 * @throws OutOfBoundsException
 	 */
 	public function getInternalIdForEntity( $entityType, $entityNumber ) {
+		$idIsSet = array_key_exists( $entityType, $this->ids )
+			&& array_key_exists( $entityNumber, $this->ids[$entityType] );
+
+		if ( !$idIsSet ) {
+			throw new OutOfBoundsException( 'The requested id is not present in the EntityIdMap' );
+		}
+
 		return $this->ids[$entityType][$entityNumber];
 	}
 
