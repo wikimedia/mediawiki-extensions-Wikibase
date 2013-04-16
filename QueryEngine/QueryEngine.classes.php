@@ -36,6 +36,7 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\QueryStoreWriter',
 
 		'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter',
+		'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRowBuilder',
 		'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRow',
 		'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable',
 

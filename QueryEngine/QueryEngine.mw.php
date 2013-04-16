@@ -78,6 +78,7 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		'QueryEngineResult',
 
 		'SQLStore/ClaimStore/ClaimInserter',
+		'SQLStore/ClaimStore/ClaimRowBuilder',
 		'SQLStore/ClaimStore/ClaimRow',
 		'SQLStore/ClaimStore/ClaimsTable',
 

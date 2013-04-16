@@ -5,10 +5,10 @@ namespace Wikibase\QueryEngine\SQLStore\ClaimStore;
 use Wikibase\Claim;
 use Wikibase\EntityId;
 use Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder;
-use Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter;
+use Wikibase\Statement;
 
 /**
- * Use case for inserting snaks into the store.
+ * Builder for ClaimRow objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,21 +33,30 @@ use Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimInserter {
+class ClaimRowBuilder {
 
-	protected $claimsTable;
-	protected $snakInserter;
-	protected $claimRowBuilder;
+	protected $idFinder;
 
-	public function __construct( ClaimsTable $claimsTable, SnakInserter $snakInserter, InternalEntityIdFinder $idFinder ) {
-		$this->claimsTable = $claimsTable;
-		$this->snakInserter = $snakInserter;
-		$this->claimRowBuilder = new ClaimRowBuilder( $idFinder ); // TODO
+	public function __construct( InternalEntityIdFinder $idFinder ) {
+		$this->idFinder = $idFinder;
 	}
 
-	public function insertClaim( Claim $claim, EntityId $subjectId ) {
-		$claimRow = $this->claimRowBuilder->newClaimRow( $claim, $subjectId );
-		$this->claimsTable->insertClaimRow( $claimRow );
+	public function newClaimRow( Claim $claim, EntityId $subjectId ) {
+		return new ClaimRow(
+			null,
+			$claim->getGuid(),
+			$this->getInternalIdFor( $claim->getPropertyId() ),
+			$this->getInternalIdFor( $subjectId ),
+			$claim instanceof Statement ? $claim->getRank() : 3, // TODO
+			$claim->getHash()
+		);
+	}
+
+	protected function getInternalIdFor( EntityId $entityId ) {
+		return $this->idFinder->getInternalIdForEntity(
+			$entityId->getEntityType(),
+			$entityId->getNumericId()
+		);
 	}
 
 }

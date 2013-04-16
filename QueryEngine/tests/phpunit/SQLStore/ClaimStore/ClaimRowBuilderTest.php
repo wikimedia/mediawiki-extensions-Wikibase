@@ -7,14 +7,12 @@ use Wikibase\Claim;
 use Wikibase\EntityId;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
-use Wikibase\Reference;
-use Wikibase\ReferenceList;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRowBuilder;
 use Wikibase\SnakList;
 use Wikibase\Statement;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter class.
+ * Unit tests for the Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRowBuilder class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,7 +40,7 @@ use Wikibase\Statement;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimInserterTest extends \PHPUnit_Framework_TestCase {
+class ClaimRowBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function claimProvider() {
 		/**
@@ -54,28 +52,11 @@ class ClaimInserterTest extends \PHPUnit_Framework_TestCase {
 			new PropertyValueSnak( 42, new StringValue( 'NyanData' ) )
 		);
 
-		$claims[] = new Claim(
-			new PropertyNoValueSnak( 23 ),
-			new SnakList( array(
-				new PropertyValueSnak( 1337, new StringValue( 'NyanData' ) ),
-				new PropertyNoValueSnak( 9001 )
-			) )
-		);
-
 		$claims[] = new Statement(
 			new PropertyNoValueSnak( 1 ),
 			new SnakList( array(
 				new PropertyValueSnak( 2, new StringValue( 'NyanData' ) ),
 				new PropertyNoValueSnak( 3 )
-			) ),
-			new ReferenceList( array(
-				new Reference( new SnakList( array(
-					new PropertyValueSnak( 3, new StringValue( 'NyanData' ) ),
-				) ) ),
-				new Reference( new SnakList( array(
-					new PropertyValueSnak( 4, new StringValue( 'NyanData' ) ),
-					new PropertyValueSnak( 5, new StringValue( 'NyanData' ) ),
-				) ) )
 			) )
 		);
 
@@ -92,26 +73,23 @@ class ClaimInserterTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider claimProvider
 	 */
-	public function testInsertClaim( Claim $claim ) {
-		$claimTable = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable' )
-			->disableOriginalConstructor()->getMock();
-
-		$claimTable->expects( $this->once() )->method( 'insertClaimRow' );
-
-		$snakInserter = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter' )
-			->disableOriginalConstructor()->getMock();
-
+	public function testNewClaimRow( Claim $claim ) {
 		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\EntityIdMap' );
 		$idFinder->expects( $this->any() )
 			->method( 'getInternalIdForEntity' )
 			->will( $this->returnValue( 42 ) );
 
+		$builder = new ClaimRowBuilder( $idFinder );
 
-		$claimInserter = new ClaimInserter( $claimTable, $snakInserter, $idFinder );
+		$claimRow = $builder->newClaimRow( $claim, new EntityId( 'item', 1337 ) );
 
-		$claimInserter->insertClaim( $claim, new EntityId( 'item', 1 ) );
+		$this->assertEquals( 42, $claimRow->getInternalPropertyId() );
+		$this->assertEquals( 42, $claimRow->getInternalSubjectId() );
+		$this->assertEquals( 'some-claim-guid', $claimRow->getExternalGuid() );
+		$this->assertEquals( $claim->getHash(), $claimRow->getHash() );
+		$this->assertInternalType( 'int', $claimRow->getRank() );
 
-		$this->assertTrue( true );
+		$this->assertInstanceOf( 'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRow', $claimRow );
 	}
 
 }

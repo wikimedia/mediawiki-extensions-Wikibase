@@ -6,7 +6,7 @@ use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRow;
 use Wikibase\Statement;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\ClaimRow class.
+ * Unit tests for the Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRow class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
