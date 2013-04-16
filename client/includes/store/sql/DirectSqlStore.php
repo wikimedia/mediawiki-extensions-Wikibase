@@ -55,20 +55,75 @@ class DirectSqlStore implements ClientStore {
 	protected $repoWiki;
 
 	/**
-	 * @param string    $repoWiki the symbolic database name of the repo wiki
+	 * @var SiteLinkTable
+	 */
+	private $siteLinkTable = null;
+
+	/**
+	 * @var EntityUsageIndex
+	 */
+	private $entityUsageIndex = null;
+
+	/**
+	 * @param $repoWiki
 	 */
 	public function __construct( $repoWiki ) {
 		$this->repoWiki = $repoWiki;
 	}
 
 	/**
-	 * @see Store::newSiteLinkTable
+	 * @see Store::getEntityUsageIndex
 	 *
+	 * @since 0.4
+	 *
+	 * @return EntityUsageIndex
+	 */
+	public function getEntityUsageIndex() {
+		if ( !$this->entityUsageIndex ) {
+			$this->entityUsageIndex = $this->newEntityUsageIndex();
+		}
+
+		return $this->siteLinkTable;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return EntityUsageIndex
+	 */
+	protected function newEntityUsageIndex() {
+		return new EntityUsageIndex( $this->getSite(), $this->getSiteLinkTable() );
+	}
+
+	/**
+	 * @return null|\Site
+	 */
+	private function getSite() {
+		$site = \Sites::singleton()->getSite( Settings::get( 'siteGlobalID' ) );
+		return $site;
+	}
+
+	/**
+	 * @see Store::getSiteLinkTable
+	 *
+	 * @since 0.4
+	 *
+	 * @return SiteLinkLookup
+	 */
+	public function getSiteLinkTable() {
+		if ( !$this->siteLinkTable ) {
+			$this->siteLinkTable = $this->newSiteLinkTable();
+		}
+
+		return $this->siteLinkTable;
+	}
+
+	/**
 	 * @since 0.3
 	 *
 	 * @return SiteLinkLookup
 	 */
-	public function newSiteLinkTable() {
+	protected function newSiteLinkTable() {
 		return new SiteLinkTable( 'wb_items_per_site', true, $this->repoWiki );
 	}
 

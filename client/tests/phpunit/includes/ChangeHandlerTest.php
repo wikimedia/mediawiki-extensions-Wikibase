@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\ChangeHandler;
+use Wikibase\EntityUsageIndex;
 use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\EntityChange;
@@ -45,11 +46,15 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 		$this->site = \Sites::singleton()->getSite( 'enwiki' );
 
+		$repo = self::getMockRepo();
+		$usageIndex = new EntityUsageIndex( $this->site, $repo );
+
 		$this->updater = new MockPageUpdater();
-		$this->handler = new ChangeHandler( $this->updater,
-					self::getMockRepo(),
-					self::getMockRepo(),
-					$this->site );
+		$this->handler = new ChangeHandler(
+			$this->updater,
+			$repo,
+			$usageIndex,
+			$this->site );
 
 		$this->handler->setNamespaces( array( NS_MAIN ) );
 		$this->handler->setCheckPageExistence( false );
