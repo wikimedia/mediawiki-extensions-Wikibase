@@ -78,6 +78,14 @@ $messages['cs'] = array(
 	'version-datavalues' => 'DataValues',
 );
 
+/** Danish (dansk)
+ * @author Byrial
+ */
+$messages['da'] = array(
+	'datavalues-desc' => 'Samling af objekter som repræsenterer forskelige slags værdier',
+	'version-datavalues' => 'DataValues',
+);
+
 /** German (Deutsch)
  * @author Kghbln
  * @author Metalhead64
