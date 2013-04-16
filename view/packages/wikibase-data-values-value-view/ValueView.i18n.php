@@ -70,10 +70,13 @@ $messages['bn'] = array(
 );
 
 /** Danish (dansk)
+ * @author Byrial
  */
 $messages['da'] = array(
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Håndtering af "$1" dataværdier understøttes ikke endnu.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Håndtering af værdier for "$1" datatype understøttes ikke endnu.', # Fuzzy
+	'valueview-desc' => 'Brugergrænsefladekomponenter til at vise og redigere dataværdier',
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Håndtering af værdier af $1 understøttes ikke endnu.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Håndtering af værdier for datatypen $1 understøttes ikke endnu.',
+	'valueview-expert-emptyvalue-empty' => 'tom',
 );
 
 /** German (Deutsch)
@@ -208,12 +211,13 @@ $messages['ja'] = array(
 
 /** Korean (한국어)
  * @author Kwj2772
+ * @author 아라
  */
 $messages['ko'] = array(
 	'valueview-desc' => '데이터 값 표시와 편집을 위한 사용자 인터페이스 구성 요소',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '"$1" 값의 처리는 아직 지원하지 않습니다.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '"$1" 데이터 유형에 대한 값의 처리는 아직 지원하지 않습니다.',
-	'valueview-expert-emptyvalue-empty' => '비어 있음',
+	'valueview-expert-emptyvalue-empty' => '비었음',
 );
 
 /** Macedonian (македонски)
