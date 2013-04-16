@@ -1,8 +1,8 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore;
+namespace Wikibase\Test\Query\SQLStore\ClaimStore;
 
-use Wikibase\QueryEngine\SQLStore\ClaimRow;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRow;
 use Wikibase\Statement;
 
 /**

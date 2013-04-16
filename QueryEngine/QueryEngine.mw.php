@@ -77,6 +77,10 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	$testFiles = array(
 		'QueryEngineResult',
 
+		'SQLStore/ClaimStore/ClaimInserter',
+		'SQLStore/ClaimStore/ClaimRow',
+		'SQLStore/ClaimStore/ClaimsTable',
+
 		'SQLStore/DVHandler/BooleanHandler',
 		'SQLStore/DVHandler/EntityIdHandler',
 		'SQLStore/DVHandler/GeoCoordinateHandler',
@@ -91,9 +95,6 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		'SQLStore/SnakStore/ValuelessSnakRow',
 		'SQLStore/SnakStore/ValueSnakStore',
 
-		'SQLStore/ClaimInserter',
-		'SQLStore/ClaimRow',
-		'SQLStore/ClaimsTable',
 		'SQLStore/DataValueHandlers',
 		'SQLStore/DataValueHandler',
 		'SQLStore/Engine',

@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore;
+namespace Wikibase\Test\Query\SQLStore\ClaimStore;
 
 use DataValues\StringValue;
 use Wikibase\Claim;
 use Wikibase\EntityId;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\QueryEngine\SQLStore\ClaimInserter;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
 use Wikibase\Reference;
 use Wikibase\ReferenceList;
 use Wikibase\SnakList;
@@ -100,7 +100,7 @@ class ClaimInserterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider insertClaimProvider
 	 */
 	public function testInsertClaim( Claim $claim, $internalSubjectId, $internalPropertyId ) {
-		$claimTable = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\ClaimsTable' )
+		$claimTable = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable' )
 			->disableOriginalConstructor()->getMock();
 
 		$claimTable->expects( $this->once() )->method( 'insertClaimRow' );

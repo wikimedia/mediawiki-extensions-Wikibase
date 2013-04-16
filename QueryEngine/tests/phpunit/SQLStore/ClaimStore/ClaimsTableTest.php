@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Test\Query\SQLStore;
+namespace Wikibase\Test\Query\SQLStore\ClaimStore;
 
 use Wikibase\Database\QueryInterface;
-use Wikibase\QueryEngine\SQLStore\ClaimRow;
-use Wikibase\QueryEngine\SQLStore\ClaimsTable;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRow;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable;
 use Wikibase\Statement;
 
 /**

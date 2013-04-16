@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\QueryEngine\SQLStore;
+namespace Wikibase\QueryEngine\SQLStore\ClaimStore;
 
 /**
  * Represents a row in the claims table.

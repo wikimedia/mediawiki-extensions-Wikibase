@@ -35,6 +35,10 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\QueryStore',
 		'Wikibase\QueryEngine\QueryStoreWriter',
 
+		'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter',
+		'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRow',
+		'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable',
+
 		'Wikibase\QueryEngine\SQLStore\DVHandler\BooleanHandler',
 		'Wikibase\QueryEngine\SQLStore\DVHandler\EntityIdHandler',
 		'Wikibase\QueryEngine\SQLStore\DVHandler\GeoCoordinateHandler',
@@ -51,9 +55,6 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakStore',
 
-		'Wikibase\QueryEngine\SQLStore\ClaimInserter',
-		'Wikibase\QueryEngine\SQLStore\ClaimRow',
-		'Wikibase\QueryEngine\SQLStore\ClaimsTable',
 		'Wikibase\QueryEngine\SQLStore\DataValueHandlers',
 		'Wikibase\QueryEngine\SQLStore\DataValueHandler',
 		'Wikibase\QueryEngine\SQLStore\DataValueTable',

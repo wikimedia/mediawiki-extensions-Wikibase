@@ -1,9 +1,10 @@
 <?php
 
-namespace Wikibase\QueryEngine\SQLStore;
+namespace Wikibase\QueryEngine\SQLStore\ClaimStore;
 
 use Wikibase\Claim;
 use Wikibase\EntityId;
+use Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter;
 use Wikibase\Statement;
 

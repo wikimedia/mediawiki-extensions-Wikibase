@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\QueryEngine\SQLStore;
+namespace Wikibase\QueryEngine\SQLStore\ClaimStore;
 
 use InvalidArgumentException;
 use Wikibase\Database\QueryInterface;
