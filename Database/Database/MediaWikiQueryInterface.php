@@ -158,4 +158,15 @@ class MediaWikiQueryInterface implements QueryInterface {
 		) !== false;
 	}
 
+	/**
+	 * @see QueryInterface::getInsertionId
+	 *
+	 * @since 0.1
+	 *
+	 * @return int|null
+	 */
+	public function getInsertionId() {
+		return $this->getDB()->insertId();
+	}
+
 }

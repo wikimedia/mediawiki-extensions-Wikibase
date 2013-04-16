@@ -49,7 +49,8 @@ class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
 	protected function dropTablesIfStillThere() {
 		$queryInterface = $this->newInstance();
 
-		foreach ( array( 'differentfieldtypes', 'defaultfieldvalues', 'notnullfields' ) as $tableName ) {
+		foreach ( array( 'differentfieldtypes', 'defaultfieldvalues', 'notnullfields',
+					  'testinsert', 'testupdate', 'testdelete', 'testgetinsertid' ) as $tableName ) {
 			if ( $queryInterface->tableExists( $tableName ) ) {
 				$queryInterface->dropTable( $tableName );
 			}
@@ -258,6 +259,50 @@ class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
 		) );
 
 		// TODO: assert change
+
+		$this->assertTrue( $queryInterface->dropTable( $table->getName() ) );
+	}
+
+	public function testGetInsertId() {
+		$queryInterface = $this->newInstance();
+
+		$table = new TableDefinition( 'testgetinsertid', array(
+			new FieldDefinition(
+				'intfield',
+				FieldDefinition::TYPE_INTEGER,
+				FieldDefinition::NULL,
+				FieldDefinition::NO_DEFAULT,
+				FieldDefinition::NO_ATTRIB,
+				FieldDefinition::NO_INDEX,
+				FieldDefinition::AUTOINCREMENT
+			),
+			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, FieldDefinition::NOT_NULL ),
+		) );
+
+		$this->assertTrue( $queryInterface->createTable( $table ) );
+
+		$this->assertTrue( $queryInterface->insert(
+			$table->getName(),
+			array(
+				'textfield' => 'foobar baz',
+			)
+		) );
+
+		$firstInsertId = $queryInterface->getInsertionId();
+		$this->assertInternalType( 'int', $firstInsertId );
+
+		$this->assertTrue( $queryInterface->insert(
+			$table->getName(),
+			array(
+				'textfield' => 'onoez!',
+			)
+		) );
+
+		$secondInsertId = $queryInterface->getInsertionId();
+		$this->assertInternalType( 'int', $secondInsertId );
+
+		// TODO: implement AUTOINCREMENT support
+//		$this->assertNotEquals( $firstInsertId, $secondInsertId );
 
 		$this->assertTrue( $queryInterface->dropTable( $table->getName() ) );
 	}

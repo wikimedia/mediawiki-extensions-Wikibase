@@ -106,4 +106,15 @@ interface QueryInterface {
 	 */
 	public function delete( $tableName, array $conditions );
 
+	/**
+	 * The ID generated for an AUTO_INCREMENT column by the previous
+	 * query on success, 0 if the previous
+	 * query does not generate an AUTO_INCREMENT value.
+	 *
+	 * @since 0.1
+	 *
+	 * @return int
+	 */
+	public function getInsertionId();
+
 }
