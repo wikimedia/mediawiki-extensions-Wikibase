@@ -38,11 +38,14 @@ class SnakInserter {
 	 */
 	protected $snakStores;
 
+	protected $snakRowBuilder;
+
 	/**
 	 * @param SnakStore[] $snakStores
 	 */
-	public function __construct( array $snakStores ) {
+	public function __construct( array $snakStores, SnakRowBuilder $snakRowBuilder ) {
 		$this->snakStores = $snakStores;
+		$this->snakRowBuilder = $snakRowBuilder;
 	}
 
 	/**
@@ -51,16 +54,20 @@ class SnakInserter {
 	 * @param Snak $snak
 	 * @param int $snakRole
 	 * @param int $internalClaimId
-	 * @param int $internalPropertyId
 	 */
 	public function insertSnak( Snak $snak, $snakRole, $internalClaimId ) {
-//		foreach ( $this->snakStores as $snakStore ) {
-//			if ( $snakStore->canStore( $snakRow ) ) {
-//				$snakStore->storeSnakRow( $snakRow );
-//			}
-//		}
-//
-//		throw new RuntimeException( 'Cannot store the snak as there is no SnakStore that can handle it' );
+		$snakRow = $this->snakRowBuilder->newSnakRow( $snak, $snakRole, $internalClaimId );
+		$this->insertSnakRow( $snakRow );
+	}
+
+	protected function insertSnakRow( SnakRow $snakRow ) {
+		foreach ( $this->snakStores as $snakStore ) {
+			if ( $snakStore->canStore( $snakRow ) ) {
+				$snakStore->storeSnakRow( $snakRow );
+			}
+		}
+
+		throw new RuntimeException( 'Cannot store the snak as there is no SnakStore that can handle it' );
 	}
 
 }

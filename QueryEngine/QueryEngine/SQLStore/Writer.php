@@ -122,25 +122,6 @@ class Writer implements QueryStoreWriter {
 	}
 
 	/**
-	 * @param int $snakRole
-	 *
-	 * @return SnakStore[]
-	 */
-	private function getSnakStores( $snakRole ) {
-		return array(
-			new ValuelessSnakStore(
-				$this->queryInterface,
-				$this->schema->getValuelessSnaksTable()->getName()
-			),
-			new ValueSnakStore(
-				$this->queryInterface,
-				$this->schema->getDataValueHandlers( $snakRole )
-			)
-		);
-	}
-
-
-	/**
 	 * @see QueryStoreUpdater::updateEntity
 	 *
 	 * @since 0.1
