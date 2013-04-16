@@ -2,6 +2,7 @@
 
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
+use RuntimeException;
 use Wikibase\Snak;
 
 /**
@@ -52,7 +53,7 @@ class SnakInserter {
 	 * @param int $internalClaimId
 	 * @param int $internalPropertyId
 	 */
-	public function insertSnak( Snak $snak, $snakRole, $internalClaimId, $internalPropertyId ) {
+	public function insertSnak( Snak $snak, $snakRole, $internalClaimId ) {
 //		foreach ( $this->snakStores as $snakStore ) {
 //			if ( $snakStore->canStore( $snakRow ) ) {
 //				$snakStore->storeSnakRow( $snakRow );

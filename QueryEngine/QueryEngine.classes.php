@@ -50,6 +50,7 @@ return call_user_func( function() {
 
 		'Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\SnakRow',
+		'Wikibase\QueryEngine\SQLStore\SnakStore\SnakRowBuilder',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakStore',

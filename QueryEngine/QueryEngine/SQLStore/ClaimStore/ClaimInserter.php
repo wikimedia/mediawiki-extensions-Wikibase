@@ -47,26 +47,25 @@ class ClaimInserter {
 	}
 
 	public function insertClaim( Claim $claim, EntityId $subjectId ) {
-		$this->insertIntoClaimsTable( $claim, $subjectId );
-		$this->insertSnaks( $claim );
+		$internalClaimId = $this->insertIntoClaimsTable( $claim, $subjectId );
+		$this->insertSnaks( $claim, $internalClaimId );
 	}
 
 	protected function insertIntoClaimsTable( Claim $claim, EntityId $subjectId ) {
 		$claimRow = $this->claimRowBuilder->newClaimRow( $claim, $subjectId );
-		$this->claimsTable->insertClaimRow( $claimRow );
+		return $this->claimsTable->insertClaimRow( $claimRow ); // TODO: internal claim id
 	}
 
-	protected function insertSnaks( Claim $claim ) {
-		$this->insertSnak( $claim->getMainSnak(), SnakRole::MAIN_SNAK );
+	protected function insertSnaks( Claim $claim, $internalClaimId ) {
+		$this->insertSnak( $claim->getMainSnak(), SnakRole::MAIN_SNAK, $internalClaimId );
 
 		foreach ( $claim->getQualifiers() as $qualifier ) {
-			$this->insertSnak( $qualifier, SnakRole::QUALIFIER );
+			$this->insertSnak( $qualifier, SnakRole::QUALIFIER, $internalClaimId );
 		}
 	}
 
-	protected function insertSnak( Snak $snak, $snakRole ) {
-		// TODO: last two arguments
-		$this->snakInserter->insertSnak( $snak, $snakRole, 0 ,0 );
+	protected function insertSnak( Snak $snak, $snakRole, $internalClaimId ) {
+		$this->snakInserter->insertSnak( $snak, $snakRole, $internalClaimId );
 	}
 
 }
