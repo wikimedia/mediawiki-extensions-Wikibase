@@ -159,13 +159,13 @@ class MediaWikiQueryInterface implements QueryInterface {
 	}
 
 	/**
-	 * @see QueryInterface::getInsertionId
+	 * @see QueryInterface::getInsertId
 	 *
 	 * @since 0.1
 	 *
-	 * @return int|null
+	 * @return int
 	 */
-	public function getInsertionId() {
+	public function getInsertId() {
 		return $this->getDB()->insertId();
 	}
 

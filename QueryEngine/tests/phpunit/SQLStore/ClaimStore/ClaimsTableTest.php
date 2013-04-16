@@ -71,6 +71,10 @@ class ClaimsTableTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInsertClaimRow( ClaimRow $claimRow ) {
 		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
+		$queryInterface->expects( $this->once() )
+			->method( 'getInsertId' )
+			->will( $this->returnValue( 42 ) );
+
 		$table = $this->getInstance( $queryInterface );
 
 		$queryInterface->expects( $this->once() )
@@ -79,7 +83,9 @@ class ClaimsTableTest extends \PHPUnit_Framework_TestCase {
 				$this->equalTo( 'test_claims' )
 			);
 
-		$table->insertClaimRow( $claimRow );
+		$insertionId = $table->insertClaimRow( $claimRow );
+		$this->assertInternalType( 'int', $insertionId );
+		$this->assertEquals( 42, $insertionId );
 	}
 
 	public function testInsertRowWithId() {

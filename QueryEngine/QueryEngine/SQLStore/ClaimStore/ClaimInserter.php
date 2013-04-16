@@ -53,7 +53,7 @@ class ClaimInserter {
 
 	protected function insertIntoClaimsTable( Claim $claim, EntityId $subjectId ) {
 		$claimRow = $this->claimRowBuilder->newClaimRow( $claim, $subjectId );
-		return $this->claimsTable->insertClaimRow( $claimRow ); // TODO: internal claim id
+		return $this->claimsTable->insertClaimRow( $claimRow );
 	}
 
 	protected function insertSnaks( Claim $claim, $internalClaimId ) {

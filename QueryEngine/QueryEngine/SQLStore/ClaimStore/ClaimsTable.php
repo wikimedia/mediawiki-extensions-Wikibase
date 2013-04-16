@@ -57,6 +57,8 @@ class ClaimsTable {
 			$this->tableName,
 			$this->getWriteValues( $claimRow )
 		);
+
+		return $this->queryInterface->getInsertId();
 	}
 
 	protected function getWriteValues( ClaimRow $claimRow ) {

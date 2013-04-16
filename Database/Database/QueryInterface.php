@@ -115,6 +115,6 @@ interface QueryInterface {
 	 *
 	 * @return int
 	 */
-	public function getInsertionId();
+	public function getInsertId();
 
 }

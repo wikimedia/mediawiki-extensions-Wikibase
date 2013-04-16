@@ -288,7 +288,7 @@ class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
 			)
 		) );
 
-		$firstInsertId = $queryInterface->getInsertionId();
+		$firstInsertId = $queryInterface->getInsertId();
 		$this->assertInternalType( 'int', $firstInsertId );
 
 		$this->assertTrue( $queryInterface->insert(
@@ -298,7 +298,7 @@ class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
 			)
 		) );
 
-		$secondInsertId = $queryInterface->getInsertionId();
+		$secondInsertId = $queryInterface->getInsertId();
 		$this->assertInternalType( 'int', $secondInsertId );
 
 		// TODO: implement AUTOINCREMENT support
