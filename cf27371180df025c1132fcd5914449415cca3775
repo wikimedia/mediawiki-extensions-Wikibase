@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dut3P54o",
+        "filename": "lib/includes/ClaimDifference.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-16T17:21:41Z",
+      "side": 1,
+      "message": "A test case would be good for this.",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dul3kVxA",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-16T17:21:41Z",
+      "side": 1,
+      "message": "We really should have tests for this class. Would be unfair to require that for this change, but still...",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dul36F7w",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-16T17:21:41Z",
+      "side": 1,
+      "message": "!$claimDifference-\u003eisAtomic()",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Duv0K69I",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-16T17:21:41Z",
+      "side": 1,
+      "message": "party!!!",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dur0Uc-Q",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-16T17:21:41Z",
+      "side": 1,
+      "message": "we are limited to 255 chars total...",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dun3hG-8",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-16T17:21:41Z",
+      "side": 1,
+      "message": "Perhaps this should be public and have a unit test.",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Duh3u3.4",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-16T17:21:41Z",
+      "side": 1,
+      "message": "Would be nice if the tests for the API module would also check the AutoSummaries. Not required for this change, but would fit.",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
