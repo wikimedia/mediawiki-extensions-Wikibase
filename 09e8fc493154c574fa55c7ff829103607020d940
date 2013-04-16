@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "Duv3Dy.4",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-16T18:55:24Z",
+      "side": 1,
+      "message": "why no return null, would seem more consistent with other places returning Title which I know of.",
+      "revId": "09e8fc493154c574fa55c7ff829103607020d940",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dun1xG90",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 4
@@ -13,6 +30,23 @@
       "writtenOn": "2013-04-16T18:47:24Z",
       "side": 1,
       "message": "condition can be flipped",
+      "revId": "09e8fc493154c574fa55c7ff829103607020d940",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dup0UD04",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-16T18:55:24Z",
+      "side": 1,
+      "message": "Doesn\u0027t seem healty to putt all this watch list related stuff into EditEntity since the class is complicated enough already. Is there no other place this logic could go to?",
       "revId": "09e8fc493154c574fa55c7ff829103607020d940",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
