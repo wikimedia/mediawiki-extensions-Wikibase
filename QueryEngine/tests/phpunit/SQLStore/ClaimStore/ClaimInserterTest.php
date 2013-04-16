@@ -8,6 +8,7 @@ use Wikibase\EntityId;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRowBuilder;
 use Wikibase\Reference;
 use Wikibase\ReferenceList;
 use Wikibase\SnakList;
@@ -101,17 +102,28 @@ class ClaimInserterTest extends \PHPUnit_Framework_TestCase {
 		$snakInserter = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter' )
 			->disableOriginalConstructor()->getMock();
 
+		$snakInserter->expects( $this->exactly( $this->countClaimSnaks( $claim ) ) )->method( 'insertSnak' );
+
 		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\EntityIdMap' );
 		$idFinder->expects( $this->any() )
 			->method( 'getInternalIdForEntity' )
 			->will( $this->returnValue( 42 ) );
 
+		$claimRowBuilder = new ClaimRowBuilder( $idFinder );
 
-		$claimInserter = new ClaimInserter( $claimTable, $snakInserter, $idFinder );
+		$claimInserter = new ClaimInserter( $claimTable, $snakInserter, $claimRowBuilder );
 
 		$claimInserter->insertClaim( $claim, new EntityId( 'item', 1 ) );
+	}
 
-		$this->assertTrue( true );
+	private function countClaimSnaks( Claim $claim ) {
+		$snakCount = 1;
+
+		$snakCount += $claim->getQualifiers()->count();
+
+		// References are ignored as these are not inserted into the store at this point.
+
+		return $snakCount;
 	}
 
 }

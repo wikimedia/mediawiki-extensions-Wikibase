@@ -4,8 +4,9 @@ namespace Wikibase\QueryEngine\SQLStore\ClaimStore;
 
 use Wikibase\Claim;
 use Wikibase\EntityId;
-use Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter;
+use Wikibase\Snak;
+use Wikibase\SnakRole;
 
 /**
  * Use case for inserting snaks into the store.
@@ -39,15 +40,33 @@ class ClaimInserter {
 	protected $snakInserter;
 	protected $claimRowBuilder;
 
-	public function __construct( ClaimsTable $claimsTable, SnakInserter $snakInserter, InternalEntityIdFinder $idFinder ) {
+	public function __construct( ClaimsTable $claimsTable, SnakInserter $snakInserter, ClaimRowBuilder $claimRowBuilder ) {
 		$this->claimsTable = $claimsTable;
 		$this->snakInserter = $snakInserter;
-		$this->claimRowBuilder = new ClaimRowBuilder( $idFinder ); // TODO
+		$this->claimRowBuilder = $claimRowBuilder;
 	}
 
 	public function insertClaim( Claim $claim, EntityId $subjectId ) {
+		$this->insertIntoClaimsTable( $claim, $subjectId );
+		$this->insertSnaks( $claim );
+	}
+
+	protected function insertIntoClaimsTable( Claim $claim, EntityId $subjectId ) {
 		$claimRow = $this->claimRowBuilder->newClaimRow( $claim, $subjectId );
 		$this->claimsTable->insertClaimRow( $claimRow );
+	}
+
+	protected function insertSnaks( Claim $claim ) {
+		$this->insertSnak( $claim->getMainSnak(), SnakRole::MAIN_SNAK );
+
+		foreach ( $claim->getQualifiers() as $qualifier ) {
+			$this->insertSnak( $qualifier, SnakRole::QUALIFIER );
+		}
+	}
+
+	protected function insertSnak( Snak $snak, $snakRole ) {
+		// TODO: last two arguments
+		$this->snakInserter->insertSnak( $snak, $snakRole, 0 ,0 );
 	}
 
 }
