@@ -35,14 +35,15 @@ class ClaimInserter {
 
 	protected $claimsTable;
 	protected $snakInserter;
+	protected $idFinder;
 
-	// TODO: take EntityIdResolver
-	public function __construct( ClaimsTable $claimsTable, SnakInserter $snakInserter ) {
+	public function __construct( ClaimsTable $claimsTable, SnakInserter $snakInserter, InternalEntityIdFinder $idFinder ) {
 		$this->claimsTable = $claimsTable;
 		$this->snakInserter = $snakInserter;
+		$this->idFinder = $idFinder;
 	}
 
-	public function insertClaim( Claim $claim, $internalSubjectId, $internalPropertyId ) {
+	public function insertClaim( Claim $claim ) {
 
 	}
 

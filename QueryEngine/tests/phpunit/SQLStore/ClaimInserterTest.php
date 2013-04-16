@@ -8,6 +8,7 @@ use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\SQLStore\ClaimInserter;
 use Wikibase\QueryEngine\SQLStore\ClaimRow;
+use Wikibase\QueryEngine\SQLStore\EntityIdMap;
 use Wikibase\Reference;
 use Wikibase\ReferenceList;
 use Wikibase\SnakList;
@@ -119,7 +120,13 @@ class ClaimInserterTest extends \PHPUnit_Framework_TestCase {
 		$snakInserter = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter' )
 			->disableOriginalConstructor()->getMock();
 
-		$claimInserter = new ClaimInserter( $claimTable, $snakInserter );
+		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\EntityIdMap' );
+		$idFinder->expects( $this->any() )
+			->method( 'getInternalIdForEntity' )
+			->will( $this->returnValue( 42 ) );
+
+
+		$claimInserter = new ClaimInserter( $claimTable, $snakInserter, $idFinder );
 
 		$claimInserter->insertClaim( $claim, $internalSubjectId, $internalPropertyId );
 
