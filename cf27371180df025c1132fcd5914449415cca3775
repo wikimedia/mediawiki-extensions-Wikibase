@@ -54,6 +54,57 @@
     },
     {
       "key": {
+        "uuid": "Dul3Jt1o",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T17:53:11Z",
+      "side": 1,
+      "message": "Looks like the ClaimDiffer is something that should go into the constructor",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Duv25i8k",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T17:53:11Z",
+      "side": 1,
+      "message": "this thing is assigned to but then not passed out?",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dun3G.00",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T17:53:11Z",
+      "side": 1,
+      "message": "same here, ClaimDiffer to constructor",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dul36F7w",
         "filename": "repo/includes/ClaimSaver.php",
         "patchSetId": 3
@@ -65,6 +116,24 @@
       "writtenOn": "2013-04-16T17:21:41Z",
       "side": 1,
       "message": "!$claimDifference-\u003eisAtomic()",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Duj3Agy0",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T17:53:11Z",
+      "side": 1,
+      "message": "And drop the negation, flip if-else",
+      "parentUuid": "Dul36F7w",
       "revId": "cf27371180df025c1132fcd5914449415cca3775",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +174,57 @@
     },
     {
       "key": {
+        "uuid": "Dut3dpxI",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T17:53:11Z",
+      "side": 1,
+      "message": "The complexity of this method was low, now it is high. Please split it up properly.",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dur3sc8k",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T17:53:11Z",
+      "side": 1,
+      "message": "The abstraction levels of the method are also messed up now. It\u0027s now also doing low level summary tasks... This logic does not belong in this class at all. I figure you want to be able to test it without actually saving a claim? :)",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dup3nL.c",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T17:53:11Z",
+      "side": 1,
+      "message": "huh... so this is an array 3 levels deep...\n\nthe structure here looks odd, and not sure the documentation is correct\n\nwhy this nesting? Looks like you are actually only returning one DV or one string?",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dun3hG-8",
         "filename": "repo/includes/api/ModifyClaim.php",
         "patchSetId": 3
@@ -116,6 +236,24 @@
       "writtenOn": "2013-04-16T17:21:41Z",
       "side": 1,
       "message": "Perhaps this should be public and have a unit test.",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dup0Aj2w",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T17:53:11Z",
+      "side": 1,
+      "message": "do NOT make things public just so you can test them. That is wrong. Ask Toby, and I\u0027m sure he will tell you the exact same thing.\n\nbetter approach: put the code in question in its own class with a public method, which allows for testing and reuse elsewhere. Then have it injected here, or since the MW API sucks and this is not possible, pull it in somehow.\n\nthis is not the right place to put this logic anyway",
+      "parentUuid": "Dun3hG-8",
       "revId": "cf27371180df025c1132fcd5914449415cca3775",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
