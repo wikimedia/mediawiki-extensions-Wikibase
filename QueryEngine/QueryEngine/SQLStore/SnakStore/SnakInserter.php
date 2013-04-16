@@ -64,6 +64,7 @@ class SnakInserter {
 		foreach ( $this->snakStores as $snakStore ) {
 			if ( $snakStore->canStore( $snakRow ) ) {
 				$snakStore->storeSnakRow( $snakRow );
+				return;
 			}
 		}
 

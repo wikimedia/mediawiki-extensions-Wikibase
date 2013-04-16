@@ -3,13 +3,16 @@
 namespace Wikibase\Tests\QueryEngine\SQLStore;
 
 use DataValues\StringValue;
+use Wikibase\Database\FieldDefinition;
+use Wikibase\Database\QueryInterface;
+use Wikibase\Database\TableDefinition;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\QueryEngine\SQLStore\EntityIdMap;
+use Wikibase\QueryEngine\SQLStore\DVHandler\StringHandler;
+use Wikibase\QueryEngine\SQLStore\DataValueTable;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SnakRowBuilder;
-use Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakStore;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakStore;
 use Wikibase\Snak;
@@ -64,35 +67,57 @@ class SnakInserterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider snakProvider
 	 */
 	public function testInsertSnak( Snak $snak ) {
-		$snakInserter = $this->newInstance();
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
 
-		// TODO: asserts
-		//$snakInserter->insertSnak( $snak, SnakRole::MAIN_SNAK, 9001 );
+		$queryInterface
+			->expects( $this->once() )
+			->method( 'insert' )
+			->with( $this->equalTo( 'test_table' ) );
+
+		$snakInserter = $this->newInstance( $queryInterface );
+
+		$snakInserter->insertSnak( $snak, SnakRole::MAIN_SNAK, 9001 );
 	}
 
-	/**
-	 * @param int $snakRole
-	 *
-	 * @return SnakStore[]
-	 */
-	protected function getSnakStores( $snakRole ) {
+	protected function newInstance( QueryInterface $queryInterface ) {
+		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\EntityIdMap' );
+		$idFinder->expects( $this->any() )
+			->method( 'getInternalIdForEntity' )
+			->will( $this->returnValue( 42 ) );
+
+		return new SnakInserter(
+			$this->getSnakStores( $queryInterface ),
+			new SnakRowBuilder( $idFinder )
+		);
+	}
+
+	protected function getSnakStores( QueryInterface $queryInterface ) {
 		return array(
 			new ValuelessSnakStore(
-				$this->getMock( 'Wikibase\Database\QueryInterface' ),
+				$queryInterface,
 				'test_table'
 			),
 			new ValueSnakStore(
-				$this->getMock( 'Wikibase\Database\QueryInterface' ),
-				array()
+				$queryInterface,
+				array(
+					'string' => $this->newStringHandler()
+				)
 			)
 		);
 	}
 
-	protected function newInstance() {
-		return new SnakInserter(
-			$this->getSnakStores( SnakRole::MAIN_SNAK ),
-			new SnakRowBuilder( new EntityIdMap() )
-		);
+	protected function newStringHandler() {
+		return new StringHandler( new DataValueTable(
+			new TableDefinition(
+				'test_table',
+				array(
+					new FieldDefinition( 'value', FieldDefinition::TYPE_TEXT, false ),
+				)
+			),
+			'value',
+			'value',
+			'value'
+		) );
 	}
 
 }
