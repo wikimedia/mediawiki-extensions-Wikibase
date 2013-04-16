@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Duh0En8E",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2013-04-16T16:58:22Z",
+      "side": 1,
+      "message": "Until it\u0027s there, it\u0027s useful to explain it.  Of course I don\u0027t know if this is correct.",
+      "parentUuid": "Duh1rP4g",
+      "revId": "a1b825ae27f31051e47150b409f0d6a734374ac6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dun1u.5g",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-04-16T16:45:44Z",
       "side": 1,
       "message": "This is not correct. It shows the dispatch state for three client wikis, the most lagged one, the least lagged one, and a median one.",
+      "revId": "a1b825ae27f31051e47150b409f0d6a734374ac6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dut0uB0Q",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2013-04-16T16:58:22Z",
+      "side": 1,
+      "message": "So what\u0027s the ID for those three wikis?",
+      "parentUuid": "Dun1u.5g",
       "revId": "a1b825ae27f31051e47150b409f0d6a734374ac6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
