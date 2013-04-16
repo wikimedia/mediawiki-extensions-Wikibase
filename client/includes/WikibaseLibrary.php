@@ -94,7 +94,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getEntityId( $pageTitle = null ) {
 		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
 		$globalSiteId = \Wikibase\Settings::get( 'siteGlobalID' );
-		$table = WikibaseClient::getDefaultInstance()->getStore( 'sqlstore' )->newSiteLinkTable();
+		$table = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
 		if ( $table == null ) {
 			return array( null );
 		}

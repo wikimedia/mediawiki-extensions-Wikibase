@@ -33,6 +33,10 @@ use Wikibase\SiteLink;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseStore
+ *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

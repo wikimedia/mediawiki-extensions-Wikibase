@@ -34,13 +34,22 @@ namespace Wikibase;
 interface ClientStore {
 
 	/**
-	 * Returns a new SiteLinkLookup for this store.
+	 * Returns a SiteLinkLookup for this store.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @return SiteLinkLookup
 	 */
-	public function newSiteLinkTable();
+	public function getSiteLinkTable();
+
+	/**
+	 * Returns a EntityUsageIndex for this store.
+	 *
+	 * @since 0.4
+	 *
+	 * @return EntityUsageIndex
+	 */
+	public function getEntityUsageIndex();
 
 	/**
 	 * Returns a new EntityLookup for this store.
@@ -48,8 +57,6 @@ interface ClientStore {
 	 * @since 0.1
 	 *
 	 * @return EntityLookup
-	 *
-	 * @todo: rename to newEntityMirror
 	 */
 	public function getEntityLookup();
 
