@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "Duh15-ys",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T17:38:40Z",
+      "side": 1,
+      "message": "This class basically contains moved out behaviour from the SetClaim API module. The tests are still there, so this thing is covered. Now this initial split happened it is possible to refactor the tests as well and make them nicer since they will not longer require dealing w/ the API stuff.",
+      "parentUuid": "Dul3kVxA",
+      "revId": "cf27371180df025c1132fcd5914449415cca3775",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dul36F7w",
         "filename": "repo/includes/ClaimSaver.php",
         "patchSetId": 3
