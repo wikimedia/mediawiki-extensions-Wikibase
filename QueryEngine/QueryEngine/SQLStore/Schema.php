@@ -109,24 +109,37 @@ class Schema {
 	 * @param int $snakRole
 	 *
 	 * @return DataValueHandler
-	 * @throws OutOfRangeException
 	 * @throws OutOfBoundsException
 	 */
 	public function getDataValueHandler( $dataValueType, $snakRole ) {
-		$this->initialize();
+		$dataValueHandlers = $this->getDataValueHandlers( $snakRole );
 
-		if ( !array_key_exists( $snakRole, $this->dvHandlers ) ) {
-			throw new OutOfRangeException( 'Got an unsupported snak role' );
-		}
-
-		if ( !array_key_exists( $dataValueType, $this->dvHandlers[$snakRole] ) ) {
+		if ( !array_key_exists( $dataValueType, $dataValueHandlers ) ) {
 			throw new OutOfBoundsException(
 				'Requested a DataValuerHandler for DataValue type '
 					. "'$dataValueType' while no handler for this type is set"
 			);
 		}
 
-		return $this->dvHandlers[$snakRole][$dataValueType];
+		return $dataValueHandlers[$dataValueType];
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @param int $snakRole
+	 *
+	 * @return DataValueHandler[]
+	 * @throws OutOfRangeException
+	 */
+	public function getDataValueHandlers( $snakRole ) {
+		$this->initialize();
+
+		if ( !array_key_exists( $snakRole, $this->dvHandlers ) ) {
+			throw new OutOfRangeException( 'Got an unsupported snak role' );
+		}
+
+		return $this->dvHandlers[$snakRole];
 	}
 
 	/**

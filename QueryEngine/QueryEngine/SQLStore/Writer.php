@@ -2,12 +2,20 @@
 
 namespace Wikibase\QueryEngine\SQLStore;
 
+use RuntimeException;
 use Wikibase\Claim;
 use Wikibase\Database\QueryInterface;
 use Wikibase\Entity;
 use Wikibase\EntityId;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\QueryEngine\QueryStoreWriter;
+use Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakStore;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
+use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakStore;
 use Wikibase\Snak;
 use Wikibase\SnakRole;
 
@@ -120,30 +128,23 @@ class Writer implements QueryStoreWriter {
 	}
 
 	/**
-	 * @since 0.1
-	 *
-	 * @param Snak $snak
 	 * @param int $snakRole
-	 * @param int $internalClaimId
-	 * @param int $internalPropertyId
+	 *
+	 * @return SnakStore[]
 	 */
-	private function insertSnak( Snak $snak, $snakRole, $internalClaimId, $internalPropertyId ) {
-		if ( $snak instanceof PropertyValueSnak ) {
-			$this->insertPropertyValueSnak( $snak, $snakRole, $internalClaimId, $internalPropertyId );
-		}
-
-
-		// TODO
-	}
-
-	private function insertPropertyValueSnak( PropertyValueSnak $snak, $snakRole, $internalClaimId, $internalPropertyId ) {
-		$dataValueHandler = $this->schema->getDataValueHandler(
-			$snak->getDataValue()->getType(),
-			$snakRole
+	private function getSnakStores( $snakRole ) {
+		return array(
+			new ValuelessSnakStore(
+				$this->queryInterface,
+				$this->schema->getValuelessSnaksTable()->getName()
+			),
+			new ValueSnakStore(
+				$this->queryInterface,
+				$this->schema->getDataValueHandlers( $snakRole )
+			)
 		);
-
-		// TODO
 	}
+
 
 	/**
 	 * @see QueryStoreUpdater::updateEntity

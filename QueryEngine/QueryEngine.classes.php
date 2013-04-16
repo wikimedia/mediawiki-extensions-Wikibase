@@ -43,6 +43,7 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\SQLStore\DVHandler\NumberHandler',
 		'Wikibase\QueryEngine\SQLStore\DVHandler\StringHandler',
 
+		'Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\SnakRow',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow',
@@ -50,12 +51,15 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakRow',
 		'Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakStore',
 
+		'Wikibase\QueryEngine\SQLStore\ClaimInserter',
 		'Wikibase\QueryEngine\SQLStore\ClaimRow',
 		'Wikibase\QueryEngine\SQLStore\ClaimsTable',
 		'Wikibase\QueryEngine\SQLStore\DataValueHandlers',
 		'Wikibase\QueryEngine\SQLStore\DataValueHandler',
 		'Wikibase\QueryEngine\SQLStore\DataValueTable',
 		'Wikibase\QueryEngine\SQLStore\Engine',
+		'Wikibase\QueryEngine\SQLStore\EntityIdMap',
+		'Wikibase\QueryEngine\SQLStore\EntityIdResolver',
 		'Wikibase\QueryEngine\SQLStore\Schema',
 		'Wikibase\QueryEngine\SQLStore\Setup',
 		'Wikibase\QueryEngine\SQLStore\Store',
