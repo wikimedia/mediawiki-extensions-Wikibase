@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "Dur0tU0Y",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-16T17:04:49Z",
+      "side": 1,
+      "message": "It\u0027s correct. I was just thinking...",
+      "parentUuid": "Duh0En8E",
+      "revId": "a1b825ae27f31051e47150b409f0d6a734374ac6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dun1u.5g",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "So what\u0027s the ID for those three wikis?",
       "parentUuid": "Dun1u.5g",
+      "revId": "a1b825ae27f31051e47150b409f0d6a734374ac6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dul0j91k",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-16T17:04:49Z",
+      "side": 1,
+      "message": "It\u0027s the ID of the last change that got dispatched to that wiki. The number of pending changes and the lag time are calculated from that (the lag time is actually the time between the last dispatched change for that client wiki and the latest change on the repo).",
+      "parentUuid": "Dut0uB0Q",
       "revId": "a1b825ae27f31051e47150b409f0d6a734374ac6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
