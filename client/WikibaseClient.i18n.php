@@ -1174,6 +1174,7 @@ $messages['gu'] = array(
 /** Hebrew (עברית)
  * @author Amire80
  * @author ExampleTomer
+ * @author ערן
  */
 $messages['he'] = array(
 	'wikibase-client-desc' => 'לקוח להרחבה Wikibase',
@@ -1218,6 +1219,8 @@ $messages['he'] = array(
 	'wikibase-unconnectedpages-submit' => 'הרצה',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" אינו קוד שפה תקין.',
 	'wikibase-unconnectedpages-page-warning' => 'לא ניתן היה להשתמש בכותרת הדף לשאילתה והמערכת תתעלם ממנה.',
+	'wikibase-unconnectedpages-iwdata-label' => 'דפים עם קישורים לשפות אחרות',
+	'wikibase-unconnectedpages-format-row' => '($1  קישורים לשפות אחרות בדף)',
 );
 
 /** Hindi (हिन्दी)
@@ -2535,6 +2538,13 @@ $messages['uk'] = array(
 	'wikibase-linkitem-success-link' => "Сторінки було успішно пов'язано. Ви можете знайти елемент, який містить ці посилання, у нашому [$1 центральному сховищі даних].",
 	'wikibase-rc-hide-wikidata' => '$1 Вікідані',
 	'wikibase-rc-show-wikidata-pref' => 'Показати зміни Вікіданих у списку нових редагувань',
+);
+
+/** Urdu (اردو)
+ * @author Noor2020
+ */
+$messages['ur'] = array(
+	'wikibase-unconnectedpages-page' => 'نتائج فہرست اس صفحہ سے شروع کریں:',
 );
 
 /** Uzbek (oʻzbekcha)
