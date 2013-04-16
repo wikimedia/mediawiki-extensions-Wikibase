@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test\Query\SQLStore;
 
+use Wikibase\QueryEngine\SQLStore\EntityIdMap;
+
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\EntityIdMap class.
  *
@@ -33,6 +35,29 @@ namespace Wikibase\Test\Query\SQLStore;
  */
 class EntityIdMapTest extends \PHPUnit_Framework_TestCase {
 
+	public function idProvider() {
+		$argLists = array();
 
+		$argLists[] = array( 'item', 1, 1 );
+		$argLists[] = array( 'item', 4, 2 );
+		$argLists[] = array( 'item', 9001, 31337 );
+		$argLists[] = array( 'property', 42, 23 );
+		$argLists[] = array( 'foobar', 500, 7201010 );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider idProvider
+	 */
+	public function testAddAndGetId( $entityType, $entityNumber, $internalId ) {
+		$idMap = new EntityIdMap();
+
+		$idMap->addId( $entityType, $entityNumber, $internalId );
+
+		$obtainedId = $idMap->getInternalIdForEntity( $entityType, $entityNumber );
+
+		$this->assertEquals( $internalId, $obtainedId );
+	}
 
 }

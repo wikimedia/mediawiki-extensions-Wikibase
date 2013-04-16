@@ -59,7 +59,7 @@ return call_user_func( function() {
 		'Wikibase\QueryEngine\SQLStore\DataValueTable',
 		'Wikibase\QueryEngine\SQLStore\Engine',
 		'Wikibase\QueryEngine\SQLStore\EntityIdMap',
-		'Wikibase\QueryEngine\SQLStore\EntityIdResolver',
+		'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder',
 		'Wikibase\QueryEngine\SQLStore\Schema',
 		'Wikibase\QueryEngine\SQLStore\Setup',
 		'Wikibase\QueryEngine\SQLStore\Store',

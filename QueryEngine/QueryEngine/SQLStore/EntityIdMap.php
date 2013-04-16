@@ -3,7 +3,7 @@
 namespace Wikibase\QueryEngine\SQLStore;
 
 /**
- * Finds the internal entity id for the given external entity id.
+ * Map from external entity ids to internal entity ids.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,9 @@ namespace Wikibase\QueryEngine\SQLStore;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityIdCollection implements InternalEntityIdFinder {
+class EntityIdMap implements InternalEntityIdFinder {
+
+	protected $ids = array();
 
 	/**
 	 * @see InternalEntityIdFinder::getInternalIdForEntity
@@ -39,7 +41,21 @@ class EntityIdCollection implements InternalEntityIdFinder {
 	 * @return int
 	 */
 	public function getInternalIdForEntity( $entityType, $entityNumber ) {
-
+		return $this->ids[$entityType][$entityNumber];
 	}
+
+	/**
+	 * @param string $entityType
+	 * @param int $entityNumber
+	 * @param int $internalId
+	 */
+	public function addId( $entityType, $entityNumber, $internalId ) {
+		if ( !array_key_exists( $entityType, $this->ids ) ) {
+			$this->ids[$entityType] = array();
+		}
+
+		$this->ids[$entityType][$entityNumber] = $internalId;
+	}
+
 
 }
