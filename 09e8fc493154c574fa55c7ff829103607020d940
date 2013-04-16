@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dun1xG90",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T18:47:24Z",
+      "side": 1,
+      "message": "condition can be flipped",
+      "revId": "09e8fc493154c574fa55c7ff829103607020d940",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Duv1NC5s",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 964,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T18:47:24Z",
+      "side": 1,
+      "message": "we use // for comments",
+      "revId": "09e8fc493154c574fa55c7ff829103607020d940",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dut1IR44",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-16T18:47:24Z",
+      "side": 1,
+      "message": "why the brackets?",
+      "revId": "09e8fc493154c574fa55c7ff829103607020d940",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
