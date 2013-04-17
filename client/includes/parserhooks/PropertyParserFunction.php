@@ -148,7 +148,7 @@ class PropertyParserFunction {
 		wfProfileIn( __METHOD__ );
 		$site = \Sites::singleton()->getSite( Settings::get( 'siteGlobalID' ) );
 
-		$siteLinkLookup = ClientStoreFactory::getStore()->newSiteLinkTable();
+		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->newSiteLinkTable();
 		$entityId = $siteLinkLookup->getEntityIdForSiteLink(
 			new SiteLink( $site, $parser->getTitle()->getFullText() )
 		);

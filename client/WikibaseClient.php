@@ -94,7 +94,6 @@ $wgAutoloadClasses['SpecialUnconnectedPages']			= $dir . 'includes/specials/Spec
 
 // includes/store
 $wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
-$wgAutoloadClasses['Wikibase\ClientStoreFactory'] 	= $dir . 'includes/store/ClientStoreFactory.php';
 $wgAutoloadClasses['Wikibase\EntityCache'] 			= $dir . 'includes/store/EntityCache.php';
 
 // includes/store/sql
