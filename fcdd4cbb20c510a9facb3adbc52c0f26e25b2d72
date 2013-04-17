@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "Du.eFglw",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-17T16:54:16Z",
+      "side": 1,
+      "message": "Not so nice no stuff all of those inclusion in here just like that. To quote myself from patch set 8:\n\nI would suggest to create something like EasyRdf.classes.php which should just return an array of all required classes ( name \u003d\u003e relativepath ). The EasyRdf.php will reference this file and include them as it does not, when using EasyRdf in MediaWiki though, you can incluede EasyRdf.classes.php, iterate over the classes and register them with the proper class registration of MW. Basically something like:\n\n  $easyRdfPath \u003d \u0027xxx\u0027\n\n  foreach ( include( \"{$easyRdfPath}/EasyRdf.classes.php\" ) as $class \u003d\u003e $file ) {\n\n    $wgAutoloadClasses[ $class ] \u003d \"{$easyRdfPath}/{$file}\";\n\n  }",
+      "revId": "fcdd4cbb20c510a9facb3adbc52c0f26e25b2d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dtwj8Vgg",
         "filename": "repo/includes/content/LinkedDataSerializer.php",
         "patchSetId": 16
