@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DuwpSG94",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-04-17T19:28:49Z",
+      "side": 1,
+      "message": "this does not work... \"store/ChunkCache\" is good",
+      "revId": "0bb8d251f4e6e0d9e4ba5b64a16b5ba9d4c524e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
