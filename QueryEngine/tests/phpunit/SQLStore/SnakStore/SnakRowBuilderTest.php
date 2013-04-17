@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine\SQLStore\SnakStore;
+namespace Wikibase\QueryEngine\Tests\SQLStore\SnakStore;
 
 use DataValues\StringValue;
 use Wikibase\PropertyNoValueSnak;
@@ -71,7 +71,7 @@ class SnakRowBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider newSnakRowProvider
 	 */
 	public function testNewSnakRow( Snak $snak, $snakRole ) {
-		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\EntityIdMap' );
+		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' );
 		$idFinder->expects( $this->any() )
 			->method( 'getInternalIdForEntity' )
 			->will( $this->returnValue( 42 ) );

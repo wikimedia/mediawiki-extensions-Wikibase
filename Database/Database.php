@@ -35,4 +35,17 @@ if ( defined( 'MEDIAWIKI' ) ) {
 		require_once __DIR__ . '/Database.mw.php';
 	} );
 }
+else {
+	spl_autoload_register( function ( $className ) {
+		static $classes = false;
+
+		if ( $classes === false ) {
+			$classes = include( __DIR__ . '/' . 'Database.classes.php' );
+		}
+
+		if ( array_key_exists( $className, $classes ) ) {
+			include_once __DIR__ . '/' . $classes[$className];
+		}
+	} );
+}
 // @codeCoverageIgnoreEnd

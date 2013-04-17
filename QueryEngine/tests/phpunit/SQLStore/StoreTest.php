@@ -1,13 +1,12 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine\SQLStore;
+namespace Wikibase\QueryEngine\Tests\SQLStore;
 
 use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
 use Wikibase\Database\MediaWikiQueryInterface;
 use Wikibase\QueryEngine\SQLStore\Store;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
-use Wikibase\Repo\LazyDBConnectionProvider;
-use Wikibase\Tests\QueryEngine\QueryStoreTest;
+use Wikibase\QueryEngine\Tests\QueryStoreTest;
 
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\Store class.
@@ -46,7 +45,7 @@ class StoreTest extends QueryStoreTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$connectionProvider = new LazyDBConnectionProvider( DB_MASTER );
+		$connectionProvider = $this->getMock( 'Wikibase\Repo\DBConnectionProvider' );
 		$storeConfig = new StoreConfig( 'foo', 'bar', array() );
 		$queryInterface = new MediaWikiQueryInterface(
 			$connectionProvider,

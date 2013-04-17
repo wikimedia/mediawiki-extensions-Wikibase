@@ -46,13 +46,17 @@ class ClaimInserter {
 		$this->claimRowBuilder = $claimRowBuilder;
 	}
 
-	public function insertClaim( Claim $claim, EntityId $subjectId ) {
-		$internalClaimId = $this->insertIntoClaimsTable( $claim, $subjectId );
+	/**
+	 * @param Claim $claim
+	 * @param int $internalSubjectId
+	 */
+	public function insertClaim( Claim $claim, $internalSubjectId ) {
+		$internalClaimId = $this->insertIntoClaimsTable( $claim, $internalSubjectId );
 		$this->insertSnaks( $claim, $internalClaimId );
 	}
 
-	protected function insertIntoClaimsTable( Claim $claim, EntityId $subjectId ) {
-		$claimRow = $this->claimRowBuilder->newClaimRow( $claim, $subjectId );
+	protected function insertIntoClaimsTable( Claim $claim, $internalSubjectId ) {
+		$claimRow = $this->claimRowBuilder->newClaimRow( $claim, $internalSubjectId );
 		return $this->claimsTable->insertClaimRow( $claimRow );
 	}
 

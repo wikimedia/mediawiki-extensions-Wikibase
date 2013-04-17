@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine;
+namespace Wikibase\QueryEngine\Tests;
 
 use Wikibase\QueryEngine\QueryEngineResult;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\QueryEngineResult class.
+ * @covers Wikibase\QueryEngine\QueryEngineResult
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ use Wikibase\QueryEngine\QueryEngineResult;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class QueryEngineResultTest extends \MediaWikiTestCase {
+class QueryEngineResultTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @since 0.1
@@ -54,7 +54,13 @@ class QueryEngineResultTest extends \MediaWikiTestCase {
 	 * @return QueryEngineResult[][]
 	 */
 	public function instanceProvider() {
-		return $this->arrayWrap( $this->getInstances() );
+		$argLists = array();
+
+		foreach ( $this->getInstances() as $instance ) {
+			$argLists[] = array( $instance );
+		}
+
+		return $argLists;
 	}
 
 	/**

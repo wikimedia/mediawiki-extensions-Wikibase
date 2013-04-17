@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\QueryEngine\SQLStore;
+namespace Wikibase\QueryEngine\SQLStore\Engine;
 
 use Ask\Language\Description\Description;
 use Ask\Language\Option\QueryOptions;
@@ -8,6 +8,7 @@ use Ask\Language\Query;
 use Wikibase\Database\QueryInterface;
 use Wikibase\QueryEngine\QueryEngine;
 use Wikibase\QueryEngine\QueryEngineResult;
+use Wikibase\QueryEngine\SQLStore\StoreConfig;
 
 /**
  * Simple query engine that works on top of the SQLStore.

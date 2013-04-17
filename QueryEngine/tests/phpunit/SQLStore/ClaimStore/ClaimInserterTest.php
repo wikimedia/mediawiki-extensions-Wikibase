@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine\SQLStore\ClaimStore;
+namespace Wikibase\QueryEngine\Tests\SQLStore\ClaimStore;
 
 use DataValues\StringValue;
 use Wikibase\Claim;
@@ -104,7 +104,7 @@ class ClaimInserterTest extends \PHPUnit_Framework_TestCase {
 
 		$snakInserter->expects( $this->exactly( $this->countClaimSnaks( $claim ) ) )->method( 'insertSnak' );
 
-		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\EntityIdMap' );
+		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' );
 		$idFinder->expects( $this->any() )
 			->method( 'getInternalIdForEntity' )
 			->will( $this->returnValue( 42 ) );

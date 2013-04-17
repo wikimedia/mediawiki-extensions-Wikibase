@@ -2,10 +2,8 @@
 
 namespace Wikibase\QueryEngine\SQLStore;
 
-use OutOfBoundsException;
-
 /**
- * Map from external entity ids to internal entity ids.
+ * Transforms entity types and numbers into internal store ids.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,10 +27,18 @@ use OutOfBoundsException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Denny Vrandecic
  */
-class EntityIdMap implements InternalEntityIdFinder {
+class EntityIdTransformer implements InternalEntityIdFinder {
 
-	protected $ids = array();
+	protected $idMap;
+
+	/**
+	 * @param int[] $idMap Maps entity types (strings) to a unique one digit integer
+	 */
+	public function __construct( array $idMap ) {
+		$this->idMap = $idMap;
+	}
 
 	/**
 	 * @see InternalEntityIdFinder::getInternalIdForEntity
@@ -41,31 +47,21 @@ class EntityIdMap implements InternalEntityIdFinder {
 	 * @param int $entityNumber
 	 *
 	 * @return int
-	 * @throws OutOfBoundsException
 	 */
 	public function getInternalIdForEntity( $entityType, $entityNumber ) {
-		$idIsSet = array_key_exists( $entityType, $this->ids )
-			&& array_key_exists( $entityNumber, $this->ids[$entityType] );
+		$this->ensureEntityTypeIsKnown( $entityType );
 
-		if ( !$idIsSet ) {
-			throw new OutOfBoundsException( 'The requested id is not present in the EntityIdMap' );
-		}
-
-		return $this->ids[$entityType][$entityNumber];
+		return $this->getComputedId( $entityType, $entityNumber );
 	}
 
-	/**
-	 * @param string $entityType
-	 * @param int $entityNumber
-	 * @param int $internalId
-	 */
-	public function addId( $entityType, $entityNumber, $internalId ) {
-		if ( !array_key_exists( $entityType, $this->ids ) ) {
-			$this->ids[$entityType] = array();
+	protected function ensureEntityTypeIsKnown( $entityType ) {
+		if ( !array_key_exists( $entityType, $this->idMap ) ) {
+			throw new \OutOfBoundsException( "Id of unknown entity type '$entityType' cannot be transformed" );
 		}
-
-		$this->ids[$entityType][$entityNumber] = $internalId;
 	}
 
+	protected function getComputedId( $entityType, $entityNumber ) {
+		return $entityNumber * 10 + $this->idMap[$entityType];
+	}
 
 }

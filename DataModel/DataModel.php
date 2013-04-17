@@ -30,9 +30,22 @@
 define( 'WIKIBASE_DATAMODEL_VERSION', '0.4 alpha'  );
 
 // @codeCoverageIgnoreStart
-call_user_func( function() {
-	if ( defined( 'MEDIAWIKI' ) ) {
+if ( defined( 'MEDIAWIKI' ) ) {
+	call_user_func( function() {
 		require_once __DIR__ . '/DataModel.mw.php';
-	}
-} );
+	} );
+}
+else {
+	spl_autoload_register( function ( $className ) {
+		static $classes = false;
+
+		if ( $classes === false ) {
+			$classes = include( __DIR__ . '/' . 'DataModel.classes.php' );
+		}
+
+		if ( array_key_exists( $className, $classes ) ) {
+			include_once __DIR__ . '/' . $classes[$className];
+		}
+	} );
+}
 // @codeCoverageIgnoreEnd

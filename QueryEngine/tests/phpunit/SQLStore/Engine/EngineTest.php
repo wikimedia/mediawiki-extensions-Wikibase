@@ -1,16 +1,15 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine\SQLStore;
+namespace Wikibase\QueryEngine\Tests\SQLStore;
 
 use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
 use Wikibase\Database\MediaWikiQueryInterface;
-use Wikibase\QueryEngine\SQLStore\Engine;
+use Wikibase\QueryEngine\SQLStore\Engine\Engine;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
-use Wikibase\Repo\LazyDBConnectionProvider;
-use Wikibase\Tests\QueryEngine\QueryEngineTest;
+use Wikibase\QueryEngine\Tests\QueryEngineTest;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\Engine class.
+ * @covers Wikibase\QueryEngine\SQLStore\Engine\Engine
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,7 +45,7 @@ class EngineTest extends QueryEngineTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$connectionProvider = new LazyDBConnectionProvider( DB_MASTER );
+		$connectionProvider = $this->getMock( 'Wikibase\Repo\DBConnectionProvider' );
 		$storeConfig = new StoreConfig( 'foo', 'bar', array() );
 		$queryInterface = new MediaWikiQueryInterface(
 			$connectionProvider,

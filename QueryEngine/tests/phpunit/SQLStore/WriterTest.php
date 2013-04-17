@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine\SQLStore;
+namespace Wikibase\QueryEngine\Tests\SQLStore;
 
 use Wikibase\Database\FieldDefinition;
 use Wikibase\Database\TableDefinition;
@@ -13,11 +13,9 @@ use Wikibase\QueryEngine\SQLStore\DataValueTable;
 use Wikibase\QueryEngine\SQLStore\Schema;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
 use Wikibase\QueryEngine\SQLStore\Writer;
-use Wikibase\Tests\QueryEngine\QueryStoreUpdaterTest;
+use Wikibase\QueryEngine\Tests\QueryStoreUpdaterTest;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\Updater class.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -56,10 +54,10 @@ class WriterTest extends QueryStoreUpdaterTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$storeSchema = new Schema( new StoreConfig( 'foo', 'bar', array() ) );
-		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
+		$entityInserter = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\EntityInserter' )
+			->disableOriginalConstructor()->getMock();
 
-		$instances[] = new Writer( $storeSchema, $queryInterface );
+		$instances[] = new Writer( $entityInserter );
 
 		return $instances;
 	}
@@ -123,21 +121,14 @@ class WriterTest extends QueryStoreUpdaterTest {
 	 * @dataProvider entityWithoutClaimsProvider
 	 */
 	public function testInsertEntityWithoutClaims( Entity $entity ) {
-		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
+		$entityInserter = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\EntityInserter' )
+			->disableOriginalConstructor()->getMock();
 
-		$queryInterface->expects( $this->once() )
-			->method( 'insert' )
-			->with(
-				$this->equalTo( 'nyan_entities' ),
-				$this->equalTo(
-					array(
-						'type' => $entity->getType(),
-						'number' => $entity->getId()->getNumericId(),
-					)
-				)
-			);
+		$entityInserter->expects( $this->once() )
+			->method( 'insertEntity' )
+			->with( $this->equalTo( $entity ) );
 
-		$updater = new Writer( $this->newStoreSchema(), $queryInterface );
+		$updater = new Writer( $entityInserter );
 
 		$updater->insertEntity( $entity );
 	}

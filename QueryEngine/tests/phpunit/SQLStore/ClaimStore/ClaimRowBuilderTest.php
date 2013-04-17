@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine\SQLStore\ClaimStore;
+namespace Wikibase\QueryEngine\Tests\SQLStore\ClaimStore;
 
 use DataValues\StringValue;
 use Wikibase\Claim;
@@ -74,17 +74,17 @@ class ClaimRowBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider claimProvider
 	 */
 	public function testNewClaimRow( Claim $claim ) {
-		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\EntityIdMap' );
+		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' );
 		$idFinder->expects( $this->any() )
 			->method( 'getInternalIdForEntity' )
 			->will( $this->returnValue( 42 ) );
 
 		$builder = new ClaimRowBuilder( $idFinder );
 
-		$claimRow = $builder->newClaimRow( $claim, new EntityId( 'item', 1337 ) );
+		$claimRow = $builder->newClaimRow( $claim, 1337 );
 
 		$this->assertEquals( 42, $claimRow->getInternalPropertyId() );
-		$this->assertEquals( 42, $claimRow->getInternalSubjectId() );
+		$this->assertEquals( 1337, $claimRow->getInternalSubjectId() );
 		$this->assertEquals( 'some-claim-guid', $claimRow->getExternalGuid() );
 		$this->assertEquals( $claim->getHash(), $claimRow->getHash() );
 		$this->assertInternalType( 'int', $claimRow->getRank() );

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine\SQLStore;
+namespace Wikibase\QueryEngine\Tests\SQLStore;
 
 use DataValues\StringValue;
 use Wikibase\Database\FieldDefinition;
@@ -80,7 +80,7 @@ class SnakInserterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	protected function newInstance( QueryInterface $queryInterface ) {
-		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\EntityIdMap' );
+		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' );
 		$idFinder->expects( $this->any() )
 			->method( 'getInternalIdForEntity' )
 			->will( $this->returnValue( 42 ) );
@@ -101,7 +101,8 @@ class SnakInserterTest extends \PHPUnit_Framework_TestCase {
 				$queryInterface,
 				array(
 					'string' => $this->newStringHandler()
-				)
+				),
+				SnakRole::MAIN_SNAK
 			)
 		);
 	}
