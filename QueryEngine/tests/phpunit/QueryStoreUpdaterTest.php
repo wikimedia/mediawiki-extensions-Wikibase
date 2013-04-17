@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine;
+namespace Wikibase\QueryEngine\Tests;
 
 use Wikibase\Item;
 use Wikibase\QueryEngine\QueryStoreWriter;
@@ -31,7 +31,7 @@ use Wikibase\QueryEngine\QueryStoreWriter;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class QueryStoreUpdaterTest extends \MediaWikiTestCase {
+abstract class QueryStoreUpdaterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @since 0.1
@@ -46,7 +46,13 @@ abstract class QueryStoreUpdaterTest extends \MediaWikiTestCase {
 	 * @return QueryStoreWriter[][]
 	 */
 	public function instanceProvider() {
-		return $this->arrayWrap( $this->getInstances() );
+		$argLists = array();
+
+		foreach ( $this->getInstances() as $instance ) {
+			$argLists[] = array( $instance );
+		}
+
+		return $argLists;
 	}
 
 	/**

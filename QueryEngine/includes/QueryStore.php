@@ -44,7 +44,7 @@ interface QueryStore {
 	 * and is thus not always the same for a certain store type. For instance, you can
 	 * have "Wikibase SQL store" and "Wikibase SQL store for update to new config".
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @return string
 	 */
@@ -81,17 +81,6 @@ interface QueryStore {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function setup( MessageReporter $messageReporter );
-
-	/**
-	 * Drop (delete) all storage structures created by setup().
-	 *
-	 * @since 0.1
-	 *
-	 * @param MessageReporter $messageReporter
-	 *
-	 * @return boolean Success indicator
-	 */
-	public function drop( MessageReporter $messageReporter );
+	public function getSetup( MessageReporter $messageReporter );
 
 }

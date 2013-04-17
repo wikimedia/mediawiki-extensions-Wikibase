@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine\SQLStore\DVHandler;
+namespace Wikibase\QueryEngine\Tests\SQLStore\DVHandler;
 
 use DataValues\NumberValue;
 use Wikibase\QueryEngine\SQLStore\DataValueHandler;
 use Wikibase\QueryEngine\SQLStore\DataValueHandlers;
-use Wikibase\Tests\QueryEngine\SQLStore\DataValueHandlerTest;
+use Wikibase\QueryEngine\Tests\SQLStore\DataValueHandlerTest;
 
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\DVHandler\NumberHandler class.

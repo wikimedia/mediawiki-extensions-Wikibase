@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine;
+namespace Wikibase\QueryEngine\Tests;
 
 use Wikibase\QueryEngine\QueryEngine;
 
@@ -30,7 +30,7 @@ use Wikibase\QueryEngine\QueryEngine;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class QueryEngineTest extends \MediaWikiTestCase {
+abstract class QueryEngineTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @since 0.1
@@ -45,7 +45,13 @@ abstract class QueryEngineTest extends \MediaWikiTestCase {
 	 * @return QueryEngine[][]
 	 */
 	public function instanceProvider() {
-		return $this->arrayWrap( $this->getInstances() );
+		$argLists = array();
+
+		foreach ( $this->getInstances() as $instance ) {
+			$argLists[] = array( $instance );
+		}
+
+		return $argLists;
 	}
 
 	/**

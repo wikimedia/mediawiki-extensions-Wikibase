@@ -41,12 +41,12 @@ class ClaimRowBuilder {
 		$this->idFinder = $idFinder;
 	}
 
-	public function newClaimRow( Claim $claim, EntityId $subjectId ) {
+	public function newClaimRow( Claim $claim, $internalSubjectId ) {
 		return new ClaimRow(
 			null,
 			$claim->getGuid(),
+			$internalSubjectId,
 			$this->getInternalIdFor( $claim->getPropertyId() ),
-			$this->getInternalIdFor( $subjectId ),
 			$claim instanceof Statement ? $claim->getRank() : 3, // TODO
 			$claim->getHash()
 		);

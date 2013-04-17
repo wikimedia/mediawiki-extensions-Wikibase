@@ -28,38 +28,14 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-if ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
-	die( 'Not an entry point.' );
-}
-
 global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks;
 
 //$wgExtensionCredits['other'][] = include( __DIR__ . '/DataModel.credits.php' );
 
 //$wgExtensionMessagesFiles['WikibaseDataModel'] = __DIR__ . '/DataModel.i18n.php';
 
-// Autoloading
-foreach ( include( __DIR__ . '/QueryEngine.classes.php' ) as $class => $file ) {
-	$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
-}
-
-$dir = __DIR__ . '/';
-
 if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-	$wgAutoloadClasses['Wikibase\Tests\QueryEngine\SQLStore\DataValueHandlerTest']
-		= $dir . 'tests/phpunit/SQLStore/DataValueHandlerTest.php';
-
-	$wgAutoloadClasses['Wikibase\Tests\QueryEngine\QueryEngineTest']
-		= $dir . 'tests/phpunit/QueryEngineTest.php';
-
-	$wgAutoloadClasses['Wikibase\Tests\QueryEngine\QueryStoreTest']
-		= $dir . 'tests/phpunit/QueryStoreTest.php';
-
-	$wgAutoloadClasses['Wikibase\Tests\QueryEngine\QueryStoreUpdaterTest']
-		= $dir . 'tests/phpunit/QueryStoreUpdaterTest.php';
-
-	$wgAutoloadClasses['Wikibase\Tests\QueryEngine\SQLStore\SnakStore\SnakStoreTest']
-		= $dir . 'tests/phpunit/SQLStore/SnakStore/SnakStoreTest.php';
+	require_once __DIR__ . '/tests/testLoader.php';
 }
 
 /**
@@ -90,6 +66,8 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		'SQLStore/DVHandler/NumberHandler',
 		'SQLStore/DVHandler/StringHandler',
 
+		'SQLStore/Engine/Engine',
+
 		'SQLStore/SnakStore/SnakInserter',
 		'SQLStore/SnakStore/SnakRowBuilder',
 		'SQLStore/SnakStore/ValuelessSnakStore',
@@ -99,8 +77,9 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 
 		'SQLStore/DataValueHandlers',
 		'SQLStore/DataValueHandler',
-		'SQLStore/Engine',
-		'SQLStore/EntityIdMap',
+		'SQLStore/EntityIdTransformer',
+		'SQLStore/EntityInserter',
+		'SQLStore/Factory',
 		'SQLStore/Schema',
 		'SQLStore/Setup',
 		'SQLStore/Store',

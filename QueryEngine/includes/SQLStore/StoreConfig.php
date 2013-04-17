@@ -99,6 +99,17 @@ class StoreConfig {
 		return $this->dvHandlers;
 	}
 
-	// TODO
+	/**
+	 * Returns a map that maps entity type (string) to internal id postfix digit (int, unique).
+	 *
+	 * @since 0.1
+	 *
+	 * @return int[]
+	 */
+	public function getEntityTypeMap() {
+		return array(
+			'item' => 0,
+		);
+	}
 
 }

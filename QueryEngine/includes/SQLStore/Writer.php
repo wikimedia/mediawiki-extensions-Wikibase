@@ -7,6 +7,11 @@ use Wikibase\Database\QueryInterface;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\QueryEngine\QueryStoreWriter;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRowBuilder;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable;
+use Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter;
+use Wikibase\QueryEngine\SQLStore\SnakStore\SnakRowBuilder;
 use Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValueSnakStore;
 use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
@@ -41,29 +46,15 @@ use Wikibase\SnakRole;
  */
 class Writer implements QueryStoreWriter {
 
-	/**
-	 * @since 0.1
-	 *
-	 * @var Schema
-	 */
-	private $schema;
+	private $entityInserter;
 
 	/**
 	 * @since 0.1
 	 *
-	 * @var QueryInterface
+	 * @param EntityInserter $entityInserter
 	 */
-	private $queryInterface;
-
-	/**
-	 * @since 0.1
-	 *
-	 * @param Schema $schema
-	 * @param QueryInterface $queryInterface
-	 */
-	public function __construct( Schema $schema, QueryInterface $queryInterface ) {
-		$this->schema = $schema;
-		$this->queryInterface = $queryInterface;
+	public function __construct( EntityInserter $entityInserter ) {
+		$this->entityInserter = $entityInserter;
 	}
 
 	/**
@@ -74,51 +65,7 @@ class Writer implements QueryStoreWriter {
 	 * @param Entity $entity
 	 */
 	public function insertEntity( Entity $entity ) {
-		$this->insertIntoEntitiesTable( $entity );
-
-		// TODO: insert info of linked entities into entities table
-
-		foreach ( $entity->getClaims() as $claim ) {
-			$this->insertClaim( $entity->getId(), $claim );
-		}
-
-		// TODO: obtain and insert virtual claims
-	}
-
-	private function insertIntoEntitiesTable( Entity $entity ) {
-		$this->queryInterface->insert(
-			$this->schema->getEntitiesTable()->getName(),
-			array(
-				'type' => $entity->getType(),
-				'number' => $entity->getId()->getNumericId(),
-			)
-		);
-	}
-
-	/**
-	 * @since 0.1
-	 *
-	 * @param EntityId $entityId
-	 * @param Claim $claim
-	 */
-	private function insertClaim( EntityId $entityId, Claim $claim ) {
-		// TODO: insert claim info into claims table
-
-		$this->insertSnak(
-			$claim->getMainSnak(),
-			SnakRole::MAIN_SNAK,
-			42, // TODO
-			9001 // TODO
-		);
-
-		foreach ( $claim->getQualifiers() as $qualifierSnak ) {
-			$this->insertSnak(
-				$qualifierSnak,
-				SnakRole::QUALIFIER,
-				42, // TODO
-				9001 // TODO
-			);
-		}
+		$this->entityInserter->insertEntity( $entity );
 	}
 
 	/**
@@ -142,7 +89,5 @@ class Writer implements QueryStoreWriter {
 	public function deleteEntity( Entity $entity ) {
 		// TODO
 	}
-
-	// TODO: write methods
 
 }

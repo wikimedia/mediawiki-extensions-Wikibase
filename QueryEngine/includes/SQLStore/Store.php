@@ -6,6 +6,7 @@ use MessageReporter;
 use Wikibase\Database\QueryInterface;
 use Wikibase\Database\TableBuilder;
 use Wikibase\QueryEngine\QueryStore;
+use Wikibase\QueryEngine\SQLStore\Engine\Engine;
 
 /**
  * Simple query store for relational SQL databases.
@@ -59,12 +60,20 @@ class Store implements QueryStore {
 	/**
 	 * @since 0.1
 	 *
+	 * @var Factory
+	 */
+	private $factory;
+
+	/**
+	 * @since 0.1
+	 *
 	 * @param StoreConfig $config
 	 * @param QueryInterface $queryInterface
 	 */
 	public function __construct( StoreConfig $config, QueryInterface $queryInterface ) {
 		$this->config = $config;
 		$this->queryInterface = $queryInterface;
+		$this->factory = new Factory( $config, $queryInterface );
 	}
 
 	/**
@@ -97,7 +106,10 @@ class Store implements QueryStore {
 	 * @return \Wikibase\QueryEngine\QueryEngine
 	 */
 	public function getQueryEngine() {
-		return new Engine( $this->config, $this->queryInterface );
+		return new Engine(
+			$this->config,
+			$this->queryInterface
+		);
 	}
 
 	/**
@@ -108,37 +120,26 @@ class Store implements QueryStore {
 	 * @return \Wikibase\QueryEngine\QueryStoreWriter
 	 */
 	public function getUpdater() {
-		return new Writer( $this->config, $this->queryInterface );
+		return $this->factory->newWriter();
 	}
 
 	/**
-	 * @see QueryStore::setup
+	 * @see QueryStore::getSetup
 	 *
 	 * @since 0.1
 	 *
 	 * @param MessageReporter $messageReporter
 	 *
-	 * @return boolean Success indicator
+	 * @return Setup
 	 */
-	public function setup( MessageReporter $messageReporter ) {
-		$setup = new Setup( $this->config, $this->queryInterface, $this->tableBuilder, $messageReporter );
-
-		return $setup->install();
-	}
-
-	/**
-	 * @see QueryStore::drop
-	 *
-	 * @since 0.1
-	 *
-	 * @param MessageReporter $messageReporter
-	 *
-	 * @return boolean Success indicator
-	 */
-	public function drop( MessageReporter $messageReporter ) {
-		$setup = new Setup( $this->config, $this->queryInterface, $this->tableBuilder, $messageReporter );
-
-		return $setup->uninstall();
+	public function getSetup( MessageReporter $messageReporter ) {
+		return new Setup(
+			$this->config,
+			$this->factory->getSchema(),
+			$this->queryInterface,
+			$this->tableBuilder,
+			$messageReporter
+		);
 	}
 
 }

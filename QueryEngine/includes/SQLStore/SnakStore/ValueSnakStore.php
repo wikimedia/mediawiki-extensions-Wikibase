@@ -35,6 +35,7 @@ class ValueSnakStore extends SnakStore {
 
 	protected $queryInterface;
 	protected $dataValueHandlers;
+	protected $snakRole;
 
 	/**
 	 * The array of DataValueHandlers must have DataValue types as array keys pointing to
@@ -42,14 +43,17 @@ class ValueSnakStore extends SnakStore {
 	 *
 	 * @param QueryInterface $queryInterface
 	 * @param DataValueHandler[] $dataValueHandlers
+	 * @param int $supportedSnakRole
 	 */
-	public function __construct( QueryInterface $queryInterface, array $dataValueHandlers ) {
+	public function __construct( QueryInterface $queryInterface, array $dataValueHandlers, $supportedSnakRole ) {
 		$this->queryInterface = $queryInterface;
 		$this->dataValueHandlers = $dataValueHandlers;
+		$this->snakRole = $supportedSnakRole;
 	}
 
 	public function canStore( SnakRow $snakRow ) {
-		return $snakRow instanceof ValueSnakRow;
+		return ( $snakRow instanceof ValueSnakRow )
+			&& $this->snakRole === $snakRow->getSnakRole();
 	}
 
 	/**
@@ -68,7 +72,7 @@ class ValueSnakStore extends SnakStore {
 
 	public function storeSnakRow( SnakRow $snakRow ) {
 		if ( !$this->canStore( $snakRow ) ) {
-			throw new InvalidArgumentException( 'Can only store ValueSnakRow in ValueSnakStore' );
+			throw new InvalidArgumentException( 'Can only store ValueSnakRow of the right snak type in ValueSnakStore' );
 		}
 
 		/**

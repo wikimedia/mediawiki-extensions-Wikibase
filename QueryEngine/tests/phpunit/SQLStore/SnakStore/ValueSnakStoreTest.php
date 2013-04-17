@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine\SQLStore\SnakStore;
+namespace Wikibase\QueryEngine\Tests\SQLStore\SnakStore;
 
 use DataValues\StringValue;
 use Wikibase\Database\FieldDefinition;
@@ -49,7 +49,8 @@ class ValueSnakStoreTest extends SnakStoreTest {
 			$this->getMock( 'Wikibase\Database\QueryInterface' ),
 			array(
 				'string' => $this->newStringHandler()
-			)
+			),
+			SnakRole::MAIN_SNAK
 		);
 	}
 
@@ -69,14 +70,6 @@ class ValueSnakStoreTest extends SnakStoreTest {
 
 	public function canStoreProvider() {
 		$argLists = array();
-
-		$argLists[] = array( new ValueSnakRow(
-			new StringValue( 'nyan' ),
-			1,
-			1,
-			SnakRole::QUALIFIER,
-			0
-		) );
 
 		$argLists[] = array( new ValueSnakRow(
 			new StringValue( 'nyan' ),
@@ -121,6 +114,14 @@ class ValueSnakStoreTest extends SnakStoreTest {
 			SnakRole::MAIN_SNAK
 		) );
 
+		$argLists[] = array( new ValueSnakRow(
+			new StringValue( 'nyan' ),
+			1,
+			1,
+			SnakRole::QUALIFIER,
+			0
+		) );
+
 		return $argLists;
 	}
 
@@ -143,7 +144,8 @@ class ValueSnakStoreTest extends SnakStoreTest {
 			$queryInterface,
 			array(
 				'string' => $stringHandler
-			)
+			),
+			SnakRole::MAIN_SNAK
 		);
 
 		$store->storeSnakRow( $snakRow );
@@ -157,7 +159,8 @@ class ValueSnakStoreTest extends SnakStoreTest {
 
 		$store = new ValueSnakStore(
 			$this->getMock( 'Wikibase\Database\QueryInterface' ),
-			array()
+			array(),
+			SnakRole::MAIN_SNAK
 		);
 
 		$store->storeSnakRow( $snakRow );

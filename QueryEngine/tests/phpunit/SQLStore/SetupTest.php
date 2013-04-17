@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\QueryEngine\SQLStore;
+namespace Wikibase\QueryEngine\Tests\SQLStore;
 
 use Wikibase\Database\TableBuilder;
 use Wikibase\QueryEngine\SQLStore\DataValueHandlers;
