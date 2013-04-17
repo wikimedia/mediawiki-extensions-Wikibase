@@ -85,6 +85,13 @@ $messages['gl'] = array(
 	'wikibasequery-desc' => 'Engade capacidades de pescuda a Wikibase',
 );
 
+/** Italian (italiano)
+ * @author Beta16
+ */
+$messages['it'] = array(
+	'wikibasequery-desc' => 'Aggiunge le funzionalità di interrogazioni a Wikibase',
+);
+
 /** Japanese (日本語)
  * @author Shirayuki
  */

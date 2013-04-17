@@ -1755,7 +1755,7 @@ $messages['bn'] = array(
 	'wikibase-snakview-variations-novalue-label' => 'মান নেই',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'অজানা মান',
 	'wikibase-snakview-snaktypeselector-novalue' => 'মান নেই',
-	'wikibase-shortcopyrightwarning' => '"$1"-এ ক্লিকের মাধ্যমে, আপনি [[$2|ব্যবহারের শর্তাবলীর]] সাথে একমত হচ্ছেন, এবং $3-এর অধীনে আপনার অবদান প্রকাশে সম্মত হচ্ছেন।',
+	'wikibase-shortcopyrightwarning' => '"$1"-এ ক্লিক করার মাধ্যমে, আপনি [[$2|ব্যবহারের শর্তাবলীর]] সাথে একমত হচ্ছেন, এবং $3-এর অধীনে আপনার অবদান প্রকাশে সম্মত হচ্ছেন।',
 	'wikibase-copyrighttooltip-acknowledge' => 'আমি আমার ভবিষ্যত সম্পাদনাগুলি জন্য এই শর্তাবলী গ্রহণ করলাম। পুনরায় এই বার্তাটি দেখাবেন না।',
 	'wikibase-entityselector-more' => 'আরও',
 	'wikibase-anonymouseditwarning' => 'সতর্কতা: আপনি লগ ইন করেননি।
@@ -3614,6 +3614,7 @@ $messages['es'] = array(
 	'wikibase-undo-samerev' => 'No se puede deshacer, la revisión que se va a deshacer es la misma que la que va a quedar.',
 	'wikibase-undo-badpage' => 'Revisión incorrecta: La revisión $2 no pertenece a [[$1]].',
 	'wikibase-undo-firstrev' => 'No se puede deshacer la creación de la página',
+	'wikibase-undo-nocontent' => 'No se puede cargar el contenido de la revisión $2 de la página "$1"',
 	'wikibase-propertyedittool-full' => 'La lista de valores está completa.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Un valor aún no guardado|$1 valores aún no guardados}}',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|entrada|entradas}}',
@@ -4047,6 +4048,7 @@ Sinu IP-aadress talletatakse üksuse $1 ajaloos.',
 
 /** Basque (euskara)
  * @author An13sa
+ * @author Joxemai
  * @author Xabier Armendaritz
  * @author පසිඳු කාවින්ද
  */
@@ -4063,6 +4065,7 @@ $messages['eu'] = array(
 	'wikibase-itembytitle-submit' => 'Bilatu',
 	'wikibase-itemdisambiguation-lookup-language' => 'Hizkuntza:',
 	'wikibase-itemdisambiguation-submit' => 'Bilatu',
+	'wikibase-newentity-submit' => 'Sortu',
 	'wikibase-setlabel-label' => 'Etiketa:',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-restoreold' => 'leheneratu',
@@ -5160,13 +5163,13 @@ $messages['gl'] = array(
 	'wikibase-anonymouseditwarning' => 'Aviso: Non accedeu ao sistema.
 O seu enderezo IP quedará rexistrado no historial de revisións da entidade "$1".',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta páxina está protexida. Non se permite a edición.',
-	'wikibase-blockeduser-tooltip-message' => 'Está bloqueado fronte á edición.',
+	'wikibase-blockeduser-tooltip-message' => 'Está bloqueado fronte á edición.', # Fuzzy
 	'wikibase-move-error' => 'Non pode trasladar as páxinas que se atopan no espazo de nomes de datos, e tampouco pode mover páxinas a este espazo de nomes.',
 	'wikibase-warning-constraint-violation-length' => 'Activouse unha restrición de lonxitude para o código de lingua "$1".',
 	'wikibase-error-constraint-violation-label' => 'Hai unha violación {{PLURAL:$1|da restrición|das restricións}} para {{PLURAL:$1|a etiqueta|as etiquetas}} "$3" {{PLURAL:$1|no código|nos códigos}} de lingua "$2".',
 	'wikibase-error-constraint-violation-description' => 'Hai unha violación {{PLURAL:$1|da restrición|das restricións}} para {{PLURAL:$1|a descrición|as descricións}} "$3" {{PLURAL:$1|no código|nos códigos}} de lingua "$2".',
 	'wikibase-error-constraint-violation-aliases' => 'Hai unha violación {{PLURAL:$1|da restrición|das restricións}} para {{PLURAL:$1|o pseudónimo|os pseudónimos}} "$3" {{PLURAL:$1|no código|nos códigos}} de lingua "$2".',
-	'wikibase-error-sitelink-already-used' => 'O elemento [[$3]] xa utiliza a ligazón do sitio [[$1:$2]].',
+	'wikibase-error-sitelink-already-used' => 'O elemento [[$3]] xa utiliza a ligazón de sitio [[$1:$2]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Outra propiedade ($3) xa ten a etiqueta "$1" asociada ao código de lingua $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Outra pescuda ($3) xa ten a etiqueta "$1" asociada ao código de lingua $2',
 	'wikibase-error-label-not-unique-item' => 'Outro elemento ($3) xa ten a etiqueta "$1" e a descrición "$4" asociadas ao código de lingua $2',
@@ -5199,7 +5202,7 @@ O seu enderezo IP quedará rexistrado no historial de revisións da entidade "$1
 	'wikibase-newitem-site' => 'Sitio da primeira páxina ligada',
 	'wikibase-newitem-page' => 'Nome da primeira páxina ligada',
 	'wikibase-newitem-no-external-page' => 'Non se puido atopar a páxina especificada no sitio correspondente.',
-	'wikibase-newitem-add-sitelink-failed' => 'Non se puido gardar a ligazón do sitio.',
+	'wikibase-newitem-add-sitelink-failed' => 'Non se puido gardar a ligazón de sitio.',
 	'wikibase-newitem-not-recognized-siteid' => 'Non se recoñeceu o identificador de sitio especificado.',
 	'wikibase-newentity-label' => 'Etiqueta:',
 	'wikibase-newentity-description' => 'Descrición:',
@@ -7158,7 +7161,7 @@ $messages['it'] = array(
 	'wikibase-anonymouseditwarning' => 'Attenzione: Accesso non effettuato.
 Nella cronologia di $1 verrà registrato il tuo indirizzo IP.',
 	'wikibase-restrictionedit-tooltip-message' => 'Questa pagina è protetta, la modifica non è consentita.',
-	'wikibase-blockeduser-tooltip-message' => 'Sei stato bloccato, non puoi fare modifiche.', # Fuzzy
+	'wikibase-blockeduser-tooltip-message' => "Non hai il permesso di modifica, perché il tuo nome utente o l'indirizzo IP è stato bloccato.",
 	'wikibase-move-error' => 'Non è possibile spostare le pagine che sono nel namespace dei dati e non è possibile spostare le pagine in esso.',
 	'wikibase-warning-constraint-violation-length' => 'Un vincolo di lunghezza è stato attivato per il codice di lingua "$1".',
 	'wikibase-error-constraint-violation-label' => 'Si è verificata la violazione di {{PLURAL:$1|un vincolo|vincoli}} {{PLURAL:$1|nell\'etichetta|nelle etichette}} "$3" per {{PLURAL:$1|il codice di lingua|i codici di lingua}} "$2".',
@@ -9615,7 +9618,7 @@ $messages['nl'] = array(
 	'wikibase-anonymouseditwarning' => 'Waarschuwing: u bent niet aangemeld.
 Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van de entiteit $1.',
 	'wikibase-restrictionedit-tooltip-message' => 'Deze pagina is beveiligd, bewerken is niet toegestaan.',
-	'wikibase-blockeduser-tooltip-message' => 'U bent geblokkeerd en kunt niet bewerken.', # Fuzzy
+	'wikibase-blockeduser-tooltip-message' => 'U kunt geen bewerkingen uitvoeren omdat uw gebruikersnaam of IP-adres geblokkeerd is.',
 	'wikibase-move-error' => "U kunt pagina's in de gegevensnaamruimte niet hernoemen en u kunt er geen pagina naartoe hernoemen.",
 	'wikibase-warning-constraint-violation-length' => 'Er is een lengtebeperking geactiveerd voor de taalcode "$1".',
 	'wikibase-error-constraint-violation-label' => 'Er {{PLURAL:$1|is een overschrijding van een beperking voor het label|zijn overschrijdingen van beperkingen voor de labels}} "$3" voor {{PLURAL:$1|taalcode|taalcodes}} "$2".',
