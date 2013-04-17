@@ -6,7 +6,6 @@ use DataTypes\DataTypeFactory;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\ClientStore;
-use Wikibase\ClientStoreFactory;
 use Wikibase\EntityLookup;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
@@ -42,6 +41,7 @@ use Wikibase\Test\MockRepository;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 final class WikibaseClient {
 
@@ -56,6 +56,8 @@ final class WikibaseClient {
 	protected $entityIdParser = null;
 
 	protected $isInTestMode;
+
+	private $storeInstances = array();
 
 	/**
 	 * @since 0.4
@@ -171,13 +173,48 @@ final class WikibaseClient {
 		);
 	}
 
+
 	/**
-	 * @since 0.4
+	 * Returns an instance of the default store, or an alternate store
+	 * if so specified with the $store argument.
+	 *
+	 * @since 0.1
+	 *
+	 * @param boolean|string $store
+	 * @param string         $reset set to 'reset' to force a fresh instance to be returned.
 	 *
 	 * @return ClientStore
 	 */
-	public function getStore() {
-		return ClientStoreFactory::getStore();
+	public function getStore( $store = false, $reset = 'no' ) {
+		global $wgWBClientStores; //XXX: still using a global here
+
+		if ( $store === false || !array_key_exists( $store, $wgWBClientStores ) ) {
+			$store = $this->settings->getSetting( 'defaultClientStore' ); // still false per default
+		}
+
+		if ( !$store ) {
+			//XXX: this is a rather ugly "magic" default.
+			if ( $this->settings->getSetting( 'repoDatabase' ) ) {
+				$store = 'DirectSqlStore';
+			} else {
+				$store = 'CachingSqlStore';
+			}
+		}
+
+		$class = $wgWBClientStores[$store];
+
+		if ( $reset !== true && $reset !== 'reset'
+			&& isset( $this->storeInstances[$store] ) ) {
+
+			return $this->storeInstances[$store];
+		}
+
+		$instance = new $class( $this->settings->getSetting( 'repoDatabase' ) );
+
+		assert( $instance instanceof ClientStore );
+
+		$this->storeInstances[$store] = $instance;
+		return $instance;
 	}
 
 	/**
@@ -201,4 +238,21 @@ final class WikibaseClient {
 		return new self( Settings::singleton(), defined( 'MW_PHPUNIT_TEST' ) );
 	}
 
+	/**
+	 * Returns the default instance constructed using newInstance().
+	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
+	 *
+	 * @since 0.4
+	 *
+	 * @return WikibaseClient
+	 */
+	public static function getDefaultInstance() {
+		static $instance = null;
+
+		if ( !$instance ) {
+			$instance = self::newInstance();
+		}
+
+		return $instance;
+	}
 }

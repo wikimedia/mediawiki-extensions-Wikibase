@@ -25,6 +25,7 @@
  */
 
 use ValueParsers\ParseException;
+use Wikibase\Client\WikibaseClient;
 
 class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
@@ -62,7 +63,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			throw $this->getEngine()->newException( 'wikibase-error-invalid-entity-id' );
 		}
 
-		$entityObject = Wikibase\ClientStoreFactory::getStore()->getEntityLookup()->getEntity(
+		$entityObject = WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup()->getEntity(
 			$entityId
 		);
 
@@ -92,7 +93,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getEntityId( $pageTitle = null ) {
 		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
 		$globalSiteId = \Wikibase\Settings::get( 'siteGlobalID' );
-		$table = \Wikibase\ClientStoreFactory::getStore( 'sqlstore' )->newSiteLinkTable();
+		$table = WikibaseClient::getDefaultInstance()->getStore( 'sqlstore' )->newSiteLinkTable();
 		if ( $table == null ) {
 			return array( null );
 		}

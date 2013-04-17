@@ -1,6 +1,8 @@
 <?php
 namespace Wikibase;
 
+use \Wikibase\Client\WikibaseClient;
+
 /**
  * File defining the hook handlers for the Wikibase Client extension.
  *
@@ -112,7 +114,7 @@ final class ClientHooks {
 	public static function onWikibaseDeleteData( $reportMessage ) {
 		wfProfileIn( __METHOD__ );
 
-		$store = ClientStoreFactory::getStore();
+		$store = WikibaseClient::getDefaultInstance()->getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
 
 		$reportMessage( "Deleting data from the " . $stores[get_class( $store )] . " store..." );
@@ -147,7 +149,7 @@ final class ClientHooks {
 	public static function onWikibaseRebuildData( $reportMessage ) {
 		wfProfileIn( __METHOD__ );
 
-		$store = ClientStoreFactory::getStore();
+		$store = WikibaseClient::getDefaultInstance()->getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
 		$reportMessage( "Rebuilding all data in the " . $stores[get_class( $store )] . " store on the client..." );
 		$store->rebuild();
@@ -178,7 +180,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSpecialMovepageAfterMove( \MovePageForm $movePage, \Title &$oldTitle, \Title &$newTitle ) {
-		$siteLinkCache = ClientStoreFactory::getStore()->newSiteLinkTable();
+		$siteLinkCache = WikibaseClient::getDefaultInstance()->getStore()->newSiteLinkTable();
 		$globalId = Settings::get( 'siteGlobalID' );
 		$itemId = $siteLinkCache->getItemIdForLink(
 			$globalId,
@@ -374,7 +376,7 @@ final class ClientHooks {
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
 			Settings::get( 'excludeNamespaces' ),
-			ClientStoreFactory::getStore()->newSiteLinkTable(),
+			WikibaseClient::getDefaultInstance()->getStore()->newSiteLinkTable(),
 			\Sites::singleton() );
 
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $parser->getTitle(), $parser->getOutput() );
@@ -460,7 +462,7 @@ final class ClientHooks {
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
 			Settings::get( 'excludeNamespaces' ),
-			ClientStoreFactory::getStore()->newSiteLinkTable(),
+			WikibaseClient::getDefaultInstance()->getStore()->newSiteLinkTable(),
 			\Sites::singleton() );
 
 		$noExternalLangLinks = $langLinkHandler->getNoExternalLangLinks( $pout );

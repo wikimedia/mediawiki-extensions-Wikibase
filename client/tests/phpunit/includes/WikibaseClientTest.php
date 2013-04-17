@@ -49,6 +49,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\SettingsArray', $returnValue );
 	}
 
+	public function testGetStoreReturnType() {
+		$returnValue = $this->newInstance()->getStore();
+		$this->assertInstanceOf( 'Wikibase\ClientStore', $returnValue );
+	}
+
 	public function testGetDataTypeFactoryReturnType() {
 		$returnValue = $this->newInstance()->getDataTypeFactory();
 		$this->assertInstanceOf( 'DataTypes\DataTypeFactory', $returnValue );
@@ -62,6 +67,12 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testEntityIdLabelFormatterReturnType() {
 		$returnValue = $this->newInstance()->newEntityIdLabelFormatter( 'en' );
 		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdLabelFormatter', $returnValue );
+	}
+
+	public function testGetDefaultInstance() {
+		$this->assertSame(
+			WikibaseClient::getDefaultInstance(),
+			WikibaseClient::getDefaultInstance() );
 	}
 
 }

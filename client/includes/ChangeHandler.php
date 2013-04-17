@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use \Wikibase\Client\WikibaseClient;
+
 /**
  * Interface for change handling. Whenever a change is detected,
  * it should be fed to this service which then takes care handling
@@ -118,11 +120,11 @@ class ChangeHandler {
 		}
 
 		if ( !$entityLookup ) {
-			$entityLookup = ClientStoreFactory::getStore()->getEntityLookup();
+			$entityLookup = WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup();
 		}
 
 		if ( !$siteLinkLookup ) {
-			$siteLinkLookup = ClientStoreFactory::getStore()->newSiteLinkTable();
+			$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->newSiteLinkTable();
 		}
 
 		if ( !$localSite ) {
