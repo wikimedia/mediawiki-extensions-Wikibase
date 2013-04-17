@@ -308,10 +308,12 @@ $messages['vi'] = array(
 );
 
 /** Simplified Chinese (中文（简体）‎)
+ * @author Linforest
  */
 $messages['zh-hans'] = array(
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '“$1”数据值的操作尚不支持。', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '对“$1”数据类型的值的操作尚不支持。', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '尚不支持对“$1”取值的操作。',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '尚不支持对“$1”数据类型取值的操作。',
+	'valueview-expert-emptyvalue-empty' => '空白',
 );
 
 /** Traditional Chinese (中文（繁體）‎)
