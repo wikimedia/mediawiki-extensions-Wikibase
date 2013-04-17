@@ -80,8 +80,13 @@ class SetAliases extends ModifyEntity {
 			);
 		}
 
-		if ( isset( $params['remove'] ) ) {
-			$summary->setAction( 'remove' );
+		if ( isset( $params['remove'] ) && count( $params['remove'] ) ) {
+			// Set the action to set in case we do more than just remove in a single edit
+			if ( $summary->getActionName() === null ) {
+				$summary->setAction( 'remove' );
+			} else {
+				$summary->setAction( 'set' );
+			}
 			$summary->addAutoSummaryArgs( $params['remove'] );
 			$entityContent->getEntity()->removeAliases(
 				$params['language'],
@@ -92,8 +97,13 @@ class SetAliases extends ModifyEntity {
 			);
 		}
 
-		if ( isset( $params['add'] ) ) {
-			$summary->setAction( 'add' );
+		if ( isset( $params['add'] ) && count( $params['add'] ) ) {
+			// Set the action to set in case we do more than just add in a single edit
+			if ( $summary->getActionName() === null ) {
+				$summary->setAction( 'add' );
+			} else {
+				$summary->setAction( 'set' );
+			}
 			$summary->addAutoSummaryArgs( $params['add'] );
 			$entityContent->getEntity()->addAliases(
 				$params['language'],
