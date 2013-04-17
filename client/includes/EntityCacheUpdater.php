@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Title;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Handler updates to the entity cache.
@@ -54,7 +55,7 @@ class EntityCacheUpdater {
 
 		$id = $change->getEntityId();
 
-		$store = ClientStoreFactory::getStore();
+		$store = WikibaseClient::getDefaultInstance()->getStore();
 		$entityCache = $store->getEntityLookup(); //TODO: make sure we get an EntityCache instance
 
 		switch ( $updateType ) {

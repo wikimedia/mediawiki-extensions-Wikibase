@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Wikibase\LangLinkHandler;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Handles the NOEXTERNALLANGLINKS parser function.
@@ -47,7 +48,7 @@ class NoLangLinkHandler {
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
 			Settings::get( 'excludeNamespaces' ),
-			ClientStoreFactory::getStore()->newSiteLinkTable(),
+			WikibaseClient::getDefaultInstance()->getStore()->newSiteLinkTable(),
 			\Sites::singleton()
 		);
 
