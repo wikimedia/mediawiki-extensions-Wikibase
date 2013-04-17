@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 use Wikibase\SiteLinkLookup;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\StoreFactory;
 
 /**
  * Tests for the Wikibase\SiteLinkLookup implementing classes.
@@ -41,11 +43,11 @@ class SiteLinkLookupTest extends \MediaWikiTestCase {
 		$instances = array();
 
 		if ( defined( 'WB_VERSION' ) ) {
-			$instances[] = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
+			$instances[] = StoreFactory::getStore( 'sqlstore' )->newSiteLinkCache();
 		}
 
 		if ( defined( 'WBC_VERSION' ) ) {
-			$instances[] = \Wikibase\ClientStoreFactory::getStore( 'sqlstore' )->newSiteLinkTable();
+			$instances[] = WikibaseClient::getDefaultInstance()->getStore( 'sqlstore' )->newSiteLinkTable();
 		}
 
 		if ( empty( $instances ) ) {
