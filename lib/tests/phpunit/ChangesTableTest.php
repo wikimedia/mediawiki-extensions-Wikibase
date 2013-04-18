@@ -151,7 +151,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 
 		$obtainedChange = $changesTable->selectRow( null, array( 'id' => $id ) );
 		$this->assertTrue( $obtainedChange !== false, 'Change could not be loaded via ORMTable!' );
-		$this->assertEquals( $change, $obtainedChange, 'round trip' );
+		$this->assertArrayEquals( $change->getFields(), $obtainedChange->getFields(), false, true );
 
 		$this->assertEquals( 1, $changesTable->count( array( 'id' => $id ) ) );
 

@@ -129,10 +129,13 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.3
 	 *
+	 * @param string $cache set to 'cache' to cache the unserialized diff.
+	 *
 	 * @return array|bool
 	 */
-	public function getMetadata() {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+	public function getMetadata( $cache = 'no' ) {
+		$info = $this->getInfo( $cache );
+
 		if ( array_key_exists( 'metadata', $info ) ) {
 			return $info['metadata'];
 		}
