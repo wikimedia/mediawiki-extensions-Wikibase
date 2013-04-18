@@ -1145,7 +1145,7 @@ $messages['gl'] = array(
 	'wikibase-error-invalid-entity-id' => 'O sistema descoñece o ID inserido. Utilice un identificador de entidade válido.',
 	'special-unconnectedpages' => 'Páxinas non conectadas con elementos',
 	'wikibase-unconnectedpages-legend' => 'Opcións para as páxinas non conectadas',
-	'wikibase-unconnectedpages-page' => 'Comezar a lista de resultados co artigo:', # Fuzzy
+	'wikibase-unconnectedpages-page' => 'Comezar a lista de resultados coa páxina:',
 	'wikibase-unconnectedpages-submit' => 'Continuar',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" non é un código de lingua válido.',
 	'wikibase-unconnectedpages-page-warning' => 'O título da páxina non se puido utilizar para a pescuda e ignorouse.',
@@ -2561,14 +2561,30 @@ $messages['uz'] = array(
  * @author Frigotoni
  */
 $messages['vec'] = array(
+	'wikibase-client-desc' => "Client par l'estension Wikibase",
+	'specialpages-group-wikibaseclient' => 'Client Wikidata',
+	'wikibase-comment-update' => 'Elemento Wikidata modificà',
+	'wikibase-comment-sitelink-add' => 'Zontà colegamento lenguìstego: $1',
+	'wikibase-comment-sitelink-change' => 'Colegamento lenguìstego canbià da $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Cavà colegamento lenguìstego: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|canbiamento|canbiamenti}}',
 	'wikibase-editlinks' => 'Canbia link',
+	'wikibase-editlinkstitle' => 'Canbia colegamenti interlenguìsteghi',
+	'wikibase-linkitem-addlinks' => 'Zonta link',
+	'wikibase-linkitem-close' => 'Sèra la finestra de dialogo e ricarga la pagina',
+	'wikibase-linkitem-title' => "Colega co n'altra pagina",
+	'wikibase-linkitem-linkpage' => 'Colega co la pagina',
 	'wikibase-linkitem-input-site' => 'Lengua:',
 	'wikibase-linkitem-input-page' => 'Pagina:',
+	'wikibase-linkitem-invalidsite' => 'Sito selessionà sconossùo o mia valido',
 	'wikibase-linkitem-confirmitem-button' => 'Va ben',
 	'wikibase-property-notfound' => 'Proprietà $1 mia catà.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Mostra le modifiche de Wikidata tra i ultimi canbiamenti',
+	'wikibase-watchlist-show-changes-pref' => 'Mostra le modifiche de Wikidata sui osservati speciali',
 	'wikibase-unconnectedpages-submit' => 'Và',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" no xe un còdese de lengua valido.',
+	'wikibase-unconnectedpages-format-row' => '($1 colegamenti interlinguìsteghi in te la pagina)',
 );
 
 /** Vietnamese (Tiếng Việt)
