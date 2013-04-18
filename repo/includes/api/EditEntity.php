@@ -448,24 +448,6 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see \ApiBase::getHelpUrls()
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbeditentity';
-	}
-
-	/**
-	 * @see \ApiBase::getVersion
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-' . WB_VERSION;
-	}
-
-	/**
 	 * Check some of the supplied data for multilang arg
 	 *
 	 * @param $arg Array: The argument array to verify

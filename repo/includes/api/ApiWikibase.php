@@ -75,6 +75,39 @@ abstract class ApiWikibase extends \ApiBase {
 		);
 	}
 
+
+	/**
+	 * @see \ApiBase::needsToken()
+	 */
+	public function needsToken() {
+		return $this->isWriteMode() && ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithTokens' ) );
+	}
+
+	/**
+	 * @see \ApiBase::mustBePosted()
+	 */
+	public function mustBePosted() {
+		return $this->isWriteMode() && ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithPost' ) );
+	}
+
+	/**
+	 * @see ApiBase::getVersion
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	public function getVersion() {
+		return get_class( $this ) . '-' . WB_VERSION;
+	}
+
+	/**
+	 * @see ApiBase::getHelpUrls()
+	 */
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#' . $this->getModuleName();
+	}
+
 	/**
 	 * Add aliases to result
 	 *
