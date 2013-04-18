@@ -69,6 +69,13 @@ $messages['bn'] = array(
 	'valueview-expert-emptyvalue-empty' => 'খালি',
 );
 
+/** Catalan (català)
+ * @author Pitort
+ */
+$messages['ca'] = array(
+	'valueview-expert-emptyvalue-empty' => 'buit',
+);
+
 /** Danish (dansk)
  * @author Byrial
  */
