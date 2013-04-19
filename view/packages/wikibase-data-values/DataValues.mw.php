@@ -92,7 +92,7 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 };
 
 /**
- * Hook to add QUnit test cases.
+ * Hook for registering QUnit test cases.
  * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
  * @since 0.1
  *
@@ -101,53 +101,16 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
  * @return boolean
  */
 $wgHooks['ResourceLoaderTestModules'][] = function ( array &$testModules, \ResourceLoader &$resourceLoader ) {
-	$moduleTemplate = array(
+	// Register DataValue QUnit tests. Take the predefined test definitions and make them
+	// suitable for registration with MediaWiki's resource loader.
+	$ownModules = include( __DIR__ . '/DataValues.tests.qunit.php' );
+	$ownModulesTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' => 'DataValues/DataValues',
+		'remoteExtPath' =>  'DataValues/DataValues',
 	);
-
-	$testModules['qunit']['ext.dataValues.DataValues'] = $moduleTemplate + array(
-		'scripts' => array(
-			'tests/qunit/DataValues.tests.js',
-		),
-		'dependencies' => array(
-			'dataValues',
-		),
-	);
-
-	$testModules['qunit']['ext.dataValues.DataValue'] = $moduleTemplate + array(
-		'scripts' => array(
-			'tests/qunit/DataValue.tests.js',
-		),
-		'dependencies' => array(
-			'dataValues.values',
-		),
-	);
-
-	$testModules['qunit']['ext.dataValues.values'] = $moduleTemplate + array(
-		'scripts' => array(
-			'tests/qunit/values/BoolValue.tests.js',
-			'tests/qunit/values/MonolingualTextValue.tests.js',
-			'tests/qunit/values/MultilingualTextValue.tests.js',
-			'tests/qunit/values/StringValue.tests.js',
-			'tests/qunit/values/NumberValue.tests.js',
-			'tests/qunit/values/UnknownValue.tests.js',
-		),
-		'dependencies' => array(
-			'ext.dataValues.DataValue',
-		),
-	);
-
-	$testModules['qunit']['ext.dataValues.util'] = $moduleTemplate + array(
-		'scripts' => array(
-			'tests/qunit/dataValues.util.inherit.tests.js',
-			'tests/qunit/dataValues.util.Notifier.tests.js',
-		),
-		'dependencies' => array(
-			'dataValues.util',
-		),
-	);
-
+	foreach( $ownModules as $ownModuleName => $ownModule ) {
+		$testModules['qunit'][ $ownModuleName ] = $ownModule + $ownModulesTemplate;
+	}
 	return true;
 };
 
@@ -172,5 +135,5 @@ $wgHooks['ExtensionTypes'][] = function( array &$extensionTypes ) {
 // Resource Loader module registration
 $wgResourceModules = array_merge(
 	$wgResourceModules,
-	include( __DIR__ . '/Resources.php' )
+	include( __DIR__ . '/DataValues.resources.php' )
 );

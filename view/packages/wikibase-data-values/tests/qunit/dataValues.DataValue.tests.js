@@ -81,7 +81,7 @@
 		 * @param {String} moduleName
 		 */
 		runTests: function( moduleName ) {
-			QUnit.module( moduleName, QUnit.newMwEnvironment() );
+			QUnit.module( moduleName );
 
 			var self = this;
 
@@ -90,7 +90,7 @@
 					QUnit.test(
 						property,
 						function( assert ) {
-							self[property].call( self, assert );
+							self[property]( assert );
 						}
 					);
 				}
