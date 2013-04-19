@@ -1,6 +1,6 @@
 <?php
 /**
- * Definition of 'DataTypes' qunit test modules.
+ * Definition of 'ValueView' qunit test modules.
  * When included this returns an array with all qunit test module definitions. Given file patchs
  * are relative to the package's root.
  *
