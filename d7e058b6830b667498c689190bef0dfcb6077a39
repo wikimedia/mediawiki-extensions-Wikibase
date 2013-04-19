@@ -16,6 +16,24 @@
       "revId": "d7e058b6830b667498c689190bef0dfcb6077a39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dvkv4Fkc",
+        "filename": "lib/includes/changes/ChangeRow.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-19T15:28:01Z",
+      "side": 1,
+      "message": "It\u0027s a boolean flag. Using strings to represent flags so you get getInfo( \u0027cache\u0027 ) instead of the less informative getInfo( true ) is current best practice in core.\n\nThe default could be anything except \u0027cache\u0027, really. It could be false (though that would mess with type hinting), or \u0027nocache\u0027 or \u0027transient\u0027 or \u0027\u0027 or whatever, I don\u0027t care much. But I think using a string is the right thing (took a while to convince me of this, but it does work). The alternative is defining constants.\n\n(wouldn\u0027t it be nice if PHP supported free form symbols?...)",
+      "parentUuid": "DvgudPrg",
+      "revId": "d7e058b6830b667498c689190bef0dfcb6077a39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
