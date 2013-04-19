@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DvrlAA1s",
+        "filename": "repo/includes/specials/SpecialDispatchStats.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-04-19T09:55:41Z",
+      "side": 1,
+      "message": "I think we need another heading above this, such as \"Client dispatch status\"",
+      "revId": "bc8a0e51418ec6981002c0add3aa04175322253d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
