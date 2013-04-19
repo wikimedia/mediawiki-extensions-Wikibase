@@ -187,9 +187,12 @@ $messages['be'] = array(
 	'wikibase-error-autocomplete-response' => 'Адказ сервера: $1',
 	'wikibase-error-ui-client-error' => 'Знікла сувязь з кліенцкай старонкай. Калі ласка, паспрабуйце пазней.',
 	'wikibase-error-ui-no-external-page' => 'Не атрымалася знайсці ўказаную старонку на адпаведным праекце.',
+	'wikibase-error-ui-cant-edit' => 'Вы не можаце выканаць гэта дзеянне.',
+	'wikibase-error-ui-no-permissions' => 'У вас не хапае правоў для выканання гэтага дзеяння.',
 	'wikibase-error-ui-link-exists' => "Вы не можаце спаслацца на гэту старонку, бо іншы аб'ект ужо на яе спасылаецца.",
 	'wikibase-error-ui-session-failure' => 'Вашая сесія скончылася. Калі ласка, увайдзіце ў сістэму зноў.',
 	'wikibase-error-ui-edit-conflict' => 'Адбыўся канфлікт правак. Калі ласка, абнавіце старонку і захавайце зноў.',
+	'wikibase-replicationnote' => 'Калі ласка, звернеце ўвагу, што можа прайсці некалькі хвілін, пакуль змены стануць бачнымі ва ўсіх вікі-праектах',
 	'wikibase-sitelinks' => "Спіс старонак, што спасылаюцца на гэты аб'ект",
 	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
@@ -369,13 +372,15 @@ $messages['ckb'] = array(
 /** Czech (česky)
  * @author Danny B.
  * @author JAn Dudík
+ * @author Mormegil
  * @author Vks
  */
 $messages['cs'] = array(
-	'wikibase-lib-desc' => 'Obsahuje běžné funkce pro rozšíření Wikibase a Wikibase klient',
+	'wikibase-lib-desc' => 'Obsahuje společné funkce pro rozšíření Wikibase a Klient Wikibase',
 	'wikibase-entity-item' => 'položka',
 	'wikibase-entity-property' => 'vlastnost',
 	'wikibase-entity-query' => 'dotaz',
+	'wikibase-error-unexpected' => 'Došlo k neočekávané chybě.',
 	'wikibase-error-autocomplete-response' => 'Odpověď serveru:$1',
 	'wikibase-error-ui-cant-edit' => 'Nemáte oprávnění k provedení této akce.',
 	'wikibase-error-ui-session-failure' => 'Platnost vaší relace skončila. Prosíme, přihlaste se znovu.',
@@ -407,12 +412,16 @@ $messages['cy'] = array(
 	'wikibase-error-remove-timeout' => 'Mae nam technegol yn bodoli, ac oherwydd hyn ni allwyd cwbwlhau eich "diddymiad".',
 	'wikibase-error-autocomplete-connection' => 'Ni lwyddwyd gofyn i API Wicipedia. Ceisiwch eto toc.',
 	'wikibase-error-autocomplete-response' => 'Ateb y gweinydd: $1',
+	'wikibase-error-ui-cant-edit' => "Nid yw'r gallu gennych i gyflawni'r weithred hon.",
+	'wikibase-error-ui-edit-conflict' => "Cafwyd gwrthdaro rhwng golygiadau. Ail-lwythwch y dudalen a'i chadw eildro.",
+	'wikibase-sitelinks' => "Rhestr y tudalennau sy'n cysylltu i'r eitem hon",
 	'wikibase-sitelinks-sitename-columnheading' => 'Iaith',
 	'wikibase-sitelinks-siteid-columnheading' => 'Cod',
 	'wikibase-sitelinks-link-columnheading' => 'Erthygl a gysylltwyd',
 	'wikibase-tooltip-error-details' => 'Manylion',
 	'datatypes-type-wikibase-item' => 'Eitem',
 	'datatypes-type-commonsMedia' => 'Ffeil cyfrwng ar y Comin',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Danish (dansk)
@@ -465,7 +474,7 @@ $messages['de'] = array(
 	'wikibase-entity-query' => 'Abfrage',
 	'wikibase-diffview-reference' => 'Referenz',
 	'wikibase-diffview-rank' => 'Rang',
-	'wikibase-diffview-qualifier' => 'Qualifizierer',
+	'wikibase-diffview-qualifier' => 'Bedingung',
 	'wikibase-error-unexpected' => 'Es ist ein unerwarteter Fehler aufgetreten.',
 	'wikibase-error-save-generic' => 'Beim Speichern ist ein Fehler aufgetreten. Die Änderungen konnten daher nicht vollständig durchgeführt werden.',
 	'wikibase-error-remove-generic' => 'Beim Versuch zu entfernen, ist ein Fehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden.',
