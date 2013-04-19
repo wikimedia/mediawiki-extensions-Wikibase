@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DvrlHo3k",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-04-19T09:31:10Z",
+      "side": 1,
+      "message": "needs to be SITENAME not sitename",
+      "revId": "ad1f73d30ab1463febe0b864d86b0852a0b9f932",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvlldT0Q",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-04-19T09:31:10Z",
+      "side": 1,
+      "message": "SITENAME",
+      "revId": "ad1f73d30ab1463febe0b864d86b0852a0b9f932",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
