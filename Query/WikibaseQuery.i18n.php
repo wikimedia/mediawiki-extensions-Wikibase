@@ -85,6 +85,13 @@ $messages['gl'] = array(
 	'wikibasequery-desc' => 'Engade capacidades de pescuda a Wikibase',
 );
 
+/** Hebrew (עברית)
+ * @author Amire80
+ */
+$messages['he'] = array(
+	'wikibasequery-desc' => 'הוספת יכולות הרצת שאילתות לוויקיבייס',
+);
+
 /** Italian (italiano)
  * @author Beta16
  */

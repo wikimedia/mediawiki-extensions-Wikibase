@@ -412,8 +412,12 @@ $messages['cy'] = array(
 	'wikibase-error-remove-timeout' => 'Mae nam technegol yn bodoli, ac oherwydd hyn ni allwyd cwbwlhau eich "diddymiad".',
 	'wikibase-error-autocomplete-connection' => 'Ni lwyddwyd gofyn i API Wicipedia. Ceisiwch eto toc.',
 	'wikibase-error-autocomplete-response' => 'Ateb y gweinydd: $1',
+	'wikibase-error-ui-client-error' => "Methodd y cysylltiad i'r dudalen gleient. Ceisiwch rhywdro eto.",
 	'wikibase-error-ui-cant-edit' => "Nid yw'r gallu gennych i gyflawni'r weithred hon.",
+	'wikibase-error-ui-no-permissions' => "Nid yw eich cyfrif wedi derbyn y gallu i gwblhau'r weithred hon.",
+	'wikibase-error-ui-session-failure' => 'Daeth eich sesiwn i ben. Mewngofnodwch eto.',
 	'wikibase-error-ui-edit-conflict' => "Cafwyd gwrthdaro rhwng golygiadau. Ail-lwythwch y dudalen a'i chadw eildro.",
+	'wikibase-replicationnote' => 'Dalier sylw: efallai na welwch y newidiadau ar bob wici cyn pen rhai munudau.',
 	'wikibase-sitelinks' => "Rhestr y tudalennau sy'n cysylltu i'r eitem hon",
 	'wikibase-sitelinks-sitename-columnheading' => 'Iaith',
 	'wikibase-sitelinks-siteid-columnheading' => 'Cod',
@@ -929,6 +933,7 @@ $messages['he'] = array(
 	'wikibase-tooltip-error-details' => 'פרטים',
 	'datatypes-type-wikibase-item' => 'פריט',
 	'datatypes-type-commonsMedia' => 'קובץ מדיה בוויקישיתוף',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Upper Sorbian (hornjoserbsce)

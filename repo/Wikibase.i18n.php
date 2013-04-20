@@ -421,6 +421,7 @@ to find out where it went.',
  * @author McDutchie
  * @author Metalhead64
  * @author Minh Nguyen
+ * @author Mormegil
  * @author Nemo bis
  * @author Nike
  * @author Nnemo
@@ -564,9 +565,11 @@ Parameters:
 	'wikibase-shortcopyrightwarning' => 'A short copyright warning displayed during editing in the JavaScript UI. The copyright warning is displayed within a tooltip next to the save button.
 
 Parameters:
-* $1 - the name of the button the message is referring to. Usually "save".
+* $1 - the name of the button the message is referring to, set in the {{msg-mw|wikibase-save}} message
 * $2 - the name of the wiki\'s page describing the terms of use
-* $3 - an external link to the license with the license\'s name as link text',
+* $3 - an external link to the license with the license\'s name as link text (set in [[mw:Manual:$wgRightsText|$wgRightsText]])
+
+See also {{msg-mw|wikidata-shortcopyrightwarning}}',
 	'wikibase-copyrighttooltip-acknowledge' => 'Label of the link to not show the copyright warning again. A copyright warning is presented to the user whenever the user is about to alter any data unless the warning is not suppressed permanently by clicking this link.',
 	'wikibase-entityselector-more' => 'The entity selector is a user interface widget that allows selecting an entity (see [[d:Wikidata:Glossary]]). It consists out of an input field and a list of suggestions that is filled according to the text typed into the input field. Initially, the list of suggestions is filled with a certain number of suggestions. Clicking the link labeled with this message will fill the list of suggestions with additional suggestions. If there are no additional suggestions or no suggestions at all, the link does not show up.
 {{Identical|More}}',
@@ -2002,6 +2005,7 @@ $messages['bs'] = array(
  * @author Arnaugir
  * @author Grondin
  * @author Pginer
+ * @author Qllach
  * @author Toniher
  * @author Vogone
  * @author Vriullop
@@ -2013,7 +2017,7 @@ $messages['ca'] = array(
 	'wikibase-save' => 'desa',
 	'wikibase-cancel' => 'cancel·la',
 	'wikibase-add' => 'afegeix',
-	'wikibase-addreference' => 'afegeix font',
+	'wikibase-addreference' => 'afegiu una font',
 	'wikibase-save-inprogress' => "S'està desant…",
 	'wikibase-remove-inprogress' => "S'està suprimint…",
 	'wikibase-label-empty' => "Encara no s'ha definit cap etiqueta.",
@@ -2023,8 +2027,8 @@ $messages['ca'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'lloc',
 	'wikibase-sitelink-page-edit-placeholder' => 'article',
 	'wikibase-alias-edit-placeholder' => 'introduïu un àlies',
-	'wikibase-label-input-help-message' => "Introduïu el títol d'aquesta data utilitzada a $1.",
-	'wikibase-description-input-help-message' => 'Introduïu una breu descripció de  $1 .',
+	'wikibase-label-input-help-message' => "Introduïu el títol d'aquest conjunt de dades a $1.",
+	'wikibase-description-input-help-message' => 'Introduïu una breu descripció a $1.',
 	'wikibase-terms' => 'En altres llengües',
 	'wikibase-sitelinks-add' => "afegir un enllaç a un lloc web d'enllaç",
 	'wikibase-sitelinks-empty' => 'Encara no hi ha enllaços del lloc per aquest element.',
@@ -2037,18 +2041,18 @@ $messages['ca'] = array(
 	'wikibase-aliases-label' => 'També conegut com:',
 	'wikibase-aliases-empty' => 'Cap àlies definit',
 	'wikibase-datatype-label' => 'Tipus de dades:',
-	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'Fonts:', # Fuzzy
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => "{{PLURAL:$1|Una font|$1 fonts}} no s'han desat encara",
 	'wikibase-copyrighttooltip-acknowledge' => 'Accept aquestes condicions per futures modificacions que faci. No tornis a mostrar aquest missatge.',
 	'wikibase-restrictionedit-tooltip-message' => "Aquesta pàgina està protegida. No s'autoritza cap edició.",
-	'wikibase-blockeduser-tooltip-message' => 'Estàs bloquejat per editar.',
-	'special-itembytitle' => 'Element per títol', # Fuzzy
+	'wikibase-blockeduser-tooltip-message' => "No teniu permís per editar perquè el vostre nom d'usuari o la vostra adreça IP han estat blocats.",
+	'special-itembytitle' => 'Element per títol',
 	'wikibase-itembytitle-lookup-fieldset' => 'Cerca elements per lloc i títol',
 	'wikibase-itembytitle-lookup-site' => 'Lloc:',
 	'wikibase-itembytitle-lookup-page' => 'Pàgina:',
 	'wikibase-itembytitle-submit' => 'Cerca',
 	'wikibase-itembytitle-create' => 'També pots [{{fullurl:Special:NewItem|site=$1&page=$2}} crear un element].',
-	'special-itemdisambiguation' => 'Desambiguació: Elements amb la mateixa etiqueta', # Fuzzy
-	'wikibase-itemdisambiguation-lookup-fieldset' => 'Cerca elements per etiqueta', # Fuzzy
+	'special-itemdisambiguation' => "Desambiguació d'elements",
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Cerca elements per idioma i etiqueta',
 	'wikibase-itemdisambiguation-lookup-language' => 'Llengua:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiqueta:',
 	'wikibase-itemdisambiguation-submit' => 'Cerca',
@@ -2058,7 +2062,7 @@ $messages['ca'] = array(
 	'wikibase-newproperty-fieldset' => 'Crea una propietat nova',
 	'wikibase-newproperty-datatype' => 'Tipus de dades:',
 	'special-newitem' => 'Crea un element nou',
-	'wikibase-newitem-summary' => "Assegureu-vos de [[Special:ItemByTitle|verificar si l'element ja no existeix]]!<br />Si contribuïu per primera vegada en aquest projecte, doneu un cop d'ull a [[Special:MyLanguage/Help:Label|Help:Label]] i [[Special:MyLanguage/Help:Description|Help:Description]].", # Fuzzy
+	'wikibase-newitem-summary' => "Assegureu-vos de [[Special:ItemByTitle|comprovar si l'element ja existeix]]!<br />Per a tot nou element cal crear una [[Help:Label|etiqueta]] i una [[Help:Description|descripció]].",
 	'wikibase-newitem-fieldset' => 'Crea un element nou',
 	'wikibase-newitem-site' => 'Nom de la primera pàgina enllaçada',
 	'wikibase-newitem-page' => 'Nom de la primera pàgina enllaçada',
@@ -2067,11 +2071,11 @@ $messages['ca'] = array(
 	'wikibase-newentity-submit' => 'Crea',
 	'special-setlabel' => 'Defineix una etiqueta',
 	'wikibase-setlabel-introfull' => "S'està definint l'etiqueta a $2 gràcies a [[$1]]",
-	'wikibase-setlabel-label' => 'Etiqueta', # Fuzzy
+	'wikibase-setlabel-label' => 'Etiqueta:',
 	'wikibase-setlabel-submit' => "Desa l'etiqueta",
 	'wikibase-setdescription-label' => 'Descripció:',
-	'wikibase-setentity-id' => 'ID', # Fuzzy
-	'wikibase-setentity-language' => 'Llengua', # Fuzzy
+	'wikibase-setentity-id' => 'ID:',
+	'wikibase-setentity-language' => 'Idioma:',
 	'wikibase-entitieswithoutlabel-label-language' => 'Llengua:',
 	'wikibase-entitieswithoutlabel-submit' => 'Cerca',
 	'wikibase-entitieswithoutlabel-invalid-language' => '" $1 " no és un codi d\'idioma vàlid.',
@@ -2242,20 +2246,20 @@ $messages['cs'] = array(
 	'wikibase-save' => 'uložit',
 	'wikibase-cancel' => 'zrušit',
 	'wikibase-add' => 'přidat',
-	'wikibase-addqualifier' => 'Přidat kvalifikátor',
+	'wikibase-addqualifier' => 'přidat kvalifikátor',
 	'wikibase-addreference' => 'přidat zdroj',
 	'wikibase-save-inprogress' => 'Ukládám…',
 	'wikibase-remove-inprogress' => 'Odstraňuji…',
 	'wikibase-label-empty' => 'Žádný popis dosud nebyl definován',
-	'wikibase-label-edit-placeholder' => 'Vložte štítek',
+	'wikibase-label-edit-placeholder' => 'vložte štítek',
 	'wikibase-description-empty' => 'Popis není dosud definován',
 	'wikibase-deletedentity' => 'Smazáno ($1)',
 	'wikibase-description-edit-placeholder' => 'zadejte popis',
 	'wikibase-sitelink-site-edit-placeholder' => 'projekt',
 	'wikibase-sitelink-page-edit-placeholder' => 'článek',
 	'wikibase-alias-edit-placeholder' => 'zadejte alias',
-	'wikibase-label-input-help-message' => 'Zadejte název této položky v $1 .',
-	'wikibase-description-input-help-message' => 'Zadejte stručný popis v $1.',
+	'wikibase-label-input-help-message' => 'Zadejte název této položky v jazyce $1.',
+	'wikibase-description-input-help-message' => 'Zadejte stručný popis v jazyce $1.',
 	'wikibase-statements' => 'Tvrzení',
 	'wikibase-terms' => 'V jiných jazycích',
 	'wikibase-sitelinks-add' => 'přidat odkaz na stránku',
@@ -2281,7 +2285,7 @@ $messages['cs'] = array(
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|položka|položky|položek}}',
 	'wikibase-sitelinksedittool-full' => 'Odkazy na stránku jsou již nastaveny pro všechny známé projekty.',
 	'wikibase-disambiguation-title' => 'Rozcestník pro „$1“',
-	'wb-special-newitem-new-item-notification' => 'Nová položka $1 vytvořena a přesměrována na stránku. Zpět na  $2 .',
+	'wb-special-newitem-new-item-notification' => 'Nová položka $1 vytvořena a přesměrováno na její stránku. Zpět na $2.',
 	'wikibase-aliases-label' => 'Také známý jako:',
 	'wikibase-aliases-empty' => 'Žádné aliasy nebyly definovány.',
 	'wikibase-datatype-label' => 'Typ dat:',
@@ -2294,6 +2298,7 @@ $messages['cs'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'uživatelská hodnota',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'neznámá hodnota',
 	'wikibase-snakview-snaktypeselector-novalue' => 'žádná hodnota',
+	'wikibase-shortcopyrightwarning' => 'Kliknutím na „$1“ potvrzujete souhlas s [[$2|podmínkami užití]] a neodvolatelně zveřejňujete svůj příspěvek za podmínek $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Přijímám tyto podmínky pro své budoucí editace. Tuto zprávu už příště nezobrazovat.',
 	'wikibase-entityselector-more' => 'více',
 	'wikibase-anonymouseditwarning' => 'Varování: Nejste přihlášen(a).
@@ -2339,6 +2344,8 @@ Vytvořené valstnosti přidejte na [[Wikidata:List of properties|seznam]]. Něk
 	'wikibase-dispatchstats-change-id' => 'ID',
 	'wikibase-dispatchstats-lag-time' => 'Zpoždění',
 	'wikibase-dispatchstats-average' => 'Průměrné',
+	'wikibase-history-title-with-label' => 'Historie verzí položky „$2“ ($1)',
+	'wikibase-history-title-without-label' => 'Historie verzí položky ($1)',
 	'wikibase-entitieswithoutlabel-label-language' => 'Jazyk:',
 	'wikibase-entitieswithoutlabel-label-type' => 'Typ:',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'vše',
@@ -2351,23 +2358,50 @@ Vytvořené valstnosti přidejte na [[Wikidata:List of properties|seznam]]. Něk
 	'wikibase-item-summary-wbeditentity-create' => 'Vytvořena nová položka',
 	'wikibase-item-summary-wbeditentity-update' => 'Položka byla aktualizována',
 	'wikibase-item-summary-wbeditentity-override' => 'Položka byla přepsána',
-	'wikibase-item-summary-wbsetlabel-set' => 'změněn [$2] štítek',
-	'wikibase-item-summary-wbsetlabel-remove' => 'Odstraněn [$2] štítek',
-	'wikibase-item-summary-wbsetdescription-set' => 'Změněn [$2] popis',
-	'wikibase-item-summary-wbsetdescription-remove' => 'Odstraněn [$2] popis',
-	'wikibase-item-summary-wbsetaliases-set' => 'Nastavuji [$2] {{PLURAL:$1|alias|aliasy|aliasů}}',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Přidáno a změněno [$2] {{PLURAL:$1|alias|aliasy|aliasů}}',
-	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Přidán [$2] alias|Přidány [$2] aliasy|Přidáno [$2] aliasů}}',
-	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Odstraněn [$2] alias|Odstraněny [$2] aliasy|Odstraněno [$2] aliasů}}',
+	'wikibase-item-summary-wbsetlabel-set' => 'Změněn štítek pro [$2]',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Odstraněn štítek pro [$2]',
+	'wikibase-item-summary-wbsetdescription-set' => 'Změněn popis pro [$2]',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Odstraněn popis pro [$2]',
+	'wikibase-item-summary-wbsetaliases-set' => 'Nastavuji {{PLURAL:$1|alias|aliasy}} pro [$2]',
+	'wikibase-item-summary-wbsetaliases-add-remove' => '{{PLURAL:$1|Přidán a změněn alias|Přidány a změněny aliasy}} pro [$2]',
+	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Přidán alias|Přidány aliasy}} pro [$2]',
+	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Odstraněn alias|Odstraněny aliasy}} pro [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Přidán odkaz na [$2]',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Odstraněn odkaz na [$2]',
+	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Vytvořeno tvrzení|Vytvořena tvrzení}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Vytvořeno tvrzení|Vytvořena tvrzení}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Vytvořeno tvrzení|Vytvořena tvrzení}}',
+	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|Vytvořeno tvrzení|Vytvořena tvrzení}}',
+	'wikibase-item-summary-wbsetclaimvalue' => '{{PLURAL:$1|Nastavena hodnota tvrzení|Nastaveny hodnoty tvrzení}}',
+	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Odstraněno tvrzení|Odstraněna tvrzení}}',
+	'wikibase-item-summary-special-create-item' => 'Založena položka pro [$2] s {{PLURAL:$1|hodnotou|hodnotami}}',
+	'wikibase-item-summary-wbcreateclaim-create' => 'Vytvořeno tvrzení',
+	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$3|Odstraněno tvrzení|Odstraněna tvrzení}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Vytvořena nová vlastnost',
 	'wikibase-property-summary-wbeditentity-update' => 'Aktualizována vlastnost',
 	'wikibase-property-summary-wbeditentity-override' => 'Přepsána vlastnost',
-	'right-item-override' => 'Přepsat položky',
-	'right-item-create' => 'Vytvořit položky',
-	'right-item-remove' => 'Odstranit položky',
-	'right-alias-add' => 'Přidat aliasy',
-	'right-alias-set' => 'Nastavit aliasy',
-	'right-alias-remove' => 'Odebrat aliasy',
+	'wikibase-property-summary-wbsetlabel-set' => 'Změněn štítek pro [$2]',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Odstraněn štítek pro [$2]',
+	'wikibase-property-summary-wbsetdescription-set' => 'Změněn popis pro [$2]',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Odstraněn popis pro [$2]',
+	'wikibase-property-summary-wbsetaliases-set' => 'Nastavuji {{PLURAL:$1|alias|aliasy}} pro [$2]',
+	'wikibase-property-summary-wbsetaliases-add-remove' => '{{PLURAL:$1|Přidán a změněn alias|Přidány a změněny aliasy}} pro [$2]',
+	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Přidán alias|Přidány aliasy}} pro [$2]',
+	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Odstraněn alias|Odstraněny aliasy}} pro [$2]',
+	'wikibase-property-summary-special-create-property' => 'Založena vlastnost pro [$2] s {{PLURAL:$1|hodnotou|hodnotami}}',
+	'wikibase-query-summary-special-create-query' => 'Založen dotaz pro [$2] s {{PLURAL:$1|hodnotou|hodnotami}}',
+	'right-item-override' => 'Přepisování položek',
+	'right-item-create' => 'Vytváření položek',
+	'right-item-remove' => 'Odstraňování položek',
+	'right-alias-add' => 'Přidávání aliasů',
+	'right-alias-set' => 'Nastavování aliasů',
+	'right-alias-remove' => 'Odstraňování aliasů',
+	'right-label-remove' => 'Odstraňování štítků',
+	'action-item-override' => 'přepisovat položky',
+	'action-item-create' => 'vytvářet položky',
+	'action-item-remove' => 'odstraňovat položky',
+	'action-alias-remove' => 'odstraňovat aliasy',
+	'action-label-remove' => 'odstraňovat štítky',
 );
 
 /** Welsh (Cymraeg)
@@ -2406,6 +2440,7 @@ $messages['cy'] = array(
 	'wikibase-undo-firstrev' => "Ni ellir gwrthdroi'r diwygiad a ddechreuodd y dudalen",
 	'wikibase-aliases-label' => 'Arallenwau:',
 	'wikibase-datatype-label' => 'Math y data:',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|ffynhonnell}}',
 	'wikibase-snakview-property-input-placeholder' => 'nodwedd',
 	'wikibase-entityselector-more' => 'mwy',
 	'wikibase-anonymouseditwarning' => 'Dalier sylw: Nid ydych wedi mewngofnodi. 
@@ -2413,6 +2448,7 @@ Fe fydd eich cyfeiriad IP yn ymddangos ar hanes golygu $1.',
 	'wikibase-itembytitle-lookup-site' => 'Wici:',
 	'wikibase-itembytitle-lookup-page' => 'Tudalen:',
 	'wikibase-itembytitle-submit' => 'Chwilier',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Chwilio am eitemau yn ôl iaith a label',
 	'wikibase-itemdisambiguation-lookup-language' => 'Iaith:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Label:',
 	'wikibase-itemdisambiguation-submit' => 'Chwilier',
@@ -5522,12 +5558,12 @@ $messages['he'] = array(
 	'wikibase-anonymouseditwarning' => 'אזהרה: לא נכנסת לחשבון.
 כתובת ה־IP שלך תירשם בהיסטוריית העריכות של ה{{GRAMMAR:תחילית|$1}}.',
 	'wikibase-restrictionedit-tooltip-message' => 'הדף הזה מוגן. לא ניתן לערוך.',
-	'wikibase-blockeduser-tooltip-message' => 'אין לכם הרשאה לערוך כי שם המשתמש או כתובת ה-IP שלכם נחסמו.',
+	'wikibase-blockeduser-tooltip-message' => 'אין לך הרשאה לערוך בשל חסימה של שם המשתמש או של כתובת ה־IP שלך.',
 	'wikibase-move-error' => 'לא ניתן להעביר דפים במרחב נתונים, ולא ניתן להעביר דפים אליו.',
 	'wikibase-warning-constraint-violation-length' => 'אילוץ אורך מופעל לקוד השפה "$1".',
-	'wikibase-error-constraint-violation-label' => 'אירעה הפרה של {{PLURAL:$1|אילוץ|אילוצים}} עבור {{PLURAL:$1|התווית|התוויות}} "$3" עבור {{PLURAL:$1|קוד השפה|קודי השפה }} "$2".',
+	'wikibase-error-constraint-violation-label' => 'אירעה הפרה של {{PLURAL:$1|אילוץ|אילוצים}} עבור {{PLURAL:$1|התווית|התוויות}} "$3" עבור {{PLURAL:$1|קוד השפה|קודי השפה}} "$2".',
 	'wikibase-error-constraint-violation-description' => 'אירעה הפרה של {{PLURAL:$1|אילוץ|אילוצים}} עבור {{PLURAL:$1|התיאור|התיאורים}} "$3" עבור {{PLURAL:$1|קוד השפה|קודי השפה}} "$2".',
-	'wikibase-error-constraint-violation-aliases' => 'אירעה הפרה של {{PLURAL:$1|אילוץ|אילוצים}} עבור {{PLURAL:$1|הכינוי|הכינויים}} "$3" עבור {{PLURAL:$1|קוד השפה|קודי השפה }} "$2".',
+	'wikibase-error-constraint-violation-aliases' => 'אירעה הפרה של {{PLURAL:$1|אילוץ|אילוצים}} עבור {{PLURAL:$1|הכינוי|הכינויים}} "$3" עבור {{PLURAL:$1|קוד השפה|קודי השפה}} "$2".',
 	'wikibase-error-sitelink-already-used' => 'קישור אתר [[$1:$2]] כבר משמש בפריט שהמזהה שלו הוא [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'למאפיין אחר ($3) כבר יש תווית "$1" שמזוהה עם קוד השפה $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'לשאילתה אחרת ($3) כבר יש תווית "$1" שמזוהה עם קוד השפה $2',
@@ -5560,9 +5596,9 @@ $messages['he'] = array(
 	'wikibase-newitem-fieldset' => 'יצירת פריט חדש',
 	'wikibase-newitem-site' => 'האתר של הדף המקושר הראשון',
 	'wikibase-newitem-page' => 'שם הדף המקושר הראשון',
-	'wikibase-newitem-no-external-page' => 'הדף שצין לא נמצא באתר המתאים.',
+	'wikibase-newitem-no-external-page' => 'הדף שצוין לא נמצא באתר המתאים.',
 	'wikibase-newitem-add-sitelink-failed' => 'לא הייתה אפשרות לשמור את הקישור לאתר.',
-	'wikibase-newitem-not-recognized-siteid' => 'מזהה האתר שסופק אינו מזוהה.',
+	'wikibase-newitem-not-recognized-siteid' => 'מזהה האתר שסופק אינו מוּכּר.',
 	'wikibase-newentity-label' => 'תווית:',
 	'wikibase-newentity-description' => 'תיאור:',
 	'wikibase-newentity-submit' => 'יצירה',
@@ -5668,12 +5704,12 @@ $messages['he'] = array(
 	'wikibase-property-summary-wbsetlabel-remove' => 'הוסרה תווית [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'שוּנה תיאור [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'הוסר תיאור [$2]',
-	'wikibase-property-summary-wbsetaliases-set' => 'הגדרה של {{PLURAL:$1|כינוי|כינויים}} [$2]',
-	'wikibase-property-summary-wbsetaliases-add-remove' => 'הוספה והסרה של {{PLURAL:$1|כינוי|כינויים}} [$2]',
-	'wikibase-property-summary-wbsetaliases-add' => 'הוספת {{PLURAL:$1|כינוי|כינויים}} [$2]',
-	'wikibase-property-summary-wbsetaliases-remove' => 'הסרת {{PLURAL:$1|כינוי|כינויים}} [$2]',
-	'wikibase-property-summary-special-create-property' => 'נוצר מאפיין תחת [$2] עם {{PLURAL:$1|ערך|ערכים}}',
-	'wikibase-query-summary-special-create-query' => 'נוצרה שאילתה תחת [$2] עם {{PLURAL:$1|ערך|ערכים}}',
+	'wikibase-property-summary-wbsetaliases-set' => 'הגדרה של {{PLURAL:$1|כינוי|כינויים}} עבור [$2]',
+	'wikibase-property-summary-wbsetaliases-add-remove' => 'הוספה והסרה של {{PLURAL:$1|כינוי|כינויים}} עבור [$2]',
+	'wikibase-property-summary-wbsetaliases-add' => 'הוספת {{PLURAL:$1|כינוי|כינויים}} עבור [$2]',
+	'wikibase-property-summary-wbsetaliases-remove' => 'הסרת {{PLURAL:$1|כינוי|כינויים}} עבור [$2]',
+	'wikibase-property-summary-special-create-property' => 'נוצר מאפיין בשפה [$2] עם {{PLURAL:$1|ערך|ערכים}}',
+	'wikibase-query-summary-special-create-query' => 'נוצרה שאילתה בשפה [$2] עם {{PLURAL:$1|ערך|ערכים}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'פריט',
 	'wikibase-listdatatypes-wikibase-item-body' => 'קישור לפריטים אחרים במיזם. בעת ההזנה ייערך חיפוש של עיולים מתאימים במרחב הפריטים בוויקינתונים. הוא מכיל שדה טקסט אחד.
 * scheme – חלק מתוך מחרוזת קישור בתסדיר IRI
@@ -5693,10 +5729,30 @@ $messages['he'] = array(
 * altitude (לא חובה) ערך מפורש (?) לגובה על המשטח המיוחס, עבור כדור הארץ (Earth) זה WGS84
 * globe (לא חובה) ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "גדור הארץ" (Earth) ו־WGS84',
 	'wikibase-listdatatypes-quantity-head' => 'כמות',
+	'wikibase-listdatatypes-quantity-body' => 'שדה נתונים מפורשים שמתייחס ליחידה כלשהי שמודרת היטב. היחידה האמתית אמורה להיות בערכי הנתונים המוזנים.
+* value – חלק משתמע של המחרוזת (מיפוי של תחילית היחידה אינו ברור)
+* unit – חלק משתמע של המחרוזת (מיפוי לגוף התקינה אינו ברור)
+* accuracy (לא חובה) – ערך נתונים מפורש, באותה יחידה כמו הערך',
 	'wikibase-listdatatypes-monolingual-text-head' => 'טקסט חד־לשוני',
+	'wikibase-listdatatypes-monolingual-text-body' => 'שדה נתונים מפורש למחרוזת שאינה מתורגמת לשפות אחרות. הסוג הזה של המחרוזת מוגדר פעם אחת ומשמש בכל השפות. שימוש אופייני הוא שם גאוגרפי שכתוב בשפה המקומית, מזהה מסוג כלשהו, נוסחה כימית, או שם מדעי בלטינית.
+* language – ערך מפורש לזיהוי השפה של החלק הטקסטואלי
+* text – ערך מפורש למחרוזת הייחודית לשפה',
 	'wikibase-listdatatypes-multilingual-text-head' => 'טקסט רב־לשוני',
+	'wikibase-listdatatypes-multilingual-text-body' => 'שדה נתונים מפורש למחרוזת שצריכה להיות מתורגמת לשפות אחרות. שימוש אופייני הוא שם ישות שיכולה לעניין את כל העולם ושיש לה שמות שונים בשפה לא מקומית. אלה יכולים להיות שונים בשפות שונות ולהיכתב במערכות כתב שונות.
+* language – ערך מפורש לזיהוי השפה של החלק הטקסטואלי
+* text – ערך מפורש למחרוזת הייחודית לשפה',
 	'wikibase-listdatatypes-string-head' => 'מחרוזת',
-	'wikibase-listdatatypes-time-head' => 'שעה',
+	'wikibase-listdatatypes-string-body' => 'שדה נתונים מפורש למחרוזת של תווים. שימוש נפוץ הוא מזהים בעלי כתיב שאינו תלוי בשפה. לפעמים אפשר לתעתק מחרוזות כאלה למערכות כתב אחרות.
+* language – ערך מפורש לזיהוי השפה של החלק הטקסטואלי
+* text – ערך מפורש למחרוזת הייחודית לשפה',
+	'wikibase-listdatatypes-time-head' => 'זמן',
+	'wikibase-listdatatypes-time-body' => 'שדה נתונים מפורש לערך של זמן. נתון בתור זמן עם רמה מסוימת של דיוק וגבולות. הזמן תמיד שמור פנימית כתאריך גרגוריאני מקדים, אבל יכול להשתמש בתסדירים אחרים בעת פענוח ועיצוב.
+* time – ערך מפורש בזמן, מיוצג לפי תקן ISO8601, בשנה תמיד יש 11 ספרות, התאריך תמיד חיובי או שלילי, בתסדיר <span dir="ltr">+00000002013-01-01T00:00:00Z</span>.
+* timezone – ערך מפורש כמספר שלם חיובי או שלילי.
+* before – ערך שלם מפורש שאומר כמה יחידות של זמן יכלו לעבור מהזמן המצוין. זהו מרכיב של דיוק.
+* after – ערך שלם מפורש שאומר כמה יחידות של זמן יכלו לעבור אחרי הזמן המצוין. זהו מרכיב של דיוק.
+* precision – ערך מפורש שלם קצר (shortint). המספרים מביעים את הערכים הבאים: 0 – מיליארד שנים, 1 – מאה מיליון שנים, ..., 6 – אלפי שנים, 7 – מאה, 8 – עשור, 9 – שנה, 10 – חודש, 11 – יום, 12 – שעה, 13 – דקה, 14 – שנייה.
+* calendarmodel – ערך מפורש שניתן בתור כתובת URL. מזהה את דגם לוח השנה שישמש לתצוגת ערך הזמן הזה.',
 	'content-model-wikibase-item' => 'פריט Wikibase',
 	'content-model-wikibase-property' => 'מאפיין Wikibase',
 	'content-model-wikibase-query' => 'שאילתת Wikibase',
