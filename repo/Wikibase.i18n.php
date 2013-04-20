@@ -348,7 +348,7 @@ to find out where it went.',
 * language – explicit value for identifying the language for the text part
 * text – explicit value for the language specific variant string',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Multilingual text',
-	'wikibase-listdatatypes-multilingual-text-body' => 'Literal data field for a string that must be translated into other languages. Typical use is a entity name of global interest that has non-local written forms. Those can differ both in languages and script systems.
+	'wikibase-listdatatypes-multilingual-text-body' => 'Literal data field for a string that must be translated into other languages. Typical use is an entity name of global interest that has non-local written forms. Those can differ both in languages and script systems.
 * language – explicit value for identifying the language for the text part
 * text – explicit value for the language specific variant string',
 	'wikibase-listdatatypes-string-head' => 'String',
@@ -356,13 +356,13 @@ to find out where it went.',
 * language – explicit value for identifying the language for the text part
 * text – explicit value for the language specific variant string',
 	'wikibase-listdatatypes-time-head' => 'Time',
-	'wikibase-listdatatypes-time-body' => 'Literal data field for a time value. Given as a time with some precision and boundaries. The time are always saved internally in proleptic Gregorian, but can use other formats during parsing and formating.(?)
-* time – explicit value for point in time, represented per ISO8601, they year always having 11 digits, the date always be signed, in the format +00000002013-01-01T00:00:00Z
+	'wikibase-listdatatypes-time-body' => 'Literal data field for a time value. Given as a time with some precision and boundaries. The time is always saved internally in the Proleptic Gregorian format, but can use other formats during parsing and formating.(?)
+* time – explicit value for point in time, represented per ISO8601, the year always having 11 digits and the date always being signed, in the format +00000002013-01-01T00:00:00Z
 * timezone – explicit value as a signed integer. Timezone information as an offset from UTC in minutes.
 * before – explicit integer value for how many units after the given time it could be. The unit is given by the precision.
 * after – explicit integer value for how many units before the given time it could be. The unit is given by the precision.
 * precision – explicit value encoded in a shortint. The numbers have the following meaning: 0 - billion years, 1 - hundred million years, ..., 6 - millenia, 7 - century, 8 - decade, 9 - year, 10 - month, 11 - day, 12 - hour, 13 - minute, 14 - second.
-* calendarmodel – explicit value given as an URI. It will identify the calendar model that should be used to display this time value.',
+* calendarmodel – explicit value given as a URI. It will identify the calendar model that should be used to display this time value.',
 	//content model names
 	'content-model-wikibase-item' => 'Wikibase item',
 	'content-model-wikibase-property' => 'Wikibase property',
