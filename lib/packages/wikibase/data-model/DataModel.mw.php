@@ -48,6 +48,9 @@ if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 	$wgAutoloadClasses['Wikibase\Test\EntityTest'] = __DIR__ . '/tests/phpunit/Entity/EntityTest.php';
 	$wgAutoloadClasses['Wikibase\Test\TestItems'] = __DIR__  . '/tests/phpunit/Entity/TestItems.php';
 	$wgAutoloadClasses['Wikibase\Test\SnakObjectTest'] = __DIR__  . '/tests/phpunit/Snak/SnakObjectTest.php';
+
+	$wgAutoloadClasses['Wikibase\Test\HashArrayTest'] = __DIR__ . '/tests/phpunit/hasharray/HashArrayTest.php';
+	$wgAutoloadClasses['Wikibase\Test\HashArrayElement'] = __DIR__ . '/tests/phpunit/hasharray/HashArrayElement.php';
 }
 
 /**
@@ -80,10 +83,16 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		'Snak/SnakList',
 		'Snak/Snak',
 
+		'HashableObjectStorage',
+		'MapValueHasher',
+
 		'ReferenceList',
 		'Reference',
 
 		'SiteLink',
+
+		'hasharray/HashArrayWithoutDuplicates',
+		'hasharray/HashArrayWithDuplicates',
 	);
 
 	foreach ( $testFiles as $file ) {
