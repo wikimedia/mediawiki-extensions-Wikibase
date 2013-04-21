@@ -235,7 +235,12 @@ final class WikibaseClient {
 	 * @return WikibaseClient
 	 */
 	public static function newInstance() {
-		return new self( Settings::singleton(), defined( 'MW_PHPUNIT_TEST' ) );
+		$settings = new SettingsArray( array_merge(
+			$GLOBALS['wgWBSettings'],
+			$GLOBALS['wgWBClientSettings']
+		) );
+
+		return new self( $settings, defined( 'MW_PHPUNIT_TEST' ) );
 	}
 
 	/**
