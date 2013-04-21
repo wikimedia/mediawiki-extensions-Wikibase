@@ -64,6 +64,13 @@ $messages['de'] = array(
 	'wikibasequery-desc' => 'Ergänzt Abfragemöglichkeiten zu Wikibase',
 );
 
+/** Finnish (suomi)
+ * @author Silvonen
+ */
+$messages['fi'] = array(
+	'wikibasequery-desc' => 'Lisää Wikibaseen kyselyominaisuudet',
+);
+
 /** French (français)
  * @author Metroitendo
  */
@@ -78,6 +85,20 @@ $messages['gl'] = array(
 	'wikibasequery-desc' => 'Engade capacidades de pescuda a Wikibase',
 );
 
+/** Hebrew (עברית)
+ * @author Amire80
+ */
+$messages['he'] = array(
+	'wikibasequery-desc' => 'הוספת יכולות הרצת שאילתות לוויקיבייס',
+);
+
+/** Italian (italiano)
+ * @author Beta16
+ */
+$messages['it'] = array(
+	'wikibasequery-desc' => 'Aggiunge le funzionalità di interrogazioni a Wikibase',
+);
+
 /** Japanese (日本語)
  * @author Shirayuki
  */
@@ -87,9 +108,10 @@ $messages['ja'] = array(
 
 /** Korean (한국어)
  * @author Kwj2772
+ * @author 아라
  */
 $messages['ko'] = array(
-	'wikibasequery-desc' => '위키베이스에 쿼리 기능을 추가',
+	'wikibasequery-desc' => '위키베이스에 쿼리 기능을 추가합니다',
 );
 
 /** Macedonian (македонски)

@@ -582,18 +582,18 @@ $messages['cs'] = array(
 	'specialpages-group-wikibaseclient' => 'Klient Wikidat',
 	'wikibase-after-page-move' => 'Můžete také [$1 aktualizovat] související položku Wikidat, abyste na přesunuté stránce zachovali jazykové odkazy.',
 	'wikibase-comment-remove' => 'Související položka Wikidat odstraněna. Mezijazykové odkazy odstraněny.',
-	'wikibase-comment-linked' => 'Položka Wikidat odkazovala na tuto stránku.',
+	'wikibase-comment-linked' => 'S touto stránkou byla provázána položka Wikidat.',
 	'wikibase-comment-unlink' => 'Odkaz na tuto stránku byl odstraněn z Wikidat. Mezijazykové odkazy odstraněny.',
 	'wikibase-comment-restore' => 'Související položka Wikidat obnovena. Mezijazykové odkazy obnoveny.',
 	'wikibase-comment-update' => 'Změněna položka na Wikidatech',
-	'wikibase-comment-sitelink-add' => 'Přidán mezijazykový odkaz:$1',
-	'wikibase-comment-sitelink-change' => 'Změněn mezijazykový odkaz z $1 na $2',
-	'wikibase-comment-sitelink-remove' => 'Odstraněn mezijazykový odkaz:$1',
+	'wikibase-comment-sitelink-add' => 'Přidán mezijazykový odkaz: $1',
+	'wikibase-comment-sitelink-change' => 'Mezijazykový odkaz změněn z $1 na $2',
+	'wikibase-comment-sitelink-remove' => 'Odstraněn mezijazykový odkaz: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|změna|změny|změn}}',
 	'wikibase-editlinks' => 'Upravit odkazy',
 	'wikibase-editlinkstitle' => 'Editovat mezijazykové odkazy',
 	'wikibase-linkitem-addlinks' => 'Přidat odkazy',
-	'wikibase-linkitem-alreadylinked' => 'Stránka, kterou chcete odkázat je již použita u [$1 položky] na Wikidatech, která odkazuje na $2. Položky smí mít pouze jeden odkaz na jeden jazyk. Prosím, zvolte jinou stránku.',
+	'wikibase-linkitem-alreadylinked' => 'Stránka, na kterou chcete odkázat, je již použita u [$1 položky] v ústředním úložišti, která odkazuje na $2 na tomto serveru. Položky smí mít pouze pro každý server jen jeden odkaz. Prosím, zvolte jinou stránku.',
 	'wikibase-linkitem-close' => 'Zavřít dialog a obnovit stránku',
 	'wikibase-linkitem-failure' => 'Došlo k neznámé chybě při pokusu o odkaz na danou stránku.',
 	'wikibase-linkitem-title' => 'Propojit se stránkou',
@@ -602,12 +602,14 @@ $messages['cs'] = array(
 	'wikibase-linkitem-input-site' => 'Jazyk:',
 	'wikibase-linkitem-input-page' => 'Stránka:',
 	'wikibase-linkitem-invalidsite' => 'Neznámá nebo neplatná stránka',
+	'wikibase-linkitem-confirmitem-text' => 'Na zvolenou stránku již odkazuje [$1 položka v našem ústředním úložišti]. Potvrďte, že s touto stránkou chcete provázat níže zobrazené stránky.',
 	'wikibase-linkitem-confirmitem-button' => 'Potvrdit',
 	'wikibase-linkitem-not-loggedin-title' => 'Musíte být přihlášen',
 	'wikibase-linkitem-not-loggedin' => 'Je třeba být přihlášen na této wiki a [$1  Wikidatech], chcete-li použít tuto funkci.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Zobrazit změny Wikidat v posledních změnách',
 	'wikibase-watchlist-show-changes-pref' => 'Zobrazit změny Wikidat ve sledovaných stránkách',
+	'wikibase-unconnectedpages-invalid-language' => '„$1“ není platný kód jazyka.',
 );
 
 /** Church Slavic (словѣ́ньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ)
@@ -1081,7 +1083,7 @@ $messages['fr'] = array(
 	'wikibase-error-invalid-entity-id' => 'L’ID saisi est inconnu du système. Veuillez utiliser un ID d’entité valide.',
 	'special-unconnectedpages' => 'Pages non reliées à l’élément',
 	'wikibase-unconnectedpages-legend' => 'Options de pages non reliées',
-	'wikibase-unconnectedpages-page' => 'Début de la liste des résultats avec l’article :',
+	'wikibase-unconnectedpages-page' => 'Début de la liste des résultats avec la page :',
 	'wikibase-unconnectedpages-submit' => 'Démarrer',
 	'wikibase-unconnectedpages-invalid-language' => '« $1 » n’est pas un code de langue valide.',
 	'wikibase-unconnectedpages-page-warning' => 'Le titre de la page ne peut pas être utilisé pour la recherche et est ignoré',
@@ -1145,7 +1147,7 @@ $messages['gl'] = array(
 	'wikibase-error-invalid-entity-id' => 'O sistema descoñece o ID inserido. Utilice un identificador de entidade válido.',
 	'special-unconnectedpages' => 'Páxinas non conectadas con elementos',
 	'wikibase-unconnectedpages-legend' => 'Opcións para as páxinas non conectadas',
-	'wikibase-unconnectedpages-page' => 'Comezar a lista de resultados co artigo:', # Fuzzy
+	'wikibase-unconnectedpages-page' => 'Comezar a lista de resultados coa páxina:',
 	'wikibase-unconnectedpages-submit' => 'Continuar',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" non é un código de lingua válido.',
 	'wikibase-unconnectedpages-page-warning' => 'O título da páxina non se puido utilizar para a pescuda e ignorouse.',
@@ -1174,17 +1176,18 @@ $messages['gu'] = array(
 /** Hebrew (עברית)
  * @author Amire80
  * @author ExampleTomer
+ * @author ערן
  */
 $messages['he'] = array(
 	'wikibase-client-desc' => 'לקוח להרחבה Wikibase',
 	'specialpages-group-wikibaseclient' => 'לקוח ויקינתונים',
-	'wikibase-after-page-move' => 'אפשר גם [$1 לעדכן] את הפריט המשויך בוויקיפדיה כדי לתחזק את קישורי השפה בדף שהועבר.',
+	'wikibase-after-page-move' => 'אפשר גם [$1 לעדכן] את הפריט המשויך בוויקינתונים כדי לתחזק את קישורי השפה בדף שהועבר.',
 	'wikibase-comment-remove' => 'פריט הוויקינתונים המשויך נמחק. קישורי שפה הוסרו.',
 	'wikibase-comment-linked' => 'פריט ויקינתונים קוּשר לדף הזה.',
 	'wikibase-comment-unlink' => 'הדף הזה נותק מִפריט ויקינתונים. קישורי השפה הוסרו.',
 	'wikibase-comment-restore' => 'פריט הוויקינתונים המשויך שוחזר. קישורי השפה שוחזרו.',
 	'wikibase-comment-update' => 'פריט ויקינתונים השתנה',
-	'wikibase-comment-sitelink-add' => 'קישור שפה הוסף: $1',
+	'wikibase-comment-sitelink-add' => 'קישור שפה נוסף: $1',
 	'wikibase-comment-sitelink-change' => 'קישור השפה שוּנה מ־$1 אל $2',
 	'wikibase-comment-sitelink-remove' => 'קישור השפה הוסר: $1',
 	'wikibase-comment-multi' => '{{PLURAL:$1|שינוי אחד|$1 שינויים}}',
@@ -1214,10 +1217,12 @@ $messages['he'] = array(
 	'wikibase-error-invalid-entity-id' => 'המזהה שהוזן אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.',
 	'special-unconnectedpages' => 'דפים שלא מקושרים לפריטים',
 	'wikibase-unconnectedpages-legend' => 'אפשרויות לדפים לא מקושרים',
-	'wikibase-unconnectedpages-page' => 'דף התחלה:', # Fuzzy
+	'wikibase-unconnectedpages-page' => 'להתחיל את רשימת התוצאות עם הדף:',
 	'wikibase-unconnectedpages-submit' => 'הרצה',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" אינו קוד שפה תקין.',
 	'wikibase-unconnectedpages-page-warning' => 'לא ניתן היה להשתמש בכותרת הדף לשאילתה והמערכת תתעלם ממנה.',
+	'wikibase-unconnectedpages-iwdata-label' => 'רק דפים עם קישורים לשפות אחרות',
+	'wikibase-unconnectedpages-format-row' => '($1  קישורים לשפות אחרות בדף)',
 );
 
 /** Hindi (हिन्दी)
@@ -2537,6 +2542,13 @@ $messages['uk'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Показати зміни Вікіданих у списку нових редагувань',
 );
 
+/** Urdu (اردو)
+ * @author Noor2020
+ */
+$messages['ur'] = array(
+	'wikibase-unconnectedpages-page' => 'نتائج فہرست اس صفحہ سے شروع کریں:',
+);
+
 /** Uzbek (oʻzbekcha)
  * @author CoderSI
  * @author Nataev
@@ -2551,14 +2563,30 @@ $messages['uz'] = array(
  * @author Frigotoni
  */
 $messages['vec'] = array(
+	'wikibase-client-desc' => "Client par l'estension Wikibase",
+	'specialpages-group-wikibaseclient' => 'Client Wikidata',
+	'wikibase-comment-update' => 'Elemento Wikidata modificà',
+	'wikibase-comment-sitelink-add' => 'Zontà colegamento lenguìstego: $1',
+	'wikibase-comment-sitelink-change' => 'Colegamento lenguìstego canbià da $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Cavà colegamento lenguìstego: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|canbiamento|canbiamenti}}',
 	'wikibase-editlinks' => 'Canbia link',
+	'wikibase-editlinkstitle' => 'Canbia colegamenti interlenguìsteghi',
+	'wikibase-linkitem-addlinks' => 'Zonta link',
+	'wikibase-linkitem-close' => 'Sèra la finestra de dialogo e ricarga la pagina',
+	'wikibase-linkitem-title' => "Colega co n'altra pagina",
+	'wikibase-linkitem-linkpage' => 'Colega co la pagina',
 	'wikibase-linkitem-input-site' => 'Lengua:',
 	'wikibase-linkitem-input-page' => 'Pagina:',
+	'wikibase-linkitem-invalidsite' => 'Sito selessionà sconossùo o mia valido',
 	'wikibase-linkitem-confirmitem-button' => 'Va ben',
 	'wikibase-property-notfound' => 'Proprietà $1 mia catà.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => 'Mostra le modifiche de Wikidata tra i ultimi canbiamenti',
+	'wikibase-watchlist-show-changes-pref' => 'Mostra le modifiche de Wikidata sui osservati speciali',
 	'wikibase-unconnectedpages-submit' => 'Và',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" no xe un còdese de lengua valido.',
+	'wikibase-unconnectedpages-format-row' => '($1 colegamenti interlinguìsteghi in te la pagina)',
 );
 
 /** Vietnamese (Tiếng Việt)

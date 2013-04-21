@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Tests\Repo;
 
-use Wikibase\Client\WikibaseClient;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
- * Tests for the Wikibase\Client\WikibaseClient class.
+ * Tests for the Wikibase\Repo\WikibaseRepo class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,33 +25,28 @@ use Wikibase\Client\WikibaseClient;
  * @file
  * @since 0.4
  *
- * @ingroup WikibaseClient
+ * @ingroup WikibaseRepo
  * @ingroup Test
  *
  * @group Wikibase
- * @group WikibaseClient
- * @group WikibaseClientTest
+ * @group WikibaseRepo
+ * @group WikibaseRepoTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
+class WikibaseRepoTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return WikibaseClient
+	 * @return WikibaseRepo
 	 */
 	private function newInstance() {
-		return WikibaseClient::newInstance();
+		return WikibaseRepo::newInstance();
 	}
 
 	public function testGetSettingsReturnType() {
 		$returnValue = $this->newInstance()->getSettings();
 		$this->assertInstanceOf( 'Wikibase\SettingsArray', $returnValue );
-	}
-
-	public function testGetStoreReturnType() {
-		$returnValue = $this->newInstance()->getStore();
-		$this->assertInstanceOf( 'Wikibase\ClientStore', $returnValue );
 	}
 
 	public function testGetDataTypeFactoryReturnType() {
@@ -62,17 +57,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetEntityIdParserReturnType() {
 		$returnValue = $this->newInstance()->getEntityIdParser();
 		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdParser', $returnValue );
-	}
-
-	public function testEntityIdLabelFormatterReturnType() {
-		$returnValue = $this->newInstance()->newEntityIdLabelFormatter( 'en' );
-		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdLabelFormatter', $returnValue );
-	}
-
-	public function testGetDefaultInstance() {
-		$this->assertSame(
-			WikibaseClient::getDefaultInstance(),
-			WikibaseClient::getDefaultInstance() );
 	}
 
 }

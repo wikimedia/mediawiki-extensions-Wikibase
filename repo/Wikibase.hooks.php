@@ -160,6 +160,7 @@ final class RepoHooks {
 			'MultiLangConstraintDetector',
 			'NamespaceUtils',
 			'Summary',
+			'WikibaseRepo',
 
 			'actions/EditEntityAction',
 			'actions/ViewEntityAction',
