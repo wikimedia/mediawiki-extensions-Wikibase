@@ -42,9 +42,6 @@ final class LibHooks {
 			'formatters/EntityIdFormatter',
 			'formatters/EntityIdLabelFormatter',
 
-			'hasharray/HashArrayWithoutDuplicates',
-			'hasharray/HashArrayWithDuplicates',
-
 			'item/ItemDiff',
 
 			'parsers/EntityIdParser',

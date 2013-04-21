@@ -45,7 +45,6 @@ return call_user_func( function() {
 		'Wikibase\Lib\EntityRetrievingDataTypeLookup' => 'includes/EntityRetrievingDataTypeLookup.php',
 		'Wikibase\Lib\ClaimGuidGenerator' => 'includes/GuidGenerator.php',
 		'Wikibase\HashableObjectStorage' => 'includes/HashableObjectStorage.php',
-		'Wikibase\HashArray' => 'includes/HashArray.php',
 		'Wikibase\Lib\InMemoryDataTypeLookup' => 'includes/InMemoryDataTypeLookup.php',
 		'Wikibase\LibRegistry' => 'includes/LibRegistry.php',
 		'Wikibase\Template' => 'includes/TemplateRegistry.php',
@@ -133,9 +132,6 @@ return call_user_func( function() {
 
 		// tests
 		'Wikibase\Test\SpecialPageTestBase' => 'tests/phpunit/specials/SpecialPageTestBase.php',
-
-		'Wikibase\Test\HashArrayTest' => 'tests/phpunit/hasharray/HashArrayTest.php',
-		'Wikibase\Test\HashArrayElement' => 'tests/phpunit/hasharray/HashArrayElement.php',
 		'Wikibase\Test\TemplateTest' => 'tests/phpunit/TemplateTest.php',
 		'Wikibase\Test\TemplateRegistryTest' => 'tests/phpunit/TemplateRegistryTest.php',
 		'Wikibase\Test\ChangeRowTest' => 'tests/phpunit/changes/ChangeRowTest.php',

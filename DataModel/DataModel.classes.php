@@ -53,6 +53,7 @@ return call_user_func( function() {
 		'Wikibase\SnakRole' => 'DataModel/Snak/SnakRole.php',
 		'Wikibase\Snaks' => 'DataModel/Snak/Snaks.php',
 
+		'Wikibase\HashArray' => 'DataModel/HashArray.php',
 		'Wikibase\Reference' => 'DataModel/Reference.php',
 		'Wikibase\ReferenceObject' => 'DataModel/Reference.php', // Deprecated
 		'Wikibase\ReferenceList' => 'DataModel/ReferenceList.php',
