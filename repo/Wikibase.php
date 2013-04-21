@@ -111,6 +111,7 @@ $wgAutoloadClasses['Wikibase\MultiLangConstraintDetector'] 			= $dir . 'includes
 $wgAutoloadClasses['Wikibase\NamespaceUtils']						= $dir . 'includes/NamespaceUtils.php';
 $wgAutoloadClasses['Wikibase\PropertyView']							= $dir . 'includes/PropertyView.php';
 $wgAutoloadClasses['Wikibase\Summary']								= $dir . 'includes/Summary.php';
+$wgAutoloadClasses['Wikibase\Repo\WikibaseRepo']					= $dir . 'includes/WikibaseRepo.php';
 
 // includes/actions
 $wgAutoloadClasses['Wikibase\HistoryEntityAction'] 		= $dir . 'includes/actions/HistoryEntityAction.php';
