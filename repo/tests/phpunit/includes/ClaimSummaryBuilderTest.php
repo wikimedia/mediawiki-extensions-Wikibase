@@ -33,6 +33,7 @@ use Wikibase\ClaimSummaryBuilder;
  *
  * @group Wikibase
  * @group WikibaseRepo
+ * @group ClaimSummaryBuilder
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
