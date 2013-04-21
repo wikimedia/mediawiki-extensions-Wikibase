@@ -109,4 +109,22 @@ final class WikibaseRepo {
 		return new self( Settings::singleton() );
 	}
 
+	/**
+	 * Returns the default instance constructed using newInstance().
+	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
+	 *
+	 * @since 0.4
+	 *
+	 * @return WikibaseRepo
+	 */
+	public static function getDefaultInstance() {
+		static $instance = null;
+
+		if ( $instance === null ) {
+			$instance = self::newInstance();
+		}
+
+		return $instance;
+	}
+
 }

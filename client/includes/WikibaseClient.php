@@ -249,10 +249,11 @@ final class WikibaseClient {
 	public static function getDefaultInstance() {
 		static $instance = null;
 
-		if ( !$instance ) {
+		if ( $instance === null ) {
 			$instance = self::newInstance();
 		}
 
 		return $instance;
 	}
+
 }
