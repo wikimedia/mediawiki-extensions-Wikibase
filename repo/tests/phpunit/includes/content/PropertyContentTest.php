@@ -59,10 +59,7 @@ class PropertyContentTest extends EntityContentTest {
 	 */
 	protected function newEmpty() {
 		$content = PropertyContent::newEmpty();
-
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-		$dataTypes = $libRegistry->getDataTypeFactory()->getTypes();
-		$content->getProperty()->setDataType( array_shift( $dataTypes ) );
+		$content->getProperty()->setDataTypeId( 'string' );
 
 		return $content;
 	}
@@ -70,20 +67,17 @@ class PropertyContentTest extends EntityContentTest {
 	public function testLabelUniquenessRestriction() {
 		\Wikibase\StoreFactory::getStore()->getTermIndex()->clear();
 
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-		$dataTypeFactory = $libRegistry->getDataTypeFactory();
-
 		$propertyContent = PropertyContent::newEmpty();
 		$propertyContent->getProperty()->setLabel( 'en', 'testLabelUniquenessRestriction' );
 		$propertyContent->getProperty()->setLabel( 'de', 'testLabelUniquenessRestriction' );
-		$propertyContent->getProperty()->setDataType( $dataTypeFactory->getType( 'wikibase-item' ) );
+		$propertyContent->getProperty()->setDataTypeId( 'wikibase-item' );
 
 		$status = $propertyContent->save( 'create property', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "property creation should work" );
 
 		$propertyContent1 = PropertyContent::newEmpty();
 		$propertyContent1->getProperty()->setLabel( 'nl', 'testLabelUniquenessRestriction' );
-		$propertyContent1->getProperty()->setDataType( $dataTypeFactory->getType( 'wikibase-item' ) );
+		$propertyContent1->getProperty()->setDataTypeId( 'wikibase-item' );
 
 		$status = $propertyContent1->save( 'create property', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "property creation should work" );

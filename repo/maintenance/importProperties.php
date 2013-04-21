@@ -121,9 +121,7 @@ class importProperties extends Maintenance {
 		foreach ( $data as $lang => $title ) {
             $label = $title;
 			$property->setLabel( $lang, $label );
-
-			$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-            $property->setDataType( $libRegistry->getDataTypeFactory()->getType( 'wikibase-item' ) );
+            $property->setDataTypeId( 'wikibase-item' );
 		}
 
 		$content = \Wikibase\PropertyContent::newFromProperty( $property );
