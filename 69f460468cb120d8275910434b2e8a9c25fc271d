@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DvjBl-eI",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-22T10:59:58Z",
+      "side": 1,
+      "message": "This logic is not API specific, it makes sense in a use case. That does not mean the abstraction level of this one is completely correct though, however moving this back into the API modules would be bad.",
+      "parentUuid": "DvlAXWUQ",
+      "revId": "69f460468cb120d8275910434b2e8a9c25fc271d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DvvAkRbY",
         "filename": "repo/includes/ClaimSaver.php",
         "patchSetId": 1
