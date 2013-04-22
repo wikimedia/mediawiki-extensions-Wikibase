@@ -11,6 +11,7 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claim;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Snaks;
 use Wikibase\SnakFactory;
 use Wikibase\PropertyValueSnak;
@@ -217,10 +218,10 @@ class SetQualifier extends ApiWikibase {
 	}
 
 	protected function getParsedEntityId( $prefixedId, $errorCode ) {
-		$libRegistry = new LibRegistry( Settings::singleton() );
+		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
 		try {
-			$entityId = $libRegistry->getEntityIdParser()->parse( $prefixedId );
+			$entityId = $entityIdParser->parse( $prefixedId );
 		}
 		catch ( ParseException $parseException ) {
 			$this->dieUsage( $parseException->getMessage(), $errorCode );

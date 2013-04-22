@@ -9,6 +9,7 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SnakFactory;
 use Wikibase\LibRegistry;
 use Wikibase\Claim;
@@ -173,10 +174,10 @@ class CreateClaim extends ModifyClaim {
 		$params = $this->extractRequestParams();
 
 		$factory = new SnakFactory();
-		$libRegistry = new LibRegistry( Settings::singleton() );
+		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
 		try {
-			$entityId = $libRegistry->getEntityIdParser()->parse( $params['property'] );
+			$entityId = $entityIdParser->parse( $params['property'] );
 		}
 		catch ( ParseException $parseException ) {
 			throw new MWException( $parseException->getMessage(), 'setclaim-invalid-guid' );
