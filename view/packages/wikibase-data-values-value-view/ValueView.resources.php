@@ -82,9 +82,9 @@ return call_user_func( function() {
 				'jquery.valueview.experts', // because vv deals with ExpertFactory
 				'jquery.valueview.experts.unsupportedvalue', // for displaying unsupported values
 				'jquery.valueview.experts.emptyvalue', // for displaying empty values
-				'jquery.valueview.experts.stringvalue',
-				'jquery.valueview.experts.entityidvalue',
-				'jquery.valueview.experts.commonsmediatype',
+				// NOTE: don't add further experts here unless they are required by the valueview
+			    // widget directly. All experts are supposed to be loaded separately, by demand and
+				// by the controller requiring them.
 			),
 		),
 
@@ -101,6 +101,15 @@ return call_user_func( function() {
 				'dataValues.values',
 				'dataTypes',
 				'valueParsers.parsers',
+			),
+		),
+
+		'jquery.valueview.BifidExpert' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.BifidExpert.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts',
 			),
 		),
 
@@ -136,13 +145,12 @@ return call_user_func( function() {
 			)
 		),
 
-		'jquery.valueview.experts.entityidvalue' => $moduleTemplate + array(
+		'jquery.valueview.experts.staticdom' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.valueview/valueview.BifidExpert.js', // todo: define separate modules
 				'jquery.valueview/valueview.experts/experts.StaticDom.js',
 			),
 			'dependencies' => array(
-				'jquery.valueview.experts.stringvalue',
+				'jquery.valueview.experts',
 			),
 		),
 
@@ -159,12 +167,12 @@ return call_user_func( function() {
 
 		'jquery.valueview.experts.commonsmediatype' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.valueview/valueview.BifidExpert.js', // todo: define separate modules
-				'jquery.valueview/valueview.experts/experts.StaticDom.js',
 				'jquery.valueview/valueview.experts/experts.SuggestedStringValue.js',
 				'jquery.valueview/valueview.experts/experts.CommonsMediaType.js',
 			),
 			'dependencies' => array(
+				'jquery.valueview.experts.staticdom',
+				'jquery.valueview.BifidExpert',
 				'jquery.valueview.experts.stringvalue',
 				'jquery.ui.suggester',
 			),
