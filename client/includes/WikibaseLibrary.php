@@ -54,10 +54,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getEntity( $prefixedEntityId = null ) {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
 		$prefixedEntityId = trim( $prefixedEntityId );
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+
+		$entityIdParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
 
 		try {
-			$entityId = $libRegistry->getEntityIdParser()->parse( $prefixedEntityId );
+			$entityId = $entityIdParser->parse( $prefixedEntityId );
 		}
 		catch ( ParseException $parseException ) {
 			throw $this->getEngine()->newException( 'wikibase-error-invalid-entity-id' );
