@@ -1,7 +1,9 @@
 <?php
 
+use Wikibase\DataTypeSelector;
 use Wikibase\PropertyContent;
 use Wikibase\EntityContent;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Page for creating new Wikibase properties.
@@ -85,9 +87,9 @@ class SpecialNewProperty extends SpecialNewEntity {
 		$status = parent::modifyEntity( $propertyContent );
 
 		if ( $this->dataType !== '' ) {
-			$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
+			$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
 
-			$dataType = $libRegistry->getDataTypeFactory()->getType( $this->dataType );
+			$dataType = $dataTypeFactory->getType( $this->dataType );
 
 			if ( $dataType === null ) {
 				$status->fatal( 'wikibase-newproperty-invalid-datatype' );
@@ -104,10 +106,9 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 * @see SpecialNewEntity::additionalFormElements()
 	 */
 	protected function additionalFormElements() {
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-		$dataTypeFactory = $libRegistry->getDataTypeFactory();
+		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
 
-		$selector = new \Wikibase\DataTypeSelector( $dataTypeFactory->getTypes(), $this->getLanguage()->getCode() );
+		$selector = new DataTypeSelector( $dataTypeFactory->getTypes(), $this->getLanguage()->getCode() );
 
 		return parent::additionalFormElements()
 			. Html::element(
