@@ -8,7 +8,7 @@
 
 module ReferencePage
   include PageObject
-  # references UI elements
+  # qualifiers UI elements
   div(:qualifiersContainer, :class => "wb-claim-qualifiers")
   link(:addQualifier, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a[text()='add qualifier']")
   link(:removeQualifierLine1, :xpath => "//div[contains(@class, 'wb-claim-qualifiers')]/div[contains(@class, 'wb-snaklistview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[text()='remove']")
@@ -33,13 +33,14 @@ module ReferencePage
 
   def add_qualifier_to_first_claim(property, value)
     editFirstStatement
+    addQualifier
     self.entitySelectorInput = property
     ajax_wait
     wait_for_entity_selector_list
     wait_for_qualifier_value_box
     self.qualifierValueInput1 = value
     ajax_wait
-    saveReference
+    saveStatement
     ajax_wait
     wait_for_statement_request_finished
   end

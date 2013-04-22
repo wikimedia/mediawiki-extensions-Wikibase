@@ -23,6 +23,9 @@ class HistoryPage
   link(:undo8, :css => "ul#pagehistory > li:nth-child(8) > span.mw-history-undo > a")
   link(:undo9, :css => "ul#pagehistory > li:nth-child(9) > span.mw-history-undo > a")
 
+  span(:autocomment1, :xpath => "//ul[@id='pagehistory']/li[1]/span[contains(@class, 'comment')]/span/span[contains(@class, 'autocomment')]")
+  span(:autosummary1, :xpath => "//ul[@id='pagehistory']/li[1]/span[contains(@class, 'comment')]/span")
+
   link(:curLink4, :css => "ul#pagehistory > li:nth-child(4) > span.mw-history-histlinks > a")
   link(:oldRevision5, :css => "ul#pagehistory > li:nth-child(5) > a")
   link(:restoreLink, :css => "div#mw-diff-otitle1 > strong > a:nth-child(2)")
