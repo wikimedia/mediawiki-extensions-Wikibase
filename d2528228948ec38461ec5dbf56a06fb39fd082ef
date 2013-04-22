@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DvnUBJzw",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-22T08:28:20Z",
+      "side": 1,
+      "message": "you can use !empty( $x ) instead of isset( $x ) \u0026\u0026 count( $x ).\n\nThis is shorter and clearer. Note that empty() does not generate a warning for unset variables, just like isset.",
+      "revId": "d2528228948ec38461ec5dbf56a06fb39fd082ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvhWbExc",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-22T08:28:20Z",
+      "side": 1,
+      "message": "would be nicer to have all the setting of actions and summary arcs in one block, see blow.",
+      "revId": "d2528228948ec38461ec5dbf56a06fb39fd082ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvtWkm1s",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-22T08:28:20Z",
+      "side": 1,
+      "message": "how about something like this for setting the action and summary args here:\n\nif ( !empty( $params[\u0027add\u0027] ) \u0026\u0026 !empty( $params[\u0027remove\u0027] ) ) {\n  ...\n} elseif ( !empty( $params[\u0027add\u0027] ) ) {\n  ... \n} elseif ( !empty( $params[\u0027remove\u0027] ) ) {\n  ...\n}\n\nThis would avoid all the conditionals in the blocks above, and the summary creation would be in a single place.",
+      "revId": "d2528228948ec38461ec5dbf56a06fb39fd082ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
