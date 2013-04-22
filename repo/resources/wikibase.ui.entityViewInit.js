@@ -10,7 +10,7 @@
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  */
 
-( function( $, mw, wb, undefined ) {
+( function( $, mw, wb ) {
 	'use strict';
 
 	$( document ).ready( function() {
@@ -197,10 +197,12 @@
 			// add copyright warning to 'save' button if there is one:
 			if( mw.config.exists( 'wbCopyrightWarning' ) ) {
 
-				var $message = $( '<span><p>' + mw.config.get( 'wbCopyrightWarning' ) + '</p></span>' ),
+				var userLang = mw.config.get( 'wgUserLanguage' ),
+					cookieKey = 'wikibase.acknowledgedentitycopyright.' + userLang,
+					$message = $( '<span><p>' + mw.config.get( 'wbCopyrightWarning' ) + '</p></span>' ),
 					messageText = $.trim( $message.text() ); // get this before adding $hideMessage link!
 
-				if( messageText === $.cookie( 'wikibase.acknowledgedentitycopyright' ) ) {
+				if( messageText === $.cookie( cookieKey ) ) {
 					return;
 				}
 
@@ -242,7 +244,7 @@
 
 				$hideMessage.on( 'click', function() {
 					messageAnchor.removeTooltip();
-					$.cookie( 'wikibase.acknowledgedentitycopyright', messageText, { 'expires': null, 'path': '/' } );
+					$.cookie( cookieKey, messageText, { 'expires': null, 'path': '/' } );
 				} );
 
 				tooltip.show( true ); // show permanently, not just on hover!
