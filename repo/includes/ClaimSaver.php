@@ -7,6 +7,7 @@ use MWException;
 use Status;
 use ValueParsers\ParseException;
 use Wikibase\ExceptionWithCode;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Class for updating a claim in the primary storage.
@@ -97,8 +98,7 @@ class ClaimSaver {
 			throw new ExceptionWithCode( $exception->getMessage(), 'setclaim-invalid-guid' );
 		}
 
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-		$idParser = $libRegistry->getEntityIdParser();
+		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
 		try {
 			$entityId = $idParser->parse( $entityId );
