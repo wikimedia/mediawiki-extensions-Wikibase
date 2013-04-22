@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "DvtDRCVU",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-22T11:50:08Z",
+      "side": 1,
+      "message": "True, it\u0027s not API specific, it\u0027s \"external\" vs \"internal\". So it should not go into the API, but into the serialization layer used by the API, linked data interface, dump generator, etc. \n\nBut here, the external representation of the ID should not be used or known at all.",
+      "parentUuid": "DvjBl-eI",
+      "revId": "69f460468cb120d8275910434b2e8a9c25fc271d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DvvAkRbY",
         "filename": "repo/includes/ClaimSaver.php",
         "patchSetId": 1
