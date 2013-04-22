@@ -24,7 +24,7 @@ module ULSPage
       self.nouls_switch_language(code)
       return
     end
-    if ulsOpen_element.text != name
+    if ulsOpen_element.text.downcase != name.downcase
       ulsOpen
       self.ulsLanguageFilter= name
       ajax_wait
