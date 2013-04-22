@@ -240,7 +240,7 @@ describe "Check qualifiers UI" do
       end
     end
 
-    it "should check editing a reference" do
+    it "should check editing a qualifier" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
