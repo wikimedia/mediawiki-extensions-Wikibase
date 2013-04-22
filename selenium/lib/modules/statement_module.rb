@@ -38,7 +38,7 @@ module StatementPage
 
   def wait_for_property_value_box
     wait_until do
-      self.statementValueInput
+      self.statementValueInput?
     end
   end
 
@@ -63,6 +63,17 @@ module StatementPage
     ajax_wait
     self.wait_for_statement_request_finished
   end
+
+  def edit_first_statement(statement_value)
+      editFirstStatement
+      self.wait_for_property_value_box
+      self.statementValueInput_element.clear
+      self.statementValueInput = statement_value
+      ajax_wait
+      saveStatement
+      ajax_wait
+      self.wait_for_statement_request_finished
+    end
 
   def add_claim_to_first_statement(statement_value)
     addClaimToFirstStatement
