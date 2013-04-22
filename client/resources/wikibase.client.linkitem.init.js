@@ -35,7 +35,7 @@
 	 * Displays the link which opens the dialog (using jquery.wikibase.linkitem)
 	 */
 	$( document ).ready( function() {
-		$( '#wbc-linkToItem' )
+		$( '.wbc-editpage' ).eq(0)
 			.empty()
 			.append(
 				$( '<a>' )
