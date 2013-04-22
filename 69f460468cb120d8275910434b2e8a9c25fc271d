@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DvlAXWUQ",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-22T10:20:55Z",
+      "side": 1,
+      "message": "Should be done on the API level, we should only be seeing internal stuff in the backend.",
+      "revId": "69f460468cb120d8275910434b2e8a9c25fc271d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvvAkRbY",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-22T10:20:55Z",
+      "side": 1,
+      "message": "We should find a nice solution for this... reporting errors with a fixed string code makes sense, but knowledge about the API would be bad. Is this separate enough from API logic?",
+      "revId": "69f460468cb120d8275910434b2e8a9c25fc271d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvrAezVo",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-22T10:20:55Z",
+      "side": 1,
+      "message": "Should be done on the API level, we should only be seeing internal stuff in the backend.",
+      "revId": "69f460468cb120d8275910434b2e8a9c25fc271d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
