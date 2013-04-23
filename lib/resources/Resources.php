@@ -524,11 +524,13 @@ return call_user_func( function() {
 				'jquery.nativeEventHandler',
 				'jquery.wikibase.entityselector',
 				'wikibase.datamodel',
-				'mw.ext.valueView',
-				'jquery.valueview.experts.wikibase',
 				'wikibase.store', // required for getting datatype from entityselector selected property
 				'mediawiki.legacy.shared',
-				'jquery.ui.TemplatedWidget'
+				'jquery.ui.TemplatedWidget',
+				// valueviews for representing DataValues in snakview:
+				'jquery.valueview.experts.stringvalue',
+				'jquery.valueview.experts.commonsmediatype',
+				'jquery.valueview.experts.wikibase.entityidvalue',
 			),
 			'messages' => array(
 				'wikibase-snakview-property-input-placeholder',
@@ -639,11 +641,22 @@ return call_user_func( function() {
 		'jquery.valueview.experts.wikibase' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview.experts.wikibase/experts.wikibase.js',
+			),
+			'dependencies' => array(
+				'mw.ext.valueView',
+			),
+		),
+
+		'jquery.valueview.experts.wikibase.entityidvalue' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview.experts.wikibase/experts.wikibase.js',
 				'jquery.valueview.experts.wikibase/experts.wikibase.EntityIdInput.js',
 				'jquery.valueview.experts.wikibase/experts.wikibase.EntityIdValue.js',
 			),
 			'dependencies' => array(
-				'jquery.valueview',
+				'jquery.valueview.BifidExpert',
+				'jquery.valueview.experts.staticdom',
+				'jquery.valueview.experts.wikibase',
 				'wikibase.parsers',
 				'jquery.eachchange',
 				'jquery.inputAutoExpand',
