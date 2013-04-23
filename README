@@ -15,7 +15,7 @@ The repo is the extension for the repository. It allows the creation and mainten
 being used on wikidata.org.
 
 The client is the extension for the client. It allows several MediaWiki instances to use data provided by a Wikidata
-instance. Usually, you would not use them in a single wiki. This is being used Wikipedias.
+instance. Usually, you would not use them in a single wiki. This is being used on the Wikipedias.
 
 The lib bundles common code that is used by both the client and the repo.
 
