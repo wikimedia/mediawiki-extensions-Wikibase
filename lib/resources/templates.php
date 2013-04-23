@@ -39,9 +39,11 @@ $4 <!-- terms -->
 $5 <!-- claims -->
 HTML;
 
+// $1: Text of the heading.
+// $2: Optional ID for the heading.
 	$templates['wb-section-heading'] =
 <<<HTML
-<h2 class="wb-section-heading" dir="auto">$1</h2>
+<h2 class="wb-section-heading" dir="auto" id="$2">$1</h2>
 HTML;
 
 	$templates['wb-claimlist'] =
