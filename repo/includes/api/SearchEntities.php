@@ -145,7 +145,7 @@ class SearchEntities extends ApiBase {
 					if ( $term->getType() === 'alias' ) {
 						// Only include matching aliases
 						// TODO This needs to be rethought when a different search engine is used
-						if ( preg_match( "/^" . preg_quote( $params['search'] ) . "/i", $term->getText() ) !== 0 ) {
+						if ( preg_match( "/^" . preg_quote( $params['search'], '/' ) . "/i", $term->getText() ) !== 0 ) {
 							$aliases[] = $term->getText();
 						}
 					}
