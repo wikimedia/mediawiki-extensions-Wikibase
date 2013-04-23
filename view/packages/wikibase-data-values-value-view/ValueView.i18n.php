@@ -56,10 +56,12 @@ $messages['qqq'] = array(
 );
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
+ * @author Wizardist
  */
 $messages['be-tarask'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Апрацоўка зьвестак тыпу «$1» пакуль не падтрымліваецца.', # Fuzzy
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Апрацоўка значэньняў тыпу «$1» яшчэ не падтрымліваецца.', # Fuzzy
+	'valueview-expert-emptyvalue-empty' => 'пуста',
 );
 
 /** Bengali (বাংলা)
@@ -238,9 +240,13 @@ $messages['mk'] = array(
 );
 
 /** Malay (Bahasa Melayu)
+ * @author Anakmalaysia
  */
 $messages['ms'] = array(
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Pengelolaan nilai-nilai untuk jenis data "$1" belum disokong.', # Fuzzy
+	'valueview-desc' => 'Komponen-komponen UI untuk memaparkan dan menyunting nilai data',
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Pengelolaan nilai "$1" belum disokong.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Pengelolaan nilai untuk jenis data "$1" belum disokong.',
+	'valueview-expert-emptyvalue-empty' => 'kosong',
 );
 
 /** Norwegian Bokmål (norsk bokmål)
@@ -270,6 +276,13 @@ $messages['pl'] = array(
  */
 $messages['pms'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestion dij valor për la sòrt ëd dat "$1" a l\'é anco\' pa apogià.', # Fuzzy
+);
+
+/** Pashto (پښتو)
+ * @author Ahmed-Najib-Biabani-Ibrahimkhel
+ */
+$messages['ps'] = array(
+	'valueview-expert-emptyvalue-empty' => 'تش',
 );
 
 /** tarandíne (tarandíne)
