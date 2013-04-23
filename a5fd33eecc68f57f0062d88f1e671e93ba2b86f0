@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DvmXrst4",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-04-23T13:20:20Z",
+      "side": 1,
+      "message": "set can be an empty array (\u003d\u003e remove all aliases) while that doesn\u0027t make sense for add/ remove",
+      "parentUuid": "Dvmoc4b4",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dvgp6De8",
         "filename": "repo/includes/api/SetAliases.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-04-23T10:30:46Z",
       "side": 1,
       "message": "I vote for \u0027xor\u0027, not \u0027Xor\u0027. Or just !\u003d\u003d.\n\nalso again, why use !empty( $params[\u0027add\u0027] ) but isset( $params[\u0027set\u0027] ) ?",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvgW5nuk",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-04-23T13:20:20Z",
+      "side": 1,
+      "message": "Will change to xor\n\nset can be an empty array (\u003d\u003e remove all aliases) while that doesn\u0027t make sense for add/ remove",
+      "parentUuid": "Dvgp6De8",
       "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DviW.GtI",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-04-23T13:20:20Z",
+      "side": 1,
+      "message": "set can be an empty array (\u003d\u003e remove all aliases) while that doesn\u0027t make sense for add/ remove",
+      "parentUuid": "DvsqDlc4",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DvuqI0eo",
         "filename": "repo/includes/api/SetAliases.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2013-04-23T10:30:46Z",
       "side": 1,
       "message": "(can be combined with \u0027add\u0027)",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvsWypgU",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-04-23T13:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DvuqI0eo",
       "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "DvuW3ovI",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-04-23T13:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dvkp4BfA",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DvipoKR4",
         "filename": "repo/includes/api/SetAliases.php",
         "patchSetId": 4
@@ -98,6 +188,24 @@
       "writtenOn": "2013-04-23T10:30:46Z",
       "side": 1,
       "message": "An example with add \u0026 remove at once would be nice here.",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvoXNjok",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-04-23T13:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DvipoKR4",
       "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
