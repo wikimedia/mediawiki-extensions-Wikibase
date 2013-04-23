@@ -1173,6 +1173,7 @@ $messages['it'] = array(
 	'wikibase-tooltip-error-details' => 'Dettagli',
 	'datatypes-type-wikibase-item' => 'Elemento',
 	'datatypes-type-commonsMedia' => 'File multimediale su Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Japanese (日本語)
@@ -1463,6 +1464,7 @@ $messages['ms'] = array(
 	'wikibase-tooltip-error-details' => 'Butiran',
 	'datatypes-type-wikibase-item' => 'Perkara',
 	'datatypes-type-commonsMedia' => 'Fail media Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Norwegian Bokmål (norsk bokmål)

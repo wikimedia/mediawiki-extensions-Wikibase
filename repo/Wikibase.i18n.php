@@ -599,7 +599,7 @@ Parameters:
 	'wikibase-error-constraint-violation-aliases' => 'Error message shown when a user tries to save XXXX that has some constraint violation.
 * $1 - the count of violating languages
 * $2 - the violating languages
-* $3 - the violating string, but this is usually not very useful as the message is usually given in an edit window', # Fuzzy
+* $3 - the violating string, but this is usually not very useful as the message is usually given in an edit window',
 	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a site link already used by another item. Parameters:
 * $1 is the site id (interwiki prefix);
 * $2 is the title on the remote site;
@@ -624,10 +624,10 @@ used to generate the link text for links to items. $1 is the items label, $2 the
 	'wikibase-itemlink-id-wrapper' => '{{optional}}
 Used to wrap the items id for a link to an item in parentheses or similar. Params:
 * $1 is the prefixed id of the item',
-	'wikibase-itemlink-userlang-wrapper' => '{{optional}}
-Used to wrap the language and label for an additional entry when the language are dissimilar to the users own. Parameters:
-* $1 is the labels language name
-* $2 is the label text',
+	'wikibase-itemlink-userlang-wrapper' => "{{optional}}
+Used to wrap the language and label for an additional entry when the language are different from the user's own. Parameters:
+* $1 is the label;s language name
+* $2 is the label text",
 	'wikibase-itemlink-title' => '{{optional}}
 Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description. Parameters:
 * $1 label as a directional string
@@ -2438,13 +2438,24 @@ $messages['cy'] = array(
 	'wikibase-undo-revision-error' => 'Methwyd gwrthdroi',
 	'wikibase-undo-badpage' => "Diwygiad gwallus: Nid yw'r diwygiad $2 yn perthyn i [[$1]].",
 	'wikibase-undo-firstrev' => "Ni ellir gwrthdroi'r diwygiad a ddechreuodd y dudalen",
+	'wikibase-propertyedittool-full' => 'Mae rhestr y gwerthoedd yn gyflawn.',
+	'wikibase-propertyedittool-counter-pending-tooltip' => 'Mae {{PLURAL:$1||un gwerth|$1 werth|$1 gwerth}} o hyd yn disgwyl cael {{PLURAL:$1||ei gadw|eu cadw}}',
+	'wikibase-disambiguation-title' => 'Gwahaniaethu ystyron "$1"',
 	'wikibase-aliases-label' => 'Arallenwau:',
+	'wikibase-aliases-empty' => 'Nid oes arallenwau i hwn eto.',
 	'wikibase-datatype-label' => 'Math y data:',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|ffynhonnell}}',
 	'wikibase-snakview-property-input-placeholder' => 'nodwedd',
+	'wikibase-snakview-choosesnaktype' => 'Dewiswch fath y gwerth.',
+	'wikibase-snakview-variations-somevalue-label' => 'gwerth anhysbys',
+	'wikibase-snakview-variations-novalue-label' => 'dim gwerth',
+	'wikibase-snakview-snaktypeselector-somevalue' => 'gwerth anhysbys',
+	'wikibase-snakview-snaktypeselector-novalue' => 'dim gwerth',
 	'wikibase-entityselector-more' => 'mwy',
 	'wikibase-anonymouseditwarning' => 'Dalier sylw: Nid ydych wedi mewngofnodi. 
 Fe fydd eich cyfeiriad IP yn ymddangos ar hanes golygu $1.',
+	'special-itembytitle' => 'Eitem yn ôl teitl',
+	'wikibase-itembytitle-lookup-fieldset' => 'Chwilio am eitemau yn ôl gwefan a theitl',
 	'wikibase-itembytitle-lookup-site' => 'Wici:',
 	'wikibase-itembytitle-lookup-page' => 'Tudalen:',
 	'wikibase-itembytitle-submit' => 'Chwilier',
@@ -2652,7 +2663,7 @@ Din IP-adresse vil blive registreret i redigeringshistorikken for dette/denne $1
 	'wikibase-restore-summary' => 'Gendan version $1 af [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Direkte redigering er deaktiveret i navnerummet $1',
 	'wikibase-noentity' => 'Dette datasæt findes ikke. Du kan
-<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søge efter relaterede logfiler]</span>
+<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søge i relaterede logfiler]</span>
 for at finde ud af, hvad der er sket med det.',
 	'wikibase-noentity-createone' => 'Du kan også [[$1|oprette et nyt]].',
 	'wikibase-item-summary-wbsetitem' => 'Oprettede et nyt emne',
@@ -2783,6 +2794,7 @@ for at finde ud af, hvad der er sket med det.',
  * @author Metalhead64
  * @author Michawiki
  * @author Nipsky
+ * @author Purodha
  * @author Vogone
  */
 $messages['de'] = array(
@@ -3039,9 +3051,9 @@ Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPA
 * language – ausdrücklicher Wert zur Identifizierung der Sprache des Textabschnitts.
 * text – ausdrücklicher Wert für die sprachspezifische Variantenkette.',
 	'wikibase-listdatatypes-string-head' => 'Zeichenkette',
-	'wikibase-listdatatypes-string-body' => 'Literales Datenfeld für eine Zeichenkette. Typische Verwendung sind Kennungen, die geschriebene Formulare haben, die nicht von der Sprache abhängig sind. Solche Zeichenketten können in einigen Fällen in andere Skriptsysteme transliteriert werden.
-* language – ausdrücklicher Wert zur Identifizierung der Sprache für den Textabschnitt.
-* text – ausdrücklicher Wert für die sprachspezifische Variantenkette.',
+	'wikibase-listdatatypes-string-body' => 'Literales Datenfeld für eine Zeichenketteneingabe. Es findet typischerweise Verwendung für Namen, Bezeichnungen oder Kennungen in sprachunabhängigen Formularfeldern mit Texteingabe. Dort eingegebene Zeichenketten können in einigen Fällen in andere Schriften transliteriert werden.
+* language – eindeutige Angabe zur Identifizierung der Sprache (und somit Schrift) des Textanteils
+* text – der Textanteil enthält die jeweilige Angabe in der genannten Sprache',
 	'wikibase-listdatatypes-time-head' => 'Zeit',
 	'wikibase-listdatatypes-time-body' => 'Literales Datenfeld für einen Zeitwert, angegeben als Zeit mit Genauigkeit und Begrenzungen. Die Zeit wird immer intern als gregorianisch gespeichert, kann jedoch andere Formate beim Parsen und Formatieren benutzen (?).
 * time – ausdrücklicher Wert für einen Zeitpunkt, dargestellt in ISO8601. Das Jahr hat immer 11 Ziffern. Das Datum ist immer signiert im Format +00000002013-01-01T00:00:00Z.
@@ -4481,7 +4493,8 @@ $messages['fi'] = array(
 	'wikibase-anonymouseditwarning' => 'Varoitus: Et ole kirjautunut sisään.
 IP-osoitteesi kirjataan sivun $1 muokkaushistoriaan.',
 	'wikibase-restrictionedit-tooltip-message' => 'Tämä sivu on suojattu. Muokkaaminen ei ole sallittua.',
-	'wikibase-blockeduser-tooltip-message' => 'Sinut on estetty muokkaamasta.', # Fuzzy
+	'wikibase-blockeduser-tooltip-message' => 'Sinulla ei ole lupaa muokata, koska käyttäjänimesi tai IP-osoitteesi on estetty.',
+	'wikibase-move-error' => 'Et voi siirtää sivuja, jotka ovat data-nimiavaruudessa, etkä voi siirtää sivuja siihen.',
 	'wikibase-warning-constraint-violation-length' => 'Kielikoodi $1 on liian pitkä.',
 	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|Nimi|Nimet}} ”$3” {{PLURAL:$1|kielikoodilla|kielikoodeilla}} $2 {{PLURAL:$1|ei|eivät}} noudata rajoituksia.',
 	'wikibase-error-constraint-violation-description' => '{{PLURAL:$1|Kuvaus|Kuvaukset}} ”$3” {{PLURAL:$1|kielikoodilla|kielikoodeilla}} $2 {{PLURAL:$1|ei|eivät}} noudata rajoituksia.',
@@ -4554,6 +4567,7 @@ IP-osoitteesi kirjataan sivun $1 muokkaushistoriaan.',
 	'wikibase-dispatchstats-site-id' => 'Sivusto',
 	'wikibase-dispatchstats-lag-num' => 'Odottaa',
 	'wikibase-dispatchstats-lag-time' => 'Viive',
+	'wikibase-dispatchstats-large-lag' => '(erittäin suuri)',
 	'wikibase-dispatchstats-freshest' => 'Tuorein',
 	'wikibase-dispatchstats-stalest' => 'Vanhentunein',
 	'wikibase-dispatchstats-median' => 'Mediaani',
@@ -4569,6 +4583,7 @@ IP-osoitteesi kirjataan sivun $1 muokkaushistoriaan.',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'kaikki',
 	'wikibase-entitieswithoutlabel-submit' => 'Etsi',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" ei ole kelvollinen kielikoodi.',
+	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" ei ole kelvollinen aiheen tyyppi.',
 	'special-itemswithoutsitelinks' => 'Kohteet ilman sivustolinkkejä',
 	'special-entitydata' => 'Kohteen tiedot',
 	'wikibase-entitydata-not-found' => 'Aihetta tunnuksella $1 ei löytynyt.',
@@ -4587,6 +4602,7 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbeditentity-create' => 'Uusi kohde luotiin',
 	'wikibase-item-summary-wbeditentity-update' => 'Kohde päivitetty',
 	'wikibase-item-summary-wbeditentity-override' => 'Kohde korvattu',
+	'wikibase-item-summary-wbsetreference' => 'Aseta lähde',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2]-nimi muutettu',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2]-nimi poistettu',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2]-kuvaus muutettu',
@@ -4681,6 +4697,7 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
  * @author Tititou36
  * @author Tpt
  * @author Wyz
+ * @author Zolo
  */
 $messages['fr'] = array(
 	'wikibase-desc' => 'Référentiel de données structurées',
@@ -4869,7 +4886,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de ce $
 	'wikibase-item-summary-wbeditentity-create' => 'Création d’un nouvel élément',
 	'wikibase-item-summary-wbeditentity-update' => 'Mise à jour d’un élément',
 	'wikibase-item-summary-wbeditentity-override' => 'Outrepasser un élément',
-	'wikibase-item-summary-wbsetreference' => 'Définir une référence',
+	'wikibase-item-summary-wbsetreference' => "définit la valeur d'une référence",
 	'wikibase-item-summary-wbsetlabel-set' => 'Changement du libellé [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Retrait du libellé [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Modification de la description [$2]',
@@ -4882,15 +4899,17 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de ce $
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Lien vers [$2] supprimé',
 	'wikibase-item-summary-wblinktitles-create' => 'Cet élément créé pour connecter les pages [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Lien de langue ajouté pour connecter les pages [$2↔$3]',
-	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Une revendication créée|Revendications créées}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Une revendication créée|Revendications créées}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Une revendication créée|Revendications créées}}',
-	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|Une revendication créée|Revendications créées}}',
-	'wikibase-item-summary-wbsetclaimvalue' => 'Définir {{PLURAL:$1|une valeur de revendication|des valeurs de revendication}}',
-	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Une revendication supprimée|Revendications supprimées}}',
-	'wikibase-item-summary-special-create-item' => 'Un élément [$2] créé avec {{PLURAL:$1|une valeur|des valeurs}}',
-	'wikibase-item-summary-wbcreateclaim-create' => 'Revendication créée',
-	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$3|Revendication supprimée|Revendications supprimées}}',
+	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Affirmation ajoutée|Affirmations ajoutées}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Valeur spéciale «&nbsp;aucune valeur&nbsp;» ajoutée|Valeurs spéciales «&nbsp;aucune valeur&nbsp;» ajoutées}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Affirmation ajoutée : «&nbsp;valeur inconnue&nbsp;»|A
+ffirmations ajoutées : «&nbsp;valeur inconnue&nbsp;»}}',
+	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|Affirmation ajoutée|A
+ffirmation ajoutée}}',
+	'wikibase-item-summary-wbsetclaimvalue' => '{{PLURAL:$1|affirmation modifiée|affirmations modifiées}}',
+	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Affirmation supprimée|Affirmations supprimées}}',
+	'wikibase-item-summary-special-create-item' => 'Un élément [$2] créé avec {{PLURAL:$1|la valeur|les valeurs}}',
+	'wikibase-item-summary-wbcreateclaim-create' => 'Affirmation ajoutée',
+	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$3|Affirmatin supprimée|Affirmations supprimées}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Création d’une nouvelle propriété',
 	'wikibase-property-summary-wbeditentity-update' => 'Mise à jour d’une propriété',
 	'wikibase-property-summary-wbeditentity-override' => 'Outrepasser une propriété',
@@ -7242,9 +7261,6 @@ Nella cronologia di $1 verrà registrato il tuo indirizzo IP.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Un\'altra proprietà ($3) ha già l\'etichetta "$1" associata con il codice lingua $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Un\'altra chiave di ricerca ($3) ha già l\'etichetta "$1" associata con il codice lingua $2',
 	'wikibase-error-label-not-unique-item' => 'Un altro elemento ($3) ha già l\'etichetta "$1" e la descrizione "$4" associate con il codice lingua $2',
-	'wikibase-itemlink' => '$1 $2',
-	'wikibase-itemlink-id-wrapper' => '($1)',
-	'wikibase-itemlink-title' => '$1 | $2',
 	'special-itembytitle' => 'Elementi per titolo',
 	'wikibase-itembytitle-lookup-fieldset' => 'Ricerca elementi per sito e titolo',
 	'wikibase-itembytitle-lookup-site' => 'Sito:',
@@ -8274,6 +8290,9 @@ $messages['ksh'] = array(
 	'wikibase-property-summary-wbeditentity-create' => 'En neu Eijeschaff aanjelaat',
 	'wikibase-property-summary-wbeditentity-update' => 'En Eijeschaff obb ene neue Schtand jebraat',
 	'wikibase-property-summary-wbeditentity-override' => 'En Eijeschaff ußjetuusch',
+	'wikibase-listdatatypes-string-body' => 'Daatefäld för en wöötlesche Ennjaabe vun enem Täx. Et weet fö jewöhnlesch jebruch för Name, Bezeischnonge udder Kännzeische, di nit en en beschtemmpte Schprooch sin. Se künne mänschmohl en ander Schreffte ömjesaz wääde.
+* <code langg="en">language</code> – jitt de Schprooch (un domet de Schreff) för dä Täx-Deil aan
+* <code langg="en">text</code> – dä Täx-Deil en dä aanjejovve Schprooch',
 	'right-item-override' => 'Daatesäz övverschriive',
 	'right-item-create' => 'Daatesäz aanlääje',
 	'right-item-remove' => 'Daatesäz fott schmiiße',
@@ -9187,12 +9206,14 @@ $messages['ms'] = array(
 	'wikibase-save' => 'simpan',
 	'wikibase-cancel' => 'batalkan',
 	'wikibase-add' => 'tambah',
+	'wikibase-addqualifier' => 'tambah penerang',
 	'wikibase-addreference' => 'tambah sumber',
 	'wikibase-save-inprogress' => 'Menyimpan…',
 	'wikibase-remove-inprogress' => 'Membuang…',
 	'wikibase-label-empty' => 'Label belum ditetapkan.',
 	'wikibase-label-edit-placeholder' => 'taipkan label',
 	'wikibase-description-empty' => 'Keterangan belum dinyatakan.',
+	'wikibase-deletedentity' => '$1 dihapuskan',
 	'wikibase-description-edit-placeholder' => 'taipkan keterangan',
 	'wikibase-sitelink-site-edit-placeholder' => 'tapak',
 	'wikibase-sitelink-page-edit-placeholder' => 'rencana',
@@ -9214,6 +9235,7 @@ $messages['ms'] = array(
 	'wikibase-undo-samerev' => 'Tidak boleh dibalikkan; semakan sebelum dan selepas pembalikan adalah sama.',
 	'wikibase-undo-badpage' => 'Semakan tak elok: Semakan $2 tidak tergolong dalam [[$1]].',
 	'wikibase-undo-firstrev' => 'Penciptaan halaman tidak boleh dibalikkan',
+	'wikibase-undo-nocontent' => 'Isi kandungan semakan $2 dari halaman $1 tidak dapat dimuatkan',
 	'wikibase-propertyedittool-full' => 'Senarai nilai telah dilengkapkan.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Satu|$1}} nilai belum disimpan',
 	'wikibase-propertyedittool-counter-entrieslabel' => '$1 entri',
@@ -9231,9 +9253,9 @@ $messages['ms'] = array(
 	'wikibase-snakview-property-input-placeholder' => 'sifat',
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak jenis "$1". Pengelolaan untuk jenis Snak ini belum disokong.',
 	'wikibase-snakview-choosesnaktype' => 'Pilih jenis nilai.',
-	'wikibase-snakview-variation-unsupporteddatatype' => 'Pengelolaan nilai-nilai untuk jenis data "$1" belum disokong.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Nilai ini tidak mematuhi takrifan sifat ini.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Jenis nilai data milik nilai, "$1" tidak sepadan dengan jenis nilai data milik jenis data sifat, "$2".',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Nilai baru tidak boleh ditentukan untuk sifat yang sudah dihapuskan.',
 	'wikibase-snakview-variations-somevalue-label' => 'nilai tidak diketahui',
 	'wikibase-snakview-variations-novalue-label' => 'tiada nilai',
 	'wikibase-snakview-snaktypeselector-value' => 'nilai tersuai',
@@ -9242,8 +9264,10 @@ $messages['ms'] = array(
 	'wikibase-shortcopyrightwarning' => 'Sambil mengklik "$1", anda bersetuju dengan [[$2|syarat-syarat]] dan sudi melepaskan sumbangan anda tanpa di bawah $3 tanpa boleh ditarik balik.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Saya menerima syarat-syarat ini untuk suntingan saya yang akan datang. Jangan paparkan pesanan ini lagi.',
 	'wikibase-entityselector-more' => 'lagi',
+	'wikibase-anonymouseditwarning' => 'Amnaran: Anda belum log masuk.
+Alamat IP anda akan dicatatkan dalam sejarah suntingan $1 ini.',
 	'wikibase-restrictionedit-tooltip-message' => 'Halaman ini dilindungi. Dilarang menyunting.',
-	'wikibase-blockeduser-tooltip-message' => 'Anda disekat daripada menyunting.',
+	'wikibase-blockeduser-tooltip-message' => 'Anda tidak dibenarkan untuk menyunting kerana nama pengguna atau alamat IP anda telah disekat.',
 	'wikibase-move-error' => 'Anda tidak boleh memindahkan halaman-halaman yang terdapat dalam ruang nama data, dan anda tidak boleh memindahkan halaman-halaman ke dalamnya.',
 	'wikibase-warning-constraint-violation-length' => 'Batas kepanjangan dicetus untuk kod bahasa "$1".',
 	'wikibase-error-constraint-violation-label' => 'Terdapat pencabulan {{PLURAL:$1|batas}} untuk {{PLURAL:$1|label|label-label}} "$3" untuk {{PLURAL:$1|kod|kod-kod}} bahasa "$2".',
@@ -9253,7 +9277,7 @@ $messages['ms'] = array(
 	'wikibase-error-label-not-unique-wikibase-property' => 'Satu lagi sifat ($3) sudah ada label "$1" yang berkaitan dengan kod bahasa $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Satu lagi pertanyaan ($3) sudah ada label "$1" yang berkaitan dengan kod bahasa $2',
 	'wikibase-error-label-not-unique-item' => 'Satu lagi perkara ($3) sudah ada label "$1" dan keterangan "$4" yang berkaitan dengan kod bahasa $2',
-	'special-itembytitle' => 'Perkara mengikut pautan tapak', # Fuzzy
+	'special-itembytitle' => 'Perkara mengikut tajuk',
 	'wikibase-itembytitle-lookup-fieldset' => 'Cari perkara mengikut tapak dan tajuk',
 	'wikibase-itembytitle-lookup-site' => 'Tapak:',
 	'wikibase-itembytitle-lookup-page' => 'Halaman:',
@@ -9282,6 +9306,8 @@ $messages['ms'] = array(
 	'wikibase-newitem-site' => 'Tapak halaman terpaut pertama',
 	'wikibase-newitem-page' => 'Nama halaman terpaut pertama',
 	'wikibase-newitem-no-external-page' => 'Halaman yang dinyatakan tidak terdapat dalam tapak yang berkenaan.',
+	'wikibase-newitem-add-sitelink-failed' => 'Pautan tapak ini tidak dapat disimpan.',
+	'wikibase-newitem-not-recognized-siteid' => 'Pengecam tapak yang diberikan tidak dikenali.',
 	'wikibase-newentity-label' => 'Label:',
 	'wikibase-newentity-description' => 'Keterangan:',
 	'wikibase-newentity-submit' => 'Cipta',
@@ -9298,7 +9324,7 @@ $messages['ms'] = array(
 	'wikibase-setdescription-submit' => 'Tetapkan keterangan',
 	'wikibase-setdescription-warning-remove' => 'Adakah anda benar-benar mahu memadamkan keterangan [[$1]]?',
 	'special-setaliases' => 'Tetapkan alias',
-	'wikibase-setaliases-introfull' => 'Anda sedang menetapkan alias dalam $2 untuk [[$1]]. Jika ada lebih daripada satu alias, asingkan setiap satu dengan tanda <code>|</code>.', # Fuzzy
+	'wikibase-setaliases-introfull' => 'Anda sedang menetapkan alias dalam $2 untuk [[$1]]. Jika ada lebih daripada satu alias, asingkan setiap satu dengan tanda paip (<code>|</code>).',
 	'wikibase-setaliases-intro' => 'Borang ini membolehkan anda untuk menetapkan alias sesuatu entiti. Anda perlu memberikan ID entiti (cth. Q23), kod bahasa (cth. "ms") dan keterangan yang hendak ditetapkan. Jika ada lebih daripada satu alias, asingkan setiap satu dengan tanda <code>|</code>.',
 	'wikibase-setaliases-label' => 'Alias:',
 	'wikibase-setaliases-submit' => 'Tetapkan alias',
@@ -9307,6 +9333,33 @@ $messages['ms'] = array(
 	'wikibase-setentity-language' => 'Bahasa:',
 	'wikibase-setentity-invalid-langcode' => 'Kod bahasa "$1" tidak diketahui. Sila gunakan kod bahasa yang dikenali oleh sistem, contohnya "en".',
 	'wikibase-setentity-invalid-id' => 'ID "$1" tidak dikenali oleh sistem. Sila gunakan ID entiti yang sah.',
+	'special-dispatchstats' => 'Ubah statistik hantaran',
+	'wikibase-dispatchstats-intro' => 'Halaman ini menyediakan statistik tentang penghantaran perubahan kepada klien.
+Wiki klien diberitahu akan perubahan pada {{SITENAME}} sebaik sahaja perubahan telah dihantar ke wiki itu, dan baris gilir kerja di wiki itu telah memproses pemberitahuan tersebut.
+* [[#{{int:wikibase-dispatchstats-changes}}|{{int:wikibase-dispatchstats-changes}}]] menunjukkan bilangan dan tarikh untuk perkara-perkara paling lama dan paling baru yang kini berada dalam baris gilir.
+* [[#{{int:wikibase-dispatchstats-stats}}|{{int:wikibase-dispatchstats-stats}}]] menyediakan maklumat tentang wiki-wiki klien yang paling lama dan yang paling kurang senjangnya serta satu wiki median di antaranya. Untuk setiap wiki disediakannya maklumat yang berikut:
+** "{{int:wikibase-dispatchstats-site-id}}" merupakan ID dalaman wiki klien.
+** "{{int:wikibase-dispatchstats-pos}}" merupakan ID perubahan terakhir yang dihantar ke wiki itu.
+** "{{int:wikibase-dispatchstats-lag-num}}" merupakan bilangan perubahan yang belum dihantar ke wiki itu.
+** "{{int:wikibase-dispatchstats-lag-time}}" merupakan selang masa antara perubahan terkini yang dihantar ke wiki itu, dan perubahan terkini yang dilakukan pada {{SITENAME}}.
+** "{{int:wikibase-dispatchstats-touched}}" merupakan waktu penghantaran kelompok perubahan yang terakhir ke wiki itu.',
+	'wikibase-dispatchstats-no-stats' => 'Tidak terdapat statistik buat masa ini.',
+	'wikibase-dispatchstats-changes' => 'Ubah statistik log',
+	'wikibase-dispatchstats-stats' => 'Hantar statistik',
+	'wikibase-dispatchstats-change-id' => 'ID',
+	'wikibase-dispatchstats-change-timestamp' => 'Cap waktu',
+	'wikibase-dispatchstats-oldest-change' => 'Terlama',
+	'wikibase-dispatchstats-newest-change' => 'Terbaru',
+	'wikibase-dispatchstats-site-id' => 'Tapak',
+	'wikibase-dispatchstats-pos' => 'Kedudukan',
+	'wikibase-dispatchstats-lag-num' => 'Belum selesai',
+	'wikibase-dispatchstats-lag-time' => 'Senjang',
+	'wikibase-dispatchstats-touched' => 'Disentuh',
+	'wikibase-dispatchstats-large-lag' => '(sangat besar)',
+	'wikibase-dispatchstats-freshest' => 'Paling mutakhir',
+	'wikibase-dispatchstats-stalest' => 'Paling lapuk',
+	'wikibase-dispatchstats-median' => 'Median',
+	'wikibase-dispatchstats-average' => 'Purata',
 	'special-listdatatypes' => 'Senarai semua jenis data yang ada',
 	'wikibase-listdatatypes-intro' => 'Ini ialah senarai semua jenis data yang sedang digunakan dalam pemasangan ini:',
 	'wikibase-history-title-with-label' => 'Semakan sejarah "$2" ($1)',
@@ -9341,6 +9394,7 @@ untuk mencari di mana set data itu.',
 	'wikibase-item-summary-wbeditentity-create' => 'Perkara baru dicipta',
 	'wikibase-item-summary-wbeditentity-update' => 'Perkara dikemaskinikan',
 	'wikibase-item-summary-wbeditentity-override' => 'Perkara ditulis ganti',
+	'wikibase-item-summary-wbsetreference' => 'Tetapkan rujukan',
 	'wikibase-item-summary-wbsetlabel-set' => 'Label [$2] ditukar',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Label [$2] dibuang',
 	'wikibase-item-summary-wbsetdescription-set' => 'Keterangan [$2] diubah',
@@ -9349,9 +9403,10 @@ untuk mencari di mana set data itu.',
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Menambahkan dan membuang {{PLURAL:$1|nama lain|nama-nama lain}} [$2]',
 	'wikibase-item-summary-wbsetaliases-add' => 'Menambahkan {{PLURAL:$1|nama lain|nama-nama lain}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Membuang {{PLURAL:$1|nama lain|nama-nama lain}} [$2]',
-	'wikibase-item-summary-wbsetsitelink-set' => 'Menambahkan pautan [$2] khusus tapak', # Fuzzy
-	'wikibase-item-summary-wbsetsitelink-remove' => 'Membuang pautan [$2] khusus tapak', # Fuzzy
-	'wikibase-item-summary-wblinktitles-connect' => 'Menyambungkan {{PLURAL:$1|halaman|halaman-halaman}} [$2↔$3]', # Fuzzy
+	'wikibase-item-summary-wbsetsitelink-set' => 'Menambahkan pautan kepada [$2]',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Membuang pautan dari [$2]',
+	'wikibase-item-summary-wblinktitles-create' => 'Mewujudkan perkara ini untuk menyambungkan halaman [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-connect' => 'Menambahkan pautan bahasa untuk menyambungkan halaman [$2↔$3]',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Mencipta {{PLURAL:$1|satu tuntutan|tuntutan-tuntutan}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Mencipta {{PLURAL:$1|satu tuntutan|tuntutan-tuntutan}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Mencipta {{PLURAL:$1|satu tuntutan|tuntutan-tuntutan}}',
@@ -9359,6 +9414,8 @@ untuk mencari di mana set data itu.',
 	'wikibase-item-summary-wbsetclaimvalue' => 'Menetapkan {{PLURAL:$1|satu nilai tuntutan|nilai-nilai tuntutan}}',
 	'wikibase-item-summary-wbremoveclaims' => 'Menggugurkan {{PLURAL:$1|satu tuntutan|tuntutan-tuntutan}}',
 	'wikibase-item-summary-special-create-item' => 'Perkara [$2] dicipta dengan {{PLURAL:$1|nilai|nilai-nilai}}',
+	'wikibase-item-summary-wbcreateclaim-create' => 'Mewujudkan tuntutan',
+	'wikibase-item-summary-wbremoveclaims-remove' => 'Menggugurkan {{PLURAL:$3|tuntutan|tuntutan-tuntutan}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Sifat baru dicipta',
 	'wikibase-property-summary-wbeditentity-update' => 'Sifat dikemaskinikan',
 	'wikibase-property-summary-wbeditentity-override' => 'Sifat ditulis ganti',
@@ -9372,12 +9429,51 @@ untuk mencari di mana set data itu.',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Membuang {{PLURAL:$1|nama lain|nama-nama lain}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Sifat [$2] dicipta dengan {{PLURAL:$1|nilai|nilai-nilai}}',
 	'wikibase-query-summary-special-create-query' => 'Pertanyaan [$2] dicipta dengan {{PLURAL:$1|nilai|nilai-nilai}}',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Perkara',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Pautan ke perkara-perkara lain pada projek. Sewaktu dimasukkan, ruang nama "Item" di Wikidata akan diperiksa untuk entri-entri yang berpadanan. Ia terdiri daripada satu medan masukan teks.
+* scheme (skema) – bahagian tersirat Iri-string
+* hierarchicalpart (bahagian tatatingkat) – bahagian tersirat Iri-string
+* query (pertanyaan) – bahagian tersirat Iri-string
+* fragment (serpihan) – bahagian tersirat Iri-string',
+	'wikibase-listdatatypes-commonsmedia-head' => 'Media Commons',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Pautan ke fail-fail yang disimpan di Wikimedia Commons. Ketika dimasukkan, ruang nama "File" di Commons akan diperiksa untuk entri-entri yang berpadanan.
+* scheme (skema) – bahagian tersirat Iri-string
+* hierarchicalpart (bahagian tatatingkat) – bahagian tersirat Iri-string
+* query (pertanyaan) – bahagian tersirat Iri-string
+* fragment (serpihan) – bahagian tersirat Iri-string',
+	'wikibase-listdatatypes-geo-coordinate-head' => 'Geokoordinat',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'Data harfiah untuk kedudukan geografi yang diberikan sebagai pasangan latitud-longitud dalam gms atau darjah perpuluhan untuk jasad cakerawala yang diberikan. Nilai asalnya "Earth" diikuti "WGS84". Ia menambahkan leraian dan julat.
+* latitude – bahagian pertama tersirat (float, dms, dm, dd) rentetan koordinat, arah diberikan dengan tanda awalan atau akhiran N/S
+* longitude – bahagian kedua tersirat (float, dms, dm, dd) rentetan koordinat, arah diberikan dengan tanda awalan atau akhiran E/W
+* altitude (pilihan) – nilai tersurat (?) untuk ketinggian di atas satah rujukan, untuk glob "Earth" yang menjadi glob rujukan "WGS84"
+* globe (pilihan) – nilai data tersurat (?), diberikan sebagai jasad cakerawala yang berpangkal pada "Earth" diikuti oleh "WGS84"',
+	'wikibase-listdatatypes-quantity-head' => 'Kuantiti',
+	'wikibase-listdatatypes-quantity-body' => 'Medan data harfiah untuk kuantiti yang berkenaan dengan suatu jenis unit yang tertentu. Unit sebenar memasuki nilai data yang dimasukkan.
+* nilai – bahagian tersirat dalam rentetan (pemetaan awalan unit tidak jelas)
+* unit – bahagian tersirat dalam rentetan (pemetaan pada jasad piawai tidak jelas)
+* ketepatan (tidak wajib) – nilai data tersurat, sama unit dengan nilai',
+	'wikibase-listdatatypes-monolingual-text-head' => 'Teks satu bahasa',
+	'wikibase-listdatatypes-monolingual-text-body' => 'Medan data harfiah untuk rentetan yang tidak diterjemahkan kepada bahasa lain. Jenis rentetan ini ditakrifkan sekali dan digunakan merentas semua bahasa. Contoh kegunaan: nama geografi yang ditulis dalam bahasa tempatan, suatu pengecam, rumus kimia atau nama sains dalam bahasa Latin.
+*language (bahasa) - nilai tersurat untuk mengecam bahasa untuk bahagian teks
+*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa',
+	'wikibase-listdatatypes-multilingual-text-head' => 'Teks berbilang bahasa',
+	'wikibase-listdatatypes-multilingual-text-body' => 'Medan data harfiah untuk rentetan yang mesti diterjemahkan ke dalam bahasa lain. Contoh kegunaan: nama perkara diminati sejagat yang mempunyai nama bertulis bukan tempatan, baik dari segi bahasa mahupun sistem tulisan.
+*language (bahasa) - nilai tersurat untuk mengecam bahasa untuk bahagian teks
+*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa',
+	'wikibase-listdatatypes-string-head' => 'Rentetan',
+	'wikibase-listdatatypes-string-body' => 'Medan data harfiah untuk rentetan aksara. Contoh kegunaan: pengecam yang berbentuk bertulis tanpa mengira bahasa. Rentetan sedemikian ini adakalanya boleh dialih huruf ke dalam sistem tulisan (abjad) yang lain.
+*language (bahasa) - nilai tersurat untuk mengecam bahasa untuk bahagian teks
+*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa',
+	'wikibase-listdatatypes-time-head' => 'Waktu',
 	'content-model-wikibase-item' => 'Perkara Wikibase',
 	'content-model-wikibase-property' => 'Sifat Wikibase',
 	'content-model-wikibase-query' => 'Pertanyaan Wikibase',
 	'right-item-override' => 'Mengubah ganti perkara',
 	'right-item-create' => 'Mencipta perkara',
 	'right-item-remove' => 'Menggugurkan perkara',
+	'right-property-override' => 'Mengatasi sifat',
+	'right-property-create' => 'Mewujudkan sifat',
+	'right-property-remove' => 'Menggugurkan sifat',
 	'right-alias-add' => 'Menambahkan alias',
 	'right-alias-set' => 'Menetapkan alias',
 	'right-alias-remove' => 'Membuang alias',
@@ -9388,6 +9484,21 @@ untuk mencari di mana set data itu.',
 	'right-label-update' => 'Mengemaskinikan label',
 	'right-description-remove' => 'Membuang keterangan',
 	'right-description-update' => 'Mengemaskinikan keterangan',
+	'action-item-override' => 'mengatasi perkara',
+	'action-item-create' => 'mewujudkan perkara',
+	'action-item-remove' => 'menggugurkan perkara',
+	'action-property-override' => 'mengatasi sifat',
+	'action-property-create' => 'mewujudkan sifat',
+	'action-property-remove' => 'menggugurkan sifat',
+	'action-alias-update' => 'mengemaskinikan alias',
+	'action-alias-remove' => 'menggugurkan alias',
+	'action-sitelink-remove' => 'menggugurkan pautan tapak',
+	'action-sitelink-update' => 'mengemaskinikan pautan tapak',
+	'action-linktitles-update' => 'mengemaskinikan tajuk pautan',
+	'action-label-remove' => 'menggugurkan label',
+	'action-label-update' => 'mengemaskinikan label',
+	'action-description-remove' => 'menggugurkan keterangan',
+	'action-description-update' => 'mengemaskinikan keterangan',
 );
 
 /** Erzya (эрзянь)
@@ -9412,12 +9523,14 @@ $messages['nb'] = array(
 	'wikibase-save' => 'lagre',
 	'wikibase-cancel' => 'avbryt',
 	'wikibase-add' => 'legg til',
+	'wikibase-addqualifier' => 'Legg til kvalifikator',
 	'wikibase-addreference' => 'legg til kilde',
 	'wikibase-save-inprogress' => 'Lagrer…',
 	'wikibase-remove-inprogress' => 'Fjerner…',
 	'wikibase-label-empty' => 'Ingen etikett definert',
 	'wikibase-label-edit-placeholder' => 'lag etikett',
 	'wikibase-description-empty' => 'Ingen beskrivelse definert',
+	'wikibase-deletedentity' => 'Slettet $1',
 	'wikibase-description-edit-placeholder' => 'lag beskrivelse',
 	'wikibase-sitelink-site-edit-placeholder' => 'nettsted',
 	'wikibase-sitelink-page-edit-placeholder' => 'artikkel',
@@ -9439,6 +9552,7 @@ $messages['nb'] = array(
 	'wikibase-undo-samerev' => 'Kan ikke tilbakestille endringen fordi samme revisjon er oppgitt for «base» og «target».',
 	'wikibase-undo-badpage' => 'Ugyldig revisjon: Revisjonen $2 hører ikke til [[$1]]',
 	'wikibase-undo-firstrev' => 'Kan ikke fjerne opprettelsen av siden',
+	'wikibase-undo-nocontent' => 'Innholdet i revisjon $2 av siden $1 kunne ikke lastes inn',
 	'wikibase-propertyedittool-full' => 'Listen av verdier er nå komplett',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|En verdi|$1 verdier}} er ennå ikke lagret',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|verdi|verdier}}',
@@ -9456,9 +9570,9 @@ $messages['nb'] = array(
 	'wikibase-snakview-property-input-placeholder' => 'egenskap',
 	'wikibase-snakview-unsupportedsnaktype' => 'Snak av typen «$1». Behandling av denne typen Snak er ennå ikke støttet.',
 	'wikibase-snakview-choosesnaktype' => 'Velg en verditype.',
-	'wikibase-snakview-variation-unsupporteddatatype' => 'Håndtering av verdier for datatypen «$1» støttes ikke ennå.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Verdien samsvarer ikke med egenskapsdefinisjonens.',
 	'wikibase-snakview-variation-datavaluetypemismatch-details' => 'Verdiens dataverditype «$1» samsvarer ikke med egenskapens datatypes dataverditype «$2».',
+	'wikibase-snakview-variation-nonewvaluefordeletedproperty' => 'Det er ikke mulig å definere en ny verdi for en slettet egenskap.',
 	'wikibase-snakview-variations-somevalue-label' => 'ukjent verdi',
 	'wikibase-snakview-variations-novalue-label' => 'ingen verdi',
 	'wikibase-snakview-snaktypeselector-value' => 'egendefinert verdi',
@@ -9467,8 +9581,10 @@ $messages['nb'] = array(
 	'wikibase-shortcopyrightwarning' => 'Ved å klikke «$1», godtar du [[$2|bruksvilkårene]] og du samtykker ugjenkallelig å publisere ditt bidrag under $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Jeg godtar vilkårene for mine fremtidige redigeringer. Ikke vis denne meldingen igjen.',
 	'wikibase-entityselector-more' => 'mer',
+	'wikibase-anonymouseditwarning' => 'Advarsel: Du er ikke innlogga.
+Din IP-adresse vil bli lagret i redigeringshistorikken for denne $1.',
 	'wikibase-restrictionedit-tooltip-message' => 'Denne siden er beskyttet, redigering er ikke tillatt.',
-	'wikibase-blockeduser-tooltip-message' => 'Du er blokkert fra å redigere.',
+	'wikibase-blockeduser-tooltip-message' => 'Du har ikke tilgang til å redigere fordi brukernavnet eller IP-adressen din er blokkert.',
 	'wikibase-move-error' => 'Du kan ikke flytte sider i datanavnerommet, og du kan ikke flytte sider inn i det.',
 	'wikibase-warning-constraint-violation-length' => 'En begrensning er utløst for språkkode «$1».',
 	'wikibase-error-constraint-violation-label' => 'Det er utløst {{PLURAL:$1|en begrensing|begrensinger}} for brudd på {{PLURAL:$1|etikett|etiketter}} «$3» for {{PLURAL:$1|språkkode|språkkoder}} «$2».',
@@ -12757,7 +12873,7 @@ $messages['vi'] = array(
 	'wikibase-anonymouseditwarning' => 'Cảnh báo: Bạn chưa đăng nhập.
 Địa chỉ IP của bạn sẽ được ghi lại trong lịch sử sửa đổi của $1 này.',
 	'wikibase-restrictionedit-tooltip-message' => 'Trang này bị khóa không cho phép sửa đổi.',
-	'wikibase-blockeduser-tooltip-message' => 'Bạn đã bị cấm không được sửa đổi.',
+	'wikibase-blockeduser-tooltip-message' => 'Bạn không có quyền sửa đổi do tài khoản hoặc địa chỉ IP của bạn đã bị cấm.',
 	'wikibase-move-error' => 'Không thể di chuyển các trang trong không gian tên dữ liệu và không thể di chuyển trang khác vào không gian tên này.',
 	'wikibase-warning-constraint-violation-length' => 'Đã vi phạm hạn chế số ký tự cho mã ngôn ngữ $1.',
 	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|Nhãn|Các nhãn}} “$3” cho {{PLURAL:$1|mã ngôn ngữ|các mã ngôn ngữ}} $2 đã vi phạm hạn chế.',
