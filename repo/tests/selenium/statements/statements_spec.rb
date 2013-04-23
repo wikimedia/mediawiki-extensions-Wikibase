@@ -145,7 +145,7 @@ describe "Check statements UI" do
     end
     it "should check error handling" do
       on_page(ItemPage) do |page|
-        js_snippet = "wikibase.RepoApi.prototype.setClaim ="+
+        js_snippet = "wikibase.AbstractedRepoApi.prototype.setClaim ="+
         "function(claim,baseRevId){var d = new $.Deferred();return d.reject('some_error_code',{error:{info:'some info'}});}"
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
