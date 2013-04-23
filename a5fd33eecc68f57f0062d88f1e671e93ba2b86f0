@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dvmoc4b4",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T10:30:46Z",
+      "side": 1,
+      "message": "why use !empty( $params[\u0027add\u0027] ) but isset( $params[\u0027set\u0027] ) ?",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dvgp6De8",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T10:30:46Z",
+      "side": 1,
+      "message": "I vote for \u0027xor\u0027, not \u0027Xor\u0027. Or just !\u003d\u003d.\n\nalso again, why use !empty( $params[\u0027add\u0027] ) but isset( $params[\u0027set\u0027] ) ?",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvsqDlc4",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T10:30:46Z",
+      "side": 1,
+      "message": "!empty?",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvuqI0eo",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T10:30:46Z",
+      "side": 1,
+      "message": "(can be combined with \u0027add\u0027)",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dvkp4BfA",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T10:30:46Z",
+      "side": 1,
+      "message": "neither ... nor.",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvipoKR4",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T10:30:46Z",
+      "side": 1,
+      "message": "An example with add \u0026 remove at once would be nice here.",
+      "revId": "a5fd33eecc68f57f0062d88f1e671e93ba2b86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
