@@ -12,10 +12,10 @@ These extensions allow for the creation, maintenance, dissemination,
 and usage of structured data in MediaWiki.
 
 The repo is the extension for the repository. It allows the creation and maintenance of structured data. This is
-planned to be used on wikidata.org once it is launched.
+being used on wikidata.org.
 
 The client is the extension for the client. It allows several MediaWiki instances to use data provided by a Wikidata
-instance. Usually, you would not use them in a single wiki. This is planned to be used on the Wikipedias.
+instance. Usually, you would not use them in a single wiki. This is being used Wikipedias.
 
 The lib bundles common code that is used by both the client and the repo.
 
@@ -24,6 +24,6 @@ Note that in each of the directories you will also find README notes for each of
 == Wikidata ==
 
 These extensions where created by the Wikidata team for the Wikidata project.
-More information on this project can be found at http://meta.wikimedia.org/wiki/Wikidata
+More information on this project can be found at https://meta.wikimedia.org/wiki/Wikidata
 
-The Wikidata project uses the Wikibase extensions at http://wikidata.org
+The Wikidata project uses the Wikibase extensions at https://www.wikidata.org
