@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dvurr8Xc",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T11:03:24Z",
+      "side": 1,
+      "message": "A type hint for $claimSUmmaryBuilder would be would be nice. And why is this optional? Aaaannnd... perhaps the builder should be injected in the constructor? It\u0027s a service this object depends on, no?\n\nOr consider leaving the whole summary building to the caller. Then we wouldn\u0027t need a differ or summary builder here, and just get the summary. Would that lead to a lot of redundant code in the callers?",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dvkr7JUU",
+        "filename": "repo/includes/ClaimSummaryBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T11:03:24Z",
+      "side": 1,
+      "message": "Seems like the claim differ should be injected in the constructor (it\u0027s a service object and doesn\u0027t carry state).",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dvqr.WTM",
+        "filename": "repo/includes/ClaimSummaryBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T11:03:24Z",
+      "side": 1,
+      "message": "oh noes!",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dvmr4YUc",
+        "filename": "repo/includes/ClaimSummaryBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T11:03:24Z",
+      "side": 1,
+      "message": "Else.... what? Perhaps fall back to the generic \"update\".",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvsqfFf8",
+        "filename": "repo/includes/ClaimSummaryBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T11:03:24Z",
+      "side": 1,
+      "message": "Summary arguments should be documented in docs/summaries.txt",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvoqKfb8",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-23T11:03:24Z",
+      "side": 1,
+      "message": "The support for data values is rather limited... we need to think about how to refactor and improve that",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
