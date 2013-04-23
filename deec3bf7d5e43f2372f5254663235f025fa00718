@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DvuUtYkU",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-23T13:11:45Z",
+      "side": 1,
+      "message": "* Added the type hint.\n* It\u0027s optional to still be able to save claims without having a summary. If it is desired to make this mandatory, we could do.\n* Why not injecting it via constructor: I moved this back and forth some times, but think Jeroen wanted it that way..\n* If we put the call to the summaryBuilder to the API module, then there would be some code duplication. But sure, we could do it.",
+      "parentUuid": "Dvurr8Xc",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dvkr7JUU",
         "filename": "repo/includes/ClaimSummaryBuilder.php",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2013-04-23T11:03:24Z",
       "side": 1,
       "message": "Seems like the claim differ should be injected in the constructor (it\u0027s a service object and doesn\u0027t carry state).",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvmXl8jg",
+        "filename": "repo/includes/ClaimSummaryBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-23T13:11:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dvkr7JUU",
       "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DvgXT3mA",
+        "filename": "repo/includes/ClaimSummaryBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-23T13:11:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dvqr.WTM",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dvmr4YUc",
         "filename": "repo/includes/ClaimSummaryBuilder.php",
         "patchSetId": 13
@@ -64,6 +118,24 @@
       "writtenOn": "2013-04-23T11:03:24Z",
       "side": 1,
       "message": "Else.... what? Perhaps fall back to the generic \"update\".",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvuXR4lQ",
+        "filename": "repo/includes/ClaimSummaryBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-23T13:11:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dvmr4YUc",
       "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "DvsVWJs0",
+        "filename": "repo/includes/ClaimSummaryBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-23T13:11:45Z",
+      "side": 1,
+      "message": "I\u0027m not quite sure how to proper \"read\" this document, but I added the new messages. Please check.",
+      "parentUuid": "DvsqfFf8",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DvoqKfb8",
         "filename": "repo/includes/api/CreateClaim.php",
         "patchSetId": 13
@@ -98,6 +188,24 @@
       "writtenOn": "2013-04-23T11:03:24Z",
       "side": 1,
       "message": "The support for data values is rather limited... we need to think about how to refactor and improve that",
+      "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvgUvXkE",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-23T13:11:45Z",
+      "side": 1,
+      "message": "Originally I thought I can adjust the API modules removeClaim and createClaim just in one go together with the setClaim. As this changeset is getting bigger, I think it\u0027s better to do this separately once setClaim is done. So I restored the original files of createClaim, removeClaim and modifyClaim again.",
+      "parentUuid": "DvoqKfb8",
       "revId": "deec3bf7d5e43f2372f5254663235f025fa00718",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
