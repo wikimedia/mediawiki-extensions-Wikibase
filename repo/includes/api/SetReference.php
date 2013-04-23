@@ -44,7 +44,6 @@ use Wikibase\Settings;
 class SetReference extends ApiWikibase {
 
 	// TODO: automcomment
-	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
 
@@ -108,12 +107,19 @@ class SetReference extends ApiWikibase {
 	protected function getSnaks( $rawSnaks ) {
 		$rawSnaks = \FormatJson::decode( $rawSnaks, true );
 
+		if ( !is_array( $rawSnaks ) || !count( $rawSnaks ) ) {
+			$this->dieUsage( 'No snaks or invalid JSON given', 'setreference-no-snaks' );
+		}
+
 		$snaks = new SnakList();
 
 		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
 		$snakUnserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Snak' );
 
 		foreach ( $rawSnaks as $byPropertySnaks ) {
+			if ( !is_array( $byPropertySnaks ) ) {
+				$this->dieUsage( 'Invalid snak JSON given', 'setreference-invalid-snaks' );
+			}
 			foreach ( $byPropertySnaks as $rawSnak ) {
 				$snaks[] = $snakUnserializer->newFromSerialization( $rawSnak );
 			}
@@ -281,9 +287,9 @@ class SetReference extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?statement=q586$57CE3C9F-37AF-42B5-B067-DADA198DD579&snaks={"p1":[{snak}, {snak}], "p2": [{snak}]}&token=foo&baserevid=42' =>
+			'api.php?statement=q586$57CE3C9F-37AF-42B5-B067-DADA198DD579&snaks={"p1":[{snak},{snak}],"p2":[{snak}]}&token=foo&baserevid=42' =>
 				'Creating a new reference with 3 snaks',
-			'api.php?statement=q586$57CE3C9F-37AF-42B5-B067-DADA198DD579&snaks={"p2": [{snak}]}&reference=da39a3ee5e6b4b0d3255bfef95601890afd80709&token=foo&baserevid=42' =>
+			'api.php?statement=q586$57CE3C9F-37AF-42B5-B067-DADA198DD579&snaks={"p2":[{snak}]}&reference=da39a3ee5e6b4b0d3255bfef95601890afd80709&token=foo&baserevid=42' =>
 				'Updating an existing reference to contain a single snak',
 		);
 	}
