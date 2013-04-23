@@ -29,7 +29,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ChangesTable extends \ORMTable {
+class ChangesTable extends \ORMTable implements ChunkAccess {
 
 	/**
 	 * Constructor.
@@ -148,5 +148,44 @@ class ChangesTable extends \ORMTable {
 		}
 
 		return $values;
+	}
+
+	/**
+	 * Returns a chunk of Change records, starting at the given change ID.
+	 *
+	 * @param int $start The change ID to start at
+	 * @param int $size  The desired number of Change objects
+	 *
+	 * @return Change[]
+	 */
+	public function loadChunk( $start, $size ) {
+		wfProfileIn( __METHOD__ );
+
+		$changes = $this->selectObjects(
+			null,
+			array(
+				'id >= ' . intval( $start )
+			),
+			array(
+				'LIMIT' => $size,
+				'ORDER BY ' => $this->getPrefixedField( 'id' ) . ' ASC'
+			),
+			__METHOD__
+		);
+
+		wfProfileOut( __METHOD__ );
+		return $changes;
+	}
+
+	/**
+	 * Returns the sequential ID of the given Change.
+	 *
+	 * @param Change $rec
+	 *
+	 * @return int
+	 */
+	public function getRecordId( $rec ) {
+		/* @var Change $rec */
+		return $rec->getId();
 	}
 }

@@ -46,6 +46,11 @@ class DispatchChanges extends \Maintenance {
 	protected $changesTable;
 
 	/**
+	 * @var ChunkCache: cache for changes
+	 */
+	protected $changesCache;
+
+	/**
 	 * @var string: the logical name of the repository's database
 	 */
 	protected $repoDB;
@@ -66,6 +71,12 @@ class DispatchChanges extends \Maintenance {
 	 *           based on $this->batchSize.
 	 */
 	protected $batchChunkFactor;
+
+	/**
+	 * @var int: factor used to compute the maximum size of the chunk cache. The total cache size is
+	 *           $this->batchSize * $this->batchChunkFactor * $this->batchCacheFactor
+	 */
+	protected $batchCacheFactor;
 
 	/**
 	 * @var int: the number of client update passes to perform before exiting.
@@ -146,6 +157,7 @@ class DispatchChanges extends \Maintenance {
 		$this->repoDB = Settings::get( 'changesDatabase' );
 		$this->clientWikis = Settings::get( 'localClientDatabases' );
 		$this->batchChunkFactor = Settings::get( 'dispatchBatchChunkFactor' );
+		$this->batchCacheFactor = Settings::get( 'dispatchBatchCacheFactor' );
 
 		$this->batchSize = intval( $this->getOption( 'batch-size', 1000 ) );
 		$this->maxTime = intval( $this->getOption( 'max-time', PHP_INT_MAX ) );
@@ -155,6 +167,10 @@ class DispatchChanges extends \Maintenance {
 		$this->lockGraceInterval = intval( $this->getOption( 'lock-grace-interval', 60 ) );
 
 		$this->verbose = $this->getOption( 'verbose', false );
+
+		$cacheChunkSize = $this->batchSize * $this->batchChunkFactor;
+		$cacheSize = $cacheChunkSize * $this->batchCacheFactor;
+		$this->changesCache = new ChunkCache( $this->changesTable, $cacheChunkSize, $cacheSize );
 
 		// make sure we have a mapping from siteId to database name in clientWikis:
 		foreach ( $this->clientWikis as $siteID => $dbName ) {
@@ -789,7 +805,7 @@ class DispatchChanges extends \Maintenance {
 
 		while ( $batchSize < $this->batchSize ) {
 			// get a chunk of changes
-			$chunk = $this->selectChanges( $after, $chunkSize );
+			$chunk = $this->changesCache->loadChunk( $after+1, $chunkSize );
 
 			if ( empty( $chunk ) ) {
 				break; // no more changes
@@ -813,44 +829,10 @@ class DispatchChanges extends \Maintenance {
 
 		wfProfileOut( __METHOD__ );
 
-		$this->trace( "Got pending changes." );
+		$this->trace( "Got " . count( $batch ) . " pending changes. "
+			. sprintf( "Cache hit rate is %2d%%", $this->changesCache->getHitRatio() * 100 ) );
 
 		return array( $batch, $lastIdSeen );
-	}
-
-	/**
-	 * Returns a list of Change objects loaded from the changes table.
-	 *
-	 * The list will have at most $limit entries, all IDs will be greater than $after,
-	 * and it will be sorted with IDs in ascending order.
-	 *
-	 * @param int $after: The change ID from which to start
-	 * @param int $limit: The maximum number of changes to return
-	 *
-	 * @return Change[] any changes matching the above criteria.
-	 */
-	public function selectChanges( $after, $limit ) {
-		$this->trace( "Selecting $limit changes." );
-
-		wfProfileIn( __METHOD__ );
-
-		$changes = $this->changesTable->selectObjects(
-			null,
-			array(
-				'id > ' . intval( $after )
-			),
-			array(
-				'LIMIT' => $limit,
-				'ORDER BY ' => $this->changesTable->getPrefixedField( 'id' ) . ' ASC'
-			),
-			__METHOD__
-		);
-
-		wfProfileOut( __METHOD__ );
-
-		$this->trace( "Selected $limit changes." );
-
-		return $changes;
 	}
 
 	/**

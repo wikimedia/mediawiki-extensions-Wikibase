@@ -116,6 +116,8 @@ return call_user_func( function() {
 		'Wikibase\Lib\Serializers\Unserializer' => 'includes/serializers/Unserializer.php',
 
 		// includes/store
+		'Wikibase\ChunkCache' => 'includes/store/ChunkCache.php',
+		'Wikibase\ChunkAccess' => 'includes/store/ChunkAccess.php',
 		'Wikibase\EntityLookup' => 'includes/store/EntityLookup.php',
 		'Wikibase\PropertyLookup' => 'includes/store/PropertyLookup.php',
 		'Wikibase\SiteLinkCache' => 'includes/store/SiteLinkCache.php',
@@ -151,6 +153,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\Test\Serializers\UnserializerBaseTest' => 'tests/phpunit/serializers/UnserializerBaseTest.php',
 		'Wikibase\Test\MockRepository' => 'tests/phpunit/MockRepository.php',
 		'Wikibase\Test\EntityLookupTest' => 'tests/phpunit/EntityLookupTest.php',
+		'Wikibase\Test\MockChunkAccess' => 'tests/phpunit/store/MockChunkAccess.php'
 	);
 
 	return $classes;
