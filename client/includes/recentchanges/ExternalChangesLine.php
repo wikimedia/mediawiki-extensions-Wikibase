@@ -104,7 +104,7 @@ class ExternalChangesLine {
 
 		$line .= self::changeSeparator();
 
-		$title = \Title::newFromText( $rc->getAttribute( 'rc_title' ), $rc->getAttribute( 'rc_namespace' ) );
+		$title = $rc->getTitle();
 		$line .= \Linker::link( $title );
 
 		if ( in_array( $changeType, array( 'add', 'restore', 'update' ) ) ) {
