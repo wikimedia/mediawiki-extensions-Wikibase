@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dvip-yd4",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-23T10:28:36Z",
+      "side": 1,
+      "message": "Moving the code down here makes the diffing really hard, I think the need for having the functions in this order is not really pressing. They should just remain in their previous order if possible.",
+      "revId": "3ea2bc99e16a24621a98a1477141d8d4fe1c2c89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
