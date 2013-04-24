@@ -113,7 +113,7 @@ class SnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFormatNoSnaks() {
-		$formatted = $this->newFormatter()->formatSnaks( array() );
+		$formatted = $this->newFormatter()->formatSnaks( array(), 'en' );
 
 		$this->assertInternalType( 'array', $formatted );
 		$this->assertEmpty( $formatted );
@@ -146,7 +146,7 @@ class SnakFormatterTest extends \PHPUnit_Framework_TestCase {
 			new StringValue( $expected )
 		);
 
-		$formatted = $this->newFormatter()->formatSnaks( array( $propertyValueSnak ) );
+		$formatted = $this->newFormatter()->formatSnaks( array( $propertyValueSnak ), 'en' );
 		$this->assertFormatSnaksReturnType( $formatted );
 		$this->assertCount( 1, $formatted );
 
@@ -174,7 +174,7 @@ class SnakFormatterTest extends \PHPUnit_Framework_TestCase {
 			new EntityId( Item::ENTITY_TYPE, 1337 )
 		);
 
-		$formatted = $this->newFormatter()->formatSnaks( $propertyValueSnaks );
+		$formatted = $this->newFormatter()->formatSnaks( $propertyValueSnaks, 'en' );
 		$this->assertFormatSnaksReturnType( $formatted );
 
 		$expected = array_merge(

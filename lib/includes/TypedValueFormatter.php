@@ -4,7 +4,11 @@ namespace Wikibase\Lib;
 
 use DataTypes\DataType;
 use DataValues\DataValue;
+use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\CachingEntityLoader;
+use Wikibase\Settings;
+use Wikibase\WikiPageEntityLookup;
 
 /**
  * Provides a string representation for a DataValue given its associated DataType.
@@ -34,7 +38,7 @@ use ValueFormatters\ValueFormatter;
  */
 class TypedValueFormatter {
 
-	public function formatToString( DataValue $dataValue, DataType $dataType ) {
+	public function formatToString( DataValue $dataValue, DataType $dataType, $languageCode ) {
 		// TODO: update this code to obtain the string formatter as soon as corresponding changes
 		// in the DataTypes library have been made.
 
@@ -44,7 +48,7 @@ class TypedValueFormatter {
 		// FIXME: before we can properly use the DataType system some issues to its implementation need
 		// to be solved. Once this is done, this evil if block and function it calls should go.
 		if ( $valueFormatter === false && $dataType->getId() === 'wikibase-item' ) {
-			$valueFormatter = $this->evilGetEntityIdFormatter();
+			$valueFormatter = $this->evilGetEntityIdFormatter( $languageCode );
 		}
 
 		if ( $valueFormatter === false ) {
@@ -64,24 +68,25 @@ class TypedValueFormatter {
 		return $valueFormatter->format( $dataValue );
 	}
 
-	private function evilGetEntityIdFormatter() {
-		$entityLookup = new \Wikibase\CachingEntityLoader( new \Wikibase\WikiPageEntityLookup( \Wikibase\Settings::get( 'repoDatabase' ) ) );
+	private function evilGetEntityIdFormatter( $languageCode ) {
+		$entityLookup = new CachingEntityLoader( new WikiPageEntityLookup( Settings::get( 'repoDatabase' ) ) );
 
 		$prefixMap = array();
 
-		foreach ( \Wikibase\Settings::get( 'entityPrefixes' ) as $prefix => $entityType ) {
+		foreach ( Settings::get( 'entityPrefixes' ) as $prefix => $entityType ) {
 			$prefixMap[$entityType] = $prefix;
 		}
 
-		$options = new \ValueFormatters\FormatterOptions( array(
-			\Wikibase\Lib\EntityIdFormatter::OPT_PREFIX_MAP => $prefixMap
+		$options = new FormatterOptions( array(
+			EntityIdFormatter::OPT_PREFIX_MAP => $prefixMap
 		) );
 
-		$idFormatter = new \Wikibase\Lib\EntityIdFormatter( $options );
+		$idFormatter = new EntityIdFormatter( $options );
 
-		$options = new \ValueFormatters\FormatterOptions();
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageCode );
 
-		$labelFormatter = new \Wikibase\Lib\EntityIdLabelFormatter( $options, $entityLookup );
+		$labelFormatter = new EntityIdLabelFormatter( $options, $entityLookup );
 		$labelFormatter->setIdFormatter( $idFormatter );
 
 		return $labelFormatter;
