@@ -143,4 +143,31 @@ class ClaimDifference implements Comparable {
 			&& $this->getReferenceChanges() == $target->getReferenceChanges();
 	}
 
+	/**
+	 * Checks whether the ClaimDifference is atomic, which means
+	 * the Claim has only changed either its MainSnak, Qualifiers, References or Rank
+	 *
+	 * @since 0.4
+	 *
+	 * @return boolean
+	 */
+	public function isAtomic() {
+		$claimChanges = 0;
+
+		if ( $this->getMainSnakChange() !== null ) {
+			$claimChanges++;
+		}
+		if ( $this->getRankChange() !== null ) {
+			$claimChanges++;
+		}
+		if ( !$this->getQualifierChanges()->isEmpty() ) {
+			$claimChanges++;
+		}
+		if ( !$this->getReferenceChanges()->isEmpty() ) {
+			$claimChanges++;
+		}
+
+		return $claimChanges === 1;
+	}
+
 }

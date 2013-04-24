@@ -71,6 +71,7 @@ final class LibHooks {
 
 			'ByPropertyIdArray',
 			'ChangesTable',
+			'ClaimDifference',
 			'DataTypes',
 			'ReferencedEntitiesFinder',
 			'EntityRetrievingDataTypeLookup',
