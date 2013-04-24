@@ -54,13 +54,13 @@ interface ClientStore {
 	public function getEntityLookup();
 
 	/**
-	 * Returns a new PropertyLookup
+	 * Returns a PropertyLabelResolver
 	 *
 	 * @since 0.4
 	 *
-	 * @return PropertyLookup
+	 * @return PropertyLabelResolver
 	 */
-	public function getPropertyLookup();
+	public function getPropertyLabelResolver();
 
 	/**
 	 * Returns a TermIndex
