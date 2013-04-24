@@ -42,8 +42,8 @@ class PropertyParserFunction {
 	/* @var EntityLookup */
 	protected $entityLookup;
 
-	/* @var PropertyLookup */
-	protected $propertyLookup;
+	/* @var PropertyLabelResolver */
+	protected $propertyLabelResolver;
 
 	/* @var ParserErrorMessageFormatter */
 	protected $errorFormatter;
@@ -56,16 +56,16 @@ class PropertyParserFunction {
 	 *
 	 * @param \Language                   $language
 	 * @param EntityLookup                $entityLookup
-	 * @param PropertyLookup              $propertyLookup
+	 * @param PropertyLabelResolver       $propertyLabelResolver
 	 * @param ParserErrorMessageFormatter $errorFormatter
 	 * @param Lib\SnakFormatter           $snaksFormatter
 	 */
 	public function __construct( \Language $language,
-		EntityLookup $entityLookup, PropertyLookup $propertyLookup,
+		EntityLookup $entityLookup, PropertyLabelResolver $propertyLabelResolver,
 		ParserErrorMessageFormatter $errorFormatter, SnakFormatter $snaksFormatter ) {
 		$this->language = $language;
 		$this->entityLookup = $entityLookup;
-		$this->propertyLookup = $propertyLookup;
+		$this->propertyLabelResolver = $propertyLabelResolver;
 		$this->errorFormatter = $errorFormatter;
 		$this->snaksFormatter = $snaksFormatter;
 	}
@@ -82,13 +82,25 @@ class PropertyParserFunction {
 	private function getClaimsForProperty( Entity $entity, $propertyLabel ) {
 		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
 
-		if ( $propertyIdToFind !== null ) {
-			$allClaims = new Claims( $entity->getClaims() );
-			$claims = $allClaims->getClaimsForProperty( $propertyIdToFind->getNumericId() );
-		} else {
-			$langCode = $this->language->getCode();
-			$claims = $this->propertyLookup->getClaimsByPropertyLabel( $entity, $propertyLabel, $langCode );
+		if ( $propertyIdToFind === null ) {
+			//XXX: It might become useful to give the PropertyLabelResolver a hint as to which
+			//     properties may become relevant during the present request, namely the ones
+			//     used by the Item linked to the current page. This could be done with
+			//     something like this:
+			//
+			//     $this->propertyLabelResolver->preloadLabelsFor( $propertiesUsedByItem );
+
+			$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels( array( $propertyLabel ) );
+
+			if ( empty( $propertyIds ) ) {
+				return new Claims();
+			} else {
+				$propertyIdToFind = $propertyIds[$propertyLabel];
+			}
 		}
+
+		$allClaims = new Claims( $entity->getClaims() );
+		$claims = $allClaims->getClaimsForProperty( $propertyIdToFind->getNumericId() );
 
 		return $claims;
 	}
@@ -165,11 +177,11 @@ class PropertyParserFunction {
 		$wikibaseClient = WikibaseClient::newInstance();
 
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-		$propertyLookup = $wikibaseClient->getStore()->getPropertyLookup();
+		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
 		$formatter = $wikibaseClient->newSnakFormatter();
 
 		$instance = new self( $targetLanguage,
-			$entityLookup, $propertyLookup,
+			$entityLookup, $propertyLabelResolver,
 			$errorFormatter, $formatter );
 
 		$result = array(
