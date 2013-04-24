@@ -304,8 +304,8 @@ to find out where it went.',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Removed {{PLURAL:$3|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-update' => 'Changed {{PLURAL:$3|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-create' => 'Created {{PLURAL:$3|claim|claims}}',
-	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Changed {{PLURAL:$4|one|$4}} {{PLURAL:$4|qualifier|qualifiers}} of {{PLURAL:$3|claim|claims}}',
-	'wikibase-item-summary-wbsetclaim-update-references' => 'Changed {{PLURAL:$4|one|$4}} {{PLURAL:$4|reference|references}} of {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Changed {{PLURAL:$4|one qualifier|$4 qualifiers}} of {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-wbsetclaim-update-references' => 'Changed {{PLURAL:$4|one reference|$4 references}} of {{PLURAL:$3|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Changed rank of {{PLURAL:$3|claim|claims}}',
 
 	// property - summary and autocomment, see docs/summaries.txt
@@ -757,7 +757,7 @@ This special page shows statistics about the process used to notify client wikis
 {{Identical|Site}}',
 	'wikibase-dispatchstats-pos' => 'Column header for dispatch position (given as change ID).
 {{Identical|Position}}',
-	'wikibase-dispatchstats-lag-num' => 'Column header. "Pending" is an adjective that refers to the number of changes not yet dispatched to this client wiki. 
+	'wikibase-dispatchstats-lag-num' => 'Column header. "Pending" is an adjective that refers to the number of changes not yet dispatched to this client wiki.
 {{Identical|Pending}}',
 	'wikibase-dispatchstats-lag-time' => 'Column header for the time since between the change last dispatched to the client and the latest known change on the repo.',
 	'wikibase-dispatchstats-touched' => 'Column header for the time a dispatcher last visited this client wiki',
@@ -2473,7 +2473,7 @@ $messages['cy'] = array(
 	'wikibase-snakview-snaktypeselector-somevalue' => 'gwerth anhysbys',
 	'wikibase-snakview-snaktypeselector-novalue' => 'dim gwerth',
 	'wikibase-entityselector-more' => 'mwy',
-	'wikibase-anonymouseditwarning' => 'Dalier sylw: Nid ydych wedi mewngofnodi. 
+	'wikibase-anonymouseditwarning' => 'Dalier sylw: Nid ydych wedi mewngofnodi.
 Fe fydd eich cyfeiriad IP yn ymddangos ar hanes golygu $1.',
 	'special-itembytitle' => 'Eitem yn ôl teitl',
 	'wikibase-itembytitle-lookup-fieldset' => 'Chwilio am eitemau yn ôl gwefan a theitl',
@@ -3724,7 +3724,7 @@ $messages['es'] = array(
 	'wikibase-shortcopyrightwarning' => 'Al hacer clic en "$1", aceptas [[$2|los términos de uso]] y aceptas liberar irrevocablemente tus contribuciones bajo la $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Acepto estos términos para mis futuras contribuciones. No volver a mostrar este mensaje otra vez.',
 	'wikibase-entityselector-more' => 'más',
-	'wikibase-anonymouseditwarning' => 'Aviso: No has iniciado sesión. 
+	'wikibase-anonymouseditwarning' => 'Aviso: No has iniciado sesión.
 Tu dirección IP quedará registrada en el historial de revisiones de $1.',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta página está protegida, no se permite editar.',
 	'wikibase-blockeduser-tooltip-message' => 'Usted ha sido bloqueado para edición.', # Fuzzy
