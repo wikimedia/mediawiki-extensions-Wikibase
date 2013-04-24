@@ -131,7 +131,7 @@ interface TermIndex extends TermCombinationMatchFinder {
 	 *        - prefixSearch: boolean, default false
 	 *        - LIMIT: int, defaults to none
 	 *
-	 * @return array
+	 * @return Term[]
 	 */
 	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() );
 

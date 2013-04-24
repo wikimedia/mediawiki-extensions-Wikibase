@@ -28,6 +28,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  *
  * @todo: rename to MirrorSqlStore
  */
@@ -116,6 +117,15 @@ class CachingSqlStore implements ClientStore {
 		$entityLookup = $this->getEntityLookup();
 
 		return new PropertySQLLookup( $entityLookup );
+	}
+
+	/**
+	 * Get a TermIndex object
+	 *
+	 * @return TermIndex
+	 */
+	public function getTermIndex() {
+		throw new MWException( "Not Implemented, " . __CLASS__ . " is incomplete." );
 	}
 
 	/**
