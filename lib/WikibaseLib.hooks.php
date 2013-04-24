@@ -64,7 +64,7 @@ final class LibHooks {
 			'store/WikiPageEntityLookup',
 			'store/CachingEntityLoader',
 
-			'store/sql/PropertySQLLookup',
+			'store/TermPropertyLabelResolver',
 
 			'ByPropertyIdArray',
 			'ChangesTable',

@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Language;
+
 /**
  * Implementation of the client store interface using direct access to the repository's
  * database via MediaWiki's foreign wiki mechanism as implemented by LBFactory_multi.
@@ -40,9 +42,9 @@ class DirectSqlStore implements ClientStore {
 	private $entityLookup = null;
 
 	/**
-	 * @var PropertyLookup
+	 * @var PropertyLabelResolver
 	 */
-	private $propertyLookup = null;
+	private $propertyLabelResolver = null;
 
 	/**
 	 * @var TermIndex
@@ -55,10 +57,17 @@ class DirectSqlStore implements ClientStore {
 	protected $repoWiki;
 
 	/**
+	 * @var Language
+	 */
+	protected $language;
+
+	/**
+	 * @param Language $wikiLanguage
 	 * @param string    $repoWiki the symbolic database name of the repo wiki
 	 */
-	public function __construct( $repoWiki ) {
+	public function __construct( Language $wikiLanguage, $repoWiki ) {
 		$this->repoWiki = $repoWiki;
+		$this->language = $wikiLanguage;
 	}
 
 	/**
@@ -122,27 +131,30 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * Get a PropertyLookup object
+	 * Get a PropertyLabelResolver object
 	 *
-	 * @return PropertyLookup
+	 * @return PropertyLabelResolver
 	 */
-	public function getPropertyLookup() {
-		if ( !$this->propertyLookup ) {
-			$this->propertyLookup = $this->newPropertyLookup();
+	public function getPropertyLabelResolver() {
+		if ( !$this->propertyLabelResolver ) {
+			$this->propertyLabelResolver = $this->newPropertyLabelResolver();
 		}
 
-		return $this->propertyLookup;
+		return $this->propertyLabelResolver;
 	}
 
-	/**
-	 * Create a new PropertyLookup instance
-	 *
-	 * @return PropertyLookup
-	 */
-	protected function newPropertyLookup() {
-		$entityLookup = $this->getEntityLookup();
 
-		return new PropertySQLLookup( $entityLookup );
+	/**
+	 * Create a new PropertyLabelResolver instance
+	 *
+	 * @return PropertyLabelResolver
+	 */
+	protected function newPropertyLabelResolver() {
+		return new TermPropertyLabelResolver(
+			$this->language->getCode(),
+			$this->getTermIndex(),
+			wfGetMainCache()
+		);
 	}
 
 	/**

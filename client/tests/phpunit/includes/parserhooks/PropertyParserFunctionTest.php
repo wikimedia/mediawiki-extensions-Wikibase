@@ -56,6 +56,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
 		$dataTypeFactory = $wikibaseClient->getDataTypeFactory();
 		$mockRepo = $this->newMockRepository();
+		$mockResolver = new MockPropertyLabelResolver( $targetLanguage->getCode(), $mockRepo );
 
 		$formatter = new SnakFormatter(
 			new EntityRetrievingDataTypeLookup( $mockRepo ),
@@ -66,7 +67,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		return new PropertyParserFunction(
 			$targetLanguage,
 			$mockRepo,
-			$mockRepo,
+			$mockResolver,
 			$errorFormatter,
 			$formatter
 		);

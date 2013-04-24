@@ -3,6 +3,7 @@
 namespace Wikibase\Client;
 
 use DataTypes\DataTypeFactory;
+use Language;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\ClientStore;
@@ -52,6 +53,13 @@ final class WikibaseClient {
 	 */
 	protected $settings;
 
+	/**
+	 * @since 0.4
+	 *
+	 * @var Language
+	 */
+	protected $contentLanguage;
+
 	protected $dataTypeFactory = null;
 	protected $entityIdParser = null;
 
@@ -63,9 +71,11 @@ final class WikibaseClient {
 	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
-	 * @param boolean       $inTestMode
+	 * @param Language      $contentLanguage
+	 * @param               $inTestMode
 	 */
-	public function __construct( SettingsArray $settings, $inTestMode ) {
+	public function __construct( SettingsArray $settings, Language $contentLanguage, $inTestMode ) {
+		$this->contentLanguage = $contentLanguage;
 		$this->settings = $settings;
 		$this->inTestMode = $inTestMode;
 	}
@@ -209,12 +219,24 @@ final class WikibaseClient {
 			return $this->storeInstances[$store];
 		}
 
-		$instance = new $class( $this->settings->getSetting( 'repoDatabase' ) );
+		$instance = new $class(
+			$this->getContentLanguage(),
+			$this->settings->getSetting( 'repoDatabase' )
+		);
 
 		assert( $instance instanceof ClientStore );
 
 		$this->storeInstances[$store] = $instance;
 		return $instance;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return Language
+	 */
+	public function getContentLanguage() {
+		return $this->contentLanguage;
 	}
 
 	/**
@@ -235,7 +257,12 @@ final class WikibaseClient {
 	 * @return WikibaseClient
 	 */
 	public static function newInstance() {
-		return new self( Settings::singleton(), defined( 'MW_PHPUNIT_TEST' ) );
+		global $wgContLang;
+
+		return new self(
+			Settings::singleton(),
+			$wgContLang,
+			defined( 'MW_PHPUNIT_TEST' ) );
 	}
 
 	/**

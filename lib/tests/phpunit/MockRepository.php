@@ -6,7 +6,7 @@ use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
 use Wikibase\Item;
-use Wikibase\PropertyLookup;
+use Wikibase\PropertyLabelResolver;
 use Wikibase\SiteLink;
 use Wikibase\SiteLinkLookup;
 use Wikibase\Property;
@@ -38,7 +38,7 @@ use Wikibase\Property;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MockRepository implements SiteLinkLookup, EntityLookup, PropertyLookup {
+class MockRepository implements SiteLinkLookup, EntityLookup {
 
 	protected $entities = array();
 	protected $itemByLink = array();
@@ -457,17 +457,7 @@ class MockRepository implements SiteLinkLookup, EntityLookup, PropertyLookup {
 		return $theClaims;
 	}
 
-	/**
-	 * Returns the Property that has the given label in the given language.
-	 *
-	 * @since    0.4
-	 *
-	 * @param string $propertyLabel
-	 * @param string $langCode
-	 *
-	 * @return Property|null
-	 */
-	protected function getPropertyByLabel( $propertyLabel, $langCode ) {
+	public function getPropertyByLabel( $propertyLabel, $langCode ) {
 		$ids = array_keys( $this->entities );
 
 		foreach ( $ids as $id ) {
