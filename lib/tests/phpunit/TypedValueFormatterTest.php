@@ -79,7 +79,7 @@ class TypedValueFormatterTest extends \PHPUnit_Framework_TestCase {
 	public function testFormatToString( DataValue $input, DataType $type, $expected ) {
 		$formatter = new TypedValueFormatter();
 
-		$actual = $formatter->formatToString( $input, $type );
+		$actual = $formatter->formatToString( $input, $type, 'en' );
 
 		$this->assertInternalType( 'string', $actual );
 		$this->assertEquals( $expected, $actual );
