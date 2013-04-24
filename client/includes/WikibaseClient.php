@@ -63,7 +63,7 @@ final class WikibaseClient {
 	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
-	 * @param boolean $inTestMode
+	 * @param boolean       $inTestMode
 	 */
 	public function __construct( SettingsArray $settings, $inTestMode ) {
 		$this->settings = $settings;

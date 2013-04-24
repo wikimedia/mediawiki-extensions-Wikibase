@@ -143,7 +143,6 @@ return call_user_func( function() {
 		'Wikibase\Test\Api\LangAttributeBase' => 'tests/phpunit/includes/api/LangAttributeBase.php',
 		'Wikibase\Test\EntityContentTest' => 'tests/phpunit/includes/content/EntityContentTest.php',
 		'Wikibase\Test\EntityHandlerTest' => 'tests/phpunit/includes/content/EntityHandlerTest.php',
-		'Wikibase\Test\TermIndexTest' => 'tests/phpunit/includes/store/TermIndexTest.php',
 
 		'MessageReporter' => 'includes/MessageReporter.php',
 		'ObservableMessageReporter' => 'includes/MessageReporter.php',

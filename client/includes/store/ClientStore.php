@@ -29,6 +29,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 interface ClientStore {
 
@@ -60,6 +61,15 @@ interface ClientStore {
 	 * @return PropertyLookup
 	 */
 	public function getPropertyLookup();
+
+	/**
+	 * Returns a TermIndex
+	 *
+	 * @since 0.4
+	 *
+	 * @return TermIndex
+	 */
+	public function getTermIndex();
 
 	/**
 	 * Returns a new ChangesTable for this store.
