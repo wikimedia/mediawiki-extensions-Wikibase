@@ -43,7 +43,7 @@ describe "Check functionality of editing sitelinks on client" do
         page.wait_for_link_item_link
         page.clientLinkItemLink?.should be_true
         page.clientLinkItemLink
-        ajax_wait
+        page.wait_for_link_item_dialog
         page.clientLinkItemLink?.should be_true
         page.clientLinkDialogHeader.should == "You need to be logged in"
         page.clientLinkDialogClose?.should be_true
@@ -60,7 +60,7 @@ describe "Check functionality of editing sitelinks on client" do
         page.wait_for_link_item_link
         page.clientLinkItemLink?.should be_true
         page.clientLinkItemLink
-        ajax_wait
+        page.wait_for_link_item_dialog
         page.clientLinkDialogHeader.should == "Link with page"
         page.clientLinkDialogClose?.should be_true
         page.clientLinkDialogClose
@@ -73,7 +73,7 @@ describe "Check functionality of editing sitelinks on client" do
         page.navigate_to_article(article_title)
         page.wait_for_link_item_link
         page.clientLinkItemLink
-        ajax_wait
+        page.wait_for_link_item_dialog
         page.clientLinkItemLanguageInput?.should be_true
         page.clientLinkItemLanguagePage?.should be_true
         page.clientLinkItemSubmit?.should be_true

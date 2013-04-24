@@ -118,4 +118,10 @@ class ClientPage < RubySelenium
       clientLinkItemLink?
     end
   end
+
+  def wait_for_link_item_dialog
+    wait_until do
+      clientLinkDialogHeader?
+    end
+  end
 end
