@@ -456,7 +456,11 @@ abstract class EntityView extends \ContextSource {
 		$claims = $entity->getEntity()->getClaims();
 		$html = '';
 
-		$html .= wfTemplate( 'wb-section-heading', wfMessage( 'wikibase-statements' ) );
+		$html .= wfTemplate(
+			'wb-section-heading',
+			wfMessage( 'wikibase-statements' ),
+			'claims' // ID - TODO: should not be added if output page is not the entity's page
+		);
 
 		// aggregate claims by properties
 		$claimsByProperty = array();
