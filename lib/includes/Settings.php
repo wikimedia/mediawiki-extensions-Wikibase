@@ -1,17 +1,12 @@
 <?php
 
 namespace Wikibase;
-use MWException;
 
 /**
- * File defining the settings for the Wikibase extension.
- * More info can be found at https://www.mediawiki.org/wiki/Extension:Wikibase#Settings
+ * @deprecated
  *
- * NOTICE:
- * Changing one of these settings can be done by assigning to $wgWBSettings,
- * AFTER the inclusion of the extension itself.
- *
- * // TODO: have dedicated settings interfaces per extension
+ * Each component should manage its own settings,
+ * and such settings should be defined in their own configuration.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
