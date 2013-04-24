@@ -217,7 +217,7 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-entitydata-text' => 'This page provides a linked data interface to entity values. Please provide the entity ID in the URL, using subpage syntax.',
 
 	// API errors - these messages should not be translated
-	'wikibase-api-aliases-invalid-list' => 'Use either one of "set", "add" and "remove" parameters.', # Do not translate
+	'wikibase-api-aliases-invalid-list' => 'Use either "set" or "add"/"remove" parameters.', # Do not translate
 	'wikibase-api-no-token' => 'No token given.', # Do not translate
 	'wikibase-api-no-data' => 'No data to operate upon.', # Do not translate
 	'wikibase-api-client-error' => 'The external client site failed.', # Do not translate
