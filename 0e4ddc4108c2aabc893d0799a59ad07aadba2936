@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DvvZpk-o",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T12:24:48Z",
+      "side": 1,
+      "message": "showError expects HTML, so this should use -\u003eparse(), not -\u003etext(). Better yet, showError should be replaced by showErrorMessage, see below.",
+      "revId": "0e4ddc4108c2aabc893d0799a59ad07aadba2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvlbEJ-c",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T12:24:48Z",
+      "side": 1,
+      "message": "Either document *verly* clearly that this MUST be HTML, or expect a Message object here. If a non-HTML string is passed to this function, we have an XSS vector, especially if that string contains user-supplied text, as error messages often do.",
+      "revId": "0e4ddc4108c2aabc893d0799a59ad07aadba2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvjZgixA",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T12:24:48Z",
+      "side": 1,
+      "message": "To make it clear what to pass to the function, I think there should be two:\n\nshowErrorMessage expects a Message object, and calls -\u003eparse() on it to get the HTML. showErrorHTML takes such an HTML sting and displays it.",
+      "revId": "0e4ddc4108c2aabc893d0799a59ad07aadba2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvlZlBx4",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T12:24:48Z",
+      "side": 1,
+      "message": "This silently converts the Message to a string, using Message::toString. Whether Message::toString returns a raw string, wikitext or HTML depends on how the object was last used. That\u0027s confusing and dangerous. \n\nUse showErrorMessage (as suggested above) instead, or use showErrorHTML (see above), but call -\u003eparser() on the message to get the HTML.",
+      "revId": "0e4ddc4108c2aabc893d0799a59ad07aadba2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvhZvj-4",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T12:24:48Z",
+      "side": 1,
+      "message": "Even while passing the result of -\u003etext() as HTML is \"safe\", it will not work for links, and may screw up the page layout. Use -\u003eparse, or change showError to showErrorMessage.",
+      "revId": "0e4ddc4108c2aabc893d0799a59ad07aadba2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvrYB2z4",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T12:24:48Z",
+      "side": 1,
+      "message": "Something is wrong here. $subPage should have the form \"site/page\". So, $part[0] would be the site ID and $part[1] would be the page.",
+      "revId": "0e4ddc4108c2aabc893d0799a59ad07aadba2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dvtb.1zQ",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T12:24:48Z",
+      "side": 1,
+      "message": "This needs to default to $parts[1], if  $parts[1] is set.",
+      "revId": "0e4ddc4108c2aabc893d0799a59ad07aadba2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvjaWS-A",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T12:24:48Z",
+      "side": 1,
+      "message": "shouldn\u0027t this check happen in prepareArguments()?",
+      "revId": "0e4ddc4108c2aabc893d0799a59ad07aadba2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
