@@ -1,11 +1,7 @@
 <?php
-
-namespace Wikibase;
-
-/**
- * Property lookup by label
+ /**
  *
- * @todo use terms table to do lookups, add caching and tests
+ * Copyright © 24.04.13 by the authors listed below.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,29 +18,31 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
- *
+ * @license GPL 2+
  * @file
- * @ingroup WikibaseLib
  *
- * @licence GNU GPL v2+
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Daniel Kinzler
+ * @author daniel
  */
-interface PropertyLookup {
+
+
+namespace Wikibase;
+
+
+/**
+ * Resolves property labels (which are unique per language) into entity IDs.
+ *
+ * @package Wikibase
+ */
+
+interface PropertyLabelResolver {
 
 	/**
-	 * Returns these claims from the given entity that have a main Snak for the property
-	 * identified by $propertyLabel in the language given by $langCode.
+	 * @param string[] $labels the labels
+	 * @param string   $recache Flag, set to 'recache' to discard cached data and fetch fresh data
+	 *                 from the database.
 	 *
-	 * @since    0.4
-	 *
-	 * @param Entity $entity
-	 * @param string $propertyLabel
-	 * @param string $langCode
-	 *
-	 * @return Claims
+	 * @return EntityId[] a map of strings from $labels to the corresponding entity ID.
 	 */
-	public function getClaimsByPropertyLabel( Entity $entity, $propertyLabel, $langCode );
+	public function getPropertyIdsForLabels( array $labels, $recache = '' );
 
 }
