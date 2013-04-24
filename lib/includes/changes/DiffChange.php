@@ -36,15 +36,17 @@ class DiffChange extends ChangeRow {
 	/**
 	 * @since 0.1
 	 *
+	 * @param string $cache set to 'cache' to cache the unserialized diff.
+	 *
 	 * @return IDiff
 	 */
-	public function getDiff() {
-		$info = $this->getField( 'info' );
+	public function getDiff( $cache = 'no' ) {
+		$info = $this->getInfo( $cache );
 
 		if ( !array_key_exists( 'diff', $info ) ) {
 			// This shouldn't happen, but we should be robust against corrupt, incomplete
 			// obsolete instances in the database, etc.
-			trigger_error( 'Cannot get the diff when it has not been set yet.', E_USER_WARNING );
+			wfLogWarning( 'Cannot get the diff when it has not been set yet.' );
 			return new Diff();
 		} else {
 			return $info['diff'];

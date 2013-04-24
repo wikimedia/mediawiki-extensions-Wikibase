@@ -28,6 +28,7 @@ use \ORMRow, \User;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ChangeRow extends ORMRow implements Change {
 
@@ -144,23 +145,77 @@ class ChangeRow extends ORMRow implements Change {
 		return $this->getField( 'object_id' );
 	}
 
-
 	/**
-	 * @see ORMRow::setField
+	 * @see ORMRow::getField
+	 *
+	 * Overwritten to unserialize the info field on the fly.
 	 *
 	 * @since 0.4
 	 *
-	 * @param string $name
-	 * @param mixed $value
+	 * @param string $name Field name
+	 * @param $default mixed: Default value to return when none is found
+	 * (default: null)
 	 *
-	 * @throws \MWException
+	 * @throws MWException
+	 * @return mixed
 	 */
-	public function setField( $name, $value ) {
+	public function getField( $name, $default = null ) {
+		$value = parent::getField( $name, $default );
+
 		if ( $name === 'info' && is_string( $value ) ) {
 			$value = $this->unserializeInfo( $value );
 		}
 
-		parent::setField( $name, $value );
+		return $value;
+	}
+
+	/**
+	 * @see ORMRow::getFields
+	 *
+	 * Overwritten to unserialize the info field on the fly.
+	 *
+	 * @since 0.4
+	 *
+	 * @return array
+	 */
+	public function getFields( ) {
+		$fields = parent::getFields();
+
+		if ( isset( $fields['info'] ) && is_string( $fields['info'] ) ) {
+			$fields['info'] = $this->unserializeInfo( $fields['info'] );
+		}
+
+		return $fields;
+	}
+
+	/**
+	 * Returns the info array. The array is deserialized on the fly by getField().
+	 * If $cache is set to 'cache', the deserialized version is stored for
+	 * later re-use.
+	 *
+	 * Usually, the deserialized version is not retained to preserve memory when
+	 * lots of changes need to be processed. It can however be retained to improve
+	 * performance in cases where the same object is accessed several times.
+	 *
+	 * @param string $cache Set to 'cache' to cache the unserialized version
+	 *        of the info array.
+	 *
+	 * @return array
+	 */
+	protected function getInfo( $cache = 'no' ) {
+		$info = $this->getField( 'info' );
+
+		assert( !is_string( $info ) );
+
+		if ( !is_array( $info ) ) {
+			$info = array();
+		}
+
+		if ( $cache === 'cache' ) {
+			$this->setField( 'info', $info );
+		}
+
+		return $info;
 	}
 
 	/**
