@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DvnZRI2A",
+        "filename": "lib/includes/ClaimDifference.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-24T12:01:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DvnYf47Q",
+      "revId": "408a8e0cd1b0ccb894e0c60623aaa4f4c1977b8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DvpYc378",
         "filename": "lib/includes/ClaimDifference.php",
         "patchSetId": 17
@@ -30,6 +48,24 @@
       "writtenOn": "2013-04-24T11:47:11Z",
       "side": 1,
       "message": "if ( boolean ) {\n    return true\n}\nelse {\n    return false\n}\n\nwhy?",
+      "revId": "408a8e0cd1b0ccb894e0c60623aaa4f4c1977b8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvpZOH8A",
+        "filename": "lib/includes/ClaimDifference.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-24T12:01:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DvpYc378",
       "revId": "408a8e0cd1b0ccb894e0c60623aaa4f4c1977b8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DvlZopx4",
+        "filename": "repo/includes/ClaimSummaryBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-24T12:01:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DvlZ-R90",
+      "revId": "408a8e0cd1b0ccb894e0c60623aaa4f4c1977b8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DvrZuuy4",
         "filename": "repo/includes/ClaimSummaryBuilder.php",
         "patchSetId": 17
@@ -64,6 +118,24 @@
       "writtenOn": "2013-04-24T11:47:11Z",
       "side": 1,
       "message": "big method (3 levels of nesting), better to split it up\n\ntypically you want to stick to one level of \"nesting\", and not go over two. Esp if there is other stuff in the method already, like is the case here",
+      "revId": "408a8e0cd1b0ccb894e0c60623aaa4f4c1977b8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvtZUl1M",
+        "filename": "repo/includes/ClaimSummaryBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-24T12:01:55Z",
+      "side": 1,
+      "message": "Can split this up when this is going to handle summaries for removeclaims as well, which will happen next but not in this CS.",
+      "parentUuid": "DvrZuuy4",
       "revId": "408a8e0cd1b0ccb894e0c60623aaa4f4c1977b8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
