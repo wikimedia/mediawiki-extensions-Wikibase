@@ -275,6 +275,7 @@ to find out where it went.',
 
 	// item - summary and autocomment, see docs/summaries.txt
 	'wikibase-item-summary-wbsetitem' => 'Created a new item', // legacy
+	'wikibase-item-summary-wbcreate-new' => 'Created a new item', // legacy, backwards compatibility
 	'wikibase-item-summary-wbeditentity' => 'Created a new item', // legacy
 	'wikibase-item-summary-wbeditentity-create' => 'Created a new item',
 	'wikibase-item-summary-wbeditentity-update' => 'Updated an item',
@@ -303,6 +304,7 @@ to find out where it went.',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Removed {{PLURAL:$3|claim|claims}}',
 
 	// property - summary and autocomment, see docs/summaries.txt
+	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
 	'wikibase-property-summary-wbeditentity-create' => 'Created a new property',
 	'wikibase-property-summary-wbeditentity-update' => 'Updated a property',
 	'wikibase-property-summary-wbeditentity-override' => 'Overrided a property',
@@ -871,6 +873,7 @@ Parameters:
 	'wikibase-noentity' => 'Of some reason the user tried to access an entity which then was detected as non-existing. This can happen when an entity is deleted and clients are not yet made aware of this.',
 	'wikibase-noentity-createone' => 'Put immediately after "wikibase-noentity" if the user has the right to create an entity of the given type. This message tells the user that he can create one and gives a link in $1 to the special page where this can be done.',
 	'wikibase-item-summary-wbsetitem' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
+	'wikibase-item-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-item-summary-wbeditentity' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
 	'wikibase-item-summary-wbeditentity-create' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item.}}',
 	'wikibase-item-summary-wbeditentity-update' => '{{wikibase summary messages|item|Automatic edit summary generated when updating an existing item.}}',
@@ -911,6 +914,7 @@ Parameters:
 	'wikibase-item-summary-special-create-item' => '{{wikibase summary messages|item|Automatic edit summary when creating an item, and supplying one or more values. This page can take an additional sitelink, but this does not reflect in the autocomment.}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Automatic edit summary generated when creating a new claim.',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Automatic edit summary generated when removing claims.',
+	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
 	'wikibase-property-summary-wbeditentity-override' => 'Automatic edit summary generated when overriding an existing property.',
