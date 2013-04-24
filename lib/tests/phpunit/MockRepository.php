@@ -138,6 +138,9 @@ class MockRepository implements SiteLinkLookup, EntityLookup, PropertyLookup {
 	 * @return integer|boolean
 	 */
 	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
+		// We store page titles with spaces instead of underscores
+		$pageTitle = str_replace( '_', ' ', $pageTitle );
+
 		$key = "$globalSiteId:$pageTitle";
 
 		if ( isset( $this->itemByLink[$key] ) ) {

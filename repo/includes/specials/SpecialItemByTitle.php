@@ -65,7 +65,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		if ( isset( $site ) && isset( $page ) ) {
 			// Try to get a item content
 			$siteId = \Wikibase\Utils::trimToNFC( $site ); // no stripping of underscores here!
-			$pageName = \Wikibase\Utils::trimToNFC( str_replace( '_', ' ', $page ) );
+			$pageName = \Wikibase\Utils::trimToNFC( $page );
 			$itemHandler = new \Wikibase\ItemHandler();
 			$itemContent = $itemHandler->getFromSiteLink( $siteId, $pageName );
 			// Do we have an item content, and if not can we try harder?

@@ -173,6 +173,9 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @return integer|boolean
 	 */
 	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
+		// We store page titles with spaces instead of underscores
+		$pageTitle = str_replace( '_', ' ', $pageTitle );
+
 		$db = $this->getConnection( DB_SLAVE );
 
 		$result = $db->selectRow(
