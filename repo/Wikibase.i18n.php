@@ -606,7 +606,7 @@ Parameters:
 	'wikibase-error-constraint-violation-aliases' => 'Error message shown when a user tries to save XXXX that has some constraint violation.
 * $1 - the count of violating languages
 * $2 - the violating languages
-* $3 - the violating string, but this is usually not very useful as the message is usually given in an edit window',
+* $3 - the violating string, but this is usually not very useful as the message is usually given in an edit window', # Fuzzy
 	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a site link already used by another item. Parameters:
 * $1 is the site id (interwiki prefix);
 * $2 is the title on the remote site;
@@ -2519,7 +2519,7 @@ $messages['da'] = array(
 	'wikibase-label-empty' => 'Ingen etiket er endnu fastlagt',
 	'wikibase-label-edit-placeholder' => 'angiv etiket',
 	'wikibase-description-empty' => 'Ingen beskrivelse endnu',
-	'wikibase-deletedentity' => 'Slettede $1',
+	'wikibase-deletedentity' => 'Slettet $1',
 	'wikibase-description-edit-placeholder' => 'angiv beskrivelse',
 	'wikibase-sitelink-site-edit-placeholder' => 'websted',
 	'wikibase-sitelink-page-edit-placeholder' => 'artikel',
@@ -5711,6 +5711,7 @@ $messages['he'] = array(
 	'wikibase-noentity' => 'ערכת הנתונים הזאת אינה קיימת. ניתן <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} לחפש ביומנים הקשורים]</span> כדי למצוא לאן היא נעלמה.',
 	'wikibase-noentity-createone' => 'אפשר גם [[$1|ליצור אחת חדשה]].',
 	'wikibase-item-summary-wbsetitem' => 'נוצר פריט חדש',
+	'wikibase-item-summary-wbcreate-new' => 'נוצר פריט חדש',
 	'wikibase-item-summary-wbeditentity' => 'נוצר פריט חדש',
 	'wikibase-item-summary-wbeditentity-create' => 'נוצר פריט חדש',
 	'wikibase-item-summary-wbeditentity-update' => 'פריט עודכן',
@@ -8974,7 +8975,7 @@ $messages['mk'] = array(
 	'wikibase-self-conflict-patched' => 'Вашето уредување е прикрпено на последната верзија, презапишувајќи врз некои од вашите меѓувремени промени.',
 	'wikibase-conflict-patched' => 'Вашето уредување е прикрпено на последната верзија.',
 	'wikibase-restoreold' => 'врати',
-	'wikibase-restore-summary' => 'Враќање на ревизијата $1 од [[Special:Contributions/$2|$2]]',
+	'wikibase-restore-summary' => 'Повраток на ревизијата $1 од [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Директното уредување е оневозможено во именскиот простор $1',
 	'wikibase-noentity' => 'Не постои таков комплет податоци. Можете да
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате по поврзаните дневници]</span>
@@ -9112,6 +9113,7 @@ $messages['ml'] = array(
 	'wikibase-save' => 'സേവ് ചെയ്യുക',
 	'wikibase-cancel' => 'റദ്ദാക്കുക',
 	'wikibase-add' => 'ചേർക്കുക',
+	'wikibase-addqualifier' => 'യോഗ്യതാപരിശോധിനി ചേർക്കുക',
 	'wikibase-addreference' => 'സ്രോതസ്സ് ചേർക്കുക',
 	'wikibase-save-inprogress' => 'സേവ് ചെയ്യുന്നു...',
 	'wikibase-remove-inprogress' => 'നീക്കം ചെയ്യുന്നു...',
@@ -9122,7 +9124,7 @@ $messages['ml'] = array(
 	'wikibase-description-edit-placeholder' => 'വിവരണം നൽകുക',
 	'wikibase-sitelink-site-edit-placeholder' => 'സൈറ്റ്',
 	'wikibase-sitelink-page-edit-placeholder' => 'ലേഖനം',
-	'wikibase-alias-edit-placeholder' => 'ഒരു മറുപേര് നൽകുക',
+	'wikibase-alias-edit-placeholder' => 'ഒരു അപരനാമം നൽകുക',
 	'wikibase-label-input-help-message' => 'ഈ ഡേറ്റാ ഗണത്തിന്റെ തലക്കെട്ട് $1 ആയി നൽകുക.',
 	'wikibase-description-input-help-message' => 'ഒരു ചെറുവിവരണം $1 ഭാഷയിൽ നൽകുക.',
 	'wikibase-statements' => 'പ്രസ്താവനകൾ',
@@ -9140,6 +9142,7 @@ $messages['ml'] = array(
 	'wikibase-undo-samerev' => 'തിരസ്കരിക്കാൻ കഴിയില്ല, തിരസ്കരണബേസിനും തിരസ്കരണ ലക്ഷ്യത്തിനും ഒരേ നാൾപ്പതിപ്പാണ്.',
 	'wikibase-undo-badpage' => 'മോശം നാൾപ്പതിപ്പ്: നാൾപ്പതിപ്പ് $2, [[$1]]-നു സ്വന്തമല്ല.',
 	'wikibase-undo-firstrev' => 'താളിന്റെ നിർമ്മിതി തിരസ്കരിക്കാനാവില്ല',
+	'wikibase-undo-nocontent' => '$1 എന്ന താളിന്റെ $2 എന്ന നാൾപ്പതിപ്പിന്റെ ഉള്ളടക്കം എടുക്കാൻ കഴിയില്ല',
 	'wikibase-propertyedittool-full' => 'പട്ടികകളുടെ വിലകൾ അപൂർണ്ണമാണ്.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|ഒരു വില|$1 വിലകൾ}} ഇതുവരെ സേവ് ചെയ്തിട്ടില്ല',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|ഉൾപ്പെടുത്തൽ|ഉൾപ്പെടുത്തലുകൾ}}',
@@ -9159,7 +9162,7 @@ $messages['ml'] = array(
 	'wikibase-anonymouseditwarning' => 'മുന്നറിയിപ്പ്: താങ്കൾ ലോഗിൻ ചെയ്തിട്ടില്ല.
 താങ്കളുടെ ഐ.പി. വിലാസം ഈ $1 എന്നതിന്റെ തിരുത്തൽ നാൾവഴിയിൽ ചേർത്ത് വെയ്ക്കുന്നതാണ്.',
 	'wikibase-restrictionedit-tooltip-message' => 'ഈ താൾ സംരക്ഷിക്കപ്പെട്ടിരിക്കുന്നു. തിരുത്തൽ അനുവദനീയമല്ല.',
-	'wikibase-blockeduser-tooltip-message' => 'തിരുത്തുന്നതിൽ നിന്നും താങ്കൾ തടയപ്പെട്ടിരിക്കുകയാണ്.',
+	'wikibase-blockeduser-tooltip-message' => 'തിരുത്തുന്നതിൽ നിന്നും താങ്കൾ തടയപ്പെട്ടിരിക്കുകയാണ്.', # Fuzzy
 	'wikibase-itembytitle-lookup-site' => 'സൈറ്റ്:',
 	'wikibase-itembytitle-lookup-page' => 'താൾ:',
 	'wikibase-itembytitle-submit' => 'തിരയുക',
