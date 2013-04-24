@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DvhF2uaA",
+        "filename": "lib/includes/store/EntityUsageIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-24T14:46:44Z",
+      "side": 1,
+      "message": "\"on a specific client wiki\" seems odd - does this class know about \"client\" wikis? With the emphasis on \"client\"",
+      "revId": "7b977293c8e3daeffce597f35496e0acf5007d73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvjF3NaE",
+        "filename": "lib/includes/store/EntityUsageIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-24T14:46:44Z",
+      "side": 1,
+      "message": "This is not an index right? EntityUsageLookup or similar seems more appropriate. Clearly not EntityUsageCache :)",
+      "revId": "7b977293c8e3daeffce597f35496e0acf5007d73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvpFJSWM",
+        "filename": "lib/includes/store/EntityUsageIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-24T14:46:44Z",
+      "side": 1,
+      "message": "$entityIds",
+      "revId": "7b977293c8e3daeffce597f35496e0acf5007d73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvvFwvaY",
+        "filename": "lib/includes/store/EntityUsageIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-24T14:46:44Z",
+      "side": 1,
+      "message": "woha, you really are loving these anon functions all of a sudden? ;p",
+      "revId": "7b977293c8e3daeffce597f35496e0acf5007d73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
