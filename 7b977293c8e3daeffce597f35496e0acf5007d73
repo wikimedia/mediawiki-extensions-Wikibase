@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DvjEy1RA",
+        "filename": "lib/includes/store/EntityUsageIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T18:59:03Z",
+      "side": 1,
+      "message": "The class just knows about *a* foreign wiki. The wikibase repo knows about client wikis. Using that term to describe the classes functionality in the context of wikibase seems useful to me.",
+      "parentUuid": "DvhF2uaA",
+      "revId": "7b977293c8e3daeffce597f35496e0acf5007d73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DvjF3NaE",
         "filename": "lib/includes/store/EntityUsageIndex.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-04-24T14:46:44Z",
       "side": 1,
       "message": "This is not an index right? EntityUsageLookup or similar seems more appropriate. Clearly not EntityUsageCache :)",
+      "revId": "7b977293c8e3daeffce597f35496e0acf5007d73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvhFB2V0",
+        "filename": "lib/includes/store/EntityUsageIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T18:59:03Z",
+      "side": 1,
+      "message": "It\u0027s an index in the sense of \"look up some X by their Y, efficiently\". \"Lookup\" to me means something that will get you a \"thing\" by its \"name\". The index just relates names/ids of things. You could in fact also call it a relation, if you prefer.",
+      "parentUuid": "DvjF3NaE",
       "revId": "7b977293c8e3daeffce597f35496e0acf5007d73",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DvrEmxc8",
+        "filename": "lib/includes/store/EntityUsageIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T18:59:03Z",
+      "side": 1,
+      "message": "Yea, would be better.",
+      "parentUuid": "DvpFJSWM",
+      "revId": "7b977293c8e3daeffce597f35496e0acf5007d73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DvvFwvaY",
         "filename": "lib/includes/store/EntityUsageIndex.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2013-04-24T14:46:44Z",
       "side": 1,
       "message": "woha, you really are loving these anon functions all of a sudden? ;p",
+      "revId": "7b977293c8e3daeffce597f35496e0acf5007d73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvtEjQb8",
+        "filename": "lib/includes/store/EntityUsageIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T18:59:03Z",
+      "side": 1,
+      "message": "I always liked them actually - I use lots of inline classes in Java and lambda in Python. I just had to get used to them in PHP :)",
+      "parentUuid": "DvvFwvaY",
       "revId": "7b977293c8e3daeffce597f35496e0acf5007d73",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
