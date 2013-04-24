@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DvjBOVpg",
+        "filename": "lib/includes/ClaimDifference.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T10:09:23Z",
+      "side": 1,
+      "message": "Just counting everything that\u0027s not empty would really be clearer, this seems error prone.",
+      "revId": "c966e96273fe414b82c851726dcf8c2e5646c8dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvtA7Quc",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T10:09:23Z",
+      "side": 1,
+      "message": "Still don\u0027t like that this is passed as a parameter here... either the caller should construct the summary, or the builder should be treated as a service object and just created here on the fly, or in the constructor. There is no need to inject or mock the summary builder, is there? If there is, it should be injected in the constructor.",
+      "revId": "c966e96273fe414b82c851726dcf8c2e5646c8dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvpYanxI",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-24T10:09:23Z",
+      "side": 1,
+      "message": "When would it be sensible for this the be null?",
+      "revId": "c966e96273fe414b82c851726dcf8c2e5646c8dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
