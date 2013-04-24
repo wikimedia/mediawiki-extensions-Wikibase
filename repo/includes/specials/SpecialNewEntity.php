@@ -100,8 +100,7 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 						$this->getLanguage()
 					);
 					$comment = Autocomment::formatAutoComment(
-						//'wbcreate' . $entityContent->getEntity()->getType() . '-new',
-						'wbcreate-new',
+						'wbeditentity-create',
 						array( $counts, $this->getLanguage()->getCode() )
 					);
 					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser(), false, $this->getContext() );
