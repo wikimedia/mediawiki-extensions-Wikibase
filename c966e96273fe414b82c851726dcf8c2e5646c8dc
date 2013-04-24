@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DvtZ8lx4",
+        "filename": "lib/includes/ClaimDifference.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-24T10:32:39Z",
+      "side": 1,
+      "message": "hm.. there\u0027s a test for every possible case..",
+      "parentUuid": "DvjBOVpg",
+      "revId": "c966e96273fe414b82c851726dcf8c2e5646c8dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DvtA7Quc",
         "filename": "repo/includes/ClaimSaver.php",
         "patchSetId": 16
@@ -30,6 +48,24 @@
       "writtenOn": "2013-04-24T10:09:23Z",
       "side": 1,
       "message": "Still don\u0027t like that this is passed as a parameter here... either the caller should construct the summary, or the builder should be treated as a service object and just created here on the fly, or in the constructor. There is no need to inject or mock the summary builder, is there? If there is, it should be injected in the constructor.",
+      "revId": "c966e96273fe414b82c851726dcf8c2e5646c8dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dvpan-6k",
+        "filename": "repo/includes/ClaimSaver.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-24T10:32:39Z",
+      "side": 1,
+      "message": "I  think the best would be to construct the summary in the API module. But this would lead to quite some code duplication right now and is probably better done when we\u0027re refactoring the whole API structure.",
+      "parentUuid": "DvtA7Quc",
       "revId": "c966e96273fe414b82c851726dcf8c2e5646c8dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
