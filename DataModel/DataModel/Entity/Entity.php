@@ -2,7 +2,9 @@
 
 namespace Wikibase;
 
+use Diff\Comparer\CallbackComparer;
 use Diff\Differ;
+use Diff\MapPatcher;
 use Diff\Patcher;
 use MWException;
 use Wikibase\Lib\GuidGenerator;
@@ -851,22 +853,31 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @since 0.4
 	 *
 	 * @param EntityDiff $patch
-	 * @param Patcher|null $patcher The patcher with which to apply the diff
 	 */
-	public final function patch( EntityDiff $patch, Patcher $patcher = null ) {
-		if ( $patcher === null ) {
-			$patcher = new \Diff\MapPatcher();
-		}
+	public final function patch( EntityDiff $patch ) {
+		$patcher = new MapPatcher();
 
 		$this->setLabels( $patcher->patch( $this->getLabels(), $patch->getLabelsDiff() ) );
 		$this->setDescriptions( $patcher->patch( $this->getDescriptions(), $patch->getDescriptionsDiff() ) );
 		$this->setAllAliases( $patcher->patch( $this->getAllAliases(), $patch->getAliasesDiff() ) );
 
-		$claims = $patcher->patch( $this->getClaims(), $patch->getClaimsDiff() );
+		$this->patchSpecificFields( $patch, $patcher );
+
+		$patcher->setValueComparer( new CallbackComparer(
+			function( Claim $firstClaim, Claim $secondClaim ) {
+				return $firstClaim->getHash() === $secondClaim->getHash();
+			}
+		)  );
+
+		$claims = array();
+
+		foreach ( $this->getClaims() as $claim ) {
+			$claims[$claim->getGuid()] = $claim;
+		}
+
+		$claims = $patcher->patch( $claims, $patch->getClaimsDiff() );
 
 		$this->setClaims( new Claims( $claims ) );
-
-		$this->patchSpecificFields( $patch, $patcher );
 	}
 
 	/**
