@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DviJgRRA",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-25T09:18:47Z",
+      "side": 1,
+      "message": "Not sure this is correct... I think parameters get escaped, that would break if you pass in HTML.",
+      "revId": "e25635e6a0f237b5dafe1110e2eec1adf5607251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
