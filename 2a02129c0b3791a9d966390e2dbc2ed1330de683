@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DvjGF7go",
+        "filename": "DataModel/DataModel/Entity/Entity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-25T21:19:22Z",
+      "side": 1,
+      "message": "This should be moved after the patching of labels, descriptions and aliases, otherwise this will cause a fatal because of strings passed to the callback function.",
+      "revId": "2a02129c0b3791a9d966390e2dbc2ed1330de683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
