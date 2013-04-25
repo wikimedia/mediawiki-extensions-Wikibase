@@ -80,6 +80,16 @@ return call_user_func( function() {
 				'dataValues',
 			),
 		),
+
+		// qunit-parameterize from https://github.com/AStepaniuk/qunit-parameterize
+		'qunit.parameterize' => $moduleTemplate + array(
+			'scripts' => array(
+				'qunit.parameterize/qunit.parameterize.js',
+			),
+			'dependencies' => array(
+				'jquery.qunit'
+			)
+		),
 	);
 
 } );
