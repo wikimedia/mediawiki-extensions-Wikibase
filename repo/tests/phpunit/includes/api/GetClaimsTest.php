@@ -68,9 +68,7 @@ class GetClaimsTest extends \ApiTestCase {
 	protected function getNewEntities() {
 		$property = \Wikibase\Property::newEmpty();
 
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-		$dataTypes = $libRegistry->getDataTypeFactory()->getTypes();
-		$property->setDataType( reset( $dataTypes ) );
+		$property->setDataTypeId( 'string' );
 
 		return array(
 			$this->addClaimsAndSave( \Wikibase\Item::newEmpty() ),
