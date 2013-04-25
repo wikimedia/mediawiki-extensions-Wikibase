@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DvgIa6Xc",
+        "filename": "repo/maintenance/importProperties.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-25T10:26:19Z",
+      "side": 1,
+      "message": "hm, would be nice to fix the broken indent here.",
+      "revId": "bbc38d0388ce87af7767af9de6890aa9f0320ec9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvmIJXTE",
+        "filename": "repo/tests/phpunit/includes/api/RemoveClaimsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-25T10:26:19Z",
+      "side": 1,
+      "message": "How do we know here that a data type called \u0027string\u0027 exist, and how do we make sure it\u0027s not \u0027String\u0027 or \u0027str\u0027 or whatever? Where is the set of available data types defined? I still think using constants here would be the right thing.",
+      "revId": "bbc38d0388ce87af7767af9de6890aa9f0320ec9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
