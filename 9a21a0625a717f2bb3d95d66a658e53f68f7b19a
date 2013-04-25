@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DvgJvSf4",
+        "filename": "lib/includes/store/sql/SiteLinkTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-25T09:49:59Z",
+      "side": 1,
+      "message": "Hm, now I\u0027m unsure whether it\u0027s actually safe to assume that this link will always point to a MediaWiki install... \n\nIdeally, we\u0027d pass a Site object instead of the site ID, and use it to perform \"quick\" normalization. But that\u0027s not possible right now... Maybe worth a //TODO",
+      "revId": "9a21a0625a717f2bb3d95d66a658e53f68f7b19a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
