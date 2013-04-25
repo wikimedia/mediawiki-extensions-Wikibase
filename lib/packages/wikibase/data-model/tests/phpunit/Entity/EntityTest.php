@@ -718,6 +718,11 @@ abstract class EntityTest extends \MediaWikiTestCase {
 		$claim2 = new \Wikibase\Claim( new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'ohi' ) ) );
 		$claim3 = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 1 ) );
 
+		$claim0->setGuid( 'claim0' );
+		$claim1->setGuid( 'claim1' );
+		$claim2->setGuid( 'claim2' );
+		$claim3->setGuid( 'claim3' );
+
 		$argLists = array();
 
 
