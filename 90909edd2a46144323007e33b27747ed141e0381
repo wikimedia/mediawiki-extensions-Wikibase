@@ -16,6 +16,24 @@
       "revId": "90909edd2a46144323007e33b27747ed141e0381",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvqImdc8",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-25T10:04:33Z",
+      "side": 1,
+      "message": "Sorry for the whitespace only change, it\u0027s an unintended result of me splitting one change set into two. I could rever this, bit it\u0027ll be re-introduced by the follow up change, so... can we just ignore it for now?\n\nOr do you mean aligning using (internal) spaces? Why not? Makes things easier to read, no?\n\nOr do you mean $inTestMode in general? I didn\u0027t put that there :)",
+      "parentUuid": "DvgcGe4Y",
+      "revId": "90909edd2a46144323007e33b27747ed141e0381",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
