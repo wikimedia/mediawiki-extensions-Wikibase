@@ -145,6 +145,15 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.valueview.experts.mock' => $moduleTemplate + array( // mock expert for tests
+			'scripts' => array(
+				'jquery.valueview/valueview.experts/experts.Mock.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts',
+			),
+		),
+
 		'jquery.valueview.experts.staticdom' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview/valueview.experts/experts.StaticDom.js',

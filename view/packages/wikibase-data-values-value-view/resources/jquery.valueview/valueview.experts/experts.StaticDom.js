@@ -5,7 +5,7 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 ( function( $, vv ) {
-	'use strict'
+	'use strict';
 
 	var PARENT = vv.Expert;
 

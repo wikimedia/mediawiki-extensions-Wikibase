@@ -61,6 +61,17 @@ return call_user_func( function() {
 				'jquery.ui.suggester',
 			),
 		),
+
+		'jquery.valueview.ExpertFactory.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.valueview/valueview.ExpertFactory.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts', // contains ExpertFactory
+				'jquery.valueview.experts.mock',
+				'qunit.parameterize'
+			),
+		)
 	);
 
 } );

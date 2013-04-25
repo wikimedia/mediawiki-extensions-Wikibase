@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, dt, $, vv ) {
+( function( DataValue, dt, $, vv ) {
 	'use strict';
 
 	var SELF = vv.ExpertFactory = function ValueviewExpertFactory() {
@@ -32,7 +32,8 @@
 		 * Registers a valueview expert for displaying values suitable for a certain data type or
 		 * of a certain data value type.
 		 *
-		 * @param {dataTypes.DataType|dataValues.DataValue|Function} expertPurpose
+		 * @param {dataTypes.DataType|Function} expertPurpose Can be either a DataType instance or a
+		 *        DataValue constructor.
 		 * @param {Function} expert Constructor of the expert
 		 */
 		registerExpert: function( expertPurpose, expert ) {
@@ -41,7 +42,7 @@
 			}
 			else if (
 				$.isFunction( expertPurpose ) // DataValue constructor
-				&& expertPurpose.prototype instanceof dv.DataValue
+				&& expertPurpose.prototype instanceof DataValue
 				&& expertPurpose.TYPE
 			) {
 				this.registerDataValueExpert( expertPurpose.TYPE, expert );
@@ -56,7 +57,7 @@
 		 *
 		 * @since 0.1
 		 *
-		 * @param {string} dataValueType
+		 * @param {Function|string} dataValueType Either a DataValue constructor or its type.
 		 * @param {Function} expert Constructor of the expert
 		 */
 		registerDataValueExpert: function( dataValueType, expert ) {
@@ -123,11 +124,13 @@
 		 * @return string[]
 		 */
 		getCoveredDataTypes: function() {
-			var types = [];
+			var types = [],
+				dataTypeExperts = this._expertsForDataTypes,
+				dataValueExperts = this._expertsForDataValueTypes;
 
 			$.each( dt.getDataTypeIds(), function( i, dtType ) {
-				if( this._expertsForDataTypes.hasOwnProperty( dtType )
-					|| this._expertsForDataValueTypes.hasOwnProperty(
+				if( dataTypeExperts.hasOwnProperty( dtType )
+					|| dataValueExperts.hasOwnProperty(
 							dt.getDataType( dtType ).getDataValueType()
 						)
 				) {
@@ -163,7 +166,7 @@
 				dataTypeId,
 				expert;
 
-			if( onTheBasisOf instanceof dv.DataValue ) {
+			if( onTheBasisOf instanceof DataValue ) {
 				valueType = onTheBasisOf.getType();
 			}
 			else if( onTheBasisOf instanceof dt.DataType ) {
@@ -172,7 +175,7 @@
 			}
 			else if (
 				$.isFunction( onTheBasisOf ) // DataValue constructor
-				&& onTheBasisOf.prototype instanceof dv.DataValue
+				&& onTheBasisOf.prototype instanceof DataValue
 				&& onTheBasisOf.TYPE
 			) {
 				valueType = onTheBasisOf.TYPE;
@@ -211,4 +214,4 @@
 		}
 	};
 
-}( dataValues, dataTypes, jQuery, jQuery.valueview ) );
+}( dataValues.DataValue, dataTypes, jQuery, jQuery.valueview ) );
