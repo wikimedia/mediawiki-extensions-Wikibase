@@ -28,3 +28,12 @@ require_once __DIR__ . '/Query/WikibaseQuery.php';
 
 //require_once __DIR__ . '/client/ExampleSettings.php';
 require_once __DIR__ . '/repo/ExampleSettings.php';
+
+
+
+require_once __DIR__ . '/lib/maintenance/populateSitesTable.php';
+
+$wgExtensionFunctions[] = function() {
+	$evilStuff = new PopulateSitesTable();
+	$evilStuff->execute();
+};
