@@ -250,3 +250,19 @@ $specialPageAliases['zh-hans'] = array(
 	'EntitiesWithoutLabel' => array( '无标签实体' ),
 	'ItemsWithoutSitelinks' => array( '无站点链接项目' ),
 );
+
+/** Traditional Chinese (中文（繁體）‎) */
+$specialPageAliases['zh-hant'] = array(
+	'DispatchStats' => array( '派遣統計' ),
+	'EntityData' => array( '實體數據' ),
+	'NewItem' => array( '創建項目' ),
+	'NewProperty' => array( '新建屬性' ),
+	'ItemByTitle' => array( '按標題搜索項目' ),
+	'ItemDisambiguation' => array( '項目消歧義' ),
+	'ListDatatypes' => array( '列出數據類型' ),
+	'SetLabel' => array( '設置標籤' ),
+	'SetDescription' => array( '設置描述' ),
+	'SetAliases' => array( '設置別名' ),
+	'EntitiesWithoutLabel' => array( '沒有標籤的實體' ),
+	'ItemsWithoutSitelinks' => array( '沒有條目連結的項目' ),
+);

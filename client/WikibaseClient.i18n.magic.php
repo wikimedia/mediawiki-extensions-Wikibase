@@ -77,3 +77,9 @@ $magicWords['vi'] = array(
 	'noexternallanglinks' => array( 0, 'khôngliênkếtngônngữngoài' ),
 	'property' => array( 0, 'thuộctính' ),
 );
+
+/** Traditional Chinese (中文（繁體）‎) */
+$magicWords['zh-hant'] = array(
+	'noexternallanglinks' => array( 0, '隱藏跨語言連結' ),
+	'property' => array( 0, '屬性' ),
+);

@@ -360,6 +360,13 @@ $messages['ca'] = array(
 $messages['ckb'] = array(
 	'wikibase-entity-item' => 'بەند',
 	'wikibase-entity-property' => 'تایبەتمەندی',
+	'wikibase-diffview-reference' => 'سەرچاوە',
+	'wikibase-diffview-rank' => 'پلە',
+	'wikibase-error-unexpected' => 'ھەڵەیەکی چاوەڕوان‌نەکراو ڕووی دا.',
+	'wikibase-error-save-generic' => 'ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی پاشەکەوتکردندا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت.',
+	'wikibase-error-remove-generic' => 'ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی سڕینەوەدا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت.',
+	'wikibase-error-save-connection' => 'ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی پاشەکەوتکردندا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت. تکایە پەیوەندی ئینتەرنێتەکەت تاوتوێ بکە.',
+	'wikibase-error-remove-connection' => 'ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی سڕینەوەدا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت. تکایە پەیوەندی ئینتەرنێتەکەت تاوتوێ بکە.',
 	'wikibase-replicationnote' => 'تکایە ئاگادار بن چەند خولەک دەگرێ ھەتا گۆڕانکارییەکان لە ھەموو ویکییەکاندا دەربکەوێ.',
 	'wikibase-sitelinks' => 'پێرستی پەڕە بەسراوەکان بەم بەندەوە',
 	'wikibase-sitelinks-sitename-columnheading' => 'زمان',
@@ -389,7 +396,7 @@ $messages['cs'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => 'Kód',
 	'wikibase-tooltip-error-details' => 'Podrobnosti',
 	'datatypes-type-wikibase-item' => 'Položka',
-	'datatypes-type-commonsMedia' => 'Commons multimediální soubor',
+	'datatypes-type-commonsMedia' => 'Mediální soubor na Commons',
 );
 
 /** Welsh (Cymraeg)
@@ -593,12 +600,14 @@ $messages['el'] = array(
 
 /** Esperanto (Esperanto)
  * @author ArnoLagrange
+ * @author KuboF
  */
 $messages['eo'] = array(
 	'wikibase-lib-desc' => 'Enhavas komunajn funckiojn por Vikidatumaj kaj por la Vikidatuma klienta etendaĵo',
 	'wikibase-entity-item' => 'ero',
 	'wikibase-entity-property' => 'Atributo',
 	'wikibase-entity-query' => 'Serĉomendo',
+	'wikibase-error-unexpected' => 'Okazis neatendita eraro.',
 	'wikibase-error-save-generic' => 'Eraro okazis dum konservado, sekve viaj ŝanĝoj ne estis konservitaj',
 	'wikibase-error-remove-generic' => 'Eraro okazis dum forigado, sekve viaj ŝanĝoj ne estis konservitaj',
 	'wikibase-error-save-connection' => 'Konekteraro okazis dum konservado, sekve viaj ŝanĝoj ne estis konservitaj. Bonvolu kontroli vian retkonekton.',
@@ -614,6 +623,7 @@ $messages['eo'] = array(
 	'wikibase-error-ui-link-exists' => 'Vi ne povas ligi al ĉi tiu paĝo ĉar alia ero ajm ligas al ĝi.',
 	'wikibase-error-ui-session-failure' => 'Via sesio ĉesis. bonvolu denove ensaluti.',
 	'wikibase-error-ui-edit-conflict' => 'Estas redaktokonflikto. Bonvolu reŝargi kaj konservi denove.',
+	'wikibase-replicationnote' => 'Bonvolu noti, ke povas daŭri kelkajn minutojn ĝis la ŝanĝoj estos videblaj en ĉiuj vikioj.',
 	'wikibase-sitelinks' => 'Listo de paĝoj ligitaj al ĉi tiu ero',
 	'wikibase-sitelinks-sitename-columnheading' => 'Lingvo',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kodo',
@@ -679,6 +689,7 @@ $messages['et'] = array(
 	'wikibase-error-remove-timeout' => 'Praegu esinevate tehniliste probleemide tõttu ei saa eemaldamist lõpule viia.',
 	'wikibase-error-autocomplete-connection' => 'Vikipeedia API päringut ei saa teha. Palun proovi hiljem uuesti.',
 	'wikibase-error-autocomplete-response' => 'Serveri vastus: $1',
+	'wikibase-error-ui-client-error' => 'Ühendamine kliendi leheküljega ebaõnnestus. Palun proovi hiljem uuesti.',
 	'wikibase-error-ui-no-external-page' => 'Määratud artiklit ei õnnestu vastavast võrgukohast leida.',
 	'wikibase-error-ui-cant-edit' => 'Sul pole lubatud seda toimingut sooritada.',
 	'wikibase-error-ui-no-permissions' => 'Sul pole selle toimingu sooritamiseks vajalikke õigusi.',
@@ -693,6 +704,7 @@ $messages['et'] = array(
 	'wikibase-tooltip-error-details' => 'Üksikasjad',
 	'datatypes-type-wikibase-item' => 'Üksus',
 	'datatypes-type-commonsMedia' => 'Commonsi meediafail',
+	'version-wikibase' => 'Vikibaas',
 );
 
 /** Basque (euskara)
@@ -1065,6 +1077,7 @@ $messages['id'] = array(
 	'wikibase-tooltip-error-details' => 'Rincian',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Berkas media Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Iloko (Ilokano)
@@ -1748,14 +1761,27 @@ $messages['pt-br'] = array(
  * @author Stelistcristi
  */
 $messages['ro'] = array(
+	'wikibase-lib-desc' => 'Grupează funcționalități comune pentru extensiile Wikibase și Client Wikibase',
+	'wikibase-entity-item' => 'element',
+	'wikibase-entity-property' => 'proprietate',
+	'wikibase-entity-query' => 'interogare',
+	'wikibase-diffview-reference' => 'referință',
+	'wikibase-diffview-rank' => 'rang',
+	'wikibase-error-unexpected' => 'A apărut o eroare neașteptată.',
 	'wikibase-error-save-generic' => 'A intervenit o eroare în timpul salvării și din această cauză modificările dumneavoastră nu au putut fi finalizate.',
 	'wikibase-error-remove-generic' => 'A intervenit o eroare în timpul eliminării și din această cauză modificările dumneavoastră nu au putut fi finalizate.',
 	'wikibase-error-autocomplete-response' => 'Serverul a răspuns: $1',
+	'wikibase-error-ui-cant-edit' => 'Nu vă este permisă efectuarea acestei acțiuni.',
+	'wikibase-error-ui-no-permissions' => 'Nu aveți suficiente drepturi să efectuați această acțiune.',
 	'wikibase-error-ui-session-failure' => 'Sesiunea dumneavoastră a expirat. Vă rugăm să vă reautentificați.',
+	'wikibase-sitelinks' => 'Listă de pagini asociate cu acest element',
 	'wikibase-sitelinks-sitename-columnheading' => 'Limbă',
 	'wikibase-sitelinks-siteid-columnheading' => 'Cod',
 	'wikibase-sitelinks-link-columnheading' => 'Articol legat',
 	'wikibase-tooltip-error-details' => 'Detalii',
+	'datatypes-type-wikibase-item' => 'Element',
+	'datatypes-type-commonsMedia' => 'Fișier multimedia de la Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** tarandíne (tarandíne)

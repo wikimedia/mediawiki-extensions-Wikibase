@@ -92,6 +92,13 @@ $messages['he'] = array(
 	'wikibasequery-desc' => 'הוספת יכולות הרצת שאילתות לוויקיבייס',
 );
 
+/** Indonesian (Bahasa Indonesia)
+ * @author Iwan Novirion
+ */
+$messages['id'] = array(
+	'wikibasequery-desc' => 'Menambahkan kemampuan permintaan ke Wikibase',
+);
+
 /** Italian (italiano)
  * @author Beta16
  */
