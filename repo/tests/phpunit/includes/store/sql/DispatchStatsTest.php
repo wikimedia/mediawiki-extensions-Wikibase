@@ -1,8 +1,12 @@
 <?php
-namespace Wikibase\Test;
+namespace Wikibase\Tests\Repo;
+
 use Wikibase\DispatchStats;
 
 /**
+ * FIXME: this class is not registered in the test hook
+ * FIXME: there already is a EntityChangeTest in lib
+ *
  * Tests for the Wikibase\EntityChange class.
  *
  * This program is free software; you can redistribute it and/or modify
