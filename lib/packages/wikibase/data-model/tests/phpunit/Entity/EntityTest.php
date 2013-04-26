@@ -2,9 +2,21 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
+use Diff\Diff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
+use Diff\DiffOpRemove;
+use Wikibase\Claim;
 use Wikibase\Entity;
 use Wikibase\EntityDiff;
 use Wikibase\EntityId;
+use Wikibase\Item;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\ObjectComparer;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
 
 /**
  * Tests for the Wikibase\Entity deriving classes.
@@ -442,7 +454,7 @@ abstract class EntityTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\Entity $entity
+	 * @param Entity $entity
 	 */
 	public function testStub( Entity $entity ) {
 		$copy = $entity->copy();
@@ -454,7 +466,7 @@ abstract class EntityTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\Entity $entity
+	 * @param Entity $entity
 	 */
 	public function testCopy( Entity $entity ) {
 		$copy = $entity->copy();
@@ -472,7 +484,7 @@ abstract class EntityTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 *
-	 * @param \Wikibase\Entity $entity
+	 * @param Entity $entity
 	 */
 	public function testSerialize( Entity $entity ) {
 		$string = serialize( $entity );
@@ -563,9 +575,9 @@ abstract class EntityTest extends \MediaWikiTestCase {
 
 		if ( $expectedId === null ) {
 			$thisData = $instance->toArray();
-			$thatData = \Wikibase\Item::newEmpty()->toArray();
+			$thatData = Item::newEmpty()->toArray();
 
-			$comparer = new \Wikibase\ObjectComparer();
+			$comparer = new ObjectComparer();
 			$equals = $comparer->dataEquals( $thisData, $thatData, array( 'entity' ) );
 
 			$this->assertTrue( $equals );
@@ -599,7 +611,7 @@ abstract class EntityTest extends \MediaWikiTestCase {
 			$entity->setId( new EntityId( $entity->getType(), 50 ) );
 		}
 
-		$snak = new \Wikibase\PropertyNoValueSnak( 42 );
+		$snak = new PropertyNoValueSnak( 42 );
 		$claim = $entity->newClaim( $snak );
 
 		$this->assertInstanceOf( '\Wikibase\Claim', $claim );
@@ -610,24 +622,24 @@ abstract class EntityTest extends \MediaWikiTestCase {
 
 		$this->assertInternalType( 'string', $guid );
 
-		$prefixedEntityId = \Wikibase\Entity::getIdFromClaimGuid( $guid );
+		$prefixedEntityId = Entity::getIdFromClaimGuid( $guid );
 
 		$this->assertEquals( $entity->getPrefixedId(), $prefixedEntityId );
 	}
 
 	public function testNewClaimMore() {
-		$snak = new \Wikibase\PropertyNoValueSnak( 42 );
-		$item = \Wikibase\Item::newEmpty();
+		$snak = new PropertyNoValueSnak( 42 );
+		$item = Item::newEmpty();
 
-		$mockId = new EntityId( \Wikibase\Item::ENTITY_TYPE, 9001 );
-		$generator = new \Wikibase\Lib\ClaimGuidGenerator( $mockId );
+		$mockId = new EntityId( Item::ENTITY_TYPE, 9001 );
+		$generator = new ClaimGuidGenerator( $mockId );
 
 		$claim = $item->newClaim( $snak, $generator );
 		$guid = $claim->getGuid();
 
 		$this->assertInternalType( 'string', $guid );
 
-		$prefixedEntityId = \Wikibase\Entity::getIdFromClaimGuid( $guid );
+		$prefixedEntityId = Entity::getIdFromClaimGuid( $guid );
 
 		$this->assertEquals( $mockId->getPrefixedId(), $prefixedEntityId );
 	}
@@ -653,21 +665,21 @@ abstract class EntityTest extends \MediaWikiTestCase {
 
 		$entity1->setDescription( 'en', 'onoez' );
 
-		$expected = new \Wikibase\EntityDiff( array(
-			'aliases' => new \Diff\Diff( array(
-				'en' => new \Diff\Diff( array(
-					new \Diff\DiffOpAdd( 'foo' ),
-					new \Diff\DiffOpAdd( 'bar' ),
+		$expected = new EntityDiff( array(
+			'aliases' => new Diff( array(
+				'en' => new Diff( array(
+					new DiffOpAdd( 'foo' ),
+					new DiffOpAdd( 'bar' ),
 				), false ),
-				'de' => new \Diff\Diff( array(
-					new \Diff\DiffOpRemove( 'bah' ),
+				'de' => new Diff( array(
+					new DiffOpRemove( 'bah' ),
 				), false ),
-				'nl' => new \Diff\Diff( array(
-					new \Diff\DiffOpAdd( 'baz' ),
+				'nl' => new Diff( array(
+					new DiffOpAdd( 'baz' ),
 				), false )
 			) ),
-			'description' => new \Diff\Diff( array(
-				'en' => new \Diff\DiffOpAdd( 'onoez' ),
+			'description' => new Diff( array(
+				'en' => new DiffOpAdd( 'onoez' ),
 			) ),
 		) );
 
@@ -684,9 +696,9 @@ abstract class EntityTest extends \MediaWikiTestCase {
 		$entity1 = $this->getNewEmpty();
 		$entity1->setLabel( 'en', 'onoez' );
 
-		$expected = new \Wikibase\EntityDiff( array(
-			'label' => new \Diff\Diff( array(
-				'en' => new \Diff\DiffOpAdd( 'onoez' ),
+		$expected = new EntityDiff( array(
+			'label' => new Diff( array(
+				'en' => new DiffOpAdd( 'onoez' ),
 			) ),
 		) );
 
@@ -713,10 +725,10 @@ abstract class EntityTest extends \MediaWikiTestCase {
 	}
 
 	public function patchProvider() {
-		$claim0 = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$claim1 = new \Wikibase\Claim( new \Wikibase\PropertySomeValueSnak( 42 ) );
-		$claim2 = new \Wikibase\Claim( new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'ohi' ) ) );
-		$claim3 = new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 1 ) );
+		$claim0 = new Claim( new PropertyNoValueSnak( 42 ) );
+		$claim1 = new Claim( new PropertySomeValueSnak( 42 ) );
+		$claim2 = new Claim( new PropertyValueSnak( 42, new StringValue( 'ohi' ) ) );
+		$claim3 = new Claim( new PropertyNoValueSnak( 1 ) );
 
 		$claim0->setGuid( 'claim0' );
 		$claim1->setGuid( 'claim1' );
@@ -749,9 +761,9 @@ abstract class EntityTest extends \MediaWikiTestCase {
 		$source = clone $source;
 
 		$patch = new EntityDiff( array(
-			'description' => new \Diff\Diff( array(
-				'de' => new \Diff\DiffOpChange( 'foobar', 'onoez' ),
-				'en' => new \Diff\DiffOpAdd( 'foobar' ),
+			'description' => new Diff( array(
+				'de' => new DiffOpChange( 'foobar', 'onoez' ),
+				'en' => new DiffOpAdd( 'foobar' ),
 			), true ),
 		) );
 		$expected = clone $source;
@@ -764,10 +776,10 @@ abstract class EntityTest extends \MediaWikiTestCase {
 		$source = $this->getNewEmpty();
 		$source->addClaim( $claim0 );
 		$source->addClaim( $claim1 );
-		$patch = new EntityDiff( array( 'claim' => new \Diff\Diff( array(
-			new \Diff\DiffOpRemove( $claim0 ),
-			new \Diff\DiffOpAdd( $claim2 ),
-			new \Diff\DiffOpAdd( $claim3 )
+		$patch = new EntityDiff( array( 'claim' => new Diff( array(
+			new DiffOpRemove( $claim0 ),
+			new DiffOpAdd( $claim2 ),
+			new DiffOpAdd( $claim3 )
 		), false ) ) );
 		$expected = $this->getNewEmpty();
 		$expected->addClaim( $claim1 );
