@@ -24,7 +24,15 @@ require_once __DIR__ . '/DataModel/DataModel.php';
 require_once __DIR__ . '/lib/WikibaseLib.php';
 require_once __DIR__ . '/repo/Wikibase.php';
 require_once __DIR__ . '/Query/WikibaseQuery.php';
-//require_once __DIR__ . '/client/WikibaseClient.php';
+require_once __DIR__ . '/client/WikibaseClient.php';
 
-//require_once __DIR__ . '/client/ExampleSettings.php';
+require_once __DIR__ . '/client/ExampleSettings.php';
 require_once __DIR__ . '/repo/ExampleSettings.php';
+
+$wgWBSettings['repoDatabase'] = $wgDBname . '-' . $wgDBprefix;
+$wgWBSettings['changesDatabase'] = $wgDBname . '-' . $wgDBprefix;
+
+$wgLBFactoryConf['sectionsByDB'] = array(
+	$wgDBname => 'DEFAULT',
+	'repowiki' => $wgDBname . '-' . $wgDBprefix,
+);
