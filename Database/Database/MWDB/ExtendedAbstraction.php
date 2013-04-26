@@ -70,7 +70,7 @@ abstract class ExtendedAbstraction {
 		$db = $this->connectionProvider->getConnection();
 
 		if ( $db->getType() !== $this->getType() ) {
-			throw new InvalidArgumentException();
+			throw new InvalidArgumentException( 'The DatabaseBase class type does not match the type of this ExtendedAbstraction' );
 		}
 
 		return $db;
