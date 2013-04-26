@@ -2,14 +2,11 @@
 
 namespace Wikibase\Tests\QueryEngine\SQLStore;
 
-use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
-use Wikibase\Database\MediaWikiQueryInterface;
 use Wikibase\Database\TableBuilder;
 use Wikibase\QueryEngine\SQLStore\DataValueHandlers;
 use Wikibase\QueryEngine\SQLStore\Schema;
 use Wikibase\QueryEngine\SQLStore\Setup;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
-use Wikibase\Repo\LazyDBConnectionProvider;
 
 /**
  * Unit tests for the Wikibase\QueryEngine\SQLStore\Setup class.
@@ -40,30 +37,17 @@ use Wikibase\Repo\LazyDBConnectionProvider;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetupTest extends \MediaWikiTestCase {
+class SetupTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @return \Wikibase\Database\QueryInterface
-	 */
-	protected function getQueryInterface() {
-		$connectionProvider = new LazyDBConnectionProvider( DB_MASTER );
-
-		$queryInterface = new MediaWikiQueryInterface(
-			$connectionProvider,
-			new ExtendedMySQLAbstraction( $connectionProvider )
-		);
-
-		return $queryInterface;
-	}
-
-	public function testExecutionOfRun() {
+	public function testInstall() {
 		$defaultHandlers = new DataValueHandlers();
-
 		$storeConfig = new StoreConfig( 'foo', 'wbsql_', $defaultHandlers->getHandlers() );
-
 		$schema = new Schema( $storeConfig );
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
 
-		$queryInterface = $this->getQueryInterface();
+		$queryInterface->expects( $this->atLeastOnce() )
+			->method( 'createTable' )
+			->will( $this->returnValue( true ) );
 
 		$storeSetup = new Setup(
 			$storeConfig,
@@ -72,23 +56,27 @@ class SetupTest extends \MediaWikiTestCase {
 			new TableBuilder( $queryInterface )
 		);
 
-		$this->assertTrue( $storeSetup->install() );
-
-		foreach ( $storeConfig->getDataValueHandlers() as $dvHandler ) {
-			foreach ( array( 'mainsnak_', 'qualifier_' ) as $snakLevel ) {
-				$table = $dvHandler->getDataValueTable()->getTableDefinition();
-				$tableName = $storeConfig->getTablePrefix() . $snakLevel . $table->getName();
-
-				$this->assertTrue(
-					$queryInterface->tableExists( $tableName ),
-					'Table "' . $tableName . '" should exist after store setup'
-				);
-			}
-		}
-
-		$this->assertTrue( $storeSetup->uninstall() );
+		$storeSetup->install();
 	}
 
-	// TODO: add more detailed tests
+	public function testUninstall() {
+		$defaultHandlers = new DataValueHandlers();
+		$storeConfig = new StoreConfig( 'foo', 'wbsql_', $defaultHandlers->getHandlers() );
+		$schema = new Schema( $storeConfig );
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
+
+		$queryInterface->expects( $this->atLeastOnce() )
+			->method( 'dropTable' )
+			->will( $this->returnValue( true ) );
+
+		$storeSetup = new Setup(
+			$storeConfig,
+			$schema,
+			$queryInterface,
+			new TableBuilder( $queryInterface )
+		);
+
+		$storeSetup->uninstall();
+	}
 
 }
