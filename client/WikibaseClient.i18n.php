@@ -566,11 +566,11 @@ $messages['ckb'] = array(
 	'wikibase-linkitem-input-site' => 'زمان:',
 	'wikibase-linkitem-input-page' => 'پەڕە:',
 	'wikibase-linkitem-invalidsite' => 'پێگەیەکی نەناسراو یان نادروست ھەڵبژێردراوە',
-	'wikibase-linkitem-confirmitem-text' => 'پەڕەیەک کە ھەڵت‌بژاردووە پێشتر بۆ [$1 بەندێکی خەزێنەی ناوەندیی داروەکانمان] بەستر دراوە. تکایە پشتدار بکەرەوە ئەم پەڕانەی لە ژێرەوە نیشان دراون ھەر ئەوانەن تۆ دەتەوێ بەم پەڕەیە بەستەر بدرێن.',
+	'wikibase-linkitem-confirmitem-text' => 'پەڕەیەک کە ھەڵت‌بژاردووە پێشتر بۆ [$1 بەندێکی خەزێنەی ناوەندیی داروەکانمان] بەستەر دراوە. تکایە پشتدار بکەرەوە ئەم پەڕانەی لە ژێرەوە نیشان دراون ھەر ئەوانەن تۆ دەتەوێ بەم پەڕەیە بەستەر بدرێن.',
 	'wikibase-linkitem-confirmitem-button' => 'پشتدار بکەرەوە',
 	'wikibase-linkitem-not-loggedin' => 'بۆ بەکارھێنانی ئەم تایبەتمەندییە دەبێ بچییە ژوورە لەم ویکییە و لە [$1 خەزێنەی ناوەندیی داروە]دا.',
 	'wikibase-linkitem-success-create' => 'پەڕەکان سەرکەوتووانە بەستەر دران. دەتوانی بەندە تازە دروست‌کراوەکە کە بەستەرەکانی تێدایە لە [$1 خەزێنەی ناوەندیی دراوەکان]ماندا بدۆزییەوە.',
-	'wikibase-linkitem-success-link' => 'پەڕەکان سەرکەوتووانە بەستەر دران. دەتوانی بەندەکە کە بەستەرەکانی تێدایە لە [$1 خەزێنەی ناوەندیی دراوەکان]ماندا بدۆزییەوە.',
+	'wikibase-linkitem-success-link' => 'پەڕەکان سەرکەوتووانە بەستەر دران. دەتوانی ئەو بەندەی بەستەرەکانی تێدایە لە [$1 خەزێنەی ناوەندیی دراوەکان]ماندا بدۆزییەوە.',
 	'wikibase-property-notfound' => 'تایبەتمەندیی $1 نەدۆزرایەوە.',
 	'wikibase-rc-hide-wikidata' => 'ویکیدراوه $1',
 	'wikibase-rc-show-wikidata-pref' => 'دەستکارییەکانی ویکیدراوە لە دوایین گۆڕانکارییەکاندا نیشان بدە',
@@ -2042,12 +2042,13 @@ $messages['mk'] = array(
  */
 $messages['ml'] = array(
 	'wikibase-client-desc' => 'വിക്കിബേസ് അനുബന്ധത്തിനുള്ള ക്ലയന്റ്',
+	'specialpages-group-wikibaseclient' => 'വിക്കിഡേറ്റ ക്ലയന്റ്',
 	'wikibase-after-page-move' => 'മാറ്റിയ താളിലെ ഭാഷാ കണ്ണികൾ പരിപാലിക്കുന്നതിനായി ബന്ധപ്പെട്ട വിക്കിഡേറ്റ ഇനം താങ്കൾക്ക് [$1 പുതുക്കുകയും] ചെയ്യാവുന്നതാണ്.',
 	'wikibase-comment-remove' => 'ബന്ധപ്പെട്ട വിക്കിഡേറ്റ ഇനം മായ്ക്കപ്പെട്ടിരിക്കുന്നു. ഭാഷാ കണ്ണികൾ നീക്കം ചെയ്തു.',
 	'wikibase-comment-linked' => 'ഒരു വിക്കിഡേറ്റ ഇനം ഈ താളിൽ കണ്ണി ചേർത്തിരിക്കുന്നു.',
 	'wikibase-comment-unlink' => 'ഈ താൾ വിക്കിഡേറ്റാ ഇനത്തിൽ നിന്നും കണ്ണി മാറ്റിയിരിക്കുന്നു. ഭാഷാ കണ്ണികൾ നീക്കം ചെയ്തു.',
 	'wikibase-comment-restore' => 'ബന്ധപ്പെട്ട വിക്കിഡേറ്റ ഇനം പുനഃസ്ഥാപിച്ചിരിക്കുന്നു. ഭാഷാ കണ്ണികൾ പുനഃസ്ഥാപിച്ചു.',
-	'wikibase-comment-update' => 'ഭാഷാ കണ്ണികൾ പുതുക്കപ്പെട്ടു.', # Fuzzy
+	'wikibase-comment-update' => 'വിക്കിഡേറ്റ ഇനം മാറിയിരിക്കുന്നു',
 	'wikibase-comment-sitelink-add' => 'ഭാഷാ കണ്ണി ചേർത്തു: $1',
 	'wikibase-comment-sitelink-change' => 'ഭാഷാ കണ്ണി $1 എന്നതിൽ നിന്ന് $2 എന്നാക്കി മാറ്റിയിരിക്കുന്നു',
 	'wikibase-comment-sitelink-remove' => 'ഭാഷാ കണ്ണി നീക്കം ചെയ്തു: $1',
@@ -2055,6 +2056,9 @@ $messages['ml'] = array(
 	'wikibase-editlinks' => 'കണ്ണികൾ തിരുത്തുക',
 	'wikibase-editlinkstitle' => 'അന്തർഭാഷാ കണ്ണികൾ തിരുത്തുക',
 	'wikibase-linkitem-addlinks' => 'കണ്ണികൾ ചേർക്കുക',
+	'wikibase-linkitem-alreadylinked' => 'കേന്ദ്രീകൃത വിവര ശേഖരത്തിൽ നിന്ന് ഈ താളുമായി ബന്ധപ്പെടുത്താൻ താങ്കൾ ശ്രമിക്കുന്ന ഒരു [$1 ഇനം], ഈ സൈറ്റിൽ $2 എന്നതിലേയ്ക്ക് കണ്ണിചേർക്കപ്പെട്ടിരിക്കുന്നു. ഒരു സൈറ്റിൽ ഒരൊറ്റ താളിലേയ്ക്കേ ഇനങ്ങൾ ചേർക്കപ്പെടാവൂ. ദയവായി കണ്ണി ചേർക്കാൻ വ്യത്യസ്തമായ ഒരു താൾ തിരഞ്ഞെടുക്കുക.',
+	'wikibase-linkitem-close' => 'അറിയിപ്പ് അടച്ച ശേഷം താൾ റീലോഡ് ചെയ്യുക',
+	'wikibase-linkitem-failure' => 'തന്നിരിക്കുന്ന താളിലേയ്ക്ക് കണ്ണി ചേർക്കാൻ ശ്രമിച്ചപ്പോൾ അപരിചിതമായ ഒരു പിഴവുണ്ടായി.',
 	'wikibase-linkitem-title' => 'താളുമായി കണ്ണി ചേർക്കുക',
 	'wikibase-linkitem-linkpage' => 'താളുമായി കണ്ണി ചേർക്കുക',
 	'wikibase-linkitem-input-site' => 'ഭാഷ:',
@@ -2064,6 +2068,8 @@ $messages['ml'] = array(
 	'wikibase-rc-hide-wikidata' => 'വിക്കിഡേറ്റ $1',
 	'wikibase-rc-show-wikidata-pref' => 'സമീപകാല മാറ്റങ്ങളിൽ വിക്കിഡേറ്റാ തിരുത്തലുകളും പ്രദർശിപ്പിക്കുക',
 	'wikibase-unconnectedpages-submit' => 'പോകൂ',
+	'wikibase-unconnectedpages-iwdata-label' => 'അന്തർഭാഷാകണ്ണികളുള്ള താളുകൾ മാത്രം',
+	'wikibase-unconnectedpages-format-row' => '(താളിൽ $1 അന്തർഭാഷാകണ്ണികളുണ്ട്)',
 );
 
 /** Marathi (मराठी)
@@ -2424,6 +2430,11 @@ $messages['qu'] = array(
 	'wikibase-editlinks' => "T'inkikunata llamk'apuy",
 	'wikibase-editlinkstitle' => "Wikipura t'inkikunata llamk'apuy",
 	'wikibase-linkitem-addlinks' => "T'inkikunata yapay",
+	'wikibase-linkitem-title' => "P'anqawan t'inkiy",
+	'wikibase-linkitem-linkpage' => "P'anqawan t'inkiy",
+	'wikibase-linkitem-selectlink' => "Ama hina kaspa, llika tiyayta p'anqatapas akllay kay p'anqawan t'inkinanpaq.",
+	'wikibase-linkitem-input-site' => 'Rimay:',
+	'wikibase-linkitem-input-page' => "P'anqa:",
 );
 
 /** Romanian (română)
@@ -2650,17 +2661,19 @@ $messages['tl'] = array(
 
 /** Ukrainian (українська)
  * @author AS
+ * @author Base
  * @author Microcell
  * @author Ата
  */
 $messages['uk'] = array(
 	'wikibase-client-desc' => 'Клієнт для розширення Wikibase',
+	'specialpages-group-wikibaseclient' => 'Клієнт Вікіданих',
 	'wikibase-after-page-move' => "Щоб виправити мовні посилання на перейменованій сторінці, Ви також можете [$1 оновити] пов'язаний елемент Вікіданих.",
 	'wikibase-comment-remove' => "Пов'язаний елемент Вікіданих видалений. Мовні посилання видалені.",
 	'wikibase-comment-linked' => 'Елемент Вікіданих посилався на цю сторінку.',
 	'wikibase-comment-unlink' => "Ця сторінка була від'єднана від елемента Вікіданих. Мовні посилання видалені.",
 	'wikibase-comment-restore' => "Пов'язаний елемент Вікіданих відновлений. Мовні посилання відновлені.",
-	'wikibase-comment-update' => 'Мовні посилання оновлені.',
+	'wikibase-comment-update' => 'Елемент Вікіданих змінено',
 	'wikibase-comment-sitelink-add' => 'Додано мовне посилання: $1',
 	'wikibase-comment-sitelink-change' => 'Мовне посилання змінено з $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Мовне посилання видалено: $1',
@@ -2683,8 +2696,20 @@ $messages['uk'] = array(
 	'wikibase-linkitem-not-loggedin' => 'Вам необхідно увійти в систему на цій вікі і на [$1 центральному сховищі даних], щоб скористатись цією функцією.',
 	'wikibase-linkitem-success-create' => "Сторінки було успішно пов'язано. Ви можете знайти новостворений елемент, який містить ці посилання, у нашому [$1 центральному сховищі даних].",
 	'wikibase-linkitem-success-link' => "Сторінки було успішно пов'язано. Ви можете знайти елемент, який містить ці посилання, у нашому [$1 центральному сховищі даних].",
+	'wikibase-property-notfound' => 'Властивість $1 не знайдено.',
+	'wikibase-property-notsupportedyet' => 'Вікідані поки що не підтримують тип властивості для властивості $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Вікідані',
 	'wikibase-rc-show-wikidata-pref' => 'Показати зміни Вікіданих у списку нових редагувань',
+	'wikibase-watchlist-show-changes-pref' => 'Показувати редагування Вікіданих у Вашому списку спостереження',
+	'wikibase-error-invalid-entity-id' => 'Введений ідентифікатор не відомий системі. Будь ласка, введіть коректний ідентифікатор сутності.',
+	'special-unconnectedpages' => "Сторінки не пов'язані з елементами",
+	'wikibase-unconnectedpages-legend' => "Параметри непов'язаних сторінок",
+	'wikibase-unconnectedpages-page' => 'Почати список результатів із сторінки:',
+	'wikibase-unconnectedpages-submit' => 'Виконати',
+	'wikibase-unconnectedpages-invalid-language' => '«$1» — неправильний код мови.',
+	'wikibase-unconnectedpages-page-warning' => 'Ця назва сторінки не може бути використаною у запиті й ігнорована.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Лише сторінки із міжмовними інтервікі-посиланнями',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|міжмовне інтервікі-посилання|міжмовні інтервікі-посилання|міжмовних інтервікі-посилань}} на сторінці)',
 );
 
 /** Urdu (اردو)
@@ -2873,7 +2898,7 @@ $messages['zh-hans'] = array(
 	'wikibase-linkitem-input-site' => '语言：',
 	'wikibase-linkitem-input-page' => '页面：',
 	'wikibase-linkitem-invalidsite' => '选择了一个未知或无效的网站',
-	'wikibase-linkitem-confirmitem-text' => '您选择的页面已链接到[$1 我们中央数据知识库中的项目]。请确认如下所示的页面都是您想要与此页面链接的。',
+	'wikibase-linkitem-confirmitem-text' => '页面已与[$1 中央数据库中的项目]链接。请确认如下所示都是您想要与此页面链接的页面。',
 	'wikibase-linkitem-confirmitem-button' => '确认',
 	'wikibase-linkitem-not-loggedin-title' => '您必须登录',
 	'wikibase-linkitem-not-loggedin' => '您必须在此维基和[$1 中央数据知识库]上登录才能使用此功能。',

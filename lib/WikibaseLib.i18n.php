@@ -1756,6 +1756,13 @@ $messages['pt-br'] = array(
 	'datatypes-type-commonsMedia' => 'Arquivo de mídia do Commons',
 );
 
+/** Quechua (Runa Simi)
+ * @author AlimanRuna
+ */
+$messages['qu'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'Rimay',
+);
+
 /** Romanian (română)
  * @author Minisarm
  * @author Stelistcristi
@@ -1972,10 +1979,14 @@ $messages['uk'] = array(
 	'wikibase-entity-item' => 'елемент',
 	'wikibase-entity-property' => 'властивість',
 	'wikibase-entity-query' => 'запит',
+	'wikibase-diffview-reference' => 'джерело',
+	'wikibase-diffview-rank' => 'ранг',
+	'wikibase-diffview-qualifier' => 'кваліфікатор',
 	'wikibase-error-unexpected' => 'Сталася невідома помилка',
 	'wikibase-error-save-generic' => 'Сталася помилка під час спроби виконати збереження, через це Ваші зміни не можуть бути здійснені.',
 	'wikibase-error-remove-generic' => 'Сталась помилка під час спроби виконати вилучення, через це Ваші зміни не можуть бути здійснені.',
 	'wikibase-error-save-connection' => "Під час спроби здійснити виконати збереження сталась помилка з'єднання, через це Ваші зміни не можуть бути здійснені. Будь ласка, перевірте Ваше з'єднання з Інтернетом.",
+	'wikibase-error-remove-connection' => 'При спробі здійснити вилучення сталась помилка підключення, тому Ваші зміни не можуть бути завершені. Будь ласка, перевірте Ваше підключення до Інтернету.',
 	'wikibase-error-autocomplete-response' => 'Сервер відповів: $1',
 	'wikibase-sitelinks' => 'Список сторінок, що посилаються на цей елемент',
 	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
@@ -2072,6 +2083,7 @@ $messages['yi'] = array(
 );
 
 /** Simplified Chinese (中文（简体）‎)
+ * @author Cwek
  * @author Hydra
  * @author Shizhao
  * @author Stevenliuyi
@@ -2110,6 +2122,7 @@ $messages['zh-hans'] = array(
 	'wikibase-tooltip-error-details' => '详细信息',
 	'datatypes-type-wikibase-item' => '项目',
 	'datatypes-type-commonsMedia' => '共享资源媒体文件',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Traditional Chinese (中文（繁體）‎)

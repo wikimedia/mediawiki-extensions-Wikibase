@@ -142,6 +142,13 @@ $messages['roa-tara'] = array(
 	'wikibasequery-desc' => "Aggiunge le capacità de l'inderrogazione sus a Uicchibase",
 );
 
+/** Ukrainian (українська)
+ * @author Base
+ */
+$messages['uk'] = array(
+	'wikibasequery-desc' => 'Додає можливості запитів до Вікібази',
+);
+
 /** Vietnamese (Tiếng Việt)
  * @author Minh Nguyen
  */
