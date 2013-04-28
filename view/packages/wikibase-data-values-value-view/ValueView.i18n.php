@@ -55,6 +55,16 @@ $messages['qqq'] = array(
 {{Identical|Empty}}',
 );
 
+/** Asturian (asturianu)
+ * @author Xuacu
+ */
+$messages['ast'] = array(
+	'valueview-desc' => "Componentes de la interfaz p'amosar y editar valores de datos",
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Inda nun hai sofitu pa xestionar valores «$1».',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Inda nun hai sofitu pa xestionar valores de datos de tipu «$1».',
+	'valueview-expert-emptyvalue-empty' => 'balero',
+);
+
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
  */
