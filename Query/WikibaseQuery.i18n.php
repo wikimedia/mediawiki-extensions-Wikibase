@@ -43,6 +43,13 @@ $messages['qqq'] = array(
 	'wikibasequery-desc' => '{{desc|name=Wikibase Query|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}',
 );
 
+/** Afrikaans (Afrikaans)
+ * @author Naudefj
+ */
+$messages['af'] = array(
+	'wikibasequery-desc' => 'Voeg soek-moontlikhede by Wikibase by',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -119,6 +126,13 @@ $messages['ja'] = array(
  */
 $messages['ko'] = array(
 	'wikibasequery-desc' => '위키베이스에 쿼리 기능을 추가합니다',
+);
+
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'wikibasequery-desc' => 'Brängk de Möjeleschkeit för ze Söhke zom <i lang="en">Wikibase</i> dohzoh.', # Fuzzy
 );
 
 /** Macedonian (македонски)

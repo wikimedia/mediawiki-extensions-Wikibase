@@ -120,6 +120,9 @@ $messages['af'] = array(
 	'wikibase-error-unexpected' => "'n Onverwagte fout het voorgekom.",
 	'wikibase-error-autocomplete-response' => 'Antwoord van bediener: $1',
 	'wikibase-error-ui-cant-edit' => 'U mag nie hierdie handeling uitvoer nie.',
+	'wikibase-error-ui-no-permissions' => 'U het nie die nodige regte om hierdie handeling uit te voer nie.',
+	'wikibase-error-ui-link-exists' => "U kan nie na die bladsy skakel nie omdat 'n ander item reeds hieraan gekoppel is.",
+	'wikibase-error-ui-session-failure' => 'U sessie het uitgeloop. Meld asseblief weer aan.',
 	'wikibase-sitelinks' => 'Lys van blaaie wat aan die item gekoppel is',
 	'wikibase-sitelinks-sitename-columnheading' => 'Taal',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
@@ -127,6 +130,7 @@ $messages['af'] = array(
 	'wikibase-tooltip-error-details' => 'Details',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Medialêer van Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Asturian (asturianu)
@@ -1308,13 +1312,13 @@ $messages['ko'] = array(
  */
 $messages['ksh'] = array(
 	'wikibase-lib-desc' => 'Jemeinsamme Fungxjuhne för di Projramm-Zohsäz <i lang="en">Wikibase</i> un <i lang="en">Wikibase Client</i>.',
-	'wikibase-entity-item' => 'Jäjeschtand',
-	'wikibase-entity-property' => 'Eijeschaff',
+	'wikibase-entity-item' => 'dä Jääjeschtand',
+	'wikibase-entity-property' => 'di Eijeschaff',
 	'wikibase-entity-query' => 'Frooch',
 	'wikibase-sitelinks-sitename-columnheading' => 'Schprooch',
 	'wikibase-sitelinks-siteid-columnheading' => 'Köözel',
 	'wikibase-tooltip-error-details' => 'Einzelheite',
-	'datatypes-type-wikibase-item' => 'Jäjeschtand',
+	'datatypes-type-wikibase-item' => 'Jääjeschtand',
 	'datatypes-type-commonsMedia' => 'Meedijedattei vun Wikkimeedija Commons',
 );
 
@@ -1893,6 +1897,7 @@ $messages['sr-ec'] = array(
 	'wikibase-tooltip-error-details' => 'Детаљи',
 	'datatypes-type-wikibase-item' => 'Ставка',
 	'datatypes-type-commonsMedia' => 'Датотека са Оставе',
+	'version-wikibase' => 'Викибаза',
 );
 
 /** Swedish (svenska)
@@ -2128,6 +2133,7 @@ $messages['zh-hans'] = array(
 /** Traditional Chinese (中文（繁體）‎)
  * @author Justincheng12345
  * @author Tntchn
+ * @author Waihorace
  */
 $messages['zh-hant'] = array(
 	'wikibase-lib-desc' => '儲存維基基礎及其客戶端的共同功能',
@@ -2161,4 +2167,5 @@ $messages['zh-hant'] = array(
 	'wikibase-tooltip-error-details' => '詳細資訊',
 	'datatypes-type-wikibase-item' => '項目',
 	'datatypes-type-commonsMedia' => '共享資源媒體檔案',
+	'version-wikibase' => 'Wikibase',
 );
