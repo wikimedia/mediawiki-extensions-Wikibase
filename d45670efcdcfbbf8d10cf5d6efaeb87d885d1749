@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dvy.UxN8",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2013-04-29T08:34:18Z",
+      "side": 1,
+      "message": "In wikis configured to be protocol relative (like wikidata.org) $wgServer is like \"//wikidata.org\" and not \"http://wikidata.org\". So, a piece of code is needed to append, if needed, an \"http:\" to $wgServer to create a valid base URI.\n\nSee https://www.mediawiki.org/wiki/Manual:$wgServer",
+      "revId": "d45670efcdcfbbf8d10cf5d6efaeb87d885d1749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv0-fwNM",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2013-04-29T08:34:18Z",
+      "side": 1,
+      "message": "I\u0027ve read that skos:isPrimarySubjectOf is something like \"depreciated\" in the stable version of the specification: http://www.w3.org/TR/skos-reference/#namespace\n\nWhy not use foaf:isPrimaryTopicOf that express the nearly same relationship?",
+      "revId": "d45670efcdcfbbf8d10cf5d6efaeb87d885d1749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv.-sbJU",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2013-04-29T08:34:18Z",
+      "side": 1,
+      "message": "Why not foaf:isPrimaryTopicOf?",
+      "revId": "d45670efcdcfbbf8d10cf5d6efaeb87d885d1749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
