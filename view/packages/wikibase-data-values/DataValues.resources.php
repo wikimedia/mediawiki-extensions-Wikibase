@@ -81,6 +81,15 @@ return call_user_func( function() {
 			),
 		),
 
+		// time.js
+		'time.js' => $moduleTemplate + array(
+			'scripts' => array(
+				'time.js/time.js',
+				'time.js/time.Time.js',
+				'time.js/time.Time.parse.js',
+			)
+		),
+
 		// qunit-parameterize from https://github.com/AStepaniuk/qunit-parameterize
 		'qunit.parameterize' => $moduleTemplate + array(
 			'scripts' => array(
