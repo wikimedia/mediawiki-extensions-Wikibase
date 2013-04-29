@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dv.9I7I0",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-29T09:47:23Z",
+      "side": 1,
+      "message": "Ah, right, thanks!",
+      "parentUuid": "Dvy.UxN8",
+      "revId": "d45670efcdcfbbf8d10cf5d6efaeb87d885d1749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dv0-fwNM",
         "filename": "repo/includes/content/RdfSerializer.php",
         "patchSetId": 21
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "Dvw9OqJc",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-29T09:47:23Z",
+      "side": 1,
+      "message": "Huh, interesting... I can\u0027t find anything about the why and how. Strange.\n\n\"Why not use foaf:isPrimaryTopicOf\"? I prefer SKOS because it\u0027s an actual W3C standard. But if SKOS doesn\u0027t have the vocab to express this, we can use FOAF.",
+      "parentUuid": "Dv0-fwNM",
+      "revId": "d45670efcdcfbbf8d10cf5d6efaeb87d885d1749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dv.-sbJU",
         "filename": "repo/includes/content/RdfSerializer.php",
         "patchSetId": 21
@@ -47,6 +83,24 @@
       "writtenOn": "2013-04-29T08:34:18Z",
       "side": 1,
       "message": "Why not foaf:isPrimaryTopicOf?",
+      "revId": "d45670efcdcfbbf8d10cf5d6efaeb87d885d1749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv29d3EQ",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-29T09:47:23Z",
+      "side": 1,
+      "message": "I was looking for something more narrow. Something like \"is RDF description of\".  isPrimaryTopicOf can apply to any text, with any range of topics, it can\u0027t be interpreted by a computer to mean \"this is the RDF resource describing that topic\".",
+      "parentUuid": "Dv.-sbJU",
       "revId": "d45670efcdcfbbf8d10cf5d6efaeb87d885d1749",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
