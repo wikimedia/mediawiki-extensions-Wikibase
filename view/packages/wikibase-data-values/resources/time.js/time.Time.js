@@ -133,6 +133,16 @@ time.Time = ( function( time ) {
 			return time.getTextFromDate( precision, year, month, day );
 		};
 
+		/**
+		 * Returns whether the Object is representing any time at all. This will be false if the
+		 * value passed to the constructor has not been interpreted as time.
+		 *
+		 * @returns {boolean}
+		 */
+		this.isValid = function() {
+			return this.year() !== null;
+		};
+
 		this.gregorianText = function() {
 			var result = this.gregorian();
 			return time.getTextFromDate( precision, result.year, result.month, result.day );
