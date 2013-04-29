@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dv8KwZ-Y",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-29T14:23:12Z",
+      "side": 1,
+      "message": "XXX? Also, shouldn\u0027t that be configurable?",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv4J8rx0",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-29T14:23:12Z",
+      "side": 1,
+      "message": "Too much responsiblity for one function or even class, serialization of each part of the Entity should probably go into its own class.\n\nWe already have a serialization system for Entity serialization for usage in the API. A similar system should probably be used for this one.",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
