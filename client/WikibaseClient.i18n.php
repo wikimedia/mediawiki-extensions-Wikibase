@@ -630,10 +630,14 @@ $messages['cs'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Potvrdit',
 	'wikibase-linkitem-not-loggedin-title' => 'Musíte být přihlášen',
 	'wikibase-linkitem-not-loggedin' => 'Je třeba být přihlášen na této wiki a [$1  Wikidatech], chcete-li použít tuto funkci.',
+	'wikibase-property-notfound' => 'Vlastnost $1 nebyla nalezena.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Zobrazit změny Wikidat v posledních změnách',
 	'wikibase-watchlist-show-changes-pref' => 'Zobrazit změny Wikidat ve sledovaných stránkách',
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ není platný kód jazyka.',
+	'wikibase-unconnectedpages-page-warning' => 'Název stránky nelze pro dotaz použít, takže se ignoruje.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Jen stránky s mezijazykovými odkazy',
+	'wikibase-unconnectedpages-format-row' => '(stránka obsahuje $1 {{PLURAL:$1|mezijazykový odkaz|mezijazykové odkazy|mezijazykových odkazů}})',
 );
 
 /** Church Slavic (словѣ́ньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ)
@@ -1035,7 +1039,7 @@ $messages['fa'] = array(
 	'wikibase-comment-linked' => 'یک آیتم ویکی‌داده به این صفحه پیوند دارد.',
 	'wikibase-comment-unlink' => 'این صفحه به ویکی‌داده پیوند ندارد. پیوند زبان حذف شد.',
 	'wikibase-comment-restore' => 'پیوند آیتم ویکی‌داده بازیابی شد. پیوند زبان بازیابی شد.',
-	'wikibase-comment-update' => 'پیوندهای زبانی به‌روز شد.',
+	'wikibase-comment-update' => 'پیوندهای زبانی به‌روز شد.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'پیوند زبان اضافه شده:$1',
 	'wikibase-comment-sitelink-change' => 'پیوند زبان از $1 به $2 تغییر کرده‌است.',
 	'wikibase-comment-sitelink-remove' => 'پیوند زبان حذف شد: $1',
@@ -1044,7 +1048,7 @@ $messages['fa'] = array(
 	'wikibase-editlinkstitle' => 'ویرایش پیوندهای میان‌ویکی',
 	'wikibase-linkitem-addlinks' => 'افزودن پیوند',
 	'wikibase-linkitem-alreadylinked' => 'صفحه‌ای که شما به آن پیوند می‌دهید، از قبل به یک [$1 آیتم] در مخزن مرکزی داده که به $2 در این سایت مریوط می‌شود، متصل است. آیتم‌ها می‌توانند فقط به یک صفحه از وبگاه ارتباط داشته‌باشند. لطفا از یک صقحه برای پیوند استفاده کنید.',
-	'wikibase-linkitem-close' => 'گفتگو را ببندید و صفحه را مجدداً بارگذاری نمایید.',
+	'wikibase-linkitem-close' => 'پنجره را ببند و صفحه را مجدداً بارگذاری کن',
 	'wikibase-linkitem-failure' => 'یک خطای ناشناخته در هنگام بارگذاری صفحهٔ پیوند داده‌شده رخ داد.',
 	'wikibase-linkitem-title' => 'پیوند به صفحه',
 	'wikibase-linkitem-linkpage' => 'پیوند با صفحه',
