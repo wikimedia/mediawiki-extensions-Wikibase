@@ -96,6 +96,7 @@ return call_user_func( function() {
 		'Wikibase\ItemHandler' => 'includes/content/ItemHandler.php',
 		'Wikibase\PropertyContent' => 'includes/content/PropertyContent.php',
 		'Wikibase\PropertyHandler' => 'includes/content/PropertyHandler.php',
+		'Wikibase\RdfBuilder' => 'includes/content/RdfBuilder.php',
 		'Wikibase\RdfSerializer' => 'includes/content/RdfSerializer.php',
 
 		// EasyRdf
@@ -168,6 +169,7 @@ return call_user_func( function() {
 		'Wikibase\Test\EntityContentTest' => 'tests/phpunit/includes/content/EntityContentTest.php',
 		'Wikibase\Test\EntityHandlerTest' => 'tests/phpunit/includes/content/EntityHandlerTest.php',
 		'Wikibase\Test\TermIndexTest' => 'tests/phpunit/includes/store/TermIndexTest.php',
+		'Wikibase\Test\RdfBuilderTest' => 'tests/phpunit/includes/content/RdfBuilderTest.php',
 
 		'MessageReporter' => 'includes/MessageReporter.php',
 		'ObservableMessageReporter' => 'includes/MessageReporter.php',

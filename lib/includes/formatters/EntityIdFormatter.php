@@ -69,9 +69,9 @@ class EntityIdFormatter extends ValueFormatterBase {
 	 *
 	 * @since 0.4
 	 *
-	 * @param mixed $value The value to format
+	 * @param EntityId $value The ID to format
 	 *
-	 * @return Result
+	 * @return string
 	 * @throws InvalidArgumentException
 	 * @throws OutOfBoundsException
 	 */

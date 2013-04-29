@@ -3,6 +3,7 @@
 namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
+use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
@@ -47,6 +48,11 @@ final class WikibaseRepo {
 	private $dataTypeFactory = null;
 
 	/**
+	 * @var EntityIdFormatter|null
+	 */
+	private $idFormatter = null;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
@@ -73,6 +79,29 @@ final class WikibaseRepo {
 		}
 
 		return $this->dataTypeFactory;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return EntityIdFormatter
+	 */
+	public function getIdFormatter() {
+		if ( $this->idFormatter === null ) {
+			$prefixMap = array();
+
+			foreach ( $this->settings->getSetting( 'entityPrefixes' ) as $prefix => $entityType ) {
+				$prefixMap[$entityType] = $prefix;
+			}
+
+			$options = new FormatterOptions( array(
+				EntityIdFormatter::OPT_PREFIX_MAP => $prefixMap
+			) );
+
+			$this->idFormatter = new EntityIdFormatter( $options );
+		}
+
+		return $this->idFormatter;
 	}
 
 	/**
