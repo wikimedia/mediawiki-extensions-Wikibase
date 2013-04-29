@@ -33,6 +33,74 @@
       "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv.IGw4g",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-29T14:27:56Z",
+      "side": 1,
+      "message": "$revision is not used. A method serializing an Entity to RDF also should not know about Revision. It ought to be usable just having loaded the serialization library and the data model component.",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv0LZ1x0",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-29T14:27:56Z",
+      "side": 1,
+      "message": "this comparison is wrong: it is comparing an entity type (string) with a data type (object).\n\nWhat is probably intended is\n\nif ( $property-\u003egetDataType() \u003d\u003d\u003d \u0027wikibase-item\u0027 ) {\n\nNo need for a dataTypeFactory.\n\nSince this is broken, I\u0027m going to assume the tests are not covering this code. So that also needs to be fixed.",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvwIMP6U",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-29T14:27:56Z",
+      "side": 1,
+      "message": "This method is waaay to big. Doing many different things.",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv4LPz1Y",
+        "filename": "repo/tests/phpunit/includes/content/RdfSerializerTest.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-04-29T14:27:56Z",
+      "side": 1,
+      "message": "why are so many fields and methods here static??",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
