@@ -4,9 +4,12 @@ namespace Wikibase\Test;
 use DataTypes\DataTypeFactory;
 use EasyRdf_Namespace;
 use MediaWikiSite;
+use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\Item;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Property;
 use Wikibase\RdfSerializer;
 use Wikibase\SiteLink;
 
@@ -33,12 +36,11 @@ use Wikibase\SiteLink;
  *
  * @ingroup WikibaseRepoTest
  * @ingroup Test
+ * @ingroup RDF
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group WikibaseProperty
- * @group WikibaseEntity
- * @group WikibaseEntityHandler
+ * @group WikibaseRdf
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -79,8 +81,6 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		),
 	);
 
-	protected static $uriBase = 'http://acme.test';
-
 	public function setUp() {
 		parent::setUp();
 
@@ -93,127 +93,14 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	 * @return Entity[]
 	 */
 	protected static function getTestEntities() {
-		static $entities = array();
-
-		if ( !empty( $entities ) ) {
-			return $entities;
-		}
-
-		$entity = Item::newEmpty();
-		$entities['empty'] = $entity;
-
-
-		$entity = Item::newEmpty();
-		$entities['terms'] = $entity;
-
-		$entity->setLabel( 'en', 'Berlin' );
-		$entity->setLabel( 'ru', 'Берлин' );
-
-		$entity->setDescription( 'en', 'German city' );
-		$entity->setDescription( 'ru', 'столица и одновременно земля Германии' );
-
-		$entity->addAliases( 'en', array( 'Berlin, Germany', 'Land Berlin' ) );
-		$entity->addAliases( 'ru', array( 'Berlin' ) );
-
-		// not yet supported
-		/*
-		$entity = Item::newEmpty();
-		$entities['links'] = $entity;
-
-		$entity->setLabel( 'en', 'Berlin' );
-
-		$entity->addSiteLink( new SiteLink( MediaWikiSite::newFromGlobalId( 'enwiki' ), 'Berlin' ) );
-		$entity->addSiteLink( new SiteLink( MediaWikiSite::newFromGlobalId( 'dewiki' ), 'Berlin' ) );
-		$entity->addSiteLink( new SiteLink( MediaWikiSite::newFromGlobalId( 'ruwiki' ), 'Берлин' ) );
-		*/
-
-		$i = 1;
-		foreach ( $entities as $entity ) {
-			$entity->setId( new EntityId( Item::ENTITY_TYPE, $i++ ) );
-		}
-
-		return $entities;
-	}
-
-	/**
-	 * @param \Wikibase\EntityId $entityId
-	 * @param array $properties
-	 *
-	 * @return \EasyRdf_Graph
-	 */
-	protected static function makeEntityGraph( EntityId $entityId, $properties ) {
-		$graph = new \EasyRdf_Graph();
-
-		$entityUri = 'wikibase_id:' . ucfirst( $entityId->getPrefixedId() );
-		$entityResource = $graph->resource( $entityUri );
-
-		/* @var \EasyRdf_Resource $entityResource */
-		foreach ( $properties as $prop => $values ) {
-			if ( is_scalar( $values ) ) {
-				$values = array( $values );
-			}
-
-			foreach ( $values as $val ) {
-				$entityResource->add( $prop, $val );
-			}
-		}
-
-		return $graph;
+		return RdfBuilderTest::getTestEntities();
 	}
 
 	/**
 	 * @return \EasyRdf_Graph[]
 	 */
 	protected static function getTestGraphs() {
-		static $graphs = array();
-
-		if ( !empty( $graphs ) ) {
-			return $graphs;
-		}
-
-		$serializer = self::newRdfSerializer( 'rdf' ); // dummy
-
-		foreach ( $serializer->getNamespaces() as $gname => $uri ) {
-			EasyRdf_Namespace::set( $gname, $uri );
-		}
-
-		$entities = self::getTestEntities();
-
-		$graphs['empty'] = self::makeEntityGraph(
-			$entities['empty']->getId(),
-			array()
-		);
-
-		$graphs['terms'] = self::makeEntityGraph(
-			$entities['terms']->getId(),
-			array(
-				'rdfs:label' => array(
-					new \EasyRdf_Literal( 'Berlin', 'en' ),
-					new \EasyRdf_Literal( 'Берлин', 'ru' )
-				),
-				'rdfs:comment' => array(
-					new \EasyRdf_Literal( 'German city', 'en' ),
-					new \EasyRdf_Literal( 'столица и одновременно земля Германии', 'ru' )
-				),
-				'wikibase_ontology:knownAs' => array(
-					new \EasyRdf_Literal( 'Berlin, Germany', 'en' ),
-					new \EasyRdf_Literal( 'Land Berlin', 'en' ),
-					new \EasyRdf_Literal( 'Berlin', 'ru' )
-				),
-			)
-		);
-
-		// not yet supportted
-		/*
-		$graphs['links'] = self::makeEntityGraph(
-			$entities['links']->getId(),
-			array(
-				//'rdfs:label', new \EasyRdf_Literal( '', '' )
-			)
-		);
-		*/
-
-		return $graphs;
+		return RdfBuilderTest::getTestGraphs();
 	}
 
 	protected static function getTestDataPatterns() {
@@ -223,26 +110,28 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			return $patterns;
 		}
 
-		$patterns['empty']['rdf'] = '!<rdf:RDF.*</rdf:RDF>!s';
-		$patterns['empty']['n3']  = '!!s';
+		$patterns['empty']['rdf'] = array( '!<rdf:RDF.*</rdf:RDF>!s' );
+		$patterns['empty']['n3']  = array( '!!s' );
 
-		$patterns['terms']['rdf'] = '!<rdf:RDF.*'
-			. '<rdf:Description.*rdf:about="wikibase_id:Q2".*'
-			. '<rdfs:label xml:lang="en">Berlin</rdfs:label>.*'
-			. '<rdfs:comment xml:lang="en">German city</rdfs:comment>.*'
-			. '<wikibase_ontology:knownAs xml:lang="en">Berlin, Germany</wikibase_ontology:knownAs>.*'
-			. '</rdf:RDF>!s';
-		$patterns['terms']['n3']  = '!<wikibase_id:Q2>.*'
-			. 'rdfs:label +"Berlin"@en,.*'
-			. 'rdfs:comment +"German city"@en,.*'
-			. 'wikibase_ontology:knownAs +"Berlin, Germany"@en,.*'
-			. '!s';
+		$patterns['terms']['rdf'] = array(
+			'!<rdf:RDF.*</rdf:RDF>!s',
+			'!<wikibase:Item.*rdf:about=".*?entity/q2"!s',
+			'!<rdfs:label xml:lang="en">Berlin</rdfs:label>!s',
+			'!<skos:prefLabel xml:lang="en">Berlin</skos:prefLabel>!s',
+			'!<skos:note xml:lang="en">German city</skos:note>!s',
+			'!<skos:altLabel xml:lang="en">Berlin, Germany</skos:altLabel>!s',
+		);
 
-		// links not yet supported
-		/*
-		$patterns['links']['rdf'] = '!xxx!s';
-		$patterns['links']['n3']  = '!xxx!s';
-		*/
+		$patterns['terms']['n3']  = array(
+			'!entity:q2!s',
+			'!rdfs:label +"Berlin"@en,!s',
+			'!skos:prefLabel +"Berlin"@en,!s',
+			'!skos:note +"German city"@en,!s',
+			'!skos:altLabel +"Berlin, Germany"@en,!s',
+		);
+
+		// TODO: test links
+		// TODO: test data values
 
 		return $patterns;
 	}
@@ -252,6 +141,12 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		$format = RdfSerializer::getFormat( $formatName );
 
 		$dataTypes = new DataTypeFactory( self::$dataTypes );
+		$idSerializer = new EntityIdFormatter( new FormatterOptions( array(
+			EntityIdFormatter::OPT_PREFIX_MAP => array(
+				Item::ENTITY_TYPE => 'q',
+				Property::ENTITY_TYPE => 'p',
+			)
+		) ) );
 
 		$mockRepo = new MockRepository();
 
@@ -261,9 +156,10 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 
 		return new RdfSerializer(
 			$format,
-			self::$uriBase,
+			RdfBuilderTest::URI_BASE,
 			$mockRepo,
-			$dataTypes
+			$dataTypes,
+			$idSerializer
 		);
 	}
 
@@ -314,7 +210,11 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			foreach ( $expectedGraph->properties( $rc ) as $prop ) {
 				$expectedValues = $expectedGraph->all( $rc, $prop );
 				$actualValues = $graph->all( $rc, $prop );
-				$this->assertArrayEquals( $expectedValues, $actualValues );
+
+				$this->assertArrayEquals(
+					RdfBuilderTest::rdf2strings( $expectedValues ),
+					RdfBuilderTest::rdf2strings( $actualValues )
+				);
 			}
 		}
 	}
@@ -343,11 +243,14 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideSerializeRdf
 	 */
-	public function testSerializeRdf( \EasyRdf_Graph $graph, $format, $regex ) {
+	public function testSerializeRdf( \EasyRdf_Graph $graph, $format, $regexes ) {
 		$serializer = self::newRdfSerializer( $format );
 
 		$data = $serializer->serializeRdf( $graph );
-		$this->assertRegExp( $regex, $data );
+
+		foreach ( $regexes as $regex ) {
+			$this->assertRegExp( $regex, $data );
+		}
 	}
 
 	public static function provideSerializeEntity() {
@@ -374,11 +277,14 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideSerializeEntity
 	 */
-	public function TestSerializeEntity( Entity $entity, $format, $regex ) {
+	public function testSerializeEntity( Entity $entity, $format, $regexes ) {
 		$serializer = self::newRdfSerializer( $format );
 
 		$data = $serializer->serializeEntity( $entity );
-		$this->assertRegExp( $regex, $data );
+
+		foreach ( $regexes as $regex ) {
+			$this->assertRegExp( $regex, $data );
+		}
 	}
 
 }
