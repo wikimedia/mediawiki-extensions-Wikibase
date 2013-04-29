@@ -38,6 +38,14 @@ use Wikibase\Repo\LazyDBConnectionProvider;
  */
 class ExtendedMySQLAbstractionTest extends ExtendedAbstractionTest {
 
+	protected function setUp() {
+		if ( wfGetDB( DB_SLAVE )->getType() !== 'mysql' ) {
+			$this->markTestSkipped( 'Can only run the ExtendedMySQLAbstractionTest when MediaWiki is using MySQL' );
+		}
+
+		parent::setUp();
+	}
+
 	/**
 	 * @see ExtendedAbstractionTest::newInstance
 	 *

@@ -2,10 +2,12 @@
 
 namespace Wikibase\Test\Database;
 
+use DatabaseBase;
 use Wikibase\Database\MediaWikiQueryInterface;
 use Wikibase\Database\QueryInterface;
 use Wikibase\Database\TableDefinition;
 use Wikibase\Database\FieldDefinition;
+use Wikibase\Repo\DBConnectionProvider;
 
 /**
  * Unit tests for the Wikibase\Database\MediaWikiQueryInterface class.
@@ -33,62 +35,101 @@ use Wikibase\Database\FieldDefinition;
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseDatabase
- * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
 
-	protected function tearDown() {
-		parent::tearDown();
-
-		$this->dropTablesIfStillThere();
-	}
-
-	protected function dropTablesIfStillThere() {
-		$queryInterface = $this->newInstance();
-
-		foreach ( array( 'differentfieldtypes', 'defaultfieldvalues', 'notnullfields',
-					  'testinsert', 'testupdate', 'testdelete', 'testgetinsertid' ) as $tableName ) {
-			if ( $queryInterface->tableExists( $tableName ) ) {
-				$queryInterface->dropTable( $tableName );
-			}
-		}
-	}
-
 	/**
 	 * @return QueryInterface
 	 */
 	protected function newInstance() {
-		$conn = new \Wikibase\Repo\LazyDBConnectionProvider( DB_MASTER );
+		$connection = $this->getMock( 'DatabaseMysql' );
+
+		$connectionProvider = new DirectConnectionProvider( $connection );
 
 		return new MediaWikiQueryInterface(
-			$conn,
-			new \Wikibase\Database\MWDB\ExtendedMySQLAbstraction( $conn )
+			$connectionProvider,
+			$this->getMock( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
 		);
 	}
 
-	public function tableExistsProvider() {
+	/**
+	 * @dataProvider tableNameProvider
+	 *
+	 * @param string $tableName
+	 */
+	public function testTableExists( $tableName ) {
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
+
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
+		);
+
+		$connection->expects( $this->once() )
+			->method( 'tableExists' )
+			->with( $this->equalTo( $tableName ) );
+
+		$queryInterface->tableExists( $tableName );
+	}
+
+	public function tableNameProvider() {
 		$argLists = array();
 
-		$argLists[] = array( 'user', true );
-		$argLists[] = array( 'xdgxftjhreyetfytj', false );
+		$argLists[] = array( 'user' );
+		$argLists[] = array( 'xdgxftjhreyetfytj' );
+		$argLists[] = array( 'a' );
+		$argLists[] = array( 'foo_bar_baz_bah' );
 
 		return $argLists;
 	}
 
 	/**
-	 * @dataProvider tableExistsProvider
+	 * @dataProvider tableProvider
 	 *
-	 * @param string $tableName
-	 * @param boolean $expected
+	 * @param TableDefinition $table
 	 */
-	public function testTableExists( $tableName, $expected ) {
-		$actual = $this->newInstance()->tableExists( $tableName );
+	public function testCreateTable( TableDefinition $table ) {
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
 
-		$this->assertInternalType( 'boolean', $actual );
-		$this->assertEquals( $expected, $actual );
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
+		);
+
+		$extendedAbstraction->expects( $this->once() )
+			->method( 'createTable' )
+			->with( $this->equalTo( $table ) );
+
+		$queryInterface->createTable( $table );
+	}
+
+	/**
+	 * @dataProvider tableProvider
+	 *
+	 * @param TableDefinition $table
+	 */
+	public function testDropTable( TableDefinition $table ) {
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
+
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
+		);
+
+		$connection->expects( $this->once() )
+			->method( 'dropTable' )
+			->with( $this->equalTo( $table ) );
+
+		$queryInterface->dropTable( $table );
 	}
 
 	public function tableProvider() {
@@ -114,197 +155,200 @@ class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider tableProvider
-	 *
-	 * @param TableDefinition $table
+	 * @dataProvider insertProvider
 	 */
-	public function testCreateAndDropTable( TableDefinition $table ) {
-		$queryInterface = $this->newInstance();
+	public function testInsert( $tableName, array $fieldValues ) {
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
 
-		$this->assertFalse(
-			$queryInterface->tableExists( $table->getName() ),
-			'Table should not exist before creation'
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
 		);
 
-		$success = $queryInterface->createTable( $table );
+		$connection->expects( $this->once() )
+			->method( 'insert' )
+			->with(
+				$this->equalTo( $tableName ),
+				$this->equalTo( $fieldValues )
+			);
 
-		$this->assertTrue(
-			$success,
-			'Creation function returned success'
-		);
-
-		$this->assertTrue(
-			$queryInterface->tableExists( $table->getName() ),
-			'Table "' . $table->getName() . '" exists after creation'
-		);
-
-		$this->assertTrue(
-			$queryInterface->dropTable( $table->getName() ),
-			'Table removal worked'
-		);
-
-		$this->assertFalse(
-			$queryInterface->tableExists( $table->getName() ),
-			'Table should not exist after deletion'
+		$queryInterface->insert(
+			$tableName,
+			$fieldValues
 		);
 	}
 
-	public function testInsert() {
-		$queryInterface = $this->newInstance();
+	public function insertProvider() {
+		$argLists = array();
 
-		$table = new TableDefinition( 'testinsert', array(
-			new FieldDefinition( 'intfield', FieldDefinition::TYPE_INTEGER, FieldDefinition::NULL ),
-			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, FieldDefinition::NOT_NULL ),
+		$argLists[] = array( 'foo', array() );
+
+		$argLists[] = array( 'bar', array(
+			'intfield' => 42,
 		) );
 
-		$this->assertTrue( $queryInterface->createTable( $table ) );
-
-		$this->assertTrue( $queryInterface->insert(
-			$table->getName(),
-			array(
-				'intfield' => 42,
-				'textfield' => 'foobar baz',
-			)
+		$argLists[] = array( 'baz', array(
+			'intfield' => 42,
+			'textfield' => '~=[,,_,,]:3',
 		) );
 
-		$this->assertTrue( $queryInterface->insert(
-			$table->getName(),
-			array(
-				'textfield' => '~=[,,_,,]:3',
-			)
-		) );
-
-		// TODO: assert present
-
-		$this->assertTrue( $queryInterface->dropTable( $table->getName() ) );
+		return $argLists;
 	}
 
-	public function testUpdate() {
-		$queryInterface = $this->newInstance();
+	/**
+	 * @dataProvider updateProvider
+	 */
+	public function testUpdate( $tableName, array $newValues, array $conditions ) {
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
 
-		$table = new TableDefinition( 'testupdate', array(
-			new FieldDefinition( 'intfield', FieldDefinition::TYPE_INTEGER, FieldDefinition::NULL ),
-			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, FieldDefinition::NOT_NULL ),
-		) );
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
+		);
 
-		$this->assertTrue( $queryInterface->createTable( $table ) );
+		$connection->expects( $this->once() )
+			->method( 'update' )
+			->with(
+				$this->equalTo( $tableName ),
+				$this->equalTo( $newValues ),
+				$this->equalTo( $conditions )
+			);
 
-		$this->assertTrue( $queryInterface->insert(
-			$table->getName(),
+		$queryInterface->update(
+			$tableName,
+			$newValues,
+			$conditions
+		);
+	}
+
+	public function updateProvider() {
+		$argLists = array();
+
+		$argLists[] = array(
+			'foo',
 			array(
 				'intfield' => 42,
 				'textfield' => 'foobar baz',
+			),
+			array(
 			)
-		) );
+		);
 
-		$this->assertTrue( $queryInterface->update(
-			$table->getName(),
+		$argLists[] = array(
+			'foo',
 			array(
 				'textfield' => '~=[,,_,,]:3',
 			),
 			array(
 				'intfield' => 0
 			)
-		) );
+		);
 
-		// TODO: assert no change
-
-		$this->assertTrue( $queryInterface->update(
-			$table->getName(),
+		$argLists[] = array(
+			'foo',
 			array(
 				'textfield' => '~=[,,_,,]:3',
+				'intfield' => 0,
+				'floatfield' => 4.2,
 			),
 			array(
-				'intfield' => 42
+				'textfield' => '~[,,_,,]:3',
+				'floatfield' => 9000.1,
 			)
-		) );
+		);
 
-		// TODO: assert change
-
-		$this->assertTrue( $queryInterface->dropTable( $table->getName() ) );
+		return $argLists;
 	}
 
-	public function testDelete() {
-		$queryInterface = $this->newInstance();
+	/**
+	 * @dataProvider deleteProvider
+	 */
+	public function testDelete( $tableName, array $conditions ) {
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
 
-		$table = new TableDefinition( 'testdelete', array(
-			new FieldDefinition( 'intfield', FieldDefinition::TYPE_INTEGER, FieldDefinition::NULL ),
-			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, FieldDefinition::NOT_NULL ),
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
+		);
+
+		$connection->expects( $this->once() )
+			->method( 'delete' )
+			->with(
+				$this->equalTo( $tableName ),
+				$this->equalTo( $conditions )
+			);
+
+		$queryInterface->delete( $tableName, $conditions );
+	}
+
+	public function deleteProvider() {
+		$argLists = array();
+
+		$argLists[] = array( 'foo', array() );
+
+		$argLists[] = array( 'bar', array(
+			'intfield' => 42,
 		) );
 
-		$this->assertTrue( $queryInterface->createTable( $table ) );
-
-		$this->assertTrue( $queryInterface->insert(
-			$table->getName(),
-			array(
-				'intfield' => 42,
-				'textfield' => 'foobar baz',
-			)
+		$argLists[] = array( 'baz', array(
+			'intfield' => 42,
+			'textfield' => '~=[,,_,,]:3',
 		) );
 
-		$this->assertTrue( $queryInterface->delete(
-			$table->getName(),
-			array(
-				'intfield' => 0
-			)
-		) );
-
-		// TODO: assert no change
-
-		$this->assertTrue( $queryInterface->delete(
-			$table->getName(),
-			array(
-				'intfield' => 42
-			)
-		) );
-
-		// TODO: assert change
-
-		$this->assertTrue( $queryInterface->dropTable( $table->getName() ) );
+		return $argLists;
 	}
 
 	public function testGetInsertId() {
-		$queryInterface = $this->newInstance();
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
 
-		$table = new TableDefinition( 'testgetinsertid', array(
-			new FieldDefinition(
-				'intfield',
-				FieldDefinition::TYPE_INTEGER,
-				FieldDefinition::NULL,
-				FieldDefinition::NO_DEFAULT,
-				FieldDefinition::NO_ATTRIB,
-				FieldDefinition::NO_INDEX,
-				FieldDefinition::AUTOINCREMENT
-			),
-			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, FieldDefinition::NOT_NULL ),
-		) );
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
+		);
 
-		$this->assertTrue( $queryInterface->createTable( $table ) );
+		$connection->expects( $this->once() )
+			->method( 'insertId' )
+			->will( $this->returnValue( 42 ) );
 
-		$this->assertTrue( $queryInterface->insert(
-			$table->getName(),
-			array(
-				'textfield' => 'foobar baz',
-			)
-		) );
+		$this->assertEquals( 42, $queryInterface->getInsertId() );
+	}
 
-		$firstInsertId = $queryInterface->getInsertId();
-		$this->assertInternalType( 'int', $firstInsertId );
+}
 
-		$this->assertTrue( $queryInterface->insert(
-			$table->getName(),
-			array(
-				'textfield' => 'onoez!',
-			)
-		) );
+class DirectConnectionProvider implements DBConnectionProvider {
 
-		$secondInsertId = $queryInterface->getInsertId();
-		$this->assertInternalType( 'int', $secondInsertId );
+	protected $connection;
 
-		// TODO: implement AUTOINCREMENT support
-//		$this->assertNotEquals( $firstInsertId, $secondInsertId );
+	public function __construct( DatabaseBase $connection ) {
+		$this->connection = $connection;
+	}
 
-		$this->assertTrue( $queryInterface->dropTable( $table->getName() ) );
+	/**
+	 * @see DBConnectionProvider::getConnection
+	 *
+	 * @since 0.4
+	 *
+	 * @return DatabaseBase
+	 */
+	public function getConnection() {
+		return $this->connection;
+	}
+
+	/**
+	 * @see DBConnectionProvider::releaseConnection
+	 *
+	 * @since 0.4
+	 */
+	public function releaseConnection() {
+
 	}
 
 }
