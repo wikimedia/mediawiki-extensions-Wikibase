@@ -4,9 +4,12 @@ namespace Wikibase\Test;
 use DataTypes\DataTypeFactory;
 use EasyRdf_Namespace;
 use MediaWikiSite;
+use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\Item;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Property;
 use Wikibase\RdfSerializer;
 use Wikibase\SiteLink;
 
@@ -252,6 +255,12 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		$format = RdfSerializer::getFormat( $formatName );
 
 		$dataTypes = new DataTypeFactory( self::$dataTypes );
+		$idSerializer = new EntityIdFormatter( new FormatterOptions( array(
+			EntityIdFormatter::OPT_PREFIX_MAP => array(
+				Item::ENTITY_TYPE => 'q',
+				Property::ENTITY_TYPE => 'p',
+			)
+		) ) );
 
 		$mockRepo = new MockRepository();
 
@@ -263,7 +272,8 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			$format,
 			self::$uriBase,
 			$mockRepo,
-			$dataTypes
+			$dataTypes,
+			$idSerializer
 		);
 	}
 

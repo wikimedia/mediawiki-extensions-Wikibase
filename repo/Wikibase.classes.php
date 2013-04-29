@@ -96,6 +96,7 @@ return call_user_func( function() {
 		'Wikibase\ItemHandler' => 'includes/content/ItemHandler.php',
 		'Wikibase\PropertyContent' => 'includes/content/PropertyContent.php',
 		'Wikibase\PropertyHandler' => 'includes/content/PropertyHandler.php',
+		'Wikibase\RdfBuilder' => 'includes/content/RdfBuilder.php',
 		'Wikibase\RdfSerializer' => 'includes/content/RdfSerializer.php',
 
 		// EasyRdf
