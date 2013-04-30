@@ -255,7 +255,13 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 				$this->msg( 'wikibase-newentity-intro' )->params(
 					Language::fetchLanguageName( $this->getLanguage()->getCode() )
 				)->text()
-				. */ Html::openElement(
+				. */ 
+				Html::rawElement(
+					'div',
+					array(),
+					Utils::getRightsWarningMessage()
+				)
+				. Html::openElement(
 					'form',
 					array(
 						'method' => 'post',

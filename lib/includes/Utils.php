@@ -545,4 +545,29 @@ final class Utils {
 
 		return $pidfile;
 	}
+
+	/**
+	 * Return the appropriate copyright message.
+	 *
+	 * Note that if this is a wiki using the WikimediaMessages extension (i.e. Wikidata)
+	 * it will use the shortcopyrightwarning message from that extension instead.
+	 *
+	 * @return String
+	 */
+	public static function getRightsWarningMessage() {
+		global $wgRightsUrl, $wgRightsText;
+
+		if ( wfMessage( 'wikidata-shortcopyrightwarning' )->exists() ) {
+			$rightsWarningMessage = wfMessage( 'wikidata-shortcopyrightwarning' )->parse();
+		} else {
+			$rightsWarningMessage = wfMessage( 'wikibase-shortcopyrightwarning',
+				wfMessage( 'wikibase-save' )->inContentLanguage()->text(),
+				wfMessage( 'copyrightpage' )->inContentLanguage()->text(),
+				"[$wgRightsUrl $wgRightsText]"
+			)->parse();
+		}
+
+		return $rightsWarningMessage;
+	}
+
 }
