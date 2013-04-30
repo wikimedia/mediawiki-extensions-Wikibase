@@ -60,6 +60,7 @@ return call_user_func( function() {
 				"$bp/values/MultilingualTextValue.tests.js",
 				"$bp/values/StringValue.tests.js",
 				"$bp/values/NumberValue.tests.js",
+				"$bp/values/TimeValue.tests.js",
 				"$bp/values/UnknownValue.tests.js",
 			),
 			'dependencies' => array(

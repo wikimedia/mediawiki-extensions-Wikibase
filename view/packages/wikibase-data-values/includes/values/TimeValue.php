@@ -34,21 +34,21 @@ use OutOfBoundsException;
  */
 class TimeValue extends DataValueObject {
 
-	const PRECISION_Ga = 28; // Gigayear
-	const PRECISION_100Ma = 29; // 100 Megayears
-	const PRECISION_10Ma = 30; // 10 Megayears
-	const PRECISION_Ma = 31; // Megayear
-	const PRECISION_100ka = 32; // 100 Kiloyears
-	const PRECISION_10ka = 33; // 10 Kiloyears
-	const PRECISION_ka = 34; // Kiloyear
-	const PRECISION_100a = 35; // 100 years
-	const PRECISION_10a = 36; // 10 years
-	const PRECISION_YEAR = 37;
-	const PRECISION_MONTH = 38;
-	const PRECISION_DAY = 39;
-	const PRECISION_HOUR = 40;
-	const PRECISION_MINUTE = 41;
-	const PRECISION_SECOND = 42;
+	const PRECISION_Ga = 0; // Gigayear
+	const PRECISION_100Ma = 1; // 100 Megayears
+	const PRECISION_10Ma = 2; // 10 Megayears
+	const PRECISION_Ma = 3; // Megayear
+	const PRECISION_100ka = 4; // 100 Kiloyears
+	const PRECISION_10ka = 5; // 10 Kiloyears
+	const PRECISION_ka = 6; // Kiloyear
+	const PRECISION_100a = 7; // 100 years
+	const PRECISION_10a = 8; // 10 years
+	const PRECISION_YEAR = 9;
+	const PRECISION_MONTH = 10;
+	const PRECISION_DAY = 11;
+	const PRECISION_HOUR = 12;
+	const PRECISION_MINUTE = 13;
+	const PRECISION_SECOND = 14;
 
 	/**
 	 * Point in time, represented per ISO8601.

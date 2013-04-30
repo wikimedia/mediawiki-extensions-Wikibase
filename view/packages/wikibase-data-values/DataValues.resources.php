@@ -57,16 +57,20 @@ return call_user_func( function() {
 
 		'dataValues.values' => $moduleTemplate + array(
 			'scripts' => array(
-				// Note: the order here is relevant, scripts should be places after the ones they depend on
+				// Note: The order here is relevant, scripts should be places after the ones they
+				//  depend on.
+				// TODO: Make one module per data value type.
 				'values/BoolValue.js',
 				'values/MonolingualTextValue.js',
 				'values/MultilingualTextValue.js',
 				'values/StringValue.js',
 				'values/NumberValue.js',
+				'values/TimeValue.js',
 				'values/UnknownValue.js',
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
+				'time.js' // required by TimeValue
 			),
 		),
 
