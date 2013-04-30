@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "Dv5UmItA",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-04-30T14:50:13Z",
+      "side": 1,
+      "message": "I think this should be TODO or FIXME then, can\u0027t remember seing XXX in MW code except on your content handler branch back then.\n\nAlso, I think constants are usually written all uppercase, e.g. ONTOLOGY_BASE_URL",
+      "parentUuid": "Dv7VFXhk",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dv4J8rx0",
         "filename": "repo/includes/content/RdfSerializer.php",
         "patchSetId": 22
