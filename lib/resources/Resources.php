@@ -537,6 +537,9 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.SomeValue.js',
 				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.NoValue.js',
 			),
+			'styles' => array(
+				'jquery.wikibase/jquery.wikibase.snakview/themes/default/snakview.SnakTypeSelector.css',
+			),
 			'dependencies' => array(
 				'jquery.eachchange',
 				'jquery.nativeEventHandler',

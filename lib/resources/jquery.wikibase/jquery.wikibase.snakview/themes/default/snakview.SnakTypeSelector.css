@@ -1,0 +1,15 @@
+.wb-snak-typeselector .wb-snaktypeselector {
+	border: none;
+}
+
+/* TODO: Move to vector theme and add default coloured icons  */
+
+.ui-state-default .ui-icon-snaktypeselector {
+	background-image: url(images/ui-icon_snaktypeselector_3d80b3.png);
+}
+.ui-state-hover .ui-icon-snaktypeselector {
+	background-image: url(images/ui-icon_snaktypeselector_2694e8.png);
+}
+.ui-state-active .ui-icon-snaktypeselector {
+	background-image: url(images/ui-icon_snaktypeselector_666666.png);
+}
