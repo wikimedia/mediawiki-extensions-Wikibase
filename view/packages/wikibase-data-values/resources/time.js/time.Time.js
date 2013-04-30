@@ -161,6 +161,26 @@ time.Time = ( function( time ) {
 		return ( 1e12 + Math.abs( number ) + '' ).slice( -digits );
 	}
 
+	/**
+	 * Creates a new Time object by a given iso8601 string.
+	 *
+	 * TODO: this function shouldn't really be required since the parser should simply be able to
+	 *       take such a string and create a new Time object from it.
+	 *
+	 * @param {string} signature
+	 * @param {number} [precision] If not given, precision will be as high as possible.
+	 */
+	Time.newFromIso8601 = function( iso8601String, precision ) {
+		// The parser only takes the iso8601 string in a certain format right now. We have to bring
+		// it into that form first:
+		var formattedIso8601 = iso8601String
+			.replace( /T.+$/, '' ) // get rid of minutes (not supported yet)
+			.replace( /([\-\+])?0*/, '$1' )// get rid of trailing zeroes, keep "-" and "+"
+			.replace( '+', '' ); // get reid of "+"
+
+		return new Time( formattedIso8601, precision );
+	};
+
 	return Time; // expose time.Time
 
 }( time ) );
