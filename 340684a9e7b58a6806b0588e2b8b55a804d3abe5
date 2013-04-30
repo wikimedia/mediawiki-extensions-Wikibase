@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dv7VFXhk",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-30T09:41:41Z",
+      "side": 1,
+      "message": "XXX \u003d\u003d \"needs more thought / ugh this sucks\"\nNo this should not be configurable. This is the canonical URI of the Wikibase ontology. It does not change and is the same for everyone.",
+      "parentUuid": "Dv8KwZ-Y",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dv4J8rx0",
         "filename": "repo/includes/content/RdfSerializer.php",
         "patchSetId": 22
@@ -53,6 +71,42 @@
     },
     {
       "key": {
+        "uuid": "Dv1VS6t4",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-30T09:41:41Z",
+      "side": 1,
+      "message": "See follow-up Ibf1499d1f: I have broken up this method in preparation of factoring out handlers for different data types.",
+      "parentUuid": "Dv4J8rx0",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvzVizrE",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-30T09:41:41Z",
+      "side": 1,
+      "message": "The RDF can/should contain meta-info about the revision (timestamp, revision id, revision URI). This will be added later.",
+      "parentUuid": "Dv.IGw4g",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dv0LZ1x0",
         "filename": "repo/includes/content/RdfSerializer.php",
         "patchSetId": 22
@@ -64,6 +118,24 @@
       "writtenOn": "2013-04-29T14:27:56Z",
       "side": 1,
       "message": "this comparison is wrong: it is comparing an entity type (string) with a data type (object).\n\nWhat is probably intended is\n\nif ( $property-\u003egetDataType() \u003d\u003d\u003d \u0027wikibase-item\u0027 ) {\n\nNo need for a dataTypeFactory.\n\nSince this is broken, I\u0027m going to assume the tests are not covering this code. So that also needs to be fixed.",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv9VW2sw",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-30T09:41:41Z",
+      "side": 1,
+      "message": "See follow-up Ibf1499d1f for a fixed version of this.\n\nAnd yes, the test doesn\u0027t cover data values yet",
+      "parentUuid": "Dv0LZ1x0",
       "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "Dv5VxQnk",
+        "filename": "repo/includes/content/RdfSerializer.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-30T09:41:41Z",
+      "side": 1,
+      "message": "Yes. See follow-up Ibf1499d1f.",
+      "parentUuid": "DvwIMP6U",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dv4LPz1Y",
         "filename": "repo/tests/phpunit/includes/content/RdfSerializerTest.php",
         "patchSetId": 22
@@ -98,6 +188,24 @@
       "writtenOn": "2013-04-29T14:27:56Z",
       "side": 1,
       "message": "why are so many fields and methods here static??",
+      "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv7VuvpU",
+        "filename": "repo/tests/phpunit/includes/content/RdfSerializerTest.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-04-30T09:41:41Z",
+      "side": 1,
+      "message": "Because data provider logic should (must?) be static - at least that\u0027s how I understand phpunit...\n\nAlso, we we want to share fixtures between test cases (yes, evil, evil, but tests are already slow enough, don\u0027t you think), I see no way around statics.",
+      "parentUuid": "Dv4LPz1Y",
       "revId": "340684a9e7b58a6806b0588e2b8b55a804d3abe5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
