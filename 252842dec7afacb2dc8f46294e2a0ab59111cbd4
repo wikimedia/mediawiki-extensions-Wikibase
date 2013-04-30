@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dv3WdpmE",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-30T11:09:46Z",
+      "side": 1,
+      "message": "why not using getWriteDb() here? what is it there for then? would say, rather get rid of getWriteDb() (and getReadDb() too) or use it.\nthis comment applies to several places in here..",
+      "revId": "252842dec7afacb2dc8f46294e2a0ab59111cbd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DvzWQjkk",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-30T11:09:46Z",
+      "side": 1,
+      "message": "get rid of this method (and getWriteDb() too) or use it everywhere. right now sometimes getReadDb() is used and sometimes $this-\u003egetConnection() - which is confusing.",
+      "revId": "252842dec7afacb2dc8f46294e2a0ab59111cbd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
