@@ -45,6 +45,13 @@ $messages['qqq'] = array(
 	'version-datavalues' => 'Name of the DataValues extension collection, used on [[Special:Version]]',
 );
 
+/** Afrikaans (Afrikaans)
+ * @author Naudefj
+ */
+$messages['af'] = array(
+	'version-datavalues' => 'DataWaardes',
+);
+
 /** Arabic (العربية)
  * @author Antime
  * @author Tarawneh
