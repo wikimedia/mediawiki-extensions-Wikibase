@@ -70,7 +70,6 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'includes/values/BooleanValue',
 		'includes/values/GeoCoordinateValue',
 		'includes/values/IriValue',
-		'includes/values/MediaWikiTitleValue',
 		'includes/values/MonolingualTextValue',
 		'includes/values/MultilingualTextValue',
 		'includes/values/NumberValue',
