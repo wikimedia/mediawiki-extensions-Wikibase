@@ -21,6 +21,11 @@
 	);
 
 	expertProvider.registerExpert(
+		dv.TimeValue,
+		vv.experts.TimeValue
+	);
+
+	expertProvider.registerExpert(
 		dt.getDataType( 'commonsMedia' ),
 		vv.experts.CommonsMediaType
 	);

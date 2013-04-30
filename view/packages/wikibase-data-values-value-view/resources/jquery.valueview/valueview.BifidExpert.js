@@ -135,8 +135,8 @@
 		/**
 		 * @see jQuery.valueview.Expert.rawValueCompare
 		 */
-		rawValueCompare: function( rawValue ) {
-			return this._currentExpert.rawValueCompare( rawValue );
+		rawValueCompare: function( rawValue1, rawValue2 ) {
+			return this._currentExpert.rawValueCompare( rawValue1, rawValue2 );
 		},
 
 		/**

@@ -174,6 +174,18 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.experts.timevalue' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.experts/experts.TimeInput.js',
+				'jquery.valueview/valueview.experts/experts.TimeValue.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts.staticdom',
+				'jquery.valueview.BifidExpert',
+				'jquery.valueview.experts.stringvalue',
+			),
+		),
+
 		'jquery.valueview.experts.commonsmediatype' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview/valueview.experts/experts.SuggestedStringValue.js',
