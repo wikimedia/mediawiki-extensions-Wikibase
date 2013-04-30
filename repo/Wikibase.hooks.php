@@ -203,6 +203,7 @@ final class RepoHooks {
 			'store/StoreFactory',
 			'store/Store',
 
+			'store/sql/DispatchStats',
 			'store/sql/SqlIdGenerator',
 			'store/sql/TermSqlIndex',
 			'store/sql/TermSearchKeyBuilder',

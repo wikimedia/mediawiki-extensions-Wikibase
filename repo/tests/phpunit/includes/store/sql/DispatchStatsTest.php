@@ -4,9 +4,6 @@ namespace Wikibase\Tests\Repo;
 use Wikibase\DispatchStats;
 
 /**
- * FIXME: this class is not registered in the test hook
- * FIXME: there already is a EntityChangeTest in lib
- *
  * Tests for the Wikibase\EntityChange class.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -38,7 +35,7 @@ use Wikibase\DispatchStats;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityChangeTest extends \MediaWikiTestCase {
+class DispatchStatsTest extends \MediaWikiTestCase {
 
 	/**
 	 * Creates and loads a DispatchStats object, injecting test data into
@@ -52,10 +49,10 @@ class EntityChangeTest extends \MediaWikiTestCase {
 		$changes = $data['changes'];
 		$states = $data['states'];
 
-		$dbw = wfGetDB( DB_MASTER ); // write to dummy tables
+		$dbw = wfGetDB( DB_MASTER ); // writes to dummy tables
 
-		$dbw->query( "truncate " . $dbw->tableName( 'wb_changes' ) );
-		$dbw->query( "truncate " . $dbw->tableName( 'wb_changes_dispatch' ) );
+		$dbw->delete( 'wb_changes', array( "1" ) );
+		$dbw->delete( 'wb_changes_dispatch', array( "1" ) );
 
 		foreach ( $changes as $row ) {
 			if ( $row === null ) {
