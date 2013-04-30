@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DvxUHkoY",
+        "filename": "client/includes/store/sql/CachingSqlStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-30T12:42:33Z",
+      "side": 1,
+      "message": "why should this ever be necessary?",
+      "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv3XZJh4",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-30T12:42:33Z",
+      "side": 1,
+      "message": "what happens if $props is null | bool (which can happen according to the documentation of getLabelMap())",
+      "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv9XnuuU",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-30T12:42:33Z",
+      "side": 1,
+      "message": "in what case would it actually be null | bool?",
+      "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dv9UAGm0",
+        "filename": "lib/tests/phpunit/store/TermPropertyLabelResolverTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-04-30T12:42:33Z",
+      "side": 1,
+      "message": "it seems that this test does not get executed and this class is not instantiated anywhere else..",
+      "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
