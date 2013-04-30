@@ -1,6 +1,7 @@
 <?php
 
 use Wikibase\Autocomment;
+use Wikibase\Utils;
 
 /**
  * Abstract special page for setting a value of a Wikibase entity.
@@ -187,6 +188,11 @@ abstract class SpecialSetEntity extends SpecialWikibasePage {
 					'p',
 					array(),
 					$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
+				)
+				. Html::rawElement(
+					'p',
+					array(),
+					Utils::getRightsWarningMessage()
 				)
 			);
 		}
