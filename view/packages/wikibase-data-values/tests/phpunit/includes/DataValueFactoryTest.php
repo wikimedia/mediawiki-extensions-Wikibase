@@ -32,7 +32,7 @@ use DataValues\DataValueFactory;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DataValuesFactoryTest extends \MediaWikiTestCase {
+class DataValuesFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testSingleton() {
 		$instance = DataValueFactory::singleton();
@@ -60,7 +60,7 @@ class DataValuesFactoryTest extends \MediaWikiTestCase {
 		$factory->registerDataValue( 'string', 'DataValues\StringValue' );
 		$factory->registerDataValue( 'number', 'DataValues\NumberValue' );
 
-		$this->assertArrayEquals( array( 'string', 'number' ), $factory->getDataValues() );
+		$this->assertEquals( array( 'string', 'number' ), $factory->getDataValues() );
 
 		$factory->registerDataValue( 'number', 'DataValues\StringValue' );
 

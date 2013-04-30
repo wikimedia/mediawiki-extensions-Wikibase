@@ -30,7 +30,7 @@ use DataValues\DataValue;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class DataValueTest extends \MediaWikiTestCase {
+abstract class DataValueTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Returns the name of the concrete class tested by this test.

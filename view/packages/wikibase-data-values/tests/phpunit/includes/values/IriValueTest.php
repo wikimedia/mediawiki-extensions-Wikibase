@@ -152,7 +152,7 @@ class IriValueTest extends DataValueTest {
 
 		$obtainedParts = IriValue::getIriParts( $input );
 
-		$this->assertArrayEquals( $expectedParts, $obtainedParts, true, true );
+		$this->assertEquals( $expectedParts, $obtainedParts );
 	}
 
 	/**

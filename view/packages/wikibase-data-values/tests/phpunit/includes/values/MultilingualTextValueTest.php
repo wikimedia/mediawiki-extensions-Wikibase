@@ -114,7 +114,7 @@ class MultilingualTextTest extends DataValueTest {
 			$this->assertInstanceOf( '\DataValues\MonolingualTextValue', $monolingualValue );
 		}
 
-		$this->assertArrayEquals( $arguments[0], $actual );
+		$this->assertEquals( $arguments[0], array_values( $actual ) );
 	}
 
 	/**

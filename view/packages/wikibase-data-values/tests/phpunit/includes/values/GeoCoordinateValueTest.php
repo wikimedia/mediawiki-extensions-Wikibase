@@ -154,7 +154,11 @@ class GeoCoordinateValueTest extends DataValueTest {
 		$expected = array_key_exists( 2, $arguments ) ? (float)$arguments[2] : null;
 		$actual = $geoCoord->getAltitude();
 
-		$this->assertTypeOrValue( 'float', $actual, null );
+		$this->assertTrue(
+			is_null( $actual ) || is_float( $actual ),
+			'getAltitude should return a float or null'
+		);
+
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -167,7 +171,11 @@ class GeoCoordinateValueTest extends DataValueTest {
 		$expected = array_key_exists( 3, $arguments ) ? $arguments[3] : 'earth';
 		$actual = $geoCoord->getGlobe();
 
-		$this->assertTypeOrValue( 'string', $actual, null );
+		$this->assertTrue(
+			is_null( $actual ) || is_string( $actual ),
+			'getGlobe should return a string or null'
+		);
+
 		$this->assertEquals( $expected, $actual );
 	}
 

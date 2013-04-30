@@ -48,5 +48,5 @@ return array(
 	'Hashable' => 'includes/Hashable.php',
 	'Immutable' => 'includes/Immutable.php',
 
-	'DataValues\Test\DataValueTest' => 'tests/includes/DataValueTest.php',
+	'DataValues\Test\DataValueTest' => 'tests/phpunit/includes/DataValueTest.php',
 );
