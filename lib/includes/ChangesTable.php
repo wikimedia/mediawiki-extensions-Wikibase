@@ -128,23 +128,33 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 	}
 
 	/**
-	 * @see ORMTable::getWriteValues()
+	 * @see   ORMTable::getWriteValues()
 	 *
 	 * @since 0.4
 	 *
-	 * @param \IORMRow $row
+	 * @param ChangeRow $row
 	 *
 	 * @return array
 	 */
 	protected function getWriteValues( \IORMRow $row ) {
+		assert( $row instanceof ChangeRow );
+
 		$values = parent::getWriteValues( $row );
 
-		if ( $row instanceof ChangeRow ) {
-			$infoField = $this->getPrefixedField( 'info' );
+		$infoField = $this->getPrefixedField( 'info' );
+		$revisionIdField = $this->getPrefixedField( 'revision_id' );
+		$userIdField = $this->getPrefixedField( 'user_id' );
 
-			if ( isset( $values[$infoField] ) ) {
-				$values[$infoField] = $row->serializeInfo( $values[$infoField] );
-			}
+		if ( isset( $values[$infoField] ) ) {
+			$values[$infoField] = $row->serializeInfo( $values[$infoField] );
+		}
+
+		if ( !isset( $values[$revisionIdField] ) ) {
+			$values[$revisionIdField] = 0;
+		}
+
+		if ( !isset( $values[$userIdField] ) ) {
+			$values[$userIdField] = 0;
 		}
 
 		return $values;
