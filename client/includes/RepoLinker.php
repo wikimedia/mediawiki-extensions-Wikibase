@@ -36,11 +36,16 @@ class RepoLinker {
 
 	protected $namespaces;
 
-	public function __construct( $baseUrl, $articlePath, $scriptPath, array $namespaces ) {
-		$this->baseUrl = $baseUrl;
-		$this->articlePath = $articlePath;
-		$this->scriptPath = $scriptPath;
-		$this->namespaces = $namespaces;
+	/**
+	 * @since 0.4
+	 *
+	 * @param SettingsArray $settings
+	 */
+	public function __construct( SettingsArray $settings ) {
+		$this->baseUrl = $settings->get( 'baseUrl' );
+		$this->articlePath = $settings->get( 'repoArticlePath' );
+		$this->scriptPath = $settings->get( 'repoScriptPath' );
+		$this->namespaces = $settings->get( 'repoNamespaces' );
 	}
 
 	/**
