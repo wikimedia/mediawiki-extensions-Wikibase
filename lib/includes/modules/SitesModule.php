@@ -54,12 +54,18 @@ class SitesModule extends ResourceLoaderModule {
 			if ( $site->getType() === Site::TYPE_MEDIAWIKI && $site->getGroup() === 'wikipedia' ) {
 				$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
 
+				// set the same protocol as one requested by
+				list( $pageUrl, $apiUrl ) = preg_replace(
+					"^https?",
+					$context->getRequest()->detectProtocol(),
+					array( $site->getPageUrl(), $site->getFileUrl( 'api' ) ) );
+
 				$sites[$site->getLanguageCode()] = array(
 					'shortName' => $languageName,
 					'name' => $languageName,
 					'globalSiteId' => $site->getGlobalId(),
-					'pageUrl' => $site->getPageUrl(),
-					'apiUrl' => $site->getFileUrl( 'api.php' ),
+					'pageUrl' => $pageUrl,
+					'apiUrl' => $apiUrl,
 					'languageCode' => $site->getLanguageCode()
 				);
 			}
