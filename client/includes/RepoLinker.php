@@ -36,11 +36,24 @@ class RepoLinker {
 
 	protected $namespaces;
 
-	public function __construct( $baseUrl, $articlePath, $scriptPath, array $namespaces ) {
-		$this->baseUrl = $baseUrl;
-		$this->articlePath = $articlePath;
-		$this->scriptPath = $scriptPath;
-		$this->namespaces = $namespaces;
+	/**
+	 * @since 0.4
+	 *
+	 * @param SettingsArray $settings
+	 */
+	public function __construct( SettingsArray $settings ) {
+		$settingsKeys = array( 'repoUrl', 'repoArticlePath', 'repoScriptPath', 'repoNamespaces' );
+
+		foreach( $settingsKeys as $key ) {
+			if ( ! ( $settings->offsetExists( $key ) ) ) {
+				throw new \MWException( "$key WikibaseClient setting is not set." );
+			}
+		}
+
+		$this->baseUrl = $settings->getSetting( 'repoUrl' );
+		$this->articlePath = $settings->getSetting( 'repoArticlePath' );
+		$this->scriptPath = $settings->getSetting( 'repoScriptPath' );
+		$this->namespaces = $settings->getSetting( 'repoNamespaces' );
 	}
 
 	/**

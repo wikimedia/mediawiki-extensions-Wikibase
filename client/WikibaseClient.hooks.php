@@ -188,12 +188,8 @@ final class ClientHooks {
 		);
 
 		if ( $itemId !== false ) {
-			$repoLinker = new RepoLinker(
-				Settings::get( 'repoUrl' ),
-				Settings::get( 'repoArticlePath' ),
-				Settings::get( 'repoScriptPath' ),
-				Settings::get( 'repoNamespaces' )
-			);
+			$settings = Settings::singleton();
+			$repoLinker = new RepoLinker( $settings );
 
 			$itemByTitle = 'Special:ItemByTitle/' . $globalId . '/' . $oldTitle->getPrefixedDBkey();
 			$itemByTitleLink = $repoLinker->repoArticleUrl( $itemByTitle );
@@ -521,12 +517,8 @@ final class ClientHooks {
 						return true;
 					}
 
-					$repoLinker = new RepoLinker(
-						Settings::get( 'repoUrl' ),
-						Settings::get( 'repoArticlePath' ),
-						Settings::get( 'repoScriptPath' ),
-						Settings::get( 'repoNamespaces' )
-					);
+					$settings = Settings::singleton();
+		            $repoLinker = new RepoLinker( $settings );
 
 					// links to the associated item on the repo
 					$template->data['language_urls'][] = array(
