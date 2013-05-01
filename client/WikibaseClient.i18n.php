@@ -2088,9 +2088,11 @@ $messages['ml'] = array(
 
 /** Marathi (मराठी)
  * @author Ydyashad
+ * @author संतोष दहिवळ
  */
 $messages['mr'] = array(
-	'wikibase-rc-hide-wikidata' => '$१ विकिमाहिती',
+	'wikibase-rc-hide-wikidata' => '$1 विकिडाटा',
+	'wikibase-rc-show-wikidata-pref' => 'विकिडाटा संपादने अलीकडील बदल मध्ये दाखवा',
 );
 
 /** Malay (Bahasa Melayu)
@@ -2758,6 +2760,7 @@ $messages['uz'] = array(
 $messages['vec'] = array(
 	'wikibase-client-desc' => "Client par l'estension Wikibase",
 	'specialpages-group-wikibaseclient' => 'Client Wikidata',
+	'wikibase-comment-linked' => 'Un elemento de Wikidata el xe stà colegà a sta pagina.',
 	'wikibase-comment-update' => 'Elemento Wikidata modificà',
 	'wikibase-comment-sitelink-add' => 'Zontà colegamento lenguìstego: $1',
 	'wikibase-comment-sitelink-change' => 'Colegamento lenguìstego canbià da $1 a $2',
@@ -2777,6 +2780,7 @@ $messages['vec'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostra le modifiche de Wikidata tra i ultimi canbiamenti',
 	'wikibase-watchlist-show-changes-pref' => 'Mostra le modifiche de Wikidata sui osservati speciali',
+	'wikibase-unconnectedpages-page' => "Taca l'elenco dei risultati da la pagina:",
 	'wikibase-unconnectedpages-submit' => 'Và',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" no xe un còdese de lengua valido.',
 	'wikibase-unconnectedpages-format-row' => '($1 colegamenti interlinguìsteghi in te la pagina)',
