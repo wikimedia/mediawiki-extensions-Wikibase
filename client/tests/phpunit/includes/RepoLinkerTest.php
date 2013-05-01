@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\RepoLinker;
 use Wikibase\EntityId;
 use Wikibase\Item;
+use Wikibase\SettingsArray;
 
 /**
  * Tests for the Wikibase\RepoLinker class.
@@ -40,27 +41,27 @@ class RepoLinkerTest extends \MediaWikiTestCase {
 	public function getRepoSettings() {
 		return array(
 			array(
-				'baseUrl' => '//www.example.com',
-				'articlePath' => '/wiki/$1',
-				'scriptPath' => '',
+				'repoUrl' => '//www.example.com',
+				'repoArticlePath' => '/wiki/$1',
+				'repoScriptPath' => '',
 				'repoNamespaces' => array(
 					'wikibase-item' => '',
 					'wikibase-property' => 'Property'
 				)
 			),
 			array(
-				'baseUrl' => '//example.com',
-				'articlePath' => '/wiki/$1',
-				'scriptPath' => '',
+				'repoUrl' => '//example.com',
+				'repoArticlePath' => '/wiki/$1',
+				'repoScriptPath' => '',
 				'repoNamespaces' => array(
 					'wikibase-item' => '',
 					'wikibase-property' => 'Property'
 				)
 			),
 			array(
-				'baseUrl' => 'http://www.example.com',
-				'articlePath' => '/wiki/$1',
-				'scriptPath' => '/w',
+				'repoUrl' => 'http://www.example.com',
+				'repoArticlePath' => '/wiki/$1',
+				'repoScriptPath' => '/w',
 				'repoNamespaces' => array(
 					'wikibase-item' => 'Item',
 					'wikibase-property' => 'Property'
@@ -92,12 +93,8 @@ class RepoLinkerTest extends \MediaWikiTestCase {
 	 * @dataProvider baseUrlProvider
 	 */
 	public function testBaseUrl( $expected, array $settings ) {
-		$repoLinker = new RepoLinker(
-			$settings['baseUrl'],
-			$settings['articlePath'],
-			$settings['scriptPath'],
-			$settings['repoNamespaces']
-		);
+		$settingsArray = new SettingsArray( $settings );
+		$repoLinker = new RepoLinker( $settingsArray );
 
 		$baseUrl = $repoLinker->baseUrl();
 		$this->assertEquals( $expected, $baseUrl );
@@ -134,12 +131,8 @@ class RepoLinkerTest extends \MediaWikiTestCase {
 	 * @dataProvider repoArticleUrlProvider
 	 */
 	 public function testRepoArticleUrl( $expected, array $settings, $page ) {
-		$repoLinker = new RepoLinker(
-			$settings['baseUrl'],
-			$settings['articlePath'],
-			$settings['scriptPath'],
-			$settings['repoNamespaces']
-		);
+		$settingsArray = new SettingsArray( $settings );
+		$repoLinker = new RepoLinker( $settingsArray );
 
 		$repoUrl = $repoLinker->repoArticleUrl( $page );
 
@@ -172,12 +165,8 @@ class RepoLinkerTest extends \MediaWikiTestCase {
 	 * @dataProvider repoItemUrlProvider
 	 */
 	public function testRepoItemUrl( $expected, array $settings, EntityId $entityId ) {
-		$repoLinker = new RepoLinker(
-			$settings['baseUrl'],
-			$settings['articlePath'],
-			$settings['scriptPath'],
-			$settings['repoNamespaces']
-		);
+		$settingsArray = new SettingsArray( $settings );
+		$repoLinker = new RepoLinker( $settingsArray );
 
 		$itemUrl = $repoLinker->repoItemUrl( $entityId );
 
@@ -210,12 +199,8 @@ class RepoLinkerTest extends \MediaWikiTestCase {
 	 * @dataProvider namespaceProvider
 	 */
 	public function testGetNamespace( $expected, array $settings, $entityType ) {
-		$repoLinker = new RepoLinker(
-			$settings['baseUrl'],
-			$settings['articlePath'],
-			$settings['scriptPath'],
-			$settings['repoNamespaces']
-		);
+		$settingsArray = new SettingsArray( $settings );
+		$repoLinker = new RepoLinker( $settingsArray );
 
 		$namespace = $repoLinker->getNamespace( $entityType );
 
@@ -275,12 +260,8 @@ class RepoLinkerTest extends \MediaWikiTestCase {
 	 * @dataProvider repoLinkProvider
 	 */
 	public function testRepoLink( $expected, $settings, $params ) {
-		$repoLinker = new RepoLinker(
-			$settings['baseUrl'],
-			$settings['articlePath'],
-			$settings['scriptPath'],
-			$settings['repoNamespaces']
-		);
+		$settingsArray = new SettingsArray( $settings );
+		$repoLinker = new RepoLinker( $settingsArray );
 
 		$repoLink = $repoLinker->repoLink( $params['target'], $params['text'], $params['params'] );
 
