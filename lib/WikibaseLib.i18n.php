@@ -2018,6 +2018,7 @@ $messages['ur'] = array(
  * @author Candalua
  */
 $messages['vec'] = array(
+	'wikibase-lib-desc' => 'Contien le funsionalità comuni par le estension Wikibase e Wikibase Client.',
 	'wikibase-entity-item' => 'elemento',
 	'wikibase-entity-property' => 'proprietà',
 	'wikibase-entity-query' => 'richiesta',
@@ -2025,9 +2026,19 @@ $messages['vec'] = array(
 	'wikibase-diffview-rank' => 'rango',
 	'wikibase-diffview-qualifier' => 'qualificador',
 	'wikibase-error-unexpected' => 'Xe capità un eror inprevisto.',
+	'wikibase-error-save-timeout' => 'Gavemo dei problemi tènici, quindi no se gà podesto conpletar el to salvatajo.',
+	'wikibase-error-remove-timeout' => 'Gavemo dei problemi tènici, quindi no se gà podesto conpletar la to rimosion.',
+	'wikibase-error-autocomplete-connection' => 'No se riese a interogar le API de Wikipedia. Proa pi tardi.',
 	'wikibase-error-autocomplete-response' => 'Risposta del server: $1',
+	'wikibase-error-ui-client-error' => 'La conesion a la pagina client no la xe riusìa. Proa pi tardi.',
+	'wikibase-error-ui-no-external-page' => "L'articolo specificà no'l xe stà catà sul sito corispondente.",
 	'wikibase-error-ui-cant-edit' => 'No te si mia autorixà a far sta roba.',
 	'wikibase-error-ui-no-permissions' => 'No te ghè diriti suficienti a far sta azion.',
+	'wikibase-error-ui-link-exists' => "No te pol colegar a sta pagina parché zà n'altro elemento el colega verso de ela.",
+	'wikibase-error-ui-session-failure' => 'La sesion la xe scadùa. Entra da novo.',
+	'wikibase-error-ui-edit-conflict' => 'Ghe xe un conflito de edizion. Par piaser ricarica e salva da novo.',
+	'wikibase-replicationnote' => 'Podarìa volerghe calche minuto prima che i canbiamenti i se veda su tute le wiki.',
+	'wikibase-sitelinks' => 'Elenco dele pagine colegà a sto elemento',
 	'wikibase-sitelinks-sitename-columnheading' => 'Lengua',
 	'wikibase-sitelinks-siteid-columnheading' => 'Còdese',
 	'wikibase-sitelinks-link-columnheading' => 'Voxe ligà',

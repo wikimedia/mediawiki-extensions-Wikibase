@@ -2081,6 +2081,7 @@ $messages['ml'] = array(
 	'wikibase-linkitem-not-loggedin' => 'ഈ സൗകര്യം ഉപയോഗിക്കുന്നതിനായി ഈ വിക്കിയിലും [$1 കേന്ദ്രീകൃത വിവര ശേഖരത്തിലും] താങ്കൾ പ്രവേശിച്ചിരിക്കേണ്ടതുണ്ട്.',
 	'wikibase-rc-hide-wikidata' => 'വിക്കിഡേറ്റ $1',
 	'wikibase-rc-show-wikidata-pref' => 'സമീപകാല മാറ്റങ്ങളിൽ വിക്കിഡേറ്റാ തിരുത്തലുകളും പ്രദർശിപ്പിക്കുക',
+	'wikibase-watchlist-show-changes-pref' => 'താങ്കൾ ശ്രദ്ധിക്കുന്നവയുടെ പട്ടികയിൽ വിക്കിഡേറ്റ തിരുത്തലുകളും പ്രദർശിപ്പിക്കുക',
 	'wikibase-unconnectedpages-submit' => 'പോകൂ',
 	'wikibase-unconnectedpages-iwdata-label' => 'അന്തർഭാഷാകണ്ണികളുള്ള താളുകൾ മാത്രം',
 	'wikibase-unconnectedpages-format-row' => '(താളിൽ $1 അന്തർഭാഷാകണ്ണികളുണ്ട്)',
@@ -2091,7 +2092,7 @@ $messages['ml'] = array(
  * @author संतोष दहिवळ
  */
 $messages['mr'] = array(
-	'wikibase-rc-hide-wikidata' => '$1 विकिडाटा',
+	'wikibase-rc-hide-wikidata' => 'विकिडाटा $1',
 	'wikibase-rc-show-wikidata-pref' => 'विकिडाटा संपादने अलीकडील बदल मध्ये दाखवा',
 );
 
@@ -2760,7 +2761,11 @@ $messages['uz'] = array(
 $messages['vec'] = array(
 	'wikibase-client-desc' => "Client par l'estension Wikibase",
 	'specialpages-group-wikibaseclient' => 'Client Wikidata',
+	'wikibase-after-page-move' => "Te pol anca [$1 ajornar] l'elemento asocià su Wikidata par trasferir i interlink su la pagina nova.",
+	'wikibase-comment-remove' => "L'elemento de Wikidata asocià el xe stà scancelà. I colegamenti interlenguìsteghi i xe stà cavà.",
 	'wikibase-comment-linked' => 'Un elemento de Wikidata el xe stà colegà a sta pagina.',
+	'wikibase-comment-unlink' => "Sta pagina la xe stà destacà da l'elemento de Wikidata. I colegamenti interlenguìsteghi i xe stà cavà.",
+	'wikibase-comment-restore' => "L'elemento de Wikidata asocià el xe stà recuperà. I colegamenti interlenguìsteghi i xe stà ripristinà.",
 	'wikibase-comment-update' => 'Elemento Wikidata modificà',
 	'wikibase-comment-sitelink-add' => 'Zontà colegamento lenguìstego: $1',
 	'wikibase-comment-sitelink-change' => 'Colegamento lenguìstego canbià da $1 a $2',
@@ -2770,19 +2775,30 @@ $messages['vec'] = array(
 	'wikibase-editlinkstitle' => 'Canbia colegamenti interlenguìsteghi',
 	'wikibase-linkitem-addlinks' => 'Zonta link',
 	'wikibase-linkitem-close' => 'Sèra la finestra de dialogo e ricarga la pagina',
+	'wikibase-linkitem-failure' => 'Xe capità un eror sconossùo sercando de colegar la pagina indicà.',
 	'wikibase-linkitem-title' => "Colega co n'altra pagina",
 	'wikibase-linkitem-linkpage' => 'Colega co la pagina',
+	'wikibase-linkitem-selectlink' => 'Selesiona un sito e na pagina che te vol colegar co sta qua.',
 	'wikibase-linkitem-input-site' => 'Lengua:',
 	'wikibase-linkitem-input-page' => 'Pagina:',
 	'wikibase-linkitem-invalidsite' => 'Sito selessionà sconossùo o mia valido',
+	'wikibase-linkitem-confirmitem-text' => "La pagina che te ghè sielto la xe zà colegà a n'altro [$1 elemento nel nostro archivio sentrale dei dati]. Conferma che le pagine mostrà qua soto le xe quele che te vol colegar co sta pagina.",
 	'wikibase-linkitem-confirmitem-button' => 'Va ben',
+	'wikibase-linkitem-success-create' => "Le pagine le xe stà colegà coretamente. Te pol catar l'elemento pena creà contegnente i link nel nostro [$1 archivio dati sentralizà].",
+	'wikibase-linkitem-success-link' => "Le pagine le xe stà colegà coretamente. Te pol catar l'elemento contegnente i link nel nostro [$1 archivio dati sentralizà].",
 	'wikibase-property-notfound' => 'Proprietà $1 mia catà.',
+	'wikibase-property-notsupportedyet' => "Wikibase no'l suporta gnancora el tipo de proprietà par la proprietà $1.",
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostra le modifiche de Wikidata tra i ultimi canbiamenti',
 	'wikibase-watchlist-show-changes-pref' => 'Mostra le modifiche de Wikidata sui osservati speciali',
+	'wikibase-error-invalid-entity-id' => "L'ID specificà el xe sconossùo al sistema. Dòpara un ID de entità valido.",
+	'special-unconnectedpages' => 'Pagine mia colegà ai elementi',
+	'wikibase-unconnectedpages-legend' => 'Opzioni par le pagine mia colegà',
 	'wikibase-unconnectedpages-page' => "Taca l'elenco dei risultati da la pagina:",
 	'wikibase-unconnectedpages-submit' => 'Và',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" no xe un còdese de lengua valido.',
+	'wikibase-unconnectedpages-page-warning' => 'El titolo de la pagina no se pol dopararlo par la riserca e quindi el vien ignorà.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Solo le pagine con colegamenti interlenguìsteghi',
 	'wikibase-unconnectedpages-format-row' => '($1 colegamenti interlinguìsteghi in te la pagina)',
 );
 
