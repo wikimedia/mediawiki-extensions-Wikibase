@@ -1,0 +1,102 @@
+/**
+ * Input element that interprets time values.
+ *
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
+ * @event change: Triggered whenever the widget's value has changed.
+ *        (1) {jQuery.Event}
+ *        (2) {time.Time|null} New value (null for no or an invalid value) the widget's value has
+ *            been changed to.
+ *
+ * @dependency jQuery.ui.Widget
+ * @dependency jQuery.eachchange
+ * @dependency time.Time
+ */
+( function( $, Time ) {
+	'use strict';
+
+	$.widget( 'time.timeinput', {
+		/**
+		 * Caches the widget's current value.
+		 * @type {time.Time|null}
+		 */
+		_value: null,
+
+		/**
+		 * @see jQuery.ui.autocomplete._create
+		 */
+		_create: function() {
+			var self = this;
+
+			this.element.addClass( this.widgetName );
+
+			this.element.eachchange( function( event, oldValue ) {
+				var value = self._parse();
+				if( value !== self._value ) {
+					self._value = value;
+					self._trigger( 'change', null, [self._value] );
+				}
+			} );
+		},
+
+		/**
+		 * @see jQuery.ui.Widget.destroy
+		 */
+		destroy: function() {
+			this.element.removeClass( this.widgetName );
+			$.ui.Widget.prototype.destroy.call( this );
+		},
+
+		/**
+		 * Parses the current input value.
+		 *
+		 * @return {time.Time|null} Time object when parsing was successful.
+		 */
+		_parse: function() {
+			var timeValue = new Time( this.element.val() );
+			return ( timeValue.isValid() ) ? timeValue : null;
+		},
+
+		/**
+		 * Sets/Gets the widget's value.
+		 *
+		 * @param {time.Time} [value]
+		 * @returns {time.Time|null}
+		 */
+		value: function( value ) {
+			if( value === undefined ) {
+				return this._value;
+			}
+
+			if( value !== null && ( !( value instanceof Time ) || !value.isValid() ) ) {
+				throw new Error( 'Cannot set value: Neither valid Time object nor \'null\' given.' );
+			}
+
+			if( value === null ) {
+				this.element.val( '' );
+			} else {
+				this.element.val( value.text() );
+			}
+
+			this._value = value;
+			return this._value;
+		},
+
+		/**
+		 * Disables the widget.
+		 */
+		disable: function() {
+			this.element.prop( 'disabled', true ).addClass( 'ui-state-disabled' );
+		},
+
+		/**
+		 * Enables the widget.
+		 */
+		enable: function() {
+			this.element.prop( 'disabled', false ).removeClass( 'ui-state-disabled' );
+		}
+
+	} );
+
+} )( jQuery, time.Time );

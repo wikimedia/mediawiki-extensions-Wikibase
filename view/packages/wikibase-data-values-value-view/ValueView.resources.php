@@ -199,6 +199,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.valueview.experts.stringvalue',
+				'jquery.time.timeinput',
 			),
 		),
 

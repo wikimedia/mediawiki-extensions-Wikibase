@@ -53,6 +53,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.time.timeinput.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.time/jquery.time.timeinput.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.time.timeinput',
+			),
+		),
+
 		'jquery.ui.suggester.tests' => array(
 			'scripts' => array(
 				"$bp/jquery.ui/jquery.ui.suggester.tests.js",
