@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DwBcQBgA",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-05-02T12:30:12Z",
+      "side": 1,
+      "message": "since we have \"use Language;\" then this can simply be \"Language\" not \"\\Language\"",
+      "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DvxUHkoY",
         "filename": "client/includes/store/sql/CachingSqlStore.php",
         "patchSetId": 4
@@ -47,6 +64,23 @@
       "writtenOn": "2013-04-30T12:42:33Z",
       "side": 1,
       "message": "in what case would it actually be null | bool?",
+      "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwJcEFsQ",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-05-02T12:30:12Z",
+      "side": 1,
+      "message": "$this-\u003etermIndex ?",
       "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
