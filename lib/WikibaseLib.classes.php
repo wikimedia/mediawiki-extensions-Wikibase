@@ -146,7 +146,8 @@ return call_user_func( function() {
 		'Wikibase\Lib\Test\Serializers\UnserializerBaseTest' => 'tests/phpunit/serializers/UnserializerBaseTest.php',
 		'Wikibase\Test\MockRepository' => 'tests/phpunit/MockRepository.php',
 		'Wikibase\Test\EntityLookupTest' => 'tests/phpunit/EntityLookupTest.php',
-		'Wikibase\Test\MockChunkAccess' => 'tests/phpunit/store/MockChunkAccess.php'
+		'Wikibase\Test\MockChunkAccess' => 'tests/phpunit/store/MockChunkAccess.php',
+		'Wikibase\Test\TermIndexTest' => 'tests/phpunit/store/TermIndexTest.php',
 	);
 
 	return $classes;

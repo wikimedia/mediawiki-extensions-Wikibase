@@ -30,10 +30,6 @@ use Wikibase\Term;
  * @ingroup WikibaseRepoTest
  * @ingroup Test
  *
- * @group Wikibase
- * @group WikibaseStore
- * @group Database
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >

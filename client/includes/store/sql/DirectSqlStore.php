@@ -45,12 +45,17 @@ class DirectSqlStore implements ClientStore {
 	private $propertyLookup = null;
 
 	/**
+	 * @var TermIndex
+	 */
+	private $termIndex = null;
+
+	/**
 	 * @var String|bool $repoWiki
 	 */
 	protected $repoWiki;
 
 	/**
-	 * @param $repoWiki
+	 * @param string    $repoWiki the symbolic database name of the repo wiki
 	 */
 	public function __construct( $repoWiki ) {
 		$this->repoWiki = $repoWiki;
@@ -92,6 +97,28 @@ class DirectSqlStore implements ClientStore {
 		//TODO: get config for persistent cache from config
 		$lookup = new WikiPageEntityLookup( $this->repoWiki ); // entities are stored in wiki pages
 		return new CachingEntityLoader( $lookup );
+	}
+
+	/**
+	 * Get a TermIndex object
+	 *
+	 * @return TermIndex
+	 */
+	public function getTermIndex() {
+		if ( !$this->termIndex ) {
+			$this->termIndex = $this->newTermIndex();
+		}
+
+		return $this->termIndex;
+	}
+
+	/**
+	 * Create a new TermIndex instance
+	 *
+	 * @return TermIndex
+	 */
+	protected function newTermIndex() {
+		return new TermSqlIndex( 'wb_terms', $this->repoWiki );
 	}
 
 	/**
