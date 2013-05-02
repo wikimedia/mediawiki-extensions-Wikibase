@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "DwBfORi4",
+        "filename": "client/includes/store/sql/CachingSqlStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-02T14:57:30Z",
+      "side": 1,
+      "message": "o_O it shouldn\u0027t. Must be a copy\u0026paste error, or code completion gone wrong, or something. I\u0027ll remove it.",
+      "parentUuid": "DvxUHkoY",
+      "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dv3XZJh4",
         "filename": "lib/includes/store/TermPropertyLabelResolver.php",
         "patchSetId": 4
@@ -47,6 +65,24 @@
       "writtenOn": "2013-04-30T12:42:33Z",
       "side": 1,
       "message": "what happens if $props is null | bool (which can happen according to the documentation of getLabelMap())",
+      "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwPfr4nc",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-02T14:57:30Z",
+      "side": 1,
+      "message": "silly phpstorm, putting such lies there :)",
+      "parentUuid": "Dv3XZJh4",
       "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "DwFcB7js",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-02T14:57:30Z",
+      "side": 1,
+      "message": "it can\u0027t.",
+      "parentUuid": "Dv9XnuuU",
+      "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwJcEFsQ",
         "filename": "lib/includes/store/TermPropertyLabelResolver.php",
         "patchSetId": 4
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "DwJf7dkQ",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-02T14:57:30Z",
+      "side": 1,
+      "message": "hrm, will do :)",
+      "parentUuid": "DwJcEFsQ",
+      "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dv9UAGm0",
         "filename": "lib/tests/phpunit/store/TermPropertyLabelResolverTest.php",
         "patchSetId": 4
@@ -98,6 +170,24 @@
       "writtenOn": "2013-04-30T12:42:33Z",
       "side": 1,
       "message": "it seems that this test does not get executed and this class is not instantiated anywhere else..",
+      "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwHf4ckc",
+        "filename": "lib/tests/phpunit/store/TermPropertyLabelResolverTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-02T14:57:30Z",
+      "side": 1,
+      "message": "ick, did i forget to register it? i keep doing that :\\",
+      "parentUuid": "Dv9UAGm0",
       "revId": "4e38b2acfe3019566f025c49517beadf906a658e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
