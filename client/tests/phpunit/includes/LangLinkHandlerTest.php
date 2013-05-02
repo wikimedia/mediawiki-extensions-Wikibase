@@ -49,18 +49,18 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			'id' => 1,
 			'label' => array( 'en' => 'Foo' ),
 			'links' => array(
-				'dewiki' => 'Foo_de',
-				'enwiki' => 'Foo_en',
-				'srwiki' => 'Foo_sr',
+				'dewiki' => 'Foo de',
+				'enwiki' => 'Foo en',
+				'srwiki' => 'Foo sr',
 			)
 		),
 		array( // matches, but not in a namespace with external langlinks enabled
 			'id' => 2,
 			'label' => array( 'en' => 'Talk:Foo' ),
 			'links' => array(
-				'dewiki' => 'Talk:Foo_de',
-				'enwiki' => 'Talk:Foo_en',
-				'srwiki' => 'Talk:Foo_sr',
+				'dewiki' => 'Talk:Foo de',
+				'enwiki' => 'Talk:Foo en',
+				'srwiki' => 'Talk:Foo sr',
 			)
 		)
 	);
@@ -101,9 +101,9 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			array( // #1
 				'Foo_sr', // page
 				array( // expected links
-					'dewiki' => 'Foo_de',
-					'enwiki' => 'Foo_en',
-					'srwiki' => 'Foo_sr',
+					'dewiki' => 'Foo de',
+					'enwiki' => 'Foo en',
+					'srwiki' => 'Foo sr',
 				)
 			),
 		);
@@ -244,20 +244,20 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			array( // #0: local overrides remote
 				'Foo_sr', // title
 				array( // langlinks
-					'de' => 'Xoo_de',
-					'nl' => 'Foo_nl',
+					'de' => 'Xoo de',
+					'nl' => 'Foo nl',
 				),
 				array( // noexternallinks
 				),
 				array( // expectedLinks
-					'enwiki' => 'Foo_en',
+					'enwiki' => 'Foo en',
 				)
 			),
 			array( // #1: namespace not covered
 				'Talk:Foo_sr', // title
 				array( // langlinks
-					'de' => 'Talk:Foo_de',
-					'nl' => 'Talk:Foo_nl',
+					'de' => 'Talk:Foo de',
+					'nl' => 'Talk:Foo nl',
 				),
 				array( // noexternallinks
 				),
@@ -267,8 +267,8 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			array( // #2: disabled
 				'Foo_sr', // title
 				array( // langlinks
-					'de' => 'Foo_de',
-					'nl' => 'Foo_nl',
+					'de' => 'Foo de',
+					'nl' => 'Foo nl',
 				),
 				array( // noexternallinks
 					'*'
@@ -279,8 +279,8 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			array( // #3: suppressed
 				'Foo_sr', // title
 				array( // langlinks
-					'de' => 'Foo_de',
-					'nl' => 'Foo_nl',
+					'de' => 'Foo de',
+					'nl' => 'Foo nl',
 				),
 				array( // noexternallinks
 					'en'
@@ -291,14 +291,14 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			array( // #4: suppressed redundantly
 				'Foo_sr', // title
 				array( // langlinks
-					'de' => 'Foo_de',
-					'nl' => 'Foo_nl',
+					'de' => 'Foo de',
+					'nl' => 'Foo nl',
 				),
 				array( // noexternallinks
 					'de'
 				),
 				array( // expectedLinks
-					'enwiki' => 'Foo_en',
+					'enwiki' => 'Foo en',
 				)
 			),
 		);
