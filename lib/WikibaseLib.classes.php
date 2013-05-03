@@ -115,17 +115,17 @@ return call_user_func( function() {
 		'Wikibase\ChunkCache' => 'includes/store/ChunkCache.php',
 		'Wikibase\ChunkAccess' => 'includes/store/ChunkAccess.php',
 		'Wikibase\EntityLookup' => 'includes/store/EntityLookup.php',
-		'Wikibase\PropertyLookup' => 'includes/store/PropertyLookup.php',
+		'Wikibase\PropertyLabelResolver' => 'includes/store/PropertyLabelResolver.php',
 		'Wikibase\SiteLinkCache' => 'includes/store/SiteLinkCache.php',
 		'Wikibase\SiteLinkLookup' => 'includes/store/SiteLinkLookup.php',
 		'Wikibase\TermIndex' => 'includes/store/TermIndex.php',
 		'Wikibase\TermCombinationMatchFinder' => 'includes/store/TermCombinationMatchFinder.php',
 		'Wikibase\TermMatchScoreCalculator' => 'includes/store/TermMatchScoreCalculator.php',
+		'Wikibase\TermPropertyLabelResolver' => 'includes/store/TermPropertyLabelResolver.php',
 		'Wikibase\TermSqlIndex' => 'includes/store/sql/TermSqlIndex.php',
 
 		// includes/store/sql
 		'Wikibase\CachingEntityLoader' => 'includes/store/sql/CachingEntityLoader.php',
-		'Wikibase\PropertySQLLookup' => 'includes/store/sql/PropertySQLLookup.php',
 		'Wikibase\SiteLinkTable' => 'includes/store/sql/SiteLinkTable.php',
 		'Wikibase\WikiPageEntityLookup' => 'includes/store/sql/WikiPageEntityLookup.php',
 
@@ -144,6 +144,8 @@ return call_user_func( function() {
 		'Wikibase\Test\EntitySerializerBaseTest' => 'tests/phpunit/serializers/EntitySerializerBaseTest.php',
 		'Wikibase\Test\EntityTestCase' => 'tests/phpunit/entity/EntityTestCase.php',
 		'Wikibase\Lib\Test\Serializers\UnserializerBaseTest' => 'tests/phpunit/serializers/UnserializerBaseTest.php',
+		'Wikibase\Test\MockPropertyLabelResolver' => 'tests/phpunit/MockPropertyLabelResolver.php',
+		'Wikibase\Test\PropertyLabelResolverTest' => 'tests/phpunit/store/PropertyLabelResolverTest.php',
 		'Wikibase\Test\MockRepository' => 'tests/phpunit/MockRepository.php',
 		'Wikibase\Test\EntityLookupTest' => 'tests/phpunit/EntityLookupTest.php',
 		'Wikibase\Test\MockChunkAccess' => 'tests/phpunit/store/MockChunkAccess.php',

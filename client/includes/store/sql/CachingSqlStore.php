@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Language;
+
 /**
  * Implementation of the client store interface using an SQL backend via MediaWiki's
  * storage abstraction layer.
@@ -40,9 +42,21 @@ class CachingSqlStore implements ClientStore {
 	private $entityLookup = null;
 
 	/**
-	 * @var PropertyLookup
+	 * @var PropertyLabelResolver
 	 */
-	private $propertyLookup = null;
+	private $propertyLabelResolver = null;
+
+	/**
+	 * @var Language
+	 */
+	protected $language;
+
+	/**
+	 * @param Language $wikiLanguage
+	 */
+	public function __construct( Language $wikiLanguage ) {
+		$this->language = $wikiLanguage;
+	}
 
 	/**
 	 * @see Store::newSiteLinkTable
@@ -94,31 +108,19 @@ class CachingSqlStore implements ClientStore {
 	}
 
 	/**
-	 * Get a PropertyLookup object
+	 * Get a PropertyLabelResolver object
 	 *
 	 * @since 0.4
 	 *
-	 * @return PropertyLookup
+	 * @return PropertyLabelResolver
 	 */
-	public function getPropertyLookup() {
-		if ( !$this->propertyLookup ) {
-			$this->propertyLookup = $this->newPropertyLookup();
+	public function getPropertyLabelResolver() {
+		if ( !$this->propertyLabelResolver ) {
+			$this->propertyLabelResolver = $this->newPropertyLabelResolver();
 		}
 
-		return $this->propertyLookup;
+		return $this->propertyLabelResolver;
 	}
-
-	/**
-	 * Create a new PropertyLookup instance
-	 *
-	 * @return PropertyLookup
-	 */
-	protected function newPropertyLookup() {
-		$entityLookup = $this->getEntityLookup();
-
-		return new PropertySQLLookup( $entityLookup );
-	}
-
 	/**
 	 * Get a TermIndex object
 	 *
@@ -126,6 +128,19 @@ class CachingSqlStore implements ClientStore {
 	 */
 	public function getTermIndex() {
 		throw new MWException( "Not Implemented, " . __CLASS__ . " is incomplete." );
+	}
+
+	/**
+	 * Create a new PropertyLabelResolver instance
+	 *
+	 * @return PropertyLabelResolver
+	 */
+	protected function newPropertyLabelResolver() {
+		return new TermPropertyLabelResolver(
+			$this->language->getCode(),
+			$this->getTermIndex(),
+			wfGetMainCache()
+		);
 	}
 
 	/**
