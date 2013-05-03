@@ -9,6 +9,9 @@
 ( function( $, QUnit ) {
 	'use strict';
 
+	// TODO: Tests for toggling additional contents
+	// TODO: Tests for hideWhenInputEmptyOption
+
 	/**
 	 * Factory for creating an input extender widget suitable for testing.
 	 */
@@ -77,54 +80,6 @@
 			QUnit.start();
 		} );
 
-	} );
-
-	QUnit.test( 'Toggle additional content', 4, function( assert ) {
-		var $input = newTestInputextender(),
-			extender = $input.data( 'inputextender' );
-
-		var assertions = [
-			function() {
-				assert.ok(
-					extender.$content.is( ':visible' ),
-					'Default content is still visible after having clicked the extender link.'
-				);
-
-				assert.ok(
-					extender.$extendedContent.is( ':visible' ),
-					'Additional content is visible after having clicked the extender link.'
-				);
-			},
-			function() {
-				assert.ok(
-					extender.$content.is( ':visible' ),
-					'Default content is still visible after having clicked the extender link the second time.'
-				);
-
-				assert.ok(
-					!extender.$extendedContent.is( ':visible' ),
-					'Additional content is hidden again after having clicked the extender link the second time.'
-				);
-			}
-		];
-
-		$input.on( 'inputextendertoggle', function( event ) {
-			assertions[0]();
-			$input
-			.off( 'inputextendertoggle' )
-			.on( 'inputextendertoggle', function( event ) {
-				assertions[1]();
-				QUnit.start();
-			} );
-			QUnit.start();
-		} );
-
-		// clicks will result into above event listeners being triggered
-		QUnit.stop();
-		extender.$extender.click();
-
-		QUnit.stop();
-		extender.$extender.click();
 	} );
 
 }( jQuery, QUnit ) );

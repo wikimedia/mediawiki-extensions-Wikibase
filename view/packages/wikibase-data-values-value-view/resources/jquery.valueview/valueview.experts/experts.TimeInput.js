@@ -5,7 +5,8 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, vp, $, vv, Time ) {
+// TODO: Remove mediaWiki dependency
+( function( dv, vp, $, vv, Time, mw ) {
 	'use strict';
 
 	var PARENT = vv.Expert;
@@ -35,20 +36,79 @@
 		_newValue: null,
 
 		/**
+		 * The preview section's node.
+		 * @type {jQuery}
+		 */
+		$preview: null,
+
+		/**
+		 * The node of the previewed input value.
+		 * @type {jQuery}
+		 */
+		$previewValue: null,
+
+		/**
 		 * @see jQuery.valueview.Expert._init
 		 */
 		_init: function() {
 			var self = this;
+
+			// TODO: Move preview out of the specific expert to a more generic place
+			this.$preview = $( '<div/>' )
+			.addClass( 'valueview-preview' )
+			.append(
+				$( '<div/>' )
+				.addClass( 'valueview-preview-label' )
+				.text( mw.msg( 'valueview-preview-label' ) )
+			);
+
+			this.$previewValue = $( '<div/>' )
+			.addClass( 'valueview-preview-value' )
+			.appendTo( this.$preview );
 
 			this.$input = $( '<input/>', {
 				type: 'text',
 				'class': this.uiBaseClass + '-input valueview-input'
 			} )
 			.appendTo( this.$viewPort )
+			.eachchange( function( event, oldValue ) {
+				var value = self.$input.data( 'timeinput' ).value();
+				if( oldValue === '' &&  value === null || self.$input.val() === '' ) {
+					self._updatePreview( null );
+				}
+			} )
 			.timeinput()
-			.on( 'timeinputchange', function( event, value ) {
+			// TODO: Move input extender out of here to a more generic place since it is not
+			// TimeInput specific.
+			.inputextender( { content: [ this.$preview ] } )
+			.on( 'timeinputupdate', function( event, value ) {
+				self._updatePreview( value );
 				self._viewNotifier.notify( 'change' );
 			} );
+		},
+
+		/**
+		 * Updates the input value's preview.
+		 * @since 0.1
+		 *
+		 * @param {time.Time|null} value
+		 */
+		_updatePreview: function( value ) {
+			// No need to update the preview when the input value is clear(ed) since the preview
+			// will be hidden anyway.
+			if( this.$input.val() === '' ) {
+				return;
+			}
+
+			if( value === null ) {
+				this.$previewValue
+				.addClass( 'valueview-preview-novalue' )
+				.text( mw.msg( 'valueview-preview-novalue' ) )
+			} else {
+				this.$previewValue
+				.removeClass( 'valueview-preview-novalue' )
+				.text( value.text() )
+			}
 		},
 
 		/**
@@ -114,6 +174,7 @@
 
 			if( this._newValue !== false ) {
 				this.$input.data( 'timeinput' ).value( this._newValue );
+				this._updatePreview( this._newValue );
 				this._newValue = false;
 			}
 		},
@@ -134,4 +195,4 @@
 
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, time.Time ) );
+}( dataValues, valueParsers, jQuery, jQuery.valueview, time.Time, mediaWiki ) );

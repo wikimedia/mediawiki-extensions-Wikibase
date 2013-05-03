@@ -43,6 +43,9 @@ $messages['en'] = array(
 	// EmptyValue expert:
 	'valueview-expert-emptyvalue-empty' => 'empty',
 
+	'valueview-preview-label' => 'will be displayed as:',
+	'valueview-preview-novalue' => 'no valid value recognized',
+
 	'valueview-inputextender-showoptions' => 'show options',
 	'valueview-inputextender-hideoptions' => 'hide options',
 );
@@ -58,6 +61,8 @@ $messages['qqq'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Error shown if a data value for a certain data type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a valueview widget expert handling data values for that data type has not yet been implemented). Parameter $1 is the name of the data type which lacks support',
 	'valueview-expert-emptyvalue-empty' => 'Message expressing that there is currently no value set in a jQuery valueview.
 {{Identical|Empty}}',
+	'valueview-preview-label' => 'Label displayed above the preview of a value that is being entered by the user. The preview is the system\'s interpretation of the specified value and - since there is no strict definition for a user how to specify values - visualizes how the value will be displayed later on after the value has been saved.',
+	'valueview-preview-novalue' => 'Message displayed instead of an input value\'s preview when no value is specified yet or when the specified value could not be interpreted by the system.',
 	'valueview-inputextender-showoptions' => 'Message of the link displayed next to an input element if there are detailed options for inputting a value. This message is shown, when the options are currently invisible. By clicking the link, the options are shown and can be adjusted.',
 	'valueview-inputextender-hideoptions' => 'Message of the link displayed next to an input element if there are detailed options for inputting a value. This message is shown, when the options are currently visible. By clicking the link, the options will be hidden.',
 );

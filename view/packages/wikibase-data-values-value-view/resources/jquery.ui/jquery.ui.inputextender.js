@@ -7,9 +7,15 @@
  *
  * @option {jQuery[]} [content] Default/"fixed" extender contents that always should be visible as
  *         long as the extension itself is visible.
+ *         Default value: []
  *
  * @option {jQuery[]} [extendedContent] Additional content that should only be displayed after
  *         clicking on the extender link.
+ *         Default value: []
+ *
+ * @option {boolean} [hideWhenInputEmpty] Whether all of the input extender's contents shall be
+ *         hidden when the associated input element is empty.
+ *         Default value: true
  *
  * @option [messages] {Object} Strings used within the widget.
  *         Messages should be specified using mwMsgOrString(<resource loader module message key>,
@@ -23,6 +29,7 @@
  *         Default value: 'hide options'
  *
  * @dependency jQuery.Widget
+ * @dependency jQuery.eachchange
  */
 ( function( $ ) {
 	'use strict';
@@ -39,7 +46,7 @@
 	 */
 	var IS_MODULE_LOADED = (
 		IS_MW_CONTEXT
-		&& $.inArray( 'jquery.wikibase.entityselector', mw.loader.getModuleNames() ) !== -1
+		&& $.inArray( 'jquery.ui.inputextender', mw.loader.getModuleNames() ) !== -1
 	);
 
 	/**
@@ -62,6 +69,7 @@
 		options: {
 			content: [],
 			extendedContent: [],
+			hideWhenInputEmpty: true,
 			messages: {
 				'show options': mwMsgOrString( 'valueview-inputextender-showoptions', 'show options' ),
 				'hide options': mwMsgOrString( 'valueview-inputextender-hideoptions', 'hide options' )
@@ -158,11 +166,23 @@
 
 			this.element.add( this.$extender )
 			.on( 'focus.' + this.widgetName, function( event ) {
-				self.showContent();
+				if( !self.options.hideWhenInputEmpty || self.element.val() !== '' || self._extended ) {
+					self.showContent();
+				}
 			} )
 			.on( 'blur.' + this.widgetName, function( event ) {
 				self.hideContent();
 			} );
+
+			if( this.options.hideWhenInputEmpty ) {
+				this.element.eachchange( function( event, oldValue ) {
+					if( self.element.val() === '' && !self._extended ) {
+						self.hideContent();
+					} else if ( oldValue === '' ) {
+						self.showContent();
+					}
+				} );
+			}
 
 			this._draw();
 		},
@@ -205,12 +225,15 @@
 
 			if( this.$extendedContent.is( ':visible' ) ) {
 				this.$extendedContent.slideUp( 150, function() {
+					self._extended = false;
+					self.element.focus();
 					self.$extender.text( self.options.messages['show options'] );
 					self._trigger( 'toggle' );
 				} );
 			} else {
-				this.element.focus();
 				this.$extendedContent.slideDown( 150, function() {
+					self._extended = true;
+					self.element.focus();
 					self.$extender.text( self.options.messages['hide options'] );
 					self._trigger( 'toggle' );
 				} );
@@ -224,6 +247,9 @@
 		 * @param {Function} [callback] Invoked as soon as the contents are visible.
 		 */
 		showContent: function( callback ) {
+			if( this.$contentContainer.is( ':visible' ) ) {
+				return;
+			}
 			this.$contentContainer.fadeIn( 150, function() {
 				if( $.isFunction( callback ) ) {
 					callback();
@@ -237,6 +263,9 @@
 		 * @param {Function} [callback] Invoked as soon as the contents are hidden.
 		 */
 		hideContent: function( callback ) {
+			if( !this.$contentContainer.is( ':visible' ) || this._extended ) {
+				return;
+			}
 			this.$contentContainer.fadeOut( 150, function() {
 				if( $.isFunction( callback ) ) {
 					callback();

@@ -104,6 +104,7 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.inputextender.css',
 			),
 			'dependencies' => array(
+				'jquery.eachchange',
 				'jquery.ui.widget',
 			),
 			'messages' => array(

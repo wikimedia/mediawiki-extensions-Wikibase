@@ -198,8 +198,12 @@ return call_user_func( function() {
 				'jquery.valueview/valueview.experts/experts.TimeInput.js',
 			),
 			'dependencies' => array(
-				'jquery.valueview.experts.stringvalue',
 				'jquery.time.timeinput',
+				'jquery.ui.inputextender',
+			),
+			'messages' => array(
+				'valueview-preview-label',
+				'valueview-preview-novalue',
 			),
 		),
 
