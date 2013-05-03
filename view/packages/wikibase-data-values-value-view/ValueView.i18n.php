@@ -31,6 +31,7 @@ $messages = array();
 
 /** English
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
 $messages['en'] = array(
 	'valueview-desc' => 'UI components for displaying and editing data values',
@@ -40,12 +41,16 @@ $messages['en'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Handling of values for "$1" data type is not yet supported.',
 
 	// EmptyValue expert:
-	'valueview-expert-emptyvalue-empty' => 'empty'
+	'valueview-expert-emptyvalue-empty' => 'empty',
+
+	'valueview-inputextender-showoptions' => 'show options',
+	'valueview-inputextender-hideoptions' => 'hide options',
 );
 
 /** Message documentation (Message documentation)
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author Shirayuki
+ * @author H. Snater < mediawiki@snater.com >
  */
 $messages['qqq'] = array(
 	'valueview-desc' => '{{desc|name=ValueView|url=http://www.mediawiki.org/wiki/Extension:ValueView}}',
@@ -53,6 +58,8 @@ $messages['qqq'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Error shown if a data value for a certain data type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a valueview widget expert handling data values for that data type has not yet been implemented). Parameter $1 is the name of the data type which lacks support',
 	'valueview-expert-emptyvalue-empty' => 'Message expressing that there is currently no value set in a jQuery valueview.
 {{Identical|Empty}}',
+	'valueview-inputextender-showoptions' => 'Message of the link displayed next to an input element if there are detailed options for inputting a value. This message is shown, when the options are currently invisible. By clicking the link, the options are shown and can be adjusted.',
+	'valueview-inputextender-hideoptions' => 'Message of the link displayed next to an input element if there are detailed options for inputting a value. This message is shown, when the options are currently visible. By clicking the link, the options will be hidden.',
 );
 
 /** Asturian (asturianu)

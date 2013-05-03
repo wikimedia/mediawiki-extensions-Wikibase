@@ -96,6 +96,22 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.inputextender' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.inputextender.js',
+			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.inputextender.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+			),
+			'messages' => array(
+				'valueview-inputextender-showoptions',
+				'valueview-inputextender-hideoptions',
+			),
+		),
+
 		'jquery.ui.toggler' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.toggler.js',
