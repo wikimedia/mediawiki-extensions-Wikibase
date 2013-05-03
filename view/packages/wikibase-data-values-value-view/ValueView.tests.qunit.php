@@ -62,6 +62,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.MockViewState.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.valueview/valueview.MockViewState.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.valueview.MockViewState',
+				'qunit.parameterize',
+			),
+		),
+
 		'jquery.valueview.ExpertFactory.tests' => array(
 			'scripts' => array(
 				"$bp/jquery.valueview/valueview.ExpertFactory.tests.js",
@@ -69,9 +79,9 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.valueview.experts', // contains ExpertFactory
 				'jquery.valueview.experts.mock',
-				'qunit.parameterize'
+				'qunit.parameterize',
 			),
-		)
+		),
 	);
 
 } );

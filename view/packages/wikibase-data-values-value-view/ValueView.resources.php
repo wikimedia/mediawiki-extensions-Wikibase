@@ -67,6 +67,24 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.ViewState' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.ViewState.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.base',
+			),
+		),
+
+		'jquery.valueview.MockViewState' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.MockViewState.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.ViewState',
+			),
+		),
+
 		// The actual valueview (vv) widget:
 		'jquery.valueview.valueview' => $moduleTemplate + array(
 			'scripts' => array(
@@ -79,6 +97,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.widget',
 				'jquery.valueview.base',
+				'jquery.valueview.ViewState',
 				'jquery.valueview.experts', // because vv deals with ExpertFactory
 				'jquery.valueview.experts.unsupportedvalue', // for displaying unsupported values
 				'jquery.valueview.experts.emptyvalue', // for displaying empty values
