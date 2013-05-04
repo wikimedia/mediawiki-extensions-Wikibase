@@ -376,6 +376,7 @@ $messages['ckb'] = array(
 	'wikibase-error-remove-generic' => 'ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی سڕینەوەدا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت.',
 	'wikibase-error-save-connection' => 'ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی پاشەکەوتکردندا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت. تکایە پەیوەندی ئینتەرنێتەکەت تاوتوێ بکە.',
 	'wikibase-error-remove-connection' => 'ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی سڕینەوەدا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت. تکایە پەیوەندی ئینتەرنێتەکەت تاوتوێ بکە.',
+	'wikibase-error-ui-no-external-page' => 'وتاری دەستنیشان‌کراو لە پێگەی ئاماژەکراودا نەدۆزرایەوە.',
 	'wikibase-replicationnote' => 'تکایە ئاگادار بن چەند خولەک دەگرێ ھەتا گۆڕانکارییەکان لە ھەموو ویکییەکاندا دەربکەوێ.',
 	'wikibase-sitelinks' => 'پێرستی پەڕە بەسراوەکان بەم بەندەوە',
 	'wikibase-sitelinks-sitename-columnheading' => 'زمان',
@@ -388,6 +389,7 @@ $messages['ckb'] = array(
 /** Czech (česky)
  * @author Danny B.
  * @author JAn Dudík
+ * @author Littledogboy
  * @author Mormegil
  * @author Vks
  */
@@ -396,16 +398,34 @@ $messages['cs'] = array(
 	'wikibase-entity-item' => 'položka',
 	'wikibase-entity-property' => 'vlastnost',
 	'wikibase-entity-query' => 'dotaz',
+	'wikibase-diffview-reference' => 'reference',
+	'wikibase-diffview-rank' => 'hodnocení',
+	'wikibase-diffview-qualifier' => 'vymezení',
 	'wikibase-error-unexpected' => 'Došlo k neočekávané chybě.',
+	'wikibase-error-save-generic' => 'Při pokusu provést akci došlo k chybě, takže vaše změny nebyly provedeny.',
+	'wikibase-error-remove-generic' => 'Při pokusu o odstranění došlo k chybě, takže vaše změny nebyly provedeny.',
+	'wikibase-error-save-connection' => 'Při pokusu o uložení došlo k chybě připojení, takže vaše změny nebyly provedeny. Prosím zkontrolujte své připojení k Internetu.',
+	'wikibase-error-remove-connection' => 'Při pokusu o odstranění došlo k chybě připojení, takže vaše změny nebyly provedeny. Prosím zkontrolujte své připojení k Internetu.',
+	'wikibase-error-save-timeout' => 'Kvůli současným technickým problémům se vaše „uložit“ nepodařilo dokončit.',
+	'wikibase-error-remove-timeout' => 'Kvůli současným technickým problémům se vaše „odstranit“ nepodařilo dokončit.',
+	'wikibase-error-autocomplete-connection' => 'Dotaz na Wikipedia API se nezdařil. Zkuste to prosím později.',
 	'wikibase-error-autocomplete-response' => 'Odpověď serveru:$1',
+	'wikibase-error-ui-client-error' => 'Připojení ke klientské stránce se nezdařilo. Zkuste to prosím později.',
+	'wikibase-error-ui-no-external-page' => 'Takový článek nebyl na příslušném webu nalezen.',
 	'wikibase-error-ui-cant-edit' => 'Nemáte oprávnění k provedení této akce.',
+	'wikibase-error-ui-no-permissions' => 'Nemáte dostatečná práva k provedení této akce.',
+	'wikibase-error-ui-link-exists' => 'Nemůžete odkázat na tuto stránku, protože na ní již odkazuje jiná položka.',
 	'wikibase-error-ui-session-failure' => 'Platnost vaší relace skončila. Prosíme, přihlaste se znovu.',
+	'wikibase-error-ui-edit-conflict' => 'Nastal editační konflikt. Prosím obnovte stránku a uložte ji znovu.',
+	'wikibase-replicationnote' => 'Vemte prosím na vědomí, že než se změny projeví na všech wiki, může to pár minut trvat',
 	'wikibase-sitelinks' => 'Seznam stránek svázaných s touto položkou',
 	'wikibase-sitelinks-sitename-columnheading' => 'Jazyk',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kód',
+	'wikibase-sitelinks-link-columnheading' => 'Propojený článek',
 	'wikibase-tooltip-error-details' => 'Podrobnosti',
 	'datatypes-type-wikibase-item' => 'Položka',
 	'datatypes-type-commonsMedia' => 'Mediální soubor na Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Welsh (Cymraeg)
@@ -1815,8 +1835,10 @@ $messages['roa-tara'] = array(
 	'wikibase-error-ui-client-error' => "'A connessione a 'a pàgene d'u cliende ha fallite. Pe piacere pruève arrete.",
 	'wikibase-sitelinks-sitename-columnheading' => 'Lènghe',
 	'wikibase-sitelinks-siteid-columnheading' => 'Codece',
+	'wikibase-sitelinks-link-columnheading' => 'Vôsce collegate',
 	'wikibase-tooltip-error-details' => 'Dettaglie',
 	'datatypes-type-wikibase-item' => 'Vôsce',
+	'datatypes-type-commonsMedia' => 'File media de Commons',
 	'version-wikibase' => 'Uicchibase',
 );
 
@@ -2026,6 +2048,10 @@ $messages['vec'] = array(
 	'wikibase-diffview-rank' => 'rango',
 	'wikibase-diffview-qualifier' => 'qualificador',
 	'wikibase-error-unexpected' => 'Xe capità un eror inprevisto.',
+	'wikibase-error-save-generic' => "Calcosa xe 'ndà storto sercando de salvar, quindi po darse che le to modifiche le sia 'ndà perse.",
+	'wikibase-error-remove-generic' => "Calcosa xe 'ndà storto sercando de far la rimosion, quindi po darse che le to modifiche le sia 'ndà perse.",
+	'wikibase-error-save-connection' => "Ghe xe stà un problema de conesion sercando de salvar, quindi po darse che le to modifiche le sia 'ndà perse. Controla se la to conesion a Internet la funsiona.",
+	'wikibase-error-remove-connection' => "Ghe xe stà un problema de conesion sercando de far la rimosion, quindi po darse che le to modifiche le sia 'ndà perse. Controla se la to conesion a Internet la funsiona.",
 	'wikibase-error-save-timeout' => 'Gavemo dei problemi tènici, quindi no se gà podesto conpletar el to salvatajo.',
 	'wikibase-error-remove-timeout' => 'Gavemo dei problemi tènici, quindi no se gà podesto conpletar la to rimosion.',
 	'wikibase-error-autocomplete-connection' => 'No se riese a interogar le API de Wikipedia. Proa pi tardi.',
