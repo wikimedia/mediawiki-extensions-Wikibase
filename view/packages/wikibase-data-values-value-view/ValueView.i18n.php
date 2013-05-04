@@ -283,9 +283,10 @@ $messages['pl'] = array(
 );
 
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  */
 $messages['pms'] = array(
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestion dij valor për la sòrt ëd dat "$1" a l\'é anco\' pa apogià.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => "La gestion dij valor për la sòrt ëd dat «$1» a l'é ancor nen mantnùa.",
 );
 
 /** Pashto (پښتو)
