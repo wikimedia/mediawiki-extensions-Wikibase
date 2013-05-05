@@ -21,6 +21,7 @@
 
     @licence GNU GPL v2+
     @author Jens Ohlig < jens.ohlig@wikimedia.de >
+    @author Thomas Pellissier Tanon
 ]]
 
 local wikibase = {}
@@ -28,30 +29,56 @@ local wikibase = {}
 function wikibase.setupInterface()
   local php = mw_interface
   mw_interface = nil
-  wikibase.getEntity = function ()
-    local id = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
-    if id == nil then return nil end
-    local entity = php.getEntity( id )
-    return entity
+
+  wikibase.getEntity = function( id )
+    if id == nil then
+      id = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
+    elseif php.getGlobalSiteId() ~= nil then -- Hack to disallow clients to get items
+      error( "You are not allowed to get currently an other item than the item linked to he current page", 2 )
+    end
+    if id == nil then
+      return nil
+    end
+    return php.getEntity( id )
   end
-  wikibase.label = function ( id )
+
+  wikibase.label = function( id )
     local code = mw.language.getContentLanguage():getCode()
-    if code == nil then return nil end
+    if code == nil then
+      return nil
+    end
+
     local entity = php.getEntity( id )
-    if entity == nil or entity.labels == nil then return nil end
+    if entity == nil or entity.labels == nil then
+      return nil
+    end
+
     local label = entity.labels[code]
-    if label == nil then return nil end
+    if label == nil then
+      return nil
+    end
+
     return label.value
   end
-  wikibase.sitelink = function ( id )
-    local entity = php.getEntity( id )
-    if entity == nil or entity.sitelinks == nil then return nil end
+
+  wikibase.sitelink = function( id )
     local globalSiteId = php.getGlobalSiteId()
-    if globalSiteId == nil then return nil end
+    if globalSiteId == nil then
+      return nil
+    end
+
+    local entity = php.getEntity( id )
+    if entity == nil or entity.sitelinks == nil then
+      return nil
+    end
+
     local sitelink = entity.sitelinks[globalSiteId]
-    if sitelink == nil then return nil end
+    if sitelink == nil then
+      return nil
+    end
     return sitelink.title
   end
+
   mw = mw or {}
   mw.wikibase = wikibase
   package.loaded['mw.wikibase'] = wikibase

@@ -69,6 +69,7 @@ return call_user_func( function() {
 		'Wikibase\Utils' => 'includes/Utils.php',
 		'Wikibase\WikibaseDiffOpFactory' => 'includes/WikibaseDiffOpFactory.php',
 		'Wikibase\Lib\WikibaseDataTypeBuilders' => 'includes/WikibaseDataTypeBuilders.php',
+		'Scribunto_LuaWikibaseLibrary' => 'includes/WikibaseLibrary.php',
 
 		// includes/changes
 		'Wikibase\Change' => 'includes/changes/Change.php',

@@ -25,13 +25,15 @@
  */
 
 use ValueParsers\ParseException;
-use Wikibase\Client\WikibaseClient;
+use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Utils;
 
-class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
+abstract class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	/**
 	 * Register mw.wikibase.lua library
@@ -46,6 +48,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		);
 		$this->getEngine()->registerInterface( dirname( __FILE__ ) . '/../resources/' . 'mw.wikibase.lua', $lib, array() );
 	}
+
 	/**
 	 * Get entity from prefixed ID (e.g. "Q23") and return it as serialized array.
 	 *
@@ -59,8 +62,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
 		$prefixedEntityId = trim( $prefixedEntityId );
 
-		$entityIdParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
-
+		$entityIdParser = new EntityIdParser();
 		try {
 			$entityId = $entityIdParser->parse( $prefixedEntityId );
 		}
@@ -68,16 +70,14 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			throw $this->getEngine()->newException( 'wikibase-error-invalid-entity-id' );
 		}
 
-		$entityObject = WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup()->getEntity(
-			$entityId
-		);
+		$entityObject = $this->getAndRegisterEntity( $entityId );
 
-		if ( $entityObject == null ) {
+		if ( $entityObject === null ) {
 			return array( null );
 		}
 
 		$serializerFactory = new SerializerFactory();
-		$opt = new EntitySerializationOptions( WikibaseClient::getDefaultInstance()->getEntityIdFormatter() );
+		$opt = new EntitySerializationOptions( new EntityIdFormatter( new FormatterOptions() ) );
 
 		// This is $wgContLang, not parser target language or anything else.
 		// See Scribunto_LuaLanguageLibrary::getContLangCode().
@@ -86,7 +86,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		// See mw.wikibase.lua. This is the only way to inject values into mw.wikibase.label( ),
 		// so any customized Lua modules can access labels of another entity written in another variant,
 		// unless we give them the ability to getEntity() any entity by specifying its ID, not just self.
-		$chain = WikibaseClient::getDefaultInstance()->getLanguageFallbackChainFactory()->newFromLanguage(
+		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
+		$chain = $languageFallbackChainFactory->newFromLanguage(
 			$wgContLang, LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
 		);
 		// MultiLangSerializationOptions accepts mixed types of keys happily.
@@ -103,6 +104,17 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
+	 * Get entity from its id and register the dependance
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityId $EntityId
+	 *
+	 * @return Entity|null
+	 */
+	protected abstract function getAndRegisterEntity( $entityId );
+
+	/**
 	 * Get entity id from page title.
 	 *
 	 * @since 0.4
@@ -113,19 +125,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getEntityId( $pageTitle = null ) {
 		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
-		$globalSiteId = \Wikibase\Settings::get( 'siteGlobalID' );
-		$table = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
-		if ( $table == null ) {
-			return array( null );
-		}
 
-		$numericId = $table->getItemIdForLink( $globalSiteId, $pageTitle );
-		if ( !is_int( $numericId ) ) {
-			return array( null );
-		}
-
-		$id = new Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, $numericId );
-		if ( $id == null ) {
+		$id = $this->getEntityIdForPageTitle( $pageTitle );
+		if ( $id === null ) {
 			return array( null );
 		}
 
@@ -133,6 +135,20 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		return array( $idFormatter->format( $id ) );
 	}
+
+	/**
+	 * Get entity id from page title
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $pageTitle
+	 *
+	 * @return EntityId|null
+	 */
+	protected function getEntityIdForPageTitle( $pageTitle ) {
+		return null; //feature not implemented by default
+	}
+
     /**
      * Get global site ID (e.g. "enwiki")
      * This is basically a helper function.
@@ -142,6 +158,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
      *
      */
     public function getGlobalSiteId() {
-        return array( \Wikibase\Settings::get( 'siteGlobalID' ) );
+        return array( null );
     }
 }
