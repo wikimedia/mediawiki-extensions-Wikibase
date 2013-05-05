@@ -116,9 +116,11 @@ $messages['dsb'] = array(
 );
 
 /** Spanish (español)
+ * @author Fitoschido
  */
 $messages['es'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La manipulación de valores para el tipo de datos "$1" aún no está soportada.', # Fuzzy
+	'valueview-expert-emptyvalue-empty' => 'vacío',
 );
 
 /** Persian (فارسی)
