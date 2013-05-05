@@ -1001,4 +1001,19 @@ final class RepoHooks {
 
 		return false;
 	}
+
+	/**
+	 * External library for Scribunto
+	 *
+	 * @since 0.4
+	 *
+	 * @param $engine
+	 * @param array $extraLibraries
+	 * @return bool
+	 */
+	public static function onScribuntoExternalLibraries ( $engine, array &$extraLibraries ) {
+		$extraLibraries['mw.wikibase'] = 'Scribunto_LuaWikibaseRepoLibrary';
+
+		return true;
+	}
 }
