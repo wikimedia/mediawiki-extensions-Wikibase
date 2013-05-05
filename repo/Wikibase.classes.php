@@ -51,6 +51,7 @@ return call_user_func( function() {
 		'Wikibase\PropertyView' => 'includes/PropertyView.php',
 		'Wikibase\Summary' => 'includes/Summary.php',
 		'Wikibase\Repo\WikibaseRepo' => 'includes/WikibaseRepo.php',
+		'Scribunto_LuaWikibaseRepoLibrary' => 'includes/WikibaseRepoLibrary.php',
 
 		// includes/actions
 		'Wikibase\HistoryEntityAction' => 'includes/actions/HistoryEntityAction.php',
