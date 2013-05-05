@@ -2680,11 +2680,14 @@ $messages['sv'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Bekräfta',
 	'wikibase-linkitem-not-loggedin-title' => 'Du måste vara inloggad',
 	'wikibase-linkitem-not-loggedin' => 'Du måste vara inloggad på denna wiki och i [$1 den centrala databasen] att använda denna funktion.',
+	'wikibase-linkitem-success-create' => 'Sidorna har länkats. Du kan hitta de nyskapade objekten som innehåller länkarna i vår [$1 centrala databas].',
+	'wikibase-linkitem-success-link' => 'Sidorna har länkats. Du kan hitta objektet som innehåller länkarna i vår [$1 centrala databas].',
 	'wikibase-property-notfound' => 'Egenskapen $1 hittades inte.',
 	'wikibase-property-notsupportedyet' => 'Wikibase stöder ännu inte egenskapstypen för egenskapen $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Visa Wikidataredigeringar i senaste ändringar',
 	'wikibase-watchlist-show-changes-pref' => 'Visa Wikidata-redigeringar i din bevakningslista',
+	'wikibase-error-invalid-entity-id' => 'Det angivna ID:et är okänt för systemet. Var god använd ett giltigt enhets-ID.',
 	'special-unconnectedpages' => 'Sidor som inte är anslutna till objekt',
 	'wikibase-unconnectedpages-legend' => 'Alternativ för sidor som inte är anslutna',
 	'wikibase-unconnectedpages-page' => 'Börja resultatlistan med sidan:',
@@ -2721,6 +2724,19 @@ $messages['tl'] = array(
 	'wikibase-client-desc' => 'Kliyente para sa dugtong na Wikibase',
 	'wikibase-editlinks' => 'Baguhin ang mga kawing',
 	'wikibase-editlinkstitle' => 'Baguhin ang mga kawing na para sa interwika',
+);
+
+/** Turkish (Türkçe)
+ * @author Sadrettin
+ */
+$messages['tr'] = array(
+	'specialpages-group-wikibaseclient' => 'Vikiveri istemcisi',
+	'wikibase-rc-hide-wikidata' => 'Vikiveri değişikliklerini $1',
+	'wikibase-rc-show-wikidata-pref' => 'Vikiveri düzenlemelerini son değişikliklerde göster',
+	'special-unconnectedpages' => 'Öğelerine bağlanmamış sayfalar',
+	'wikibase-unconnectedpages-legend' => 'Bağlanmamış sayfa seçenekleri',
+	'wikibase-unconnectedpages-submit' => 'Git',
+	'wikibase-unconnectedpages-iwdata-label' => 'Sadece dillerarası bağlantıları olan sayfalar',
 );
 
 /** Ukrainian (українська)

@@ -13383,6 +13383,11 @@ Te pol <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE
 * query - inplicito, da parte de l'Iri-string
 * framento - inplicito, da parte de l'Iri-string",
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Coordinate giogràfeghe',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'Dati leterali par na posizion giografica data come na còpia latitudine-longitudine in GMS o gradi desimali par el corpo stelare in question. El default xe "Tera" e dopo "WGS84". Ghe xonta na risolusion e un intervalo.
+* latitudine – prima parte inplicita (float, dms, dm, dd) de la stringa de coordinate, la diresion la xe data da un segno prefiso o da un N/S postfiso
+* longitudine – seconda parte inplicita (float, dms, dm, dd) de la stringa de coordinate, la diresion la xe data da un segno prefiso o da un E/W postfiso.
+* altitudine (opsional) – valor esplicito (?) par l\'altesa sora un piano de riferimento, par el globo "Tera" sarìa el globo de riferimento "WGS84"
+* globo (opsional) – valor esplicito (?), dato come corpo seleste che par default xe "Tera" e po "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'wikibase-listdatatypes-quantity-body' => "Canpo dato leterale par na quantità che se riferise a calche tipo de unità ben definìa. L'unità la va in tei valori che xe inserii.
 * valor – parte inplicita de la stringa (la corispondensa col prefiso de l'unità no xe ciara)
