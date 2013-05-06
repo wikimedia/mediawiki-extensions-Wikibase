@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DwuCJYiY",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-06T12:42:03Z",
+      "side": 1,
+      "message": "I tend to use null, jeroen prefers false, core mostly uses false, but sometimes null. I really don\u0027t care :)",
+      "parentUuid": "Duv3Dy.4",
+      "revId": "09e8fc493154c574fa55c7ff829103607020d940",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dun1xG90",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 4
@@ -65,6 +83,24 @@
       "writtenOn": "2013-04-16T18:55:24Z",
       "side": 1,
       "message": "Doesn\u0027t seem healty to putt all this watch list related stuff into EditEntity since the class is complicated enough already. Is there no other place this logic could go to?",
+      "revId": "09e8fc493154c574fa55c7ff829103607020d940",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwoB5di4",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-06T12:42:03Z",
+      "side": 1,
+      "message": "Not really. It should be split off into a separate class, I suppose (which ideally would be in core and would be re-used by EditPage). \n\nEditEntity needs to be split up anyway. I suggest to leave that for another change.",
+      "parentUuid": "Dup0UD04",
       "revId": "09e8fc493154c574fa55c7ff829103607020d940",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -135,6 +171,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "Dut1IR44",
+      "revId": "09e8fc493154c574fa55c7ff829103607020d940",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwgCFZgo",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-06T12:42:03Z",
+      "side": 1,
+      "message": "nooo! The backets make the evaluation order of !\u003d\u003d vs. \u0026\u0026 explicit. Relying on implicit eval order is generally a bad idea, especially in languages like php where \u0026\u0026 has different rules than AND, etc...",
+      "parentUuid": "DwL3HeGY",
       "revId": "09e8fc493154c574fa55c7ff829103607020d940",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
