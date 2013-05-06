@@ -190,8 +190,9 @@ final class RepoHooks {
 			'content/ItemHandler',
 			'content/PropertyContent',
 			'content/PropertyHandler',
-			'content/RdfBuilder',
-			'content/RdfSerializer',
+
+			'rdf/RdfBuilder',
+			'rdf/RdfSerializer',
 
 			'specials/SpecialNewItem',
 			'specials/SpecialNewProperty',

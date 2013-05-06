@@ -126,13 +126,18 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return \EasyRdf_Graph[]
+	 * @return \EasyRdf_Graph[]|null
 	 */
 	public static function getTestGraphs() {
 		static $graphs = array();
 
 		if ( !empty( $graphs ) ) {
 			return $graphs;
+		}
+
+		if ( !RdfBuilder::isSupported() ) {
+			// test will be skipped anyway
+			return null;
 		}
 
 		$builder = self::newRdfBuilder( 'rdf' ); //XXX: ugh, dummy object

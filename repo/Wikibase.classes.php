@@ -96,31 +96,8 @@ return call_user_func( function() {
 		'Wikibase\ItemHandler' => 'includes/content/ItemHandler.php',
 		'Wikibase\PropertyContent' => 'includes/content/PropertyContent.php',
 		'Wikibase\PropertyHandler' => 'includes/content/PropertyHandler.php',
-		'Wikibase\RdfBuilder' => 'includes/content/RdfBuilder.php',
-		'Wikibase\RdfSerializer' => 'includes/content/RdfSerializer.php',
-
-		// EasyRdf
-		'EasyRdf_Exception' => 'includes/content/easyRdf/EasyRdf/Exception.php',
-		'EasyRdf_Format' => 'includes/content/easyRdf/EasyRdf/Format.php',
-		'EasyRdf_Graph' => 'includes/content/easyRdf/EasyRdf/Graph.php',
-		'EasyRdf_Namespace' => 'includes/content/easyRdf/EasyRdf/Namespace.php',
-		'EasyRdf_Literal' => 'includes/content/easyRdf/EasyRdf/Literal.php',
-		'EasyRdf_Literal_Boolean' => 'includes/content/easyRdf/EasyRdf/Literal/Boolean.php',
-		'EasyRdf_Literal_Date' => 'includes/content/easyRdf/EasyRdf/Literal/Date.php',
-		'EasyRdf_Literal_DateTime' => 'includes/content/easyRdf/EasyRdf/Literal/DateTime.php',
-		'EasyRdf_Literal_Decimal' => 'includes/content/easyRdf/EasyRdf/Literal/Decimal.php',
-		'EasyRdf_Literal_HexBinary' => 'includes/content/easyRdf/EasyRdf/Literal/HexBinary.php',
-		'EasyRdf_Literal_Integer' => 'includes/content/easyRdf/EasyRdf/Literal/Integer.php',
-		'EasyRdf_Resource' => 'includes/content/easyRdf/EasyRdf/Resource.php',
-		'EasyRdf_Serialiser' => 'includes/content/easyRdf/EasyRdf/Serialiser.php',
-		'EasyRdf_Serialiser_GraphViz' => 'includes/content/easyRdf/EasyRdf/Serialiser/GraphViz.php',
-		'EasyRdf_Serialiser_RdfPhp' => 'includes/content/easyRdf/EasyRdf/Serialiser/RdfPhp.php',
-		'EasyRdf_Serialiser_Ntriples' => 'includes/content/easyRdf/EasyRdf/Serialiser/Ntriples.php',
-		'EasyRdf_Serialiser_Json' => 'includes/content/easyRdf/EasyRdf/Serialiser/Json.php',
-		'EasyRdf_Serialiser_RdfXml' => 'includes/content/easyRdf/EasyRdf/Serialiser/RdfXml.php',
-		'EasyRdf_Serialiser_Turtle' => 'includes/content/easyRdf/EasyRdf/Serialiser/Turtle.php',
-		'EasyRdf_TypeMapper' => 'includes/content/easyRdf/EasyRdf/TypeMapper.php',
-		'EasyRdf_Utils' => 'includes/content/easyRdf/EasyRdf/Utils.php',
+		'Wikibase\RdfBuilder' => 'includes/rdf/RdfBuilder.php',
+		'Wikibase\RdfSerializer' => 'includes/rdf/RdfSerializer.php',
 
 		// includes/specials
 		'SpecialNewEntity' => 'includes/specials/SpecialNewEntity.php',
@@ -168,12 +145,42 @@ return call_user_func( function() {
 		'Wikibase\Test\Api\LangAttributeBase' => 'tests/phpunit/includes/api/LangAttributeBase.php',
 		'Wikibase\Test\EntityContentTest' => 'tests/phpunit/includes/content/EntityContentTest.php',
 		'Wikibase\Test\EntityHandlerTest' => 'tests/phpunit/includes/content/EntityHandlerTest.php',
-		'Wikibase\Test\RdfBuilderTest' => 'tests/phpunit/includes/content/RdfBuilderTest.php',
+		'Wikibase\Test\RdfBuilderTest' => 'tests/phpunit/includes/rdf/RdfBuilderTest.php',
 
 		'MessageReporter' => 'includes/MessageReporter.php',
 		'ObservableMessageReporter' => 'includes/MessageReporter.php',
 		'NullMessageReporter' => 'includes/MessageReporter.php',
 	);
+
+
+	// EasyRdf
+	if ( file_exists( __DIR__ . '/../contrib/easyRdf/EasyRdf' ) ) {
+		$rdfClasses = array(
+			'EasyRdf_Exception' => '../contrib/easyRdf/EasyRdf/Exception.php',
+			'EasyRdf_Format' => '../contrib/easyRdf/EasyRdf/Format.php',
+			'EasyRdf_Graph' => '../contrib/easyRdf/EasyRdf/Graph.php',
+			'EasyRdf_Namespace' => '../contrib/easyRdf/EasyRdf/Namespace.php',
+			'EasyRdf_Literal' => '../contrib/easyRdf/EasyRdf/Literal.php',
+			'EasyRdf_Literal_Boolean' => '../contrib/easyRdf/EasyRdf/Literal/Boolean.php',
+			'EasyRdf_Literal_Date' => '../contrib/easyRdf/EasyRdf/Literal/Date.php',
+			'EasyRdf_Literal_DateTime' => '../contrib/easyRdf/EasyRdf/Literal/DateTime.php',
+			'EasyRdf_Literal_Decimal' => '../contrib/easyRdf/EasyRdf/Literal/Decimal.php',
+			'EasyRdf_Literal_HexBinary' => '../contrib/easyRdf/EasyRdf/Literal/HexBinary.php',
+			'EasyRdf_Literal_Integer' => '../contrib/easyRdf/EasyRdf/Literal/Integer.php',
+			'EasyRdf_Resource' => '../contrib/easyRdf/EasyRdf/Resource.php',
+			'EasyRdf_Serialiser' => '../contrib/easyRdf/EasyRdf/Serialiser.php',
+			'EasyRdf_Serialiser_GraphViz' => '../contrib/easyRdf/EasyRdf/Serialiser/GraphViz.php',
+			'EasyRdf_Serialiser_RdfPhp' => '../contrib/easyRdf/EasyRdf/Serialiser/RdfPhp.php',
+			'EasyRdf_Serialiser_Ntriples' => '../contrib/easyRdf/EasyRdf/Serialiser/Ntriples.php',
+			'EasyRdf_Serialiser_Json' => '../contrib/easyRdf/EasyRdf/Serialiser/Json.php',
+			'EasyRdf_Serialiser_RdfXml' => '../contrib/easyRdf/EasyRdf/Serialiser/RdfXml.php',
+			'EasyRdf_Serialiser_Turtle' => '../contrib/easyRdf/EasyRdf/Serialiser/Turtle.php',
+			'EasyRdf_TypeMapper' => '../contrib/easyRdf/EasyRdf/TypeMapper.php',
+			'EasyRdf_Utils' => '../contrib/easyRdf/EasyRdf/Utils.php',
+		);
+
+		$classes = array_merge( $classes, $rdfClasses );
+	}
 
 	return $classes;
 
