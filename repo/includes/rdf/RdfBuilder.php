@@ -120,8 +120,7 @@ class RdfBuilder {
 	 */
 	public static function isSupported() {
 		// check that the submodule is present
-		$file = __DIR__ . '/easyRdf/EasyRdf.php';
-		return file_exists( $file ) && class_exists( 'EasyRdf_Graph' );
+		return class_exists( 'EasyRdf_Graph' );
 	}
 
 	/**

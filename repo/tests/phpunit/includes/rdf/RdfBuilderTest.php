@@ -135,6 +135,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			return $graphs;
 		}
 
+		if ( !RdfBuilder::isSupported() ) {
+			// test will be skipped anyway
+			throw new \PHPUnit_Framework_SkippedTestError( "No RDF support" );
+		}
+
 		$builder = self::newRdfBuilder( 'rdf' ); //XXX: ugh, dummy object
 
 		foreach ( $builder->getNamespaces() as $gname => $uri ) {
