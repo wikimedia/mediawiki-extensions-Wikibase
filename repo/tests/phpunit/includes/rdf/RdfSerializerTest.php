@@ -6,12 +6,10 @@ use EasyRdf_Namespace;
 use MediaWikiSite;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
-use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Property;
 use Wikibase\RdfSerializer;
-use Wikibase\SiteLink;
 
 /**
  * Tests for the Wikibase\RdfSerializer class.
@@ -191,10 +189,12 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		$cases = array();
 
 		foreach ( $entities as $name => $entity ) {
-			$cases[] = array(
-				$entity,
-				$graphs[$name],
-			);
+			if ( isset( $graphs[$name] ) ) {
+				$cases[] = array(
+					$entity,
+					$graphs[$name],
+				);
+			}
 		}
 
 		return $cases;
