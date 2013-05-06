@@ -63,6 +63,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 	protected $dataTypeFactory = null;
 
 	/**
+	 * @var \Wikibase\Lib\EntityIdFormatter
+	 */
+	protected $idFormatter = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -112,7 +117,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$this->rdfBaseURI = $repo->getRdfBaseURI();
 		$this->entityLookup = \Wikibase\StoreFactory::getStore()->getEntityLookup();
 		$this->dataTypeFactory = $repo->getDataTypeFactory();
-
+		$this->idFormatter = $repo->getIdFormatter();
 
 		$this->showData( $format, $id, $revision );
 	}
@@ -291,7 +296,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$rdfFormat,
 			$this->rdfBaseURI,
 			$this->entityLookup,
-			$this->dataTypeFactory
+			$this->dataTypeFactory,
+			$this->idFormatter
 		);
 
 		return $serializer;
