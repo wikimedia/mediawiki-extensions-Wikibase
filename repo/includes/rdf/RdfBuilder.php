@@ -41,6 +41,7 @@ use EasyRdf_Namespace;
 use EasyRdf_Resource;
 use Revision;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\PropertyDataTypeLookup;
 
 class RdfBuilder {
 
@@ -80,13 +81,15 @@ class RdfBuilder {
 	protected $entitiesResolved = array();
 
 	/**
-	 * @param string                $baseUri
-	 * @param Lib\EntityIdFormatter $idFormatter
-	 * @param EasyRdf_Graph|null    $graph
+	 * @param string                 $baseUri
+	 * @param Lib\EntityIdFormatter  $idFormatter
+	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param EasyRdf_Graph|null     $graph
 	 */
 	public function __construct(
 		$baseUri,
 		EntityIdFormatter $idFormatter,
+		PropertyDataTypeLookup $dataTypeLookup,
 		EasyRdf_Graph $graph = null
 	) {
 		if ( !$graph ) {
@@ -96,6 +99,7 @@ class RdfBuilder {
 		$this->graph = $graph;
 		$this->baseUri = $baseUri;
 		$this->idFormatter = $idFormatter;
+		$this->dataTypeLookup = $dataTypeLookup;
 
 		$this->namespaces = array(
 			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI,
@@ -394,10 +398,11 @@ class RdfBuilder {
 		$statementResource = $this->getStatementResource( $claim );
 		$entityResource->addResource( $propertyQName, $statementResource );
 
-		$value = $snak->getDataValue()->getValue();
+		$value = $snak->getDataValue();
+		$type = $this->dataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
 
 		$this->entityMentioned( $propertyId );
-		$this->addClaimValue( $claim, $propertyId, $value );
+		$this->addClaimValue( $claim, $propertyId, $type, $value );
 	}
 
 	/**
@@ -405,18 +410,18 @@ class RdfBuilder {
 	 *
 	 * @param Claim     $claim
 	 * @param EntityId  $propertyId
+	 * @param string    $type The property data type (not to be confused with the data value type)
 	 * @param DataValue $value
 	 */
-	public function addClaimValue( Claim $claim, EntityId $propertyId, DataValue $value ) {
+	public function addClaimValue( Claim $claim, EntityId $propertyId, $type, DataValue $value ) {
 		$statementResource = $this->getStatementResource( $claim );
 		$propertyValueQName = $this->getEntityQName( self::NS_VALUE, $propertyId );
 
-		$typeId = $value->getType();
+		$rawValue = $value->getValue();
 
-		switch ( $typeId ) {
+		//TODO: replace with a proper registry
+		switch ( $type ) {
 			case 'wikibase-item':
-				$rawValue = $value->getValue();
-
 				assert( $rawValue instanceof EntityId );
 				$valueQName = $this->getEntityQName( self::NS_ENTITY, $rawValue );
 				$valueResource = $this->graph->resource( $valueQName );
@@ -424,11 +429,17 @@ class RdfBuilder {
 				$this->entityMentioned( $rawValue );
 				break;
 			case 'commonsMedia':
-				$statementResource->addResource( $propertyValueQName, $value );
+				assert( is_string( $rawValue ) );
+				//FIXME: build image (page?) URL
+				$statementResource->addResource( $propertyValueQName, $rawValue );
+				break;
+			case 'string':
+				assert( is_string( $rawValue ) );
+				$statementResource->addLiteral( $propertyValueQName, $rawValue );
 				break;
 			default:
 				//TODO: more media types
-				wfWarn( "Unsupported data type: $typeId" );
+				wfWarn( "Unsupported data type: $type" );
 		}
 	}
 
