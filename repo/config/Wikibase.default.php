@@ -35,21 +35,21 @@ if ( !defined( 'WB_VERSION' ) ) {
 
 $dir = __DIR__ . '/';
 
-$wgWBRepoSettings = array();
+$wgWBRepoDefaultSettings = array();
 
 // Set API in debug mode
 // do not turn on in production!
-$wgWBRepoSettings['apiInDebug'] = false;
+$wgWBRepoDefaultSettings['apiInDebug'] = false;
 
 // Additional settings for API when debugging is on to
 // facilitate testing.
-$wgWBRepoSettings['apiDebugWithPost'] = false;
-$wgWBRepoSettings['apiDebugWithRights'] = false;
-$wgWBRepoSettings['apiDebugWithTokens'] = false;
+$wgWBRepoDefaultSettings['apiDebugWithPost'] = false;
+$wgWBRepoDefaultSettings['apiDebugWithRights'] = false;
+$wgWBRepoDefaultSettings['apiDebugWithTokens'] = false;
 
-$wgWBRepoSettings['defaultStore'] = 'sqlstore';
+$wgWBRepoDefaultSettings['defaultStore'] = 'sqlstore';
 
-$wgWBRepoSettings['idBlacklist'] = array(
+$wgWBRepoDefaultSettings['idBlacklist'] = array(
 	1,
 	23,
 	42,
@@ -63,16 +63,16 @@ $wgWBRepoSettings['idBlacklist'] = array(
 // for sites that can not easily roll out schema changes on large tables.
 // This means that all searches will use exact matching
 // (depending on the database's collation).
-$wgWBRepoSettings['withoutTermSearchKey'] = false;
+$wgWBRepoDefaultSettings['withoutTermSearchKey'] = false;
 
-$wgWBRepoSettings['entityNamespaces'] = array();
+$wgWBRepoDefaultSettings['entityNamespaces'] = array();
 
 // These are used for multilanguage strings that should have a soft length constraint
-$wgWBRepoSettings['multilang-limits'] = array(
+$wgWBRepoDefaultSettings['multilang-limits'] = array(
 	'length' => 250,
 );
 
-$wgWBRepoSettings['multilang-truncate-length'] = 32;
+$wgWBRepoDefaultSettings['multilang-truncate-length'] = 32;
 
 // Should the page names (titles) be normalized against the external site
-$wgWBRepoSettings['normalizeItemByTitlePageNames'] = false;
+$wgWBRepoDefaultSettings['normalizeItemByTitlePageNames'] = false;

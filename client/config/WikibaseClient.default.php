@@ -35,7 +35,7 @@ if ( !defined( 'WBC_VERSION' ) ) {
 
 global $wgScriptPath, $wgArticlePath, $wgLanguageCode, $wgDBname;
 
-$wgWBClientSettings = array(
+$wgWBClientDefaultSettings = array(
 	'namespaces' => array(), // by default, include all namespaces; deprecated as of 0.4
 	'excludeNamespaces' => array(),
 	'repoUrl' => '//www.wikidata.org',
@@ -71,7 +71,7 @@ $wgWBClientSettings = array(
  * http://meta.wikimedia.org/w/index.php?title=MediaWiki:Interwiki_config-sorting_order-native-languagename-firstword (revised)
  * and from pywikipedia for alphabetic_sr
  */
-$wgWBClientSettings['interwikiSortOrders'] = array(
+$wgWBClientDefaultSettings['interwikiSortOrders'] = array(
     'alphabetic' => array(
         'ace', 'kbd', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc',
         'roa-rup', 'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'bm', 'bn', 'bjn',

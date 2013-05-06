@@ -33,9 +33,9 @@ if ( !defined( 'WBL_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
 
-global $wgWBSettings, $wgAutoloadClasses, $wgHooks;
+global $wgWBLibDefaultSettings, $wgAutoloadClasses, $wgHooks;
 
-$wgWBSettings['dataTypes'] = array_merge( $wgWBSettings['dataTypes'], array(
+$wgWBLibDefaultSettings['dataTypes'] = array_merge( $wgWBLibDefaultSettings['dataTypes'], array(
 	'geo-coordinate',
 	'quantity',
 	'monolingual-text',

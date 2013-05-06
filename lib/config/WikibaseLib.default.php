@@ -33,36 +33,36 @@ if ( !defined( 'WBL_VERSION' ) ) {
 	die( 'Not an entry point.' );
 }
 
-$wgWBSettings = array();
+$wgWBLibDefaultSettings = array();
 
 // alternative: application/vnd.php.serialized
-$wgWBSettings['serializationFormat'] = CONTENT_FORMAT_JSON;
+$wgWBLibDefaultSettings['serializationFormat'] = CONTENT_FORMAT_JSON;
 
 // whether changes get recorded to wb_changes
-$wgWBSettings['useChangesTable'] = true;
+$wgWBLibDefaultSettings['useChangesTable'] = true;
 
-$wgWBSettings['entityPrefixes'] = array(
+$wgWBLibDefaultSettings['entityPrefixes'] = array(
 	'q' => \Wikibase\Item::ENTITY_TYPE,
 	'p' => \Wikibase\Property::ENTITY_TYPE,
 );
 
-$wgWBSettings['siteLinkGroup'] = 'wikipedia';
+$wgWBLibDefaultSettings['siteLinkGroup'] = 'wikipedia';
 
 // local by default. Set to something LBFactory understands.
-$wgWBSettings['changesDatabase'] = false;
+$wgWBLibDefaultSettings['changesDatabase'] = false;
 
 // JSON is more robust against version differences between repo and client,
 // but only once the client can cope with the JSON form of the change.
-$wgWBSettings['changesAsJson'] = true;
+$wgWBLibDefaultSettings['changesAsJson'] = true;
 
 // list of logical database names of local client wikis.
 // may contain mappings from site-id to db-name.
-$wgWBSettings['localClientDatabases'] = array();
+$wgWBLibDefaultSettings['localClientDatabases'] = array();
 
-$wgWBSettings['dispatchBatchChunkFactor'] = 3;
-$wgWBSettings['dispatchBatchCacheFactor'] = 3;
+$wgWBLibDefaultSettings['dispatchBatchChunkFactor'] = 3;
+$wgWBLibDefaultSettings['dispatchBatchCacheFactor'] = 3;
 
-$wgWBSettings['changeHandlers'] = array(
+$wgWBLibDefaultSettings['changeHandlers'] = array(
 	'wikibase-item~add' => 'Wikibase\ItemChange',
 	'wikibase-property~add' => 'Wikibase\EntityChange',
 	'wikibase-query~add' => 'Wikibase\EntityChange',
@@ -84,7 +84,7 @@ $wgWBSettings['changeHandlers'] = array(
 	'wikibase-query~restore' => 'Wikibase\EntityChange',
 );
 
-$wgWBSettings['dataTypes'] = array(
+$wgWBLibDefaultSettings['dataTypes'] = array(
 	'wikibase-item',
 	'commonsMedia',
 	'string',

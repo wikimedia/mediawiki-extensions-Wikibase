@@ -259,8 +259,19 @@ final class WikibaseClient {
 	public static function newInstance() {
 		global $wgContLang;
 
+		$settings = array_merge(
+			$GLOBALS['wgWBLibDefaultSettings'],
+			$GLOBALS['wgWBClientDefaultSettings']
+		);
+
+		foreach( array( 'wgWBSettings', 'wgWBClientSettings' ) as $settingsKey ) {
+			if ( array_key_exists( $settingsKey, $GLOBALS ) ) {
+				$settings = array_merge( $settings, $GLOBALS[$settingsKey] );
+			}
+		}
+
 		return new self(
-			Settings::singleton(),
+			new SettingsArray( $settings ),
 			$wgContLang,
 			defined( 'MW_PHPUNIT_TEST' ) );
 	}

@@ -44,17 +44,26 @@ class Settings extends SettingsArray {
 		static $instance = null;
 
 		if ( $instance === null ) {
-			$settings = array();
+			$settings = $GLOBALS['wgWBLibDefaultSettings'];
+
+			$settingsKeys = array( 'wgWBSettings' );
 
 			if ( defined( 'WB_VERSION' ) ) {
-				$settings = array_merge( $settings, $GLOBALS['wgWBRepoSettings'] );
+				$settings = array_merge( $settings, $GLOBALS['wgWBRepoDefaultSettings'] );
+				$settingsKeys[] = 'wgWBRepoSettings';
 			}
 
 			if ( defined( 'WBC_VERSION' ) ) {
-				$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
+				$settings = array_merge( $settings, $GLOBALS['wgWBClientDefaultSettings'] );
+				$settingsKeys[] = 'wgWBClientSettings';
 			}
 
-			$settings = array_merge( $settings, $GLOBALS['wgWBSettings'] );
+			// apply the setting overrides defined in LocalSettings
+			foreach( $settingsKeys as $settingsKey ) {
+				if ( array_key_exists( $settingsKey, $GLOBALS ) && is_array( $GLOBALS[$settingsKey] ) ) {
+					$settings = array_merge( $settings, $GLOBALS[$settingsKey] );
+				}
+			}
 
 			$instance = new static( $settings );
 		}

@@ -148,7 +148,18 @@ final class WikibaseRepo {
 	 * @return WikibaseRepo
 	 */
 	public static function newInstance() {
-		return new self( Settings::singleton() );
+		$settings = array_merge(
+			$GLOBALS['wgWBLibDefaultSettings'],
+			$GLOBALS['wgWBRepoDefaultSettings']
+		);
+
+		foreach( array( 'wgWBSettings', 'wgWBRepoSettings' ) as $settingsKey ) {
+			if ( array_key_exists( $settingsKey, $GLOBALS ) ) {
+				$settings = array_merge( $settings, $GLOBALS[$settingsKey] );
+			}
+		}
+
+		return new self( new SettingsArray( $settings ) );
 	}
 
 	/**
