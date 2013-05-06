@@ -76,6 +76,19 @@ final class WikibaseRepo {
 	}
 
 	/**
+	 * Returns the base to use when generating URIs for use in RDF output.
+	 *
+	 * @return string
+	 */
+	public function getRdfBaseURI() {
+		global $wgServer; //TODO: make this configurable
+
+		$uri = $wgServer;
+		$uri = preg_replace( '!^//!', 'http://', $uri );
+		return $uri;
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @return EntityIdParser

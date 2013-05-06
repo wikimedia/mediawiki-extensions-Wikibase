@@ -1,10 +1,11 @@
 <?php
 
+use DataTypes\DataTypeFactory;
+use \Wikibase\Entity;
 use \Wikibase\EntityContent;
 use \Wikibase\EntityContentFactory;
 use \Wikibase\EntityId;
-
-//XXX: our special pages are not in the wikibase namespace. why? some crappy internal magic going on?
+use \Wikibase\RdfSerializer;
 
 /**
  * Special page to act as a data endpoint for the linked data web.
@@ -18,13 +19,15 @@ use \Wikibase\EntityId;
  * representation of data entities. Using the ContentHandler to serialize the entity would expose
  * internal implementation details.
  *
- * @since 0.3
+ * @since 0.4
  *
  * @file 
  * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thomas Pellissier Tanon
+ * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
  */
 class SpecialEntityData extends SpecialWikibasePage {
 
@@ -45,9 +48,24 @@ class SpecialEntityData extends SpecialWikibasePage {
 	);
 
 	/**
+	 * @var string
+	 */
+	protected $rdfBaseURI = null;
+
+	/**
+	 * @var Wikibase\EntityLookup
+	 */
+	protected $entityLookup = null;
+
+	/**
+	 * @var DataTypeFactory
+	 */
+	protected $dataTypeFactory = null;
+
+	/**
 	 * Constructor.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 */
 	public function __construct() {
 		parent::__construct( 'EntityData' );
@@ -56,11 +74,9 @@ class SpecialEntityData extends SpecialWikibasePage {
 	/**
 	 * Main method.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param string|null $subPage
-	 *
-	 * @return boolean
 	 */
 	public function execute( $subPage ) {
 		$revision = 0;
@@ -92,13 +108,35 @@ class SpecialEntityData extends SpecialWikibasePage {
 			return;
 		}
 
+		$repo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		$this->rdfBaseURI = $repo->getRdfBaseURI();
+		$this->entityLookup = \Wikibase\StoreFactory::getStore()->getEntityLookup();
+		$this->dataTypeFactory = $repo->getDataTypeFactory();
+
+
+		$this->showData( $format, $id, $revision );
+	}
+
+	/**
+	 * Output entity data.
+	 *
+	 * @param string $format The name (mime type of file extension) of the format to use
+	 * @param string $id The entity ID
+	 * @param int|string $revision The entity revision
+	 *
+	 * @throws HttpError
+	 */
+	public function showData( $format, $id, $revision ) {
+
 		//TODO: handle IfModifiedSince!
 
+		$serializer = $this->createApiSerializer( $format );
 
-		$apiFormat = self::getApiFormatName( $format );
-		$printer = $apiFormat === null ? null : $this->createApiPrinter( $apiFormat );
+		if ( !$serializer ) {
+			$serializer = $this->createRdfSerializer( $format );
+		}
 
-		if ( !$printer ) {
+		if ( !$serializer ) {
 			throw new \HttpError( 415, wfMessage( 'wikibase-entitydata-unsupported-format' )->params( $format ) );
 		}
 
@@ -140,7 +178,16 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$rev = $page->getRevision();
 		}
 
-		$this->showData( $entity, $printer, $rev );
+
+		if( $serializer instanceof \Wikibase\RdfSerializer ) {
+			$data = $serializer->serializeEntity( $entity->getEntity(), $rev );
+			$contentType = $serializer->getDefaultMimeType();
+		} else {
+			$data = $this->apiSerialize( $entity->getEntity(), $serializer, $rev );
+			$contentType = $serializer->getIsHtml() ? 'text/html' : $serializer->getMimeType();
+		}
+
+		$this->outputData( $data, $contentType, $rev );
 	}
 
 	/**
@@ -203,24 +250,51 @@ class SpecialEntityData extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Creates a printer that can generate the given output format.
+	 * Creates an API printer that can generate the given output format.
 	 *
 	 * @param String $format The desired serialization format,
-	 *   as a format name understood by ApiBase.
+	 *   as a format name understood by ApiBase or EasyRdf_Format
 	 *
 	 * @return ApiFormatBase|null A suitable result printer, or null
+	 *         if the given format is not supported by the API.
+	 */
+	protected function createApiSerializer( $format ) {
+		//MediaWiki formats
+		$api = $this->getApiMain( $format );
+		$formats = $api->getFormats();
+		$formatName = self::getApiFormatName( $format );
+		if ( $formatName !== null && array_key_exists( $formatName, $formats ) ) {
+			return $api->createPrinterByName( $formatName );
+		}
+
+		return null;
+	}
+
+	/**
+	 * Creates an Rdf Serializer that can generate the given output format.
+	 *
+	 * @param String $format The desired serialization format,
+	 *   as a format name understood by ApiBase or EasyRdf_Format
+	 *
+	 * @return RdfSerializer|null A suitable result printer, or null
 	 *   if the given format is not supported.
 	 */
-	protected function createApiPrinter( $format ) {
-		$api = $this->getApiMain( $format );
+	protected function createRdfSerializer( $format ) {
+		//MediaWiki formats
+		$rdfFormat = \Wikibase\RdfSerializer::getFormat( $format );
 
-		$formats = $api->getFormats();
-		if ( !array_key_exists( $format, $formats ) ) {
+		if ( !$rdfFormat ) {
 			return null;
 		}
 
-		$printer = $api->createPrinterByName( $format );
-		return $printer;
+		$serializer = new RdfSerializer(
+			$rdfFormat,
+			$this->rdfBaseURI,
+			$this->entityLookup,
+			$this->dataTypeFactory
+		);
+
+		return $serializer;
 	}
 
 	/**
@@ -229,19 +303,19 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 * result, if $printer was generated from that same ApiMain module, as
 	 * createApiPrinter() does.
 	 *
-	 * @param Wikibase\EntityContent $entityContent The entity to convert ot an ApiResult
+	 * @param Wikibase\Entity $entity The entity to convert ot an ApiResult
 	 * @param ApiFormatBase $printer The output printer that will be used for serialization.
 	 *   Used to provide context for generating the ApiResult, and may also be manipulated
 	 *   to fine-tune the output.
 	 *
 	 * @return ApiResult
 	 */
-	protected function generateApiResult( EntityContent $entityContent, ApiFormatBase $printer ) {
+	protected function generateApiResult( Entity $entity, ApiFormatBase $printer ) {
 		wfProfileIn( __METHOD__ );
 
 		$format = strtolower( $printer->getFormat() ); //XXX: hack!
 
-		$entityKey = 'entity'; //XXX: perhaps better: $entity->getEntity()->getType();
+		$entityKey = 'entity'; //XXX: perhaps better: $entity->getType();
 		$basePath = array();
 
 		$res = $this->getApiMain( $format )->getResult();
@@ -260,14 +334,14 @@ class SpecialEntityData extends SpecialWikibasePage {
 		}
 
 		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
-		$serializer =$serializerFactory->newSerializerForObject( $entityContent->getEntity() );
+		$serializer =$serializerFactory->newSerializerForObject( $entity );
 
 		$opt = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
 		$opt->setIndexTags( $res->getIsRawMode() ); //FIXME: $res->rawMode doesn't seem to be set to what we want.
 		$opt->setProps( self::$fieldsToShow );      //FIXME: someone does not know how to write clear FIXMEs
 		$serializer->setOptions( $opt );
 
-		$arr = $serializer->getSerialized( $entityContent->getEntity() );
+		$arr = $serializer->getSerialized( $entity );
 
 		// we want the entity to *be* the result, not *in* the result
 		foreach ( $arr as $key => $value ) {
@@ -279,17 +353,19 @@ class SpecialEntityData extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Serialize the entity data using the provided format and send it as the HTTP response body.
+	 * Serialize the entity data using the provided format.
 	 *
 	 * Note that we are using the API's serialization facility to ensure a consistent external
 	 * representation of data entities. Using the ContentHandler to serialize the entity would
 	 * expose internal implementation details.
 	 *
-	 * @param Wikibase\EntityContent $entity the entity to output.
+	 * @param Wikibase\Entity $entity the entity to output.
 	 * @param ApiFormatBase $printer the printer to use to generate the output
 	 * @param Revision $revision the entity's revision (optional)
+	 *
+	 * @return string the serialized data
 	 */
-	public function output( EntityContent $entity, ApiFormatBase $printer, Revision $revision ) {
+	public function apiSerialize( Entity $entity, ApiFormatBase $printer, Revision $revision = null ) {
 		// NOTE: The way the ApiResult is provided to $printer is somewhat
 		//       counter-intuitive. Basically, the relevant ApiResult object
 		//       is owned by the ApiMain module provided by getApiMain().
@@ -300,34 +376,37 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		//XXX: really inject meta-info? where else should we put it?
 		$basePath = array();
-		$res->addValue( $basePath , '_revision_', intval( $revision->getId() ) );
-		$res->addValue( $basePath , '_modified_', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
 
+		if ( $revision ) {
+			$res->addValue( $basePath , '_revision_', intval( $revision->getId() ) );
+			$res->addValue( $basePath , '_modified_', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
+		}
 
 		$this->getOutput()->disable(); // don't generate HTML
 
 		$printer->profileIn();
 		$printer->initPrinter( false );
+		$printer->setBufferResult( true );
 
 		// Outputs the ApiResult held by the ApiMain module, which is hopefully the same as $res
+		//NOTE: this can and will mess with the HTTP response!
 		$printer->execute();
+		$data = $printer->getBuffer();
 
 		$printer->closePrinter();
 		$printer->profileOut();
 
-		//FIXME: Content-Length is bogus! Where does it come from?!
+		return $data;
 	}
 
 	/**
 	 * Output the entity data and set the appropriate HTTP response headers.
 	 *
-	 * @param Wikibase\EntityContent $entity the entity to output.
-	 * @param ApiFormatBase $printer the printer to use to generate the output
-	 * @param Revision $revision the entity's revision (optional)
-	 *
-	 * @throws HttpError If an unsupported format is requested.
+	 * @param string $data the data to output
+	 * @param string $contentType the data's mime type
+	 * @param Revision $revision
 	 */
-	public function showData( EntityContent $entity, ApiFormatBase $printer, Revision $revision = null ) {
+	public function outputData( $data, $contentType, Revision $revision = null ) {
 		global $wgSquidMaxage;
 
 		// NOTE: similar code as in RawAction::onView, keep in sync.
@@ -342,18 +421,30 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$maxage  = max( 0, min( 60 * 60 * 24 * 30, $maxage ) );
 		$smaxage = max( 0, min( 60 * 60 * 24 * 30, $smaxage ) );
 
-		//TODO: set Last-Modified header? Why doesn't mediawiki set that for article pages?
-
-		// make sure we are reporting the correct content type
-		$contentType = $printer->getIsHtml() ? 'text/html' : $printer->getMimeType();
 		$response->header( 'Content-Type: ' . $contentType . '; charset=UTF-8' );
+		$response->header( 'Content-Length: ' . strlen( $data ) );
+
+		if ( $revision ) {
+			$response->header( 'Last-Modified: ' . wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
+		}
+
+		//Set X-Frame-Options API results (bug 39180)
+		global $wgApiFrameOptions;
+		if ( $wgApiFrameOptions ) {
+			$response->header( "X-Frame-Options: $wgApiFrameOptions" );
+		}
 
 		// allow the client to cache this
 		$mode = 'public';
 		$response->header( 'Cache-Control: ' . $mode . ', s-maxage=' . $smaxage . ', max-age=' . $maxage );
-		//FIXME: Cache-Control and Expires headers are apparently overwritten later!
 
-		$this->output( $entity, $printer, $revision );
+		$this->getOutput()->disable(); // don't generate HTML
+		ob_clean();
+
+		print $data;
+		flush();
+
+		//die(); //FIXME: figure out how to best shut down here.
 	}
 
 }
