@@ -39,6 +39,7 @@ use EasyRdf_Format;
 use EasyRdf_Graph;
 use EasyRdf_Namespace;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 
 class RdfSerializer {
 
@@ -52,6 +53,11 @@ class RdfSerializer {
 	 * @var EntityLookup
 	 */
 	protected $entityLookup;
+
+	/**
+	 * @var Lib\EntityRetrievingDataTypeLookup
+	 */
+	protected $dataTypeLookup;
 
 	/**
 	 * @var EasyRdf_Format
@@ -75,6 +81,7 @@ class RdfSerializer {
 		$this->uriBase = $uriBase;
 		$this->format = $format;
 		$this->entityLookup = $entityLookup;
+		$this->dataTypeLookup = new EntityRetrievingDataTypeLookup( $entityLookup );
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->idFormatter = $idFormatter;
 	}
@@ -128,7 +135,8 @@ class RdfSerializer {
 
 		$builder = new RdfBuilder(
 			$this->uriBase,
-			$this->idFormatter
+			$this->idFormatter,
+			$this->dataTypeLookup
 		);
 
 		return $builder;

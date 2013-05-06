@@ -98,6 +98,7 @@ return call_user_func( function() {
 		'Wikibase\PropertyHandler' => 'includes/content/PropertyHandler.php',
 		'Wikibase\RdfBuilder' => 'includes/rdf/RdfBuilder.php',
 		'Wikibase\RdfSerializer' => 'includes/rdf/RdfSerializer.php',
+		'Wikibase\RdfStatementBuilder' => 'includes/rdf/RdfStatementBuilder.php',
 
 		// includes/specials
 		'SpecialNewEntity' => 'includes/specials/SpecialNewEntity.php',

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use DataTypes\DataTypeFactory;
+use DataValues\StringValue;
 use EasyRdf_Namespace;
 use MediaWikiSite;
 use ValueFormatters\FormatterOptions;
@@ -9,8 +10,14 @@ use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Property;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
 use Wikibase\RdfBuilder;
+use Wikibase\SiteLink;
+use Wikibase\Statement;
 
 /**
  * Tests for the Wikibase\RdfBuilder class.
@@ -56,6 +63,18 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		}
 	}
 
+	protected static function getSite( $globalId ) {
+		$site = new \MediaWikiSite();
+		$site->setGlobalId( $globalId );
+
+		return $site;
+	}
+
+	protected static function makeSiteLink( $siteId, $page ) {
+		$site = self::getSite( $siteId );
+		return new SiteLink( $site, $page );
+	}
+
 	/**
 	 * @return Entity[]
 	 */
@@ -82,13 +101,61 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$entity->addAliases( 'en', array( 'Berlin, Germany', 'Land Berlin' ) );
 		$entity->addAliases( 'ru', array( 'Berlin' ) );
 
-		// TODO: test links
-		// TODO: test data values
+		$entity->addSiteLink( self::makeSiteLink( 'enwiki', 'Berlin' ), 'add' );
+		$entity->addSiteLink( self::makeSiteLink( 'ruwiki', 'Берлин' ), 'add' );
+
+		$entity = Property::newEmpty();
+		$entities['parent'] = $entity;
+
+		$entity->setLabel( 'en', 'Parent' );
+		$entity->setDataTypeId( "wikibase-item" );
+
+
+		$entity = Property::newEmpty();
+		$entities['picture'] = $entity;
+
+		$entity->setLabel( 'en', 'Picture' );
+		$entity->setDataTypeId( "commonsMedia" );
+
+
+		$entity = Property::newEmpty();
+		$entities['pid'] = $entity;
+
+		$entity->setLabel( 'en', 'PID' );
+		$entity->setDataTypeId( "string" );
+
 
 		$i = 1;
+		/* @var Entity $entity */
 		foreach ( $entities as $entity ) {
-			$entity->setId( new EntityId( Item::ENTITY_TYPE, $i++ ) );
+			$entity->setId( new EntityId( $entity->getType(), $i++ ) );
 		}
+
+		$snak = new PropertyValueSnak( $entities['parent']->getId(), $entities['empty']->getId() );
+		$claim = new Statement( $snak );
+		$entities['terms']->addClaim( $claim );
+
+		$snak = new PropertyValueSnak( $entities['picture']->getId(), new StringValue( "Berlin.jpg" ) );
+		$claim = new Statement( $snak );
+		$entities['terms']->addClaim( $claim );
+
+		$snak = new PropertyValueSnak( $entities['pid']->getId(), new StringValue( "B5" ) );
+		$claim = new Statement( $snak );
+		$entities['terms']->addClaim( $claim );
+
+		//TODO: add support for SOmeValueSnak and NoValueSnak
+		/*
+		$snak = new PropertySomeValueSnak( $entities['parent']->getId() );
+		$claim = new Statement( $snak );
+		$entities['terms']->addClaim( $claim );
+
+		$snak = new PropertyNoValueSnak( $entities['pid']->getId() );
+		$claim = new Statement( $snak );
+		$entities['terms']->addClaim( $claim );
+		*/
+
+		//TODO: qualifiers
+		//TODO: references
 
 		return $entities;
 	}
@@ -219,9 +286,22 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			)
 		) ) );
 
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+
+		$entities = self::getTestEntities();
+
+		foreach ( $entities as $entity ) {
+			if ( $entity instanceof Property  ) {
+				$dataTypeLookup->setDataTypeForProperty(
+					$entity->getId(), $entity->getDataTypeId()
+				);
+			}
+		}
+
 		return new RdfBuilder(
 			self::URI_BASE,
-			$idFormatter
+			$idFormatter,
+			$dataTypeLookup
 		);
 	}
 
@@ -232,10 +312,12 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$cases = array();
 
 		foreach ( $entities as $name => $entity ) {
-			$cases[] = array(
-				$entity,
-				$graphs[$name],
-			);
+			if ( isset( $graphs[$name] ) ) {
+				$cases[] = array(
+					$entity,
+					$graphs[$name],
+				);
+			}
 		}
 
 		return $cases;

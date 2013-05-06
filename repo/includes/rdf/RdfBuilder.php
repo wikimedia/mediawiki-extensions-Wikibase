@@ -4,6 +4,7 @@ namespace Wikibase;
 
 /**
  * RDF mapping for wikibase data model.
+ * The mapping is specified in https://meta.wikimedia.org/wiki/Wikidata/Development/RDF
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,6 +42,7 @@ use EasyRdf_Namespace;
 use EasyRdf_Resource;
 use Revision;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\PropertyDataTypeLookup;
 
 class RdfBuilder {
 
@@ -80,13 +82,20 @@ class RdfBuilder {
 	protected $entitiesResolved = array();
 
 	/**
-	 * @param string                $baseUri
-	 * @param Lib\EntityIdFormatter $idFormatter
-	 * @param EasyRdf_Graph|null    $graph
+	 * @var Lib\PropertyDataTypeLookup
+	 */
+	protected $dataTypeLookup;
+
+	/**
+	 * @param string                 $baseUri
+	 * @param Lib\EntityIdFormatter  $idFormatter
+	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param EasyRdf_Graph|null     $graph
 	 */
 	public function __construct(
 		$baseUri,
 		EntityIdFormatter $idFormatter,
+		PropertyDataTypeLookup $dataTypeLookup,
 		EasyRdf_Graph $graph = null
 	) {
 		if ( !$graph ) {
@@ -96,6 +105,7 @@ class RdfBuilder {
 		$this->graph = $graph;
 		$this->baseUri = $baseUri;
 		$this->idFormatter = $idFormatter;
+		$this->dataTypeLookup = $dataTypeLookup;
 
 		$this->namespaces = array(
 			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI,
@@ -225,8 +235,10 @@ class RdfBuilder {
 	 * if it wasn't already marked as resolved.
 	 *
 	 * @param EntityId $id
+	 *
+	 * @note used by RdfStatementBuilder
 	 */
-	protected function entityMentioned( EntityId $id ) {
+	public function entityMentioned( EntityId $id ) {
 		$prefixedId = $this->idFormatter->format( $id );
 
 		if ( !isset( $this->entitiesResolved[$prefixedId] ) ) {
@@ -371,29 +383,28 @@ class RdfBuilder {
 	 * @param Claim  $claim
 	 */
 	public function addClaim( Entity $entity, Claim $claim ) {
-		$this->addMainSnak( $entity, $claim );
+		/* https://meta.wikimedia.org/wiki/Wikidata/Development/RDF#Specification
+		 Item s:Property StatementID .
+		 StatementID rdf:type o:Statement .
+			wfDebug( __METHOD__ . ": Unsupported snak type: " . get_class( $snak ) );
+		*/
+
+		$entityResource = $this->getEntityResource( $entity->getId() );
+		$propertyId = $claim->getMainSnak()->getPropertyId();
+		$propertyQName = $this->getEntityQName( self::NS_PROPERTY, $propertyId );
+
+		// Item s:Property StatementID
+		$statementResource = $this->getStatementResource( $claim );
+		$entityResource->addResource( $propertyQName, $statementResource );
+
+		$value = $snak->getDataValue();
+
+		$mainSnak = $claim->getMainSnak();
+		$statementBuilder->addMainSnak( $mainSnak );
 
 		//TODO: add qualifiers
 		//TODO: add references
 	}
-
-	/**
-	 * Adds the given Claim's main Snak to the RDF graph.
-	 *
-	 * @param Entity $entity
-	 * @param Claim  $claim
-	 */
-	public function addMainSnak( Entity $entity, Claim $claim ) {
-		$snak = $claim->getMainSnak();
-
-		if ( $snak instanceof PropertyValueSnak ) {
-			$this->addPropertyValueSnak( $entity, $claim, $snak );
-		} else {
-			//TODO: NoValueSnak, SomeValueSnak
-			wfDebug( __METHOD__ . ": Unsupported snak type: " . get_class( $snak ) );
-		}
-	}
-
 
 	/**
 	 * Returns a resource representing the given claim.
@@ -404,62 +415,15 @@ class RdfBuilder {
 	 */
 	public function getStatementResource( Claim $claim ) {
 		$statementQName = $this->getStatementQName( self::NS_STATEMENT, $claim );
+
 		$statementResource = $this->graph->resource( $statementQName, array( self::WIKIBASE_STATEMENT_QNAME ) );
-		return $statementResource;
-	}
 
-	/**
-	 * Adds the given PropertyValueSnak to the RDF graph.
-	 *
-	 * @param Entity            $entity
-	 * @param PropertyValueSnak $snak
-	 * @param Claim             $claim
-	 */
-	public function addPropertyValueSnak( Entity $entity, Claim $claim, PropertyValueSnak $snak ) {
-		$entityResource = $this->getEntityResource( $entity->getId() );
-
-		$propertyId = $claim->getMainSnak()->getPropertyId();
-		$propertyQName = $this->getEntityQName( self::NS_PROPERTY, $propertyId );
-
-		$statementResource = $this->getStatementResource( $claim );
-		$entityResource->addResource( $propertyQName, $statementResource );
-
-		$value = $snak->getDataValue();
-
-		$this->entityMentioned( $propertyId );
-		$this->addClaimValue( $claim, $propertyId, $value );
-	}
-
-	/**
-	 * Adds the value of the given property to the RDF graph.
-	 *
-	 * @param Claim     $claim
-	 * @param EntityId  $propertyId
-	 * @param DataValue $value
-	 */
-	public function addClaimValue( Claim $claim, EntityId $propertyId, DataValue $value ) {
-		$statementResource = $this->getStatementResource( $claim );
-		$propertyValueQName = $this->getEntityQName( self::NS_VALUE, $propertyId );
-
-		$typeId = $value->getType();
-
-		switch ( $typeId ) {
-			case 'wikibase-item':
-				$rawValue = $value->getValue();
-
-				assert( $rawValue instanceof EntityId );
-				$valueQName = $this->getEntityQName( self::NS_ENTITY, $rawValue );
-				$valueResource = $this->graph->resource( $valueQName );
-				$statementResource->addResource( $propertyValueQName, $valueResource );
-				$this->entityMentioned( $rawValue );
-				break;
-			case 'commonsMedia':
-				$statementResource->addResource( $propertyValueQName, $value );
-				break;
-			default:
-				//TODO: more media types
+		if ( ! $this->graph->hasProperty( 'rdf:type', $statementResource ) ) {
+			$statementResource->addResource( 'rdf:type', self::NS_ONTOLOGY . ':' . 'Statement' );
 				wfDebug( __METHOD__ . ": Unsupported data type: $typeId\n" );
 		}
+
+		return $statementResource;
 	}
 
 	/**
