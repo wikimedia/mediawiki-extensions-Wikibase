@@ -994,7 +994,7 @@ $messages['et'] = array(
 	'wikibase-editlinkstitle' => 'Redigeeri keeltevahelisi linke',
 	'wikibase-linkitem-addlinks' => 'Lisa lingid',
 	'wikibase-linkitem-alreadylinked' => 'Lehekülg, mida proovisid linkida on juba seotud keskse andmehoidla [$1 üksusega] ja viitab siin võrgukohas leheküljele $2. Üksusega saab siduda igast võrgukohast vaid ühe lehekülje. Palun vali muu lehekülg, millele linkida.',
-	'wikibase-linkitem-close' => 'Sule dialoogiaken ja laadi lehekülg uuesti',
+	'wikibase-linkitem-close' => 'Sule dialoogikast ja laadi lehekülg uuesti',
 	'wikibase-linkitem-failure' => 'Ette antud leheküljele linkimisel ilmnes tundmatu tõrge.',
 	'wikibase-linkitem-title' => 'Leheküljega linkimine',
 	'wikibase-linkitem-linkpage' => 'Lingi leheküljega',
@@ -2742,6 +2742,7 @@ $messages['tr'] = array(
 /** Ukrainian (українська)
  * @author AS
  * @author Base
+ * @author Lystopad
  * @author Microcell
  * @author Ата
  */
@@ -2908,6 +2909,13 @@ $messages['vi'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Tên trang không thể sử dụng để truy vấn nên đã được bỏ qua.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Chỉ những trang có liên kết ngôn ngữ',
 	'wikibase-unconnectedpages-format-row' => '($1 liên kết ngôn ngữ trên trang)',
+);
+
+/** Volapük (Volapük)
+ * @author Iketsi
+ */
+$messages['vo'] = array(
+	'wikibase-linkitem-input-site' => 'Pük:',
 );
 
 /** Yiddish (ייִדיש)

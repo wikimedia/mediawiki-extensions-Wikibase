@@ -44,6 +44,11 @@ $specialPageAliases['nl'] = array(
 	'UnconnectedPages' => array( 'OngekoppeldePaginas', 'OngekoppeldePagina\'s' ),
 );
 
+/** Turkish (Türkçe) */
+$specialPageAliases['tr'] = array(
+	'UnconnectedPages' => array( 'BağlanmamışSayfalar', 'Bağlantısız', 'SiteBağlantısız' ),
+);
+
 /** Vietnamese (Tiếng Việt) */
 $specialPageAliases['vi'] = array(
 	'UnconnectedPages' => array( 'Trang_không_kết_nối', 'Trang_không_có_liên_kết_site' ),

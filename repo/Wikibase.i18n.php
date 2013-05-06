@@ -881,7 +881,7 @@ This is an error message for a situation where the arguments to the API is incon
 Parameters:
 * $1 - the name of the namespace for which direct editing was denied',
 	'wikibase-noentity' => 'Of some reason the user tried to access an entity which then was detected as non-existing. This can happen when an entity is deleted and clients are not yet made aware of this.',
-	'wikibase-noentity-createone' => 'Put immediately after "wikibase-noentity" if the user has the right to create an entity of the given type. This message tells the user that he can create one and gives a link in $1 to the special page where this can be done.',
+	'wikibase-noentity-createone' => 'Put immediately after {{msg-mw|wikibase-noentity}} if the user has the right to create an entity of the given type. This message tells the user that he can create one and gives a link in $1 to the special page where this can be done.',
 	'wikibase-item-summary-wbsetitem' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
 	'wikibase-item-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-item-summary-wbeditentity' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
@@ -2459,7 +2459,7 @@ Vytvořené valstnosti přidejte na [[Wikidata:List of properties|seznam]]. Něk
 	'wikibase-listdatatypes-intro' => 'Toto je seznam všech datových typů v současné době používaných na této instalaci:',
 	'wikibase-history-title-with-label' => 'Historie verzí položky „$2“ ($1)',
 	'wikibase-history-title-without-label' => 'Historie verzí položky ($1)',
-	'special-entitieswithoutlabel' => 'Entita bez štítku',
+	'special-entitieswithoutlabel' => 'Entity bez štítku',
 	'wikibase-entitieswithoutlabel-legend' => 'Získat seznam entit bez štítků',
 	'wikibase-entitieswithoutlabel-label-language' => 'Jazyk:',
 	'wikibase-entitieswithoutlabel-label-type' => 'Typ:',
@@ -2530,11 +2530,11 @@ Vytvořené valstnosti přidejte na [[Wikidata:List of properties|seznam]]. Něk
 	'content-model-wikibase-item' => 'Položka Wikibase',
 	'content-model-wikibase-property' => 'Položka Wikibase',
 	'content-model-wikibase-query' => 'Dotaz Wikibase',
-	'right-item-override' => 'Přepsat položky',
-	'right-item-create' => 'Vytvořit položky',
-	'right-item-remove' => 'Odstranit položky',
-	'right-property-create' => 'Vytvořit vlastnosti',
-	'right-property-remove' => 'Odstranit vlastnosti',
+	'right-item-override' => 'Přepisování položek',
+	'right-item-create' => 'Vytváření položek',
+	'right-item-remove' => 'Odstraňování položek',
+	'right-property-create' => 'Vytváření vlastností',
+	'right-property-remove' => 'Odstraňování vlastností',
 	'right-alias-add' => 'Přidávání aliasů',
 	'right-alias-set' => 'Nastavování aliasů',
 	'right-alias-remove' => 'Odstraňování aliasů',
@@ -2591,6 +2591,7 @@ $messages['cy'] = array(
 	'wikibase-undo-revision-error' => 'Methwyd gwrthdroi',
 	'wikibase-undo-badpage' => "Diwygiad gwallus: Nid yw'r diwygiad $2 yn perthyn i [[$1]].",
 	'wikibase-undo-firstrev' => "Ni ellir gwrthdroi'r diwygiad a ddechreuodd y dudalen",
+	'wikibase-undo-nocontent' => "Methwyd llwytho cynnwys y diwygiad $2 o'r dudalen $1",
 	'wikibase-propertyedittool-full' => 'Mae rhestr y gwerthoedd yn gyflawn.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => 'Mae {{PLURAL:$1||un gwerth|$1 werth|$1 gwerth}} o hyd yn disgwyl cael {{PLURAL:$1||ei gadw|eu cadw}}',
 	'wikibase-disambiguation-title' => 'Gwahaniaethu ystyron "$1"',
@@ -4144,6 +4145,7 @@ $messages['et'] = array(
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Üks väärtus|$1 väärtust}} on veel salvestamata.',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|sissekanne|sissekannet}}',
 	'wikibase-sitelinksedittool-full' => 'Kõigile teadaolevate võrgukohtade lehekülgedele viitavad lingid määratud.',
+	'wikibase-disambiguation-title' => 'Eristatavad üksused sildiga "$1"',
 	'wikibase-aliases-label' => 'Teisiti:',
 	'wikibase-aliases-empty' => 'Rööpkujud on määramata.',
 	'wikibase-datatype-label' => 'Andmetüüp:',
@@ -4175,12 +4177,14 @@ Sinu IP-aadress talletatakse üksuse $1 ajaloos.',
 	'wikibase-itembytitle-submit' => 'Otsi',
 	'wikibase-itembytitle-description' => 'Võrgukohale vastab identifikaatorikood, nt "enwiki".',
 	'wikibase-itembytitle-create' => 'Saad üksuse ka [{{fullurl:Special:NewItem|site=$1&page=$2}} luua].',
+	'special-itemdisambiguation' => 'Sama sildiga üksuste eristamine',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'Üksuste otsimine keele ja sildi järgi',
 	'wikibase-itemdisambiguation-lookup-language' => 'Keel:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Silt:',
 	'wikibase-itemdisambiguation-submit' => 'Otsi',
 	'wikibase-itemdisambiguation-nothing-found' => 'Sellise sildiga üksust kahjuks ei leitud.',
 	'wikibase-itemdisambiguation-create' => 'Saad [{{fullurl:Special:NewItem|label=$1}} üksuse luua].',
+	'wikibase-itemdisambiguation-invalid-langcode' => 'Keeleidentifikaator, mille ära tõid, on kahjuks süsteemis tundmatu. Palun kasuta sobivat keeleidentifikaatorit nagu "et".',
 	'special-newproperty' => 'Uue omaduse loomine',
 	'wikibase-newproperty-summary' => 'Kontrolli kindlasti, ega omadus juba olemas pole!<br />Kõigi uute omaduste juurde tuleks lisada [[Help:Label|silt]] ja [[Help:Description|kirjeldus]] ning lisaks ka sobiv omaduse tüüp.',
 	'wikibase-newproperty-fieldset' => 'Uue omaduse loomine',
@@ -4191,7 +4195,9 @@ Sinu IP-aadress talletatakse üksuse $1 ajaloos.',
 	'wikibase-newitem-fieldset' => 'Uue üksuse loomine',
 	'wikibase-newitem-site' => 'Esimese viidatud lehekülje võrgukoht',
 	'wikibase-newitem-page' => 'Esimese viidatud lehekülje pealkiri',
+	'wikibase-newitem-no-external-page' => 'Vastavast võrgukohast ei leitud määratud lehekülge.',
 	'wikibase-newitem-add-sitelink-failed' => 'Seda võrgukohalinki ei saa salvestada.',
+	'wikibase-newitem-not-recognized-siteid' => 'Ette antud võrgukohaidentifikaatorit ei tuntud ära.',
 	'wikibase-newentity-label' => 'Silt:',
 	'wikibase-newentity-description' => 'Kirjeldus:',
 	'wikibase-newentity-submit' => 'Loo',
@@ -4841,6 +4847,7 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-special-create-item' => 'Luotu [$2]-kohde {{PLURAL:$1|arvolla|arvoilla}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Luotu väite',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Poistettu {{PLURAL:$3|väite|väitettä}}',
+	'wikibase-item-summary-wbsetclaim-create' => 'Luotu {{PLURAL:$3|väite|väitettä}}',
 	'wikibase-property-summary-wbcreate-new' => 'Luotu uusi ominaisuus',
 	'wikibase-property-summary-wbeditentity-create' => 'Loi uuden ominaisuuden',
 	'wikibase-property-summary-wbeditentity-update' => 'Ominaisuus päivitetty',
@@ -7650,6 +7657,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetclaim-create' => "{{PLURAL:$3|Creata un'asserzione|Create asserzioni}}",
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => "{{PLURAL:$4|Modificato un qualificatore|Modificati $4 qualificatori}} di {{PLURAL:$3|un'asserzione|asserzioni}}",
 	'wikibase-item-summary-wbsetclaim-update-references' => "{{PLURAL:$4|Modificato un riferimento|Modificati $4 riferimenti}} di {{PLURAL:$3|un'asserzione|asserzioni}}",
+	'wikibase-item-summary-wbsetclaim-update-rank' => "Modificata classificazione di {{PLURAL:$3|un'asserzione|asserzioni}}",
 	'wikibase-property-summary-wbcreate-new' => 'Creata una nuova proprietà',
 	'wikibase-property-summary-wbeditentity-create' => 'Creata una nuova proprietà',
 	'wikibase-property-summary-wbeditentity-update' => 'Aggiornata una proprietà',
@@ -13755,6 +13763,14 @@ $messages['vi'] = array(
 	'action-description-update' => 'cập nhật lời miêu tả',
 );
 
+/** Volapük (Volapük)
+ * @author Iketsi
+ */
+$messages['vo'] = array(
+	'wikibase-edit' => 'redakön',
+	'wikibase-sitelink-page-edit-placeholder' => 'yaged',
+);
+
 /** Yiddish (ייִדיש)
  * @author פוילישער
  * @author පසිඳු කාවින්ද
@@ -14256,8 +14272,8 @@ $messages['zh-hant'] = array(
 	'wikibase-item-summary-special-create-item' => '創建含{{PLURAL:$1|數值}}的[$2]項目',
 	'wikibase-item-summary-wbcreateclaim-create' => '創建聲稱',
 	'wikibase-item-summary-wbremoveclaims-remove' => '移除{{PLURAL:$3|聲稱|聲稱}}',
-	'wikibase-item-summary-wbsetclaim-update' => '已更改聲稱', # Fuzzy
-	'wikibase-item-summary-wbsetclaim-create' => '已創建聲稱', # Fuzzy
+	'wikibase-item-summary-wbsetclaim-update' => '已更改{{PLURAL:$3|聲稱}}',
+	'wikibase-item-summary-wbsetclaim-create' => '已創建{{PLURAL:$3|聲稱}}',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '已更改{{PLURAL:$3|聲稱}}的{{PLURAL:$4|一個修飾成分|$4個修飾成分}}',
 	'wikibase-property-summary-wbcreate-new' => '創建一個新屬性。',
 	'wikibase-property-summary-wbeditentity-create' => '創建新屬性',

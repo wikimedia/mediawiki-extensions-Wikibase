@@ -1190,6 +1190,7 @@ $messages['it'] = array(
 	'wikibase-entity-property' => 'proprietà',
 	'wikibase-entity-query' => 'interrogazione',
 	'wikibase-diffview-reference' => 'riferimento',
+	'wikibase-diffview-rank' => 'classificazione',
 	'wikibase-diffview-qualifier' => 'qualificatore',
 	'wikibase-error-unexpected' => 'Si è verificato un errore imprevisto.',
 	'wikibase-error-save-generic' => 'Si è verificato un errore durante il tentativo di salvataggio, perciò le tue modifiche potrebbero non essere state completamente memorizzate.',
@@ -2111,6 +2112,15 @@ $messages['vi'] = array(
 	'wikibase-tooltip-error-details' => 'Chi tiết',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
 	'datatypes-type-commonsMedia' => 'Tập tin phương tiện Commons',
+	'version-wikibase' => 'Wikibase',
+);
+
+/** Volapük (Volapük)
+ * @author Iketsi
+ */
+$messages['vo'] = array(
+	'wikibase-sitelinks-sitename-columnheading' => 'Pük',
+	'wikibase-tooltip-error-details' => 'Pats',
 	'version-wikibase' => 'Wikibase',
 );
 
