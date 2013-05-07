@@ -98,7 +98,7 @@ Your IP address will be recorded in the edit history of this $1.",
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
 	'wikibase-warning-constraint-violation-length' => 'A length constraint is triggered for language code "$1".',
-	'wikibase-error-constraint-violation-label' => 'There is {{PLURAL:$1|a constraint|constraints}} violation for {{PLURAL:$1|label|labels}} "$3" for {{PLURAL:$1|language code|language codes}} "$2".',
+	'wikibase-error-constraint-violation-label' => 'There {{PLURAL:$1|is a constraint violation|are constraint violations}} for the {{PLURAL:$1|label|labels}} "$3" in {{PLURAL:$1|language code|language codes}} "$2".',
 	'wikibase-error-constraint-violation-description' => 'There is {{PLURAL:$1|a constraint|constraints}} violation for {{PLURAL:$1|description|descriptions}} "$3" for {{PLURAL:$1|language code|language codes}} "$2".',
 	'wikibase-error-constraint-violation-aliases' => 'There is {{PLURAL:$1|a constraint|constraints}} violation for {{PLURAL:$1|alias|aliases}} "$3" for {{PLURAL:$1|language code|language codes}} "$2".',
 
