@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DwhVxHqk",
+        "filename": "selenium_cuc/Gemfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T16:11:10Z",
+      "side": 1,
+      "message": "It is usual to commit Gemfile.lock file to make sure every environment has exactly the same versions of gems. It is suggested at Bundler home page (http://gembundler.com/):\n\n$ git add Gemfile Gemfile.lock",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwtqLZRc",
         "filename": "selenium_cuc/config/config.yml.sample",
         "patchSetId": 2
@@ -72,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DwvpuKQA",
+        "filename": "selenium_cuc/config/config.yml.sample",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T16:11:10Z",
+      "side": 1,
+      "message": "In env.rb you eval all properties into constants, right?",
+      "parentUuid": "DwhpdzXc",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dwpp53S4",
         "filename": "selenium_cuc/features/label.feature",
         "patchSetId": 2
@@ -101,6 +136,41 @@
       "side": 1,
       "message": "at the moment not, you\u0027re right, but I will add more scenarios in here as next step, so we could just keep it.",
       "parentUuid": "Dwpp53S4",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dwlp0dc4",
+        "filename": "selenium_cuc/features/label.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T16:11:10Z",
+      "side": 1,
+      "message": "Makes sense. I just prefer to refactor at the last responsible moment. :)",
+      "parentUuid": "DwvqI6eo",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwrWF0l0",
+        "filename": "selenium_cuc/features/label.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T16:11:10Z",
+      "side": 1,
+      "message": "This scenario does too much. It should be split into several smaller ones. If this one big scenario fails, it is not clear what is broken. Is entity page displayed, does editing work, does cancelling work...\n\nExample:\n\nBackground:\n  Given I am on an entity page\n\nScenario: Entity page has all required elements\n  Then Original label should be displayed\n    And Label edit button should be there\n    And Label cancel button should not be there\n\nScenario: Click edit button\n  When I click the label edit button\n  Then Label input element should be there\n    And Label input element should contain original label\n    And Label cancel button should be there\n\nScenario: Modify the label\n  When I modify the label\n  Then Label save button should be there\n    And Label cancel button should be there\n    And Label edit button should not be there\n\nScenario: Label cancel\n  When I modify the label\n    And I click the label cancel button\n  Then Original label should be displayed\n    And Label edit button should be there\n    And Label cancel button should not be there\n\nNow that the scenario is split into several smaller ones, if anything is broken, it should be clear what is broken, and what still works.",
       "revId": "f177db96a39917a4c91c96590475168626b1efdd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -142,6 +212,74 @@
     },
     {
       "key": {
+        "uuid": "DwtX7NhE",
+        "filename": "selenium_cuc/features/steps/label_steps.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T16:11:10Z",
+      "side": 1,
+      "message": "We usually use \"visit\" a shorter version of \"visit_page\".",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwrUAMgU",
+        "filename": "selenium_cuc/features/steps/label_steps.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T16:11:10Z",
+      "side": 1,
+      "message": "We also use \"on\", the shorter version of \"on_page\".",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwvUKuiA",
+        "filename": "selenium_cuc/features/steps/label_steps.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T16:11:10Z",
+      "side": 1,
+      "message": "There is no need for a block, when only one action is performed on a page. This block could be written as:\n\non(ItemPage).cancelLabelLink",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwrUpUo0",
+        "filename": "selenium_cuc/features/steps/label_steps.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T16:11:10Z",
+      "side": 1,
+      "message": "It is also a Ruby convention to use snake_case for method names.\n\nFor example: page.label_input_field_element.clear",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwlrJFVs",
         "filename": "selenium_cuc/features/support/env.rb",
         "patchSetId": 2
@@ -177,6 +315,23 @@
     },
     {
       "key": {
+        "uuid": "DwvoZCYQ",
+        "filename": "selenium_cuc/features/support/modules/alias_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T16:11:10Z",
+      "side": 1,
+      "message": "This long xpath expressions look like a really fragile way of finding elements on a page.",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dwnqnuao",
         "filename": "selenium_cuc/features/support/pages/item_page.rb",
         "patchSetId": 2
@@ -206,6 +361,24 @@
       "side": 1,
       "message": "I\u0027m not happy with it either. This is something that grew in the beginning of the project while everybody was a ruby-newby. We\u0027re still newbies but it\u0027s probably a good time to get rid of it and make it nicer.",
       "parentUuid": "Dwnqnuao",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwhpDDXE",
+        "filename": "selenium_cuc/features/support/pages/item_page.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T16:11:10Z",
+      "side": 1,
+      "message": "Since page-object gem uses composition, it would make sense to stick to it.",
+      "parentUuid": "DwppG-cE",
       "revId": "f177db96a39917a4c91c96590475168626b1efdd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
