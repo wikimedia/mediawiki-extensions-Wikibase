@@ -1,0 +1,16 @@
+# Wikidata UI tests
+#
+# Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# License:: GNU GPL v2+
+#
+# RAKEFILE
+
+desc 'Run serial task.'
+task default: :serial
+
+# cucumber needs this
+require 'cucumber/rake/task'
+
+Cucumber::Rake::Task.new(:serial, 'Run all Cucumber features in serial.') do |t|
+  t.profile = 'default'
+end
