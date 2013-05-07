@@ -62,7 +62,8 @@
 	 * @param {dv.util.Notifier} [valueViewNotifier] Required so the expert can notify the valueview
 	 *        about certain events. The following notification keys can be used:
 	 *        - change: will be sent when raw value displayed by the expert changes. Either by a
-	 *                  user action or by calling the rawValue() method.
+	 *                  user action or by calling the rawValue() method. First parameter is a
+	 *                  reference to the Expert itself.
 	 * @param {Object} [options={}]
 	 *
 	 * TODO: think about whether there should be a function to add multiple notifiers for widget
@@ -167,7 +168,7 @@
 		 * @since 0.1
 		 * @abstract
 		 *
-		 * @return valueParsers.Parser
+		 * @return valueParsers.ValueParser
 		 */
 		parser: function() {
 			return new vp.NullParser()
@@ -194,7 +195,8 @@
 		 * value, so basically, the expert itself will do the job of parsing itself somehow and does
 		 * not require an asynchronous job for doing so.
 		 * If the first parameter is set, then the function will set the value instead of returning
-		 * it. An incompatible value will be recognized as empty (same as null).
+		 * it. An incompatible value will be recognized as empty (same as null). If the given value
+		 * is different from the current one, "change" will be notified to the change notifier.
 		 *
 		 * @since 0.1
 		 *
@@ -203,13 +205,24 @@
 		 *         Returns undefined if used as setter.
 		 */
 		rawValue: function( rawValue ) {
+			var currentRawValue = this._getRawValue();
+
 			if( rawValue === undefined ) { // GETTER:
-				return this._getRawValue();
+				return currentRawValue;
 			}
-			// SETTER:
-			this._setRawValue( rawValue );
-			this.draw();
-			this._viewNotifier.notify( 'change' );
+
+			// Only change value if different from current value:
+			if( !this.rawValueCompare( currentRawValue, rawValue ) ) { // SETTER:
+				this._setRawValue( rawValue );
+
+				// rawValue might be a unknown value different from null which will end as null
+				// nonetheless. If that is the case the value was null already, then this is not
+				// a real update.
+				if( currentRawValue !== null || this._getRawValue() !== null ) {
+					this.draw();
+					this._viewNotifier.notify( 'change', [ this ] );
+				}
+			}
 		},
 
 		/**

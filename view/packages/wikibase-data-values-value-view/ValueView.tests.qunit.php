@@ -82,6 +82,25 @@ return call_user_func( function() {
 				'qunit.parameterize',
 			),
 		),
+
+		'jquery.valueview.tests.testExpert.js' => array(
+			'scripts' => array(
+				"$bp/jquery.valueview/valueview.tests.testExpert.js",
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts',
+				'qunit.parameterize',
+			),
+		),
+
+		'jquery.valueview.experts.stringvalue.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.valueview/valueview.experts/experts.StringValue.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts.stringvalue',
+			),
+		),
 	);
 
 } );
