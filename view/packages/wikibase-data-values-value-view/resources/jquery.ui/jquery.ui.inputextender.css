@@ -21,3 +21,12 @@
 	clear: both;
 	margin-top: 0.5em;
 }
+
+.ui-inputextender-extension-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none !important;
+	background: none !important;
+	cursor: pointer;
+}
