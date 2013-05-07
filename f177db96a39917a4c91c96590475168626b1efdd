@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DwrpngU8",
+        "filename": "selenium_cuc/config/config.yml.sample",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-07T15:25:45Z",
+      "side": 1,
+      "message": "yes, it\u0027s the same principle as with the LocalSettings in mediawiki. the sample file should be copied to a file named config.yml where all the secrets can go..",
+      "parentUuid": "DwtqLZRc",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwrqQIUM",
         "filename": "selenium_cuc/config/config.yml.sample",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-05-07T15:00:29Z",
       "side": 1,
       "message": "Is there a reason all lines have one leading space? Also, why are all properties in ALL_CAPS?",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwhpdzXc",
+        "filename": "selenium_cuc/config/config.yml.sample",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-07T15:25:45Z",
+      "side": 1,
+      "message": "no reason for the spaces, I used ALL_CAPS for the properties as they seemed like constants for me..",
+      "parentUuid": "DwrqQIUM",
       "revId": "f177db96a39917a4c91c96590475168626b1efdd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DwvqI6eo",
+        "filename": "selenium_cuc/features/label.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-07T15:25:45Z",
+      "side": 1,
+      "message": "at the moment not, you\u0027re right, but I will add more scenarios in here as next step, so we could just keep it.",
+      "parentUuid": "Dwpp53S4",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dwjp8ERw",
         "filename": "selenium_cuc/features/label.feature",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2013-05-07T15:00:29Z",
       "side": 1,
       "message": "Ruby convention is to use two spaces instead of tabs: https://github.com/styleguide/ruby",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dwpp4vfE",
+        "filename": "selenium_cuc/features/label.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-07T15:25:45Z",
+      "side": 1,
+      "message": "ok, will stick to the conventions",
+      "parentUuid": "Dwjp8ERw",
       "revId": "f177db96a39917a4c91c96590475168626b1efdd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "DwjoiUQU",
+        "filename": "selenium_cuc/features/support/env.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-07T15:25:45Z",
+      "side": 1,
+      "message": "we have ULS enabled on all sites when the user is logged in (on production) and we have ULS enabled everywhere and anytime on all of our test-instances.\nWe have also a method in our tests to switch the languge during tests: see \"uls_switch_language\" in http://tiny.cc/okzpww",
+      "parentUuid": "DwlrJFVs",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dwnqnuao",
         "filename": "selenium_cuc/features/support/pages/item_page.rb",
         "patchSetId": 2
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "DwppG-cE",
+        "filename": "selenium_cuc/features/support/pages/item_page.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-07T15:25:45Z",
+      "side": 1,
+      "message": "I\u0027m not happy with it either. This is something that grew in the beginning of the project while everybody was a ruby-newby. We\u0027re still newbies but it\u0027s probably a good time to get rid of it and make it nicer.",
+      "parentUuid": "Dwnqnuao",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwjqdMVU",
         "filename": "selenium_cuc/features/support/utils/utils.rb",
         "patchSetId": 2
@@ -115,6 +223,24 @@
       "writtenOn": "2013-05-07T15:00:29Z",
       "side": 1,
       "message": "Do you know there are simpler ways to generate random strings in Ruby? A few examples: http://stackoverflow.com/q/88311/17469",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwnryGZo",
+        "filename": "selenium_cuc/features/support/utils/utils.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-07T15:25:45Z",
+      "side": 1,
+      "message": "less lines: yes\nsimpler: probably ;)\nI just took the first snippet I\u0027ve found, but since this is a common method, we could easily change it to something else..",
+      "parentUuid": "DwjqdMVU",
       "revId": "f177db96a39917a4c91c96590475168626b1efdd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
