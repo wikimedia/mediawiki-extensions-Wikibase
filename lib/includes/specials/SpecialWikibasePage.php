@@ -67,6 +67,8 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	 * @since 0.1
 	 *
 	 * @param string|null $subPage
+	 *
+	 * @return boolean
 	 */
 	public function execute( $subPage ) {
 		$subPage = is_null( $subPage ) ? '' : $subPage;
@@ -79,7 +81,9 @@ abstract class SpecialWikibasePage extends SpecialPage {
 		// If the user is authorized, display the page, if not, show an error.
 		if ( !$this->userCanExecute( $this->getUser() ) ) {
 			$this->displayRestrictionError();
+			return false;
 		}
+		return true;
 	}
 
 }
