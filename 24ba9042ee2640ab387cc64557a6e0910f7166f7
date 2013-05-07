@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DwmomyNI",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-05-07T21:26:03Z",
+      "side": 1,
+      "message": "These need corresponding messages in the \u0027qqq\u0027 section of this file.  qqq messages explain how the message is used and other info that can help translators.\n\nhttps://www.mediawiki.org/wiki/Localisation#Message_documentation",
+      "revId": "24ba9042ee2640ab387cc64557a6e0910f7166f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dwuq.WGE",
         "filename": "lib/includes/EntityDiffVisualizer.php",
         "patchSetId": 1
