@@ -6,8 +6,11 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 // TODO: Remove mediaWiki dependency
-( function( dv, vp, $, vv, Time, mw ) {
+( function( dv, vp, $, vv, time, mw ) {
 	'use strict';
+
+	var Time = time.Time,
+		timeSettings = time.settings;
 
 	var PARENT = vv.Expert;
 
@@ -64,7 +67,29 @@
 
 			this.$previewValue = $( '<div/>' )
 			.addClass( 'valueview-preview-value' )
+			.text( mw.msg( 'valueview-preview-novalue' ) )
 			.appendTo( this.$preview );
+
+			var precisionValues = [];
+			$.each( timeSettings.precisiontexts, function( i, text ) {
+				precisionValues.push( { value: i, label: text } );
+			} );
+
+			this.$precision = $( '<div/>' )
+			.listrotator( { values: precisionValues.reverse(), deferInit: true } )
+			.on( 'listrotatorauto', function( event ) {
+				var value = new Time( self.$input.val() );
+				$( this ).data( 'listrotator' ).rotate( value.precision() );
+				self._setRawValue( value );
+				self._updatePreview( value );
+				self._viewNotifier.notify( 'change' );
+			} )
+			.on( 'listrotatorselected', function( event, precision ) {
+				var value = new Time( self.$input.val(), precision );
+				self._setRawValue( value );
+				self._updatePreview( value );
+				self._viewNotifier.notify( 'change' );
+			} );
 
 			this.$input = $( '<input/>', {
 				type: 'text',
@@ -80,11 +105,21 @@
 			.timeinput()
 			// TODO: Move input extender out of here to a more generic place since it is not
 			// TimeInput specific.
-			.inputextender( { content: [ this.$preview ] } )
+			.inputextender( {
+				content: [ this.$preview ],
+				extendedContent: [ this.$precision ],
+				initCallback: function() {
+					self.$precision.data( 'listrotator' ).initWidths();
+				}
+			} )
 			.on( 'timeinputupdate', function( event, value ) {
 				self._updatePreview( value );
+				if( value && value.isValid() ) {
+					self.$precision.data( 'listrotator' ).rotate( value.precision() );
+				}
 				self._viewNotifier.notify( 'change' );
 			} );
+
 		},
 
 		/**
@@ -175,6 +210,9 @@
 			if( this._newValue !== false ) {
 				this.$input.data( 'timeinput' ).value( this._newValue );
 				this._updatePreview( this._newValue );
+				if( this._newValue !== null ) {
+					this.$precision.data( 'listrotator' ).value( this._newValue.precision() );
+				}
 				this._newValue = false;
 			}
 		},
@@ -195,4 +233,4 @@
 
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, time.Time, mediaWiki ) );
+}( dataValues, valueParsers, jQuery, jQuery.valueview, time, mediaWiki ) );

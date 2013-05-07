@@ -71,6 +71,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.listrotator.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.ui/jquery.ui.listrotator.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.ui.listrotator',
+			),
+		),
+
 		'jquery.ui.suggester.tests' => array(
 			'scripts' => array(
 				"$bp/jquery.ui/jquery.ui.suggester.tests.js",

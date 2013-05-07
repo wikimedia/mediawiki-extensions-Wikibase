@@ -13,11 +13,16 @@
  *         clicking on the extender link.
  *         Default value: []
  *
+ * @option {Function} [initCallback] Function triggered after the widget has been initialized but
+ *         before the widget contents get hidden initially. This may be used to init some widgets
+ *         that need to be visible on initialization for measuring dimension according to their
+ *         container's styles.
+ *
  * @option {boolean} [hideWhenInputEmpty] Whether all of the input extender's contents shall be
  *         hidden when the associated input element is empty.
  *         Default value: true
  *
- * @option [messages] {Object} Strings used within the widget.
+ * @option {Object} [messages] Strings used within the widget.
  *         Messages should be specified using mwMsgOrString(<resource loader module message key>,
  *         <fallback message>) in order to use the messages specified in the resource loader module
  *         (if loaded).
@@ -27,6 +32,9 @@
  *         messages['hide options'] {String} (optional) Label of the link hiding any additional
  *         contents.
  *         Default value: 'hide options'
+ *
+ * @event toggle: Triggered when the visibility of the extended content is toggled.
+ *        (1) {jQuery.Event}
  *
  * @dependency jQuery.Widget
  * @dependency jQuery.eachchange
@@ -41,7 +49,7 @@
 	var IS_MW_CONTEXT = ( typeof mw !== 'undefined' && mw.msg );
 
 	/**
-	 * Whether actual entity selector resource loader module is loaded.
+	 * Whether actual inputextender resource loader module is loaded.
 	 * @type {boolean}
 	 */
 	var IS_MODULE_LOADED = (
@@ -69,6 +77,7 @@
 		options: {
 			content: [],
 			extendedContent: [],
+			initCallback: null,
 			hideWhenInputEmpty: true,
 			messages: {
 				'show options': mwMsgOrString( 'valueview-inputextender-showoptions', 'show options' ),
@@ -119,6 +128,12 @@
 		$extendedContent: null,
 
 		/**
+		 * Caches the timeout when the actual "blur" action should kick in.
+		 * @type {Object}
+		 */
+		_blurTimeout: null,
+
+		/**
 		 * @see jQuery.Widget._create
 		 */
 		_create: function() {
@@ -132,7 +147,6 @@
 
 			this.$container = $( '<div/>' )
 			.addClass( this.widgetBaseClass )
-			.data( this.widgetName, this )
 			.appendTo( this.$parent );
 
 			this.$inputContainer = $( '<div />' )
@@ -146,14 +160,26 @@
 			.text( this.options.messages['show options'] )
 			.appendTo( this.$inputContainer )
 			.on( 'click', function( event ) {
+				clearTimeout( self._blurTimeout );
 				self._toggleExtension();
+			} )
+			.on( 'keydown', function( event ) {
+				if( event.keyCode === $.ui.keyCode.ENTER ) {
+					clearTimeout( self._blurTimeout );
+					self._toggleExtension();
+				}
+			} )
+			.on( 'focus', function( event ) {
+				clearTimeout( self._blurTimeout );
 			} )
 			.hide();
 
 			this.$contentContainer = $( '<div/>' )
 			.addClass( this.widgetBaseClass + '-contentcontainer ui-widget-content' )
 			.appendTo( this.$container )
-			.hide();
+			.on( 'click.' + this.widgetName, function( event ) {
+				clearTimeout( self._blurTimeout );
+			} );
 
 			this.$content = $( '<div/>' )
 			.addClass( this.widgetBaseClass + '-content' )
@@ -161,22 +187,27 @@
 
 			this.$extendedContent = $( '<div/>' )
 			.addClass( this.widgetBaseClass + '-extendedcontent' )
-			.appendTo( this.$contentContainer )
-			.hide();
+			.appendTo( this.$contentContainer );
 
 			this.element.add( this.$extender )
 			.on( 'focus.' + this.widgetName, function( event ) {
-				if( !self.options.hideWhenInputEmpty || self.element.val() !== '' || self._extended ) {
+				if( !self.options.hideWhenInputEmpty || self.element.val() !== '' ) {
+					clearTimeout( self._blurTimeout );
 					self.showContent();
 				}
 			} )
+			// TODO: Do not hide when tabbing into the inputextender's contents
 			.on( 'blur.' + this.widgetName, function( event ) {
-				self.hideContent();
+				self._blurTimeout = setTimeout( function() {
+					self.hideContent( function() {
+						self._toggleExtension( { forceHide: true } );
+					} );
+				}, 150 );
 			} );
 
 			if( this.options.hideWhenInputEmpty ) {
 				this.element.eachchange( function( event, oldValue ) {
-					if( self.element.val() === '' && !self._extended ) {
+					if( self.element.val() === '' && !self.$extendedContent.is( ':visible' ) ) {
 						self.hideContent();
 					} else if ( oldValue === '' ) {
 						self.showContent();
@@ -184,7 +215,33 @@
 				} );
 			}
 
+			// Blurring by clicking away from the widget (one handler is sufficient):
+			if( $( ':' + this.widgetBaseClass ).length === 1 ) {
+				$( 'html' ).on( 'click.' + this.widgetName, function( event ) {
+					// Loop through all widgets and hide content when having clicked out of it:
+					var $widgetNodes = $( ':' + self.widgetBaseClass );
+					$widgetNodes.each( function( i, widgetNode ) {
+						var widget = $( widgetNode ).data( self.widgetName );
+						if(
+							$( event.target ).closest( widget.$container ).length === 0
+							&& !widget.element.is( ':focus' )
+						) {
+							widget.hideContent( function() {
+								widget._toggleExtension( { forceHide: true } );
+							} );
+						}
+					} );
+				} );
+			}
+
 			this._draw();
+
+			if( $.isFunction( this.options.initCallback ) ) {
+				this.options.initCallback();
+			}
+
+			this.$contentContainer.hide();
+			this.$extendedContent.hide();
 		},
 
 		/**
@@ -194,6 +251,9 @@
 			var $input = this.element.detach();
 			this.$container.remove();
 			this.$parent.append( $input );
+			if( $( ':' + this.widgetBaseClass ).length === 0 ) {
+				$( 'html' ).off( '.' + this.widgetName );
+			}
 			$.Widget.prototype.destroy.call( this );
 		},
 
@@ -219,23 +279,38 @@
 
 		/**
 		 * Toggles the visibility of the additional options.
+		 *
+		 * @param {Object|undefined} customOptions
 		 */
-		_toggleExtension: function() {
-			var self = this;
+		_toggleExtension: function( customOptions ) {
+			var self = this,
+				options = {
+					moveFocus: true,
+					forceHide: false
+				};
 
-			if( this.$extendedContent.is( ':visible' ) ) {
-				this.$extendedContent.slideUp( 150, function() {
-					self._extended = false;
-					self.element.focus();
+			$.extend( options, customOptions );
+
+			function hideExtendedContent() {
+				self.$extendedContent.slideUp( 150, function() {
 					self.$extender.text( self.options.messages['show options'] );
 					self._trigger( 'toggle' );
 				} );
+			}
+
+			if( options.forceHide ) {
+				hideExtendedContent();
+				return;
+			}
+
+			if( this.$extendedContent.is( ':visible' ) ) {
+				this.showContent( hideExtendedContent );
 			} else {
-				this.$extendedContent.slideDown( 150, function() {
-					self._extended = true;
-					self.element.focus();
-					self.$extender.text( self.options.messages['hide options'] );
-					self._trigger( 'toggle' );
+				this.showContent( function() {
+					self.$extendedContent.slideDown( 150, function() {
+						self.$extender.text( self.options.messages['hide options'] );
+						self._trigger( 'toggle' );
+					} );
 				} );
 			}
 
@@ -247,10 +322,7 @@
 		 * @param {Function} [callback] Invoked as soon as the contents are visible.
 		 */
 		showContent: function( callback ) {
-			if( this.$contentContainer.is( ':visible' ) ) {
-				return;
-			}
-			this.$contentContainer.fadeIn( 150, function() {
+			this.$contentContainer.stop( true, true ).fadeIn( 150, function() {
 				if( $.isFunction( callback ) ) {
 					callback();
 				}
@@ -263,10 +335,7 @@
 		 * @param {Function} [callback] Invoked as soon as the contents are hidden.
 		 */
 		hideContent: function( callback ) {
-			if( !this.$contentContainer.is( ':visible' ) || this._extended ) {
-				return;
-			}
-			this.$contentContainer.fadeOut( 150, function() {
+			this.$contentContainer.stop( true, true ).fadeOut( 150, function() {
 				if( $.isFunction( callback ) ) {
 					callback();
 				}

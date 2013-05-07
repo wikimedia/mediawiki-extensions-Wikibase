@@ -125,6 +125,23 @@ return call_user_func( function() {
 			),
 		),
 
+
+		'jquery.ui.listrotator' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.listrotator.js',
+			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.listrotator.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+				'jquery.ui.position',
+				'jquery.ui.autocomplete', // needs jquery.ui.menu
+			),
+			'messages' => array(
+				'valueview-listrotator-auto',
+			),
+		),
 	);
 
 	// return jQuery.valueview's native resources plus those required by the MW extension:

@@ -48,6 +48,8 @@ $messages['en'] = array(
 
 	'valueview-inputextender-showoptions' => 'show options',
 	'valueview-inputextender-hideoptions' => 'hide options',
+
+	'valueview-listrotator-auto' => 'auto',
 );
 
 /** Message documentation (Message documentation)
@@ -65,6 +67,7 @@ $messages['qqq'] = array(
 	'valueview-preview-novalue' => 'Message displayed instead of an input value\'s preview when no value is specified yet or when the specified value could not be interpreted by the system.',
 	'valueview-inputextender-showoptions' => 'Message of the link displayed next to an input element if there are detailed options for inputting a value. This message is shown, when the options are currently invisible. By clicking the link, the options are shown and can be adjusted.',
 	'valueview-inputextender-hideoptions' => 'Message of the link displayed next to an input element if there are detailed options for inputting a value. This message is shown, when the options are currently visible. By clicking the link, the options will be hidden.',
+	'valueview-listrotator-auto' => 'Label of the link to have the system automatically select the most appropriate value from a "listrotator" widget. The "listrotator" basically is a facade for a drop-down select box allowing to pick a value from a list of values. In addition to the defined values, an "automatic" option may be selected that makes the system pick the most appropriate value according to an associated input element.',
 );
 
 /** Asturian (asturianu)

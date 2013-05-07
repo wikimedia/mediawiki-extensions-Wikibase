@@ -200,6 +200,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.time.timeinput',
 				'jquery.ui.inputextender',
+				'jquery.ui.listrotator',
 			),
 			'messages' => array(
 				'valueview-preview-label',
