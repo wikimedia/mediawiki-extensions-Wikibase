@@ -1,0 +1,12 @@
+source "https://rubygems.org"
+
+gem 'rake'
+gem 'rspec'
+gem 'page-object'
+gem 'require_all'
+gem 'rspec-extra-formatters'
+gem 'rspec-expectations'
+gem 'syntax'
+gem 'parallel_tests'
+gem 'cucumber'
+gem 'json', '~> 1.7.7'
