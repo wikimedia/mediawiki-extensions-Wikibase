@@ -59,6 +59,12 @@ time.Time.parse = ( function( time ) {
 			retval.day = result.day;
 			retval.precision = 11;
 		}
+
+		// No proper precision available:
+		if( retval.precision === -1 ) {
+			return null;
+		}
+
 		if( result.calendar !== undefined ) {
 			retval.calendarname = result.calendar;
 		} else if( (result.year < 1583) && (retval.precision > 10) ) {
