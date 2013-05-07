@@ -92,9 +92,9 @@ class EntityDiffVisualizer {
 		$termDiffVisualizer = new DiffView(
 			array(),
 			new Diff( array(
-				'label' => $diff->getLabelsDiff(),
-				'aliases' => $diff->getAliasesDiff(),
-				'description' => $diff->getDescriptionsDiff(),
+				wfMessage( 'wikibase-diffview-label')->plain() => $diff->getLabelsDiff(),
+				wfMessage( 'wikibase-diffview-alias')->plain() => $diff->getAliasesDiff(),
+				wfMessage( 'wikibase-diffview-description')->plain() => $diff->getDescriptionsDiff(),
 			), true ),
 			$this->context
 		);
@@ -110,7 +110,7 @@ class EntityDiffVisualizer {
 			$termDiffVisualizer = new DiffView(
 				array(),
 				new Diff( array(
-					'links' => $diff->getSiteLinkDiff(),
+					wfMessage( 'wikibase-diffview-link')->plain() => $diff->getSiteLinkDiff(),
 				), true ),
 				$this->context
 			);

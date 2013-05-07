@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * Internationalization file for the WikibaseLib extension.
@@ -24,6 +24,10 @@ $messages['en'] = array(
 	'wikibase-diffview-reference' => 'reference',
 	'wikibase-diffview-rank' => 'rank',
 	'wikibase-diffview-qualifier' => 'qualifier',
+	'wikibase-diffview-label' => 'label',
+	'wikibase-diffview-alias' => 'aliases',
+	'wikibase-diffview-description' => 'description',
+	'wikibase-diffview-link' => 'links',
 	'wikibase-error-unexpected' => 'An unexpected error occurred.',
 	'wikibase-error-save-generic' => 'An error occurred while trying to perform save and because of this, your changes could not be completed.',
 	'wikibase-error-remove-generic' => 'An error occurred while trying to perform remove and because of this, your changes could not be completed.',
