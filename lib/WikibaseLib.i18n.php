@@ -24,6 +24,10 @@ $messages['en'] = array(
 	'wikibase-diffview-reference' => 'reference',
 	'wikibase-diffview-rank' => 'rank',
 	'wikibase-diffview-qualifier' => 'qualifier',
+	'wikibase-diffview-label' => 'label',
+	'wikibase-diffview-alias' => 'aliases',
+	'wikibase-diffview-description' => 'description',
+	'wikibase-diffview-link' => 'links',
 	'wikibase-error-unexpected' => 'An unexpected error occurred.',
 	'wikibase-error-save-generic' => 'An error occurred while trying to perform save and because of this, your changes could not be completed.',
 	'wikibase-error-remove-generic' => 'An error occurred while trying to perform remove and because of this, your changes could not be completed.',
@@ -104,6 +108,10 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
 	'version-wikibase' => 'Name of the Wikibase extension collection, used on [[Special:Version]]',
+	'wikibase-diffview-label' => 'Sub heading for label changes in a diff',
+	'wikibase-diffview-alias' => 'Sub heading for alias changes in a diff',
+	'wikibase-diffview-description' => 'Sub heading for description changes in a diff',
+	'wikibase-diffview-link' => 'Sub heading for link changes in a diff',
 );
 
 /** Afrikaans (Afrikaans)
