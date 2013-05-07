@@ -150,6 +150,7 @@ $specialPageAliases['ja'] = array(
 
 /** Korean (한국어) */
 $specialPageAliases['ko'] = array(
+	'DispatchStats' => array( '전송통계' ),
 	'EntityData' => array( '항목데이터' ),
 	'NewItem' => array( '항목만들기', '아이템만들기' ),
 	'NewProperty' => array( '새속성' ),

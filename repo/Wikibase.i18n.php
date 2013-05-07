@@ -543,7 +543,7 @@ This will be inserted into parameter $3 of {{msg-mw|wikibase-ui-pendingquantityc
 Parameters:
 * $1 - the property name the user is about to edit a value of or add another value to',
 	'wikibase-claimview-snak-new-tooltip' => 'Tooltip message displayed when hovering/clicking the help icon next to the save, cancel and remove links of a claim (see [[d:Wikidata:Glossary]]) when about to add a completely new claim which includes specifying the property.',
-	'wikibase-statementview-referencesheading-pendingcountersubject' => "Used in the heading for the references associated with a statement (see [[d:Wikidata:Glossary]]). The heading is giving information about how many references exist for that statement. This is just the label for the counter's subject, the references, the number of references is not part of the message.
+	'wikibase-statementview-referencesheading-pendingcountersubject' => "Used in the heading for the references associated with a statement (see [[d:Wikidata:Glossary]]). The heading is giving information about how many references exist for that statement. This is just the label for the counter's subject: the references, the number of references is not part of the message.
 
 Parameters:
 * $1 - the number of references for plural usage",
@@ -789,12 +789,14 @@ This special page returns a list of available datatypes (such as commonsMedia)',
 	'special-entitieswithoutlabel' => '{{doc-special|EntitiesWithoutLabel}}
 This special page returns a list of entities without label for a given language',
 	'wikibase-entitieswithoutlabel-legend' => 'Legend of the form that allow to change the language.',
-	'wikibase-entitieswithoutlabel-label-language' => 'Label for the input field to change the language.',
+	'wikibase-entitieswithoutlabel-label-language' => 'Label for the input field to change the language.
+{{Identical|Language}}',
 	'wikibase-entitieswithoutlabel-label-type' => 'Label of the entity type selector that allows to restrict the request to one type.
 {{Identical|Type}}',
 	'wikibase-entitieswithoutlabel-label-alltypes' => 'Label of the entity type selector entry that allows to output missing labels for all entity types.
 {{Identical|All}}',
-	'wikibase-entitieswithoutlabel-submit' => 'Label for the button that activate the action.',
+	'wikibase-entitieswithoutlabel-submit' => 'Label for the button that activate the action.
+{{Identical|Find}}',
 	'wikibase-entitieswithoutlabel-invalid-language' => 'Error message shown when the entity type passed in parameter is invalid. $1 is the invalid type.',
 	'wikibase-entitieswithoutlabel-invalid-type' => 'Parameters:
 * $1 - an invalid entity type. Valid entity types are: item, property and query.',
@@ -2371,12 +2373,12 @@ $messages['cs'] = array(
 	'wikibase-sitelinksedittool-full' => 'Odkazy na stránku jsou již nastaveny pro všechny známé projekty.',
 	'wikibase-disambiguation-title' => 'Rozcestník pro „$1“',
 	'wb-special-newitem-new-item-notification' => 'Nová položka $1 vytvořena a přesměrováno na její stránku. Zpět na $2.',
-	'wikibase-aliases-label' => 'Aliasy (alternativní názvy):',
-	'wikibase-aliases-input-help-message' => 'Pokud je tato entita známá pod více než jedním jménem, můžete přidat aliasy (alternativní názvy nebo jména), pod kterými ji půjde vyhledat.',
+	'wikibase-aliases-label' => 'Aliasy:',
+	'wikibase-aliases-input-help-message' => 'Pokud je tato entita známa pod více než jedním jménem, můžete přidat aliasy a synonyma, pod kterými ji půjde vyhledat.',
 	'wikibase-aliases-empty' => 'Žádné aliasy nebyly definovány.',
 	'wikibase-datatype-label' => 'Typ dat:',
-	'wikibase-claimview-snak-tooltip' => 'Vložte hodnotu odpovídající vlastnosti jménem "$1". Pokud vlastnost nemá žádnou určenou hodnotu, nebo aktuální hodnota naní známa, můžete zvolit z alternativ k vložení kliknutím na ikonu vedle kolonky pro vložení hodnoty.',
-	'wikibase-claimview-snak-new-tooltip' => 'Pro specifikování vlastnosti můžete vložit příslušnou hodnotu. Pokud vlastnost nemá žádnou určenou hodnotu, můžete zvolit z alternativ k vložení kliknutím na ikonu vedle kolonky pro vložení hodnoty.',
+	'wikibase-claimview-snak-tooltip' => 'Zadejte hodnotu odpovídající vlastnosti jménem „$1“. Pokud vlastnost nemá žádnou určenou hodnotu nebo není hodnota známa, můžete si místo jejího zadání vybrat alternativu kliknutím na ikonu vedle kolonky pro zadání hodnoty.',
+	'wikibase-claimview-snak-new-tooltip' => 'Po určení vlastnosti můžete zadat příslušnou hodnotu. Pokud vlastnost nemá žádnou určenou hodnotu nebo není hodnota známa, můžete si místo jejího zadání vybrat alternativu kliknutím na ikonu vedle kolonky pro zadání hodnoty.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|zdroj|zdroje|zdrojů}}',
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Jeden zdroj zatím nebyl uložen|$1 zdroje zatím nebyly uloženy|$1 zdrojů zatím nebylo uloženo}}',
 	'wikibase-snakview-property-input-placeholder' => 'vlastnost',
@@ -2448,13 +2450,31 @@ Vytvořené valstnosti přidejte na [[Wikidata:List of properties|seznam]]. Něk
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Jazyk:',
 	'wikibase-setentity-invalid-langcode' => 'Neznámý identifikátor jazyka „$1“. Použijte identifikátor jazyka, který systém zná, například „en“.',
+	'special-dispatchstats' => 'Statistika distribuce změn',
+	'wikibase-dispatchstats-intro' => 'Tato stránka poskytuje statistiky o distribuci změn klientům.
+Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byla změna na tuto wiki distribuována a fronta úloh na této wiki tuto notifikaci zpracovala.
+* [[#{{int:wikibase-dispatchstats-changes}}|{{int:wikibase-dispatchstats-changes}}]] zobrazuje číslo a datum nejstarší a nejaktuálnější položky, které jsou momentálně ve frontě.
+* [[#{{int:wikibase-dispatchstats-stats}}|{{int:wikibase-dispatchstats-stats}}]] poskytuje informace o nejvíce a nejméně zpožděné klientské wiki a mediánovou hodnotu mezi nimi. U každé wiki jsou zobrazeny následující informace:
+** „{{int:wikibase-dispatchstats-site-id}}“ je interní ID klientské wiki.
+** „{{int:wikibase-dispatchstats-pos}}“ je ID poslední změny, která byla na tuto wiki odeslána.
+** „{{int:wikibase-dispatchstats-lag-num}}“ je počet změn, které dosud nebyly na tuto wiki odeslány.
+** „{{int:wikibase-dispatchstats-lag-time}}“ je čas mezi poslední změnou odeslanou na tuto wiki a poslední změnou provedenou na {{grammar:6sg|{{SITENAME}}}}.
+** „{{int:wikibase-dispatchstats-touched}}“ je čas odeslání poslední dávky změn na tuto wiki.',
+	'wikibase-dispatchstats-no-stats' => 'Momentálně nejsou k dispozici žádné statistiky.',
+	'wikibase-dispatchstats-changes' => 'Statistika protokolu změn',
+	'wikibase-dispatchstats-stats' => 'Statistika distribuce',
 	'wikibase-dispatchstats-change-id' => 'ID',
 	'wikibase-dispatchstats-change-timestamp' => 'Časová značka',
 	'wikibase-dispatchstats-oldest-change' => 'Nejstarší',
 	'wikibase-dispatchstats-newest-change' => 'Nejnovější',
+	'wikibase-dispatchstats-pos' => 'Pozice',
+	'wikibase-dispatchstats-lag-num' => 'Čekajících',
 	'wikibase-dispatchstats-lag-time' => 'Zpoždění',
+	'wikibase-dispatchstats-large-lag' => '(velmi vysoké)',
 	'wikibase-dispatchstats-freshest' => 'Nejčerstvější',
-	'wikibase-dispatchstats-average' => 'Průměrné',
+	'wikibase-dispatchstats-stalest' => 'Nejzastaralejší',
+	'wikibase-dispatchstats-median' => 'Medián',
+	'wikibase-dispatchstats-average' => 'Průměr',
 	'special-listdatatypes' => 'Seznam dostupných datových typů',
 	'wikibase-listdatatypes-intro' => 'Toto je seznam všech datových typů v současné době používaných na této instalaci:',
 	'wikibase-history-title-with-label' => 'Historie verzí položky „$2“ ($1)',
@@ -2503,8 +2523,8 @@ Vytvořené valstnosti přidejte na [[Wikidata:List of properties|seznam]]. Něk
 	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$3|Odstraněno tvrzení|Odstraněna tvrzení}}',
 	'wikibase-item-summary-wbsetclaim-update' => '{{PLURAL:$3|Změněno tvrzení|Změněna tvrzení}}',
 	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|Vytvořeno tvrzení|Vytvořena tvrzení}}',
-	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Změněno jedno vymezení|Změněna $4 vymezení}} u {{PLURAL:$3|tvrzení}}',
-	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Změněno jedna reference|Změněno $4 referencí}} u {{PLURAL:$3|tvrzení}}',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Změněno jedno vymezení|Změněna $4 vymezení|Změněno $4 vymezení}} u {{PLURAL:$3|tvrzení}}',
+	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Změněna jedna reference|Změněny $4 reference|Změněno $4 referencí}} u {{PLURAL:$3|tvrzení}}',
 	'wikibase-property-summary-wbcreate-new' => 'Vytvořena nová vlastnost',
 	'wikibase-property-summary-wbeditentity-create' => 'Vytvořena nová vlastnost',
 	'wikibase-property-summary-wbeditentity-update' => 'Aktualizována vlastnost',
@@ -2540,7 +2560,7 @@ Vytvořené valstnosti přidejte na [[Wikidata:List of properties|seznam]]. Něk
 	'right-alias-remove' => 'Odstraňování aliasů',
 	'right-label-remove' => 'Odstraňování štítků',
 	'right-label-update' => 'Aktualizovat štítky',
-	'right-description-remove' => 'Odstranit popisy',
+	'right-description-remove' => 'Odstraňování popisů',
 	'right-description-update' => 'Aktualizovat popisy',
 	'action-item-override' => 'přepisovat položky',
 	'action-item-create' => 'vytvářet položky',
@@ -2821,6 +2841,7 @@ Din IP-adresse vil blive registreret i redigeringshistorikken for dette/denne $1
 for at finde ud af, hvad der er sket med det.',
 	'wikibase-noentity-createone' => 'Du kan også [[$1|oprette et nyt]].',
 	'wikibase-item-summary-wbsetitem' => 'Oprettede et nyt emne',
+	'wikibase-item-summary-wbcreate-new' => 'Oprettede et nyt emne',
 	'wikibase-item-summary-wbeditentity' => 'Oprettede et nyt emne',
 	'wikibase-item-summary-wbeditentity-create' => 'Oprettede et nyt emne',
 	'wikibase-item-summary-wbeditentity-update' => 'Opdaterede et emne',
@@ -2847,6 +2868,12 @@ for at finde ud af, hvad der er sket med det.',
 	'wikibase-item-summary-special-create-item' => 'Oprettede et emne for [$2] med {{PLURAL:$1|en værdi|værdier}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Oprettede påstand',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Fjernede {{PLURAL:$3|påstand|påstande}}',
+	'wikibase-item-summary-wbsetclaim-update' => 'Ændrede {{PLURAL:$3|en påstand|$3 påstande}}',
+	'wikibase-item-summary-wbsetclaim-create' => 'Oprettede {{PLURAL:$3|en påstand|$3 påstande}}',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Ændrede {{PLURAL:$4|en kvalifikator|$4 kvalifikatorer}} i {{PLURAL:$3|en påstand|$3 påstande}}',
+	'wikibase-item-summary-wbsetclaim-update-references' => 'Ændrede {{PLURAL:$4|en kilde|$4 kilder}} til {{PLURAL:$3|en påstand|$3 påstande}}',
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Ændrede rangering af {{PLURAL:$3|en påstand|$3 påstande}}',
+	'wikibase-property-summary-wbcreate-new' => 'Oprettede en ny egenskab',
 	'wikibase-property-summary-wbeditentity-create' => 'Oprettede en ny egenskab',
 	'wikibase-property-summary-wbeditentity-update' => 'Opdaterede en egenskab',
 	'wikibase-property-summary-wbeditentity-override' => 'Overskrev en egenskab',
@@ -7203,6 +7230,7 @@ $messages['is'] = array(
 	'wikibase-save' => 'vista',
 	'wikibase-cancel' => 'hætta við',
 	'wikibase-add' => 'bæta við',
+	'wikibase-addqualifier' => 'bæta við sérgreini',
 	'wikibase-addreference' => 'bæta við heimild',
 	'wikibase-save-inprogress' => 'Vista...',
 	'wikibase-remove-inprogress' => 'Fjarlægi...',
@@ -7261,7 +7289,7 @@ $messages['is'] = array(
 	'wikibase-anonymouseditwarning' => 'Viðvörun: Þú ert ekki innskráð(ur).
 Vistfang þitt skráist í breytingaskrá $1.',
 	'wikibase-restrictionedit-tooltip-message' => 'Þessi síða er vernduð, breytingar eru óheimilar.',
-	'wikibase-blockeduser-tooltip-message' => 'Þér er bannað að breyta síðum.',
+	'wikibase-blockeduser-tooltip-message' => 'Þú hefur ekki leyfi til að breyta því notendanafn þitt eða vistfang hefur verið bannað.',
 	'wikibase-move-error' => 'Ekki er mögulegt að færa síður í data nafnrýminu, né færa síður þangað.',
 	'wikibase-warning-constraint-violation-length' => 'Lengdar takmörkun náð fyrir tungumálakóða „$1".',
 	'wikibase-error-constraint-violation-label' => '{{PLURAL:$1|Takmörkun|Takmörkunum}} náð fyrir {{PLURAL:$1|merkimiða}} „$3" og {{PLURAL:$1|tungumálatengilinn|tungumálatenglana}} „$2".',
@@ -7357,6 +7385,7 @@ alla eiginleika og þar að auki gilda gagnagerð.',
 Þú getur <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} leitað í aðgerðarskránni]</span>.',
 	'wikibase-noentity-createone' => 'Þú getur líka [[$1|búið til nýjan]].',
 	'wikibase-item-summary-wbsetitem' => 'Bjó til nýjan hlut',
+	'wikibase-item-summary-wbcreate-new' => 'Bjó til nýjan hlut',
 	'wikibase-item-summary-wbeditentity' => 'Bjó til nýjan hlut',
 	'wikibase-item-summary-wbeditentity-create' => 'Bjó til nýjan hlut',
 	'wikibase-item-summary-wbeditentity-update' => 'Uppfærði hlut',
@@ -7382,6 +7411,9 @@ alla eiginleika og þar að auki gilda gagnagerð.',
 	'wikibase-item-summary-special-create-item' => 'Bjó til [$2] hlut með {{PLURAL:$1|gildi|gildum}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Bjó til fullyrðingu',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Fjarlægði {{PLURAL:$3|fullyrðingu|fullyrðingar}}',
+	'wikibase-item-summary-wbsetclaim-update' => 'Breytti {{PLURAL:$3|fullyrðingu|fullyrðingum}}',
+	'wikibase-item-summary-wbsetclaim-create' => 'Bjó til {{PLURAL:$3|fullyrðingu|fullyrðingar}}',
+	'wikibase-property-summary-wbcreate-new' => 'Bjó til nýjan eiginleika',
 	'wikibase-property-summary-wbeditentity-create' => 'Bjó til nýjan eiginleika',
 	'wikibase-property-summary-wbeditentity-update' => 'Uppfærði eiginleika',
 	'wikibase-property-summary-wbeditentity-override' => 'Yfirskrifaði eiginleika',
@@ -13765,10 +13797,14 @@ $messages['vi'] = array(
 
 /** Volapük (Volapük)
  * @author Iketsi
+ * @author Malafaya
  */
 $messages['vo'] = array(
 	'wikibase-edit' => 'redakön',
-	'wikibase-sitelink-page-edit-placeholder' => 'yaged',
+	'wikibase-add' => 'läükön',
+	'wikibase-sitelink-page-edit-placeholder' => 'yeged',
+	'wikibase-itembytitle-lookup-page' => 'Pad:',
+	'wikibase-itemdisambiguation-lookup-language' => 'Pük:',
 );
 
 /** Yiddish (ייִדיש)

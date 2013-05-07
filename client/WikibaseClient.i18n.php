@@ -634,6 +634,10 @@ $messages['cs'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Zobrazit změny Wikidat v posledních změnách',
 	'wikibase-watchlist-show-changes-pref' => 'Zobrazit změny Wikidat ve sledovaných stránkách',
+	'special-unconnectedpages' => 'Stránky nepropojené s položkou',
+	'wikibase-unconnectedpages-legend' => 'Nastavení nepropojených stránek',
+	'wikibase-unconnectedpages-page' => 'Seznam výsledků začít stránkou:',
+	'wikibase-unconnectedpages-submit' => 'Provést',
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ není platný kód jazyka.',
 	'wikibase-unconnectedpages-page-warning' => 'Název stránky nelze pro dotaz použít, takže se ignoruje.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Jen stránky s mezijazykovými odkazy',
@@ -2913,9 +2917,15 @@ $messages['vi'] = array(
 
 /** Volapük (Volapük)
  * @author Iketsi
+ * @author Malafaya
  */
 $messages['vo'] = array(
+	'wikibase-editlinks' => 'Redakön yümis',
+	'wikibase-editlinkstitle' => 'Redakön yümis bevüpükik',
+	'wikibase-linkitem-addlinks' => 'Läükön yümis',
 	'wikibase-linkitem-input-site' => 'Pük:',
+	'wikibase-linkitem-input-page' => 'Pad:',
+	'wikibase-rc-hide-wikidata' => '$1 eli Wikidata',
 );
 
 /** Yiddish (ייִדיש)
