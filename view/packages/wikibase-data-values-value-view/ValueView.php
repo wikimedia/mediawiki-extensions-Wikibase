@@ -31,13 +31,6 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 
-if ( !defined( 'DATAVALUES' ) && !defined( 'MEDIAWIKI' ) ) {
-	die( 'Not an entry point.' );
-}
-
-if ( !defined( 'DATAVALUES' ) ) {
-	define( 'DATAVALUES', true );
-}
 
 define( 'ValueView_VERSION', '0.1 alpha' );
 
