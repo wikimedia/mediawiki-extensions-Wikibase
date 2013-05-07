@@ -45,7 +45,7 @@
 		 */
 		destroy: function() {
 			this.element.removeClass( this.widgetName );
-			$.ui.Widget.prototype.destroy.call( this );
+			$.Widget.prototype.destroy.call( this );
 		},
 
 		/**

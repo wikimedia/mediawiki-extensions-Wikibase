@@ -51,6 +51,12 @@
 		$previewValue: null,
 
 		/**
+		 * Node of the widget used to specify the precision.
+		 * @type {jQuery}
+		 */
+		$precision: null,
+
+		/**
 		 * @see jQuery.valueview.Expert._init
 		 */
 		_init: function() {
@@ -77,14 +83,14 @@
 
 			this.$precision = $( '<div/>' )
 			.listrotator( { values: precisionValues.reverse(), deferInit: true } )
-			.on( 'listrotatorauto', function( event ) {
+			.on( 'listrotatorauto.' + this.uiBaseClass, function( event ) {
 				var value = new Time( self.$input.val() );
 				$( this ).data( 'listrotator' ).rotate( value.precision() );
 				self._setRawValue( value );
 				self._updatePreview( value );
 				self._viewNotifier.notify( 'change' );
 			} )
-			.on( 'listrotatorselected', function( event, precision ) {
+			.on( 'listrotatorselected.' + this.uiBaseClass, function( event, precision ) {
 				var value = new Time( self.$input.val(), precision );
 				self._setRawValue( value );
 				self._updatePreview( value );
@@ -106,13 +112,12 @@
 			// TODO: Move input extender out of here to a more generic place since it is not
 			// TimeInput specific.
 			.inputextender( {
-				content: [ this.$preview ],
-				extendedContent: [ this.$precision ],
+				content: [ this.$preview, this.$precision ],
 				initCallback: function() {
 					self.$precision.data( 'listrotator' ).initWidths();
 				}
 			} )
-			.on( 'timeinputupdate', function( event, value ) {
+			.on( 'timeinputupdate.' + this.uiBasClass, function( event, value ) {
 				self._updatePreview( value );
 				if( value && value.isValid() ) {
 					self.$precision.data( 'listrotator' ).rotate( value.precision() );
@@ -120,6 +125,21 @@
 				self._viewNotifier.notify( 'change' );
 			} );
 
+		},
+
+		/**
+		 * @see jQuery.valueview.Expert.destroy
+		 */
+		destroy: function() {
+			this.$precision.data( 'listrotator' ).destroy();
+			this.$precision.remove();
+			this.$previewValue.remove();
+			this.$preview.remove();
+			this.$input.data( 'inputextender' ).destroy();
+			this.$input.data( 'timeinput' ).destroy();
+			this.$input.remove();
+
+			PARENT.prototype.destroy.call( this );
 		},
 
 		/**
@@ -147,7 +167,7 @@
 		},
 
 		/**
-		 * @see Query.valueview.Expert.parser
+		 * @see jQuery.valueview.Expert.parser
 		 */
 		parser: function() {
 			return new vp.TimeParser();

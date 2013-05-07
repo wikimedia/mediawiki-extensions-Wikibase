@@ -9,7 +9,6 @@
 ( function( $, QUnit ) {
 	'use strict';
 
-	// TODO: Tests for toggling additional contents
 	// TODO: Tests for hideWhenInputEmptyOption
 
 	/**
@@ -18,68 +17,82 @@
 	var newTestInputextender = function( options ) {
 		if( !options ) {
 			options = {
-				content: [ $( '<span/>' ).addClass( 'defaultContent' ).text( 'default content' ) ],
-				extendedContent: [ $( '<span/>' ).addClass( 'extendedContent' ).text( 'extended content' ) ]
+				content: [ $( '<span/>' ).addClass( 'defaultContent' ).text( 'default content' ) ]
 			}
 		}
 
-		return $( '<input/>' )
+		var $input = $( '<input/>' )
 			.addClass( 'test_inputextender' )
 			.appendTo( $( 'body' ) )
 			.inputextender( options );
+
+		return $input.data( 'inputextender' );
 	};
 
 	QUnit.module( 'jquery.ui.inputextender', QUnit.newMwEnvironment( {
 		teardown: function() {
 			$( '.test_inputextender' ).each( function( i, node ) {
-				$( node ).data( 'inputextender' ).destroy();
+				if( $( node ).data( 'inputextender' ) ) {
+					$( node ).data( 'inputextender' ).destroy();
+				}
 				$( node ).remove();
 			} );
 		}
 	} ) );
 
-	QUnit.test( 'Initialization', 1, function( assert ) {
-		var $input = newTestInputextender(),
-			extender = $input.data( 'inputextender' );
+	QUnit.test( 'Initialization', 4, function( assert ) {
+		var extender = newTestInputextender(),
+			widgetBaseClass = extender.widgetBaseClass;
+
+		assert.equal(
+			$( '.test_inputextender' ).data( 'inputextender' ),
+			extender,
+			'Initialized widget.'
+		);
 
 		assert.ok(
-			!extender.$contentContainer.is( ':visible' ),
-			'Content is not visible.'
+			!extender.$extension.is( ':visible' ),
+			'Extension is not visible.'
+		);
+
+		extender.destroy();
+
+		assert.ok(
+			$( '.test_inputextender' ).data( 'inputextender' ) === undefined,
+			'Destroyed widget.'
+		);
+
+		assert.equal(
+			$( '.' + widgetBaseClass + '-extension' ).length,
+			0,
+			'Removed extension node from DOM.'
 		);
 	} );
 
-	QUnit.test( 'Show/Hide basic content', 4, function( assert ) {
-		var $input = newTestInputextender(),
-			extender = $input.data( 'inputextender' );
-
-		extender.showContent( function() {
-			assert.ok(
-				extender.$contentContainer.is( ':visible' ),
-				'Content visible after focusing input element.'
-			);
-
-			assert.ok(
-				extender.$content.is( ':visible' ),
-				'Default content is visible.'
-			);
-
-			assert.ok(
-				!extender.$extendedContent.is( ':visible' ),
-				'Additional content is hidden.'
-			);
-		} );
+	QUnit.test( 'Show/Hide', 2, function( assert ) {
+		var extender = newTestInputextender();
 
 		QUnit.stop();
 
-		extender.hideContent( function() {
+		extender.showExtension( function() {
 			assert.ok(
-				!extender.$contentContainer.is( ':visible' ),
-				'Content is hidden after blurring the input element.'
+				extender.$extension.is( ':visible' ),
+				'showExtension()'
 			);
+
+			QUnit.stop();
+
+			extender.hideExtension( function() {
+				assert.ok(
+					!extender.$extension.is( ':visible' ),
+					'hideExtension()'
+				);
+
+				QUnit.start();
+			} );
 
 			QUnit.start();
 		} );
-
 	} );
 
 }( jQuery, QUnit ) );

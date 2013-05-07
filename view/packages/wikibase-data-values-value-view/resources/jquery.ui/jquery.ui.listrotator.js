@@ -173,7 +173,7 @@
 				self._trigger( 'auto' );
 			} )
 			.addClass( 'ui-state-active' );
-			this.$auto.children( 'a' ).text( this.options.messages['show options'] );
+			this.$auto.children( 'a' ).text( this.options.messages['auto'] );
 
 			// Construct the basic sections:
 			this.$curr = this._createSection( 'curr', function( event ) {
@@ -294,10 +294,10 @@
 				if( width > currMaxWidth ) {
 					currMaxWidth = width;
 				}
-				if( i > 0 && width > prevMaxWidth ) {
+				if( i < stringWidths.length && width > prevMaxWidth ) {
 					prevMaxWidth = width;
 				}
-				if( i < stringWidths.length && width > nextMaxWidth ) {
+				if( i > 0 && width > nextMaxWidth ) {
 					nextMaxWidth = width;
 				}
 			} );

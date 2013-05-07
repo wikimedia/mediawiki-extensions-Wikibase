@@ -105,11 +105,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.eachchange',
+				'jquery.ui.position',
 				'jquery.ui.widget',
-			),
-			'messages' => array(
-				'valueview-inputextender-showoptions',
-				'valueview-inputextender-hideoptions',
 			),
 		),
 

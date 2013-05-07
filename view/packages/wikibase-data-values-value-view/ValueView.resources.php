@@ -203,6 +203,7 @@ return call_user_func( function() {
 				'jquery.ui.listrotator',
 			),
 			'messages' => array(
+				'valueview-expert-timeinput-precision',
 				'valueview-preview-label',
 				'valueview-preview-novalue',
 			),
