@@ -294,7 +294,7 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.RepoApiError',
 				'wikibase.ui.Base',
-				'wikibase.utilities',
+				'jquery.ui.toggler',
 			),
 			'messages' => array(
 				'wikibase-tooltip-error-details'
@@ -608,6 +608,7 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.AbstractedRepoApi',
 				'wikibase.utilities',
+				'jquery.ui.toggler',
 			),
 			'messages' => array(
 				'wikibase-statementview-referencesheading-pendingcountersubject',
@@ -691,6 +692,18 @@ return call_user_func( function() {
 			'messages' => array(
 				'wikibase-entity-item',
 			)
+		),
+
+		'jquery.ui.toggler' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.toggler.js',
+			),
+			'styles' => array(
+				'jquery.ui/themes/default/jquery.ui.toggler.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+			),
 		),
 
 	);
