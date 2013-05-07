@@ -1,0 +1,10 @@
+WIKIDATA_REPO_URL: "http://wikidata-test-repo.wikimedia.de/wiki/"
+
+# the namespace of the data items (e.g. "Data:" or "" for main namespace)
+ITEM_NAMESPACE: ""
+PROPERTY_NAMESPACE: "Property:"
+ITEM_ID_PREFIX: "Q"
+PROPERTY_ID_PREFIX: "P"
+LANGUAGE: "en"
+LANGUAGE_CODE: "en"
+LANGUAGE_NAME: "English"
