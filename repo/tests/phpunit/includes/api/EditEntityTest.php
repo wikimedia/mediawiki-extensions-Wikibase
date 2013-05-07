@@ -677,17 +677,4 @@ class EditEntityTest extends ModifyItemBase {
 		}
 	}
 
-
-	function testProtectedItem() { //TODO
-		$this->markTestIncomplete();
-	}
-
-	function testBlockedUser() { //TODO
-		$this->markTestIncomplete();
-	}
-
-	function testEditPermission() { //TODO
-		$this->markTestIncomplete();
-	}
-
 }

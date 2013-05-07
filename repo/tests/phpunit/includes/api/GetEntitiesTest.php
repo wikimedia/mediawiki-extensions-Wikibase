@@ -206,6 +206,7 @@ class GetEntitiesTest extends ModifyItemBase {
 			$this->fail( "expected request to fail" );
 		} catch ( \UsageException $ex ) {
 			// ok
+			$this->assertTrue( true );
 		}
 	}
 

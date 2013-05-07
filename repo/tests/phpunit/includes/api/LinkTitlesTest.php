@@ -187,6 +187,8 @@ class LinkTitlesTest extends ModifyItemBase {
 		if ( $handle ) {
 			$this->resetItem( $handle );
 		}
+
+		$this->assertTrue( true );
 	}
 
 }
