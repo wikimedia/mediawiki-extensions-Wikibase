@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dwuq.WGE",
+        "filename": "lib/includes/EntityDiffVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-07T21:12:03Z",
+      "side": 1,
+      "message": "This should be using the context information rather then making static calls that use global state.\n\n$this-\u003econtext-\u003egetLanguage()-\u003egetMessage( \u0027wikibase-diffview-label\u0027 )-\u003eplain()",
+      "revId": "24ba9042ee2640ab387cc64557a6e0910f7166f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
