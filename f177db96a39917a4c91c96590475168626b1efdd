@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DwtqLZRc",
+        "filename": "selenium_cuc/config/config.yml.sample",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T15:00:29Z",
+      "side": 1,
+      "message": "Is there a reason the file name is config.yml.sample instead of config.yml?",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwrqQIUM",
+        "filename": "selenium_cuc/config/config.yml.sample",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T15:00:29Z",
+      "side": 1,
+      "message": "Is there a reason all lines have one leading space? Also, why are all properties in ALL_CAPS?",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dwpp53S4",
+        "filename": "selenium_cuc/features/label.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T15:00:29Z",
+      "side": 1,
+      "message": "There is no need for background if you have only one scenario. You can include the step in the scenario.",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dwjp8ERw",
+        "filename": "selenium_cuc/features/label.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T15:00:29Z",
+      "side": 1,
+      "message": "Ruby convention is to use two spaces instead of tabs: https://github.com/styleguide/ruby",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwlrJFVs",
+        "filename": "selenium_cuc/features/support/env.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T15:00:29Z",
+      "side": 1,
+      "message": "I think you need this \"if\" block only for sites that have universal language selector enabled. See this feature for example of how it is used: https://github.com/wikimedia/qa-browsertests/blob/master/features/uls_accept_language.feature",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dwnqnuao",
+        "filename": "selenium_cuc/features/support/pages/item_page.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T15:00:29Z",
+      "side": 1,
+      "message": "Do you really need to use both inheritance and composition?",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwjqdMVU",
+        "filename": "selenium_cuc/features/support/utils/utils.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-07T15:00:29Z",
+      "side": 1,
+      "message": "Do you know there are simpler ways to generate random strings in Ruby? A few examples: http://stackoverflow.com/q/88311/17469",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
