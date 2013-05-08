@@ -183,6 +183,19 @@ final class WikibaseClient {
 		);
 	}
 
+	/**
+	 * @since 0.4
+	 *
+	 * @return RepoLinker
+	 */
+	public function newRepoLinker() {
+		return new RepoLinker(
+			$this->settings->getSetting( 'repoUrl' ),
+			$this->settings->getSetting( 'repoArticlePath' ),
+			$this->settings->getSetting( 'repoScriptPath' ),
+			$this->settings->getSetting( 'repoNamespaces' )
+		);
+	}
 
 	/**
 	 * Returns an instance of the default store, or an alternate store

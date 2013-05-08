@@ -72,12 +72,7 @@ class ExternalChangesLine {
 		$line = '';
 
 		if ( in_array( $changeType, array( 'remove', 'restore' ) ) ) {
-			$repoLinker = new RepoLinker(
-				Settings::get( 'repoUrl' ),
-				Settings::get( 'repoArticlePath' ),
-				Settings::get( 'repoScriptPath' ),
-				Settings::get( 'repoNamespaces' )
-			);
+			$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
 			$deletionLog = $repoLinker->repoLink( 'Special:Log/delete', wfMessage( 'dellogpage' )->text() );
 			$line .= wfMessage( 'parentheses' )->rawParams( $deletionLog );
@@ -222,12 +217,7 @@ class ExternalChangesLine {
 	 * @return string
 	 */
 	protected static function diffLink( $titleText, $entityData, $rc ) {
-		$repoLinker = new RepoLinker(
-			Settings::get( 'repoUrl' ),
-			Settings::get( 'repoArticlePath' ),
-			Settings::get( 'repoScriptPath' ),
-			Settings::get( 'repoNamespaces' )
-		);
+		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
 		return $repoLinker->repoLink(
 			null,
@@ -257,12 +247,7 @@ class ExternalChangesLine {
 	 * @return string
 	 */
 	protected static function historyLink( $titleText, $entityData ) {
-		$repoLinker = new RepoLinker(
-			Settings::get( 'repoUrl' ),
-			Settings::get( 'repoArticlePath' ),
-			Settings::get( 'repoScriptPath' ),
-			Settings::get( 'repoNamespaces' )
-		);
+		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
 		$link = $repoLinker->repoLink(
 			null,
@@ -309,12 +294,7 @@ class ExternalChangesLine {
 	 * @return string
 	 */
 	protected static function userLink( $userName ) {
-		$repoLinker = new RepoLinker(
-			Settings::get( 'repoUrl' ),
-			Settings::get( 'repoArticlePath' ),
-			Settings::get( 'repoScriptPath' ),
-			Settings::get( 'repoNamespaces' )
-		);
+		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
 		// @todo: localise this once namespaces are localised on the repo
 		$link = "User:$userName";
@@ -340,12 +320,7 @@ class ExternalChangesLine {
 			$text = wfMessage( 'contribslink' );
 		}
 
-		$repoLinker = new RepoLinker(
-			Settings::get( 'repoUrl' ),
-			Settings::get( 'repoArticlePath' ),
-			Settings::get( 'repoScriptPath' ),
-			Settings::get( 'repoNamespaces' )
-		);
+		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
 		return $repoLinker->repoLink( $link, $text );
 	}
@@ -358,12 +333,7 @@ class ExternalChangesLine {
 	 * @return string
 	 */
 	protected static function userTalkLink( $userName ) {
-		$repoLinker = new RepoLinker(
-			Settings::get( 'repoUrl' ),
-			Settings::get( 'repoArticlePath' ),
-			Settings::get( 'repoScriptPath' ),
-			Settings::get( 'repoNamespaces' )
-		);
+		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
 		// @todo: localize this once we can localize namespaces on the repo
 		$link = "User_talk:$userName";
@@ -414,12 +384,7 @@ class ExternalChangesLine {
 			return false;
 		}
 
-		$repoLinker = new RepoLinker(
-			Settings::get( 'repoUrl' ),
-			Settings::get( 'repoArticlePath' ),
-			Settings::get( 'repoScriptPath' ),
-			Settings::get( 'repoNamespaces' )
-		);
+		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
 		return $repoLinker->repoLink( $entityText, $entityId, array( 'class' => 'wb-entity-link' ) );
 	}
@@ -451,12 +416,7 @@ class ExternalChangesLine {
 			$titleText = strtoupper( $entityId->getPrefixedId() );
 
 			if ( $includeNamespace ) {
-				$repoLinker = new RepoLinker(
-					Settings::get( 'repoUrl' ),
-					Settings::get( 'repoArticlePath' ),
-					Settings::get( 'repoScriptPath' ),
-					Settings::get( 'repoNamespaces' )
-				);
+				$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
 				$ns = $repoLinker->getNamespace( $entityId->getEntityType() );
 				if ( !empty( $ns ) ) {
