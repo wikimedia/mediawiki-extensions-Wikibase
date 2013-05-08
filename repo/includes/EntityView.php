@@ -494,6 +494,11 @@ abstract class EntityView extends \ContextSource {
 					$value = $claim->getMainSnak()->getDataValue()->getValue();
 				}
 
+				// TODO: bad to have a switch for different data types here
+				if( $value instanceof \DataValues\TimeValue ) {
+					$value = $value->getTime();
+				}
+
 				$additionalCssClasses = '';
 				if ( $i++ === 0 ) {
 					$additionalCssClasses .= 'wb-first ';
