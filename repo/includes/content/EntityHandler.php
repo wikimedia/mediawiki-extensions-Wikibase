@@ -139,10 +139,16 @@ abstract class EntityHandler extends \ContentHandler {
 	 *
 	 * @since 0.1
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	final public function getEntityNamespace() {
-		return NamespaceUtils::getEntityNamespace( $this->getModelID() );
+		$ns = NamespaceUtils::getEntityNamespace( $this->getModelID() );
+
+		if ( $ns === false ) {
+			throw new MWException( "No namespace found for entity model " . $this->getModelID() );
+		}
+
+		return $ns;
 	}
 
 	/**

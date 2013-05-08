@@ -79,6 +79,8 @@ unset( $dependencies );
 define( 'WBL_VERSION', '0.4 alpha'
 	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
+define( 'WBL_DIR', __DIR__ );
+
 $wgExtensionCredits['wikibase'][] = array(
 	'path' => __DIR__,
 	'name' => 'WikibaseLib',
@@ -167,8 +169,9 @@ function wfTemplate( $key /*...*/ ) {
 // Resource Loader Modules:
 $wgResourceModules = array_merge( $wgResourceModules, include( __DIR__ . "/resources/Resources.php" ) );
 
+$wgWBSettings = array();
 
-include_once( __DIR__ . '/config/WikibaseLib.default.php' );
+$wgValueFormatters['wikibase-entityid'] = 'Wikibase\Lib\EntityIdFormatter';
 
 if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 	include_once( __DIR__ . '/config/WikibaseLib.experimental.php' );

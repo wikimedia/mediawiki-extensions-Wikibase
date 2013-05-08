@@ -29,50 +29,50 @@
  * @licence GNU GPL v2+
  */
 
-if ( !defined( 'WB_VERSION' ) ) {
-	die( 'Not an entry point.' );
-}
+return call_user_func( function() {
 
-$dir = __DIR__ . '/';
+	$defaults = array(
 
-$wgWBRepoSettings = array();
+		// Set API in debug mode
+		// do not turn on in production!
+		'apiInDebug' => false,
 
-// Set API in debug mode
-// do not turn on in production!
-$wgWBRepoSettings['apiInDebug'] = false;
+		// Additional settings for API when debugging is on to
+		// facilitate testing.
+		'apiDebugWithPost' => false,
+		'apiDebugWithRights' => false,
+		'apiDebugWithTokens' => false,
 
-// Additional settings for API when debugging is on to
-// facilitate testing.
-$wgWBRepoSettings['apiDebugWithPost'] = false;
-$wgWBRepoSettings['apiDebugWithRights'] = false;
-$wgWBRepoSettings['apiDebugWithTokens'] = false;
+		'defaultStore' => 'sqlstore',
 
-$wgWBRepoSettings['defaultStore'] = 'sqlstore';
+		'idBlacklist' => array(
+			1,
+			23,
+			42,
+			1337,
+			9001,
+			31337,
+			720101010,
+		),
 
-$wgWBRepoSettings['idBlacklist'] = array(
-	1,
-	23,
-	42,
-	1337,
-	9001,
-	31337,
-	720101010,
-);
+		// Allow the TermIndex table to work without the term_search_key field,
+		// for sites that can not easily roll out schema changes on large tables.
+		// This means that all searches will use exact matching
+		// (depending on the database's collation).
+		'withoutTermSearchKey' => false,
 
-// Allow the TermIndex table to work without the term_search_key field,
-// for sites that can not easily roll out schema changes on large tables.
-// This means that all searches will use exact matching
-// (depending on the database's collation).
-$wgWBRepoSettings['withoutTermSearchKey'] = false;
+		'entityNamespaces' => array(),
 
-$wgWBRepoSettings['entityNamespaces'] = array();
+		// These are used for multilanguage strings that should have a soft length constraint
+		'multilang-limits' => array(
+			'length' => 250,
+		),
 
-// These are used for multilanguage strings that should have a soft length constraint
-$wgWBRepoSettings['multilang-limits'] = array(
-	'length' => 250,
-);
+		'multilang-truncate-length' => 32,
 
-$wgWBRepoSettings['multilang-truncate-length'] = 32;
+		// Should the page names (titles) be normalized against the external site
+		'normalizeItemByTitlePageNames' => false,
+	);
 
-// Should the page names (titles) be normalized against the external site
-$wgWBRepoSettings['normalizeItemByTitlePageNames'] = false;
+	return $defaults;
+} );

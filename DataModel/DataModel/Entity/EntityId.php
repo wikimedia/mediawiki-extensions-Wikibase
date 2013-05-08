@@ -88,7 +88,8 @@ class EntityId extends \DataValues\DataValueObject {
 
 			// TODO: fix dependency on global state
 			// Either the prefix or the needed option should be passe din the constructor.
-			foreach ( Settings::get( 'entityPrefixes' ) as $prefix => $type ) {
+			$prefixes = Settings::get( 'entityPrefixes' );
+			foreach ( $prefixes as $prefix => $type ) {
 				$prefixMap[$type] = $prefix;
 			}
 		}
