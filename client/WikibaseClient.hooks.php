@@ -180,7 +180,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSpecialMovepageAfterMove( \MovePageForm $movePage, \Title &$oldTitle, \Title &$newTitle ) {
-		$siteLinkCache = WikibaseClient::getDefaultInstance()->getStore()->newSiteLinkTable();
+		$siteLinkCache = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
 		$globalId = Settings::get( 'siteGlobalID' );
 		$itemId = $siteLinkCache->getItemIdForLink(
 			$globalId,
@@ -376,7 +376,7 @@ final class ClientHooks {
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
 			Settings::get( 'excludeNamespaces' ),
-			WikibaseClient::getDefaultInstance()->getStore()->newSiteLinkTable(),
+			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
 			\Sites::singleton() );
 
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $parser->getTitle(), $parser->getOutput() );
@@ -462,7 +462,7 @@ final class ClientHooks {
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
 			Settings::get( 'excludeNamespaces' ),
-			WikibaseClient::getDefaultInstance()->getStore()->newSiteLinkTable(),
+			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
 			\Sites::singleton() );
 
 		$noExternalLangLinks = $langLinkHandler->getNoExternalLangLinks( $pout );
