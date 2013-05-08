@@ -30,6 +30,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class Settings extends SettingsArray {
 
@@ -46,6 +47,24 @@ class Settings extends SettingsArray {
 		if ( $instance === null ) {
 			$settings = array();
 
+			// load appropriate defaults -------------------
+			if ( defined( 'WBL_VERSION' ) ) {
+				$settings = array_merge( $settings, self::loadDefaults( WBL_DIR . '/config/WikibaseLib.default.php' ) );
+			}
+
+			if ( defined( 'WB_VERSION' ) ) {
+				$settings = array_merge( $settings, self::loadDefaults( WB_DIR . '/config/Wikibase.default.php' ) );
+			}
+
+			if ( defined( 'WBC_VERSION' ) ) {
+				$settings = array_merge( $settings, self::loadDefaults( WBC_DIR . '/config/WikibaseClient.default.php' ) );
+			}
+
+			// merge appropriate settings -------------------
+			if ( defined( 'WBL_VERSION' ) ) {
+				$settings = array_merge( $settings, $GLOBALS['wgWBSettings'] );
+			}
+
 			if ( defined( 'WB_VERSION' ) ) {
 				$settings = array_merge( $settings, $GLOBALS['wgWBRepoSettings'] );
 			}
@@ -54,12 +73,20 @@ class Settings extends SettingsArray {
 				$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
 			}
 
-			$settings = array_merge( $settings, $GLOBALS['wgWBSettings'] );
-
 			$instance = new static( $settings );
 		}
 
 		return $instance;
+	}
+
+	protected static function loadDefaults( $path ) {
+		$defaults = include( $path );
+
+		if ( !is_array( $defaults ) ) {
+			throw new \MWException( "Defaults file not found: $path" );
+		}
+
+		return $defaults;
 	}
 
 	/**
