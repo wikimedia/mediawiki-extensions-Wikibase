@@ -194,6 +194,7 @@ final class RepoHooks {
 			'rdf/RdfBuilder',
 			'rdf/RdfSerializer',
 
+			'specials/SpecialEntityData',
 			'specials/SpecialNewItem',
 			'specials/SpecialNewProperty',
 			'specials/SpecialItemDisambiguation',

@@ -100,7 +100,7 @@ class RdfSerializer {
 	 */
 	public static function getFormat( $name ) {
 		if ( !self::isSupported() ) {
-			wfWarn( "EasyRdf not found" );
+			wfDebug( __METHOD__ . ": EasyRdf not found\n" );
 			return null;
 		}
 

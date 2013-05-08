@@ -123,6 +123,7 @@ $wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
 $wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
 $wgSpecialPages['DispatchStats']					= 'SpecialDispatchStats';
+$wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 
 // Special page groups
 $wgSpecialPageGroups['NewItem']						= 'wikibaserepo';
