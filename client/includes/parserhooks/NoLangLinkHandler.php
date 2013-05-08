@@ -48,7 +48,7 @@ class NoLangLinkHandler {
 			Settings::get( 'siteGlobalID' ),
 			Settings::get( 'namespaces' ),
 			Settings::get( 'excludeNamespaces' ),
-			WikibaseClient::getDefaultInstance()->getStore()->newSiteLinkTable(),
+			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
 			\Sites::singleton()
 		);
 

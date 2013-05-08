@@ -108,7 +108,7 @@ class ChangeHandler {
 
 	public function __construct( PageUpdater $updater = null,
 			EntityLookup $entityLookup = null,
-			SiteLinkLookup $siteLinkLookup = null,
+			EntityUsageIndex $entityUsageIndex = null,
 			\Site $localSite = null ) {
 
 		wfProfileIn( __METHOD__ );
@@ -123,8 +123,8 @@ class ChangeHandler {
 			$entityLookup = WikibaseClient::getDefaultInstance()->getStore()->getEntityLookup();
 		}
 
-		if ( !$siteLinkLookup ) {
-			$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->newSiteLinkTable();
+		if ( !$entityUsageIndex ) {
+			$entityUsageIndex = WikibaseClient::getDefaultInstance()->getStore()->getEntityUsageIndex();
 		}
 
 		if ( !$localSite ) {
@@ -140,7 +140,7 @@ class ChangeHandler {
 		$this->site = $localSite;
 		$this->updater = $updater;
 		$this->entityLookup = $entityLookup;
-		$this->siteLinkLookup = $siteLinkLookup;
+		$this->entityUsageIndex = $entityUsageIndex;
 
 		// TODO: allow these to be passed in as parameters!
 		$this->setNamespaces(
@@ -549,15 +549,12 @@ class ChangeHandler {
 		if ( $change instanceof ItemChange ) {
 			// update local pages connected to a relevant data item.
 
-			$itemId = $change->getEntityId()->getNumericId();
+			$itemId = $change->getEntityId();
 
 			$siteGlobalId = $this->site->getGlobalId();
 
-			// @todo: getLinks is a bit ugly, need a getter for a pair of item id + site key
-			$siteLinks = $this->siteLinkLookup->getLinks( array( $itemId ), array( $siteGlobalId ) );
-			if ( !empty( $siteLinks ) ) {
-				$pagesToUpdate[] = $siteLinks[0][1];
-			}
+			$usedOnPages = $this->entityUsageIndex->getEntityUsage( array( $itemId ) );
+			$pagesToUpdate = array_merge( $pagesToUpdate, $usedOnPages );
 
 			// if an item's sitelinks change, update the old and the new target
 			$siteLinkDiff = ( $change instanceof ItemChange ) ? $change->getSiteLinkDiff() : null;
