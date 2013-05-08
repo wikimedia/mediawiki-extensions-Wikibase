@@ -50,6 +50,8 @@ if ( !defined( 'WBL_VERSION' ) ) {
 define( 'WB_VERSION', '0.4 alpha'
 	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
+define( 'WB_DIR', __DIR__ );
+
 $wgExtensionCredits['wikibase'][] = array(
 	'path' => __DIR__,
 	'name' => 'Wikibase Repository',
@@ -141,7 +143,6 @@ $wgSpecialPageGroups['DispatchStats']				= 'wikibaserepo';
 
 // Hooks
 $wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
-$wgHooks['WikibaseDefaultSettings'][] 				= 'Wikibase\RepoHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\RepoHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'Wikibase\RepoHooks::registerUnitTests';
 $wgHooks['NamespaceIsMovable'][]					= 'Wikibase\RepoHooks::onNamespaceIsMovable';
@@ -176,7 +177,7 @@ $wgWBStores = array();
 
 $wgWBStores['sqlstore'] = 'Wikibase\SqlStore';
 
-include_once( __DIR__ . '/config/Wikibase.default.php' );
+$wgWBRepoSettings = array();
 
 if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 	include_once( __DIR__ . '/config/Wikibase.experimental.php' );

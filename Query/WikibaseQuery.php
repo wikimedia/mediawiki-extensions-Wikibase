@@ -94,7 +94,13 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreEnd
 };
 
-$wgWBSettings['entityPrefixes']['y'] = 'query';
+$wgHooks['WikibaseDefaultSettings'][] = function( array &$settings ) {
+	$settings['entityPrefixes']['y'] = 'query';
+	$settings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY;
+
+	return true;
+};
+
 
 define( 'CONTENT_MODEL_WIKIBASE_QUERY', "wikibase-query" );
 
@@ -104,9 +110,6 @@ $wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
 
 $wgExtraNamespaces[WB_NS_QUERY] = 'Query';
 $wgExtraNamespaces[WB_NS_QUERY_TALK] = 'Query_talk';
-
-$wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY;
-
 
 $wgAutoloadClasses['Wikibase\HistoryQueryAction'] 		= __DIR__ . '/Query/HistoryQueryAction.php';
 $wgAutoloadClasses['Wikibase\EditQueryAction'] 			= __DIR__ . '/Query/EditQueryAction.php';
