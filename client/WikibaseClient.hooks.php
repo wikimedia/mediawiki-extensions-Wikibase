@@ -188,12 +188,7 @@ final class ClientHooks {
 		);
 
 		if ( $itemId !== false ) {
-			$repoLinker = new RepoLinker(
-				Settings::get( 'repoUrl' ),
-				Settings::get( 'repoArticlePath' ),
-				Settings::get( 'repoScriptPath' ),
-				Settings::get( 'repoNamespaces' )
-			);
+			$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
 			$itemByTitle = 'Special:ItemByTitle/' . $globalId . '/' . $oldTitle->getPrefixedDBkey();
 			$itemByTitleLink = $repoLinker->repoArticleUrl( $itemByTitle );
@@ -521,12 +516,7 @@ final class ClientHooks {
 						return true;
 					}
 
-					$repoLinker = new RepoLinker(
-						Settings::get( 'repoUrl' ),
-						Settings::get( 'repoArticlePath' ),
-						Settings::get( 'repoScriptPath' ),
-						Settings::get( 'repoNamespaces' )
-					);
+					$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
 					// links to the associated item on the repo
 					$template->data['language_urls'][] = array(

@@ -15,6 +15,7 @@ use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\TypedValueFormatter;
+use Wikibase\RepoLinker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\Test\MockRepository;
@@ -183,6 +184,19 @@ final class WikibaseClient {
 		);
 	}
 
+	/**
+	 * @since 0.4
+	 *
+	 * @return RepoLinker
+	 */
+	public function newRepoLinker() {
+		return new RepoLinker(
+			$this->settings->getSetting( 'repoUrl' ),
+			$this->settings->getSetting( 'repoArticlePath' ),
+			$this->settings->getSetting( 'repoScriptPath' ),
+			$this->settings->getSetting( 'repoNamespaces' )
+		);
+	}
 
 	/**
 	 * Returns an instance of the default store, or an alternate store
