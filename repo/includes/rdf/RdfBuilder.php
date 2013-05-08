@@ -317,7 +317,9 @@ class RdfBuilder {
 				continue;
 			}
 
-			$pageRecourse = $this->graph->resource( $link->getUrl() );
+			//XXX: ideally, we'd use https if the target site supports it.
+			$url = wfExpandUrl( $link->getUrl(), PROTO_HTTP );
+			$pageRecourse = $this->graph->resource( $url );
 			$entityResource->addResource( 'foaf:primaryTopicOf', $pageRecourse, $languageCode );
 		}
 	}
@@ -360,7 +362,7 @@ class RdfBuilder {
 			$this->addPropertyValueSnak( $entity, $claim, $snak );
 		} else {
 			//TODO: NoValueSnak, SomeValueSnak
-			wfWarn( "Unsupported snak type: " . get_class( $snak ) );
+			wfDebug( __METHOD__ . ": Unsupported snak type: " . get_class( $snak ) );
 		}
 	}
 
@@ -394,7 +396,7 @@ class RdfBuilder {
 		$statementResource = $this->getStatementResource( $claim );
 		$entityResource->addResource( $propertyQName, $statementResource );
 
-		$value = $snak->getDataValue()->getValue();
+		$value = $snak->getDataValue();
 
 		$this->entityMentioned( $propertyId );
 		$this->addClaimValue( $claim, $propertyId, $value );
@@ -428,7 +430,7 @@ class RdfBuilder {
 				break;
 			default:
 				//TODO: more media types
-				wfWarn( "Unsupported data type: $typeId" );
+				wfDebug( __METHOD__ . ": Unsupported data type: $typeId\n" );
 		}
 	}
 
@@ -467,7 +469,7 @@ class RdfBuilder {
 			$this->addSiteLinks( $entity );
 		}
 
-		$this->addClaims( $entity );
+		//$this->addClaims( $entity ); //TODO: finish this.
 	}
 
 	/**
