@@ -145,7 +145,7 @@ function testExpert( testDefinition ) {
 
 				assert.ok(
 					args.expert.rawValueCompare( testValue, otherValue ) === successExpected,
-					'Raw value "' + valueDescription( testValue ) + ' does ' +
+					'Raw value ' + valueDescription( testValue ) + ' does ' +
 						( successExpected ? '' : 'not ' ) + 'equal raw value "' +
 						valueDescription( otherValue )
 				);
