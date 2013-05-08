@@ -114,6 +114,7 @@ return call_user_func( function() {
 		'SpecialItemsWithoutSitelinks' => 'includes/specials/SpecialItemsWithoutSitelinks.php',
 		'SpecialListDatatypes' => 'includes/specials/SpecialListDatatypes.php',
 		'SpecialDispatchStats' => 'includes/specials/SpecialDispatchStats.php',
+		'SpecialEntityData' => 'includes/specials/SpecialEntityData.php',
 
 		// includes/store
 		'Wikibase\EntityPerPage' => 'includes/store/EntityPerPage.php',
