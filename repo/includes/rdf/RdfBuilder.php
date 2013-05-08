@@ -55,10 +55,10 @@ class RdfBuilder {
 	const NS_STATEMENT = 's'; // entity -> statement
 
 	const NS_SKOS = 'skos'; // SKOS vocabulary
-	const NS_FOAF = 'foaf'; // FOAF vocabulary
+	const NS_SCHEMA_ORG = 'schema'; // schema.org vocabulary
 
 	const SKOS_URI = 'http://www.w3.org/2004/02/skos/core#';
-	const FOAF_URI = 'http://xmlns.com/foaf/0.1/';
+	const SCHEMA_ORG_URI = 'http://schema.org/';
 
 	const WIKIBASE_STATEMENT_QNAME = 'wikibase:Statement';
 
@@ -106,7 +106,7 @@ class RdfBuilder {
 			self::NS_QUALIFIER => $this->baseUri . '/qualifier/',
 			self::NS_STATEMENT => $this->baseUri . '/statement/',
 			self::NS_SKOS => self::SKOS_URI,
-			self::NS_FOAF => self::FOAF_URI,
+			self::NS_SCHEMA_ORG => self::SCHEMA_ORG_URI,
 		);
 
 		//XXX: Ugh, static. Should go into $this->graph.
@@ -197,6 +197,19 @@ class RdfBuilder {
 	}
 
 	/**
+	 * Gets a URL of the rdf description of the given entity
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return string
+	 */
+	public function getDataURL( EntityId $id ) {
+		$base = $this->namespaces[ self::NS_DATA ];
+		$url = $base . $this->idFormatter->format( $id );
+		return $url;
+	}
+
+	/**
 	 * Language filter
 	 *
 	 * @param $lang
@@ -240,9 +253,20 @@ class RdfBuilder {
 	public function addEntityMetaData( Entity $entity, Revision $rev = null ) {
 		$entityResource = $this->getEntityResource( $entity->getId() );
 		$entityResource->addResource( 'rdf:type', $this->getEntityTypeQName( $entity->getType() ) );
-		$entityResource->addResource( 'foaf:primaryTopicOf', $this->getEntityQName( self::NS_DATA, $entity->getId() ) );
 
-		//TODO: revision timestamp, revision id, versioned data URI
+		$dataResource = $this->graph->resource( '#' ); // "this document"
+		$dataURL = $this->getDataURL( $entity->getId() );
+		$dataResource->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
+		$dataResource->addResource( self::NS_SCHEMA_ORG . ':url', $dataURL );
+		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
+
+		if ( $rev ) {
+			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':version', $rev->getId() );
+			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':dateModified', wfTimestamp( TS_ISO_8601, $rev->getTimestamp() ) );
+			//TODO: add support for date types to EasyRDF
+		}
+
+		//TODO: revision timestamp, revision id, versioned data URI, current-version-of
 
 		$this->entityResolved( $entity->getId() );
 	}
@@ -261,7 +285,8 @@ class RdfBuilder {
 			}
 
 			$entityResource->addLiteral( 'rdfs:label', $labelText, $languageCode );
-			$entityResource->addLiteral( 'skos:prefLabel', $labelText, $languageCode );
+			$entityResource->addLiteral( self::NS_SKOS . ':prefLabel', $labelText, $languageCode );
+			$entityResource->addLiteral( self::NS_SCHEMA_ORG . ':name', $labelText, $languageCode );
 		}
 	}
 
@@ -278,7 +303,7 @@ class RdfBuilder {
 				continue;
 			}
 
-			$entityResource->addLiteral( 'skos:note', $description, $languageCode );
+			$entityResource->addLiteral( self::NS_SCHEMA_ORG . ':description', $description, $languageCode );
 		}
 	}
 
@@ -296,7 +321,7 @@ class RdfBuilder {
 			}
 
 			foreach ( $aliases as $alias ) {
-				$entityResource->addLiteral( 'skos:altLabel', $alias, $languageCode );
+				$entityResource->addLiteral( self::NS_SKOS . ':altLabel', $alias, $languageCode );
 			}
 		}
 	}
@@ -320,7 +345,10 @@ class RdfBuilder {
 			//XXX: ideally, we'd use https if the target site supports it.
 			$url = wfExpandUrl( $link->getUrl(), PROTO_HTTP );
 			$pageRecourse = $this->graph->resource( $url );
-			$entityResource->addResource( 'foaf:primaryTopicOf', $pageRecourse, $languageCode );
+
+			$pageRecourse->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
+			$pageRecourse->addResource( self::NS_SCHEMA_ORG . ':inLanguage', $languageCode );
+			$pageRecourse->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ':Article' );
 		}
 	}
 

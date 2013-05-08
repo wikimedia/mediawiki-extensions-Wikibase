@@ -95,19 +95,32 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param \Wikibase\EntityId $entityId
-	 * @param array $properties
+	 * @param array $entityProps
+	 * @param array $dataProps
 	 *
 	 * @return \EasyRdf_Graph
 	 */
-	protected static function makeEntityGraph( EntityId $entityId, $properties ) {
+	protected static function makeEntityGraph( EntityId $entityId, $entityProps, $dataProps ) {
 		$graph = new \EasyRdf_Graph();
 
 		$builder = self::newRdfBuilder( 'rdf' ); //XXX: ugh, dummy object
 
 		$entityUri = $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entityId );
 		$entityResource = $graph->resource( $entityUri );
+		$dataResource = $graph->resource( '#' );
 
-		/* @var \EasyRdf_Resource $entityResource */
+		self::addProperties( $graph, $entityResource, $entityProps );
+		self::addProperties( $graph, $dataResource, $dataProps );
+
+		return $graph;
+	}
+
+	/**
+	 * @param \EasyRdf_Graph    $graph
+	 * @param \EasyRdf_Resource $resources
+	 * @param array  $properties
+	 */
+	protected static function addProperties( \EasyRdf_Graph $graph, \EasyRdf_Resource $resource, $properties ) {
 		foreach ( $properties as $prop => $values ) {
 			if ( is_scalar( $values ) ) {
 				$values = array( $values );
@@ -118,11 +131,9 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 					$val = $graph->resource( $val );
 				}
 
-				$entityResource->add( $prop, $val );
+				$resource->add( $prop, $val );
 			}
 		}
-
-		return $graph;
 	}
 
 	/**
@@ -152,6 +163,9 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$entities['empty']->getId(),
 			array(
 				'rdf:type' => $builder->getEntityTypeQName( Item::ENTITY_TYPE ),
+			),
+			array(
+				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
 			)
 		);
 
@@ -159,7 +173,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$entities['terms']->getId(),
 			array(
 				'rdf:type' => $builder->getEntityTypeQName( Item::ENTITY_TYPE ),
-				'foaf:primaryTopicOf' => $builder->getEntityQName( RdfBuilder::NS_DATA, $entities['terms']->getId() ),
 				'rdfs:label' => array(
 					new \EasyRdf_Literal( 'Berlin', 'en' ),
 					new \EasyRdf_Literal( 'Берлин', 'ru' )
@@ -168,7 +181,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 					new \EasyRdf_Literal( 'Berlin', 'en' ),
 					new \EasyRdf_Literal( 'Берлин', 'ru' )
 				),
-				'skos:note' => array(
+				'schema:name' => array(
+					new \EasyRdf_Literal( 'Berlin', 'en' ),
+					new \EasyRdf_Literal( 'Берлин', 'ru' )
+				),
+				'schema:description' => array(
 					new \EasyRdf_Literal( 'German city', 'en' ),
 					new \EasyRdf_Literal( 'столица и одновременно земля Германии', 'ru' )
 				),
@@ -177,6 +194,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 					new \EasyRdf_Literal( 'Land Berlin', 'en' ),
 					new \EasyRdf_Literal( 'Berlin', 'ru' )
 				),
+			),
+			array(
+				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
+				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['terms']->getId() ),
+				'schema:url' => $builder->getDataURL( $entities['terms']->getId() ),
 			)
 		);
 
@@ -230,7 +252,9 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$graph = $builder->getGraph();
 
 		foreach ( $expectedGraph->resources() as $rc ) {
-			foreach ( $expectedGraph->properties( $rc ) as $prop ) {
+			$props = $expectedGraph->properties( $rc );
+
+			foreach ( $props as $prop ) {
 				$expectedValues = $expectedGraph->all( $rc, $prop );
 				$actualValues = $graph->all( $rc, $prop );
 
@@ -272,5 +296,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 	//TODO: test resolveMentionedEntities
 	//TODO: test all the addXXX methods
+	//TODO: test all the getXXX methods
 
 }
