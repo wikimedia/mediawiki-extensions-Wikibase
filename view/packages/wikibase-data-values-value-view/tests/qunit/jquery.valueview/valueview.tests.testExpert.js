@@ -99,7 +99,12 @@ function testExpert( testDefinition ) {
 		return experts;
 	}
 
-	var expertCases = QUnit.cases( expertProvider() );
+	var expertCases = QUnit.cases(
+		// provide fresh instances for each test
+		function() {
+			return expertProvider();
+		}
+	);
 
 	expertCases.test( 'constructor', function( args, assert ) {
 		assert.ok(
@@ -161,6 +166,14 @@ function testExpert( testDefinition ) {
 		assert.ok(
 			expert.rawValueCompare( validRawValue ),
 			'"rawValueCompare( value )" is true after "rawValue( value )"'
+		);
+	} );
+
+	expertCases.test( 'rawValue: initial value', function( args, assert ) {
+		assert.equal(
+			args.expert.rawValue(),
+			null,
+			'newly initialized expert has no value (rawValue() returns null)'
 		);
 	} );
 
