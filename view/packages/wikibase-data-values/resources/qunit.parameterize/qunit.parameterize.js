@@ -21,6 +21,15 @@
 QUnit.cases = ( function( QUnit ) {
 	'use strict';
 
+	/**
+	 * @param {[]|Function} testCases An Array (or a callback returning such an object) which
+	 *        has to hold different Objects where each defines what will be passed to tests which
+	 *        will be registered to the Object returned by the function. By providing a callback,
+	 *        the parameters provided to the tests will be created separately for each test. This
+	 *        allows to provide instances which involve state without running into problems when
+	 *        manipulating state in one test case but expecting initial state in another one.
+	 * @return {Object}
+	 */
 	return function(testCases) {
 		var createTest = function(methodName, title, expected, callback, parameters) {
 			QUnit[methodName](
@@ -38,8 +47,12 @@ QUnit.cases = ( function( QUnit ) {
 				expected = null;
 			}
 
-			for (var i = 0; i < testCases.length; ++i) {
-				var parameters = testCases[i];
+			var testTestCases = QUnit.is( "function", testCases )
+				? testCases()
+				: testCases;
+
+			for (var i = 0; i < testTestCases.length; ++i) {
+				var parameters = testTestCases[i];
 
 				var testCaseTitle = title;
 				if (parameters.title) {
