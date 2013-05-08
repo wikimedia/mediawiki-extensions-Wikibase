@@ -78,6 +78,10 @@ $messages['qqq'] = array(
 	'wikibase-diffview-rank' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects the rank of the statement. Will be shown as e.g. "claim / property q1 / rank".
 {{Identical|Rank}}',
 	'wikibase-diffview-qualifier' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects a qualifier. Will be shown as e.g. "claim / property q1 / qualifier".',
+	'wikibase-diffview-label' => 'Sub heading for label changes in a diff',
+	'wikibase-diffview-alias' => 'Sub heading for alias changes in a diff',
+	'wikibase-diffview-description' => 'Sub heading for description changes in a diff',
+	'wikibase-diffview-link' => 'Sub heading for link changes in a diff',
 	'wikibase-error-unexpected' => 'Error message that is used as a fallback message if no other message can be assigned to the error that occurred. This error message being displayed should never happen. However, there may be "unexpected" errors not covered by the implemented error handling.',
 	'wikibase-error-save-generic' => 'Generic error message for an error happening during a save operation.',
 	'wikibase-error-remove-generic' => 'Generic error message for an error happening during a remove operation',
@@ -108,10 +112,6 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
 	'version-wikibase' => 'Name of the Wikibase extension collection, used on [[Special:Version]]',
-	'wikibase-diffview-label' => 'Sub heading for label changes in a diff',
-	'wikibase-diffview-alias' => 'Sub heading for alias changes in a diff',
-	'wikibase-diffview-description' => 'Sub heading for description changes in a diff',
-	'wikibase-diffview-link' => 'Sub heading for link changes in a diff',
 );
 
 /** Afrikaans (Afrikaans)
@@ -474,6 +474,7 @@ $messages['cy'] = array(
 
 /** Danish (dansk)
  * @author Hede2000
+ * @author HenrikKbh
  * @author Poul G
  */
 $messages['da'] = array(
@@ -508,6 +509,7 @@ $messages['da'] = array(
 	'wikibase-tooltip-error-details' => 'Detaljer',
 	'datatypes-type-wikibase-item' => 'Emne',
 	'datatypes-type-commonsMedia' => 'Commons media-fil',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** German (Deutsch)
@@ -523,6 +525,10 @@ $messages['de'] = array(
 	'wikibase-diffview-reference' => 'Referenz',
 	'wikibase-diffview-rank' => 'Rang',
 	'wikibase-diffview-qualifier' => 'Bedingung',
+	'wikibase-diffview-label' => 'Bezeichnung',
+	'wikibase-diffview-alias' => 'Aliasse',
+	'wikibase-diffview-description' => 'Beschreibung',
+	'wikibase-diffview-link' => 'Links',
 	'wikibase-error-unexpected' => 'Es ist ein unerwarteter Fehler aufgetreten.',
 	'wikibase-error-save-generic' => 'Beim Speichern ist ein Fehler aufgetreten. Die Änderungen konnten daher nicht vollständig durchgeführt werden.',
 	'wikibase-error-remove-generic' => 'Beim Versuch zu entfernen, ist ein Fehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden.',

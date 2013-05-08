@@ -548,6 +548,13 @@ $messages['ca'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 enllaços entre llengües a la pàgina)',
 );
 
+/** Chechen (нохчийн)
+ * @author Умар
+ */
+$messages['ce'] = array(
+	'wikibase-rc-hide-wikidata' => '$1 Викихаамаш',
+);
+
 /** Sorani Kurdish (کوردی)
  * @author Calak
  */
@@ -686,6 +693,7 @@ $messages['cy'] = array(
 /** Danish (dansk)
  * @author Christian List
  * @author Hede2000
+ * @author HenrikKbh
  * @author Poul G
  * @author Steenth
  */
@@ -728,7 +736,7 @@ $messages['da'] = array(
 	'wikibase-error-invalid-entity-id' => 'Den indtastede ID er ukendt i systemet. Anvend venligst en gyldig ID.',
 	'special-unconnectedpages' => 'Sider, der ikke er forbundet til emner',
 	'wikibase-unconnectedpages-legend' => 'Indstillinger for ikke-forbundne sider',
-	'wikibase-unconnectedpages-page' => 'Startside:',
+	'wikibase-unconnectedpages-page' => 'Start resultatliste med side:',
 	'wikibase-unconnectedpages-submit' => 'Udfør',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" er ikke en gyldig sprogkode.',
 	'wikibase-unconnectedpages-page-warning' => 'Sidens titel kunne ikke anvendes til forespørgslen og blev ignoreret.',
@@ -1355,6 +1363,12 @@ $messages['hi'] = array(
 $messages['hr'] = array(
 	'wikibase-editlinks' => 'Uredi međuwikije',
 	'wikibase-linkitem-addlinks' => 'Dodaj međuwikije',
+	'wikibase-linkitem-close' => 'Zatvori dijalog i ponovo učitaj stranicu',
+	'wikibase-linkitem-linkpage' => 'Uredi međuwikipoveznice',
+	'wikibase-linkitem-input-site' => 'Jezik:',
+	'wikibase-linkitem-input-page' => 'Ime stranice:',
+	'wikibase-linkitem-not-loggedin-title' => 'Morate biti prijavljeni',
+	'wikibase-linkitem-success-create' => 'Stranice su uspješno povezane. Možete pronaći ove nove poveznice na projektu [$1 wikidata].',
 );
 
 /** Upper Sorbian (hornjoserbsce)
@@ -2306,7 +2320,7 @@ $messages['nn'] = array(
 	'wikibase-error-invalid-entity-id' => 'Den oppgjevne ID-en er ukjend for systemet. Bruk ein gild einings-ID.',
 	'special-unconnectedpages' => 'Sider som ikkje er kopa til datasett',
 	'wikibase-unconnectedpages-legend' => 'Val for ukopla sider',
-	'wikibase-unconnectedpages-page' => 'Byrja resultatlista med denne artikkelen:', # Fuzzy
+	'wikibase-unconnectedpages-page' => 'Byrja resultatlista med denne sida:',
 	'wikibase-unconnectedpages-submit' => 'Gå',
 	'wikibase-unconnectedpages-invalid-language' => '«$1» er ikkje ein gild språkkode.',
 	'wikibase-unconnectedpages-page-warning' => 'Sidetittelen kunne ikkje brukast med spørjinga og er ignorert.',
@@ -2355,6 +2369,7 @@ $messages['pl'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidane',
 	'wikibase-rc-show-wikidata-pref' => 'Pokazuj edycje na Wikidanych w ostatnich zmianach',
 	'wikibase-watchlist-show-changes-pref' => 'Pokazuj edycje na Wikidanych w obserwowanych',
+	'wikibase-error-invalid-entity-id' => 'Wprowadzony identyfikator jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.',
 	'special-unconnectedpages' => 'Nie powiązane strony',
 	'wikibase-unconnectedpages-legend' => 'Opcje stron niepowiązanych',
 	'wikibase-unconnectedpages-page' => 'Rozpocznij wyświetlanie wyników od strony:',
@@ -3016,7 +3031,7 @@ $messages['zh-hans'] = array(
 	'wikibase-linkitem-input-site' => '语言：',
 	'wikibase-linkitem-input-page' => '页面：',
 	'wikibase-linkitem-invalidsite' => '选择了一个未知或无效的网站',
-	'wikibase-linkitem-confirmitem-text' => '页面已与[$1 中央数据库中的项目]链接。请确认如下所示都是您想要与此页面链接的页面。',
+	'wikibase-linkitem-confirmitem-text' => '您所选的页面已与[$1 中央数据库中的其他项目]链接。请确认如下所示的都是您想要与此页面相链接的页面。',
 	'wikibase-linkitem-confirmitem-button' => '确认',
 	'wikibase-linkitem-not-loggedin-title' => '您必须登录',
 	'wikibase-linkitem-not-loggedin' => '您必须在此维基项目和[$1 中央数据库]上登录才能使用此功能。',
