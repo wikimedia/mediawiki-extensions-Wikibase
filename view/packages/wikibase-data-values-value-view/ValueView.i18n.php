@@ -303,6 +303,9 @@ $messages['ps'] = array(
  */
 $messages['roa-tara'] = array(
 	'valueview-desc' => 'Combonende UI pe fà vedè e cangià le volre de le date',
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '\'A gestione de "$1" valore non g\'è angore mandenute.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '\'A gestione de valore pu tipe de date "$1" non g\'è angore mandenute.',
+	'valueview-expert-emptyvalue-empty' => 'vacande',
 );
 
 /** Russian (русский)
