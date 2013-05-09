@@ -458,18 +458,10 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		$edit = new EditEntity( $content );
 
-		try {
-			$edit->checkEditPermissions();
-
-			$this->assertTrue( $expectedOK, 'this permission check was expected to fail!' );
-		} catch ( \PermissionsError $ex ) {
-			$this->assertFalse( $expectedOK, 'this permission check was expected to pass! '
-				. $ex->permission . ': ' . var_export( $ex->errors, true ) );
-		}
+		$edit->checkEditPermissions();
 
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK() );
 		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
-		$this->assertNotEquals( $expectedOK, $edit->showErrorPage() );
 	}
 
 	/**
@@ -485,18 +477,10 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		$edit = new EditEntity( $content );
 
-		try {
-			$edit->attemptSave( "testing", ( $content->isNew() ? EDIT_NEW : 0 ), $token );
-
-			$this->assertTrue( $expectedOK, 'this permission check was expected to fail!' );
-		} catch ( \PermissionsError $ex ) {
-			$this->assertFalse( $expectedOK, 'this permission check was expected to pass! '
-				. $ex->permission . ': ' . var_export( $ex->errors, true )  );
-		}
+		$edit->attemptSave( "testing", ( $content->isNew() ? EDIT_NEW : 0 ), $token );
 
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
-		$this->assertNotEquals( $expectedOK, $edit->showErrorPage() );
 	}
 
 	/**

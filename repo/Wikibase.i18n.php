@@ -233,7 +233,7 @@ $1', # Do not translate
 	'wikibase-api-not-recognized-array' => 'An array was expected, but not found.', # Do not translate
 	'wikibase-api-not-recognized-language' => 'The supplied language identifier was not recognized.', # Do not translate
 	'wikibase-api-not-recognized-siteid' => 'The supplied site identifier was not recognized.', # Do not translate
-	'wikibase-api-no-permissions' => 'The logged in user does not have sufficient rights.', # Do not translate
+	'wikibase-api-no-permissions' => 'The user does not have sufficient rights.', # Do not translate
 	'wikibase-api-no-revision' => 'The revision could not be found.', # Do not translate
 	'wikibase-api-patch-empty' => 'The generated patch turned out to be empty.', # Do not translate
 	'wikibase-api-patch-incomplete' => 'The generated patch turned out to be incomplete.', # Do not translate
