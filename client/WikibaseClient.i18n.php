@@ -2386,7 +2386,7 @@ $messages['pl'] = array(
  */
 $messages['pms'] = array(
 	'wikibase-client-desc' => "Client për l'estension Wikibase",
-	'wikibase-after-page-move' => "It peule ëdcò [$1 modifiché] j'element Wikidata associà për goerné ij colegament antërwiki an sla pàgina tramudà.",
+	'wikibase-after-page-move' => "A peul ëdcò [$1 agiorné] j'element Wikidata associà për goerné le liure ëd lenga an sla pàgina tramudà.",
 	'wikibase-comment-remove' => 'Element Wikidata associà scancelà. Liura ëd lenga gavà.',
 	'wikibase-comment-linked' => "N'element Wikidata a l'é stàit colegà a sta pàgina.",
 	'wikibase-comment-unlink' => "Sta pàgina a l'é stàita dëscolegà da l'element Wikidata. Liure ëd lenga gavà.",
@@ -2732,6 +2732,7 @@ $messages['ta'] = array(
  */
 $messages['te'] = array(
 	'wikibase-editlinks' => 'లంకెలను మార్చు',
+	'wikibase-linkitem-addlinks' => 'లంకెలను చేర్చండి',
 	'wikibase-rc-hide-wikidata' => 'వికీడాటాను $1',
 	'wikibase-rc-show-wikidata-pref' => 'వికీడామా మార్పులను ఇటీవలి మార్పులలో చూపించు',
 );
