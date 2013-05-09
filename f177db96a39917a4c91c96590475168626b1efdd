@@ -332,6 +332,23 @@
     },
     {
       "key": {
+        "uuid": "DwtWqDHI",
+        "filename": "selenium_cuc/features/support/modules/alias_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-05-09T10:10:32Z",
+      "side": 1,
+      "message": "\"return\" is optional in Ruby and not used (by convention) unless necessary. The return value of the last line of a method will be returned by the method by default.",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dwnqnuao",
         "filename": "selenium_cuc/features/support/pages/item_page.rb",
         "patchSetId": 2
