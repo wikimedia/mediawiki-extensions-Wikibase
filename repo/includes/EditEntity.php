@@ -138,7 +138,7 @@ class EditEntity {
 	 * @since 0.1
 	 * @var array
 	 */
-	protected $requiredPremissions = array(
+	protected $requiredPermissions = array(
 		'edit',
 	);
 
@@ -524,7 +524,7 @@ class EditEntity {
 	 * @param String $permission
 	 */
 	public function addRequiredPermission( $permission ) {
-		$this->requiredPremissions[] = $permission;
+		$this->requiredPermissions[] = $permission;
 	}
 
 	/**
@@ -537,15 +537,14 @@ class EditEntity {
 	public function checkEditPermissions() {
 		wfProfileIn( __METHOD__ );
 
-		foreach ( $this->requiredPremissions as $action ) {
+		foreach ( $this->requiredPermissions as $action ) {
 			$permissionStatus = $this->newContent->checkPermission( $action, $this->getUser() );
 
 			$this->status->merge( $permissionStatus );
 
 			if ( !$this->status->isOK() ) {
 				$this->errorType |= self::PERMISSION_ERROR;
-				wfProfileOut( __METHOD__ );
-				throw new \PermissionsError( $action, $permissionStatus->getErrorsArray() );
+				$this->status->fatal( 'no-permission' );
 			}
 		}
 
@@ -553,11 +552,7 @@ class EditEntity {
 	}
 
 	/**
-	 * Checks the necessary permissions to perform this edit.
-	 * Per default, the 'edit' permission (and if needed, the 'create' permission) is checked.
-	 * Use addRequiredPermission() to check more permissions.
-	 *
-	 * @throws \PermissionsError if the user's permissions are not sufficient
+	 * Checks if rate limits have been exceeded.
 	 */
 	public function checkRateLimits() {
 		wfProfileIn( __METHOD__ );
