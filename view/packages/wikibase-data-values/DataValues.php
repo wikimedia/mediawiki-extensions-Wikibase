@@ -44,14 +44,6 @@
  * @ingroup DataValues
  */
 
-if ( !defined( 'DATAVALUES' ) && !defined( 'MEDIAWIKI' ) ) {
-	die( 'Not an entry point.' );
-}
-
-if ( !defined( 'DATAVALUES' ) ) {
-	define( 'DATAVALUES', true );
-}
-
 define( 'DataValues_VERSION', '0.1 alpha' );
 
 if ( defined( 'MEDIAWIKI' ) ) {

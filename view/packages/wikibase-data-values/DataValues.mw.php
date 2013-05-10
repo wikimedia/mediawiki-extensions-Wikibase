@@ -27,14 +27,6 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die( 'Not an entry point.' );
-}
-
-if ( !defined( 'DATAVALUES' ) ) {
-	define( 'DATAVALUES', true );
-}
-
 global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks, $wgResourceModules;
 
 $wgExtensionCredits['datavalues'][] = array(
