@@ -441,22 +441,38 @@ $messages['bg'] = array(
  * @author Sankarshan
  */
 $messages['bn'] = array(
+	'wikibase-client-desc' => 'উইকিবেজ এক্সটেনশনের জন্য গ্রাহক',
+	'specialpages-group-wikibaseclient' => 'উইকিউপাত্ত গ্রাহক',
 	'wikibase-after-page-move' => 'এছাড়া আপনি স্থানান্তর করা পাতাতে ভাষার লিংক বজায় রাখার জন্য সংশ্লিষ্ট উইকিউপাত্তের আইটেমটি [$1 হালনাগাদ] করতে পারেন।',
+	'wikibase-comment-remove' => 'সংশ্লিষ্ট উইকিউপাত্ত আইটেম অপসারিত হয়েছে। ভাষার সংযোগ অপসারিত হয়েছে।',
+	'wikibase-comment-linked' => 'একটি উইকিউপাত্ত আইটেম এই পাতার সাথে সংযুক্ত হয়েছে।',
+	'wikibase-comment-unlink' => 'এই পাতাটি উইকিউপাত্তের আইটেম থেকে সংযোগমুক্ত করা হয়েছে। ভাষার সংযোগ অপসারিত হয়েছে।',
 	'wikibase-comment-update' => 'উইকিউপাত্তের আইটেম পরিবর্তন হয়েছে।',
+	'wikibase-comment-sitelink-add' => 'ভাষা সংযোগ যোগ হয়েছে: $1',
+	'wikibase-comment-sitelink-change' => 'ভাষা সংযোগ $1 থেকে $2 এ পরিবর্তন হয়েছে',
+	'wikibase-comment-sitelink-remove' => 'ভাষা সংযোগ অপসারিত হয়েছে: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|পরিবর্তন|পরিবর্তনসমূহ}}',
-	'wikibase-editlinks' => 'সংযোগ সম্পাদনা',
+	'wikibase-editlinks' => 'আন্তঃউইকি সংযোগ সম্পাদনা',
 	'wikibase-editlinkstitle' => 'আন্তঃভাষার লিংকগুলি সম্পাদনা করুন',
-	'wikibase-linkitem-addlinks' => 'সংযোগ যোগ',
-	'wikibase-linkitem-title' => 'পাতার সাথে লিংক',
-	'wikibase-linkitem-linkpage' => 'পাতার সাথে লিংক',
+	'wikibase-linkitem-addlinks' => 'আন্তঃউইকি সংযোগ যোগ',
+	'wikibase-linkitem-close' => 'ডায়ালগ বন্ধ এবং পাতা পুনরায় লোড করো',
+	'wikibase-linkitem-title' => 'পাতার সাথে সংযোগ',
+	'wikibase-linkitem-linkpage' => 'পাতার সাথে সংযোগ',
+	'wikibase-linkitem-selectlink' => 'একটি সাইট এবং পাতা নির্বাচন করুন যেটির সাথে আপনি এই পাতার সংযোগ দিতে ইচ্ছুক।',
 	'wikibase-linkitem-input-site' => 'ভাষা:',
 	'wikibase-linkitem-input-page' => 'পাতা:',
 	'wikibase-linkitem-invalidsite' => 'অজানা বা অবৈধ সাইট নির্বাচন করা হয়েছে',
+	'wikibase-linkitem-confirmitem-text' => 'আপনি যে পাতাটি পছন্দ করেছেন তা ইতোমধ্যে [আমাদের কেন্দ্রীয় তথ্যভান্ডারে $1 আইটেমের] সাথে সংযুক্ত আছে। অনুগ্রহ করে নিশ্চিত করুন যে নিচে প্রদর্শিত পাতাগুলোর একটির সাথে আপনি এই পাতার সংযোগ করতে চান।',
 	'wikibase-linkitem-confirmitem-button' => 'নিশ্চিত করুন',
-	'wikibase-linkitem-not-loggedin-title' => 'আপনার লগইন করা প্রয়োজন',
+	'wikibase-linkitem-not-loggedin-title' => 'আপনার প্রবেশ করা প্রয়োজন',
 	'wikibase-rc-hide-wikidata' => 'উইকিউপাত্ত $1',
 	'wikibase-rc-show-wikidata-pref' => 'উইকিউপাত্তের সম্পাদনাগুলো সাম্প্রতিক পরিবর্তনে দেখানো হোক',
 	'wikibase-watchlist-show-changes-pref' => 'উইকিউপাত্তের সম্পাদনাগুলো নজরতালিকায় দেখাও',
+	'wikibase-error-invalid-entity-id' => 'প্রবেশ করানো আইডিটি সিস্টেমের অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।',
+	'special-unconnectedpages' => 'পাতাটি আইটেমের সাথে সংযুক্ত হয়নি',
+	'wikibase-unconnectedpages-legend' => 'অসংযুক্ত পাতার বিকল্প',
+	'wikibase-unconnectedpages-submit' => 'যাও',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" কোনো সঠিক ভাষার কোড নয়।',
 );
 
 /** Breton (brezhoneg)
@@ -606,6 +622,7 @@ $messages['crh-latn'] = array(
 
 /** Czech (česky)
  * @author JAn Dudík
+ * @author Littledogboy
  * @author Mormegil
  */
 $messages['cs'] = array(
@@ -637,6 +654,7 @@ $messages['cs'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Potvrdit',
 	'wikibase-linkitem-not-loggedin-title' => 'Musíte být přihlášen',
 	'wikibase-linkitem-not-loggedin' => 'Je třeba být přihlášen na této wiki a [$1  Wikidatech], chcete-li použít tuto funkci.',
+	'wikibase-linkitem-success-link' => 'Stránky byly úspěšně spojeny. Byla založena položka obsahující tyto odkazy v [$1  centrálním datovém úložišti].',
 	'wikibase-property-notfound' => 'Vlastnost $1 nebyla nalezena.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Zobrazit změny Wikidat v posledních změnách',

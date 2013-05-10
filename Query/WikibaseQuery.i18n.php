@@ -156,6 +156,13 @@ $messages['roa-tara'] = array(
 	'wikibasequery-desc' => "Aggiunge le capacità de l'inderrogazione sus a Uicchibase",
 );
 
+/** Serbian (Cyrillic script) (српски (ћирилица)‎)
+ * @author Милан Јелисавчић
+ */
+$messages['sr-ec'] = array(
+	'wikibasequery-desc' => 'Додавање могућности упита на Викибазу',
+);
+
 /** Ukrainian (українська)
  * @author Base
  */
