@@ -35,9 +35,18 @@ use Hashable;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class HashArrayTest extends \GenericArrayObjectTest {
+abstract class HashArrayTest extends \MediaWikiTestCase {
 
 	public abstract function constructorProvider();
+
+	/**
+	 * Returns the name of the concrete class being tested.
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	abstract public function getInstanceClass();
 
 	public function instanceProvider() {
 		$class = $this->getInstanceClass();

@@ -3,6 +3,7 @@
 namespace Wikibase;
 use Hashable;
 use GenericArrayObject;
+use InvalidArgumentException;
 
 /**
  * Generic array object with lookups based on hashes of the elements.
@@ -45,7 +46,7 @@ use GenericArrayObject;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class HashArray extends GenericArrayObject implements \Hashable, \Comparable {
+abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable {
 
 	/**
 	 * Maps element hashes to their offsets.
@@ -66,7 +67,64 @@ abstract class HashArray extends GenericArrayObject implements \Hashable, \Compa
 	protected $acceptDuplicates = false;
 
 	/**
-	 * @see GenericArrayObject::preSetElement
+	 * @var integer
+	 */
+	protected $indexOffset = 0;
+
+	/**
+	 * Returns the name of an interface/class that the element should implement/extend.
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	abstract public function getObjectType();
+
+	/**
+	 * Constructor.
+	 * @see ArrayObject::__construct
+	 *
+	 * @since 1.20
+	 *
+	 * @param null|array $input
+	 * @param int $flags
+	 * @param string $iterator_class
+	 */
+	public function __construct( $input = null, $flags = 0, $iterator_class = 'ArrayIterator' ) {
+		parent::__construct( array(), $flags, $iterator_class );
+
+		if ( !is_null( $input ) ) {
+			foreach ( $input as $offset => $value ) {
+				$this->offsetSet( $offset, $value );
+			}
+		}
+	}
+
+	/**
+	 * Finds a new offset for when appending an element.
+	 * The base class does this, so it would be better to integrate,
+	 * but there does not appear to be any way to do this...
+	 *
+	 * @since 1.20
+	 *
+	 * @return integer
+	 */
+	protected function getNewOffset() {
+		while ( $this->offsetExists( $this->indexOffset ) ) {
+			$this->indexOffset++;
+		}
+
+		return $this->indexOffset;
+	}
+
+	/**
+	 * Gets called before a new element is added to the ArrayObject.
+	 *
+	 * At this point the index is always set (ie not null) and the
+	 * value is always of the type returned by @see getObjectType.
+	 *
+	 * Should return a boolean. When false is returned the element
+	 * does not get added to the ArrayObject.
 	 *
 	 * @since 0.1
 	 *
@@ -340,5 +398,134 @@ abstract class HashArray extends GenericArrayObject implements \Hashable, \Compa
 			$this->offsetSet( $offset, $hashable );
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * @see ArrayObject::append
+	 *
+	 * @since 1.20
+	 *
+	 * @param mixed $value
+	 */
+	public function append( $value ) {
+		$this->setElement( null, $value );
+	}
+
+	/**
+	 * @see ArrayObject::offsetSet()
+	 *
+	 * @since 1.20
+	 *
+	 * @param mixed $index
+	 * @param mixed $value
+	 */
+	public function offsetSet( $index, $value ) {
+		$this->setElement( $index, $value );
+	}
+
+	/**
+	 * Returns if the provided value has the same type as the elements
+	 * that can be added to this ArrayObject.
+	 *
+	 * @since 1.20
+	 *
+	 * @param mixed $value
+	 *
+	 * @return boolean
+	 */
+	protected function hasValidType( $value ) {
+		$class = $this->getObjectType();
+		return $value instanceof $class;
+	}
+
+	/**
+	 * Method that actually sets the element and holds
+	 * all common code needed for set operations, including
+	 * type checking and offset resolving.
+	 *
+	 * If you want to do additional indexing or have code that
+	 * otherwise needs to be executed whenever an element is added,
+	 * you can overload @see preSetElement.
+	 *
+	 * @since 1.20
+	 *
+	 * @param mixed $index
+	 * @param mixed $value
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	protected function setElement( $index, $value ) {
+		if ( !$this->hasValidType( $value ) ) {
+			throw new InvalidArgumentException(
+				'Can only add ' . $this->getObjectType() . ' implementing objects to ' . get_called_class() . '.'
+			);
+		}
+
+		if ( is_null( $index ) ) {
+			$index = $this->getNewOffset();
+		}
+
+		if ( $this->preSetElement( $index, $value ) ) {
+			parent::offsetSet( $index, $value );
+		}
+	}
+
+	/**
+	 * @see Serializable::serialize
+	 *
+	 * @since 1.20
+	 *
+	 * @return string
+	 */
+	public function serialize() {
+		return serialize( array(
+			'data' => $this->getArrayCopy(),
+			'index' => $this->indexOffset,
+		) );
+	}
+
+	/**
+	 * @see Serializable::unserialize
+	 *
+	 * @since 1.20
+	 *
+	 * @param string $serialization
+	 *
+	 * @return array
+	 */
+	public function unserialize( $serialization ) {
+		$serializationData = unserialize( $serialization );
+
+		foreach ( $serializationData['data'] as $offset => $value ) {
+			// Just set the element, bypassing checks and offset resolving,
+			// as these elements have already gone through this.
+			parent::offsetSet( $offset, $value );
+		}
+
+		$this->indexOffset = $serializationData['index'];
+
+		return $serializationData;
+	}
+
+	/**
+	 * Returns if the ArrayObject has no elements.
+	 *
+	 * @since 1.20
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return $this->count() === 0;
+	}
+
 
 }
