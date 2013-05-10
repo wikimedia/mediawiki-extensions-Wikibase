@@ -1,5 +1,6 @@
 <?php
 
+// TODO: fix NS
 namespace Wikibase\Repo;
 
 use DatabaseBase;
@@ -7,8 +8,6 @@ use DatabaseBase;
 /**
  * Lazy database connection provider.
  * The connection is fetched when needed using the id provided in the constructor.
- *
- * TODO: move to lib
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

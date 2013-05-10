@@ -47,6 +47,9 @@ return call_user_func( function() {
 		$paths[$class] = $path;
 	}
 
+	$paths['Wikibase\Repo\DBConnectionProvider'] = 'Database/DBConnectionProvider.php';
+	$paths['Wikibase\Repo\LazyDBConnectionProvider'] = 'Database/LazyDBConnectionProvider.php';
+
 	return $paths;
 
 } );

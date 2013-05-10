@@ -33,11 +33,6 @@ if ( !defined( 'WB_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
 
-// Include the Database component if that hasn't been done yet.
-if ( !defined( 'WIKIBASE_DATABASE_VERSION' ) && defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
-	@include_once( __DIR__ . '/../../Database/Database.php' );
-}
-
 // Include the Query component if that hasn't been done yet.
 if ( !defined( 'WIKIBASE_QUERY_VERSION' ) && defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	@include_once( __DIR__ . '/../../QueryEngine/QueryEngine.php' );
