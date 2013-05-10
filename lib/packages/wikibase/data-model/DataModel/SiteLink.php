@@ -53,7 +53,11 @@ class SiteLink {
 	 * @return \Wikibase\SiteLink the new SiteLink
 	 * @throws \MWException if the $siteID isn't known.
 	 */
-	public static function newFromText( $globalSiteId, $page, $normalize = false ) {
+	public static function newFromText( $globalSiteId, $page, $normalize = null ) {
+		if ( $normalize !== null ) {
+			throw new \Exception( 'Support for $normalize parameter has been dropped' );
+		}
+
 		wfProfileIn( __METHOD__ );
 
 		$site = Sites::singleton()->getSite( $globalSiteId );
