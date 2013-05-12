@@ -35,6 +35,10 @@
 	 * Displays the link which opens the dialog (using jquery.wikibase.linkitem)
 	 */
 	$( document ).ready( function() {
+		if ( !$.support.cors ) {
+			// This will fail horribly w/o CORS support on WMF-like setups (different domains for repo and client)
+			return;
+		}
 		$( '.wbc-editpage' ).eq(0)
 			.empty()
 			.append(
