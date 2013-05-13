@@ -118,7 +118,8 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			'!<wikibase:Item.*rdf:about=".*?entity/q2"!s',
 			'!<rdfs:label xml:lang="en">Berlin</rdfs:label>!s',
 			'!<skos:prefLabel xml:lang="en">Berlin</skos:prefLabel>!s',
-			'!<skos:note xml:lang="en">German city</skos:note>!s',
+			'!<schema:name xml:lang="en">Berlin</schema:name>!s',
+			'!<schema:description xml:lang="en">German city</schema:description>!s',
 			'!<skos:altLabel xml:lang="en">Berlin, Germany</skos:altLabel>!s',
 		);
 
@@ -126,10 +127,12 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			'!entity:q2!s',
 			'!rdfs:label +"Berlin"@en,!s',
 			'!skos:prefLabel +"Berlin"@en,!s',
-			'!skos:note +"German city"@en,!s',
+			'!schema:name +"Berlin"@en,!s',
+			'!schema:description +"German city"@en,!s',
 			'!skos:altLabel +"Berlin, Germany"@en,!s',
 		);
 
+		// TODO: check meta
 		// TODO: test links
 		// TODO: test data values
 
