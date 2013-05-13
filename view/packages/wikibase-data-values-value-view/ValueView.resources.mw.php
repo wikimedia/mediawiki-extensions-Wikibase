@@ -84,6 +84,19 @@ return call_user_func( function() {
 				'jquery.ui.autocomplete'
 			)
 		),
+
+		'jquery.ui.toggler' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.toggler.js',
+			),
+			'styles' => array(
+				'jquery.ui/themes/default/jquery.ui.toggler.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+			),
+		),
+
 	);
 
 	// return jQuery.valueview's native resources plus those required by the MW extension:
