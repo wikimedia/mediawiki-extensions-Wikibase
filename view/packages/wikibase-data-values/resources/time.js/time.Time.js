@@ -187,8 +187,10 @@ time.Time = ( function( time ) {
 		// it into that form first:
 		var formattedIso8601 = iso8601String
 			.replace( /T.+$/, '' ) // get rid of minutes (not supported yet)
-			.replace( /([\-\+])?0*/, '$1' )// get rid of trailing zeroes, keep "-" and "+"
-			.replace( '+', '' ); // get reid of "+"
+			// Get rid of year's leading zeros (but keep one if the year actually is 0)
+			// and keep "-" and "+":
+			.replace( /^([\-\+])?0*(0|[1-9]+)/, '$1$2' )
+			.replace( '+', '' ); // get rid of "+"
 
 		return new Time( formattedIso8601, { precision: precision } );
 	};
