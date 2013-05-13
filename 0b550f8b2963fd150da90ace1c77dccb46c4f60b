@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dw7LiAaI",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-13T21:28:10Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be easier and cleaner to just make them protocol relative?",
+      "revId": "0b550f8b2963fd150da90ace1c77dccb46c4f60b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
