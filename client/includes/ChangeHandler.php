@@ -109,11 +109,16 @@ class ChangeHandler {
 	public function __construct( PageUpdater $updater = null,
 			EntityLookup $entityLookup = null,
 			EntityUsageIndex $entityUsageIndex = null,
-			\Site $localSite = null ) {
+			\Site $localSite = null,
+			\SiteList $sites = null) {
 
 		wfProfileIn( __METHOD__ );
 
-		$this->sites = \Sites::singleton(); // TODO: get from param
+		if ( $sites === null ) {
+			$sites = \Sites::singleton();
+		}
+
+		$this->sites = $sites;
 
 		if ( !$updater ) {
 			$updater = new WikiPageUpdater();
@@ -827,6 +832,8 @@ class ChangeHandler {
 				$params['message'] = 'wikibase-comment-sitelink-change';
 
 				// fall back to global id... not great, but we have to do *something*
+				// FIXME: this code appears to be doing something incorrect as "best effort"
+				// rather than allowing for proper error handling
 				$navIds = $this->site->getNavigationIds();
 				$iwPrefix = isset( $navIds[0] ) ? $navIds[0] : $this->site->getGlobalId();
 
