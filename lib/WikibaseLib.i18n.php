@@ -835,6 +835,10 @@ $messages['fi'] = array(
 	'wikibase-diffview-reference' => 'lähde',
 	'wikibase-diffview-rank' => 'sija',
 	'wikibase-diffview-qualifier' => 'tarkenne',
+	'wikibase-diffview-label' => 'nimi',
+	'wikibase-diffview-alias' => 'aliakset',
+	'wikibase-diffview-description' => 'kuvaus',
+	'wikibase-diffview-link' => 'linkit',
 	'wikibase-error-unexpected' => 'Odottamaton virhe.',
 	'wikibase-error-save-generic' => 'Tallennus epäonnistui. Muutoksiasi ei voitu toteuttaa.',
 	'wikibase-error-remove-generic' => 'Poistaminen epäonnistui. Muutoksiasi ei voitu toteuttaa.',
@@ -859,6 +863,7 @@ $messages['fi'] = array(
 	'wikibase-tooltip-error-details' => 'Tiedot',
 	'datatypes-type-wikibase-item' => 'Kohde',
 	'datatypes-type-commonsMedia' => 'Commonsin mediatiedosto',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** French (français)
@@ -1995,10 +2000,13 @@ $messages['sr-ec'] = array(
 	'wikibase-error-save-generic' => 'Дошло је до грешке приликом покушаја чувања и због тога, промене не могу бити завршене.',
 	'wikibase-error-remove-generic' => 'Дошло је до грешке приликом покушаја да се изврши уклањање и због тога, промене не могу бити завршене.',
 	'wikibase-error-autocomplete-response' => 'Одговор сервера: $1',
+	'wikibase-error-ui-no-external-page' => 'Наведени чланак није пронађен на одговарајућем сајту.',
 	'wikibase-error-ui-cant-edit' => 'Немате дозволу да извршите ову радњу.',
 	'wikibase-error-ui-no-permissions' => 'Немате потребна овлашћења да извршите ову радњу.',
 	'wikibase-error-ui-link-exists' => 'Не можете да повежете са овом страницом, јер друга ставка већ води до ње.',
+	'wikibase-error-ui-session-failure' => 'Ваша сесија је истекла. Молимо пријавите се поново.',
 	'wikibase-error-ui-edit-conflict' => 'Дошло је до сукоба измена. Молимо учитајте и сачувајте поново страну.',
+	'wikibase-replicationnote' => 'Молимо обратите пажњу да може потрајати и неколико минута пре него што промене постану видљиве на свим викијима',
 	'wikibase-sitelinks' => 'Списак страна повезаних са овом ставком',
 	'wikibase-sitelinks-sitename-columnheading' => 'Језик',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
