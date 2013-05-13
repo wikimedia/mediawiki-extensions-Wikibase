@@ -34,6 +34,12 @@ use Wikibase\Client\WikibaseClient;
  */
 class EntityCacheUpdater {
 
+	protected $entityCache;
+
+	public function __construct( EntityCache $entityCache ) {
+		$this->entityCache = $entityCache;
+	}
+
 	/**
 	 * Update the entity cache to reflect the provided change.
 	 *
@@ -54,9 +60,7 @@ class EntityCacheUpdater {
 		}
 
 		$id = $change->getEntityId();
-
-		$store = WikibaseClient::getDefaultInstance()->getStore();
-		$entityCache = $store->getEntityLookup(); //TODO: make sure we get an EntityCache instance
+		$entityCache = $this->entityCache;
 
 		switch ( $updateType ) {
 			case 'remove':

@@ -156,7 +156,7 @@ class ChangeHandler {
 		$this->injectRC = Settings::get( 'injectRecentChanges' );
 
 		if ( Settings::get( 'repoDatabase' ) === null ) {
-			$this->mirrorUpdater = new EntityCacheUpdater();
+			$this->mirrorUpdater = new EntityCacheUpdater( new EntityCacheTable() );
 		} else {
 			$this->mirrorUpdater = null;
 		}

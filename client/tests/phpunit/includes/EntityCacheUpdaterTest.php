@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\EntityCacheTable;
 use Wikibase\EntityCacheUpdater;
 use Wikibase\EntityChange;
 use Wikibase\Item;
@@ -40,6 +41,11 @@ use Wikibase\Settings;
  */
 class EntityCacheUpdaterTest extends \MediaWikiTestCase {
 
+	public function testConstructor() {
+		new EntityCacheUpdater( new EntityCacheTable() );
+		$this->assertTrue( true );
+	}
+
 	public function handleChangeProvider() {
 		$argLists = array();
 
@@ -66,28 +72,13 @@ class EntityCacheUpdaterTest extends \MediaWikiTestCase {
 		foreach ( $this->handleChangeProvider() as $argList ) {
 			list( $change, , ) = $argList;
 
-			$cacheUpdater = new EntityCacheUpdater();
+			$cacheUpdater = new EntityCacheUpdater( new EntityCacheTable() );
 
 			$cacheUpdater->handleChange( $change );
 
 			// TODO: test if the result matches expected behavior
 			$this->assertTrue( true );
 		}
-	}
-
-	public function constructorProvider() {
-		return array(
-			array(),
-		);
-	}
-
-	/**
-	 * @dataProvider constructorProvider
-	 */
-	public function testConstructor() {
-		$reflector = new \ReflectionClass( '\Wikibase\EntityCacheUpdater' );
-		$instance = $reflector->newInstanceArgs( func_get_args() );
-		$this->assertInstanceOf( '\Wikibase\EntityCacheUpdater', $instance );
 	}
 
 }
