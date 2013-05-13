@@ -1,13 +1,12 @@
 <?php
 
+// TODO: fix NS
 namespace Wikibase\Repo;
 
 use DatabaseBase;
 
 /**
  * Interface for database connection providers.
- *
- * TODO: move to lib
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
