@@ -92,7 +92,7 @@ class DirectSqlStore implements ClientStore {
 			$this->entityUsageIndex = $this->newEntityUsageIndex();
 		}
 
-		return $this->siteLinkTable;
+		return $this->entityUsageIndex;
 	}
 
 	/**
