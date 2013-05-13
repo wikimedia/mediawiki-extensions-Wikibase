@@ -2,10 +2,26 @@
 
 namespace Wikibase\Test;
 
+use Site;
 use Wikibase\SiteLink;
 
 /**
- * Tests for the Wikibase\SiteLink class.
+ * @covers Wikibase\SiteLink
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -16,138 +32,109 @@ use Wikibase\SiteLink;
  * @group Wikibase
  * @group WikibaseDataModel
  * @group SiteLink
- * @group Database
  *
  * @licence GNU GPL v2+
- * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SiteLinkTest extends \MediaWikiTestCase {
 
-	public function setUp() {
-		parent::setUp();
+	/**
+	 * @dataProvider constructorProvider
+	 */
+	public function testConstructor( Site $site, $pageName ) {
+		$link = new SiteLink( $site, $pageName );
 
-		static $hasSites = false;
+		$this->assertEquals( $site, $link->getSite() );
+		$this->assertEquals( $pageName, $link->getPage() );
+	}
 
-		if ( !$hasSites ) {
-			\TestSites::insertIntoDb();
-			$hasSites = true;
+	public function constructorProvider() {
+		$argLists = array();
+
+		foreach ( $this->getSites() as $site ) {
+			foreach ( array( 'Nyan', 'Nyan!', 'Main_Page' ) as $pageName ) {
+				$argLists[] = array( $site, $pageName );
+			}
 		}
+
+		return $argLists;
+	}
+
+	protected function getSites() {
+		$sites = array();
+
+		$enWiki = new \MediaWikiSite();
+		$enWiki->setGlobalId( 'enwiki' );
+
+		$sites[] = $enWiki;
+
+
+		$nlWiki = new \MediaWikiSite();
+		$nlWiki->setGlobalId( 'nlwiki' );
+
+		$sites[] = $nlWiki;
+
+
+		$fooWiki = new \Site();
+		$fooWiki->setGlobalId( 'foobarbaz' );
+
+		$sites[] = $fooWiki;
+
+		return $sites;
 	}
 
 	/**
-	 * Returns a site to test with.
-	 * @return \MediaWikiSite
+	 * @dataProvider constructorProvider
 	 */
-	protected function getSite() {
-		$site = \MediaWikiSite::newFromGlobalId( 'enwiki' );
-		$site->setPagePath( 'https://en.wikipedia.org/wiki/$1' );
+	public function testToString( Site $site, $pageName ) {
+		$link = new SiteLink( $site, $pageName );
 
-		return $site;
-	}
+		$this->assertInternalType( 'string', (string)$link );
 
-	protected function newFromText( $pageText ) {
-		return new SiteLink( $this->getSite(), $pageText );
-	}
+		$parts = explode( ':', (string)$link );
+		$this->assertCount( 2, $parts, 'string representation should contain one colon' );
 
-	public function testNewFromText() {
-		$link = SiteLink::newFromText( "enwiki", " foo " );
-		$this->assertEquals( " foo ", $link->getPage() );
+		$this->assertEquals(
+			$site->getGlobalId(),
+			substr( $parts[0], 2 ),
+			'The first part of the string representation should be [[$globalSiteId'
+		);
 
-		//NOTE: this does not actually call out to the enwiki site to perform the normalization,
-		//      but uses a local Title object to do so. This is hardcoded on SiteLink::normalizePageTitle
-		//      for the case that MW_PHPUNIT_TEST is set.
-		$link = SiteLink::newFromText( "enwiki", " foo ", true );
-		$this->assertEquals( "Foo", $link->getPage() );
-	}
-
-	public function testConstructor() {
-		$link = new SiteLink( $this->getSite(), "Foo" );
-		$this->assertEquals( "Foo", $link->getPage() );
-	}
-
-	/**
-	 * @depends testNewFromText
-	 */
-	public function testGetPage() {
-		$link = $this->newFromText( 'Foo' );
-		$this->assertEquals( "Foo", $link->getPage() );
-	}
-
-	/**
-	 * @depends testNewFromText
-	 */
-	public function testGetSite() {
-		$this->assertEquals( $this->getSite(), $this->newFromText( 'Foo' )->getSite() );
-	}
-
-	/**
-	 * @depends testNewFromText
-	 */
-	public function testGetSiteID() {
-		$this->assertEquals( 'enwiki', $this->newFromText( 'Foo' )->getSite()->getGlobalId() );
-	}
-
-	/**
-	 * @depends testNewFromText
-	 */
-	public function testToString() {
-		$link = $this->newFromText( 'Foo Bar' );
-
-		$this->assertEquals( "[[enwiki:Foo Bar]]", "$link" );
-	}
-
-	public function dataGetSiteIDs() {
-		return array(
-			array(
-				array(),
-				array() ),
-
-			array(
-				array( SiteLink::newFromText( 'enwiki', "Foo Bar" ), SiteLink::newFromText( 'dewiki', "Bla bla" ) ),
-				array( 'enwiki', 'dewiki' ) ),
-
-			array(
-				array( SiteLink::newFromText( 'enwiki', "Foo Bar" ), SiteLink::newFromText( 'dewiki', "Bla bla" ), SiteLink::newFromText( 'enwiki', "More Stuff" ) ),
-				array( 'enwiki', 'dewiki' ) ),
+		$this->assertEquals(
+			$pageName,
+			substr( $parts[1], 0, strlen( $parts[1] ) - 2 ),
+			'The second part of the string representation should be $pageName]]'
 		);
 	}
 
 	/**
-	 *
-	 * @dataProvider dataGetSiteIDs
-	 * @depends testNewFromText
+	 * @dataProvider constructorProvider
 	 */
-	public function testGetSiteIDs( $links, $expected ) {
-		$ids = SiteLink::getSiteIDs( $links );
+	public function testGetUrl( Site $site, $pageName ) {
+		$link = new SiteLink( $site, $pageName );
 
-		$this->assertArrayEquals( $expected, $ids );
-	}
-
-	public function dataSiteLinksToArray() {
-		return array(
-			array(
-				array(),
-				array() ),
-
-			array(
-				array( SiteLink::newFromText( 'enwiki', "Foo Bar" ), SiteLink::newFromText( 'dewiki', "Bla bla" ) ),
-				array( 'enwiki' => "Foo Bar", 'dewiki' => "Bla bla" ) ),
-
-			array(
-				array( SiteLink::newFromText( 'enwiki', "Foo Bar" ), SiteLink::newFromText( 'dewiki', "Bla bla" ), SiteLink::newFromText( 'enwiki', "More Stuff" ) ),
-				array( 'enwiki' => "More Stuff", 'dewiki' => "Bla bla" ) ),
+		$this->assertEquals(
+			$site->getPageUrl( $pageName ),
+			$link->getUrl()
 		);
 	}
 
 	/**
-	 *
-	 * @dataProvider dataSiteLinksToArray
-	 * @depends testNewFromText
+	 * @dataProvider siteProvider
 	 */
-	public function testSiteLinksToArray( $links, $expected ) {
-		$array = SiteLink::siteLinksToArray( $links );
-
-		$this->assertArrayEquals( $expected, $array );
+	public function testConstructorWithNullPageName( Site $site ) {
+		$this->setExpectedException( 'MWException' );
+		new SiteLink( $site, null );
 	}
+
+	public function siteProvider() {
+		$argLists = array();
+
+		foreach ( $this->getSites() as $site ) {
+			$argLists[] = array( $site );
+		}
+
+		return $argLists;
+	}
+
 }
