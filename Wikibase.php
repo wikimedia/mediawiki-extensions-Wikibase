@@ -33,8 +33,9 @@ if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 	switch( $jenkins_job_name) {
 
 	case 'mwext-Wikibase-client-tests':
+		require_once __DIR__ . '/client/WikibaseClient.php';
+		require_once __DIR__ . '/client/ExampleSettings.php';
 	break;
-
 	case 'mwext-Wikibase-repo-tests':
 		# Pretends we asked PHPUnit to exclude WikidataClient group,
 		# this is done by inserting an --exclude-group option just after the
