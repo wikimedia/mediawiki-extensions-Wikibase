@@ -85,6 +85,17 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.time.timeinput' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.time/jquery.time.timeinput.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+				'jquery.eachchange',
+				'time.js'
+			),
+		),
+
 		'jquery.ui.toggler' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.toggler.js',

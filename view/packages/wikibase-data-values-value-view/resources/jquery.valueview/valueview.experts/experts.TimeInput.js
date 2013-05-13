@@ -3,13 +3,12 @@
  * @ingroup ValueView
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
 ( function( dv, vp, $, vv, Time ) {
 	'use strict';
 
-	// TODO: for now, we only serve a plain input. Later this expert should use a widget dedicated
-	//  to time input and therefore not require to inherit from the StringValue expert anymore.
-	var PARENT = vv.experts.StringValue;
+	var PARENT = vv.Expert;
 
 	/**
 	 * Valueview expert handling input of time values.
@@ -17,9 +16,41 @@
 	 * @since 0.1
 	 *
 	 * @constructor
-	 * @extends jQuery.valueview.experts.StringValue
+	 * @extends jQuery.valueview.Expert
 	 */
 	vv.experts.TimeInput = vv.expert( 'timeinput', PARENT, {
+		/**
+		 * The the input element's node.
+		 * @type {jQuery}
+		 */
+		$input: null,
+
+		/**
+		 * Caches a new value (or null for no value) set by _setRawValue() until draw() displaying
+		 * the new value has been called. The use of this, basically, is a structural improvement
+		 * which allows moving setting the displayed value to the draw() method which is supposed to
+		 * handle all visual manners.
+		 * @type {time.Time|null|false}
+		 */
+		_newValue: null,
+
+		/**
+		 * @see jQuery.valueview.Expert._init
+		 */
+		_init: function() {
+			var self = this;
+
+			this.$input = $( '<input/>', {
+				type: 'text',
+				'class': this.uiBaseClass + '-input valueview-input'
+			} )
+			.appendTo( this.$viewPort )
+			.timeinput()
+			.on( 'timeinputchange', function( event, value ) {
+				self._viewNotifier.notify( 'change' );
+			} );
+		},
+
 		/**
 		 * @see Query.valueview.Expert.parser
 		 */
@@ -29,14 +60,13 @@
 
 		/**
 		 * @see jQuery.valueview.Expert._getRawValue
+		 *
+		 * @return {time.Time|null}
 		 */
 		_getRawValue: function() {
-			if( this._newValue !== false ) {
-				return this._newValue
-			}
-			var time = new Time( $.trim( this.$input.val() ) );
-
-			return time.isValid() ? time : null;
+			return ( this._newValue !== false )
+				? this._newValue
+				: this.$input.data( 'timeinput' ).value();
 		},
 
 		/**
@@ -73,17 +103,35 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.experts.StringValue.draw
+		 * @see jQuery.valueview.Expert.draw
 		 */
 		draw: function() {
-			// Little hack for abusing inheritance. Should go away since the whole expert is just
-			// temporary for now.
-			if( this._newValue !== false ) {
-				this._newValue = this._newValue === null ? '' : this._newValue.text();
+			if( this._viewState.isDisabled() ) {
+				this.$input.data( 'timeinput' ).disable();
+			} else {
+				this.$input.data( 'timeinput' ).enable();
 			}
 
-			PARENT.prototype.draw.call( this );
+			if( this._newValue !== false ) {
+				this.$input.data( 'timeinput' ).value( this._newValue );
+				this._newValue = false;
+			}
+		},
+
+		/**
+		 * @see jQuery.valueview.Expert.focus
+		 */
+		focus: function() {
+			this.$input.focus();
+		},
+
+		/**
+		 * @see jQuery.valueview.Expert.blur
+		 */
+		blur: function() {
+			this.$input.blur();
 		}
+
 	} );
 
 }( dataValues, valueParsers, jQuery, jQuery.valueview, time.Time ) );
