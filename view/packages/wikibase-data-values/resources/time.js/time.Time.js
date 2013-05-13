@@ -11,9 +11,19 @@ time.Time = ( function( time ) {
 	 * Constructor for object representing a point in time with a certain precision.
 	 *
 	 * @param {string} inputtext Text to be interpreted as time.
-	 * @param {number} explicitPrecision Precission which will overrule the precision
+	 * @param {Object} options
+	 *        {number} precision: Precision which will overrule the automatically detected
+	 *        precision.
+	 *        {string} calendarname: Default calendar name overruling the automatically detected
+	 *        calendar.
 	 */
-	function Time( inputtext, explicitPrecision ) {
+	function Time( inputtext, options ) {
+		options = $.extend( {
+			precision: null,
+			calendarname: null
+		}, options );
+
+
 		this.getInputtext = function() {
 			return inputtext;
 		};
@@ -34,7 +44,9 @@ time.Time = ( function( time ) {
 			minute = (result.minute !== undefined) ? result.minute : 0,
 			second = (result.second !== undefined) ? result.second : 0,
 			utcoffset = '+00:00',
-			calendarname = (result.calendarname !== undefined) ? result.calendarname : 'Gregorian';
+			calendarname = ( options.calendarname )
+				? options.calendarname
+				: ( result.calendarname !== undefined ) ? result.calendarname : 'Gregorian';
 
 		this.year = function() {
 			return year;
@@ -52,7 +64,7 @@ time.Time = ( function( time ) {
 			return utcoffset;
 		};
 
-		var precision = explicitPrecision !== undefined ? explicitPrecision : result.precision;
+		var precision = ( options.precision ) ? options.precision : result.precision;
 		this.precision = function() {
 			return precision;
 		};
@@ -167,7 +179,7 @@ time.Time = ( function( time ) {
 	 * TODO: this function shouldn't really be required since the parser should simply be able to
 	 *       take such a string and create a new Time object from it.
 	 *
-	 * @param {string} signature
+	 * @param {string} iso8601String
 	 * @param {number} [precision] If not given, precision will be as high as possible.
 	 */
 	Time.newFromIso8601 = function( iso8601String, precision ) {
@@ -178,7 +190,7 @@ time.Time = ( function( time ) {
 			.replace( /([\-\+])?0*/, '$1' )// get rid of trailing zeroes, keep "-" and "+"
 			.replace( '+', '' ); // get reid of "+"
 
-		return new Time( formattedIso8601, precision );
+		return new Time( formattedIso8601, { precision: precision } );
 	};
 
 	return Time; // expose time.Time
