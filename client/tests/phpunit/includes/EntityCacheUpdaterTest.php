@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\EntityCacheTable;
 use Wikibase\EntityCacheUpdater;
 use Wikibase\EntityChange;
 use Wikibase\Item;
@@ -66,7 +67,7 @@ class EntityCacheUpdaterTest extends \MediaWikiTestCase {
 		foreach ( $this->handleChangeProvider() as $argList ) {
 			list( $change, , ) = $argList;
 
-			$cacheUpdater = new EntityCacheUpdater();
+			$cacheUpdater = new EntityCacheUpdater( new EntityCacheTable() );
 
 			$cacheUpdater->handleChange( $change );
 
