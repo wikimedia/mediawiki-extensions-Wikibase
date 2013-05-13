@@ -34,11 +34,16 @@ if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 
 	case 'mwext-Wikibase-client-tests':
 		require_once __DIR__ . '/client/WikibaseClient.php';
+
+		$_SERVER['argv'] = array_merge(
+			$_SERVER['argv'],
+			array(
+				'--group', 'Diff,Ask,DataValueExtensions,Wikibase',
+				'--exclude-group', 'ChangeHandlerTest',
+			)
+		);
 	break;
 	case 'mwext-Wikibase-repo-tests':
-		# Pretends we asked PHPUnit to exclude WikidataClient group,
-		# this is done by inserting an --exclude-group option just after the
-		# command line.
 		$_SERVER['argv'] = array_merge(
 			$_SERVER['argv'],
 			array(
