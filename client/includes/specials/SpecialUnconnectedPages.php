@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\NamespaceChecker;
+
 /**
  * List client pages that is not connected to repository items.
  *
@@ -220,7 +222,7 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		$conds = $this->buildConditionals( $dbr );
-		$conds[] = "page_is_redirect = FALSE";
+		$conds["page_is_redirect"] = '0';
 		$conds[] = "pp_propname IS NULL";
 		if ( $this->iwData === 'only' ) {
 			$conds[] = 'll_from IS NOT NULL';
