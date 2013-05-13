@@ -8,20 +8,7 @@ use Wikibase\Utils;
 use Wikibase\ItemView;
 
 /**
- * Test WikibaseItemView.
- *
- * The tests are using "Database" to get its own set of temporal tables.
- * This is nice so we avoid poisoning an existing database.
- *
- * The tests are using "medium" so they are able to run alittle longer before they are killed.
- * Without this they will be killed after 1 second, but the setup of the tables takes so long
- * time that the first few tests get killed.
- *
- * The tests are doing some assumptions on the id numbers. If the database isn't empty when
- * when its filled with test items the ids will most likely get out of sync and the tests will
- * fail. It seems impossible to store the item ids back somehow and at the same time not being
- * dependant on some magically correct solution. That is we could use GetItemId but then we
- * would imply that this module in fact is correct.
+ * @covers Wikibase\ItemView.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,68 +48,7 @@ use Wikibase\ItemView;
  */
 class ItemViewTest extends \MediaWikiTestCase {
 
-	//@todo: make this a baseclass to use with all types of entities.
-
-	protected static $num = -1;
-
-	public function setUp() {
-		parent::setUp();
-
-		static $hasSites = false;
-
-		if ( !$hasSites ) {
-			\TestSites::insertIntoDb();
-			$hasSites = true;
-		}
-	}
-
 	/**
-	 * @dataProvider providerGetHtml
-	 */
-	public function testGetHtml( $itemData, $expected ) {
-		self::$num++;
-		$view = new ItemView();
-
-		if ( is_string( $expected ) ) {
-			$expected = ( array )$expected;
-		}
-		$expected[] = '/class\s*=\s*"wb-entity wb-' . Item::ENTITY_TYPE . '"/';
-
-		if( $itemData === false ) {
-			$itemContent = ItemContent::newEmpty();
-			$expected[] = '/id\s*=\s*"wb-' . Item::ENTITY_TYPE . '-new"/';
-		} else {
-			$itemData += array( 'entity' => 'q123' );
-			$itemContent = ItemContent::newFromArray( $itemData );
-			$expected[] = '/id\s*=\s*"wb-' . Item::ENTITY_TYPE . '-' . $itemContent->getEntity()->getPrefixedId() . '"/';
-		}
-
-		$itemContent->getEntity()->setLabel( 'de', 'Stockholm' );
-
-		$this->assertTrue(
-			!is_null( $itemContent ) && $itemContent !== false,
-			"Could not find an item"
-		);
-
-		$this->assertTrue(
-			!is_null( $view ) && $view !== false,
-			"Could not find a view"
-		);
-
-		$html = $view->getHtml( $itemContent );
-
-		foreach ( $expected as $that ) {
-			$this->assertRegExp(
-				$that,
-				$html,
-				"Could not find the marker '{$that}'"
-			);
-		}
-
-	}
-
-	/**
-	 * @todo move this to an EntityViewTest class at some point
 	 * @dataProvider providerNewForEntityContent
 	 */
 	public function testNewForEntityContent( $entityContent ) {
@@ -138,54 +64,6 @@ class ItemViewTest extends \MediaWikiTestCase {
 		return array(
 			array( ItemContent::newEmpty() ),
 			array( \Wikibase\PropertyContent::newEmpty() )
-		);
-	}
-
-	// Should use proper abstraction and not create items from arrays
-	public static function providerGetHtml() {
-		return array(
-			array(
-				false,
-				'/"wb-sitelinks"/'
-			),
-			array(
-				array(
-					'links'=> array(
-						'enwiki' => 'Oslo',
-					)
-				),
-				array(
-					'/"wb-sitelinks"/',
-					'/"wb-sitelinks-en uneven"/',
-				)
-			),
-			array(
-				array(
-					'links'=> array(
-						'dewiki' => 'Stockholm',
-						'enwiki' => 'Oslo',
-					)
-				),
-				array(
-					'/"wb-sitelinks"/',
-					'/"wb-sitelinks-de uneven"/',
-					'/"wb-sitelinks-en even"/',
-				)
-			),
-			array(
-				array(
-					'description'=> array(
-						'en' => 'Capitol of Norway'
-					),
-					'links'=> array(
-						'enwiki' => 'Oslo',
-					),
-				),
-				array(
-					'/"wb-sitelinks"/',
-					'/<span class="wb-value ">\s*Capitol of Norway\s*<\/span>/',
-				)
-			),
 		);
 	}
 
