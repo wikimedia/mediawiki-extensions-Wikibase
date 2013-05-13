@@ -21,10 +21,6 @@ require_once __DIR__ . '/Query/ExampleSettings.php';
 
 require_once __DIR__ . '/DataModel/DataModel.php';
 require_once __DIR__ . '/lib/WikibaseLib.php';
-require_once __DIR__ . '/repo/Wikibase.php';
-require_once __DIR__ . '/Query/WikibaseQuery.php';
-
-require_once __DIR__ . '/repo/ExampleSettings.php';
 
 # Let JenkinsAdapt our test suite when run under Jenkins
 $jenkins_job_name = getenv( 'JOB_NAME' );
@@ -34,11 +30,21 @@ if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 
 	case 'mwext-Wikibase-client-tests':
 		require_once __DIR__ . '/client/WikibaseClient.php';
+
+		$_SERVER['argv'] = array_merge(
+			$_SERVER['argv'],
+			array(
+				'--group', 'Diff,Ask,DataValueExtensions,WikibaseClient,WikibaseLib',
+				'--exclude-group', 'ChangeHandlerTest',
+			)
+		);
 	break;
 	case 'mwext-Wikibase-repo-tests':
-		# Pretends we asked PHPUnit to exclude WikidataClient group,
-		# this is done by inserting an --exclude-group option just after the
-		# command line.
+		require_once __DIR__ . '/repo/Wikibase.php';
+		require_once __DIR__ . '/Query/WikibaseQuery.php';
+
+		require_once __DIR__ . '/repo/ExampleSettings.php';
+
 		$_SERVER['argv'] = array_merge(
 			$_SERVER['argv'],
 			array(
