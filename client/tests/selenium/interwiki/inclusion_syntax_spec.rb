@@ -58,7 +58,7 @@ describe "Check client inclusion syntax" do
   end
 
   context "Check item-property inclusion syntax" do
-    it "should check if item-property gets included properly: single value, referenced by property label", :experimental => true do
+    it "should check if item-property gets included properly: single value, referenced by property label" do
       on_page(ClientPage) do |page|
         page.navigate_to_article(article_title)
         page.clientArticleTitle.should == article_title
