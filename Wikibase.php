@@ -26,12 +26,12 @@ require_once __DIR__ . '/Query/WikibaseQuery.php';
 
 require_once __DIR__ . '/repo/ExampleSettings.php';
 
-// Temporary hack that populates the sites table since there are some tests that require this to have happened
-require_once __DIR__ . '/lib/maintenance/populateSitesTable.php';
-$wgExtensionFunctions[] = function() {
-	$evilStuff = new PopulateSitesTable();
-	$evilStuff->execute();
-};
+//// Temporary hack that populates the sites table since there are some tests that require this to have happened
+//require_once __DIR__ . '/lib/maintenance/populateSitesTable.php';
+//$wgExtensionFunctions[] = function() {
+//	$evilStuff = new PopulateSitesTable();
+//	$evilStuff->execute();
+//};
 
 # Let JenkinsAdapt our test suite when run under Jenkins
 $jenkins_job_name = getenv( 'JOB_NAME' );
