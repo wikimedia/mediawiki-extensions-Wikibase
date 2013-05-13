@@ -9,7 +9,7 @@
  * element the toggler is initialized on. The toggler considers the subject's current "display"
  * style, so if it is set to "none", it is considered invisible initially.
  *
- * @option {string} $subject (REQUIRED) The node whose visibility shall be toggled.
+ * @option {jQuery} $subject (REQUIRED) The node whose visibility shall be toggled.
  *
  * @dependency jquery.ui.Widget
  */
@@ -89,7 +89,7 @@
 
 			this.element
 			.text( '' )
-			.addClass( this.widgetBaseClass +  ' ' + this.widgetBaseClass + '-toggle');
+			.addClass( this.widgetBaseClass +  ' ' + this.widgetBaseClass + '-toggle ' + 'ui-state-default' );
 
 			if( this.element[0].nodeName === 'A' ) {
 				this.element.attr( 'href', 'javascript:void(0);' );
@@ -100,9 +100,17 @@
 
 			this.element
 			.on( 'click', function( event ) {
-				// Change toggle icon to reflect current state of toggle subject visibility:
-				self._reflectVisibilityOnToggleIcon( true );
-				self.options.$subject.slideToggle();
+				if( !self.element.hasClass( 'ui-state-disabled' ) ) {
+					// Change toggle icon to reflect current state of toggle subject visibility:
+					self._reflectVisibilityOnToggleIcon( true );
+					self.options.$subject.slideToggle();
+				}
+			} )
+			.on( 'mouseover', function( event ) {
+				self.element.addClass( 'ui-state-hover' );
+			} )
+			.on( 'mouseout', function( event ) {
+				self.element.removeClass( 'ui-state-hover' );
 			} )
 			.append( this.$toggleIcon )
 			.append( $toggleLabel );

@@ -11,6 +11,8 @@
 	display: block;
 	margin-top: .5em;
 	white-space: nowrap;
+	border: none;
+	background: none;
 }
 .ui-toggler .ui-toggler-icon,
 .ui-toggler .ui-toggler-label {
