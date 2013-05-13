@@ -50,9 +50,7 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.3
 	 *
-	 * @note: as of version 0.4, no code calls setEntity(), so getEntity() will always return null.
-	 * This is kept in the expectation that we may want to construct EntityChange objects
-	 * from an atom feed or the like, where full entity data would be included and useful.
+	 * @deprecated: as of version 0.4, no code calls setEntity(), so getEntity() will always return null.
 	 *
 	 * @return Entity|null
 	 */
