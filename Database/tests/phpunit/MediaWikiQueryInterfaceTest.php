@@ -39,7 +39,7 @@ use Wikibase\Repo\DBConnectionProvider;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
+class MediaWikiQueryInterfaceTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @return QueryInterface
@@ -151,7 +151,13 @@ class MediaWikiQueryInterfaceTest extends \MediaWikiTestCase {
 			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, false ),
 		) );
 
-		return $this->arrayWrap( $tables );
+		$argLists = array();
+
+		foreach ( $tables as $table ) {
+			$argLists[] = array( $table );
+		}
+
+		return $argLists;
 	}
 
 	/**
