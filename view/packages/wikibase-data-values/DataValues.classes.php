@@ -32,7 +32,6 @@ return array(
 	'DataValues\IriValue' => 'includes/values/IriValue.php',
 	'DataValues\MonolingualTextValue' => 'includes/values/MonolingualTextValue.php',
 	'DataValues\MultilingualTextValue' => 'includes/values/MultilingualTextValue.php',
-	'DataValues\MediaWikiTitleValue' => 'includes/values/MediaWikiTitleValue.php',
 	'DataValues\NumberValue' => 'includes/values/NumberValue.php',
 	'DataValues\PropertyValue' => 'includes/values/PropertyValue.php',
 	'DataValues\QuantityValue' => 'includes/values/QuantityValue.php',
