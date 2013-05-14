@@ -54,12 +54,22 @@ class SitesModule extends ResourceLoaderModule {
 			if ( $site->getType() === Site::TYPE_MEDIAWIKI && $site->getGroup() === 'wikipedia' ) {
 				$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
 
+				// Use protocol relative URIs, as it's safe to assume that all wikis support the same protocol
+				list( $pageUrl, $apiUrl ) = preg_replace(
+					"/^https?:/i",
+					'',
+					array(
+						$site->getPageUrl(),
+						$site->getFileUrl( 'api.php' )
+					)
+				);
+
 				$sites[$site->getLanguageCode()] = array(
 					'shortName' => $languageName,
 					'name' => $languageName,
 					'globalSiteId' => $site->getGlobalId(),
-					'pageUrl' => $site->getPageUrl(),
-					'apiUrl' => $site->getFileUrl( 'api.php' ),
+					'pageUrl' => $pageUrl,
+					'apiUrl' => $apiUrl,
 					'languageCode' => $site->getLanguageCode()
 				);
 			}
