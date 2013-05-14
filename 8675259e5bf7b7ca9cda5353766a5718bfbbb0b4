@@ -33,6 +33,23 @@
       "revId": "8675259e5bf7b7ca9cda5353766a5718bfbbb0b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwxEb6n8",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-14T09:32:13Z",
+      "side": 1,
+      "message": "Isn\u0027t this working already? At least I\u0027ve seen some code for this in this change set.",
+      "revId": "8675259e5bf7b7ca9cda5353766a5718bfbbb0b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
