@@ -131,7 +131,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found entity in cache (key $cacheKey)" );
 				list( $cachedRev, $cachedEntity ) = $cached;
 
-				if ( $revision && $revision == $cachedRev) {
+				if ( $revision && $revision == $cachedRev ) {
 					wfDebugLog( __CLASS__, __FUNCTION__ . ": Using cached entity (rev $cachedRev)" );
 					wfProfileOut( __METHOD__ );
 					return $cachedEntity;
@@ -294,7 +294,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 
 		if ( $blob === false ) {
 			// oops. something went wrong.
-			wfWarn( "Unable to load raw content bob for rev " . $row->rev_id );
+			wfWarn( "Unable to load raw content blob for rev " . $row->rev_id );
 			wfProfileOut( __METHOD__ );
 			return null;
 		}
