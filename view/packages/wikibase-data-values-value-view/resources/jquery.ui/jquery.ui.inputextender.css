@@ -19,4 +19,5 @@
 .ui-inputextender-extension .ui-inputextender-contentnode {
 	float: left;
 	clear: both;
+	margin-top: 0.5em;
 }

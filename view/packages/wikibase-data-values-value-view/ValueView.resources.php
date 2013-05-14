@@ -197,12 +197,17 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery.valueview/valueview.experts/experts.TimeInput.js',
 			),
+			'styles' => array(
+				'jquery.valueview/valueview.experts/experts.TimeInput.css',
+			),
 			'dependencies' => array(
 				'jquery.time.timeinput',
 				'jquery.ui.inputextender',
 				'jquery.ui.listrotator',
+				'jquery.ui.toggler',
 			),
 			'messages' => array(
+				'valueview-expert-advancedoptions',
 				'valueview-expert-timeinput-precision',
 				'valueview-expert-timeinput-calendar',
 				'valueview-preview-label',

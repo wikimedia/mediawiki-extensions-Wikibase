@@ -1,0 +1,29 @@
+/**
+ * Styles for valueview's TimeInput expert.
+ *
+ * @since 0.1
+ * @file
+ * @ingroup ValueView
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+
+.valueview-expert-timeinput-input {
+	width: 100%;
+}
+
+.ui-inputextender-extension .valueview-expert-timeinput-advancedtoggler {
+	margin-top: 0;
+}
+
+/* TODO: Put style into more generic place along with moving the preview out of the TimeInput expert */
+.valueview-preview {
+	width: 100%;
+	margin-top: 0.5em;
+	padding-top: 0.5em;
+	border-top: 1px dashed #CCC;
+}
+.valueview-preview-value {
+	margin-top: 0.2em;
+}

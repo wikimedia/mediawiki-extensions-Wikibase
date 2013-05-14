@@ -157,6 +157,10 @@
 			} )
 			.appendTo( this.$calendarContainer );
 
+			var $toggler = $( '<a/>' )
+			.addClass( this.uiBaseClass + '-advancedtoggler' )
+			.text( mw.msg( 'valueview-expert-advancedoptions' ) );
+
 			this.$input = $( '<input/>', {
 				type: 'text',
 				'class': this.uiBaseClass + '-input valueview-input'
@@ -172,13 +176,17 @@
 			// TODO: Move input extender out of here to a more generic place since it is not
 			// TimeInput specific.
 			.inputextender( {
-				content: [ this.$preview, this.$precisionContainer, this.$calendarContainer ],
+				content: [ $toggler, this.$precisionContainer, this.$calendarContainer, this.$preview ],
 				initCallback: function() {
 					self.$precision.data( 'listrotator' ).initWidths();
 					self.$calendar.data( 'listrotator' ).initWidths();
+
+					var $subjects = self.$precisionContainer.add( self.$calendarContainer );
+					$subjects.css( 'display', 'none' );
+					$toggler.toggler( { $subject: $subjects } );
 				}
 			} )
-			.on( 'timeinputupdate.' + this.uiBasClass, function( event, value ) {
+			.on( 'timeinputupdate.' + this.uiBaseClass, function( event, value ) {
 				self._updatePreview( value );
 				if( value && value.isValid() ) {
 					self.$precision.data( 'listrotator' ).rotate( value.precision() );

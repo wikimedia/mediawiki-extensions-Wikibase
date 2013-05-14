@@ -36,6 +36,8 @@ $messages = array();
 $messages['en'] = array(
 	'valueview-desc' => 'UI components for displaying and editing data values',
 
+	'valueview-expert-advancedoptions' => 'advanced options',
+
 	// UnsupportedValue expert:
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Handling of "$1" values is not yet supported.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Handling of values for "$1" data type is not yet supported.',
