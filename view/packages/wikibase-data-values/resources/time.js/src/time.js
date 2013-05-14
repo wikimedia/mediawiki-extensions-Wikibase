@@ -2,7 +2,13 @@
  * time.js by Denny Vrandečić
  * Source: http://simia.net/valueparser/time.js
  *
+ * VERSION: 0.1
+ *
+ * @since 0.1
+ * @file
+ * @ingroup Time.js
  * @licence GNU GPL v2+
+ *
  * @author Denny Vrandečić
  */
 ( function( global ) {

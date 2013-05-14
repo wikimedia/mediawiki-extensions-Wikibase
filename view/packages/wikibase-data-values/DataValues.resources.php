@@ -88,9 +88,9 @@ return call_user_func( function() {
 		// time.js
 		'time.js' => $moduleTemplate + array(
 			'scripts' => array(
-				'time.js/time.js',
-				'time.js/time.Time.js',
-				'time.js/time.Time.parse.js',
+				'time.js/src/time.js',
+				'time.js/src/time.Time.js',
+				'time.js/src/time.Time.parse.js',
 			)
 		),
 

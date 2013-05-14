@@ -1,6 +1,11 @@
 /**
  * time.js's Time constructor for parsing and representing a time.
  *
+ * @since 0.1
+ * @file
+ * @ingroup Time.js
+ * @licence GNU GPL v2+
+ *
  * @author Denny Vrandečić
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
