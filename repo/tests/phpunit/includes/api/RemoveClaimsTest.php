@@ -145,4 +145,32 @@ class RemoveClaimsTest extends \ApiTestCase {
 		$this->assertArrayEquals( $claimGuids, $claims );
 	}
 
+	/**
+	 * @dataProvider invalidClaimProvider
+	 */
+	public function testRemoveInvalidClaims( $claimGuid ) {
+		$caughtException = false;
+
+		$params = array(
+			'action' => 'wbremoveclaims',
+			'claim' => $claimGuid
+		);
+
+		try {
+			$this->doApiRequest( $params );
+		} catch ( \UsageException $e ) {
+			$this->assertEquals( $e->getCodeString(), 'removeclaims-invalid-guid',  'Invalid claim guid raised correct error' );
+			$caughtExceptin = true;
+		}
+
+		$this->assertTrue( $caughtException, 'Exception was caught' );
+	}
+
+	public function invalidClaimProvider() {
+		return array(
+			array( 'xyz' ),
+			array( 'x$y$z' )
+		);
+	}
+
 }
