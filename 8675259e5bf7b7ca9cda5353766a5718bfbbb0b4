@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dw1E8Ut8",
+        "filename": "repo/includes/rdf/RdfStatementBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-14T09:30:03Z",
+      "side": 1,
+      "message": "I am wondering whether we should just say code like this is not acceptable in the first place. Too often these never get replaced until it is too late because the cost of refactoring would be too high which will be used as an excuse later.\n\nA factory object or builder offering the right RdfSnakBuilder instance depending on the Snak type should probably be injected into the constructor to do this in a non-static way.\n\nHaving this would also make this class less complicated (remove almost 100 lines).",
+      "revId": "8675259e5bf7b7ca9cda5353766a5718bfbbb0b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwzFBzl4",
+        "filename": "repo/includes/rdf/RdfStatementBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-14T09:30:03Z",
+      "side": 1,
+      "message": "same here of course.",
+      "revId": "8675259e5bf7b7ca9cda5353766a5718bfbbb0b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
