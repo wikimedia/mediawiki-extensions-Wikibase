@@ -44,6 +44,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\V4GuidGenerator' => 'includes/GuidGenerator.php',
 		'Wikibase\Lib\EntityRetrievingDataTypeLookup' => 'includes/EntityRetrievingDataTypeLookup.php',
 		'Wikibase\Lib\ClaimGuidGenerator' => 'includes/GuidGenerator.php',
+		'Wikibase\Lib\ClaimGuidValidator' => 'includes/ClaimGuidValidator.php',
 		'Wikibase\Lib\InMemoryDataTypeLookup' => 'includes/InMemoryDataTypeLookup.php',
 		'Wikibase\LibRegistry' => 'includes/LibRegistry.php',
 		'Wikibase\Template' => 'includes/TemplateRegistry.php',
