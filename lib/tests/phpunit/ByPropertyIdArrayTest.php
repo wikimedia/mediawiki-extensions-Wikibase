@@ -115,4 +115,16 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $objects, $allObtainedObjects );
 	}
 
+	/**
+	 * @dataProvider listProvider
+	 * @param array $objects
+	 */
+	public function testGetByInvalidId( array $objects ) {
+		$indexedArray = new ByPropertyIdArray( $objects );
+		$indexedArray->buildIndex();
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+
+		$indexedArray->getByPropertyId( 9000 );
+	}
 }
