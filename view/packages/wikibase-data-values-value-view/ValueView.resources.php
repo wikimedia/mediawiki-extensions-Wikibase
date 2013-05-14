@@ -204,6 +204,7 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'valueview-expert-timeinput-precision',
+				'valueview-expert-timeinput-calendar',
 				'valueview-preview-label',
 				'valueview-preview-novalue',
 			),

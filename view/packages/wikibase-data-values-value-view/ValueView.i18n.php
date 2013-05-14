@@ -45,6 +45,7 @@ $messages['en'] = array(
 
 	// TimeInput expert:
 	'valueview-expert-timeinput-precision' => 'Precision:',
+	'valueview-expert-timeinput-calendar' => 'Calendar:',
 
 	'valueview-preview-label' => 'will be displayed as:',
 	'valueview-preview-novalue' => 'no valid value recognized',
@@ -64,6 +65,7 @@ $messages['qqq'] = array(
 	'valueview-expert-emptyvalue-empty' => 'Message expressing that there is currently no value set in a jQuery valueview.
 {{Identical|Empty}}',
 	'valueview-expert-timeinput-precision' => 'Label for the user interface element used to set a specific precision (e.g. hour, day, month, year) when entering a time value.',
+	'valueview-expert-timeinput-calendar' => 'Label for the user interface element used to select a specific calendar (e.g. Gregorian, Julian) entering a time value.',
 	'valueview-preview-label' => 'Label displayed above the preview of a value that is being entered by the user. The preview is the system\'s interpretation of the specified value and - since there is no strict definition for a user how to specify values - visualizes how the value will be displayed later on after the value has been saved.',
 	'valueview-preview-novalue' => 'Message displayed instead of an input value\'s preview when no value is specified yet or when the specified value could not be interpreted by the system.',
 	'valueview-listrotator-auto' => 'Label of the link to have the system automatically select the most appropriate value from a "listrotator" widget. The "listrotator" basically is a facade for a drop-down select box allowing to pick a value from a list of values. In addition to the defined values, an "automatic" option may be selected that makes the system pick the most appropriate value according to an associated input element.',

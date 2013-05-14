@@ -51,10 +51,28 @@
 		$previewValue: null,
 
 		/**
+		 * Container node for precision input and label.
+		 * @type {jQuery}
+		 */
+		$precisionContainer: null,
+
+		/**
 		 * Node of the widget used to specify the precision.
 		 * @type {jQuery}
 		 */
 		$precision: null,
+
+		/**
+		 * Container node for calendar input and label.
+		 * @type {jQuery}
+		 */
+		$calendarContainer: null,
+
+		/**
+		 * Node of the widget used to specify the calendar.
+		 * @type {jQuery}
+		 */
+		$calendar: null,
 
 		/**
 		 * @see jQuery.valueview.Expert._init
@@ -76,26 +94,68 @@
 			.text( mw.msg( 'valueview-preview-novalue' ) )
 			.appendTo( this.$preview );
 
+			this.$precisionContainer = $( '<div/>' )
+			.addClass( this.uiBaseClass + '-precisioncontainer' )
+			.append( $( '<div/>' ).text( mw.msg( 'valueview-expert-timeinput-precision' ) ) );
+
 			var precisionValues = [];
 			$.each( timeSettings.precisiontexts, function( i, text ) {
 				precisionValues.push( { value: i, label: text } );
 			} );
 
 			this.$precision = $( '<div/>' )
+			.addClass( this.uiBaseClass + '-precision' )
 			.listrotator( { values: precisionValues.reverse(), deferInit: true } )
 			.on( 'listrotatorauto.' + this.uiBaseClass, function( event ) {
-				var value = new Time( self.$input.val() );
+				var value = ( self.$calendar.data( 'listrotator' ).value() )
+					? new Time( self.$input.val(), { calendarname: self.$calendar.data( 'listrotator' ).value() } )
+					: new Time( self.$input.val() );
 				$( this ).data( 'listrotator' ).rotate( value.precision() );
 				self._setRawValue( value );
 				self._updatePreview( value );
 				self._viewNotifier.notify( 'change' );
 			} )
 			.on( 'listrotatorselected.' + this.uiBaseClass, function( event, precision ) {
-				var value = new Time( self.$input.val(), precision );
+				var value = ( self.$calendar.data( 'listrotator' ).value() )
+					? new Time( self.$input.val(), { precision: $( this ).data( 'listrotator' ).value(), calendarname: self.$calendar.data( 'listrotator' ).value() } )
+					: new Time( self.$input.val(), { precision: $( this ).data( 'listrotator' ).value() } );
 				self._setRawValue( value );
 				self._updatePreview( value );
 				self._viewNotifier.notify( 'change' );
+			} )
+			.appendTo( this.$precisionContainer );
+
+			this.$calendarContainer = $( '<div/>' )
+			.addClass( this.uiBaseClass + '-calendarcontainer' )
+			.append( $( '<div/>' ).text( mw.msg( 'valueview-expert-timeinput-calendar' ) ) );
+
+			var calendarValues = [];
+			$.each( timeSettings.calendarnames, function( i, calendarTerms ) {
+				calendarValues.push( { value: calendarTerms[0], label: calendarTerms[0] } );
 			} );
+			this.$calendar = $( '<div/>' )
+			.listrotator( { values: calendarValues, deferInit: true } )
+			.on( 'listrotatorauto', function( event ) {
+				var value = ( self.$precision.data( 'listrotator' ).value() )
+					? new Time( self.$input.val(), { precision: self.$precision.data( 'listrotator' ).value() } )
+					: new Time( self.$input.val() );
+
+				$( this ).data( 'listrotator' ).rotate( value.calendarText() );
+				self._setRawValue( value );
+				self._updatePreview( value );
+				self._viewNotifier.notify( 'change' );
+			} )
+			.on( 'listrotatorselected', function( event ) {
+				var value = ( self.$precision.data( 'listrotator' ).value() )
+					? new Time( self.$input.val(), { precision: self.$precision.data( 'listrotator' ).value(), calendarname: $( this ).data( 'listrotator' ).value() } )
+					: new Time( self.$input.val(), { calendarname: $( this ).data( 'listrotator' ).value() } );
+
+				$( this ).data( 'listrotator' ).rotate( value.calendarText() );
+				self._setRawValue( value );
+				self._updatePreview( value );
+				self._viewNotifier.notify( 'change' );
+			} )
+			.appendTo( this.$calendarContainer );
 
 			this.$input = $( '<input/>', {
 				type: 'text',
@@ -112,15 +172,17 @@
 			// TODO: Move input extender out of here to a more generic place since it is not
 			// TimeInput specific.
 			.inputextender( {
-				content: [ this.$preview, this.$precision ],
+				content: [ this.$preview, this.$precisionContainer, this.$calendarContainer ],
 				initCallback: function() {
 					self.$precision.data( 'listrotator' ).initWidths();
+					self.$calendar.data( 'listrotator' ).initWidths();
 				}
 			} )
 			.on( 'timeinputupdate.' + this.uiBasClass, function( event, value ) {
 				self._updatePreview( value );
 				if( value && value.isValid() ) {
 					self.$precision.data( 'listrotator' ).rotate( value.precision() );
+					self.$calendar.data( 'listrotator' ).rotate( value.calendarText() );
 				}
 				self._viewNotifier.notify( 'change' );
 			} );
@@ -133,8 +195,15 @@
 		destroy: function() {
 			this.$precision.data( 'listrotator' ).destroy();
 			this.$precision.remove();
+			this.$precisionContainer.remove();
+
+			this.$calendar.data( 'listrotator' ).destroy();
+			this.$calendar.remove();
+			this.$calendarContainer.remove();
+
 			this.$previewValue.remove();
 			this.$preview.remove();
+
 			this.$input.data( 'inputextender' ).destroy();
 			this.$input.data( 'timeinput' ).destroy();
 			this.$input.remove();
@@ -232,6 +301,7 @@
 				this._updatePreview( this._newValue );
 				if( this._newValue !== null ) {
 					this.$precision.data( 'listrotator' ).value( this._newValue.precision() );
+					this.$calendar.data( 'listrotator' ).value( this._newValue.calendarText() );
 				}
 				this._newValue = false;
 			}
