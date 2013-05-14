@@ -157,4 +157,34 @@ class RemoveReferencesTest extends \ApiTestCase {
 		}
 	}
 
+	/**
+	 * @dataProvider invalidGuidProvider
+	 */
+	public function testInvalidStatementGuid( $statementGuid ) {
+		$caughtException = false;
+
+		$params = array(
+			'action' => 'wbremovereferences',
+			'statement' => $statementGuid,
+			'references' => '95a2b6e8659bf177bfbeffa59cd50be859b7c810',
+			'token' => $GLOBALS['wgUser']->getEditToken()
+		);
+
+		try {
+			$this->doApiRequest( $params );
+		} catch ( \UsageException $e ) {
+			$this->assertEquals( $e->getCodeString(), 'removereferences-invalid-guid',  'Invalid statement guid raised correct error' );
+			$caughtException = true;
+		}
+
+		$this->assertTrue( $caughtException );
+	}
+
+	public function invalidGuidProvider() {
+		return array(
+			array( 'xyz' ),
+			array( 'x$y$z' )
+		);
+	}
+
 }

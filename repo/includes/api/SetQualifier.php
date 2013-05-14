@@ -18,6 +18,7 @@ use Wikibase\PropertyValueSnak;
 use Wikibase\LibRegistry;
 use Wikibase\Settings;
 
+use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -117,6 +118,12 @@ class SetQualifier extends ApiWikibase {
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
+
+		$claimGuidValidator = new ClaimGuidValidator();
+
+		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
+			$this->dieUsage( 'Invalid claim guid', 'setqualifier-invalid-guid' );
+		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
