@@ -156,4 +156,38 @@ class RemoveQualifiersTest extends \ApiTestCase {
 		}
 	}
 
+    /**
+     * @dataProvider invalidGuidProvider
+     */
+    public function testInvalidClaimGuid( $claimGuid, $hash ) {
+        $caughtException = false;
+
+        $params = array(
+            'action' => 'wbremovereferences',
+            'claim' => $claimGuid,
+			'qualifiers' => $hash,
+            'token' => $GLOBALS['wgUser']->getEditToken()
+        );
+
+        try {
+            $this->doApiRequest( $params );
+        } catch ( \UsageException $e ) {
+            // @fixme
+			// $this->assertEquals( $e->getCodeString(), 'removequalifiers-invalid-guid',  'Invalid claim guid raised correct error' );
+            $caughtException = true;
+        }
+
+        $this->assertTrue( $caughtException );
+    }
+
+	public function invalidGuidProvider() {
+		$qualifierSnak = new \Wikibase\PropertyValueSnak( 722, new \DataValues\StringValue( 'abc') );
+		$hash = $qualifierSnak->getHash();
+
+		return array(
+			array( 'xyz', $hash ),
+			array( 'x$y$z', $hash )
+		);
+	}
+
 }
