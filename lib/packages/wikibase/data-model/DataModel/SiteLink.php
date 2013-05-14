@@ -161,27 +161,6 @@ class SiteLink {
 	}
 
 	/**
-	 * Returns the list of site IDs for a given list of site Links.
-	 * Each site will only occur once in the result.
-	 * The order of the site ids in the result is undefined.
-	 *
-	 * @param $siteLinks array a list of SiteLink objects
-	 * @return array the list of site ids.
-	 */
-	public static function getSiteIDs( $siteLinks ) {
-		$siteIds = array();
-
-		/**
-		 * @var SiteLink $link
-		 */
-		foreach ( $siteLinks as $link ) {
-			$siteIds[] = $link->getSite()->getGlobalId();
-		}
-
-		return array_unique( $siteIds );
-	}
-
-	/**
 	 * Converts a list of SiteLink objects to a structure of arrays.
 	 *
 	 * @since 0.1
