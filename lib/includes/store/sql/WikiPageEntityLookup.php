@@ -213,6 +213,8 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			}
 
 			$entity = $this->loadEntity( $entityId->getEntityType(), $row );
+		} else {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Entity not loaded for " . $entityId->getPrefixedId() );
 		}
 
 		$this->releaseConnection( $db );
