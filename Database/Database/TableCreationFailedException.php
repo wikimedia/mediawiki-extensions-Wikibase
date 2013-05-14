@@ -1,8 +1,8 @@
 <?php
 
+namespace Wikibase\Database;
+
 /**
- * Class registration file for the Database component of Wikibase.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -26,33 +26,18 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-return call_user_func( function() {
+class TableCreationFailedException extends QueryInterfaceException {
 
-	$classes = array(
-		'Wikibase\Database\MWDB\ExtendedAbstraction',
-		'Wikibase\Database\MWDB\ExtendedMySQLAbstraction',
+	protected $table;
 
-		'Wikibase\Database\FieldDefinition',
-		'Wikibase\Database\MediaWikiQueryInterface',
-		'Wikibase\Database\MessageReporter',
-		'Wikibase\Database\QueryInterface',
-		'Wikibase\Database\QueryInterfaceException',
-		'Wikibase\Database\TableBuilder',
-		'Wikibase\Database\TableCreationFailedException',
-		'Wikibase\Database\TableDefinition',
-	);
+	public function __construct( TableDefinition $table, $message = '', \Exception $previous = null ) {
+		parent::__construct( $message, 0, $previous );
 
-	$paths = array();
-
-	foreach ( $classes as $class ) {
-		$path = str_replace( '\\', '/', substr( $class, 9 ) ) . '.php';
-
-		$paths[$class] = $path;
+		$this->table = $table;
 	}
 
-	$paths['Wikibase\Repo\DBConnectionProvider'] = 'Database/DBConnectionProvider.php';
-	$paths['Wikibase\Repo\LazyDBConnectionProvider'] = 'Database/LazyDBConnectionProvider.php';
+	public function getTable() {
+		return $this->table;
+	}
 
-	return $paths;
-
-} );
+}
