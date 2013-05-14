@@ -131,7 +131,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found entity in cache (key $cacheKey)" );
 				list( $cachedRev, $cachedEntity ) = $cached;
 
-				if ( $revision && $revision == $cachedRev ) {
+				if ( $revision === $cachedRev ) {
 					wfDebugLog( __CLASS__, __FUNCTION__ . ": Using cached entity (rev $cachedRev)" );
 					wfProfileOut( __METHOD__ );
 					return $cachedEntity;
