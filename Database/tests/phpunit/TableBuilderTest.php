@@ -8,7 +8,7 @@ use Wikibase\Database\TableDefinition;
 use NullMessageReporter;
 
 /**
- * Unit tests for the Wikibase\Database\TableBuilder class.
+ * @covers Wikibase\Database\TableBuilder
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

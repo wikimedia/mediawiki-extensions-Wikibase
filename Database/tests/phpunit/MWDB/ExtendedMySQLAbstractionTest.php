@@ -6,7 +6,7 @@ use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
 use Wikibase\Repo\LazyDBConnectionProvider;
 
 /**
- * Unit tests for the Wikibase\Database\MWDB\ExtendedMySQLAbstraction class.
+ * @covers Wikibase\Database\MWDB\ExtendedMySQLAbstraction
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
