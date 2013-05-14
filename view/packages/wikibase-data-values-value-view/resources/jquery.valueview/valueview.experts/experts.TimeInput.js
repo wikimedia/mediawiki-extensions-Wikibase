@@ -388,12 +388,7 @@
 		 * @see jQuery.valueview.Expert.focus
 		 */
 		focus: function() {
-			// Move text cursor to the end of the textarea:
-			// TODO: Duplicated code from the StringValue expert, move it into its own function.
-			var value = this.$input.val();
-			this.$input.val( '' );
-			this.$input.focus();
-			this.$input.val( value );
+			this.$input.focusAt( 'end' );
 		},
 
 		/**

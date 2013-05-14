@@ -68,6 +68,15 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.fn.focusAt' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery/jquery.fn.focusAt.js',
+			),
+			'dependencies' => array(
+				'jquery',
+			),
+		),
+
 		'jquery.ui.suggester' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.suggester.js'

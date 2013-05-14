@@ -144,10 +144,7 @@
 				return; // no need to execute following code since focus won't be set anyhow
 			}
 			// Move text cursor to the end of the textarea:
-			var value = this.$input.val();
-			this.$input.val( '' );
-			this.$input.focus();
-			this.$input.val( value );
+			this.$input.focusAt( 'end' );
 		},
 
 		/**

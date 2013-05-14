@@ -53,6 +53,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.fn.focusAt.tests' => array(
+			'scripts' => array(
+				"$bp/jquery/jquery.fn.focusAt.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.fn.focusAt',
+				'qunit.parameterize',
+			),
+		),
+
 		'jquery.time.timeinput.tests' => array(
 			'scripts' => array(
 				"$bp/jquery.time/jquery.time.timeinput.tests.js",

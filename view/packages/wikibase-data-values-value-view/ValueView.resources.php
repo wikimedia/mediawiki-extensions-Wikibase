@@ -193,6 +193,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts',
 				'jquery.eachchange',
 				'jquery.inputAutoExpand',
+				'jquery.fn.focusAt',
 			),
 		),
 
@@ -204,6 +205,7 @@ return call_user_func( function() {
 				'jquery.valueview/valueview.experts/experts.TimeInput.css',
 			),
 			'dependencies' => array(
+				'jquery.fn.focusAt',
 				'jquery.time.timeinput',
 				'jquery.ui.inputextender',
 				'jquery.ui.listrotator',
