@@ -13,6 +13,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\Claims;
 use Wikibase\Summary;
 use Wikibase\PropertyValueSnak;
+use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * API module for removing claims.
@@ -147,14 +148,20 @@ class RemoveClaims extends ApiWikibase {
 
 		$guids = array();
 
+		$claimGuidValidator = new ClaimGuidValidator();
+
 		foreach ( $params['claim'] as $guid ) {
-			$entityId = Entity::getIdFromClaimGuid( $guid );
+			if ( $claimGuidValidator->validate( $guid ) ) {
+				$entityId = Entity::getIdFromClaimGuid( $guid );
 
-			if ( !array_key_exists( $entityId, $guids ) ) {
-				$guids[$entityId] = array();
+				if ( !array_key_exists( $entityId, $guids ) ) {
+					$guids[$entityId] = array();
+				}
+
+				$guids[$entityId][] = $guid;
+			} else {
+				$this->dieUsage( 'Invalid claim guid', 'removeclaims-invalid-guid' );
 			}
-
-			$guids[$entityId][] = $guid;
 		}
 
 		return $guids;

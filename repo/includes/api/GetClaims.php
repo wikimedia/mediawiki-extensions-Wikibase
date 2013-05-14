@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiBase;
 use MWException;
 
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\EntityId;
@@ -166,6 +167,12 @@ class GetClaims extends ApiWikibase {
 		}
 
 		$claimGuid = null;
+
+		$claimGuidValidator = new ClaimGuidValidator();
+
+		if ( isset( $params['claim'] ) && $claimGuidValidator->validate( $params['claim'] ) === false ) {
+			$this->dieUsage( 'Claim guid is invalid', 'getclaims-invalid-guid' );
+		}
 
 		if ( isset( $params['entity'] ) && isset( $params['claim'] ) ) {
 			$entityId = Entity::getIdFromClaimGuid( $params['claim'] );

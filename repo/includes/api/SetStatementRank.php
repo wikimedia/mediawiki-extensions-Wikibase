@@ -12,6 +12,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\Statement;
 use Wikibase\Settings;
 
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**
@@ -84,6 +85,12 @@ class SetStatementRank extends ApiWikibase {
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
+
+		$claimGuidValidator = new ClaimGuidValidator();
+
+		if ( !( $claimGuidValidator->validate( $params['statement'] ) ) ) {
+			$this->dieUsage( 'Invalid claim guid', 'setstatementrank-invalid-guid' );
+		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
