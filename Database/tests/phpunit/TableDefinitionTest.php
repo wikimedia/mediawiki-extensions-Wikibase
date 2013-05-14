@@ -35,7 +35,7 @@ use Wikibase\Database\TableDefinition;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TableDefinitionTest extends \MediaWikiTestCase {
+class TableDefinitionTest extends \PHPUnit_Framework_TestCase {
 
 	public function instanceProvider() {
 		$instances = array();
@@ -56,7 +56,13 @@ class TableDefinitionTest extends \MediaWikiTestCase {
 			)
 		);
 
-		return $this->arrayWrap( $instances );
+		$argLists = array();
+
+		foreach ( $instances as $instance ) {
+			$argLists[] = array( $instance );
+		}
+
+		return $argLists;
 	}
 
 	/**

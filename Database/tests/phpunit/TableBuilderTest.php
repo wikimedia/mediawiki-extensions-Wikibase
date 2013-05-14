@@ -37,19 +37,7 @@ use NullMessageReporter;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TableBuilderTest extends \MediaWikiTestCase {
-
-	public function tableNameProvider() {
-		return $this->arrayWrap(
-			array(
-				'foo',
-				'bar',
-				'o',
-				'foo_bar_baz',
-				'foobarbaz',
-			)
-		);
-	}
+class TableBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider tableNameProvider
@@ -71,6 +59,16 @@ class TableBuilderTest extends \MediaWikiTestCase {
 		$builder = new TableBuilder( $queryInterface, $reporter );
 
 		$builder->createTable( $table );
+	}
+
+	public function tableNameProvider() {
+		return array(
+			array( 'foo' ),
+			array( 'bar' ),
+			array( 'o' ),
+			array( 'foo_bar_baz' ),
+			array( 'foobarbaz ' ),
+		);
 	}
 
 }
