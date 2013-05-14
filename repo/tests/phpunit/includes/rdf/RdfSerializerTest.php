@@ -184,17 +184,19 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		$this->assertNotNull( $format, $name );
 	}
 
-	public static function provideBuildGraphForEntity() {
+	public function provideBuildGraphForEntity() {
 		$entities = self::getTestEntities();
 		$graphs = self::getTestGraphs();
 
 		$cases = array();
 
 		foreach ( $entities as $name => $entity ) {
-			$cases[] = array(
-				$entity,
-				$graphs[$name],
-			);
+			if ( array_key_exists( $name, $graphs ) ) {
+				$cases[] = array(
+					$entity,
+					$graphs[$name],
+				);
+			}
 		}
 
 		return $cases;
