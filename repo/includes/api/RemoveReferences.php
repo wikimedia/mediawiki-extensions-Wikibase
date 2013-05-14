@@ -12,6 +12,8 @@ use Wikibase\Statement;
 use Wikibase\References;
 use Wikibase\Settings;
 use Wikibase\Claims;
+use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for removing one or more references of the same statement.
@@ -43,7 +45,7 @@ class RemoveReferences extends ApiWikibase {
 
 	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
 		//NOTE: need to declare this constructor, so old PHP versions don't use the
-		//      removeReferences() function as the constructor.
+		//removeReferences() function as the constructor.
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 	}
 
@@ -81,6 +83,15 @@ class RemoveReferences extends ApiWikibase {
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
+
+		// @todo generalize handling of settings in api modules
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
+		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
+
+		if ( !( $claimGuidValidator->validateFormat( $params['statement'] ) ) ) {
+			$this->dieUsage( 'Invalid claim guid', 'removereferences-invalid-guid' );
+		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
