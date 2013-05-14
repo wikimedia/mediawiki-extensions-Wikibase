@@ -167,6 +167,10 @@ class ClaimsTest extends \MediaWikiTestCase {
 		$claims = $array->getClaimsForProperty( 23 );
 		$this->assertInstanceOf( 'Wikibase\Claims', $claims );
 		$this->assertCount( 1, $claims );
+
+		$claims = $array->getClaimsForProperty( 9000 );
+		$this->assertInstanceOf( 'Wikibase\Claims', $claims );
+		$this->assertCount( 0, $claims );
 	}
 
 	public function testDuplicateClaims() {
