@@ -18,34 +18,32 @@ time.Time = ( function( time, $ ) {
 	/**
 	 * Constructor for object representing a point in time with a certain precision.
 	 *
-	 * @param {string} inputtext Text to be interpreted as time.
+	 * @param {string|Object} timeDefinition Text to be interpreted as time. Or a plain object
+	 *        describing the time in the form of a time parser output.
 	 * @param {Object} options
 	 *        {number} precision: Precision which will overrule the automatically detected
 	 *        precision.
 	 *        {string} calendarname: Default calendar name overruling the automatically detected
 	 *        calendar.
 	 */
-	function Time( inputtext, options ) {
+	var Time = function Time( timeDefinition, options ) {
+		var result;
+
 		options = $.extend( {
 			precision: null,
 			calendarname: null
 		}, options );
 
-
-		this.getInputtext = function() {
-			return inputtext;
-		};
-
-		// TODO: doing parsing here is bad practice, constructor should instead take parser output.
-		//  This way we never get an invalid Time object and can throw errors if wrong arguments
-		//  are provided to the constructor.
-		var result = time.Time.parse( inputtext );
+		if( typeof timeDefinition === 'string' ) {
+			result = time.Time.parse( timeDefinition );
+		} else {
+			result = $.extend( {}, timeDefinition );
+		}
 		if( result === null ) {
 			result = {};
 		}
 
-		var bce = (result.bce !== undefined) ? result.bce : false,
-			year = (result.year !== undefined) ? result.year : null,
+		var year = (result.year !== undefined) ? result.year : null,
 			month = (result.month !== undefined) ? result.month : 1,
 			day = (result.day !== undefined) ? result.day : 1,
 			hour = (result.hour !== undefined) ? result.hour : 0,
@@ -93,25 +91,25 @@ time.Time = ( function( time, $ ) {
 		};
 
 		this.gregorian = function() {
-			if( calendarname === 'Gregorian' ) {
+			if( calendarname === Time.CALENDAR.GREGORIAN ) {
 				return {
 					'year': year,
 					'month': month,
 					'day': day
 				};
-			} else if( calendarname === 'Julian' ) {
+			} else if( calendarname === Time.CALENDAR.JULIAN ) {
 				return time.julianToGregorian( year, month, day );
 			}
 		};
 
 		this.julian = function() {
-			if( calendarname === 'Julian' ) {
+			if( calendarname === Time.CALENDAR.JULIAN ) {
 				return {
 					'year': year,
 					'month': month,
 					'day': day
 				};
-			} else if( calendarname === 'Gregorian' ) {
+			} else if( calendarname === Time.CALENDAR.GREGORIAN ) {
 				if( year !== null ) {
 					return time.gregorianToJulian( year, month, day );
 				}
@@ -123,7 +121,7 @@ time.Time = ( function( time, $ ) {
 			if( year === null ) {
 				return null;
 			}
-			if( calendarname === 'Gregorian' ) {
+			if( calendarname === Time.CALENDAR.GREGORIAN ) {
 				return time.gregorianToJulianDay( year, month, day );
 			} else {
 				return time.julianToJulianDay( year, month, day );
@@ -135,9 +133,9 @@ time.Time = ( function( time, $ ) {
 		};
 
 		this.calendarURI = function() {
-			if( calendarname === 'Gregorian' ) {
+			if( calendarname === Time.CALENDAR.GREGORIAN ) {
 				return 'http://wikidata.org/id/Q1985727';
-			} else if( calendarname === 'Julian' ) {
+			} else if( calendarname === Time.CALENDAR.JULIAN ) {
 				return 'http://wikidata.org/id/Q1985786';
 			}
 		};
@@ -157,6 +155,9 @@ time.Time = ( function( time, $ ) {
 		 * Returns whether the Object is representing any time at all. This will be false if the
 		 * value passed to the constructor has not been interpreted as time.
 		 *
+		 * TODO: throw an error if invalid Time, don't support invalid data objects and deprecate
+		 *  this function then.
+		 *
 		 * @returns {boolean}
 		 */
 		this.isValid = function() {
@@ -175,7 +176,7 @@ time.Time = ( function( time, $ ) {
 			}
 			return time.getTextFromDate( precision, result.year, result.month, result.day );
 		};
-	}
+	};
 
 	function pad( number, digits ) {
 		return ( 1e12 + Math.abs( number ) + '' ).slice( -digits );
@@ -201,6 +202,37 @@ time.Time = ( function( time, $ ) {
 			.replace( '+', '' ); // get rid of "+"
 
 		return new Time( formattedIso8601, { precision: precision } );
+	};
+
+	/**
+	 * All possible precisions of Time.
+	 * @type {Object} holding fields of type number
+	 */
+	Time.PRECISION = {
+		GY: 0, // Gigayear
+		MY100: 1, // 100 Megayears
+		MY10: 2, // 10 Megayears
+		MY: 3, // Megayear
+		KY100: 4, // 100 Kiloyears
+		KY10: 5, // 10 Kiloyears
+		KY: 6, // Kiloyear
+		YEAR100: 7, // 100 years
+		YEAR10: 8, // 10 years
+		YEAR: 9,
+		MONTH: 10,
+		DAY: 11,
+		HOUR: 12,
+		MINUTES: 13,
+		SECOND: 14
+	};
+
+	/**
+	 * All supported calendar models
+	 * @type {Object}
+	 */
+	Time.CALENDAR = {
+		GREGORIAN: 'Gregorian',
+		JULIAN: 'Julian'
 	};
 
 	return Time; // expose time.Time
