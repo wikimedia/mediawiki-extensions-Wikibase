@@ -91,7 +91,7 @@ class ByPropertyIdArray extends \ArrayObject {
 	 *
 	 * @param integer $propertyId
 	 *
-	 * @return object[]
+	 * @return object[]|null
 	 * @throws MWException
 	 */
 	public function getByPropertyId( $propertyId ) {
@@ -99,7 +99,7 @@ class ByPropertyIdArray extends \ArrayObject {
 			throw new MWException( 'Index not build, call buildIndex first' );
 		}
 
-		return $this->byId[$propertyId];
+		return array_key_exists( $propertyId, $this->byId ) ? $this->byId[$propertyId] : null;
 	}
 
 }

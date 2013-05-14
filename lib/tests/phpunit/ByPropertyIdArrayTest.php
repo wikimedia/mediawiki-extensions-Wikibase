@@ -113,6 +113,9 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 		}
 
 		$this->assertArrayEquals( $objects, $allObtainedObjects );
+
+		// test for property not in array
+		$this->assertEquals( null, $indexedArray->getByPropertyId( 2077 ) );
 	}
 
 }
