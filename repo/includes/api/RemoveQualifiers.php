@@ -72,6 +72,12 @@ class RemoveQualifiers extends ApiWikibase {
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
 
+		$claimGuidValidator = new ClaimGuidValidator();
+
+		if ( $claimGuidValidator->validate( $params['claim'] ) === false ) {
+			$this->dieUsage( 'Invalid claim guid', 'removequalifiers-invalid-guid' );
+		}
+
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
