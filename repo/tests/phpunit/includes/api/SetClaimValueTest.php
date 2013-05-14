@@ -39,6 +39,7 @@ use Wikibase\EntityId;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SetClaimValueTest extends \ApiTestCase {
 
@@ -129,6 +130,37 @@ class SetClaimValueTest extends \ApiTestCase {
 		$dataValue = \DataValues\DataValueFactory::singleton()->newFromArray( $claim['mainsnak']['datavalue'] );
 
 		$this->assertTrue( $claims->getClaimWithGuid( $claimGuid )->getMainSnak()->getDataValue()->equals( $dataValue ) );
+	}
+
+	/**
+	 * @dataProvider invalidClaimProvider
+	 */
+	public function testInvalidClaimGuid( $claimGuid ) {
+		$caughtException = false;
+
+		$params = array(
+			'action' => 'wbsetclaimvalue',
+			'claim' => $claimGuid,
+			'snaktype' => 'value',
+			'value' => 'abc',
+			'token' => $GLOBALS['wgUser']->getEditToken()
+		);
+
+		try {
+			$this->doApiRequest( $params );
+		} catch ( \UsageException $e ) {
+			$this->assertEquals( $e->getCodeString(), 'setclaimvalue-invalid-guid',  'Invalid claim guid raised correct error' );
+			$caughtException = true;
+		}
+
+		$this->assertTrue( $caughtException, 'Exception was caught' );
+	}
+
+	public function invalidClaimProvider() {
+		return array(
+			array( 'xyz' ),
+			array( 'x$y$z' )
+		);
 	}
 
 }

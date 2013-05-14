@@ -12,6 +12,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\SnakObject;
 use Wikibase\Claim;
 use Wikibase\Claims;
+use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * API module for setting the DataValue contained by the main snak of a claim.
@@ -79,6 +80,12 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
+
+		$claimGuidValidator = new ClaimGuidValidator();
+
+		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
+			$this->dieUsage( 'Invalid claim guid', 'setclaimvalue-invalid-guid' );
+		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );

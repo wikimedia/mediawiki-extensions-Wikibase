@@ -42,6 +42,7 @@ use Wikibase\EntityId;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SetQualifierTest extends ModifyItemBase {
 
@@ -180,5 +181,38 @@ class SetQualifierTest extends ModifyItemBase {
 	}
 
 	// TODO: test update requests
+
+
+    /**
+     * @dataProvider invalidClaimProvider
+     */
+    public function testInvalidClaimGuid( $claimGuid ) {
+        $caughtException = false;
+
+        $params = array(
+            'action' => 'wbsetqualifier',
+            'claim' => $claimGuid,
+            'property' => 7,
+			'snaktype' => 'value',
+            'value' => 'abc',
+            'token' => $GLOBALS['wgUser']->getEditToken()
+        );
+
+        try {
+            $this->doApiRequest( $params );
+        } catch ( \UsageException $e ) {
+            $this->assertEquals( $e->getCodeString(), 'setqualifier-invalid-guid',  'Invalid claim guid raised correct error' );
+            $caughtException = true;
+        }
+
+        $this->assertTrue( $caughtException, 'Exception was caught' );
+    }
+
+    public function invalidClaimProvider() {
+        return array(
+            array( 'xyz' ),
+            array( 'x$y$z' )
+        );
+    }
 
 }
