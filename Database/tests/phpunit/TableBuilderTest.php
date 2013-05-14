@@ -5,7 +5,6 @@ namespace Wikibase\Test\Database;
 use Wikibase\Database\TableBuilder;
 use Wikibase\Database\FieldDefinition;
 use Wikibase\Database\TableDefinition;
-use NullMessageReporter;
 
 /**
  * @covers Wikibase\Database\TableBuilder
@@ -48,7 +47,7 @@ class TableBuilderTest extends \PHPUnit_Framework_TestCase {
 			array( new FieldDefinition( 'foo', FieldDefinition::TYPE_TEXT ) )
 		);
 
-		$reporter = new NullMessageReporter();
+		$reporter = $this->getMock( 'Wikibase\Database\MessageReporter' );
 
 		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
 

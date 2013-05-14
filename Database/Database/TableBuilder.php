@@ -2,8 +2,6 @@
 
 namespace Wikibase\Database;
 
-use MessageReporter;
-
 /**
  * Object that can create a table in a database given a table definition.
  *

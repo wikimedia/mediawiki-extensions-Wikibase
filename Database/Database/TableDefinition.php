@@ -5,7 +5,7 @@ namespace Wikibase\Database;
 use InvalidArgumentException;
 
 /**
- * Definition of a database table.
+ * Definition of a database table. Immutable.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TableDefinition implements \Immutable {
+class TableDefinition {
 
 	/**
 	 * @since 0.1
