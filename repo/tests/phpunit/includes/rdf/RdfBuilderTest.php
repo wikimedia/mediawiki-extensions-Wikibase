@@ -148,7 +148,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		if ( !RdfBuilder::isSupported() ) {
 			// test will be skipped anyway
-			return null;
+			return array();
 		}
 
 		$builder = self::newRdfBuilder( 'rdf' ); //XXX: ugh, dummy object
@@ -232,10 +232,17 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$cases = array();
 
 		foreach ( $entities as $name => $entity ) {
-			$cases[] = array(
-				$entity,
-				$graphs[$name],
-			);
+			if ( array_key_exists( $name, $graphs ) ) {
+				$cases[] = array(
+					$entity,
+					$graphs[$name],
+				);
+			}
+		}
+
+		if ( count( $cases ) == 0 ) {
+			//test should be skipped
+			return null;
 		}
 
 		return $cases;

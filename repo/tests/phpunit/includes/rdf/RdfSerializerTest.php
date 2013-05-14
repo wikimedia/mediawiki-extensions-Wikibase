@@ -184,17 +184,24 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		$this->assertNotNull( $format, $name );
 	}
 
-	public static function provideBuildGraphForEntity() {
+	public function provideBuildGraphForEntity() {
 		$entities = self::getTestEntities();
 		$graphs = self::getTestGraphs();
 
 		$cases = array();
 
 		foreach ( $entities as $name => $entity ) {
-			$cases[] = array(
-				$entity,
-				$graphs[$name],
-			);
+			if ( array_key_exists( $name, $graphs ) ) {
+				$cases[] = array(
+					$entity,
+					$graphs[$name],
+				);
+			}
+		}
+
+		if ( count( $cases ) == 0 ) {
+			//test should be skipped
+			return null;
 		}
 
 		return $cases;
@@ -238,6 +245,11 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 					);
 				}
 			}
+		}
+
+		if ( count( $cases ) == 0 ) {
+			//test should be skipped
+			return null;
 		}
 
 		return $cases;
