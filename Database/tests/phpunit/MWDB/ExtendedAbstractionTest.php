@@ -32,7 +32,7 @@ use Wikibase\Database\FieldDefinition;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class ExtendedAbstractionTest extends \MediaWikiTestCase {
+abstract class ExtendedAbstractionTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @return ExtendedAbstraction
@@ -74,7 +74,13 @@ abstract class ExtendedAbstractionTest extends \MediaWikiTestCase {
 			new FieldDefinition( 'textfield', FieldDefinition::TYPE_TEXT, false ),
 		) );
 
-		return $this->arrayWrap( $tables );
+		$argLists = array();
+
+		foreach ( $tables as $table ) {
+			$argLists[] = array( $table );
+		}
+
+		return $argLists;
 	}
 
 	/**
