@@ -40,6 +40,7 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SetStatementRankTest extends \ApiTestCase {
 
@@ -205,6 +206,38 @@ class SetStatementRankTest extends \ApiTestCase {
 				throw $e;
 			}
 		}
+	}
+
+	/**
+	 * @dataProvider invalidClaimProvider
+	 */
+	public function testInvalidClaimGuid( $claimGuid ) {
+		$caughtException = false;
+
+		$ranks = ClaimSerializer::getRanks();
+
+		$params = array(
+			'action' => 'wbsetstatementrank',
+			'statement' => $claimGuid,
+			'rank' => $ranks[0],
+			'token' => $GLOBALS['wgUser']->getEditToken()
+		);
+
+		try {
+			$this->doApiRequest( $params );
+		} catch ( \UsageException $e ) {
+			$this->assertEquals( $e->getCodeString(), 'setstatementrank-invalid-guid',  'Invalid claim guid raised correct error' );
+			$caughtException = true;
+		}
+
+		$this->assertTrue( $caughtException, 'Exception was caught' );
+	}
+
+	public function invalidClaimProvider() {
+		return array(
+			array( 'xyz' ),
+			array( 'x$y$z' )
+		);
 	}
 
 }
