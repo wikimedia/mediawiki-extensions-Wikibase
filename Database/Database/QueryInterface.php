@@ -37,7 +37,7 @@ interface QueryInterface {
 	 *
 	 * @param string $tableName
 	 *
-	 * @return boolean Success indicator
+	 * @return boolean
 	 */
 	public function tableExists( $tableName );
 
