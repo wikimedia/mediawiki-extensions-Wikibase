@@ -568,6 +568,7 @@ $messages['ca'] = array(
  * @author Умар
  */
 $messages['ce'] = array(
+	'wikibase-after-page-move' => 'Викихаамашчохь [$1 керла якха] хьой цӀе хийцина агӀона хьажориг.',
 	'wikibase-rc-hide-wikidata' => '$1 Викихаамаш',
 );
 
@@ -603,6 +604,7 @@ $messages['ckb'] = array(
 	'wikibase-property-notfound' => 'تایبەتمەندیی $1 نەدۆزرایەوە.',
 	'wikibase-rc-hide-wikidata' => 'ویکیدراوه $1',
 	'wikibase-rc-show-wikidata-pref' => 'دەستکارییەکانی ویکیدراوە لە دوایین گۆڕانکارییەکاندا نیشان بدە',
+	'wikibase-watchlist-show-changes-pref' => 'دەستکارییەکانی ویکیدراوە لە پێرستی چاودێرییەکەت نیشان بدە',
 	'wikibase-unconnectedpages-submit' => 'بڕۆ',
 );
 
@@ -709,6 +711,7 @@ $messages['cy'] = array(
 );
 
 /** Danish (dansk)
+ * @author Byrial
  * @author Christian List
  * @author Hede2000
  * @author HenrikKbh
@@ -718,15 +721,15 @@ $messages['cy'] = array(
 $messages['da'] = array(
 	'wikibase-client-desc' => 'Klient til Wikibase-udvidelsen',
 	'specialpages-group-wikibaseclient' => 'Wikidata-klient',
-	'wikibase-after-page-move' => 'Du kan også [$1 opdatere] det tilknyttede Wikidata-emne for at fastholde sproglinks på den flyttede side.',
-	'wikibase-comment-remove' => 'Det tilknyttede Wikidata-emne er slettet. Sproglinks fjernet.',
+	'wikibase-after-page-move' => 'Du kan også [$1 opdatere] det tilknyttede Wikidata-emne for at bevare sproghenvisninger på den flyttede side.',
+	'wikibase-comment-remove' => 'Det tilknyttede Wikidata-emne er slettet. Sproghenvisninger er fjernet.',
 	'wikibase-comment-linked' => 'Et Wikidata-emne er blevet knyttet til denne side.',
-	'wikibase-comment-unlink' => 'Denne side er ikke længere linket fra et Wikidata-emne. Sproglinks fjernet.',
-	'wikibase-comment-restore' => 'Det tilknyttede Wikidata-emne er genskabt. Sproglinks gendannet.',
-	'wikibase-comment-update' => 'Emnet på Wikidata er blevet ændret.',
-	'wikibase-comment-sitelink-add' => 'Sprog-link tilføjet: $1',
-	'wikibase-comment-sitelink-change' => 'Sprog-link ændret fra $1 til $2',
-	'wikibase-comment-sitelink-remove' => 'Sprog-link fjernet: $1',
+	'wikibase-comment-unlink' => 'Denne side er ikke længere linket fra et Wikidata-emne. Sproghenvisninger er fjernet.',
+	'wikibase-comment-restore' => 'Det tilknyttede Wikidata-emne er genskabt. Sproghenvisninger er gendannet.',
+	'wikibase-comment-update' => 'Wikidata-emnet er ændret',
+	'wikibase-comment-sitelink-add' => 'Sproghenvisning tilføjet: $1',
+	'wikibase-comment-sitelink-change' => 'Sproghenvisning ændret fra $1 til $2',
+	'wikibase-comment-sitelink-remove' => 'Sproghenvisning fjernet: $1',
 	'wikibase-comment-multi' => '{{PLURAL:$1|ændring|ændringer}}',
 	'wikibase-editlinks' => 'Rediger links',
 	'wikibase-editlinkstitle' => 'Rediger sproglinks',
@@ -758,8 +761,8 @@ $messages['da'] = array(
 	'wikibase-unconnectedpages-submit' => 'Udfør',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" er ikke en gyldig sprogkode.',
 	'wikibase-unconnectedpages-page-warning' => 'Sidens titel kunne ikke anvendes til forespørgslen og blev ignoreret.',
-	'wikibase-unconnectedpages-iwdata-label' => 'Kun sider med sproglinks',
-	'wikibase-unconnectedpages-format-row' => '$1 sproglinks på siden',
+	'wikibase-unconnectedpages-iwdata-label' => 'Kun sider med sproghenvisninger',
+	'wikibase-unconnectedpages-format-row' => '($1 sproghenvisninger på siden)',
 );
 
 /** German (Deutsch)
