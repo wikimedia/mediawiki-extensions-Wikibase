@@ -14,6 +14,8 @@ use Wikibase\Snaks;
 use Wikibase\SnakList;
 use Wikibase\Claims;
 use Wikibase\Settings;
+use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating a reference or setting the value of an existing one.
@@ -80,6 +82,15 @@ class SetReference extends ApiWikibase {
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
+
+		// @todo generalize handling of settings in api modules
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
+		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
+
+		if ( !( $claimGuidValidator->validate( $params['statement'] ) ) ) {
+			$this->dieUsage( 'Invalid guid', 'setreference-invalid-guid' );
+		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
 
