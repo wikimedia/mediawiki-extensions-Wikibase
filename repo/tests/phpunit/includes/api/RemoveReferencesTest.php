@@ -39,6 +39,7 @@ use Wikibase\Statement;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class RemoveReferencesTest extends \ApiTestCase {
 
@@ -155,6 +156,39 @@ class RemoveReferencesTest extends \ApiTestCase {
 				$this->assertEquals( $expectedError, $e->getCodeString(), 'Invalid request raised correct error' );
 			}
 		}
+	}
+
+	/**
+	 * @dataProvider invalidGuidProvider
+	 */
+	public function testInvalidStatementGuid( $statementGuid, $hash ) {
+		$caughtException = false;
+
+		$params = array(
+			'action' => 'wbremovereferences',
+			'statement' => $statementGuid,
+			'references' => $hash,
+			'token' => $GLOBALS['wgUser']->getEditToken()
+		);
+
+		try {
+			$this->doApiRequest( $params );
+		} catch ( \UsageException $e ) {
+			$this->assertEquals( $e->getCodeString(), 'removereferences-invalid-guid',  'Invalid statement guid raised correct error' );
+			$caughtException = true;
+		}
+
+		$this->assertTrue( $caughtException );
+	}
+
+	public function invalidGuidProvider() {
+		$snak = new \Wikibase\PropertyValueSnak( 722, new \DataValues\StringValue( 'abc') );
+		$hash = $snak->getHash();
+
+		return array(
+			array( 'xyz', $hash ),
+			array( 'x$y$z', $hash )
+		);
 	}
 
 }
