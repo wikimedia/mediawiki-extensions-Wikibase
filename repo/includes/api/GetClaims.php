@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiBase;
 use MWException;
 
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\EntityId;
@@ -13,6 +14,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\Statement;
 use Wikibase\Claims;
 use Wikibase\Claim;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for getting claims.
@@ -166,6 +168,15 @@ class GetClaims extends ApiWikibase {
 		}
 
 		$claimGuid = null;
+
+		// @todo handle the settings in a more generalized way for all the api modules
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+        $entityPrefixes = $settings->getSetting( 'entityPrefixes' );
+		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
+
+		if ( isset( $params['claim'] ) && $claimGuidValidator->validate( $params['claim'] ) === false ) {
+			$this->dieUsage( 'Claim guid is invalid', 'getclaims-invalid-guid' );
+		}
 
 		if ( isset( $params['entity'] ) && isset( $params['claim'] ) ) {
 			$entityId = Entity::getIdFromClaimGuid( $params['claim'] );

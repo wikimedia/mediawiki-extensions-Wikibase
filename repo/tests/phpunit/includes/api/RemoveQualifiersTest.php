@@ -38,6 +38,7 @@ use Wikibase\Statement;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class RemoveQualifiersTest extends \ApiTestCase {
 
@@ -154,6 +155,39 @@ class RemoveQualifiersTest extends \ApiTestCase {
 				$this->assertEquals( $expectedError, $e->getCodeString(), 'Invalid request raised correct error' );
 			}
 		}
+	}
+
+    /**
+     * @dataProvider invalidGuidProvider
+     */
+    public function testInvalidClaimGuid( $claimGuid, $hash ) {
+        $caughtException = false;
+
+        $params = array(
+            'action' => 'wbremovequalifiers',
+            'claim' => $claimGuid,
+			'qualifiers' => $hash,
+            'token' => $GLOBALS['wgUser']->getEditToken()
+        );
+
+        try {
+            $this->doApiRequest( $params );
+        } catch ( \UsageException $e ) {
+			$this->assertEquals( $e->getCodeString(), 'removequalifiers-invalid-guid',  'Invalid claim guid raised correct error' );
+            $caughtException = true;
+        }
+
+        $this->assertTrue( $caughtException );
+    }
+
+	public function invalidGuidProvider() {
+		$qualifierSnak = new \Wikibase\PropertyValueSnak( 722, new \DataValues\StringValue( 'abc') );
+		$hash = $qualifierSnak->getHash();
+
+		return array(
+			array( 'xyz', $hash ),
+			array( 'x$y$z', $hash )
+		);
 	}
 
 }
