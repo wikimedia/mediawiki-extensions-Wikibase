@@ -92,11 +92,15 @@ class ByPropertyIdArray extends \ArrayObject {
 	 * @param integer $propertyId
 	 *
 	 * @return object[]
-	 * @throws MWException
+	 * @throws MWException|OutOfBoundsException
 	 */
 	public function getByPropertyId( $propertyId ) {
 		if ( $this->byId === null ) {
 			throw new MWException( 'Index not build, call buildIndex first' );
+		}
+
+		if ( !( array_key_exists( $propertyId, $this->byId ) ) ) {
+			throw new \OutOfBoundsException( 'Property id array key does not exist.' );
 		}
 
 		return $this->byId[$propertyId];

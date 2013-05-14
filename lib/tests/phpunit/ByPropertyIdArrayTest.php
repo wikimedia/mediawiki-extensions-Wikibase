@@ -115,4 +115,12 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $objects, $allObtainedObjects );
 	}
 
+	public function testGetByNotSetIdThrowsException() {
+		$indexedArray = new ByPropertyIdArray();
+		$indexedArray->buildIndex();
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+
+		$indexedArray->getByPropertyId( 9000 );
+	}
 }

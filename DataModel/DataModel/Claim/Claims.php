@@ -179,6 +179,10 @@ class Claims extends HashArray implements ClaimListAccess {
 		$claimsByProp = new ByPropertyIdArray( $this );
 		$claimsByProp->buildIndex();
 
+		if ( !( in_array( $propertyId, $claimsByProp->getPropertyIds() ) ) ) {
+			return new Claims();
+		}
+
 		$claimsForProperty = new Claims( $claimsByProp->getByPropertyId( $propertyId ) );
 		return $claimsForProperty;
 	}
