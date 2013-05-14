@@ -24,7 +24,7 @@ use DatabaseBase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
+ * @since 0.1
  *
  * @file
  * @ingroup WikibaseRepo
@@ -35,28 +35,28 @@ use DatabaseBase;
 class LazyDBConnectionProvider implements DBConnectionProvider {
 
 	/**
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @var DatabaseBase|null
 	 */
 	protected $connection = null;
 
 	/**
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @var int|null
 	 */
 	protected $connectionId = null;
 
 	/**
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @var string|array
 	 */
 	protected $groups;
 
 	/**
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @var string|boolean $wiki
 	 */
@@ -65,7 +65,7 @@ class LazyDBConnectionProvider implements DBConnectionProvider {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @param int $connectionId
 	 * @param string|array $groups
@@ -80,7 +80,7 @@ class LazyDBConnectionProvider implements DBConnectionProvider {
 	/**
 	 * @see DBConnectionProvider::getConnection
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @return DatabaseBase
 	 */
@@ -97,7 +97,7 @@ class LazyDBConnectionProvider implements DBConnectionProvider {
 	/**
 	 * @see DBConnectionProvider::releaseConnection
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 */
 	public function releaseConnection() {
 		if ( $this->wiki !== false && $this->connection !== null ) {

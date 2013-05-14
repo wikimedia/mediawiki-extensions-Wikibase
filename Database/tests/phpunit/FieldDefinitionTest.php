@@ -23,7 +23,7 @@ use Wikibase\Database\FieldDefinition;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since wd.db
+ * @since 0.1
  *
  * @ingroup WikibaseDatabaseTest
  *
