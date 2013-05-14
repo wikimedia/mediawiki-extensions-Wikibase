@@ -28,7 +28,7 @@ use Wikibase\Repo\DBConnectionProvider;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since wd.db
+ * @since 0.1
  *
  * @ingroup WikibaseDatabaseTest
  *
@@ -340,7 +340,7 @@ class DirectConnectionProvider implements DBConnectionProvider {
 	/**
 	 * @see DBConnectionProvider::getConnection
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @return DatabaseBase
 	 */
@@ -351,7 +351,7 @@ class DirectConnectionProvider implements DBConnectionProvider {
 	/**
 	 * @see DBConnectionProvider::releaseConnection
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 */
 	public function releaseConnection() {
 
