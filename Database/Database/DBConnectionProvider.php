@@ -23,7 +23,7 @@ use DatabaseBase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
+ * @since 0.1
  *
  * @file
  * @ingroup WikibaseRepo
@@ -37,7 +37,7 @@ interface DBConnectionProvider {
 	 * Returns the database connection.
 	 * Initialization of this connection is done if it was not already initialized.
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @return DatabaseBase
 	 */
@@ -46,7 +46,7 @@ interface DBConnectionProvider {
 	/**
 	 * Releases the connection if doing so makes any sense resource wise.
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 */
 	public function releaseConnection();
 
