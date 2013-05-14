@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DwzRcHOo",
+        "filename": "selenium_cuc/Gemfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DwhVxHqk",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwtqLZRc",
         "filename": "selenium_cuc/config/config.yml.sample",
         "patchSetId": 2
@@ -107,6 +125,42 @@
     },
     {
       "key": {
+        "uuid": "Dw3RupJg",
+        "filename": "selenium_cuc/config/config.yml.sample",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "yes. is that bad? could I stay with that for now?",
+      "parentUuid": "DwvpuKQA",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw5RxqHk",
+        "filename": "selenium_cuc/config/config.yml.sample",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "removed the leading spaces.",
+      "parentUuid": "DwhpdzXc",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dwpp53S4",
         "filename": "selenium_cuc/features/label.feature",
         "patchSetId": 2
@@ -177,6 +231,24 @@
     },
     {
       "key": {
+        "uuid": "DwzSxvPg",
+        "filename": "selenium_cuc/features/label.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "I\u0027ve split it up into several scenarios as you suggested. One problem I see here is, that the test now takes 1:20 min (instead of 0:33 min before). That is, because creating a new item takes a lot of time and now for every scenario a new item is created. Can this made paralleled somehow? Now that the scenarios act on independent items, this would be possible..",
+      "parentUuid": "DwrWF0l0",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dwjp8ERw",
         "filename": "selenium_cuc/features/label.feature",
         "patchSetId": 2
@@ -212,6 +284,24 @@
     },
     {
       "key": {
+        "uuid": "Dw1SzoAk",
+        "filename": "selenium_cuc/features/label.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dwpp4vfE",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwtX7NhE",
         "filename": "selenium_cuc/features/steps/label_steps.rb",
         "patchSetId": 2
@@ -223,6 +313,24 @@
       "writtenOn": "2013-05-07T16:11:10Z",
       "side": 1,
       "message": "We usually use \"visit\" a shorter version of \"visit_page\".",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwxSL2CE",
+        "filename": "selenium_cuc/features/steps/label_steps.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DwtX7NhE",
       "revId": "f177db96a39917a4c91c96590475168626b1efdd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -246,6 +354,24 @@
     },
     {
       "key": {
+        "uuid": "Dw-SPVCk",
+        "filename": "selenium_cuc/features/steps/label_steps.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DwrUAMgU",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwvUKuiA",
         "filename": "selenium_cuc/features/steps/label_steps.rb",
         "patchSetId": 2
@@ -263,6 +389,24 @@
     },
     {
       "key": {
+        "uuid": "Dw1SFYAk",
+        "filename": "selenium_cuc/features/steps/label_steps.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DwvUKuiA",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwrUpUo0",
         "filename": "selenium_cuc/features/steps/label_steps.rb",
         "patchSetId": 2
@@ -274,6 +418,24 @@
       "writtenOn": "2013-05-07T16:11:10Z",
       "side": 1,
       "message": "It is also a Ruby convention to use snake_case for method names.\n\nFor example: page.label_input_field_element.clear",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw-SQ9EM",
+        "filename": "selenium_cuc/features/steps/label_steps.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "will make a separate change later. this will touch a lot of code.",
+      "parentUuid": "DwrUpUo0",
       "revId": "f177db96a39917a4c91c96590475168626b1efdd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -332,6 +494,24 @@
     },
     {
       "key": {
+        "uuid": "Dw7QBTLQ",
+        "filename": "selenium_cuc/features/support/modules/alias_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "oh, yes, we have a lot of them.. :)\none reason is, that some elements simply cannot be accessed by css selectors.\nalso we have a very complex and dynamic DOM hierarchy and we\u0027re not using IDs, so I do not see a possibility to make this shorter..",
+      "parentUuid": "DwvoZCYQ",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwtWqDHI",
         "filename": "selenium_cuc/features/support/modules/alias_module.rb",
         "patchSetId": 2
@@ -343,6 +523,24 @@
       "writtenOn": "2013-05-09T10:10:32Z",
       "side": 1,
       "message": "\"return\" is optional in Ruby and not used (by convention) unless necessary. The return value of the last line of a method will be returned by the method by default.",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw-Qz1Kg",
+        "filename": "selenium_cuc/features/support/modules/alias_module.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "fixed it in this file and will remove it over time in other files when I stumble upon it.",
+      "parentUuid": "DwtWqDHI",
       "revId": "f177db96a39917a4c91c96590475168626b1efdd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -396,6 +594,24 @@
       "side": 1,
       "message": "Since page-object gem uses composition, it would make sense to stick to it.",
       "parentUuid": "DwppG-cE",
+      "revId": "f177db96a39917a4c91c96590475168626b1efdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw5SWyEk",
+        "filename": "selenium_cuc/features/support/pages/item_page.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-14T12:30:12Z",
+      "side": 1,
+      "message": "will do this in a later, separate changeset.",
+      "parentUuid": "DwhpDDXE",
       "revId": "f177db96a39917a4c91c96590475168626b1efdd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
