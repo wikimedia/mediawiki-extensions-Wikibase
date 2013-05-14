@@ -71,7 +71,6 @@ $wgDataValues = array();
 $wgDataValues['boolean'] = 'DataValues\BooleanValue';
 $wgDataValues['geocoordinate'] = 'DataValues\GeoCoordinateValue';
 $wgDataValues['iri'] = 'DataValues\IriValue';
-$wgDataValues['mediawikititle'] = 'DataValues\MediaWikiTitleValue';
 $wgDataValues['monolingualtext'] = 'DataValues\MonolingualTextValue';
 $wgDataValues['multilingualtext'] = 'DataValues\MultilingualTextValue';
 $wgDataValues['number'] = 'DataValues\NumberValue';
