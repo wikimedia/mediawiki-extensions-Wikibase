@@ -53,7 +53,7 @@ final class NamespaceUtils {
 	 * Returns the namespace ID for the given entity content model, or false if the content model
 	 * is not a known entity model.
 	 *
-	 * The return value is based on getEntityNamespaces(), which is configured via $wgWBSettings['entityNamespaces'].
+	 * The return value is based on getEntityNamespaces(), which is configured via $wgWBRepoSettings['entityNamespaces'].
 	 *
 	 * @since 0.4
 	 *

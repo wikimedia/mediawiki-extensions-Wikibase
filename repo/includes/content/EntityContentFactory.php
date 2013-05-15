@@ -62,7 +62,7 @@ class EntityContentFactory {
 
 	/**
 	 * Returns a list of content model IDs that are used to represent Wikibase entities.
-	 * Configured via $wgWBSettings['entityNamespaces'].
+	 * Configured via $wgWBRepoSettings['entityNamespaces'].
 	 *
 	 * @since 0.2
 	 *
