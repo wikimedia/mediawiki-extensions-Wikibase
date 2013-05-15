@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DxKSFpl0",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-15T23:01:46Z",
+      "side": 1,
+      "message": "What name would you suggest then?",
+      "parentUuid": "DxEEBNDw",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxIH7PEQ",
         "filename": "lib/includes/SiteTitle.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-05-15T22:06:43Z",
       "side": 1,
       "message": "both a Site and a siteId? huh?",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxASimv8",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-15T23:01:46Z",
+      "side": 1,
+      "message": "I want to be able to only lazy load the Site object when needed",
+      "parentUuid": "DxIH7PEQ",
       "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DxISPynU",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-15T23:01:46Z",
+      "side": 1,
+      "message": "I want to only normalize it once",
+      "parentUuid": "DxGH4sEc",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxOFugAA",
         "filename": "lib/includes/SiteTitle.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-05-15T22:13:01Z",
       "side": 1,
       "message": "Try not to use Utils, it is procedural code",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxMTp0h0",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-15T23:01:46Z",
+      "side": 1,
+      "message": "mh",
+      "parentUuid": "DxOFugAA",
       "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "DxGSznk0",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-15T23:01:46Z",
+      "side": 1,
+      "message": "What else should I use?",
+      "parentUuid": "DxKFkeCQ",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxKGauA8",
         "filename": "lib/includes/SiteTitle.php",
         "patchSetId": 1
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "DxOSmjhE",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-15T23:01:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DxKGauA8",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxOGkwFs",
         "filename": "lib/includes/SiteTitle.php",
         "patchSetId": 1
@@ -132,6 +240,24 @@
       "writtenOn": "2013-05-15T22:06:43Z",
       "side": 1,
       "message": "Pulling in global settings - should be injected as an option in to the object doing the normalization",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxGSMPoE",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-15T23:01:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DxOGkwFs",
       "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
