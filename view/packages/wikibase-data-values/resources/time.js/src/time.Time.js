@@ -25,6 +25,8 @@ time.Time = ( function( time, $ ) {
 	 *        precision.
 	 *        {string} calendarname: Default calendar name overruling the automatically detected
 	 *        calendar.
+	 *
+	 * @throws {Error} If given time Definition is an Object not representing a valid time.
 	 */
 	var Time = function Time( timeDefinition, options ) {
 		var result;
@@ -35,9 +37,10 @@ time.Time = ( function( time, $ ) {
 		}, options );
 
 		if( typeof timeDefinition === 'string' ) {
-			result = time.Time.parse( timeDefinition );
+			result = Time.parse( timeDefinition );
 		} else {
-			result = $.extend( {}, timeDefinition );
+			result = $.extend( {}, timeDefinition ); // copy object
+			Time.validate( result );
 		}
 		if( result === null ) {
 			result = {};
