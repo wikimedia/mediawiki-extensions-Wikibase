@@ -243,6 +243,15 @@ time.Time = ( function( time, $ ) {
 	};
 
 	/**
+	 * Returns the highest possible precision from the time.Time.PRECISION enum.
+	 *
+	 * @returns {Number}
+	 */
+	Time.maxPrecision = function() {
+		return Time.PRECISION.SECOND;
+	};
+
+	/**
 	 * All supported calendar models
 	 * @type {Object}
 	 */

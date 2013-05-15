@@ -24,6 +24,10 @@
 
 	QUnit.test( 'invalid precisions', function( assert ) {
 		assert.ok(
+			!Time.knowsPrecision( Time.maxPrecision() + 1 ),
+			'Precision above highest precision is an unknown precision'
+		);
+		assert.ok(
 			!Time.knowsPrecision( 'foo' ),
 			'Random string is not a known precision'
 		);

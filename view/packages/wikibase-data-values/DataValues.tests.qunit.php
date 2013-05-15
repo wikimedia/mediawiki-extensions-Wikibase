@@ -83,6 +83,7 @@ return call_user_func( function() {
 		'time.js.tests' => array(
 			'scripts' => array(
 				'resources/time.js/tests/time.Time.knowsPrecision.tests.js',
+				'resources/time.js/tests/time.Time.maxPrecision.tests.js',
 			),
 			'dependencies' => array(
 				'time.js',
