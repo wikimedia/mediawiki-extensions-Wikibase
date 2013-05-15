@@ -29,65 +29,65 @@
  * @licence GNU GPL v2+
  */
 
-return call_user_func( function() {
+if ( !defined( 'WBL_VERSION' ) ) {
+	die( 'Not an entry point.' );
+}
 
-	$defaults = array(
+$wgWBSettings = array();
 
-		// alternative: application/vnd.php.serialized
-		'serializationFormat' => CONTENT_FORMAT_JSON,
+// alternative: application/vnd.php.serialized
+$wgWBSettings['serializationFormat'] = CONTENT_FORMAT_JSON;
 
-		// whether changes get recorded to wb_changes
-		'useChangesTable' => true,
+// whether changes get recorded to wb_changes
+$wgWBSettings['useChangesTable'] = true;
 
-		'entityPrefixes' => array(
-			'q' => \Wikibase\Item::ENTITY_TYPE,
-			'p' => \Wikibase\Property::ENTITY_TYPE,
-		),
+$wgWBSettings['entityPrefixes'] = array(
+	'q' => \Wikibase\Item::ENTITY_TYPE,
+	'p' => \Wikibase\Property::ENTITY_TYPE,
+);
 
-		'siteLinkGroup' => 'wikipedia',
+$wgWBSettings['siteLinkGroup'] = 'wikipedia';
 
-		// local by default. Set to something LBFactory understands.
-		'changesDatabase' => false,
+// local by default. Set to something LBFactory understands.
+$wgWBSettings['changesDatabase'] = false;
 
-		// JSON is more robust against version differences between repo and client,
-		// but only once the client can cope with the JSON form of the change.
-		'changesAsJson' => true,
+// JSON is more robust against version differences between repo and client,
+// but only once the client can cope with the JSON form of the change.
+$wgWBSettings['changesAsJson'] = true;
 
-		// list of logical database names of local client wikis.
-		// may contain mappings from site-id to db-name.
-		'localClientDatabases' => array(),
+// list of logical database names of local client wikis.
+// may contain mappings from site-id to db-name.
+$wgWBSettings['localClientDatabases'] = array();
 
-		'dispatchBatchChunkFactor' => 3,
-		'dispatchBatchCacheFactor' => 3,
+$wgWBSettings['dispatchBatchChunkFactor'] = 3;
+$wgWBSettings['dispatchBatchCacheFactor'] = 3;
 
-		'changeHandlers' => array(
-			'wikibase-item~add' => 'Wikibase\ItemChange',
-			'wikibase-property~add' => 'Wikibase\EntityChange',
-			'wikibase-query~add' => 'Wikibase\EntityChange',
+$wgWBSettings['changeHandlers'] = array(
+	'wikibase-item~add' => 'Wikibase\ItemChange',
+	'wikibase-property~add' => 'Wikibase\EntityChange',
+	'wikibase-query~add' => 'Wikibase\EntityChange',
 
-			'wikibase-item~update' => 'Wikibase\ItemChange',
-			'wikibase-property~update' => 'Wikibase\EntityChange',
-			'wikibase-query~update' => 'Wikibase\EntityChange',
+	'wikibase-item~update' => 'Wikibase\ItemChange',
+	'wikibase-property~update' => 'Wikibase\EntityChange',
+	'wikibase-query~update' => 'Wikibase\EntityChange',
 
-			'wikibase-item~remove' => 'Wikibase\ItemChange',
-			'wikibase-property~remove' => 'Wikibase\EntityChange',
-			'wikibase-query~remove' => 'Wikibase\EntityChange',
+	'wikibase-item~remove' => 'Wikibase\ItemChange',
+	'wikibase-property~remove' => 'Wikibase\EntityChange',
+	'wikibase-query~remove' => 'Wikibase\EntityChange',
 
-			'wikibase-item~refresh' => 'Wikibase\ItemChange',
-			'wikibase-property~refresh' => 'Wikibase\EntityChange',
-			'wikibase-query~refresh' => 'Wikibase\EntityChange',
+	'wikibase-item~refresh' => 'Wikibase\ItemChange',
+	'wikibase-property~refresh' => 'Wikibase\EntityChange',
+	'wikibase-query~refresh' => 'Wikibase\EntityChange',
 
-			'wikibase-item~restore' => 'Wikibase\ItemChange',
-			'wikibase-property~restore' => 'Wikibase\EntityChange',
-			'wikibase-query~restore' => 'Wikibase\EntityChange',
-		),
+	'wikibase-item~restore' => 'Wikibase\ItemChange',
+	'wikibase-property~restore' => 'Wikibase\EntityChange',
+	'wikibase-query~restore' => 'Wikibase\EntityChange',
+);
 
-		'dataTypes' => array(
-			'wikibase-item',
-			'commonsMedia',
-			'string',
-		),
-	);
+$wgWBSettings['dataTypes'] = array(
+	'wikibase-item',
+	'commonsMedia',
+	'string',
+);
 
-	return $defaults;
-} );
+$wgValueFormatters['wikibase-entityid'] = 'Wikibase\Lib\EntityIdFormatter';

@@ -33,19 +33,16 @@ if ( !defined( 'WBL_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
 
-global $wgHooks;
+global $wgWBSettings, $wgAutoloadClasses, $wgHooks;
 
-$wgHooks['WikibaseDefaultSettings'][]	= function( array &$settings ) {
-	$settings['dataTypes'] = array_merge( $settings['dataTypes'], array(
-		'geo-coordinate',
-		'quantity',
-		'monolingual-text',
-		'multilingual-text',
-		'time',
-	) );
+$wgWBSettings['dataTypes'] = array_merge( $wgWBSettings['dataTypes'], array(
+	'geo-coordinate',
+	'quantity',
+	'monolingual-text',
+	'multilingual-text',
+	'time',
+) );
 
-	return true;
-};
 
 $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreStart
