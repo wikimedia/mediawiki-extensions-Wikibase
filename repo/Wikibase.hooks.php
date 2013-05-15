@@ -217,6 +217,7 @@ final class RepoHooks {
 			'store/Store',
 
 			'store/sql/DispatchStats',
+			'store/sql/EntityPerPageBuilder',
 			'store/sql/SqlIdGenerator',
 			'store/sql/TermSqlIndex',
 			'store/sql/TermSearchKeyBuilder',
