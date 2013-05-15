@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "Dw6bfXtI",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-15T12:43:41Z",
+      "side": 1,
+      "message": "if you return an empty array, you\u0027ll get a failure like \"Warning No tests found in suite \"Wikibase\\Test\\RdfBuilderTest::testAddEntity\".\"",
+      "parentUuid": "Dw0ZdsnY",
+      "revId": "24ed5abc5dff474ad20bda93df115d97cfe75406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dw2ZUNlI",
         "filename": "repo/tests/phpunit/includes/rdf/RdfSerializerTest.php",
         "patchSetId": 2
