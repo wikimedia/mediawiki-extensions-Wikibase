@@ -8,8 +8,9 @@
 
 #require 'ruby_selenium'
 
-class ItemPage < EntityPage
+class ItemPage
   include PageObject
+  include EntityPage
 
   # ***** METHODS *****
   # item url navigation
