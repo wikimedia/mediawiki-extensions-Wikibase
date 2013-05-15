@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dw4ZXulY",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-15T12:37:01Z",
+      "side": 1,
+      "message": "Hm, without the check, this should trigger a warning if $graphs is null, right? Interestingly, it doesn\u0027t for me. The tests work fine when I remove EasyRdf. Must be an issue with the PHP version or some such",
+      "revId": "24ed5abc5dff474ad20bda93df115d97cfe75406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw0ZdsnY",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-15T12:37:01Z",
+      "side": 1,
+      "message": "Is it legal for a data provider to return null? isn\u0027t it required to return an array?\nIs this documented somewhere?",
+      "revId": "24ed5abc5dff474ad20bda93df115d97cfe75406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw2ZUNlI",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfSerializerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-15T12:37:01Z",
+      "side": 1,
+      "message": "This does fail if $graphs is null. I wonder how I didn\u0027t notice that. Oops, sorry.",
+      "revId": "24ed5abc5dff474ad20bda93df115d97cfe75406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
