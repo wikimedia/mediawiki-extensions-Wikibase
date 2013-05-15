@@ -106,31 +106,9 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @return boolean success indicator
 	 */
 	public function rebuild() {
-		$dbw = wfGetDB( DB_MASTER );
-		$begin = 0;
-		$entityContentFactory = EntityContentFactory::singleton();
-		do {
-			$pages = $dbw->select(
-				array( 'page' ),
-				array( 'page_title' ),
-				array( 'page_namespace' => NamespaceUtils::getEntityNamespaces() ),
-				__METHOD__,
-				array( 'LIMIT' => 1000, 'OFFSET' => $begin )
-			);
+		$rebuilder = new EntityPerPageRebuilder();
+		$rebuilder->rebuild( $this );
 
-			foreach ( $pages as $pageRow ) {
-				$id = EntityId::newFromPrefixedId( $pageRow->page_title );
-
-				if ( $id !== null ) {
-					$entityContent = $entityContentFactory->getFromId( $id, \Revision::RAW );
-
-					if ( $entityContent !== null ) {
-						$this->addEntityContent( $entityContent );
-					}
-				}
-			}
-			$begin += 1000;
-		} while ( $pages->numRows() === 1000 );
 		return true;
 	}
 
