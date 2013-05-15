@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 use LoggedUpdateMaintenance;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\EntityIdParser;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -32,13 +34,17 @@ require_once $basePath . '/maintenance/Maintenance.php';
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 
 	public function __construct() {
+		parent::__construct();
+
 		$this->mDescription = 'Rebuild the entites_per_page table';
 
-		parent::__construct();
+		$this->addOption( 'only-missing', "Update only missing keys (per default, entire table is rebuilt)" );
+		$this->addOption( 'batch-size', "Number of rows to update per batch (100 by default)", false, true );
 	}
 
 	/**
@@ -52,8 +58,40 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 			exit;
 		}
 
-		StoreFactory::getStore( 'sqlstore' )->newEntityPerPage()->rebuild();
+		$batchSize = intval( $this->getOption( 'batch-size', 100 ) );
+		$onlyMissing = $this->getOption( 'only-missing', false );
+
+		$reporter = new \ObservableMessageReporter();
+		$reporter->registerReporterCallback(
+			array( $this, 'report' )
+		);
+
+		$entityPerPageTable = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
+
+		$entityContentFactory = EntityContentFactory::singleton();
+
+		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+
+		$builder = new EntityPerPageBuilder( $entityPerPageTable, $entityContentFactory, $entityIdParser );
+		$builder->setReporter( $reporter );
+
+		$builder->setBatchSize( $batchSize );
+		$builder->setOnlyMissing( $onlyMissing );
+
+		$builder->rebuild();
+
 		return true;
+	}
+
+	/**
+	 * Outputs a message vis the output() method.
+	 *
+	 * @since 0.4
+	 *
+	 * @param $msg
+	 */
+	public function report( $msg ) {
+		$this->output( "$msg\n" );
 	}
 
 	/**

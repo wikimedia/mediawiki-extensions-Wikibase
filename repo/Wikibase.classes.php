@@ -125,6 +125,7 @@ return call_user_func( function() {
 		// includes/store/sql
 		'Wikibase\SqlIdGenerator' => 'includes/store/sql/SqlIdGenerator.php',
 		'Wikibase\SqlStore' => 'includes/store/sql/SqlStore.php',
+		'Wikibase\EntityPerPageBuilder' => 'includes/store/sql/EntityPerPageBuilder.php',
 		'Wikibase\EntityPerPageTable' => 'includes/store/sql/EntityPerPageTable.php',
 		'Wikibase\DispatchStats' => 'includes/store/sql/DispatchStats.php',
 		'Wikibase\TermSearchKeyBuilder' => 'includes/store/sql/TermSearchKeyBuilder.php',
