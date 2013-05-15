@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "DxOFugAA",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T22:13:01Z",
+      "side": 1,
+      "message": "Try not to use Utils, it is procedural code",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxMGVROQ",
         "filename": "lib/includes/SiteTitle.php",
         "patchSetId": 1
@@ -64,6 +81,23 @@
       "writtenOn": "2013-05-15T22:06:43Z",
       "side": 1,
       "message": "work in the constructor",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxKFkeCQ",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T22:13:01Z",
+      "side": 1,
+      "message": "SiteSQLStore?!",
       "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
