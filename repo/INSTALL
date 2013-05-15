@@ -83,7 +83,7 @@ $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
 
 == Configuration ==
 
-Configuration of Reviews is done by assigning to $wgWBSettings in your
+Configuration is done by assigning to $wgWBRepoSettings in your
 [[Manual:LocalSettings.php|LocalSettings.php]] file, AFTER the inclusion of the
 extension. The options are listed below and their default is set in the Wikibase settings file:
 https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=lib/includes/Settings.php

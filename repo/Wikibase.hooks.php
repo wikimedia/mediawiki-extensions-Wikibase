@@ -71,7 +71,7 @@ final class RepoHooks {
 		if ( empty( $namespaces ) ) {
 			wfProfileOut( __METHOD__ );
 			throw new MWException( 'Wikibase: Incomplete configuration: '
-				. '$wgWBSettings["entityNamespaces"] has to be set to an array mapping content model IDs to namespace IDs. '
+				. '$wgWBRepoSettings["entityNamespaces"] has to be set to an array mapping content model IDs to namespace IDs. '
 				. 'See ExampleSettings.php for details and examples.');
 		}
 

@@ -2,7 +2,7 @@
 
 This document describes the configuration of the Wikibase extensions.
 
-As usual, the extension is configured in MediaWiki's LocalSettings.php file. However, Wikibase settings are placed in a single associative array, <code>$wgWBSettings</code>, instead of individual global variables. So, if below the setting <code>foo</code> is described below, you would need to use <code>$wgWBSettings['foo']</code> in LocalSettings.php.
+As usual, the extension is configured in MediaWiki's LocalSettings.php file. However, Wikibase settings are placed in associative arrays, <code>$wgWBRepoSettings</code> and <code>$wgWBClientSettings</code> respectively, instead of individual global variables. So, if below the setting <code>foo</code> is described below, you would need to use <code>$wgWBClientSettings['foo']</code> in LocalSettings.php.
 
 
 == Common Settings ==
