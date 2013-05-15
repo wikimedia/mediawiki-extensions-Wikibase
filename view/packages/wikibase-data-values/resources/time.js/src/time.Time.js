@@ -158,7 +158,7 @@ time.Time = ( function( time, $ ) {
 		 * TODO: throw an error if invalid Time, don't support invalid data objects and deprecate
 		 *  this function then.
 		 *
-		 * @returns {boolean}
+		 * @return {boolean}
 		 */
 		this.isValid = function() {
 			return this.year() !== null;
@@ -230,7 +230,7 @@ time.Time = ( function( time, $ ) {
 	 * Returns whether a given number can be interpreted as a Time's precision.
 	 *
 	 * @param {number} precision
-	 * @returns {boolean}
+	 * @return {boolean}
 	 */
 	Time.knowsPrecision = function( precision ) {
 		var precisionKey;
@@ -243,9 +243,18 @@ time.Time = ( function( time, $ ) {
 	};
 
 	/**
+	 * Returns the lowest possible precision from the time.Time.PRECISION enum.
+	 *
+	 * @return {Number}
+	 */
+	Time.minPrecision = function() {
+		return Time.PRECISION.GY;
+	};
+
+	/**
 	 * Returns the highest possible precision from the time.Time.PRECISION enum.
 	 *
-	 * @returns {Number}
+	 * @return {Number}
 	 */
 	Time.maxPrecision = function() {
 		return Time.PRECISION.SECOND;

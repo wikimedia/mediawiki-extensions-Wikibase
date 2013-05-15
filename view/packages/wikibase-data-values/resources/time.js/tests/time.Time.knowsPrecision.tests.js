@@ -28,6 +28,10 @@
 			'Precision above highest precision is an unknown precision'
 		);
 		assert.ok(
+			!Time.knowsPrecision( Time.minPrecision() - 1 ),
+			'Precision below lowest precision is an unknown precision'
+		);
+		assert.ok(
 			!Time.knowsPrecision( 'foo' ),
 			'Random string is not a known precision'
 		);
