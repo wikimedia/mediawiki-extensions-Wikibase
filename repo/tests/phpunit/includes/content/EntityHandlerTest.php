@@ -118,14 +118,11 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	public function testCanBeUsedOn() {
 		$handler = $this->getHandler();
 
-		$ns = $handler->getEntityNamespace();
-		$title = \Title::makeTitle( $ns, "1234" );
-		$this->assertTrue( $handler->canBeUsedOn( $title ),
+		$this->assertTrue( $handler->canBeUsedOn( \Title::makeTitle( $handler->getEntityNamespace(), "1234" ) ),
 							'It should be possible to create this kind of entity in the respective entity namespace!'
 						);
 
-		$title = \Title::makeTitle( NS_MEDIAWIKI, "Foo" );
-		$this->assertFalse( $handler->canBeUsedOn( $title ),
+		$this->assertFalse( $handler->canBeUsedOn( \Title::makeTitle( NS_MEDIAWIKI, "Foo" ) ),
 							'It should be impossible to create an entity outside the respective entity namespace!'
 						);
 	}

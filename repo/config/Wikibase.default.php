@@ -29,50 +29,50 @@
  * @licence GNU GPL v2+
  */
 
-return call_user_func( function() {
+if ( !defined( 'WB_VERSION' ) ) {
+	die( 'Not an entry point.' );
+}
 
-	$defaults = array(
+$dir = __DIR__ . '/';
 
-		// Set API in debug mode
-		// do not turn on in production!
-		'apiInDebug' => false,
+$wgWBRepoSettings = array();
 
-		// Additional settings for API when debugging is on to
-		// facilitate testing.
-		'apiDebugWithPost' => false,
-		'apiDebugWithRights' => false,
-		'apiDebugWithTokens' => false,
+// Set API in debug mode
+// do not turn on in production!
+$wgWBRepoSettings['apiInDebug'] = false;
 
-		'defaultStore' => 'sqlstore',
+// Additional settings for API when debugging is on to
+// facilitate testing.
+$wgWBRepoSettings['apiDebugWithPost'] = false;
+$wgWBRepoSettings['apiDebugWithRights'] = false;
+$wgWBRepoSettings['apiDebugWithTokens'] = false;
 
-		'idBlacklist' => array(
-			1,
-			23,
-			42,
-			1337,
-			9001,
-			31337,
-			720101010,
-		),
+$wgWBRepoSettings['defaultStore'] = 'sqlstore';
 
-		// Allow the TermIndex table to work without the term_search_key field,
-		// for sites that can not easily roll out schema changes on large tables.
-		// This means that all searches will use exact matching
-		// (depending on the database's collation).
-		'withoutTermSearchKey' => false,
+$wgWBRepoSettings['idBlacklist'] = array(
+	1,
+	23,
+	42,
+	1337,
+	9001,
+	31337,
+	720101010,
+);
 
-		'entityNamespaces' => array(),
+// Allow the TermIndex table to work without the term_search_key field,
+// for sites that can not easily roll out schema changes on large tables.
+// This means that all searches will use exact matching
+// (depending on the database's collation).
+$wgWBRepoSettings['withoutTermSearchKey'] = false;
 
-		// These are used for multilanguage strings that should have a soft length constraint
-		'multilang-limits' => array(
-			'length' => 250,
-		),
+$wgWBRepoSettings['entityNamespaces'] = array();
 
-		'multilang-truncate-length' => 32,
+// These are used for multilanguage strings that should have a soft length constraint
+$wgWBRepoSettings['multilang-limits'] = array(
+	'length' => 250,
+);
 
-		// Should the page names (titles) be normalized against the external site
-		'normalizeItemByTitlePageNames' => false,
-	);
+$wgWBRepoSettings['multilang-truncate-length'] = 32;
 
-	return $defaults;
-} );
+// Should the page names (titles) be normalized against the external site
+$wgWBRepoSettings['normalizeItemByTitlePageNames'] = false;
