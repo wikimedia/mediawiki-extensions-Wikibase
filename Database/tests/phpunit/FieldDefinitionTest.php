@@ -34,7 +34,7 @@ use Wikibase\Database\FieldDefinition;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class FieldDefinitionTest extends \MediaWikiTestCase {
+class FieldDefinitionTest extends \PHPUnit_Framework_TestCase {
 
 	public function instanceProvider() {
 		$instances = array();
@@ -75,7 +75,13 @@ class FieldDefinitionTest extends \MediaWikiTestCase {
 			true
 		);
 
-		return $this->arrayWrap( $instances );
+		$argLists = array();
+
+		foreach ( $instances as $instance ) {
+			$argLists[] = array( $instance );
+		}
+
+		return $argLists;
 	}
 
 	/**
