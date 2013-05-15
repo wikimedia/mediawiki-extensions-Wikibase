@@ -11,6 +11,13 @@
  *
  * @option {jQuery} $subject (REQUIRED) The node whose visibility shall be toggled.
  *
+ * @event animationstep: While the toggler is being animated, this event is triggered on each
+ *        animation step. The event forwards the parameters received from the animation's "step"
+ *        callback.
+ *        (1) {jQuery.Event}
+ *        (2) {number} now
+ *        (3) {jQuery.Tween} tween
+ *
  * @dependency jquery.ui.Widget
  */
 ( function( $ ) {
@@ -103,7 +110,11 @@
 				if( !self.element.hasClass( 'ui-state-disabled' ) ) {
 					// Change toggle icon to reflect current state of toggle subject visibility:
 					self._reflectVisibilityOnToggleIcon( true );
-					self.options.$subject.slideToggle();
+					self.options.$subject.slideToggle( {
+						step: function( now, tween ) {
+							self._trigger( 'animationstep', null, [ now, tween ] );
+						}
+					} );
 				}
 			} )
 			.on( 'mouseover', function( event ) {

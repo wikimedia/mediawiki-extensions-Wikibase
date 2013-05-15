@@ -25,6 +25,14 @@
  * @event toggle: Triggered when the visibility of the extended content is toggled.
  *        (1) {jQuery.Event}
  *
+ * @event animationstep: While the input extender's extension is being animated, this event is
+ *        triggered on each animation step. The event forwards the parameters received from the
+ *        animation's "step" callback. However, when the animation is finished, the event is
+ *        triggered without the second and third parameter.
+ *        (1) {jQuery.Event}
+ *        (2) {number} [now]
+ *        (3) {jQuery.Tween} [tween]
+ *
  * @dependency jQuery.Widget
  * @dependency jQuery.eachchange
  */
@@ -61,10 +69,10 @@
 		$extension: null,
 
 		/**
-		 * Caches the timeout when the actual "blur" action should kick in.
+		 * Caches the timeout when the actual input extender animation should kick in.
 		 * @type {Object}
 		 */
-		_blurTimeout: null,
+		_animationTimeout: null,
 
 		/**
 		 * @see jQuery.Widget._create
@@ -78,22 +86,27 @@
 			this.$extension = $( '<div/>' )
 			.addClass( this.widgetBaseClass + '-extension ui-widget-content' )
 			.on( 'click.' + this.widgetName, function( event ) {
-				clearTimeout( self._blurTimeout );
+				clearTimeout( self._animationTimeout );
 				event.stopPropagation();
 				self.showExtension();
+			} )
+			.on( 'toggleranimationstep.' + this.widgetName, function( event, now, tween ) {
+				self._trigger( 'animationstep', null, [ now, tween ] );
 			} )
 			.appendTo( $( 'body' ) );
 
 			this.element
 			.on( 'focus.' + this.widgetName, function( event ) {
 				if( !self.options.hideWhenInputEmpty || self.element.val() !== '' ) {
-					clearTimeout( self._blurTimeout );
-					self.showExtension();
+					clearTimeout( self._animationTimeout );
+					self._animationTimeout = setTimeout( function() {
+						self.showExtension();
+					}, 150 );
 				}
 			} )
 			// TODO: Allow direct tabbing into the extension
 			.on( 'blur.' + this.widgetName, function( event ) {
-				self._blurTimeout = setTimeout( function() {
+				self._animationTimeout = setTimeout( function() {
 					self.hideExtension();
 				}, 150 );
 			} )
@@ -173,6 +186,15 @@
 		 * @param {Function} [callback] Invoked as soon as the contents are visible.
 		 */
 		showExtension: function( callback ) {
+			var self = this;
+
+			// When blurring the browser viewport and an re-focusing, Chrome is firing the "focus"
+			// event twice. jQuery fadeIn sets the opacity to 0 for the first fadeIn but does not
+			// pick up the value when triggering fadeIn the second time.
+			if( this.$extension.css( 'opacity' ) === '0' ) {
+				this.$extension.css( 'opacity', '1' );
+			}
+
 			// Element needs to be visible to use jquery.ui.position.
 			if( !this.$extension.is( ':visible' ) ) {
 				this.$extension.show();
@@ -182,9 +204,16 @@
 				this.$extension.hide();
 			}
 
-			this.$extension.stop( true, true ).fadeIn( 150, function() {
-				if( $.isFunction( callback ) ) {
-					callback();
+			this.$extension.stop( true ).fadeIn( {
+				duration: 150,
+				step: function( now, tween ) {
+					self._trigger( 'animationstep', null, [ now, tween ] );
+				},
+				complete: function() {
+					if( $.isFunction( callback ) ) {
+						callback();
+					}
+					self._trigger( 'animationstep' );
 				}
 			} );
 		},
@@ -195,9 +224,18 @@
 		 * @param {Function} [callback] Invoked as soon as the contents are hidden.
 		 */
 		hideExtension: function( callback ) {
-			this.$extension.stop( true, true ).fadeOut( 150, function() {
-				if( $.isFunction( callback ) ) {
-					callback();
+			var self = this;
+
+			this.$extension.stop( true ).fadeOut( {
+				duration: 150,
+				step: function( now, tween ) {
+					self._trigger( 'animationstep', null, [ now, tween ] );
+				},
+				complete: function() {
+					if( $.isFunction( callback ) ) {
+						callback();
+					}
+					self._trigger( 'animationstep' );
 				}
 			} );
 		}
