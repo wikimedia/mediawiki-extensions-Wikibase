@@ -245,7 +245,7 @@ class DispatchChanges extends \Maintenance {
 		$this->init();
 
 		if ( empty( $this->clientWikis ) ) {
-			throw new \MWException( "No client wikis configured! Please set \$wgWBSettings['localClientDatabases']." );
+			throw new \MWException( "No client wikis configured! Please set \$wgWBRepoSettings['localClientDatabases']." );
 		}
 
 		$this->initStateTable();

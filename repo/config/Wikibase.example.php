@@ -54,7 +54,7 @@ $wgExtraNamespaces[WB_NS_PROPERTY_TALK] = 'Property_talk';
 $wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_ITEM] = WB_NS_ITEM;
 $wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_PROPERTY;
 
-// NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $wgWBSettings
+// NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $wgWBRepoSettings
 
 // Tell MediaWIki to search the item namespace
 $wgNamespacesToBeSearchedDefault[WB_NS_ITEM] = true;

@@ -146,7 +146,6 @@ $wgSpecialPageGroups['DispatchStats']				= 'wikibaserepo';
 
 // Hooks
 $wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
-$wgHooks['WikibaseDefaultSettings'][] 				= 'Wikibase\RepoHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\RepoHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'Wikibase\RepoHooks::registerUnitTests';
 $wgHooks['NamespaceIsMovable'][]					= 'Wikibase\RepoHooks::onNamespaceIsMovable';
@@ -181,7 +180,12 @@ $wgWBStores = array();
 
 $wgWBStores['sqlstore'] = 'Wikibase\SqlStore';
 
-include_once( __DIR__ . '/config/Wikibase.default.php' );
+$wgWBRepoSettings = array_merge(
+	require( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
+	require( __DIR__ . '/config/Wikibase.default.php' )
+);
+
+$wgWBSettings = &$wgWBRepoSettings; // B/C
 
 if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 	include_once( __DIR__ . '/config/Wikibase.experimental.php' );

@@ -143,8 +143,12 @@ $wgWBClientStores = array();
 $wgWBClientStores['CachingSqlStore'] = 'Wikibase\CachingSqlStore';
 $wgWBClientStores['DirectSqlStore'] = 'Wikibase\DirectSqlStore';
 
+$wgWBClientSettings = array_merge(
+	require( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
+	require( __DIR__ . '/config/WikibaseClient.default.php' )
+);
 
-include_once( $dir . 'config/WikibaseClient.default.php' );
+$wgWBSettings = &$wgWBClientSettings; // B/C
 
 if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 	include_once( $dir . 'config/WikibaseClient.experimental.php' );
