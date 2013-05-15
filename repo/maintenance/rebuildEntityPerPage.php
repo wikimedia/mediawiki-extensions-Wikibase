@@ -52,8 +52,29 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 			exit;
 		}
 
-		StoreFactory::getStore( 'sqlstore' )->newEntityPerPage()->rebuild();
+		$reporter = new \ObservableMessageReporter();
+		$reporter->registerReporterCallback(
+			array( $this, 'report' )
+		);
+
+		$table = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
+
+		$builder = new EntityPerPageRebuilder();
+		$builder->setReporter( $reporter );
+		$builder->rebuild( $table );
+
 		return true;
+	}
+
+	/**
+	 * Outputs a message vis the output() method.
+	 *
+	 * @since 0.4
+	 *
+	 * @param $msg
+	 */
+	public function report( $msg ) {
+		$this->output( "$msg\n" );
 	}
 
 	/**
