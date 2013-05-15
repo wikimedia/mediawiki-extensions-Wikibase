@@ -6,8 +6,9 @@
 #
 # page object for CreateEntity special page base class
 
-class CreateEntityPage < EntityPage
+module CreateEntityPage
   include PageObject
+  include EntityPage
 
   text_field(:createEntityLabelField, :id => "wb-newentity-label")
   text_field(:createEntityDescriptionField, :id => "wb-newentity-description")
