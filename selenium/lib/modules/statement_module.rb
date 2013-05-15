@@ -57,7 +57,6 @@ module StatementPage
     self.wait_for_property_value_box
     if self.statementValueInput?
       self.statementValueInput = statement_value
-      # TODO: bug 43609: Regarding item property, as long as no verification of the input is done, we have to wait for the entityselector to finish the selection
       ajax_wait
     end
     saveStatement
