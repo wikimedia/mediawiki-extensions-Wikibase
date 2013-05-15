@@ -8,7 +8,7 @@
 
 #require 'ruby_selenium'
 
-class EntityPage# < RubySelenium
+module EntityPage
   include PageObject
   include SitelinkPage
   include AliasPage
