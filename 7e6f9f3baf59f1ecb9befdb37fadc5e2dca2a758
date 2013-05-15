@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dw5prih8",
+        "filename": "lib/tests/phpunit/ClaimGuidValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:53:32Z",
+      "side": 1,
+      "message": "You are making the same mistake as I have made way to many times during the last half year :)\n\nIt is better to have a validGUidProvider and an InvalidGuidProvider.\n\nAlso place the provider after the test method. The test method is of more interest to someone reading this then the data that goes in it, so the reading order is now wrong.",
+      "revId": "7e6f9f3baf59f1ecb9befdb37fadc5e2dca2a758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw9p1Evk",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:53:32Z",
+      "side": 1,
+      "message": "mhh, tight coupling... need to fix the API module as a whole to really get rid of that though, so not your task here",
+      "revId": "7e6f9f3baf59f1ecb9befdb37fadc5e2dca2a758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw-pR9mE",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:53:32Z",
+      "side": 1,
+      "message": "why the blank line here? we do not do this elsewhere",
+      "revId": "7e6f9f3baf59f1ecb9befdb37fadc5e2dca2a758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw9pOssA",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:53:32Z",
+      "side": 1,
+      "message": "this will silently ignore the invalid guids",
+      "revId": "7e6f9f3baf59f1ecb9befdb37fadc5e2dca2a758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DwzrE-g8",
+        "filename": "repo/includes/api/RemoveQualifiers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:53:32Z",
+      "side": 1,
+      "message": "since the return value always is a boolean, doing \u003d\u003d\u003d false is not needed. Simply negating is sufficient",
+      "revId": "7e6f9f3baf59f1ecb9befdb37fadc5e2dca2a758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw3rOhi8",
+        "filename": "repo/includes/api/RemoveReferences.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:53:32Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "7e6f9f3baf59f1ecb9befdb37fadc5e2dca2a758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw1rTwtQ",
+        "filename": "repo/includes/api/SetClaimValue.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:53:32Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "7e6f9f3baf59f1ecb9befdb37fadc5e2dca2a758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw7rYDu8",
+        "filename": "repo/includes/api/SetQualifier.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:53:32Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "7e6f9f3baf59f1ecb9befdb37fadc5e2dca2a758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw-rilqI",
+        "filename": "repo/includes/api/SetQualifier.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:53:32Z",
+      "side": 1,
+      "message": "well, this is creating more duplication... should look into how to fix that",
+      "revId": "7e6f9f3baf59f1ecb9befdb37fadc5e2dca2a758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dwxry2m4",
+        "filename": "repo/includes/api/SetReference.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:53:32Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "7e6f9f3baf59f1ecb9befdb37fadc5e2dca2a758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dw3rnpq8",
+        "filename": "repo/includes/api/SetStatementRank.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:53:32Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "7e6f9f3baf59f1ecb9befdb37fadc5e2dca2a758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
