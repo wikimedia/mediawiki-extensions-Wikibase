@@ -78,6 +78,17 @@ return call_user_func( function() {
 				'dataValues.util',
 			),
 		),
+
+		// tests of Time.js:
+		'time.js.tests' => array(
+			'scripts' => array(
+				'resources/time.js/tests/time.Time.knowsPrecision.tests.js',
+			),
+			'dependencies' => array(
+				'time.js',
+			),
+		),
+
 	);
 
 } );

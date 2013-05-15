@@ -227,6 +227,22 @@ time.Time = ( function( time, $ ) {
 	};
 
 	/**
+	 * Returns whether a given number can be interpreted as a Time's precision.
+	 *
+	 * @param {number} precision
+	 * @returns {boolean}
+	 */
+	Time.knowsPrecision = function( precision ) {
+		var precisionKey;
+		for( precisionKey in Time.PRECISION ) {
+			if( Time.PRECISION[ precisionKey ] === precision ) {
+				return true;
+			}
+		}
+		return false;
+	};
+
+	/**
 	 * All supported calendar models
 	 * @type {Object}
 	 */
