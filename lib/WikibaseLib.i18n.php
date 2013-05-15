@@ -2019,13 +2019,18 @@ $messages['sr-ec'] = array(
 
 /** Swedish (svenska)
  * @author Lokal Profil
+ * @author WikiPhoenix
  */
 $messages['sv'] = array(
+	'wikibase-diffview-description' => 'beskrivning',
+	'wikibase-diffview-link' => 'länkar',
+	'wikibase-error-ui-session-failure' => 'Din session har upphört. Var god logga in igen.',
 	'wikibase-sitelinks' => 'Sidor som är länkade till det här objektet',
 	'wikibase-sitelinks-sitename-columnheading' => 'Språk',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
 	'wikibase-sitelinks-link-columnheading' => 'Länkad artikel',
 	'wikibase-tooltip-error-details' => 'Detaljer',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Tamil (தமிழ்)
