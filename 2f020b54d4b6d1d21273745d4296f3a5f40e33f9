@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxEEBNDw",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T22:06:43Z",
+      "side": 1,
+      "message": "If this is a value object, which is what the name and the docs imply, then normalizePageName has no place here",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxIH7PEQ",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T22:06:43Z",
+      "side": 1,
+      "message": "both a Site and a siteId? huh?",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxGH4sEc",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T22:06:43Z",
+      "side": 1,
+      "message": "why the page name twice?",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxMGVROQ",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T22:06:43Z",
+      "side": 1,
+      "message": "work in the constructor",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxKGauA8",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T22:06:43Z",
+      "side": 1,
+      "message": "If you cannot normalize, throw an exception. Do not return null",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxOGkwFs",
+        "filename": "lib/includes/SiteTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T22:06:43Z",
+      "side": 1,
+      "message": "Pulling in global settings - should be injected as an option in to the object doing the normalization",
+      "revId": "2f020b54d4b6d1d21273745d4296f3a5f40e33f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
