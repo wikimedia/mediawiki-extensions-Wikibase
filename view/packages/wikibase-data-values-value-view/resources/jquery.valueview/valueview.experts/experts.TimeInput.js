@@ -75,6 +75,12 @@
 		$calendar: null,
 
 		/**
+		 * Node of the hint giving information about the automatically selected calendar.
+		 * @type {jQuery}
+		 */
+		$calendarhint: null,
+
+		/**
 		 * @see jQuery.valueview.Expert._init
 		 */
 		_init: function() {
@@ -113,6 +119,7 @@
 				$( this ).data( 'listrotator' ).rotate( value.precision() );
 				self._setRawValue( value );
 				self._updatePreview( value );
+				self._updateCalendarHint( value );
 				self._viewNotifier.notify( 'change' );
 			} )
 			.on( 'listrotatorselected.' + this.uiBaseClass, function( event, precision ) {
@@ -121,6 +128,7 @@
 					: new Time( self.$input.val(), { precision: $( this ).data( 'listrotator' ).value() } );
 				self._setRawValue( value );
 				self._updatePreview( value );
+				self._updateCalendarHint( value );
 				self._viewNotifier.notify( 'change' );
 			} )
 			.appendTo( this.$precisionContainer );
@@ -143,6 +151,7 @@
 				$( this ).data( 'listrotator' ).rotate( value.calendarText() );
 				self._setRawValue( value );
 				self._updatePreview( value );
+				self._updateCalendarHint( value );
 				self._viewNotifier.notify( 'change' );
 			} )
 			.on( 'listrotatorselected', function( event ) {
@@ -153,6 +162,7 @@
 				$( this ).data( 'listrotator' ).rotate( value.calendarText() );
 				self._setRawValue( value );
 				self._updatePreview( value );
+				self._updateCalendarHint( value );
 				self._viewNotifier.notify( 'change' );
 			} )
 			.appendTo( this.$calendarContainer );
@@ -160,6 +170,15 @@
 			var $toggler = $( '<a/>' )
 			.addClass( this.uiBaseClass + '-advancedtoggler' )
 			.text( mw.msg( 'valueview-expert-advancedoptions' ) );
+
+			this.$calendarhint = $( '<div/>' )
+			.addClass( this.uiBaseClass + '-calendarhint' )
+			.append( $( '<span/>' ).addClass( this.uiBaseClass + '-calendarhint-message' ) )
+			.append(
+				$( '<a/>' )
+				.addClass( this.uiBaseClass + '-calendarhint-switch' )
+				.attr( 'href', 'javascript:void(0);' )
+			);
 
 			this.$input = $( '<input/>', {
 				type: 'text',
@@ -170,13 +189,14 @@
 				var value = self.$input.data( 'timeinput' ).value();
 				if( oldValue === '' &&  value === null || self.$input.val() === '' ) {
 					self._updatePreview( null );
+					self._updateCalendarHint();
 				}
 			} )
 			.timeinput()
 			// TODO: Move input extender out of here to a more generic place since it is not
 			// TimeInput specific.
 			.inputextender( {
-				content: [ $toggler, this.$precisionContainer, this.$calendarContainer, this.$preview ],
+				content: [ $toggler, this.$precisionContainer, this.$calendarContainer, this.$preview, this.$calendarhint ],
 				initCallback: function() {
 					self.$precision.data( 'listrotator' ).initWidths();
 					self.$calendar.data( 'listrotator' ).initWidths();
@@ -188,6 +208,7 @@
 			} )
 			.on( 'timeinputupdate.' + this.uiBaseClass, function( event, value ) {
 				self._updatePreview( value );
+				self._updateCalendarHint( value );
 				if( value && value.isValid() ) {
 					self.$precision.data( 'listrotator' ).rotate( value.precision() );
 					self.$calendar.data( 'listrotator' ).rotate( value.calendarText() );
@@ -208,6 +229,8 @@
 			this.$calendar.data( 'listrotator' ).destroy();
 			this.$calendar.remove();
 			this.$calendarContainer.remove();
+
+			this.$calendarhint.remove();
 
 			this.$previewValue.remove();
 			this.$preview.remove();
@@ -240,6 +263,44 @@
 				this.$previewValue
 				.removeClass( 'valueview-preview-novalue' )
 				.text( value.text() )
+			}
+		},
+
+		/**
+		 * Updates the calendar hint message.
+		 *
+		 * @param {time.Time} [value] Message will get hidden when omitted.
+		 */
+		_updateCalendarHint: function( value ) {
+			if( value && value.year() > 1581 && value.year() < 1930 && value.precision() > 10 ) {
+				var self = this;
+
+				var otherCalendar = ( value.calendarText() === timeSettings.calendarnames[0][0] )
+					? timeSettings.calendarnames[1][0]
+					: timeSettings.calendarnames[0][0];
+
+				this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-message' )
+				.text( mw.msg( 'valueview-expert-timeinput-calendarhint', value.calendarText() ) );
+
+				this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-switch' )
+				.off( 'click.' + this.uiBaseClass )
+				.on( 'click.' + this.uiBaseClass, function( event ) {
+					self.$calendar.data( 'listrotator' ).rotate( otherCalendar );
+
+					var value = ( self.$precision.data( 'listrotator' ).value() )
+						? new Time( self.$input.val(), { precision: self.$precision.data( 'listrotator' ).value(), calendarname: self.$calendar.data( 'listrotator' ).value() } )
+						: new Time( self.$input.val(), { calendarname: self.$calendar.data( 'listrotator' ).value() } );
+
+					self._setRawValue( value );
+					self._updatePreview( value );
+					self._updateCalendarHint( value );
+					self._viewNotifier.notify( 'change' );
+				} )
+				.html( mw.msg( 'valueview-expert-timeinput-calendarhint-switch', otherCalendar ) );
+
+				this.$calendarhint.show();
+			} else {
+				this.$calendarhint.hide();
 			}
 		},
 
@@ -307,6 +368,7 @@
 			if( this._newValue !== false ) {
 				this.$input.data( 'timeinput' ).value( this._newValue );
 				this._updatePreview( this._newValue );
+				this._updateCalendarHint( this._newValue );
 				if( this._newValue !== null ) {
 					this.$precision.data( 'listrotator' ).value( this._newValue.precision() );
 					this.$calendar.data( 'listrotator' ).value( this._newValue.calendarText() );

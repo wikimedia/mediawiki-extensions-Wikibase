@@ -210,6 +210,8 @@ return call_user_func( function() {
 				'valueview-expert-advancedoptions',
 				'valueview-expert-timeinput-precision',
 				'valueview-expert-timeinput-calendar',
+				'valueview-expert-timeinput-calendarhint',
+				'valueview-expert-timeinput-calendarhint-switch',
 				'valueview-preview-label',
 				'valueview-preview-novalue',
 			),
