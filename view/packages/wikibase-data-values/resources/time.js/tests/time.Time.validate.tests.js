@@ -129,7 +129,56 @@
 		newInvalidTestDefinition(
 			'unknown calendar name',
 			{ calendarname: 'foo' }
-		)
+		),
+		newInvalidTestDefinition(
+			'precision higher day not yet supported',
+			{ precision: Time.PRECISION.DAY + 1 }
+		), {
+			reason: 'precision is "DAY" but field "day" not given',
+			definition: {
+				calendarname: J,
+				year: 1492,
+				month: 10,
+				precision: PRECISION.DAY
+			}
+		}, {
+			reason: 'precision is "DAY" but field "month" not given',
+			definition: {
+				calendarname: J,
+				year: 1492,
+				day: 1,
+				precision: PRECISION.DAY
+			}
+		}, {
+			reason: 'precision is "DAY" but field "year" not given',
+			definition: {
+				calendarname: J,
+				month: 1,
+				day: 1,
+				precision: PRECISION.DAY
+			}
+		}, {
+			reason: 'precision is "MONTH" but field "month" not given',
+			definition: {
+				calendarname: J,
+				year: 1234,
+				precision: PRECISION.MONTH
+			}
+		}, {
+			reason: 'precision is "MONTH" but field "year" not given',
+			definition: {
+				calendarname: J,
+				month: 12,
+				precision: PRECISION.MONTH
+			}
+		}, {
+			reason: 'precision is "YEAR" but field "year" not given',
+			definition: {
+				calendarname: J,
+				month: 12,
+				precision: PRECISION.YEAR
+			}
+		}
 	];
 
 	QUnit.test( 'validating invalid time definitions', function( assert ) {

@@ -26,13 +26,12 @@ time.Time.validate = ( function( Time ) {
 			precision: 'number'
 		} );
 
-		if( definition.year === undefined || isNaN( definition.year ) ) {
-			throw new Error( '"year" has to be a number' );
-		}
+		checkPrecisionRequirements( definition );
 
-		if( definition.month > 12 || definition.month < 1 ) {
+		var month = definition.month;
+		if( month > 12 || month < 1 ) {
 			throw new Error( '"month" must not be lower than 1 (January) or higher than 12 ' +
-				'(December). "' + definition.month + '" is not a valid month number.'  );
+				'(December). "' + month + '" is not a valid month number.'  );
 		}
 
 		if( definition.day < 1 ) {
@@ -47,11 +46,47 @@ time.Time.validate = ( function( Time ) {
 			throw new Error( '"calendarname" is "' + definition.calendarname + '" but has to be "'
 				+ Time.CALENDAR.GREGORIAN + '" or "' + Time.CALENDAR.JULIAN + '"' );
 		}
+	};
 
-		if( !Time.knowsPrecision( definition.precision ) ) {
+	/**
+	 * Makes sure a given structure has a proper precision set by validating the precision itself
+	 * and checking if all fields required by that precision are set. E.g. if precision is "MONTH",
+	 * then also the field "year" has to be given.
+	 *
+	 * @param {Object} definition
+	 * @throws {Error}
+	 */
+	function checkPrecisionRequirements( definition ) {
+		var precision = definition.precision,
+			year = definition.year;
+
+		if( !Time.knowsPrecision( precision ) ) {
 			throw new Error( 'Unknown precision "' + definition.precision + '" given in "precision"' );
 		}
-	};
+
+		// make sure fields with time information required for given precision are set:
+		if( precision > Time.PRECISION.DAY ) {
+			throw new Error( 'Precision higher than "DAY" is not yet supported' );
+		}
+		if( precision >= Time.PRECISION.DAY
+			&& !definition.day
+		) {
+			throw new Error( 'Field "day" required because precision is "DAY' );
+		}
+		if( precision >= Time.PRECISION.MONTH
+			&& !definition.month
+		) {
+			throw new Error( 'Field "month" required because precision is "MONTH' );
+		}
+
+		// year is always required
+		if( year === undefined
+			|| isNaN( year )
+			|| !isFinite( year )
+		) {
+			throw new Error( '"year" has to be a finite number' );
+		}
+	}
 
 	/**
 	 * Checks a definition for certain fields. If the field is available, an error will be thrown
