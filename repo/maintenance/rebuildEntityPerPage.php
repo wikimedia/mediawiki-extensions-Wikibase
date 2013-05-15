@@ -52,7 +52,12 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 			exit;
 		}
 
-		StoreFactory::getStore( 'sqlstore' )->newEntityPerPage()->rebuild();
+		$table = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
+
+		$builder = new EntityPerPageRebuilder();
+		$builder->rebuild( $table );
+
+//		StoreFactory::getStore( 'sqlstore' )->newEntityPerPage()->rebuild();
 		return true;
 	}
 
