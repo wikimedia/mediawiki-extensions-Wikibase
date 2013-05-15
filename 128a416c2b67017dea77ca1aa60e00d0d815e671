@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dw3raBko",
+        "filename": "lib/tests/phpunit/ByPropertyIdArrayTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-15T16:03:49Z",
+      "side": 1,
+      "message": "The use of this data provider seems not needed and only introduce a dependency on it and its contents. I suggest just creating an empty ByPropertyIdArray here, which will do just fine.\n\nThe method name is also a bit deceptive. The id is not invalid, it is simply not set. So testGetByNotSetIdThrowsException would be better",
+      "revId": "128a416c2b67017dea77ca1aa60e00d0d815e671",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
