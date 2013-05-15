@@ -6,8 +6,9 @@
 #
 # page object for CreateItem special page
 
-class CreateItemPage < CreateEntityPage
+class CreateItemPage
   include PageObject
+  include CreateEntityPage
   include URL
 
   page_url URL.repo_url("Special:NewItem")
