@@ -84,6 +84,7 @@ final class LibHooks {
 			'TypedValueFormatter',
 			'Term',
 			'Utils',
+			'SiteTitle',
 		);
 
 		foreach ( $testFiles as $file ) {
