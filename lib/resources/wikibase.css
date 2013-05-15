@@ -663,6 +663,7 @@ div.wb-claim-new .wb-snak-value {
 /* "add" link in one reference's snak list */
 .wb-claim-qualifiers .wb-snaklistview > .wb-addtoolbar {
 	float: right;
+	clear: both;
 	margin-bottom: 1em;
 }
 
