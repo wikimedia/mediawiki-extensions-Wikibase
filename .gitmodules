@@ -1,3 +1,3 @@
-[submodule "repo/includes/content/easyRdf"]
+[submodule "content/easyRdf"]
 	path = contrib/easyRdf
-	url = https://github.com/Wikidata/easyrdf_lite.git
+	url = https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Wikibase/easyrdf.git
