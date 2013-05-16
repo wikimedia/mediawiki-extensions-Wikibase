@@ -1387,13 +1387,16 @@ $messages['hi'] = array(
 );
 
 /** Croatian (hrvatski)
+ * @author Roberta F.
  * @author SpeedyGonsales
  */
 $messages['hr'] = array(
 	'wikibase-editlinks' => 'Uredi međuwikije',
 	'wikibase-linkitem-addlinks' => 'Dodaj međuwikije',
 	'wikibase-linkitem-close' => 'Zatvori dijalog i ponovo učitaj stranicu',
-	'wikibase-linkitem-linkpage' => 'Uredi međuwikipoveznice',
+	'wikibase-linkitem-title' => 'Uređivanje međuwikipoveznica',
+	'wikibase-linkitem-linkpage' => 'Snimi međuwikipoveznice',
+	'wikibase-linkitem-selectlink' => 'Molimo odaberite projekt i stranicu koju želite povezati.',
 	'wikibase-linkitem-input-site' => 'Jezik:',
 	'wikibase-linkitem-input-page' => 'Ime stranice:',
 	'wikibase-linkitem-not-loggedin-title' => 'Morate biti prijavljeni',
