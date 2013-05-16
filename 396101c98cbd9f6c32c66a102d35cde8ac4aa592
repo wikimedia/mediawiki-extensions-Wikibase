@@ -16,6 +16,24 @@
       "revId": "396101c98cbd9f6c32c66a102d35cde8ac4aa592",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxNIGtIg",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-16T13:59:52Z",
+      "side": 1,
+      "message": "This commit is a better alternative to my original I14422cd85. Since that got merged in before I got around to improving it (despite the CAVEAT in the commit message), I propose to revert the earlier change and apply this on instead.\n\nThe changes to the default files are (nearly) identical.",
+      "parentUuid": "DxCcM.EE",
+      "revId": "396101c98cbd9f6c32c66a102d35cde8ac4aa592",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
