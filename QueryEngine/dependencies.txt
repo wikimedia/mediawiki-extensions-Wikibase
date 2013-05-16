@@ -1,8 +1,10 @@
 The Wikibase QueryEngine component is dependent on:
 
-* Wikibase DataModel
-* WikibaseLib
 * DataValues
 * Ask
+* Wikibase DataModel
+* Wikibase Database
 
 And nothing else.
+
+An always up to date list can be found at tests/bootstrap.php.
