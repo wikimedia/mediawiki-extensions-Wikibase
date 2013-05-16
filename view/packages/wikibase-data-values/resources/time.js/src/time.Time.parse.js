@@ -22,11 +22,8 @@ time.Time.parse = ( function( time ) {
 	function parse( text ) {
 		var tokens = tokenize( text ),
 			retval = {},
-			result = matchGrammars( [
-				'y', '-y', 'my', 'm-y', 'yb', 'myb', 'mdy', 'md-y', 'dmy', 'dm-y',
-				'mdyb', 'dmyb', 'mdyc', ',md-yc', 'dmyc', 'dm-yc',
-				'mdybc', 'dmybc', 'ymd', '-ymd', 'ym', '-ym'
-			], tokens );
+			grammars = getGrammars( settings.daybeforemonth ),
+			result = matchGrammars( grammars, tokens );
 
 		if( result === null ) {
 			return null;
@@ -77,15 +74,41 @@ time.Time.parse = ( function( time ) {
 
 		if( result.calendar !== undefined ) {
 			retval.calendarname = result.calendar;
-		} else if( (result.year < 1583) && (retval.precision > 10) ) {
-			retval.calendarname = 'Julian';
+		} else if( ( result.year < 1583 ) && ( retval.precision > 10 ) ) {
+			retval.calendarname = time.Time.CALENDAR.JULIAN;
 		} else {
-			retval.calendarname = 'Gregorian';
+			retval.calendarname = time.Time.CALENDAR.GREGORIAN;
 		}
 
 		delete( retval.bce ); // nothing we want to expose since this is redundant with "year"
 		delete( retval.minus );
 		return retval;
+	}
+
+	/**
+	 * Returns an array of grammars which should be used.
+	 *
+	 * @param {boolean} daybeforemonth Whether the day is usually written before the month.
+	 * @return {string[]}
+	 */
+	function getGrammars( daybeforemonth ) {
+		var grammars = [
+			'y', '-y', 'my', 'm-y', 'yb', 'myb', 'mdy', 'md-y', 'dmy', 'dm-y',
+			'mdyb', 'dmyb', 'mdyc', ',md-yc', 'dmyc', 'dm-yc',
+			'mdybc', 'dmybc'
+		];
+
+		// If the language prefers the day before the month, we have to switch the above grammar
+		// priorities (switch the "md" with the "dm" versions of the equivalent grammar).
+		if( daybeforemonth ) {
+			for( var i in grammars ) {
+				grammars[i] = grammars[i]
+					.replace( 'md', '@@' )
+					.replace( 'dm', 'md' )
+					.replace( '@@', 'dm' );
+			}
+		}
+		return grammars.concat( [ 'ymd', '-ymd', 'ym', '-ym' ] );
 	}
 
 	function matchGrammars( grammars, tokens ) {

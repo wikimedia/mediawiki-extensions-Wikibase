@@ -23,6 +23,7 @@
 		return time;
 	};
 
+	// TODO: get rid of global settings, inject them where required
 	var settings = {};
 
 	settings.bce = ['BCE', 'BC', 'B.C.', 'before Common Era', 'before Christ'];
@@ -36,6 +37,7 @@
 	settings.calendarnames[1] = [
 		'Julian', 'J', 'JD', 'JC', 'OS', 'O.S.', 'Old Style', 'Julian calendar', 'Julian date'
 	];
+	settings.daybeforemonth = true;
 
 	settings.monthnames = [];
 	settings.monthnames[0] = ['January', 'Jan'];

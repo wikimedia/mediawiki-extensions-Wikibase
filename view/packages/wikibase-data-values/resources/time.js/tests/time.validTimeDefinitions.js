@@ -2,6 +2,7 @@
  * Object holding example time definitions indexed by a string describing it. The string describing
  * it is basically a string that could be fed to the time parser, the parsed result should be a
  * time definition equal to the ones given here. This is particularly useful for testing purposes.
+ * The definition assumes that the settings "daybeforemonth" is set to true.
  *
  * @since 0.1
  * @file
@@ -51,11 +52,11 @@ time.validTimeDefinitions = ( function( time ) {
 			day: 22,
 			precision: PRECISION.DAY
 		},
-		'2001-01-01': {
+		'2001-01-02': {
 			calendarname: G,
 			year: 2001,
 			month: 1,
-			day: 1,
+			day: 2,
 			precision: PRECISION.DAY
 		},
 		'November 20, 1989': {
@@ -64,6 +65,32 @@ time.validTimeDefinitions = ( function( time ) {
 			month: 11,
 			day: 20,
 			precision: PRECISION.DAY
+		},
+		'1.2.3': {
+			calendarname: J,
+			year: 3,
+			month: 2,
+			day: 1,
+			precision: PRECISION.DAY
+		},
+		'15.2.3': {
+			calendarname: J,
+			year: 3,
+			month: 2,
+			day: 15,
+			precision: PRECISION.DAY
+		},
+		'111-10': {
+			calendarname: G,
+			year: 111,
+			month: 10,
+			precision: PRECISION.MONTH
+		},
+		'-2003-10': {
+			calendarname: G,
+			year: -2003,
+			month: 10,
+			precision: PRECISION.MONTH
 		}
 	};
 
