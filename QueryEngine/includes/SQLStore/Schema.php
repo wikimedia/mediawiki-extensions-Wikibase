@@ -207,6 +207,16 @@ class Schema {
 				FieldDefinition::INDEX
 			),
 
+			// Internal subject id
+			new FieldDefinition(
+				'subject_id',
+				FieldDefinition::TYPE_INTEGER,
+				FieldDefinition::NOT_NULL,
+				FieldDefinition::NO_DEFAULT,
+				FieldDefinition::ATTRIB_UNSIGNED,
+				FieldDefinition::INDEX
+			),
+
 			// Internal property id
 			new FieldDefinition(
 				'property_id',
