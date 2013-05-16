@@ -207,6 +207,9 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery.valueview/valueview.experts/experts.TimeValue.js',
 			),
+			'styles' => array(
+				'jquery.valueview/valueview.experts/experts.TimeValue.css',
+			),
 			'dependencies' => array(
 				'jquery.valueview.experts.staticdom',
 				'jquery.valueview.BifidExpert',
