@@ -51,6 +51,7 @@ return call_user_func( function() {
 		'Wikibase\ReferencedEntitiesFinder' => 'includes/ReferencedEntitiesFinder.php',
 		'Wikibase\ObjectComparer' => 'includes/ObjectComparer.php',
 		'Wikibase\Lib\PropertyDataTypeLookup' => 'includes/PropertyDataTypeLookup.php',
+		'Wikibase\Lib\PropertyNotFoundException' => 'includes/PropertyNotFoundException.php',
 		'Wikibase\Settings' => 'includes/Settings.php',
 		'Wikibase\SettingsArray' => 'includes/SettingsArray.php',
 		'Wikibase\Lib\SnakFormatter' => 'includes/SnakFormatter.php',
