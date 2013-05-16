@@ -77,6 +77,7 @@ final class LibHooks {
 			'TemplateRegistry',
 			'LibHooks',
 			'MockRepository',
+			'PropertyNotFoundException',
 			'SettingsArray',
 			'SnakFormatter',
 
