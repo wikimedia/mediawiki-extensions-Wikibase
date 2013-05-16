@@ -420,6 +420,9 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$request = $this->getRequest();
 		$response = $request->response();
 
+		$this->getOutput()->disable(); // don't generate HTML
+		wfClearOutputBuffers();
+
 		$maxage = $request->getInt( 'maxage', $wgSquidMaxage );
 		$smaxage = $request->getInt( 'smaxage', $wgSquidMaxage );
 
@@ -444,11 +447,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$mode = 'public';
 		$response->header( 'Cache-Control: ' . $mode . ', s-maxage=' . $smaxage . ', max-age=' . $maxage );
 
-		$this->getOutput()->disable(); // don't generate HTML
-		ob_clean();
-
 		print $data;
-		flush();
 
 		//die(); //FIXME: figure out how to best shut down here.
 	}
