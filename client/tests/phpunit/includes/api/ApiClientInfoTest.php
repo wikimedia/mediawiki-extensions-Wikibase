@@ -1,6 +1,7 @@
 <?php
-
 namespace Wikibase\Test;
+
+use Wikibase\SettingsArray;
 
 /**
  * Tests for ApiClientInfo module.
@@ -39,7 +40,10 @@ namespace Wikibase\Test;
  */
 class ApiClientInfoTest extends \ApiTestCase {
 
-	public function testGetUrlInfo() {
+	/**
+	 * @dataProvider settingsProvider
+	 */
+	public function testGetUrlInfo( SettingsArray $settings ) {
 		$data = $this->doApiRequest(
 			array(
 				'action' => 'query',
@@ -63,8 +67,22 @@ class ApiClientInfoTest extends \ApiTestCase {
 		$this->assertTrue( is_string( $urlInfo['scriptpath'] ) );
 		$this->assertTrue( is_string( $urlInfo['articlepath'] ) );
 
-		$this->assertEquals( \Wikibase\Settings::get( 'repoUrl' ), $urlInfo['base'] );
-		$this->assertEquals( \Wikibase\Settings::get( 'repoScriptPath' ), $urlInfo['scriptpath'] );
-		$this->assertEquals( \Wikibase\Settings::get( 'repoArticlePath' ), $urlInfo['articlepath'] );
+		$this->assertEquals( $settings->getSetting( 'repoUrl' ), $urlInfo['base'] );
+		$this->assertEquals( $settings->getSetting( 'repoScriptPath' ), $urlInfo['scriptpath'] );
+		$this->assertEquals( $settings->getSetting( 'repoArticlePath' ), $urlInfo['articlepath'] );
+
 	}
+
+	public function settingsProvider() {
+		$settings = array(
+			'repoUrl' => 'http://www.example.org',
+			'repoScriptPath' => '/w',
+			'repoArticlePath' => '/wiki/$1'
+		);
+
+		return array(
+			array( new SettingsArray( $settings ) )
+		);
+	}
+
 }

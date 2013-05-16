@@ -51,12 +51,15 @@ class ApiClientInfo extends \ApiQueryBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
+		// @todo inject settings into entire api module
+		$settings = Settings::singleton();
+
 		$data = array( 'repo' => array() );
 
 		foreach ( $params['prop'] as $p ) {
 			switch ( $p ) {
 				case 'url':
-					$data['repo']['url'] = $this->urlInfo();
+					$data['repo']['url'] = $this->urlInfo( $settings );
 					break;
 				default;
 					break;
@@ -73,11 +76,11 @@ class ApiClientInfo extends \ApiQueryBase {
 	 *
 	 * @return array
 	 */
-	public function urlInfo() {
+	public function urlInfo( SettingsArray $settings ) {
 		return array(
-			'base' => Settings::get( 'repoUrl' ),
-			'scriptpath' => Settings::get( 'repoScriptPath' ),
-			'articlepath' => Settings::get( 'repoArticlePath' ),
+			'base' => $settings->getSetting( 'repoUrl' ),
+			'scriptpath' => $settings->getSetting( 'repoScriptPath' ),
+			'articlepath' => $settings->getSetting( 'repoArticlePath' ),
 		);
 	}
 
