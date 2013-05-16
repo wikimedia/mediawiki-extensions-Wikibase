@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Database;
+namespace Wikibase\Database\Tests;
 
 use Wikibase\Database\FieldDefinition;
 
@@ -28,7 +28,6 @@ use Wikibase\Database\FieldDefinition;
  * @ingroup WikibaseDatabaseTest
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseDatabase
  *
  * @licence GNU GPL v2+

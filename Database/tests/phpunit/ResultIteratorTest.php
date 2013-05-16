@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Database;
+namespace Wikibase\Database\Tests;
 
 use Wikibase\Database\ResultIterator;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Test\Database\MWDB;
+namespace Wikibase\Database\Tests\MWDB;
 
+use Wikibase\Database\LazyDBConnectionProvider;
 use Wikibase\Database\MWDB\ExtendedMySQLAbstraction;
-use Wikibase\Repo\LazyDBConnectionProvider;
 
 /**
  * @covers Wikibase\Database\MWDB\ExtendedMySQLAbstraction
@@ -29,7 +29,6 @@ use Wikibase\Repo\LazyDBConnectionProvider;
  * @ingroup WikibaseDatabaseTest
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseDatabase
  * @group Database
  *
