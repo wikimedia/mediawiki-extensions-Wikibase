@@ -7,7 +7,8 @@
 
 require 'spec_helper'
 
-num_items = 1
+num_items = 8
+label_common_prefix = generate_random_string(4)
 alias_a = generate_random_string(8)
 alias_b = generate_random_string(8)
 
@@ -15,7 +16,7 @@ alias_b = generate_random_string(8)
 count = 0
 items = Array.new
 while count < num_items do
-  items.push({"label"=>generate_random_string(10), "description"=>generate_random_string(20)})
+  items.push({"label"=>label_common_prefix + generate_random_string(10), "description"=>generate_random_string(20)})
   count = count + 1
 end
 
@@ -38,6 +39,15 @@ describe "Check entityselector search" do
         ajax_wait
         page.wait_for_suggestions_list
         page.entitySelectorSearchInput.should == items[0]["label"]
+      end
+    end
+    it "should check for multiple suggestions" do
+      visit_page(RepoMainPage) do |page|
+        page.entitySelectorSearchInput?.should be_true
+        page.entitySelectorSearchInput = label_common_prefix
+        ajax_wait
+        page.wait_for_suggestions_list
+        page.count_search_results.should == 9 # 7 suggestions, "more" & "containing.."
       end
     end
   end
@@ -146,6 +156,32 @@ describe "Check entityselector search" do
         page.wait_for_entity_to_load
         page.entityLabelSpan?.should be_true
         page.entityLabelSpan.should == items[0]["label"]
+      end
+    end
+  end
+
+  context "Check more-button" do
+    it "should check existence of 'more'" do
+      visit_page(RepoMainPage) do |page|
+        page.entitySelectorSearchInput = label_common_prefix
+        ajax_wait
+        page.wait_for_suggestions_list
+        page.get_search_results[7].text.include?("more").should be_true
+      end
+    end
+    it "should check functionality of 'more'" do
+      visit_page(RepoMainPage) do |page|
+        page.entitySelectorSearchInput = label_common_prefix
+        ajax_wait
+        page.wait_for_suggestions_list
+        page.count_search_results.should == 9 # 7 suggestions, "more" & "containing.."
+        page.get_search_results[7].click
+        ajax_wait
+        page.wait_for_suggestions_list
+        page.count_search_results.should == 9 # 8 suggestions, "containing.."
+        search_results = page.get_search_results
+        search_results[7].text.include?("more").should be_false
+        search_results[8].text.include?("more").should be_false
       end
     end
   end
