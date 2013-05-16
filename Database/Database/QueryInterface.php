@@ -117,4 +117,19 @@ interface QueryInterface {
 	 */
 	public function getInsertId();
 
+	/**
+	 * Selects the specified fields from the rows that match the provided conditions.
+	 * The conditions are provided as an associative array in
+	 * which the keys are the field names.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $tableName
+	 * @param array $fields
+	 * @param array $conditions
+	 *
+	 * @return ResultIterator
+	 */
+	public function select( $tableName, array $fields, array $conditions );
+
 }

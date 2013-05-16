@@ -327,6 +327,74 @@ class MediaWikiQueryInterfaceTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 42, $queryInterface->getInsertId() );
 	}
 
+	/**
+	 * @dataProvider selectProvider
+	 */
+	public function testSelect( $tableName, array $fields, array $conditions ) {
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
+
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
+		);
+
+		$connection->expects( $this->once() )
+			->method( 'select' )
+			->with(
+				$this->equalTo( $tableName ),
+				$this->equalTo( $fields ),
+				$this->equalTo( $conditions )
+			);
+
+		$queryInterface->select( $tableName, $fields, $conditions );
+
+		// Ideally we would have the select method result a mock ResultWrapper
+		// and would assert if the data was present in the selection result.
+		// It however seems somewhat impossible to create a mock of ResultWrapper.
+	}
+
+	public function selectProvider() {
+		$argLists = array();
+
+		$argLists[] = array(
+			'table',
+			array(
+				'foo',
+				'bar',
+				'baz',
+			),
+			array(
+				'intfield' => 42,
+				'strfield' => 'nyan',
+			)
+		);
+
+		$argLists[] = array(
+			'table',
+			array(
+				'foo',
+				'bar',
+				'baz',
+			),
+			array(
+			)
+		);
+
+		$argLists[] = array(
+			'onoez',
+			array(
+				'foo',
+			),
+			array(
+				'intfield' => 42,
+			)
+		);
+
+		return $argLists;
+	}
+
 }
 
 class DirectConnectionProvider implements DBConnectionProvider {

@@ -37,6 +37,7 @@ return call_user_func( function() {
 		'Wikibase\Database\MessageReporter',
 		'Wikibase\Database\QueryInterface',
 		'Wikibase\Database\QueryInterfaceException',
+		'Wikibase\Database\ResultIterator',
 		'Wikibase\Database\TableBuilder',
 		'Wikibase\Database\TableCreationFailedException',
 		'Wikibase\Database\TableDefinition',

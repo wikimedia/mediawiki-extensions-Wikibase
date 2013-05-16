@@ -65,6 +65,7 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 
 		'FieldDefinition',
 		'MediaWikiQueryInterface',
+		'ResultIterator',
 		'TableBuilder',
 		'TableDefinition',
 		'TableCreationFailedException',
