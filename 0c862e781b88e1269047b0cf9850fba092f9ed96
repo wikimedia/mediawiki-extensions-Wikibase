@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DxJL1TIM",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-16T14:07:17Z",
+      "side": 1,
+      "message": "Please look at the follow up. I\u0027m reverting this in order to apply a better version of the original change, I54b1d9b4. It fixes the problem with overwriting defaults instead of extending them.\n\nIn order to apply the new version, it was easiest to first revert the old change. The defaults files are pretty much identical between the two changes.",
+      "parentUuid": "DxOcZcIQ",
+      "revId": "0c862e781b88e1269047b0cf9850fba092f9ed96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxAcVfEg",
         "filename": "lib/config/WikibaseLib.default.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-05-16T10:41:48Z",
       "side": 1,
       "message": "This is bootstrapping code, not config",
+      "revId": "0c862e781b88e1269047b0cf9850fba092f9ed96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxHLyQJo",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-16T14:07:17Z",
+      "side": 1,
+      "message": "I agree, and it gets removed from here again. PLease look at the follow-up.",
+      "parentUuid": "DxAcVfEg",
       "revId": "0c862e781b88e1269047b0cf9850fba092f9ed96",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
