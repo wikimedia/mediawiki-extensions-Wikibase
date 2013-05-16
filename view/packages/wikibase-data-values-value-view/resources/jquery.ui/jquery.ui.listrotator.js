@@ -1,29 +1,36 @@
 /**
  * List rotator widget
  *
- * The list rotator may be used to rotate through a list of values.
+ * The list rotator may be used to rotate through a list of values. The previous and next value
+ * according to the currently selected value are displayed as links next to the current value. In
+ * addition, clicking the current value reveals a drop-down list to directly select a value from the
+ * list values.
+ *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
- * @option {Object[]} values Array of objects containing the values to rotate.
+ * @option {Object[]} values (REQUIRED) Array of objects containing the values to rotate.
  *         Single object structure:
  *         { value: <actual value (being returned on value())>, label: <the value's label> }
  *
  * @option {Object} [menu] Options for the jQuery.menu widget used as drop-down menu:
- *         [menu.position] {Object} Default object passed to jQuery.ui.position when positioning the
- *                         menu.
+ *         {Object} [menu.position] Default object passed to jQuery.ui.position when positioning the
+ *         menu.
  *
  * @option {boolean} [auto] Whether to display the "auto" link.
- *         Default value: true
+ *         Default: true
  *
- * @option {string[]} [animationMargins] Defines how far the sections should be shifted when
- *         animating the rotation. First value when shifting to the left and vice versa. Values will
- *         be flipped in rtl context.
- *         Default value: ['-15px', '15px']
+ * @option {Object} [animation] Object containing parameters used for the rotation animation.
+ *         {string[]} [margins] Defines how far the sections should be shifted when animating the
+ *         rotation. First value when shifting to the left and vice versa. Values will be flipped in
+ *         rtl context.
+ *         Default: ['-15px', '15px']
+ *         {number} [duration] Defines the animation's duration in milliseconds.
+ *         Default: 150
  *
  * @option {boolean} [deferInit] Whether to defer initializing the section widths until initWidths()
  *         is called "manually".
- *         Default value: false
+ *         Default: false
  *
  * @event auto: Triggered when "auto" options is selected.
  *        (1) {jQuery.Event}
@@ -32,7 +39,7 @@
  *        (1) {jQuery.Event}
  *        (2) {*} Value as specified in the "values" option.
  *
- * @dependency jQuery.ui.Widget
+ * @dependency jQuery.Widget
  * @dependency jQuery.ui.menu
  * @dependency jQuery.ui.position
  */
@@ -106,13 +113,20 @@
 				}
 			},
 			auto: true,
-			animationMargins: ['-15px', '15px'],
+			animation: {
+				margins: ['-15px', '15px'],
+				duration: 150
+			},
 			deferInit: false,
 			messages: {
 				'auto': mwMsgOrString( 'valueview-listrotator-auto', 'auto' )
 			}
 		},
 
+		/**
+		 * Node of the selectable "auto" option.
+		 * @type {jQuery}
+		 */
 		$auto: null,
 
 		/**
@@ -173,7 +187,7 @@
 				self._trigger( 'auto' );
 			} )
 			.addClass( 'ui-state-active' );
-			this.$auto.children( 'a' ).text( this.options.messages['auto'] );
+			this.$auto.children( 'span' ).text( this.options.messages['auto'] );
 
 			// Construct the basic sections:
 			this.$curr = this._createSection( 'curr', function( event ) {
@@ -183,38 +197,34 @@
 					self._hideMenu();
 				}
 			} )
-			.append( $( '<a/>' ).addClass( 'ui-icon ui-icon-triangle-1-s' ) );
+			.append( $( '<span/>' ).addClass( 'ui-icon ui-icon-triangle-1-s' ) );
 
 			this.$prev = this._createSection( 'prev', function( event ) {
 				self.prev();
 			} )
-			.append( $( '<a/>' ).addClass( iconClasses[0] ) );
+			.append( $( '<span/>' ).addClass( iconClasses[0] ) );
 
 			this.$next = this._createSection( 'next', function( event ) {
 				self.next();
 			} )
-			.append( $( '<a/>' ).addClass( iconClasses[1] ) );
+			.append( $( '<span/>' ).addClass( iconClasses[1] ) );
 
 			if( this.$auto ) {
 				this.element.append( this.$auto );
 			}
 			this.element.append( this.$prev ).append( this.$curr ).append( this.$next );
 
-			$.each( [ this.$auto, this.$curr, this.$prev, this.$next ], function( i, $node ) {
-				$node.find( 'a' ).attr( 'href', 'javascript:void(0);' );
-			} );
-
 			// Construct and initialize menu widget:
 			this._createMenu();
 
 			// Attach event to html node to detect click outside of the menu closing the menu:
-			if ( $( ':' + self.widgetBaseClass ).length === 1 ) {
-				$( 'html' ).on( 'click.' + this.widgetBaseClass, function( event ) {
-					$( ':' + self.widgetBaseClass ).each( function( i, node ) {
-						$( node ).data( 'listrotator' ).$menu.hide();
-					} );
+			$( 'html' )
+			.off( '.' + this.widgetName )
+			.on( 'click.' + this.widgetBaseClass, function( event ) {
+				$( ':' + self.widgetBaseClass ).each( function( i, node ) {
+					$( node ).data( 'listrotator' ).$menu.hide();
 				} );
-			}
+			} );
 
 			// Prevent propagation of clicking on the "current" section as well as on the menu in
 			// order to not trigger the event handler assigned to the html element.
@@ -245,12 +255,12 @@
 
 			this.element.removeClass( this.widgetBaseClass + ' ui-widget-content' );
 
+			$.Widget.prototype.destroy.call( this );
+
 			// Remove event attached to the html node if no instances of the widget exist anymore:
 			if ( $( ':' + this.widgetBaseClass ).length === 0 ) {
 				$( 'html' ).off( '.' + this.widgetBaseClass );
 			}
-
-			$.Widget.prototype.destroy.call( this );
 		},
 
 		/**
@@ -307,14 +317,15 @@
 		 * @return {jQuery}
 		 */
 		_createSection: function( classSuffix, clickCallback ) {
-			return $( '<span/>' )
+			return $( '<a/>' )
+			.attr( 'href', 'javascript:void(0);' )
 			.addClass( this.widgetBaseClass + '-' + classSuffix )
 			.on( 'click.' + this.widgetBaseClass, function( event ) {
 				if( !$( this ).hasClass( 'ui-state-disabled' ) ) {
 					clickCallback( event );
 				}
 			} )
-			.append( $( '<a/>' ).addClass( this.widgetBaseClass + '-label ui-state-default' ) );
+			.append( $( '<span/>' ).addClass( this.widgetBaseClass + '-label ui-state-default' ) );
 		},
 
 		/**
@@ -335,6 +346,7 @@
 						.attr( 'href', 'javascript:void(0);')
 						.text( v.label )
 						.on( 'click', function( event ) {
+							event.stopPropagation();
 							self._trigger( 'selected', null, [ self.value( v.value ) ] );
 							self.$menu.hide();
 						} )
@@ -347,7 +359,8 @@
 		},
 
 		/**
-		 * Sets/Gets the widget's value.
+		 * Sets/Gets the widget's value. Setting the value involves setting the rotator to the
+		 * specified value without any animation.
 		 *
 		 * TODO: Change behavior: value as setter should return "this" for allowing chaining calls
 		 *  to the widget.
@@ -362,44 +375,44 @@
 				return this.$curr.data( 'value' );
 			}
 
-			var index = 0;
+			var values = this.options.values,
+				index = 0;
 
 			this.$prev.add( this.$curr ).add( this.$next )
 			.children( '.' + this.widgetBaseClass + '-label' ).empty();
 
-			$.each( this.options.values, function( i, v ) {
+			// Retrieve the index of the new value within the list of predefined values:
+			$.each( values, function( i, v ) {
 				if ( value === v.value ) {
 					index = i;
 					return false;
 				}
 			} );
 
+			// Re-construct each section:
 			this.$curr
-			.data( 'value', this.options.values[index].value )
+			.data( 'value', values[index].value )
 			.children( '.' + this.widgetBaseClass + '-label' )
-			.text( this.options.values[index].label );
+			.text( values[index].label );
 
 			if ( index > 0 ) {
 				this.$prev
-				.data( 'value', this.options.values[index - 1].value )
+				.data( 'value', values[index - 1].value )
 				.children( '.' + this.widgetBaseClass + '-label' )
-				.text( this.options.values[index - 1].label );
+				.text( values[index - 1].label );
 			}
 
-			if ( index < this.options.values.length - 1 ) {
+			if ( index < values.length - 1 ) {
 				this.$next
-				.data( 'value', this.options.values[index + 1].value )
+				.data( 'value', values[index + 1].value )
 				.children( '.' + this.widgetBaseClass + '-label' )
-				.text( this.options.values[index + 1].label );
+				.text( values[index + 1].label );
 			}
 
-			this.$prev.css( 'visibility', 'visible' );
-			this.$next.css( 'visibility', 'visible' );
-			if ( index === 0 ) {
-				this.$prev.css( 'visibility', 'hidden' );
-			} else if ( index === this.options.values.length - 1 ) {
-				this.$next.css( 'visibility', 'hidden' );
-			}
+			// Hide "previous"/"$next" section when the new value is at the end of the list the
+			// predefined values:
+			this.$prev.css( 'visibility', ( index === 0 ) ? 'hidden' : 'visible' );
+			this.$next.css( 'visibility', ( index === values.length - 1 ) ? 'hidden' : 'visible' );
 
 			// Alter menu item states:
 			this.$menu.children( 'li' ).each( function( i, li ) {
@@ -452,19 +465,25 @@
 		 * @param {Function} [callback]
 		 */
 		rotate: function( newValue, callback ) {
-			if( newValue === this._rotatingTo || !this._rotatingTo && newValue === this.$curr.data( 'value' ) ) {
+			if(
+				newValue === this._rotatingTo
+				|| !this._rotatingTo && newValue === this.$curr.data( 'value' )
+			) {
+				// Rotation is to the given target is in progress or has been performed already.
 				return;
 			}
 
-			this._rotatingTo = newValue;
-
 			var self = this,
-				margins = $.merge( [], this.options.animationMargins ),
+				margins = $.merge( [], this.options.animation.margins ),
 				s = '.' + this.widgetBaseClass + '-label';
 
+			// Nodes that shall be animated:
 			var $nodes = this.$prev.children( s )
 				.add( this.$curr.children( s ) )
 				.add( this.$next.children( s ) );
+
+			// Set the rotation target:
+			this._rotatingTo = newValue;
 
 			// Figure out whether rotating to the right or to the left:
 			var beforeCurrent = true;
@@ -493,18 +512,27 @@
 					opacity: 0
 				}, {
 					done: function() {
+						// Reset margins an opacity used for the animation effect:
 						$nodes.css( {
 							marginLeft: '0',
 							marginRight: '0',
 							opacity: 1
 						} );
+
+						// Rotation target changed in the meantime, just abort selecting:
+						if( self._rotatingTo !== newValue ) {
+							return;
+						}
+
 						self._trigger( 'selected', null, [ self.value( newValue ) ] );
+
 						self._rotatingTo = null;
+
 						if( $.isFunction( callback ) ) {
 							callback();
 						}
 					},
-					duration: 150
+					duration: this.options.animation.duration
 				}
 			);
 		},
@@ -515,10 +543,12 @@
 		 * @param {jQuery} [$section] Section to activate. "Current" section by default.
 		 */
 		activate: function( $section ) {
-			this.$curr.add( this.$auto ).removeClass( 'ui-state-hover' ).removeClass( 'ui-state-active' );
+			this.$curr.add( this.$auto ).removeClass( 'ui-state-hover ui-state-active' );
+
 			if( $section === undefined ) {
 				$section = this.$curr;
 			}
+
 			$section.addClass( 'ui-state-active' );
 		},
 
@@ -533,10 +563,12 @@
 		 * Shows the drop-down menu.
 		 */
 		_showMenu: function() {
-			this.$menu.slideDown( 150 );
+			this.$menu.slideDown( this.options.animation.duration );
+
 			this.$menu.position( $.extend( {
 				of: this.$curr
 			}, this.options.menu.position ) );
+
 			this.activate();
 		},
 
@@ -544,7 +576,7 @@
 		 * Hides the drop-down menu.
 		 */
 		_hideMenu: function() {
-			this.$menu.slideUp( 150 );
+			this.$menu.slideUp( this.options.animation.duration );
 			this.activate();
 		},
 
