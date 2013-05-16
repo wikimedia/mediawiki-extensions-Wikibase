@@ -95,7 +95,16 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery',
-			)
+			),
+		),
+
+		'time.js.validTimeDefinitions' => $moduleTemplate + array(
+			'scripts' => array(
+				'time.js/tests/time.validTimeDefinitions.js' // example times for testing purposes
+			),
+			'dependencies' => array(
+				'time.js',
+			),
 		),
 
 		// qunit-parameterize from https://github.com/AStepaniuk/qunit-parameterize
@@ -105,7 +114,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.qunit'
-			)
+			),
 		),
 	);
 

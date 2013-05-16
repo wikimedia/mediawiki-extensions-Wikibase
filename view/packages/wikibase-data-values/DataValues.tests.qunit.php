@@ -85,11 +85,13 @@ return call_user_func( function() {
 				'resources/time.js/tests/time.Time.knowsPrecision.tests.js',
 				'resources/time.js/tests/time.Time.minPrecision.tests.js',
 				'resources/time.js/tests/time.Time.maxPrecision.tests.js',
+				'resources/time.js/tests/time.Time.tests.js',
 				'resources/time.js/tests/time.Time.validate.tests.js',
 				'resources/time.js/tests/time.Time.parse.tests.js',
 			),
 			'dependencies' => array(
 				'time.js',
+				'time.js.validTimeDefinitions',
 			),
 		),
 

@@ -6,7 +6,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( QUnit, $, Time ) {
+( function( QUnit, $, Time, validTimeDefinitions ) {
 	'use strict';
 
 	var PRECISION = Time.PRECISION,
@@ -15,51 +15,8 @@
 
 	QUnit.module( 'time.js: time.Time.validate()' );
 
-	var validDefinitions = [
-		{
-			calendarname: G,
-			year: -44,
-			precision: PRECISION.YEAR
-		}, {
-			calendarname: J,
-			year: 1492,
-			month: 10,
-			day: 12,
-			precision: PRECISION.DAY
-		}, {
-			calendarname: G,
-			month: 3,
-			year: -44,
-			precision: PRECISION.MONTH
-		}, {
-			calendarname: J,
-			year: 1616,
-			month: 4,
-			day: 23,
-			precision: PRECISION.DAY
-		}, {
-			calendarname: G,
-			year: 1616,
-			month: 4,
-			day: 22,
-			precision: PRECISION.DAY
-		}, {
-			calendarname: G,
-			year: 2001,
-			month: 1,
-			day: 1,
-			precision: PRECISION.DAY
-		}, {
-			calendarname: G,
-			year: 1989,
-			month: 11,
-			day: 20,
-			precision: PRECISION.DAY
-		}
-	];
-
 	QUnit.test( 'validating valid time definitions', function( assert ) {
-		$.each( validDefinitions, function( i, timeDefinition ) {
+		$.each( validTimeDefinitions, function( name, timeDefinition ) {
 			var valid = true;
 			try {
 				Time.validate( timeDefinition ); // throws an error if failure
@@ -69,7 +26,7 @@
 
 			assert.ok(
 				valid,
-				'valid definition ' + i + ' has been accepted by validate()'
+				'valid definition (with key "' + name + '") has been accepted by validate()'
 			);
 		} );
 	} );
@@ -144,7 +101,7 @@
 		}, {
 			reason: 'precision is "DAY" but field "month" not given',
 			definition: {
-				calendarname: J,
+				calendarname: G,
 				year: 1492,
 				day: 1,
 				precision: PRECISION.DAY
@@ -198,4 +155,4 @@
 		} );
 	} );
 
-}( QUnit, jQuery, time.Time ) );
+}( QUnit, jQuery, time.Time, time.validTimeDefinitions ) );
