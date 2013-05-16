@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Database\MWDB;
+namespace Wikibase\Database\Tests\MWDB;
 
 use Wikibase\Database\MWDB\ExtendedAbstraction;
 use Wikibase\Database\TableDefinition;

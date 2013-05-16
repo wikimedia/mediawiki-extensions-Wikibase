@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Database;
+namespace Wikibase\Database\Tests;
 
 use DatabaseBase;
+use Wikibase\Database\DBConnectionProvider;
 use Wikibase\Database\MediaWikiQueryInterface;
 use Wikibase\Database\QueryInterface;
 use Wikibase\Database\TableDefinition;
 use Wikibase\Database\FieldDefinition;
-use Wikibase\Repo\DBConnectionProvider;
 
 /**
  * @covers Wikibase\Database\MediaWikiQueryInterface
@@ -33,7 +33,6 @@ use Wikibase\Repo\DBConnectionProvider;
  * @ingroup WikibaseDatabaseTest
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseDatabase
  *
  * @licence GNU GPL v2+

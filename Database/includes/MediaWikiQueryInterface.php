@@ -2,7 +2,6 @@
 
 namespace Wikibase\Database;
 
-use Wikibase\Repo\DBConnectionProvider;
 use Wikibase\Database\TableDefinition;
 use Wikibase\Database\MWDB\ExtendedAbstraction;
 
