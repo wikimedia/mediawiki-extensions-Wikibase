@@ -112,25 +112,15 @@
 			this.$precision = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precision' )
 			.listrotator( { values: precisionValues.reverse(), deferInit: true } )
-			.on( 'listrotatorauto.' + this.uiBaseClass, function( event ) {
-				var value = ( self.$calendar.data( 'listrotator' ).value() )
-					? new Time( self.$input.val(), { calendarname: self.$calendar.data( 'listrotator' ).value() } )
-					: new Time( self.$input.val() );
-				$( this ).data( 'listrotator' ).rotate( value.precision() );
-				self._setRawValue( value );
-				self._updatePreview( value );
-				self._updateCalendarHint( value );
-				self._viewNotifier.notify( 'change' );
-			} )
-			.on( 'listrotatorselected.' + this.uiBaseClass, function( event, precision ) {
-				var value = ( self.$calendar.data( 'listrotator' ).value() )
-					? new Time( self.$input.val(), { precision: $( this ).data( 'listrotator' ).value(), calendarname: self.$calendar.data( 'listrotator' ).value() } )
-					: new Time( self.$input.val(), { precision: $( this ).data( 'listrotator' ).value() } );
-				self._setRawValue( value );
-				self._updatePreview( value );
-				self._updateCalendarHint( value );
-				self._viewNotifier.notify( 'change' );
-			} )
+			.on(
+				'listrotatorauto.' + this.uiBaseClass + ' listrotatorselected.' + this.uiBaseClass,
+				function( event ) {
+					var value = self._updateValue( { precision: undefined } );
+					if( event.type === 'listrotatorauto' ) {
+						$( this ).data( 'listrotator' ).rotate( value.precision() );
+					}
+				}
+			)
 			.appendTo( this.$precisionContainer );
 
 			this.$calendarContainer = $( '<div/>' )
@@ -143,28 +133,15 @@
 			} );
 			this.$calendar = $( '<div/>' )
 			.listrotator( { values: calendarValues, deferInit: true } )
-			.on( 'listrotatorauto', function( event ) {
-				var value = ( self.$precision.data( 'listrotator' ).value() )
-					? new Time( self.$input.val(), { precision: self.$precision.data( 'listrotator' ).value() } )
-					: new Time( self.$input.val() );
-
-				$( this ).data( 'listrotator' ).rotate( value.calendarText() );
-				self._setRawValue( value );
-				self._updatePreview( value );
-				self._updateCalendarHint( value );
-				self._viewNotifier.notify( 'change' );
-			} )
-			.on( 'listrotatorselected', function( event ) {
-				var value = ( self.$precision.data( 'listrotator' ).value() )
-					? new Time( self.$input.val(), { precision: self.$precision.data( 'listrotator' ).value(), calendarname: $( this ).data( 'listrotator' ).value() } )
-					: new Time( self.$input.val(), { calendarname: $( this ).data( 'listrotator' ).value() } );
-
-				$( this ).data( 'listrotator' ).rotate( value.calendarText() );
-				self._setRawValue( value );
-				self._updatePreview( value );
-				self._updateCalendarHint( value );
-				self._viewNotifier.notify( 'change' );
-			} )
+			.on(
+				'listrotatorauto.' + this.uiBaseClass + ' listrotatorselected.' + this.uiBaseClass,
+				function( event ) {
+					var value = self._updateValue( { calendarname: undefined } );
+					if( event.type === 'listrotatorauto' ) {
+						$( this ).data( 'listrotator' ).rotate( value.calendarText() );
+					}
+				}
+			)
 			.appendTo( this.$calendarContainer );
 
 			var $toggler = $( '<a/>' )
@@ -187,7 +164,7 @@
 			.appendTo( this.$viewPort )
 			.eachchange( function( event, oldValue ) {
 				var value = self.$input.data( 'timeinput' ).value();
-				if( oldValue === '' &&  value === null || self.$input.val() === '' ) {
+				if( oldValue === '' && value === null || self.$input.val() === '' ) {
 					self._updatePreview( null );
 					self._updateCalendarHint();
 				}
@@ -243,6 +220,43 @@
 		},
 
 		/**
+		 * Builds a time.Time object from the widet's current input and advanced adjustments.
+		 *
+		 * @param {Object} [overwrites] Values that should be used instead of the ones picked from
+		 *        the input elements.
+		 * @return {time.Time}
+		 */
+		_updateValue: function( overwrites ) {
+			overwrites = overwrites || {};
+
+			var options = {},
+				precision = ( overwrites.hasOwnProperty( 'precision' ) )
+					? overwrites.precision
+					: this.$precision.data( 'listrotator' ).value(),
+				calendarname = ( overwrites.hasOwnProperty( 'calendarname' ) )
+					? overwrites.calendarname
+					: this.$calendar.data( 'listrotator' ).value(),
+				value = null;
+
+			if( precision !== undefined ) {
+				options.precision = precision;
+			}
+
+			if( calendarname !== undefined ) {
+				options.calendarname = calendarname;
+			}
+
+			value = new Time( this.$input.val(), options );
+
+			this._setRawValue( value );
+			this._updatePreview( value );
+			this._updateCalendarHint( value );
+			this._viewNotifier.notify( 'change' );
+
+			return value;
+		},
+
+		/**
 		 * Updates the input value's preview.
 		 * @since 0.1
 		 *
@@ -285,16 +299,9 @@
 				this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-switch' )
 				.off( 'click.' + this.uiBaseClass )
 				.on( 'click.' + this.uiBaseClass, function( event ) {
-					self.$calendar.data( 'listrotator' ).rotate( otherCalendar );
-
-					var value = ( self.$precision.data( 'listrotator' ).value() )
-						? new Time( self.$input.val(), { precision: self.$precision.data( 'listrotator' ).value(), calendarname: self.$calendar.data( 'listrotator' ).value() } )
-						: new Time( self.$input.val(), { calendarname: self.$calendar.data( 'listrotator' ).value() } );
-
-					self._setRawValue( value );
-					self._updatePreview( value );
-					self._updateCalendarHint( value );
-					self._viewNotifier.notify( 'change' );
+					self.$calendar.data( 'listrotator' ).rotate( otherCalendar, function() {
+						self._updateValue();
+					} );
 				} )
 				.html( mw.msg( 'valueview-expert-timeinput-calendarhint-switch', otherCalendar ) );
 
