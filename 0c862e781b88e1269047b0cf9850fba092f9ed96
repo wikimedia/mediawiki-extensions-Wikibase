@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxOcZcIQ",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-16T10:41:48Z",
+      "side": 1,
+      "message": "Why this change? Now this file again knows the var name and is more prone to leaking stuff in global scope. Those are not huge issues, though are still reasons to keep the previous approach.",
+      "revId": "0c862e781b88e1269047b0cf9850fba092f9ed96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxAcVfEg",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-16T10:41:48Z",
+      "side": 1,
+      "message": "This is bootstrapping code, not config",
+      "revId": "0c862e781b88e1269047b0cf9850fba092f9ed96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
