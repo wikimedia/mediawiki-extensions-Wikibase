@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "Dxd1hqzs",
+        "filename": "client/includes/api/ApiClientInfo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-16T17:06:40Z",
+      "side": 1,
+      "message": "This object should not know about all settings, just the options relevant to it.",
+      "revId": "39bb803bb6bfed64411d0fe6865fb31cd4c3dafa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxZ04w54",
         "filename": "client/includes/api/ApiClientInfo.php",
         "patchSetId": 3
@@ -13,6 +30,24 @@
       "writtenOn": "2013-05-16T15:29:39Z",
       "side": 1,
       "message": "I\u0027m a bit worried that the third parameter could be used for something else in the future, or could somewhere be assumed to be the parameter prefix, as it is for ApiQueryBase. \n\nMaybe just use  Settings::singleton() in the constructor and provide a setSettings() function of force a different settings object?",
+      "revId": "39bb803bb6bfed64411d0fe6865fb31cd4c3dafa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxb1i3z8",
+        "filename": "client/includes/api/ApiClientInfo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-16T17:06:40Z",
+      "side": 1,
+      "message": "Agree, given how MW deals with API modules, this is risky.",
+      "parentUuid": "DxZ04w54",
       "revId": "39bb803bb6bfed64411d0fe6865fb31cd4c3dafa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
