@@ -250,7 +250,7 @@ class RdfBuilder {
 	 * @param Entity         $entity
 	 * @param \Revision|null $rev
 	 */
-	public function addEntityMetaData( Entity $entity, Revision $rev = null ) {
+	public function addEntityMetaData( Entity $entity, $rev = null ) {
 		$entityResource = $this->getEntityResource( $entity->getId() );
 		$entityResource->addResource( 'rdf:type', $this->getEntityTypeQName( $entity->getType() ) );
 
@@ -486,7 +486,7 @@ class RdfBuilder {
 	 * @param Entity $entity the entity to output.
 	 * @param \Revision $revision for meta data (optional)
 	 */
-	public function addEntity( Entity $entity, \Revision $revision = null ) {
+	public function addEntity( Entity $entity, $revision = null ) {
 		$this->addEntityMetaData( $entity, $revision );
 
 		$this->addLabels( $entity );

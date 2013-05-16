@@ -142,7 +142,7 @@ class RdfSerializer {
 	 *
 	 * @return EasyRdf_Graph
 	 */
-	public function buildGraphForEntity( Entity $entity, \Revision $revision = null ) {
+	public function buildGraphForEntity( Entity $entity, $revision = null ) {
 		$builder = $this->newRdfBuilder();
 
 		$builder->addEntity( $entity, $revision );
