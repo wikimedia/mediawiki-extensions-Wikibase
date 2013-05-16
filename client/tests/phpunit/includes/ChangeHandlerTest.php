@@ -50,6 +50,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$this->site = new \MediaWikiSite();
 		$this->site->setGlobalId( 'enwiki' );
 		$this->site->setLanguageCode( 'en' );
+		$this->site->addNavigationId( 'en' );
 
 		$repo = self::getMockRepo();
 		$usageIndex = new EntityUsageIndex( $this->site, $repo );
