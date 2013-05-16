@@ -130,7 +130,7 @@ class PropertyValue extends DataValueObject {
 	 * @return mixed
 	 */
 	public function getValue() {
-		return $this;
+		return $this->id;
 	}
 
 	/**
