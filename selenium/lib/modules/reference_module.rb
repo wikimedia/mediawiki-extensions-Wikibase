@@ -36,7 +36,8 @@ module ReferencePage
   link(:removeReferenceLine1, :xpath => "//div[contains(@class, 'wb-referenceview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][1]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[text()='remove']")
   link(:removeReferenceLine2, :xpath => "//div[contains(@class, 'wb-referenceview')]/div[contains(@class, 'wb-snaklistview-listview')]/div[contains(@class, 'wb-snakview')][2]/span[contains(@class, 'wb-removetoolbar')]/div/span/span/a[text()='remove']")
   link(:addReferenceLine, :xpath => "//div[contains(@class, 'wb-referenceview')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a[text()='add']")
-  link(:addReferenceToFirstClaim, :xpath => "//div[contains(@class, 'wb-statement-references-container')][1]/div[contains(@class, 'wb-statement-references')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
+  link(:addReferenceToFirstClaim, :text => "add source", :index => 0)
+  link(:addReferenceToSecondClaim, :text => "add source", :index => 1)
   link(:editReference1, :xpath => "//div[contains(@class, 'wb-referenceview')][1]/span[contains(@class, 'wb-edittoolbar')]/span/span/span/span/a[text()='edit']")
 
   def wait_for_reference_value_box
