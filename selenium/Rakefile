@@ -278,6 +278,11 @@ RSpec::Core::RakeTask.new(:revision) do |spec|
   spec.pattern = '../repo/tests/selenium/item/revision_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:entity_search) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/special/entity_search_spec.rb'
+end
+
 task :run_tests, :taskname, :browser, :remote, :os do |t, args|
   task = args[:taskname] || :all
   setup_env(args[:browser], args[:remote], args[:os])
