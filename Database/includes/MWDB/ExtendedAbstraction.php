@@ -2,8 +2,8 @@
 
 namespace Wikibase\Database\MWDB;
 
+use Wikibase\Database\DBConnectionProvider;
 use Wikibase\Database\TableDefinition;
-use Wikibase\Repo\DBConnectionProvider;
 use InvalidArgumentException;
 use DatabaseBase;
 

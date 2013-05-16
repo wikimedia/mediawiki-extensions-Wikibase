@@ -29,8 +29,8 @@ spl_autoload_register( function ( $className ) {
 
 	$inTestNamespace = count( $namespaceSegments ) > 2
 		&& $namespaceSegments[0] === 'Wikibase'
-		&& $namespaceSegments[1] === 'Test'
-		&& $namespaceSegments[2] === 'Database';
+		&& $namespaceSegments[1] === 'Database'
+		&& $namespaceSegments[2] === 'Tests';
 
 	if ( $inTestNamespace ) {
 		$pathParts = explode( '/', $fileName );

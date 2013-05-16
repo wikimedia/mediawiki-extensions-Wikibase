@@ -45,7 +45,7 @@ class EngineTest extends QueryEngineTest {
 	protected function getInstances() {
 		$instances = array();
 
-		$connectionProvider = $this->getMock( 'Wikibase\Repo\DBConnectionProvider' );
+		$connectionProvider = $this->getMock( 'Wikibase\Database\DBConnectionProvider' );
 		$storeConfig = new StoreConfig( 'foo', 'bar', array() );
 		$queryInterface = new MediaWikiQueryInterface(
 			$connectionProvider,
