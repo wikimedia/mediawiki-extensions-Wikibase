@@ -14,6 +14,11 @@ time.Time.parse = ( function( time ) {
 
 	var settings = time.settings;
 
+	// TODO: this should probably already return a time.Time instance and time.Time constructor
+	//  should not take a string (perhaps just for convenience?).
+	// TODO: have a parser per calendar model and one for time.Time itself which is delegating the
+	//  parsing to the different calendar model parsers. This will allow to add new calendar models
+	//  without touching existing code. Parser code for similiar models can still be shared.
 	function parse( text ) {
 		var tokens = tokenize( text ),
 			retval = {},
@@ -78,6 +83,8 @@ time.Time.parse = ( function( time ) {
 			retval.calendarname = 'Gregorian';
 		}
 
+		delete( retval.bce ); // nothing we want to expose since this is redundant with "year"
+		delete( retval.minus );
 		return retval;
 	}
 
