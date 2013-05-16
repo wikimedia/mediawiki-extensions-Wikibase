@@ -127,7 +127,9 @@ class RdfSerializer {
 
 		$builder->addEntity( $entityRevision->getEntity() );
 
-		$builder->resolvedMentionedEntities( $this->entityLookup ); //TODO: optional
+		if ( $this->entityLookup !== null ) {
+			$builder->resolvedMentionedEntities( $this->entityLookup );
+		}
 
 		$graph = $builder->getGraph();
 		return $graph;
