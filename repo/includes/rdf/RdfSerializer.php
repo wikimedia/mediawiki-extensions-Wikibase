@@ -61,15 +61,15 @@ class RdfSerializer {
 	/**
 	 * @param EasyRdf_Format        $format
 	 * @param string                $uriBase
-	 * @param EntityLookup          $entityLookup
-	 * @param DataTypeFactory       $dataTypeFactory
+	 * @param EntityLookup|null     $entityLookup
+	 * @param DataTypeFactory|null  $dataTypeFactory
 	 * @param Lib\EntityIdFormatter $idFormatter
 	 */
 	public function __construct(
 		EasyRdf_Format $format,
 		$uriBase,
-		EntityLookup $entityLookup,
-		DataTypeFactory $dataTypeFactory,
+		$entityLookup,
+		$dataTypeFactory,
 		EntityIdFormatter $idFormatter
 	) {
 		$this->uriBase = $uriBase;
@@ -142,11 +142,13 @@ class RdfSerializer {
 	 *
 	 * @return EasyRdf_Graph
 	 */
-	public function buildGraphForEntity( Entity $entity, \Revision $revision = null ) {
+	public function buildGraphForEntity( Entity $entity, $revision = null ) {
 		$builder = $this->newRdfBuilder();
 
 		$builder->addEntity( $entity, $revision );
-		$builder->resolvedMentionedEntities( $this->entityLookup ); //TODO: optional
+		if ( $this->entityLookup !== null ) {
+			$builder->resolvedMentionedEntities( $this->entityLookup );
+		}
 
 		$graph = $builder->getGraph();
 		return $graph;
@@ -176,7 +178,7 @@ class RdfSerializer {
 	 *
 	 * @return string
 	 */
-	public function serializeEntity( Entity $entity, \Revision $revision = null ) {
+	public function serializeEntity( Entity $entity, $revision = null ) {
 		$graph = $this->buildGraphForEntity( $entity, $revision );
 		$data = $this->serializeRdf( $graph );
 		return $data;
