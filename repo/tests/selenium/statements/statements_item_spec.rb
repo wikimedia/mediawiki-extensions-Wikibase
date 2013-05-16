@@ -73,10 +73,32 @@ describe "Check item type statements UI" do
         page.cancelStatement
       end
     end
+    it "should check handling of item & property with no label" do
+      on_page(ItemPage) do |page|
+        page.navigate_to items[0]["url"]
+        page.wait_for_entity_to_load
+        page.uls_switch_language("de", "Deutsch") # switch to german, no label for the item & the property should be set there
+        page.wait_for_entity_to_load
+        page.statement1Name.include?(properties_item[0]["id"]).should be_true
+        page.statement1ClaimValue1.include?(items[1]["id"]).should be_true
+        page.statement1ClaimValue1_element.click
+        page.wait_for_entity_to_load
+        @browser.title.include?(ITEM_ID_PREFIX + items[1]["id"]).should be_true
+        @browser.back
+        @browser.refresh
+        page.wait_for_entity_to_load
+        page.statement1Name_element.click
+        page.wait_for_entity_to_load
+        @browser.title.include?(PROPERTY_ID_PREFIX + properties_item[0]["id"]).should be_true
+      end
+    end
   end
 
   after :all do
-    # tear down
+    # tear down: switch to default language again
+    on_page(ItemPage) do |page|
+      page.uls_switch_language(LANGUAGE_CODE, LANGUAGE_NAME)
+    end
   end
 
 end
