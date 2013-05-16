@@ -200,25 +200,8 @@
 			}
 			this.element.append( this.$prev ).append( this.$curr ).append( this.$next );
 
-			// Apply hover functionality:
 			$.each( [ this.$auto, this.$curr, this.$prev, this.$next ], function( i, $node ) {
-				$node
-				.addClass( 'ui-state-default' )
-				.on( 'mouseover', function( event ) {
-					var $this = $( this );
-					if( $this.hasClass( 'ui-state-disabled' ) ) {
-						return;
-					}
-					$this.addClass( 'ui-state-hover' );
-				} )
-				.on( 'mouseout', function( event ) {
-					var $this = $( this );
-					if( $this.hasClass( 'ui-state-disabled' ) ) {
-						return;
-					}
-					$this.removeClass( 'ui-state-hover' );
-				} )
-				.find( 'a' ).attr( 'href', 'javascript:void(0);' );
+				$node.find( 'a' ).attr( 'href', 'javascript:void(0);' );
 			} );
 
 			// Construct and initialize menu widget:
@@ -331,7 +314,7 @@
 					clickCallback( event );
 				}
 			} )
-			.append( $( '<a/>' ).addClass( this.widgetBaseClass + '-label' ) );
+			.append( $( '<a/>' ).addClass( this.widgetBaseClass + '-label ui-state-default' ) );
 		},
 
 		/**

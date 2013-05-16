@@ -10,6 +10,11 @@
 	border: none;
 }
 
+.ui-listrotator .ui-listrotator-label {
+	background: none;
+	border: none;
+}
+
 .ui-listrotator .ui-state-active a {
 	text-decoration: underline;
 }
@@ -37,7 +42,7 @@
 	text-align: center;
 	padding: 0 5px 0 10px;
 	background: none;
-	border-color: #CCCCCC;
+	border: 1px solid #CCCCCC;
 }
 .ui-listrotator .ui-listrotator-curr a {
 	float: left;

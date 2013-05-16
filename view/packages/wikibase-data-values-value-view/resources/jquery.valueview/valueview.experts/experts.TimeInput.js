@@ -176,7 +176,7 @@
 			.append( $( '<span/>' ).addClass( this.uiBaseClass + '-calendarhint-message' ) )
 			.append(
 				$( '<a/>' )
-				.addClass( this.uiBaseClass + '-calendarhint-switch' )
+				.addClass( this.uiBaseClass + '-calendarhint-switch ui-state-default' )
 				.attr( 'href', 'javascript:void(0);' )
 			);
 
@@ -196,7 +196,7 @@
 			// TODO: Move input extender out of here to a more generic place since it is not
 			// TimeInput specific.
 			.inputextender( {
-				content: [ $toggler, this.$precisionContainer, this.$calendarContainer, this.$preview, this.$calendarhint ],
+				content: [ this.$preview, this.$calendarhint, $toggler, this.$precisionContainer, this.$calendarContainer ],
 				initCallback: function() {
 					self.$precision.data( 'listrotator' ).initWidths();
 					self.$calendar.data( 'listrotator' ).initWidths();

@@ -58,7 +58,8 @@
 			position: {
 				my: ( isRtl ) ? 'right top' : 'left top',
 				at: ( isRtl ) ? 'right bottom' : 'left bottom',
-				collision: 'none'
+				collision: 'none',
+				offset: '-4 2'
 			}
 		},
 
