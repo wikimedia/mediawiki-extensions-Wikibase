@@ -181,6 +181,22 @@ time.Time = ( function( time, $ ) {
 		};
 	};
 
+	/**
+	 * Returns whether some given time is equal to this one.
+	 *
+	 * @param {*|time.Time} otherTime
+	 * @return boolean
+	 */
+	Time.prototype.equals = function( otherTime ) {
+		if( !( otherTime instanceof Time ) ) {
+			return false;
+		}
+
+		return this.isValid() && otherTime.isValid() // two invalid times are not equal
+			&& this.precision() === otherTime.precision()
+			&& this.iso8601() === otherTime.iso8601();
+	};
+
 	function pad( number, digits ) {
 		return ( 1e12 + Math.abs( number ) + '' ).slice( -digits );
 	}

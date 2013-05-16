@@ -56,4 +56,37 @@
 		);
 	}
 
+	QUnit.test( 'time.Time.equals()', function( assert ) {
+		$.each( validTimeDefinitions, function( name, definition ) {
+			var time1 = new Time( definition ),
+				time2 = new Time( definition );
+
+			assert.ok(
+				time1.equals( time2 ) && time2.equals( time1 ),
+				'equal() works for time definition of "' + name + '"'
+			);
+
+		} );
+	} );
+
+	QUnit.test( 'Equality of Time objects constructed by object/string', function( assert ) {
+		var equalTimeObjects = {};
+		$.each( validTimeDefinitions, function( name, definition ) {
+			equalTimeObjects[ name ] = {
+				byObject: new Time( definition ),
+				byString: new Time( name )
+			};
+		} );
+		$.each( equalTimeObjects, function( name, equalTimes ) {
+			var timeByObject = equalTimes.byObject,
+				timeByString = equalTimes.byString;
+
+			assert.ok(
+				timeByObject.equals( timeByString ),
+				'Time created from string "' + name + '" and time created from equivalent time ' +
+					'object definition are equal'
+			);
+		} );
+	} );
+
 }( QUnit, jQuery, time ) );

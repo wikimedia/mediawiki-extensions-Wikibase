@@ -62,14 +62,7 @@
 			if ( !( value instanceof SELF ) ) {
 				return false;
 			}
-
-			var ownTime = this.getValue(),
-				otherTime = value.getValue();
-
-			// no need to check for isValid() since constructor won't allow invalid Time values
-
-			return ownTime.precision() === otherTime.precision()
-				&& ownTime.iso8601() === otherTime.iso8601();
+			return this.getValue().equals( value.getValue() );
 		},
 
 		/**
