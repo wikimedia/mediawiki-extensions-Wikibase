@@ -33,14 +33,19 @@ use ApiBase;
  */
 class ApiClientInfo extends \ApiQueryBase {
 
+	protected $settings;
+
 	/**
 	 * @since 0.4
 	 *
-	 * @param $api ApiBase
-	 * @param $moduleName string
+	 * @param ApiBase $api
+	 * @param string $moduleName
 	 */
 	public function __construct( $api, $moduleName ) {
 		parent::__construct( $api, $moduleName, 'wb' );
+
+		// @todo inject this instead of using singleton here
+		$this->settings = Settings::singleton();
 	}
 
 	/**
@@ -51,34 +56,51 @@ class ApiClientInfo extends \ApiQueryBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
+		$apiData = $this->getRepoInfo( $params );
+
+		$this->getResult()->addValue( 'query', 'wikibase', $apiData );
+	}
+
+	/**
+	 * Set settings for api module
+	 *
+	 * @since 0.4
+	 *
+	 * @param SettingsArray $settings
+	 */
+	public function setSettings( SettingsArray $settings ) {
+		$this->settings = $settings;
+	}
+
+	/**
+	 * Gets repo url info to inject into the api module
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $params[]
+	 *
+	 * @return array
+	 */
+	public function getRepoInfo( array $params ) {
 		$data = array( 'repo' => array() );
+
+		$repoUrlArray = array(
+            'base' => $this->settings->getSetting( 'repoUrl' ),
+            'scriptpath' => $this->settings->getSetting( 'repoScriptPath' ),
+            'articlepath' => $this->settings->getSetting( 'repoArticlePath' ),
+        );
 
 		foreach ( $params['prop'] as $p ) {
 			switch ( $p ) {
 				case 'url':
-					$data['repo']['url'] = $this->urlInfo();
+					$data['repo']['url'] = $repoUrlArray;
 					break;
 				default;
 					break;
 			}
 		}
 
-		$this->getResult()->addValue( 'query', 'wikibase', $data );
-	}
-
-	/**
-	 * Provides url settings for the associated Wikibase repo
-	 *
-	 * @since 0.4
-	 *
-	 * @return array
-	 */
-	public function urlInfo() {
-		return array(
-			'base' => Settings::get( 'repoUrl' ),
-			'scriptpath' => Settings::get( 'repoScriptPath' ),
-			'articlepath' => Settings::get( 'repoArticlePath' ),
-		);
+		return $data;
 	}
 
 	/**
