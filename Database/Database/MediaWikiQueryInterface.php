@@ -169,4 +169,32 @@ class MediaWikiQueryInterface implements QueryInterface {
 		return $this->getDB()->insertId();
 	}
 
+	/**
+	 * @see QueryInterface::select
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $tableName
+	 * @param array $fields
+	 * @param array $conditions
+	 *
+	 * @return ResultIterator
+	 */
+	public function select( $tableName, array $fields, array $conditions ) {
+		$selectionResult = $this->getDB()->select(
+			$tableName,
+			 $fields,
+			$conditions,
+			__METHOD__
+		);
+
+		if ( $selectionResult instanceof \ResultWrapper ) {
+			return new ResultIterator( iterator_to_array( $selectionResult ) );
+		}
+
+		// TODO: throw
+	}
+
 }
+
+
