@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib;
 
-use DataTypes\DataType;
 use InvalidArgumentException;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
@@ -67,23 +66,17 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 	 * @param EntityId $propertyId
 	 *
 	 * @return Property
-	 * @throws PropertyNotFoundExtension
+	 * @throws PropertyNotFoundException
 	 */
 	private function getProperty( EntityId $propertyId ) {
 		$property = $this->entityLookup->getEntity( $propertyId );
 
 		if ( $property === null ) {
-			throw new PropertyNotFoundExtension();
+			throw new PropertyNotFoundException( $propertyId );
 		}
 
 		assert( $property instanceof Property );
 		return $property;
 	}
-
-}
-
-class PropertyNotFoundExtension extends \RuntimeException {
-
-
 
 }
