@@ -31,15 +31,15 @@ time.Time = ( function( time, $ ) {
 	var Time = function Time( timeDefinition, options ) {
 		var result;
 
-		options = $.extend( {
-			precision: null,
-			calendarname: null
-		}, options );
+		options = options || {};
 
 		if( typeof timeDefinition === 'string' ) {
+			// TODO: this should also throw errors or we should just take it out.
+			// TODO: if this stays, the options should be merged with the parser result and the
+			//  resulting object should be validated.
 			result = Time.parse( timeDefinition );
 		} else {
-			result = $.extend( {}, timeDefinition ); // copy object
+			result = $.extend( {}, timeDefinition, options ); // copy object
 			Time.validate( result );
 		}
 		if( result === null ) {
@@ -53,9 +53,13 @@ time.Time = ( function( time, $ ) {
 			minute = (result.minute !== undefined) ? result.minute : 0,
 			second = (result.second !== undefined) ? result.second : 0,
 			utcoffset = '+00:00',
-			calendarname = ( options.calendarname )
-				? options.calendarname
-				: ( result.calendarname !== undefined ) ? result.calendarname : 'Gregorian';
+			calendarname = Time.CALENDAR.GREGORIAN;
+
+		if( options.calendarname ) {
+			calendarname = options.calendarname;
+		} else if ( result.calendarname !== undefined ) {
+			calendarname = result.calendarname;
+		}
 
 		this.year = function() {
 			return year;
@@ -73,7 +77,7 @@ time.Time = ( function( time, $ ) {
 			return utcoffset;
 		};
 
-		var precision = ( options.precision ) ? options.precision : result.precision;
+		var precision = ( options.precision !== undefined ) ? options.precision : result.precision;
 		this.precision = function() {
 			return precision;
 		};
@@ -202,25 +206,44 @@ time.Time = ( function( time, $ ) {
 	}
 
 	/**
-	 * Creates a new Time object by a given iso8601 string.
+	 * Creates a new Time object by a given iso8601 string like "+00000002000-12-31T23:59:59Z".
 	 *
 	 * TODO: this function shouldn't really be required since the parser should simply be able to
-	 *       take such a string and create a new Time object from it.
+	 *       take such a string and create a new Time object from it. It could be kept for
+	 *       performance reasons though.
 	 *
 	 * @param {string} iso8601String
 	 * @param {number} [precision] If not given, precision will be as high as possible.
+	 * @return time.Time
+	 * @throws {Error} If the input string is invalid.
 	 */
 	Time.newFromIso8601 = function( iso8601String, precision ) {
-		// The parser only takes the iso8601 string in a certain format right now. We have to bring
-		// it into that form first:
-		var formattedIso8601 = iso8601String
-			.replace( /T.+$/, '' ) // get rid of minutes (not supported yet)
-			// Get rid of year's leading zeros (but keep one if the year actually is 0)
-			// and keep "-" and "+":
-			.replace( /^([\-\+])?0*(0|[1-9]+)/, '$1$2' )
-			.replace( '+', '' ); // get rid of "+"
+		var year, month, day;
 
-		return new Time( formattedIso8601, { precision: precision } );
+		try{
+			year = parseInt(
+				iso8601String.match( /^[\-\+]?[\d]+/ )[0] || 0,
+				10
+			);
+			month = parseInt(
+				iso8601String.match( /(?:[1-9]|1[012])(?=\-\d+T)/ )[0],
+				10
+			);
+			day = parseInt(
+				iso8601String.match( /[1-9]?\d(?=T)/ )[0],
+				10
+			);
+		} catch( e ) {
+			throw new Error( 'Unprocessable iso8601 string given' );
+		}
+
+		return new Time( {
+			year: year,
+			month: month,
+			day: day,
+			precision: precision !== undefined ? precision : Time.PRECISION.DAY,
+			calendarname: Time.CALENDAR.GREGORIAN
+		} );
 	};
 
 	/**
