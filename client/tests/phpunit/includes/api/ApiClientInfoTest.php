@@ -59,9 +59,12 @@ class ApiClientInfoTest extends \ApiTestCase {
 		$this->assertArrayHasKey( 'scriptpath', $urlInfo );
 		$this->assertArrayHasKey( 'articlepath', $urlInfo );
 
-		$this->assertTrue( is_string( $urlInfo['base'] ) );
-		$this->assertTrue( is_string( $urlInfo['scriptpath'] ) );
-		$this->assertTrue( is_string( $urlInfo['articlepath'] ) );
+		$this->assertInternalType( 'string', $urlInfo['base'],
+			"The repo URL information for 'base' should be a string" );
+		$this->assertInternalType( 'string', $urlInfo['scriptpath'],
+			"The repo URL information for 'scriptpath' should be a string" );
+		$this->assertInternalType( 'string', $urlInfo['articlepath'],
+			"The repo URL information for 'articlepath' should be a string" );
 
 		$this->assertEquals( \Wikibase\Settings::get( 'repoUrl' ), $urlInfo['base'] );
 		$this->assertEquals( \Wikibase\Settings::get( 'repoScriptPath' ), $urlInfo['scriptpath'] );
