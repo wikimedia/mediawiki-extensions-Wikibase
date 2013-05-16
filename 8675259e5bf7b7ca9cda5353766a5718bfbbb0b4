@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DxT05r9Y",
+        "filename": "repo/includes/rdf/RdfStatementBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-16T14:39:27Z",
+      "side": 1,
+      "message": "I think we should at least allow it as an intermediate commit. We could decide to not accept it for closing a ticket. But I don\u0027t see the point in a case like this:\n\nIt\u0027s unlikely that more snake types get added. Factoring them out laster is an isolated thing, I don\u0027t see the increasing cost. And... most of the 100 lines this would save will be covered by factoring out the handling of individual property types. Which should indeed be done.",
+      "parentUuid": "Dw1E8Ut8",
+      "revId": "8675259e5bf7b7ca9cda5353766a5718bfbbb0b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwzFBzl4",
         "filename": "repo/includes/rdf/RdfStatementBuilder.php",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "DxX0zN-Y",
+        "filename": "repo/includes/rdf/RdfStatementBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-16T14:39:27Z",
+      "side": 1,
+      "message": "Well, do you think this is not acceptable as intermediate code? Then it becomes quite hard to make small patch sets...",
+      "parentUuid": "DwzFBzl4",
+      "revId": "8675259e5bf7b7ca9cda5353766a5718bfbbb0b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DwxEb6n8",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2013-05-14T09:32:13Z",
       "side": 1,
       "message": "Isn\u0027t this working already? At least I\u0027ve seen some code for this in this change set.",
+      "revId": "8675259e5bf7b7ca9cda5353766a5718bfbbb0b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxV0w..c",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-16T14:39:27Z",
+      "side": 1,
+      "message": "Yea, you are right, this comment is obsolete.",
+      "parentUuid": "DwxEb6n8",
       "revId": "8675259e5bf7b7ca9cda5353766a5718bfbbb0b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
