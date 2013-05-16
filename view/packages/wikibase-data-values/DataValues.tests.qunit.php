@@ -88,6 +88,7 @@ return call_user_func( function() {
 				'resources/time.js/tests/time.Time.tests.js',
 				'resources/time.js/tests/time.Time.validate.tests.js',
 				'resources/time.js/tests/time.Time.parse.tests.js',
+				'resources/time.js/tests/time.Time.newFromIso8601.tests.js',
 			),
 			'dependencies' => array(
 				'time.js',
