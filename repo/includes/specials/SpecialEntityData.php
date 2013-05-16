@@ -84,8 +84,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
-		ob_start();
-
 		$revision = 0;
 		$format = 'json';
 
@@ -120,6 +118,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$this->entityLookup = \Wikibase\StoreFactory::getStore()->getEntityLookup();
 		$this->dataTypeFactory = $repo->getDataTypeFactory();
 		$this->idFormatter = $repo->getIdFormatter();
+
+		ob_start();
 
 		$this->showData( $format, $id, $revision );
 
