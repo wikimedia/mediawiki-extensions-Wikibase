@@ -88,7 +88,6 @@
 			.addClass( this.widgetBaseClass + '-extension ui-widget-content' )
 			.on( 'click.' + this.widgetName, function( event ) {
 				clearTimeout( self._animationTimeout );
-				event.stopPropagation();
 				self.showExtension();
 			} )
 			.on( 'toggleranimationstep.' + this.widgetName, function( event, now, tween ) {
@@ -128,21 +127,23 @@
 			}
 
 			// Blurring by clicking away from the widget (one handler is sufficient):
-			if( $( ':' + this.widgetBaseClass ).length === 1 ) {
-				$( 'html' ).on( 'click.' + this.widgetName, function( event ) {
-					// Loop through all widgets and hide content when having clicked out of it:
-					var $widgetNodes = $( ':' + self.widgetBaseClass );
-					$widgetNodes.each( function( i, widgetNode ) {
-						var widget = $( widgetNode ).data( self.widgetName );
-						if(
-							$( event.target ).closest( widget.$container ).length === 0
-							&& !widget.element.is( ':focus' )
-						) {
-							widget.hideExtension();
-						}
-					} );
+			$( 'html' )
+			.off( '.' + this.widgetName )
+			.on( 'click.' + this.widgetName, function( event ) {
+				// Loop through all widgets and hide content when having clicked out of it:
+				var $widgetNodes = $( ':' + self.widgetBaseClass );
+				$widgetNodes.each( function( i, widgetNode ) {
+					var widget = $( widgetNode ).data( self.widgetName ),
+						$target = $( event.target );
+
+					// Hide the extension neither it nor the corresponding input element is
+					// clicked:
+					if( !$target.closest( widget.element.add( widget.$extension ) ).length ) {
+						widget.hideExtension();
+					}
+
 				} );
-			}
+			} );
 
 			this._draw();
 
@@ -162,10 +163,12 @@
 		 */
 		destroy: function() {
 			this.$extension.remove();
+
+			$.Widget.prototype.destroy.call( this );
+
 			if( $( ':' + this.widgetBaseClass ).length === 0 ) {
 				$( 'html' ).off( '.' + this.widgetName );
 			}
-			$.Widget.prototype.destroy.call( this );
 		},
 
 		/**

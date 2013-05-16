@@ -222,14 +222,16 @@
 			.off( '.' + this.widgetName )
 			.on( 'click.' + this.widgetBaseClass, function( event ) {
 				$( ':' + self.widgetBaseClass ).each( function( i, node ) {
-					$( node ).data( 'listrotator' ).$menu.hide();
-				} );
-			} );
+					var $target = $( event.target ),
+						listrotator = $( node ).data( 'listrotator' );
 
-			// Prevent propagation of clicking on the "current" section as well as on the menu in
-			// order to not trigger the event handler assigned to the html element.
-			this.$menu.add( this.$curr ).on( 'click.' + this.widgetBaseClass, function( event ) {
-				event.stopPropagation();
+					// Hide the menu if it is neither the "current" node nor the menu's node that
+					// has been clicked.
+					if( !$target.closest( listrotator.$curr.add( listrotator.$menu ) ).length ) {
+						listrotator.$menu.hide();
+					}
+
+				} );
 			} );
 
 			// Focus on first element:
