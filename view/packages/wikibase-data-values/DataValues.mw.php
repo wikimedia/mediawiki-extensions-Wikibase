@@ -65,7 +65,6 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 		'includes/values/MonolingualTextValue',
 		'includes/values/MultilingualTextValue',
 		'includes/values/NumberValue',
-		'includes/values/PropertyValue',
 		'includes/values/QuantityValue',
 		'includes/values/StringValue',
 		'includes/values/TimeValue',

@@ -74,7 +74,6 @@ $wgDataValues['iri'] = 'DataValues\IriValue';
 $wgDataValues['monolingualtext'] = 'DataValues\MonolingualTextValue';
 $wgDataValues['multilingualtext'] = 'DataValues\MultilingualTextValue';
 $wgDataValues['number'] = 'DataValues\NumberValue';
-$wgDataValues['property'] = 'DataValues\PropertyValue';
 $wgDataValues['quantity'] = 'DataValues\QuantityValue';
 $wgDataValues['string'] = 'DataValues\StringValue';
 $wgDataValues['time'] = 'DataValues\TimeValue';
