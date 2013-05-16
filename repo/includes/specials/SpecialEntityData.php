@@ -21,7 +21,7 @@ use \Wikibase\RdfSerializer;
  *
  * @since 0.4
  *
- * @file 
+ * @file
  * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
@@ -84,6 +84,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
+		ob_start();
+
 		$revision = 0;
 		$format = 'json';
 
@@ -120,6 +122,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$this->idFormatter = $repo->getIdFormatter();
 
 		$this->showData( $format, $id, $revision );
+
+		ob_end_flush();
 	}
 
 	/**
@@ -448,7 +452,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 		ob_clean();
 
 		print $data;
-		flush();
 
 		//die(); //FIXME: figure out how to best shut down here.
 	}
