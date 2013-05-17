@@ -160,7 +160,7 @@
 
 			var $toggler = $( '<a/>' )
 			.addClass( this.uiBaseClass + '-advancedtoggler' )
-			.text( mw.msg( 'valueview-expert-advancedoptions' ) );
+			.text( mw.msg( 'valueview-expert-advancedadjustments' ) );
 
 			this.$calendarhint = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-calendarhint' )

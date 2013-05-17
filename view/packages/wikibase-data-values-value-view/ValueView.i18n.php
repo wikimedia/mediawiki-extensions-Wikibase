@@ -36,7 +36,7 @@ $messages = array();
 $messages['en'] = array(
 	'valueview-desc' => 'UI components for displaying and editing data values',
 
-	'valueview-expert-advancedoptions' => 'advanced options',
+	'valueview-expert-advancedadjustments' => 'advanced adjustments',
 
 	// UnsupportedValue expert:
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Handling of "$1" values is not yet supported.',
@@ -64,6 +64,7 @@ $messages['en'] = array(
  */
 $messages['qqq'] = array(
 	'valueview-desc' => '{{desc|name=ValueView|url=http://www.mediawiki.org/wiki/Extension:ValueView}}',
+	'valueview-expert-advancedadjustments' => 'Label of the link to unfold advanced adjustments regarding the data type (see [[d:Wikidata:Glossary]]) the user is about to enter a value of (e.g. specifying the precision of a time value).',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Error shown if a data value of a certain data value type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a valueview widget expert handling data values of that type has not yet been implemented). $1 is the name of the data value type which lacks support.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Error shown if a data value for a certain data type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a valueview widget expert handling data values for that data type has not yet been implemented). Parameter $1 is the name of the data type which lacks support',
 	'valueview-expert-emptyvalue-empty' => 'Message expressing that there is currently no value set in a jQuery valueview.
