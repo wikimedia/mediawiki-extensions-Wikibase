@@ -212,7 +212,7 @@ return call_user_func( function() {
 				'jquery.ui.toggler',
 			),
 			'messages' => array(
-				'valueview-expert-advancedoptions',
+				'valueview-expert-advancedadjustments',
 				'valueview-expert-timeinput-precision',
 				'valueview-expert-timeinput-calendar',
 				'valueview-expert-timeinput-calendarhint',
