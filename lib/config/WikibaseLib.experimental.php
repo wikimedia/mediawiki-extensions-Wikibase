@@ -33,19 +33,7 @@ if ( !defined( 'WBL_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
 
-global $wgWBSettings, $wgAutoloadClasses, $wgHooks;
-
-//TODO: The data types need to be injected into the repo settings and/or the client settings.
-//      Using the deprecated $wgWBSettings for this kind of sucks.
-if ( isset( $wgWBSettings['dataTypes'] ) ) {
-	$wgWBSettings['dataTypes'] = array_merge( $wgWBSettings['dataTypes'], array(
-		'geo-coordinate',
-		'quantity',
-		'monolingual-text',
-		'multilingual-text',
-		'time',
-	) );
-}
+global $wgHooks;
 
 $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreStart
@@ -60,5 +48,8 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	return true;
 	// @codeCoverageIgnoreEnd
 };
+
+//NOTE: any experimental default settings need to go into the
+//      appropriate section of WikibaseLib.defaults.php.
 
 
