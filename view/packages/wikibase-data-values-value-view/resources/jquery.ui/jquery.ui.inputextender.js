@@ -93,6 +93,27 @@
 			.on( 'toggleranimationstep.' + this.widgetName, function( event, now, tween ) {
 				self._trigger( 'animationstep', null, [ now, tween ] );
 			} )
+			.on( 'keydown.' + this.widgetName, function( event ) {
+				if( event.keyCode === $.ui.keyCode.TAB ) {
+					var $focusable = self.$extension.find( ':focusable' );
+					if( event.target === $focusable.first()[0] && event.shiftKey ) {
+						event.preventDefault();
+						// Tab back to the input element:
+						self.element.focus();
+					} else if ( event.target === $focusable.last()[0] && !event.shiftKey ) {
+						event.preventDefault();
+						// Tabbing forward out of the extension: Focus the next focusable element
+						// after the input element.
+						$focusable = $( ':focusable' );
+						$focusable.each( function( i, node ) {
+							if( node === self.element[0] ) {
+								self.hideExtension();
+								$focusable[ ( i + 1 >= $focusable.length ) ? 0 : i + 1 ].focus();
+							}
+						} );
+					}
+				}
+			} )
 			.appendTo( $( 'body' ) );
 
 			this.element
@@ -104,7 +125,6 @@
 					}, 150 );
 				}
 			} )
-			// TODO: Allow direct tabbing into the extension
 			.on( 'blur.' + this.widgetName, function( event ) {
 				self._animationTimeout = setTimeout( function() {
 					self.hideExtension();
@@ -113,6 +133,15 @@
 			.on( 'keydown.' + this.widgetName, function( event ) {
 				if( event.keyCode === $.ui.keyCode.ESCAPE ) {
 					self.hideExtension();
+				} else if ( event.keyCode === $.ui.keyCode.TAB && !event.shiftKey ) {
+					event.preventDefault();
+					// When tabbing out of the input element, focus the first focusable element
+					// within the extension.
+					var focusable = self.$extension.find( ':focusable' );
+					if( focusable.length ) {
+						focusable.first().focus();
+						clearTimeout( self._animationTimeout );
+					}
 				}
 			} );
 
