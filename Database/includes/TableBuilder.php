@@ -72,8 +72,6 @@ class TableBuilder {
 	 * @since 0.1
 	 *
 	 * @param TableDefinition $table
-	 *
-	 * @return boolean Success indicator
 	 */
 	public function createTable( TableDefinition $table ) {
 		if ( $this->db->tableExists( $table->getName() ) ) {
@@ -83,7 +81,7 @@ class TableBuilder {
 
 		$this->report( 'Table "' . $table->getName() . '" not found, creating.' );
 
-		return $this->db->createTable( $table );
+		$this->db->createTable( $table );
 	}
 
 }
