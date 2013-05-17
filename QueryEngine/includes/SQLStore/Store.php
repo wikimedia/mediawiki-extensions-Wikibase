@@ -6,6 +6,7 @@ use MessageReporter;
 use Wikibase\Database\QueryInterface;
 use Wikibase\Database\TableBuilder;
 use Wikibase\QueryEngine\QueryStore;
+use Wikibase\QueryEngine\SQLStore\Engine\DescriptionMatchFinder;
 use Wikibase\QueryEngine\SQLStore\Engine\Engine;
 
 /**
@@ -74,10 +75,14 @@ class Store implements QueryStore {
 		$this->config = $config;
 		$this->queryInterface = $queryInterface;
 		$this->factory = new Factory( $config, $queryInterface );
+
+		$this->tableBuilder = new TableBuilder( $this->queryInterface );
 	}
 
 	/**
 	 * Sets the table builder to use for creating tables.
+	 *
+	 * @deprecated TODO: move to config
 	 *
 	 * @since 0.1
 	 *
@@ -140,6 +145,15 @@ class Store implements QueryStore {
 			$this->tableBuilder,
 			$messageReporter
 		);
+	}
+
+	/**
+	 * TODO: figure out how to merge this into the QueryEngine interface
+	 *
+	 * @return DescriptionMatchFinder
+	 */
+	public function getDescriptionMatchFinder() {
+		return $this->factory->newDescriptionMatchFinder();
 	}
 
 }
