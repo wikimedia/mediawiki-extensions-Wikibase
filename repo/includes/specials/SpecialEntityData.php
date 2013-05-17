@@ -445,12 +445,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$response->header( 'Cache-Control: ' . $mode . ', s-maxage=' . $smaxage . ', max-age=' . $maxage );
 
 		$this->getOutput()->disable(); // don't generate HTML
-		ob_clean();
+		ob_clean(); // remove anything that might already be in the output buffer.
 
 		print $data;
-		flush();
 
-		//die(); //FIXME: figure out how to best shut down here.
+		// exit normally here, keeping all levels of output buffering.
 	}
 
 }
