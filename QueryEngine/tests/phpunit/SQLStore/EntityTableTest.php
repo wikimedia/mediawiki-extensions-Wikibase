@@ -3,17 +3,14 @@
 namespace Wikibase\QueryEngine\Tests\SQLStore;
 
 use Wikibase\Claim;
-use Wikibase\Database\FieldDefinition;
-use Wikibase\Database\TableDefinition;
 use Wikibase\Entity;
 use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
-use Wikibase\QueryEngine\SQLStore\DataValueTable;
-use Wikibase\QueryEngine\SQLStore\EntityInserter;
+use Wikibase\QueryEngine\SQLStore\EntityTable;
 
 /**
- * @covers Wikibase\QueryEngine\SQLStore\EntityInserter
+ * @covers Wikibase\QueryEngine\SQLStore\EntityTable
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,30 +38,27 @@ use Wikibase\QueryEngine\SQLStore\EntityInserter;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityInserterTest extends \PHPUnit_Framework_TestCase {
+class EntityTableTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider entityProvider
 	 */
 	public function testInsertEntity( Entity $entity ) {
-		$entityTable = $this
-			->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\EntityTable' )
-			->disableOriginalConstructor()
-			->getMock();
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
 
-		$entityTable->expects( $this->once() )
-			->method( 'insertEntity' )
-			->with( $this->equalTo( $entity ) );
+		$queryInterface->expects( $this->once() )
+			->method( 'insert' )
+			->with(
+				$this->equalTo( 'nyan_entities' ),
+				$this->equalTo(
+					array(
+						'type' => $entity->getType(),
+						'number' => $entity->getId()->getNumericId(),
+					)
+				)
+			);
 
-		$claimInserter = $this
-			->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$claimInserter->expects( $this->exactly( count( $entity->getClaims() ) ) )
-			->method( 'insertClaim' );
-
-		$inserter = new EntityInserter( $entityTable, $claimInserter );
+		$inserter = new EntityTable( $queryInterface, 'nyan_entities' );
 
 		$inserter->insertEntity( $entity );
 	}
@@ -98,15 +92,6 @@ class EntityInserterTest extends \PHPUnit_Framework_TestCase {
 		$property->addClaim( new Claim( new PropertyNoValueSnak( 42 ) ) );
 
 		$argLists[] = array( $property );
-
-
-		$item = Item::newEmpty();
-		$item->setId( 2 );
-		$item->addClaim( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$item->addClaim( new Claim( new PropertyNoValueSnak( 43 ) ) );
-		$item->addClaim( new Claim( new PropertyNoValueSnak( 44 ) ) );
-
-		$argLists[] = array( $item );
 
 		return $argLists;
 	}

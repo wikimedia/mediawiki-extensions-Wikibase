@@ -32,20 +32,20 @@ use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityInserter {
+class EntityTable {
 
-	private $entityTable;
-	private $claimInserter;
+	private $queryInterface;
+	private $entityTableName;
 
 	/**
 	 * @since 0.1
 	 *
-	 * @param EntityTable $entityTable
-	 * @param ClaimInserter $claimInserter
+	 * @param QueryInterface $queryInterface
+	 * @param string $entityTableName
 	 */
-	public function __construct( EntityTable $entityTable, ClaimInserter $claimInserter ) {
-		$this->entityTable = $entityTable;
-		$this->claimInserter = $claimInserter;
+	public function __construct( QueryInterface $queryInterface, $entityTableName ) {
+		$this->queryInterface = $queryInterface;
+		$this->entityTableName = $entityTableName;
 	}
 
 	/**
@@ -56,13 +56,13 @@ class EntityInserter {
 	 * @param Entity $entity
 	 */
 	public function insertEntity( Entity $entity ) {
-		$this->entityTable->insertEntity( $entity );
-
-		foreach ( $entity->getClaims() as $claim ) {
-			$this->claimInserter->insertClaim( $claim, 0 ); // TODO
-		}
-
-		// TODO: obtain and insert virtual claims
+		$this->queryInterface->insert(
+			$this->entityTableName,
+			array(
+				'type' => $entity->getType(),
+				'number' => $entity->getId()->getNumericId(),
+			)
+		);
 	}
 
 }

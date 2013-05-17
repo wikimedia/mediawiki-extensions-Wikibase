@@ -62,6 +62,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testNewEntityTableReturnType() {
+		$this->assertInstanceOf(
+			'Wikibase\QueryEngine\SQLStore\EntityTable',
+			$this->newInstance()->newEntityTable()
+		);
+	}
+
 	public function testNewSnakInserterReturnType() {
 		$this->assertInstanceOf(
 			'Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter',
