@@ -67,13 +67,13 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 	 * @param EntityId $propertyId
 	 *
 	 * @return Property
-	 * @throws PropertyNotFoundExtension
+	 * @throws PropertyNotFoundException
 	 */
 	private function getProperty( EntityId $propertyId ) {
 		$property = $this->entityLookup->getEntity( $propertyId );
 
 		if ( $property === null ) {
-			throw new PropertyNotFoundExtension();
+			throw new PropertyNotFoundException();
 		}
 
 		assert( $property instanceof Property );
@@ -82,7 +82,7 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 
 }
 
-class PropertyNotFoundExtension extends \RuntimeException {
+class PropertyNotFoundException extends \RuntimeException {
 
 
 
