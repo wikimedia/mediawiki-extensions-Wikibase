@@ -69,6 +69,7 @@ class DescriptionMatchFinder {
 	 * @param QueryOptions $options
 	 *
 	 * @return int[]
+	 * @throws QueryNotSupportedException
 	 */
 	public function findMatchingEntities( Description $description, QueryOptions $options ) {
 		if ( $description instanceof SomeProperty ) {
@@ -76,13 +77,9 @@ class DescriptionMatchFinder {
 		}
 
 		throw new QueryNotSupportedException( $description );
-
-		// SomeProperty[AnyValue]: SELECT entity_id FROM $table WHERE property_id = $id
-
-		// SomeProperty[ValueDescription]:
-		// SELECT SELECT entity_id FROM $table WHERE property_id = $property_id AND
 	}
 
+	// TODO: this code needs some serious cleanup before it is extended
 	protected function findMatchingSomeProperty( SomeProperty $description, QueryOptions $options ) {
 		$propertyId = $description->getPropertyId();
 
