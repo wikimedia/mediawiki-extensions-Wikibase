@@ -4,11 +4,6 @@
  * When included this returns an array with all modules introduced by the "valueview" jQuery
  * extension.
  *
- * External dependencies:
- * - jQuery 1.8
- * - jQuery.eachchange (maintained by wikidata team)
- * - jQuery.inputAutoExpand (maintained by wikidata team)
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or

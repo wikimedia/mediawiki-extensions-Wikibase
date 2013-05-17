@@ -6,8 +6,11 @@
  *
  * External dependencies:
  * - jQuery 1.8
- * - jQuery.eachchange (maintained by wikidata team)
- * - jQuery.inputAutoExpand (maintained by wikidata team)
+ * - jQuery.eachchange
+ * - jQuery.inputAutoExpand
+ * - jQuery.ui.suggester
+ * - jQuery.time.timeinput
+ * - jQuery.ui.toggler
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
