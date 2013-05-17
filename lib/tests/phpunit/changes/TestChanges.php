@@ -103,6 +103,12 @@ final class TestChanges {
 			$changes['item-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $old, null );
 
 			// -----
+
+			//FIXME: EntityChange::newFromUpdate causes Item::getSiteLinks to be called,
+			//       which uses SiteLink::newFromText, which in turn uses the Sites singleton
+			//       which relies on the database. This is inconsistent with the Site objects
+			//       generated here, or elsewhere in test cases.
+
 			$link = self::makeSiteLink( 'dewiki', "Dummy" );
 			$new->addSiteLink( $link, 'add' );
 			$changes['set-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
