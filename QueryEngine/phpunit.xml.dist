@@ -14,7 +14,8 @@
          verbose="true">
     <testsuites>
         <testsuite name="QueryEngine">
-            <directory>tests</directory>
+            <directory>tests/phpunit</directory>
+            <exclude>tests/integration</exclude>
         </testsuite>
     </testsuites>
 </phpunit>
