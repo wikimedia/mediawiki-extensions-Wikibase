@@ -131,6 +131,7 @@ class StoreConfig {
 	public function getEntityTypeMap() {
 		return array(
 			'item' => 0,
+			'property' => 1,
 		);
 	}
 
