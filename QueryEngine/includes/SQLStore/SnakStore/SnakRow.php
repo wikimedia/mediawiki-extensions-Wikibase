@@ -33,16 +33,19 @@ abstract class SnakRow {
 	protected $internalPropertyId;
 	protected $internalClaimId;
 	protected $snakRole;
+	protected $internalSubjectId;
 
 	/**
 	 * @param int $internalPropertyId
 	 * @param int $internalClaimId
 	 * @param int $snakRole
+	 * @param int $internalSubjectId
 	 */
-	public function __construct( $internalPropertyId, $internalClaimId, $snakRole ) {
+	public function __construct( $internalPropertyId, $internalClaimId, $snakRole, $internalSubjectId ) {
 		$this->internalPropertyId = $internalPropertyId;
 		$this->internalClaimId = $internalClaimId;
 		$this->snakRole = $snakRole;
+		$this->internalSubjectId = $internalSubjectId;
 	}
 
 	/**
@@ -64,6 +67,13 @@ abstract class SnakRow {
 	 */
 	public function getSnakRole() {
 		return $this->snakRole;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getInternalSubjectId() {
+		return $this->internalSubjectId;
 	}
 
 }

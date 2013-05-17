@@ -37,9 +37,10 @@ class ValueSnakRow extends SnakRow {
 	 * @param int $internalPropertyId
 	 * @param int $internalClaimId
 	 * @param int $snakRole
+	 * @param $internalSubjectId
 	 */
-	public function __construct( DataValue $value, $internalPropertyId, $internalClaimId, $snakRole ) {
-		parent::__construct( $internalPropertyId, $internalClaimId, $snakRole );
+	public function __construct( DataValue $value, $internalPropertyId, $internalClaimId, $snakRole, $internalSubjectId ) {
+		parent::__construct( $internalPropertyId, $internalClaimId, $snakRole, $internalSubjectId );
 
 		$this->value = $value;
 	}

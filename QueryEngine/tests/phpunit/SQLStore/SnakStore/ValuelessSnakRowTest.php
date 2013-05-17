@@ -43,14 +43,16 @@ class ValuelessSnakRowTest extends \PHPUnit_Framework_TestCase {
 			ValuelessSnakRow::TYPE_NO_VALUE,
 			9001,
 			31337,
-			SnakRole::MAIN_SNAK
+			SnakRole::MAIN_SNAK,
+			321
 		);
 
 		$argLists[] = array(
 			ValuelessSnakRow::TYPE_SOME_VALUE,
 			9002,
 			1337,
-			SnakRole::QUALIFIER
+			SnakRole::QUALIFIER,
+			123
 		);
 
 		return $argLists;
@@ -59,13 +61,14 @@ class ValuelessSnakRowTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider constructorProvider
 	 */
-	public function testConstructor( $internalSnakType, $internalPropertyId, $internalClaimId, $snakRole ) {
-		$snakRow = new ValuelessSnakRow( $internalSnakType, $internalPropertyId, $internalClaimId, $snakRole );
+	public function testConstructor( $internalSnakType, $internalPropertyId, $internalClaimId, $snakRole, $internalSubjectId ) {
+		$snakRow = new ValuelessSnakRow( $internalSnakType, $internalPropertyId, $internalClaimId, $snakRole, $internalSubjectId );
 
 		$this->assertEquals( $internalPropertyId, $snakRow->getInternalPropertyId() );
 		$this->assertEquals( $internalClaimId, $snakRow->getInternalClaimId() );
 		$this->assertEquals( $snakRole, $snakRow->getSnakRole() );
 		$this->assertEquals( $internalSnakType, $snakRow->getInternalSnakType() );
+		$this->assertEquals( $internalSubjectId, $snakRow->getInternalSubjectId() );
 	}
 
 }

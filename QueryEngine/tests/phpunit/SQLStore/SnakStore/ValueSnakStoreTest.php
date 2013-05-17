@@ -90,28 +90,32 @@ class ValueSnakStoreTest extends SnakStoreTest {
 			ValuelessSnakRow::TYPE_NO_VALUE,
 			1,
 			1,
-			SnakRole::QUALIFIER
+			SnakRole::QUALIFIER,
+			1
 		) );
 
 		$argLists[] = array( new ValuelessSnakRow(
 			ValuelessSnakRow::TYPE_NO_VALUE,
 			1,
 			1,
-			SnakRole::MAIN_SNAK
+			SnakRole::MAIN_SNAK,
+			1
 		) );
 
 		$argLists[] = array( new ValuelessSnakRow(
 			ValuelessSnakRow::TYPE_SOME_VALUE,
 			1,
 			1,
-			SnakRole::QUALIFIER
+			SnakRole::QUALIFIER,
+			1
 		) );
 
 		$argLists[] = array( new ValuelessSnakRow(
 			ValuelessSnakRow::TYPE_SOME_VALUE,
 			1,
 			1,
-			SnakRole::MAIN_SNAK
+			SnakRole::MAIN_SNAK,
+			1
 		) );
 
 		$argLists[] = array( new ValueSnakRow(

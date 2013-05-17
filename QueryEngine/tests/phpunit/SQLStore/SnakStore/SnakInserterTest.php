@@ -76,7 +76,7 @@ class SnakInserterTest extends \PHPUnit_Framework_TestCase {
 
 		$snakInserter = $this->newInstance( $queryInterface );
 
-		$snakInserter->insertSnak( $snak, SnakRole::MAIN_SNAK, 9001 );
+		$snakInserter->insertSnak( $snak, SnakRole::MAIN_SNAK, 9001, 123 );
 	}
 
 	protected function newInstance( QueryInterface $queryInterface ) {

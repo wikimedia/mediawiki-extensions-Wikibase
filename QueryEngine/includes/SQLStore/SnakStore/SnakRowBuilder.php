@@ -50,32 +50,34 @@ class SnakRowBuilder {
 	 * @param Snak $snak
 	 * @param int $snakRole
 	 * @param int $internalClaimId
+	 * @param int $internalSubjectId
 	 *
 	 * @return SnakRow
 	 * @throws InvalidArgumentException
 	 */
-	public function newSnakRow( Snak $snak, $snakRole, $internalClaimId ) {
+	public function newSnakRow( Snak $snak, $snakRole, $internalClaimId, $internalSubjectId ) {
 		if ( $snak instanceof PropertyValueSnak ) {
-			return $this->newValueSnakRow( $snak, $snakRole, $internalClaimId );
+			return $this->newValueSnakRow( $snak, $snakRole, $internalClaimId, $internalSubjectId );
 		}
 
 		if ( $snak instanceof PropertySomeValueSnak || $snak instanceof PropertyNoValueSnak ) {
-			return $this->newValuelessSnakRow( $snak, $snakRole, $internalClaimId );
+			return $this->newValuelessSnakRow( $snak, $snakRole, $internalClaimId, $internalSubjectId );
 		}
 
 		throw new InvalidArgumentException( 'Got a snak type no supported by the SnakRowBuilder' );
 	}
 
-	protected function newValueSnakRow( PropertyValueSnak $snak, $snakRole, $internalClaimId ) {
+	protected function newValueSnakRow( PropertyValueSnak $snak, $snakRole, $internalClaimId, $internalSubjectId ) {
 		return new ValueSnakRow(
 			$snak->getDataValue(),
 			$this->getInternalIdFor( $snak->getPropertyId() ),
 			$internalClaimId,
-			$snakRole
+			$snakRole,
+			$internalSubjectId
 		);
 	}
 
-	protected function newValuelessSnakRow( Snak $snak, $snakRole, $internalClaimId ) {
+	protected function newValuelessSnakRow( Snak $snak, $snakRole, $internalClaimId, $internalSubjectId ) {
 		$internalSnakType = $snak instanceof PropertySomeValueSnak
 			? ValuelessSnakRow::TYPE_SOME_VALUE : ValuelessSnakRow::TYPE_NO_VALUE;
 
@@ -83,7 +85,8 @@ class SnakRowBuilder {
 			$internalSnakType,
 			$this->getInternalIdFor( $snak->getPropertyId() ),
 			$internalClaimId,
-			$snakRole
+			$snakRole,
+			$internalSubjectId
 		);
 	}
 

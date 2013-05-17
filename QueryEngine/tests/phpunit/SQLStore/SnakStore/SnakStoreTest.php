@@ -55,21 +55,24 @@ abstract class SnakStoreTest extends \PHPUnit_Framework_TestCase {
 			ValuelessSnakRow::TYPE_NO_VALUE,
 			1,
 			2,
-			SnakRole::QUALIFIER
+			SnakRole::QUALIFIER,
+			3
 		) );
 
 		$argLists[] = array( new ValuelessSnakRow(
 			ValuelessSnakRow::TYPE_SOME_VALUE,
 			3,
 			4,
-			SnakRole::MAIN_SNAK
+			SnakRole::MAIN_SNAK,
+			5
 		) );
 
 		$argLists[] = array( new ValueSnakRow(
 			new StringValue( '~=[,,_,,]:3' ),
 			42,
 			31337,
-			SnakRole::MAIN_SNAK
+			SnakRole::MAIN_SNAK,
+			9001
 		) );
 
 		return $argLists;

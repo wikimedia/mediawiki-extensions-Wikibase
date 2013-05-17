@@ -40,15 +40,16 @@ class ValuelessSnakRow extends SnakRow {
 	 * @param int $internalPropertyId
 	 * @param int $internalClaimId
 	 * @param int $snakRole
+	 * @param int $internalSubjectId
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $internalSnakType, $internalPropertyId, $internalClaimId, $snakRole ) {
+	public function __construct( $internalSnakType, $internalPropertyId, $internalClaimId, $snakRole, $internalSubjectId ) {
 		if ( !in_array( $internalSnakType, array( self::TYPE_NO_VALUE, self::TYPE_SOME_VALUE ), true ) ) {
 			throw new InvalidArgumentException( 'Invalid internal snak type provided' );
 		}
 
-		parent::__construct( $internalPropertyId, $internalClaimId, $snakRole );
+		parent::__construct( $internalPropertyId, $internalClaimId, $snakRole, $internalSubjectId );
 
 		$this->internalSnakType = $internalSnakType;
 	}
