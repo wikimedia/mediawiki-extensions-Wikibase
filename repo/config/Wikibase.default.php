@@ -30,6 +30,7 @@
  */
 
 return call_user_func( function() {
+	global $wgSquidMaxage;
 
 	$defaults = array(
 
@@ -72,6 +73,10 @@ return call_user_func( function() {
 
 		// Should the page names (titles) be normalized against the external site
 		'normalizeItemByTitlePageNames' => false,
+
+		// Number of seconds for which data output shall be cached.
+		// Note: keep that low, because such caches can not always be purged easily.
+		'dataSquidMaxage' => $wgSquidMaxage,
 	);
 
 	return $defaults;
