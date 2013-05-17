@@ -126,6 +126,7 @@ class ValuelessSnakStoreTest extends SnakStoreTest {
 					array(
 						'claim_id' => $snakRow->getInternalClaimId(),
 						'property_id' => $snakRow->getInternalPropertyId(),
+						'subject_id' => $snakRow->getInternalSubjectId(),
 						'snak_type' => $snakRow->getInternalSnakType(),
 						'snak_role' => $snakRow->getSnakRole(),
 					)

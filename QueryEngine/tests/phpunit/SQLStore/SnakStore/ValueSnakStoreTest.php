@@ -141,7 +141,16 @@ class ValueSnakStoreTest extends SnakStoreTest {
 			->method( 'insert' )
 			->with(
 				$this->equalTo( 'strings_of_doom' ),
-				$this->equalTo( $stringHandler->getInsertValues( $snakRow->getValue() ) )
+				$this->equalTo(
+					array_merge(
+						array(
+							'claim_id' => $snakRow->getInternalClaimId(),
+							'property_id' => $snakRow->getInternalPropertyId(),
+							'subject_id' => $snakRow->getInternalSubjectId(),
+						),
+						$stringHandler->getInsertValues( $snakRow->getValue() )
+					)
+				)
 			);
 
 		$store = new ValueSnakStore(

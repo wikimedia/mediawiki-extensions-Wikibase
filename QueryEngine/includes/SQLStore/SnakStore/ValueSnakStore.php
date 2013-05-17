@@ -80,9 +80,20 @@ class ValueSnakStore extends SnakStore {
 		 */
 		$dataValueHandler = $this->getDataValueHandler( $snakRow->getValue()->getType() );
 
-		$this->queryInterface->insert(
-			$dataValueHandler->getDataValueTable()->getTableDefinition()->getName(),
+		$tableName = $dataValueHandler->getDataValueTable()->getTableDefinition()->getName();
+
+		$insertValues = array_merge(
+			array(
+				'claim_id' => $snakRow->getInternalClaimId(),
+				'property_id' => $snakRow->getInternalPropertyId(),
+				'subject_id' => $snakRow->getInternalSubjectId(),
+			),
 			$dataValueHandler->getInsertValues( $snakRow->getValue() )
+		);
+
+		$this->queryInterface->insert(
+			$tableName,
+			$insertValues
 		);
 	}
 
