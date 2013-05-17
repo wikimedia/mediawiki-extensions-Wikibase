@@ -66,4 +66,21 @@ class StoreConfigTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $tablePrefix, $instance->getTablePrefix(), 'Table prefix got set correctly' );
 	}
 
+	public function testSetPropertyDataValueTypeLookup() {
+		$instance = new StoreConfig( 'foo', 'bar', array() );
+
+		$lookup = $this->getMock( 'Wikibase\QueryEngine\SQLStore\PropertyDataValueTypeLookup' );
+
+		$instance->setPropertyDataValueTypeLookup( $lookup );
+
+		$this->assertEquals( $lookup, $instance->getPropertyDataValueTypeLookup() );
+	}
+
+	public function testSetPropertyDataValueTypeLookupNotSet() {
+		$instance = new StoreConfig( 'foo', 'bar', array() );
+
+		$this->setExpectedException( 'Exception' );
+		$instance->getPropertyDataValueTypeLookup();
+	}
+
 }

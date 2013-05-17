@@ -62,6 +62,13 @@ class StoreConfig {
 	/**
 	 * @since 0.1
 	 *
+	 * @var PropertyDataValueTypeLookup|null
+	 */
+	protected $propertyDataValueTypeLookup = null;
+
+	/**
+	 * @since 0.1
+	 *
 	 * @param string $storeName
 	 * @param string $tablePrefix
 	 * @param DataValueHandler[] $dataValueHandlers
@@ -70,6 +77,21 @@ class StoreConfig {
 		$this->name = $storeName;
 		$this->tablePrefix = $tablePrefix;
 		$this->dvHandlers = $dataValueHandlers;
+	}
+
+	public function setPropertyDataValueTypeLookup( PropertyDataValueTypeLookup $lookup ) {
+		$this->propertyDataValueTypeLookup = $lookup;
+	}
+
+	/**
+	 * @return PropertyDataValueTypeLookup
+	 */
+	public function getPropertyDataValueTypeLookup() {
+		if ( $this->propertyDataValueTypeLookup === null ) {
+			throw new \Exception( 'setPropertyDataValueTypeLookup has not been called yet' );
+		}
+
+		return $this->propertyDataValueTypeLookup;
 	}
 
 	/**
