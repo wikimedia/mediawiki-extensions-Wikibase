@@ -35,18 +35,6 @@ if ( !defined( 'WBL_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 
 global $wgHooks;
 
-$wgHooks['WikibaseDefaultSettings'][]	= function( array &$settings ) {
-	$settings['dataTypes'] = array_merge( $settings['dataTypes'], array(
-		'geo-coordinate',
-		'quantity',
-		'monolingual-text',
-		'multilingual-text',
-		'time',
-	) );
-
-	return true;
-};
-
 $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreStart
 	$testFiles = array(
@@ -60,5 +48,8 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	return true;
 	// @codeCoverageIgnoreEnd
 };
+
+//NOTE: any experimental default settings need to go into the
+//      appropriate section of WikibaseLib.defaults.php.
 
 
