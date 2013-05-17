@@ -119,6 +119,26 @@ class SnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEmpty( $formatted );
 	}
 
+	/**
+	 * @dataProvider formatPropertyNotFoundProvider
+	 */
+	public function testFormatSnaksPropertyNotFound( $snak ) {
+		$formatter = $this->newFormatter();
+
+		$this->assertEquals( array( '' ), $formatter->formatSnaks( array( $snak ), 'de' ) );
+	}
+
+	public function formatPropertyNotFoundProvider() {
+		return array(
+			array(
+				new PropertyValueSnak(
+					new EntityId( Property::ENTITY_TYPE, 9000 ),
+					new StringValue( 'xyz' )
+				)
+			)
+		);
+	}
+
 	private function getStrings() {
 		return array(
 			'',
