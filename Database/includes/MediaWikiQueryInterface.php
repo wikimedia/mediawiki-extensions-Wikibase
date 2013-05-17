@@ -178,6 +178,7 @@ class MediaWikiQueryInterface implements QueryInterface {
 	 * @param array $conditions
 	 *
 	 * @return ResultIterator
+	 * @throws SelectFailedException
 	 */
 	public function select( $tableName, array $fields, array $conditions ) {
 		$selectionResult = $this->getDB()->select(
@@ -191,7 +192,7 @@ class MediaWikiQueryInterface implements QueryInterface {
 			return new ResultIterator( iterator_to_array( $selectionResult ) );
 		}
 
-		// TODO: throw
+		throw new SelectFailedException( $tableName, $fields, $conditions );
 	}
 
 }
