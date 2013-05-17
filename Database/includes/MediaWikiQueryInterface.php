@@ -82,10 +82,14 @@ class MediaWikiQueryInterface implements QueryInterface {
 	 *
 	 * @param TableDefinition $table
 	 *
-	 * @return boolean Success indicator
+	 * @throws TableCreationFailedException
 	 */
 	public function createTable( TableDefinition $table ) {
-		return $this->extendedAbstraction->createTable( $table );
+		$success = $this->extendedAbstraction->createTable( $table );
+
+		if ( $success !== true ) {
+			throw new TableCreationFailedException( $table );
+		}
 	}
 
 	/**

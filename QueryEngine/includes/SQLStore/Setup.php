@@ -5,6 +5,7 @@ namespace Wikibase\QueryEngine\SQLStore;
 use MessageReporter;
 use Wikibase\Database\FieldDefinition;
 use Wikibase\Database\QueryInterface;
+use Wikibase\Database\QueryInterfaceException;
 use Wikibase\Database\TableBuilder;
 use Wikibase\Database\TableDefinition;
 
@@ -104,36 +105,31 @@ class Setup {
 	 * Install the store.
 	 *
 	 * @since 0.1
-	 *
-	 * @return boolean Success indicator
 	 */
 	public function install() {
 		$this->report( 'Starting install of ' . $this->config->getStoreName() );
 
-		$success = $this->setupTables();
+		try {
+			$this->setupTables();
+		}
+		catch ( QueryInterfaceException $exception ) {
+			// TODO: throw exception of proper type
+		}
 
 		// TODO: initialize basic content
 
 		$this->report( 'Finished install of ' . $this->config->getStoreName() );
-
-		return $success;
 	}
 
 	/**
 	 * Sets up the tables of the store.
 	 *
 	 * @since 0.1
-	 *
-	 * @return boolean Success indicator
 	 */
 	private function setupTables() {
-		$success = true;
-
 		foreach ( $this->storeSchema->getTables() as $table ) {
-			$success = $this->tableBuilder->createTable( $table ) && $success;
+			$this->tableBuilder->createTable( $table );
 		}
-
-		return $success;
 	}
 
 	/**

@@ -104,7 +104,32 @@ class MediaWikiQueryInterfaceTest extends \PHPUnit_Framework_TestCase {
 
 		$extendedAbstraction->expects( $this->once() )
 			->method( 'createTable' )
-			->with( $this->equalTo( $table ) );
+			->with( $this->equalTo( $table ) )
+			->will( $this->returnValue( true ) );
+
+		$queryInterface->createTable( $table );
+	}
+
+	/**
+	 * @dataProvider tableProvider
+	 *
+	 * @param TableDefinition $table
+	 */
+	public function testCreateTableFailure( TableDefinition $table ) {
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
+
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
+		);
+
+		$extendedAbstraction->expects( $this->once() )
+			->method( 'createTable' )
+			->will( $this->returnValue( false ) );
+
+		$this->setExpectedException( 'Wikibase\Database\TableCreationFailedException' );
 
 		$queryInterface->createTable( $table );
 	}
