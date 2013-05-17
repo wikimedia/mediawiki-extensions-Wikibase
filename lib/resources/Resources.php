@@ -83,7 +83,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase',
 				'wikibase.utilities',
-				'dataValues.values', // DataValues extension
+				'mw.ext.dataValues', // DataValues extension
 				'dataTypes', // DataTypes extension
 			)
 		),
