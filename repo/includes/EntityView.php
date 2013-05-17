@@ -496,7 +496,7 @@ abstract class EntityView extends \ContextSource {
 
 				// TODO: bad to have a switch for different data types here
 				if( $value instanceof \DataValues\TimeValue ) {
-					$value = $value->getTime();
+					$value = $value->getTime() . ' (' . $value->getCalendarModel() . ')';
 				}
 
 				$additionalCssClasses = '';
