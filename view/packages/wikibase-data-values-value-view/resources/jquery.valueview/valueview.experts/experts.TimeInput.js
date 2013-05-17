@@ -115,7 +115,14 @@
 			.on(
 				'listrotatorauto.' + this.uiBaseClass + ' listrotatorselected.' + this.uiBaseClass,
 				function( event ) {
-					var value = self._updateValue( { precision: undefined } );
+					var overwrite = {};
+
+					if( event.type === 'listrotatorauto' ) {
+						overwrite.precision = undefined;
+					}
+
+					var value = self._updateValue( overwrite );
+
 					if( event.type === 'listrotatorauto' ) {
 						$( this ).data( 'listrotator' ).rotate( value.precision() );
 					}
@@ -136,7 +143,14 @@
 			.on(
 				'listrotatorauto.' + this.uiBaseClass + ' listrotatorselected.' + this.uiBaseClass,
 				function( event ) {
-					var value = self._updateValue( { calendarname: undefined } );
+					var overwrite = {};
+
+					if( event.type === 'listrotatorauto' ) {
+						overwrite.calendarname = undefined;
+					}
+
+					var value = self._updateValue( overwrite );
+
 					if( event.type === 'listrotatorauto' ) {
 						$( this ).data( 'listrotator' ).rotate( value.calendarText() );
 					}
@@ -220,7 +234,7 @@
 		},
 
 		/**
-		 * Builds a time.Time object from the widet's current input and advanced adjustments.
+		 * Builds a time.Time object from the widget's current input and advanced adjustments.
 		 *
 		 * @param {Object} [overwrites] Values that should be used instead of the ones picked from
 		 *        the input elements.
