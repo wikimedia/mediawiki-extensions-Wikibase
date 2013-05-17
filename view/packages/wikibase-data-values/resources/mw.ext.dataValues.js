@@ -11,20 +11,16 @@
 mediaWiki.ext = mediaWiki.ext || {};
 
 /**
- * Object representing the MeidaWiki "DataValues" extension.
+ * Object representing the MediaWiki "DataValues" extension.
  *
  * @since 0.1
  */
-mediaWiki.ext.dataValues = ( function( mw, dataValues, time ) {
+mediaWiki.ext.dataValues = ( function( mw, dataValues, time, $ ) {
 	'use strict';
 
 	return new ( function MwExtDataValues() {
-		// Make sure time parser works without confusing user (consider user's interface language).
-		// Source: http://en.wikipedia.org/wiki/Date_format_by_country
-		var userLang = mw.config.get( 'wgUserLanguage' ),
-			monthBeforeDayLanguages = [ 'en' ]; // NOTE: add "Palau" if it gets supported by MW
-
-		time.settings.daybeforemonth = $.inArray( userLang, monthBeforeDayLanguages ) === -1;
+		time.settings.daybeforemonth = getDayBeforeMonthTimeSettingFromMWContext();
+		time.settings.monthnames = getMonthNameTimeSettingsFromMWContext();
 
 		// TODO: think of a better way to manage options. This only works because we load the whole
 		//  "dataValues.values" module which will result into "time.js" being loaded which results
@@ -32,4 +28,51 @@ mediaWiki.ext.dataValues = ( function( mw, dataValues, time ) {
 		//  is required, we could not define its global setting at this entry point!
 	} )();
 
-}( mediaWiki, dataValues, time ) );
+	/**
+	 * Returns whether the language used in MediaWiki prefers the day before the month in its
+	 * numerical date notation.
+	 *
+	 * @return {boolean}
+	 */
+	function getDayBeforeMonthTimeSettingFromMWContext() {
+		// Make sure time parser works without confusing user (consider user's interface language).
+		// Source: http://en.wikipedia.org/wiki/Date_format_by_country
+		var userLang = mw.config.get( 'wgUserLanguage' ),
+			monthBeforeDayLanguages = [ 'en' ]; // NOTE: add "Palau" if it gets supported by MW
+
+		return $.inArray( userLang, monthBeforeDayLanguages ) === -1;
+	}
+
+	/**
+	 * Returns an array of arrays where each holds different string representations of a month
+	 * name. Considers the MediaWiki user's interface language.
+	 *
+	 * @return {string[][]}
+	 */
+	function getMonthNameTimeSettingsFromMWContext() {
+		function monthNames( shortNameKey, longNameKey ) {
+			var short = mw.msg( shortNameKey ),
+				long = mw.msg( longNameKey );
+
+			if( short && short !== long ) {
+				return [ long, short ];
+			}
+			return [ long ];
+		}
+		return [
+			monthNames( 'jan', 'january' ),
+			monthNames( 'feb', 'february' ),
+			monthNames( 'mar', 'march' ),
+			monthNames( 'apr', 'april' ),
+			monthNames( 'may', 'may_long' ),
+			monthNames( 'jun', 'june' ),
+			monthNames( 'jul', 'july' ),
+			monthNames( 'aug', 'august' ),
+			monthNames( 'sep', 'september' ),
+			monthNames( 'oct', 'october' ),
+			monthNames( 'nov', 'november' ),
+			monthNames( 'dec', 'december' )
+		];
+	}
+
+}( mediaWiki, dataValues, time, jQuery ) );

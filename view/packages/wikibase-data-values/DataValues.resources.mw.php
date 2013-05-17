@@ -44,6 +44,20 @@ return call_user_func( function() {
 				// load all values. TODO: this is bad but the system is not as advanced as ValueView yet.
 				'dataValues.values'
 			),
+			'messages' => array(
+				'jan', 'january',
+				'feb', 'february',
+				'mar', 'march',
+				'apr', 'april',
+				'may', 'may_long',
+				'jun', 'june',
+				'jul', 'july',
+				'aug', 'august',
+				'sep', 'september',
+				'oct', 'october',
+				'nov', 'november',
+				'dec', 'december',
+			)
 		),
 
 		// Dependencies required by "DataValues" library:
