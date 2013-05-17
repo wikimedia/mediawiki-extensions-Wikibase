@@ -35,7 +35,6 @@ if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 			$_SERVER['argv'],
 			array(
 				'--group', 'Diff,Ask,DataValueExtensions,WikibaseClient,WikibaseLib',
-				'--exclude-group', 'ChangeHandlerTest',
 			)
 		);
 	break;
