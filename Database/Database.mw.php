@@ -32,20 +32,14 @@ if ( !defined( 'WIKIBASE_DATABASE_VERSION' ) ) {
 	die( 'Not an entry point.' );
 }
 
-global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks;
+global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks;
 
 //$wgExtensionCredits['other'][] = include( __DIR__ . '/DataModel.credits.php' );
 
 //$wgExtensionMessagesFiles['WikibaseDataModel'] = __DIR__ . '/DataModel.i18n.php';
 
-// Autoloading
-foreach ( include( __DIR__ . '/Database.classes.php' ) as $class => $file ) {
-	$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
-}
-
 if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-	$wgAutoloadClasses['Wikibase\Test\Database\MWDB\ExtendedAbstractionTest']
-		= __DIR__ . '/tests/phpunit/MWDB/ExtendedAbstractionTest.php';
+	require_once __DIR__ . '/tests/testLoader.php';
 }
 
 /**
