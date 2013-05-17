@@ -70,6 +70,9 @@
 	} );
 
 	QUnit.test( 'Equality of Time objects constructed by object/string', function( assert ) {
+		// TODO: get rid of this once we can use a parser instance with injected options
+		var dbmStateBefore = time.settings.daybeforemonth = true;
+
 		var equalTimeObjects = {};
 		$.each( validTimeDefinitions, function( name, definition ) {
 			equalTimeObjects[ name ] = {
@@ -87,6 +90,8 @@
 					'object definition are equal'
 			);
 		} );
+
+		time.settings.daybeforemonth = dbmStateBefore; // reset state of evil global setting
 	} );
 
 }( QUnit, jQuery, time ) );

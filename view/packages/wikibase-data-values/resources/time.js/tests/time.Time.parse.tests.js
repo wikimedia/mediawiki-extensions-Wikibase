@@ -21,6 +21,9 @@
 	} );
 
 	QUnit.test( 'random parsing', function( assert ) {
+		// TODO: get rid of this once we can use a parser instance with injected options
+		var dbmStateBefore = time.settings.daybeforemonth = true;
+
 		$.each( times, function( timeInput, exptectedTimeDefinition ) {
 			var parsedTime,
 				timeObject;
@@ -41,6 +44,8 @@
 				);
 			}
 		} );
+
+		time.settings.daybeforemonth = dbmStateBefore; // reset state of evil global setting
 	} );
 
 }( QUnit, jQuery, time.Time, time.validTimeDefinitions ) );
