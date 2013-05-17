@@ -1,6 +1,9 @@
 /**
  * time.js's Time constructor for parsing and representing a time.
  *
+ * @dependency jQuery
+ * TODO: get rid of heavy jQuery dependency
+ *
  * @since 0.1
  * @file
  * @ingroup Time.js
@@ -9,7 +12,7 @@
  * @author Denny Vrandečić
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-time.Time = ( function( time ) {
+time.Time = ( function( time, $ ) {
 	'use strict';
 
 	/**
@@ -202,4 +205,4 @@ time.Time = ( function( time ) {
 
 	return Time; // expose time.Time
 
-}( time ) );
+}( time, jQuery ) );

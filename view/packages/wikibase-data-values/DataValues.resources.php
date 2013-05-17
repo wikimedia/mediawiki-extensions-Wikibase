@@ -91,6 +91,9 @@ return call_user_func( function() {
 				'time.js/src/time.js',
 				'time.js/src/time.Time.js',
 				'time.js/src/time.Time.parse.js',
+			),
+			'dependencies' => array(
+				'jquery',
 			)
 		),
 
