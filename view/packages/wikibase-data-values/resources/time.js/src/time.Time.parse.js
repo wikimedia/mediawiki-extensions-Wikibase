@@ -1,6 +1,11 @@
 /**
  * time.js's Time parser.
  *
+ * @since 0.1
+ * @file
+ * @ingroup Time.js
+ * @licence GNU GPL v2+
+ *
  * @author Denny Vrandečić
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
