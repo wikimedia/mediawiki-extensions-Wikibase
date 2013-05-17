@@ -31,6 +31,8 @@ namespace Wikibase\QueryEngine\SQLStore;
 interface InternalEntityIdFinder {
 
 	/**
+	 * TODO: taking an EntityId would be a lot more convenient
+	 *
 	 * @param string $entityType
 	 * @param int $entityNumber
 	 *

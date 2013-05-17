@@ -10,6 +10,7 @@ use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\QueryEngine\SQLStore\DataValueTable;
+use Wikibase\QueryEngine\SQLStore\EntityIdTransformer;
 use Wikibase\QueryEngine\SQLStore\EntityInserter;
 
 /**
@@ -61,10 +62,25 @@ class EntityInserterTest extends \PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$claimInserter->expects( $this->exactly( count( $entity->getClaims() ) ) )
+		$invocationMocker = $claimInserter->expects( $this->exactly( count( $entity->getClaims() ) ) )
 			->method( 'insertClaim' );
 
-		$inserter = new EntityInserter( $entityTable, $claimInserter );
+		// The 'with' constraints fail if the method is not invoked,
+		// so we can only add them when there are claims.
+		if ( count( $entity->getClaims() ) > 0 ) {
+			$invocationMocker->with(
+				$this->anything(),
+				$this->equalTo( 1234 )
+			);
+		}
+
+		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' );
+
+		$idFinder->expects( $this->any() )
+			->method( 'getInternalIdForEntity' )
+			->will( $this->returnValue( 1234 ) );
+
+		$inserter = new EntityInserter( $entityTable, $claimInserter, $idFinder );
 
 		$inserter->insertEntity( $entity );
 	}
