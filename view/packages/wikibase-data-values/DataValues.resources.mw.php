@@ -1,12 +1,7 @@
 <?php
 /**
  * Definition of "DataValues" resourceloader modules.
- * When included this returns an array with all modules introduced by the "DataValues" JavaScript
- * module.
- *
- * External dependencies:
- * - jQuery 1.8
- * - time.js
+ * When included this returns an array with all the modules introduced by "DataValues" extension.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,53 +35,41 @@ return call_user_func( function() {
 		'remoteExtPath' =>  'DataValues/DataValues/resources',
 	);
 
-	return array(
-		'dataValues' => $moduleTemplate + array(
+	$mwVvResources = array(
+		// time.js
+		'time.js' => $moduleTemplate + array(
 			'scripts' => array(
-				'dataValues.js',
+				'time.js/src/time.js',
+				'time.js/src/time.Time.js',
+				'time.js/src/time.Time.validate.js',
+				'time.js/src/time.Time.parse.js',
+			),
+			'dependencies' => array(
+				'jquery',
 			),
 		),
 
-		'dataValues.DataValue' => $moduleTemplate + array(
+		'time.js.validTimeDefinitions' => $moduleTemplate + array(
 			'scripts' => array(
-				'DataValue.js',
+				'time.js/tests/time.validTimeDefinitions.js', // example times for testing purposes
 			),
 			'dependencies' => array(
-				'dataValues',
-				'dataValues.util',
+				'time.js',
 			),
 		),
 
-		'dataValues.values' => $moduleTemplate + array(
+		// qunit-parameterize from https://github.com/AStepaniuk/qunit-parameterize
+		'qunit.parameterize' => $moduleTemplate + array(
 			'scripts' => array(
-				// Note: The order here is relevant, scripts should be places after the ones they
-				//  depend on.
-				// TODO: Make one module per data value type.
-				'values/BoolValue.js',
-				'values/MonolingualTextValue.js',
-				'values/MultilingualTextValue.js',
-				'values/StringValue.js',
-				'values/NumberValue.js',
-				'values/TimeValue.js',
-				'values/UnknownValue.js',
+				'qunit.parameterize/qunit.parameterize.js',
 			),
 			'dependencies' => array(
-				'dataValues.DataValue',
-				'time.js' // required by TimeValue
-			),
-		),
-
-		'dataValues.util' => $moduleTemplate + array(
-			'scripts' => array(
-				'dataValues.util.js',
-				'dataValues.util.inherit.js',
-				'dataValues.util.Notify.js',
-			),
-			'dependencies' => array(
-				'dataValues',
+				'jquery.qunit',
 			),
 		),
 	);
 
+	// return "DataValue" module's native resources plus those required by the MW extension:
+	return $mwVvResources + include( __DIR__ . '/DataValues.resources.php' );
 } );
 // @codeCoverageIgnoreEnd

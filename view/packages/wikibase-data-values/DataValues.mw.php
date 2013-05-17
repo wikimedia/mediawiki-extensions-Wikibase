@@ -125,5 +125,5 @@ $wgHooks['ExtensionTypes'][] = function( array &$extensionTypes ) {
 // Resource Loader module registration
 $wgResourceModules = array_merge(
 	$wgResourceModules,
-	include( __DIR__ . '/DataValues.resources.php' )
+	include( __DIR__ . '/DataValues.resources.mw.php' )
 );
