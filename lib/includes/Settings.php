@@ -30,7 +30,6 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
  */
 class Settings extends SettingsArray {
 
@@ -45,65 +44,22 @@ class Settings extends SettingsArray {
 		static $instance = null;
 
 		if ( $instance === null ) {
-			$instance = new static();
-			$instance->initFromGlobals();
+			$settings = array();
+
+			if ( defined( 'WB_VERSION' ) ) {
+				$settings = array_merge( $settings, $GLOBALS['wgWBRepoSettings'] );
+			}
+
+			if ( defined( 'WBC_VERSION' ) ) {
+				$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
+			}
+
+			$settings = array_merge( $settings, $GLOBALS['wgWBSettings'] );
+
+			$instance = new static( $settings );
 		}
 
 		return $instance;
-	}
-
-	protected static function loadDefaults( $path ) {
-		$defaults = include( $path );
-
-		if ( !is_array( $defaults ) ) {
-			throw new \MWException( "Defaults file not found: $path" );
-		}
-
-		return $defaults;
-	}
-
-	/**
-	 * Initializes this Settings object from the global configuration variables.
-	 * Default settings are loaded from the appropriate files.
-	 * The hook WikibaseDefaultSettings can be used to manipulate the defaults.
-	 *
-	 * @since 0.4
-	 */
-	public function initFromGlobals() {
-		$settings = array();
-
-		// load appropriate defaults -------------------
-		if ( defined( 'WBL_VERSION' ) ) {
-			$settings = array_merge( $settings, self::loadDefaults( WBL_DIR . '/config/WikibaseLib.default.php' ) );
-		}
-
-		if ( defined( 'WB_VERSION' ) ) {
-			$settings = array_merge( $settings, self::loadDefaults( WB_DIR . '/config/Wikibase.default.php' ) );
-		}
-
-		if ( defined( 'WBC_VERSION' ) ) {
-			$settings = array_merge( $settings, self::loadDefaults( WBC_DIR . '/config/WikibaseClient.default.php' ) );
-		}
-
-		wfRunHooks( 'WikibaseDefaultSettings', array( &$settings ) );
-
-		// merge appropriate settings -------------------
-		if ( defined( 'WBL_VERSION' ) ) {
-			$settings = array_merge( $settings, $GLOBALS['wgWBSettings'] );
-		}
-
-		if ( defined( 'WB_VERSION' ) ) {
-			$settings = array_merge( $settings, $GLOBALS['wgWBRepoSettings'] );
-		}
-
-		if ( defined( 'WBC_VERSION' ) ) {
-			$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
-		}
-
-		// store
-		foreach ( $settings as $key => $value ) {
-			$this[$key] = $value;
-		}
 	}
 
 	/**

@@ -39,8 +39,6 @@ if ( !defined( 'WBL_VERSION' ) ) {
 define( 'WBC_VERSION', '0.4 alpha'
 	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
-define( 'WBC_DIR', __DIR__ );
-
 $wgExtensionCredits['wikibase'][] = array(
 	'path' => __DIR__,
 	'name' => 'Wikibase Client',
@@ -146,7 +144,7 @@ $wgWBClientStores['CachingSqlStore'] = 'Wikibase\CachingSqlStore';
 $wgWBClientStores['DirectSqlStore'] = 'Wikibase\DirectSqlStore';
 
 
-$wgWBClientSettings = array();
+include_once( $dir . 'config/WikibaseClient.default.php' );
 
 if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 	include_once( $dir . 'config/WikibaseClient.experimental.php' );
