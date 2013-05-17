@@ -97,7 +97,7 @@ class DescriptionMatchFinder {
 
 		$conditions = $this->getExtraConditions( $description, $dvHandler );
 
-		$conditions['property_id'] = $this->getInternalId( $propertyId );
+		//$conditions['property_id'] = $this->getInternalId( $propertyId );
 
 		$selectionResult = $this->queryInterface->select(
 			$dvHandler->getDataValueTable()->getTableDefinition()->getName(),
