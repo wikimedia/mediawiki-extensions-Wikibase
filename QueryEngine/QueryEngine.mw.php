@@ -91,6 +91,14 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';
 	}
 
+	$testFiles = array(
+		'SQLStore/Engine/DescriptionMatchFinderIntegrationTest',
+	);
+
+	foreach ( $testFiles as $file ) {
+		$files[] = __DIR__ . '/tests/integration/' . $file . '.php';
+	}
+
 	return true;
 	// @codeCoverageIgnoreEnd
 };
