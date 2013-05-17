@@ -1,0 +1,23 @@
+/**
+ * Default styles for input extender widget
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+
+.ui-inputextender .ui-inputextender-input {
+	display: inline;
+}
+
+.ui-inputextender .ui-inputextender-extender {
+	display: inline;
+}
+
+.ui-inputextender .ui-inputextender-contentcontainer {
+	position: absolute;
+	z-index: 1;
+	left: 2px;
+	font-size: 84%;
+	padding: 2px;
+	box-shadow: 2px 2px 6px -1px grey;
+}

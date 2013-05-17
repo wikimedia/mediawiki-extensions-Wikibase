@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
- * @event change: Triggered whenever the widget's value has changed.
+ * @event update: Triggered whenever the widget's value is updated.
  *        (1) {jQuery.Event}
  *        (2) {time.Time|null} New value (null for no or an invalid value) the widget's value has
  *            been changed to.
@@ -35,7 +35,7 @@
 				var value = self._parse();
 				if( value !== self._value ) {
 					self._value = value;
-					self._trigger( 'change', null, [self._value] );
+					self._trigger( 'update', null, [self._value] );
 				}
 			} );
 		},

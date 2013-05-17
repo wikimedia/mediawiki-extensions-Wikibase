@@ -34,7 +34,7 @@
 			);
 		};
 
-		$input.on( 'timeinputchange', function( event, value ) {
+		$input.on( 'timeinputupdate', function( event, value ) {
 			assertValue( value );
 		} );
 

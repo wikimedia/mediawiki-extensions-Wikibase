@@ -62,6 +62,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.inputextender.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.ui/jquery.ui.inputextender.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.ui.inputextender',
+			),
+		),
+
 		'jquery.ui.suggester.tests' => array(
 			'scripts' => array(
 				"$bp/jquery.ui/jquery.ui.suggester.tests.js",
