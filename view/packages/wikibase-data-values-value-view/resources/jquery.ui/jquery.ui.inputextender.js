@@ -87,8 +87,11 @@
 			this.$extension = $( '<div/>' )
 			.addClass( this.widgetBaseClass + '-extension ui-widget-content' )
 			.on( 'click.' + this.widgetName, function( event ) {
-				clearTimeout( self._animationTimeout );
-				self.showExtension();
+				if( !$( event.target ).closest( self.$closeIcon ).length ) {
+					clearTimeout( self._animationTimeout );
+					event.stopPropagation();
+					self.showExtension();
+				}
 			} )
 			.on( 'toggleranimationstep.' + this.widgetName, function( event, now, tween ) {
 				self._trigger( 'animationstep', null, [ now, tween ] );
@@ -174,6 +177,19 @@
 				} );
 			} );
 
+			this.$closeIcon = $( '<div/>' )
+			.addClass( this.widgetBaseClass + '-extension-close ui-state-default' )
+			.on( 'mouseover.' + this.widgetName, function( event ) {
+				$( this ).addClass( 'ui-state-hover' );
+			} )
+			.on( 'mouseout.' + this.widgetName, function( event ) {
+				$( this ).removeClass( 'ui-state-hover' );
+			} )
+			.on( 'click.' + this.widgetName, function( event ) {
+				self.hideExtension();
+			} )
+			.append( $( '<div/>' ).addClass( 'ui-icon ui-icon-close' ) );
+
 			this._draw();
 
 			if( $.isFunction( this.options.initCallback ) ) {
@@ -206,7 +222,7 @@
 		_draw: function() {
 			var self = this;
 
-			this.$extension.empty();
+			this.$extension.empty().append( this.$closeIcon );
 
 			$.each( this.options.content, function( i, $node ) {
 				self.$extension.append( $node );
