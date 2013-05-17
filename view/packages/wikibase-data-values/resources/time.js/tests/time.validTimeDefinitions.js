@@ -32,6 +32,69 @@ time.validTimeDefinitions = ( function( time ) {
 			day: 12,
 			precision: PRECISION.DAY
 		},
+		'5. September 1981': {
+			calendarname: G,
+			year: 1981,
+			month: 9,
+			day: 5,
+			precision: PRECISION.DAY
+		},
+		'5 9 1981': {
+			calendarname: G,
+			year: 1981,
+			month: 9,
+			day: 5,
+			precision: PRECISION.DAY
+		},
+		'5-9-1981': {
+			calendarname: G,
+			year: 1981,
+			month: 9,
+			day: 5,
+			precision: PRECISION.DAY
+		},
+		'5,9,1981': {
+			calendarname: G,
+			year: 1981,
+			month: 9,
+			day: 5,
+			precision: PRECISION.DAY
+		},
+		'1981,9,5': {
+			calendarname: G,
+			year: 1981,
+			month: 9,
+			day: 5,
+			precision: PRECISION.DAY
+		},
+		'September 5 1981': {
+			calendarname: G,
+			year: 1981,
+			month: 9,
+			day: 5,
+			precision: PRECISION.DAY
+		},
+		'1981, September 5': {
+			calendarname: G,
+			year: 1981,
+			month: 9,
+			day: 5,
+			precision: PRECISION.DAY
+		},
+		'5. 9. 1981': {
+			calendarname: G,
+			year: 1981,
+			month: 9,
+			day: 5,
+			precision: PRECISION.DAY
+		},
+		'001981-September-00005': {
+			calendarname: G,
+			year: 1981,
+			month: 9,
+			day: 5,
+			precision: PRECISION.DAY
+		},
 		'March 45 BC': {
 			calendarname: G,
 			month: 3,
@@ -91,6 +154,31 @@ time.validTimeDefinitions = ( function( time ) {
 			year: -2003,
 			month: 10,
 			precision: PRECISION.MONTH
+		},
+		'10.-2003': {
+			calendarname: G,
+			year: -2003,
+			month: 10,
+			precision: PRECISION.MONTH
+		},
+		'20.10.-2003': {
+			calendarname: J,
+			year: -2003,
+			month: 10,
+			day: 20,
+			precision: PRECISION.DAY
+		},
+		'-1000-11-12': {
+			calendarname: J,
+			year: -1000,
+			month: 11,
+			day: 12,
+			precision: PRECISION.DAY
+		},
+		'-1000': {
+			calendarname: G,
+			year: -1000,
+			precision: PRECISION.YEAR
 		}
 	};
 
