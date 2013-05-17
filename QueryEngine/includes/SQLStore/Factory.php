@@ -71,9 +71,15 @@ final class Factory {
 
 	public function newEntityInserter() {
 		return new EntityInserter(
-			$this->queryInterface,
-			$this->getSchema()->getEntitiesTable()->getName(),
+			$this->newEntityTable(),
 			$this->newClaimInserter()
+		);
+	}
+
+	public function newEntityTable() {
+		return new EntityTable(
+			$this->queryInterface,
+			$this->getSchema()->getEntitiesTable()->getName()
 		);
 	}
 

@@ -267,8 +267,7 @@ class Schema {
 					FieldDefinition::NOT_NULL,
 					FieldDefinition::NO_DEFAULT,
 					FieldDefinition::ATTRIB_UNSIGNED,
-					FieldDefinition::INDEX_PRIMARY,
-					FieldDefinition::AUTOINCREMENT
+					FieldDefinition::INDEX
 				),
 
 				// EntityId type part
@@ -310,8 +309,7 @@ class Schema {
 					 FieldDefinition::NOT_NULL,
 					 FieldDefinition::NO_DEFAULT,
 					 FieldDefinition::ATTRIB_UNSIGNED,
-					 FieldDefinition::INDEX_PRIMARY,
-					 FieldDefinition::AUTOINCREMENT
+					 FieldDefinition::INDEX
 				 ),
 
 				 // External id
