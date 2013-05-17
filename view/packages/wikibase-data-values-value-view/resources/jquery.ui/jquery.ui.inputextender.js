@@ -94,6 +94,7 @@
 				}
 			} )
 			.on( 'toggleranimationstep.' + this.widgetName, function( event, now, tween ) {
+				self._reposition();
 				self._trigger( 'animationstep', null, [ now, tween ] );
 			} )
 			.on( 'keydown.' + this.widgetName, function( event ) {
@@ -247,9 +248,7 @@
 			// Element needs to be visible to use jquery.ui.position.
 			if( !this.$extension.is( ':visible' ) ) {
 				this.$extension.show();
-				this.$extension.position( $.extend( {
-					of: this.element
-				}, this.options.position ) );
+				this._reposition();
 				this.$extension.hide();
 			}
 
@@ -287,6 +286,18 @@
 					self._trigger( 'animationstep' );
 				}
 			} );
+		},
+
+		/**
+		 * Repositions the extension.
+		 */
+		_reposition: function() {
+			// TODO: Repositioning is not optimal in RTL context when hitting the toggler in the
+			//  extension to hide additional input. This seems to be caused by a width
+			//  miscalculation which can be debugged with "console.log( this.$extension.width() )".
+			this.$extension.position( $.extend( {
+				of: this.element
+			}, this.options.position ) );
 		}
 
 	} );
