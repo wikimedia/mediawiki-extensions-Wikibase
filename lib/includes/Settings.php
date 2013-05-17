@@ -30,6 +30,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class Settings extends SettingsArray {
 
@@ -44,22 +45,36 @@ class Settings extends SettingsArray {
 		static $instance = null;
 
 		if ( $instance === null ) {
-			$settings = array();
-
-			if ( defined( 'WB_VERSION' ) ) {
-				$settings = array_merge( $settings, $GLOBALS['wgWBRepoSettings'] );
-			}
-
-			if ( defined( 'WBC_VERSION' ) ) {
-				$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
-			}
-
-			$settings = array_merge( $settings, $GLOBALS['wgWBSettings'] );
-
-			$instance = new static( $settings );
+			$instance = new static();
+			$instance->initFromGlobals();
 		}
 
 		return $instance;
+	}
+
+	/**
+	 * Initializes this Settings object from the global configuration variables.
+	 * Default settings are loaded from the appropriate files.
+	 * The hook WikibaseDefaultSettings can be used to manipulate the defaults.
+	 *
+	 * @since 0.4
+	 */
+	public function initFromGlobals() {
+		$settings = array();
+
+		// merge appropriate settings -------------------
+		if ( defined( 'WB_VERSION' ) ) {
+			$settings = array_merge( $settings, $GLOBALS['wgWBRepoSettings'] );
+		}
+
+		if ( defined( 'WBC_VERSION' ) ) {
+			$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
+		}
+
+		// store
+		foreach ( $settings as $key => $value ) {
+			$this[$key] = $value;
+		}
 	}
 
 	/**

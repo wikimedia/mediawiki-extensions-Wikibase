@@ -94,7 +94,7 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreEnd
 };
 
-$wgWBSettings['entityPrefixes']['y'] = 'query';
+$wgWBRepoSettings['entityPrefixes']['y'] = 'query';
 
 define( 'CONTENT_MODEL_WIKIBASE_QUERY', "wikibase-query" );
 

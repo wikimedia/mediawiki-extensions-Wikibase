@@ -37,12 +37,12 @@ if ( !defined( 'WB_CLIENT_EXAMPLE_ENTRY' ) ) {
 // Base URL for building links to the repository.
 // Assumes your wiki is setup as "http://repo.example.org/wiki/"
 // This can be protocol relative, such as "//www.wikidata.org"
-$wgWBSettings['repoUrl'] = "http://repo.example.org";
+$wgWBClientSettings['repoUrl'] = "http://repo.example.org";
 
 // This setting is optional if you have the same type of setup for your
 // repo and client.  It will default to using the client's $wgArticlePath setting,
 // and if you do not have $wgArticlePath set anywhere, MediaWiki has a default for it.
-$wgWBSettings['repoArticlePath'] = "/wiki/$1";
+$wgWBClientSettings['repoArticlePath'] = "/wiki/$1";
 
 // Assuming your wiki is setup with such script path as "http://repo.example.org/w/api.php"
 // This should be the same as the $wgScriptPath setting if you have it set in your repo
@@ -50,20 +50,20 @@ $wgWBSettings['repoArticlePath'] = "/wiki/$1";
 //
 // If your client and repo are setup in the same way, then the below setting is optional
 // and will default to what you have $wgScriptPath set in the client.
-$wgWBSettings['repoScriptPath'] = "/w";
+$wgWBClientSettings['repoScriptPath'] = "/w";
 
 // The global site ID by which this wiki is known on the repo.
-$wgWBSettings['siteGlobalID'] = "mywiki";
+$wgWBClientSettings['siteGlobalID'] = "mywiki";
 
 // Database name of the repository, for direct access from the client.
 // repoDatabase and changesDatabase will generally be the same.
 // This requires the given database name to be known to LBFactory, see
 // $wgLBFactoryConf below.
-$wgWBSettings['repoDatabase'] = "repo";
-$wgWBSettings['changesDatabase'] = "repo";
+$wgWBClientSettings['repoDatabase'] = "repo";
+$wgWBClientSettings['changesDatabase'] = "repo";
 
-$wgWBSettings['injectRecentChanges'] = true;
-$wgWBSettings['showExternalRecentChanges'] = true;
+$wgWBClientSettings['injectRecentChanges'] = true;
+$wgWBClientSettings['showExternalRecentChanges'] = true;
 
 $wgLBFactoryConf = array(
 	// In order to seamlessly access a remote wiki, to fetch entity data,
