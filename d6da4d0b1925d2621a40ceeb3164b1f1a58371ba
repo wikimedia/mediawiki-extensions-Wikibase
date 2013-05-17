@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxbKF5l0",
+        "filename": "lib/includes/PropertyNotFoundException.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-17T14:58:34Z",
+      "side": 1,
+      "message": "This should extend MWException. MediaWiki has nicer handling for those.",
+      "revId": "d6da4d0b1925d2621a40ceeb3164b1f1a58371ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxTKSdp8",
+        "filename": "lib/tests/phpunit/PropertyNotFoundExceptionTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-17T14:58:34Z",
+      "side": 1,
+      "message": "Would be better to actually test that EntityRetrievingDataTypeLookup *throws* this exception under the (im)proper conditions...",
+      "revId": "d6da4d0b1925d2621a40ceeb3164b1f1a58371ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
