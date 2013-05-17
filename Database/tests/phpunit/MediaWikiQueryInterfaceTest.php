@@ -339,13 +339,17 @@ class MediaWikiQueryInterfaceTest extends \PHPUnit_Framework_TestCase {
 			$extendedAbstraction
 		);
 
+		$resultWrapper = $this->getMockBuilder( 'ResultWrapper' )
+			->disableOriginalConstructor()->getMock();
+
 		$connection->expects( $this->once() )
 			->method( 'select' )
 			->with(
 				$this->equalTo( $tableName ),
 				$this->equalTo( $fields ),
 				$this->equalTo( $conditions )
-			);
+			)
+			->will( $this->returnValue( $resultWrapper ) );
 
 		$queryInterface->select( $tableName, $fields, $conditions );
 
