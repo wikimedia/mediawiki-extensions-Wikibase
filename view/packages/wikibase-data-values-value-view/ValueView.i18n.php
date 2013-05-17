@@ -36,7 +36,7 @@ $messages = array();
 $messages['en'] = array(
 	'valueview-desc' => 'UI components for displaying and editing data values',
 
-	'valueview-expert-advancedadjustments' => 'advanced adjustments',
+	'valueview-expert-advancedoptions' => 'advanced options',
 
 	// UnsupportedValue expert:
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Handling of "$1" values is not yet supported.',
@@ -59,12 +59,11 @@ $messages['en'] = array(
 
 /** Message documentation (Message documentation)
  * @author Daniel Werner < daniel.werner@wikimedia.de >
- * @author Shirayuki
  * @author H. Snater < mediawiki@snater.com >
+ * @author Shirayuki
  */
 $messages['qqq'] = array(
 	'valueview-desc' => '{{desc|name=ValueView|url=http://www.mediawiki.org/wiki/Extension:ValueView}}',
-	'valueview-expert-advancedadjustments' => 'Label of the link to unfold advanced adjustments regarding the data type (see [[d:Wikidata:Glossary]]) the user is about to enter a value of (e.g. specifying the precision of a time value).',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Error shown if a data value of a certain data value type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a valueview widget expert handling data values of that type has not yet been implemented). $1 is the name of the data value type which lacks support.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Error shown if a data value for a certain data type (see [[d:Wikidata:Glossary]]) should be displayed or a form for creating one should be offered while this is not yet possible from a technical point of view (e.g. because a valueview widget expert handling data values for that data type has not yet been implemented). Parameter $1 is the name of the data type which lacks support',
 	'valueview-expert-emptyvalue-empty' => 'Message expressing that there is currently no value set in a jQuery valueview.
@@ -73,8 +72,8 @@ $messages['qqq'] = array(
 	'valueview-expert-timeinput-calendar' => 'Label for the user interface element used to select a specific calendar (e.g. Gregorian, Julian) entering a time value.',
 	'valueview-expert-timeinput-calendarhint' => 'Message informing about the calendar (e.g. Gregorian) that is detected automatically when specifying a date. The message is shown only when the specified date lies within a time frame when multiple calendars had been in use. $1 is the name of the calendar that is detected by the system.',
 	'valueview-expert-timeinput-calendarhint-switch' => 'Label of the link manually switching the calendar (e.g. from Gregorian to Julian) directly at the preview (in combination with the calendar hint message). $1 is the name of the other calender that may be switched to. (Currently, only Gregorian and Julian calendars are implemented.)',
-	'valueview-preview-label' => 'Label displayed above the preview of a value that is being entered by the user. The preview is the system\'s interpretation of the specified value and - since there is no strict definition for a user how to specify values - visualizes how the value will be displayed later on after the value has been saved.',
-	'valueview-preview-novalue' => 'Message displayed instead of an input value\'s preview when no value is specified yet or when the specified value could not be interpreted by the system.',
+	'valueview-preview-label' => "Label displayed above the preview of a value that is being entered by the user. The preview is the system's interpretation of the specified value and - since there is no strict definition for a user how to specify values - visualizes how the value will be displayed later on after the value has been saved.",
+	'valueview-preview-novalue' => "Message displayed instead of an input value's preview when no value is specified yet or when the specified value could not be interpreted by the system.",
 	'valueview-listrotator-auto' => 'Label of the link to have the system automatically select the most appropriate value from a "listrotator" widget. The "listrotator" basically is a facade for a drop-down select box allowing to pick a value from a list of values. In addition to the defined values, an "automatic" option may be selected that makes the system pick the most appropriate value according to an associated input element.',
 );
 
@@ -122,13 +121,22 @@ $messages['da'] = array(
 );
 
 /** German (Deutsch)
+ * @author Kghbln
  * @author Metalhead64
  */
 $messages['de'] = array(
-	'valueview-desc' => 'Ergänzt Komponenten zur Benutzeroberfläche zum Anzeigen und Bearbeiten von Datenwerten',
+	'valueview-desc' => 'Ergänzt die Benutzeroberfläche um Komponenten zum Anzeigen und Bearbeiten von Datenwerten',
+	'valueview-expert-advancedoptions' => 'Erweiterte Optionen',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Das Bearbeiten von Werten mit dem Typ „$1“ wird noch nicht unterstützt.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Das Bearbeiten von Werten für den Datentyp „$1“ wird noch nicht unterstützt.',
 	'valueview-expert-emptyvalue-empty' => 'leer',
+	'valueview-expert-timeinput-precision' => 'Genauigkeit:',
+	'valueview-expert-timeinput-calendar' => 'Kalender:',
+	'valueview-expert-timeinput-calendarhint' => '(vorweggenommener $1 Kalender)',
+	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; ändern in $1',
+	'valueview-preview-label' => 'wird angezeigt als:',
+	'valueview-preview-novalue' => 'keinen gültigen Wert erkannt',
+	'valueview-listrotator-auto' => 'automatisch',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -178,9 +186,17 @@ $messages['fr'] = array(
  */
 $messages['gl'] = array(
 	'valueview-desc' => 'Compoñentes da interface para mostrar e editar valores de datos',
+	'valueview-expert-advancedoptions' => 'opcións avanzadas',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'A manipulación de valores "$1" aínda non está soportada.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'A manipulación de valores para o tipo de datos "$1" aínda non está soportada.',
 	'valueview-expert-emptyvalue-empty' => 'baleiro',
+	'valueview-expert-timeinput-precision' => 'Precisión:',
+	'valueview-expert-timeinput-calendar' => 'Calendario:',
+	'valueview-expert-timeinput-calendarhint' => '(calendario $1 proléptico)',
+	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; cambiar ao $1',
+	'valueview-preview-label' => 'vaise mostrar así:',
+	'valueview-preview-novalue' => 'non se recoñeceu ningún valor válido',
+	'valueview-listrotator-auto' => 'automático',
 );
 
 /** Gujarati (ગુજરાતી)
