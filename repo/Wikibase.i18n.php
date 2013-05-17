@@ -2528,7 +2528,7 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-item-summary-wbsetlabel-remove' => 'Odstraněn štítek pro [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Změněn popis pro [$2]',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Odstraněn popis pro [$2]',
-	'wikibase-item-summary-wbsetaliases-set' => '{{PLURAL:$1|Nastaven alias|Nastaveny aliasy}} v jazyce [$2]',
+	'wikibase-item-summary-wbsetaliases-set' => '{{PLURAL:$1|Nastaven alias|Nastaveny aliasy}} pro [$2]',
 	'wikibase-item-summary-wbsetaliases-add-remove' => '{{PLURAL:$1|Přidán a změněn alias|Přidány a změněny aliasy}} pro [$2]',
 	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Přidán alias|Přidány aliasy}} pro [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Odstraněn alias|Odstraněny aliasy}} pro [$2]',
@@ -9576,8 +9576,35 @@ $messages['ml'] = array(
 
 /** Marathi (मराठी)
  * @author Ydyashad
+ * @author संतोष दहिवळ
  */
 $messages['mr'] = array(
+	'wikibase-label-edit-placeholder' => 'लेबल लावा',
+	'wikibase-terms' => 'इतर भाषांत',
+	'wikibase-aliases-label' => 'या नावानेही ओळखले जाते:',
+	'wikibase-entityselector-more' => 'आणखी',
+	'special-itembytitle' => 'शीर्षकानुसार कलम',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'भाषा आणि लेबलनुसार कलम शोध',
+	'wikibase-itemdisambiguation-lookup-language' => 'भाषा:',
+	'wikibase-itemdisambiguation-lookup-label' => 'लेबल:',
+	'wikibase-itemdisambiguation-submit' => 'शोध',
+	'special-newitem' => 'नवीन कलम तयार करा',
+	'wikibase-newitem-fieldset' => 'नवीन कलम तयार करा',
+	'wikibase-newentity-label' => 'लेबल:',
+	'wikibase-newentity-description' => 'वर्णन:',
+	'wikibase-newentity-submit' => 'बनवा',
+	'wikibase-setlabel-label' => 'लेबल:',
+	'special-setdescription' => 'वर्णन नोंदवा',
+	'wikibase-setdescription-label' => 'वर्णन:',
+	'wikibase-item-summary-wbeditentity-update' => 'कलम अद्ययावत केली',
+	'wikibase-item-summary-wbsetreference' => 'संदर्भ नोंदवा',
+	'wikibase-item-summary-wbsetlabel-set' => '[$2] चे लेबल बदलले',
+	'wikibase-item-summary-wbsetlabel-remove' => '[$2] चे लेबल काढले',
+	'wikibase-item-summary-wbsetdescription-set' => '[$2] चे वर्णन बदलले',
+	'wikibase-item-summary-wbsetdescription-remove' => '[$2] चे वर्णन काढले',
+	'wikibase-item-summary-wbsetsitelink-set' => '[$2] ला दुवा जोडला',
+	'wikibase-item-summary-wbsetsitelink-remove' => '[$2] चा दुवा काढला',
+	'wikibase-listdatatypes-wikibase-item-head' => 'कलम',
 	'right-alias-add' => 'टोपण नाव घाला',
 	'right-alias-remove' => 'टोपण नाव काढा',
 );

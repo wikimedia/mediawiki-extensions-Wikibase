@@ -263,11 +263,14 @@ $messages['ar'] = array(
  * @author Basharh
  */
 $messages['arc'] = array(
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|ܫܘܚܠܦܐ|ܫܘܚܠܦ̈ܐ}}',
 	'wikibase-editlinks' => 'ܫܚܠܦ ܐܣܘܪ̈ܐ',
+	'wikibase-linkitem-addlinks' => 'ܐܘܣܦ ܐܣܘܪ̈ܐ',
 	'wikibase-linkitem-input-site' => 'ܠܫܢܐ:',
 	'wikibase-linkitem-input-page' => 'ܦܐܬܐ:',
 	'wikibase-linkitem-confirmitem-button' => 'ܫܪܪ',
 	'wikibase-rc-hide-wikidata' => '$1 ܘܝܩܝܓܠܝܬ̈ܐ',
+	'wikibase-unconnectedpages-submit' => 'ܙܠ',
 );
 
 /** Asturian (asturianu)
@@ -485,6 +488,7 @@ $messages['bn'] = array(
 /** Breton (brezhoneg)
  * @author Fohanno
  * @author Fulup
+ * @author VIGNERON
  */
 $messages['br'] = array(
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|kemm|kemm}}', # Fuzzy
@@ -494,6 +498,7 @@ $messages['br'] = array(
 	'wikibase-linkitem-input-site' => 'Yezh :',
 	'wikibase-linkitem-input-page' => 'Pajenn :',
 	'wikibase-linkitem-confirmitem-button' => 'Kadarnaat',
+	'special-unconnectedpages' => 'Pajennoù n’int ket liammet gant elfennoù',
 );
 
 /** Bosnian (bosanski)
@@ -637,7 +642,7 @@ $messages['crh-latn'] = array(
 $messages['cs'] = array(
 	'wikibase-client-desc' => 'Klient pro rozšíření Wikibase',
 	'specialpages-group-wikibaseclient' => 'Klient Wikidat',
-	'wikibase-after-page-move' => 'Můžete také [$1 aktualizovat] související položku Wikidat, abyste na přesunuté stránce zachovali jazykové odkazy.',
+	'wikibase-after-page-move' => 'Bylo by vhodné [$1 aktualizovat související položku Wikidat], aby na přesunuté stránce zůstaly odkazy na další jazyky (mezijazykové odkazy).',
 	'wikibase-comment-remove' => 'Související položka Wikidat odstraněna. Mezijazykové odkazy odstraněny.',
 	'wikibase-comment-linked' => 'S touto stránkou byla provázána položka Wikidat.',
 	'wikibase-comment-unlink' => 'Odkaz na tuto stránku byl odstraněn z Wikidat. Mezijazykové odkazy odstraněny.',
@@ -1399,6 +1404,7 @@ $messages['hr'] = array(
 	'wikibase-linkitem-selectlink' => 'Molimo odaberite projekt i stranicu koju želite povezati.',
 	'wikibase-linkitem-input-site' => 'Jezik:',
 	'wikibase-linkitem-input-page' => 'Ime stranice:',
+	'wikibase-linkitem-confirmitem-button' => 'Potvrdi',
 	'wikibase-linkitem-not-loggedin-title' => 'Morate biti prijavljeni',
 	'wikibase-linkitem-success-create' => 'Stranice su uspješno povezane. Možete pronaći ove nove poveznice na projektu [$1 wikidata].',
 );
@@ -1918,9 +1924,11 @@ $messages['ku'] = array(
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
  * @author George Animal
  * @author Ghybu
+ * @author Gomada
  */
 $messages['ku-latn'] = array(
-	'wikibase-comment-update' => 'Girêdanên ziman hatin rojanekirin.',
+	'wikibase-after-page-move' => 'Tu dikarî beşa têkilîdar a Wîkîdaneyê, ku girêdanên zimanan ên li ser rûpela gerandî têde ne, [$1 rojane bikî].',
+	'wikibase-comment-update' => 'Girêdanên ziman hatin rojanekirin.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Girêdana ziman lê hat zêdekirin:$1',
 	'wikibase-comment-sitelink-remove' => 'Girêdana ziman hat jêbirin:$1',
 	'wikibase-editlinks' => 'Girêdanan biguherîne',
@@ -2152,6 +2160,11 @@ $messages['ml'] = array(
  * @author संतोष दहिवळ
  */
 $messages['mr'] = array(
+	'wikibase-comment-linked' => 'या पानाला विकिडाटातील कलम दुवा जोडला.',
+	'wikibase-comment-update' => 'विकिडाटा कलम बदलली',
+	'wikibase-comment-sitelink-add' => 'भाषा दुवा जोडला: $1',
+	'wikibase-comment-sitelink-change' => 'भाषा दुवा बदलला $1 पासून $2 कडे',
+	'wikibase-comment-sitelink-remove' => 'भाषा दुवा काढला: $1',
 	'wikibase-rc-hide-wikidata' => 'विकिडाटा $1',
 	'wikibase-rc-show-wikidata-pref' => 'विकिडाटा संपादने अलीकडील बदल मध्ये दाखवा',
 );

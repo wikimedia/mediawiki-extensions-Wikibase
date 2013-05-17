@@ -1561,6 +1561,18 @@ $messages['ml'] = array(
 	'version-wikibase' => 'വിക്കിബേസ്',
 );
 
+/** Marathi (मराठी)
+ * @author संतोष दहिवळ
+ */
+$messages['mr'] = array(
+	'wikibase-entity-item' => 'कलम',
+	'wikibase-diffview-label' => 'लेबल',
+	'wikibase-diffview-description' => 'वर्णन',
+	'wikibase-diffview-link' => 'दुवे',
+	'wikibase-sitelinks-sitename-columnheading' => 'भाषा',
+	'datatypes-type-wikibase-item' => 'कलम',
+);
+
 /** Malay (Bahasa Melayu)
  * @author Anakmalaysia
  */
@@ -2285,7 +2297,7 @@ $messages['zh-hans'] = array(
 	'wikibase-error-ui-link-exists' => '因为另一项目已链接，您不能链接到此页面。',
 	'wikibase-error-ui-session-failure' => '您的会话已过期。请重新登录。',
 	'wikibase-error-ui-edit-conflict' => '发生编辑冲突。请刷新再重新保存。',
-	'wikibase-replicationnote' => '更改可能需要几分钟才能在所有的维基上出现，望理解。',
+	'wikibase-replicationnote' => '更改可能需要几分钟才能在所有的维基上出现，请理解。',
 	'wikibase-sitelinks' => '链接到本项目的页面列表',
 	'wikibase-sitelinks-sitename-columnheading' => '语言',
 	'wikibase-sitelinks-siteid-columnheading' => '代码',
