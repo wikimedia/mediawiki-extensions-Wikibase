@@ -4,6 +4,7 @@ namespace Wikibase\QueryEngine\SQLStore;
 
 use Wikibase\Database\QueryInterface;
 use Wikibase\Entity;
+use Wikibase\EntityId;
 use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
 
 /**
@@ -36,6 +37,7 @@ class EntityInserter {
 
 	private $entityTable;
 	private $claimInserter;
+	private $idFinder;
 
 	/**
 	 * @since 0.1
@@ -43,9 +45,10 @@ class EntityInserter {
 	 * @param EntityTable $entityTable
 	 * @param ClaimInserter $claimInserter
 	 */
-	public function __construct( EntityTable $entityTable, ClaimInserter $claimInserter ) {
+	public function __construct( EntityTable $entityTable, ClaimInserter $claimInserter, InternalEntityIdFinder $idFinder ) {
 		$this->entityTable = $entityTable;
 		$this->claimInserter = $claimInserter;
+		$this->idFinder = $idFinder;
 	}
 
 	/**
@@ -58,11 +61,23 @@ class EntityInserter {
 	public function insertEntity( Entity $entity ) {
 		$this->entityTable->insertEntity( $entity );
 
+		$internalSubjectId = $this->getInternalId( $entity->getId() );
+
 		foreach ( $entity->getClaims() as $claim ) {
-			$this->claimInserter->insertClaim( $claim, 0 ); // TODO
+			$this->claimInserter->insertClaim(
+				$claim,
+				$internalSubjectId
+			);
 		}
 
 		// TODO: obtain and insert virtual claims
+	}
+
+	protected function getInternalId( EntityId $entityId ) {
+		return $this->idFinder->getInternalIdForEntity(
+			$entityId->getType(),
+			$entityId->getNumericId()
+		);
 	}
 
 }
