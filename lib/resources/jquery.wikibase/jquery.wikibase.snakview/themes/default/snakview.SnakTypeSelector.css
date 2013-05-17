@@ -13,3 +13,7 @@
 .ui-state-active .ui-icon-snaktypeselector {
 	background-image: url(images/ui-icon_snaktypeselector_666666.png);
 }
+
+.wb-snaktypeselector-menu {
+	position: absolute;
+}
