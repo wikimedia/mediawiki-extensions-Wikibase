@@ -68,6 +68,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 	protected $idFormatter = null;
 
 	/**
+	 * @var int Cache dureation in seconds
+	 */
+	protected $maxAge = 0;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -113,11 +118,13 @@ class SpecialEntityData extends SpecialWikibasePage {
 			return;
 		}
 
+		//TODO: move this, so we can inject alternative values
 		$repo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 		$this->rdfBaseURI = $repo->getRdfBaseURI();
 		$this->entityLookup = \Wikibase\StoreFactory::getStore()->getEntityLookup();
 		$this->dataTypeFactory = $repo->getDataTypeFactory();
 		$this->idFormatter = $repo->getIdFormatter();
+		$this->maxAge = \Wikibase\Settings::get( 'dataSquidMaxAge' );
 
 		$this->showData( $format, $id, $revision );
 	}
@@ -413,25 +420,24 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 * @param Revision $revision
 	 */
 	public function outputData( $data, $contentType, Revision $revision = null ) {
-		global $wgSquidMaxage;
-
 		// NOTE: similar code as in RawAction::onView, keep in sync.
 
 		$request = $this->getRequest();
 		$response = $request->response();
 
-		$maxage = $request->getInt( 'maxage', $wgSquidMaxage );
-		$smaxage = $request->getInt( 'smaxage', $wgSquidMaxage );
+		$maxage = $request->getInt( 'maxage', $this->maxAge );
+		$smaxage = $request->getInt( 'smaxage', $this->maxAge );
 
-		// Sanity: 0 to 30 days. // todo: Hard maximum could be configurable somehow.
-		$maxage  = max( 0, min( 60 * 60 * 24 * 30, $maxage ) );
-		$smaxage = max( 0, min( 60 * 60 * 24 * 30, $smaxage ) );
+		// XXX: do we want public caching even for data from old revisions?
+		// Sanity: 0 to 31 days. // todo: Hard maximum could be configurable somehow.
+		$maxage  = max( 0, min( 60 * 60 * 24 * 31, $maxage ) );
+		$smaxage = max( 0, min( 60 * 60 * 24 * 31, $smaxage ) );
 
 		$response->header( 'Content-Type: ' . $contentType . '; charset=UTF-8' );
 		$response->header( 'Content-Length: ' . strlen( $data ) );
 
 		if ( $revision ) {
-			$response->header( 'Last-Modified: ' . wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
+			$response->header( 'Last-Modified: ' . wfTimestamp( TS_RFC2822, $revision->getTimestamp() ) );
 		}
 
 		//Set X-Frame-Options API results (bug 39180)
