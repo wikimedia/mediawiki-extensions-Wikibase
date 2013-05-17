@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxZLByoU",
+        "filename": "DataModel/DataModel/Claim/Claims.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-17T15:05:04Z",
+      "side": 1,
+      "message": "Wouldn\u0027t be needed if getByPropertyId would just return an empty array if the property isn\u0027t there.",
+      "revId": "52bbb96a456a330301002d27692c084f0b97ee70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxRLNurk",
+        "filename": "lib/includes/ByPropertyIdArray.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-17T15:05:04Z",
+      "side": 1,
+      "message": "Why not put the ID into the error message? Makes debugging easier.\n\nBut.. why throw an exception at all? we can just return an empty array. That\u0027s logically consistent, and would make the code simpler.",
+      "revId": "52bbb96a456a330301002d27692c084f0b97ee70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
