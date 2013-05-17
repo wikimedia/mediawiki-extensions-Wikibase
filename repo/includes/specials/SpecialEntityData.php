@@ -120,6 +120,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$revision = 0;
 		$format = '';
 
+		$requestedSubPage = $subPage;
+
 		// get format from $subPage or request param
 		if ( preg_match( '#\.([-./\w]+)$#', $subPage, $m ) ) {
 			$subPage = preg_replace( '#\.([-./\w]+)$#', '', $subPage );
@@ -144,6 +146,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 		if ( $id === null || $id === '' ) {
 			$this->showForm();
 			return;
+		}
+
+		//XXX: allow for logged in users only?
+		if ( $this->getRequest()->getText( 'action', 'purge' ) ) {
+			$this->purge( $id, $format, $revision );
 		}
 
 		if ( $format === null || $format === '' ) {
@@ -175,6 +182,45 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$this->idFormatter = $repo->getIdFormatter();
 
 		$this->showData( $format, $id, $revision );
+	}
+
+	/**
+	 * Purges the entity data identified by the subPage parameter from any HTTP caches.
+	 *
+	 * @param string $id
+	 * @param string $format
+	 * @param int    $revision
+	 */
+	protected function purge( $id, $format = '', $revision = 0 ) {
+		global $wgUseSquid;
+
+		if ( $wgUseSquid ) {
+			//TODO: purge all formats based on the ID, instead of just the one currently requested
+			$subPage = $this->getSubPageName( $id, $format, $revision );
+
+			$title = $this->getTitle( $subPage );
+
+			$urls = array();
+			$urls[] = $title->getInternalURL();
+
+			$u = new SquidUpdate( $urls );
+			$u->doUpdate();
+		}
+	}
+
+	public function getSubPageName( $id, $format, $revision ) {
+		//TODO: force canonical ID (upper- or lower case) by redirecting
+		$subPage = $id;
+
+		if ( $revision > 0 ) {
+			$subPage .= ':' . $revision;
+		}
+
+		if ( $format !== null && $format !== '' ) {
+			$subPage .= '.' . $format;
+		}
+
+		return $subPage;
 	}
 
 	/**
