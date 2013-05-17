@@ -106,7 +106,10 @@
 
 			var precisionValues = [];
 			$.each( timeSettings.precisiontexts, function( i, text ) {
-				precisionValues.push( { value: i, label: text } );
+				if( i <= Time.PRECISION.DAY ) {
+					// TODO: Remove this check as soon as time values are supported.
+					precisionValues.push( { value: i, label: text } );
+				}
 			} );
 
 			this.$precision = $( '<div/>' )
