@@ -187,7 +187,8 @@ class EntityId extends \DataValues\DataValueObject {
 	}
 
 	/**
-	 * Return a string representation of this entity id. Equal to getPrefixedId().
+	 * Return a string representation of this entity id.
+	 * Note: this will not change equal to the deprecated getPrefixedId
 	 *
 	 * @since 0.3
 	 *
