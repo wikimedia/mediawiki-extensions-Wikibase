@@ -3,6 +3,7 @@ namespace Wikibase;
 
 use Html;
 use Diff\Diff;
+use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * Class for generating HTML for Claim Diffs.
@@ -43,16 +44,32 @@ class ClaimDifferenceVisualizer {
 	private $entityLookup;
 
 	/**
+	 * @since 0.4
+	 *
+	 * @var string
+	 */
+	private $langCode;
+
+	/**
+	 * @since 0.4
+	 *
+	 * @var EntityIdFormatter
+	 */
+	private $idFormatter;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
 	 *
 	 * @param EntityLookup $entityLookup
 	 * @param string $langCode
+	 * @param EntityIdFormatter $idFormatter
 	 */
-	public function __construct( $entityLookup, $langCode ) {
+	public function __construct( $entityLookup, $langCode, EntityIdFormatter $idFormatter ) {
 		$this->entityLookup = $entityLookup;
 		$this->langCode = $langCode;
+		$this->idFormatter = $idFormatter;
 	}
 
 	/**
@@ -296,19 +313,17 @@ class ClaimDifferenceVisualizer {
 	 * @return string
 	 */
 	protected function getEntityLabel( EntityId $entityId  ) {
-		$label = $entityId->getPrefixedId();
-
 		$entity = $this->entityLookup->getEntity( $entityId );
 
 		if ( $entity instanceof Entity ) {
 			$lookedUpLabel = $this->entityLookup->getEntity( $entityId )->getLabel( $this->langCode );
 
 			if ( $lookedUpLabel !== false ) {
-				$label = $lookedUpLabel;
+				return $lookedUpLabel;
 			}
 		}
 
-		return $label;
+		return $this->idFormatter->format( $entityId );
 	}
 
 	/**
