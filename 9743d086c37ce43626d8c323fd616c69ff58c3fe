@@ -16,6 +16,24 @@
       "revId": "9743d086c37ce43626d8c323fd616c69ff58c3fe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxZ.tTjQ",
+        "filename": ".jshintignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-18T15:43:40Z",
+      "side": 1,
+      "message": "I thought it might not be worth the work to make these pass (of course these are only files which fail atm). If you (or someone else) thinks this is important I can make these pass as well.",
+      "parentUuid": "DxV.zxpc",
+      "revId": "9743d086c37ce43626d8c323fd616c69ff58c3fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
