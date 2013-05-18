@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxV.zxpc",
+        "filename": ".jshintignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-18T15:30:53Z",
+      "side": 1,
+      "message": "Why are you ignoring these files?",
+      "revId": "9743d086c37ce43626d8c323fd616c69ff58c3fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
