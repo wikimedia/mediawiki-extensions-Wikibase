@@ -2,6 +2,9 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
+use Wikibase\Lib\EntityIdFormatter;
+
 /**
  * EditSummary-Builder for claim operations
  *
@@ -14,6 +17,7 @@ namespace Wikibase;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class ClaimSummaryBuilder {
+
 	/**
 	 * @var string
 	 */
@@ -25,21 +29,29 @@ class ClaimSummaryBuilder {
 	private $claimDiffer;
 
 	/**
+	 * @var EntityIdFormatter
+	 */
+	private $idFormatter;
+
+	/**
 	 * Constructs a new ClaimSummaryBuilder
 	 *
 	 * @since 0.4
 	 *
 	 * @param string $apiModuleName
 	 * @param ClaimDiffer $claimDiffer
+	 * @param EntityIdFormatter $idFormatter
 	 *
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $apiModuleName, ClaimDiffer $claimDiffer ) {
+	public function __construct( $apiModuleName, ClaimDiffer $claimDiffer, EntityIdFormatter $idFormatter ) {
 		if ( !is_string( $apiModuleName ) ) {
-			throw new \MWException( "$apiModuleName needs to be a string" );
+			throw new InvalidArgumentException( '$apiModuleName needs to be a string' );
 		}
 
 		$this->apiModuleName = $apiModuleName;
 		$this->claimDiffer = $claimDiffer;
+		$this->idFormatter = $idFormatter;
 	}
 
 	/**
@@ -57,7 +69,7 @@ class ClaimSummaryBuilder {
 
 		$summary->addAutoCommentArgs( 1 ); // only one claim touched, so we're always having singular here
 		$summaryArgs = $this->buildSummaryArgs(
-			new \Wikibase\Claims( array( $newClaim ) ),
+			new Claims( array( $newClaim ) ),
 			array($newClaim->getGuid())
 		);
 		$summary->addAutoSummaryArgs( $summaryArgs );
@@ -109,7 +121,7 @@ class ClaimSummaryBuilder {
 		foreach( $guids as $guid ) {
 			if ( $claims->hasClaimWithGuid( $guid ) ) {
 				$snak = $claims->getClaimWithGuid( $guid )->getMainSnak();
-				$key = $snak->getPropertyId()->getPrefixedId();
+				$key = $this->idFormatter->format( $snak->getPropertyId() );
 
 				if ( !array_key_exists( $key, $pairs ) ) {
 					$pairs[$key] = array();
