@@ -1,0 +1,34 @@
+{
+	/* Common */
+
+	// Enforcing
+	"camelcase": true,
+	"curly": true,
+	"eqeqeq": true,
+	"immed": true,
+	"latedef": true,
+	"newcap": true,
+	"noarg": true,
+	"noempty": true,
+	"nonew": true,
+	"quotmark": "single",
+	"trailing": true,
+	"undef": true,
+	"unused": true,
+	// Legacy
+	"onevar": true,
+
+	/* Local */
+
+	// Environment
+	"browser": true,
+
+	"predef": [
+		"wikibase",
+		"dataValues",
+		"dataTypes",
+		"valueParsers",
+		"mediaWiki",
+		"jQuery"
+	]
+}

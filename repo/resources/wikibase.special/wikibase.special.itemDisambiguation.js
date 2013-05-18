@@ -17,9 +17,11 @@
 		}
 
 		// TODO: Migth want to use the siteselector jquery widget or some other suggester derivate
-		var langList = [];
+		var langList = [],
+			languages;
+
 		if ( $.uls !== undefined ) {
-			var languages = $.uls.data.getAutonyms();
+			languages = $.uls.data.getAutonyms();
 			$.each( languages, function( key, value ) {
 				langList.push( {
 					'label': value + ' (' + key + ')',
@@ -27,11 +29,11 @@
 				} );
 			} );
 		}
-		$( '#wb-itemdisambiguation-languagename' ).suggester( { "source": langList } );
+		$( '#wb-itemdisambiguation-languagename' ).suggester( { 'source': langList } );
 
 		// On submit, replace human readable value like "English (en)" with actual language name ("en")
-		$( '#wb-itemdisambiguation-form1' ).submit( function( event ) {
-			var langID = String( $( '#wb-itemdisambiguation-languagename' ).val().replace(/.*\(|\).*/gi,'') );
+		$( '#wb-itemdisambiguation-form1' ).submit( function() {
+			var langID = String( $( '#wb-itemdisambiguation-languagename' ).val().replace( /.*\(|\).*/gi,'' ) );
 			$( '#wb-itemdisambiguation-languagename' ).val( langID );
 		});
 	} );

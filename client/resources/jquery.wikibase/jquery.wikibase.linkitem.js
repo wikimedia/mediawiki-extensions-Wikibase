@@ -407,12 +407,12 @@ $.widget( 'wikibase.linkitem', {
 	 * @param {object} data
 	 */
 	_onEntityLoad: function( data ) {
-		var i, entity, itemLink;
+		var siteLinkCount = 0,
+			i, entity, itemLink;
 
 		if ( !data.entities['-1'] ) {
 			this._removeSpinner();
 
-			var siteLinkCount = 0;
 			// Show a table with links to the user and ask for confirmation
 			for ( i in data.entities ) {
 				if ( data.entities[ i ].sitelinks ) {
@@ -473,11 +473,13 @@ $.widget( 'wikibase.linkitem', {
 			this.getEntityForCurrentPage()
 				.fail( $.proxy( this._onError, this ) )
 				.done( $.proxy( function( data ) {
+					var i, entity, entityData;
+
 					if ( data.entities['-1'] ) {
 						// There's no item yet, create one
 
 						// JSON data for the new entity
-						var entityData = {
+						entityData = {
 							labels: {},
 							sitelinks: {}
 						};
@@ -502,7 +504,6 @@ $.widget( 'wikibase.linkitem', {
 					} else {
 						// There already is an entity with the current page linked
 						// but it's empty (=only has the current page linked) cause this dialog isn't shown on pages with langlinks
-						var i, entity;
 
 						for ( i in data.entities ) {
 							if ( data.entities[ i ].title ) {
@@ -548,15 +549,15 @@ $.widget( 'wikibase.linkitem', {
 					)
 					.done( $.proxy( this._successfullyLinked, this ) )
 					.fail( $.proxy( this._onError, this ) );
-				}, this );
+				}, this ),
+					siteLinkCount = 0,
+					i, selfEntity, tooltip;
 
 				if ( data.entities['-1'] ) {
 					// Everything is ok
 					doLink();
 				} else {
 					// We have to unlink it first
-					var siteLinkCount = 0,
-						i, selfEntity;
 
 					for ( i in data.entities ) {
 						if ( data.entities[ i ].title ) {
@@ -577,7 +578,7 @@ $.widget( 'wikibase.linkitem', {
 					} else {
 						// The current page already is linked with an item which is linked with other pages... this probably some kind of edit conflict.
 						// Show an error and let the user purge the page
-						var tooltip = new wb.ui.Tooltip(
+						tooltip = new wb.ui.Tooltip(
 							this.$goButton,
 							{},
 							mw.msg( 'wikibase-linkitem-failure' ),
