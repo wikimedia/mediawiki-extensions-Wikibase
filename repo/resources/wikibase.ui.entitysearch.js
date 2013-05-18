@@ -35,7 +35,7 @@
 		}
 
 		$input
-		.one( 'focus', function( event ) {
+		.one( 'focus', function() {
 			if ( $.data( this, 'suggestionsContext' ) ) {
 				removeSuggestionContext( this );
 			} else {
@@ -43,6 +43,7 @@
 				// the page is still rendered.
 				var $input = $( this );
 				$input.on( 'keypress.entitysearch', function( event ) {
+					/*jshint unused:false */
 					if ( $.data( this, 'suggestionsContext' ) ) {
 						removeSuggestionContext( this );
 						$input.off( '.entitysearch' );
@@ -61,15 +62,21 @@
 					.append( $( '<div/>' ).addClass( 'special-query' )
 				),
 				action: function( event, entityselector ) {
+					/*jshint unused:false */
+
 					$form.submit();
 				},
 				cssClass: 'wb-entitysearch-suggestions'
 			}
 		} )
 		.on( 'entityselectoropen', function( event ) {
+			/*jshint unused:false */
+
 			updateSuggestionSpecial();
 		} )
 		.eachchange( function( event, oldVal ) {
+			/*jshint unused:false */
+
 			updateSuggestionSpecial();
 		} );
 
@@ -84,8 +91,8 @@
 
 			// If an entity is selected, redirect to that entity's page.
 			if (
-				event.type === 'click'
-				|| event.keyCode === $.ui.keyCode.ENTER || event.keyCode === $.ui.keyCode.SPACE
+				event.type === 'click' ||
+				event.keyCode === $.ui.keyCode.ENTER || event.keyCode === $.ui.keyCode.SPACE
 			) {
 				var entity = $input.data( 'entityselector' ).selectedEntity();
 				if ( entity && entity.url ){
@@ -101,7 +108,7 @@
 		// in a hidden input element (which has ripped the "name" attribute from the original search
 		// box). Therefore, the entity id needs to be replaced by the actual search box (entity
 		// selector) content.
-		$form.on( 'submit', function( event ) {
+		$form.on( 'submit', function() {
 			$( this ).find( 'input[name="search"]' ).val( $input.val() );
 		} );
 

@@ -14,6 +14,10 @@
 	'use strict';
 
 	$( document ).ready( function() {
+		var labelEditTool, editableLabel, termsValueTools, fetchedEntityUnserializer,
+			entityJSON, usedEntitiesJSON, unserializerFactory, entityUnserializer,
+			$claims, $claimsParent, $claimsHeading;
+
 		// remove HTML edit links with links to special pages
 		// for site-links we don't want to remove the table cell representing the edit section
 		$( 'td.wb-editsection' ).empty();
@@ -25,8 +29,9 @@
 
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
 		if ( $( '.wb-firstHeading' ).length ) { // Special pages do not have a custom wb heading
-			var labelEditTool = new wb.ui.LabelEditTool( $( '.wb-firstHeading' )[0] );
-			var editableLabel = labelEditTool.getValues( true )[0]; // [0] will always be set
+			labelEditTool = new wb.ui.LabelEditTool( $( '.wb-firstHeading' )[0] );
+			editableLabel = labelEditTool.getValues( true )[0]; // [0] will always be set
+			termsValueTools = [];
 
 			// make sure we update the 'title' tag of the page when label changes
 			editableLabel.on( 'afterStopEditing', function() {
@@ -46,22 +51,21 @@
 
 		// add an edit tool for all properties in the data view:
 		$( '.wb-property-container' ).each( function() {
+			/*jshint nonew: false */
+
 			// TODO: Make this nicer when we have implemented the data model
-			if( $( this ).children( '.wb-property-container-key' ).attr( 'title') === 'description' ) {
+			if( $( this ).children( '.wb-property-container-key' ).attr( 'title' ) === 'description' ) {
 				new wb.ui.DescriptionEditTool( this );
 			} else {
 				new wb.ui.PropertyEditTool( this );
 			}
 		} );
 
-		var termsValueTools = [];
-
 		$( 'tr.wb-terms-label, tr.wb-terms-description' ).each( function() {
 			var $termsRow = $( this ),
 				editTool = wb.ui.PropertyEditTool[
-					$termsRow.hasClass( 'wb-terms-label' )
-						? 'EditableLabel'
-						: 'EditableDescription'
+					$termsRow.hasClass( 'wb-terms-label' ) ?
+						'EditableLabel' : 'EditableDescription'
 				],
 				toolbar = new wb.ui.Toolbar(),
 				editGroup = new wb.ui.Toolbar.EditGroup();
@@ -73,13 +77,13 @@
 		} );
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
-			var entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) ),
-				usedEntitiesJSON = $.evalJSON( mw.config.get( 'wbUsedEntities' ) ),
-				unserializerFactory = new wb.serialization.SerializerFactory(),
-				entityUnserializer = unserializerFactory.newUnserializerFor( wb.Entity );
+			entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) );
+			usedEntitiesJSON = $.evalJSON( mw.config.get( 'wbUsedEntities' ) );
+			unserializerFactory = new wb.serialization.SerializerFactory();
+			entityUnserializer = unserializerFactory.newUnserializerFor( wb.Entity );
 
 			// unserializer for fetched content whose content is a wb.Entity:
-			var fetchedEntityUnserializer = unserializerFactory.newUnserializerFor(
+			fetchedEntityUnserializer = unserializerFactory.newUnserializerFor(
 				wb.store.FetchedContent, {
 					contentUnserializer: entityUnserializer
 				}
@@ -101,6 +105,7 @@
 
 			// edit tool for aliases:
 			$( '.wb-aliases' ).each( function() {
+				/*jshint nonew:false */
 				new wb.ui.AliasesEditTool( this );
 			} );
 
@@ -108,19 +113,23 @@
 
 			// BUILD CLAIMS VIEW:
 			// Note: $.entityview() only works for claims right now, the goal is to use it for more
-			var $claims = $( '.wb-claims' ).first(),
-				$claimsParent = $claims.parent();
+			$claims = $( '.wb-claims' ).first();
+			$claimsParent = $claims.parent();
 
 			$claims.detach().entityview( { // take widget subject out of DOM while initializing
 				value: wb.entity
 			} ).appendTo( $claimsParent );
 
 			// add 'wb-claim' id to entity page's Claims heading:
-			var $claimsHeading = $( '.wb-claimlist' ).prev( '.wb-section-heading' ).first();
-			$claimsHeading.attr( 'id', 'claims' );
+			$claimsHeading = $( '.wb-claimlist' )
+				.prev( '.wb-section-heading' )
+				.first()
+				.attr( 'id', 'claims' );
 
 			// removing site links heading to rebuild it with value counter
 			$( 'table.wb-sitelinks' ).each( function() {
+				var editTool;
+
 				$( this ).before(
 					mw.template( 'wb-section-heading', mw.msg( 'wikibase-sitelinks' ), 'sitelinks' )
 					.append(
@@ -130,7 +139,7 @@
 					)
 				);
 				// actual initialization
-				new wb.ui.SiteLinksEditTool( $( this ) );
+				editTool = new wb.ui.SiteLinksEditTool( $( this ) );
 			} );
 
 			// BUILD TOOLBARS
@@ -180,8 +189,8 @@
 			// disable language terms table's editable value or mark it as the active one if it is
 			// the one being edited by the user and therefore the origin of the event
 			$.each( termsValueTools, function( i, termValueTool ) {
-				if ( !( origin instanceof wb.ui.PropertyEditTool.EditableValue )
-					|| origin.getSubject() !== termValueTool.getSubject()
+				if ( !( origin instanceof wb.ui.PropertyEditTool.EditableValue ) ||
+					origin.getSubject() !== termValueTool.getSubject()
 				) {
 					termValueTool.disable();
 				} else if ( origin && origin.getSubject() === termValueTool.getSubject() ) {
@@ -204,13 +213,14 @@
 				var userLang = mw.config.get( 'wgUserLanguage' ),
 					cookieKey = 'wikibase.acknowledgedentitycopyright.' + userLang,
 					$message = $( '<span><p>' + mw.config.get( 'wbCopyrightWarning' ) + '</p></span>' ),
-					messageText = $.trim( $message.text() ); // get this before adding $hideMessage link!
+					messageText = $.trim( $message.text() ), // get this before adding $hideMessage link!
+					$activeToolbar, $hideMessage, toolbar, gravity, tooltip, messageAnchor;
 
 				if( messageText === $.cookie( cookieKey ) ) {
 					return;
 				}
 
-				var $activeToolbar = $( '.wb-edit' )
+				$activeToolbar = $( '.wb-edit' )
 					// label/description of EditableValue always in edit mode if empty, 2nd '.wb-edit'
 					// on PropertyEditTool only appended when really being edited by the user though
 					.not( '.wb-ui-propertyedittool-editablevalue-ineditmode' )
@@ -220,17 +230,16 @@
 					return; // no toolbar for some reason, just stop
 				}
 
-				var toolbar = $activeToolbar.data( 'wb-toolbar' ),
-					$hideMessage = $( '<a/>', {
-						href: 'javascript:void(0);',
-						text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
-					} ).appendTo( $message );
+				toolbar = $activeToolbar.data( 'wb-toolbar' );
 
-				var gravity = ( options && options.wbCopyrightWarningGravity )
-					? options.wbCopyrightWarningGravity
-					: 'nw';
+				$hideMessage = $( '<a>' )
+					.text( mw.msg( 'wikibase-copyrighttooltip-acknowledge' ) )
+					.appendTo( $message );
 
-				var tooltip = new wb.ui.Tooltip(
+				gravity = ( options && options.wbCopyrightWarningGravity ) ?
+					options.wbCopyrightWarningGravity : 'nw';
+
+				tooltip = new wb.ui.Tooltip(
 					toolbar.btnSave.getTooltipParent(), // adjust tooltip to save button
 					{},
 					$message,
@@ -243,10 +252,12 @@
 				// we don't even have to add this new toolbar element to the toolbar, we only use it
 				// to manage the tooltip which will have the 'save' button as element to point to.
 				// The 'save' button can still have its own tooltip though.
-				var messageAnchor = new wb.ui.Toolbar.Label( $( '<span/>' ) );
+				messageAnchor = new wb.ui.Toolbar.Label( $( '<span>' ) );
 				messageAnchor.setTooltip( tooltip );
 
-				$hideMessage.on( 'click', function() {
+				$hideMessage.on( 'click', function( event ) {
+					event.preventDefault();
+
 					messageAnchor.removeTooltip();
 					$.cookie( cookieKey, messageText, { 'expires': null, 'path': '/' } );
 				} );
@@ -254,14 +265,14 @@
 				tooltip.show( true ); // show permanently, not just on hover!
 
 				// destroy tooltip after edit mode gets closed again:
-				$( wb ).one( 'stopItemPageEditMode', function( event ) {
+				$( wb ).one( 'stopItemPageEditMode', function() {
 					tooltip.destroy();
 					toolbar.removeElement( messageAnchor );
 				} );
 			}
 		} );
 
-		$( wb ).on( 'stopItemPageEditMode', function( event ) {
+		$( wb ).on( 'stopItemPageEditMode', function() {
 			$( 'table.wb-terms' ).removeClass( 'wb-edit' );
 			$.each( termsValueTools, function( i, termValueTool ) {
 				termValueTool.enable();
