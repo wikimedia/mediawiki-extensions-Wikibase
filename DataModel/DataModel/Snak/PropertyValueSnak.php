@@ -124,6 +124,7 @@ class PropertyValueSnak extends SnakObject {
 	 * The DataValue
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.4
 	 *
 	 * @param EntityId $propertyId
 	 * @param mixed $rawDataValue

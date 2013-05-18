@@ -1,10 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\EntityContentFactory;
 
 /**
- * Tests for the Wikibase\EntityContentFactory class.
+ * @covers Wikibase\EntityContentFactory
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,19 +31,35 @@ use Wikibase\EntityContentFactory;
  * @group Wikibase
  * @group WikibaseEntity
  * @group WikibaseContent
- * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityContentFactoryTest extends \MediaWikiTestCase {
+class EntityContentFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetEntityContentModels() {
-		$this->assertInternalType( 'array', EntityContentFactory::singleton()->getEntityContentModels() );
+		$contentModelIds = array( 42, 1337, 9001 );
+
+		$factory = new EntityContentFactory(
+			$this->newMockIdFormatter(),
+			$contentModelIds
+		);
+
+		$this->assertEquals( $contentModelIds, $factory->getEntityContentModels() );
+	}
+
+	protected function newMockIdFormatter() {
+		$idFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
+			->disableOriginalConstructor()->getMock();
+
+		return $idFormatter;
 	}
 
 	public function testIsEntityContentModel() {
-		$factory = EntityContentFactory::singleton();
+		$factory = new EntityContentFactory(
+			$this->newMockIdFormatter(),
+			array( 42, 1337, 9001 )
+		);
 
 		foreach ( $factory->getEntityContentModels() as $type ) {
 			$this->assertTrue( $factory->isEntityContentModel( $type ) );

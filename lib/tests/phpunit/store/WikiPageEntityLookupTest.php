@@ -111,6 +111,7 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 			throw new \MWException( "Can't generate test entities in a client database." );
 		}
 
+		// FIXME: this is using repo functionality
 		$content = \Wikibase\EntityContentFactory::singleton()->newFromEntity( $entity );
 		$status = $content->save( "storeTestEntity" );
 
