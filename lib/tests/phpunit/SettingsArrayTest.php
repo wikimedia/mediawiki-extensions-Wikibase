@@ -1,10 +1,11 @@
 <?php
 
 namespace Wikibase\Lib\Test;
+
 use Wikibase\SettingsArray;
 
 /**
- * Tests for the SettingsArray class.
+ * @covers Wikibase\SettingsArray
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,48 +29,70 @@ use Wikibase\SettingsArray;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group SettingsArrayTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SettingsArrayTest extends \MediaWikiTestCase {
+class SettingsArrayTest extends \PHPUnit_Framework_TestCase {
 
-	public function settingArrayProvider() {
-		$settingArrays = array();
+	/**
+	 * @dataProvider settingProvider
+	 */
+	public function testGetKnownSetting( array $settings ) {
+		$settingsArray = new SettingsArray( $settings );
 
-		$settingArrays[] = new SettingsArray();
+		foreach ( $settingsArray as $settingName => $settingValue ) {
+			$this->assertEquals( $settingValue, $settingsArray->getSetting( $settingName ) );
+		}
 
-		return $this->arrayWrap( $settingArrays );
+		$this->assertSameSize( $settings, $settingsArray );
+	}
+
+	public function settingProvider() {
+		$argLists = array();
+
+		$argLists[] = array( array() );
+
+		$argLists[] = array( array(
+			'foo' => 'bar'
+		) );
+
+		$argLists[] = array( array(
+			'foo' => 'bar',
+			'baz' => 'bah',
+		) );
+
+		$argLists[] = array( array(
+			'foo' => 'bar',
+			'baz' => 'bah',
+			'blah' => 'bah',
+			'nyan' => 1337,
+			'onoez' => array( 1, 2, 3 ),
+			'spam' => false,
+			'hax' => null,
+		) );
+
+		return $argLists;
 	}
 
 	/**
-	 * @dataProvider settingArrayProvider
-	 *
-	 * @param SettingsArray $settings
+	 * @dataProvider settingProvider
 	 */
-	public function testGetSetting( SettingsArray $settings ) {
-		foreach ( $settings as $settingName => $settingValue ) {
-			$this->assertEquals( $settingValue, $settings->getSetting( $settingName ) );
-		}
+	public function testGetUnknownSetting( array $settings ) {
+		$settingsArray = new SettingsArray( $settings );
 
-		$unknownSettings = array( 'dzgtxdfgtdsrxstds4ryt', 'sadftsrftszy' );
+		$this->setExpectedException( 'OutOfBoundsException' );
 
-		foreach ( $unknownSettings as $unknownSetting ) {
-			$this->assertException(
-				function() use ( $settings, $unknownSetting ) {
-					$settings->getSetting( $unknownSetting );
-				},
-				'MWException'
-			);
-		}
+		$settingsArray->getSetting( 'NyanData ALL the way across the sky' );
 	}
 
 	/**
-	 * @dataProvider settingArrayProvider
-	 *
-	 * @param SettingsArray $settings
+	 * @dataProvider settingProvider
 	 */
-	public function testHasSetting( SettingsArray $settings ) {
+	public function testHasSetting( array $settings ) {
+		$settings = new SettingsArray( $settings );
+
 		foreach ( array_keys( iterator_to_array( $settings ) ) as $settingName ) {
 			$this->assertTrue( $settings->hasSetting( $settingName ) );
 		}
@@ -78,11 +101,11 @@ class SettingsArrayTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider settingArrayProvider
-	 *
-	 * @param SettingsArray $settings
+	 * @dataProvider settingProvider
 	 */
-	public function testSetSetting( SettingsArray $settings ) {
+	public function testSetSetting( array $settings ) {
+		$settings = new SettingsArray( $settings );
+
 		foreach ( $settings as $settingName => $settingValue ) {
 			$settings->setSetting( $settingName, $settingValue );
 			$this->assertEquals( $settingValue, $settings->getSetting( $settingName ) );
