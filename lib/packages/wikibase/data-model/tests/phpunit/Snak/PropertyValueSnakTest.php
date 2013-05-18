@@ -109,7 +109,7 @@ class PropertyValueSnakTest extends SnakObjectTest {
 
 		$this->assertInstanceOf( '\Wikibase\PropertyValueSnak', $instance );
 		$this->assertTrue( $instance->getDataValue()->equals( $dataValue ) );
-		$this->assertEquals( $property->getPrefixedId(), $instance->getPropertyId()->getPrefixedId() );
+		$this->assertEquals( $property->getId(), $instance->getPropertyId() );
 	}
 
 }

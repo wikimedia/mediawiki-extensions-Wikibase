@@ -179,6 +179,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * Returns a prefixed version of the entity's id or null if it is not in the datastore yet.
 	 *
 	 * @since 0.2
+	 * @deprecated since 0.4
 	 *
 	 * @return string|null
 	 */
@@ -897,6 +898,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * Parses the claim GUID and returns the prefixed entity ID it contains.
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.4
 	 *
 	 * @param string $claimKey
 	 *
