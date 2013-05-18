@@ -34,9 +34,18 @@ if ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
 
 global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks;
 
-//$wgExtensionCredits['other'][] = include( __DIR__ . '/DataModel.credits.php' );
+$wgExtensionCredits['wikibase'][] = array(
+	'path' => __DIR__,
+	'name' => 'Wikibase DataModel',
+	'version' => WIKIBASE_DATAMODEL_VERSION,
+	'author' => array(
+		'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
+	),
+	'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_DataModel',
+	'descriptionmsg' => 'wikibasedatamodel-desc'
+);
 
-//$wgExtensionMessagesFiles['WikibaseDataModel'] = __DIR__ . '/DataModel.i18n.php';
+$wgExtensionMessagesFiles['WikibaseDataModel'] = __DIR__ . '/DataModel.i18n.php';
 
 // Autoloading
 foreach ( include( __DIR__ . '/DataModel.classes.php' ) as $class => $file ) {
