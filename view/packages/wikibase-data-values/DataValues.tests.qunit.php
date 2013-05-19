@@ -62,6 +62,7 @@ return call_user_func( function() {
 				"$bp/values/NumberValue.tests.js",
 				"$bp/values/TimeValue.tests.js",
 				"$bp/values/UnknownValue.tests.js",
+				"$bp/values/UnUnserializableValue.tests.js",
 			),
 			'dependencies' => array(
 				'dataValues.DataValue.tests',
