@@ -49,16 +49,17 @@ class RdfBuilder {
 	const NS_ONTOLOGY =  'wikibase'; // wikibase ontology (shared)
 	const NS_ENTITY =    'entity';   // concept uris
 	const NS_DATA =      'data';     // document uris
-	const NS_PROPERTY =  'p'; // entity -> value
 	const NS_VALUE =     'v'; // statement -> value
 	const NS_QUALIFIER = 'q'; // statement -> qualifier
 	const NS_STATEMENT = 's'; // entity -> statement
 
 	const NS_SKOS = 'skos'; // SKOS vocabulary
 	const NS_SCHEMA_ORG = 'schema'; // schema.org vocabulary
+	const NS_CC = 'cc';
 
 	const SKOS_URI = 'http://www.w3.org/2004/02/skos/core#';
 	const SCHEMA_ORG_URI = 'http://schema.org/';
+	const CC_URI = 'http://creativecommons.org/ns#';
 
 	const WIKIBASE_STATEMENT_QNAME = 'wikibase:Statement';
 
@@ -86,6 +87,7 @@ class RdfBuilder {
 	 */
 	public function __construct(
 		$baseUri,
+		$dataUri,
 		EntityIdFormatter $idFormatter,
 		EasyRdf_Graph $graph = null
 	) {
@@ -95,18 +97,19 @@ class RdfBuilder {
 
 		$this->graph = $graph;
 		$this->baseUri = $baseUri;
+		$this->dataUri = $dataUri;
 		$this->idFormatter = $idFormatter;
 
 		$this->namespaces = array(
 			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI,
-			self::NS_DATA => $this->baseUri . '/data/',
-			self::NS_ENTITY => $this->baseUri . '/entity/',
-			self::NS_PROPERTY => $this->baseUri . '/property/',
-			self::NS_VALUE => $this->baseUri . '/value/',
-			self::NS_QUALIFIER => $this->baseUri . '/qualifier/',
-			self::NS_STATEMENT => $this->baseUri . '/statement/',
+			self::NS_DATA => $this->dataUri,
+			self::NS_ENTITY => $this->baseUri,
+			self::NS_VALUE => $this->baseUri . 'value/',
+			self::NS_QUALIFIER => $this->baseUri . 'qualifier/',
+			self::NS_STATEMENT => $this->baseUri . 'statement/',
 			self::NS_SKOS => self::SKOS_URI,
 			self::NS_SCHEMA_ORG => self::SCHEMA_ORG_URI,
+			self::NS_CC => self::CC_URI,
 		);
 
 		//XXX: Ugh, static. Should go into $this->graph.
@@ -154,7 +157,7 @@ class RdfBuilder {
 	 * @return string
 	 */
 	public function getEntityQName( $prefix, EntityId $id ) {
-		return $prefix . ':' . $this->idFormatter->format( $id );
+		return $prefix . ':' . ucfirst( $this->idFormatter->format( $id ) );
 	}
 
 	/**
@@ -205,7 +208,7 @@ class RdfBuilder {
 	 */
 	public function getDataURL( EntityId $id ) {
 		$base = $this->namespaces[ self::NS_DATA ];
-		$url = $base . $this->idFormatter->format( $id );
+		$url = $base . ucfirst( $this->idFormatter->format( $id ) );
 		return $url;
 	}
 
@@ -253,12 +256,12 @@ class RdfBuilder {
 	public function addEntityMetaData( Entity $entity, Revision $rev = null ) {
 		$entityResource = $this->getEntityResource( $entity->getId() );
 		$entityResource->addResource( 'rdf:type', $this->getEntityTypeQName( $entity->getType() ) );
-
-		$dataResource = $this->graph->resource( '#' ); // "this document"
 		$dataURL = $this->getDataURL( $entity->getId() );
-		$dataResource->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
-		$dataResource->addResource( self::NS_SCHEMA_ORG . ':url', $dataURL );
+
+		$dataResource = $this->graph->resource( $dataURL ); // "this document"
 		$dataResource->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ":Dataset" );
+		$dataResource->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
+		$dataResource->addResource( self::NS_CC . ':license', 'http://creativecommons.org/publicdomain/zero/1.0/' );
 
 		if ( $rev ) {
 			$dataResource->addLiteral( self::NS_SCHEMA_ORG . ':version', $rev->getId() );
@@ -346,9 +349,9 @@ class RdfBuilder {
 			$url = wfExpandUrl( $link->getUrl(), PROTO_HTTP );
 			$pageRecourse = $this->graph->resource( $url );
 
-			$pageRecourse->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
-			$pageRecourse->addResource( self::NS_SCHEMA_ORG . ':inLanguage', $languageCode );
 			$pageRecourse->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ':Article' );
+			$pageRecourse->addResource( self::NS_SCHEMA_ORG . ':about', $entityResource );
+			$pageRecourse->addLiteral( self::NS_SCHEMA_ORG . ':inLanguage', $languageCode );
 		}
 	}
 
@@ -419,7 +422,7 @@ class RdfBuilder {
 		$entityResource = $this->getEntityResource( $entity->getId() );
 
 		$propertyId = $claim->getMainSnak()->getPropertyId();
-		$propertyQName = $this->getEntityQName( self::NS_PROPERTY, $propertyId );
+		$propertyQName = $this->getEntityQName( self::NS_ENTITY, $propertyId );
 
 		$statementResource = $this->getStatementResource( $claim );
 		$entityResource->addResource( $propertyQName, $statementResource );

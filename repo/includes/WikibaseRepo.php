@@ -114,6 +114,7 @@ final class WikibaseRepo {
 
 		$uri = $wgServer;
 		$uri = preg_replace( '!^//!', 'http://', $uri );
+		$uri = $uri . '/entity/';
 		return $uri;
 	}
 
