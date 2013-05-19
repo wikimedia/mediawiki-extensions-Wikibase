@@ -42,6 +42,7 @@ var dataValues = new( function Dv( $ ) {
 	 * @since 0.1
 	 *
 	 * @throws {Error} If the a unknown data value type is given.
+	 * @throws {Error} If the given data is not sufficient for constructing the data value.
 	 *
 	 * @param {String} dataValueType
 	 * @param {*} data

@@ -130,7 +130,7 @@
 		 *
 		 * @since 0.1
 		 *
-		 * @param {QUnit} assert
+		 * @param {QUnit.assert} assert
 		 */
 		testGetSortKey: function( assert ) {
 			var instances = this.getInstances(),
@@ -148,11 +148,27 @@
 		},
 
 		/**
+		 * Tests whether the data value's constructor has a newFromJSON function.
+		 *
+		 * @since 0.1
+		 *
+		 * @param {QUnit.assert} assert
+		 */
+		testNewFromJSON: function( assert ) {
+			var fnNewFromJSON = this.getConstructor().newFromJSON;
+
+			assert.ok(
+				$.isFunction( fnNewFromJSON ),
+				'has a related newFromJSON function'
+			);
+		},
+
+		/**
 		 * Tests the toJSON method.
 		 *
 		 * @since 0.1
 		 *
-		 * @param {QUnit} assert
+		 * @param {QUnit.assert} assert
 		 */
 		testToJSON: function( assert ) {
 			var instances = this.getInstances(),
@@ -161,7 +177,37 @@
 
 			for ( i in instances ) {
 				jsonValue = instances[i].toJSON();
-				assert.ok( true ); // TODO: add meaningful assertion
+
+				assert.ok(
+					jsonValue !== undefined,
+					'toJSON() returned some value'
+				);
+			}
+		},
+
+		/**
+		 * Gets a data values JSON, constructs a new data value from it by using the newFromJSON
+		 * and checks whether the two are equal.
+		 *
+		 * @param {QUnit.assert} assert
+		 */
+		testJsonRoundtripping: function( assert ) {
+			var instances = this.getInstances(),
+				fnNewFromJSON = this.getConstructor().newFromJSON,
+				i,
+				value1,
+				value2,
+				jsonValue;
+
+			for ( i in instances ) {
+				value1 = instances[i];
+				jsonValue = value1.toJSON();
+				value2 = fnNewFromJSON( jsonValue );
+
+				assert.ok(
+					value1.equals( value2 ) && value2.equals( value1 ),
+					'data value created from another data values JSON is equal to its donor'
+				);
 			}
 		},
 

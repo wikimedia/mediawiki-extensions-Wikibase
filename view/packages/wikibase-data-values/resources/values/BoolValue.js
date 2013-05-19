@@ -6,12 +6,14 @@
  *
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( dv, $, undefined ) {
+( function( dv, $ ) {
 'use strict';
 
 var PARENT = dv.DataValue,
 	constructor = function( value ) {
-		// TODO: validate
+		if( typeof value !== 'boolean' ) {
+			throw new Error( 'A boolean value has to be given' );
+		}
 		this._value = value;
 	};
 
@@ -22,7 +24,7 @@ var PARENT = dv.DataValue,
  * @extends dv.DataValue
  * @since 0.1
  *
- * @param {String} value
+ * @param {boolean} value
  */
 dv.BoolValue = dv.util.inherit( 'DvBoolValue', PARENT, constructor, {
 
@@ -31,7 +33,7 @@ dv.BoolValue = dv.util.inherit( 'DvBoolValue', PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return Number
+	 * @return number
 	 */
 	getSortKey: function() {
 		return this._value ? 1 : 0;
@@ -42,7 +44,7 @@ dv.BoolValue = dv.util.inherit( 'DvBoolValue', PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return Boolean
+	 * @return boolean
 	 */
 	getValue: function() {
 		return this._value;
@@ -65,6 +67,8 @@ dv.BoolValue = dv.util.inherit( 'DvBoolValue', PARENT, constructor, {
 	 * @see dv.DataValue.toJSON
 	 *
 	 * @since 0.1
+	 *
+	 * @return boolean
 	 */
 	toJSON: function() {
 		return this._value;
