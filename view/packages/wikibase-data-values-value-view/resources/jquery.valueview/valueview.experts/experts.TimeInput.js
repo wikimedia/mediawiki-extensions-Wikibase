@@ -207,6 +207,7 @@
 					self.$precision.data( 'listrotator' ).rotate( value.precision() );
 					self.$calendar.data( 'listrotator' ).rotate( value.calendarText() );
 				}
+				self._newValue = false; // value, not yet handled by draw(), is outdated now
 				self._viewNotifier.notify( 'change' );
 			} );
 
