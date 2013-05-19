@@ -60,19 +60,22 @@ class RdfSerializer {
 
 	/**
 	 * @param EasyRdf_Format        $format
-	 * @param string                $uriBase
+	 * @param string                $baseUri
+	 * @param string                $dataUri
 	 * @param EntityLookup          $entityLookup
 	 * @param DataTypeFactory       $dataTypeFactory
 	 * @param Lib\EntityIdFormatter $idFormatter
 	 */
 	public function __construct(
 		EasyRdf_Format $format,
-		$uriBase,
+		$baseUri,
+		$dataUri,
 		EntityLookup $entityLookup,
 		DataTypeFactory $dataTypeFactory,
 		EntityIdFormatter $idFormatter
 	) {
-		$this->uriBase = $uriBase;
+		$this->baseUri = $baseUri;
+		$this->dataUri = $dataUri;
 		$this->format = $format;
 		$this->entityLookup = $entityLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
@@ -127,7 +130,8 @@ class RdfSerializer {
 		//TODO: language filter
 
 		$builder = new RdfBuilder(
-			$this->uriBase,
+			$this->baseUri,
+			$this->dataUri,
 			$this->idFormatter
 		);
 

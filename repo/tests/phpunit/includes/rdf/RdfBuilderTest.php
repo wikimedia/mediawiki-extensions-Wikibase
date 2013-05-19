@@ -46,7 +46,8 @@ use Wikibase\RdfBuilder;
  */
 class RdfBuilderTest extends \MediaWikiTestCase {
 
-	const URI_BASE = 'http://acme.test';
+	const URI_BASE = 'http://acme.test/';
+	const URI_DATA = 'http://data.acme.test/';
 
 	public function setUp() {
 		parent::setUp();
@@ -106,8 +107,9 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder = self::newRdfBuilder( 'rdf' ); //XXX: ugh, dummy object
 
 		$entityUri = $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entityId );
+		$dataUri = $builder->getDataURL( $entityId );
 		$entityResource = $graph->resource( $entityUri );
-		$dataResource = $graph->resource( '#' );
+		$dataResource = $graph->resource( $dataUri );
 
 		self::addProperties( $graph, $entityResource, $entityProps );
 		self::addProperties( $graph, $dataResource, $dataProps );
@@ -198,7 +200,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			array(
 				'rdf:type' => RdfBuilder::NS_SCHEMA_ORG . ':Dataset',
 				'schema:about' => $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entities['terms']->getId() ),
-				'schema:url' => $builder->getDataURL( $entities['terms']->getId() ),
 			)
 		);
 
@@ -214,13 +215,14 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	protected static function newRdfBuilder() {
 		$idFormatter = new EntityIdFormatter( new FormatterOptions( array(
 			EntityIdFormatter::OPT_PREFIX_MAP => array(
-				Item::ENTITY_TYPE => 'q',
-				Property::ENTITY_TYPE => 'p',
+				Item::ENTITY_TYPE => 'Q',
+				Property::ENTITY_TYPE => 'P',
 			)
 		) ) );
 
 		return new RdfBuilder(
 			self::URI_BASE,
+			self::URI_DATA,
 			$idFormatter
 		);
 	}

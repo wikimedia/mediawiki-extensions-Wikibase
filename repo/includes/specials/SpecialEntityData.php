@@ -53,6 +53,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 	protected $rdfBaseURI = null;
 
 	/**
+	 * @var string
+	 */
+	protected $rdfDataURI = null;
+
+	/**
 	 * @var Wikibase\EntityLookup
 	 */
 	protected $entityLookup = null;
@@ -115,6 +120,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$repo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 		$this->rdfBaseURI = $repo->getRdfBaseURI();
+		$this->rdfDataURI = $this->getTitle()->getCanonicalURL() . '/';
 		$this->entityLookup = \Wikibase\StoreFactory::getStore()->getEntityLookup();
 		$this->dataTypeFactory = $repo->getDataTypeFactory();
 		$this->idFormatter = $repo->getIdFormatter();
@@ -295,6 +301,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$serializer = new RdfSerializer(
 			$rdfFormat,
 			$this->rdfBaseURI,
+			$this->rdfDataURI,
 			$this->entityLookup,
 			$this->dataTypeFactory,
 			$this->idFormatter
