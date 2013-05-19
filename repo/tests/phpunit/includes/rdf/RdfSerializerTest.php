@@ -115,7 +115,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 
 		$patterns['terms']['rdf'] = array(
 			'!<rdf:RDF.*</rdf:RDF>!s',
-			'!<wikibase:Item.*rdf:about=".*?entity/q2"!s',
+			'!<wikibase:Item.*rdf:about=".*?/Q2"!s',
 			'!<rdfs:label xml:lang="en">Berlin</rdfs:label>!s',
 			'!<skos:prefLabel xml:lang="en">Berlin</skos:prefLabel>!s',
 			'!<schema:name xml:lang="en">Berlin</schema:name>!s',
@@ -124,7 +124,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		);
 
 		$patterns['terms']['n3']  = array(
-			'!entity:q2!s',
+			'!entity:Q2!s',
 			'!rdfs:label +"Berlin"@en,!s',
 			'!skos:prefLabel +"Berlin"@en,!s',
 			'!schema:name +"Berlin"@en,!s',
@@ -146,8 +146,8 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		$dataTypes = new DataTypeFactory( self::$dataTypes );
 		$idSerializer = new EntityIdFormatter( new FormatterOptions( array(
 			EntityIdFormatter::OPT_PREFIX_MAP => array(
-				Item::ENTITY_TYPE => 'q',
-				Property::ENTITY_TYPE => 'p',
+				Item::ENTITY_TYPE => 'Q',
+				Property::ENTITY_TYPE => 'P',
 			)
 		) ) );
 
@@ -160,6 +160,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		return new RdfSerializer(
 			$format,
 			RdfBuilderTest::URI_BASE,
+			RdfBuilderTest::URI_DATA,
 			$mockRepo,
 			$dataTypes,
 			$idSerializer

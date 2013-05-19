@@ -62,9 +62,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public static function provideGetRdfBaseURI() {
 		return array(
-			array ( 'http://acme.test', 'http://acme.test' ),
-			array ( 'https://acme.test', 'https://acme.test' ),
-			array ( '//acme.test', 'http://acme.test' ),
+			array ( 'http://acme.test', 'http://acme.test/entity/' ),
+			array ( 'https://acme.test', 'https://acme.test/entity/' ),
+			array ( '//acme.test', 'http://acme.test/entity/' ),
 		);
 	}
 
