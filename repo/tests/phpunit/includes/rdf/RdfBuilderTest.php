@@ -107,7 +107,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		$entityUri = $builder->getEntityQName( RdfBuilder::NS_ENTITY, $entityId );
 		$entityResource = $graph->resource( $entityUri );
-		$dataResource = $graph->resource( '#' );
+		$dataResource = $graph->resource( $entityUri . '.rdf' );
 
 		self::addProperties( $graph, $entityResource, $entityProps );
 		self::addProperties( $graph, $dataResource, $dataProps );
@@ -214,8 +214,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	protected static function newRdfBuilder() {
 		$idFormatter = new EntityIdFormatter( new FormatterOptions( array(
 			EntityIdFormatter::OPT_PREFIX_MAP => array(
-				Item::ENTITY_TYPE => 'q',
-				Property::ENTITY_TYPE => 'p',
+				Item::ENTITY_TYPE => 'Q',
+				Property::ENTITY_TYPE => 'P',
 			)
 		) ) );
 
