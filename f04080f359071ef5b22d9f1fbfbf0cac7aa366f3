@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxUvEpJM",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2013-05-20T17:41:31Z",
+      "side": 1,
+      "message": "\".rdf\": what about other serialization formats like Turtle?",
+      "revId": "f04080f359071ef5b22d9f1fbfbf0cac7aa366f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxWvH4Jk",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2013-05-20T17:41:31Z",
+      "side": 1,
+      "message": "Use maybe EasyRdf_Resource::setType()?",
+      "revId": "f04080f359071ef5b22d9f1fbfbf0cac7aa366f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
