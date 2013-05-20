@@ -103,11 +103,11 @@
 		// NOTE: Having the calendar model as url to Wikidata was a specified data model requirement.
 
 		// Time instance should be defined as Gregorian:
-		if( json.calendarmodel === 'http://wikidata.org/id/Q1985727' ) {
+		if( json.calendarmodel === 'http://www.wikidata.org/entity/Q1985727' ) {
 			finalTime = gregorianTime;
 		}
 		// Time instance should be defined as Julian:
-		else if( json.calendarmodel === 'http://wikidata.org/id/Q1985786' ) {
+		else if( json.calendarmodel === 'http://www.wikidata.org/entity/Q1985786' ) {
 			// Since the data value saves the time as Gregorian, we first have to transform that
 			// back into Julian.
 			// NOTE: As of May 15 2013 we decided that this is nonsense and that we should always
