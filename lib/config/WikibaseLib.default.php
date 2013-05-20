@@ -86,6 +86,7 @@ return call_user_func( function() {
 			'wikibase-item',
 			'commonsMedia',
 			'string',
+			'time',
 		),
 	);
 
@@ -97,7 +98,6 @@ return call_user_func( function() {
 			'quantity',
 			'monolingual-text',
 			'multilingual-text',
-			'time',
 		) );
 	}
 
