@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DxUvoI7Y",
+        "filename": "client/includes/api/ApiClientInfo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-05-20T20:18:14Z",
+      "side": 1,
+      "message": "perhaps a next step (not in this patch) is to have an object that contains the relevant settings (e.g. RepoSite) and maybe extend from the Site classes.",
+      "parentUuid": "Dxd1hqzs",
+      "revId": "39bb803bb6bfed64411d0fe6865fb31cd4c3dafa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxZ04w54",
         "filename": "client/includes/api/ApiClientInfo.php",
         "patchSetId": 3
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "DxavZ5yA",
+        "filename": "client/includes/api/ApiClientInfo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-05-20T20:18:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dxb1i3z8",
+      "revId": "39bb803bb6bfed64411d0fe6865fb31cd4c3dafa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dxb0uX0I",
         "filename": "client/tests/phpunit/includes/api/ApiClientInfoTest.php",
         "patchSetId": 3
@@ -65,6 +101,24 @@
       "writtenOn": "2013-05-16T15:29:39Z",
       "side": 1,
       "message": "what do we need the user for?",
+      "revId": "39bb803bb6bfed64411d0fe6865fb31cd4c3dafa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxWvGv00",
+        "filename": "client/tests/phpunit/includes/api/ApiClientInfoTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-05-20T20:18:14Z",
+      "side": 1,
+      "message": "user is needed for the api context, though simply User::newFromName appears sufficient here",
+      "parentUuid": "Dxb0uX0I",
       "revId": "39bb803bb6bfed64411d0fe6865fb31cd4c3dafa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "DxcvDkzo",
+        "filename": "client/tests/phpunit/includes/api/ApiClientInfoTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-05-20T20:18:14Z",
+      "side": 1,
+      "message": "could be....",
+      "parentUuid": "Dxd1CSxI",
+      "revId": "39bb803bb6bfed64411d0fe6865fb31cd4c3dafa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxT1Ijy8",
         "filename": "client/tests/phpunit/includes/api/ApiClientInfoTest.php",
         "patchSetId": 3
@@ -99,6 +171,24 @@
       "writtenOn": "2013-05-16T15:29:39Z",
       "side": 1,
       "message": "This doesn\u0027t allow us to test for HTTP response codes - but then, we very rarely do that anyway.",
+      "revId": "39bb803bb6bfed64411d0fe6865fb31cd4c3dafa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxQveGw4",
+        "filename": "client/tests/phpunit/includes/api/ApiClientInfoTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-05-20T20:18:14Z",
+      "side": 1,
+      "message": "good idea and need to think how to do that",
+      "parentUuid": "DxT1Ijy8",
       "revId": "39bb803bb6bfed64411d0fe6865fb31cd4c3dafa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
