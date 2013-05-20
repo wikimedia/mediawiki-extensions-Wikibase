@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DxRAGTYY",
+        "filename": "repo/maintenance/transformXMLtoRDF.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-05-20T14:50:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DxT0lLw0",
+      "revId": "742615c89a6bebaef27079f44de4203b50536d08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dxf2Dx80",
         "filename": "repo/maintenance/transformXMLtoRDF.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "DxXD7UXc",
+        "filename": "repo/maintenance/transformXMLtoRDF.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-05-20T14:50:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dxf2Dx80",
+      "revId": "742615c89a6bebaef27079f44de4203b50536d08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxT1uzzA",
         "filename": "repo/maintenance/transformXMLtoRDF.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2013-05-16T17:02:26Z",
       "side": 1,
       "message": "$modelsToOmmit \u003d array( \u0027foo\u0027, \u0027bar\u0027 );\n\nif ( !in_array( $rev-\u003egetModel(), $modelsToOmmit ) ) {\n\n}",
+      "revId": "742615c89a6bebaef27079f44de4203b50536d08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxVD41Xg",
+        "filename": "repo/maintenance/transformXMLtoRDF.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-05-20T14:50:28Z",
+      "side": 1,
+      "message": "removed, thus done.",
+      "parentUuid": "DxT1uzzA",
       "revId": "742615c89a6bebaef27079f44de4203b50536d08",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
