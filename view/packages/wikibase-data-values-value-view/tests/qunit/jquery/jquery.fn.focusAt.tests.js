@@ -11,7 +11,7 @@
 ( function( $, QUnit ) {
 	'use strict';
 
-	var BROWSER_FOCUS_NOTE = '(An error at this stage might also occur if you removed the focus' +
+	var BROWSER_FOCUS_NOTE = '(An error at this stage might also occur if you removed the focus ' +
 		'from the browser window.)';
 
 	/**
