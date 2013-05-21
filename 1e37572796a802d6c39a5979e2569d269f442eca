@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxVr463g",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-21T15:26:45Z",
+      "side": 1,
+      "message": "This wont work with MediaWiki 1.20, will it?",
+      "revId": "1e37572796a802d6c39a5979e2569d269f442eca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
