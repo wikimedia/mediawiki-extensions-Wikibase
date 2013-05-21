@@ -19,6 +19,74 @@
     },
     {
       "key": {
+        "uuid": "DxY5uuS4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-21T00:21:34Z",
+      "side": 1,
+      "message": "For the sake of performance we might want to use the NamespaceChecker first",
+      "revId": "d09c579d9538dc46100eed6cff91cc154bb8af1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxQ56qe4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-21T00:21:34Z",
+      "side": 1,
+      "message": "SiteLinkTable::getEntityIdForSiteLink returns null or EntityId... so you should do instanceof EntityId or just if ( $entityId )",
+      "revId": "d09c579d9538dc46100eed6cff91cc154bb8af1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxc5GAcM",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-21T00:21:34Z",
+      "side": 1,
+      "message": "Comments should start with an upper case later and there should be a leading space:\n// Adding ...",
+      "revId": "d09c579d9538dc46100eed6cff91cc154bb8af1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxS4QRac",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-21T00:21:34Z",
+      "side": 1,
+      "message": "This probably should be linked (if possible)",
+      "revId": "d09c579d9538dc46100eed6cff91cc154bb8af1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dxc4fIbM",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 1
@@ -30,6 +98,40 @@
       "writtenOn": "2013-05-21T00:18:24Z",
       "side": 1,
       "message": "\"N/A\" needs to be localised, like the headers are",
+      "revId": "d09c579d9538dc46100eed6cff91cc154bb8af1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxW45rTw",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-21T00:21:34Z",
+      "side": 1,
+      "message": "Don\u0027t hardcode things like this... either make it translateable or just add nothing",
+      "revId": "d09c579d9538dc46100eed6cff91cc154bb8af1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxW5rbSA",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-21T00:21:34Z",
+      "side": 1,
+      "message": "Please use wikibase- as message key prefix as is done above",
       "revId": "d09c579d9538dc46100eed6cff91cc154bb8af1b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
