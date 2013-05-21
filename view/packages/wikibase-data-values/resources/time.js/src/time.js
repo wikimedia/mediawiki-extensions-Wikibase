@@ -191,7 +191,6 @@
 	};
 
 	var getTextFromDate = function( precision, year, month, day ) {
-		var retval = '';
 		if( year === null ) {
 			return '';
 		}
