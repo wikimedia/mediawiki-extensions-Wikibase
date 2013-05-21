@@ -648,4 +648,38 @@ final class ClientHooks {
 		}
 		return true;
 	}
+
+	/**
+	 * Adds the Entity ID of the corresponding Wikidata item in action=info
+	 *
+	 * @param IContextSource $context
+	 * @param array $pageInfo
+	 *
+	 * @return bool
+	 */
+	public static function onInfoAction( $context, &$pageInfo ) {
+		$site = \Sites::singleton()->getSite( Settings::get( 'siteGlobalID' ) );
+
+		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
+		$entityId = $siteLinkLookup->getEntityIdForSiteLink(
+			new SiteLink( $site, $context->getTitle()->getFullText() )
+		);
+
+		if( isset( $entityId ) ) {
+			$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
+			$idString = $idFormatter->format( $entityId );
+
+			//adding the entity ID to page info
+			$pageInfo['header-basic'][] = array(
+				$context->msg( 'pageinfo-entity-id' ),
+				$idString
+			);
+		} else {
+			$pageInfo['header-basic'][] = array(
+				$context->msg( 'pageinfo-entity-id' ),
+				'N/A'
+			);
+		}
+		return true;
+	}
 }
