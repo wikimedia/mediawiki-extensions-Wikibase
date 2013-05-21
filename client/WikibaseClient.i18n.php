@@ -65,6 +65,8 @@ $messages['en'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'The page title could not be used for the query and is ignored.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Only pages with interlanguagelinks',
 	'wikibase-unconnectedpages-format-row' => '($1 interlanguagelinks on the page)',
+	'wikibase-pageinfo-entity-id' => 'Item ID',
+	'wikibase-pageinfo-entity-id-na' => 'None',
 );
 
 /** Message documentation (Message documentation)
@@ -167,6 +169,9 @@ This message follows the page title (with link).
 
 Parameters:
 * $1 - number of inter-language links',
+
+	'wikibase-pageinfo-entity-id' => 'The Alpha-Numeric identifier of the corresponding Wikibase Item',
+	'wikibase-pageinfo-entity-id-na' => 'Not Applicable / Not Available',
 );
 
 /** Afrikaans (Afrikaans)
