@@ -132,7 +132,7 @@ $messages['ko'] = array(
  * @author Purodha
  */
 $messages['ksh'] = array(
-	'wikibasequery-desc' => 'Brängk de Möjeleschkeit för ze Söhke zom <i lang="en">Wikibase</i> dohzoh.', # Fuzzy
+	'wikibasequery-desc' => 'Brängk de Möjeleschkeit för ze Söhke zom <i lang="en">Wikibase</i> dohzoh.',
 );
 
 /** Macedonian (македонски)
