@@ -7,6 +7,8 @@ use Wikibase\ClaimDiffer;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\ClaimSummaryBuilder;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Tests for the ClaimSummaryBuilder class.
@@ -129,7 +131,18 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function testBuildCreateClaimSummary() {
-		$claimSummaryBuilder = new ClaimSummaryBuilder( 'wbsetclaim', new ClaimDiffer( new ListDiffer() ) );
+		$idFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
+			->disableOriginalConstructor()->getMock();
+		$idFormatter->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnValue( 'foo' ) );
+
+		$claimSummaryBuilder = new ClaimSummaryBuilder(
+			'wbsetclaim',
+			new ClaimDiffer( new ListDiffer() ),
+			$idFormatter
+		);
+
 		$claims = new Claims();
 		$newClaims = $this->claimProvider();
 
@@ -149,7 +162,18 @@ class ClaimSummaryBuilderTest extends \MediaWikiTestCase {
 	 * @param string $action
 	 */
 	public function testBuildUpdateClaimSummary( $originalClaim, $modifiedClaim, $action ) {
-		$claimSummaryBuilder = new ClaimSummaryBuilder( 'wbsetclaim', new ClaimDiffer( new ListDiffer() ) );
+		$idFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
+			->disableOriginalConstructor()->getMock();
+		$idFormatter->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnValue( 'foo' ) );
+
+		$claimSummaryBuilder = new ClaimSummaryBuilder(
+			'wbsetclaim',
+			new ClaimDiffer( new ListDiffer() ),
+			$idFormatter
+		);
+
 		$claims = new Claims();
 		$claims->addClaim( $originalClaim );
 

@@ -11,6 +11,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\ClaimDiffer;
 use Wikibase\ClaimSaver;
 use Wikibase\ClaimSummaryBuilder;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -53,7 +54,11 @@ class SetClaim extends ApiWikibase {
 		$claim = $this->getClaimFromRequest();
 
 		$claimDiffer = new ClaimDiffer( new ListDiffer() );
-		$claimSummaryBuilder = new ClaimSummaryBuilder( $this->getModuleName(), $claimDiffer );
+		$claimSummaryBuilder = new ClaimSummaryBuilder(
+			$this->getModuleName(),
+			$claimDiffer,
+			WikibaseRepo::newInstance()->getIdFormatter()
+		);
 		$claimSaver = new ClaimSaver();
 
 		$params = $this->extractRequestParams();
