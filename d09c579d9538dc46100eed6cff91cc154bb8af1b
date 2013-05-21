@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "DxT-n0bA",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-21T10:23:35Z",
+      "side": 1,
+      "message": "singleton, usage of deprecated code",
+      "revId": "d09c579d9538dc46100eed6cff91cc154bb8af1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxQ56qe4",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 1
