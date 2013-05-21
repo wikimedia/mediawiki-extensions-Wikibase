@@ -70,5 +70,12 @@ describe "Running repo QUnit tests" do
         page.qunitTestFail?.should be_false
       end
     end
+    it "run time tests" do
+      on_page(QUnitPage) do |page|
+        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=time")
+        page.wait_for_qunit_tests
+        page.qunitTestFail?.should be_false
+      end
+    end
   end
 end
