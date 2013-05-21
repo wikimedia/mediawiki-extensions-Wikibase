@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase;
-use MWException;
+
+use OutOfBoundsException;
 
 /**
  * Class representing a collection of settings.
@@ -33,16 +34,16 @@ class SettingsArray extends \ArrayObject {
 	/**
 	 * Gets the value of the specified setting.
 	 *
-	 * @since 0.14
+	 * @since 0.1
 	 *
 	 * @param string $settingName
 	 *
-	 * @throws MWException
+	 * @throws OutOfBoundsException
 	 * @return mixed
 	 */
 	public function getSetting( $settingName ) {
 		if ( !$this->offsetExists( $settingName ) ) {
-			throw new MWException( 'Attempt to get non-existing setting "' . $settingName . '"' );
+			throw new OutOfBoundsException( 'Attempt to get non-existing setting "' . $settingName . '"' );
 		}
 
 		return $this[$settingName];
