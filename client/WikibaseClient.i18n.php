@@ -642,7 +642,7 @@ $messages['crh-latn'] = array(
 $messages['cs'] = array(
 	'wikibase-client-desc' => 'Klient pro rozšíření Wikibase',
 	'specialpages-group-wikibaseclient' => 'Klient Wikidat',
-	'wikibase-after-page-move' => 'Bylo by vhodné [$1 aktualizovat související položku Wikidat], aby na přesunuté stránce zůstaly odkazy na další jazyky (mezijazykové odkazy).',
+	'wikibase-after-page-move' => 'Můžete také [$1 aktualizovat] související položku Wikidat, aby na přesunuté stránce zůstaly odkazy na další jazyky.',
 	'wikibase-comment-remove' => 'Související položka Wikidat odstraněna. Mezijazykové odkazy odstraněny.',
 	'wikibase-comment-linked' => 'S touto stránkou byla provázána položka Wikidat.',
 	'wikibase-comment-unlink' => 'Odkaz na tuto stránku byl odstraněn z Wikidat. Mezijazykové odkazy odstraněny.',
@@ -1080,12 +1080,13 @@ $messages['et'] = array(
  */
 $messages['fa'] = array(
 	'wikibase-client-desc' => 'کارخواه برای افزونهٔ ویکی‌بیس',
+	'specialpages-group-wikibaseclient' => 'مشتری ویکی‌داده',
 	'wikibase-after-page-move' => 'شما ممکن است در عین حال بخواهید آیتم وابستهٔ ویکی‌داده را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.',
 	'wikibase-comment-remove' => 'پیوند آیتم ویکی‌داده حذف گردید. پیوند زبان حذف شد.',
 	'wikibase-comment-linked' => 'یک آیتم ویکی‌داده به این صفحه پیوند دارد.',
 	'wikibase-comment-unlink' => 'این صفحه به ویکی‌داده پیوند ندارد. پیوند زبان حذف شد.',
 	'wikibase-comment-restore' => 'پیوند آیتم ویکی‌داده بازیابی شد. پیوند زبان بازیابی شد.',
-	'wikibase-comment-update' => 'پیوندهای زبانی به‌روز شد.', # Fuzzy
+	'wikibase-comment-update' => 'آیتم ویکی‌داده تغییر یافت',
 	'wikibase-comment-sitelink-add' => 'پیوند زبان اضافه شده:$1',
 	'wikibase-comment-sitelink-change' => 'پیوند زبان از $1 به $2 تغییر کرده‌است.',
 	'wikibase-comment-sitelink-remove' => 'پیوند زبان حذف شد: $1',
@@ -1108,8 +1109,20 @@ $messages['fa'] = array(
 	'wikibase-linkitem-not-loggedin' => 'شما نیاز است که در این ویکی و [$1 مخزن اصلی داده] وارد شوید تا بتوانید از این امکان استفاده کنید.',
 	'wikibase-linkitem-success-create' => 'این صفحه به‌درستی پیوند داده شد. شما می‌توانید آیتم حاوی پیوند را در [$1 مخزن مرکزی داده‌ها] ما بیابید.',
 	'wikibase-linkitem-success-link' => 'این صفحه به‌درستی پیوند داده شد. شما می‌توانید آیتم حاوی پیوند را در [$1 central data repository] بیابید.',
+	'wikibase-property-notfound' => 'خصوصیت $1 یافت نشد.',
+	'wikibase-property-notsupportedyet' => 'ویکی‌بیس هنوز نوع خصوصیت برای خصوصیت $1 را پشتیبانی نمی‌کند.',
 	'wikibase-rc-hide-wikidata' => '$1 ویکی‌داده',
 	'wikibase-rc-show-wikidata-pref' => 'نمایش ویرایش‌های ویکی‌داده در تغییرات اخیر',
+	'wikibase-watchlist-show-changes-pref' => 'نمایش ویرایش‌های ویکی‌داده در فهرست پیگیری‌ها',
+	'wikibase-error-invalid-entity-id' => 'شناسهٔ واردشده برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.',
+	'special-unconnectedpages' => 'صفحات به آیتم‌ها متصل نیستند',
+	'wikibase-unconnectedpages-legend' => 'گزینه‌های صفحات غیرمرتبط',
+	'wikibase-unconnectedpages-page' => 'فهرست نتایج با صفحهٔ:',
+	'wikibase-unconnectedpages-submit' => 'برو',
+	'wikibase-unconnectedpages-invalid-language' => '«$1» یک کد زبان نامعتبر است.',
+	'wikibase-unconnectedpages-page-warning' => 'عنوان صفحه برای کوئری استفاده نمی‌شود و نادیده گرفته شده‌است.',
+	'wikibase-unconnectedpages-iwdata-label' => 'فقط صفحات با پیوند میان‌ویکی',
+	'wikibase-unconnectedpages-format-row' => '( $1  پیوند زبان بر روی صفحه)',
 );
 
 /** Finnish (suomi)
@@ -1962,6 +1975,7 @@ $messages['lb'] = array(
 	'wikibase-linkitem-failure' => 'En onbekannte Feeler ass beim Versuch fir déi Säit déi Dir uginn hutt ze verlinken.',
 	'wikibase-linkitem-title' => 'Mat der Säit verlinken',
 	'wikibase-linkitem-linkpage' => 'Mat der Säit verlinken',
+	'wikibase-linkitem-selectlink' => 'Sicht w.e.g. e Site an eng Säit eraus mat där Dir dës Säit verlinke wëllt.',
 	'wikibase-linkitem-input-site' => 'Sprooch:',
 	'wikibase-linkitem-input-page' => 'Säit:',
 	'wikibase-linkitem-invalidsite' => 'Onbekannten oder net valabele Site erausgesicht',
@@ -1973,9 +1987,11 @@ $messages['lb'] = array(
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Ännerungen an Ärer Iwwerwaachungslëscht weisen',
 	'wikibase-error-invalid-entity-id' => "D'ID déi Dir aginn hutt ass am System net bekannt. Benotzt w.e.g. en valabel ID.",
 	'special-unconnectedpages' => 'Säiten déi net mat Elementer verbonn sinn',
-	'wikibase-unconnectedpages-page' => 'Ufankssäit:', # Fuzzy
+	'wikibase-unconnectedpages-page' => 'Lëscht vun de Resultater fänkt u mat der Säit:',
 	'wikibase-unconnectedpages-submit' => 'Lass',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" ass kee valabele Sproochecode.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Nëmme Säite mat Linke mat anere Sproochen',
+	'wikibase-unconnectedpages-format-row' => '($1 Linke mat anere Sproochen op der Säit)',
 );
 
 /** Lezghian (лезги)

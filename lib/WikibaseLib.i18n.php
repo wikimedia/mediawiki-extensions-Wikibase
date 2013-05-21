@@ -581,7 +581,7 @@ $messages['de'] = array(
 	'wikibase-tooltip-error-details' => 'Einzelheiten',
 	'datatypes-type-wikibase-item' => 'Datenobjekt',
 	'datatypes-type-commonsMedia' => 'Mediendatei auf Commons',
-	'version-wikibase' => 'Wikibase',
+	'version-wikibase' => 'Wikibase-Erweiterungen',
 );
 
 /** German (formal address) (Deutsch (Sie-Form)‎)
@@ -1444,6 +1444,10 @@ $messages['lb'] = array(
 	'wikibase-entity-query' => 'Ufro',
 	'wikibase-diffview-reference' => 'Referenz',
 	'wikibase-diffview-rank' => 'Classement',
+	'wikibase-diffview-label' => 'Etiquette',
+	'wikibase-diffview-alias' => 'Aliasen',
+	'wikibase-diffview-description' => 'Beschreiwung',
+	'wikibase-diffview-link' => 'Linken',
 	'wikibase-error-unexpected' => 'En onerwaarte Feeler ass geschitt.',
 	'wikibase-error-save-generic' => 'Beim Späicheren ass e Feeler geschitt an dofir konnten Är Ännerungen net ofgeschloss ginn.',
 	'wikibase-error-save-timeout' => 'Mir hunn technesch Schwieregkeeten an dofir konnt Är Ännerung net "gespäichert" ginn.',
@@ -1735,6 +1739,7 @@ $messages['nn'] = array(
 
 /** Polish (polski)
  * @author BeginaFelicysym
+ * @author Chrumps
  * @author Kpjas
  * @author Lazowik
  * @author Maćko
@@ -1747,7 +1752,12 @@ $messages['pl'] = array(
 	'wikibase-entity-property' => 'właściwość',
 	'wikibase-entity-query' => 'zapytanie',
 	'wikibase-diffview-reference' => 'przypis',
+	'wikibase-diffview-rank' => 'ranga',
 	'wikibase-diffview-qualifier' => 'kwalifikator',
+	'wikibase-diffview-label' => 'etykieta',
+	'wikibase-diffview-alias' => 'aliasy',
+	'wikibase-diffview-description' => 'opis',
+	'wikibase-diffview-link' => 'linki',
 	'wikibase-error-unexpected' => 'Wystąpił nieoczekiwany błąd.',
 	'wikibase-error-save-generic' => 'Wystąpił błąd podczas próby zapisu i z tego powodu Twoje zmiany nie zostały zapisane.',
 	'wikibase-error-remove-generic' => 'Wystąpił błąd podczas próby usunięcia i z tego powodu Twoje zmiany nie zostały zapisane.',
@@ -1772,6 +1782,7 @@ $messages['pl'] = array(
 	'wikibase-tooltip-error-details' => 'Szczegóły',
 	'datatypes-type-wikibase-item' => 'Obiekt',
 	'datatypes-type-commonsMedia' => 'Plik multimedialny na Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Piedmontese (Piemontèis)
