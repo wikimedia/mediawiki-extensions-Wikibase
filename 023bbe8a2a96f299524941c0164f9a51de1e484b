@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dxbofb7M",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-05-21T16:23:58Z",
+      "side": 1,
+      "message": "default",
+      "revId": "023bbe8a2a96f299524941c0164f9a51de1e484b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
