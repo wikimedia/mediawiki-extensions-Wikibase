@@ -71,13 +71,6 @@ class ChangeNotificationJob extends \Job {
 		$params['repo'] = $repo;
 		$params['changeIds'] = $changeIds;
 
-		$params = array_merge(
-			\Job::newRootJobParams(
-				$repo . ':' . implode( ',', $changeIds )
-			),
-			$params
-		);
-
 		$job = new ChangeNotificationJob( $dummyTitle, $params );
 
 		wfProfileOut( __METHOD__ );
