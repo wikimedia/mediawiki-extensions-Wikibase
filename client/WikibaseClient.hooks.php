@@ -648,4 +648,51 @@ final class ClientHooks {
 		}
 		return true;
 	}
+
+	/**
+	 * Adds the Entity ID of the corresponding Wikidata item in action=info
+	 *
+	 * @param IContextSource $context
+	 * @param array $pageInfo
+	 *
+	 * @return bool
+	 */
+	public static function onInfoAction( $context, array &$pageInfo ) {
+		// Check if wikibase namespace is enabled
+		$title = $context->getTitle();
+		$namespaceChecker = new NamespaceChecker(
+			Settings::get( 'excludeNamespaces' ),
+			Settings::get( 'namespaces' )
+		);
+
+		if ( $title->exists() && $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+
+			$site = \MediaWikiSite::newFromGlobalId( Settings::get( 'siteGlobalID' ) );
+
+			$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
+			$entityId = $siteLinkLookup->getEntityIdForSiteLink(
+				new SiteLink( $site, $title->getFullText() )
+			);
+
+			if( $entityId ) {
+				// Creating a Repo link with Item ID as anchor text
+				$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+				$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
+				$idString = $idFormatter->format( $entityId );
+				$returnString = $repoLinker->repoLink( $idString, $idString );
+
+				// Adding the Repo link to array &$pageInfo
+				$pageInfo['header-basic'][] = array(
+					$context->msg( 'wikibase-pageinfo-entity-id' ),
+					$returnString
+				);
+			} else {
+				$pageInfo['header-basic'][] = array(
+					$context->msg( 'wikibase-pageinfo-entity-id' ),
+					$context->msg( 'wikibase-pageinfo-entity-id-na' )
+				);
+			}
+		}
+		return true;
+	}
 }

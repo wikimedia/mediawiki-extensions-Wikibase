@@ -126,6 +126,7 @@ $wgHooks['SpecialWatchlistFilters'][]          = '\Wikibase\ClientHooks::onSpeci
 // extension hooks
 $wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
 $wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
+$wgHooks['InfoAction'][] 								= '\Wikibase\ClientHooks::onInfoAction';
 
 // api modules
 $wgAPIMetaModules['wikibase'] = 'Wikibase\ApiClientInfo';
