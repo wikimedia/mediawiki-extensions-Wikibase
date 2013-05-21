@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use  Html, Linker, Skin, Status, Revision;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @file
@@ -434,7 +435,11 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new \Diff\ListDiffer() ),
-			new ClaimDifferenceVisualizer( new WikiPageEntityLookup(), $langCode )
+			new ClaimDifferenceVisualizer(
+				new WikiPageEntityLookup(),
+				$langCode,
+				WikibaseRepo::newInstance()->getIdFormatter()
+			)
 		);
 
 		$this->getOutput()->addHTML( $diffVisualizer->visualizeDiff( $diff ) );

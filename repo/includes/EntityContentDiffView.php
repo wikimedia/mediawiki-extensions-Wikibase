@@ -4,6 +4,7 @@ namespace Wikibase;
 use Diff\ListDiffer;
 
 use Content, Html;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Difference view for Wikibase entities.
@@ -138,7 +139,11 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new ListDiffer() ),
-			new ClaimDifferenceVisualizer( new WikiPageEntityLookup(), $langCode )
+			new ClaimDifferenceVisualizer(
+				new WikiPageEntityLookup(),
+				$langCode,
+				WikibaseRepo::newInstance()->getIdFormatter()
+			)
 		);
 
 		return $diffVisualizer->visualizeDiff( $diff );
