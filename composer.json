@@ -13,8 +13,9 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "mediawiki/mediawiki": ">=1.20",
-        "diff/diff": ">=0.3",
-        "datavalues/datavalues": "*"
+        "mediawiki/core": ">=1.20",
+		"mediawiki/data-values": "*",
+		"diff/diff": ">=0.6",
+		"ask/ask": "*"
     }
 }
