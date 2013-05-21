@@ -146,8 +146,16 @@
 	};
 
 	var writeApproximateYear = function( year, precision ) {
-		var significant = Math.floor( (Math.abs( year ) - 1) / Math.pow( 10, 9 - precision ) ) + 1,
-			text = settings.outputprecision[precision].replace( '%', significant );
+		var significant = 0,
+			text = '';
+
+		if( precision == 8 ) {
+			significant = Math.floor( ( Math.abs( year ) ) / Math.pow( 10, 9 - precision ) );
+		} else {
+			significant = Math.floor( ( Math.abs( year ) - 1) / Math.pow( 10, 9 - precision ) ) + 1;
+		}
+
+		text = settings.outputprecision[precision].replace( '%', significant );
 
 		if( precision < 6 ) {
 			if( year < 0 ) {
@@ -160,6 +168,7 @@
 				text += ' ' + settings.bce[0];
 			}
 		}
+
 		return text;
 	};
 
