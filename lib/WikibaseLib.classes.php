@@ -131,6 +131,10 @@ return call_user_func( function() {
 		'Wikibase\SiteLinkTable' => 'includes/store/sql/SiteLinkTable.php',
 		'Wikibase\WikiPageEntityLookup' => 'includes/store/sql/WikiPageEntityLookup.php',
 
+		// includes/util
+		'Wikibase\HttpAcceptNegotiator' => 'includes/util/HttpAcceptNegotiator.php',
+		'Wikibase\HttpAcceptParser' => 'includes/util/HttpAcceptParser.php',
+
 		// tests
 		'Wikibase\Test\SpecialPageTestBase' => 'tests/phpunit/specials/SpecialPageTestBase.php',
 		'Wikibase\Test\TemplateTest' => 'tests/phpunit/TemplateTest.php',

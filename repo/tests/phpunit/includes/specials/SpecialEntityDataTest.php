@@ -258,4 +258,99 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		}
 	}
 
+	static $apiMimeTypes = array(
+		'application/vnd.php.serialized',
+		'application/json',
+		'text/xml'
+	);
+
+	static $apiExtensions = array(
+		'php',
+		'json',
+		'xml'
+	);
+
+	static $rdfMimeTypes = array(
+		'application/rdf+xml',
+		'text/n3',
+		'text/rdf+n3',
+		'text/turtle',
+		'application/turtle',
+	);
+
+	static $rdfExtensions = array(
+		'rdf',
+		'n3',
+		'ttl'
+	);
+
+	static $badMimeTypes = array(
+		'text/html',
+		'text/text',
+		'text/plain',
+	);
+
+	static $badExtensions = array(
+		'html',
+		'text',
+		'txt',
+	);
+
+	public function testGetSupportedMineTypes() {
+		$page = $this->newSpecialPage();
+
+		$types = $page->getSupportedMimeTypes();
+
+		foreach ( self::$apiMimeTypes as $type ) {
+			$this->assertTrue( in_array( $type, $types), $type );
+		}
+
+		if ( $page->isRdfSupported() ) {
+			foreach ( self::$rdfMimeTypes as $type ) {
+				$this->assertTrue( in_array( $type, $types), $type );
+			}
+		}
+
+		foreach ( self::$badMimeTypes as $type ) {
+			$this->assertFalse( in_array( $type, $types), $type );
+		}
+	}
+
+	public function testGetSupportedExtensions() {
+		$page = $this->newSpecialPage();
+
+		$types = $page->getSupportedExtensions();
+
+		foreach ( self::$apiExtensions as $type ) {
+			$this->assertTrue( in_array( $type, $types), $type );
+		}
+
+		if ( $page->isRdfSupported() ) {
+			foreach ( self::$rdfExtensions as $type ) {
+				$this->assertTrue( in_array( $type, $types), $type );
+			}
+		}
+
+		foreach ( self::$badExtensions as $type ) {
+			$this->assertFalse( in_array( $type, $types), $type );
+		}
+	}
+
+	public function testGetFormatName() {
+		$page = $this->newSpecialPage();
+
+		$types = $page->getSupportedMimeTypes();
+
+		foreach ( $types as $type ) {
+			$format = $page->getFormatName( $type );
+			$this->assertNotNull( $format, $type );
+		}
+
+		$types = $page->getSupportedExtensions();
+
+		foreach ( $types as $type ) {
+			$format = $page->getFormatName( $type );
+			$this->assertNotNull( $format, $type );
+		}
+	}
 }

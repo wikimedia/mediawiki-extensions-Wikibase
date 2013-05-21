@@ -31,6 +31,22 @@ use \Wikibase\RdfSerializer;
  */
 class SpecialEntityData extends SpecialWikibasePage {
 
+	const DEFAULT_FORMAT = 'json';
+
+	/**
+	 * White list of supported formats.
+	 *
+	 * @var array
+	 */
+	static $formatWhiteList = array(
+		'json',
+		'php',
+		'xml',
+		'rdfxml',
+		'n3',
+		'turtle'
+	);
+
 	/**
 	 * Attributes that should be included in the serialized form of the entity.
 	 * That is, all well known attributes.
@@ -68,6 +84,18 @@ class SpecialEntityData extends SpecialWikibasePage {
 	protected $idFormatter = null;
 
 	/**
+	 * @var null|array Associative array from MIME type to format name
+	 * @note: initialized by initFormats()
+	 */
+	protected $mimeTypes = null;
+
+	/**
+	 * @var null|array Associative array from file extension to format name
+	 * @note: initialized by initFormats()
+	 */
+	protected $fileExtensions = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -85,7 +113,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 */
 	public function execute( $subPage ) {
 		$revision = 0;
-		$format = 'json';
+		$format = '';
 
 		// get format from $subPage or request param
 		if ( preg_match( '#\.([-./\w]+)$#', $subPage, $m ) ) {
@@ -113,6 +141,27 @@ class SpecialEntityData extends SpecialWikibasePage {
 			return;
 		}
 
+		if ( $format === null || $format === '' ) {
+			$headers = $this->getRequest()->getAllHeaders();
+			if ( isset( $headers['ACCEPT'] ) ) {
+				$negotiator = new \Wikibase\HttpAcceptNegotiator( $this->getSupportedMimeTypes() );
+
+				$parser = new \Wikibase\HttpAcceptParser();
+				$accept = $parser->parseWeights( $headers['ACCEPT'] );
+
+				$format = $negotiator->getBestSupportedKey( $accept, self::DEFAULT_FORMAT );
+
+				//TODO: determine canonical title (get extension for MIME type)
+				//TODO: trigger 303 redirect
+
+				//XXX: if no match, fail or default?!
+			}
+		}
+
+		if ( $format === null || $format === '' ) {
+			$format = self::DEFAULT_FORMAT;
+		}
+
 		$repo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 		$this->rdfBaseURI = $repo->getRdfBaseURI();
 		$this->entityLookup = \Wikibase\StoreFactory::getStore()->getEntityLookup();
@@ -120,6 +169,108 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$this->idFormatter = $repo->getIdFormatter();
 
 		$this->showData( $format, $id, $revision );
+	}
+
+	/**
+	 * Returns the list of supported MIME types that can be used to specify the
+	 * output format.
+	 *
+	 * @return string[]
+	 */
+	public function getSupportedMimeTypes() {
+		$this->initFormats();
+
+		return array_keys( $this->mimeTypes );
+	}
+
+	/**
+	 * Returns the list of supported file extensions that can be used
+	 * to specify a format.
+	 *
+	 * @return string[]
+	 */
+	public function getSupportedExtensions() {
+		$this->initFormats();
+
+		return array_keys( $this->fileExtensions );
+	}
+
+	/**
+	 * Returns a canonical format name.
+	 *
+	 * @param string $format the format as given in the request, as a file extension or MIME type.
+	 *
+	 * @return string|null the canonical format name, or null of the format is not supported
+	 */
+	public function getFormatName( $format ) {
+		$this->initFormats();
+
+		$format = trim( strtolower( $format ) );
+
+		if ( isset( $this->mimeTypes[$format] ) ) {
+			return $this->mimeTypes[$format];
+		}
+
+		if ( isset( $this->fileExtensions[$format] ) ) {
+			return $this->fileExtensions[$format];
+		}
+
+		return null;
+	}
+
+	/**
+	 * Initializes the internal mapping of MIME types and file extensions to format names.
+	 */
+	protected function initFormats() {
+		if ( $this->mimeTypes !== null
+			&& $this->fileExtensions !== null ) {
+			return;
+		}
+
+		$this->mimeTypes = array();
+		$this->fileExtensions = array();
+
+		$api = $this->getApiMain( "dummy" );
+		$formats = $api->getFormats();
+
+		foreach ( $formats as $name => $class ) {
+			if ( !in_array( $name, self::$formatWhiteList ) ) {
+				continue;
+			}
+
+			$mime = self::getApiMimeType( $name );
+			$ext = self::getApiFormatName( $name );
+
+			$this->mimeTypes[ $mime ] = $name;
+			$this->fileExtensions[ $ext ] = $name;
+		}
+
+		if ( \Wikibase\RdfSerializer::isSupported() ) {
+			$formats = EasyRdf_Format::getFormats();
+
+			/* @var EasyRdf_Format $format */
+			foreach ( $formats as $format ) {
+				$name = $format->getName();
+
+				// check whitelist, and don't override API formats
+				if ( !in_array( $name, self::$formatWhiteList )
+					|| in_array( $name, $this->mimeTypes )
+					|| in_array( $name, $this->fileExtensions )) {
+					continue;
+				}
+
+				// use all mime types. to improve content negotiation
+				foreach ( array_keys( $format->getMimeTypes() ) as $mime ) {
+					$this->mimeTypes[ $mime ] = $name;
+				}
+
+				// use only one file extension, to keep purging simple
+				if ( $format->getDefaultExtension() ) {
+					$ext = $format->getDefaultExtension();
+					$this->fileExtensions[ $ext ] = $name;
+				}
+			}
+		}
 	}
 
 	/**
@@ -135,10 +286,19 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		//TODO: handle IfModifiedSince!
 
-		$serializer = $this->createApiSerializer( $format );
+		$serializer = null;
+		$formatName = $this->getFormatName( $format );
 
-		if ( !$serializer ) {
-			$serializer = $this->createRdfSerializer( $format );
+		if ( $formatName !== null ) {
+			$serializer = $this->createApiSerializer( $formatName );
+
+			if ( !$serializer ) {
+				$serializer = $this->createRdfSerializer( $formatName );
+			}
+
+			if ( !$serializer ) {
+				wfWarn( "Could not create serializer using name `$formatName`, even though it is registered." );
+			}
 		}
 
 		if ( !$serializer ) {
@@ -211,17 +371,44 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 *
 	 * @return String|null the normalized format name, or null if the format is unknown
 	 */
-	public static function getApiFormatName( $format ) {
+	protected static function getApiFormatName( $format ) {
 		$format = trim( strtolower( $format ) );
 
 		if ( $format === 'application/vnd.php.serialized' ) {
 			$format = 'php';
+		} elseif ( $format === 'text/text' || $format === 'text/plain' ) {
+			$format = 'txt';
 		} else {
 			// hack: just trip the major part of the mime type
 			$format = preg_replace( '@^(text|application)?/@', '', $format );
 		}
 
 		return $format;
+	}
+
+	/**
+	 * Converts API format names to MIME types.
+	 *
+	 * @param String $format the API format name
+	 *
+	 * @return String|null the MIME type for the given format
+	 */
+	protected static function getApiMimeType( $format ) {
+		$format = trim( strtolower( $format ) );
+		$type = null;
+
+		if ( $format === 'php' ) {
+			$type = 'application/vnd.php.serialized';
+		} else if ( $format === 'txt' ) {
+			$type = "text/text"; // NOTE: not text/plain, to avoid HTML sniffing in IE7
+		} else if ( in_array( $format, array( 'xml', 'javascript', 'text' ) ) ) {
+			$type = "text/$format";
+		} else {
+			// hack: assume application type
+			$type = "application/$format";
+		}
+
+		return $type;
 	}
 
 	/**
@@ -263,11 +450,10 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 * @return ApiFormatBase|null A suitable result printer, or null
 	 *         if the given format is not supported by the API.
 	 */
-	protected function createApiSerializer( $format ) {
+	protected function createApiSerializer( $formatName ) {
 		//MediaWiki formats
-		$api = $this->getApiMain( $format );
+		$api = $this->getApiMain( $formatName );
 		$formats = $api->getFormats();
-		$formatName = self::getApiFormatName( $format );
 		if ( $formatName !== null && array_key_exists( $formatName, $formats ) ) {
 			return $api->createPrinterByName( $formatName );
 		}
@@ -453,4 +639,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 		//die(); //FIXME: figure out how to best shut down here.
 	}
 
+	/**
+	 * Returns true iff RDF output is supported.
+	 * @return bool
+	 */
+	public function isRdfSupported() {
+		return RdfSerializer::isSupported();
+	}
 }

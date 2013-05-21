@@ -67,6 +67,9 @@ final class LibHooks {
 
 			'store/TermPropertyLabelResolver',
 
+			'util/HttpAcceptParser',
+			'util/HttpAcceptNegotiator',
+
 			'ByPropertyIdArray',
 			'ChangesTable',
 			'ClaimDifference',
