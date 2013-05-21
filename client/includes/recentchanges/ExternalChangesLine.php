@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use \Wikibase\Client\WikibaseClient;
+
 /**
  * @todo remove static stuff and refactor
  *
