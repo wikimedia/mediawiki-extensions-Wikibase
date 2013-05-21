@@ -141,9 +141,9 @@ time.Time = ( function( time, $ ) {
 
 		this.calendarURI = function() {
 			if( calendarname === Time.CALENDAR.GREGORIAN ) {
-				return 'http://wikidata.org/id/Q1985727';
+				return 'http://www.wikidata.org/entity/Q1985727';
 			} else if( calendarname === Time.CALENDAR.JULIAN ) {
-				return 'http://wikidata.org/id/Q1985786';
+				return 'http://www.wikidata.org/entity/Q1985786';
 			}
 		};
 
