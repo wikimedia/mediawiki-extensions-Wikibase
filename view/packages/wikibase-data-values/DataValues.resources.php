@@ -69,6 +69,7 @@ return call_user_func( function() {
 				'values/NumberValue.js',
 				'values/TimeValue.js',
 				'values/UnknownValue.js',
+				'values/UnUnserializableValue.js',
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
