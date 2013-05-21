@@ -16,6 +16,23 @@
       "revId": "1e37572796a802d6c39a5979e2569d269f442eca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxRrso48",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2013-05-21T16:52:38Z",
+      "side": 1,
+      "message": "Mixing tabs and spaces",
+      "revId": "1e37572796a802d6c39a5979e2569d269f442eca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
