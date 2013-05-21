@@ -6,7 +6,7 @@
  *
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( dv, $, undefined ) {
+( function( dv, $ ) {
 	'use strict';
 
 	var PARENT = dv.DataValue,
@@ -22,7 +22,7 @@
 	 * @extends dv.DataValue
 	 * @since 0.1
 	 *
-	 * @param {String} value
+	 * @param {string} value
 	 */
 	dv.UnknownValue = dv.util.inherit( 'DvUnknownValue', PARENT, constructor, {
 
@@ -31,7 +31,7 @@
 		 *
 		 * @since 0.1
 		 *
-		 * @return Number
+		 * @return number
 		 */
 		getSortKey: function() {
 			return 0;
@@ -42,7 +42,7 @@
 		 *
 		 * @since 0.1
 		 *
-		 * @return String
+		 * @return string
 		 */
 		getValue: function() {
 			return this._value;

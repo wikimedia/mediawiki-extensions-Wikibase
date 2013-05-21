@@ -32,7 +32,7 @@ dv.MultilingualTextValue = dv.util.inherit( 'DvMultilingualTextValue', PARENT, c
 	 *
 	 * @since 0.1
 	 *
-	 * @return String
+	 * @return string
 	 */
 	getSortKey: function() {
 		return this._texts.length < 1 ? '' : this._texts[0].getSortKey();
@@ -43,7 +43,7 @@ dv.MultilingualTextValue = dv.util.inherit( 'DvMultilingualTextValue', PARENT, c
 	 *
 	 * @since 0.1
 	 *
-	 * @return mixed
+	 * @return dataValues.MultilingualTextValue
 	 */
 	getValue: function() {
 		return this;
@@ -73,10 +73,10 @@ dv.MultilingualTextValue = dv.util.inherit( 'DvMultilingualTextValue', PARENT, c
 	 * @return Object
 	 */
 	toJSON: function() {
-		var texts = [];
+		var texts = {};
 
 		for ( var i in this._texts ) {
-			texts[this._texts[i].getLanguageCode()] = this._texts[i].getText();
+			texts[ this._texts[i].getLanguageCode() ] = this._texts[i].getText();
 		}
 
 		return texts;

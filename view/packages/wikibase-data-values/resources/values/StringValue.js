@@ -12,7 +12,9 @@
 
 var PARENT = dv.DataValue,
 	constructor = function( value ) {
-		// TODO: validate
+		if( typeof value !== 'string' ) {
+			throw new Error( 'A string value has to be given' );
+		}
 		this._value = value;
 	};
 
@@ -23,7 +25,7 @@ var PARENT = dv.DataValue,
  * @extends dv.DataValue
  * @since 0.1
  *
- * @param {String} value
+ * @param {string} value
  */
 dv.StringValue = dv.util.inherit( 'DvStringValue', PARENT, constructor, {
 
@@ -32,7 +34,7 @@ dv.StringValue = dv.util.inherit( 'DvStringValue', PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return String
+	 * @return string
 	 */
 	getSortKey: function() {
 		return this._value;
@@ -43,7 +45,7 @@ dv.StringValue = dv.util.inherit( 'DvStringValue', PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return String
+	 * @return string
 	 */
 	getValue: function() {
 		return this._value;
@@ -66,6 +68,8 @@ dv.StringValue = dv.util.inherit( 'DvStringValue', PARENT, constructor, {
 	 * @see dv.DataValue.toJSON
 	 *
 	 * @since 0.1
+	 *
+	 * @return string
 	 */
 	toJSON: function() {
 		return this._value;

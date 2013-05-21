@@ -34,7 +34,7 @@ dv.MonolingualTextValue = dv.util.inherit( 'DvMonolingualTextValue', PARENT, con
 	 *
 	 * @since 0.1
 	 *
-	 * @return String
+	 * @return string
 	 */
 	getSortKey: function() {
 		return this._languageCode + this._text;
@@ -81,7 +81,7 @@ dv.MonolingualTextValue = dv.util.inherit( 'DvMonolingualTextValue', PARENT, con
 	 *
 	 * @since 0.1
 	 *
-	 * @return String
+	 * @return string
 	 */
 	getText: function() {
 		return this._text;
@@ -92,7 +92,7 @@ dv.MonolingualTextValue = dv.util.inherit( 'DvMonolingualTextValue', PARENT, con
 	 *
 	 * @since 0.1
 	 *
-	 * @return String
+	 * @return string
 	 */
 	getLanguageCode: function() {
 		return this._languageCode;

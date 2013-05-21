@@ -48,7 +48,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return String|Number
+	 * @return string|number
 	 */
 	getSortKey: dv.util.abstractMember,
 
@@ -57,7 +57,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return Object
+	 * @return *
 	 */
 	toJSON: dv.util.abstractMember,
 
@@ -68,7 +68,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @param dataValue DataValue
 	 *
-	 * @return Boolean
+	 * @return boolean
 	 */
 	equals: dv.util.abstractMember,
 
@@ -77,7 +77,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return String
+	 * @return string
 	 */
 	getType: function() {
 		return this.constructor.TYPE;
