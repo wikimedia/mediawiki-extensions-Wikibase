@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DxWpYcDA",
+        "filename": "DataModel/DataModel.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-22T14:12:14Z",
+      "side": 1,
+      "message": "Is it really useful to list this as a separate extension? I actually have my doubts regarding WikibaseLib too. Repo and Client should be sufficient (and of course stuff in separate repos, like Diff).",
+      "revId": "6593eb3eee98360be0c38b335349a4985bdf29bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxV-EXZM",
         "filename": "DataModel/DataModel.mw.php",
         "patchSetId": 1
