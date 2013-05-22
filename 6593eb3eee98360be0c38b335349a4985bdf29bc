@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "DxcoaZBM",
+        "filename": "DataModel/DataModel.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-22T14:37:59Z",
+      "side": 1,
+      "message": "Well, it can\u0027t be used without Repo or Client, that\u0027s the main point. Diff and Ask are useful independently of Wikibase.\n\nThe \"same repo\" argument is mainly practical: the extension credits are useful to find a place to download the extension, to find documentation, and to find out who wrote it. All of this info is usually maintained at the repo level.",
+      "parentUuid": "DxcoBxLM",
+      "revId": "6593eb3eee98360be0c38b335349a4985bdf29bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxV-EXZM",
         "filename": "DataModel/DataModel.mw.php",
         "patchSetId": 1
