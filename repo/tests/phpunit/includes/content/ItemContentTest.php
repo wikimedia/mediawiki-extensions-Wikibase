@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\ItemContent;
+use Wikibase\SiteLink;
 
 /**
  * Tests for the Wikibase\ItemContent class.
@@ -39,6 +40,18 @@ use Wikibase\ItemContent;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ItemContentTest extends EntityContentTest {
+
+	public function setUp() {
+		parent::setUp();
+
+		$site = new \MediaWikiSite();
+		$site->setGlobalId( 'eswiki' );
+		$site->setPath( \MediaWikiSite::PATH_PAGE, "https://es.wikipedia.org/wiki/$1" );
+
+		$sitesTable = \SiteSQLStore::newInstance();
+		$sitesTable->clear();
+		$sitesTable->saveSites( array( $site ) );
+	}
 
 	/**
 	 * @see EntityContentTest::getContentClass
@@ -86,6 +99,44 @@ class ItemContentTest extends EntityContentTest {
 		$status = $editEntity->attemptSave( 'save item', EDIT_UPDATE, false );
 		$this->assertFalse( $status->isOK(), "saving an item with duplicate lang+label+description should not work" );
 		$this->assertTrue( $status->hasMessage( 'wikibase-error-label-not-unique-item' ) );
+	}
+
+	/**
+	 * @dataProvider siteLinkConflictProvider
+	 */
+	public function testSiteLinkConflict( SiteLink $siteLink, $expected ) {
+		$content = ItemContent::newEmpty();
+		$content->getItem()->addSiteLink( $siteLink );
+
+		$status = $content->save( 'add item', null, EDIT_NEW );
+
+		$this->assertTrue( $status->isOK(), 'item creation succeeded' );
+
+		$content1 = ItemContent::newEmpty();
+		$content1->getItem()->addSiteLink( $siteLink );
+
+		$status = $content1->save( 'add item', null, EDIT_NEW );
+
+		$this->assertFalse( $status->isOK(), "saving an item with a site link conflict should fail" );
+
+		$html = $status->getHTML();
+		$expected = preg_replace( '(\$1)', $content->getTitle()->getFullText(), $html );
+
+		$this->assertEquals( $expected, $status->getHTML() );
+	}
+
+	public function siteLinkConflictProvider() {
+        $site = new \MediaWikiSite();
+        $site->setGlobalId( 'eswiki' );
+
+        $siteLink = new SiteLink( $site, 'Pelecanus' );
+
+		return array(
+			array(
+				$siteLink,
+				'Site link [https://es.wikipedia.org/wiki/Pelecanus Pelecanus] already used by item [[$1]].'
+			)
+		);
 	}
 
 }
