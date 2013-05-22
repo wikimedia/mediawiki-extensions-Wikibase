@@ -2,6 +2,8 @@
 
 namespace Wikibase\QueryEngine\SQLStore;
 
+use Wikibase\EntityId;
+
 /**
  * Finds the internal entity id for the given external entity id.
  *
@@ -31,13 +33,10 @@ namespace Wikibase\QueryEngine\SQLStore;
 interface InternalEntityIdTransformer {
 
 	/**
-	 * TODO: taking an EntityId would be a lot more convenient
-	 *
-	 * @param string $entityType
-	 * @param int $entityNumber
+	 * @param EntityId $entityId
 	 *
 	 * @return int
 	 */
-	public function getInternalIdForEntity( $entityType, $entityNumber );
+	public function getInternalIdForEntity( EntityId $entityId );
 
 }

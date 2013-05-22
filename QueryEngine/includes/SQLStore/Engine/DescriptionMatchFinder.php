@@ -114,10 +114,7 @@ class DescriptionMatchFinder {
 	}
 
 	protected function getInternalId( EntityId $id ) {
-		return $this->idFinder->getInternalIdForEntity(
-			$id->getEntityType(),
-			$id->getNumericId()
-		);
+		return $this->idFinder->getInternalIdForEntity( $id );
 	}
 
 	protected function getExtraConditions( SomeProperty $description, DataValueHandler $dvHandler ) {
