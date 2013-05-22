@@ -4,7 +4,6 @@ namespace Wikibase\QueryEngine\SQLStore;
 
 use MessageReporter;
 use Wikibase\Database\QueryInterface;
-use Wikibase\Database\TableBuilder;
 use Wikibase\QueryEngine\QueryStore;
 use Wikibase\QueryEngine\SQLStore\Engine\DescriptionMatchFinder;
 use Wikibase\QueryEngine\SQLStore\Engine\Engine;
@@ -54,13 +53,6 @@ class Store implements QueryStore {
 	/**
 	 * @since 0.1
 	 *
-	 * @var TableBuilder|null
-	 */
-	private $tableBuilder;
-
-	/**
-	 * @since 0.1
-	 *
 	 * @var Factory
 	 */
 	private $factory;
@@ -75,21 +67,6 @@ class Store implements QueryStore {
 		$this->config = $config;
 		$this->queryInterface = $queryInterface;
 		$this->factory = new Factory( $config, $queryInterface );
-
-		$this->tableBuilder = new TableBuilder( $this->queryInterface );
-	}
-
-	/**
-	 * Sets the table builder to use for creating tables.
-	 *
-	 * @deprecated TODO: move to config
-	 *
-	 * @since 0.1
-	 *
-	 * @param TableBuilder $tableBuilder
-	 */
-	public function setTableBuilder( TableBuilder $tableBuilder ) {
-		$this->tableBuilder = $tableBuilder;
 	}
 
 	/**

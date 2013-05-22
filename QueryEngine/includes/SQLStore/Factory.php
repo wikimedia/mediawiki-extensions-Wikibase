@@ -3,6 +3,7 @@
 namespace Wikibase\QueryEngine\SQLStore;
 
 use Wikibase\Database\QueryInterface;
+use Wikibase\Database\TableBuilder;
 use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
 use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRowBuilder;
 use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable;
@@ -152,6 +153,10 @@ final class Factory {
 			$this->config->getPropertyDataValueTypeLookup(),
 			$this->getInternalEntityIdFinder()
 		);
+	}
+
+	public function getTableBuilder() {
+		return new TableBuilder( $this->queryInterface );
 	}
 
 }
