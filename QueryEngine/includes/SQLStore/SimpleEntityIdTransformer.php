@@ -2,6 +2,8 @@
 
 namespace Wikibase\QueryEngine\SQLStore;
 
+use Wikibase\EntityId;
+
 /**
  * Transforms entity types and numbers into internal store ids.
  *
@@ -43,15 +45,14 @@ class SimpleEntityIdTransformer implements InternalEntityIdTransformer {
 	/**
 	 * @see InternalEntityIdTransformer::getInternalIdForEntity
 	 *
-	 * @param string $entityType
-	 * @param int $entityNumber
+	 * @param EntityId $entityId
 	 *
 	 * @return int
 	 */
-	public function getInternalIdForEntity( $entityType, $entityNumber ) {
-		$this->ensureEntityTypeIsKnown( $entityType );
+	public function getInternalIdForEntity( EntityId $entityId ) {
+		$this->ensureEntityTypeIsKnown( $entityId->getEntityType() );
 
-		return $this->getComputedId( $entityType, $entityNumber );
+		return $this->getComputedId( $entityId );
 	}
 
 	protected function ensureEntityTypeIsKnown( $entityType ) {
@@ -60,8 +61,8 @@ class SimpleEntityIdTransformer implements InternalEntityIdTransformer {
 		}
 	}
 
-	protected function getComputedId( $entityType, $entityNumber ) {
-		return $entityNumber * 10 + $this->idMap[$entityType];
+	protected function getComputedId( EntityId $entityId ) {
+		return $entityId->getNumericId() * 10 + $this->idMap[$entityId->getEntityType()];
 	}
 
 }
