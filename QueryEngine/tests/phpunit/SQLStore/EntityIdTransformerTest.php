@@ -3,6 +3,7 @@
 namespace Wikibase\QueryEngine\Tests\SQLStore;
 
 use Wikibase\QueryEngine\SQLStore\EntityIdTransformer;
+use Wikibase\EntityId;
 
 /**
  * @covers Wikibase\QueryEngine\SQLStore\EntityIdTransformer
@@ -58,7 +59,7 @@ class EntityIdTransformerTest extends \PHPUnit_Framework_TestCase {
 
 		$transformer = new EntityIdTransformer( $idMap );
 
-		$internalId = $transformer->getInternalIdForEntity( $entityType, $numericId );
+		$internalId = $transformer->getInternalIdForEntity( new EntityId( $entityType, $numericId ) );
 
 		$this->assertInternalType( 'int', $internalId );
 
@@ -95,7 +96,7 @@ class EntityIdTransformerTest extends \PHPUnit_Framework_TestCase {
 
 		$transformer = new EntityIdTransformer( array() );
 
-		$transformer->getInternalIdForEntity( $entityType, $numericId );
+		$transformer->getInternalIdForEntity( new EntityId( $entityType, $numericId ) );
 	}
 
 }
