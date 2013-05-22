@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxTcv9UE",
+        "filename": "lib/includes/ClaimGuidValidator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-22T10:33:27Z",
+      "side": 1,
+      "message": "dependency on repo in lib is bad.",
+      "revId": "1431f8a0a47cd2d3d4145e77e814f9994ba33370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxdcBcbM",
+        "filename": "lib/includes/ClaimGuidValidator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-22T10:33:27Z",
+      "side": 1,
+      "message": "you\u0027re introducing dependency on repo in lib.",
+      "revId": "1431f8a0a47cd2d3d4145e77e814f9994ba33370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
