@@ -238,7 +238,7 @@ $messages['he'] = array(
 	'valueview-desc' => 'רכיבי ממשק להצגה ועריכה של ערכי נתונים',
 	'valueview-expert-advancedadjustments' => 'כוונונים מתקדמים',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'טיפול בערכים מסוג "$1" אינו נתמך עדיין.',
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'טיפול בערכים מסוג נתונים "41" אינו נתמך עדיין.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'טיפול בערכים מסוג נתונים "$1" אינו נתמך עדיין.',
 	'valueview-expert-emptyvalue-empty' => 'ריק',
 	'valueview-expert-timeinput-precision' => 'דיוק:',
 	'valueview-expert-timeinput-calendar' => 'לוח שנה:',
@@ -288,11 +288,13 @@ $messages['is'] = array(
  */
 $messages['it'] = array(
 	'valueview-desc' => "Componenti dell'interfaccia utente per la visualizzazione e la modifica dei valori dei dati",
+	'valueview-expert-advancedadjustments' => 'regolazioni avanzate',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'La gestione dei valori "$1" non è ancora supportata.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestione dei valori per il tipo di dati "$1" non è ancora supportata.',
 	'valueview-expert-emptyvalue-empty' => 'vuoto',
 	'valueview-expert-timeinput-precision' => 'Precisione:',
 	'valueview-expert-timeinput-calendar' => 'Calendario:',
+	'valueview-expert-timeinput-calendarhint' => '(calendario $1 prolettico)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; modifica in $1',
 	'valueview-preview-label' => 'verrà visualizzato come:',
 	'valueview-preview-novalue' => 'nessun valore valido riconosciuto',
@@ -446,9 +448,21 @@ $messages['sr-ec'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Ата
  */
 $messages['uk'] = array(
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Обробка значень типу «$1» не підтримується.', # Fuzzy
+	'valueview-desc' => 'Компоненти користувацького інтерфейсу для відображення і редагування значень даних',
+	'valueview-expert-advancedadjustments' => 'розширені налаштування',
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Обробка значень «$1» ще не підтримується.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Обробка значень типу даних «$1» ще не підтримується.',
+	'valueview-expert-emptyvalue-empty' => 'пусто',
+	'valueview-expert-timeinput-precision' => 'Точність:',
+	'valueview-expert-timeinput-calendar' => 'Календар:',
+	'valueview-expert-timeinput-calendarhint' => '(пролептичний $1 календар)',
+	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; змінити на $1',
+	'valueview-preview-label' => 'буде відображатися як:',
+	'valueview-preview-novalue' => 'не розпізнано допустимого значення',
+	'valueview-listrotator-auto' => 'автоматично',
 );
 
 /** Vietnamese (Tiếng Việt)
