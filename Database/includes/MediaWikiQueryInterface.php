@@ -113,14 +113,18 @@ class MediaWikiQueryInterface implements QueryInterface {
 	 * @param string $tableName
 	 * @param array $values
 	 *
-	 * @return boolean Success indicator
+	 * @throws InsertFailedException
 	 */
 	public function insert( $tableName, array $values ) {
-		return $this->getDB()->insert(
+		$success = $this->getDB()->insert(
 			$tableName,
 			$values,
 			__METHOD__
 		) !== false;
+
+		if ( !$success ) {
+			throw new InsertFailedException( $tableName, $values );
+		}
 	}
 
 	/**
