@@ -49,6 +49,7 @@ interface QueryInterface {
 	 * @param TableDefinition $table
 	 *
 	 * @return boolean Success indicator
+	 * @throws TableCreationFailedException
 	 */
 	public function createTable( TableDefinition $table );
 
@@ -129,6 +130,7 @@ interface QueryInterface {
 	 * @param array $conditions
 	 *
 	 * @return ResultIterator
+	 * @throws SelectFailedException
 	 */
 	public function select( $tableName, array $fields, array $conditions );
 
