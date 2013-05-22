@@ -202,7 +202,33 @@ class MediaWikiQueryInterfaceTest extends \PHPUnit_Framework_TestCase {
 			->with(
 				$this->equalTo( $tableName ),
 				$this->equalTo( $fieldValues )
-			);
+			)
+			->will( $this->returnValue( true ) );
+
+		$queryInterface->insert(
+			$tableName,
+			$fieldValues
+		);
+	}
+
+	/**
+	 * @dataProvider insertProvider
+	 */
+	public function testInsertFailure( $tableName, array $fieldValues ) {
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
+
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
+		);
+
+		$connection->expects( $this->once() )
+			->method( 'insert' )
+			->will( $this->returnValue( false ) );
+
+		$this->setExpectedException( '\Wikibase\Database\InsertFailedException' );
 
 		$queryInterface->insert(
 			$tableName,

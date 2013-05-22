@@ -26,16 +26,16 @@ namespace Wikibase\Database;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DeleteFailedException extends QueryInterfaceException {
+class InsertFailedException extends QueryInterfaceException {
 
 	protected $tableName;
-	protected $conditions;
+	protected $values;
 
 	public function __construct( $tableName, array $values, $message = '', \Exception $previous = null ) {
 		parent::__construct( $message, 0, $previous );
 
 		$this->tableName = $tableName;
-		$this->conditions = $values;
+		$this->values = $values;
 	}
 
 	/**
@@ -48,8 +48,8 @@ class DeleteFailedException extends QueryInterfaceException {
 	/**
 	 * @return array
 	 */
-	public function getConditions() {
-		return $this->conditions;
+	public function getValues() {
+		return $this->values;
 	}
 
 }

@@ -74,8 +74,7 @@ interface QueryInterface {
 	 * @param string $tableName
 	 * @param array $values
 	 *
-	 * @return boolean Success indicator
-	 * TODO: change to exception
+	 * @throws InsertFailedException
 	 */
 	public function insert( $tableName, array $values );
 
