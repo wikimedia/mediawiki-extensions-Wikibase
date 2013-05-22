@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxRRON5c",
+        "filename": "lib/includes/ClaimGuidValidator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-05-22T08:41:24Z",
+      "side": 1,
+      "message": "we probably want to also validate the part after the \u0027$\u0027 with a regex like e.g. preg_match(\u0027/^\\{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}\\}?$/\u0027, $guid) just to be sure to avoid guids like q123$foo",
+      "revId": "4bfab9e7d1617fede66442653ad54e2c57ed61ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
