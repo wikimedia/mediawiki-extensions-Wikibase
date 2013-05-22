@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DxXegXUc",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-22T13:14:34Z",
+      "side": 1,
+      "message": "Indeed, this is however not something I am changing here",
+      "parentUuid": "DxVr463g",
+      "revId": "1e37572796a802d6c39a5979e2569d269f442eca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxRrso48",
         "filename": "composer.json",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-05-21T16:52:38Z",
       "side": 1,
       "message": "Mixing tabs and spaces",
+      "revId": "1e37572796a802d6c39a5979e2569d269f442eca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxVelYVQ",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-22T13:14:34Z",
+      "side": 1,
+      "message": "bleh",
+      "parentUuid": "DxRrso48",
       "revId": "1e37572796a802d6c39a5979e2569d269f442eca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
