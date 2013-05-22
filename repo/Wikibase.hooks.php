@@ -538,6 +538,7 @@ final class RepoHooks {
 
 		if ( EntityContentFactory::singleton()->isEntityContentModel( $title->getContentModel() ) ) {
 			unset( $links['views']['edit'] );
+			unset( $links['views']['viewsource'] );
 
 			if ( $title->quickUserCan( 'edit', $sktemplate->getUser() ) ) {
 				$old = !$sktemplate->isRevisionCurrent()
