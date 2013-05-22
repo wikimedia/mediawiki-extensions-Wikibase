@@ -276,18 +276,20 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		'text/rdf+n3',
 		'text/turtle',
 		'application/turtle',
+		'application/ntriples',
 	);
 
 	static $rdfExtensions = array(
 		'rdf',
 		'n3',
-		'ttl'
+		'ttl',
+		'nt'
 	);
 
 	static $badMimeTypes = array(
 		'text/html',
 		'text/text',
-		'text/plain',
+		// 'text/plain', // ntriples presents as text/plain!
 	);
 
 	static $badExtensions = array(

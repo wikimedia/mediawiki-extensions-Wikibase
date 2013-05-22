@@ -44,7 +44,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 		'xml',
 		'rdfxml',
 		'n3',
-		'turtle'
+		'turtle',
+		'ntriples'
 	);
 
 	/**
