@@ -1,7 +1,13 @@
 <?php
 
 namespace Wikibase;
-use MWException, Title, WikiPage, Revision;
+
+use MWException;
+use Title;
+use WikiPage;
+use Revision;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Factory for EntityContent objects.
@@ -33,6 +39,7 @@ class EntityContentFactory {
 
 	/**
 	 * @since 0.2
+	 * @deprecated since 0.4
 	 *
 	 * @return EntityContentFactory
 	 */
@@ -40,10 +47,24 @@ class EntityContentFactory {
 		static $instance = false;
 
 		if ( $instance === false ) {
-			$instance = new static();
+			$instance = WikibaseRepo::newInstance()->getEntityContentFactory();
 		}
 
 		return $instance;
+	}
+
+	// TODO: inject this map and allow extensions to somehow extend it
+	protected static $typeMap = array(
+		Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
+		Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY,
+	);
+
+	protected $idFormatter;
+	protected $contentModelIds;
+
+	public function __construct( EntityIdFormatter $idFormatter, array $contentModelIds ) {
+		$this->idFormatter = $idFormatter;
+		$this->contentModelIds = $contentModelIds;
 	}
 
 	/**
@@ -62,15 +83,13 @@ class EntityContentFactory {
 
 	/**
 	 * Returns a list of content model IDs that are used to represent Wikibase entities.
-	 * Configured via $wgWBRepoSettings['entityNamespaces'].
 	 *
 	 * @since 0.2
 	 *
 	 * @return array An array of string content model IDs.
 	 */
 	public function getEntityContentModels() {
-		$namespaces = Settings::get( 'entityNamespaces' );
-		return is_array( $namespaces ) ? array_keys( $namespaces ) : array();
+		return $this->contentModelIds;
 	}
 
 	/**
@@ -139,7 +158,7 @@ class EntityContentFactory {
 	 */
 	public function getTitleForId( EntityId $id ) {
 		return Title::newFromText(
-			$id->getPrefixedId(),
+			$this->idFormatter->format( $id ),
 			NamespaceUtils::getEntityNamespace( self::$typeMap[$id->getEntityType()] )
 		);
 	}
@@ -177,12 +196,6 @@ class EntityContentFactory {
 
 		return $revision->getContent();
 	}
-
-	// TODO: move to sane place
-	protected static $typeMap = array(
-		Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
-		Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY,
-	);
 
 	/**
 	 * Constructs a new EntityContent from an Entity.

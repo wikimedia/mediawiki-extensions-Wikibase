@@ -5,6 +5,7 @@ namespace Wikibase\Repo;
 use DataTypes\DataTypeFactory;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
+use Wikibase\EntityContentFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
@@ -79,6 +80,20 @@ final class WikibaseRepo {
 		}
 
 		return $this->dataTypeFactory;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return EntityContentFactory
+	 */
+	public function getEntityContentFactory() {
+		$entityNamespaces = $this->settings->getSetting( 'entityNamespaces' );
+
+		return new EntityContentFactory(
+			$this->getIdFormatter(),
+			is_array( $entityNamespaces ) ? array_keys( $entityNamespaces ) : array()
+		);
 	}
 
 	/**
