@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dxfcw7QI",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-22T13:55:43Z",
+      "side": 1,
+      "message": "Would be good if WikiRevision and Revision shared an interface :(",
+      "revId": "a09cb83f072191cfc6a6ea181943542975ed269e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxVdB4Vw",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-22T13:55:43Z",
+      "side": 1,
+      "message": "No type hinting? Sad...\nAlso, without an EntityLookup, it is not possible to serialize claims.\nWe need to look up the types of properties.",
+      "revId": "a09cb83f072191cfc6a6ea181943542975ed269e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxZcjacA",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-22T13:55:43Z",
+      "side": 1,
+      "message": "We need this for claims.",
+      "revId": "a09cb83f072191cfc6a6ea181943542975ed269e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxbcmZc8",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-22T13:55:43Z",
+      "side": 1,
+      "message": "There should be a separate switch to enable or disable the automatic inclusion of mentioned entities. \n\nIf it\u0027s disabled, we should not even collect them - entityMentioned() should just do nothing. This avoids collecting millions of mentioned entities when creating a bulk dump.",
+      "revId": "a09cb83f072191cfc6a6ea181943542975ed269e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
