@@ -70,6 +70,7 @@ $messages['en'] = array(
 	'wikibase-aliases-input-help-message' => 'If this data set is known under more than one particular name, you may enter aliases and synonyms, so it can be found by its alternative names.',
 	'wikibase-aliases-empty' => 'No aliases defined.',
 	'wikibase-datatype-label' => 'Data type:',
+	'wikibase-property-footer' => '', # do not translate or duplicate this message to other languages
 	'wikibase-claimview-snak-tooltip' => 'Enter a value corresponding to the property named "$1". If the property has no designated value or the actual value is not known, you may choose an alternative to specifying a custom value by clicking the icon next to the value input box.',
 	'wikibase-claimview-snak-new-tooltip' => 'After specifying a property you can enter a corresponding value. If the property has no designated value or the actual value is not known, you may choose an alternative to specifying a custom value by clicking the icon next to the value input box.',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|source|sources}}',

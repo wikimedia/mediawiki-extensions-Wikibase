@@ -50,6 +50,11 @@ class PropertyView extends EntityView {
 		/** @var PropertyContent $property */
 		$html .= $this->getHtmlForDataType( $property->getProperty()->getDataType(), $lang, $editable );
 		// TODO: figure out where to display type information more nicely
+		# Customizable footer
+		$footer = $this->msg( 'wikibase-property-footer' );
+		if ( !$footer->isBlank() ) {
+			$html .= "\n" . $footer->parse();
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $html;
