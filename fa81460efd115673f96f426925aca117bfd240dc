@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxQo57KA",
+        "filename": "Database/tests/phpunit/DeleteFailedExceptionTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-05-22T14:28:40Z",
+      "side": 1,
+      "message": "is this part of the contract, that the exception never gets modified by the classes inheriting from?",
+      "revId": "fa81460efd115673f96f426925aca117bfd240dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
