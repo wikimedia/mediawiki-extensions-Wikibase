@@ -1,6 +1,7 @@
 <?php
 namespace Wikibase;
 
+use DataValues\TimeValue;
 use Html;
 use Diff\Diff;
 use Wikibase\Lib\EntityIdFormatter;
@@ -293,6 +294,10 @@ class ClaimDifferenceVisualizer {
 			// FIXME! should use some value formatter
 			if ( $dataValue instanceof EntityId ) {
 				$diffValueString = $this->getEntityLabel( $dataValue );
+			} else if ( $dataValue instanceof TimeValue ) {
+				// TODO: this will just display the plain ISO8601-string,
+				// we should instead use a decent formatter
+				$diffValueString = $dataValue->getTime();
 			} else {
 				$diffValueString = $dataValue->getValue();
 			}
