@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "DxeploOM",
+        "filename": "DataModel/DataModel/Entity/Entity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-22T14:16:02Z",
+      "side": 1,
+      "message": "Hm? Why? And how is that related to EntityId?",
+      "revId": "dc3b9d39b1476206ac101b96092be7a721c47a0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxR9D9Rc",
         "filename": "DataModel/DataModel/Entity/EntityId.php",
         "patchSetId": 1
@@ -13,6 +30,41 @@
       "writtenOn": "2013-05-21T07:02:30Z",
       "side": 1,
       "message": "I do not understand this note.",
+      "revId": "dc3b9d39b1476206ac101b96092be7a721c47a0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxQp8TH8",
+        "filename": "DataModel/DataModel/Entity/EntityId.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-22T14:16:02Z",
+      "side": 1,
+      "message": "I don\u0027t either, but it should say that this may or may not be equal to getPrefixedId(), and is only intended for debugging.",
+      "parentUuid": "DxR9D9Rc",
+      "revId": "dc3b9d39b1476206ac101b96092be7a721c47a0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxWpxkKg",
+        "filename": "DataModel/DataModel/Entity/EntityId.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-22T14:16:02Z",
+      "side": 1,
+      "message": "This should be replaced by something like \"$type:$number\".",
       "revId": "dc3b9d39b1476206ac101b96092be7a721c47a0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
