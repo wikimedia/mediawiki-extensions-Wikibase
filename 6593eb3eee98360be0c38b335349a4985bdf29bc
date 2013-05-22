@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DxcoBxLM",
+        "filename": "DataModel/DataModel.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-22T14:34:33Z",
+      "side": 1,
+      "message": "This is a separate component with its own version number. There is no relevant difference here with Diff or Ask if one thinks the \"oh it happens to be in the same git repo\" point is invalid, which I do.",
+      "parentUuid": "DxWpYcDA",
+      "revId": "6593eb3eee98360be0c38b335349a4985bdf29bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxV-EXZM",
         "filename": "DataModel/DataModel.mw.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-05-21T06:59:25Z",
       "side": 1,
       "message": "\"The Wikidata Team\" would be more appropriate here. There are at least 2 other authors in these files.",
+      "revId": "6593eb3eee98360be0c38b335349a4985bdf29bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxUoVtO4",
+        "filename": "DataModel/DataModel.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-22T14:34:33Z",
+      "side": 1,
+      "message": "There are a few with danielk and a few with john. And supposedly there are a few commits from other people as well. However all of those together make up for a insignificant part of the code here, so should not be listed",
+      "parentUuid": "DxV-EXZM",
       "revId": "6593eb3eee98360be0c38b335349a4985bdf29bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
