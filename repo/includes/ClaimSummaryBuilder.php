@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use DataValues\TimeValue;
 use InvalidArgumentException;
 use Wikibase\Lib\EntityIdFormatter;
 
@@ -129,6 +130,10 @@ class ClaimSummaryBuilder {
 
 				if ( $snak instanceof PropertyValueSnak ) {
 					$value = $snak->getDataValue();
+					// TODO: we should use value formatters here!
+					if ( $value instanceof TimeValue ) {
+						$value = $value->getTime();
+					}
 				} else {
 					$value = '-'; // todo handle no values in general way (needed elsewhere)
 				}
