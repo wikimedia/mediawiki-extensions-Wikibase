@@ -74,7 +74,7 @@ final class Factory {
 		return new EntityInserter(
 			$this->newEntityTable(),
 			$this->newClaimInserter(),
-			$this->getInternalEntityIdFinder()
+			$this->getInternalEntityIdTransformer()
 		);
 	}
 
@@ -89,7 +89,7 @@ final class Factory {
 		return new ClaimInserter(
 			$this->newClaimsTable(),
 			$this->newSnakInserter(),
-			new ClaimRowBuilder( $this->getInternalEntityIdFinder() )
+			new ClaimRowBuilder( $this->getInternalEntityIdTransformer() )
 		);
 	}
 
@@ -103,7 +103,7 @@ final class Factory {
 	public function newSnakInserter() {
 		return new SnakInserter(
 			$this->getSnakStores(),
-			new SnakRowBuilder( $this->getInternalEntityIdFinder() )
+			new SnakRowBuilder( $this->getInternalEntityIdTransformer() )
 		);
 	}
 
@@ -130,10 +130,10 @@ final class Factory {
 	}
 
 	/**
-	 * @return InternalEntityIdFinder
+	 * @return InternalEntityIdTransformer
 	 */
-	protected function getInternalEntityIdFinder() {
-		return new EntityIdTransformer( $this->config->getEntityTypeMap() );
+	protected function getInternalEntityIdTransformer() {
+		return new SimpleEntityIdTransformer( $this->config->getEntityTypeMap() );
 	}
 
 	public function newWriter() {
@@ -150,7 +150,7 @@ final class Factory {
 			$this->queryInterface,
 			$this->schema,
 			$this->config->getPropertyDataValueTypeLookup(),
-			$this->getInternalEntityIdFinder()
+			$this->getInternalEntityIdTransformer()
 		);
 	}
 

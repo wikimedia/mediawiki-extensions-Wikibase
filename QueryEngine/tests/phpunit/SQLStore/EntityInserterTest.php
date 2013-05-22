@@ -10,7 +10,7 @@ use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\QueryEngine\SQLStore\DataValueTable;
-use Wikibase\QueryEngine\SQLStore\EntityIdTransformer;
+use Wikibase\QueryEngine\SQLStore\SimpleEntityIdTransformer;
 use Wikibase\QueryEngine\SQLStore\EntityInserter;
 
 /**
@@ -74,7 +74,7 @@ class EntityInserterTest extends \PHPUnit_Framework_TestCase {
 			);
 		}
 
-		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' );
+		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdTransformer' );
 
 		$idFinder->expects( $this->any() )
 			->method( 'getInternalIdForEntity' )
