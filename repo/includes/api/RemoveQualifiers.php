@@ -12,6 +12,8 @@ use Wikibase\EntityContentFactory;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\Settings;
+use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for removing qualifiers from a claim.
@@ -71,6 +73,15 @@ class RemoveQualifiers extends ApiWikibase {
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
+
+		// @todo generalize handling of settings in api modules
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
+		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
+
+		if ( !( $claimGuidValidator->validateFormat( $params['claim'] ) ) ) {
+			$this->dieUsage( 'Invalid claim guid', 'removequalifiers-invalid-guid' );
+		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );

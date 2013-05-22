@@ -38,6 +38,7 @@ use Wikibase\Claim;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class RemoveClaimsTest extends \ApiTestCase {
 
@@ -143,6 +144,34 @@ class RemoveClaimsTest extends \ApiTestCase {
 		$this->assertInternalType( 'array', $claims, 'top claims element is an array' );
 
 		$this->assertArrayEquals( $claimGuids, $claims );
+	}
+
+	/**
+	 * @dataProvider invalidClaimProvider
+	 */
+	public function testRemoveInvalidClaims( $claimGuid ) {
+		$caughtException = false;
+
+		$params = array(
+			'action' => 'wbremoveclaims',
+			'claim' => $claimGuid
+		);
+
+		try {
+			$this->doApiRequest( $params );
+		} catch ( \UsageException $e ) {
+			$this->assertEquals( $e->getCodeString(), 'removeclaims-invalid-guid', 'Invalid claim guid raised correct error' );
+			$caughtException = true;
+		}
+
+		$this->assertTrue( $caughtException, 'Exception was caught' );
+	}
+
+	public function invalidClaimProvider() {
+		return array(
+			array( 'xyz' ),
+			array( 'x$y$z' )
+		);
 	}
 
 }

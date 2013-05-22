@@ -11,8 +11,9 @@ use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Statement;
 use Wikibase\Settings;
-
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for setting the rank of a statement
@@ -49,7 +50,7 @@ class SetStatementRank extends ApiWikibase {
 
 	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
 		//NOTE: need to declare this constructor, so old PHP versions don't use the
-		//      setStatementRank() function as the constructor.
+		//setStatementRank() function as the constructor.
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 	}
 
@@ -84,6 +85,15 @@ class SetStatementRank extends ApiWikibase {
 	 */
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
+
+		// @todo generalize handling of settings in api modules
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$entityPrefixes = $settings->getSetting( 'entityPrefixes' );
+		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
+
+		if ( !( $claimGuidValidator->validate( $params['statement'] ) ) ) {
+			$this->dieUsage( 'Invalid claim guid', 'setstatementrank-invalid-guid' );
+		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );

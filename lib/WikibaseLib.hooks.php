@@ -73,6 +73,7 @@ final class LibHooks {
 			'ByPropertyIdArray',
 			'ChangesTable',
 			'ClaimDifference',
+			'ClaimGuidValidator',
 			'ReferencedEntitiesFinder',
 			'EntityRetrievingDataTypeLookup',
 			'InMemoryDataTypeLookup',

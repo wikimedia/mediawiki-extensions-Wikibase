@@ -37,6 +37,7 @@ use Wikibase\Reference;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SetReferenceTest extends \ApiTestCase {
 
@@ -127,6 +128,43 @@ class SetReferenceTest extends \ApiTestCase {
 		catch ( \UsageException $e ) {
 			$this->assertEquals( 'setreference-no-such-reference', $e->getCodeString(), 'Invalid request raised correct error' );
 		}
+	}
+
+	/**
+	 * @dataProvider invalidClaimProvider
+	 */
+	public function testInvalidClaimGuid( $claimGuid, $snakHash, $refHash ) {
+		$caughtException = false;
+
+		$params = array(
+			'action' => 'wbsetreference',
+			'statement' => $claimGuid,
+			'snaks' => $snakHash,
+			'reference' => $refHash,
+			'token' => $GLOBALS['wgUser']->getEditToken()
+		);
+
+		try {
+			$this->doApiRequest( $params );
+		} catch ( \UsageException $e ) {
+			$this->assertEquals( $e->getCodeString(), 'setreference-invalid-guid', 'Invalid claim guid raised correct error' );
+			$caughtException = true;
+		}
+
+		$this->assertTrue( $caughtException, 'Exception was caught' );
+	}
+
+	public function invalidClaimProvider() {
+		$snak = new \Wikibase\PropertyValueSnak( 722, new \DataValues\StringValue( 'abc') );
+		$snakHash = $snak->getHash();
+
+		$reference = new \Wikibase\PropertyValueSnak( 723, new \DataValues\StringValue( 'def' ) );
+		$refHash = $reference->getHash();
+
+		return array(
+			array( 'xyz', $snakHash, $refHash ),
+			array( 'x$y$z', $snakHash, $refHash )
+		);
 	}
 
 }
