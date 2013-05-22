@@ -2,10 +2,10 @@
 
 namespace Wikibase\Database\Tests;
 
-use Wikibase\Database\TableCreationFailedException;
+use Wikibase\Database\UpdateFailedException;
 
 /**
- * @covers Wikibase\Database\TableCreationFailedException
+ * @covers Wikibase\Database\UpdateFailedException
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,28 +33,32 @@ use Wikibase\Database\TableCreationFailedException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TableCreationFailedExceptionTest extends \PHPUnit_Framework_TestCase {
+class UpdateFailedExceptionTest extends \PHPUnit_Framework_TestCase {
 
-	public function testConstructorWithJustATable() {
-		$table = $this->getMockBuilder( 'Wikibase\Database\TableDefinition' )
-			->disableOriginalConstructor()->getMock();
+	public function testConstructorWithOnlyRequiredArguments() {
+		$tableName = 'nyancats';
+		$values = array( 'bar', 'baz', 'bah' );
+		$conditions = array( 'foo' => 42, 'awesome > 9000' );
 
-		$exception = new TableCreationFailedException( $table );
+		$exception = new UpdateFailedException( $tableName, $values, $conditions );
 
-		$this->assertEquals( $table, $exception->getTable() );
+		$this->assertEquals( $tableName, $exception->getTableName() );
+		$this->assertEquals( $values, $exception->getValues() );
+		$this->assertEquals( $conditions, $exception->getConditions() );
 	}
 
 	public function testConstructorWithAllArguments() {
-		$table = $this->getMockBuilder( 'Wikibase\Database\TableDefinition' )
-			->disableOriginalConstructor()->getMock();
-
+		$tableName = 'users';
+		$fields = array( 'bar' );
+		$conditions = array( 'foo' => 42 );
 		$message = 'NyanData all the way accross the sky!';
-
 		$previous = new \Exception( 'Onoez!' );
 
-		$exception = new TableCreationFailedException( $table, $message, $previous );
+		$exception = new UpdateFailedException( $tableName, $fields, $conditions, $message, $previous );
 
-		$this->assertEquals( $table, $exception->getTable() );
+		$this->assertEquals( $tableName, $exception->getTableName() );
+		$this->assertEquals( $fields, $exception->getValues() );
+		$this->assertEquals( $conditions, $exception->getConditions() );
 		$this->assertEquals( $message, $exception->getMessage() );
 		$this->assertEquals( $previous, $exception->getPrevious() );
 	}

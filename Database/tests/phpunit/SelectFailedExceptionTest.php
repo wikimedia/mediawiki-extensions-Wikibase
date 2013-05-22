@@ -5,7 +5,7 @@ namespace Wikibase\Database\Tests;
 use Wikibase\Database\SelectFailedException;
 
 /**
- * @covers Wikibase\Database\SelectFailedException class.
+ * @covers Wikibase\Database\SelectFailedException
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
