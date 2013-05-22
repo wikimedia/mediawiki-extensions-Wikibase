@@ -48,7 +48,7 @@ $messages['en'] = array(
 	// TimeInput expert:
 	'valueview-expert-timeinput-precision' => 'Precision:',
 	'valueview-expert-timeinput-calendar' => 'Calendar:',
-	'valueview-expert-timeinput-calendarhint' => '(proleptic $1 calendar)',
+	'valueview-expert-timeinput-calendarhint' => '($1 calendar)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; change to $1',
 
 	'valueview-preview-label' => 'will be displayed as:',
