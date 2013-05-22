@@ -11,7 +11,7 @@ use Wikibase\Database\TableDefinition;
 use Wikibase\EntityId;
 use Wikibase\QueryEngine\SQLStore\DataValueTable;
 use Wikibase\QueryEngine\SQLStore\Engine\DescriptionMatchFinder;
-use Wikibase\QueryEngine\SQLStore\EntityIdTransformer;
+use Wikibase\QueryEngine\SQLStore\SimpleEntityIdTransformer;
 
 /**
  * @covers Wikibase\QueryEngine\SQLStore\Engine\DescriptionMatchFinder
@@ -55,7 +55,7 @@ class DescriptionMatchFinderTest extends \PHPUnit_Framework_TestCase {
 			$this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\Schema' )
 				->disableOriginalConstructor()->getMock(),
 			$this->getMock( 'Wikibase\QueryEngine\SQLStore\PropertyDataValueTypeLookup' ),
-			$this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' )
+			$this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdTransformer' )
 		);
 	}
 
@@ -101,7 +101,7 @@ class DescriptionMatchFinderTest extends \PHPUnit_Framework_TestCase {
 
 		$dvTypeLookup = $this->getMock( 'Wikibase\QueryEngine\SQLStore\PropertyDataValueTypeLookup' );
 
-		$idTransformer = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' );
+		$idTransformer = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdTransformer' );
 
 		$matchFinder = new DescriptionMatchFinder(
 			$queryEngine,

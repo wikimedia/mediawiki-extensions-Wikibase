@@ -77,7 +77,7 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 
 		'SQLStore/DataValueHandlers',
 		'SQLStore/DataValueHandler',
-		'SQLStore/EntityIdTransformer',
+		'SQLStore/SimpleEntityIdTransformer',
 		'SQLStore/EntityInserter',
 		'SQLStore/Factory',
 		'SQLStore/Schema',

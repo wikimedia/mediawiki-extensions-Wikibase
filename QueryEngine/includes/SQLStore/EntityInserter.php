@@ -45,7 +45,7 @@ class EntityInserter {
 	 * @param EntityTable $entityTable
 	 * @param ClaimInserter $claimInserter
 	 */
-	public function __construct( EntityTable $entityTable, ClaimInserter $claimInserter, InternalEntityIdFinder $idFinder ) {
+	public function __construct( EntityTable $entityTable, ClaimInserter $claimInserter, InternalEntityIdTransformer $idFinder ) {
 		$this->entityTable = $entityTable;
 		$this->claimInserter = $claimInserter;
 		$this->idFinder = $idFinder;

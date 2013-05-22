@@ -2,7 +2,7 @@
 
 namespace Wikibase\QueryEngine\Tests\SQLStore;
 
-use Wikibase\QueryEngine\SQLStore\EntityIdTransformer;
+use Wikibase\QueryEngine\SQLStore\SimpleEntityIdTransformer;
 
 /**
  * @covers Wikibase\QueryEngine\SQLStore\EntityIdTransformer
@@ -34,10 +34,10 @@ use Wikibase\QueryEngine\SQLStore\EntityIdTransformer;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Denny Vrandecic
  */
-class EntityIdTransformerTest extends \PHPUnit_Framework_TestCase {
+class SimpleEntityIdTransformerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstruct() {
-		new EntityIdTransformer( $this->getIdMap() );
+		new SimpleEntityIdTransformer( $this->getIdMap() );
 		$this->assertTrue( true );
 	}
 
@@ -56,7 +56,7 @@ class EntityIdTransformerTest extends \PHPUnit_Framework_TestCase {
 	public function testGetInternalIdForEntity( $entityType, $numericId ) {
 		$idMap = $this->getIdMap();
 
-		$transformer = new EntityIdTransformer( $idMap );
+		$transformer = new SimpleEntityIdTransformer( $idMap );
 
 		$internalId = $transformer->getInternalIdForEntity( $entityType, $numericId );
 
@@ -93,7 +93,7 @@ class EntityIdTransformerTest extends \PHPUnit_Framework_TestCase {
 	public function testGetForNotSetType( $entityType, $numericId ) {
 		$this->setExpectedException( 'OutOfBoundsException' );
 
-		$transformer = new EntityIdTransformer( array() );
+		$transformer = new SimpleEntityIdTransformer( array() );
 
 		$transformer->getInternalIdForEntity( $entityType, $numericId );
 	}

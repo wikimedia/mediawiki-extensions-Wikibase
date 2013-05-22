@@ -7,7 +7,7 @@ use Wikibase\EntityId;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder;
+use Wikibase\QueryEngine\SQLStore\InternalEntityIdTransformer;
 use Wikibase\Snak;
 
 /**
@@ -40,7 +40,7 @@ class SnakRowBuilder {
 
 	protected $idFinder;
 
-	public function __construct( InternalEntityIdFinder $idFinder ) {
+	public function __construct( InternalEntityIdTransformer $idFinder ) {
 		$this->idFinder = $idFinder;
 	}
 

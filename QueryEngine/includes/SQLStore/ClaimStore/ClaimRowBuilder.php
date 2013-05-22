@@ -4,7 +4,7 @@ namespace Wikibase\QueryEngine\SQLStore\ClaimStore;
 
 use Wikibase\Claim;
 use Wikibase\EntityId;
-use Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder;
+use Wikibase\QueryEngine\SQLStore\InternalEntityIdTransformer;
 use Wikibase\Statement;
 
 /**
@@ -37,7 +37,7 @@ class ClaimRowBuilder {
 
 	protected $idFinder;
 
-	public function __construct( InternalEntityIdFinder $idFinder ) {
+	public function __construct( InternalEntityIdTransformer $idFinder ) {
 		$this->idFinder = $idFinder;
 	}
 

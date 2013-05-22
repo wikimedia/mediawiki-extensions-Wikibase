@@ -104,7 +104,7 @@ class ClaimInserterTest extends \PHPUnit_Framework_TestCase {
 
 		$snakInserter->expects( $this->exactly( $this->countClaimSnaks( $claim ) ) )->method( 'insertSnak' );
 
-		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' );
+		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdTransformer' );
 		$idFinder->expects( $this->any() )
 			->method( 'getInternalIdForEntity' )
 			->will( $this->returnValue( 42 ) );

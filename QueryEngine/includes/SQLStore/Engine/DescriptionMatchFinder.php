@@ -11,7 +11,7 @@ use Wikibase\EntityId;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\QueryEngine\QueryNotSupportedException;
 use Wikibase\QueryEngine\SQLStore\DataValueHandler;
-use Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder;
+use Wikibase\QueryEngine\SQLStore\InternalEntityIdTransformer;
 use Wikibase\QueryEngine\SQLStore\PropertyDataValueTypeLookup;
 use Wikibase\QueryEngine\SQLStore\Schema;
 use Wikibase\SnakRole;
@@ -52,7 +52,7 @@ class DescriptionMatchFinder {
 	public function __construct( QueryInterface $queryInterface,
 			Schema $schema,
 			PropertyDataValueTypeLookup $propertyDataValueTypeLookup,
-			InternalEntityIdFinder $idFinder ) {
+			InternalEntityIdTransformer $idFinder ) {
 		$this->queryInterface = $queryInterface;
 		$this->schema = $schema;
 		$this->propertyDataValueTypeLookup = $propertyDataValueTypeLookup;
