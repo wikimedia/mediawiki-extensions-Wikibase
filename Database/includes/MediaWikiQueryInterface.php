@@ -132,15 +132,19 @@ class MediaWikiQueryInterface implements QueryInterface {
 	 * @param array $values
 	 * @param array $conditions
 	 *
-	 * @return boolean Success indicator
+	 * @throws UpdateFailedException
 	 */
 	public function update( $tableName, array $values, array $conditions ) {
-		return $this->getDB()->update(
+		$success = $this->getDB()->update(
 			$tableName,
 			$values,
 			$conditions,
 			__METHOD__
 		) !== false;
+
+		if ( !$success ) {
+			throw new UpdateFailedException( $tableName, $values, $conditions );
+		}
 	}
 
 	/**
@@ -151,14 +155,18 @@ class MediaWikiQueryInterface implements QueryInterface {
 	 * @param string $tableName
 	 * @param array $conditions
 	 *
-	 * @return boolean Success indicator
+	 * @throws DeleteFailedException
 	 */
 	public function delete( $tableName, array $conditions ) {
-		return $this->getDB()->delete(
+		$success = $this->getDB()->delete(
 			$tableName,
 			$conditions,
 			__METHOD__
 		) !== false;
+
+		if ( !$success ) {
+			throw new DeleteFailedException( $tableName, $conditions );
+		}
 	}
 
 	/**

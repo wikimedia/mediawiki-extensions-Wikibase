@@ -246,7 +246,34 @@ class MediaWikiQueryInterfaceTest extends \PHPUnit_Framework_TestCase {
 				$this->equalTo( $tableName ),
 				$this->equalTo( $newValues ),
 				$this->equalTo( $conditions )
-			);
+			)
+			->will( $this->returnValue( true ) );
+
+		$queryInterface->update(
+			$tableName,
+			$newValues,
+			$conditions
+		);
+	}
+
+	/**
+	 * @dataProvider updateProvider
+	 */
+	public function testUpdateFailure( $tableName, array $newValues, array $conditions ) {
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
+
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
+		);
+
+		$connection->expects( $this->once() )
+			->method( 'update' )
+			->will( $this->returnValue( false ) );
+
+		$this->setExpectedException( '\Wikibase\Database\UpdateFailedException' );
 
 		$queryInterface->update(
 			$tableName,
@@ -312,7 +339,30 @@ class MediaWikiQueryInterfaceTest extends \PHPUnit_Framework_TestCase {
 			->with(
 				$this->equalTo( $tableName ),
 				$this->equalTo( $conditions )
-			);
+			)
+			->will( $this->returnValue( true ) );
+
+		$queryInterface->delete( $tableName, $conditions );
+	}
+
+	/**
+	 * @dataProvider deleteProvider
+	 */
+	public function testDeleteFailure( $tableName, array $conditions ) {
+		$connection = $this->getMock( 'DatabaseMysql' );
+		$extendedAbstraction = $this->getMockBuilder( '\Wikibase\Database\MWDB\ExtendedMySQLAbstraction' )
+			->disableOriginalConstructor()->getMock();
+
+		$queryInterface = new MediaWikiQueryInterface(
+			new DirectConnectionProvider( $connection ),
+			$extendedAbstraction
+		);
+
+		$connection->expects( $this->once() )
+			->method( 'delete' )
+			->will( $this->returnValue( false ) );
+
+		$this->setExpectedException( '\Wikibase\Database\DeleteFailedException' );
 
 		$queryInterface->delete( $tableName, $conditions );
 	}
