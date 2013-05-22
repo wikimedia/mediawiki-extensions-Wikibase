@@ -74,6 +74,7 @@ interface QueryInterface {
 	 * @param array $values
 	 *
 	 * @return boolean Success indicator
+	 * TODO: change to exception
 	 */
 	public function insert( $tableName, array $values );
 
@@ -88,7 +89,7 @@ interface QueryInterface {
 	 * @param array $values
 	 * @param array $conditions
 	 *
-	 * @return boolean Success indicator
+	 * @throws UpdateFailedException
 	 */
 	public function update( $tableName, array $values, array $conditions );
 
@@ -102,7 +103,7 @@ interface QueryInterface {
 	 * @param string $tableName
 	 * @param array $conditions
 	 *
-	 * @return boolean Success indicator
+	 * @throw DeleteFailedException
 	 */
 	public function delete( $tableName, array $conditions );
 
