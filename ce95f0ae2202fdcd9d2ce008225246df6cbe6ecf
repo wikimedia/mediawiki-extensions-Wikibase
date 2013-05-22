@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxfQEa8Q",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-22T02:20:23Z",
+      "side": 1,
+      "message": "$context-\u003egetTitle()-\u003egetFullText() -\u003e $title-\u003egetFullText()",
+      "revId": "ce95f0ae2202fdcd9d2ce008225246df6cbe6ecf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxZT359E",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-22T02:20:23Z",
+      "side": 1,
+      "message": "Maybe a plain \"none\" would be better... but I\u0027m no expert in UI design/ localization",
+      "revId": "ce95f0ae2202fdcd9d2ce008225246df6cbe6ecf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
