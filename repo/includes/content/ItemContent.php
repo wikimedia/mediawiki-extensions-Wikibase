@@ -147,24 +147,40 @@ class ItemContent extends EntityContent {
 		$conflicts = StoreFactory::getStore()->newSiteLinkCache()->getConflictsForItem( $this->getItem(), $db );
 
 		foreach ( $conflicts as $conflict ) {
-			$id = new EntityId( Item::ENTITY_TYPE, $conflict['itemId'] );
+			$msg = $this->getConflictMessage( $conflict );
 
-			/**
-			 * @var WikiPage $ipsPage
-			 */
-			$conflictingPage = EntityContentFactory::singleton()->getWikiPageForId( $id );
-
-			// NOTE: it would be nice to generate the link here and just pass it as HTML,
-			// but Status forces all parameters to be escaped.
-			$status->fatal(
-				'wikibase-error-sitelink-already-used',
-				$conflict['siteId'],
-				$conflict['sitePage'],
-				$conflictingPage->getTitle()->getFullText()
-			);
+			$status->fatal( $msg );
 		}
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Get Message for a conflict
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $conflict
+	 *
+	 * @return \Message
+	 */
+	protected function getConflictMessage( array $conflict ) {
+		$id = new EntityId( Item::ENTITY_TYPE, $conflict['itemId'] );
+
+		/**
+		 * @var WikiPage $ipsPage
+		 */
+		$conflictingPage = EntityContentFactory::singleton()->getWikiPageForId( $id );
+
+		$siteSqlStore = \SiteSQLStore::newInstance();
+		$site = $siteSqlStore->getSite( $conflict['siteId'] );
+		$pageUrl = $site->getPageUrl( $conflict['sitePage'] );
+
+		$msg = new \Message( 'wikibase-error-sitelink-already-used' );
+		$msg->rawParams( $pageUrl );
+		$msg->params( array( $conflict['sitePage'], $conflictingPage->getTitle()->getFullText() ) );
+
+		return $msg;
 	}
 
 	/**

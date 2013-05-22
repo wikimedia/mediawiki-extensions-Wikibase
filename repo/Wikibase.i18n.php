@@ -102,7 +102,7 @@ Your IP address will be recorded in the edit history of this $1.",
 	'wikibase-error-constraint-violation-description' => 'There is {{PLURAL:$1|a constraint|constraints}} violation for {{PLURAL:$1|description|descriptions}} "$3" for {{PLURAL:$1|language code|language codes}} "$2".',
 	'wikibase-error-constraint-violation-aliases' => 'There is {{PLURAL:$1|a constraint|constraints}} violation for {{PLURAL:$1|alias|aliases}} "$3" for {{PLURAL:$1|language code|language codes}} "$2".',
 
-	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'Site link [$1 $2] already used by item [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Another property ($3) already has label "$1" associated with language code $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Another query ($3) already has label "$1" associated with language code $2',
 	'wikibase-error-label-not-unique-item' => 'Another item ($3) already has label "$1" and description "$4" associated with language code $2',
@@ -611,9 +611,9 @@ Parameters:
 * $2 - the violating languages
 * $3 - the violating string, but this is usually not very useful as the message is usually given in an edit window', # Fuzzy
 	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a site link already used by another item. Parameters:
-* $1 is the site id (interwiki prefix);
-* $2 is the title on the remote site;
-* $3 is the title of the conflicting item.",
+* $1 is the url to the remote client page;
+* $2 is the title on the remote client site;
+* $3 is the item (e.g. Q60) on the repo with the conflicting site link.",
 	'wikibase-error-label-not-unique-wikibase-property' => 'Error message shown when a user tries to save a property that has a non-unique label.
 * $1 is label text
 * $2 is the labels language code
@@ -1318,7 +1318,7 @@ $messages['ast'] = array(
 	'wikibase-shortcopyrightwarning' => 'Al calcar en "$1", aceuta [[$2|les condiciones d\'usu]] y aceuta ensin vuelta lliberar les sos collaboraciones baxo la $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Aceuto estes condiciones pa les mios futures ediciones. Nun volver a amosar esti mensaxe.',
 	'wikibase-entityselector-more' => 'más',
-	'wikibase-anonymouseditwarning' => "Avisu: Nun anició sesión. 
+	'wikibase-anonymouseditwarning' => "Avisu: Nun anició sesión.
 La direición IP quedará rexistrada nel historial d'ediciones de $1.",
 	'wikibase-restrictionedit-tooltip-message' => 'Esta páxina ta protexida. Nun se permite la edición.',
 	'wikibase-blockeduser-tooltip-message' => "Nun tien permisu pa editar porque'l so nome d'usuariu o direición IP tan bloquiaos.",
