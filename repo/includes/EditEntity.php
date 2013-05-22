@@ -631,7 +631,7 @@ class EditEntity {
 			//       We should figure out which error codes the callers expect,
 			//       and only set the correct error code, in one place, probably here.
 			$this->errorType |= self::TOKEN_ERROR;
-			$this->status->fatal( 'session-failure' );
+			$this->status->fatal( 'sessionfailure' );
 			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
 
 			wfProfileOut( __METHOD__ );
