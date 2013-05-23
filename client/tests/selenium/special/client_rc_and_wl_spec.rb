@@ -136,6 +136,7 @@ describe "Check client RC & WL" do
   context "Check recent changes" do
     it "should try filter wikidata entries by flag" do
       visit_page(ClientRecentChangesPage) do |page|
+        sleep 1 #wikidata entries not hidden immediately
         page.rcFirstResult_element.text.include?(item_id).should be_false
         page.show_wikidata
         page.rcFirstResult_element.text.include?(item_id).should be_true
@@ -154,6 +155,7 @@ describe "Check client RC & WL" do
       visit_page(ClientRecentChangesPage) do |page|
         page.rcFirstResult_element.text.include?(item_id).should be_true
         page.hide_wikidata
+        sleep 1 #wikidata entries not hidden immediately
         page.rcFirstResult_element.text.include?(item_id).should be_false
         page.show_wikidata
         page.rcFirstResult_element.text.include?(item_id).should be_true
