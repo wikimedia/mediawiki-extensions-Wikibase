@@ -10,9 +10,12 @@ class CreateItemPage < CreateEntityPage
   include PageObject
   page_url WIKI_REPO_URL + "Special:NewItem"
 
-  def create_new_item(label, description, switch_lang = true)
+  def create_new_item(label, description, switch_lang = true, dismiss_copyright = true)
     if switch_lang
       self.uls_switch_language(LANGUAGE_CODE, LANGUAGE_NAME)
+    end
+    if dismiss_copyright
+      self.set_copyright_ack_cookie
     end
     self.createEntityLabelField = label
     self.createEntityDescriptionField = description
