@@ -114,4 +114,9 @@ class EntityPage < RubySelenium
       wbErrorDetailsDiv? == true
     end
   end
+
+  def set_copyright_ack_cookie
+    cookie = "$.cookie( 'wikibase.acknowledgedentitycopyright.en', 'By clicking \"save\", you agree to the terms of use, and you irrevocably agree to release your contribution under the [ ].', { 'expires': null, 'path': '/' } );"
+    @browser.execute_script(cookie)
+  end
 end

@@ -12,9 +12,12 @@ class NewPropertyPage < CreateEntityPage
 
   select_list(:newPropertyDatatype, :id => 'wb-newproperty-datatype' )
 
-  def create_new_property(label, description, datatype = "Item", switch_lang = true)
+  def create_new_property(label, description, datatype = "Item", switch_lang = true, dismiss_copyright = true)
     if switch_lang
       self.uls_switch_language(LANGUAGE_CODE, LANGUAGE_NAME)
+    end
+    if dismiss_copyright
+      self.set_copyright_ack_cookie
     end
     self.createEntityLabelField = label
     self.createEntityDescriptionField = description
