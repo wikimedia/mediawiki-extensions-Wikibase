@@ -16,6 +16,24 @@
       "revId": "4fafed23e14c07fb349e89c5ab52554a16276074",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxpBrhIY",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-23T20:32:09Z",
+      "side": 1,
+      "message": "Yes... having to hard code this isn\u0027t nice, but we have it all over the place and should stay consistent",
+      "parentUuid": "DxqVkhCQ",
+      "revId": "4fafed23e14c07fb349e89c5ab52554a16276074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
