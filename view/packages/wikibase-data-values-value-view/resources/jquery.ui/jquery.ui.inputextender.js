@@ -76,6 +76,13 @@
 		_animationTimeout: null,
 
 		/**
+		 * Caches the element's offset to determine whether the input extension has to be
+		 * repositioned when reacting on global "animationstep" event.
+		 * @type {Object}
+		 */
+		_offset: null,
+
+		/**
 		 * @see jQuery.Widget._create
 		 */
 		_create: function() {
@@ -159,13 +166,12 @@
 				} );
 			}
 
-			// Blurring by clicking away from the widget (one handler is sufficient):
 			$( 'html' )
 			.off( '.' + this.widgetName )
+			// Blurring by clicking away from the widget (one handler is sufficient):
 			.on( 'click.' + this.widgetName, function( event ) {
 				// Loop through all widgets and hide content when having clicked out of it:
-				var $widgetNodes = $( ':' + self.widgetBaseClass );
-				$widgetNodes.each( function( i, widgetNode ) {
+				$( ':' + self.widgetBaseClass ).each( function( i, widgetNode ) {
 					var widget = $( widgetNode ).data( self.widgetName ),
 						$target = $( event.target );
 
@@ -175,6 +181,16 @@
 						widget.hideExtension();
 					}
 
+				} );
+			} )
+			// If some other animation changes the input element's position, the input extender
+			// needs to be repositioned:
+			.on( 'animationstep.' + this.widgetName, function( event, now, tween ) {
+				$( ':' + self.widgetBaseClass ).each( function( i, widgetNode ) {
+					var widget = $( widgetNode ).data( self.widgetName );
+					if( widget.$extension.is( ':visible' ) ) {
+						widget._reposition();
+					}
 				} );
 			} );
 
@@ -292,12 +308,23 @@
 		 * Repositions the extension.
 		 */
 		_reposition: function() {
+			var offset = this.element.offset();
+
+			if(
+				this._offset
+				&& offset.top === this._offset.top && offset.left === this._offset.left
+			) {
+				return; // Position has not changed.
+			}
+
 			// TODO: Repositioning is not optimal in RTL context when hitting the toggler in the
 			//  extension to hide additional input. This seems to be caused by a width
 			//  miscalculation which can be debugged with "console.log( this.$extension.width() )".
 			this.$extension.position( $.extend( {
 				of: this.element
 			}, this.options.position ) );
+
+			this._offset = offset;
 		}
 
 	} );
