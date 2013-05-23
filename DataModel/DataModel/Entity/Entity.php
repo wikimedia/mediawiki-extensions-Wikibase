@@ -335,7 +335,12 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @param array $aliases
 	 */
 	public function setAliases( $languageCode, array $aliases ) {
-		$this->data['aliases'][$languageCode] = array_unique( $aliases );
+		$aliases = array_unique( $aliases );
+		if( count( $aliases ) > 0 ) {
+			$this->data['aliases'][$languageCode] = $aliases;
+		} else {
+			unset( $this->data['aliases'][$languageCode] );
+		}
 	}
 
 	/**
