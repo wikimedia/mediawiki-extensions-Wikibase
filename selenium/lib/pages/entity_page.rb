@@ -108,4 +108,10 @@ class EntityPage < RubySelenium
       mwNotificationContent? == true
     end
   end
+
+  def wait_for_error_details
+    wait_until do
+      wbErrorDetailsDiv? == true
+    end
+  end
 end
