@@ -96,10 +96,12 @@
 				var textValue = this._newValue === null ? '' : this._newValue;
 				this._newValue = false;
 
-				// Display value and resize textarea to fit for the value:
+				// Display value:
 				this.$input.val( textValue );
-				this._resizeInput();
 			}
+
+			// Resize textarea to fit the value (which might be empty):
+			this._resizeInput();
 
 			// We always use the textare for displaying the value, only in edit mode we format the
 			// textare as an input field though.
