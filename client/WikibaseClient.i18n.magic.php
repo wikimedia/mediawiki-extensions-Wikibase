@@ -78,6 +78,11 @@ $magicWords['vi'] = array(
 	'property' => array( 0, 'thuộctính' ),
 );
 
+/** Yiddish (ייִדיש) */
+$magicWords['yi'] = array(
+	'property' => array( 0, 'אייגנשאפט' ),
+);
+
 /** Traditional Chinese (中文（繁體）‎) */
 $magicWords['zh-hant'] = array(
 	'noexternallanglinks' => array( 0, '隱藏跨語言連結' ),
