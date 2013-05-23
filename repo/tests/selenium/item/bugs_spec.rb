@@ -65,6 +65,7 @@ describe "Check for known bugs" do
         page.wbErrorDiv?.should be_true
         page.wbErrorDetailsLink?.should be_true
         page.wbErrorDetailsLink
+        page.wait_for_error_details
         page.wbErrorDetailsDiv?.should be_true
         page.wbErrorDetailsDiv_element.text.include?(label_1).should be_true
         page.wbErrorDetailsDiv_element.text.include?(description_1).should be_true
@@ -79,6 +80,7 @@ describe "Check for known bugs" do
         page.wbErrorDiv?.should be_true
         page.wbErrorDetailsLink?.should be_true
         page.wbErrorDetailsLink
+        page.wait_for_error_details
         page.wbErrorDetailsDiv?.should be_true
         page.wbErrorDetailsDiv_element.text.include?(label_1).should be_true
         page.wbErrorDetailsDiv_element.text.include?(description_1).should be_true
