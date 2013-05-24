@@ -89,7 +89,6 @@
 			.on( 'click.' + this.widgetName, function( event ) {
 				if( !$( event.target ).closest( self.$closeIcon ).length ) {
 					clearTimeout( self._animationTimeout );
-					event.stopPropagation();
 					self.showExtension();
 				}
 			} )
