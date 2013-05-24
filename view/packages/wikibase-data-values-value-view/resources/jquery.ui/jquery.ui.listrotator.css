@@ -67,6 +67,7 @@
 .ui-listrotator-menu {
 	font-size: 84%;
 	padding: 0;
+	position: absolute;
 	z-index: 1;
 }
 
