@@ -86,9 +86,7 @@ The calendar is not localized at this time.
 The message is shown only when the specified date lies within a time frame when multiple calendars had been in use.
 
 Parameters:
-* $1 - the name of the calendar that is detected by the system (not localized)
-
-For an explanation about "proleptic" see [[:w:Proleptic Gregorian calendar]].',
+* $1 - the name of the calendar that is detected by the system (not localized)',
 	'valueview-expert-timeinput-calendarhint-switch' => 'Label of the link manually switching the calendar (e.g. from Gregorian to Julian) directly at the preview (in combination with the calendar hint message).
 
 Parameters:
@@ -164,7 +162,7 @@ $messages['de'] = array(
 	'valueview-expert-emptyvalue-empty' => 'leer',
 	'valueview-expert-timeinput-precision' => 'Genauigkeit:',
 	'valueview-expert-timeinput-calendar' => 'Kalender:',
-	'valueview-expert-timeinput-calendarhint' => '(vorweggenommener $1 Kalender)', # Fuzzy
+	'valueview-expert-timeinput-calendarhint' => '($1 Kalender)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; ändern in $1',
 	'valueview-preview-label' => 'wird angezeigt als:',
 	'valueview-preview-novalue' => 'keinen gültigen Wert erkannt',
@@ -202,15 +200,25 @@ $messages['fi'] = array(
 );
 
 /** French (français)
+ * @author Ayack
+ * @author Hello71
  * @author Metroitendo
  * @author Peter17
  * @author Urhixidur
  */
 $messages['fr'] = array(
 	'valueview-desc' => 'Composants graphiques pour l’affichage et la modification des données',
+	'valueview-expert-advancedadjustments' => 'réglages avancés',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'La manipulation des valeurs de données « $1 » n’est pas encore supportée.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestion des valeurs pour le type de données « $1 » n’est pas encore pris en charge.',
 	'valueview-expert-emptyvalue-empty' => 'vide',
+	'valueview-expert-timeinput-precision' => 'Précision :',
+	'valueview-expert-timeinput-calendar' => 'Calendrier :',
+	'valueview-expert-timeinput-calendarhint' => '(calendrier $1)',
+	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; changer à $1',
+	'valueview-preview-label' => 'affiché comme :',
+	'valueview-preview-novalue' => 'aucune valeur valide reconnu',
+	'valueview-listrotator-auto' => 'auto',
 );
 
 /** Galician (galego)
@@ -321,7 +329,7 @@ $messages['ja'] = array(
 	'valueview-expert-emptyvalue-empty' => '空',
 	'valueview-expert-timeinput-precision' => '精度:',
 	'valueview-expert-timeinput-calendar' => '暦:',
-	'valueview-expert-timeinput-calendarhint' => '(予期的 $1 暦)', # Fuzzy
+	'valueview-expert-timeinput-calendarhint' => '($1 暦)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; $1 に変更',
 	'valueview-preview-label' => 'プレビュー:',
 	'valueview-preview-novalue' => '有効な値が認識できませんでした',
@@ -363,7 +371,7 @@ $messages['mk'] = array(
 	'valueview-expert-emptyvalue-empty' => 'празно',
 	'valueview-expert-timeinput-precision' => 'Уточнетост:',
 	'valueview-expert-timeinput-calendar' => 'Календар:',
-	'valueview-expert-timeinput-calendarhint' => '(пролептичен $1 календар)', # Fuzzy
+	'valueview-expert-timeinput-calendarhint' => '(календар: $1)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; смени на $1',
 	'valueview-preview-label' => 'ќе се прикажува како:',
 	'valueview-preview-novalue' => 'не препознав важечка вредност',
@@ -397,6 +405,8 @@ $messages['nl'] = array(
 	'valueview-expert-emptyvalue-empty' => 'leeg',
 	'valueview-expert-timeinput-precision' => 'Precisie:',
 	'valueview-expert-timeinput-calendar' => 'Kalender:',
+	'valueview-expert-timeinput-calendarhint' => '(kalendersysteem $1)',
+	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; wijzigen naar $1',
 	'valueview-preview-label' => 'wordt weergegeven als:',
 	'valueview-preview-novalue' => 'geen geldige waarde herkend',
 	'valueview-listrotator-auto' => 'automatisch',
@@ -447,12 +457,14 @@ $messages['sh'] = array(
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
+ * @author Milicevic01
  * @author Милан Јелисавчић
  */
 $messages['sr-ec'] = array(
 	'valueview-desc' => 'УИ компоненте за приказ и уређивање података',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Начин управљања вредностима за „$1“ врсту података још није подржан.', # Fuzzy
 	'valueview-expert-emptyvalue-empty' => 'празно',
+	'valueview-expert-timeinput-calendar' => 'Календар:',
 );
 
 /** Ukrainian (українська)
@@ -483,6 +495,7 @@ $messages['vi'] = array(
 /** Simplified Chinese (中文（简体）‎)
  * @author Li3939108
  * @author Linforest
+ * @author Stevenliuyi
  */
 $messages['zh-hans'] = array(
 	'valueview-expert-advancedadjustments' => '高级调整',
@@ -491,14 +504,28 @@ $messages['zh-hans'] = array(
 	'valueview-expert-emptyvalue-empty' => '空白',
 	'valueview-expert-timeinput-precision' => '精度：',
 	'valueview-expert-timeinput-calendar' => '日历：',
+	'valueview-expert-timeinput-calendarhint' => '（$1历）',
+	'valueview-expert-timeinput-calendarhint-switch' => '→ 更改为$1',
+	'valueview-preview-label' => '将显示为：',
+	'valueview-preview-novalue' => '无法识别',
+	'valueview-listrotator-auto' => '自动',
 );
 
 /** Traditional Chinese (中文（繁體）‎)
  * @author Simon Shek
+ * @author Stevenliuyi
  */
 $messages['zh-hant'] = array(
 	'valueview-desc' => '顯示和編輯數據值的用戶介面',
+	'valueview-expert-advancedadjustments' => '高級調整',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '尚未支援「$1」值的操作。',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '尚未支援「$1」數據值的操作。',
 	'valueview-expert-emptyvalue-empty' => '空',
+	'valueview-expert-timeinput-precision' => '精度：',
+	'valueview-expert-timeinput-calendar' => '日曆：',
+	'valueview-expert-timeinput-calendarhint' => '（$1曆）',
+	'valueview-expert-timeinput-calendarhint-switch' => '→ 更改為$1',
+	'valueview-preview-label' => '將顯示為：',
+	'valueview-preview-novalue' => '無法識別',
+	'valueview-listrotator-auto' => '自動',
 );
