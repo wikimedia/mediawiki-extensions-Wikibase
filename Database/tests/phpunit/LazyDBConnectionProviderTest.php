@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Repo\Test;
+namespace Wikibase\Database\Tests;
 
-use Wikibase\Repo\LazyDBConnectionProvider;
-use Wikibase\Repo\DBConnectionProvider;
+use Wikibase\Database\DBConnectionProvider;
+use Wikibase\Database\LazyDBConnectionProvider;
 
 /**
- * Tests for the Wikibase\Repo\LazyDBConnectionProvider class.
+ * @covers Wikibase\Database\LazyDBConnectionProvider
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,11 +24,11 @@ use Wikibase\Repo\DBConnectionProvider;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.4
+ * @since 0.1
  *
- * @ingroup WikibaseRepoTest
+ * @ingroup WikibaseDatabaseTest
  *
- * @group WikibaseRepo
+ * @group WikibaseDatabase
  * @group LazyDBConnectionProviderTest
  *
  * @licence GNU GPL v2+

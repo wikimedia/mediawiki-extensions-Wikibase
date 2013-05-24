@@ -17,10 +17,12 @@
             <directory>tests/phpunit</directory>
             <exclude>tests/phpunit/MWDB</exclude>
             <exclude>tests/phpunit/MediaWikiQueryInterfaceTest.php</exclude>
+            <exclude>tests/phpunit/LazyDBConnectionProviderTest.php</exclude>
         </testsuite>
         <testsuite name="WikibaseDatabaseMediaWiki">
             <directory>tests/phpunit/MWDB</directory>
             <file>tests/phpunit/MediaWikiQueryInterfaceTest.php</file>
+            <file>tests/phpunit/LazyDBConnectionProviderTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
