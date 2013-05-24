@@ -1,0 +1,327 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxsYAswY",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "No strong opinion on whether moving them here or not, but the real issue here is that the function is too long and this should probably be splitted up a little.\nIf the code won\u0027t get splitt up, then having the var definitions within the controllblocks seems more readable.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxub7LxE",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "This is really ugly, I\u0027d much rather prefer multiple var keywords here.\nWhenever you assign a var and that assignment takes multiple lines, then the following assignment can have its own var keyword. Or just define all vars first and then overwrite it again - but I don\u0027t see real advantage in that either.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxoYXy0M",
+        "filename": "lib/resources/jquery.valueview.experts.wikibase/experts.wikibase.EntityIdInput.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "I really dislike this style. It makes the code much less readable since you\u0027d always have to move your eyes to the end of the line to figure out that those lines are part of a turnary and not something else.\n\nWhatever jshint rule is enforcing this should be disabled.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxmY539U",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "Just another reason why not allowing usage of multiple \"var\" is just annoying; less space for documentation since it requires another tab level. For the first var assignment though the documentation will start one tab level to the left... looks just weird.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxsZ7k4g",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "Any reason for removing the \"/\" ? The string is not valid HTML in any case, so saying the \"/\" would make it invalid HTML is just bike-shed, at least \"\u003cdiv/\u003e\" would be well-formed xml while \"\u003cdiv\u003e\" wouldn\u0027t ;-)\n\nJust because doing this different ways than \"\u003cdiv\u003e\" got removed from the Coding conventions a few days ago doesn\u0027t mean everyone agrees with it or this had to be changed in all projects immediately.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxiZxl6k",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "It seems quite ugly to require having this whenever defining a callback with all its parameters even if they won\u0027t be used.\n\nI\u0027d rather prefer not having the jshint rule activated in the first place.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxsacM78",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "same as with the ternary operator, not sure what\u0027s the point in having this at the end of the line. This just requires horizontal reading of code while you\u0027re perhaps just trying to get a brief overview where reading the code more verticaly should be sufficient.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxqaPZ3U",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "In this case you\u0027re being inconsistent with the way you indent the comment in relation to the variable definition.\n\nThis time, the comment is not on the tab level of the variable definition. This still looks weird but there is more space for the comment.\n\nStill a reason why multiple var keywords just look more readable and less distracting.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxubpbx0",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "as mentioned before, this function is just way too long but moving all of those up doesn\u0027t make it better.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxmbe-2s",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "same opinion on this as I mentioned for ternary and other operators already.\n\nI can live with both versions, but we shouldn\u0027t enforce the one over the other, especially in established codebases like ours. MW PHP coding styles leave quite some space for personal style and I don\u0027t think it\u0027s a bad thing.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxkbbA3o",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "less readable. Why not use double quotes if it improves readability of the actual string?",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxsbXE0k",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "I don\u0027t think so, this is an actual bug, this should be:\n\nif ( !( reference instanceof wb.Reference ) ) { ... }\n\nThis is probably not unit tested and also not used in elsewhere, so we never get an error in production.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxoa.q-k",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.SnakTypeSelector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "here you actually forgot to move the \":\"",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxmZIvzA",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.variations.NoValue.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "Yeat another reason against not allowing multiple var. This is kind of our own (Wikibase specific) convention for defining some sort of outer-scope-wide constants.\n\nSo those all-upper case vars should never change their value and therefore assigning them together with a \"var\" keyword looks less suspicious since they should never change their values.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxoZoa4o",
+        "filename": "lib/resources/templates.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "the \"[...]\" implies that that part is optional. \"template\" is not optional. Perhaps the whole comment could be removed, should be sufficient with sufficient doxygen documentation.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxgYVe.8",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "no need to execute the code if you run into the first return.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxga42.E",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.EntityId.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "Are you sure? I just can\u0027t see how this is not an undefined global. It should be \"this._entityType\" really.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxkadw1M",
+        "filename": "lib/resources/wikibase.serialization/serialization.SerializerFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "I\u0027d prefer renaming \"constructor\" to \"Constructor\" then. Having those inline jshint comments is more confusing.",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxqbD5zo",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-24T20:24:35Z",
+      "side": 1,
+      "message": "?",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
