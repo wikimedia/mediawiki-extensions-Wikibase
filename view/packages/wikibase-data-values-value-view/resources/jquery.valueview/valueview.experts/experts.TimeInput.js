@@ -39,16 +39,10 @@
 		_newValue: null,
 
 		/**
-		 * The preview section's node.
-		 * @type {jQuery}
+		 * The preview widget.
+		 * @type {jQuery.valueview.preview}
 		 */
-		$preview: null,
-
-		/**
-		 * The node of the previewed input value.
-		 * @type {jQuery}
-		 */
-		$previewValue: null,
+		preview: null,
 
 		/**
 		 * Container node for precision input and label.
@@ -85,20 +79,6 @@
 		 */
 		_init: function() {
 			var self = this;
-
-			// TODO: Move preview out of the specific expert to a more generic place
-			this.$preview = $( '<div/>' )
-			.addClass( 'valueview-preview' )
-			.append(
-				$( '<div/>' )
-				.addClass( 'valueview-preview-label' )
-				.text( mw.msg( 'valueview-preview-label' ) )
-			);
-
-			this.$previewValue = $( '<div/>' )
-			.addClass( 'valueview-preview-value' )
-			.text( mw.msg( 'valueview-preview-novalue' ) )
-			.appendTo( this.$preview );
 
 			this.$precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
@@ -178,11 +158,15 @@
 				type: 'text',
 				'class': this.uiBaseClass + '-input valueview-input'
 			} )
-			.appendTo( this.$viewPort )
-			.eachchange( function( event, oldValue ) {
+			.appendTo( this.$viewPort );
+
+			var $preview = $( '<div/>' ).preview( { $input: this.$input } );
+			this.preview = $preview.data( 'preview' );
+
+			this.$input.eachchange( function( event, oldValue ) {
 				var value = self.$input.data( 'timeinput' ).value();
 				if( oldValue === '' && value === null || self.$input.val() === '' ) {
-					self._updatePreview( null );
+					self._updatePreview();
 					self._updateCalendarHint();
 				}
 			} )
@@ -190,7 +174,7 @@
 			// TODO: Move input extender out of here to a more generic place since it is not
 			// TimeInput specific.
 			.inputextender( {
-				content: [ this.$preview, this.$calendarhint, $toggler, this.$precisionContainer, this.$calendarContainer ],
+				content: [ $preview, this.$calendarhint, $toggler, this.$precisionContainer, this.$calendarContainer ],
 				initCallback: function() {
 					self.$precision.data( 'listrotator' ).initWidths();
 					self.$calendar.data( 'listrotator' ).initWidths();
@@ -201,7 +185,6 @@
 				}
 			} )
 			.on( 'timeinputupdate.' + this.uiBaseClass, function( event, value ) {
-				self._updatePreview( value );
 				self._updateCalendarHint( value );
 				if( value && value.isValid() ) {
 					self.$precision.data( 'listrotator' ).rotate( value.precision() );
@@ -209,6 +192,7 @@
 				}
 				self._newValue = false; // value, not yet handled by draw(), is outdated now
 				self._viewNotifier.notify( 'change' );
+				self._updatePreview();
 			} );
 
 		},
@@ -227,8 +211,9 @@
 
 			this.$calendarhint.remove();
 
-			this.$previewValue.remove();
-			this.$preview.remove();
+			var previewElement = this.preview.element;
+			this.preview.destroy();
+			previewElement.remove();
 
 			this.$input.data( 'inputextender' ).destroy();
 			this.$input.data( 'timeinput' ).destroy();
@@ -267,7 +252,7 @@
 			value = new Time( this.$input.val(), options );
 
 			this._setRawValue( value );
-			this._updatePreview( value );
+			this._updatePreview();
 			this._updateCalendarHint( value );
 			this._viewNotifier.notify( 'change' );
 
@@ -275,27 +260,11 @@
 		},
 
 		/**
-		 * Updates the input value's preview.
-		 * @since 0.1
-		 *
-		 * @param {time.Time|null} value
+		 * Updates the preview.
 		 */
-		_updatePreview: function( value ) {
-			// No need to update the preview when the input value is clear(ed) since the preview
-			// will be hidden anyway.
-			if( this.$input.val() === '' ) {
-				return;
-			}
-
-			if( value === null ) {
-				this.$previewValue
-				.addClass( 'valueview-preview-novalue' )
-				.text( mw.msg( 'valueview-preview-novalue' ) )
-			} else {
-				this.$previewValue
-				.removeClass( 'valueview-preview-novalue' )
-				.text( value.text() )
-			}
+		_updatePreview: function() {
+			var rawValue = this._getRawValue();
+			this.preview.update( ( rawValue ) ? rawValue.text() : null );
 		},
 
 		/**
@@ -392,13 +361,13 @@
 
 			if( this._newValue !== false ) {
 				this.$input.data( 'timeinput' ).value( this._newValue );
-				this._updatePreview( this._newValue );
 				this._updateCalendarHint( this._newValue );
 				if( this._newValue !== null ) {
 					this.$precision.data( 'listrotator' ).value( this._newValue.precision() );
 					this.$calendar.data( 'listrotator' ).value( this._newValue.calendarText() );
 				}
 				this._newValue = false;
+				this._updatePreview();
 			}
 		},
 

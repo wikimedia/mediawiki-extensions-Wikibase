@@ -210,6 +210,7 @@ return call_user_func( function() {
 				'jquery.ui.inputextender',
 				'jquery.ui.listrotator',
 				'jquery.ui.toggler',
+				'jquery.valueview.preview',
 			),
 			'messages' => array(
 				'valueview-expert-advancedadjustments',
@@ -248,6 +249,23 @@ return call_user_func( function() {
 				'jquery.ui.suggester',
 			),
 		),
+
+		'jquery.valueview.preview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.preview.js',
+			),
+			'styles' => array(
+				'jquery.valueview/valueview.preview.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+			),
+			'messages' => array(
+				'valueview-preview-label',
+				'valueview-preview-novalue',
+			),
+		)
+
 	);
 
 } );
