@@ -1946,6 +1946,7 @@ $messages['roa-tara'] = array(
 	'wikibase-diffview-description' => 'descrizione',
 	'wikibase-diffview-link' => 'collegaminde',
 	'wikibase-error-unexpected' => "S'ha verificate 'n'errore inaspettate.",
+	'wikibase-error-autocomplete-connection' => "Non ge pozze 'nderrogà le API de Uicchipèdie. Pe piacere pruève cchiù tarde.",
 	'wikibase-error-autocomplete-response' => "'U server ave resposte: $1",
 	'wikibase-error-ui-client-error' => "'A connessione a 'a pàgene d'u cliende ha fallite. Pe piacere pruève arrete.",
 	'wikibase-sitelinks-sitename-columnheading' => 'Lènghe',
@@ -1969,6 +1970,13 @@ $messages['ru'] = array(
 	'wikibase-entity-item' => 'элемент',
 	'wikibase-entity-property' => 'свойство',
 	'wikibase-entity-query' => 'запрос',
+	'wikibase-diffview-reference' => 'источник',
+	'wikibase-diffview-rank' => 'ранг',
+	'wikibase-diffview-qualifier' => 'квалификатор',
+	'wikibase-diffview-label' => 'метка',
+	'wikibase-diffview-alias' => 'синоним',
+	'wikibase-diffview-description' => 'описание',
+	'wikibase-diffview-link' => 'ссылки',
 	'wikibase-error-unexpected' => 'Произошла непредвиденная ошибка.',
 	'wikibase-error-save-generic' => 'Произошла ошибка при попытке выполнить сохранение, поэтому ваши изменения не могут быть завершены.',
 	'wikibase-error-remove-generic' => 'Произошла ошибка при попытке выполнить удаление, поэтому ваши изменения не могут быть завершены.',
@@ -1993,6 +2001,7 @@ $messages['ru'] = array(
 	'wikibase-tooltip-error-details' => 'Подробности',
 	'datatypes-type-wikibase-item' => 'Элемент',
 	'datatypes-type-commonsMedia' => 'Медиафайл на Викискладе',
+	'version-wikibase' => 'Вики-база',
 );
 
 /** Sinhala (සිංහල)
@@ -2267,6 +2276,10 @@ $messages['vo'] = array(
  */
 $messages['yi'] = array(
 	'wikibase-diffview-reference' => 'רעפערענץ',
+	'wikibase-diffview-label' => 'באצייכענונג',
+	'wikibase-diffview-alias' => 'אליאסן',
+	'wikibase-diffview-description' => 'באַשרײַבונג',
+	'wikibase-diffview-link' => 'לינקען',
 	'wikibase-sitelinks' => 'ליסטע פון בלעטער פארבונדן מיט דעם דאטנאביעקט',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפראַך',
 	'wikibase-sitelinks-siteid-columnheading' => 'קאד',
@@ -2274,24 +2287,26 @@ $messages['yi'] = array(
 	'wikibase-tooltip-error-details' => 'פרטים',
 	'datatypes-type-wikibase-item' => 'איינהייט',
 	'datatypes-type-commonsMedia' => 'קאמאנס מעדיע טעקע',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Cwek
  * @author Hydra
+ * @author Li3939108
  * @author Shizhao
  * @author Stevenliuyi
  * @author Yfdyh000
  * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
-	'wikibase-lib-desc' => '储存Wikibase及其客户端的共同功能',
-	'wikibase-entity-item' => '项目',
+	'wikibase-lib-desc' => '储存维基库及其客户端的共同功能',
+	'wikibase-entity-item' => '项',
 	'wikibase-entity-property' => '属性',
 	'wikibase-entity-query' => '查询',
 	'wikibase-diffview-reference' => '参考',
-	'wikibase-diffview-rank' => '分级',
-	'wikibase-diffview-qualifier' => '限定语',
+	'wikibase-diffview-rank' => '阶',
+	'wikibase-diffview-qualifier' => '修饰',
 	'wikibase-diffview-label' => '标签',
 	'wikibase-diffview-alias' => '别名',
 	'wikibase-diffview-description' => '描述',
@@ -2309,7 +2324,7 @@ $messages['zh-hans'] = array(
 	'wikibase-error-ui-no-external-page' => '在相应的站点上找不到指定的条目。',
 	'wikibase-error-ui-cant-edit' => '您不能执行此操作。',
 	'wikibase-error-ui-no-permissions' => '您没有足够的权限执行此操作。',
-	'wikibase-error-ui-link-exists' => '因为另一项目已链接，您不能链接到此页面。',
+	'wikibase-error-ui-link-exists' => '您不能链接到此页面，因为另一项已链接到它。',
 	'wikibase-error-ui-session-failure' => '您的会话已过期。请重新登录。',
 	'wikibase-error-ui-edit-conflict' => '发生编辑冲突。请刷新再重新保存。',
 	'wikibase-replicationnote' => '更改可能需要几分钟才能在所有的维基上出现，请理解。',
@@ -2317,10 +2332,10 @@ $messages['zh-hans'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => '语言',
 	'wikibase-sitelinks-siteid-columnheading' => '代码',
 	'wikibase-sitelinks-link-columnheading' => '链接的条目',
-	'wikibase-tooltip-error-details' => '详细信息',
-	'datatypes-type-wikibase-item' => '项目',
+	'wikibase-tooltip-error-details' => '详情',
+	'datatypes-type-wikibase-item' => '项',
 	'datatypes-type-commonsMedia' => '共享资源媒体文件',
-	'version-wikibase' => 'Wikibase',
+	'version-wikibase' => '维基库',
 );
 
 /** Traditional Chinese (中文（繁體）‎)

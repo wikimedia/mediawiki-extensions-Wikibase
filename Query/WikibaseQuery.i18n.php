@@ -156,6 +156,13 @@ $messages['roa-tara'] = array(
 	'wikibasequery-desc' => "Aggiunge le capacità de l'inderrogazione sus a Uicchibase",
 );
 
+/** Russian (русский)
+ * @author Kaganer
+ */
+$messages['ru'] = array(
+	'wikibasequery-desc' => 'Добавляет возможности запросов к Вики-базе',
+);
+
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
  * @author Милан Јелисавчић
  */
@@ -175,4 +182,11 @@ $messages['uk'] = array(
  */
 $messages['vi'] = array(
 	'wikibasequery-desc' => 'Thêm khả năng truy vấn vào Wikibase',
+);
+
+/** Simplified Chinese (中文（简体）‎)
+ * @author Li3939108
+ */
+$messages['zh-hans'] = array(
+	'wikibasequery-desc' => '将查询功能添加到维基数据库',
 );
