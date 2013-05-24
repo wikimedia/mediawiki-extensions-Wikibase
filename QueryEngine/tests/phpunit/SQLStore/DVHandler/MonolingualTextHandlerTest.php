@@ -8,7 +8,7 @@ use Wikibase\QueryEngine\SQLStore\DataValueHandlers;
 use Wikibase\QueryEngine\Tests\SQLStore\DataValueHandlerTest;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\DVHandler\MonolingualTextHandler class.
+ * @covers Wikibase\QueryEngine\SQLStore\DVHandler\MonolingualTextHandler
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

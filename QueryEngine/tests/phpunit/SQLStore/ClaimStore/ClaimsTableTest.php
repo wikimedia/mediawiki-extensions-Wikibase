@@ -8,7 +8,7 @@ use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable;
 use Wikibase\Statement;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable class.
+ * @covers  Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

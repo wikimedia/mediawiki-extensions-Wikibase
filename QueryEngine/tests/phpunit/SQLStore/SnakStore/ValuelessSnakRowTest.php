@@ -6,7 +6,7 @@ use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakRow;
 use Wikibase\SnakRole;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\ValuelessSnakRow class.
+ * @covers Wikibase\QueryEngine\SQLStore\ValuelessSnakRow
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
