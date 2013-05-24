@@ -34,6 +34,24 @@
       "revId": "4fafed23e14c07fb349e89c5ab52554a16276074",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxnbZkB4",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-05-24T09:45:36Z",
+      "side": 1,
+      "message": "we have a bug to implement a magic word like {{REPOSITENAME}}  when we have that, then we can use that in messages like this.",
+      "parentUuid": "DxpBrhIY",
+      "revId": "4fafed23e14c07fb349e89c5ab52554a16276074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
