@@ -10,7 +10,7 @@ use Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakStore;
 use Wikibase\SnakRole;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakStore\NoValueSnakStore class.
+ * @covers Wikibase\QueryEngine\SQLStore\SnakStore\ValuelessSnakStore
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

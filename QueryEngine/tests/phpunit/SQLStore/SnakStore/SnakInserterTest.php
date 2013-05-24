@@ -19,7 +19,7 @@ use Wikibase\Snak;
 use Wikibase\SnakRole;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakInserter class.
+ * @covers Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

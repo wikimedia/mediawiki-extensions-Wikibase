@@ -9,7 +9,7 @@ use Wikibase\QueryEngine\SQLStore\StoreConfig;
 use Wikibase\QueryEngine\Tests\QueryStoreTest;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\Store class.
+ * @covers Wikibase\QueryEngine\SQLStore\Store
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

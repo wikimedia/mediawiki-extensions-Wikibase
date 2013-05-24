@@ -12,7 +12,7 @@ use Wikibase\QueryEngine\SQLStore\StoreConfig;
 use Wikibase\SnakRole;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore implementing classes.
+ * @covers Wikibase\QueryEngine\SQLStore\SnakStore\SnakStore
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
