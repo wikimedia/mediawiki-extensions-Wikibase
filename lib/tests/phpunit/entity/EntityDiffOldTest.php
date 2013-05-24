@@ -142,9 +142,9 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 
 		// #9: remove alias language
 		$a = self::newEntity( $entityType );
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
 
 		$b = $a->copy();
+		$b->addAliases( 'en', array( 'Foo', 'Bar' ) );
 		$b->removeAliases( 'en', array( 'Foo', 'Bar' ) );
 
 		$tests[] = array( $a, $b );
