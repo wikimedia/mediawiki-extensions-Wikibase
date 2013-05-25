@@ -2328,7 +2328,7 @@ $messages['zh-hans'] = array(
 	'wikibase-error-ui-session-failure' => '您的会话已过期。请重新登录。',
 	'wikibase-error-ui-edit-conflict' => '发生编辑冲突。请刷新再重新保存。',
 	'wikibase-replicationnote' => '更改可能需要几分钟才能在所有的维基上出现，请理解。',
-	'wikibase-sitelinks' => '链接到本项目的页面列表',
+	'wikibase-sitelinks' => '链接到该项的页面列表',
 	'wikibase-sitelinks-sitename-columnheading' => '语言',
 	'wikibase-sitelinks-siteid-columnheading' => '代码',
 	'wikibase-sitelinks-link-columnheading' => '链接的条目',
@@ -2340,13 +2340,14 @@ $messages['zh-hans'] = array(
 
 /** Traditional Chinese (中文（繁體）‎)
  * @author Justincheng12345
+ * @author Li3939108
  * @author Simon Shek
  * @author Tntchn
  * @author Waihorace
  */
 $messages['zh-hant'] = array(
 	'wikibase-lib-desc' => '儲存維基基礎及其客戶端的共同功能',
-	'wikibase-entity-item' => '項目',
+	'wikibase-entity-item' => '項',
 	'wikibase-entity-property' => '屬性',
 	'wikibase-entity-query' => '查詢',
 	'wikibase-diffview-reference' => '參考',
@@ -2369,16 +2370,16 @@ $messages['zh-hant'] = array(
 	'wikibase-error-ui-no-external-page' => '相應維基項目無法找到指定條目。',
 	'wikibase-error-ui-cant-edit' => '您不能執行此操作。',
 	'wikibase-error-ui-no-permissions' => '您没有足够權限執行此操作。',
-	'wikibase-error-ui-link-exists' => '因為另一項目已連接，您不能再連接到此頁。',
+	'wikibase-error-ui-link-exists' => '因為另一項已連接，您不能再連接到此頁。',
 	'wikibase-error-ui-session-failure' => '您的資料已過期。請重新登入。',
 	'wikibase-error-ui-edit-conflict' => '發生編輯衝突。請重新整理再儲存。',
 	'wikibase-replicationnote' => '所做的更改可能需要幾分鐘的時間才能在所有的維基上看到，敬請留意。',
-	'wikibase-sitelinks' => '鏈接到此項目的頁面清單',
+	'wikibase-sitelinks' => '鏈接到此項的頁面清單',
 	'wikibase-sitelinks-sitename-columnheading' => '語言',
 	'wikibase-sitelinks-siteid-columnheading' => '代碼',
 	'wikibase-sitelinks-link-columnheading' => '已連結的條目',
 	'wikibase-tooltip-error-details' => '詳細資訊',
-	'datatypes-type-wikibase-item' => '項目',
+	'datatypes-type-wikibase-item' => '項',
 	'datatypes-type-commonsMedia' => '共享資源媒體檔案',
 	'version-wikibase' => 'Wikibase',
 );

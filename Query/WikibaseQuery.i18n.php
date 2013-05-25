@@ -190,3 +190,10 @@ $messages['vi'] = array(
 $messages['zh-hans'] = array(
 	'wikibasequery-desc' => '将查询功能添加到维基数据库',
 );
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Li3939108
+ */
+$messages['zh-hant'] = array(
+	'wikibasequery-desc' => '將查詢功能添加到Wikibase',
+);

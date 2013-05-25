@@ -2555,6 +2555,16 @@ $messages['qu'] = array(
 	'wikibase-linkitem-input-page' => "P'anqa:",
 );
 
+/** Romansh (rumantsch)
+ * @author Kazu89
+ */
+$messages['rm'] = array(
+	'wikibase-editlinks' => 'Modifitgar colliaziuns',
+	'wikibase-linkitem-addlinks' => 'Agiunscher colliaziuns',
+	'wikibase-linkitem-input-site' => 'Lingua',
+	'wikibase-linkitem-input-page' => 'Pagina',
+);
+
 /** Romanian (română)
  * @author Minisarm
  * @author Stelistcristi
@@ -3114,7 +3124,7 @@ $messages['zh-hans'] = array(
 	'wikibase-linkitem-input-site' => '语言：',
 	'wikibase-linkitem-input-page' => '页面：',
 	'wikibase-linkitem-invalidsite' => '选择了一个未知或无效的网站',
-	'wikibase-linkitem-confirmitem-text' => '您所选的页面已与[$1 中央数据库中的其他项目]链接。请确认如下所示的都是您想要与此页面相链接的页面。',
+	'wikibase-linkitem-confirmitem-text' => '您所选的页面已与[$1 中央数据库中的其他项]链接。请确认如下所示的都是您想要与此页面相链接的页面。',
 	'wikibase-linkitem-confirmitem-button' => '确认',
 	'wikibase-linkitem-not-loggedin-title' => '您必须登录',
 	'wikibase-linkitem-not-loggedin' => '您必须在此维基和[$1 中央数据存储库]上登录才能使用此功能。',
@@ -3139,6 +3149,7 @@ $messages['zh-hans'] = array(
 /** Traditional Chinese (中文（繁體）‎)
  * @author Bencmq
  * @author Justincheng12345
+ * @author Li3939108
  * @author Stevenliuyi
  * @author Tntchn
  * @author 乌拉跨氪
@@ -3146,12 +3157,12 @@ $messages['zh-hans'] = array(
 $messages['zh-hant'] = array(
 	'wikibase-client-desc' => 'Wikibase擴展客戶端',
 	'specialpages-group-wikibaseclient' => '維基數據客戶端',
-	'wikibase-after-page-move' => '您還可以[$1 更新]關聯的維基數據項目，使其連結至移動後的頁面。',
-	'wikibase-comment-remove' => '關聯的維基數據項目已刪除。語言連結已移除。',
-	'wikibase-comment-linked' => '一個維基數據項目已連結至此頁面。',
-	'wikibase-comment-unlink' => '本頁已解除維基數據項目的連結。語言連結已移除。',
-	'wikibase-comment-restore' => '關聯的維基數據項目已還原。語言連結已恢復。',
-	'wikibase-comment-update' => '維基數據項目已變更。',
+	'wikibase-after-page-move' => '您還可以[$1 更新]關聯的維基數據項，使其連結至移動後的頁面。',
+	'wikibase-comment-remove' => '關聯的維基數據項已刪除。語言連結已移除。',
+	'wikibase-comment-linked' => '一個維基數據項已連結至此頁面。',
+	'wikibase-comment-unlink' => '本頁已解除維基數據項的連結。語言連結已移除。',
+	'wikibase-comment-restore' => '關聯的維基數據項已還原。語言連結已恢復。',
+	'wikibase-comment-update' => '維基數據項已變更。',
 	'wikibase-comment-sitelink-add' => '添加語言連結：$1',
 	'wikibase-comment-sitelink-change' => '語言連結從$1更改為$2',
 	'wikibase-comment-sitelink-remove' => '刪除語言連結：$1',
@@ -3159,28 +3170,28 @@ $messages['zh-hant'] = array(
 	'wikibase-editlinks' => '編輯連結',
 	'wikibase-editlinkstitle' => '編輯跨語言連結',
 	'wikibase-linkitem-addlinks' => '添加連結',
-	'wikibase-linkitem-alreadylinked' => '你要連接的頁面已於中央數據庫中的一個[$1 項目]裏，並且已連接到了本站點的$2。站點中的每個頁面只能在一個項目裏。請選擇其他頁面作連接。',
+	'wikibase-linkitem-alreadylinked' => '你要連接的頁面已於中央數據庫中的一個[$1 項]裏，並且已連接到了本站點的$2。站點中的每個頁面只能在一個項裏。請選擇其他頁面作連接。',
 	'wikibase-linkitem-close' => '關閉對話框，並刷新頁面',
 	'wikibase-linkitem-failure' => '連接頁面時出現未知錯誤。',
 	'wikibase-linkitem-title' => '頁面該連結',
 	'wikibase-linkitem-linkpage' => '連結該頁面',
-	'wikibase-linkitem-selectlink' => '請輸入你想連接的項目及其頁面。',
+	'wikibase-linkitem-selectlink' => '請輸入你想連接的項及其頁面。',
 	'wikibase-linkitem-input-site' => '語言：',
 	'wikibase-linkitem-input-page' => '頁面：',
 	'wikibase-linkitem-invalidsite' => '所選的網站未知或無效。',
-	'wikibase-linkitem-confirmitem-text' => '你選擇的頁面已連至[$1 中央數據庫的項目]。請確認以下項目亦是你想連接到的頁面。',
+	'wikibase-linkitem-confirmitem-text' => '你選擇的頁面已連至[$1 中央數據庫的項]。請確認以下項亦是你想連接到的頁面。',
 	'wikibase-linkitem-confirmitem-button' => '確認',
 	'wikibase-linkitem-not-loggedin-title' => '您必須登入。',
 	'wikibase-linkitem-not-loggedin' => '你必需於本維基及[$1 中央數據庫]中登入才可使用此功能。',
-	'wikibase-linkitem-success-create' => '頁面已成功連接，你可以於[$1 中央數據庫]中找到包含此連結的項目。',
-	'wikibase-linkitem-success-link' => '貢面已成功連接，你可以於[$1 中央數據庫]中找到包含此連結的項目。',
+	'wikibase-linkitem-success-create' => '頁面已成功連接，你可以於[$1 中央數據庫]中找到包含此連結的項。',
+	'wikibase-linkitem-success-link' => '貢面已成功連接，你可以於[$1 中央數據庫]中找到包含此連結的項。',
 	'wikibase-property-notfound' => '$1屬性未找到。',
 	'wikibase-property-notsupportedyet' => 'Wikibase尚未支援$1屬性。',
 	'wikibase-rc-hide-wikidata' => '$1維基數據',
 	'wikibase-rc-show-wikidata-pref' => '在最近更改中顯示維基數據的編輯',
 	'wikibase-watchlist-show-changes-pref' => '於監視列表中顯示維基數據的編輯',
 	'wikibase-error-invalid-entity-id' => '系統無法辨認你輸入的ID。請使用一個有效的ID。',
-	'special-unconnectedpages' => '未連接到任一項目的頁面',
+	'special-unconnectedpages' => '未連接到任一項的頁面',
 	'wikibase-unconnectedpages-legend' => '未連接頁面選項',
 	'wikibase-unconnectedpages-page' => '由此頁面開始：',
 	'wikibase-unconnectedpages-submit' => '前往',
