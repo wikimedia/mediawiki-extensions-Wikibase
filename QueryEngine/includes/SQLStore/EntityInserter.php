@@ -43,6 +43,7 @@ class EntityInserter {
 	 *
 	 * @param EntityTable $entityTable
 	 * @param ClaimInserter $claimInserter
+	 * @param InternalEntityIdFinder $idFinder
 	 */
 	public function __construct( EntityTable $entityTable, ClaimInserter $claimInserter, InternalEntityIdFinder $idFinder ) {
 		$this->entityTable = $entityTable;
@@ -51,8 +52,6 @@ class EntityInserter {
 	}
 
 	/**
-	 * @see QueryStoreUpdater::insertEntity
-	 *
 	 * @since 0.1
 	 *
 	 * @param Entity $entity
