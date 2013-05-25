@@ -34,19 +34,16 @@ use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
  */
 class EntityInserter {
 
-	private $entityTable;
 	private $claimInserter;
 	private $idFinder;
 
 	/**
 	 * @since 0.1
 	 *
-	 * @param EntityTable $entityTable
 	 * @param ClaimInserter $claimInserter
 	 * @param InternalEntityIdFinder $idFinder
 	 */
-	public function __construct( EntityTable $entityTable, ClaimInserter $claimInserter, InternalEntityIdFinder $idFinder ) {
-		$this->entityTable = $entityTable;
+	public function __construct( ClaimInserter $claimInserter, InternalEntityIdFinder $idFinder ) {
 		$this->claimInserter = $claimInserter;
 		$this->idFinder = $idFinder;
 	}
@@ -57,8 +54,6 @@ class EntityInserter {
 	 * @param Entity $entity
 	 */
 	public function insertEntity( Entity $entity ) {
-		$this->entityTable->insertEntity( $entity );
-
 		$internalSubjectId = $this->getInternalId( $entity->getId() );
 
 		foreach ( $entity->getClaims() as $claim ) {

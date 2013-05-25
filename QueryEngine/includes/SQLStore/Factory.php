@@ -72,7 +72,6 @@ final class Factory {
 
 	public function newEntityInserter() {
 		return new EntityInserter(
-			$this->newEntityTable(),
 			$this->newClaimInserter(),
 			$this->getInternalEntityIdFinder()
 		);

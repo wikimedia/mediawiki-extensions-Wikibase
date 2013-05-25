@@ -48,15 +48,6 @@ class EntityInserterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider entityProvider
 	 */
 	public function testInsertEntity( Entity $entity ) {
-		$entityTable = $this
-			->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\EntityTable' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$entityTable->expects( $this->once() )
-			->method( 'insertEntity' )
-			->with( $this->equalTo( $entity ) );
-
 		$claimInserter = $this
 			->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter' )
 			->disableOriginalConstructor()
@@ -84,7 +75,7 @@ class EntityInserterTest extends \PHPUnit_Framework_TestCase {
 			)
 			->will( $this->returnValue( 1234 ) );
 
-		$inserter = new EntityInserter( $entityTable, $claimInserter, $idFinder );
+		$inserter = new EntityInserter( $claimInserter, $idFinder );
 
 		$inserter->insertEntity( $entity );
 	}
