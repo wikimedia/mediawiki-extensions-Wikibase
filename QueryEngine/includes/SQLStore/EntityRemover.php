@@ -2,12 +2,12 @@
 
 namespace Wikibase\QueryEngine\SQLStore;
 
-use Wikibase\Database\QueryInterface;
 use Wikibase\Entity;
-use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
+use Wikibase\EntityId;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRemover;
 
 /**
- * Use case for inserting entities into the store.
+ * Use case for removing entities from the store.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,39 +32,21 @@ use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityTable {
+class EntityRemover {
 
-	private $queryInterface;
-	private $entityTableName;
+	private $claimRemover;
+	private $idFinder;
 
 	/**
 	 * @since 0.1
 	 *
-	 * @param QueryInterface $queryInterface
-	 * @param string $entityTableName
+	 * @param ClaimRemover $claimRemover
+	 * @param InternalEntityIdFinder $idFinder
 	 */
-	public function __construct( QueryInterface $queryInterface, $entityTableName ) {
-		$this->queryInterface = $queryInterface;
-		$this->entityTableName = $entityTableName;
+	public function __construct( ClaimRemover $claimRemover, InternalEntityIdFinder $idFinder ) {
+		$this->claimRemover = $claimRemover;
+		$this->idFinder = $idFinder;
 	}
-
-	/**
-	 * @see QueryStoreUpdater::insertEntity
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $entity
-	 */
-	public function insertEntity( Entity $entity ) {
-		$this->queryInterface->insert(
-			$this->entityTableName,
-			array(
-				'type' => $entity->getType(),
-				'number' => $entity->getId()->getNumericId(),
-			)
-		);
-	}
-
 
 	/**
 	 * @since 0.1
@@ -72,7 +54,23 @@ class EntityTable {
 	 * @param Entity $entity
 	 */
 	public function removeEntity( Entity $entity ) {
+		$internalSubjectId = $this->getInternalId( $entity->getId() );
 
+		foreach ( $entity->getClaims() as $claim ) {
+			$this->claimRemover->removeClaim(
+				$claim,
+				$internalSubjectId
+			);
+		}
+
+		// TODO: obtain and remove virtual claims
+	}
+
+	protected function getInternalId( EntityId $entityId ) {
+		return $this->idFinder->getInternalIdForEntity(
+			$entityId->getEntityType(),
+			$entityId->getNumericId()
+		);
 	}
 
 }
