@@ -10,7 +10,6 @@ use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\QueryEngine\SQLStore\DataValueTable;
-use Wikibase\QueryEngine\SQLStore\EntityIdTransformer;
 use Wikibase\QueryEngine\SQLStore\EntityInserter;
 
 /**
