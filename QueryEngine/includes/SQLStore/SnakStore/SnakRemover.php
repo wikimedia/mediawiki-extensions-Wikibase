@@ -2,11 +2,16 @@
 
 namespace Wikibase\QueryEngine\SQLStore\SnakStore;
 
-use InvalidArgumentException;
-use Wikibase\Database\QueryInterface;
-use Wikibase\Database\TableDefinition;
+use RuntimeException;
+use Wikibase\Snak;
 
 /**
+ * Use case for removing snaks from the store.
+ *
+ * TODO: this can be made more efficient by providing the list of snaks
+ * the entity has, so deletes can be run just against the relevant
+ * data value type specific tables.
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -30,42 +35,29 @@ use Wikibase\Database\TableDefinition;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ValuelessSnakStore extends SnakStore {
+class SnakRemover {
 
-	protected $queryInterface;
-	protected $tableName;
+	/**
+	 * @var SnakStore[]
+	 */
+	protected $snakStores;
 
-	public function __construct( QueryInterface $queryInterface, $tableName ) {
-		$this->queryInterface = $queryInterface;
-		$this->tableName = $tableName;
+	/**
+	 * @param SnakStore[] $snakStores
+	 */
+	public function __construct( array $snakStores ) {
+		$this->snakStores = $snakStores;
 	}
 
-	public function canStore( SnakRow $snakRow ) {
-		return $snakRow instanceof ValuelessSnakRow;
-	}
-
-	public function storeSnakRow( SnakRow $snakRow ) {
-		if ( !$this->canStore( $snakRow ) ) {
-			throw new InvalidArgumentException( 'Can only store ValuelessSnakRow in ValuelessSnakStore' );
-		}
-
-		/**
-		 * @var ValuelessSnakRow $snakRow
-		 */
-		$this->queryInterface->insert(
-			$this->tableName,
-			array(
-				'claim_id' => $snakRow->getInternalClaimId(),
-				'property_id' => $snakRow->getInternalPropertyId(),
-				'subject_id' => $snakRow->getInternalSubjectId(),
-				'snak_type' => $snakRow->getInternalSnakType(),
-				'snak_role' => $snakRow->getSnakRole(),
-			)
-		);
-	}
-
+	/**
+	 * @since 0.1
+	 *
+	 * @param int $internalSubjectId
+	 */
 	public function removeSnaksOfSubject( $internalSubjectId ) {
-
+		foreach ( $this->snakStores as $snakStore ) {
+			$snakStore->removeSnaksOfSubject( $internalSubjectId );
+		}
 	}
 
 }

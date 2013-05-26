@@ -97,4 +97,8 @@ class ValueSnakStore extends SnakStore {
 		);
 	}
 
+	public function removeSnaksOfSubject( $internalSubjectId ) {
+
+	}
+
 }
