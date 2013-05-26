@@ -205,6 +205,7 @@ return call_user_func( function() {
 				'jquery.valueview/valueview.experts/experts.TimeInput.css',
 			),
 			'dependencies' => array(
+				'jquery.valueview.experts',
 				'jquery.fn.focusAt',
 				'jquery.time.timeinput',
 				'jquery.ui.inputextender',
