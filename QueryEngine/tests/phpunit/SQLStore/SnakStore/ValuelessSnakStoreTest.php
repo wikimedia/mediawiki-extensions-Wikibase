@@ -138,4 +138,25 @@ class ValuelessSnakStoreTest extends SnakStoreTest {
 		$store->storeSnakRow( $snakRow );
 	}
 
+	public function testRemoveSnaksOfSubject() {
+		$internalSubjectId = 4242;
+		$tableName = 'test_snaks_nyan';
+
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
+
+		$queryInterface->expects( $this->once() )
+			->method( 'delete' )
+			->with(
+				$this->equalTo( $tableName ),
+				$this->equalTo( array( 'subject_id' => $internalSubjectId ) )
+			);
+
+		$store = new ValuelessSnakStore(
+			$queryInterface,
+			$tableName
+		);
+
+		$store->removeSnaksOfSubject( $internalSubjectId );
+	}
+
 }
