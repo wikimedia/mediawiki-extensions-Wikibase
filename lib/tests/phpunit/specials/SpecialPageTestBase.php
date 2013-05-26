@@ -57,19 +57,37 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 
 		$response = $request->response();
 
+		$context = new \DerivativeContext( \RequestContext::getMain() );
+		$context->setRequest( $request );
+
+		$out = new \OutputPage( $context );
+		$context->setOutput( $out );
+
 		$page = $this->newSpecialPage();
-		$page->getContext()->setRequest( $request );
+		$page->setContext( $context );
+
+		$out->setTitle( $page->getTitle() );
 
 		ob_start();
 		$page->execute( $sub );
 
-		if ( $page->getOutput()->isDisabled() ) {
+		if ( $out->getRedirect() !== '' ) {
+			$out->output();
+			$text = ob_get_contents();
+		} elseif ( $out->isDisabled() ) {
 			$text = ob_get_contents();
 		} else {
-			$text = $page->getOutput()->getHTML();
+			$text = $out->getHTML();
 		}
 
 		ob_end_clean();
+
+		$code = $response->getStatusCode();
+
+		if ( $code > 0 ) {
+			$response->header( "Status: " . $code . ' ' . \HttpStatus::getMessage( $code ) );
+		}
+
 		return array( $text, $response );
 	}
 
