@@ -65,7 +65,10 @@ class ValuelessSnakStore extends SnakStore {
 	}
 
 	public function removeSnaksOfSubject( $internalSubjectId ) {
-
+		$this->queryInterface->delete(
+			$this->tableName,
+			array( 'subject_id' => $internalSubjectId )
+		);
 	}
 
 }
