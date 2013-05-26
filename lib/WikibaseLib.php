@@ -119,6 +119,7 @@ $wgExtensionFunctions[] = function() {
 $wgValueParsers['wikibase-entityid'] = 'Wikibase\Lib\EntityIdParser';
 $wgDataValues['wikibase-entityid'] = 'Wikibase\EntityId';
 $wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
+$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\UpdateRepoOnMoveJob';
 
 // Hooks
 $wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerPhpUnitTests';

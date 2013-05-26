@@ -37,6 +37,7 @@ return call_user_func( function() {
 		'Wikibase\ByPropertyIdArray' => 'includes/ByPropertyIdArray.php',
 		'Wikibase\ChangeNotifier' => 'includes/ChangeNotifier.php',
 		'Wikibase\ChangeNotificationJob' => 'includes/ChangeNotificationJob.php',
+		'Wikibase\UpdateRepoOnMoveJob' => 'includes/UpdateRepoOnMoveJob.php',
 		'Wikibase\ChangesTable' => 'includes/ChangesTable.php',
 		'Wikibase\DiffOpValueFormatter' => 'includes/DiffOpValueFormatter.php',
 		'Wikibase\DiffView' => 'includes/DiffView.php',

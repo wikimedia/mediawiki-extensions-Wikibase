@@ -18,6 +18,7 @@ use \Wikibase\Client\WikibaseClient;
  * @author Daniel Kinzler
  * @author Tobias Gritschacher
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
 
 final class ClientHooks {
@@ -180,29 +181,41 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSpecialMovepageAfterMove( \MovePageForm $movePage, \Title &$oldTitle, \Title &$newTitle ) {
-		$siteLinkCache = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
-		$globalId = Settings::get( 'siteGlobalID' );
-		$itemId = $siteLinkCache->getItemIdForLink(
-			$globalId,
-			$oldTitle->getText()
+		$site = \MediaWikiSite::newFromGlobalId( Settings::get( 'siteGlobalID' ) );
+
+		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
+		$entityId = $siteLinkLookup->getEntityIdForSiteLink(
+			new SiteLink( $site, $oldTitle->getFullText() )
 		);
 
-		if ( $itemId !== false ) {
-			$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
-
-			$itemByTitle = 'Special:ItemByTitle/' . $globalId . '/' . $oldTitle->getPrefixedDBkey();
-			$itemByTitleLink = $repoLinker->repoArticleUrl( $itemByTitle );
-			$out = $movePage->getOutput();
-			$out->addModules( 'wikibase.client.page-move' );
-			$out->addHTML(
-				\Html::rawElement(
-					'div',
-					array( 'id' => 'wbc-after-page-move',
-							'class' => 'plainlinks' ),
-					wfMessage( 'wikibase-after-page-move', $itemByTitleLink )->parse()
-				)
-			);
+		if ( !$entityId ) {
+			return true;
 		}
+		// Create a repo link directly to the item
+		// We can't use Special:ItemByTitle here as the item might have already been updated.
+		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+		$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
+		$idString = $idFormatter->format( $entityId );
+		$itemLink = $repoLinker->repoItemUrl( $entityId );
+
+		if ( isset( $newTitle->wikibasePushedChangeToRepo ) ) {
+			// We're going to update the item using the repo job queue \o/
+			$msg = 'wikibase-after-page-move-queued';
+		} else {
+			// The user has to update the item per hand for some reason
+			$msg = 'wikibase-after-page-move';
+		}
+
+		$out = $movePage->getOutput();
+		$out->addModules( 'wikibase.client.page-move' );
+		$out->addHTML(
+			\Html::rawElement(
+				'div',
+				array( 'id' => 'wbc-after-page-move',
+						'class' => 'plainlinks' ),
+				wfMessage( $msg, $itemLink )->parse()
+			)
+		);
 		return true;
 	}
 
@@ -693,6 +706,90 @@ final class ClientHooks {
 				);
 			}
 		}
+		return true;
+	}
+
+	/**
+	 * After a page has been moved also update the item on the repo
+	 * This only works with CentralAuth
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleMoveComplete
+	 *
+	 * @param Title $oldTitle
+	 * @param Title $newTitle
+	 * @param User $user
+	 * @param integer $pageid database ID of the page that's been moved
+	 * @param integer $redirid database ID of the created redirect
+	 *
+	 * @return bool
+	 */
+	public static function onTitleMoveComplete( $oldTitle, $newTitle, $user, $pageId, $redirectId ) {
+		wfProfileIn( __METHOD__ );
+
+		if ( !class_exists( 'CentralAuthUser' ) ) {
+			// We can't do anything without CentralAuth as there's no way to verify that
+			// the local user equals the repo one of the same name
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		$repoDB = Settings::get( 'repoDatabase' );
+		$globalId = Settings::get( 'siteGlobalID' );
+
+		$namespaceChecker = new NamespaceChecker(
+			Settings::get( 'excludeNamespaces' ),
+			Settings::get( 'namespaces' )
+		);
+
+		if ( !$namespaceChecker->isWikibaseEnabled( $newTitle->getNamespace() ) ) {
+			// Don't make the repo link to namespaces on which wikibase is disabled
+			return true;
+		}
+
+		$caUser = \CentralAuthUser::getInstance( $user );
+		if ( !$caUser || !$caUser->exists() ) {
+			// The current user doesn't have a central account
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		// XXX: repoDatabase == CentralAuth site id?!!
+		if ( !$caUser->isAttached() || !$caUser->attachedOn( $repoDB ) ) {
+			// Either the user account on this wiki or the one on the repo do not exist
+			// or they aren't connected
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		wfProfileIn( __METHOD__ . '#queue' );
+		$jobQueueGroup = \JobQueueGroup::singleton( $repoDB );
+		wfProfileOut( __METHOD__ . '#queue' );
+
+		if ( !$jobQueueGroup ) {
+			trigger_error( "Failed to acquire a JobQueueGroup for $repoDB", E_USER_WARNING );
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		wfProfileIn( __METHOD__ . '#job' );
+		$job = UpdateRepoOnMoveJob::newFromMove( $oldTitle, $newTitle, $user, $globalId );
+		wfProfileOut( __METHOD__ . '#job' );
+
+		wfProfileIn( __METHOD__ . '#push' );
+		$ok = $jobQueueGroup->push( $job );
+		wfProfileOut( __METHOD__ . '#push' );
+
+		if ( !$ok ) {
+			trigger_error( "Failed to push to job queue for $repoDB", E_USER_WARNING );
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		wfProfileOut( __METHOD__ );
+
+		// To be able to find out about this in the SpecialMovepageAfterMove hook
+		$newTitle->wikibasePushedChangeToRepo = true;
+
 		return true;
 	}
 }

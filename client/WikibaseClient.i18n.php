@@ -24,6 +24,7 @@ $messages['en'] = array(
 	'wikibase-client-desc' => 'Client for the Wikibase extension',
 	'specialpages-group-wikibaseclient' => 'Wikidata client',
 	'wikibase-after-page-move' => 'You may also [$1 update] the associated Wikidata item to maintain language links on moved page.',
+	'wikibase-after-page-move-queued' => 'The [$1 Wikidata item] associated with this page will be automatically updated soon.',
 	'wikibase-comment-remove' => 'Associated Wikidata item deleted. Language links removed.',
 	'wikibase-comment-linked' => 'A Wikidata item has been linked to this page.',
 	'wikibase-comment-unlink' => 'This page has been unlinked from Wikidata item. Language links removed.',
@@ -85,6 +86,10 @@ $messages['qqq'] = array(
 See also [[d:Wikidata:Glossary#Wikidata|Wikidata]].',
 	'specialpages-group-wikibaseclient' => '{{doc-special-group|that=is related to Wikidata clients|like=[[Special:UnconnectedPages]]}}',
 	'wikibase-after-page-move' => 'Message on [[Special:MovePage]] on submit and successfully move, inviting user to update associated Wikibase repository item to maintain language links on the moved page on the client.
+
+Parameters:
+* $1 - the link for the associated Wikibase item.',
+	'wikibase-after-page-move-queued' => 'Message on [[Special:MovePage]] on submit and successful move, telling the user that the Wikidata item belonging to the page will be automatically updated soon.
 
 Parameters:
 * $1 - the link for the associated Wikibase item.',
