@@ -69,20 +69,23 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$cases[] = array( // #0: no params, show form
 			'',      // subpage
 			array(), // parameters
+			array(), // headers
 			'!<p>!', // output regex //TODO: be more specific
 			200,       // http code
 		);
 
 		$cases[] = array( // #1: valid item ID
 			'',      // subpage
-			array( 'id' => '{testitemid}' ), // parameters
+			array( 'id' => '{testitemid}', 'format' => 'json' ), // parameters
+			array(), // headers
 			'!^\{.*Raarrr!', // output regex
 			200,       // http code
 		);
 
 		$cases[] = array( // #2: invalid item ID
 			'',      // subpage
-			array( 'id' => 'q1231231230' ), // parameters
+			array( 'id' => 'Q1231231230', 'format' => 'json' ), // parameters
+			array(), // headers
 			'!!', // output regex
 			404,  // http code
 		);
@@ -92,7 +95,9 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			array( // parameters
 				'id' => '{testitemid}',
 				'revision' => '{testitemrev}',
+				'format' => 'json',
 			),
+			array(), // headers
 			'!^\{.*Raarr!', // output regex
 			200,       // http code
 		);
@@ -102,21 +107,23 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			array( // parameters
 				'id' => '{testitemid}',
 				'revision' => '1231231230',
+				'format' => 'json',
 			),
+			array(), // headers
 			'!!', // output regex
 			404,       // http code
 		);
 
-		$cases[] = array( // #5: alternative format
+		$cases[] = array( // #5: no format, cause 303 to default format
 			'',      // subpage
 			array( // parameters
 				'id' => '{testitemid}',
-				'format' => 'php',
 			),
-			'!^a:\d+.*Raarr!', // output regex
-			200,       // http code
+			array(), // headers
+			'!!', // output regex
+			303,  // http code
 			array( // headers
-				'Content-Type' => 'application/vnd.php.serialized; charset=UTF-8'
+				'Location' => '!.+!'
 			)
 		);
 
@@ -126,10 +133,11 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 				'id' => '{testitemid}',
 				'format' => 'application/json',
 			),
+			array(), // headers
 			'!^\{.*Raarr!', // output regex
 			200,       // http code
 			array( // headers
-				'Content-Type' => 'application/json; charset=UTF-8'
+				'Content-Type' => '!^application/json(;|$)!'
 			)
 		);
 
@@ -139,6 +147,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 				'id' => '{testitemid}',
 				'format' => 'sdakljflsd',
 			),
+			array(), // headers
 			'!!', // output regex
 			415,  // http code
 		);
@@ -149,39 +158,28 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 				'id' => '{testitemid}',
 				'format' => 'xml',
 			),
+			array(), // headers
 			'!<entity!', // output regex
 			200,       // http code
 			array( // headers
-				'Content-Type' => 'text/xml; charset=UTF-8'
+				'Content-Type' => '!^text/xml(;|$)!'
 			)
 		);
 
-		$cases[] = array( // #9: evil stuff
+		$cases[] = array( // #9: malformed id
 			'',      // subpage
 			array( // parameters
 				'id' => '////',
-				'revision' => '::::',
-				//'format' => '....',
+				'format' => 'json',
 			),
+			array(), // headers
 			'!!', // output regex
-			404,  // http code
+			400,  // http code
 		);
 
-		$cases[] = array( // #10: RDF+XML
-			'',      // subpage
-			array( // parameters
-				'id' => '{testitemid}',
-				'format' => 'rdf',
-			),
-			'!<rdf:RDF.*rdf:about.*</rdf:RDF>!s', // output regex
-			200,       // http code
-			array( // headers
-				'Content-Type' => 'application/rdf+xml; charset=UTF-8'
-			)
-		);
+		// from case #0 to #9, generate #10 to #19
 
 		$subpageCases = array();
-
 		foreach ( $cases as $c ) {
 			$case = $c;
 			$case[0] = '';
@@ -197,6 +195,14 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			}
 
 			if ( isset( $case[1]['format'] ) ) {
+				if ( $case[4] === 200 && preg_match( '!/!', $case[1]['format'] ) ) {
+					// It's a mime type, so it will trigger a redirect to the canonical form
+					// when used with subpage syntax.
+					$case[3] = '!!';
+					$case[4] = 301;
+					$case[5] = array();
+				}
+
 				$case[0] .= '.' . $case[1]['format'];
 				unset( $case[1]['format'] );
 			}
@@ -205,6 +211,205 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		}
 
 		$cases = array_merge( $cases, $subpageCases );
+
+		// add cases starting from #20
+
+		// #20: format=application/json does not trigger a redirect
+		$cases[] = array(
+			'',      // subpage
+			array( // parameters
+				'id' => '{testitemid}',
+				'format' => 'application/json',
+			),
+			array(), // headers
+			'!!', // output regex
+			200,  // http code
+			array( // headers
+				'Content-Type' => '!^application/json!'
+			)
+		);
+
+		// #21: format=html does trigger a 303
+		$cases[] = array(
+			'',      // subpage
+			array( // parameters
+				'id' => '{testitemid}',
+				'format' => 'HTML',
+			),
+			array(), // headers
+			'!!', // output regex
+			303,  // http code
+			array( // headers
+				'Location' => '!{testitemid}$!'
+			)
+		);
+
+		// #22: format=html&revision=1234 does trigger a 303 to the correct rev
+		$cases[] = array(
+			'',      // subpage
+			array( // parameters
+				'id' => '{testitemid}',
+				'revision' => '{testitemrev}',
+				'format' => 'text/html',
+			),
+			array(), // headers
+			'!!', // output regex
+			303,  // http code
+			array( // headers
+				'Location' => '!{testitemid}(\?|&)oldid={testitemrev}!'
+			)
+		);
+
+		// #23: id=q5&format=json does not trigger a redirect
+		$cases[] = array(
+			'',      // subpage
+			array( // parameters
+				'id' => '{lowertestitemid}',
+				'format' => 'application/json',
+			),
+			array(), // headers
+			'!!', // output regex
+			200,  // http code
+			array( // headers
+				'Content-Type' => '!^application/json!'
+			)
+		);
+
+		// #24: /Q5 does trigger a 303
+		$cases[] = array(
+			'{testitemid}',      // subpage
+			array(), // parameters
+			array(), // headers
+			'!!', // output regex
+			303,  // http code
+			array( // headers
+				'Location' => '!/{testitemid}\.[-./\w]+$!'
+			)
+		);
+
+		// #25: /Q5.json does not trigger a redirect
+		$cases[] = array(
+			'{testitemid}.json',      // subpage
+			array(),
+			array(), // headers
+			'!!', // output regex
+			200,  // http code
+			array( // headers
+				'Content-Type' => '!^application/json!'
+			)
+		);
+
+		// #26: /q5.json does trigger a 301
+		$cases[] = array(
+			'{lowertestitemid}.JSON',      // subpage
+			array(), // parameters
+			array(), // headers
+			'!!', // output regex
+			301,  // http code
+			array( // headers
+				'Location' => '!/{testitemid}\.json$!'
+			)
+		);
+
+		// #27: /q5:1234.json does trigger a 301 to the correct rev
+		$cases[] = array(
+			'{lowertestitemid}:{testitemrev}.json',      // subpage
+			array(), // parameters
+			array(), // headers
+			'!!', // output regex
+			301,  // http code
+			array( // headers
+				'Location' => '!{testitemid}:{testitemrev}\.json!'
+			)
+		);
+
+		// #28: /Q5.application/json does trigger a 301
+		$cases[] = array(
+			'{testitemid}.application/json',      // subpage
+			array(), // parameters
+			array(), // headers
+			'!!', // output regex
+			301,  // http code
+			array( // headers
+				'Location' => '!{testitemid}\.json!'
+			)
+		);
+
+		// #29: /Q5.html does trigger a 303
+		$cases[] = array(
+			'{testitemid}.html',      // subpage
+			array(), // parameters
+			array(), // headers
+			'!!', // output regex
+			303,  // http code
+			array( // headers
+				'Location' => '!{testitemid}$!'
+			)
+		);
+
+		// #30: /Q5.xyz triggers a 415
+		$cases[] = array(
+			'{testitemid}.xyz',      // subpage
+			array(),
+			array(), // headers
+			'!!', // output regex
+			415,  // http code
+			array(), // headers
+		);
+
+		// #31: /Q5 with "Accept: text/foobar" triggers a 406
+		$cases[] = array(
+			'{testitemid}',      // subpage
+			array(),
+			array( // headers
+				'Accept' => 'text/foobar'
+			),
+			'!!', // output regex
+			406,  // http code
+			array(), // headers
+		);
+
+		// #32: /Q5 with "Accept: text/html" triggers a 303
+		$cases[] = array(
+			'{testitemid}',      // subpage
+			array(), // parameters
+			array( // headers
+				'Accept' => 'text/HTML'
+			),
+			'!!', // output regex
+			303,  // http code
+			array( // headers
+				'Location' => '!{testitemid}$!'
+			)
+		);
+
+		// #33: /Q5 with "Accept: application/json" triggers a 303
+		$cases[] = array(
+			'{testitemid}',      // subpage
+			array(), // parameters
+			array( // headers
+				'Accept' => 'application/foobar, application/json'
+			),
+			'!!', // output regex
+			303,  // http code
+			array( // headers
+				'Location' => '!/{testitemid}.json$!'
+			)
+		);
+
+		// #34: /Q5 with "Accept: text/html; q=0.5, application/json" uses weights for 303
+		$cases[] = array(
+			'{testitemid}',      // subpage
+			array(), // parameters
+			array( // headers
+				'Accept' => 'text/html; q=0.5, application/json'
+			),
+			'!!', // output regex
+			303,  // http code
+			array( // headers
+				'Location' => '!/{testitemid}.json$!'
+			)
+		);
 
 		return $cases;
 	}
@@ -215,7 +420,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 				self::injectIds( $v, $entity );
 			}
 		} else if ( is_string( $data ) ) {
-			$data = str_replace( '{testitemid}', $entity->getId()->getPrefixedId(), $data );
+			$data = str_replace( '{testitemid}', strtoupper( $entity->getId()->getPrefixedId() ), $data );
+			$data = str_replace( '{lowertestitemid}', strtolower( $entity->getId()->getPrefixedId() ), $data );
 
 			if ( strpos( $data, '{testitemrev}' ) >= 0 ) {
 				$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
@@ -229,130 +435,39 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	 *
 	 * @param string $subpage The subpage to request (or '')
 	 * @param array  $params  Request parameters
+	 * @param array  $headers  Request headers
 	 * @param string $expRegExp   Regex to match the output against.
 	 * @param int    $expCode     Expected HTTP status code
 	 * @param array  $expHeaders  Expected HTTP response headers
 	 */
-	public function testExecute( $subpage, $params, $expRegExp, $expCode = 200, $expHeaders = array() ) {
+	public function testExecute( $subpage, $params, $headers, $expRegExp, $expCode = 200, $expHeaders = array() ) {
 		$item = $this->getTestItem();
 
 		self::injectIds( $subpage, $item );
 		self::injectIds( $params, $item );
+		self::injectIds( $expRegExp, $item );
+		self::injectIds( $expHeaders, $item );
 
 		$request = new \FauxRequest( $params );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
+
+		foreach ( $headers as $name => $value ) {
+			$request->setHeader( strtoupper( $name ), $value );
+		}
 
 		try {
 			/* @var \FauxResponse $response */
 			list( $output, $response ) = $this->executeSpecialPage( $subpage, $request );
 
 			$this->assertEquals( $expCode, $response->getStatusCode(), "status code" );
-			$this->assertRegExp( $expRegExp, $output, "outpout" );
+			$this->assertRegExp( $expRegExp, $output, "output" );
 
-			foreach ( $expHeaders as $name => $expected ) {
-				$this->assertEquals( $expected, $response->getheader( $name ), "header: $name" );
+			foreach ( $expHeaders as $name => $exp ) {
+				$this->assertRegExp( $exp, $response->getheader( $name ), "header: $name" );
 			}
 		} catch ( \HttpError $e ) {
 			$this->assertEquals( $expCode, $e->getStatusCode(), "status code" );
 			$this->assertRegExp( $expRegExp, $e->getHTML(), "error output" );
-		}
-	}
-
-	static $apiMimeTypes = array(
-		'application/vnd.php.serialized',
-		'application/json',
-		'text/xml'
-	);
-
-	static $apiExtensions = array(
-		'php',
-		'json',
-		'xml'
-	);
-
-	static $rdfMimeTypes = array(
-		'application/rdf+xml',
-		'text/n3',
-		'text/rdf+n3',
-		'text/turtle',
-		'application/turtle',
-		'application/ntriples',
-	);
-
-	static $rdfExtensions = array(
-		'rdf',
-		'n3',
-		'ttl',
-		'nt'
-	);
-
-	static $badMimeTypes = array(
-		'text/html',
-		'text/text',
-		// 'text/plain', // ntriples presents as text/plain!
-	);
-
-	static $badExtensions = array(
-		'html',
-		'text',
-		'txt',
-	);
-
-	public function testGetSupportedMineTypes() {
-		$page = $this->newSpecialPage();
-
-		$types = $page->getSupportedMimeTypes();
-
-		foreach ( self::$apiMimeTypes as $type ) {
-			$this->assertTrue( in_array( $type, $types), $type );
-		}
-
-		if ( $page->isRdfSupported() ) {
-			foreach ( self::$rdfMimeTypes as $type ) {
-				$this->assertTrue( in_array( $type, $types), $type );
-			}
-		}
-
-		foreach ( self::$badMimeTypes as $type ) {
-			$this->assertFalse( in_array( $type, $types), $type );
-		}
-	}
-
-	public function testGetSupportedExtensions() {
-		$page = $this->newSpecialPage();
-
-		$types = $page->getSupportedExtensions();
-
-		foreach ( self::$apiExtensions as $type ) {
-			$this->assertTrue( in_array( $type, $types), $type );
-		}
-
-		if ( $page->isRdfSupported() ) {
-			foreach ( self::$rdfExtensions as $type ) {
-				$this->assertTrue( in_array( $type, $types), $type );
-			}
-		}
-
-		foreach ( self::$badExtensions as $type ) {
-			$this->assertFalse( in_array( $type, $types), $type );
-		}
-	}
-
-	public function testGetFormatName() {
-		$page = $this->newSpecialPage();
-
-		$types = $page->getSupportedMimeTypes();
-
-		foreach ( $types as $type ) {
-			$format = $page->getFormatName( $type );
-			$this->assertNotNull( $format, $type );
-		}
-
-		$types = $page->getSupportedExtensions();
-
-		foreach ( $types as $type ) {
-			$format = $page->getFormatName( $type );
-			$this->assertNotNull( $format, $type );
 		}
 	}
 }
