@@ -5,6 +5,7 @@ namespace Wikibase\QueryEngine\SQLStore;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRemover;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable;
 
 /**
  * Use case for removing entities from the store.
@@ -34,17 +35,17 @@ use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRemover;
  */
 class EntityRemover {
 
-	private $claimRemover;
+	private $claimsTable;
 	private $idFinder;
 
 	/**
 	 * @since 0.1
 	 *
-	 * @param ClaimRemover $claimRemover
+	 * @param ClaimsTable $claimsTable
 	 * @param InternalEntityIdFinder $idFinder
 	 */
-	public function __construct( ClaimRemover $claimRemover, InternalEntityIdFinder $idFinder ) {
-		$this->claimRemover = $claimRemover;
+	public function __construct( ClaimsTable $claimsTable, InternalEntityIdFinder $idFinder ) {
+		$this->claimsTable = $claimsTable;
 		$this->idFinder = $idFinder;
 	}
 
@@ -57,7 +58,7 @@ class EntityRemover {
 		$internalSubjectId = $this->getInternalId( $entity->getId() );
 
 		foreach ( $entity->getClaims() as $claim ) {
-			$this->claimRemover->removeClaim(
+			$this->claimsTable->removeClaim(
 				$claim,
 				$internalSubjectId
 			);

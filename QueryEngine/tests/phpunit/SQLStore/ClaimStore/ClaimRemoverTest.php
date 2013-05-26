@@ -49,27 +49,26 @@ class ClaimRemoverTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider claimProvider
 	 */
 	public function testRemoveClaim( Claim $claim ) {
-		$this->assertTrue( true ); // TODO
-//		$claimTable = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable' )
-//			->disableOriginalConstructor()->getMock();
-//
-//		$claimTable->expects( $this->once() )->method( 'insertClaimRow' );
-//
-//		$snakInserter = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter' )
-//			->disableOriginalConstructor()->getMock();
-//
-//		$snakInserter->expects( $this->exactly( $this->countClaimSnaks( $claim ) ) )->method( 'insertSnak' );
-//
-//		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' );
-//		$idFinder->expects( $this->any() )
-//			->method( 'getInternalIdForEntity' )
-//			->will( $this->returnValue( 42 ) );
-//
-//		$claimRowBuilder = new ClaimRowBuilder( $idFinder );
-//
-//		$claimInserter = new ClaimInserter( $claimTable, $snakInserter, $claimRowBuilder );
-//
-//		$claimInserter->insertClaim( $claim, new EntityId( 'item', 1 ) );
+		$claimTable = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable' )
+			->disableOriginalConstructor()->getMock();
+
+		$claimTable->expects( $this->once() )->method( 'removeClaimRow' );
+
+		$snakInserter = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\SnakStore\SnakInserter' )
+			->disableOriginalConstructor()->getMock();
+
+		$snakInserter->expects( $this->exactly( $this->countClaimSnaks( $claim ) ) )->method( 'insertSnak' );
+
+		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' );
+		$idFinder->expects( $this->any() )
+			->method( 'getInternalIdForEntity' )
+			->will( $this->returnValue( 42 ) );
+
+		$claimRowBuilder = new ClaimRowBuilder( $idFinder );
+
+		$claimInserter = new ClaimInserter( $claimTable, $snakInserter, $claimRowBuilder );
+
+		$claimInserter->insertClaim( $claim, new EntityId( 'item', 1 ) );
 	}
 
 	public function claimProvider() {
