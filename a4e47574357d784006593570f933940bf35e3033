@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dxk6staE",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Value.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-26T12:22:59Z",
+      "side": 1,
+      "message": "seems weird to have documentation of a global event here. Also, if we really have to do this, perhaps it should be prefixed anyhow?",
+      "revId": "a4e47574357d784006593570f933940bf35e3033",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
