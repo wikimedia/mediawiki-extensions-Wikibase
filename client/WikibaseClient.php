@@ -122,11 +122,12 @@ $wgHooks['GetPreferences'][]						= '\Wikibase\ClientHooks::onGetPreferences';
 $wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay';
 $wgHooks['ScribuntoExternalLibraries'][]      = '\Wikibase\ClientHooks::onScribuntoExternalLibraries';
 $wgHooks['SpecialWatchlistFilters'][]          = '\Wikibase\ClientHooks::onSpecialWatchlistFilters';
+$wgHooks['InfoAction'][] 								= '\Wikibase\ClientHooks::onInfoAction';
+$wgHooks['TitleMoveComplete'][]          = '\Wikibase\ClientHooks::onTitleMoveComplete';
 
 // extension hooks
 $wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
 $wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
-$wgHooks['InfoAction'][] 								= '\Wikibase\ClientHooks::onInfoAction';
 
 // api modules
 $wgAPIMetaModules['wikibase'] = 'Wikibase\ApiClientInfo';
