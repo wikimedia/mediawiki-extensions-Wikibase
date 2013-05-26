@@ -98,7 +98,12 @@ class ValueSnakStore extends SnakStore {
 	}
 
 	public function removeSnaksOfSubject( $internalSubjectId ) {
-
+		foreach ( $this->dataValueHandlers as $dvHandler ) {
+			$this->queryInterface->delete(
+				$dvHandler->getDataValueTable()->getTableDefinition()->getName(),
+				array( 'subject_id' => $internalSubjectId )
+			);
+		}
 	}
 
 }
