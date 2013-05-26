@@ -686,7 +686,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 * @param EntityContent $content  The content to save
 	 * @param String $summary    The edit summary
-	 * @param int    $flags      The edit flags (see WikiPage::toEditContent)
+	 * @param int    $flags      The edit flags (see WikiPage::doEditContent)
 	 *
 	 * @return Status the status of the save operation, as returned by EditEntity::attemptSave()
 	 * @see  EditEntity::attemptSave()

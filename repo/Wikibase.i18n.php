@@ -308,6 +308,7 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Changed {{PLURAL:$4|one qualifier|$4 qualifiers}} of {{PLURAL:$3|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Changed {{PLURAL:$4|one reference|$4 references}} of {{PLURAL:$3|claim|claims}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Changed rank of {{PLURAL:$3|claim|claims}}',
+	'wikibase-item-summary-clientsitelink-set' => 'Automatically changed the sitelink to [$2]',
 
 	// property - summary and autocomment, see docs/summaries.txt
 	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
@@ -939,6 +940,7 @@ Parameters:
 * $4 - number of references changed',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Automatic edit summary generated when modifying the rank of a claim using setclaim. Parameters:
 * $3 - number of claims changed',
+	'wikibase-item-summary-clientsitelink-set' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when a language link has been automatically added or edited (like after a page move). Such a summary could appear in English as "Automatically changed the sitelink to [itwiki]:  Italia".}}',
 	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
