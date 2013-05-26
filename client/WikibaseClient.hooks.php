@@ -6,6 +6,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Client\MovePageNotice;
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**
@@ -23,6 +24,7 @@ use Wikibase\DataModel\SimpleSiteLink;
  * @author Daniel Kinzler
  * @author Tobias Gritschacher
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
 
 final class ClientHooks {
@@ -175,29 +177,21 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSpecialMovepageAfterMove( \MovePageForm $movePage, \Title &$oldTitle, \Title &$newTitle ) {
-		$siteLinkCache = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
-		$globalId = Settings::get( 'siteGlobalID' );
-		$itemId = $siteLinkCache->getItemIdForLink(
-			$globalId,
-			$oldTitle->getText()
+		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
+		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+		$out = $movePage->getOutput();
+
+		$movePageNotice = new MovePageNotice(
+			$siteLinkLookup,
+			Settings::get( 'siteGlobalID' ),
+			$oldTitle,
+			$newTitle,
+			$repoLinker,
+			$out
 		);
 
-		if ( $itemId !== false ) {
-			$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+		$movePageNotice->appendOutput();
 
-			$itemByTitle = 'Special:ItemByTitle/' . $globalId . '/' . $oldTitle->getPrefixedDBkey();
-			$itemByTitleLink = $repoLinker->repoArticleUrl( $itemByTitle );
-			$out = $movePage->getOutput();
-			$out->addModules( 'wikibase.client.page-move' );
-			$out->addHTML(
-				\Html::rawElement(
-					'div',
-					array( 'id' => 'wbc-after-page-move',
-							'class' => 'plainlinks' ),
-					wfMessage( 'wikibase-after-page-move', $itemByTitleLink )->parse()
-				)
-			);
-		}
 		return true;
 	}
 
@@ -673,6 +667,55 @@ final class ClientHooks {
 				);
 			}
 		}
+		return true;
+	}
+
+	/**
+	 * After a page has been moved also update the item on the repo
+	 * This only works with CentralAuth
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleMoveComplete
+	 *
+	 * @param Title $oldTitle
+	 * @param Title $newTitle
+	 * @param User $user
+	 * @param integer $pageid database ID of the page that's been moved
+	 * @param integer $redirid database ID of the created redirect
+	 *
+	 * @return bool
+	 */
+	public static function onTitleMoveComplete( $oldTitle, $newTitle, $user, $pageId, $redirectId ) {
+		wfProfileIn( __METHOD__ );
+		$repoDB = Settings::get( 'repoDatabase' );
+		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
+		$jobQueueGroup = \JobQueueGroup::singleton( $repoDB );
+
+		if ( !$jobQueueGroup ) {
+			wfLogWarning( "Failed to acquire a JobQueueGroup for $repoDB" );
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		$updateRepo = new UpdateRepoOnMove(
+			$repoDB,
+			$siteLinkLookup,
+			$user,
+			Settings::get( 'siteGlobalID' ),
+			$oldTitle,
+			$newTitle
+		);
+
+		if ( !$updateRepo || !$updateRepo->getEntityId() || !$updateRepo->userIsValidOnRepo() ) {
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
+		if ( $updateRepo->injectJob( $jobQueueGroup ) ) {
+			// To be able to find out about this in the SpecialMovepageAfterMove hook
+			$newTitle->wikibasePushedMoveToRepo = true;
+		}
+
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 }
