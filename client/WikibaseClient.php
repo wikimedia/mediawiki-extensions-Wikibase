@@ -84,6 +84,8 @@ call_user_func( function() {
 	$wgAutoloadClasses['Scribunto_LuaWikibaseLibrary']      = $dir . 'includes/WikibaseLibrary.php';
 	$wgAutoloadClasses['Wikibase\PageUpdater'] 	= $dir . 'includes/PageUpdater.php';
 	$wgAutoloadClasses['Wikibase\WikiPageUpdater'] 	= $dir . 'includes/WikiPageUpdater.php';
+	$wgAutoloadClasses['Wikibase\UpdateRepo']       = $dir . 'includes/UpdateRepo.php';
+	$wgAutoloadClasses['Wikibase\UpdateRepoOnMove']         = $dir . 'includes/UpdateRepoOnMove.php';
 
 	// includes/api
 	$wgAutoloadClasses['Wikibase\ApiClientInfo']		= $dir . 'includes/api/ApiClientInfo.php';
@@ -134,6 +136,8 @@ call_user_func( function() {
 	$wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay';
 	$wgHooks['ScribuntoExternalLibraries'][]      = '\Wikibase\ClientHooks::onScribuntoExternalLibraries';
 	$wgHooks['SpecialWatchlistFilters'][]          = '\Wikibase\ClientHooks::onSpecialWatchlistFilters';
+	$wgHooks['InfoAction'][] 								= '\Wikibase\ClientHooks::onInfoAction';
+	$wgHooks['TitleMoveComplete'][]          = '\Wikibase\ClientHooks::onTitleMoveComplete';
 
 	// extension hooks
 	$wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
