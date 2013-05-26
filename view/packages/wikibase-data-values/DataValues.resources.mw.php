@@ -62,6 +62,15 @@ return call_user_func( function() {
 
 		// Dependencies required by "DataValues" library:
 
+		// coordinate.js
+		'coordinate.js' => $moduleTemplate + array(
+			'scripts' => array(
+				'coordinate.js/src/coordinate.js',
+				'coordinate.js/src/coordinate.parser.js',
+				'coordinate.js/src/coordinate.Coordinate.js',
+			),
+		),
+
 		// time.js
 		'time.js' => $moduleTemplate + array(
 			'scripts' => array(
