@@ -205,6 +205,8 @@ final class RepoHooks {
 			'specials/SpecialSetLabel',
 			'specials/SpecialSetAliases',
 
+			'specials/EntityDataSerializationService',
+
 			'store/IdGenerator',
 			'store/StoreFactory',
 			'store/Store',

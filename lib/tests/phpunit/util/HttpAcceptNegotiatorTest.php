@@ -62,10 +62,10 @@ class HttpAcceptNegotiatorTest extends \PHPUnit_Framework_TestCase {
 				'X',  // expected
 			),
 			array( // #3: preference
-				array( 'text/foo', 'text/BAR', 'application/zuul' ), // supported
+				array( 'text/foo', 'text/bar', 'application/zuul' ), // supported
 				array( 'text/xoo', 'text/BAR', 'text/foo' ), // accepted
 				null, // default
-				'text/BAR',  // expected
+				'text/bar',  // expected
 			),
 			array( // #4: * wildcard
 				array( 'text/foo', 'text/BAR', 'application/zuul' ), // supported
