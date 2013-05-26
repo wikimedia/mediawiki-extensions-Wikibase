@@ -77,6 +77,27 @@ return call_user_func( function() {
 		// Number of seconds for which data output shall be cached.
 		// Note: keep that low, because such caches can not always be purged easily.
 		'dataSquidMaxage' => $wgSquidMaxage,
+
+		// Formats that shall be available via SpecialEntityData.
+		// The first format will be used as the default.
+		// This is a whitelist, some formats may not be supported because when missing
+		// optional dependencies (e.g. easyRdf).
+		// The formats are given using logical names as used by EntityDataSerializationService.
+		'entityDataFormats' => array(
+			// using the API
+			'json', // default
+			'php',
+			'xml',
+
+			// using easyRdf
+			'rdfxml',
+			'n3',
+			'turtle',
+			'ntriples',
+
+			// hardcoded internal handling
+			'html',
+		),
 	);
 
 	return $defaults;

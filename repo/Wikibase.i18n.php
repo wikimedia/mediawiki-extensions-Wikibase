@@ -212,7 +212,9 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'special-itemswithoutsitelinks' => 'Items without sitelinks',
 	'special-entitydata' => 'Entity data',
 	'wikibase-entitydata-not-found' => "No entity with ID $1 was found.",
+	'wikibase-entitydata-not-acceptable' => "No matching format found. Supported MIME types: $1",
 	'wikibase-entitydata-bad-revision' => "Can't show revision $2 of entity $1.",
+	'wikibase-entitydata-bad-id' => "Invalid ID: $1.",
 	'wikibase-entitydata-unsupported-format' => "The data format $1 is not supported by this interface.",
 	'wikibase-entitydata-title' => 'Entity Data',
 	'wikibase-entitydata-text' => 'This page provides a linked data interface to entity values. Please provide the entity ID in the URL, using subpage syntax.',
@@ -805,14 +807,18 @@ This special page returns a list of entities without label for a given language'
 This special page returns a list of items without any site link',
 	'special-entitydata' => '{{doc-special|EntityData}}
 The special page provides a linked data interface and easy way to get the JSON data representation for an entity.',
-	'wikibase-entitydata-not-found' => 'Error shown when no entity with the given ID could be found. Paramters:
+	'wikibase-entitydata-not-found' => 'Error shown when no entity with the given ID could be found (HTTP error 404). Paramters:
 * $1 - the given ID',
+	'wikibase-entitydata-not-acceptable' => 'Error shown when none of the formats acceptable to the client is suppoerted (HTTP error 406). Paramters:
+* $1 - the list of supported MIME types',
 	'wikibase-entitydata-bad-revision' => 'Error shown when the requested revision of a data entity was not found or was not suitable.
 
 Paramters:
-* $1 - the the entity ID
+* $1 - the entity ID
 * $2 - the requested revision ID',
-	'wikibase-entitydata-unsupported-format' => 'Error shown when the requested output format is not supported for entity data.',
+	'wikibase-entitydata-bad-id' => 'Error shown when the requested ID is invalid. Parameters:
+* $1: the malformed ID',
+	'wikibase-entitydata-unsupported-format' => 'Error shown when the requested output format is not supported for entity data (HTTP error 415).',
 	'wikibase-entitydata-title' => 'Title shown on the special page when a form or text is presented',
 	'wikibase-entitydata-text' => 'Explanatory text shown on the special page.',
 	'wikibase-api-aliases-invalid-list' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions.
