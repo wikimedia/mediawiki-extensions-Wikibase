@@ -57,8 +57,6 @@ class SiteModule extends ResourceLoaderModule {
 				'shortName' => $languageName,
 				'name' => $languageName,
 				'globalSiteId' => $site->getGlobalId(),
-				'pageUrl' => $site->getPageUrl(),
-				'apiUrl' => $site->getFileUrl( 'api.php' ),
 				'languageCode' => $site->getLanguageCode()
 			);
 		}
