@@ -26,7 +26,7 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 			this.error = err.toString();
 		}
 
-		if ( Math.abs(result[0] ) > 90 || Math.abs( result[1] ) > 180 ) {
+		if ( Math.abs( result[0] ) > 90 || Math.abs( result[1] ) > 180 ) {
 			result = [0, 0, 0];
 		}
 
@@ -35,29 +35,33 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		this.latitudeInternal = function() { return latitude; };
 		this.longitudeInternal = function() { return longitude; };
 	
-		var precision = (inputprecision === undefined)? result[2] : inputprecision;
+		var precision = ( inputprecision === undefined ) ? result[2] : inputprecision;
 		this.precisionInternal = function() { return precision; };
-		this.precisionText = function() { return coordinate.precisionText(precision); };
-		this.precisionTextEarth = function() { return coordinate.precisionTextEarth(precision); };
+		this.precisionText = function() { return coordinate.precisionText( precision ); };
+		this.precisionTextEarth = function() { return coordinate.precisionTextEarth( precision ); };
 
 		this.increasePrecision = function() {
-			precision = coordinate.increasePrecision(precision);
+			precision = coordinate.increasePrecision( precision );
 			return precision;
 		};
 		this.decreasePrecision = function() {
-			precision = coordinate.decreasePrecision(precision);
+			precision = coordinate.decreasePrecision( precision );
 			return precision;
 		};
 
-		this.northsouth = function() { return (latitude < 0) ? coordinate.settings.south : coordinate.settings.north; };
-		this.eastwest = function() { return (longitude < 0) ? coordinate.settings.west : coordinate.settings.east; };
+		this.northsouth = function() {
+			return ( latitude < 0 ) ? coordinate.settings.south : coordinate.settings.north;
+		};
+		this.eastwest = function() {
+			return ( longitude < 0 ) ? coordinate.settings.west : coordinate.settings.east;
+		};
 
-		this.latitudeDegree = function() { return coordinate.toDegree(latitude, precision); };
-		this.longitudeDegree = function() { return coordinate.toDegree(longitude, precision); };
-		this.latitudeDecimal = function() { return coordinate.toDecimal(latitude, precision); };
-		this.longitudeDecimal = function() { return coordinate.toDecimal(longitude, precision); };
-		this.degreeText = function() { return coordinate.degreeText(latitude, longitude, precision); };
-		this.decimalText = function() { return coordinate.decimalText(latitude, longitude, precision); };
+		this.latitudeDegree = function() { return coordinate.toDegree( latitude, precision ); };
+		this.longitudeDegree = function() { return coordinate.toDegree( longitude, precision ); };
+		this.latitudeDecimal = function() { return coordinate.toDecimal( latitude, precision ); };
+		this.longitudeDecimal = function() { return coordinate.toDecimal( longitude, precision ); };
+		this.degreeText = function() { return coordinate.degreeText( latitude, longitude, precision ); };
+		this.decimalText = function() { return coordinate.decimalText( latitude, longitude, precision ); };
 	};
 
 	return Coordinate; // expose coordinate.Coordinate
