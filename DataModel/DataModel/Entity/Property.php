@@ -53,7 +53,7 @@ class Property extends Entity {
 	 * @deprecated since 0.4
 	 *
 	 * @return DataType
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function getDataType() {
 		if ( $this->dataType === null ) {
@@ -63,11 +63,11 @@ class Property extends Entity {
 				$this->dataType = $registry->getDataTypeFactory()->getType( $this->data['datatype'] );
 
 				if ( $this->dataType === null ) {
-					throw new MWException( 'The DataType of the property is not valid' );
+					throw new InvalidArgumentException( 'The DataType of the property is not valid' );
 				}
 			}
 			else {
-				throw new MWException( 'The DataType of the property is not known' );
+				throw new InvalidArgumentException( 'The DataType of the property is not known' );
 			}
 		}
 

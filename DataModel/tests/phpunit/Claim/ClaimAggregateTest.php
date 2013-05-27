@@ -36,7 +36,7 @@ use Wikibase\ClaimAggregate;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimAggregateTest extends \MediaWikiTestCase {
+class ClaimAggregateTest extends \PHPUnit_Framework_TestCase {
 
 	public function ClaimTestProvider() {
 		$claims = array();
@@ -104,7 +104,7 @@ class ClaimAggregateTest extends \MediaWikiTestCase {
 
 		$freshlyObtained = new \Wikibase\Claims( $aggregate->getClaims() );
 
-		$this->assertArrayEquals(
+		$this->assertEquals(
 			iterator_to_array( $unmodifiedClaims ),
 			iterator_to_array( $freshlyObtained ),
 			'Was able to modify statements via ClaimAggregate::getClaims'

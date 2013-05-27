@@ -36,7 +36,7 @@ use Wikibase\Claims;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimsTest extends \MediaWikiTestCase {
+class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function getInstanceClass() {
 		return '\Wikibase\Claims';
@@ -153,7 +153,7 @@ class ClaimsTest extends \MediaWikiTestCase {
 	 */
 	public function testGetMainSnaks( Claims $array ) {
 		$snaks = $array->getMainSnaks();
-		$this->assertType( 'array', $snaks );
+		$this->assertInternalType( 'array', $snaks );
 		$this->assertSameSize( $array, $snaks );
 	}
 
@@ -207,12 +207,11 @@ class ClaimsTest extends \MediaWikiTestCase {
 			new \Wikibase\SnakList( array( new \Wikibase\PropertyValueSnak( 10, new \DataValues\StringValue( 'spam' ) ) ) )
 		) ) ) );
 
-		$guidGen = new \Wikibase\Lib\V4GuidGenerator();
-		$claim0->setGuid( $guidGen->newGuid() );
-		$claim1->setGuid( $guidGen->newGuid() );
-		$claim2->setGuid( $guidGen->newGuid() );
-		$statement1->setGuid( $guidGen->newGuid() );
-		$statement0->setGuid( $guidGen->newGuid() );
+		$claim0->setGuid( 'claim0' );
+		$claim1->setGuid( 'claim1' );
+		$claim2->setGuid( 'claim2' );
+		$statement1->setGuid( 'statement1' );
+		$statement0->setGuid( 'statement0' );
 
 		$claim2v2 = unserialize( serialize( $claim2 ) );
 		$claim2v2->setMainSnak( new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'omnomnom' ) ) );
@@ -294,7 +293,7 @@ class ClaimsTest extends \MediaWikiTestCase {
 		$actual = $source->getDiff( $target );
 
 		// Note: this makes order of inner arrays relevant, and this order is not guaranteed by the interface
-		$this->assertArrayEquals( $expected->getOperations(), $actual->getOperations(), false, true, $message );
+		$this->assertEquals( $expected->getOperations(), $actual->getOperations(), $message );
 	}
 
 }

@@ -44,13 +44,7 @@ foreach ( include( __DIR__ . '/DataModel.classes.php' ) as $class => $file ) {
 }
 
 if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-	$wgAutoloadClasses['Wikibase\Test\ClaimTest'] = __DIR__ . '/tests/phpunit/Claim/ClaimTest.php';
-	$wgAutoloadClasses['Wikibase\Test\EntityTest'] = __DIR__ . '/tests/phpunit/Entity/EntityTest.php';
-	$wgAutoloadClasses['Wikibase\Test\TestItems'] = __DIR__  . '/tests/phpunit/Entity/TestItems.php';
-	$wgAutoloadClasses['Wikibase\Test\SnakObjectTest'] = __DIR__  . '/tests/phpunit/Snak/SnakObjectTest.php';
-
-	$wgAutoloadClasses['Wikibase\Test\HashArrayTest'] = __DIR__ . '/tests/phpunit/hasharray/HashArrayTest.php';
-	$wgAutoloadClasses['Wikibase\Test\HashArrayElement'] = __DIR__ . '/tests/phpunit/hasharray/HashArrayElement.php';
+	require_once __DIR__ . '/tests/testLoader.php';
 }
 
 /**
@@ -72,6 +66,7 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		'Claim/Claim',
 		'Claim/Statement',
 
+		'Entity/ByPropertyIdArray',
 		'Entity/EntityId',
 		'Entity/ItemMultilangTexts',
 		'Entity/ItemNewEmpty',

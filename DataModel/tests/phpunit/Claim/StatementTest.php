@@ -68,7 +68,13 @@ class StatementTest extends ClaimTest {
 
 		$instances[] = $instance;
 
-		return $this->arrayWrap( $instances );
+		$argLists = array();
+
+		foreach ( $instances as $instance ) {
+			$argLists[] = array( $instance );
+		}
+
+		return $argLists;
 	}
 
 	/**
@@ -114,15 +120,14 @@ class StatementTest extends ClaimTest {
 	public function testSetRank( Statement $statement ) {
 		$statement->setRank( Statement::RANK_DEPRECATED );
 		$this->assertEquals( Statement::RANK_DEPRECATED, $statement->getRank() );
+	}
 
-		$pokemons = null;
-
-		try {
-			$statement->setRank( 9001 );
-		}
-		catch ( \Exception $pokemons ) {}
-
-		$this->assertInstanceOf( '\MWException', $pokemons );
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testSetInvalidRank( Statement $statement ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$statement->setRank( 9001 );
 	}
 
 	/**
@@ -156,15 +161,12 @@ class StatementTest extends ClaimTest {
 	}
 
 	public function testGetHash() {
-		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 31 ) );
-		$guid = $guidGenerator->newGuid();
-
 		$claim0 = new Statement( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$claim0->setGuid( $guid );
+		$claim0->setGuid( 'claim0' );
 		$claim0->setRank( Statement::RANK_DEPRECATED );
 
 		$claim1 = new Statement( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$claim1->setGuid( $guid );
+		$claim1->setGuid( 'claim1' );
 		$claim1->setRank( Statement::RANK_DEPRECATED );
 
 		$this->assertEquals( $claim0->getHash(), $claim1->getHash() );

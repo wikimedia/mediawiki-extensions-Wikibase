@@ -35,7 +35,7 @@ use Wikibase\Item;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ItemNewFromArrayTest extends \MediaWikiTestCase {
+class ItemNewFromArrayTest extends \PHPUnit_Framework_TestCase {
 
 	//@todo: make this a baseclass to use with all types of entitites.
 

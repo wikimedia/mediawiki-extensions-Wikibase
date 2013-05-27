@@ -48,7 +48,7 @@ use Wikibase\PropertyValueSnak;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class EntityTest extends \MediaWikiTestCase {
+abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @since 0.1
@@ -448,7 +448,13 @@ abstract class EntityTest extends \MediaWikiTestCase {
 
 		$entities[] = $entity;
 
-		return $this->arrayWrap( $entities );
+		$argLists = array();
+
+		foreach ( $entities as $entity ) {
+			$argLists[] = array( $entity );
+		}
+
+		return $argLists;
 	}
 
 	/**
@@ -510,7 +516,13 @@ abstract class EntityTest extends \MediaWikiTestCase {
 			$ids[] = new EntityId( $type, $id );
 		}
 
-		return $this->arrayWrap( $ids );
+		$argLists = array();
+
+		foreach ( $ids as $id ) {
+			$argLists[] = array( $id );
+		}
+
+		return $argLists;
 	}
 
 	/**

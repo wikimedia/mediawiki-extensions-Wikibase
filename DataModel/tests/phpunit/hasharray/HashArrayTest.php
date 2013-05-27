@@ -35,7 +35,7 @@ use Hashable;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class HashArrayTest extends \MediaWikiTestCase {
+abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 
 	public abstract function constructorProvider();
 
@@ -125,6 +125,15 @@ abstract class HashArrayTest extends \MediaWikiTestCase {
 	public function testEquals( HashArray $array ) {
 		$this->assertTrue( $array->equals( $array ) );
 		$this->assertFalse( $array->equals( 42 ) );
+	}
+
+	protected function arrayWrap( array $elements ) {
+		return array_map(
+			function ( $element ) {
+				return array( $element );
+			},
+			$elements
+		);
 	}
 
 }

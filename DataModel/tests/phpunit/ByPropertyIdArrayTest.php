@@ -34,7 +34,7 @@ use Wikibase\ByPropertyIdArray, Wikibase\EntityId, Wikibase\Property, Wikibase\S
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ByPropertyIdArrayTest extends \MediaWikiTestCase {
+class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	public function listProvider() {
 		$lists = array();
@@ -43,8 +43,8 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 			new \Wikibase\PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
 			new \Wikibase\PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
 			new \Wikibase\PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 10 ) ),
-			new \Wikibase\PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 1 ) ),
 			new \Wikibase\PropertyValueSnak( new EntityId( Property::ENTITY_TYPE, 10 ), new \DataValues\StringValue( 'ohi' ) ),
+			new \Wikibase\PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 1 ) ),
 		);
 
 		$lists[] = $snaks;
@@ -63,7 +63,13 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 			$snaks
 		);
 
-		return $this->arrayWrap( $lists );
+		$argLists = array();
+
+		foreach ( $lists as $list ) {
+			$argLists[] = array( $list );
+		}
+
+		return $argLists;
 	}
 
 	/**
@@ -83,7 +89,10 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 
 		$indexedArray->buildIndex();
 
-		$this->assertArrayEquals( $expected, $indexedArray->getPropertyIds() );
+		$this->assertEquals(
+			array_values( $expected ),
+			array_values( $indexedArray->getPropertyIds() )
+		);
 	}
 
 	/**
@@ -112,7 +121,10 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 			}
 		}
 
-		$this->assertArrayEquals( $objects, $allObtainedObjects );
+		$this->assertEquals(
+			array_values( $objects ),
+			array_values( $allObtainedObjects )
+		);
 	}
 
 	public function testGetByNotSetIdThrowsException() {

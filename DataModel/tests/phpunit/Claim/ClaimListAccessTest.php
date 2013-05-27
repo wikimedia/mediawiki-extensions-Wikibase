@@ -35,7 +35,7 @@ use Wikibase\ClaimListAccess;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimListAccessTest extends \MediaWikiTestCase {
+class ClaimListAccessTest extends \PHPUnit_Framework_TestCase {
 
 	public function claimTestProvider() {
 		$claims = array();
