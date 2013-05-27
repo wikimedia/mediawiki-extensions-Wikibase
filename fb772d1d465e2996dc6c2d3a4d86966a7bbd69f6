@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "Dxtd5dC0",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-27T21:01:05Z",
+      "side": 1,
+      "message": "Cause the client needs it to create a new object and inject it and the repo needs to run self::run",
+      "parentUuid": "DxtfulO0",
+      "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxrfrCN0",
         "filename": "lib/includes/UpdateRepoOnMoveJob.php",
         "patchSetId": 3
@@ -81,6 +99,24 @@
       "writtenOn": "2013-05-27T20:44:48Z",
       "side": 1,
       "message": "This does not belong in this class.",
+      "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxrd2aDo",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-27T21:01:05Z",
+      "side": 1,
+      "message": "Should I just use __construct with $params directly then and have this logic in a new class together with the one currently in the hooks file?",
+      "parentUuid": "Dxhe5HOo",
       "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
