@@ -2,6 +2,108 @@
   "comments": [
     {
       "key": {
+        "uuid": "DxrfEqGI",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-27T20:44:48Z",
+      "side": 1,
+      "message": "Same as the blow comment - if you add new things here, we want it to no longer be procedural and untested",
+      "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxtfHtGU",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-27T20:44:48Z",
+      "side": 1,
+      "message": "This is all procedural code. Put into class(es) and add tests.",
+      "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxtfulO0",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-27T20:44:48Z",
+      "side": 1,
+      "message": "why is this in lib?",
+      "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxrfrCN0",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-27T20:44:48Z",
+      "side": 1,
+      "message": "\"Old title\" is not adding value and thus only clutters",
+      "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxhe5HOo",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-27T20:44:48Z",
+      "side": 1,
+      "message": "This does not belong in this class.",
+      "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxve9kNU",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-27T20:44:48Z",
+      "side": 1,
+      "message": "This method is deprecated.\n\n$site \u003d new MediaWikiSite();\n$site-\u003esetGlobalId( $globalId );",
+      "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxlE8VN8",
         "filename": "lib/includes/UpdateRepoOnMoveJob.php",
         "patchSetId": 3
@@ -13,6 +115,24 @@
       "writtenOn": "2013-05-26T23:08:36Z",
       "side": 1,
       "message": "This function probably is to large/ complex and could need some tests...",
+      "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxnfKIHE",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-27T20:44:48Z",
+      "side": 1,
+      "message": "Yes, basically all logic belonging to this class now resides in one method. Our current guidelines are full test coverage, so try to get close to that.",
+      "parentUuid": "DxlE8VN8",
       "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
