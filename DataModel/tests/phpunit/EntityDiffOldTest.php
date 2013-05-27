@@ -36,7 +36,7 @@ use Wikibase\EntityDiff;
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
  */
 
-abstract class EntityDiffOldTest extends \MediaWikiTestCase {
+abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 
 	private static function newEntity ( $entityType ) {
 		switch ( $entityType ) {
@@ -158,9 +158,9 @@ abstract class EntityDiffOldTest extends \MediaWikiTestCase {
 	public function testApply( Entity $a, Entity $b ) {
 		$a->patch( $a->getDiff( $b ) );
 
-		$this->assertArrayEquals( $a->getLabels(), $b->getLabels() );
-		$this->assertArrayEquals( $a->getDescriptions(), $b->getDescriptions() );
-		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
+		$this->assertEquals( $a->getLabels(), $b->getLabels() );
+		$this->assertEquals( $a->getDescriptions(), $b->getDescriptions() );
+		$this->assertEquals( $a->getAllAliases(), $b->getAllAliases() );
 	}
 
 	public static function provideConflictDetection() {

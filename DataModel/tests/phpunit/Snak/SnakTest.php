@@ -35,7 +35,7 @@ use Wikibase\Snak;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakTest extends \MediaWikiTestCase {
+class SnakTest extends \PHPUnit_Framework_TestCase {
 
 	public function snakProvider() {
 		$snaks = array();
@@ -56,7 +56,13 @@ class SnakTest extends \MediaWikiTestCase {
 			$snaks[] = new \Wikibase\PropertyValueSnak( $id42, $value );
 		}
 
-		return $this->arrayWrap( $snaks );
+		$argLists = array();
+
+		foreach ( $snaks as $snak ) {
+			$argLists[] = array( $snak );
+		}
+
+		return $argLists;
 	}
 
 	/**

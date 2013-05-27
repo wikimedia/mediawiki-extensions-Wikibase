@@ -66,43 +66,6 @@ class PropertyTest extends EntityTest {
 		return Property::newFromArray( $data );
 	}
 
-	public function testGetDataType() {
-		$property = $this->getNewEmpty();
-
-		$pokemons = null;
-
-		try {
-			$property->getDataType();
-		}
-		catch ( \Exception $pokemons ) {}
-
-		$this->assertInstanceOf( '\MWException', $pokemons );
-
-		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
-			$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-			$dataType = $libRegistry->getDataTypeFactory()->getType( $dataTypeId );
-
-			$property->setDataType( $dataType );
-
-			$this->assertInstanceOf( '\DataTypes\DataType', $property->getDataType() );
-		}
-	}
-
-	public function testSetDataType() {
-		$property = $this->getNewEmpty();
-
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-		$dataTypeFactory = $libRegistry->getDataTypeFactory();
-
-		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
-			$dataType = $dataTypeFactory->getType( $dataTypeId );
-
-			$property->setDataType( $dataType );
-
-			$this->assertEquals( $dataType, $property->getDataType() );
-		}
-	}
-
 	public function propertyProvider() {
 		$objects = array();
 
@@ -141,8 +104,7 @@ class PropertyTest extends EntityTest {
 
 		$argLists[] = array( clone $property, new EntityId( Item::ENTITY_TYPE, 9001 ) );
 
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-		$property->setDataType( $libRegistry->getDataTypeFactory()->getType( 'commonsMedia' ) );
+		$property->setDataTypeId( 'commonsMedia' );
 
 		return $argLists;
 	}

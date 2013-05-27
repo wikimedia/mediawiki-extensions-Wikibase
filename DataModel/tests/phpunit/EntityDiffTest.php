@@ -32,7 +32,7 @@ use Wikibase\EntityDiff;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityDiffTest extends \MediaWikiTestCase {
+class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 
 	public function isEmptyProvider() {
 		$argLists = array();
@@ -105,7 +105,13 @@ class EntityDiffTest extends \MediaWikiTestCase {
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		return $this->arrayWrap( $diffs );
+		$argLists = array();
+
+		foreach ( $diffs as $diff ) {
+			$argLists[] = array( $diff );
+		}
+
+		return $argLists;
 	}
 
 	/**

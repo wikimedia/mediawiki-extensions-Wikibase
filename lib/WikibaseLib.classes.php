@@ -34,7 +34,6 @@ return call_user_func( function() {
 
 		// includes
 		'Wikibase\Arrayalizer' => 'includes/Arrayalizer.php',
-		'Wikibase\ByPropertyIdArray' => 'includes/ByPropertyIdArray.php',
 		'Wikibase\ChangeNotifier' => 'includes/ChangeNotifier.php',
 		'Wikibase\ChangeNotificationJob' => 'includes/ChangeNotificationJob.php',
 		'Wikibase\ChangesTable' => 'includes/ChangesTable.php',
@@ -74,10 +73,8 @@ return call_user_func( function() {
 		'Wikibase\ClaimDifferenceVisualizer' => 'includes/ClaimDifferenceVisualizer.php',
 
 
-		'Wikibase\EntityDiff' => 'includes/EntityDiff.php',
 		'Wikibase\EntityDiffVisualizer' => 'includes/EntityDiffVisualizer.php',
 		'Wikibase\EntityFactory' => 'includes/EntityFactory.php',
-		'Wikibase\ItemDiff' => 'includes/ItemDiff.php',
 
 		// includes/formatters
 		'Wikibase\Lib\EntityIdFormatter' => 'includes/formatters/EntityIdFormatter.php',
@@ -145,7 +142,6 @@ return call_user_func( function() {
 		'Wikibase\Test\EntityChangeTest' => 'tests/phpunit/changes/EntityChangeTest.php',
 		'Wikibase\Test\TestChanges' => 'tests/phpunit/changes/TestChanges.php',
 
-		'Wikibase\Test\EntityDiffOldTest' => 'tests/phpunit/entity/EntityDiffOldTest.php',
 		'Wikibase\Test\EntityRefreshTest' => 'tests/phpunit/changes/EntityRefreshTest.php',
 		'Wikibase\Test\SerializerBaseTest' => 'tests/phpunit/serializers/SerializerBaseTest.php',
 		'Wikibase\Test\EntitySerializerBaseTest' => 'tests/phpunit/serializers/EntitySerializerBaseTest.php',

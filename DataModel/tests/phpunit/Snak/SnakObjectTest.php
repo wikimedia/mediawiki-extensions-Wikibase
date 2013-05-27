@@ -35,7 +35,7 @@ use Wikibase\Snak;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class SnakObjectTest extends \MediaWikiTestCase {
+abstract class SnakObjectTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Returns the name of the concrete class tested by this test.

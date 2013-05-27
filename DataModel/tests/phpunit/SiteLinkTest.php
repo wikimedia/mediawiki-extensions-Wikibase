@@ -36,7 +36,7 @@ use Wikibase\SiteLink;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteLinkTest extends \MediaWikiTestCase {
+class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider constructorProvider

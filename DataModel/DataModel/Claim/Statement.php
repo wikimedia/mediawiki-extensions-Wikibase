@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
+
 /**
  * Class representing a Wikibase statement.
  * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Statements
@@ -95,13 +97,13 @@ class Statement extends Claim {
 	 * @since 0.1
 	 *
 	 * @param integer $rank
-	 * @throws \MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function setRank( $rank ) {
 		$ranks = array( Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED );
 
 		if ( !in_array( $rank, $ranks, true ) ) {
-			throw new \MWException( 'Invalid rank specified for statement: ' . var_export( $rank, true ) );
+			throw new InvalidArgumentException( 'Invalid rank specified for statement: ' . var_export( $rank, true ) );
 		}
 
 		$this->rank = $rank;

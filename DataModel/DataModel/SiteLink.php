@@ -58,8 +58,6 @@ class SiteLink {
 			throw new \Exception( 'Support for $normalize parameter has been dropped' );
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		$site = Sites::singleton()->getSite( $globalSiteId );
 
 		if ( !$site ) {
@@ -77,10 +75,7 @@ class SiteLink {
 			$page = $normalized;
 		}
 
-		$link = new SiteLink( $site, $page );
-
-		wfProfileOut( __METHOD__ );
-		return $link;
+		return new SiteLink( $site, $page );
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -606,8 +606,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @return Entity
 	 */
 	public function copy() {
-		wfProfileIn( __METHOD__ );
-
 		$array = array();
 
 		foreach ( $this->toArray() as $key => $value ) {
@@ -616,7 +614,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 
 		$copy = new static( $array );
 
-		wfProfileOut( __METHOD__ );
 		return $copy;
 	}
 

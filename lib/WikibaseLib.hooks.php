@@ -36,13 +36,10 @@ final class LibHooks {
 			'claim/ClaimDifferenceVisualizer',
 			'claim/ClaimDiffer',
 
-			'entity/EntityDiff',
 			'entity/EntityFactory',
 
 			'formatters/EntityIdFormatter',
 			'formatters/EntityIdLabelFormatter',
-
-			'item/ItemDiff',
 
 			'parsers/EntityIdParser',
 
@@ -70,7 +67,6 @@ final class LibHooks {
 			'util/HttpAcceptParser',
 			'util/HttpAcceptNegotiator',
 
-			'ByPropertyIdArray',
 			'ChangesTable',
 			'ClaimDifference',
 			'ClaimGuidValidator',

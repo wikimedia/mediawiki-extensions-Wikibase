@@ -34,7 +34,7 @@ use Wikibase\EntityId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class EntityIdTest extends \MediaWikiTestCase {
+class EntityIdTest extends \PHPUnit_Framework_TestCase {
 
 	public function constructorProvider() {
 		$argLists = array();

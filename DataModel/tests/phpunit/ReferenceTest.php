@@ -39,7 +39,7 @@ use Wikibase\Snaks;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ReferenceTest extends \MediaWikiTestCase {
+class ReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	public function snakListProvider() {
 		$snakLists = array();
@@ -56,7 +56,13 @@ class ReferenceTest extends \MediaWikiTestCase {
 			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 3 ) )
 		) );
 
-		return $this->arrayWrap( $snakLists );
+		$argLists = array();
+
+		foreach ( $snakLists as $snakList ) {
+			$argLists[] = array( $snakList );
+		}
+
+		return $argLists;
 	}
 
 	public function instanceProvider() {
@@ -69,7 +75,13 @@ class ReferenceTest extends \MediaWikiTestCase {
 			new StringValue( 'a' )
 		) ) ) );
 
-		return $this->arrayWrap( $references );
+		$argLists = array();
+
+		foreach ( $references as $reference ) {
+			$argLists[] = array( $reference );
+		}
+
+		return $argLists;
 	}
 
 	/**
