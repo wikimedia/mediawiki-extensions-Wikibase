@@ -16,6 +16,40 @@
       "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxlQGAiA",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-27T00:13:35Z",
+      "side": 1,
+      "message": "Throw an exception instead?",
+      "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxvQA7gU",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-27T00:13:35Z",
+      "side": 1,
+      "message": "@FIXME: Test that it\u0027s still there",
+      "revId": "fb772d1d465e2996dc6c2d3a4d86966a7bbd69f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
