@@ -81,35 +81,11 @@ class PropertyValueSnakTest extends SnakObjectTest {
 
 		$argLists[] = array( clone $property, new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 9001 ) );
 
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-		$property->setDataType( $libRegistry->getDataTypeFactory()->getType( 'commonsMedia' ) );
+		$property->setDataTypeId( 'commonsMedia' );
 
 		$argLists[] = array( clone $property, new \DataValues\StringValue( 'https://commons.wikimedia.org/wiki/Wikidata' ) );
 
 		return $argLists;
-	}
-
-	/**
-	 * @dataProvider newFromPropertyValueProvider
-	 */
-	public function testNewFromPropertyValue( \Wikibase\Property $property, \DataValues\DataValue $dataValue ) {
-		if ( !class_exists( '\Wikibase\PropertyContent' ) ) {
-			$this->markTestSkipped( 'PropertyContent class not found' );
-		}
-
-		// We need to make sure the property exists since otherwise
-		// we cannot obtain it based on id in the method being tested.
-		$content = \Wikibase\PropertyContent::newFromProperty( $property );
-		$content->save();
-
-		$instance = PropertyValueSnak::newFromPropertyValue(
-			$property->getId(),
-			$dataValue->getArrayValue()
-		);
-
-		$this->assertInstanceOf( '\Wikibase\PropertyValueSnak', $instance );
-		$this->assertTrue( $instance->getDataValue()->equals( $dataValue ) );
-		$this->assertEquals( $property->getId(), $instance->getPropertyId() );
 	}
 
 }

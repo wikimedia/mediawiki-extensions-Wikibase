@@ -34,7 +34,7 @@ use Wikibase\Item;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ItemMultilangTextsTest extends \MediaWikiTestCase {
+class ItemMultilangTextsTest extends \PHPUnit_Framework_TestCase {
 
 	//@todo: make this a baseclass to use with all types of entitites.
 	

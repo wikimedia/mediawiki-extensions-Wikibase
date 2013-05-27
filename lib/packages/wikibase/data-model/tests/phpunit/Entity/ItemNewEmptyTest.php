@@ -38,7 +38,7 @@ use Wikibase\SiteLink;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ItemNewEmptyTest extends \MediaWikiTestCase {
+class ItemNewEmptyTest extends \PHPUnit_Framework_TestCase {
 
 	//@todo: make this a baseclass to use with all types of entitites.
 

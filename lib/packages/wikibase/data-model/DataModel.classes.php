@@ -53,8 +53,11 @@ return call_user_func( function() {
 		'Wikibase\SnakRole' => 'DataModel/Snak/SnakRole.php',
 		'Wikibase\Snaks' => 'DataModel/Snak/Snaks.php',
 
+		'Wikibase\ByPropertyIdArray' => 'DataModel/ByPropertyIdArray.php',
+		'Wikibase\EntityDiff' => 'DataModel/EntityDiff.php',
 		'Wikibase\HashableObjectStorage' => 'DataModel/HashableObjectStorage.php',
 		'Wikibase\HashArray' => 'DataModel/HashArray.php',
+		'Wikibase\ItemDiff' => 'DataModel/ItemDiff.php',
 		'Wikibase\MapHasher' => 'DataModel/MapHasher.php',
 		'Wikibase\MapValueHasher' => 'DataModel/MapValueHasher.php',
 		'Wikibase\Reference' => 'DataModel/Reference.php',

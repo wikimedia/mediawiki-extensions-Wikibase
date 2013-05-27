@@ -39,7 +39,7 @@ use Wikibase\Snaks;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimTest extends \MediaWikiTestCase {
+class ClaimTest extends \PHPUnit_Framework_TestCase {
 
 	public function constructorProvider() {
 		$argLists = array();
@@ -160,7 +160,7 @@ class ClaimTest extends \MediaWikiTestCase {
 	 */
 	public function testGetGuid( Claim $claim ) {
 		$guid = $claim->getGuid();
-		$this->assertTypeOrValue( 'string', $guid, null );
+		$this->assertTrue( $guid === null || is_string( $guid ) );
 		$this->assertEquals( $guid, $claim->getGuid() );
 
 		$claim->setGuid( 'foobar' );
@@ -190,14 +190,11 @@ class ClaimTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetHashStability() {
-		$guidGenerator = new \Wikibase\Lib\ClaimGuidGenerator( new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 31 ) );
-		$guid = $guidGenerator->newGuid();
-
 		$claim0 = new Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$claim0->setGuid( $guid );
+		$claim0->setGuid( 'claim0' );
 
 		$claim1 = new Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$claim1->setGuid( $guid );
+		$claim1->setGuid( 'claim1' );
 
 		$this->assertEquals( $claim0->getHash(), $claim1->getHash() );
 	}

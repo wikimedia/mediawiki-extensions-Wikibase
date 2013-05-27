@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use Wikibase\EntityId;
+use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
@@ -52,20 +54,20 @@ class SnakListTest extends HashArrayTest {
 	 * @see GenericArrayObjectTest::elementInstancesProvider
 	 */
 	public function elementInstancesProvider() {
-		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id42 = new EntityId( Property::ENTITY_TYPE, 42 );
 
-		$instances = array(
-			new PropertyNoValueSnak( $id42 ),
-			new PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 9001 ) ),
-			new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
-		);
+		$argLists = array();
 
-		return $this->arrayWrap( $this->arrayWrap( $instances ) );
+		$argLists[] = array( array( new PropertyNoValueSnak( $id42 ) ) );
+		$argLists[] = array( array( new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 9001 ) ) ) );
+		$argLists[] = array( array( new PropertyValueSnak( $id42, new StringValue( 'a' ) ) ) );
+
+		return $argLists;
 	}
 
 	public function constructorProvider() {
-		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
-		$id9001 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 9001 );
+		$id42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$id9001 = new EntityId( Property::ENTITY_TYPE, 9001 );
 
 		return array(
 			array(),
@@ -130,7 +132,7 @@ class SnakListTest extends HashArrayTest {
 			$this->assertEquals( --$elementCount, $array->count() );
 		}
 
-		$element = new PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) );
+		$element = new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) );
 
 		$array->removeSnak( $element );
 		$array->removeSnakHash( $element->getHash() );

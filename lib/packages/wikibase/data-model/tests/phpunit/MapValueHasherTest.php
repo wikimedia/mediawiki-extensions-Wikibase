@@ -18,19 +18,11 @@ use Wikibase\MapValueHasher;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapValueHasherTest extends \MediaWikiTestCase {
+class MapValueHasherTest extends \PHPUnit_Framework_TestCase {
 
-	public function constructorProvider() {
-		return $this->arrayWrap( array( false, true ) );
-	}
-
-	/**
-	 * @dataProvider constructorProvider
-	 */
-	public function testConstructor( $arg0 ) {
-		$hasher = new MapValueHasher( $arg0 );
-
-		$this->assertInstanceOf( '\Wikibase\MapHasher', $hasher );
+	public function testCanConstructor() {
+		new MapValueHasher( true );
+		$this->assertTrue( true );
 	}
 
 	public function testHash() {

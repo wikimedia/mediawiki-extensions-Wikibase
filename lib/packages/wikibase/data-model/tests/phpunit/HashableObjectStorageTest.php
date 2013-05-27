@@ -35,7 +35,7 @@ use Wikibase\Hashable;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class HashableObjectStorageTest extends \MediaWikiTestCase {
+class HashableObjectStorageTest extends \PHPUnit_Framework_TestCase {
 
 	public function testRemoveDuplicates() {
 		$list = new HashableObjectStorage();
