@@ -7,7 +7,7 @@ use Wikibase\QueryEngine\SQLStore\DataValueHandlers;
 use Wikibase\QueryEngine\SQLStore\StoreConfig;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\StoreConfig class.
+ * @covers Wikibase\QueryEngine\SQLStore\StoreConfig
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

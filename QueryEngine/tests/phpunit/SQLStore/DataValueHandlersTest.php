@@ -5,7 +5,7 @@ namespace Wikibase\QueryEngine\Tests\SQLStore;
 use Wikibase\QueryEngine\SQLStore\DataValueHandlers;
 
 /**
- * Unit tests for the Wikibase\QueryEngine\SQLStore\DataValueHandlers class.
+ * @covers Wikibase\QueryEngine\SQLStore\DataValueHandlers
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
