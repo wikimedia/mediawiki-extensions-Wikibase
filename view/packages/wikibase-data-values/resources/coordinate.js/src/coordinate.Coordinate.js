@@ -7,6 +7,7 @@
  * @licence GNU GPL v2+
  *
  * @author Denny Vrandečić
+ * @author H. Snater < mediawiki@snater.com >
  *
  * @dependency coordinate
  * @dependency coordinate.parser
@@ -14,56 +15,184 @@
 coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 	'use strict';
 
-	var Coordinate = function Coordinate( inputtext, inputprecision ) {
-		var result = [0, 0, 0];
+	/**
+	 * Constructor for an object representing a coordinate with a certain precision.
+	 *
+	 * @param {string} rawInput
+	 * @param {Object} options
+	 *        {number} precision: Precision which will overrule the automatically detected
+	 *        precision.
+	 *
+	 * @throws {Error} If input text could not be parsed.
+	 *
+	 * @constructor
+	 */
+	var Coordinate = function Coordinate( rawInput, options ) {
+		var parsed;
 
-		this.getInputtext = function() { return inputtext; };
+		options = options || {};
 
 		try {
-			result = coordinateParser.parse( inputtext );
-		} catch ( err ) {
-			result = [0, 0, 0];
-			this.error = err.toString();
+			parsed = coordinateParser.parse( rawInput );
+		} catch( e ) {
+			throw new Error( 'Could not parse input: ' + e.toString() );
 		}
 
-		if ( Math.abs( result[0] ) > 90 || Math.abs( result[1] ) > 180 ) {
-			result = [0, 0, 0];
+		if ( Math.abs( this._latitude ) > 90 || Math.abs( this.longitude ) > 180 ) {
+			throw new Error( 'Invalid input' );
 		}
 
-		var latitude = result[0];
-		var longitude = result[1];
-		this.latitudeInternal = function() { return latitude; };
-		this.longitudeInternal = function() { return longitude; };
-	
-		var precision = ( inputprecision === undefined ) ? result[2] : inputprecision;
-		this.precisionInternal = function() { return precision; };
-		this.precisionText = function() { return coordinate.precisionText( precision ); };
-		this.precisionTextEarth = function() { return coordinate.precisionTextEarth( precision ); };
-
-		this.increasePrecision = function() {
-			precision = coordinate.increasePrecision( precision );
-			return precision;
-		};
-		this.decreasePrecision = function() {
-			precision = coordinate.decreasePrecision( precision );
-			return precision;
-		};
-
-		this.northsouth = function() {
-			return ( latitude < 0 ) ? coordinate.settings.south : coordinate.settings.north;
-		};
-		this.eastwest = function() {
-			return ( longitude < 0 ) ? coordinate.settings.west : coordinate.settings.east;
-		};
-
-		this.latitudeDegree = function() { return coordinate.toDegree( latitude, precision ); };
-		this.longitudeDegree = function() { return coordinate.toDegree( longitude, precision ); };
-		this.latitudeDecimal = function() { return coordinate.toDecimal( latitude, precision ); };
-		this.longitudeDecimal = function() { return coordinate.toDecimal( longitude, precision ); };
-		this.degreeText = function() { return coordinate.degreeText( latitude, longitude, precision ); };
-		this.decimalText = function() { return coordinate.decimalText( latitude, longitude, precision ); };
+		this._rawInput = rawInput;
+		this._latitude = parsed[0];
+		this._longitude = parsed[1];
+		this._precision = ( options.precision !== undefined ) ? options.precision : parsed[2];
 	};
 
-	return Coordinate; // expose coordinate.Coordinate
+	Coordinate.prototype = {
+		/**
+		 * Raw input
+		 * @type {string}
+		 */
+		_rawInput: null,
+
+		/**
+		 * Latitude (decimal)
+		 * @type {number}
+		 */
+		_latitude: null,
+
+		/**
+		 * Longitude (decimal)
+		 * @type {number}
+		 */
+		_longitude: null,
+
+		/**
+		 * Precision
+		 * @type {number}
+		 */
+		_precision: null,
+
+		/**
+		 * Returns the original (raw) input.
+		 *
+		 * @return {string}
+		 */
+		getRawInput: function() { return this._rawInput; },
+
+		/**
+		 * Returns the decimal latitude.
+		 *
+		 * @return {number}
+		 */
+		getLatitude: function() { return this._latitude; },
+
+		/**
+		 * Returns the decimal longitude.
+		 *
+		 * @return {number}
+		 */
+		getLongitude: function() { return this._longitude; },
+
+		/**
+		 * Returns the precision.
+		 *
+		 * @return {number}
+		 */
+		getPrecision: function() { return this._precision; },
+
+		/**
+		 * Sets the precision.
+		 *
+		 * @param {number} precision
+		 */
+		setPrecision: function( precision ) { this._precision = precision; },
+
+		/**
+		 * Increases the precision by one step.
+		 */
+		increasePrecision: function() {
+			this._precision = coordinate.increasePrecision( this._precision );
+		},
+
+		/**
+		 * Decreases the precision by one step.
+		 */
+		decreasePrecision: function() {
+			this._precision = coordinate.decreasePrecision( this._precision );
+		},
+
+		/**
+		 * Returns the precision text.
+		 *
+		 * @return {string}
+		 */
+		getPrecisionText: function() { return coordinate.precisionText( this._precision ); },
+
+		/**
+		 * Returns the precision text in a common unit.
+		 *
+		 * @return {string}
+		 */
+		getPrecisionTextEarth: function() {
+			return coordinate.precisionTextEarth( this._precision );
+		},
+
+		/**
+		 * Returns the latitude in degree.
+		 *
+		 * @return {Object}
+		 */
+		latitudeDegree: function() {
+			return coordinate.toDegree( this._latitude, this._precision );
+		},
+
+		/**
+		 * Returns the longitude in degree.
+		 *
+		 * @return {Object}
+		 */
+		longitudeDegree: function() {
+			return coordinate.toDegree( this._longitude, this._precision );
+		},
+
+		/**
+		 * Returns the decimal latitude.
+		 *
+		 * @return {Object}
+		 */
+		latitudeDecimal: function() {
+			return coordinate.toDecimal( this._latitude, this._precision );
+		},
+
+		/**
+		 * Returns the decimal longitude.
+		 *
+		 * @return {Object}
+		 */
+		longitudeDecimal: function() {
+			return coordinate.toDecimal( this._longitude, this._precision );
+		},
+
+		/**
+		 * Returns the coordinate as text in degree.
+		 *
+		 * @return {string}
+		 */
+		degreeText: function() {
+			return coordinate.degreeText( this._latitude, this._longitude, this._precision );
+		},
+
+		/**
+		 * Returns the decimal coordinate as text.
+		 *
+		 * @return {string}
+		 */
+		decimalText: function() {
+			return coordinate.decimalText( this._latitude, this._longitude, this._precision );
+		}
+	};
+
+	return Coordinate;
 
 }( coordinate, coordinate.parser ) );

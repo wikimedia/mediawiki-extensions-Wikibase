@@ -214,7 +214,7 @@ coordinate.parser = ( function( coordinate ){
 							}
 						}
 						if (result2 !== null) {
-							if (input.substr(pos, 1).toUpperCase() === coordinate.settings.north()) {
+							if (input.substr(pos, 1).toUpperCase() === coordinate.settings.north) {
 								result3 = input.substr(pos, 1);
 								pos++;
 							} else {
@@ -225,7 +225,7 @@ coordinate.parser = ( function( coordinate ){
 							}
 							result3 = result3 !== null ? result3 : "";
 							if (result3 !== null) {
-								if (input.substr(pos, 1).toUpperCase() === coordinate.settings.south()) {
+								if (input.substr(pos, 1).toUpperCase() === coordinate.settings.south) {
 									result4 = input.substr(pos, 1);
 									pos++;
 								} else {
@@ -284,7 +284,7 @@ coordinate.parser = ( function( coordinate ){
 												}
 											}
 											if (result7 !== null) {
-												if (input.substr(pos, 1).toUpperCase() === coordinate.settings.east()) {
+												if (input.substr(pos, 1).toUpperCase() === coordinate.settings.east) {
 													result8 = input.substr(pos, 1);
 													pos++;
 												} else {
@@ -295,7 +295,7 @@ coordinate.parser = ( function( coordinate ){
 												}
 												result8 = result8 !== null ? result8 : "";
 												if (result8 !== null) {
-													if (input.substr(pos, 1).toUpperCase() === coordinate.settings.west()) {
+													if (input.substr(pos, 1).toUpperCase() === coordinate.settings.west) {
 														result9 = input.substr(pos, 1);
 														pos++;
 													} else {
