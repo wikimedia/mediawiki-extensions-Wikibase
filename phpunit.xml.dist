@@ -1,0 +1,26 @@
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="Database/tests/bootstrap.php"
+         cacheTokens="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="false"
+         convertWarningsToExceptions="true"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         strict="true"
+         verbose="true">
+    <testsuites>
+        <testsuite name="WikibaseDatabaseStandalone">
+            <directory>Database/tests/phpunit</directory>
+            <exclude>Database/tests/phpunit/MWDB</exclude>
+            <exclude>Database/tests/phpunit/MediaWikiQueryInterfaceTest.php</exclude>
+        </testsuite>
+        <testsuite name="WikibaseDatabaseMediaWiki">
+            <directory>Database/tests/phpunit/MWDB</directory>
+            <file>Database/tests/phpunit/MediaWikiQueryInterfaceTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>
