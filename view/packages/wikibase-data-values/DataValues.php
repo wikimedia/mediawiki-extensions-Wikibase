@@ -70,6 +70,9 @@ if ( defined( 'MEDIAWIKI' ) ) {
 }
 
 global $wgDataValues;
+/**
+ * @deprecated since 0.1 This is a global registry that provides no control over object lifecycle
+ */
 $wgDataValues = array();
 
 $wgDataValues['boolean'] = 'DataValues\BooleanValue';
