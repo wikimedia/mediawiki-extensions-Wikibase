@@ -50,45 +50,15 @@ if ( defined( 'MW_PHPUNIT_TEST' ) ) {
  */
 $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreStart
-	$testFiles = array(
-		'QueryEngineResult',
+	$directoryIterator = new RecursiveDirectoryIterator( __DIR__ . '/tests/phpunit/' );
 
-		'SQLStore/ClaimStore/ClaimInserter',
-		'SQLStore/ClaimStore/ClaimRowBuilder',
-		'SQLStore/ClaimStore/ClaimRow',
-		'SQLStore/ClaimStore/ClaimsTable',
-
-		'SQLStore/DVHandler/BooleanHandler',
-		'SQLStore/DVHandler/EntityIdHandler',
-		'SQLStore/DVHandler/GeoCoordinateHandler',
-		'SQLStore/DVHandler/IriHandler',
-		'SQLStore/DVHandler/MonolingualTextHandler',
-		'SQLStore/DVHandler/NumberHandler',
-		'SQLStore/DVHandler/StringHandler',
-
-		'SQLStore/Engine/Engine',
-
-		'SQLStore/SnakStore/SnakInserter',
-		'SQLStore/SnakStore/SnakRowBuilder',
-		'SQLStore/SnakStore/ValuelessSnakStore',
-		'SQLStore/SnakStore/ValueSnakRow',
-		'SQLStore/SnakStore/ValuelessSnakRow',
-		'SQLStore/SnakStore/ValueSnakStore',
-
-		'SQLStore/DataValueHandlers',
-		'SQLStore/DataValueHandler',
-		'SQLStore/EntityIdTransformer',
-		'SQLStore/EntityInserter',
-		'SQLStore/Factory',
-		'SQLStore/Schema',
-		'SQLStore/Setup',
-		'SQLStore/Store',
-		'SQLStore/StoreConfig',
-		'SQLStore/Writer',
-	);
-
-	foreach ( $testFiles as $file ) {
-		$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';
+	/**
+	 * @var SplFileInfo $fileInfo
+	 */
+	foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
+		if ( substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
+			$files[] = $fileInfo->getPathname();
+		}
 	}
 
 	$testFiles = array(
