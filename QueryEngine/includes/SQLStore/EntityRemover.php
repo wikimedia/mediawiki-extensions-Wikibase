@@ -5,6 +5,8 @@ namespace Wikibase\QueryEngine\SQLStore;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRemover;
+use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable;
+use Wikibase\QueryEngine\SQLStore\SnakStore\SnakRemover;
 
 /**
  * Use case for removing entities from the store.
@@ -34,18 +36,21 @@ use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRemover;
  */
 class EntityRemover {
 
-	private $claimRemover;
+	private $claimsTable;
 	private $idFinder;
+	private $snakRemover;
 
 	/**
 	 * @since 0.1
 	 *
-	 * @param ClaimRemover $claimRemover
+	 * @param ClaimsTable $claimsTable
+	 * @param SnakRemover $snakRemover
 	 * @param InternalEntityIdFinder $idFinder
 	 */
-	public function __construct( ClaimRemover $claimRemover, InternalEntityIdFinder $idFinder ) {
-		$this->claimRemover = $claimRemover;
+	public function __construct( ClaimsTable $claimsTable, SnakRemover $snakRemover, InternalEntityIdFinder $idFinder ) {
+		$this->claimsTable = $claimsTable;
 		$this->idFinder = $idFinder;
+		$this->snakRemover = $snakRemover;
 	}
 
 	/**
@@ -56,12 +61,8 @@ class EntityRemover {
 	public function removeEntity( Entity $entity ) {
 		$internalSubjectId = $this->getInternalId( $entity->getId() );
 
-		foreach ( $entity->getClaims() as $claim ) {
-			$this->claimRemover->removeClaim(
-				$claim,
-				$internalSubjectId
-			);
-		}
+		$this->claimsTable->removeClaimsOfSubject( $internalSubjectId );
+		$this->snakRemover->removeSnaksOfSubject( $internalSubjectId );
 
 		// TODO: obtain and remove virtual claims
 	}

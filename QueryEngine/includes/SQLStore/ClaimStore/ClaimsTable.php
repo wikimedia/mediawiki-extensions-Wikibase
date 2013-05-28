@@ -71,4 +71,13 @@ class ClaimsTable {
 		);
 	}
 
+	public function removeClaimsOfSubject( $internalSubjectId ) {
+		$this->queryInterface->delete(
+			$this->tableName,
+			array(
+				'subject_id' => $internalSubjectId
+			)
+		);
+	}
+
 }
