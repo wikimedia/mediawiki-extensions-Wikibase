@@ -2,7 +2,6 @@
 
 namespace Wikibase\QueryEngine\SQLStore;
 
-use Wikibase\Database\QueryInterface;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
