@@ -100,10 +100,15 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 */
 	protected function switchForm( $siteId, $page ) {
 
-		$group = \Wikibase\Settings::get( 'siteLinkGroup' );
-		$sites = \SiteSQLStore::newInstance()->getSites()->getGroup( $group );
+		$groups = \Wikibase\Settings::get( 'siteLinkGroups' );
+		$sites = \SiteSQLStore::newInstance()->getSites();
 
-		$siteExists = $sites->hasSite( $siteId );
+		if ( $sites->hasSite( $siteId ) ) {
+			$site = $sites->getSite( $siteId );
+			$siteExists = in_array( $site->getGroup(), $groups );
+		} else {
+			$siteExists = false;
+		}
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Site $siteId exists: " . var_export( $siteExists, true ) );
 

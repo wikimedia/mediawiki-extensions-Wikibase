@@ -41,13 +41,35 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForSiteLinks( EntityContent $item, Language $lang = null, $editable = true ) {
-		$siteLinks = $item->getItem()->getSiteLinks();
+		$groups = Settings::get( "siteLinkGroups" );
+		$html = '';
+
+		foreach ( $groups as $group ) {
+			$html .= $this->getHtmlForSiteLinkGroup( $item, $group, $lang, $editable );
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Builds and returns the HTML representing a group of a WikibaseEntity's site-links.
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityContent $item the entity to render
+	 * @param string $group a site group ID
+	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 * @return string
+	 */
+	public function getHtmlForSiteLinkGroup( EntityContent $item, $group, Language $lang = null, $editable = true ) {
+		$siteLinks = $item->getItem()->getSiteLinks( $group );
 		$html = $thead = $tbody = $tfoot = '';
 
 		$html .= wfTemplate(
 			'wb-section-heading',
-			wfMessage( 'wikibase-sitelinks' ), // heading
-			'sitelinks' // ID - TODO: should not be added if output page is not the entity's page
+			wfMessage( 'wikibase-sitelinks-' . $group ), // heading
+			'sitelinks-' . $group // ID - TODO: should not be added if output page is not the entity's page
 		);
 
 		if( !empty( $siteLinks ) ) {
@@ -107,7 +129,7 @@ class ItemView extends EntityView {
 					$languageCode,
 					$alternatingClass,
 					htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ), // TODO: get an actual site name rather then just the language
-					htmlspecialchars( $languageCode ), // TODO: get an actual site id rather then just the language code
+					htmlspecialchars( $site->getGlobalId() ),
 					htmlspecialchars( $link->getUrl() ),
 					htmlspecialchars( $link->getPage() ),
 					$this->getHtmlForEditSection( $item, $lang, $editLink /* . '/' . $languageCode */, 'td' )

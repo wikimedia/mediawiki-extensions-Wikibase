@@ -58,11 +58,14 @@ final class TestItems {
 
 		$item = Item::newEmpty();
 
-		$group = \Wikibase\Settings::get( 'siteLinkGroup' );
-		$sites = \SiteSQLStore::newInstance()->getSites()->getGroup( $group );
+		$groups = \Wikibase\Settings::get( 'siteLinkGroups' );
 
-		if ( count( $sites ) > 1 ) {
-			$item->addSiteLink( new SiteLink( $sites->getIterator()->current(), 'spam' ) );
+		foreach ( $groups as $group ) {
+			$sites = \SiteSQLStore::newInstance()->getSites()->getGroup( $group );
+
+			if ( count( $sites ) > 1 ) {
+				$item->addSiteLink( new SiteLink( $sites->getIterator()->current(), 'spam' ) );
+			}
 		}
 
 		//$items[] = $item;
