@@ -1,6 +1,6 @@
 /**
- * JavaScript for 'wikibase' extension, initializing some stuff when ready
- * @todo: this might not be necessary or only for ui stuff when we add more js modules!
+ * JavaScript for 'wikibase' extension, initializing some stuff when ready. This is the main
+ * entry point for initializing edit tools for editing entities on entity pages.
  *
  * @since 0.1
  * @file
@@ -8,10 +8,13 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
+ *
+ * TODO: Refactor this huge single function into smaller pieces of code.
  */
 
 ( function( $, mw, wb ) {
 	'use strict';
+	/* jshint nonew: false */
 
 	$( document ).ready( function() {
 		// remove HTML edit links with links to special pages
@@ -25,8 +28,8 @@
 
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
 		if ( $( '.wb-firstHeading' ).length ) { // Special pages do not have a custom wb heading
-			var labelEditTool = new wb.ui.LabelEditTool( $( '.wb-firstHeading' )[0] );
-			var editableLabel = labelEditTool.getValues( true )[0]; // [0] will always be set
+			var labelEditTool = new wb.ui.LabelEditTool( $( '.wb-firstHeading' )[0] ),
+				editableLabel = labelEditTool.getValues( true )[0]; // [0] will always be set
 
 			// make sure we update the 'title' tag of the page when label changes
 			editableLabel.on( 'afterStopEditing', function() {
@@ -47,7 +50,7 @@
 		// add an edit tool for all properties in the data view:
 		$( '.wb-property-container' ).each( function() {
 			// TODO: Make this nicer when we have implemented the data model
-			if( $( this ).children( '.wb-property-container-key' ).attr( 'title') === 'description' ) {
+			if( $( this ).children( '.wb-property-container-key' ).attr( 'title' ) === 'description' ) {
 				new wb.ui.DescriptionEditTool( this );
 			} else {
 				new wb.ui.PropertyEditTool( this );
@@ -116,8 +119,10 @@
 			} ).appendTo( $claimsParent );
 
 			// add 'wb-claim' id to entity page's Claims heading:
-			var $claimsHeading = $( '.wb-claimlist' ).prev( '.wb-section-heading' ).first();
-			$claimsHeading.attr( 'id', 'claims' );
+			$( '.wb-claimlist' )
+				.prev( '.wb-section-heading' )
+				.first()
+				.attr( 'id', 'claims' );
 
 			// removing site links heading to rebuild it with value counter
 			$( 'table.wb-sitelinks' ).each( function() {
@@ -222,7 +227,6 @@
 
 				var toolbar = $activeToolbar.data( 'wb-toolbar' ),
 					$hideMessage = $( '<a/>', {
-						href: 'javascript:void(0);',
 						text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
 					} ).appendTo( $message );
 
@@ -246,7 +250,8 @@
 				var messageAnchor = new wb.ui.Toolbar.Label( $( '<span/>' ) );
 				messageAnchor.setTooltip( tooltip );
 
-				$hideMessage.on( 'click', function() {
+				$hideMessage.on( 'click', function( event ) {
+					event.preventDefault();
 					messageAnchor.removeTooltip();
 					$.cookie( cookieKey, messageText, { 'expires': null, 'path': '/' } );
 				} );
