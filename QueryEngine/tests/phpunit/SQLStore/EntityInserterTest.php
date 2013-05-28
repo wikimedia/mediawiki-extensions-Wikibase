@@ -69,8 +69,7 @@ class EntityInserterTest extends \PHPUnit_Framework_TestCase {
 		$idFinder->expects( $this->any() )
 			->method( 'getInternalIdForEntity' )
 			->with(
-				$entity->getId()->getEntityType(),
-				$entity->getId()->getNumericId()
+				$entity->getId()
 			)
 			->will( $this->returnValue( 1234 ) );
 

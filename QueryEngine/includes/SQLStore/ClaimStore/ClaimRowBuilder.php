@@ -53,10 +53,7 @@ class ClaimRowBuilder {
 	}
 
 	protected function getInternalIdFor( EntityId $entityId ) {
-		return $this->idFinder->getInternalIdForEntity(
-			$entityId->getEntityType(),
-			$entityId->getNumericId()
-		);
+		return $this->idFinder->getInternalIdForEntity( $entityId );
 	}
 
 }
