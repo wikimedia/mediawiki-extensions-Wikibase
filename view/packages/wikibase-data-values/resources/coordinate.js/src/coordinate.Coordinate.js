@@ -32,6 +32,10 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 
 		options = options || {};
 
+		if( !rawInput ) {
+			throw new Error( 'No input given' );
+		}
+
 		try {
 			parsed = coordinateParser.parse( rawInput );
 		} catch( e ) {
@@ -139,24 +143,6 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		},
 
 		/**
-		 * Returns the latitude in degree.
-		 *
-		 * @return {Object}
-		 */
-		latitudeDegree: function() {
-			return coordinate.toDegree( this._latitude, this._precision );
-		},
-
-		/**
-		 * Returns the longitude in degree.
-		 *
-		 * @return {Object}
-		 */
-		longitudeDegree: function() {
-			return coordinate.toDegree( this._longitude, this._precision );
-		},
-
-		/**
 		 * Returns the decimal latitude.
 		 *
 		 * @return {Object}
@@ -175,12 +161,21 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		},
 
 		/**
-		 * Returns the coordinate as text in degree.
+		 * Returns the latitude in degree.
 		 *
-		 * @return {string}
+		 * @return {Object}
 		 */
-		degreeText: function() {
-			return coordinate.degreeText( this._latitude, this._longitude, this._precision );
+		latitudeDegree: function() {
+			return coordinate.toDegree( this._latitude, this._precision );
+		},
+
+		/**
+		 * Returns the longitude in degree.
+		 *
+		 * @return {Object}
+		 */
+		longitudeDegree: function() {
+			return coordinate.toDegree( this._longitude, this._precision );
 		},
 
 		/**
@@ -190,7 +185,17 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 */
 		decimalText: function() {
 			return coordinate.decimalText( this._latitude, this._longitude, this._precision );
+		},
+
+		/**
+		 * Returns the coordinate as text in degree.
+		 *
+		 * @return {string}
+		 */
+		degreeText: function() {
+			return coordinate.degreeText( this._latitude, this._longitude, this._precision );
 		}
+
 	};
 
 	return Coordinate;
