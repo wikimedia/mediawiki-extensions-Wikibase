@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxqKzyEs",
+        "filename": "QueryEngine/includes/SQLStore/EntityRemover.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-05-28T10:31:04Z",
+      "side": 1,
+      "message": "not related to this change, but why doesn\u0027t idFinder not take EntityId as a parameter, but it needs to be broken out here? I am confused that EntityRemover needs to know about the internal structure of EntityId",
+      "revId": "cd02b17afa5ab3d0f11f6664eaf382652d1a5445",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
