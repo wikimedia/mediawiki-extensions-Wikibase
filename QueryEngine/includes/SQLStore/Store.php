@@ -119,7 +119,7 @@ class Store implements QueryStore {
 			$this->config,
 			$this->factory->getSchema(),
 			$this->queryInterface,
-			$this->tableBuilder,
+			$this->factory->getTableBuilder(),
 			$messageReporter
 		);
 	}
