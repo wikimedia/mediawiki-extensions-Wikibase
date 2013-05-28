@@ -42,6 +42,7 @@ if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 	case 'mwext-Wikibase-repo-tests':
 		require_once __DIR__ . '/repo/Wikibase.php';
 		require_once __DIR__ . '/Query/WikibaseQuery.php';
+		require_once __DIR__ . '/QueryEngine/QueryEngine.php';
 
 		require_once __DIR__ . '/repo/ExampleSettings.php';
 
