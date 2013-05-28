@@ -56,6 +56,45 @@ var coordinate = ( function() {
 		],
 
 		/**
+		 * Returns the given precision increased by one step.
+		 *
+		 * @param {number} precision
+		 * @return {number}
+		 */
+		increasePrecision: function( precision ) {
+			var index = this.precisionLevels.indexOf( precision );
+
+			if( index === this.precisionLevels.length - 1 || index === -1 ) {
+				var newPrecision = precision / 10;
+				return ( newPrecision < 1e-9 ) ? 1e-9 : newPrecision;
+			}
+
+			return this.precisionLevels[index + 1];
+		},
+
+		/**
+		 * Returns the given precision decreased by one step.
+		 *
+		 * @param {number} precision
+		 * @return {number}
+		 */
+		decreasePrecision: function( precision ) {
+			if( precision < 1e-9) {
+				return 1e-9;
+			}
+
+			var index = this.precisionLevels.indexOf( precision );
+
+			if( index === 0 ) {
+				return 180;
+			} else if( index < 0 ) {
+				return Math.min( precision * 10, 180 );
+			}
+
+			return this.precisionLevels[index-1];
+		},
+
+		/**
 		 * Returns a given precision as string.
 		 *
 		 * @param {number} precision
@@ -232,44 +271,6 @@ var coordinate = ( function() {
 				+ text( longDeg.minute, this.settings.minute )
 				+ text( longDeg.second, this.settings.second )
 				+ ( ( longitude < 0 ) ? this.settings.west : this.settings.east );
-		},
-
-		/**
-		 * Returns the given precision increased by one step.
-		 *
-		 * @param {number} precision
-		 * @return {number}
-		 */
-		increasePrecision: function( precision ) {
-			var index = this.precisionLevels.indexOf( precision );
-
-			if( ( index === this.precisionLevels.length - 1 ) || ( index < 0 ) ) {
-				var newPrecision = precision / 10;
-				return ( newPrecision < 1e-9 ) ? 0 : newPrecision;
-			}
-			return this.precisionLevels[index + 1];
-		},
-
-		/**
-		 * Returns the given precision decreased by one step.
-		 *
-		 * @param {number} precision
-		 * @return {number}
-		 */
-		decreasePrecision: function( precision ) {
-			if( precision === 0) {
-				return 1e-9;
-			}
-
-			var index = this.precisionLevels.indexOf( precision );
-
-			if( index === 0 ) {
-				return 180;
-			} else if( index < 0 ) {
-				return Math.min( precision * 10, 180 );
-			}
-
-			return this.precisionLevels[index-1];
 		}
 
 	};
