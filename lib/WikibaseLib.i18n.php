@@ -45,7 +45,7 @@ $messages['en'] = array(
 	'wikibase-error-ui-session-failure' => 'Your session has expired. Please log in again.',
 	'wikibase-error-ui-edit-conflict' => 'There is an edit conflict. Please reload and save again.',
 	'wikibase-replicationnote' => 'Please notice that it can take several minutes until the changes are visible on all wikis',
-	'wikibase-sitelinks' => 'List of pages linked to this item',
+	'wikibase-sitelinks-wikipedia' => 'Wikipedia pages linked to this item',
 	'wikibase-sitelinks-sitename-columnheading' => 'Language',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
 	'wikibase-sitelinks-link-columnheading' => 'Linked article',
@@ -108,8 +108,9 @@ Note that the default message says the user shall "reload and save", but after a
 Preceded by any one of the following messages:
 * {{msg-mw|Wikibase-linkitem-success-create}}
 * {{msg-mw|Wikibase-linkitem-success-link}}',
-	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
-Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#Item|item]].',
+	'wikibase-sitelinks-wikipedia' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
+Header messages for pages on different Wikipedias linked to this item. Similar messages can be created for each group of target sites, depending on configuration.
+See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#Item|item]].',
 	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.
 {{Identical|Language}}',
 	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.',

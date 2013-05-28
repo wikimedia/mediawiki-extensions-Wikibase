@@ -504,7 +504,8 @@ final class ClientHooks {
 			$namespaceChecker,
 			$repoLinker,
 			$entityIdParser,
-			Settings::get( 'enableSiteLinkWidget' )
+			Settings::get( 'enableSiteLinkWidget' ),
+			Settings::get( 'siteGroup' )
 		);
 
 		$action = \Action::getActionName( $skin->getContext() );
