@@ -25,7 +25,7 @@
 				'value': site.getName() + ' (' + site.getId() + ')'
 			} );
 		}
-		$( '#wb-itembytitle-sitename' ).suggester( { "source": siteList } );
+		$( '#wb-itembytitle-sitename' ).suggester( { 'source': siteList } );
 		// Hackety hack hack...
 		// On submit, replace human readable value like "English (en)" with actual sitename ("enwiki")
 		$( '#wb-itembytitle-form1' ).submit( function() {
