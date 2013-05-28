@@ -184,6 +184,10 @@ final class RepoHooks {
 			'api/RemoveReferences',
 			'api/SetClaim',
 
+			'changeop/ChangeOps',
+			'changeop/ChangeOpLabel',
+			'changeop/ChangeOpDescription',
+
 			'content/EntityContentFactory',
 			'content/EntityHandler',
 			'content/ItemContent',
