@@ -2,8 +2,11 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, User, Status, SiteList;
+use Wikibase\ChangeOps;
 
+use Wikibase\ChangeOpLabel;
+use Wikibase\ChangeOpDescription;
+use ApiBase, User, Status, SiteList;
 use Wikibase\SiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
@@ -95,6 +98,8 @@ class EditEntity extends ModifyEntity {
 		wfProfileIn( __METHOD__ );
 		$status = Status::newGood();
 		$summary = $this->createSummary( $params );
+		$entity = $entityContent->getEntity();
+		$changeOps = new ChangeOps();
 
 		if ( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
 			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
@@ -181,11 +186,16 @@ class EditEntity extends ModifyEntity {
 
 					foreach ( $list as $langCode => $arg ) {
 						$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
-						if ( array_key_exists( 'remove', $arg ) || $arg['value'] === "" ) {
-							$entityContent->getEntity()->removeLabel( $arg['language'] );
+
+						$language = $arg['language'];
+						$newLabel = Utils::trimToNFC( $arg['value'] );
+						$oldLabel = $entity->getLabel( $language );
+
+						if ( array_key_exists( 'remove', $arg ) || $newLabel === "" ) {
+							$changeOps->add( new ChangeOpLabel( $language, null ) );
 						}
 						else {
-							$entityContent->getEntity()->setLabel( $arg['language'], Utils::trimToNFC( $arg['value'] ) );
+							$changeOps->add( new ChangeOpLabel( $language, $newLabel ) );
 						}
 					}
 
@@ -204,11 +214,16 @@ class EditEntity extends ModifyEntity {
 
 					foreach ( $list as $langCode => $arg ) {
 						$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
-						if ( array_key_exists( 'remove', $arg ) || $arg['value'] === "" ) {
-							$entityContent->getEntity()->removeDescription( $arg['language'] );
+
+						$language = $arg['language'];
+						$newDescription = Utils::trimToNFC( $arg['value'] );
+						$oldDescription = $entity->getDescription( $language );
+
+						if ( array_key_exists( 'remove', $arg ) || $newDescription === "" ) {
+							$changeOps->add( new ChangeOpDescription( $language, null ) );
 						}
 						else {
-							$entityContent->getEntity()->setDescription( $arg['language'], Utils::trimToNFC( $arg['value'] ) );
+							$changeOps->add( new ChangeOpDescription( $language, $newDescription ) );
 						}
 					}
 
@@ -334,6 +349,8 @@ class EditEntity extends ModifyEntity {
 				}
 			}
 		}
+
+		$changeOps->apply( $entity );
 
 		// This is already done in createEntity
 		if ( $entityContent->isNew() ) {

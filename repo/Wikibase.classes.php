@@ -49,6 +49,10 @@ return call_user_func( function() {
 		'Wikibase\PropertyView' => 'includes/PropertyView.php',
 		'Wikibase\Summary' => 'includes/Summary.php',
 		'Wikibase\Repo\WikibaseRepo' => 'includes/WikibaseRepo.php',
+		'Wikibase\ChangeOps' => 'includes/changeop/ChangeOps.php',
+		'Wikibase\ChangeOp' => 'includes/changeop/ChangeOp.php',
+		'Wikibase\ChangeOpLabel' => 'includes/changeop/ChangeOpLabel.php',
+		'Wikibase\ChangeOpDescription' => 'includes/changeop/ChangeOpDescription.php',
 
 		// includes/actions
 		'Wikibase\HistoryEntityAction' => 'includes/actions/HistoryEntityAction.php',
