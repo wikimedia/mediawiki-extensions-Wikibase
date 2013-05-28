@@ -125,7 +125,7 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 		$namespaceChecker = $this->getNamespaceChecker();
 		$entityIdParser = $this->getEntityIdParser();
 
-		$repoItemLinkGenerator = new RepoItemLinkGenerator( $namespaceChecker, $repoLinker, $entityIdParser, true );
+		$repoItemLinkGenerator = new RepoItemLinkGenerator( $namespaceChecker, $repoLinker, $entityIdParser, true, 'wikipedia' );
 
 		$link = $repoItemLinkGenerator->getLink(
 			$title, $action, $isAnon, $noExternalLangLinks, $prefixedId

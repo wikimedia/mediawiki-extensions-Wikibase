@@ -399,7 +399,19 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @return \SiteList
 	 */
 	protected function getSiteLinkTargetSites() {
-		return \SiteSQLStore::newInstance()->getSites()->getGroup( Settings::get( 'siteLinkGroup' ) );
+		$sites = new \SiteList();
+		$groups = Settings::get( 'siteLinkGroups' );
+
+		$allSites = \SiteSQLStore::newInstance()->getSites();
+
+		/* @var \Site $site */
+		foreach ( $allSites as $site ) {
+			if ( in_array( $site->getGroup(), $groups ) ) {
+				$sites->append( $site );
+			}
+		}
+
+		return $sites;
 	}
 
 
