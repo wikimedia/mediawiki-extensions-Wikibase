@@ -350,3 +350,10 @@ $messages['zh-hans'] = array(
 	'datavalues-desc' => '表示各种类型的值的对象集合',
 	'version-datavalues' => 'DataValues',
 );
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Simon Shek
+ */
+$messages['zh-hant'] = array(
+	'version-datavalues' => 'DataValues',
+);
