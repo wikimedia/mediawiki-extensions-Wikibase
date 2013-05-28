@@ -187,6 +187,10 @@ final class RepoHooks {
 			'api/RemoveQualifiers',
 			'api/SetQualifier',
 
+			'changeop/ChangeOps',
+			'changeop/ChangeOpLabel',
+			'changeop/ChangeOpDescription',
+
 			'content/EntityContentFactory',
 			'content/EntityHandler',
 			'content/ItemContent',
