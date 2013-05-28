@@ -27,7 +27,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-define( 'WIKIBASE_Query', '0.1 alpha' );
+define( 'WIKIBASE_QUERYENGINE_VERSION', '0.1 alpha' );
 
 spl_autoload_register( function ( $className ) {
 	$className = ltrim( $className, '\\' );

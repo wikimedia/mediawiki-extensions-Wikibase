@@ -30,9 +30,18 @@
 
 global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks;
 
-//$wgExtensionCredits['other'][] = include( __DIR__ . '/DataModel.credits.php' );
+$wgExtensionCredits['wikibase'][] = array(
+	'path' => __DIR__,
+	'name' => 'Wikibase QueryEngine',
+	'version' => WIKIBASE_QUERYENGINE_VERSION,
+	'author' => array(
+		'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
+	),
+	'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_QueryEngine',
+	'descriptionmsg' => 'wikibasequeryegnine-desc'
+);
 
-//$wgExtensionMessagesFiles['WikibaseDataModel'] = __DIR__ . '/DataModel.i18n.php';
+$wgExtensionMessagesFiles['WikibaseQueryEngine'] = __DIR__ . '/QueryEngine.i18n.php';
 
 if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 	require_once __DIR__ . '/tests/testLoader.php';
