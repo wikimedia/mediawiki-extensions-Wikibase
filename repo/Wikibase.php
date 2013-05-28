@@ -114,6 +114,8 @@ $wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\Api\SetClaimValue';
 $wgAPIModules['wbsetreference'] 					= 'Wikibase\Api\SetReference';
 $wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
 $wgAPIModules['wbsetclaim'] 						= 'Wikibase\Api\SetClaim';
+$wgAPIModules['wbremovequalifiers']                 = 'Wikibase\Api\RemoveQualifiers';
+$wgAPIModules['wbsetqualifier']                     = 'Wikibase\Api\SetQualifier';
 
 // Special page registration
 $wgSpecialPages['NewItem'] 							= 'SpecialNewItem';
