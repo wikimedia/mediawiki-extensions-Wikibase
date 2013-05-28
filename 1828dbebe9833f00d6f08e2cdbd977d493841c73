@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DxqhPKTQ",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-28T17:36:24Z",
+      "side": 1,
+      "message": "I plan to refactor the widget for some time... but it\u0027s just not important right now. Probably I can do that until August",
+      "parentUuid": "DxsYAswY",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dxub7LxE",
         "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
         "patchSetId": 6
@@ -206,6 +224,24 @@
     },
     {
       "key": {
+        "uuid": "Dxui9sdU",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-28T17:36:24Z",
+      "side": 1,
+      "message": "Oh right...probably I was to tired while writing this :P",
+      "parentUuid": "DxsbXE0k",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dxoa.q-k",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.SnakTypeSelector.js",
         "patchSetId": 6
@@ -308,6 +344,24 @@
     },
     {
       "key": {
+        "uuid": "DxqgB6bM",
+        "filename": "lib/resources/wikibase.serialization/serialization.SerializerFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-28T17:36:24Z",
+      "side": 1,
+      "message": "Yes... renaming factoryMember probably is better",
+      "parentUuid": "Dxkadw1M",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxqbD5zo",
         "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.js",
         "patchSetId": 6
@@ -319,6 +373,24 @@
       "writtenOn": "2013-05-24T20:24:35Z",
       "side": 1,
       "message": "?",
+      "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxoj6Lbk",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-05-28T17:36:24Z",
+      "side": 1,
+      "message": "With that option jshint will not complain about function names like _normalize_fromCurrentResults which we have in here (and the names are IMO ok). But we don\u0027t want such names in general.",
+      "parentUuid": "DxqbD5zo",
       "revId": "1828dbebe9833f00d6f08e2cdbd977d493841c73",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
