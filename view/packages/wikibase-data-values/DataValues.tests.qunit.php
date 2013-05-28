@@ -83,6 +83,7 @@ return call_user_func( function() {
 		'coordinate.js.tests' => array(
 			'scripts' => array(
 				'resources/coordinate.js/tests/coordinate.tests.js',
+				'resources/coordinate.js/tests/coordinate.parser.tests.js',
 			),
 			'dependencies' => array(
 				'coordinate.js',
