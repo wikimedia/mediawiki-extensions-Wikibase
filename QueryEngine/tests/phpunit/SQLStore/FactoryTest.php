@@ -85,4 +85,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGetTableBuilderReturnType() {
+		$this->assertInstanceOf(
+			'Wikibase\Database\TableBuilder',
+			$this->newInstance()->getTableBuilder()
+		);
+	}
+
 }
