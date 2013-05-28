@@ -1,0 +1,105 @@
+<?php
+
+use Wikibase\ItemContent;
+
+namespace Wikibase\Test;
+
+use Diff\DiffOpChange;
+use Diff\DiffOpRemove;
+use Diff\DiffOpAdd;
+use Wikibase\ChangeOpLabel;
+use Wikibase\ChangeOpDescription;
+use Wikibase\ChangeOps;
+use Wikibase\ItemContent;
+
+/**
+ * @covers Wikibase\ChangeOps
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * @file
+ * @since 0.4
+ *
+ * @ingroup Wikibase
+ * @ingroup Test
+ *
+ * @group Wikibase
+ * @group WikibaseRepo
+ * @group ChangeOp
+ *
+ * @licence GNU GPL v2+
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ */
+class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
+
+	public function testEmptyChangeOps() {
+		$changeOps = new ChangeOps();
+		$this->assertEmpty( $changeOps->getChangeOps() );
+	}
+
+	/**
+	 * @return \Wikibase\ChangeOp[]
+	 */
+	public function changeOpProvider() {
+		$ops = array();
+		$ops[] = array ( new ChangeOpLabel( 'en', new DiffOpChange( 'myOld', 'myNew' ) ) );
+		$ops[] = array ( new ChangeOpDescription( 'de', new DiffOpChange( 'myOldDescr', 'myNewDescr' ) ) );
+		$ops[] = array ( new ChangeOpLabel( 'en', new DiffOpRemove( 'myOld' ) ) );
+		$ops[] = array ( new ChangeOpLabel( 'en', new DiffOpAdd( 'myNew' ) ) );
+
+		return $ops;
+	}
+
+	/**
+	 * @dataProvider changeOpProvider
+	 *
+	 * @param ChangeOp $changeOp
+	 */
+	public function testAdd( $changeOp ) {
+		$changeOps = new ChangeOps();
+		$changeOps->add( $changeOp );
+		$this->assertEquals( array( $changeOp ), $changeOps->getChangeOps() );
+	}
+
+	public function changeOpsProvider() {
+		$args = array();
+
+		$language = 'en';
+		$changeOps = new ChangeOps();
+		$changeOps->add( new ChangeOpLabel( $language, new DiffOpAdd( 'newLabel' ) ) );
+		$changeOps->add( new ChangeOpDescription( $language, new DiffOpAdd( 'newDescription' ) ) );
+		$args[] = array( $changeOps, $language, 'newLabel', 'newDescription' );
+
+		return $args;
+	}
+
+	/**
+	 * @dataProvider changeOpsProvider
+	 *
+	 * @param ChangeOps $changeOps
+	 * @param string $language
+	 * @param string $expectedLabel
+	 * @param string $expectedDescription
+	 */
+	public function testApply( $changeOps, $language, $expectedLabel, $expectedDescription ) {
+		$item = ItemContent::newEmpty();
+		$entity = $item->getEntity();
+
+		$changeOps->apply( $entity );
+		$this->assertEquals( $expectedLabel, $entity->getLabel( $language ) );
+		$this->assertEquals( $expectedDescription, $entity->getDescription( $language ) );
+	}
+
+}
