@@ -129,6 +129,7 @@ $messages['be-tarask'] = array(
  */
 $messages['bn'] = array(
 	'valueview-expert-emptyvalue-empty' => 'খালি',
+	'valueview-expert-timeinput-calendarhint' => '($1 ক্যালেন্ডার)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; $1-এ পরিবর্তন',
 	'valueview-preview-label' => 'যেটি হিসাবে প্রদর্শন করা হবে:',
 );
