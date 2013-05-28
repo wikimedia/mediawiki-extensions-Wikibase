@@ -5,5 +5,7 @@
 
 !.gitignore
 !.gitreview
+!.jshintrc
+!.jshintignore
 selenium/configuration.yml
 selenium/Gemfile.lock
