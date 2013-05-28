@@ -5,7 +5,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( wb, dv, $ ) {
+( function( wb, dv ) {
 	'use strict';
 
 	var PARENT = dv.DataValue;
@@ -76,9 +76,11 @@
 		 * @return String
 		 */
 		getPrefixedId: function( prefixMap ) {
+			var entityType = this._entityType;
+
 			// find prefix of this entity ID's entity type
 			for( var key in prefixMap ) {
-				if( prefixMap[ key ] === this._entityType ) {
+				if( prefixMap[ key ] === entityType ) {
 					return key + this.getNumericId();
 				}
 			}
@@ -154,4 +156,4 @@ wb.EntityId.TYPE = 'wikibase-entityid';
 
 dv.registerDataValue( wb.EntityId );
 
-}( wikibase, dataValues, jQuery ) );
+}( wikibase, dataValues ) );

@@ -62,7 +62,7 @@
 		/**
 		 * Overwrites the current set of snaks.
 		 *
-		  * @param {wb.Snak[]|wb.Snak|wb.SnakList} snaks
+		 * @param {wb.Snak[]|wb.Snak|wb.SnakList} snaks
 		 */
 		setSnaks: function( snaks ) {
 			this._snaks = new wb.SnakList( snaks );

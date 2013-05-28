@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( wb, dt, $ ) {
+( function( wb, dt ) {
 	'use strict';
 
 	var PARENT = wb.Entity;
@@ -80,4 +80,4 @@
 	 */
 	SELF.TYPE = 'property';
 
-}( wikibase, dataTypes, jQuery ) );
+}( wikibase, dataTypes ) );

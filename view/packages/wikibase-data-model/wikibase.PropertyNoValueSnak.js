@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( wb, $ ) {
+( function( wb ) {
 'use strict';
 
 var PARENT = wb.Snak;
@@ -26,4 +26,4 @@ var SELF = wb.PropertyNoValueSnak = wb.utilities.inherit( 'WbPropertyNoValueSnak
  */
 SELF.TYPE = 'novalue';
 
-}( wikibase, jQuery ) );
+}( wikibase ) );
