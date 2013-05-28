@@ -16,6 +16,24 @@
       "revId": "cd02b17afa5ab3d0f11f6664eaf382652d1a5445",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxoJXrFY",
+        "filename": "QueryEngine/includes/SQLStore/EntityRemover.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-28T12:15:33Z",
+      "side": 1,
+      "message": "Good question :)",
+      "parentUuid": "DxqKzyEs",
+      "revId": "cd02b17afa5ab3d0f11f6664eaf382652d1a5445",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
