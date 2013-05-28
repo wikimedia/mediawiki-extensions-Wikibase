@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Diff\CallbackListDiffer;
 use Diff\ListDiffer;
 
 use Content, Html;
@@ -135,10 +136,14 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		$diff = $old->getEntity()->getDiff( $new->getEntity() );
 		$langCode = $this->getContext()->getLanguage()->getCode();
 
+		$comparer = function( \Comparable $old, \Comparable $new ) {
+			return $old->equals( $new );
+		};
+
 		// TODO: derp inject the EntityDiffVisualizer
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
-			new ClaimDiffer( new ListDiffer() ),
+			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
 			new ClaimDifferenceVisualizer(
 				new WikiPageEntityLookup(),
 				$langCode,

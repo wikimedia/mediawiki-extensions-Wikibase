@@ -2,6 +2,7 @@
 
 namespace Wikibase\Api;
 
+use Diff\CallbackListDiffer;
 use MWException;
 use ApiBase;
 use Diff\ListDiffer;
@@ -53,7 +54,11 @@ class SetClaim extends ApiWikibase {
 	public function execute() {
 		$claim = $this->getClaimFromRequest();
 
-		$claimDiffer = new ClaimDiffer( new ListDiffer() );
+		$comparer = function( \Comparable $old, \Comparable $new ) {
+			return $old->equals( $new );
+		};
+
+		$claimDiffer = new ClaimDiffer( new CallbackListDiffer( $comparer ) );
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
 			$claimDiffer,

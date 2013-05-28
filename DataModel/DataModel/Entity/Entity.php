@@ -870,7 +870,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			function( Claim $firstClaim, Claim $secondClaim ) {
 				return $firstClaim->getHash() === $secondClaim->getHash();
 			}
-		)  );
+		) );
 
 		$claims = array();
 

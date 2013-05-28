@@ -2,9 +2,18 @@
 
 namespace Wikibase\Test;
 
+use Diff\CallbackListDiffer;
+use Diff\Diff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
+use Diff\DiffOpRemove;
 use Wikibase\ClaimDiffer;
 use Wikibase\ClaimDifference;
 use Wikibase\Claim;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\ReferenceList;
+use Wikibase\SnakList;
+use Wikibase\Statement;
 
 /**
  * Tests for the Wikibase\ClaimDiffer class.
@@ -42,11 +51,79 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 	public function diffClaimsProvider() {
 		$argLists = array();
 
-		$simpleClaim = new Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$noValueForP42 = new Statement( new PropertyNoValueSnak( 42 ) );
+		$noValueForP43 = new Statement( new PropertyNoValueSnak( 43 ) );
 
-		$argLists[] = array( $simpleClaim, $simpleClaim, new ClaimDifference() );
+		$argLists[] = array(
+			$noValueForP42,
+			$noValueForP42,
+			new ClaimDifference()
+		);
 
-		// TODO: more tests
+		$argLists[] = array(
+			$noValueForP42,
+			$noValueForP43,
+			new ClaimDifference( new DiffOpChange( new PropertyNoValueSnak( 42 ), new PropertyNoValueSnak( 43 ) ) )
+		);
+
+		$qualifiers = new SnakList( array( new PropertyNoValueSnak( 1 ) ) );
+		$withQualifiers = clone $noValueForP42;
+		$withQualifiers->setQualifiers( $qualifiers );
+
+		$argLists[] = array(
+			$noValueForP42,
+			$withQualifiers,
+			new ClaimDifference(
+				null,
+				new Diff( array(
+					new DiffOpAdd( new PropertyNoValueSnak( 1 ) )
+				), false )
+			)
+		);
+
+		$references = new ReferenceList( array( new PropertyNoValueSnak( 2 ) ) );
+		$withReferences = clone $noValueForP42;
+		$withReferences->setReferences( $references );
+
+		$argLists[] = array(
+			$noValueForP42,
+			$withReferences,
+			new ClaimDifference(
+				null,
+				null,
+				new Diff( array(
+					new DiffOpAdd( new PropertyNoValueSnak( 2 ) )
+				), false )
+			)
+		);
+
+		$argLists[] = array(
+			$withQualifiers,
+			$withReferences,
+			new ClaimDifference(
+				null,
+				new Diff( array(
+					new DiffOpRemove( new PropertyNoValueSnak( 1 ) )
+				), false ),
+				new Diff( array(
+					new DiffOpAdd( new PropertyNoValueSnak( 2 ) )
+				), false )
+			)
+		);
+
+		$noValueForP42Preferred = clone $noValueForP42;
+		$noValueForP42Preferred->setRank( Statement::RANK_PREFERRED );
+
+		$argLists[] = array(
+			$noValueForP42,
+			$noValueForP42Preferred,
+			new ClaimDifference(
+				null,
+				null,
+				null,
+				new DiffOpChange( Statement::RANK_NORMAL, Statement::RANK_PREFERRED )
+			)
+		);
 
 		return $argLists;
 	}
@@ -59,11 +136,23 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 	 * @param ClaimDifference $expected
 	 */
 	public function testDiffClaims( Claim $oldClaim, Claim $newClaim, ClaimDifference $expected ) {
-		$differ = new ClaimDiffer( new \Diff\ListDiffer() );
+		$comparer = function( \Comparable $old, \Comparable $new ) {
+			return $old->equals( $new );
+		};
+
+		$differ = new ClaimDiffer( new CallbackListDiffer( $comparer ) );
 		$actual = $differ->diffClaims( $oldClaim, $newClaim );
 
 		$this->assertInstanceOf( 'Wikibase\ClaimDifference', $actual );
-		$this->assertTrue( $expected->equals( $actual ), 'Expected equals actual' );
+
+		if ( !$expected->equals( $actual ) ) {
+			q($expected, $actual);
+		}
+
+		$this->assertTrue(
+			$expected->equals( $actual ),
+			'Diffing the claims results in the correct ClaimDifference'
+		);
 	}
 
 }
