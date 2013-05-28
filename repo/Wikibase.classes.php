@@ -85,6 +85,8 @@ return call_user_func( function() {
 		'Wikibase\Api\SetReference' => 'includes/api/SetReference.php',
 		'Wikibase\Api\RemoveReferences' => 'includes/api/RemoveReferences.php',
 		'Wikibase\Api\SetClaim' => 'includes/api/SetClaim.php',
+		'Wikibase\Api\RemoveQualifiers' => 'includes/api/RemoveQualifiers.php',
+		'Wikibase\Api\SetQualifier' => 'includes/api/SetQualifier.php',
 
 		// includes/content
 		'Wikibase\EntityContent' => 'includes/content/EntityContent.php',

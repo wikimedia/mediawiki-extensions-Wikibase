@@ -183,6 +183,8 @@ final class RepoHooks {
 			'api/SetReference',
 			'api/RemoveReferences',
 			'api/SetClaim',
+			'api/RemoveQualifiers',
+			'api/SetQualifier',
 
 			'content/EntityContentFactory',
 			'content/EntityHandler',

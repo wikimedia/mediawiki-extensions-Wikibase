@@ -40,14 +40,10 @@ if ( !defined( 'WIKIBASE_QUERY_VERSION' ) && defined( 'WB_EXPERIMENTAL_FEATURES'
 
 $dir = __DIR__ . '/../';
 
-$wgAutoloadClasses['Wikibase\Api\RemoveQualifiers'] 	= $dir . 'includes/api/RemoveQualifiers.php';
-$wgAutoloadClasses['Wikibase\Api\SetQualifier'] 		= $dir . 'includes/api/SetQualifier.php';
 $wgAutoloadClasses['Wikibase\Api\SetStatementRank']		= $dir . 'includes/api/SetStatementRank.php';
 
 unset( $dir );
 
-$wgAPIModules['wbremovequalifiers'] 				= 'Wikibase\Api\RemoveQualifiers';
-$wgAPIModules['wbsetqualifier'] 					= 'Wikibase\Api\SetQualifier';
 $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
 
 /**
@@ -63,9 +59,7 @@ $wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
 $wgHooks['UnitTestsList'][] = function( array &$files ) {
 	// @codeCoverageIgnoreStart
 	$testFiles = array(
-		'api/RemoveQualifiers',
 		'api/SetStatementRank',
-		'api/SetQualifier',
 	);
 
 	foreach ( $testFiles as $file ) {
