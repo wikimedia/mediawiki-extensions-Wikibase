@@ -44,4 +44,11 @@ abstract class SnakStore {
 	 */
 	public abstract function storeSnakRow( SnakRow $snakRow );
 
+	/**
+	 * @since 0.1
+	 *
+	 * @param int $internalSubjectId
+	 */
+	public abstract function removeSnaksOfSubject( $internalSubjectId );
+
 }
