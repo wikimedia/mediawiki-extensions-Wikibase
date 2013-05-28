@@ -30,13 +30,14 @@ var coordinate = ( function() {
 			degree: '°',
 			minute: '\'',
 			second: '"',
-			precisionTextDegree: 'to a degree',
-			precisionTextMinute: 'to an arcminute',
-			precisionTextSecond: 'to an arcsecond',
-			precisionTextDecisecond: 'to a tenth of an arcsecond',
-			precisionTextCentisecond: 'to the hundredth of an arcsecond',
-			precisionTextMillisecond: 'to the thousandth of an arcsecond',
-			precisionTextMaximal: 'maximal'
+			precisionTexts: [
+				{ precision: 1, text: 'to a degree' },
+				{ precision: 1 / 60, text: 'to an arcminute' },
+				{ precision: 1 / 3600, text: 'to an arcsecond' },
+				{ precision: 1 / 36000, text: 'to a tenth of an arcsecond' },
+				{ precision: 1 / 360000, text: 'to the hundredth of an arcsecond' },
+				{ precision: 1 / 3600000, text: 'to the thousandth of an arcsecond' }
+			]
 		},
 
 		/**
@@ -61,30 +62,28 @@ var coordinate = ( function() {
 		 * @return {string}
 		 */
 		precisionText: function( precision ) {
-			var text;
+			var precisionText;
 
-			if( Math.abs( precision - 1 ) < 0.0000001 ) {
-				text = this.settings.precisionTextDegree;
-			} else if( Math.abs(precision - 1 / 60 ) < 0.0000001 ) {
-				text = this.settings.precisionTextMinute;
-			} else if( Math.abs( precision - 1 / 3600 ) < 0.0000001 ) {
-				text = this.settings.precisionTextSecond;
-			} else if( Math.abs( precision - 1 / 36000 ) < 0.0000001 ) {
-				text = this.settings.precisionTextDecisecond;
-			} else if( Math.abs( precision - 1 / 360000 ) < 0.0000001 ) {
-				text = this.settings.precisionTextCentisecond;
-			} else if( Math.abs( precision - 1 / 3600000 ) < 0.0000001 ) {
-				text = this.settings.precisionTextMillisecond;
-			} else if( precision === 0 ) {
-				text = this.settings.precisionTextMaximal;
-			} else {
+			// Figure out if the precision is very close to a precision that can be expressed with a
+			// string:
+			for( var i in this.settings.precisionTexts ) {
+				if(
+					this.settings.precisionTexts.hasOwnProperty( i )
+					&& Math.abs( precision - this.settings.precisionTexts[i].precision ) < 0.0000001
+				) {
+					precisionText = this.settings.precisionTexts[i].text;
+				}
+			}
+
+			if( !precisionText ) {
 				if( precision < 9e-10 ) {
 					precision = 1e-9;
 				}
-				text = '&plusmn;' + precision + this.settings.degree;
+				// 0x000B1 is the plus/minus sign
+				precisionText = String.fromCharCode( 0x00B1 ) + precision + this.settings.degree;
 			}
 
-			return text;
+			return precisionText;
 		},
 
 		/**

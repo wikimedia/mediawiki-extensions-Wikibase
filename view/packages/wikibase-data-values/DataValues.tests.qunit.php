@@ -80,6 +80,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'coordinate.js.tests' => array(
+			'scripts' => array(
+				'resources/coordinate.js/tests/coordinate.tests.js',
+			),
+			'dependencies' => array(
+				'coordinate.js',
+			),
+		),
+
 		// tests of Time.js:
 		'time.js.tests' => array(
 			'scripts' => array(
