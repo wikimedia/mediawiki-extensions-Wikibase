@@ -40,17 +40,17 @@
 	 * @return Function
 	 */
 	function buildRegisterFn( store, type ) {
-		return function( factoryMember, constructor ) {
+		return function( FactoryMember, constructor ) {
 			if( !$.isFunction( constructor ) ) {
 				throw new Error( 'No constructor (function) given' );
 			}
-			if( !( ( new factoryMember() ) instanceof type ) ) {
+			if( !( ( new FactoryMember() ) instanceof type ) ) {
 				throw new Error( 'Given serializer is not an implementation of wb.serialization.Serializer' );
 			}
 
 			store.push( [
 				constructor,
-				factoryMember
+				FactoryMember
 			] );
 		};
 	}
@@ -77,7 +77,7 @@
 				}
 			}
 			throw new Error( 'No suitable ' + storeSubject + ' has been registered' );
-		}
+		};
 	}
 
 	$.extend( SELF.prototype, {
@@ -103,7 +103,7 @@
 				}
 				var constructorOfSerialized = $.isFunction( object ) ? object : object.constructor;
 				return lookupFn( constructorOfSerialized, options );
-			}
+			};
 		}() ),
 
 		/**
