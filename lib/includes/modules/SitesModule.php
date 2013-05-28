@@ -47,11 +47,15 @@ class SitesModule extends ResourceLoaderModule {
 	public function getScript( ResourceLoaderContext $context ) {
 		$sites = array();
 
+		$groups = Settings::get( "siteLinkGroups" );
+
 		/**
 		 * @var MediaWikiSite $site
 		 */
 		foreach ( \SiteSQLStore::newInstance()->getSites() as $site ) {
-			if ( $site->getType() === Site::TYPE_MEDIAWIKI && $site->getGroup() === 'wikipedia' ) {
+			$group = $site->getGroup();
+
+			if ( $site->getType() === Site::TYPE_MEDIAWIKI && in_array( $group, $groups ) ) {
 				$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
 
 				// Use protocol relative URIs, as it's safe to assume that all wikis support the same protocol
@@ -64,13 +68,17 @@ class SitesModule extends ResourceLoaderModule {
 					)
 				);
 
+				$localIds = $site->getLocalIds();
+				$name = empty( $localIds ) ? $site->getGlobalId() : $localIds[0];
+
 				$sites[$site->getLanguageCode()] = array(
 					'shortName' => $languageName,
-					'name' => $languageName,
+					'name' => $name,
 					'globalSiteId' => $site->getGlobalId(),
 					'pageUrl' => $pageUrl,
 					'apiUrl' => $apiUrl,
-					'languageCode' => $site->getLanguageCode()
+					'languageCode' => $site->getLanguageCode(),
+					'group' => $group
 				);
 			}
 		}
