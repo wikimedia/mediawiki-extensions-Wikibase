@@ -789,9 +789,9 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$source->addClaim( $claim0 );
 		$source->addClaim( $claim1 );
 		$patch = new EntityDiff( array( 'claim' => new Diff( array(
-			new DiffOpRemove( $claim0 ),
-			new DiffOpAdd( $claim2 ),
-			new DiffOpAdd( $claim3 )
+			'claim0' => new DiffOpRemove( $claim0 ),
+			'claim2' => new DiffOpAdd( $claim2 ),
+			'claim3' => new DiffOpAdd( $claim3 )
 		), false ) ) );
 		$expected = $this->getNewEmpty();
 		$expected->addClaim( $claim1 );
