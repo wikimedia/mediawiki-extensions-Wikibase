@@ -17,7 +17,7 @@
 		}
 
 		// this will build a drop-down for the language selection:
-		var siteList = new Array();
+		var siteList = [];
 		for ( var siteId in wb.getSites() ) {
 			var site = wb.getSite( siteId );
 			siteList.push( {
@@ -25,7 +25,7 @@
 				'value': site.getName() + ' (' + site.getId() + ')'
 			} );
 		}
-		$( '#wb-itembytitle-sitename' ).suggester( { "source": siteList } );
+		$( '#wb-itembytitle-sitename' ).suggester( { 'source': siteList } );
 		// Hackety hack hack...
 		// On submit, replace human readable value like "English (en)" with actual sitename ("enwiki")
 		$( '#wb-itembytitle-form1' ).submit( function() {
