@@ -44,7 +44,9 @@ return call_user_func( function() {
 			'p' => \Wikibase\Property::ENTITY_TYPE,
 		),
 
-		'siteLinkGroup' => 'wikipedia',
+		'siteLinkGroups' => array(
+			'wikipedia',
+		),
 
 		// local by default. Set to something LBFactory understands.
 		'changesDatabase' => false,

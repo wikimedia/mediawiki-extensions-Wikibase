@@ -9,7 +9,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 === Basic Settings ===
 
 ;changesDatabase: The database that changes are recorded to for processing by clients. This must be set to a symbolic database identifier that MediaWiki's LBFactory class understands; <code>false</code> means that the wiki's own database shall be used. '''Note''' that on the client, this setting should usually be the same as the <code>repoDatabase</code> setting.
-;siteLinkGroup: The site group to use in sitelinks. Must correspond to a value used to give the site group in the MediaWiki <code>sites</code> table. Default is "wikipedia". This defines which group of sites can be linked to Wikibase items. '''Note''' that this setting will likely change in the future to allow multiple groups to be configured.
+;siteLinkGroups: The site groups to use in sitelinks. Must correspond to a value used to give the site group in the MediaWiki <code>sites</code> table. Default is array( "wikipedia" ). This defines which groups of sites can be linked to Wikibase items. '''Note''' that this setting replaces the old ''siteLinkGroup'' setting, which only allowed for a single group.
 ;localClientDatabases: An array of locally accessible client databases, for use by the <code>dispatchChanges.php</code> script. This setting determines which wikis changes are pushed to directly. It must be given either as an associative array, mapping global site IDs to logical database names, or, of the database names are the same as the site IDs, as a list of databases. The default is an empty array, indicating no local client databases.
 
 === Expert Settings ===
@@ -87,7 +87,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;enableSiteLinkWidget: switch to enable or disable add site link widget. Defaults to <tt>false</tt>.
 
 === Expert Settings ===
-;siteGroup: This site's group ID, as used in the sites table. Default: <tt>'wikipedia'</tt>. '''Note:''' this setting will be removed once we can take this information from the sites table.
 ;injectRecentChanges: whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc. Requires the <code>dispatchChanges.php</code> script to run, and this wiki to be listed in the <code>localClientDatabases</code> setting on the repository.
 ;showExternalRecentChanges: whether changes on the repository should be displayed on Special:RecentChanges, Special:Watchlist, etc on the client wiki. In contrast to <code>injectRecentChanges</code>, this setting just removes the changes from the user interface. The default is <code>false</code>. This is intended to temporarily prevent external changes from showing in order to find or fix some issue on a live site.
 ;defaultClientStore: The storage engine to use for storing information on the client side. Default: <code>null</code>. Possible values:
