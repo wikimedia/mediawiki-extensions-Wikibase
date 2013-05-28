@@ -11,17 +11,9 @@
  *
  * @author Denny Vrandečić
  */
-( function( global ) {
+this.time = ( function() { // 'this' is global scope, e.g. 'window' in the browser and 'global' on the server
 
-	var time = {},
-		_oldTime = global.time;
-
-	global.time = time;
-
-	time.noConflict = function() {
-		global.time = _oldTime;
-		return time;
-	};
+	var time = {};
 
 	// TODO: get rid of global settings, inject them where required
 	var settings = {};
@@ -39,47 +31,50 @@
 	];
 	settings.daybeforemonth = true;
 
-	settings.monthnames = [];
-	settings.monthnames[0] = ['January', 'Jan'];
-	settings.monthnames[1] = ['February', 'Feb'];
-	settings.monthnames[2] = ['March', 'Mar'];
-	settings.monthnames[3] = ['April', 'Apr'];
-	settings.monthnames[4] = ['May'];
-	settings.monthnames[5] = ['June', 'Jun'];
-	settings.monthnames[6] = ['July', 'Jul'];
-	settings.monthnames[7] = ['August', 'Aug'];
-	settings.monthnames[8] = ['September', 'Sep'];
-	settings.monthnames[9] = ['October', 'Oct'];
-	settings.monthnames[10] = ['November', 'Nov'];
-	settings.monthnames[11] = ['December', 'Dec'];
+	settings.monthnames = [
+		[ 'January', 'Jan' ],
+		[ 'February', 'Feb' ],
+		[ 'March', 'Mar' ],
+		[ 'April', 'Apr' ],
+		[ 'May' ],
+		[ 'June', 'Jun' ],
+		[ 'July', 'Jul' ],
+		[ 'August', 'Aug' ],
+		[ 'September', 'Sep' ],
+		[ 'October', 'Oct' ],
+		[ 'November', 'Nov' ],
+		[ 'December', 'Dec' ]
+	];
 
-	settings.precisiontexts = [];
-	settings.precisiontexts[0] = 'billion years';
-	settings.precisiontexts[1] = 'hundred million years';
-	settings.precisiontexts[2] = 'ten million years';
-	settings.precisiontexts[3] = 'million years';
-	settings.precisiontexts[4] = '100,000 years';
-	settings.precisiontexts[5] = '10,000 years';
-	settings.precisiontexts[6] = 'millenium';
-	settings.precisiontexts[7] = 'century';
-	settings.precisiontexts[8] = 'decade';
-	settings.precisiontexts[9] = 'year';
-	settings.precisiontexts[10] = 'month';
-	settings.precisiontexts[11] = 'day';
-	settings.precisiontexts[12] = 'hour';
-	settings.precisiontexts[13] = 'minute';
-	settings.precisiontexts[14] = 'second';
+	settings.precisiontexts = [
+		'billion years',
+		'hundred million years',
+		'ten million years',
+		'million years',
+		'100,000 years',
+		'10,000 years',
+		'millenium',
+		'century',
+		'decade',
+		'year',
+		'month',
+		'day',
+		'hour',
+		'minute',
+		'second'
+	];
 
-	settings.outputprecision = [];
-	settings.outputprecision[0] = '% billion years';
-	settings.outputprecision[1] = '%00 million years';
-	settings.outputprecision[2] = '%0 million years';
-	settings.outputprecision[3] = '% million years';
-	settings.outputprecision[4] = '%00,000 years';
-	settings.outputprecision[5] = '%0,000 years';
-	settings.outputprecision[6] = '%. millenium';
-	settings.outputprecision[7] = '%. century';
-	settings.outputprecision[8] = '%0s';
+	settings.outputprecision = [
+		'% billion years',
+		'%00 million years',
+		'%0 million years',
+		'% million years',
+		'%00,000 years',
+		'%0,000 years',
+		'%. millenium',
+		'%. century',
+		'%0s'
+	];
 
 	var maxPrecision = function() {
 		return 14;
@@ -136,13 +131,13 @@
 	};
 
 	var julianToGregorian = function( year, month, day ) {
-		var julianday = julianToJulianDay( year, month, day );
-		return julianDayToGregorian( julianday );
+		var julianDay = julianToJulianDay( year, month, day );
+		return julianDayToGregorian( julianDay );
 	};
 
 	var gregorianToJulian = function( year, month, day ) {
-		var julianday = gregorianToJulianDay( year, month, day );
-		return julianDayToJulian( julianday );
+		var julianDay = gregorianToJulianDay( year, month, day );
+		return julianDayToJulian( julianDay );
 	};
 
 	var writeApproximateYear = function( year, precision ) {
@@ -182,7 +177,6 @@
 	};
 
 	var getTextFromDate = function( precision, year, month, day ) {
-		var retval = '';
 		if( year === null ) {
 			return '';
 		}
@@ -225,4 +219,5 @@
 
 	time.settings = settings;
 
-}( this ) ); // 'this' is global scope, i.e. 'window' in the browser and 'global' on the server
+	return time; // export
+}() );
