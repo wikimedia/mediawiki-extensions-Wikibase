@@ -5,6 +5,11 @@
 
 !.gitignore
 !.gitreview
+
+!.jshintrc
+!.jshintignore
+
 !.travis.yml
+
 selenium/configuration.yml
 selenium/Gemfile.lock
