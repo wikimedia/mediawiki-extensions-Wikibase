@@ -44,58 +44,41 @@ use Wikibase\QueryEngine\Tests\QueryStoreUpdaterTest;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WriterTest extends QueryStoreUpdaterTest {
+class WriterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @see QueryStoreUpdaterTest::getInstances
-	 *
-	 * @since 0.1
-	 *
-	 * @return Writer[]
+	 * @dataProvider entityProvider
 	 */
-	protected function getInstances() {
-		$instances = array();
-
+	public function testInsertEntityWithoutClaims( Entity $entity ) {
 		$entityInserter = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\EntityInserter' )
 			->disableOriginalConstructor()->getMock();
 
-		$instances[] = new Writer( $entityInserter );
+		$entityUpdater = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\EntityUpdater' )
+			->disableOriginalConstructor()->getMock();
 
-		return $instances;
+		$entityRemover = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\EntityRemover' )
+			->disableOriginalConstructor()->getMock();
+
+		$writer = new Writer( $entityInserter, $entityUpdater, $entityRemover );
+
+		$entityInserter->expects( $this->once() )->method( 'insertEntity' )->with( $this->equalTo( $entity ) );
+
+		$writer->insertEntity( $entity );
+
+		$entityUpdater->expects( $this->once() )->method( 'updateEntity' )->with( $this->equalTo( $entity ) );
+
+		$writer->updateEntity( $entity );
+
+		$entityRemover->expects( $this->once() )->method( 'removeEntity' )->with( $this->equalTo( $entity ) );
+
+		$writer->deleteEntity( $entity );
 	}
 
-	protected function newStoreSchema() {
-		$dataValueHandlers = array();
+	protected function getInstance() {
 
-		$dataValueHandlers['boolean'] = new BooleanHandler( new DataValueTable(
-			new TableDefinition(
-				'boolean',
-				array(
-					new FieldDefinition( 'value', FieldDefinition::TYPE_BOOLEAN, false ),
-				)
-			),
-			'value',
-			'value'
-		) );
-
-		$dataValueHandlers['monolingualtext'] = new MonolingualTextHandler( new DataValueTable(
-			new TableDefinition(
-				'mono_text',
-				array(
-					new FieldDefinition( 'text', FieldDefinition::TYPE_TEXT, false ),
-					new FieldDefinition( 'language', FieldDefinition::TYPE_TEXT, false ),
-					new FieldDefinition( 'json', FieldDefinition::TYPE_TEXT, false ),
-				)
-			),
-			'json',
-			'text',
-			'text'
-		) );
-
-		return new Schema( new StoreConfig( 'foobar', 'nyan_', $dataValueHandlers ) );
 	}
 
-	public function entityWithoutClaimsProvider() {
+	public function entityProvider() {
 		$argLists = array();
 
 		$item = Item::newEmpty();
@@ -117,22 +100,6 @@ class WriterTest extends QueryStoreUpdaterTest {
 		$argLists[] = array( $property );
 
 		return $argLists;
-	}
-
-	/**
-	 * @dataProvider entityWithoutClaimsProvider
-	 */
-	public function testInsertEntityWithoutClaims( Entity $entity ) {
-		$entityInserter = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\EntityInserter' )
-			->disableOriginalConstructor()->getMock();
-
-		$entityInserter->expects( $this->once() )
-			->method( 'insertEntity' )
-			->with( $this->equalTo( $entity ) );
-
-		$updater = new Writer( $entityInserter );
-
-		$updater->insertEntity( $entity );
 	}
 
 }
