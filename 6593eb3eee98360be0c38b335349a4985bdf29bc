@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "DxmRYpTA",
+        "filename": "DataModel/DataModel.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-29T19:51:59Z",
+      "side": 1,
+      "message": "This component is not particularly small. It is bigger then a lot of MW extensions.\n\nSpecial:Version is meant to list the versions of all software installed. Since this component has a version, it should be listed there.\n\nWe have 7 components in Wikibase right now, which is counting repo, lib and client. This might increase a little, but is not going to get to 50.\n\nI do not understand your last paragraph.\n\nIn any case, I want to be able to see which version of this component is installed. Right now I cannot do this. It is not because right now the version numbers of lib,repo,client and datamodel are all the same, that this will remain true. And keep in mind that DataModel does not depend on any of these. It can be used on its own, for instance by an extension that interacts with some wikibase repo and needs to represent entities. What if there is a bug there? How are the users going to report which version they are using? Look at the code?",
+      "parentUuid": "DxmmggEc",
+      "revId": "6593eb3eee98360be0c38b335349a4985bdf29bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxV-EXZM",
         "filename": "DataModel/DataModel.mw.php",
         "patchSetId": 1
