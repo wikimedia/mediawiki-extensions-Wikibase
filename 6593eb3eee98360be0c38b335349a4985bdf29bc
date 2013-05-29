@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "DxmmggEc",
+        "filename": "DataModel/DataModel.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-29T19:38:50Z",
+      "side": 1,
+      "message": "I am also against creating a separate extension for each tiny module. No strong opinion about Diff and Ask, they seem rather big, but this is clearly part of Wikibase and the separation of Lib, Repo and Client is more than enough already.\n\nVisitors of the Wiki will just get confused if there are tons of extensions displayed which do not really have a visible effect for the user.\n\nI could stuff each of our more generic jQuery widgets into its own extension. I could even stuff each resource loader module into its own extension and we would be above 50 extensions for Wikibase soon.\n\nIf you have separate components, put them into a separate directory and ship it with a separate file which does nothin than returning an array with the file names when included somewhere. That\u0027s flexible enough if someone really wants to use those components separately.",
+      "parentUuid": "DxYpaHEw",
+      "revId": "6593eb3eee98360be0c38b335349a4985bdf29bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxV-EXZM",
         "filename": "DataModel/DataModel.mw.php",
         "patchSetId": 1
