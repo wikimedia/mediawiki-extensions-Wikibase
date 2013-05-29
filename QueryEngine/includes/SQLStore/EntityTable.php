@@ -4,7 +4,6 @@ namespace Wikibase\QueryEngine\SQLStore;
 
 use Wikibase\Database\QueryInterface;
 use Wikibase\Entity;
-use Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimInserter;
 
 /**
  * Use case for inserting entities into the store.
