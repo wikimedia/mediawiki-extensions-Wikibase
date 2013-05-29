@@ -207,4 +207,35 @@
 
 	} );
 
+	QUnit.test( 'equals()', function( assert ) {
+		var c1, c2;
+
+		$.each( iso6709representations, function( inputString1, iso6709string1 ) {
+			c1 = new coordinate.Coordinate( inputString1 );
+
+			$.each( iso6709representations, function( inputString2, iso6709string2 ) {
+				c2 = new coordinate.Coordinate( inputString2 );
+
+				if( inputString1 === inputString2 && c1.isValid() && c2.isValid() ) {
+
+					assert.ok(
+						c1.equals( c2 ),
+						'Validated equality for \'' + inputString1 + '\'.'
+					);
+
+				} else {
+
+					assert.ok(
+						!c1.equals( c2 ),
+						'Validated inequality of \'' + inputString1 + '\' and \'' + inputString2 + '\'.'
+					);
+
+				}
+
+			} );
+
+		} );
+
+	} );
+
 }( QUnit, jQuery, coordinate ) );

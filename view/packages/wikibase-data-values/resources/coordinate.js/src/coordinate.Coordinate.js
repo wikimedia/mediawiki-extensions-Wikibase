@@ -76,6 +76,9 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		/**
 		 * Returns whether the object is representing a valid coordinate.
 		 *
+		 * TODO: throw an error in constructor if invalid Coordinate, don't support invalid data
+		 *  objects and deprecate this function then.
+		 *
 		 * @return {boolean}
 		 */
 		isValid: function() {
@@ -113,12 +116,16 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		/**
 		 * Sets the precision.
 		 *
+		 * TODO: Make this an immutable object, deprecate this function.
+		 *
 		 * @param {number} precision
 		 */
 		setPrecision: function( precision ) { this._precision = precision; },
 
 		/**
 		 * Increases the precision by one step.
+		 *
+		 * TODO: Make this an immutable object, deprecate this function.
 		 */
 		increasePrecision: function() {
 			this._precision = coordinate.increasePrecision( this._precision );
@@ -126,6 +133,8 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 
 		/**
 		 * Decreases the precision by one step.
+		 *
+		 * TODO: Make this an immutable object, deprecate this function.
 		 */
 		decreasePrecision: function() {
 			this._precision = coordinate.decreasePrecision( this._precision );
@@ -242,6 +251,23 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 				+ ( ( lon.minute || lon.second ) ? pad( lon.minute, 2 ) : '' )
 				+ ( ( lon.second ) ? pad( lon.second, 2 ) : '' )
 				+ '/';
+		},
+
+		/**
+		 * Compares the object to another Coordinate object and returns whether both represent the
+		 * same information.
+		 *
+		 * @param {coordinate.Coordinate} otherCoordinate
+		 * @return {boolean}
+		 */
+		equals: function( otherCoordinate ) {
+			if( !( otherCoordinate instanceof coordinate.Coordinate ) ) {
+				return false;
+			}
+
+			return this.isValid() && otherCoordinate.isValid() // two invalid times are not equal
+				&& this.getPrecision() === otherCoordinate.getPrecision()
+				&& this.iso6709() === otherCoordinate.iso6709();
 		}
 
 	};
