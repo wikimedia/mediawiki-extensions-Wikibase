@@ -199,6 +199,49 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 */
 		degreeText: function() {
 			return coordinate.degreeText( this._latitude, this._longitude, this._precision );
+		},
+
+		/**
+		 * Returns the coordinate's ISO 6709 string representation.
+		 *
+		 * @return {string}
+		 */
+		iso6709: function() {
+			var lat = this.latitudeDegree(),
+				lon = this.longitudeDegree();
+
+			/**
+			 * Strips a number's sign and fills the number's integer part with zeroes according to a
+			 * given string length.
+			 *
+			 * @param {number} number
+			 * @param {number} length
+			 */
+			function pad( number, length ) {
+				var absolute = Math.abs( number ),
+					string = String( absolute ),
+					exploded = string.split( '.' );
+
+				if( exploded[0].length === length ) {
+					return string;
+				}
+
+				return ''
+					+ new Array( length - exploded[0].length + 1 ).join( '0' )
+					+ exploded[0]
+					+ ( ( exploded[1] ) ? '.' + exploded[1] : '' );
+			}
+
+			// There is no need to include minute in the result if minute and second have no value.
+			// If second has no value, it can be dropped anyway.
+			return ''
+				+ ( ( ( lat.degree < 0 ) ? '-' : '+' ) + pad( lat.degree, 2 ) )
+				+ ( ( lat.minute || lat.second ) ? pad( lat.minute, 2 ) : '' )
+				+ ( ( lat.second ) ? pad( lat.second, 2 ) : '' )
+				+ ( ( ( lon.degree < 0 ) ? '-' : '+' ) + pad( lon.degree, 3 ) )
+				+ ( ( lon.minute || lon.second ) ? pad( lon.minute, 2 ) : '' )
+				+ ( ( lon.second ) ? pad( lon.second, 2 ) : '' )
+				+ '/';
 		}
 
 	};

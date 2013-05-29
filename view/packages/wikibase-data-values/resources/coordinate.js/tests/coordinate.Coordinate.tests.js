@@ -9,6 +9,23 @@
 ( function( QUnit, $, coordinate ) {
 	'use strict';
 
+	/**
+	 * ISO 6709 representations keyed by the input string used to generate a coordinate object.
+	 * @type {Object}
+	 */
+	var iso6709representations = {
+		'0': '+00+000/',
+		'-3 +2': '-03+002/',
+		'1.1 2': '+0106+002/',
+		'90° N 30.10°': '+90+03006/',
+		'0° 5\'N, 0° 0\' 10"E': '+0005+0000010/',
+		'5\'S': '-05+000/',
+		'1\' 1"': '+010001+000/',
+		'1\' 1.1"': '+010001.1+000/',
+		'190° 30" 1.123\'': '+19030+0010723/',
+		'5\'N 0\' 10.5"W': '+05-0015949.5/'
+	};
+
 	QUnit.module( 'coordinate.Coordinate.js' );
 
 	QUnit.test( 'Basic checks', function( assert ) {
@@ -174,5 +191,20 @@
 
 	} );
 
+	QUnit.test( 'iso6709()', function( assert ) {
+		var c;
+
+		$.each( iso6709representations, function( inputString, iso6709string ) {
+			c = new coordinate.Coordinate( inputString );
+
+			assert.equal(
+				c.iso6709(),
+				iso6709string,
+				'Validated ISO 6709 string for \'' + inputString + '\': \'' + iso6709string + '\'.'
+			);
+
+		} );
+
+	} );
 
 }( QUnit, jQuery, coordinate ) );
