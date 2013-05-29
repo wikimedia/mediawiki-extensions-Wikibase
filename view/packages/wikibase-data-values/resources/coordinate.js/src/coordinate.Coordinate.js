@@ -42,10 +42,6 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 			throw new Error( 'Could not parse input: ' + e.toString() );
 		}
 
-		if ( Math.abs( this._latitude ) > 90 || Math.abs( this.longitude ) > 180 ) {
-			throw new Error( 'Invalid input' );
-		}
-
 		this._rawInput = rawInput;
 		this._latitude = parsed[0];
 		this._longitude = parsed[1];
@@ -76,6 +72,15 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 * @type {number}
 		 */
 		_precision: null,
+
+		/**
+		 * Returns whether the object is representing a valid coordinate.
+		 *
+		 * @return {boolean}
+		 */
+		isValid: function() {
+			return ( Math.abs( this._latitude ) <= 90 && Math.abs( this._longitude ) <= 180 );
+		},
 
 		/**
 		 * Returns the original (raw) input.

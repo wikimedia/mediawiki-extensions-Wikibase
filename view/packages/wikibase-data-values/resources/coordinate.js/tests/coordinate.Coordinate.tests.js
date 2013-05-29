@@ -102,6 +102,23 @@
 
 	} );
 
+	QUnit.test( 'isValid()', function( assert ) {
+		var c = new coordinate.Coordinate( '1.5 1.25' );
+
+		assert.ok(
+			c.isValid(),
+			'\'1.5 1.25\' generates a valid coordinate.'
+		);
+
+		c = new coordinate.Coordinate( '190° 30" 1.123\'' );
+
+		assert.ok(
+			!c.isValid(),
+			'190° 30" 1.123\' generates an invalid coordinate.'
+		);
+
+	} );
+
 	QUnit.test( 'Precision handling', function( assert ) {
 		var c = new coordinate.Coordinate( '1.5 1.25' );
 
