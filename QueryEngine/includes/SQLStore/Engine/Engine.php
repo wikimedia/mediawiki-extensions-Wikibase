@@ -74,26 +74,6 @@ class Engine implements QueryEngine {
 	 */
 	public function runQuery( Query $query ) {
 		// TODO
-		$internalEntityIds = $this->findQueryMatches( $query->getDescription(), $query->getOptions() );
-
-		$result = $this->selectRequestedFields( $internalEntityIds, $query->getSelectionRequests() );
-
-		return $result;
-	}
-
-	/**
-	 * Selects all the quested data from the matching entities.
-	 * This data is put in a QueryEngineResult object which is then returned.
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $internalEntityIds
-	 * @param array $query
-	 *
-	 * @return QueryEngineResult
-	 */
-	private function selectRequestedFields( array $internalEntityIds, array $query ) {
-		// TODO
 	}
 
 }
