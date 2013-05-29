@@ -58,8 +58,9 @@ class TypedValueFormatter {
 				return $value;
 			}
 
-			// TODO: implement: error message or other error handling
-			return 'ERROR: TODO: getValue returned non-string, so DataType is missing formatter';
+			// @todo: implement: error message or other error handling
+			// @todo: implement value formatter for time!
+			return '';
 		}
 
 		/**
