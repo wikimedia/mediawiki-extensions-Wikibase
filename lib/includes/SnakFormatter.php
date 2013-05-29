@@ -99,7 +99,9 @@ class SnakFormatter {
 			// @todo nicer error handling!
 			wfDebugLog( __CLASS__, __METHOD__ . ': Property '
 				. $snak->getPropertyId()->getPrefixedId() . ' not found.' );
-		}
+        } catch ( RuntimeException $e ) {
+            wfDebugLog( __CLASS__, __METHOD__ . ': unknown DataType id for $dataTypeId' );
+        }
 
 		return '';
 	}
