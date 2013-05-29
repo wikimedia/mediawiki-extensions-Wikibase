@@ -6,7 +6,6 @@ use Wikibase\Snak;
 use Wikibase\Statement;
 use Wikibase\Claim;
 use Wikibase\EntityId;
-//use Wikibase\Test\ModifyItemBase;
 
 /**
  * Unit tests for the Wikibase\Repo\Api\SetQualifier class.
@@ -101,22 +100,33 @@ class SetQualifierTest extends ModifyItemBase {
 	 * @return Snak[]
 	 */
 	protected function newQualifierProvider() {
-		$property = \Wikibase\Property::newFromType( 'commonsMedia' );
-		$content = new \Wikibase\PropertyContent( $property );
-		$status = $content->save( '', null, EDIT_NEW );
+		$properties = array();
 
-		$this->assertTrue( $status->isOK() );
+		$property1 = \Wikibase\Property::newFromType( 'commonsMedia' );
+		$properties[] = $property1;
+
+		$property2 = \Wikibase\Property::newFromType( 'wikibase-item' );
+		$properties[] = $property2;
+
+		foreach( $properties as $property ) {
+			$content = new \Wikibase\PropertyContent( $property );
+			$status = $content->save( '', null, EDIT_NEW );
+
+			$this->assertTrue( $status->isOK() );
+		}
 
 		return array(
 			new \Wikibase\PropertySomeValueSnak( 1 ),
 			new \Wikibase\PropertyNoValueSnak( 1 ),
-			new \Wikibase\PropertyValueSnak( $property->getId(), new \DataValues\StringValue( 'new qualifier' ) ),
+			new \Wikibase\PropertyValueSnak( $property1->getId(), new \DataValues\StringValue( 'new qualifier' ) ),
+			new \Wikibase\PropertyValueSnak( $property2->getId(), new EntityId( Item::ENTITY_TYPE, 802 ) ),
 		);
 	}
 
 	public function testRequests() {
-		foreach ( $this->claimProvider() as $claim ) {
+		foreach( $this->claimProvider() as $claim ) {
 			$item = \Wikibase\Item::newEmpty();
+			$item->setId( new EntityId( Item::ENTITY_TYPE, 802 ) );
 			$content = new \Wikibase\ItemContent( $item );
 			$content->save( '', null, EDIT_NEW );
 
@@ -145,11 +155,8 @@ class SetQualifierTest extends ModifyItemBase {
 		);
 
 		if ( $qualifier instanceof \Wikibase\PropertyValueSnak ) {
-			$params['value'] = $qualifier->getDataValue()->getArrayValue();
-
-			if ( is_array( $params['value'] ) ) {
-				$params['value'] = \FormatJson::encode( $params['value'] );
-			}
+			$dataValue = $qualifier->getDataValue();
+			$params['value'] = \FormatJson::encode( $dataValue->getArrayValue() );
 		}
 
 		$this->makeValidRequest( $params );

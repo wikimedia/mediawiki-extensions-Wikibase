@@ -258,7 +258,7 @@ class SetQualifier extends ApiWikibase {
 		$newQualifier = $factory->newSnak(
 			$propertyId,
 			$params['snaktype'],
-			isset( $params['value'] ) ? $params['value'] : null
+			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
 		);
 
 		return $qualifiers->addSnak( $newQualifier );
