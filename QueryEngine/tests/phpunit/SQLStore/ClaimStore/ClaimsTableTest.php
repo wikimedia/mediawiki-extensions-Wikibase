@@ -104,4 +104,21 @@ class ClaimsTableTest extends \PHPUnit_Framework_TestCase {
 		$table->insertClaimRow( $claimRow );
 	}
 
+	public function testRemoveClaimsOfSubject() {
+		$tableName = 'test_claims';
+		$subjectId = 1234;
+
+		$queryInterface = $this->getMock( 'Wikibase\Database\QueryInterface' );
+		$queryInterface->expects( $this->once() )
+			->method( 'delete' )
+			->with(
+				$this->equalTo( $tableName ),
+				$this->equalTo( array( 'subject_id' => $subjectId ) )
+			);
+
+		$table = new ClaimsTable( $queryInterface, $tableName );
+
+		$table->removeClaimsOfSubject( $subjectId );
+	}
+
 }

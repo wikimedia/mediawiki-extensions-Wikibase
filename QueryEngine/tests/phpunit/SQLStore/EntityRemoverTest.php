@@ -47,22 +47,24 @@ class EntityRemoverTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider entityProvider
 	 */
 	public function testRemoveEntity( Entity $entity ) {
-		$claimRemover = $this
-			->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimRemover' )
+		$internalSubjectId = 9001;
+
+		$claimTable = $this
+			->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\ClaimStore\ClaimsTable' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$invocationMocker = $claimRemover->expects( $this->exactly( count( $entity->getClaims() ) ) )
-			->method( 'removeClaim' );
+		$claimTable->expects( $this->once() )
+			->method( 'removeClaimsOfSubject' )
+			->with( $this->equalTo( $internalSubjectId ) );
 
-		// The 'with' constraints fail if the method is not invoked,
-		// so we can only add them when there are claims.
-		if ( count( $entity->getClaims() ) > 0 ) {
-			$invocationMocker->with(
-				$this->anything(),
-				$this->equalTo( 1234 )
-			);
-		}
+		$snakRemover = $this->getMockBuilder( 'Wikibase\QueryEngine\SQLStore\SnakStore\SnakRemover' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$snakRemover->expects( $this->once() )
+			->method( 'removeSnaksOfSubject' )
+			->with( $this->equalTo( $internalSubjectId ) );
 
 		$idFinder = $this->getMock( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' );
 
@@ -71,9 +73,9 @@ class EntityRemoverTest extends \PHPUnit_Framework_TestCase {
 			->with(
 				$entity->getId()
 			)
-			->will( $this->returnValue( 1234 ) );
+			->will( $this->returnValue( $internalSubjectId ) );
 
-		$remover = new EntityRemover( $claimRemover, $idFinder );
+		$remover = new EntityRemover( $claimTable, $snakRemover, $idFinder );
 
 		$remover->removeEntity( $entity );
 	}
