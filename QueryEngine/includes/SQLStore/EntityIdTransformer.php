@@ -2,6 +2,7 @@
 
 namespace Wikibase\QueryEngine\SQLStore;
 
+use OutOfBoundsException;
 use Wikibase\EntityId;
 
 /**
@@ -31,15 +32,16 @@ use Wikibase\EntityId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Denny Vrandecic
  */
-class EntityIdTransformer implements InternalEntityIdFinder {
+class EntityIdTransformer implements InternalEntityIdFinder, InternalEntityIdInterpreter {
 
-	protected $idMap;
+	protected $stringTypeToInt;
+	protected $intTypeToString;
 
 	/**
 	 * @param int[] $idMap Maps entity types (strings) to a unique one digit integer
 	 */
 	public function __construct( array $idMap ) {
-		$this->idMap = $idMap;
+		$this->stringTypeToInt = $idMap;
 	}
 
 	/**
@@ -50,19 +52,56 @@ class EntityIdTransformer implements InternalEntityIdFinder {
 	 * @return int
 	 */
 	public function getInternalIdForEntity( EntityId $entityId ) {
-		$this->ensureEntityTypeIsKnown( $entityId->getEntityType() );
+		$this->ensureEntityStringTypeIsKnown( $entityId->getEntityType() );
 
 		return $this->getComputedId( $entityId );
 	}
 
-	protected function ensureEntityTypeIsKnown( $entityType ) {
-		if ( !array_key_exists( $entityType, $this->idMap ) ) {
-			throw new \OutOfBoundsException( "Id of unknown entity type '$entityType' cannot be transformed" );
+	protected function ensureEntityStringTypeIsKnown( $entityType ) {
+		if ( !array_key_exists( $entityType, $this->stringTypeToInt ) ) {
+			throw new OutOfBoundsException( "Id of unknown entity type '$entityType' cannot be transformed" );
 		}
 	}
 
 	protected function getComputedId( EntityId $entityId ) {
-		return $entityId->getNumericId() * 10 + $this->idMap[$entityId->getEntityType()];
+		return $entityId->getNumericId() * 10 + $this->stringTypeToInt[$entityId->getEntityType()];
+	}
+
+	/**
+	 * @see InternalEntityIdInterpreter::getExternalIdForEntity
+	 *
+	 * @param int $internalEntityId
+	 *
+	 * @return EntityId
+	 */
+	public function getExternalIdForEntity( $internalEntityId ) {
+		$this->buildIntToStringMap();
+
+		$numericId = (int)floor( $internalEntityId / 10 );
+		$typeId = $internalEntityId % 10;
+
+		$this->ensureEntityIntTypeIsKnown( $typeId );
+		$typeId = $this->intTypeToString[$typeId];
+
+		return new EntityId( $typeId, $numericId );
+	}
+
+	protected function buildIntToStringMap() {
+		if ( is_array( $this->intTypeToString ) ) {
+			return;
+		}
+
+		$this->intTypeToString = array();
+
+		foreach ( $this->stringTypeToInt as $string => $int ) {
+			$this->intTypeToString[$int] = $string;
+		}
+	}
+
+	protected function ensureEntityIntTypeIsKnown( $intType ) {
+		if ( !array_key_exists( $intType, $this->intTypeToString ) ) {
+			throw new OutOfBoundsException( "Id of unknown entity type '$intType' cannot be interpreted" );
+		}
 	}
 
 }
