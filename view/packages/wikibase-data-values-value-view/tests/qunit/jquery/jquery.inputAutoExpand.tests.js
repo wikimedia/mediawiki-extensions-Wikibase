@@ -87,9 +87,9 @@
 		return $textarea;
 	};
 
-	QUnit.module( 'jquery.inputAutoExpand', QUnit.newMwEnvironment( {
+	QUnit.module( 'jquery.inputAutoExpand', {
 		teardown: function() { $( '#inputAutoExpandTest' ).remove(); }
-	} ) );
+	} );
 
 	QUnit.test( 'Apply jquery.inputAutoExpand() on input boxes', function( assert ) {
 		var subject = newTestInputAutoExpand();

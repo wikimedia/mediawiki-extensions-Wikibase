@@ -28,14 +28,14 @@
 			);
 		};
 
-	QUnit.module( 'jquery.eachchange', QUnit.newMwEnvironment( {
+	QUnit.module( 'jquery.eachchange', {
 		setup: function() {
 			iReset();
 		},
 		teardown: function() {
 			$( '.test_eachchange' ).remove();
 		}
-	} ) );
+	} );
 
 	QUnit.test(
 		'Initialization',

@@ -51,11 +51,11 @@
 		return $input;
 	};
 
-	QUnit.module( 'jquery.ui.suggester', QUnit.newMwEnvironment( {
+	QUnit.module( 'jquery.ui.suggester', {
 		teardown: function() {
 			$( '.test_suggester' ).remove();
 		}
-	} ) );
+	} );
 
 	QUnit.test( 'basic tests', function( assert ) {
 		var $input = newTestSuggester();

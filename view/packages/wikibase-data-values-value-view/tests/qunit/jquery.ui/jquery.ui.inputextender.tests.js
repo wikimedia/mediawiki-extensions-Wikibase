@@ -29,7 +29,7 @@
 		return $input.data( 'inputextender' );
 	};
 
-	QUnit.module( 'jquery.ui.inputextender', QUnit.newMwEnvironment( {
+	QUnit.module( 'jquery.ui.inputextender', {
 		teardown: function() {
 			$( '.test_inputextender' ).each( function( i, node ) {
 				if( $( node ).data( 'inputextender' ) ) {
@@ -38,7 +38,7 @@
 				$( node ).remove();
 			} );
 		}
-	} ) );
+	} );
 
 	QUnit.test( 'Initialization', 4, function( assert ) {
 		var extender = newTestInputextender(),
