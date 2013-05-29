@@ -12,7 +12,7 @@
 	// TODO: figure out some non-global alternative to deal with this.
 	QUnit.config.requireExpects = false;
 
-	QUnit.module( 'DataValues.js', QUnit.newMwEnvironment() );
+	QUnit.module( 'DataValues.js' );
 
 	QUnit.test(
 		'getDataValues',
