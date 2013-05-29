@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxmnOwC8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-29T18:43:49Z",
+      "side": 1,
+      "message": "Would be great to have a description about that thing here",
+      "revId": "642638c749cb280ea5a467aa9481f32294126602",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
