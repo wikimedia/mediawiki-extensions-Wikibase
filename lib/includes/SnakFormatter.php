@@ -90,18 +90,19 @@ class SnakFormatter {
 	}
 
 	private function formatPropertyValueSnak( PropertyValueSnak $snak, $languageCode ) {
+		$formattedValue = '';
+
 		try {
 			$dataValue = $snak->getDataValue();
 			$dataTypeId = $this->getDataTypeForProperty( $snak->getPropertyId() );
 
-			return $this->typedValueFormatter->formatToString( $dataValue, $dataTypeId, $languageCode );
-		} catch ( PropertyNotFoundException $e ) {
+			$formattedValue = $this->typedValueFormatter->formatToString( $dataValue, $dataTypeId, $languageCode );
+		} catch ( \Exception $e ) {
 			// @todo nicer error handling!
-			wfDebugLog( __CLASS__, __METHOD__ . ': Property '
-				. $snak->getPropertyId()->getPrefixedId() . ' not found.' );
+			wfDebugLog( __CLASS__, __METHOD__ . ': ' . $e->getMessage() );
 		}
 
-		return '';
+		return $formattedValue;
 	}
 
 	private function getDataTypeForProperty( EntityId $propertyId ) {
