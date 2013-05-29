@@ -155,7 +155,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		}
 
 		//XXX: allow for logged in users only?
-		if ( $this->getRequest()->getText( 'action', 'purge' ) ) {
+		if ( $this->getRequest()->getText( 'action' ) === 'purge' ) {
 			$this->purge( $id, $format, $revision );
 		}
 
