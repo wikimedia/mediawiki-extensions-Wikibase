@@ -6,6 +6,7 @@ use Ask\Language\Description\Description;
 use Ask\Language\Description\SomeProperty;
 use Ask\Language\Description\ValueDescription;
 use Ask\Language\Option\QueryOptions;
+use InvalidArgumentException;
 use Wikibase\Database\QueryInterface;
 use Wikibase\EntityId;
 use Wikibase\Lib\EntityIdParser;
@@ -84,7 +85,7 @@ class DescriptionMatchFinder {
 		$propertyId = $description->getPropertyId();
 
 		if ( !( $propertyId instanceof EntityId ) ) {
-			// TODO: Throw
+			throw new InvalidArgumentException( 'All property ids provided to the SQLStore should be EntityId objects' );
 		}
 
 		$dvHandler = $this->schema->getDataValueHandler(
