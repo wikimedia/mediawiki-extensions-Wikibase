@@ -66,6 +66,17 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			// Try to get a item content
 			$siteId = \Wikibase\Utils::trimToNFC( $site ); // no stripping of underscores here!
 			$pageName = \Wikibase\Utils::trimToNFC( $page );
+
+			if ( !\Sites::singleton()->getSite( $siteId ) ) {
+				// HACK: If the site ID isn't known, add "wiki" to it; this allows the wikipedia
+				// subdomains to be used to refer to wikipedias, instead of requiring their
+				// full global id to be used.
+				// @todo: Ideally, if the site can't be looked up by global ID, we
+				// should try to look it up by local navigation ID.
+				// Support for this depends on bug 48934.
+				$siteId .= 'wiki';
+			}
+
 			$itemHandler = new \Wikibase\ItemHandler();
 			$itemContent = $itemHandler->getFromSiteLink( $siteId, $pageName );
 			// Do we have an item content, and if not can we try harder?
