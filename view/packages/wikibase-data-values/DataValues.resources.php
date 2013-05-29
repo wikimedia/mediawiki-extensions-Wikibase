@@ -63,6 +63,7 @@ return call_user_func( function() {
 				//  depend on.
 				// TODO: Make one module per data value type.
 				'values/BoolValue.js',
+				'values/CoordinateValue.js',
 				'values/MonolingualTextValue.js',
 				'values/MultilingualTextValue.js',
 				'values/StringValue.js',
@@ -73,6 +74,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
+				'coordinate.js', // required by CoordinateValue
 				'time.js' // required by TimeValue
 			),
 		),

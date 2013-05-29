@@ -56,6 +56,7 @@ return call_user_func( function() {
 		'dataValues.values.tests' => array(
 			'scripts' => array(
 				"$bp/values/BoolValue.tests.js",
+				"$bp/values/CoordinateValue.tests.js",
 				"$bp/values/MonolingualTextValue.tests.js",
 				"$bp/values/MultilingualTextValue.tests.js",
 				"$bp/values/StringValue.tests.js",

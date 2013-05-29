@@ -18,8 +18,8 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 	/**
 	 * Constructor for an object representing a coordinate with a certain precision.
 	 *
-	 * @param {string} rawInput
-	 * @param {Object} options
+	 * @param {string|Object} coordinateDefinition
+	 * @param {Object} [options]
 	 *        {number} precision: Precision which will overrule the automatically detected
 	 *        precision.
 	 *
@@ -27,28 +27,48 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 	 *
 	 * @constructor
 	 */
-	var Coordinate = function Coordinate( rawInput, options ) {
+	var Coordinate = function Coordinate( coordinateDefinition, options ) {
 		var parsed;
 
 		options = options || {};
 
-		if( !rawInput ) {
+		if( !coordinateDefinition ) {
 			throw new Error( 'No input given' );
 		}
 
-		try {
-			parsed = coordinateParser.parse( rawInput );
-		} catch( e ) {
-			throw new Error( 'Could not parse input: ' + e.toString() );
+		if( typeof coordinateDefinition === 'string' ) {
+			try {
+				parsed = coordinateParser.parse( coordinateDefinition );
+			} catch( e ) {
+				throw new Error( 'Could not parse input: ' + e.toString() );
+			}
+
+			this._rawInput = coordinateDefinition;
+			this._latitude = parsed[0];
+			this._longitude = parsed[1];
+			this._precision = ( options.precision !== undefined ) ? options.precision : parsed[2];
+		} else {
+			this._latitude = coordinateDefinition.latitude;
+			this._longitude = coordinateDefinition.longitude;
+
+			// The backend does not return precision, so we need to parse the coordinate values:
+			// TODO: Have the backend support precision
+			parsed = coordinateParser.parse( this._latitude + ', ' + this._longitude );
+			this._precision = parsed[2];
+
+			// TODO: Capture altitude and globe
 		}
 
-		this._rawInput = rawInput;
-		this._latitude = parsed[0];
-		this._longitude = parsed[1];
-		this._precision = ( options.precision !== undefined ) ? options.precision : parsed[2];
+		this._globe = 'http://wikidata.org/id/Q2'; // TODO: Support other globes
 	};
 
 	Coordinate.prototype = {
+		/**
+		 * Globe URI
+		 * @type {string}
+		 */
+		_globe: null,
+
 		/**
 		 * Raw input
 		 * @type {string}
@@ -83,6 +103,15 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 */
 		isValid: function() {
 			return ( Math.abs( this._latitude ) <= 90 && Math.abs( this._longitude ) <= 180 );
+		},
+
+		/**
+		 * Returns the coordinate's globe URI.
+		 *
+		 * @return {string}
+		 */
+		getGlobe: function() {
+			return this._globe;
 		},
 
 		/**
