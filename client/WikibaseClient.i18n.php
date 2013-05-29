@@ -170,7 +170,8 @@ This message follows the page title (with link).
 Parameters:
 * $1 - number of inter-language links',
 	'wikibase-pageinfo-entity-id' => 'A link to the corresponding Wikibase Item',
-	'wikibase-pageinfo-entity-id-none' => 'The page is not linked with a wikibase item.',
+	'wikibase-pageinfo-entity-id-none' => 'The page is not linked with a wikibase item.
+{{Identical|None}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -325,6 +326,8 @@ $messages['ast'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'El títulu de la páxina nun pudo usase pa la consulta ya inoróse.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Namái páxines con enllaces interllingüísticos',
 	'wikibase-unconnectedpages-format-row' => '($1 enllaces interllingüísticos na páxina)',
+	'wikibase-pageinfo-entity-id' => "ID d'elementu de Wikidata",
+	'wikibase-pageinfo-entity-id-none' => 'Dengún',
 );
 
 /** Bashkir (башҡортса)
@@ -461,7 +464,7 @@ $messages['bn'] = array(
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|পরিবর্তন|পরিবর্তনসমূহ}}',
 	'wikibase-editlinks' => 'আন্তঃউইকি সংযোগ সম্পাদনা',
 	'wikibase-editlinkstitle' => 'আন্তঃভাষার লিংকগুলি সম্পাদনা করুন',
-	'wikibase-linkitem-addlinks' => 'আন্তঃউইকি সংযোগ যোগ',
+	'wikibase-linkitem-addlinks' => 'আন্তঃউইকি সংযোগ দিন',
 	'wikibase-linkitem-alreadylinked' => 'আপনি পাতাটি কেন্দ্রীয় তথ্য ভান্ডারের [$1 আইটেমের] সাথে সংযুক্ত করতে চাইছেন তা ইতোমধ্যে এই সাইটের $2 এর সাথে সংযুক্ত রয়েছে। একটি আইটেম কোন সাইটে কেবল একটি মাত্র পাতার সাথে সংযুক্ত হতে পারে। অনুগ্রহ করে সংযোগ করতে অন্য একটি পাতা পছন্দ করুন।',
 	'wikibase-linkitem-close' => 'ডায়ালগ বন্ধ এবং পাতা পুনরায় লোড করো',
 	'wikibase-linkitem-failure' => 'আপনার দেওয়া পাতায় সংযোগ করতে একটি অজানা ত্রুটি দেখা দিয়েছে।',
@@ -487,6 +490,8 @@ $messages['bn'] = array(
 	'wikibase-unconnectedpages-page' => 'যে পাতা দিয়ে ফলাফলের তালিকা শুরু হবে:',
 	'wikibase-unconnectedpages-submit' => 'যাও',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" কোনো সঠিক ভাষার কোড নয়।',
+	'wikibase-pageinfo-entity-id' => 'উইকিউপাত্ত আইটেম আইডি',
+	'wikibase-pageinfo-entity-id-none' => 'কোনটিই নয়',
 );
 
 /** Breton (brezhoneg)
@@ -832,6 +837,8 @@ $messages['de'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Der Seitenname kann nicht für die Abfrage verwendet werden und wurde ignoriert.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Nur Seiten mit Interlanguagelinks',
 	'wikibase-unconnectedpages-format-row' => '($1 Interlanguagelinks auf der Seite)',
+	'wikibase-pageinfo-entity-id' => 'Wikidata-Objektkennung',
+	'wikibase-pageinfo-entity-id-none' => 'Keine',
 );
 
 /** Zazaki (Zazaki)
@@ -1369,6 +1376,8 @@ $messages['he'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'לא ניתן היה להשתמש בכותרת הדף לשאילתה והמערכת תתעלם ממנה.',
 	'wikibase-unconnectedpages-iwdata-label' => 'רק דפים עם קישורים לשפות אחרות',
 	'wikibase-unconnectedpages-format-row' => '($1  קישורים לשפות אחרות בדף)',
+	'wikibase-pageinfo-entity-id' => 'מזהה פריט בוויקינתונים',
+	'wikibase-pageinfo-entity-id-none' => 'אין',
 );
 
 /** Hindi (हिन्दी)
@@ -1707,6 +1716,8 @@ $messages['it'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Il titolo della pagina non può essere utilizzato per la query e viene ignorato.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Solo le pagine con collegamenti interlinguistici',
 	'wikibase-unconnectedpages-format-row' => '($1 collegamenti interlinguistici nella pagina)',
+	'wikibase-pageinfo-entity-id' => 'ID elemento Wikidata',
+	'wikibase-pageinfo-entity-id-none' => 'Nessuno',
 );
 
 /** Japanese (日本語)
@@ -1758,6 +1769,8 @@ $messages['ja'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'ページ名は検索に使用できなかったため無視します。',
 	'wikibase-unconnectedpages-iwdata-label' => '言語間リンクがあるページのみ',
 	'wikibase-unconnectedpages-format-row' => '(ページ内に $1 件の言語間リンク)',
+	'wikibase-pageinfo-entity-id' => 'ウィキデータ項目 ID',
+	'wikibase-pageinfo-entity-id-none' => 'なし',
 );
 
 /** Georgian (ქართული)
@@ -1997,6 +2010,7 @@ $messages['lb'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" ass kee valabele Sproochecode.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Nëmme Säite mat Linke mat anere Sproochen',
 	'wikibase-unconnectedpages-format-row' => '($1 Linke mat anere Sproochen op der Säit)',
+	'wikibase-pageinfo-entity-id-none' => 'Keng',
 );
 
 /** Lezghian (лезги)
@@ -2123,6 +2137,8 @@ $messages['mk'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Насловот на страницата не може да се употреби во барање, па затоа е занемарен.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Само страници со меѓујазични врски',
 	'wikibase-unconnectedpages-format-row' => '($1 меѓујазични врски на страницата)',
+	'wikibase-pageinfo-entity-id' => 'Предметна назнака од Википодатоци',
+	'wikibase-pageinfo-entity-id-none' => 'нема',
 );
 
 /** Malayalam (മലയാളം)
@@ -2335,12 +2351,14 @@ $messages['nl'] = array(
 	'wikibase-error-invalid-entity-id' => 'Het opgegeven ID is niet bekend in het systeem. Gebruik een geldig entiteits-ID.',
 	'special-unconnectedpages' => "Pagina's niet niet gekoppeld zijn aan items",
 	'wikibase-unconnectedpages-legend' => "Instellingen voor ongekoppelde pagina's",
-	'wikibase-unconnectedpages-page' => 'Lijst beginnen met pagina:', # Fuzzy
+	'wikibase-unconnectedpages-page' => 'Lijst beginnen met pagina:',
 	'wikibase-unconnectedpages-submit' => 'OK',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" is geen geldige taalcode.',
 	'wikibase-unconnectedpages-page-warning' => 'De paginanaam kan niet worden gebruikt voor de zoekopdracht en wordt genegeerd.',
 	'wikibase-unconnectedpages-iwdata-label' => "Alleen pagina's met intertaalkoppelingen",
 	'wikibase-unconnectedpages-format-row' => '($1 intertaalkoppeling{{PLURAL:$1||en}} op de pagina)',
+	'wikibase-pageinfo-entity-id' => 'Wikidata Item-ID',
+	'wikibase-pageinfo-entity-id-none' => 'Geen',
 );
 
 /** Norwegian Nynorsk (norsk nynorsk)
@@ -3024,6 +3042,8 @@ $messages['vi'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Tên trang không thể sử dụng để truy vấn nên đã được bỏ qua.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Chỉ những trang có liên kết ngôn ngữ',
 	'wikibase-unconnectedpages-format-row' => '($1 liên kết ngôn ngữ trên trang)',
+	'wikibase-pageinfo-entity-id' => 'ID khoản mục Wikidata',
+	'wikibase-pageinfo-entity-id-none' => 'Không có',
 );
 
 /** Volapük (Volapük)
@@ -3154,6 +3174,7 @@ $messages['zh-hans'] = array(
  * @author Bencmq
  * @author Justincheng12345
  * @author Li3939108
+ * @author Simon Shek
  * @author Stevenliuyi
  * @author Tntchn
  * @author 乌拉跨氪
@@ -3203,4 +3224,5 @@ $messages['zh-hant'] = array(
 	'wikibase-unconnectedpages-page-warning' => '該頁面標題無法用於查詢並已忽略。',
 	'wikibase-unconnectedpages-iwdata-label' => '僅有跨語言連結的頁面',
 	'wikibase-unconnectedpages-format-row' => '（該頁面有$1個跨語言連結）',
+	'wikibase-pageinfo-entity-id-none' => '無',
 );

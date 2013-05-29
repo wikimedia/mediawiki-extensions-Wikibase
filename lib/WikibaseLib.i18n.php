@@ -1472,6 +1472,7 @@ $messages['lb'] = array(
 	'wikibase-tooltip-error-details' => 'Detailer',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Media-Fichier op Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Lithuanian (lietuvių)
@@ -1949,6 +1950,9 @@ $messages['roa-tara'] = array(
 	'wikibase-error-autocomplete-connection' => "Non ge pozze 'nderrogà le API de Uicchipèdie. Pe piacere pruève cchiù tarde.",
 	'wikibase-error-autocomplete-response' => "'U server ave resposte: $1",
 	'wikibase-error-ui-client-error' => "'A connessione a 'a pàgene d'u cliende ha fallite. Pe piacere pruève arrete.",
+	'wikibase-error-ui-cant-edit' => "Non ge tìne le permesse pe combletà st'azione.",
+	'wikibase-error-ui-session-failure' => "'A sessiona toje ha scadute. Pe piacere tràse arrete.",
+	'wikibase-sitelinks' => 'Elenghe de le pàggene collegate a sta vôsce',
 	'wikibase-sitelinks-sitename-columnheading' => 'Lènghe',
 	'wikibase-sitelinks-siteid-columnheading' => 'Codece',
 	'wikibase-sitelinks-link-columnheading' => 'Vôsce collegate',

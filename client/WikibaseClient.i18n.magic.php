@@ -67,6 +67,16 @@ $magicWords['nn'] = array(
 	'noexternallanglinks' => array( 0, 'ingenspråklenkjerutanfrå' ),
 );
 
+/** Portuguese (português) */
+$magicWords['pt'] = array(
+	'property' => array( 0, 'propriedade' ),
+);
+
+/** Brazilian Portuguese (português do Brasil) */
+$magicWords['pt-br'] = array(
+	'property' => array( 0, 'propriedade' ),
+);
+
 /** Ukrainian (українська) */
 $magicWords['uk'] = array(
 	'noexternallanglinks' => array( 0, 'беззовнішніхпосилань' ),
