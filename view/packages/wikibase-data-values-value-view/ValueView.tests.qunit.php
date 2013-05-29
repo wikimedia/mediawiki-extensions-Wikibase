@@ -99,6 +99,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.preview.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.valueview/valueview.preview.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.valueview.preview',
+			),
+		),
+
 		'jquery.valueview.MockViewState.tests' => array(
 			'scripts' => array(
 				"$bp/jquery.valueview/valueview.MockViewState.tests.js",
