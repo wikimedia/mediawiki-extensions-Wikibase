@@ -1,7 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\Entity;
+use Wikibase\EntityContentFactory;
+use Wikibase\EntityId;
 use \Wikibase\EntityLookup;
+use Wikibase\EntityRevision;
 use \Wikibase\WikiPageEntityLookup;
 
 /**
@@ -40,6 +44,9 @@ use \Wikibase\WikiPageEntityLookup;
  */
 class WikipageEntityLookupTest extends EntityLookupTest {
 
+	/**
+	 * @var EntityRevision[]
+	 */
 	protected static $testEntities = array();
 
 	public function setUp( ) {
@@ -56,54 +63,19 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 	 * @return EntityLookup
 	 */
 	protected function newEntityLoader( array $entities ) {
-		// make sure all test entities are in the database, but only do that once.
-		/* @var \Wikibase\Entity $entity */
-		foreach ( $entities as $entity ) {
-			if ( !isset( self::$testEntities[$entity->getPrefixedId()] ) ) {
-				self::storeTestEntity( $entity );
-				$testEntities[$entity->getPrefixedId()] = $entity->getPrefixedId();
+		// make sure all test entities are in the database.
+		/* @var Entity $entity */
+		foreach ( $entities as $logicalRev => $entity ) {
+			if ( !isset( self::$testEntities[$logicalRev] ) ) {
+				$rev = self::storeTestEntity( $entity );
+				self::$testEntities[$logicalRev] = $rev;
 			}
 		}
 
 		return new WikiPageEntityLookup( false, CACHE_DB );
 	}
 
-	/*
-	protected static function getTestEntityId( $handle ) {
-		$entities = self::getTestEntities();
-
-		if ( !isset( $entities[$handle] ) ) {
-			return null;
-		}
-
-		return $entities[$handle]->getId();
-	}
-
-	protected static function getTestEntity( $handle ) {
-		$entities = self::initTestEntities();
-
-		return $entities[$handle];
-	}
-
-	protected static function initTestEntities() {
-		static $initialized = false;
-
-		if ( !$initialized ) {
-			$entities = self::getTestEntities();
-
-			foreach ( $entities as $handle => $entity ) {
-				self::storeTestEntity( $entity );
-				$testEntities[$handle] = $entity->getPrefixedId();
-			}
-
-			$initialized = true;
-		}
-
-		return self::$testEntities;
-	}
-	*/
-
-	protected static function storeTestEntity( \Wikibase\Entity $entity ) {
+	protected static function storeTestEntity( Entity $entity ) {
 		//NOTE: We are using EntityContent here, which is not available on the client.
 		//      For now, this test case will only work on the repository.
 
@@ -112,12 +84,73 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 		}
 
 		// FIXME: this is using repo functionality
-		$content = \Wikibase\EntityContentFactory::singleton()->newFromEntity( $entity );
+		$content = EntityContentFactory::singleton()->newFromEntity( $entity );
 		$status = $content->save( "storeTestEntity" );
 
 		if ( !$status->isOK() ) {
 			throw new \MWException( "couldn't create " . $content->getTitle()->getFullText()
 				. ":\n" . $status->getWikiText() );
 		}
+
+		return new EntityRevision(
+			$entity,
+			$content->getWikiPage()->getRevision()->getId(),
+			$content->getWikiPage()->getRevision()->getTimestamp()
+		);
 	}
+
+
+	public static function provideGetEntityRevision() {
+		$cases = array(
+			array( // #0
+				'q42', false, true,
+			),
+			array( // #1
+				'q753', false, false,
+			),
+			array( // #2
+				'p753', false, true,
+			),
+		);
+
+		return $cases;
+	}
+
+	protected function resolveLogicalRevision( $revision ) {
+		if ( is_int( $revision ) && isset( self::$testEntities[$revision] ) ) {
+			$revision = self::$testEntities[$revision]->getRevision();
+		}
+
+		return $revision;
+	}
+
+	/**
+	 * @dataProvider provideGetEntity
+	 *
+	 * @param string|EntityId $id The entity to get
+	 * @param bool|int $revision The revision to get (or null)
+	 * @param bool|int $expectedRev The expected revision
+	 */
+	public function testGetEntityRevision( $id, $revision, $shouldExist ) {
+		if ( is_string( $id ) ) {
+			$id = EntityId::newFromPrefixedId( $id );
+		}
+
+		$revision = $this->resolveLogicalRevision( $revision );
+
+		$lookup = $this->getLookup();
+		$entityRev = $lookup->getEntityRevision( $id, $revision );
+
+		if ( $shouldExist ) {
+			$this->assertNotNull( $entityRev, "ID " . $id->getPrefixedId() );
+			$this->assertEquals( $id->getPrefixedId(), $entityRev->getEntity()->getPrefixedId() );
+
+			if ( is_int( $revision ) ) {
+				$this->assertEquals( $revision, $entityRev->getRevision() );
+			}
+		} else {
+			$this->assertNull( $entityRev, "ID " . $id->getPrefixedId() );
+		}
+	}
+
 }
