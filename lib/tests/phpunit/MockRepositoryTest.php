@@ -32,7 +32,8 @@ use \Wikibase\SiteLink;
  * @ingroup Test
  *
  * @group Wikibase
- * @group WikibaseClient
+ * @group WikibaseLib
+ * @group WikibaseEntityLookup
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -85,6 +86,48 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$prop = $this->repo->getEntity( $propId );
 		$this->assertNotNull( $prop, "Entity " . $propId );
 		$this->assertInstanceOf( '\Wikibase\Property', $prop, "Entity " . $propId );
+	}
+
+	public function testGetEntityRevision() {
+		$item = new Item( array() );
+		$item->setLabel( 'en', 'foo' );
+
+		// set up a data Item
+		$this->repo->putEntity( $item, 23, "20130101000000" );
+		$itemId = $item->getId();
+
+		// set up another version of the data Item
+		$item->setLabel( 'de', 'bar' );
+		$this->repo->putEntity( $item, 24 );
+
+		// set up a property
+		$prop = new Property( array() );
+		$prop->setLabel( 'en', 'foo' );
+		$prop->setId( $itemId->getNumericId() ); // same numeric id, different prefix
+
+		$propId = $prop->getId();
+		$this->repo->putEntity( $prop );
+
+		// test latest item
+		$itemRev = $this->repo->getEntityRevision( $itemId );
+		$this->assertNotNull( $item, "Entity " . $itemId );
+		$this->assertInstanceOf( '\Wikibase\EntityRevision', $itemRev, "Entity " . $itemId );
+		$this->assertInstanceOf( '\Wikibase\Item', $itemRev->getEntity(), "Entity " . $itemId );
+		$this->assertEquals( 24, $itemRev->getRevision() );
+
+		// test item by rev id
+		$itemRev = $this->repo->getEntityRevision( $itemId, 23 );
+		$this->assertNotNull( $item, "Entity " . $itemId . "@23" );
+		$this->assertInstanceOf( '\Wikibase\EntityRevision', $itemRev, "Entity " . $itemId );
+		$this->assertInstanceOf( '\Wikibase\Item', $itemRev->getEntity(), "Entity " . $itemId );
+		$this->assertEquals( 23, $itemRev->getRevision() );
+		$this->assertEquals( "20130101000000", $itemRev->getTimestamp() );
+
+		// test latest prop
+		$propRev = $this->repo->getEntityRevision( $propId );
+		$this->assertNotNull( $propRev, "Entity " . $propId );
+		$this->assertInstanceOf( '\Wikibase\EntityRevision', $propRev, "Entity " . $propId );
+		$this->assertInstanceOf( '\Wikibase\Property', $propRev->getEntity(), "Entity " . $propId );
 	}
 
 	public function testGetItemIdForLink() {
@@ -273,38 +316,17 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		return array(
 			array( // #0: empty
 				array(), // ids
-				array(), // revs
 				array(), // expected
 			),
 
-			array( // #1: some entities, no revisions
+			array( // #1: some entities
 				array( // ids
 					'q1',
 					'q2',
 				),
-				false, // revs
 				array( // expected
 					'q1' => array(
 						'de' => 'eins',
-						'en' => 'one',
-					),
-					'q2' => array(
-						'en' => 'two',
-					),
-				),
-			),
-
-			array( // #2: revisions
-				array( // ids
-					'q1',
-					'q2'
-				),
-				array( // revs
-					1001,
-					false
-				),
-				array( // expected
-					'q1' => array(
 						'en' => 'one',
 					),
 					'q2' => array(
@@ -315,7 +337,6 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 			array( // #3: bad ID
 				array( 'q1', 'q22' ), // ids
-				false, // revs
 				array( // expected
 					'q1' => array(
 						'en' => 'one',
@@ -323,26 +344,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 					),
 					'q22' => null,
 				),
-			),
-
-			array( // #4: bad revision
-				array( 'q1', 'q2' ), // ids
-				array( false, 5555 ), // revs
-				array( // expected
-					'q1' => array(
-						'en' => 'one',
-						'de' => 'eins',
-					),
-					'q2' => null,
-				),
-			),
-
-			array( // #5: bad number of revision
-				array( 'q2', 'q2' ), // ids
-				array( 1001 ), // revs
-				null,
-				'\MWException'
-			),
+			)
 		);
 	}
 
@@ -364,7 +366,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetEntities
 	 */
-	public function testGetEntities( $ids, $revs, $expected, $expectedError = false ) {
+	public function testGetEntities( $ids, $expected, $expectedError = false ) {
 		$this->setupGetEntities();
 
 		// convert string IDs to EntityId objects
@@ -378,7 +380,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// do it!
 		try {
-			$entities = $this->repo->getEntities( $ids, $revs );
+			$entities = $this->repo->getEntities( $ids );
 
 			if ( $expectedError !== false  ) {
 				$this->fail( "expected error: " . $expectedError );
