@@ -5,6 +5,7 @@ use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityId;
 use \Wikibase\EntityLookup;
+use Wikibase\EntityRevision;
 use \Wikibase\WikiPageEntityLookup;
 
 /**
@@ -44,7 +45,7 @@ use \Wikibase\WikiPageEntityLookup;
 class WikipageEntityLookupTest extends EntityLookupTest {
 
 	/**
-	 * @var array[]
+	 * @var EntityRevision[]
 	 */
 	protected static $testEntities = array();
 
@@ -66,8 +67,8 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 		/* @var Entity $entity */
 		foreach ( $entities as $logicalRev => $entity ) {
 			if ( !isset( self::$testEntities[$logicalRev] ) ) {
-				$revId = self::storeTestEntity( $entity );
-				self::$testEntities[$logicalRev] = array( $entity, $revId );
+				$rev = self::storeTestEntity( $entity );
+				self::$testEntities[$logicalRev] = $rev;
 			}
 		}
 
@@ -91,15 +92,53 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 				. ":\n" . $status->getWikiText() );
 		}
 
-		return $content->getWikiPage()->getRevision()->getId();
+		return new EntityRevision(
+			$entity,
+			$content->getWikiPage()->getRevision()->getId(),
+			$content->getWikiPage()->getRevision()->getTimestamp()
+		);
 	}
 
 	protected function resolveLogicalRevision( $revision ) {
 		if ( is_int( $revision ) && isset( self::$testEntities[$revision] ) ) {
-			list( , $revision ) = self::$testEntities[$revision];
+			$revision = self::$testEntities[$revision]->getRevision();
 		}
 
 		return $revision;
+	}
+
+	/**
+	 * @dataProvider provideGetEntity
+	 *
+	 * @param string|EntityId $id The entity to get
+	 * @param bool|int $revision The revision to get (or null)
+	 * @param bool|int $expectedRev The expected revision
+	 * @param string|null     $expectException
+	 */
+	public function testGetEntityRevision( $id, $revision, $shouldExist, $expectException = null ) {
+		if ( is_string( $id ) ) {
+			$id = EntityId::newFromPrefixedId( $id );
+		}
+
+		if ( $expectException !== null ) {
+			$this->setExpectedException( $expectException );
+		}
+
+		$revision = $this->resolveLogicalRevision( $revision );
+
+		$lookup = $this->getLookup();
+		$entityRev = $lookup->getEntityRevision( $id, $revision );
+
+		if ( $shouldExist ) {
+			$this->assertNotNull( $entityRev, "ID " . $id->getPrefixedId() );
+			$this->assertEquals( $id->getPrefixedId(), $entityRev->getEntity()->getPrefixedId() );
+
+			if ( $revision > 0 ) {
+				$this->assertEquals( $revision, $entityRev->getRevision() );
+			}
+		} else {
+			$this->assertNull( $entityRev, "ID " . $id->getPrefixedId() );
+		}
 	}
 
 }

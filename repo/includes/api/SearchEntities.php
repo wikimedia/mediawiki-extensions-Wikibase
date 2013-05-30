@@ -116,7 +116,7 @@ class SearchEntities extends ApiBase {
 			$ids = array_unique( $ids );
 		}
 
-		// reduce any overflow
+		// reduce any overflow#
 		$ids = array_slice ( $ids, 0, $limit );
 
 		// Find all the remaining terms for the given entities
