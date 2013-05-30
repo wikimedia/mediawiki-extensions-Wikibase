@@ -6,6 +6,7 @@ use Ask\Language\Description\AnyValue;
 use Ask\Language\Description\SomeProperty;
 use Ask\Language\Option\QueryOptions;
 use DataValues\PropertyValue;
+use DataValues\StringValue;
 use Wikibase\Database\FieldDefinition;
 use Wikibase\Database\TableDefinition;
 use Wikibase\EntityId;
@@ -116,5 +117,22 @@ class DescriptionMatchFinderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertContainsOnly( 'int', $matchingInternalIds );
 		$this->assertEquals( array( 10 ), $matchingInternalIds );
 	}
+
+	public function testFindMatchingEntitiesWithInvalidPropertyId() {
+		$matchFinder = new MatchFinderWithoutConstructor();
+
+		$description = new SomeProperty( new StringValue( 'nyan!' ), new AnyValue() );
+		$queryOptions = new QueryOptions( 100, 0 );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+
+		$matchFinder->findMatchingEntities( $description, $queryOptions );
+	}
+
+}
+
+class MatchFinderWithoutConstructor extends \Wikibase\QueryEngine\SQLStore\Engine\DescriptionMatchFinder {
+
+	public function __construct(){}
 
 }
