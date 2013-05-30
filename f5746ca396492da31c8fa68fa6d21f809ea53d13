@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DxqOioP0",
+        "filename": "lib/includes/parsers/EntityIdParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-30T18:25:09Z",
+      "side": 1,
+      "message": "work in the constructor",
+      "revId": "f5746ca396492da31c8fa68fa6d21f809ea53d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
