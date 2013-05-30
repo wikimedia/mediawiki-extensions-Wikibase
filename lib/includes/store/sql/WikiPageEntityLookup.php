@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use MWException;
+use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -112,10 +113,15 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	 *
 	 * @return Entity|null
 	 */
-	public function getEntity( EntityID $entityId, $revision = false ) {
+	public function getEntity( EntityID $entityId, $revision = 0 ) {
 		wfProfileIn( __METHOD__ );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up entity " . $entityId->getPrefixedId()
-				. " (rev $revision)" );
+			. " (rev $revision)" );
+
+		if ( $revision === false ) { // default changed from false to 0
+			wfWarn( 'getEntity() called with $revision = false, use 0 instead.' );
+			$revision = 0;
+		}
 
 		$cache = null;
 		$cacheKey = false;
@@ -161,7 +167,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 		$where = array();
 		$join = array();
 
-		if ( $revision ) {
+		if ( $revision > 0 ) {
 			// pick revision by id
 			$where['rev_id'] = $revision;
 
@@ -219,6 +225,20 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 
 		$this->releaseConnection( $db );
 
+		if ( $entity && !$entityId->equals( $entity->getId() ) ) {
+			// This can happen when giving a revision ID that doesn't belong to the given entity
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Loaded wrong entity: expected " . $entityId
+				. ", got " . $entity->getId());
+
+			$entity = null;
+		}
+
+		if ( $entity === null && $revision > 0 ) {
+			// If a revision was specified, that revision doesn't exist or doesn't belong to
+			// the given entity. Throw an error.
+			throw new StorageException( "No such revision found for $entityId: $revision" );
+		}
+
 		// cacheable if it's the latest revision.
 		if ( $cache && $row && $entity
 			&& $row->page_latest === $row->rev_id ) {
@@ -246,26 +266,16 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	 * @since 0.4
 	 *
 	 * @param EntityID[] $entityIds
-	 * @param array|bool $revision
 	 *
 	 * @return Entity|null[]
 	 */
-	public function getEntities( array $entityIds, $revision = false ) {
+	public function getEntities( array $entityIds ) {
 		$entities = array();
 
 		// TODO: we really want batch lookup here :)
 		foreach ( $entityIds as $key => $entityId ) {
-			$rev = $revision;
 
-			if ( is_array( $rev ) ) {
-				if ( !array_key_exists( $key, $rev ) ) {
-					throw new MWException( '$entityId has no revision specified' );
-				}
-
-				$rev = $rev[$key];
-			}
-
-			$entities[$entityId->getPrefixedId()] = $this->getEntity( $entityId, $rev );
+			$entities[$entityId->getPrefixedId()] = $this->getEntity( $entityId );
 		}
 
 		return $entities;
@@ -305,7 +315,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 		$entity = EntityFactory::singleton()->newFromBlob( $entityType, $blob, $format );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
-			. $entity->getId()->getPrefixedId() );
+			. $entity->getId() );
 
 		wfProfileOut( __METHOD__ );
 		return $entity;
