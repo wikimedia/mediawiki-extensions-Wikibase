@@ -1,5 +1,5 @@
 /**
- * QUnit tests for inherit() function for more prototypal inheritance convenience.
+ * QUnit tests for inherit() function for more prototypical inheritance convenience.
  *
  * @since 0.1
  * @file
@@ -11,7 +11,7 @@
 ( function( dv, $, QUnit ) {
 	'use strict';
 
-	QUnit.module( 'dataValues.util.inherit', QUnit.newMwEnvironment() );
+	QUnit.module( 'dataValues.util.inherit' );
 
 	// ============================
 	// ======= Test Utils: ========
