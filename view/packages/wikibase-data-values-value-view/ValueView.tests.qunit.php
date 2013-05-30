@@ -157,6 +157,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.experts.coordinateinput.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.valueview/valueview.experts/experts.CoordinateInput.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts.coordinateinput',
+			),
+		),
+
 		'jquery.valueview.experts.timeinput.tests' => array(
 			'scripts' => array(
 				"$bp/jquery.valueview/valueview.experts/experts.TimeInput.tests.js",

@@ -44,6 +44,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.valueview',
 				'jquery.valueview.experts.stringvalue',
+				'jquery.valueview.experts.coordinatevalue',
 				'jquery.valueview.experts.timevalue',
 				'jquery.valueview.experts.commonsmediatype'
 			),

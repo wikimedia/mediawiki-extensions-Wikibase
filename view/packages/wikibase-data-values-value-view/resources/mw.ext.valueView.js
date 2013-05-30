@@ -8,7 +8,7 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 ( function( mw, dv, dt, $, vv ) {
-	"use strict";
+	'use strict';
 
 	mw.ext = mw.ext || {};
 
@@ -18,6 +18,11 @@
 	expertProvider.registerExpert(
 		dv.StringValue,
 		vv.experts.StringValue
+	);
+
+	expertProvider.registerExpert(
+		dv.CoordinateValue,
+		vv.experts.CoordinateValue
 	);
 
 	expertProvider.registerExpert(

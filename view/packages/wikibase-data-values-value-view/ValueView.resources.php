@@ -9,6 +9,7 @@
  * - jQuery.eachchange
  * - jQuery.inputAutoExpand
  * - jQuery.ui.suggester
+ * - jQuery.coordinate.coordinateinput
  * - jQuery.time.timeinput
  * - jQuery.ui.toggler
  *
@@ -194,6 +195,34 @@ return call_user_func( function() {
 				'jquery.eachchange',
 				'jquery.inputAutoExpand',
 				'jquery.fn.focusAt',
+			),
+		),
+
+		'jquery.valueview.experts.coordinateinput' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.experts/experts.CoordinateInput.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts',
+				'jquery.fn.focusAt',
+				'jquery.coordinate.coordinateinput',
+				'jquery.ui.inputextender',
+				'jquery.valueview.preview',
+			),
+			'messages' => array(
+				'valueview-preview-label',
+				'valueview-preview-novalue',
+			),
+		),
+
+		'jquery.valueview.experts.coordinatevalue' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview/valueview.experts/experts.CoordinateValue.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts.staticdom',
+				'jquery.valueview.BifidExpert',
+				'jquery.valueview.experts.coordinateinput',
 			),
 		),
 
