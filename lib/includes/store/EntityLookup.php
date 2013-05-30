@@ -34,16 +34,19 @@ interface EntityLookup {
 	/**
 	 * Returns the entity with the provided id or null if there is no such
 	 * entity. If a $revision is given, the requested revision of the entity is loaded.
-	 * If the revision does not belong to the given entity, null is returned.
+	 * If that revision does not exist or does not belong to the given entity,
+	 * an exception is thrown.
 	 *
 	 * @since 0.3
 	 *
 	 * @param EntityID $entityId
-	 * @param int|bool $revision
+	 * @param int $revision The desired revision id, 0 means "current".
 	 *
 	 * @return Entity|null
+	 *
+	 * @throw StorageException
 	 */
-	public function getEntity( EntityID $entityId, $revision = false );
+	public function getEntity( EntityID $entityId, $revision = 0 );
 
 	/**
 	 * Fetches the entities with provided ids and returns them.
