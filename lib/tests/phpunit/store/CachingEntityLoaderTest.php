@@ -50,8 +50,8 @@ class CachingEntityLoaderTest extends EntityLookupTest {
 	protected function newEntityLoader( array $entities ) {
 		$mock = new MockRepository();
 
-		foreach ( $entities as $entity ) {
-			$mock->putEntity( $entity );
+		foreach ( $entities as $rev => $entity ) {
+			$mock->putEntity( $entity, $rev );
 		}
 
 		return new CachingEntityLoader( $mock );

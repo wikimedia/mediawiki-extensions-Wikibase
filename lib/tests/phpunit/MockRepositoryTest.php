@@ -87,6 +87,48 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Wikibase\Property', $prop, "Entity " . $propId );
 	}
 
+	public function testGetEntityRevision() {
+		$item = new Item( array() );
+		$item->setLabel( 'en', 'foo' );
+
+		// set up a data Item
+		$this->repo->putEntity( $item, 23, "20130101000000" );
+		$itemId = $item->getId();
+
+		// set up another version of the data Item
+		$item->setLabel( 'de', 'bar' );
+		$this->repo->putEntity( $item, 24 );
+
+		// set up a property
+		$prop = new Property( array() );
+		$prop->setLabel( 'en', 'foo' );
+		$prop->setId( $itemId->getNumericId() ); // same numeric id, different prefix
+
+		$propId = $prop->getId();
+		$this->repo->putEntity( $prop );
+
+		// test latest item
+		$itemRev = $this->repo->getEntityRevision( $itemId );
+		$this->assertNotNull( $item, "Entity " . $itemId );
+		$this->assertInstanceOf( '\Wikibase\EntityRevision', $itemRev, "Entity " . $itemId );
+		$this->assertInstanceOf( '\Wikibase\Item', $itemRev->getEntity(), "Entity " . $itemId );
+		$this->assertEquals( 24, $itemRev->getRevision() );
+
+		// test item by rev id
+		$itemRev = $this->repo->getEntityRevision( $itemId, 23 );
+		$this->assertNotNull( $item, "Entity " . $itemId . "@23" );
+		$this->assertInstanceOf( '\Wikibase\EntityRevision', $itemRev, "Entity " . $itemId );
+		$this->assertInstanceOf( '\Wikibase\Item', $itemRev->getEntity(), "Entity " . $itemId );
+		$this->assertEquals( 23, $itemRev->getRevision() );
+		$this->assertEquals( "20130101000000", $itemRev->getTimestamp() );
+
+		// test latest prop
+		$propRev = $this->repo->getEntityRevision( $propId );
+		$this->assertNotNull( $propRev, "Entity " . $propId );
+		$this->assertInstanceOf( '\Wikibase\EntityRevision', $propRev, "Entity " . $propId );
+		$this->assertInstanceOf( '\Wikibase\Property', $propRev->getEntity(), "Entity " . $propId );
+	}
+
 	public function testGetItemIdForLink() {
 		$item = new Item( array() );
 		$item->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Foo' ) );

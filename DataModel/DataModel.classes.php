@@ -37,6 +37,7 @@ return call_user_func( function() {
 		'Wikibase\StatementObject' => 'DataModel/Claim/Statement.php', // Deprecated
 
 		'Wikibase\Entity' => 'DataModel/Entity/Entity.php',
+		'Wikibase\EntityRevision' => 'DataModel/Entity/EntityRevision.php',
 		'Wikibase\EntityId' => 'DataModel/Entity/EntityId.php',
 		'Wikibase\Item' => 'DataModel/Entity/Item.php',
 		'Wikibase\ItemObject' => 'DataModel/Entity/Item.php',

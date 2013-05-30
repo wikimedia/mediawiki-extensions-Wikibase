@@ -94,16 +94,16 @@ class CachingEntityLoader implements EntityLookup {
 	}
 
 	/**
-	 * @see EntityLookup::getEntities
+	 * @see   EntityLookup::getEntities
 	 *
 	 * @since 0.4
 	 *
 	 * @param array $entityIds
-	 * @param array|bool $revision
 	 *
 	 * @return Entity|null[]
+	 * @throws \MWException
 	 */
-	public function getEntities( array $entityIds, $revision = false ) {
+	public function getEntities( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
 
 		$loaded = array();

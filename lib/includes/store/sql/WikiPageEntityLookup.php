@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use MWException;
+use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -31,7 +32,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
+class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, EntityRevisionLookup {
 
 	/**
 	 * The cache type to use for caching entities in memory. Use false to disable caching.
@@ -113,13 +114,30 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	 * @return Entity|null
 	 */
 	public function getEntity( EntityID $entityId, $revision = false ) {
+		$entityRev = $this->getEntityRevision( $entityId, $revision );
+		return $entityRev === null ? null : $entityRev->getEntity();
+	}
+
+	/**
+	 * Returns the entity revision with the provided id or null is there is no such
+	 * entity. If a $revision is given, the requested revision of the entity is loaded.
+	 * The the revision does not belong to the given entity, null is returned.
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityID $entityId
+	 * @param int|bool $revision
+	 *
+	 * @return EntityRevision|null
+	 */
+	public function getEntityRevision( EntityID $entityId, $revision = false ) {
 		wfProfileIn( __METHOD__ );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up entity " . $entityId->getPrefixedId()
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up entity " . $entityId
 				. " (rev $revision)" );
 
 		$cache = null;
 		$cacheKey = false;
-		$cachedEntity = null;
+		$cachedEntityRev = null;
 		$cachedRev = false;
 
 		if ( $this->cacheType !== false ) {
@@ -127,14 +145,20 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			$cache = wfGetCache( $this->cacheType );
 			$cached = $cache->get( $cacheKey );
 
+			if ( !( $cached instanceof EntityRevision ) ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found something strange in the cache for (key $cacheKey)." );
+				$cached = false;
+			}
+
 			if ( $cached ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found entity in cache (key $cacheKey)" );
-				list( $cachedRev, $cachedEntity ) = $cached;
+				$cachedEntityRev = $cached;
+				$cachedRev = $cachedEntityRev->getRevision();
 
 				if ( $revision === $cachedRev ) {
 					wfDebugLog( __CLASS__, __FUNCTION__ . ": Using cached entity (rev $cachedRev)" );
 					wfProfileOut( __METHOD__ );
-					return $cachedEntity;
+					return $cachedEntityRev;
 				}
 
 				// NOTE: if $revision is false, we first check whether the cached
@@ -171,7 +195,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			// pick text via rev_text_id
 			$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revision of " . $entityId->getPrefixedId() );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revision of " . $entityId );
 		} else {
 			// entity to page mapping
 			$tables[] = 'wb_entity_per_page';
@@ -189,7 +213,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			// pick text via rev_text_id
 			$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up latest revision of " . $entityId->getPrefixedId() );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up latest revision of " . $entityId );
 		}
 
 		$res = $db->select( $tables, $vars, $where, __METHOD__, $opt, $join );
@@ -201,7 +225,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			wfWarn( "Database Error in " . __METHOD__ . " #$enum: $error" );
 		}
 
-		$entity = null;
+		$entityRev = null;
 
 		if ( $row = $res->fetchObject() ) {
 
@@ -209,35 +233,43 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 				// the revision we loaded is the cached one, use the cached entity
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Using cached entity (rev $cachedRev is latest)" );
 				wfProfileOut( __METHOD__ );
-				return $cachedEntity;
+				return $cachedEntityRev;
 			}
 
-			$entity = $this->loadEntity( $entityId->getEntityType(), $row );
+			$entityRev = $this->loadEntity( $entityId->getEntityType(), $row );
 		} else {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Entity not loaded for " . $entityId->getPrefixedId() );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Entity not loaded for " . $entityId );
 		}
 
 		$this->releaseConnection( $db );
 
+		if ( $entityRev && !$entityId->equals( $entityRev->getEntity()->getId() ) ) {
+			// This can happen when giving a revision ID that doesn't belong to the given entity
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Loaded wrong entity: expected " . $entityId
+							. ", got " . $entityRev->getEntity()->getId());
+
+			$entityRev = null;
+		}
+
 		// cacheable if it's the latest revision.
-		if ( $cache && $row && $entity
+		if ( $cache && $row && $entityRev
 			&& $row->page_latest === $row->rev_id ) {
 
 			if ( $cachedRev !== false ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Updating cached version of " . $entityId->getPrefixedId() );
-				$cache->replace( $cacheKey, array( $row->rev_id, $entity ), $this->cacheTimeout );
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": Updating cached version of " . $entityId );
+				$cache->replace( $cacheKey, $entityRev, $this->cacheTimeout );
 			} else {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Adding cached version of " . $entityId->getPrefixedId() );
-				$cache->add( $cacheKey, array( $row->rev_id, $entity ), $this->cacheTimeout );
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": Adding cached version of " . $entityId );
+				$cache->add( $cacheKey, $entityRev, $this->cacheTimeout );
 			}
 		} else if ( $cachedRev !== false ) {
 			// no longer the latest version
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Removing cached version of " . $entityId->getPrefixedId() );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Removing cached version of " . $entityId );
 			$cache->delete( $cacheKey );
 		}
 
 		wfProfileOut( __METHOD__ );
-		return $entity;
+		return $entityRev;
 	}
 
 	/**
@@ -272,7 +304,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	}
 
 	/**
-	 * Construct an Entity object from a database row from the revision and text tables.
+	 * Construct an EntityRevision object from a database row from the revision and text tables.
 	 *
 	 * This calls Revision::getRevisionText to resolve any additional indirections in getting
 	 * to the actual blob data, like the "External Store" mechanism used by Wikipedia & co.
@@ -282,7 +314,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 	 * @param String $entityType The entity type ID, determines what kind of object is constructed
 	 *        from the blob in the database.
 	 *
-	 * @return Entity|null
+	 * @return EntityRevision|null
 	 */
 	protected function loadEntity( $entityType, $row ) {
 		wfProfileIn( __METHOD__ );
@@ -303,11 +335,12 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 
 		$format = $row->rev_content_format;
 		$entity = EntityFactory::singleton()->newFromBlob( $entityType, $blob, $format );
+		$entityRev = new EntityRevision( $entity, $row->rev_id, $row->rev_timestamp );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
-			. $entity->getId()->getPrefixedId() );
+			. $entity->getId() );
 
 		wfProfileOut( __METHOD__ );
-		return $entity;
+		return $entityRev;
 	}
 }

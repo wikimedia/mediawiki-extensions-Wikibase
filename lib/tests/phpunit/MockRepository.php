@@ -5,6 +5,8 @@ use Wikibase\Claims;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
+use Wikibase\EntityRevision;
+use Wikibase\EntityRevisionLookup;
 use Wikibase\Item;
 use Wikibase\PropertyLabelResolver;
 use Wikibase\SiteLink;
@@ -38,7 +40,7 @@ use Wikibase\Property;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MockRepository implements SiteLinkLookup, EntityLookup {
+class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLookup {
 
 	protected $entities = array();
 	protected $itemByLink = array();
@@ -56,12 +58,29 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	 * @return Entity|null
 	 */
 	public function getEntity( EntityId $entityId, $revision = false ) {
+		$rev = $this->getEntityRevision( $entityId, $revision );
+
+		return $rev === null ? null : $rev->getEntity();
+	}
+
+	/**
+	 * Returns the entity revision with the provided id or null is there is no such
+	 * entity. If a $revision is given, the requested revision of the entity is loaded.
+	 * The the revision does not belong to the given entity, null is returned.
+	 *
+	 * @param EntityID $entityId
+	 * @param int|bool $revision
+	 *
+	 * @return EntityRevision|null
+	 */
+	public function getEntityRevision( EntityId $entityId, $revision = false ) {
 		$key = $entityId->getPrefixedId();
 
 		if ( !isset( $this->entities[$key] ) || empty( $this->entities[$key] ) ) {
 			return null;
 		}
 
+		/* @var EntityRevision[] $revisions */
 		$revisions = $this->entities[$key];
 
 		if ( $revision === false ) {
@@ -73,8 +92,14 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 			return null;
 		}
 
-		$entity = $revisions[$revision]->copy(); // return a copy!
-		return $entity;
+		$entityRev = $revisions[$revision];
+		$entityRev = new EntityRevision( // return a copy!
+			$entityRev->getEntity()->copy(), // return a copy!
+			$entityRev->getRevision(),
+			$entityRev->getTimestamp()
+		);
+
+		return $entityRev;
 	}
 
 	/**
@@ -210,9 +235,10 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	 * ID is given, the entity with the highest revision ID is considered the current one.
 	 *
 	 * @param \Wikibase\Entity $entity
-	 * @param bool             $revision
+	 * @param bool|int         $revision
+	 * @param int|string      $timestamp
 	 */
-	public function putEntity( Entity $entity, $revision = false ) {
+	public function putEntity( Entity $entity, $revision = false, $timestamp = 0 ) {
 		if ( $entity->getId() === null ) {
 			//NOTE: assign ID to original object, not clone
 			$entity->setId( $this->maxId +1 );
@@ -242,8 +268,16 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 
 		$this->maxId = max( $this->maxId, $entity->getId()->getNumericId() );
 
-		$this->entities[$key][$revision] = $entity->copy(); // note: always clone
+		$rev = new EntityRevision(
+			$entity->copy(), // note: always clone
+			$revision,
+			wfTimestamp( TS_MW, $timestamp )
+		);
+
+		$this->entities[$key][$revision] = $rev;
 		ksort( $this->entities[$key] );
+
+		return $rev;
 	}
 
 	/**
