@@ -1,15 +1,7 @@
 <?php
-
-namespace Wikibase\Test;
-use Wikibase\CachingEntityLoader;
-use Wikibase\Item;
-use Wikibase\Query;
-use Wikibase\EntityLookup;
-use Wikibase\EntityId;
-use Wikibase\Property;
-
-/**
- * Tests for the Wikibase\EntityLoader class.
+ /**
+ *
+ * Copyright © 06.06.13 by the authors listed below.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,36 +18,21 @@ use Wikibase\Property;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
- *
+ * @license GPL 2+
  * @file
- * @ingroup WikibaseLib
- * @ingroup Test
  *
- * @group WikibaseLib
- * @group WikibaseEntityLookup
- *
- * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
- * @todo: turn this into a base class for tests for different EntityLookup tests
  */
-class CachingEntityLoaderTest extends EntityLookupTest {
 
-	/**
-	 * @see EntityLookupTest::newEntityLoader()
-	 *
-	 * @return EntityLookup
-	 */
-	protected function newEntityLoader( array $entities ) {
-		$mock = new MockRepository();
 
-		foreach ( $entities as $rev => $entity ) {
-			$mock->putEntity( $entity, $rev );
-		}
+namespace Wikibase;
 
-		return new CachingEntityLoader( $mock );
-	}
+
+/**
+ * Class StorageException
+ * @package Wikibase
+ */
+
+class StorageException extends \MWException {
 
 }
-
