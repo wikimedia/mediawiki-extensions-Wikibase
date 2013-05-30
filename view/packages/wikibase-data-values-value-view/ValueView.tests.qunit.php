@@ -63,6 +63,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.coordinate.coordinateinput.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.coordinate/jquery.coordinate.coordinateinput.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.coordinate.coordinateinput',
+			),
+		),
+
 		'jquery.time.timeinput.tests' => array(
 			'scripts' => array(
 				"$bp/jquery.time/jquery.time.timeinput.tests.js",

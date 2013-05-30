@@ -89,6 +89,17 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.coordinate.coordinateinput' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.coordinate/jquery.coordinate.coordinateinput.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+				'jquery.eachchange',
+				'coordinate.js',
+			),
+		),
+
 		'jquery.time.timeinput' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.time/jquery.time.timeinput.js',
