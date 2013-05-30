@@ -37,9 +37,11 @@ use Wikibase\EntityId;
  */
 class EntityIdTransformerTest extends \PHPUnit_Framework_TestCase {
 
-	public function testConstruct() {
-		new EntityIdTransformer( $this->getIdMap() );
-		$this->assertTrue( true );
+	public function testConstructAndImplementsInterfaces() {
+		$transformer = new EntityIdTransformer( $this->getIdMap() );
+
+		$this->assertInstanceOf( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdFinder' , $transformer );
+		$this->assertInstanceOf( 'Wikibase\QueryEngine\SQLStore\InternalEntityIdInterpreter' , $transformer );
 	}
 
 	protected function getIdMap() {
@@ -91,12 +93,49 @@ class EntityIdTransformerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider idProvider
 	 */
-	public function testGetForNotSetType( $entityType, $numericId ) {
-		$this->setExpectedException( 'OutOfBoundsException' );
-
+	public function testGetInternalIdForNotSetType( $entityType, $numericId ) {
 		$transformer = new EntityIdTransformer( array() );
 
+		$this->setExpectedException( 'OutOfBoundsException' );
+
 		$transformer->getInternalIdForEntity( new EntityId( $entityType, $numericId ) );
+	}
+
+	/**
+	 * @dataProvider idProvider
+	 */
+	public function testGetExternalIdForEntity( $entityType, $numericId ) {
+		$transformer = new EntityIdTransformer( $this->getIdMap() );
+		$expected = new EntityId( $entityType, $numericId );
+
+		$internalId = $transformer->getInternalIdForEntity( $expected );
+		$actual = $transformer->getExternalIdForEntity( $internalId );
+
+		$this->assertEquals( $expected, $actual );
+	}
+
+	/**
+	 * @dataProvider internalIdProvider
+	 */
+	public function testGetExternalIdForNotSetType( $internalId ) {
+		$transformer = new EntityIdTransformer( array() );
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+
+		$transformer->getExternalIdForEntity( $internalId );
+	}
+
+	public function internalIdProvider() {
+		$argLists = array();
+
+		$argLists[] = array( 10 );
+		$argLists[] = array( 11 );
+		$argLists[] = array( 19 );
+		$argLists[] = array( 123450 );
+		$argLists[] = array( 123451 );
+		$argLists[] = array( 123459 );
+
+		return $argLists;
 	}
 
 }
