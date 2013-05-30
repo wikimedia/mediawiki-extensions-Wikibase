@@ -210,6 +210,7 @@ return call_user_func( function() {
 				'jquery.valueview.preview',
 			),
 			'messages' => array(
+				'valueview-expert-coordinateinput-precision',
 				'valueview-preview-label',
 				'valueview-preview-novalue',
 			),
@@ -218,6 +219,9 @@ return call_user_func( function() {
 		'jquery.valueview.experts.coordinatevalue' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview/valueview.experts/experts.CoordinateValue.js',
+			),
+			'styles' => array(
+				'jquery.valueview/valueview.experts/experts.CoordinateInput.css',
 			),
 			'dependencies' => array(
 				'jquery.valueview.experts.staticdom',

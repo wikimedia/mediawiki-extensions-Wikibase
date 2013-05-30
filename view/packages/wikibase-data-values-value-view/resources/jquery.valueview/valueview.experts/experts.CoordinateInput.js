@@ -5,8 +5,12 @@
  *
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, vp, $, vv, Coordinate ) {
+// TODO: Remove mediaWiki dependency
+( function( dv, vp, $, vv, coordinate, mw ) {
 	'use strict';
+
+	var Coordinate = coordinate.Coordinate,
+		coordinateSettings = coordinate.settings;
 
 	var PARENT = vv.Expert;
 
@@ -41,10 +45,63 @@
 		preview: null,
 
 		/**
+		 * Container node for precision input and label.
+		 * @type {jQuery}
+		 */
+		$precisionContainer: null,
+
+		/**
+		 * Node of the widget used to specify the precision.
+		 * @type {jQuery}
+		 */
+		$precision: null,
+
+		/**
 		 * @see jQuery.valueview.Expert._init
 		 */
 		_init: function() {
 			var self = this;
+
+			this.$precisionContainer = $( '<div/>' )
+			.addClass( this.uiBaseClass + '-precisioncontainer' )
+			.append( $( '<div/>' ).text( mw.msg( 'valueview-expert-coordinateinput-precision' ) ) );
+
+			var precisionValues = [];
+			$.each( coordinateSettings.precisions, function( i, precisionDefinition ) {
+				var label = ( precisionDefinition.text )
+					? precisionDefinition.text
+					: precisionDefinition.level;
+
+				precisionValues.push( { value: precisionDefinition.level, label: label } );
+			} );
+
+			this.$precision = $( '<div/>' )
+				.addClass( this.uiBaseClass + '-precision' )
+				.listrotator( {
+					values: precisionValues.reverse(),
+					deferInit: true
+				} )
+				.on(
+				'listrotatorauto.' + this.uiBaseClass + ' listrotatorselected.' + this.uiBaseClass,
+				function( event ) {
+					var overwrite = {};
+
+					if( event.type === 'listrotatorauto' ) {
+						overwrite.precision = undefined;
+					}
+
+					var value = self._updateValue( overwrite );
+
+					if( event.type === 'listrotatorauto' ) {
+						$( this ).data( 'listrotator' ).rotate( value.getPrecision() );
+					}
+				}
+			)
+			.appendTo( this.$precisionContainer );
+
+			var $toggler = $( '<a/>' )
+			.addClass( this.uiBaseClass + '-advancedtoggler' )
+			.text( mw.msg( 'valueview-expert-advancedadjustments' ) );
 
 			this.$input = $( '<input/>', {
 				type: 'text',
@@ -63,9 +120,17 @@
 			} )
 			.coordinateinput()
 			.inputextender( {
-				content: [ $preview ]
+				content: [ $preview, $toggler, this.$precisionContainer ],
+				initCallback: function() {
+					self.$precision.data( 'listrotator' ).initWidths();
+					self.$precisionContainer.css( 'display', 'none' );
+					$toggler.toggler( { $subject: self.$precisionContainer } );
+				}
 			} )
 			.on( 'coordinateinputupdate.' + this.uiBaseClass, function( event, value ) {
+				if( value && value.isValid() ) {
+					self.$precision.data( 'listrotator' ).rotate( value.getPrecision() );
+				}
 				self._newValue = false; // value, not yet handled by draw(), is outdated now
 				self._viewNotifier.notify( 'change' );
 				self._updatePreview();
@@ -77,6 +142,10 @@
 		 * @see jQuery.valueview.Expert.destroy
 		 */
 		destroy: function() {
+			this.$precision.data( 'listrotator' ).destroy();
+			this.$precision.remove();
+			this.$precisionContainer.remove();
+
 			var previewElement = this.preview.element;
 			this.preview.destroy();
 			previewElement.remove();
@@ -86,6 +155,36 @@
 			this.$input.remove();
 
 			PARENT.prototype.destroy.call( this );
+		},
+
+		/**
+		 * Builds a coordinate.Coordinate object from the widget's current input taking the
+		 * precision into account if set manually.
+		 *
+		 * @param {Object} [overwrites] Values that should be used instead of the ones picked from
+		 *        the input elements.
+		 * @return {coordinate.Coordinate}
+		 */
+		_updateValue: function( overwrites ) {
+			overwrites = overwrites || {};
+
+			var options = {},
+				precision = ( overwrites.hasOwnProperty( 'precision' ) )
+					? overwrites.precision
+					: this.$precision.data( 'listrotator' ).value(),
+				value;
+
+			if( precision !== undefined ) {
+				options.precision = precision;
+			}
+
+			value = new Coordinate( this.$input.val(), options );
+
+			this._setRawValue( value );
+			this._updatePreview();
+			this._viewNotifier.notify( 'change' );
+
+			return value;
 		},
 
 		/**
@@ -157,6 +256,9 @@
 
 			if( this._newValue !== false ) {
 				this.$input.data( 'coordinateinput' ).value( this._newValue );
+				if( this._newValue !== null ) {
+					this.$precision.data( 'listrotator' ).value( this._newValue.getPrecision() );
+				}
 				this._newValue = false;
 				this._updatePreview();
 			}
@@ -177,4 +279,4 @@
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, coordinate.Coordinate ) );
+}( dataValues, valueParsers, jQuery, jQuery.valueview, coordinate, mediaWiki ) );

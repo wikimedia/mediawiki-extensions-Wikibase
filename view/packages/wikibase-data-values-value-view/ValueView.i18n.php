@@ -45,6 +45,9 @@ $messages['en'] = array(
 	// EmptyValue expert:
 	'valueview-expert-emptyvalue-empty' => 'empty',
 
+	// CoordinateInput expert:
+	'valueview-expert-coordinateinput-precision' => 'Precision:',
+
 	// TimeInput expert:
 	'valueview-expert-timeinput-precision' => 'Precision:',
 	'valueview-expert-timeinput-calendar' => 'Calendar:',
@@ -76,6 +79,7 @@ Parameters:
 * $1 - the name of the data type which lacks support',
 	'valueview-expert-emptyvalue-empty' => 'Message expressing that there is currently no value set in a jQuery valueview.
 {{Identical|Empty}}',
+	'valueview-expert-coordinateinput-precision' => 'Label for the user interface element used to set a specific precision (e.g. 1, 0.1, 0.001) when entering a coordinate value.',
 	'valueview-expert-timeinput-precision' => 'Label for the user interface element used to set a specific precision (e.g. hour, day, month, year) when entering a time value.',
 	'valueview-expert-timeinput-calendar' => 'Label for the user interface element used to select a specific calendar (e.g. Gregorian, Julian) entering a time value.
 
