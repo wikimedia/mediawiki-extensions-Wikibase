@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "DxvozrKg",
+        "filename": "DataModel/DataModel.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-05-30T13:03:34Z",
+      "side": 1,
+      "message": "I am just saying low level components should not be listed as an extension with higher level concept extensions that are actually relevant for the users of the wiki. As a user of some wiki I go to special version to see what extensions are installed and to seek their documentation pages to see what features I can use within that wiki. To have that page flooded with low level components which are used by other extensions but which do not have any real value for the user is just annoying and seems ridiculous.\n\nI know that this is a problem of core, but as long as the problem exists, I would rather not work around it like that.\n\nIf your only concern is that you want to see the version number of those components right now, then perhaps creating a dynamic extension description for \"real\" extensions which will hold information about their usage of those components could be a less invasive workaround",
+      "parentUuid": "DxmRYpTA",
+      "revId": "6593eb3eee98360be0c38b335349a4985bdf29bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxV-EXZM",
         "filename": "DataModel/DataModel.mw.php",
         "patchSetId": 1
