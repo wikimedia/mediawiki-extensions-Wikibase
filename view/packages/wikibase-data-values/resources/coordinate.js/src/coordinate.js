@@ -30,30 +30,41 @@ this.coordinate = ( function() {
 			degree: '°',
 			minute: '\'',
 			second: '"',
-			precisionTexts: [
-				{ precision: 1, text: 'to a degree' },
-				{ precision: 1 / 60, text: 'to an arcminute' },
-				{ precision: 1 / 3600, text: 'to an arcsecond' },
-				{ precision: 1 / 36000, text: 'to a tenth of an arcsecond' },
-				{ precision: 1 / 360000, text: 'to the hundredth of an arcsecond' },
-				{ precision: 1 / 3600000, text: 'to the thousandth of an arcsecond' }
+			precisions: [
+				{ level: 10 },
+				{ level: 1, text: 'to a degree' },
+				{ level: 0.1 },
+				{ level: 1 / 60, text: 'to an arcminute' },
+				{ level: 0.01 },
+				{ level: 1 / 3600, text: 'to an arcsecond' },
+				{ level: 0.001 },
+				{ level: 1 / 36000, text: 'to 1/10 of an arcsecond' },
+				{ level: 0.0001 },
+				{ level: 1 / 360000, text: 'to 1/100 of an arcsecond' },
+				{ level: 0.00001 },
+				{ level: 1 / 3600000, text: 'to 1/1000 of an arcsecond' },
+				{ level: 0.000001 }
 			]
 		},
 
 		/**
-		 * Default precision levels.
-		 * @type {number[]}
+		 * Returns the index of a precision within the settings array containing the precisions or
+		 * -1 if the precision could not be found.
+		 *
+		 * @param {number} precision
+		 * @return {number}
 		 */
-		precisionLevels: [
-			10,
-			1,
-			0.1, 1/60,
-			0.01, 1/3600,
-			0.001, 1/36000,
-			0.0001, 1/360000,
-			0.00001, 1/3600000,
-			0.000001
-		],
+		getPrecisionIndex: function( precision ) {
+			for( var i in this.settings.precisions ) {
+				if(
+					this.settings.precisions.hasOwnProperty( i )
+					&& this.settings.precisions[i].level === precision
+				) {
+					return i;
+				}
+			}
+			return -1;
+		},
 
 		/**
 		 * Returns the given precision increased by one step.
@@ -62,14 +73,14 @@ this.coordinate = ( function() {
 		 * @return {number}
 		 */
 		increasePrecision: function( precision ) {
-			var index = this.precisionLevels.indexOf( precision );
+			var index = this.getPrecisionIndex( precision );
 
-			if( index === this.precisionLevels.length - 1 || index === -1 ) {
+			if( index === this.settings.precisions.length - 1 || index === -1 ) {
 				var newPrecision = precision / 10;
 				return ( newPrecision < 1e-9 ) ? 1e-9 : newPrecision;
 			}
 
-			return this.precisionLevels[index + 1];
+			return this.settings.precisions[index + 1].level;
 		},
 
 		/**
@@ -83,7 +94,7 @@ this.coordinate = ( function() {
 				return 1e-9;
 			}
 
-			var index = this.precisionLevels.indexOf( precision );
+			var index = this.getPrecisionIndex( precision );
 
 			if( index === 0 ) {
 				return 180;
@@ -91,11 +102,11 @@ this.coordinate = ( function() {
 				return Math.min( precision * 10, 180 );
 			}
 
-			return this.precisionLevels[index-1];
+			return this.settings.precisions[index-1].level;
 		},
 
 		/**
-		 * Returns a given precision as string.
+		 * Returns a precision's string representation.
 		 *
 		 * @param {number} precision
 		 * @return {string}
@@ -105,12 +116,12 @@ this.coordinate = ( function() {
 
 			// Figure out if the precision is very close to a precision that can be expressed with a
 			// string:
-			for( var i in this.settings.precisionTexts ) {
+			for( var i in this.settings.precisions ) {
 				if(
-					this.settings.precisionTexts.hasOwnProperty( i )
-					&& Math.abs( precision - this.settings.precisionTexts[i].precision ) < 0.0000001
+					this.settings.precisions.hasOwnProperty( i )
+					&& Math.abs( precision - this.settings.precisions[i].level ) < 0.0000001
 				) {
-					precisionText = this.settings.precisionTexts[i].text;
+					precisionText = this.settings.precisions[i].text;
 				}
 			}
 

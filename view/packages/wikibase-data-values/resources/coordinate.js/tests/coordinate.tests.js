@@ -159,13 +159,14 @@
 			// Look up precision text:
 			if( typeof expected.tech === 'number' ) {
 
-				$.each( coordinate.settings.precisionTexts, function( i, textDefinition ) {
-					if( textDefinition.precision === expected.tech ) {
+				$.each( coordinate.settings.precisions, function( i, precisionDefinition ) {
+					if( precisionDefinition.level === expected.tech ) {
 
 						assert.strictEqual(
 							precisionText,
-							textDefinition.text,
-							'Precision text for \'' + precision + '\' results in text \'' + textDefinition.text + '\'.'
+							precisionDefinition.text,
+							'Precision text for \'' + precision + '\' results in text \''
+								+ precisionDefinition.text + '\'.'
 						);
 
 						return false;

@@ -143,33 +143,6 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		getPrecision: function() { return this._precision; },
 
 		/**
-		 * Sets the precision.
-		 *
-		 * TODO: Make this an immutable object, deprecate this function.
-		 *
-		 * @param {number} precision
-		 */
-		setPrecision: function( precision ) { this._precision = precision; },
-
-		/**
-		 * Increases the precision by one step.
-		 *
-		 * TODO: Make this an immutable object, deprecate this function.
-		 */
-		increasePrecision: function() {
-			this._precision = coordinate.increasePrecision( this._precision );
-		},
-
-		/**
-		 * Decreases the precision by one step.
-		 *
-		 * TODO: Make this an immutable object, deprecate this function.
-		 */
-		decreasePrecision: function() {
-			this._precision = coordinate.decreasePrecision( this._precision );
-		},
-
-		/**
 		 * Returns the precision text.
 		 *
 		 * @return {string}

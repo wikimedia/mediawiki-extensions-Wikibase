@@ -136,61 +136,6 @@
 
 	} );
 
-	QUnit.test( 'Precision handling', function( assert ) {
-		var c = new coordinate.Coordinate( '1.5 1.25' );
-
-		assert.equal(
-			c.getPrecision(),
-			0.01,
-			'Increased precision'
-		);
-
-		c.decreasePrecision();
-		c.decreasePrecision();
-
-		assert.equal(
-			c.getPrecision(),
-			0.1,
-			'Decreased precision'
-		);
-
-		assert.equal(
-			c.longitudeDecimal(),
-			1.3,
-			'Verified applied precision'
-		);
-
-		c.increasePrecision();
-		c.increasePrecision();
-
-		assert.equal(
-			c.getPrecision(),
-			0.01,
-			'Increased precision'
-		);
-
-		assert.equal(
-			c.longitudeDecimal(),
-			1.25,
-			'Verified applied precision'
-		);
-
-		c.setPrecision( 1 );
-
-		assert.equal(
-			c.getPrecision(),
-			1,
-			'Set precision'
-		);
-
-		assert.equal(
-			c.longitudeDecimal(),
-			1,
-			'Verified applied precision'
-		);
-
-	} );
-
 	QUnit.test( 'iso6709()', function( assert ) {
 		var c;
 
