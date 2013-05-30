@@ -31,6 +31,7 @@ use Wikibase\EntityId;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class EntityIdParser extends StringValueParser {
 
@@ -55,6 +56,8 @@ class EntityIdParser extends StringValueParser {
 	 */
 	protected $regex = false;
 
+	private $prefixMap = null;
+
 	/**
 	 * @since 0.4
 	 *
@@ -68,6 +71,25 @@ class EntityIdParser extends StringValueParser {
 		parent::__construct( $options );
 
 		$this->requireOption( self::OPT_PREFIX_MAP );
+	}
+
+	/**
+	 * Returns a prefix map with lower case keys. The map is constructed from
+	 * the OPT_PREFIX_MAP option from the ParserOptions passed to the provider.
+	 *
+	 * @return array A mapping from prefixes to type IDs.
+	 */
+	protected function getPrefixMap() {
+		if ( $this->prefixMap === null ) {
+			$this->prefixMap = array();
+
+			foreach ( $this->getOption( self::OPT_PREFIX_MAP ) as $prefix => $type ) {
+				$prefix = strtolower( $prefix );
+				$this->prefixMap[$prefix] = $type;
+			}
+		}
+
+		return $this->prefixMap;
 	}
 
 	/**
@@ -99,17 +121,18 @@ class EntityIdParser extends StringValueParser {
 	/**
 	 * @since 0.4
 	 *
-	 * @param string $prefix
+	 * @param string $prefix the prefix to look up
 	 *
 	 * @return string|null
 	 */
 	protected function getEntityTypeForPrefix( $prefix ) {
-		$typeMap = $this->getOption( self::OPT_PREFIX_MAP );
-		return array_key_exists( $prefix, $typeMap ) ? $typeMap[$prefix] : null;
+		$prefix = strtolower( $prefix );
+		$prefixMap = $this->getPrefixMap();
+		return array_key_exists( $prefix, $prefixMap ) ? $prefixMap[$prefix] : null;
 	}
 
 	/**
-	 * Get individual parts of an id.
+	 * Get individual parts of an id. All results are converted to lower case.
 	 *
 	 * @since 0.4
 	 *
@@ -120,8 +143,9 @@ class EntityIdParser extends StringValueParser {
 	protected function getIdParts( $id ) {
 		if ( $this->regex === false ) {
 			$prefixes = array();
+			$prefixMap = $this->getPrefixMap();
 
-			foreach ( array_keys( $this->getOption( self::OPT_PREFIX_MAP ) ) as $prefix ) {
+			foreach ( array_keys( $prefixMap ) as $prefix ) {
 				$prefixes[] = preg_quote( $prefix );
 			}
 
