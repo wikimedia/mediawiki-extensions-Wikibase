@@ -29,7 +29,7 @@
 		return $div.data( 'listrotator' );
 	};
 
-	QUnit.module( 'jquery.ui.listrotator', QUnit.newMwEnvironment( {
+	QUnit.module( 'jquery.ui.listrotator', {
 		teardown: function() {
 			$( '.test_listrotator' ).each( function( i, node ) {
 				var $node = $( node ),
@@ -40,7 +40,7 @@
 				$node.remove();
 			} );
 		}
-	} ) );
+	} );
 
 	QUnit.test( 'Initialize and destroy', 4, function( assert ) {
 		var listrotator = newTestListrotator(),

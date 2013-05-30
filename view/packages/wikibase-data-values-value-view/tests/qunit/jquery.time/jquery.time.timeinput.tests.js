@@ -16,11 +16,11 @@
 		return $( '<input/>' ).addClass( 'test_timeinput' ).timeinput( options );
 	};
 
-	QUnit.module( 'jquery.time.timeinput', QUnit.newMwEnvironment( {
+	QUnit.module( 'jquery.time.timeinput', {
 		teardown: function() {
 			$( '.test_timeinput' ).remove();
 		}
-	} ) );
+	} );
 
 	QUnit.test( 'Input interpretation', function( assert ) {
 		var $input = newTestTimeinput(),
