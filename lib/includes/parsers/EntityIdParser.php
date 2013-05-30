@@ -97,6 +97,8 @@ class EntityIdParser extends StringValueParser {
 	 *
 	 * @param string $prefix
 	 *
+	 * @todo: prefixes should be case insensitive
+	 *
 	 * @return string|null
 	 */
 	protected function getEntityTypeForPrefix( $prefix ) {
