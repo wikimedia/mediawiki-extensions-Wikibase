@@ -5,7 +5,10 @@ use Wikibase\Claims;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
+use Wikibase\EntityRevision;
+use Wikibase\EntityRevisionLookup;
 use Wikibase\Item;
+use Wikibase\PropertyLabelResolver;
 use Wikibase\SiteLink;
 use Wikibase\SiteLinkLookup;
 use Wikibase\Property;
@@ -38,7 +41,7 @@ use Wikibase\StorageException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MockRepository implements SiteLinkLookup, EntityLookup {
+class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLookup {
 
 	protected $entities = array();
 	protected $itemByLink = array();
@@ -46,16 +49,32 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	private $maxId = 0;
 
 	/**
-	 * @see   EntityLookup::getEntity
+	 * @see EntityLookup::getEntity
 	 *
-	 * @param EntityID           $entityId
-	 * @param \Wikibase\EntityId $entityId
-	 * @param int                $revision The desired revision id, 0 means "current".
+	 * @param EntityID $entityId
+	 * @param int $revision The desired revision id, 0 means "current".
 	 *
-	 * @throws \Wikibase\StorageException
 	 * @return Entity|null
+	 *
+	 * @throw StorageException
 	 */
 	public function getEntity( EntityId $entityId, $revision = 0 ) {
+		$rev = $this->getEntityRevision( $entityId, $revision );
+
+		return $rev === null ? null : $rev->getEntity();
+	}
+
+	/**
+	 * @since 0.4
+	 * @see EntityRevisionLookup::getEntityRevision
+	 *
+	 * @param EntityID $entityId
+	 * @param int $revision The desired revision id, 0 means "current".
+	 *
+	 * @return EntityRevision|null
+	 * @throw StorageException
+	 */
+	public function getEntityRevision( EntityId $entityId, $revision = 0 ) {
 		$key = $entityId->getPrefixedId();
 
 		if ( !isset( $this->entities[$key] ) || empty( $this->entities[$key] ) ) {
@@ -63,11 +82,11 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 		}
 
 		if ( $revision === false ) { // default changed from false to 0
-			wfWarn( 'getEntity() called with $revision = false, use 0 instead.' );
+			wfWarn( 'getEntityRevision() called with $revision = false, use 0 instead.' );
 			$revision = 0;
 		}
 
-		/* @var Entity[] $revisions */
+		/* @var EntityRevision[] $revisions */
 		$revisions = $this->entities[$key];
 
 		if ( $revision === 0 ) { // note: be robust and accept false too.
@@ -79,10 +98,14 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 			throw new StorageException( "no such revision for entity $key: $revision" );
 		}
 
-		$entity = $revisions[$revision];
-		$entity = $entity->copy();
+		$entityRev = $revisions[$revision];
+		$entityRev = new EntityRevision( // return a copy!
+			$entityRev->getEntity()->copy(), // return a copy!
+			$entityRev->getRevision(),
+			$entityRev->getTimestamp()
+		);
 
-		return $entity;
+		return $entityRev;
 	}
 
 	/**
@@ -218,10 +241,12 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	 * ID is given, the entity with the highest revision ID is considered the current one.
 	 *
 	 * @param \Wikibase\Entity $entity
-	 * @param bool|int         $revision
-	 * @param int|string      $timestamp
+	 * @param int              $revision
+	 * @param int|string       $timestamp
+	 *
+	 * @return \Wikibase\EntityRevision
 	 */
-	public function putEntity( Entity $entity, $revision = false, $timestamp = 0 ) {
+	public function putEntity( Entity $entity, $revision = 0, $timestamp = 0 ) {
 		if ( $entity->getId() === null ) {
 			//NOTE: assign ID to original object, not clone
 			$entity->setId( $this->maxId +1 );
@@ -245,14 +270,22 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 			$this->entities[$key] = array();
 		}
 
-		if ( $revision === false ) {
-			$revision = count( $this->entities[$key] );
+		if ( $revision === 0 ) {
+			$revision = count( $this->entities[$key] ) +1;
 		}
 
 		$this->maxId = max( $this->maxId, $entity->getId()->getNumericId() );
 
-		$this->entities[$key][$revision] = $entity->copy(); // note: always clone
+		$rev = new EntityRevision(
+			$entity->copy(), // note: always clone
+			$revision,
+			wfTimestamp( TS_MW, $timestamp )
+		);
+
+		$this->entities[$key][$revision] = $rev;
 		ksort( $this->entities[$key] );
+
+		return $rev;
 	}
 
 	/**
