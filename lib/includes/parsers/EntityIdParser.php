@@ -59,6 +59,10 @@ class EntityIdParser extends StringValueParser {
 	 * @since 0.4
 	 *
 	 * @param ParserOptions|null $options
+	 *
+	 * The OPT_PREFIX_MAP option MUST be set, and prefixes MUST be lower case.
+	 *
+	 * @todo: make this case insensitive
 	 */
 	public function __construct( ParserOptions $options = null ) {
 		parent::__construct( $options );
@@ -96,8 +100,6 @@ class EntityIdParser extends StringValueParser {
 	 * @since 0.4
 	 *
 	 * @param string $prefix
-	 *
-	 * @todo: prefixes should be case insensitive
 	 *
 	 * @return string|null
 	 */
