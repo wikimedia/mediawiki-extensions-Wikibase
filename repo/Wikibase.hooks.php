@@ -206,6 +206,7 @@ final class RepoHooks {
 			'specials/SpecialSetAliases',
 
 			'specials/EntityDataSerializationService',
+			'specials/EntityDataRequestHandler',
 
 			'store/IdGenerator',
 			'store/StoreFactory',
@@ -221,7 +222,13 @@ final class RepoHooks {
 		);
 
 		foreach ( $testFiles as $file ) {
-			$files[] = __DIR__ . '/tests/phpunit/includes/' . $file . 'Test.php';
+			$file = __DIR__ . '/tests/phpunit/includes/' . $file . 'Test.php';
+
+			if ( !file_exists( $file ) ) {
+				throw new MWException( "Test file not found: $file" );
+			}
+
+			$files[] = $file;
 		}
 
 		return true;

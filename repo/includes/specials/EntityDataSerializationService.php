@@ -1,22 +1,24 @@
 <?php
 
-use DataTypes\DataTypeFactory;
-use \Wikibase\Entity;
-use \Wikibase\EntityContent;
-use \Wikibase\EntityContentFactory;
-use Wikibase\EntityLookup;
-use Wikibase\Lib\EntityIdFormatter;
-use \Wikibase\RdfSerializer;
+namespace Wikibase;
+
+use \DataTypes\DataTypeFactory;
+use \Wikibase\Lib\EntityIdFormatter;
+use \MWException;
+use \EasyRdf_Format;
+use \Revision;
+use \ApiFormatBase;
+use \ApiMain;
+use \ApiResult;
+use \ApiFormatXml;
+use \DerivativeContext;
+use \DerivativeRequest;
+use \RequestContext;
 
 /**
- * Special page to act as a data endpoint for the linked data web.
- * The web server should generally be configured to make this accessible via a canonical URL/URI,
- * such as <http://my.domain.org/data/Q12345>.
+ * Service for serializing entity content.
  *
- * Note that this is implemented as a special page and not a per-page action, so there is no need
- * for the web server to map ID prefixes to wiki namespaces.
- *
- * Also note that we are using the API's serialization facility to ensure a consistent external
+ * Note that we are using the API's serialization facility to ensure a consistent external
  * representation of data entities. Using the ContentHandler to serialize the entity would expose
  * internal implementation details.
  *
@@ -66,7 +68,7 @@ class EntityDataSerializationService {
 	protected $rdfDataURI = null;
 
 	/**
-	 * @var Wikibase\EntityLookup
+	 * @var EntityLookup
 	 */
 	protected $entityLookup = null;
 
@@ -147,20 +149,6 @@ class EntityDataSerializationService {
 	 */
 	public function getFormatWhiteList() {
 		return $this->formatWhiteList;
-	}
-
-	/**
-	 * @param int $maxAge
-	 */
-	public function setMaxAge( $maxAge ) {
-		$this->maxAge = $maxAge;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getMaxAge() {
-		return $this->maxAge;
 	}
 
 	/**
@@ -512,7 +500,7 @@ class EntityDataSerializationService {
 	 * result, if $printer was generated from that same ApiMain module, as
 	 * createApiPrinter() does.
 	 *
-	 * @param Wikibase\Entity $entity The entity to convert ot an ApiResult
+	 * @param Entity $entity The entity to convert ot an ApiResult
 	 * @param ApiFormatBase $printer The output printer that will be used for serialization.
 	 *   Used to provide context for generating the ApiResult, and may also be manipulated
 	 *   to fine-tune the output.
@@ -566,7 +554,7 @@ class EntityDataSerializationService {
 	 * representation of data entities. Using the ContentHandler to serialize the entity would
 	 * expose internal implementation details.
 	 *
-	 * @param Wikibase\Entity $entity the entity to output.
+	 * @param Entity $entity the entity to output.
 	 * @param ApiFormatBase $printer the printer to use to generate the output
 	 * @param Revision $revision the entity's revision (optional)
 	 *
