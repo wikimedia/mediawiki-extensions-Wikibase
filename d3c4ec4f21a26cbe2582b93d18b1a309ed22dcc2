@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dxl9dcnY",
+        "filename": "repo/includes/specials/EntityDataSerializationService.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-05-30T10:22:32Z",
+      "side": 1,
+      "message": "change the description",
+      "revId": "d3c4ec4f21a26cbe2582b93d18b1a309ed22dcc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxj8QZqc",
+        "filename": "repo/includes/specials/EntityDataSerializationService.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-05-30T10:22:32Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "d3c4ec4f21a26cbe2582b93d18b1a309ed22dcc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxh-Eig8",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-05-30T10:22:32Z",
+      "side": 1,
+      "message": "why the static function instead of $this-\u003eservice?",
+      "revId": "d3c4ec4f21a26cbe2582b93d18b1a309ed22dcc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxl-OEi8",
+        "filename": "repo/tests/phpunit/includes/specials/EntityDataSerializationServiceTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-05-30T10:22:32Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "d3c4ec4f21a26cbe2582b93d18b1a309ed22dcc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
