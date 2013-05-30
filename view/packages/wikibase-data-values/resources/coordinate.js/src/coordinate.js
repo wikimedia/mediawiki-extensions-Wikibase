@@ -12,7 +12,7 @@
  * @author Denny Vrandečić
  * @author H. Snater < mediawiki@snater.com >
  */
-var coordinate = ( function() {
+this.coordinate = ( function() {
 	'use strict';
 
 	return {
