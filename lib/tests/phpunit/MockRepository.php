@@ -6,10 +6,10 @@ use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
 use Wikibase\Item;
-use Wikibase\PropertyLabelResolver;
 use Wikibase\SiteLink;
 use Wikibase\SiteLinkLookup;
 use Wikibase\Property;
+use Wikibase\StorageException;
 
 /**
  * Mock repository for use in tests.
@@ -46,34 +46,42 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	private $maxId = 0;
 
 	/**
-	 * Returns the entity with the provided id or null is there is no such
-	 * entity. If a $revision is given, the requested revision of the entity is loaded.
-	 * The the revision does not belong to the given entity, null is returned.
+	 * @see   EntityLookup::getEntity
 	 *
-	 * @param EntityID $entityId
-	 * @param int|bool $revision
+	 * @param EntityID           $entityId
+	 * @param \Wikibase\EntityId $entityId
+	 * @param int                $revision The desired revision id, 0 means "current".
 	 *
+	 * @throws \Wikibase\StorageException
 	 * @return Entity|null
 	 */
-	public function getEntity( EntityId $entityId, $revision = false ) {
+	public function getEntity( EntityId $entityId, $revision = 0 ) {
 		$key = $entityId->getPrefixedId();
 
 		if ( !isset( $this->entities[$key] ) || empty( $this->entities[$key] ) ) {
 			return null;
 		}
 
+		if ( $revision === false ) { // default changed from false to 0
+			wfWarn( 'getEntity() called with $revision = false, use 0 instead.' );
+			$revision = 0;
+		}
+
+		/* @var Entity[] $revisions */
 		$revisions = $this->entities[$key];
 
-		if ( $revision === false ) {
+		if ( $revision === 0 ) { // note: be robust and accept false too.
 			$revIds = array_keys( $revisions );
 			$n = count( $revIds );
 
 			$revision = $revIds[$n-1];
 		} else if ( !isset( $revisions[$revision] ) ) {
-			return null;
+			throw new StorageException( "no such revision for entity $key: $revision" );
 		}
 
-		$entity = $revisions[$revision]->copy(); // return a copy!
+		$entity = $revisions[$revision];
+		$entity = $entity->copy();
+
 		return $entity;
 	}
 
@@ -210,9 +218,10 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	 * ID is given, the entity with the highest revision ID is considered the current one.
 	 *
 	 * @param \Wikibase\Entity $entity
-	 * @param bool             $revision
+	 * @param bool|int         $revision
+	 * @param int|string      $timestamp
 	 */
-	public function putEntity( Entity $entity, $revision = false ) {
+	public function putEntity( Entity $entity, $revision = false, $timestamp = 0 ) {
 		if ( $entity->getId() === null ) {
 			//NOTE: assign ID to original object, not clone
 			$entity->setId( $this->maxId +1 );
@@ -382,29 +391,19 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	 * @since 0.4
 	 *
 	 * @param EntityID[] $entityIds
-	 * @param array|bool $revision
 	 *
 	 * @return Entity|null[]
 	 */
-	public function getEntities( array $entityIds, $revision = false ) {
+	public function getEntities( array $entityIds ) {
 		$entities = array();
 
 		foreach ( $entityIds as $key => $entityId ) {
-			$rev = $revision;
 
 			if ( is_string( $entityId ) ) {
 				$entityId = EntityId::newFromPrefixedId( $entityId );
 			}
 
-			if ( is_array( $rev ) ) {
-				if ( !array_key_exists( $key, $rev ) ) {
-					throw new \MWException( '$entityId has no revision specified' );
-				}
-
-				$rev = $rev[$key];
-			}
-
-			$entities[$entityId->getPrefixedId()] = $this->getEntity( $entityId, $rev );
+			$entities[$entityId->getPrefixedId()] = $this->getEntity( $entityId );
 		}
 
 		return $entities;

@@ -183,22 +183,23 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	}
 
 	/**
-	 * @see   EntityCache::getEntity
-	 *
 	 * @since 0.1
+	 * @see   EntityLookup::getEntity
 	 *
-	 * @param EntityId $entityId  The entity's ID
-	 * @param bool|int $revision  The desired Revision
+	 * @param EntityID $entityId
+	 * @param int      $revision The desired revision id, 0 means "current".
 	 *
-	 * @return null|Entity
+	 * @return Entity|null
+	 *
+	 * @throw StorageException
 	 */
-	public function getEntity( EntityID $entityId, $revision = false ) {
+	public function getEntity( EntityID $entityId, $revision = 0 ) {
 		$where = array(
 			'entity_type' => $entityId->getEntityType(),
 			'entity_id' => $entityId->getNumericId(),
 		);
 
-		if ( $revision !== false ) {
+		if ( $revision !== 0 ) {
 			//FIXME: this field does not yet exist in the database!
 			$where['entity_revision'] = $revision;
 		}
