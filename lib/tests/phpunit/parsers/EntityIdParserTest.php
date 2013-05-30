@@ -50,8 +50,8 @@ class EntityIdParserTest extends \ValueParsers\Test\StringValueParserTest {
 			EntityIdParser::OPT_PREFIX_MAP => array(
 				'a' => 'entity-type-a',
 				'b' => 'entity-type-b',
-				'x' => 'entity-type-a',
-				'dd' => 'entity-type-d',
+				'X' => 'entity-type-a',
+				'DD' => 'entity-type-d',
 				'' => 'entity-type-e',
 				'-' => 'entity-type-f',
 				'|' => 'entity-type-f',
