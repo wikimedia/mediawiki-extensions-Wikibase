@@ -60,7 +60,7 @@ class CachingEntityLoader implements EntityLookup {
 	 *
 	 * @return string
 	 */
-	protected function getCacheKey( $entityId, $revision = false ) {
+	protected function getCacheKey( $entityId, $revision = 0 ) {
 		$key = $entityId->getPrefixedId();
 
 		if ( $revision ) {
@@ -71,16 +71,17 @@ class CachingEntityLoader implements EntityLookup {
 	}
 
 	/**
-	 * @see EntityLookup::getEntity
-	 *
 	 * @since 0.4
+	 * @see   EntityLookup::getEntity
 	 *
-	 * @param EntityId $entityId
-	 * @param boolean|int $revision
+	 * @param EntityID $entityId
+	 * @param int      $revision The desired revision id, 0 means "current".
 	 *
 	 * @return Entity|null
+	 *
+	 * @throw StorageException
 	 */
-	public function getEntity( EntityId $entityId, $revision = false ) {
+	public function getEntity( EntityId $entityId, $revision = 0 ) {
 		wfProfileIn( __METHOD__ );
 		$key = $this->getCacheKey( $entityId, $revision );
 
@@ -94,16 +95,16 @@ class CachingEntityLoader implements EntityLookup {
 	}
 
 	/**
-	 * @see EntityLookup::getEntities
+	 * @see   EntityLookup::getEntities
 	 *
 	 * @since 0.4
 	 *
 	 * @param array $entityIds
-	 * @param array|bool $revision
 	 *
 	 * @return Entity|null[]
+	 * @throws \MWException
 	 */
-	public function getEntities( array $entityIds, $revision = false ) {
+	public function getEntities( array $entityIds ) {
 		wfProfileIn( __METHOD__ );
 
 		$loaded = array();
