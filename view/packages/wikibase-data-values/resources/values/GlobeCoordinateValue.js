@@ -6,7 +6,7 @@
  *
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, $, GlobeCoordinate ) {
+( function( dv, $, GlobeCoordinate, globeCoordinateParse ) {
 	'use strict';
 
 	var PARENT = dv.DataValue,
@@ -75,26 +75,33 @@
 		toJSON: function() {
 			var globeCoordinate = this.getValue();
 
-			// TODO: Backend should interact with a proper JSON structure and have precision implemented.
-			return globeCoordinate.getLatitude() + '|' + globeCoordinate.getLongitude();
+			return {
+				latitude: globeCoordinate.getLatitude(),
+				longitude: globeCoordinate.getLongitude(),
+				globe: globeCoordinate.getGlobe(),
+				precision: globeCoordinate.getPrecision()
+				// altitude: ...
+			};
 		}
-
 	} );
 
 	/**
 	 * @see dv.DataValue.newFromJSON
 	 */
 	SELF.newFromJSON = function( json ) {
-		var data = json.split( '|' );
+		// The backend does not return precision, so we need to parse the coordinate values:
+		// TODO: Have the backend support precision
+		var precision = globeCoordinateParse( json.latitude + ', ' + json.longitude )[2];
 
-		var c = new GlobeCoordinate( {
-			latitude: parseFloat( data[0] ),
-			longitude: parseFloat( data[1] ),
-			altitude: ( data[2] ) ? parseFloat( data[2] ) : null,
-			globe: ( data[3] ) ? data[3] : null
+		var gc = new GlobeCoordinate( {
+			latitude: json.latitude,
+			longitude: json.longitude,
+			globe: json.globe,
+			precision: precision
+			// altitude: json.altitude, // TODO: make globeCoordinate.js support altitude
 		} );
 
-		return new SELF( c );
+		return new SELF( gc );
 	};
 
 	/**
@@ -104,4 +111,4 @@
 
 	dv.registerDataValue( SELF );
 
-}( dataValues, jQuery, globeCoordinate.GlobeCoordinate ) );
+}( dataValues, jQuery, globeCoordinate.GlobeCoordinate, globeCoordinate.parser.parse ) );
