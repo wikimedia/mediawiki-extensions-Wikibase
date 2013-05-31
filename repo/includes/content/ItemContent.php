@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOutput, DataUpdate;
+use \ValueFormatters\ValueFormatterFactory;
 
 /**
  * Content object for articles representing Wikibase items.
@@ -279,7 +280,10 @@ class ItemContent extends EntityContent {
 	 * @return \Title
 	 */
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
-		$itemView = new ItemView( );
+		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
+
+		$itemView = new ItemView( $valueFormatters );
 		return $itemView->getParserOutput( $this, $options, $generateHtml );
 	}
+
 }
