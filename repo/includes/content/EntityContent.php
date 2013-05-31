@@ -2,7 +2,8 @@
 
 namespace Wikibase;
 
-use WikiPage, Title, User, Status;
+use WikiPage, Title, User, Status, ParserOptions;
+use \ValueFormatters\ValueFormatterFactory;
 
 /**
  * Abstract content object for articles representing Wikibase entities.
@@ -123,6 +124,25 @@ abstract class EntityContent extends \AbstractContent {
 	 * @return Entity
 	 */
 	public abstract function getEntity();
+
+	/**
+	 * Returns a ParserOutput object containing the HTML.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title $title
+	 * @param null $revId
+	 * @param null|ParserOptions $options
+	 * @param bool $generateHtml
+	 *
+	 * @return ParserOutput
+	 */
+	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
+		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
+
+		$entityView = EntityView::newForEntityContent( $this, $valueFormatters );;
+		return $entityView->getParserOutput( $this, $options, $generateHtml );
+	}
 
 	/**
 	 * @return String a string representing the content in a way useful for building a full text
