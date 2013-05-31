@@ -68,10 +68,7 @@
 
 			var precisionValues = [];
 			$.each( globeCoordinateSettings.precisions, function( i, precisionDefinition ) {
-				var label = ( precisionDefinition.text )
-					? precisionDefinition.text
-					: precisionDefinition.level;
-
+				var label = globeCoordinate.precisionText( precisionDefinition.level );
 				precisionValues.push( { value: precisionDefinition.level, label: label } );
 			} );
 
