@@ -6,8 +6,8 @@
  *
  * @event update: Triggered whenever the widget's value is updated.
  *        (1) {jQuery.Event}
- *        (2) {globeCoordinate.GlobeCoordinate|null} New value (null for no or an invalid value) the widget's
- *            value has been changed to.
+ *        (2) {globeCoordinate.GlobeCoordinate|null} New value (null for no or an invalid value) the
+ *            widget's value has been changed to.
  *
  * @dependency jQuery.Widget
  * @dependency jQuery.eachchange
@@ -59,11 +59,11 @@
 
 			try {
 				globeCoordinateValue = new GlobeCoordinate( this.element.val() );
+				return globeCoordinateValue;
 			} catch( e ) {
+				// Current value is invalid.
 				return null;
 			}
-
-			return ( globeCoordinateValue.isValid() ) ? globeCoordinateValue : null;
 		},
 
 		/**
@@ -77,9 +77,9 @@
 				return this._value;
 			}
 
-			if( value !== null && ( !( value instanceof GlobeCoordinate ) || !value.isValid() ) ) {
-				throw new Error( 'Cannot set value: Neither valid GlobeCoordinate object nor '
-					+ '\'null\' given.' );
+			if( value !== null && !( value instanceof GlobeCoordinate ) ) {
+				throw new Error( 'Cannot set value: Neither GlobeCoordinate object nor \'null\' '
+					+ 'given.' );
 			}
 
 			if( value === null ) {

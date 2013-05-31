@@ -125,7 +125,7 @@
 				}
 			} )
 			.on( 'globecoordinateinputupdate.' + this.uiBaseClass, function( event, value ) {
-				if( value && value.isValid() ) {
+				if( value ) {
 					self.$precision.data( 'listrotator' ).rotate( value.getPrecision() );
 				}
 				self._newValue = false; // value, not yet handled by draw(), is outdated now
@@ -216,7 +216,7 @@
 		 * @param {globeCoordinate.GlobeCoordinate|null} globeCoordinate
 		 */
 		_setRawValue: function( globeCoordinate ) {
-			if( !( globeCoordinate instanceof GlobeCoordinate ) || !globeCoordinate.isValid() ) {
+			if( !( globeCoordinate instanceof GlobeCoordinate ) ) {
 				globeCoordinate = null;
 			}
 			this._newValue = globeCoordinate;
