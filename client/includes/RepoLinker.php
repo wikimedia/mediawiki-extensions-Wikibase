@@ -36,6 +36,14 @@ class RepoLinker {
 
 	protected $namespaces;
 
+	/**
+	 * @since 0.4
+	 *
+	 * @param string $baseUrl
+	 * @param string $articlePath
+	 * @param string $scriptPath
+	 * @param array $namespaces // repoNamespaces setting
+	 */
 	public function __construct( $baseUrl, $articlePath, $scriptPath, array $namespaces ) {
 		$this->baseUrl = $baseUrl;
 		$this->articlePath = $articlePath;

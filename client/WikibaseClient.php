@@ -67,6 +67,7 @@ $wgAutoloadClasses['Wikibase\InterwikiSorter']      = $dir . 'includes/Interwiki
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 			= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\NamespaceChecker']		= $dir . 'includes/NamespaceChecker.php';
+$wgAutoloadClasses['Wikibase\RepoItemLinkGenerator']	= $dir . 'includes/RepoItemLinkGenerator.php';
 $wgAutoloadClasses['Wikibase\RepoLinker']			= $dir . 'includes/RepoLinker.php';
 $wgAutoloadClasses['Wikibase\Client\WikibaseClient'] = $dir . 'includes/WikibaseClient.php';
 $wgAutoloadClasses['Scribunto_LuaWikibaseLibrary']      = $dir . 'includes/WikibaseLibrary.php';
