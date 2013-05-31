@@ -16,6 +16,24 @@
       "revId": "f5746ca396492da31c8fa68fa6d21f809ea53d13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxsmHDbc",
+        "filename": "lib/includes/parsers/EntityIdParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-05-31T10:54:11Z",
+      "side": 1,
+      "message": "Well, ok, if you want to be picky. A transformation of the config value doesn\u0027t seem horrible to me, and doesn\u0027t hinder testing. Anyway...\n\nSo what would you suggest? Doing this inline every time the map is needed? Or a getter that initialized a member lazily?",
+      "parentUuid": "DxqOioP0",
+      "revId": "f5746ca396492da31c8fa68fa6d21f809ea53d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
