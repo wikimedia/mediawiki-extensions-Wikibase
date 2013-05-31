@@ -84,24 +84,6 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		return $cases;
 	}
 
-	protected static function injectIds( &$data, \Wikibase\Entity $entity ) {
-		//TODO: Same as in EntityDataRequestHandlerTest. Factor out.
-
-		if ( is_array( $data ) ) {
-			foreach ( $data as $k => &$v ) {
-				self::injectIds( $v, $entity );
-			}
-		} else if ( is_string( $data ) ) {
-			$data = str_replace( '{testitemid}', strtoupper( $entity->getId()->getPrefixedId() ), $data );
-			$data = str_replace( '{lowertestitemid}', strtolower( $entity->getId()->getPrefixedId() ), $data );
-
-			if ( strpos( $data, '{testitemrev}' ) >= 0 ) {
-				$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
-				$data = str_replace( '{testitemrev}', $content->getWikiPage()->getLatest(), $data );
-			}
-		}
-	}
-
 	/**
 	 * @dataProvider provideExecute
 	 *
@@ -115,10 +97,11 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	public function testExecute( $subpage, $params, $headers, $expRegExp, $expCode = 200, $expHeaders = array() ) {
 		$item = $this->getTestItem();
 
-		self::injectIds( $subpage, $item );
-		self::injectIds( $params, $item );
-		self::injectIds( $expRegExp, $item );
-		self::injectIds( $expHeaders, $item );
+		EntityDataRequestHandlerTest::injectIds( $subpage, $item );
+		EntityDataRequestHandlerTest::injectIds( $params, $item );
+		EntityDataRequestHandlerTest::injectIds( $headers, $item );
+		EntityDataRequestHandlerTest::injectIds( $expRegExp, $item );
+		EntityDataRequestHandlerTest::injectIds( $expHeaders, $item );
 
 		$request = new \FauxRequest( $params );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset

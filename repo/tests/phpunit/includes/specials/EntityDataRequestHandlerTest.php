@@ -6,6 +6,7 @@ use DataTypes\DataTypeFactory;
 use Title;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
+use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityDataSerializationService;
 use \Wikibase\Item;
@@ -148,10 +149,11 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$data = str_replace( '{testitemid}', strtoupper( $entity->getId()->getPrefixedId() ), $data );
 			$data = str_replace( '{lowertestitemid}', strtolower( $entity->getId()->getPrefixedId() ), $data );
 
-			if ( strpos( $data, '{testitemrev}' ) >= 0 ) {
-				$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
-				$data = str_replace( '{testitemrev}', $content->getWikiPage()->getLatest(), $data );
-			}
+			$content = EntityContentFactory::singleton()->getFromId( $entity->getId() );
+			$data = str_replace( '{testitemrev}', $content->getWikiPage()->getLatest(), $data );
+
+			$ts = wfTimestamp( TS_RFC2822, $content->getWikiPage()->getTimestamp() );
+			$data = str_replace( '{testitemtimestamp}', $ts, $data );
 		}
 	}
 
@@ -204,6 +206,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		// inject actual ID of test items
 		self::injectIds( $subpage, $item );
 		self::injectIds( $params, $item );
+		self::injectIds( $headers, $item );
 		self::injectIds( $expRegExp, $item );
 		self::injectIds( $expHeaders, $item );
 
