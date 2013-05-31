@@ -380,6 +380,31 @@ class EntityDataTestProvider {
 				'Location' => '!/{testitemid}.json$!'
 			)
 		);
+
+		// If-Modified-Since handling
+
+		// #35: IMS from the deep bast should return a 200
+		$cases[] = array(
+			'{testitemid}.xml',	  // subpage
+			array(), // parameters
+			array( // headers
+				'If-Modified-Since' => wfTimestamp( TS_RFC2822, '20000101000000' )
+			),
+			'!!', // output regex
+			200,  // http code
+		);
+
+		// #36: IMS from now should return a 304
+		$cases[] = array(
+			'{testitemid}.json',	  // subpage
+			array(), // parameters
+			array( // headers
+				'If-Modified-Since' => '{testitemtimestamp}'
+			),
+			'!!', // output regex
+			304,  // http code
+		);
+
 		return $cases;
 	}
 
