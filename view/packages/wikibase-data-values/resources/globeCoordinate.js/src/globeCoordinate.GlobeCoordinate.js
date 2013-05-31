@@ -12,7 +12,7 @@
  * @dependency globeCoordinate
  * @dependency globeCoordinate.parser
  */
-globeCoordinate.GlobeCoordinate = ( function( globeCcoordinate, globeCoordinateParser ) {
+globeCoordinate.GlobeCoordinate = ( function( globeCoordinate, globeCoordinateParser ) {
 	'use strict';
 
 	/**
@@ -59,7 +59,20 @@ globeCoordinate.GlobeCoordinate = ( function( globeCcoordinate, globeCoordinateP
 			// TODO: Capture altitude and globe
 		}
 
-		this._globe = 'http://wikidata.org/id/Q2'; // TODO: Support other globes
+		// Keep precision boundaries:
+		// TODO: get definition of precisions out of global settings and put them into
+		//  a globeCoordinate.GlobeCoordinate.PRECISION constant.
+		var precisions = globeCoordinate.settings.precisions,
+			minPrecision = precisions[0].level,
+			maxPrecision = precisions[precisions.length - 1].level;
+
+		if( this._precision > minPrecision ) {
+			this._precision = minPrecision;
+		} else if( this._precision < maxPrecision ) {
+			this._precision = maxPrecision;
+		}
+
+		this._globe = 'http://www.wikidata.org/entity/Q2'; // TODO: Support other globes
 	}
 
 	GlobeCoordinate.prototype = {
