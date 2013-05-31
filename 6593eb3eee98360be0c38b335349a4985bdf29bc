@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "Dxx6pSd8",
+        "filename": "DataModel/DataModel.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-05-31T23:22:25Z",
+      "side": 1,
+      "message": "Why are you complaining here, while we already have the same for Diff, Ask and DataValues? How are those different? Do you suggest we also remove the version info of those?\n\nListing the version of all components used by a certain extension in its description is just stupid. That will create lots of duplication and is more an abuse of Special:Version then registering these components IMO. Plus it breaks component encapsulation.\n\nThe enemy of the good is the perfect. IMO you are being perfectionistic here, and blocking the obvious pragmatic approach, demanding to go for a solution you know very well is not going to happen. And wasting time on something that is a non-issue while we have serious things to do.",
+      "parentUuid": "DxvozrKg",
+      "revId": "6593eb3eee98360be0c38b335349a4985bdf29bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxV-EXZM",
         "filename": "DataModel/DataModel.mw.php",
         "patchSetId": 1
