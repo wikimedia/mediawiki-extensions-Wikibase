@@ -1,5 +1,7 @@
 <?php
 
+use \ValueFormatters\ValueFormatterFactory;
+
 /**
  * Base for special pages that resolve certain arguments to an item.
  *
@@ -104,7 +106,9 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	 * @param Wikibase\ItemContent $itemContent
 	 */
 	protected function displayItem( Wikibase\ItemContent $itemContent ) {
-		$view = new Wikibase\ItemView( $this->getContext() );
+		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
+
+		$view = new Wikibase\ItemView( $valueFormatters, $this->getContext() );
 		$view->render( $itemContent );
 
 		$this->getOutput()->setPageTitle( $itemContent->getItem()->getLabel( $this->getLanguage()->getCode() ) );
