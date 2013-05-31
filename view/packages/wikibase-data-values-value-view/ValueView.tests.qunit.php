@@ -117,6 +117,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.toggler.tests' => array(
+			'scripts' => array(
+				"$bp/jquery.ui/jquery.ui.toggler.tests.js",
+			),
+			'dependencies' => array(
+				'jquery.ui.toggler',
+			),
+		),
+
 		'jquery.valueview.MockViewState.tests' => array(
 			'scripts' => array(
 				"$bp/jquery.valueview/valueview.MockViewState.tests.js",

@@ -18,7 +18,7 @@
  *        (2) {number} now
  *        (3) {jQuery.Tween} tween
  *
- * @dependency jquery.ui.Widget
+ * @dependency jQuery.Widget
  */
 ( function( $ ) {
 	'use strict';
@@ -51,7 +51,7 @@
 		}
 
 		// Check for support of transformation (see https://gist.github.com/1031421)
-		var img = (new Image).style;
+		var img = (new Image()).style;
 		browserSupportsTransform = 'transition' in img // general
 			|| 'msTransform' in img
 			|| 'webkitTransition' in img; // Webkit
@@ -81,7 +81,7 @@
 		$toggleIcon: null,
 
 		/**
-		 * @see jQuery.ui.Widget._create
+		 * @see jQuery.Widget._create
 		 */
 		_create: function() {
 			var self = this;
@@ -131,12 +131,12 @@
 		},
 
 		/**
-		 * @see jQuery.ui.Widget
+		 * @see jQuery.Widget.destroy
 		 */
 		destroy: function() {
 			var label = this.element.children( this.widgetBaseClass + '-label' ).text();
 			this.element.empty().text( label );
-			$.ui.Widget.prototype.destroy.call( this );
+			$.Widget.prototype.destroy.call( this );
 		},
 
 		/**
