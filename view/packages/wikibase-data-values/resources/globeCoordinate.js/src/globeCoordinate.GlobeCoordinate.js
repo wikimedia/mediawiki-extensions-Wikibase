@@ -97,6 +97,7 @@ globeCoordinate.GlobeCoordinate = ( function( globeCcoordinate, globeCoordinateP
 		 * @return {boolean}
 		 */
 		isValid: function() {
+			// TODO: Validate precision.
 			return ( Math.abs( this._latitude ) <= 90 && Math.abs( this._longitude ) <= 180 );
 		},
 
