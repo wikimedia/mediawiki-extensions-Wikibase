@@ -22,7 +22,7 @@
 		'5\'S': '-05+000/',
 		'1\' 1"': '+010001+000/',
 		'1\' 1.1"': '+010001.1+000/',
-		'190° 30" 1.123\'': '+19030+0010723/',
+		'89° 59" 59\' 1.123\'': '+8959+0590001.123/',
 		'5\'N 0\' 10.5"W': '+05-0015949.5/'
 	};
 
@@ -38,7 +38,12 @@
 
 		assert.throws(
 			function() { c = new globeCoordinate.GlobeCoordinate( 'some string' ); },
-			'Trying to instantiate with an invalid value throws an error.'
+			'Trying to instantiate with an invalid value (some string) throws an error.'
+		);
+
+		assert.throws(
+			function() { c = new globeCoordinate.GlobeCoordinate( '190° 30" 1.123\'' ); },
+			'Trying to instantiate with an invalid value (190° 30" 1.123\') throws an error.'
 		);
 
 		c = new globeCoordinate.GlobeCoordinate( '1.5 1.5' );
@@ -119,23 +124,6 @@
 
 	} );
 
-	QUnit.test( 'isValid()', function( assert ) {
-		var c = new globeCoordinate.GlobeCoordinate( '1.5 1.25' );
-
-		assert.ok(
-			c.isValid(),
-			'\'1.5 1.25\' generates a valid coordinate.'
-		);
-
-		c = new globeCoordinate.GlobeCoordinate( '190° 30" 1.123\'' );
-
-		assert.ok(
-			!c.isValid(),
-			'190° 30" 1.123\' generates an invalid coordinate.'
-		);
-
-	} );
-
 	QUnit.test( 'iso6709()', function( assert ) {
 		var c;
 
@@ -161,7 +149,7 @@
 			$.each( iso6709representations, function( inputString2, iso6709string2 ) {
 				c2 = new globeCoordinate.GlobeCoordinate( inputString2 );
 
-				if( inputString1 === inputString2 && c1.isValid() && c2.isValid() ) {
+				if( inputString1 === inputString2 ) {
 
 					assert.ok(
 						c1.equals( c2 ),

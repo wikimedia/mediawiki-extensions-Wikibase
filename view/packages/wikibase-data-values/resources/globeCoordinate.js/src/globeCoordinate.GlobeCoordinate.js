@@ -54,6 +54,15 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate, globeCoordinatePa
 		}
 		// TODO: Capture altitude and globe
 
+		// TODO: The following checks are earth specific. When implementing additional globes,
+		// either loosen the restrictions or implement globe specific restrictions.
+		if( Math.abs( this._latitude ) > 90 ) {
+			throw new Error( 'Latitude (' + this._latitude + ') is out of bounds' );
+		}
+		if( Math.abs( this._longitude ) > 180 ) {
+			throw new Error( 'Longitude (' + this._longitude + ') is out of bounds' );
+		}
+
 		// Keep precision boundaries:
 		// TODO: get definition of precisions out of global settings and put them into
 		//  a globeCoordinate.GlobeCoordinate.PRECISION constant.
@@ -103,19 +112,6 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate, globeCoordinatePa
 		 * @type {number}
 		 */
 		_precision: null,
-
-		/**
-		 * Returns whether the object is representing a valid globe coordinate.
-		 *
-		 * TODO: throw an error in constructor if invalid GlobeCoordinate, don't support invalid
-		 *  data objects and deprecate this function then.
-		 *
-		 * @return {boolean}
-		 */
-		isValid: function() {
-			// TODO: Validate precision.
-			return ( Math.abs( this._latitude ) <= 90 && Math.abs( this._longitude ) <= 180 );
-		},
 
 		/**
 		 * Returns the coordinate's globe URI.
@@ -279,8 +275,7 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate, globeCoordinatePa
 				return false;
 			}
 
-			return this.isValid() && otherGlobeCoordinate.isValid() // two invalid times are not equal
-				&& this.getPrecision() === otherGlobeCoordinate.getPrecision()
+			return this.getPrecision() === otherGlobeCoordinate.getPrecision()
 				&& this.iso6709() === otherGlobeCoordinate.iso6709();
 		}
 

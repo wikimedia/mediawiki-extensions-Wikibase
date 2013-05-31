@@ -15,10 +15,6 @@
 				throw new Error( 'The given value has to be a globeCoordinate.GlobeCoordinate '
 					+ 'object' );
 			}
-			if( !value.isValid() ) {
-				throw new Error( 'The given GlobeCoordinate object value has to represent a '
-					+ 'valid globe coordinate' );
-			}
 
 			this._value = value;
 		};
