@@ -9,7 +9,7 @@
  * - jQuery.eachchange
  * - jQuery.inputAutoExpand
  * - jQuery.ui.suggester
- * - jQuery.coordinate.coordinateinput
+ * - jQuery.globecoordinate.globecoordinateinput
  * - jQuery.time.timeinput
  * - jQuery.ui.toggler
  *
@@ -198,35 +198,35 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.experts.coordinateinput' => $moduleTemplate + array(
+		'jquery.valueview.experts.globecoordinateinput' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.valueview/valueview.experts/experts.CoordinateInput.js',
+				'jquery.valueview/valueview.experts/experts.GlobeCoordinateInput.js',
 			),
 			'dependencies' => array(
 				'jquery.valueview.experts',
 				'jquery.fn.focusAt',
-				'jquery.coordinate.coordinateinput',
+				'jquery.globecoordinate.globecoordinateinput',
 				'jquery.ui.inputextender',
 				'jquery.valueview.preview',
 			),
 			'messages' => array(
-				'valueview-expert-coordinateinput-precision',
+				'valueview-expert-globecoordinateinput-precision',
 				'valueview-preview-label',
 				'valueview-preview-novalue',
 			),
 		),
 
-		'jquery.valueview.experts.coordinatevalue' => $moduleTemplate + array(
+		'jquery.valueview.experts.globecoordinatevalue' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.valueview/valueview.experts/experts.CoordinateValue.js',
+				'jquery.valueview/valueview.experts/experts.GlobeCoordinateValue.js',
 			),
 			'styles' => array(
-				'jquery.valueview/valueview.experts/experts.CoordinateInput.css',
+				'jquery.valueview/valueview.experts/experts.GlobeCoordinateInput.css',
 			),
 			'dependencies' => array(
 				'jquery.valueview.experts.staticdom',
 				'jquery.valueview.BifidExpert',
-				'jquery.valueview.experts.coordinateinput',
+				'jquery.valueview.experts.globecoordinateinput',
 			),
 		),
 

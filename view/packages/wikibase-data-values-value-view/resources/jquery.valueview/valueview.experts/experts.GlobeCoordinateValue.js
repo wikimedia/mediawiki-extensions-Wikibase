@@ -9,7 +9,7 @@
 	'use strict';
 
 	var PARENT = vv.BifidExpert,
-		editableExpert = vv.experts.CoordinateInput;
+		editableExpert = vv.experts.GlobeCoordinateInput;
 
 	/**
 	 * Valueview expert for handling coordinate values.
@@ -19,7 +19,7 @@
 	 * @constructor
 	 * @extends jQuery.valueview.experts.BifidExpert
 	 */
-	vv.experts.CoordinateValue = vv.expert( 'coordinatevalue', PARENT, {
+	vv.experts.GlobeCoordinateValue = vv.expert( 'globecoordinatevalue', PARENT, {
 		/**
 		 * @see jQuery.valueview.BifidExpert._editableExpert
 		 */
@@ -40,7 +40,7 @@
 		 */
 		_staticExpertOptions: {
 			/**
-			 * @param {coordinate.Coordinate|null} currentRawValue
+			 * @param {globeCoordinate.GlobeCoordinate|null} currentRawValue
 			 * @param {jQuery.valueview.ViewState} viewState
 			 */
 			domBuilder: function( currentRawValue, viewState ) {

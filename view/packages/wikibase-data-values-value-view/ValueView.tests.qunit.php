@@ -63,12 +63,12 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.coordinate.coordinateinput.tests' => array(
+		'jquery.globecoordinate.globecoordinateinput.tests' => array(
 			'scripts' => array(
-				"$bp/jquery.coordinate/jquery.coordinate.coordinateinput.tests.js",
+				"$bp/jquery.globecoordinate/jquery.globecoordinate.globecoordinateinput.tests.js",
 			),
 			'dependencies' => array(
-				'jquery.coordinate.coordinateinput',
+				'jquery.globecoordinate.globecoordinateinput',
 			),
 		),
 
@@ -157,12 +157,12 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.experts.coordinateinput.tests' => array(
+		'jquery.valueview.experts.globecoordinateinput.tests' => array(
 			'scripts' => array(
-				"$bp/jquery.valueview/valueview.experts/experts.CoordinateInput.tests.js",
+				"$bp/jquery.valueview/valueview.experts/experts.GlobeCoordinateInput.tests.js",
 			),
 			'dependencies' => array(
-				'jquery.valueview.experts.coordinateinput',
+				'jquery.valueview.experts.globecoordinateinput',
 			),
 		),
 

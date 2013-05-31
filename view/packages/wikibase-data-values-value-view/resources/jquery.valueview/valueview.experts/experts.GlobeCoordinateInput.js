@@ -6,23 +6,23 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 // TODO: Remove mediaWiki dependency
-( function( dv, vp, $, vv, coordinate, mw ) {
+( function( dv, vp, $, vv, globeCoordinate, mw ) {
 	'use strict';
 
-	var Coordinate = coordinate.Coordinate,
-		coordinateSettings = coordinate.settings;
+	var GlobeCoordinate = globeCoordinate.GlobeCoordinate,
+		globeCoordinateSettings = globeCoordinate.settings;
 
 	var PARENT = vv.Expert;
 
 	/**
-	 * Valueview expert handling input of coordinate values.
+	 * Valueview expert handling input of globe coordinate values.
 	 *
 	 * @since 0.1
 	 *
 	 * @constructor
 	 * @extends jQuery.valueview.Expert
 	 */
-	vv.experts.CoordinateInput = vv.expert( 'coordinateinput', PARENT, {
+	vv.experts.GlobeCoordinateInput = vv.expert( 'globecoordinateinput', PARENT, {
 		/**
 		 * The the input element's node.
 		 * @type {jQuery}
@@ -34,7 +34,7 @@
 		 * the new value has been called. The use of this, basically, is a structural improvement
 		 * which allows moving setting the displayed value to the draw() method which is supposed to
 		 * handle all visual manners.
-		 * @type {coordinate.Coordinate|null|false}
+		 * @type {globeCoordinate.globeCoordinate|null|false}
 		 */
 		_newValue: null,
 
@@ -64,10 +64,10 @@
 
 			this.$precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
-			.append( $( '<div/>' ).text( mw.msg( 'valueview-expert-coordinateinput-precision' ) ) );
+			.append( $( '<div/>' ).text( mw.msg( 'valueview-expert-globecoordinateinput-precision' ) ) );
 
 			var precisionValues = [];
-			$.each( coordinateSettings.precisions, function( i, precisionDefinition ) {
+			$.each( globeCoordinateSettings.precisions, function( i, precisionDefinition ) {
 				var label = ( precisionDefinition.text )
 					? precisionDefinition.text
 					: precisionDefinition.level;
@@ -113,12 +113,12 @@
 			this.preview = $preview.data( 'preview' );
 
 			this.$input.eachchange( function( event, oldValue ) {
-				var value = self.$input.data( 'coordinateinput' ).value();
+				var value = self.$input.data( 'globecoordinateinput' ).value();
 				if( oldValue === '' && value === null || self.$input.val() === '' ) {
 					self._updatePreview();
 				}
 			} )
-			.coordinateinput()
+			.globecoordinateinput()
 			.inputextender( {
 				content: [ $preview, $toggler, this.$precisionContainer ],
 				initCallback: function() {
@@ -127,7 +127,7 @@
 					$toggler.toggler( { $subject: self.$precisionContainer } );
 				}
 			} )
-			.on( 'coordinateinputupdate.' + this.uiBaseClass, function( event, value ) {
+			.on( 'globecoordinateinputupdate.' + this.uiBaseClass, function( event, value ) {
 				if( value && value.isValid() ) {
 					self.$precision.data( 'listrotator' ).rotate( value.getPrecision() );
 				}
@@ -151,19 +151,19 @@
 			previewElement.remove();
 
 			this.$input.data( 'inputextender' ).destroy();
-			this.$input.data( 'coordinateinput' ).destroy();
+			this.$input.data( 'globecoordinateinput' ).destroy();
 			this.$input.remove();
 
 			PARENT.prototype.destroy.call( this );
 		},
 
 		/**
-		 * Builds a coordinate.Coordinate object from the widget's current input taking the
+		 * Builds a globeCoordinate.GlobeCoordinate object from the widget's current input taking the
 		 * precision into account if set manually.
 		 *
 		 * @param {Object} [overwrites] Values that should be used instead of the ones picked from
 		 *        the input elements.
-		 * @return {coordinate.Coordinate}
+		 * @return {globeCoordinate.GlobeCoordinate}
 		 */
 		_updateValue: function( overwrites ) {
 			overwrites = overwrites || {};
@@ -178,7 +178,7 @@
 				options.precision = precision;
 			}
 
-			value = new Coordinate( this.$input.val(), options );
+			value = new GlobeCoordinate( this.$input.val(), options );
 
 			this._setRawValue( value );
 			this._updatePreview();
@@ -199,49 +199,52 @@
 		 * @see jQuery.valueview.Expert.parser
 		 */
 		parser: function() {
-			return new vp.CoordinateParser();
+			return new vp.GlobeCoordinateParser();
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert._getRawValue
 		 *
-		 * @return {coordinate.Coordinate|null}
+		 * @return {globeCoordinate.GlobeCoordinate|null}
 		 */
 		_getRawValue: function() {
 			return ( this._newValue !== false )
 				? this._newValue
-				: this.$input.data( 'coordinateinput' ).value();
+				: this.$input.data( 'globecoordinateinput' ).value();
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert._setRawValue
 		 *
-		 * @param {coordinate.Coordinate|null} coordinate
+		 * @param {globeCoordinate.GlobeCoordinate|null} globeCoordinate
 		 */
-		_setRawValue: function( coordinate ) {
-			if( !( coordinate instanceof Coordinate ) || !coordinate.isValid() ) {
-				coordinate = null;
+		_setRawValue: function( globeCoordinate ) {
+			if( !( globeCoordinate instanceof GlobeCoordinate ) || !globeCoordinate.isValid() ) {
+				globeCoordinate = null;
 			}
-			this._newValue = coordinate;
+			this._newValue = globeCoordinate;
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert.rawValueCompare
 		 */
-		rawValueCompare: function( coordinate1, coordinate2 ) {
-			if( coordinate2 === undefined ) {
-				coordinate2 = this._getRawValue();
+		rawValueCompare: function( globeCoordinate1, globeCoordinate2 ) {
+			if( globeCoordinate2 === undefined ) {
+				globeCoordinate2 = this._getRawValue();
 			}
 
-			if( coordinate1 === null && coordinate2 === null ) {
+			if( globeCoordinate1 === null && globeCoordinate2 === null ) {
 				return true;
 			}
 
-			if( !( coordinate1 instanceof Coordinate ) || !( coordinate2 instanceof Coordinate ) ) {
+			if(
+				!( globeCoordinate1 instanceof GlobeCoordinate )
+				|| !( globeCoordinate2 instanceof GlobeCoordinate )
+			) {
 				return false;
 			}
 
-			return coordinate1.equals( coordinate2 );
+			return globeCoordinate1.equals( globeCoordinate2 );
 		},
 
 		/**
@@ -249,13 +252,13 @@
 		 */
 		draw: function() {
 			if( this._viewState.isDisabled() ) {
-				this.$input.data( 'coordinateinput' ).disable();
+				this.$input.data( 'globecoordinateinput' ).disable();
 			} else {
-				this.$input.data( 'coordinateinput' ).enable();
+				this.$input.data( 'globecoordinateinput' ).enable();
 			}
 
 			if( this._newValue !== false ) {
-				this.$input.data( 'coordinateinput' ).value( this._newValue );
+				this.$input.data( 'globecoordinateinput' ).value( this._newValue );
 				if( this._newValue !== null ) {
 					this.$precision.data( 'listrotator' ).value( this._newValue.getPrecision() );
 				}
@@ -279,4 +282,4 @@
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, coordinate, mediaWiki ) );
+}( dataValues, valueParsers, jQuery, jQuery.valueview, globeCoordinate, mediaWiki ) );

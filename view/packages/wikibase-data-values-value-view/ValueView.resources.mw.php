@@ -44,7 +44,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.valueview',
 				'jquery.valueview.experts.stringvalue',
-				'jquery.valueview.experts.coordinatevalue',
+				'jquery.valueview.experts.globecoordinatevalue',
 				'jquery.valueview.experts.timevalue',
 				'jquery.valueview.experts.commonsmediatype'
 			),
@@ -90,14 +90,14 @@ return call_user_func( function() {
 			)
 		),
 
-		'jquery.coordinate.coordinateinput' => $moduleTemplate + array(
+		'jquery.globecoordinate.globecoordinateinput' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.coordinate/jquery.coordinate.coordinateinput.js',
+				'jquery.globecoordinate/jquery.globecoordinate.globecoordinateinput.js',
 			),
 			'dependencies' => array(
 				'jquery.ui.widget',
 				'jquery.eachchange',
-				'coordinate.js',
+				'globeCoordinate.js',
 			),
 		),
 

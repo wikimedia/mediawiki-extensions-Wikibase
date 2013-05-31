@@ -1,25 +1,25 @@
 /**
- * Input element that interprets coordinate values.
+ * Input element that interprets globe coordinate values.
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @event update: Triggered whenever the widget's value is updated.
  *        (1) {jQuery.Event}
- *        (2) {coordinate.Coordinate|null} New value (null for no or an invalid value) the widget's
+ *        (2) {globeCoordinate.GlobeCoordinate|null} New value (null for no or an invalid value) the widget's
  *            value has been changed to.
  *
  * @dependency jQuery.Widget
  * @dependency jQuery.eachchange
- * @dependency coordinate.Coordinate
+ * @dependency globeCoordinate.GlobeCoordinate
  */
-( function( $, Coordinate ) {
+( function( $, GlobeCoordinate ) {
 	'use strict';
 
-	$.widget( 'coordinate.coordinateinput', {
+	$.widget( 'globecoordinate.globecoordinateinput', {
 		/**
 		 * Caches the widget's current value.
-		 * @type {coordinate.Coordinate|null}
+		 * @type {globeCoordinate.GlobeCoordinate|null}
 		 */
 		_value: null,
 
@@ -51,34 +51,35 @@
 		/**
 		 * Parses the current input value.
 		 *
-		 * @return {coordinate.Coordinate|null} Coordinate object when parsing was successful.
+		 * @return {globeCoordinate.GlobeCoordinate|null} GlobeCoordinate object when parsing was
+		 *         successful.
 		 */
 		_parse: function() {
-			var coordinateValue;
+			var globeCoordinateValue;
 
 			try {
-				coordinateValue = new Coordinate( this.element.val() );
+				globeCoordinateValue = new GlobeCoordinate( this.element.val() );
 			} catch( e ) {
 				return null;
 			}
 
-			return ( coordinateValue.isValid() ) ? coordinateValue : null;
+			return ( globeCoordinateValue.isValid() ) ? globeCoordinateValue : null;
 		},
 
 		/**
 		 * Sets/Gets the widget's value.
 		 *
-		 * @param {coordinate.Coordinate} [value]
-		 * @return {coordinate.Coordinate|null}
+		 * @param {globeCoordinate.GlobeCoordinate} [value]
+		 * @return {globeCoordinate.GlobeCoordinate|null}
 		 */
 		value: function( value ) {
 			if( value === undefined ) {
 				return this._value;
 			}
 
-			if( value !== null && ( !( value instanceof Coordinate ) || !value.isValid() ) ) {
-				throw new Error( 'Cannot set value: Neither valid Coordinate object nor \'null\' ' +
-					'given.' );
+			if( value !== null && ( !( value instanceof GlobeCoordinate ) || !value.isValid() ) ) {
+				throw new Error( 'Cannot set value: Neither valid GlobeCoordinate object nor '
+					+ '\'null\' given.' );
 			}
 
 			if( value === null ) {
@@ -107,4 +108,4 @@
 
 	} );
 
-} )( jQuery, coordinate.Coordinate );
+} )( jQuery, globeCoordinate.GlobeCoordinate );

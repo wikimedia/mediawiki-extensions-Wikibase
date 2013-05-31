@@ -21,8 +21,8 @@
 	);
 
 	expertProvider.registerExpert(
-		dv.CoordinateValue,
-		vv.experts.CoordinateValue
+		dv.GlobeCoordinateValue,
+		vv.experts.GlobeCoordinateValue
 	);
 
 	expertProvider.registerExpert(
