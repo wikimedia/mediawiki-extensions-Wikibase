@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 use Title, Content, ParserOptions, ParserOutput, WikiPage, User, Status, DataUpdate;
-use \ValueFormatters\ValueFormatterFactory;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -163,25 +162,6 @@ class PropertyContent extends EntityContent {
 			parent::getDeletionUpdates( $page, $parserOutput ),
 			array( new EntityDeletionUpdate( $this ) )
 		);
-	}
-
-	/**
-	 * Returns a ParserOutput object containing the HTML.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Title $title
-	 * @param null $revId
-	 * @param null|ParserOptions $options
-	 * @param bool $generateHtml
-	 *
-	 * @return ParserOutput
-	 */
-	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
-		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
-
-		$propertyView = new PropertyView( $valueFormatters );
-		return $propertyView->getParserOutput( $this, $options, $generateHtml );
 	}
 
 	/**
