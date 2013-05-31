@@ -27,7 +27,7 @@ globeCoordinate.GlobeCoordinate = ( function( globeCcoordinate, globeCoordinateP
 	 *
 	 * @constructor
 	 */
-	var GlobeCoordinate = function GlobeCoordinate( globeCoordinateDefinition, options ) {
+	function GlobeCoordinate( globeCoordinateDefinition, options ) {
 		var parsed;
 
 		options = options || {};
@@ -60,9 +60,12 @@ globeCoordinate.GlobeCoordinate = ( function( globeCcoordinate, globeCoordinateP
 		}
 
 		this._globe = 'http://wikidata.org/id/Q2'; // TODO: Support other globes
-	};
+	}
 
 	GlobeCoordinate.prototype = {
+		// Don't forget about "constructor" since we are overwriting the whole prototype here:
+		constructor: GlobeCoordinate,
+
 		/**
 		 * Globe URI
 		 * @type {string}
