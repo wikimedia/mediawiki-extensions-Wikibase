@@ -286,8 +286,8 @@ class CreateClaim extends ModifyClaim {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=createclaim&entity=q42&property=p9001&snaktype=novalue&token=foobar&baserevid=7201010',
-			'api.php?action=createclaim&entity=q42&property=p9001&snaktype=value&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010',
+			'api.php?action=wbcreateclaim&entity=q42&property=p9001&snaktype=novalue&token=foobar&baserevid=7201010',
+			'api.php?action=wbcreateclaim&entity=q42&property=p9001&snaktype=value&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010',
 			// 'ex' => 'desc'
 		);
 	}
