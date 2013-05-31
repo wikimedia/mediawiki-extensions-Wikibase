@@ -95,7 +95,7 @@ class MultilingualTextValue extends DataValueObject {
 	 *
 	 * @return string
 	 */
-	public function getType() {
+	public static function getType() {
 		return 'multilingualtext';
 	}
 

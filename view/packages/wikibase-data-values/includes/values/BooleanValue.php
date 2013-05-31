@@ -85,7 +85,7 @@ class BooleanValue extends DataValueObject {
 	 *
 	 * @return string
 	 */
-	public function getType() {
+	public static function getType() {
 		return 'boolean';
 	}
 

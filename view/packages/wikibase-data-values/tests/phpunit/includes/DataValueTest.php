@@ -136,6 +136,21 @@ abstract class DataValueTest extends \PHPUnit_Framework_TestCase {
 	 * @param DataValue $value
 	 * @param array $arguments
 	 */
+	public function testGetType( DataValue $value, array $arguments ) {
+		$valueType = $value->getType();
+		$this->assertInternalType( 'string', $valueType );
+		$this->assertTrue( strlen( $valueType ) > 0 );
+
+		// Check whether using getType statically returns the same as called from an instance:
+		$staticValueType = call_user_func( array( $this->getClass(), 'getType' ) );
+		$this->assertEquals( $staticValueType, $valueType );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param DataValue $value
+	 * @param array $arguments
+	 */
 	public function testSerialization( DataValue $value, array $arguments ) {
 		$serialization = serialize( $value );
 		$this->assertInternalType( 'string', $serialization );

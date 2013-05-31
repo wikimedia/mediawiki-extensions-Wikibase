@@ -88,7 +88,7 @@ class NumberValue extends DataValueObject {
 	 *
 	 * @return string
 	 */
-	public function getType() {
+	public static function getType() {
 		return 'number';
 	}
 

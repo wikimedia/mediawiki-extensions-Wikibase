@@ -40,7 +40,7 @@ interface DataValue extends \Hashable, \Comparable, \Serializable, \Immutable, \
 	 *
 	 * @return string
 	 */
-	public function getType();
+	public static function getType();
 
 	/**
 	 * Returns a key that can be used to sort the data value with.
