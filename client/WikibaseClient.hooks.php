@@ -90,6 +90,7 @@ final class ClientHooks {
 			'includes/ChangeHandler',
 			'includes/EntityCacheUpdater',
 			'includes/LangLinkHandler',
+			'includes/RepoItemLinkGenerator',
 			'includes/RepoLinker',
 			'includes/WikibaseClient',
 		);
@@ -434,7 +435,6 @@ final class ClientHooks {
 					// Add the JavaScript which lazy-loads the link item widget (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
 					$out->addModules( 'wikibase.client.linkitem.init' );
 				}
-
 			}
 		}
 
@@ -488,55 +488,30 @@ final class ClientHooks {
 	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( \Action::getActionName( $skin->getContext() ) !== 'view' ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
-		$title = $skin->getContext()->getTitle();
 		$namespaceChecker = new NamespaceChecker(
 			Settings::get( 'excludeNamespaces' ),
 			Settings::get( 'namespaces' )
 		);
 
-		if ( $title->exists() && $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
-			// if property is not set, these will return null
-			$prefixedId = $skin->getOutput()->getProperty( 'wikibase_item' );
-			$noExternalLangLinks = $skin->getOutput()->getProperty( 'noexternallanglinks' );
+		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 
-			// @todo: may want a data link somewhere, even if the links are suppressed
-			if ( $noExternalLangLinks === null || !in_array( '*', $noExternalLangLinks ) ) {
-				if ( $prefixedId !== null ) {
-					$entityId = EntityId::newFromPrefixedId( $prefixedId );
+		$editLinkInjector = new RepoItemLinkGenerator(
+			$namespaceChecker,
+			$repoLinker,
+			Settings::get( 'enableSiteLinkWidget' )
+		);
 
-					// should not happen but just in case
-					if ( $entityId === null ) {
-						wfWarn( 'Wikibase $entityId is is set as output page property but is not valid.' );
-						wfProfileOut( __METHOD__ );
-						return true;
-					}
+		$action = \Action::getActionName( $skin->getContext() );
+		$title = $skin->getContext()->getTitle();
 
-					$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+		$isAnon = ! $skin->getContext()->getUser()->isLoggedIn();
+		$noExternalLangLinks = $skin->getOutput()->getProperty( 'noexternallanglinks' );
+		$prefixedId = $skin->getOutput()->getProperty( 'wikibase_item' );
 
-					// links to the associated item on the repo
-					$template->data['language_urls'][] = array(
-						'href' => $repoLinker->repoItemUrl( $entityId ) . '#sitelinks',
-						'text' => wfMessage( 'wikibase-editlinks' )->text(),
-						'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
-						'class' => 'wbc-editpage',
-					);
-				} else {
-					// Placeholder in case the page doesn't have any langlinks yet
-					// self::onBeforePageDisplay adds the JavaScript module which will overwrite this with a link
-					// We can leave this here in case people want to use it for gadgets, css or whatnot,
-					// even if the widget is not enabled.
-					$template->data['language_urls'][] = array(
-						'text' => '',
-						'id' => 'wbc-linkToItem',
-						'class' => 'wbc-editpage wbc-nolanglinks',
-					);
-				}
-			}
+		$editLink = $editLinkInjector->getLink( $title, $action, $isAnon, $noExternalLangLinks, $prefixedId );
+
+		if ( is_array( $editLink ) ) {
+			$template->data['language_urls'][] = $editLink;
 		}
 
 		wfProfileOut( __METHOD__ );
