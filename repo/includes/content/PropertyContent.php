@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Title, Content, ParserOptions, ParserOutput, WikiPage, User, Status, DataUpdate;
+use \ValueFormatters\ValueFormatterFactory;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -177,7 +178,9 @@ class PropertyContent extends EntityContent {
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
-		$propertyView = new PropertyView();
+		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
+
+		$propertyView = new PropertyView( $valueFormatters );
 		return $propertyView->getParserOutput( $this, $options, $generateHtml );
 	}
 

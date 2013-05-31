@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Language, Article;
+use Language, Article, \ValueFormatters\ValueFormatterFactory;
 
 /**
  * Handles the view action for Wikibase entities.
@@ -80,9 +80,10 @@ abstract class ViewEntityAction extends \ViewAction {
 
 			$this->displayEntityContent( $content );
 
+			$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
 			$isEditableView = $this->isPlainView();
 
-			$view = EntityView::newForEntityContent( $content );
+			$view = EntityView::newForEntityContent( $content, $valueFormatters );
 			$view->registerJsConfigVars(
 				$this->getOutput(),
 				$content,
