@@ -1,12 +1,12 @@
 /**
  * @since 0.1
  * @file
- * @ingroup coordinate.js
+ * @ingroup globeCoordinate.js
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( QUnit, $, coordinate ) {
+( function( QUnit, $, globeCoordinate ) {
 	'use strict';
 
 	var values = [0, 0.06, 0.4, 0.5, 1, 10];
@@ -149,17 +149,17 @@
 		}
 	};
 
-	QUnit.module( 'coordinate.js' );
+	QUnit.module( 'globeCoordinate.js' );
 
 	QUnit.test( 'precisionText()', function( assert ) {
 
 		$.each( precisions, function( precision, expected ) {
-			var precisionText = coordinate.precisionText( precision );
+			var precisionText = globeCoordinate.precisionText( precision );
 
 			// Look up precision text:
 			if( typeof expected.tech === 'number' ) {
 
-				$.each( coordinate.settings.precisions, function( i, precisionDefinition ) {
+				$.each( globeCoordinate.settings.precisions, function( i, precisionDefinition ) {
 					if( precisionDefinition.level === expected.tech ) {
 
 						assert.strictEqual(
@@ -192,7 +192,7 @@
 		$.each( precisions, function( precision, expected ) {
 
 				assert.strictEqual(
-					coordinate.precisionTextEarth( precision ),
+					globeCoordinate.precisionTextEarth( precision ),
 					expected.earth,
 					'Precision text for \'' + precision + '\' results in text \'' + expected.earth + '\'.'
 				);
@@ -206,13 +206,13 @@
 		$.each( precisions, function( precision, expected ) {
 
 			assert.strictEqual(
-				coordinate.increasePrecision( precision ),
+				globeCoordinate.increasePrecision( precision ),
 				expected.increased,
 				'Increased precision \'' + precision + '\' to \'' + expected.increased + '\'.'
 			);
 
 			assert.strictEqual(
-				coordinate.decreasePrecision( precision ),
+				globeCoordinate.decreasePrecision( precision ),
 				expected.decreased,
 				'Decreased precision \'' + precision + '\' to \'' + expected.decreased + '\'.'
 			);
@@ -227,7 +227,7 @@
 			$.each( values, function( i, value ) {
 
 				assert.strictEqual(
-					coordinate.toDecimal( value, precision ),
+					globeCoordinate.toDecimal( value, precision ),
 					expected.toDecimal[i],
 					'Applied precision \'' + precision + '\' to \'' + value + '\' resulting in \'' + expected.toDecimal[i] + '\'.'
 				);
@@ -243,7 +243,7 @@
 			$.each( values, function( i, value ) {
 
 				assert.deepEqual(
-					coordinate.toDegree( value, precision ),
+					globeCoordinate.toDegree( value, precision ),
 					expected.toDegree[i],
 					'Converted \'' + value + '\' to degree applying precision \'' + precision
 						+ '\' resulting in: '
@@ -264,19 +264,19 @@
 		// decimalText():
 
 		assert.equal(
-			coordinate.decimalText( 0, 0, 0 ),
+			globeCoordinate.decimalText( 0, 0, 0 ),
 			'0° N, 0° E',
 			'Verified output: 0° N, 0° E'
 		);
 
 		assert.equal(
-			coordinate.decimalText( 1, 1, 1 ),
+			globeCoordinate.decimalText( 1, 1, 1 ),
 			'1° N, 1° E',
 			'Verified output: 1° N, 1° E'
 		);
 
 		assert.equal(
-			coordinate.decimalText( -10, -1.5, 0.1 ),
+			globeCoordinate.decimalText( -10, -1.5, 0.1 ),
 			'10° S, 1.5° W',
 			'Verified output: 10° S, 1.5° W'
 		);
@@ -284,23 +284,23 @@
 		// degreeText():
 
 		assert.equal(
-			coordinate.degreeText( 0, 0, 0 ),
+			globeCoordinate.degreeText( 0, 0, 0 ),
 			'0°0\'0"N, 0°0\'0"E',
 			'Verified output: 0°0\'0"N, 0°0\'0"E'
 		);
 
 		assert.equal(
-			coordinate.degreeText( 1, 1, 1 ),
+			globeCoordinate.degreeText( 1, 1, 1 ),
 			'1°N, 1°E',
 			'Verified output: 1°N, 1°E'
 		);
 
 		assert.equal(
-			coordinate.degreeText( -10, -1.5, 0.1 ),
+			globeCoordinate.degreeText( -10, -1.5, 0.1 ),
 			'10°0\'S, 2°30\'W',
 			'Verified output: 10°0\'S, 2°30\'W'
 		);
 
 	} );
 
-}( QUnit, jQuery, coordinate ) );
+}( QUnit, jQuery, globeCoordinate ) );

@@ -1,24 +1,24 @@
 /**
- * Coordinate object
+ * Globe coordinate object
  *
  * @since 0.1
  * @file
- * @ingroup coordinate.js
+ * @ingroup globeCoordinate.js
  * @licence GNU GPL v2+
  *
  * @author Denny Vrandečić
  * @author H. Snater < mediawiki@snater.com >
  *
- * @dependency coordinate
- * @dependency coordinate.parser
+ * @dependency globeCoordinate
+ * @dependency globeCoordinate.parser
  */
-coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
+globeCoordinate.GlobeCoordinate = ( function( globeCcoordinate, globeCoordinateParser ) {
 	'use strict';
 
 	/**
-	 * Constructor for an object representing a coordinate with a certain precision.
+	 * Constructor for an object representing a globe coordinate with a certain precision.
 	 *
-	 * @param {string|Object} coordinateDefinition
+	 * @param {string|Object} globeCoordinateDefinition
 	 * @param {Object} [options]
 	 *        {number} precision: Precision which will overrule the automatically detected
 	 *        precision.
@@ -27,33 +27,33 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 	 *
 	 * @constructor
 	 */
-	var Coordinate = function Coordinate( coordinateDefinition, options ) {
+	var GlobeCoordinate = function GlobeCoordinate( globeCoordinateDefinition, options ) {
 		var parsed;
 
 		options = options || {};
 
-		if( !coordinateDefinition ) {
+		if( !globeCoordinateDefinition ) {
 			throw new Error( 'No input given' );
 		}
 
-		if( typeof coordinateDefinition === 'string' ) {
+		if( typeof globeCoordinateDefinition === 'string' ) {
 			try {
-				parsed = coordinateParser.parse( coordinateDefinition );
+				parsed = globeCoordinateParser.parse( globeCoordinateDefinition );
 			} catch( e ) {
 				throw new Error( 'Could not parse input: ' + e.toString() );
 			}
 
-			this._rawInput = coordinateDefinition;
+			this._rawInput = globeCoordinateDefinition;
 			this._latitude = parsed[0];
 			this._longitude = parsed[1];
 			this._precision = ( options.precision !== undefined ) ? options.precision : parsed[2];
 		} else {
-			this._latitude = coordinateDefinition.latitude;
-			this._longitude = coordinateDefinition.longitude;
+			this._latitude = globeCoordinateDefinition.latitude;
+			this._longitude = globeCoordinateDefinition.longitude;
 
 			// The backend does not return precision, so we need to parse the coordinate values:
 			// TODO: Have the backend support precision
-			parsed = coordinateParser.parse( this._latitude + ', ' + this._longitude );
+			parsed = globeCoordinateParser.parse( this._latitude + ', ' + this._longitude );
 			this._precision = parsed[2];
 
 			// TODO: Capture altitude and globe
@@ -62,7 +62,7 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		this._globe = 'http://wikidata.org/id/Q2'; // TODO: Support other globes
 	};
 
-	Coordinate.prototype = {
+	GlobeCoordinate.prototype = {
 		/**
 		 * Globe URI
 		 * @type {string}
@@ -94,10 +94,10 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		_precision: null,
 
 		/**
-		 * Returns whether the object is representing a valid coordinate.
+		 * Returns whether the object is representing a valid globe coordinate.
 		 *
-		 * TODO: throw an error in constructor if invalid Coordinate, don't support invalid data
-		 *  objects and deprecate this function then.
+		 * TODO: throw an error in constructor if invalid GlobeCoordinate, don't support invalid
+		 *  data objects and deprecate this function then.
 		 *
 		 * @return {boolean}
 		 */
@@ -147,7 +147,7 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 *
 		 * @return {string}
 		 */
-		getPrecisionText: function() { return coordinate.precisionText( this._precision ); },
+		getPrecisionText: function() { return globeCoordinate.precisionText( this._precision ); },
 
 		/**
 		 * Returns the precision text in a common unit.
@@ -155,7 +155,7 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 * @return {string}
 		 */
 		getPrecisionTextEarth: function() {
-			return coordinate.precisionTextEarth( this._precision );
+			return globeCoordinate.precisionTextEarth( this._precision );
 		},
 
 		/**
@@ -164,7 +164,7 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 * @return {Object}
 		 */
 		latitudeDecimal: function() {
-			return coordinate.toDecimal( this._latitude, this._precision );
+			return globeCoordinate.toDecimal( this._latitude, this._precision );
 		},
 
 		/**
@@ -173,7 +173,7 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 * @return {Object}
 		 */
 		longitudeDecimal: function() {
-			return coordinate.toDecimal( this._longitude, this._precision );
+			return globeCoordinate.toDecimal( this._longitude, this._precision );
 		},
 
 		/**
@@ -182,7 +182,7 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 * @return {Object}
 		 */
 		latitudeDegree: function() {
-			return coordinate.toDegree( this._latitude, this._precision );
+			return globeCoordinate.toDegree( this._latitude, this._precision );
 		},
 
 		/**
@@ -191,7 +191,7 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 * @return {Object}
 		 */
 		longitudeDegree: function() {
-			return coordinate.toDegree( this._longitude, this._precision );
+			return globeCoordinate.toDegree( this._longitude, this._precision );
 		},
 
 		/**
@@ -200,7 +200,7 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 * @return {string}
 		 */
 		decimalText: function() {
-			return coordinate.decimalText( this._latitude, this._longitude, this._precision );
+			return globeCoordinate.decimalText( this._latitude, this._longitude, this._precision );
 		},
 
 		/**
@@ -209,7 +209,7 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		 * @return {string}
 		 */
 		degreeText: function() {
-			return coordinate.degreeText( this._latitude, this._longitude, this._precision );
+			return globeCoordinate.degreeText( this._latitude, this._longitude, this._precision );
 		},
 
 		/**
@@ -256,24 +256,24 @@ coordinate.Coordinate = ( function( coordinate, coordinateParser ) {
 		},
 
 		/**
-		 * Compares the object to another Coordinate object and returns whether both represent the
-		 * same information.
+		 * Compares the object to another GlobeCoordinate object and returns whether both represent
+		 * the same information.
 		 *
-		 * @param {coordinate.Coordinate} otherCoordinate
+		 * @param {globeCoordinate.GlobeCoordinate} otherGlobeCoordinate
 		 * @return {boolean}
 		 */
-		equals: function( otherCoordinate ) {
-			if( !( otherCoordinate instanceof coordinate.Coordinate ) ) {
+		equals: function( otherGlobeCoordinate ) {
+			if( !( otherGlobeCoordinate instanceof globeCoordinate.GlobeCoordinate ) ) {
 				return false;
 			}
 
-			return this.isValid() && otherCoordinate.isValid() // two invalid times are not equal
-				&& this.getPrecision() === otherCoordinate.getPrecision()
-				&& this.iso6709() === otherCoordinate.iso6709();
+			return this.isValid() && otherGlobeCoordinate.isValid() // two invalid times are not equal
+				&& this.getPrecision() === otherGlobeCoordinate.getPrecision()
+				&& this.iso6709() === otherGlobeCoordinate.iso6709();
 		}
 
 	};
 
-	return Coordinate;
+	return GlobeCoordinate;
 
-}( coordinate, coordinate.parser ) );
+}( globeCoordinate, globeCoordinate.parser ) );

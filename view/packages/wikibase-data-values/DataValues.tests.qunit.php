@@ -56,7 +56,7 @@ return call_user_func( function() {
 		'dataValues.values.tests' => array(
 			'scripts' => array(
 				"$bp/values/BoolValue.tests.js",
-				"$bp/values/CoordinateValue.tests.js",
+				"$bp/values/GlobeCoordinateValue.tests.js",
 				"$bp/values/MonolingualTextValue.tests.js",
 				"$bp/values/MultilingualTextValue.tests.js",
 				"$bp/values/StringValue.tests.js",
@@ -81,14 +81,14 @@ return call_user_func( function() {
 			),
 		),
 
-		'coordinate.js.tests' => array(
+		'globeCoordinate.js.tests' => array(
 			'scripts' => array(
-				'resources/coordinate.js/tests/coordinate.tests.js',
-				'resources/coordinate.js/tests/coordinate.parser.tests.js',
-				'resources/coordinate.js/tests/coordinate.Coordinate.tests.js',
+				'resources/globeCoordinate.js/tests/globeCoordinate.tests.js',
+				'resources/globeCoordinate.js/tests/globeCoordinate.parser.tests.js',
+				'resources/globeCoordinate.js/tests/globeCoordinate.GlobeCoordinate.tests.js',
 			),
 			'dependencies' => array(
-				'coordinate.js',
+				'globeCoordinate.js',
 			),
 		),
 

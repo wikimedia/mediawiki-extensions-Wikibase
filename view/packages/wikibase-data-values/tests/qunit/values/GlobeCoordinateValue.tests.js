@@ -6,25 +6,25 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, $, QUnit, Coordinate ) {
+( function( dv, $, QUnit, GlobeCoordinate ) {
 	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
 
 	/**
-	 * Constructor for creating a test object for the coordinate DataValue.
+	 * Constructor for creating a test object for the globe coordinate DataValue.
 	 *
 	 * @constructor
 	 * @extends dv.tests.DataValueTest
 	 * @since 0.1
 	 */
-	dv.tests.CoordinateValueTest = dv.util.inherit( PARENT, {
+	dv.tests.GlobeCoordinateValueTest = dv.util.inherit( PARENT, {
 
 		/**
 		 * @see dv.tests.DataValueTest.getConstructor
 		 */
 		getConstructor: function() {
-			return dv.CoordinateValue;
+			return dv.GlobeCoordinateValue;
 		},
 
 		/**
@@ -32,15 +32,15 @@
 		 */
 		getConstructorArguments: function() {
 			return [
-				[ new Coordinate( '1.5 1.25' ) ],
-				[ new Coordinate( '-50 -20' ) ]
+				[ new GlobeCoordinate( '1.5 1.25' ) ],
+				[ new GlobeCoordinate( '-50 -20' ) ]
 			];
 		}
 
 	} );
 
-	var test = new dv.tests.CoordinateValueTest();
+	var test = new dv.tests.GlobeCoordinateValueTest();
 
-	test.runTests( 'dataValues.CoordinateValue' );
+	test.runTests( 'dataValues.GlobeCoordinateValue' );
 
-}( dataValues, jQuery, QUnit, coordinate.Coordinate ) );
+}( dataValues, jQuery, QUnit, globeCoordinate.GlobeCoordinate ) );

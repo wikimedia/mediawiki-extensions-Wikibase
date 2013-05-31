@@ -1,18 +1,18 @@
 /**
- * Coordinate detection global routines
+ * Globe coordinate detection global routines
  * Original source: http://simia.net/valueparser/coordinate.js
  *
  * VERSION: 0.1
  *
  * @since 0.1
  * @file
- * @ingroup coordinate.js
+ * @ingroup globeCoordinate.js
  * @licence GNU GPL v2+
  *
  * @author Denny Vrandečić
  * @author H. Snater < mediawiki@snater.com >
  */
-this.coordinate = ( function() {
+this.globeCoordinate = ( function() {
 	'use strict';
 
 	return {

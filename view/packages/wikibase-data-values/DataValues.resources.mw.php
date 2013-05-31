@@ -62,12 +62,12 @@ return call_user_func( function() {
 
 		// Dependencies required by "DataValues" library:
 
-		// coordinate.js
-		'coordinate.js' => $moduleTemplate + array(
+		// globeCoordinate.js
+		'globeCoordinate.js' => $moduleTemplate + array(
 			'scripts' => array(
-				'coordinate.js/src/coordinate.js',
-				'coordinate.js/src/coordinate.parser.js',
-				'coordinate.js/src/coordinate.Coordinate.js',
+				'globeCoordinate.js/src/globeCoordinate.js',
+				'globeCoordinate.js/src/globeCoordinate.parser.js',
+				'globeCoordinate.js/src/globeCoordinate.GlobeCoordinate.js',
 			),
 		),
 

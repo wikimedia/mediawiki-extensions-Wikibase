@@ -1,16 +1,16 @@
 /**
  * @since 0.1
  * @file
- * @ingroup coordinate.js
+ * @ingroup globeCoordinate.js
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( QUnit, $, coordinate ) {
+( function( QUnit, $, globeCoordinate ) {
 	'use strict';
 
 	/**
-	 * ISO 6709 representations keyed by the input string used to generate a coordinate object.
+	 * ISO 6709 representations keyed by the input string used to generate a GlobeCoordinate object.
 	 * @type {Object}
 	 */
 	var iso6709representations = {
@@ -26,22 +26,22 @@
 		'5\'N 0\' 10.5"W': '+05-0015949.5/'
 	};
 
-	QUnit.module( 'coordinate.Coordinate.js' );
+	QUnit.module( 'globeCoordinate.GlobeCoordinate.js' );
 
 	QUnit.test( 'Basic checks', function( assert ) {
 		var c;
 
 		assert.throws(
-			function() { c = new coordinate.Coordinate( '' ); },
+			function() { c = new globeCoordinate.GlobeCoordinate( '' ); },
 			'Trying to instantiate with an empty value throws an error.'
 		);
 
 		assert.throws(
-			function() { c = new coordinate.Coordinate( 'some string' ); },
+			function() { c = new globeCoordinate.GlobeCoordinate( 'some string' ); },
 			'Trying to instantiate with an invalid value throws an error.'
 		);
 
-		c = new coordinate.Coordinate( '1.5 1.5' );
+		c = new globeCoordinate.GlobeCoordinate( '1.5 1.5' );
 
 		// Since most methods are just plain getters, just doing plain verification:
 
@@ -120,14 +120,14 @@
 	} );
 
 	QUnit.test( 'isValid()', function( assert ) {
-		var c = new coordinate.Coordinate( '1.5 1.25' );
+		var c = new globeCoordinate.GlobeCoordinate( '1.5 1.25' );
 
 		assert.ok(
 			c.isValid(),
 			'\'1.5 1.25\' generates a valid coordinate.'
 		);
 
-		c = new coordinate.Coordinate( '190° 30" 1.123\'' );
+		c = new globeCoordinate.GlobeCoordinate( '190° 30" 1.123\'' );
 
 		assert.ok(
 			!c.isValid(),
@@ -140,7 +140,7 @@
 		var c;
 
 		$.each( iso6709representations, function( inputString, iso6709string ) {
-			c = new coordinate.Coordinate( inputString );
+			c = new globeCoordinate.GlobeCoordinate( inputString );
 
 			assert.equal(
 				c.iso6709(),
@@ -156,10 +156,10 @@
 		var c1, c2;
 
 		$.each( iso6709representations, function( inputString1, iso6709string1 ) {
-			c1 = new coordinate.Coordinate( inputString1 );
+			c1 = new globeCoordinate.GlobeCoordinate( inputString1 );
 
 			$.each( iso6709representations, function( inputString2, iso6709string2 ) {
-				c2 = new coordinate.Coordinate( inputString2 );
+				c2 = new globeCoordinate.GlobeCoordinate( inputString2 );
 
 				if( inputString1 === inputString2 && c1.isValid() && c2.isValid() ) {
 
@@ -183,4 +183,4 @@
 
 	} );
 
-}( QUnit, jQuery, coordinate ) );
+}( QUnit, jQuery, globeCoordinate ) );

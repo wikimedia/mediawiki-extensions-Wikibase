@@ -6,32 +6,33 @@
  *
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, $, Coordinate ) {
+( function( dv, $, GlobeCoordinate ) {
 	'use strict';
 
 	var PARENT = dv.DataValue,
 		constructor = function( value ) {
-			if( !( value instanceof Coordinate ) ) {
-				throw new Error( 'The given value has to be a coordinate.Coordinate object' );
+			if( !( value instanceof GlobeCoordinate ) ) {
+				throw new Error( 'The given value has to be a globeCoordinate.GlobeCoordinate '
+					+ 'object' );
 			}
 			if( !value.isValid() ) {
-				throw new Error( 'The given coordinate object value has to represent a valid ' +
-					'coordinate' );
+				throw new Error( 'The given GlobeCoordinate object value has to represent a '
+					+ 'valid globe coordinate' );
 			}
 
 			this._value = value;
 		};
 
 	/**
-	 * Constructor for creating a data value representing a coordinate.
+	 * Constructor for creating a data value representing a globe coordinate.
 	 *
 	 * @constructor
 	 * @extends dv.DataValue
 	 * @since 0.1
 	 *
-	 * @param {coordinate.Coordinate} value
+	 * @param {globeCoordinate.GlobeCoordinate} value
 	 */
-	var SELF = dv.CoordinateValue = dv.util.inherit( 'DvCoordinateValue', PARENT, constructor, {
+	var SELF = dv.GlobeCoordinateValue = dv.util.inherit( 'DvGlobeCoordinateValue', PARENT, constructor, {
 		/**
 		 * @see dv.DataValue.getSortKey
 		 *
@@ -48,7 +49,7 @@
 		 *
 		 * @since 0.1
 		 *
-		 * @return {coordinate.Coordinate}
+		 * @return {globeCoordinate.GlobeCoordinate}
 		 */
 		getValue: function() {
 			return this._value;
@@ -72,10 +73,10 @@
 		 * @since 0.1
 		 */
 		toJSON: function() {
-			var coordinate = this.getValue();
+			var globeCoordinate = this.getValue();
 
 			// TODO: Backend should interact with a proper JSON structure and have precision implemented.
-			return coordinate.getLatitude() + '|' + coordinate.getLongitude();
+			return globeCoordinate.getLatitude() + '|' + globeCoordinate.getLongitude();
 		}
 
 	} );
@@ -86,7 +87,7 @@
 	SELF.newFromJSON = function( json ) {
 		var data = json.split( '|' );
 
-		var c = new Coordinate( {
+		var c = new GlobeCoordinate( {
 			latitude: parseFloat( data[0] ),
 			longitude: parseFloat( data[1] ),
 			altitude: ( data[2] ) ? parseFloat( data[2] ) : null,
@@ -103,4 +104,4 @@
 
 	dv.registerDataValue( SELF );
 
-}( dataValues, jQuery, coordinate.Coordinate ) );
+}( dataValues, jQuery, globeCoordinate.GlobeCoordinate ) );

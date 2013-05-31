@@ -1,16 +1,16 @@
 /**
  * @since 0.1
  * @file
- * @ingroup coordinate.js
+ * @ingroup globeCoordinate.js
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( QUnit, $, coordinate ) {
+( function( QUnit, $, globeCoordinate ) {
 	'use strict';
 
 	/**
-	 * Valid coordinate strings:
+	 * Valid globe coordinate strings:
 	 * { <{string} input>: <{number[]} parse result> }
 	 * @type {Object}
 	 */
@@ -28,21 +28,21 @@
 	};
 
 	/**
-	 * Invalid coordinate strings.
+	 * Invalid globe coordinate strings.
 	 * @type {string[]}
 	 */
 	var invalid = [
 		'random string'
 	];
 
-	QUnit.module( 'coordinate.parser.js' );
+	QUnit.module( 'globeCoordinate.parser.js' );
 
 	QUnit.test( 'Parsing valid coordinate strings', function( assert ) {
 
 		$.each( valid, function( string, expected ) {
 
 			assert.deepEqual(
-				coordinate.parser.parse( string ),
+				globeCoordinate.parser.parse( string ),
 				expected,
 				'Successfully parsed \'' + string + '\'.'
 			);
@@ -56,7 +56,7 @@
 		$.each( invalid, function( i, string ) {
 
 			assert.throws(
-				function() { coordinate.parser.parse( string ); },
+				function() { globeCoordinate.parser.parse( string ); },
 				'Unable to parse \'' + string + '\'.'
 			);
 
@@ -64,4 +64,4 @@
 
 	} );
 
-}( QUnit, jQuery, coordinate ) );
+}( QUnit, jQuery, globeCoordinate ) );

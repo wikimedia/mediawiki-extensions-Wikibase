@@ -1,19 +1,19 @@
 /**
- * Coordinate parser
+ * Globe coordinate parser
  * Original source: http://simia.net/valueparser/coordinate.js
  *
  * VERSION: 0.1
  *
  * @since 0.1
  * @file
- * @ingroup coordinate.js
+ * @ingroup globeCoordinate.js
  * @licence GNU GPL v2+
  *
  * @author Denny Vrandečić
  *
- * @dependency coordinate
+ * @dependency globeCoordinate
  */
-coordinate.parser = ( function( coordinate ){
+globeCoordinate.parser = ( function( globeCoordinate ){
 	'use strict';
 
 	/*
@@ -214,7 +214,7 @@ coordinate.parser = ( function( coordinate ){
 							}
 						}
 						if (result2 !== null) {
-							if (input.substr(pos, 1).toUpperCase() === coordinate.settings.north) {
+							if (input.substr(pos, 1).toUpperCase() === globeCoordinate.settings.north) {
 								result3 = input.substr(pos, 1);
 								pos++;
 							} else {
@@ -225,7 +225,7 @@ coordinate.parser = ( function( coordinate ){
 							}
 							result3 = result3 !== null ? result3 : "";
 							if (result3 !== null) {
-								if (input.substr(pos, 1).toUpperCase() === coordinate.settings.south) {
+								if (input.substr(pos, 1).toUpperCase() === globeCoordinate.settings.south) {
 									result4 = input.substr(pos, 1);
 									pos++;
 								} else {
@@ -284,7 +284,7 @@ coordinate.parser = ( function( coordinate ){
 												}
 											}
 											if (result7 !== null) {
-												if (input.substr(pos, 1).toUpperCase() === coordinate.settings.east) {
+												if (input.substr(pos, 1).toUpperCase() === globeCoordinate.settings.east) {
 													result8 = input.substr(pos, 1);
 													pos++;
 												} else {
@@ -295,7 +295,7 @@ coordinate.parser = ( function( coordinate ){
 												}
 												result8 = result8 !== null ? result8 : "";
 												if (result8 !== null) {
-													if (input.substr(pos, 1).toUpperCase() === coordinate.settings.west) {
+													if (input.substr(pos, 1).toUpperCase() === globeCoordinate.settings.west) {
 														result9 = input.substr(pos, 1);
 														pos++;
 													} else {
@@ -837,4 +837,4 @@ coordinate.parser = ( function( coordinate ){
 	result.SyntaxError.prototype = Error.prototype;
 
 	return result;
-} )( coordinate );
+} )( globeCoordinate );
