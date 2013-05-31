@@ -167,7 +167,7 @@ function wfTemplate( $key /*...*/ ) {
 // Resource Loader Modules:
 $wgResourceModules = array_merge( $wgResourceModules, include( __DIR__ . "/resources/Resources.php" ) );
 
-$wgValueFormatters['wikibase-entityid'] = 'Wikibase\Lib\EntityIdFormatter';
+$wgValueFormatters[ \Wikibase\EntityId::getType() ] = 'Wikibase\Lib\EntityIdFormatter';
 
 if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 	include_once( __DIR__ . '/config/WikibaseLib.experimental.php' );
