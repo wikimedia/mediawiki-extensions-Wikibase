@@ -173,6 +173,25 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
+	 * Returns a ParserOutput object containing the HTML.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title $title
+	 * @param null $revId
+	 * @param null|ParserOptions $options
+	 * @param bool $generateHtml
+	 *
+	 * @return ParserOutput
+	 */
+	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
+		$valueFormatters = new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] );
+
+		$propertyView = new PropertyView( $valueFormatters );
+		return $propertyView->getParserOutput( $this, $options, $generateHtml );
+	}
+
+	/**
 	 * @see ContentHandler::getSecondaryDataUpdates
 	 *
 	 * @since 0.1
