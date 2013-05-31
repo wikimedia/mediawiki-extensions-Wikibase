@@ -6,6 +6,7 @@ use DataTypes\DataTypeFactory;
 use Title;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
+use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityDataSerializationService;
 use \Wikibase\Item;
@@ -491,10 +492,34 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			)
 		);
 
+		// If-Modified-Since handling
+
+		// #35: IMS from the deep bast should return a 200
+		$cases[] = array(
+			'{testitemid}.xml',      // subpage
+			array(), // parameters
+			array( // headers
+				'If-Modified-Since' => wfTimestamp( TS_RFC2822, '20000101000000' )
+			),
+			'!!', // output regex
+			200,  // http code
+		);
+
+		// #36: IMS from now should return a 304
+		$cases[] = array(
+			'{testitemid}.json',      // subpage
+			array(), // parameters
+			array( // headers
+				'If-Modified-Since' => '{testitemtimestamp}'
+			),
+			'!!', // output regex
+			304,  // http code
+		);
+
 		return $cases;
 	}
 
-	protected static function injectIds( &$data, \Wikibase\Entity $entity ) {
+	public static function injectIds( &$data, Entity $entity ) {
 		if ( is_array( $data ) ) {
 			foreach ( $data as $k => &$v ) {
 				self::injectIds( $v, $entity );
@@ -503,10 +528,11 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$data = str_replace( '{testitemid}', strtoupper( $entity->getId()->getPrefixedId() ), $data );
 			$data = str_replace( '{lowertestitemid}', strtolower( $entity->getId()->getPrefixedId() ), $data );
 
-			if ( strpos( $data, '{testitemrev}' ) >= 0 ) {
-				$content = \Wikibase\EntityContentFactory::singleton()->getFromId( $entity->getId() );
-				$data = str_replace( '{testitemrev}', $content->getWikiPage()->getLatest(), $data );
-			}
+			$content = EntityContentFactory::singleton()->getFromId( $entity->getId() );
+			$data = str_replace( '{testitemrev}', $content->getWikiPage()->getLatest(), $data );
+
+			$ts = wfTimestamp( TS_RFC2822, $content->getWikiPage()->getTimestamp() );
+			$data = str_replace( '{testitemtimestamp}', $ts, $data );
 		}
 	}
 
@@ -555,6 +581,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		// inject actual ID of test items
 		self::injectIds( $subpage, $item );
 		self::injectIds( $params, $item );
+		self::injectIds( $headers, $item );
 		self::injectIds( $expRegExp, $item );
 		self::injectIds( $expHeaders, $item );
 

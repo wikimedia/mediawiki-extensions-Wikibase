@@ -412,8 +412,6 @@ class EntityDataRequestHandler {
 	 */
 	public function showData( WebRequest $request, OutputPage $output, $format, EntityId $id, $revision ) {
 
-		//TODO: handle IfModifiedSince!
-
 		$prefixedId = $this->entityIdFormatter->format( $id );
 		$entity = $this->entityContentFactory->getFromId( $id );
 
@@ -450,6 +448,18 @@ class EntityDataRequestHandler {
 			}
 		} else {
 			$rev = $page->getRevision();
+		}
+
+		// handle If-Modified-Since
+		$imsHeader = $request->getHeader( 'IF-MODIFIED-SINCE' );
+		if ( $imsHeader !== false ) {
+			$ims = wfTimestamp( TS_MW, $imsHeader );
+
+			if ( $rev->getTimestamp() <= $ims ) {
+				$response = $output->getRequest()->response();
+				$response->header( 'Status: 304', true, 304 );
+				return;
+			}
 		}
 
 		list( $data, $contentType ) = $this->serializationService->getSerializedData(
