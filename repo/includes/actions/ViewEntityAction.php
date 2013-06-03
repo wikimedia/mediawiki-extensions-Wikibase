@@ -38,16 +38,53 @@ abstract class ViewEntityAction extends \ViewAction {
 	 * @return EntityContent|null
 	 */
 	protected function getContent() {
-		$title = $this->getTitle();
-		$revisionId = $this->getArticle()->getOldID();
+        $title = $this->getTitle();
+		$queryValues = $this->getRequest()->getQueryValues();
 
-		$revision = \Revision::newFromTitle( $title, $revisionId );
+		if ( array_key_exists( 'diff', $queryValues ) ) {
+			$oldId = $this->getArticle()->getOldID();
+			$revision = $this->getDiffRevision( $oldId, $queryValues['diff'] );
+		} else {
+			$revisionId = $this->getArticle()->getOldID();
+			$revision = \Revision::newFromTitle( $title, $revisionId );
+		}
 
 		if ( $revision !== null ) {
 			return $revision->getContent();
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * Get the revision specified in the diff parameter or prev/next revision of oldid
+	 *
+	 * @todo ViewEntityAction really isn't a great place for this
+	 *
+	 * @since 0.4
+	 *
+	 * @param int $oldId
+	 * @param string|int $diffValue
+	 *
+	 * @return \Revision|null
+	 */
+	public function getDiffRevision( $oldId, $diffValue ) {
+		if ( in_array( $diffValue, array( 'prev', 'next' ) ) ) {
+			$revision = \Revision::newFromId( $oldId, \Revision::READ_LATEST );
+
+			if ( $revision !== null ) {
+				if ( $diffValue === 'prev' ) {
+					return $revision->getPrevious();
+				} else {
+					return $revision->getNext();
+				}
+			}
+		} else {
+			$revId = (int)$diffValue;
+			$revision = \Revision::newFromId( $revId, \Revision::READ_LATEST );
+		}
+
+		return $revision;
 	}
 
 	/**
