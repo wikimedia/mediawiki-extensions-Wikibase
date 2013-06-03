@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dx-gGKIg",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-03T19:38:04Z",
+      "side": 1,
+      "message": "I see \"direction\u003dprev\" and \"direction\u003dnext\" bing used in the navigation links of the diff view. I do recall seeing \"diff\u003dprev\" before though. Did this change?\n\nIn any case, what we do here must be consistent with the diff view.",
+      "revId": "6533ad5c8a4a7e02ceb06ab433b8dec8bf164431",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
