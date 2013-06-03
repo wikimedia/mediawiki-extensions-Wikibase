@@ -166,6 +166,7 @@ $messages['de'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Das Bearbeiten von Werten mit dem Typ „$1“ wird noch nicht unterstützt.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Das Bearbeiten von Werten für den Datentyp „$1“ wird noch nicht unterstützt.',
 	'valueview-expert-emptyvalue-empty' => 'leer',
+	'valueview-expert-globecoordinateinput-precision' => 'Genauigkeit:',
 	'valueview-expert-timeinput-precision' => 'Genauigkeit:',
 	'valueview-expert-timeinput-calendar' => 'Kalender:',
 	'valueview-expert-timeinput-calendarhint' => '($1 Kalender)',
@@ -180,6 +181,12 @@ $messages['de'] = array(
 $messages['dsb'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Wobźěłowanje datowych gódnotow "$1" hyšći se njepódpěra.', # Fuzzy
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Wobźěłowanje gódnotow za datowy typ "$1" hyšći se njepódpěra.', # Fuzzy
+);
+
+/** British English (British English)
+ */
+$messages['en-gb'] = array(
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Handling of "$1" data values is not yet supported.', # Fuzzy
 );
 
 /** Spanish (español)
@@ -347,6 +354,7 @@ $messages['ja'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '「$1」の値の処理にはまだ対応していません。',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'データ型「$1」の値の処理にはまだ対応していません。',
 	'valueview-expert-emptyvalue-empty' => '空',
+	'valueview-expert-globecoordinateinput-precision' => '精度:',
 	'valueview-expert-timeinput-precision' => '精度:',
 	'valueview-expert-timeinput-calendar' => '暦:',
 	'valueview-expert-timeinput-calendarhint' => '($1 暦)',
