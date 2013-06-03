@@ -130,12 +130,13 @@ $messages['be-tarask'] = array(
 
 /** Bengali (বাংলা)
  * @author Aftab1995
+ * @author Bellayet
  */
 $messages['bn'] = array(
 	'valueview-expert-emptyvalue-empty' => 'খালি',
 	'valueview-expert-timeinput-calendarhint' => '($1 ক্যালেন্ডার)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; $1-এ পরিবর্তন',
-	'valueview-preview-label' => 'যেটি হিসাবে প্রদর্শন করা হবে:',
+	'valueview-preview-label' => 'যা হিসাবে প্রদর্শন করা হবে:',
 );
 
 /** Catalan (català)
@@ -197,11 +198,21 @@ $messages['fa'] = array(
 );
 
 /** Finnish (suomi)
+ * @author Nike
  * @author Silvonen
+ * @author Stryn
  */
 $messages['fi'] = array(
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Datatyypin "$1" arvojen käsittelyä ei vielä tueta.', # Fuzzy
+	'valueview-expert-advancedadjustments' => 'lisäsäädöt',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Datatyypin "$1" arvojen käsittelyä ei vielä tueta.',
 	'valueview-expert-emptyvalue-empty' => 'tyhjä',
+	'valueview-expert-timeinput-precision' => 'Tarkkuus:',
+	'valueview-expert-timeinput-calendar' => 'Kalenteri:',
+	'valueview-expert-timeinput-calendarhint' => '(kalenteri: $1)',
+	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; vaihda kalenteriin $1',
+	'valueview-preview-label' => 'näytetään muodossa:',
+	'valueview-preview-novalue' => 'kelvollista arvoa ei tunnistettu',
+	'valueview-listrotator-auto' => 'auto',
 );
 
 /** French (français)
@@ -235,9 +246,10 @@ $messages['gl'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'A manipulación de valores "$1" aínda non está soportada.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'A manipulación de valores para o tipo de datos "$1" aínda non está soportada.',
 	'valueview-expert-emptyvalue-empty' => 'baleiro',
+	'valueview-expert-globecoordinateinput-precision' => 'Precisión:',
 	'valueview-expert-timeinput-precision' => 'Precisión:',
 	'valueview-expert-timeinput-calendar' => 'Calendario:',
-	'valueview-expert-timeinput-calendarhint' => '(calendario $1 proléptico)', # Fuzzy
+	'valueview-expert-timeinput-calendarhint' => '(calendario $1)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; cambiar ao $1',
 	'valueview-preview-label' => 'vaise mostrar así:',
 	'valueview-preview-novalue' => 'non se recoñeceu ningún valor válido',
@@ -245,10 +257,13 @@ $messages['gl'] = array(
 );
 
 /** Gujarati (ગુજરાતી)
+ * @author Ashok modhvadia
  * @author KartikMistry
  */
 $messages['gu'] = array(
 	'valueview-expert-emptyvalue-empty' => 'ખાલી',
+	'valueview-expert-timeinput-calendarhint' => '($1 પંચાંગ)',
+	'valueview-listrotator-auto' => 'સ્વયં',
 );
 
 /** Hebrew (עברית)
@@ -347,9 +362,17 @@ $messages['ja'] = array(
  */
 $messages['ko'] = array(
 	'valueview-desc' => '데이터 값 표시와 편집을 위한 사용자 인터페이스 구성 요소',
+	'valueview-expert-advancedadjustments' => '고급 설정',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '"$1" 값의 처리는 아직 지원하지 않습니다.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '"$1" 데이터 유형에 대한 값의 처리는 아직 지원하지 않습니다.',
 	'valueview-expert-emptyvalue-empty' => '비었음',
+	'valueview-expert-timeinput-precision' => '유효 단위:',
+	'valueview-expert-timeinput-calendar' => '달력:',
+	'valueview-expert-timeinput-calendarhint' => '($1력)',
+	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; $1로 바꾸기',
+	'valueview-preview-label' => '다음과 같이 표시:',
+	'valueview-preview-novalue' => '유효값이 인식되지 않음',
+	'valueview-listrotator-auto' => '자동',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
@@ -408,6 +431,7 @@ $messages['nl'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Het verwerken van waarden van het type "$1" wordt nog niet ondersteund.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Het verwerken van waarden van het gegevenstype "$1" wordt nog niet ondersteund.',
 	'valueview-expert-emptyvalue-empty' => 'leeg',
+	'valueview-expert-globecoordinateinput-precision' => 'Precisie:',
 	'valueview-expert-timeinput-precision' => 'Precisie:',
 	'valueview-expert-timeinput-calendar' => 'Kalender:',
 	'valueview-expert-timeinput-calendarhint' => '(kalendersysteem $1)',
@@ -415,6 +439,18 @@ $messages['nl'] = array(
 	'valueview-preview-label' => 'wordt weergegeven als:',
 	'valueview-preview-novalue' => 'geen geldige waarde herkend',
 	'valueview-listrotator-auto' => 'automatisch',
+);
+
+/** Norwegian Nynorsk (norsk nynorsk)
+ * @author Njardarlogar
+ */
+$messages['nn'] = array(
+	'valueview-expert-emptyvalue-empty' => 'tom',
+	'valueview-expert-timeinput-precision' => 'Presisjon',
+	'valueview-expert-timeinput-calendar' => 'Kalender:',
+	'valueview-preview-label' => 'vil visast som:',
+	'valueview-preview-novalue' => 'ingen gild verdi vart attkjend',
+	'valueview-listrotator-auto' => 'auto',
 );
 
 /** Polish (polski)
