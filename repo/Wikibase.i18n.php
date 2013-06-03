@@ -3188,7 +3188,9 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespei
 	'special-itemswithoutsitelinks' => 'Objekte ohne Websitelinks',
 	'special-entitydata' => 'Objektdaten',
 	'wikibase-entitydata-not-found' => 'Es wurde kein Objekt mit der Kennung $1 gefunden.',
+	'wikibase-entitydata-not-acceptable' => 'Kein passendes Format gefunden. Unterstützte MIME-Typen: $1',
 	'wikibase-entitydata-bad-revision' => 'Die Version $2 des Objektes $1 kann nicht angezeigt werden.',
+	'wikibase-entitydata-bad-id' => 'Ungültige Kennung: $1.',
 	'wikibase-entitydata-unsupported-format' => 'Das Datenformat $1 wird von dieser Schnittstelle nicht unterstützt.',
 	'wikibase-entitydata-title' => 'Objektdaten',
 	'wikibase-entitydata-text' => 'Diese Seite liefert eine verlinkte Datenschnittstelle zu Objektwerten. Bitte gib die Objektkennung in der URL an, indem du Unterseitensyntax verwendest.',
@@ -3753,7 +3755,6 @@ $messages['en-ca'] = array(
  */
 $messages['en-gb'] = array(
 	'wikibase-deletedentity' => 'Deleted $1',
-	'wikibase-snakview-variation-unsupporteddatavalue' => 'Handling of "$1" data values is not yet supported.',
 	'wikibase-anonymouseditwarning' => 'Warning: You are not logged in.
 Your IP address will be recorded in the edit history of this $1.',
 	'wikibase-newitem-not-recognized-siteid' => 'The supplied site identifier was not recognised.',
@@ -8050,7 +8051,9 @@ $messages['ja'] = array(
 	'special-itemswithoutsitelinks' => 'サイトリンクがない項目',
 	'special-entitydata' => 'エンティティのデータ',
 	'wikibase-entitydata-not-found' => 'ID $1 のエンティティが見つかりません。',
+	'wikibase-entitydata-not-acceptable' => '該当する形式が見つかりません。対応している MIME タイプ: $1',
 	'wikibase-entitydata-bad-revision' => 'エンティティ $1 の版 $2 を表示できません。',
+	'wikibase-entitydata-bad-id' => '無効な ID です: $1',
 	'wikibase-entitydata-unsupported-format' => 'このインターフェイスはデータ形式 $1 に対応していません。',
 	'wikibase-entitydata-title' => 'エンティティのデータ',
 	'wikibase-entitydata-text' => 'このページではエンティティの値にリンクされたデータ インターフェイスを提供します。下位ページの構文を使用して、URL にエンティティ ID を指定してください。',
@@ -10577,6 +10580,11 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 * query – impliciet onderdeel van de Iri-tekst
 * fragment – impliciet onderdeel van de Iri-tekst',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons media�',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Koppeling naar bestanden die zijn opgeslagen op Wikimedia Commons. Tijdens de invoer wordt de naamruimte "File" op Commons doorzocht voor overeenkomende bestanden.
+* scheme - impliciet onderdeel van de Iristring
+* hierarchicalpart  - impliciet onderdeel van de Iristring
+* query - impliciet onderdeel van de Iristring
+* fragment - impliciet onderdeel van de Iristring',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Geocoördinaat',
 	'wikibase-listdatatypes-quantity-head' => 'Hoeveelheid',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Enkeltalige tekst',
@@ -10884,7 +10892,7 @@ Ein klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endri
 	'action-description-update' => 'oppdatera skildringar',
 );
 
-/** Oriya (ଓଡ଼ିଆ)
+/** Oriya (ଓଡ଼ିଆ)
  * @author MKar
  */
 $messages['or'] = array(
@@ -11431,7 +11439,7 @@ $messages['pt'] = array(
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valor desconhecido',
 	'wikibase-snakview-snaktypeselector-novalue' => 'sem valor',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta página está protegida. Não pode ser editada.',
-	'wikibase-blockeduser-tooltip-message' => 'A sua capacidade de fazer edições foi bloqueada.',
+	'wikibase-blockeduser-tooltip-message' => 'A sua capacidade de fazer edições foi bloqueada.', # Fuzzy
 	'special-itemdisambiguation' => 'Desambiguação de item',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'Pesquisar itens por língua e rótulo',
 	'wikibase-itemdisambiguation-lookup-language' => 'Língua:',
@@ -13065,7 +13073,7 @@ $messages['ta'] = array(
 	'wikibase-disambiguation-title' => '"$1" க்கான பக்க நெறிப்படுத்தல்',
 	'wikibase-datatype-label' => 'தரவு வகை:',
 	'wikibase-restrictionedit-tooltip-message' => 'இந்தப் பக்கம் காக்கப்பட்டுள்ளது. தொகுப்பது அனுமதிக்கப்படவில்லை.',
-	'wikibase-blockeduser-tooltip-message' => 'நீங்கள் தொகுப்பதிலிருந்து தடுக்கப்பட்டுள்ளீர்கள்.',
+	'wikibase-blockeduser-tooltip-message' => 'நீங்கள் தொகுப்பதிலிருந்து தடுக்கப்பட்டுள்ளீர்கள்.', # Fuzzy
 	'special-itembytitle' => 'தலைப்பு வாரியாக உருப்படி', # Fuzzy
 	'wikibase-itembytitle-lookup-site' => 'தளம்:',
 	'wikibase-itembytitle-lookup-page' => 'பக்கம்:',
