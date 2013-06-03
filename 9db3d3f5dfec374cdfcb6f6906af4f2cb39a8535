@@ -16,6 +16,24 @@
       "revId": "9db3d3f5dfec374cdfcb6f6906af4f2cb39a8535",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx9W.nGE",
+        "filename": "repo/includes/changeop/ChangeOpDescription.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-03T13:37:22Z",
+      "side": 1,
+      "message": "Done.\nI thought it would be easier by using DiffOps here, but I cannot see an advantage right now. So, I\u0027ll remove it for now.",
+      "parentUuid": "Dx0-N3YY",
+      "revId": "9db3d3f5dfec374cdfcb6f6906af4f2cb39a8535",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
