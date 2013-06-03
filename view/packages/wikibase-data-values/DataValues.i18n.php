@@ -352,8 +352,10 @@ $messages['zh-hans'] = array(
 );
 
 /** Traditional Chinese (中文（繁體）‎)
+ * @author Justincheng12345
  * @author Simon Shek
  */
 $messages['zh-hant'] = array(
+	'datavalues-desc' => '表示各種類型數值的對象集合',
 	'version-datavalues' => 'DataValues',
 );
