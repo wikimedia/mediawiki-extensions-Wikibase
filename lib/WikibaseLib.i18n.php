@@ -395,6 +395,32 @@ $messages['ca'] = array(
 	'datatypes-type-commonsMedia' => 'Fitxer multimèdia de Commons',
 );
 
+/** Chechen (нохчийн)
+ * @author Умар
+ */
+$messages['ce'] = array(
+	'wikibase-entity-item' => 'элемент',
+	'wikibase-entity-property' => 'свойство',
+	'wikibase-entity-query' => 'жоп деха',
+	'wikibase-diffview-reference' => 'хьост',
+	'wikibase-diffview-rank' => 'дарж',
+	'wikibase-diffview-qualifier' => 'квалификатор',
+	'wikibase-diffview-label' => 'билгало',
+	'wikibase-diffview-alias' => 'синоним',
+	'wikibase-diffview-description' => 'цуьнах лаьцна',
+	'wikibase-diffview-link' => 'хьажоригаш',
+	'wikibase-error-unexpected' => 'Дагахь доцу гӀалат хилла.',
+	'wikibase-error-autocomplete-response' => 'Серверо жоп делла: $1',
+	'wikibase-replicationnote' => 'Дехар до, тидам бар бина хийцам гучу ца болуш маситта минут яла там бу массо вики-проекташкахь.',
+	'wikibase-sitelinks-sitename-columnheading' => 'Мотт',
+	'wikibase-sitelinks-siteid-columnheading' => 'Код',
+	'wikibase-sitelinks-link-columnheading' => 'Вовшахтесна йолу агӀонаш',
+	'wikibase-tooltip-error-details' => 'Мадарра',
+	'datatypes-type-wikibase-item' => 'Элемент',
+	'datatypes-type-commonsMedia' => 'Медиафайл Викидlайуьллуче чохь',
+	'version-wikibase' => 'Вики-баз',
+);
+
 /** Sorani Kurdish (کوردی)
  * @author Calak
  */
@@ -475,6 +501,10 @@ $messages['cy'] = array(
 	'wikibase-diffview-reference' => 'ffynhonnell',
 	'wikibase-diffview-rank' => 'gradd',
 	'wikibase-diffview-qualifier' => 'goleddfwr',
+	'wikibase-diffview-label' => 'label',
+	'wikibase-diffview-alias' => 'arallenwau',
+	'wikibase-diffview-description' => 'disgrifiad',
+	'wikibase-diffview-link' => 'cysylltau',
 	'wikibase-error-unexpected' => 'Cafwyd nam annisgwyl',
 	'wikibase-error-save-generic' => "Cafwyd nam tra'n ceisio rhoi ar gadw ac oherwydd hyn ni allwyd cadw eich newidiadau.",
 	'wikibase-error-remove-generic' => "Cafwyd nam tra'n ceisio diddymu ac oherwydd hyn ni allwyd cwbwlhau eich newidiadau.",
@@ -485,6 +515,7 @@ $messages['cy'] = array(
 	'wikibase-error-autocomplete-connection' => 'Ni lwyddwyd gofyn i API Wicipedia. Ceisiwch eto toc.',
 	'wikibase-error-autocomplete-response' => 'Ateb y gweinydd: $1',
 	'wikibase-error-ui-client-error' => "Methodd y cysylltiad i'r dudalen gleient. Ceisiwch rhywdro eto.",
+	'wikibase-error-ui-no-external-page' => "Ni chafwyd hyd i'r erthygl a nodwyd ar y wefan gyfatebol.",
 	'wikibase-error-ui-cant-edit' => "Nid yw'r gallu gennych i gyflawni'r weithred hon.",
 	'wikibase-error-ui-no-permissions' => "Nid yw eich cyfrif wedi derbyn y gallu i gwblhau'r weithred hon.",
 	'wikibase-error-ui-session-failure' => 'Daeth eich sesiwn i ben. Mewngofnodwch eto.',
@@ -546,7 +577,7 @@ $messages['da'] = array(
  * @author Metalhead64
  */
 $messages['de'] = array(
-	'wikibase-lib-desc' => 'Stellt von den Erweiterungen Wikibase und Wikibase Client gemeinsam genutzte Funktionen bereit',
+	'wikibase-lib-desc' => 'Stellt dem Repositorium strukturierter Daten Funktionen bereit',
 	'wikibase-entity-item' => 'Datenobjekt',
 	'wikibase-entity-property' => 'Eigenschaft',
 	'wikibase-entity-query' => 'Abfrage',
@@ -655,18 +686,33 @@ $messages['el'] = array(
 	'wikibase-entity-item' => 'αντικείμενο',
 	'wikibase-entity-property' => 'ιδιότητα',
 	'wikibase-diffview-reference' => 'πηγή',
+	'wikibase-diffview-label' => 'ετικέτα',
+	'wikibase-diffview-description' => 'περιγραφή',
+	'wikibase-diffview-link' => 'σύνδεσμοι',
 	'wikibase-error-unexpected' => 'Παρουσιάστηκε ένα απροσδόκητο σφάλμα.',
 	'wikibase-error-save-generic' => 'Παρουσιάστηκε σφάλμα κατά την προσπάθειά σας να αποθηκεύσετε και εξαιτίας αυτού, οι αλλαγές σας μπορεί να μην ολοκληρώθηκαν.',
+	'wikibase-error-remove-generic' => 'Παρουσιάστηκε σφάλμα κατά την προσπάθεια να προβείτε στην αφαίρεση και εξαιτίας αυτού, οι αλλαγές σας μπορεί να μην έχουν ολοκληρωθεί.',
+	'wikibase-error-save-connection' => 'Παρουσιάστηκε σφάλμα σύνδεσης ενώ προσπαθήσατε  να αποθηκεύσετε, και εξαιτίας αυτού οι αλλαγές σας μπορεί να μην ολοκληρώθηκαν. Παρακαλούμε να ελέγξετε σύνδεσή σας στο Διαδίκτυο.',
+	'wikibase-error-remove-connection' => 'Παρουσιάστηκε σφάλμα κατά την προσπάθεια να προβείτε στην αφαίρεση και εξαιτίας αυτού, οι αλλαγές σας μπορεί να μην έχουν ολοκληρωθεί. Παρακαλούμε να ελέγξετε σύνδεσή σας στο Διαδίκτυο.',
+	'wikibase-error-save-timeout' => 'Αντιμετωπίζουμε τεχνικές δυσκολίες, και εξαιτίας αυτού η  "Αποθήκευση" δεν ήταν δυνατό να ολοκληρωθεί.',
+	'wikibase-error-remove-timeout' => 'Αντιμετωπίζουμε τεχνικές δυσκολίες, και εξαιτίας αυτού η "Κατάργηση" δεν ήταν δυνατό να ολοκληρωθεί.',
+	'wikibase-error-autocomplete-response' => 'Απόκριση διακομιστή:$1',
+	'wikibase-error-ui-client-error' => 'Απέτυχε η σύνδεση με τη σελίδα του πελάτη. Παρακαλώ προσπαθήστε ξανά αργότερα.',
+	'wikibase-error-ui-no-external-page' => 'Η συγκεκριμένη σελίδα δεν βρέθηκε στην αντίστοιχη ιστοσελίδα.',
 	'wikibase-error-ui-cant-edit' => 'Δεν σας επιτρέπεται να εκτελέσετε αυτήν την ενέργεια.',
 	'wikibase-error-ui-no-permissions' => 'Δεν διαθέτετε επαρκή δικαιώματα για να εκτελέσετε αυτήν την ενέργεια.',
 	'wikibase-error-ui-link-exists' => 'Δεν μπορείτε να συνδέσετε αυτή τη σελίδα επειδή ένα άλλο αντικείμενο ήδη συνδέει σε αυτό.',
+	'wikibase-error-ui-session-failure' => 'Η συνεδρία σας έχει λήξει. Παρακαλώ συνδεθείτε ξανά.',
 	'wikibase-error-ui-edit-conflict' => 'Υπάρχει σύγκρουση επεξεργασίας. Παρακαλούμε  φορτώσετε εκ νέου και αποθηκεύστε ξανά.',
 	'wikibase-replicationnote' => 'Παρακαλώ να λάβετε υπόψη ότι έως ότου οι αλλαγές γίνουν ορατές σε όλα τα wiki μπορεί να περάσουν μερικά λεπτά.',
 	'wikibase-sitelinks' => 'Κατάλογος συνδεδεμένων σελίδων σε αυτό το αντικείμενο',
 	'wikibase-sitelinks-sitename-columnheading' => 'Γλώσσα',
+	'wikibase-sitelinks-siteid-columnheading' => 'Κωδικός',
+	'wikibase-sitelinks-link-columnheading' => 'Σελίδες που συνδέονται',
 	'wikibase-tooltip-error-details' => 'Λεπτομέρειες',
 	'datatypes-type-wikibase-item' => 'Αντικείμενο',
 	'datatypes-type-commonsMedia' => 'αρχείο πολυμέσων των Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Esperanto (Esperanto)
@@ -787,6 +833,7 @@ $messages['eu'] = array(
 
 /** Persian (فارسی)
  * @author Dalba
+ * @author Ladsgroup
  * @author Reza1615
  * @author ZxxZxxZ
  */
@@ -798,6 +845,10 @@ $messages['fa'] = array(
 	'wikibase-diffview-reference' => 'منبع',
 	'wikibase-diffview-rank' => 'رتبه',
 	'wikibase-diffview-qualifier' => 'ارزش‌یاب',
+	'wikibase-diffview-label' => 'برچسب',
+	'wikibase-diffview-alias' => 'نام‌های دیگر',
+	'wikibase-diffview-description' => 'توضیحات',
+	'wikibase-diffview-link' => 'پیوندها',
 	'wikibase-error-unexpected' => 'یک خطای غیرمنتظره رخ داد.',
 	'wikibase-error-save-generic' => 'خطایی هنگام تلاش برای انجام ذخیره‌سازی رخ داد و به این خاطر تکمیل تغییراتتان ناموفق بود.',
 	'wikibase-error-remove-generic' => 'خطایی هنگام تلاش برای حذف‌کردن رخ داد و به این خاطر تکمیل تغییراتتان ناموفق بود.',
@@ -822,6 +873,7 @@ $messages['fa'] = array(
 	'wikibase-tooltip-error-details' => 'جزئیات',
 	'datatypes-type-wikibase-item' => 'آیتم',
 	'datatypes-type-commonsMedia' => 'پرونده‌های ویکی‌انبار',
+	'version-wikibase' => 'ویکی‌بیس',
 );
 
 /** Finnish (suomi)
@@ -1179,6 +1231,10 @@ $messages['ilo'] = array(
 	'wikibase-diffview-reference' => 'nagibasaran',
 	'wikibase-diffview-rank' => 'ranggo',
 	'wikibase-diffview-qualifier' => 'kababalin',
+	'wikibase-diffview-label' => 'etiketa',
+	'wikibase-diffview-alias' => 'sabali a nagnagan',
+	'wikibase-diffview-description' => 'deskripsion',
+	'wikibase-diffview-link' => 'dagiti silpo',
 	'wikibase-error-unexpected' => 'Adda rimsua a maysa a saan a nanamnama a biddut.',
 	'wikibase-error-save-generic' => 'Ada biddut a napasamak bayat nga agar-aramidka ti panagidulin iti daytoy, saan a malpas dagiti panagibalbaliwmo.',
 	'wikibase-error-remove-generic' => 'Adda biddut a napasamak bayat nga agar-aramidka ti panagikkat ti daytoy, saan a malpas dagiti panagibalbaliwmo.',
@@ -1203,6 +1259,7 @@ $messages['ilo'] = array(
 	'wikibase-tooltip-error-details' => 'Dagiti salaysay',
 	'datatypes-type-wikibase-item' => 'Banag',
 	'datatypes-type-commonsMedia' => 'Midia a papeles ti Commons',
+	'version-wikibase' => 'Wikibase',
 );
 
 /** Icelandic (íslenska)
@@ -1593,6 +1650,10 @@ $messages['ms'] = array(
 	'wikibase-diffview-reference' => 'rujukan',
 	'wikibase-diffview-rank' => 'kedudukan',
 	'wikibase-diffview-qualifier' => 'penerang',
+	'wikibase-diffview-label' => 'label',
+	'wikibase-diffview-alias' => 'alias',
+	'wikibase-diffview-description' => 'keterangan',
+	'wikibase-diffview-link' => 'pautan',
 	'wikibase-error-unexpected' => 'Berlakunya ralat luar jangkaan.',
 	'wikibase-error-save-generic' => 'Suatu ralat telah berlaku apabila cuba melakukan penyimpanan; oleh itu, pengubahan anda tidak dapat disiapkan.',
 	'wikibase-error-remove-generic' => 'Suatu ralat telah berlaku apabila cuba melakukan pembuangan; oleh itu, pengubahan anda tidak dapat disiapkan.',
@@ -1752,7 +1813,7 @@ $messages['nn'] = array(
  * @author WTM
  */
 $messages['pl'] = array(
-	'wikibase-lib-desc' => 'Zawiera elementy wspólne dla rozszerzeń Wikibase i Wikibase Client',
+	'wikibase-lib-desc' => 'Zawiera wspólne funkcje dla rozszerzeń Wikibase i Wikibase Client',
 	'wikibase-entity-item' => 'element',
 	'wikibase-entity-property' => 'właściwość',
 	'wikibase-entity-query' => 'zapytanie',
@@ -1764,16 +1825,16 @@ $messages['pl'] = array(
 	'wikibase-diffview-description' => 'opis',
 	'wikibase-diffview-link' => 'linki',
 	'wikibase-error-unexpected' => 'Wystąpił nieoczekiwany błąd.',
-	'wikibase-error-save-generic' => 'Wystąpił błąd podczas próby zapisu i z tego powodu Twoje zmiany nie zostały zapisane.',
-	'wikibase-error-remove-generic' => 'Wystąpił błąd podczas próby usunięcia i z tego powodu Twoje zmiany nie zostały zapisane.',
-	'wikibase-error-save-connection' => 'Wystąpił błąd połączenia podczas próby zapisu i z tego powodu Twoje zmiany nie zostały zapisane. Sprawdź swoje połączenie z Internetem.',
-	'wikibase-error-remove-connection' => 'Wystąpił błąd połączenia podczas próby usunięcia i z tego powodu Twoje zmiany nie zostały zapisane. Sprawdź swoje połączenie z Internetem.',
+	'wikibase-error-save-generic' => 'Wystąpił błąd podczas próby zapisu i z tego powodu zmiany nie zostały zapisane.',
+	'wikibase-error-remove-generic' => 'Wystąpił błąd podczas próby usunięcia i z tego powodu zmiany nie zostały zapisane.',
+	'wikibase-error-save-connection' => 'Wystąpił błąd połączenia podczas próby zapisu i z tego powodu zmiany nie zostały zapisane. Sprawdź swoje połączenie z Internetem.',
+	'wikibase-error-remove-connection' => 'Wystąpił błąd połączenia podczas próby usunięcia i z tego powodu zmiany nie zostały zapisane. Sprawdź swoje połączenie z Internetem.',
 	'wikibase-error-save-timeout' => 'Mamy problemy techniczne i z tego powodu próba zapisu nie powiodła się.',
 	'wikibase-error-remove-timeout' => 'Mamy problemy techniczne i z tego powodu próba usunięcia nie powiodła się.',
 	'wikibase-error-autocomplete-connection' => 'Nie można połączyć się z API Wikipedii. Spróbuj ponownie później.',
 	'wikibase-error-autocomplete-response' => 'Serwer odpowiedział: $1',
 	'wikibase-error-ui-client-error' => 'Połączenie z klientem nie powiodło się. Spróbuj ponownie później.',
-	'wikibase-error-ui-no-external-page' => 'Nie można odnaleźć artykułu na tej wiki.',
+	'wikibase-error-ui-no-external-page' => 'Nie można odnaleźć artykułu na odpowiadającej witrynie.',
 	'wikibase-error-ui-cant-edit' => 'Nie możesz wykonać tego działania.',
 	'wikibase-error-ui-no-permissions' => 'Nie masz wystarczających uprawnień aby wykonać to działanie.',
 	'wikibase-error-ui-link-exists' => 'Nie możesz podać tej strony, gdyż inny wpis już na nią wskazuje.',
@@ -1785,7 +1846,7 @@ $messages['pl'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
 	'wikibase-sitelinks-link-columnheading' => 'Powiązany artykuł',
 	'wikibase-tooltip-error-details' => 'Szczegóły',
-	'datatypes-type-wikibase-item' => 'Obiekt',
+	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Plik multimedialny na Commons',
 	'version-wikibase' => 'Wikibase',
 );
@@ -1861,6 +1922,7 @@ $messages['pt'] = array(
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Jaideraf
+ * @author Luckas
  * @author 555
  */
 $messages['pt-br'] = array(
@@ -1871,6 +1933,8 @@ $messages['pt-br'] = array(
 	'wikibase-diffview-reference' => 'referência',
 	'wikibase-diffview-rank' => 'rank',
 	'wikibase-diffview-qualifier' => 'qualificador',
+	'wikibase-diffview-description' => 'descrição',
+	'wikibase-diffview-link' => 'links',
 	'wikibase-error-unexpected' => 'Ocorreu um erro inesperado.',
 	'wikibase-error-save-generic' => 'Ocorreu um erro ao tentar salvar e, por isso, as alterações não puderam ser completadas.',
 	'wikibase-error-remove-generic' => 'Ocorreu um erro ao tentar remover e, por isso, as alterações não puderam ser completadas.',

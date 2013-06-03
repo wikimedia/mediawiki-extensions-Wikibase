@@ -486,7 +486,7 @@ $messages['bn'] = array(
 	'wikibase-watchlist-show-changes-pref' => 'উইকিউপাত্তের সম্পাদনাগুলো নজরতালিকায় দেখাও',
 	'wikibase-error-invalid-entity-id' => 'প্রবেশ করানো আইডিটি সিস্টেমের অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।',
 	'special-unconnectedpages' => 'পাতাটি আইটেমের সাথে সংযুক্ত হয়নি',
-	'wikibase-unconnectedpages-legend' => 'অসংযুক্ত পাতার বিকল্প',
+	'wikibase-unconnectedpages-legend' => 'অসংযুক্ত পাতা অপশন',
 	'wikibase-unconnectedpages-page' => 'যে পাতা দিয়ে ফলাফলের তালিকা শুরু হবে:',
 	'wikibase-unconnectedpages-submit' => 'যাও',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" কোনো সঠিক ভাষার কোড নয়।',
@@ -590,14 +590,35 @@ $messages['ca'] = array(
  */
 $messages['ce'] = array(
 	'wikibase-after-page-move' => 'Викихаамашчохь [$1 керла якха] хьой цӀе хийцина агӀона хьажориг.',
+	'wikibase-comment-sitelink-add' => 'Юкъарвики-хьажориг тӀетоьхна: $1',
+	'wikibase-comment-sitelink-change' => 'Юкъарвики-хьажориг хийцина $1 оцу $2',
+	'wikibase-comment-sitelink-remove' => 'Юкъарвики-хьажориг дӀаяккхина: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|хийцам|хийцамаш}}',
+	'wikibase-editlinks' => 'Хьажоригаш нисяр',
+	'wikibase-editlinkstitle' => 'Меттанашан юкъара хьажоригаш нисяр',
+	'wikibase-linkitem-addlinks' => 'ТӀетоха хьажоригаш',
+	'wikibase-linkitem-close' => 'ДӀачӀагӀа къамел агӀо керла йоккхуш',
+	'wikibase-linkitem-title' => 'АгӀонаш вовшахтасар',
+	'wikibase-linkitem-linkpage' => 'АгӀонаш вовшахтаса',
+	'wikibase-linkitem-selectlink' => 'Дехар до, кхузара хьажориг тӀехӀотто харжа сайт а агӀо а.',
+	'wikibase-linkitem-input-site' => 'Мотт:',
+	'wikibase-linkitem-input-page' => 'АгӀо:',
+	'wikibase-linkitem-invalidsite' => 'Къастина йозушйоцу я нийса йоцу сайт',
+	'wikibase-linkitem-confirmitem-text' => 'Ахьа къастийна агӀо хӀинцале хоьттина ю [$1 кхечу Википедишан агӀонашца]. Дехар до, бакъдар лахахь гайтина йолу агӀонаши юкъахь хьой къузара хьажориг тӀехӀоттош йолу агӀо хилар.',
+	'wikibase-linkitem-confirmitem-button' => 'Бакъдан',
+	'wikibase-linkitem-success-link' => 'АгӀонаш кхиамца вовшахтесна. Вовшахтесна йолу агӀонаш [$1 Викихаамаш чохь] ю.',
+	'wikibase-property-notfound' => 'Свойства «$1» ца карайо',
 	'wikibase-rc-hide-wikidata' => '$1 Викихаамаш',
+	'wikibase-unconnectedpages-submit' => 'Кхочушдé',
+	'wikibase-unconnectedpages-invalid-language' => '«$1» — меттан код нийса яц.',
+	'wikibase-pageinfo-entity-id-none' => 'Хlумма цаоьшу',
 );
 
 /** Sorani Kurdish (کوردی)
  * @author Calak
  */
 $messages['ckb'] = array(
-	'wikibase-after-page-move' => 'باشترە ھەروەھا برگەی ویکیدراوەی پەیوەندیداریش [$1 نوێ بکەیەوە] ھەتا پەیوەندەکانی زمان لە پەڕە گوازراوەکەدا بمێنێتەوە.',
+	'wikibase-after-page-move' => 'باشترە ھەروەھا بەندی ویکیدراوەی پەیوەندیداریش [$1 نوێ بکەیەوە] ھەتا پەیوەندەکانی زمان لە پەڕە گوازراوەکەدا بمێنێتەوە.',
 	'wikibase-comment-remove' => 'بەندی ویکیدراوەی پەیوەندیدار سڕایەوە. بەستەرەکانی زمان لابران.',
 	'wikibase-comment-linked' => 'بەندێکی ویکیدراوە بەم پەڕەیە بەستەر دراوە.',
 	'wikibase-comment-unlink' => 'ئەم پەڕەیە بە بەندی ویکیدراوە بەستەر نەدراوە. بەستەرەکانی زمان لابران.',
@@ -896,9 +917,14 @@ $messages['dsb'] = array(
 
 /** Greek (Ελληνικά)
  * @author Geraki
+ * @author Nikosguard
  */
 $messages['el'] = array(
-	'wikibase-comment-update' => 'Οι γλωσσικοί σύνδεσμοι ενημερώθηκαν.',
+	'wikibase-comment-remove' => 'Το σχετιζόμενο αντικείμενο των Wikidata διαγράφτηκε. Ο γλωσσικός σύνδεσμος αφαιρέθηκε.',
+	'wikibase-comment-linked' => 'Ένα αντικείμενο των Wikidata συνδέθηκε με αυτή την σελίδα.',
+	'wikibase-comment-unlink' => 'Αυτή η σελίδα αποσυνδέθηκε από αντικείμενο των Wikidata. Γλωσσικοί σύνδεσμοι αποσυνδέθηκαν.',
+	'wikibase-comment-restore' => 'Το σχετιζόμενο αντικείμενο των Wikidata επαναφέρθηκε. Ο γλωσσικός σύνδεσμος αποκαταστάθηκε.',
+	'wikibase-comment-update' => 'Το αντικείμενο των Wikidata τροποποιήθηκε',
 	'wikibase-comment-sitelink-add' => 'Γλωσσικός σύνδεσμος προστέθηκε: $1',
 	'wikibase-comment-sitelink-change' => 'Γλωσσικός σύνδεσμος άλλαξε από $1 σε $2',
 	'wikibase-comment-sitelink-remove' => 'Γλωσσικός σύνδεσμος αφαιρέθηκε: $1',
@@ -925,6 +951,11 @@ $messages['el'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Εμφάνιση των επεξεργασιών στο Wikidata στις πρόσφατες αλλαγές',
 	'wikibase-watchlist-show-changes-pref' => 'Εμφάνιση αλλαγών στα Wikidata στη λίστα παρακολούθησης σας',
+	'special-unconnectedpages' => 'Οι σελίδες δεν συνδέθηκαν με τα αντικείμενα.',
+	'wikibase-unconnectedpages-submit' => 'Μετάβαση',
+	'wikibase-unconnectedpages-invalid-language' => 'Το " $1 " δεν είναι έγκυρος κώδικας γλώσσας.',
+	'wikibase-pageinfo-entity-id' => 'Κωδικός αντικειμένου των Wikidata',
+	'wikibase-pageinfo-entity-id-none' => 'Κανένα',
 );
 
 /** Esperanto (Esperanto)
@@ -1083,6 +1114,7 @@ $messages['et'] = array(
 
 /** Persian (فارسی)
  * @author Calak
+ * @author Ladsgroup
  * @author Mehran
  * @author Pouyana
  * @author Reza1615
@@ -1134,6 +1166,8 @@ $messages['fa'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'عنوان صفحه برای کوئری استفاده نمی‌شود و نادیده گرفته شده‌است.',
 	'wikibase-unconnectedpages-iwdata-label' => 'فقط صفحات با پیوند میان‌ویکی',
 	'wikibase-unconnectedpages-format-row' => '( $1  پیوند زبان بر روی صفحه)',
+	'wikibase-pageinfo-entity-id' => 'شناسه آیتم ویکی‌داده',
+	'wikibase-pageinfo-entity-id-none' => 'هیچ‌کدام',
 );
 
 /** Finnish (suomi)
@@ -1195,6 +1229,7 @@ $messages['fi'] = array(
  * @author Linedwell
  * @author Ltrlg
  * @author Peter17
+ * @author Sherbrooke
  * @author Wyz
  */
 $messages['fr'] = array(
@@ -1242,6 +1277,8 @@ $messages['fr'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Le titre de la page ne peut pas être utilisé pour la recherche et est ignoré',
 	'wikibase-unconnectedpages-iwdata-label' => 'Uniquement les pages avec des liens inter-langues',
 	'wikibase-unconnectedpages-format-row' => '($1 liens inter-langues sur la page)',
+	'wikibase-pageinfo-entity-id' => "ID de l'élément Wikidata",
+	'wikibase-pageinfo-entity-id-none' => 'Aucun',
 );
 
 /** Franco-Provençal (arpetan)
@@ -1306,6 +1343,8 @@ $messages['gl'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'O título da páxina non se puido utilizar para a pescuda e ignorouse.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Só as páxinas con ligazóns interlingüísticas',
 	'wikibase-unconnectedpages-format-row' => '($1 ligazóns interlingüísticas na páxina)',
+	'wikibase-pageinfo-entity-id' => 'ID do elemento do Wikidata',
+	'wikibase-pageinfo-entity-id-none' => 'Ningún',
 );
 
 /** Swiss German (Alemannisch)
@@ -1320,10 +1359,12 @@ $messages['gsw'] = array(
 );
 
 /** Gujarati (ગુજરાતી)
+ * @author Ashok modhvadia
  * @author KartikMistry
  */
 $messages['gu'] = array(
 	'wikibase-unconnectedpages-submit' => 'જાઓ',
+	'wikibase-pageinfo-entity-id-none' => 'કંઇ નહિં',
 );
 
 /** Hebrew (עברית)
@@ -1608,12 +1649,14 @@ $messages['ilo'] = array(
 	'wikibase-error-invalid-entity-id' => 'Ti ID a naikabil ket di ammo ti sistema. Pangngaasi nga agusar ti umiso nga entidad ti ID.',
 	'special-unconnectedpages' => 'Dagiti panid a saan a naikapet kadagiti banag',
 	'wikibase-unconnectedpages-legend' => 'Dagiti pagpilian kadagiti saan a naikapet a panid',
-	'wikibase-unconnectedpages-page' => 'Rugian ti resulta ti listaan iti artikulo:',
+	'wikibase-unconnectedpages-page' => 'Rugian ti resulta ti listaan iti panid:',
 	'wikibase-unconnectedpages-submit' => 'Inkan',
 	'wikibase-unconnectedpages-invalid-language' => 'Ti "$1" ket saan nga umiso a kodigo ti pagsasao.',
 	'wikibase-unconnectedpages-page-warning' => 'Ti titulo ti panid ket saan a mabalin a mausar iti panangbiruk ken saan a naikaskaso.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Dagiti laeng panid nga adda dagiti silpo ti pagsasao',
 	'wikibase-unconnectedpages-format-row' => '($1 a silsilpo ti pagsasao iti daytoy a panid)',
+	'wikibase-pageinfo-entity-id' => 'ID ti Banag ti Wikidata',
+	'wikibase-pageinfo-entity-id-none' => 'Awan',
 );
 
 /** Icelandic (íslenska)
@@ -2005,9 +2048,11 @@ $messages['lb'] = array(
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Ännerungen an Ärer Iwwerwaachungslëscht weisen',
 	'wikibase-error-invalid-entity-id' => "D'ID déi Dir aginn hutt ass am System net bekannt. Benotzt w.e.g. en valabel ID.",
 	'special-unconnectedpages' => 'Säiten déi net mat Elementer verbonn sinn',
+	'wikibase-unconnectedpages-legend' => 'Optioune fir net verbonne Säiten',
 	'wikibase-unconnectedpages-page' => 'Lëscht vun de Resultater fänkt u mat der Säit:',
 	'wikibase-unconnectedpages-submit' => 'Lass',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" ass kee valabele Sproochecode.',
+	'wikibase-unconnectedpages-page-warning' => "Den Titel vun der säit konnt net fir d'Ufro benotzt ginn a gouf ignoréiert.",
 	'wikibase-unconnectedpages-iwdata-label' => 'Nëmme Säite mat Linke mat anere Sproochen',
 	'wikibase-unconnectedpages-format-row' => '($1 Linke mat anere Sproochen op der Säit)',
 	'wikibase-pageinfo-entity-id-none' => 'Keng',
@@ -2254,6 +2299,8 @@ $messages['ms'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Tajuk halaman tidak dapat digunakan untuk pertanyaan, oleh itu diabaikan.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Hanya halaman dengan pautan antara bahasa',
 	'wikibase-unconnectedpages-format-row' => '($1 pautan antara bahasa pada halaman ini)',
+	'wikibase-pageinfo-entity-id' => 'ID Perkara Wikidata',
+	'wikibase-pageinfo-entity-id-none' => 'Tiada',
 );
 
 /** Maltese (Malti)
@@ -2261,12 +2308,14 @@ $messages['ms'] = array(
  */
 $messages['mt'] = array(
 	'wikibase-client-desc' => 'Klijent għall-estensjoni Wikibase',
-	'wikibase-comment-update' => 'Ħoloq għal-lingwi aġġornati.',
+	'specialpages-group-wikibaseclient' => 'Klijent tal-Wikidata',
+	'wikibase-comment-update' => 'Ħoloq għal-lingwi aġġornati.', # Fuzzy
 	'wikibase-editlinks' => 'Immodifika l-ħoloq',
 	'wikibase-editlinkstitle' => 'Immodifika l-ħoloq interlingwi',
 	'wikibase-linkitem-addlinks' => 'Żid ħoloq',
 	'wikibase-linkitem-not-loggedin-title' => 'Trid tkun dħalt fil-kont tiegħek',
 	'wikibase-linkitem-not-loggedin' => "Sabiex tuża' din il-funzjoni trid tkun dħalt fil-kont tiegħek u fir-[$1repożitorju tad-data ċentralizzata].",
+	'special-unconnectedpages' => "Paġni mhux imwaħħda ma' elementi",
 );
 
 /** Norwegian Bokmål (norsk bokmål)
@@ -2440,29 +2489,31 @@ $messages['pl'] = array(
 	'wikibase-linkitem-failure' => 'Wystąpił nieznany błąd podczas próby powiązania podanej strony.',
 	'wikibase-linkitem-title' => 'Powiąż ze stroną',
 	'wikibase-linkitem-linkpage' => 'Powiąż ze stroną',
-	'wikibase-linkitem-selectlink' => 'Wybierz serwis i stronę z którą chcesz powiązać tę stronę.',
+	'wikibase-linkitem-selectlink' => 'Wybierz witrynę i stronę, z którą chcesz powiązać tę stronę.',
 	'wikibase-linkitem-input-site' => 'Język:',
 	'wikibase-linkitem-input-page' => 'Strona:',
 	'wikibase-linkitem-invalidsite' => 'Wybrano nieznaną lub niepoprawną stronę',
 	'wikibase-linkitem-confirmitem-text' => 'Wybrana strona jest już powiązana z [$1 elementem w naszym centralnym repozytorium danych]. Potwierdź, że strony wymienione poniżej są tymi, z którymi chcesz powiązać tę stronę.',
 	'wikibase-linkitem-confirmitem-button' => 'Potwierdź',
 	'wikibase-linkitem-not-loggedin-title' => 'Musisz być zalogowany.',
-	'wikibase-linkitem-not-loggedin' => 'Aby użyć tej opcji musisz być zalogowany na tej wiki oraz [$1 centralnym repozytorium danych].',
+	'wikibase-linkitem-not-loggedin' => 'Aby użyć tej funkcji musisz być zalogowany na tej wiki oraz [$1 centralnym repozytorium danych].',
 	'wikibase-linkitem-success-create' => 'Strony zostały pomyślnie powiązane. Utworzony element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].',
 	'wikibase-linkitem-success-link' => 'Strony zostały pomyślnie powiązane. Element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].',
 	'wikibase-property-notfound' => 'Właściwość $1 nie została znaleziona.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidane',
-	'wikibase-rc-show-wikidata-pref' => 'Pokazuj edycje na Wikidanych w ostatnich zmianach',
-	'wikibase-watchlist-show-changes-pref' => 'Pokazuj edycje na Wikidanych w obserwowanych',
+	'wikibase-rc-show-wikidata-pref' => 'Pokazuj edycje w Wikidanych w ostatnich zmianach',
+	'wikibase-watchlist-show-changes-pref' => 'Pokazuj edycje w Wikidanych w obserwowanych',
 	'wikibase-error-invalid-entity-id' => 'Wprowadzony identyfikator jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.',
-	'special-unconnectedpages' => 'Nie powiązane strony',
+	'special-unconnectedpages' => 'Niepowiązane strony',
 	'wikibase-unconnectedpages-legend' => 'Opcje stron niepowiązanych',
 	'wikibase-unconnectedpages-page' => 'Rozpocznij wyświetlanie wyników od strony:',
 	'wikibase-unconnectedpages-submit' => 'Pokaż',
-	'wikibase-unconnectedpages-invalid-language' => '"$1" jest nie prawidłowym kodem języka.',
+	'wikibase-unconnectedpages-invalid-language' => '„$1” jest nie prawidłowym kodem języka.',
 	'wikibase-unconnectedpages-page-warning' => 'Wpisany tytuł strony nie może być użyty do wyszukiwania, dlatego został zignorowany.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Tylko strony z odnośnikami interwiki w treści',
 	'wikibase-unconnectedpages-format-row' => '(zawiera $1 {{PLURAL:$1|odnośnik interwiki|odnośniki interwiki|odnośników interwiki}})',
+	'wikibase-pageinfo-entity-id' => 'Identyfikator elementu Wikidanych',
+	'wikibase-pageinfo-entity-id-none' => 'brak',
 );
 
 /** Piedmontese (Piemontèis)
