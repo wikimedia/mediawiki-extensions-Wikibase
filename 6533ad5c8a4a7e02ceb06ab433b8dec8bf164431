@@ -16,6 +16,24 @@
       "revId": "6533ad5c8a4a7e02ceb06ab433b8dec8bf164431",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx3j7OHc",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-03T19:47:53Z",
+      "side": 1,
+      "message": "http://www.wikidata.org/w/index.php?title\u003dQ2290639\u0026diff\u003dnext\u0026oldid\u003d15664741\n\nfound when clicking next in the diff view.  this diff using \u0027next\u0027 should show p131 : Canton of St. Gallen \n\nthe wrong revision (older one) is being embedded in the js, and then used in the claim view.  the revision comes from this function.\n\n\u0027prev\u0027 should show the oldid revision.  (confusing, yes)\n\ngo ahead and compare with how a wiki text page works in diff view.\n\ne.g. http://en.wikipedia.org/w/index.php?title\u003dBrooklyn\u0026diff\u003dnext\u0026oldid\u003d557850057\n\nI don\u0027t know where \"direction\u003dprev\" comes from?",
+      "parentUuid": "Dx-gGKIg",
+      "revId": "6533ad5c8a4a7e02ceb06ab433b8dec8bf164431",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
