@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dx0-N3YY",
+        "filename": "repo/includes/changeop/ChangeOpDescription.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-03T11:27:05Z",
+      "side": 1,
+      "message": "Seems like wrapping a DiffOp is not really useful here, if we rely on a type check instead of polymorphism. To me it seems like just wrapping the new value, instead of a DiffOp, would work: we would still have a conditional here (remove if the new value is null, set new value otherwise), but we would not need the conditional in the EditEntity class that chosses the right kind of DiffOp - we\u0027d just pass the new value.\n\nChangeOp is pretty similar to DiffOp, but perhaps not similar enough for code re-use. And we could always just generate a DiffOp from a ChangeOp should we need that in the future.",
+      "revId": "9db3d3f5dfec374cdfcb6f6906af4f2cb39a8535",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
