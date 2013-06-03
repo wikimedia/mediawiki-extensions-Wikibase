@@ -14,10 +14,6 @@
 			if( !( value instanceof Time ) ) {
 				throw new Error( 'The given value has to be a time.Time object' );
 			}
-			if( !value.isValid() ) {
-				throw new Error( 'The given time value has to represent a valid time' );
-			}
-
 			this._value = value;
 		};
 

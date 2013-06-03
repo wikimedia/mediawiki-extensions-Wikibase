@@ -24,7 +24,7 @@
 		var time,
 			valid = true;
 		try {
-			var time = new Time( definition ); // throws an error if failure
+			time = new Time( definition ); // throws an error if failure
 		} catch( e ) {
 			valid = false;
 		}
@@ -39,6 +39,18 @@
 		$.each( validTimeDefinitions, function( name, definition ) {
 			testConstructByString( assert, name, definition );
 		} );
+
+		var t;
+
+		assert.throws(
+			function() { t = new Time( '' ); },
+			'Trying to instantiate with an empty value throws an error.'
+		);
+
+		assert.throws(
+			function() { t = new Time( 'foooo - invalid time' ); },
+			'Trying to instantiate with an invalid value throws an error.'
+		);
 	} );
 
 	function testConstructByString( assert, definitionName, definition ) {
@@ -51,7 +63,7 @@
 		}
 
 		assert.ok(
-			valid && time.isValid(),
+			valid,
 			'New valid time.Time object built from "' + definitionName + '" example definition'
 		);
 	}

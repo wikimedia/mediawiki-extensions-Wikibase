@@ -38,10 +38,9 @@
 			// test integration with time.Time:
 			if( parsedTime !== null ) {
 				timeObject = new Time( parsedTime );
-				assert.ok(
-					timeObject.isValid(),
-					'"' + timeInput + '" parser result can be used to create new valid time.Time instance'
-				);
+
+				assert.ok( timeObject instanceof Time, '"' + timeInput + '" parser result can be '
+					+ 'used to create new time.Time instance' );
 			}
 		} );
 

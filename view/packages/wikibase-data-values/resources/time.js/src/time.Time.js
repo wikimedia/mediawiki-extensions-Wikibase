@@ -55,6 +55,10 @@ time.Time = ( function( time, $ ) {
 			utcoffset = '+00:00',
 			calendarname = Time.CALENDAR.GREGORIAN;
 
+		if( year === null ) {
+			throw new Error( 'time.Time object is invalid' );
+		}
+
 		if( options.calendarname ) {
 			calendarname = options.calendarname;
 		} else if ( result.calendarname !== undefined ) {
@@ -158,19 +162,6 @@ time.Time = ( function( time, $ ) {
 			return time.getTextFromDate( precision, year, month, day );
 		};
 
-		/**
-		 * Returns whether the Object is representing any time at all. This will be false if the
-		 * value passed to the constructor has not been interpreted as time.
-		 *
-		 * TODO: throw an error if invalid Time, don't support invalid data objects and deprecate
-		 *  this function then.
-		 *
-		 * @return {boolean}
-		 */
-		this.isValid = function() {
-			return this.year() !== null;
-		};
-
 		this.gregorianText = function() {
 			var result = this.gregorian();
 			return time.getTextFromDate( precision, result.year, result.month, result.day );
@@ -196,8 +187,7 @@ time.Time = ( function( time, $ ) {
 			return false;
 		}
 
-		return this.isValid() && otherTime.isValid() // two invalid times are not equal
-			&& this.precision() === otherTime.precision()
+		return this.precision() === otherTime.precision()
 			&& this.iso8601() === otherTime.iso8601();
 	};
 
