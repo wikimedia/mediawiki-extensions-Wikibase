@@ -6,6 +6,7 @@ use Wikibase\NamespaceUtils;
 use Wikibase\Item;
 use Wikibase\EntityId;
 use Wikibase\EntityContentFactory;
+use Wikibase\ViewItemAction;
 use WikiPage;
 use Title;
 
@@ -104,6 +105,51 @@ class ViewEntityActionTest extends ActionTestCase {
 
 		$action->show();
 		$this->assertEquals( 404, $response->getStatusCode(), "response code" );
+	}
+
+	public function testGetDiffRevision() {
+		$testCases = $this->doDiffRevisionEdits();
+
+		foreach( $testCases as $case ) {
+			list( $expected, $oldId, $diffValue, $title ) = $case;
+			$page = new \WikiPage( $title );
+			$viewItemAction = $this->createAction( 'view', $page );
+
+			$revision = $viewItemAction->getDiffRevision( $oldId, $diffValue, $title );
+			$this->assertInstanceOf( '\Revision', $revision );
+
+			$id = $revision->getId();
+			$this->assertEquals( $expected, $id, 'Retrieved correct diff revision' );
+		}
+	}
+
+	public function doDiffRevisionEdits() {
+		$item = \Wikibase\Item::newEmpty();
+		$item->setId( new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 847 ) );
+		$item->setDescription( 'en', 'Largest city in Germany' );
+
+        $content = new \Wikibase\ItemContent( $item );
+		$status = $content->save( 'create' );
+		assert( $status->isOK() );
+		$revId1 = $content->getWikiPage()->getRevision()->getId();
+
+		$content->getEntity()->setDescription( 'en', 'Capital of Germany' );
+		$status = $content->save( 'update' );
+		assert( $status->isOK() );
+		$revId2 = $content->getWikiPage()->getRevision()->getId();
+
+		$content->getEntity()->setDescription( 'en', 'City in Germany' );
+		$status = $content->save( 'update' );
+		assert( $status->isOK() );
+		$revId3 = $content->getWikiPage()->getRevision()->getId();
+
+		$title = $content->getTitle();
+
+		return array(
+			array( $revId2, $revId1, $revId2, $title ),
+			array( $revId3, $revId2, 'next', $title ),
+			array( $revId2, $revId2, 'prev', $title )
+		);
 	}
 
 }
