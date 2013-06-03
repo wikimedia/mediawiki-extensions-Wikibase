@@ -19,7 +19,7 @@ alias_de = generate_random_string(8)
 language_code_de = "de"
 item_id = ""
 
-describe "Check special pages to set entity label, description, aliases." do
+describe "Check special pages to set an entity" do
   before :all do
     # set up: create item
     visit_page(CreateItemPage) do |page|
@@ -118,6 +118,36 @@ describe "Check special pages to set entity label, description, aliases." do
         page.wait_for_entity_to_load
         page.count_existing_aliases.should == 2
       end
+    end
+  end
+
+  context "SetSitelink functionality test" do
+    it "should set sitelink" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.count_existing_sitelinks.should == 0
+      end
+      visit_page(SetSitelinkPage) do |page|
+        page.idField = ITEM_ID_PREFIX + item_id
+        page.sitelinkSiteField = 'enwiki'
+        page.sitelinkPageField = 'Bill Zuber'
+        page.setSitelinkSubmit
+        page.wait_for_entity_to_load
+        page.count_existing_sitelinks.should == 1
+        page.englishSitelink?.should be_true
+        page.englishSitelink
+        page.articleTitle.should == "Bill Zuber"
+      end
+    end
+  end
+
+  after :all do
+    # tear down: remove all sitelinks
+    on_page(ItemPage) do |page|
+      page.navigate_to_item
+      page.wait_for_entity_to_load
+      page.remove_all_sitelinks
     end
   end
 end
