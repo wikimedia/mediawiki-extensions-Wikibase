@@ -52,6 +52,24 @@
       "revId": "6533ad5c8a4a7e02ceb06ab433b8dec8bf164431",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx3M5m9U",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-03T21:34:53Z",
+      "side": 1,
+      "message": "ok, also found http://en.wikipedia.org/w/index.php?title\u003dBrooklyn\u0026diff\u003dcur\u0026oldid\u003d557850057\n\nthis should show the latest rev, diffed against the oldid. (-1 for that and to fix)\n\nI am not sure that diff param would be used together with direction?  if diff is not there, then we use Article::getOldID which handles direction.",
+      "parentUuid": "Dx3MQe08",
+      "revId": "6533ad5c8a4a7e02ceb06ab433b8dec8bf164431",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
