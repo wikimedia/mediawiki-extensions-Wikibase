@@ -34,6 +34,24 @@
       "revId": "6533ad5c8a4a7e02ceb06ab433b8dec8bf164431",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx3MQe08",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-03T21:18:38Z",
+      "side": 1,
+      "message": "Oh... it\u0027s even more confusing than I thought:\n\nThe prev/next link in the diff view uses diff\u003dprev/next as you say, but the prev/next links in the \"old revision\" view use direction\u003dprev/next. I wonder how exactly these (should) work?",
+      "parentUuid": "Dx3j7OHc",
+      "revId": "6533ad5c8a4a7e02ceb06ab433b8dec8bf164431",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
