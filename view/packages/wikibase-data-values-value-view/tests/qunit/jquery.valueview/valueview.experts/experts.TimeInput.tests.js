@@ -22,8 +22,7 @@
 			],
 			unknown: testExpert.basicTestDefinition.rawValues.unknown.concat( [
 				42,
-				'1. 1984',
-				new Time( 'foooo - invalid time' )
+				'1. 1984'
 			] )
 		},
 		relatedValueParser: TimeParser

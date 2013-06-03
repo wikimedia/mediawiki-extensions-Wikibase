@@ -186,7 +186,7 @@
 			} )
 			.on( 'timeinputupdate.' + this.uiBaseClass, function( event, value ) {
 				self._updateCalendarHint( value );
-				if( value && value.isValid() ) {
+				if( value ) {
 					self.$precision.data( 'listrotator' ).rotate( value.precision() );
 					self.$calendar.data( 'listrotator' ).rotate( value.calendarText() );
 				}
@@ -322,7 +322,7 @@
 		 * @param {time.Time|null} time
 		 */
 		_setRawValue: function( time ) {
-			if( !( time instanceof Time ) || !time.isValid() ) {
+			if( !( time instanceof Time ) ) {
 				time = null;
 			}
 			this._newValue = time;
@@ -344,8 +344,7 @@
 				return false;
 			}
 
-			return time1.isValid() && time2.isValid()
-				&& time1.precision() === time2.precision()
+			return time1.precision() === time2.precision()
 				&& time1.iso8601() === time2.iso8601();
 		},
 

@@ -32,7 +32,14 @@
 			this.element.addClass( this.widgetName );
 
 			this.element.eachchange( function( event, oldValue ) {
-				var value = self._parse();
+				var value;
+
+				try {
+					value = self._parse();
+				} catch( e ) {
+					value = null;
+				}
+
 				if( value !== self._value ) {
 					self._value = value;
 					self._trigger( 'update', null, [self._value] );
@@ -52,10 +59,11 @@
 		 * Parses the current input value.
 		 *
 		 * @return {time.Time|null} Time object when parsing was successful.
+		 *
+		 * @throws {Error} When no time.Time object could be instantiated.
 		 */
 		_parse: function() {
-			var timeValue = new Time( this.element.val() );
-			return ( timeValue.isValid() ) ? timeValue : null;
+			return new Time( this.element.val() );
 		},
 
 		/**
@@ -69,8 +77,8 @@
 				return this._value;
 			}
 
-			if( value !== null && ( !( value instanceof Time ) || !value.isValid() ) ) {
-				throw new Error( 'Cannot set value: Neither valid Time object nor \'null\' given.' );
+			if( value !== null && ( !( value instanceof Time ) ) ) {
+				throw new Error( 'Cannot set value: Neither time.Time object nor \'null\' given.' );
 			}
 
 			if( value === null ) {
