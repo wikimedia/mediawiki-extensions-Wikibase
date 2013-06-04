@@ -176,7 +176,7 @@ var // the following are a couple of var definitions used by the tests beyond
 					expectedName,
 					'inherit( \'' + testName + '\', ... ); will use "' + expectedName + '" as name.'
 				);
-				
+
 			}
 
 		} );

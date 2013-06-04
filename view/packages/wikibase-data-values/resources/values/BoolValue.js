@@ -60,7 +60,7 @@ dv.BoolValue = dv.util.inherit( 'DvBoolValue', PARENT, constructor, {
 			return false;
 		}
 
-		return this.getValue() == value.getValue();
+		return this.getValue() === value.getValue();
 	},
 
 	/**

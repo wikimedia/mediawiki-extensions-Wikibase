@@ -101,7 +101,7 @@ dv.MonolingualTextValue = dv.util.inherit( 'DvMonolingualTextValue', PARENT, con
 } );
 
 dv.MonolingualTextValue.newFromJSON = function( json ) {
-	return new dv.MonolingualTextValue( json['language'], json['text'] );
+	return new dv.MonolingualTextValue( json.language, json.text );
 };
 
 dv.MonolingualTextValue.TYPE = 'monolingualtext';

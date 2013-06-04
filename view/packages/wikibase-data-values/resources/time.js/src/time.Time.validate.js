@@ -17,7 +17,7 @@ time.Time.validate = ( function( Time ) {
 	 * @param {Object} definition
 	 * @throws {Error}
 	 */
-	return function validateTimeDefinition( definition ) {
+	function validateTimeDefinition( definition ) {
 		validateFieldTypes( definition, {
 			day: 'number',
 			month: 'number',
@@ -46,7 +46,7 @@ time.Time.validate = ( function( Time ) {
 			throw new Error( '"calendarname" is "' + definition.calendarname + '" but has to be "'
 				+ Time.CALENDAR.GREGORIAN + '" or "' + Time.CALENDAR.JULIAN + '"' );
 		}
-	};
+	}
 
 	/**
 	 * Makes sure a given structure has a proper precision set by validating the precision itself
@@ -110,5 +110,7 @@ time.Time.validate = ( function( Time ) {
 			}
 		}
 	}
+
+	return validateTimeDefinition;
 
 }( time.Time ) );

@@ -49,10 +49,13 @@
 		}
 
 		// function we execute in our real constructor created by evil eval:
-		var evilsSeed = constructor || base,
+		var evilsSeed,
 			NewConstructor;
 
+		evilsSeed = constructor || base;
+
 		// for creating a named function with a variable name, there is just no other way...
+		/* jshint evil: true */
 		eval( 'NewConstructor = function ' + name +
 			'(){ evilsSeed.apply( this, arguments ); }' );
 

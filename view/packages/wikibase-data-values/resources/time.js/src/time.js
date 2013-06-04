@@ -12,6 +12,7 @@
  * @author Denny Vrandečić
  */
 this.time = ( function() { // 'this' is global scope, e.g. 'window' in the browser and 'global' on the server
+	'use strict';
 
 	var time = {};
 
@@ -144,7 +145,7 @@ this.time = ( function() { // 'this' is global scope, e.g. 'window' in the brows
 		var significant = 0,
 			text = '';
 
-		if( precision == 8 ) {
+		if( precision === 8 ) {
 			significant = Math.floor( ( Math.abs( year ) ) / Math.pow( 10, 9 - precision ) );
 		} else {
 			significant = Math.floor( ( Math.abs( year ) - 1) / Math.pow( 10, 9 - precision ) ) + 1;

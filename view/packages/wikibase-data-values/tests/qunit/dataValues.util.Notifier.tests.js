@@ -17,8 +17,10 @@
 
 
 	QUnit.test( 'Construction of Notifier instances', function( assert ) {
+		var n;
+
 		assert.ok(
-			Notifier() instanceof Notifier,
+			new Notifier() instanceof Notifier,
 			'Instance created without using "new" keyword'
 		);
 
@@ -34,7 +36,7 @@
 
 		assert.throws(
 			function() {
-				new Notifier( 'foo' );
+				n = new Notifier( 'foo' );
 			},
 			'Creating Notifier with wrong argument fails'
 		);
@@ -68,7 +70,7 @@
 		var notifier;
 
 		// callback with tests for notify() calls:
-		function fnNotifyAssertions( testNotificationKeyName ) {
+		var fnNotifyAssertions = function( testNotificationKeyName ) {
 			assert.ok(
 				true,
 				'notification has been triggered'
@@ -81,7 +83,7 @@
 
 			assert.ok(
 				testNotificationKeyName !== undefined,
-				'Custom notify argument got passed into callaback'
+				'Custom notify argument got passed into callback'
 			);
 
 			assert.equal(
@@ -89,7 +91,7 @@
 				testNotificationKeyName,
 				'Notifier.current() returns callback notification key "' + testNotificationKeyName + '"'
 			);
-		}
+		};
 
 		notifier = new Notifier( {
 			test: fnNotifyAssertions,

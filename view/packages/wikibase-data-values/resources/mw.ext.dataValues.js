@@ -18,7 +18,12 @@ mediaWiki.ext = mediaWiki.ext || {};
 mediaWiki.ext.dataValues = ( function( mw, dataValues, time, $ ) {
 	'use strict';
 
-	return new ( function MwExtDataValues() {
+	/**
+	 * Constructor for extension singleton.
+	 *
+	 * @constructor
+	 */
+	function MwExtDataValues() {
 		time.settings.daybeforemonth = getDayBeforeMonthTimeSettingFromMWContext();
 		time.settings.monthnames = getMonthNameTimeSettingsFromMWContext();
 
@@ -26,7 +31,7 @@ mediaWiki.ext.dataValues = ( function( mw, dataValues, time, $ ) {
 		//  "dataValues.values" module which will result into "time.js" being loaded which results
 		//  into the global time object being available. If we would only load "time.js" when it
 		//  is required, we could not define its global setting at this entry point!
-	} )();
+	}
 
 	/**
 	 * Returns whether the language used in MediaWiki prefers the day before the month in its
@@ -51,13 +56,13 @@ mediaWiki.ext.dataValues = ( function( mw, dataValues, time, $ ) {
 	 */
 	function getMonthNameTimeSettingsFromMWContext() {
 		function monthNames( shortNameKey, longNameKey ) {
-			var short = mw.msg( shortNameKey ),
-				long = mw.msg( longNameKey );
+			var shortName = mw.msg( shortNameKey ),
+				longName = mw.msg( longNameKey );
 
-			if( short && short !== long ) {
-				return [ long, short ];
+			if( shortName && shortName !== longName ) {
+				return [ longName, shortName ];
 			}
-			return [ long ];
+			return [ longName ];
 		}
 		return [
 			monthNames( 'jan', 'january' ),
@@ -74,5 +79,7 @@ mediaWiki.ext.dataValues = ( function( mw, dataValues, time, $ ) {
 			monthNames( 'dec', 'december' )
 		];
 	}
+
+	return new MwExtDataValues(); // expose extension singleton
 
 }( mediaWiki, dataValues, time, jQuery ) );

@@ -19,7 +19,7 @@ var SELF = dv.DataValue = function DvDataValue() {
 	if( !this.constructor.TYPE ) {
 		throw new Error( 'Can not create abstract DataValue of no specific type' );
 	}
-}
+};
 
 /**
  * Type of the DataValue. A static definition of the type like this has to be defined for all
