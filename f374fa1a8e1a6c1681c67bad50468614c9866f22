@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dx7AwNOk",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T16:31:15Z",
+      "side": 1,
+      "message": "Namespaces need an overhaul. I don\u0027t want to mix that into this change.",
+      "parentUuid": "Dx.3DB.8",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dxw2-U18",
         "filename": "repo/includes/specials/EntityDataRequestHandler.php",
         "patchSetId": 4
@@ -30,6 +48,41 @@
       "writtenOn": "2013-06-04T15:41:57Z",
       "side": 1,
       "message": "leading slashes here are not needed and typically not placed",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxxBOSHA",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T16:31:15Z",
+      "side": 1,
+      "message": "ok, when we to the namespace overhaul.",
+      "parentUuid": "Dxw2-U18",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx-BSvBE",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T16:31:15Z",
+      "side": 1,
+      "message": "done.",
       "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "Dx1BY0C8",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T16:31:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dxy1Bb14",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx62qnxc",
         "filename": "repo/includes/specials/EntityDataRequestHandler.php",
         "patchSetId": 4
@@ -82,6 +153,24 @@
       "writtenOn": "2013-06-04T15:41:57Z",
       "side": 1,
       "message": "return for great justice!",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxzBdRB8",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T16:31:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx62qnxc",
       "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -123,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "Dx5BCWEA",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T16:31:15Z",
+      "side": 1,
+      "message": "Injected $wgUseSquid. Leaving refactoring for later.",
+      "parentUuid": "Dx.0fh2c",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx410A9A",
         "filename": "repo/includes/specials/EntityDataRequestHandler.php",
         "patchSetId": 4
@@ -152,6 +259,24 @@
       "side": 1,
       "message": "Isn\u0027t it fun? And I have no idea what it does, either!",
       "parentUuid": "Dx410A9A",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx3A-zLE",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T16:31:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx40P4zc",
       "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
