@@ -190,6 +190,7 @@ final class RepoHooks {
 			'changeop/ChangeOps',
 			'changeop/ChangeOpLabel',
 			'changeop/ChangeOpDescription',
+			'changeop/ChangeOpAliases',
 
 			'content/EntityContentFactory',
 			'content/EntityHandler',
