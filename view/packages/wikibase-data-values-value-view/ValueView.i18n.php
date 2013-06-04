@@ -110,9 +110,10 @@ $messages['ast'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Inda nun hai sofitu pa xestionar valores «$1».',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Inda nun hai sofitu pa xestionar valores de datos de tipu «$1».',
 	'valueview-expert-emptyvalue-empty' => 'balero',
+	'valueview-expert-globecoordinateinput-precision' => 'Precisión:',
 	'valueview-expert-timeinput-precision' => 'Precisión:',
 	'valueview-expert-timeinput-calendar' => 'Calendariu:',
-	'valueview-expert-timeinput-calendarhint' => '(calendariu $1 prolépticu)', # Fuzzy
+	'valueview-expert-timeinput-calendarhint' => '(calendariu $1)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; cambiar al $1',
 	'valueview-preview-label' => 'veráse como:',
 	'valueview-preview-novalue' => 'nun se reconoció dengún valor válidu',
@@ -224,6 +225,7 @@ $messages['fi'] = array(
 
 /** French (français)
  * @author Ayack
+ * @author Gomoko
  * @author Hello71
  * @author Metroitendo
  * @author Peter17
@@ -235,6 +237,7 @@ $messages['fr'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'La manipulation des valeurs de données « $1 » n’est pas encore supportée.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestion des valeurs pour le type de données « $1 » n’est pas encore pris en charge.',
 	'valueview-expert-emptyvalue-empty' => 'vide',
+	'valueview-expert-globecoordinateinput-precision' => 'Précision :',
 	'valueview-expert-timeinput-precision' => 'Précision :',
 	'valueview-expert-timeinput-calendar' => 'Calendrier :',
 	'valueview-expert-timeinput-calendarhint' => '(calendrier $1)',
@@ -335,9 +338,10 @@ $messages['it'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'La gestione dei valori "$1" non è ancora supportata.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestione dei valori per il tipo di dati "$1" non è ancora supportata.',
 	'valueview-expert-emptyvalue-empty' => 'vuoto',
+	'valueview-expert-globecoordinateinput-precision' => 'Precisione:',
 	'valueview-expert-timeinput-precision' => 'Precisione:',
 	'valueview-expert-timeinput-calendar' => 'Calendario:',
-	'valueview-expert-timeinput-calendarhint' => '(calendario $1 prolettico)', # Fuzzy
+	'valueview-expert-timeinput-calendarhint' => '(calendario $1)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; modifica in $1',
 	'valueview-preview-label' => 'verrà visualizzato come:',
 	'valueview-preview-novalue' => 'nessun valore valido riconosciuto',
@@ -405,6 +409,7 @@ $messages['mk'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Работата со вредности од типот „$1“ сè уште не е поддржана.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Работата со вредности за податочниот тип „$1“ сè уште не е поддржана.',
 	'valueview-expert-emptyvalue-empty' => 'празно',
+	'valueview-expert-globecoordinateinput-precision' => 'Уточнетост:',
 	'valueview-expert-timeinput-precision' => 'Уточнетост:',
 	'valueview-expert-timeinput-calendar' => 'Календар:',
 	'valueview-expert-timeinput-calendarhint' => '(календар: $1)',
@@ -570,6 +575,7 @@ $messages['zh-hant'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '尚未支援「$1」值的操作。',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '尚未支援「$1」數據值的操作。',
 	'valueview-expert-emptyvalue-empty' => '空',
+	'valueview-expert-globecoordinateinput-precision' => '精度：',
 	'valueview-expert-timeinput-precision' => '精度：',
 	'valueview-expert-timeinput-calendar' => '日曆：',
 	'valueview-expert-timeinput-calendarhint' => '（$1曆）',
