@@ -5,7 +5,7 @@ use Wikibase\EntityContent;
 use Wikibase\Test\Api\ModifyItemBase;
 
 /**
- * Tests for the Wikibase\EntityContent class.
+ * @covers EntityContent
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -396,5 +396,15 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 		$actual = $itemB->equals( $itemA );
 		$this->assertEquals( $equals, $actual );
+	}
+
+	public function testGetParserOutput() {
+		$content = $this->newEmpty();
+		$content->getEntity()->setId( 42 ); // TODO/FIXME: Rendering fails without ID set while it really shouldn't.
+
+		$title = \Title::newFromText( 'Foo' );
+		$parserOutput = $content->getParserOutput( $title );
+
+		$this->assertInstanceOf( '\ParserOutput', $parserOutput );
 	}
 }
