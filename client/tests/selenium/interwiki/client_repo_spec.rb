@@ -38,6 +38,15 @@ describe "Check functionality of client-repo connection" do
         page.interwiki_xxx?.should be_false
       end
     end
+    it "should check data item link in client toolbox" do
+      on_page(ClientPage) do |page|
+        page.navigate_to_article(article_title_a)
+        page.clientDataItemLink?.should be_true
+        page.clientDataItemLink
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == article_title_a
+      end
+    end
     it "should login as user & add some sitelinks to the item" do
       visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
