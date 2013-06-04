@@ -459,7 +459,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForClaims( EntityContent $entity, Language $lang = null, $editable = true ) {
-		global $wgLang, $wgValueFormatters;
+		global $wgLang;
 
 		wfProfileIn( __METHOD__ );
 
@@ -498,72 +498,9 @@ abstract class EntityView extends \ContextSource {
 				);
 			}
 
-			$entitiesPrefixMap = array();
-			foreach ( Settings::get( 'entityPrefixes' ) as $prefix => $entityType ) {
-				$entitiesPrefixMap[ $entityType ] = $prefix;
-			}
-			$valueFormatterOptions = new FormatterOptions( array(
-				ValueFormatter::OPT_LANG => $languageCode,
-				Lib\EntityIdFormatter::OPT_PREFIX_MAP => $entitiesPrefixMap
-			) );
-
 			$i = 0;
 			foreach( $claims as $claim ) {
-				// TODO: display a "placeholder" message for novalue/somevalue snak
-				$value = '';
-				if ( $claim->getMainSnak()->getType() === 'value' ) {
-					$value = $claim->getMainSnak()->getDataValue();
-
-					// TODO: Bad to have a switch for different data types here, implement a formatter!
-					if( $value instanceof \DataValues\TimeValue ) {
-						$value = $value->getTime() . ' (' . $value->getCalendarModel() . ')';
-					} else {
-						// Proper way, use value formatter:
-						$valueFormatter = $this->valueFormatters->newFormatter(
-							$value->getType(), $valueFormatterOptions
-						);
-
-						if( $valueFormatter !== null ) {
-							$value = $valueFormatter->format( $value );
-						} else {
-							// If value representation is a string, just display that one as a
-							// fallback for values not having a formatter implemented yet.
-							$value = $value->getValue();
-
-							if( !is_string( $value ) ) {
-								// TODO: don't fail here, display a message in the UI instead
-								throw new MWException( 'Displaying of values of type "'
-									. $value->getType() . '" not supported yet' );
-							}
-						}
-					}
-				}
-
-				$additionalCssClasses = '';
-				if ( $i++ === 0 ) {
-					$additionalCssClasses .= 'wb-first ';
-				}
-				if ( $i === count( $claims ) ) {
-					$additionalCssClasses .= 'wb-last ';
-				}
-
-				$mainSnakHtml = wfTemplate( 'wb-snak',
-					'wb-mainsnak',
-					$propertyLink,
-					'', // type selector, JS only
-					( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value )
-				);
-
-				// TODO: Use 'wb-claim' or 'wb-statement' template accordingly
-				$propertyHtml .= wfTemplate( 'wb-statement',
-					$additionalCssClasses,
-					$claim->getGuid(),
-					$mainSnakHtml,
-					'', // TODO: Qualifiers
-					$this->getHtmlForEditSection( $entity, $lang, '', 'span' ), // TODO: add link to SpecialPage
-					'', // TODO: References heading
-					'' // TODO: References
-				);
+				$propertyHtml .= $this->getHtmlForClaim( $entity, $claim, $lang, $editable );
 			}
 
 			$propertyHtml .= wfTemplate( 'wb-toolbar',
@@ -585,6 +522,96 @@ abstract class EntityView extends \ContextSource {
 
 		wfProfileOut( __METHOD__ );
 		return $html;
+	}
+
+	/**
+	 * Builds and returns the HTML representing a single WikibaseEntity's claim.
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityContent $entity the entity related to the claim
+	 * @param Claim $claim the claim to render
+	 * @param Language|null $lang the language to use for rendering. if not given, the local
+	 *        context will be used.
+	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 * @return string
+	 *
+	 * @throws MWException If a claim's value can't be displayed because the related value formatter
+	 *         is not yet implemented or provided in the constructor. (Also see related todo)
+	 */
+	protected function getHtmlForClaim(
+		EntityContent $entity,
+		Claim $claim,
+		Language $lang = null,
+		$editable = true
+	) {
+		global $wgLang;
+
+		wfProfileIn( __METHOD__ );
+
+		$languageCode = isset( $lang ) ? $lang->getCode() : $wgLang->getCode();
+
+		$entitiesPrefixMap = array();
+		foreach ( Settings::get( 'entityPrefixes' ) as $prefix => $entityType ) {
+			$entitiesPrefixMap[ $entityType ] = $prefix;
+		}
+		$valueFormatterOptions = new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => $languageCode,
+			Lib\EntityIdFormatter::OPT_PREFIX_MAP => $entitiesPrefixMap
+		) );
+
+		// TODO: display a "placeholder" message for novalue/somevalue snak
+		$value = '';
+		if ( $claim->getMainSnak()->getType() === 'value' ) {
+			$value = $claim->getMainSnak()->getDataValue();
+
+			// TODO: Bad to have a switch for different data types here, implement a formatter!
+			if( $value instanceof \DataValues\TimeValue ) {
+				$value = $value->getTime() . ' (' . $value->getCalendarModel() . ')';
+			} else {
+				// Proper way, use value formatter:
+				$valueFormatter = $this->valueFormatters->newFormatter(
+					$value->getType(), $valueFormatterOptions
+				);
+
+				if( $valueFormatter !== null ) {
+					$value = $valueFormatter->format( $value );
+				} else {
+					// If value representation is a string, just display that one as a
+					// fallback for values not having a formatter implemented yet.
+					$value = $value->getValue();
+
+					if( !is_string( $value ) ) {
+						// TODO: don't fail here, display a message in the UI instead
+						throw new MWException( 'Displaying of values of type "'
+							. $value->getType() . '" not supported yet' );
+					}
+				}
+			}
+		}
+
+		$mainSnakHtml = wfTemplate( 'wb-snak',
+			'wb-mainsnak',
+			'', // Link to property. NOTE: we don't display this ever (instead, we generate it on
+				// Claim group level) If this was a public function, this should be generated
+				// anyhow since important when displaying a Claim on its own.
+			'', // type selector, JS only
+			( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value )
+		);
+
+		// TODO: Use 'wb-claim' or 'wb-statement' template accordingly
+		$claimHtml = wfTemplate( 'wb-statement',
+			'', // additional classes
+			$claim->getGuid(),
+			$mainSnakHtml,
+			'', // TODO: Qualifiers
+			$this->getHtmlForEditSection( $entity, $lang, '', 'span' ), // TODO: add link to SpecialPage
+			'', // TODO: References heading
+			'' // TODO: References
+		);
+
+		wfProfileOut( __METHOD__ );
+		return $claimHtml;
 	}
 
 	/**
