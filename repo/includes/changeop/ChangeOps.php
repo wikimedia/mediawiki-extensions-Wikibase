@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
+
 /**
  * Class for holding a batch of change operations
  *
@@ -49,10 +51,18 @@ class ChangeOps {
 	 *
 	 * @since 0.4
 	 *
-	 * @param ChangeOp $changeOp
+	 * @param ChangeOp|ChangeOp[] $changeOp
 	 */
-	public function add( ChangeOp $changeOp ) {
-		$this->ops[] = $changeOp;
+	public function add( $changeOp ) {
+		if ( !is_array( $changeOp ) && !( $changeOp instanceof ChangeOp ) ) {
+			throw new InvalidArgumentException( '$changeOp needs to be an instance of ChangeOp or an array of ChangeOps' );
+		}
+
+		if ( $changeOp instanceof ChangeOp ) {
+			$this->ops[] = $changeOp;
+		} else {
+			$this->ops = array_merge( $this->ops, $changeOp );
+		}
 	}
 
 	/**
