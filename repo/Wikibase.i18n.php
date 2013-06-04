@@ -335,9 +335,6 @@ to find out where it went.',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Removed [$2] {{PLURAL:$1|alias|aliases}}',
 	'wikibase-property-summary-special-create-property' => 'Created a [$2] property with {{PLURAL:$1|value|values}}',
 
-	// query - summary and autocomment
-	'wikibase-query-summary-special-create-query' => 'Created a [$2] query with {{PLURAL:$1|value|values}}',
-
 	// datatype descriptions
 	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Link to other items at the project. During entry the "Item" namespace on Wikidata will be searched for matching entries. It consists of a single text entry field.
@@ -990,9 +987,6 @@ Parameters:
 	'wikibase-property-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
-	'wikibase-query-summary-special-create-query' => 'Automatic edit summary when creating a query, and supplying one or more values. Parameters:
-* $1 is the number of values set (that is 0 - zero);
-* $2 is the language code of the entity page during creation.',
 	'wikibase-listdatatypes-wikibase-item-head' => '{{Wikibase-datatype-head|Item|wikibase-item}}
 {{Identical|Item}}',
 	'wikibase-listdatatypes-wikibase-item-body' => '{{Wikibase-datatype-body|Item}}
@@ -1527,7 +1521,6 @@ $messages['be'] = array(
 	'wikibase-property-summary-wbsetdescription-set' => 'Зменена апісанне [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Выдалена апісанне [$2]',
 	'wikibase-property-summary-special-create-property' => 'Створана ўласцівасць [$2] са {{PLURAL:$1|значэннем|значэннямі}}',
-	'wikibase-query-summary-special-create-query' => 'Створана запыт [$2] са {{PLURAL:$1|значэннем|значэннямі}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Элемент',
 	'wikibase-listdatatypes-quantity-head' => 'Колькасць',
 	'wikibase-listdatatypes-string-head' => 'Радок',
@@ -2596,7 +2589,6 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Přidán alias|Přidány aliasy}} pro [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Odstraněn alias|Odstraněny aliasy}} pro [$2]',
 	'wikibase-property-summary-special-create-property' => 'Založena vlastnost pro [$2] s {{PLURAL:$1|hodnotou|hodnotami}}',
-	'wikibase-query-summary-special-create-query' => 'Založen dotaz pro [$2] s {{PLURAL:$1|hodnotou|hodnotami}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Položka',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Média na Commons',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Zeměpisné souřadnice',
@@ -2945,7 +2937,6 @@ for at finde ud af, hvad der er sket med det.',
 	'wikibase-property-summary-wbsetaliases-add' => 'Tilføjede {{PLURAL:$1|alias|aliasser}} for [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Fjernede {{PLURAL:$1|alias|aliasser}} for [$2]',
 	'wikibase-property-summary-special-create-property' => 'Oprettede en egenskab for [$2] med {{PLURAL:$1|en værdi|værdier}}',
-	'wikibase-query-summary-special-create-query' => 'Oprettede en forespørgsel for [$2] med {{PLURAL:$1|en værdi|værdier}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Emne',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Henvisning til andre emner på projektet. Ved indgang bliver emnenavnerummet på Wikidata eftersøgt for tilsvarende poster. Den består af et enkelt tekstfelt.
 * ordning – implicit del af Iri-streng
@@ -3267,7 +3258,6 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespei
 	'wikibase-property-summary-wbsetaliases-add' => 'Fügte {{PLURAL:$1|Alias|Aliasse}} für [$2] hinzu',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Entfernte {{PLURAL:$1|Alias|Aliasse}} für [$2]',
 	'wikibase-property-summary-special-create-property' => 'Erstellte eine Eigenschaft für [$2] mit {{PLURAL:$1|Wert|Werten}}',
-	'wikibase-query-summary-special-create-query' => 'Erstellte eine Abfrage für [$2] mit {{PLURAL:$1|Wert|Werten}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Datenobjekt',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Link zu anderen Objekten im Projekt. Es wird der „Objekt“-Namensraum auf Wikidata für passende Einträge durchsucht. Er besteht aus einem einfachen Texteintragsfeld.
 * scheme – impliziter Teil der Iri-Zeichenkette.
@@ -3606,7 +3596,6 @@ $messages['dsb'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Alias jo|Aliasa stej|Aliase su}} se za [$2] {{PLURAL:$1|pśidał|pśidałej|pśidali}}',
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Alias jo|Aliasa stej|Aliase su}} se za [$2] {{PLURAL:$1|wótpórał|wótpórałej|wótpórali}}',
 	'wikibase-property-summary-special-create-property' => 'Kakosć z {{PLURAL:$1| gódnotu|gódnotoma|gódnotami}} jo se za  [$2] napórała',
-	'wikibase-query-summary-special-create-query' => 'Napšašowanje z {{PLURAL:$1| gódnotu|gódnotoma|gódnotami}} jo se za  [$2] napórało',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Element',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Medijowe dataje w Commons',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Geokoordinata',
@@ -4180,7 +4169,6 @@ Tu dirección IP quedará registrada en el historial de revisiones de $1.',
 	'wikibase-property-summary-wbsetaliases-add' => 'Se {{PLURAL:$1|añadió un|añadieron}} alias de [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Se {{PLURAL:$1|eliminó un|eliminaron}} alias de [$2]',
 	'wikibase-property-summary-special-create-property' => 'Se ha creado una propiedad de [$2] con {{PLURAL:$1|valor|valores}}',
-	'wikibase-query-summary-special-create-query' => 'Se ha creado una consulta en [$2] con {{PLURAL:$1|valor|valores}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Enlace hacia otros elementos del proyecto. Durante la entrada, se realizará una búsqueda en el espacio de nombres "Elemento" de Wikidata para buscar entradas coincidentes. Consiste en un campo de entrada de texto simple.
 *scheme - parte implícita de la cadena de texto IRI
@@ -4426,7 +4414,6 @@ Sinu IP-aadress talletatakse üksuse $1 ajaloos.',
 	'wikibase-property-summary-wbsetaliases-add' => 'Lisatud [$2]-{{PLURAL:$1|rööpkuju|rööpkujud}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Eemaldatud [$2]-{{PLURAL:$1|rööpkuju|rööpkujud}}',
 	'wikibase-property-summary-special-create-property' => 'Loodud {{PLURAL:$1|väärtusega|väärtustega}} omadus [$2]',
-	'wikibase-query-summary-special-create-query' => 'Loodud {{PLURAL:$1|väärtusega|väärtustega}} päring [$2]',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Üksus',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commonsi meediafail',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Geokoordinaat',
@@ -4705,7 +4692,6 @@ $messages['fa'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => 'افزودن {{PLURAL:$1|نام مستعار|نام مستعار}} [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'حذف {{PLURAL:$1|نام مستعار|نام مستعار}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'ایجاد یک ویژگی [$2] با {{PLURAL:$1|مقدار|مقدارها}}',
-	'wikibase-query-summary-special-create-query' => 'ایجاد یک کوئری [$2] با {{PLURAL:$1|مقدار|مقدارها}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'آیتم',
 	'wikibase-listdatatypes-wikibase-item-body' => 'به آیتم‌های دیگر موجود در این پروژه پیوند بدهید. هنگامی که در حال واردکردن آیتم هستید، ویکی‌داده به صورت خودکار به یافتن ورودی‌های که با آن بخوانند اقدام می‌کند. ورودی مد نظر، فقط باید متن خام(بدون عدد) باشد.
 * شمای کلی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
@@ -4998,7 +4984,6 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-property-summary-wbsetaliases-add' => 'Lisättiin [$2]-{{PLURAL:$1|alias|aliaksia}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Poistettiin [$2]-{{PLURAL:$1|alias|aliaksia}}',
 	'wikibase-property-summary-special-create-property' => 'Luotiin [$2]-ominaisuus {{PLURAL:$1|arvolla|arvoilla}}',
-	'wikibase-query-summary-special-create-query' => 'Luotiin [$2]-kysely {{PLURAL:$1|arvolla|arvoilla}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Kohde',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons-media',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Geo-koordinaatti',
@@ -5295,7 +5280,6 @@ ffirmation ajoutée}}',
 	'wikibase-property-summary-wbsetaliases-add' => 'Ajout {{PLURAL:$1|d’un alias|d’alias}} [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Retrait {{PLURAL:$1|d’un alias|d’alias}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Propriété [$2] créée avec {{PLURAL:$1|une valeur|des valeurs}}',
-	'wikibase-query-summary-special-create-query' => 'Requête [$2] créée avec {{PLURAL:$1|une valeur|des valeurs}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Élément',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Lien vers d’autres éléments du projet. Lors de la saisie, l’espace de noms "Élément" sur Wikidata sera scruté à la recherche des entrées correspondantes. Cela consiste en un simple champ de saisie de texte.
 * scheme — partie implicite de Iri-string
@@ -5502,7 +5486,6 @@ $messages['frp'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => 'Aponsa {{PLURAL:$1|d’un aliâs|d’aliâs}} [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Retrèt {{PLURAL:$1|d’un aliâs|d’aliâs}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Na propriètât [$2] fêta avouéc {{PLURAL:$1|na valor|des valors}}',
-	'wikibase-query-summary-special-create-query' => 'Na demanda [$2] fêta avouéc {{PLURAL:$1|na valor|des valors}}',
 	'content-model-wikibase-item' => 'Piéce de Wikibase',
 	'content-model-wikibase-property' => 'Propriètât de Wikibase',
 	'content-model-wikibase-query' => 'Demanda de Wikibase',
@@ -5767,7 +5750,6 @@ O seu enderezo IP quedará rexistrado no historial de revisións da entidade "$1
 	'wikibase-property-summary-wbsetaliases-add' => 'Engado {{PLURAL:$1|un pseudónimo|pseudónimos}} en [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Elimino {{PLURAL:$1|un pseudónimo|pseudónimos}} en [$2]',
 	'wikibase-property-summary-special-create-property' => 'Creo unha propiedade en [$2] {{PLURAL:$1|cun valor|con valores}}',
-	'wikibase-query-summary-special-create-query' => 'Creo unha pescuda en [$2] {{PLURAL:$1|cun valor|con valores}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Ligazón cara a outros elementos do proxecto. Durante a entrada, realizarase unha procura no espazo de nomes "Elemento" do Wikidata para buscar entradas coincidentes. Consiste nun campo de entrada de texto simple.
 * scheme – parte implícita da cadea de texto IRI
@@ -6117,7 +6099,6 @@ $messages['he'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => 'הוספת {{PLURAL:$1|כינוי|כינויים}} עבור [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'הסרת {{PLURAL:$1|כינוי|כינויים}} עבור [$2]',
 	'wikibase-property-summary-special-create-property' => 'נוצר מאפיין בשפה [$2] עם {{PLURAL:$1|ערך|ערכים}}',
-	'wikibase-query-summary-special-create-query' => 'נוצרה שאילתה בשפה [$2] עם {{PLURAL:$1|ערך|ערכים}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'פריט',
 	'wikibase-listdatatypes-wikibase-item-body' => 'קישור לפריטים אחרים במיזם. בעת ההזנה ייערך חיפוש של עיולים מתאימים במרחב הפריטים בוויקינתונים. הוא מכיל שדה טקסט אחד.
 * scheme – חלק מתוך מחרוזת קישור בתסדיר IRI
@@ -6468,7 +6449,6 @@ $messages['hsb'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => 'Přida {{PLURAL:$1|alias|aliasaj|aliasy}} za [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Wotstroni {{PLURAL:$1|alias|aliasaj|aliasy}} za [$2]',
 	'wikibase-property-summary-special-create-property' => 'Wutwori kajkosć z {{PLURAL:$1|hódnotu|hódnotomaj|hódnotami}} za  [$2]',
-	'wikibase-query-summary-special-create-query' => 'Wutwori naprašowanje z {{PLURAL:$1| hódnotu|hódnotomaj|hódnotami}} za  [$2]',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Element',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Medijowe dataje w Commons',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Geokoordinata',
@@ -6687,7 +6667,6 @@ $messages['hu'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => '[$2] további {{PLURAL:$1|név|nevek}} hozzáadása',
 	'wikibase-property-summary-wbsetaliases-remove' => '[$2] további {{PLURAL:$1|név|nevek}} törlése',
 	'wikibase-property-summary-special-create-property' => '[$2] tulajdonság létrehozása {{PLURAL:$1|értékkel|értékekkel}}',
-	'wikibase-query-summary-special-create-query' => '[$2] lekérdezés létrehozása {{PLURAL:$1|értékkel|értékekkel}}',
 	'content-model-wikibase-item' => 'Wikibase fogalom',
 	'content-model-wikibase-property' => 'Wikibase tulajdonság',
 	'content-model-wikibase-query' => 'Wikibase lekérdezés',
@@ -6978,7 +6957,6 @@ Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.',
 	'wikibase-property-summary-wbsetaliases-add' => 'Menambahkan {{PLURAL:$1|nama lain}} [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Menghapus {{PLURAL:$1|nama lain}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Buat [$2] properti dengan {{PLURAL:$1|nilai}}',
-	'wikibase-query-summary-special-create-query' => 'Buat [$2] permintaan dengan {{PLURAL:$1|nilai}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Kaitan ke item lain di proyek. Pada saat entri ruang nama "Item" pada Wikidata akan mencari entri yang cocok. Ini terdiri dari satu teks bidang entri.
  * skema-bagian implisit dari Iri-string
@@ -7269,7 +7247,6 @@ tapno birukem ti napananda.',
 	'wikibase-property-summary-wbsetaliases-add' => 'Nagnayon ti [$2] {{PLURAL:$1|a sabali a nagan|a sabali a nagnagan}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Nagikkat ti [$2] {{PLURAL:$1|a sabali a nagan|a sabali a nagnagan}}',
 	'wikibase-property-summary-special-create-property' => 'Nagpartuat ti [$2] a tagikua iti {{PLURAL:$1|a pateg|a patpateg}}',
-	'wikibase-query-summary-special-create-query' => 'Nagpartuat ti [$2] ti panagbiruk iti {{PLURAL:$1|a pateg|a patpateg}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Banag',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Silpo dagiti nadumaduma a banag iti gandat. Agbirukto para kadagiti maipada a naikabkabil iti las-ud ti panangikabil ti nagan a lugar ti "Banag" idiay Wikidata. Daytoy ket buklen ti maysa a testo a pagikabilan.
 * pamay-an – naipaltiing a nalawag a paset iti Iri-a kuerdas
@@ -7557,7 +7534,6 @@ alla eiginleika og þar að auki gilda gagnagerð.',
 	'wikibase-property-summary-wbsetaliases-add' => 'Bætti við [$2] {{PLURAL:$1|samnefni|samnefnum}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Fjarlægði [$2] {{PLURAL:$1|samnefni}}',
 	'wikibase-property-summary-special-create-property' => 'Bjó til [$2] eiginleika með {{PLURAL:$1|gildi|gildum}}',
-	'wikibase-query-summary-special-create-query' => 'Bjó til [$2] fyrirspurn með {{PLURAL:$1|gildi|gildum}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Hlutur',
 	'wikibase-listdatatypes-string-head' => 'Strengur',
 	'content-model-wikibase-item' => 'Wikibase hlutur',
@@ -7836,7 +7812,6 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Aggiunto|Aggiunti}} alias [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Rimosso|Rimossi}} alias [$2]',
 	'wikibase-property-summary-special-create-property' => 'Creata una proprietà [$2] con {{PLURAL:$1|valore|valori}}',
-	'wikibase-query-summary-special-create-query' => "Creata un'interrogazione [$2] con {{PLURAL:$1|valore|valori}}",
 	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
 	'wikibase-listdatatypes-wikibase-item-body' => "Collega ad altri elementi nel progetto. Durante l'inserimento verranno cercati gli elementi corrispondenti nel namespace \"Item\" di Wikidata. Consiste in un unico campo di testo:
 * schema - implicito, da parte dell'Iri-string
@@ -8134,7 +8109,6 @@ $messages['ja'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => '[$2] の{{PLURAL:$1|別名}}を追加',
 	'wikibase-property-summary-wbsetaliases-remove' => '[$2] の{{PLURAL:$1|別名}}を除去',
 	'wikibase-property-summary-special-create-property' => '{{PLURAL:$1|1=値を持つ|0=値を持たない|複数の値を持つ}} [$2] プロパティを作成',
-	'wikibase-query-summary-special-create-query' => '{{PLURAL:$1|1=値を持つ|0=値を持たない|複数の値を持つ}} [$2] クエリを作成',
 	'wikibase-listdatatypes-wikibase-item-head' => '項目',
 	'wikibase-listdatatypes-wikibase-item-body' => 'プロジェクト内の他の項目へのリンク。入力時にウィキデータの項目用名前空間に一致するものがないか検索されます。テキスト入力欄1個で構成されます。
 * scheme - IRI文字列の非明示部分
@@ -8389,7 +8363,6 @@ $messages['ka'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => 'დაემატა [$2] {{PLURAL:$1|ფსევდონიმი}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'წაიშალა [$2] {{PLURAL:$1|ფსევდონიმი}}',
 	'wikibase-property-summary-special-create-property' => 'შეიქმნა თვისება [$2] {{PLURAL:$1|მნიშვნელობით}}',
-	'wikibase-query-summary-special-create-query' => 'შეიქმნა მოთხოვნა [$2] {{PLURAL:$1|მნიშვნელობით}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'ელემენტი',
 	'wikibase-listdatatypes-commonsmedia-head' => 'ვიკისაწყობის მედიაფაილი',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'გეოკოორდინატი',
@@ -8658,7 +8631,6 @@ IP 주소가 $1의 편집 역사에 남게 됩니다.',
 	'wikibase-property-summary-wbsetaliases-add' => '[$2] {{PLURAL:$1|별명}}을 추가함',
 	'wikibase-property-summary-wbsetaliases-remove' => '[$2] {{PLURAL:$1|별명}}을 제거함',
 	'wikibase-property-summary-special-create-property' => '{{PLURAL:$1|값}}으로 [$2] 속성을 만듦',
-	'wikibase-query-summary-special-create-query' => '{{PLURAL:$1|값}}으로 [$2] 쿼리를 만듦',
 	'wikibase-listdatatypes-wikibase-item-head' => '항목',
 	'wikibase-listdatatypes-commonsmedia-head' => '공용 미디어',
 	'wikibase-listdatatypes-geo-coordinate-head' => '지리 좌표',
@@ -9548,7 +9520,6 @@ $messages['mk'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Ставен алијас|Ставени алијаси}} на [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Отстранет алијас|Отстранети алијаси}} на [$2]',
 	'wikibase-property-summary-special-create-property' => 'Создадено својство за [$2] со {{PLURAL:$1|вредноста|вредностите}}',
-	'wikibase-query-summary-special-create-query' => 'Создадено барање за [$2] со {{PLURAL:$1|вредноста|вредностите}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Предмет',
 	'wikibase-listdatatypes-wikibase-item-body' => "Врска до други предмети во проектот. При внесување на нешто во именскиот простор „Предмет“ (Item), системот на Википодатоците ќе пребара дали има ставки што се совпаѓаат. Се состои од едно поле за внос на текст.
 * шема (''scheme'') – содржан дел од Iri-низата
@@ -10054,7 +10025,6 @@ untuk mencari di mana set data itu.',
 	'wikibase-property-summary-wbsetaliases-add' => 'Menambahkan {{PLURAL:$1|nama lain|nama-nama lain}} [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Membuang {{PLURAL:$1|nama lain|nama-nama lain}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Sifat [$2] dicipta dengan {{PLURAL:$1|nilai|nilai-nilai}}',
-	'wikibase-query-summary-special-create-query' => 'Pertanyaan [$2] dicipta dengan {{PLURAL:$1|nilai|nilai-nilai}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Perkara',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Pautan ke perkara-perkara lain pada projek. Sewaktu dimasukkan, ruang nama "Item" di Wikidata akan diperiksa untuk entri-entri yang berpadanan. Ia terdiri daripada satu medan masukan teks.
 * scheme (skema) – bahagian tersirat Iri-string
@@ -10341,7 +10311,6 @@ for å finne ut hva som har skjedd.',
 	'wikibase-property-summary-wbsetaliases-add' => 'La til [$2] {{PLURAL:$1|kallenavn}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Fjernet [$2] {{PLURAL:$1|kallenavn}}',
 	'wikibase-property-summary-special-create-property' => 'Opprettet en [$2] egenskap med {{PLURAL:$1|verdi|verdiene}}',
-	'wikibase-query-summary-special-create-query' => 'Opprettet et [$2] søk med {{PLURAL:$1|verdi|verdiene}}',
 	'content-model-wikibase-item' => 'Wikibase datasett',
 	'content-model-wikibase-property' => 'Wikibase egenskap',
 	'content-model-wikibase-query' => 'Wikibase spørring',
@@ -10599,7 +10568,6 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd',
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|alias|aliassen}} voor [$2] verwijderd',
 	'wikibase-property-summary-special-create-property' => 'Eigenschap voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
-	'wikibase-query-summary-special-create-query' => 'Zoekopdracht voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Koppeling naar andere items van het project. Tijdens de gegevensinvoer wordt de naamruimte "Item" van Wikidata doorzicht op overeenkomende items. Het bestaat uit een enkel invoerveld voor tekst.
 * scheme – impliciet onderdeel van de Iri-tekst
@@ -10874,7 +10842,6 @@ Ein klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endri
 	'wikibase-property-summary-wbsetaliases-add' => 'La til {{PLURAL:$1|tilleggsnamn}} [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Fjerna {{PLURAL:$1|tilleggsnamn}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Oppretta ein eigenskap med {{PLURAL:$1|verdi|verdiar}} [$2]',
-	'wikibase-query-summary-special-create-query' => 'Oppretta ei spørjing med {{PLURAL:$1|verdi|verdiar}} [$2]',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Datasett',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons-media',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Geografisk koordinat',
@@ -11162,7 +11129,6 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}} gdy zm
 	'wikibase-property-summary-wbsetaliases-add' => 'Dodano [$2] {{PLURAL:$1|alias|aliasy}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Usunięto [$2] {{PLURAL:$1|alias|aliasy}}',
 	'wikibase-property-summary-special-create-property' => 'Utworzono właściwość [$2] o {{PLURAL:$1|wartości|wartościach}}',
-	'wikibase-query-summary-special-create-query' => 'Stworzone zapytanie [$2] z {{PLURAL:$1|wartością|wartościami}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Element',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Odwołuje się do innych elementów w projekcie. Podczas wprowadzania będzie przeszukiwana przestrzeń nazw „element” w Wikidanych aby odnaleźć pasujące wpisy. Składa się z jednego pola.
 * schemat – niejawna część łańcucha IRI
@@ -11370,7 +11336,6 @@ $messages['pms'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => "Giontà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
 	'wikibase-property-summary-wbsetaliases-remove' => "Gavà {{PLURAL:$1|n'alternativa|d'alternative}} [$2]",
 	'wikibase-property-summary-special-create-property' => 'Creà na propietà [$2] con {{PLURAL:$1|un valor|dij valor}}',
-	'wikibase-query-summary-special-create-query' => "Creà n'arcesta [$2] con {{PLURAL:$1|un|dij}} valor",
 	'content-model-wikibase-item' => 'Element ëd Wikibase',
 	'content-model-wikibase-property' => 'Propietà ëd Wikibase',
 	'content-model-wikibase-query' => 'Arcesta ëd Wikibase',
@@ -11691,7 +11656,6 @@ para descobrir para onde ele foi.',
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Nome alternativo adicionado [$2]|Nomes alternativos adicionados [$2]}}',
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Removido nome alternativo [$2]|Removidos nomes alternativos [$2]}}',
 	'wikibase-property-summary-special-create-property' => 'Criou uma propriedade com {{PLURAL:$1|um valor [$2]|valores [$2]}}',
-	'wikibase-query-summary-special-create-query' => 'Criou uma consulta com {{PLURAL:$1|um valor [$2]|valores [$2]}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Mídia do Commons',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Coordenada geográfica',
@@ -12144,7 +12108,6 @@ $messages['ru'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Добавлено|Добавлены}} доп. {{PLURAL:$1|название|названия}} ({{PLURAL:$1|синоним|синонимы}}) [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Удалено|Удалены}} доп. {{PLURAL:$1|название|названия}} ({{PLURAL:$1|синоним|синонимы}}) [$2]',
 	'wikibase-property-summary-special-create-property' => 'Создано свойство [$2] со {{PLURAL:$1|значением|значениями}}',
-	'wikibase-query-summary-special-create-query' => 'Создан запрос [$2] со {{PLURAL:$1|значением|значениями}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Элемент',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Ссылка на другие элементы в проекте. При вводе будет производиться поиск похожих записей в пространстве имён Викиданных <code>Item:</code>. Состоит из одного текстового поля ввода.
  * scheme — неявная часть строки IRI
@@ -12412,7 +12375,6 @@ da otkrijete gdje je nestao.',
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Dodan|Dodani}} [$2] {{PLURAL:$1|alias|aliasi}}',
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Uklonjen|Uklonjeni}} [$2] {{PLURAL:$1|alias|aliasi}}',
 	'wikibase-property-summary-special-create-property' => 'Stvoreno [$2] polje sa {{PLURAL:$1|vrijednosti|vrijednostima}}',
-	'wikibase-query-summary-special-create-query' => 'Stvoren [$2] upit sa {{PLURAL:$1|vrijednosti|vrijednostima}}',
 	'content-model-wikibase-item' => 'Wikibazina stavka',
 	'content-model-wikibase-property' => 'Wikibazino polje',
 	'content-model-wikibase-query' => 'Wikibazin upit',
@@ -12549,7 +12511,6 @@ $messages['si'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|අන්වර්ථ නාම}} [$2] එක් කරන ලදී',
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|අන්වර්ථ නාම}} [$2] ඉවත් කරන ලදී',
 	'wikibase-property-summary-special-create-property' => 'තනන ලදී [$2] වත්කමක් සමඟ {{PLURAL:$1|value|values}}',
-	'wikibase-query-summary-special-create-query' => 'තනන ලදී [$2] ප්‍රශ්නයක් සමඟ {{PLURAL:$1|value|values}}',
 	'content-model-wikibase-item' => 'විකිපාදක අයිතමය',
 	'content-model-wikibase-property' => 'විකිපාදක අයිතිය',
 	'content-model-wikibase-query' => 'විකිපාදක ප්‍රශ්නය',
@@ -12792,7 +12753,6 @@ $messages['sr-ec'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => 'Додато [$2] {{PLURAL:$1|псеудоним|псеудонима}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Уклоњено [$2] {{PLURAL:$1|псеудоним|псеудонима}}',
 	'wikibase-property-summary-special-create-property' => 'Направљено [$2] својство са {{PLURAL:$1|вредношћу|вредностима}}',
-	'wikibase-query-summary-special-create-query' => 'Направљен [$2] упит са {{PLURAL:$1|вредношћу|вредностима}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Ставка',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Датотека са Оставе',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Координате',
@@ -13485,7 +13445,6 @@ $messages['uk'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => 'Додано [$2] {{PLURAL:$1|додаткову назву|додаткові назви|додаткових назв}}',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Вилучено [$2] {{PLURAL:$1|додаткову назву|додаткові назви|додаткових назв}}',
 	'wikibase-property-summary-special-create-property' => 'Створено властивість для [$2] із {{PLURAL:$1|значенням|значеннями}}',
-	'wikibase-query-summary-special-create-query' => 'Створено [$2] запит із {{PLURAL:$1|значенням|значеннями}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Елемент',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Медіа-файл з Вікісховища',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Географічні координати',
@@ -13819,7 +13778,6 @@ Te pol <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Zontà alias}} [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Cavà alias}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Creà na proprietà [$2] con {{PLURAL:$1|valore|valori}}',
-	'wikibase-query-summary-special-create-query' => 'Creà na interogassion [$2] con {{PLURAL:$1|valore|valori}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Elemento',
 	'wikibase-listdatatypes-wikibase-item-body' => "Colega a altri elementi 'ntel progeto. Durante l'inserimento vegnarà sercà i elementi corispondenti 'ntel namespace \"Item\" de Wikidata. El consiste de un unico canpo de testo:
 * schema - inplicito, da parte de l'Iri-string
@@ -14127,7 +14085,6 @@ $messages['vi'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1}}Đã thêm tên khác [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1}}Đã loại bỏ tên khác [$2]',
 	'wikibase-property-summary-special-create-property' => '{{PLURAL:$1}}Đã tạo thuộc tính [$2] có giá trị',
-	'wikibase-query-summary-special-create-query' => '{{PLURAL:$1}}Đã tạo truy vấn [$2] có giá trị',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Khoản mục',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Liên kết đến khoản mục khác tại dự án. Không gian tên “Item” tại Wikidata sẽ được tìm cho mục phù hợp khi nhập tên vào hộp văn bản.
 * scheme – phần ẩn của chuỗi IRI
@@ -14612,7 +14569,6 @@ $messages['zh-hans'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => '添加[$2]{{PLURAL:$1|别名|多个别名}}',
 	'wikibase-property-summary-wbsetaliases-remove' => '删除[$2]{{PLURAL:$1|别名|多个别名}}',
 	'wikibase-property-summary-special-create-property' => '创建含{{PLURAL:$1|值|多个值}}的一个[$2]属性',
-	'wikibase-query-summary-special-create-query' => '创建含{{PLURAL:$1|值|多个值}}的一个[$2]查询',
 	'wikibase-listdatatypes-wikibase-item-head' => '项',
 	'wikibase-listdatatypes-wikibase-item-body' => '在这个项目上至其他项的链接。输入时会在维基数据“项”名字空间搜索匹配条目。它由单个文本输入字段构成。
 *协议——IRI串的非明示部分
@@ -14912,7 +14868,6 @@ $messages['zh-hant'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => '設置[$2]{{PLURAL:$1|别名}}',
 	'wikibase-property-summary-wbsetaliases-remove' => '刪除[$2]{{PLURAL:$1|别名}}',
 	'wikibase-property-summary-special-create-property' => '創建含{{PLURAL:$1|數值}}的[$2]屬性',
-	'wikibase-query-summary-special-create-query' => '創建含{{PLURAL:$1|數值}}的[$2]查詢',
 	'wikibase-listdatatypes-wikibase-item-head' => '項目',
 	'wikibase-listdatatypes-commonsmedia-head' => '共享媒體',
 	'wikibase-listdatatypes-geo-coordinate-head' => '地理座標',
