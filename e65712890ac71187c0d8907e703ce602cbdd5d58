@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dx0lUsFE",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-04T10:14:41Z",
+      "side": 1,
+      "message": "on the last patch, you got rid of the \"Utils::getRightsWarningMessage()\" thing.  is it somewhere else now?\n\nnot tried it but does getting rid of only this \"return false\" after the get rights warning work?",
+      "revId": "e65712890ac71187c0d8907e703ce602cbdd5d58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
