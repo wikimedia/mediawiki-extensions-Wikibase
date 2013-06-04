@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "Dxy1Bb14",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T15:56:14Z",
+      "side": 1,
+      "message": "probably should allow null in the param, to be robust.",
+      "parentUuid": "Dx42zY5c",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx62qnxc",
         "filename": "repo/includes/specials/EntityDataRequestHandler.php",
         "patchSetId": 4
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "Dx.0fh2c",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T15:56:14Z",
+      "side": 1,
+      "message": "I suppose $wgUseSquid could be injected.\n\nIt could be factored into a separate class, but that would need more abtraction still to have getDocTitle() available. Let\u0027s leave that for later - after all, this change just factored out all this code from SpecialEntityData. Not a good idea to do all the refactoring in a single change, right?",
+      "parentUuid": "Dx01q..8",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx410A9A",
         "filename": "repo/includes/specials/EntityDataRequestHandler.php",
         "patchSetId": 4
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "Dx40P4zc",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T15:56:14Z",
+      "side": 1,
+      "message": "Isn\u0027t it fun? And I have no idea what it does, either!",
+      "parentUuid": "Dx410A9A",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dxy1vr-4",
         "filename": "repo/includes/specials/EntityDataRequestHandler.php",
         "patchSetId": 4
@@ -115,6 +169,24 @@
       "writtenOn": "2013-06-04T15:41:57Z",
       "side": 1,
       "message": "This class in general appears to be doing multiple things, and contains many high complexity methods. Please split up the methods to decrease complexity, and separate the different responsibilities in distinct objects.",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx20MF0M",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T15:56:14Z",
+      "side": 1,
+      "message": "This class was just factored out of SpecialEntityData; It could be split up further, but let\u0027s take this one step at a time, shall we?",
+      "parentUuid": "Dxy1vr-4",
       "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
