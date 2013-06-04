@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Internationalization file for the Wikibase extension.
  *
@@ -166,6 +167,14 @@ Your IP address will be recorded in the edit history of this $1.",
 	'wikibase-setaliases-label' => 'Aliases:',
 	'wikibase-setaliases-submit' => 'Set the aliases',
 	'wikibase-setaliases-warning-remove' => 'Do you really want to remove all aliases of [[$1]]?',
+	'special-setsitelink' => 'Set a site link',
+	'wikibase-setsitelink-introfull' => 'You are setting the site link of $2 for [[$1]].',
+	'wikibase-setsitelink-intro' => 'This form allows you to set the site link of an entity. You need to provide the ID of the entity (e.g. Q23), a site id (e.g. "enwiki") and the site link to set to.',
+	'wikibase-setsitelink-site' => 'Site id:',
+	'wikibase-setsitelink-label' => 'Site link:',
+	'wikibase-setsitelink-submit' => 'Set the site link',
+	'wikibase-setsitelink-warning-remove' => 'Do you really want to remove the site link of [[$1]]?',
+	'wikibase-setsitelink-invalid-site' => 'The site id "$1" is unknown. Please use an existing site id, such as "enwiki".',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Language:',
 	'wikibase-setentity-invalid-langcode' => 'The language identifier "$1" is unknown. Please use a language identifier known to the system, such as "en".',
@@ -739,6 +748,16 @@ The special page allows the user to set aliases for an entity.',
 {{Identical|Alias}}',
 	'wikibase-setaliases-submit' => 'Label for the button that activates the action.',
 	'wikibase-setaliases-warning-remove' => 'A warning message to ask the user if he wants to remove all aliases. $1 is the id that links to the entity.',
+	'special-setsitelink' => 'Title of the special page that allows the user to set a site link for an entity',
+	'wikibase-setsitelink-introfull' => 'Intro text when a site link is to be set. Parameters:
+* $1 is the ID that links to the entity;
+* $2 is the site id the site link is to be set to.',
+	'wikibase-setsitelink-intro' => 'A short text at the top of the page that allows users to set the site link of an entity, explaining the form.',
+	'wikibase-setsitelink-site' => 'Label for the input field to type the site id to set the site link to.',
+	'wikibase-setsitelink-label' => 'Label for the input field to type the site link to set the entity to.',
+	'wikibase-setsitelink-submit' => 'Label for the button that activates the action.',
+	'wikibase-setsitelink-warning-remove' => 'A warning message to ask the user if he wants to remove the site link. $1 is the id that links to the entity.',
+	'wikibase-setsitelink-invalid-site' => 'Response informing that the site id is not valid. Could give an example of a valid site id. $1 is the invalid id.',
 	'wikibase-setentity-id' => 'Label for the input field to select the ID of the entity.
 {{Identical|ID}}',
 	'wikibase-setentity-language' => 'Label for the input field to select the language the label should be set in.
