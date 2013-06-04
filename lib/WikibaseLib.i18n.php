@@ -2343,7 +2343,11 @@ $messages['vo'] = array(
  * @author පසිඳු කාවින්ද
  */
 $messages['yi'] = array(
+	'wikibase-entity-item' => 'דאטנאביעקט',
+	'wikibase-entity-property' => 'אייגנשאפֿט',
+	'wikibase-entity-query' => 'פֿראגע',
 	'wikibase-diffview-reference' => 'רעפערענץ',
+	'wikibase-diffview-rank' => 'ראנג',
 	'wikibase-diffview-label' => 'באצייכענונג',
 	'wikibase-diffview-alias' => 'אליאסן',
 	'wikibase-diffview-description' => 'באַשרײַבונג',

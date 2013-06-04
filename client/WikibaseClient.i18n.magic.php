@@ -40,6 +40,11 @@ $magicWords['et'] = array(
 	'noexternallanglinks' => array( 0, 'välistekeelelinkideta' ),
 );
 
+/** Finnish (suomi) */
+$magicWords['fi'] = array(
+	'property' => array( 0, 'ominaisuus' ),
+);
+
 /** Korean (한국어) */
 $magicWords['ko'] = array(
 	'noexternallanglinks' => array( 0, '바깥언어링크없음', '바깥언어고리없음' ),

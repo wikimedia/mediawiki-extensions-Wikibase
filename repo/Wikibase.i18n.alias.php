@@ -104,6 +104,7 @@ $specialPageAliases['fi'] = array(
 	'SetDescription' => array( 'Aseta_kuvaus' ),
 	'SetAliases' => array( 'Aseta_aliakset' ),
 	'EntitiesWithoutLabel' => array( 'Aiheet_ilman_nimeä' ),
+	'ItemsWithoutSitelinks' => array( 'Kohteet_ilman_sivustolinkkejä' ),
 );
 
 /** Icelandic (íslenska) */

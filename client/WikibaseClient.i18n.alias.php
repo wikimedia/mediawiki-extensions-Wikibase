@@ -24,6 +24,11 @@ $specialPageAliases['de'] = array(
 	'UnconnectedPages' => array( 'Nicht_verbundene_Seiten' ),
 );
 
+/** Finnish (suomi) */
+$specialPageAliases['fi'] = array(
+	'UnconnectedPages' => array( 'Yhdistämättömät_sivut' ),
+);
+
 /** Japanese (日本語) */
 $specialPageAliases['ja'] = array(
 	'UnconnectedPages' => array( '関連付けられていないページ', '関連付けのないページ' ),

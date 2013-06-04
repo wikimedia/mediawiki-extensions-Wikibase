@@ -2686,6 +2686,7 @@ $messages['roa-tara'] = array(
  * @author Ignatus
  * @author Kaganer
  * @author Ole Yves
+ * @author Putnik
  * @author Александр Сигачёв
  */
 $messages['ru'] = array(
@@ -2733,6 +2734,8 @@ $messages['ru'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Это название страницы не может быть использовано в данном запросе и игнорируется.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Только страницы с межъязыковыми ссылками:',
 	'wikibase-unconnectedpages-format-row' => '($1 межъязыков{{PLURAL:$1|ая ссылка|ые ссылки|ых ссылок}} на странице)',
+	'wikibase-pageinfo-entity-id' => 'Идентификатор элемента в Викиданных',
+	'wikibase-pageinfo-entity-id-none' => 'Нет',
 );
 
 /** Sinhala (සිංහල)
@@ -3140,13 +3143,17 @@ $messages['yi'] = array(
 	'wikibase-linkitem-invalidsite' => 'אומבאוואוסט אדער אומגילטיק זייטל אויסגעוויילט',
 	'wikibase-linkitem-confirmitem-button' => 'באַשטעטיקן',
 	'wikibase-linkitem-not-loggedin-title' => 'איר דארפט זיין אריינלאגירט',
+	'wikibase-property-notfound' => '$1 אייגנשאפט נישט געטראפן',
+	'wikibase-property-notsupportedyet' => 'וויקיבאזע שטיצט נאך נישט אייגנשאפט טיפ פאר $1 אייגנשאפט.',
 	'wikibase-rc-hide-wikidata' => '$1 וויקידאטן',
 	'wikibase-rc-show-wikidata-pref' => 'ווייזן וויקידאטן רעדאקטירונגען אין לעצטע ענדערונגען',
+	'wikibase-watchlist-show-changes-pref' => 'ווייזן וויקידאטן רעדאקטירונגען אין אייער אויפפאסונג־ליסטע',
 	'wikibase-unconnectedpages-page' => 'אנהייבן רעזולטאט ליסטע מיט בלאט:',
 	'wikibase-unconnectedpages-submit' => 'גיין',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" איז נישט קיין גילטיקער שפראך־קאד.',
 	'wikibase-unconnectedpages-iwdata-label' => 'נאר בלעטער מיט אינטערשפראך לינקען',
 	'wikibase-unconnectedpages-format-row' => '($1 אינטערשפראך לינקען אויפן בלאט)',
+	'wikibase-pageinfo-entity-id-none' => 'קיין',
 );
 
 /** Cantonese (粵語)
