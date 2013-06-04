@@ -1,0 +1,429 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dx25X8lc",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "Is it really necessary to have the job as a member?",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx05rFiA",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "The name is a bit vague. How about userExistsOnRepo()?",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxw5irj4",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "Please don\u0027t use object state for a return value. $job \u003d $this-\u003enewJob() would be cleaner. Would there ever be a reason to re-use the same job? Is the job really a component of the updater? I think not...",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx65R.mI",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "Singletons are evil, please limit their use to the constructor, or even better, just ask for a JobQueueGroup in the constructor and let the caller figure out where to get it from. The idea is to push access to global state as far up the stackj as possible.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx47f3tI",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "wfLogWarning can and should now be used instead of tigger_error. This changed a couple of months ago.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxy7nqrA",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "\"populates\", not \"propagates\". But I think this should be a factory function that just returns a Job.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxw7sbo8",
+        "filename": "client/includes/UpdateRepoOnMove.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "As I said in the base class, this should just be a factory called newJob or createJob. Having the job as a member seems odd - when will it be re-used?",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx.ndvBI",
+        "filename": "client/includes/UpdateRepoOnMove.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "Please determine the respective item ID here, and pass it as a parameter to the job. This prevents confusion in case items on the repo get changed while the job is queued. By the time the job is run, oldTitle may be associated with a different item.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx.6VwuM",
+        "filename": "client/includes/UpdateRepoOnMove.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "Please create a pseudo-constructor for this, e.g. UpdateRepoOnMoveJob::newFromMove( $siteId, $oldTitle, $newTitle, $user )",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx26KUsI",
+        "filename": "client/includes/UpdateRepoOnMove.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "I suggest to drop this method and use the constructor directly. All it does is hardwire dependency on global state, which we should avoid anyway. If we must access a global settings object, let\u0027s do it as far up the stack as possible (i.e. let the caller deal with it).",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxw5vTv4",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "Let\u0027s hope it doesn\u0027t... I\u0027m tempted to create it :)",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx87Dpu8",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "\"assertJobIsValid\" or \"assertIsValidJob\".",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx06wNoo",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "Hardwired expectations? Shouldn\u0027t these be parameters to the assert?",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx.5fgkg",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "It\u0027s not obvious what is asserted here, see above.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx65.Gqo",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "If the $jobQueueGroup was injected into UpdateRepoOnMove, we could just have mocked it and wouldn\u0027t be messing with the database here.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxy4V6kg",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "Please provide a newFromMove pseudo-constructor.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxw4arnc",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "Would be nice if this could be the item page\u0027s title... but that\u0027s probably just useless overhead.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx0md0FM",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "The job could contain the item ID itself, instead of the old page. That would be more robust in cases where items on the repository got changed manually while the job was in the queue - $oldPage may now be associated with a different item, which would then be updated erronously!\n\nIf the item\u0027s id is used to identify which item to update, the item\u0027s current state should still be checked against $oldPage, again in case it was updated manually while the job was queued.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx04MtkI",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "wfDebugLog would be nice here.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx24P8jg",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "wfDebugLog would be nice here.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx44GviA",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "wfDebugLog",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxykGhB8",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "should probably be EDIT_UPDATE",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx2lxrHY",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "This will *remove* the item from the watchlist. Use null instead for default behavior (this will add the item to the user\u0027s watchlist if the user automatically watches edited items). Or you could get the status quo via $user-\u003eisWatched( $title ), and pass that status again, so nothing will change.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx4nE.GI",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "use wfLogWarning instead. Oh, and $user is an object, or null here. you\u0027d want $params[\u0027user\u0027] here.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx25dMkU",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T09:42:25Z",
+      "side": 1,
+      "message": "Should somehow indicate why: \"Page moved from [[:en:Foo]] to [[:en:Bar]]\" would probably be clear enough.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
