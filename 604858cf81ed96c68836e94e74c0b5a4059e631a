@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dxyld5Hc",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T10:12:36Z",
+      "side": 1,
+      "message": "You could combine this check with the switch, to make the code more clear:\n\n  switch ( $diffValue ) {\n     case \u0027next\u0027: ...\n     case \u0027cur\u0027: ...\n     case \u0027next\u0027: ...\n     default: ...\n  }\n\nOk, this way, you need \\Revision::newFromId( $oldId ) in multiple places, but I think it would still make the code clearer. Well, maybe. Just a thought.",
+      "revId": "604858cf81ed96c68836e94e74c0b5a4059e631a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx0ki8AU",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T10:12:36Z",
+      "side": 1,
+      "message": "Uninitialized in cased $diffValue was prev/next/cur, but $oldId was invalid so $oldIdRev was null. Please initialize to null.",
+      "revId": "604858cf81ed96c68836e94e74c0b5a4059e631a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
