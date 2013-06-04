@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dx.3DB.8",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-04T15:41:57Z",
+      "side": 1,
+      "message": "Wikibase\\Repo plox",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxw2-U18",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-04T15:41:57Z",
+      "side": 1,
+      "message": "leading slashes here are not needed and typically not placed",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx42zY5c",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-04T15:41:57Z",
+      "side": 1,
+      "message": "The method docs say this is a string, so why is there a null check? If it should be a string, then null is an InvalidArgumentException",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx62qnxc",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-04T15:41:57Z",
+      "side": 1,
+      "message": "return for great justice!",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx01q..8",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-04T15:41:57Z",
+      "side": 1,
+      "message": "does this really belong in the same class?\n\nusage of global state and lack of dependency injection",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx410A9A",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-04T15:41:57Z",
+      "side": 1,
+      "message": "more global state",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxy1vr-4",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-04T15:41:57Z",
+      "side": 1,
+      "message": "This class in general appears to be doing multiple things, and contains many high complexity methods. Please split up the methods to decrease complexity, and separate the different responsibilities in distinct objects.",
+      "revId": "f374fa1a8e1a6c1681c67bad50468614c9866f22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
