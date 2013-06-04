@@ -48,6 +48,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 * This is poor man's inverse dependency injection.
 	 */
 	protected function initDependencies() {
+		global $wgUseSquid, $wgApiFrameOptions;
+
 		// Initialize serialization service.
 		// TODO: use reverse DI facility (global registry/factory)
 		$repo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
@@ -77,7 +79,9 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$entityIdFormatter,
 			$service,
 			$defaultFormat,
-			$maxAge
+			$maxAge,
+			$wgUseSquid,
+			$wgApiFrameOptions
 		);
 	}
 
