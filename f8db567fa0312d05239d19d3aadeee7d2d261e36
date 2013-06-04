@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dx63Z-yA",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T14:30:20Z",
+      "side": 1,
+      "message": "$prefixedId can be null. Is getLink() handling that?",
+      "revId": "f8db567fa0312d05239d19d3aadeee7d2d261e36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxw0HU4Y",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T14:30:20Z",
+      "side": 1,
+      "message": "Mixed? Why mixed? $prefixedId is apparently expected to be a string below. If it may be null, please use string|null to indicate a nullable string.",
+      "revId": "f8db567fa0312d05239d19d3aadeee7d2d261e36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx.0LB44",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T14:30:20Z",
+      "side": 1,
+      "message": "Does this accept null?",
+      "revId": "f8db567fa0312d05239d19d3aadeee7d2d261e36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx00BW24",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T14:30:20Z",
+      "side": 1,
+      "message": "should be \"canHazLink\"...",
+      "revId": "f8db567fa0312d05239d19d3aadeee7d2d261e36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxy0Gj4Y",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T14:30:20Z",
+      "side": 1,
+      "message": "While we are refactoring, we can cover this as well: please use an EntityIdParser injected in the constructor.",
+      "revId": "f8db567fa0312d05239d19d3aadeee7d2d261e36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx437Y3Y",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T14:30:20Z",
+      "side": 1,
+      "message": "note that once we support multiple site groups, this would need to be \"#sitelinks-wikipedia\", \"#sitelinks-wikivoyage\", etc. So the client would need to know their own site group (from the repo\u0027s perspective).",
+      "revId": "f8db567fa0312d05239d19d3aadeee7d2d261e36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx234l3k",
+        "filename": "client/includes/RepoItemLinkGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T14:30:20Z",
+      "side": 1,
+      "message": "Please document what JS module uses this to inject the widget. Or at least the fact that this is handled via JS.",
+      "revId": "f8db567fa0312d05239d19d3aadeee7d2d261e36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx831a4I",
+        "filename": "client/tests/phpunit/includes/RepoItemLinkGeneratorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T14:30:20Z",
+      "side": 1,
+      "message": "Would be a lot easier to read and understand the test of the parameters were passed individually, not as a single array with positional arguments.",
+      "revId": "f8db567fa0312d05239d19d3aadeee7d2d261e36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
