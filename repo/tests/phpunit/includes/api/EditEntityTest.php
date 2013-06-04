@@ -212,46 +212,6 @@ class EditEntityTest extends ModifyItemBase {
 	}
 
 	/**
-	 * Check success when the entity is set again, with fields in the json that should be ignored
-	 */
-	function testEditEntityWithIgnoredData() {
-		$token = $this->getItemToken();
-
-		// these sets of failing data must be merged with an existing entity
-		$ignoredData = array(
-			array( 'length' => 999999 ), // always ignored
-			array( 'count' => 999999 ), // always ignored
-			array( 'touched' => '2000-01-01T18:05:01Z' ), // always ignored
-			array( 'pageid' => 999999 ),
-			array( 'ns' => 200 ),
-			array( 'title' => 'does-not-exist' ),
-			array( 'lastrevid' => 99999999 ),
-		);
-		foreach ( $ignoredData as $data ) {
-			try {
-				list($res,,) = $this->doApiRequest(
-					array(
-						'action' => 'wbeditentity',
-						'reason' => 'Some reason',
-						'data' => json_encode( array_merge( self::$entity, $data ) ),
-						'token' => $token,
-						'id' => self::$id, // will now use default type
-						'exclude' => 'pageid|ns|title|lastrevid'
-					),
-					null,
-					false,
-					self::$users['wbeditor']->user
-				);
-				$this->assertSuccess( $res, 'entity', 'id' );
-				$this->assertItemEquals( self::$expect, $res['entity'] );
-			}
-			catch ( \UsageException $e ) {
-				$this->fail( "Got unexpected exception: $e" );
-			}
-		}
-	}
-
-	/**
 	 * Check failure to set the same entity again, with illegal field values in the json
 	 */
 	function testEditEntityWithIllegalData() {
@@ -273,7 +233,6 @@ class EditEntityTest extends ModifyItemBase {
 						'data' => json_encode( array_merge( self::$entity, $data ) ),
 						'token' => $token,
 						'id' => self::$id,
-						//'exclude' => '' // make sure all critical values are checked per default
 					),
 					null,
 					false,
@@ -324,7 +283,6 @@ class EditEntityTest extends ModifyItemBase {
 						'data' => json_encode( array_merge( $data, self::$entity ) ),
 						'token' => $token,
 						'id' => self::$id,
-						//'exclude' => '' // make sure all critical values are checked per default
 					),
 					null,
 					false,
@@ -354,7 +312,6 @@ class EditEntityTest extends ModifyItemBase {
 					'token' => $token,
 					'id' => self::$id,
 					'clear' => true,
-					//'exclude' => '' // make sure all critical values are checked per default
 				),
 				null,
 				false,

@@ -68,6 +68,8 @@ class ChangeOpDescription implements ChangeOp {
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
+	 *
+	 * @return bool
 	 */
 	public function apply( Entity $entity ) {
 		if ( $this->description === null ) {
@@ -75,6 +77,7 @@ class ChangeOpDescription implements ChangeOp {
 		} else {
 			$entity->setDescription( $this->language, $this->description );
 		}
+		return true;
 	}
 
 }

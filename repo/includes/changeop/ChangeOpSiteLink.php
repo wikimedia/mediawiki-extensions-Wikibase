@@ -3,9 +3,10 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use Site;
 
 /**
- * Class for label change operation
+ * Class for sitelink change operation
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,37 +30,37 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpLabel implements ChangeOp {
+class ChangeOpSiteLink implements ChangeOp {
 
 	/**
 	 * @since 0.4
 	 *
-	 * @var string
+	 * @var Site
 	 */
-	protected $language;
+	protected $linkSite;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @var string|null
 	 */
-	protected $label;
+	protected $linkPage;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param string $language
-	 * @param string|null $label
+	 * @param Site $linkSite
+	 * @param string|null $linkPage
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $language, $label ) {
-		if ( !is_string( $language ) ) {
-			throw new InvalidArgumentException( '$language needs to be a string' );
+	public function __construct( Site $linkSite, $linkPage ) {
+		if ( !is_string( $linkPage ) && $linkPage !==null ) {
+			throw new InvalidArgumentException( '$linkPage needs to be a string|null' );
 		}
 
-		$this->language = $language;
-		$this->label = $label;
+		$this->linkSite = $linkSite;
+		$this->linkPage = $linkPage;
 	}
 
 	/**
@@ -69,15 +70,16 @@ class ChangeOpLabel implements ChangeOp {
 	 *
 	 * @param Entity $entity
 	 *
-	 * @return bool
+	 * @return SiteLink|bool
 	 */
 	public function apply( Entity $entity ) {
-		if ( $this->label === null ) {
-			$entity->removeLabel( $this->language );
+		if ( $this->linkPage === null ) {
+			$entity->removeSiteLink( $this->linkSite->getGlobalId() );
+			return true; // don't show an error when the sitelink we try to remove does not exist
 		} else {
-			$entity->setLabel( $this->language, $this->label );
+			$siteLink = new SiteLink( $this->linkSite, $this->linkPage );
+			return $entity->addSiteLink( $siteLink,'set' );
 		}
-		return true;
 	}
 
 }
