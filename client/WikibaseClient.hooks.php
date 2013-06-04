@@ -400,6 +400,56 @@ final class ClientHooks {
 	}
 
 	/**
+	 * Add Wikibase item link in toolbox
+	 *
+	 * @since 0.4
+	 *
+	 * @param SkinTemplate &$sk
+	 * @param array &$toolbox
+	 *
+	 * @return boolean
+	 */
+	public static function onBaseTemplateToolbox( &$sk, &$toolbox ) {
+		$prefixedId = $sk->getSkin()->getOutput()->getProperty( 'wikibase_item' );
+
+		if ( $prefixedId !== null ) {
+			$entityIdParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
+			$entityId = $entityIdParser->parse( $prefixedId );
+
+			$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+			$itemLink = $repoLinker->repoItemUrl( $entityId );
+
+			$toolbox['wikibase'] = array(
+				'text' => $sk->getMsg( 'wikibase-dataitem' )->text(),
+				'href' => $itemLink,
+				'id' => 't-wikibase'
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Add the connected item prefixed id as a JS config variable, for gadgets etc.
+	 *
+	 * @param \OutputPage &$out
+	 * @param \Skin &$skin
+	 *
+	 * @since 0.4
+	 *
+	 * @return bool
+	 */
+	public static function onBeforePageDisplayAddJsConfig( \OutputPage &$out, \Skin &$skin ) {
+		$prefixedId = $out->getProperty( 'wikibase_item' );
+
+		if ( $prefixedId !== null ) {
+			$out->addJsConfigVars( 'wgWikibaseItemId', $prefixedId );
+		}
+
+		return true;
+	}
+
+	/**
 	 * Adds css for the edit links sidebar link or JS to create a new item
 	 * or to link with an existing one.
 	 *
