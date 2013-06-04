@@ -135,12 +135,26 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$idFormatter,
 			$service,
 			'json',
-			1800
+			1800,
+			false,
+			null
 		);
 		return $handler;
 	}
 
-	public static function injectIds( &$data, \Wikibase\Entity $entity ) {
+	/**
+	 * Substitutes placeholders using the concrete values from the given entity.
+	 * Known placeholders are:
+	 *
+	 *  {testitemid}, {lowertestitemid}, {testitemrev}, {testitemtimestamp}
+	 *
+	 * @param mixed $data The data in which to substitude placeholders.
+	 *        If this is an erray, injectIds is called on all elements recursively.
+	 * @param Entity $entity
+	 *
+	 * @todo: use EntityRevision once we have that
+	 */
+	public static function injectIds( &$data, Entity $entity ) {
 		if ( is_array( $data ) ) {
 			foreach ( $data as $k => &$v ) {
 				self::injectIds( $v, $entity );
@@ -247,5 +261,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 
 	//TODO: test canHandleRequest
 	//TODO: test httpContentNegotiation
+	//TODO: test getCanonicalFormat
 	//TODO: test ALL the things!
 }
