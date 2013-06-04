@@ -3,9 +3,10 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use MWExceptiontion;
 
 /**
- * Class for label change operation
+ * Class for aliases change operation
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +30,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpLabel implements ChangeOp {
+class ChangeOpAliases implements ChangeOp {
 
 	/**
 	 * @since 0.4
@@ -41,25 +42,38 @@ class ChangeOpLabel implements ChangeOp {
 	/**
 	 * @since 0.4
 	 *
-	 * @var string|null
+	 * @var string[]
 	 */
-	protected $label;
+	protected $aliases;
+
+	/**
+	 * @since 0.4
+	 *
+	 * @var array
+	 */
+	protected $action;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param string $language
-	 * @param string|null $label
+	 * @param string[] $aliases
+	 * @param string $action
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $language, $label ) {
+	public function __construct( $language, array $aliases, $action ) {
 		if ( !is_string( $language ) ) {
 			throw new InvalidArgumentException( '$language needs to be a string' );
 		}
 
+		if ( !is_string( $action ) ) {
+			throw new InvalidArgumentException( '$action needs to be a string' );
+		}
+
 		$this->language = $language;
-		$this->label = $label;
+		$this->aliases = $aliases;
+		$this->action = $action;
 	}
 
 	/**
@@ -70,12 +84,18 @@ class ChangeOpLabel implements ChangeOp {
 	 * @param Entity $entity
 	 *
 	 * @return bool
+	 *
+	 * @throws MWException
 	 */
 	public function apply( Entity $entity ) {
-		if ( $this->label === null ) {
-			$entity->removeLabel( $this->language );
+		if ( $this->action === "" || $this->action === "set" ) {
+			$entity->setAliases( $this->language, $this->aliases );
+		} elseif ( $this->action === "add" ) {
+			$entity->addAliases( $this->language, $this->aliases );
+		} elseif ( $this->action === "remove" ) {
+			$entity->removeAliases( $this->language, $this->aliases );
 		} else {
-			$entity->setLabel( $this->language, $this->label );
+			throw new \MWException( "Unknown action: $this->action" );
 		}
 		return true;
 	}
