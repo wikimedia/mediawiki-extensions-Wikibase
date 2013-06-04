@@ -16,6 +16,24 @@
       "revId": "e65712890ac71187c0d8907e703ce602cbdd5d58",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx2nYjO4",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-04T10:19:09Z",
+      "side": 1,
+      "message": "This was added by your rebase. So, it was removed by bene already.",
+      "parentUuid": "Dx0lUsFE",
+      "revId": "e65712890ac71187c0d8907e703ce602cbdd5d58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
