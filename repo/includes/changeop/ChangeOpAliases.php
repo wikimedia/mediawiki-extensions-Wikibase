@@ -5,7 +5,7 @@ namespace Wikibase;
 use InvalidArgumentException;
 
 /**
- * Class for holding a batch of change operations
+ * Class for aliases change operation
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,68 +29,51 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOps {
+class ChangeOpAliases implements ChangeOp {
 
 	/**
 	 * @since 0.4
 	 *
-	 * @var ChangeOp[]
+	 * @var string
 	 */
-	protected $ops;
+	protected $language;
 
 	/**
 	 * @since 0.4
 	 *
+	 * @var string|null
 	 */
-	public function __construct() {
-		$this->ops = array();
-	}
+	protected $aliases;
 
 	/**
-	 * Adds a changeOp
-	 *
 	 * @since 0.4
 	 *
-	 * @param ChangeOp|ChangeOp[] $changeOp
+	 * @param string $language
+	 * @param string|null $label
+	 *
+	 * @throws InvalidArgumentException
 	 */
-	public function add( $changeOp ) {
-		if ( !is_array( $changeOp ) && !( $changeOp instanceof ChangeOp ) ) {
-			throw new InvalidArgumentException( '$changeOp needs to be an instance of ChangeOp or an array of ChangeOps' );
+	public function __construct( $language, $label ) {
+		if ( !is_string( $language ) ) {
+			throw new InvalidArgumentException( '$language needs to be a string' );
 		}
 
-		if ( $changeOp instanceof ChangeOp ) {
-			$this->ops[] = $changeOp;
-		} else {
-			foreach ( $changeOp as $op ) {
-				if ( $op instanceof ChangeOp ) {
-					$this->ops[] = $op;
-				} else {
-					throw new InvalidArgumentException( 'array $changeOp must contain ChangeOps only' );
-				}
-			}
-		}
+		$this->language = $language;
+		$this->label = $label;
 	}
 
 	/**
-	 * Get the array of changeOps
+	 * Applies the change to the given entity
 	 *
-	 * @since 0.4
-	 *
-	 * @return ChangeOp[]
-	 */
-	public function getChangeOps() {
-		return $this->ops;
-	}
-
-	/**
-	 * Applies all changes to the given entity
 	 * @since 0.4
 	 *
 	 * @param Entity $entity
 	 */
 	public function apply( Entity $entity ) {
-		foreach ( $this->ops as $op ) {
-			$op->apply( $entity );
+		if ( $this->label === null ) {
+			$entity->removeLabel( $this->language );
+		} else {
+			$entity->setLabel( $this->language, $this->label );
 		}
 	}
 
