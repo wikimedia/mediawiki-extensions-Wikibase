@@ -37,7 +37,8 @@ time.Time = ( function( time, $ ) {
 			// TODO: this should also throw errors or we should just take it out.
 			// TODO: if this stays, the options should be merged with the parser result and the
 			//  resulting object should be validated.
-			result = Time.parse( timeDefinition );
+			var parser = new time.Parser();
+			result = parser.parse( timeDefinition );
 		} else {
 			result = $.extend( {}, timeDefinition, options ); // copy object
 			Time.validate( result );

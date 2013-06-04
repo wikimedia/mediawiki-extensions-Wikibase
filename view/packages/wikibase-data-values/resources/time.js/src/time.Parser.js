@@ -9,20 +9,49 @@
  * @author Denny Vrandečić
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-time.Time.parse = ( function( time ) {
+time.Parser = ( function( time ) {
 	'use strict';
-
-	var settings = time.settings;
 
 	// TODO: this should probably already return a time.Time instance and time.Time constructor
 	//  should not take a string (perhaps just for convenience?).
 	// TODO: have a parser per calendar model and one for time.Time itself which is delegating the
 	//  parsing to the different calendar model parsers. This will allow to add new calendar models
-	//  without touching existing code. Parser code for similiar models can still be shared.
-	function parse( text ) {
-		var tokens = tokenize( text ),
+	//  without touching existing code. Parser code for similar models can still be shared.
+
+	/**
+	 * Time Parser
+	 *
+	 * @param {Object} settings
+	 * @constructor
+	 */
+	function Parser( settings ) {
+		this._settings = time.settings;
+
+		for( var key in settings ) {
+			if( settings.hasOwnProperty( key ) ) {
+				this._settings[key] = settings[key];
+			}
+		}
+	}
+
+	/**
+	 * Parser settings
+	 * @type {Object}
+	 */
+	Parser.prototype._settings = null;
+
+	/**
+	 * Parsing
+	 *
+	 * @param {string} text
+	 * @return {Object}
+	 */
+	Parser.prototype.parse = function( text ) {
+		// TODO: instead of injecting settings, the parser should properly set up its own tokenizer
+		//  instance once such an object is available.
+		var tokens = tokenize( text, this._settings ),
 			retval = {},
-			grammars = getGrammars( settings.daybeforemonth ),
+			grammars = getGrammars( this._settings.daybeforemonth ),
 			result = matchGrammars( grammars, tokens );
 
 		if( result === null ) {
@@ -34,7 +63,7 @@ time.Time.parse = ( function( time ) {
 		}
 		if( result.bce !== undefined ) {
 			if( result.year < 1 ) {
-				return;
+				return null;
 			}
 			retval.bce = result.bce;
 			if( result.bce ) {
@@ -83,7 +112,7 @@ time.Time.parse = ( function( time ) {
 		delete( retval.bce ); // nothing we want to expose since this is redundant with "year"
 		delete( retval.minus );
 		return retval;
-	}
+	};
 
 	/**
 	 * Returns an array of grammars which should be used.
@@ -189,7 +218,10 @@ time.Time.parse = ( function( time ) {
 		return result;
 	}
 
-	function tokenize( s ) {
+	// TODO: Create a generic tokenizer prototype out of the following helpers which can be used by
+	//  different (time) parsers.
+
+	function tokenize( s, settings ) {
 		var result = [],
 			token = '',
 			minus = {
@@ -205,7 +237,7 @@ time.Time.parse = ( function( time ) {
 					}
 					continue;
 				}
-				var analysis = analyze( token );
+				var analysis = analyze( token, settings );
 				if( analysis !== null ) {
 					result.push( analysis );
 					token = '';
@@ -222,21 +254,21 @@ time.Time.parse = ( function( time ) {
 			}
 			if( fullMatch( token, /\d+/ ) && !/\d/.test( s[i] ) ) {
 				if( token !== '' ) {
-					result.push( analyze( token ) );
+					result.push( analyze( token, settings ) );
 				}
 				token = '';
 			}
 			token += s[i];
 		}
 		if( token !== '' ) {
-			result.push( analyze( token ) );
+			result.push( analyze( token, settings ) );
 		}
 		return result;
 	}
 
-	function analyze( t ) {
+	function analyze( t, settings ) {
 		if( !fullMatch( t, /\d{1,11}/ ) ) {
-			return testString( t );
+			return testString( t, settings );
 		}
 		var v = parseInt( t, 10 ),
 			day = (t > 0) && (t < 32),
@@ -254,8 +286,8 @@ time.Time.parse = ( function( time ) {
 		};
 	}
 
-	function testString( s ) {
-		var v = readAsMonth( s );
+	function testString( s, settings ) {
+		var v = readAsMonth( s, settings );
 		if( v !== null ) {
 			return {
 				'val': v,
@@ -263,14 +295,14 @@ time.Time.parse = ( function( time ) {
 				'month': true
 			};
 		}
-		v = readAsBCE( s );
+		v = readAsBCE( s, settings );
 		if( v !== null ) {
 			return {
 				'val': v,
 				'type': 'bce'
 			};
 		}
-		v = readAsCalendar( s );
+		v = readAsCalendar( s, settings );
 		if( v !== null ) {
 			return {
 				'val': v,
@@ -280,7 +312,7 @@ time.Time.parse = ( function( time ) {
 		return null;
 	}
 
-	function readAsMonth( word ) {
+	function readAsMonth( word, settings ) {
 		for( var i = 0; i < settings.monthnames.length; i++ ) {
 			for( var j = 0; j < settings.monthnames[i].length; j++ ) {
 				if( settings.monthnames[i][j].toLowerCase() === word.toLowerCase() ) {
@@ -289,9 +321,9 @@ time.Time.parse = ( function( time ) {
 			}
 		}
 		return null;
-	};
+	}
 
-	function readAsBCE( word ) {
+	function readAsBCE( word, settings ) {
 		for( var i = 0; i < settings.bce.length; i++ ) {
 			if( settings.bce[i].toLowerCase() === word.toLowerCase() ) {
 				return true;
@@ -303,9 +335,9 @@ time.Time.parse = ( function( time ) {
 			}
 		}
 		return null;
-	};
+	}
 
-	function readAsCalendar( word ) {
+	function readAsCalendar( word, settings ) {
 		for( var i = 0; i < settings.calendarnames.length; i++ ) {
 			for( var j = 0; j < settings.calendarnames[i].length; j++ ) {
 				if( settings.calendarnames[i][j].toLowerCase() === word.toLowerCase() ) {
@@ -314,7 +346,7 @@ time.Time.parse = ( function( time ) {
 			}
 		}
 		return null;
-	};
+	}
 
 	function fullMatch( str, reg ) {
 		var matches = reg.exec( str );
@@ -324,6 +356,6 @@ time.Time.parse = ( function( time ) {
 		return str === matches[0];
 	}
 
-	return parse; // expose time.parse
+	return Parser; // expose
 
 }( time ) );
