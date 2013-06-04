@@ -119,6 +119,7 @@ call_user_func( function() {
 	// Hooks
 	$wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
 	$wgHooks['LoadExtensionSchemaUpdates'][] 		= '\Wikibase\ClientHooks::onSchemaUpdate';
+	$wgHooks['BaseTemplateToolbox'][]»	»	»	= '\Wikibase\ClientHooks::onBaseTemplateToolbox';
 	$wgHooks['OldChangesListRecentChangesLine'][]		= '\Wikibase\ClientHooks::onOldChangesListRecentChangesLine';
 	$wgHooks['OutputPageParserOutput'][]		= '\Wikibase\ClientHooks::onOutputPageParserOutput';
 	$wgHooks['ParserAfterParse'][]				= '\Wikibase\ClientHooks::onParserAfterParse';
@@ -132,6 +133,7 @@ call_user_func( function() {
 	$wgHooks['SpecialRecentChangesFilters'][]			= '\Wikibase\ClientHooks::onSpecialRecentChangesFilters';
 	$wgHooks['GetPreferences'][]						= '\Wikibase\ClientHooks::onGetPreferences';
 	$wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay';
+	$wgHooks['BeforePageDisplay'][]             = '\Wikibase\ClientHooks::onBeforePageDisplayAddJsConfig';
 	$wgHooks['ScribuntoExternalLibraries'][]      = '\Wikibase\ClientHooks::onScribuntoExternalLibraries';
 	$wgHooks['SpecialWatchlistFilters'][]          = '\Wikibase\ClientHooks::onSpecialWatchlistFilters';
 
