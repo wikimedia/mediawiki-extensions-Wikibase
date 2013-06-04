@@ -70,6 +70,24 @@
       "revId": "6533ad5c8a4a7e02ceb06ab433b8dec8bf164431",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx.kQHK0",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-04T10:03:43Z",
+      "side": 1,
+      "message": "Orrr... Article::getOldID... more confusion. I hate the Article class :/\n\nBut ok, should work, then. Will have a look at the latest version.",
+      "parentUuid": "Dx3M5m9U",
+      "revId": "6533ad5c8a4a7e02ceb06ab433b8dec8bf164431",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
