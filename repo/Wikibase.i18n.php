@@ -335,9 +335,6 @@ to find out where it went.',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Removed [$2] {{PLURAL:$1|alias|aliases}}',
 	'wikibase-property-summary-special-create-property' => 'Created a [$2] property with {{PLURAL:$1|value|values}}',
 
-	// query - summary and autocomment
-	'wikibase-query-summary-special-create-query' => 'Created a [$2] query with {{PLURAL:$1|value|values}}',
-
 	// datatype descriptions
 	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Link to other items at the project. During entry the "Item" namespace on Wikidata will be searched for matching entries. It consists of a single text entry field.
@@ -988,9 +985,6 @@ Parameters:
 * $1 is the number of aliases that were removed;
 * $2 is the language code for the item page.',
 	'wikibase-property-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
-* $1 is the number of values set (that is 0 - zero);
-* $2 is the language code of the entity page during creation.',
-	'wikibase-query-summary-special-create-query' => 'Automatic edit summary when creating a query, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
 	'wikibase-listdatatypes-wikibase-item-head' => '{{Wikibase-datatype-head|Item|wikibase-item}}
