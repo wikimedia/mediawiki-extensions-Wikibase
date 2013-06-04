@@ -89,7 +89,7 @@
 			) {
 				var entity = $input.data( 'entityselector' ).selectedEntity();
 				if ( entity && entity.url ){
-					event.preventDefault(); // Prevent default form sumit action.
+					event.preventDefault(); // Prevent default form submit action.
 					window.location.href = entity.url;
 				}
 			}
