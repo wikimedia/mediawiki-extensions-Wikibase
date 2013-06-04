@@ -4,6 +4,9 @@ namespace Wikibase;
 use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, MediaWikiSite;
 use MWException, FormatJson;
 use \Wikibase\Lib\Serializers\SerializerFactory;
+use \ValueFormatters\ValueFormatterFactory,
+	\ValueFormatters\FormatterOptions,
+	\ValueFormatters\ValueFormatter;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
@@ -38,6 +41,12 @@ use \Wikibase\Lib\Serializers\SerializerFactory;
  * @author Daniel Werner
  */
 abstract class EntityView extends \ContextSource {
+	/**
+	 * @since 0.4
+	 *
+	 * @var ValueFormatterFactory
+	 */
+	protected $valueFormatters;
 
 	/**
 	 * Maps entity types to the corresponding entity view.
@@ -62,9 +71,12 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \IContextSource|null $context
+	 * @param ValueFormatterFactory $valueFormatters
+	 * @param IContextSource|null $context
 	 */
-	public function __construct( IContextSource $context = null ) {
+	public function __construct( ValueFormatterFactory $valueFormatters, IContextSource $context = null ) {
+		$this->valueFormatters = $valueFormatters;
+
 		if ( !$context ) {
 			$context = \RequestContext::getMain();
 		}
@@ -486,15 +498,12 @@ abstract class EntityView extends \ContextSource {
 				);
 			}
 
-			// TODO: inject value formatters into constructor instead
-			$valueFormatters = new \ValueFormatters\ValueFormatterFactory( $wgValueFormatters );
-
 			$entitiesPrefixMap = array();
 			foreach ( Settings::get( 'entityPrefixes' ) as $prefix => $entityType ) {
 				$entitiesPrefixMap[ $entityType ] = $prefix;
 			}
-			$valueFormatterOptions = new \ValueFormatters\FormatterOptions( array(
-				\ValueFormatters\ValueFormatter::OPT_LANG => $languageCode,
+			$valueFormatterOptions = new FormatterOptions( array(
+				ValueFormatter::OPT_LANG => $languageCode,
 				Lib\EntityIdFormatter::OPT_PREFIX_MAP => $entitiesPrefixMap
 			) );
 
@@ -510,7 +519,7 @@ abstract class EntityView extends \ContextSource {
 						$value = $value->getTime() . ' (' . $value->getCalendarModel() . ')';
 					} else {
 						// Proper way, use value formatter:
-						$valueFormatter = $valueFormatters->newFormatter(
+						$valueFormatter = $this->valueFormatters->newFormatter(
 							$value->getType(), $valueFormatterOptions
 						);
 
@@ -523,8 +532,8 @@ abstract class EntityView extends \ContextSource {
 
 							if( !is_string( $value ) ) {
 								// TODO: don't fail here, display a message in the UI instead
-								throw new MWException( 'Displaying of values of type "' + $value->getType()
-									+ '" not supported yet' );
+								throw new MWException( 'Displaying of values of type "'
+									. $value->getType() . '" not supported yet' );
 							}
 						}
 					}
@@ -827,18 +836,24 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.2
 	 *
 	 * @param EntityContent $entity
+	 * @param ValueFormatterFactory $valueFormatters
+	 * @param IContextSource|null $context
 	 *
 	 * @return EntityView
 	 * @throws MWException
 	 */
-	public static function newForEntityContent( EntityContent $entity ) {
+	public static function newForEntityContent(
+		EntityContent $entity,
+		ValueFormatterFactory $valueFormatters,
+		IContextSource $context = null
+	) {
 		$type = $entity->getEntity()->getType();
 
 		if ( !in_array( $type, array_keys( self::$typeMap ) ) ) {
 			throw new MWException( "No entity view known for handling entities of type '$type'" );
 		}
 
-		$instance = new self::$typeMap[ $type ]();
+		$instance = new self::$typeMap[ $type ]( $valueFormatters, $context );
 		return $instance;
 	}
 }
