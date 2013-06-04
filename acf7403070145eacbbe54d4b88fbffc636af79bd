@@ -33,6 +33,23 @@
       "revId": "acf7403070145eacbbe54d4b88fbffc636af79bd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx8lNYJw",
+        "filename": "repo/tests/phpunit/includes/specials/EntityDataSerializationServiceTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-04T10:50:08Z",
+      "side": 1,
+      "message": "@covers SpecialItemByTitle",
+      "revId": "acf7403070145eacbbe54d4b88fbffc636af79bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
