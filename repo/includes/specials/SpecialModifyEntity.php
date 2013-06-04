@@ -65,6 +65,10 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 			return false;
 		}
 
+		$this->checkPermissions();
+		$this->checkBlocked();
+		$this->checkReadOnly();
+
 		$this->setHeaders();
 		$this->outputHeader();
 
@@ -268,5 +272,26 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 		);
 
 		return AutoComment::formatTotalSummary( $comment, $summary, $lang );
+	}
+
+	/**
+	 * Output an error message telling the user that he is blocked
+	 */
+	function displayBlockedError() {
+		throw new UserBlockedError( $this->getUser()->getBlock() );
+	}
+
+	/**
+	 * Checks if user is blocked, and if he is blocked throws a UserBlocked
+	 *
+	 * @todo factor out to have some generic code for all editing
+	 *       Wikibase pages to be able to use.  This applies to new entities also.
+	 *
+	 * @since 0.4
+	 */
+	public function checkBlocked() {
+		if ( $this->getUser()->isBlocked() ) {
+			$this->displayBlockedError();
+		}
 	}
 }
