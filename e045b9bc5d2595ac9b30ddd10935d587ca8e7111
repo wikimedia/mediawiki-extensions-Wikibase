@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dx-C9nNU",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-04T17:49:10Z",
+      "side": 1,
+      "message": "Now this class has 8 fields. That is not bad in itself but is a warning sign that you might be putting in multiple responsibilities. The same goes for the long list of imports at the top of the file.",
+      "revId": "e045b9bc5d2595ac9b30ddd10935d587ca8e7111",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx5DNOIo",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-04T17:49:10Z",
+      "side": 1,
+      "message": "I can\u0027t help but think that if this was not mixed together with unrelated stuff, that naming it $maxAgeInSeconds would remove the need for any extra documentation",
+      "revId": "e045b9bc5d2595ac9b30ddd10935d587ca8e7111",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxzC4pOI",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-04T17:49:10Z",
+      "side": 1,
+      "message": "\u003e do we have web caches configured?\n\nThis does not seem to add a lot of value. To me it is in fact rather confusing, even though I\u0027m familiar with MW.",
+      "revId": "e045b9bc5d2595ac9b30ddd10935d587ca8e7111",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx1CzsAk",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-04T17:49:10Z",
+      "side": 1,
+      "message": "Such checks really suck - In general try to have your variables/fields only be a single type.",
+      "revId": "e045b9bc5d2595ac9b30ddd10935d587ca8e7111",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
