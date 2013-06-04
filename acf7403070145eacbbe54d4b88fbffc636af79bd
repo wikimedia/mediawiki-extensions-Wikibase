@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dx2l0DM8",
+        "filename": "repo/tests/phpunit/includes/specials/EntityDataRequestHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-04T10:48:59Z",
+      "side": 1,
+      "message": "we\u0027re using\n@covers EntityDataRequestHandler\nnow",
+      "revId": "acf7403070145eacbbe54d4b88fbffc636af79bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx0lxUN0",
+        "filename": "repo/tests/phpunit/includes/specials/EntityDataRequestHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-04T10:48:59Z",
+      "side": 1,
+      "message": "what? :)",
+      "revId": "acf7403070145eacbbe54d4b88fbffc636af79bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
