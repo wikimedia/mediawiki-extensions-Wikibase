@@ -214,6 +214,7 @@ class EditEntityTest extends ModifyItemBase {
 	/**
 	 * Check success when the entity is set again, with fields in the json that should be ignored
 	 */
+	/*
 	function testEditEntityWithIgnoredData() {
 		$token = $this->getItemToken();
 
@@ -250,6 +251,7 @@ class EditEntityTest extends ModifyItemBase {
 			}
 		}
 	}
+	*/
 
 	/**
 	 * Check failure to set the same entity again, with illegal field values in the json
