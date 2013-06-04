@@ -132,7 +132,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	private function isValidSiteId( $siteId ) {
-		return $siteId !== null && \Sites::singleton()->getSite( $siteId ) !== false;
+		return $siteId !== null && \Sites::singleton()->getSite( $siteId ) !== null;
 	}
 
 	/**
@@ -160,14 +160,14 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$site = \Sites::singleton()->getSite( $this->site );
 
-		if ( $this->entityContent !== null && $this->site !== null && $site !== false ) {
+		if ( $this->entityContent !== null && $this->site !== null && $site !== null ) {
 			return Html::rawElement(
 				'p',
 				array(),
 				$this->msg(
 					'wikibase-setsitelink-introfull',
 					$this->entityContent->getTitle()->getPrefixedText(),
-					'[' . \Sites::singleton()->getSite( $this->site )->getPageUrl( '' ) . ' ' . $this->site . ']'
+					'[' . $site->getPageUrl( '' ) . ' ' . $this->site . ']'
 				)->parse()
 			)
 			. Html::input( 'site', $this->site, 'hidden' )
@@ -249,10 +249,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$siteObject = \Sites::singleton()->getSite( $site );
 		$status = \Status::newGood();
 
-		if ( $siteObject === false ) {
+		if ( $siteObject === null ) {
 			$status->error( 'wikibase-setsitelink-invalid-site', $site );
 			return $status;
 		}
+
 		if ( $siteObject->normalizePageName( $page ) === false && $page !== '' ) {
 			$status->error( 'wikibase-error-ui-no-external-page' );
 			return $status;
