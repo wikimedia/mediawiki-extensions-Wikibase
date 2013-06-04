@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dx0la8E4",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-04T10:52:11Z",
+      "side": 1,
+      "message": "i don\u0027t know if there is a use case for getting the $diff revision when $oldid is null (e.g. deleted or something)?  there might be, which is why i keep it this way for now.  (can be convinced otherwise, though)",
+      "parentUuid": "Dxyld5Hc",
+      "revId": "604858cf81ed96c68836e94e74c0b5a4059e631a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx0ki8AU",
         "filename": "repo/includes/actions/ViewEntityAction.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-04T10:12:36Z",
       "side": 1,
       "message": "Uninitialized in cased $diffValue was prev/next/cur, but $oldId was invalid so $oldIdRev was null. Please initialize to null.",
+      "revId": "604858cf81ed96c68836e94e74c0b5a4059e631a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx6lXNCQ",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-04T10:52:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx0ki8AU",
       "revId": "604858cf81ed96c68836e94e74c0b5a4059e631a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
