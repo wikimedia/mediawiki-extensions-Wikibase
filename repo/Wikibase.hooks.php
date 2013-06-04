@@ -152,6 +152,7 @@ final class RepoHooks {
 			'Autocomment',
 			'ClaimSummaryBuilder',
 			'EditEntity',
+			'EntityView',
 			'ItemMove',
 			'ItemContentDiffView',
 			'ItemMove',
