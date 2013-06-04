@@ -45,7 +45,7 @@ $messages['en'] = array(
 	'wikibase-linkitem-input-site' => 'Language:',
 	'wikibase-linkitem-input-page' => 'Page:',
 	'wikibase-linkitem-invalidsite' => 'Unknown or invalid site selected',
-	'wikibase-linkitem-confirmitem-text' => 'The page you chose is already linked to an [$1 item on our central data repository]. Please confirm that the pages shown below are the ones you want to link with this page.',
+	'wikibase-linkitem-confirmitem-text' => 'The page you chose is already associated to an [$1 item on our central data repository]. Please confirm that the {{PLURAL:$2|page|pages}} shown below {{PLURAL:$2|is|are}} the {{PLURAL:$2|one|ones}} you want to link with this page.',
 	'wikibase-linkitem-confirmitem-button' => 'Confirm',
 	'wikibase-linkitem-not-loggedin-title' => 'You need to be logged in',
 	'wikibase-linkitem-not-loggedin' => 'You need to be logged in on this wiki and in the [$1 central data repository] to use this feature.',
@@ -132,9 +132,11 @@ Parameters:
 {{Identical|Page}}',
 	'wikibase-linkitem-invalidsite' => 'Tooltip shown if the user entered an invalid site to link pages with',
 	'wikibase-linkitem-confirmitem-text' => 'Text shown above a table containing links to other pages. Asks the user to confirm that the links are correct and should be linked with the current page.
+	The message string will only be used when there are multiple pages, still it has a count argument so it can use a correct plural parser function.
 
 Parameters:
-* $1 - the URL to the item which links to the shown pages',
+* $1 - the URL to the item which links to the shown pages
+* $2 - the number of links to associated pages',
 	'wikibase-linkitem-confirmitem-button' => 'Button label below a table containing links to other pages. Asks the user to confirm that he wants to link them with the current page.
 {{Identical|Confirm}}',
 	'wikibase-linkitem-not-loggedin-title' => 'Title of the dialog telling the user that he needs to login on both the repo and client to use this feature.',
