@@ -3,9 +3,9 @@
 namespace Wikibase\Api;
 
 use Wikibase\ChangeOps;
-
 use Wikibase\ChangeOpLabel;
 use Wikibase\ChangeOpDescription;
+use Wikibase\ChangeOpAliases;
 use ApiBase, User, Status, SiteList;
 use Wikibase\SiteLink;
 use Wikibase\Entity;
@@ -29,6 +29,17 @@ use Wikibase\Utils;
  * @author Daniel Kinzler
  */
 class EditEntity extends ModifyEntity {
+
+	protected $validLanguageCodes;
+
+	protected $status;
+
+	public function __construct( $mainModule, $moduleName ) {
+		parent::__construct( $mainModule, $moduleName );
+
+		$this->validLanguageCodes = array_flip( Utils::getLanguageCodes() );
+		$this->status = Status::newGood();
+	}
 
 	/**
 	 * @see  \Wikibase\Api\Api::getRequiredPermissions()
@@ -64,14 +75,14 @@ class EditEntity extends ModifyEntity {
 			$this->flags |= EDIT_NEW;
 			if ( isset($params['id']) ) {
 				switch ( $params['data'] ) {
-				case 'item':
-					return ItemContent::newEmpty();
-				case 'property':
-					return \Wikibase\PropertyContent::newEmpty();
-				case 'query':
-					return \Wikibase\QueryContent::newEmpty();
-				default:
-					$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
+					case 'item':
+						return ItemContent::newEmpty();
+					case 'property':
+						return \Wikibase\PropertyContent::newEmpty();
+					case 'query':
+						return \Wikibase\QueryContent::newEmpty();
+					default:
+						$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 				}
 			}
 			else {
@@ -96,7 +107,6 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
-		$status = Status::newGood();
 		$summary = $this->createSummary( $params );
 		$entity = $entityContent->getEntity();
 		$changeOps = new ChangeOps();
@@ -111,184 +121,38 @@ class EditEntity extends ModifyEntity {
 		//TODO: Construct a nice and meaningful summary from the changes that get applied!
 		//      Perhaps that could be based on the resulting diff?
 
-		if ( isset( $params['data'] ) ) {
-			$data = json_decode( $params['data'], true );
-			if ( is_null( $data ) ) {
-				wfProfileOut( __METHOD__ );
-				$this->dieUsage( $this->msg( 'wikibase-api-json-invalid' )->text(), 'json-invalid' );
-			}
-			if ( !is_array( $data ) ) { // NOTE: json_decode will decode any JS literal or structure, not just objects!
-				wfProfileOut( __METHOD__ );
-				$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-array' );
-			}
-			$languages = array_flip( Utils::getLanguageCodes() );
+		if ( !isset( $params['data'] ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-data' )->text(), 'no-data' );
+		}
 
-			if ( isset( $params['clear'] ) && $params['clear'] ) {
-				$entityContent->getEntity()->clear();
-			}
+		$data = json_decode( $params['data'], true );
+		$this->status->merge( $this->checkDataProperties( $data, $entityContent->getWikiPage() ) );
 
-			$title = null;
-			$revision = null;
-			$page = $entityContent->getWikiPage();
-			if ( $page ) {
-				$title = $page->getTitle();
-				$revision = $page->getRevision();
-			}
+		if ( isset( $params['clear'] ) && $params['clear'] ) {
+			$entityContent->getEntity()->clear();
+		}
 
-			foreach ( $data as $props => $list ) {
-				if ( !is_string( $props ) ) { // NOTE: catch json_decode returning an indexed array (list)
-					$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-string' );
-				}
-				// unconditional no-ops
-				if ( in_array( $props, array( 'length', 'count', 'touched' ) ) ) {
-					continue;
-				}
-				// conditional no-ops
-				if ( isset( $params['exclude'] ) && in_array( $props, $params['exclude'] ) ) {
-					continue;
-				}
+		if ( array_key_exists( 'labels', $data ) ) {
+			$changeOps->add( $this->getLabelChangeOps( $data['labels'] ) );
+		}
 
-				switch ($props) {
+		if ( array_key_exists( 'descriptions', $data ) ) {
+			$changeOps->add( $this->getDescriptionChangeOps( $data['descriptions'] ) );
+		}
 
-				// conditional processing
-				case 'pageid':
-					if ( isset( $data[$props] ) && ( is_object( $page ) ? $page->getId() !== $data[$props] : true ) ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'pageid' )->text(), 'illegal-field' );
-					}
-					break;
-				case 'ns':
-					// not completely convinced that we can use title to get the namespace in this case
-					if ( isset( $data[$props] ) && ( is_object( $title ) ? $title->getNamespace() !== $data[$props] : true ) ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'namespace' )->text(), 'illegal-field' );
-					}
-					break;
-				case 'title':
-					if ( isset( $data[$props] ) && ( is_object( $title ) ? $title->getPrefixedText() !== $data[$props] : true ) ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'title' )->text(), 'illegal-field' );
-					}
-					break;
-				case 'lastrevid':
-					if ( isset( $data[$props] ) && ( is_object( $revision ) ? $revision->getId() !== $data[$props] : true ) ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'lastrevid' )->text(), 'illegal-field' );
-					}
-					break;
+		if ( array_key_exists( 'aliases', $data ) ) {
+			$changeOps->add( $this->getAliasesChangeOps( $data['aliases'] ) );
+		}
 
+		if ( !$this->status->isOk() ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( "Contained status: $1", $this->status->getWikiText() );
+		}
+
+		foreach ( $data as $props => $list ) {
+			switch ($props) {
 				// ordinary entries
-				case 'labels':
-					if ( !is_array( $list ) ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Key 'labels' must refer to an array", 'not-recognized-array' );
-					}
-
-					foreach ( $list as $langCode => $arg ) {
-						$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
-
-						$language = $arg['language'];
-						$newLabel = Utils::trimToNFC( $arg['value'] );
-						$oldLabel = $entity->getLabel( $language );
-
-						if ( array_key_exists( 'remove', $arg ) || $newLabel === "" ) {
-							$changeOps->add( new ChangeOpLabel( $language, null ) );
-						}
-						else {
-							$changeOps->add( new ChangeOpLabel( $language, $newLabel ) );
-						}
-					}
-
-					if ( !$status->isOk() ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
-					}
-
-					break;
-
-				case 'descriptions':
-					if ( !is_array( $list ) ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Key 'descriptions' must refer to an array", 'not-recognized-array' );
-					}
-
-					foreach ( $list as $langCode => $arg ) {
-						$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
-
-						$language = $arg['language'];
-						$newDescription = Utils::trimToNFC( $arg['value'] );
-						$oldDescription = $entity->getDescription( $language );
-
-						if ( array_key_exists( 'remove', $arg ) || $newDescription === "" ) {
-							$changeOps->add( new ChangeOpDescription( $language, null ) );
-						}
-						else {
-							$changeOps->add( new ChangeOpDescription( $language, $newDescription ) );
-						}
-					}
-
-					if ( !$status->isOk() ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
-					}
-
-					break;
-
-				case 'aliases':
-					if ( !is_array( $list ) ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Key 'aliases' must refer to an array", 'not-recognized-array' );
-					}
-
-					$aliases = array();
-
-					foreach ( $list as $langCode => $arg ) {
-						if ( intval( $langCode ) ) {
-							$aliases[] = ( array_values($arg) === $arg ) ? $arg : array( $arg );
-						} else {
-							$aliases[$langCode] = ( array_values($arg) === $arg ) ? $arg : array( $arg );
-						}
-					}
-
-					$setAliases = array();
-					$addAliases = array();
-					$remAliases = array();
-
-					foreach ( $aliases as $langCode => $args ) {
-						foreach ( $args as $arg ) {
-							$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
-							if ( array_key_exists( 'remove', $arg ) ) {
-								$remAliases[$arg['language']][] = Utils::trimToNFC( $arg['value'] );
-							}
-							elseif ( array_key_exists( 'add', $arg ) ) {
-								$addAliases[$arg['language']][] = Utils::trimToNFC( $arg['value'] );
-							}
-							else {
-								$setAliases[$arg['language']][] = Utils::trimToNFC( $arg['value'] );
-							}
-						}
-					}
-					foreach ( $setAliases as $langCode => $strings ) {
-							$entityContent->getEntity()->setAliases( $langCode, $strings );
-					}
-					foreach ( $remAliases as $langCode => $strings ) {
-							$entityContent->getEntity()->removeAliases( $langCode, $strings );
-					}
-					foreach ( $addAliases as $langCode => $strings ) {
-							$entityContent->getEntity()->addAliases( $langCode, $strings );
-					}
-
-					if ( !$status->isOk() ) {
-						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
-					}
-
-					unset( $aliases );
-					unset( $setAliases );
-					unset( $addAliases );
-					unset( $remAliases );
-
-					break;
 
 				case 'sitelinks':
 					// TODO: This is a temporary fix that should be handled properly with an
@@ -306,7 +170,7 @@ class EditEntity extends ModifyEntity {
 					$sites = $this->getSiteLinkTargetSites();
 
 					foreach ( $list as $siteId => $arg ) {
-						$status->merge( $this->checkSiteLinks( $arg, $siteId, $sites ) );
+						$this->status->merge( $this->checkSiteLinks( $arg, $siteId, $sites ) );
 						if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
 							$entityContent->getEntity()->removeSiteLink( $arg['site'] );
 						}
@@ -334,9 +198,9 @@ class EditEntity extends ModifyEntity {
 						}
 					}
 
-					if ( !$status->isOk() ) {
+					if ( !$this->status->isOk() ) {
 						wfProfileOut( __METHOD__ );
-						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
+						$this->dieUsage( "Contained status: $1", $this->status->getWikiText() );
 					}
 
 					unset( $sites );
@@ -345,8 +209,6 @@ class EditEntity extends ModifyEntity {
 
 				default:
 					wfProfileOut( __METHOD__ );
-					$this->dieUsage( "unknown key: $props", 'not-recognized' );
-				}
 			}
 		}
 
@@ -371,6 +233,168 @@ class EditEntity extends ModifyEntity {
 
 		wfProfileOut( __METHOD__ );
 		return $summary;
+	}
+
+	protected function getLabelChangeOps( $labels ) {
+		$labelChangeOps = array();
+
+		if ( !is_array( $labels ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( "Key 'labels' must refer to an array", 'not-recognized-array' );
+		}
+
+		foreach ( $labels as $langCode => $arg ) {
+			$this->status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
+
+			$language = $arg['language'];
+			$newLabel = Utils::trimToNFC( $arg['value'] );
+
+			if ( array_key_exists( 'remove', $arg ) || $newLabel === "" ) {
+				$labelChangeOps[] = new ChangeOpLabel( $language, null );
+			}
+			else {
+				$labelChangeOps[] = new ChangeOpLabel( $language, $newLabel );
+			}
+		}
+
+		return $labelChangeOps;
+	}
+
+	protected function getDescriptionChangeOps( $descriptions ) {
+		$descriptionChangeOps = array();
+
+		if ( !is_array( $descriptions ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( "Key 'descriptions' must refer to an array", 'not-recognized-array' );
+		}
+
+		foreach ( $descriptions as $langCode => $arg ) {
+			$this->status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
+
+			$language = $arg['language'];
+			$newDescription = Utils::trimToNFC( $arg['value'] );
+
+			if ( array_key_exists( 'remove', $arg ) || $newDescription === "" ) {
+				$descriptionChangeOps[] = new ChangeOpDescription( $language, null );
+			}
+			else {
+				$descriptionChangeOps[] = new ChangeOpDescription( $language, $newDescription );
+			}
+		}
+
+		return $descriptionChangeOps;
+	}
+
+	protected function getAliasesChangeOps( $aliases ) {
+		$aliasesChangeOps = array();
+
+		if ( !is_array( $aliases ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( "Key 'aliases' must refer to an array", 'not-recognized-array' );
+		}
+
+		$indexedAliases = array();
+
+		foreach ( $aliases as $langCode => $arg ) {
+			if ( intval( $langCode ) ) {
+				$indexedAliases[] = ( array_values($arg) === $arg ) ? $arg : array( $arg );
+			} else {
+				$indexedAliases[$langCode] = ( array_values($arg) === $arg ) ? $arg : array( $arg );
+			}
+		}
+
+		foreach ( $indexedAliases as $langCode => $args ) {
+			foreach ( $args as $arg ) {
+				$this->status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
+
+				$alias = array( Utils::trimToNFC( $arg['value'] ) );
+				$language = $arg['language'];
+
+				if ( array_key_exists( 'remove', $arg ) ) {
+					$aliasesChangeOps[] = new ChangeOpAliases( $language, $alias, 'remove' );
+				}
+				elseif ( array_key_exists( 'add', $arg ) ) {
+					$aliasesChangeOps[] = new ChangeOpAliases( $language, $alias, 'add' );
+				}
+				else {
+					$aliasesChangeOps[] = new ChangeOpAliases( $language, $alias, 'set' );
+				}
+			}
+		}
+
+		if ( !$this->status->isOk() ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( "Contained status: $1", $this->status->getWikiText() );
+		}
+
+		unset( $indexedAliases );
+
+		return $aliasesChangeOps;
+	}
+
+	protected function checkDataProperties( $data, $page ) {
+		$status = Status::newGood();
+
+		$title = null;
+		$revision = null;
+		if ( $page ) {
+			$title = $page->getTitle();
+			$revision = $page->getRevision();
+		}
+
+		$allowedProps = array(
+			'length',
+			'count',
+			'touched',
+			'pageid',
+			'ns',
+			'title',
+			'lastrevid',
+			'labels',
+			'descriptions',
+			'aliases',
+			'sitelinks' );
+
+		if ( is_null( $data ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-json-invalid' )->text(), 'json-invalid' );
+		}
+
+		if ( !is_array( $data ) ) { // NOTE: json_decode will decode any JS literal or structure, not just objects!
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-array' );
+		}
+
+		foreach ( $data as $prop => $args ) {
+			if ( !is_string( $prop ) ) { // NOTE: catch json_decode returning an indexed array (list)
+				$this->dieUsage( 'Top level structure must be a JSON objectt', 'not-recognized-string' );
+			}
+
+			if ( !in_array( $prop, $allowedProps ) ) {
+				$this->dieUsage( "unknown key: $prop", 'not-recognized' );
+			}
+		}
+
+		// conditional processing
+		if ( isset( $data['pageid'] ) && ( is_object( $page ) ? $page->getId() !== $data['pageid'] : true ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'pageid' )->text(), 'illegal-field' );
+		}
+		// not completely convinced that we can use title to get the namespace in this case
+		if ( isset( $data['ns'] ) && ( is_object( $title ) ? $title->getNamespace() !== $data['ns'] : true ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'namespace' )->text(), 'illegal-field' );
+		}
+		if ( isset( $data['title'] ) && ( is_object( $title ) ? $title->getPrefixedText() !== $data['title'] : true ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'title' )->text(), 'illegal-field' );
+		}
+		if ( isset( $data['lastrevid'] ) && ( is_object( $revision ) ? $revision->getId() !== $data['lastrevid'] : true ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'lastrevid' )->text(), 'illegal-field' );
+		}
+
+		return $status;
 	}
 
 	/**
@@ -405,16 +429,16 @@ class EditEntity extends ModifyEntity {
 			parent::getAllowedParamsForEntity(),
 			array(
 				'data' => array(
-					ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_TYPE => 'string',
 				),
 				'exclude' => array(
-					ApiBase::PARAM_TYPE => array( 'pageid', 'ns', 'title', 'lastrevid', 'touched', 'sitelinks', 'aliases', 'labels', 'descriptions' ),
-					ApiBase::PARAM_DFLT => '',
-					ApiBase::PARAM_ISMULTI => true,
+				ApiBase::PARAM_TYPE => array( 'pageid', 'ns', 'title', 'lastrevid', 'touched', 'sitelinks', 'aliases', 'labels', 'descriptions' ),
+				ApiBase::PARAM_DFLT => '',
+				ApiBase::PARAM_ISMULTI => true,
 				),
 				'clear' => array(
-					ApiBase::PARAM_TYPE => 'boolean',
-					ApiBase::PARAM_DFLT => false
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false
 				),
 			)
 		);
@@ -425,21 +449,21 @@ class EditEntity extends ModifyEntity {
 	 */
 	public function getParamDescription() {
 		return array_merge(
-			parent::getParamDescription(),
-			parent::getParamDescriptionForId(),
-			parent::getParamDescriptionForSiteLink(),
-			parent::getParamDescriptionForEntity(),
-			array(
-				'data' => array( 'The serialized object that is used as the data source.',
+				parent::getParamDescription(),
+				parent::getParamDescriptionForId(),
+				parent::getParamDescriptionForSiteLink(),
+				parent::getParamDescriptionForEntity(),
+				array(
+					'data' => array( 'The serialized object that is used as the data source.',
 					"A newly created entity will be assigned an 'id'."
-				),
-				'exclude' => array( 'List of substructures to neglect during the processing.',
+					),
+					'exclude' => array( 'List of substructures to neglect during the processing.',
 					"In addition 'length', 'touched' and 'count' is always excluded."
-				),
-				'clear' => array( 'If set, the complete emptied is emptied before proceeding.',
+					),
+					'clear' => array( 'If set, the complete emptied is emptied before proceeding.',
 					'The entity will not be saved before it is filled with the "data", possibly with parts excluded.'
-				),
-			)
+					),
+				)
 		);
 	}
 
@@ -469,11 +493,10 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @param $arg Array: The argument array to verify
 	 * @param $langCode string: The language code used in the value part
-	 * @param &$languages array: The valid language codes as an assoc array
 	 *
 	 * @return Status: The result from the comparison (always true)
 	 */
-	public function checkMultilangArgs( $arg, $langCode, &$languages = null ) {
+	public function checkMultilangArgs( $arg, $langCode ) {
 		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
@@ -486,7 +509,7 @@ class EditEntity extends ModifyEntity {
 				$this->dieUsage( "inconsistent language: {$langCode} is not equal to {$arg['language']}", 'inconsistent-language' );
 			}
 		}
-		if ( isset( $languages ) && !array_key_exists( $arg['language'], $languages ) ) {
+		if ( isset( $this->validLanguageCodes ) && !array_key_exists( $arg['language'], $this->validLanguageCodes ) ) {
 			$this->dieUsage( "unknown language: {$arg['language']}", 'not-recognized-language' );
 		}
 		if ( !is_string( $arg['value'] ) ) {

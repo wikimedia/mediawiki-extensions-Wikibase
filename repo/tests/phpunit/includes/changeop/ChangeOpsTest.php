@@ -67,6 +67,49 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( array( $changeOp ), $changeOps->getChangeOps() );
 	}
 
+	public function changeOpArrayProvider() {
+		$ops = array();
+		$ops[] = array (
+					array(
+						new ChangeOpLabel( 'en', 'enLabel' ),
+						new ChangeOpLabel( 'de', 'deLabel' ),
+						new ChangeOpDescription( 'en', 'enDescr' ),
+					)
+				);
+
+		return $ops;
+	}
+
+	/**
+	 * @dataProvider changeOpArrayProvider
+	 *
+	 * @param ChangeOp[] $changeOp
+	 */
+	public function testAddArray( $changeOpArray ) {
+		$changeOps = new ChangeOps();
+		$changeOps->add( $changeOpArray );
+		$this->assertEquals( $changeOpArray, $changeOps->getChangeOps() );
+	}
+
+	public function invalidChangeOpProvider() {
+		$ops = array();
+		$ops[] = array ( 1234 );
+		$ops[] = array ( array( new ChangeOpLabel( 'en', 'test' ), 123 ) );
+
+		return $ops;
+	}
+
+	/**
+	 * @dataProvider invalidChangeOpProvider
+	 * @expectedException InvalidArgumentException
+	 *
+	 * @param $invalidChangeOp
+	 */
+	public function testInvalidAdd( $invalidChangeOp ) {
+		$changeOps = new ChangeOps();
+		$changeOps->add( $invalidChangeOp );
+	}
+
 	public function changeOpsProvider() {
 		$args = array();
 
