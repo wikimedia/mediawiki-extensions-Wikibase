@@ -17,7 +17,7 @@ use \SquidUpdate;
  *
  * @since 0.4
  *
- * @file 
+ * @file
  * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
@@ -58,15 +58,27 @@ class EntityDataRequestHandler {
 	protected $defaultFormat;
 
 	/**
+	 * @var bool
+	 */
+	protected $useSquids;
+
+	/**
+	 * @var string|null
+	 */
+	protected $frameOptionsHeader;
+
+	/**
 	 * @since 0.4
 	 *
-	 * @param Title                          $interfaceTitle
+	 * @param Title                          $interfaceTitle for building canonical URLs
 	 * @param EntityContentFactory           $entityContentFactory
 	 * @param EntityIdParser                 $entityIdParser
 	 * @param EntityIdFormatter              $entityIdFormatter
 	 * @param EntityDataSerializationService $serializationService
 	 * @param string                         $defaultFormat
-	 * @param int                            $maxAge
+	 * @param int                            $maxAge number of seconds to cache entity data
+	 * @param bool                           $useSquids do we have web caches configured?
+	 * @param string|null                    $frameOptionsHeader for X-Frame-Options
 	 */
 	public function __construct(
 		Title $interfaceTitle,
@@ -75,7 +87,9 @@ class EntityDataRequestHandler {
 		EntityIdFormatter $entityIdFormatter,
 		EntityDataSerializationService $serializationService,
 		$defaultFormat,
-		$maxAge
+		$maxAge,
+		$useSquids,
+		$frameOptionsHeader
 	) {
 		$this->interfaceTitle = $interfaceTitle;
 		$this->entityContentFactory = $entityContentFactory;
@@ -84,6 +98,8 @@ class EntityDataRequestHandler {
 		$this->serializationService = $serializationService;
 		$this->defaultFormat = $defaultFormat;
 		$this->maxAge = $maxAge;
+		$this->useSquids = $useSquids;
+		$this->frameOptionsHeader = $frameOptionsHeader;
 	}
 
 	/**
@@ -109,7 +125,7 @@ class EntityDataRequestHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param string $doc Document name, e.g. Q5 or Q5.json or Q5:33.xml
+	 * @param string|null $doc Document name, e.g. Q5 or Q5.json or Q5:33.xml
 	 * @param WebRequest $request
 	 *
 	 * @return bool
@@ -231,7 +247,6 @@ class EntityDataRequestHandler {
 		}
 
 		$this->showData( $request, $output, $format, $entityId, $revision );
-		return;
 	}
 
 	/**
@@ -245,9 +260,7 @@ class EntityDataRequestHandler {
 	 * @param int      $revision The revision ID (use 0 for current)
 	 */
 	public function purge( EntityId $id, $format = '', $revision = 0 ) {
-		global $wgUseSquid;
-
-		if ( $wgUseSquid ) {
+		if ( $this->useSquids ) {
 			//TODO: Purge all formats based on the ID, instead of just the one currently requested.
 			//TODO: Also purge when an entity gets edited, using the new TitleSquidURLs hook.
 			$title = $this->getDocTitle( $id, $format, $revision );
@@ -498,9 +511,8 @@ class EntityDataRequestHandler {
 		}
 
 		//Set X-Frame-Options API results (bug 39180)
-		global $wgApiFrameOptions;
-		if ( $wgApiFrameOptions ) {
-			$response->header( "X-Frame-Options: $wgApiFrameOptions" );
+		if ( $this->frameOptionsHeader !== null && $this->frameOptionsHeader !== '' ) {
+			$response->header( "X-Frame-Options: $this->frameOptionsHeader" );
 		}
 
 		// allow the client to cache this
@@ -518,7 +530,7 @@ class EntityDataRequestHandler {
 	 * Returns true iff RDF output is supported.
 	 * @return bool
 	 */
-	public static function isRdfSupported() {
-		return EntityDataSerializationService::isRdfSupported();
+	public function isRdfSupported() {
+		return $this->serializationService->isRdfSupported();
 	}
 }

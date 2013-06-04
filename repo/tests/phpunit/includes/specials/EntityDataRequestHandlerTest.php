@@ -135,7 +135,9 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$idFormatter,
 			$service,
 			'json',
-			1800
+			1800,
+			false,
+			null
 		);
 		return $handler;
 	}
