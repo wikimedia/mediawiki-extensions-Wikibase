@@ -171,7 +171,7 @@
 		 * @return valueParsers.ValueParser
 		 */
 		parser: function() {
-			return new vp.NullParser()
+			return new vp.NullParser();
 		},
 
 		/**

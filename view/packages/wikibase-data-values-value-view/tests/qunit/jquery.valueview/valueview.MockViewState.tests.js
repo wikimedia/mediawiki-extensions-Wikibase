@@ -14,6 +14,24 @@
 
 	QUnit.module( 'jquery.valueview.MockViewState' );
 
+	/**
+	 * Helper which returns a test function for a member of MockViewState.
+	 *
+	 * @param {string} memberName
+	 * @returns {Function}
+	 */
+	function buildMemberTestFn( memberName ) {
+		return function( params, assert ) {
+			var viewState = new MockViewState( params.constructorArg );
+
+			assert.strictEqual(
+				viewState[ memberName ](),
+				params[ memberName ],
+				'"' + memberName + '" returns injected value'
+			);
+		};
+	}
+
 	QUnit
 	.cases( [
 		{
@@ -94,26 +112,8 @@
 				params.optionBar,
 				'Option "bar" holds injected value'
 			);
-			
+
 		} );
-
-	/**
-	 * Helper which returns a test function for a member of MockViewState.
-	 *
-	 * @param {string} memberName
-	 * @returns {Function}
-	 */
-	function buildMemberTestFn( memberName ) {
-		return function( params, assert ) {
-			var viewState = new MockViewState( params.constructorArg );
-
-			assert.strictEqual(
-				viewState[ memberName ](),
-				params[ memberName ],
-				'"' + memberName + '" returns injected value'
-			);
-		};
-	}
 
 	QUnit.test( 'Changing state after construction', function( assert ) {
 		var state = {},

@@ -30,7 +30,7 @@ function valueDescription( value ) {
   * @param {Object} testDefinition See testExpert.basicTestDefinition for documentation.
   */
 function testExpert( testDefinition ) {
-	 // Throw error if something is wrong with given test definition:
+	// Throw error if something is wrong with given test definition:
 	testExpert.verifyTestDefinition( testDefinition );
 
 	var Expert = testDefinition.expertConstructor,
@@ -313,7 +313,7 @@ testExpert.basicTestDefinition = {
 			new function NotSoPlainObject() {}(), // not-so-plain object
 			/regex/, // regex
 			$.noop, // function
-			Number['NaN'] // NaN
+			Number.NaN // NaN
 		]
 	},
 	/**

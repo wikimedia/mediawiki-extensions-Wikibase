@@ -187,7 +187,7 @@
 				self._trigger( 'auto' );
 			} )
 			.addClass( 'ui-state-active' );
-			this.$auto.children( 'span' ).text( this.options.messages['auto'] );
+			this.$auto.children( 'span' ).text( this.options.messages.auto );
 
 			// Construct the basic sections:
 			this.$curr = this._createSection( 'curr', function( event ) {

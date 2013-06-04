@@ -423,17 +423,14 @@
 		 * @return {String}
 		 */
 		getWidthFor: function( text ) {
-			var input = this.input,
-				ruler = this.$rulerX;
-
-			ruler.html( text // escape stuff
+			this.$rulerX.html( text // escape stuff
 				.replace(/&/g, '&amp;')
 				.replace(/</g, '&lt;')
 				.replace(/>/g, '&gt;')
 				.replace(/\s/g,'&nbsp;')
 			);
 
-			return ruler.width();
+			return this.$rulerX.width();
 		},
 
 		/**
@@ -448,8 +445,7 @@
 			if ( !active ) {
 				active = true;
 
-				var input = this.input[0],
-					ruler = this.$rulerY[0];
+				var ruler = this.$rulerY[0];
 
 				ruler.value = text;
 

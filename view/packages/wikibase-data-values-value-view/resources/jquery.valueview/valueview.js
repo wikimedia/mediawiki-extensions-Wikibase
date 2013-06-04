@@ -23,6 +23,6 @@
 	$.valueview.valueview = $.valueview; // simulate namespace nevertheless in case jQuery requires it
 
 	// Allow to query for ":valueview" isntead of ":valueview-valueview" (as defined by jQuery.widget):
-	$.expr[ ":" ].valueview = $.expr[ ":" ][ 'valueview-valueview' ];
+	$.expr[ ':' ].valueview = $.expr[ ':' ][ 'valueview-valueview' ];
 
 }( jQuery ) );

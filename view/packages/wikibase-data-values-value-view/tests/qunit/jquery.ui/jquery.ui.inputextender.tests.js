@@ -18,7 +18,7 @@
 		if( !options ) {
 			options = {
 				content: [ $( '<span/>' ).addClass( 'defaultContent' ).text( 'default content' ) ]
-			}
+			};
 		}
 
 		var $input = $( '<input/>' )

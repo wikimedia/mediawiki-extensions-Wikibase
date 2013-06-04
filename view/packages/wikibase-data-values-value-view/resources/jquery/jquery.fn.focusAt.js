@@ -17,7 +17,7 @@
 jQuery.fn.focusAt = ( function( $ ) {
 	'use strict';
 
-	return function( position ) {
+	var focusAt = function focusAt( position ) {
 		// If we have a collection of elements, only consider the first one, just like the native
 		// jQuery.fn.focus does.
 		var $elem = this.eq( 0 );
@@ -97,5 +97,7 @@ jQuery.fn.focusAt = ( function( $ ) {
 			}
 		}
 	}
+
+	return focusAt;
 
 }( jQuery ) );

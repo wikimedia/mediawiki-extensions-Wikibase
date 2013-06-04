@@ -33,9 +33,9 @@
 		 * @param {String} text
 		 * @return {Number} Amount of the changed size in pixels
 		 */
-		$input.test_insert = function( text ) {
+		$input.testInsert = function( text ) {
 			this.val( text );
-			return this.test_trigger();
+			return this.testTrigger();
 		};
 
 		/**
@@ -43,7 +43,7 @@
 		 *
 		 * @return {*}
 		 */
-		$input.test_trigger = function() {
+		$input.testTrigger = function() {
 			var autoExpand = this.data( 'AutoExpandInput' );
 			return autoExpand.expand();
 		};
@@ -69,9 +69,9 @@
 		 * @param {String} text
 		 * @return {Number} Amount of the changed size in pixels
 		 */
-		$textarea.test_insert = function( text ) {
+		$textarea.testInsert = function( text ) {
 			this.text( text );
-			return this.test_trigger();
+			return this.testTrigger();
 		};
 
 		/**
@@ -79,7 +79,7 @@
 		 *
 		 * @return {*}
 		 */
-		$textarea.test_trigger = function() {
+		$textarea.testTrigger = function() {
 			var autoExpand = this.data( 'AutoExpandInput' );
 			return autoExpand.expand();
 		};
@@ -101,7 +101,7 @@
 		);
 
 		assert.ok(
-			subject.test_insert( 'AA' ) > 0,
+			subject.testInsert( 'AA' ) > 0,
 			'Input field has grown after longer string was inserted'
 		);
 
@@ -109,19 +109,19 @@
 		subject.attr( 'placeholder', 'AA BB CC' );
 
 		assert.ok(
-			subject.test_trigger() > 0,
+			subject.testTrigger() > 0,
 			'Input field has grown after long placeholder was inserted'
 		);
 
 		assert.equal(
-			subject.test_insert( '' ),
+			subject.testInsert( '' ),
 			0,
 			'Remove input fields text, size shouldn\'t change since we still have a placeholder'
 		);
 
 		// remove placeholder
 		subject.attr( 'placeholder', null );
-		subject.test_trigger();
+		subject.testTrigger();
 
 		assert.equal(
 			subject.data( 'AutoExpandInput' ).getWidth(),
@@ -141,7 +141,7 @@
 
 		var initialHeight = subject.height();
 
-		subject.test_insert( 'a\na' );
+		subject.testInsert( 'a\na' );
 
 		assert.ok(
 			subject.height() > initialHeight,
@@ -150,14 +150,14 @@
 
 		var cachedHeight = subject.height();
 
-		subject.test_insert( 'a\naa' );
+		subject.testInsert( 'a\naa' );
 
 		assert.ok(
-			 subject.height() === cachedHeight,
+			subject.height() === cachedHeight,
 			'Not growing when adding another character on the same line.'
 		);
 
-		subject.test_insert( '' );
+		subject.testInsert( '' );
 
 		assert.ok(
 			subject.height() === initialHeight,
