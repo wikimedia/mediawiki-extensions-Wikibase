@@ -58,7 +58,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$entityIdParser = $repo->getEntityIdParser();
 		$entityIdFormatter = $repo->getIdFormatter();
 
-		$service = new EntityDataSerializationService(
+		$serializationService = new EntityDataSerializationService(
 			$repo->getRdfBaseURI(),
 			$this->getTitle()->getCanonicalURL() . '/',
 			\Wikibase\StoreFactory::getStore()->getEntityLookup(),
@@ -68,16 +68,34 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$maxAge = \Wikibase\Settings::get( 'dataSquidMaxage' );
 		$formats = \Wikibase\Settings::get( 'entityDataFormats' );
-		$service->setFormatWhiteList( $formats );
+		$serializationService->setFormatWhiteList( $formats );
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
 
-		$this->requestHandler = new \Wikibase\EntityDataRequestHandler(
+		// build a mapping of formats to file extensions and include HTML
+		$supportedExtensions = array();
+		$supportedExtensions['html'] = 'html';
+		foreach ( $serializationService->getSupportedFormats() as $format ) {
+			$ext = $serializationService->getExtension( $format );
+
+			if ( $ext !== null ) {
+				$supportedExtensions[$format] = $ext;
+			}
+		}
+
+		$uriManager = new \Wikibase\EntityDataUriManager(
 			$this->getTitle(),
+			$supportedExtensions,
+			$entityIdFormatter,
+			$entityContentFactory
+		);
+		
+		$this->requestHandler = new \Wikibase\EntityDataRequestHandler(
+			$uriManager,
 			$entityContentFactory,
 			$entityIdParser,
 			$entityIdFormatter,
-			$service,
+			$serializationService,
 			$defaultFormat,
 			$maxAge,
 			$wgUseSquid,

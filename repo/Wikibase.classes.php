@@ -123,6 +123,7 @@ return call_user_func( function() {
 		'SpecialEntityData' => 'includes/specials/SpecialEntityData.php',
 		'Wikibase\EntityDataSerializationService' => 'includes/linkeddata/EntityDataSerializationService.php',
 		'Wikibase\EntityDataRequestHandler' => 'includes/linkeddata/EntityDataRequestHandler.php',
+		'Wikibase\EntityDataUriManager' => 'includes/linkeddata/EntityDataUriManager.php',
 
 		// includes/store
 		'Wikibase\EntityPerPage' => 'includes/store/EntityPerPage.php',
