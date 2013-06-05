@@ -67,46 +67,6 @@ this.globeCoordinate = ( function() {
 		},
 
 		/**
-		 * Returns the given precision increased by one step or -1 if the current precision is
-		 * invalid.
-		 *
-		 * @param {number} precision
-		 * @return {number}
-		 */
-		increasePrecision: function( precision ) {
-			var index = this.getPrecisionIndex( precision );
-
-			// Current precision is invalid:
-			if( index === -1 ) {
-				return -1;
-			}
-
-			return ( index + 1 < this.settings.precisions.length )
-				? this.settings.precisions[index + 1].level
-				: precision; // Highest precision is set already.
-		},
-
-		/**
-		 * Returns the given precision decreased by one step or -1 if the current precision is
-		 * invalid.
-		 *
-		 * @param {number} precision
-		 * @return {number}
-		 */
-		decreasePrecision: function( precision ) {
-			var index = this.getPrecisionIndex( precision );
-
-			// Current precision is invalid:
-			if( index === -1 ) {
-				return -1;
-			}
-
-			return ( index - 1 >= 0 )
-				? this.settings.precisions[index - 1].level
-				: precision; // Lowest precision is set already.
-		},
-
-		/**
 		 * Returns a precision's string representation.
 		 *
 		 * @param {number} precision

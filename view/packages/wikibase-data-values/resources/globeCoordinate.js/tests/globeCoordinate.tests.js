@@ -15,8 +15,6 @@
 		0: {
 			tech: '±0°',
 			earth: '1 mm',
-			increased: -1,
-			decreased: -1,
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
@@ -30,8 +28,6 @@
 		1: {
 			tech: 1,
 			earth: '100 km',
-			increased: 0.1,
-			decreased: 10,
 			toDecimal: [0, 0, 0, 1, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
@@ -45,8 +41,6 @@
 		2: {
 			tech: '±2°',
 			earth: '200 km',
-			increased: -1,
-			decreased: -1,
 			toDecimal: [0, 0, 0, 1, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
@@ -60,8 +54,6 @@
 		1.00000001: {
 			tech: 1,
 			earth: '100 km',
-			increased: 0.1,
-			decreased: 10,
 			toDecimal: [0, 0, 0, 1, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
@@ -75,8 +67,6 @@
 		0.016666666666666666: {
 			tech: 1 / 60,
 			earth: '2 km',
-			increased: 0.01,
-			decreased: 0.1,
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: 0, second: undefined },
@@ -90,8 +80,6 @@
 		2.7777777777777776e-7: {
 			tech: 1 / 3600000,
 			earth: '3 cm',
-			increased: 0.000001,
-			decreased: 0.00001,
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
@@ -105,8 +93,6 @@
 		1.0000000001e-10: {
 			tech: '±1.0000000001e-10°',
 			earth: '1 mm',
-			increased: -1,
-			decreased: -1,
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
@@ -120,8 +106,6 @@
 		1.0000001: {
 			tech: '±1.0000001°',
 			earth: '100 km',
-			increased: -1,
-			decreased: -1,
 			toDecimal: [0, 0, 0, 1, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
@@ -135,8 +119,6 @@
 		1.1: {
 			tech: '±1.1°',
 			earth: '100 km',
-			increased: -1,
-			decreased: -1,
 			toDecimal: [0, 0, 0, 1, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
@@ -196,26 +178,6 @@
 					expected.earth,
 					'Precision text for \'' + precision + '\' results in text \'' + expected.earth + '\'.'
 				);
-
-		} );
-
-	} );
-
-	QUnit.test( 'Increase and decrease precision', function( assert ) {
-
-		$.each( precisions, function( precision, expected ) {
-
-			assert.strictEqual(
-				globeCoordinate.increasePrecision( precision ),
-				expected.increased,
-				'Increased precision \'' + precision + '\' to \'' + expected.increased + '\'.'
-			);
-
-			assert.strictEqual(
-				globeCoordinate.decreasePrecision( precision ),
-				expected.decreased,
-				'Decreased precision \'' + precision + '\' to \'' + expected.decreased + '\'.'
-			);
 
 		} );
 
