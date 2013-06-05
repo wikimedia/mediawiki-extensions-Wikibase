@@ -88,7 +88,7 @@ class GeoCoordinateValue extends DataValueObject {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $latitude, $longitude, $altitude = null, $globe = 'earth', $precision = null ) {
+	public function __construct( $latitude, $longitude, $altitude = null, $globe = 'http://www.wikidata.org/entity/Q2', $precision = null ) {
 		// TODO: validate those values!
 		if ( is_int( $latitude ) ) {
 			$latitude = (float)$latitude;
@@ -118,6 +118,10 @@ class GeoCoordinateValue extends DataValueObject {
 			throw new InvalidArgumentException( 'Can only construct GeoCoordinateValue with a numeric altitude' );
 		}
 
+		if ( $precision !== null && !is_float( $precision ) ) {
+			throw new InvalidArgumentException( 'Can only construct GeoCoordinateValue with a numeric precision' );
+		}
+
 		if ( !is_string( $globe ) && $globe !== null ) {
 			throw new InvalidArgumentException( 'Can only construct GeoCoordinateValue with a string or null globe parameter' );
 		}
@@ -137,20 +141,7 @@ class GeoCoordinateValue extends DataValueObject {
 	 * @return string
 	 */
 	public function serialize() {
-		$data = array(
-			$this->latitude,
-			$this->longitude
-		);
-
-		if ( $this->globe !== 'earth' || $this->altitude !== null ) {
-			$data[] = $this->altitude;
-		}
-
-		if ( $this->globe !== 'earth' ) {
-			$data[] = $this->globe;
-		}
-
-		return implode( '|', $data );
+		return json_encode( array_values( $this->getArrayValue() ) );
 	}
 
 	/**
@@ -160,22 +151,12 @@ class GeoCoordinateValue extends DataValueObject {
 	 *
 	 * @param string $value
 	 *
-	 * @return MonolingualTextValue
+	 * @return GeoCoordinateValue
 	 * @throws InvalidArgumentException
 	 */
 	public function unserialize( $value ) {
-		$data = explode( '|', $value, 4 );
-
-		if ( count( $data ) < 2 ) {
-			throw new InvalidArgumentException( 'Invalid serialization provided in ' . __METHOD__ );
-		}
-
-		$this->__construct(
-			(float)$data[0],
-			(float)$data[1],
-			array_key_exists( 2, $data ) ? (float)$data[2] : null,
-			array_key_exists( 3, $data ) ? $data[3] : 'earth'
-		);
+		list( $latitude, $longitude, $altitude, $globe, $precision ) = json_decode( $value );
+		$this->__construct( $latitude, $longitude, $altitude, $globe, $precision );
 	}
 
 	/**
