@@ -163,6 +163,24 @@
     },
     {
       "key": {
+        "uuid": "DxyGAWEk",
+        "filename": "DataModel/DataModel.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-06-05T11:06:57Z",
+      "side": 1,
+      "message": "1. I don\u0027t think that this is not going to happen. Why not?\n2. It might be perfectionist, but I still see not having them in Special:Version at all as an option - that\u0027s a non perfectionist approach I am offering you, right? I\u0027d just consider it preferable to spamming Special:Version information relevant for the common user with detail information. It even seems like I am not the only one feeling this way.",
+      "parentUuid": "Dx95-4WE",
+      "revId": "6593eb3eee98360be0c38b335349a4985bdf29bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxV-EXZM",
         "filename": "DataModel/DataModel.mw.php",
         "patchSetId": 1
