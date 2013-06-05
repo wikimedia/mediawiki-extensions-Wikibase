@@ -103,7 +103,7 @@
 	/**
 	 * @see dv.DataValue.TYPE
 	 */
-	SELF.TYPE = 'geocoordinate';
+	SELF.TYPE = 'globecoordinate';
 
 	dv.registerDataValue( SELF );
 

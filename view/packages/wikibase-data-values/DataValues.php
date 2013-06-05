@@ -69,7 +69,7 @@ global $wgDataValues;
 $wgDataValues = array();
 
 $wgDataValues['boolean'] = 'DataValues\BooleanValue';
-$wgDataValues['geocoordinate'] = 'DataValues\GeoCoordinateValue';
+$wgDataValues['globecoordinate'] = 'DataValues\GeoCoordinateValue';
 $wgDataValues['iri'] = 'DataValues\IriValue';
 $wgDataValues['monolingualtext'] = 'DataValues\MonolingualTextValue';
 $wgDataValues['multilingualtext'] = 'DataValues\MultilingualTextValue';

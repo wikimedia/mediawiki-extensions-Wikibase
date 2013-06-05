@@ -186,7 +186,7 @@ class GeoCoordinateValue extends DataValueObject {
 	 * @return string
 	 */
 	public function getType() {
-		return 'geocoordinate';
+		return 'globecoordinate';
 	}
 
 	/**
