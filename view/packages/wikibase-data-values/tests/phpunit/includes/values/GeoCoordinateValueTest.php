@@ -104,7 +104,7 @@ class GeoCoordinateValueTest extends DataValueTest {
 		$argLists[] = array( false, 42, 4.2, array() );
 		$argLists[] = array( false, 42, 4.2, 'foo' );
 
-		$argLists[] = array( true, 42, 4.2, 9000.1, 'earth' );
+		$argLists[] = array( true, 42, 4.2, 9000.1, 'http://www.wikidata.org/entity/Q2' );
 		$argLists[] = array( true, 42, 4.2, 9000.1, null );
 		$argLists[] = array( true, 4.2, 42, 9000.1, 'terminus' );
 		$argLists[] = array( true, 4.2, 42, 0, "Schar's World" );
@@ -168,7 +168,7 @@ class GeoCoordinateValueTest extends DataValueTest {
 	 * @param array $arguments
 	 */
 	public function testGetGlobe( GeoCoordinateValue $geoCoord, array $arguments ) {
-		$expected = array_key_exists( 3, $arguments ) ? $arguments[3] : 'earth';
+		$expected = array_key_exists( 3, $arguments ) ? $arguments[3] : 'http://www.wikidata.org/entity/Q2';
 		$actual = $geoCoord->getGlobe();
 
 		$this->assertTrue(
