@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dx2cicAY",
+        "filename": "DataModel/DataModel.classes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T18:19:37Z",
+      "side": 1,
+      "message": "I\u0027d like to change this all at once or not at all - more inconsistency is just plainful and confusing.",
+      "parentUuid": "Dx.fugCI",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx0f0lPA",
         "filename": "DataModel/DataModel/Entity/EntityRevision.php",
         "patchSetId": 2
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "Dx8d4pPI",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T18:19:37Z",
+      "side": 1,
+      "message": "There has to be a way to say \"give me the latest revision\". We can either have a special int value for that (e.g. 0), or a non-int value (e.g. null or false). \n\nI don\u0027t like \"magic\" values like 0 much, so false seems appropriate.\n\nAlso, this interface should closely resembe the EntityLookup interface. I don\u0027t want to be inconsistent. \n\nWe can change this from false to 0, but in a separate change, and in both interfaces, please.",
+      "parentUuid": "Dx2dFUBc",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx8dSZN0",
         "filename": "lib/includes/store/EntityRevisionLookup.php",
         "patchSetId": 2
@@ -98,6 +134,24 @@
       "writtenOn": "2013-06-05T17:15:23Z",
       "side": 1,
       "message": "Please do not return null on error - that is what exceptions are for. Returning null causes problems",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxyeJiO0",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T18:19:37Z",
+      "side": 1,
+      "message": "If you consider \"this revision does not exist\" an error, yes. \nGenerally, I feel getters can return null if the thing they were supposed to get isn\u0027t there. That\u0027s a matter of taste, I guess.\n\nBut I believe that this interface should be consistent with the EntityLookup interface. So I wouldn\u0027t like to change this behavior here and now.",
+      "parentUuid": "Dx8dSZN0",
       "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +175,24 @@
     },
     {
       "key": {
+        "uuid": "Dx6d1mPk",
+        "filename": "lib/includes/store/sql/CachingEntityLoader.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T18:19:37Z",
+      "side": 1,
+      "message": "?!",
+      "parentUuid": "Dx6dPWDQ",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxwddbOk",
         "filename": "lib/tests/phpunit/EntityLookupTest.php",
         "patchSetId": 2
@@ -132,6 +204,24 @@
       "writtenOn": "2013-06-05T17:15:23Z",
       "side": 1,
       "message": "Instead of putting a comment here, you can pass a string to the test method so that when it fails you get it as error message, rather then needing to figure out which comment here applies to you.",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxwdjrEY",
+        "filename": "lib/tests/phpunit/EntityLookupTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T18:19:37Z",
+      "side": 1,
+      "message": "True. I have been meaning to get into that habit. Perhaps now is a good time :)",
+      "parentUuid": "DxwddbOk",
       "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -166,6 +256,24 @@
       "writtenOn": "2013-06-05T17:15:23Z",
       "side": 1,
       "message": "You are already doing this here - more reason to leave it out of the constructor",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx2dUMFI",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T18:19:37Z",
+      "side": 1,
+      "message": "Well, this isn\u0027t the only caller. And validating and normalizing input in the constructor is fine I think, as long as it doesn\u0027t introduce dependencies or delays. wfTimestamp is a bit nasty, you are right about that.-",
+      "parentUuid": "Dxydc6Ok",
       "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
