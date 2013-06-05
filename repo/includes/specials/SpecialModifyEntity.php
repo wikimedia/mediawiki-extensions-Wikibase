@@ -1,6 +1,7 @@
 <?php
 
 use Wikibase\Autocomment;
+use Wikibase\Utils;
 
 /**
  * Abstract special page for modifing Wikibase entity.
@@ -285,7 +286,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	 * Checks if user is blocked, and if he is blocked throws a UserBlocked
 	 *
 	 * @todo factor out to have some generic code for all editing
-	 *       Wikibase pages to be able to use.  This applies to new entities also.
+	 *	   Wikibase pages to be able to use.  This applies to new entities also.
 	 *
 	 * @since 0.4
 	 */
@@ -293,5 +294,21 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 		if ( $this->getUser()->isBlocked() ) {
 			$this->displayBlockedError();
 		}
+	}
+
+	/**
+	 * Show the rights warning message
+	 *
+	 * @since 0.4
+	 */
+	public function showRightsMessage() {
+		$this->showErrorHTML(
+			Html::rawElement(
+				'p',
+				array(),
+				Utils::getRightsWarningMessage()->parse()
+			),
+			'warning'
+		);
 	}
 }

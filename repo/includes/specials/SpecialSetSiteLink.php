@@ -1,6 +1,7 @@
 <?php
 
 use Wikibase\SiteLink;
+use Wikibase\Utils;
 
 /**
  * Special page for setting the sitepage of a Wikibase entity.
@@ -97,6 +98,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$request = $this->getRequest();
 		// has to be checked before modifying but is no error
 		if ( $this->entityContent === null || !$this->isValidSiteId( $this->site ) || !$request->wasPosted() ) {
+			$this->showRightsMessage();
+
 			return false;
 		}
 
