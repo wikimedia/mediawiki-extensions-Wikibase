@@ -49,7 +49,7 @@ class GeoCoordinateHandlerTest extends DataValueHandlerTest {
 		$instances = array();
 
 		$defaultHandlers = new DataValueHandlers();
-		$instances[] = $defaultHandlers->getHandler( 'geocoordinate' );
+		$instances[] = $defaultHandlers->getHandler( 'globecoordinate' );
 
 		return $instances;
 	}

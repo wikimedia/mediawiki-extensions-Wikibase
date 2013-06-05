@@ -155,7 +155,7 @@ final class DataValueHandlers {
 			'text'
 		) );
 
-		$tables['geocoordinate'] = new GeoCoordinateHandler( new DataValueTable(
+		$tables['globecoordinate'] = new GeoCoordinateHandler( new DataValueTable(
 			new TableDefinition(
 				'geo',
 				array(
