@@ -1,7 +1,11 @@
 <?php
-namespace Wikibase;
+namespace Wikibase\LinkedData;
 
 use DataTypes\DataTypeFactory;
+use Wikibase\EntityContentFactory;
+use Wikibase\EntityId;
+use Wikibase\HttpAcceptNegotiator;
+use Wikibase\HttpAcceptParser;
 use \Wikibase\Lib\EntityIdParser;
 use \Wikibase\Lib\EntityIdFormatter;
 use \Title;
@@ -362,7 +366,7 @@ class EntityDataRequestHandler {
 	public function httpContentNegotiation( WebRequest $request, OutputPage $output, EntityId $id, $revision = 0 ) {
 		$headers = $request->getAllHeaders();
 		if ( isset( $headers['ACCEPT'] ) ) {
-			$parser = new \Wikibase\HttpAcceptParser();
+			$parser = new HttpAcceptParser();
 			$accept = $parser->parseWeights( $headers['ACCEPT'] );
 		} else {
 			// anything goes
@@ -382,7 +386,7 @@ class EntityDataRequestHandler {
 		$mimeTypes = $this->serializationService->getSupportedMimeTypes();
 		$mimeTypes[] = 'text/html'; // HTML is handled by the normal page URL
 
-		$negotiator = new \Wikibase\HttpAcceptNegotiator( $mimeTypes );
+		$negotiator = new HttpAcceptNegotiator( $mimeTypes );
 		$format = $negotiator->getBestSupportedKey( $accept, null );
 
 		if ( $format === null ) {

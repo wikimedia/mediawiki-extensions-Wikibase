@@ -1,13 +1,13 @@
 <?php
 
 use DataTypes\DataTypeFactory;
-use Wikibase\EntityDataRequestHandler;
-use \Wikibase\Lib\EntityIdParser;
-use \Wikibase\Lib\EntityIdFormatter;
-use \Wikibase\EntityContent;
-use \Wikibase\EntityContentFactory;
-use \Wikibase\RdfSerializer;
-use \Wikibase\EntityDataSerializationService;
+use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\EntityContent;
+use Wikibase\EntityContentFactory;
+use Wikibase\LinkedData\EntityDataRequestHandler;
+use Wikibase\LinkedData\EntityDataSerializationService;
+use Wikibase\RdfSerializer;
 
 /**
  * Special page to act as a data endpoint for the linked data web.
@@ -72,7 +72,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
 
-		$this->requestHandler = new \Wikibase\EntityDataRequestHandler(
+		$this->requestHandler = new EntityDataRequestHandler(
 			$this->getTitle(),
 			$entityContentFactory,
 			$entityIdParser,
@@ -117,13 +117,5 @@ class SpecialEntityData extends SpecialWikibasePage {
 		//TODO: show input form with selector for format and field for ID. Add some explanation,
 		//      point to meta-info like schema and license, and generally be a helpful data endpoint.
 		$this->getOutput()->showErrorPage( 'wikibase-entitydata-title', 'wikibase-entitydata-text' );
-	}
-
-	/**
-	 * Returns true iff RDF output is supported.
-	 * @return bool
-	 */
-	public function isRdfSupported() {
-		return $this->service->isRdfSupported();
 	}
 }
