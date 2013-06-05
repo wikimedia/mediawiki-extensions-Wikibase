@@ -251,15 +251,10 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 	 */
 	public function createForm( $legend = null, $additionalHtml = '' ) {
 		$this->getOutput()->addHTML(
-		/*
-				$this->msg( 'wikibase-newentity-intro' )->params(
-					Language::fetchLanguageName( $this->getLanguage()->getCode() )
-				)->text()
-				. */ 
 				Html::rawElement(
 					'div',
 					array(),
-					Utils::getRightsWarningMessage()
+					Utils::getRightsWarningMessage()->parse()
 				)
 				. Html::openElement(
 					'form',
