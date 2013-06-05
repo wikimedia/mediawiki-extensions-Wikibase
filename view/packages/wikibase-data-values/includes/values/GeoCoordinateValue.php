@@ -69,16 +69,27 @@ class GeoCoordinateValue extends DataValueObject {
 	protected $globe;
 
 	/**
+	 * The precision of the coordinate.
+	 *
+	 * @since 0.1
+	 *
+	 * @var float|null
+	 */
+	protected $precision;
+
+	/**
 	 * @since 0.1
 	 *
 	 * @param float|int $latitude
 	 * @param float|int $longitude
-	 * @param float|null $altitude
+	 * @param float|int|null $altitude
 	 * @param string|null $globe
+	 * @param float|int|null $precision
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $latitude, $longitude, $altitude = null, $globe = 'earth' ) {
+	public function __construct( $latitude, $longitude, $altitude = null, $globe = 'earth', $precision = null ) {
+		// TODO: validate those values!
 		if ( is_int( $latitude ) ) {
 			$latitude = (float)$latitude;
 		}
@@ -89,6 +100,10 @@ class GeoCoordinateValue extends DataValueObject {
 
 		if ( is_int( $altitude ) ) {
 			$altitude = (float)$altitude;
+		}
+
+		if( is_int( $precision ) ) {
+			$precision = (float)$precision;
 		}
 
 		if ( !is_float( $latitude ) ) {
@@ -110,9 +125,8 @@ class GeoCoordinateValue extends DataValueObject {
 		$this->latitude = $latitude;
 		$this->longitude = $longitude;
 		$this->altitude = $altitude;
-
 		$this->globe = $globe;
-
+		$this->precision = $precision;
 	}
 
 	/**
@@ -243,6 +257,20 @@ class GeoCoordinateValue extends DataValueObject {
 	}
 
 	/**
+	 * Returns the precision of the coordinate.
+	 *
+	 * TODO: Introduce some constants holding the different precisions and document. Sync with JS.
+	 *  Take Time as an example how to do this.
+	 *
+	 * @since 0.1
+	 *
+	 * @return float|null
+	 */
+	public function getPrecision() {
+		return $this->precision;
+	}
+
+	/**
 	 * @see DataValue::getArrayValue
 	 *
 	 * @since 0.1
@@ -255,6 +283,7 @@ class GeoCoordinateValue extends DataValueObject {
 			'longitude' => $this->longitude,
 			'altitude' => $this->altitude,
 			'globe' => $this->globe,
+			'precision' => $this->precision
 		);
 	}
 
@@ -269,7 +298,13 @@ class GeoCoordinateValue extends DataValueObject {
 	 * @return GeoCoordinateValue
 	 */
 	public static function newFromArray( array $data ) {
-		return new static( $data['latitude'], $data['longitude'], $data['altitude'], $data['globe'] );
+		return new static(
+			$data['latitude'],
+			$data['longitude'],
+			$data['altitude'],
+			$data['globe'],
+			$data['precision']
+		);
 	}
 
 }

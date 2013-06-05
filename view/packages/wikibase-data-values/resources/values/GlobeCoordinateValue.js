@@ -89,15 +89,11 @@
 	 * @see dv.DataValue.newFromJSON
 	 */
 	SELF.newFromJSON = function( json ) {
-		// The backend does not return precision, so we need to parse the coordinate values:
-		// TODO: Have the backend support precision
-		var precision = globeCoordinateParse( json.latitude + ', ' + json.longitude )[2];
-
 		var gc = new GlobeCoordinate( {
 			latitude: json.latitude,
 			longitude: json.longitude,
 			globe: json.globe,
-			precision: precision
+			precision: json.precision
 			// altitude: json.altitude, // TODO: make globeCoordinate.js support altitude
 		} );
 
