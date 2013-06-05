@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use Diff\Diff;
-use Diff\ListDiffer;
+use Diff\Differ;
 use Diff\DiffOpChange;
 
 /**
@@ -37,7 +37,7 @@ class ClaimDiffer {
 	/**
 	 * @since 0.4
 	 *
-	 * @var ListDiffer
+	 * @var Differ
 	 */
 	private $listDiffer;
 
@@ -46,9 +46,9 @@ class ClaimDiffer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param ListDiffer $listDiffer
+	 * @param Differ $listDiffer
 	 */
-	public function __construct( ListDiffer $listDiffer ) {
+	public function __construct( Differ $listDiffer ) {
 		$this->listDiffer = $listDiffer;
 	}
 
@@ -71,13 +71,12 @@ class ClaimDiffer {
 			$mainSnakChange = new DiffOpChange( $oldClaim->getMainSnak(), $newClaim->getMainSnak() );
 		}
 
-		$this->listDiffer->setComparisonCallback( function( \Comparable $old, \Comparable $new ) {
-			return $old->equals( $new );
-		} );
+		$oldQualifiers = iterator_to_array( $oldClaim->getQualifiers() );
+		$newQualifiers = iterator_to_array( $newClaim->getQualifiers() );
 
 		$qualifierChanges = new Diff( $this->listDiffer->doDiff(
-			iterator_to_array( $oldClaim->getQualifiers() ),
-			iterator_to_array( $newClaim->getQualifiers() )
+			$oldQualifiers,
+			$newQualifiers
 		), false );
 
 		if ( $oldClaim instanceof Statement && $newClaim instanceof Statement ) {

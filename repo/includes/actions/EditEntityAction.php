@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Diff\CallbackListDiffer;
 use  Html, Linker, Skin, Status, Revision;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -431,10 +432,14 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$langCode = $this->getContext()->getLanguage()->getCode();
 
+		$comparer = function( \Comparable $old, \Comparable $new ) {
+			return $old->equals( $new );
+		};
+
 		// TODO: derp inject the EntityDiffVisualizer
 		$diffVisualizer = new EntityDiffVisualizer(
 			$this->getContext(),
-			new ClaimDiffer( new \Diff\ListDiffer() ),
+			new ClaimDiffer( new CallbackListDiffer( $comparer ) ),
 			new ClaimDifferenceVisualizer(
 				new WikiPageEntityLookup(),
 				$langCode,
