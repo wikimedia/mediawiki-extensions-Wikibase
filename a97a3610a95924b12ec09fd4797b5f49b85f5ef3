@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dx.fugCI",
+        "filename": "DataModel/DataModel.classes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T17:15:23Z",
+      "side": 1,
+      "message": "Ahh, no PSR-0 compliance makes me cry :(",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx0f0lPA",
+        "filename": "DataModel/DataModel/Entity/EntityRevision.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T17:15:23Z",
+      "side": 1,
+      "message": "Why not on one line?",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxwc0TKk",
+        "filename": "DataModel/DataModel/Entity/EntityRevision.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T17:15:23Z",
+      "side": 1,
+      "message": "Why cast to an int if it is supposed to be an int? Better to have the caller make sure it is passing what this thing needs and throw an exception if it does not. Alternatively you can update the docs and specify it can also be a string - that is somewhat less nice though.",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxydDSBg",
+        "filename": "DataModel/DataModel/Entity/EntityRevision.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T17:15:23Z",
+      "side": 1,
+      "message": "The int cast is something so trivial that placing it in a constructor is perhaps not a real issue. Calling wfTimestamp is however doing work, and creating tight coupling. Why would this class need to depend on MW? ... And now I realize that this is in DataModel, that certainly is a no go, since this component should be usable without MW. ... Though this class seems misplaced then, better put it in lib.",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx2dFUBc",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T17:15:23Z",
+      "side": 1,
+      "message": "Is this double function of the parameter needed? What about requiring a revision to always be given to this method?",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx8dSZN0",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T17:15:23Z",
+      "side": 1,
+      "message": "Please do not return null on error - that is what exceptions are for. Returning null causes problems",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx6dPWDQ",
+        "filename": "lib/includes/store/sql/CachingEntityLoader.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T17:15:23Z",
+      "side": 1,
+      "message": "?",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxwddbOk",
+        "filename": "lib/tests/phpunit/EntityLookupTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T17:15:23Z",
+      "side": 1,
+      "message": "Instead of putting a comment here, you can pass a string to the test method so that when it fails you get it as error message, rather then needing to figure out which comment here applies to you.",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx0dXdMk",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T17:15:23Z",
+      "side": 1,
+      "message": "mhhh - the return null is also bad, though I suspect I introduced that way back :)",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dxydc6Ok",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T17:15:23Z",
+      "side": 1,
+      "message": "You are already doing this here - more reason to leave it out of the constructor",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
