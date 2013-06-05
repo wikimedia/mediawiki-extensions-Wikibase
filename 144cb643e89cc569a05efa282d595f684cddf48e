@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dx7ZObL8",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T10:01:38Z",
+      "side": 1,
+      "message": "please inject",
+      "revId": "144cb643e89cc569a05efa282d595f684cddf48e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxxbEgA8",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T10:01:38Z",
+      "side": 1,
+      "message": "please inject and use an EntityIdParser",
+      "revId": "144cb643e89cc569a05efa282d595f684cddf48e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx-bI9CQ",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T10:01:38Z",
+      "side": 1,
+      "message": "If  $entityContent is null, the ID should be removed from entity_per_page, I suppose. We should at least report this, something must be wrong.",
+      "revId": "144cb643e89cc569a05efa282d595f684cddf48e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx1bOCC8",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T10:01:38Z",
+      "side": 1,
+      "message": "Gah, this code really needs a good place in core :/",
+      "revId": "144cb643e89cc569a05efa282d595f684cddf48e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxzbTfNY",
+        "filename": "repo/maintenance/rebuildEntityPerPage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T10:01:38Z",
+      "side": 1,
+      "message": "Inverse logic? if --only-missing is set, $onlyMissing becomes false?",
+      "revId": "144cb643e89cc569a05efa282d595f684cddf48e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx5bYkO8",
+        "filename": "repo/maintenance/rebuildEntityPerPage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T10:01:38Z",
+      "side": 1,
+      "message": "So, perhaps $onlyMissing is simply misnamed? Or it should be inverted here, not when getting the option above.",
+      "revId": "144cb643e89cc569a05efa282d595f684cddf48e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DxxbtoI8",
+        "filename": "repo/tests/phpunit/includes/store/sql/EntityPerPageBuilderTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T10:01:38Z",
+      "side": 1,
+      "message": "$offset??",
+      "revId": "144cb643e89cc569a05efa282d595f684cddf48e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx-bxFGs",
+        "filename": "repo/tests/phpunit/includes/store/sql/EntityPerPageBuilderTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T10:01:38Z",
+      "side": 1,
+      "message": "Killing all entries with an even id would be easier :)",
+      "revId": "144cb643e89cc569a05efa282d595f684cddf48e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx1bnKK8",
+        "filename": "repo/tests/phpunit/includes/store/sql/EntityPerPageBuilderTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-05T10:01:38Z",
+      "side": 1,
+      "message": "This isn\u0027t really under test here, is it? Not a problem, i\u0027d just put something like //sanity check there.",
+      "revId": "144cb643e89cc569a05efa282d595f684cddf48e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
