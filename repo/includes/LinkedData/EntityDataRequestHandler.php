@@ -2,6 +2,7 @@
 namespace Wikibase\LinkedData;
 
 use DataTypes\DataTypeFactory;
+use ValueParsers\ParseException;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityId;
 use Wikibase\HttpAcceptNegotiator;
@@ -42,6 +43,11 @@ class EntityDataRequestHandler {
 	protected $serializationService;
 
 	/**
+	 * @var EntityDataUriManager
+	 */
+	protected $uriManager;
+
+	/**
 	 * @var EntityIdParser
 	 */
 	protected $entityIdParser;
@@ -74,7 +80,7 @@ class EntityDataRequestHandler {
 	/**
 	 * @since 0.4
 	 *
-	 * @param Title                          $interfaceTitle for building canonical URLs
+	 * @param EntityDataUriManager           $uriManager
 	 * @param EntityContentFactory           $entityContentFactory
 	 * @param EntityIdParser                 $entityIdParser
 	 * @param EntityIdFormatter              $entityIdFormatter
@@ -85,7 +91,7 @@ class EntityDataRequestHandler {
 	 * @param string|null                    $frameOptionsHeader for X-Frame-Options
 	 */
 	public function __construct(
-		Title $interfaceTitle,
+		EntityDataUriManager $uriManager,
 		EntityContentFactory $entityContentFactory,
 		EntityIdParser $entityIdParser,
 		EntityIdFormatter $entityIdFormatter,
@@ -95,7 +101,7 @@ class EntityDataRequestHandler {
 		$useSquids,
 		$frameOptionsHeader
 	) {
-		$this->interfaceTitle = $interfaceTitle;
+		$this->uriManager = $uriManager;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdFormatter = $entityIdFormatter;
@@ -165,29 +171,17 @@ class EntityDataRequestHandler {
 	 */
 	public function handleRequest( $doc, WebRequest $request, OutputPage $output ) {
 		$revision = 0;
-		$format = '';
 
-		$requestedDoc = $doc;
+		list( $id, $format ) = $this->uriManager->parseDocName( $doc );
 
-		// get format from $doc or request param
-		if ( preg_match( '#\.([-./\w]+)$#', $doc, $m ) ) {
-			$doc = preg_replace( '#\.([-./\w]+)$#', '', $doc );
-			$format = $m[1];
-		}
-
+		// get entity id and format from request parameter
 		$format = $request->getText( 'format', $format );
-
-		//TODO: malformed revision IDs should trigger a code 400
-
+		$id = $request->getText( 'id', $id );
 		$revision = $request->getInt( 'oldid', $revision );
 		$revision = $request->getInt( 'revision', $revision );
+		//TODO: malformed revision IDs should trigger a code 400
 
-		// get entity from remaining $doc or request param
-		$id = $doc;
-		$id = $request->getText( 'id', $id );
-
-		// If there is no ID, show an HTML form
-		// TODO: Don't do this if HTML is not acceptable according to HTTP headers.
+		// If there is no ID, fail
 		if ( $id === null || $id === '' ) {
 			//TODO: different error message?
 			throw new \HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
@@ -195,13 +189,13 @@ class EntityDataRequestHandler {
 
 		try {
 			$entityId = $this->entityIdParser->parse( $id );
-		} catch ( \ValueParsers\ParseException $ex ) {
+		} catch ( ParseException $ex ) {
 			throw new \HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
 		}
 
 		//XXX: allow for logged in users only?
 		if ( $request->getText( 'action' ) === 'purge' ) {
-			$this->purge( $entityId, $format, $revision );
+			$this->purgeWebCache( $entityId );
 			//XXX: Now what? Proceed to show the data?
 		}
 
@@ -218,12 +212,12 @@ class EntityDataRequestHandler {
 		// we should know the format now.
 		assert( $format !== null && $format !== '' );
 
-		if ( $requestedDoc !== null && $requestedDoc !== '' ) {
+		if ( $doc !== null && $doc !== '' ) {
 			// if subpage syntax is used, always enforce the canonical form
-			$canonicalDoc = $this->getDocName( $entityId, $format, $revision );
+			$canonicalDoc = $this->uriManager->getDocName( $entityId, $format );
 
-			if ( $requestedDoc !== $canonicalDoc ) {
-				$url = $this->getCanonicalUrl( $entityId, $format, $revision );
+			if ( $doc !== $canonicalDoc ) {
+				$url = $this->uriManager->getDocUrl( $entityId, $format, $revision );
 				$output->redirect( $url, 301 );
 				return;
 			}
@@ -231,7 +225,7 @@ class EntityDataRequestHandler {
 
 		// if the format is HTML, redirect to the entity's wiki page
 		if ( $format === 'html' ) {
-			$url = $this->getCanonicalUrl( $entityId, 'html', $revision );
+			$url = $this->uriManager->getDocUrl( $entityId, 'html', $revision );
 			$output->redirect( $url, 303 );
 			return;
 		}
@@ -270,72 +264,14 @@ class EntityDataRequestHandler {
 	 * Purges the entity data identified by the doc parameter from any HTTP caches.
 	 * Does nothing if $wgUseSquid is not set.
 	 *
-	 * @todo: how to test this?
-	 *
 	 * @param EntityId $id       The entity
-	 * @param string   $format   The (normalized) format name, or ''
 	 */
-	public function purge( EntityId $id, $format = '' ) {
-		if ( $this->useSquids ) {
-			//TODO: Purge all formats based on the ID, instead of just the one currently requested.
-			//TODO: Also purge when an entity gets edited, using the new TitleSquidURLs hook.
-			$title = $this->getDocTitle( $id, $format );
+	public function purgeWebCache( EntityId $id ) {
+		$urls = $this->uriManager->getCacheableUrls( $id );
 
-			$urls = array();
-			$urls[] = $title->getInternalURL();
-
-			$u = new SquidUpdate( $urls );
-			$u->doUpdate();
-		}
-	}
-
-	/**
-	 * Returns the canonical subpage name used to address a given set
-	 * of entity data.
-	 *
-	 * @param EntityId $id       The entity
-	 * @param string   $format   The (normalized) format name, or ''
-	 *
-	 * @return string
-	 */
-	public function getDocName( EntityId $id, $format = '' ) {
-		$doc = $this->entityIdFormatter->format( $id );
-
-		//TODO: Use upper case everywhere. EntityIdFormatter should do the right thing.
-		$doc = strtoupper( $doc );
-
-		if ( $format !== null && $format !== '' ) {
-			$ext = $this->serializationService->getExtension( $format );
-
-			if ( $ext === null ) {
-				// if no extension is known, use the format name as the extension
-				$ext = $format;
-			}
-
-			$doc .= '.' . $ext;
-		}
-
-		return $doc;
-	}
-
-	/**
-	 * Returns a Title representing the given document.
-	 *
-	 * @param EntityId $id       The entity
-	 * @param string   $format   The (normalized) format name, or ''
-	 *
-	 * @return Title
-	 */
-	public function getDocTitle( EntityId $id, $format = '' ) {
-		$doc = $this->getDocName( $id, $format );
-
-		$name = $this->interfaceTitle->getPrefixedText();
-		if ( $doc !== null && $doc !== '' ) {
-			$name .= '/' . $doc;
-		}
-
-		$title = Title::newFromText( $name );
-		return $title;
+		//TODO: use a factory or service, so we can mock & test this
+		$update = new SquidUpdate( $urls );
+		$update->doUpdate();
 	}
 
 	/**
@@ -383,40 +319,16 @@ class EntityDataRequestHandler {
 
 		$format = $this->getCanonicalFormat( $format );
 
-		$url = $this->getCanonicalUrl( $id, $format, $revision );
+		$url = $this->uriManager->getDocUrl( $id, $format, $revision );
 		$output->redirect( $url, 303 );
 		return;
 	}
 
 	/**
-	 * Returns the canonical URL for the given set of entity data.
-	 *
-	 * @param EntityId $id       The entity
-	 * @param string   $format   The (normalized) format name, or ''
-	 * @param int      $revision The revision ID (use 0 for current)
-	 *
-	 * @return string
-	 */
-	public function getCanonicalUrl( EntityId $id, $format = '', $revision = 0 ) {
-		if ( $format === 'html' ) {
-			//\Wikibase\EntityContentFactory::singleton()
-			$title = $this->entityContentFactory->getTitleForId( $id );
 		} else {
 			$title = $this->getDocTitle( $id, $format );
 		}
 
-		$params = '';
-
-		if ( $revision > 0 ) {
-			// Ugh, internal knowledge. Doesn't title have a better way to do this?
-			$params = 'oldid=' . $revision;
-		}
-
-		$url = $title->getFullURL( $params );
-		return $url;
-	}
-
-	/**
 	 * Output entity data.
 	 *
 	 * @param WebRequest $request
@@ -439,6 +351,7 @@ class EntityDataRequestHandler {
 
 		$page = $entity->getWikiPage();
 
+		// TODO: use EntityRevisionLookup to get the entity revision, pending change I762535bda41
 		if ( $revision > 0 ) {
 			// get the desired revision
 			$rev = Revision::newFromId( $revision );
@@ -499,6 +412,7 @@ class EntityDataRequestHandler {
 	public function outputData( WebRequest $request, WebResponse $response, $data, $contentType, Revision $revision = null ) {
 		// NOTE: similar code as in RawAction::onView, keep in sync.
 
+		//FIXME: do not cache if revision was requested explicitly!
 		$maxage = $request->getInt( 'maxage', $this->maxAge );
 		$smaxage = $request->getInt( 'smaxage', $this->maxAge );
 
