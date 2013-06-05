@@ -16,6 +16,24 @@
       "revId": "3bc67a85a930553bd263e2d557bb5a9a8e132174",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx4GszPA",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-05T11:03:15Z",
+      "side": 1,
+      "message": "no, this is duplicated. The same message is also put inside the form fieldset.  Not sure I like it this way, but not sure I like it squashed together with warning and rights messages either.  could use some thought, but showing it twice is even uglier.",
+      "parentUuid": "Dx0FxJKg",
+      "revId": "3bc67a85a930553bd263e2d557bb5a9a8e132174",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
