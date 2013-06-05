@@ -8,16 +8,16 @@ use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
-use Wikibase\EntityDataSerializationService;
-use \Wikibase\Item;
-use \Wikibase\ItemContent;
-use \Wikibase\EntityDataRequestHandler;
+use Wikibase\Item;
+use Wikibase\ItemContent;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdParser;
+use Wikibase\LinkedData\EntityDataSerializationService;
+use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\Property;
 
 /**
- * @covers \Wikibase\EntityDataRequestHandler
+ * @covers \Wikibase\LinkedData\EntityDataRequestHandler
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
