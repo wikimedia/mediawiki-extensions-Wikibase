@@ -393,6 +393,23 @@
     },
     {
       "key": {
+        "uuid": "Dx7ZoLIo",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2013-06-05T05:17:12Z",
+      "side": 1,
+      "message": "Will this fail if they do the page move on the client, then log out before the job queue runs?  If so, that\u0027s kind of unintuitive.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx4nE.GI",
         "filename": "lib/includes/UpdateRepoOnMoveJob.php",
         "patchSetId": 4
