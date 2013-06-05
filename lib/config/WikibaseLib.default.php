@@ -94,7 +94,6 @@ return call_user_func( function() {
 	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 		// experimental data types
 		$defaults['dataTypes'] = array_merge( $defaults['dataTypes'], array(
-			'globe-coordinate',
 			'quantity',
 			'monolingual-text',
 			'multilingual-text',
