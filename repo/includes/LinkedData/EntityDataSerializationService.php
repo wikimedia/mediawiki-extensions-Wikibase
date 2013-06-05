@@ -1,8 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\LinkedData;
 
 use \DataTypes\DataTypeFactory;
+use Wikibase\Entity;
+use Wikibase\EntityLookup;
 use \Wikibase\Lib\EntityIdFormatter;
 use \MWException;
 use \EasyRdf_Format;
@@ -16,6 +18,7 @@ use \DerivativeRequest;
 use \RequestContext;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\RdfSerializer;
 
 /**
  * Service for serializing entity data.
@@ -455,7 +458,7 @@ class EntityDataSerializationService {
 	 * @param string $formatName The desired serialization format,
 	 *           as a format name understood by ApiBase or EasyRdf_Format
 	 *
-	 * @return ApiFormatBase|null A suitable result printer, or null
+	 * @return \ApiFormatBase|null A suitable result printer, or null
 	 *           if the given format is not supported by the API.
 	 */
 	public function createApiSerializer( $formatName ) {
