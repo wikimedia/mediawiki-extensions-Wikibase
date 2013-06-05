@@ -445,7 +445,7 @@ $.widget( 'wikibase.linkitem', {
 					.empty()
 					.append(
 						$( '<div>' )
-							.html( mw.message( 'wikibase-linkitem-confirmitem-text', itemLink ).parse() )
+							.html( mw.message( 'wikibase-linkitem-confirmitem-text', itemLink, siteLinkCount ).parse() )
 					).append(
 						$( '<br />' )
 					)
