@@ -85,9 +85,11 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	/**
 	 * Output the query result
 	 *
+	 * @param array|String $query optional URL query parameter string
+	 *
 	 * @since 0.3
 	 */
-	protected function showQuery() {
+	protected function showQuery( array $query = array() ) {
 		$out = $this->getOutput();
 
 		if ( $this->limit == 0 && $this->offset == 0 ) {
@@ -107,7 +109,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 				$this->offset + 1 )->parseAsBlock() );
 			// Disable the "next" link when we reach the end
 			$paging = $this->getLanguage()->viewPrevNext( $this->getTitleForNavigation(), $this->offset,
-				$this->limit, array(), ( $this->numRows <= $this->limit ) );
+				$this->limit, $query, ( $this->numRows <= $this->limit ) );
 			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
 		} else {
 			// No results to show, so don't bother with "showing X of Y" etc.
