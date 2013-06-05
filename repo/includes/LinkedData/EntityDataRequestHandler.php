@@ -179,12 +179,6 @@ class EntityDataRequestHandler {
 
 		//TODO: malformed revision IDs should trigger a code 400
 
-		// get revision from $doc or request param
-		if ( preg_match( '#:(\w+)$#', $doc, $m ) ) {
-			$doc = preg_replace( '#:(\w+)$#', '', $doc );
-			$revision = (int)$m[1];
-		}
-
 		$revision = $request->getInt( 'oldid', $revision );
 		$revision = $request->getInt( 'revision', $revision );
 
@@ -280,13 +274,12 @@ class EntityDataRequestHandler {
 	 *
 	 * @param EntityId $id       The entity
 	 * @param string   $format   The (normalized) format name, or ''
-	 * @param int      $revision The revision ID (use 0 for current)
 	 */
-	public function purge( EntityId $id, $format = '', $revision = 0 ) {
+	public function purge( EntityId $id, $format = '' ) {
 		if ( $this->useSquids ) {
 			//TODO: Purge all formats based on the ID, instead of just the one currently requested.
 			//TODO: Also purge when an entity gets edited, using the new TitleSquidURLs hook.
-			$title = $this->getDocTitle( $id, $format, $revision );
+			$title = $this->getDocTitle( $id, $format );
 
 			$urls = array();
 			$urls[] = $title->getInternalURL();
@@ -302,19 +295,14 @@ class EntityDataRequestHandler {
 	 *
 	 * @param EntityId $id       The entity
 	 * @param string   $format   The (normalized) format name, or ''
-	 * @param int      $revision The revision ID (use 0 for current)
 	 *
 	 * @return string
 	 */
-	public function getDocName( EntityId $id, $format = '', $revision = 0 ) {
+	public function getDocName( EntityId $id, $format = '' ) {
 		$doc = $this->entityIdFormatter->format( $id );
 
 		//TODO: Use upper case everywhere. EntityIdFormatter should do the right thing.
 		$doc = strtoupper( $doc );
-
-		if ( $revision > 0 ) {
-			$doc .= ':' . $revision;
-		}
 
 		if ( $format !== null && $format !== '' ) {
 			$ext = $this->serializationService->getExtension( $format );
@@ -335,12 +323,11 @@ class EntityDataRequestHandler {
 	 *
 	 * @param EntityId $id       The entity
 	 * @param string   $format   The (normalized) format name, or ''
-	 * @param int      $revision The revision ID (use 0 for current)
 	 *
 	 * @return Title
 	 */
-	public function getDocTitle( EntityId $id, $format = '', $revision = 0 ) {
-		$doc = $this->getDocName( $id, $format, $revision );
+	public function getDocTitle( EntityId $id, $format = '' ) {
+		$doc = $this->getDocName( $id, $format );
 
 		$name = $this->interfaceTitle->getPrefixedText();
 		if ( $doc !== null && $doc !== '' ) {
@@ -414,19 +401,18 @@ class EntityDataRequestHandler {
 		if ( $format === 'html' ) {
 			//\Wikibase\EntityContentFactory::singleton()
 			$title = $this->entityContentFactory->getTitleForId( $id );
-			$params = '';
-
-			if ( $revision > 0 ) {
-				// Ugh, internal knowledge. Doesn't title have a better way to do this?
-				$params = 'oldid=' . $revision;
-			}
-
-			$url = $title->getFullURL( $params );
 		} else {
-			$title = $this->getDocTitle( $id, $format, $revision );
-			$url = $title->getFullURL();
+			$title = $this->getDocTitle( $id, $format );
 		}
 
+		$params = '';
+
+		if ( $revision > 0 ) {
+			// Ugh, internal knowledge. Doesn't title have a better way to do this?
+			$params = 'oldid=' . $revision;
+		}
+
+		$url = $title->getFullURL( $params );
 		return $url;
 	}
 
