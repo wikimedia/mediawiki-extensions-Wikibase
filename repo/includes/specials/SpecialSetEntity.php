@@ -103,19 +103,8 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 		$request = $this->getRequest();
 
 		if ( $this->entityContent === null || !$this->isValidLanguageCode( $this->language ) || !$request->wasPosted() ) {
-			$this->showErrorHTML(
-				Html::rawElement(
-					'p',
-					array(),
-					$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
-				)
-				. Html::rawElement(
-					'p',
-					array(),
-					Utils::getRightsWarningMessage()
-				),
-				'warning'
-			);
+			$this->showRightsMessage();
+
 			return false;
 		}
 
@@ -266,4 +255,20 @@ abstract class SpecialSetEntity extends SpecialModifyEntity {
 	 * @return Status
 	 */
 	abstract protected function setValue( $entityContent, $language, $value, &$summary );
+
+	/**
+	 * Show the rights warning message
+	 *
+	 * @since 0.4
+	 */
+	public function showRightsMessage() {
+		$this->showErrorHTML(
+			Html::rawElement(
+				'p',
+				array(),
+				Utils::getRightsWarningMessage()->parse()
+			),
+			'warning'
+		);
+	}
 }
