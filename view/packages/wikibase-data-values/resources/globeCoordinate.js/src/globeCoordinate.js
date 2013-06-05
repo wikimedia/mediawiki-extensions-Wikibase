@@ -36,14 +36,14 @@ this.globeCoordinate = ( function() {
 				{ level: 0.1 },
 				{ level: 1 / 60, text: 'to an arcminute' },
 				{ level: 0.01 },
-				{ level: 1 / 3600, text: 'to an arcsecond' },
 				{ level: 0.001 },
-				{ level: 1 / 36000, text: 'to 1/10 of an arcsecond' },
+				{ level: 1 / 3600, text: 'to an arcsecond' },
 				{ level: 0.0001 },
-				{ level: 1 / 360000, text: 'to 1/100 of an arcsecond' },
+				{ level: 1 / 36000, text: 'to 1/10 of an arcsecond' },
 				{ level: 0.00001 },
-				{ level: 1 / 3600000, text: 'to 1/1000 of an arcsecond' },
-				{ level: 0.000001 }
+				{ level: 1 / 360000, text: 'to 1/100 of an arcsecond' },
+				{ level: 0.000001 },
+				{ level: 1 / 3600000, text: 'to 1/1000 of an arcsecond' }
 			]
 		},
 
@@ -58,16 +58,17 @@ this.globeCoordinate = ( function() {
 			for( var i in this.settings.precisions ) {
 				if(
 					this.settings.precisions.hasOwnProperty( i )
-					&& this.settings.precisions[i].level === precision
+					&& Math.abs( precision - this.settings.precisions[i].level ) < 0.0000001
 				) {
-					return i;
+					return parseInt( i, 10 );
 				}
 			}
 			return -1;
 		},
 
 		/**
-		 * Returns the given precision increased by one step.
+		 * Returns the given precision increased by one step or -1 if the current precision is
+		 * invalid.
 		 *
 		 * @param {number} precision
 		 * @return {number}
@@ -75,34 +76,34 @@ this.globeCoordinate = ( function() {
 		increasePrecision: function( precision ) {
 			var index = this.getPrecisionIndex( precision );
 
-			if( index === this.settings.precisions.length - 1 || index === -1 ) {
-				var newPrecision = precision / 10;
-				return ( newPrecision < 1e-9 ) ? 1e-9 : newPrecision;
+			// Current precision is invalid:
+			if( index === -1 ) {
+				return -1;
 			}
 
-			return this.settings.precisions[index + 1].level;
+			return ( index + 1 < this.settings.precisions.length )
+				? this.settings.precisions[index + 1].level
+				: precision; // Highest precision is set already.
 		},
 
 		/**
-		 * Returns the given precision decreased by one step.
+		 * Returns the given precision decreased by one step or -1 if the current precision is
+		 * invalid.
 		 *
 		 * @param {number} precision
 		 * @return {number}
 		 */
 		decreasePrecision: function( precision ) {
-			if( precision < 1e-9) {
-				return 1e-9;
-			}
-
 			var index = this.getPrecisionIndex( precision );
 
-			if( index === 0 ) {
-				return 180;
-			} else if( index < 0 ) {
-				return Math.min( precision * 10, 180 );
+			// Current precision is invalid:
+			if( index === -1 ) {
+				return -1;
 			}
 
-			return this.settings.precisions[index-1].level;
+			return ( index - 1 >= 0 )
+				? this.settings.precisions[index - 1].level
+				: precision; // Lowest precision is set already.
 		},
 
 		/**
@@ -120,17 +121,14 @@ this.globeCoordinate = ( function() {
 				if(
 					this.settings.precisions.hasOwnProperty( i )
 					&& Math.abs( precision - this.settings.precisions[i].level ) < 0.0000001
+					&& this.settings.precisions[i].text
 				) {
 					precisionText = this.settings.precisions[i].text;
 				}
 			}
 
 			if( !precisionText ) {
-				if( precision < 9e-10 ) {
-					precision = 1e-9;
-				}
-				// 0x000B1 is the plus/minus sign
-				precisionText = String.fromCharCode( 0x00B1 ) + precision + this.settings.degree;
+				precisionText = '±' + precision + this.settings.degree;
 			}
 
 			return precisionText;

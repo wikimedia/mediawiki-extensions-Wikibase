@@ -13,10 +13,10 @@
 
 	var precisions = {
 		0: {
-			tech: String.fromCharCode( 0x00B1 ) + '1e-9°',
+			tech: '±0°',
 			earth: '1 mm',
-			increased: 1e-9,
-			decreased: 1e-9,
+			increased: -1,
+			decreased: -1,
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
@@ -43,10 +43,10 @@
 			]
 		},
 		2: {
-			tech: String.fromCharCode( 0x00B1 ) + '2°',
+			tech: '±2°',
 			earth: '200 km',
-			increased: 0.2,
-			decreased: 20,
+			increased: -1,
+			decreased: -1,
 			toDecimal: [0, 0, 0, 1, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
@@ -60,8 +60,8 @@
 		1.00000001: {
 			tech: 1,
 			earth: '100 km',
-			increased: 0.10000000099999999,
-			decreased: 10.0000001,
+			increased: 0.1,
+			decreased: 10,
 			toDecimal: [0, 0, 0, 1, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
@@ -75,8 +75,8 @@
 		0.016666666666666666: {
 			tech: 1 / 60,
 			earth: '2 km',
-			increased: 0.0016666666666666666,
-			decreased: 0.16666666666666666,
+			increased: 0.01,
+			decreased: 0.1,
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: 0, second: undefined },
@@ -90,8 +90,8 @@
 		2.7777777777777776e-7: {
 			tech: 1 / 3600000,
 			earth: '3 cm',
-			increased: 2.7777777777777777e-8,
-			decreased: 0.0000027777777777777775,
+			increased: 0.000001,
+			decreased: 0.00001,
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
@@ -103,10 +103,10 @@
 			]
 		},
 		1.0000000001e-10: {
-			tech: String.fromCharCode( 0x00B1 ) + '1e-9°',
+			tech: '±1.0000000001e-10°',
 			earth: '1 mm',
-			increased: 1e-9,
-			decreased: 1e-9,
+			increased: -1,
+			decreased: -1,
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
@@ -118,10 +118,10 @@
 			]
 		},
 		1.0000001: {
-			tech: String.fromCharCode( 0x00B1 ) + '1.0000001°',
+			tech: '±1.0000001°',
 			earth: '100 km',
-			increased: 0.10000001,
-			decreased: 10.000001000000001,
+			increased: -1,
+			decreased: -1,
 			toDecimal: [0, 0, 0, 1, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
@@ -133,10 +133,10 @@
 			]
 		},
 		1.1: {
-			tech: String.fromCharCode( 0x00B1 ) + '1.1°',
+			tech: '±1.1°',
 			earth: '100 km',
-			increased: 0.11000000000000001,
-			decreased: 11,
+			increased: -1,
+			decreased: -1,
 			toDecimal: [0, 0, 0, 1, 1, 10],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
