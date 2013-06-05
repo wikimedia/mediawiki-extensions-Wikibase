@@ -198,6 +198,9 @@ final class RepoHooks {
 			'content/PropertyContent',
 			'content/PropertyHandler',
 
+			'linkeddata/EntityDataSerializationService',
+			'linkeddata/EntityDataRequestHandler',
+
 			'rdf/RdfBuilder',
 			'rdf/RdfSerializer',
 
@@ -209,9 +212,6 @@ final class RepoHooks {
 			'specials/SpecialSetDescription',
 			'specials/SpecialSetLabel',
 			'specials/SpecialSetAliases',
-
-			'specials/EntityDataSerializationService',
-			'specials/EntityDataRequestHandler',
 
 			'store/IdGenerator',
 			'store/StoreFactory',

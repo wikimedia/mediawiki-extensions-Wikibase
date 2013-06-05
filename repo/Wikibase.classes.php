@@ -121,8 +121,8 @@ return call_user_func( function() {
 		'SpecialListDatatypes' => 'includes/specials/SpecialListDatatypes.php',
 		'SpecialDispatchStats' => 'includes/specials/SpecialDispatchStats.php',
 		'SpecialEntityData' => 'includes/specials/SpecialEntityData.php',
-		'Wikibase\EntityDataSerializationService' => 'includes/specials/EntityDataSerializationService.php',
-		'Wikibase\EntityDataRequestHandler' => 'includes/specials/EntityDataRequestHandler.php',
+		'Wikibase\EntityDataSerializationService' => 'includes/linkeddata/EntityDataSerializationService.php',
+		'Wikibase\EntityDataRequestHandler' => 'includes/linkeddata/EntityDataRequestHandler.php',
 
 		// includes/store
 		'Wikibase\EntityPerPage' => 'includes/store/EntityPerPage.php',
@@ -160,9 +160,9 @@ return call_user_func( function() {
 		'ObservableMessageReporter' => 'includes/MessageReporter.php',
 		'NullMessageReporter' => 'includes/MessageReporter.php',
 
-		'Wikibase\Test\EntityDataSerializationServiceTest' => 'tests/phpunit/includes/specials/EntityDataSerializationServiceTest.php',
-		'Wikibase\Test\EntityDataRequestHandlerTest' => 'tests/phpunit/includes/specials/EntityDataRequestHandlerTest.php',
-		'Wikibase\Test\EntityDataTestProvider' => 'tests/phpunit/includes/specials/EntityDataTestProvider.php',
+		'Wikibase\Test\EntityDataSerializationServiceTest' => 'tests/phpunit/includes/linkeddata/EntityDataSerializationServiceTest.php',
+		'Wikibase\Test\EntityDataRequestHandlerTest' => 'tests/phpunit/includes/linkeddata/EntityDataRequestHandlerTest.php',
+		'Wikibase\Test\EntityDataTestProvider' => 'tests/phpunit/includes/linkeddata/EntityDataTestProvider.php',
 	);
 
 
