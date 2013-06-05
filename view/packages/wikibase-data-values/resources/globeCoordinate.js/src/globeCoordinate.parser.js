@@ -12,6 +12,14 @@
  * @author Denny Vrandečić
  *
  * @dependency globeCoordinate
+ *
+ * TODO: Change the return value to be an object which can be passed into the
+ *  GlobeCoordinate constructor.
+ *
+ * TODO: Make the parser a constructor which can take options, instances then have a parse
+ *  function and we avoid global state for parser options.
+ *
+ * TODO: Make this parser more lightweight or properly use native PEG.js rather than modifying it.
  */
 globeCoordinate.parser = ( function( globeCoordinate ){
 	'use strict';
