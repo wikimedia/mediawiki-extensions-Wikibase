@@ -9,6 +9,7 @@ use ValueParsers\ParserOptions;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityDataSerializationService;
+use Wikibase\EntityDataUriManager;
 use \Wikibase\Item;
 use \Wikibase\ItemContent;
 use \Wikibase\EntityDataRequestHandler;
@@ -127,9 +128,28 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			)
 		);
 
+		$extensions = array(
+			// using the API
+			'json' => 'json', // default
+			'php' => 'php',
+			'xml' => 'xml',
+
+			// using easyRdf
+			'rdfxml' => 'rdf',
+			'n3' => 'n3',
+			'turtle' => 'ttl',
+			'ntriples' => 'n3',
+		);
+
+		$uriManager = new EntityDataUriManager(
+			$this->interfaceTitle,
+			$extensions,
+			$idFormatter,
+			$contentFactory
+		);
 
 		$handler = new EntityDataRequestHandler(
-			$this->interfaceTitle,
+			$uriManager,
 			$contentFactory,
 			$idParser,
 			$idFormatter,
