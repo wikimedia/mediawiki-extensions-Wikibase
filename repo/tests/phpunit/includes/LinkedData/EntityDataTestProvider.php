@@ -159,11 +159,6 @@ class EntityDataTestProvider {
 				unset( $case[1]['id'] );
 			}
 
-			if ( isset( $case[1]['revision'] ) ) {
-				$case[0] .= ':' . $case[1]['revision'];
-				unset( $case[1]['revision'] );
-			}
-
 			if ( isset( $case[1]['format'] ) ) {
 				if ( $case[4] === 200 && preg_match( '!/!', $case[1]['format'] ) ) {
 					// It's a mime type, so it will trigger a redirect to the canonical form
@@ -283,13 +278,13 @@ class EntityDataTestProvider {
 
 		// #27: /q5:1234.json does trigger a 301 to the correct rev
 		$cases[] = array(
-			'{lowertestitemid}:{testitemrev}.json',      // subpage
-			array(), // parameters
+			'{lowertestitemid}.json',      // subpage
+			array( 'revision' => '{testitemrev}' ), // parameters
 			array(), // headers
 			'!!', // output regex
 			301,  // http code
 			array( // headers
-				'Location' => '!{testitemid}:{testitemrev}\.json!'
+				'Location' => '!{testitemid}\.json[\?&]oldid={testitemrev}!'
 			)
 		);
 
