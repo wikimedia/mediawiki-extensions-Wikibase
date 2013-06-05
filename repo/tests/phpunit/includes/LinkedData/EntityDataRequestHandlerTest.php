@@ -14,6 +14,7 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataRequestHandler;
+use Wikibase\LinkedData\EntityDataUriManager;
 use Wikibase\Property;
 
 /**
@@ -127,9 +128,28 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			)
 		);
 
+		$extensions = array(
+			// using the API
+			'json' => 'json', // default
+			'php' => 'php',
+			'xml' => 'xml',
+
+			// using easyRdf
+			'rdfxml' => 'rdf',
+			'n3' => 'n3',
+			'turtle' => 'ttl',
+			'ntriples' => 'n3',
+		);
+
+		$uriManager = new EntityDataUriManager(
+			$this->interfaceTitle,
+			$extensions,
+			$idFormatter,
+			$contentFactory
+		);
 
 		$handler = new EntityDataRequestHandler(
-			$this->interfaceTitle,
+			$uriManager,
 			$contentFactory,
 			$idParser,
 			$idFormatter,

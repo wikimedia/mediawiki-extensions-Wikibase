@@ -127,6 +127,7 @@ return call_user_func( function() {
 		'SpecialEntityData' => 'includes/specials/SpecialEntityData.php',
 		'Wikibase\LinkedData\EntityDataSerializationService' => 'includes/LinkedData/EntityDataSerializationService.php',
 		'Wikibase\LinkedData\EntityDataRequestHandler' => 'includes/LinkedData/EntityDataRequestHandler.php',
+		'Wikibase\LinkedData\EntityDataUriManager' => 'includes/LinkedData/EntityDataUriManager.php',
 
 		// includes/store
 		'Wikibase\EntityPerPage' => 'includes/store/EntityPerPage.php',
