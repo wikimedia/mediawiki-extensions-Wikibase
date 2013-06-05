@@ -50,14 +50,9 @@ globeCoordinate.GlobeCoordinate = ( function( globeCcoordinate, globeCoordinateP
 		} else {
 			this._latitude = globeCoordinateDefinition.latitude;
 			this._longitude = globeCoordinateDefinition.longitude;
-
-			// The backend does not return precision, so we need to parse the coordinate values:
-			// TODO: Have the backend support precision
-			parsed = globeCoordinateParser.parse( this._latitude + ', ' + this._longitude );
-			this._precision = parsed[2];
-
-			// TODO: Capture altitude and globe
+			this._precision = globeCoordinateDefinition.precision;
 		}
+		// TODO: Capture altitude and globe
 
 		this._globe = 'http://wikidata.org/id/Q2'; // TODO: Support other globes
 	}
