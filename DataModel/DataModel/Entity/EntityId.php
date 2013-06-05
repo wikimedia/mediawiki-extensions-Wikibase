@@ -232,7 +232,7 @@ class EntityId extends \DataValues\DataValueObject {
 	 *
 	 * @return string
 	 */
-	public function getType() {
+	public static function getType() {
 		return 'wikibase-entityid';
 	}
 
