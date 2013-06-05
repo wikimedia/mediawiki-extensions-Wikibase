@@ -202,6 +202,7 @@ final class RepoHooks {
 
 			'LinkedData/EntityDataSerializationService',
 			'LinkedData/EntityDataRequestHandler',
+			'LinkedData/EntityDataUriManager',
 
 			'rdf/RdfBuilder',
 			'rdf/RdfSerializer',
