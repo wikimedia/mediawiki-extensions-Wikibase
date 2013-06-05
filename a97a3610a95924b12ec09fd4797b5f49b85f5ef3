@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "Dx6equBc",
+        "filename": "DataModel/DataModel.classes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T18:49:32Z",
+      "side": 1,
+      "message": "We cannot easily change this. Stuck with fail forever :(",
+      "parentUuid": "Dx2cicAY",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx0f0lPA",
         "filename": "DataModel/DataModel/Entity/EntityRevision.php",
         "patchSetId": 2
@@ -123,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "Dx0dD9G8",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T18:49:32Z",
+      "side": 1,
+      "message": "Better leave this explicit then changing it to 0.\n\nWhat about requiring the argument and adding a getLatestRevisionOfEntity method? Decreases what this method needs to do, and a call to getLatestRevisionOfEntity( $entityId ) is a lot clearer then getEntityRevision( $entityId, false )",
+      "parentUuid": "Dx8d4pPI",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx8dSZN0",
         "filename": "lib/includes/store/EntityRevisionLookup.php",
         "patchSetId": 2
@@ -158,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "DxycaKHg",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T18:49:32Z",
+      "side": 1,
+      "message": "This is not a \"getter\" under the definition of getter that I have. Anyway, I disagree with either interpretation, unless you have a getter that just returns a field that can happen to be null.\n\nThe difference between throwing an exception and returning null is not taste or cosmetic. The difference between returning null or false is ;p This causes actual problems. I\u0027ll make some presentation on the topic soonish, though can point you to a chapter in a book right now if you want to.\n\nThis is a different interface. Being consistent with problems elsewhere is a bad idea. Rather then learning from the mistake we are now bound to it? I hope not.",
+      "parentUuid": "DxyeJiO0",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx6dPWDQ",
         "filename": "lib/includes/store/sql/CachingEntityLoader.php",
         "patchSetId": 2
@@ -187,6 +241,24 @@
       "side": 1,
       "message": "?!",
       "parentUuid": "Dx6dPWDQ",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx4cPvDc",
+        "filename": "lib/includes/store/sql/CachingEntityLoader.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-05T18:49:32Z",
+      "side": 1,
+      "message": "~\u003d[,,_,,]:3",
+      "parentUuid": "Dx6d1mPk",
       "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
