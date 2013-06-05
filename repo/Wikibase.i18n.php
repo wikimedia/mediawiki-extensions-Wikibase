@@ -362,15 +362,14 @@ to find out where it went.',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Monolingual text',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Literal data field for a string that is not translated into other languages. This type of string is defined once and reused across all languages. Typical use is a geographical names written in the local language, an identifier of some kind, a chemical formula or a Latin scientific name.
 * language – explicit value for identifying the language for the text part
-* text – explicit value for the language specific variant string',
+* value – explicit value for the language specific variant string',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Multilingual text',
 	'wikibase-listdatatypes-multilingual-text-body' => 'Literal data field for a string that must be translated into other languages. Typical use is an entity name of global interest that has non-local written forms. Those can differ both in languages and script systems.
 * language – explicit value for identifying the language for the text part
-* text – explicit value for the language specific variant string',
+* value – explicit value for the language specific variant string',
 	'wikibase-listdatatypes-string-head' => 'String',
-	'wikibase-listdatatypes-string-body' => 'Literal data field for a string of characters. Typical use is identifiers that has written forms that does not depend on the language. Such strings can in some cases be transliterated into other script systems.
-* language – explicit value for identifying the language for the text part
-* text – explicit value for the language specific variant string',
+	'wikibase-listdatatypes-string-body' => 'Literal data field for a string of glyphs. Typical use are identifiers that have written forms which do not depend on the language of the reader.
+* value – explicit value for the language specific variant string',
 	'wikibase-listdatatypes-time-head' => 'Time',
 	'wikibase-listdatatypes-time-body' => 'Literal data field for a time value. Given as a time with some precision and boundaries. The time is always saved internally in the Proleptic Gregorian format, but can use other formats during parsing and formating.(?)
 * time – explicit value for point in time, represented per ISO8601, the year always having 11 digits and the date always being signed, in the format +00000002013-01-01T00:00:00Z
