@@ -788,7 +788,7 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbEntityId', $entity->getPrefixedId() );
 
 		// copyright warning message
-		$out->addJsConfigVars( 'wbCopyrightWarning', Utils::getRightsWarningMessage() );
+		$out->addJsConfigVars( 'wbCopyrightWarning', Utils::getRightsWarningMessage()->parse() );
 
 		$serializationOptions = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
 
