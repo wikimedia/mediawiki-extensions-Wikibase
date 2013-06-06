@@ -59,39 +59,15 @@ if ( defined( 'MW_PHPUNIT_TEST' ) ) {
  */
 $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreStart
-	$testFiles = array(
-		'Claim/ClaimAggregate',
-		'Claim/ClaimListAccess',
-		'Claim/Claims',
-		'Claim/Claim',
-		'Claim/Statement',
+	$directoryIterator = new RecursiveDirectoryIterator( __DIR__ . '/tests/phpunit/' );
 
-		'Entity/EntityId',
-		'Entity/ItemMultilangTexts',
-		'Entity/ItemNewEmpty',
-		'Entity/ItemNewFromArray',
-		'Entity/Item',
-		'Entity/Property',
-
-		'Snak/PropertyValueSnak',
-		'Snak/SnakList',
-		'Snak/Snak',
-
-		'ByPropertyIdArray',
-		'HashableObjectStorage',
-		'MapValueHasher',
-
-		'ReferenceList',
-		'Reference',
-
-		'SiteLink',
-
-		'hasharray/HashArrayWithoutDuplicates',
-		'hasharray/HashArrayWithDuplicates',
-	);
-
-	foreach ( $testFiles as $file ) {
-		$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';
+	/**
+	 * @var SplFileInfo $fileInfo
+	 */
+	foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
+		if ( substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
+			$files[] = $fileInfo->getPathname();
+		}
 	}
 
 	return true;
