@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dy-rnReU",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-06-06T20:19:36Z",
+      "side": 1,
+      "message": "should use htmlspecialchars!\n\nJust noticing that the messages here are not using that either... They don\u0027t returne html escaped text, do they? wfTemplate does not escape anything (since a parameter value might be HTML)!",
+      "revId": "93f8981b405a5b9ed585f3634e034a30c25bce7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
