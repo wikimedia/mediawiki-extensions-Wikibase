@@ -65,6 +65,9 @@ class PopulateSitesTable extends Maintenance {
 			$this->output( $e->getMessage() );
 		}
 
+
+		SiteSQLStore::newInstance()->getSites( 'recache' );
+
 		$this->output( "done.\n" );
 	}
 
