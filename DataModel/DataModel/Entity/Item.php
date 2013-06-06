@@ -97,21 +97,6 @@ class Item extends Entity {
 	}
 
 	/**
-	 * Replaces the currently set sitelinks with the provided ones.
-	 *
-	 * @since 0.4
-	 *
-	 * @param SiteLink[] $siteLinks
-	 */
-	public function setSiteLinks( array $siteLinks ) {
-		$this->data['links'] = array();
-
-		foreach ( $siteLinks as $siteLink ) {
-			$this->data['links'][$siteLink->getSite()->getGlobalId()] = $siteLink->getPage();
-		}
-	}
-
-	/**
 	 * Returns the site links in an associative array with the following format:
 	 * site id (str) => SiteLink
 	 *
