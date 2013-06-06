@@ -65,6 +65,7 @@ return call_user_func( function() {
 		'Wikibase\ReferenceList' => 'DataModel/ReferenceList.php',
 		'Wikibase\References' => 'DataModel/References.php',
 
+		'Wikibase\DataModel\SimpleSiteLink' => 'DataModel/SimpleSiteLink.php',
 		'Wikibase\SiteLink' => 'DataModel/SiteLink.php',
 	);
 
