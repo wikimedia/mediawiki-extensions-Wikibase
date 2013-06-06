@@ -181,7 +181,8 @@ this.globeCoordinate = ( function() {
 		 * @return {Object}
 		 */
 		toDegree: function( value, precision ) {
-			var result = {};
+			var value = Math.abs( value ),
+				result = {};
 
 			result.degree = Math.floor( value + 0.00000001 );
 

@@ -254,10 +254,10 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate, globeCoordinatePa
 			// There is no need to include minute in the result if minute and second have no value.
 			// If second has no value, it can be dropped anyway.
 			return ''
-				+ ( ( ( lat.degree < 0 ) ? '-' : '+' ) + pad( lat.degree, 2 ) )
+				+ ( ( ( this.getLatitude() < 0 ) ? '-' : '+' ) + pad( lat.degree, 2 ) )
 				+ ( ( lat.minute || lat.second ) ? pad( lat.minute, 2 ) : '' )
 				+ ( ( lat.second ) ? pad( lat.second, 2 ) : '' )
-				+ ( ( ( lon.degree < 0 ) ? '-' : '+' ) + pad( lon.degree, 3 ) )
+				+ ( ( ( this.getLongitude() < 0 ) ? '-' : '+' ) + pad( lon.degree, 3 ) )
 				+ ( ( lon.minute || lon.second ) ? pad( lon.minute, 2 ) : '' )
 				+ ( ( lon.second ) ? pad( lon.second, 2 ) : '' )
 				+ '/';

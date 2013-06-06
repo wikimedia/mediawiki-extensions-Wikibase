@@ -258,7 +258,7 @@
 		);
 
 		assert.equal(
-			globeCoordinate.degreeText( -10, -1.5, 0.1 ),
+			globeCoordinate.degreeText( -10, -2.5, 0.1 ),
 			'10°0\'S, 2°30\'W',
 			'Verified output: 10°0\'S, 2°30\'W'
 		);
