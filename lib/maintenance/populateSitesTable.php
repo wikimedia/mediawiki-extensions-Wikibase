@@ -53,6 +53,9 @@ class PopulateSitesTable extends \Maintenance {
 		$wiki = $this->getOption( 'load-from', 'https://meta.wikimedia.org/w/api.php' );
 
 		\Wikibase\Utils::insertSitesFrom( $wiki, $stripProtocols );
+
+		SiteSQLStore::newInstance()->getSites( 'recache' );
+
 		$this->output( "done.\n" );
 	}
 
