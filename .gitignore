@@ -11,5 +11,8 @@
 
 !.travis.yml
 
+composer.phar
+vendor/
+
 selenium/configuration.yml
 selenium/Gemfile.lock
