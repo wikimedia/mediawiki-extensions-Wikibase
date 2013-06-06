@@ -147,7 +147,13 @@ class ItemView extends EntityView {
 			$this->getHtmlForEditSection( $item, $lang, $editLink, 'td', 'add', !$isFull )
 		);
 
-		return $html . wfTemplate( 'wb-sitelinks-table', $thead, $tbody, $tfoot );
+		return $html . wfTemplate(
+			'wb-sitelinks-table',
+			$thead,
+			$tbody,
+			$tfoot,
+			htmlspecialchars( $group )
+		);
 	}
 
 }
