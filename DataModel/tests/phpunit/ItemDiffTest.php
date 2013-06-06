@@ -1,10 +1,14 @@
 <?php
+
 namespace Wikibase\Test;
+
+use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Entity;
 use Wikibase\SiteLink;
 use Wikibase\Item;
 
 /**
- * Tests for the Wikibase\ItemDiff class.
+ * @covers Wikibase\ItemDiff
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,18 +28,19 @@ use Wikibase\Item;
  * @file
  * @since 0.1
  *
- * @ingroup WikibaseLib
+ * @ingroup WikibaseDataModel
  * @ingroup Test
  *
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseDiff
+ * @group WikibaseDataModel
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-
 class ItemDiffTest extends EntityDiffOldTest {
 
 	public static function provideApplyData() {
@@ -44,17 +49,17 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// add link ------------------------------
 		$a = Item::newEmpty();
-		$a->addSiteLink( SiteLink::newFromText( 'enwiki', 'Test' ) );
+		$a->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Test' ) );
 
 		$b = $a->copy();
-		$b->addSiteLink( SiteLink::newFromText(  'dewiki', 'Test' ) );
+		$b->addSimpleSiteLink( new SimpleSiteLink(  'dewiki', 'Test' ) );
 
 		$tests[] = array( $a, $b );
 
 		// remove link
 		$a = Item::newEmpty();
-		$a->addSiteLink( SiteLink::newFromText(  'enwiki', 'Test' ), 'set' );
-		$a->addSiteLink( SiteLink::newFromText(  'dewiki', 'Test' ), 'set' );
+		$a->addSimpleSiteLink( new SimpleSiteLink(  'enwiki', 'Test' ), 'set' );
+		$a->addSimpleSiteLink( new SimpleSiteLink(  'dewiki', 'Test' ), 'set' );
 
 		$b = $a->copy();
 		$b->removeSiteLink( 'enwiki' );
@@ -63,10 +68,10 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// change link
 		$a = Item::newEmpty();
-		$a->addSiteLink( SiteLink::newFromText(  'enwiki', 'Test' ), 'set' );
+		$a->addSimpleSiteLink( new SimpleSiteLink(  'enwiki', 'Test' ), 'set' );
 
 		$b = $a->copy();
-		$b->addSiteLink( SiteLink::newFromText(  'enwiki', 'Test!!!' ), 'set' );
+		$b->addSimpleSiteLink( new SimpleSiteLink(  'enwiki', 'Test!!!' ), 'set' );
 
 		$tests[] = array( $a, $b );
 
@@ -76,15 +81,15 @@ class ItemDiffTest extends EntityDiffOldTest {
 	/**
 	 * @dataProvider provideApplyData
 	 */
-	public function testApply( \Wikibase\Entity $a, \Wikibase\Entity $b ) {
+	public function testApply( Entity $a, Entity $b ) {
 		parent::testApply( $a, $b );
 
 		$a->patch( $a->getDiff( $b ) );
 
-		$this->assertArrayEquals( $a->getLabels(), $b->getLabels() );
-		$this->assertArrayEquals( $a->getDescriptions(), $b->getDescriptions() );
-		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
-		$this->assertArrayEquals( SiteLink::siteLinksToArray( $a->getSiteLinks() ), SiteLink::siteLinksToArray( $b->getSiteLinks() ) );
+		$this->assertEquals( $a->getLabels(), $b->getLabels() );
+		$this->assertEquals( $a->getDescriptions(), $b->getDescriptions() );
+		$this->assertEquals( $a->getAllAliases(), $b->getAllAliases() );
+		$this->assertEquals( $a->getSiteLinks(), $b->getSiteLinks() );
 	}
 
 }
