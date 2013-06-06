@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Dy5dhxK4",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-06T15:37:42Z",
+      "side": 1,
+      "message": "that\u0027s not gonna work. use $sites-\u003eappend(...",
+      "revId": "0804e1f882b9e05456bcd0253a56efe74e8c4e6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
