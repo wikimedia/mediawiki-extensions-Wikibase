@@ -4,6 +4,8 @@ namespace Wikibase;
 
 use Diff\Patcher;
 use MWException;
+use OutOfBoundsException;
+use Wikibase\DataModel\SimpleSiteLink;
 
 /**
  * Represents a single Wikibase item.
@@ -48,6 +50,7 @@ class Item extends Entity {
 	 * Adds a site link.
 	 *
 	 * @since 0.1
+	 * @deprecated since 0.4, use addSiteLink instead
 	 *
 	 * @param SiteLink $link the link to the target page
 	 * @param string $updateType
@@ -70,6 +73,19 @@ class Item extends Entity {
 	}
 
 	/**
+	 * Adds a site link to the list of site links.
+	 * If there already is a site link with the site id of the provided site link,
+	 * then that one will be overridden by the provided one.
+	 *
+	 * @since 0.4
+	 *
+	 * @param SimpleSiteLink $siteLink
+	 */
+	public function addSimpleSiteLink( SimpleSiteLink $siteLink ) {
+		$this->data['links'][$siteLink->getSiteId()] = $siteLink->getPageName();
+	}
+
+	/**
 	 * Removes the sitelink with specified site ID if the Item has such a sitelink.
 	 * A page name can be provided to have removal only happen when it matches what is set.
 	 * A boolean is returned indicating if a link got removed or not.
@@ -82,7 +98,7 @@ class Item extends Entity {
 	 * @return bool Success indicator
 	 */
 	public function removeSiteLink( $siteId, $pageName = false ) {
-		if ( $pageName !== false) {
+		if ( $pageName !== false ) {
 			$success = array_key_exists( $siteId, $this->data['links'] ) && $this->data['links'][$siteId] === $pageName;
 		}
 		else {
@@ -101,6 +117,7 @@ class Item extends Entity {
 	 * site id (str) => SiteLink
 	 *
 	 * @since 0.1
+	 * @deprecated since 0.4, use getSimpleSiteLinks instead
 	 *
 	 * @return array a list of SiteLink objects
 	 */
@@ -118,9 +135,25 @@ class Item extends Entity {
 	}
 
 	/**
+	 * @since 0.4
+	 *
+	 * @return SimpleSiteLink[]
+	 */
+	public function getSimpleSiteLinks() {
+		$links = array();
+
+		foreach ( $this->data['links'] as $siteId => $pageName ) {
+			$links[] = new SimpleSiteLink( $siteId, $pageName );
+		}
+
+		return $links;
+	}
+
+	/**
 	 * Returns the site link for the given site id, or null.
 	 *
 	 * @since 0.1
+	 * @deprecated since 0.4, use getSimpleSiteLink instead
 	 *
 	 * @param String $siteId the id of the site to which to get the lin
 	 *
@@ -132,6 +165,20 @@ class Item extends Entity {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * @param string $siteId
+	 *
+	 * @return SimpleSiteLink
+	 * @throws OutOfBoundsException
+	 */
+	public function getSimpleSiteLink( $siteId ) {
+		if ( !array_key_exists( $siteId, $this->data['links'] ) ) {
+			throw new OutOfBoundsException( "There is no site link with site id '$siteId'" );
+		}
+
+		return new SimpleSiteLink( $siteId, $this->data['links'][$siteId] );
 	}
 
 	/**
