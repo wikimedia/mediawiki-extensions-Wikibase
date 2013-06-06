@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
 use Wikibase\SiteLink;
 
@@ -258,6 +259,74 @@ class ItemTest extends EntityTest {
 		$expected = $this->getNewEmpty();
 
 		$argLists[] = array( $source, $patch, $expected );
+
+		return $argLists;
+	}
+
+	public function testGetSimpleSiteLinkWithNonSetSiteId() {
+		$item = Item::newEmpty();
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$item->getSimpleSiteLink( 'enwiki' );
+	}
+
+	/**
+	 * @dataProvider simpleSiteLinkProvider
+	 */
+	public function testAddSimpleSiteLink( SimpleSiteLink $siteLink ) {
+		$item = Item::newEmpty();
+
+		$item->addSimpleSiteLink( $siteLink );
+
+		$this->assertEquals(
+			$siteLink,
+			$item->getSimpleSiteLink( $siteLink->getSiteId() )
+		);
+	}
+
+	public function simpleSiteLinkProvider() {
+		$argLists = array();
+
+		$argLists[] = array( new SimpleSiteLink( 'enwiki', 'Wikidata' ) );
+		$argLists[] = array( new SimpleSiteLink( 'nlwiki', 'Wikidata' ) );
+		$argLists[] = array( new SimpleSiteLink( 'nlwiki', 'Nyan!' ) );
+		$argLists[] = array( new SimpleSiteLink( 'foo bar', 'baz bah' ) );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider simpleSiteLinksProvider
+	 */
+	public function testGetSimpleSiteLinks() {
+		$siteLinks = func_get_args();
+		$item = Item::newEmpty();
+
+		foreach ( $siteLinks as $siteLink ) {
+			$item->addSimpleSiteLink( $siteLink );
+		}
+
+		$this->assertInternalType( 'array', $item->getSimpleSiteLinks() );
+		$this->assertEquals( $siteLinks, $item->getSimpleSiteLinks() );
+	}
+
+	public function simpleSiteLinksProvider() {
+		$argLists = array();
+
+		$argLists[] = array();
+
+		$argLists[] = array( new SimpleSiteLink( 'enwiki', 'Wikidata' ) );
+
+		$argLists[] = array(
+			new SimpleSiteLink( 'enwiki', 'Wikidata' ),
+			new SimpleSiteLink( 'nlwiki', 'Wikidata' )
+		);
+
+		$argLists[] = array(
+			new SimpleSiteLink( 'enwiki', 'Wikidata' ),
+			new SimpleSiteLink( 'nlwiki', 'Wikidata' ),
+			new SimpleSiteLink( 'foo bar', 'baz bah' )
+		);
 
 		return $argLists;
 	}
