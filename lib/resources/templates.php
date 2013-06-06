@@ -239,7 +239,7 @@ HTML;
 
 	$templates['wb-sitelinks-table'] =
 <<<HTML
-<table class="wb-sitelinks">
+<table class="wb-sitelinks" data-wb-sitelinks-group="$4">
 	<colgroup>
 		<col class="wb-sitelinks-sitename" />
 		<col class="wb-sitelinks-siteid" />
