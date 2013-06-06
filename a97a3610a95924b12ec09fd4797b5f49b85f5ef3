@@ -159,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "DxyJ2lqA",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-06T10:39:25Z",
+      "side": 1,
+      "message": "I think optional parameters are fine, don\u0027t you? This is the equivalent of requesting a wiki page with or without oldid\u003d1234 parameter. No need for an extra entry point, I think.\n\nEven worse: In all methods that use getEntityRevision and accept a revision themselves, I would have to introduce an if/then/else block, depending on whether the revision is 0/false or not.\n\nOr I would have to duplicate all these functions.\n\nNo - allowing \"current\" as a special value for the revision here \"somehow\" overall leads to cleaner code, I believe.",
+      "parentUuid": "Dx0dD9G8",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx8dSZN0",
         "filename": "lib/includes/store/EntityRevisionLookup.php",
         "patchSetId": 2
@@ -206,6 +224,24 @@
       "side": 1,
       "message": "This is not a \"getter\" under the definition of getter that I have. Anyway, I disagree with either interpretation, unless you have a getter that just returns a field that can happen to be null.\n\nThe difference between throwing an exception and returning null is not taste or cosmetic. The difference between returning null or false is ;p This causes actual problems. I\u0027ll make some presentation on the topic soonish, though can point you to a chapter in a book right now if you want to.\n\nThis is a different interface. Being consistent with problems elsewhere is a bad idea. Rather then learning from the mistake we are now bound to it? I hope not.",
       "parentUuid": "DxyeJiO0",
+      "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Dx6Jiptg",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-06T10:39:25Z",
+      "side": 1,
+      "message": "Consistency is a good thing and may override the possibility of slight improvements, yes. \n\nI\u0027m open to changing this in both interfaces, or changing EntityLookup first. But I really don\u0027t want to introduce an inconsistency here.",
+      "parentUuid": "DxycaKHg",
       "revId": "a97a3610a95924b12ec09fd4797b5f49b85f5ef3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
