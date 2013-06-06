@@ -65,16 +65,6 @@ class SiteLink {
 			$site->setGlobalId( $globalSiteId );
 		}
 
-		if ( $normalize ) {
-			$normalized = $site->normalizePageName( $page );
-
-			if ( $normalized === false ) {
-				throw new MWException( "failed to normalize title: $page" );
-			}
-
-			$page = $normalized;
-		}
-
 		return new SiteLink( $site, $page );
 	}
 
