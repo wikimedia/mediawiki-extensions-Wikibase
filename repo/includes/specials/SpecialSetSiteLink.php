@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\EntityContent;
 use Wikibase\SiteLink;
 use Wikibase\Utils;
 
@@ -221,19 +223,21 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @since 0.4
 	 *
 	 * @param \Wikibase\EntityContent $entityContent
-	 * @param string $site
+	 * @param string $siteId
 	 *
 	 * @return string
 	 */
-	protected function getSiteLink( $entityContent, $site ) {
+	protected function getSiteLink( $entityContent, $siteId ) {
+		// FIXME: either the documentation here is wrong, or this check is not needed
 		if ( $entityContent === null ) {
 			return '';
 		}
-		$sitelink = $entityContent->getEntity()->getSitelink( $site );
-		if ( $sitelink === null ) {
-			return '';
+
+		if ( $entityContent->getEntity()->hasLinkToSite( $siteId ) ) {
+			return $entityContent->getEntity()->getSimpleSitelink( $siteId )->getPageName();
 		}
-		return $sitelink->getPage();
+
+		return '';
 	}
 
 	/**
@@ -241,51 +245,51 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \Wikibase\EntityContent $entityContent
-	 * @param string $site
-	 * @param string $page
+	 * @param EntityContent $entityContent
+	 * @param string $siteId
+	 * @param string $pageName
 	 * @param string &$summary The summary for this edit will be saved here.
 	 *
 	 * @return Status
 	 */
-	protected function setSiteLink( $entityContent, $site, $page, &$summary ) {
-		$siteObject = \Sites::singleton()->getSite( $site );
+	protected function setSiteLink( $entityContent, $siteId, $pageName, &$summary ) {
+		$site = \Sites::singleton()->getSite( $siteId );
 		$status = \Status::newGood();
 
-		if ( $siteObject === null ) {
-			$status->error( 'wikibase-setsitelink-invalid-site', $site );
+		if ( $site === null ) {
+			$status->error( 'wikibase-setsitelink-invalid-site', $siteId );
 			return $status;
 		}
 
-		if ( $page !== '' ) {
+		if ( $pageName !== '' ) {
 			// Don't try to normalize an empty string (which means: remove the link)
-			$page = $siteObject->normalizePageName( $page );
+			$pageName = $site->normalizePageName( $pageName );
 
-			if ( $page === false ) {
+			if ( $pageName === false ) {
 				$status->error( 'wikibase-error-ui-no-external-page' );
 				return $status;
 			}
 		}
 
-		if ( $page === '' ) {
-			$link = $entityContent->getItem()->getSiteLink( $site );
-			if ( !$link ) {
+		if ( $pageName === '' ) {
+			try {
+				$link = $entityContent->getItem()->getSimpleSiteLink( $siteId );
+			} catch( \OutOfBoundsException $e ) {
 				$status->error( 'wikibase-setsitelink-remove-failed' );
 				return $status;
 			}
-			$entityContent->getItem()->removeSitelink( $site );
+			$entityContent->getItem()->removeSiteLink( $siteId );
 			$i18n = 'wbsetsitelink-remove';
 		}
 		else {
-			$siteLink = new SiteLink( $siteObject, $page );
-			$ret = $entityContent->getItem()->addSiteLink( $siteLink, 'set' );
-			if ( $ret === false ) {
-				$status->error( 'wikibase-setsitelink-add-failed' );
-				return $status;
-			}
+			$siteLink = new SimpleSiteLink( $siteId, $pageName );
+			$entityContent->getItem()->addSimpleSiteLink( $siteLink );
 			$i18n = 'wbsetsitelink-set';
 		}
-		$summary = $this->getSummary( $site, $page, $i18n ); // $summary is passed by reference ( &$summary )
+
+		// $summary is passed by reference ( &$summary )
+		$summary = $this->getSummary( $siteId, $pageName, $i18n );
+
 		return $status;
 	}
 }

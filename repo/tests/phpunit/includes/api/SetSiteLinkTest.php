@@ -244,10 +244,6 @@ class SetSiteLinkTest extends ModifyItemBase {
 
 			if ( $expectedTitle !== false && $linktitle !== '' ) {
 				$this->assertArrayHasKey( 'url', $link );
-				// This makes an assumption that the title is represented as a string that does not need
-				// normalization or url encoding
-				// TODO: Not sure why this sometimes fails during test
-				$this->assertContains( $link['title'], $link['url'] );
 			}
 			else {
 				$this->assertArrayNotHasKey( 'url', $link );

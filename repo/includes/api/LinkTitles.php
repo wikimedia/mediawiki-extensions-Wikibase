@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase, User, Status;
 
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\SiteLink;
 use Wikibase\EntityId;
 use Wikibase\Entity;
@@ -99,10 +100,12 @@ class LinkTitles extends ApiWikibase {
 		if ( !$fromId && !$toId ) {
 			// create new item
 			$itemContent = ItemContent::newEmpty();
-			$toLink = new SiteLink( $toSite, $toPage );
-			$return[] = $itemContent->getItem()->addSiteLink( $toLink, 'set' );
-			$fromLink = new SiteLink( $fromSite, $fromPage );
-			$return[] = $itemContent->getItem()->addSiteLink( $fromLink, 'set' );
+			$toLink = new SimpleSiteLink( $toSite->getGlobalId(), $toPage );
+			$itemContent->getItem()->addSimpleSiteLink( $toLink );
+			$return[] = $toLink;
+			$fromLink = new SimpleSiteLink( $fromSite->getGlobalId(), $fromPage );
+			$itemContent->getItem()->addSimpleSiteLink( $fromLink );
+			$return[] = $fromLink;
 
 			$flags |= EDIT_NEW;
 			$summary->setAction( 'create' ); //FIXME: i18n
@@ -112,8 +115,9 @@ class LinkTitles extends ApiWikibase {
 			$itemContent = EntityContentFactory::singleton()->getFromId(
 				new EntityId( Item::ENTITY_TYPE, $toId )
 			);
-			$fromLink = new SiteLink( $fromSite, $fromPage );
-			$return[] = $itemContent->getItem()->addSiteLink( $fromLink, 'set' );
+			$fromLink = new SimpleSiteLink( $fromSite->getGlobalId(), $fromPage );
+			$itemContent->getItem()->addSimpleSiteLink( $fromLink );
+			$return[] = $fromLink;
 			$summary->setAction( 'connect' );
 		}
 		elseif ( $fromId && !$toId ) {
@@ -121,8 +125,9 @@ class LinkTitles extends ApiWikibase {
 			$itemContent = EntityContentFactory::singleton()->getFromId(
 				new EntityId( Item::ENTITY_TYPE, $fromId )
 			);
-			$toLink = new SiteLink( $toSite, $toPage );
-			$return[] = $itemContent->getItem()->addSiteLink( $toLink, 'set' );
+			$toLink = new SimpleSiteLink( $toSite->getGlobalId(), $toPage );
+			$itemContent->getItem()->addSimpleSiteLink( $toLink );
+			$return[] = $toLink;
 			$summary->setAction( 'connect' );
 		}
 		elseif ( $fromId === $toId ) {
