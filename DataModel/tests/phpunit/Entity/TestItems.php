@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
-use Wikibase\SiteLink;
 
 /**
  * Holds Item objects for testing proposes.
@@ -62,7 +62,7 @@ final class TestItems {
 		$sites = \SiteSQLStore::newInstance()->getSites()->getGroup( $group );
 
 		if ( count( $sites ) > 1 ) {
-			$item->addSiteLink( new SiteLink( $sites->getIterator()->current(), 'spam' ) );
+			$item->addSimpleSiteLink( new SimpleSiteLink( $sites->getIterator()->current()->getGlobalId(), 'spam' ) );
 		}
 
 		//$items[] = $item;
@@ -72,9 +72,9 @@ final class TestItems {
 		if ( count( $sites ) > 1 ) {
 			$linksIterator = $sites->getIterator();
 
-			$item->addSiteLink( new SiteLink( $linksIterator->current(), 'spamz' ) );
+			$item->addSimpleSiteLink( new SimpleSiteLink( $linksIterator->current()->getGlobalId(), 'spamz' ) );
 			$linksIterator->next();
-			$item->addSiteLink( new SiteLink( $linksIterator->current(), 'foobar' ) );
+			$item->addSimpleSiteLink( new SimpleSiteLink( $linksIterator->current()->getGlobalId(), 'foobar' ) );
 		}
 
 		$item->setDescription( 'en', 'foo' );
