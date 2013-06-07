@@ -2,12 +2,21 @@
 
 namespace Wikibase\Test;
 
+use Diff\Diff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
+use Diff\DiffOpRemove;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\EntityId;
 use Wikibase\Item;
+use Wikibase\ItemDiff;
+use Wikibase\Property;
+use Wikibase\PropertyNoValueSnak;
 use Wikibase\SiteLink;
+use Wikibase\Statement;
 
 /**
- * Tests for the Wikibase\Item class.
+ * @covers Wikibase\Item
  * Some tests for this class are located in ItemMultilangTextsTest,
  * ItemNewEmptyTest and ItemNewFromArrayTest.
  *
@@ -88,11 +97,7 @@ class ItemTest extends EntityTest {
 		 */
 		foreach ( TestItems::getItems() as $item ) {
 			// getId()
-			$this->assertTrue( is_null( $item->getId() ) || $item->getId() instanceof \Wikibase\EntityId );
-			// getPrefixedId()
-			$this->assertTrue(
-				$item->getId() === null ? $item->getPrefixedId() === null : is_string( $item->getPrefixedId() )
-			);
+			$this->assertTrue( is_null( $item->getId() ) || $item->getId() instanceof EntityId );
 		}
 	}
 
@@ -124,7 +129,7 @@ class ItemTest extends EntityTest {
 		parent::testIsEmpty();
 
 		$item = Item::newEmpty();
-		$item->addSiteLink( SiteLink::newFromText( 'enwiki', 'Foobar' ) );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foobar' ) );
 
 		$this->assertFalse( $item->isEmpty() );
 	}
@@ -134,11 +139,11 @@ class ItemTest extends EntityTest {
 
 		$item = $this->getNewEmpty();
 
-		$item->addSiteLink( SiteLink::newFromText( "enwiki", "Foozzle" ) );
+		$item->addSimpleSiteLink( new SimpleSiteLink( "enwiki", "Foozzle" ) );
 
 		$item->clear();
 
-		$this->assertEmpty( $item->getSiteLinks(), "sitelinks" );
+		$this->assertEmpty( $item->getSimpleSiteLinks(), "sitelinks" );
 		$this->assertTrue( $item->isEmpty() );
 	}
 
@@ -162,12 +167,18 @@ class ItemTest extends EntityTest {
 		 * @var Item $item;
 		 */
 		$item = $item->copy();
-		$item->addClaim( new \Wikibase\Statement(
-			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) )
+		$item->addClaim( new Statement(
+			new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) )
 		) );
 		$items[] = $item;
 
-		return $this->arrayWrap( $items );
+		$argLists = array();
+
+		foreach ( $items as $item ) {
+			$argLists[] = array( $item );
+		}
+
+		return $argLists;
 	}
 
 	public function diffProvider() {
@@ -176,11 +187,11 @@ class ItemTest extends EntityTest {
 		// Addition of a sitelink
 		$entity0 = $this->getNewEmpty();
 		$entity1 = $this->getNewEmpty();
-		$entity1->addSiteLink( SiteLink::newFromText( 'enwiki', 'Berlin' ) );
+		$entity1->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin' ) );
 
 		$expected = new \Wikibase\EntityDiff( array(
-			'links' => new \Diff\Diff( array(
-				'enwiki' => new \Diff\DiffOpAdd( 'Berlin' ),
+			'links' => new Diff( array(
+				'enwiki' => new DiffOpAdd( 'Berlin' ),
 			), true ),
 		) );
 
@@ -189,12 +200,12 @@ class ItemTest extends EntityTest {
 
 		// Removal of a sitelink
 		$entity0 = $this->getNewEmpty();
-		$entity0->addSiteLink( SiteLink::newFromText( 'enwiki', 'Berlin' ) );
+		$entity0->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin' ) );
 		$entity1 = $this->getNewEmpty();
 
 		$expected = new \Wikibase\EntityDiff( array(
-			'links' => new \Diff\Diff( array(
-				'enwiki' => new \Diff\DiffOpRemove( 'Berlin' ),
+			'links' => new Diff( array(
+				'enwiki' => new DiffOpRemove( 'Berlin' ),
 			), true ),
 		) );
 
@@ -203,13 +214,13 @@ class ItemTest extends EntityTest {
 
 		// Modification of a sitelink
 		$entity0 = $this->getNewEmpty();
-		$entity0->addSiteLink( SiteLink::newFromText( 'enwiki', 'Berlin' ) );
+		$entity0->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin' ) );
 		$entity1 = $this->getNewEmpty();
-		$entity1->addSiteLink( SiteLink::newFromText( 'enwiki', 'Foobar' ) );
+		$entity1->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foobar' ) );
 
 		$expected = new \Wikibase\EntityDiff( array(
-			'links' => new \Diff\Diff( array(
-				'enwiki' => new \Diff\DiffOpChange( 'Berlin', 'Foobar' ),
+			'links' => new Diff( array(
+				'enwiki' => new DiffOpChange( 'Berlin', 'Foobar' ),
 			), true ),
 		) );
 
@@ -223,18 +234,18 @@ class ItemTest extends EntityTest {
 
 		// Addition of a sitelink
 		$source = $this->getNewEmpty();
-		$patch = new \Wikibase\ItemDiff( array(
-			'links' => new \Diff\Diff( array( 'enwiki' => new \Diff\DiffOpAdd( 'Berlin' ) ), true )
+		$patch = new ItemDiff( array(
+			'links' => new Diff( array( 'enwiki' => new DiffOpAdd( 'Berlin' ) ), true )
 		) );
 		$expected = clone $source;
-		$expected->addSiteLink( SiteLink::newFromText( 'enwiki', 'Berlin' ) );
+		$expected->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin' ) );
 
 		$argLists[] = array( $source, $patch, $expected );
 
 
 		// Retaining of a sitelink
 		$source = clone $expected;
-		$patch = new \Wikibase\ItemDiff();
+		$patch = new ItemDiff();
 		$expected = clone $source;
 
 		$argLists[] = array( $source, $patch, $expected );
@@ -242,19 +253,19 @@ class ItemTest extends EntityTest {
 
 		// Modification of a sitelink
 		$source = clone $expected;
-		$patch = new \Wikibase\ItemDiff( array(
-			'links' => new \Diff\Diff( array( 'enwiki' => new \Diff\DiffOpChange( 'Berlin', 'Foobar' ) ), true )
+		$patch = new ItemDiff( array(
+			'links' => new Diff( array( 'enwiki' => new DiffOpChange( 'Berlin', 'Foobar' ) ), true )
 		) );
 		$expected = $this->getNewEmpty();
-		$expected->addSiteLink( SiteLink::newFromText( 'enwiki', 'Foobar' ) );
+		$expected->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foobar' ) );
 
 		$argLists[] = array( $source, $patch, $expected );
 
 
 		// Removal of a sitelink
 		$source = clone $expected;
-		$patch = new \Wikibase\ItemDiff( array(
-			'links' => new \Diff\Diff( array( 'enwiki' => new \Diff\DiffOpRemove( 'Foobar' ) ), true )
+		$patch = new ItemDiff( array(
+			'links' => new Diff( array( 'enwiki' => new DiffOpRemove( 'Foobar' ) ), true )
 		) );
 		$expected = $this->getNewEmpty();
 
