@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Wikibase\DataModel\SimpleSiteLink;
+
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
@@ -81,7 +83,7 @@ class CreatedBlacklistedItems extends \Maintenance {
 
 			$item->setId( $id );
 			$item->setLabel( 'en', $name );
-			$item->addSiteLink( SiteLink::newFromText( 'enwiki', $name ) );
+			$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', $name ) );
 
 			$itemContent = ItemContent::newFromItem( $item );
 			$itemContent->save( 'Import' );
