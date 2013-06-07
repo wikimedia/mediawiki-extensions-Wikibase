@@ -58,23 +58,15 @@ foreach ( include( __DIR__ . '/DataValues.classes.php' ) as $class => $file ) {
  */
 $wgHooks['UnitTestsList'][] = function( array &$files ) {
 	// @codeCoverageIgnoreStart
-	$testFiles = array(
-		'includes/values/BooleanValue',
-		'includes/values/GeoCoordinateValue',
-		'includes/values/IriValue',
-		'includes/values/MonolingualTextValue',
-		'includes/values/MultilingualTextValue',
-		'includes/values/NumberValue',
-		'includes/values/QuantityValue',
-		'includes/values/StringValue',
-		'includes/values/TimeValue',
-		'includes/values/UnknownValue',
+	$directoryIterator = new RecursiveDirectoryIterator( __DIR__ . '/tests/phpunit/' );
 
-		'includes/DataValueFactory',
-	);
-
-	foreach ( $testFiles as $file ) {
-		$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';
+	/**
+	 * @var SplFileInfo $fileInfo
+	 */
+	foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
+		if ( substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
+			$files[] = $fileInfo->getPathname();
+		}
 	}
 
 	return true;
