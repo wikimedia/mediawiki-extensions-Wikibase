@@ -5,8 +5,7 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
-// TODO: Remove mediaWiki dependency
-( function( dv, vp, $, vv, time, mw ) {
+( function( dv, vp, $, vv, time ) {
 	'use strict';
 
 	var Time = time.Time,
@@ -82,7 +81,14 @@
 
 			this.$precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
-			.append( $( '<div/>' ).text( mw.msg( 'valueview-expert-timeinput-precision' ) ) );
+			.append(
+				$( '<div/>' ).text(
+					( this._options.mediaWiki )
+						? this._options.mediaWiki.msg( 'valueview-expert-timeinput-precision' )
+						// TODO: Use default messages
+						: ''
+				)
+			);
 
 			var precisionValues = [];
 			$.each( timeSettings.precisiontexts, function( i, text ) {
@@ -115,7 +121,13 @@
 
 			this.$calendarContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-calendarcontainer' )
-			.append( $( '<div/>' ).text( mw.msg( 'valueview-expert-timeinput-calendar' ) ) );
+			.append(
+				$( '<div/>' ).text(
+					( this._options.mediaWiki )
+						? this._options.mediaWiki.msg( 'valueview-expert-timeinput-calendar' )
+						: ''
+				)
+			);
 
 			var calendarValues = [];
 			$.each( timeSettings.calendarnames, function( i, calendarTerms ) {
@@ -143,7 +155,11 @@
 
 			var $toggler = $( '<a/>' )
 			.addClass( this.uiBaseClass + '-advancedtoggler' )
-			.text( mw.msg( 'valueview-expert-advancedadjustments' ) );
+			.text(
+				( this._options.mediaWiki )
+					? this._options.mediaWiki.msg( 'valueview-expert-advancedadjustments' )
+					: ''
+			);
 
 			this.$calendarhint = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-calendarhint' )
@@ -280,8 +296,13 @@
 					? timeSettings.calendarnames[1][0]
 					: timeSettings.calendarnames[0][0];
 
-				this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-message' )
-				.text( mw.msg( 'valueview-expert-timeinput-calendarhint', value.calendarText() ) );
+				if( this._options.mediaWiki ) {
+					this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-message' )
+					.text( this._options.mediaWiki.msg(
+						'valueview-expert-timeinput-calendarhint',
+						value.calendarText()
+					) );
+				}
 
 				this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-switch' )
 				.off( 'click.' + this.uiBaseClass )
@@ -290,7 +311,10 @@
 						self._updateValue();
 					} );
 				} )
-				.html( mw.msg( 'valueview-expert-timeinput-calendarhint-switch', otherCalendar ) );
+				.html( ( this._options.mediaWiki )
+					? this._options.mediaWiki.msg( 'valueview-expert-timeinput-calendarhint-switch', otherCalendar )
+					: ''
+				);
 
 				this.$calendarhint.show();
 			} else {
@@ -385,4 +409,4 @@
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, time, mediaWiki ) );
+}( dataValues, valueParsers, jQuery, jQuery.valueview, time ) );

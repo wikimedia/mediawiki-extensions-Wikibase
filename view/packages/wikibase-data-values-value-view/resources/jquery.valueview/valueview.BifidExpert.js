@@ -94,7 +94,8 @@
 					this.$viewPort,
 					this._viewState,
 					this._viewNotifier,
-					newExpertOptions
+					// Pass common and individual expert options:
+					$.extend( {}, this._options, newExpertOptions )
 				);
 				this._currentExpert.rawValue( rawValue );
 

@@ -56,6 +56,8 @@ function expertProxy( fnName ) {
  *         initialization if its initial value is empty.
  *         Default: true
  *
+ * @option mediaWiki {Object} mediaWiki JavaScript object that may be used in MediaWiki environment.
+ *
  * @event change: Triggered when the widget's value is updated.
  *        (1) {jQuery.event} event
  *
@@ -112,7 +114,8 @@ $.widget( 'valueview.valueview', PARENT, {
 		expertProvider: null,
 		on: null,
 		value: null,
-		autoStartEditing: false
+		autoStartEditing: false,
+		mediaWiki: null
 	},
 
 	/**
@@ -374,7 +377,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		}
 
 		// Previous expert not suitable for the new task!
-		// Destroy old expert, create enw one suitable for value:
+		// Destroy old expert, create new one suitable for value:
 		if( this._expert ) {
 			this._expert.destroy();
 			this._expert = null;
@@ -384,7 +387,10 @@ $.widget( 'valueview.valueview', PARENT, {
 			this._expert = new NewExpert(
 				this.$value,
 				this.viewState(),
-				this.viewNotifier()
+				this.viewNotifier(),
+				{
+					mediaWiki: this.options.mediaWiki
+				}
 			);
 		}
 	},
