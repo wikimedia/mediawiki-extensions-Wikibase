@@ -1,26 +1,45 @@
 <?php
 
 namespace Wikibase\Test;
+
+use Wikibase\EntityId;
 use Wikibase\MapValueHasher;
+use Wikibase\Property;
+use Wikibase\PropertyNoValueSnak;
 
 /**
- * Tests for the Wikibase\MapValueHasher class.
+ * @covers Wikibase\MapValueHasher
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
  *
- * @ingroup WikibaseLib
+ * @ingroup WikibaseDataModel
  * @ingroup Test
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseDataModel
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class MapValueHasherTest extends \PHPUnit_Framework_TestCase {
 
-	public function testCanConstructor() {
+	public function testCanConstruct() {
 		new MapValueHasher( true );
 		$this->assertTrue( true );
 	}
@@ -29,10 +48,10 @@ class MapValueHasherTest extends \PHPUnit_Framework_TestCase {
 		$hasher = new MapValueHasher();
 
 		$map0 = array(
-			'foo' => new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ) ),
-			'bar' => new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 2 ) ),
-			42 => new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) ),
-			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 9001 ) ),
+			'foo' => new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 1 ) ),
+			'bar' => new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 2 ) ),
+			42 => new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
+			new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 9001 ) ),
 		);
 
 		$hash = $hasher->hash( $map0 );
@@ -52,9 +71,16 @@ class MapValueHasherTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNotEquals( $hash, $hasher->hash( $map2 ) );
 
 		$map3 = $map0;
-		$map3['foo'] = new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 5 ) );
+		$map3['foo'] = new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 5 ) );
 
 		$this->assertNotEquals( $hash, $hasher->hash( $map3 ) );
+	}
+
+	public function testHashThrowsExceptionOnInvalidArgument() {
+		$hasher = new MapValueHasher();
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$hasher->hash( null );
 	}
 
 }
