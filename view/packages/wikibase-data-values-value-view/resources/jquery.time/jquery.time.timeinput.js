@@ -18,6 +18,14 @@
 
 	$.widget( 'time.timeinput', {
 		/**
+		 * Default options.
+		 * @type {Object}
+		 */
+		options: {
+			mediaWiki: null
+		},
+
+		/**
 		 * Caches the widget's current value.
 		 * @type {time.Time|null}
 		 */
@@ -84,7 +92,13 @@
 			if( value === null ) {
 				this.element.val( '' );
 			} else {
-				this.element.val( value.text() );
+				var options = {};
+
+				if( this.options.mediaWiki ) {
+					options.format = this.options.mediaWiki.user.options.get( 'date' );
+				}
+
+				this.element.val( value.text( options ) );
 			}
 
 			this._value = value;
