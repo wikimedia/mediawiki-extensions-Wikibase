@@ -2,8 +2,10 @@
 
 namespace Wikibase\Test;
 
+use Site;
 use Wikibase\ChangeOpSiteLink;
-use Wikibase\ItemContent;
+use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Item;
 use InvalidArgumentException;
 use Wikibase\SiteLink;
 
@@ -39,39 +41,36 @@ use Wikibase\SiteLink;
  */
 class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
-	public function invalidConstructorProvider() {
-		$args = array();
-		$args[] = array( $this->getSite( 'enwiki' ), 1234 );
-
-		return $args;
-	}
-
 	/**
 	 * @dataProvider invalidConstructorProvider
 	 * @expectedException InvalidArgumentException
-	 *
-	 * @param Site $linkSite
-	 * @param string|null $aliases
 	 */
-	public function testInvalidConstruct( $linkSite, $linkPage ) {
-		$changeOpSiteLink = new ChangeOpSiteLink( $linkSite, $linkPage );
+	public function testConstructorWithInvalidArguments( $siteId, $linkPage ) {
+		new ChangeOpSiteLink( $siteId, $linkPage );
+	}
+
+	public function invalidConstructorProvider() {
+		$argLists = array();
+
+		$argLists[] = array( 'enwiki', 1234 );
+		$argLists[] = array( 1234, 'Berlin' );
+
+		return $argLists;
 	}
 
 	public function changeOpSiteLinkProvider() {
-		$enWiki = $this->getSite( 'enwiki' );
-		$deWiki = $this->getSite( 'dewiki' );
-		$existingSiteLinks = array( new SiteLink( $deWiki, 'Berlin' ) );
-		$enSiteLink = new SiteLink( $enWiki, 'Berlin' );
+		$existingSiteLinks = array( new SimpleSiteLink( 'dewiki', 'Berlin' ) );
+		$enSiteLink = new SiteLink( 'enwiki', 'Berlin' );
 
-		$item = ItemContent::newEmpty();
-		$entity = $item->getEntity();
+		$item = Item::newEmpty();
+
 		foreach ( $existingSiteLinks as $siteLink ) {
-			$entity->addSiteLink( $siteLink );
+			$item->addSimpleSiteLink( $siteLink );
 		}
 
 		$args = array();
-		$args[] = array ( clone $entity, new ChangeOpSiteLink( $enWiki, 'Berlin' ), array_merge( $existingSiteLinks, array ( $enSiteLink ) ) );
-		$args[] = array ( clone $entity, new ChangeOpSiteLink( $deWiki, null ), array() );
+		$args[] = array ( clone $item, new ChangeOpSiteLink( 'enwiki', 'Berlin' ), array_merge( $existingSiteLinks, array ( $enSiteLink ) ) );
+		$args[] = array ( clone $item, new ChangeOpSiteLink( 'dewiki', null ), array() );
 
 		return $args;
 	}
@@ -79,23 +78,17 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider changeOpSiteLinkProvider
 	 *
-	 * @param Entity $entity
+	 * @param Item $entity
 	 * @param ChangeOpSiteLink $changeOpSiteLink
-	 * @param string $expectedSiteLinks
+	 * @param SimpleSiteLink[] $expectedSiteLinks
 	 */
-	public function testApply( $entity, $changeOpSiteLink, $expectedSiteLinks ) {
+	public function testApply( Item $entity, ChangeOpSiteLink $changeOpSiteLink, array $expectedSiteLinks ) {
 		$changeOpSiteLink->apply( $entity );
+
 		$this->assertEquals(
-			SiteLink::siteLinksToArray( $expectedSiteLinks ),
-			SiteLink::siteLinksToArray( $entity->getSiteLinks() )
+			$expectedSiteLinks,
+			$entity->getSimpleSiteLinks()
 		);
-	}
-
-	protected function getSite( $globalId ) {
-		$site = new \MediaWikiSite();
-		$site->setGlobalId( $globalId );
-
-		return $site;
 	}
 
 }

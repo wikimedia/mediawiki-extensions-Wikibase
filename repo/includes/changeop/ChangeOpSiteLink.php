@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use Site;
+use Wikibase\DataModel\SimpleSiteLink;
 
 /**
  * Class for sitelink change operation
@@ -35,9 +36,9 @@ class ChangeOpSiteLink implements ChangeOp {
 	/**
 	 * @since 0.4
 	 *
-	 * @var Site
+	 * @var string
 	 */
-	protected $linkSite;
+	protected $siteId;
 
 	/**
 	 * @since 0.4
@@ -49,17 +50,21 @@ class ChangeOpSiteLink implements ChangeOp {
 	/**
 	 * @since 0.4
 	 *
-	 * @param Site $linkSite
+	 * @param string $siteId
 	 * @param string|null $linkPage
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( Site $linkSite, $linkPage ) {
+	public function __construct( $siteId, $linkPage ) {
+		if ( !is_string( $siteId ) ) {
+			throw new InvalidArgumentException( '$siteId needs to be a string' );
+		}
+
 		if ( !is_string( $linkPage ) && $linkPage !==null ) {
 			throw new InvalidArgumentException( '$linkPage needs to be a string|null' );
 		}
 
-		$this->linkSite = $linkSite;
+		$this->siteId = $siteId;
 		$this->linkPage = $linkPage;
 	}
 
@@ -70,16 +75,14 @@ class ChangeOpSiteLink implements ChangeOp {
 	 *
 	 * @param Entity $entity
 	 *
-	 * @return SiteLink|bool
+	 * @throws InvalidArgumentException
 	 */
 	public function apply( Entity $entity ) {
-		if ( $this->linkPage === null ) {
-			$entity->removeSiteLink( $this->linkSite->getGlobalId() );
-			return true; // don't show an error when the sitelink we try to remove does not exist
-		} else {
-			$siteLink = new SiteLink( $this->linkSite, $this->linkPage );
-			return $entity->addSiteLink( $siteLink,'set' );
+		if ( !( $entity instanceof Item ) ) {
+			throw new InvalidArgumentException( 'ChangeOpSiteLink can only be applied to Item instances' );
 		}
+
+		$entity->addSimpleSiteLink( new SimpleSiteLink( $this->siteId, $this->linkPage ) );
 	}
 
 }
