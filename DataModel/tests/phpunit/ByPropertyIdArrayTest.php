@@ -1,10 +1,20 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ByPropertyIdArray, Wikibase\EntityId, Wikibase\Property, Wikibase\Snak;
+
+use DataValues\StringValue;
+use Wikibase\ByPropertyIdArray;
+use Wikibase\EntityId;
+use Wikibase\Property;
+use Wikibase\Snak;
+use Wikibase\Claim;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
+use Wikibase\Statement;
 
 /**
- * Tests for the Wikibase\ByPropertyIdArray class.
+ * @covers Wikibase\ByPropertyIdArray
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,25 +50,25 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		$lists = array();
 
 		$snaks = array(
-			new \Wikibase\PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
-			new \Wikibase\PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
-			new \Wikibase\PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 10 ) ),
-			new \Wikibase\PropertyValueSnak( new EntityId( Property::ENTITY_TYPE, 10 ), new \DataValues\StringValue( 'ohi' ) ),
-			new \Wikibase\PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 1 ) ),
+			new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
+			new PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
+			new PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 10 ) ),
+			new PropertyValueSnak( new EntityId( Property::ENTITY_TYPE, 10 ), new StringValue( 'ohi' ) ),
+			new PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 1 ) ),
 		);
 
 		$lists[] = $snaks;
 
 		$lists[] = array_map(
-			function( \Wikibase\Snak $snak ) {
-				return new \Wikibase\Claim( $snak );
+			function( Snak $snak ) {
+				return new Claim( $snak );
 			},
 			$snaks
 		);
 
 		$lists[] = array_map(
-			function( \Wikibase\Snak $snak ) {
-				return new \Wikibase\Statement( $snak );
+			function( Snak $snak ) {
+				return new Statement( $snak );
 			},
 			$snaks
 		);
@@ -135,4 +145,19 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 		$indexedArray->getByPropertyId( 9000 );
 	}
+
+	public function testNotBuildExceptionIsThrownForByPropertyId() {
+		$indexedArray = new ByPropertyIdArray();
+
+		$this->setExpectedException( 'RuntimeException' );
+		$indexedArray->getByPropertyId( 9000 );
+	}
+
+	public function testNotBuildExceptionIsThrownForGetPropertyIds() {
+		$indexedArray = new ByPropertyIdArray();
+
+		$this->setExpectedException( 'RuntimeException' );
+		$indexedArray->getPropertyIds();
+	}
+
 }
