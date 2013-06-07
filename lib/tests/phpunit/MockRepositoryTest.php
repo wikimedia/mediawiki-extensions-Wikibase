@@ -1,12 +1,12 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\DataModel\SimpleSiteLink;
-use \Wikibase\Entity;
-use \Wikibase\EntityId;
-use \Wikibase\Item;
-use \Wikibase\Property;
-use \Wikibase\SiteLink;
+use Wikibase\Entity;
+use Wikibase\EntityId;
+use Wikibase\Item;
+use Wikibase\Property;
 
 /**
  * Tests for the MockRepository class.
@@ -90,7 +90,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 	public function testGetItemIdForLink() {
 		$item = new Item( array() );
-		$item->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Foo' ) );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
 
 		// test item lookup
 		$this->repo->putEntity( $item );
@@ -100,7 +100,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( false, $this->repo->getItemIdForLink( 'xywiki', 'Foo' ) );
 
 		// test lookup after item modification
-		$item->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Bar' ), 'set' );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Bar' ), 'set' );
 		$this->repo->putEntity( $item );
 
 		$this->assertEquals( false, $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
@@ -118,36 +118,36 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// #0: same link ---------
 		$a = new Item( array( 'id' => 1 ) );
-		$a->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Foo' ) );
-		$a->addSiteLink( \Wikibase\SiteLink::newFromText( 'dewiki', 'Foo' ) );
+		$a->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
+		$a->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Foo' ) );
 
 		$b = new Item( array( 'id' => 2 ) );
-		$b->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Foo' ) );
-		$b->addSiteLink( \Wikibase\SiteLink::newFromText( 'dewiki', 'Bar' ) );
+		$b->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
+		$b->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Bar' ) );
 
 		$cases[] = array( $a, $b, array( array( 'enwiki', 'Foo', 1 ) ) );
 
 		// #1: same site ---------
 		$a = new Item( array( 'id' => 1 ) );
-		$a->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Foo' ) );
+		$a->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
 
 		$b = new Item( array( 'id' => 2 ) );
-		$b->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Bar' ) );
+		$b->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Bar' ) );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #2: same page ---------
 		$a = new Item( array( 'id' => 1 ) );
-		$a->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Foo' ) );
+		$a->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
 
 		$b = new Item( array( 'id' => 2 ) );
-		$b->addSiteLink( \Wikibase\SiteLink::newFromText( 'dewiki', 'Foo' ) );
+		$b->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Foo' ) );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #3: same item ---------
 		$a = new Item( array( 'id' => 1 ) );
-		$a->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Foo' ) );
+		$a->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
 
 		$cases[] = array( $a, $a, array() );
 
@@ -168,12 +168,12 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$cases = array();
 
 		$a = new Item( array( 'id' => 1 ) );
-		$a->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Foo' ) );
-		$a->addSiteLink( \Wikibase\SiteLink::newFromText( 'dewiki', 'Bar' ) );
+		$a->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
+		$a->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Bar' ) );
 
 		$b = new Item( array( 'id' => 2 ) );
-		$b->addSiteLink( \Wikibase\SiteLink::newFromText( 'enwiki', 'Bar' ) );
-		$b->addSiteLink( \Wikibase\SiteLink::newFromText( 'dewiki', 'Xoo' ) );
+		$b->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Bar' ) );
+		$b->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Xoo' ) );
 
 		$items = array( $a, $b );
 
@@ -454,4 +454,5 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		// check links if property
 		$this->assertEmpty( $this->repo->getSiteLinksForItem( $prop->getId() ) );
 	}
+
 }
