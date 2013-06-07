@@ -407,6 +407,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @throws \MWException
 	 *
 	 * @return SiteLink[]
+	 * TODO: return SimpleSiteLink[] instead
 	 */
 	public function getSiteLinksForItem( EntityId $entityId ) {
 		if ( $entityId->getEntityType() !== Item::ENTITY_TYPE ) {
@@ -431,7 +432,10 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		$siteLinks = array();
 
 		foreach( $rows as $row ) {
-			$siteLinks[] = SiteLink::newFromText( $row->ips_site_id, $row->ips_site_page );
+			$siteLinks[] = new SiteLink(
+				\Sites::singleton()->getSite( $row->ips_site_id ),
+				$row->ips_site_page
+			);
 		}
 
 		$this->releaseConnection( $dbr );
