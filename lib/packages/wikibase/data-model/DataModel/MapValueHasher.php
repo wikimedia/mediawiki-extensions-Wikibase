@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase;
-use Traversable, Hashable;
+
+use Traversable;
+use Hashable;
 use MWException;
 
 /**

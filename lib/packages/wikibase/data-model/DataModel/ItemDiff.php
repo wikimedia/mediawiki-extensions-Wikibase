@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use Diff\Diff;
 
 /**

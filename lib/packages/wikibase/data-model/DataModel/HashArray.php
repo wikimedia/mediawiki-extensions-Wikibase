@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase;
+
 use Hashable;
-use GenericArrayObject;
 use InvalidArgumentException;
 
 /**
