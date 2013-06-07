@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DzfjnTeU",
+        "filename": "selenium_cuc/features/label.feature",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2013-06-07T17:26:57Z",
+      "side": 1,
+      "message": "There should be one empty line between scenarios.",
+      "revId": "13d1b5e55acd6d98645085f38122eb3179585f96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
