@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DzDygmZQ",
+        "filename": "DataModel/DataModel/Entity/Item.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T07:15:19Z",
+      "side": 1,
+      "message": "addSimpleSiteLink",
+      "revId": "497db6d3e5efc5fd9f5925f35e22988c79e4ffe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzNyaRV8",
+        "filename": "DataModel/DataModel/Entity/Item.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T07:15:19Z",
+      "side": 1,
+      "message": "overidden",
+      "revId": "497db6d3e5efc5fd9f5925f35e22988c79e4ffe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
