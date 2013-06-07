@@ -99,22 +99,16 @@ abstract class DataValueTest extends \PHPUnit_Framework_TestCase {
 		$valid = array_shift( $args );
 		$pokemons = null;
 
-		try {
-			$dataItem = call_user_func_array( array( $this, 'newInstance' ), $args );
-			$this->assertInstanceOf( $this->getClass(), $dataItem );
+		if ( $valid === false ) {
+			$valid = 'Exception';
 		}
-		catch ( \Exception $pokemons ) {
-			if ( $valid === true ) {
-				throw $pokemons;
-			}
 
-			if ( is_string( $valid ) ) {
-				$this->assertEquals( $valid, get_class( $pokemons ) );
-			}
-			else {
-				$this->assertFalse( $valid );
-			}
+		if ( is_string( $valid ) ) {
+			$this->setExpectedException( $valid );
 		}
+
+		$dataItem = call_user_func_array( array( $this, 'newInstance' ), $args );
+		$this->assertInstanceOf( $this->getClass(), $dataItem );
 	}
 
 	/**

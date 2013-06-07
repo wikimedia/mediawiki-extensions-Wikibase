@@ -56,6 +56,7 @@ class GeoCoordinateValueTest extends DataValueTest {
 	public function constructorProvider() {
 		$argLists = array();
 
+		// #0
 		$argLists[] = array( false );
 		$argLists[] = array( false, 42 );
 		$argLists[] = array( false, array() );
@@ -65,6 +66,7 @@ class GeoCoordinateValueTest extends DataValueTest {
 		$argLists[] = array( false, 'foo' );
 		$argLists[] = array( false, 42 );
 
+		// #8
 		$argLists[] = array( false, 'en', 42 );
 		$argLists[] = array( false, 'en', 4.2 );
 		$argLists[] = array( false, 42, false );
@@ -73,6 +75,7 @@ class GeoCoordinateValueTest extends DataValueTest {
 		$argLists[] = array( false, 42, 'foo' );
 		$argLists[] = array( false, 4.2, 'foo' );
 
+		// #15
 		$argLists[] = array( true, 4.2, 4.2 );
 		$argLists[] = array( true, 4.2, 42 );
 		$argLists[] = array( true, 42, 4.2 );
@@ -82,6 +85,7 @@ class GeoCoordinateValueTest extends DataValueTest {
 		$argLists[] = array( true, -42, 4.2 );
 		$argLists[] = array( true, 0, 0 );
 
+		// #23
 		$argLists[] = array( false, '4.2', 4.2 );
 		$argLists[] = array( false, '4.2', '4.2' );
 		$argLists[] = array( false, 4.2, '4.2' );
@@ -89,27 +93,31 @@ class GeoCoordinateValueTest extends DataValueTest {
 		$argLists[] = array( false, 42, '42' );
 		$argLists[] = array( false, '0', 0 );
 
+		// #29
 		$argLists[] = array( true, 4.2, 4.2, 4.2 );
 		$argLists[] = array( true, 4.2, -4.2, -42 );
 		$argLists[] = array( true, -42, 4.2, 42 );
 		$argLists[] = array( true, -4.2, 42, -4.2 );
 		$argLists[] = array( true, 0, 0, 0 );
 
+		// #34
 		$argLists[] = array( false, 4.2, 4.2, '4.2' );
 		$argLists[] = array( false, 4.2, '4.2', 4.2 );
 		$argLists[] = array( false, '4.2', 4.2, 4.2 );
 		$argLists[] = array( false, 42, 4.2, false );
 		$argLists[] = array( false, 42, 4.2, true );
-		$argLists[] = array( false, 42, 4.2, null );
+		$argLists[] = array( true, 42, 4.2, null );
 		$argLists[] = array( false, 42, 4.2, array() );
 		$argLists[] = array( false, 42, 4.2, 'foo' );
 
+		// #42
 		$argLists[] = array( true, 42, 4.2, 9000.1, 'http://www.wikidata.org/entity/Q2' );
 		$argLists[] = array( true, 42, 4.2, 9000.1, null );
 		$argLists[] = array( true, 4.2, 42, 9000.1, 'terminus' );
 		$argLists[] = array( true, 4.2, 42, 0, "Schar's World" );
 		$argLists[] = array( true, -42, -4.2, -9000.1, 'coruscant' );
 
+		// #47
 		$argLists[] = array( false, 42, 4.2, 9000.1, false );
 		$argLists[] = array( false, 42, 4.2, 9000.1, true );
 		$argLists[] = array( false, 42, 4.2, 9000.1, 42 );

@@ -117,12 +117,12 @@ class TimeValueTest extends DataValueTest {
 		);
 
 		$argLists[] = array(
-			'DataValues\IllegalValueException',
+			true,
 			'+00000002013-01-01T00:00:00Z',
 			0,
 			0,
 			0,
-			0,
+			0, // 0 == TimeValue::PRECISION_GIGAYEAR
 			'http://nyan.cat/original.php',
 		);
 

@@ -56,6 +56,7 @@ class QuantityValueTest extends DataValueTest {
 	public function constructorProvider() {
 		$argLists = array();
 
+		// #0
 		$argLists[] = array( false );
 
 		$argLists[] = array( true, 42 );
@@ -75,6 +76,7 @@ class QuantityValueTest extends DataValueTest {
 		$argLists[] = array( false, null );
 		$argLists[] = array( false, '0x20' );
 
+		// #17
 		$argLists[] = array( true, 42, 'm' );
 		$argLists[] = array( true, -42, 'm' );
 		$argLists[] = array( true, 4.2, 'm' );
@@ -85,19 +87,20 @@ class QuantityValueTest extends DataValueTest {
 		$argLists[] = array( false, '0', 'm' );
 		$argLists[] = array( false, 42, 0 );
 		$argLists[] = array( false, -42, 0 );
-		$argLists[] = array( false, 4.2, null );
+		$argLists[] = array( true, 4.2, null );
 		$argLists[] = array( false, -4.2, false );
 		$argLists[] = array( false, 0, true );
 		$argLists[] = array( false, 'foo', array() );
 		$argLists[] = array( false, '', 4.2 );
 		$argLists[] = array( false, '0', -1 );
 
+		// #33
 		$argLists[] = array( true, 42, 'm', 4.2 );
 		$argLists[] = array( true, -42, 'm', -4.2 );
 		$argLists[] = array( true, 4.2, 'm', -42 );
 		$argLists[] = array( true, -4.2, 'm', 42 );
 		$argLists[] = array( false, 42, 'm', false );
-		$argLists[] = array( false, -42, 'm', null );
+		$argLists[] = array( true, -42, 'm', null );
 		$argLists[] = array( false, 4.2, 'm', '0' );
 		$argLists[] = array( false, -4.2, 'm', '-4.2' );
 
