@@ -101,7 +101,7 @@
 		this.$viewPort = $( viewPortNode );
 		this.$viewPort.addClass( this.uiBaseClass );
 
-		this._options = $.extend( {}, options || {} );
+		this._options = $.extend( ( !this._options ) ? {} : this._options, options || {} );
 
 		this._init();
 	};
@@ -302,6 +302,30 @@
 		 * @abstract
 		 */
 		draw: dv.util.abstractMember,
+
+		/**
+		 * Tries to get a message via mediaWiki (if set in the options) or from the default options.
+		 * @since 0.1
+		 *
+		 * @param {string} key
+		 * @param {string[]} [params] Message parameters (forwarded to mediaWiki messages only).
+		 * @return {string|null}
+		 *
+		 * @todo Implement a MessageFetcher composited into this object instead of this method.
+		 */
+		_getMessage: function( key, params ) {
+			params = params || [];
+
+			if( this._options.mediaWiki ) {
+				return this._options.mediaWiki.msg( key, params );
+			}
+
+			if( this._options && this._options.messages && this._options.messages[key] ) {
+				return this._options.messages[key];
+			}
+
+			return null;
+		},
 
 		/**
 		 * Will set the focus if there is some focusable input elements.

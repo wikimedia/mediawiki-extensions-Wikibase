@@ -20,8 +20,25 @@
 	 *
 	 * @constructor
 	 * @extends jQuery.valueview.Expert
+	 *
+	 * @option {Object} messages Default messages used by the widget. The keys correspond to
+	 *         mediaWiki message keys since these will be picked when in MediaWiki environment and
+	 *         the mediaWiki JavaScript object has been passed to the expert constructor.
 	 */
 	vv.experts.TimeInput = vv.expert( 'timeinput', PARENT, {
+
+		/**
+		 * Default options
+		 * @type {Object}
+		 */
+		_options: {
+			messages: {
+				'valueview-expert-timeinput-precision': 'Precision',
+				'valueview-expert-timeinput-calendar': 'Calendar',
+				'valueview-expert-advancedadjustments': 'advanced adjustments'
+			}
+		},
+
 		/**
 		 * The the input element's node.
 		 * @type {jQuery}
@@ -82,12 +99,7 @@
 			this.$precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
 			.append(
-				$( '<div/>' ).text(
-					( this._options.mediaWiki )
-						? this._options.mediaWiki.msg( 'valueview-expert-timeinput-precision' )
-						// TODO: Use default messages
-						: ''
-				)
+				$( '<div/>' ).text( this._getMessage( 'valueview-expert-timeinput-precision' ) )
 			);
 
 			var precisionValues = [];
@@ -122,11 +134,7 @@
 			this.$calendarContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-calendarcontainer' )
 			.append(
-				$( '<div/>' ).text(
-					( this._options.mediaWiki )
-						? this._options.mediaWiki.msg( 'valueview-expert-timeinput-calendar' )
-						: ''
-				)
+				$( '<div/>' ).text( this._getMessage( 'valueview-expert-timeinput-calendar' ) )
 			);
 
 			var calendarValues = [];
@@ -155,11 +163,7 @@
 
 			var $toggler = $( '<a/>' )
 			.addClass( this.uiBaseClass + '-advancedtoggler' )
-			.text(
-				( this._options.mediaWiki )
-					? this._options.mediaWiki.msg( 'valueview-expert-advancedadjustments' )
-					: ''
-			);
+			.text( this._getMessage( 'valueview-expert-advancedadjustments' ) );
 
 			this.$calendarhint = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-calendarhint' )
@@ -168,7 +172,8 @@
 				$( '<a/>' )
 				.addClass( this.uiBaseClass + '-calendarhint-switch ui-state-default' )
 				.attr( 'href', 'javascript:void(0);' )
-			);
+			)
+			.hide();
 
 			this.$input = $( '<input/>', {
 				type: 'text',
@@ -289,6 +294,15 @@
 		 * @param {time.Time} [value] Message will get hidden when omitted.
 		 */
 		_updateCalendarHint: function( value ) {
+			var msg = this._getMessage(
+				'valueview-expert-timeinput-calendarhint',
+				( value ) ? value.calendarText() : ''
+			);
+
+			if( !msg ) {
+				return;
+			}
+
 			if( value && value.year() > 1581 && value.year() < 1930 && value.precision() > 10 ) {
 				var self = this;
 
@@ -296,25 +310,23 @@
 					? timeSettings.calendarnames[1][0]
 					: timeSettings.calendarnames[0][0];
 
-				if( this._options.mediaWiki ) {
-					this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-message' )
-					.text( this._options.mediaWiki.msg(
-						'valueview-expert-timeinput-calendarhint',
-						value.calendarText()
-					) );
-				}
+				this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-message' )
+				.text( msg );
 
-				this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-switch' )
-				.off( 'click.' + this.uiBaseClass )
-				.on( 'click.' + this.uiBaseClass, function( event ) {
-					self.$calendar.data( 'listrotator' ).rotate( otherCalendar, function() {
-						self._updateValue();
-					} );
-				} )
-				.html( ( this._options.mediaWiki )
-					? this._options.mediaWiki.msg( 'valueview-expert-timeinput-calendarhint-switch', otherCalendar )
-					: ''
+				msg = this._getMessage(
+					'valueview-expert-timeinput-calendarhint-switch',
+					otherCalendar
 				);
+				if( msg ) {
+					this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-switch' )
+					.off( 'click.' + this.uiBaseClass )
+					.on( 'click.' + this.uiBaseClass, function( event ) {
+						self.$calendar.data( 'listrotator' ).rotate( otherCalendar, function() {
+							self._updateValue();
+						} );
+					} )
+					.html( msg );
+				}
 
 				this.$calendarhint.show();
 			} else {
