@@ -1,6 +1,9 @@
 <?php
 
 namespace Wikibase;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use SplFileInfo;
 use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, MWException;
 
 
@@ -148,88 +151,15 @@ final class RepoHooks {
 	 */
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
-		$testFiles = array(
-			'Autocomment',
-			'ClaimSummaryBuilder',
-			'EditEntity',
-			'EntityView',
-			'ItemMove',
-			'ItemContentDiffView',
-			'ItemMove',
-			'ItemView',
-			'LabelDescriptionDuplicateDetector',
-			'LazyDBConnectionProvider',
-			'MultiLangConstraintDetector',
-			'NamespaceUtils',
-			'Summary',
-			'WikibaseRepo',
+		$directoryIterator = new RecursiveDirectoryIterator( __DIR__ . '/tests/phpunit/includes/' );
 
-			'actions/EditEntityAction',
-			'actions/ViewEntityAction',
-
-			'api/BotEdit',
-			'api/EditPage',
-			'api/GetEntities',
-			'api/SetLabel',
-			'api/SetDescription',
-			'api/LinkTitles',
-			'api/Permissions',
-			'api/SetAliases',
-			'api/EditEntity',
-			'api/SetSiteLink',
-			'api/CreateClaim',
-			'api/GetClaims',
-			'api/RemoveClaims',
-			'api/SetClaimValue',
-			'api/SetReference',
-			'api/RemoveReferences',
-			'api/SetClaim',
-			'api/RemoveQualifiers',
-			'api/SetQualifier',
-
-			'changeop/ChangeOps',
-			'changeop/ChangeOpLabel',
-			'changeop/ChangeOpDescription',
-			'changeop/ChangeOpAliases',
-			'changeop/ChangeOpSiteLink',
-
-			'content/EntityContentFactory',
-			'content/EntityHandler',
-			'content/ItemContent',
-			'content/ItemHandler',
-			'content/PropertyContent',
-			'content/PropertyHandler',
-
-			'rdf/RdfBuilder',
-			'rdf/RdfSerializer',
-
-			'specials/SpecialEntityData',
-			'specials/SpecialNewItem',
-			'specials/SpecialNewProperty',
-			'specials/SpecialItemDisambiguation',
-			'specials/SpecialItemByTitle',
-			'specials/SpecialSetDescription',
-			'specials/SpecialSetLabel',
-			'specials/SpecialSetAliases',
-
-			'specials/EntityDataSerializationService',
-
-			'store/IdGenerator',
-			'store/StoreFactory',
-			'store/Store',
-
-			'store/sql/DispatchStats',
-			'store/sql/EntityPerPageBuilder',
-			'store/sql/SqlIdGenerator',
-			'store/sql/TermSqlIndex',
-			'store/sql/TermSearchKeyBuilder',
-
-			'updates/ItemDeletionUpdate',
-			'updates/ItemModificationUpdate',
-		);
-
-		foreach ( $testFiles as $file ) {
-			$files[] = __DIR__ . '/tests/phpunit/includes/' . $file . 'Test.php';
+		/**
+		 * @var SplFileInfo $fileInfo
+		 */
+		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
+			if ( substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
+				$files[] = $fileInfo->getPathname();
+			}
 		}
 
 		return true;
