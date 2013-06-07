@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\DataModel\SimpleSiteLink;
+
 /**
  * Page for creating new Wikibase items.
  *
@@ -92,8 +94,9 @@ class SpecialNewItem extends SpecialNewEntity {
 				return $status;
 			}
 
-			$link = new \Wikibase\SiteLink( $site, $page );
-			$ret = $itemContent->getItem()->addSiteLink( $link, 'add' );
+			$link = new SimpleSiteLink( $site->getGlobalId(), $page );
+			$ret = $itemContent->getItem()->addSimpleSiteLink( $link );
+
 			if ( $ret === false ) {
 				$status->error( 'wikibase-newitem-add-sitelink-failed' );
 				return $status;
