@@ -337,7 +337,7 @@ class EditEntity extends ModifyEntity {
 			}
 
 			if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $linkSite, null );
+				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, null );
 			} else {
 				$linkPage = $linkSite->normalizePageName( Utils::trimWhitespace( $arg['title'] ) );
 
@@ -346,7 +346,7 @@ class EditEntity extends ModifyEntity {
 					$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'add-sitelink-failed' );
 				}
 
-				$siteLinksChangeOps[] = new ChangeOpSiteLink( $linkSite, $linkPage );
+				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
 			}
 		}
 
