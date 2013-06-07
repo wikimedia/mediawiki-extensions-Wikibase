@@ -40,6 +40,7 @@ return call_user_func( function() {
 		'Wikibase\ChangesTable' => 'includes/ChangesTable.php',
 		'Wikibase\DiffOpValueFormatter' => 'includes/DiffOpValueFormatter.php',
 		'Wikibase\DiffView' => 'includes/DiffView.php',
+		'Wikibase\LanguageWrapper' => 'includes/LanguageWrapper.php',
 		'Wikibase\Lib\GuidGenerator' => 'includes/GuidGenerator.php',
 		'Wikibase\Lib\V4GuidGenerator' => 'includes/GuidGenerator.php',
 		'Wikibase\Lib\EntityRetrievingDataTypeLookup' => 'includes/EntityRetrievingDataTypeLookup.php',
