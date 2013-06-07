@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use MWException;
+use InvalidArgumentException;
 
 /**
  * Base class for snaks.
@@ -45,7 +45,7 @@ abstract class SnakObject implements Snak {
 	 *
 	 * @param EntityId|integer $propertyId
 	 *
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $propertyId ) {
 		if ( is_integer( $propertyId ) ) {
@@ -53,11 +53,11 @@ abstract class SnakObject implements Snak {
 		}
 
 		if ( !$propertyId instanceof EntityId ) {
-			throw new MWException( '$propertyId should be a EntityId' );
+			throw new InvalidArgumentException( '$propertyId should be a EntityId' );
 		}
 
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new MWException( 'The $propertyId of a property snak can only be an ID of a Property object' );
+			throw new InvalidArgumentException( 'The $propertyId of a property snak can only be an ID of a Property object' );
 		}
 
 		$this->propertyId = $propertyId;
@@ -160,7 +160,6 @@ abstract class SnakObject implements Snak {
 	 * @param array $data
 	 *
 	 * @return Snak
-	 * @throws MWException
 	 */
 	public static function newFromArray( array $data ) {
 		$snakType = array_shift( $data );
@@ -184,11 +183,11 @@ abstract class SnakObject implements Snak {
 	 * @param array $constructorArguments
 	 *
 	 * @return Snak
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public static function newFromType( $snakType, array $constructorArguments ) {
 		if ( $constructorArguments === array() || ( $snakType === 'value' ) && count( $constructorArguments ) < 2 ) {
-			throw new MWException( __METHOD__ . ' got an array with to few constructor arguments' );
+			throw new InvalidArgumentException( __METHOD__ . ' got an array with to few constructor arguments' );
 		}
 
 		$snakJar = array(
@@ -198,7 +197,7 @@ abstract class SnakObject implements Snak {
 		);
 
 		if ( !array_key_exists( $snakType, $snakJar ) ) {
-			throw new MWException( 'Cannot construct a snak from array with unknown snak type "' . $snakType . '"' );
+			throw new InvalidArgumentException( 'Cannot construct a snak from array with unknown snak type "' . $snakType . '"' );
 		}
 
 		$snakClass = $snakJar[$snakType];
