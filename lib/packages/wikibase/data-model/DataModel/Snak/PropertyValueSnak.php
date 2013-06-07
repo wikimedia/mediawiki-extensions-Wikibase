@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use DataValues\DataValue;
-use MWException;
 
 /**
  * Class representing a property value snak.
@@ -117,40 +116,6 @@ class PropertyValueSnak extends SnakObject {
 	 */
 	public function getType() {
 		return 'value';
-	}
-
-	/**
-	 * Returns a new PropertyValueSnak constructed from the provided value.
-	 * The DataValue
-	 *
-	 * @since 0.3
-	 * @deprecated since 0.4
-	 *
-	 * @param EntityId $propertyId
-	 * @param mixed $rawDataValue
-	 *
-	 * @return PropertyValueSnak
-	 * @throws MWException
-	 */
-	public static function newFromPropertyValue( EntityId $propertyId, $rawDataValue ) {
-		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new MWException( 'Expected an EntityId of a property' );
-		}
-
-		$content = EntityContentFactory::singleton()->getFromId( $propertyId );
-
-		if ( $content === null ) {
-			throw new MWException( 'Cannot create a DataValue for a non-existing property' );
-		}
-
-		/**
-		 * @var Property $property
-		 */
-		$property = $content->getEntity();
-
-		$dataValue = $property->newDataValue( $rawDataValue );
-
-		return new static( $propertyId, $dataValue );
 	}
 
 }
