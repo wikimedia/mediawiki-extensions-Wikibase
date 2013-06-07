@@ -472,6 +472,16 @@ final class ClientHooks {
 			$out->setProperty( 'wikibase_item', $itemId );
 		}
 
+		$errors = $pout->getExtensionData( 'wikibase-property-render-errors' );
+
+		if ( !empty( $errors ) ) {
+			foreach ( $errors as $errorMessage ) {
+				$out->addWikiText(
+					'<p class="error">' . $errorMessage . '</p>'
+				);
+			}
+		}
+
 		return true;
 	}
 
