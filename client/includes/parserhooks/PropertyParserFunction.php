@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -162,7 +163,7 @@ class PropertyParserFunction {
 
 		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
 		$entityId = $siteLinkLookup->getEntityIdForSiteLink( //FIXME: method not in the interface
-			new SiteLink( $site, $parser->getTitle()->getFullText() )
+			new SimpleSiteLink( $site, $parser->getTitle()->getFullText() )
 		);
 
 		// @todo handle when site link is not there, such as site link / entity has been deleted...

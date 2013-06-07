@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\Claims;
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
@@ -151,19 +152,26 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	}
 
 	/**
-	 * Gets an EntityId for a SiteLink
+	 * @see SiteLinkLookup::getEntityIdForSiteLink
 	 *
 	 * @since 0.4
 	 *
-	 * @param SiteLink $siteLink
+	 * @param SimpleSiteLink $siteLink
 	 *
-	 * @return EntityId
+	 * @return EntityId|null
 	 */
-	public function getEntityIdForSiteLink( SiteLink $siteLink ) {
-		$globalSiteId = $siteLink->getSite()->getGlobalId();
+	public function getEntityIdForSiteLink( SimpleSiteLink $siteLink ) {
+		if ( $siteLink instanceof SiteLink ) {
+			$globalSiteId = $siteLink->getSite()->getGlobalId();
+			$pageName = $siteLink->getPage();
+		}
+		else {
+			$globalSiteId = $siteLink->getSiteId();
+			$pageName = $siteLink->getPageName();
+		}
 
 		// @todo: fix test data to use titles with underscores, like the site link table does it
-		$title = \Title::newFromText( $siteLink->getPage() );
+		$title = \Title::newFromText( $pageName );
 		$pageTitle = $title->getDBkey();
 
 		$numericItemId = $this->getItemIdForLink( $globalSiteId, $pageTitle );
@@ -411,6 +419,8 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	}
 
 	/**
+	 * @see SiteLinkLookup::getSiteLinksForItem
+	 *
 	 * Returns an array of SiteLink for an EntityId.
 	 *
 	 * If the entity isn't known or not an Item, an empty array is returned.
@@ -419,17 +429,17 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return SiteLink[]
+	 * @return SimpleSiteLink[]
 	 */
 	public function getSiteLinksForItem( EntityId $entityId ) {
 		$entity = $this->getEntity( $entityId );
 
-		if ( !$entity || !( $entity instanceof Item ) ) {
-			return array();
+		if ( $entity instanceof Item ) {
+			return $entity->getSimpleSiteLinks();
 		}
 
-		return $entity->getSiteLinks();
-
+		// FIXME: throw InvalidArgumentException rather then failing silently
+		return array();
 	}
 
 	/**

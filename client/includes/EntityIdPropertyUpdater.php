@@ -2,6 +2,10 @@
 
 namespace Wikibase;
 
+use ParserOutput;
+use Title;
+use Wikibase\DataModel\SimpleSiteLink;
+
 /**
  * Handles wikibase_item page and parser output property
  *
@@ -52,11 +56,11 @@ class EntityIdPropertyUpdater {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \ParserOutput $out
+	 * @param ParserOutput $out
 	 * @param Title $title
 	 */
-	public function updateItemIdProperty( \ParserOutput $out, \Title $title ) {
-		$siteLink = new SiteLink(
+	public function updateItemIdProperty( ParserOutput $out, Title $title ) {
+		$siteLink = new SimpleSiteLink(
 			$this->site,
 			$title->getFullText()
 		);
@@ -72,7 +76,7 @@ class EntityIdPropertyUpdater {
 			$this->unsetProperty( $out, 'wikibase_item' );
 
 			wfDebugLog( __CLASS__, __FUNCTION__ . 'Trying to set wikibase_item property for '
-				. $siteLink->getSite()->getGlobalId() . ':' . $siteLink->getPage()
+				. $siteLink->getSiteId() . ':' . $siteLink->getPageName()
 				. ' but $itemId is not an EntityId object.' );
 		}
 	}
