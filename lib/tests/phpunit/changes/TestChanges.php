@@ -1,12 +1,12 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\DataModel\SimpleSiteLink;
 use \Wikibase\Item;
 use \Wikibase\Property;
 use \Wikibase\EntityChange;
 use \Wikibase\DiffChange;
 use \Wikibase\EntityId;
-use Wikibase\SiteLink;
 
 /**
  * Test change data for ChangeRowTest
@@ -42,27 +42,15 @@ use Wikibase\SiteLink;
  */
 final class TestChanges {
 
-	protected static function getSite( $globalId ) {
-		$site = new \MediaWikiSite();
-		$site->setGlobalId( $globalId );
-
-		return $site;
-	}
-
-	protected static function makeSiteLink( $siteId, $page ) {
-		$site = self::getSite( $siteId );
-		return new SiteLink( $site, $page );
-	}
-
 	protected static function getItem() {
 		$item = Item::newEmpty();
 		$item->setLabel( 'en', 'Venezuela' );
 		$item->setDescription( 'en', 'a country' );
 		$item->addAliases( 'en', array( 'Bolivarian Republic of Venezuela' ) );
 
-		$item->addSiteLink( self::makeSiteLink( 'enwiki', 'Venezuela' )  );
-		$item->addSiteLink( self::makeSiteLink( 'jawiki', 'ベネズエラ' )  );
-		$item->addSiteLink( self::makeSiteLink( 'cawiki', 'Veneçuela' )  );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Venezuela' )  );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'jawiki', 'ベネズエラ' )  );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'cawiki', 'Veneçuela' )  );
 
 		return $item;
 	}
@@ -109,24 +97,24 @@ final class TestChanges {
 			//       which relies on the database. This is inconsistent with the Site objects
 			//       generated here, or elsewhere in test cases.
 
-			$link = self::makeSiteLink( 'dewiki', "Dummy" );
-			$new->addSiteLink( $link, 'add' );
+			$link = new SimpleSiteLink( 'dewiki', "Dummy" );
+			$new->addSimpleSiteLink( $link, 'add' );
 			$changes['set-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$link = self::makeSiteLink( 'enwiki', "Emmy" );
-			$new->addSiteLink( $link, 'add' );
+			$link = new SimpleSiteLink( 'enwiki', "Emmy" );
+			$new->addSimpleSiteLink( $link, 'add' );
 			$changes['set-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			// -----
-			$link = self::makeSiteLink( 'dewiki', "Dummy2" );
-			$new->addSiteLink( $link, 'set' );
+			$link = new SimpleSiteLink( 'dewiki', "Dummy2" );
+			$new->addSimpleSiteLink( $link, 'set' );
 			$changes['change-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$link = self::makeSiteLink( 'enwiki', "Emmy2" );
-			$new->addSiteLink( $link, 'set' );
+			$link = new SimpleSiteLink( 'enwiki', "Emmy2" );
+			$new->addSimpleSiteLink( $link, 'set' );
 			$changes['change-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
