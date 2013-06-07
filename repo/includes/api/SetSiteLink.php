@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase, User;
 
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
@@ -75,9 +76,10 @@ class SetSiteLink extends ModifyEntity {
 		$summary->setLanguage( $params['linksite'] ); //XXX: not really a language!
 
 		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
-			$link = $entityContent->getItem()->getSiteLink( Utils::trimToNFC( $params['linksite'] ) );
-
-			if ( !$link ) {
+			try {
+				$link = $entityContent->getItem()->getSimpleSiteLink( Utils::trimToNFC( $params['linksite'] ) );
+			}
+			catch ( \OutOfBoundsException $exception ) {
 				wfProfileOut( __METHOD__ );
 				$this->dieUsage( $this->msg( 'wikibase-api-remove-sitelink-failed' )->text(), 'remove-sitelink-failed' );
 			}
@@ -106,21 +108,17 @@ class SetSiteLink extends ModifyEntity {
 				$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
 			}
 
-			$link = new SiteLink( $site, $page );
-			$ret = $entityContent->getEntity()->addSiteLink( $link, 'set' );
+			$link = new SimpleSiteLink( $site->getGlobalId(), $page );
 
-			if ( $ret === false ) {
-				wfProfileOut( __METHOD__ );
-				$this->dieUsage( $this->msg( 'wikibase-api-add-sitelink-failed' )->text(), 'add-sitelink-failed' );
-			}
+			$entityContent->getEntity()->addSimpleSiteLink( $link );
 
-			$this->addSiteLinksToResult( array( $ret ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
+			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
 
 			$summary->setAction( 'set' );
 			$summary->addAutoSummaryArgs( $params['linktitle'] );
 
 			wfProfileOut( __METHOD__ );
-			return $ret === false ? null : $summary;
+			return $summary;
 		}
 	}
 

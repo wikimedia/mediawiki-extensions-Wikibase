@@ -146,24 +146,8 @@ class Item extends Entity {
 	}
 
 	/**
-	 * Returns the site link for the given site id, or null.
+	 * @since 0.4
 	 *
-	 * @since 0.1
-	 * @deprecated since 0.4, use getSimpleSiteLink instead
-	 *
-	 * @param String $siteId the id of the site to which to get the lin
-	 *
-	 * @return SiteLink|null the corresponding SiteLink object, or null
-	 */
-	public function getSiteLink( $siteId ) {
-		if ( array_key_exists( $siteId, $this->data['links'] ) ) {
-			return SiteLink::newFromText( $siteId, $this->data['links'][$siteId] );
-		} else {
-			return null;
-		}
-	}
-
-	/**
 	 * @param string $siteId
 	 *
 	 * @return SimpleSiteLink
@@ -175,6 +159,17 @@ class Item extends Entity {
 		}
 
 		return new SimpleSiteLink( $siteId, $this->data['links'][$siteId] );
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param string $siteId
+	 *
+	 * @return bool
+	 */
+	public function hasLinkToSite( $siteId ) {
+		return array_key_exists( $siteId, $this->data['links'] );
 	}
 
 	/**

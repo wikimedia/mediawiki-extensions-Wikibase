@@ -4,10 +4,12 @@ namespace Wikibase\Api;
 
 use User, Status, ApiBase;
 
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Settings;
 use Wikibase\EditEntity;
+use Wikibase\SiteLink;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -199,23 +201,15 @@ abstract class ApiWikibase extends \ApiBase {
 				if ( $dir === 'ascending' ) {
 					$sortOk = usort(
 						$siteLinks,
-						function( $a, $b ) {
-							/**
-							 * @var \Wikibase\SiteLink $a
-							 * @var \Wikibase\SiteLink $b
-							 */
-							return strcmp( $a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
+						function( SimpleSiteLink $a, SimpleSiteLink $b ) {
+							return strcmp( $a->getSiteId(), $b->getSiteId() );
 						}
 					);
 				} elseif ( $dir === 'descending' ) {
 					$sortOk = usort(
 						$siteLinks,
-						function( $a, $b ) {
-							/**
-							 * @var \Wikibase\SiteLink $a
-							 * @var \Wikibase\SiteLink $b
-							 */
-							return strcmp( $b->getSite()->getGlobalId(), $a->getSite()->getGlobalId() );
+						function( SimpleSiteLink $a, SimpleSiteLink $b ) {
+							return strcmp( $b->getSiteId(), $a->getSiteId() );
 						}
 					);
 				}
@@ -227,12 +221,12 @@ abstract class ApiWikibase extends \ApiBase {
 		}
 
 		/**
-		 * @var \Wikibase\SiteLink $link
+		 * @var SimpleSiteLink $link
 		 */
 		foreach ( $siteLinks as $link ) {
 			$response = array(
-				'site' => $link->getSite()->getGlobalId(),
-				'title' => $link->getPage(),
+				'site' => $link->getSiteId(),
+				'title' => $link->getPageName(),
 			);
 
 			if ( $options !== null ) {
@@ -241,7 +235,19 @@ abstract class ApiWikibase extends \ApiBase {
 						//skip
 					} elseif ( $opt === 'url' ) {
 						//include full url in the result
-						$response['url'] = $link->getUrl();
+						$site = \Sites::singleton()->getSite( $link->getSiteId() );
+
+						if ( $site === null ) {
+							$response['url'] = '';
+						}
+						else {
+							$siteLink = new SiteLink(
+								$site,
+								$link->getPageName()
+							);
+
+							$response['url'] = $siteLink->getUrl();
+						}
 					} else {
 						//include some flag in the result
 						$response[$opt] = '';
@@ -249,7 +255,7 @@ abstract class ApiWikibase extends \ApiBase {
 				}
 			}
 
-			$key = $this->getUsekeys() ? $link->getSite()->getGlobalId() : $idx++;
+			$key = $this->getUsekeys() ? $link->getSiteId() : $idx++;
 			$value[$key] = $response;
 		}
 
