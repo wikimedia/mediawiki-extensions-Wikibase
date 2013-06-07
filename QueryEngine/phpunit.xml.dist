@@ -17,5 +17,8 @@
             <directory>tests/phpunit</directory>
             <exclude>tests/integration</exclude>
         </testsuite>
+        <testsuite name="QueryEngineIntegration">
+            <directory>tests/integration</directory>
+        </testsuite>
     </testsuites>
 </phpunit>
