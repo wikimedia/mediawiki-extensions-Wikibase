@@ -135,39 +135,4 @@ class ItemNewEmptyTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 	
-	/**
-	 * Tests @see Item::addSiteLink
-	 * Tests @see Item::removeSiteLink
-	 * Tests @see Item::getSiteLinks
-	 */
-	public function testAddRemoveSiteLink() {
-		$arr = array(
-			SiteLink::newFromText( 'nnwiki', 'Norge' ),
-			SiteLink::newFromText( 'enwiki', 'English' ),
-		);
-
-		/**
-		 * @var SiteLink $link
-		 */
-		foreach ( $arr as $link ) {
-			$this->item->addSiteLink( $link );
-		}
-
-		$this->assertEquals(
-			$arr,
-			$this->item->getSiteLinks(),
-			'Testing if getSiteLinks reconstructs the whole structure after it is built with addSiteLink'
-		);
-
-		foreach ( $arr as $link ) {
-			$this->item->removeSiteLink( $link->getSite()->getGlobalId() );
-		}
-
-		$this->assertCount(
-			0,
-			$this->item->getSiteLinks(),
-			'Testing if removeSiteLink decrements the whole structure to zero after it is built with addSiteLink'
-		);
-	}
-	
 }
