@@ -4,12 +4,17 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\Claim;
+use Wikibase\EntityId;
+use Wikibase\Property;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 use Wikibase\SnakList;
 use Wikibase\Snaks;
 
 /**
- * Tests for the Wikibase\Claim class.
+ * @covers Wikibase\Claim
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,18 +49,18 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	public function constructorProvider() {
 		$argLists = array();
 
-		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id42 = new EntityId( Property::ENTITY_TYPE, 42 );
 
-		$argLists[] = array( new \Wikibase\PropertyNoValueSnak( $id42 ) );
+		$argLists[] = array( new PropertyNoValueSnak( $id42 ) );
 
-		$argLists[] = array( new \Wikibase\PropertyNoValueSnak( $id42 ), new SnakList() );
+		$argLists[] = array( new PropertyNoValueSnak( $id42 ), new SnakList() );
 
 		$argLists[] = array(
-			new \Wikibase\PropertyNoValueSnak( $id42 ),
-			new \Wikibase\SnakList( array(
-				new \Wikibase\PropertyValueSnak( $id42, new StringValue( 'a' ) ),
-				new \Wikibase\PropertySomeValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ) ),
-				new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 2 ) )
+			new PropertyNoValueSnak( $id42 ),
+			new SnakList( array(
+				new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
+				new PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 1 ) ),
+				new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 2 ) )
 			) )
 		);
 
@@ -98,40 +103,40 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetMainSnak() {
-		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id42 = new EntityId( Property::ENTITY_TYPE, 42 );
 
-		$claim = new Claim( new \Wikibase\PropertyNoValueSnak( $id42 ) );
+		$claim = new Claim( new PropertyNoValueSnak( $id42 ) );
 
-		$snak = new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 41 ) );
+		$snak = new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 41 ) );
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 
-		$snak = new \Wikibase\PropertyValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 43 ), new StringValue( 'a' ) );
+		$snak = new PropertyValueSnak( new EntityId( Property::ENTITY_TYPE, 43 ), new StringValue( 'a' ) );
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 
-		$snak = new \Wikibase\PropertyNoValueSnak( $id42 );
+		$snak = new PropertyNoValueSnak( $id42 );
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 	}
 
 	public function testSetQualifiers() {
-		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id42 = new EntityId( Property::ENTITY_TYPE, 42 );
 
-		$claim = new Claim( new \Wikibase\PropertyNoValueSnak( $id42 ) );
+		$claim = new Claim( new PropertyNoValueSnak( $id42 ) );
 
 		$qualifiers = new SnakList();
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );
 
-		$qualifiers = new SnakList( array( new \Wikibase\PropertyValueSnak( $id42, new StringValue( 'a' ) ) ) );
+		$qualifiers = new SnakList( array( new PropertyValueSnak( $id42, new StringValue( 'a' ) ) ) );
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );
 
 		$qualifiers = new SnakList( array(
-			new \Wikibase\PropertyValueSnak( $id42, new StringValue( 'a' ) ),
-			new \Wikibase\PropertySomeValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 2 ) ),
-			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 3 ) )
+			new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
+			new PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 2 ) ),
+			new PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 3 ) )
 		) );
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );
@@ -190,13 +195,20 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetHashStability() {
-		$claim0 = new Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim0 = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim0->setGuid( 'claim0' );
 
-		$claim1 = new Claim( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim1 = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim1->setGuid( 'claim1' );
 
 		$this->assertEquals( $claim0->getHash(), $claim1->getHash() );
+	}
+
+	public function testSetInvalidGuidCausesException() {
+		$claim0 = new Claim( new PropertyNoValueSnak( 42 ) );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$claim0->setGuid( 42 );
 	}
 
 }
