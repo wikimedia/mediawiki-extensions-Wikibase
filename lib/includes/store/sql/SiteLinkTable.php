@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use MWException;
+use Wikibase\DataModel\SimpleSiteLink;
 
 /**
  * Represents a lookup database table for sitelinks.
@@ -192,17 +193,19 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	}
 
 	/**
+	 * @see SiteLinkLookup::getEntityIdForSiteLink
+	 *
 	 * @since 0.4
 	 *
-	 * @param SiteLink $siteLink
+	 * @param SimpleSiteLink $siteLink
 	 *
 	 * return EntityId|null
 	 */
-	public function getEntityIdForSiteLink( SiteLink $siteLink ) {
-		$numericItemId = $this->getItemIdForLink(
-			$siteLink->getSite()->getGlobalId(),
-			$siteLink->getPage()
-		);
+	public function getEntityIdForSiteLink( SimpleSiteLink $siteLink ) {
+		$siteId = $siteLink->getSiteId();
+		$pageName = $siteLink->getPageName();
+
+		$numericItemId = $this->getItemIdForLink( $siteId, $pageName );
 
 		return is_int( $numericItemId ) ? new EntityId( Item::ENTITY_TYPE, $numericItemId ) : null;
 	}
@@ -398,6 +401,8 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	}
 
 	/**
+	 * @see SiteLinkLookup::getSiteLinksForItem
+	 *
 	 * Get array of SiteLink for an item or returns empty array if no site links
 	 *
 	 * @since 0.4
@@ -406,7 +411,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 *
 	 * @throws \MWException
 	 *
-	 * @return SiteLink[]
+	 * @return SimpleSiteLink[]
 	 */
 	public function getSiteLinksForItem( EntityId $entityId ) {
 		if ( $entityId->getEntityType() !== Item::ENTITY_TYPE ) {
@@ -431,7 +436,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		$siteLinks = array();
 
 		foreach( $rows as $row ) {
-			$siteLinks[] = SiteLink::newFromText( $row->ips_site_id, $row->ips_site_page );
+			$siteLinks[] = new SimpleSiteLink( $row->ips_site_id, $row->ips_site_page );
 		}
 
 		$this->releaseConnection( $dbr );
