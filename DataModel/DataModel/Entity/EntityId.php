@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use MWException;
+use InvalidArgumentException;
 use ValueParsers\ParseException;
 
 /**
@@ -59,7 +59,6 @@ class EntityId extends \DataValues\DataValueObject {
 	 * @param string $prefixedId
 	 *
 	 * @return EntityId|null
-	 * @throws MWException
 	 */
 	public static function newFromPrefixedId( $prefixedId ) {
 		$libRegistry = new LibRegistry( Settings::singleton() );
@@ -122,15 +121,15 @@ class EntityId extends \DataValues\DataValueObject {
 	 * @param string $entityType
 	 * @param integer $numericId
 	 *
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $entityType, $numericId ) {
 		if ( !is_string( $entityType ) ) {
-			throw new MWException( '$entityType needs to be a string' );
+			throw new InvalidArgumentException( '$entityType needs to be a string' );
 		}
 
 		if ( !is_integer( $numericId ) ) {
-			throw new MWException( '$numericId needs to be an integer' );
+			throw new InvalidArgumentException( '$numericId needs to be an integer' );
 		}
 
 		$this->entityType = $entityType;
