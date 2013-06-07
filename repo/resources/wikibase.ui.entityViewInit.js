@@ -141,7 +141,9 @@
 					)
 				);
 				// actual initialization
-				new wb.ui.SiteLinksEditTool( $( this ) );
+				new wb.ui.SiteLinksEditTool( $( this ), {
+					allowedSites: wb.getSitesOfGroup( group )
+				} );
 			} );
 
 			// BUILD TOOLBARS
