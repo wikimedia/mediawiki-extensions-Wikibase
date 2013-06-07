@@ -269,7 +269,11 @@ class Item extends Entity {
 
 		$array = parent::entityToDiffArray( $entity );
 
-		$array['links'] = SiteLink::siteLinksToArray( $entity->getSiteLinks() );
+		$array['links'] = array();
+
+		foreach ( $entity->getSimpleSiteLinks() as $siteLink ) {
+			$array['links'][$siteLink->getSiteId()] = $siteLink->getPageName();
+		}
 
 		return $array;
 	}
