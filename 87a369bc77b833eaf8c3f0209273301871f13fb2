@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DzR4MsUE",
+        "filename": "repo/includes/linkeddata/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-07T23:08:13Z",
+      "side": 1,
+      "message": "YES! MORE FIELDS!",
+      "revId": "87a369bc77b833eaf8c3f0209273301871f13fb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzUkQMU8",
+        "filename": "repo/includes/linkeddata/EntityDataUriManager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-07T23:08:13Z",
+      "side": 1,
+      "message": "... You are adding more classes in the top level NS. \"We\u0027ll do one big migration at some point\" is a not very helpful attitude IMO. Later turns into never.\n\nThis is an increase of technical debt, not a big one, but it is an increase. When applied systematically, it does make a difference.",
+      "revId": "87a369bc77b833eaf8c3f0209273301871f13fb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzV4GKSM",
+        "filename": "repo/includes/linkeddata/EntityDataUriManager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-07T23:08:13Z",
+      "side": 1,
+      "message": "Manager is a weasel word. This just just as clear to me as EntityDataUriThing, which does not describe what this thing does.",
+      "revId": "87a369bc77b833eaf8c3f0209273301871f13fb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
