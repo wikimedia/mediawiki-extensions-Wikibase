@@ -5,7 +5,6 @@ namespace Wikibase;
 use DataTypes\DataType;
 use DataValues\DataValue;
 use InvalidArgumentException;
-use MWException;
 use RuntimeException;
 
 /**
