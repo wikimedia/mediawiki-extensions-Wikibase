@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Wikibase\DataModel\SimpleSiteLink;
+
 /**
  * Contains methods to lookup of sitelinks of lookup by sitelinks.
  *
@@ -108,7 +110,17 @@ interface SiteLinkLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return SiteLink[]
+	 * @return SimpleSiteLink[]
 	 */
 	public function getSiteLinksForItem( EntityId $entityId );
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param SimpleSiteLink $siteLink
+	 *
+	 * return EntityId|null
+	 */
+	public function getEntityIdForSiteLink( SimpleSiteLink $siteLink );
+
 }
