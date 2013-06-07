@@ -122,6 +122,7 @@ class ItemView extends EntityView {
 
 			} else {
 				$languageCode = $site->getLanguageCode();
+				$escapedSiteId = htmlspecialchars( $site->getGlobalId() );
 
 				// TODO: for non-JS, also set the dir attribute on the link cell;
 				// but do not build language objects for each site since it causes too much load
@@ -130,10 +131,11 @@ class ItemView extends EntityView {
 					$languageCode,
 					$alternatingClass,
 					htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ), // TODO: get an actual site name rather then just the language
-					htmlspecialchars( $site->getGlobalId() ),
+					$escapedSiteId, // displayed site ID
 					htmlspecialchars( $link->getUrl() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, $editLink . '/' . $languageCode, 'td' )
+					$this->getHtmlForEditSection( $item, $lang, $editLink . '/' . $languageCode, 'td' ),
+					$escapedSiteId // ID used in classes
 				);
 			}
 		}
