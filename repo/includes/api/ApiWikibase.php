@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use User, Status, ApiBase;
 
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Settings;
@@ -199,23 +200,15 @@ abstract class ApiWikibase extends \ApiBase {
 				if ( $dir === 'ascending' ) {
 					$sortOk = usort(
 						$siteLinks,
-						function( $a, $b ) {
-							/**
-							 * @var \Wikibase\SiteLink $a
-							 * @var \Wikibase\SiteLink $b
-							 */
-							return strcmp( $a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
+						function( SimpleSiteLink $a, SimpleSiteLink $b ) {
+							return strcmp( $a->getSiteId(), $b->getSiteId() );
 						}
 					);
 				} elseif ( $dir === 'descending' ) {
 					$sortOk = usort(
 						$siteLinks,
-						function( $a, $b ) {
-							/**
-							 * @var \Wikibase\SiteLink $a
-							 * @var \Wikibase\SiteLink $b
-							 */
-							return strcmp( $b->getSite()->getGlobalId(), $a->getSite()->getGlobalId() );
+						function( SimpleSiteLink $a, SimpleSiteLink $b ) {
+							return strcmp( $b->getSiteId(), $a->getSiteId() );
 						}
 					);
 				}

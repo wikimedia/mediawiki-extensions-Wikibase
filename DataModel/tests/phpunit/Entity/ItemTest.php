@@ -342,4 +342,24 @@ class ItemTest extends EntityTest {
 		return $argLists;
 	}
 
+	public function testHasLinkToSiteForFalse() {
+		$item = Item::newEmpty();
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'ENWIKI', 'Wikidata' ) );
+
+		$this->assertFalse( $item->hasLinkToSite( 'enwiki' ) );
+		$this->assertFalse( $item->hasLinkToSite( 'dewiki' ) );
+		$this->assertFalse( $item->hasLinkToSite( 'foo bar' ) );
+	}
+
+	public function testHasLinkToSiteForTrue() {
+		$item = Item::newEmpty();
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Wikidata' ) );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Wikidata' ) );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'foo bar', 'Wikidata' ) );
+
+		$this->assertTrue( $item->hasLinkToSite( 'enwiki' ) );
+		$this->assertTrue( $item->hasLinkToSite( 'dewiki' ) );
+		$this->assertTrue( $item->hasLinkToSite( 'foo bar' ) );
+	}
+
 }
