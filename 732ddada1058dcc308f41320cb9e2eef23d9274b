@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "DzFz49UY",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dy5pSiRE",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dy1pJEWA",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-06T18:42:38Z",
       "side": 1,
       "message": "can return null (or was it false?) if the json is invalid. need to handle this.",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzLyVyeQ",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "this is checked in the next line in checkDataProperties()",
+      "parentUuid": "Dy1pJEWA",
       "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "DzJyajRA",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "I kept it like it was before, didn\u0027t want to change too much code in this commit.\nremoved it now.",
+      "parentUuid": "Dyzprfbo",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dy3q2lT4",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 12
@@ -64,6 +118,24 @@
       "writtenOn": "2013-06-06T18:42:38Z",
       "side": 1,
       "message": "perhaps apply() should not return an integer, but throw an informative exception upon failure.",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzHyt8TA",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "will do in a follow up.",
+      "parentUuid": "Dy3q2lT4",
       "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "DzNykBVw",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dy1qz0Uw",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dy-p6pXM",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 12
@@ -98,6 +188,24 @@
       "writtenOn": "2013-06-06T18:42:38Z",
       "side": 1,
       "message": "So, you are *again* creating an int key? That doesn\u0027t seem right. Shouldn\u0027t you get $langCode from inside $arg somehow?",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzDyKWcE",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "I kept this code as it was in the original editEntity, as this commit should only be about rearranging the code for better readability. have to investigate that piece of code in a followup. I find it very odd too..",
+      "parentUuid": "Dy-p6pXM",
       "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "DzHyU0eA",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "no, that\u0027s not true for aliases. if you want to remove an alias, you always have to specify the old value, otherwise you are not able to decide what alias you want to remove (there can be more than one alias in \"en\" for example, and you only want to remove one specific \"en\" alias..)",
+      "parentUuid": "DyzqVPYc",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dy9p-4WE",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 12
@@ -132,6 +258,24 @@
       "writtenOn": "2013-06-06T18:42:38Z",
       "side": 1,
       "message": "also if there is no value or the value is empty, i guess.",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzFyRFe8",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "see answer above..",
+      "parentUuid": "Dy9p-4WE",
       "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "DzLy.aWA",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "unnecessary leftover from old code..\nremoved it.",
+      "parentUuid": "Dy3qPtXY",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dy1qMcYA",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 12
@@ -166,6 +328,24 @@
       "writtenOn": "2013-06-06T18:42:38Z",
       "side": 1,
       "message": "$linkSite may be null here.",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzPy44XU",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "meehhh.. then the documentation in SiteList::getSite is wrong. it can also return false.\nI\u0027m now checking for that..",
+      "parentUuid": "Dy1qMcYA",
       "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "DzJzDrfA",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dy7rpTR4",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dy9r4geU",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 12
@@ -200,6 +398,24 @@
       "writtenOn": "2013-06-06T18:42:38Z",
       "side": 1,
       "message": "Does \"illegal field\" convey the idea that the data contained a page ID incompatible with the page ID in the API params?",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzNy9JWQ",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "I guess so, I did not change that code, just moved it here..",
+      "parentUuid": "Dy9r4geU",
       "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "DzDyzeZk",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "I\u0027m not sure. I just left the code as it was before.. we could discuss this in a follow up.",
+      "parentUuid": "DyxrbGXs",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dy7qALU4",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 12
@@ -234,6 +468,24 @@
       "writtenOn": "2013-06-06T18:42:38Z",
       "side": 1,
       "message": "why use dieUsage() if we have a status object we can return? mixing the two methods of reporting errors seems odd.",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzBywPYk",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "true.\nthat should be tackled in a follow up.",
+      "parentUuid": "Dy7qALU4",
       "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "DzFyqtRo",
+        "filename": "repo/includes/changeop/ChangeOpSiteLink.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dy1rlkTg",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dy-rMZb8",
         "filename": "repo/includes/changeop/ChangeOps.php",
         "patchSetId": 12
@@ -268,6 +538,24 @@
       "writtenOn": "2013-06-06T18:42:38Z",
       "side": 1,
       "message": "exceptions would be nicer, they can carry more info.",
+      "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzLxfiUk",
+        "filename": "repo/includes/changeop/ChangeOps.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-07T10:49:17Z",
+      "side": 1,
+      "message": "true.\nwill do that in a follow up.",
+      "parentUuid": "Dy-rMZb8",
       "revId": "732ddada1058dcc308f41320cb9e2eef23d9274b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
