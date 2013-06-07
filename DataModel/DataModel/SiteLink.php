@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use MWException;
+use InvalidArgumentException;
 use Site;
 use Sites;
 
@@ -90,11 +90,11 @@ class SiteLink {
 	 * @param Site   $site  The site the page link points to
 	 * @param String $page  The target page's title. This is expected to already be normalized.
 	 *
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( Site $site, $page ) {
 		if ( !is_string( $page ) ) {
-			throw new MWException( '$page must be a string' );
+			throw new InvalidArgumentException( '$page must be a string' );
 		}
 
 		$this->site = $site;
