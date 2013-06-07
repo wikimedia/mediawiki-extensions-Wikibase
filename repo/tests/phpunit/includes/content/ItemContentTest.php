@@ -1,8 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
+
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\ItemContent;
-use Wikibase\SiteLink;
 
 /**
  * Tests for the Wikibase\ItemContent class.
@@ -38,6 +39,7 @@ use Wikibase\SiteLink;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author aude
  */
 class ItemContentTest extends EntityContentTest {
 
@@ -104,16 +106,16 @@ class ItemContentTest extends EntityContentTest {
 	/**
 	 * @dataProvider siteLinkConflictProvider
 	 */
-	public function testSiteLinkConflict( SiteLink $siteLink, $expected ) {
+	public function testSiteLinkConflict( SimpleSiteLink $siteLink, $expected ) {
 		$content = ItemContent::newEmpty();
-		$content->getItem()->addSiteLink( $siteLink );
+		$content->getItem()->addSimpleSiteLink( $siteLink );
 
 		$status = $content->save( 'add item', null, EDIT_NEW );
 
 		$this->assertTrue( $status->isOK(), 'item creation succeeded' );
 
 		$content1 = ItemContent::newEmpty();
-		$content1->getItem()->addSiteLink( $siteLink );
+		$content1->getItem()->addSimpleSiteLink( $siteLink );
 
 		$status = $content1->save( 'add item', null, EDIT_NEW );
 
@@ -126,10 +128,7 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	public function siteLinkConflictProvider() {
-		$site = new \MediaWikiSite();
-		$site->setGlobalId( 'eswiki' );
-
-		$siteLink = new SiteLink( $site, 'Pelecanus' );
+		$siteLink = new SimpleSiteLink( 'eswiki', 'Pelecanus' );
 
 		return array(
 			array(
