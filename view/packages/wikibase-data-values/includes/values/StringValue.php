@@ -2,8 +2,6 @@
 
 namespace DataValues;
 
-use InvalidArgumentException;
-
 /**
  * Class representing a string value.
  *
@@ -44,11 +42,11 @@ class StringValue extends DataValueObject {
 	 *
 	 * @param string $value
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws IllegalValueException
 	 */
 	public function __construct( $value ) {
 		if ( !is_string( $value ) ) {
-			throw new InvalidArgumentException( 'Can only construct StringValue from strings' );
+			throw new IllegalValueException( 'Can only construct StringValue from strings' );
 		}
 
 		$this->value = $value;

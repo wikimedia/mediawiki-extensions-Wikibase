@@ -2,8 +2,6 @@
 
 namespace DataValues;
 
-use InvalidArgumentException;
-
 /**
  * Class representing a boolean value.
  *
@@ -44,11 +42,11 @@ class BooleanValue extends DataValueObject {
 	 *
 	 * @param string $value
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws IllegalValueException
 	 */
 	public function __construct( $value ) {
 		if ( !is_bool( $value ) ) {
-			throw new InvalidArgumentException( 'Can only construct BooleanValue from booleans' );
+			throw new IllegalValueException( 'Can only construct BooleanValue from booleans' );
 		}
 
 		$this->value = $value;

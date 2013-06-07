@@ -2,9 +2,6 @@
 
 namespace DataValues;
 
-use InvalidArgumentException;
-use OutOfBoundsException;
-
 /**
  * Class representing a time value.
  * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Dates_and_times
@@ -117,40 +114,39 @@ class TimeValue extends DataValueObject {
 	 * @param integer $precision
 	 * @param string $calendarModel
 	 *
-	 * @throws InvalidArgumentException
-	 * @throws OutOfBoundsException
+	 * @throws IllegalValueException
 	 */
 	public function __construct( $time, $timezone, $before, $after, $precision, $calendarModel ) {
 		if ( !is_string( $time ) ) {
-			throw new InvalidArgumentException( '$time needs to be a string' );
+			throw new IllegalValueException( '$time needs to be a string' );
 		}
 
 		if ( !is_integer( $timezone ) ) {
-			throw new InvalidArgumentException( '$timezone needs to be an integer' );
+			throw new IllegalValueException( '$timezone needs to be an integer' );
 		}
 
 		if ( $timezone < -12 * 3600 || $timezone > 14 * 3600 ) {
-			throw new OutOfBoundsException( '$timezone out of allowed bounds' );
+			throw new IllegalValueException( '$timezone out of allowed bounds' );
 		}
 
 		if ( !is_integer( $before ) || $before < 0 ) {
-			throw new InvalidArgumentException( '$before needs to be an unsigned integer' );
+			throw new IllegalValueException( '$before needs to be an unsigned integer' );
 		}
 
 		if ( !is_integer( $after ) || $after < 0 ) {
-			throw new InvalidArgumentException( '$after needs to be an unsigned integer' );
+			throw new IllegalValueException( '$after needs to be an unsigned integer' );
 		}
 
 		if ( !is_integer( $precision ) ) {
-			throw new InvalidArgumentException( '$precision needs to be an integer' );
+			throw new IllegalValueException( '$precision needs to be an integer' );
 		}
 
 		if ( $precision < self::PRECISION_Ga || $precision > self::PRECISION_SECOND ) {
-			throw new OutOfBoundsException( '$precision out of allowed bounds' );
+			throw new IllegalValueException( '$precision out of allowed bounds' );
 		}
 
 		if ( !is_string( $calendarModel ) ) {
-			throw new InvalidArgumentException( '$calendarModel needs to be a string' );
+			throw new IllegalValueException( '$calendarModel needs to be a string' );
 		}
 
 		// Can haz scalar type hints plox? ^^
@@ -282,7 +278,7 @@ class TimeValue extends DataValueObject {
 	 * @param string $value
 	 *
 	 * @return MonolingualTextValue
-	 * @throws InvalidArgumentException
+	 * @throws IllegalValueException
 	 */
 	public function unserialize( $value ) {
 		list( $time, $timezone, $before, $after, $precision, $calendarModel ) = json_decode( $value );

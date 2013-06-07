@@ -2,8 +2,6 @@
 
 namespace DataValues;
 
-use InvalidArgumentException;
-
 /**
  * Class representing a simple numeric value.
  *
@@ -47,11 +45,11 @@ class NumberValue extends DataValueObject {
 	 *
 	 * @param int|float $value
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws IllegalValueException
 	 */
 	public function __construct( $value ) {
 		if ( !is_int( $value ) && !is_float( $value ) ) {
-			throw new InvalidArgumentException( 'Can only construct NumberValue from floats or integers' );
+			throw new IllegalValueException( 'Can only construct NumberValue from floats or integers' );
 		}
 
 		$this->value = $value;

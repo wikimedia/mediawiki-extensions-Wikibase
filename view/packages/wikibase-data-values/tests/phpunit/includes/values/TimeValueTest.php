@@ -87,7 +87,7 @@ class TimeValueTest extends DataValueTest {
 		);
 
 		$argLists[] = array(
-			'InvalidArgumentException',
+			'DataValues\IllegalValueException',
 			'+00000002013-01-01T00:00:00Z',
 			'0',
 			0,
@@ -97,7 +97,7 @@ class TimeValueTest extends DataValueTest {
 		);
 
 		$argLists[] = array(
-			'InvalidArgumentException',
+			'DataValues\IllegalValueException',
 			'+00000002013-01-01T00:00:00Z',
 			4.2,
 			0,
@@ -107,7 +107,7 @@ class TimeValueTest extends DataValueTest {
 		);
 
 		$argLists[] = array(
-			'OutOfBoundsException',
+			'DataValues\IllegalValueException',
 			'+00000002013-01-01T00:00:00Z',
 			-20 * 3600,
 			0,
@@ -117,7 +117,7 @@ class TimeValueTest extends DataValueTest {
 		);
 
 		$argLists[] = array(
-			'OutOfBoundsException',
+			'DataValues\IllegalValueException',
 			'+00000002013-01-01T00:00:00Z',
 			0,
 			0,
@@ -127,7 +127,7 @@ class TimeValueTest extends DataValueTest {
 		);
 
 		$argLists[] = array(
-			'OutOfBoundsException',
+			'DataValues\IllegalValueException',
 			'+00000002013-01-01T00:00:00Z',
 			0,
 			0,
@@ -137,7 +137,7 @@ class TimeValueTest extends DataValueTest {
 		);
 
 		$argLists[] = array(
-			'InvalidArgumentException',
+			'DataValues\IllegalValueException',
 			42,
 			0,
 			0,
@@ -147,7 +147,7 @@ class TimeValueTest extends DataValueTest {
 		);
 
 		$argLists[] = array(
-			'InvalidArgumentException',
+			'DataValues\IllegalValueException',
 			'+00000002013-01-01T00:00:00Z',
 			0,
 			4.2,
@@ -157,7 +157,7 @@ class TimeValueTest extends DataValueTest {
 		);
 
 		$argLists[] = array(
-			'InvalidArgumentException',
+			'DataValues\IllegalValueException',
 			'+00000002013-01-01T00:00:00Z',
 			0,
 			0,

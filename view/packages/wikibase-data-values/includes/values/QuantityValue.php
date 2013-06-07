@@ -2,8 +2,6 @@
 
 namespace DataValues;
 
-use InvalidArgumentException;
-
 /**
  * Class representing a numeric value with associated unit and accuracy.
  *
@@ -62,19 +60,19 @@ class QuantityValue extends DataValueObject {
 	 * @param string|null $unit
 	 * @param int|float|null $accuracy
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws IllegalValueException
 	 */
 	public function __construct( $amount, $unit = null, $accuracy = null ) {
 		if ( !is_int( $amount ) && !is_float( $amount ) ) {
-			throw new InvalidArgumentException( 'Can only construct QuantityValue from floats or integers' );
+			throw new IllegalValueException( 'Can only construct QuantityValue from floats or integers' );
 		}
 
 		if ( $accuracy !== null && !is_int( $accuracy ) && !is_float( $accuracy ) ) {
-			throw new InvalidArgumentException( 'The accuracy of a QuantityValue needs to be a float or integer' );
+			throw new IllegalValueException( 'The accuracy of a QuantityValue needs to be a float or integer' );
 		}
 
 		if ( $unit !== null && !is_string( $unit ) ) {
-			throw new InvalidArgumentException( 'The unit of a QuantityValue needs to be a string' );
+			throw new IllegalValueException( 'The unit of a QuantityValue needs to be a string' );
 		}
 
 		$this->value = $amount;

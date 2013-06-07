@@ -42,6 +42,8 @@ return array(
 	'DataValues\DataValueFactory' => 'includes/DataValueFactory.php',
 	'DataValues\DataValueObject' => 'includes/DataValueObject.php',
 
+	'DataValues\IllegalValueException' => 'includes/IllegalValueException.php',
+
 	'Comparable' => 'includes/Comparable.php',
 	'Copyable' => 'includes/Copyable.php',
 	'Hashable' => 'includes/Hashable.php',

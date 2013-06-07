@@ -2,8 +2,6 @@
 
 namespace DataValues;
 
-use InvalidArgumentException;
-
 /**
  * Class representing a monolingual text value.
  *
@@ -56,18 +54,18 @@ class MonolingualTextValue extends DataValueObject {
 	 * @param string $languageCode
 	 * @param string $value
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws IllegalValueException
 	 */
 	public function __construct( $languageCode, $value ) {
 		if ( !is_string( $languageCode ) ) {
-			throw new InvalidArgumentException( 'Can only construct MonolingualTextValue with a string language code' );
+			throw new IllegalValueException( 'Can only construct MonolingualTextValue with a string language code' );
 		}
 		elseif ( $languageCode === '' ) {
-			throw new InvalidArgumentException( 'Can only construct MonolingualTextValue with a language code of non-zero length' );
+			throw new IllegalValueException( 'Can only construct MonolingualTextValue with a language code of non-zero length' );
 		}
 
 		if ( !is_string( $value ) ) {
-			throw new InvalidArgumentException( 'Can only construct MonolingualTextValue with a string value' );
+			throw new IllegalValueException( 'Can only construct MonolingualTextValue with a string value' );
 		}
 
 		$this->value = $value;

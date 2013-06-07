@@ -2,8 +2,6 @@
 
 namespace DataValues;
 
-use InvalidArgumentException;
-
 /**
  * Class representing a value of unknown type.
  * This is in essence a null-wrapper, useful for instance for null-parsers.
@@ -44,8 +42,6 @@ class UnknownValue extends DataValueObject {
 	 * @since 0.1
 	 *
 	 * @param mixed $value
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $value ) {
 		$this->value = $value;

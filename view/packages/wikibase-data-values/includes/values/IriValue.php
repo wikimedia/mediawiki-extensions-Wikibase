@@ -2,8 +2,6 @@
 
 namespace DataValues;
 
-use InvalidArgumentException;
-
 /**
  * Class representing a IRI value.
  *
@@ -88,21 +86,21 @@ class IriValue extends DataValueObject {
 	 * @param string $query
 	 * @param string $fragment
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws IllegalValueException
 	 */
 	public function __construct( $scheme, $hierarchicalPart, $query = '', $fragment = '' ) {
 		foreach ( func_get_args() as $value ) {
 			if ( !is_string( $value ) ) {
-				throw new InvalidArgumentException( 'Can only construct IriValue from strings' );
+				throw new IllegalValueException( 'Can only construct IriValue from strings' );
 			}
 		}
 
 		if ( $scheme === '' || preg_match( '/[^a-zA-Z]/u', $scheme ) ) {
-			throw new InvalidArgumentException( "Illegal URI scheme '$scheme'." );
+			throw new IllegalValueException( "Illegal URI scheme '$scheme'." );
 		}
 
 		if ( $hierarchicalPart === '' ) {
-			throw new InvalidArgumentException( "Illegal URI hierarchical part '$hierarchicalPart'." );
+			throw new IllegalValueException( "Illegal URI hierarchical part '$hierarchicalPart'." );
 		}
 
 		$this->scheme = $scheme;
@@ -225,17 +223,17 @@ class IriValue extends DataValueObject {
 	 * @param string $serialization
 	 *
 	 * @return array
-	 * @throws InvalidArgumentException
+	 * @throws IllegalValueException
 	 */
 	public static function getIriParts( $serialization ) {
 		if ( !is_string( $serialization ) ) {
-			throw new InvalidArgumentException( 'IriValue::getIriParts expects a string value' );
+			throw new IllegalValueException( 'IriValue::getIriParts expects a string value' );
 		}
 
 		$parts = explode( ':', $serialization, 2 ); // try to split "schema:rest"
 
 		if ( count( $parts ) === 1 ) {
-			throw new InvalidArgumentException( "Unserialization failed: the string \"$serialization\" is no valid URI." );
+			throw new IllegalValueException( "Unserialization failed: the string \"$serialization\" is no valid URI." );
 		}
 
 		$scheme = $parts[0];

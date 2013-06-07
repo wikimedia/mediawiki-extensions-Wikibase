@@ -2,8 +2,6 @@
 
 namespace DataValues;
 
-use InvalidArgumentException;
-
 /**
  * Class representing a geographical coordinate value.
  *
@@ -86,7 +84,7 @@ class GeoCoordinateValue extends DataValueObject {
 	 * @param string|null $globe
 	 * @param float|int|null $precision
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws IllegalValueException
 	 */
 	public function __construct( $latitude, $longitude, $altitude = null, $globe = 'http://www.wikidata.org/entity/Q2', $precision = null ) {
 		// TODO: validate those values!
@@ -107,23 +105,23 @@ class GeoCoordinateValue extends DataValueObject {
 		}
 
 		if ( !is_float( $latitude ) ) {
-			throw new InvalidArgumentException( 'Can only construct GeoCoordinateValue with a numeric latitude' );
+			throw new IllegalValueException( 'Can only construct GeoCoordinateValue with a numeric latitude' );
 		}
 
 		if ( !is_float( $longitude ) ) {
-			throw new InvalidArgumentException( 'Can only construct GeoCoordinateValue with a numeric longitude' );
+			throw new IllegalValueException( 'Can only construct GeoCoordinateValue with a numeric longitude' );
 		}
 
 		if ( $altitude !== null && !is_float( $altitude ) ) {
-			throw new InvalidArgumentException( 'Can only construct GeoCoordinateValue with a numeric altitude' );
+			throw new IllegalValueException( 'Can only construct GeoCoordinateValue with a numeric altitude' );
 		}
 
 		if ( $precision !== null && !is_float( $precision ) ) {
-			throw new InvalidArgumentException( 'Can only construct GeoCoordinateValue with a numeric precision' );
+			throw new IllegalValueException( 'Can only construct GeoCoordinateValue with a numeric precision' );
 		}
 
 		if ( !is_string( $globe ) && $globe !== null ) {
-			throw new InvalidArgumentException( 'Can only construct GeoCoordinateValue with a string or null globe parameter' );
+			throw new IllegalValueException( 'Can only construct GeoCoordinateValue with a string or null globe parameter' );
 		}
 
 		$this->latitude = $latitude;
@@ -152,7 +150,7 @@ class GeoCoordinateValue extends DataValueObject {
 	 * @param string $value
 	 *
 	 * @return GeoCoordinateValue
-	 * @throws InvalidArgumentException
+	 * @throws IllegalValueException
 	 */
 	public function unserialize( $value ) {
 		list( $latitude, $longitude, $altitude, $globe, $precision ) = json_decode( $value );
