@@ -27,7 +27,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks, $wgResourceModules;
+global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks, $wgResourceModules;
 
 $wgExtensionCredits['datavalues'][] = array(
 	'path' => __DIR__,
@@ -40,10 +40,8 @@ $wgExtensionCredits['datavalues'][] = array(
 
 $wgExtensionMessagesFiles['DataValues'] = __DIR__ . '/DataValues.i18n.php';
 
-foreach ( include( __DIR__ . '/DataValues.classes.php' ) as $class => $file ) {
-	if ( !array_key_exists( $class, $GLOBALS['wgAutoloadLocalClasses'] ) ) {
-		$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
-	}
+if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+	require_once __DIR__ . '/tests/testLoader.php';
 }
 
 /**
