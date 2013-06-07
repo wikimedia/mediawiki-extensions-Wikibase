@@ -57,6 +57,7 @@ class SitesModule extends ResourceLoaderModule {
 
 			if ( $site->getType() === Site::TYPE_MEDIAWIKI && in_array( $group, $groups ) ) {
 				$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
+				$globalId = $site->getGlobalId();
 
 				// Use protocol relative URIs, as it's safe to assume that all wikis support the same protocol
 				list( $pageUrl, $apiUrl ) = preg_replace(
@@ -72,10 +73,10 @@ class SitesModule extends ResourceLoaderModule {
 				//$localIds = $site->getLocalIds();
 				//$name = empty( $localIds['equivalent'] ) ? $site->getGlobalId() : $localIds['equivalent'][0];
 
-				$sites[$site->getLanguageCode()] = array(
+				$sites[ $globalId ] = array(
 					'shortName' => $languageName,
 					'name' => $languageName, // use short name for both, for now
-					'globalSiteId' => $site->getGlobalId(),
+					'id' => $globalId,
 					'pageUrl' => $pageUrl,
 					'apiUrl' => $apiUrl,
 					'languageCode' => $site->getLanguageCode(),
