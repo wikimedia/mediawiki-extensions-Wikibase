@@ -16,6 +16,24 @@
       "revId": "497db6d3e5efc5fd9f5925f35e22988c79e4ffe6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzJwLrY8",
+        "filename": "DataModel/DataModel/Entity/Item.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-07T07:47:23Z",
+      "side": 0,
+      "message": "with my git credits script:\n\ngit-credits Item.php\n      1 daniel\n    299 jeroendedauw\n\nLine 54 is from Daniel:\n\n* @param SiteLink $link the link to the target page",
+      "parentUuid": "DzFynVao",
+      "revId": "497db6d3e5efc5fd9f5925f35e22988c79e4ffe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
