@@ -587,9 +587,7 @@ abstract class ModifyItemBase extends ApiTestCase {
 		if ( isset( $expected['id'] ) ) {
 			$this->assertEquals( $expected['id'], $actual['id'] );
 		}
-		if ( isset( $expected['lastrevid'] ) ) {
-			$this->assertEquals( $expected['lastrevid'], $actual['lastrevid'] );
-		}
+
 		if ( isset( $expected['type'] ) ) {
 			$this->assertEquals( $expected['type'], $actual['type'] );
 		}
