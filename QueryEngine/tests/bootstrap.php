@@ -12,6 +12,10 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
+if ( !in_array( '--testsuite=QueryEngineIntegration', $GLOBALS['argv'] ) ) {
+	require_once( __DIR__ . '/evilMediaWikiBootstrap.php' );
+}
+
 require_once( __DIR__ . '/../../../DataValues/DataValues/DataValues.php' );
 
 require_once( __DIR__ . '/../../../Ask/Ask.php' );
