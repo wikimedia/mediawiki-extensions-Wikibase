@@ -6,7 +6,7 @@ use Wikibase\EntityId;
 use Wikibase\Lib\PropertyNotFoundException;
 
 /**
- * @covers Wikibase\Lib\PropertyNotFoundException class.
+ * @covers Wikibase\Lib\PropertyNotFoundException
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

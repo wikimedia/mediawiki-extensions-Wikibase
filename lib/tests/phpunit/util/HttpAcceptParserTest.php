@@ -9,7 +9,7 @@ use Wikibase\Item;
 use Wikibase\Term;
 
 /**
- * Test for HttpAcceptParser
+ * @covers Wikibase\HttpAcceptParser
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,6 @@ use Wikibase\Term;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  *
- * @covers HttpAcceptNegotiator
  */
 class HttpAcceptParserTest extends \PHPUnit_Framework_TestCase {
 
