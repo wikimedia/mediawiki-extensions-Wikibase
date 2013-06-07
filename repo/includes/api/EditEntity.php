@@ -185,7 +185,7 @@ class EditEntity extends ModifyEntity {
 		// TODO: This is a temporary fix that should be handled properly with a
 		// serializer class that is specific for the given entity
 		if ( $entityContent->getEntity()->getType() === Item::ENTITY_TYPE ) {
-			$this->addSiteLinksToResult( $entity->getSiteLinks(), 'entity' );
+			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
 		}
 
 		wfProfileOut( __METHOD__ );
