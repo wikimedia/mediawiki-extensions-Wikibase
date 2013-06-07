@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use Diff\Patcher;
-use MWException;
+use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\SimpleSiteLink;
 
@@ -33,7 +33,6 @@ use Wikibase\DataModel\SimpleSiteLink;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
  */
 class Item extends Entity {
 
@@ -122,15 +121,12 @@ class Item extends Entity {
 	 * @return array a list of SiteLink objects
 	 */
 	public function getSiteLinks() {
-		wfProfileIn( __METHOD__ );
-
 		$links = array();
 
 		foreach ( $this->data['links'] as $globalSiteId => $title ) {
 			$links[] = SiteLink::newFromText( $globalSiteId, $title );
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $links;
 	}
 
@@ -264,11 +260,11 @@ class Item extends Entity {
 	 * @param Entity $entity
 	 *
 	 * @return array
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	protected function entityToDiffArray( Entity $entity ) {
 		if ( !( $entity instanceof Item ) ) {
-			throw new MWException( 'ItemDiffer only accepts Item objects' );
+			throw new InvalidArgumentException( 'ItemDiffer only accepts Item objects' );
 		}
 
 		$array = parent::entityToDiffArray( $entity );
