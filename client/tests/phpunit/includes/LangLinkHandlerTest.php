@@ -117,11 +117,8 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			$title = \Title::newFromText( $title );
 		}
 
-		$links = array();
-
-		foreach ( $this->langLinkHandler->getEntityLinks( $title ) as $link ) {
-			$links[$link->getSiteId()] = $link->getPageName();
-		}
+		$links = $this->langLinkHandler->getEntityLinks( $title );
+		$links = SiteLink::siteLinksToArray( $links );
 
 		$this->assertArrayEquals( $expectedLinks, $links, false, true );
 	}

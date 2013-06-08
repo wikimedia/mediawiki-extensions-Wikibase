@@ -1,14 +1,12 @@
 <?php
 
 namespace Wikibase\Test;
-
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\EntityId;
-use Wikibase\SiteLinkTable;
-use Wikibase\Item;
+use \Wikibase\SiteLinkTable;
+use \Wikibase\SiteLink;
+use \Wikibase\Item;
 
 /**
- * @covers Wikibase\SiteLinkTable
+ * Tests for the Wikibase\SiteLinkTable class.
  *
  * @file
  * @since 0.1
@@ -24,13 +22,9 @@ use Wikibase\Item;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author aude
  */
 class SiteLinkTableTest extends \MediaWikiTestCase {
 
-	/**
-	 * @var SiteLinkTable
-	 */
 	protected $siteLinkTable;
 
 	public function setUp() {
@@ -47,7 +41,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		$items = array();
 
 		$item = Item::newEmpty();
-		$item->setId( new EntityId( Item::ENTITY_TYPE, 1 ) );
+		$item->setId( new \Wikibase\EntityId( Item::ENTITY_TYPE, 1 ) );
 		$item->setLabel( 'en', 'Beer' );
 
 		$sitelinks = array(
@@ -57,7 +51,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		);
 
 		foreach( $sitelinks as $site => $page ) {
-			$item->addSimpleSiteLink( new SimpleSiteLink( $site, $page ) );
+			$item->addSiteLink( SiteLink::newFromText( $site, $page ) );
 		}
 
 		$items[] = $item;
@@ -68,7 +62,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider itemProvider
 	 */
-	public function testSaveLinksOfItem( Item $item ) {
+	public function testSaveLinksOfItem( $item ) {
 		$res = $this->siteLinkTable->saveLinksOfItem( $item );
 		$this->assertTrue( $res );
 	}
@@ -77,11 +71,11 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
-	 public function testGetSiteLinksOfItem( Item $item ) {
+	 public function testGetSiteLinksOfItem( $item ) {
 		$siteLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
 
 		$this->assertEquals(
-			$item->getSimpleSiteLinks(),
+			$item->getSiteLinks(),
 			$siteLinks
 		);
 	}
@@ -91,13 +85,10 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGetEntityIdForSiteLink( Item $item ) {
-		$siteLinks = $item->getSimpleSiteLinks();
+		$siteLinks = $item->getSiteLinks();
 
 		foreach( $siteLinks as $siteLink ) {
-			$this->assertEquals(
-				$item->getId(),
-				$this->siteLinkTable->getEntityIdForSiteLink( $siteLink )
-			);
+			$this->assertEquals( $item->getId(), $this->siteLinkTable->getEntityIdForSiteLink( $siteLink ) );
 		}
 	}
 
@@ -105,9 +96,9 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
-	public function testCountLinks( Item $item ) {
+	public function testCountLinks( $item ) {
 		$this->assertEquals(
-			count( $item->getSimpleSiteLinks() ),
+			count( $item->getSiteLinks() ),
 			$this->siteLinkTable->countLinks( array( $item->getId()->getNumericId() ) )
 		);
 	}
@@ -116,12 +107,13 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @depends testCountLinks
 	 * @dataProvider itemProvider
 	 */
-	 public function testDeleteLinksOfItem( Item $item ) {
+	 public function testDeleteLinksOfItem( $item ) {
 		$this->assertTrue(
 			$this->siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false
 		);
 
-		$this->assertEmpty(
+		$this->assertEquals(
+			array(),
 			$this->siteLinkTable->getSiteLinksForItem( $item->getId() )
 		);
 	}

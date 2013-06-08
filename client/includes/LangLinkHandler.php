@@ -6,7 +6,6 @@ use Sites;
 use Site;
 use Title;
 use ParserOutput;
-use Wikibase\DataModel\SimpleSiteLink;
 
 /**
  * Handles language links.
@@ -42,10 +41,6 @@ class LangLinkHandler {
 	protected $siteId;
 	protected $namespaces;
 	protected $excludeNamespaces;
-
-	/**
-	 * @var SiteLinkLookup
-	 */
 	protected $siteLinksLookup;
 
 	/**
@@ -80,7 +75,7 @@ class LangLinkHandler {
 	 *
 	 * @param Title $title
 	 *
-	 * @return SimpleSiteLink[]
+	 * @return SiteLink[]
 	 */
 	public function getEntityLinks( Title $title ) {
 		wfProfileIn( __METHOD__ );
@@ -88,7 +83,14 @@ class LangLinkHandler {
 
 		$links = array();
 
-		$siteLink = new SimpleSiteLink( $this->siteId, $title->getFullText() );
+		$site = $this->sites->getSite( $this->siteId );
+
+		if ( $site === null ) {
+			wfWarn( 'Site not found for ' . $this->siteId );
+			return $links;
+		}
+
+		$siteLink = new SiteLink( $site, $title->getFullText() );
 		$itemId = $this->siteLinksLookup->getEntityIdForSiteLink( $siteLink );
 
 		if ( $itemId !== null ) {
@@ -304,7 +306,7 @@ class LangLinkHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param SimpleSiteLink[] $repoLinks
+	 * @param SiteLink[] $repoLinks
 	 *
 	 * @return array An associative array, using site IDs for keys
 	 *         and the target pages on the respective wiki as the associated value.
@@ -314,9 +316,10 @@ class LangLinkHandler {
 
 		$links = array();
 
+		/* @var SiteLink $link */
 		foreach ( $repoLinks as $link ) {
-			$wiki = $link->getSiteId();
-			$page = $link->getPageName();
+			$wiki = $link->getSite()->getGlobalId();
+			$page = $link->getPage();
 
 			$links[$wiki] = $page;
 		}

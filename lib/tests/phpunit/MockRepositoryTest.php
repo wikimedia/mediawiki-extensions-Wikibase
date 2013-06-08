@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\DataModel\SimpleSiteLink;
 use \Wikibase\Entity;
 use \Wikibase\EntityId;
 use \Wikibase\Item;
@@ -433,25 +432,34 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$one = new Item( array( 'id' => 1 ) );
 		$prop = new Property( array( 'id' => 101 ) );
 
-		$one->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Xoo' ) );
-		$one->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
+		$one->addSiteLink( SiteLink::newFromText( 'dewiki', 'Xoo' ) );
+		$one->addSiteLink( SiteLink::newFromText( 'enwiki', 'Foo' ) );
 
 		$this->repo->putEntity( $one );
 		$this->repo->putEntity( $prop );
 
 		// check link retrieval
-		$this->assertEquals(
-			array(
-				new SimpleSiteLink( 'dewiki', 'Xoo' ),
-				new SimpleSiteLink( 'enwiki', 'Foo' ),
-			),
-			$this->repo->getSiteLinksForItem( $one->getId() )
-		);
+		$links = SiteLink::siteLinksToArray(
+			$this->repo->getSiteLinksForItem(
+				$one->getId() ) );
+
+		$this->assertArrayEquals( array(
+				'dewiki' => 'Xoo',
+				'enwiki' => 'Foo',
+			), $links );
 
 		// check links of unknown id
-		$this->assertEmpty( $this->repo->getSiteLinksForItem( new EntityId( 'item', 123 ) ) );
+		$links = SiteLink::siteLinksToArray(
+			$this->repo->getSiteLinksForItem(
+				EntityId::newFromPrefixedId( "q123" ) ) );
+
+		$this->assertArrayEquals( array(), $links );
 
 		// check links if property
-		$this->assertEmpty( $this->repo->getSiteLinksForItem( $prop->getId() ) );
+		$links = SiteLink::siteLinksToArray(
+			$this->repo->getSiteLinksForItem(
+				$prop->getId() ) );
+
+		$this->assertArrayEquals( array(), $links );
 	}
 }
