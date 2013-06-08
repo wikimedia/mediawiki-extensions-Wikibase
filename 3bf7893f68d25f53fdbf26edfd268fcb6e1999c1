@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DztQU3PU",
+        "filename": "client/includes/EntityIdPropertyUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-08T17:32:41Z",
+      "side": 1,
+      "message": "@var string",
+      "revId": "3bf7893f68d25f53fdbf26edfd268fcb6e1999c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "DzjT6cLs",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-08T17:32:41Z",
+      "side": 1,
+      "message": "Is this still needed?",
+      "revId": "3bf7893f68d25f53fdbf26edfd268fcb6e1999c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
