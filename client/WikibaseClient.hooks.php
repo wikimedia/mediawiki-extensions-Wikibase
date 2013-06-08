@@ -1,9 +1,7 @@
 <?php
 namespace Wikibase;
 
-use IContextSource;
-use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\SimpleSiteLink;
+use \Wikibase\Client\WikibaseClient;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -650,7 +648,7 @@ final class ClientHooks {
 
 			$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
 			$entityId = $siteLinkLookup->getEntityIdForSiteLink(
-				new SimpleSiteLink( $site, $title->getFullText() )
+				new SiteLink( $site, $title->getFullText() )
 			);
 
 			if( $entityId ) {

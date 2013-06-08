@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use Wikibase\Claims;
-use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
@@ -152,26 +151,19 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	}
 
 	/**
-	 * @see SiteLinkLookup::getEntityIdForSiteLink
+	 * Gets an EntityId for a SiteLink
 	 *
 	 * @since 0.4
 	 *
-	 * @param SimpleSiteLink $siteLink
+	 * @param SiteLink $siteLink
 	 *
-	 * @return EntityId|null
+	 * @return EntityId
 	 */
-	public function getEntityIdForSiteLink( SimpleSiteLink $siteLink ) {
-		if ( $siteLink instanceof SiteLink ) {
-			$globalSiteId = $siteLink->getSite()->getGlobalId();
-			$pageName = $siteLink->getPage();
-		}
-		else {
-			$globalSiteId = $siteLink->getSiteId();
-			$pageName = $siteLink->getPageName();
-		}
+	public function getEntityIdForSiteLink( SiteLink $siteLink ) {
+		$globalSiteId = $siteLink->getSite()->getGlobalId();
 
 		// @todo: fix test data to use titles with underscores, like the site link table does it
-		$title = \Title::newFromText( $pageName );
+		$title = \Title::newFromText( $siteLink->getPage() );
 		$pageTitle = $title->getDBkey();
 
 		$numericItemId = $this->getItemIdForLink( $globalSiteId, $pageTitle );
@@ -419,8 +411,6 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	}
 
 	/**
-	 * @see SiteLinkLookup::getSiteLinksForItem
-	 *
 	 * Returns an array of SiteLink for an EntityId.
 	 *
 	 * If the entity isn't known or not an Item, an empty array is returned.
@@ -429,17 +419,17 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return SimpleSiteLink[]
+	 * @return SiteLink[]
 	 */
 	public function getSiteLinksForItem( EntityId $entityId ) {
 		$entity = $this->getEntity( $entityId );
 
-		if ( $entity instanceof Item ) {
-			return $entity->getSimpleSiteLinks();
+		if ( !$entity || !( $entity instanceof Item ) ) {
+			return array();
 		}
 
-		// FIXME: throw InvalidArgumentException rather then failing silently
-		return array();
+		return $entity->getSiteLinks();
+
 	}
 
 	/**
