@@ -49,7 +49,7 @@ class Item extends Entity {
 	 * Adds a site link.
 	 *
 	 * @since 0.1
-	 * @deprecated since 0.4, use addSiteLink instead
+	 * @deprecated since 0.4, use addSimpleSiteLink instead
 	 *
 	 * @param SiteLink $link the link to the target page
 	 * @param string $updateType
