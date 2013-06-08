@@ -38,17 +38,17 @@ class EntityIdPropertyUpdater {
 	protected $siteLinkLookup;
 
 	/* @var Site */
-	protected $site;
+	protected $siteId;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param \Site $site
+	 * @param string $siteId
 	 */
-	public function __construct( SiteLinkLookup $siteLinkLookup, \Site $site ) {
+	public function __construct( SiteLinkLookup $siteLinkLookup, $siteId ) {
 		$this->siteLinkLookup = $siteLinkLookup;
-		$this->site = $site;
+		$this->siteId = $siteId;
 	}
 
 	/**
@@ -61,7 +61,7 @@ class EntityIdPropertyUpdater {
 	 */
 	public function updateItemIdProperty( ParserOutput $out, Title $title ) {
 		$siteLink = new SimpleSiteLink(
-			$this->site,
+			$this->siteId,
 			$title->getFullText()
 		);
 

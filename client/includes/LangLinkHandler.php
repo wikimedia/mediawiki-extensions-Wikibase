@@ -433,7 +433,7 @@ class LangLinkHandler {
 			return;
 		}
 
-		$propertyHandler = new EntityIdPropertyUpdater( $this->siteLinksLookup, $site );
+		$propertyHandler = new EntityIdPropertyUpdater( $this->siteLinksLookup, $this->siteId );
 		$propertyHandler->updateItemIdProperty( $out, $title );
 
 		wfProfileOut( __METHOD__ );
