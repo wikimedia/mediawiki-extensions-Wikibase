@@ -424,17 +424,8 @@ class LangLinkHandler {
 	public function updateItemIdProperty( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
 
-		// @todo inject this as a parameter
-		$site = $this->sites->getSite( $this->siteId );
-
-		if ( $site === null ) {
-			wfWarn( 'Site not found for ' . $this->siteId . '. Cannot add links from repository.' );
-			wfProfileOut( __METHOD__ );
-			return;
-		}
-
-		$propertyHandler = new EntityIdPropertyUpdater( $this->siteLinksLookup, $site );
-		$propertyHandler->updateItemIdProperty( $out, $title );
+		$entityIdPropertyUpdater = new EntityIdPropertyUpdater( $this->siteLinksLookup, $this->siteId );
+		$entityIdPropertyUpdater->updateItemIdProperty( $out, $title );
 
 		wfProfileOut( __METHOD__ );
 	}
