@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "DzjSW8Es",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-08T18:45:49Z",
+      "side": 1,
+      "message": "Please add a test for this code in a follow up commit.",
+      "revId": "05ebf2237b4b1b7c98cf2be1667ca59d6a145981",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
