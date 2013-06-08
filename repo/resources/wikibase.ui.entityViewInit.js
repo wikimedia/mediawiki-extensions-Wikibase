@@ -126,7 +126,8 @@
 
 			// removing site links heading to rebuild it with value counter
 			$( 'table.wb-sitelinks' ).each( function() {
-				var group = $( this ).data( 'wb-sitelinks-group' );
+				var group = $( this ).data( 'wb-sitelinks-group' ),
+					$sitesCounterSurface = $( '<span/>' );
 
 				// add site links section heading:
 				$( this ).before(
@@ -134,15 +135,12 @@
 						'wb-section-heading',
 						mw.msg( 'wikibase-sitelinks-' + group ),
 						'sitelinks'
-					).append(
-						$( '<span/>' )
-						.attr( 'id', 'wb-item-' + mw.config.get('wbEntityId') + '-sitelinks-counter' )
-						.addClass( 'wb-ui-propertyedittool-counter' )
-					)
+					).append( $sitesCounterSurface )
 				);
 				// actual initialization
 				new wb.ui.SiteLinksEditTool( $( this ), {
-					allowedSites: wb.getSitesOfGroup( group )
+					allowedSites: wb.getSitesOfGroup( group ),
+					counterSurfaces: $sitesCounterSurface
 				} );
 			} );
 
