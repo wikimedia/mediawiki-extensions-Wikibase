@@ -646,11 +646,9 @@ final class ClientHooks {
 
 		if ( $title->exists() && $namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 
-			$site = \MediaWikiSite::newFromGlobalId( Settings::get( 'siteGlobalID' ) );
-
 			$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
 			$entityId = $siteLinkLookup->getEntityIdForSiteLink(
-				new SimpleSiteLink( $site, $title->getFullText() )
+				new SimpleSiteLink( Settings::get( 'siteGlobalID' ), $title->getFullText() )
 			);
 
 			if( $entityId ) {
