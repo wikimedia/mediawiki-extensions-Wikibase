@@ -17,6 +17,8 @@
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */
 
+use Wikibase\DataModel\SimpleSiteLink;
+
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
@@ -126,12 +128,7 @@ class importInterlang extends Maintenance {
 			$label = preg_replace( '/ *\(.*\)$/u', '', $name );
 
 			$item->setLabel( $lang, $label );
-
-			$siteLink = \Wikibase\SiteLink::newFromText( $lang . 'wiki',  $name );
-
-			if ( $siteLink ) {
-				$item->addSiteLink( $siteLink );
-			}
+			$item->addSimpleSiteLink( new SimpleSiteLink( $lang . 'wiki',  $name ) );
 		}
 
 		$content = \Wikibase\ItemContent::newFromItem( $item );
