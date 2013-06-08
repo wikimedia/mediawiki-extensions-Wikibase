@@ -159,11 +159,11 @@ class PropertyParserFunction {
 	 */
 	public static function render( \Parser $parser, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
-		$site = \Sites::singleton()->getSite( Settings::get( 'siteGlobalID' ) );
+		$siteId = Settings::get( 'siteGlobalID' );
 
 		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
 		$entityId = $siteLinkLookup->getEntityIdForSiteLink( //FIXME: method not in the interface
-			new SimpleSiteLink( $site, $parser->getTitle()->getFullText() )
+			new SimpleSiteLink( $siteId, $parser->getTitle()->getFullText() )
 		);
 
 		// @todo handle when site link is not there, such as site link / entity has been deleted...
