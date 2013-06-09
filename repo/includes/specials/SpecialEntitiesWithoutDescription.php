@@ -1,9 +1,7 @@
 <?php
 
-namespace Wikibase\Test;
-
 /**
- * Tests for the SpecialSetSiteLink class.
+ * Page for listing entities without description.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,34 +18,39 @@ namespace Wikibase\Test;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @file
  * @since 0.4
  *
- * @ingroup WikibaseRepoTest
- * @ingroup Test
- *
- * @group Wikibase
- * @group SpecialPage
- * @group WikibaseSpecialPage
+ * @file
+ * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
- * @author Bene* < benestar.wikimedia@googlemail.com >
+ * @author Bene*
  */
-class SpecialSetSiteLinkTest extends SpecialPageTestBase {
+class SpecialEntitiesWithoutDescription extends SpecialEntitiesWithoutPage {
 
-	protected function newSpecialPage() {
-		return new \SpecialSetSiteLink();
+	public function __construct() {
+		parent::__construct( 'EntitiesWithoutDescription' );
 	}
 
-	public function testExecute() {
-		//TODO: Actually verify that the output is correct.
-		//      Currently this just tests that there is no fatal error,
-		//      and that the restriction handling is working and doesn't
-		//      block. That is, the default should let the user execute
-		//      the page.
-
-		list( $output, ) = $this->executeSpecialPage( '' );
-		$this->assertTrue( true, 'Calling execute without any subpage value' );
+	/**
+	 * @see SpecialEntitiesWithoutPage::getTermType
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	protected function getTermType() {
+		return \Wikibase\Term::TYPE_DESCRIPTION;
 	}
 
+	/**
+	 * @see SpecialEntitiesWithoutPage::getLegend
+	 *
+	 * @since 0.4
+	 *
+	 * @return string
+	 */
+	protected function getLegend() {
+		return $this->msg( 'wikibase-entitieswithoutdescription-legend' )->text();
+	}
 }

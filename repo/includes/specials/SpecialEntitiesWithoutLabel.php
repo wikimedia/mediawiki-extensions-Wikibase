@@ -1,7 +1,5 @@
 <?php
 
-use Wikibase\EntityId;
-
 /**
  * Page for listing entities without label.
  *
@@ -26,178 +24,33 @@ use Wikibase\EntityId;
  * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
- * @author Thomas Pellissier Tanon
+ * @author Bene*
  */
-class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
-
-	/**
-	 * The language used
-	 *
-	 * @since 0.2
-	 *
-	 * @var string
-	 */
-	protected $language = '';
+class SpecialEntitiesWithoutLabel extends SpecialEntitiesWithoutPage {
 
 	public function __construct() {
 		parent::__construct( 'EntitiesWithoutLabel' );
-
 	}
 
 	/**
-	 * @see SpecialWikibasePage::execute
+	 * @see SpecialEntitiesWithoutPage::getTermType
 	 *
-	 * @since 0.2
+	 * @since 0.4
 	 *
-	 * @param string $subPage
-	 * @return boolean
+	 * @return string
 	 */
-	public function execute( $subPage ) {
-		if ( !parent::execute( $subPage ) ) {
-			return false;
-		}
-
-		# 10 seconds server-side caching max
-		$this->getOutput()->setSquidMaxage( 10 );
-
-		$output = $this->getOutput();
-		$request = $this->getRequest();
-
-		$this->language = '';
-		$this->type = null;
-		if ( $subPage !== null ) {
-			$parts = explode( '/', $subPage );
-			if ( array_key_exists( 1, $parts ) ) {
-				$this->type = $parts[1];
-			}
-			$this->language = $parts[0];
-		}
-
-		$this->language = $request->getText( 'language', $this->language );
-		if ( $this->language !== '' && !in_array( $this->language, \Wikibase\Utils::getLanguageCodes() ) ) {
-			$output->addWikiMsg( 'wikibase-entitieswithoutlabel-invalid-language', $this->language );
-			$this->language = '';
-		}
-
-		$this->type = $request->getText( 'type', $this->type );
-		$possibleTypes = array( 'item', 'property', 'query' );
-		if ( $this->type === '' ) {
-			$this->type = null;
-		}
-		if ( $this->type !== null && !in_array( $this->type, $possibleTypes ) ) {
-			$output->addWikiMsg( 'wikibase-entitieswithoutlabel-invalid-type', $this->type );
-			$this->type = null;
-		}
-		$typeSelect = new XmlSelect( 'type', 'wb-entitieswithoutlabel-type', $this->type );
-		$typeSelect->addOption( $this->msg( 'wikibase-entitieswithoutlabel-label-alltypes' )->text(), '' );
-		// Give grep a chance to find the usages:
-		// wikibase-entity-item, wikibase-entity-property, wikibase-entity-query
-		foreach( $possibleTypes as $possibleType ) {
-			$typeSelect->addOption( $this->msg( 'wikibase-entity-' . $possibleType )->text(), $possibleType );
-		}
-
-		$output->addHTML(
-			Html::openElement(
-				'form',
-				array(
-					'action' => $this->getTitle()->getLocalURL(),
-					'name' => 'entitieswithoutlabel',
-					'id' => 'wb-entitieswithoutlabel-form'
-				)
-			) .
-			Html::openElement( 'fieldset' ) .
-			Html::element(
-				'legend',
-				array(),
-				$this->msg( 'wikibase-entitieswithoutlabel-legend' )->text()
-			) .
-			Html::openElement( 'p' ) .
-			Html::element(
-				'label',
-				array(
-					'for' => 'wb-entitieswithoutlabel-language'
-				),
-				$this->msg( 'wikibase-entitieswithoutlabel-label-language' )->text()
-			) . ' ' .
-			Html::input(
-				'language',
-				$this->language,
-				'text',
-				array(
-					'id' => 'wb-entitieswithoutlabel-language'
-				)
-			) . ' ' .
-			Html::element(
-				'label',
-				array(
-					'for' => 'wb-entitieswithoutlabel-type'
-				),
-				$this->msg( 'wikibase-entitieswithoutlabel-label-type' )->text()
-			) . ' ' .
-			$typeSelect->getHTML() . ' ' .
-			Html::input(
-				'submit',
-				$this->msg( 'wikibase-entitieswithoutlabel-submit' )->text(),
-				'submit',
-				array(
-					'id' => 'wikibase-entitieswithoutlabel-submit',
-					'class' => 'wb-input-button'
-				)
-			) .
-			Html::closeElement( 'p' ) .
-			Html::closeElement( 'fieldset' ) .
-			Html::closeElement( 'form' )
-		);
-
-		if ( $this->language !== '' ) {
-			$this->showQuery();
-		}
+	protected function getTermType() {
+		return \Wikibase\Term::TYPE_LABEL;
 	}
 
 	/**
-	 * @see SpecialWikibaseQueryPage::formatRow
+	 * @see SpecialEntitiesWithoutPage::getLegend
 	 *
-	 * @since 0.3
+	 * @since 0.4
 	 *
-	 * @param $entry The entry is for this call an EntityId
-	 *
-	 * @return string|null
+	 * @return string
 	 */
-	protected function formatRow( $entry ) {
-		try {
-			$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $entry );
-			return Linker::linkKnown( $title );
-		} catch ( MWException $e ) {
-			wfWarn( "Error formatting result row: " . $e->getMessage() );
-			return false;
-		}
+	protected function getLegend() {
+		return $this->msg( 'wikibase-entitieswithoutlabel-legend' )->text();
 	}
-
-	/**
-	 * @see SpecialWikibaseQueryPage::getResult
-	 *
-	 * @since 0.2
-	 *
-	 * @param integer $offset
-	 * @param integer $limit
-	 *
-	 * @return EntityId[]
-	 */
-	protected function getResult( $offset = 0, $limit = 0 ) {
-		$entityPerPage = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
-		return $entityPerPage->getEntitiesWithoutTerm( \Wikibase\Term::TYPE_LABEL, $this->language, $this->type, $limit, $offset );
-	}
-
-
-	/**
-	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
-	 *
-	 * @since 0.2
-	 *
-	 * @return Title
-	 */
-	protected function getTitleForNavigation() {
-		return $this->getTitle( $this->language . '/' . $this->type );
-	}
-
 }

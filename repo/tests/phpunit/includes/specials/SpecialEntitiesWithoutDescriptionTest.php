@@ -1,13 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-<<<<<<< HEAD
-use SpecialEntitiesWithoutLabel;
-=======
->>>>>>> 892375a... Special page for entities without description
 
 /**
- * Tests for the SpecialEntitiesWithoutLabel class.
+ * Tests for the SpecialEntitiesWithoutDescription class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,20 +31,12 @@ use SpecialEntitiesWithoutLabel;
  * @group WikibaseSpecialPage
  *
  * @licence GNU GPL v2+
-<<<<<<< HEAD
- * @author Adam Shorland
-=======
  * @author Bene* < benestar.wikimedia@googlemail.com >
->>>>>>> 892375a... Special page for entities without description
  */
-class SpecialEntitiesWithoutLabelTest extends SpecialPageTestBase {
+class SpecialEntitiesWithoutDescriptionTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-<<<<<<< HEAD
-		return new SpecialEntitiesWithoutLabel();
-=======
-		return new \SpecialEntitiesWithoutLabel();
->>>>>>> 892375a... Special page for entities without description
+		return new \SpecialEntitiesWithoutDescription();
 	}
 
 	public function testExecute() {
@@ -60,12 +48,9 @@ class SpecialEntitiesWithoutLabelTest extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '' );
 		$this->assertTrue( true, 'Calling execute without any subpage value' );
-<<<<<<< HEAD
-=======
 
 		list( $output, ) = $this->executeSpecialPage( 'en' );
 		$this->assertTrue( true, 'Calling execute with a subpage value' ); //TODO: assert output
->>>>>>> 892375a... Special page for entities without description
 	}
 
 }
