@@ -128,6 +128,7 @@ $wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
 $wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
 $wgSpecialPages['SetSiteLink']						= 'SpecialSetSiteLink';
 $wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
+$wgSpecialPages['EntitiesWithoutDescription']		= 'SpecialEntitiesWithoutDescription';
 $wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
 $wgSpecialPages['DispatchStats']					= 'SpecialDispatchStats';
