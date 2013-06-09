@@ -1,10 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use SpecialSetSiteLink;
 
 /**
- * Tests for the SpecialSetSitelink class.
+ * Tests for the SpecialEntitiesWithoutDescription class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,12 +31,12 @@ use SpecialSetSiteLink;
  * @group WikibaseSpecialPage
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-class SpecialSetSitelinkTest extends SpecialPageTestBase {
+class SpecialEntitiesWithoutDescriptionTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new SpecialSetSitelink();
+		return new \SpecialEntitiesWithoutDescription();
 	}
 
 	public function testExecute() {
@@ -47,42 +46,11 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		//      block. That is, the default should let the user execute
 		//      the page.
 
-		//TODO: Verify that item creation works via a faux post request
-
-		$matchers['id'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'id' => 'wb-setentity-id',
-				'class' => 'wb-input',
-				'name' => 'id',
-			) );
-		$matchers['site'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'id' => 'wb-setsitelink-site',
-				'class' => 'wb-input',
-				'name' => 'site',
-			) );
-		$matchers['page'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'id' => 'wb-setsitelink-page',
-				'class' => 'wb-input',
-				'name' => 'page',
-			) );
-		$matchers['submit'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'id' => 'wb-setsitelink-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'wikibase-setsitelink-submit',
-			) );
-
 		list( $output, ) = $this->executeSpecialPage( '' );
-		foreach( $matchers as $key => $matcher ){
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
-		}
+		$this->assertTrue( true, 'Calling execute without any subpage value' );
+
+		list( $output, ) = $this->executeSpecialPage( 'en' );
+		$this->assertTrue( true, 'Calling execute with a subpage value' ); //TODO: assert output
 	}
 
 }
