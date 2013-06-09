@@ -28,6 +28,7 @@ $specialPageAliases['en'] = array(
 	'SetAliases' => array( 'SetAliases' ),
 	'SetSiteLink' => array( 'SetSiteLink' ),
 	'EntitiesWithoutLabel' => array( 'EntitiesWithoutLabel' ),
+	'EntitiesWithoutDescription' => array( 'EntitiesWithoutDescription' ),
 	'ItemsWithoutSitelinks' => array( 'ItemsWithoutSitelinks' ),
 	'MyLanguageFallbackChain' => array( 'MyLanguageFallbackChain' ),
 );
@@ -84,6 +85,7 @@ $specialPageAliases['de'] = array(
 	'SetAliases' => array( 'Aliasse_festlegen' ),
 	'SetSiteLink' => array( 'Websitelink_festlegen' ),
 	'EntitiesWithoutLabel' => array( 'Objekte_ohne_Bezeichnung' ),
+	'EntitiesWithoutDescription' => array( 'Objekte_ohne_Beschreibung' ),
 	'ItemsWithoutSitelinks' => array( 'Objekte_ohne_Websitelinks' ),
 	'MyLanguageFallbackChain' => array( 'Meine_Sprachfallbackkette' ),
 );
