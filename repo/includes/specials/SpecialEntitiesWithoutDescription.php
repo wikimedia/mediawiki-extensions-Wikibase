@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Page for listing entities without label.
+ * Page for listing entities without description.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.2
+ * @since 0.4
  *
  * @file
  * @ingroup WikibaseRepo
@@ -26,10 +26,10 @@
  * @licence GNU GPL v2+
  * @author Bene*
  */
-class SpecialEntitiesWithoutLabel extends SpecialEntitiesWithoutPage {
+class SpecialEntitiesWithoutDescription extends SpecialEntitiesWithoutPage {
 
 	public function __construct() {
-		parent::__construct( 'EntitiesWithoutLabel' );
+		parent::__construct( 'EntitiesWithoutDescription' );
 	}
 
 	/**
@@ -40,7 +40,7 @@ class SpecialEntitiesWithoutLabel extends SpecialEntitiesWithoutPage {
 	 * @return string
 	 */
 	protected function getTerm() {
-		return \Wikibase\Term::TYPE_LABEL;
+		return \Wikibase\Term::TYPE_DESCRIPTION;
 	}
 
 	/**
@@ -51,6 +51,6 @@ class SpecialEntitiesWithoutLabel extends SpecialEntitiesWithoutPage {
 	 * @return string
 	 */
 	protected function getLegend() {
-		return $this->msg( 'wikibase-entitieswithoutlabel-legend' )->text();
+		return $this->msg( 'wikibase-entitieswithoutdescription-legend' )->text();
 	}
 }
