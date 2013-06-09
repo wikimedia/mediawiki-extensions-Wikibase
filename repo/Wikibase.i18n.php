@@ -211,6 +211,8 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-listdatatypes-intro' => 'This is a list of all datatypes currently in use on this installation:',
 	'wikibase-history-title-with-label' => 'Revision history of "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Revision history of ($1)',
+	'special-entitieswithoutdescription' => 'Entities without description',
+	'wikibase-entitieswithoutdescription-legend' => 'Get list of entities without description',
 	'special-entitieswithoutlabel' => 'Entities without label',
 	'wikibase-entitieswithoutlabel-legend' => 'Get list of entities without label',
 	'wikibase-entitieswithoutlabel-label-language' => 'Language:',
@@ -842,6 +844,9 @@ This special page returns a list of available datatypes (such as commonsMedia)',
 * $2 - the localized label, it is usually in quotes',
 	'wikibase-history-title-without-label' => 'The title of the history page with only a prefixed id. Parameters:
 * $1 - the prefixed id, the id is usually in parenthesis',
+	'special-entitieswithoutdescription' => '{{doc-special|EntitiesWithoutDescription}}
+This special page returns a list of entities without description for a given language',
+	'wikibase-entitieswithoutdescription-legend' => 'Legend of the form that allow to change the language.',
 	'special-entitieswithoutlabel' => '{{doc-special|EntitiesWithoutLabel}}
 This special page returns a list of entities without label for a given language',
 	'wikibase-entitieswithoutlabel-legend' => 'Legend of the form that allow to change the language.',
