@@ -210,6 +210,8 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-listdatatypes-intro' => 'This is a list of all datatypes currently in use on this installation:',
 	'wikibase-history-title-with-label' => 'Revision history of "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Revision history of ($1)',
+	'special-entitieswithoutdescription' => 'Entities without description',
+	'wikibase-entitieswithoutdescription-legend' => 'Get list of entities without description',
 	'special-entitieswithoutlabel' => 'Entities without label',
 	'wikibase-entitieswithoutlabel-legend' => 'Get list of entities without label',
 	'wikibase-entitieswithoutlabel-label-language' => 'Language:',
