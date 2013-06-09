@@ -142,7 +142,7 @@ call_user_func( function() {
 	$wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
 	$wgSpecialPages['SetSiteLink']						= 'SpecialSetSiteLink';
 	$wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
-	$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
+	$wgSpecialPages['EntitiesWithoutDescription']		= 'SpecialEntitiesWithoutDescription';
 	$wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
 	$wgSpecialPages['DispatchStats']					= 'SpecialDispatchStats';
 	$wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
@@ -159,10 +159,11 @@ call_user_func( function() {
 	$wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
 	$wgSpecialPageGroups['SetSiteLink']					= 'wikibaserepo';
 	$wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
-	$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
+	$wgSpecialPageGroups['EntitiesWithoutDescription']	= 'wikibaserepo';
 	$wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
 	$wgSpecialPageGroups['DispatchStats']				= 'wikibaserepo';
-	$wgSpecialPageGroups['MyLanguageFallbackChain'] 			= 'wikibaserepo';
+	$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
+	$wgSpecialPageGroups['MyLanguageFallbackChain'] 	= 'wikibaserepo';
 
 	// Hooks
 	$wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
