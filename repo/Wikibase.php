@@ -128,7 +128,7 @@ $wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
 $wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
 $wgSpecialPages['SetSiteLink']						= 'SpecialSetSiteLink';
 $wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
-$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
+$wgSpecialPages['EntitiesWithoutDescription']		= 'SpecialEntitiesWithoutDescription';
 $wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
 $wgSpecialPages['DispatchStats']					= 'SpecialDispatchStats';
 $wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
@@ -144,9 +144,10 @@ $wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
 $wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
 $wgSpecialPageGroups['SetSiteLink']					= 'wikibaserepo';
 $wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
-$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
+$wgSpecialPageGroups['EntitiesWithoutDescription']	= 'wikibaserepo';
 $wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
 $wgSpecialPageGroups['DispatchStats']				= 'wikibaserepo';
+$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
 
 // Hooks
 $wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
