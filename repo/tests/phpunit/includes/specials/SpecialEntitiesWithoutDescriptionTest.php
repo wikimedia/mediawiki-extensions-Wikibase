@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 /**
- * Tests for the SpecialSetSiteLink class.
+ * Tests for the SpecialEntitiesWithoutDescription class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,10 +33,10 @@ namespace Wikibase\Test;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
-class SpecialSetSiteLinkTest extends SpecialPageTestBase {
+class SpecialEntitiesWithoutDescriptionTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new \SpecialSetSiteLink();
+		return new \SpecialEntitiesWithoutDescription();
 	}
 
 	public function testExecute() {
@@ -48,6 +48,9 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '' );
 		$this->assertTrue( true, 'Calling execute without any subpage value' );
+
+		list( $output, ) = $this->executeSpecialPage( 'en' );
+		$this->assertTrue( true, 'Calling execute with a subpage value' ); //TODO: assert output
 	}
 
 }
