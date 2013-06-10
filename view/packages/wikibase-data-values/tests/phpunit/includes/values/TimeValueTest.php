@@ -117,12 +117,12 @@ class TimeValueTest extends DataValueTest {
 		);
 
 		$argLists[] = array(
-			true,
+			'DataValues\IllegalValueException',
 			'+00000002013-01-01T00:00:00Z',
 			0,
 			0,
 			0,
-			0, // 0 == TimeValue::PRECISION_GIGAYEAR
+			333,
 			'http://nyan.cat/original.php',
 		);
 
@@ -162,6 +162,106 @@ class TimeValueTest extends DataValueTest {
 			0,
 			0,
 			-1,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php',
+		);
+
+		$argLists[] = array(
+			'DataValues\IllegalValueException',
+			'bla',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php',
+		);
+
+		$argLists[] = array(
+			'DataValues\IllegalValueException',
+			'+00000002013/01/01 00:00:00',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php',
+		);
+
+		$argLists[] = array(
+			'DataValues\IllegalValueException',
+			'+00000002013-22-01T00:00:00Z',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php',
+		);
+
+		$argLists[] = array(
+			'DataValues\IllegalValueException',
+			'+00000002013-01-35T00:00:00Z',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php',
+		);
+
+		$argLists[] = array(
+			'DataValues\IllegalValueException',
+			'+00000002013-01-01T27:00:00Z',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php',
+		);
+
+		$argLists[] = array(
+			'DataValues\IllegalValueException',
+			'+00000002013-01-01T00:66:00Z',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php',
+		);
+
+		$argLists[] = array(
+			'DataValues\IllegalValueException',
+			'+00000002013-01-01T00:00:66Z',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php',
+		);
+
+		$argLists[] = array(
+			'DataValues\IllegalValueException',
+			'+00000002013-01-01T00:00:00+60',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php',
+		);
+
+		$argLists[] = array(
+			true,
+			'+2013-01-01T00:00:00Z',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php',
+		);
+
+		$argLists[] = array(
+			true,
+			'-5-01-01T00:00:00Z',
+			0,
+			0,
+			0,
 			TimeValue::PRECISION_SECOND,
 			'http://nyan.cat/original.php',
 		);
