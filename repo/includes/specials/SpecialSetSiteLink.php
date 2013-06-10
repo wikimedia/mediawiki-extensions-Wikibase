@@ -242,24 +242,24 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @since 0.4
 	 *
 	 * @param \Wikibase\EntityContent $entityContent
-	 * @param string $site
+	 * @param string $siteId
 	 * @param string $page
 	 * @param string &$summary The summary for this edit will be saved here.
 	 *
 	 * @return Status
 	 */
-	protected function setSiteLink( $entityContent, $site, $page, &$summary ) {
-		$siteObject = \Sites::singleton()->getSite( $site );
+	protected function setSiteLink( $entityContent, $siteId, $page, &$summary ) {
+		$site = \Sites::singleton()->getSite( $siteId );
 		$status = \Status::newGood();
 
-		if ( $siteObject === null ) {
-			$status->error( 'wikibase-setsitelink-invalid-site', $site );
+		if ( $site === null ) {
+			$status->error( 'wikibase-setsitelink-invalid-site', $siteId );
 			return $status;
 		}
 
 		if ( $page !== '' ) {
 			// Don't try to normalize an empty string (which means: remove the link)
-			$page = $siteObject->normalizePageName( $page );
+			$page = $site->normalizePageName( $page );
 
 			if ( $page === false ) {
 				$status->error( 'wikibase-error-ui-no-external-page' );
@@ -268,16 +268,16 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		}
 
 		if ( $page === '' ) {
-			$link = $entityContent->getItem()->getSiteLink( $site );
+			$link = $entityContent->getItem()->getSiteLink( $siteId );
 			if ( !$link ) {
 				$status->error( 'wikibase-setsitelink-remove-failed' );
 				return $status;
 			}
-			$entityContent->getItem()->removeSitelink( $site );
+			$entityContent->getItem()->removeSiteLink( $siteId );
 			$i18n = 'wbsetsitelink-remove';
 		}
 		else {
-			$siteLink = new SiteLink( $siteObject, $page );
+			$siteLink = new SiteLink( $site, $page );
 			$ret = $entityContent->getItem()->addSiteLink( $siteLink, 'set' );
 			if ( $ret === false ) {
 				$status->error( 'wikibase-setsitelink-add-failed' );
@@ -285,7 +285,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			}
 			$i18n = 'wbsetsitelink-set';
 		}
-		$summary = $this->getSummary( $site, $page, $i18n ); // $summary is passed by reference ( &$summary )
+		$summary = $this->getSummary( $siteId, $page, $i18n ); // $summary is passed by reference ( &$summary )
 		return $status;
 	}
 }
