@@ -151,7 +151,12 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 		. Html::closeElement( 'form' );
 		$output->addHTML( $out );
 
-		$this->showQuery();
+		$query = array();
+		if ( $this->iwData === 'only' ) {
+			$query['iwdata'] = $this->iwData;
+		}
+
+		$this->showQuery( $query );
 	}
 
 	/**
