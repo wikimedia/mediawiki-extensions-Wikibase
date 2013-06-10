@@ -348,8 +348,8 @@ to find out where it went.',
 * hierarchicalpart – implicit part of the Iri-string
 * query – implicit part of the Iri-string
 * fragment – implicit part of the Iri-string',
-	'wikibase-listdatatypes-geo-coordinate-head' => 'Geo coordinate',
-	'wikibase-listdatatypes-geo-coordinate-body' => 'Literal data for a geographical position given as a latitude-longitude pair in gms or decimal degrees for the given stellar body. Defaults to "Earth" and then "WGS84". It adds a resolution and range.
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Globe coordinate',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Literal data for a geographical position given as a latitude-longitude pair in gms or decimal degrees for the given stellar body. Defaults to "Earth" and then "WGS84". It adds a resolution and range.
 * latitude – implicit first part (float, dms, dm, dd) of the coordinate string, direction is either given by prefixed sign or by postfixed N/S
 * longitude – implicit second part (float, dms, dm, dd) of the coordinate string, direction is either given by prefixed sign or by postfixed E/W
 * altitude (optional) – explicit (?) value for the height over a reference plane , for the globe "Earth" that would be the "WGS84" reference globe
@@ -1034,8 +1034,8 @@ For information about "Iri" and related terms, see [[:w:Internationalized resour
 	'wikibase-listdatatypes-commonsmedia-body' => '{{Wikibase-datatype-body|Commons media}}
 
 For information about "Iri" and related terms, see [[:w:Internationalized resource identifier|Internationalized resource identifier]] and [[:w:URI scheme|URI scheme]].',
-	'wikibase-listdatatypes-geo-coordinate-head' => '{{Wikibase-datatype-head|Geo coordinate|geo-coordinate}}',
-	'wikibase-listdatatypes-geo-coordinate-body' => '{{Wikibase-datatype-body|Geo coordinate}}',
+	'wikibase-listdatatypes-globe-coordinate-head' => '{{Wikibase-datatype-head|Globe coordinate|globe-coordinate}}',
+	'wikibase-listdatatypes-globe-coordinate-body' => '{{Wikibase-datatype-body|Globe coordinate}}',
 	'wikibase-listdatatypes-quantity-head' => '{{Wikibase-datatype-head|Quantity}}
 {{Identical|Quantity}}',
 	'wikibase-listdatatypes-quantity-body' => '{{Wikibase-datatype-body|Quantity}}',
