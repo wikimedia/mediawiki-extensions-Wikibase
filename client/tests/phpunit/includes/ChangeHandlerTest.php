@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 use Site;
 use Wikibase\ChangeHandler;
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityUsageIndex;
 use Wikibase\Item;
 use Wikibase\Property;
@@ -1108,14 +1109,12 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 				foreach ( $v as $siteId => $page ) {
 					if ( is_int( $siteId ) ) {
-						$site = $this->site;
+						$siteIdentifier = $this->site->getGlobalId();
 					} else {
-						$site = new \MediaWikiSite();
-						$site->setGlobalId( $siteId );
+						$siteIdentifier = $siteId;
 					}
 
-					$link = new \Wikibase\SiteLink( $site, $page );
-					$entity->addSiteLink( $link, "add" );
+					$entity->addSimpleSiteLink( new SimpleSiteLink( $siteIdentifier, $page ) );
 				}
 			} else {
 				$entity = $v;

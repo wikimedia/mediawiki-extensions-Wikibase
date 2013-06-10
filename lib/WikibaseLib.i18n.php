@@ -103,7 +103,11 @@ $messages['qqq'] = array(
 	'wikibase-error-ui-session-failure' => 'This is a human readable version of the API error "wikibase-api-session-failure" which is shown in the UI.',
 	'wikibase-error-ui-edit-conflict' => 'This is a human readable version of the API error "edit-conflict" which is shown in the UI.
 Note that the default message says the user shall "reload and save", but after a reload the content that should be saved will be lost.',
-	'wikibase-replicationnote' => 'Note telling the user that it can take a few minutes until the made changes are visible on all wikis.',
+	'wikibase-replicationnote' => 'Note telling the user that it can take a few minutes until the made changes are visible on all wikis.
+
+Preceded by any one of the following messages:
+* {{msg-mw|Wikibase-linkitem-success-create}}
+* {{msg-mw|Wikibase-linkitem-success-link}}',
 	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#Item|item]].',
 	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.
@@ -1022,7 +1026,7 @@ $messages['gl'] = array(
 	'wikibase-error-ui-link-exists' => 'Non pode ligar con esta páxina porque xa hai outro elemento que liga con ela.',
 	'wikibase-error-ui-session-failure' => 'A súa sesión caducou. Acceda ao sistema de novo.',
 	'wikibase-error-ui-edit-conflict' => 'Hai un conflito de edición. Volva cargar a páxina e garde de novo.',
-	'wikibase-replicationnote' => 'Teña en conta que pode levar varios minutos que as modificacións sexan visibles en todos os wikis',
+	'wikibase-replicationnote' => 'Teña en conta que pode levar varios minutos que as modificacións sexan visibles en todos os wikis.',
 	'wikibase-sitelinks' => 'Lista de páxinas con ligazóns cara a este elemento',
 	'wikibase-sitelinks-sitename-columnheading' => 'Lingua',
 	'wikibase-sitelinks-siteid-columnheading' => 'Código',
@@ -1193,6 +1197,10 @@ $messages['id'] = array(
 	'wikibase-diffview-reference' => 'referensi',
 	'wikibase-diffview-rank' => 'peringkat',
 	'wikibase-diffview-qualifier' => 'kualifikasi',
+	'wikibase-diffview-label' => 'label',
+	'wikibase-diffview-alias' => 'nama lain',
+	'wikibase-diffview-description' => 'deskripsi',
+	'wikibase-diffview-link' => 'pranala',
 	'wikibase-error-unexpected' => 'Terjadi kesalahan tak terduga.',
 	'wikibase-error-save-generic' => 'Masalah terjadi saat mencoba untuk melakukan Simpan dan karenanya perubahan Anda tidak dapat diselesaikan.',
 	'wikibase-error-remove-generic' => 'Masalah terjadi saat mencoba untuk melakukan Hapus dan karenanya perubahan Anda tidak dapat diselesaikan.',

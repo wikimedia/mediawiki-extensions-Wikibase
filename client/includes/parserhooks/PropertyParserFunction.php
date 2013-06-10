@@ -124,30 +124,37 @@ class PropertyParserFunction {
 	 * @param EntityId $entityId
 	 * @param string   $propertyLabel
 	 *
-	 * @return string - wikitext format
+	 * @return \Status a status object wrapping a wikitext string
 	 */
 	public function renderForEntityId( EntityId $entityId, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
 
-		$entity = $this->entityLookup->getEntity( $entityId );
+		try {
+			$entity = $this->entityLookup->getEntity( $entityId );
 
-		if ( !$entity ) {
-			wfProfileOut( __METHOD__ );
-			return '';
+			if ( !$entity ) {
+				wfProfileOut( __METHOD__ );
+				return \Status::newGood( '' );
+			}
+
+			$claims = $this->getClaimsForProperty( $entity, $propertyLabel );
+
+			if ( $claims->isEmpty() ) {
+				wfProfileOut( __METHOD__ );
+				return \Status::newGood( '' );
+			}
+
+			$snakList = $claims->getMainSnaks();
+			$text = $this->formatSnakList( $snakList, $propertyLabel );
+			$status = \Status::newGood( $text );
+		} catch ( \Exception $ex ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': ' . $ex->getMessage() );
+
+			$status = \Status::newFatal( 'wikibase-property-render-error', $propertyLabel, $ex->getMessage() );
 		}
-
-		$claims = $this->getClaimsForProperty( $entity, $propertyLabel );
-
-		if ( $claims->isEmpty() ) {
-			wfProfileOut( __METHOD__ );
-			return '';
-		}
-
-		$snakList = $claims->getMainSnaks();
-		$text = $this->formatSnakList( $snakList, $propertyLabel );
 
 		wfProfileOut( __METHOD__ );
-		return $text;
+		return $status;
 	}
 
 	/**
@@ -185,8 +192,26 @@ class PropertyParserFunction {
 			$entityLookup, $propertyLabelResolver,
 			$errorFormatter, $formatter );
 
+		$status = $instance->renderForEntityId( $entityId, $propertyLabel );
+
+		if ( !$status->isGood() ) {
+			// stuff the error messages into the ParserOutput, so we can render them later somewhere
+
+			$errors = $parser->getOutput()->getExtensionData( 'wikibase-property-render-errors' );
+			if ( $errors === null ) {
+				$errors = array();
+			}
+
+			//XXX: if Status sucked less, we'd could get an array of Message objects
+			$errors[] = $status->getWikiText();
+
+			$parser->getOutput()->setExtensionData( 'wikibase-property-render-errors', $errors );
+		}
+
+		$text = $status->isOK() ? $status->getValue() : '';
+
 		$result = array(
-			$instance->renderForEntityId( $entityId, $propertyLabel ),
+			$text,
 			'noparse' => false,
 			'nowiki' => true,
 		);

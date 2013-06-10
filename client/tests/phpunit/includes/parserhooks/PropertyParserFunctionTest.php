@@ -122,16 +122,19 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 	public function testRenderForEntityId( $name, $expected, $info ) {
 		$parserFunction = $this->newInstance();
 
-		$result = $parserFunction->renderForEntityId(
+		$status = $parserFunction->renderForEntityId(
 			new EntityId( Item::ENTITY_TYPE, 42 ),
 			$name
 		);
 
-		$this->assertInternalType( 'string', $result );
+		$this->assertTrue( $status->isOK() );
+
+		$text = $status->getValue();
+		$this->assertInternalType( 'string', $text );
 
 		$this->assertEquals(
 			$expected,
-			$result,
+			$text,
 			$info
 		);
 	}

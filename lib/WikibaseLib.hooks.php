@@ -2,6 +2,10 @@
 
 namespace Wikibase;
 
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use SplFileInfo;
+
 /**
  * File defining the hook handlers for the WikibaseLib extension.
  *
@@ -27,68 +31,15 @@ final class LibHooks {
 	 */
 	public static function registerPhpUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
-		$testFiles = array(
-			'changes/ChangeRow',
-			'changes/DiffChange',
-			'changes/EntityChange',
+		$directoryIterator = new RecursiveDirectoryIterator( __DIR__ . '/tests/phpunit/' );
 
-			'claim/ClaimDifference',
-			'claim/ClaimDifferenceVisualizer',
-			'claim/ClaimDiffer',
-
-			'entity/EntityFactory',
-
-			'formatters/EntityIdFormatter',
-			'formatters/EntityIdLabelFormatter',
-
-			'parsers/EntityIdParser',
-
-			'serializers/ByPropertyListSerializer',
-			'serializers/ByPropertyListUnserializer',
-			'serializers/ClaimSerializer',
-			'serializers/ClaimsSerializer',
-			'serializers/ItemSerializer',
-			'serializers/PropertySerializer',
-			'serializers/ReferenceSerializer',
-			'serializers/SerializationOptions',
-			'serializers/SerializerFactory',
-			'serializers/Serializer',
-			'serializers/SnakSerializer',
-
-			'store/ChunkCache',
-			'store/SiteLinkLookup',
-			'store/SiteLinkTable',
-			'store/WikiPageEntityLookup',
-			'store/CachingEntityLoader',
-			'store/EntityUsageIndex',
-
-			'store/TermPropertyLabelResolver',
-
-			'util/HttpAcceptParser',
-			'util/HttpAcceptNegotiator',
-
-			'ChangesTable',
-			'ClaimDifference',
-			'ClaimGuidValidator',
-			'ReferencedEntitiesFinder',
-			'EntityRetrievingDataTypeLookup',
-			'InMemoryDataTypeLookup',
-			'Template',
-			'TemplateRegistry',
-			'LibHooks',
-			'MockRepository',
-			'PropertyNotFoundException',
-			'SettingsArray',
-			'SnakFormatter',
-
-			'TermsToClaimsTranslator',
-			'TypedValueFormatter',
-			'Term',
-			'Utils',
-		);
-
-		foreach ( $testFiles as $file ) {
-			$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';
+		/**
+		 * @var SplFileInfo $fileInfo
+		 */
+		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
+			if ( substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
+				$files[] = $fileInfo->getPathname();
+			}
 		}
 
 		return true;
