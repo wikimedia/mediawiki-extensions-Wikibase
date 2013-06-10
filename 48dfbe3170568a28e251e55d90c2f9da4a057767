@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D0..rAYk",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-10T14:40:55Z",
+      "side": 1,
+      "message": "Try to avoid static fields. This is global state.\n\nYou could delegate to an object of which you have a global instance or so. That\u0027d still be bad, though not a concern of this class, and something that is not its responsibility for fixing.\n\nAn alternative would be to use a decorator. That still results in a somewhat hard to deal with decorated class, however the non decorated one will not be polluted and remain as simple as it should be, which is the most important thing here.",
+      "revId": "48dfbe3170568a28e251e55d90c2f9da4a057767",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D08.wvfY",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-10T14:40:55Z",
+      "side": 1,
+      "message": "one field per line please",
+      "revId": "48dfbe3170568a28e251e55d90c2f9da4a057767",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0w.T5Vs",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-10T14:40:55Z",
+      "side": 1,
+      "message": "Not a big fan of passing in Language objects like this... however lets ignore that for now and first fix the other issues.",
+      "revId": "48dfbe3170568a28e251e55d90c2f9da4a057767",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0y.WqUs",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-10T14:40:55Z",
+      "side": 1,
+      "message": "type hint: Language $language",
+      "revId": "48dfbe3170568a28e251e55d90c2f9da4a057767",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D08.J3SY",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-10T14:40:55Z",
+      "side": 1,
+      "message": "After looking at this class, the description at the top seems to be off... This object does not represent a language (though it might represent something like a Language object (which would be a bad description)). It is something responsible for translating, so Translator would be a better name. What about having a Translator interface that does not expose fallback specific stuff, and a TranslatorWithLanguageFallback that implements it?",
+      "revId": "48dfbe3170568a28e251e55d90c2f9da4a057767",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
