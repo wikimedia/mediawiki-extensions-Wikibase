@@ -91,7 +91,7 @@ class TimeValue extends DataValueObject {
 	 *
 	 * @since 0.1
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $timezone;
 
@@ -111,6 +111,7 @@ class TimeValue extends DataValueObject {
 	 * @param string $time
 	 * @param integer $timezone
 	 * @param integer $before
+	 * @param integer $after
 	 * @param integer $precision
 	 * @param string $calendarModel
 	 *
@@ -119,6 +120,10 @@ class TimeValue extends DataValueObject {
 	public function __construct( $time, $timezone, $before, $after, $precision, $calendarModel ) {
 		if ( !is_string( $time ) ) {
 			throw new IllegalValueException( '$time needs to be a string' );
+		}
+
+		if ( !preg_match( '!^[-+]\d{1,16}-(0\d|1[012])-([012]\d|3[01])T([01]\d|2[0123]):[0-5]\d:([0-5]\d|6[012])Z$!', $time ) ) {
+			throw new IllegalValueException( '$time needs to be a valid ISO 8601 date' );
 		}
 
 		if ( !is_integer( $timezone ) ) {
@@ -145,7 +150,7 @@ class TimeValue extends DataValueObject {
 			throw new IllegalValueException( '$precision out of allowed bounds' );
 		}
 
-		if ( !is_string( $calendarModel ) ) {
+		if ( !is_string( $calendarModel ) ) { //XXX: enforce IRI? Or at least a size limit?
 			throw new IllegalValueException( '$calendarModel needs to be a string' );
 		}
 
