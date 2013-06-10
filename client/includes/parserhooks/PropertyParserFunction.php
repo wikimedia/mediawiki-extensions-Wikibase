@@ -128,25 +128,32 @@ class PropertyParserFunction {
 	public function renderForEntityId( EntityId $entityId, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
 
-		$entity = $this->entityLookup->getEntity( $entityId );
+		try {
+			$entity = $this->entityLookup->getEntity( $entityId );
 
-		if ( !$entity ) {
+			if ( !$entity ) {
+				wfProfileOut( __METHOD__ );
+				return '';
+			}
+
+			$claims = $this->getClaimsForProperty( $entity, $propertyLabel );
+
+			if ( $claims->isEmpty() ) {
+				wfProfileOut( __METHOD__ );
+				return '';
+			}
+
+			$snakList = $claims->getMainSnaks();
+			$text = $this->formatSnakList( $snakList, $propertyLabel );
+
+
+			wfProfileOut( __METHOD__ );
+			return $text;
+		} catch ( \Exception $e ) {
+			wfDebugLog( __CLASS__, __METHOD__ . ': Unable to render snak' );
 			wfProfileOut( __METHOD__ );
 			return '';
 		}
-
-		$claims = $this->getClaimsForProperty( $entity, $propertyLabel );
-
-		if ( $claims->isEmpty() ) {
-			wfProfileOut( __METHOD__ );
-			return '';
-		}
-
-		$snakList = $claims->getMainSnaks();
-		$text = $this->formatSnakList( $snakList, $propertyLabel );
-
-		wfProfileOut( __METHOD__ );
-		return $text;
 	}
 
 	/**
