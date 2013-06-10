@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use Diff\Diff;
-use MWException;
 
 /**
  * Represents a diff between two Wikibase\Entity instances.
