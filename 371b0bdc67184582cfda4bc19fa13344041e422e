@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D03VMAHI",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-10T19:54:40Z",
+      "side": 1,
+      "message": "You use trimToNFC on $site above, but not here? Any reason to do this?",
+      "revId": "371b0bdc67184582cfda4bc19fa13344041e422e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
