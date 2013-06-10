@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "D03Jrdoc",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-06-10T17:46:29Z",
+      "side": 1,
+      "message": "Actually I was thinking wrong. What I was trying to cache is actually something different and shouldn\u0027t be shared between objects. By fixing the issue these variables are already removed.",
+      "parentUuid": "D0..rAYk",
+      "revId": "48dfbe3170568a28e251e55d90c2f9da4a057767",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D08.wvfY",
         "filename": "lib/includes/LanguageWrapper.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-10T14:40:55Z",
       "side": 1,
       "message": "one field per line please",
+      "revId": "48dfbe3170568a28e251e55d90c2f9da4a057767",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0xJuapc",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-06-10T17:46:29Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "D08.wvfY",
       "revId": "48dfbe3170568a28e251e55d90c2f9da4a057767",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "D01Jo8og",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-06-10T17:46:29Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "D0y.WqUs",
+      "revId": "48dfbe3170568a28e251e55d90c2f9da4a057767",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D08.J3SY",
         "filename": "lib/includes/LanguageWrapper.php",
         "patchSetId": 6
@@ -81,6 +135,24 @@
       "writtenOn": "2013-06-10T14:40:55Z",
       "side": 1,
       "message": "After looking at this class, the description at the top seems to be off... This object does not represent a language (though it might represent something like a Language object (which would be a bad description)). It is something responsible for translating, so Translator would be a better name. What about having a Translator interface that does not expose fallback specific stuff, and a TranslatorWithLanguageFallback that implements it?",
+      "revId": "48dfbe3170568a28e251e55d90c2f9da4a057767",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0w9axU0",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-06-10T17:46:29Z",
+      "side": 1,
+      "message": "This class/object is used to implement the concept described at http://bots.wmflabs.org/~wm-bot/logs/%23wikimedia-wikidata/20130528.txt (from [16:02:51]) in a transparent way between two types of fallbacks. To use it, take an item in fallback chain (no matter what it is), fetch data from language -\u003egetFetchLanguage(), then feed data to -\u003etranslate() and use the results. Maybe the class name itself is already somehow misleading.\n\nI have no idea about what interface Translator is. The most similar name is class TermsToClaimsTranslator, or maybe you\u0027re referring to creating a new thing called Translator?",
+      "parentUuid": "D08.J3SY",
       "revId": "48dfbe3170568a28e251e55d90c2f9da4a057767",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
