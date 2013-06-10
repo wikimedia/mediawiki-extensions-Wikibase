@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D0xX3dNM",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-10T20:34:36Z",
+      "side": 1,
+      "message": "This breaks removing page links! Only do this if $page !\u003d\u003d \u0027\u0027 as normalizePageName will set page to false if it\u0027s empty",
+      "revId": "76f5c9880e83b75b239b713cf187cb9c1de61fce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
