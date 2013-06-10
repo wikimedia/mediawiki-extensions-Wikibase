@@ -53,6 +53,7 @@ $specialPageAliases['bxr'] = array(
 
 /** German (Deutsch) */
 $specialPageAliases['de'] = array(
+	'DispatchStats' => array( 'Abfertigungsstatistiken' ),
 	'EntityData' => array( 'Objektdaten' ),
 	'NewItem' => array( 'Neues_Datenelement_erstellen' ),
 	'NewProperty' => array( 'Neues_Attribut_erstellen' ),
@@ -62,6 +63,7 @@ $specialPageAliases['de'] = array(
 	'SetLabel' => array( 'Bezeichnung_festlegen' ),
 	'SetDescription' => array( 'Beschreibung_festlegen' ),
 	'SetAliases' => array( 'Aliasse_festlegen' ),
+	'SetSiteLink' => array( 'Websitelink_festlegen' ),
 	'EntitiesWithoutLabel' => array( 'Objekte_ohne_Bezeichnung' ),
 	'ItemsWithoutSitelinks' => array( 'Objekte_ohne_Websitelinks' ),
 );
@@ -146,6 +148,7 @@ $specialPageAliases['ja'] = array(
 	'SetLabel' => array( 'ラベルの設定' ),
 	'SetDescription' => array( '説明の設定' ),
 	'SetAliases' => array( '別名の設定' ),
+	'SetSiteLink' => array( 'サイトリンクの設定' ),
 	'EntitiesWithoutLabel' => array( 'ラベルのない実体', 'ラベルのないエンティティ' ),
 	'ItemsWithoutSitelinks' => array( 'サイトリンクのない項目' ),
 );
@@ -190,6 +193,7 @@ $specialPageAliases['mk'] = array(
 	'SetLabel' => array( 'ЗадајЕтикета' ),
 	'SetDescription' => array( 'ЗадајОпис' ),
 	'SetAliases' => array( 'ЗадајАлијаси' ),
+	'SetSiteLink' => array( 'ЗадајВикиврска' ),
 	'EntitiesWithoutLabel' => array( 'ЕдинициБезЕтикета' ),
 	'ItemsWithoutSitelinks' => array( 'ПредметиБезВикиврски' ),
 );
