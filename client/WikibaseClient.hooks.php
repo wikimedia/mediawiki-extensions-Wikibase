@@ -2,6 +2,9 @@
 namespace Wikibase;
 
 use IContextSource;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use SplFileInfo;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
 
@@ -79,26 +82,15 @@ final class ClientHooks {
 	 */
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
-		$testFiles = array(
-			'includes/api/ApiClientInfo',
+		$directoryIterator = new RecursiveDirectoryIterator( __DIR__ . '/tests/phpunit/' );
 
-			'includes/parserhooks/PropertyParserFunction',
-
-			'includes/specials/SpecialUnconnectedPages',
-
-			'includes/store/EntityCacheTable',
-
-			'includes/CachedEntity',
-			'includes/ChangeHandler',
-			'includes/EntityCacheUpdater',
-			'includes/LangLinkHandler',
-			'includes/RepoItemLinkGenerator',
-			'includes/RepoLinker',
-			'includes/WikibaseClient',
-		);
-
-		foreach ( $testFiles as $file ) {
-			$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';
+		/**
+		 * @var SplFileInfo $fileInfo
+		 */
+		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
+			if ( substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
+				$files[] = $fileInfo->getPathname();
+			}
 		}
 
 		return true;
@@ -472,6 +464,16 @@ final class ClientHooks {
 
 		if ( $itemId !== false ) {
 			$out->setProperty( 'wikibase_item', $itemId );
+		}
+
+		$errors = $pout->getExtensionData( 'wikibase-property-render-errors' );
+
+		if ( !empty( $errors ) ) {
+			foreach ( $errors as $errorMessage ) {
+				$out->addWikiText(
+					'<p class="error">' . $errorMessage . '</p>'
+				);
+			}
 		}
 
 		return true;

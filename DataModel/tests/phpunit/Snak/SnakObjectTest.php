@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\Snak;
 
 /**
- * Tests for the Wikibase\SnakObject class.
+ * @covers Wikibase\SnakObject
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -104,6 +104,8 @@ abstract class SnakObjectTest extends \PHPUnit_Framework_TestCase {
 		$valid = array_shift( $args );
 		$pokemons = null;
 
+		// TODO: use setExpectedException rather then this clutter
+		// TODO: separate valid from invalid cases (different test methods)
 		try {
 			$dataItem = call_user_func_array( array( $this, 'newInstance' ), $args );
 			$this->assertInstanceOf( $this->getClass(), $dataItem );

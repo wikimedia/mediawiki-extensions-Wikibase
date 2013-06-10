@@ -67,6 +67,7 @@ $messages['en'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|interlanguagelink|interlanguagelinks}} on the page)',
 	'wikibase-pageinfo-entity-id' => 'Wikidata Item ID',
 	'wikibase-pageinfo-entity-id-none' => 'None',
+	'wikibase-property-render-error' => 'Failed to render property $1: $2'
 );
 
 /** Message documentation (Message documentation)
@@ -174,6 +175,13 @@ Parameters:
 	'wikibase-pageinfo-entity-id' => 'A link to the corresponding Wikibase Item',
 	'wikibase-pageinfo-entity-id-none' => 'The page is not linked with a wikibase item.
 {{Identical|None}}',
+
+	'wikibase-property-render-error' => 'Error message shown when the #property parser function fails to render a property value.
+
+Parameters:
+* $1 - the property ID or name
+* $2 - the original error message (this is typically in English and may be rather technical)
+'
 );
 
 /** Afrikaans (Afrikaans)
@@ -591,7 +599,7 @@ $messages['ca'] = array(
  * @author Умар
  */
 $messages['ce'] = array(
-	'wikibase-after-page-move' => 'Викихаамашчохь [$1 керла якха] хьой цӀе хийцина агӀона хьажориг.',
+	'wikibase-after-page-move' => 'Викихаамашчохь [$1 карлаякха] хьой цӀе хийцина агӀона хьажориг.',
 	'wikibase-comment-sitelink-add' => 'Юкъарвики-хьажориг тӀетоьхна: $1',
 	'wikibase-comment-sitelink-change' => 'Юкъарвики-хьажориг хийцина $1 оцу $2',
 	'wikibase-comment-sitelink-remove' => 'Юкъарвики-хьажориг дӀаяккхина: $1',
@@ -606,9 +614,10 @@ $messages['ce'] = array(
 	'wikibase-linkitem-input-site' => 'Мотт:',
 	'wikibase-linkitem-input-page' => 'АгӀо:',
 	'wikibase-linkitem-invalidsite' => 'Къастина йозушйоцу я нийса йоцу сайт',
-	'wikibase-linkitem-confirmitem-text' => 'Ахьа къастийна агӀо хӀинцале хоьттина ю [$1 кхечу Википедишан агӀонашца]. Дехар до, бакъдар лахахь гайтина йолу агӀонаши юкъахь хьой къузара хьажориг тӀехӀоттош йолу агӀо хилар.',
+	'wikibase-linkitem-confirmitem-text' => 'Ахьа къастийна агӀо хӀинцале [$1 кхечу Википедишан агӀонашца] вовшахтесна ю. Дехар до, бакъдар лахахь гайтина йолу агӀонаши юкъахь хьой къузара хьажориг тӀехӀоттош йолу агӀо хилар.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Бакъдан',
-	'wikibase-linkitem-success-link' => 'АгӀонаш кхиамца вовшахтесна. Вовшахтесна йолу агӀонаш [$1 Викихаамаш чохь] ю.',
+	'wikibase-linkitem-success-create' => 'АгӀонаш кхиамца [$1 Викихаамаш чохь] вовшахтесна.',
+	'wikibase-linkitem-success-link' => 'АгӀонаш кхиамца [$1 Викихаамаш чохь] вовшахтесна.',
 	'wikibase-property-notfound' => 'Свойства «$1» ца карайо',
 	'wikibase-rc-hide-wikidata' => '$1 Викихаамаш',
 	'wikibase-unconnectedpages-submit' => 'Кхочушдé',
@@ -730,7 +739,7 @@ $messages['cy'] = array(
 	'specialpages-group-wikibaseclient' => 'Cleient Wiciddata',
 	'wikibase-after-page-move' => "Gallwch [$1 ddiweddaru]'r eitem berthnasol ar Wikidata er mwyn cynnal y cysylltiadau rhwng ieithoedd ar y dudalen a symudwyd.",
 	'wikibase-comment-linked' => "Cysylltwyd eitem Wikidata â'r dudalen hon.",
-	'wikibase-comment-update' => 'Diweddarwyd y cysylltau rhwng ieithoedd.', # Fuzzy
+	'wikibase-comment-update' => 'Newidiwyd yr eitem Wiciddata.',
 	'wikibase-comment-sitelink-add' => 'Ychwanegwyd y cyswllt rhwng ieithoedd $1',
 	'wikibase-comment-sitelink-change' => 'Newidiwyd y cyswllt rhwng ieithoedd o $1 i $2',
 	'wikibase-comment-sitelink-remove' => 'Tynnwyd cyswllt rhwng ieithoedd i ffwrdd: $1',
@@ -788,7 +797,7 @@ $messages['da'] = array(
 	'wikibase-linkitem-input-site' => 'Sprog:',
 	'wikibase-linkitem-input-page' => 'Side:',
 	'wikibase-linkitem-invalidsite' => 'Ugyldigt eller ukendt websted valgt',
-	'wikibase-linkitem-confirmitem-text' => 'Den side, du har valgt, er allerede knyttet til et [$1 emne i vores centrale datadepot]. Bekræft, at siderne, der vises nedenfor, er dem, du vil sammenkæde med.',
+	'wikibase-linkitem-confirmitem-text' => 'Den side, du har valgt, er allerede knyttet til et [$1 emne i vores centrale datadepot]. Bekræft, at siderne, der vises nedenfor, er dem, du vil sammenkæde med.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Bekræft',
 	'wikibase-linkitem-not-loggedin-title' => 'Du skal være logget ind',
 	'wikibase-linkitem-not-loggedin' => 'Du skal være logget ind på denne wiki og i det [$1 centrale datadepot] for at bruge denne funktion.',
@@ -807,7 +816,7 @@ $messages['da'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" er ikke en gyldig sprogkode.',
 	'wikibase-unconnectedpages-page-warning' => 'Sidens titel kunne ikke anvendes til forespørgslen og blev ignoreret.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Kun sider med sproghenvisninger',
-	'wikibase-unconnectedpages-format-row' => '($1 sproghenvisninger på siden)',
+	'wikibase-unconnectedpages-format-row' => '($1 sproghenvisninger på siden)', # Fuzzy
 );
 
 /** German (Deutsch)
@@ -918,10 +927,12 @@ $messages['dsb'] = array(
 );
 
 /** Greek (Ελληνικά)
+ * @author FocalPoint
  * @author Geraki
  * @author Nikosguard
  */
 $messages['el'] = array(
+	'wikibase-after-page-move' => 'Μπορείτε επίσης να [$1 ενημερώσετε] το σχετικό αντικείμενο Wikidata ώστε να διατηρηθούν οι διαγλωσσικές συνδέσεις στη μετακινούμενη σελίδα.',
 	'wikibase-comment-remove' => 'Το σχετιζόμενο αντικείμενο των Wikidata διαγράφτηκε. Ο γλωσσικός σύνδεσμος αφαιρέθηκε.',
 	'wikibase-comment-linked' => 'Ένα αντικείμενο των Wikidata συνδέθηκε με αυτή την σελίδα.',
 	'wikibase-comment-unlink' => 'Αυτή η σελίδα αποσυνδέθηκε από αντικείμενο των Wikidata. Γλωσσικοί σύνδεσμοι αποσυνδέθηκαν.',
@@ -943,7 +954,7 @@ $messages['el'] = array(
 	'wikibase-linkitem-input-site' => 'Γλώσσα:',
 	'wikibase-linkitem-input-page' => 'Σελίδα:',
 	'wikibase-linkitem-invalidsite' => 'Άγνωστο ή μη έγκυρο site επιλέχτηκε',
-	'wikibase-linkitem-confirmitem-text' => 'Η σελίδα που επιλέξατε είναι ήδη συνδεδεμένη με ένα [$1 αντικείμενο στο κεντρικό μας αποθετήριο δεδομένων]. Παρακαλούμε βεβαιωθείτε ότι οι σελίδες που φαίνεται παρακάτω είναι αυτές που θέλετε να συνδέσετε με την παρούσα σελίδα.',
+	'wikibase-linkitem-confirmitem-text' => 'Η σελίδα που επιλέξατε είναι ήδη συνδεδεμένη με ένα [$1 αντικείμενο στο κεντρικό μας αποθετήριο δεδομένων]. Παρακαλούμε βεβαιωθείτε ότι οι σελίδες που φαίνεται παρακάτω είναι αυτές που θέλετε να συνδέσετε με την παρούσα σελίδα.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Επιβεβαίωση',
 	'wikibase-linkitem-not-loggedin-title' => 'Πρέπει να έχετε συνδεθεί',
 	'wikibase-linkitem-not-loggedin' => 'Πρέπει να έχετε συνδεθεί σε αυτό το wiki και στο [$1 κεντρικό αποθετήριο δεδομένων] για να χρησιμοποιήσετε αυτή τη δυνατότητα.',
@@ -954,8 +965,12 @@ $messages['el'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Εμφάνιση των επεξεργασιών στο Wikidata στις πρόσφατες αλλαγές',
 	'wikibase-watchlist-show-changes-pref' => 'Εμφάνιση αλλαγών στα Wikidata στη λίστα παρακολούθησης σας',
 	'special-unconnectedpages' => 'Οι σελίδες δεν συνδέθηκαν με τα αντικείμενα.',
+	'wikibase-unconnectedpages-legend' => 'Επιλογές για ασύνδετες σελίδες',
+	'wikibase-unconnectedpages-page' => 'Άρχισε τον κατάλογο αποτελεσμάτων με τη σελίδα:',
 	'wikibase-unconnectedpages-submit' => 'Μετάβαση',
 	'wikibase-unconnectedpages-invalid-language' => 'Το " $1 " δεν είναι έγκυρος κώδικας γλώσσας.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Μόνο σελίδες με διαγλωσσικές συνδέσεις',
+	'wikibase-unconnectedpages-format-row' => '($1 διαγλωσσικές συνδέσεις για τη σελίδα)', # Fuzzy
 	'wikibase-pageinfo-entity-id' => 'Κωδικός αντικειμένου των Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Κανένα',
 );
@@ -1013,6 +1028,7 @@ $messages['eo'] = array(
 /** Spanish (español)
  * @author Armando-Martin
  * @author Dalton2
+ * @author Gustronico
  * @author Hazard-SJ
  * @author Hereñu
  * @author Pegna
@@ -1026,7 +1042,7 @@ $messages['es'] = array(
 	'wikibase-comment-linked' => 'Un artículo de Wikidata ha sido enlazado a esta página.',
 	'wikibase-comment-unlink' => 'Esta página ha sido desenlazada de un elemento de Wikidata. Se han eliminado los enlaces lingüísticos.',
 	'wikibase-comment-restore' => 'Se ha restaurado un elemento asociado a Wikidata. Se han restaurado los enlaces de idioma.',
-	'wikibase-comment-update' => 'Cambió el elemento de Wikidata',
+	'wikibase-comment-update' => 'Se cambió el elemento en Wikidata',
 	'wikibase-comment-sitelink-add' => 'Se ha añadido un enlace de idioma: $1',
 	'wikibase-comment-sitelink-change' => 'Se ha cambiado el enlace de idioma de $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Se ha eliminado el enlace de idioma: $1',
@@ -1043,7 +1059,7 @@ $messages['es'] = array(
 	'wikibase-linkitem-input-site' => 'Idioma:',
 	'wikibase-linkitem-input-page' => 'Página:',
 	'wikibase-linkitem-invalidsite' => 'Seleccionó un sitio desconocido o no válido',
-	'wikibase-linkitem-confirmitem-text' => 'La página que usted eligió ya está enlazada a un [$1 item on our central data repository]. Confirme que las páginas que se muestran a continuación son los que desea enlazar con esta página.',
+	'wikibase-linkitem-confirmitem-text' => 'La página que usted eligió ya está enlazada a un [$1 item on our central data repository]. Confirme que las páginas que se muestran a continuación son los que desea enlazar con esta página.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Confirmar',
 	'wikibase-linkitem-not-loggedin-title' => 'Necesita haberse identificado',
 	'wikibase-linkitem-not-loggedin' => 'Necesita haberse identificado en esta wiki y en el [$1 central data repository], para usar esta función.',
@@ -1061,7 +1077,7 @@ $messages['es'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" no es un código de idioma válido.',
 	'wikibase-unconnectedpages-page-warning' => 'El título de la página no se pudo usar para la búsqueda y se ignoró.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Solo páginas con enlaces interlingüísticos',
-	'wikibase-unconnectedpages-format-row' => '($1 enlaces interlingüísticos en la página)',
+	'wikibase-unconnectedpages-format-row' => '($1 enlaces interlingüísticos en la página)', # Fuzzy
 );
 
 /** Estonian (eesti)
@@ -1148,7 +1164,7 @@ $messages['fa'] = array(
 	'wikibase-linkitem-input-site' => 'زبان:',
 	'wikibase-linkitem-input-page' => 'صفحه:',
 	'wikibase-linkitem-invalidsite' => 'سایت‌های ناشناخته و یا غیر معتبر انتخاب شده است.',
-	'wikibase-linkitem-confirmitem-text' => 'این صفحه که انتخاب کرده‌اید از قبل به [$1 یک آیتم روی مخزن مرکزی داده ما] متصل است. لطفا تایید کنید که صفحه‌های زیر همان‌هایی هستند که شما خواهان پیوند دادن به آن‌ها بودید.',
+	'wikibase-linkitem-confirmitem-text' => 'این صفحه که انتخاب کرده‌اید از قبل به [$1 یک آیتم روی مخزن مرکزی داده ما] متصل است. لطفا تایید کنید که صفحه‌های زیر همان‌هایی هستند که شما خواهان پیوند دادن به آن‌ها بودید.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'تأیید',
 	'wikibase-linkitem-not-loggedin-title' => 'باید وارد سیستم شوید.',
 	'wikibase-linkitem-not-loggedin' => 'شما نیاز است که در این ویکی و [$1 مخزن اصلی داده] وارد شوید تا بتوانید از این امکان استفاده کنید.',
@@ -1167,7 +1183,7 @@ $messages['fa'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '«$1» یک کد زبان نامعتبر است.',
 	'wikibase-unconnectedpages-page-warning' => 'عنوان صفحه برای کوئری استفاده نمی‌شود و نادیده گرفته شده‌است.',
 	'wikibase-unconnectedpages-iwdata-label' => 'فقط صفحات با پیوند میان‌ویکی',
-	'wikibase-unconnectedpages-format-row' => '( $1  پیوند زبان بر روی صفحه)',
+	'wikibase-unconnectedpages-format-row' => '( $1  پیوند زبان بر روی صفحه)', # Fuzzy
 	'wikibase-pageinfo-entity-id' => 'شناسه آیتم ویکی‌داده',
 	'wikibase-pageinfo-entity-id-none' => 'هیچ‌کدام',
 );
@@ -1587,7 +1603,7 @@ $messages['id'] = array(
 	'wikibase-linkitem-input-site' => 'Bahasa:',
 	'wikibase-linkitem-input-page' => 'Halaman:',
 	'wikibase-linkitem-invalidsite' => 'Wiki tidak diketahui atau tidak valid yang dipilih',
-	'wikibase-linkitem-confirmitem-text' => 'Halaman yang anda pilih telah terpaut pada [$1 item di pusat penyimpanan data kami]. Silahkan dikonfirmasi halaman yang ditampilkan dibawah ini adalah halaman yang ingin anda tautkan.',
+	'wikibase-linkitem-confirmitem-text' => 'Halaman yang anda pilih telah terpaut pada [$1 item di pusat penyimpanan data kami]. Silahkan dikonfirmasi halaman yang ditampilkan dibawah ini adalah halaman yang ingin anda tautkan.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Terima',
 	'wikibase-linkitem-not-loggedin-title' => 'Anda harus masuk log',
 	'wikibase-linkitem-not-loggedin' => 'Anda harus masuk log pada wiki ini dan pada [$1 pusat penyimpanan data] untuk menggunakan fitur ini.',
@@ -1606,7 +1622,9 @@ $messages['id'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" bukan kode bahasa yang valid.',
 	'wikibase-unconnectedpages-page-warning' => 'Judul halaman tidak boleh digunakan untuk permintaan dan akan diabaikan.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Hanya halaman yang ada interwiki',
-	'wikibase-unconnectedpages-format-row' => '($1 interwiki pada halaman)',
+	'wikibase-unconnectedpages-format-row' => '($1 interwiki pada halaman)', # Fuzzy
+	'wikibase-pageinfo-entity-id' => 'ID Item Wikidata',
+	'wikibase-pageinfo-entity-id-none' => 'Tidak ada',
 );
 
 /** Iloko (Ilokano)
@@ -1637,7 +1655,7 @@ $messages['ilo'] = array(
 	'wikibase-linkitem-input-site' => 'Pagsasao:',
 	'wikibase-linkitem-input-page' => 'Panid:',
 	'wikibase-linkitem-invalidsite' => 'Di ammo wenno saan nga umiso a sitio ti napili',
-	'wikibase-linkitem-confirmitem-text' => 'Ti panid a napilim ket naisilpon iti [$1 a banag idiay sentro a pagipenpan ti datosmi]. Pangngaasi a pasingkedan a dagiti panid a naipakita dita baba ket dagiti kayatmo nga isilpo iti daytoy a panid.',
+	'wikibase-linkitem-confirmitem-text' => 'Ti panid a napilim ket naisilpon iti [$1 a banag idiay sentro a pagipenpan ti datosmi]. Pangngaasi a pasingkedan a dagiti panid a naipakita dita baba ket dagiti kayatmo nga isilpo iti daytoy a panid.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Pasingkedan',
 	'wikibase-linkitem-not-loggedin-title' => 'Masapul a nakastrekka',
 	'wikibase-linkitem-not-loggedin' => 'Masapul a nakastrekka iti daytoy a wiki ken idiay [$1 sentro a resipotorio ti datos] tapno makausar ti daytoy a pagpilian.',
@@ -1656,7 +1674,7 @@ $messages['ilo'] = array(
 	'wikibase-unconnectedpages-invalid-language' => 'Ti "$1" ket saan nga umiso a kodigo ti pagsasao.',
 	'wikibase-unconnectedpages-page-warning' => 'Ti titulo ti panid ket saan a mabalin a mausar iti panangbiruk ken saan a naikaskaso.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Dagiti laeng panid nga adda dagiti silpo ti pagsasao',
-	'wikibase-unconnectedpages-format-row' => '($1 a silsilpo ti pagsasao iti daytoy a panid)',
+	'wikibase-unconnectedpages-format-row' => '($1 a silsilpo ti pagsasao iti daytoy a panid)', # Fuzzy
 	'wikibase-pageinfo-entity-id' => 'ID ti Banag ti Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Awan',
 );
@@ -1898,7 +1916,7 @@ $messages['ko'] = array(
 	'wikibase-linkitem-input-page' => '문서:',
 	'wikibase-linkitem-invalidsite' => '알 수 없거나 잘못된 사이트를 선택했습니다',
 	'wikibase-linkitem-confirmitem-text' => '선택한 문서는 이미 [$1 중앙 데이터 저장소에 항목]에 링크되어 있습니다.
-이 문서와 아래에 나타난 문서를 링크해야 할지 확인하세요.',
+이 문서와 아래에 나타난 문서를 링크해야 할지 확인하세요.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => '확인',
 	'wikibase-linkitem-not-loggedin-title' => '로그인 필요',
 	'wikibase-linkitem-not-loggedin' => '이 기능을 사용하려면 이 위키와 [$1 중앙 데이터 저장소]에 로그인해야 합니다.',
@@ -1917,7 +1935,9 @@ $messages['ko'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1"(은)는 올바른 언어 코드가 아닙니다.',
 	'wikibase-unconnectedpages-page-warning' => '문서 제목은 쿼리에 사용할 수 없고 무시됩니다.',
 	'wikibase-unconnectedpages-iwdata-label' => '언어 인터위키 링크가 있는 문서만',
-	'wikibase-unconnectedpages-format-row' => '(문서에 있는 언어 인터위키 링크 $1개)',
+	'wikibase-unconnectedpages-format-row' => '(문서에 있는 언어 인터위키 링크 $1개)', # Fuzzy
+	'wikibase-pageinfo-entity-id' => '위키데이터 항목 ID',
+	'wikibase-pageinfo-entity-id-none' => '없음',
 );
 
 /** Karachay-Balkar (къарачай-малкъар)
@@ -2114,7 +2134,7 @@ $messages['min'] = array(
 	'wikibase-linkitem-input-site' => 'Bahaso:',
 	'wikibase-linkitem-input-page' => 'Laman:',
 	'wikibase-linkitem-invalidsite' => 'Wiki indak dikatahui atau indak valid nan dipiliah',
-	'wikibase-linkitem-confirmitem-text' => 'Laman nan Sanak piliah alah tapauik pado [$1 item di pusek panyimpanan data kami]. Silahkan dikonfirmasi laman nan ditampilan dibawah ko adolah laman nan nio Sanak tauikkan.',
+	'wikibase-linkitem-confirmitem-text' => 'Laman nan Sanak piliah alah tapauik pado [$1 item di pusek panyimpanan data kami]. Silahkan dikonfirmasi laman nan ditampilan dibawah ko adolah laman nan nio Sanak tauikkan.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Tarimo',
 	'wikibase-linkitem-not-loggedin-title' => 'Sanak musti masuak log',
 	'wikibase-linkitem-not-loggedin' => 'Sanak musti masuak log pado wiki ko dan pado [$1 pusek panyimpanan data] untuak manggunoan fitur iko.',
@@ -2133,7 +2153,9 @@ $messages['min'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" bukan kode bahaso nan sah.',
 	'wikibase-unconnectedpages-page-warning' => 'Judul laman indak buliah digunoan untuak query dan akan diabaian.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Hanyo laman nan ado interwiki',
-	'wikibase-unconnectedpages-format-row' => '($1 interwiki pado laman)',
+	'wikibase-unconnectedpages-format-row' => '($1 interwiki pado laman)', # Fuzzy
+	'wikibase-pageinfo-entity-id' => 'ID Item Wikidata',
+	'wikibase-pageinfo-entity-id-none' => 'Indak ado',
 );
 
 /** Macedonian (македонски)
@@ -2542,12 +2564,13 @@ $messages['pms'] = array(
 /** Portuguese (português)
  * @author Helder.wiki
  * @author Lijealso
+ * @author Luckas
  * @author Malafaya
  * @author SandroHc
  */
 $messages['pt'] = array(
 	'wikibase-client-desc' => 'Cliente para a extensão Wikibase',
-	'wikibase-after-page-move' => 'Também pode [$1 actualizar] o item do Wikidata associado para manter os links de idioma na página movida.',
+	'wikibase-after-page-move' => 'Também pode [$1 atualizar] o item do Wikidata associado para manter os links de idioma na página movida.',
 	'wikibase-comment-remove' => 'O item associado no Wikidata foi eliminado. Foram removidos os links para outros idiomas.',
 	'wikibase-comment-linked' => 'Um item do Wikidata foi ligado a esta página.',
 	'wikibase-comment-unlink' => 'O link desta página foi retirado do item do Wikidata. Os links para outros idiomas foram removidos.',
@@ -2716,7 +2739,7 @@ $messages['ru'] = array(
 	'wikibase-linkitem-input-site' => 'Язык:',
 	'wikibase-linkitem-input-page' => 'Страница:',
 	'wikibase-linkitem-invalidsite' => 'Выбран неизвестный или некорректный сайт',
-	'wikibase-linkitem-confirmitem-text' => 'Выбранная вами страница уже связана с [$1 элементом нашего центрального репозитория данных]. Пожалуйста, подтвердите, что среди показанных ниже страниц есть та, на которую вы хотели поставить ссылку отсюда.',
+	'wikibase-linkitem-confirmitem-text' => 'Выбранная вами страница уже связана с [$1 элементом нашего центрального репозитория данных]. Пожалуйста, подтвердите, что среди показанных ниже страниц есть та, на которую вы хотели поставить ссылку отсюда.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Подтвердить',
 	'wikibase-linkitem-not-loggedin-title' => 'Вы должны авторизоваться',
 	'wikibase-linkitem-not-loggedin' => 'Чтобы воспользоваться этой функцией, вы должны быть авторизованы в этой вики и в [$1 центральном репозитории данных].',
@@ -2735,7 +2758,7 @@ $messages['ru'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '«$1» — неправильный код языка.',
 	'wikibase-unconnectedpages-page-warning' => 'Это название страницы не может быть использовано в данном запросе и игнорируется.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Только страницы с межъязыковыми ссылками:',
-	'wikibase-unconnectedpages-format-row' => '($1 межъязыков{{PLURAL:$1|ая ссылка|ые ссылки|ых ссылок}} на странице)',
+	'wikibase-unconnectedpages-format-row' => '($1 межъязыков{{PLURAL:$1|ая ссылка|ые ссылки|ых ссылок}} на странице)', # Fuzzy
 	'wikibase-pageinfo-entity-id' => 'Идентификатор элемента в Викиданных',
 	'wikibase-pageinfo-entity-id-none' => 'Нет',
 );
@@ -2803,7 +2826,7 @@ $messages['sr-ec'] = array(
 	'wikibase-linkitem-input-site' => 'Језик:',
 	'wikibase-linkitem-input-page' => 'Страница:',
 	'wikibase-linkitem-invalidsite' => 'Изабран непознато или неважећи сајт',
-	'wikibase-linkitem-confirmitem-text' => 'Страница коју сте изабрали је већ повезана са [$1 ставком на нашој централној бази података]. Молимо вас потврдите да су странице испод приказане оне које желите да повежете са овом страницом.',
+	'wikibase-linkitem-confirmitem-text' => 'Страница коју сте изабрали је већ повезана са [$1 ставком на нашој централној бази података]. Молимо вас потврдите да су странице испод приказане оне које желите да повежете са овом страницом.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Потврди',
 	'wikibase-linkitem-not-loggedin-title' => 'Морате бити пријављени',
 	'wikibase-linkitem-not-loggedin' => 'Морате бити пријављени на овом вики-сајту и на [$1 главном складишту података] како бисте користили ову могућност.',
@@ -2822,7 +2845,9 @@ $messages['sr-ec'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ није исправан код за језик.',
 	'wikibase-unconnectedpages-page-warning' => 'Наслов странице не може се користи за упит и биће игнорисан.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Само странице са међујезичким везама',
-	'wikibase-unconnectedpages-format-row' => '($1 међујезичких веза на страници)',
+	'wikibase-unconnectedpages-format-row' => '($1 међујезичких веза на страници)', # Fuzzy
+	'wikibase-pageinfo-entity-id' => 'ИД ставке на Википодацима',
+	'wikibase-pageinfo-entity-id-none' => 'Нема',
 );
 
 /** Serbian (Latin script) (srpski (latinica)‎)
@@ -2992,10 +3017,12 @@ $messages['ur'] = array(
 /** Uzbek (oʻzbekcha)
  * @author CoderSI
  * @author Nataev
+ * @author Sociologist
  */
 $messages['uz'] = array(
 	'wikibase-editlinks' => 'Ishoratlarni tahrirla',
 	'wikibase-editlinkstitle' => 'Tillararo havolalarni tahrirlash',
+	'wikibase-linkitem-addlinks' => 'Ishorat qoʻshish',
 );
 
 /** vèneto (vèneto)
@@ -3154,7 +3181,7 @@ $messages['yi'] = array(
 	'wikibase-unconnectedpages-submit' => 'גיין',
 	'wikibase-unconnectedpages-invalid-language' => '"$1" איז נישט קיין גילטיקער שפראך־קאד.',
 	'wikibase-unconnectedpages-iwdata-label' => 'נאר בלעטער מיט אינטערשפראך לינקען',
-	'wikibase-unconnectedpages-format-row' => '($1 אינטערשפראך לינקען אויפן בלאט)',
+	'wikibase-unconnectedpages-format-row' => '($1 אינטערשפראך לינקען אויפן בלאט)', # Fuzzy
 	'wikibase-pageinfo-entity-id-none' => 'קיין',
 );
 
@@ -3208,7 +3235,7 @@ $messages['zh-hans'] = array(
 	'wikibase-linkitem-input-site' => '语言：',
 	'wikibase-linkitem-input-page' => '页面：',
 	'wikibase-linkitem-invalidsite' => '选择了一个未知或无效的网站',
-	'wikibase-linkitem-confirmitem-text' => '您所选的页面已与[$1 中央数据库中的其他项]链接。请确认如下所示的都是您想要与此页面相链接的页面。',
+	'wikibase-linkitem-confirmitem-text' => '您所选的页面已与[$1 中央数据库中的其他项]链接。请确认如下所示的都是您想要与此页面相链接的页面。', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => '确认',
 	'wikibase-linkitem-not-loggedin-title' => '您必须登录',
 	'wikibase-linkitem-not-loggedin' => '您必须在此维基和[$1 中央数据存储库]上登录才能使用此功能。',
@@ -3227,7 +3254,9 @@ $messages['zh-hans'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '“$1”不是有效的语言代码。',
 	'wikibase-unconnectedpages-page-warning' => '该页面标题不能被用于查询并已被忽略。',
 	'wikibase-unconnectedpages-iwdata-label' => '仅含有跨语言链接的页面',
-	'wikibase-unconnectedpages-format-row' => '（该页面有$1个跨语言链接）',
+	'wikibase-unconnectedpages-format-row' => '（该页面有$1个跨语言链接）', # Fuzzy
+	'wikibase-pageinfo-entity-id' => '维基数据项ID',
+	'wikibase-pageinfo-entity-id-none' => '无',
 );
 
 /** Traditional Chinese (中文（繁體）‎)
@@ -3264,7 +3293,7 @@ $messages['zh-hant'] = array(
 	'wikibase-linkitem-input-site' => '語言：',
 	'wikibase-linkitem-input-page' => '頁面：',
 	'wikibase-linkitem-invalidsite' => '所選的網站未知或無效。',
-	'wikibase-linkitem-confirmitem-text' => '你選擇的頁面已連至[$1 中央數據庫的項目]。請確認以下項目亦是你想連接到的頁面。',
+	'wikibase-linkitem-confirmitem-text' => '你選擇的頁面已連至[$1 中央數據庫的項目]。請確認以下項目亦是你想連接到的頁面。', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => '確認',
 	'wikibase-linkitem-not-loggedin-title' => '您必須登入。',
 	'wikibase-linkitem-not-loggedin' => '你必需於本維基及[$1 中央數據庫]中登入才可使用此功能。',
@@ -3283,6 +3312,7 @@ $messages['zh-hant'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1"不是有效的語言代碼。',
 	'wikibase-unconnectedpages-page-warning' => '該頁面標題無法用於查詢並已忽略。',
 	'wikibase-unconnectedpages-iwdata-label' => '僅有跨語言連結的頁面',
-	'wikibase-unconnectedpages-format-row' => '（該頁面有$1個跨語言連結）',
+	'wikibase-unconnectedpages-format-row' => '（該頁面有$1個跨語言連結）', # Fuzzy
+	'wikibase-pageinfo-entity-id' => '維基數據項目ID',
 	'wikibase-pageinfo-entity-id-none' => '無',
 );

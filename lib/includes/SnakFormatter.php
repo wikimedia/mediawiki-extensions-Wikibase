@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib;
 
+use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use RuntimeException;
 use Wikibase\EntityId;
@@ -90,18 +91,10 @@ class SnakFormatter {
 	}
 
 	private function formatPropertyValueSnak( PropertyValueSnak $snak, $languageCode ) {
-		try {
-			$dataValue = $snak->getDataValue();
-			$dataTypeId = $this->getDataTypeForProperty( $snak->getPropertyId() );
+		$dataValue = $snak->getDataValue();
+		$dataTypeId = $this->getDataTypeForProperty( $snak->getPropertyId() );
 
-			return $this->typedValueFormatter->formatToString( $dataValue, $dataTypeId, $languageCode );
-		} catch ( PropertyNotFoundException $e ) {
-			// @todo nicer error handling!
-			wfDebugLog( __CLASS__, __METHOD__ . ': Property '
-				. $snak->getPropertyId()->getPrefixedId() . ' not found.' );
-		}
-
-		return '';
+		return $this->typedValueFormatter->formatToString( $dataValue, $dataTypeId, $languageCode );
 	}
 
 	private function getDataTypeForProperty( EntityId $propertyId ) {
