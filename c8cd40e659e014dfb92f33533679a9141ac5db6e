@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D0891XZU",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-10T14:07:51Z",
+      "side": 1,
+      "message": "Putting the body of this try catch into its own method will prevent this mixup of logic and error handling.",
+      "revId": "c8cd40e659e014dfb92f33533679a9141ac5db6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
