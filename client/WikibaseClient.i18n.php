@@ -67,6 +67,7 @@ $messages['en'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|interlanguagelink|interlanguagelinks}} on the page)',
 	'wikibase-pageinfo-entity-id' => 'Wikidata Item ID',
 	'wikibase-pageinfo-entity-id-none' => 'None',
+	'wikibase-property-render-error' => 'Failed to render property $1: $2'
 );
 
 /** Message documentation (Message documentation)
@@ -174,6 +175,13 @@ Parameters:
 	'wikibase-pageinfo-entity-id' => 'A link to the corresponding Wikibase Item',
 	'wikibase-pageinfo-entity-id-none' => 'The page is not linked with a wikibase item.
 {{Identical|None}}',
+
+	'wikibase-property-render-error' => 'Error message shown when the #property parser function fails to render a property value.
+
+Parameters:
+* $1 - the property ID or name
+* $2 - the original error message (this is typically in English and may be rather technical)
+'
 );
 
 /** Afrikaans (Afrikaans)
