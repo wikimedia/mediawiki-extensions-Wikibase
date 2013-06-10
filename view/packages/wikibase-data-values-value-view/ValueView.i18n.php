@@ -373,17 +373,18 @@ $messages['ja'] = array(
  * @author 아라
  */
 $messages['ko'] = array(
-	'valueview-desc' => '데이터 값 표시와 편집을 위한 사용자 인터페이스 구성 요소',
-	'valueview-expert-advancedadjustments' => '고급 설정',
+	'valueview-desc' => '데이터 값 보이기와 편집을 위한 사용자 인터페이스 구성 요소',
+	'valueview-expert-advancedadjustments' => '고급 조정',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '"$1" 값의 처리는 아직 지원하지 않습니다.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '"$1" 데이터 유형에 대한 값의 처리는 아직 지원하지 않습니다.',
 	'valueview-expert-emptyvalue-empty' => '비었음',
-	'valueview-expert-timeinput-precision' => '유효 단위:',
+	'valueview-expert-globecoordinateinput-precision' => '정밀도:',
+	'valueview-expert-timeinput-precision' => '정밀도:',
 	'valueview-expert-timeinput-calendar' => '달력:',
 	'valueview-expert-timeinput-calendarhint' => '($1력)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; $1로 바꾸기',
-	'valueview-preview-label' => '다음과 같이 표시:',
-	'valueview-preview-novalue' => '유효값이 인식되지 않음',
+	'valueview-preview-label' => '다음과 같이 보이기:',
+	'valueview-preview-novalue' => '올바른 값이 인식되지 않음',
 	'valueview-listrotator-auto' => '자동',
 );
 
