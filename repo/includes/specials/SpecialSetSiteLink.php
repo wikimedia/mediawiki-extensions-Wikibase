@@ -257,18 +257,29 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			return $status;
 		}
 
-		if ( $siteObject->normalizePageName( $page ) === false && $page !== '' ) {
+		$page = $siteObject->normalizePageName( $page );
+
+		if ( $page === false && $page !== '' ) {
 			$status->error( 'wikibase-error-ui-no-external-page' );
 			return $status;
 		}
 
 		if ( $page === '' ) {
-			$entityContent->getEntity()->removeSitelink( $site );
+			$link = $entityContent->getItem()->getSiteLink( $site );
+			if ( !$link ) {
+				$status->error( 'wikibase-setsitelink-remove-failed' );
+				return $status;
+			}
+			$entityContent->getItem()->removeSitelink( $site );
 			$i18n = 'wbsetsitelink-remove';
 		}
 		else {
 			$siteLink = new SiteLink( $siteObject, $page );
-			$entityContent->getEntity()->addSiteLink( $siteLink, 'set' );
+			$ret = $entityContent->getItem()->addSiteLink( $siteLink, 'set' );
+			if ( $ret === false ) {
+				$status->error( 'wikibase-setsitelink-add-failed' );
+				return $status;
+			}
 			$i18n = 'wbsetsitelink-set';
 		}
 		$summary = $this->getSummary( $site, $page, $i18n ); // $summary is passed by reference ( &$summary )
