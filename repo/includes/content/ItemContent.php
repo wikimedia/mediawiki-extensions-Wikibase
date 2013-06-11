@@ -177,11 +177,11 @@ class ItemContent extends EntityContent {
 		$site = $siteSqlStore->getSite( $conflict['siteId'] );
 		$pageUrl = $site->getPageUrl( $conflict['sitePage'] );
 
-		$msg = new \Message( 'wikibase-error-sitelink-already-used' );
-		$msg->rawParams( $pageUrl );
-		$msg->params( array( $conflict['sitePage'], $conflictingPage->getTitle()->getFullText() ) );
-
-		return $msg;
+		// $pageUrl shouldn't be a raw param (it's causing the link not to be parsed)
+		return new \Message(
+			'wikibase-error-sitelink-already-used',
+			array( $pageUrl, $conflict['sitePage'], $conflictingPage->getTitle()->getFullText() )
+		);
 	}
 
 	/**
