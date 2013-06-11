@@ -572,10 +572,10 @@ globeCoordinate.parser = ( function( globeCoordinate ){
 					result0 = ( function( offset, sign, full, min, dotsec, sec, postdot ) {
 						var r = full + min / 60 + sec / 3600;
 						var precision = 1;
-						if( min > 0 ) {
-							precision = 1 / 60;
-						} else if( sec > 0 ) {
+						if( sec > 0 ) {
 							precision = 1 / 3600;
+						} else if( min > 0 ) {
+							precision = 1 / 60;
 						}
 						if ( dotsec === '\'' ) {
 							r += ( postdot[0] / 3600 );
