@@ -9,8 +9,10 @@
 module StatementPage
   include PageObject
   include EntitySelectorPage
+  include TimePage
   include ReferencePage
   include QualifierPage
+
   # statements UI elements
   link(:addStatement, :xpath => "//div[contains(@class, 'wb-claimlist')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
   link(:addClaimToFirstStatement, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
@@ -18,9 +20,8 @@ module StatementPage
   link(:saveStatement, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='save']")
   link(:cancelStatement, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='cancel']")
   link(:removeClaimButton, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='remove']")
-  # TODO: could this lead to problems? for CM & item type properties there is an additional "a" element around the textbox; this is not the case for string type properies
-  #text_area(:statementValueInput, :xpath => "//div[contains(@class, 'valueview-ineditmode')]/div/a/textarea[contains(@class, 'valueview-input')]")
   text_area(:statementValueInput, :class => "valueview-input")
+  text_field(:statementValueInputField, :class => "valueview-input")
   div(:claimEditMode, :xpath => "//div[contains(@class, 'wb-claim-section')]/div[contains(@class, 'wb-edit')]")
   div(:statement1Name, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]")
   div(:statement2Name, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]")
@@ -38,9 +39,31 @@ module StatementPage
   link(:snaktypeSelectorSomevalue, :xpath => "//ul[contains(@class, 'wb-snaktypeselector-menu')]/li[contains(@class, 'wb-snaktypeselector-menuitem-somevalue')]/a")
   link(:snaktypeSelectorNovalue, :xpath => "//ul[contains(@class, 'wb-snaktypeselector-menu')]/li[contains(@class, 'wb-snaktypeselector-menuitem-novalue')]/a")
 
+  # time UI elements
+  div(:timeInputExtender, :class => "ui-inputextender-extension")
+  div(:timeInputExtenderClose, :class => "ui-inputextender-extension-close")
+  div(:timePreview, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-preview')]")
+  div(:timePreviewLabel, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-preview')]/div[contains(@class, 'valueview-preview-label')]")
+  div(:timePreviewValue, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-preview')]/div[contains(@class, 'valueview-preview-value')]")
+  link(:timeInputExtenderAdvanced, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/a[contains(@class, 'valueview-expert-timeinput-advancedtoggler')]")
+  div(:timePrecision, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-precisioncontainer')]")
+  link(:timePrecisionRotatorAuto, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-precisioncontainer')]/div[contains(@class, 'valueview-expert-timeinput-precision')]/a[contains(@class, 'ui-listrotator-auto')]")
+  link(:timePrecisionRotatorPrev, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-precisioncontainer')]/div[contains(@class, 'valueview-expert-timeinput-precision')]/a[contains(@class, 'ui-listrotator-prev')]")
+  link(:timePrecisionRotatorNext, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-precisioncontainer')]/div[contains(@class, 'valueview-expert-timeinput-precision')]/a[contains(@class, 'ui-listrotator-next')]")
+  link(:timePrecisionRotatorSelect, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-precisioncontainer')]/div[contains(@class, 'valueview-expert-timeinput-precision')]/a[contains(@class, 'ui-listrotator-curr')]")
+  unordered_list(:timePrecisionMenu, :class => "ui-listrotator-menu")
+  div(:timeCalendar, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-calendarcontainer')]")
+  link(:timeCalendarRotatorAuto, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-calendarcontainer')]/div[contains(@class, 'ui-listrotator')]/a[contains(@class, 'ui-listrotator-auto')]")
+  link(:timeCalendarRotatorPrev, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-calendarcontainer')]/div[contains(@class, 'ui-listrotator')]/a[contains(@class, 'ui-listrotator-prev')]")
+  link(:timeCalendarRotatorNext, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-calendarcontainer')]/div[contains(@class, 'ui-listrotator')]/a[contains(@class, 'ui-listrotator-next')]")
+  link(:timeCalendarRotatorSelect, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-calendarcontainer')]/div[contains(@class, 'ui-listrotator')]/a[contains(@class, 'ui-listrotator-curr')]")
+  unordered_list(:timePrecisionMenu, :class => "ui-listrotator-menu", :index => 0)
+  unordered_list(:timeCalendarMenu, :class => "ui-listrotator-menu", :index => 1)
+  # *****
+
   def wait_for_property_value_box
     wait_until do
-      self.statementValueInput?
+      self.statementValueInput? || self.statementValueInputField?
     end
   end
 
@@ -58,6 +81,9 @@ module StatementPage
     self.wait_for_property_value_box
     if self.statementValueInput?
       self.statementValueInput = statement_value
+      ajax_wait
+    elsif self.statementValueInputField?
+      self.statementValueInputField = statement_value
       ajax_wait
     end
     saveStatement
