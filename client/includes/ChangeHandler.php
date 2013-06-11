@@ -339,50 +339,55 @@ class ChangeHandler {
 		$breakNext = false;
 
 		foreach ( $changes as $change ) {
-			$action = $change->getAction();
-			$meta = $change->getMetadata();
-			$user = $meta['user_text'];
-			$entityId = $change->getEntityId()->getPrefixedId();
+			try {
+				$action = $change->getAction();
+				$meta = $change->getMetadata();
+				$user = $meta['user_text'];
+				$entityId = $change->getEntityId()->getPrefixedId();
 
-			$break = $breakNext
-				|| $currentAction !== $action
-				|| $currentUser !== $user
-				|| $currentEntity !== $entityId;
+				$break = $breakNext
+					|| $currentAction !== $action
+					|| $currentUser !== $user
+					|| $currentEntity !== $entityId;
 
-			$breakNext = false;
-			$siteGlobalId = $this->site->getGlobalId();
+				$breakNext = false;
+				$siteGlobalId = $this->site->getGlobalId();
 
-			if ( !$break && ( $change instanceof ItemChange ) ) {
-				$siteLinkDiff = $change->getSiteLinkDiff();
-				if ( isset( $siteLinkDiff[ $siteGlobalId ] ) ) {
-					$break = true;
-					$breakNext = true;
-				};
-			}
-
-			// FIXME: We should call changeNeedsRendering() and see if the needs-rendering
-			//        stays the same, and break the run if not. This way, uninteresting
-			//        changes can be sorted out more cleanly later.
-			// FIXME: Perhaps more easily, get rid of them here and now!
-			if ( $break ) {
-				if ( !empty( $currentRun ) ) {
-					try {
-						$coalesced[] = $this->mergeChanges( $currentRun );
-					} catch ( \MWException $ex ) {
-						// Something went wrong while trying to merge the changes.
-						// Just keep the original run.
-						wfWarn( $ex->getMessage() );
-						$coalesced = array_merge( $coalesced, $currentRun );
-					}
+				if ( !$break && ( $change instanceof ItemChange ) ) {
+					$siteLinkDiff = $change->getSiteLinkDiff();
+					if ( isset( $siteLinkDiff[ $siteGlobalId ] ) ) {
+						$break = true;
+						$breakNext = true;
+					};
 				}
 
-				$currentRun = array();
-				$currentUser = $user;
-				$currentEntity = $entityId;
-				$currentAction = $action === EntityChange::ADD ? EntityChange::UPDATE : $action;
-			}
+				// FIXME: We should call changeNeedsRendering() and see if the needs-rendering
+				//        stays the same, and break the run if not. This way, uninteresting
+				//        changes can be sorted out more cleanly later.
+				// FIXME: Perhaps more easily, get rid of them here and now!
+				if ( $break ) {
+					if ( !empty( $currentRun ) ) {
+						try {
+							$coalesced[] = $this->mergeChanges( $currentRun );
+						} catch ( \MWException $ex ) {
+							// Something went wrong while trying to merge the changes.
+							// Just keep the original run.
+							wfWarn( $ex->getMessage() );
+							$coalesced = array_merge( $coalesced, $currentRun );
+						}
+					}
 
-			$currentRun[] = $change;
+					$currentRun = array();
+					$currentUser = $user;
+					$currentEntity = $entityId;
+					$currentAction = $action === EntityChange::ADD ? EntityChange::UPDATE : $action;
+				}
+
+				$currentRun[] = $change;
+			// skip any change that failed to process in some way (bug 49417)
+			} catch ( \Exception $e ) {
+				wfDebug( __CLASS__, __METHOD__ . ':' . $e->getMessage() );
+			}
 		}
 
 		if ( !empty( $currentRun ) ) {
