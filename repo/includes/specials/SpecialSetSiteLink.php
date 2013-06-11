@@ -253,34 +253,31 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$status = \Status::newGood();
 
 		if ( $siteObject === null ) {
-			$status->error( 'wikibase-setsitelink-invalid-site', $site );
+			$status->fatal( 'wikibase-setsitelink-invalid-site', $site );
 			return $status;
 		}
 
-		if ( $page !== '' ) {
-			// Don't try to normalize an empty string (which means: remove the link)
-			$page = $siteObject->normalizePageName( $page );
-
-			if ( $page === false ) {
-				$status->error( 'wikibase-error-ui-no-external-page' );
-				return $status;
-			}
-		}
-
+		// Empty page means remove site link
 		if ( $page === '' ) {
 			$link = $entityContent->getItem()->getSiteLink( $site );
 			if ( !$link ) {
-				$status->error( 'wikibase-setsitelink-remove-failed' );
+				$status->fatal( 'wikibase-setsitelink-remove-failed' );
 				return $status;
 			}
 			$entityContent->getItem()->removeSitelink( $site );
 			$i18n = 'wbsetsitelink-remove';
 		}
 		else {
+			// Try to normalize the page name
+			$page = $siteObject->normalizePageName( $page );
+			if ( $page === false ) {
+				$status->fatal( 'wikibase-error-ui-no-external-page' );
+				return $status;
+			}
 			$siteLink = new SiteLink( $siteObject, $page );
 			$ret = $entityContent->getItem()->addSiteLink( $siteLink, 'set' );
 			if ( $ret === false ) {
-				$status->error( 'wikibase-setsitelink-add-failed' );
+				$status->fatal( 'wikibase-setsitelink-add-failed' );
 				return $status;
 			}
 			$i18n = 'wbsetsitelink-set';
