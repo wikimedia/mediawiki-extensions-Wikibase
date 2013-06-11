@@ -451,7 +451,7 @@ globeCoordinate.parser = ( function( globeCoordinate ){
 							if (result3 !== null) {
 								result4 = parse_integer();
 								if (result4 !== null) {
-									if (input.charCodeAt(pos) === 39) {
+									if (input.charCodeAt(pos) === 39 || input.charCodeAt(pos) === 8242) { //' and ′
 										result5 = "'";
 										pos++;
 									} else {
@@ -490,24 +490,25 @@ globeCoordinate.parser = ( function( globeCoordinate ){
 												result8 = parse_postdot();
 												if (result8 !== null) {
 													result9 = [];
-													if (/^['"]/.test(input.charAt(pos))) {
+													var quoteIds = [34, 39, 8242, 8243]; //", ', ′ and ″
+													if (quoteIds.indexOf(input.charCodeAt(pos)) !== -1) {
 														result10 = input.charAt(pos);
 														pos++;
 													} else {
 														result10 = null;
 														if (reportFailures === 0) {
-															matchFailed("['\"]");
+															matchFailed("['\"′″]");
 														}
 													}
 													while (result10 !== null) {
 														result9.push(result10);
-														if (/^['"]/.test(input.charAt(pos))) {
+														if (quoteIds.indexOf(input.charCodeAt(pos)) !== -1) {
 															result10 = input.charAt(pos);
 															pos++;
 														} else {
 															result10 = null;
 															if (reportFailures === 0) {
-																matchFailed("['\"]");
+																matchFailed("['\"′″]");
 															}
 														}
 													}
