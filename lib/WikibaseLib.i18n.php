@@ -536,6 +536,7 @@ $messages['cy'] = array(
 );
 
 /** Danish (dansk)
+ * @author Byrial
  * @author Hede2000
  * @author HenrikKbh
  * @author Poul G
@@ -545,7 +546,7 @@ $messages['da'] = array(
 	'wikibase-entity-item' => 'emne',
 	'wikibase-entity-property' => 'egenskab',
 	'wikibase-entity-query' => 'forespørgsel',
-	'wikibase-diffview-reference' => 'fodnote',
+	'wikibase-diffview-reference' => 'kilde',
 	'wikibase-diffview-rank' => 'rang',
 	'wikibase-diffview-qualifier' => 'operator',
 	'wikibase-error-unexpected' => 'Der opstod en uventet fejl.',

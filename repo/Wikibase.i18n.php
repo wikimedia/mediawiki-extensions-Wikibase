@@ -2287,6 +2287,7 @@ $messages['ca'] = array(
 );
 
 /** Chechen (нохчийн)
+ * @author Kaganer
  * @author Умар
  */
 $messages['ce'] = array(
@@ -2295,6 +2296,7 @@ $messages['ce'] = array(
 	'wikibase-addreference' => 'тӏетоха хьост',
 	'wikibase-sitelinks-add' => 'Сайтан агӀона тӀе тӀетоха хьажориг',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|хьост|хьосташ}}',
+	'wikibase-error-sitelink-already-used' => 'Хьажориг оцу [$1 $2] сайтан тӏе хӏинцале лелош ю хӏокху [[$3]] элементо.',
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
 	'wikibase-itembytitle-lookup-page' => 'АгӀо:',
 	'wikibase-itemdisambiguation-lookup-language' => 'Мотт:',
@@ -2847,7 +2849,7 @@ Din IP-adresse vil blive registreret i redigeringshistorikken for dette/denne $1
 	'wikibase-error-constraint-violation-label' => 'Der er {{PLURAL:$1|en begrænsningskrænkelse|begrænsningskrænkelser}} for {{PLURAL:$1|etiketten|etiketterne}} "$3" for {{PLURAL:$1|sprogkoden|sprogkoderne}} "$2".',
 	'wikibase-error-constraint-violation-description' => 'Der er {{PLURAL:$1|en begrænsningskrænkelse|begrænsningskrænkelser}} for {{PLURAL:$1|beskrivelsen|beskrivelserne}} "$3" for {{PLURAL:$1|sprogkoden|sprogkoderne}} "$2".',
 	'wikibase-error-constraint-violation-aliases' => 'Der er {{PLURAL:$1|en begrænsningskrænkelse|begrænsningskrænkelser}} for {{PLURAL:$1|kaldenavnet|kaldenavnene}} "$3" for {{PLURAL:$1|sprogkoden|sprogkoderne}} "$2".',
-	'wikibase-error-sitelink-already-used' => 'Linket [$1 $2] anvendes allerede af emnet [[$3]].', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Linket [$1 $2] anvendes allerede af emnet [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'En anden egenskab ($3) har allerede etiketten "$1" knyttet til sprogkode $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'En anden forespørgsel ($3) har allerede etiketten "$1" knyttet til sprogkode $2',
 	'wikibase-error-label-not-unique-item' => 'Et andet emne ($3) har allerede etiketten "$1" og beskrivelsen "$4" knyttet til sprogkode $2',
@@ -2903,6 +2905,7 @@ Din IP-adresse vil blive registreret i redigeringshistorikken for dette/denne $1
 	'wikibase-setaliases-label' => 'Aliasser:',
 	'wikibase-setaliases-submit' => 'Angiv aliasserne',
 	'wikibase-setaliases-warning-remove' => 'Vil du virkelig fjerne alle kaldenavne for [[$1]]?',
+	'special-setsitelink' => 'Angiv en sidehenvisning',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Sprog:',
 	'wikibase-setentity-invalid-langcode' => 'Sprog-id "$1" er ukendt. Brug venligst et sprog-id, der er kendt i systemet, såsom "da".',
@@ -3029,13 +3032,12 @@ for at finde ud af, hvad der er sket med det.',
 * sprog – eksplicit værdi for at identificere sproget for tekstdelen
 * tekst – eksplicit værdi for den sprogspecifikke streng',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Tekst på flere sprog',
-	'wikibase-listdatatypes-multilingual-text-body' => 'Bogstaveligt datafelt for en streng der skal oversættes til andre sprog. Typisk brug er et entitetsnavn af global interesse, der har ikke-lokale skrevne former. Disse kan adskilles i sprog og skriftsystemer.
+	'wikibase-listdatatypes-multilingual-text-body' => 'Bogstaveligt datafelt for en streng der skal oversættes til andre sprog. Typisk brug er et entitetsnavn af global interesse, der har ikke-lokale skrevne former. Disse kan både have forskellige sprog og skriftsystemer.
 * sprog – eksplicit værdi til at identificere sproget for tekstdelen
-* tekst – eksplicit værdi for strengen på specifikke sprog',
+* tekst – eksplicit værdi for den sprogspecifikke variant af strengen',
 	'wikibase-listdatatypes-string-head' => 'Streng',
-	'wikibase-listdatatypes-string-body' => "Bogstaveligt datafelt for en streng af tegn. Typisk brug er id'er, der har skrevne formularer, der ikke er sprogafhængige . Sådanne strenge kan i nogle tilfælde være translittereret i andre skriftsystemer.
-* sprog – eksplicit værdi for at identificere sproget for tekstdelen
-* tekst – eksplicit værdi for den specifikke variant af streng sproget",
+	'wikibase-listdatatypes-string-body' => "Bogstaveligt datafelt for en streng af tegn. Typisk brug er id'er, der har skriftlige former, der ikke er sprogafhængige.
+* værdi – eksplicit værdi for den specifikke streng",
 	'wikibase-listdatatypes-time-head' => 'Tid',
 	'wikibase-listdatatypes-time-body' => 'Bogstavelige datafelt for en klokkeslætsværdi. Givet som en tid med en præcision og grænser. Tidspunktet gemmes altid internt i tilbageført gregoriansk tid, men kan bruge andre formater under parsing og formatering.(?)
 * tid – eksplicit værdi for tidspunkt, repræsenteret pr. ISO8601, året har altid 11 cifre, datoen altid med fortegn i formatet +00000002013-01-01T00:00:00Z
@@ -3117,8 +3119,8 @@ $messages['de'] = array(
 	'wikibase-description-input-help-message' => 'Gib eine kurze Beschreibung in $1 an.',
 	'wikibase-statements' => 'Aussagen',
 	'wikibase-terms' => 'Bezeichnung und Beschreibung in anderen Sprachen',
-	'wikibase-sitelinks-add' => 'füge eine Verknüpfung zu einer Seitenverknüpfung hinzu',
-	'wikibase-sitelinks-empty' => 'Bislang sind zu diesem Datenobjekt noch keine Seitenverknüpfungen vorhanden.',
+	'wikibase-sitelinks-add' => 'füge eine Verknüpfung zu einer Websiteverknüpfung hinzu',
+	'wikibase-sitelinks-empty' => 'Bislang sind zu diesem Datenobjekt noch keine Websiteverknüpfungen vorhanden.',
 	'wikibase-sitelinks-input-help-message' => 'Leg eine Verknüpfung zu einer diesem Datenobjekt entsprechenden Seite fest.',
 	'wikibase-remove' => 'entfernen',
 	'wikibase-undo-title' => 'Bearbeitung an „$1“ rückgängig machen',
@@ -3175,7 +3177,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespei
 	'wikibase-error-label-not-unique-item' => 'Ein anderes Datenobjekt ($3) hat bereits die Bezeichnung „$1“ und die Beschreibung „$4“, die dem Sprachcode $2 zugeordnet ist.',
 	'special-itembytitle' => 'Datenobjekte nach Titel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Suche Datenobjekte nach Website und Titel',
-	'wikibase-itembytitle-lookup-site' => 'Wiki:',
+	'wikibase-itembytitle-lookup-site' => 'Website:',
 	'wikibase-itembytitle-lookup-page' => 'Seite:',
 	'wikibase-itembytitle-submit' => 'Suchen',
 	'wikibase-itembytitle-nothing-found' => 'Mit der vorherigen Suche konnte kein Datenobjekt ermittelt werden. Bitte verfeinere die Abfrage indem du die externe Seite besser beschreibst.',
@@ -3228,11 +3230,13 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespei
 	'special-setsitelink' => 'Einen Websitelink festlegen',
 	'wikibase-setsitelink-introfull' => 'Du legst den Websitelink von $2 für [[$1]] fest.',
 	'wikibase-setsitelink-intro' => 'Dieses Formular ermöglicht dir die Festlegung des Websitelinks eines Objektes. Du musst die Objektkennung (z.&nbsp;B. „Q23“), eine Websitekennung (z.&nbsp;B. „dewiki“) und den Websitelink angeben.',
-	'wikibase-setsitelink-site' => 'Seitenkennung:',
+	'wikibase-setsitelink-site' => 'Websitekennung:',
 	'wikibase-setsitelink-label' => 'Websitelink:',
 	'wikibase-setsitelink-submit' => 'Den Websitelink festlegen',
 	'wikibase-setsitelink-warning-remove' => 'Möchtest du den Websitelink von [[$1]] wirklich entfernen?',
 	'wikibase-setsitelink-invalid-site' => 'Die Websitekennung „$1“ ist unbekannt. Bitte verwende eine vorhandene Kennung, wie „dewiki“.',
+	'wikibase-setsitelink-add-failed' => 'Der Websitelink konnte nicht gespeichert werden.',
+	'wikibase-setsitelink-remove-failed' => 'Der Websitelink konnte nicht entfernt werden.',
 	'wikibase-setentity-id' => 'Kennung:',
 	'wikibase-setentity-language' => 'Sprache:',
 	'wikibase-setentity-invalid-langcode' => 'Der Sprachcode „$1“ ist unbekannt. Bitte nutze einen gültige Sprachcode, wie bspw. „de“.',
@@ -3357,15 +3361,14 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespei
 	'wikibase-listdatatypes-monolingual-text-head' => 'Einsprachiger Text',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Literales Datenfeld für eine Zeichenkette, die nicht in andere Sprachen übersetzt ist. Diese Art von Zeichenkette ist einmal definiert und wird auf allen Sprachen verwendet. Typische Verwendung sind geografische Namen, die in der lokalen Sprache geschrieben sind, eine Kennung gleicher Art, eine chemische Formel oder ein lateinischer wissenschaftlicher Name.
 * language – ausdrücklicher Wert zur Identifizierung der Sprache für den Textabschnitt.
-* text – ausdrücklicher Wert für die sprachspezifische Variantenkette.', # Fuzzy
+* value – ausdrücklicher Wert für die sprachspezifische Variantenkette.',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Mehrsprachiger Text',
 	'wikibase-listdatatypes-multilingual-text-body' => 'Literales Datenfeld für eine Zeichenkette, die in andere Sprachen übersetzt werden muss. Typische Verwendung ist ein Objektname mit globaler Interesse, der nicht-lokal geschriebene Formulare hat. Dies kann in Sprachen und Skriptsystemen abweichen.
 * language – ausdrücklicher Wert zur Identifizierung der Sprache des Textabschnitts.
-* text – ausdrücklicher Wert für die sprachspezifische Variantenkette.', # Fuzzy
+* value – ausdrücklicher Wert für die sprachspezifische Variantenkette.',
 	'wikibase-listdatatypes-string-head' => 'Zeichenkette',
-	'wikibase-listdatatypes-string-body' => 'Literales Datenfeld für eine Zeichenketteneingabe. Es findet typischerweise Verwendung für Namen, Bezeichnungen oder Kennungen in sprachunabhängigen Formularfeldern mit Texteingabe. Dort eingegebene Zeichenketten können in einigen Fällen in andere Schriften transliteriert werden.
-* language – eindeutige Angabe zur Identifizierung der Sprache (und somit Schrift) des Textanteils
-* text – der Textanteil enthält die jeweilige Angabe in der genannten Sprache', # Fuzzy
+	'wikibase-listdatatypes-string-body' => 'Literales Datenfeld für eine Glyphenkette. Typische Verwendung sind Kennungen mit geschriebenen Formen, die nicht von der Sprache des Lesers abhängig sind.
+* value – ausdrücklicher Wert für die sprachspezifische Variantenkette',
 	'wikibase-listdatatypes-time-head' => 'Zeit',
 	'wikibase-listdatatypes-time-body' => 'Literales Datenfeld für einen Zeitwert, angegeben als Zeit mit Genauigkeit und Begrenzungen. Die Zeit wird immer intern als gregorianisch gespeichert, kann jedoch andere Formate beim Parsen und Formatieren benutzen (?).
 * time – ausdrücklicher Wert für einen Zeitpunkt; dargestellt, wie in der Norm ISO8601 beschrieben. Das Jahr hat immer 11 Ziffern und das Datum ist immer vorzeichenbehaftet im Format +00000002013-01-01T00:00:00Z.
@@ -4551,6 +4554,7 @@ $messages['eu'] = array(
 );
 
 /** Persian (فارسی)
+ * @author A.R.Rostamzade
  * @author Calak
  * @author Dalba
  * @author Ladsgroup
@@ -4693,17 +4697,36 @@ $messages['fa'] = array(
 	'wikibase-setaliases-label' => 'نام‌های مستعار:',
 	'wikibase-setaliases-submit' => 'ثبت نام‌های مستعار',
 	'wikibase-setaliases-warning-remove' => 'آیا می‌خواهید تمامی نام‌های مستعار [[$1]] را حذف کنید؟',
+	'special-setsitelink' => 'ثبت پیوند تارنما',
+	'wikibase-setsitelink-introfull' => 'شما در حال ثبت پیوند تارنمای $2 برای [[$1]] هستید.',
+	'wikibase-setsitelink-intro' => 'این فرم به شما امکان ثبت پیوند تارنمای یک موجودی را می‌دهد. شما باید شناسه موجودی (برای نمونه، Q23)، یک شناسه تارنما (برای نمونه، "fawiki") و پیوند تارنما را برای ثبت فراهم کنید.',
+	'wikibase-setsitelink-site' => 'شناسه تارنما:',
+	'wikibase-setsitelink-label' => 'پیوند تارنما:',
+	'wikibase-setsitelink-submit' => 'ثبت پیوند تارنما',
+	'wikibase-setsitelink-warning-remove' => 'مطمئنید که می‌خواهید پیوند تارنمای [[$1]] را حذف کنید؟',
+	'wikibase-setsitelink-invalid-site' => 'شناسه تارنمای «$1» نامعلوم است. خواهشمند است از یک شناسه موجود بهره گیرید، چیزی همچون «fawiki».',
 	'wikibase-setentity-id' => 'شناسه:',
 	'wikibase-setentity-language' => 'زبان:',
 	'wikibase-setentity-invalid-langcode' => 'شناسهٔ زبان «$1» ناشناخته است. لطفاً از یک شناسهٔ زبان که برای سامانه شناخته‌شده است (مثل «en») استفاده کنید.',
 	'wikibase-setentity-invalid-id' => 'شناسهٔ «$1» برای سامانه ناشناخته است.لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.',
+	'special-dispatchstats' => 'آمار تغییرات فرستادن‌ها',
+	'wikibase-dispatchstats-no-stats' => 'هم‌اکنون هیچ آماری در دسترس نیست.',
+	'wikibase-dispatchstats-changes' => 'آمار تغییرات ورود به سامانه',
 	'wikibase-dispatchstats-stats' => 'آمارهای ارسال شده',
 	'wikibase-dispatchstats-change-id' => 'شناسه',
+	'wikibase-dispatchstats-change-timestamp' => 'برچسب زمان',
 	'wikibase-dispatchstats-oldest-change' => 'قدیمی‌ترین',
 	'wikibase-dispatchstats-newest-change' => 'جدیدترین',
 	'wikibase-dispatchstats-site-id' => 'وب‌گاه',
 	'wikibase-dispatchstats-pos' => 'جایگاه',
 	'wikibase-dispatchstats-lag-num' => 'در حال اضافه شدن',
+	'wikibase-dispatchstats-lag-time' => 'تاخیر',
+	'wikibase-dispatchstats-touched' => 'لمس‌شده',
+	'wikibase-dispatchstats-large-lag' => '(بسیار بزرگ)',
+	'wikibase-dispatchstats-freshest' => 'تازه‌ترین',
+	'wikibase-dispatchstats-stalest' => 'قدیمی‌ترین',
+	'wikibase-dispatchstats-median' => 'میانه',
+	'wikibase-dispatchstats-average' => 'میانگین',
 	'special-listdatatypes' => 'فهرست همهٔ نوع‌های دادهٔ موجود',
 	'wikibase-listdatatypes-intro' => 'این فهرست همهٔ نوع‌های دادهٔ موجود در این نصب است:',
 	'wikibase-history-title-with-label' => 'تاریخچهٔ ویرایش‌های «$2» ($1)',
@@ -4719,7 +4742,9 @@ $messages['fa'] = array(
 	'special-itemswithoutsitelinks' => 'آیتم‌های بدون پیوند میان‌ویکی',
 	'special-entitydata' => 'داده‌های موضوع',
 	'wikibase-entitydata-not-found' => 'هیچ موضوعی با شناسهٔ «$1» یافت نشد.',
+	'wikibase-entitydata-not-acceptable' => 'هیچ قالب تطبیقی یافت نشد. انواع MIME پشتیبانی شده: $1',
 	'wikibase-entitydata-bad-revision' => 'عدم نمابش تغییر نسخه‌ $2 مورد $1',
+	'wikibase-entitydata-bad-id' => 'شناسه نامعتبر: $1.',
 	'wikibase-entitydata-unsupported-format' => 'این رابط از قالب دادهٔ $1 پشتیبانی نمی‌کند.',
 	'wikibase-entitydata-title' => 'داده‌های موضوع',
 	'wikibase-entitydata-text' => 'این صفحه رابطی از داده‌های پیوندداده‌شده به مقدارهای موضوع ارائه می‌کند. لطفاً شناسهٔ موضوع (ID) موجود در نشانی اینترنتی را با استفاده از نحو زیرصفحه ارائه کنید.',
@@ -4732,10 +4757,12 @@ $messages['fa'] = array(
 	'wikibase-noentity' => 'این مجموعه‌داده وجود ندارد. می‌توانید <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} سیاهه‌های مرتبط را جستجو کنید]</span> تا ببینید کجا رفته‌است.',
 	'wikibase-noentity-createone' => 'همچنین می‌توانید [[$1|یکی جدید ایجاد کنید]].',
 	'wikibase-item-summary-wbsetitem' => 'یک آیتم جدید ایجاد کرد',
+	'wikibase-item-summary-wbcreate-new' => 'مورد جدیدی ایجاد شد',
 	'wikibase-item-summary-wbeditentity' => 'ایجاد یک آیتم جدید',
 	'wikibase-item-summary-wbeditentity-create' => 'ایجاد یک مورد جدید',
 	'wikibase-item-summary-wbeditentity-update' => 'به‌روز رسانی یک مورد',
 	'wikibase-item-summary-wbeditentity-override' => 'پریدن از روی یک مورد',
+	'wikibase-item-summary-wbsetreference' => 'قرار دادن یک منبع',
 	'wikibase-item-summary-wbsetlabel-set' => 'تغییر نام [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'حذف نام [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'تغییر توضیحات [$2]',
@@ -4744,9 +4771,10 @@ $messages['fa'] = array(
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'افزودن و حذف {{PLURAL:$1|نام مستعار|نام‌های مستعار}}[$2]',
 	'wikibase-item-summary-wbsetaliases-add' => 'افزودن {{PLURAL:$1|نام مستعار|نام‌های مستعار}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'حذف {{PLURAL:$1|نام مستعار|نام‌های مستعار}} [$2]',
-	'wikibase-item-summary-wbsetsitelink-set' => 'افزودن پیوند مشخص‌کنندهٔ وب‌گاه [$2]', # Fuzzy
-	'wikibase-item-summary-wbsetsitelink-remove' => 'حذف پیوند مشخص‌کنندهٔ وب‌گاه [$2]', # Fuzzy
-	'wikibase-item-summary-wblinktitles-connect' => 'ارتباط‌دادن {{PLURAL:$1|صفحه|صفحه‌ها}} [$2↔$3]', # Fuzzy
+	'wikibase-item-summary-wbsetsitelink-set' => 'افزودن پیوند مشخص‌کنندهٔ وب‌گاه [$2]',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'حذف پیوند مشخص‌کنندهٔ وب‌گاه [$2]',
+	'wikibase-item-summary-wblinktitles-create' => 'ساخت این آیتم برای پیوند صفحه های [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-connect' => 'افزودن یک پیوند زبانی برای ارتباط صفحه های [$2↔$3]',
 	'wikibase-item-summary-wbcreateclaim-value' => 'ایجاد {{PLURAL:$1|یک ادعا|ادعا}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'ایجاد {{PLURAL:$1|یک ادعای بدون مقدار|ادعاهای بدون مقدار}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'ایجاد {{PLURAL:$1|یک ادعای چندمقداری|ادعاهای چندمقداری}}',
@@ -4754,6 +4782,10 @@ $messages['fa'] = array(
 	'wikibase-item-summary-wbsetclaimvalue' => 'ثبت {{PLURAL:$1|یک مقدار ادعا|مقدار ادعا}}',
 	'wikibase-item-summary-wbremoveclaims' => 'حذف  {{PLURAL:$1| ادعا|ادعا}}',
 	'wikibase-item-summary-special-create-item' => 'ایجاد یک آیتم [$2] با {{PLURAL:$1|مقدار|مقدارها}}',
+	'wikibase-item-summary-wbcreateclaim-create' => 'ادعای ایجاد شده',
+	'wikibase-item-summary-wbremoveclaims-remove' => 'پاک کردن {{PLURAL:$3|مطالبه|مطالبه ها}}',
+	'wikibase-item-summary-wbsetclaim-update' => 'تغییر دادن {{PLURAL:$3|ادعا|ادعاها}}',
+	'wikibase-item-summary-wbsetclaim-create' => 'ساختن {{PLURAL:$3|ادعا|ادعاها}}',
 	'wikibase-property-summary-wbeditentity-create' => 'ایجاد یک ویژگی جدید',
 	'wikibase-property-summary-wbeditentity-update' => 'به‌روز رسانی یک ویژگی',
 	'wikibase-property-summary-wbeditentity-override' => 'پریدن از روی یک ویژگی',
@@ -4792,15 +4824,15 @@ $messages['fa'] = array(
 	'wikibase-listdatatypes-monolingual-text-head' => 'متن تک‌زبانه',
 	'wikibase-listdatatypes-monolingual-text-body' => 'داده حروفی به صورت رشته ای که در زبان های دیگر واژه جدیدی برای آن ابداع نشده باشد. این نوع داده رشته ای فقط یک بار تعریف شده و در تمام زبان ها از همان تعریف استفاده می شود. نمونه های بارز این نوع رشته، نام های جغرافیایی هستند که با یک زبان محلی نوشته می شوند و نام های شناسه ای که به یک فرمول شیمیایی یا نام علمی لاتین اختصاص داده می شوند.
 * زبان - مقداری مشخص برای شناساندن متن
-* متن - مقداری مشخص برای رشته ای به زبانی مشخص', # Fuzzy
+* متن - مقداری مشخص برای رشته ای به زبانی مشخص',
 	'wikibase-listdatatypes-multilingual-text-head' => 'متن چندزبانه',
 	'wikibase-listdatatypes-multilingual-text-body' => 'داده حروفی برای رشته ای که می بایست آنرا به سایر زبان ها ترجمه نمود. معمولا برای چیزهایی به کار می رود که مورد اقبال عمومی است ولی فاقد صورت نوشتاری محلی است. چیزهایی که در زبان های مختلف و با سیستم های نوشتاری مختلف نمود پیدا می کنند.
 * زبان - مقداری معین(معلوم)که زبان به کار رفته در بخش متن را می شناساند
-* متن - مقداری معین برای رشته متغیر مختص آن زبان', # Fuzzy
+* متن - مقداری معین برای رشته متغیر مختص آن زبان',
 	'wikibase-listdatatypes-string-head' => 'رشته',
 	'wikibase-listdatatypes-string-body' => 'داده حروفی برای یک رشته کارکتر. در مواقعی که صورت نوشتاری یک شناسه بدون تبعیت از زبانی معین نوشته شده باشد، این نوع داده ها زیاد به کار می روند. بعضی اوقات این نوع داده ها در قالب سیستم های نوشتاری غیر حرف نگاری می شوند.
 * زبان - مقداری معین برای شناساندن زبان بخش متن
-* متن - مقداری معین برای رشته متغیر مختص آن زبان', # Fuzzy
+* متن - مقداری معین برای رشته متغیر مختص آن زبان',
 	'wikibase-listdatatypes-time-head' => 'زمان',
 	'wikibase-listdatatypes-time-body' => 'داده حروفی برای مقداری از زمان. این داده به صورت دقیق و با قاعده هایی بیان می شود. زمان را طبق گاه‌شماری میلادی ویژه تاریخ نگاری وارد کرده ولی می توان برای جدا کردن و نیز در شکل نوشتن تغییرهایی نیز انجام داد.(؟)
 * زمان - مقداری معین برای اشاره به برهه ای از زمان که با استاندارد ایزو 8601 وارد می شود، سال به صورت 11 رقمی و با علامت مثبت یا منفی در قالب +00000002013-01-01T00:00:00Z وارد می شود
@@ -4815,6 +4847,8 @@ $messages['fa'] = array(
 	'right-item-override' => 'باطل‌کردن آیتم‌ها',
 	'right-item-create' => 'ایجاد آیتم‌ها',
 	'right-item-remove' => 'حذف آیتم‌ها',
+	'right-property-create' => 'ایجاد ویژگی‌ها',
+	'right-property-remove' => 'حذف ویژگی‌ها',
 	'right-alias-add' => 'افزودن نام‌های مستعار',
 	'right-alias-set' => 'گذاشتن نام‌های مستعار',
 	'right-alias-remove' => 'حذف نام‌های مستعار',
@@ -4826,6 +4860,15 @@ $messages['fa'] = array(
 	'right-description-remove' => 'حذف توضیحات',
 	'right-description-update' => 'به‌روزرسانی توضیحات',
 	'action-item-create' => 'ساختن آیتم جدید',
+	'action-item-remove' => 'حذف موردها',
+	'action-property-override' => 'نادیده گرفتن خواص',
+	'action-property-create' => 'ساخت خواص',
+	'action-property-remove' => 'پاک کردن خواص',
+	'action-alias-update' => 'به روز رسانی نام مستعار',
+	'action-alias-remove' => 'پاک کردن نام مستعار',
+	'action-sitelink-remove' => 'حذف پیوندهای تارنما',
+	'action-sitelink-update' => 'به روز کردن پیوندهای تارنما',
+	'action-linktitles-update' => 'به روز کردن عنوان پیوندها',
 	'action-label-remove' => 'حذف کردن برچسب ها',
 	'action-label-update' => 'به روز کردن برچسب ها',
 	'action-description-remove' => 'حذف کردن توضیحات',
@@ -4973,6 +5016,7 @@ IP-osoitteesi kirjataan sivun $1 muokkaushistoriaan.',
 	'wikibase-setaliases-submit' => 'Aseta aliakset',
 	'wikibase-setaliases-warning-remove' => 'Haluatko todella poistaa kaikki aliakset aiheesta [[$1]]?',
 	'special-setsitelink' => 'Aseta sivustolinkki',
+	'wikibase-setsitelink-intro' => 'Tällä lomakkeella voit asettaa nimen aiheelle. Sinun täytyy antaa aiheen tunniste (esim. Q23), kielikoodi (esim. "fiwiki") ja sivustolinkki, jonka haluat asettaa.',
 	'wikibase-setsitelink-site' => 'Sivuston tunniste:',
 	'wikibase-setsitelink-label' => 'Sivustolinkki',
 	'wikibase-setsitelink-submit' => 'Aseta sivustolinkki',
@@ -5267,6 +5311,8 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de ce $
 	'wikibase-setsitelink-submit' => 'Définir le lien de site',
 	'wikibase-setsitelink-warning-remove' => 'Voulez-vous vraiment supprimer le lien de site de [[$1]] ?',
 	'wikibase-setsitelink-invalid-site' => 'L’id de site « $1 » est inconnu. Veuillez utiliser un id de site existant, comme « enwiki ».',
+	'wikibase-setsitelink-add-failed' => 'Le lien de site n’a pas pu être enregistré.',
+	'wikibase-setsitelink-remove-failed' => 'Le site de lien n’a pas pu être supprimé.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Langue :',
 	'wikibase-setentity-invalid-langcode' => "Le code de langue «&nbsp;$1&nbsp;» est inconnu. S'il vous plaît utiliser un code de langue connu du système, par exemple «&nbsp;fr&nbsp;».",
@@ -5394,15 +5440,14 @@ ffirmation ajoutée}}',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Texte monolingue',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Champ de donnée littéral pour une chaîne qui n’est pas traduite dans d’autres langues. Ce type de chaîne est défini une fois et réutilisé dans toutes les langues. Une utilisation typique concerne les noms géographiques écrits dans la langue locale, un identifiant de type quelconque, une formule chimique ou un nom scientifique latin.
 * langue — valeur explicite pour identifier la langue de la partie texte
-* text — valeur explicite pour la chaîne dans la variante spécifique de la langue', # Fuzzy
+* value — valeur explicite pour la chaîne dans la variante spécifique de la langue',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Texte multilingue',
 	'wikibase-listdatatypes-multilingual-text-body' => 'Champ de donnée littéral pour une chaîne qui doit être traduite en d’autres langues. Une utilisation typique concerne un nom d’entité d’intérêt global qui a des formes écrites non locales. Elles peuvent différer à la fois dans les langues et les systèmes de script.
 * language — valeur explicite pour identifier la langue de la partie texte
-* text — valeur explicite pour la chaîne dans la variante spécifique de la langue', # Fuzzy
+* value — valeur explicite pour la chaîne dans la variante spécifique de la langue',
 	'wikibase-listdatatypes-string-head' => 'Chaîne',
-	'wikibase-listdatatypes-string-body' => 'Champ de donnée littéral pour une chaîne de caractères. Une utilisation typique concerne les identifiants qui ont des formes écrites ne dépendant pas de la langue. De telles chaînes peuvent dans certains cas être traduites en d’autres systèmes de script.
-* language — valeur explicite pour identifier la langue de la partie texte
-* text — valeur explicite pour la chaîne dans la variante spécifique de la langue', # Fuzzy
+	'wikibase-listdatatypes-string-body' => 'Champ de donnée littéral pour une chaîne de glyphes. Une utilisation typique concerne les identifiants qui ont des formes écrites ne dépendant pas de la langue du lecteur.
+* value — valeur explicite pour la chaîne dans la variante spécifique de la langue',
 	'wikibase-listdatatypes-time-head' => 'Date',
 	'wikibase-listdatatypes-time-body' => 'Champ de donnée littéral pour une valeur d’horodatage. Fournit un horodatage avec certaines précision et limites. L’horodatage est toujours enregistré en interne au format grégorien, mais peut utiliser d’autres formats lors de l’analyse et la mise en forme. (?)
 * time — valeur explicite pour le point dans le temps, représenté en ISO8601, avec toujours 11 chiffres, la date toujours signée, au format +00000002013-01-01T00:00:00Z
@@ -5747,6 +5792,8 @@ O seu enderezo IP quedará rexistrado no historial de revisións da entidade "$1
 	'wikibase-setsitelink-submit' => 'Definir a ligazón de sitio',
 	'wikibase-setsitelink-warning-remove' => 'Está seguro de querer eliminar a ligazón de sitio de [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'Descoñécese o ID de sitio "$1". Utilice un ID de sitio que exista, como "glwiki".',
+	'wikibase-setsitelink-add-failed' => 'Non se puido gardar a ligazón de sitio.',
+	'wikibase-setsitelink-remove-failed' => 'Non se puido eliminar a ligazón de sitio.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Lingua:',
 	'wikibase-setentity-invalid-langcode' => 'Descoñécese o identificador de lingua "$1". Utilice un identificador de lingua coñecido para o sistema, como "gl".',
@@ -5872,15 +5919,14 @@ O seu enderezo IP quedará rexistrado no historial de revisións da entidade "$1
 	'wikibase-listdatatypes-monolingual-text-head' => 'Texto monolingüe',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Campo de datos literal para unha cadea de caracteres que non está traducida a outras linguas. Este tipo de cadea de caracteres defínese unha vez e reutilízase en todas as linguas. O uso típico é nos nomes xeográficos escritos na lingua local, nos identificadores dalgún tipo, nas fórmulas químicas ou nos nomes científicos en latín.
 * language – valor explícito para identificar a lingua da parte de texto
-* text – valor explícito para a cadea de caracteres da variante de lingua específica', # Fuzzy
+* value – valor explícito para a cadea de caracteres da variante de lingua específica',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Texto multilingüe',
 	'wikibase-listdatatypes-multilingual-text-body' => 'Campo de datos literal para unha cadea de caracteres que debe traducirse a outras linguas. O uso típico é nos nomes de entidades de interese global que non teñen formas de escrita local. Estes poden cambiar entre linguas e sistemas de escritura.
 * language – valor explícito para identificar a lingua da parte de texto
-* text – valor explícito para a cadea de caracteres da variante de lingua específica', # Fuzzy
+* value – valor explícito para a cadea de caracteres da variante de lingua específica',
 	'wikibase-listdatatypes-string-head' => 'Cadea de caracteres',
-	'wikibase-listdatatypes-string-body' => 'Campo de datos literal para unha cadea de caracteres. O uso típico é nos identificadores con formas que non dependen da lingua. Tales cadeas de caracteres poden, nalgúns casos, ser transliteradas a outros sistemas de escritura.
-* language – valor explícito para identificar a lingua da parte de texto
-* text – valor explícito para a cadea de caracteres da variante de lingua específica', # Fuzzy
+	'wikibase-listdatatypes-string-body' => 'Campo de datos literal para unha cadea de glifos. O uso típico son os identificadores con formas escritas que non dependen da lingua do lector.
+* value – valor explícito para a cadea de caracteres da variante de lingua específica',
 	'wikibase-listdatatypes-time-head' => 'Hora',
 	'wikibase-listdatatypes-time-body' => 'Campo de datos literal para un valor de data e hora. Dado como unha data e hora con certa precisión e límites. A data e hora gárdanse sempre internamente en formato gregoriano, pero poden utilizar outros formatos durante a análise e mais ao darlles formato. (?)
 * time – valor explícito para un punto no tempo, representado por ISO8601, sempre con 11 cifras, a data sempre indicada, no formato +00000002013-01-01T00:00:00Z
@@ -7827,6 +7873,8 @@ Nella cronologia di $1 verrà registrato il tuo indirizzo IP.',
 	'wikibase-setsitelink-submit' => 'Impostare il collegamento al sito',
 	'wikibase-setsitelink-warning-remove' => 'Vuoi davvero rimuovere il collegamento al sito da [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'L\'ID del sito "$1" è sconosciuto. Utilizza un ID esistente, ad esempio "itwiki".',
+	'wikibase-setsitelink-add-failed' => 'Il collegamento al sito non può essere salvato.',
+	'wikibase-setsitelink-remove-failed' => 'Il collegamento al sito non può essere rimosso.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Lingua:',
 	'wikibase-setentity-invalid-langcode' => 'L\'identificatore di lingua "$1" è sconosciuto. Utilizza un identificatore di lingua conosciuto al sistema, ad esempio "it".',
@@ -7939,13 +7987,17 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 * query - implicito, da parte dell'Iri-string
 * frammento - implicito, da parte dell'Iri-string",
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Coordinate geografiche',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'Campo dati letterale per una posizione geografica indicata come latitudine-longitudine in gms o gradi decimali per il corpo stellare indicato. I valori predefiniti sono "Terra" e "WGS84". Aggiunge risoluzione e intervallo di valori.
+* latitudine – implicito prima parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti N/S
+* longitudine – implicito seconda parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti E/W
+* altitudine (facoltativo) – valore esplicito (?) per l\'altezza sopra un piano di riferimento, per il pianeta "Terra" dovrebbe essere il globo di riferimento "WGS84"
+* pianeta (facoltativo) – valore esplicito (?), indicato come corpo stellare; i valori predefiniti sono "Terra" e "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Testo monolingua',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Testo multilingua',
 	'wikibase-listdatatypes-string-head' => 'Stringa',
-	'wikibase-listdatatypes-string-body' => "Campo dati letterale per una stringa di caratteri. L'uso tipico è come identificatore scritto con formati che non dipendono dalla lingua. In alcuni casi, tali stringhe possono essere traslitterate in altri sistemi di scrittura.
-* lingua – valore esplicito per identificare la lingua per la parte di testo
-* testo – valore esplicito per la variante stringa nella lingua indicata", # Fuzzy
+	'wikibase-listdatatypes-string-body' => "Campo dati letterale per una stringa di glifi. L'uso tipico è per identificatori che sono scritti con formati che non dipendono dalla lingua del lettore.
+* value – valore esplicito per la stringa nella variante lingua indicata",
 	'wikibase-listdatatypes-time-head' => 'Data e ora',
 	'wikibase-listdatatypes-time-body' => "Campo dati letterale per un valore temporale. Fornito come un tempo con una certa precisione e limiti. Il tempo è sempre salvato internamente nel formato gregoriano prolettico, ma può utilizzare altri formati durante l'analisi e la formattazione.(?)
 * tempo - valore esplicito per un istante nel tempo, rappresentato per ISO 8601, l'anno ha sempre 11 cifre e la data viene sempre costruita nel formato +00000002013-01-01T00:00:00Z
@@ -8253,15 +8305,14 @@ $messages['ja'] = array(
 	'wikibase-listdatatypes-monolingual-text-head' => '単一言語のテキスト',
 	'wikibase-listdatatypes-monolingual-text-body' => '他の言語に翻訳されない文字列のリテラルデータ。この種の文字列は一度定義されると、すべての言語にわたって再利用されます。典型的な用途としては、地元の言語で表記した地名、なんらかの識別子、化学式、ラテン語の学名などがあります。
 * language - テキスト (text) 部分の言語を識別するための明示の値
-* text - 言語を特定した文字列、明示の値', # Fuzzy
+* value - 言語を特定した文字列、明示の値',
 	'wikibase-listdatatypes-multilingual-text-head' => '多言語のテキスト',
 	'wikibase-listdatatypes-multilingual-text-body' => '他の言語に翻訳する必要のある文字列のリテラルデータ。典型的な用途としては、地元の表記のようなものを持たない、全世界的に関係する実体の名前があります。それらは言語や文字体系によって異なることがあります。
 * language - テキスト (text) 部分の言語を識別するための明示の値
-* text - 言語を特定した文字列、明示の値', # Fuzzy
+* value - 言語を特定した文字列、明示の値',
 	'wikibase-listdatatypes-string-head' => '文字列',
-	'wikibase-listdatatypes-string-body' => '文字列のリテラルデータ。典型的な用途としては、言語に依存しない表記を持つ識別子があります。そのような文字列は他の文字体系に翻字できることがあります。
-* language - テキスト (text) 部分の言語を識別するための明示の値
-* text - 言語を特定した文字列、明示の値', # Fuzzy
+	'wikibase-listdatatypes-string-body' => '文字列のリテラルデータ。典型的な用途としては、読み手の言語に依存しない表記を持つ識別子があります。
+* value - 言語を特定した文字列、明示の値',
 	'wikibase-listdatatypes-time-head' => '時刻',
 	'content-model-wikibase-item' => 'ウィキベース項目',
 	'content-model-wikibase-property' => 'ウィキベース プロパティ',
@@ -9556,6 +9607,8 @@ $messages['mk'] = array(
 	'wikibase-setsitelink-submit' => 'Задај викиврска',
 	'wikibase-setsitelink-warning-remove' => 'Дали навистина сакате да ја отстраните викиврската од [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'Викиназнаката „$1“ е непозната. Употребете постоечка, како на пр. „mkwiki“.',
+	'wikibase-setsitelink-add-failed' => 'Не можав да ја зачувам викиврската.',
+	'wikibase-setsitelink-remove-failed' => 'Не можев да ја отстранам викиврската.',
 	'wikibase-setentity-id' => 'Назнака:',
 	'wikibase-setentity-language' => 'Јазик:',
 	'wikibase-setentity-invalid-langcode' => 'Јазичниот код „$1“ е непознат. Внесете назнака што му е позната на системот, како на пр. „mk“.',
@@ -9682,15 +9735,14 @@ $messages['mk'] = array(
 	'wikibase-listdatatypes-monolingual-text-head' => 'Еднојазичен текст',
 	'wikibase-listdatatypes-monolingual-text-body' => "Дословно податочно поле за низа што не се преведува на други јазици. Ваквата низа се задава еднаш и се користи кај сите јазици. Типичен пример би биле географските називи напишани на локалниот јазик, некаква назнака, хемиска формула или латинско научно име.
 * јазик (''language'') – содржана вредност за одредување на јазикот на текстуалниот дел
-* текст (''text'') – искажана вредност на низата на дадениот јазик", # Fuzzy
+* вредност (''value'') – искажана вредност на низата на дадениот јазик",
 	'wikibase-listdatatypes-multilingual-text-head' => 'Повеќејазичен текст',
 	'wikibase-listdatatypes-multilingual-text-body' => "Дословно податочно поле за низа што мора да се преведе на други јазици. Се користи кај називите на единиците од глобален интерес што имаат нелокален пишан облик. Може да се разликуваат и по јазици и по писма.
 * јазик (''language'') – содржана вредност за одредување на јазикот на текстуалниот дел
-* текст (''text'') – искажана вредност на низата на дадениот јазик", # Fuzzy
+* текст (''text'') – искажана вредност на низата на дадениот јазик",
 	'wikibase-listdatatypes-string-head' => 'Низа',
-	'wikibase-listdatatypes-string-body' => "Дословно податочно поле за низа од знаци. Обично се користи кај назнаки чиј пишан облик не зависи од јазикот. Во некои случаи ваквите низи можат да се транслитерираат во друго писмо.
-* јазик (''language'') – содржана вредност за одредување на јазикот на текстуалниот дел
-* текст (''text'') – искажана вредност на низата на дадениот јазик", # Fuzzy
+	'wikibase-listdatatypes-string-body' => 'Дословно податочно поле за низа од знаци. Тука типично се користат назнаки напишани во облик што не зависи од јазикот на читателот.
+* value — изрично зададена вредност на низата за дадена варијанта',
 	'wikibase-listdatatypes-time-head' => 'Време',
 	'wikibase-listdatatypes-time-body' => "Дословно податочно поле за временска вредност. Се дава како време со извесна точност и граници. The time are always saved internally in пролептички грегоријански стил, но може да користи и други формати во текот на прекопирањето и форматирањето.(?)
 * време (''time'') – explicit value for point in time, represented per ISO8601, they year always having 11 digits, the date always знак плус или миус, in the format +00000002013-01-01T00:00:00Z
@@ -12090,7 +12142,7 @@ $messages['ru'] = array(
 	'wikibase-error-constraint-violation-label' => 'У {{PLURAL:$1|метки (названии)|меток (названиях)}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
 	'wikibase-error-constraint-violation-description' => 'У {{PLURAL:$1|описания|описаний}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
 	'wikibase-error-constraint-violation-aliases' => 'У {{PLURAL:$1|альтернативного названия (синонима)|альтернативных названий (синонимов)}} «$3» {{PLURAL:$1|обнаружено нарушение|обнаружены нарушения}} ограничений в {{PLURAL:$1|версии с кодом языка|в версиях с кодами языков}} «$2».',
-	'wikibase-error-sitelink-already-used' => 'Хьажориг оцу [$1 $2] сайтан тӏе хӏинцале лелош ю хӏокху [[$3]] элементо.',
+	'wikibase-error-sitelink-already-used' => 'Ссылка на сайт [$1 $2] уже используется элементом [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Название «$1», связанное с кодом языка «$2», уже присвоено другому свойству ($3)',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Название «$1», связанное с кодом языка «$2», уже присвоено другому запросу ($3)',
 	'wikibase-error-label-not-unique-item' => 'Название «$1» и описание «$4», связанные с кодом языка «$2», уже присвоены другому элементу ($3)',
@@ -12146,6 +12198,14 @@ $messages['ru'] = array(
 	'wikibase-setaliases-label' => 'Псевдонимы (альт. названия):',
 	'wikibase-setaliases-submit' => 'Задать псевдонимы',
 	'wikibase-setaliases-warning-remove' => 'Вы действительно хотите удалить все псевдонимы, заданные для [[$1]]?',
+	'special-setsitelink' => 'Задать ссылку на сайт',
+	'wikibase-setsitelink-introfull' => 'Вы задали для [[$1]] ссылку на сайт «$2».',
+	'wikibase-setsitelink-intro' => 'Эта форма позволяет вам задать ссылку на сайт для какого-либо элемента. Необходимо ввести идентификатор элемента (например, Q23), идентификатор сайта (например, «enwiki» ) и название страницы этого сайта, на которую вы хотите сослаться.',
+	'wikibase-setsitelink-site' => 'Идентификатор сайта:',
+	'wikibase-setsitelink-label' => 'Ссылка на сайт:',
+	'wikibase-setsitelink-submit' => 'Задать ссылку на сайт',
+	'wikibase-setsitelink-warning-remove' => 'Вы действительно хотите удалить ссылку на сайт для [[$1]]?',
+	'wikibase-setsitelink-invalid-site' => 'Неизвестный идентификатор сайта «$1». Пожалуйста, используйте один из существующих идентификаторов сайта, например «enwiki».',
 	'wikibase-setentity-id' => 'Идентификатор:',
 	'wikibase-setentity-language' => 'Язык:',
 	'wikibase-setentity-invalid-langcode' => 'Неизвестный код языка «$1». Пожалуйста, используйте один из известных системе языковых кодов, например «ru».',
@@ -12247,47 +12307,46 @@ $messages['ru'] = array(
 	'wikibase-property-summary-special-create-property' => 'Создано свойство [$2] со {{PLURAL:$1|значением|значениями}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Элемент',
 	'wikibase-listdatatypes-wikibase-item-body' => 'Ссылка на другие элементы в проекте. При вводе будет производиться поиск похожих записей в пространстве имён Викиданных <code>Item:</code>. Состоит из одного текстового поля ввода.
- * scheme — неявная часть строки IRI
- * hierarchicalpart — неявная часть строки IRI
- * query — неявная часть строки IRI
- * fragment — неявная часть строки IRI',
+* scheme — неявно задаваемая часть строки IRI
+* hierarchicalpart — неявно задаваемая часть строки IRI
+* query — неявно задаваемая часть строки IRI
+* fragment — неявно задаваемая часть строки IRI',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Медиафайл с Викисклада',
 	'wikibase-listdatatypes-commonsmedia-body' => 'Ссылка на файлы, хранящиеся на Викискладе. Во время ввода будет производиться поиск по пространству имён <code>File:</code> на Викискладе.
-* scheme — неявная часть строки IRI
-* hierarchicalpart — неявная часть строки IRI
-* query — неявная часть строки IRI
-* fragment — неявная часть строки IRI',
+* scheme — неявно задаваемая часть строки IRI
+* hierarchicalpart — неявно задаваемая часть строки IRI
+* query — неявно задаваемая часть строки IRI
+* fragment — неявно задаваемая часть строки IRI',
 	'wikibase-listdatatypes-geo-coordinate-head' => 'Географические координаты',
-	'wikibase-listdatatypes-geo-coordinate-body' => 'Строковые данные о географическом положении в виде пары широта-долгота в (°ʹʺ) или десятичных градусах для данного космического тела. По умолчанию это «Земля», а затем «WGS84». Он добавляет разрешение и диапазон.
-* latitude — неявные первые части (float, dms, dm, dd) в координатной строке, направление задаётся предшествующим знаком или последующим N/S
-* longituge — неявные второй части (float, dms, dm, dd) в координатной строке, направление задаётся предшествующим знаком или последующим E/W
-* altitude (необяз.) — явное (?) значение для высоты над плоскостью отсчёта, для планеты "Земля"это будет глобус "WGS84".
-* globe (необяз.) — явное (?) значение данных в виде космического тела, которое по умолчанию является «Землёй», а затем «WGS84»',
+	'wikibase-listdatatypes-geo-coordinate-body' => 'Символьные данные о географическом положении для определённого небесного тела, задаваемые в виде пары «широта—долгота» в формате «градусы минуты секунды» (°ʹʺ) или в десятичном формате. По умолчанию это «Земля», а затем «WGS84». Это добавляет разрешение и диапазон.
+* latitude — неявно задаваемая первая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом N/S
+* longituge — неявно задаваемая вторая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом E/W
+* altitude (необяз.) — явно задаваемое (?) значение для высоты над плоскостью отсчёта, для планеты «Земля» это будет глобус «WGS84».
+* globe (необяз.) — явное задаваемое (?) значение данных, в виде ссылки на небесное тело, которое по умолчанию является «Землёй», а затем «WGS84»',
 	'wikibase-listdatatypes-quantity-head' => 'Количество',
 	'wikibase-listdatatypes-quantity-body' => 'Строковое поле для ввода количества, выраженного в некоторых вполне определённых единицах. Конкретные единицы указаны во вводимых значениях данных.
 * value — неявная часть строки (обработка префикса единицы непонятна)
 * unit — неявная часть строки (связь с эталоном непонятна)
 * accuracy (необяз.) — явное значение, выраженное в тех же единицах, что и value',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Моноязычный текст',
-	'wikibase-listdatatypes-monolingual-text-body' => 'Строковое поле данных для строки, не переводимой на другие языки. Строки этого типа определяются один раз и используются одинаково для всех языков. Обычно используется для географических названий на местном языке, идентификаторов какого-либо типа, химических формул или латинских научных названий.
- * language — явное значение для определения языка для текстовой части
- * text — явное значение для определенной строки вариант языка', # Fuzzy
+	'wikibase-listdatatypes-monolingual-text-body' => 'Символьное поле данных для строки, не переводимой на другие языки. Строки этого типа определяются один раз и используются одинаково для всех языков. Обычно используется для географических названий на местном языке, идентификаторов какого-либо типа, химических формул или латинских научных названий.
+* language — явно задаваемое значение для определения языка текстовой части
+* value — явно задаваемое значение для строки на определенном языке',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Многоязычный текст',
-	'wikibase-listdatatypes-multilingual-text-body' => 'Строковое поле данных для строки, которую следует переводить на различные языки. Обычно используется для названий сущностей, представляющих всемирный интерес и имеющих различные письменные формы, которые могут отличаться как языком, так и системой записи.
- * language — явное значение для определения языка для текстовой части
- * text — явное значение для определенной строки вариант языка', # Fuzzy
+	'wikibase-listdatatypes-multilingual-text-body' => 'Символьное поле данных для строки, которую следует переводить на различные языки. Обычно используется для названий сущностей, представляющих всемирный интерес и имеющих различные письменные формы, которые могут отличаться как языком, так и системой записи.
+* language — явно задаваемое значение для определения языка текстовой части
+* value — явно задаваемое значение для строки на определёном языке',
 	'wikibase-listdatatypes-string-head' => 'Строка',
-	'wikibase-listdatatypes-string-body' => 'Строковое поле данных для строки символов. Обычное применение — идентификаторы, письменные формы которых не зависят от языка. Такие строки могут в некоторых случаях транслитерироваться в другие системы записи.
- * language — явное значение для определения языка для текстовой части
- * text — явное значение для определенной строки вариант языка', # Fuzzy
+	'wikibase-listdatatypes-string-body' => 'Символьное поле данных для строки символов. Обычное применение — идентификаторы, письменные формы которых не зависят от языка. Такие строки могут в некоторых случаях транслитерироваться в другие системы записи.
+* value — явно задаваемое значение для строки на определенном языке',
 	'wikibase-listdatatypes-time-head' => 'Время',
-	'wikibase-listdatatypes-time-body' => 'Строковое поле данных для значения времени в видее времени с некоторой точностью и границами. Время внутренне всегда сохраняются в формате «преждевременный григорианский календарь», но можно использовать другие форматы во время синтаксического анализа и форматирования.(?)
- * time — явное значение для точки во времени, представленное по ISO8601 (год всегда имеет 11 цифр, даты всегда должны быть указаны), в формате +00000002013-01-01T00:00:00Z
- * timezone — явное значение как знаковое целое число. Информация о часовом поясе как смещение от UTC в минутах.
- * before — явные целочисленное значение для указания, на сколько единиц ранее(?) указанного времени это может быть. Единицы задаются precision.
- * after — явные целочисленное значение для указания, на сколько единиц позднее(?) указанного времени это может быть. Единицы задаются precision.
- * precision — явное значение кодируется в shortint. Номера имеют следующие значения: 0 — миллиарды лет, 1 — сотни миллионов лет,..., 6 — тысячелетия, 7 — века, 8 — десятилетия, 9 — годы, 10 — месяцы, 11 — день, 12 — час, 13 — минута, 14 — секунда.
- * calendarmodel — явное значение в виде URI. Она определит модель календаря, который должен использоваться для отображения этого значения времени.',
+	'wikibase-listdatatypes-time-body' => 'Символьное поле данных для значения времени. Задаётся как время с некоторой точностью и границами. Внутренний формат хранения значений времени — всегда [[:w:ru:Пролептический григорианский календарь|«предваряющий григорианский календарь»]], но во время синтаксического анализа и форматирования могут использоваться другие форматы.
+* time — явно задаваемое значение для точки во времени, представленное по ISO8601 (год всегда состоит из 11 цифр, даты всегда должны быть указаны), в формате +00000002013-01-01T00:00:00Z
+* timezone — явно задаваемое значение в виде целого числа. Информация о часовом поясе задаётся как смещение от UTC в минутах.
+* before — явно задаваемое целочисленное значение для указания, на сколько единиц ранее(?) указанного времени это может быть. Единицы задается точностью.
+* after — явно задаваемое целочисленное значение для указания, на сколько единиц позднее(?) указанного времени это может быть. Единицы задается точностью.
+* precision — явно задаваемое значение, закодированное в виде короткого числа (shortint). Номера имеют следующие значения: 0 — миллиард лет, 1 — сто миллионов лет,..., 6 — тысячелетие, 7 — век, 8 — десятилетие, 9 — год, 10 — месяц, 11 — день, 12 — час, 13 — минута, 14 — секунда.
+* calendarmodel — явно задаваемое значение в виде URI. Определит модель календаря, который должен использоваться для отображения этого значения времени.',
 	'content-model-wikibase-item' => 'Элемент репозитория Wikibase',
 	'content-model-wikibase-property' => 'Свойство элемента Wikibase',
 	'content-model-wikibase-query' => 'Запрос Wikibase',
