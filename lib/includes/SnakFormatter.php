@@ -4,9 +4,11 @@ namespace Wikibase\Lib;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
+use DataValues\IllegalValueException;
 use RuntimeException;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
+use Wikibase\PropertyBadValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 
@@ -82,11 +84,17 @@ class SnakFormatter {
 	}
 
 	private function formatSnak( Snak $snak, $languageCode ) {
+		// TODO: replace with a proper registry with a formatter for each snak type.
+		// TODO: no value, some value
+
 		if ( $snak instanceof PropertyValueSnak ) {
 			return $this->formatPropertyValueSnak( $snak, $languageCode );
+		} else if ( $snak instanceof PropertyBadValueSnak ) {
+			//NOTE: This essentially restores the original exception that
+			//      caused the PropertyBadValueSnak.
+			throw new IllegalValueException( $snak->getValueError() );
 		}
 
-		// TODO: we might want to allow customization here (this happens for NoValue and SomeValue snaks)
 		return '';
 	}
 
