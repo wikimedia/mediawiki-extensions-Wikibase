@@ -4,9 +4,11 @@ namespace Wikibase\Lib;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
+use Html;
 use RuntimeException;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
+use Wikibase\PropertyBadValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 
@@ -82,11 +84,15 @@ class SnakFormatter {
 	}
 
 	private function formatSnak( Snak $snak, $languageCode ) {
+		// TODO: replace with a proper registry with a formatter for each snak type.
+		// TODO: no value, some value
+
 		if ( $snak instanceof PropertyValueSnak ) {
 			return $this->formatPropertyValueSnak( $snak, $languageCode );
+		} else if ( $snak instanceof PropertyBadValueSnak ) {
+			return $this->formatPropertyBadValueSnak( $snak, $languageCode );
 		}
 
-		// TODO: we might want to allow customization here (this happens for NoValue and SomeValue snaks)
 		return '';
 	}
 
@@ -95,6 +101,22 @@ class SnakFormatter {
 		$dataTypeId = $this->getDataTypeForProperty( $snak->getPropertyId() );
 
 		return $this->typedValueFormatter->formatToString( $dataValue, $dataTypeId, $languageCode );
+	}
+
+	private function formatPropertyBadValueSnak( PropertyBadValueSnak $snak, $languageCode ) {
+		$json = json_encode( $snak->getRawData(), JSON_ERROR_UTF8 );
+
+		$html = Html::rawElement( 'div', array( 'class' => 'error' ),
+			Html::element( 'span', array( ),
+				$snak->getErrorMessage()
+			) .
+			Html::element( 'br' ) .
+			Html::element( 'span', array( 'class' => 'wikibase-bad-value-data' ),
+				$json
+			)
+		);
+
+		return $html;
 	}
 
 	private function getDataTypeForProperty( EntityId $propertyId ) {
