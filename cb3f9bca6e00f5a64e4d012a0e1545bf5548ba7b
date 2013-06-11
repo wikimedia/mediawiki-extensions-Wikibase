@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D0371-X8",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-11T13:19:18Z",
+      "side": 1,
+      "message": "Should be wfLogWarning. This is somethign that we want to log during production, I\u0027d think.",
+      "revId": "cb3f9bca6e00f5a64e4d012a0e1545bf5548ba7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
