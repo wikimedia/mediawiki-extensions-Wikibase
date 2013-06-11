@@ -4,6 +4,7 @@ namespace Wikibase\Lib;
 
 use DataTypes\DataType;
 use DataValues\DataValue;
+use DataValues\IllegalValueException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\CachingEntityLoader;
@@ -41,6 +42,10 @@ class TypedValueFormatter {
 	public function formatToString( DataValue $dataValue, DataType $dataType, $languageCode ) {
 		// TODO: update this code to obtain the string formatter as soon as corresponding changes
 		// in the DataTypes library have been made.
+
+		if ( $dataValue->getType() === 'bad' ) {
+			throw new IllegalValueException( $dataValue->getError() );
+		}
 
 		$valueFormatters = $dataType->getFormatters();
 		$valueFormatter = reset( $valueFormatters );

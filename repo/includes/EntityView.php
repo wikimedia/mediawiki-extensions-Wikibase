@@ -594,6 +594,8 @@ abstract class EntityView extends \ContextSource {
 			// TODO: Bad to have a switch for different data types here, implement a formatter!
 			if( $value instanceof \DataValues\TimeValue ) {
 				$value = $value->getTime() . ' (' . $value->getCalendarModel() . ')';
+			} elseif( $value instanceof \DataValues\UnDeserializableValue ) {
+					$value = $value->getReason();
 			} else {
 				// Proper way, use value formatter:
 				$valueFormatter = $this->valueFormatters->newFormatter(
