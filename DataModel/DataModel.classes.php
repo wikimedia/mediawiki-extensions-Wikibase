@@ -46,6 +46,7 @@ return call_user_func( function() {
 		'Wikibase\PropertySnak' => 'DataModel/Snak/PropertySnak.php',
 		'Wikibase\PropertyValueSnak' => 'DataModel/Snak/PropertyValueSnak.php',
 		'Wikibase\PropertySomeValueSnak' => 'DataModel/Snak/PropertySomeValueSnak.php',
+		'Wikibase\PropertyBadValueSnak' => 'DataModel/Snak/PropertyBadValueSnak.php',
 		'Wikibase\Snak' => 'DataModel/Snak/Snak.php',
 		'Wikibase\SnakFactory' => 'DataModel/Snak/SnakFactory.php',
 		'Wikibase\SnakList' => 'DataModel/Snak/SnakList.php',

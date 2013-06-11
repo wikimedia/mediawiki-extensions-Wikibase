@@ -2,7 +2,9 @@
 
 namespace Wikibase;
 
+use DataValues\IllegalValueException;
 use InvalidArgumentException;
+use ReflectionClass;
 
 /**
  * Base class for snaks.
@@ -167,8 +169,25 @@ abstract class SnakObject implements Snak {
 		$data[0] = new EntityId( Property::ENTITY_TYPE, $data[0] );
 
 		if ( $snakType === 'value' ) {
-			$data[1] = \DataValues\DataValueFactory::singleton()->newDataValue( $data[1], $data[2] );
-			unset( $data[2] );
+			try {
+				$data[1] = \DataValues\DataValueFactory::singleton()->newDataValue( $data[1], $data[2] );
+				unset( $data[2] );
+			} catch ( IllegalValueException $ex ) {
+				// Substitute with a PropertyBadValueSnak
+
+				//TODO: this behavior should be optional, but it's unclear how
+				//      to pass the respective flag into this static method.
+				//      Static context is bad, let's use a factory.
+
+				$snakType = 'bad';
+
+				$data = array(
+					$data[0],
+					$ex->getMessage(),
+					$data[2],
+					$data[1]
+				);
+			}
 		}
 
 		return self::newFromType( $snakType, $data );
@@ -190,10 +209,11 @@ abstract class SnakObject implements Snak {
 			throw new InvalidArgumentException( __METHOD__ . ' got an array with to few constructor arguments' );
 		}
 
-		$snakJar = array(
+		static $snakJar = array(
 			'value' => '\Wikibase\PropertyValueSnak',
 			'novalue' => '\Wikibase\PropertyNoValueSnak',
 			'somevalue' => '\Wikibase\PropertySomeValueSnak',
+			'bad' => '\Wikibase\PropertyBadValueSnak',
 		);
 
 		if ( !array_key_exists( $snakType, $snakJar ) ) {
@@ -202,15 +222,10 @@ abstract class SnakObject implements Snak {
 
 		$snakClass = $snakJar[$snakType];
 
-		if ( $snakType === 'value' ) {
-			return new $snakClass(
-				$constructorArguments[0],
-				$constructorArguments[1]
-			);
-		}
-		else {
-			return new $snakClass( $constructorArguments[0] );
-		}
+		$reflect  = new ReflectionClass( $snakClass ); //TODO: remember this in $snakJar
+		$snak = $reflect->newInstanceArgs( $constructorArguments );
+
+		return $snak;
 	}
 
 }
