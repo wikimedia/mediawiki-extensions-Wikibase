@@ -364,7 +364,7 @@ $messages['ja'] = array(
 	'valueview-expert-timeinput-calendarhint' => '($1 暦)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; $1 に変更',
 	'valueview-preview-label' => 'プレビュー:',
-	'valueview-preview-novalue' => '有効な値が認識できませんでした',
+	'valueview-preview-novalue' => '有効な値を認識できませんでした',
 	'valueview-listrotator-auto' => '自動',
 );
 
