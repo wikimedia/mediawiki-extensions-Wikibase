@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D0.4j.qg",
+        "filename": "DataModel/DataModel/Snak/PropertyBadValueSnak.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-11T23:42:22Z",
+      "side": 1,
+      "message": "hmmm, you are Jeroen? :)",
+      "revId": "0d0577495ad182093b6caa06e083a723677ca702",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
