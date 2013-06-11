@@ -257,16 +257,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			return $status;
 		}
 
-		if ( $page !== '' ) {
-			// Don't try to normalize an empty string (which means: remove the link)
-			$page = $siteObject->normalizePageName( $page );
-
-			if ( $page === false ) {
-				$status->error( 'wikibase-error-ui-no-external-page' );
-				return $status;
-			}
-		}
-
+		// empty page means remove site link
 		if ( $page === '' ) {
 			$link = $entityContent->getItem()->getSiteLink( $site );
 			if ( !$link ) {
@@ -277,6 +268,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$i18n = 'wbsetsitelink-remove';
 		}
 		else {
+			// Try to normalize the page name
+			$page = $siteObject->normalizePageName( $page );
+			if ( $page === false ) {
+				$status->error( 'wikibase-error-ui-no-external-page' );
+				return $status;
+			}
 			$siteLink = new SiteLink( $siteObject, $page );
 			$ret = $entityContent->getItem()->addSiteLink( $siteLink, 'set' );
 			if ( $ret === false ) {

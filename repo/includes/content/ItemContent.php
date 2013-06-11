@@ -178,8 +178,7 @@ class ItemContent extends EntityContent {
 		$pageUrl = $site->getPageUrl( $conflict['sitePage'] );
 
 		$msg = new \Message( 'wikibase-error-sitelink-already-used' );
-		$msg->rawParams( $pageUrl );
-		$msg->params( array( $conflict['sitePage'], $conflictingPage->getTitle()->getFullText() ) );
+		$msg->params( array( $pageUrl, $conflict['sitePage'], $conflictingPage->getTitle()->getFullText() ) );
 
 		return $msg;
 	}
