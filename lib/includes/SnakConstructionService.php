@@ -3,7 +3,9 @@
 namespace Wikibase\Lib;
 
 use DataTypes\DataTypeFactory;
+use DataValues\DataValueFactory;
 use DataValues\IllegalValueException;
+use DataValues\UnDeserializableValue;
 use InvalidArgumentException;
 use MWException;
 use Wikibase\EntityId;
@@ -55,15 +57,27 @@ class SnakConstructionService {
 	 */
 	protected $dataTypeFactory;
 
+	/**
+	 * @var DataValueFactory
+	 */
+	protected $dataValueFactory;
 
+	/**
+	 * @param SnakFactory            $snakFactory
+	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param DataTypeFactory        $dataTypeFactory
+	 * @param DataValueFactory       $dataValueFactory
+	 */
 	public function __construct(
 		SnakFactory $snakFactory,
 		PropertyDataTypeLookup $dataTypeLookup,
-		DataTypeFactory $dataTypeFactory
+		DataTypeFactory $dataTypeFactory,
+		DataValueFactory $dataValueFactory
 	) {
 		$this->snakFactory = $snakFactory;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
+		$this->dataValueFactory = $dataValueFactory;
 	}
 
 	/**
@@ -73,27 +87,27 @@ class SnakConstructionService {
 	 *
 	 * @param EntityId    $propertyId
 	 * @param string      $snakType
-	 * @param mixed       $snakValue
+	 * @param mixed       $rawValue
 	 *
+	 * @return \Wikibase\Snak
+	 * @throws InvalidArgumentException
 	 * @throws IllegalValueException
-	 * @throws InvalidArgumentException
-	 * @return Snak
-	 * @throws MWException
-	 * @throws InvalidArgumentException
+	 * @throws PropertyNotFoundException
 	 */
-	public function newSnak( EntityId $propertyId, $snakType, $snakValue = null ) {
+	public function newSnak( EntityId $propertyId, $snakType, $rawValue = null ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
 			throw new InvalidArgumentException( 'Expected an EntityId of a property' );
 		}
 
-		$dataTypeId = $snakValue === null ? null : $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
-		$dataType = $dataTypeId === null ? null : $this->dataTypeFactory->getType( $dataTypeId );
-		$valueType = $dataType === null ? null : $dataType->getDataValueType();
+		$dataTypeId = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+		$dataType = $this->dataTypeFactory->getType( $dataTypeId );
+		$valueType = $dataType->getDataValueType();
+
+		$snakValue = $snakType !== 'value' ? null : $this->dataValueFactory->newDataValue( $valueType, $rawValue );
 
 		$snak = $this->snakFactory->newSnak(
 			$propertyId,
 			$snakType,
-			$valueType,
 			$snakValue
 		);
 
