@@ -111,20 +111,20 @@ class GeoCoordinateValueTest extends DataValueTest {
 		$argLists[] = array( false, 42, 4.2, 'foo' );
 
 		// #42
-		$argLists[] = array( true, 42, 4.2, 9000.1, 'http://www.wikidata.org/entity/Q2' );
-		$argLists[] = array( true, 42, 4.2, 9000.1, null );
-		$argLists[] = array( true, 4.2, 42, 9000.1, 'terminus' );
-		$argLists[] = array( true, 4.2, 42, 0, "Schar's World" );
-		$argLists[] = array( true, -42, -4.2, -9000.1, 'coruscant' );
+		$argLists[] = array( true, 42, 4.2, 9000.1, null, 'http://www.wikidata.org/entity/Q2' );
+		$argLists[] = array( true, 42, 4.2, 9000.1, null, null );
+		$argLists[] = array( true, 4.2, 42, 9000.1, null, 'terminus' );
+		$argLists[] = array( true, 4.2, 42, 0, null, "Schar's World" );
+		$argLists[] = array( true, -42, -4.2, -9000.1, null, 'coruscant' );
 
 		// #47
-		$argLists[] = array( false, 42, 4.2, 9000.1, false );
-		$argLists[] = array( false, 42, 4.2, 9000.1, true );
-		$argLists[] = array( false, 42, 4.2, 9000.1, 42 );
-		$argLists[] = array( false, 42, 4.2, 9000.1, 4.2 );
-		$argLists[] = array( false, 42, 4.2, 9000.1, -1 );
-		$argLists[] = array( false, 42, 4.2, 9000.1, 0 );
-		$argLists[] = array( false, 42, 4.2, 9000.1, array() );
+		$argLists[] = array( false, 42, 4.2, 9000.1, null, false );
+		$argLists[] = array( false, 42, 4.2, 9000.1, null, true );
+		$argLists[] = array( false, 42, 4.2, 9000.1, null, 42 );
+		$argLists[] = array( false, 42, 4.2, 9000.1, null, 4.2 );
+		$argLists[] = array( false, 42, 4.2, 9000.1, null, -1 );
+		$argLists[] = array( false, 42, 4.2, 9000.1, null, 0 );
+		$argLists[] = array( false, 42, 4.2, 9000.1, null, array() );
 
 		return $argLists;
 	}
@@ -176,7 +176,7 @@ class GeoCoordinateValueTest extends DataValueTest {
 	 * @param array $arguments
 	 */
 	public function testGetGlobe( GeoCoordinateValue $geoCoord, array $arguments ) {
-		$expected = array_key_exists( 3, $arguments ) ? $arguments[3] : 'http://www.wikidata.org/entity/Q2';
+		$expected = array_key_exists( 4, $arguments ) ? $arguments[4] : 'http://www.wikidata.org/entity/Q2';
 		$actual = $geoCoord->getGlobe();
 
 		$this->assertTrue(

@@ -58,15 +58,6 @@ class GeoCoordinateValue extends DataValueObject {
 	protected $altitude;
 
 	/**
-	 * The globe on which the location resides.
-	 *
-	 * @since 0.1
-	 *
-	 * @var string|null
-	 */
-	protected $globe;
-
-	/**
 	 * The precision of the coordinate.
 	 *
 	 * @since 0.1
@@ -76,17 +67,26 @@ class GeoCoordinateValue extends DataValueObject {
 	protected $precision;
 
 	/**
+	 * The globe on which the location resides.
+	 *
+	 * @since 0.1
+	 *
+	 * @var string|null
+	 */
+	protected $globe;
+
+	/**
 	 * @since 0.1
 	 *
 	 * @param float|int $latitude
 	 * @param float|int $longitude
 	 * @param float|int|null $altitude
+	 * param float|int|null $precision
 	 * @param string|null $globe
-	 * @param float|int|null $precision
 	 *
 	 * @throws IllegalValueException
 	 */
-	public function __construct( $latitude, $longitude, $altitude = null, $globe = 'http://www.wikidata.org/entity/Q2', $precision = null ) {
+	public function __construct( $latitude, $longitude, $altitude = null, $precision = null, $globe = 'http://www.wikidata.org/entity/Q2' ) {
 		// TODO: validate those values!
 		if ( is_int( $latitude ) ) {
 			$latitude = (float)$latitude;
@@ -127,8 +127,8 @@ class GeoCoordinateValue extends DataValueObject {
 		$this->latitude = $latitude;
 		$this->longitude = $longitude;
 		$this->altitude = $altitude;
-		$this->globe = $globe;
 		$this->precision = $precision;
+		$this->globe = $globe;
 	}
 
 	/**
@@ -153,8 +153,8 @@ class GeoCoordinateValue extends DataValueObject {
 	 * @throws IllegalValueException
 	 */
 	public function unserialize( $value ) {
-		list( $latitude, $longitude, $altitude, $globe, $precision ) = json_decode( $value );
-		$this->__construct( $latitude, $longitude, $altitude, $globe, $precision );
+		list( $latitude, $longitude, $altitude, $precision, $globe ) = json_decode( $value );
+		$this->__construct( $latitude, $longitude, $altitude, $precision, $globe );
 	}
 
 	/**
@@ -225,17 +225,6 @@ class GeoCoordinateValue extends DataValueObject {
 	}
 
 	/**
-	 * Returns the globe on which the location resides.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string|null
-	 */
-	public function getGlobe() {
-		return $this->globe;
-	}
-
-	/**
 	 * Returns the precision of the coordinate.
 	 *
 	 * TODO: Introduce some constants holding the different precisions and document. Sync with JS.
@@ -250,6 +239,17 @@ class GeoCoordinateValue extends DataValueObject {
 	}
 
 	/**
+	 * Returns the globe on which the location resides.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string|null
+	 */
+	public function getGlobe() {
+		return $this->globe;
+	}
+
+	/**
 	 * @see DataValue::getArrayValue
 	 *
 	 * @since 0.1
@@ -261,8 +261,8 @@ class GeoCoordinateValue extends DataValueObject {
 			'latitude' => $this->latitude,
 			'longitude' => $this->longitude,
 			'altitude' => $this->altitude,
+			'precision' => $this->precision,
 			'globe' => $this->globe,
-			'precision' => $this->precision
 		);
 	}
 
@@ -281,8 +281,8 @@ class GeoCoordinateValue extends DataValueObject {
 			$data['latitude'],
 			$data['longitude'],
 			$data['altitude'],
-			$data['globe'],
-			$data['precision']
+			$data['precision'],
+			$data['globe']
 		);
 	}
 
