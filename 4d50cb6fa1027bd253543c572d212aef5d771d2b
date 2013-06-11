@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "D0544oZ4",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-11T09:33:38Z",
+      "side": 1,
+      "message": "must be $status-\u003efatal, not $status-\u003eerror! Otherwise the error is recorded but the error flag isn\u0027t set.",
+      "revId": "4d50cb6fa1027bd253543c572d212aef5d771d2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D0-VccH0",
         "filename": "repo/includes/specials/SpecialSetSiteLink.php",
         "patchSetId": 6
