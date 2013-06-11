@@ -16,6 +16,24 @@
       "revId": "37e5b42e660e53b5158179e1c13a905a3187dda0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D035SHd8",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-11T09:34:41Z",
+      "side": 1,
+      "message": "so the entity object does not need to be serialized at all? are you sure?",
+      "parentUuid": "D016.Ofw",
+      "revId": "37e5b42e660e53b5158179e1c13a905a3187dda0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
