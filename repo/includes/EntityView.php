@@ -562,10 +562,12 @@ abstract class EntityView extends \ContextSource {
 			Lib\EntityIdFormatter::OPT_PREFIX_MAP => $entitiesPrefixMap
 		) );
 
+		// FIXME: unify logic with SnakFormatter / TypedValueFormatter
 		// TODO: display a "placeholder" message for novalue/somevalue snak
-		$value = '';
-		if ( $claim->getMainSnak()->getType() === 'value' ) {
-			$value = $claim->getMainSnak()->getDataValue();
+		$mainSnakHtml = '';
+		$snak = $claim->getMainSnak();
+		if ( $snak->getType() === 'value' ) {
+			$value = $snak->getDataValue();
 
 			// TODO: Bad to have a switch for different data types here, implement a formatter!
 			if( $value instanceof \DataValues\TimeValue ) {
@@ -590,16 +592,30 @@ abstract class EntityView extends \ContextSource {
 					}
 				}
 			}
-		}
 
-		$mainSnakHtml = wfTemplate( 'wb-snak',
-			'wb-mainsnak',
-			'', // Link to property. NOTE: we don't display this ever (instead, we generate it on
+			$mainSnakHtml = wfTemplate( 'wb-snak',
+				'wb-mainsnak',
+				'', // Link to property. NOTE: we don't display this ever (instead, we generate it on
 				// Claim group level) If this was a public function, this should be generated
 				// anyhow since important when displaying a Claim on its own.
-			'', // type selector, JS only
-			( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value )
-		);
+				'', // type selector, JS only
+				( $value === '' ) ? '&nbsp;' : htmlspecialchars( $value )
+			);
+		} else if ( $snak->getType() === 'bad' ) {
+			$json = json_encode( $snak->getRawData(), JSON_ERROR_UTF8 );
+
+			$mainSnakHtml = Html::rawElement( 'div', array( 'class' => 'error' ),
+				Html::element( 'span', array( ),
+					$snak->getErrorMessage()
+				) .
+				Html::element( 'br' ) .
+				Html::element( 'span', array( 'class' => 'wikibase-bad-value-data' ),
+					$json
+				)
+			);
+		}
+
+		//TODO: qualifiers, etc!
 
 		// TODO: Use 'wb-claim' or 'wb-statement' template accordingly
 		$claimHtml = wfTemplate( 'wb-statement',
