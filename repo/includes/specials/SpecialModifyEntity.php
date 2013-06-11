@@ -90,7 +90,9 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 			);
 
 			if ( !$editEntity->isSuccess() ) {
-				$editEntity->showErrorPage();
+				$errors = $editEntity->getStatus()->getErrorsArray();
+				$this->showErrorHTML( $errors[0]->parse() );
+				$this->setForm();
 			}
 			else {
 				$entityUrl = $this->entityContent->getTitle()->getFullUrl();
