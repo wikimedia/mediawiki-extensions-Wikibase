@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D016.Ofw",
+        "filename": "client/includes/WikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-11T09:28:48Z",
+      "side": 1,
+      "message": "This is actually an error happening when serializing, not deserializing, right?\nWhy are we serializing at all here?",
+      "revId": "37e5b42e660e53b5158179e1c13a905a3187dda0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
