@@ -6,13 +6,14 @@ use DataTypes\DataTypeFactory;
 use Revision;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
+use Wikibase\EntityDataSerializationService;
 use \Wikibase\Item;
 use \Wikibase\ItemContent;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Property;
 
 /**
- * Tests for the SpecialItemByTitle class.
+ * @covers \Wikibase\EntityDataSerializationService
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +31,7 @@ use Wikibase\Property;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.1
+ * @since 0.4
  *
  * @ingroup WikibaseRepoTest
  * @ingroup Test
@@ -38,8 +39,7 @@ use Wikibase\Property;
  * @group Database
  *
  * @group Wikibase
- * @group SpecialPage
- * @group WikibaseSpecialPage
+ * @group WikibaseEntityData
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -49,7 +49,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
 
-	protected static $dataTypes = array(
+	public static $dataTypes = array(
 		'commonsMedia' => array(
 			'datavalue' => 'string',
 		),
@@ -83,7 +83,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			)
 		) ) );
 
-		$service = new \EntityDataSerializationService(
+		$service = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
 			$entityLookup,
