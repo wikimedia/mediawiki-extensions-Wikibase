@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D03GMC4E",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-12T10:43:29Z",
+      "side": 1,
+      "message": "I do not see this used anywhere in the class (or am i blind?)",
+      "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0zGSg58",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-12T10:43:29Z",
+      "side": 1,
+      "message": "this block could be split into another function",
+      "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D09Hpdx0",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-12T10:43:29Z",
+      "side": 1,
+      "message": "could split here to line 380 into a getFormat() or such function",
+      "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D05GP73U",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-12T10:43:29Z",
+      "side": 1,
+      "message": "perhaps this could be split into another class? EntityDataFormatter or EntityDataRequestFormatter? (please come up with a nicer name)\n\nfor example, the $entityIdFormatter constructor param in this class is only used here.\n\nmaxAge is only used in outputData(), which is called from here.\n\nso instead the constructor gets $entityDataFormatter (which has its params) and this class has the ones it needs not related to formatting and output of the request.",
+      "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D01GVh4U",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-12T10:43:29Z",
+      "side": 1,
+      "message": "not blocking on this, but 8 is a lot of constructor parameters.  Would be nice to come up with a way to handle that better.",
+      "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
