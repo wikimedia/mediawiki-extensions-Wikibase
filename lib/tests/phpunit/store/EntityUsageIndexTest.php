@@ -3,11 +3,11 @@
 namespace Wikibase\Test;
 use MediaWikiSite;
 use Site;
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
 use Wikibase\EntityUsageIndex;
 use Wikibase\EntityId;
 use Wikibase\Property;
-use Wikibase\SiteLink;
 
 /**
  * Test class for EntityUsageIndex
@@ -49,15 +49,11 @@ class EntityUsageIndexTest extends \MediaWikiTestCase {
 	 * @return Item
 	 */
 	protected static function newItemFromLinks( $id, array $links ) {
-		$sites = self::getTestSites();
-
 		$item = Item::newEmpty();
 		$item->setId( $id );
 
 		foreach ( $links as $siteId => $page ) {
-			$site = $sites[$siteId];
-			$link = new SiteLink( $site, $page );
-			$item->addSiteLink( $link );
+			$item->addSimpleSiteLink( new SimpleSiteLink( $siteId, $page ) );
 		}
 
 		return $item;
