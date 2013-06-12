@@ -84,6 +84,23 @@
       "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D07HUsx4",
+        "filename": "repo/tests/phpunit/includes/specials/EntityDataRequestHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-12T11:51:44Z",
+      "side": 1,
+      "message": "Entity $entity is sufficient since it is included at the top.\n\nalso type hints?",
+      "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
