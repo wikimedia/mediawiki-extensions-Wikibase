@@ -78,8 +78,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$opt = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
 		$serializer->setOptions( $opt );
 
-		$entityArr = $serializer->getSerialized( $entityObject );
-		return array( $entityArr );
+		try {
+			$entityArr = $serializer->getSerialized( $entityObject );
+			return array( $entityArr );
+		} catch ( \Exception $e ) {
+			throw $this->getEngine()->newException( 'wikibase-error-serialize-error' );
+		}
 	}
 
 	/**
