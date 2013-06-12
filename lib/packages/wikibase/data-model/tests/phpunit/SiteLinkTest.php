@@ -123,7 +123,7 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider siteProvider
 	 */
 	public function testConstructorWithNullPageName( Site $site ) {
-		$this->setExpectedException( 'MWException' );
+		$this->setExpectedException( 'InvalidArgumentException' );
 		new SiteLink( $site, null );
 	}
 
