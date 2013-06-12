@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D0zHPI1k",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-12T12:54:27Z",
+      "side": 1,
+      "message": "the page name no longer gets returned",
+      "revId": "92cb06954618f30ae1824442ebfe1ebbab1a4f34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
