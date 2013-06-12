@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D0w5dnnc",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-06-12T07:56:33Z",
+      "side": 1,
+      "message": "\"counterSurfaces\" is an odd name. Something like \"counterCanvasses\" or \"counterNodes\" would be a better choice.",
+      "revId": "0247838256f840e96451ea399c8d51c332302efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0.5hOjs",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-06-12T07:56:33Z",
+      "side": 1,
+      "message": "Do we still need that line? Isn\u0027t it sufficient to just use the option?",
+      "revId": "0247838256f840e96451ea399c8d51c332302efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
