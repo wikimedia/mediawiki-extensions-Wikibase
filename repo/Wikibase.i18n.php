@@ -2301,6 +2301,8 @@ $messages['ce'] = array(
 	'wikibase-itembytitle-lookup-page' => 'АгӀо:',
 	'wikibase-itemdisambiguation-lookup-language' => 'Мотт:',
 	'wikibase-itemdisambiguation-lookup-label' => 'ЦӀе:',
+	'wikibase-newentity-description' => 'Цуьнах лаьцна:',
+	'wikibase-setdescription-label' => 'Цуьнах лаьцна:',
 	'wikibase-setentity-language' => 'Мотт:',
 	'wikibase-entitieswithoutlabel-label-language' => 'Мотт:',
 	'wikibase-entitieswithoutlabel-submit' => 'Лаха',
@@ -4705,6 +4707,8 @@ $messages['fa'] = array(
 	'wikibase-setsitelink-submit' => 'ثبت پیوند تارنما',
 	'wikibase-setsitelink-warning-remove' => 'مطمئنید که می‌خواهید پیوند تارنمای [[$1]] را حذف کنید؟',
 	'wikibase-setsitelink-invalid-site' => 'شناسه تارنمای «$1» نامعلوم است. خواهشمند است از یک شناسه موجود بهره گیرید، چیزی همچون «fawiki».',
+	'wikibase-setsitelink-add-failed' => 'نشانی وبگاه ذخیره نمی‌شود.',
+	'wikibase-setsitelink-remove-failed' => 'لینک سایت را نمی توان حذف کرد.',
 	'wikibase-setentity-id' => 'شناسه:',
 	'wikibase-setentity-language' => 'زبان:',
 	'wikibase-setentity-invalid-langcode' => 'شناسهٔ زبان «$1» ناشناخته است. لطفاً از یک شناسهٔ زبان که برای سامانه شناخته‌شده است (مثل «en») استفاده کنید.',
@@ -5016,6 +5020,7 @@ IP-osoitteesi kirjataan sivun $1 muokkaushistoriaan.',
 	'wikibase-setaliases-submit' => 'Aseta aliakset',
 	'wikibase-setaliases-warning-remove' => 'Haluatko todella poistaa kaikki aliakset aiheesta [[$1]]?',
 	'special-setsitelink' => 'Aseta sivustolinkki',
+	'wikibase-setsitelink-introfull' => 'Olet asettamassa sivustolla $2 olevaa linkkiä kohteeseen [[$1]].',
 	'wikibase-setsitelink-intro' => 'Tällä lomakkeella voit asettaa nimen aiheelle. Sinun täytyy antaa aiheen tunniste (esim. Q23), kielikoodi (esim. "fiwiki") ja sivustolinkki, jonka haluat asettaa.',
 	'wikibase-setsitelink-site' => 'Sivuston tunniste:',
 	'wikibase-setsitelink-label' => 'Sivustolinkki',
@@ -8185,6 +8190,8 @@ $messages['ja'] = array(
 	'wikibase-setsitelink-submit' => 'サイトリンクを設定',
 	'wikibase-setsitelink-warning-remove' => '[[$1]] のサイトリンクを本当に除去しますか?',
 	'wikibase-setsitelink-invalid-site' => 'サイト ID「$1」は不明です。既存のサイト ID (「jawiki」など) を使用してください。',
+	'wikibase-setsitelink-add-failed' => 'サイトリンクを保存できませんでした。',
+	'wikibase-setsitelink-remove-failed' => 'サイトリンクを除去できませんでした。',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => '言語:',
 	'wikibase-setentity-invalid-langcode' => '言語コード「$1」は不明です。システムに登録されている言語コード (「en」など) を使用してください。',
@@ -8302,6 +8309,10 @@ $messages['ja'] = array(
 * altitude (省略可) – ある参考面からの高さを表した明示 (?) の値。地球については「WGS84」準拠楕円体が使われる
 * globe (省略可) – 星を表す明示 (?) のデータ値。既定は「地球」それから「WGS84」',
 	'wikibase-listdatatypes-quantity-head' => '数量',
+	'wikibase-listdatatypes-quantity-body' => 'なんらかの明確に定義された単位に結びついた量を表すリテラルデータ。実際の単位は入力されたデータ値に含まれています。
+* value – 文字列の非明示部分（単位接頭辞の対応付けは不明瞭です）
+* unit – 文字列の非明示部分（標準化団体への対応付けは不明瞭です）
+* accuracy (省略可能) – value と同じ単位を持つ、明示のデータ値',
 	'wikibase-listdatatypes-monolingual-text-head' => '単一言語のテキスト',
 	'wikibase-listdatatypes-monolingual-text-body' => '他の言語に翻訳されない文字列のリテラルデータ。この種の文字列は一度定義されると、すべての言語にわたって再利用されます。典型的な用途としては、地元の言語で表記した地名、なんらかの識別子、化学式、ラテン語の学名などがあります。
 * language - テキスト (text) 部分の言語を識別するための明示の値
@@ -8314,6 +8325,13 @@ $messages['ja'] = array(
 	'wikibase-listdatatypes-string-body' => '文字列のリテラルデータ。典型的な用途としては、読み手の言語に依存しない表記を持つ識別子があります。
 * value - 言語を特定した文字列、明示の値',
 	'wikibase-listdatatypes-time-head' => '時刻',
+	'wikibase-listdatatypes-time-body' => '時刻のリテラルデータ。何らかの精度と境界を持った時刻として指定されます。内部では時刻は常に先発グレゴリオ暦の形式で保存されていますが、他の形式も入力時および出力時に使うことができます。(?)
+* time – ある時点を表す明示の値。ISO8601 に従って表現され、年は常に11桁で、日付は常に符号が付き、+00000002013-01-01T00:00:00Z という形式です。
+* timezone – 符号付き整数で表される明示の値。UTC からのオフセットを分で指定したタイムゾーン情報。
+* before – 指定された時刻から現在になるまで単位時間で何個文経ったか表す明示の整数値。単位は precision で与えられます。
+* after – 指定された時刻になるまで現在から単位時間で何個文かかるのか表す明示の整数値。単位は precision で与えられます。
+* precision – shortint 型の明示の値。数には以下の意味があります: 0 - 10億年、1 - 1億年、...、6 - 千年、7 - 1世紀、8 - 10年、9 - 1年、10 - 月、11 - 日、12 - 時間、13 - 分、14 - 秒。
+* calendarmodel – URI として指定される明示の値。時刻を表示するのに使うべき暦法を示します。',
 	'content-model-wikibase-item' => 'ウィキベース項目',
 	'content-model-wikibase-property' => 'ウィキベース プロパティ',
 	'content-model-wikibase-query' => 'ウィキベース クエリ',
@@ -14543,6 +14561,7 @@ $messages['yi'] = array(
  * @author Shirayuki
  * @author Shizhao
  * @author Stevenliuyi
+ * @author Xiaomingyan
  * @author Yfdyh000
  * @author 乌拉跨氪
  */
@@ -14567,7 +14586,7 @@ $messages['zh-hans'] = array(
 	'wikibase-alias-edit-placeholder' => '输入一个别名',
 	'wikibase-label-input-help-message' => '用$1输入此数据集的标题。',
 	'wikibase-description-input-help-message' => '用$1输入一段简要描述。',
-	'wikibase-statements' => '声明',
+	'wikibase-statements' => '陈述',
 	'wikibase-terms' => '其他语言',
 	'wikibase-sitelinks-add' => '添加指向站点链接的链接',
 	'wikibase-sitelinks-empty' => '尚无此项的站点链接。',
@@ -14589,7 +14608,7 @@ $messages['zh-hans'] = array(
 	'wikibase-sitelinksedittool-full' => '已经为所有的已知站点设置了指向页面的链接。',
 	'wikibase-disambiguation-title' => '“$1”的消歧义',
 	'wb-special-newitem-new-item-notification' => '已建立新项$1并重定位到它的页面。回到$2。',
-	'wikibase-aliases-label' => '亦称为：',
+	'wikibase-aliases-label' => '别名：',
 	'wikibase-aliases-input-help-message' => '如果此数据集有一个以上的名称，您可以输入它的别名和同义词，以便可以通过其他名称找到它。',
 	'wikibase-aliases-empty' => '没有已定义的别名。',
 	'wikibase-datatype-label' => '数据类型：',

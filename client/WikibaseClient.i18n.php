@@ -730,6 +730,7 @@ $messages['cs'] = array(
  */
 $messages['cu'] = array(
 	'wikibase-editlinks' => 'исправи съвѧꙁи',
+	'wikibase-rc-hide-wikidata' => '$1 Викисводъ',
 );
 
 /** Welsh (Cymraeg)
@@ -860,6 +861,7 @@ $messages['de'] = array(
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Bearbeitungen in den „Letzten Änderungen“ anzeigen',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata-Bearbeitungen in der Beobachtungsliste anzeigen',
+	'wikibase-error-serialize-error' => 'Die Daten konnten nicht serialisiert werden',
 	'wikibase-error-invalid-entity-id' => 'Die eingegebene Kennung ist für das System unbekannt. Bitte verwende eine gültige Objektkennung.',
 	'special-unconnectedpages' => 'Seiten, die nicht mit Objekten verbunden sind',
 	'wikibase-unconnectedpages-legend' => 'Optionen für nicht verbundene Seiten',
@@ -1354,6 +1356,7 @@ $messages['gl'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 o Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar as modificacións do Wikidata nos cambios recentes',
 	'wikibase-watchlist-show-changes-pref' => 'Mostrar as modificacións do Wikidata na súa lista de vixilancia',
+	'wikibase-error-serialize-error' => 'Erro ao seriar os datos',
 	'wikibase-error-invalid-entity-id' => 'O sistema descoñece o ID inserido. Utilice un identificador de entidade válido.',
 	'special-unconnectedpages' => 'Páxinas non conectadas con elementos',
 	'wikibase-unconnectedpages-legend' => 'Opcións para as páxinas non conectadas',
@@ -2355,12 +2358,13 @@ $messages['mt'] = array(
  */
 $messages['nb'] = array(
 	'wikibase-client-desc' => 'Klientutvidelse for Wikibase, det strukturerte datalageret',
+	'specialpages-group-wikibaseclient' => 'Wikidata klient',
 	'wikibase-after-page-move' => 'Du kan også [$1 oppdatere] det tilknyttede Wikidata-datasettet for å bevare språklenkene til den flyttede siden.',
 	'wikibase-comment-remove' => 'Det tilknyttede Wikidata-datasettet har blitt slettet. Språklenker har blitt fjernet.',
 	'wikibase-comment-linked' => 'Et Wikidata-datasett har blitt knyttet til denne siden.',
 	'wikibase-comment-unlink' => 'Denne siden har blitt fraknyttet et Wikidata-datasett. Språklenker har blitt fjernet.',
 	'wikibase-comment-restore' => 'Det tilknyttede Wikidata-datasettet har blitt gjenopprettet. Språklenker har blitt gjenopprettet.',
-	'wikibase-comment-update' => 'Språklenker har blitt oppdatert.', # Fuzzy
+	'wikibase-comment-update' => 'Wikidata element har blitt oppdatert.',
 	'wikibase-comment-sitelink-add' => 'Språklenke tilført: $1',
 	'wikibase-comment-sitelink-change' => 'Språklenke endret fra $1 til $2',
 	'wikibase-comment-sitelink-remove' => 'Språklenke fjernet: $1',
@@ -2377,14 +2381,29 @@ $messages['nb'] = array(
 	'wikibase-linkitem-input-site' => 'Språk:',
 	'wikibase-linkitem-input-page' => 'Side:',
 	'wikibase-linkitem-invalidsite' => 'Ukjent eller ugyldig nettsted er valgt',
-	'wikibase-linkitem-confirmitem-text' => 'Siden du valgte, er allerede lenket til [$1 element på vårt sentrale dataregister]. Bekreft at siden(e) som er vist nedenfor er de(n) du vil lenke med valgt side.',
+	'wikibase-linkitem-confirmitem-text' => 'Siden du valgte, er allerede lenket til [$1 element på vårt sentrale dataregister]. Bekreft at {{PLURAL:$2|siden|sidene}} som er vist nedenfor er {{PLURAL:den|de}} du vil lenke med valgt side.',
 	'wikibase-linkitem-confirmitem-button' => 'Bekreft',
 	'wikibase-linkitem-not-loggedin-title' => 'Du må være logget inn',
 	'wikibase-linkitem-not-loggedin' => 'Du må være logget inn på denne wikien og på det [$1 sentrale dataregister] for å bruke denne funksjonen.',
 	'wikibase-linkitem-success-create' => 'Sidene er lenket. Du kan finne det nyopprettede datasettet med nettstedlenkene i vårt [$1 sentrale dataregister].',
 	'wikibase-linkitem-success-link' => 'Sidene er koblet. Du kan finne datasettet med nettstedlenkene i vårt [$1 sentrale dataregister].',
+	'wikibase-property-notfound' => 'Egenskapen $1 er ikke funnet.',
+	'wikibase-property-notsupportedyet' => 'Wikibase støtter foreløpig ikke egenskapstypen til egenskap $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata-redigeringer i siste endringer',
+	'wikibase-watchlist-show-changes-pref' => 'Vis redigeringer fra Wikidata i din overvåkingsliste',
+	'wikibase-error-invalid-entity-id' => 'IDen du la inn er ukjent for systemet. Legg inn en gyldig en.',
+	'special-unconnectedpages' => 'Sider som ikke er koblet til elementer.',
+	'wikibase-unconnectedpages-legend' => 'Valg for ukoblede sider',
+	'wikibase-unconnectedpages-page' => 'Start resultatlisten med siden:',
+	'wikibase-unconnectedpages-submit' => 'Gå',
+	'wikibase-unconnectedpages-invalid-language' => '«$1» er ikke en gyldig språkkode.',
+	'wikibase-unconnectedpages-page-warning' => 'Sidens tittel kunne ikke brukes for søket og er ignorert.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Bare sider med språklenker',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|språklenke|språklenker}} på siden)',
+	'wikibase-pageinfo-entity-id' => 'Wikidataelement ID',
+	'wikibase-pageinfo-entity-id-none' => 'Ingen',
+	'wikibase-property-render-error' => 'Klarte ikke å vise egenskapen $1: $2',
 );
 
 /** Dutch (Nederlands)
