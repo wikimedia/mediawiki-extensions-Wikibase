@@ -67,7 +67,7 @@ class GeoCoordinateHandlerTest extends DataValueHandlerTest {
 		$values[] = new GeoCoordinateValue( 0, 0 );
 		$values[] = new GeoCoordinateValue( 23, 42 );
 		$values[] = new GeoCoordinateValue( 2.3, 4.2, 9000.1 );
-		$values[] = new GeoCoordinateValue( -2.3, -4.2, -9000.1, 'mars' );
+		$values[] = new GeoCoordinateValue( -2.3, -4.2, -9000.1, null, 'mars' );
 
 		return $values;
 	}
