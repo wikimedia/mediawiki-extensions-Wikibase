@@ -3,7 +3,11 @@
 namespace Wikibase;
 
 use Diff\Differ;
-use MWException;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
+use Diff\DiffOpRemove;
+use Diff\MapDiffer;
+use InvalidArgumentException;
 
 /**
  * Implementation of the Claims interface.
@@ -168,12 +172,12 @@ class Claims extends HashArray implements ClaimListAccess {
 	 *
 	 * @param int $propertyId
 	 *
-	 * @throws \MWException if $propertyId isn't valid
+	 * @throws InvalidArgumentException
 	 * @return Claims
 	 */
 	public function getClaimsForProperty( $propertyId ) {
 		if ( !is_int( $propertyId ) ) {
-			throw new MWException( "ID must be an int." );
+			throw new InvalidArgumentException( '$propertyId must be an integer' );
 		}
 
 		$claimsByProp = new ByPropertyIdArray( $this );
@@ -251,14 +255,14 @@ class Claims extends HashArray implements ClaimListAccess {
 	 * @param Differ|null $differ
 	 *
 	 * @return \Diff\Diff
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function getDiff( Claims $claims, Differ $differ = null ) {
 		assert( $this->indicesAreUpToDate() );
 		assert( $claims->indicesAreUpToDate() );
 
 		if ( $differ === null ) {
-			$differ = new \Diff\MapDiffer();
+			$differ = new MapDiffer();
 		}
 
 		$sourceHashes = array();
@@ -278,7 +282,7 @@ class Claims extends HashArray implements ClaimListAccess {
 		$diff = new \Diff\Diff( array(), true );
 
 		foreach ( $differ->doDiff( $sourceHashes, $targetHashes ) as $diffOp ) {
-			if ( $diffOp instanceof \Diff\DiffOpChange ) {
+			if ( $diffOp instanceof DiffOpChange ) {
 				$oldClaim = $this->getByElementHash( $diffOp->getOldValue() );
 				$newClaim = $claims->getByElementHash( $diffOp->getNewValue() );
 
@@ -286,20 +290,20 @@ class Claims extends HashArray implements ClaimListAccess {
 				assert( $newClaim instanceof Claim );
 				assert( $oldClaim->getGuid() === $newClaim->getGuid() );
 
-				$diff[$oldClaim->getGuid()] = new \Diff\DiffOpChange( $oldClaim, $newClaim );
+				$diff[$oldClaim->getGuid()] = new DiffOpChange( $oldClaim, $newClaim );
 			}
-			elseif ( $diffOp instanceof \Diff\DiffOpAdd ) {
+			elseif ( $diffOp instanceof DiffOpAdd ) {
 				$claim = $claims->getByElementHash( $diffOp->getNewValue() );
 				assert( $claim instanceof Claim );
-				$diff[$claim->getGuid()] = new \Diff\DiffOpAdd( $claim );
+				$diff[$claim->getGuid()] = new DiffOpAdd( $claim );
 			}
-			elseif ( $diffOp instanceof \Diff\DiffOpRemove ) {
+			elseif ( $diffOp instanceof DiffOpRemove ) {
 				$claim = $this->getByElementHash( $diffOp->getOldValue() );
 				assert( $claim instanceof Claim );
-				$diff[$claim->getGuid()] = new \Diff\DiffOpRemove( $claim );
+				$diff[$claim->getGuid()] = new DiffOpRemove( $claim );
 			}
 			else {
-				throw new MWException( 'Invalid DiffOp type cannot be handled' );
+				throw new InvalidArgumentException( 'Invalid DiffOp type cannot be handled' );
 			}
 		}
 
