@@ -2,9 +2,9 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 use Traversable;
 use Hashable;
-use MWException;
 
 /**
  * Generates hashes for associative arrays based on the values of their elements.
@@ -27,7 +27,7 @@ use MWException;
  * @since 0.1
  *
  * @file
- * @ingroup WikibaseLib
+ * @ingroup WikibaseDataModel
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -60,11 +60,11 @@ class MapValueHasher implements MapHasher {
 	 * @param Traversable|Hashable[] $map
 	 *
 	 * @return string
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function hash( $map ) {
 		if ( !is_array( $map ) && !( $map instanceof Traversable ) ) {
-			throw new MWException( 'MapHasher::hash only accepts Traversable objects (including arrays)' );
+			throw new InvalidArgumentException( 'MapHasher::hash only accepts Traversable objects (including arrays)' );
 		}
 
 		$hashes = array();
