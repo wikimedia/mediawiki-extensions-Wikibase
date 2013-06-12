@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use MWException;
+use InvalidArgumentException;
 
 /**
  * Class that represents a single Wikibase claim.
@@ -157,11 +157,11 @@ class Claim implements \Hashable, \Serializable {
 	 *
 	 * @param string|null $guid
 	 *
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function setGuid( $guid ) {
 		if ( !is_string( $guid ) && $guid !== null ) {
-			throw new MWException( 'Can only set the GUID to string values or null' );
+			throw new InvalidArgumentException( 'Can only set the GUID to string values or null' );
 		}
 
 		$this->guid = $guid;
