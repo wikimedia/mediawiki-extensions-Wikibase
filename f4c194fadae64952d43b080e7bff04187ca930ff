@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "D0zHKg3A",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-12T12:29:47Z",
+      "side": 1,
+      "message": "In purge(), on line 263.\n\nIt\u0027s an optimization to not purge if there are no web caches.\n\nIdeally, there would be a WebCache service with a dummy-implementation that provides a purge() method. But since we don\u0027t have this, we somehow need to know the config flag.",
+      "parentUuid": "D03GMC4E",
+      "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D0zGSg58",
         "filename": "repo/includes/specials/EntityDataRequestHandler.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-12T10:43:29Z",
       "side": 1,
       "message": "this block could be split into another function",
+      "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D01GWJ0w",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-12T12:29:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D0zGSg58",
       "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "D05Ggj6Q",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-12T12:29:47Z",
+      "side": 1,
+      "message": "The 406 is really part of the content negotiation proper, so i wouldn\u0027t like to split it off. I\u0027ll move the special handling of HTML.",
+      "parentUuid": "D09Hpdx0",
+      "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D05GP73U",
         "filename": "repo/includes/specials/EntityDataRequestHandler.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "D0-Gw.-U",
+        "filename": "repo/includes/specials/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-12T12:29:47Z",
+      "side": 1,
+      "message": "True, but that\u0027S for a follow-up.",
+      "parentUuid": "D05GP73U",
+      "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D01GVh4U",
         "filename": "repo/includes/specials/SpecialEntityData.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2013-06-12T10:43:29Z",
       "side": 1,
       "message": "not blocking on this, but 8 is a lot of constructor parameters.  Would be nice to come up with a way to handle that better.",
+      "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D03GdK2I",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-12T12:29:47Z",
+      "side": 1,
+      "message": "Probably best done by injecting a EntityDataResponseHandler instead of $maxAge, $ApiFrameOptions, and $entityIdFormatter. That\u0027s for a later though.",
+      "parentUuid": "D01GVh4U",
       "revId": "f4c194fadae64952d43b080e7bff04187ca930ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
