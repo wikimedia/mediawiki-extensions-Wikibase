@@ -62,7 +62,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		$entityContent = null;
 
 		// If we have an id try that first. If the id isn't prefixed, assume it refers to an item.
-		if ( isset( $params['id'] ) ) {
+		if ( isset( $params['id'] ) && !isset( $params['new'] ) ) {
 			$id = $params['id'];
 
 			$entityContentFactory = EntityContentFactory::singleton();

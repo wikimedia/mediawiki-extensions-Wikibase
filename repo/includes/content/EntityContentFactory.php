@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use MWException;
+use InvalidArgumentException;
 use Title;
 use WikiPage;
 use Revision;
@@ -213,6 +214,31 @@ class EntityContentFactory {
 		$handler = \ContentHandler::getForModelID( self::$typeMap[$entity->getType()] );
 
 		return $handler->newContentFromEntity( $entity );
+	}
+
+	/**
+	 * Constructs a new EntityContent from a given type.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $type
+	 *
+	 * @return EntityContent
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function newFromType( $type ) {
+		if ( !is_string( $type ) ) {
+			throw new InvalidArgumentException( '$type needs to be a string' );
+		}
+
+		if ( $type === Item::ENTITY_TYPE ) {
+			return ItemContent::newEmpty();
+		} elseif ( $type === Property::ENTITY_TYPE ) {
+			return PropertyContent::newEmpty();
+		} else {
+			throw new InvalidArgumentException( 'unknown entity type $type' );
+		}
 	}
 
 }

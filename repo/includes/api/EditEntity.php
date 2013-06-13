@@ -2,6 +2,8 @@
 
 namespace Wikibase\Api;
 
+use Wikibase\EntityContentFactory;
+use InvalidArgumentException;
 use Wikibase\ChangeOps;
 use Wikibase\ChangeOpLabel;
 use Wikibase\ChangeOpDescription;
@@ -13,6 +15,9 @@ use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Item;
 use Wikibase\ItemContent;
+use Wikibase\PropertyContent;
+use Wikibase\Property;
+use Wikibase\QueryContent;
 use Wikibase\Autocomment;
 use Wikibase\Utils;
 
@@ -63,25 +68,21 @@ class EditEntity extends ModifyEntity {
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
-		if ( isset( $params['data'] ) ) {
-			$this->flags |= EDIT_NEW;
-			if ( isset($params['id']) ) {
-				switch ( $params['data'] ) {
-				case 'item':
-					return ItemContent::newEmpty();
-				case 'property':
-					return \Wikibase\PropertyContent::newEmpty();
-				case 'query':
-					return \Wikibase\QueryContent::newEmpty();
-				default:
-					$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
-				}
-			}
-			else {
-				return ItemContent::newEmpty();
-			}
+		if ( isset( $params['id'] ) ) {
+			$this->dieUsage( "Parameter 'id' and 'new' are not allowed to be both set in the same request", 'add-with-id' );
 		}
-		$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
+		if ( isset( $params['new'] ) ) {
+			$type = $params['new'];
+			$this->flags |= EDIT_NEW;
+			$entityContentFactory = EntityContentFactory::singleton();
+			try {
+				return $entityContentFactory->newFromType( $type );
+			} catch ( InvalidArgumentException $e ) {
+				$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
+			}
+		} else {
+			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'no-such-entity' );
+		}
 	}
 
 	/**
@@ -126,6 +127,15 @@ class EditEntity extends ModifyEntity {
 			$entityContent->getEntity()->clear();
 		}
 
+		// if we create a new property, make sure we set the datatype
+		if ( $entityContent->isNew() && $entity->getType() === Property::ENTITY_TYPE ) {
+			if ( !isset( $data['datatype'] ) ) {
+				$this->dieUsage( 'No datatype given', 'edit-entity-create-property-failed' );
+			} else {
+				$entity->setDataTypeId( $data['datatype'] );
+			}
+		}
+
 		if ( array_key_exists( 'labels', $data ) ) {
 			$changeOps->add( $this->getLabelChangeOps( $data['labels'], $status ) );
 		}
@@ -157,20 +167,15 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( 'Change could not be applied to entity', 'edit-entity-apply-failed' );
 		}
 
-		// This is already done in createEntity
-		if ( $entityContent->isNew() ) {
-			// if the entity doesn't exist yet, create it
-			$this->flags |= EDIT_NEW;
-		}
-
-		$entity = $entityContent->getEntity();
+		//$entity = $entityContent->getEntity();
 		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
 
 		// TODO: This is a temporary fix that should be handled properly with a
 		// serializer class that is specific for the given entity
-		if ( $entityContent->getEntity()->getType() === Item::ENTITY_TYPE ) {
+		//if ( $entityContent->getEntity()->getType() === Item::ENTITY_TYPE ) {
+		if ( $entity->getType() === Item::ENTITY_TYPE ) {
 			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
 		}
 
@@ -372,7 +377,8 @@ class EditEntity extends ModifyEntity {
 			'labels',
 			'descriptions',
 			'aliases',
-			'sitelinks' );
+			'sitelinks',
+			'datatype' );
 
 		if ( is_null( $data ) ) {
 			wfProfileOut( __METHOD__ );
@@ -459,6 +465,9 @@ class EditEntity extends ModifyEntity {
 					ApiBase::PARAM_TYPE => 'boolean',
 					ApiBase::PARAM_DFLT => false
 				),
+				'new' => array(
+					ApiBase::PARAM_TYPE => 'string',
+				),
 			)
 		);
 	}
@@ -481,6 +490,9 @@ class EditEntity extends ModifyEntity {
 				),
 				'clear' => array( 'If set, the complete emptied is emptied before proceeding.',
 					'The entity will not be saved before it is filled with the "data", possibly with parts excluded.'
+				),
+				'new' => array( 'bla.',
+					'blubb.'
 				),
 			)
 		);
