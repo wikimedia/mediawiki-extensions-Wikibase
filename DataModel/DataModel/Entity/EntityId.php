@@ -285,7 +285,18 @@ class EntityId extends \DataValues\DataValueObject {
 	 * @return \DataValues\DataValue
 	 */
 	public static function newFromArray( $data ) {
-		self::requireArrayFields( $data, array( 'entity-type', 'numeric-id' ) );
+		if ( !is_array( $data ) ) {
+			throw new IllegalValueException( "array expected" );
+		}
+
+		if ( !array_key_exists( 'entity-type', $data ) ) {
+			throw new IllegalValueException( "'entity-type' field required" );
+		}
+
+		if ( !array_key_exists( 'numeric-id', $data ) ) {
+			throw new IllegalValueException( "'numeric-id' field required" );
+		}
+
 		return new static( $data['entity-type'], $data['numeric-id'] );
 	}
 
