@@ -12,10 +12,6 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-require_once( __DIR__ . '/../../DataValues/DataValues/DataValues.php' );
-
-require_once( __DIR__ . '/../../Diff/Diff.php' );
-
 require_once( __DIR__ . '/../WikibaseDataModel.php' );
 
 require_once( __DIR__ . '/testLoader.php' );

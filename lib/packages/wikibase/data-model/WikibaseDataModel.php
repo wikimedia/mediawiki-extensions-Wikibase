@@ -41,6 +41,16 @@ if ( ( !defined( 'Diff_VERSION' ) || !defined( 'DataValues_VERSION' ) )
 	include_once( __DIR__ . '/vendor/autoload.php' );
 }
 
+// Attempt to include the DataValues lib if that hasn't been done yet.
+if ( !defined( 'DataValues_VERSION' ) && file_exists( __DIR__ . '/../DataValues/DataValues.php' ) ) {
+	include_once( __DIR__ . '/../DataValues/DataValues.php' );
+}
+
+// Attempt to include the Diff lib if that hasn't been done yet.
+if ( !defined( 'Diff_VERSION' ) && file_exists( __DIR__ . '/../Diff/Diff.php' ) ) {
+	include_once( __DIR__ . '/../Diff/Diff.php' );
+}
+
 // @codeCoverageIgnoreStart
 spl_autoload_register( function ( $className ) {
 	static $classes = false;
