@@ -36,41 +36,6 @@ use Sites;
 class SiteLink {
 
 	/**
-	 * Creates a new SiteLink representing a link to the given page on the given site. The page title is normalized
-	 * for the SiteLink object is created. If you already have a normalized page title, use the constructor directly.
-	 *
-	 * @note  : If $normalize is set, this may cause an API request to the remote site, so beware that this function may
-	 *          be slow slow and depend on an external service.
-	 *
-	 * @deprecated since 0.4, use the constructor or Site::newForType
-	 *
-	 * @param String $globalSiteId     The site's global ID
-	 * @param String $page       The target page's title
-	 * @param bool   $normalize  Whether the page title should be normalized (default: false)
-	 *
-	 * @see \Wikibase\Site::normalizePageName()
-	 *
-	 * @return \Wikibase\SiteLink the new SiteLink
-	 * @throws \MWException if the $siteID isn't known.
-	 */
-	public static function newFromText( $globalSiteId, $page, $normalize = null ) {
-		if ( $normalize !== null ) {
-			throw new \Exception( 'Support for $normalize parameter has been dropped' );
-		}
-
-		$site = Sites::singleton()->getSite( $globalSiteId );
-
-		if ( !$site ) {
-			$site = new Site();
-			$site->setGlobalId( $globalSiteId );
-		}
-
-		return new SiteLink( $site, $page );
-	}
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/**
 	 * @since 0.1
 	 * @var String
 	 */

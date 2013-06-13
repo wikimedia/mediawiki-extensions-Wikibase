@@ -787,7 +787,13 @@ class EditEntityActionTest extends ActionTestCase {
 		}
 
 		if ( isset( $expected['sitelinks'] ) ) {
-			$this->assertArrayEquals( $expected['sitelinks'], SiteLink::siteLinksToArray( $item->getSiteLinks() ), false, true );
+			$actual = array();
+
+			foreach ( $item->getSimpleSiteLinks() as $siteLink ) {
+				$actual[$siteLink->getSiteId()] = $siteLink->getPageName();
+			}
+
+			$this->assertArrayEquals( $expected['sitelinks'], $actual, false, true );
 		}
 
 		self::resetTestItem( $handle );

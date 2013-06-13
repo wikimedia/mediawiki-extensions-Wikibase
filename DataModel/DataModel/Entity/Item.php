@@ -112,25 +112,6 @@ class Item extends Entity {
 	}
 
 	/**
-	 * Returns the site links in an associative array with the following format:
-	 * site id (str) => SiteLink
-	 *
-	 * @since 0.1
-	 * @deprecated since 0.4, use getSimpleSiteLinks instead
-	 *
-	 * @return array a list of SiteLink objects
-	 */
-	public function getSiteLinks() {
-		$links = array();
-
-		foreach ( $this->data['links'] as $globalSiteId => $title ) {
-			$links[] = SiteLink::newFromText( $globalSiteId, $title );
-		}
-
-		return $links;
-	}
-
-	/**
 	 * @since 0.4
 	 *
 	 * @return SimpleSiteLink[]

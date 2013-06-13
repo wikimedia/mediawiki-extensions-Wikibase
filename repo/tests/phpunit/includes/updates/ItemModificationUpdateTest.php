@@ -62,7 +62,7 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 
 		$item = $itemContent->getItem();
 
-		$expected = count( $item->getSiteLinks() );
+		$expected = count( $item->getSimpleSiteLinks() );
 		$actual = $linkLookup->countLinks( array( $item->getId()->getNumericId() ) );
 
 		$this->assertEquals(
