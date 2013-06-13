@@ -17,7 +17,6 @@
             <directory>tests/phpunit</directory>
             <exclude>tests/phpunit/Entity/ItemTest.php</exclude>
             <exclude>tests/phpunit/Entity/PropertyTest.php</exclude>
-            <exclude>tests/phpunit/Entity/ItemNewEmptyTest.php</exclude>
             <exclude>tests/phpunit/ItemDiffTest.php</exclude>
             <exclude>tests/phpunit/SiteLinkTest.php</exclude>
         </testsuite>
