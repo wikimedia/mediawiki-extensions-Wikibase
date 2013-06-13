@@ -42,3 +42,10 @@ $messages['en'] = array(
 $messages['qqq'] = array(
 	'wikibasedatamodel-desc' => '{{desc|name=Wikibase DataModel|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}',
 );
+
+/** German (Deutsch)
+ * @author Metalhead64
+ */
+$messages['de'] = array(
+	'wikibasedatamodel-desc' => 'Komponente, die das Wikibase-Datenmodell definiert',
+);
