@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D0yRdHh8",
+        "filename": "DataModel/DataModel/Entity/Entity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-13T10:22:34Z",
+      "side": 1,
+      "message": "Hrm, would be great to have a UnserializeException or a CorruptDataException or some such.\n\nTo paraphrase your book: the important bit is when and where the exception gets caught. It\u0027s useful to be able to specifically catch exception caused by the attempt to unserialize broken data.",
+      "revId": "2b4c0895a3d72c9f0ec85ed2787a02bd269ae9ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
