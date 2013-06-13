@@ -60,20 +60,6 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::findEntity()
-	 */
-	protected function findEntity( array $params ) {
-		$entityContent = parent::findEntity( $params );
-
-		// If we found anything then check if it is of the correct base class
-		if ( is_object( $entityContent ) && !( $entityContent instanceof EntityContent ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-wrong-class' )->text(), 'wrong-class' );
-		}
-
-		return $entityContent;
-	}
-
-	/**
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
@@ -155,7 +141,7 @@ class EditEntity extends ModifyEntity {
 		if ( array_key_exists( 'sitelinks', $data ) ) {
 			if ( $entity->getType() !== Item::ENTITY_TYPE ) {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( "key can't be handled: $props", 'not-recognized' );
+				$this->dieUsage( "key can't be handled: sitelinks", 'not-recognized' );
 			}
 
 			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $status ) );
@@ -163,7 +149,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( !$status->isOk() ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "Contained status: $1", $status->getWikiText() );
+			$this->dieUsage( "Edit failed: $1", $status->getWikiText() );
 		}
 
 		if ( $changeOps->apply( $entity ) === false ) {
@@ -196,10 +182,11 @@ class EditEntity extends ModifyEntity {
 	 * @since 0.4
 	 *
 	 * @param array $labels
+	 * @param Status $status
 	 *
 	 * @return ChangeOpLabel[]
 	 */
-	protected function getLabelChangeOps( $labels, $status ) {
+	protected function getLabelChangeOps( $labels, Status $status ) {
 		$labelChangeOps = array();
 
 		if ( !is_array( $labels ) ) {
@@ -228,10 +215,11 @@ class EditEntity extends ModifyEntity {
 	 * @since 0.4
 	 *
 	 * @param array $descriptions
+	 * @param Status $status
 	 *
 	 * @return ChangeOpdescription[]
 	 */
-	protected function getDescriptionChangeOps( $descriptions, $status ) {
+	protected function getDescriptionChangeOps( $descriptions, Status $status ) {
 		$descriptionChangeOps = array();
 
 		if ( !is_array( $descriptions ) ) {
@@ -260,10 +248,11 @@ class EditEntity extends ModifyEntity {
 	 * @since 0.4
 	 *
 	 * @param array $aliases
+	 * @param Status $status
 	 *
 	 * @return ChangeOpAliases[]
 	 */
-	protected function getAliasesChangeOps( $aliases, $status ) {
+	protected function getAliasesChangeOps( $aliases, Status $status ) {
 		$aliasesChangeOps = array();
 
 		if ( !is_array( $aliases ) ) {
@@ -312,10 +301,11 @@ class EditEntity extends ModifyEntity {
 	 * @since 0.4
 	 *
 	 * @param array $siteLinks
+	 * @param Status $status
 	 *
 	 * @return ChangeOpSiteLink[]
 	 */
-	protected function getSitelinksChangeOps( $siteLinks, $status ) {
+	protected function getSitelinksChangeOps( $siteLinks, Status $status ) {
 		$siteLinksChangeOps = array();
 
 		if ( !is_array( $siteLinks ) ) {
