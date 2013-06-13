@@ -109,6 +109,7 @@ class EditEntityTest extends ModifyItemBase {
 						'action' => 'wbeditentity',
 						'reason' => 'Some reason',
 						'data' => json_encode( self::$entity ),
+						'new' => 'item',
 					),
 					null,
 					false,
@@ -136,6 +137,7 @@ class EditEntityTest extends ModifyItemBase {
 				'reason' => 'Some reason',
 				'data' => json_encode( self::$entity ),
 				'token' => $token,
+				'new' => 'item',
 			),
 			null,
 			false,
@@ -170,6 +172,7 @@ class EditEntityTest extends ModifyItemBase {
 					'reason' => 'Some reason',
 					'data' => json_encode( array_merge( self::$entity, $data ) ),
 					'token' => $token,
+					'new' => 'item',
 				),
 				null,
 				false,
@@ -343,40 +346,6 @@ class EditEntityTest extends ModifyItemBase {
 				"not-recognized"
 			),
 
-			//-----------------------------------------------
-/*
-			// aliases have to be one list per language
-			array(
-				array(
-					"aliases" => array(
-						array( "language" => "de", "value" => "foo" ),
-					)
-				),
-				"not-recognized-array"
-			),
-
-			// labels have to be one value per language
-			array(
-				array(
-					"labels" => array(
-						array( "language" => "de", "value" => "foo" ),
-					)
-				),
-				"not-recognized-string"
-			),
-
-			// descriptions have to be one value per language
-			array(
-				array(
-					"descriptions" => array(
-						array( "language" => "de", "value" => "foo" ),
-					)
-				),
-				"not-recognized-string"
-			),
-*/
-			//-----------------------------------------------
-
 			// aliases have to use valid language codes
 			array(
 				array(
@@ -474,6 +443,7 @@ class EditEntityTest extends ModifyItemBase {
 					'reason' => 'Some reason',
 					'data' => is_string( $data ) ? $data : json_encode( $data ),
 					'token' => $token,
+					'new' => 'item',
 				),
 				null,
 				false,
