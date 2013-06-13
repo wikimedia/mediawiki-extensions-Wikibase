@@ -99,6 +99,7 @@ class V4GuidGenerator implements GuidGenerator {
 }
 
 use MWException;
+use Wikibase\EntityId;
 
 /**
  * Claim GUID generator.
@@ -138,7 +139,7 @@ class ClaimGuidGenerator implements GuidGenerator {
 	/**
 	 * @since 0.3
 	 *
-	 * @var \Wikibase\EntityId|null
+	 * @var EntityId|null
 	 */
 	protected $entityId;
 
@@ -147,7 +148,7 @@ class ClaimGuidGenerator implements GuidGenerator {
 	 *
 	 * @since 0.3
 	 */
-	public function __construct( \Wikibase\EntityId $entityId = null ) {
+	public function __construct( EntityId $entityId = null ) {
 		$this->baseGenerator = new V4GuidGenerator();
 		$this->entityId = $entityId;
 	}
