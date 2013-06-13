@@ -13,6 +13,8 @@ use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Item;
 use Wikibase\ItemContent;
+use Wikibase\PropertyContent;
+use Wikibase\QueryContent;
 use Wikibase\Autocomment;
 use Wikibase\Utils;
 
@@ -63,25 +65,21 @@ class EditEntity extends ModifyEntity {
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
-		if ( isset( $params['data'] ) ) {
+		if ( isset( $params['new'] ) ) {
 			$this->flags |= EDIT_NEW;
-			if ( isset($params['id']) ) {
-				switch ( $params['data'] ) {
-				case 'item':
-					return ItemContent::newEmpty();
-				case 'property':
-					return \Wikibase\PropertyContent::newEmpty();
-				case 'query':
-					return \Wikibase\QueryContent::newEmpty();
-				default:
-					$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
-				}
-			}
-			else {
+			switch ( $params['new'] ) {
+			case 'item':
 				return ItemContent::newEmpty();
+			case 'property':
+				return PropertyContent::newEmpty();
+			case 'query':
+				return QueryContent::newEmpty();
+			default:
+				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 			}
+		} else {
+			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'no-such-entity' );
 		}
-		$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 	}
 
 	/**
@@ -428,7 +426,6 @@ class EditEntity extends ModifyEntity {
 			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
 			array( 'code' => 'add-sitelink-failed', 'info' => $this->msg( 'wikibase-api-add-sitelink-failed' )->text() ),
 			array( 'code' => 'illegal-field', 'info' => $this->msg( 'wikibase-api-illegal-field' )->text() ),
-			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
 			array( 'code' => 'not-recognized-string', 'info' => $this->msg( 'wikibase-api-not-recognized-string' )->text() ),
 			array( 'code' => 'not-recognized-array', 'info' => $this->msg( 'wikibase-api-not-recognized-array' )->text() ),
 			array( 'code' => 'inconsistent-language', 'info' => $this->msg( 'wikibase-api-inconsistent-language' )->text() ),
@@ -458,6 +455,9 @@ class EditEntity extends ModifyEntity {
 				'clear' => array(
 					ApiBase::PARAM_TYPE => 'boolean',
 					ApiBase::PARAM_DFLT => false
+				),
+				'new' => array(
+					ApiBase::PARAM_TYPE => 'string',
 				),
 			)
 		);
