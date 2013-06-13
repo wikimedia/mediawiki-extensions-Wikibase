@@ -97,7 +97,12 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	 * @return array of array
 	 */
 	public function getConflictsForItem( Item $item, \DatabaseBase $db = null ) {
-		$newLinks = SiteLink::siteLinksToArray( $item->getSiteLinks() );
+		$newLinks = array();
+
+		foreach ( $item->getSimpleSiteLinks() as $siteLink ) {
+			$newLinks[$siteLink->getSiteId()] = $siteLink->getPageName();
+		}
+
 		$conflicts = array();
 
 		foreach ( array_keys( $this->entities ) as $id ) {
@@ -188,9 +193,8 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 
 		$numId = $item->getId()->getNumericId();
 
-		/* @var SiteLink $link */
-		foreach ( $item->getSiteLinks() as $link ) {
-			$key = $link->getSite()->getGlobalId() . ':' . $link->getPage();
+		foreach ( $item->getSimpleSiteLinks() as $siteLink ) {
+			$key = $siteLink->getSiteId() . ':' . $siteLink->getPageName();
 			$this->itemByLink[$key] = $numId;
 		}
 	}
