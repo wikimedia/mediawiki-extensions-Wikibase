@@ -2,10 +2,14 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 use MWException;
 
 /**
  * Factory for creating new snaks.
+ *
+ * FIXME: right now this is dependent on retrieving properties. It thus does not
+ * fit in the DataModel component. Perhaps it can be moved to Wikibase lib.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,15 +46,29 @@ class SnakFactory {
 	 *
 	 * @return Snak
 	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function newSnak( EntityId $propertyId, $snakType, $snakValue = null ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new MWException( 'Expected an EntityId of a property' );
+			throw new InvalidArgumentException( 'Expected an EntityId of a property' );
 		}
 
 		switch ( $snakType ) {
 			case 'value':
-				$snak = PropertyValueSnak::newFromPropertyValue( $propertyId, $snakValue );
+				$content = EntityContentFactory::singleton()->getFromId( $propertyId );
+
+				if ( $content === null ) {
+					throw new MWException( 'Cannot create a DataValue for a non-existing property' );
+				}
+
+				/**
+				 * @var Property $property
+				 */
+				$property = $content->getEntity();
+
+				$dataValue = \DataValues\DataValueFactory::singleton()->newDataValue( $property->getDataType()->getDataValueType(), $snakValue );
+
+				$snak = new PropertyValueSnak( $propertyId, $dataValue );
 				break;
 			case 'novalue':
 				$snak = new PropertyNoValueSnak( $propertyId );
