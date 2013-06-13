@@ -1,9 +1,0 @@
-The SQLStore component is dependent on
-
-* DataValues library
-* Ask library
-* Wikibase DataModel component
-* Wikibase\QueryEngine component
-* Wikibase\Database component
-
-And nothing else.
