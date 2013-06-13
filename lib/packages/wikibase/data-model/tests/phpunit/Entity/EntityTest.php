@@ -17,6 +17,7 @@ use Wikibase\ObjectComparer;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
+use Wikibase\Statement;
 
 /**
  * Tests for the Wikibase\Entity deriving classes.
@@ -371,13 +372,13 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 				true
 			),
 			array( #2
-				array( 'entity' => 'x23' ),
+				array( 'entity' => array( 'item', 23 ) ),
 				array(),
 				true
 			),
 			array( #3
-				array( 'entity' => 'x23' ),
-				array( 'entity' => 'x24' ),
+				array( 'entity' => array( 'item', 23 ) ),
+				array( 'entity' => array( 'item', 24 ) ),
 				true
 			),
 			array( #4
@@ -479,7 +480,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 		// The equality method alone is not enough since it does not check the IDs.
 		$this->assertTrue( $entity->equals( $copy ) );
-		$this->assertEquals( $entity->getPrefixedId(), $copy->getPrefixedId() );
+		$this->assertEquals( $entity->getId(), $copy->getId() );
 
 		// More checks that should also pass
 		$this->assertEquals( $entity, $copy );
@@ -500,7 +501,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$instance = unserialize( $string );
 
 		$this->assertTrue( $entity->equals( $instance ) );
-		$this->assertEquals( $entity->getPrefixedId(), $instance->getPrefixedId() );
+		$this->assertEquals( $entity->getId(), $instance->getId() );
 	}
 
 	public function baseIdProvider() {
@@ -624,7 +625,8 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$snak = new PropertyNoValueSnak( 42 );
-		$claim = $entity->newClaim( $snak );
+		$claim = new Statement( $snak );
+		$claim->setGuid( 'q42$foobarbaz' );
 
 		$this->assertInstanceOf( '\Wikibase\Claim', $claim );
 
@@ -636,24 +638,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 		$prefixedEntityId = Entity::getIdFromClaimGuid( $guid );
 
-		$this->assertEquals( $entity->getPrefixedId(), $prefixedEntityId );
-	}
-
-	public function testNewClaimMore() {
-		$snak = new PropertyNoValueSnak( 42 );
-		$item = Item::newEmpty();
-
-		$mockId = new EntityId( Item::ENTITY_TYPE, 9001 );
-		$generator = new ClaimGuidGenerator( $mockId );
-
-		$claim = $item->newClaim( $snak, $generator );
-		$guid = $claim->getGuid();
-
-		$this->assertInternalType( 'string', $guid );
-
-		$prefixedEntityId = Entity::getIdFromClaimGuid( $guid );
-
-		$this->assertEquals( $mockId->getPrefixedId(), $prefixedEntityId );
+		$this->assertEquals( 'q42', $prefixedEntityId );
 	}
 
 	public function diffProvider() {
