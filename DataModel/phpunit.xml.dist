@@ -18,7 +18,6 @@
             <exclude>tests/phpunit/Entity/ItemTest.php</exclude>
             <exclude>tests/phpunit/Entity/PropertyTest.php</exclude>
             <exclude>tests/phpunit/ItemDiffTest.php</exclude>
-            <exclude>tests/phpunit/SiteLinkTest.php</exclude>
         </testsuite>
         <testsuite name="WikibaseDataModelAll">
             <directory>tests/phpunit</directory>
