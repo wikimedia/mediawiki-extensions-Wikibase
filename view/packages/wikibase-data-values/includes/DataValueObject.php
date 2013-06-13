@@ -91,4 +91,26 @@ abstract class DataValueObject implements DataValue {
 		);
 	}
 
+	/**
+	 * Checks that $data is an array and contains the given fields.
+	 *
+	 * @param mixed $data
+	 * @param array $fields
+	 *
+	 * @todo: this should be removed once we got rid of all the static newFromArray() methods.
+	 *
+	 * @throws IllegalValueException
+	 */
+	protected static function requireArrayFields( $data, array $fields ) {
+		if ( !is_array( $data ) ) {
+			throw new IllegalValueException( "array expected" );
+		}
+
+		foreach ( $fields as $field ) {
+			if ( !array_key_exists( $field, $data ) ) {
+				throw new IllegalValueException( "$field field required" );
+			}
+		}
+	}
+
 }

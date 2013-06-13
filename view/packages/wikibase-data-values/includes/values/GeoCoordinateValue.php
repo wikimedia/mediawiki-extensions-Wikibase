@@ -272,11 +272,14 @@ class GeoCoordinateValue extends DataValueObject {
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $data
+	 * @param mixed $data
 	 *
 	 * @return GeoCoordinateValue
+	 * @throws IllegalValueException
 	 */
-	public static function newFromArray( array $data ) {
+	public static function newFromArray( $data ) {
+		self::requireArrayFields( $data, array( 'latitude', 'longitude', 'altitude', 'precision', 'globe' ) );
+
 		return new static(
 			$data['latitude'],
 			$data['longitude'],

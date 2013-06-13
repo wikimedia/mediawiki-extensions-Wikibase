@@ -153,15 +153,21 @@ class MultilingualTextValue extends DataValueObject {
 
 	/**
 	 * Constructs a new instance of the DataValue from the provided data.
-	 * This can round-trip with @see getArrayValue
+	 * This can round-trip with
+	 * @see   getArrayValue
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $data
+	 * @param mixed $data
 	 *
-	 * @return MultilingualTextValue
+	 * @throws IllegalValueException
+	 * @return MultilingualTextValue if $data is not an array.
 	 */
-	public static function newFromArray( array $data ) {
+	public static function newFromArray( $data ) {
+		if ( !is_array( $data ) ) {
+			throw new IllegalValueException( "array expected" );
+		}
+
 		$values = array();
 
 		foreach ( $data as $monolingualValue ) {

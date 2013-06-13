@@ -208,11 +208,13 @@ class QuantityValue extends DataValueObject {
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $data
+	 * @param mixed $data
 	 *
 	 * @return QuantityValue
+	 * @throws IllegalValueException
 	 */
-	public static function newFromArray( array $data ) {
+	public static function newFromArray( $data ) {
+		self::requireArrayFields( $data, array( 'value', 'unit', 'accuracy' ) );
 		return new static( $data['value'], $data['unit'], $data['accuracy'] );
 	}
 

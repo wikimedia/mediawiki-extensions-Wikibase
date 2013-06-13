@@ -276,11 +276,14 @@ class IriValue extends DataValueObject {
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $data
+	 * @param mixed $data
 	 *
 	 * @return IriValue
+	 * @throws IllegalValueException
 	 */
-	public static function newFromArray( array $data ) {
+	public static function newFromArray( $data ) {
+		self::requireArrayFields( $data, array( 'scheme', 'hierarchicalpart', 'query', 'fragment' ) );
+
 		return new static( $data['scheme'], $data['hierarchicalpart'], $data['query'], $data['fragment'] );
 	}
 
