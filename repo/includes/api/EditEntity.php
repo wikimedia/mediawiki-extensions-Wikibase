@@ -60,20 +60,6 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::findEntity()
-	 */
-	protected function findEntity( array $params ) {
-		$entityContent = parent::findEntity( $params );
-
-		// If we found anything then check if it is of the correct base class
-		if ( is_object( $entityContent ) && !( $entityContent instanceof EntityContent ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-wrong-class' )->text(), 'wrong-class' );
-		}
-
-		return $entityContent;
-	}
-
-	/**
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
