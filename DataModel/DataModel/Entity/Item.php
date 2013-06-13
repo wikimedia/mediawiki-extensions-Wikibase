@@ -46,32 +46,6 @@ class Item extends Entity {
 	protected $statements = null;
 
 	/**
-	 * Adds a site link.
-	 *
-	 * @since 0.1
-	 * @deprecated since 0.4, use addSimpleSiteLink instead
-	 *
-	 * @param SiteLink $link the link to the target page
-	 * @param string $updateType
-	 *
-	 * @return SiteLink|bool Returns the link on success, or false on failure
-	 */
-	public function addSiteLink( SiteLink $link, $updateType = 'add' ) {
-		$siteId = $link->getSite()->getGlobalId();
-
-		$success =
-			( $updateType === 'add' && !array_key_exists( $siteId, $this->data['links'] ) )
-				|| ( $updateType === 'update' && array_key_exists( $siteId, $this->data['links'] ) )
-				|| ( $updateType === 'set' );
-
-		if ( $success ) {
-			$this->data['links'][$siteId] = $link->getPage();
-		}
-
-		return $success ? $link : false;
-	}
-
-	/**
 	 * Adds a site link to the list of site links.
 	 * If there already is a site link with the site id of the provided site link,
 	 * then that one will be overridden by the provided one.

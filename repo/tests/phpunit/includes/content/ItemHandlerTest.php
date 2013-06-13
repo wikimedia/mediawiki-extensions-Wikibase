@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\DataModel\SimpleSiteLink;
 use \Wikibase\ItemContent;
 
 /**
@@ -64,7 +65,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 		 * @var ItemContent $content
 		 */
 		$content = clone $contents[1][0];
-		$content->getItem()->addSiteLink( new \Wikibase\SiteLink( \Sites::newSite( 'enwiki' ), 'Foobar' ) );
+		$content->getItem()->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foobar' ) );
 		$contents[] = array( $content );
 
 		return $contents;
