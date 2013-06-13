@@ -179,7 +179,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.add_sitelinks([["sr", "Helijum"]])
+        page.add_sitelinks([["српски", "Helijum"]])
         page.pageArticleNormalized?.should be_true
         page.pageArticleNormalized_element.text.should == "Хелијум"
       end
@@ -238,26 +238,26 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.get_text_from_sitelist_table(1, 1).should == "de"
-        page.get_text_from_sitelist_table(2, 1).should == "en"
-        page.get_text_from_sitelist_table(3, 1).should == "fr"
-        page.get_text_from_sitelist_table(4, 1).should == "he"
-        page.get_text_from_sitelist_table(5, 1).should == "ja"
-        page.get_text_from_sitelist_table(6, 1).should == "sr"
+        page.get_text_from_sitelist_table(1, 1).should == "dewiki"
+        page.get_text_from_sitelist_table(2, 1).should == "enwiki"
+        page.get_text_from_sitelist_table(3, 1).should == "frwiki"
+        page.get_text_from_sitelist_table(4, 1).should == "hewiki"
+        page.get_text_from_sitelist_table(5, 1).should == "jawiki"
+        page.get_text_from_sitelist_table(6, 1).should == "srwiki"
         page.sitelinksHeaderLanguage_element.click
-        page.get_text_from_sitelist_table(1, 1).should == "de"
-        page.get_text_from_sitelist_table(2, 1).should == "en"
-        page.get_text_from_sitelist_table(3, 1).should == "fr"
-        page.get_text_from_sitelist_table(4, 1).should == "sr"
-        page.get_text_from_sitelist_table(5, 1).should == "he"
-        page.get_text_from_sitelist_table(6, 1).should == "ja"
+        page.get_text_from_sitelist_table(1, 1).should == "dewiki"
+        page.get_text_from_sitelist_table(2, 1).should == "enwiki"
+        page.get_text_from_sitelist_table(3, 1).should == "frwiki"
+        page.get_text_from_sitelist_table(4, 1).should == "srwiki"
+        page.get_text_from_sitelist_table(5, 1).should == "hewiki"
+        page.get_text_from_sitelist_table(6, 1).should == "jawiki"
         page.sitelinksHeaderCode_element.click
-        page.get_text_from_sitelist_table(1, 1).should == "de"
-        page.get_text_from_sitelist_table(2, 1).should == "en"
-        page.get_text_from_sitelist_table(3, 1).should == "fr"
-        page.get_text_from_sitelist_table(4, 1).should == "he"
-        page.get_text_from_sitelist_table(5, 1).should == "ja"
-        page.get_text_from_sitelist_table(6, 1).should == "sr"
+        page.get_text_from_sitelist_table(1, 1).should == "dewiki"
+        page.get_text_from_sitelist_table(2, 1).should == "enwiki"
+        page.get_text_from_sitelist_table(3, 1).should == "frwiki"
+        page.get_text_from_sitelist_table(4, 1).should == "hewiki"
+        page.get_text_from_sitelist_table(5, 1).should == "jawiki"
+        page.get_text_from_sitelist_table(6, 1).should == "srwiki"
       end
     end
 
