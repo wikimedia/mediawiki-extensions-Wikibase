@@ -47,14 +47,13 @@ use Wikibase\SnakRole;
 class Writer implements QueryStoreWriter {
 
 	private $entityInserter;
+	private $entityUpdater;
+	private $entityRemover;
 
-	/**
-	 * @since 0.1
-	 *
-	 * @param EntityInserter $entityInserter
-	 */
-	public function __construct( EntityInserter $entityInserter ) {
-		$this->entityInserter = $entityInserter;
+	public function __construct( EntityInserter $inserter, EntityUpdater $updater, EntityRemover $remover ) {
+		$this->entityInserter = $inserter;
+		$this->entityUpdater = $updater;
+		$this->entityRemover = $remover;
 	}
 
 	/**
@@ -76,7 +75,7 @@ class Writer implements QueryStoreWriter {
 	 * @param Entity $entity
 	 */
 	public function updateEntity( Entity $entity ) {
-		// TODO
+		$this->entityUpdater->updateEntity( $entity );
 	}
 
 	/**
@@ -87,7 +86,7 @@ class Writer implements QueryStoreWriter {
 	 * @param Entity $entity
 	 */
 	public function deleteEntity( Entity $entity ) {
-		// TODO
+		$this->entityRemover->removeEntity( $entity );
 	}
 
 }
