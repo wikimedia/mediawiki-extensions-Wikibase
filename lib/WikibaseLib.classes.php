@@ -54,6 +54,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\PropertyNotFoundException' => 'includes/PropertyNotFoundException.php',
 		'Wikibase\Settings' => 'includes/Settings.php',
 		'Wikibase\SettingsArray' => 'includes/SettingsArray.php',
+		'Wikibase\SiteLink' => 'includes/SiteLink.php',
 		'Wikibase\Lib\SnakFormatter' => 'includes/SnakFormatter.php',
 		'Wikibase\Term' => 'includes/Term.php',
 		'Wikibase\Lib\TermsToClaimsTranslator' => 'includes/TermsToClaimsTranslator.php',
