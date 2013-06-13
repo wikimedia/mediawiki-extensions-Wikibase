@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase, MWException;
 
+use DataValues\IllegalValueException;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
@@ -128,13 +129,17 @@ class SetReference extends ApiWikibase {
 		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
 		$snakUnserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Snak' );
 
-		foreach ( $rawSnaks as $byPropertySnaks ) {
-			if ( !is_array( $byPropertySnaks ) ) {
-				$this->dieUsage( 'Invalid snak JSON given', 'setreference-invalid-snaks' );
+		try {
+			foreach ( $rawSnaks as $byPropertySnaks ) {
+				if ( !is_array( $byPropertySnaks ) ) {
+					$this->dieUsage( 'Invalid snak JSON given', 'setreference-invalid-snaks' );
+				}
+				foreach ( $byPropertySnaks as $rawSnak ) {
+					$snaks[] = $snakUnserializer->newFromSerialization( $rawSnak );
+				}
 			}
-			foreach ( $byPropertySnaks as $rawSnak ) {
-				$snaks[] = $snakUnserializer->newFromSerialization( $rawSnak );
-			}
+		} catch ( IllegalValueException $ex ) {
+			$this->dieUsage( $ex->getMessage(), 'setreference-invalid-snaks' );
 		}
 
 		return $snaks;

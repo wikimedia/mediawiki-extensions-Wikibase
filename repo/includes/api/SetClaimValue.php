@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase, MWException;
 
+use DataValues\IllegalValueException;
 use Wikibase\Autocomment;
 use Wikibase\EntityId;
 use Wikibase\Entity;
@@ -143,11 +144,16 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 			$constructorArguments[] = $content->getProperty()->newDataValue( $value );
 		}
 
-		$claim->setMainSnak( SnakObject::newFromType( $snakType, $constructorArguments ) );
+		try {
+			$snak = SnakObject::newFromType( $snakType, $constructorArguments );
+			$claim->setMainSnak( $snak );
 
-		$entity->setClaims( $claims );
+			$entity->setClaims( $claims );
 
-		return $claim;
+			return $claim;
+		} catch ( IllegalValueException $ex ) {
+			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-snak' );
+		}
 	}
 
 	/**

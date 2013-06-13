@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use DataValues\IllegalValueException;
+use InvalidArgumentException;
 use MWException;
 
 /**
@@ -36,16 +38,17 @@ class SnakFactory {
 	 *
 	 * @since 0.3
 	 *
-	 * @param EntityId $propertyId
-	 * @param string $snakType
+	 * @param EntityId    $propertyId
+	 * @param string      $snakType
 	 * @param string|null $snakValue
 	 *
+	 * @throws IllegalValueException
+	 * @throws InvalidArgumentException
 	 * @return Snak
-	 * @throws MWException
 	 */
 	public function newSnak( EntityId $propertyId, $snakType, $snakValue = null ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new MWException( 'Expected an EntityId of a property' );
+			throw new InvalidArgumentException( 'Expected an EntityId of a property' );
 		}
 
 		switch ( $snakType ) {
@@ -60,9 +63,7 @@ class SnakFactory {
 				break;
 		}
 
-		if ( !isset( $snak ) ) {
-			throw new MWException( '$snak was not set to an instance of Snak' );
-		}
+		assert( isset( $snak ) );
 
 		return $snak;
 	}

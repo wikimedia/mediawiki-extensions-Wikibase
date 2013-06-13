@@ -2,6 +2,7 @@
 
 namespace Wikibase\Api;
 
+use DataValues\IllegalValueException;
 use Diff\CallbackListDiffer;
 use MWException;
 use ApiBase;
@@ -105,11 +106,15 @@ class SetClaim extends ApiWikibase {
 		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
 
 		$params = $this->extractRequestParams();
-		$claim = $unserializer->newFromSerialization( \FormatJson::decode( $params['claim'], true ) );
 
-		assert( $claim instanceof Claim );
+		try {
+			$claim = $unserializer->newFromSerialization( \FormatJson::decode( $params['claim'], true ) );
 
-		return $claim;
+			assert( $claim instanceof Claim );
+			return $claim;
+		} catch ( IllegalValueException $ex ) {
+			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-claim' );
+		}
 	}
 
 	/**

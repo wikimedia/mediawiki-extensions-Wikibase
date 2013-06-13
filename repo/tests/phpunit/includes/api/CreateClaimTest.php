@@ -123,7 +123,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'value' => '"foo"',
 		);
 
-		$argLists[] = array( 'unknownerror', $params );
+		$argLists[] = array( 'claim-invalid-snak', $params );
 
 		$params = array(
 			'action' => 'wbcreateclaim',
@@ -166,6 +166,16 @@ class CreateClaimTest extends \ApiTestCase {
 		);
 
 		$argLists[] = array( 'claim-value-missing', $params );
+
+		$params = array(
+			'action' => 'wbcreateclaim',
+			'entity' => '-',
+			'snaktype' => 'value',
+			'property' => '-',
+			'value' => '{"x":"foo", "y":"bar"}',
+		);
+
+		$argLists[] = array( 'claim-invalid-snak', $params );
 
 		return $argLists;
 	}
