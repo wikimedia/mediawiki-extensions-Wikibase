@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "D08FMBHQ",
+        "filename": "DataModel/DataModel/Snak/SnakFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-13T04:43:24Z",
+      "side": 1,
+      "message": "I\u0027m not convinced this class is a good idea and might ditch it very soon. So given that I am just inlining a method and not making changes, creating a test for it now seems odd",
+      "parentUuid": "D00z3rtI",
+      "revId": "514fd220ea041f41858c5bd2bba7623eaf311c88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D02z6crw",
         "filename": "DataModel/DataModel/Snak/SnakFactory.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "D06FJAGM",
+        "filename": "DataModel/DataModel/Snak/SnakFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-13T04:43:24Z",
+      "side": 1,
+      "message": "This code got inlined here, so the badness of it is more contained. The problem you are pointing out was already there, and fixing it is not what this commit is about",
+      "parentUuid": "D02z6crw",
+      "revId": "514fd220ea041f41858c5bd2bba7623eaf311c88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D00xujpg",
         "filename": "DataModel/DataModel/Snak/SnakFactory.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2013-06-12T15:49:22Z",
       "side": 1,
       "message": "Wouldn\u0027t it be nice if the Snak just knew it\u0027s data type?",
+      "revId": "514fd220ea041f41858c5bd2bba7623eaf311c88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0wF3LKA",
+        "filename": "DataModel/DataModel/Snak/SnakFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-13T04:43:24Z",
+      "side": 1,
+      "message": "This code got inlined here, so the badness of it is more contained. The problem you are pointing out was already there, and fixing it is not what this commit is about",
+      "parentUuid": "D00xujpg",
       "revId": "514fd220ea041f41858c5bd2bba7623eaf311c88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
