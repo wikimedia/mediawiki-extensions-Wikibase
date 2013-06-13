@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use DataValues\IllegalValueException;
 use MWException;
 
 use ValueParsers\ParseException;
@@ -220,10 +221,16 @@ class SetQualifier extends ApiWikibase {
 			$snakValue = null;
 		}
 
-		$factory = new SnakFactory();
-		$newQualifier = $factory->newSnak( $propertyId, $snakType, $snakValue );
+		try {
+			$factory = new SnakFactory();
+			$newQualifier = $factory->newSnak( $propertyId, $snakType, $snakValue );
 
-		return $qualifiers->addSnak( $newQualifier );
+			return $qualifiers->addSnak( $newQualifier );
+		} catch ( IllegalValueException $ex ) {
+			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-snak' );
+		}
+
+		return false; // we should never get here.
 	}
 
 	protected function getParsedEntityId( $prefixedId, $errorCode ) {
@@ -255,13 +262,19 @@ class SetQualifier extends ApiWikibase {
 
 		$propertyId = $this->getParsedEntityId( $params['property'], 'invalid-property-id' );
 
-		$newQualifier = $factory->newSnak(
-			$propertyId,
-			$params['snaktype'],
-			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
-		);
+		try {
+			$newQualifier = $factory->newSnak(
+				$propertyId,
+				$params['snaktype'],
+				isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
+			);
 
-		return $qualifiers->addSnak( $newQualifier );
+			return $qualifiers->addSnak( $newQualifier );
+		} catch ( IllegalValueException $ex ) {
+			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-snak' );
+		}
+
+		return false; // we should never get here.
 	}
 
 	/**

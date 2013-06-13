@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use MWException;
 
@@ -40,10 +41,12 @@ class SnakFactory {
 	 *
 	 * @since 0.3
 	 *
-	 * @param EntityId $propertyId
-	 * @param string $snakType
+	 * @param EntityId    $propertyId
+	 * @param string      $snakType
 	 * @param string|null $snakValue
 	 *
+	 * @throws IllegalValueException
+	 * @throws InvalidArgumentException
 	 * @return Snak
 	 * @throws MWException
 	 * @throws InvalidArgumentException
@@ -78,9 +81,7 @@ class SnakFactory {
 				break;
 		}
 
-		if ( !isset( $snak ) ) {
-			throw new MWException( '$snak was not set to an instance of Snak' );
-		}
+		assert( isset( $snak ) );
 
 		return $snak;
 	}

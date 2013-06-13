@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use ValueParsers\ParseException;
 
@@ -273,15 +274,18 @@ class EntityId extends \DataValues\DataValueObject {
 
 	/**
 	 * Constructs a new instance of the DataValue from the provided data.
-	 * This can round-trip with @see getArrayValue
+	 * This can round-trip with
+	 * @see   getArrayValue
 	 *
 	 * @since 0.4
 	 *
 	 * @param mixed $data
 	 *
+	 * @throws \DataValues\IllegalValueException
 	 * @return \DataValues\DataValue
 	 */
 	public static function newFromArray( $data ) {
+		self::requireArrayFields( $data, array( 'entity-type', 'numeric-id' ) );
 		return new static( $data['entity-type'], $data['numeric-id'] );
 	}
 

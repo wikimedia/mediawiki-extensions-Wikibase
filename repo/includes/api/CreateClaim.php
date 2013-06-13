@@ -4,6 +4,9 @@ namespace Wikibase\Api;
 
 use ApiBase, MWException;
 
+use DataValues\IllegalValueException;
+use InvalidArgumentException;
+use UsageException;
 use ValueParsers\ParseException;
 use Wikibase\EntityId;
 use Wikibase\Entity;
@@ -66,9 +69,18 @@ class CreateClaim extends ModifyClaim {
 		try {
 			$snak = $this->getSnakInstance();
 		}
-		catch ( \Exception $ex ) {
+		catch ( IllegalValueException $ex ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsageMsg( $ex->getMessage() );
+			$this->dieUsage( $ex->getMessage(), 'claim-invalid-snak' );
+		}
+		catch ( InvalidArgumentException $ex ) {
+			// shouldn't happen, but might.
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $ex->getMessage(), 'claim-invalid-snak' );
+		}
+		catch ( ParseException $parseException ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( $parseException->getMessage(), 'claim-invalid-guid' );
 		}
 
 		$claim = $this->addClaim( $entityContent->getEntity(), $snak );
@@ -168,7 +180,8 @@ class CreateClaim extends ModifyClaim {
 	 * @since 0.2
 	 *
 	 * @return Snak
-	 * @throws MWException
+	 * @throws ParseException
+	 * @throws IllegalValueException
 	 */
 	protected function getSnakInstance() {
 		$params = $this->extractRequestParams();
@@ -176,12 +189,7 @@ class CreateClaim extends ModifyClaim {
 		$factory = new SnakFactory();
 		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
-		try {
-			$entityId = $entityIdParser->parse( $params['property'] );
-		}
-		catch ( ParseException $parseException ) {
-			throw new MWException( $parseException->getMessage(), 'setclaim-invalid-guid' );
-		}
+		$entityId = $entityIdParser->parse( $params['property'] );
 
 		return $factory->newSnak(
 			$entityId,
