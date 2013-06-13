@@ -41,44 +41,29 @@ final class TestItems {
 	public static function getItems() {
 		$items = array();
 
-		//$items[] = Item::newEmpty();
+		$items[] = Item::newEmpty();
 
 		$item = Item::newEmpty();
 
 		$item->setDescription( 'en', 'foo' );
 		$item->setLabel( 'en', 'bar' );
 
-		//$items[] = $item;
+		$items[] = $item;
 
 		$item = Item::newEmpty();
 
 		$item->addAliases( 'en', array( 'foobar', 'baz' ) );
 
-		//$items[] = $item;
+		$items[] = $item;
 
 		$item = Item::newEmpty();
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'spam' ) );
 
-		$groups = \Wikibase\Settings::get( 'siteLinkGroups' );
-
-		foreach ( $groups as $group ) {
-			$sites = \SiteSQLStore::newInstance()->getSites()->getGroup( $group );
-
-			if ( count( $sites ) > 1 ) {
-			$item->addSimpleSiteLink( new SimpleSiteLink( $sites->getIterator()->current()->getGlobalId(), 'spam' ) );
-			}
-		}
-
-		//$items[] = $item;
+		$items[] = $item;
 
 		$item = Item::newEmpty();
-
-		if ( count( $sites ) > 1 ) {
-			$linksIterator = $sites->getIterator();
-
-			$item->addSimpleSiteLink( new SimpleSiteLink( $linksIterator->current()->getGlobalId(), 'spamz' ) );
-			$linksIterator->next();
-			$item->addSimpleSiteLink( new SimpleSiteLink( $linksIterator->current()->getGlobalId(), 'foobar' ) );
-		}
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'spamz' ) );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'foobar' ) );
 
 		$item->setDescription( 'en', 'foo' );
 		$item->setLabel( 'en', 'bar' );
