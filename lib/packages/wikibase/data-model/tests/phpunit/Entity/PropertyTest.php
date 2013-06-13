@@ -66,61 +66,6 @@ class PropertyTest extends EntityTest {
 		return Property::newFromArray( $data );
 	}
 
-	public function propertyProvider() {
-		$objects = array();
-
-		$objects[] = Property::newEmpty();
-
-		$entity = Property::newEmpty();
-		$entity->setDescription( 'en', 'foo' );
-		$objects[] = $entity;
-
-		$entity = Property::newEmpty();
-		$entity->setDescription( 'en', 'foo' );
-		$entity->setDescription( 'de', 'foo' );
-		$entity->setLabel( 'en', 'foo' );
-		$entity->setAliases( 'de', array( 'bar', 'baz' ) );
-		$objects[] = $entity;
-
-		$entity = $entity->copy();
-		$entity->addClaim( new Claim( new PropertyNoValueSnak(
-			new EntityId( Property::ENTITY_TYPE, 42 )
-		) ) );
-		$objects[] = $entity;
-
-		return $this->arrayWrap( $objects );
-	}
-
-	public function newDataValueProvider() {
-		$argLists = array();
-
-		$property = Property::newFromType( 'wikibase-item' );
-		$property->setId( 852645 );
-
-		$argLists[] = array( clone $property, new EntityId( Item::ENTITY_TYPE, 42 ) );
-		$argLists[] = array( clone $property, new EntityId( Item::ENTITY_TYPE, 9001 ) );
-
-		$property->setId( 852642 );
-
-		$argLists[] = array( clone $property, new EntityId( Item::ENTITY_TYPE, 9001 ) );
-
-		$property->setDataTypeId( 'commonsMedia' );
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider newDataValueProvider
-	 *
-	 * @param Property $property
-	 * @param \DataValues\DataValue $dataValue
-	 */
-	public function testNewDataValue( Property $property, \DataValues\DataValue $dataValue ) {
-		$newDataValue = $property->newDataValue( $dataValue->getArrayValue() );
-
-		$this->assertTrue( $dataValue->equals( $newDataValue ) );
-	}
-
 	public function testNewFromType() {
 		$property = Property::newFromType( 'string' );
 		$this->assertInstanceOf( 'Wikibase\Property', $property );
