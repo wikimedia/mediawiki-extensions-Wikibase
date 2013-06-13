@@ -112,7 +112,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 		// the unserializer to avoid breaking compatibility after certain changes.
 		$data['v'] = 1;
 
-		return \FormatJson::encode( $data );
+		return json_encode( $data );
 	}
 
 	/**
@@ -126,7 +126,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @throws RuntimeException
 	 */
 	public function unserialize( $value ) {
-		$unserialized = \FormatJson::decode( $value, true );
+		$unserialized = json_decode( $value, true );
 
 		if ( is_array( $unserialized ) && array_key_exists( 'v', $unserialized ) ) {
 			unset( $unserialized['v'] );
@@ -165,15 +165,27 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 */
 	public function getId() {
 		if ( $this->id === false ) {
-			if ( array_key_exists( 'entity', $this->data ) ) {
-				$this->id = EntityId::newFromPrefixedId( $this->data['entity'] );
-			}
-			else {
-				$this->id = null;
-			}
+			$this->id = $this->getUnstubbedId();
 		}
 
 		return $this->id;
+	}
+
+	protected function getUnstubbedId() {
+		if ( array_key_exists( 'entity', $this->data ) ) {
+			if ( strlen( $this->data['entity'] ) > 0 && $this->data['entity']{0} === '|' ) {
+				// This is unstubbing of the current stubbing format
+				$idParts = json_decode( substr( $this->data['entity'], 1 ), true );
+				return new EntityId( $idParts[0], $idParts[1] );
+			}
+			else {
+				// This is unstubbing of the legacy stubbing format
+				return EntityId::newFromPrefixedId( $this->data['entity'] );
+			}
+		}
+		else {
+			return null;
+		}
 	}
 
 	/**
@@ -544,13 +556,10 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @return boolean
 	 */
 	public function isEmpty() {
-		wfProfileIn( __METHOD__ );
-
 		$fields = array( 'label', 'description', 'aliases' );
 
 		foreach ( $fields as $field ) {
 			if ( $this->data[$field] !== array() ) {
-				wfProfileOut( __METHOD__ );
 				return false;
 			}
 		}
@@ -559,7 +568,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			return false;
 		}
 
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -586,8 +594,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			return false;
 		}
 
-		wfProfileIn( __METHOD__ );
-
 		//@todo: ignore the order of aliases
 		$thisData = $this->toArray();
 		$thatData = $that->toArray();
@@ -595,7 +601,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 		$comparer = new ObjectComparer();
 		$equals = $comparer->dataEquals( $thisData, $thatData, array( 'entity' ) );
 
-		wfProfileOut( __METHOD__ );
 		return $equals;
 	}
 
@@ -631,10 +636,21 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			}
 		}
 		else {
-			$this->data['entity'] = $this->getPrefixedId();
+			$this->data['entity'] = $this->getStubbedId();
 		}
 
 		$this->data['claims'] = $this->getStubbedClaims( empty( $this->data['claims'] ) ? array() : $this->data['claims'] );
+	}
+
+	protected function getStubbedId() {
+		$id = $this->getId();
+
+		if ( $id === null ) {
+			return $id;
+		}
+		else {
+			return '|' . json_encode( array( $id->getEntityType(), $id->getNumericId() ) );
+		}
 	}
 
 	/**
