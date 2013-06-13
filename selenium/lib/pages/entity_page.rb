@@ -13,7 +13,9 @@ class EntityPage < RubySelenium
   include SitelinkPage
   include AliasPage
   include StatementPage
+  include InputExtenderPage
   include TimePage
+  include CoordinatePage
   include ULSPage
 
   @@property_url = ""
@@ -73,6 +75,7 @@ class EntityPage < RubySelenium
   end
 
   def wait_for_entity_to_load
+    sleep 1
     wait_until do
       entitySpinner? == false
     end
