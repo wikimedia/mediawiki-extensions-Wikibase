@@ -111,20 +111,6 @@ class ItemTest extends EntityTest {
 		}
 	}
 
-	public function testGetSiteLinks() {
-		/**
-		 * @var \Wikibase\Item $item
-		 */
-		foreach ( TestItems::getItems() as $item ) {
-			$links = $item->getSiteLinks();
-			$this->assertInternalType( 'array', $links );
-
-			foreach ( $links as $link ) {
-				$this->assertInstanceOf( '\Wikibase\SiteLink', $link );
-			}
-		}
-	}
-
 	public function testIsEmpty() {
 		parent::testIsEmpty();
 

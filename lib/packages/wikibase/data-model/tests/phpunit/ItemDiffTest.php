@@ -47,6 +47,11 @@ class ItemDiffTest extends EntityDiffOldTest {
 		$originalTests = parent::generateApplyData( \Wikibase\Item::ENTITY_TYPE );
 		$tests = array();
 
+		/**
+		 * @var Item $a
+		 * @var Item $b
+		 */
+
 		// add link ------------------------------
 		$a = Item::newEmpty();
 		$a->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Test' ) );
@@ -86,10 +91,15 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		$a->patch( $a->getDiff( $b ) );
 
+		/**
+		 * @var Item $a
+		 * @var Item $b
+		 */
+
 		$this->assertEquals( $a->getLabels(), $b->getLabels() );
 		$this->assertEquals( $a->getDescriptions(), $b->getDescriptions() );
 		$this->assertEquals( $a->getAllAliases(), $b->getAllAliases() );
-		$this->assertEquals( $a->getSiteLinks(), $b->getSiteLinks() );
+		$this->assertEquals( $a->getSimpleSiteLinks(), $b->getSimpleSiteLinks() );
 	}
 
 }
