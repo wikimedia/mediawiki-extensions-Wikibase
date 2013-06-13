@@ -15,7 +15,7 @@
     <testsuites>
         <testsuite name="WikibaseDataModelWithoutMW">
             <directory>tests/phpunit</directory>
-            <exclude>tests/phpunit/Entity/ItemTest.php</exclude>
+
             <exclude>tests/phpunit/Entity/PropertyTest.php</exclude>
         </testsuite>
         <testsuite name="WikibaseDataModelAll">
