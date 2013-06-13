@@ -160,18 +160,4 @@ class Property extends Entity {
 		return self::newFromArray( array( 'datatype' => $dataTypeId ) );
 	}
 
-	/**
-	 * Factory for creating new DataValue objects for the property.
-	 *
-	 * @since 0.3
-	 * @deprecated since 0.4
-	 *
-	 * @param mixed $rawDataValue
-	 *
-	 * @return DataValue
-	 */
-	public function newDataValue( $rawDataValue ) {
-		return \DataValues\DataValueFactory::singleton()->newDataValue( $this->getDataType()->getDataValueType(), $rawDataValue );
-	}
-
 }
