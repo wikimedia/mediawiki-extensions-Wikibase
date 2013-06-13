@@ -209,6 +209,7 @@ class PermissionsTest extends ModifyItemBase {
 
 		$params = array(
 			'data' => \FormatJson::encode( $itemData ),
+			'new' => 'item',
 		);
 
 		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
