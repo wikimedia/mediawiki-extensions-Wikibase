@@ -15,6 +15,7 @@ use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\TypedValueFormatter;
+use Wikibase\Lib\WikiBaseTypeBuilders;
 use Wikibase\RepoLinker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -88,14 +89,15 @@ final class WikibaseClient {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			global $wgDataTypes;
 
-			$dataTypes = array_intersect_key(
-				$wgDataTypes,
+			$builders = new WikiBaseTypeBuilders( $this );
+
+			$typeBuilderSpecs = array_intersect_key(
+				$builders->getDataTypeBuilders(),
 				array_flip( $this->settings->getSetting( 'dataTypes' ) )
 			);
 
-			$this->dataTypeFactory = new DataTypeFactory( $dataTypes );
+			$this->dataTypeFactory = new DataTypeFactory( $typeBuilderSpecs );
 		}
 
 		return $this->dataTypeFactory;

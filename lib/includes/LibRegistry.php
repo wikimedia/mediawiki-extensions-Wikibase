@@ -8,6 +8,7 @@ use ValueParsers\ParserOptions;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\WikiBaseTypeBuilders;
 
 /**
  * Application registry for Wikibase Lib.
@@ -71,14 +72,15 @@ final class LibRegistry {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			global $wgDataTypes;
 
-			$dataTypes = array_intersect_key(
-				$wgDataTypes,
+			$builders = new WikiBaseTypeBuilders( $this );
+
+			$typeBuilderSpecs = array_intersect_key(
+				$builders->getDataTypeBuilders(),
 				array_flip( $this->settings->getSetting( 'dataTypes' ) )
 			);
 
-			$this->dataTypeFactory = new DataTypeFactory( $dataTypes );
+			$this->dataTypeFactory = new DataTypeFactory( $typeBuilderSpecs );
 		}
 
 		return $this->dataTypeFactory;
