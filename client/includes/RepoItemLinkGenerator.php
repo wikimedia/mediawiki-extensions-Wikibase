@@ -39,21 +39,25 @@ class RepoItemLinkGenerator {
 
 	protected $enableSiteLinkWidget;
 
+	protected $siteGroup;
+
 	/**
 	 * @since 0.4
 	 *
 	 * @param NamespaceChecker $namespaceChecker
-	 * @param RepoLinker $repoLinker
-	 * @param EntityIdParser $entityIdParser
-	 * @param boolean $enableSiteLinkWidget
+	 * @param RepoLinker       $repoLinker
+	 * @param EntityIdParser   $entityIdParser
+	 * @param boolean          $enableSiteLinkWidget
+	 * @param string           $siteGroup
 	 */
 	public function __construct( NamespaceChecker $namespaceChecker, RepoLinker $repoLinker,
-		EntityIdParser $entityIdParser, $enableSiteLinkWidget ) {
+		EntityIdParser $entityIdParser, $enableSiteLinkWidget, $siteGroup ) {
 
 		$this->namespaceChecker = $namespaceChecker;
 		$this->repoLinker = $repoLinker;
 		$this->entityIdParser = $entityIdParser;
 		$this->enableSiteLinkWidget = $enableSiteLinkWidget;
+		$this->siteGroup = $siteGroup;
 	}
 
 	/**
@@ -133,8 +137,10 @@ class RepoItemLinkGenerator {
 	 * @return array
 	 */
 	protected function getEditLinksLink( EntityId $entityId ) {
+		$fragment = '#sitelinks-' . htmlspecialchars( $this->siteGroup, ENT_QUOTES );
+
 		$link = array(
-			'href' => $this->repoLinker->repoItemUrl( $entityId ) . '#sitelinks',
+			'href' => $this->repoLinker->repoItemUrl( $entityId ) . $fragment,
 			'text' => wfMessage( 'wikibase-editlinks' )->text(),
 			'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
 			'class' => 'wbc-editpage',
