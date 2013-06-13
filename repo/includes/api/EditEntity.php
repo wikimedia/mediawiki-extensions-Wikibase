@@ -2,6 +2,8 @@
 
 namespace Wikibase\Api;
 
+use Wikibase\EntityContentFactory;
+use InvalidArgumentException;
 use Wikibase\ChangeOps;
 use Wikibase\ChangeOpLabel;
 use Wikibase\ChangeOpDescription;
@@ -13,6 +15,9 @@ use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\Item;
 use Wikibase\ItemContent;
+use Wikibase\PropertyContent;
+use Wikibase\Property;
+use Wikibase\QueryContent;
 use Wikibase\Autocomment;
 use Wikibase\Utils;
 
@@ -63,25 +68,18 @@ class EditEntity extends ModifyEntity {
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
-		if ( isset( $params['data'] ) ) {
-			$this->flags |= EDIT_NEW;
-			if ( isset($params['id']) ) {
-				switch ( $params['data'] ) {
-				case 'item':
-					return ItemContent::newEmpty();
-				case 'property':
-					return \Wikibase\PropertyContent::newEmpty();
-				case 'query':
-					return \Wikibase\QueryContent::newEmpty();
-				default:
-					$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
-				}
-			}
-			else {
-				return ItemContent::newEmpty();
-			}
+		if ( !isset( $params['new'] ) ) {
+			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'no-such-entity' );
 		}
-		$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
+
+		$type = $params['new'];
+		$this->flags |= EDIT_NEW;
+		$entityContentFactory = EntityContentFactory::singleton();
+		try {
+			return $entityContentFactory->newFromType( $type );
+		} catch ( InvalidArgumentException $e ) {
+			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
+		}
 	}
 
 	/**
@@ -91,6 +89,12 @@ class EditEntity extends ModifyEntity {
 		// note that this is changed back and could fail
 		if ( !( isset( $params['data'] ) OR  isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-data-or-id-xor-wikititle' )->text(), 'data-or-id-xor-wikititle' );
+		}
+		if ( isset( $params['id'] ) && isset( $params['new'] ) ) {
+			$this->dieUsage( "Parameter 'id' and 'new' are not allowed to be both set in the same request", 'add-with-id' );
+		}
+		if ( !isset( $params['id'] ) && !isset( $params['new'] ) ) {
+			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'no-such-entity' );
 		}
 	}
 
@@ -126,6 +130,15 @@ class EditEntity extends ModifyEntity {
 			$entityContent->getEntity()->clear();
 		}
 
+		// if we create a new property, make sure we set the datatype
+		if ( $entityContent->isNew() && $entity->getType() === Property::ENTITY_TYPE ) {
+			if ( !isset( $data['datatype'] ) ) {
+				$this->dieUsage( 'No datatype given', 'edit-entity-create-property-failed' );
+			} else {
+				$entity->setDataTypeId( $data['datatype'] );
+			}
+		}
+
 		if ( array_key_exists( 'labels', $data ) ) {
 			$changeOps->add( $this->getLabelChangeOps( $data['labels'], $status ) );
 		}
@@ -157,20 +170,13 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( 'Change could not be applied to entity', 'edit-entity-apply-failed' );
 		}
 
-		// This is already done in createEntity
-		if ( $entityContent->isNew() ) {
-			// if the entity doesn't exist yet, create it
-			$this->flags |= EDIT_NEW;
-		}
-
-		$entity = $entityContent->getEntity();
 		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
 
 		// TODO: This is a temporary fix that should be handled properly with a
 		// serializer class that is specific for the given entity
-		if ( $entityContent->getEntity()->getType() === Item::ENTITY_TYPE ) {
+		if ( $entity->getType() === Item::ENTITY_TYPE ) {
 			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
 		}
 
@@ -372,7 +378,8 @@ class EditEntity extends ModifyEntity {
 			'labels',
 			'descriptions',
 			'aliases',
-			'sitelinks' );
+			'sitelinks',
+			'datatype' );
 
 		if ( is_null( $data ) ) {
 			wfProfileOut( __METHOD__ );
@@ -450,14 +457,12 @@ class EditEntity extends ModifyEntity {
 				'data' => array(
 					ApiBase::PARAM_TYPE => 'string',
 				),
-				'exclude' => array(
-					ApiBase::PARAM_TYPE => array( 'pageid', 'ns', 'title', 'lastrevid', 'touched', 'sitelinks', 'aliases', 'labels', 'descriptions' ),
-					ApiBase::PARAM_DFLT => '',
-					ApiBase::PARAM_ISMULTI => true,
-				),
 				'clear' => array(
 					ApiBase::PARAM_TYPE => 'boolean',
 					ApiBase::PARAM_DFLT => false
+				),
+				'new' => array(
+					ApiBase::PARAM_TYPE => 'string',
 				),
 			)
 		);
@@ -476,11 +481,12 @@ class EditEntity extends ModifyEntity {
 				'data' => array( 'The serialized object that is used as the data source.',
 					"A newly created entity will be assigned an 'id'."
 				),
-				'exclude' => array( 'List of substructures to neglect during the processing.',
-					"In addition 'length', 'touched' and 'count' is always excluded."
-				),
 				'clear' => array( 'If set, the complete emptied is emptied before proceeding.',
 					'The entity will not be saved before it is filled with the "data", possibly with parts excluded.'
+				),
+				'new' => array( "If set, a new entity will be created.",
+						"Set this to the type of the entity you want to create - currently 'item'|'property'.",
+						"It is not allowed to have this set when 'id' is also set."
 				),
 			)
 		);

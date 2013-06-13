@@ -119,6 +119,7 @@ class BotEditTest extends ModifyItemBase {
 			'summary' => 'Some reason',
 			'data' => '{}',
 			'token' => $token,
+			'new' => 'item',
 		);
 
 		$second = $this->doApiRequest( $req, null, false, self::$users['wbbot']->user );
@@ -151,6 +152,8 @@ class BotEditTest extends ModifyItemBase {
 		if ( !$new ) {
 			$myid = $this->getItemId( $handle );
 			$req['id'] = $myid;
+		} else {
+			$req['new'] = 'item';
 		}
 		if ( $bot ) {
 			$req['bot'] = true;
