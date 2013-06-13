@@ -220,12 +220,12 @@ end
 
 RSpec::Core::RakeTask.new(:statements) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = '../repo/tests/selenium/statements/{statements_spec.rb,statements_cm_spec.rb,statements_item_spec.rb,statements_string_spec.rb,statements_time_spec.rb,references_spec.rb,qualifiers_spec.rb,statements_deleted_prop_spec.rb,statements_deleted_item_spec.rb}'
+  spec.pattern = '../repo/tests/selenium/statements/{statements_spec.rb,statements_cm_spec.rb,statements_item_spec.rb,statements_string_spec.rb,statements_time_spec.rb,statements_coordinate_spec.rb,references_spec.rb,qualifiers_spec.rb,statements_deleted_prop_spec.rb,statements_deleted_item_spec.rb}'
 end
 
 RSpec::Core::RakeTask.new(:statements_basic) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = '../repo/tests/selenium/statements/{statements_spec.rb,statements_cm_spec.rb,statements_item_spec.rb}'
+  spec.pattern = '../repo/tests/selenium/statements/{statements_spec.rb,statements_cm_spec.rb,statements_item_spec.rb,statements_time_spec.rb,statements_coordinate_spec.rb}'
 end
 
 RSpec::Core::RakeTask.new(:statements_cm) do |spec|
@@ -246,6 +246,11 @@ end
 RSpec::Core::RakeTask.new(:statements_time) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/statements/statements_time_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:statements_coordinate) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/statements/statements_coordinate_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:statements_bugs) do |spec|

@@ -14,6 +14,7 @@ class EntityPage < RubySelenium
   include AliasPage
   include StatementPage
   include TimePage
+  include CoordinatePage
   include ULSPage
 
   @@property_url = ""
