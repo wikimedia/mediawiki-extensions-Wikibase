@@ -1,0 +1,11 @@
+.*
+*~
+*.kate-swp
+
+vendor/
+composer.phar
+
+!.gitignore
+!.gitreview
+
+!.travis.yml
