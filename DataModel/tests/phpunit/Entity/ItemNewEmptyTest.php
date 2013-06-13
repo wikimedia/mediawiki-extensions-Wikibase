@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\Item;
-use Wikibase\SiteLink;
 
 /**
  * Tests for the Wikibase\Item class.

@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
-use Wikibase\SiteLink;
 use Wikibase\Item;
 
 /**
