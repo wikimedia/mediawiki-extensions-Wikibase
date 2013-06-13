@@ -12,7 +12,6 @@ use Wikibase\Item;
 use Wikibase\ItemDiff;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
-use Wikibase\SiteLink;
 use Wikibase\Statement;
 
 /**
