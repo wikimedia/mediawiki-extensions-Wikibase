@@ -95,7 +95,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 			return false;
 		}
 
-		$siteLinks = $item->getSiteLinks();
+		$siteLinks = $item->getSimpleSiteLinks();
 
 		if ( empty( $siteLinks ) ) {
 			$this->releaseConnection( $dbw );
@@ -109,7 +109,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		}
 
 		/**
-		 * @var SiteLink $siteLink
+		 * @var SimpleSiteLink $siteLink
 		 */
 		foreach ( $siteLinks as $siteLink ) {
 			$success = $dbw->insert(
@@ -117,8 +117,8 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 				array_merge(
 					array( 'ips_item_id' => $item->getId()->getNumericId() ),
 					array(
-						'ips_site_id' => $siteLink->getSite()->getGlobalId(),
-						'ips_site_page' => $siteLink->getPage(),
+						'ips_site_id' => $siteLink->getSiteId(),
+						'ips_site_page' => $siteLink->getPageName(),
 					)
 				),
 				$function
@@ -223,7 +223,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	public function getConflictsForItem( Item $item, \DatabaseBase $db = null ) {
 		wfProfileIn( __METHOD__ );
 
-		$links = $item->getSiteLinks();
+		$links = $item->getSimpleSiteLinks();
 
 		if ( $links === array() ) {
 			wfProfileOut( __METHOD__ );
@@ -238,18 +238,15 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 
 		$anyOfTheLinks = '';
 
-		/**
-		 * @var SiteLink $siteLink
-		 */
 		foreach ( $links as $siteLink ) {
 			if ( $anyOfTheLinks !== '' ) {
 				$anyOfTheLinks .= "\nOR ";
 			}
 
 			$anyOfTheLinks .= '(';
-			$anyOfTheLinks .= 'ips_site_id=' . $dbr->addQuotes( $siteLink->getSite()->getGlobalId() );
+			$anyOfTheLinks .= 'ips_site_id=' . $dbr->addQuotes( $siteLink->getSiteId() );
 			$anyOfTheLinks .= ' AND ';
-			$anyOfTheLinks .= 'ips_site_page=' . $dbr->addQuotes( $siteLink->getPage() );
+			$anyOfTheLinks .= 'ips_site_page=' . $dbr->addQuotes( $siteLink->getPageName() );
 			$anyOfTheLinks .= ')';
 		}
 

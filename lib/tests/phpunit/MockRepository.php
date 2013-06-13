@@ -97,7 +97,12 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	 * @return array of array
 	 */
 	public function getConflictsForItem( Item $item, \DatabaseBase $db = null ) {
-		$newLinks = SiteLink::siteLinksToArray( $item->getSiteLinks() );
+		$newLinks = array();
+
+		foreach ( $item->getSimpleSiteLinks() as $siteLink ) {
+			$newLinks[$siteLink->getSiteId()] = $siteLink->getPageName();
+		}
+
 		$conflicts = array();
 
 		foreach ( array_keys( $this->entities ) as $id ) {
@@ -188,9 +193,8 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 
 		$numId = $item->getId()->getNumericId();
 
-		/* @var SiteLink $link */
-		foreach ( $item->getSiteLinks() as $link ) {
-			$key = $link->getSite()->getGlobalId() . ':' . $link->getPage();
+		foreach ( $item->getSimpleSiteLinks() as $siteLink ) {
+			$key = $siteLink->getSiteId() . ':' . $siteLink->getPageName();
 			$this->itemByLink[$key] = $numId;
 		}
 	}
@@ -326,14 +330,16 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 				continue;
 			}
 
+			/**
+			 * @var Item $entity
+			 */
 			$entity = $this->getEntity( $id );
 
-			/* @var SiteLink $link */
-			foreach ( $entity->getSiteLinks() as $link ) {
+			foreach ( $entity->getSimpleSiteLinks() as $link ) {
 				if ( $this->linkMatches( $entity, $link, $itemIds, $siteIds, $pageNames ) ) {
 					$links[] = array(
-						$link->getSite()->getGlobalId(),
-						$link->getPage(),
+						$link->getSiteId(),
+						$link->getPageName(),
 						$entity->getId()->getNumericId(),
 					);
 				}
@@ -346,15 +352,15 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 	/**
 	 * Returns true if the link matches the given conditions.
 	 *
-	 * @param \Wikibase\Item     $item
-	 * @param \Wikibase\SiteLink $link
+	 * @param Item     $item
+	 * @param SimpleSiteLink $link
 	 * @param array              $itemIds
 	 * @param array              $siteIds
 	 * @param array              $pageNames
 	 *
 	 * @return bool
 	 */
-	protected function linkMatches( Item $item, SiteLink $link,
+	protected function linkMatches( Item $item, SimpleSiteLink $link,
 		array $itemIds, array $siteIds = array(), array $pageNames = array() ) {
 
 		if ( !empty( $itemIds ) ) {
@@ -364,13 +370,13 @@ class MockRepository implements SiteLinkLookup, EntityLookup {
 		}
 
 		if ( !empty( $siteIds ) ) {
-			if ( !in_array( $link->getSite()->getGlobalId(), $siteIds ) ) {
+			if ( !in_array( $link->getSiteId(), $siteIds ) ) {
 				return false;
 			}
 		}
 
 		if ( !empty( $pageNames ) ) {
-			if ( !in_array( $link->getPage(), $pageNames ) ) {
+			if ( !in_array( $link->getPageName(), $pageNames ) ) {
 				return false;
 			}
 		}
