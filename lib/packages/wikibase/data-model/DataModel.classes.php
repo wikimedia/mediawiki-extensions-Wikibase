@@ -66,7 +66,6 @@ return call_user_func( function() {
 		'Wikibase\References' => 'DataModel/References.php',
 
 		'Wikibase\DataModel\SimpleSiteLink' => 'DataModel/SimpleSiteLink.php',
-		'Wikibase\SiteLink' => 'DataModel/SiteLink.php',
 	);
 
 	return $classes;
