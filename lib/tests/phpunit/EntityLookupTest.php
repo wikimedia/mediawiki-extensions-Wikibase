@@ -60,7 +60,13 @@ abstract class EntityLookupTest extends EntityTestCase {
 			$item->setId( 42 );
 			$entities[$item->getPrefixedId()] = $item;
 
-			$dtf = $factory = new DataTypeFactory( $GLOBALS['wgDataTypes'] );
+			$dataTypes = array(
+				'string' => array(
+					'datavalue' => 'string'
+				)
+			);
+
+			$dtf = $factory = new DataTypeFactory( $dataTypes );
 
 			$prop = Property::newEmpty();
 			$prop->setId( 753 );

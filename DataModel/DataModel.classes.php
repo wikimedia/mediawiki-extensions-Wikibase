@@ -27,7 +27,6 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 return call_user_func( function() {
-
 	$classes = array(
 		'Wikibase\Claim' => 'DataModel/Claim/Claim.php',
 		'Wikibase\ClaimAggregate' => 'DataModel/Claim/ClaimAggregate.php',
