@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D02o-7bE",
+        "filename": "DataModel/DataModel/Entity/Entity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-13T15:39:56Z",
+      "side": 1,
+      "message": "We are using IllegalValueException for this purpose elsewhere.",
+      "revId": "e0f6603f93025206078f196252bc95933eb08a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0.p73Yc",
+        "filename": "DataModel/DataModel/Entity/Entity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-13T15:39:56Z",
+      "side": 1,
+      "message": "should probably be private",
+      "revId": "e0f6603f93025206078f196252bc95933eb08a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D08qP.XQ",
+        "filename": "DataModel/DataModel/Entity/Entity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-13T15:39:56Z",
+      "side": 1,
+      "message": "if the new format just used an array instead of a string, this would be less awkward.",
+      "revId": "e0f6603f93025206078f196252bc95933eb08a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0yqARUk",
+        "filename": "DataModel/DataModel/Entity/Entity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-13T15:39:56Z",
+      "side": 1,
+      "message": "why make this a string at all? just return array( $id-\u003egetEntityType(), $id-\u003egetNumericId() );",
+      "revId": "e0f6603f93025206078f196252bc95933eb08a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
