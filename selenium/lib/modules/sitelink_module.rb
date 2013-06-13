@@ -31,9 +31,9 @@ module SitelinkPage
   link(:removeSitelinkLink, :text => "remove")
   link(:editSitelinkLink, :xpath => "//td[contains(@class, 'wb-ui-propertyedittool-editablevalue-toolbarparent')]/span/span/span/a")
   link(:englishEditSitelinkLink, :xpath => "//tr[contains(@class, 'wb-sitelinks-en')]/td[4]/span/span/span/a")
-  link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-sr > a")
-  link(:germanSitelink, :xpath => "//td[contains(@class, 'wb-sitelinks-link-de')]/a")
-  link(:englishSitelink, :xpath => "//td[contains(@class, 'wb-sitelinks-link-en')]/a")
+  link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-srwiki > a")
+  link(:germanSitelink, :xpath => "//td[contains(@class, 'wb-sitelinks-link-dewiki')]/a")
+  link(:englishSitelink, :xpath => "//td[contains(@class, 'wb-sitelinks-link-enwiki')]/a")
   span(:articleTitle, :xpath => "//h1[@id='firstHeading']/span")
   # sitelinks methods
   def get_number_of_sitelinks_from_counter
