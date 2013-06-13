@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use DataTypes\DataType;
 use Wikibase\Property;
 
 /**
@@ -73,10 +74,8 @@ class PropertySerializerTest extends EntitySerializerBaseTest {
 
 		$property = $this->getEntityInstance();
 
-		$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-		$dataTypes = $libRegistry->getDataTypeFactory()->getTypes();
-
-		$property->setDataType( array_shift( $dataTypes ) );
+		$type = new DataType( 'string', 'string', array(), array(), array() );
+		$property->setDataType( $type );
 
 		$validArgs[] = array(
 			$property,
