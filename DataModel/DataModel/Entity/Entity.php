@@ -6,7 +6,8 @@ use Diff\Comparer\CallbackComparer;
 use Diff\Differ;
 use Diff\MapPatcher;
 use Diff\Patcher;
-use MWException;
+use InvalidArgumentException;
+use RuntimeException;
 use Wikibase\Lib\GuidGenerator;
 
 /**
@@ -122,7 +123,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @param string $value
 	 *
 	 * @return Entity
-	 * @throws MWException
+	 * @throws RuntimeException
 	 */
 	public function unserialize( $value ) {
 		$unserialized = \FormatJson::decode( $value, true );
@@ -133,7 +134,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			return $this->__construct( $unserialized );
 		}
 
-		throw new MWException( 'Invalid serialization passed to Entity unserializer' );
+		throw new RuntimeException( 'Invalid serialization passed to Entity unserializer' );
 	}
 
 	/**
@@ -195,12 +196,12 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 *
 	 * @param EntityId|integer $id Can be EntityId since 0.3
 	 *
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public function setId( $id ) {
 		if ( $id instanceof EntityId ) {
 			if ( $id->getEntityType() !== $this->getType() ) {
-				throw new MWException( 'Attempt to set an EntityId with mismatching entity type' );
+				throw new InvalidArgumentException( 'Attempt to set an EntityId with mismatching entity type' );
 			}
 
 			$this->id = $id;
@@ -209,7 +210,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 			$this->id = new EntityId( $this->getType(), $id );
 		}
 		else {
-			throw new MWException( __METHOD__ . ' only accepts EntityId and integer' );
+			throw new InvalidArgumentException( __METHOD__ . ' only accepts EntityId and integer' );
 		}
 	}
 
@@ -809,11 +810,11 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @param Differ|null $differ Since 0.4
 	 *
 	 * @return EntityDiff
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public final function getDiff( Entity $target, Differ $differ = null ) {
 		if ( $this->getType() !== $target->getType() ) {
-			throw new MWException( 'Can only diff between entities of the same type' );
+			throw new InvalidArgumentException( 'Can only diff between entities of the same type' );
 		}
 
 		if ( $differ === null ) {
@@ -905,13 +906,13 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	 * @param string $claimKey
 	 *
 	 * @return string
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public static function getIdFromClaimGuid( $claimKey ) {
 		$keyParts = explode( '$', $claimKey );
 
 		if ( count( $keyParts ) !== 2 ) {
-			throw new MWException( 'A claim key should have a single $ in it' );
+			throw new InvalidArgumentException( 'A claim key should have a single $ in it' );
 		}
 
 		return $keyParts[0];
