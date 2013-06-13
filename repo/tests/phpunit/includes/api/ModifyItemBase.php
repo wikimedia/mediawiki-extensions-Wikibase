@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase\Test\Api;
-use ApiTestCase, TestUser;
+
+use ApiTestCase;
+use TestUser;
 use Wikibase\Settings;
 
 /**
@@ -42,7 +44,6 @@ use Wikibase\Settings;
  * @ingroup Test
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */

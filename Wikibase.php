@@ -22,6 +22,13 @@ require_once __DIR__ . '/Query/ExampleSettings.php';
 require_once __DIR__ . '/DataModel/DataModel.php';
 require_once __DIR__ . '/lib/WikibaseLib.php';
 
+// Temporary hack that populates the sites table since there are some tests that require this to have happened
+require_once __DIR__ . '/lib/maintenance/populateSitesTable.php';
+$wgExtensionFunctions[] = function() {
+	$evilStuff = new PopulateSitesTable();
+	$evilStuff->execute();
+};
+
 # Let JenkinsAdapt our test suite when run under Jenkins
 $jenkins_job_name = getenv( 'JOB_NAME' );
 if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
