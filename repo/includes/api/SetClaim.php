@@ -108,6 +108,7 @@ class SetClaim extends ApiWikibase {
 		$claim = $unserializer->newFromSerialization( \FormatJson::decode( $params['claim'], true ) );
 
 		assert( $claim instanceof Claim );
+		ModifyClaim::validateClaimSnaks( $claim );
 
 		return $claim;
 	}

@@ -222,6 +222,7 @@ class SetQualifier extends ApiWikibase {
 
 		$factory = new SnakFactory();
 		$newQualifier = $factory->newSnak( $propertyId, $snakType, $snakValue );
+		ModifyClaim::validateSnak( $newQualifier );
 
 		return $qualifiers->addSnak( $newQualifier );
 	}
@@ -261,6 +262,7 @@ class SetQualifier extends ApiWikibase {
 			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
 		);
 
+		ModifyClaim::validateSnak( $newQualifier );
 		return $qualifiers->addSnak( $newQualifier );
 	}
 

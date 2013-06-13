@@ -71,6 +71,8 @@ class CreateClaim extends ModifyClaim {
 			$this->dieUsageMsg( $ex->getMessage() );
 		}
 
+		self::validateSnak( $snak );
+
 		$claim = $this->addClaim( $entityContent->getEntity(), $snak );
 		$summary = $this->createSummary( $snak, 'create' );
 

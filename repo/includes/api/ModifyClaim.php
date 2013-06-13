@@ -2,7 +2,14 @@
 namespace Wikibase\Api;
 
 use ApiBase, MWException;
+use DataValues\TimeValue;
+use InvalidArgumentException;
+use UsageException;
+use Wikibase\Claim;
+use Wikibase\PropertyValueSnak;
+use Wikibase\Reference;
 use Wikibase\Snak;
+use Wikibase\Statement;
 use Wikibase\Summary;
 
 /**
@@ -58,4 +65,55 @@ abstract class ModifyClaim extends ApiWikibase {
 		return $summary;
 	}
 
+	/**
+	 * Validates the given Snak.
+	 *
+	 * @note: This is a NASTY HACK, we shouldn't know about the stuff we are checking here.
+	 *        We should be using proper Validators, and proper handling of deserialization failures.
+	 *
+	 * @param Snak $snak the snak to validate
+	 *
+	 * @throws \UsageException if the snak isn't valid
+	 */
+	public static function validateSnak( Snak $snak ) {
+		if ( $snak instanceof PropertyValueSnak ) {
+			$dataValue = $snak->getDataValue();
+
+			if ( $dataValue instanceof TimeValue ) {
+				$time = $dataValue->getTime();
+
+				if ( !preg_match( '!^[-+]\d{1,16}-(0\d|1[012])-([012]\d|3[01])T([01]\d|2[0123]):[0-5]\d:([0-5]\d|6[012])Z$!', $time ) ) {
+					throw new UsageException( '$time needs to be a valid ISO 8601 date', 'claim-invalid-snak' );
+				}
+			}
+		}
+	}
+
+	/**
+	 * Validates all Snaks in the given claim.
+	 *
+	 * @note: This is a NASTY HACK, we shouldn't know about the stuff we are checking here.
+	 *        We should be using proper Validators, and proper handling of deserialization failures.
+	 *
+	 * @param Claim $claim the snak to validate
+	 *
+	 * @throws \UsageException if the snak isn't valid
+	 */
+	public static function validateClaimSnaks( Claim $claim ) {
+		$snak = $claim->getMainSnak();
+		self::validateSnak( $snak );
+
+		foreach ( $claim->getQualifiers() as $snak ) {
+			self::validateSnak( $snak );
+		}
+
+		if ( $claim instanceof Statement ) {
+			/* @var Reference $ref */
+			foreach ( $claim->getReferences() as $ref ) {
+				foreach ( $ref->getSnaks() as $snak ) {
+					self::validateSnak( $snak );
+				}
+			}
+		}
+	}
 }

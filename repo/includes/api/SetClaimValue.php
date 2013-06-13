@@ -143,7 +143,10 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 			$constructorArguments[] = $content->getProperty()->newDataValue( $value );
 		}
 
-		$claim->setMainSnak( SnakObject::newFromType( $snakType, $constructorArguments ) );
+		$snak = SnakObject::newFromType( $snakType, $constructorArguments );
+		ModifyClaim::validateSnak( $snak );
+
+		$claim->setMainSnak( $snak );
 
 		$entity->setClaims( $claims );
 

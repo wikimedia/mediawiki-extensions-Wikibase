@@ -133,7 +133,9 @@ class SetReference extends ApiWikibase {
 				$this->dieUsage( 'Invalid snak JSON given', 'setreference-invalid-snaks' );
 			}
 			foreach ( $byPropertySnaks as $rawSnak ) {
-				$snaks[] = $snakUnserializer->newFromSerialization( $rawSnak );
+				$snak = $snakUnserializer->newFromSerialization( $rawSnak );
+				ModifyClaim::validateSnak( $snak );
+				$snaks[] = $snak;
 			}
 		}
 
