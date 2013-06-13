@@ -38,11 +38,6 @@ global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHo
 
 //$wgExtensionMessagesFiles['WikibaseDataModel'] = __DIR__ . '/DataModel.i18n.php';
 
-// Autoloading
-foreach ( include( __DIR__ . '/DataModel.classes.php' ) as $class => $file ) {
-	$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
-}
-
 if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 	require_once __DIR__ . '/tests/testLoader.php';
 }

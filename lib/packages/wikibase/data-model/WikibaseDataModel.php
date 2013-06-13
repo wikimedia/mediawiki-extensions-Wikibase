@@ -34,7 +34,7 @@ spl_autoload_register( function ( $className ) {
 	static $classes = false;
 
 	if ( $classes === false ) {
-		$classes = include( __DIR__ . '/' . 'DataModel.classes.php' );
+		$classes = include( __DIR__ . '/' . 'WikibaseDataModel.classes.php' );
 	}
 
 	if ( array_key_exists( $className, $classes ) ) {
@@ -44,7 +44,7 @@ spl_autoload_register( function ( $className ) {
 
 if ( defined( 'MEDIAWIKI' ) ) {
 	call_user_func( function() {
-		require_once __DIR__ . '/DataModel.mw.php';
+		require_once __DIR__ . '/WikibaseDataModel.mw.php';
 	} );
 }
 // @codeCoverageIgnoreEnd
