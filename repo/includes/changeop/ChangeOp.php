@@ -30,6 +30,13 @@ namespace Wikibase;
  */
 interface ChangeOp {
 
+	/**
+	 * @since 0.4
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return bool 
+	 */
 	public function apply( Entity $entity );
 
 }
