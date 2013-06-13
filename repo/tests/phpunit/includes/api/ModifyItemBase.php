@@ -403,6 +403,8 @@ abstract class ModifyItemBase extends ApiTestCase {
 			if ( isset( $data['id'] ) ) {
 				$params['id'] = $data['id'];
 				unset( $data['id'] );
+			} else {
+				$params['new'] = 'item';
 			}
 
 			$data = json_encode( $data );
