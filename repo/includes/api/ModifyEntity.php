@@ -63,6 +63,9 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		// If we have an id try that first. If the id isn't prefixed, assume it refers to an item.
 		if ( isset( $params['id'] ) ) {
+			if ( isset( $params['new'] ) ) {
+				$this->dieUsage( "Parameter 'id' and 'new' are not allowed to be both set in the same request" );
+			}
 			$id = $params['id'];
 
 			$entityContentFactory = EntityContentFactory::singleton();
