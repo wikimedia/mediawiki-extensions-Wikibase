@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
+use Wikibase\DataModel\SimpleSiteLink;
 
 /**
  * Class for creating views for Wikibase\Item instances.
@@ -35,7 +36,7 @@ class ItemView extends EntityView {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $item the entity to render
+	 * @param EntityContent $itemContent the entity to render
 	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
@@ -56,14 +57,18 @@ class ItemView extends EntityView {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityContent $item the entity to render
+	 * @param EntityContent $itemContent the entity to render
 	 * @param string $group a site group ID
 	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForSiteLinkGroup( EntityContent $item, $group, Language $lang = null, $editable = true ) {
-		$siteLinks = $item->getItem()->getSiteLinks( $group );
+	public function getHtmlForSiteLinkGroup( EntityContent $itemContent, $group, Language $lang = null, $editable = true ) {
+		/**
+		 * @var ItemContent $itemContent
+		 */
+		$siteLinks = $itemContent->getItem()->getSimpleSiteLinks();
+
 		$html = $thead = $tbody = $tfoot = '';
 
 		$html .= wfTemplate(
@@ -90,21 +95,33 @@ class ItemView extends EntityView {
 		$safetyCopy = $siteLinks; // keep a shallow copy;
 		$sortOk = usort(
 			$siteLinks,
-			function( $a, $b ) {
-				return strcmp($a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
+			function( SimpleSiteLink $a, SimpleSiteLink $b ) {
+				return strcmp( $a->getSiteId(), $b->getSiteId() );
 			}
 		);
+
 		if ( !$sortOk ) {
 			$siteLinks = $safetyCopy;
 		}
 
 		// Link to SpecialPage
-		$editLink = $this->getEditUrl( $item->getEntity()->getPrefixedId(), null, 'SetSiteLink' );
+		$editLink = $this->getEditUrl( $itemContent->getEntity()->getPrefixedId(), null, 'SetSiteLink' );
 
-		/**
-		 * @var SiteLink $link
-		 */
-		foreach( $siteLinks as $link ) {
+		foreach( $siteLinks as $siteLink ) {
+			// FIXME: depracted method usage
+			$site = \Sites::singleton()->getSite( $siteLink->getSiteId() );
+
+			if ( $site === null ) {
+				$site = new \Site();
+				$site->setGlobalId( $siteLink->getSiteId() );
+			}
+
+			$link = new SiteLink( $site, $siteLink->getPageName() );
+
+			if ( $link->getSite()->getGroup() !== $group ) {
+				continue;
+			}
+
 			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 
 			$site = $link->getSite();
@@ -117,7 +134,7 @@ class ItemView extends EntityView {
 					$alternatingClass,
 					htmlspecialchars( $link->getSite()->getGlobalId() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, $editLink, 'td' )
+					$this->getHtmlForEditSection( $itemContent, $lang, $editLink, 'td' )
 				);
 
 			} else {
@@ -134,7 +151,7 @@ class ItemView extends EntityView {
 					$escapedSiteId, // displayed site ID
 					htmlspecialchars( $link->getUrl() ),
 					htmlspecialchars( $link->getPage() ),
-					$this->getHtmlForEditSection( $item, $lang, $editLink . '/' . $escapedSiteId, 'td' ),
+					$this->getHtmlForEditSection( $itemContent, $lang, $editLink . '/' . $escapedSiteId, 'td' ),
 					$escapedSiteId // ID used in classes
 				);
 			}
@@ -145,7 +162,7 @@ class ItemView extends EntityView {
 
 		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
 			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->parse() : '',
-			$this->getHtmlForEditSection( $item, $lang, $editLink, 'td', 'add', !$isFull )
+			$this->getHtmlForEditSection( $itemContent, $lang, $editLink, 'td', 'add', !$isFull )
 		);
 
 		return $html . wfTemplate(

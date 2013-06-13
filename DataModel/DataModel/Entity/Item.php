@@ -112,34 +112,6 @@ class Item extends Entity {
 	}
 
 	/**
-	 * Returns the site links in an associative array with the following format:
-	 * site id (str) => SiteLink
-	 *
-	 * @since 0.4
-	 * @deprecated since 0.4, use getSimpleSiteLinks instead
-	 *
-	 * @param string|null $group Gtroup to get links for (if not given, all links are returned)
-	 *
-	 * @return SiteLink[]
-	 */
-	public function getSiteLinks( $group = null ) {
-		$links = array();
-
-		foreach ( $this->data['links'] as $globalSiteId => $title ) {
-			//TODO: get rid of global state here!
-			$link = SiteLink::newFromText( $globalSiteId, $title );
-
-			if ( $group !== null && $link->getSite()->getGroup() !== $group ) {
-				continue;
-			}
-
-			$links[] = $link;
-		}
-
-		return $links;
-	}
-
-	/**
 	 * @since 0.4
 	 *
 	 * @return SimpleSiteLink[]
