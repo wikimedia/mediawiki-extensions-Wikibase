@@ -49,3 +49,52 @@ $messages['qqq'] = array(
 $messages['de'] = array(
 	'wikibasedatamodel-desc' => 'Komponente, die das Wikibase-Datenmodell definiert',
 );
+
+/** French (français)
+ * @author Gomoko
+ */
+$messages['fr'] = array(
+	'wikibasedatamodel-desc' => 'Composant définissant le modèle de données de Wikibase',
+);
+
+/** Galician (galego)
+ * @author Toliño
+ */
+$messages['gl'] = array(
+	'wikibasedatamodel-desc' => 'Compoñente que define o modelo de datos de Wikibase',
+);
+
+/** Hebrew (עברית)
+ * @author Amire80
+ */
+$messages['he'] = array(
+	'wikibasedatamodel-desc' => 'רכיב שמגדיר את מודל הנתונים של ויקיבייס',
+);
+
+/** Japanese (日本語)
+ * @author Shirayuki
+ */
+$messages['ja'] = array(
+	'wikibasedatamodel-desc' => 'ウィキベースのデータモデルを定義するコンポーネント',
+);
+
+/** Korean (한국어)
+ * @author Kwj2772
+ */
+$messages['ko'] = array(
+	'wikibasedatamodel-desc' => '위키베이스 데이터 모형을 정의하는 구성 요소',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'wikibasedatamodel-desc' => "Combonende ca definisce 'u modelle de date Uicchibase",
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Justincheng12345
+ */
+$messages['zh-hant'] = array(
+	'wikibasedatamodel-desc' => '定義維基基礎資料模型之元件',
+);
