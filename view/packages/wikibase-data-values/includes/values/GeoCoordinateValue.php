@@ -81,12 +81,12 @@ class GeoCoordinateValue extends DataValueObject {
 	 * @param float|int $latitude
 	 * @param float|int $longitude
 	 * @param float|int|null $altitude
-	 * param float|int|null $precision
+	 * @param float|int|null $precision
 	 * @param string|null $globe
 	 *
 	 * @throws IllegalValueException
 	 */
-	public function __construct( $latitude, $longitude, $altitude = null, $precision = null, $globe = 'http://www.wikidata.org/entity/Q2' ) {
+	public function __construct( $latitude, $longitude, $altitude = null, $precision = null, $globe = null ) {
 		// TODO: validate those values!
 		if ( is_int( $latitude ) ) {
 			$latitude = (float)$latitude;
@@ -128,7 +128,7 @@ class GeoCoordinateValue extends DataValueObject {
 		$this->longitude = $longitude;
 		$this->altitude = $altitude;
 		$this->precision = $precision;
-		$this->globe = $globe;
+		$this->globe = ( is_null( $globe ) ) ? 'http://www.wikidata.org/entity/Q2' : $globe;
 	}
 
 	/**
@@ -278,14 +278,14 @@ class GeoCoordinateValue extends DataValueObject {
 	 * @throws IllegalValueException
 	 */
 	public static function newFromArray( $data ) {
-		self::requireArrayFields( $data, array( 'latitude', 'longitude', 'altitude', 'precision', 'globe' ) );
+		self::requireArrayFields( $data, array( 'latitude', 'longitude' ) );
 
 		return new static(
 			$data['latitude'],
 			$data['longitude'],
-			$data['altitude'],
-			$data['precision'],
-			$data['globe']
+			( isset( $data['altitude'] ) ) ? $data['altitude'] : null,
+			( isset( $data['precision'] ) ) ? $data['precision'] : null,
+			( isset( $data['globe'] ) ) ? $data['globe'] : null
 		);
 	}
 
