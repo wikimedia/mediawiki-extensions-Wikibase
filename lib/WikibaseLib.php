@@ -101,19 +101,8 @@ $wgExtensionMessagesFiles['WikibaseLib'] = __DIR__ . '/WikibaseLib.i18n.php';
 
 // TODO: this is not nice, figure out a better design
 $wgExtensionFunctions[] = function() {
-	global $wgDataTypes;
-
-	$libRegistry = new \Wikibase\LibRegistry( \Wikibase\Settings::singleton() );
-
-	$wgDataTypes['wikibase-item'] = array(
-		'datavalue' => 'wikibase-entityid',
-		'parser' => $libRegistry->getEntityIdParser(),
-		//'formatter' => evilGetEntityidFormatter(), // TODO
-	);
-
 	\Wikibase\TemplateRegistry::singleton()->addTemplates( include( __DIR__ . "/resources/templates.php" ) );
-
-    return true;
+	return true;
 };
 
 $wgValueParsers['wikibase-entityid'] = 'Wikibase\Lib\EntityIdParser';
