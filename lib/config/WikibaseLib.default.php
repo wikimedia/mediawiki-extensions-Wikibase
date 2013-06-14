@@ -40,8 +40,8 @@ return call_user_func( function() {
 		'useChangesTable' => true,
 
 		'entityPrefixes' => array(
-			'q' => \Wikibase\Item::ENTITY_TYPE,
-			'p' => \Wikibase\Property::ENTITY_TYPE,
+			'q' => 'item',
+			'p' => 'property',
 		),
 
 		'siteLinkGroups' => array(
