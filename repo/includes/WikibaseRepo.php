@@ -88,7 +88,7 @@ final class WikibaseRepo {
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
 
-			$builders = new WikibaseDataTypeBuilders( $this );
+			$builders = new WikibaseDataTypeBuilders( $this->getEntityLookup(), $this->getEntityIdParser() );
 
 			$typeBuilderSpecs = array_intersect_key(
 				$builders->getDataTypeBuilders(),
