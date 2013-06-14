@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test\Api;
 use Wikibase\Item;
+use Wikibase\Property;
+use Wikibase\PropertyContent;
 use Wikibase\Snak;
 use Wikibase\Statement;
 use Wikibase\Claim;
@@ -42,6 +44,7 @@ use Wikibase\EntityId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class SetQualifierTest extends ModifyItemBase {
 
@@ -49,11 +52,36 @@ class SetQualifierTest extends ModifyItemBase {
 	 * @return Snak[]
 	 */
 	protected function snakProvider() {
+		static $hasProperties = false;
+
+		$prop42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$prop9001 = new EntityId( Property::ENTITY_TYPE, 9001 );
+		$prop7201010 = new EntityId( Property::ENTITY_TYPE, 7201010 );
+
+		if ( !$hasProperties ) {
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( $prop42 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'testing' );
+
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( $prop9001 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'testing' );
+
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( $prop7201010 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'testing' );
+
+			$hasProperties = true;
+		}
+
 		$snaks = array();
 
-		$snaks[] = new \Wikibase\PropertyNoValueSnak( 42 );
-		$snaks[] = new \Wikibase\PropertySomeValueSnak( 9001 );
-		$snaks[] = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
+		$snaks[] = new \Wikibase\PropertyNoValueSnak( $prop42 );
+		$snaks[] = new \Wikibase\PropertySomeValueSnak( $prop9001 );
+		$snaks[] = new \Wikibase\PropertyValueSnak( $prop7201010, new \DataValues\StringValue( 'o_O' ) );
 
 		return $snaks;
 	}
@@ -116,8 +144,8 @@ class SetQualifierTest extends ModifyItemBase {
 		}
 
 		return array(
-			new \Wikibase\PropertySomeValueSnak( 1 ),
-			new \Wikibase\PropertyNoValueSnak( 1 ),
+			new \Wikibase\PropertySomeValueSnak( 9001 ),
+			new \Wikibase\PropertyNoValueSnak( 9001 ),
 			new \Wikibase\PropertyValueSnak( $property1->getId(), new \DataValues\StringValue( 'new qualifier' ) ),
 			new \Wikibase\PropertyValueSnak( $property2->getId(), new EntityId( Item::ENTITY_TYPE, 802 ) ),
 		);
