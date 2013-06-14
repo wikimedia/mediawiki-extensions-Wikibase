@@ -1,6 +1,5 @@
 <?php
  /**
- *
  * Copyright © 10.06.13 by the authors listed below.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -44,6 +43,8 @@ use Wikibase\Statement;
 
 /**
  * Class SnakValidator for validating Snaks.
+ *
+ * @since 0.4
  *
  * @package Wikibase\Validators
  */

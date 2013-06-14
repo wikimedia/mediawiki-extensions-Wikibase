@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use DataValues\IllegalValueException;
+use ApiMain;
 use Diff\CallbackListDiffer;
 use MWException;
 use ApiBase;
@@ -15,6 +16,7 @@ use Wikibase\ClaimSaver;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
+use Wikibase\validators\SnakValidator;
 
 /**
  * API module for creating or updating an entire Claim.
@@ -48,12 +50,36 @@ class SetClaim extends ApiWikibase {
 	// TODO: rights
 
 	/**
+	 * @var SnakValidationHelper
+	 */
+	protected $snakValidation;
+
+	/**
+	 * see ApiBase::__construct()
+	 *
+	 * @param ApiMain $mainModule
+	 * @param string  $moduleName
+	 * @param string  $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$this->snakValidation = new SnakValidationHelper(
+			$this,
+			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
+			WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
+		);
+	}
+
+	/**
 	 * @see ApiBase::execute
 	 *
 	 * @since 0.4
 	 */
 	public function execute() {
 		$claim = $this->getClaimFromRequest();
+
+		$this->snakValidation->validateClaimSnaks( $claim );
 
 		$comparer = function( \Comparable $old, \Comparable $new ) {
 			return $old->equals( $new );
@@ -197,5 +223,4 @@ class SetClaim extends ApiWikibase {
 			// 'ex' => 'desc'
 		);
 	}
-
 }
