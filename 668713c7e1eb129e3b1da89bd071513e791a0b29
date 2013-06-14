@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D00Onbw4",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-14T17:22:14Z",
+      "side": 1,
+      "message": "EntityContentFactory should have a newEmptyFromType() method, and that should be used here. Please add that. Also, please use Item::ENTITY_TYPE, etc, instead of string literals for the type ids.",
+      "revId": "668713c7e1eb129e3b1da89bd071513e791a0b29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D06OsW-A",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-14T17:22:14Z",
+      "side": 1,
+      "message": "Say something about \u0027new\u0027 here",
+      "revId": "668713c7e1eb129e3b1da89bd071513e791a0b29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D00OAD0o",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-14T17:22:14Z",
+      "side": 1,
+      "message": "A bit ugly to do this here; would be nicer (more explicit) toi do this in the caller:\n\nif ( isset( $params[\u0027id\u0027] ) \u0026\u0026 isset( $params[\u0027new\u0027] ) ) {\n  ...die...\n}",
+      "revId": "668713c7e1eb129e3b1da89bd071513e791a0b29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
