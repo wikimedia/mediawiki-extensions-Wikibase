@@ -159,22 +159,65 @@ time.Time = ( function( time, $ ) {
 				+ ':' + pad( second, 2 ) + 'Z';
 		};
 
-		this.text = function() {
-			return time.getTextFromDate( precision, year, month, day );
-		};
+		this.text = function( options ) {
+			options = options || {};
 
-		this.gregorianText = function() {
-			var result = this.gregorian();
-			return time.getTextFromDate( precision, result.year, result.month, result.day );
-		};
-
-		this.julianText = function() {
-			var result = this.julian();
-			if( result === null ) {
+			if( year === null ) {
 				return '';
 			}
-			return time.getTextFromDate( precision, result.year, result.month, result.day );
+
+			if( options.format && options.format === 'ISO 8601' ) {
+				return this.iso8601();
+			}
+
+			var defaultFormat = 'mdy';
+
+			if( !options.format || options.format === 'default' ) {
+				options.format = defaultFormat;
+			}
+
+			options.format = options.format.replace( /[^ymd]/g, '' );
+
+			if( !/^[ymd]{3}$/.test( options.format ) ) {
+				options.format = defaultFormat;
+			}
+
+			if( precision < 9 ) {
+				return time.writeApproximateYear( year, precision );
+			}
+
+			if( precision === 9 ) {
+				return time.writeYear( year );
+			}
+
+			var result = '';
+
+			if( precision >= 10 ) {
+				var template = options.format;
+
+				if( precision < 11 ) {
+					template = template.replace( /d/, '' );
+				}
+
+				template = template.split( '' ).join( ' ' );
+
+				for( var i = 0; i < template.length; i++ ) {
+					switch( template[i] ) {
+						case 'y': result += time.writeYear( year ); break;
+						case 'm': result += time.writeMonth( month ); break;
+						case 'd': result += time.writeDay( day ); break;
+						default: result += template[i];
+					}
+				}
+			}
+
+			if( precision > 11 ) {
+				result += ' (time not implemented yet)';
+			}
+
+			return result;
 		};
+
 	};
 
 	/**

@@ -178,31 +178,12 @@ this.time = ( function() { // 'this' is global scope, e.g. 'window' in the brows
 		return year;
 	};
 
-	var writeMonth = function( year, month ) {
-		return settings.monthnames[month - 1][0] + ' ' + writeYear( year );
+	var writeMonth = function( month ) {
+		return settings.monthnames[month - 1][0];
 	};
 
-	var writeDay = function( year, month, day ) {
-		return settings.monthnames[ month - 1 ][0] + ' ' + day + ', ' + writeYear( year );
-	};
-
-	var getTextFromDate = function( precision, year, month, day ) {
-		if( year === null ) {
-			return '';
-		}
-		if( precision < 9 ) {
-			return writeApproximateYear( year, precision );
-		}
-		switch( precision ) {
-			case 9:
-				return writeYear( year );
-			case 10:
-				return writeMonth( year, month );
-			case 11:
-				return writeDay( year, month, day );
-			default:
-				return writeDay( year, month, day ) + ' (time not implemented yet)';
-		}
+	var writeDay = function( day ) {
+		return day;
 	};
 
 	var precisionText = function( acc ) {
@@ -223,7 +204,6 @@ this.time = ( function() { // 'this' is global scope, e.g. 'window' in the brows
 	time.writeYear = writeYear;
 	time.writeMonth = writeMonth;
 	time.writeDay = writeDay;
-	time.getTextFromDate = getTextFromDate;
 	time.precisionText = precisionText;
 	time.maxPrecision = maxPrecision;
 
