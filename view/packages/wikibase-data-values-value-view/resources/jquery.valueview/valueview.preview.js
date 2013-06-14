@@ -83,6 +83,13 @@
 				.removeClass( this.widgetBaseClass + '-novalue' )
 				.text( value );
 			}
+		},
+
+		/**
+		 * Shows a spinner symbol instead of any preview.
+		 */
+		showSpinner: function() {
+			this.$value.empty().append( $( '<span/>' ).addClass( 'mw-small-spinner' ) );
 		}
 
 	} );

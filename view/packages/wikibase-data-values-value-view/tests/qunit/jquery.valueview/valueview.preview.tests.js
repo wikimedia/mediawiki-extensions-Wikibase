@@ -63,16 +63,50 @@
 		);
 	} );
 
-	QUnit.test( 'Update value', 1, function( assert ) {
+	QUnit.test( 'Update value', 6, function( assert ) {
 		var preview = newTestPreview();
 
 		preview.update( 'test' );
+
+		assert.equal(
+			preview.$value.children().length,
+			0,
+			'Preview has no child node.'
+		);
 
 		assert.equal(
 			preview.$value.text(),
 			'test',
 			'Updated preview.'
 		);
+
+		preview.showSpinner();
+
+		assert.equal(
+			preview.$value.children().length,
+			1,
+			'Preview has only one child node.'
+		);
+
+		assert.ok(
+			preview.$value.children( 'span' ).first().hasClass( 'mw-small-spinner' ),
+			'Applied spinner css class.'
+		);
+
+		preview.update( 'test2' );
+
+		assert.equal(
+			preview.$value.text(),
+			'test2',
+			'Updated preview.'
+		);
+
+		assert.equal(
+			preview.$value.children().length,
+			0,
+			'Preview has no child node.'
+		);
+
 	} );
 
 }( jQuery, QUnit ) );

@@ -293,6 +293,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.widget',
+				'mediawiki.legacy.shared',
 			),
 			'messages' => array(
 				'valueview-preview-label',
