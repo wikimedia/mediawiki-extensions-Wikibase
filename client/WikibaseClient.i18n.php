@@ -1424,7 +1424,7 @@ $messages['he'] = array(
 	'wikibase-linkitem-input-site' => 'שפה:',
 	'wikibase-linkitem-input-page' => 'דף:',
 	'wikibase-linkitem-invalidsite' => 'בחרת אתר בלתי־ידוע או בלתי־תקין',
-	'wikibase-linkitem-confirmitem-text' => 'הדף שבחרת כבר מקושר ל[$1 פריט במאגר הנתונים המרכזי]. נא לאשר שהדפים להלן הם אלה בשרצית לקשר אל הדף הזה.',
+	'wikibase-linkitem-confirmitem-text' => 'הדף שבחרת כבר משויך ל[$1 פריט במאגר הנתונים המרכזי]. נא לאשר ש{{PLURAL:$2|הדף המוצג|הדפים המוצגים}} להלן {{PLURAL:$2|הוא הדף|הם הדפים}} שרצית לקשר אל הדף הזה.',
 	'wikibase-linkitem-confirmitem-button' => 'אישור',
 	'wikibase-linkitem-not-loggedin-title' => 'יש להיכנס לחשבון',
 	'wikibase-linkitem-not-loggedin' => 'יש להיכנס לחשבון בוויקי הזה וב[$1 מאגר הנתונים המרכזי] כדי להשתמש באפשרות הזאת.',
@@ -1435,6 +1435,7 @@ $messages['he'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 ויקינתונים',
 	'wikibase-rc-show-wikidata-pref' => 'הצגת עריכות ויקינתונים בשינויים אחרונים',
 	'wikibase-watchlist-show-changes-pref' => 'להציג עריכות בוויקינתונים ברשימת המעקב שלך',
+	'wikibase-error-serialize-error' => 'כשל בהכנת נתונים לשמירה',
 	'wikibase-error-invalid-entity-id' => 'המזהה שהוזן אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.',
 	'special-unconnectedpages' => 'דפים שלא מקושרים לפריטים',
 	'wikibase-unconnectedpages-legend' => 'אפשרויות לדפים לא מקושרים',
@@ -1443,9 +1444,10 @@ $messages['he'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" אינו קוד שפה תקין.',
 	'wikibase-unconnectedpages-page-warning' => 'לא ניתן היה להשתמש בכותרת הדף לשאילתה והמערכת תתעלם ממנה.',
 	'wikibase-unconnectedpages-iwdata-label' => 'רק דפים עם קישורים לשפות אחרות',
-	'wikibase-unconnectedpages-format-row' => '($1  קישורים לשפות אחרות בדף)',
+	'wikibase-unconnectedpages-format-row' => '({{PLURAL:|קישור אחד לשפה אחרת|$1 קישורים לשפות אחרות}} בדף)',
 	'wikibase-pageinfo-entity-id' => 'מזהה פריט בוויקינתונים',
 	'wikibase-pageinfo-entity-id-none' => 'אין',
+	'wikibase-property-render-error' => 'כשל בהכנת המאפיין $1 לתצוגה: $2',
 );
 
 /** Hindi (हिन्दी)
@@ -1948,7 +1950,7 @@ $messages['ko'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1"(은)는 올바른 언어 코드가 아닙니다.',
 	'wikibase-unconnectedpages-page-warning' => '문서 제목은 쿼리에 사용할 수 없고 무시됩니다.',
 	'wikibase-unconnectedpages-iwdata-label' => '언어 인터위키 링크가 있는 문서만',
-	'wikibase-unconnectedpages-format-row' => '(문서에 있는 언어 인터위키 링크 $1개)', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '(문서에 있는 {{PLURAL:$1|언어 인터위키 링크}} $1개)',
 	'wikibase-pageinfo-entity-id' => '위키데이터 항목 ID',
 	'wikibase-pageinfo-entity-id-none' => '없음',
 );
@@ -2090,6 +2092,7 @@ $messages['lb'] = array(
 	'wikibase-unconnectedpages-page-warning' => "Den Titel vun der säit konnt net fir d'Ufro benotzt ginn a gouf ignoréiert.",
 	'wikibase-unconnectedpages-iwdata-label' => 'Nëmme Säite mat Linke mat anere Sproochen',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|Link mat enger anerer Sprooch|Linke mat anere Sproochen}} op der Säit)',
+	'wikibase-pageinfo-entity-id' => 'ID vum Wikidata-Element',
 	'wikibase-pageinfo-entity-id-none' => 'Keng',
 );
 

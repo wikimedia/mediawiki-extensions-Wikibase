@@ -38,6 +38,7 @@ $magicWords['eo'] = array(
 /** Estonian (eesti) */
 $magicWords['et'] = array(
 	'noexternallanglinks' => array( 0, 'välistekeelelinkideta' ),
+	'property' => array( 0, 'omadus' ),
 );
 
 /** Finnish (suomi) */

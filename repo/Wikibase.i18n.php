@@ -1961,6 +1961,7 @@ $messages['bn'] = array(
 	'special-newproperty' => 'একটি নতুন বৈশিষ্ট্য তৈরি করুন',
 	'wikibase-newproperty-fieldset' => 'একটি নতুন বৈশিষ্ট্য তৈরি করুন',
 	'wikibase-newproperty-datatype' => 'উপাত্তের ধরণ:',
+	'wikibase-newproperty-invalid-datatype' => 'উল্লিখিত ডাটাটাইপ অবৈধ',
 	'special-newitem' => 'নতুন আইটেম তৈরি করুন',
 	'wikibase-newitem-fieldset' => 'নতুন আইটেম তৈরি করুন',
 	'wikibase-newitem-add-sitelink-failed' => 'সাইট লিঙ্ক সংরক্ষণ করা যায়নি।',
@@ -4236,6 +4237,7 @@ Tu dirección IP quedará registrada en el historial de revisiones de $1.',
 	'wikibase-item-summary-special-create-item' => 'Se ha creado un elemento de [$2] con {{PLURAL:$1|valor|valores}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Se creó una afirmación',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Se {{PLURAL:$3|eliminó una afirmación|eliminaron varias afirmaciones}}',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Se {{PLURAL:$4|modificó un calificador|modificaron $4 calificadores}} de {{PLURAL:$3|una afirmación|afirmaciones}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Se creó una nueva propiedad',
 	'wikibase-property-summary-wbeditentity-update' => 'Se actualizó una propiedad',
 	'wikibase-property-summary-wbeditentity-override' => 'Se sobreescribió una propiedad',
@@ -4790,6 +4792,7 @@ $messages['fa'] = array(
 	'wikibase-item-summary-wbremoveclaims-remove' => 'پاک کردن {{PLURAL:$3|مطالبه|مطالبه ها}}',
 	'wikibase-item-summary-wbsetclaim-update' => 'تغییر دادن {{PLURAL:$3|ادعا|ادعاها}}',
 	'wikibase-item-summary-wbsetclaim-create' => 'ساختن {{PLURAL:$3|ادعا|ادعاها}}',
+	'wikibase-property-summary-wbcreate-new' => 'ایجاد یک ویژگی جدید',
 	'wikibase-property-summary-wbeditentity-create' => 'ایجاد یک ویژگی جدید',
 	'wikibase-property-summary-wbeditentity-update' => 'به‌روز رسانی یک ویژگی',
 	'wikibase-property-summary-wbeditentity-override' => 'پریدن از روی یک ویژگی',
@@ -4814,12 +4817,12 @@ $messages['fa'] = array(
 * بخش سلسله مراتبی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته ای غیرمستقیم به آن ارجاع می‌دهد
 * کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
 * تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد',
-	'wikibase-listdatatypes-globe-coordinate-head' => 'مختصات جغرافیایی', # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-head' => 'مختصات جغرافیایی',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'داده حروفی برای مکان جغرافیایی یک جرم درخشان آسمانی که به صورت طول جغرافیایی-عرض جغرافیایی بر حسب درجه یا بوسیله سیستم های زئومتریک بیان می شود.
 * عرض جغرافیایی - بخش اول مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (شمالی/جنوبی) مشخص می شود
 * طول جغرافیایی - بخش دوم مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (خاوری/باختریی) مشخص می شود
 * ارتفاع(اختیاری) - مقدار مشخص(؟)ارتفاع از سطح مرجع، برای کره "زمین" که کره مرجع آن "WGS84" است
-* کره(اختیاری) - مقداری مشخص(؟)که بر حسب جسم آسمانی تعیین شده، به صورت پیشفرض کره "زمین" و "WGS84" است', # Fuzzy
+* کره(اختیاری) - مقداری مشخص(؟)که بر حسب جسم آسمانی تعیین شده، به صورت پیشفرض کره "زمین" و "WGS84" است',
 	'wikibase-listdatatypes-quantity-head' => 'کمیت',
 	'wikibase-listdatatypes-quantity-body' => 'داده های حروفی برای یک کمیت که به یک نوع یکای دقیق مربوط می شود. یکا، در واقع با مقدار وارد شده همراه می آید.
 * مقدار - بخشی نامعلوم از رشته(اندازه گیری شده با پیشوندی نامعلوم)
@@ -4851,6 +4854,7 @@ $messages['fa'] = array(
 	'right-item-override' => 'باطل‌کردن آیتم‌ها',
 	'right-item-create' => 'ایجاد آیتم‌ها',
 	'right-item-remove' => 'حذف آیتم‌ها',
+	'right-property-override' => 'نادیده گرفتن خواص',
 	'right-property-create' => 'ایجاد ویژگی‌ها',
 	'right-property-remove' => 'حذف ویژگی‌ها',
 	'right-alias-add' => 'افزودن نام‌های مستعار',
@@ -4863,6 +4867,7 @@ $messages['fa'] = array(
 	'right-label-update' => 'به‌روزرسانی نام‌ها',
 	'right-description-remove' => 'حذف توضیحات',
 	'right-description-update' => 'به‌روزرسانی توضیحات',
+	'action-item-override' => 'نادیده گرفتن موارد',
 	'action-item-create' => 'ساختن آیتم جدید',
 	'action-item-remove' => 'حذف موردها',
 	'action-property-override' => 'نادیده گرفتن خواص',
@@ -5431,12 +5436,12 @@ ffirmation ajoutée}}',
 * hierarchicalpart — partie implicite de Iri-string
 * query — partie implicite de Iri-string
 * fragment — partie implicite de Iri-string',
-	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordonnées géographiques', # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordonnées du globe',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Données littérales pour une position géographique donnée sous forme de paire latitude-longitude en GMS ou en degrés décimaux pour le corps céleste concerné. Par défaut, "Terre" puis "WGS84". Cela ajoute une résolution et une portée.
 * latitude — première partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe ou par le N/S en suffixe
 * longitude – seconde partie implicite (float, dms, dm, dd) de la chaîne des coordonnées, la direction étant donnée soit par le signe en préfixe soit par le E/W en suffixe
-* altitude (facultatif) – valeur explicite (?) pour l’élévation au-dessus d’un plan de référence, pour le globe "Terre" qui serait le globe de référence "WGS84"
-* globe (facultatif) – valeur de donnée explicite (?), fournissant le corps céleste, par défaut à "Terre" puis "WGS84"', # Fuzzy
+* altitude (facultatif) – valeur explicite (?) pour l’élévation au-dessus d’un plan de référence, pour le globe "Terre" ce serait le globe de référence "WGS84"
+* globe (facultatif) – valeur de donnée explicite (?), fournissant le corps céleste, par défaut "Terre" puis "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Quantité',
 	'wikibase-listdatatypes-quantity-body' => 'Champ de donnée littérale pour une quantité qui se rapporte à un type d’unité bien défini. L’unité réelle va dans les valeurs de donnée qui sont entrées.
 * value — partie implicite de la chaîne (l’application du préfixe de l’unité n’est pas clair)
@@ -5910,12 +5915,12 @@ O seu enderezo IP quedará rexistrado no historial de revisións da entidade "$1
 * hierarchicalpart – parte implícita da cadea de texto IRI
 * query – parte implícita da cadea de texto IRI
 * fragment – parte implícita da cadea de texto IRI',
-	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenada xeográfica', # Fuzzy
-	'wikibase-listdatatypes-globe-coordinate-body' => 'Datos literais para unha posición dada como un par latitude-lonxitude en GMS ou graos decimais do corpo estelar especificado. Por defecto, é "Terra" e logo "WGS84". Engade unha resolución e un rango.
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenadas do globo',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Datos literais para unha posición xeográfica dada como un par latitude-lonxitude en GMS ou graos decimais do corpo estelar especificado. Por defecto, é "Terra" e logo "WGS84". Engade unha resolución e un rango.
 * latitude – primeira parte implícita (float, dms, dm, dd) da cadea de coordenadas; a dirección achégase mediante o signo en prefixo ou o sufixo N/S
 * longitude – segunda parte implícita (float, dms, dm, dd) da cadea de coordenadas; a dirección achégase mediante o signo en prefixo ou o sufixo E/W
 * altitude (opcional) – valor explícito (?) para a altura sobre un plano de referencia; para o globo "Terra" sería o globo de referencia "WGS84"
-* globe (opcional) – valor de datos explícito (?), dado como un corpo estelar; por defecto, é "Terra" e logo "WGS84"', # Fuzzy
+* globe (opcional) – valor de datos explícito (?), dado como un corpo estelar; por defecto, é "Terra" e logo "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Cantidade',
 	'wikibase-listdatatypes-quantity-body' => 'Campo de datos literal para unha cantidade relacionada con algún tipo de unidade ben definida. A unidade real vai nos valores de datos introducidos.
 * value – parte implícita da cadea de texto (o mapeamento do prefixo da unidade non está claro)
@@ -6158,6 +6163,8 @@ $messages['he'] = array(
 	'wikibase-setsitelink-submit' => 'הגדרת קישור אתר',
 	'wikibase-setsitelink-warning-remove' => 'האם ברצונך באמת להסיר את קישור אתר של [[$1]]?',
 	'wikibase-setsitelink-invalid-site' => 'מזהה האתר "$1" אינו ידוע. נא להשתמש במזהה אתר קיים, כגון "enwiki".',
+	'wikibase-setsitelink-add-failed' => 'לא התאפשרה שמירת קישור האתר.',
+	'wikibase-setsitelink-remove-failed' => 'אל התאפשרה הסרת קישור האתר.',
 	'wikibase-setentity-id' => 'מזהה:',
 	'wikibase-setentity-language' => 'שפה:',
 	'wikibase-setentity-invalid-langcode' => 'מזהה השפה "$1" אינו ידוע. נא להשתמש במזהה שפה שידוע למערכת, כגון "en".',
@@ -6268,12 +6275,12 @@ $messages['he'] = array(
 * hierarchicalpart – חלק מתוך מחרוזת קישור בתסדיר IRI
 * query – חלק מתוך מחרוזת קישור בתסדיר IRI
 * fragment – חלק מתוך מחרוזת קישור בתסדיר IRI',
-	'wikibase-listdatatypes-globe-coordinate-head' => 'קואורדינטה גאוגרפית', # Fuzzy
-	'wikibase-listdatatypes-globe-coordinate-body' => 'נתונים מפורשים על מיקום גאוגרפי, בתור זוג קו־רוחב–קו־אורך ב־gms או מעלות עשרוניות לגוף השמימי הנתון. בררת המחדל היא להשתמש בכדור הארץ ובמערכת גאודזית עולמית (WGS84). מתווספים רזולוציה וטווח.
+	'wikibase-listdatatypes-globe-coordinate-head' => 'נקודת ציון של גלובוס',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'נתונים מפורשים על מיקום גאוגרפי, בתור זוג קו־רוחב–קו־אורך ב־gms או במעלות עשרוניות לגוף השמימי הנתון. בררת המחדל היא להשתמש בכדור הארץ ובמערכת גאודזית עולמית (WGS84). מתווספים רזולוציה וטווח.
 * latitude – החלק המשתמע הראשון (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־N/S בסוף.
 * longitude – החלק המשתמע השני (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־E/W בסוף.
-* altitude (לא חובה) ערך מפורש (?) לגובה על המשטח המיוחס, עבור כדור הארץ (Earth) זה WGS84
-* globe (לא חובה) ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "גדור הארץ" (Earth) ו־WGS84', # Fuzzy
+* altitude (לא חובה) ערך מפורש (?) לגובה על משטח הייחוס, עבור כדור הארץ (Earth) זה גלובוס הייחוס "WGS84"
+* globe (לא חובה) ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "כדור הארץ" (Earth) ו־WGS84',
 	'wikibase-listdatatypes-quantity-head' => 'כמות',
 	'wikibase-listdatatypes-quantity-body' => 'שדה נתונים מפורשים שמתייחס ליחידה כלשהי שמודרת היטב. היחידה האמתית אמורה להיות בערכי הנתונים המוזנים.
 * value – חלק משתמע של המחרוזת (מיפוי של תחילית היחידה אינו ברור)
@@ -6282,15 +6289,14 @@ $messages['he'] = array(
 	'wikibase-listdatatypes-monolingual-text-head' => 'טקסט חד־לשוני',
 	'wikibase-listdatatypes-monolingual-text-body' => 'שדה נתונים מפורש למחרוזת שאינה מתורגמת לשפות אחרות. הסוג הזה של המחרוזת מוגדר פעם אחת ומשמש בכל השפות. שימוש אופייני הוא שם גאוגרפי שכתוב בשפה המקומית, מזהה מסוג כלשהו, נוסחה כימית, או שם מדעי בלטינית.
 * language – ערך מפורש לזיהוי השפה של החלק הטקסטואלי
-* text – ערך מפורש למחרוזת הייחודית לשפה', # Fuzzy
+* value – ערך מפורש למחרוזת הייחודית לשפה',
 	'wikibase-listdatatypes-multilingual-text-head' => 'טקסט רב־לשוני',
 	'wikibase-listdatatypes-multilingual-text-body' => 'שדה נתונים מפורש למחרוזת שצריכה להיות מתורגמת לשפות אחרות. שימוש אופייני הוא שם ישות שיכולה לעניין את כל העולם ושיש לה שמות שונים בשפה לא מקומית. אלה יכולים להיות שונים בשפות שונות ולהיכתב במערכות כתב שונות.
 * language – ערך מפורש לזיהוי השפה של החלק הטקסטואלי
-* text – ערך מפורש למחרוזת הייחודית לשפה', # Fuzzy
+* value – ערך מפורש למחרוזת הייחודית לשפה',
 	'wikibase-listdatatypes-string-head' => 'מחרוזת',
-	'wikibase-listdatatypes-string-body' => 'שדה נתונים מפורש למחרוזת של תווים. שימוש נפוץ הוא מזהים בעלי כתיב שאינו תלוי בשפה. לפעמים אפשר לתעתק מחרוזות כאלה למערכות כתב אחרות.
-* language – ערך מפורש לזיהוי השפה של החלק הטקסטואלי
-* text – ערך מפורש למחרוזת הייחודית לשפה', # Fuzzy
+	'wikibase-listdatatypes-string-body' => 'שדה נתונים מפורש למחרוזת של גליפים. השימוש האופייני הוא מזהים שיש להם צורות כתובות שאינן תלויות בשפה של הקורא.
+* value – ערך מפורש למחרוזת הייחודית לשפה',
 	'wikibase-listdatatypes-time-head' => 'זמן',
 	'wikibase-listdatatypes-time-body' => 'שדה נתונים מפורש לערך של זמן. נתון בתור זמן עם רמה מסוימת של דיוק וגבולות. הזמן תמיד שמור פנימית כתאריך גרגוריאני מקדים, אבל יכול להשתמש בתסדירים אחרים בעת פענוח ועיצוב.
 * time – ערך מפורש בזמן, מיוצג לפי תקן ISO8601, בשנה תמיד יש 11 ספרות, התאריך תמיד חיובי או שלילי, בתסדיר <span dir="ltr">+00000002013-01-01T00:00:00Z</span>.
@@ -7991,12 +7997,12 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 * hierarchicalpart - implicito, da parte dell'Iri-string
 * query - implicito, da parte dell'Iri-string
 * frammento - implicito, da parte dell'Iri-string",
-	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordinate geografiche', # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordinate geografiche',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Campo dati letterale per una posizione geografica indicata come latitudine-longitudine in gms o gradi decimali per il corpo stellare indicato. I valori predefiniti sono "Terra" e "WGS84". Aggiunge risoluzione e intervallo di valori.
 * latitudine – implicito prima parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti N/S
 * longitudine – implicito seconda parte (float, dms, dm, dd) della coordinata, la direzione è data dal segno preposto o dai valori posposti E/W
 * altitudine (facoltativo) – valore esplicito (?) per l\'altezza sopra un piano di riferimento, per il pianeta "Terra" dovrebbe essere il globo di riferimento "WGS84"
-* pianeta (facoltativo) – valore esplicito (?), indicato come corpo stellare; i valori predefiniti sono "Terra" e "WGS84"', # Fuzzy
+* pianeta (facoltativo) – valore esplicito (?), indicato come corpo stellare; i valori predefiniti sono "Terra" e "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Quantità',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Testo monolingua',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Testo multilingua',
@@ -8302,12 +8308,12 @@ $messages['ja'] = array(
 * hierarchicalpart - IRI文字列の非明示部分
 * query - IRI文字列の非明示部分
 * fragment - IRI文字列の非明示部分',
-	'wikibase-listdatatypes-globe-coordinate-head' => '緯度経度', # Fuzzy
-	'wikibase-listdatatypes-globe-coordinate-body' => 'ある星における地理座標を緯度経度の組として度分秒または少数形式で指定したリテラルデータ。既定では「地球」それから「WGS84」です。分解能と範囲が指定されます。
-* latitude – 座標文字列の1番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の N か S で指定されます
-* longitude – 座標文字列の2番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の E か W で指定されます
+	'wikibase-listdatatypes-globe-coordinate-head' => '座標',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'ある星における地理座標を緯度経度の組として度分秒または少数形式で指定したリテラルデータ。「地球」それから「WGS84」が既定となっており、分解能と範囲が指定されます。
+* latitude – 座標文字列の1番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の N または S で指定されます
+* longitude – 座標文字列の2番目の非明示部分 (float, dms, dm, dd) で、方向は先頭の符号か末尾の E または W で指定されます
 * altitude (省略可) – ある参考面からの高さを表した明示 (?) の値。地球については「WGS84」準拠楕円体が使われる
-* globe (省略可) – 星を表す明示 (?) のデータ値。既定は「地球」それから「WGS84」', # Fuzzy
+* globe (省略可) – 星を表す明示 (?) のデータ値。既定は「地球」それから「WGS84」',
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-quantity-body' => 'なんらかの明確に定義された単位に結びついた量を表すリテラルデータ。実際の単位は入力されたデータ値に含まれています。
 * value – 文字列の非明示部分（単位接頭辞の対応付けは不明瞭です）
@@ -9188,7 +9194,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-property-summary-wbsetdescription-remove' => '[$2]-Beschreiwung ewechgeholl',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Element',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Mediefichier op Commons',
-	'wikibase-listdatatypes-globe-coordinate-head' => 'Geokoordinaten', # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Global Koordinaten',
 	'wikibase-listdatatypes-quantity-head' => 'Quantitéit',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Text an enger Sprooch',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Text a méi Sproochen',
