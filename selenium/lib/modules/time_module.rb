@@ -9,11 +9,6 @@
 module TimePage
   include PageObject
   # time UI elements
-  div(:timeInputExtender, :class => "ui-inputextender-extension")
-  div(:timeInputExtenderClose, :class => "ui-inputextender-extension-close")
-  div(:timePreview, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-preview')]")
-  div(:timePreviewLabel, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-preview')]/div[contains(@class, 'valueview-preview-label')]")
-  div(:timePreviewValue, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-preview')]/div[contains(@class, 'valueview-preview-value')]")
   div(:timeCalendarHint, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-calendarhint')]")
   span(:timeCalendarHintMessage, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-calendarhint')]/span[contains(@class, 'valueview-expert-timeinput-calendarhint-message')]")
   link(:timeCalendarHintSwitch, :xpath => "//div[contains(@class, 'ui-inputextender-extension')]/div[contains(@class, 'valueview-expert-timeinput-calendarhint')]/span[contains(@class, 'valueview-expert-timeinput-calendarhint-switch')]")
@@ -31,7 +26,7 @@ module TimePage
   unordered_list(:timePrecisionMenu, :class => "ui-listrotator-menu", :index => 0)
   unordered_list(:timeCalendarMenu, :class => "ui-listrotator-menu", :index => 1)
   # methods
-  def select_precision prec
+  def select_time_precision prec
     self.show_advanced_time_settings
     if prec == "auto"
       self.timePrecisionRotatorAuto

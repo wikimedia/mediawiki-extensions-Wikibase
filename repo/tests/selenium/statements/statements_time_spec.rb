@@ -142,15 +142,15 @@ describe "Check time statements UI" do
         page.wait_for_entity_selector_list
         page.wait_for_property_value_box
         page.statementValueInputField = time_values[0]["input"]
-        page.timeInputExtender_element.when_visible
-        page.timeInputExtender_element.visible?.should be_true
-        page.timeInputExtenderClose_element.click
-        page.timeInputExtender_element.when_not_visible
-        page.timeInputExtender_element.visible?.should be_false
+        page.inputExtender_element.when_visible
+        page.inputExtender_element.visible?.should be_true
+        page.inputExtenderClose_element.click
+        page.inputExtender_element.when_not_visible
+        page.inputExtender_element.visible?.should be_false
         page.statementValueInputField_element.click
-        page.timeInputExtender_element.when_visible
-        page.timeInputExtender_element.visible?.should be_true
-        page.timePreviewValue_element.visible?.should be_true
+        page.inputExtender_element.when_visible
+        page.inputExtender_element.visible?.should be_true
+        page.inputPreviewValue_element.visible?.should be_true
         page.timeInputExtenderAdvanced_element.visible?.should be_true
         page.timeInputExtenderAdvanced
         page.timePrecision_element.when_visible
@@ -191,10 +191,10 @@ describe "Check time statements UI" do
           page.wait_for_property_value_box
           page.statementValueInputField_element.clear
           page.statementValueInputField = time["input"]
-          page.timeInputExtender_element.when_visible
-          page.select_precision time["precision"]
+          page.inputExtender_element.when_visible
+          page.select_time_precision time["precision"]
           page.select_calendar time["calendar"]
-          page.timePreviewValue.should == time["expected_preview"]
+          page.inputPreviewValue.should == time["expected_preview"]
           page.timePrecisionRotatorSelect_element.text.should == time["expected_precision"]
           if time["expected_calendarhint"] == ""
             page.timeCalendarHint_element.visible?.should be_false
