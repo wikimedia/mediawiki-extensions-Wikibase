@@ -6,12 +6,17 @@ use DataTypes\DataTypeFactory;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\EntityContentFactory;
+use Wikibase\EntityLookup;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
+use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
+use Wikibase\Store;
+use Wikibase\StoreFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -55,12 +60,24 @@ final class WikibaseRepo {
 	private $idFormatter = null;
 
 	/**
+	 * @var Store
+	 */
+	private $store;
+
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $propertyDataTypeLookup;
+
+	/**
 	 * @since 0.4
 	 *
-	 * @param SettingsArray $settings
+	 * @param SettingsArray   $settings
+	 * @param Store           $store
 	 */
-	public function __construct( SettingsArray $settings ) {
+	public function __construct( SettingsArray $settings, Store $store ) {
 		$this->settings = $settings;
+		$this->store = $store;
 	}
 
 	/**
@@ -122,6 +139,28 @@ final class WikibaseRepo {
 	}
 
 	/**
+	 * @since 0.4
+	 *
+	 * @return PropertyDataTypeLookup
+	 */
+	public function getPropertyDataTypeLookup() {
+		if ( $this->propertyDataTypeLookup === null ) {
+			$this->propertyDataTypeLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
+		}
+
+		return $this->propertyDataTypeLookup;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return EntityLookup
+	 */
+	public function getEntityLookup() {
+		return $this->store->getEntityLookup();
+	}
+
+	/**
 	 * Returns the base to use when generating URIs for use in RDF output.
 	 *
 	 * @return string
@@ -166,7 +205,10 @@ final class WikibaseRepo {
 	 * @return WikibaseRepo
 	 */
 	public static function newInstance() {
-		return new self( Settings::singleton() );
+		return new self(
+			Settings::singleton(),
+			StoreFactory::getStore()
+		);
 	}
 
 	/**

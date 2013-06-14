@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test\Api;
+use Wikibase\PropertyContent;
 use Wikibase\Reference;
 
 /**
@@ -38,8 +39,23 @@ use Wikibase\Reference;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class SetReferenceTest extends \ApiTestCase {
+
+	public function setUp() {
+		static $hasProperties = false;
+		if ( !$hasProperties ) {
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( 42 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'testing' );
+
+			$hasProperties = true;
+		}
+
+		parent::setUp();
+	}
 
 	// TODO: clean this up so more of the input space can easily be tested
 	// semi-blocked by cleanup of GUID handling in claims
@@ -133,7 +149,7 @@ class SetReferenceTest extends \ApiTestCase {
 	/**
 	 * @dataProvider invalidClaimProvider
 	 */
-	public function testInvalidClaimGuid( $claimGuid, $snakHash, $refHash ) {
+	public function testInvalidClaimGuid( $claimGuid, $snakHash, $refHash, $expectedError ) {
 		$caughtException = false;
 
 		$params = array(
@@ -146,24 +162,22 @@ class SetReferenceTest extends \ApiTestCase {
 
 		try {
 			$this->doApiRequest( $params );
+			$this->fail( "Exception with code $expectedError expected" );
 		} catch ( \UsageException $e ) {
-			$this->assertEquals( $e->getCodeString(), 'setreference-invalid-guid', 'Invalid claim guid raised correct error' );
-			$caughtException = true;
+			$this->assertEquals( $e->getCodeString(), $expectedError, 'Error code' );
 		}
-
-		$this->assertTrue( $caughtException, 'Exception was caught' );
 	}
 
 	public function invalidClaimProvider() {
-		$snak = new \Wikibase\PropertyValueSnak( 722, new \DataValues\StringValue( 'abc') );
+		$snak = new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'abc') );
 		$snakHash = $snak->getHash();
 
-		$reference = new \Wikibase\PropertyValueSnak( 723, new \DataValues\StringValue( 'def' ) );
+		$reference = new \Wikibase\PropertyValueSnak( 42, new \DataValues\StringValue( 'def' ) );
 		$refHash = $reference->getHash();
 
 		return array(
-			array( 'xyz', $snakHash, $refHash ),
-			array( 'x$y$z', $snakHash, $refHash )
+			array( 'xyz', $snakHash, $refHash, 'setreference-invalid-guid' ),
+			array( 'x$y$z', $snakHash, $refHash, 'setreference-invalid-guid' )
 		);
 	}
 

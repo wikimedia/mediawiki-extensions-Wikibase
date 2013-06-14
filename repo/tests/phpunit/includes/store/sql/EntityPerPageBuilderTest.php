@@ -53,9 +53,14 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		parent::setUp();
 
 		$settings = $this->getTestSettings();
-		$this->wikibaseRepo = new WikibaseRepo( $settings );
+		$store = StoreFactory::getStore( 'sqlstore' );
 
-		$this->entityPerPageTable = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
+		$this->wikibaseRepo = new WikibaseRepo(
+			$settings,
+			$store
+		);
+
+		$this->entityPerPageTable = $store->newEntityPerPage();
 
 		$this->clearTables();
 		$this->addItems();
