@@ -11,6 +11,7 @@ module StatementPage
   include EntitySelectorPage
   include ReferencePage
   include QualifierPage
+
   # statements UI elements
   link(:addStatement, :xpath => "//div[contains(@class, 'wb-claimlist')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
   link(:addClaimToFirstStatement, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
@@ -18,9 +19,8 @@ module StatementPage
   link(:saveStatement, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='save']")
   link(:cancelStatement, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='cancel']")
   link(:removeClaimButton, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='remove']")
-  # TODO: could this lead to problems? for CM & item type properties there is an additional "a" element around the textbox; this is not the case for string type properies
-  #text_area(:statementValueInput, :xpath => "//div[contains(@class, 'valueview-ineditmode')]/div/a/textarea[contains(@class, 'valueview-input')]")
   text_area(:statementValueInput, :class => "valueview-input")
+  text_field(:statementValueInputField, :class => "valueview-input")
   div(:claimEditMode, :xpath => "//div[contains(@class, 'wb-claim-section')]/div[contains(@class, 'wb-edit')]")
   div(:statement1Name, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]")
   div(:statement2Name, :xpath => "//div[contains(@class, 'wb-claim-section')][2]/div[contains(@class, 'wb-claim-section-name')]/div[contains(@class, 'wb-claim-name')]")
@@ -40,7 +40,7 @@ module StatementPage
 
   def wait_for_property_value_box
     wait_until do
-      self.statementValueInput?
+      self.statementValueInput? || self.statementValueInputField?
     end
   end
 
@@ -59,6 +59,9 @@ module StatementPage
     if self.statementValueInput?
       self.statementValueInput = statement_value
       ajax_wait
+    elsif self.statementValueInputField?
+      self.statementValueInputField = statement_value
+      ajax_wait
     end
     saveStatement
     ajax_wait
@@ -66,15 +69,15 @@ module StatementPage
   end
 
   def edit_first_statement(statement_value)
-      editFirstStatement
-      self.wait_for_property_value_box
-      self.statementValueInput_element.clear
-      self.statementValueInput = statement_value
-      ajax_wait
-      saveStatement
-      ajax_wait
-      self.wait_for_statement_request_finished
-    end
+    editFirstStatement
+    self.wait_for_property_value_box
+    self.statementValueInput_element.clear
+    self.statementValueInput = statement_value
+    ajax_wait
+    saveStatement
+    ajax_wait
+    self.wait_for_statement_request_finished
+  end
 
   def add_claim_to_first_statement(statement_value)
     addClaimToFirstStatement
