@@ -3,7 +3,7 @@
     "type": "mediawiki-extension",
     "description": "Structured data repository and client for MediaWiki",
     "keywords": ["wikibase", "wikidata", "wikibaselib", "wikibaseclient", "wikibaserepo"],
-    "homepage": "https://www.mediawiki.org/wiki/Extension:Wikibase",
+    "homepage": "https://www.mediawiki.org/wiki/Wikibase",
     "license": "GNU GPL v2+",
     "authors": [
         {
@@ -11,11 +11,17 @@
             "role": "Developer"
         }
     ],
+	"support": {
+		"issues": "https://bugzilla.wikimedia.org/",
+		"irc": "irc://irc.freenode.net/wikimedia-wikidata",
+		"forum": "https://www.mediawiki.org/wiki/Talk:Wikibase",
+		"wiki": "https://www.mediawiki.org/wiki/Wikibase"
+	},
     "require": {
         "php": ">=5.3.0",
-        "mediawiki/core": ">=1.20",
-        "mediawiki/data-values": "*",
-        "diff/diff": ">=0.6",
-        "ask/ask": "*"
-    }
+        "data-values/data-values": "*",
+		"wikibase/data-model": "*",
+        "diff/diff": ">=0.6"
+    },
+	"minimum-stability" : "dev"
 }
