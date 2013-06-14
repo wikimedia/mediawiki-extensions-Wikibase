@@ -88,7 +88,7 @@ class SetClaimValueTest extends \ApiTestCase {
 			 * @var Claim $claim
 			 */
 			foreach ( $entity->getClaims() as $claim ) {
-				$argLists[] = array( $entity, $claim->getGuid(), '~=[,,_,,]:3' );
+				$argLists[] = array( $entity, $claim->getGuid(), 'Kittens.png' );
 			}
 		}
 
