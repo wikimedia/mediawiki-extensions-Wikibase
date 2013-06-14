@@ -34,6 +34,14 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
+if ( defined( 'WB_VERSION' ) ) {
+	// Do not initialize more then once.
+	return;
+}
+
+define( 'WB_VERSION', '0.4 alpha'
+	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
+
 if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
 	die( '<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.' );
 }
@@ -46,9 +54,6 @@ if ( !defined( 'WBL_VERSION' ) ) {
 if ( !defined( 'WBL_VERSION' ) ) {
 	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:WikibaseLib">WikibaseLib</a> extension.' );
 }
-
-define( 'WB_VERSION', '0.4 alpha'
-	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
 $wgExtensionCredits['wikibase'][] = array(
 	'path' => __DIR__,
