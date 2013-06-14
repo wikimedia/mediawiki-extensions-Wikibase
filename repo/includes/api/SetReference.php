@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiBase, MWException;
 
 use DataValues\IllegalValueException;
+use ApiMain;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
@@ -14,7 +15,6 @@ use Wikibase\Reference;
 use Wikibase\Snaks;
 use Wikibase\SnakList;
 use Wikibase\Claims;
-use Wikibase\Settings;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -50,6 +50,28 @@ class SetReference extends ApiWikibase {
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
+
+	/**
+	 * @var SnakValidationHelper
+	 */
+	protected $snakValidation;
+
+	/**
+	 * see ApiBase::__construct()
+	 *
+	 * @param ApiMain $mainModule
+	 * @param string  $moduleName
+	 * @param string  $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$this->snakValidation = new SnakValidationHelper(
+			$this,
+			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
+			WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
+		);
+	}
 
 	/**
 	 * @see ApiBase::execute
@@ -135,10 +157,13 @@ class SetReference extends ApiWikibase {
 					$this->dieUsage( 'Invalid snak JSON given', 'setreference-invalid-snaks' );
 				}
 				foreach ( $byPropertySnaks as $rawSnak ) {
-					$snaks[] = $snakUnserializer->newFromSerialization( $rawSnak );
+					$snak = $snakUnserializer->newFromSerialization( $rawSnak );
+					$this->snakValidation->validateSnak( $snak );
+					$snaks[] = $snak;
 				}
 			}
 		} catch ( IllegalValueException $ex ) {
+			// Handle Snak instantiation failures
 			$this->dieUsage( $ex->getMessage(), 'setreference-invalid-snaks' );
 		}
 
