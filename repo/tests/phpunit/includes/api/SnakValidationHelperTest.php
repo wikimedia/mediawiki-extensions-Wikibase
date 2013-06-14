@@ -6,10 +6,7 @@ use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\StringValue;
-use ValueValidators\Error;
-use ValueValidators\Result;
 use ValueValidators\StringValidator;
-use ValueValidators\ValueValidator;
 use Wikibase\Claim;
 use Wikibase\EntityId;
 use Wikibase\Lib\InMemoryDataTypeLookup;
@@ -28,7 +25,7 @@ use Wikibase\Validators\DataValueValidator;
 use Wikibase\Validators\SnakValidator;
 
 /**
- * @covers Wikibase\Validators\SnakValidator
+ * @covers Wikibase\Api\SnakValidationHelper
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,11 +50,12 @@ use Wikibase\Validators\SnakValidator;
  *
  * @group Wikibase
  * @group WikibaseValidators
+ * @group WikibaseApi
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class SnakValidatorTest extends \MediaWikiTestCase {
+class SnakValidationHelperTest extends \MediaWikiTestCase {
 
 	/**
 	 * @var DataTypeFactory
@@ -87,6 +85,7 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p1, 'numeric' );
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p2, 'alphabetic' );
 	}
+
 
 	public static function provideValidateClaimSnaks() {
 		$p1 = new EntityId( Property::ENTITY_TYPE, 1 ); // numeric
@@ -144,88 +143,9 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expectedValid, $result->isValid(), $description );
 	}
 
-	public static function provideValidateReferences() {
-		$p1 = new EntityId( Property::ENTITY_TYPE, 1 ); // numeric
-		$p2 = new EntityId( Property::ENTITY_TYPE, 2 ); // alphabetic
+	public static function provideValidateSnak() {
+		//TODO: share code with SnakValidatorTest
 
-		$cases = array();
-
-		$references = new ReferenceList();
-		$cases[] = array( $references, 'empty reference list', true );
-
-		$references = new ReferenceList( array (
-			new Reference( new SnakList( array(
-				new PropertyValueSnak( $p1, new StringValue( '123' ) )
-			) ) ),
-			new Reference( new SnakList( array(
-				new PropertyValueSnak( $p2, new StringValue( 'abc' ) )
-			) ) )
-		) );
-		$cases[] = array( $references, 'conforming reference list', true );
-
-		$references = new ReferenceList( array (
-			new Reference( new SnakList( array(
-				new PropertyValueSnak( $p1, new StringValue( '123' ) )
-			) ) ),
-			new Reference( new SnakList( array(
-				new PropertyValueSnak( $p2, new StringValue( '456' ) )
-			) ) )
-		) );
-		$cases[] = array( $references, 'invalid reference list', false );
-
-		return $cases;
-	}
-
-	/**
-	 * @dataProvider provideValidateReferences
-	 */
-	public function testValidateReferences( References $references, $description, $expectedValid = true ) {
-		$validator = new SnakValidator( $this->propertyDataTypeLookup, $this->dataTypeFactory );
-
-		$result = $validator->validateReferences( $references );
-
-		$this->assertEquals( $expectedValid, $result->isValid(), $description );
-	}
-
-
-	public static function provideValidateReference() {
-		$p1 = new EntityId( Property::ENTITY_TYPE, 1 ); // numeric
-		$p2 = new EntityId( Property::ENTITY_TYPE, 2 ); // alphabetic
-
-		$cases = array();
-
-		$reference = new Reference( new SnakList() );
-		$cases[] = array( $reference, 'empty reference', true );
-
-		$reference = new Reference( new SnakList( array(
-				new PropertyValueSnak( $p1, new StringValue( '123' ) ),
-				new PropertyValueSnak( $p2, new StringValue( 'abc' ) )
-			) )
-		);
-		$cases[] = array( $reference, 'conforming reference', true );
-
-		$reference = new Reference( new SnakList( array(
-				new PropertyValueSnak( $p1, new StringValue( '123' ) ),
-				new PropertyValueSnak( $p2, new StringValue( '456' ) )
-			) )
-		);
-		$cases[] = array( $reference, 'invalid reference', false );
-
-		return $cases;
-	}
-
-	/**
-	 * @dataProvider provideValidateReference
-	 */
-	public function testValidateReference( Reference $reference, $description, $expectedValid = true ) {
-		$validator = new SnakValidator( $this->propertyDataTypeLookup, $this->dataTypeFactory );
-
-		$result = $validator->validateReference( $reference );
-
-		$this->assertEquals( $expectedValid, $result->isValid(), $description );
-	}
-
-	public static function provideValidate() {
 		$p1 = new EntityId( Property::ENTITY_TYPE, 1 ); // numeric
 		$p2 = new EntityId( Property::ENTITY_TYPE, 2 ); // alphabetic
 
@@ -253,9 +173,9 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate
+	 * @dataProvider provideValidateSnak
 	 */
-	public function testValidate( Snak $snak, $description, $expectedValid = true ) {
+	public function testValidateSnak( Snak $snak, $description, $expectedValid = true ) {
 		$validator = new SnakValidator( $this->propertyDataTypeLookup, $this->dataTypeFactory );
 
 		$result = $validator->validate( $snak );
@@ -263,27 +183,5 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expectedValid, $result->isValid(), $description );
 	}
 
-	public static function provideValidateDataValue() {
-		return array(
-			array( new StringValue( '123' ), 'numeric', 'p1', 'valid numeric value', true ),
-			array( new StringValue( '123' ), 'alphabetic', 'p2', 'invalid alphabetic value', false ),
-			array( new StringValue( 'abc' ), 'alphabetic', 'p2', 'valid alphabetic value', true ),
-			array( new StringValue( 'abc' ), 'numeric', 'p1', 'invalid numeric value', false ),
-
-			//XXX: string length check is currently broken
-			//array( new StringValue( '01234567890123456789' ), 'numeric', 'p1', 'overly long numeric value', false ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideValidateDataValue
-	 */
-	public function testValidateDataValue( DataValue $dataValue, $dataTypeId, $propertyName, $description, $expectedValid = true ) {
-		$validator = new SnakValidator( $this->propertyDataTypeLookup, $this->dataTypeFactory );
-
-		$result = $validator->validateDataValue( $dataValue, $dataTypeId, $propertyName );
-
-		$this->assertEquals( $expectedValid, $result->isValid(), $description );
-	}
-
 }
+
