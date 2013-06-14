@@ -95,6 +95,7 @@ return call_user_func( function() {
 		'Wikibase\Api\SetClaim' => 'includes/api/SetClaim.php',
 		'Wikibase\Api\RemoveQualifiers' => 'includes/api/RemoveQualifiers.php',
 		'Wikibase\Api\SetQualifier' => 'includes/api/SetQualifier.php',
+		'Wikibase\Api\SnakValidationHelper' => 'includes/api/SnakValidationHelper.php',
 
 		// includes/content
 		'Wikibase\EntityContent' => 'includes/content/EntityContent.php',
@@ -171,6 +172,7 @@ return call_user_func( function() {
 		'Wikibase\Test\EntityDataSerializationServiceTest' => 'tests/phpunit/includes/specials/EntityDataSerializationServiceTest.php',
 		'Wikibase\Test\EntityDataRequestHandlerTest' => 'tests/phpunit/includes/specials/EntityDataRequestHandlerTest.php',
 		'Wikibase\Test\EntityDataTestProvider' => 'tests/phpunit/includes/specials/EntityDataTestProvider.php',
+		'Wikibase\Test\TestValidator' => 'tests/phpunit/includes/Validators/TestValidator.php',
 	);
 
 

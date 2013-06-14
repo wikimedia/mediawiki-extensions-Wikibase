@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use DataValues\IllegalValueException;
+use ApiMain;
 use MWException;
 
 use ValueParsers\ParseException;
@@ -13,12 +14,14 @@ use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claim;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Snak;
 use Wikibase\Snaks;
 use Wikibase\SnakFactory;
 use Wikibase\PropertyValueSnak;
 use Wikibase\LibRegistry;
 use Wikibase\Settings;
 use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\validators\SnakValidator;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -54,6 +57,28 @@ class SetQualifier extends ApiWikibase {
 	// TODO: conflict detection
 	// TODO: more explicit support for snak merging?
 	// TODO: claim uniqueness
+
+	/**
+	 * @var SnakValidationHelper
+	 */
+	protected $snakValidation;
+
+	/**
+	 * see ApiBase::__construct()
+	 *
+	 * @param ApiMain $mainModule
+	 * @param string  $moduleName
+	 * @param string  $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$this->snakValidation = new SnakValidationHelper(
+			$this,
+			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
+			WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
+		);
+	}
 
 	/**
 	 * @see ApiBase::execute
@@ -222,11 +247,15 @@ class SetQualifier extends ApiWikibase {
 		}
 
 		try {
-			$factory = new SnakFactory();
+			$factory = new SnakFactory(); //TODO: should be injected!
 			$newQualifier = $factory->newSnak( $propertyId, $snakType, $snakValue );
+
+			$this->snakValidation->validateSnak( $newQualifier );
 
 			return $qualifiers->addSnak( $newQualifier );
 		} catch ( IllegalValueException $ex ) {
+			//Note: This handles failures during snak instantiation, not validation.
+			//      Validation errors are handled by the validation helper.
 			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-snak' );
 		}
 
@@ -268,6 +297,8 @@ class SetQualifier extends ApiWikibase {
 				$params['snaktype'],
 				isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
 			);
+
+		$this->snakValidation->validateSnak( $newQualifier );
 
 			return $qualifiers->addSnak( $newQualifier );
 		} catch ( IllegalValueException $ex ) {

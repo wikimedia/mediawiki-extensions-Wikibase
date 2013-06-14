@@ -2,6 +2,9 @@
 
 namespace Wikibase\Test\Api;
 use Wikibase\Claim;
+use Wikibase\EntityId;
+use Wikibase\Property;
+use Wikibase\PropertyContent;
 
 /**
  * Unit tests for the Wikibase\Repo\Api\ApSetClaim class.
@@ -37,6 +40,7 @@ use Wikibase\Claim;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SetClaimTest extends \ApiTestCase {
 
@@ -44,11 +48,36 @@ class SetClaimTest extends \ApiTestCase {
 	 * @return \Wikibase\Snak[]
 	 */
 	protected function snakProvider() {
+		static $hasProperties = false;
+
+		$prop42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$prop9001 = new EntityId( Property::ENTITY_TYPE, 9001 );
+		$prop7201010 = new EntityId( Property::ENTITY_TYPE, 7201010 );
+
+		if ( !$hasProperties ) {
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( $prop42 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'testing' );
+
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( $prop9001 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'testing' );
+
+			$prop = PropertyContent::newEmpty();
+			$prop->getEntity()->setId( $prop7201010 );
+			$prop->getEntity()->setDataTypeId( 'string' );
+			$prop->save( 'testing' );
+
+			$hasProperties = true;
+		}
+
 		$snaks = array();
 
-		$snaks[] = new \Wikibase\PropertyNoValueSnak( 42 );
-		$snaks[] = new \Wikibase\PropertySomeValueSnak( 9001 );
-		$snaks[] = new \Wikibase\PropertyValueSnak( 7201010, new \DataValues\StringValue( 'o_O' ) );
+		$snaks[] = new \Wikibase\PropertyNoValueSnak( $prop42 );
+		$snaks[] = new \Wikibase\PropertySomeValueSnak( $prop9001 );
+		$snaks[] = new \Wikibase\PropertyValueSnak( $prop7201010, new \DataValues\StringValue( 'o_O' ) );
 
 		return $snaks;
 	}
@@ -59,11 +88,12 @@ class SetClaimTest extends \ApiTestCase {
 	protected function claimProvider() {
 		$statements = array();
 
-		$mainSnak = new \Wikibase\PropertyNoValueSnak( 42 );
+		$snaks = $this->snakProvider();
+		$mainSnak = $snaks[0];
 		$statement = new \Wikibase\Statement( $mainSnak );
 		$statements[] = $statement;
 
-		foreach ( $this->snakProvider() as $snak ) {
+		foreach ( $snaks as $snak ) {
 			$statement = clone $statement;
 			$snaks = new \Wikibase\SnakList( array( $snak ) );
 			$statement->getReferences()->addReference( new \Wikibase\Reference( $snaks ) );
@@ -105,7 +135,7 @@ class SetClaimTest extends \ApiTestCase {
 			// Addition request
 			$this->makeRequest( $claim, $item->getId(), 1 );
 
-			$claim = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( 1234 ) );
+			$claim = new \Wikibase\Statement( new \Wikibase\PropertyNoValueSnak( 9001 ) );
 			$claim->setGuid( $guid );
 
 			// Update request

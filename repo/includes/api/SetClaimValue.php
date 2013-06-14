@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiBase, MWException;
 
 use DataValues\IllegalValueException;
+use ApiMain;
 use Wikibase\Autocomment;
 use Wikibase\EntityId;
 use Wikibase\Entity;
@@ -15,6 +16,7 @@ use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\validators\SnakValidator;
 
 /**
  * API module for setting the DataValue contained by the main snak of a claim.
@@ -48,6 +50,28 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 	// TODO: rights
 	// TODO: conflict detection
 	// TODO: claim uniqueness
+
+	/**
+	 * @var SnakValidationHelper
+	 */
+	protected $snakValidation;
+
+	/**
+	 * see ApiBase::__construct()
+	 *
+	 * @param ApiMain $mainModule
+	 * @param string  $moduleName
+	 * @param string  $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$this->snakValidation = new SnakValidationHelper(
+			$this,
+			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
+			WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
+		);
+	}
 
 	/**
 	 * @see \ApiBase::execute
@@ -148,9 +172,10 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 		}
 
 		try {
-			$snak = SnakObject::newFromType( $snakType, $constructorArguments );
-			$claim->setMainSnak( $snak );
+			$snak = SnakObject::newFromType( $snakType, $constructorArguments ); //TODO: use SnakFactory
+			$this->snakValidation->validateSnak( $snak );
 
+			$claim->setMainSnak( $snak );
 			$entity->setClaims( $claims );
 
 			return $claim;
