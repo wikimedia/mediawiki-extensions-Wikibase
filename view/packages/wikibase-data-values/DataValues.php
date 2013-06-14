@@ -44,6 +44,11 @@
  * @ingroup DataValues
  */
 
+if ( defined( 'DataValues_VERSION' ) ) {
+	// Do not initialize more then once.
+	return;
+}
+
 define( 'DataValues_VERSION', '0.1 alpha' );
 
 spl_autoload_register( function ( $className ) {
