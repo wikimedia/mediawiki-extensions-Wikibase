@@ -191,7 +191,7 @@
 					self._updateCalendarHint();
 				}
 			} )
-			.timeinput()
+			.timeinput( { mediaWiki: this._options.mediaWiki } )
 			// TODO: Move input extender out of here to a more generic place since it is not
 			// TimeInput specific.
 			.inputextender( {
@@ -284,8 +284,14 @@
 		 * Updates the preview.
 		 */
 		_updatePreview: function() {
-			var rawValue = this._getRawValue();
-			this.preview.update( ( rawValue ) ? rawValue.text() : null );
+			var rawValue = this._getRawValue(),
+				options = {};
+
+			if ( this._options.mediaWiki ) {
+				options.format = this._options.mediaWiki.user.options.get( 'date' );
+			}
+
+			this.preview.update( ( rawValue ) ? rawValue.text( options ) : null );
 		},
 
 		/**

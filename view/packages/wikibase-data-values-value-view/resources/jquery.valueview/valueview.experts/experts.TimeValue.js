@@ -50,6 +50,10 @@
 					return $node;
 				}
 
+				var dateFormat = ( this.mediaWiki )
+					? this.mediaWiki.user.options.get( 'date' )
+					: 'default';
+
 				// Display the calendar being used if the date lies within a time frame when
 				// multiple calendars have been in use or if the time value features a calendar that
 				// is uncommon for the specified time:
@@ -65,10 +69,10 @@
 					)
 				) {
 					$node
-					.append( $( '<span/>' ).text( currentRawValue.text() ) )
+					.append( $( '<span/>' ).text( currentRawValue.text( { format: dateFormat }) ) )
 					.append( $( '<sup/>' ).text( currentRawValue.calendarText() ) );
 				} else {
-					$node.text( currentRawValue.text() );
+					$node.text( currentRawValue.text( { format: dateFormat }) );
 				}
 
 				return $node;
