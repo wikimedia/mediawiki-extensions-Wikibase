@@ -80,7 +80,15 @@
 				} )
 				.on(
 				'listrotatorauto.' + this.uiBaseClass + ' listrotatorselected.' + this.uiBaseClass,
-				function( event ) {
+				function( event, newValue ) {
+					var rawValue = self._getRawValue();
+
+					if( rawValue === null || newValue === rawValue.getPrecision() ) {
+						// Listrotator has been rotated automatically, the value covering the new
+						// precision has already been generated or the current input is invalid.
+						return;
+					}
+
 					var overwrite = {};
 
 					if( event.type === 'listrotatorauto' ) {

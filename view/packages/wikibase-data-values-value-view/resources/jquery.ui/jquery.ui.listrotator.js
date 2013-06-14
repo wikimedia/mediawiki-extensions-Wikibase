@@ -441,9 +441,11 @@
 				return;
 			}
 
-			this.rotate( newValue, function() {
+			this.element.one( this.widgetEventPrefix + 'selected', function( event, newValue ) {
 				self.activate();
 			} );
+
+			this.rotate( newValue );
 		},
 
 		/**
@@ -464,9 +466,8 @@
 		 * Performs the rotation of the widget.
 		 *
 		 * @param {string} newValue
-		 * @param {Function} [callback]
 		 */
-		rotate: function( newValue, callback ) {
+		rotate: function( newValue ) {
 			if(
 				newValue === this._rotatingTo
 				|| !this._rotatingTo && newValue === this.$curr.data( 'value' )
@@ -529,10 +530,6 @@
 						self._trigger( 'selected', null, [ self.value( newValue ) ] );
 
 						self._rotatingTo = null;
-
-						if( $.isFunction( callback ) ) {
-							callback();
-						}
 					},
 					duration: this.options.animation.duration
 				}
