@@ -1,5 +1,0 @@
-The Wikibase Database component is dependent on:
-
-* MediaWiki 1.21 or later (only when making use of the MediaWikiQueryInterface implementation of QueryInterface)
-
-And nothing else.
