@@ -134,6 +134,16 @@ return call_user_func( function() {
 		'Wikibase\HttpAcceptNegotiator' => 'includes/util/HttpAcceptNegotiator.php',
 		'Wikibase\HttpAcceptParser' => 'includes/util/HttpAcceptParser.php',
 
+		// includes/Validators
+		'Wikibase\Validators\CompositeValidator' => 'includes/Validators/CompositeValidator.php',
+		'Wikibase\Validators\DataFieldValidator' => 'includes/Validators/DataFieldValidator.php',
+		'Wikibase\Validators\DataValueValidator' => 'includes/Validators/DataValueValidator.php',
+		'Wikibase\Validators\EntityExistsValidator' => 'includes/Validators/EntityExistsValidator.php',
+		'Wikibase\Validators\EntityIdValidator' => 'includes/Validators/EntityIdValidator.php',
+		'Wikibase\Validators\RegexValidator' => 'includes/Validators/RegexValidator.php',
+		'Wikibase\Validators\StringLengthValidator' => 'includes/Validators/StringLengthValidator.php',
+		'Wikibase\Validators\TypeValidator' => 'includes/Validators/TypeValidator.php',
+
 		// tests
 		'Wikibase\Test\SpecialPageTestBase' => 'tests/phpunit/specials/SpecialPageTestBase.php',
 		'Wikibase\Test\TemplateTest' => 'tests/phpunit/TemplateTest.php',
