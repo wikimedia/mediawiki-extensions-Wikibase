@@ -5,10 +5,12 @@ namespace Wikibase;
 use DataTypes\DataTypeFactory;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Application registry for Wikibase Lib.
@@ -73,7 +75,20 @@ final class LibRegistry {
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
 
-			$builders = new WikibaseDataTypeBuilders( $this );
+			// TODO: extreme uglynes here! Get rid of this method!
+			if ( defined( 'WB_VERSION' ) ) { // repo mode
+				$repo = WikibaseRepo::getDefaultInstance();
+				$entityIdParser = $repo->getEntityIdParser();
+				$entityLookup = $repo->getEntityLookup();
+			} elseif ( defined( 'WBC_VERSION' ) ) { // client mode
+				$client = WikibaseClient::getDefaultInstance();
+				$entityIdParser = $client->getEntityIdParser();
+				$entityLookup = $client->getStore()->getEntityLookup();
+			} else {
+				throw new \RuntimeException( "Neither repo nor client found!" );
+			}
+
+			$builders = new WikibaseDataTypeBuilders( $entityLookup, $entityIdParser );
 
 			$typeBuilderSpecs = array_intersect_key(
 				$builders->getDataTypeBuilders(),

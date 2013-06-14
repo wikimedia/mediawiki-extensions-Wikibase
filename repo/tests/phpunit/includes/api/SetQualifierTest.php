@@ -146,7 +146,7 @@ class SetQualifierTest extends ModifyItemBase {
 		return array(
 			new \Wikibase\PropertySomeValueSnak( 9001 ),
 			new \Wikibase\PropertyNoValueSnak( 9001 ),
-			new \Wikibase\PropertyValueSnak( $property1->getId(), new \DataValues\StringValue( 'new qualifier' ) ),
+			new \Wikibase\PropertyValueSnak( $property1->getId(), new \DataValues\StringValue( 'Dummy.jpg' ) ),
 			new \Wikibase\PropertyValueSnak( $property2->getId(), new EntityId( Item::ENTITY_TYPE, 802 ) ),
 		);
 	}
