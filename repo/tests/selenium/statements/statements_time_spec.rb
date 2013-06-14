@@ -20,7 +20,7 @@ time_values.push({
   "precision" => "auto",
   "calendar" => "auto",
   "expected_precision" => "day",
-  "expected_preview" => "January 1, 1",
+  "expected_preview" => "January 1 1",
   "expected_calendarhint" => ""
 })
 time_values.push({
@@ -28,7 +28,7 @@ time_values.push({
   "precision" => "auto",
   "calendar" => "auto",
   "expected_precision" => "day",
-  "expected_preview" => "December 11, 1981",
+  "expected_preview" => "December 11 1981",
   "expected_calendarhint" => ""
 })
 time_values.push({
@@ -36,7 +36,7 @@ time_values.push({
   "precision" => "auto",
   "calendar" => "auto",
   "expected_precision" => "day",
-  "expected_preview" => "December 11, 1929",
+  "expected_preview" => "December 11 1929",
   "expected_calendarhint" => "(Gregorian calendar)"
 })
 time_values.push({
@@ -44,7 +44,7 @@ time_values.push({
   "precision" => "auto",
   "calendar" => "auto",
   "expected_precision" => "day",
-  "expected_preview" => "May 20, 1582",
+  "expected_preview" => "May 20 1582",
   "expected_calendarhint" => "(Julian calendar)"
 })
 time_values.push({
@@ -108,7 +108,7 @@ time_values.push({
   "precision" => "auto",
   "calendar" => "Julian",
   "expected_precision" => "day",
-  "expected_preview" => "April 12, 1900",
+  "expected_preview" => "April 12 1900",
   "expected_calendarhint" => "(Julian calendar)"
 })
 time_values.push({
