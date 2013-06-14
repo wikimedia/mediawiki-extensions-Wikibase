@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase\Lib\Test;
+use DataTypes\DataType;
+use DataTypes\DataTypeFactory;
 use Wikibase\Claims;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Claim;
@@ -161,17 +163,14 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 	protected function getMockEntityLoader() {
 		$entityLoader = new \Wikibase\Test\MockRepository();
 
-		$libRegistry = new LibRegistry( Settings::singleton() );
-		$dataTypeFactory = $libRegistry->getDataTypeFactory();
-
 		$stringProp = Property::newEmpty();
 		$stringProp->setId( 1 );
-		$stringProp->setDataType( $dataTypeFactory->getType( 'commonsMedia' ) );
+		$stringProp->setDataTypeId( 'commonsMedia' );
 		$entityLoader->putEntity( $stringProp );
 
 		$itemProp = Property::newEmpty();
 		$itemProp->setId( 2 );
-		$itemProp->setDataType( $dataTypeFactory->getType( 'wikibase-item' ) );
+		$itemProp->setDataTypeId( 'wikibase-item' );
 		$entityLoader->putEntity( $itemProp );
 
 		return $entityLoader;
