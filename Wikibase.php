@@ -19,7 +19,6 @@ define( 'WB_EXPERIMENTAL_FEATURES', true );
 
 require_once __DIR__ . '/Query/ExampleSettings.php';
 
-require_once __DIR__ . '/DataModel/DataModel.php';
 require_once __DIR__ . '/lib/WikibaseLib.php';
 
 // Temporary hack that populates the sites table since there are some tests that require this to have happened
