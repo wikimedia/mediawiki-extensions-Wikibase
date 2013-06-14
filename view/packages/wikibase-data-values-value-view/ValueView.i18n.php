@@ -395,6 +395,7 @@ $messages['lb'] = array(
 	'valueview-expert-emptyvalue-empty' => 'eidel',
 	'valueview-expert-timeinput-precision' => 'Präzisioun:',
 	'valueview-expert-timeinput-calendar' => 'Kalenner:',
+	'valueview-expert-timeinput-calendarhint' => '($1 Kalenner)',
 	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; änneren op $1',
 	'valueview-preview-label' => 'gëtt gewisen als:',
 	'valueview-preview-novalue' => 'kee valabele Wäert erkannt',
