@@ -31,6 +31,10 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 
+if ( defined( 'ValueView_VERSION' ) ) {
+	// Do not initialize more then once.
+	return;
+}
 
 define( 'ValueView_VERSION', '0.1 alpha' );
 
