@@ -38,11 +38,6 @@ if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c becaus
 	die( '<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.' );
 }
 
-// Include the Database component if that hasn't been done yet.
-if ( !defined( 'WIKIBASE_DATABASE_VERSION' ) ) {
-	@include_once( __DIR__ . '/../Database/Database.php' );
-}
-
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
 if ( !defined( 'WBL_VERSION' ) ) {
 	@include_once( __DIR__ . '/../lib/WikibaseLib.php' );
