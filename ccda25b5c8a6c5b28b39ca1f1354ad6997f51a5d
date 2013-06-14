@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "D02DaaUo",
+        "filename": "lib/tests/phpunit/EntityLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-14T14:12:45Z",
+      "side": 1,
+      "message": "I have no idea, i didn\u0027t change that :)",
+      "parentUuid": "D0wALndg",
+      "revId": "ccda25b5c8a6c5b28b39ca1f1354ad6997f51a5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D02AQqQE",
         "filename": "lib/tests/phpunit/ReferencedEntitiesFinderTest.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-14T13:56:17Z",
       "side": 1,
       "message": "mhh... this is updating deprecated code basically. The stuff below is being rather roundabout now one can, and should, call getDataTypeId on these properties. No need for this stuff here at all",
+      "revId": "ccda25b5c8a6c5b28b39ca1f1354ad6997f51a5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D00DfZTc",
+        "filename": "lib/tests/phpunit/ReferencedEntitiesFinderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-14T14:12:45Z",
+      "side": 1,
+      "message": "oh, right, that would be much simpler (supposing you mean setDataTypeId).",
+      "parentUuid": "D02AQqQE",
       "revId": "ccda25b5c8a6c5b28b39ca1f1354ad6997f51a5d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
