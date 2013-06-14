@@ -226,6 +226,8 @@ final class RepoHooks {
 
 			'updates/ItemDeletionUpdate',
 			'updates/ItemModificationUpdate',
+
+			'Validators/SnakValidator',
 		);
 
 		foreach ( $testFiles as $file ) {
