@@ -10,6 +10,7 @@
 !.jshintignore
 
 !.travis.yml
+!.travis.sh
 
 composer.phar
 composer.lock
