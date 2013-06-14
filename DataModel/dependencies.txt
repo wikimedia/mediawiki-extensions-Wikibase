@@ -1,9 +1,0 @@
-The Wikibase DataModel component is dependent on:
-
-* WikibaseLib (this dependency is something we want to get rid of)
-* MediaWiki (this dependency is something we want to get rid of)
-* DataValues library
-* Diff library
-* DataTypes library (this dependency is something we want to get rid of)
-
-And nothing else.

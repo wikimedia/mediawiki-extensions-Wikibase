@@ -12,6 +12,7 @@
 !.travis.yml
 
 composer.phar
+composer.lock
 vendor/
 
 selenium/configuration.yml
