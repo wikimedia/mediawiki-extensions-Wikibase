@@ -43,6 +43,13 @@ $messages['qqq'] = array(
 	'wikibasedatamodel-desc' => '{{desc|name=Wikibase DataModel|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}',
 );
 
+/** Asturian (asturianu)
+ * @author Xuacu
+ */
+$messages['ast'] = array(
+	'wikibasedatamodel-desc' => "Componente que define'l modelu de datos de Wikibase",
+);
+
 /** German (Deutsch)
  * @author Metalhead64
  */
@@ -83,6 +90,13 @@ $messages['ja'] = array(
  */
 $messages['ko'] = array(
 	'wikibasedatamodel-desc' => '위키베이스 데이터 모형을 정의하는 구성 요소',
+);
+
+/** Macedonian (македонски)
+ * @author Bjankuloski06
+ */
+$messages['mk'] = array(
+	'wikibasedatamodel-desc' => 'Компонента што го определува податочниот модел на Викибазата',
 );
 
 /** tarandíne (tarandíne)
