@@ -2975,10 +2975,12 @@ $messages['tl'] = array(
 );
 
 /** Turkish (Türkçe)
+ * @author Emperyan
  * @author Sadrettin
  */
 $messages['tr'] = array(
 	'specialpages-group-wikibaseclient' => 'Vikiveri istemcisi',
+	'wikibase-editlinkstitle' => 'Diğer dillerdeki bağlantıları düzenle',
 	'wikibase-rc-hide-wikidata' => 'Vikiveri değişikliklerini $1',
 	'wikibase-rc-show-wikidata-pref' => 'Vikiveri düzenlemelerini son değişikliklerde göster',
 	'special-unconnectedpages' => 'Öğelerine bağlanmamış sayfalar',
@@ -3130,16 +3132,16 @@ $messages['vi'] = array(
 	'wikibase-editlinks' => 'Sửa liên kết',
 	'wikibase-editlinkstitle' => 'Sửa liên kết giữa ngôn ngữ',
 	'wikibase-linkitem-addlinks' => 'Thêm liên kết',
-	'wikibase-linkitem-alreadylinked' => 'Bạn không thể đặt liên kết đến trang được chọn vì nó đã được liên kết đến một [$1 khoản mục] trong kho dữ liệu chung, và khoản mục đó đã liên kết đến $2 tại site này. Các khoản mục chỉ có thể có liên kết đến mỗi site một trang. Xin vui lòng chọn một trang khác để liên kết.',
+	'wikibase-linkitem-alreadylinked' => 'Bạn không thể đặt liên kết đến trang được chọn vì nó đã được liên kết đến một [$1 khoản mục] trong kho dữ liệu chung, và khoản mục đó đã liên kết đến $2 tại dịch vụ này. Các khoản mục chỉ có thể có liên kết đến mỗi dịch vụ một trang. Xin vui lòng chọn một trang khác để liên kết.',
 	'wikibase-linkitem-close' => 'Đóng hộp thoại và tải lại trang',
 	'wikibase-linkitem-failure' => 'Đã xuất hiện lỗi bất ngờ khi đặt liên kết đến trang chỉ định.',
 	'wikibase-linkitem-title' => 'Đặt liên kết với trang',
 	'wikibase-linkitem-linkpage' => 'Đặt liên kết với trang',
-	'wikibase-linkitem-selectlink' => 'Xin hãy chọn site và trang để liên kết với trang này.',
+	'wikibase-linkitem-selectlink' => 'Xin hãy chọn dịch vụ và trang để liên kết với trang này.',
 	'wikibase-linkitem-input-site' => 'Ngôn ngữ:',
 	'wikibase-linkitem-input-page' => 'Trang:',
-	'wikibase-linkitem-invalidsite' => 'Đã chọn site không rõ hoặc không hợp lệ',
-	'wikibase-linkitem-confirmitem-text' => 'Trang bạn chọn đã được liên kết đến [$1 khoản mục trong kho dữ liệu chung]. Xin vui lòng xác nhận rằng {{PLURAL:$2|trang|các trang}} thể hiện bên dưới {{PLURAL:$2|là|là}} {{PLURAL:$2|trang|trang}} bạn muốn liên kết đến.',
+	'wikibase-linkitem-invalidsite' => 'Đã chọn dịch vụ không rõ hoặc không hợp lệ',
+	'wikibase-linkitem-confirmitem-text' => 'Trang bạn chọn đã được liên kết với [$1 khoản mục trong kho dữ liệu chung]. Xin vui lòng xác nhận rằng bạn muốn liên kết trang này với {{PLURAL:$2|trang|các trang}} bên dưới.',
 	'wikibase-linkitem-confirmitem-button' => 'Xác nhận',
 	'wikibase-linkitem-not-loggedin-title' => 'Bạn cần đăng nhập',
 	'wikibase-linkitem-not-loggedin' => 'Bạn cần đăng nhập vào cả wiki này lẫn [$1 kho dữ liệu chung] để sử dụng tính năng này.',
