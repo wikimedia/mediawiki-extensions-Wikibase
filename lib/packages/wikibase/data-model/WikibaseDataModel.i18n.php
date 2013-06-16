@@ -106,6 +106,13 @@ $messages['roa-tara'] = array(
 	'wikibasedatamodel-desc' => "Combonende ca definisce 'u modelle de date Uicchibase",
 );
 
+/** Vietnamese (Tiếng Việt)
+ * @author Minh Nguyen
+ */
+$messages['vi'] = array(
+	'wikibasedatamodel-desc' => 'Bộ phận xác định mô hình dữ liệu Wikibase',
+);
+
 /** Traditional Chinese (中文（繁體）‎)
  * @author Justincheng12345
  */
