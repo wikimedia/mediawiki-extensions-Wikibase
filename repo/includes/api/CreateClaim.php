@@ -46,6 +46,7 @@ use Wikibase\Snak;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class CreateClaim extends ModifyClaim {
 
@@ -186,15 +187,28 @@ class CreateClaim extends ModifyClaim {
 	protected function getSnakInstance() {
 		$params = $this->extractRequestParams();
 
+		$snakType = $params['snaktype'];
+		$valueData = isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null;
+
+		//TODO: Inject all this, or at least initialize it in a central location.
 		$factory = new SnakFactory();
 		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
+		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
 
 		$entityId = $entityIdParser->parse( $params['property'] );
+		//TODO: make sure $entityId refers to a property
+
+		//XXX: The below is somewhat cumbersome. Can we move this into a service?
+		$dataTypeId = $valueData === null ? null : $dataTypeLookup->getDataTypeIdForProperty( $entityId );
+		$dataType = $dataTypeId === null ? null : $dataTypeFactory->getType( $dataTypeId );
+		$valueType = $dataType === null ? null : $dataType->getDataValueType();
 
 		return $factory->newSnak(
 			$entityId,
-			$params['snaktype'],
-			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
+			$snakType,
+			$valueType,
+			$valueData
 		);
 	}
 
