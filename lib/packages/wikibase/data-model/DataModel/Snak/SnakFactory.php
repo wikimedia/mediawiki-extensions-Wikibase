@@ -9,9 +9,6 @@ use MWException;
 /**
  * Factory for creating new snaks.
  *
- * FIXME: right now this is dependent on retrieving properties. It thus does not
- * fit in the DataModel component. Perhaps it can be moved to Wikibase lib.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -33,43 +30,37 @@ use MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SnakFactory {
 
 	/**
-	 * Builds and returns a new snak from the provided property, snak type and optional snak value.
+	 * Builds and returns a new snak from the provided property, snak type
+	 * and optional snak value and value type.
 	 *
-	 * @since 0.3
+	 * @since 0.4
 	 *
 	 * @param EntityId    $propertyId
 	 * @param string      $snakType
-	 * @param string|null $snakValue
+	 * @param string|null $valueType
+	 * @param mixed|null  $rawValue
+	 *
+	 * @return Snak
 	 *
 	 * @throws IllegalValueException
 	 * @throws InvalidArgumentException
-	 * @return Snak
-	 * @throws MWException
-	 * @throws InvalidArgumentException
 	 */
-	public function newSnak( EntityId $propertyId, $snakType, $snakValue = null ) {
+	public function newSnak( EntityId $propertyId, $snakType, $valueType = null, $rawValue = null ) {
+		//TODO: needs test
+
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
 			throw new InvalidArgumentException( 'Expected an EntityId of a property' );
 		}
 
 		switch ( $snakType ) {
 			case 'value':
-				$content = EntityContentFactory::singleton()->getFromId( $propertyId );
-
-				if ( $content === null ) {
-					throw new MWException( 'Cannot create a DataValue for a non-existing property' );
-				}
-
-				/**
-				 * @var Property $property
-				 */
-				$property = $content->getEntity();
-
-				$dataValue = \DataValues\DataValueFactory::singleton()->newDataValue( $property->getDataType()->getDataValueType(), $snakValue );
+				//TODO: inject DataValueFactory
+				$dataValue = \DataValues\DataValueFactory::singleton()->newDataValue( $valueType, $rawValue );
 
 				$snak = new PropertyValueSnak( $propertyId, $dataValue );
 				break;
@@ -79,6 +70,8 @@ class SnakFactory {
 			case 'somevalue':
 				$snak = new PropertySomeValueSnak( $propertyId );
 				break;
+			default:
+				throw new InvalidArgumentException( "bad snak type: $snakType" );
 		}
 
 		assert( isset( $snak ) );
