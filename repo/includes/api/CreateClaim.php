@@ -12,6 +12,7 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
+use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SnakFactory;
 use Wikibase\LibRegistry;
@@ -46,6 +47,7 @@ use Wikibase\Snak;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class CreateClaim extends ModifyClaim {
 
@@ -186,15 +188,23 @@ class CreateClaim extends ModifyClaim {
 	protected function getSnakInstance() {
 		$params = $this->extractRequestParams();
 
-		$factory = new SnakFactory();
+		$snakType = $params['snaktype'];
+		$valueData = isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null;
+
+		//TODO: Inject all this, or at least initialize it in a central location.
+		$factory = WikibaseRepo::getDefaultInstance()->getSnakConstructionService();
 		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
 		$entityId = $entityIdParser->parse( $params['property'] );
 
+		if ( $entityId->getEntityType() !== Property::ENTITY_TYPE ) {
+			$this->dieUsage( "Property expected, got " . $entityId->getEntityType(), 'claim-invalid-snak' );
+		}
+
 		return $factory->newSnak(
 			$entityId,
-			$params['snaktype'],
-			isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
+			$snakType,
+			$valueData
 		);
 	}
 

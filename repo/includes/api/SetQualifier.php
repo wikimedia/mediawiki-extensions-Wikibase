@@ -13,6 +13,7 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claim;
+use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Snak;
 use Wikibase\Snaks;
@@ -48,6 +49,7 @@ use Wikibase\validators\SnakValidator;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SetQualifier extends ApiWikibase {
 
@@ -231,7 +233,7 @@ class SetQualifier extends ApiWikibase {
 		$propertyId = isset( $params['property'] ) ? $params['property'] : $snak->getPropertyId();
 
 		if ( is_string( $propertyId ) ) {
-			$propertyId = $this->getParsedEntityId( $propertyId, 'invalid-property-id' );
+			$propertyId = $this->getParsedPropertyId( $propertyId, 'invalid-property-id' );
 		}
 
 		$snakType = isset( $params['snaktype'] ) ? $params['snaktype'] : $snak->getType();
@@ -247,9 +249,7 @@ class SetQualifier extends ApiWikibase {
 		}
 
 		try {
-			$factory = new SnakFactory(); //TODO: should be injected!
-			$newQualifier = $factory->newSnak( $propertyId, $snakType, $snakValue );
-
+			$newQualifier = $this->newSnak( $propertyId, $snakType, $snakValue );
 			$this->snakValidation->validateSnak( $newQualifier );
 
 			return $qualifiers->addSnak( $newQualifier );
@@ -262,11 +262,16 @@ class SetQualifier extends ApiWikibase {
 		return false; // we should never get here.
 	}
 
-	protected function getParsedEntityId( $prefixedId, $errorCode ) {
+	protected function getParsedPropertyId( $prefixedId, $errorCode ) {
 		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
 		try {
 			$entityId = $entityIdParser->parse( $prefixedId );
+
+			if ( $entityId->getEntityType() !== Property::ENTITY_TYPE ) {
+				$this->dieUsage( 'Not a property: ' . $prefixedId, $errorCode );
+				return null;
+			}
 		}
 		catch ( ParseException $parseException ) {
 			$this->dieUsage( $parseException->getMessage(), $errorCode );
@@ -274,6 +279,26 @@ class SetQualifier extends ApiWikibase {
 		}
 
 		return $entityId;
+	}
+
+	/**
+	 * @param EntityId $propertyId
+	 * @param string $snakType
+	 * @param mixed $valueData
+	 */
+	protected function newSnak( EntityId $propertyId, $snakType, $valueData ) {
+		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
+			$this->dieUsage( "Property expected, got " . $propertyId->getEntityType(), 'claim-invalid-snak' );
+		}
+
+		//TODO: Inject this, or at least initialize it in a central location.
+		$factory = WikibaseRepo::getDefaultInstance()->getSnakConstructionService();
+
+		return $factory->newSnak(
+			$propertyId,
+			$snakType,
+			$valueData
+		);
 	}
 
 	/**
@@ -287,12 +312,10 @@ class SetQualifier extends ApiWikibase {
 	 */
 	protected function addQualifier( Snaks $qualifiers ) {
 		$params = $this->extractRequestParams();
-		$factory = new SnakFactory();
-
-		$propertyId = $this->getParsedEntityId( $params['property'], 'invalid-property-id' );
+		$propertyId = $this->getParsedPropertyId( $params['property'], 'invalid-property-id' );
 
 		try {
-			$newQualifier = $factory->newSnak(
+			$newQualifier = $this->newSnak(
 				$propertyId,
 				$params['snaktype'],
 				isset( $params['value'] ) ? \FormatJson::decode( $params['value'], true ) : null
