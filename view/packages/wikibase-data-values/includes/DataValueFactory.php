@@ -29,6 +29,7 @@ use InvalidArgumentException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class DataValueFactory {
 
@@ -111,15 +112,15 @@ class DataValueFactory {
 	 * @param array $data
 	 *
 	 * @return DataValue
-	 * @throws InvalidArgumentException
+	 * @throws IllegalValueException
 	 */
 	public function newFromArray( array $data ) {
 		if ( !array_key_exists( 'type', $data ) ) {
-			throw new InvalidArgumentException( 'DataValue type is missing' );
+			throw new IllegalValueException( 'DataValue type is missing' );
 		}
 
 		if ( !array_key_exists( 'value', $data ) ) {
-			throw new InvalidArgumentException( 'DataValue value is missing' );
+			throw new IllegalValueException( 'DataValue value is missing' );
 		}
 
 		return $this->newDataValue( $data['type'], $data['value'] );
