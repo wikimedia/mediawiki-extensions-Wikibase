@@ -2622,6 +2622,7 @@ $messages['pt'] = array(
 /** Brazilian Portuguese (português do Brasil)
  * @author Helder.wiki
  * @author Jaideraf
+ * @author Opraco
  * @author TheGabrielZaum
  * @author Tuliouel
  */
@@ -2650,7 +2651,7 @@ $messages['pt-br'] = array(
 	'wikibase-linkitem-input-site' => 'Idioma:',
 	'wikibase-linkitem-input-page' => 'Página:',
 	'wikibase-linkitem-invalidsite' => 'Site desconhecido ou inválido selecionado',
-	'wikibase-linkitem-confirmitem-text' => 'A página que você escolheu já está vinculada a um [$1 item em nosso repositório central de dados]. Por favor, confirme que as páginas exibidas abaixo são as que você deseja vincular com esta página.',
+	'wikibase-linkitem-confirmitem-text' => 'A página que você escolheu já está vinculada a um [$1 item em nosso repositório central de dados]. Por favor, confirme que as páginas exibidas abaixo são as que você deseja vincular com esta página.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Confirmar',
 	'wikibase-linkitem-not-loggedin-title' => 'Você precisa estar logado',
 	'wikibase-linkitem-not-loggedin' => 'Você precisa estar logado neste wiki e no [$1 repositório central de dados] para utilizar esse recurso.',
@@ -2669,7 +2670,8 @@ $messages['pt-br'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" não é um código de idioma válido.',
 	'wikibase-unconnectedpages-page-warning' => 'O título da página não pôde ser utilizado para a consulta e foi ignorado.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Apenas páginas com links interlínguas',
-	'wikibase-unconnectedpages-format-row' => '($1 links interlínguas na página)',
+	'wikibase-unconnectedpages-format-row' => '($1 links interlínguas na página)', # Fuzzy
+	'wikibase-pageinfo-entity-id' => 'ID do item no Wikidata',
 );
 
 /** Quechua (Runa Simi)
@@ -3152,6 +3154,7 @@ $messages['vi'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Hiện các sửa đổi Wikidata trong thay đổi gần đây',
 	'wikibase-watchlist-show-changes-pref' => 'Hiện các sửa đổi tại Wikidata trong danh sách theo dõi của bạn',
+	'wikibase-error-serialize-error' => 'Thất bại khi tuần tự hóa dữ liệu',
 	'wikibase-error-invalid-entity-id' => 'ID nhập vào không có trên hệ thống. Xin vui lòng sử dụng ID đã được cấp.',
 	'special-unconnectedpages' => 'Trang không kết nối với khoản mục',
 	'wikibase-unconnectedpages-legend' => 'Tùy chọn danh sách trang không kết nối',
@@ -3163,6 +3166,7 @@ $messages['vi'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 liên kết ngôn ngữ trên trang)',
 	'wikibase-pageinfo-entity-id' => 'ID khoản mục Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Không có',
+	'wikibase-property-render-error' => 'Thất bại khi kết xuất thuộc tính $1: $2',
 );
 
 /** Volapük (Volapük)

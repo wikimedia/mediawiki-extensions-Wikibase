@@ -2344,6 +2344,7 @@ $messages['vi'] = array(
 	'wikibase-error-ui-session-failure' => 'Phiên của bạn đã hết hạn. Xin hãy đăng nhập lại.',
 	'wikibase-error-ui-edit-conflict' => 'Một mâu thuẫn sửa đổi đã xảy ra. Xin hãy tải lại và lưu lần nữa.',
 	'wikibase-replicationnote' => 'Xin lưu ý, có thể phải chờ vài phút để cho các wiki trình bày được các thay đổi',
+	'wikibase-sitelinks-wikipedia' => 'Trang Wikipedia được liên kết với khoản mục này',
 	'wikibase-sitelinks-sitename-columnheading' => 'Ngôn ngữ',
 	'wikibase-sitelinks-siteid-columnheading' => 'Mã',
 	'wikibase-sitelinks-link-columnheading' => 'Bài viết liên kết',
