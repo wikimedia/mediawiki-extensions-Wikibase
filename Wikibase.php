@@ -51,6 +51,8 @@ if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 
 		require_once __DIR__ . '/repo/ExampleSettings.php';
 
+		array_pop( $_SERVER['argv'] );
+
 		$_SERVER['argv'] = array_merge(
 			$_SERVER['argv'],
 			array(
