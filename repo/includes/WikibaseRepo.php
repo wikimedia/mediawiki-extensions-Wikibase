@@ -9,9 +9,13 @@ use Wikibase\EntityContentFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
+use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
+use Wikibase\Store;
+use Wikibase\StoreFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -36,6 +40,7 @@ use Wikibase\SettingsArray;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 final class WikibaseRepo {
 
@@ -185,6 +190,27 @@ final class WikibaseRepo {
 		}
 
 		return $instance;
+	}
+
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return PropertyDataTypeLookup
+	 */
+	public function getPropertyDataTypeLookup() {
+		//TODO: remember instance
+		return new EntityRetrievingDataTypeLookup( $this->getStore()->getEntityLookup() );
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return Store
+	 */
+	public function getStore() {
+		//TODO: inject this, get rid of global store instance(s)
+		return StoreFactory::getStore();
 	}
 
 }

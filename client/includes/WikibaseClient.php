@@ -170,6 +170,8 @@ final class WikibaseClient {
 	 * @return PropertyDataTypeLookup
 	 */
 	public function newPropertyDataTypeLookup() {
+		//TODO: remember instance, re-use in getPropertyDataTypeLookup
+		//TODO: make sure in-process and memcached/apc caching is applied to property types
 		return new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
 	}
 
