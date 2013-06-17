@@ -17,8 +17,6 @@
  */
 define( 'WB_EXPERIMENTAL_FEATURES', true );
 
-require_once __DIR__ . '/Query/ExampleSettings.php';
-
 require_once __DIR__ . '/lib/WikibaseLib.php';
 
 // Temporary hack that populates the sites table since there are some tests that require this to have happened
@@ -33,38 +31,18 @@ $jenkins_job_name = getenv( 'JOB_NAME' );
 if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 
 	switch( $jenkins_job_name) {
-
-	case 'mwext-Wikibase-client-tests':
-		require_once __DIR__ . '/client/WikibaseClient.php';
-
-		$_SERVER['argv'] = array_merge(
-			$_SERVER['argv'],
-			array(
-				'--group', 'Diff,Ask,DataValueExtensions,WikibaseClient,WikibaseLib',
-				'--exclude-group', 'ChangeHandlerTest',
-			)
-		);
-	break;
-	case 'mwext-Wikibase-repo-tests':
-		require_once __DIR__ . '/repo/Wikibase.php';
-		require_once __DIR__ . '/Query/WikibaseQuery.php';
-
-		require_once __DIR__ . '/repo/ExampleSettings.php';
-
-		$_SERVER['argv'] = array_merge(
-			$_SERVER['argv'],
-			array(
-				'--group', 'Diff,Ask,DataValueExtensions,Wikibase',
-				'--exclude-group', 'WikibaseClient',
-			)
-		);
-
-	break;
-	default:
-		require_once __DIR__ . '/client/WikibaseClient.php';
-		require_once __DIR__ . '/repo/Wikibase.php';
-		require_once __DIR__ . '/Query/WikibaseQuery.php';
-		require_once __DIR__ . '/repo/ExampleSettings.php';
+		case 'mwext-Wikibase-client-tests':
+			require_once __DIR__ . '/client/WikibaseClient.php';
+		break;
+		case 'mwext-Wikibase-repo-tests':
+			require_once __DIR__ . '/repo/Wikibase.php';
+			require_once __DIR__ . '/repo/ExampleSettings.php';
+		break;
+		default:
+			require_once __DIR__ . '/client/WikibaseClient.php';
+			require_once __DIR__ . '/repo/Wikibase.php';
+			require_once __DIR__ . '/Query/WikibaseQuery.php';
+			require_once __DIR__ . '/repo/ExampleSettings.php';
 	}
 }
 // Avoid polluting the global namespace
