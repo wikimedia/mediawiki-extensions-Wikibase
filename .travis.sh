@@ -18,6 +18,11 @@ git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/WikibaseDataMode
 git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Wikibase.git
 
 cd ..
+echo 'error_reporting(E_ALL| E_STRICT);' >> LocalSettings.php
+echo 'ini_set("display_errors", 1);' >> LocalSettings.php
+echo '$wgShowExceptionDetails = true;' >> LocalSettings.php
+echo '$wgDevelopmentWarnings = true;' >> LocalSettings.php
+
 echo "define( 'WB_EXPERIMENTAL_FEATURES', true );" >> LocalSettings.php
 echo 'require_once( __DIR__ . "/extensions/Wikibase/repo/Wikibase.php" );' >> LocalSettings.php
 echo 'require_once( __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php" );' >> LocalSettings.php
