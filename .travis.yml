@@ -20,7 +20,7 @@ matrix:
     - env: DBTYPE=postgres EXTENSION=repo
       php: 5.5
   exclude:
-    - end: TRAVISASSUMESWRONGSTUFF=FAIL
+    - env: TRAVISASSUMESWRONGSTUFF=FAIL
   allow_failures:
     - env: DBTYPE=postgres EXTENSION=repo
 
