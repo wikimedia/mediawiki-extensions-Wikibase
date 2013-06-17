@@ -4192,6 +4192,12 @@ Tu dirección IP quedará registrada en el historial de revisiones de $1.',
 	'wikibase-setaliases-label' => 'Alias:',
 	'wikibase-setaliases-submit' => 'Establecer o alias',
 	'wikibase-setaliases-warning-remove' => '¿Estás {{GENDER:|seguro|segura}} de que quieres eliminar todos los alias de [[$1]]?',
+	'special-setsitelink' => 'Definir un enlace de sitio',
+	'wikibase-setsitelink-site' => 'Id del sitio:',
+	'wikibase-setsitelink-label' => 'Enlace del sitio:',
+	'wikibase-setsitelink-submit' => 'Definir el enlace de sitio',
+	'wikibase-setsitelink-warning-remove' => '¿Estás {{GENDER:|seguro|segura}} de que quieres eliminar el enlace de sitio de [[$1]]?',
+	'wikibase-setsitelink-invalid-site' => 'Se desconoce el id del sitio "$1". Por favor, utiliza un id de sitio existente, como "eswiki".',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Idioma:',
 	'wikibase-setentity-invalid-langcode' => 'El identificador de idioma "$1" es desconocido. Utiliza un identificador de idioma que sea conocido para el sistema, como "es".',
@@ -4243,6 +4249,7 @@ Tu dirección IP quedará registrada en el historial de revisiones de $1.',
 	'wikibase-noentity' => 'Este conjunto de datos no existe. Puedes <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar los registros relacionados]</span> para saber donde se pueden encontrar.',
 	'wikibase-noentity-createone' => 'También puedes [[$1|crear uno nuevo]].',
 	'wikibase-item-summary-wbsetitem' => 'Se creó un nuevo elemento',
+	'wikibase-item-summary-wbcreate-new' => 'Creo un nuevo elemento',
 	'wikibase-item-summary-wbeditentity' => 'Se creó un nuevo elemento',
 	'wikibase-item-summary-wbeditentity-create' => 'Se creó un nuevo elemento',
 	'wikibase-item-summary-wbeditentity-update' => 'Se actualizó un elemento',
@@ -9142,6 +9149,7 @@ $messages['lb'] = array(
 Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-restrictionedit-tooltip-message' => 'Dës Säit ass gespaart. Änneren ass net erlaabt.',
 	'wikibase-blockeduser-tooltip-message' => "Dir hutt net d'Recht fir Ännerungen ze maachen, well Äre Benotzernumm oder Är IP-Adress gespaart gouf.",
+	'wikibase-move-error' => 'Dir kënnt keng Säiten déi am Data-Nummraum si réckelen an Dir kënnt och keng Säiten dohi réckelen.',
 	'wikibase-warning-constraint-violation-length' => 'Eng Limitatioun vun der Längt vum Sproochcode "$1" gëtt markéiert.',
 	'wikibase-error-sitelink-already-used' => 'Link op de Site [$1 $2] gëtt scho vum Element [[$3]] benotzt.',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Eng aner Eegeschaft ($3) huet schonns d\'Etiquette "$1" associéiert mam Sproochcode $2',
@@ -9171,6 +9179,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-newitem-page' => 'Numm vun der éischter verlinkter Säit',
 	'wikibase-newitem-no-external-page' => 'Déi spezifizéiert Säit konnt op dem korrespondéierte Site net fonnt ginn.',
 	'wikibase-newitem-add-sitelink-failed' => 'De Link op de Site konnt net gespäichert ginn.',
+	'wikibase-newitem-not-recognized-siteid' => 'Den Identifiant fir de Site deen Dir uginn hutt gouf net erkannt.',
 	'wikibase-newentity-label' => 'Etiquette:',
 	'wikibase-newentity-description' => 'Beschreiwung:',
 	'wikibase-newentity-submit' => 'Uleeën',
@@ -9192,9 +9201,12 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-setsitelink-label' => 'Link vum Site:',
 	'wikibase-setsitelink-submit' => 'De Link vum Site definéieren',
 	'wikibase-setsitelink-warning-remove' => 'Wëllt Dir wierklech de Link vum Site vun [[$1]] ewechhuelen?',
+	'wikibase-setsitelink-add-failed' => 'De Link op de Site konnt net gespäichert ginn.',
+	'wikibase-setsitelink-remove-failed' => 'De Link op de Site konnt net ewechgeholl ginn.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Sprooch:',
 	'wikibase-setentity-invalid-langcode' => 'De Sproochcode "$1" ass onbekannt. Benotzt w.e.g. e Sproochcode deen dem System bekannt ass, wéi z. Bsp. "en".',
+	'wikibase-setentity-invalid-id' => 'D\'ID "$1" ass am System net bekannt. Benotzt w.e.g. en valabel ID vun der Entitéit.',
 	'wikibase-dispatchstats-no-stats' => 'Et sinn elo keng Statistiken disponibel.',
 	'wikibase-dispatchstats-change-id' => 'Nummer (ID)',
 	'wikibase-dispatchstats-change-timestamp' => 'Zäitstempel',
@@ -9245,6 +9257,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-item-summary-wblinktitles-connect' => "Huet ee Sproochlink derbäigesat fir d'Säiten [$2↔$3] ze verbannen",
 	'wikibase-item-summary-special-create-item' => 'Huet en Element op [$2] ugeluecht mat {{PLURAL:$1|dem Wäert|de Wäerter}}',
 	'wikibase-property-summary-wbcreate-new' => 'Eng nei Eegeschaft gouf ugeluecht',
+	'wikibase-property-summary-wbeditentity-create' => 'Eng nei Eegeschaft gouf ugeluecht',
 	'wikibase-property-summary-wbeditentity-update' => 'Huet eng Eegeschaft aktualiséiert',
 	'wikibase-property-summary-wbeditentity-override' => 'Huet eng Eegeschaft iwwerschriwwen',
 	'wikibase-property-summary-wbsetlabel-set' => "Huet d'Etiquette fir $2 geännert",
@@ -9264,6 +9277,8 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'right-item-override' => 'Elementer iwwerschreiwen',
 	'right-item-create' => 'Elementer uleeën',
 	'right-item-remove' => 'Elementer ewechhuelen',
+	'right-property-override' => 'Eegeschaften iwwerschreiwen',
+	'right-property-create' => 'Eegeschaften uleeën',
 	'right-property-remove' => 'Eegeschaften ewechhuelen',
 	'right-alias-add' => 'Aliasen derbäisetzen',
 	'right-alias-set' => 'Aliasen definéieren',
@@ -9279,6 +9294,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'action-item-create' => 'Elementer uleeën',
 	'action-item-remove' => 'Elementer ewechhuelen',
 	'action-property-override' => 'Eegeschaften iwwerschreiwen',
+	'action-property-remove' => 'Eegeschaften ewechhuelen',
 	'action-alias-update' => 'Aliasen aktualiséieren',
 	'action-alias-remove' => 'Aliasen ewechhuelen',
 	'action-sitelink-remove' => 'Website-Linken ewechhuelen',
@@ -10747,6 +10763,9 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van de entiteit $1.',
 	'wikibase-setaliases-label' => 'Aliassen',
 	'wikibase-setaliases-submit' => 'Aliassen aanmaken',
 	'wikibase-setaliases-warning-remove' => 'Wilt u echt alle aliassen verwijderen van [[$1]]?',
+	'wikibase-setsitelink-site' => 'Site-ID:',
+	'wikibase-setsitelink-label' => 'Sitekoppeling:',
+	'wikibase-setsitelink-submit' => 'Sitekoppeling instellen',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Taal:',
 	'wikibase-setentity-invalid-langcode' => 'De taalcode "$1" is niet bekend. Gebruik een taalcode die bekend is in het systeem, zoals "en".',
@@ -10858,7 +10877,7 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 * hierarchicalpart  - impliciet onderdeel van de Iristring
 * query - impliciet onderdeel van de Iristring
 * fragment - impliciet onderdeel van de Iristring',
-	'wikibase-listdatatypes-geo-coordinate-head' => 'Geocoördinaat',
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Globale coördinaat',
 	'wikibase-listdatatypes-quantity-head' => 'Hoeveelheid',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Enkeltalige tekst',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Meertalige tekst',
@@ -15099,6 +15118,8 @@ $messages['zh-hant'] = array(
 	'wikibase-setsitelink-submit' => '設置維基項目連結',
 	'wikibase-setsitelink-warning-remove' => '您真的要移除[[$1]]的維基項目連結？',
 	'wikibase-setsitelink-invalid-site' => '維基項目ID$1為未知。請使用一个存在的維基項目ID，如enwiki。',
+	'wikibase-setsitelink-add-failed' => '無法儲存該網站連結。',
+	'wikibase-setsitelink-remove-failed' => '無法移除該網站連結。',
 	'wikibase-setentity-id' => 'ID：',
 	'wikibase-setentity-language' => '語言：',
 	'wikibase-setentity-invalid-langcode' => '語言標籤「$1」未知。請使用已知的語言標籤，如「en」。',
@@ -15209,12 +15230,12 @@ $messages['zh-hant'] = array(
 *階層部分——IRI串的非明示部分
 *查詢——IRI串的非明示部分
 *片——IRI串的非明示部分',
-	'wikibase-listdatatypes-globe-coordinate-head' => '地理座標', # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-head' => '地理座標',
 	'wikibase-listdatatypes-globe-coordinate-body' => '由dms或十進制經緯度指定的地理位置的原始數據字段。預設為「Earth」甚次為「WGS84」。其加入一解像度及範圍。
 *緯度——隱藏的地理位置字串第一部分，包含float、dms、dm及dd，方向由前綴符號或後綴N或S提供
 *經度——隱藏的地理位置字串第二部分，包含float、dms、dm及dd，方向由前綴符號或後綴E或W提供
-*高度（可選）——距離參考平面的一個精確數值
-*星球（可選）——精確數值，預設指向「Earth」，其次為「WGS84」', # Fuzzy
+*高度（可選）——距離參考平面的一個精確數值，「Earth」將以「WGS84」作為參考
+*星球（可選）——精確數值，預設指向「Earth」，其次為「WGS84」',
 	'wikibase-listdatatypes-quantity-head' => '數量',
 	'wikibase-listdatatypes-quantity-body' => '一些精確定義單位之數值的原始數據字段。實際單位亦輸入到數據中。
 *數值－－字串的隱藏部分（單位不明）
@@ -15223,15 +15244,14 @@ $messages['zh-hant'] = array(
 	'wikibase-listdatatypes-monolingual-text-head' => '單語言文本',
 	'wikibase-listdatatypes-monolingual-text-body' => '不能譯為其他語言的一個字串的原始數據字段。該類型的字串一經定義就可在所有語言中使用。典型的是用於當地語言書寫的地名、某種標識符、化學方程式或拉丁科學名稱。
 *語言——標定文本部分語言的明確的數值
-*文字——特定語言變體字符串的明確的數值', # Fuzzy
+*數值——特定語言變體字符串的明確的數值',
 	'wikibase-listdatatypes-multilingual-text-head' => '多語言文本',
 	'wikibase-listdatatypes-multilingual-text-body' => '一個必須翻譯成其他語言的字串的原始數據字段。典型的是用於具有不同於當地書寫形式但卻全球知名的實體名稱。它們可能在語言和文字系統上都不同。
 *語言——標定文本部分語言的明確的數值
-*文本——特定語言變體字符串的明確的數值', # Fuzzy
+*數值——特定語言變體字符串的明確的數值',
 	'wikibase-listdatatypes-string-head' => '字串',
-	'wikibase-listdatatypes-string-body' => '字串的原始數據字段。典型的用途是語言無關的書寫形式的標識符。這樣的字串在某些情況下可以直接移入其他文字系統。
-*語言——標定文本部分語言的明確的數值
-*文字——特定語言變體字串的明確的數值', # Fuzzy
+	'wikibase-listdatatypes-string-body' => '符號的原始數據字段。典型的用途是與讀者語言無關之書寫方式的標識符。
+*文字——特定語言變體字串的明確的數值',
 	'wikibase-listdatatypes-time-head' => '時間',
 	'wikibase-listdatatypes-time-body' => '時間值的原始數據字段。給出一個含精度及邊界的時間。時間於內部儲存為外推格里高利歷的格式，但在解析及排版時可用其他格式。
 *時間——時間點的明確值，根據ISO8601，年都表示為11位數字且日期均帶有符號，格式為+00000002013-01-01T00:00:00Z
