@@ -26,8 +26,7 @@
 	"minimum-stability" : "dev",
 	"autoload": {
 		"files" : [
-			"lib/WikibaseLib.php",
-			"repo/Wikibase.php"
+			"lib/WikibaseLib.php"
 		]
 	}
 }
