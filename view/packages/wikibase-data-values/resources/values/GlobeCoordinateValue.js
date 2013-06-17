@@ -6,7 +6,7 @@
  *
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, $, GlobeCoordinate, globeCoordinateParse ) {
+( function( dv, $, GlobeCoordinate ) {
 	'use strict';
 
 	var PARENT = dv.DataValue,
@@ -103,4 +103,4 @@
 
 	dv.registerDataValue( SELF );
 
-}( dataValues, jQuery, globeCoordinate.GlobeCoordinate, globeCoordinate.parser.parse ) );
+}( dataValues, jQuery, globeCoordinate.GlobeCoordinate ) );

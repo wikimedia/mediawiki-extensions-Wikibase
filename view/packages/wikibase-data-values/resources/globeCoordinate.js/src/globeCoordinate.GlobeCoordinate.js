@@ -10,48 +10,33 @@
  * @author H. Snater < mediawiki@snater.com >
  *
  * @dependency globeCoordinate
- * @dependency globeCoordinate.parser
  */
-globeCoordinate.GlobeCoordinate = ( function( globeCoordinate, globeCoordinateParser ) {
+globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 	'use strict';
 
 	/**
 	 * Constructor for an object representing a globe coordinate with a certain precision.
 	 *
-	 * @param {string|Object} globeCoordinateDefinition
-	 * @param {Object} [options]
-	 *        {number} precision: Precision which will overrule the automatically detected
-	 *        precision.
-	 *
-	 * @throws {Error} If input text could not be parsed.
+	 * @param {Object} gcDef Needs the following attributes:
+	 *                 - {number} latitude
+	 *                 - {number} longitude
+	 *                 - {number} precision
 	 *
 	 * @constructor
 	 */
-	function GlobeCoordinate( globeCoordinateDefinition, options ) {
-		var parsed;
-
-		options = options || {};
-
-		if( !globeCoordinateDefinition ) {
-			throw new Error( 'No input given' );
+	function GlobeCoordinate( gcDef ) {
+		if( !gcDef || typeof gcDef !== 'object'
+			|| gcDef.latitude === undefined
+			|| gcDef.longitude === undefined
+			|| gcDef.precision === undefined
+		) {
+			throw new Error( 'No proper globe coordinate definition given' );
 		}
 
-		if( typeof globeCoordinateDefinition === 'string' ) {
-			try {
-				parsed = globeCoordinateParser.parse( globeCoordinateDefinition );
-			} catch( e ) {
-				throw new Error( 'Could not parse input: ' + e.toString() );
-			}
+		this._latitude = gcDef.latitude;
+		this._longitude = gcDef.longitude;
+		this._precision = gcDef.precision;
 
-			this._rawInput = globeCoordinateDefinition;
-			this._latitude = parsed[0];
-			this._longitude = parsed[1];
-			this._precision = ( options.precision !== undefined ) ? options.precision : parsed[2];
-		} else {
-			this._latitude = globeCoordinateDefinition.latitude;
-			this._longitude = globeCoordinateDefinition.longitude;
-			this._precision = globeCoordinateDefinition.precision;
-		}
 		// TODO: Capture altitude and globe
 
 		// TODO: The following checks are earth specific. When implementing additional globes,
@@ -121,13 +106,6 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate, globeCoordinatePa
 		getGlobe: function() {
 			return this._globe;
 		},
-
-		/**
-		 * Returns the original (raw) input.
-		 *
-		 * @return {string}
-		 */
-		getRawInput: function() { return this._rawInput; },
 
 		/**
 		 * Returns the decimal latitude.
@@ -227,17 +205,19 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate, globeCoordinatePa
 		 */
 		iso6709: function() {
 			var lat = this.latitudeDegree(),
-				lon = this.longitudeDegree();
+				lon = this.longitudeDegree(),
+				latISO,
+				lonISO;
 
 			/**
 			 * Strips a number's sign and fills the number's integer part with zeroes according to a
 			 * given string length.
 			 *
 			 * @param {number} number
-			 * @param {number} length
+			 * @param {string} length
 			 */
 			function pad( number, length ) {
-				var absolute = Math.abs( number ),
+				var absolute = Math.abs( number || 0 ),
 					string = String( absolute ),
 					exploded = string.split( '.' );
 
@@ -251,16 +231,31 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate, globeCoordinatePa
 					+ ( ( exploded[1] ) ? '.' + exploded[1] : '' );
 			}
 
-			// There is no need to include minute in the result if minute and second have no value.
-			// If second has no value, it can be dropped anyway.
-			return ''
+			latISO = ''
 				+ ( ( ( this.getLatitude() < 0 ) ? '-' : '+' ) + pad( lat.degree, 2 ) )
-				+ ( ( lat.minute || lat.second ) ? pad( lat.minute, 2 ) : '' )
-				+ ( ( lat.second ) ? pad( lat.second, 2 ) : '' )
+				+ ( ( this.getPrecision() < 1 ) ? pad( lat.minute, 2 ) : '' )
+				+ ( ( this.getPrecision() < 1 / 60 ) ? pad( lat.second, 2 ) : '' );
+
+			lonISO = ''
 				+ ( ( ( this.getLongitude() < 0 ) ? '-' : '+' ) + pad( lon.degree, 3 ) )
-				+ ( ( lon.minute || lon.second ) ? pad( lon.minute, 2 ) : '' )
-				+ ( ( lon.second ) ? pad( lon.second, 2 ) : '' )
-				+ '/';
+				+ ( ( this.getPrecision() < 1 ) ? pad( lon.minute, 2 ) : '' )
+				+ ( ( this.getPrecision() < 1 / 60 ) ? pad( lon.second, 2 ) : '' );
+
+			// Synchronize precision (longitude degree needs to be 1 digit longer):
+			if( lonISO.indexOf( '.' ) !== -1 && latISO.indexOf( '.' ) === -1 ) {
+				latISO += '.';
+			}
+			while( latISO.length < lonISO.length - 1 ) {
+				latISO += '0';
+			}
+			if( latISO.indexOf( '.' ) !== -1 && lonISO.indexOf( '.' ) === -1 ) {
+				lonISO += '.';
+			}
+			while( lonISO.length < latISO.length + 1 ) {
+				lonISO += '0';
+			}
+
+			return latISO + lonISO + '/';
 		},
 
 		/**
@@ -283,4 +278,4 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate, globeCoordinatePa
 
 	return GlobeCoordinate;
 
-}( globeCoordinate, globeCoordinate.parser ) );
+}( globeCoordinate ) );

@@ -66,7 +66,6 @@ return call_user_func( function() {
 		'globeCoordinate.js' => $moduleTemplate + array(
 			'scripts' => array(
 				'globeCoordinate.js/src/globeCoordinate.js',
-				'globeCoordinate.js/src/globeCoordinate.parser.js',
 				'globeCoordinate.js/src/globeCoordinate.GlobeCoordinate.js',
 			),
 		),

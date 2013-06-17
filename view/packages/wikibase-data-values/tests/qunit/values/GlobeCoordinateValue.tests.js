@@ -32,8 +32,8 @@
 		 */
 		getConstructorArguments: function() {
 			return [
-				[ new GlobeCoordinate( '1.5 1.25' ) ],
-				[ new GlobeCoordinate( '-50 -20' ) ]
+				[ new GlobeCoordinate( { latitude: 1.5, longitude: 1.25, precision: 0.01 } ) ],
+				[ new GlobeCoordinate( { latitude: -50, longitude: -20, precision: 1 } ) ]
 			];
 		}
 

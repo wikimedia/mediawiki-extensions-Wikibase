@@ -14,16 +14,16 @@
 	 * @type {Object}
 	 */
 	var iso6709representations = {
-		'0': '+00+000/',
-		'-3 +2': '-03+002/',
-		'1.1 2': '+0106+002/',
-		'90° N 30.10°': '+90+03006/',
-		'0° 5\'N, 0° 0\' 10"E': '+0005+0000010/',
-		'5\'S': '-05+000/',
-		'1\' 1"': '+010001+000/',
-		'1\' 1.1"': '+010001.1+000/',
-		'89° 59" 59\' 1.123\'': '+8959+0590001.123/',
-		'5°\'N 0° 0\' 10.5"W': '+05-0000010.5/'
+		'+00+000/': { latitude: 0, longitude: 0, precision: 1 },
+		'-03+002/': { latitude: -3, longitude: 2, precision: 1 },
+		'+0106+00200/': { latitude: 1.1, longitude: 2, precision: 0.1 },
+		'+900000+0300600/': { latitude: 90, longitude: 30.1, precision: 0.01 },
+		'+000600+0000027/': { latitude: 0.1, longitude: 0.0075, precision: 1 / 3600 },
+		'-0006+00000/': { latitude: -0.1, longitude: 0, precision: 1 / 60 },
+		'+010001+0000000/': { latitude: 1.00028, longitude: 0, precision: 1 / 3600 },
+		'+010001.8+0000000.0/': { latitude: 1.0005, longitude: 0, precision: 1 / 36000 },
+		'+895400.000-0000001.116/': { latitude: 89.9, longitude: -0.00031, precision: 1 / 3600000 },
+		'+050000.0-0000010.5/': { latitude: 5, longitude: -0.00292, precision: 1 / 36000 }
 	};
 
 	QUnit.module( 'globeCoordinate.GlobeCoordinate.js' );
@@ -46,15 +46,14 @@
 			'Trying to instantiate with an invalid value (190° 30" 1.123\') throws an error.'
 		);
 
-		c = new globeCoordinate.GlobeCoordinate( '1.5 1.5' );
+		assert.throws(
+			function() { c = new globeCoordinate.GlobeCoordinate( { latitude: 20 } ); },
+			'Trying to instantiate with an invalid value ({ latitude: 20 }) throws an error.'
+		);
+
+		c = new globeCoordinate.GlobeCoordinate( { latitude: 1.5, longitude: 1.5, precision: 0.1 } );
 
 		// Since most methods are just plain getters, just doing plain verification:
-
-		assert.equal(
-			c.getRawInput(),
-			'1.5 1.5',
-			'Verified getRawInput()'
-		);
 
 		assert.equal(
 			c.getLatitude(),
@@ -127,13 +126,13 @@
 	QUnit.test( 'iso6709()', function( assert ) {
 		var c;
 
-		$.each( iso6709representations, function( inputString, iso6709string ) {
-			c = new globeCoordinate.GlobeCoordinate( inputString );
+		$.each( iso6709representations, function( iso6709string, gcDef ) {
+			c = new globeCoordinate.GlobeCoordinate( gcDef );
 
 			assert.equal(
 				c.iso6709(),
 				iso6709string,
-				'Validated ISO 6709 string for \'' + inputString + '\': \'' + iso6709string + '\'.'
+				'Validated ISO 6709 string for \'' + c.decimalText() + '\': \'' + iso6709string + '\'.'
 			);
 
 		} );
@@ -143,24 +142,24 @@
 	QUnit.test( 'equals()', function( assert ) {
 		var c1, c2;
 
-		$.each( iso6709representations, function( inputString1, iso6709string1 ) {
-			c1 = new globeCoordinate.GlobeCoordinate( inputString1 );
+		$.each( iso6709representations, function( iso6709string1, gcDef1 ) {
+			c1 = new globeCoordinate.GlobeCoordinate( gcDef1 );
 
-			$.each( iso6709representations, function( inputString2, iso6709string2 ) {
-				c2 = new globeCoordinate.GlobeCoordinate( inputString2 );
+			$.each( iso6709representations, function( iso6709string2, gcDef ) {
+				c2 = new globeCoordinate.GlobeCoordinate( gcDef );
 
-				if( inputString1 === inputString2 ) {
+				if( iso6709string1 === iso6709string2 ) {
 
 					assert.ok(
 						c1.equals( c2 ),
-						'Validated equality for \'' + inputString1 + '\'.'
+						'Validated equality for \'' + c1.decimalText() + '\'.'
 					);
 
 				} else {
 
 					assert.ok(
 						!c1.equals( c2 ),
-						'Validated inequality of \'' + inputString1 + '\' and \'' + inputString2 + '\'.'
+						'Validated inequality of \'' + c1.decimalText() + '\' and \'' + c2.decimalText() + '\'.'
 					);
 
 				}

@@ -84,7 +84,6 @@ return call_user_func( function() {
 		'globeCoordinate.js.tests' => array(
 			'scripts' => array(
 				'resources/globeCoordinate.js/tests/globeCoordinate.tests.js',
-				'resources/globeCoordinate.js/tests/globeCoordinate.parser.tests.js',
 				'resources/globeCoordinate.js/tests/globeCoordinate.GlobeCoordinate.tests.js',
 			),
 			'dependencies' => array(
