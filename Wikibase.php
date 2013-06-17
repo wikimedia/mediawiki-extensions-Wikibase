@@ -26,15 +26,25 @@ $wgExtensionFunctions[] = function() {
 	$evilStuff->execute();
 };
 
+function remove_directory( $dirPath ) {
+	foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dirPath, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST) as $path) {
+		$path->isFile() ? unlink($path->getPathname()) : rmdir($path->getPathname());
+	}
+}
+
 # Let JenkinsAdapt our test suite when run under Jenkins
 $jenkins_job_name = getenv( 'JOB_NAME' );
 if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 
 	switch( $jenkins_job_name) {
 		case 'mwext-Wikibase-client-tests':
+			remove_directory( __DIR__ . '/Query' );
+			remove_directory( __DIR__ . '/repo' );
 			require_once __DIR__ . '/client/WikibaseClient.php';
 		break;
 		case 'mwext-Wikibase-repo-tests':
+			remove_directory( __DIR__ . '/Query' );
+			remove_directory( __DIR__ . '/client' );
 			require_once __DIR__ . '/repo/Wikibase.php';
 			require_once __DIR__ . '/repo/ExampleSettings.php';
 		break;
