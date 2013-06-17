@@ -523,6 +523,21 @@ $messages['sr-ec'] = array(
 	'valueview-expert-timeinput-calendar' => 'Календар:',
 );
 
+/** Swedish (svenska)
+ * @author Jopparn
+ */
+$messages['sv'] = array(
+	'valueview-expert-emptyvalue-empty' => 'tom',
+	'valueview-expert-globecoordinateinput-precision' => 'Precision:',
+	'valueview-expert-timeinput-precision' => 'Precision:',
+	'valueview-expert-timeinput-calendar' => 'Kalender:',
+	'valueview-expert-timeinput-calendarhint' => '($1 kalender)',
+	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; ändra till $1',
+	'valueview-preview-label' => 'kommer att visas som:',
+	'valueview-preview-novalue' => 'inget giltigt värde erkänns',
+	'valueview-listrotator-auto' => 'automatisk',
+);
+
 /** Ukrainian (українська)
  * @author Ата
  */
