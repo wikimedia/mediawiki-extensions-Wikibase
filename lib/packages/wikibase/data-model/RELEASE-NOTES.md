@@ -1,6 +1,13 @@
 Release notes of Wikibase DataModel
 ====================================
 
+Version 0.5
+-----------
+
+Under development.
+
+* 
+
 Version 0.4
 -----------
 
