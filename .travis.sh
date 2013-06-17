@@ -23,6 +23,3 @@ echo 'require_once( __DIR__ . "/extensions/Wikibase/repo/Wikibase.php" );' >> Lo
 echo 'require_once( __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php" );' >> LocalSettings.php
 
 php maintenance/update.php --quick
-
-cd tests/phpunit
-./phpunit.php --group Wikibase
