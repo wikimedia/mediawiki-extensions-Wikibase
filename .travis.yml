@@ -29,7 +29,7 @@ before_script:
 
 script:
   - cd ../phase3/tests/phpunit
-  - ./phpunit.php --group Wikibase
+  - ./phpunit.php --group Wikibase --exclude-group ChangeHandlerTest
 
 notifications:
   email:
