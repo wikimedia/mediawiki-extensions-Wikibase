@@ -1,7 +1,7 @@
 {
     "name": "wikibase/wikibase",
     "type": "mediawiki-extension",
-    "description": "Structured data repository and client for MediaWiki",
+    "description": "Structured data repository for MediaWiki",
     "keywords": ["wikibase", "wikidata", "wikibaselib", "wikibaseclient", "wikibaserepo"],
     "homepage": "https://www.mediawiki.org/wiki/Wikibase",
     "license": "GNU GPL v2+",
@@ -23,5 +23,11 @@
 		"wikibase/data-model": "*",
         "diff/diff": ">=0.6"
     },
-	"minimum-stability" : "dev"
+	"minimum-stability" : "dev",
+	"autoload": {
+		"files" : [
+			"lib/WikibaseLib.php",
+			"repo/Wikibase.php"
+		]
+	}
 }
