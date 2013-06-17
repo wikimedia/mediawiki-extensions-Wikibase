@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "D0zqQgUk",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-17T13:56:49Z",
+      "side": 1,
+      "message": "Yep, it does",
+      "parentUuid": "D09r6Fbo",
+      "revId": "73fbeb4bd13ed9802b959f0758089221d25f2157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D07r3UdE",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-17T13:33:48Z",
       "side": 1,
       "message": "Variables $1 and $2 are not documented.",
+      "revId": "73fbeb4bd13ed9802b959f0758089221d25f2157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D01qMZS8",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-17T13:56:49Z",
+      "side": 1,
+      "message": "This one will be altered anyway (see comment on PS3)",
+      "parentUuid": "D07r3UdE",
       "revId": "73fbeb4bd13ed9802b959f0758089221d25f2157",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
