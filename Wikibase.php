@@ -39,7 +39,6 @@ if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 	switch( $jenkins_job_name) {
 		case 'mwext-Wikibase-client-tests':
 //			// Exclude non loaded production code
-//			remove_directory( __DIR__ . '/Query' );
 //			remove_directory( __DIR__ . '/repo' );
 //
 //			// This test is failing for unknown reason
@@ -58,7 +57,6 @@ if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 //		break;
 		case 'mwext-Wikibase-repo-tests':
 			// Exclude non loaded production code
-			remove_directory( __DIR__ . '/Query' );
 			remove_directory( __DIR__ . '/client' );
 
 			// This test breaks when it is run in a different order
@@ -70,7 +68,6 @@ if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 		default:
 			require_once __DIR__ . '/client/WikibaseClient.php';
 			require_once __DIR__ . '/repo/Wikibase.php';
-			require_once __DIR__ . '/Query/WikibaseQuery.php';
 			require_once __DIR__ . '/repo/ExampleSettings.php';
 	}
 }
