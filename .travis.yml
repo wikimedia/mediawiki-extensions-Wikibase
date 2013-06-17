@@ -1,5 +1,8 @@
 language: php
 
+env:
+  - TRAVISASSUMESWRONGSTUFF=FAIL
+
 matrix:
   include:
     - env: DBTYPE=mysql EXTENSION=client
@@ -16,6 +19,8 @@ matrix:
       php: 5.5
     - env: DBTYPE=postgres EXTENSION=repo
       php: 5.5
+  exclude:
+    - end: TRAVISASSUMESWRONGSTUFF=FAIL
   allow_failures:
     - env: DBTYPE=postgres EXTENSION=repo
 

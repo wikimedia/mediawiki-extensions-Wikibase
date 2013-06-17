@@ -29,7 +29,7 @@ then
 	echo 'require_once __DIR__ . "/extensions/Wikibase/repo/Wikibase.php";' >> LocalSettings.php
 	echo 'require_once __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
 else
-	echo 'require_once __DIR__ . "/client/WikibaseClient.php";' >> LocalSettings.php
+	echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
 fi
 
 php maintenance/update.php --quick
