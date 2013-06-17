@@ -7,6 +7,17 @@
 
 require 'spec_helper'
 
+test_filters = [
+  "dataValues",
+  "dataTypes",
+  "eachchange",
+  "jQuery.ui",
+  "templates",
+  "valueview",
+  "time",
+  "coordinate"
+]
+
 describe "Running repo QUnit tests" do
   before :all do
     # set up
@@ -28,53 +39,14 @@ describe "Running repo QUnit tests" do
         end
       end
     end
-    it "run dataValues tests" do
-      on_page(QUnitPage) do |page|
-        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=dataValues")
-        page.wait_for_qunit_tests
-        page.qunitTestFail?.should be_false
-      end
-    end
-    it "run dataTypes tests" do
-      on_page(QUnitPage) do |page|
-        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=dataTypes")
-        page.wait_for_qunit_tests
-        page.qunitTestFail?.should be_false
-      end
-    end
-    it "run eachchange tests" do
-      on_page(QUnitPage) do |page|
-        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=eachchange")
-        page.wait_for_qunit_tests
-        page.qunitTestFail?.should be_false
-      end
-    end
-    it "run jQuery.ui tests" do
-      on_page(QUnitPage) do |page|
-        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=jQuery.ui")
-        page.wait_for_qunit_tests
-        page.qunitTestFail?.should be_false
-      end
-    end
-    it "run template engine tests" do
-      on_page(QUnitPage) do |page|
-        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=templates")
-        page.wait_for_qunit_tests
-        page.qunitTestFail?.should be_false
-      end
-    end
-    it "run valueview tests" do
-      on_page(QUnitPage) do |page|
-        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=valueview")
-        page.wait_for_qunit_tests
-        page.qunitTestFail?.should be_false
-      end
-    end
-    it "run time tests" do
-      on_page(QUnitPage) do |page|
-        page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=time")
-        page.wait_for_qunit_tests
-        page.qunitTestFail?.should be_false
+
+    test_filters.each do |filter|
+      it "run tests for filter " + filter do
+        on_page(QUnitPage) do |page|
+          page.call_qunit(WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=" + filter)
+          page.wait_for_qunit_tests
+          page.qunitTestFail?.should be_false
+        end
       end
     end
   end
