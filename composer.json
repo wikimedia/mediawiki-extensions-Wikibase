@@ -23,10 +23,5 @@
 		"wikibase/data-model": "*",
         "diff/diff": ">=0.6"
     },
-	"minimum-stability" : "dev",
-	"autoload": {
-		"files" : [
-			"lib/WikibaseLib.php"
-		]
-	}
+	"minimum-stability" : "dev"
 }
