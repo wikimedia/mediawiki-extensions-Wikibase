@@ -78,6 +78,13 @@ $messages['he'] = array(
 	'wikibasedatamodel-desc' => 'רכיב שמגדיר את מודל הנתונים של ויקיבייס',
 );
 
+/** Italian (italiano)
+ * @author Beta16
+ */
+$messages['it'] = array(
+	'wikibasedatamodel-desc' => 'Componente per la definizione del modello di dati Wikibase',
+);
+
 /** Japanese (日本語)
  * @author Shirayuki
  */
