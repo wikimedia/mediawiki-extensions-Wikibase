@@ -14,7 +14,6 @@ php maintenance/install.php --dbtype $DBTYPE --dbuser root --dbname its_a_mw --d
 cd extensions
 git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Diff.git
 git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DataValues.git
-git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Ask.git
 git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/WikibaseDataModel.git
 git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Wikibase.git
 
