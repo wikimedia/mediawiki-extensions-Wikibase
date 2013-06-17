@@ -4,22 +4,16 @@ matrix:
   include:
     - env: DBTYPE=mysql EXTENSION=client
       php: 5.3
-  include:
     - env: DBTYPE=mysql EXTENSION=client
       php: 5.4
-  include:
     - env: DBTYPE=sqlite EXTENSION=client
       php: 5.5
-  include:
     - env: DBTYPE=sqlite EXTENSION=repo
       php: 5.3
-  include:
     - env: DBTYPE=sqlite EXTENSION=repo
       php: 5.4
-  include:
     - env: DBTYPE=mysql EXTENSION=repo
       php: 5.5
-  include:
     - env: DBTYPE=postgres EXTENSION=repo
       php: 5.5
   allow_failures:
