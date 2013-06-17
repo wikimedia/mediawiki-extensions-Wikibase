@@ -1,31 +1,36 @@
 language: php
 
-php:
-  - 5.3
-  - 5.4
-  - 5.5
-
-env:
-  - DBTYPE=mysql
-  - DBTYPE=sqlite
-  - DBTYPE=postgres
-
 matrix:
+  include:
+    - env: DBTYPE=mysql EXTENSION=client
+      php: 5.3
+  include:
+    - env: DBTYPE=mysql EXTENSION=client
+      php: 5.4
+  include:
+    - env: DBTYPE=sqlite EXTENSION=client
+      php: 5.5
+  include:
+    - env: DBTYPE=sqlite EXTENSION=repo
+      php: 5.3
+  include:
+    - env: DBTYPE=sqlite EXTENSION=repo
+      php: 5.4
+  include:
+    - env: DBTYPE=mysql EXTENSION=repo
+      php: 5.5
+  include:
+    - env: DBTYPE=postgres EXTENSION=repo
+      php: 5.5
   allow_failures:
-    - env: DBTYPE=postgres
-  exclude:
-    - php: 5.4
-      env: DBTYPE=mysql
-    - php: 5.4
-      env: DBTYPE=postgres
-    - php: 5.5
-      env: DBTYPE=postgres
+    - env: DBTYPE=postgres EXTENSION=repo
 
 before_script:
-  - bash .travis.sh
-  - cd ../phase3/tests/phpunit
+  - bash .travis.sh $EXTENSION
 
-script: ./phpunit.php --group Wikibase
+script:
+  - cd ../phase3/tests/phpunit
+  - ./phpunit.php --group Wikibase
 
 notifications:
   email:
