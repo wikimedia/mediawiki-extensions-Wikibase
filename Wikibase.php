@@ -32,9 +32,13 @@ if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 
 	switch( $jenkins_job_name) {
 		case 'mwext-Wikibase-client-tests':
+			rmdir( __DIR__ . '/Query' );
+			rmdir( __DIR__ . '/repo' );
 			require_once __DIR__ . '/client/WikibaseClient.php';
 		break;
 		case 'mwext-Wikibase-repo-tests':
+			rmdir( __DIR__ . '/Query' );
+			rmdir( __DIR__ . '/client' );
 			require_once __DIR__ . '/repo/Wikibase.php';
 			require_once __DIR__ . '/repo/ExampleSettings.php';
 		break;
