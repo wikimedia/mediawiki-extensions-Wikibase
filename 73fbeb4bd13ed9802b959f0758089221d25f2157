@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D09r6Fbo",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-06-17T13:33:48Z",
+      "side": 1,
+      "message": "Checking: Does this message have class\u003d\"plainlinks\" to avoid ugly CSS markup?",
+      "revId": "73fbeb4bd13ed9802b959f0758089221d25f2157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D07r3UdE",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2013-06-17T13:33:48Z",
+      "side": 1,
+      "message": "Variables $1 and $2 are not documented.",
+      "revId": "73fbeb4bd13ed9802b959f0758089221d25f2157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
