@@ -195,19 +195,42 @@ function testExpert( testDefinition ) {
 	} );
 
 	expertCases.test( 'rawValue: setting value to unknown value', function( args, assert ) {
-		var expert = args.expert;
 
 		$.each( unknownRawValues, function( i, testValue ) {
-			expert.rawValue( testValue );
+			QUnit.stop();
+
+			// Copy expert to not overwrite its raw value while looping when testing an expert using
+			// an asynchronous API based parser:
+			var expert = $.extend( {}, args.expert ),
+				promise = expert.rawValue( testValue );
 
 			assert.ok(
 				true,
 				'Changed value via "rawValue( value )". "value" is ' + valueDescription( testValue )
 			);
-			assert.ok(
-				expert.rawValueCompare( expert.rawValue(), null ),
-				'The new value returned by "rawValue()" is null (empty value)'
-			);
+
+			if( promise && promise.state ) {
+				promise.always( function() {
+					QUnit.start();
+
+					// Since experts using an API based parser deal with plain unparsed values, they
+					// return the original instead of the parsed value when calling rawValue().
+					assert.ok(
+						expert.rawValueCompare( expert.rawValue(), testValue )
+							|| isNaN( testValue ) && isNaN( expert.rawValue() ),
+						'The new value returned by "rawValue()" is ' + valueDescription( testValue )
+					);
+				} );
+
+			} else {
+				QUnit.start();
+
+				assert.ok(
+					expert.rawValueCompare( expert.rawValue(), null ),
+					'The new value returned by "rawValue()" is null (empty value)'
+				);
+			}
+
 		} );
 	} );
 
@@ -256,18 +279,29 @@ function testExpert( testDefinition ) {
 			'Change notification has not been triggered initially'
 		);
 
-		function testChangeRawValue( rawValue, changeExptected, testDescription ) {
+		function testChangeRawValue( rawValue, changeExpected, testDescription ) {
 			notified = false;
 			newValue = rawValue;
-			expert.rawValue( rawValue );
 
-			var msg = changeExptected
+			var msg = changeExpected
 				? 'Changing the expert\'s raw value has triggered a "change" notification after '
-				: 'No "change" notification has been triggered since the expert\'s value did not ' +
-					'change after ';
+				: 'No "change" notification has been triggered since the expert\'s value did not '
+					+ 'change after ';
 			msg += testDescription;
 
-			assert.ok( changeExptected === notified, msg );
+			QUnit.stop();
+
+			var promise = expert.rawValue( rawValue );
+
+			if( promise && promise.state ) {
+				promise.always( function() {
+					QUnit.start();
+					assert.ok( changeExpected === notified, msg );
+				} );
+			} else {
+				QUnit.start();
+				assert.ok( changeExpected === notified, msg );
+			}
 		}
 
 		testChangeRawValue( null, false, 'changing value to empty after initialization ' +

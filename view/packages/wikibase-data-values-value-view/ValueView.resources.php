@@ -9,7 +9,6 @@
  * - jQuery.eachchange
  * - jQuery.inputAutoExpand
  * - jQuery.ui.suggester
- * - jQuery.globecoordinate.globecoordinateinput
  * - jQuery.time.timeinput
  * - jQuery.ui.toggler
  *
@@ -205,7 +204,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.valueview.experts',
 				'jquery.fn.focusAt',
-				'jquery.globecoordinate.globecoordinateinput',
 				'jquery.ui.inputextender',
 				'jquery.valueview.preview',
 			),

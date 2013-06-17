@@ -201,8 +201,14 @@
 		 * @since 0.1
 		 *
 		 * @param {*} [rawValue] If provided, the function will act as setter.
-		 * @return {*|null|undefined} Returns null in case no or non-processable value is set.
+		 * @return {*|null|jQuery.Promise|undefined} Returns null in case no or non-processable
+		 *         value is set or returns a jQuery.Promise object when setting a value of an expert
+		 *         using an asynchronous API based parser.
 		 *         Returns undefined if used as setter.
+		 *
+		 * TODO: Change this interface to its original state of not returning  promises. Experts
+		 *  should not use parsers, they should just be responsible for delivering raw values which
+		 *  will then be used with a parser by the valueview widget.
 		 */
 		rawValue: function( rawValue ) {
 			var currentRawValue = this._getRawValue();
@@ -216,11 +222,21 @@
 				this._setRawValue( rawValue );
 
 				// rawValue might be a unknown value different from null which will end as null
-				// nonetheless. If that is the case the value was null already, then this is not
+				// nonetheless. If that is the case or the value was null already, then this is not
 				// a real update.
 				if( currentRawValue !== null || this._getRawValue() !== null ) {
-					this.draw();
-					this._viewNotifier.notify( 'change', [ this ] );
+					var self = this,
+						promise = this.draw();
+
+					if( promise && promise.state ) {
+						// Asynchronous API based parser:
+						return promise.done( function() {
+							self._viewNotifier.notify( 'change', [ self ] );
+						} );
+					} else {
+						// Synchronous JavaScript parser:
+						this._viewNotifier.notify( 'change', [ this ] );
+					}
 				}
 			}
 		},
