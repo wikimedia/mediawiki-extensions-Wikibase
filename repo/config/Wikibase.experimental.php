@@ -33,6 +33,8 @@ if ( !defined( 'WB_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
 
+global $wgAPIModules, $wgHooks;
+
 $dir = __DIR__ . '/../';
 
 $wgAutoloadClasses['Wikibase\Api\SetStatementRank']		= $dir . 'includes/api/SetStatementRank.php';

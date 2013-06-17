@@ -39,10 +39,7 @@ if ( defined( 'WB_VERSION' ) ) {
 	return;
 }
 
-define( 'WB_VERSION', '0.4 alpha'
-	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
-
-if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
+if ( version_compare( $GLOBALS['wgVersion'], '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
 	die( '<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.' );
 }
 
@@ -52,145 +49,154 @@ if ( !defined( 'WBL_VERSION' ) ) {
 }
 
 if ( !defined( 'WBL_VERSION' ) ) {
-	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:WikibaseLib">WikibaseLib</a> extension.' );
+	throw new Exception( 'Wikibase depends on the WikibaseLib extension.' );
 }
 
-$wgExtensionCredits['wikibase'][] = array(
-	'path' => __DIR__,
-	'name' => 'Wikibase Repository',
-	'version' => WB_VERSION,
-	'author' => array(
-		'The Wikidata team', // TODO: link?
-	),
-	'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase',
-	'descriptionmsg' => 'wikibase-desc'
-);
+define( 'WB_VERSION', '0.4 alpha'
+	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
-// constants
-define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
-define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
+call_user_func( function() {
+	global $wgExtensionCredits, $wgAutoloadClasses, $wgGroupPermissions, $wgExtensionMessagesFiles;
+	global $wgAPIModules, $wgSpecialPages, $wgSpecialPageGroups, $wgHooks, $wgContentHandlers;
+	global $wgWBStores, $wgWBRepoSettings, $wgWBSettings, $wgResourceModules;
 
-// Autoloading
-foreach ( include( __DIR__ . '/Wikibase.classes.php' ) as $class => $file ) {
-	$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
-}
+	$wgExtensionCredits['wikibase'][] = array(
+		'path' => __DIR__,
+		'name' => 'Wikibase Repository',
+		'version' => WB_VERSION,
+		'author' => array(
+			'The Wikidata team',
+		),
+		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase',
+		'descriptionmsg' => 'wikibase-desc'
+	);
 
-// rights
-// names should be according to other naming scheme
-$wgGroupPermissions['*']['item-override']		= true;
-$wgGroupPermissions['*']['item-create']			= true;
-$wgGroupPermissions['*']['item-remove']			= true;
-$wgGroupPermissions['*']['property-override']	= true;
-$wgGroupPermissions['*']['property-create']		= true;
-$wgGroupPermissions['*']['property-remove']		= true;
-$wgGroupPermissions['*']['alias-update']		= true;
-$wgGroupPermissions['*']['alias-remove']		= true;
-$wgGroupPermissions['*']['sitelink-remove']		= true;
-$wgGroupPermissions['*']['sitelink-update']		= true;
-$wgGroupPermissions['*']['linktitles-update']	= true;
-$wgGroupPermissions['*']['label-remove']		= true;
-$wgGroupPermissions['*']['label-update']		= true;
-$wgGroupPermissions['*']['description-remove']	= true;
-$wgGroupPermissions['*']['description-update']	= true;
+	// constants
+	define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
+	define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
 
-// i18n
-$wgExtensionMessagesFiles['Wikibase'] 				= __DIR__ . '/Wikibase.i18n.php';
-$wgExtensionMessagesFiles['WikibaseAlias'] 			= __DIR__ . '/Wikibase.i18n.alias.php';
-$wgExtensionMessagesFiles['WikibaseNS'] 			= __DIR__ . '/Wikibase.i18n.namespaces.php';
+	// Autoloading
+	foreach ( include( __DIR__ . '/Wikibase.classes.php' ) as $class => $file ) {
+		$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
+	}
 
-// API module registration
-$wgAPIModules['wbgetentities'] 						= 'Wikibase\Api\GetEntities';
-$wgAPIModules['wbsetlabel'] 						= 'Wikibase\Api\SetLabel';
-$wgAPIModules['wbsetdescription'] 					= 'Wikibase\Api\SetDescription';
-$wgAPIModules['wbsearchentities'] 					= 'Wikibase\Api\SearchEntities';
-$wgAPIModules['wbsetaliases'] 						= 'Wikibase\Api\SetAliases';
-$wgAPIModules['wbeditentity'] 						= 'Wikibase\Api\EditEntity';
-$wgAPIModules['wblinktitles'] 						= 'Wikibase\Api\LinkTitles';
-$wgAPIModules['wbsetsitelink'] 						= 'Wikibase\Api\SetSiteLink';
-$wgAPIModules['wbcreateclaim'] 						= 'Wikibase\Api\CreateClaim';
-$wgAPIModules['wbgetclaims'] 						= 'Wikibase\Api\GetClaims';
-$wgAPIModules['wbremoveclaims'] 					= 'Wikibase\Api\RemoveClaims';
-$wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\Api\SetClaimValue';
-$wgAPIModules['wbsetreference'] 					= 'Wikibase\Api\SetReference';
-$wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
-$wgAPIModules['wbsetclaim'] 						= 'Wikibase\Api\SetClaim';
-$wgAPIModules['wbremovequalifiers']                 = 'Wikibase\Api\RemoveQualifiers';
-$wgAPIModules['wbsetqualifier']                     = 'Wikibase\Api\SetQualifier';
+	// rights
+	// names should be according to other naming scheme
+	$wgGroupPermissions['*']['item-override']		= true;
+	$wgGroupPermissions['*']['item-create']			= true;
+	$wgGroupPermissions['*']['item-remove']			= true;
+	$wgGroupPermissions['*']['property-override']	= true;
+	$wgGroupPermissions['*']['property-create']		= true;
+	$wgGroupPermissions['*']['property-remove']		= true;
+	$wgGroupPermissions['*']['alias-update']		= true;
+	$wgGroupPermissions['*']['alias-remove']		= true;
+	$wgGroupPermissions['*']['sitelink-remove']		= true;
+	$wgGroupPermissions['*']['sitelink-update']		= true;
+	$wgGroupPermissions['*']['linktitles-update']	= true;
+	$wgGroupPermissions['*']['label-remove']		= true;
+	$wgGroupPermissions['*']['label-update']		= true;
+	$wgGroupPermissions['*']['description-remove']	= true;
+	$wgGroupPermissions['*']['description-update']	= true;
 
-// Special page registration
-$wgSpecialPages['NewItem'] 							= 'SpecialNewItem';
-$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
-$wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
-$wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
-$wgSpecialPages['ItemsWithoutSitelinks']			= 'SpecialItemsWithoutSitelinks';
-$wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
-$wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
-$wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
-$wgSpecialPages['SetSiteLink']						= 'SpecialSetSiteLink';
-$wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
-$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
-$wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
-$wgSpecialPages['DispatchStats']					= 'SpecialDispatchStats';
-$wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
+	// i18n
+	$wgExtensionMessagesFiles['Wikibase'] 				= __DIR__ . '/Wikibase.i18n.php';
+	$wgExtensionMessagesFiles['WikibaseAlias'] 			= __DIR__ . '/Wikibase.i18n.alias.php';
+	$wgExtensionMessagesFiles['WikibaseNS'] 			= __DIR__ . '/Wikibase.i18n.namespaces.php';
 
-// Special page groups
-$wgSpecialPageGroups['NewItem']						= 'wikibaserepo';
-$wgSpecialPageGroups['NewProperty']					= 'wikibaserepo';
-$wgSpecialPageGroups['ItemByTitle']					= 'wikibaserepo';
-$wgSpecialPageGroups['ItemDisambiguation']			= 'wikibaserepo';
-$wgSpecialPageGroups['ItemsWithoutSitelinks']		= 'wikibaserepo';
-$wgSpecialPageGroups['SetLabel']					= 'wikibaserepo';
-$wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
-$wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
-$wgSpecialPageGroups['SetSiteLink']					= 'wikibaserepo';
-$wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
-$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
-$wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
-$wgSpecialPageGroups['DispatchStats']				= 'wikibaserepo';
+	// API module registration
+	$wgAPIModules['wbgetentities'] 						= 'Wikibase\Api\GetEntities';
+	$wgAPIModules['wbsetlabel'] 						= 'Wikibase\Api\SetLabel';
+	$wgAPIModules['wbsetdescription'] 					= 'Wikibase\Api\SetDescription';
+	$wgAPIModules['wbsearchentities'] 					= 'Wikibase\Api\SearchEntities';
+	$wgAPIModules['wbsetaliases'] 						= 'Wikibase\Api\SetAliases';
+	$wgAPIModules['wbeditentity'] 						= 'Wikibase\Api\EditEntity';
+	$wgAPIModules['wblinktitles'] 						= 'Wikibase\Api\LinkTitles';
+	$wgAPIModules['wbsetsitelink'] 						= 'Wikibase\Api\SetSiteLink';
+	$wgAPIModules['wbcreateclaim'] 						= 'Wikibase\Api\CreateClaim';
+	$wgAPIModules['wbgetclaims'] 						= 'Wikibase\Api\GetClaims';
+	$wgAPIModules['wbremoveclaims'] 					= 'Wikibase\Api\RemoveClaims';
+	$wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\Api\SetClaimValue';
+	$wgAPIModules['wbsetreference'] 					= 'Wikibase\Api\SetReference';
+	$wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
+	$wgAPIModules['wbsetclaim'] 						= 'Wikibase\Api\SetClaim';
+	$wgAPIModules['wbremovequalifiers']                 = 'Wikibase\Api\RemoveQualifiers';
+	$wgAPIModules['wbsetqualifier']                     = 'Wikibase\Api\SetQualifier';
 
-// Hooks
-$wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
-$wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\RepoHooks::onSchemaUpdate';
-$wgHooks['UnitTestsList'][] 						= 'Wikibase\RepoHooks::registerUnitTests';
-$wgHooks['NamespaceIsMovable'][]					= 'Wikibase\RepoHooks::onNamespaceIsMovable';
-$wgHooks['NewRevisionFromEditComplete'][]			= 'Wikibase\RepoHooks::onNewRevisionFromEditComplete';
-$wgHooks['SkinTemplateNavigation'][] 				= 'Wikibase\RepoHooks::onPageTabs';
-$wgHooks['RecentChange_save'][]						= 'Wikibase\RepoHooks::onRecentChangeSave';
-$wgHooks['ArticleDeleteComplete'][] 				= 'Wikibase\RepoHooks::onArticleDeleteComplete';
-$wgHooks['ArticleUndelete'][]						= 'Wikibase\RepoHooks::onArticleUndelete';
-$wgHooks['LinkBegin'][] 							= 'Wikibase\RepoHooks::onLinkBegin';
-$wgHooks['OutputPageBodyAttributes'][] 				= 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
-//FIXME: handle other types of entities with autocomments too!
-$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_ITEM, "wikibase-item" ) );
-$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_PROPERTY, "wikibase-property" ) );
-$wgHooks['PageHistoryLineEnding'][]					= 'Wikibase\RepoHooks::onPageHistoryLineEnding';
-$wgHooks['WikibaseRebuildData'][] 					= 'Wikibase\RepoHooks::onWikibaseRebuildData';
-$wgHooks['WikibaseDeleteData'][] 					= 'Wikibase\RepoHooks::onWikibaseDeleteData';
-$wgHooks['ApiCheckCanExecute'][] 					= 'Wikibase\RepoHooks::onApiCheckCanExecute';
-$wgHooks['SetupAfterCache'][] 						= 'Wikibase\RepoHooks::onSetupAfterCache';
-$wgHooks['ShowSearchHit'][] 						= 'Wikibase\RepoHooks::onShowSearchHit';
-$wgHooks['TitleGetRestrictionTypes'][]				= 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
-$wgHooks['AbuseFilter-contentToString'][]			= 'Wikibase\RepoHooks::onAbuseFilterContentToString';
-$wgHooks['SpecialPage_reorderPages'][]				= 'Wikibase\RepoHooks::onSpecialPage_reorderPages';
+	// Special page registration
+	$wgSpecialPages['NewItem'] 							= 'SpecialNewItem';
+	$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
+	$wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
+	$wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
+	$wgSpecialPages['ItemsWithoutSitelinks']			= 'SpecialItemsWithoutSitelinks';
+	$wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
+	$wgSpecialPages['SetDescription'] 					= 'SpecialSetDescription';
+	$wgSpecialPages['SetAliases'] 						= 'SpecialSetAliases';
+	$wgSpecialPages['SetSiteLink']						= 'SpecialSetSiteLink';
+	$wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
+	$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
+	$wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
+	$wgSpecialPages['DispatchStats']					= 'SpecialDispatchStats';
+	$wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 
-// Resource Loader Modules:
-$wgResourceModules = array_merge( $wgResourceModules, include( __DIR__ . "/resources/Resources.php" ) );
+	// Special page groups
+	$wgSpecialPageGroups['NewItem']						= 'wikibaserepo';
+	$wgSpecialPageGroups['NewProperty']					= 'wikibaserepo';
+	$wgSpecialPageGroups['ItemByTitle']					= 'wikibaserepo';
+	$wgSpecialPageGroups['ItemDisambiguation']			= 'wikibaserepo';
+	$wgSpecialPageGroups['ItemsWithoutSitelinks']		= 'wikibaserepo';
+	$wgSpecialPageGroups['SetLabel']					= 'wikibaserepo';
+	$wgSpecialPageGroups['SetDescription']				= 'wikibaserepo';
+	$wgSpecialPageGroups['SetAliases']					= 'wikibaserepo';
+	$wgSpecialPageGroups['SetSiteLink']					= 'wikibaserepo';
+	$wgSpecialPageGroups['EntitiesWithoutLabel']		= 'wikibaserepo';
+	$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
+	$wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
+	$wgSpecialPageGroups['DispatchStats']				= 'wikibaserepo';
 
-// register hooks and handlers
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] 		= '\Wikibase\ItemHandler';
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] 	= '\Wikibase\PropertyHandler';
+	// Hooks
+	$wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
+	$wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\RepoHooks::onSchemaUpdate';
+	$wgHooks['UnitTestsList'][] 						= 'Wikibase\RepoHooks::registerUnitTests';
+	$wgHooks['NamespaceIsMovable'][]					= 'Wikibase\RepoHooks::onNamespaceIsMovable';
+	$wgHooks['NewRevisionFromEditComplete'][]			= 'Wikibase\RepoHooks::onNewRevisionFromEditComplete';
+	$wgHooks['SkinTemplateNavigation'][] 				= 'Wikibase\RepoHooks::onPageTabs';
+	$wgHooks['RecentChange_save'][]						= 'Wikibase\RepoHooks::onRecentChangeSave';
+	$wgHooks['ArticleDeleteComplete'][] 				= 'Wikibase\RepoHooks::onArticleDeleteComplete';
+	$wgHooks['ArticleUndelete'][]						= 'Wikibase\RepoHooks::onArticleUndelete';
+	$wgHooks['LinkBegin'][] 							= 'Wikibase\RepoHooks::onLinkBegin';
+	$wgHooks['OutputPageBodyAttributes'][] 				= 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
+	//FIXME: handle other types of entities with autocomments too!
+	$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_ITEM, "wikibase-item" ) );
+	$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_PROPERTY, "wikibase-property" ) );
+	$wgHooks['PageHistoryLineEnding'][]					= 'Wikibase\RepoHooks::onPageHistoryLineEnding';
+	$wgHooks['WikibaseRebuildData'][] 					= 'Wikibase\RepoHooks::onWikibaseRebuildData';
+	$wgHooks['WikibaseDeleteData'][] 					= 'Wikibase\RepoHooks::onWikibaseDeleteData';
+	$wgHooks['ApiCheckCanExecute'][] 					= 'Wikibase\RepoHooks::onApiCheckCanExecute';
+	$wgHooks['SetupAfterCache'][] 						= 'Wikibase\RepoHooks::onSetupAfterCache';
+	$wgHooks['ShowSearchHit'][] 						= 'Wikibase\RepoHooks::onShowSearchHit';
+	$wgHooks['TitleGetRestrictionTypes'][]				= 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
+	$wgHooks['AbuseFilter-contentToString'][]			= 'Wikibase\RepoHooks::onAbuseFilterContentToString';
+	$wgHooks['SpecialPage_reorderPages'][]				= 'Wikibase\RepoHooks::onSpecialPage_reorderPages';
 
-$wgWBStores = array();
+	// Resource Loader Modules:
+	$wgResourceModules = array_merge( $wgResourceModules, include( __DIR__ . "/resources/Resources.php" ) );
 
-$wgWBStores['sqlstore'] = 'Wikibase\SqlStore';
+	// register hooks and handlers
+	$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] 		= '\Wikibase\ItemHandler';
+	$wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] 	= '\Wikibase\PropertyHandler';
 
-$wgWBRepoSettings = array_merge(
-	require( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
-	require( __DIR__ . '/config/Wikibase.default.php' )
-);
+	$wgWBStores = array();
 
-$wgWBSettings = &$wgWBRepoSettings; // B/C
+	$wgWBStores['sqlstore'] = 'Wikibase\SqlStore';
 
-if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-	include_once( __DIR__ . '/config/Wikibase.experimental.php' );
-}
+	$wgWBRepoSettings = array_merge(
+		require( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
+		require( __DIR__ . '/config/Wikibase.default.php' )
+	);
+
+	$wgWBSettings = &$wgWBRepoSettings; // B/C
+
+	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+		include_once( __DIR__ . '/config/Wikibase.experimental.php' );
+	}
+} );
