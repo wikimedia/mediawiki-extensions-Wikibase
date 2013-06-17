@@ -25,4 +25,5 @@ echo 'require_once( __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php" );
 
 php maintenance/update.php --quick
 
-php tests/phpunit/phpunit.php --group Wikibase
+cd tests/phpunit
+./phpunit.php --group Wikibase
