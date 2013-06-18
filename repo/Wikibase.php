@@ -194,9 +194,9 @@ call_user_func( function() {
 		require( __DIR__ . '/config/Wikibase.default.php' )
 	);
 
-	$GLOBALS['wgWBSettings'] =& $GLOBALS['wgWBRepoSettings']; // B/C alias
-
 	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 		include_once( __DIR__ . '/config/Wikibase.experimental.php' );
 	}
 } );
+
+$wgWBSettings =& $wgWBRepoSettings; // B/C alias
