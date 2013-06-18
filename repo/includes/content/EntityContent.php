@@ -253,11 +253,15 @@ abstract class EntityContent extends \AbstractContent {
 			return false;
 		}
 
+		if ( !( $that instanceof EntityContent ) ) {
+			return false;
+		}
+
 		$thisEntity = $this->getEntity();
 		$thatEntity = $that->getEntity();
 
 		if ( !$this->isNew() && !$that->isNew()
-			&& $thisEntity->getPrefixedId() !== $thatEntity->getPrefixedId()
+			&& !$thisEntity->getId()->equals( $thatEntity->getId() )
 		) {
 			return false;
 		}
