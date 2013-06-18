@@ -1,10 +1,17 @@
 <?php
 
 namespace Wikibase\Lib\Test\Serializers;
+
+use Wikibase\Claim;
+use Wikibase\Item;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\Reference;
 
 /**
- * Tests for the Wikibase\Lib\Serializers\SerializerFactory class.
+ * @covers Wikibase\Lib\Serializers\SerializerFactory
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +40,7 @@ use Wikibase\Lib\Serializers\SerializerFactory;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SerializerTest extends \MediaWikiTestCase {
+class SerializerFactoryTest extends \MediaWikiTestCase {
 
 	public function testConstructor() {
 		new SerializerFactory();
@@ -43,26 +50,24 @@ class SerializerTest extends \MediaWikiTestCase {
 	public function objectProvider() {
 		$argLists = array();
 
-		$argLists[] = array( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$argLists[] = array( new \Wikibase\Reference() );
-		$argLists[] = array( new \Wikibase\Claim( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
-		$argLists[] = array( \Wikibase\Item::newEmpty() );
+		$argLists[] = array( new PropertyNoValueSnak( 42 ) );
+		$argLists[] = array( new Reference() );
+		$argLists[] = array( new Claim( new PropertyNoValueSnak( 42 ) ) );
 
-		// TODO
-		//$argLists[] = array( \Wikibase\Query::newEmpty() );
+		$idFormatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdFormatter' )
+			->disableOriginalConstructor()->getMock();
+		$argLists[] = array( Item::newEmpty(), new EntitySerializationOptions( $idFormatter ) );
 
 		return $argLists;
 	}
 
 	/**
 	 * @dataProvider objectProvider
-	 *
-	 * @param mixed $object
 	 */
-	public function testNewSerializerForObject( $object ) {
+	public function testNewSerializerForObject( $object, $options = null ) {
 		$factory = new SerializerFactory();
 
-		$serializer = $factory->newSerializerForObject( $object );
+		$serializer = $factory->newSerializerForObject( $object, $options );
 
 		$this->assertInstanceOf( 'Wikibase\Lib\Serializers\Serializer', $serializer );
 
@@ -72,7 +77,7 @@ class SerializerTest extends \MediaWikiTestCase {
 	public function serializationProvider() {
 		$argLists = array();
 
-		$snak = new \Wikibase\PropertyNoValueSnak( 42 );
+		$snak = new PropertyNoValueSnak( 42 );
 
 		$factory = new SerializerFactory();
 		$serializer = $factory->newSerializerForObject( $snak );
