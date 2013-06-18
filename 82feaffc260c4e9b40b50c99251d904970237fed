@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1DHJ6lw",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-18T11:53:03Z",
+      "side": 1,
+      "message": "That name is confusing! How about addNormalizationInfoToOutput?",
+      "revId": "82feaffc260c4e9b40b50c99251d904970237fed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
