@@ -26,6 +26,8 @@
 
 use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 
 class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
@@ -72,10 +74,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return array( null );
 		}
 
-		$serializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$serializerFactory = new SerializerFactory();
 		$serializer = $serializerFactory->newSerializerForObject( $entityObject );
 
-		$opt = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
+		$opt = new EntitySerializationOptions( WikibaseClient::getDefaultInstance()->getEntityIdFormatter() );
 		$serializer->setOptions( $opt );
 
 		try {
