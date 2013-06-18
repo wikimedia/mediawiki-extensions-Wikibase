@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Api;
 use Wikibase\Entity;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Unit tests for the Wikibase\ApiCreateClaim class.
@@ -72,9 +73,9 @@ class CreateClaimTest extends \ApiTestCase {
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $entity->getPrefixedId(),
+			'entity' => $this->getFormattedIdForEntity( $entity ),
 			'snaktype' => 'value',
-			'property' => $property->getPrefixedId(),
+			'property' => $this->getFormattedIdForEntity( $property ),
 			'value' => '"foo"',
 			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
@@ -91,7 +92,7 @@ class CreateClaimTest extends \ApiTestCase {
 
 		$entityId = \Wikibase\Entity::getIdFromClaimGuid( $claim['id'] );
 
-		$this->assertEquals( $entity->getPrefixedId(), $entityId );
+		$this->assertEquals( $this->getFormattedIdForEntity( $entity ), $entityId );
 
 		$this->assertEquals( 'value', $claim['mainsnak']['snaktype'] );
 
@@ -206,11 +207,11 @@ class CreateClaimTest extends \ApiTestCase {
 		$params['token'] = $GLOBALS['wgUser']->getEditToken();
 
 		if ( array_key_exists( 'entity', $params ) && $params['entity'] === '-' ) {
-			$params['entity'] = $entity->getPrefixedId();
+			$params['entity'] = $this->getFormattedIdForEntity( $entity );
 		}
 
 		if ( array_key_exists( 'property', $params ) && $params['property'] === '-' ) {
-			$params['property'] = $property->getPrefixedId();
+			$params['property'] = $this->getFormattedIdForEntity( $entity );
 		}
 
 		try {
@@ -226,6 +227,11 @@ class CreateClaimTest extends \ApiTestCase {
 		$this->assertFalse( $entityContent->getEntity()->hasClaims() );
 	}
 
+	protected function getFormattedIdForEntity( Entity $entity ) {
+		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+		return $idFormatter->format( $entity->getId() );
+	}
+
 	public function testMultipleRequests() {
 		/**
 		 * @var Entity $entity
@@ -235,9 +241,9 @@ class CreateClaimTest extends \ApiTestCase {
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $entity->getPrefixedId(),
+			'entity' => $this->getFormattedIdForEntity( $entity ),
 			'snaktype' => 'value',
-			'property' => $property->getPrefixedId(),
+			'property' => $this->getFormattedIdForEntity( $property ),
 			'value' => '"foo"',
 			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
@@ -252,9 +258,9 @@ class CreateClaimTest extends \ApiTestCase {
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $entity->getPrefixedId(),
+			'entity' => $this->getFormattedIdForEntity( $entity ),
 			'snaktype' => 'value',
-			'property' => $property->getPrefixedId(),
+			'property' => $this->getFormattedIdForEntity( $property ),
 			'value' => '"bar"',
 			'token' => $GLOBALS['wgUser']->getEditToken(),
 			'baserevid' => $revId
