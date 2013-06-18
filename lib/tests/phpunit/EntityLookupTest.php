@@ -148,8 +148,57 @@ abstract class EntityLookupTest extends EntityTestCase {
 		if ( $shouldExist == true ) {
 			$this->assertNotNull( $entity, "ID " . $id->getPrefixedId() );
 			$this->assertEquals( $id->getPrefixedId(), $entity->getPrefixedId() );
+
+			$has = $lookup->hasEntity( $id );
+			$this->assertTrue( $has, 'hasEntity' );
 		} else {
 			$this->assertNull( $entity, "ID " . $id->getPrefixedId() );
+
+			if ( $revision == 0 ) {
+				$has = $lookup->hasEntity( $id );
+				$this->assertFalse( $has, 'hasEntity' );
+			}
+		}
+	}
+
+	public static function provideHasEntity() {
+		$cases = array(
+			array( // #0
+				'q42', true,
+			),
+			array( // #1
+				'q753', false,
+			),
+			array( // #2
+				'p753', true,
+			),
+		);
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider provideHasEntity
+	 *
+	 * @param string|EntityId $id The entity to check
+	 * @param bool $expected
+	 */
+	public function testHasEntity( $id, $expected ) {
+		if ( is_string( $id ) ) {
+			$id = EntityId::newFromPrefixedId( $id );
+		}
+
+		$lookup = $this->getLookup();
+		$result = $lookup->hasEntity( $id );
+
+		$this->assertEquals( $expected, $result );
+
+		$entity = $lookup->getEntity( $id );
+
+		if ( $expected ) {
+			$this->assertInstanceOf( 'Wikibase\Entity', $entity );
+		} else {
+			$this->assertNull( $entity );
 		}
 	}
 

@@ -49,6 +49,19 @@ interface EntityLookup {
 	public function getEntity( EntityID $entityId, $revision = 0 );
 
 	/**
+	 * Returns whether the given entity can bee looked up using
+	 * getEntity(). This avoids loading and deserializing entity content
+	 * just to check whether the entity exists.
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityID $entityId
+	 *
+	 * @return bool
+	 */
+	public function hasEntity( EntityID $entityId );
+
+	/**
 	 * Fetches the entities with provided ids and returns them.
 	 * The result array contains the prefixed entity ids as keys.
 	 * The values are either an Entity or null, if there is no entity with the associated id.

@@ -110,6 +110,19 @@ class MockRepository implements SiteLinkLookup, EntityLookup, EntityRevisionLook
 	}
 
 	/**
+	 * See EntityLookup::hasEntity()
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityID $entityId
+	 *
+	 * @return bool
+	 */
+	public function hasEntity( EntityId $entityId ) {
+		return $this->getEntity( $entityId ) !== null;
+	}
+
+	/**
 	 * Returns an array with the conflicts between the item and the sitelinks
 	 * currently in the store. The array is empty if there are no such conflicts.
 	 *
