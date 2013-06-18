@@ -1,7 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use Wikibase\Entity;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 
 /**
@@ -44,6 +47,23 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 	protected abstract function getEntityInstance();
 
 	/**
+	 * @var ValueFormatter
+	 */
+	protected $idFormatter;
+
+	protected function setUp() {
+		$formatterOptions = new FormatterOptions( array( EntityIdFormatter::OPT_PREFIX_MAP => array(
+			'i' => 'item'
+		) ) );
+
+		$this->idFormatter = new EntityIdFormatter( $formatterOptions );
+	}
+
+	protected function getFormattedIdForEntity( Entity $entity ) {
+		return $this->idFormatter->format( $entity->getId() );
+	}
+
+	/**
 	 * Returns arguments for entity agnostic arguments that can be returned
 	 * by validProvider after making sure the provided serialization contains
 	 * anything the entity implementing class requires.
@@ -57,7 +77,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 
 		$validArgs = array();
 
-		$options = new EntitySerializationOptions();
+		$options = new EntitySerializationOptions( $this->idFormatter );
 		$options->setProps( array( 'aliases' ) );
 
 		$entity0 = $entity->copy();
@@ -67,7 +87,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			$entity0,
 			array(
-				'id' => $entity0->getPrefixedId(),
+				'id' => $this->getFormattedIdForEntity( $entity0 ),
 				'type' => $entity0->getType(),
 				'aliases' => array(
 					'en' => array(
@@ -92,10 +112,10 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 					),
 				),
 			),
-			$options,
+			$options
 		);
 
-		$options = new EntitySerializationOptions();
+		$options = new EntitySerializationOptions( $this->idFormatter );
 		$options->setProps( array( 'descriptions', 'labels' ) );
 
 		$entity1 = $entity->copy();
@@ -107,7 +127,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			$entity1,
 			array(
-				'id' => $entity1->getPrefixedId(),
+				'id' => $this->getFormattedIdForEntity( $entity1 ),
 				'type' => $entity1->getType(),
 				'labels' => array(
 					'en' => array(
@@ -130,7 +150,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 					),
 				),
 			),
-			$options,
+			$options
 		);
 
 		return $validArgs;
