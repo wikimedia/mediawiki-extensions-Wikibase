@@ -168,7 +168,7 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( 'Change could not be applied to entity', 'edit-entity-apply-failed' );
 		}
 
-		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
+		$this->addLabelsToResult( $entity, 'entity' );
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
 

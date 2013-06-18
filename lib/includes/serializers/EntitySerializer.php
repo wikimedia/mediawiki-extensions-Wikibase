@@ -83,7 +83,8 @@ class EntitySerializer extends SerializerObject {
 					$serialization['descriptions'] = $this->getDescriptionsSerialization( $entity );
 					break;
 				case 'labels':
-					$serialization['labels'] = $this->getLabelsSerialization( $entity );
+					$labelSerializer = new LabelSerializer( $this->options );
+					$serialization['labels'] = $labelSerializer->getSerialized( $entity );
 					break;
 				case 'claims':
 					$claimsSerializer = new ClaimsSerializer( $this->options );
@@ -199,42 +200,4 @@ class EntitySerializer extends SerializerObject {
 
 		return $value;
 	}
-
-	/**
-	 * Returns the labels in an array ready for serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return array
-	 */
-	protected final function getLabelsSerialization( Entity $entity ) {
-		$value = array();
-		$idx = 0;
-
-		$labels = $entity->getLabels( $this->options->getLanguages() );
-
-		foreach ( $labels as $languageCode => $label ) {
-			if ( $label === '' ) {
-				$value[$this->options->shouldUseKeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'removed' => '',
-				);
-			}
-			else {
-				$value[$this->options->shouldUseKeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'value' => $label,
-				);
-			}
-		}
-
-		if ( !$this->options->shouldUseKeys() ) {
-			$this->setIndexedTagName( $value, 'label' );
-		}
-
-		return $value;
-	}
-
 }
