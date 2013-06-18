@@ -3,10 +3,12 @@
 namespace Wikibase;
 use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, MediaWikiSite;
 use MWException, FormatJson;
+use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use \Wikibase\Lib\Serializers\SerializerFactory;
 use \ValueFormatters\ValueFormatterFactory,
 	\ValueFormatters\FormatterOptions,
 	\ValueFormatters\ValueFormatter;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
@@ -790,7 +792,8 @@ abstract class EntityView extends \ContextSource {
 		// copyright warning message
 		$out->addJsConfigVars( 'wbCopyrightWarning', Utils::getRightsWarningMessage()->parse() );
 
-		$serializationOptions = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
+		// TODO: use injected id formatter
+		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 
 		$serializerFactory = new SerializerFactory();
 		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
@@ -833,7 +836,8 @@ abstract class EntityView extends \ContextSource {
 		$entityInfo = array();
 
 		$serializerFactory = new SerializerFactory();
-		$serializationOptions = new \Wikibase\Lib\Serializers\EntitySerializationOptions();
+		// TODO: use injected id formatter
+		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		$serializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
 
 		$serializationOptions->setLanguages( array( $langCode ) );
