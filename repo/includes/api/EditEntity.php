@@ -164,7 +164,7 @@ class EditEntity extends ModifyEntity {
 		}
 
 		$entity = $entityContent->getEntity();
-		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
+		$this->addLabelsToResult( $entity, 'entity' );
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
 
