@@ -1,8 +1,11 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use ApiResult, MWException;
+
+use ApiResult;
+use MWException;
 use Wikibase\Entity;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Serializer for entities.
@@ -47,13 +50,9 @@ class EntitySerializer extends SerializerObject {
 	 *
 	 * @since 0.2
 	 *
-	 * @param EntitySerializationOptions|null $options
+	 * @param EntitySerializationOptions $options
 	 */
-	public function __construct( EntitySerializationOptions $options = null ) {
-		if ( $options === null ) {
-			$options = new EntitySerializationOptions();
-		}
-
+	public function __construct( EntitySerializationOptions $options ) {
 		parent::__construct( $options );
 	}
 
@@ -72,7 +71,7 @@ class EntitySerializer extends SerializerObject {
 			throw new MWException( 'EntitySerializer can only serialize Entity objects' );
 		}
 
-		$serialization['id'] = $entity->getPrefixedId();
+		$serialization['id'] = $this->options->getIdFormatter()->format( $entity->getId() );
 		$serialization['type'] = $entity->getType();
 
 		foreach ( $this->options->getProps() as $key ) {
@@ -236,30 +235,6 @@ class EntitySerializer extends SerializerObject {
 		}
 
 		return $value;
-	}
-
-	/**
-	 * Returns an EntitySerializer for the provided entity.
-	 * If there is no specific serializer registered for the type of entity,
-	 * a plain EntitySerializer is returned, else the more specific one is.
-	 *
-	 * @since 0.3
-	 * @deprecated since 0.4
-	 *
-	 * @param Entity $entity
-	 * @param EntitySerializationOptions $options
-	 *
-	 * @return EntitySerializer
-	 */
-	public static function newForEntity( Entity $entity, EntitySerializationOptions $options = null ) {
-		$factory = new SerializerFactory();
-
-		$serializer = $factory->newSerializerForObject( $entity );
-		$serializer->setOptions( $options );
-
-		assert( $serializer instanceof EntitySerializer );
-
-		return $serializer;
 	}
 
 }
