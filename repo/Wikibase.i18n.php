@@ -4301,7 +4301,7 @@ Tu dirección IP quedará registrada en el historial de revisiones de $1.',
 *hierarchicalpart - parte implícita de la cadena de texto IRI
 *query - parte implícita de la cadena de texto IRI
 *fragment - parte implícita de la cadena de texto IRI',
-	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenadas geográficas', # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenadas geográficas',
 	'wikibase-listdatatypes-quantity-head' => 'Cantidad',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Texto monolingüe',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Texto multilingüe',
@@ -5711,6 +5711,17 @@ $messages['frp'] = array(
 	'right-label-update' => 'Betar a jorn des lambéls',
 	'right-description-remove' => 'Enlevar des dèscripcions',
 	'right-description-update' => 'Betar a jorn des dèscripcions',
+);
+
+/** Northern Frisian (Nordfriisk)
+ * @author Murma174
+ */
+$messages['frr'] = array(
+	'wikibase-listdatatypes-wikibase-item-body' => "Ferwisang tu ööder objekten uun't projekt. Di nöömrüm „objekt“ woort trochsoocht. Det as man en ianfach tekstfial. 
+* scheme – hiart tu't Iri-tiakenkeed.
+* hierarchicalpart – hiart tu't Iri-tiakenkeed.
+* query – hiart tu't Iri-tiakenkeed.
+* fragment – hiart tu't Iri-tiakenkeed.",
 );
 
 /** Irish (Gaeilge)
@@ -9161,6 +9172,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-itembytitle-submit' => 'Sichen',
 	'wikibase-itembytitle-nothing-found' => "Bäi der vireger Sich gouf keen Element fonnt. Verfäinert d'Ufro w.e.g. mat enger besserer Identifikatioun vun der externer Säit.",
 	'wikibase-itembytitle-description' => 'Site ass en Identifikatiouns-Code  esou wéi z. Bsp. "lbwiki"',
+	'wikibase-itembytitle-create' => 'Dir kënnt och [{{fullurl:Special:NewItem|site=$1&page=$2}} en Element uleeën].',
 	'special-itemdisambiguation' => 'Homonymie Element',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'Elementer no Sprooch an Etiquette sichen',
 	'wikibase-itemdisambiguation-lookup-language' => 'Sprooch:',
@@ -9215,6 +9227,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-dispatchstats-site-id' => 'Site',
 	'wikibase-dispatchstats-pos' => 'Positioun',
 	'wikibase-dispatchstats-lag-num' => 'Am Suspens',
+	'wikibase-dispatchstats-lag-time' => 'Verspéidung',
 	'wikibase-dispatchstats-touched' => "Fir d'lescht geännert",
 	'wikibase-dispatchstats-large-lag' => '(ganz grouss)',
 	'wikibase-dispatchstats-freshest' => 'Neist',
@@ -9273,6 +9286,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'wikibase-listdatatypes-string-head' => 'Zeecheketten',
 	'wikibase-listdatatypes-time-head' => 'Zäit',
 	'content-model-wikibase-item' => 'Wikibase-Element',
+	'content-model-wikibase-property' => 'Wikibase-Eegeschaft',
 	'content-model-wikibase-query' => 'Wikibase-Ufro',
 	'right-item-override' => 'Elementer iwwerschreiwen',
 	'right-item-create' => 'Elementer uleeën',
@@ -9294,6 +9308,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'action-item-create' => 'Elementer uleeën',
 	'action-item-remove' => 'Elementer ewechhuelen',
 	'action-property-override' => 'Eegeschaften iwwerschreiwen',
+	'action-property-create' => 'Eegeschaften uleeën',
 	'action-property-remove' => 'Eegeschaften ewechhuelen',
 	'action-alias-update' => 'Aliasen aktualiséieren',
 	'action-alias-remove' => 'Aliasen ewechhuelen',
@@ -12143,27 +12158,34 @@ $messages['roa-tara'] = array(
 	'wikibase-alias-edit-placeholder' => "mitte 'n'alias",
 	'wikibase-label-input-help-message' => "Mitte 'u titole de stu 'nzieme de date jndr'à $1.",
 	'wikibase-description-input-help-message' => "Mitte 'na descrizione piccenne jndr'à $1.",
+	'wikibase-terms' => "Jndr'à l'otre lènghe",
+	'wikibase-sitelinks-add' => "aggiunge 'nu collegamende a 'u site",
+	'wikibase-sitelinks-empty' => 'Nisciune site pe sta vôsce angore.',
 	'wikibase-remove' => 'live',
 	'wikibase-aliases-label' => 'Pure canusciute cumme:',
 	'wikibase-datatype-label' => 'Tipe de date:',
+	'wikibase-snakview-property-input-placeholder' => 'probbietà',
 	'wikibase-snakview-variations-somevalue-label' => 'valore scanusciute',
 	'wikibase-snakview-variations-novalue-label' => 'nisciune valore',
 	'wikibase-snakview-snaktypeselector-value' => 'valore personalizzate',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'valore scanusciute',
 	'wikibase-snakview-snaktypeselector-novalue' => 'nisciune valore',
 	'wikibase-entityselector-more' => 'de cchiù',
+	'special-itembytitle' => 'Vôsce pe titole',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
 	'wikibase-itembytitle-lookup-page' => 'Pàgene:',
 	'wikibase-itembytitle-submit' => 'Cirche',
 	'wikibase-itemdisambiguation-lookup-language' => 'Lènghe:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etichette:',
 	'wikibase-itemdisambiguation-submit' => 'Cirche',
+	'wikibase-newitem-fieldset' => "Ccreje 'na vôscia nove",
 	'wikibase-newentity-label' => 'Etichette:',
 	'wikibase-newentity-description' => 'Descrizione:',
 	'wikibase-newentity-submit' => 'Ccreje',
 	'special-setlabel' => "'Mboste 'n'etichette",
 	'wikibase-setlabel-label' => 'Etichette:',
 	'wikibase-setlabel-submit' => "'Mboste l'etichette",
+	'special-setdescription' => "'Mboste 'na descrizione",
 );
 
 /** Russian (русский)
@@ -12699,6 +12721,7 @@ da otkrijete gdje je nestao.',
 );
 
 /** Sinhala (සිංහල)
+ * @author Singhalawap
  * @author පසිඳු කාවින්ද
  */
 $messages['si'] = array(
@@ -12735,7 +12758,7 @@ $messages['si'] = array(
 	'wikibase-snakview-property-input-placeholder' => 'ගුණාංගය',
 	'wikibase-restrictionedit-tooltip-message' => 'මෙම පිටුව ආරක්ෂණය කර ඇත. සංස්කරණයට ඉඩ නොදේ.',
 	'wikibase-blockeduser-tooltip-message' => 'ඔබව සංස්කරණ කිරීමෙන් වලක්වා ඇත.', # Fuzzy
-	'wikibase-error-sitelink-already-used' => 'අඩවි සබැඳිය [$1 $2] already used by item [[$3]].', # Fuzzy
+	'wikibase-error-sitelink-already-used' => '[$1 $2]  අඩවි සබැඳිය දැනටමත් [[$3]] විසින් භාවිතකරයි.',
 	'special-itembytitle' => 'ශීර්ෂය අනුව අයිතමය', # Fuzzy
 	'wikibase-itembytitle-lookup-fieldset' => 'අඩවිය සහ ශීර්ෂය අනුව අයිතමයන් සඳහා සොයන්න',
 	'wikibase-itembytitle-lookup-site' => 'අඩවිය:',

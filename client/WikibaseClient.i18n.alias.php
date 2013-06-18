@@ -39,6 +39,11 @@ $specialPageAliases['ko'] = array(
 	'UnconnectedPages' => array( '연결안된문서' ),
 );
 
+/** Luxembourgish (Lëtzebuergesch) */
+$specialPageAliases['lb'] = array(
+	'UnconnectedPages' => array( 'Net_verbonne_Säiten', 'Ouni_Verbindung', 'Ouni_Linken_op_aner_Säiten' ),
+);
+
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = array(
 	'UnconnectedPages' => array( 'НесврзаниСтраници' ),

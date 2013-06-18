@@ -52,6 +52,11 @@ $magicWords['ko'] = array(
 	'property' => array( 0, '속성' ),
 );
 
+/** Luxembourgish (Lëtzebuergesch) */
+$magicWords['lb'] = array(
+	'property' => array( 0, 'Eegeschaft' ),
+);
+
 /** Macedonian (македонски) */
 $magicWords['mk'] = array(
 	'noexternallanglinks' => array( 0, 'безнадворјазврски' ),
