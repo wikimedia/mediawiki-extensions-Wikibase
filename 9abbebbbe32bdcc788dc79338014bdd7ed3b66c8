@@ -34,6 +34,24 @@
       "revId": "9abbebbbe32bdcc788dc79338014bdd7ed3b66c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1HT1IIA",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-18T16:22:06Z",
+      "side": 1,
+      "message": "Ah, i missed the type hint in the param list. Without that, you\u0027d need to first check the type, then access type specific stuff, to avoid fatal errors.\n\nBut with the type hint, we get fatal errors anyway :)",
+      "parentUuid": "D1JEVPpw",
+      "revId": "9abbebbbe32bdcc788dc79338014bdd7ed3b66c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
