@@ -92,21 +92,6 @@ class WikipageEntityLookupTest extends EntityLookupTest {
 				. ":\n" . $status->getWikiText() );
 		}
 
-		return new EntityRevision(
-			$entity,
-			$content->getWikiPage()->getRevision()->getId(),
-			$content->getWikiPage()->getRevision()->getTimestamp()
-		);
-	}
-
-	protected function resolveLogicalRevision( $revision ) {
-		if ( is_int( $revision ) && isset( self::$testEntities[$revision] ) ) {
-			$revision = self::$testEntities[$revision]->getRevision();
-		}
-
-		return $revision;
-	}
-
 	/**
 	 * @dataProvider provideGetEntity
 	 *
