@@ -49,6 +49,30 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->repo = new MockRepository();
 	}
 
+	public function testHasEntity() {
+		$q23 = new EntityId( Item::ENTITY_TYPE, 23 );
+		$q42 = new EntityId( Item::ENTITY_TYPE, 42 );
+
+		$p23 = new EntityId( Property::ENTITY_TYPE, 23 );
+		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+
+		$item = Item::newEmpty();
+		$item->setId( $q23 );
+		$this->repo->putEntity( $item );
+
+		$prop = Property::newEmpty();
+		$prop->setId( $p23 );
+		$this->repo->putEntity( $prop );
+
+		// test item
+		$this->assertTrue( $this->repo->hasEntity( $q23 ) );
+		$this->assertFalse( $this->repo->hasEntity( $q42 ) );
+
+		// test prop
+		$this->assertTrue( $this->repo->hasEntity( $p23 ) );
+		$this->assertFalse( $this->repo->hasEntity( $p42 ) );
+	}
+
 	public function testGetEntity() {
 		$item = new Item( array() );
 		$item->setLabel( 'en', 'foo' );
