@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
+use ValueFormatters\FormatterOptions;
 use Wikibase\Item;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 
 /**
@@ -74,21 +76,26 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 
 		$item = $this->getEntityInstance();
 
+		$formatterOptions = new FormatterOptions( array( EntityIdFormatter::OPT_PREFIX_MAP => array(
+			'i' => 'item'
+		) ) );
+		$idFormatter = new EntityIdFormatter( $formatterOptions );
+
 		$validArgs[] = array(
 			$item,
 			array(
-				'id' => $item->getPrefixedId(),
+				'id' => $idFormatter->format( $item->getId() ),
 				'type' => $item->getType(),
 			),
 		);
 
-		$options = new EntitySerializationOptions();
+		$options = new EntitySerializationOptions( $idFormatter );
 		$options->setProps( array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls' ) );
 
 		$validArgs[] = array(
 			$item,
 			array(
-				'id' => $item->getPrefixedId(),
+				'id' => $idFormatter->format( $item->getId() ),
 				'type' => $item->getType(),
 			),
 			$options,

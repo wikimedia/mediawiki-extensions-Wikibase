@@ -2,6 +2,9 @@
 
 namespace Wikibase\Lib\Serializers;
 use MWException;
+use ValueFormatters\ValueFormatter;
+use Wikibase\EntityId;
+use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * Options for Serializer objects.
@@ -148,6 +151,22 @@ class EntitySerializationOptions extends SerializationOptions {
 	protected $sortDirection = self::SORT_NONE;
 
 	/**
+	 * @since 0.4
+	 *
+	 * @var ValueFormatter
+	 */
+	protected $idFormatter;
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param ValueFormatter $formatter
+	 */
+	public function __construct( ValueFormatter $formatter ) {
+		$this->idFormatter = $formatter;
+	}
+
+	/**
 	 * Sets if keys should be used in the serialization.
 	 *
 	 * @since 0.2
@@ -290,6 +309,15 @@ class EntitySerializationOptions extends SerializationOptions {
 	 */
 	public function getSortDirection() {
 		return $this->sortDirection;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return ValueFormatter
+	 */
+	public function getIdFormatter() {
+		return $this->idFormatter;
 	}
 
 }
