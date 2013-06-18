@@ -573,6 +573,7 @@ $messages['zh-hans'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => '尚不支持对“$1”取值的操作。',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => '尚不支持对“$1”数据类型取值的操作。',
 	'valueview-expert-emptyvalue-empty' => '空白',
+	'valueview-expert-globecoordinateinput-precision' => '精度：',
 	'valueview-expert-timeinput-precision' => '精度：',
 	'valueview-expert-timeinput-calendar' => '日历：',
 	'valueview-expert-timeinput-calendarhint' => '（$1历）',
