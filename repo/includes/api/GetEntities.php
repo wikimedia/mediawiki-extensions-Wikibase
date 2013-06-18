@@ -182,6 +182,7 @@ class GetEntities extends ApiWikibase {
 				$options->setSortDirection( $params['dir'] );
 				$options->setProps( $props );
 				$options->setIndexTags( $this->getResult()->getIsRawMode() );
+				#$options->setUseKeys( $this->getUsekeys() );
 
 				$serializerFactory = new SerializerFactory();
 				$entitySerializer = $serializerFactory->newSerializerForObject( $entity, $options );

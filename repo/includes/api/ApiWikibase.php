@@ -2,6 +2,10 @@
 
 namespace Wikibase\Api;
 
+use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
+
+use Wikibase\Lib\Serializers\EntitySerializer;
+
 use User, Status, ApiBase;
 
 use Wikibase\DataModel\SimpleSiteLink;
@@ -10,6 +14,9 @@ use Wikibase\EntityContent;
 use Wikibase\Settings;
 use Wikibase\EditEntity;
 use Wikibase\SiteLink;
+use Wikibase\Lib\Serializers\LabelSerializer;
+use Wikibase\Lib\Serializers\DescriptionSerializer;
+use Wikibase\Lib\Serializers\AliasSerializer;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -113,10 +120,7 @@ abstract class ApiWikibase extends \ApiBase {
 	/**
 	 * Add aliases to result
 	 *
-	 * @deprecated
-	 * TODO: remove, now in EntitySerializer
-	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $aliases the aliases to set in the result
 	 * @param array|string $path where the data is located
@@ -126,30 +130,8 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @return array|bool
 	 */
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
-		$value = array();
-
-		if ( $this->getUsekeys() ) {
-			foreach ( $aliases as $languageCode => $alarr ) {
-				$arr = array();
-				foreach ( $alarr as $alias ) {
-					$arr[] = array(
-						'language' => $languageCode,
-						'value' => $alias,
-					);
-				}
-				$value[$languageCode] = $arr;
-			}
-		}
-		else {
-			foreach ( $aliases as $languageCode => $alarr ) {
-				foreach ( $alarr as $alias ) {
-					$value[] = array(
-						'language' => $languageCode,
-						'value' => $alias,
-					);
-				}
-			}
-		}
+		$aliasSerializer = new AliasSerializer();
+		$value = $aliasSerializer->getSerialized( $aliases );
 
 		if ( $value !== array() ) {
 			if ( !$this->getUsekeys() ) {
@@ -157,6 +139,7 @@ abstract class ApiWikibase extends \ApiBase {
 			}
 			$this->getResult()->addValue( $path, $name, $value );
 		}
+
 	}
 
 	/**
@@ -271,10 +254,7 @@ abstract class ApiWikibase extends \ApiBase {
 	/**
 	 * Add descriptions to result
 	 *
-	 * @deprecated
-	 * TODO: remove, now in \Wikibase\EntitySerializer
-	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $descriptions the descriptions to insert in the result
 	 * @param array|string $path where the data is located
@@ -284,23 +264,8 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @return array|bool
 	 */
 	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
-		$value = array();
-		$idx = 0;
-
-		foreach ( $descriptions as $languageCode => $description ) {
-			if ( $description === '' ) {
-				$value[$this->getUsekeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'removed' => '',
-				);
-			}
-			else {
-				$value[$this->getUsekeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'value' => $description,
-				);
-			}
-		}
+		$descriptionSerializer = new DescriptionSerializer();
+		$value = $descriptionSerializer->getSerialized( $descriptions );
 
 		if ( $value !== array() ) {
 			if ( !$this->getUsekeys() ) {
@@ -314,10 +279,7 @@ abstract class ApiWikibase extends \ApiBase {
 	/**
 	 * Add labels to result
 	 *
-	 * @deprecated
-	 * TODO: remove, now in \Wikibase\EntitySerializer
-	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $labels the labels to set in the result
 	 * @param array|string $path where the data is located
@@ -327,23 +289,8 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @return array|bool
 	 */
 	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
-		$value = array();
-		$idx = 0;
-
-		foreach ( $labels as $languageCode => $label ) {
-			if ( $label === '' ) {
-				$value[$this->getUsekeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'removed' => '',
-				);
-			}
-			else {
-				$value[$this->getUsekeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'value' => $label,
-				);
-			}
-		}
+		$labelSerializer = new LabelSerializer();
+		$value = $labelSerializer->getSerialized( $labels );
 
 		if ( $value !== array() ) {
 			if ( !$this->getUsekeys() ) {

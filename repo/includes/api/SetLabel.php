@@ -41,6 +41,7 @@ class SetLabel extends ModifyLangAttribute {
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		wfProfileIn( __METHOD__ );
+		$entity = $entityContent->getEntity();
 		$summary = $this->createSummary( $params );
 
 		if ( isset( $params['value'] ) ) {
@@ -49,13 +50,13 @@ class SetLabel extends ModifyLangAttribute {
 			$language = $params['language'];
 			if ( 0 < strlen( $label ) ) {
 				$summary->addAutoSummaryArgs( $label );
-				$labels = array( $language => $entityContent->getEntity()->setLabel( $language, $label ) );
+				$labels = array( $language => $entity->setLabel( $language, $label ) );
 			}
 			else {
-				$old = $entityContent->getEntity()->getLabel( $language );
+				$old = $entity->getLabel( $language );
 				$summary->addAutoSummaryArgs( $old );
 
-				$entityContent->getEntity()->removeLabel( $language );
+				$entity->removeLabel( $language );
 				$labels = array( $language => '' );
 			}
 
