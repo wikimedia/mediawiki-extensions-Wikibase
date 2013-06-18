@@ -109,6 +109,7 @@ class EditEntityTest extends ModifyItemBase {
 						'action' => 'wbeditentity',
 						'reason' => 'Some reason',
 						'data' => json_encode( self::$entity ),
+						'new' => 'item',
 					),
 					null,
 					false,
@@ -124,6 +125,32 @@ class EditEntityTest extends ModifyItemBase {
 	}
 
 	/**
+	 * Checks the creation of a property via the editEntity API module
+	 */
+	function testEditEntityCreateProperty() {
+		$token = $this->getItemToken();
+		$data = '{"datatype":"string","labels":{"en":{"language":"en","value":"its a test!"}}}';
+
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbeditentity',
+				'reason' => 'Some reason',
+				'data' => $data,
+				'token' => $token,
+				'new' => 'property',
+			),
+			null,
+			false,
+			self::$users['wbeditor']->user
+		);
+
+		$this->assertSuccess( $res, 'entity', 'id' );
+		$this->assertRegExp( '/^p\d+$/',
+			$res['entity']['id'],
+			'Expected a qualfied property ID with prefix' );
+	}
+
+	/**
 	 * Check if an entity can be created when a token is supplied
 	 * note that upon completion the id will be stored for later reuse
 	 */
@@ -136,6 +163,7 @@ class EditEntityTest extends ModifyItemBase {
 				'reason' => 'Some reason',
 				'data' => json_encode( self::$entity ),
 				'token' => $token,
+				'new' => 'item',
 			),
 			null,
 			false,
@@ -170,6 +198,7 @@ class EditEntityTest extends ModifyItemBase {
 					'reason' => 'Some reason',
 					'data' => json_encode( array_merge( self::$entity, $data ) ),
 					'token' => $token,
+					'new' => 'item',
 				),
 				null,
 				false,
@@ -343,40 +372,6 @@ class EditEntityTest extends ModifyItemBase {
 				"not-recognized"
 			),
 
-			//-----------------------------------------------
-/*
-			// aliases have to be one list per language
-			array(
-				array(
-					"aliases" => array(
-						array( "language" => "de", "value" => "foo" ),
-					)
-				),
-				"not-recognized-array"
-			),
-
-			// labels have to be one value per language
-			array(
-				array(
-					"labels" => array(
-						array( "language" => "de", "value" => "foo" ),
-					)
-				),
-				"not-recognized-string"
-			),
-
-			// descriptions have to be one value per language
-			array(
-				array(
-					"descriptions" => array(
-						array( "language" => "de", "value" => "foo" ),
-					)
-				),
-				"not-recognized-string"
-			),
-*/
-			//-----------------------------------------------
-
 			// aliases have to use valid language codes
 			array(
 				array(
@@ -474,6 +469,7 @@ class EditEntityTest extends ModifyItemBase {
 					'reason' => 'Some reason',
 					'data' => is_string( $data ) ? $data : json_encode( $data ),
 					'token' => $token,
+					'new' => 'item',
 				),
 				null,
 				false,
