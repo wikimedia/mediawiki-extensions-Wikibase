@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1FSdhGE",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:56:59Z",
+      "side": 1,
+      "message": "Redundant with below",
+      "revId": "82ae8ca11a837fbf96d11758d098bd5e44a7bf32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1HSggKM",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:56:59Z",
+      "side": 1,
+      "message": "Why this?",
+      "revId": "82ae8ca11a837fbf96d11758d098bd5e44a7bf32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
