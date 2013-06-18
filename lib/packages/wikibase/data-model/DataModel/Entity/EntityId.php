@@ -76,11 +76,11 @@ class EntityId extends \DataValues\DataValueObject {
 	 * Returns the prefixed used when serializing the ID.
 	 *
 	 * @since 0.3
-	 * @deprecated since 0.4
+	 * @deprecated since 0.4, private since 0.5
 	 *
 	 * @return string
 	 */
-	public function getPrefix() {
+	private function getPrefix() {
 		static $prefixMap = false;
 
 		if ( $prefixMap === false ) {
