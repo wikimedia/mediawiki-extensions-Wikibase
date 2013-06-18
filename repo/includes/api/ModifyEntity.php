@@ -2,7 +2,10 @@
 
 namespace Wikibase\Api;
 
-use User, Title, ApiBase;
+use Status;
+use User;
+use Title;
+use ApiBase;
 
 use Wikibase\EntityId;
 use Wikibase\Entity;
@@ -11,7 +14,6 @@ use Wikibase\EntityContentFactory;
 use Wikibase\ItemHandler;
 use Wikibase\Summary;
 use Wikibase\Utils;
-use Wikibase\Settings;
 
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
@@ -23,7 +25,6 @@ use Wikibase\Settings;
  * @ingroup API
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
@@ -198,21 +199,34 @@ abstract class ModifyEntity extends ApiWikibase {
 			$summary = new Summary( $this->getModuleName() );
 		}
 
-		// if the entity is not up for creation, set the EDIT_UPDATE flags
-		if ( !$entityContent->isNew() && ( $this->flags & EDIT_NEW ) === 0 ) {
-			$this->flags |= EDIT_UPDATE;
-		}
-
-		$this->flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+		$this->addFlags( $entityContent->isNew() );
 
 		//NOTE: EDIT_NEW will not be set automatically. If the entity doesn't exist, and EDIT_NEW was
 		//      not added to $this->flags explicitly, the save will fail.
 
 		// collect information and create an EditEntity
-		$status = $this->attemptSaveEntity( $entityContent,
+		$status = $this->attemptSaveEntity(
+			$entityContent,
 			$summary->toString(),
-			$this->flags );
+			$this->flags
+		);
 
+		$this->addToOutput( $entityContent, $status );
+
+		wfProfileOut( __METHOD__ );
+	}
+
+	protected function addFlags( $entityContentIsNew ) {
+		// if the entity is not up for creation, set the EDIT_UPDATE flags
+		if ( !$entityContentIsNew && ( $this->flags & EDIT_NEW ) === 0 ) {
+			$this->flags |= EDIT_UPDATE;
+		}
+
+		$params = $this->extractRequestParams();
+		$this->flags |= ( $this->getUser()->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+	}
+
+	protected function addToOutput( EntityContent $entityContent, Status $status ) {
 		$this->getResult()->addValue(
 			'entity',
 			'id', $entityContent->getEntity()->getPrefixedId()
@@ -225,21 +239,10 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		$this->addRevisionIdFromStatusToResult( 'entity', 'lastrevid', $status );
 
+		$params = $this->extractRequestParams();
+
 		if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-			$normalized = array();
-
-			$normTitle = Utils::trimToNFC( $params['title'] );
-			if ( $normTitle !== $params['title'] ) {
-				$normalized['from'] = $params['title'];
-				$normalized['to'] = $normTitle;
-			}
-
-			if ( $normalized !== array() ) {
-				$this->getResult()->addValue(
-					'entity',
-					'normalized', $normalized
-				);
-			}
+			$this->addNormalizationInfoToOutput( $params['title'] );
 		}
 
 		$this->getResult()->addValue(
@@ -247,8 +250,23 @@ abstract class ModifyEntity extends ApiWikibase {
 			'success',
 			1
 		);
+	}
 
-		wfProfileOut( __METHOD__ );
+	protected function addNormalizationInfoToOutput( $title ) {
+		$normalized = array();
+
+		$normTitle = Utils::trimToNFC( $title );
+		if ( $normTitle !== $title ) {
+			$normalized['from'] = $title;
+			$normalized['to'] = $normTitle;
+		}
+
+		if ( $normalized !== array() ) {
+			$this->getResult()->addValue(
+				'entity',
+				'normalized', $normalized
+			);
+		}
 	}
 
 	/**
