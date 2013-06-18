@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1EIBQjw",
+        "filename": "lib/includes/parsers/EntityIdParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-18T21:11:37Z",
+      "side": 1,
+      "message": "Arrrr! Useless comment! Please don\u0027t add such cruft",
+      "revId": "496e1502693f91dc389171d290cb5e468813385e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
