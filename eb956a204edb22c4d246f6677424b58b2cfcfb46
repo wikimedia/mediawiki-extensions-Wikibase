@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Dx4ktGKs",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx25X8lc",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx05rFiA",
         "filename": "client/includes/UpdateRepo.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "The name is a bit vague. How about userExistsOnRepo()?",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D026lM1U",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Used userIsValidOnRepo now, as that IMO is even clearer.",
+      "parentUuid": "Dx05rFiA",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "Dx.ka3Hk",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Right... done",
+      "parentUuid": "Dxw5irj4",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx65R.mI",
         "filename": "client/includes/UpdateRepo.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "Singletons are evil, please limit their use to the constructor, or even better, just ask for a JobQueueGroup in the constructor and let the caller figure out where to get it from. The idea is to push access to global state as far up the stackj as possible.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0-QakhI",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx65R.mI",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "Dx8kfIGg",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx47f3tI",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dxy7nqrA",
         "filename": "client/includes/UpdateRepo.php",
         "patchSetId": 4
@@ -98,6 +188,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "\"populates\", not \"propagates\". But I think this should be a factory function that just returns a Job.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D046gV0g",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dxy7nqrA",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "D0.6RI-E",
+        "filename": "client/includes/UpdateRepoOnMove.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dxw7sbo8",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx.ndvBI",
         "filename": "client/includes/UpdateRepoOnMove.php",
         "patchSetId": 4
@@ -132,6 +258,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "Please determine the respective item ID here, and pass it as a parameter to the job. This prevents confusion in case items on the repo get changed while the job is queued. By the time the job is run, oldTitle may be associated with a different item.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D09QjDlg",
+        "filename": "client/includes/UpdateRepoOnMove.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx.ndvBI",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "D07QgCk0",
+        "filename": "client/includes/UpdateRepoOnMove.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx.6VwuM",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx26KUsI",
         "filename": "client/includes/UpdateRepoOnMove.php",
         "patchSetId": 4
@@ -166,6 +328,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "I suggest to drop this method and use the constructor directly. All it does is hardwire dependency on global state, which we should avoid anyway. If we must access a global settings object, let\u0027s do it as far up the stack as possible (i.e. let the caller deal with it).",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0xQeNgg",
+        "filename": "client/includes/UpdateRepoOnMove.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx26KUsI",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "D09TkrhI",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "heh",
+      "parentUuid": "Dxw5vTv4",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx87Dpu8",
         "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
         "patchSetId": 4
@@ -200,6 +398,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "\"assertJobIsValid\" or \"assertIsValidJob\".",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D07ThKgI",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx87Dpu8",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "D0-Trsts",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx06wNoo",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx.5fgkg",
         "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
         "patchSetId": 4
@@ -234,6 +468,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "It\u0027s not obvious what is asserted here, see above.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0xTvVus",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx.5fgkg",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "D01S53ug",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "As long as we have @group Database set, this isn\u0027t critical... noted as todo.",
+      "parentUuid": "Dx65.Gqo",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dxy4V6kg",
         "filename": "lib/includes/UpdateRepoOnMoveJob.php",
         "patchSetId": 4
@@ -268,6 +538,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "Please provide a newFromMove pseudo-constructor.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D006-j14",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dxy4V6kg",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "D01TQvio",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Constructing a local title for the item on the repo is useless overhead IMO",
+      "parentUuid": "Dxw4arnc",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx0md0FM",
         "filename": "lib/includes/UpdateRepoOnMoveJob.php",
         "patchSetId": 4
@@ -302,6 +608,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "The job could contain the item ID itself, instead of the old page. That would be more robust in cases where items on the repository got changed manually while the job was in the queue - $oldPage may now be associated with a different item, which would then be updated erronously!\n\nIf the item\u0027s id is used to identify which item to update, the item\u0027s current state should still be checked against $oldPage, again in case it was updated manually while the job was queued.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D0zQ0GpE",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx0md0FM",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "D01QvHkA",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx04MtkI",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx24P8jg",
         "filename": "lib/includes/UpdateRepoOnMoveJob.php",
         "patchSetId": 4
@@ -336,6 +678,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "wfDebugLog would be nice here.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D05Qphjw",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx24P8jg",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -359,6 +719,24 @@
     },
     {
       "key": {
+        "uuid": "D03QuokI",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx44GviA",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "DxykGhB8",
         "filename": "lib/includes/UpdateRepoOnMoveJob.php",
         "patchSetId": 4
@@ -370,6 +748,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "should probably be EDIT_UPDATE",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D03Tfwjc",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "DxykGhB8",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -393,6 +789,24 @@
     },
     {
       "key": {
+        "uuid": "D05TaJkc",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx2lxrHY",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx7ZoLIo",
         "filename": "lib/includes/UpdateRepoOnMoveJob.php",
         "patchSetId": 4
@@ -404,6 +818,24 @@
       "writtenOn": "2013-06-05T05:17:12Z",
       "side": 1,
       "message": "Will this fail if they do the page move on the client, then log out before the job queue runs?  If so, that\u0027s kind of unintuitive.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D005gLxE",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Of course not... the name of this core function is a bit weird",
+      "parentUuid": "Dx7ZoLIo",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -427,6 +859,24 @@
     },
     {
       "key": {
+        "uuid": "D0y5l6x8",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx4nE.GI",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Dx25dMkU",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 4
@@ -438,6 +888,24 @@
       "writtenOn": "2013-06-04T09:42:25Z",
       "side": 1,
       "message": "Should somehow indicate why: \"Page moved from [[:en:Foo]] to [[:en:Bar]]\" would probably be clear enough.",
+      "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1PTz0Ac",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-18T15:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Dx25dMkU",
       "revId": "eb956a204edb22c4d246f6677424b58b2cfcfb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
