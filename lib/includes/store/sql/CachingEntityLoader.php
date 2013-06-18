@@ -36,7 +36,7 @@ use MWException;
 class CachingEntityLoader implements EntityLookup {
 
 	/**
-	 * @var Entity|null[]
+	 * @var Entity|bool|null[]
 	 */
 	protected $loadedEntities = array();
 
@@ -85,13 +85,43 @@ class CachingEntityLoader implements EntityLookup {
 		wfProfileIn( __METHOD__ );
 		$key = $this->getCacheKey( $entityId, $revision );
 
-		if ( !array_key_exists( $key, $this->loadedEntities ) ) {
+		// $this->loadedEntities[$key] is null if the entity is known to not exist,
+		// true if it is known to exist, and an Entity if it is loaded.
+		// If $this->loadedEntities[$key] is true, we still need to load it.
+
+		if ( !array_key_exists( $key, $this->loadedEntities )
+			|| $this->loadedEntities[$key] === true ) {
 			$entity = $this->lookup->getEntity( $entityId, $revision );
 			$this->loadedEntities[$key] = $entity;
 		}
 
 		wfProfileOut( __METHOD__ );
 		return $this->loadedEntities[$key];
+	}
+
+	/**
+	 * See EntityLookup::hasEntity()
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityID $entityId
+	 *
+	 * @return bool
+	 */
+	public function hasEntity( EntityId $entityId ) {
+		wfProfileIn( __METHOD__ );
+		$key = $this->getCacheKey( $entityId );
+
+		// $this->loadedEntities[$key] is null if the entity is known to not exist,
+		// true if it is known to exist, and an Entity if it is loaded.
+
+		if ( !array_key_exists( $key, $this->loadedEntities ) ) {
+			$hasEntity = $this->lookup->hasEntity( $entityId );
+			$this->loadedEntities[$key] = $hasEntity === true ? true : null;
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $this->loadedEntities[$key] !== null;
 	}
 
 	/**

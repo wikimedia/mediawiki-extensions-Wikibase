@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use DBQueryError;
 use MWException;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 
@@ -118,13 +119,13 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 
 	/**
 	 * @since 0.4
-	 * @see EntityRevisionLookup::getEntityRevision
+	 * @see   EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityID $entityId
-	 * @param int $revision The desired revision id, 0 means "current".
+	 * @param int      $revision The desired revision id, 0 means "current".
 	 *
 	 * @return EntityRevision|null
-	 * @throw StorageException
+	 * @throws StorageException
 	 */
 	public function getEntityRevision( EntityID $entityId, $revision = 0 ) {
 		wfProfileIn( __METHOD__ );
@@ -146,12 +147,16 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 			$cache = wfGetCache( $this->cacheType );
 			$cached = $cache->get( $cacheKey );
 
+			//TODO: we may cache a stub without content in hasEntity!
+
 			if ( !( $cached instanceof EntityRevision ) ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found something strange in the cache for (key $cacheKey)." );
 				$cached = false;
 			}
 
 			if ( $cached ) {
+				//TODO: purge this cache when entities get deleted!
+
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found entity in cache (key $cacheKey)" );
 				$cachedEntityRev = $cached;
 				$cachedRev = $cachedEntityRev->getRevision();
@@ -167,6 +172,122 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 			}
 		}
 
+		$row = $this->selectRevisionRow( $entityId, $revision );
+
+		if ( $row ) {
+
+			if ( $cachedRev !== false && intval( $row->rev_id ) === intval( $cachedRev ) ) {
+				// the revision we loaded is the cached one, use the cached entity
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": Using cached entity (rev $cachedRev is latest)" );
+				wfProfileOut( __METHOD__ );
+				return $cachedEntityRev;
+			}
+
+			$entityRev = $this->loadEntity( $entityId->getEntityType(), $row );
+
+			if ( !$entityRev ) {
+				// This only happens when there is a problem with the external store.
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": Entity not loaded for " . $entityId );
+			}
+		} else {
+			// No such revision
+			$entityRev = null;
+		}
+
+		if ( $entityRev && !$entityId->equals( $entityRev->getEntity()->getId() ) ) {
+			// This can happen when giving a revision ID that doesn't belong to the given entity
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Loaded wrong entity: expected " . $entityId
+							. ", got " . $entityRev->getEntity()->getId());
+
+			$entityRev = null;
+		}
+
+		if ( $entityRev === null && $revision > 0 ) {
+			// If a revision was specified, that revision doesn't exist or doesn't belong to
+			// the given entity. Throw an error.
+			throw new StorageException( "No such revision found for $entityId: $revision" );
+		}
+
+		// cacheable if it's the latest revision.
+		if ( $cache && $row && $entityRev
+			&& $row->page_latest === $row->rev_id ) {
+
+			if ( $cachedRev !== false ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": Updating cached version of " . $entityId );
+				$cache->replace( $cacheKey, $entityRev, $this->cacheTimeout );
+			} else {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": Adding cached version of " . $entityId );
+				$cache->add( $cacheKey, $entityRev, $this->cacheTimeout );
+			}
+		} else if ( $cachedRev !== false ) {
+			// no longer the latest version
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Removing cached version of " . $entityId );
+			$cache->delete( $cacheKey );
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $entityRev;
+	}
+
+	/**
+	 * @since 0.4
+	 * @see   EntityLookup::hasEntity
+	 *
+	 * @param EntityID $entityId
+	 *
+	 * @return bool
+	 * @throws StorageException
+	 */
+	public function hasEntity( EntityID $entityId ) {
+		wfProfileIn( __METHOD__ );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": Checking existance of entity " . $entityId );
+
+		$cache = null;
+
+		if ( $this->cacheType !== false ) {
+			$cacheKey = $this->getEntityCacheKey( $entityId );
+			$cache = wfGetCache( $this->cacheType );
+			$cached = $cache->get( $cacheKey );
+
+			if ( !( $cached instanceof EntityRevision ) ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found something strange in the cache for (key $cacheKey)." );
+				$cached = false;
+			}
+
+			if ( $cached ) {
+				// If it'S cached, we consider it existing
+				//TODO: actually purge this cache when entities get deleted!
+				wfProfileOut( __METHOD__ );
+				return true;
+			}
+		}
+
+		$row = $this->selectRevisionRow( $entityId );
+
+		if ( $row ) {
+			//TODO: cache this!
+			wfProfileOut( __METHOD__ );
+			return true;
+		} else {
+			//TODO: negative caching?
+			wfProfileOut( __METHOD__ );
+			return false;
+		}
+	}
+
+	/**
+	 * Selects revision information from the page and revision tables.
+	 *
+	 * @since 0.4
+	 *
+	 * @param EntityID $entityId The entity to query the DB for.
+	 * @param int      $revision The desired revision id, 0 means "current".
+	 *
+	 * @throws \DBQueryError If the query fails.
+	 * @return object|null a raw database row object, or null if no such entity revision exists.
+	 */
+	protected function selectRevisionRow( EntityID $entityId, $revision = 0 ) {
+		wfProfileIn( __METHOD__ );
 		$db = $this->getConnection( DB_READ );
 
 		$opt = array();
@@ -222,61 +343,19 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 		if ( !$res ) {
 			// this can only happen if the DB is set to ignore errors, which shouldn't be the case...
 			$error = $db->lastError();
-			$enum = $db->lastErrno();
-			wfWarn( "Database Error in " . __METHOD__ . " #$enum: $error" );
-		}
-
-		$entityRev = null;
-
-		if ( $row = $res->fetchObject() ) {
-
-			if ( $cachedRev !== false && intval( $row->rev_id ) === intval( $cachedRev ) ) {
-				// the revision we loaded is the cached one, use the cached entity
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Using cached entity (rev $cachedRev is latest)" );
-				wfProfileOut( __METHOD__ );
-				return $cachedEntityRev;
-			}
-
-			$entityRev = $this->loadEntity( $entityId->getEntityType(), $row );
-		} else {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Entity not loaded for " . $entityId );
+			$errno = $db->lastErrno();
+			throw new DBQueryError( $db, $error, $errno, '', __METHOD__ );
 		}
 
 		$this->releaseConnection( $db );
 
-		if ( $entityRev && !$entityId->equals( $entityRev->getEntity()->getId() ) ) {
-			// This can happen when giving a revision ID that doesn't belong to the given entity
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Loaded wrong entity: expected " . $entityId
-							. ", got " . $entityRev->getEntity()->getId());
-
-			$entityRev = null;
+		if ( $row = $res->fetchObject() ) {
+			wfProfileOut( __METHOD__ );
+			return $row;
+		} else {
+			wfProfileOut( __METHOD__ );
+			return null;
 		}
-
-		if ( $entityRev === null && $revision > 0 ) {
-			// If a revision was specified, that revision doesn't exist or doesn't belong to
-			// the given entity. Throw an error.
-			throw new StorageException( "No such revision found for $entityId: $revision" );
-		}
-
-		// cacheable if it's the latest revision.
-		if ( $cache && $row && $entityRev
-			&& $row->page_latest === $row->rev_id ) {
-
-			if ( $cachedRev !== false ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Updating cached version of " . $entityId );
-				$cache->replace( $cacheKey, $entityRev, $this->cacheTimeout );
-			} else {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Adding cached version of " . $entityId );
-				$cache->add( $cacheKey, $entityRev, $this->cacheTimeout );
-			}
-		} else if ( $cachedRev !== false ) {
-			// no longer the latest version
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Removing cached version of " . $entityId );
-			$cache->delete( $cacheKey );
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $entityRev;
 	}
 
 	/**
