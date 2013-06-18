@@ -139,7 +139,9 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 	 */
 	public function testGetSerializedInvalid( $input ) {
 		$serializer = $this->getInstance();
-		$this->assertException( function() use ( $serializer, $input ) { $serializer->getSerialized( $input ); } );
+
+		$this->setExpectedException( 'Exception' );
+		$serializer->getSerialized( $input );
 	}
 
 }
