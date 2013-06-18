@@ -36,6 +36,8 @@ use Wikibase\EntityId;
 class EntityIdFormatter extends ValueFormatterBase {
 
 	/**
+	 * @todo The documentation here is wrong. It's currently behaving the other way around.
+	 *
 	 * Option name for the required prefixmap option.
 	 * The value of this option should be an array of
 	 * prefixes (string) pointing to the entity type
