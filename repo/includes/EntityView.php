@@ -1,13 +1,23 @@
 <?php
 
 namespace Wikibase;
-use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, MediaWikiSite;
-use MWException, FormatJson;
+
+use Html;
+use ParserOptions;
+use ParserOutput;
+use Title;
+use Language;
+use IContextSource;
+use OutputPage;
+use MediaWikiSite;
+use MWException;
+use FormatJson;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
-use \Wikibase\Lib\Serializers\SerializerFactory;
-use \ValueFormatters\ValueFormatterFactory,
-	\ValueFormatters\FormatterOptions,
-	\ValueFormatters\ValueFormatter;
+use Wikibase\Lib\Serializers\SerializerFactory;
+use ValueFormatters\ValueFormatterFactory;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -43,6 +53,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Werner
  */
 abstract class EntityView extends \ContextSource {
+
 	/**
 	 * @since 0.4
 	 *
@@ -51,7 +62,13 @@ abstract class EntityView extends \ContextSource {
 	protected $valueFormatters;
 
 	/**
+	 * @var EntityIdFormatter
+	 */
+	protected $idFormatter;
+
+	/**
 	 * Maps entity types to the corresponding entity view.
+	 * FIXME: remove this stuff, big OCP violation
 	 *
 	 * @since 0.2
 	 *
@@ -83,6 +100,9 @@ abstract class EntityView extends \ContextSource {
 			$context = \RequestContext::getMain();
 		}
 		$this->setContext( $context );
+
+		// TODO: this need to be properly injected
+		$this->idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 	}
 
 	/**
@@ -101,7 +121,7 @@ abstract class EntityView extends \ContextSource {
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 		$info = $this->extractEntityInfo( $entity, $lang );
 
-		$entityId = $entity->getEntity()->getPrefixedId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
+		$entityId = $entity->getEntity()->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 		$html = '';
 
 		$html .= wfTemplate( 'wb-entity',
@@ -139,6 +159,10 @@ abstract class EntityView extends \ContextSource {
 
 		wfProfileOut( __METHOD__ );
 		return $html;
+	}
+
+	protected function getFormattedIdForEntity( Entity $entity ) {
+		return $this->idFormatter->format( $entity->getId() );
 	}
 
 	/**
@@ -418,13 +442,13 @@ abstract class EntityView extends \ContextSource {
 			$alternatingClass = ( $rowNumber++ % 2 ) ? 'even' : 'uneven';
 
 			$editLabelLink = $specialLabelPage->getTitle()->getLocalURL()
-				. '/' . $entity->getEntity()->getPrefixedId() . '/' . $language;
+				. '/' . $this->getFormattedIdForEntity( $entity->getEntity() ) . '/' . $language;
 
 			// TODO: this if is here just until the SetDescription special page exists and
 			// can be removed then
 			if ( $specialDescriptionPage !== null ) {
 				$editDescriptionLink = $specialDescriptionPage->getTitle()->getLocalURL()
-					. '/' . $entity->getEntity()->getPrefixedId() . '/' . $language;
+					. '/' . $this->getFormattedIdForEntity( $entity->getEntity() ) . '/' . $language;
 			} else {
 				$editDescriptionLink = '';
 			}
@@ -697,7 +721,7 @@ abstract class EntityView extends \ContextSource {
 		}
 		return array(
 			'lang' => $lang,
-			'id' => $entity->getEntity()->getPrefixedId()
+			'id' => $this->getFormattedIdForEntity( $entity->getEntity() )
 		);
 	}
 
@@ -787,7 +811,7 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 
 		// entity specific data
-		$out->addJsConfigVars( 'wbEntityId', $entity->getPrefixedId() );
+		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
 
 		// copyright warning message
 		$out->addJsConfigVars( 'wbCopyrightWarning', Utils::getRightsWarningMessage()->parse() );

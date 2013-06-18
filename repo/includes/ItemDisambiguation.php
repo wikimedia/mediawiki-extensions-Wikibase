@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use IContextSource, MWException;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Class representing the disambiguation of a list of WikibaseItems.
@@ -27,6 +28,8 @@ use IContextSource, MWException;
  * @ingroup WikibaseRepo
  *
  * @licence GNU GPL v2+
+ * @author aude
+ * @author jeblad
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ItemDisambiguation extends \ContextSource {
@@ -70,17 +73,19 @@ class ItemDisambiguation extends \ContextSource {
 		$userLang = $this->getLanguage()->getCode();
 		$searchLang = $this->langCode;
 
+		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+
 		return
 			'<ul class="wikibase-disambiguation">' .
 				implode( '', array_map(
-					function( ItemContent $itemContent ) use ( $userLang, $searchLang ) {
+					function( ItemContent $itemContent ) use ( $userLang, $searchLang, $idFormatter ) {
 
 						$userLabel = $itemContent->getItem()->getLabel( $userLang );
 						$searchLabel = $itemContent->getItem()->getLabel( $searchLang );
 
 						// link to the item. The text is the label in the user's language, or the ID if no label exists
 						$idLabel = \Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
-							. wfMessage( 'wikibase-itemlink-id-wrapper' )->params( $itemContent->getEntity()->getPrefixedId() )->escaped()
+							. wfMessage( 'wikibase-itemlink-id-wrapper' )->params( $idFormatter->format( $itemContent->getEntity()->getId() ) )->escaped()
 							. \Html::closeElement( 'span' );
 						$result =
 							\Linker::link(
