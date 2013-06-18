@@ -35,7 +35,7 @@ $messages['en'] = array(
 	'wikibase-error-remove-connection' => 'A connection error occurred while trying to perform remove, and because of this your changes could not be completed. Please check your Internet connection.',
 	'wikibase-error-save-timeout' => 'We are experiencing technical difficulties, and because of this your "save" could not be completed.',
 	'wikibase-error-remove-timeout' => 'We are experiencing technical difficulties, and because of this your "remove" could not be completed.',
-	'wikibase-error-autocomplete-connection' => 'Could not query Wikipedia API. Please try again later.',
+	'wikibase-error-autocomplete-connection' => 'Could not query site API. Please try again later.',
 	'wikibase-error-autocomplete-response' => 'Server responded: $1',
 	'wikibase-error-ui-client-error' => 'The connection to the client page failed. Please try again later.',
 	'wikibase-error-ui-no-external-page' => 'The specified article could not be found on the corresponding site.',
@@ -114,7 +114,7 @@ See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and
 	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.
 {{Identical|Language}}',
 	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.',
-	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (Wikipedia) page.',
+	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (wiki) page.',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).
 {{Identical|Details}}',
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
