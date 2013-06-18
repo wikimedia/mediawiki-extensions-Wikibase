@@ -47,7 +47,7 @@ define( 'WBC_VERSION', '0.4 alpha'
 call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks;
 	global $wgAPIMetaModules, $wgSpecialPages, $wgSpecialPageGroups, $wgResourceModules;
-	global $wgWBClientStores, $wgWBClientSettings, $wgWBSettings;
+	global $wgWBClientStores, $wgWBClientSettings;
 
 
 	$wgExtensionCredits['wikibase'][] = array(
@@ -161,7 +161,7 @@ call_user_func( function() {
 		require( __DIR__ . '/config/WikibaseClient.default.php' )
 	);
 
-	$wgWBSettings = &$wgWBClientSettings; // B/C
+	$GLOBALS['wgWBSettings'] =& $GLOBALS['wgWBClientSettings']; // B/C alias
 
 	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 		include_once( $dir . 'config/WikibaseClient.experimental.php' );
