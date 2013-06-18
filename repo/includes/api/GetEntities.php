@@ -6,6 +6,7 @@ use ApiBase;
 use MWException;
 
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 use Wikibase\StoreFactory;
 use Wikibase\EntityId;
@@ -174,7 +175,8 @@ class GetEntities extends ApiWikibase {
 
 				$entity = $entityContent->getEntity();
 
-				$options = new EntitySerializationOptions();
+				// TODO: inject id formatter
+				$options = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 				$options->setLanguages( $params['languages'] );
 				$options->setSortDirection( $params['dir'] );
 				$options->setProps( $props );
