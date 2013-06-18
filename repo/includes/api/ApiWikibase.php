@@ -2,6 +2,8 @@
 
 namespace Wikibase\Api;
 
+use Wikibase\Lib\Serializers\EntitySerializer;
+
 use User, Status, ApiBase;
 
 use Wikibase\DataModel\SimpleSiteLink;
@@ -10,6 +12,7 @@ use Wikibase\EntityContent;
 use Wikibase\Settings;
 use Wikibase\EditEntity;
 use Wikibase\SiteLink;
+use Wikibase\Lib\Serializers\LabelSerializer;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -326,24 +329,9 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 * @return array|bool
 	 */
-	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
-		$value = array();
-		$idx = 0;
-
-		foreach ( $labels as $languageCode => $label ) {
-			if ( $label === '' ) {
-				$value[$this->getUsekeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'removed' => '',
-				);
-			}
-			else {
-				$value[$this->getUsekeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'value' => $label,
-				);
-			}
-		}
+	protected function addLabelsToResult( $entity, $path, $name = 'labels', $tag = 'label' ) {
+		$labelSerializer = new LabelSerializer();
+		$value = $labelSerializer->getSerialized( $entity );
 
 		if ( $value !== array() ) {
 			if ( !$this->getUsekeys() ) {
