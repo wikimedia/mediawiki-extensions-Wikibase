@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1LEGeoc",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-18T12:00:37Z",
+      "side": 1,
+      "message": "should be done before the getModel() check",
+      "revId": "9abbebbbe32bdcc788dc79338014bdd7ed3b66c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
