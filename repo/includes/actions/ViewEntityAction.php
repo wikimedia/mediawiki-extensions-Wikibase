@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Language, Article, \ValueFormatters\ValueFormatterFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Handles the view action for Wikibase entities.
@@ -207,7 +208,8 @@ abstract class ViewEntityAction extends \ViewAction {
 		$labelText = $content->getEntity()->getLabel( $langCode );
 
 		if ( $labelText === false ) {
-			$labelText = strtoupper( $content->getEntity()->getPrefixedId() );
+			$idPrefixer = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+			$labelText = strtoupper( $idPrefixer->format( $content->getEntity()->getId() ) );
 		}
 
 		// Create and set the title.

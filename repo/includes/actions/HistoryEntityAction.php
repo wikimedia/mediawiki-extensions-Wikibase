@@ -1,6 +1,8 @@
 <?php
 namespace Wikibase;
 
+use Wikibase\Repo\WikibaseRepo;
+
 /**
  * Handles the history action for Wikibase entities.
  *
@@ -42,9 +44,12 @@ class HistoryEntityAction extends \HistoryAction {
 		}
 
 		$entity = $content->getEntity();
-		$langCode = $this->getContext()->getLanguage()->getCode();
-		$prefixedId = ucfirst( $entity->getPrefixedId() );
-		$labelText = $entity->getLabel( $langCode );
+
+		$labelText = $entity->getLabel( $this->getContext()->getLanguage()->getCode() );
+
+		$idPrefixer = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+		$prefixedId = ucfirst( $idPrefixer->format( $entity->getId() ) );
+
 		if ( isset( $labelText ) ) {
 			return $this->msg( 'wikibase-history-title-with-label', $prefixedId, $labelText )->text();
 		}

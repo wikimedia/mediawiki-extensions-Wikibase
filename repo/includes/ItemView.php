@@ -3,6 +3,7 @@
 namespace Wikibase;
 use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Class for creating views for Wikibase\Item instances.
@@ -105,7 +106,8 @@ class ItemView extends EntityView {
 		}
 
 		// Link to SpecialPage
-		$editLink = $this->getEditUrl( $itemContent->getEntity()->getPrefixedId(), null, 'SetSiteLink' );
+		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+		$editLink = $this->getEditUrl( $idFormatter->format( $itemContent->getEntity()->getId() ), null, 'SetSiteLink' );
 
 		foreach( $siteLinks as $siteLink ) {
 			// FIXME: depracted method usage
