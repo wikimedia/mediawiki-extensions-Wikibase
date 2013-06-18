@@ -1,7 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use Wikibase\Entity;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 
 /**
@@ -43,6 +46,11 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 	 */
 	protected abstract function getEntityInstance();
 
+	protected function getInstance() {
+		$class = $this->getClass();
+		return new $class( new EntitySerializationOptions( $this->getIdFormatter() ) );
+	}
+
 	/**
 	 * Returns arguments for entity agnostic arguments that can be returned
 	 * by validProvider after making sure the provided serialization contains
@@ -57,7 +65,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 
 		$validArgs = array();
 
-		$options = new EntitySerializationOptions();
+		$options = new EntitySerializationOptions( $this->getIdFormatter() );
 		$options->setProps( array( 'aliases' ) );
 
 		$entity0 = $entity->copy();
@@ -67,7 +75,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			$entity0,
 			array(
-				'id' => $entity0->getPrefixedId(),
+				'id' => $this->getFormattedIdForEntity( $entity0 ),
 				'type' => $entity0->getType(),
 				'aliases' => array(
 					'en' => array(
@@ -92,10 +100,10 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 					),
 				),
 			),
-			$options,
+			$options
 		);
 
-		$options = new EntitySerializationOptions();
+		$options = new EntitySerializationOptions( $this->getIdFormatter() );
 		$options->setProps( array( 'descriptions', 'labels' ) );
 
 		$entity1 = $entity->copy();
@@ -107,7 +115,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			$entity1,
 			array(
-				'id' => $entity1->getPrefixedId(),
+				'id' => $this->getFormattedIdForEntity( $entity1 ),
 				'type' => $entity1->getType(),
 				'labels' => array(
 					'en' => array(
@@ -130,10 +138,23 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 					),
 				),
 			),
-			$options,
+			$options
 		);
 
 		return $validArgs;
+	}
+
+	protected function getFormattedIdForEntity( Entity $entity ) {
+		return $this->getIdFormatter()->format( $entity->getId() );
+	}
+
+	protected function getIdFormatter() {
+		$formatterOptions = new FormatterOptions( array( EntityIdFormatter::OPT_PREFIX_MAP => array(
+			'i' => 'item',
+			'p' => 'property',
+		) ) );
+
+		return new EntityIdFormatter( $formatterOptions );
 	}
 
 }
