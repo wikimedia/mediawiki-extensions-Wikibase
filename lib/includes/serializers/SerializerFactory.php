@@ -1,7 +1,9 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use MWException;
+
+use InvalidArgumentException;
+use OutOfBoundsException;
 
 /**
  * Factory for constructing Serializer and Unserializer objects.
@@ -31,20 +33,17 @@ use MWException;
  */
 class SerializerFactory {
 
-	public function __construct(  ) {
-
-	}
-
 	/**
 	 * @param mixed $object
 	 * @param SerializationOptions $options
 	 *
 	 * @return Serializer
-	 * @throws MWException
+	 * @throws OutOfBoundsException
+	 * @throws InvalidArgumentException
 	 */
 	public function newSerializerForObject( $object, $options = null ) {
 		if ( !is_object( $object ) ) {
-			throw new MWException( 'newSerializerForObject only accepts objects and got ' . gettype( $object ) );
+			throw new InvalidArgumentException( 'newSerializerForObject only accepts objects and got ' . gettype( $object ) );
 		}
 
 		switch ( true ) {
@@ -64,7 +63,7 @@ class SerializerFactory {
 				return new ClaimsSerializer( $options );
 		}
 
-		throw new MWException( 'There is no serializer for the provided type of object "' . get_class( $object ) . '"' );
+		throw new OutOfBoundsException( 'There is no serializer for the provided type of object "' . get_class( $object ) . '"' );
 	}
 
 	/**
@@ -72,11 +71,12 @@ class SerializerFactory {
 	 * @param SerializationOptions $options
 	 *
 	 * @return Unserializer
-	 * @throws MWException
+	 * @throws OutOfBoundsException
+	 * @throws InvalidArgumentException
 	 */
 	public function newUnserializerForClass( $className, $options = null ) {
 		if ( !is_string( $className ) ) {
-			throw new MWException( '$className needs to be a string' );
+			throw new OutOfBoundsException( '$className needs to be a string' );
 		}
 
 		switch ( ltrim( $className, '\\' ) ) {
@@ -88,7 +88,7 @@ class SerializerFactory {
 				return new ClaimSerializer( $options );
 		}
 
-		throw new MWException( '"' . $className . '" has no associated unserializer' );
+		throw new OutOfBoundsException( '"' . $className . '" has no associated unserializer' );
 	}
 
 }
