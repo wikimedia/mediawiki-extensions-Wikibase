@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+1: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Code-Review+2: Tobias Gritschacher <tobias.gritschacher@wikimedia.de>
+Submitted-by: Tobias Gritschacher <tobias.gritschacher@wikimedia.de>
+Submitted-at: Wed, 19 Jun 2013 14:58:14 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/69493
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
