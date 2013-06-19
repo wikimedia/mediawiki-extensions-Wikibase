@@ -71,8 +71,7 @@ describe "Check string statements UI" do
         page.remove_all_claims
       end
     end
-    # TODO: skipping for now, as this string length limit is currently not implemented on master
-    xit "should check adding a statement of string type with too long string" do
+    it "should check adding a statement of string type with too long string" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load

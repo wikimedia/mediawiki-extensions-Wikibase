@@ -88,7 +88,7 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'commonsMedia', 'Foo.jpg', false, 'StringValue expected, string supplied' ),
 			array( 'commonsMedia', new NumberValue( 7 ), false, 'StringValue expected' ),
 			array( 'commonsMedia', new StringValue( '' ), false, 'empty string should be invalid' ),
-			array( 'commonsMedia', new StringValue( str_repeat('xy', 255) . '.jpg' ), false, 'name too long' ),
+			array( 'commonsMedia', new StringValue( str_repeat('x', 250) . '.jpg' ), false, 'name too long' ),
 			array( 'commonsMedia', new StringValue( 'Foo' ), false, 'no file extension' ),
 			array( 'commonsMedia', new StringValue( 'Foo.jpg' ), true, 'this should be good' ),
 			array( 'commonsMedia', new StringValue( 'Foo#bar.jpg' ), false, 'illegal character: hash' ),
@@ -104,7 +104,8 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'string', new StringValue( '' ), false, 'empty string should be invalid' ),
 			array( 'string', new StringValue( 'Foo' ), true, 'simple string' ),
 			array( 'string', new StringValue( 'Äöü' ), true, 'Unicode support' ),
-			array( 'string', new StringValue( str_repeat('xy', 255) ), false, 'too long' ),
+			array( 'string', new StringValue( str_repeat('x', 390) ), true, 'long, but not too long' ),
+			array( 'string', new StringValue( str_repeat('x', 401) ), false, 'too long' ),
 			array( 'string', new StringValue( ' Foo ' ), false, 'Untrimmed' ),
 
 			//time
@@ -113,7 +114,7 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 
 			//time['calendar-model']
 			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, '' ), false, 'calendar: empty string should be invalid' ),
-			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, 'http://' . str_repeat('xy', 255) ), false, 'calendar: too long' ),
+			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, 'http://' . str_repeat('x', 256) ), false, 'calendar: too long' ),
 			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, 'http://acme.com/calendar' ), true, 'calendar: URL' ),
 			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, 0, ' http://acme.com/calendar ' ), false, 'calendar: untrimmed' ),
 
@@ -131,7 +132,7 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 
 			//globe-coordinate[globe]
 			array( 'globe-coordinate', new GeoCoordinateValue( 0, 0, 0, 0, '' ), false, 'globe: empty string should be invalid' ),
-			array( 'globe-coordinate', new GeoCoordinateValue( 0, 0, 0, 0, 'http://' . str_repeat('xy', 255) ), false, 'globe: too long' ),
+			array( 'globe-coordinate', new GeoCoordinateValue( 0, 0, 0, 0, 'http://' . str_repeat('x', 256) ), false, 'globe: too long' ),
 			array( 'globe-coordinate', new GeoCoordinateValue( 0, 0, 0, 0, 'http://acme.com/globe' ), true, 'globe: URL' ),
 			array( 'globe-coordinate', new GeoCoordinateValue( 0, 0, 0, 0, ' http://acme.com/globe ' ), false, 'globe: untrimmed' ),
 			//TODO: must be an item reference
