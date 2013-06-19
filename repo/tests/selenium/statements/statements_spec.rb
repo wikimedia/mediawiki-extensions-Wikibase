@@ -36,8 +36,8 @@ while count < num_props_item do
   count = count + 1
 end
 
-statement_value = generate_random_string(10)
-statement_value_changed = generate_random_string(10)
+statement_value = generate_random_string(10) + '.jpg'
+statement_value_changed = generate_random_string(10) + '.jpg'
 
 describe "Check statements UI" do
   before :all do
@@ -254,7 +254,7 @@ describe "Check statements UI" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
-        values = [generate_random_string(10), generate_random_string(10), generate_random_string(10)]
+        values = [generate_random_string(10) + '.jpg', generate_random_string(10) + '.jpg', generate_random_string(10) + '.jpg']
         page.add_statement(properties_cm[0]["label"], values[0])
         page.statement1Name.should == properties_cm[0]["label"]
         page.statement1ClaimValue1.should == values[0]
@@ -306,8 +306,8 @@ describe "Check statements UI" do
       on_page(ItemPage) do |page|
         page.navigate_to items[0]["url"]
         page.wait_for_entity_to_load
-        statement1_values = [generate_random_string(10), generate_random_string(10)]
-        statement2_values = [generate_random_string(10), generate_random_string(10)]
+        statement1_values = [generate_random_string(10) + '.jpg', generate_random_string(10) + '.jpg']
+        statement2_values = [generate_random_string(10) + '.jpg', generate_random_string(10) + '.jpg']
         page.add_statement(properties_cm[0]["label"], statement1_values[0])
         page.statement1Name.should == properties_cm[0]["label"]
         page.statement1ClaimValue1.should == statement1_values[0]

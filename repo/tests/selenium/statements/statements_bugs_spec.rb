@@ -8,7 +8,7 @@
 
 require 'spec_helper'
 
-statement_value = generate_random_string(10)
+statement_value = generate_random_string(10) + '.jpg'
 
 num_items = 2
 num_props_cm = 2
@@ -150,18 +150,18 @@ describe "Check for bugs in statements UI" do
       on_page(ItemPage) do |page|
         page.navigate_to items[1]["url"]
         page.wait_for_entity_to_load
-        page.add_statement(properties_cm[0]['label'], generate_random_string(10))
-        page.add_statement(properties_cm[1]['label'], generate_random_string(10))
+        page.add_statement(properties_cm[0]['label'], generate_random_string(10) + '.jpg')
+        page.add_statement(properties_cm[1]['label'], generate_random_string(10) + '.jpg')
         page.wait_for_entity_to_load
         page.addReferenceToFirstClaim?.should be_true
         page.addReferenceToSecondClaim?.should be_true
-        page.add_reference_to_first_claim(properties_cm[0]['label'], generate_random_string(10))
+        page.add_reference_to_first_claim(properties_cm[0]['label'], generate_random_string(10) + '.jpg')
         page.addReferenceToSecondClaim
         page.entitySelectorInput = properties_cm[1]['label']
         ajax_wait
         page.wait_for_entity_selector_list
         page.wait_for_reference_value_box
-        page.referenceValueInput = generate_random_string(10)
+        page.referenceValueInput = generate_random_string(10) + '.jpg'
         ajax_wait
         page.saveReference
         ajax_wait
