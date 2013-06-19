@@ -65,6 +65,8 @@ final class LibHooks {
 
 				'tests/qunit/parsers/EntityIdParser.tests.js',
 
+				'tests/qunit/wikibase.dataTypes/wikibase.dataTypes.tests.js',
+
 				'tests/qunit/wikibase.datamodel/Wikibase.claim.tests.js',
 				'tests/qunit/wikibase.datamodel/Wikibase.reference.tests.js',
 				'tests/qunit/wikibase.datamodel/Wikibase.snak.tests.js',
