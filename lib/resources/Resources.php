@@ -1,4 +1,7 @@
 <?php
+
+use \Wikibase\LibRegistry;
+
 /**
  * File for Wikibase resourceloader modules.
  * When included this returns an array with all the modules introduced by Wikibase.
@@ -65,6 +68,24 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.dataTypes' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.dataTypes/wikibase.dataTypes.js',
+			),
+			'dependencies' => array(
+				'wikibase',
+				'mw.config.values.wbDataTypes',
+			),
+		),
+
+		'mw.config.values.wbDataTypes' => $moduleTemplate + array(
+			'class' => 'DataTypes\DataTypesModule',
+			'datatypesfactory' => function() {
+				return LibRegistry::newInstance()->getDataTypeFactory();
+			},
+			'datatypesconfigvarname' => 'wbDataTypes',
+		),
+
 		'wikibase.datamodel' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.datamodel/datamodel.entities/wikibase.Entity.js',
@@ -85,6 +106,7 @@ return call_user_func( function() {
 				'wikibase.utilities',
 				'mw.ext.dataValues', // DataValues extension
 				'dataTypes', // DataTypes extension
+				'wikibase.dataTypes',
 			)
 		),
 
