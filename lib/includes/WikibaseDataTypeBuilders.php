@@ -115,7 +115,7 @@ class WikibaseDataTypeBuilders {
 		$validators = array();
 
 		$validators[] = new TypeValidator( 'string' );
-		$validators[] = new StringLengthValidator( 1, 255, 'mb_strlen' ); //XXX: restrict what exactly?
+		$validators[] = new StringLengthValidator( 1, 400, 'mb_strlen' );
 		$validators[] = new RegexValidator( '/^\s|[\r\n\t]|\s$/', true ); // no leading/trailing whitespace, no line breaks.
 
 		$topValidator = new DataValueValidator( //Note: validate the DataValue's native value.
