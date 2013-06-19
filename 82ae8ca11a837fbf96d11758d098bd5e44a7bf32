@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "D1NQ2lE8",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-19T03:48:06Z",
+      "side": 1,
+      "message": "gah! :)  think i want this here and not below, so the hook functions are each doing one thing.",
+      "parentUuid": "D1FSdhGE",
+      "revId": "82ae8ca11a837fbf96d11758d098bd5e44a7bf32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1HSggKM",
         "filename": "client/WikibaseClient.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-18T15:56:59Z",
       "side": 1,
       "message": "Why this?",
+      "revId": "82ae8ca11a837fbf96d11758d098bd5e44a7bf32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1ENC5EI",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-19T03:48:06Z",
+      "side": 1,
+      "message": "think it\u0027s better to have each hook function do just one thing, even if that means defining multiple hook functions here.",
+      "parentUuid": "D1HSggKM",
       "revId": "82ae8ca11a837fbf96d11758d098bd5e44a7bf32",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
