@@ -6,14 +6,13 @@ use DataTypes\DataTypeFactory;
 use Revision;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Entity;
-use Wikibase\EntityDataSerializationService;
-use \Wikibase\Item;
-use \Wikibase\ItemContent;
+use Wikibase\Item;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\Property;
 
 /**
- * @covers \Wikibase\EntityDataSerializationService
+ * @covers \Wikibase\LinkedData\EntityDataSerializationService
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
