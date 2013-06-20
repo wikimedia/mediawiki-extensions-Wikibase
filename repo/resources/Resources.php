@@ -50,7 +50,8 @@ return call_user_func( function() {
 				'jquery.json',
 				'jquery.cookie',
 				'wikibase.serialization.entities',
-				'wikibase.serialization.fetchedcontent'
+				'wikibase.serialization.fetchedcontent',
+				'jquery.wikibase.claimgrouplabelscroll'
 			),
 			'messages' => array(
 				'wikibase-sitelinks-wikipedia',
