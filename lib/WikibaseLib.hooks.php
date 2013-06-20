@@ -50,6 +50,8 @@ final class LibHooks {
 	 * Add new javascript testing modules. This is called after the addition of MediaWiki core test suites.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
 	 *
+	 * TODO: Move into a file with only this definition.
+	 *
 	 * @since 0.2 (in repo as RepoHooks::onResourceLoaderTestModules in 0.1)
 	 *
 	 * @param array &$testModules
@@ -58,7 +60,13 @@ final class LibHooks {
 	 * @return boolean
 	 */
 	public static function registerQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
-		$testModules['qunit']['wikibase.tests'] = array(
+		$moduleBase = array(
+			'localBasePath' => __DIR__,
+			'remoteExtPath' => 'Wikibase/lib',
+		);
+
+		// TODO: Split into test modules per QUnit module.
+		$testModules['qunit']['wikibase.tests'] = $moduleBase + array(
 			'scripts' => array(
 				'tests/qunit/templates.tests.js',
 				'tests/qunit/wikibase.tests.js',
@@ -136,9 +144,16 @@ final class LibHooks {
 				'jquery.nativeEventHandler',
 				'jquery.client',
 				'jquery.eachchange',
+			)
+		);
+
+		$testModules['qunit']['jquery.wikibase.claimgrouplabelscroll.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.tests.js',
 			),
-			'localBasePath' => __DIR__,
-			'remoteExtPath' => 'Wikibase/lib',
+			'dependencies' => array(
+				'jquery.wikibase.claimgrouplabelscroll'
+			),
 		);
 
 		return true;
