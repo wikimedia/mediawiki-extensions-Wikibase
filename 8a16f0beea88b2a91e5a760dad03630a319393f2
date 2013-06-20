@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1F90dM4",
+        "filename": "lib/includes/serializers/AliasSerializer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-20T17:43:32Z",
+      "side": 1,
+      "message": "The two versions here don\u0027t only use different keys, they are structurally different. Do we have tests for both variants, and do they behave the same as before?",
+      "revId": "8a16f0beea88b2a91e5a760dad03630a319393f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1B9q7O4",
+        "filename": "lib/includes/serializers/DescriptionSerializer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-20T17:43:32Z",
+      "side": 1,
+      "message": "ugh, a trinary operator as an index? please use a local variable for this.",
+      "revId": "8a16f0beea88b2a91e5a760dad03630a319393f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1N9IZI4",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-20T17:43:32Z",
+      "side": 1,
+      "message": "nested function calls are annoying to debug. one call nested into another is fine if one of them is trivial, but three starts to get hard to read. \n\nlocal variables are your friends :P",
+      "revId": "8a16f0beea88b2a91e5a760dad03630a319393f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1H9U0B8",
+        "filename": "lib/includes/serializers/LabelSerializer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-20T17:43:32Z",
+      "side": 1,
+      "message": "Instead of having the same code here twice, just vary the key:\n\n $valueKey \u003d  $label \u003d\u003d\u003d \u0027\u0027 ? \"removed\" : \"value\";\n ...\n   $valueKey \u003d\u003e $label",
+      "revId": "8a16f0beea88b2a91e5a760dad03630a319393f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
