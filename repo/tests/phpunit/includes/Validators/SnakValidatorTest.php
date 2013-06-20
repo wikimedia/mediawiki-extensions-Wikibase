@@ -15,6 +15,7 @@ use Wikibase\EntityId;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Property;
+use Wikibase\PropertyBadValueSnak;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -248,6 +249,9 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 
 		$snak = new PropertyValueSnak( $p1, new StringValue( 'abc' ) );
 		$cases[] = array( $snak, 'invalid numeric value', false );
+
+		$snak = new PropertyBadValueSnak( $p1, "an error", 'none', 'nothing' );
+		$cases[] = array( $snak, 'PropertyBadValueSnak', false );
 
 		return $cases;
 	}

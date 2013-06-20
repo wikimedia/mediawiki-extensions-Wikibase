@@ -29,10 +29,12 @@ namespace Wikibase\Validators;
 
 use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
+use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\Claim;
 use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\PropertyBadValueSnak;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
@@ -161,6 +163,12 @@ class SnakValidator implements ValueValidator {
 		// XXX: instead of an instanceof check, we could have multiple validators
 		//      with a canValidate() method, to determine which validator to use
 		//      for a given snak.
+
+		if ( $snak instanceof PropertyBadValueSnak ) {
+			return Result::newError( array(
+				Error::newError( "Bad snak value: " . $snak->getValueError() )
+			) );
+		}
 
 		if ( $snak instanceof SnakObject ) {
 
