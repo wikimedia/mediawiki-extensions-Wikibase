@@ -111,7 +111,6 @@ class SetSiteLink extends ModifyEntity {
 			$link = new SimpleSiteLink( $site->getGlobalId(), $page );
 
 			$entityContent->getEntity()->addSimpleSiteLink( $link );
-
 			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
 
 			$summary->setAction( 'set' );
