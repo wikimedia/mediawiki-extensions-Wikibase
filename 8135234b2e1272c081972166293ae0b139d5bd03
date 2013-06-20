@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1Jq26js",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-20T18:06:32Z",
+      "side": 1,
+      "message": "This is a boolean field. No point in comparing it to true.",
+      "revId": "8135234b2e1272c081972166293ae0b139d5bd03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
