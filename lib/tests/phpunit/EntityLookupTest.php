@@ -58,7 +58,13 @@ abstract class EntityLookupTest extends EntityTestCase {
 		if ( $entities === null ) {
 			$item = Item::newEmpty();
 			$item->setId( 42 );
-			$entities[$item->getPrefixedId()] = $item;
+
+			$entities[1] = $item;
+
+			$item = $item->copy();
+			$item->setLabel( 'en', "Foo" );
+
+			$entities[2] = $item;
 
 			$dataTypes = array(
 				'string' => array(
@@ -71,7 +77,8 @@ abstract class EntityLookupTest extends EntityTestCase {
 			$prop = Property::newEmpty();
 			$prop->setId( 753 );
 			$prop->setDataType( $dtf->getType( "string" ) );
-			$entities[$prop->getPrefixedId()] = $prop;
+
+			$entities[3] = $prop;
 		}
 
 		return $entities;
@@ -84,16 +91,32 @@ abstract class EntityLookupTest extends EntityTestCase {
 		return $lookup;
 	}
 
+	protected function resolveLogicalRevision( $revision ) {
+		return $revision;
+	}
+
 	public static function provideGetEntity() {
 		$cases = array(
-			array( // #0
-				'q42', false, true,
+			array( // #0: any revision
+				'q42', 0, true,
 			),
-			array( // #1
-				'q753', false, false,
+			array( // #1: first revision
+				'q42', 1, true,
 			),
-			array( // #2
-				'p753', false, true,
+			array( // #2: second revision
+				'q42', 2, true,
+			),
+			array( // #3: bad revision
+				'q42', 600000, false, 'Wikibase\StorageException',
+			),
+			array( // #4: wrong type
+				'q753', 0, false,
+			),
+			array( // #5: bad revision
+				'p753', 1, false, 'Wikibase\StorageException',
+			),
+			array( // #6: some revision
+				'p753', 0, true,
 			),
 		);
 
@@ -103,30 +126,28 @@ abstract class EntityLookupTest extends EntityTestCase {
 	/**
 	 * @dataProvider provideGetEntity
 	 *
-	 * @param string|EntityId $id The entity to get
-	 * @param bool|int $revision The revision to get (or null)
-	 * @param bool|int $expectedRev The expected revision
+	 * @param string|EntityId $id       The entity to get
+	 * @param int             $revision The revision to get (or 0)
+	 * @param bool            $shouldExist
+	 * @param string|null     $expectException
 	 */
-	public function testGetEntity( $id, $revisionOffset, $expectedRev ) {
-		if ( $revisionOffset !== false ) {
-			$this->markTestIncomplete( "can't test revision IDs yet" );
+	public function testGetEntity( $id, $revision, $shouldExist, $expectException = null ) {
+		if ( $expectException !== null ) {
+			$this->setExpectedException( $expectException );
 		}
-
-		//TODO: get the actual revision ID and add the offset.
-		$revision = $revisionOffset;
 
 		if ( is_string( $id ) ) {
 			$id = EntityId::newFromPrefixedId( $id );
 		}
 
+		$revision = $this->resolveLogicalRevision( $revision );
+
 		$lookup = $this->getLookup();
 		$entity = $lookup->getEntity( $id, $revision );
 
-		if ( $expectedRev == true ) {
+		if ( $shouldExist == true ) {
 			$this->assertNotNull( $entity, "ID " . $id->getPrefixedId() );
 			$this->assertEquals( $id->getPrefixedId(), $entity->getPrefixedId() );
-
-			//TODO: check revision ID
 		} else {
 			$this->assertNull( $entity, "ID " . $id->getPrefixedId() );
 		}

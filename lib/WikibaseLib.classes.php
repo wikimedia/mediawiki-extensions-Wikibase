@@ -119,6 +119,7 @@ return call_user_func( function() {
 		'Wikibase\EntityUsageIndex' => 'includes/store/EntityUsageIndex.php',
 		'Wikibase\SiteLinkCache' => 'includes/store/SiteLinkCache.php',
 		'Wikibase\SiteLinkLookup' => 'includes/store/SiteLinkLookup.php',
+		'Wikibase\StorageException' => 'includes/store/StorageException.php',
 		'Wikibase\TermIndex' => 'includes/store/TermIndex.php',
 		'Wikibase\TermCombinationMatchFinder' => 'includes/store/TermCombinationMatchFinder.php',
 		'Wikibase\TermMatchScoreCalculator' => 'includes/store/TermMatchScoreCalculator.php',

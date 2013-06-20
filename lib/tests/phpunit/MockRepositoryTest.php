@@ -274,16 +274,14 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		return array(
 			array( // #0: empty
 				array(), // ids
-				array(), // revs
 				array(), // expected
 			),
 
-			array( // #1: some entities, no revisions
+			array( // #1: some entities
 				array( // ids
 					'q1',
 					'q2',
 				),
-				false, // revs
 				array( // expected
 					'q1' => array(
 						'de' => 'eins',
@@ -295,28 +293,8 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 				),
 			),
 
-			array( // #2: revisions
-				array( // ids
-					'q1',
-					'q2'
-				),
-				array( // revs
-					1001,
-					false
-				),
-				array( // expected
-					'q1' => array(
-						'en' => 'one',
-					),
-					'q2' => array(
-						'en' => 'two',
-					),
-				),
-			),
-
-			array( // #3: bad ID
+			array( // #2: bad ID
 				array( 'q1', 'q22' ), // ids
-				false, // revs
 				array( // expected
 					'q1' => array(
 						'en' => 'one',
@@ -324,25 +302,6 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 					),
 					'q22' => null,
 				),
-			),
-
-			array( // #4: bad revision
-				array( 'q1', 'q2' ), // ids
-				array( false, 5555 ), // revs
-				array( // expected
-					'q1' => array(
-						'en' => 'one',
-						'de' => 'eins',
-					),
-					'q2' => null,
-				),
-			),
-
-			array( // #5: bad number of revision
-				array( 'q2', 'q2' ), // ids
-				array( 1001 ), // revs
-				null,
-				'\MWException'
 			),
 		);
 	}
@@ -365,7 +324,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetEntities
 	 */
-	public function testGetEntities( $ids, $revs, $expected, $expectedError = false ) {
+	public function testGetEntities( $ids, $expected, $expectedError = false ) {
 		$this->setupGetEntities();
 
 		// convert string IDs to EntityId objects
@@ -379,7 +338,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// do it!
 		try {
-			$entities = $this->repo->getEntities( $ids, $revs );
+			$entities = $this->repo->getEntities( $ids );
 
 			if ( $expectedError !== false  ) {
 				$this->fail( "expected error: " . $expectedError );
