@@ -115,7 +115,15 @@
 			.listrotator( { values: precisionValues.reverse(), deferInit: true } )
 			.on(
 				'listrotatorauto.' + this.uiBaseClass + ' listrotatorselected.' + this.uiBaseClass,
-				function( event ) {
+				function( event, newValue ) {
+					var rawValue = self._getRawValue();
+
+					if( rawValue === null || newValue === rawValue.precision() ) {
+						// Listrotator has been rotated automatically, the value covering the new
+						// precision has already been generated or the current input is invalid.
+						return;
+					}
+
 					var overwrite = {};
 
 					if( event.type === 'listrotatorauto' ) {
@@ -145,7 +153,15 @@
 			.listrotator( { values: calendarValues, deferInit: true } )
 			.on(
 				'listrotatorauto.' + this.uiBaseClass + ' listrotatorselected.' + this.uiBaseClass,
-				function( event ) {
+				function( event, newValue ) {
+					var rawValue = self._getRawValue();
+
+					if( rawValue === null || newValue === rawValue.calendarText() ) {
+						// Listrotator has been rotated automatically, the value covering the new
+						// precision has already been generated or the current input is invalid.
+						return;
+					}
+
 					var overwrite = {};
 
 					if( event.type === 'listrotatorauto' ) {
@@ -327,10 +343,14 @@
 					this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-switch' )
 					.off( 'click.' + this.uiBaseClass )
 					.on( 'click.' + this.uiBaseClass, function( event ) {
-						self.$calendar.data( 'listrotator' ).rotate( otherCalendar, function() {
-							self._updateValue();
-						} );
-					} )
+						var listrotator = self.$calendar.data( 'listrotator ');
+
+							listrotator.element.one( 'listrotatorselected', function ( event ) {
+								self._updateValue();
+							} );
+
+							self.$calendar.data( 'listrotator' ).rotate( otherCalendar );
+						} )
 					.html( msg );
 				}
 
