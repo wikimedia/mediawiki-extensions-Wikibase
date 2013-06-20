@@ -9,9 +9,12 @@ use Wikibase\EntityContent;
 use Wikibase\Settings;
 use Wikibase\EditEntity;
 use Wikibase\SiteLink;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Serializers\LabelSerializer;
 use Wikibase\Lib\Serializers\DescriptionSerializer;
 use Wikibase\Lib\Serializers\AliasSerializer;
+use Wikibase\Lib\Serializers\SiteLinkSerializer;
+use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
 
 /**
@@ -25,6 +28,7 @@ use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 abstract class ApiWikibase extends \ApiBase {
 
@@ -123,7 +127,6 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @param string $name name used for the entry
 	 * @param string $tag tag used for indexed entries in xml formats and similar
 	 *
-	 * @return array|bool
 	 */
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
 		$options = new MultiLangSerializationOptions();
@@ -141,12 +144,9 @@ abstract class ApiWikibase extends \ApiBase {
 	}
 
 	/**
-	 * Add sitelinks to result
+	 * Get serialized sitelinks and add them to result
 	 *
-	 * @deprecated
-	 * TODO: move to \Wikibase\EntitySerializer
-	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $siteLinks the site links to insert in the result, as SiteLink objects
 	 * @param array|string $path where the data is located
@@ -155,90 +155,31 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @param array $options additional information to include in the listelinks structure. For example:
 	 *              * 'url' will include the full URL of the sitelink in the result
 	 *              * 'removed' will mark the sitelinks as removed
-	 *              * other options will simply be included as flags.
 	 *
-	 * @return array|bool
 	 */
 	protected function addSiteLinksToResult( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
-		$value = array();
-		$idx = 0;
+		$serializerOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+		$serializerOptions->setSortDirection( EntitySerializationOptions::SORT_NONE );
 
 		if ( isset( $options ) ) {
-			// figure out if the entries shall be sorted
-			$dir = null;
-			if ( in_array( 'ascending', $options ) ) {
-				$dir = 'ascending';
-			}
-			elseif ( in_array( 'descending', $options ) ) {
-				$dir = 'descending';
+			if ( in_array( EntitySerializationOptions::SORT_ASC, $options ) ) {
+				$serializerOptions->setSortDirection( EntitySerializationOptions::SORT_ASC );
+			} elseif ( in_array( EntitySerializationOptions::SORT_DESC, $options ) ) {
+				$serializerOptions->setSortDirection( EntitySerializationOptions::SORT_DESC );
 			}
 
-			if ( isset( $dir ) ) {
-				// Sort the sitelinks according to their global id
-				$saftyCopy = $siteLinks; // keep a shallow copy;
+			if ( in_array( 'url', $options ) ) {
+				$serializerOptions->addProp( 'sitelinks/url' );
+			}
 
-				$sortOk = false;
-
-				if ( $dir === 'ascending' ) {
-					$sortOk = usort(
-						$siteLinks,
-						function( SimpleSiteLink $a, SimpleSiteLink $b ) {
-							return strcmp( $a->getSiteId(), $b->getSiteId() );
-						}
-					);
-				} elseif ( $dir === 'descending' ) {
-					$sortOk = usort(
-						$siteLinks,
-						function( SimpleSiteLink $a, SimpleSiteLink $b ) {
-							return strcmp( $b->getSiteId(), $a->getSiteId() );
-						}
-					);
-				}
-
-				if ( !$sortOk ) {
-					$siteLinks = $saftyCopy;
-				}
+			if ( in_array( 'removed', $options ) ) {
+				$serializerOptions->addProp( 'sitelinks/removed' );
 			}
 		}
 
-		/**
-		 * @var SimpleSiteLink $link
-		 */
-		foreach ( $siteLinks as $link ) {
-			$response = array(
-				'site' => $link->getSiteId(),
-				'title' => $link->getPageName(),
-			);
-
-			if ( $options !== null ) {
-				foreach ( $options as $opt ) {
-					if ( isset( $response[$opt] ) ) {
-						//skip
-					} elseif ( $opt === 'url' ) {
-						//include full url in the result
-						$site = \Sites::singleton()->getSite( $link->getSiteId() );
-
-						if ( $site === null ) {
-							$response['url'] = '';
-						}
-						else {
-							$siteLink = new SiteLink(
-								$site,
-								$link->getPageName()
-							);
-
-							$response['url'] = $siteLink->getUrl();
-						}
-					} else {
-						//include some flag in the result
-						$response[$opt] = '';
-					}
-				}
-			}
-
-			$key = $this->getUsekeys() ? $link->getSiteId() : $idx++;
-			$value[$key] = $response;
-		}
+		$siteStore = \SiteSQLStore::newInstance();
+		$siteLinkSerializer = new SiteLinkSerializer( $serializerOptions, $siteStore );
+		$value = $siteLinkSerializer->getSerialized( $siteLinks );
 
 		if ( $value !== array() ) {
 			if ( !$this->getUsekeys() ) {
@@ -259,7 +200,6 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @param string $name name used for the entry
 	 * @param string $tag tag used for indexed entries in xml formats and similar
 	 *
-	 * @return array|bool
 	 */
 	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
 		$options = new MultiLangSerializationOptions();
@@ -287,7 +227,6 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @param string $name name used for the entry
 	 * @param string $tag tag used for indexed entries in xml formats and similar
 	 *
-	 * @return array|bool
 	 */
 	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
 		$options = new MultiLangSerializationOptions();
