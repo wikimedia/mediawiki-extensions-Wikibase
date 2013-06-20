@@ -196,7 +196,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		return $pages;
 	}
 
-	public function testRebuild() {
+	public function testRebuildAll() {
 		$this->entityPerPageTable->clear();
 
 		assert( $this->countEntityPerPageRows() === 0 );
@@ -207,6 +207,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 			$this->wikibaseRepo->getEntityIdParser()
 		);
 
+		$builder->setRebuildAll( true );
 		$builder->rebuild();
 
 		$this->assertEquals( $this->countEntityPerPageRows(), 10 );
@@ -232,7 +233,6 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 			$this->wikibaseRepo->getEntityIdParser()
 		);
 
-		$builder->setOnlyMissing( true );
 		$builder->rebuild();
 
 		$this->assertEquals( 10, $this->countEntityPerPageRows() );
