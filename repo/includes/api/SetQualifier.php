@@ -13,6 +13,7 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\Claim;
+use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Snak;
@@ -249,6 +250,8 @@ class SetQualifier extends ApiWikibase {
 			//Note: This handles failures during snak instantiation, not validation.
 			//      Validation errors are handled by the validation helper.
 			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-snak' );
+		} catch ( PropertyNotFoundException $ex ) {
+			$this->dieUsage( $ex->getMessage(), 'invalid-snak' );
 		}
 
 		return false; // we should never get here.

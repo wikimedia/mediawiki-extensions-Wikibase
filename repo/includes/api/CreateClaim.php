@@ -12,6 +12,7 @@ use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
+use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\LibRegistry;
@@ -92,29 +93,26 @@ class CreateClaim extends ApiWikibase {
 		// entity type or providing an invalid DataValue.
 		try {
 			$snak = $this->getSnakInstance();
+
+			$this->snakValidation->validateSnak( $snak );
+
+			$claim = $this->addClaim( $entityContent->getEntity(), $snak );
+			$summary = $this->createSummary( $snak, 'create' );
+
+			$this->saveChanges( $entityContent, $summary );
+
+			$this->outputClaim( $claim );
+
 		}
 		catch ( IllegalValueException $ex ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid snak: IllegalValueException', 'invalid-snak' );
 		}
-		catch ( InvalidArgumentException $ex ) {
-			// shouldn't happen, but might.
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Invalid snak: InvalidArgumentException', 'invalid-snak' );
+		catch ( PropertyNotFoundException $ex ) {
+			$this->dieUsage( 'Invalid snak: PropertyNotFoundException', 'invalid-snak' );
 		}
 		catch ( ParseException $parseException ) {
-			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Invalid guid: ParseException', 'invalid-guid' );
 		}
-
-		$this->snakValidation->validateSnak( $snak );
-
-		$claim = $this->addClaim( $entityContent->getEntity(), $snak );
-		$summary = $this->createSummary( $snak, 'create' );
-
-		$this->saveChanges( $entityContent, $summary );
-
-		$this->outputClaim( $claim );
 
 		wfProfileOut( __METHOD__ );
 	}

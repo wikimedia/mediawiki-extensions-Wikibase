@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
-use OutOfBoundsException;
 use Wikibase\EntityId;
 use Wikibase\Property;
 
@@ -70,7 +69,7 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 		$numericId = $propertyId->getNumericId();
 
 		if ( !array_key_exists( $numericId, $this->dataTypeIds ) ) {
-			throw new OutOfBoundsException( "The DataType for property '$numericId' is not set" );
+			throw new PropertyNotFoundException( $propertyId, "The DataType for property '$numericId' is not set" );
 		}
 	}
 
