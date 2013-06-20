@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1GTHI5o",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-20T12:50:28Z",
+      "side": 1,
+      "message": "not needed, the group will never match in this case. just skip it.",
+      "revId": "b04b612943f0958ca026f7b4850e56a97621ef82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1KTBC4U",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-20T12:50:28Z",
+      "side": 1,
+      "message": "check $site-\u003egetGroup() \u003d\u003d $group before creating the SiteLink",
+      "revId": "b04b612943f0958ca026f7b4850e56a97621ef82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1CTNG7o",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-20T12:50:28Z",
+      "side": 1,
+      "message": "Sites::singleton()-\u003egetSiteGroup( $group );",
+      "revId": "b04b612943f0958ca026f7b4850e56a97621ef82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1ATSn1g",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-20T12:50:28Z",
+      "side": 1,
+      "message": "$isFull \u003d count( $siteLinks ) \u003e\u003d count( $sites );",
+      "revId": "b04b612943f0958ca026f7b4850e56a97621ef82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
