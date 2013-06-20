@@ -50,6 +50,7 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 	 * @param EntityId $propertyId
 	 *
 	 * @return string
+	 * @throws PropertyNotFoundException
 	 */
 	public function getDataTypeIdForProperty( EntityId $propertyId ) {
 		//TODO: use memcached here, or wrap this object!

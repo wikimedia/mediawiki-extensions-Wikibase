@@ -4,8 +4,10 @@ namespace Wikibase\Test;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
+use DataValues\BadValue;
 use DataValues\DataValue;
 use DataValues\StringValue;
+use DataValues\UnknownValue;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\StringValidator;
@@ -15,6 +17,7 @@ use Wikibase\EntityId;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Property;
+use Wikibase\PropertyBadValueSnak;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -228,6 +231,7 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 	public static function provideValidate() {
 		$p1 = new EntityId( Property::ENTITY_TYPE, 1 ); // numeric
 		$p2 = new EntityId( Property::ENTITY_TYPE, 2 ); // alphabetic
+		$p3 = new EntityId( Property::ENTITY_TYPE, 3 ); // bad
 
 		$cases = array();
 
@@ -249,6 +253,15 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 		$snak = new PropertyValueSnak( $p1, new StringValue( 'abc' ) );
 		$cases[] = array( $snak, 'invalid numeric value', false );
 
+		$snak = new PropertyValueSnak( $p1, new BadValue( 'string', 'abc', 'error' ) );
+		$cases[] = array( $snak, 'bad value', false );
+
+		$snak = new PropertyValueSnak( $p1, new UnknownValue( 'abc' ) );
+		$cases[] = array( $snak, 'wrong value type', false );
+
+		$snak = new PropertyValueSnak( $p3, new StringValue( 'abc' ) );
+		$cases[] = array( $snak, 'bad property', false );
+
 		return $cases;
 	}
 
@@ -269,9 +282,9 @@ class SnakValidatorTest extends \MediaWikiTestCase {
 			array( new StringValue( '123' ), 'alphabetic', 'p2', 'invalid alphabetic value', false ),
 			array( new StringValue( 'abc' ), 'alphabetic', 'p2', 'valid alphabetic value', true ),
 			array( new StringValue( 'abc' ), 'numeric', 'p1', 'invalid numeric value', false ),
-
-			//XXX: string length check is currently broken
-			//array( new StringValue( '01234567890123456789' ), 'numeric', 'p1', 'overly long numeric value', false ),
+			array( new StringValue( '01234567890123456789' ), 'numeric', 'p1', 'overly long numeric value', false ),
+			array( new UnknownValue( 'abc' ), 'alphabetic', 'p2', 'bad value type', false ),
+			array( new BadValue( 'string', 'abc', 'error' ), 'numeric', 'p1', 'bad value', false ),
 		);
 	}
 
