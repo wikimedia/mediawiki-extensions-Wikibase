@@ -68,7 +68,25 @@ class ItemView extends EntityView {
 		/**
 		 * @var ItemContent $itemContent
 		 */
-		$siteLinks = $itemContent->getItem()->getSimpleSiteLinks();
+		$siteLinks = $itemContent->getItem()->getSimpleSiteLinks(); // all site links
+
+		$groupSiteLinks = array(); // site links of the currently handled site group
+
+		foreach( $siteLinks as $siteLink ) {
+			// FIXME: depracted method usage
+			$site = \Sites::singleton()->getSite( $siteLink->getSiteId() );
+
+			if ( $site === null ) {
+				$site = new \Site();
+				$site->setGlobalId( $siteLink->getSiteId() );
+			}
+
+			$link = new SiteLink( $site, $siteLink->getPageName() );
+
+			if ( $link->getSite()->getGroup() === $group ) {
+				$groupSiteLinks[] = $link;
+			}
+		}
 
 		$html = $thead = $tbody = $tfoot = '';
 
@@ -79,7 +97,7 @@ class ItemView extends EntityView {
 			// TODO: support entity-id as prefix for element IDs.
 		);
 
-		if( !empty( $siteLinks ) ) {
+		if( !empty( $groupSiteLinks ) ) {
 			$thead = wfTemplate( 'wb-sitelinks-thead',
 				wfMessage( 'wikibase-sitelinks-sitename-columnheading' )->parse(),
 				wfMessage( 'wikibase-sitelinks-siteid-columnheading' )->parse(),
@@ -93,37 +111,23 @@ class ItemView extends EntityView {
 		$sites = Sites::singleton()->getSites();
 
 		// Sort the sitelinks according to their global id
-		$safetyCopy = $siteLinks; // keep a shallow copy;
+		$safetyCopy = $groupSiteLinks; // keep a shallow copy;
 		$sortOk = usort(
-			$siteLinks,
-			function( SimpleSiteLink $a, SimpleSiteLink $b ) {
-				return strcmp( $a->getSiteId(), $b->getSiteId() );
+			$groupSiteLinks,
+			function( SiteLink $a, SiteLink $b ) {
+				return strcmp( $a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
 			}
 		);
 
 		if ( !$sortOk ) {
-			$siteLinks = $safetyCopy;
+			$groupSiteLinks = $safetyCopy;
 		}
 
 		// Link to SpecialPage
 		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$editLink = $this->getEditUrl( $idFormatter->format( $itemContent->getEntity()->getId() ), null, 'SetSiteLink' );
 
-		foreach( $siteLinks as $siteLink ) {
-			// FIXME: depracted method usage
-			$site = \Sites::singleton()->getSite( $siteLink->getSiteId() );
-
-			if ( $site === null ) {
-				$site = new \Site();
-				$site->setGlobalId( $siteLink->getSiteId() );
-			}
-
-			$link = new SiteLink( $site, $siteLink->getPageName() );
-
-			if ( $link->getSite()->getGroup() !== $group ) {
-				continue;
-			}
-
+		foreach( $groupSiteLinks as $link ) {
 			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 
 			$site = $link->getSite();
@@ -160,6 +164,7 @@ class ItemView extends EntityView {
 		}
 
 		// built table footer with button to add site-links, consider list could be complete!
+		// TODO: This check needs to be site group specific.
 		$isFull = count( $siteLinks ) >= count( $sites );
 
 		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
