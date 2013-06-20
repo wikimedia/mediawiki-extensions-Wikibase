@@ -124,9 +124,19 @@ $messages['ast'] = array(
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
+	'valueview-desc' => 'Кампанэнты карыстальніцкага інтэрфэйсу для адлюстраваньня і рэдагаваньня зьвестак',
+	'valueview-expert-advancedadjustments' => 'пашыраныя налады',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Апрацоўка зьвестак тыпу «$1» пакуль не падтрымліваецца.', # Fuzzy
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Апрацоўка значэньняў тыпу «$1» яшчэ не падтрымліваецца.', # Fuzzy
 	'valueview-expert-emptyvalue-empty' => 'пуста',
+	'valueview-expert-globecoordinateinput-precision' => 'Дакладнасьць:',
+	'valueview-expert-timeinput-precision' => 'Дакладнасьць:',
+	'valueview-expert-timeinput-calendar' => 'Каляндар:',
+	'valueview-expert-timeinput-calendarhint' => '($1 каляндар)',
+	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; зьмяніць на $1',
+	'valueview-preview-label' => 'будзе адлюстроўвацца як:',
+	'valueview-preview-novalue' => 'слушнае значэньне не распазнанае',
+	'valueview-listrotator-auto' => 'аўтаматычна',
 );
 
 /** Bengali (বাংলা)
