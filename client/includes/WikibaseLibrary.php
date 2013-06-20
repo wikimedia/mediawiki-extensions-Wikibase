@@ -75,10 +75,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		}
 
 		$serializerFactory = new SerializerFactory();
-		$serializer = $serializerFactory->newSerializerForObject( $entityObject );
-
 		$opt = new EntitySerializationOptions( WikibaseClient::getDefaultInstance()->getEntityIdFormatter() );
-		$serializer->setOptions( $opt );
+		$serializer = $serializerFactory->newSerializerForObject( $entityObject, $opt );
 
 		try {
 			$entityArr = $serializer->getSerialized( $entityObject );
