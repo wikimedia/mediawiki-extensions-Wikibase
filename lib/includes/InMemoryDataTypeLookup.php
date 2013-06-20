@@ -70,7 +70,7 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 		$numericId = $propertyId->getNumericId();
 
 		if ( !array_key_exists( $numericId, $this->dataTypeIds ) ) {
-			throw new OutOfBoundsException( "The DataType for property '$numericId' is not set" );
+			throw new PropertyNotFoundException( $propertyId, "The DataType for property '$numericId' is not set" );
 		}
 	}
 
