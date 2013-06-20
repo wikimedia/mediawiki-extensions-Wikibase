@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1CRX28o",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-20T13:23:32Z",
+      "side": 1,
+      "message": "why is this here?",
+      "revId": "e5ff50f9e3ed9559c2ff98392caa9eb0668bcae8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1MQzd6k",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-20T13:23:32Z",
+      "side": 1,
+      "message": "???",
+      "revId": "e5ff50f9e3ed9559c2ff98392caa9eb0668bcae8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
