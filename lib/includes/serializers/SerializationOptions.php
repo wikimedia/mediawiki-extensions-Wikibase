@@ -130,6 +130,11 @@ class SerializationOptions {
  * @author Jeroen De Dauw < tobias.gritschacher@wikimedia.de >
  */
 class MultiLangSerializationOptions extends SerializationOptions {
+
+	const SORT_ASC = 'ascending';
+	const SORT_DESC = 'descending';
+	const SORT_NONE = 'none';
+
 	/**
 	 * The language codes of the languages for which internationalized data (ie descriptions) should be returned.
 	 * Or null for no restriction.
@@ -139,6 +144,24 @@ class MultiLangSerializationOptions extends SerializationOptions {
 	 * @var null|array of string
 	 */
 	protected $languageCodes = null;
+
+	/**
+	 * Names of fields to sort on.
+	 *
+	 * @since 0.2
+	 *
+	 * @var array
+	 */
+	protected $sortFields = array();
+
+	/**
+	 * The direction the result should be sorted in.
+	 *
+	 * @since 0.2
+	 *
+	 * @var string Element of the EntitySerializationOptions::SORT_ enum
+	 */
+	protected $sortDirection = self::SORT_NONE;
 
 	/**
 	 * Sets the language codes of the languages for which internationalized data (ie descriptions) should be returned.
@@ -160,6 +183,55 @@ class MultiLangSerializationOptions extends SerializationOptions {
 	 */
 	public function getLanguages() {
 		return $this->languageCodes;
+	}
+
+	/**
+	 * Sets the names of fields to sort on.
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $sortFields
+	 */
+	public function setSortFields( array $sortFields ) {
+		$this->sortFields = $sortFields;
+	}
+
+	/**
+	 * Returns the names of fields to sort on.
+	 *
+	 * @since 0.2
+	 *
+	 * @return array
+	 */
+	public function getSortFields() {
+		return $this->sortFields;
+	}
+
+	/**
+	 * Sets the direction the result should be sorted in.
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $sortDirection Element of the EntitySerializationOptions::SORT_ enum
+	 * @throws MWException
+	 */
+	public function setSortDirection( $sortDirection ) {
+		if ( !in_array( $sortDirection, array( self::SORT_ASC, self::SORT_DESC, self::SORT_NONE ) ) ) {
+			throw new MWException( 'Invalid sort direction provided' );
+		}
+
+		$this->sortDirection = $sortDirection;
+	}
+
+	/**
+	 * Returns the direction the result should be sorted in.
+	 *
+	 * @since 0.2
+	 *
+	 * @return string Element of the EntitySerializationOptions::SORT_ enum
+	 */
+	public function getSortDirection() {
+		return $this->sortDirection;
 	}
 }
 
@@ -191,10 +263,6 @@ class MultiLangSerializationOptions extends SerializationOptions {
  */
 class EntitySerializationOptions extends MultiLangSerializationOptions {
 
-	const SORT_ASC = 'ascending';
-	const SORT_DESC = 'descending';
-	const SORT_NONE = 'none';
-
 	/**
 	 * The optional properties of the entity that should be included in the serialization.
 	 *
@@ -211,24 +279,6 @@ class EntitySerializationOptions extends MultiLangSerializationOptions {
 		'datatype', // property specific
 		'sitelinks', // item specific
 	);
-
-	/**
-	 * Names of fields to sort on.
-	 *
-	 * @since 0.2
-	 *
-	 * @var array
-	 */
-	protected $sortFields = array();
-
-	/**
-	 * The direction the result should be sorted in.
-	 *
-	 * @since 0.2
-	 *
-	 * @var string Element of the EntitySerializationOptions::SORT_ enum
-	 */
-	protected $sortDirection = self::SORT_NONE;
 
 	/**
 	 * @since 0.4
@@ -288,55 +338,6 @@ class EntitySerializationOptions extends MultiLangSerializationOptions {
 	 */
 	public function removeProp ( $name ) {
 		$this->props = array_diff( $this->props, array( $name ) );
-	}
-
-	/**
-	 * Sets the names of fields to sort on.
-	 *
-	 * @since 0.2
-	 *
-	 * @param array $sortFields
-	 */
-	public function setSortFields( array $sortFields ) {
-		$this->sortFields = $sortFields;
-	}
-
-	/**
-	 * Returns the names of fields to sort on.
-	 *
-	 * @since 0.2
-	 *
-	 * @return array
-	 */
-	public function getSortFields() {
-		return $this->sortFields;
-	}
-
-	/**
-	 * Sets the direction the result should be sorted in.
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $sortDirection Element of the EntitySerializationOptions::SORT_ enum
-	 * @throws MWException
-	 */
-	public function setSortDirection( $sortDirection ) {
-		if ( !in_array( $sortDirection, array( self::SORT_ASC, self::SORT_DESC, self::SORT_NONE ) ) ) {
-			throw new MWException( 'Invalid sort direction provided' );
-		}
-
-		$this->sortDirection = $sortDirection;
-	}
-
-	/**
-	 * Returns the direction the result should be sorted in.
-	 *
-	 * @since 0.2
-	 *
-	 * @return string Element of the EntitySerializationOptions::SORT_ enum
-	 */
-	public function getSortDirection() {
-		return $this->sortDirection;
 	}
 
 	/**
