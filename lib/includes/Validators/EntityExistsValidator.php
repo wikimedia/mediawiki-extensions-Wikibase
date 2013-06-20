@@ -81,9 +81,7 @@ class EntityExistsValidator implements ValueValidator {
 			throw new \InvalidArgumentException( "Expected an EntityId object" );
 		}
 
-		//TODO: We don't actually need to load the entity to check here!
-		//      Add a hasEntity() method to EntityLookup. so we can check quickly
-		if ( $this->lookup->getEntity( $value ) === null ) {
+		if ( !$this->lookup->hasEntity( $value ) ) {
 			return Result::newError( array( // TODO: make it easier to report an error
 				Error::newError( "Entity not found: " . $value ), //TODO: i18n!
 			) );
