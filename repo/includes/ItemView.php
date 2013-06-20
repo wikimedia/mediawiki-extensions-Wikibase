@@ -68,7 +68,24 @@ class ItemView extends EntityView {
 		/**
 		 * @var ItemContent $itemContent
 		 */
-		$siteLinks = $itemContent->getItem()->getSimpleSiteLinks();
+		$allSiteLinks = $itemContent->getItem()->getSimpleSiteLinks();
+
+		$siteLinks = array(); // site links of the currently handled site group
+
+		foreach( $allSiteLinks as $siteLink ) {
+			// FIXME: depracted method usage
+			$site = \Sites::singleton()->getSite( $siteLink->getSiteId() );
+
+			if ( $site === null ) {
+				continue;
+			}
+
+			$link = new SiteLink( $site, $siteLink->getPageName() );
+
+			if ( $site->getGroup() === $group ) {
+				$siteLinks[] = $link;
+			}
+		}
 
 		$html = $thead = $tbody = $tfoot = '';
 
@@ -90,14 +107,14 @@ class ItemView extends EntityView {
 		$i = 0;
 
 		// Batch load the sites we need info about during the building of the sitelink list.
-		$sites = Sites::singleton()->getSites();
+		$sites = Sites::singleton()->getSiteGroup( $group );
 
 		// Sort the sitelinks according to their global id
 		$safetyCopy = $siteLinks; // keep a shallow copy;
 		$sortOk = usort(
 			$siteLinks,
-			function( SimpleSiteLink $a, SimpleSiteLink $b ) {
-				return strcmp( $a->getSiteId(), $b->getSiteId() );
+			function( SiteLink $a, SiteLink $b ) {
+				return strcmp( $a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
 			}
 		);
 
@@ -109,21 +126,7 @@ class ItemView extends EntityView {
 		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$editLink = $this->getEditUrl( $idFormatter->format( $itemContent->getEntity()->getId() ), null, 'SetSiteLink' );
 
-		foreach( $siteLinks as $siteLink ) {
-			// FIXME: depracted method usage
-			$site = \Sites::singleton()->getSite( $siteLink->getSiteId() );
-
-			if ( $site === null ) {
-				$site = new \Site();
-				$site->setGlobalId( $siteLink->getSiteId() );
-			}
-
-			$link = new SiteLink( $site, $siteLink->getPageName() );
-
-			if ( $link->getSite()->getGroup() !== $group ) {
-				continue;
-			}
-
+		foreach( $siteLinks as $link ) {
 			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 
 			$site = $link->getSite();
