@@ -23,7 +23,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( "Not an entry point.\n" );
 }
 
-if ( defined( 'WBL_VERSION' ) ) {
+if ( defined( 'WBC_VERSION' ) ) {
 	// Do not initialize more then once.
 	return;
 }
