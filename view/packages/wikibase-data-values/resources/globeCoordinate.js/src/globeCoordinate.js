@@ -181,8 +181,9 @@ this.globeCoordinate = ( function() {
 		 * @return {Object}
 		 */
 		toDegree: function( value, precision ) {
-			var value = Math.abs( value ),
-				result = {};
+			var result = {};
+
+			value = Math.abs( value );
 
 			result.degree = Math.floor( value + 0.00000001 );
 
@@ -206,7 +207,14 @@ this.globeCoordinate = ( function() {
 				} else {
 					result.second = Math.abs( Math.round( result.second * 1000 ) / 1000 );
 				}
+			}
 
+			if( precision > 1 ) {
+				var index = this.getPrecisionIndex( precision );
+				if( index !== -1 ) {
+					var level = this.settings.precisions[index].level;
+					result.degree = Math.round( result.degree / level ) * level;
+				}
 			}
 
 			return result;

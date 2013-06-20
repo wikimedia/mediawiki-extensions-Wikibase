@@ -9,124 +9,147 @@
 ( function( QUnit, $, globeCoordinate ) {
 	'use strict';
 
-	var values = [0, 0.06, 0.4, 0.5, 1, 10];
+	var values = [0, 0.06, 0.4, 0.5, 1, 10, 17];
 
 	var precisions = {
 		0: {
 			tech: '±0°',
 			earth: '1 mm',
-			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
+			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
 				{ degree: 0, minute: 3, second: 36 },
 				{ degree: 0, minute: 24, second: 0 },
 				{ degree: 0, minute: 30, second: 0 },
 				{ degree: 1, minute: 0, second: 0 },
-				{ degree: 10, minute: 0, second: 0 }
+				{ degree: 10, minute: 0, second: 0 },
+				{ degree: 17, minute: 0, second: 0 }
 			]
 		},
 		1: {
 			tech: 1,
 			earth: '100 km',
-			toDecimal: [0, 0, 0, 1, 1, 10],
+			toDecimal: [0, 0, 0, 1, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 1, minute: undefined, second: undefined },
-				{ degree: 10, minute: undefined, second: undefined }
+				{ degree: 10, minute: undefined, second: undefined },
+				{ degree: 17, minute: undefined, second: undefined }
 			]
 		},
 		2: {
 			tech: '±2°',
 			earth: '200 km',
-			toDecimal: [0, 0, 0, 1, 1, 10],
+			toDecimal: [0, 0, 0, 1, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 1, minute: undefined, second: undefined },
-				{ degree: 10, minute: undefined, second: undefined }
+				{ degree: 10, minute: undefined, second: undefined },
+				{ degree: 17, minute: undefined, second: undefined }
 			]
 		},
 		1.00000001: {
 			tech: 1,
 			earth: '100 km',
-			toDecimal: [0, 0, 0, 1, 1, 10],
+			toDecimal: [0, 0, 0, 1, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 1, minute: undefined, second: undefined },
-				{ degree: 10, minute: undefined, second: undefined }
+				{ degree: 10, minute: undefined, second: undefined },
+				{ degree: 17, minute: undefined, second: undefined }
 			]
 		},
 		0.016666666666666666: {
 			tech: 1 / 60,
 			earth: '2 km',
-			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
+			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: 0, second: undefined },
 				{ degree: 0, minute: 3, second: undefined },
 				{ degree: 0, minute: 24, second: undefined },
 				{ degree: 0, minute: 30, second: undefined },
 				{ degree: 1, minute: 0, second: undefined },
-				{ degree: 10, minute: 0, second: undefined }
+				{ degree: 10, minute: 0, second: undefined },
+				{ degree: 17, minute: 0, second: undefined }
 			]
 		},
 		2.7777777777777776e-7: {
 			tech: 1 / 3600000,
 			earth: '3 cm',
-			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
+			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
 				{ degree: 0, minute: 3, second: 36 },
 				{ degree: 0, minute: 24, second: 0 },
 				{ degree: 0, minute: 30, second: 0 },
 				{ degree: 1, minute: 0, second: 0 },
-				{ degree: 10, minute: 0, second: 0 }
+				{ degree: 10, minute: 0, second: 0 },
+				{ degree: 17, minute: 0, second: 0 }
 			]
 		},
 		1.0000000001e-10: {
 			tech: '±1.0000000001e-10°',
 			earth: '1 mm',
-			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10],
+			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
 				{ degree: 0, minute: 3, second: 36 },
 				{ degree: 0, minute: 24, second: 0 },
 				{ degree: 0, minute: 30, second: 0 },
 				{ degree: 1, minute: 0, second: 0 },
-				{ degree: 10, minute: 0, second: 0 }
+				{ degree: 10, minute: 0, second: 0 },
+				{ degree: 17, minute: 0, second: 0 }
 			]
 		},
 		1.0000001: {
 			tech: '±1.0000001°',
 			earth: '100 km',
-			toDecimal: [0, 0, 0, 1, 1, 10],
+			toDecimal: [0, 0, 0, 1, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 1, minute: undefined, second: undefined },
-				{ degree: 10, minute: undefined, second: undefined }
+				{ degree: 10, minute: undefined, second: undefined },
+				{ degree: 17, minute: undefined, second: undefined }
 			]
 		},
 		1.1: {
 			tech: '±1.1°',
 			earth: '100 km',
-			toDecimal: [0, 0, 0, 1, 1, 10],
+			toDecimal: [0, 0, 0, 1, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 1, minute: undefined, second: undefined },
-				{ degree: 10, minute: undefined, second: undefined }
+				{ degree: 10, minute: undefined, second: undefined },
+				{ degree: 17, minute: undefined, second: undefined }
+			]
+		},
+		10: {
+			tech: '±10°',
+			earth: '1100 km',
+			toDecimal: [0, 0, 0, 0, 0, 10, 20],
+			toDegree: [
+				{ degree: 0, minute: undefined, second: undefined },
+				{ degree: 0, minute: undefined, second: undefined },
+				{ degree: 0, minute: undefined, second: undefined },
+				{ degree: 0, minute: undefined, second: undefined },
+				{ degree: 0, minute: undefined, second: undefined },
+				{ degree: 10, minute: undefined, second: undefined },
+				{ degree: 20, minute: undefined, second: undefined }
 			]
 		}
 	};
