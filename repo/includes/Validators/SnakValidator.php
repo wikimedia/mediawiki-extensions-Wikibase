@@ -28,11 +28,15 @@ namespace Wikibase\Validators;
 
 
 use DataTypes\DataTypeFactory;
+use DataValues\BadValue;
 use DataValues\DataValue;
+use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\Claim;
 use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\PropertyNotFoundException;
+use Wikibase\PropertyBadValueSnak;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
@@ -162,27 +166,22 @@ class SnakValidator implements ValueValidator {
 		//      with a canValidate() method, to determine which validator to use
 		//      for a given snak.
 
-		if ( $snak instanceof SnakObject ) {
+		$propertyId = $snak->getPropertyId();
 
-			//NOTE: We only really need the DataType in case of PropertyValueSnak,
-			//      but getDataTypeIdForProperty() is a quick way to check if the property exists.
-
-			//XXX: getDataTypeIdForProperty may throw a PropertyNotFoundException.
-			//     Shall we catch that and report it using the Result object?
-
-			$propertyId = $snak->getPropertyId();
+		try {
 			$typeId = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
 
 			if ( $snak instanceof PropertyValueSnak ) {
 				$dataValue = $snak->getDataValue();
 				$result = $this->validateDataValue( $dataValue, $typeId );
-
 				//TODO: include property ID in any error report
 			} else {
 				$result = Result::newSuccess();
 			}
-		} else {
-			$result = Result::newSuccess();
+		} catch ( PropertyNotFoundException $ex ) {
+			$result = Result::newError( array(
+				Error::newError( "Property $propertyId not found!", null, 'no-such-property', array( $propertyId ) )
+			) );
 		}
 
 		return $result;
@@ -199,7 +198,18 @@ class SnakValidator implements ValueValidator {
 	public function validateDataValue( DataValue $dataValue, $dataTypeId ) {
 		$dataType = $this->dataTypeFactory->getType( $dataTypeId );
 
-		$result = Result::newSuccess();
+		if ( $dataValue instanceof BadValue ) {
+			$result = Result::newError( array(
+				Error::newError( "Bad snak value: " . $dataValue->getErrror(), null, 'bad-value', array( $dataValue->getErrror() ) )
+			) );
+		} elseif ( $dataType->getDataValueType() != $dataValue->getType() ) {
+			$result = Result::newError( array(
+					Error::newError( "Bad value type: " . $dataValue->getType() . ", expected " . $dataType->getDataValueType(),
+						null, 'bad-value-type', array( $dataValue->getType(), $dataType->getDataValueType() ) )
+			) );
+		} else {
+			$result = Result::newSuccess();
+		}
 
 		//XXX: Perhaps DataType should have a validate() method (even implement ValueValidator)
 		//     At least, DataType should expose only one validator, which would be a CompositeValidator
