@@ -31,6 +31,7 @@ use Wikibase\Utils;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class EditEntity extends ModifyEntity {
 
@@ -171,9 +172,6 @@ class EditEntity extends ModifyEntity {
 		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
-
-		// TODO: This is a temporary fix that should be handled properly with a
-		// serializer class that is specific for the given entity
 		if ( $entity->getType() === Item::ENTITY_TYPE ) {
 			$this->addSiteLinksToResult( $entity->getSimpleSiteLinks(), 'entity' );
 		}
