@@ -43,7 +43,7 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 
 		$this->mDescription = 'Rebuild the entites_per_page table';
 
-		$this->addOption( 'only-missing', "Update only missing keys (per default, entire table is rebuilt)" );
+		$this->addOption( 'rebuild-all', "Rebuild the entire table (per default, only missing entries are rebuild)" );
 		$this->addOption( 'batch-size', "Number of rows to update per batch (100 by default)", false, true );
 	}
 
@@ -59,7 +59,7 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 		}
 
 		$batchSize = intval( $this->getOption( 'batch-size', 100 ) );
-		$onlyMissing = $this->getOption( 'only-missing', false );
+		$rebuildAll = $this->getOption( 'rebuild-all', false );
 
 		$reporter = new \ObservableMessageReporter();
 		$reporter->registerReporterCallback(

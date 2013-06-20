@@ -67,11 +67,11 @@ class EntityPerPageBuilder {
 	protected $batchSize = 100;
 
 	/**
-	 * Rebuild the entire table or only missing pages
+	 * Rebuild the entire table
 	 *
 	 * @var boolean
 	 */
-	protected $onlyMissing = false;
+	protected $rebuildAll = false;
 
 	/**
 	 * @param EntityPerPage $entityPerPageTable
@@ -94,10 +94,10 @@ class EntityPerPageBuilder {
 	/**
 	 * @since 0.4
 	 *
-	 * @param boolean $onlyMissing
+	 * @param boolean $rebuildAll
 	 */
-	public function setOnlyMissing( $onlyMissing ) {
-		$this->onlyMissing = $onlyMissing;
+	public function setRebuildAll( $rebuildAll ) {
+		$this->rebuildAll = $rebuildAll;
 	}
 
 	/**
@@ -113,10 +113,6 @@ class EntityPerPageBuilder {
 	 * @since 0.4
 	 */
 	public function rebuild() {
-		if ( $this->onlyMissing === false ) {
-			$this->entityPerPageTable->clear();
-		}
-
 		$dbw = wfGetDB( DB_MASTER );
 
 		$lastPageSeen = 0;
@@ -130,11 +126,7 @@ class EntityPerPageBuilder {
 			$pages = $dbw->select(
 				array( 'page', 'wb_entity_per_page' ),
 				array( 'page_title', 'page_id' ),
-				array(
-					'page_namespace' => NamespaceUtils::getEntityNamespaces(),
-					'page_id > ' . $lastPageSeen,
-					'epp_page_id IS NULL'
-				),
+				$this->getQueryConds( $lastPageSeen ),
 				__METHOD__,
 				array( 'LIMIT' => $this->batchSize, 'ORDER BY' => 'page_id' ),
 				array( 'wb_entity_per_page' => array( 'LEFT JOIN', 'page_id = epp_page_id' ) )
@@ -152,6 +144,28 @@ class EntityPerPageBuilder {
 		$this->report( "Rebuild done." );
 
 		return true;
+	}
+
+	/**
+	 * Construct query conditions
+	 *
+	 * @since 0.4
+	 *
+	 * @param int $lastPageSeen
+	 *
+	 * @return array
+	 */
+	protected function getQueryConds( $lastPageSeen ) {
+		$conds = array(
+			'page_namespace' => NamespaceUtils::getEntityNamespaces(),
+			'page_id > ' . $lastPageSeen
+		);
+
+		if ( $this->rebuildAll === false ) {
+			$conds[] = 'epp_page_id IS NULL';
+		}
+
+		return $conds;
 	}
 
 	/**
@@ -175,6 +189,10 @@ class EntityPerPageBuilder {
 			}
 
 			$entityContent = $this->entityContentFactory->getFromId( $entityId, \Revision::RAW );
+
+			if ( $this->rebuildAll === true ) {
+				$this->entityPerPageTable->deleteEntity( $entityId );
+			}
 
 			if ( $entityContent !== null ) {
 				$this->entityPerPageTable->addEntityContent( $entityContent );
