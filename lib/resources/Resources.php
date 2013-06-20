@@ -686,6 +686,15 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.wikibase.claimgrouplabelscroll' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.js'
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+			),
+		),
+
 		// jQuery.valueview views for Wikibase specific DataValues/DataTypes
 		'jquery.valueview.experts.wikibase' => $moduleTemplate + array(
 			'scripts' => array(
