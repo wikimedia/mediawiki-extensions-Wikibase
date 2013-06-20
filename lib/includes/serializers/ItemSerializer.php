@@ -2,10 +2,8 @@
 
 namespace Wikibase\Lib\Serializers;
 use MWException;
-use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\Item;
-use Wikibase\SiteLink;
 
 /**
  * Serializer for items.
@@ -33,6 +31,7 @@ use Wikibase\SiteLink;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class ItemSerializer extends EntitySerializer {
 
@@ -54,94 +53,11 @@ class ItemSerializer extends EntitySerializer {
 		$serialization = array();
 
 		if ( in_array( 'sitelinks', $this->options->getProps() ) ) {
-			$serialization['sitelinks'] = $this->getSiteLinksSerialization( $item );
+			$siteLinkSerializer = new SiteLinkSerializer( $this->options );
+			$siteLinks = $item->getSimpleSiteLinks();
+			$serialization['sitelinks'] = $siteLinkSerializer->getSerialized( $siteLinks );
 		}
 
 		return $serialization;
 	}
-
-	/**
-	 * @since 0.2
-	 *
-	 * @param Item $item
-	 *
-	 * @return array
-	 */
-	protected function getSiteLinksSerialization( Item $item ) {
-		$serialization = array();
-
-		$includeUrls = in_array( 'sitelinks/urls', $this->options->getProps() );
-
-		foreach ( $this->getSortedSiteLinks( $item ) as $link ) {
-			$response = array(
-				'site' => $link->getSiteId(),
-				'title' => $link->getPageName(),
-			);
-
-			if ( $includeUrls ) {
-				// FIXME: deprecated method usage
-				$site = \Sites::singleton()->getSite( $link->getSiteId() );
-
-				if ( $site !== null ) {
-					$siteLink = new SiteLink( $site, $link->getPageName() );
-					$response['url'] = $siteLink->getUrl();
-				}
-			}
-
-			if ( $this->options->shouldUseKeys() ) {
-				$serialization[$link->getSiteId()] = $response;
-			}
-			else {
-				$serialization[] = $response;
-			}
-		}
-
-		if ( !$this->options->shouldUseKeys() ) {
-			$this->setIndexedTagName( $serialization, 'sitelink' );
-		}
-
-		return $serialization;
-	}
-
-	/**
-	 * Returns the sitelinks for the provided item sorted based
-	 * on the set serialization options.
-	 *
-	 * @since 0.2
-	 *
-	 * @param Item $item
-	 * @return SimpleSiteLink[]
-	 */
-	protected function getSortedSiteLinks( Item $item ) {
-		$siteLinks = $item->getSimpleSiteLinks();
-
-		$sortDirection = $this->options->getSortDirection();
-
-		if ( $sortDirection !== EntitySerializationOptions::SORT_NONE ) {
-			$sortOk = false;
-
-			if ( $sortDirection === EntitySerializationOptions::SORT_ASC ) {
-				$sortOk = usort(
-					$siteLinks,
-					function( SimpleSiteLink $a, SimpleSiteLink $b ) {
-						return strcmp( $a->getSiteId(), $b->getSiteId() );
-					}
-				);
-			} elseif ( $sortDirection === EntitySerializationOptions::SORT_DESC ) {
-				$sortOk = usort(
-					$siteLinks,
-					function( SimpleSiteLink $a, SimpleSiteLink $b ) {
-						return strcmp( $b->getSiteId(), $a->getSiteId() );
-					}
-				);
-			}
-
-			if ( !$sortOk ) {
-				$siteLinks = $item->getSimpleSiteLinks();
-			}
-		}
-
-		return $siteLinks;
-	}
-
 }
