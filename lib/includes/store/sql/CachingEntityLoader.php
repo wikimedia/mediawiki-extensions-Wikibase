@@ -95,7 +95,7 @@ class CachingEntityLoader implements EntityLookup {
 	}
 
 	/**
-	 * @see   EntityLookup::getEntities
+	 * @see EntityLookup::getEntities
 	 *
 	 * @since 0.4
 	 *
