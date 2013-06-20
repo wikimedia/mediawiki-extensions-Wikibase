@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "D1AQuH0E",
+        "filename": "lib/includes/store/EntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-20T13:30:55Z",
+      "side": 1,
+      "message": "Because EntityLookup has it, and maybe it would be nice to have it for completeness/consistency. But it\u0027s annoying to implement and currently not needed, so... :)",
+      "parentUuid": "D1CRX28o",
+      "revId": "e5ff50f9e3ed9559c2ff98392caa9eb0668bcae8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1MQzd6k",
         "filename": "repo/includes/api/SearchEntities.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-20T13:23:32Z",
       "side": 1,
       "message": "???",
+      "revId": "e5ff50f9e3ed9559c2ff98392caa9eb0668bcae8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1GQjo1o",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-20T13:30:55Z",
+      "side": 1,
+      "message": "oops, must have accidentally put that there, focus in wrong window :P",
+      "parentUuid": "D1MQzd6k",
       "revId": "e5ff50f9e3ed9559c2ff98392caa9eb0668bcae8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
