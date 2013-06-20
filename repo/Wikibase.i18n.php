@@ -1745,6 +1745,13 @@ $messages['be-tarask'] = array(
 	'wikibase-setaliases-label' => 'Псэўданімы:',
 	'wikibase-setaliases-submit' => 'Вызначыць псэўданімы:',
 	'wikibase-setaliases-warning-remove' => 'Ці сапраўды хочаце выдаліць усе псэўданімы [[$1]]?',
+	'wikibase-setsitelink-site' => 'Ідэнтыфікатар сайта:',
+	'wikibase-setsitelink-label' => 'Спасылка на сайт:',
+	'wikibase-setsitelink-submit' => 'Вызначыць спасылку на сайт',
+	'wikibase-setsitelink-warning-remove' => 'Ці сапраўды хочаце выдаліць спасылку на сайт з [[$1]]?',
+	'wikibase-setsitelink-invalid-site' => 'Ідэнтыфікатар сайта «$1» невядомы. Ужывайце, калі ласка, вядомыя ідэнтыфікатары, як то «enwiki».',
+	'wikibase-setsitelink-add-failed' => 'Не ўдалося захаваць спасылку на сайт.',
+	'wikibase-setsitelink-remove-failed' => 'Не ўдалося выдаліць спасылку на сайт.',
 	'wikibase-setentity-id' => 'Ідэнтыфікатар:',
 	'wikibase-setentity-language' => 'Мова:',
 	'wikibase-setentity-invalid-langcode' => 'Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце только вядомыя сыстэме моўныя коды, як то «en».',
@@ -1796,6 +1803,12 @@ $messages['be-tarask'] = array(
 	'wikibase-item-summary-wblinktitles-create' => 'Аб’ект створаны для злучэньня старонак [$2↔$3]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Дададзеная моўная спасылка для злучэньня старонак [$2↔$3]',
 	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Створанае сьцверджаньне|Створаныя сьцверджаньні}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Створанае сьцверджаньне|Створаныя сьцверджаньні}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Створанае сьцверджаньне|Створаныя сьцверджаньні}}',
+	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|Створанае сьцверджаньне|Створаныя сьцверджаньні}}',
+	'wikibase-item-summary-wbsetclaimvalue' => '{{PLURAL:$1|Вызначанае значэньне|Вызначаныя значэньні}} сьцьверджаньня',
+	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Выдаленае сьцьверджаньне|Выдаленыя сьцьверджаньні}}',
+	'wikibase-item-summary-special-create-item' => 'Створаны аб’ект [$2] са {{PLURAL:$1|значэньнем|значэньнямі}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Створана сьцьверджаньне',
 	'wikibase-property-summary-wbeditentity-create' => 'Створаная новая ўласьцівасьць',
 	'wikibase-property-summary-wbeditentity-update' => 'Абноўленая ўласьцівасьць',
@@ -1807,7 +1820,7 @@ $messages['be-tarask'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Дададзены сынонім|Дададзеныя сынонімы}} для [$2]',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Аб’ект',
 	'wikibase-listdatatypes-commonsmedia-head' => 'мэдыяфайл зь Вікісховішча',
-	'wikibase-listdatatypes-geo-coordinate-head' => 'Геаграфічныя каардынаты',
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Геаграфічныя каардынаты', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Колькасьць',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Аднамоўны тэкст',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Шматмоўны тэкст',
@@ -2009,11 +2022,14 @@ $messages['bn'] = array(
 	'wikibase-setdescription-submit' => 'বিবরণ নির্ধারণ করুন',
 	'wikibase-setdescription-warning-remove' => 'আপনি কি সত্যিই [[$1]]-এর বিবরণ সরাতে চান?',
 	'special-setaliases' => 'উপনাম ধার্য করুন',
+	'special-setsitelink' => 'একটি সাইট লিঙ্ক সেট করুন',
 	'wikibase-setsitelink-site' => 'সাইট আইডি:',
 	'wikibase-setsitelink-label' => 'সাইট লিংক:',
 	'wikibase-setsitelink-submit' => 'সাইট লিংক নির্ধারণ করুন',
 	'wikibase-setsitelink-warning-remove' => 'আপনি কি সত্যিই [[$1]]-এর সাইট লিংক সরাতে চান?',
 	'wikibase-setsitelink-invalid-site' => 'সাইট আইডি "$1" আজানা। একটি বিদ্যমান সাইট আইডি ব্যবহার করুন, যেমন "bnwiki"।',
+	'wikibase-setsitelink-add-failed' => 'সাইট লিঙ্ক সংরক্ষণ করা যায়নি।',
+	'wikibase-setsitelink-remove-failed' => 'সাইট লিঙ্ক মুছে ফেলা যাবে না।',
 	'wikibase-setentity-id' => 'আইডি:',
 	'wikibase-setentity-language' => 'ভাষা:',
 	'wikibase-setentity-invalid-langcode' => 'ভাষা শনাক্তকারী "$1" অজানা। সিস্টেমের জন্য পরিচিত এমন একটি ভাষা শনাক্তকারী ব্যবহার করুন, যেমন "bn"।',
@@ -5228,6 +5244,7 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
  * @author Alno
  * @author Boniface
  * @author Brunoperel
+ * @author Byrial
  * @author Crochet.david
  * @author DavidL
  * @author Dereckson
@@ -5262,7 +5279,7 @@ $messages['fr'] = array(
 	'wikibase-label-empty' => 'Pas de libellé défini',
 	'wikibase-label-edit-placeholder' => 'saisir un libellé',
 	'wikibase-description-empty' => 'Aucune description pour le moment',
-	'wikibase-deletedentity' => '$1 supprimé',
+	'wikibase-deletedentity' => '$1 supprimée',
 	'wikibase-description-edit-placeholder' => 'saisir une description',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'article',
