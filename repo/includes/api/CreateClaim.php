@@ -4,23 +4,23 @@ namespace Wikibase\Api;
 
 use ApiBase, MWException;
 
+use ApiMain;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
-use UsageException;
 use ValueParsers\ParseException;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
+use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SnakFactory;
 use Wikibase\LibRegistry;
 use Wikibase\Claim;
 use Wikibase\Autocomment;
-use Wikibase\Settings;
 use Wikibase\Summary;
 use Wikibase\Snak;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * API module for creating claims.
@@ -49,9 +49,31 @@ use Wikibase\Snak;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class CreateClaim extends ModifyClaim {
+class CreateClaim extends ApiWikibase {
 
-	// TODO: rights
+
+	/**
+	 * @var SnakValidationHelper
+	 */
+	protected $snakValidation;
+
+	/**
+	 * see ApiBase::__construct()
+	 *
+	 * @param ApiMain $mainModule
+	 * @param string  $moduleName
+	 * @param string  $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$this->snakValidation = new SnakValidationHelper(
+			$this,
+			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
+			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
+			new ValidatorErrorLocalizer()
+		);
+	}
 
 	/**
 	 * @see \ApiBase::execute
@@ -61,7 +83,8 @@ class CreateClaim extends ModifyClaim {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$this->checkParameterRequirements();
+		$params = $this->extractRequestParams();
+		$this->validateParameters( $params );
 
 		$entityContent = $this->getEntityContent();
 
@@ -70,27 +93,26 @@ class CreateClaim extends ModifyClaim {
 		// entity type or providing an invalid DataValue.
 		try {
 			$snak = $this->getSnakInstance();
+
+			$this->snakValidation->validateSnak( $snak );
+
+			$claim = $this->addClaim( $entityContent->getEntity(), $snak );
+			$summary = $this->createSummary( $snak, 'create' );
+
+			$this->saveChanges( $entityContent, $summary );
+
+			$this->outputClaim( $claim );
+
 		}
 		catch ( IllegalValueException $ex ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $ex->getMessage(), 'claim-invalid-snak' );
+			$this->dieUsage( 'Invalid snak: IllegalValueException', 'invalid-snak' );
 		}
-		catch ( InvalidArgumentException $ex ) {
-			// shouldn't happen, but might.
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $ex->getMessage(), 'claim-invalid-snak' );
+		catch ( PropertyNotFoundException $ex ) {
+			$this->dieUsage( 'Invalid snak: PropertyNotFoundException', 'invalid-snak' );
 		}
 		catch ( ParseException $parseException ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $parseException->getMessage(), 'claim-invalid-guid' );
+			$this->dieUsage( 'Invalid guid: ParseException', 'invalid-guid' );
 		}
-
-		$claim = $this->addClaim( $entityContent->getEntity(), $snak );
-		$summary = $this->createSummary( $snak, 'create' );
-
-		$this->saveChanges( $entityContent, $summary );
-
-		$this->outputClaim( $claim );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -135,25 +157,54 @@ class CreateClaim extends ModifyClaim {
 	}
 
 	/**
+	 * Create a summary
+	 *
+	 * @since 0.4
+	 *
+	 * @param Snak $snak
+	 * @param string $action
+	 *
+	 * @return Summary
+	 * @throws \MWException
+	 */
+	protected function createSummary( Snak $snak, $action ) {
+		if ( !is_string( $action ) ) {
+			throw new \MWException( 'action is invalid or unknown type.' );
+		}
+
+		$summary = new Summary( $this->getModuleName() );
+		$summary->setAction( $action );
+		$summary->addAutoSummaryArgs( $snak->getPropertyId(), $snak->getDataValue() );
+
+		return $summary;
+	}
+
+	/**
+	 * @see ApiBase::isWriteMode
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
 	 * Checks if the required parameters are set and the ones that make no sense given the
 	 * snaktype value are not set.
 	 *
 	 * @since 0.2
 	 */
-	protected function checkParameterRequirements() {
-		$params = $this->extractRequestParams();
-
+	protected function validateParameters( array $params ) {
 		if ( $params['snaktype'] == 'value' XOR isset( $params['value'] ) ) {
 			if ( $params['snaktype'] == 'value' ) {
-				$this->dieUsage( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'claim-value-missing' );
+				$this->dieUsage( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'param-missing' );
 			}
 			else {
-				$this->dieUsage( 'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak', 'claim-value-set' );
+				$this->dieUsage( 'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak', 'param-illegal' );
 			}
 		}
 
 		if ( !isset( $params['property'] ) ) {
-			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a Snak', 'claim-property-id-missing' );
+			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a Snak', 'param-missing' );
 		}
 	}
 
@@ -172,7 +223,7 @@ class CreateClaim extends ModifyClaim {
 		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 		if ( $entityContent === null ) {
-			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
+			$this->dieUsage( 'Entity not found, snak not created', 'no-such-entity' );
 		}
 
 		return $entityContent;
@@ -198,7 +249,7 @@ class CreateClaim extends ModifyClaim {
 		$entityId = $entityIdParser->parse( $params['property'] );
 
 		if ( $entityId->getEntityType() !== Property::ENTITY_TYPE ) {
-			$this->dieUsage( "Property expected, got " . $entityId->getEntityType(), 'claim-invalid-snak' );
+			$this->dieUsage( 'Property expected, got ' . $entityId->getEntityType(), 'invalid-snak' );
 		}
 
 		return $factory->newSnak(
@@ -224,6 +275,19 @@ class CreateClaim extends ModifyClaim {
 			'claim',
 			$serializer->getSerialized( $claim )
 		);
+	}
+
+	/**
+	 * @see \ApiBase::getPossibleErrors()
+	 */
+	public function getPossibleErrors() {
+		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'invalid-snak', 'info' => $this->msg( 'wikibase-api-invalid-snak' )->text() ),
+			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
+			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
+			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
+			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+		) );
 	}
 
 	/**
@@ -255,7 +319,7 @@ class CreateClaim extends ModifyClaim {
 			'baserevid' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
-			'bot' => null,
+			'bot' => false,
 		);
 	}
 
@@ -305,8 +369,7 @@ class CreateClaim extends ModifyClaim {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbcreateclaim&entity=q42&property=p9001&snaktype=novalue&token=foobar&baserevid=7201010',
-			'api.php?action=wbcreateclaim&entity=q42&property=p9001&snaktype=value&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010',
-			// 'ex' => 'desc'
+			'api.php?action=wbcreateclaim&entity=q42&property=p9001&snaktype=value&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010' => 'Creates a claim for q42 of p101 with a value of q1',
 		);
 	}
 }

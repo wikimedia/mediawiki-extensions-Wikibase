@@ -60,6 +60,9 @@ $messages['en'] = array(
 	'wikibase-validator-bad-entity-id' => 'Malformed ID: $1',
 	'wikibase-validator-bad-entity-type' => 'Unexpected entity type $1',
 	'wikibase-validator-no-such-entity' => '$1 not found',
+	'wikibase-validator-no-such-property' => 'Property $1 not found',
+	'wikibase-validator-bad-value' => 'Illegal value: $1',
+	'wikibase-validator-bad-value-type' => 'Bad value type $1, expected $2',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Commons media file',
 	'version-wikibase' => 'Wikibase',
@@ -176,6 +179,23 @@ Parameters:
 
 Parameters:
 * $1 is the entity id',
+	'wikibase-validator-no-such-property' => 'Input validation error shown when the property used for a statement could not be found.
+This kind of error is unlekely to occur during normal operation, since the user interface should prevent illegal values from being entered.
+
+Parameters:
+* $1 is the property id',
+	'wikibase-validator-bad-value' => 'Input validation error shown when the value is syntactically or structurally invalid.
+This kind of error is unlekely to occur during normal operation, since the user interface should prevent illegal values from being entered.
+
+Parameters:
+* $1 is the technical error message describing the problem',
+	'wikibase-validator-bad-value-type' => 'Input validation error shown when the value has the wrong type for the property it is applied to.
+This kind of error is unlekely to occur during normal operation, since the user interface should prevent illegal values from being entered.
+
+Parameters:
+* $1 is the actual value type
+* $2 is the expected value type',
+
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
