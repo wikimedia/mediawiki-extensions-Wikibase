@@ -60,7 +60,7 @@ if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 			remove_directory( __DIR__ . '/client' );
 
 			// This test breaks when it is run in a different order
-			unlink( __DIR__ . '/repo/tests/phpunit/includes/api/GetEntitiesTest.php' );
+			//unlink( __DIR__ . '/repo/tests/phpunit/includes/api/GetEntitiesTest.php' );
 
 			require_once __DIR__ . '/repo/Wikibase.php';
 			require_once __DIR__ . '/repo/ExampleSettings.php';
