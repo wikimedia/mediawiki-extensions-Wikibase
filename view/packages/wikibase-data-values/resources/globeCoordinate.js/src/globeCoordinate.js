@@ -162,15 +162,9 @@ this.globeCoordinate = ( function() {
 		 */
 		decimalText: function( latitude, longitude, precision ) {
 			return ''
-				+ Math.abs( this.toDecimal( latitude, precision ) )
-				+ this.settings.degree
-				+ ' '
-				+ ( ( latitude < 0 ) ? this.settings.south : this.settings.north )
+				+ this.toDecimal( latitude, precision )
 				+ this.settings.latLongCombinator
-				+ Math.abs( this.toDecimal( longitude, precision ) )
-				+ this.settings.degree
-				+ ' '
-				+ ( ( longitude < 0 ) ? this.settings.west : this.settings.east );
+				+ this.toDecimal( longitude, precision );
 		},
 
 		/**

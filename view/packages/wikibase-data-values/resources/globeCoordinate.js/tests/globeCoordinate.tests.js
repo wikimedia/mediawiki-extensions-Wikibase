@@ -250,20 +250,26 @@
 
 		assert.equal(
 			globeCoordinate.decimalText( 0, 0, 0 ),
-			'0° N, 0° E',
-			'Verified output: 0° N, 0° E'
+			'0, 0',
+			'Verified output: 0, 0'
 		);
 
 		assert.equal(
 			globeCoordinate.decimalText( 1, 1, 1 ),
-			'1° N, 1° E',
-			'Verified output: 1° N, 1° E'
+			'1, 1',
+			'Verified output: 1, 1'
 		);
 
 		assert.equal(
 			globeCoordinate.decimalText( -10, -1.5, 0.1 ),
-			'10° S, 1.5° W',
-			'Verified output: 10° S, 1.5° W'
+			'-10, -1.5',
+			'Verified output: -10, -1.5'
+		);
+
+		assert.equal(
+			globeCoordinate.decimalText( 24, -1.5, 10 ),
+			'20, 0',
+			'Verified output: 20, 0'
 		);
 
 		// degreeText():
@@ -284,6 +290,12 @@
 			globeCoordinate.degreeText( -10, -2.5, 0.1 ),
 			'10°0\'S, 2°30\'W',
 			'Verified output: 10°0\'S, 2°30\'W'
+		);
+
+		assert.equal(
+			globeCoordinate.degreeText( 24, -1.5, 10 ),
+			'20°N, 0°W',
+			'Verified output: 20°N, 0°W'
 		);
 
 	} );
