@@ -106,6 +106,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\Serializers\LabelSerializer' => 'includes/serializers/LabelSerializer.php',
 		'Wikibase\Lib\Serializers\DescriptionSerializer' => 'includes/serializers/DescriptionSerializer.php',
 		'Wikibase\Lib\Serializers\AliasSerializer' => 'includes/serializers/AliasSerializer.php',
+		'Wikibase\Lib\Serializers\SiteLinkSerializer' => 'includes/serializers/SiteLinkSerializer.php',
 		'Wikibase\Lib\Serializers\PropertySerializer' => 'includes/serializers/PropertySerializer.php',
 		'Wikibase\Lib\Serializers\ReferenceSerializer' => 'includes/serializers/ReferenceSerializer.php',
 		'Wikibase\Lib\Serializers\SerializationOptions' => 'includes/serializers/SerializationOptions.php',
