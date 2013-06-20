@@ -144,12 +144,13 @@
 				} );
 			} );
 
-			// BUILD TOOLBARS
-			$( '.wb-entity' ).toolbarcontroller( {
+			$( '.wb-entity' )
+			.toolbarcontroller( { // BUILD TOOLBARS
 				addtoolbar: ['claimlistview', 'claimsection', 'claim-qualifiers-snak', 'references', 'referenceview-snakview'],
 				edittoolbar: ['statementview', 'referenceview'],
 				removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove']
-			} );
+			} )
+			.claimgrouplabelscroll();
 		}
 
 		// handle edit restrictions
