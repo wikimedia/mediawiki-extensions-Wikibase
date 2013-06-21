@@ -74,6 +74,23 @@ this.time = ( function() { // 'this' is global scope, e.g. 'window' in the brows
 		'%0s'
 	];
 
+	/**
+	 * Factors correlating to settings.outputprecision. These are use when detecting and
+	 * re-converting input specified in one of the formats specified in outputprecisions.
+	 * @type {number[]}
+	 */
+	settings.outputprecisionFactors = [
+		1000000000,
+		100000000,
+		10000000,
+		1000000,
+		100000,
+		10000,
+		1000,
+		100,
+		10
+	];
+
 	var maxPrecision = function() {
 		return 14;
 	};

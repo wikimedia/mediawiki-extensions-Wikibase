@@ -49,6 +49,14 @@ time.Parser = ( function( time ) {
 	Parser.prototype.parse = function( text ) {
 		// TODO: instead of injecting settings, the parser should properly set up its own tokenizer
 		//  instance once such an object is available.
+
+		// Checking if the input text matches an output precision before analyzing the input text
+		// character by character:
+		var reconverted = this._reconvertOutputString( text );
+		if( reconverted !== false ) {
+			return reconverted;
+		}
+
 		var tokens = tokenize( text, this._settings ),
 			retval = {},
 			grammars = getGrammars( this._settings.daybeforemonth ),
@@ -112,6 +120,48 @@ time.Parser = ( function( time ) {
 		delete( retval.bce ); // nothing we want to expose since this is redundant with "year"
 		delete( retval.minus );
 		return retval;
+	};
+
+	/**
+	 * Analyzes a string if it is a time value that has been specified in one of the output
+	 * precision formats specified in the settings. If so, this method re-converts such an output
+	 * string to an object that can be used to instantiate a time.Time object.
+	 *
+	 * @param {string} string
+	 * @return {Object|false}
+	 */
+	Parser.prototype._reconvertOutputString = function( string ) {
+		for( var precisionIndex in this._settings.outputprecision ) {
+			var regExp = new RegExp(
+				'^\\s*([^\\d\\s]*|)\\s*'
+				+ this._settings.outputprecision[precisionIndex].replace( /%/, '(\\d+)' )
+				+ '\\s*([^\\d\\s]*|)\\s*$'
+			);
+
+			if( regExp.test( string ) ) {
+				var matches = string.match( regExp ),
+					significant = matches[2],
+					year = significant * this._settings.outputprecisionFactors[precisionIndex],
+					bceIndicators = [
+						this._settings.bce[0],
+						this._settings.pasttext.replace( /( |%)/g, '' )
+					];
+
+				for( var i in bceIndicators ) {
+					if( matches[1] === bceIndicators[i] || matches[3] === bceIndicators[i] ) {
+						year *= -1;
+					}
+				}
+
+				return {
+					year: year,
+					precision: parseInt( precisionIndex, 10 ),
+					calendarname: time.Time.CALENDAR.GREGORIAN
+				};
+			}
+		}
+
+		return false;
 	};
 
 	/**

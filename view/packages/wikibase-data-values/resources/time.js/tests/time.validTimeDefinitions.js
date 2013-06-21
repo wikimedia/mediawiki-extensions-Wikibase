@@ -179,6 +179,26 @@ time.validTimeDefinitions = ( function( time ) {
 			calendarname: G,
 			year: -1000,
 			precision: PRECISION.YEAR
+		},
+		'1980s': {
+			calendarname: G,
+			year: 1980,
+			precision: PRECISION.YEAR10
+		},
+		'in 300,000 years': {
+			calendarname: G,
+			year: 300000,
+			precision: PRECISION.KY100
+		},
+		'2 billion years ago': {
+			calendarname: G,
+			year: -2000000000,
+			precision: PRECISION.GY
+		},
+		'1. century BCE': {
+			calendarname: G,
+			year: -100,
+			precision: PRECISION.YEAR100
 		}
 	};
 
