@@ -172,7 +172,7 @@
 				precisionWidget = this.$precision.data( 'listrotator' );
 
 			// TODO: Don't access the widget's internals here, check this via some function.
-			if( !precisionWidget.$auto.hasClass( 'ui-state-active' ) ) {
+			if( !precisionWidget.autoActive() ) {
 				var precision = getPrecisionSetting( precisionWidget.value() );
 
 				if( precision !== null ) {
@@ -255,7 +255,7 @@
 			}
 
 			if( this._newValue
-				|| this.$precision.data( 'listrotator' ).$auto.hasClass( 'ui-state-active' )
+				|| this.$precision.data( 'listrotator' ).autoActive()
 			) {
 				// hacky update of precision, just assume the raw value is the value we have in
 				// the valueview right now.
