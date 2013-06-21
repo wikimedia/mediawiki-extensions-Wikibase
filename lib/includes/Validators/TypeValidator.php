@@ -64,20 +64,22 @@ class TypeValidator implements ValueValidator {
 	 * @throws \InvalidArgumentException
 	 */
 	public function validate( $value ) {
-		//TODO: check primitive type?
+		$type = gettype( $value );
 
-		if ( gettype( $value ) === $this->type ) {
+		if ( $type === $this->type ) {
 			return Result::newSuccess();
 		}
 
-		if ( is_object( $value ) && is_a( $value, $this->type ) ) {
-			return Result::newSuccess();
+		if ( is_object( $value ) ) {
+			$type = get_class( $value );
+
+			if ( is_a( $value, $this->type ) ) {
+				return Result::newSuccess();
+			}
 		}
 
-		// XXX: having to provide an array is quite inconvenient
 		return Result::newError( array(
-			//TODO: How to localize the message? Provide an error key and parameters?
-			Error::newError( 'Bad type, expected ' . $this->type )
+			Error::newError( 'Bad type, expected ' . $this->type, null, 'bad-type', array( $this->type, $type ) )
 		) );
 	}
 

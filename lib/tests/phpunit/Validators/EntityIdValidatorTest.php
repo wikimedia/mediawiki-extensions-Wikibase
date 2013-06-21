@@ -37,6 +37,7 @@ use Wikibase\Item;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Property;
 use Wikibase\Validators\EntityIdValidator;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Class EntityIdValidatorTest
@@ -73,6 +74,16 @@ class EntityIdValidatorTest extends \PHPUnit_Framework_TestCase {
 		$result = $validator->validate( $value );
 
 		$this->assertEquals( $expected, $result->isValid(), $message );
+
+		if ( !$expected ) {
+			$errors = $result->getErrors();
+			$this->assertCount( 1, $errors, $message );
+			$this->assertTrue( in_array( $errors[0]->getCode(), array( 'bad-entity-id', 'bad-entity-type' ) ), $message . "\n" . $errors[0]->getCode() );
+
+			$localizer = new ValidatorErrorLocalizer( );
+			$msg = $localizer->getErrorMessage( $errors[0] );
+			$this->assertTrue( $msg->exists(), $msg );
+		}
 	}
 
 }
