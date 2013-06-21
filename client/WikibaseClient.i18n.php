@@ -555,7 +555,7 @@ $messages['bs'] = array(
 	'wikibase-linkitem-input-site' => 'Jezik:',
 	'wikibase-linkitem-input-page' => 'Stranica:',
 	'wikibase-linkitem-invalidsite' => 'Izabran nepoznati ili nevažeći sajt',
-	'wikibase-linkitem-confirmitem-text' => 'Stranica koju ste izabrali je povezana sa [$1 stavkom u našem centralnom skladištu podataka]. Potvrdite da {{PLURAL:$2|je|su}} {{PLURAL:$2|stranica|stranice|stranica}} {{PLURAL:$2|koja je prikazana|koje su prikazane}} ispod zaista {{PLURAL:$2|ona|one}} sa {{PLURAL:$2|kojom|kojim}} želite napraviti vezu.',
+	'wikibase-linkitem-confirmitem-text' => 'Stranica koju ste izabrali je povezana sa [$1 stavkom u našem centralnom skladištu podataka]. Potvrdite da {{PLURAL:$2|je|su}} {{PLURAL:$2|stranica|stranice}} {{PLURAL:$2|koja je prikazana|koje su prikazane}} ispod zaista {{PLURAL:$2|ona|one}} sa {{PLURAL:$2|kojom|kojim}} želite napraviti vezu.',
 	'wikibase-linkitem-confirmitem-button' => 'Potvrdi',
 	'wikibase-linkitem-not-loggedin-title' => 'Morate biti prijavljeni',
 	'wikibase-linkitem-not-loggedin' => 'Morate biti prijavljeni na ovom wiki projektu i na [$1 centralnom skladištu podataka] da bi mogli koristiti ovu funkciju.',
@@ -2891,6 +2891,60 @@ $messages['ru'] = array(
 	'wikibase-pageinfo-entity-id-none' => 'Нет',
 );
 
+/** Sicilian (sicilianu)
+ * @author Gmelfi
+ */
+$messages['scn'] = array(
+	'wikibase-client-desc' => "Client pi l'estinsioni Wikibase",
+	'specialpages-group-wikibaseclient' => 'Client Wikidata',
+	'wikibase-after-page-move' => "Puoi puru [$1 aggiurnari] l'elimentu assuciatu supra Wikidata pi trasfiriri li interlink supra la pàggina nova.",
+	'wikibase-comment-remove' => "L'elimentu di Wikidata assuciatu fu cancellatu. Lu culligamenti nterlinguistici foru supprimuti.",
+	'wikibase-comment-linked' => "N'elimentu di Wikidata fu culligatu a sta pàggina.",
+	'wikibase-comment-unlink' => "Sta pàggina fu sculligata di l'elimentu di Wikidata. li culligamenti nterlinguistici foru supprimuti.",
+	'wikibase-comment-restore' => "Supprissioni di l'elimentu di Wikidata assuciatu annullata. Li culligamenti nterlinguistici foru ristabbiliti.",
+	'wikibase-comment-update' => 'Elimentu Wikidata canciatu',
+	'wikibase-comment-sitelink-add' => 'Culligamentu linguisticu junciutu: $1',
+	'wikibase-comment-sitelink-change' => 'Culligamentu linguisticu canciatu di $1 a $2',
+	'wikibase-comment-sitelink-remove' => 'Culligamentu linguisticu supprimutu: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|canciamentu|canciamenti}}',
+	'wikibase-editlinks' => 'Cancia li liami',
+	'wikibase-editlinkstitle' => 'Cancia li culligamenti nterlinguistici',
+	'wikibase-linkitem-addlinks' => 'Jùncicci li liami',
+	'wikibase-linkitem-alreadylinked' => "La pâggina ca si voli culligari è già assuciata a n'àutru [$1 elimentu] nti l'archiviu cintrali dâ dati ca punta supra a $2 nti stu situ. Li elimenti pònnu siri culligati a na pàggina sula pi situ. Scegghi n'àutra pàggina a cui culligàrila.",
+	'wikibase-linkitem-close' => 'Chiudi la finestra di diàluggu e ricarica la pàggina',
+	'wikibase-linkitem-failure' => "Si virificau n'erruri scanusciutu duranti lu tintativu di culligari la pàggina nnicata.",
+	'wikibase-linkitem-title' => "Liari cu n'àutra pàggina",
+	'wikibase-linkitem-linkpage' => 'Liari cu la pàggina',
+	'wikibase-linkitem-selectlink' => 'Silizziona nu situ e na pàggina ca vuoi culligari cu chista.',
+	'wikibase-linkitem-input-site' => 'Lingua:',
+	'wikibase-linkitem-input-page' => 'Pàggina',
+	'wikibase-linkitem-invalidsite' => 'Situ silizziunatu scanusciutu o nun vàliddu',
+	'wikibase-linkitem-confirmitem-text' => "La pàggina ca scigghisti è ggià assuciata a n'àutru [$1 elimentu dî l'archiviu cintrali dî dati nostru]. Cunfirma ca {{PLURAL:$2|la pàggina ammusciata|li pàggini ammusciati}} ccàssutta {{PLURAL:$2|eni chiddaa|sunu chiddi}} ca si vònnu culligari cu sta pàggina.",
+	'wikibase-linkitem-confirmitem-button' => 'Cunfirmari',
+	'wikibase-linkitem-not-loggedin-title' => 'Hai a siri luggatu',
+	'wikibase-linkitem-not-loggedin' => "Hai a siri luggatu nti sta wiki e nti l'[$1 archiviu cintralizzatu dî dati] pi utilizzari sta funziunalitati.",
+	'wikibase-linkitem-success-create' => "Li pàggini foru culligati di manera giusta. Puoi truvari l'elimentu ca criasti cuntinenti li liami ntô nostru [$1 archiviu dî dati cintralizzatu].",
+	'wikibase-linkitem-success-link' => "Li pàggini foru culligati di manera giusta. Puoi truvari l'elimentu cuntinenti li liami ntô nostru [$1 archiviu dî dati cintralizzatu].",
+	'wikibase-property-notfound' => 'Prupritati $1 nun truvata.',
+	'wikibase-property-notsupportedyet' => 'Wikibase nun supporta ancora lu tipu di prupritatu pi la prupritati $1.',
+	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-show-wikidata-pref' => "Ammuscia li canciamenti di Wikidata nti l'ùrtimi canciamenti",
+	'wikibase-watchlist-show-changes-pref' => 'Ammuscia li canciamenti supra Wikidata ntâ tò lista di ussirvati spiciali',
+	'wikibase-error-serialize-error' => 'Mpussibbili sirializzari li dati',
+	'wikibase-error-invalid-entity-id' => 'Lu ID spicificatu è scanusciutu ô sistema. Usa nu ID di entitati vàliddu.',
+	'special-unconnectedpages' => "Pàggini nun culligati a l'elimenti",
+	'wikibase-unconnectedpages-legend' => 'Opzioni pi li pàggini nun culligati',
+	'wikibase-unconnectedpages-page' => 'Accuminzatina dâ lista dî risurtati câ pàggina:',
+	'wikibase-unconnectedpages-submit' => 'Và trova',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" nunu è nu codici di lingua vàliddu.',
+	'wikibase-unconnectedpages-page-warning' => "Lu titulu dâ pàggina nun pò essiri utilizzatu pi la ricerca eggh'è ignuratu.",
+	'wikibase-unconnectedpages-iwdata-label' => 'Sulu li pàggini cu li culligamenti interliguistici',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|culligamentu interlinguisticu|culligamenta interlinguistici}} ntâ pàggina)',
+	'wikibase-pageinfo-entity-id' => 'ID elimentu Wikidata',
+	'wikibase-pageinfo-entity-id-none' => 'Nuddu',
+	'wikibase-property-render-error' => 'Sfallìu a rènniri la prupritati $1: $2',
+);
+
 /** Sinhala (සිංහල)
  * @author පසිඳු කාවින්ද
  */
@@ -2954,7 +3008,7 @@ $messages['sr-ec'] = array(
 	'wikibase-linkitem-input-site' => 'Језик:',
 	'wikibase-linkitem-input-page' => 'Страница:',
 	'wikibase-linkitem-invalidsite' => 'Изабран непознато или неважећи сајт',
-	'wikibase-linkitem-confirmitem-text' => 'Страница коју сте изабрали је већ повезана са [$1 ставком на нашој централној бази података]. Молимо вас потврдите да су странице испод приказане оне које желите да повежете са овом страницом.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Страница коју сте изабрали је већ придружена [$1 ставци на нашој централној бази података]. Молимо вас потврдите да {{PLURAL:$2|је страница|су странице}} испод {{PLURAL:$2|приказана|приказане}} {{PLURAL:$2|она коју|оне које}} желите да повежете са овом страницом.',
 	'wikibase-linkitem-confirmitem-button' => 'Потврди',
 	'wikibase-linkitem-not-loggedin-title' => 'Морате бити пријављени',
 	'wikibase-linkitem-not-loggedin' => 'Морате бити пријављени на овом вики-сајту и на [$1 главном складишту података] како бисте користили ову могућност.',
@@ -2965,6 +3019,7 @@ $messages['sr-ec'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Википодаци',
 	'wikibase-rc-show-wikidata-pref' => 'Прикажи измене на Википодацима у скорашњим изменама',
 	'wikibase-watchlist-show-changes-pref' => 'Прикажи измене на Википодацима у списку надгледања',
+	'wikibase-error-serialize-error' => 'Неуспешна серијализација података',
 	'wikibase-error-invalid-entity-id' => 'Унети идентификатор је непознат систему. Молимо унесите важећи ИД.',
 	'special-unconnectedpages' => 'Странице нису повезане са ставкама',
 	'wikibase-unconnectedpages-legend' => 'Могућности неповезаних страница',
@@ -2973,7 +3028,7 @@ $messages['sr-ec'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ није исправан код за језик.',
 	'wikibase-unconnectedpages-page-warning' => 'Наслов странице не може се користи за упит и биће игнорисан.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Само странице са међујезичким везама',
-	'wikibase-unconnectedpages-format-row' => '($1 међујезичких веза на страници)', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|међујезичка веза|међујезичких веза}} на страници)',
 	'wikibase-pageinfo-entity-id' => 'ИД ставке на Википодацима',
 	'wikibase-pageinfo-entity-id-none' => 'Нема',
 );

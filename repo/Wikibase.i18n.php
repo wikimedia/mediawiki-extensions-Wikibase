@@ -459,7 +459,8 @@ See example: [[d:Special:SpecialPages#mw-specialpagesgroup-wikibaserepo|d:Specia
 [[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 1 and 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an existing element of some kind.',
 	'wikibase-save' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
-This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that saves what the user has done while the user interface has been in edit mode.',
+This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that saves what the user has done while the user interface has been in edit mode.
+{{Identical|Save}}',
 	'wikibase-cancel' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that cancels what the user has done while the user interface has been in edit mode.',
 	'wikibase-add' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
@@ -1810,6 +1811,13 @@ $messages['be-tarask'] = array(
 	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Выдаленае сьцьверджаньне|Выдаленыя сьцьверджаньні}}',
 	'wikibase-item-summary-special-create-item' => 'Створаны аб’ект [$2] са {{PLURAL:$1|значэньнем|значэньнямі}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Створана сьцьверджаньне',
+	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$3|Выдаленае сьцьверджаньне|Выдаленыя сьцьверджаньні}}',
+	'wikibase-item-summary-wbsetclaim-update' => '{{PLURAL:$3|Зьмененае сьцьверджаньне|Зьмененыя сьцьверджаньні}}',
+	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|Створанае сьцверджаньне|Створаныя сьцверджаньні}}',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Зьменены $4 кваліфікатар|Зьмененыя $4 кваліфікатары|Зьмененыя $4 кваліфікатараў}} у {{PLURAL:$3|сьцьверджаньні|сьцьверджаньнях}}',
+	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Зьмененая $4 крыніца|Зьмененыя $4 крыніцы|Зьмененыя $4 крыніц}} у {{PLURAL:$3|сьцьверджаньні|сьцьверджаньнях}}',
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Зьменены ранг {{PLURAL:$3|сьцьверджаньня|сьцьверджаньняў}}',
+	'wikibase-property-summary-wbcreate-new' => 'Створаная новая ўласьцівасьць',
 	'wikibase-property-summary-wbeditentity-create' => 'Створаная новая ўласьцівасьць',
 	'wikibase-property-summary-wbeditentity-update' => 'Абноўленая ўласьцівасьць',
 	'wikibase-property-summary-wbeditentity-override' => 'Перавызначаная ўласьцівасьць',
@@ -1820,7 +1828,7 @@ $messages['be-tarask'] = array(
 	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Дададзены сынонім|Дададзеныя сынонімы}} для [$2]',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Аб’ект',
 	'wikibase-listdatatypes-commonsmedia-head' => 'мэдыяфайл зь Вікісховішча',
-	'wikibase-listdatatypes-globe-coordinate-head' => 'Геаграфічныя каардынаты', # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Геаграфічныя каардынаты',
 	'wikibase-listdatatypes-quantity-head' => 'Колькасьць',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Аднамоўны тэкст',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Шматмоўны тэкст',
@@ -3144,6 +3152,7 @@ for at finde ud af, hvad der er sket med det.',
  * @author Michawiki
  * @author Nipsky
  * @author Purodha
+ * @author Se4598
  * @author Tomabrafix
  * @author Vogone
  */
@@ -3161,7 +3170,7 @@ $messages['de'] = array(
 	'wikibase-label-empty' => 'Bislang wurde noch keine Bezeichnung angegeben.',
 	'wikibase-label-edit-placeholder' => 'Bezeichnung eingeben',
 	'wikibase-description-empty' => 'Bislang wurde noch keine Beschreibung angegeben.',
-	'wikibase-deletedentity' => 'Löschte $1',
+	'wikibase-deletedentity' => 'Gelöschte(s) $1',
 	'wikibase-description-edit-placeholder' => 'Beschreibung eingeben',
 	'wikibase-sitelink-site-edit-placeholder' => 'Website',
 	'wikibase-sitelink-page-edit-placeholder' => 'Artikel',
@@ -5279,7 +5288,7 @@ $messages['fr'] = array(
 	'wikibase-label-empty' => 'Pas de libellé défini',
 	'wikibase-label-edit-placeholder' => 'saisir un libellé',
 	'wikibase-description-empty' => 'Aucune description pour le moment',
-	'wikibase-deletedentity' => '$1 supprimée',
+	'wikibase-deletedentity' => '$1 supprimé(e)',
 	'wikibase-description-edit-placeholder' => 'saisir une description',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'article',
