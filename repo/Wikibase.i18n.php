@@ -35,7 +35,9 @@ $messages['en'] = array(
 	'wikibase-label-empty' => 'No label defined yet',
 	'wikibase-label-edit-placeholder' => 'enter label',
 	'wikibase-description-empty' => 'No description defined yet',
-	'wikibase-deletedentity' => 'Deleted $1',
+	'wikibase-deletedentity-item' => 'Deleted item',
+	'wikibase-deletedentity-property' => 'Deleted property',
+	'wikibase-deletedentity-query' => 'Deleted query',
 	'wikibase-description-edit-placeholder' => 'enter description',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'article',
@@ -478,14 +480,24 @@ This is a generic placeholder message used while a remove is in progress, and re
 	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-label|label]].',
 	'wikibase-description-empty' => "Placeholder message displayed instead of the item's description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
-	'wikibase-deletedentity' => "Message displayed instead of an Entity's label if the Entity has been deleted (see [[d:Wikidata:Glossary]]).
+	'wikibase-deletedentity-item' => "Message displayed instead of an Item's label if the Item has been deleted (see [[d:Wikidata:Glossary]]).
 
-Usually this message is used with some other message pointing to the entity.
+See also:
+* {{msg-mw|Wikibase-entity-item}}
+* {{msg-mw|Wikibase-deletedentity-property}}
+* {{msg-mw|Wikibase-deletedentity-query}}",
+	'wikibase-deletedentity-property' => "Message displayed instead of an Property's label if the Property has been deleted (see [[d:Wikidata:Glossary]]).
 
-Parameters:
-* $1 - the kind of entity which got deleted. any one of the following messages:
-** {{msg-mw|Wikibase-entity-item}}
-** {{msg-mw|Wikibase-entity-property}}",
+See also:
+* {{msg-mw|Wikibase-entity-property}}
+* {{msg-mw|Wikibase-deletedentity-item}}
+* {{msg-mw|Wikibase-deletedentity-query}}",
+	'wikibase-deletedentity-query' => "Message displayed instead of an Query's label if the Query has been deleted (see [[d:Wikidata:Glossary]]).
+
+See also:
+* {{msg-mw|Wikibase-entity-query}}
+* {{msg-mw|Wikibase-deletedentity-item}}
+* {{msg-mw|Wikibase-deletedentity-property}}",
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-description|description]].',
 	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
@@ -5734,7 +5746,7 @@ $messages['frp'] = array(
  * @author Murma174
  */
 $messages['frr'] = array(
-	'wikibase-listdatatypes-wikibase-item-body' => "Ferwisang tu ööder objekten uun't projekt. Di nöömrüm „objekt“ woort trochsoocht. Det as man en ianfach tekstfial. 
+	'wikibase-listdatatypes-wikibase-item-body' => "Ferwisang tu ööder objekten uun't projekt. Di nöömrüm „objekt“ woort trochsoocht. Det as man en ianfach tekstfial.
 * scheme – hiart tu't Iri-tiakenkeed.
 * hierarchicalpart – hiart tu't Iri-tiakenkeed.
 * query – hiart tu't Iri-tiakenkeed.
