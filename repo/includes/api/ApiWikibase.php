@@ -483,7 +483,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 * @see \ApiBase::dieUsage()
 	 */
-	protected function handleStatus( Status $status, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
+	public function handleStatus( Status $status, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
 		wfProfileIn( __METHOD__ );
 
 		$res = $this->getResult();

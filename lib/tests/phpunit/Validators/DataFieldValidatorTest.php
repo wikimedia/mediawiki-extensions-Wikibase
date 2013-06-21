@@ -35,6 +35,7 @@ namespace Wikibase\Test\Validators;
 
 use Wikibase\Validators\DataFieldValidator;
 use Wikibase\Validators\StringLengthValidator;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Class DataFieldValidatorTest
@@ -68,6 +69,15 @@ class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {
 		$result = $validator->validate( $value );
 
 		$this->assertEquals( $expected, $result->isValid(), $message );
+
+		if ( !$expected ) {
+			$errors = $result->getErrors();
+			$this->assertCount( 1, $errors, $message );
+
+			$localizer = new ValidatorErrorLocalizer( );
+			$msg = $localizer->getErrorMessage( $errors[0] );
+			$this->assertTrue( $msg->exists(), $msg );
+		}
 	}
 
 }

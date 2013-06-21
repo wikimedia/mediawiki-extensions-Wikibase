@@ -39,6 +39,7 @@ use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\Test\MockRepository;
 use Wikibase\Validators\EntityExistsValidator;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Class EntityExistsValidatorTest
@@ -73,6 +74,16 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 		$result = $validator->validate( $value );
 
 		$this->assertEquals( $expected, $result->isValid(), $message );
+
+		if ( !$expected ) {
+			$errors = $result->getErrors();
+			$this->assertCount( 1, $errors, $message );
+			$this->assertEquals( 'no-such-entity', $errors[0]->getCode(), $message );
+
+			$localizer = new ValidatorErrorLocalizer( );
+			$msg = $localizer->getErrorMessage( $errors[0] );
+			$this->assertTrue( $msg->exists(), $msg );
+		}
 	}
 
 }

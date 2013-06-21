@@ -151,6 +151,7 @@ return call_user_func( function() {
 		'Wikibase\Validators\RegexValidator' => 'includes/Validators/RegexValidator.php',
 		'Wikibase\Validators\StringLengthValidator' => 'includes/Validators/StringLengthValidator.php',
 		'Wikibase\Validators\TypeValidator' => 'includes/Validators/TypeValidator.php',
+		'Wikibase\Validators\ValidatorErrorLocalizer' => 'includes/Validators/ValidatorErrorLocalizer.php',
 
 		// tests
 		'Wikibase\Test\SpecialPageTestBase' => 'tests/phpunit/specials/SpecialPageTestBase.php',

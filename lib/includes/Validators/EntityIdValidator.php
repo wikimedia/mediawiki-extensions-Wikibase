@@ -78,12 +78,12 @@ class EntityIdValidator implements ValueValidator {
 				&& !in_array( $id->getEntityType(), $this->allowedTypes ) ) {
 
 				return Result::newError( array(
-					Error::newError( "Bad entity type: " . $id->getEntityType() ), //TODO: i18n!
+					Error::newError( "Bad entity type: " . $id->getEntityType(), null, 'bad-entity-type', array( $id->getEntityType() ) ),
 				) );
 			}
 		} catch ( ParseException $ex ) {
 			return Result::newError( array(
-				Error::newError( "Bad entity id: " . $value ), //TODO: i18n!
+				Error::newError( "Bad entity id: " . $value, null, 'bad-entity-id', array( $value ) ),
 			) );
 		}
 

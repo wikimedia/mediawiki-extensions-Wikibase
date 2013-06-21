@@ -16,6 +16,7 @@ use Wikibase\ClaimSaver;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 use Wikibase\validators\SnakValidator;
 
 /**
@@ -67,7 +68,8 @@ class SetClaim extends ApiWikibase {
 		$this->snakValidation = new SnakValidationHelper(
 			$this,
 			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
-			WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
+			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
+			new ValidatorErrorLocalizer()
 		);
 	}
 
