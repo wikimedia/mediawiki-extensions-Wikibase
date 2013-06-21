@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "D1KJ2GDo",
+        "filename": "lib/includes/serializers/AliasSerializer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-21T08:00:05Z",
+      "side": 1,
+      "message": "We now have tests for both variants as I added them. I\u0027m not sure if there were tests before (I guess getEntitiesTest has some). The behavior is the same (as I just copied the code from EntitySerializer) except that we now skip empty aliases (if there are any in the DB) which seems like the correct behavior to me.",
+      "parentUuid": "D1F90dM4",
+      "revId": "8a16f0beea88b2a91e5a760dad03630a319393f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1B9q7O4",
         "filename": "lib/includes/serializers/DescriptionSerializer.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-20T17:43:32Z",
       "side": 1,
       "message": "ugh, a trinary operator as an index? please use a local variable for this.",
+      "revId": "8a16f0beea88b2a91e5a760dad03630a319393f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1GJ8MB0",
+        "filename": "lib/includes/serializers/DescriptionSerializer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-21T08:00:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1B9q7O4",
       "revId": "8a16f0beea88b2a91e5a760dad03630a319393f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "D1MJ5pC0",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-21T08:00:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1N9IZI4",
+      "revId": "8a16f0beea88b2a91e5a760dad03630a319393f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1H9U0B8",
         "filename": "lib/includes/serializers/LabelSerializer.php",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2013-06-20T17:43:32Z",
       "side": 1,
       "message": "Instead of having the same code here twice, just vary the key:\n\n $valueKey \u003d  $label \u003d\u003d\u003d \u0027\u0027 ? \"removed\" : \"value\";\n ...\n   $valueKey \u003d\u003e $label",
+      "revId": "8a16f0beea88b2a91e5a760dad03630a319393f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1IJ-nBE",
+        "filename": "lib/includes/serializers/LabelSerializer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-21T08:00:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1H9U0B8",
       "revId": "8a16f0beea88b2a91e5a760dad03630a319393f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
