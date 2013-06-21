@@ -40,22 +40,15 @@
 		 */
 		_staticExpertOptions: {
 			/**
-			 * @param {string|globeCoordinate.GlobeCoordinate|null} currentRawValue
-			 * @param {jQuery.valueview.ViewState} [viewState]
+			 * @param {globeCoordinate.GlobeCoordinate|string|null} currentRawValue
+			 * @param {jQuery.valueview.ViewState} viewState
 			 */
 			domBuilder: function( currentRawValue, viewState ) {
-				var $node = $( '<span/>' );
-
-				if( !currentRawValue ) {
-					return $node;
+				if( currentRawValue instanceof GlobeCoordinate ) {
+					currentRawValue = currentRawValue.degreeText();
 				}
 
-				// On initialization, the static expert will be fed with a GlobeCoordinate instance.
-				var text = ( currentRawValue instanceof GlobeCoordinate )
-					? currentRawValue.degreeText()
-					: currentRawValue;
-
-				return $node.text( text );
+				return $( '<span/>' ).text( currentRawValue || '' );
 			},
 			baseExpert: editableExpert
 		}

@@ -120,6 +120,13 @@
 		},
 
 		/**
+		 * @see jQuery.valueview.Expert.valueCharacteristics
+		 */
+		valueCharacteristics: function() {
+			return this._currentExpert.valueCharacteristics();
+		},
+
+		/**
 		 * @see jQuery.valueview.Expert._getRawValue
 		 */
 		_getRawValue: function() {

@@ -165,13 +165,29 @@
 		/**
 		 * Returns a parser suitable for parsing the raw value returned by rawValue().
 		 *
+		 * TODO: Get rid of this in here. rawValue should just always return a string or a
+		 *  DataValue, in case of a string, in the valueview, we would just get the parser from a
+		 *  ValueParserFactory composited into the valueview.
+		 *
 		 * @since 0.1
-		 * @abstract
 		 *
 		 * @return valueParsers.ValueParser
 		 */
 		parser: function() {
 			return new vp.NullParser();
+		},
+
+		/**
+		 * Returns an object with characteristics specified for the value. The object can be used
+		 * as parser options definition in the parser returned by parser().
+		 *
+		 * TODO: This should actually move out of here together with all the advanced input features
+		 *  of certain experts (time/coordinate).
+		 *
+		 * @since 0.1
+		 */
+		valueCharacteristics: function() {
+			return {};
 		},
 
 		/**

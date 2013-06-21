@@ -16,13 +16,12 @@
 		expertConstructor: valueview.experts.GlobeCoordinateInput,
 		rawValues: {
 			valid: [
-				new GlobeCoordinate( '30, 30' ),
-				new GlobeCoordinate( '-1.5 -1.25' )
+				'-1.5, -1.25',
+				'30, 30',
+				'foo' // Might not be a valid coordinate, but that's for the parser to decide, the expert shouldn't care.
 			],
 			unknown: testExpert.basicTestDefinition.rawValues.unknown.concat( [
-				'foo', // NOTE: this is only "unknown" because the expert is overly smart since it is using the parser internally (while it shouldn't)
 				42,
-				'1 1'
 			] )
 		},
 		relatedValueParser: GlobeCoordinateParser
