@@ -38,6 +38,7 @@ use DataValues\StringValue;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\StringLengthValidator;
 use Wikibase\Validators\TypeValidator;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Class CompositeValidatorTest
@@ -68,6 +69,15 @@ class CompositeValidatorTest extends \PHPUnit_Framework_TestCase {
 		$result = $validator->validate( $value );
 
 		$this->assertEquals( $expected, $result->isValid(), $message );
+
+		if ( !$expected ) {
+			$errors = $result->getErrors();
+			$this->assertCount( 1, $errors, $message );
+
+			$localizer = new ValidatorErrorLocalizer( );
+			$msg = $localizer->getErrorMessage( $errors[0] );
+			$this->assertTrue( $msg->exists(), $msg );
+		}
 	}
 
 }

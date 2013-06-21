@@ -73,16 +73,14 @@ class RegexValidator implements ValueValidator {
 		if ( $match === 0 && !$this->inverse ) {
 			// XXX: having to provide an array is quite inconvenient
 			return Result::newError( array(
-				//TODO: How to localize the message? Provide an error key and parameters?
-				Error::newError( 'Pattern match failed: ' . $this->expression )
+				Error::newError( 'Pattern match failed: ' . $this->expression, null, 'malformed-value', array( $value ) )
 			) );
 		}
 
 		if ( $match === 1 && $this->inverse ) {
 			// XXX: having to provide an array is quite inconvenient
 			return Result::newError( array(
-				//TODO: How to localize the message? Provide an error key and parameters?
-				Error::newError( 'Negative pattern matched: ' . $this->expression )
+				Error::newError( 'Negative pattern matched: ' . $this->expression, null, 'malformed-value', array( $value ) )
 			) );
 		}
 

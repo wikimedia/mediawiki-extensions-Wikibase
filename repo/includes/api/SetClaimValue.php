@@ -16,6 +16,7 @@ use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 use Wikibase\validators\SnakValidator;
 
 /**
@@ -69,7 +70,8 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 		$this->snakValidation = new SnakValidationHelper(
 			$this,
 			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
-			WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
+			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
+			new ValidatorErrorLocalizer()
 		);
 	}
 

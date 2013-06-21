@@ -50,6 +50,13 @@ $messages['en'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
 	'wikibase-sitelinks-link-columnheading' => 'Linked article',
 	'wikibase-tooltip-error-details' => 'Details',
+	'wikibase-validator-bad-type' => '$2 instead of $1',
+	'wikibase-validator-too-long' => 'Must be no more than {{PLURAL:$1|one character|$1 characters}} long',
+	'wikibase-validator-too-short' => 'Must be at least {{PLURAL:$1|one character|$1 characters}} long',
+	'wikibase-validator-malformed-value' => 'Malformed input: $1',
+	'wikibase-validator-bad-entity-id' => 'Malformed ID: $1',
+	'wikibase-validator-bad-entity-type' => 'Unexpected entity type $1',
+	'wikibase-validator-no-such-entity' => '$1 not found',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Commons media file',
 	'version-wikibase' => 'Wikibase',
@@ -117,6 +124,38 @@ See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and
 	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (wiki) page.',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).
 {{Identical|Details}}',
+
+	'wikibase-validator-bad-type' => 'Input validation error shown when the input has the wrong type.
+
+Parameters:
+* $1 is the expected type
+* $2 is the actual type',
+	'wikibase-validator-too-long' => 'Input validation error shown when the input is too short
+
+Parameters:
+* $1 is the minimum length
+* $2 is the actual length',
+	'wikibase-validator-too-short' => 'Input validation error shown when the input is too short
+
+Parameters:
+* $1 is the minimum length
+* $2 is the actual length',
+	'wikibase-validator-malformed-value' => 'Input validation error shown when the user\'s input was malformed in some way.
+
+Parameters:
+* $1 is the malformed input',
+	'wikibase-validator-bad-entity-id' => 'Input validation error shown when the entity ID given by the user is malformed.
+
+Parameters:
+* $1 is the malfromed entity ID',
+	'wikibase-validator-bad-entity-type' => 'Input validation error shown when the entity specified by the user was not of the correct type.
+
+Parameters:
+* $1 is the actual type',
+	'wikibase-validator-no-such-entity' => 'Input validation error shown when the entity specified by the user was not found.
+
+Parameters:
+* $1 is the entity id',
 	'datatypes-type-wikibase-item' => 'The name of a data type for items in Wikibase.
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
