@@ -77,13 +77,19 @@ class EntitySerializer extends SerializerObject {
 		foreach ( $this->options->getProps() as $key ) {
 			switch ( $key ) {
 				case 'aliases':
-					$serialization['aliases'] = $this->getAliasesSerialization( $entity );
+					$aliasSerializer = new AliasSerializer( $this->options );
+					$aliases = $entity->getAllAliases( $this->options->getLanguages() );
+					$serialization['aliases'] = $aliasSerializer->getSerialized( $aliases );
 					break;
 				case 'descriptions':
-					$serialization['descriptions'] = $this->getDescriptionsSerialization( $entity );
+					$descriptionSerializer = new DescriptionSerializer( $this->options );
+					$descriptions = $entity->getDescriptions( $this->options->getLanguages() );
+					$serialization['descriptions'] = $descriptionSerializer->getSerialized( $descriptions );
 					break;
 				case 'labels':
-					$serialization['labels'] = $this->getLabelsSerialization( $entity );
+					$labelSerializer = new LabelSerializer( $this->options );
+					$labels = $entity->getLabels( $this->options->getLanguages() );
+					$serialization['labels'] = $labelSerializer->getSerialized( $labels );
 					break;
 				case 'claims':
 					$claimsSerializer = new ClaimsSerializer( $this->options );
@@ -118,123 +124,4 @@ class EntitySerializer extends SerializerObject {
 		// Stub, override expected
 		return array();
 	}
-
-	/**
-	 * Returns the aliases in an array ready for serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return array
-	 */
-	protected final function getAliasesSerialization( Entity $entity ) {
-		$value = array();
-
-		$aliases = $entity->getAllAliases( $this->options->getLanguages() );
-
-		if ( $this->options->shouldUseKeys() ) {
-			foreach ( $aliases as $languageCode => $alarr ) {
-				$arr = array();
-				foreach ( $alarr as $alias ) {
-					$arr[] = array(
-						'language' => $languageCode,
-						'value' => $alias,
-					);
-				}
-				$value[$languageCode] = $arr;
-			}
-		}
-		else {
-			foreach ( $aliases as $languageCode => $alarr ) {
-				foreach ( $alarr as $alias ) {
-					$value[] = array(
-						'language' => $languageCode,
-						'value' => $alias,
-					);
-				}
-			}
-		}
-
-		if ( !$this->options->shouldUseKeys() ) {
-			$this->setIndexedTagName( $value, 'alias' );
-		}
-
-		return $value;
-	}
-
-	/**
-	 * Returns the descriptions in an array ready for serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return array
-	 */
-	protected final function getDescriptionsSerialization( Entity $entity ) {
-		$value = array();
-		$idx = 0;
-
-		$descriptions = $entity->getDescriptions( $this->options->getLanguages() );
-
-		foreach ( $descriptions as $languageCode => $description ) {
-			if ( $description === '' ) {
-				$value[$this->options->shouldUseKeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'removed' => '',
-				);
-			}
-			else {
-				$value[$this->options->shouldUseKeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'value' => $description,
-				);
-			}
-		}
-
-		if ( !$this->options->shouldUseKeys() ) {
-			$this->setIndexedTagName( $value, 'description' );
-		}
-
-		return $value;
-	}
-
-	/**
-	 * Returns the labels in an array ready for serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return array
-	 */
-	protected final function getLabelsSerialization( Entity $entity ) {
-		$value = array();
-		$idx = 0;
-
-		$labels = $entity->getLabels( $this->options->getLanguages() );
-
-		foreach ( $labels as $languageCode => $label ) {
-			if ( $label === '' ) {
-				$value[$this->options->shouldUseKeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'removed' => '',
-				);
-			}
-			else {
-				$value[$this->options->shouldUseKeys() ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'value' => $label,
-				);
-			}
-		}
-
-		if ( !$this->options->shouldUseKeys() ) {
-			$this->setIndexedTagName( $value, 'label' );
-		}
-
-		return $value;
-	}
-
 }
