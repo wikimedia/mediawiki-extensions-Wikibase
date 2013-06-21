@@ -338,10 +338,10 @@ time.Parser = ( function( time ) {
 	}
 
 	function readAsCalendar( word, settings ) {
-		for( var i = 0; i < settings.calendarnames.length; i++ ) {
-			for( var j = 0; j < settings.calendarnames[i].length; j++ ) {
-				if( settings.calendarnames[i][j].toLowerCase() === word.toLowerCase() ) {
-					return settings.calendarnames[i][0];
+		for( var calendarKey in settings.calendarnames ) {
+			for( var i = 0; i < settings.calendarnames[calendarKey].length; i++ ) {
+				if( settings.calendarnames[calendarKey][i].toLowerCase() === word.toLowerCase() ) {
+					return calendarKey;
 				}
 			}
 		}

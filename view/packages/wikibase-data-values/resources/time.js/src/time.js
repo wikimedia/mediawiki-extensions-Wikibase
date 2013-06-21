@@ -23,13 +23,10 @@ this.time = ( function() { // 'this' is global scope, e.g. 'window' in the brows
 	settings.ace = ['CE', 'AD', 'A.D.', 'Anno Domini', 'Common Era'];
 	settings.pasttext = '% ago';
 	settings.futuretext = 'in %';
-	settings.calendarnames = [];
-	settings.calendarnames[0] = [
-		'Gregorian', 'G', 'GD', 'GC', 'NS', 'N.S.', 'New Style', 'Gregorian calendar', 'Gregorian date'
-	];
-	settings.calendarnames[1] = [
-		'Julian', 'J', 'JD', 'JC', 'OS', 'O.S.', 'Old Style', 'Julian calendar', 'Julian date'
-	];
+	settings.calendarnames = {
+		'Gregorian': [ 'Gregorian', 'G', 'GD', 'GC', 'NS', 'N.S.', 'New Style', 'Gregorian calendar', 'Gregorian date' ],
+		'Julian': [ 'Julian', 'J', 'JD', 'JC', 'OS', 'O.S.', 'Old Style', 'Julian calendar', 'Julian date' ]
+	};
 	settings.daybeforemonth = true;
 
 	settings.monthnames = [

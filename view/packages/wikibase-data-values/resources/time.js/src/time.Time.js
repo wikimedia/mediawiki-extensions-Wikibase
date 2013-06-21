@@ -140,7 +140,7 @@ time.Time = ( function( time, $ ) {
 			}
 		};
 
-		this.calendarText = function() {
+		this.calendar = function() {
 			return calendarname;
 		};
 
