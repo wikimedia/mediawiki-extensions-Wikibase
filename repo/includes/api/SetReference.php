@@ -17,6 +17,7 @@ use Wikibase\SnakList;
 use Wikibase\Claims;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * API module for creating a reference or setting the value of an existing one.
@@ -69,7 +70,8 @@ class SetReference extends ApiWikibase {
 		$this->snakValidation = new SnakValidationHelper(
 			$this,
 			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
-			WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
+			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
+			new ValidatorErrorLocalizer()
 		);
 	}
 
