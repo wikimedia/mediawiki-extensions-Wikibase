@@ -248,8 +248,10 @@ return call_user_func( function() {
 				'valueview-expert-advancedadjustments',
 				'valueview-expert-timeinput-precision',
 				'valueview-expert-timeinput-calendar',
-				'valueview-expert-timeinput-calendarhint',
-				'valueview-expert-timeinput-calendarhint-switch',
+				'valueview-expert-timeinput-calendarhint-gregorian',
+				'valueview-expert-timeinput-calendarhint-julian',
+				'valueview-expert-timeinput-calendarhint-switch-gregorian',
+				'valueview-expert-timeinput-calendarhint-switch-julian',
 				'valueview-preview-label',
 				'valueview-preview-novalue',
 			),
@@ -266,6 +268,10 @@ return call_user_func( function() {
 				'jquery.valueview.experts.staticdom',
 				'jquery.valueview.BifidExpert',
 				'jquery.valueview.experts.timeinput',
+			),
+			'messages' => array(
+				'valueview-expert-timevalue-calendar-gregorian',
+				'valueview-expert-timevalue-calendar-julian',
 			),
 		),
 

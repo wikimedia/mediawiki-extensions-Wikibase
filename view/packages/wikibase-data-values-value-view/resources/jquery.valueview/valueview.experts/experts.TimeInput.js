@@ -146,8 +146,11 @@
 			);
 
 			var calendarValues = [];
-			$.each( timeSettings.calendarnames, function( i, calendarTerms ) {
-				calendarValues.push( { value: calendarTerms[0], label: calendarTerms[0] } );
+			$.each( timeSettings.calendarnames, function( calendarKey, calendarTerms ) {
+				var label = self._getMessage(
+					'valueview-expert-timevalue-calendar-' + calendarTerms[0].toLowerCase()
+				);
+				calendarValues.push( { value: calendarTerms[0], label: label } );
 			} );
 			this.$calendar = $( '<div/>' )
 			.listrotator( { values: calendarValues, deferInit: true } )
@@ -156,7 +159,7 @@
 				function( event, newValue ) {
 					var rawValue = self._getRawValue();
 
-					if( rawValue === null || newValue === rawValue.calendarText() ) {
+					if( rawValue === null || newValue === rawValue.calendar() ) {
 						// Listrotator has been rotated automatically, the value covering the new
 						// precision has already been generated or the current input is invalid.
 						return;
@@ -171,7 +174,7 @@
 					var value = self._updateValue( overwrite );
 
 					if( event.type === 'listrotatorauto' ) {
-						$( this ).data( 'listrotator' ).rotate( value.calendarText() );
+						$( this ).data( 'listrotator' ).rotate( value.calendar() );
 					}
 				}
 			)
@@ -225,7 +228,7 @@
 				self._updateCalendarHint( value );
 				if( value ) {
 					self.$precision.data( 'listrotator' ).rotate( value.precision() );
-					self.$calendar.data( 'listrotator' ).rotate( value.calendarText() );
+					self.$calendar.data( 'listrotator' ).rotate( value.calendar() );
 				}
 				self._newValue = false; // value, not yet handled by draw(), is outdated now
 				self._viewNotifier.notify( 'change' );
@@ -316,10 +319,15 @@
 		 * @param {time.Time} [value] Message will get hidden when omitted.
 		 */
 		_updateCalendarHint: function( value ) {
-			var msg = this._getMessage(
-				'valueview-expert-timeinput-calendarhint',
-				( value ) ? value.calendarText() : ''
-			);
+			// When no value is specified or loaded in non-MediaWiki context, no message shall be
+			// displayed.
+			var msg = null;
+
+			if( value ) {
+				msg = this._getMessage(
+					'valueview-expert-timeinput-calendarhint-' + value.calendar().toLowerCase()
+				);
+			}
 
 			if( !msg ) {
 				return;
@@ -328,22 +336,21 @@
 			if( value && value.year() > 1581 && value.year() < 1930 && value.precision() > 10 ) {
 				var self = this;
 
-				var otherCalendar = ( value.calendarText() === timeSettings.calendarnames[0][0] )
-					? timeSettings.calendarnames[1][0]
-					: timeSettings.calendarnames[0][0];
+				var otherCalendar = ( value.calendar() === Time.CALENDAR.GREGORIAN )
+					? Time.CALENDAR.JULIAN
+					: Time.CALENDAR.GREGORIAN;
 
 				this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-message' )
 				.text( msg );
 
 				msg = this._getMessage(
-					'valueview-expert-timeinput-calendarhint-switch',
-					otherCalendar
+					'valueview-expert-timeinput-calendarhint-switch-' + otherCalendar.toLowerCase()
 				);
 				if( msg ) {
 					this.$calendarhint.children( '.' + this.uiBaseClass + '-calendarhint-switch' )
 					.off( 'click.' + this.uiBaseClass )
 					.on( 'click.' + this.uiBaseClass, function( event ) {
-						var listrotator = self.$calendar.data( 'listrotator ');
+						var listrotator = self.$calendar.data( 'listrotator' );
 
 							listrotator.element.one( 'listrotatorselected', function ( event ) {
 								self._updateValue();
@@ -425,7 +432,7 @@
 				this._updateCalendarHint( this._newValue );
 				if( this._newValue !== null ) {
 					this.$precision.data( 'listrotator' ).value( this._newValue.precision() );
-					this.$calendar.data( 'listrotator' ).value( this._newValue.calendarText() );
+					this.$calendar.data( 'listrotator' ).value( this._newValue.calendar() );
 				}
 				this._newValue = false;
 			}

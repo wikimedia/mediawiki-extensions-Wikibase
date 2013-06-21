@@ -48,11 +48,17 @@ $messages['en'] = array(
 	// CoordinateInput expert:
 	'valueview-expert-globecoordinateinput-precision' => 'Precision:',
 
+	// TimeValue expert:
+	'valueview-expert-timevalue-calendar-gregorian' => 'Gregorian',
+	'valueview-expert-timevalue-calendar-julian' => 'Julian',
+
 	// TimeInput expert:
 	'valueview-expert-timeinput-precision' => 'Precision:',
 	'valueview-expert-timeinput-calendar' => 'Calendar:',
-	'valueview-expert-timeinput-calendarhint' => '($1 calendar)',
-	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; change to $1',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Gregorian calendar)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Julian calendar)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; change to Gregorian',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; change to Julian',
 
 	'valueview-preview-label' => 'will be displayed as:',
 	'valueview-preview-novalue' => 'no valid value recognized',
@@ -80,21 +86,17 @@ Parameters:
 	'valueview-expert-emptyvalue-empty' => 'Message expressing that there is currently no value set in a jQuery valueview.
 {{Identical|Empty}}',
 	'valueview-expert-globecoordinateinput-precision' => 'Label for the user interface element used to set a specific precision (e.g. 1, 0.1, 0.001) when entering a coordinate value.',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Label of the GREGORIAN calendar. The label is used for selecting the GREGORIAN calendar model when entering a date and is displayed with dates that refer to that calendar model.',
+	'valueview-expert-timevalue-calendar-julian' => 'Label of the JULIAN calendar. The label is used for selecting the JULIAN calendar model when entering a date and is displayed with dates that refer to that calendar model.',
 	'valueview-expert-timeinput-precision' => 'Label for the user interface element used to set a specific precision (e.g. hour, day, month, year) when entering a time value.',
 	'valueview-expert-timeinput-calendar' => 'Label for the user interface element used to select a specific calendar (e.g. Gregorian, Julian) entering a time value.
 
 The calendar is not localized at this time.
 {{Identical|Calendar}}',
-	'valueview-expert-timeinput-calendarhint' => 'Message informing about the calendar (e.g. Gregorian) that is detected automatically when specifying a date.
-
-The message is shown only when the specified date lies within a time frame when multiple calendars had been in use.
-
-Parameters:
-* $1 - the name of the calendar that is detected by the system (not localized)',
-	'valueview-expert-timeinput-calendarhint-switch' => 'Label of the link manually switching the calendar (e.g. from Gregorian to Julian) directly at the preview (in combination with the calendar hint message).
-
-Parameters:
-* $1 - the name of the other calendar that may be switched to. (Currently, only Gregorian and Julian calendars are implemented, and these calendars are not localized.)',
+	'valueview-expert-timeinput-calendarhint-gregorian' => 'Message informing that the GREGORIAN calendar has been detected automatically while specifying a date. The message is shown only when the specified date lies within a time frame when multiple calendars had been in use.',
+	'valueview-expert-timeinput-calendarhint-julian' => 'Message informing that the JULIAN calendar has been detected automatically while specifying a date. The message is shown only when the specified date lies within a time frame when multiple calendars had been in use.',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => 'Label of the link manually switching to the GREGORIAN calendar. The link is located directly at the preview (in combination with the calendar hint message).',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => 'Label of the link manually switching to the JULIAN calendar. The link is located directly at the preview (in combination with the calendar hint message).',
 	'valueview-preview-label' => "Label displayed above the preview of a value that is being entered by the user. The preview is the system's interpretation of the specified value and - since there is no strict definition for a user how to specify values - visualizes how the value will be displayed later on after the value has been saved.",
 	'valueview-preview-novalue' => "Message displayed instead of an input value's preview when no value is specified yet or when the specified value could not be interpreted by the system.",
 	'valueview-listrotator-auto' => 'Label of the link to have the system automatically select the most appropriate value from a "listrotator" widget. The "listrotator" basically is a façade for a drop-down select box allowing to pick a value from a list of values. In addition to the defined values, an "automatic" option may be selected that makes the system pick the most appropriate value according to an associated input element.

@@ -5,7 +5,8 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, vp, $, vv ) {
+// TODO: Get rid of mw dependency
+( function( dv, vp, $, vv, mw ) {
 	'use strict';
 
 	var PARENT = vv.BifidExpert,
@@ -64,13 +65,16 @@
 					currentRawValue.precision() > 10
 					&& (
 						year > 1581 && year < 1930
-						|| year <= 1581 && currentRawValue.calendarText() === 'Gregorian'
-						|| year >= 1930 && currentRawValue.calendarText() === 'Julian'
+						|| year <= 1581 && currentRawValue.calendar() === 'Gregorian'
+						|| year >= 1930 && currentRawValue.calendar() === 'Julian'
 					)
 				) {
+					var key = currentRawValue.calendar().toLowerCase(),
+						calendarText = mw.msg( 'valueview-expert-timevalue-calendar-' + key );
+
 					$node
 					.append( $( '<span/>' ).text( currentRawValue.text( { format: dateFormat }) ) )
-					.append( $( '<sup/>' ).text( currentRawValue.calendarText() ) );
+					.append( $( '<sup/>' ).text( calendarText ) );
 				} else {
 					$node.text( currentRawValue.text( { format: dateFormat }) );
 				}
