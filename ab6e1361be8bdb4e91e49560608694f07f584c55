@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1KJ7uLo",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "The $site object is no longer used at all, as far as I can tell.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1CJIaIg",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "$idString doesn\u0027t seem to be used, so we\u0027ll probably also not need the $idFormatter",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1CJBiF4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "A general remark about hook handler functions:\n\nWe are trying to move away from having actual logic in the static handler functions. Instead, the logic should be put into a handler (aka controller) object that does not use any global state. We haven\u0027t refactored our existing code this way yet,. but new code should follow this pattern.\n\nIn the static handler function, you create the handler object, providing any services it needs (like the RepoLinker) by getting them from the global service registry.\n\nOnce the handler object exists, call the appropriate method on it.\n\nThe advantage is:\na) it\u0027s easy to write unit tests for the handler object, since the test does not need any global fixtures, and all services can be mocked.\nb) we don\u0027t have a bunch of unrelated code bunched together in one huge file (the hooks file).\n\nWhether you use the same handler for dealing with different hooks for the same task, or create different handlers for each hook, is up to you. Which makes more sense depends on the task at hand.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1IImfM8",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "UpdateRepoOnMove is already pretty close the the idea of a handler object i mentioned above.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1MIwhAM",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "Hm? Where does this come from and how is it related?",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1OIfgGc",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "Please inject all services via the constructor and avoid using global state if at all possible.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1IIPnDc",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "Return values are generally a bad way to indicate success or failure. Please use exceptions instead, they don\u0027t get ignored silently.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1GIMMEM",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "need wfProfileOut here.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1EIVtEc",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "Perhaps this should be a parameter of this method, not of the constructor?",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1CIaKHg",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "In case $jobQueueGroup is a parameter of this function, we could throw a RuntimeException here.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1MIJpDM",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "The title should refer to a page on the repo, not on the client. That\u0027s where the job is going to be executed. So it\u0027s shouldn\u0027t be the old or new title on the client, but the title of the respective item page on the repo. The RepoLinker should be able to give you that.\n\nSince it\u0027s a dummy, that doesn\u0027t really matter, but it\u0027s worth mentioning I guess.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1KIGGCA",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "Yea, how to inject services into job instances... \nI don\u0027t have a good solution yet. Would be good though to have a way to inject an alternative, for testing.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1AX8Vgg",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "same as above.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1OUAKgY",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "Why not just let the exception fly?",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1MUaTmw",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-21T12:18:06Z",
+      "side": 1,
+      "message": "Here we are throwing away all info about what went wrong. I don\u0027t have a good suggestion as to what to do instead, but it seems worth a note, at least.\n\nMaybe at some point we could post any errors to the user\u0027s talk page?... Or we could use the new Echo notifications directly? Worth a //TODO",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
