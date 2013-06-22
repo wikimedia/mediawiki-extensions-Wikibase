@@ -2108,6 +2108,13 @@ $messages['ru'] = array(
 	'version-wikibase' => 'Вики-база',
 );
 
+/** Sicilian (sicilianu)
+ * @author Gmelfi
+ */
+$messages['scn'] = array(
+	'wikibase-replicationnote' => 'Putìssiru siri nicissari devirsi minuti prima la li canci sunu visìbbili supra tutti li wiki',
+);
+
 /** Sinhala (සිංහල)
  * @author පසිඳු කාවින්ද
  */
@@ -2131,6 +2138,7 @@ $messages['si'] = array(
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
+ * @author Milicevic01
  * @author Милан Јелисавчић
  */
 $messages['sr-ec'] = array(
@@ -2148,7 +2156,7 @@ $messages['sr-ec'] = array(
 	'wikibase-error-save-generic' => 'Дошло је до грешке приликом покушаја чувања и због тога, промене не могу бити завршене.',
 	'wikibase-error-remove-generic' => 'Дошло је до грешке приликом покушаја да се изврши уклањање и због тога, промене не могу бити завршене.',
 	'wikibase-error-autocomplete-response' => 'Одговор сервера: $1',
-	'wikibase-error-ui-client-error' => 'Веза са клијентском страницом није успела. Молимо Вас покушајте поново касније.',
+	'wikibase-error-ui-client-error' => 'Веза са клијентском страницом није успела. Молимо вас покушајте поново касније.',
 	'wikibase-error-ui-no-external-page' => 'Наведени чланак није пронађен на одговарајућем сајту.',
 	'wikibase-error-ui-cant-edit' => 'Немате дозволу да извршите ову радњу.',
 	'wikibase-error-ui-no-permissions' => 'Немате потребна овлашћења да извршите ову радњу.',
@@ -2277,6 +2285,13 @@ $messages['uk'] = array(
  */
 $messages['ur'] = array(
 	'wikibase-tooltip-error-details' => 'تفصیلات',
+);
+
+/** Uzbek (oʻzbekcha)
+ * @author Sociologist
+ */
+$messages['uz'] = array(
+	'wikibase-replicationnote' => 'Iltimos, eʼtibor bering, oʻzgarishlar barcha viki-loyihalarda koʻrsatilishi uchun bir necha daqiqa kerak boʻlishi mumkin',
 );
 
 /** vèneto (vèneto)

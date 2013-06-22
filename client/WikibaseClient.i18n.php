@@ -2764,6 +2764,7 @@ $messages['pt-br'] = array(
 	'wikibase-unconnectedpages-iwdata-label' => 'Apenas páginas com links interlínguas',
 	'wikibase-unconnectedpages-format-row' => '($1 links interlínguas na página)', # Fuzzy
 	'wikibase-pageinfo-entity-id' => 'ID do item no Wikidata',
+	'wikibase-pageinfo-entity-id-none' => 'Não há',
 );
 
 /** Quechua (Runa Simi)
@@ -3208,6 +3209,13 @@ $messages['uz'] = array(
 	'wikibase-editlinks' => 'Ishoratlarni tahrirla',
 	'wikibase-editlinkstitle' => 'Tillararo havolalarni tahrirlash',
 	'wikibase-linkitem-addlinks' => 'Ishorat qoʻshish',
+	'wikibase-linkitem-title' => 'Sahifa bogʻlash',
+	'wikibase-linkitem-linkpage' => 'Sahifa bogʻlash',
+	'wikibase-linkitem-selectlink' => 'Ushbu sahifaga bogʻlamoqchi boʻlgan sayt va sahifa nomlarini tanlang.',
+	'wikibase-linkitem-input-site' => 'Til:',
+	'wikibase-linkitem-confirmitem-text' => 'Siz tanlagan sahifa [$1 markazlashtirilgan maʼlumotlar repozitoriyimizning bandi] bilan bogʻlandi. Iltimos, quyida koʻrsatilgan sahifalar orasida ushbu sahifaga bogʻlanishi keraklari borligini tasdiqlang.', # Fuzzy
+	'wikibase-linkitem-success-create' => 'Sahifalar bogʻlandi. Bogʻlamalar toʻplamini saqlash uchun yaratilgan yangi band [$1 markazlashtirilgan maʼlumot repozitoriyimizda] joylashgan.',
+	'wikibase-linkitem-success-link' => 'Sahifalar bogʻlandi. Bogʻlamalar toʻplami saqlanadigan bandni [$1 markazlashtirilgan maʼlumot repozitoriyimizda] topishingiz mumkin.',
 );
 
 /** vèneto (vèneto)
