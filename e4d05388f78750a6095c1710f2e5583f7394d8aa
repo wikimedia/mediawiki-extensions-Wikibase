@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1HZdEkU",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2013-06-22T08:02:32Z",
+      "side": 1,
+      "message": "plural, proper grammar",
+      "revId": "e4d05388f78750a6095c1710f2e5583f7394d8aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
