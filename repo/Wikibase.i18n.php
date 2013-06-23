@@ -10472,12 +10472,12 @@ untuk mencari di mana set data itu.',
 * hierarchicalpart (bahagian tatatingkat) – bahagian tersirat Iri-string
 * query (pertanyaan) – bahagian tersirat Iri-string
 * fragment (serpihan) – bahagian tersirat Iri-string',
-	'wikibase-listdatatypes-geo-coordinate-head' => 'Geokoordinat',
-	'wikibase-listdatatypes-geo-coordinate-body' => 'Data harfiah untuk kedudukan geografi yang diberikan sebagai pasangan latitud-longitud dalam gms atau darjah perpuluhan untuk jasad cakerawala yang diberikan. Nilai asalnya "Earth" diikuti "WGS84". Ia menambahkan leraian dan julat.
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Koordinat glob',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Data harfiah untuk kedudukan geografi yang diberikan sebagai pasangan latitud-longitud dalam gms atau darjah perpuluhan untuk jasad cakerawala yang diberikan. Nilai asalnya "Earth" diikuti "WGS84". Ia menambahkan leraian dan julat.
 * latitude – bahagian pertama tersirat (float, dms, dm, dd) rentetan koordinat, arah diberikan dengan tanda awalan atau akhiran N/S
 * longitude – bahagian kedua tersirat (float, dms, dm, dd) rentetan koordinat, arah diberikan dengan tanda awalan atau akhiran E/W
 * altitude (pilihan) – nilai tersurat (?) untuk ketinggian di atas satah rujukan, untuk glob "Earth" yang menjadi glob rujukan "WGS84"
-* globe (pilihan) – nilai data tersurat (?), diberikan sebagai jasad cakerawala yang berpangkal pada "Earth" diikuti oleh "WGS84"',
+* globe (pilihan) – nilai data tersurat (?), diberikan sebagai jasad cakerawala yang berpangkal pada "Earth" diikuti oleh "WGS84"', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Kuantiti',
 	'wikibase-listdatatypes-quantity-body' => 'Medan data harfiah untuk kuantiti yang berkenaan dengan suatu jenis unit yang tertentu. Unit sebenar memasuki nilai data yang dimasukkan.
 * nilai – bahagian tersirat dalam rentetan (pemetaan awalan unit tidak jelas)
@@ -10486,15 +10486,15 @@ untuk mencari di mana set data itu.',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Teks satu bahasa',
 	'wikibase-listdatatypes-monolingual-text-body' => 'Medan data harfiah untuk rentetan yang tidak diterjemahkan kepada bahasa lain. Jenis rentetan ini ditakrifkan sekali dan digunakan merentas semua bahasa. Contoh kegunaan: nama geografi yang ditulis dalam bahasa tempatan, suatu pengecam, rumus kimia atau nama sains dalam bahasa Latin.
 *language (bahasa) - nilai tersurat untuk mengecam bahasa untuk bahagian teks
-*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa',
+*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa', # Fuzzy
 	'wikibase-listdatatypes-multilingual-text-head' => 'Teks berbilang bahasa',
 	'wikibase-listdatatypes-multilingual-text-body' => 'Medan data harfiah untuk rentetan yang mesti diterjemahkan ke dalam bahasa lain. Contoh kegunaan: nama perkara diminati sejagat yang mempunyai nama bertulis bukan tempatan, baik dari segi bahasa mahupun sistem tulisan.
 *language (bahasa) - nilai tersurat untuk mengecam bahasa untuk bahagian teks
-*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa',
+*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa', # Fuzzy
 	'wikibase-listdatatypes-string-head' => 'Rentetan',
 	'wikibase-listdatatypes-string-body' => 'Medan data harfiah untuk rentetan aksara. Contoh kegunaan: pengecam yang berbentuk bertulis tanpa mengira bahasa. Rentetan sedemikian ini adakalanya boleh dialih huruf ke dalam sistem tulisan (abjad) yang lain.
 *language (bahasa) - nilai tersurat untuk mengecam bahasa untuk bahagian teks
-*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa',
+*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa', # Fuzzy
 	'wikibase-listdatatypes-time-head' => 'Waktu',
 	'wikibase-listdatatypes-time-body' => 'Medan data harfiah untuk nilai masa, diberi dalam bentuk waktu dengan sedikit kepersisan dan sempadan. Waktunya sentiasa disimpan secara dalaman dalam format Gregory Prolepsis, tetapi format-format lain boleh digunakan sewaktu penghuraian dan penghuraian.(?)
 * time (waktu) – nilai tersurat untuk waktu yang dipaparkan mengikut ISO8601, yang mana tahunnya sentiasa ada 11 digit dan tarikhnya sentiasa bertanda dalam format +00000002013-01-01T00:00:00Z
