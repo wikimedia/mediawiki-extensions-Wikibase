@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "D1BHfeDg",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1KJ7uLo",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1CJIaIg",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 8
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "D1JHraN0",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1CJIaIg",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1CJBiF4",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 8
@@ -47,6 +83,24 @@
       "writtenOn": "2013-06-21T12:18:06Z",
       "side": 1,
       "message": "A general remark about hook handler functions:\n\nWe are trying to move away from having actual logic in the static handler functions. Instead, the logic should be put into a handler (aka controller) object that does not use any global state. We haven\u0027t refactored our existing code this way yet,. but new code should follow this pattern.\n\nIn the static handler function, you create the handler object, providing any services it needs (like the RepoLinker) by getting them from the global service registry.\n\nOnce the handler object exists, call the appropriate method on it.\n\nThe advantage is:\na) it\u0027s easy to write unit tests for the handler object, since the test does not need any global fixtures, and all services can be mocked.\nb) we don\u0027t have a bunch of unrelated code bunched together in one huge file (the hooks file).\n\nWhether you use the same handler for dealing with different hooks for the same task, or create different handlers for each hook, is up to you. Which makes more sense depends on the task at hand.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1GZYvTA",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "That sounds reasonable, done",
+      "parentUuid": "D1CJBiF4",
       "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "D1DHadEk",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "It\u0027s from below... some kind of rebase weirdness... fixed",
+      "parentUuid": "D1MIwhAM",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1OIfgGc",
         "filename": "client/includes/UpdateRepo.php",
         "patchSetId": 8
@@ -98,6 +170,24 @@
       "writtenOn": "2013-06-21T12:18:06Z",
       "side": 1,
       "message": "Please inject all services via the constructor and avoid using global state if at all possible.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1GPnD7A",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1OIfgGc",
       "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "D1IY-qbA",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "I\u0027ve changed this to throw exceptions when things which really shouldn\u0027t happen happen, but left it to not throw up in case the actual injection fails.",
+      "parentUuid": "D1IIPnDc",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1GIMMEM",
         "filename": "client/includes/UpdateRepo.php",
         "patchSetId": 8
@@ -132,6 +240,24 @@
       "writtenOn": "2013-06-21T12:18:06Z",
       "side": 1,
       "message": "need wfProfileOut here.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1NHU0B8",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1GIMMEM",
       "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "D1EPsk5A",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1EIVtEc",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1CIaKHg",
         "filename": "client/includes/UpdateRepo.php",
         "patchSetId": 8
@@ -172,6 +316,24 @@
     },
     {
       "key": {
+        "uuid": "D1KMB9z4",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1CIaKHg",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1MIJpDM",
         "filename": "lib/includes/UpdateRepoOnMoveJob.php",
         "patchSetId": 8
@@ -183,6 +345,24 @@
       "writtenOn": "2013-06-21T12:18:06Z",
       "side": 1,
       "message": "The title should refer to a page on the repo, not on the client. That\u0027s where the job is going to be executed. So it\u0027s shouldn\u0027t be the old or new title on the client, but the title of the respective item page on the repo. The RepoLinker should be able to give you that.\n\nSince it\u0027s a dummy, that doesn\u0027t really matter, but it\u0027s worth mentioning I guess.",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1LEdxA0",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1MIJpDM",
       "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -240,6 +420,24 @@
     },
     {
       "key": {
+        "uuid": "D1FGTwFo",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "I could let it fly and catch it below... that might be more sane. Letting it fly entirely isn\u0027t an option though as this is a somewhat expected thing. (Added a code comment about that in PS9)",
+      "parentUuid": "D1OUAKgY",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1MUaTmw",
         "filename": "lib/includes/UpdateRepoOnMoveJob.php",
         "patchSetId": 8
@@ -251,6 +449,24 @@
       "writtenOn": "2013-06-21T12:18:06Z",
       "side": 1,
       "message": "Here we are throwing away all info about what went wrong. I don\u0027t have a good suggestion as to what to do instead, but it seems worth a note, at least.\n\nMaybe at some point we could post any errors to the user\u0027s talk page?... Or we could use the new Echo notifications directly? Worth a //TODO",
+      "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1PHPTIo",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-23T21:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1MUaTmw",
       "revId": "ab6e1361be8bdb4e91e49560608694f07f584c55",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
