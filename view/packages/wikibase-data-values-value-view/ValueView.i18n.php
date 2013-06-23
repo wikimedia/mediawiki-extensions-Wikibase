@@ -202,10 +202,17 @@ $messages['en-gb'] = array(
 
 /** Spanish (español)
  * @author Fitoschido
+ * @author Invadinado
  */
 $messages['es'] = array(
+	'valueview-expert-advancedadjustments' => 'ajustes avanzados',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La manipulación de valores para el tipo de datos "$1" aún no está soportada.', # Fuzzy
 	'valueview-expert-emptyvalue-empty' => 'vacío',
+	'valueview-expert-globecoordinateinput-precision' => 'Precisión:',
+	'valueview-expert-timeinput-precision' => 'Precisión:',
+	'valueview-expert-timeinput-calendar' => 'Calendario:',
+	'valueview-expert-timeinput-calendarhint' => '(calendario $1)',
+	'valueview-preview-label' => 'se mostrará como:',
 );
 
 /** Persian (فارسی)
