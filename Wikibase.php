@@ -14,59 +14,42 @@
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-define( 'WB_EXPERIMENTAL_FEATURES', true );
 
-require_once __DIR__ . '/lib/WikibaseLib.php';
+//TODO: Use a different file for jenkins, use this for a standard repo+client setup.
 
-// Temporary hack that populates the sites table since there are some tests that require this to have happened
-require_once __DIR__ . '/lib/maintenance/populateSitesTable.php';
-$wgExtensionFunctions[] = function() {
-	$evilStuff = new PopulateSitesTable();
-	$evilStuff->execute();
-};
-
-function remove_directory( $dirPath ) {
-	foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dirPath, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST) as $path) {
-		$path->isFile() ? unlink($path->getPathname()) : rmdir($path->getPathname());
-	}
-}
-
-# Let JenkinsAdapt our test suite when run under Jenkins
 $jenkins_job_name = getenv( 'JOB_NAME' );
-if( PHP_SAPI === 'cli' && $jenkins_job_name !== false ) {
 
-	switch( $jenkins_job_name) {
-		case 'mwext-Wikibase-client-tests':
-//			// Exclude non loaded production code
-//			remove_directory( __DIR__ . '/repo' );
-//
-//			// This test is failing for unknown reason
-//			unlink( __DIR__ . '/client/tests/phpunit/includes/CachedEntityTest.php' );
-//
-//			require_once __DIR__ . '/client/WikibaseClient.php';
-//			require_once __DIR__ . '/client/ExampleSettings.php';
-//
-//			$wgWBSettings['repoDatabase'] = $wgDBname . '-' . $wgDBprefix;
-//			$wgWBSettings['changesDatabase'] = $wgDBname . '-' . $wgDBprefix;
-//
-//			$wgLBFactoryConf['sectionsByDB'] = array(
-//				$wgDBname => 'DEFAULT',
-//				'repowiki' => $wgDBname . '-' . $wgDBprefix,
-//			);
-//		break;
-		case 'mwext-Wikibase-repo-tests':
-			// Exclude non loaded production code
-			remove_directory( __DIR__ . '/client' );
-
-			require_once __DIR__ . '/repo/Wikibase.php';
-			require_once __DIR__ . '/repo/ExampleSettings.php';
-		break;
-		default:
-			require_once __DIR__ . '/client/WikibaseClient.php';
-			require_once __DIR__ . '/repo/Wikibase.php';
-			require_once __DIR__ . '/repo/ExampleSettings.php';
-	}
+if( PHP_SAPI !== 'cli' || $jenkins_job_name === false ) {
+	die( "This entry point is for use by the Jenkins testing framework only.\n"
+		. "Use repo/Wikibase.php resp. client/WikibaseClient.php instead.\n" );
 }
+
+if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
+	define( 'WB_EXPERIMENTAL_FEATURES', true );
+}
+
+switch( $jenkins_job_name) {
+	case 'mwext-Wikibase-client-tests':
+		require_once __DIR__ . '/client/WikibaseClient.php';
+		require_once __DIR__ . '/client/ExampleSettings.php';
+		break;
+
+	case 'mwext-Wikibase-repo-tests':
+		require_once __DIR__ . '/repo/Wikibase.php';
+		require_once __DIR__ . '/repo/ExampleSettings.php';
+		break;
+
+	default:
+		require_once __DIR__ . '/repo/Wikibase.php';
+		require_once __DIR__ . '/client/WikibaseClient.php';
+
+		require_once __DIR__ . '/repo/ExampleSettings.php';
+		require_once __DIR__ . '/client/ExampleSettings.php';
+}
+
 // Avoid polluting the global namespace
-unset( $jenkins_job_name, $cmd );
+unset( $jenkins_job_name );
+
+
