@@ -126,8 +126,8 @@ $messages['ast'] = array(
 $messages['be-tarask'] = array(
 	'valueview-desc' => 'Кампанэнты карыстальніцкага інтэрфэйсу для адлюстраваньня і рэдагаваньня зьвестак',
 	'valueview-expert-advancedadjustments' => 'пашыраныя налады',
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Апрацоўка зьвестак тыпу «$1» пакуль не падтрымліваецца.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Апрацоўка значэньняў тыпу «$1» яшчэ не падтрымліваецца.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Апрацоўка значэньняў «$1» пакуль не падтрымліваецца.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Апрацоўка значэньняў тыпу «$1» яшчэ не падтрымліваецца.',
 	'valueview-expert-emptyvalue-empty' => 'пуста',
 	'valueview-expert-globecoordinateinput-precision' => 'Дакладнасьць:',
 	'valueview-expert-timeinput-precision' => 'Дакладнасьць:',
@@ -544,6 +544,7 @@ $messages['sr-ec'] = array(
  * @author Jopparn
  */
 $messages['sv'] = array(
+	'valueview-expert-advancedadjustments' => 'avancerade inställningar',
 	'valueview-expert-emptyvalue-empty' => 'tom',
 	'valueview-expert-globecoordinateinput-precision' => 'Precision:',
 	'valueview-expert-timeinput-precision' => 'Precision:',
