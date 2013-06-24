@@ -189,6 +189,66 @@ final class Utils {
 	}
 
 	/**
+	 * Remove bytes that represent an incomplete Unicode character
+	 * at the end of string (e.g. bytes of the char are missing)
+	 *
+	 * @todo: this was stolen from the Language class. Make that code reusable.
+	 *
+	 * @param $string String
+	 * @return string
+	 */
+	public static function removeBadCharLast( $string ) {
+		if ( $string != '' ) {
+			$char = ord( $string[strlen( $string ) - 1] );
+			$m = array();
+			if ( $char >= 0xc0 ) {
+				# We got the first byte only of a multibyte char; remove it.
+				$string = substr( $string, 0, -1 );
+			} elseif ( $char >= 0x80 &&
+				preg_match( '/^(.*)(?:[\xe0-\xef][\x80-\xbf]|' .
+					'[\xf0-\xf7][\x80-\xbf]{1,2})$/', $string, $m )
+			) {
+				# We chopped in the middle of a character; remove it
+				$string = $m[1];
+			}
+		}
+		return $string;
+	}
+
+	/**
+	 * Remove bytes that represent an incomplete Unicode character
+	 * at the start of string (e.g. bytes of the char are missing)
+	 *
+	 * @todo: this was stolen from the Language class. Make that code reusable.
+	 *
+	 * @param $string String
+	 * @return string
+	 */
+	public static function removeBadCharFirst( $string ) {
+		if ( $string != '' ) {
+			$char = ord( $string[0] );
+			if ( $char >= 0x80 && $char < 0xc0 ) {
+				# We chopped in the middle of a character; remove the whole thing
+				$string = preg_replace( '/^[\x80-\xbf]+/', '', $string );
+			}
+		}
+		return $string;
+	}
+
+	/**
+	 * Remove incomplete UTF-8 sequences from the beginning and end of the string.
+	 *
+	 * @param $string
+	 *
+	 * @return $string
+	 */
+	public static function trimBadChars( $string ) {
+		$string = self::removeBadCharFirst( $string );
+		$string = self::removeBadCharLast( $string );
+		return $string;
+	}
+
+	/**
 	 * Trim initial and trailing whitespace and control chars, and optionally compress internal ones.
 	 *
 	 * @since 0.1
@@ -198,8 +258,11 @@ final class Utils {
 	 * @return string where whitespace possibly are removed.
 	 */
 	static public function trimWhitespace( $inputString ) {
+		$inputString = self::trimBadChars( $inputString );
+
 		// \p{Z} - whitespace
 		// \p{Cc} - control chars
+		// WARNING: *any* invalid UTF8 sequence causes preg_replace to return an empty string.
 		$trimmed = preg_replace( '/^[\p{Z}\p{Cc}]+|[\p{Z}\p{Cc}]+$/u', '', $inputString );
 		$trimmed = preg_replace( '/[\p{Cc}]+/u', ' ', $trimmed );
 		return $trimmed;
@@ -212,10 +275,13 @@ final class Utils {
 	 *
 	 * @param string $inputString The actual string to process.
 	 *
-	 * @return string where whitespace possibly are removed.
+	 * @return string NFC form of the input, with (some) invalid sequences removed.
 	 */
 	static public function cleanupToNFC( $inputString ) {
-		return UtfNormal::cleanUp( $inputString );
+		$cleaned = $inputString;
+		$cleaned = self::trimBadChars( $cleaned );
+		$cleaned = UtfNormal::cleanUp( $cleaned );
+		return $cleaned;
 	}
 
 	/**
@@ -225,7 +291,7 @@ final class Utils {
 	 *
 	 * @param string $inputString
 	 *
-	 * @return string on NFC form
+	 * @return string on NFC form and leading and trailing whitespace removed.
 	 */
 	static public function trimToNFC( $inputString ) {
 		return self::cleanupToNFC( self::trimWhitespace( $inputString ) );

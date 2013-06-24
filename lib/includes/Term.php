@@ -229,19 +229,42 @@ class Term {
 	 * @return string
 	 */
 	public static function normalizeText( $text, $lang = 'en' ) {
-		// \p{Z} - whitespace
-		// \p{C} - control chars
-		$text = preg_replace( '/^[\p{Z}\p{C}]+|[\p{Z}\p{C}]+$/u', '', $text );
-		$text = preg_replace( '/[\p{C}]+/u', ' ', $text );
+		if ( $text === '' ) {
+			return '';
+		}
 
 		// composed normal form
-		$text = Utils::cleanupToNFC( $text );
+		$nfcText = Utils::cleanupToNFC( $text );
+
+		if ( !is_string( $nfcText ) || $nfcText === '' ) {
+			wfWarn( "Unicode normalization failed for `$text`" );
+		}
+
+		// \p{Z} - whitespace
+		// \p{C} - control chars
+		// WARNING: *any* invalid UTF8 sequence causes preg_replace to return an empty string.
+		$strippedText = $nfcText;
+		$strippedText = preg_replace( '/[\p{Cc}\p{Cf}\p{Cn}\p{Cs}]+/u', ' ', $strippedText );
+		$strippedText = preg_replace( '/^[\p{Z}]+|[\p{Z}]+$/u', '', $strippedText );
+
+		if ( $strippedText === '' ) {
+			// NOTE: This happens when there is only whitespace in the string.
+			//       However, preg_replace will also return an empty string if it
+			//       encounters any invalid utf-8 sequence.
+			return '';
+		}
 
 		//TODO: Use Language::lc to convert to lower case.
 		//      But that requires us to load ALL the language objects,
 		//      which loads ALL the messages, which makes us run out
 		//      of RAM (see bug 41103).
-		return mb_strtolower( $text, 'UTF-8' );
+		$normalized = mb_strtolower( $strippedText, 'UTF-8' );
+
+		if ( !is_string( $normalized ) || $normalized === '' ) {
+			wfWarn( "mb_strtolower normalization failed for `$strippedText`" );
+		}
+
+		return $normalized;
 	}
 
 	/**
