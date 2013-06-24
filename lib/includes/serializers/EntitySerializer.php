@@ -33,6 +33,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class EntitySerializer extends SerializerObject {
 
