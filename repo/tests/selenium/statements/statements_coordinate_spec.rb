@@ -115,10 +115,10 @@ describe "Check coordinate statements UI", :exclude_chrome => true do
           page.wait_for_property_value_box
           page.statementValueInputField_element.clear
           page.statementValueInputField = coordinate["input"]
-          ajax_wait
           page.inputExtender_element.when_visible
+          page.previewSpinner_element.when_not_visible
           page.select_coordinate_precision coordinate["precision"]
-          ajax_wait
+          page.previewSpinner_element.when_not_visible
           page.inputPreviewValue.should == coordinate["expected_preview"]
           page.coordinatePrecisionRotatorSelect_element.text.should == coordinate["expected_precision"]
           page.cancelStatement
@@ -136,7 +136,7 @@ describe "Check coordinate statements UI", :exclude_chrome => true do
         page.wait_for_entity_selector_list
         page.wait_for_property_value_box
         page.statementValueInputField = coordinate_values[0]["input"]
-        ajax_wait
+        page.previewSpinner_element.when_not_visible
         page.saveStatement?.should be_true
         page.saveStatement
         ajax_wait

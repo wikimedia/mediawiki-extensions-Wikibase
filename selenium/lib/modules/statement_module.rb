@@ -37,6 +37,7 @@ module StatementPage
   link(:snaktypeSelectorValue, :xpath => "//ul[contains(@class, 'wb-snaktypeselector-menu')]/li[contains(@class, 'wb-snaktypeselector-menuitem-value')]/a")
   link(:snaktypeSelectorSomevalue, :xpath => "//ul[contains(@class, 'wb-snaktypeselector-menu')]/li[contains(@class, 'wb-snaktypeselector-menuitem-somevalue')]/a")
   link(:snaktypeSelectorNovalue, :xpath => "//ul[contains(@class, 'wb-snaktypeselector-menu')]/li[contains(@class, 'wb-snaktypeselector-menuitem-novalue')]/a")
+  span(:previewSpinner, :class => "mw-small-spinner")
 
   def wait_for_property_value_box
     wait_until do
