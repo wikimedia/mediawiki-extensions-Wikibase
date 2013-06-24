@@ -496,7 +496,7 @@ $.widget( 'wikibase.linkitem', {
 							site: this.targetSite,
 							title: this.targetArticle
 						};
-						this.repoApi.createEntity( entityData )
+						this.repoApi.createEntity( 'item', entityData )
 							.done( $.proxy( this._successfullyCreated, this ) )
 							.fail( $.proxy( this._onError, this ) );
 					} else {
