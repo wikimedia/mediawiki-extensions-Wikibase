@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1Y3uwSE",
+        "filename": "lib/includes/serializers/ItemSerializer.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-24T16:10:32Z",
+      "side": 1,
+      "message": "Would be nice to push this dependency on global state further \"out\", perhaps to the Serializer\u0027s constructor. That gives us a changes to override it for testing.",
+      "revId": "66e4dcb8755fb09e987e199c46b46231d4876c69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
