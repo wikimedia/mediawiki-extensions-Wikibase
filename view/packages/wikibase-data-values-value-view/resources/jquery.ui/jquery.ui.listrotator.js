@@ -17,9 +17,6 @@
  *         {Object} [menu.position] Default object passed to jQuery.ui.position when positioning the
  *         menu.
  *
- * @option {boolean} [auto] Whether to display the "auto" link.
- *         Default: true
- *
  * @option {Object} [animation] Object containing parameters used for the rotation animation.
  *         {string[]} [margins] Defines how far the sections should be shifted when animating the
  *         rotation. First value when shifting to the left and vice versa. Values will be flipped in
@@ -112,7 +109,6 @@
 					collision: 'none'
 				}
 			},
-			auto: true,
 			animation: {
 				margins: ['-15px', '15px'],
 				duration: 150
@@ -180,7 +176,7 @@
 
 			// Construct "auto" link:
 			this.$auto = this._createSection( 'auto', function( event ) {
-				if( self.$auto.hasClass( 'ui-state-active' ) ) {
+				if( self.autoActive() ) {
 					return;
 				}
 				self.activate( self.$auto );
@@ -556,6 +552,16 @@
 		 */
 		deactivate: function() {
 			this.$curr.add( this.$auto ).removeClass( 'ui-state-active' );
+		},
+
+		/**
+		 * Returns whether the listrotator is currently set to "auto", meaning that the value
+		 * returned by value() has not been chosen by the user explicitly.
+		 *
+		 * @returns boolean
+		 */
+		autoActive: function() {
+			return this.$auto.hasClass( 'ui-state-active' );
 		},
 
 		/**

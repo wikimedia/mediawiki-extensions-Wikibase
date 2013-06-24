@@ -92,7 +92,16 @@
 			3,
 			'Confirmed listrotator\'s value.'
 		);
+	} );
 
+	QUnit.test( 'autoActive()', function( assert ) {
+		assert.ok(
+			newTestListrotator().autoActive(),
+			'Listrotator uses "auto" initially'
+		);
+
+		// TODO: Implement autoActive( true ) and check for autoActive() again or simulate click
+		//  which would also result into autoActive() === false.
 	} );
 
 }( jQuery, QUnit ) );
