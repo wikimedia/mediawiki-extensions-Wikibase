@@ -110,6 +110,36 @@ class TermTest extends \MediaWikiTestCase {
 				"\xE2\x80\x8F\xE2\x80\x8Cfoo\xE2\x80\x8Cbar\xE2\x80\xA9", // raw
 				"foo bar", // normalized
 			),
+
+			array( // #7: Private Use Area: U+0F818
+				"\xef\xa0\x98",
+				"\xef\xa0\x98"
+			),
+
+			array( // #8: Latin Extended-D: U+0A7AA
+				"\xea\x9e\xaa",
+				"\xea\x9e\xaa",
+			),
+
+			array( // #9: badly truncated cyrillic:
+				"\xd0\xb5\xd0",
+				"\xd0\xb5",
+			),
+
+			array( // #10: badly truncated katakana:
+				"\xe3\x82\xa6\xe3\x83",
+				"\xe3\x82\xa6"
+			),
+
+			array( // #11: empty
+				"",
+				""
+			),
+
+			array( // #12: just blanks
+				" \n ",
+				""
+			),
 		);
 	}
 
@@ -120,7 +150,9 @@ class TermTest extends \MediaWikiTestCase {
 		$term = new Term( array() );
 
 		$term->setText( $raw );
-		$this->assertEquals( $normalized, $term->getNormalizedText() );
+
+		$actual = $term->getNormalizedText();
+		$this->assertEquals( $normalized, $actual );
 	}
 
 	public function testClone() {
