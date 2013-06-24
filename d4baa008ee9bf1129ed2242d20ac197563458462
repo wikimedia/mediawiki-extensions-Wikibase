@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1NcEvcQ",
+        "filename": "Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-24T15:29:04Z",
+      "side": 1,
+      "message": "It is fantastic the tests now run together. Running them separately as well is added value though. It\u0027d be nicer to keep all 3 jobs (client, repo, both), where we can now for the first time make all 3 voting.",
+      "revId": "d4baa008ee9bf1129ed2242d20ac197563458462",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
