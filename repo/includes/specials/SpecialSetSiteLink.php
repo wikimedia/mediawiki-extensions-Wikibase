@@ -263,7 +263,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		if ( $pageName !== '' ) {
 			// Don't try to normalize an empty string (which means: remove the link)
-			$page = $site->normalizePageName( $page );
 			$pageName = $site->normalizePageName( $pageName );
 
 			if ( $pageName === false ) {
