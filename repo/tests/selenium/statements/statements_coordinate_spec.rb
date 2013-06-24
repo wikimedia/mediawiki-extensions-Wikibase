@@ -41,11 +41,12 @@ coordinate_values.push({
   "expected_preview" => "42°9'13.7\"N, 8°34'23.2\"E"
 })
 coordinate_values.push({
-  "input" => "42° 09.231' N, 008° 34.386' E",
+  "input" => "42° 09.231' N 008° 34.386' E",
   "precision" => "auto",
   "expected_precision" => "to 1/100 of an arcsecond",
   "expected_preview" => "42°9'13.86\"N, 8°34'23.16\"E"
 })
+
 coordinate_values.push({
   "input" => "stuff",
   "precision" => "auto",
@@ -116,9 +117,11 @@ describe "Check coordinate statements UI", :exclude_chrome => true do
           page.statementValueInputField_element.clear
           page.statementValueInputField = coordinate["input"]
           page.inputExtender_element.when_visible
-          page.previewSpinner_element.when_not_visible
+          page.previewSpinner_element.when_not_visible(10)
+          ajax_wait
           page.select_coordinate_precision coordinate["precision"]
-          page.previewSpinner_element.when_not_visible
+          page.previewSpinner_element.when_not_visible(10)
+          ajax_wait
           page.inputPreviewValue.should == coordinate["expected_preview"]
           page.coordinatePrecisionRotatorSelect_element.text.should == coordinate["expected_precision"]
           page.cancelStatement
@@ -136,7 +139,8 @@ describe "Check coordinate statements UI", :exclude_chrome => true do
         page.wait_for_entity_selector_list
         page.wait_for_property_value_box
         page.statementValueInputField = coordinate_values[0]["input"]
-        page.previewSpinner_element.when_not_visible
+        page.previewSpinner_element.when_not_visible(10)
+        ajax_wait
         page.saveStatement?.should be_true
         page.saveStatement
         ajax_wait

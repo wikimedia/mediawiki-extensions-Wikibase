@@ -24,7 +24,7 @@ module CoordinatePage
       return
     end
     self.coordinatePrecisionRotatorSelect
-    self.coordinatePrecisionMenu_element.when_visible
+    self.coordinatePrecisionMenu_element.when_visible(10)
     self.coordinatePrecisionMenu_element.each do |item|
       if item.text == prec
         item.click
@@ -36,7 +36,7 @@ module CoordinatePage
   def show_advanced_coordinate_settings
     if !self.coordinatePrecision_element.visible?
       self.coordinateInputExtenderAdvanced
-      self.coordinatePrecision_element.when_visible
+      self.coordinatePrecision_element.when_visible(10)
     end
   end
 end
