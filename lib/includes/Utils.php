@@ -189,6 +189,49 @@ final class Utils {
 	}
 
 	/**
+	 * Trim initial and trailing whitespace and control chars, and optionally compress internal ones.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $inputString The actual string to process.
+	 *
+	 * @return string where whitespace possibly are removed.
+	 */
+	static public function trimWhitespace( $inputString ) {
+		// \p{Z} - whitespace
+		// \p{Cc} - control chars
+		$trimmed = preg_replace( '/^[\p{Z}\p{Cc}]+|[\p{Z}\p{Cc}]+$/u', '', $inputString );
+		$trimmed = preg_replace( '/[\p{Cc}]+/u', ' ', $trimmed );
+		return $trimmed;
+	}
+
+	/**
+	 * Normalize string into NFC by using the cleanup metod from UtfNormal.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $inputString The actual string to process.
+	 *
+	 * @return string where whitespace possibly are removed.
+	 */
+	static public function cleanupToNFC( $inputString ) {
+		return UtfNormal::cleanUp( $inputString );
+	}
+
+	/**
+	 * Do a toNFC after the string is squashed
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $inputString
+	 *
+	 * @return string on NFC form
+	 */
+	static public function trimToNFC( $inputString ) {
+		return self::cleanupToNFC( self::trimWhitespace( $inputString ) );
+	}
+
+	/**
 	 * Reorder an array with keys with the order given by a second array.
 	 *
 	 * Note that this function will do an intersection and then organize
