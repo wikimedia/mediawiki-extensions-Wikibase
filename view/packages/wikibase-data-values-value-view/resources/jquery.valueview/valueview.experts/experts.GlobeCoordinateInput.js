@@ -35,7 +35,7 @@
 		 * the new value has been called. The use of this, basically, is a structural improvement
 		 * which allows moving setting the displayed value to the draw() method which is supposed to
 		 * handle all visual manners.
- 		 * @type {string|null|false}
+		 * @type {string|null|false}
 		 */
 		_newValue: null,
 
@@ -171,7 +171,6 @@
 			var options = {},
 				precisionWidget = this.$precision.data( 'listrotator' );
 
-			// TODO: Don't access the widget's internals here, check this via some function.
 			if( !precisionWidget.autoActive() ) {
 				var precision = getPrecisionSetting( precisionWidget.value() );
 
