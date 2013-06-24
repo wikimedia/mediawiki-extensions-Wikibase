@@ -21,7 +21,7 @@
 				'foo' // Might not be a valid coordinate, but that's for the parser to decide, the expert shouldn't care.
 			],
 			unknown: testExpert.basicTestDefinition.rawValues.unknown.concat( [
-				42,
+				42
 			] )
 		},
 		relatedValueParser: GlobeCoordinateParser

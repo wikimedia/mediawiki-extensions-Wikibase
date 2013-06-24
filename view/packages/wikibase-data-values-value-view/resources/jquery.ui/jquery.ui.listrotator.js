@@ -558,7 +558,7 @@
 		 * Returns whether the listrotator is currently set to "auto", meaning that the value
 		 * returned by value() has not been chosen by the user explicitly.
 		 *
-		 * @returns boolean
+		 * @return {boolean}
 		 */
 		autoActive: function() {
 			return this.$auto.hasClass( 'ui-state-active' );
