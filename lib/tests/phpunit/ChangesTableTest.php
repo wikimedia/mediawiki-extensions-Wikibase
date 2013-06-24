@@ -136,7 +136,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 	 * @dataProvider newFromArrayProvider
 	 */
 	public function testSaveSelectCountAndDelete( array $data, $loadDefaults = false ) {
-		if ( defined( 'WBC_VERSION' ) ) {
+		if ( !defined( 'WB_VERSION' ) ) {
 			$this->markTestSkipped( "Skipping because Wikibase Client should not write to foreign database table." );
 		}
 

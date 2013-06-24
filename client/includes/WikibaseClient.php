@@ -220,9 +220,14 @@ final class WikibaseClient {
 			$store = $this->settings->getSetting( 'defaultClientStore' ); // still false per default
 		}
 
+		//NOTE: $repoDatabase is null per default, meaning no direct access to the repo's database.
+		//      If $repoDatabase is false, the local wiki IS the repository.
+		//      Otherwise, $repoDatabase needs to be a logical database name that LBFactory understands.
+		$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
+
 		if ( !$store ) {
 			//XXX: this is a rather ugly "magic" default.
-			if ( $this->settings->getSetting( 'repoDatabase' ) ) {
+			if ( $repoDatabase !== null ) {
 				$store = 'DirectSqlStore';
 			} else {
 				$store = 'CachingSqlStore';
@@ -239,7 +244,7 @@ final class WikibaseClient {
 
 		$instance = new $class(
 			$this->getContentLanguage(),
-			$this->settings->getSetting( 'repoDatabase' )
+			$repoDatabase
 		);
 
 		assert( $instance instanceof ClientStore );

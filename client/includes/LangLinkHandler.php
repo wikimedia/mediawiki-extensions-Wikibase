@@ -379,15 +379,6 @@ class LangLinkHandler {
 	public function addLinksFromRepository( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
 
-		// @todo: inject this as a parameter
-		$site = $this->sites->getSite( $this->siteId );
-
-		if ( $site === null ) {
-			wfWarn( 'Site not found for ' . $this->siteId . '. Cannot add links from repository.' );
-			wfProfileOut( __METHOD__ );
-			return;
-		}
-
 		$repoLinks = $this->getEffectiveRepoLinks( $title, $out );
 
 		foreach ( $repoLinks as $wiki => $page ) {
