@@ -33,6 +33,7 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, M
  * @author Daniel Werner
  * @author Michał Łazowik
  * @author Jens Ohlig
+ * @author Marius Hoch < hoo@online.de >
  */
 final class RepoHooks {
 	/**
@@ -1027,5 +1028,82 @@ final class RepoHooks {
 		$text = $content->getTextForFilters();
 
 		return false;
+	}
+
+	/**
+	 * Add javascript testing modules. This is called after the addition of MediaWiki core test suites.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
+	 *
+	 * @since 0.4
+	 *
+	 * @param array &$testModules
+	 * @param \ResourceLoader &$resourceLoader
+	 *
+	 * @return boolean
+	 */
+	public static function registerQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
+		$testModules['qunit']['wikibase.repo.tests'] = array(
+			'scripts' => array(
+				'tests/qunit/parsers/EntityIdParser.tests.js',
+
+				'tests/qunit/wikibase.dataTypes/wikibase.dataTypes.tests.js',
+
+				'tests/qunit/wikibase.datamodel/Wikibase.claim.tests.js',
+				'tests/qunit/wikibase.datamodel/Wikibase.reference.tests.js',
+				'tests/qunit/wikibase.datamodel/Wikibase.snak.tests.js',
+				'tests/qunit/wikibase.datamodel/Wikibase.SnakList.tests.js',
+				'tests/qunit/wikibase.datamodel/wikibase.Statement.tests.js',
+				'tests/qunit/wikibase.datamodel/datamodel.Entity.tests.js',
+				'tests/qunit/wikibase.datamodel/datamodel.Item.tests.js',
+				'tests/qunit/wikibase.datamodel/datamodel.Property.tests.js',
+
+				'tests/qunit/wikibase.ui.AliasesEditTool.tests.js',
+				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
+				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
+				'tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableAliases.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableDescription.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableSiteLink.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.ListInterface.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js',
+
+				'tests/qunit/wikibase.utilities/wikibase.utilities.ClaimGuidGenerator.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.GuidGenerator.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.newExtension.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
+
+				'tests/qunit/jquery.wikibase/jquery.wikibase.entityselector.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.tests.qunit.testrunner',
+				'wikibase',
+				'wikibase.AbstractedRepoApi',
+				'wikibase.parsers',
+				'wikibase.store',
+				'wikibase.utilities',
+				'wikibase.utilities.ClaimGuidGenerator',
+				'wikibase.utilities.GuidGenerator',
+				'wikibase.utilities.jQuery',
+				'wikibase.ui.Toolbar',
+				'wikibase.ui.PropertyEditTool',
+				'jquery.ui.suggester',
+				'jquery.wikibase.entityselector',
+				'jquery.nativeEventHandler',
+				'jquery.client',
+				'jquery.eachchange',
+			),
+			'localBasePath' => __DIR__,
+			'remoteExtPath' => 'Wikibase/repo',
+		);
+
+		return true;
 	}
 }
