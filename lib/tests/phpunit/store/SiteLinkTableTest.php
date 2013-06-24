@@ -36,7 +36,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		if ( defined( 'WBC_VERSION' ) ) {
+		if ( !defined( 'WB_VERSION' ) ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local site link table." );
 		}
 
