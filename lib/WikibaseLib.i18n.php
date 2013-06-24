@@ -21,6 +21,9 @@ $messages['en'] = array(
 	'wikibase-entity-item' => 'item',
 	'wikibase-entity-property' => 'property',
 	'wikibase-entity-query' => 'query',
+	'wikibase-deletedentity-item' => 'Deleted item',
+	'wikibase-deletedentity-property' => 'Deleted property',
+	'wikibase-deletedentity-query' => 'Deleted query',
 	'wikibase-diffview-reference' => 'reference',
 	'wikibase-diffview-rank' => 'rank',
 	'wikibase-diffview-qualifier' => 'qualifier',
@@ -73,6 +76,24 @@ $messages['qqq'] = array(
 {{Identical|Property}}',
 	'wikibase-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[d:Wikidata:Glossary#entity|entity]].
 {{Identical|Query}}',
+	'wikibase-deletedentity-item' => "Message displayed instead of an Item's label if the Item has been deleted (see [[d:Wikidata:Glossary]]).
+
+See also:
+* {{msg-mw|Wikibase-entity-item}}
+* {{msg-mw|Wikibase-deletedentity-property}}
+* {{msg-mw|Wikibase-deletedentity-query}}",
+	'wikibase-deletedentity-property' => "Message displayed instead of an Property's label if the Property has been deleted (see [[d:Wikidata:Glossary]]).
+
+See also:
+* {{msg-mw|Wikibase-entity-property}}
+* {{msg-mw|Wikibase-deletedentity-item}}
+* {{msg-mw|Wikibase-deletedentity-query}}",
+	'wikibase-deletedentity-query' => "Message displayed instead of an Query's label if the Query has been deleted (see [[d:Wikidata:Glossary]]).
+
+See also:
+* {{msg-mw|Wikibase-entity-query}}
+* {{msg-mw|Wikibase-deletedentity-item}}
+* {{msg-mw|Wikibase-deletedentity-property}}",
 	'wikibase-diffview-reference' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects a reference. Will be shown as e.g. "claim / property q1 / reference".
 {{Identical|Reference}}',
 	'wikibase-diffview-rank' => 'Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects the rank of the statement. Will be shown as e.g. "claim / property q1 / rank".

@@ -35,7 +35,6 @@ $messages['en'] = array(
 	'wikibase-label-empty' => 'No label defined yet',
 	'wikibase-label-edit-placeholder' => 'enter label',
 	'wikibase-description-empty' => 'No description defined yet',
-	'wikibase-deletedentity' => 'Deleted $1',
 	'wikibase-description-edit-placeholder' => 'enter description',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'article',
@@ -479,14 +478,6 @@ This is a generic placeholder message used while a remove is in progress, and re
 	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-label|label]].',
 	'wikibase-description-empty' => "Placeholder message displayed instead of the item's description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
-	'wikibase-deletedentity' => "Message displayed instead of an Entity's label if the Entity has been deleted (see [[d:Wikidata:Glossary]]).
-
-Usually this message is used with some other message pointing to the entity.
-
-Parameters:
-* $1 - the kind of entity which got deleted. any one of the following messages:
-** {{msg-mw|Wikibase-entity-item}}
-** {{msg-mw|Wikibase-entity-property}}",
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-description|description]].',
 	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
