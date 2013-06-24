@@ -49,15 +49,17 @@
 		},
 
 		/**
-		 * Returns a parser suitable for parsing the raw value returned by rawValue().
-		 *
-		 * @since 0.1
-		 * @abstract
-		 *
-		 * @return valueParsers.Parser
+		 * @see jQuery.valueview.Expert.parser
 		 */
 		parser: function() {
 			return this._options.baseExpert.prototype.parser.call( this );
+		},
+
+		/**
+		 * @see jQuery.valueview.Expert.valueCharacteristics
+		 */
+		valueCharacteristics: function() {
+			return this._options.baseExpert.prototype.valueCharacteristics.call( this );
 		},
 
 		/**

@@ -4,6 +4,7 @@
  * @licence GNU GPL v2+
  *
  * @author H. Snater < mediawiki@snater.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 // TODO: Remove mediaWiki dependency
 ( function( dv, vp, $, vv, globeCoordinate, mw ) {
@@ -34,17 +35,9 @@
 		 * the new value has been called. The use of this, basically, is a structural improvement
 		 * which allows moving setting the displayed value to the draw() method which is supposed to
 		 * handle all visual manners.
-		 * @type {globeCoordinate.GlobeCoordinate|null|false}
+ 		 * @type {string|null|false}
 		 */
 		_newValue: null,
-
-		/**
-		 * Current value. Needs to be cached because the value cannot simply be parsed from the
-		 * current input element value since that would lead to the precision being set in the
-		 * sexagesimal system even when not intended.
-		 * @type {globeCoordinate.GlobeCoordinate|null}
-		 */
-		_value: null,
 
 		/**
 		 * The preview widget.
@@ -69,9 +62,10 @@
 		 */
 		_init: function() {
 			var self = this,
-				listrotatorEvents = 'listrotatorauto.' + this.uiBaseClass
-					+ ' listrotatorselected.' + this.uiBaseClass,
-				precisionValues = [];
+				notifier = this._viewNotifier,
+				precisionValues = [],
+				listrotatorEvents = 'listrotatorauto listrotatorselected'
+					.replace( /(\w+)/g, '$1.' + this.uiBaseClass );
 
 			this.$precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
@@ -93,21 +87,24 @@
 					values: precisionValues.reverse(),
 					deferInit: true
 				} )
-				.on( listrotatorEvents, function( event, newValue ) {
-					var rawValue = self._getRawValue(),
-						roundedPrecision = roundPrecision( rawValue.getPrecision() ) ;
+				.on( listrotatorEvents, function( event, newPrecisionLevel ) {
+					var currentValue = self.viewState().value();
 
-					if( rawValue === null || newValue === roundedPrecision ) {
-						// Listrotator has been rotated automatically, the value covering the new
-						// precision has already been generated or the current input is invalid.
+					if( currentValue === null ) {
+						// current rawValue must be invalid anyhow
 						return;
 					}
 
-					self._updateValue().done( function( gc ) {
-						if( event.type === 'listrotatorauto' ) {
-							self.$precision.data( 'listrotator' ).rotate( gc.getValue().getPrecision() );
-						}
-					} );
+					var currentPrecision = roundPrecision(
+							currentValue.getValue().getPrecision() );
+
+					if( newPrecisionLevel === currentPrecision ) {
+						// Listrotator has been rotated automatically or the value covering the new
+						// precision has already been generated.
+						return;
+					}
+
+					notifier.notify( 'change' );
 				} )
 				.appendTo( this.$precisionContainer );
 
@@ -125,42 +122,7 @@
 			this.preview = $preview.data( 'preview' );
 
 			this.$input.eachchange( function( event, oldValue ) {
-				var currentInputValue = self.$input.val();
-
-				self._setRawValue( currentInputValue );
-
-				// No need to update the preview when the input element is cleared since it will
-				// be hidden anyway.
-				if( self.$input.val() === '' ) {
-					self._updatePreview( null );
-					return;
-				}
-
-				self.preview.showSpinner();
-
-				self.parser().parse( self.$input.val() )
-				.done( function( dataValue ) {
-					// Throw away outdated requests:
-					if( currentInputValue !== self.$input.val() ) {
-						return;
-					}
-
-					self._setRawValue( dataValue.getValue() );
-
-					self.$precision.data( 'listrotator' ).rotate(
-						roundPrecision( dataValue.getValue().getPrecision() )
-					);
-
-					self._newValue = false; // value, not yet handled by draw(), is outdated now
-					self._updatePreview( dataValue.getValue() );
-					self._viewNotifier.notify( 'change' );
-				} )
-				.fail( function() {
-					if( currentInputValue !== self.$input.val() ) {
-						return;
-					}
-					self._updatePreview( null );
-				} );
+				notifier.notify( 'change' );
 			} )
 			.inputextender( {
 				content: [ $preview, $toggler, this.$precisionContainer ],
@@ -192,79 +154,60 @@
 		},
 
 		/**
-		 * Builds a GlobeCoordinate object from the widget's current input taking the precision into
-		 * account if set manually.
-		 * @since 0.1
-		 *
-		 * @return {jQuery.Promise}
-		 */
-		_updateValue: function() {
-			var currentInputValue = this.$input.val();
-
-			this.preview.showSpinner();
-
-			var self = this;
-			return this.parser().parse( this.$input.val() )
-			.done( function( gc ) {
-				// Throw away outdated requests:
-				if( currentInputValue !== self.$input.val() ) {
-					return;
-				}
-				self._setRawValue( gc.getValue() );
-				self._updatePreview( gc.getValue() );
-				self._viewNotifier.notify( 'change' );
-			} )
-			.fail( function() {
-				if( currentInputValue !== self.$input.val() ) {
-					return;
-				}
-				self._setRawValue( null );
-				self._updatePreview( null );
-				self._viewNotifier.notify( 'change' );
-			} );
-		},
-
-		/**
-		 * Updates the preview.
-		 * @since 0.1
-		 *
-		 * @param {globeCoordinate.GlobeCoordinate|null} gc
-		 */
-		_updatePreview: function( gc ) {
-			if( gc !== null ) {
-				gc = gc.degreeText();
-			}
-			this.preview.update( gc );
-		},
-
-		/**
 		 * @see jQuery.valueview.Expert.parser
 		 */
 		parser: function() {
-			var precisionWidget = this.$precision.data( 'listrotator' ),
-				options = ( !precisionWidget.$auto.hasClass( 'ui-state-active' ) )
-					? { precision: getPrecisionSetting( precisionWidget.value() ) }
-					: {};
+			return new vp.GlobeCoordinateParser();
+		},
 
-			return new vp.GlobeCoordinateParser( options );
+		/**
+		 * @see jQuery.valueview.Expert.valueCharacteristics
+		 */
+		valueCharacteristics: function() {
+			if( !this.$precision ) { // happens when used by BifidExpert ...
+				return {};
+			}
+
+			var options = {},
+				precisionWidget = this.$precision.data( 'listrotator' );
+
+			// TODO: Don't access the widget's internals here, check this via some function.
+			if( !precisionWidget.$auto.hasClass( 'ui-state-active' ) ) {
+				var precision = getPrecisionSetting( precisionWidget.value() );
+
+				if( precision !== null ) {
+					options.precision = precision;
+				}
+			}
+
+			return options;
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert._getRawValue
 		 *
-		 * @return {globeCoordinate.GlobeCoordinate|string|null}
+		 * @return {string|null}
 		 */
 		_getRawValue: function() {
-			return ( this._newValue !== false ) ? this._newValue : this._value;
+			var value = this._newValue !== false ? this._newValue : this.$input.val();
+
+			if( $.trim( value ) === '' ) {
+				return null;
+			}
+			return value;
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert._setRawValue
-		 *
-		 * @param {globeCoordinate.GlobeCoordinate|string|null} globeCoordinate
 		 */
-		_setRawValue: function( globeCoordinate ) {
-			this._newValue = this._value = globeCoordinate;
+		_setRawValue: function( rawValue ) {
+			if( rawValue instanceof GlobeCoordinate ) {
+				rawValue = rawValue.degreeText();
+			}
+			else if( typeof rawValue !== 'string' ) {
+				rawValue = null;
+			}
+			this._newValue = rawValue;
 		},
 
 		/**
@@ -292,41 +235,40 @@
 
 		/**
 		 * @see jQuery.valueview.Expert.draw
-		 *
-		 * @return {jQuery.Promise|null}
-		 *
-		 * TODO: Get rid of this LSP violation, should not be necessary to return a promise here.
 		 */
 		draw: function() {
-			var self = this,
-				promise = null;
+			var geoValue = this.viewState().value(),
+				$input = this.$input;
 
 			if( this._viewState.isDisabled() ) {
-				var deferred = $.Deferred().reject();
-				promise = deferred.promise();
-				this.$input.prop( 'disabled', true ).addClass( 'ui-state-disabled' );
+				$input.prop( 'disabled', true ).addClass( 'ui-state-disabled' );
 			} else {
-				this.$input.prop( 'disabled', false ).removeClass( 'ui-state-disabled' );
+				$input.prop( 'disabled', false ).removeClass( 'ui-state-disabled' );
+			}
 
-				if( this._newValue !== false ) {
-					if( this._newValue !== null ) {
-						promise = this.parser().parse( this._newValue )
-						.done( function( dataValue ) {
-							var gc = dataValue.getValue();
-							self.$input.val( gc.degreeText() );
-							self.$precision.data( 'listrotator' ).value(
-								roundPrecision( gc.getPrecision() )
-							);
-							self._updatePreview( gc );
-						} ).fail( function() {
-							self._updatePreview( null );
-						} );
-					}
-					this._newValue = false;
+			if( this._newValue !== false ) {
+				var newText = this._newValue || '';
+
+				if( $input.val() !== newText ) {
+					$input.val( newText );
 				}
 			}
 
-			return promise;
+			if( this._newValue
+				|| this.$precision.data( 'listrotator' ).$auto.hasClass( 'ui-state-active' )
+			) {
+				// hacky update of precision, just assume the raw value is the value we have in
+				// the valueview right now.
+				if( geoValue ) {
+					this.$precision.data( 'listrotator' ).value(
+						roundPrecision( geoValue.getValue().getPrecision() ) );
+				}
+			}
+
+			this._newValue = false;
+
+			// Update preview:
+			this.preview.update( geoValue && geoValue.getValue().degreeText() );
 		},
 
 		/**
@@ -345,7 +287,11 @@
 	} );
 
 	/**
-	 * Rounds a given precision for being able to use is as internal "constant".
+	 * Rounds a given precision for being able to use it as internal "constant".
+	 *
+	 * TODO: This should not even be necessary. Make sure GlobeCoordinateValue objects can be
+	 *  used without having to take care of their precision first if they are generated by the
+	 *  backend parser.
 	 *
 	 * @since 0.1
 	 *
@@ -373,11 +319,11 @@
 	 * @since 0.1
 	 *
 	 * @param {number} roundedPrecision
-	 * @return {number}
+	 * @return {number|null}
 	 */
 	function getPrecisionSetting( roundedPrecision ) {
 		var rounded,
-			precision;
+			precision = null;
 
 		$.each( globeCoordinateSettings.precisions, function( i, precisionDefinition ) {
 			rounded = roundPrecision( precisionDefinition.level );

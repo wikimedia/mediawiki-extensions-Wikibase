@@ -14,7 +14,7 @@ jQuery.valueview.MockViewState = ( function( $, inherit, ViewState ) {
 	 * @extends jQuery.valueview.ViewState
 	 * @since 0.1
 	 *
-	 * @param {Object} [definition={}] A plain object with the fiels "isInEditMode", "isDisabled",
+	 * @param {Object} [definition={}] A plain object with the fields "isInEditMode", "isDisabled",
 	 *        "value" and "options". This will just keep a reference to the object, so changing the
 	 *        object from the outside will also update the ViewState's functions return values.
 	 */

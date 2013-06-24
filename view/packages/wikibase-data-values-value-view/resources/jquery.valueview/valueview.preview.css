@@ -16,3 +16,9 @@
 .valueview-preview-novalue {
 	font-style: italic;
 }
+
+.valueview-preview-label .mw-small-spinner {
+	position: relative;
+	top: 0;
+	left: 0;
+}

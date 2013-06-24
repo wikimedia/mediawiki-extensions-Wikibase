@@ -130,6 +130,15 @@ function testExpert( testDefinition ) {
 		);
 	} );
 
+	expertCases.test( 'valueCharacteristics', function( args, assert ) {
+		var valueCharacteristics = args.expert.valueCharacteristics();
+
+		assert.ok(
+			$.isPlainObject( valueCharacteristics ),
+			'valueCharacteristics() returns a plain object'
+		);
+	} );
+
 	expertCases.test( 'viewState', function( args, assert ) {
 		var viewState = args.expert.viewState();
 		assert.ok(

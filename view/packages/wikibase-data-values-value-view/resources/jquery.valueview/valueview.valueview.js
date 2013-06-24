@@ -507,9 +507,28 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		this.__lastUpdateValue = rawValue;
 
-		expert.parser().parse(
+		// TODO: Get rid of parsers in experts, instead, inject a ValueParserFactory in here.
+		var parserOptions = expert.valueCharacteristics(),
+			valueParser = expert.parser();
+
+		parserOptions = $.extend( valueParser.getOptions(), parserOptions );
+		valueParser = new valueParser.constructor( parserOptions );
+
+		// TODO: Hacky preview spinner activation. Necessary until we move the responsibility for
+		//  previews out of the experts. The preview should be handled in the same place for all
+		//  value types, could perhaps move into its own widget, listening to valueview events.
+		if( expert._currentExpert && expert._currentExpert.preview ) {
+			expert._currentExpert.preview.showSpinner();
+		}
+
+		valueParser.parse(
 			rawValue
 		).done( function( parsedValue ) {
+			// Paranoia check against ValueParser interface:
+			if( parsedValue !== null && !( parsedValue instanceof dv.DataValue ) ) {
+				throw new Error( 'Unexpected value parser result' );
+			}
+
 			if( self.__lastUpdateValue === undefined ) {
 				// latest update job is done, this one must be a late response for some weird reason
 				return;
@@ -528,6 +547,9 @@ $.widget( 'valueview.valueview', PARENT, {
 			// TODO: display some message if parsing failed due to bad API connection etc.
 			self._value = null;
 		} ).always( function() {
+			// Call experts draw() for allowing update of "advanced adjustments" in some experts.
+			expert.draw();
+
 			self._trigger( 'afterparse' );
 		} );
 	},
@@ -568,11 +590,27 @@ $.widget( 'valueview.valueview', PARENT, {
 				// the expert will get that new value's raw value while we already have the parsed
 				// version of the value.
 				var value = self.value(),
-					rawValue = value ? value.getValue() : null;
+					rawValue = value ? value.getValue() : null,
+					differentValueCharacteristics = false,
+					newValueCharacteristics = self._expert.valueCharacteristics(),
+					lastValueCharacteristics = self.__lastValueCharacteristics || {};
 
-				if( !self._expert.rawValueCompare( rawValue )
-					&& !self._setValueIsOngoing
+				for( var i in newValueCharacteristics ) {
+					differentValueCharacteristics = differentValueCharacteristics ||
+						newValueCharacteristics[i] !== lastValueCharacteristics[i];
+				}
+				for( var i in lastValueCharacteristics ) {
+					differentValueCharacteristics = differentValueCharacteristics ||
+						newValueCharacteristics[i] !== lastValueCharacteristics[i];
+				}
+
+				if( !self._setValueIsOngoing
+					&& (
+						differentValueCharacteristics
+						|| !self._expert.rawValueCompare( rawValue )
+					)
 				) {
+					self.__lastValueCharacteristics = newValueCharacteristics;
 					self._trigger( 'change' );
 					self._updateValue();
 				}
