@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "D1dDRglU",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-06-24T19:13:09Z",
+      "side": 1,
+      "message": "For a verbatim en language: language \u003d en, source language \u003d null;\nFor a convert-zh-tw-to-zh-cn language: language \u003d zh-cn, source language \u003d zh-tw.",
+      "parentUuid": "D1HxukJg",
+      "revId": "eccd22f27f0714babb4868d3281bc05105a68a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1Lxo.Ik",
         "filename": "lib/includes/LanguageWrapper.php",
         "patchSetId": 8
@@ -81,6 +99,24 @@
       "writtenOn": "2013-06-24T12:01:52Z",
       "side": 1,
       "message": "what does it mean to be the language where data should be fetched? is the the fallback language?",
+      "revId": "eccd22f27f0714babb4868d3281bc05105a68a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1fA9now",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-06-24T19:13:09Z",
+      "side": 1,
+      "message": "In above case:\n\nFor a verbatim en language: getFetchLanguage \u003d en;\nFor convert-zh-tw-to-zh-cn language: getFetchLanguage \u003d zh-tw.\n\nAgain for what I said in an inline comment in patchset 6:\n\nTo use it, take an item in fallback chain (should be a LanguageWrapper object, no matter what type it is, converted or verbatim), fetch data from language -\u003egetFetchLanguage(), then feed data to -\u003etranslate() and use the results.",
+      "parentUuid": "D1FxXVMk",
       "revId": "eccd22f27f0714babb4868d3281bc05105a68a4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
