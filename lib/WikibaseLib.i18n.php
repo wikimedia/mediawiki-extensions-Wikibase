@@ -145,7 +145,6 @@ See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and
 	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (wiki) page.',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).
 {{Identical|Details}}',
-
 	'wikibase-validator-bad-type' => 'Input validation error shown when the input has the wrong type.
 
 Parameters:
@@ -161,10 +160,10 @@ Parameters:
 Parameters:
 * $1 is the minimum length
 * $2 is the actual length',
-	'wikibase-validator-malformed-value' => 'Input validation error shown when the user\'s input was malformed in some way.
+	'wikibase-validator-malformed-value' => "Input validation error shown when the user's input was malformed in some way.
 
 Parameters:
-* $1 is the malformed input',
+* $1 is the malformed input",
 	'wikibase-validator-bad-entity-id' => 'Input validation error shown when the entity ID given by the user is malformed.
 
 Parameters:
@@ -1740,7 +1739,7 @@ $messages['ms'] = array(
 	'wikibase-error-remove-connection' => 'Ralat penyambungan telah berlaku apabila cuba melakukan penyimpanan; oleh itu, pengubahan anda tidak dapat disiapkan. Sila semak sambungan Internet anda.',
 	'wikibase-error-save-timeout' => 'Kami sedang mengalami kesulitan teknikal, oleh itu "simpanan" anda tidak dapat dilengkapkan.',
 	'wikibase-error-remove-timeout' => 'Kami sedang mengalami kesulitan teknikal, oleh itu "pembuangan" anda tidak dapat dilengkapkan.',
-	'wikibase-error-autocomplete-connection' => 'API Wikipedia tidak dapat ditanya. Sila cuba lagi kemudian.',
+	'wikibase-error-autocomplete-connection' => 'API tapak tidak dapat ditanya. Sila cuba lagi kemudian.',
 	'wikibase-error-autocomplete-response' => 'Pelayan membalas: $1',
 	'wikibase-error-ui-client-error' => 'Sambungan dengan halaman pelanggan gagal. Sila cuba lagi kemudian.',
 	'wikibase-error-ui-no-external-page' => 'Rencana yang dinyatakan tidak dapat dijumpai di halaman yang berpadanan.',
@@ -1750,7 +1749,7 @@ $messages['ms'] = array(
 	'wikibase-error-ui-session-failure' => 'Sesi anda sudah berakhir. Sila log masuk semula.',
 	'wikibase-error-ui-edit-conflict' => 'Terdapat percanggahan suntingan. Sila muat semula dan simpan semula.',
 	'wikibase-replicationnote' => 'Sila ambil perhatian bahawa masa beberapa minit mungkin perlu diambil sehingga semua perubahan kelihatan di semua wiki',
-	'wikibase-sitelinks' => 'Senarai halaman yang berpaut pada perkara ini',
+	'wikibase-sitelinks-wikipedia' => 'Halaman Wikipedia yang berpaut dengan perkara ini',
 	'wikibase-sitelinks-sitename-columnheading' => 'Bahasa',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
 	'wikibase-sitelinks-link-columnheading' => 'Rencana terpaut',
@@ -2199,6 +2198,7 @@ $messages['si'] = array(
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
  * @author Milicevic01
+ * @author TheStefan12345
  * @author Милан Јелисавчић
  */
 $messages['sr-ec'] = array(
@@ -2223,7 +2223,8 @@ $messages['sr-ec'] = array(
 	'wikibase-error-ui-link-exists' => 'Не можете да повежете са овом страницом, јер друга ставка већ води до ње.',
 	'wikibase-error-ui-session-failure' => 'Ваша сесија је истекла. Молимо пријавите се поново.',
 	'wikibase-error-ui-edit-conflict' => 'Дошло је до сукоба измена. Молимо учитајте и сачувајте поново страну.',
-	'wikibase-replicationnote' => 'Молимо обратите пажњу да може потрајати и неколико минута пре него што промене постану видљиве на свим викијима',
+	'wikibase-replicationnote' => 'Имајте на уму да промене највероватније неће бити одмах видљиве на свим викијима, него ће бити потребно сачекати неколико минута',
+	'wikibase-sitelinks-wikipedia' => 'Списак страна повезаних са овом ставком',
 	'wikibase-sitelinks-sitename-columnheading' => 'Језик',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
 	'wikibase-sitelinks-link-columnheading' => 'Повезани чланак',

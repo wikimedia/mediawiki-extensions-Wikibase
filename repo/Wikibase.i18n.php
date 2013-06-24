@@ -1335,7 +1335,6 @@ $messages['ast'] = array(
 	'wikibase-label-empty' => 'Inda nun ta definida denguna etiqueta',
 	'wikibase-label-edit-placeholder' => 'escriba la etiqueta',
 	'wikibase-description-empty' => 'Inda nun ta definida denguna descripción',
-	'wikibase-deletedentity' => 'Desanicióse $1',
 	'wikibase-description-edit-placeholder' => 'escriba la descripción',
 	'wikibase-sitelink-site-edit-placeholder' => 'sitiu',
 	'wikibase-sitelink-page-edit-placeholder' => 'artículu',
@@ -1746,7 +1745,6 @@ $messages['be-tarask'] = array(
 	'wikibase-label-empty' => 'Метка пакуль ня вызначаная',
 	'wikibase-label-edit-placeholder' => 'увядзіце метку',
 	'wikibase-description-empty' => 'Апісаньне пакуль ня вызначанае',
-	'wikibase-deletedentity' => 'Выдалена $1',
 	'wikibase-description-edit-placeholder' => 'увядзіце апісаньне',
 	'wikibase-sitelink-site-edit-placeholder' => 'праект',
 	'wikibase-sitelink-page-edit-placeholder' => 'артыкул',
@@ -1793,12 +1791,17 @@ $messages['be-tarask'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'уласнае значэньне',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'невядомае значэньне',
 	'wikibase-snakview-snaktypeselector-novalue' => 'без значэньня',
+	'wikibase-shortcopyrightwarning' => 'Націснуўшы «$1», вы пагаджаецеся з [[$2|умовамі выкарыстаньня]], і пагаджаецеся беззваротна апублікаваць ваш унёсак на ўмовах $3.',
 	'wikibase-copyrighttooltip-acknowledge' => 'Я згодны зьдзяйсьняць наступныя праўкі паводле гэтых умоваў. Не паказвайце больш гэтае паведамленьне.',
 	'wikibase-entityselector-more' => 'болей',
+	'wikibase-anonymouseditwarning' => 'Папярэджаньне: вы не ўвайшлі ў сыстэму.
+Ваш IP-адрас будзе запісаны ў гісторыі $1.',
 	'wikibase-restrictionedit-tooltip-message' => 'Гэтая старонка абароненая. Рэдагаваньне не дазволенае.',
-	'wikibase-blockeduser-tooltip-message' => 'Вам было забароненае рэдагаваньне.', # Fuzzy
+	'wikibase-blockeduser-tooltip-message' => 'Вы ня маеце дазволу на рэдагаваньне, бо вашае імя або IP-адрас былі заблякаваныя.',
 	'wikibase-move-error' => 'Вы ня можаце пераносіць старонкі, якія знаходзяцца ў прасторы назваў зьвестак, як і ня можаце пераносіць старонкі ў прастору.',
-	'wikibase-error-sitelink-already-used' => 'Спасылка [$1 $2] ужо выкарыстоўваецца ў аб’екце [[$3]]', # Fuzzy
+	'wikibase-warning-constraint-violation-length' => 'Для моўнага коду «$1» спрацавала абмежаваньне даўжыні.',
+	'wikibase-error-sitelink-already-used' => 'Спасылка [$1 $2] ужо выкарыстоўваецца ў аб’екце [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Іншая ўласьцівасьць ($3) ужо мае метку «$1» для моўнага коду $2',
 	'special-itembytitle' => 'Аб’ект паводле назвы',
 	'wikibase-itembytitle-lookup-fieldset' => 'Пошук аб’ектаў паводле сайту і назвы',
 	'wikibase-itembytitle-lookup-site' => 'Сайт:',
@@ -1844,6 +1847,7 @@ $messages['be-tarask'] = array(
 	'wikibase-setaliases-label' => 'Псэўданімы:',
 	'wikibase-setaliases-submit' => 'Вызначыць псэўданімы:',
 	'wikibase-setaliases-warning-remove' => 'Ці сапраўды хочаце выдаліць усе псэўданімы [[$1]]?',
+	'special-setsitelink' => 'Вызначыць спасылку на сайт',
 	'wikibase-setsitelink-site' => 'Ідэнтыфікатар сайта:',
 	'wikibase-setsitelink-label' => 'Спасылка на сайт:',
 	'wikibase-setsitelink-submit' => 'Вызначыць спасылку на сайт',
@@ -1878,6 +1882,7 @@ $messages['be-tarask'] = array(
 	'special-entitydata' => 'Зьвесткі аб’екта',
 	'wikibase-entitydata-not-found' => 'Аб’ект з ідэнтыфікатарам $1 ня знойдзены.',
 	'wikibase-entitydata-bad-revision' => 'Немагчыма паказаць вэрсію $2 аб’екта $1.',
+	'wikibase-entitydata-bad-id' => 'Няслушны ідэнтыфікатар: $1.',
 	'wikibase-entitydata-unsupported-format' => 'Фармат зьвестак $1 гэтым інтэрфэйсам не падтрымліваецца.',
 	'wikibase-entitydata-title' => 'Зьвесткі аб’екта',
 	'wikibase-api-patch-incomplete' => 'Згенэраваны патч апынуўся няпоўным.',
@@ -1885,10 +1890,12 @@ $messages['be-tarask'] = array(
 	'wikibase-no-direct-editing' => 'Простае рэдагаваньне ў прасторы назваў «$1» адключанае',
 	'wikibase-noentity-createone' => 'Вы можаце таксама [[$1|стварыць яго]].',
 	'wikibase-item-summary-wbsetitem' => 'Створаны новы прадмет',
+	'wikibase-item-summary-wbcreate-new' => 'Створаны новы аб’ект',
 	'wikibase-item-summary-wbeditentity' => 'Створаны новы аб’ект',
 	'wikibase-item-summary-wbeditentity-create' => 'Створаны новы аб’ект',
 	'wikibase-item-summary-wbeditentity-update' => 'Абноўлены аб’ект',
 	'wikibase-item-summary-wbeditentity-override' => 'Перавызначаны аб’ект',
+	'wikibase-item-summary-wbsetreference' => 'Пазначаная крыніца',
 	'wikibase-item-summary-wbsetlabel-set' => 'Зьмененая метка для [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Выдаленая метка для [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Зьмененае апісаньне для [$2]',
@@ -2048,7 +2055,6 @@ $messages['bn'] = array(
 	'wikibase-label-empty' => 'এখনও কোন লেভেল সংজ্ঞায়িত নয়',
 	'wikibase-label-edit-placeholder' => 'লেবেল লিখুন',
 	'wikibase-description-empty' => 'এখনও কোন বিবরণ সংজ্ঞায়িত করা হয়নি',
-	'wikibase-deletedentity' => '$1 অপসারিত',
 	'wikibase-description-edit-placeholder' => 'বিবরণ লিখুন',
 	'wikibase-sitelink-site-edit-placeholder' => 'সাইট',
 	'wikibase-sitelink-page-edit-placeholder' => 'নিবন্ধ',
@@ -4204,7 +4210,6 @@ $messages['es'] = array(
 	'wikibase-label-empty' => 'No se ha definido ninguna etiqueta todavía.',
 	'wikibase-label-edit-placeholder' => 'introducir la etiqueta',
 	'wikibase-description-empty' => 'No se ha definido ninguna descripción todavía.',
-	'wikibase-deletedentity' => 'Borrado $1',
 	'wikibase-description-edit-placeholder' => 'introducir una descripción',
 	'wikibase-sitelink-site-edit-placeholder' => 'sitio',
 	'wikibase-sitelink-page-edit-placeholder' => 'artículo',
@@ -5087,7 +5092,6 @@ $messages['fi'] = array(
 	'wikibase-label-empty' => 'Nimeä ei ole vielä lisätty',
 	'wikibase-label-edit-placeholder' => 'kirjoita nimi',
 	'wikibase-description-empty' => 'Kuvausta ei ole vielä lisätty',
-	'wikibase-deletedentity' => '$1 poistettu',
 	'wikibase-description-edit-placeholder' => 'kirjoita kuvaus',
 	'wikibase-sitelink-site-edit-placeholder' => 'sivusto',
 	'wikibase-sitelink-page-edit-placeholder' => 'artikkeli',
@@ -5839,9 +5843,10 @@ $messages['frp'] = array(
 
 /** Northern Frisian (Nordfriisk)
  * @author Murma174
+ * @author Se4598
  */
 $messages['frr'] = array(
-	'wikibase-listdatatypes-wikibase-item-body' => "Ferwisang tu ööder objekten uun't projekt. Di nöömrüm „objekt“ woort trochsoocht. Det as man en ianfach tekstfial. 
+	'wikibase-listdatatypes-wikibase-item-body' => "Ferwisang tu ööder objekten uun't projekt. Di nöömrüm „objekt“ woort trochsoocht. Det as man en ianfach tekstfial.
 * scheme – hiart tu't Iri-tiakenkeed.
 * hierarchicalpart – hiart tu't Iri-tiakenkeed.
 * query – hiart tu't Iri-tiakenkeed.
@@ -9239,7 +9244,6 @@ $messages['lb'] = array(
 	'wikibase-label-empty' => 'Et ass nach keng Etiquette definéiert',
 	'wikibase-label-edit-placeholder' => 'Etiquette aginn',
 	'wikibase-description-empty' => 'Nach keng Beschreiwung definéiert',
-	'wikibase-deletedentity' => '$1 geläscht',
 	'wikibase-description-edit-placeholder' => 'Beschreiwung aginn',
 	'wikibase-sitelink-site-edit-placeholder' => 'Site',
 	'wikibase-sitelink-page-edit-placeholder' => 'Artikel',
@@ -10229,7 +10233,6 @@ $messages['ms'] = array(
 	'wikibase-label-empty' => 'Label belum ditetapkan.',
 	'wikibase-label-edit-placeholder' => 'taipkan label',
 	'wikibase-description-empty' => 'Keterangan belum dinyatakan.',
-	'wikibase-deletedentity' => '$1 dihapuskan',
 	'wikibase-description-edit-placeholder' => 'taipkan keterangan',
 	'wikibase-sitelink-site-edit-placeholder' => 'tapak',
 	'wikibase-sitelink-page-edit-placeholder' => 'rencana',
@@ -10345,6 +10348,16 @@ Alamat IP anda akan dicatatkan dalam sejarah suntingan $1 ini.',
 	'wikibase-setaliases-label' => 'Alias:',
 	'wikibase-setaliases-submit' => 'Tetapkan alias',
 	'wikibase-setaliases-warning-remove' => 'Adakah anda benar-benar mahu menggugurkan semua alias [[$1]]?',
+	'special-setsitelink' => 'Tetapkan pautan laman',
+	'wikibase-setsitelink-introfull' => 'Anda sedang menetapkan pautan laman $1 untuk [[$1]].', # Fuzzy
+	'wikibase-setsitelink-intro' => 'Borang ini membolehkan anda untuk menetapkan pautan tapak sesebuah perkara. Anda perlu menyatakan ID perkara (cth. Q23), id laman (cth. "enwiki") dan pautan laman yang hendak ditetapkan.',
+	'wikibase-setsitelink-site' => 'ID laman:',
+	'wikibase-setsitelink-label' => 'Pautan laman:',
+	'wikibase-setsitelink-submit' => 'Tetapkan',
+	'wikibase-setsitelink-warning-remove' => 'Adakah anda benar-benar mahu menggugurkan pautan laman [[$1]]?',
+	'wikibase-setsitelink-invalid-site' => 'ID laman "$1" tidak dikenali. Sila gunakan ID laman sedia ada seperti "enwiki".',
+	'wikibase-setsitelink-add-failed' => 'Pautan laman tidak dapat disimpan.',
+	'wikibase-setsitelink-remove-failed' => 'Pautan laman tidak dapat digugurkan.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Bahasa:',
 	'wikibase-setentity-invalid-langcode' => 'Kod bahasa "$1" tidak diketahui. Sila gunakan kod bahasa yang dikenali oleh sistem, contohnya "en".',
@@ -10391,7 +10404,9 @@ Wiki klien diberitahu akan perubahan pada {{SITENAME}} sebaik sahaja perubahan t
 	'special-itemswithoutsitelinks' => 'Perkara tanpa pautan tapak',
 	'special-entitydata' => 'Data entiti',
 	'wikibase-entitydata-not-found' => 'Tiada entiti dengan ID $1 dijumpai.',
+	'wikibase-entitydata-not-acceptable' => 'Format sepadan tidak dijumpai. Jenis-jenis MIME yang disokong: $1',
 	'wikibase-entitydata-bad-revision' => 'Semakan $2 entiti $1 tidak boleh dipaparkan.',
+	'wikibase-entitydata-bad-id' => 'ID tidak sah: $1.',
 	'wikibase-entitydata-unsupported-format' => 'Format data $1 tidak disokong oleh antaramuka ini.',
 	'wikibase-entitydata-title' => 'Data Entiti',
 	'wikibase-entitydata-text' => 'Halaman ini menyediakan antaramuka data yang berpautan kepada nilai-nilai entiti. Sila berikan ID entiti di dalam URL dengan menggunakan sintaks subhalaman.',
@@ -10464,28 +10479,28 @@ untuk mencari di mana set data itu.',
 * query (pertanyaan) – bahagian tersirat Iri-string
 * fragment (serpihan) – bahagian tersirat Iri-string',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Koordinat glob',
-	'wikibase-listdatatypes-globe-coordinate-body' => 'Data harfiah untuk kedudukan geografi yang diberikan sebagai pasangan latitud-longitud dalam gms atau darjah perpuluhan untuk jasad cakerawala yang diberikan. Nilai asalnya "Earth" diikuti "WGS84". Ia menambahkan leraian dan julat.
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Data literal untuk kedudukan geografi yang diberikan sebagai pasangan latitud-longitud dalam gms atau darjah perpuluhan untuk jasad cakerawala yang tertentu. Nilai asalnya "Earth" diikuti "WGS84". Ia menambahkan leraian dan julat.
 * latitude – bahagian pertama tersirat (float, dms, dm, dd) rentetan koordinat, arah diberikan dengan tanda awalan atau akhiran N/S
 * longitude – bahagian kedua tersirat (float, dms, dm, dd) rentetan koordinat, arah diberikan dengan tanda awalan atau akhiran E/W
 * altitude (pilihan) – nilai tersurat (?) untuk ketinggian di atas satah rujukan, untuk glob "Earth" yang menjadi glob rujukan "WGS84"
-* globe (pilihan) – nilai data tersurat (?), diberikan sebagai jasad cakerawala yang berpangkal pada "Earth" diikuti oleh "WGS84"', # Fuzzy
+* globe (pilihan) – nilai data tersurat (?), diberikan sebagai jasad cakerawala yang berpangkal pada "Earth" diikuti oleh "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Kuantiti',
 	'wikibase-listdatatypes-quantity-body' => 'Medan data harfiah untuk kuantiti yang berkenaan dengan suatu jenis unit yang tertentu. Unit sebenar memasuki nilai data yang dimasukkan.
 * nilai – bahagian tersirat dalam rentetan (pemetaan awalan unit tidak jelas)
 * unit – bahagian tersirat dalam rentetan (pemetaan pada jasad piawai tidak jelas)
 * ketepatan (tidak wajib) – nilai data tersurat, sama unit dengan nilai',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Teks satu bahasa',
-	'wikibase-listdatatypes-monolingual-text-body' => 'Medan data harfiah untuk rentetan yang tidak diterjemahkan kepada bahasa lain. Jenis rentetan ini ditakrifkan sekali dan digunakan merentas semua bahasa. Contoh kegunaan: nama geografi yang ditulis dalam bahasa tempatan, suatu pengecam, rumus kimia atau nama sains dalam bahasa Latin.
+	'wikibase-listdatatypes-monolingual-text-body' => 'Medan data literal untuk rentetan yang tidak diterjemahkan kepada bahasa lain. Jenis rentetan ini ditakrifkan sekali dan digunakan merentas semua bahasa. Contoh kegunaan: nama geografi yang ditulis dalam bahasa tempatan, suatu pengecam, rumus kimia atau nama sains dalam bahasa Latin.
 *language (bahasa) - nilai tersurat untuk mengecam bahasa untuk bahagian teks
-*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa', # Fuzzy
+*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Teks berbilang bahasa',
-	'wikibase-listdatatypes-multilingual-text-body' => 'Medan data harfiah untuk rentetan yang mesti diterjemahkan ke dalam bahasa lain. Contoh kegunaan: nama perkara diminati sejagat yang mempunyai nama bertulis bukan tempatan, baik dari segi bahasa mahupun sistem tulisan.
+	'wikibase-listdatatypes-multilingual-text-body' => 'Medan data literal untuk rentetan yang mesti diterjemahkan ke dalam bahasa lain. Contoh kegunaan: nama perkara diminati sejagat yang mempunyai nama bertulis bukan tempatan, baik dari segi bahasa mahupun sistem tulisan.
 *language (bahasa) - nilai tersurat untuk mengecam bahasa untuk bahagian teks
-*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa', # Fuzzy
+*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa',
 	'wikibase-listdatatypes-string-head' => 'Rentetan',
 	'wikibase-listdatatypes-string-body' => 'Medan data harfiah untuk rentetan aksara. Contoh kegunaan: pengecam yang berbentuk bertulis tanpa mengira bahasa. Rentetan sedemikian ini adakalanya boleh dialih huruf ke dalam sistem tulisan (abjad) yang lain.
-*language (bahasa) - nilai tersurat untuk mengecam bahasa untuk bahagian teks
-*text (teks) - nilai tersurat untuk rentetan varian tentuan bahasa', # Fuzzy
+*language - (bahasa) nilai tersurat untuk mengecam bahasa untuk bahagian teks
+*text - (teks) nilai tersurat untuk rentetan varian tentuan bahasa',
 	'wikibase-listdatatypes-time-head' => 'Waktu',
 	'wikibase-listdatatypes-time-body' => 'Medan data harfiah untuk nilai masa, diberi dalam bentuk waktu dengan sedikit kepersisan dan sempadan. Waktunya sentiasa disimpan secara dalaman dalam format Gregory Prolepsis, tetapi format-format lain boleh digunakan sewaktu penghuraian dan penghuraian.(?)
 * time (waktu) – nilai tersurat untuk waktu yang dipaparkan mengikut ISO8601, yang mana tahunnya sentiasa ada 11 digit dan tarikhnya sentiasa bertanda dalam format +00000002013-01-01T00:00:00Z
@@ -10786,7 +10801,6 @@ $messages['nl'] = array(
 	'wikibase-label-empty' => 'Er is nog geen label ingesteld.',
 	'wikibase-label-edit-placeholder' => 'geef een label op',
 	'wikibase-description-empty' => 'Is is nog geen beschrijving ingesteld.',
-	'wikibase-deletedentity' => '$1 verwijderd',
 	'wikibase-description-edit-placeholder' => 'geef een beschrijving op',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'pagina',
@@ -12275,7 +12289,6 @@ $messages['roa-tara'] = array(
 	'wikibase-label-empty' => 'Nisciuna etichette angore definite',
 	'wikibase-label-edit-placeholder' => "mitte l'etichette",
 	'wikibase-description-empty' => 'Nisciuna descrizione angore definite',
-	'wikibase-deletedentity' => 'Scagellate $1',
 	'wikibase-description-edit-placeholder' => "mitte 'a descrizione",
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'vôsce',
@@ -15141,7 +15154,6 @@ $messages['zh-hant'] = array(
 	'wikibase-label-empty' => '尚未定義任何標籤。',
 	'wikibase-label-edit-placeholder' => '輸入標籤',
 	'wikibase-description-empty' => '尚未定義任何描述。',
-	'wikibase-deletedentity' => '删除$1',
 	'wikibase-description-edit-placeholder' => '輸入描述',
 	'wikibase-sitelink-site-edit-placeholder' => '站點',
 	'wikibase-sitelink-page-edit-placeholder' => '條目',

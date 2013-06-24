@@ -1975,7 +1975,7 @@ $messages['ka'] = array(
 	'wikibase-linkitem-input-site' => 'ენა:',
 	'wikibase-linkitem-input-page' => 'გვერდი:',
 	'wikibase-linkitem-invalidsite' => 'არჩეულია უცნობი ან არაკორექტული საიტი',
-	'wikibase-linkitem-confirmitem-text' => 'თქვენ მიერ არჩეული გვერდი უკვე დაკავშირებულია [$1 ჩვენი მონაცემების ცენტრალური რეპოზიტორიის ელემენტთან]. გთხოვთ, დაადასტუროთ, რომ ქვემოთ ნაჩვენებ გვერდებს შორის არის ის, რომელზეც გსურთ ბმულის გაკეთება აქედან.',
+	'wikibase-linkitem-confirmitem-text' => 'თქვენ მიერ არჩეული გვერდი უკვე დაკავშირებულია [$1 ჩვენი მონაცემების ცენტრალური რეპოზიტორიის ელემენტთან]. გთხოვთ, დაადასტუროთ, რომ ქვემოთ ნაჩვენებ გვერდებს შორის არის ის, რომელზეც გსურთ ბმულის გაკეთება აქედან.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'დადასტურება',
 	'wikibase-linkitem-not-loggedin-title' => 'თქვენ უნდა გაიაროთ ავტორიზაცია',
 	'wikibase-linkitem-not-loggedin' => 'ამ ფუნქციის გამოყენებისათვის, თქვენ უნდა გაიაროთ ავტორიზაცია ამ ვიკისა და [$1 მონაცემების ცენტრალურ რეპოზიტორიაში].',
@@ -1984,8 +1984,8 @@ $messages['ka'] = array(
 	'wikibase-property-notfound' => 'თვისება „$1“ ვერ მოიძებნა.',
 	'wikibase-property-notsupportedyet' => 'ვიკიბაზას ჯერ არ აქვს $1 თვისების ტიპის მხარდაჭერა.',
 	'wikibase-rc-hide-wikidata' => 'ვიკიმონაცემების $1',
-	'wikibase-rc-show-wikidata-pref' => 'ვიკიმონაცემების რედაქტირებების ჩვენება ბოლო ცვლილებების სიაში',
-	'wikibase-watchlist-show-changes-pref' => 'ვიკიმონაცემების რედაქტირებების ჩვენება თქვენი კონტროლის სიაში',
+	'wikibase-rc-show-wikidata-pref' => 'ბოლო ცვლილებების სიაში ვიკიმონაცემების რედაქტირებების ჩვენება',
+	'wikibase-watchlist-show-changes-pref' => 'თქვენი კონტროლის სიაში ვიკიმონაცემების რედაქტირებების ჩვენება',
 	'wikibase-error-invalid-entity-id' => 'მითითებული ID სისტემისთვის უცნობია. გთხოვთ, გამოიყენოთ მოქმედი ID.',
 	'special-unconnectedpages' => 'ელემენტებთან დაუკავშირებელი გვერდები',
 	'wikibase-unconnectedpages-legend' => 'დაუკავშირებელი გვერდების პარამეტრები',
@@ -1993,7 +1993,7 @@ $messages['ka'] = array(
 	'wikibase-unconnectedpages-submit' => 'მიდი',
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ არ არის ენის სწორი კოდი.',
 	'wikibase-unconnectedpages-iwdata-label' => 'მხოლოდ ენათშორისი ბმულების მქონე გვერდები',
-	'wikibase-unconnectedpages-format-row' => '($1 ენათშორისი ბმული გვერდზე)',
+	'wikibase-unconnectedpages-format-row' => '($1 ენათშორისი ბმული გვერდზე)', # Fuzzy
 );
 
 /** Korean (한국어)
@@ -2417,7 +2417,7 @@ $messages['ms'] = array(
 	'wikibase-linkitem-input-site' => 'Bahasa:',
 	'wikibase-linkitem-input-page' => 'Halaman:',
 	'wikibase-linkitem-invalidsite' => 'Tapak yang tidak dikenali atau tidak sah terpilih',
-	'wikibase-linkitem-confirmitem-text' => 'Halaman yang telah anda pilih itu sudah dipautkan dengan satu [$1 perkara di repositori pusat kami]. Sila sahkan bahawa halaman-halaman yang ditunjukkan seperti berikut adalah yang ingin anda pautkan dengan halaman ini.',
+	'wikibase-linkitem-confirmitem-text' => 'Halaman yang telah anda pilih itu sudah dipautkan dengan satu [$1 perkara di repositori pusat kami]. Sila sahkan bahawa {{PLURAL:$2|halaman|halaman-halaman}} yang ditunjukkan seperti berikut adalah yang ingin anda pautkan dengan halaman ini.',
 	'wikibase-linkitem-confirmitem-button' => 'Sahkan',
 	'wikibase-linkitem-not-loggedin-title' => 'Anda perlu log masuk',
 	'wikibase-linkitem-not-loggedin' => 'Anda perlu log masuk ke dalam wiki ini dan juga ke dalam [$1 repositori data pusat] untuk menggunakan ciri ini.',
@@ -2428,6 +2428,7 @@ $messages['ms'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Paparkan suntingan Wikidata dalam perubahan terkini',
 	'wikibase-watchlist-show-changes-pref' => 'Paparkan suntingan Wikidata dalam senarai pantau anda',
+	'wikibase-error-serialize-error' => 'Data gagal disirikan',
 	'wikibase-error-invalid-entity-id' => 'ID yang diberikan itu tidak dikenali oleh sistem. Sila gunakan ID entiti yang sah.',
 	'special-unconnectedpages' => 'Halaman yang tidak bersambung dengan perkara',
 	'wikibase-unconnectedpages-legend' => 'Pilihan untuk halaman tak tersambung',
@@ -2439,6 +2440,7 @@ $messages['ms'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 pautan antara bahasa pada halaman ini)',
 	'wikibase-pageinfo-entity-id' => 'ID Perkara Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Tiada',
+	'wikibase-property-render-error' => 'Sifat $1 gagal dihasilkan: $2',
 );
 
 /** Maltese (Malti)
