@@ -62,13 +62,15 @@ class Settings extends SettingsArray {
 	public function initFromGlobals() {
 		$settings = array();
 
-		// merge appropriate settings -------------------
-		if ( defined( 'WB_VERSION' ) ) {
-			$settings = array_merge( $settings, $GLOBALS['wgWBRepoSettings'] );
-		}
+		//NOTE: Repo overrides client. This is important especially for
+		//      settings initialized by WikibaseLib.
 
 		if ( defined( 'WBC_VERSION' ) ) {
 			$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
+		}
+
+		if ( defined( 'WB_VERSION' ) ) {
+			$settings = array_merge( $settings, $GLOBALS['wgWBRepoSettings'] );
 		}
 
 		// store

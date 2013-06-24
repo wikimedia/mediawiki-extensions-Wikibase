@@ -147,6 +147,7 @@ call_user_func( function() {
 	// extension hooks
 	$wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
 	$wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
+	$wgHooks['SetupAfterCache'][]			                = '\Wikibase\ClientHooks::onSetupAfterCache';
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = 'Wikibase\ApiClientInfo';
