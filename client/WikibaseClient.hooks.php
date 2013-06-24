@@ -163,6 +163,35 @@ final class ClientHooks {
 	}
 
 	/**
+	 * @param $settings
+	 */
+	public static function onSetupAfterCache() {
+		$settings = Settings::singleton();
+
+		// If the repo is running locally, resolve some empty default settings
+		// to the actual values for the local wiki.
+		if ( defined( 'WC_VERSION' ) ) {
+			if ( $settings->getSetting( 'repoUrl' ) === null ) {
+				$settings->setSetting( 'repoUrl', $GLOBALS['wgServer'] );
+			}
+
+			if ( $settings->getSetting( 'repoArticlePath' ) === null ) {
+				$settings->setSetting( 'repoArticlePath', $GLOBALS['wgArticlePath'] );
+			}
+
+			if ( $settings->getSetting( 'repoScriptPath' ) === null ) {
+				$settings->setSetting( 'repoScriptPath', $GLOBALS['wgScriptPath'] );
+			}
+		}
+
+		if ( $settings->getSetting( 'siteGlobalID' ) === null ) {
+			$settings->setSetting( 'siteGlobalID', $GLOBALS['wgDBName'] );
+		}
+
+		return true;
+	}
+
+	/**
 	 * Hook for injecting a message on [[Special:MovePage]]
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialMovepageAfterMove
 	 *
