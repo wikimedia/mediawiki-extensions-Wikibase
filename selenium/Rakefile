@@ -225,7 +225,7 @@ end
 
 RSpec::Core::RakeTask.new(:statements_basic) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = '../repo/tests/selenium/statements/{statements_spec.rb,statements_cm_spec.rb,statements_item_spec.rb,statements_time_spec.rb,statements_coordinate_spec.rb}'
+  spec.pattern = '../repo/tests/selenium/statements/statements_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:statements_cm) do |spec|
