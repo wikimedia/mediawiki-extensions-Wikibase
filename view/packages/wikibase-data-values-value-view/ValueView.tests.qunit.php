@@ -63,15 +63,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.globecoordinate.globecoordinateinput.tests' => array(
-			'scripts' => array(
-				"$bp/jquery.globecoordinate/jquery.globecoordinate.globecoordinateinput.tests.js",
-			),
-			'dependencies' => array(
-				'jquery.globecoordinate.globecoordinateinput',
-			),
-		),
-
 		'jquery.time.timeinput.tests' => array(
 			'scripts' => array(
 				"$bp/jquery.time/jquery.time.timeinput.tests.js",

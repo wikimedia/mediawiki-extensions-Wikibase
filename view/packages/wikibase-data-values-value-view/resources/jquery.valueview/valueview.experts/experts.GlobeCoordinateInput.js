@@ -34,9 +34,17 @@
 		 * the new value has been called. The use of this, basically, is a structural improvement
 		 * which allows moving setting the displayed value to the draw() method which is supposed to
 		 * handle all visual manners.
-		 * @type {globeCoordinate.globeCoordinate|null|false}
+		 * @type {globeCoordinate.GlobeCoordinate|null|false}
 		 */
 		_newValue: null,
+
+		/**
+		 * Current value. Needs to be cached because the value cannot simply be parsed from the
+		 * current input element value since that would lead to the precision being set in the
+		 * sexagesimal system even when not intended.
+		 * @type {globeCoordinate.GlobeCoordinate|null}
+		 */
+		_value: null,
 
 		/**
 		 * The preview widget.
@@ -60,16 +68,23 @@
 		 * @see jQuery.valueview.Expert._init
 		 */
 		_init: function() {
-			var self = this;
+			var self = this,
+				listrotatorEvents = 'listrotatorauto.' + this.uiBaseClass
+					+ ' listrotatorselected.' + this.uiBaseClass,
+				precisionValues = [];
 
 			this.$precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
-			.append( $( '<div/>' ).text( mw.msg( 'valueview-expert-globecoordinateinput-precision' ) ) );
+			.append(
+				$( '<div/>' ).text( mw.msg( 'valueview-expert-globecoordinateinput-precision' ) )
+			);
 
-			var precisionValues = [];
 			$.each( globeCoordinateSettings.precisions, function( i, precisionDefinition ) {
 				var label = globeCoordinate.precisionText( precisionDefinition.level );
-				precisionValues.push( { value: precisionDefinition.level, label: label } );
+				precisionValues.push( {
+					value: roundPrecision( precisionDefinition.level ),
+					label: label
+				} );
 			} );
 
 			this.$precision = $( '<div/>' )
@@ -78,31 +93,23 @@
 					values: precisionValues.reverse(),
 					deferInit: true
 				} )
-				.on(
-				'listrotatorauto.' + this.uiBaseClass + ' listrotatorselected.' + this.uiBaseClass,
-				function( event, newValue ) {
-					var rawValue = self._getRawValue();
+				.on( listrotatorEvents, function( event, newValue ) {
+					var rawValue = self._getRawValue(),
+						roundedPrecision = roundPrecision( rawValue.getPrecision() ) ;
 
-					if( rawValue === null || newValue === rawValue.getPrecision() ) {
+					if( rawValue === null || newValue === roundedPrecision ) {
 						// Listrotator has been rotated automatically, the value covering the new
 						// precision has already been generated or the current input is invalid.
 						return;
 					}
 
-					var overwrite = {};
-
-					if( event.type === 'listrotatorauto' ) {
-						overwrite.precision = undefined;
-					}
-
-					var value = self._updateValue( overwrite );
-
-					if( event.type === 'listrotatorauto' ) {
-						$( this ).data( 'listrotator' ).rotate( value.getPrecision() );
-					}
-				}
-			)
-			.appendTo( this.$precisionContainer );
+					self._updateValue().done( function( gc ) {
+						if( event.type === 'listrotatorauto' ) {
+							self.$precision.data( 'listrotator' ).rotate( gc.getValue().getPrecision() );
+						}
+					} );
+				} )
+				.appendTo( this.$precisionContainer );
 
 			var $toggler = $( '<a/>' )
 			.addClass( this.uiBaseClass + '-advancedtoggler' )
@@ -118,12 +125,43 @@
 			this.preview = $preview.data( 'preview' );
 
 			this.$input.eachchange( function( event, oldValue ) {
-				var value = self.$input.data( 'globecoordinateinput' ).value();
-				if( oldValue === '' && value === null || self.$input.val() === '' ) {
-					self._updatePreview();
+				var currentInputValue = self.$input.val();
+
+				self._setRawValue( currentInputValue );
+
+				// No need to update the preview when the input element is cleared since it will
+				// be hidden anyway.
+				if( self.$input.val() === '' ) {
+					self._updatePreview( null );
+					return;
 				}
+
+				self.preview.showSpinner();
+
+				self.parser().parse( self.$input.val() )
+				.done( function( dataValue ) {
+					// Throw away outdated requests:
+					if( currentInputValue !== self.$input.val() ) {
+						return;
+					}
+
+					self._setRawValue( dataValue.getValue() );
+
+					self.$precision.data( 'listrotator' ).rotate(
+						roundPrecision( dataValue.getValue().getPrecision() )
+					);
+
+					self._newValue = false; // value, not yet handled by draw(), is outdated now
+					self._updatePreview( dataValue.getValue() );
+					self._viewNotifier.notify( 'change' );
+				} )
+				.fail( function() {
+					if( currentInputValue !== self.$input.val() ) {
+						return;
+					}
+					self._updatePreview( null );
+				} );
 			} )
-			.globecoordinateinput()
 			.inputextender( {
 				content: [ $preview, $toggler, this.$precisionContainer ],
 				initCallback: function() {
@@ -131,14 +169,6 @@
 					self.$precisionContainer.css( 'display', 'none' );
 					$toggler.toggler( { $subject: self.$precisionContainer } );
 				}
-			} )
-			.on( 'globecoordinateinputupdate.' + this.uiBaseClass, function( event, value ) {
-				if( value ) {
-					self.$precision.data( 'listrotator' ).rotate( value.getPrecision() );
-				}
-				self._newValue = false; // value, not yet handled by draw(), is outdated now
-				self._viewNotifier.notify( 'change' );
-				self._updatePreview();
 			} );
 
 		},
@@ -156,78 +186,85 @@
 			previewElement.remove();
 
 			this.$input.data( 'inputextender' ).destroy();
-			this.$input.data( 'globecoordinateinput' ).destroy();
 			this.$input.remove();
 
 			PARENT.prototype.destroy.call( this );
 		},
 
 		/**
-		 * Builds a globeCoordinate.GlobeCoordinate object from the widget's current input taking the
-		 * precision into account if set manually.
+		 * Builds a GlobeCoordinate object from the widget's current input taking the precision into
+		 * account if set manually.
+		 * @since 0.1
 		 *
-		 * @param {Object} [overwrites] Values that should be used instead of the ones picked from
-		 *        the input elements.
-		 * @return {globeCoordinate.GlobeCoordinate}
+		 * @return {jQuery.Promise}
 		 */
-		_updateValue: function( overwrites ) {
-			overwrites = overwrites || {};
+		_updateValue: function() {
+			var currentInputValue = this.$input.val();
 
-			var options = {},
-				precision = ( overwrites.hasOwnProperty( 'precision' ) )
-					? overwrites.precision
-					: this.$precision.data( 'listrotator' ).value(),
-				value;
+			this.preview.showSpinner();
 
-			if( precision !== undefined ) {
-				options.precision = precision;
-			}
-
-			value = new GlobeCoordinate( this.$input.val(), options );
-
-			this._setRawValue( value );
-			this._updatePreview();
-			this._viewNotifier.notify( 'change' );
-
-			return value;
+			var self = this;
+			return this.parser().parse( this.$input.val() )
+			.done( function( gc ) {
+				// Throw away outdated requests:
+				if( currentInputValue !== self.$input.val() ) {
+					return;
+				}
+				self._setRawValue( gc.getValue() );
+				self._updatePreview( gc.getValue() );
+				self._viewNotifier.notify( 'change' );
+			} )
+			.fail( function() {
+				if( currentInputValue !== self.$input.val() ) {
+					return;
+				}
+				self._setRawValue( null );
+				self._updatePreview( null );
+				self._viewNotifier.notify( 'change' );
+			} );
 		},
 
 		/**
 		 * Updates the preview.
+		 * @since 0.1
+		 *
+		 * @param {globeCoordinate.GlobeCoordinate|null} gc
 		 */
-		_updatePreview: function() {
-			var rawValue = this._getRawValue();
-			this.preview.update( ( rawValue ) ? rawValue.degreeText() : null );
+		_updatePreview: function( gc ) {
+			if( gc !== null ) {
+				gc = gc.degreeText();
+			}
+			this.preview.update( gc );
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert.parser
 		 */
 		parser: function() {
-			return new vp.GlobeCoordinateParser();
+			var precisionWidget = this.$precision.data( 'listrotator' ),
+				options = ( !precisionWidget.$auto.hasClass( 'ui-state-active' ) )
+					? { precision: getPrecisionSetting( precisionWidget.value() ) }
+					: {};
+
+			return new vp.GlobeCoordinateParser( options );
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert._getRawValue
 		 *
-		 * @return {globeCoordinate.GlobeCoordinate|null}
+		 * @return {globeCoordinate.GlobeCoordinate|string|null}
 		 */
 		_getRawValue: function() {
-			return ( this._newValue !== false )
-				? this._newValue
-				: this.$input.data( 'globecoordinateinput' ).value();
+			return ( this._newValue !== false ) ? this._newValue : this._value;
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert._setRawValue
 		 *
-		 * @param {globeCoordinate.GlobeCoordinate|null} globeCoordinate
+		 * @param {globeCoordinate.GlobeCoordinate|string|null} globeCoordinate
 		 */
 		_setRawValue: function( globeCoordinate ) {
-			if( !( globeCoordinate instanceof GlobeCoordinate ) ) {
-				globeCoordinate = null;
-			}
-			this._newValue = globeCoordinate;
+			this._newValue = this._value = globeCoordinate;
 		},
 
 		/**
@@ -242,34 +279,54 @@
 				return true;
 			}
 
-			if(
-				!( globeCoordinate1 instanceof GlobeCoordinate )
-				|| !( globeCoordinate2 instanceof GlobeCoordinate )
-			) {
-				return false;
+			if( globeCoordinate1 instanceof GlobeCoordinate ) {
+				globeCoordinate1 = globeCoordinate1.degreeText();
 			}
 
-			return globeCoordinate1.equals( globeCoordinate2 );
+			if( globeCoordinate2 instanceof GlobeCoordinate ) {
+				globeCoordinate2 = globeCoordinate2.degreeText();
+			}
+
+			return globeCoordinate1 === globeCoordinate2;
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert.draw
+		 *
+		 * @return {jQuery.Promise|null}
+		 *
+		 * TODO: Get rid of this LSP violation, should not be necessary to return a promise here.
 		 */
 		draw: function() {
+			var self = this,
+				promise = null;
+
 			if( this._viewState.isDisabled() ) {
-				this.$input.data( 'globecoordinateinput' ).disable();
+				var deferred = $.Deferred().reject();
+				promise = deferred.promise();
+				this.$input.prop( 'disabled', true ).addClass( 'ui-state-disabled' );
 			} else {
-				this.$input.data( 'globecoordinateinput' ).enable();
+				this.$input.prop( 'disabled', false ).removeClass( 'ui-state-disabled' );
+
+				if( this._newValue !== false ) {
+					if( this._newValue !== null ) {
+						promise = this.parser().parse( this._newValue )
+						.done( function( dataValue ) {
+							var gc = dataValue.getValue();
+							self.$input.val( gc.degreeText() );
+							self.$precision.data( 'listrotator' ).value(
+								roundPrecision( gc.getPrecision() )
+							);
+							self._updatePreview( gc );
+						} ).fail( function() {
+							self._updatePreview( null );
+						} );
+					}
+					this._newValue = false;
+				}
 			}
 
-			if( this._newValue !== false ) {
-				this.$input.data( 'globecoordinateinput' ).value( this._newValue );
-				if( this._newValue !== null ) {
-					this.$precision.data( 'listrotator' ).value( this._newValue.getPrecision() );
-				}
-				this._newValue = false;
-				this._updatePreview();
-			}
+			return promise;
 		},
 
 		/**
@@ -286,5 +343,51 @@
 			this.$input.blur();
 		}
 	} );
+
+	/**
+	 * Rounds a given precision for being able to use is as internal "constant".
+	 *
+	 * @since 0.1
+	 *
+	 * @param {number} precision
+	 * @return {number}
+	 */
+	function roundPrecision( precision ) {
+		var precisions = globeCoordinateSettings.precisions,
+			highestPrecision = precisions[precisions.length - 1].level,
+			multiplier = 1;
+
+		// To make sure that not too much digits are cut off for the "constant" precisions to be
+		// distinctive, we round with a multiplier that rounds the most precise precision to a
+		// number greater than 1:
+		while( highestPrecision * multiplier < 1 ) {
+			multiplier *= 10;
+		}
+
+		return Math.round( precision * multiplier ) / multiplier;
+	}
+
+	/**
+	 * Returns the original precision level for a rounded precision.
+	 *
+	 * @since 0.1
+	 *
+	 * @param {number} roundedPrecision
+	 * @return {number}
+	 */
+	function getPrecisionSetting( roundedPrecision ) {
+		var rounded,
+			precision;
+
+		$.each( globeCoordinateSettings.precisions, function( i, precisionDefinition ) {
+			rounded = roundPrecision( precisionDefinition.level );
+			if( rounded === roundedPrecision ) {
+				precision = precisionDefinition.level;
+				return false;
+			}
+		} );
+
+		return precision;
+	}
 
 }( dataValues, valueParsers, jQuery, jQuery.valueview, globeCoordinate, mediaWiki ) );

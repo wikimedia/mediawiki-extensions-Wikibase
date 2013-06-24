@@ -5,7 +5,7 @@
  *
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, vp, $, vv ) {
+( function( dv, vp, $, vv, GlobeCoordinate ) {
 	'use strict';
 
 	var PARENT = vv.BifidExpert,
@@ -40,15 +40,25 @@
 		 */
 		_staticExpertOptions: {
 			/**
-			 * @param {globeCoordinate.GlobeCoordinate|null} currentRawValue
-			 * @param {jQuery.valueview.ViewState} viewState
+			 * @param {string|globeCoordinate.GlobeCoordinate|null} currentRawValue
+			 * @param {jQuery.valueview.ViewState} [viewState]
 			 */
 			domBuilder: function( currentRawValue, viewState ) {
 				var $node = $( '<span/>' );
-				return ( currentRawValue ) ? $node.text( currentRawValue.degreeText() ) : $node;
+
+				if( !currentRawValue ) {
+					return $node;
+				}
+
+				// On initialization, the static expert will be fed with a GlobeCoordinate instance.
+				var text = ( currentRawValue instanceof GlobeCoordinate )
+					? currentRawValue.degreeText()
+					: currentRawValue;
+
+				return $node.text( text );
 			},
 			baseExpert: editableExpert
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview ) );
+}( dataValues, valueParsers, jQuery, jQuery.valueview, globeCoordinate.GlobeCoordinate ) );

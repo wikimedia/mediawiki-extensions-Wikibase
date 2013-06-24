@@ -90,17 +90,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'jquery.globecoordinate.globecoordinateinput' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.globecoordinate/jquery.globecoordinate.globecoordinateinput.js',
-			),
-			'dependencies' => array(
-				'jquery.ui.widget',
-				'jquery.eachchange',
-				'globeCoordinate.js',
-			),
-		),
-
 		'jquery.time.timeinput' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.time/jquery.time.timeinput.js',
