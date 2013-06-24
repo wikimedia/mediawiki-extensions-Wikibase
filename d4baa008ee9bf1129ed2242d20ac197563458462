@@ -16,6 +16,24 @@
       "revId": "d4baa008ee9bf1129ed2242d20ac197563458462",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1Dcu4UE",
+        "filename": "Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-24T15:33:15Z",
+      "side": 1,
+      "message": "In that case, I\u0027d prefer to rename the entry point. To me, this file is what you include whn you want both client and repo in your wiki.\n\nAny jenkins specific magic should go somewhere else (that should probably include the example settings...)\n\nI didn\u0027t want to do that imediatly though, since that would again break jenkins builds on gerrit :)",
+      "parentUuid": "D1NcEvcQ",
+      "revId": "d4baa008ee9bf1129ed2242d20ac197563458462",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
