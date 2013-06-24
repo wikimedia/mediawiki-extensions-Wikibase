@@ -17,6 +17,7 @@ use Wikibase\EntityId;
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseChange
+ * @group XXX
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -136,7 +137,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 	 * @dataProvider newFromArrayProvider
 	 */
 	public function testSaveSelectCountAndDelete( array $data, $loadDefaults = false ) {
-		if ( defined( 'WBC_VERSION' ) ) {
+		if ( !defined( 'WB_VERSION' ) ) {
 			$this->markTestSkipped( "Skipping because Wikibase Client should not write to foreign database table." );
 		}
 
