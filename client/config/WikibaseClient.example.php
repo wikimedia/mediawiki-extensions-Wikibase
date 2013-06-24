@@ -34,6 +34,12 @@ if ( !defined( 'WB_CLIENT_EXAMPLE_ENTRY' ) ) {
 	die( 'Not an entry point.' );
 }
 
+// NOTE: If this wiki also runs the Wikibase repo extension,
+//       stop and just use the defaults for settings.
+if ( defined( 'WB_VERSION' ) ) {
+	return;
+}
+
 // Base URL for building links to the repository.
 // Assumes your wiki is setup as "http://repo.example.org/wiki/"
 // This can be protocol relative, such as "//www.wikidata.org"
