@@ -31,7 +31,7 @@
 
 
 return call_user_func( function() {
-	global $wgScriptPath, $wgArticlePath, $wgLanguageCode, $wgDBname;
+	global $wgLanguageCode, $wgDBname;
 
 	$defaults = array(
 		'namespaces' => array(), // by default, include all namespaces; deprecated as of 0.4
@@ -181,6 +181,17 @@ return call_user_func( function() {
 			),
 		),
 	);
+
+	// Repository is active on the local wiki, change defaults accordingly
+	if ( defined( 'WB_VERSION' ) ) {
+		$defaults['repoUrl'] = null; // initialized later
+		$defaults['repoArticlePath'] = null; // initialized later
+		$defaults['repoScriptPath'] = null; // initialized later
+
+		// use the local database for direct repo access
+		$defaults['repoDatabase'] = false;
+		$defaults['changesDatabase'] = false;
+	}
 
 	return $defaults;
 } );
