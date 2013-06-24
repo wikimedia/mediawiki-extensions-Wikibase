@@ -163,6 +163,29 @@ final class ClientHooks {
 	}
 
 	/**
+	 * @param $settings
+	 */
+	public static function onWikibaseSettings( &$settings ) {
+		if ( defined( 'WB_VERSION' ) ) {
+			// This means the client code is running locally on the repo.
+			// TODO: account for the case that a wiki can be client to multiple repos
+
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Client is running on the repo wiki, forcing some settings." );
+
+			// use this wiki's paths
+			$settings['repoUrl'] = $GLOBALS['wgServer'];
+			$settings['repoArticlePath'] = $GLOBALS['wgArticlePath'];
+			$settings['repoScriptPath'] = $GLOBALS['wgScriptPath'];
+
+			// use the local database for direct repo access
+			$settings['repoDatabase'] = false;
+			$settings['changesDatabase'] = false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Hook for injecting a message on [[Special:MovePage]]
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialMovepageAfterMove
 	 *

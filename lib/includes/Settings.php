@@ -63,13 +63,15 @@ class Settings extends SettingsArray {
 		$settings = array();
 
 		// merge appropriate settings -------------------
+		if ( defined( 'WBC_VERSION' ) ) {
+			$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
+		}
+
 		if ( defined( 'WB_VERSION' ) ) {
 			$settings = array_merge( $settings, $GLOBALS['wgWBRepoSettings'] );
 		}
 
-		if ( defined( 'WBC_VERSION' ) ) {
-			$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
-		}
+		wfRunHooks( 'WikibaseSettings', array( &$settings ) );
 
 		// store
 		foreach ( $settings as $key => $value ) {
