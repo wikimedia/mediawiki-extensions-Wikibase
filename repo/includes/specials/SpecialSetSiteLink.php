@@ -256,6 +256,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$site = \Sites::singleton()->getSite( $siteId );
 		$status = \Status::newGood();
 
+		#var_dump($site);
 		if ( $site === null ) {
 			$status->error( 'wikibase-setsitelink-invalid-site', $siteId );
 			return $status;
@@ -263,7 +264,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		if ( $pageName !== '' ) {
 			// Don't try to normalize an empty string (which means: remove the link)
-			$page = $site->normalizePageName( $page );
 			$pageName = $site->normalizePageName( $pageName );
 
 			if ( $pageName === false ) {
