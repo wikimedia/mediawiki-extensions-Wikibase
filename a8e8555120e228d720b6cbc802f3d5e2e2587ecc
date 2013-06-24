@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1ROwNIk",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-24T21:12:24Z",
+      "side": 1,
+      "message": "This assumes you will want to point to the installed repo. What if someone installs a client hooked up to WD and then enabled repo to try out some things? Boom. And they can\u0027t even override it.",
+      "revId": "a8e8555120e228d720b6cbc802f3d5e2e2587ecc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1ZNkJCU",
+        "filename": "lib/includes/Settings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-24T21:12:24Z",
+      "side": 1,
+      "message": "Lets please not reintroduce this evil hook?",
+      "revId": "a8e8555120e228d720b6cbc802f3d5e2e2587ecc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
