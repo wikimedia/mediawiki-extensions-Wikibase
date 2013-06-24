@@ -71,6 +71,8 @@ class Settings extends SettingsArray {
 			$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
 		}
 
+		wfRunHooks( 'WikibaseSettings', array( &$settings ) );
+
 		// store
 		foreach ( $settings as $key => $value ) {
 			$this[$key] = $value;
