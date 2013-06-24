@@ -56,7 +56,13 @@ function expertProxy( fnName ) {
  *         initialization if its initial value is empty.
  *         Default: true
  *
+ * @option parseDelay {number} Time milliseconds that the parser should wait before parsing. A delay
+ *         is useful to limit the number of API request that are outdated when returning because the
+ *         input has changed in the meantime.
+ *         Default: 300
+ *
  * @option mediaWiki {Object} mediaWiki JavaScript object that may be used in MediaWiki environment.
+ *         Default: null
  *
  * @event change: Triggered when the widget's value is updated.
  *        (1) {jQuery.event} event
@@ -107,6 +113,12 @@ $.widget( 'valueview.valueview', PARENT, {
 	_expert: null,
 
 	/**
+	 * Timeout id of the currently running setTimeout function that delays the parser API request.
+	 * @type {number}
+	 */
+	_parseTimer: null,
+
+	/**
 	 * Default options
 	 * @see jQuery.Widget.options
 	 */
@@ -115,6 +127,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		on: null,
 		value: null,
 		autoStartEditing: false,
+		parseDelay: 300,
 		mediaWiki: null
 	},
 
@@ -342,7 +355,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
-	 * Will update the expert repsonsible for handling the value type of the current value. If there
+	 * Will update the expert responsible for handling the value type of the current value. If there
 	 * is no value set currently (empty value) then the expert will be chosen based on the "on"
 	 * option of the valueview widget. This will be an expert suitable for creating a data value
 	 * as desired by the "on" option.
@@ -505,53 +518,61 @@ $.widget( 'valueview.valueview', PARENT, {
 			return;
 		}
 
-		this.__lastUpdateValue = rawValue;
-
-		// TODO: Get rid of parsers in experts, instead, inject a ValueParserFactory in here.
-		var parserOptions = expert.valueCharacteristics(),
-			valueParser = expert.parser();
-
-		parserOptions = $.extend( valueParser.getOptions(), parserOptions );
-		valueParser = new valueParser.constructor( parserOptions );
-
-		// TODO: Hacky preview spinner activation. Necessary until we move the responsibility for
-		//  previews out of the experts. The preview should be handled in the same place for all
-		//  value types, could perhaps move into its own widget, listening to valueview events.
-		if( expert._currentExpert && expert._currentExpert.preview ) {
-			expert._currentExpert.preview.showSpinner();
+		if( this._parseTimer ) {
+			clearTimeout( this._parseTimer );
 		}
 
-		valueParser.parse(
-			rawValue
-		).done( function( parsedValue ) {
-			// Paranoia check against ValueParser interface:
-			if( parsedValue !== null && !( parsedValue instanceof dv.DataValue ) ) {
-				throw new Error( 'Unexpected value parser result' );
+		this._parseTimer = setTimeout( function() {
+			self.__lastUpdateValue = rawValue;
+
+			// TODO: Get rid of parsers in experts, instead, inject a ValueParserFactory in here.
+			var parserOptions = expert.valueCharacteristics(),
+				valueParser = expert.parser();
+
+			parserOptions = $.extend( valueParser.getOptions(), parserOptions );
+			valueParser = new valueParser.constructor( parserOptions );
+
+			// TODO: Hacky preview spinner activation. Necessary until we move the responsibility
+			//  for previews out of the experts. The preview should be handled in the same place for
+			//  all value types, could perhaps move into its own widget, listening to valueview
+			//  events.
+			if( expert._currentExpert && expert._currentExpert.preview ) {
+				expert._currentExpert.preview.showSpinner();
 			}
 
-			if( self.__lastUpdateValue === undefined ) {
-				// latest update job is done, this one must be a late response for some weird reason
-				return;
-			}
+			valueParser.parse(
+				rawValue
+			).done( function( parsedValue ) {
+				// Paranoia check against ValueParser interface:
+				if( parsedValue !== null && !( parsedValue instanceof dv.DataValue ) ) {
+					throw new Error( 'Unexpected value parser result' );
+				}
 
-			self._value = parsedValue; // NOTE: can be null!
+				if( self.__lastUpdateValue === undefined ) {
+					// latest update job is done, this one must be a late response for some weird
+					// reason
+					return;
+				}
 
-			if( expert.rawValueCompare( self.__lastUpdateValue, rawValue ) ) {
-				// this is the response for the latest update! by setting this to undefined, we will
-				// ignore all responses which might come back late.
-				// Another reason for this could be something like "a", "ab", "a", where the first
-				// response comes back and the following two can be ignored.
-				self.__lastUpdateValue = undefined;
-			}
-		} ).fail( function( error, details ) {
-			// TODO: display some message if parsing failed due to bad API connection etc.
-			self._value = null;
-		} ).always( function() {
-			// Call experts draw() for allowing update of "advanced adjustments" in some experts.
-			expert.draw();
+				self._value = parsedValue; // NOTE: can be null!
 
-			self._trigger( 'afterparse' );
-		} );
+				if( expert.rawValueCompare( self.__lastUpdateValue, rawValue ) ) {
+					// this is the response for the latest update! by setting this to undefined, we
+					// will ignore all responses which might come back late.
+					// Another reason for this could be something like "a", "ab", "a", where the
+					// first response comes back and the following two can be ignored.
+					self.__lastUpdateValue = undefined;
+				}
+			} ).fail( function( error, details ) {
+				// TODO: display some message if parsing failed due to bad API connection etc.
+				self._value = null;
+			} ).always( function() {
+				// Call experts draw() for allowing update of "advanced adjustments" in some experts.
+				expert.draw();
+
+				self._trigger( 'afterparse' );
+			} );
+		} , this.options.parseDelay );
 	},
 
 	/**
