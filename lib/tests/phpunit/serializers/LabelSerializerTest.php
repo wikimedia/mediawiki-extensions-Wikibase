@@ -24,7 +24,7 @@ use Wikibase\Lib\Serializers\LabelSerializer;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.2
+ * @since 0.4
  *
  * @ingroup WikibaseLib
  * @ingroup Test

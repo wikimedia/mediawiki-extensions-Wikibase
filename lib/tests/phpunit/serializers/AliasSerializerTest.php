@@ -6,7 +6,7 @@ use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
 use Wikibase\Lib\Serializers\AliasSerializer;
 
 /**
- * @covers Wikibase\Lib\Serializers\LabelSerializer
+ * @covers Wikibase\Lib\Serializers\AliasSerializer
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ use Wikibase\Lib\Serializers\AliasSerializer;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.2
+ * @since 0.4
  *
  * @ingroup WikibaseLib
  * @ingroup Test
