@@ -34,6 +34,24 @@
       "revId": "d4baa008ee9bf1129ed2242d20ac197563458462",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1RNxVN4",
+        "filename": "Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-24T21:15:37Z",
+      "side": 1,
+      "message": "This \"entry point\" should not be here. It is here since Jenkins assumes it is and breaks if it is not. It is the only way we can get stuff to currently work by making changes in this repo. If you want to make this sane, changes in the WMF Jenkins setup are needed.",
+      "parentUuid": "D1Dcu4UE",
+      "revId": "d4baa008ee9bf1129ed2242d20ac197563458462",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
