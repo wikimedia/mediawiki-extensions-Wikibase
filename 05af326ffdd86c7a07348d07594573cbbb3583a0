@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1FmvZn4",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2013-06-24T02:22:04Z",
+      "side": 1,
+      "message": "Indented too far. Also, recommending name \"wikibase.lib.test\" or  \"wikibase.lib.tests\" instead.",
+      "revId": "05af326ffdd86c7a07348d07594573cbbb3583a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1HnGok0",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2013-06-24T02:22:04Z",
+      "side": 1,
+      "message": "Not new in this commit but, avoid trailing line comments. Inline comments go over the line they are about.",
+      "revId": "05af326ffdd86c7a07348d07594573cbbb3583a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
