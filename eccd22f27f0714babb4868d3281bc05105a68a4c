@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1BwGbNE",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-06-24T12:01:52Z",
+      "side": 1,
+      "message": "this description seems not right, can you please extend?",
+      "revId": "eccd22f27f0714babb4868d3281bc05105a68a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1DwVKPA",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-06-24T12:01:52Z",
+      "side": 1,
+      "message": "Maybe LanguageWithFallback instead of LanguageWrapper?",
+      "revId": "eccd22f27f0714babb4868d3281bc05105a68a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1HxukJg",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-06-24T12:01:52Z",
+      "side": 1,
+      "message": "what is the source language?",
+      "revId": "eccd22f27f0714babb4868d3281bc05105a68a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1Lxo.Ik",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-06-24T12:01:52Z",
+      "side": 1,
+      "message": "it returns not Language, but LanguageWrapper",
+      "revId": "eccd22f27f0714babb4868d3281bc05105a68a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1FxXVMk",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-06-24T12:01:52Z",
+      "side": 1,
+      "message": "what does it mean to be the language where data should be fetched? is the the fallback language?",
+      "revId": "eccd22f27f0714babb4868d3281bc05105a68a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1LxPWDQ",
+        "filename": "lib/includes/LanguageWrapper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-06-24T12:01:52Z",
+      "side": 1,
+      "message": "result, not results",
+      "revId": "eccd22f27f0714babb4868d3281bc05105a68a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
