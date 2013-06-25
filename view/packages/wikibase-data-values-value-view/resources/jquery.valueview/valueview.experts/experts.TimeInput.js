@@ -428,8 +428,9 @@
 					this.$calendar.data( 'listrotator' ).value( this._newValue.calendarText() );
 				}
 				this._newValue = false;
-				this._updatePreview();
 			}
+
+			this._updatePreview();
 		},
 
 		/**
