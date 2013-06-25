@@ -217,6 +217,8 @@ describe "Check time statements UI" do
         page.wait_for_entity_selector_list
         page.wait_for_property_value_box
         page.statementValueInputField = time_values[0]["input"]
+        page.wait_for_time_request
+        ajax_wait
         page.saveStatement?.should be_true
         page.saveStatement
         ajax_wait

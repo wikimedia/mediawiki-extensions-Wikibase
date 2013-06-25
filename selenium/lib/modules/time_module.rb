@@ -64,4 +64,10 @@ module TimePage
       self.timePrecision_element.when_visible
     end
   end
+
+  def wait_for_time_request
+    wait_until do
+      previewSpinner? == false
+    end
+  end
 end
