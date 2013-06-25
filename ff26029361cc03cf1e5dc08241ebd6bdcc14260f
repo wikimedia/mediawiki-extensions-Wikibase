@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1qxfQ0k",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-25T09:49:07Z",
+      "side": 1,
+      "message": "Just use a type hint on the parameter, then you don\u0027t need this check.",
+      "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1kyqHxs",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-25T09:49:07Z",
+      "side": 1,
+      "message": "Why would createJob ever return false or null? If it can\u0027t create a job, it should throw an exception, which should be allowed to \"bubble up\" from here (see rant below).",
+      "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1oxkByU",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-25T09:49:07Z",
+      "side": 1,
+      "message": "That\u0027s still a reason for an exception.\n\n[Rant about best practice error handling from my personal experience and general best practice; Not necessary in line with current practice in MediaWiki]\n\nExceptions are a way of aborting the expected flow, and return to a safe point. They are not only for programming errors, but also (and especially) for things that go wrong at runtime (note PHP\u0027s distinction between LogicException and RuntimeException).\n\nNote that an exception does not imply that the user will see an error message. Exceptions should only be allowed to \"bubble up\" as far as necessary to resume normal operation. The caller has to decide how to deal with exceptions: ignore, report, or throw - in the latter case, the next caller has to make the same decision, and so on. Generally, catch and handle an exception in a place where you can recover and continue normally (perhaps after logging or showing a message). Note that in order to make that decision, the exception class has to be sufficiently specific - MWException isn\u0027t specific enough for that.\n\nEssentially: if i have a function called doX() and it returns, it expect X to be done. Having to check the return value is like going back and asking \"did you really do X\"?\n\nA return value should not indicate an error (i would have liked to say NEVER, but exceptions exist), the caller should not be required to check a return value that would otherwise not have been used or looked at at all.\n\nIt\u0027s different for getters: $foo-\u003egetThingy( $id )  may return null if no thingy with that ID exists - in that case, it\u0027s mostly a matter of context or even taste.",
+      "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1qxI44w",
+        "filename": "client/includes/hooks/MovePageNotice.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-25T09:49:07Z",
+      "side": 1,
+      "message": "I would only require $siteLinkLookup and $repoLinks (and add type hints for these). Oh, and the $siteId. The rest could/should be parameters of appendOutput().\n\nAs a rule of thumb: put into the constructor what you operate *with*, and into the method\u0027s parameter what the method operates *on*.",
+      "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1uxC62o",
+        "filename": "client/includes/hooks/MovePageNotice.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-25T09:49:07Z",
+      "side": 1,
+      "message": "I would rename this and add parameters: reportRepoUpdate( Title $oldTitle, Title $newTitle, OutputPage $output );",
+      "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
