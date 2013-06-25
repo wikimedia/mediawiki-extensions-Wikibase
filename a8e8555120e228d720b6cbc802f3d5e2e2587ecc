@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "D1qx5A-w",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-25T09:01:11Z",
+      "side": 1,
+      "message": "Yes, we should support a wiki being a client to multiple repos (one of which may be the wiki itself). But we currently don\u0027t. \n\nOf course it would be nicer to just *default* to the below values when repo and client are active at the same time, but the values we need are not configured at the point where defaults are defined (i think $GLOBALS[\u0027wgServer\u0027] is the main problem here).\n\nSo, can you give me a better solution?",
+      "parentUuid": "D1ROwNIk",
+      "revId": "a8e8555120e228d720b6cbc802f3d5e2e2587ecc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1ZNkJCU",
         "filename": "lib/includes/Settings.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-24T21:12:24Z",
       "side": 1,
       "message": "Lets please not reintroduce this evil hook?",
+      "revId": "a8e8555120e228d720b6cbc802f3d5e2e2587ecc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1kwc374",
+        "filename": "lib/includes/Settings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-25T09:01:11Z",
+      "side": 1,
+      "message": "I\u0027m not very happy with this either, but can\u0027t think of an alternative solution.",
+      "parentUuid": "D1ZNkJCU",
       "revId": "a8e8555120e228d720b6cbc802f3d5e2e2587ecc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
