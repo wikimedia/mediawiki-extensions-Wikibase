@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1vKEgBA",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T17:21:18Z",
+      "side": 1,
+      "message": "Might be nicer to just pass everything as simple argument instead of using an array",
+      "revId": "86558e45cb294b711e999bb76ad567292ddabb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1vKywAQ",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T17:21:18Z",
+      "side": 1,
+      "message": "Comments should start with an upper case letter",
+      "revId": "86558e45cb294b711e999bb76ad567292ddabb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1hLK7G8",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T17:21:18Z",
+      "side": 1,
+      "message": "This should probably be Status::fatal",
+      "revId": "86558e45cb294b711e999bb76ad567292ddabb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1nLH8Gc",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T17:21:18Z",
+      "side": 1,
+      "message": "This should probably be Status::fatal",
+      "revId": "86558e45cb294b711e999bb76ad567292ddabb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1pKm3MI",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T17:21:18Z",
+      "side": 1,
+      "message": "This probably needs to be changed to SimpleSiteLink and the below to addSimpleSiteLink (probably already done on master), just noting for completeness",
+      "revId": "86558e45cb294b711e999bb76ad567292ddabb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1rKhWK8",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T17:21:18Z",
+      "side": 1,
+      "message": "This should probably be Status::fatal",
+      "revId": "86558e45cb294b711e999bb76ad567292ddabb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1tKJhCY",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T17:21:18Z",
+      "side": 0,
+      "message": "This change is undocumented... or am I missing something? What is it supposed to do?",
+      "revId": "4d50cb6fa1027bd253543c572d212aef5d771d2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
