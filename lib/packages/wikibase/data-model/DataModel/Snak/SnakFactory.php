@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use DataValues\DataValue;
+use DataValues\DataValueFactory;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use MWException;
@@ -42,27 +44,24 @@ class SnakFactory {
 	 *
 	 * @param EntityId    $propertyId
 	 * @param string      $snakType
-	 * @param string|null $valueType
-	 * @param mixed|null  $rawValue
+	 * @param DataValue $value
 	 *
 	 * @return Snak
 	 *
-	 * @throws IllegalValueException
 	 * @throws InvalidArgumentException
 	 */
-	public function newSnak( EntityId $propertyId, $snakType, $valueType = null, $rawValue = null ) {
-		//TODO: needs test
-
+	public function newSnak( EntityId $propertyId, $snakType, DataValue $value = null ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
 			throw new InvalidArgumentException( 'Expected an EntityId of a property' );
 		}
 
 		switch ( $snakType ) {
 			case 'value':
-				//TODO: inject DataValueFactory
-				$dataValue = \DataValues\DataValueFactory::singleton()->newDataValue( $valueType, $rawValue );
+				if ( $value === null ) {
+					throw new InvalidArgumentException( "`value` snaks require a the $value parameter to be set!" );
+				}
 
-				$snak = new PropertyValueSnak( $propertyId, $dataValue );
+				$snak = new PropertyValueSnak( $propertyId, $value );
 				break;
 			case 'novalue':
 				$snak = new PropertyNoValueSnak( $propertyId );
@@ -75,6 +74,7 @@ class SnakFactory {
 		}
 
 		assert( isset( $snak ) );
+		assert( $snak instanceof Snak );
 
 		return $snak;
 	}

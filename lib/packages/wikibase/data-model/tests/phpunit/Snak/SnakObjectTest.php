@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\Snak;
+use Wikibase\SnakObject;
 
 /**
  * @covers Wikibase\SnakObject
@@ -140,6 +141,16 @@ abstract class SnakObjectTest extends \PHPUnit_Framework_TestCase {
 		$id = $omnomnom->getPropertyId();
 		$this->assertInstanceOf( '\Wikibase\EntityId', $id );
 		$this->assertEquals( $id, $omnomnom->getPropertyId() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testNewFromArray( Snak $snak ) {
+		$data = $snak->toArray();
+		$actual = SnakObject::newFromArray( $data );
+
+		$this->assertEquals( $snak, $actual );
 	}
 
 }

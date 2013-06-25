@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use DataValues\UnDeserializableValue;
 use DataValues\DataValue;
 
 /**
@@ -30,6 +31,7 @@ use DataValues\DataValue;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class PropertyValueSnak extends SnakObject {
 
@@ -117,5 +119,4 @@ class PropertyValueSnak extends SnakObject {
 	public function getType() {
 		return 'value';
 	}
-
 }

@@ -155,6 +155,9 @@ abstract class SnakObject implements Snak {
 	 * - data value type (string)
 	 * ]
 	 *
+	 * @note: If a DataValue could not be unserialized properly, the respective data
+	 *        will be represented using an UnDeserializableValue object.
+	 *
 	 * @since 0.3
 	 *
 	 * @param array $data
@@ -167,7 +170,7 @@ abstract class SnakObject implements Snak {
 		$data[0] = new EntityId( Property::ENTITY_TYPE, $data[0] );
 
 		if ( $snakType === 'value' ) {
-			$data[1] = \DataValues\DataValueFactory::singleton()->newDataValue( $data[1], $data[2] );
+			$data[1] = \DataValues\DataValueFactory::singleton()->tryNewDataValue( $data[1], $data[2] );
 			unset( $data[2] );
 		}
 
