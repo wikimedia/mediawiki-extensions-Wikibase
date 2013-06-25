@@ -31,6 +31,7 @@ use DataValues\DataValueFactory;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class DataValuesFactoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -51,48 +52,138 @@ class DataValuesFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return DataValueFactory
 	 */
 	protected function getNewInstance() {;
-		return new DataValueFactory();
+		$factory = new DataValueFactory();
+		$factory->registerDataValue( 'string', '\DataValues\StringValue' );
+		$factory->registerDataValue( 'unknown', '\DataValues\UnknownValue' );
+		$factory->registerDataValue( 'number', 'DataValues\NumberValue' );
+		return $factory;
 	}
 
 	public function testRegisterDataValue() {
 		$factory = $this->getNewInstance();
 
-		$factory->registerDataValue( 'string', 'DataValues\StringValue' );
-		$factory->registerDataValue( 'number', 'DataValues\NumberValue' );
-
-		$this->assertEquals( array( 'string', 'number' ), $factory->getDataValues() );
+		$this->assertEquals( array( 'string', 'unknown', 'number' ), $factory->getDataValues() );
 
 		$factory->registerDataValue( 'number', 'DataValues\StringValue' );
 
 		$this->assertInstanceOf( 'DataValues\StringValue', $factory->newDataValue( 'number', '42' ) );
 	}
 
-	public function testNewDataValue() {
-		$factory = $this->getNewInstance();
-
-		$values = array(
-			'string' => 'foo bar baz!',
-			'number' => 42.0,
+	public static function provideNewDataValue() {
+		return array(
+			'string value' =>  array( 'string', 'hello', '\DataValues\StringValue' ),
+			'unknown value' => array( 'unknown', array( 2, 3 ), '\DataValues\UnknownValue' ),
+			'bad type' =>      array( 'foo', 'hello', null, '\DataValues\IllegalValueException' ),
+			'bad value' =>     array( 'string', array( 23 ), null, '\DataValues\IllegalValueException' ),
+			'no type' =>       array( null, 'hello', null, '\InvalidArgumentException' ),
 		);
-
-		$dataValues = array(
-			'string' => 'DataValues\StringValue',
-			'number' => 'DataValues\NumberValue',
-		);
-
-		foreach ( $dataValues as $dataValueType => $dataValueClass ) {
-			$factory->registerDataValue( $dataValueType, $dataValueClass );
-		}
-
-		foreach ( $factory->getDataValues() as $dataValueType ) {
-			$dataValue = $factory->newDataValue( $dataValueType, $values[$dataValueType] );
-			$this->assertInstanceOf( $dataValues[$dataValueType], $dataValue );
-		}
-
-		// In case there are no DataValues PHPUnit would otherwise complain here.
-		$this->assertTrue( true );
 	}
 
-	// newFromArray is tested in DataValueTest
+	/**
+	 * @dataProvider provideNewDataValue
+	 */
+	public function testNewDataValue( $type, $data, $expectedClass, $expectedException = null ) {
+		if ( $expectedException ) {
+			$this->setExpectedException( $expectedException );
+		}
+
+		$factory = $this->getNewInstance();
+
+		$value = $factory->newDataValue( $type, $data );
+
+		$this->assertInstanceOf( $expectedClass, $value );
+
+		$this->assertEquals( $type, $value->getType() );
+		$this->assertEquals( $data, $value->getArrayValue() );
+	}
+
+	/**
+	 * @dataProvider provideNewDataValue
+	 */
+	public function testTryNewDataValue( $type, $data, $expectedClass, $expectedException = null ) {
+		if ( $expectedException !== '\DataValues\IllegalValueException' ) {
+			$this->setExpectedException( $expectedException );
+		}
+
+		$factory = $this->getNewInstance();
+
+		$value = $factory->tryNewDataValue( $type, $data );
+
+		if ( $expectedException === '\DataValues\IllegalValueException' ) {
+			$this->assertInstanceOf( 'DataValues\UnDeserializableValue', $value );
+			$this->assertNotNull( $value->getReason() );
+			$this->assertEquals( $type, $value->getTargetType() );
+			$this->assertEquals( $data, $value->getArrayValue() );
+		} else {
+			$this->assertInstanceOf( $expectedClass, $value );
+			$this->assertEquals( $type, $value->getType() );
+			$this->assertEquals( $data, $value->getArrayValue() );
+		}
+	}
+
+	public static function provideNewFromArray() {
+		return array_merge( self::provideNewDataValue(), array(
+			'no type' =>  array( null, null, null, '\DataValues\IllegalValueException' ),
+			'empty type' =>  array( '', 'bla', null, '\DataValues\IllegalValueException' ),
+			'no value' => array( 'string', null, null, '\DataValues\IllegalValueException' ),
+		) );
+	}
+
+	/**
+	 * @dataProvider provideNewFromArray
+	 */
+	public function testNewFromArray( $type, $data, $expectedClass, $expectedException = null ) {
+		if ( $expectedException ) {
+			$this->setExpectedException( $expectedException );
+		}
+
+		$factory = $this->getNewInstance();
+
+		$array= array();
+
+		if ( $type !== null ) {
+			$array['type'] = $type;
+		}
+
+		if ( $data !== null ) {
+			$array['value'] = $data;
+		}
+
+		$value = $factory->newFromArray( $array );
+
+		$this->assertInstanceOf( $expectedClass, $value );
+		$this->assertEquals( $data, $value->getArrayValue() );
+		$this->assertEquals( $array, $value->toArray() );
+	}
+
+	/**
+	 * @dataProvider provideNewFromArray
+	 */
+	public function testTryNewFromArray( $type, $data, $expectedClass, $expectedException = null ) {
+		$factory = $this->getNewInstance();
+
+		$array= array();
+
+		if ( $type !== null ) {
+			$array['type'] = $type;
+		}
+
+		if ( $data !== null ) {
+			$array['value'] = $data;
+		}
+
+		$value = $factory->tryNewFromArray( $array );
+
+		if ( $expectedException ) {
+			$this->assertInstanceOf( 'DataValues\UnDeserializableValue', $value );
+			$this->assertNotNull( $value->getReason() );
+			$this->assertEquals( $type, $value->getTargetType() );
+			$this->assertEquals( $data, $value->getArrayValue() );
+		} else {
+			$this->assertInstanceOf( $expectedClass, $value );
+			$this->assertEquals( $data, $value->getArrayValue() );
+			$this->assertEquals( $array, $value->toArray() );
+		}
+	}
 
 }

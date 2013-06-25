@@ -265,9 +265,9 @@ abstract class DataValueTest extends \PHPUnit_Framework_TestCase {
 	public function testNewFromArrayFactory( DataValue $value, array $arguments ) {
 		$dvFactory = new \DataValues\DataValueFactory();
 
-		foreach ( $GLOBALS['wgDataValues'] as $type => $class ) {
-			$dvFactory->registerDataValue( $type, $class );
-		}
+		$class = $this->getClass();
+
+		$dvFactory->registerDataValue( $class::getType(), $class );
 
 		$this->assertTrue( $value->equals( $dvFactory->newFromArray( $value->toArray() ) ) );
 	}

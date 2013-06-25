@@ -37,6 +37,7 @@ return array(
 	'DataValues\StringValue' => 'includes/values/StringValue.php',
 	'DataValues\TimeValue' => 'includes/values/TimeValue.php',
 	'DataValues\UnknownValue' => 'includes/values/UnknownValue.php',
+	'DataValues\UnDeserializableValue' => 'includes/values/UnDeserializableValue.php',
 
 	'DataValues\DataValue' => 'includes/DataValue.php',
 	'DataValues\DataValueFactory' => 'includes/DataValueFactory.php',
