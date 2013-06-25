@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "D1i.WpUs",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T15:03:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1qxfQ0k",
+      "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1kyqHxs",
         "filename": "client/includes/UpdateRepo.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-25T09:49:07Z",
       "side": 1,
       "message": "Why would createJob ever return false or null? If it can\u0027t create a job, it should throw an exception, which should be allowed to \"bubble up\" from here (see rant below).",
+      "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1o.mucI",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T15:03:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1kyqHxs",
       "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "D1g.dqVQ",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T15:03:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1oxkByU",
+      "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1qxI44w",
         "filename": "client/includes/hooks/MovePageNotice.php",
         "patchSetId": 9
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "D1q8GFYc",
+        "filename": "client/includes/hooks/MovePageNotice.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T15:03:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1qxI44w",
+      "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1uxC62o",
         "filename": "client/includes/hooks/MovePageNotice.php",
         "patchSetId": 9
@@ -81,6 +153,24 @@
       "writtenOn": "2013-06-25T09:49:07Z",
       "side": 1,
       "message": "I would rename this and add parameters: reportRepoUpdate( Title $oldTitle, Title $newTitle, OutputPage $output );",
+      "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1o8LWY8",
+        "filename": "client/includes/hooks/MovePageNotice.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-06-25T15:03:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "D1uxC62o",
       "revId": "ff26029361cc03cf1e5dc08241ebd6bdcc14260f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
