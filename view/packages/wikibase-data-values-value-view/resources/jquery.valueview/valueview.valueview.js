@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( dv, dt, $ ) {
+( function( dv, dt, vp, $ ) {
 	'use strict';
 
 var PARENT = $.Widget;
@@ -522,6 +522,9 @@ $.widget( 'valueview.valueview', PARENT, {
 			clearTimeout( this._parseTimer );
 		}
 
+		var valueParser = expert.parser(),
+			delay = ( valueParser instanceof vp.ApiBasedValueParser ) ? this.options.parseDelay : 0;
+
 		this._parseTimer = setTimeout( function() {
 			self.__lastUpdateValue = rawValue;
 
@@ -572,7 +575,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 				self._trigger( 'afterparse' );
 			} );
-		} , this.options.parseDelay );
+		} , delay );
 	},
 
 	/**
@@ -640,4 +643,4 @@ $.widget( 'valueview.valueview', PARENT, {
 	}
 } );
 
-}( dataValues, dataTypes, jQuery ) );
+}( dataValues, dataTypes, valueParsers, jQuery ) );
