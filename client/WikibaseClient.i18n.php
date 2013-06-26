@@ -403,6 +403,7 @@ $messages['be'] = array(
 $messages['be-tarask'] = array(
 	'wikibase-client-desc' => 'Кліент для пашырэньня Wikibase',
 	'specialpages-group-wikibaseclient' => 'Кліент Вікізьвестак',
+	'tooltip-t-wikibase' => 'Спасылка на аб’ект у рэпазыторыі зьвестак',
 	'wikibase-after-page-move' => 'Каб захаваць міжмоўныя спасылкі на перанесеную старонку, вы можаце [$1 абнавіць] злучаны аб’ект у Вікізьвестках.',
 	'wikibase-comment-remove' => 'Злучаны аб’ект выдалены зь Вікізьвестак. Моўныя спасылкі былі выдаленыя.',
 	'wikibase-comment-linked' => 'Аб’ект Вікізьвестак быў злучаны з гэтай старонкай.',
@@ -413,6 +414,7 @@ $messages['be-tarask'] = array(
 	'wikibase-comment-sitelink-change' => 'Моўная спасылка зьмененая з $1 на $2',
 	'wikibase-comment-sitelink-remove' => 'Моўная спасылка выдаленая: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|зьмена|зьмены|зьменаў}}',
+	'wikibase-dataitem' => 'Аб’ект зьвестак',
 	'wikibase-editlinks' => 'Правіць спасылкі',
 	'wikibase-editlinkstitle' => 'Рэдагаваць міжмоўныя спасылкі',
 	'wikibase-linkitem-addlinks' => 'Дадаць спасылкі',
@@ -1860,6 +1862,7 @@ $messages['is'] = array(
 $messages['it'] = array(
 	'wikibase-client-desc' => "Client per l'estensione Wikibase",
 	'specialpages-group-wikibaseclient' => 'Client Wikidata',
+	'tooltip-t-wikibase' => "Collegamento all'elemento connesso dell'archivio dati",
 	'wikibase-after-page-move' => "Puoi anche [$1 aggiornare] l'elemento associato su Wikidata per trasferire gli interlink sulla nuova pagina.",
 	'wikibase-comment-remove' => "L'elemento di Wikidata associato è stato cancellato. I collegamenti interlinguistici sono stati rimossi.",
 	'wikibase-comment-linked' => 'Un elemento di Wikidata è stato collegato a questa pagina.',
@@ -1870,6 +1873,7 @@ $messages['it'] = array(
 	'wikibase-comment-sitelink-change' => 'Collegamento linguistico modificato da $1 a $2',
 	'wikibase-comment-sitelink-remove' => 'Collegamento linguistico rimosso: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|modifica|modifiche}}',
+	'wikibase-dataitem' => 'Elemento dati',
 	'wikibase-editlinks' => 'Modifica link',
 	'wikibase-editlinkstitle' => 'Modifica collegamenti interlinguistici',
 	'wikibase-linkitem-addlinks' => 'Aggiungi link',
@@ -1915,7 +1919,7 @@ $messages['it'] = array(
 $messages['ja'] = array(
 	'wikibase-client-desc' => 'Wikibase 拡張機能のクライアント',
 	'specialpages-group-wikibaseclient' => 'ウィキデータのクライアント',
-	'tooltip-t-wikibase' => '関連付けされたデータリピジトリ項目へのリンク',
+	'tooltip-t-wikibase' => '関連付けられたデータリポジトリ項目へのリンク',
 	'wikibase-after-page-move' => '移動されたページにある言語リンクを維持するために、関連付けられたウィキデータ項目を[$1 更新]することもできます。',
 	'wikibase-comment-remove' => '関連付けられたウィキデータ項目を削除しました。言語リンクを除去しました。',
 	'wikibase-comment-linked' => 'ウィキデータ項目をこのページにリンクしました。',
@@ -2215,6 +2219,54 @@ $messages['lb'] = array(
  */
 $messages['lez'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Викималуматар',
+);
+
+/** Lithuanian (lietuvių)
+ * @author Hugo.arg
+ */
+$messages['lt'] = array(
+	'wikibase-after-page-move' => 'Jūs taip pat galite [$1 atnaujinti] susijusį Vikidatos įrašą, kad perkelto puslapio nuorodos toliau funkcionuotų.',
+	'wikibase-comment-remove' => 'Susietas Vikidatos įrašas panaikintas. Kalbos nuorodos pašalintos.',
+	'wikibase-comment-linked' => 'Vikidatos įrašas buvo susietas su šiuo puslapiu.',
+	'wikibase-comment-unlink' => 'Šis puslapis atsietas nuo Vikidatos įrašo. Kalbinės nuorodos pašalintos.',
+	'wikibase-comment-restore' => 'Susietas Vikidatos įrašas neištrintas. Kalbinės nuorodos atstatytos.',
+	'wikibase-comment-update' => 'Vikidatos įrašas pakeistas',
+	'wikibase-comment-sitelink-add' => 'Pridėta kalbinė nuoroda: $1',
+	'wikibase-comment-sitelink-change' => 'Kalbinė nuoroda pakeista iš $1 į $2',
+	'wikibase-comment-sitelink-remove' => 'Pašalinta kalbinė nuoroda: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|keitimas|keitimai|keitimų}}',
+	'wikibase-dataitem' => 'Duomenų įrašas',
+	'wikibase-editlinks' => 'Keisti nuorodas',
+	'wikibase-editlinkstitle' => 'Keisti tarpkalbines nuorodas',
+	'wikibase-linkitem-addlinks' => 'Pridėti nuorodas',
+	'wikibase-linkitem-alreadylinked' => 'Puslapis, su kuriuo susieti norėjote, jau esti priskirtas [$1 įrašui] centrinėje duomenų bazėje ir siejasi su puslapiu $2 šioje svetainėje. Įrašai gali būti susieti tik su vienu svetainės puslapiu. Prašome pasirinkti kitą puslapį susiejimui.',
+	'wikibase-linkitem-close' => 'Uždaryti pokalbio langą ir perkrauti puslapį',
+	'wikibase-linkitem-failure' => 'Bandant susieti šį puslapį, įvyko nenustatyta klaida.',
+	'wikibase-linkitem-title' => 'Susieti su puslapiu',
+	'wikibase-linkitem-linkpage' => 'Susieti su puslapiu',
+	'wikibase-linkitem-selectlink' => 'Prašome pasirinkti svetainę ir puslapį, su kuriais norėtumėte susieti šį puslapį.',
+	'wikibase-linkitem-input-site' => 'Kalba:',
+	'wikibase-linkitem-input-page' => 'Puslapis:',
+	'wikibase-linkitem-invalidsite' => 'Parinktas nežinomas arba klaidingas puslapis',
+	'wikibase-linkitem-confirmitem-text' => 'Jūsų pasirinktas puslapis jau susietas su [$1 įrašu mūsų centrinėje duomenų saugykloje]. Prašome patvirtinti, kad {{PLURAL:$2|puslapis|puslapiai}}, rodomi žemiau, yra {{PLURAL:$2|tas|tie}}, su kuriais iš tiesų norite susieti šį puslapį.',
+	'wikibase-linkitem-confirmitem-button' => 'Patvirtinti',
+	'wikibase-linkitem-not-loggedin-title' => 'Jums reikia būti prisiregistravusiam',
+	'wikibase-linkitem-not-loggedin' => 'Jums reikia būti prisijungusiam šioje wiki ir [$1 centrinėje duomenų saugykloje], kad galėtumėte naudotis šia funkcija.',
+	'wikibase-linkitem-success-create' => 'Puslapiai buvo sėkmingai susieti. Naujai sukurtą įrašą, kaupiantį nuorodas, galite rasti mūsų [$1 centrinėje duomenų saugykloje].',
+	'wikibase-property-notfound' => '$1 savybė nerasta.',
+	'wikibase-rc-hide-wikidata' => '$1 Vikidatą',
+	'wikibase-rc-show-wikidata-pref' => 'Rodyti pakeitimus Vikidatoje naujausių keitimų puslapyje',
+	'wikibase-watchlist-show-changes-pref' => 'Rodyti keitimus Vikidatoje jūsų stebimųjų puslapių sąraše',
+	'wikibase-error-serialize-error' => 'Nepavyko išdėstyti duomenų',
+	'special-unconnectedpages' => 'Puslapiai, nesusieti su įrašais',
+	'wikibase-unconnectedpages-legend' => 'Nesusietų puslapių parinktys',
+	'wikibase-unconnectedpages-page' => 'Pradėti rezultatų sąrašą puslapiu:',
+	'wikibase-unconnectedpages-submit' => 'Eiti',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" nėra teisingas kalbos kodas.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Tik puslapiai su tarpkalbinėmis nuorodomis',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|tarpkalbinė nuoroda|tarpkalbinės nuorodos|tarpkalbinių nuorodų}} šiame puslapyje)',
+	'wikibase-pageinfo-entity-id' => 'Vikidatos įrašo identifikatorius',
+	'wikibase-pageinfo-entity-id-none' => 'Nėra',
 );
 
 /** Latvian (latviešu)

@@ -1536,6 +1536,22 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-item-summary-wbsetlabel-remove' => 'Desanició la etiqueta [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Camudó la descripción [$2]',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Desanició la descripción [$2]',
+	'wikibase-item-summary-wbsetaliases-set' => "Definiendo {{PLURAL:$1|l'alcuñu|los alcuños}} en [$2]",
+	'wikibase-item-summary-wbsetaliases-add-remove' => "S'{{PLURAL:$1|añadió y desanició un alcuñu|añadieron y desaniciaron alcuños}} en [$2]",
+	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Añadíu un alcuñu|Añadíos alcuños}} en [$2]',
+	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Desaniciáu un alcuñu|Desaniciaos alcuños}} en [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Amestáu un enllaz a [$2]',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Desaniciáu un enllaz a [$2]',
+	'wikibase-item-summary-wblinktitles-create' => 'Creáu esti elementu pa coneutar les páxines [$2↔$3]',
+	'wikibase-item-summary-wblinktitles-connect' => "Amestáu un enllaz d'idioma pa coneutar les páxines [$2↔$3]",
+	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1|Creada una afirmación|Creaes afirmaciones}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Creada una afirmación|Creaes afirmaciones}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Creada una afirmación|Creaes afirmaciones}}',
+	'wikibase-item-summary-wbcreateclaim' => '{{PLURAL:$1|Creada una afirmación|Creaes afirmaciones}}',
+	'wikibase-item-summary-wbsetclaimvalue' => "{{PLURAL:$1|Creáu un valor d'afirmación|Creaos valores d'afirmación}}",
+	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Desaniciada una afirmación|Desaniciaes afirmaciones}}',
+	'wikibase-item-summary-special-create-item' => 'Creáu un elementu en [$2] con {{PLURAL:$1|valor|valores}}',
+	'wikibase-item-summary-wbcreateclaim-create' => 'Creada una afirmación',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenada del globu',
 );
 
@@ -1863,13 +1879,31 @@ $messages['be-tarask'] = array(
 	'wikibase-setentity-id' => 'Ідэнтыфікатар:',
 	'wikibase-setentity-language' => 'Мова:',
 	'wikibase-setentity-invalid-langcode' => 'Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце только вядомыя сыстэме моўныя коды, як то «en».',
+	'special-dispatchstats' => 'Статыстыка рассыланьня зьменаў',
+	'wikibase-dispatchstats-intro' => 'Гэтая старонка адлюстроўвае статыстыку рассыланьня зьменаў кліентам.
+Кліенцкай вікі паведамляецца пра зьмену ў {{GRAMMAR:месны|{{SITENAME}}}}, як толькі зьмена была туды дасланая і апрацаваная чаргой заданьняў той вікі.
+* Разьдзел «[[#{{int:wikibase-dispatchstats-changes}}|{{int:wikibase-dispatchstats-changes}}]]» паказвае нумар і дату найстарэйшага і найнавейшага аб’ектаў, якія цяпер чакаюць у чарзе.
+* Разьдзел «[[#{{int:wikibase-dispatchstats-stats}}|{{int:wikibase-dispatchstats-stats}}]]» падае зьвесткі пра самыя павольныя і самыя хуткія кліенты, а таксама самы сярэдні паміж імі. Для кожнай вікі адлюстроўваецца наступная інфармацыя:
+** «{{int:wikibase-dispatchstats-site-id}}» — унутраны ідэнтыфікатар кліенцкай вікі.
+** «{{int:wikibase-dispatchstats-pos}}» — ідэнтыфікатар апошняй зьмены, дасланай у тую вікі.
+** «{{int:wikibase-dispatchstats-lag-num}}» — колькасьць зьменаў, яшчэ не дасланых туды.
+** «{{int:wikibase-dispatchstats-lag-time}}» — час паміж апошняй дасланай у вікі зьменай і апошняй зьменай, зробленай у {{GRAMMAR:месны|{{SITENAME}}}}.
+** «{{int:wikibase-dispatchstats-touched}}» — час, калі апошні набор зьменай быў дасланы ў вікі.',
+	'wikibase-dispatchstats-no-stats' => 'У гэты момант статыстычных зьвестак няма.',
+	'wikibase-dispatchstats-changes' => 'Статыстыка журналу зьменаў',
+	'wikibase-dispatchstats-stats' => 'Статыстыка рассыланьня',
 	'wikibase-dispatchstats-change-id' => 'Ідэнтыфікатар',
 	'wikibase-dispatchstats-change-timestamp' => 'Дата/час',
 	'wikibase-dispatchstats-oldest-change' => 'Найстарэйшыя',
 	'wikibase-dispatchstats-newest-change' => 'Найнавейшыя',
 	'wikibase-dispatchstats-site-id' => 'Сайт',
+	'wikibase-dispatchstats-pos' => 'Пазыцыя',
+	'wikibase-dispatchstats-lag-num' => 'Чаканьне',
 	'wikibase-dispatchstats-lag-time' => 'Затрымка',
+	'wikibase-dispatchstats-touched' => 'Злучэньне',
 	'wikibase-dispatchstats-large-lag' => '(завялікі)',
+	'wikibase-dispatchstats-freshest' => 'Найнавейшая',
+	'wikibase-dispatchstats-stalest' => 'Найстарэйшая',
 	'wikibase-dispatchstats-median' => 'Мэдыяна',
 	'wikibase-dispatchstats-average' => 'Сярэдняе',
 	'special-listdatatypes' => 'Сьпіс усіх даступных тыпаў зьвестак',
@@ -2470,6 +2504,7 @@ $messages['ce'] = array(
 	'wikibase-newentity-description' => 'Цуьнах лаьцна:',
 	'wikibase-setdescription-label' => 'Цуьнах лаьцна:',
 	'wikibase-setentity-language' => 'Мотт:',
+	'wikibase-dispatchstats-change-timestamp' => 'Терахь/хан',
 	'wikibase-entitieswithoutlabel-label-language' => 'Мотт:',
 	'wikibase-entitieswithoutlabel-submit' => 'Лаха',
 );
