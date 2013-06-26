@@ -51,6 +51,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_until do
           page.siteIdAutocompleteList_element.visible?
         end
+        page.siteIdInputField_element.send_keys :arrow_right
         page.siteIdAutocompleteList_element.visible?.should be_true
         page.pageInputField_element.enabled?.should be_true
         page.pageInputField="xyz_thisarticleshouldneverexist_xyz"
@@ -80,6 +81,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_until do
           page.siteIdAutocompleteList_element.visible?
         end
+        page.siteIdInputField_element.send_keys :arrow_right
         page.siteIdAutocompleteList_element.visible?.should be_true
         page.pageInputField_element.enabled?.should be_true
         @browser.execute_script("$( '.wb-sitelinks-link input.ui-suggester-input' ).data( 'suggester' ).options.ajax.url = 'thisWillCauseAnError';")
@@ -104,6 +106,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_until do
           page.siteIdAutocompleteList_element.visible?
         end
+        page.siteIdInputField_element.send_keys :arrow_right
         page.pageInputField_element.enabled?.should be_true
         page.siteIdInputField="en-doesnotexist" # check if no fallback language is selected
         page.pageInputField_element.enabled?.should be_false
@@ -112,6 +115,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_until do
           page.siteIdAutocompleteList_element.visible?
         end
+        page.siteIdInputField_element.send_keys :arrow_right
         page.siteIdAutocompleteList_element.visible?.should be_true
         page.pageInputField_element.enabled?.should be_true
         page.pageInputField="Ber"
@@ -158,6 +162,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.wait_until do
             page.siteIdAutocompleteList_element.visible?
           end
+          page.siteIdInputField_element.send_keys :arrow_right
           page.siteIdAutocompleteList_element.visible?.should be_true
           page.pageInputField_element.enabled?.should be_true
           page.pageInputField = sitelink[1]

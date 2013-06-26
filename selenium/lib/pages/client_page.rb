@@ -22,7 +22,7 @@ class ClientPage < RubySelenium
   link(:clientActionsMenu, :xpath => "//div[@id='p-cactions']/h5/a")
   link(:clientWatchArticle, :xpath => "//li[@id='ca-watch']/a")
   link(:clientUnwatchArticle, :xpath => "//li[@id='ca-unwatch']/a")
-  link(:clientDataItemLink, :id => "t-wikibase")
+  link(:clientDataItemLink, :xpath => "//li[@id='t-wikibase']/a")
   text_area(:clientCreateArticleInput, :id => "wpTextbox1")
   button(:clientCreateArticleSubmit, :id => "wpSave")
   span(:clientArticleTitle, :xpath => "//h1[@id='firstHeading']/span")
