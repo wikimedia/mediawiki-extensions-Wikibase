@@ -117,6 +117,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.siteIdInputField_element.should be_true
         page.pageInputField_element.enabled?.should be_false
         page.siteIdInputField="en"
+        page.siteIdInputField_element.send_keys :arrow_right
         page.wait_until do
           page.pageInputField_element.enabled?
         end
