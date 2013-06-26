@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1jP4x3g",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-26T16:35:56Z",
+      "side": 1,
+      "message": "What happened to SpecialNewProperty?",
+      "revId": "827e44abbd29b5bf58730bbf23e3b4597d7021ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1tMnwx8",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-26T16:35:56Z",
+      "side": 1,
+      "message": "As a rule of thumb, subclassing solely for the reason of code sharing is a bad thing. Consider making this a standalone utility class, which can be used by special classes or other code. Would allow for separate testing, too.",
+      "revId": "827e44abbd29b5bf58730bbf23e3b4597d7021ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1pP1O4M",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-26T16:35:56Z",
+      "side": 1,
+      "message": "This is the term *type*, not the term. If this was a standalone class, the term type could be injected into the constructor.",
+      "revId": "827e44abbd29b5bf58730bbf23e3b4597d7021ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1nPyT5o",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-26T16:35:56Z",
+      "side": 1,
+      "message": "Please document whether this is expected to return HTML, wikitext or raw text. This is important for avoiding and tracking JS injection issues.\n\nIf this was a standalone class, the appropriate message key could be injected into the constructor.",
+      "revId": "827e44abbd29b5bf58730bbf23e3b4597d7021ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
