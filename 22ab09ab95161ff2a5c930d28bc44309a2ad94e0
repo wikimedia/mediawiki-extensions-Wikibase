@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1mGMPIE",
+        "filename": "lib/includes/InMemoryDataTypeLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-26T10:41:26Z",
+      "side": 1,
+      "message": "not needed anymore",
+      "revId": "22ab09ab95161ff2a5c930d28bc44309a2ad94e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1oHoSBM",
+        "filename": "repo/includes/Validators/SnakValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-26T10:41:26Z",
+      "side": 1,
+      "message": "aren\u0027t we doing this now, so we could remove the todo?",
+      "revId": "22ab09ab95161ff2a5c930d28bc44309a2ad94e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1iHE9JI",
+        "filename": "repo/includes/Validators/SnakValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2013-06-26T10:41:26Z",
+      "side": 1,
+      "message": "don\u0027t forget to change the errror everywhere here if you change it in the BadValue class..",
+      "revId": "22ab09ab95161ff2a5c930d28bc44309a2ad94e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
