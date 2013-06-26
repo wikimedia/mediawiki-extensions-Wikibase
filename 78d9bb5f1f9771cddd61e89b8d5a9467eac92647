@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "D1mF7nLw",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-26T13:29:40Z",
+      "side": 1,
+      "message": "Slightly nicer \u0026 easier to understand: move this into the try block, below injectJob. Then it will only be executed if there is no exception (which is the point of exceptions). That way, you\u0027ll also not need a return statement in the catch block (which should generally be avoided) and get a single ewxit point for the method.",
+      "revId": "78d9bb5f1f9771cddd61e89b8d5a9467eac92647",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
