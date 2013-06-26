@@ -23,8 +23,10 @@
 	 * @extends jQuery.valueview.Expert
 	 *
 	 * @option domBuilder {Function} A callback function called whenever the DOM for displaying the
-	 *         current raw value is required. First parameter of the callback is the current raw
-	 *         value of the expert, second parameter is the expert's related ViewState object.
+	 *         current raw value is required. Parameters:
+	 *         (1) Expert's current raw value.
+	 *         (2) Expert's related ViewState object.
+	 *         (3) The message provider associated with this StaticDom instance.
 	 *
 	 * @option baseExpert {Function} Constructor of an expert whose "parser" and "rawValueCompare"
 	 *         functions will be borrowed. This is required because this expert doesn't need to
@@ -90,7 +92,11 @@
 		 */
 		draw: function() {
 			// Build DOM as specified by callback:
-			var $customDom = this._options.domBuilder( this.rawValue(), this._viewState );
+			var $customDom = this._options.domBuilder(
+				this.rawValue(),
+				this._viewState,
+				this._messageProvider
+			);
 			this.$viewPort.empty().append( $customDom );
 		}
 	} );

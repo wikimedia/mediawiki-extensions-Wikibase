@@ -63,7 +63,12 @@
 		 * @see jQuery.valueview.BifidExpert._staticExpertOptions
 		 */
 		_staticExpertOptions: {
-			domBuilder: function( currentRawValue, viewState ) {
+			/**
+			 * @param {time.Time|null} currentRawValue
+			 * @param {jQuery.valueview.ViewState} viewState
+			 * @param {jQuery.valueview.MessageProvider} messageProvider
+			 */
+			domBuilder: function( currentRawValue, viewState, messageProvider ) {
 				return $( '<a/>', {
 					text: currentRawValue,
 					href: commonsUrl( currentRawValue )

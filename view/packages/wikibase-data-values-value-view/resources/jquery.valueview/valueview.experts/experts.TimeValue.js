@@ -5,8 +5,7 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
-// TODO: Get rid of mw dependency
-( function( dv, vp, $, vv, mw ) {
+( function( dv, vp, $, vv ) {
 	'use strict';
 
 	var PARENT = vv.BifidExpert,
@@ -43,8 +42,9 @@
 			/**
 			 * @param {time.Time|null} currentRawValue
 			 * @param {jQuery.valueview.ViewState} viewState
+			 * @param {jQuery.valueview.MessageProvider} messageProvider
 			 */
-			domBuilder: function( currentRawValue, viewState ) {
+			domBuilder: function( currentRawValue, viewState, messageProvider ) {
 				var $node = $( '<span/>' );
 
 				if( !currentRawValue ) {
@@ -59,7 +59,11 @@
 				// multiple calendars have been in use or if the time value features a calendar that
 				// is uncommon for the specified time:
 				// TODO: This needs to be shaped more generic instead of focusing on Gregorian/Julian calendar.
-				var year = currentRawValue.year();
+				var year = currentRawValue.year(),
+					calendarKey = currentRawValue.calendar().toLowerCase(),
+					calendarText = messageProvider.getMessage(
+						'valueview-expert-timevalue-calendar-' + calendarKey
+					);
 
 				if(
 					currentRawValue.precision() > 10
@@ -68,15 +72,13 @@
 						|| year <= 1581 && currentRawValue.calendar() === 'Gregorian'
 						|| year >= 1930 && currentRawValue.calendar() === 'Julian'
 					)
+					&& calendarText
 				) {
-					var key = currentRawValue.calendar().toLowerCase(),
-						calendarText = mw.msg( 'valueview-expert-timevalue-calendar-' + key );
-
 					$node
-					.append( $( '<span/>' ).text( currentRawValue.text( { format: dateFormat }) ) )
+					.append( $( '<span/>' ).text( currentRawValue.text( { format: dateFormat } ) ) )
 					.append( $( '<sup/>' ).text( calendarText ) );
 				} else {
-					$node.text( currentRawValue.text( { format: dateFormat }) );
+					$node.text( currentRawValue.text( { format: dateFormat } ) );
 				}
 
 				return $node;

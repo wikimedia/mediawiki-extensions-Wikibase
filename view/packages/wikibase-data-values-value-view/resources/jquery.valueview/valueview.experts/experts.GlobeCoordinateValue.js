@@ -42,8 +42,9 @@
 			/**
 			 * @param {globeCoordinate.GlobeCoordinate|string|null} currentRawValue
 			 * @param {jQuery.valueview.ViewState} viewState
+			 * @param {jQuery.valueview.MessageProvider} messageProvider
 			 */
-			domBuilder: function( currentRawValue, viewState ) {
+			domBuilder: function( currentRawValue, viewState, messageProvider ) {
 				if( currentRawValue instanceof GlobeCoordinate ) {
 					currentRawValue = currentRawValue.degreeText();
 				}

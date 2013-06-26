@@ -6,8 +6,7 @@
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-// TODO: Remove mediaWiki dependency
-( function( dv, vp, $, vv, globeCoordinate, mw ) {
+( function( dv, vp, $, vv, globeCoordinate ) {
 	'use strict';
 
 	var GlobeCoordinate = globeCoordinate.GlobeCoordinate,
@@ -24,6 +23,17 @@
 	 * @extends jQuery.valueview.Expert
 	 */
 	vv.experts.GlobeCoordinateInput = vv.expert( 'globecoordinateinput', PARENT, {
+		/**
+		 * Options.
+		 * @type {Object}
+		 */
+		_options: {
+			messages: {
+				'valueview-expert-advancedadjustments': 'advanced adjustments',
+				'valueview-expert-globecoordinateinput-precision': 'Precision'
+			}
+		},
+
 		/**
 		 * The the input element's node.
 		 * @type {jQuery}
@@ -63,15 +73,14 @@
 		_init: function() {
 			var self = this,
 				notifier = this._viewNotifier,
+				precisionMsgKey = 'valueview-expert-globecoordinateinput-precision',
 				precisionValues = [],
 				listrotatorEvents = 'listrotatorauto listrotatorselected'
 					.replace( /(\w+)/g, '$1.' + this.uiBaseClass );
 
 			this.$precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
-			.append(
-				$( '<div/>' ).text( mw.msg( 'valueview-expert-globecoordinateinput-precision' ) )
-			);
+			.append( $( '<div/>' ).text( this._messageProvider.getMessage( precisionMsgKey ) ) );
 
 			$.each( globeCoordinateSettings.precisions, function( i, precisionDefinition ) {
 				var label = globeCoordinate.precisionText( precisionDefinition.level );
@@ -110,7 +119,7 @@
 
 			var $toggler = $( '<a/>' )
 			.addClass( this.uiBaseClass + '-advancedtoggler' )
-			.text( mw.msg( 'valueview-expert-advancedadjustments' ) );
+			.text( this._messageProvider.getMessage( 'valueview-expert-advancedadjustments' ) );
 
 			this.$input = $( '<input/>', {
 				type: 'text',
@@ -335,4 +344,4 @@
 		return precision;
 	}
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, globeCoordinate, mediaWiki ) );
+}( dataValues, valueParsers, jQuery, jQuery.valueview, globeCoordinate ) );
