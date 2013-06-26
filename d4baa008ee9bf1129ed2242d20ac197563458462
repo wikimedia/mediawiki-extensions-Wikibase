@@ -52,6 +52,24 @@
       "revId": "d4baa008ee9bf1129ed2242d20ac197563458462",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "D1obiHqI",
+        "filename": "Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-06-26T08:48:46Z",
+      "side": 1,
+      "message": "Hmpf, i guess you are right. \nYay for special case WMF hacks, then.",
+      "parentUuid": "D1RNxVN4",
+      "revId": "d4baa008ee9bf1129ed2242d20ac197563458462",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
