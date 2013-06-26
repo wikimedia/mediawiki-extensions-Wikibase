@@ -86,17 +86,41 @@ Parameters:
 	'valueview-expert-emptyvalue-empty' => 'Message expressing that there is currently no value set in a jQuery valueview.
 {{Identical|Empty}}',
 	'valueview-expert-globecoordinateinput-precision' => 'Label for the user interface element used to set a specific precision (e.g. 1, 0.1, 0.001) when entering a coordinate value.',
-	'valueview-expert-timevalue-calendar-gregorian' => 'Label of the GREGORIAN calendar. The label is used for selecting the GREGORIAN calendar model when entering a date and is displayed with dates that refer to that calendar model.',
-	'valueview-expert-timevalue-calendar-julian' => 'Label of the JULIAN calendar. The label is used for selecting the JULIAN calendar model when entering a date and is displayed with dates that refer to that calendar model.',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Label of the GREGORIAN calendar. The label is used for selecting the GREGORIAN calendar model when entering a date and is displayed with dates that refer to that calendar model.
+
+See also:
+* {{msg-mw|Valueview-expert-timeinput-calendarhint-gregorian}}
+* {{msg-mw|Valueview-expert-timeinput-calendarhint-switch-gregorian}}',
+	'valueview-expert-timevalue-calendar-julian' => 'Label of the JULIAN calendar. The label is used for selecting the JULIAN calendar model when entering a date and is displayed with dates that refer to that calendar model.
+
+See also:
+* {{msg-mw|Valueview-expert-timeinput-calendarhint-julian}}
+* {{msg-mw|Valueview-expert-timeinput-calendarhint-switch-julian}}',
 	'valueview-expert-timeinput-precision' => 'Label for the user interface element used to set a specific precision (e.g. hour, day, month, year) when entering a time value.',
 	'valueview-expert-timeinput-calendar' => 'Label for the user interface element used to select a specific calendar (e.g. Gregorian, Julian) entering a time value.
 
 The calendar is not localized at this time.
 {{Identical|Calendar}}',
-	'valueview-expert-timeinput-calendarhint-gregorian' => 'Message informing that the GREGORIAN calendar has been detected automatically while specifying a date. The message is shown only when the specified date lies within a time frame when multiple calendars had been in use.',
-	'valueview-expert-timeinput-calendarhint-julian' => 'Message informing that the JULIAN calendar has been detected automatically while specifying a date. The message is shown only when the specified date lies within a time frame when multiple calendars had been in use.',
-	'valueview-expert-timeinput-calendarhint-switch-gregorian' => 'Label of the link manually switching to the GREGORIAN calendar. The link is located directly at the preview (in combination with the calendar hint message).',
-	'valueview-expert-timeinput-calendarhint-switch-julian' => 'Label of the link manually switching to the JULIAN calendar. The link is located directly at the preview (in combination with the calendar hint message).',
+	'valueview-expert-timeinput-calendarhint-gregorian' => 'Message informing that the GREGORIAN calendar has been detected automatically while specifying a date. The message is shown only when the specified date lies within a time frame when multiple calendars had been in use.
+
+See also:
+* {{msg-mw|Valueview-expert-timevalue-calendar-gregorian}}
+* {{msg-mw|Valueview-expert-timeinput-calendarhint-switch-gregorian}}',
+	'valueview-expert-timeinput-calendarhint-julian' => 'Message informing that the JULIAN calendar has been detected automatically while specifying a date. The message is shown only when the specified date lies within a time frame when multiple calendars had been in use.
+
+See also:
+* {{msg-mw|Valueview-expert-timevalue-calendar-julian}}
+* {{msg-mw|Valueview-expert-timeinput-calendarhint-switch-julian}}',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => 'Label of the link manually switching to the GREGORIAN calendar. The link is located directly at the preview (in combination with the calendar hint message).
+
+See also:
+* {{msg-mw|Valueview-expert-timevalue-calendar-gregorian}}
+* {{msg-mw|Valueview-expert-timeinput-calendarhint-gregorian}}',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => 'Label of the link manually switching to the JULIAN calendar. The link is located directly at the preview (in combination with the calendar hint message).
+
+See also:
+* {{msg-mw|Valueview-expert-timevalue-calendar-julian}}
+* {{msg-mw|Valueview-expert-timeinput-calendarhint-julian}}',
 	'valueview-preview-label' => "Label displayed above the preview of a value that is being entered by the user. The preview is the system's interpretation of the specified value and - since there is no strict definition for a user how to specify values - visualizes how the value will be displayed later on after the value has been saved.",
 	'valueview-preview-novalue' => "Message displayed instead of an input value's preview when no value is specified yet or when the specified value could not be interpreted by the system.",
 	'valueview-listrotator-auto' => 'Label of the link to have the system automatically select the most appropriate value from a "listrotator" widget. The "listrotator" basically is a façade for a drop-down select box allowing to pick a value from a list of values. In addition to the defined values, an "automatic" option may be selected that makes the system pick the most appropriate value according to an associated input element.
@@ -258,10 +282,14 @@ $messages['fr'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestion des valeurs pour le type de données « $1 » n’est pas encore pris en charge.',
 	'valueview-expert-emptyvalue-empty' => 'vide',
 	'valueview-expert-globecoordinateinput-precision' => 'Précision :',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Grégorien',
+	'valueview-expert-timevalue-calendar-julian' => 'Julien',
 	'valueview-expert-timeinput-precision' => 'Précision :',
 	'valueview-expert-timeinput-calendar' => 'Calendrier :',
-	'valueview-expert-timeinput-calendarhint' => '(calendrier $1)',
-	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; changer à $1',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Calendrier grégorien)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Calendrier julien)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; passer en Grégorien',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; passer en Julien',
 	'valueview-preview-label' => 'affiché comme :',
 	'valueview-preview-novalue' => 'aucune valeur valide reconnu',
 	'valueview-listrotator-auto' => 'auto',
@@ -277,10 +305,14 @@ $messages['gl'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'A manipulación de valores para o tipo de datos "$1" aínda non está soportada.',
 	'valueview-expert-emptyvalue-empty' => 'baleiro',
 	'valueview-expert-globecoordinateinput-precision' => 'Precisión:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Gregoriano',
+	'valueview-expert-timevalue-calendar-julian' => 'Xuliano',
 	'valueview-expert-timeinput-precision' => 'Precisión:',
 	'valueview-expert-timeinput-calendar' => 'Calendario:',
-	'valueview-expert-timeinput-calendarhint' => '(calendario $1)',
-	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; cambiar ao $1',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Calendario gregoriano)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Calendario xuliano)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; cambiar a gregoriano',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; cambiar a xuliano',
 	'valueview-preview-label' => 'vaise mostrar así:',
 	'valueview-preview-novalue' => 'non se recoñeceu ningún valor válido',
 	'valueview-listrotator-auto' => 'automático',
@@ -359,10 +391,14 @@ $messages['it'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'La gestione dei valori per il tipo di dati "$1" non è ancora supportata.',
 	'valueview-expert-emptyvalue-empty' => 'vuoto',
 	'valueview-expert-globecoordinateinput-precision' => 'Precisione:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Gregoriano',
+	'valueview-expert-timevalue-calendar-julian' => 'Giuliano',
 	'valueview-expert-timeinput-precision' => 'Precisione:',
 	'valueview-expert-timeinput-calendar' => 'Calendario:',
-	'valueview-expert-timeinput-calendarhint' => '(calendario $1)',
-	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; modifica in $1',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(calendario gregoriano)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(calendario giuliano)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; modifica in gregoriano',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; modifica in giuliano',
 	'valueview-preview-label' => 'verrà visualizzato come:',
 	'valueview-preview-novalue' => 'nessun valore valido riconosciuto',
 	'valueview-listrotator-auto' => 'automatico',
@@ -379,10 +415,14 @@ $messages['ja'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'データ型「$1」の値の処理にはまだ対応していません。',
 	'valueview-expert-emptyvalue-empty' => '空',
 	'valueview-expert-globecoordinateinput-precision' => '精度:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'グレゴリオ暦',
+	'valueview-expert-timevalue-calendar-julian' => 'ユリウス暦',
 	'valueview-expert-timeinput-precision' => '精度:',
 	'valueview-expert-timeinput-calendar' => '暦:',
-	'valueview-expert-timeinput-calendarhint' => '($1 暦)',
-	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; $1 に変更',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(グレゴリオ暦)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(ユリウス暦)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; グレゴリオ暦に変更',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; ユリウス暦に変更',
 	'valueview-preview-label' => 'プレビュー:',
 	'valueview-preview-novalue' => '有効な値を認識できませんでした',
 	'valueview-listrotator-auto' => '自動',
@@ -413,10 +453,13 @@ $messages['ko'] = array(
  */
 $messages['lb'] = array(
 	'valueview-expert-emptyvalue-empty' => 'eidel',
+	'valueview-expert-globecoordinateinput-precision' => 'Präzisioun:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Gregorianesch',
+	'valueview-expert-timevalue-calendar-julian' => 'Julianesch',
 	'valueview-expert-timeinput-precision' => 'Präzisioun:',
 	'valueview-expert-timeinput-calendar' => 'Kalenner:',
-	'valueview-expert-timeinput-calendarhint' => '($1 Kalenner)',
-	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; änneren op $1',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Gregorianesche Kalenner)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Julianesche Kalenner)',
 	'valueview-preview-label' => 'gëtt gewisen als:',
 	'valueview-preview-novalue' => 'kee valabele Wäert erkannt',
 	'valueview-listrotator-auto' => 'auto',
@@ -432,10 +475,14 @@ $messages['mk'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Работата со вредности за податочниот тип „$1“ сè уште не е поддржана.',
 	'valueview-expert-emptyvalue-empty' => 'празно',
 	'valueview-expert-globecoordinateinput-precision' => 'Уточнетост:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'грегоријански',
+	'valueview-expert-timevalue-calendar-julian' => 'јулијански',
 	'valueview-expert-timeinput-precision' => 'Уточнетост:',
 	'valueview-expert-timeinput-calendar' => 'Календар:',
-	'valueview-expert-timeinput-calendarhint' => '(календар: $1)',
-	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; смени на $1',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(грегоријански календар)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(јулијански календар)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; смени во грегоријански',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; смени во јулијански',
 	'valueview-preview-label' => 'ќе се прикажува како:',
 	'valueview-preview-novalue' => 'не препознав важечка вредност',
 	'valueview-listrotator-auto' => 'автоматски',
