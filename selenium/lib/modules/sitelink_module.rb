@@ -75,6 +75,7 @@ module SitelinkPage
     sitelinks.each do |sitelink|
       addSitelinkLink
       self.siteIdInputField= sitelink[0]
+      self.siteIdInputField_element.send_keys :arrow_right
       wait_until do
         self.pageInputField_element.enabled?
       end
