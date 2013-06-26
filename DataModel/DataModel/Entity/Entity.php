@@ -165,7 +165,13 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 	public function getId() {
 		if ( $this->id === false ) {
 			if ( array_key_exists( 'entity', $this->data ) ) {
-				$this->id = EntityId::newFromPrefixedId( $this->data['entity'] );
+				$id = $this->data['entity'];
+
+				if ( is_array( $id ) ) {
+					$this->id = new EntityId( $id[0], $id[1] );
+				} else {
+					$this->id = EntityId::newFromPrefixedId( $id );
+				}
 			}
 			else {
 				$this->id = null;
