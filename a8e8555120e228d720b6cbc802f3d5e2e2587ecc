@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "D1nNUDyA",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-06-26T20:49:51Z",
+      "side": 1,
+      "message": "\u003e Yes, we should support a wiki being a client to multiple repos (one of which may be the wiki itself). But we currently don\u0027t. \n\nI did not say anything about linking a client to multiple repos.\n\n\u003e So, can you give me a better solution?\n\nYou introduce a new bad assumption. Don\u0027t introduce it.",
+      "parentUuid": "D1qx5A-w",
+      "revId": "a8e8555120e228d720b6cbc802f3d5e2e2587ecc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "D1ZNkJCU",
         "filename": "lib/includes/Settings.php",
         "patchSetId": 2
