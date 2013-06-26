@@ -127,7 +127,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 			$cache = wfGetCache( $this->cacheType );
 			$cached = $cache->get( $cacheKey );
 
-			if ( $cached ) {
+			if ( $cached && is_array( $cached ) ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Found entity in cache (key $cacheKey)" );
 				list( $cachedRev, $cachedEntity ) = $cached;
 
@@ -304,8 +304,12 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup {
 		$format = $row->rev_content_format;
 		$entity = EntityFactory::singleton()->newFromBlob( $entityType, $blob, $format );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
-			. $entity->getId()->getPrefixedId() );
+		if ( $entity->getId() ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
+				. $entity->getId()->getPrefixedId() );
+		} else {
+			wfLogWarning( __METHOD__ . ": Entity object from revision blob does not contain an ID!" );
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $entity;
