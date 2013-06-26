@@ -85,4 +85,4 @@
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview ) );
+}( dataValues, valueParsers, jQuery, jQuery.valueview, mediaWiki ) );
