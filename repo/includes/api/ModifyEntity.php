@@ -191,6 +191,8 @@ abstract class ModifyEntity extends ApiWikibase {
 		$summary = $this->modifyEntity( $entityContent, $params );
 
 		if ( !$summary ) {
+			//XXX: This could rather be used for "silent" failure, i.e. in cases where
+			//     there was simply nothing to do.
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-modify-failed' )->text(), 'modify-failed' );
 		}

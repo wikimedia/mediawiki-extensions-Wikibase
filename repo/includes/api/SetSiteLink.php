@@ -75,22 +75,29 @@ class SetSiteLink extends ModifyEntity {
 		$summary = $this->createSummary( $params );
 		$summary->setLanguage( $params['linksite'] ); //XXX: not really a language!
 
+		if ( !( $entityContent instanceof ItemContent ) ) {
+			wfProfileOut( __METHOD__ );
+			$this->dieUsage( "The given entity is not an item", "not-and-item" );
+		}
+
+		/* @var Item $item */
+		$item = $entityContent->getItem();
+
 		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
+			$linksite = Utils::trimToNFC( $params['linksite'] );
+
 			try {
-				$link = $entityContent->getItem()->getSimpleSiteLink( Utils::trimToNFC( $params['linksite'] ) );
-			}
-			catch ( \OutOfBoundsException $exception ) {
-				wfProfileOut( __METHOD__ );
-				$this->dieUsage( $this->msg( 'wikibase-api-remove-sitelink-failed' )->text(), 'remove-sitelink-failed' );
-			}
+				$link = $item->getSimpleSiteLink( $linksite );
+				$item->removeSiteLink( $params['linksite'] );
+				$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
 
-			$entityContent->getItem()->removeSiteLink( $params['linksite'] );
-			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
-
-			$summary->setAction( 'remove' );
+				$summary->setAction( 'remove' );
+			} catch ( \OutOfBoundsException $exception ) {
+				// never mind then
+			}
 
 			wfProfileOut( __METHOD__ );
-			return $summary;
+			return $summary; // would be nice to signal "nothing to do" somehow
 		}
 		else {
 			$sites = $this->getSiteLinkTargetSites();
@@ -110,7 +117,7 @@ class SetSiteLink extends ModifyEntity {
 
 			$link = new SimpleSiteLink( $site->getGlobalId(), $page );
 
-			$entityContent->getEntity()->addSimpleSiteLink( $link );
+			$item->addSimpleSiteLink( $link );
 
 			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
 
