@@ -47,11 +47,6 @@ use Wikibase\validators\SnakValidator;
  */
 class SetClaimValue extends ApiWikibase implements IAutocomment{
 
-	// TODO: example
-	// TODO: rights
-	// TODO: conflict detection
-	// TODO: claim uniqueness
-
 	/**
 	 * @var SnakValidationHelper
 	 */
@@ -73,6 +68,14 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
 			new ValidatorErrorLocalizer()
 		);
+	}
+
+	/**
+	 * @see ApiBase::isWriteMode
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
 	}
 
 	/**

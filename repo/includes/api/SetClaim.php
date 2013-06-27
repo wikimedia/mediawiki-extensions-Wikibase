@@ -48,8 +48,6 @@ use Wikibase\validators\SnakValidator;
  */
 class SetClaim extends ApiWikibase {
 
-	// TODO: rights
-
 	/**
 	 * @var SnakValidationHelper
 	 */
@@ -71,6 +69,14 @@ class SetClaim extends ApiWikibase {
 			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
 			new ValidatorErrorLocalizer()
 		);
+	}
+
+	/**
+	 * @see ApiBase::isWriteMode
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
 	}
 
 	/**
