@@ -512,9 +512,11 @@ Parameters:
 	'wikibase-empty-undo' => 'Message shown in case the edit can not be undone.',
 	'wikibase-undo-revision-error' => 'Title shown when undo or restore failed',
 	'wikibase-undo-samerev' => 'Message shown when the user attempts to undo the difference between two revisions which are both the same.',
-	'wikibase-undo-badpage' => 'Message shown when the user attempts to undo the difference between two revisions belonging to different pages. The first argument is the name of the page, the second is the revision id.  Parameters:
-* $1 is the title of the page;
-* $2 is the revision id number.',
+	'wikibase-undo-badpage' => 'Message shown when the user attempts to undo the difference between two revisions belonging to different pages. The first argument is the name of the page, the second is the revision id.
+
+Parameters:
+* $1 - the title of the page
+* $2 - the revision id number',
 	'wikibase-undo-firstrev' => "Message shown when the user attempts to undo the very first revision of a page, that is, the page's creation.",
 	'wikibase-undo-nocontent' => 'Message shown when the content of one of the revisions needed for undo could not be loaded.
 This may happen if there is an error in the storage backend, or if the respective revision has been hidden (oversighted) or deleted.
@@ -590,11 +592,12 @@ Parameters:
 	'wikibase-shortcopyrightwarning' => 'A short copyright warning displayed during editing in the JavaScript UI. The copyright warning is displayed within a tooltip next to the save button.
 
 Parameters:
-* $1 - the name of the button the message is referring to, set in the {{msg-mw|wikibase-save}} message
+* $1 - the name of the button the message is referring to, set in the {{msg-mw|Wikibase-save}} message
 * $2 - the name of the wiki\'s page describing the terms of use
 * $3 - an external link to the license with the license\'s name as link text (set in [[mw:Manual:$wgRightsText|$wgRightsText]])
 
-See also {{msg-mw|wikidata-shortcopyrightwarning}}',
+See also:
+* {{msg-mw|Wikidata-shortcopyrightwarning}}',
 	'wikibase-copyrighttooltip-acknowledge' => 'Label of the link to not show the copyright warning again. A copyright warning is presented to the user whenever the user is about to alter any data unless the warning is not suppressed permanently by clicking this link.',
 	'wikibase-entityselector-more' => 'The entity selector is a user interface widget that allows selecting an entity (see [[d:Wikidata:Glossary]]). It consists out of an input field and a list of suggestions that is filled according to the text typed into the input field. Initially, the list of suggestions is filled with a certain number of suggestions. Clicking the link labeled with this message will fill the list of suggestions with additional suggestions. If there are no additional suggestions or no suggestions at all, the link does not show up.
 {{Identical|More}}',
@@ -963,10 +966,10 @@ Parameters:
 
 This module generates a slightly different summary (autocomment) than the other ones.
 
-;Parameters:
-* $1 is the number of pages that were connected;
-* $2 is the site code for the from-page;
-* $3 is the site code for the to-page.',
+Parameters:
+* $1 - the number of pages that were connected
+* $2 - the site code for the from-page
+* $3 - the site code for the to-page',
 	'wikibase-item-summary-wblinktitles-connect' => '{{wikibase summary messages|item|Automatic edit summary when connecting page(s).}}
 
 This module generates a slightly different summary (autocomment) than the other ones.
@@ -996,10 +999,10 @@ Parameters:
 * $4 - number of references changed',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Automatic edit summary generated when modifying the rank of a claim using setclaim. Parameters:
 * $3 - number of claims changed',
-	'wikibase-item-summary-clientsitelink-update' => '{{wikibase summary messages|sitelinks|Automatic edit summary (autocomment) when a language link has been automatically updated after a page move. Parameters:
+	'wikibase-item-summary-clientsitelink-update' => 'Automatic edit summary (autocomment) when a language link has been automatically updated after a page move. Parameters:
 * $3 - siteid and name of the old page name (like enwiki:Foo)
 * $4 - siteid and name of the new page name (like enwiki:Bar)
-	}}',
+{{wikibase summary messages|sitelinks}}',
 	'wikibase-property-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-property-summary-wbeditentity-create' => 'Automatic edit summary generated when creating a new property.',
 	'wikibase-property-summary-wbeditentity-update' => 'Automatic edit summary generated when updating an existing property.',
@@ -3314,7 +3317,6 @@ $messages['de'] = array(
 	'wikibase-label-empty' => 'Bislang wurde noch keine Bezeichnung angegeben.',
 	'wikibase-label-edit-placeholder' => 'Bezeichnung eingeben',
 	'wikibase-description-empty' => 'Bislang wurde noch keine Beschreibung angegeben.',
-	'wikibase-deletedentity' => 'Gelöschte(s) $1',
 	'wikibase-description-edit-placeholder' => 'Beschreibung eingeben',
 	'wikibase-sitelink-site-edit-placeholder' => 'Website',
 	'wikibase-sitelink-page-edit-placeholder' => 'Artikel',
@@ -3526,6 +3528,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespei
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Änderte {{PLURAL:$4|eine Bedingung|$4 Bedingungen}} {{PLURAL:$3|einer Aussage|von Aussagen}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Änderte {{PLURAL:$4|eine Referenz|$4 Referenzen}} {{PLURAL:$3|einer Aussage|von Aussagen}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Änderte den Rang der {{PLURAL:$3|Aussage|Aussagen}}',
+	'wikibase-item-summary-clientsitelink-update' => 'Seite verschoben von [$3] nach [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Erstellte eine neue Eigenschaft',
 	'wikibase-property-summary-wbeditentity-create' => 'Erstellte eine neue Eigenschaft',
 	'wikibase-property-summary-wbeditentity-update' => 'Aktualisierte eine Eigenschaft',
@@ -3936,22 +3939,29 @@ $messages['el'] = array(
 	'wikibase-label-empty' => 'Δεν έχει ορισθεί ακόμη ετικέτα',
 	'wikibase-label-edit-placeholder' => 'προσθέστε ετικέτα',
 	'wikibase-description-empty' => 'Δεν ορίστηκε ακόμα περιγραφή',
-	'wikibase-deletedentity' => 'Διαγράφηκε το $1',
 	'wikibase-description-edit-placeholder' => 'προσθέστε περιγραφή',
+	'wikibase-label-input-help-message' => 'Πληκτρολογήστε τον τίτλο γι αυτό το σύνολο δεδομένων στα  $1.',
 	'wikibase-description-input-help-message' => 'Πληκτρολογήστε μια σύντομη περιγραφή στα $1 .',
 	'wikibase-statements' => 'Δηλώσεις',
 	'wikibase-terms' => 'Σε άλλες γλώσσες',
+	'wikibase-sitelinks-input-help-message' => 'Ορίστε μια σύνδεση σε μια σελίδα που σχετίζεται με αυτό το αντικείμενο.',
 	'wikibase-remove' => 'αφαίρεση',
+	'wikibase-restore-title' => 'Επαναφορά παλαιότερης αναθεώρησης του "$1"',
+	'wikibase-partial-undo' => 'Η επεξεργασία εν μέρει μπορεί να αναιρεθεί.',
 	'wikibase-empty-undo' => 'Δεν υπάρχει τίποτα που μπορεί να αναιρεθεί εδώ.',
 	'wikibase-undo-revision-error' => 'Η αναίρεση απέτυχε',
 	'wikibase-undo-firstrev' => 'Δεν μπορεί να αναιρεθεί η δημιουργία σελίδας',
 	'wikibase-propertyedittool-full' => 'Ο κατάλογος με τις τιμές είναι πλήρης.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|μια τιμή δεν έχει|$1 τιμές δεν έχουν}} αποθηκευτεί ακόμα',
+	'wikibase-sitelinksedittool-full' => 'Οι συνδέσμοι σε σελίδες έχουν ήδη οριστεί για όλες τις γνωστές τοποθεσίες.',
 	'wikibase-disambiguation-title' => 'Αποσαφήνιση για "$1"',
 	'wikibase-aliases-label' => 'Γνωστό επίσης ως:',
+	'wikibase-aliases-input-help-message' => 'Μπορείτε να εισαγάγετε ψευδώνυμα και συνώνυμα με τα οποία είναι γνωστό αυτό το σύνολο δεδομένων,έτσι ώστε να είναι δυνατόν να εντοπιστεί από τα πιθανές εναλλακτικές ονομασίες.',
 	'wikibase-datatype-label' => 'Τύπος δεδομένων:',
-	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|Πηγή|πηγές}}',
-	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Η πηγή|$1 Οι πηγές}} δεν έχουν ακόμη αποθηκευτεί',
+	'wikibase-claimview-snak-tooltip' => 'Εισαγάγετε μια τιμή που αντιστοιχεί στην ιδιότητα που ονομάζεται "$1". Εάν η ιδιότητα δεν έχει καθορισμένη τιμή ή η πραγματική τιμή δεν είναι γνωστή, μπορείτε να επιλέξετε μια εναλλακτική λύση για να καθορίσετε μια προσαρμοσμένη τιμή κάνοντας κλικ στο εικονίδιο δίπλα στο πλαίσιο τιμή εισόδου.',
+	'wikibase-claimview-snak-new-tooltip' => 'Αφού καθορίσετε μια ιδιότητα, μπορείτε να εισαγάγετε μια αντίστοιχη τιμή. Εάν η ιδιότητα δεν έχει καθορισμένη τιμή ή η πραγματική τιμή δεν είναι γνωστή, μπορείτε να επιλέξετε μια εναλλακτική λύση για να καθορίσετε μια προσαρμοσμένη τιμή κάνοντας κλικ στο εικονίδιο δίπλα στο πλαίσιο τιμή εισόδου.',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|πηγή|πηγές}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|μία πηγή|$1 πηγές}} δεν έχουν ακόμη αποθηκευτεί',
 	'wikibase-snakview-property-input-placeholder' => 'ιδιότητα',
 	'wikibase-snakview-choosesnaktype' => 'Επιλέξτε έναν τύπο τιμών.',
 	'wikibase-snakview-variation-datavaluetypemismatch' => 'Η τιμή δεν συμμορφώνεται με τον ορισμό της ιδιότητας.',
@@ -3961,7 +3971,7 @@ $messages['el'] = array(
 	'wikibase-snakview-snaktypeselector-value' => 'προσαρμοσμένη τιμή',
 	'wikibase-snakview-snaktypeselector-somevalue' => 'άγνωστη τιμή',
 	'wikibase-snakview-snaktypeselector-novalue' => 'καμία τιμή',
-	'wikibase-shortcopyrightwarning' => 'Κάνοντας κλικ στο "$1", συμφωνείτε με τους [[$2|όρους χρήσης]], και συμφωνείτε αμετάκλητα να θέσετε την συνεισφορά σας κάτω υπό το $3 .',
+	'wikibase-shortcopyrightwarning' => 'Κάνοντας κλικ στο "$1", συμφωνείτε με τους [[$2|όρους χρήσης]], και συμφωνείτε αμετάκλητα να θέσετε την συνεισφορά σας υπό το $3 .',
 	'wikibase-copyrighttooltip-acknowledge' => 'Αποδέχομαι τους όρους αυτούς και για τις επεξεργασίες που θα κάνω στο μέλλον. Να μην εμφανιστεί ξανά αυτό το μήνυμα.',
 	'wikibase-entityselector-more' => 'περισσότερα',
 	'wikibase-anonymouseditwarning' => 'Προειδοποίηση: Δεν έχετε συνδεθεί. Η διεύθυνση IP σας θα καταγραφεί στο ιστορικό επεξεργασίας της σελίδας $1.',
@@ -3977,7 +3987,8 @@ $messages['el'] = array(
 	'wikibase-itembytitle-lookup-page' => 'Σελίδα:',
 	'wikibase-itembytitle-submit' => 'Αναζήτηση',
 	'wikibase-itembytitle-create' => 'Μπορείτε επίσης να [{{fullurl:Special:NewItem|site=$1&page=$2}}να δημιουργήσετε ένα αντικείμενο].',
-	'wikibase-itemdisambiguation-lookup-fieldset' => 'Αναζήτηση αντικειμένων ανά γλώσσα και την ετικέτα',
+	'special-itemdisambiguation' => 'Αποσαφήνιση αντικειμένου',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Αναζήτηση αντικειμένων ανά γλώσσα και ετικέτα',
 	'wikibase-itemdisambiguation-lookup-language' => 'Γλώσσα:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Ετικέτα:',
 	'wikibase-itemdisambiguation-submit' => 'Αναζήτηση',
@@ -3989,6 +4000,7 @@ $messages['el'] = array(
 	'wikibase-newproperty-datatype' => 'Τύπος δεδομένων:',
 	'wikibase-newproperty-invalid-datatype' => 'Ορίσθηκε άκυρος τύπος δεδομένων',
 	'special-newitem' => 'Δημιουργία νέου αντικείμενου',
+	'wikibase-newitem-summary' => 'Βεβαιωθείτε πως [[Special:ItemByTitle|ελέγξατε ότι το αντικείμενο δεν υπάρχει ήδη]]!<br /> Θα πρέπει να προσθέσετε [[Help:Label|ετικέτα]] και [[Help:Description|περιγραφή]] για κάθε νέο αντικείμενο που δημιουργείτε.',
 	'wikibase-newitem-fieldset' => 'Δημιουργήστε ένα νέο αντικείμενο.',
 	'wikibase-newitem-page' => 'Όνομα της πρώτης σελίδας που συνδέεται',
 	'wikibase-newitem-no-external-page' => 'Η συγκεκριμένη σελίδα δεν βρέθηκε στον αντίστοιχο ιστότοπο.',
@@ -4012,6 +4024,7 @@ $messages['el'] = array(
 	'wikibase-restoreold' => 'επαναφορά',
 	'wikibase-item-summary-wbsetitem' => 'Δημιουργήστε ένα νέο αντικείμενο.',
 	'wikibase-item-summary-wbeditentity' => 'Δημιουργήθηκε ένα νέο αντικείμενο',
+	'wikibase-item-summary-clientsitelink-update' => 'Η σελίδα μετακινήθηκε από [$3] σε [$4]',
 	'wikibase-property-summary-wbeditentity-update' => 'Η ιδιότητα ενημερώθηκε',
 	'wikibase-listdatatypes-wikibase-item-head' => 'αντικείμενο',
 	'right-label-remove' => 'Αφαιρέσετε ετικέτες',
@@ -5431,7 +5444,6 @@ $messages['fr'] = array(
 	'wikibase-label-empty' => 'Pas de libellé défini',
 	'wikibase-label-edit-placeholder' => 'saisir un libellé',
 	'wikibase-description-empty' => 'Aucune description pour le moment',
-	'wikibase-deletedentity' => '$1 supprimé(e)',
 	'wikibase-description-edit-placeholder' => 'saisir une description',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'article',
@@ -5646,6 +5658,7 @@ ffirmation ajoutée}}',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Un qualifieur|$4 qualifieurs}} d’{{PLURAL:$3|affirmation|affirmations}} {{PLURAL:$4|modifié|modifiés}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Une référence|$4 références}} d’{{PLURAL:$3|affirmation|affirmations}} {{PLURAL:$4|modifiée|modifiées}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Rang {{PLURAL:$3|de l’affirmation|des affirmations}} modifié',
+	'wikibase-item-summary-clientsitelink-update' => 'Page déplacée de [$3] à [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Création d’une nouvelle propriété',
 	'wikibase-property-summary-wbeditentity-create' => 'Création d’une nouvelle propriété',
 	'wikibase-property-summary-wbeditentity-update' => 'Mise à jour d’une propriété',
@@ -5925,7 +5938,6 @@ $messages['gl'] = array(
 	'wikibase-label-empty' => 'Aínda non hai ningunha etiqueta definida.',
 	'wikibase-label-edit-placeholder' => 'escriba unha etiqueta',
 	'wikibase-description-empty' => 'Aínda non hai ningunha descrición definida.',
-	'wikibase-deletedentity' => 'Borrouse a entidade "$1"',
 	'wikibase-description-edit-placeholder' => 'escriba unha descrición',
 	'wikibase-sitelink-site-edit-placeholder' => 'sitio',
 	'wikibase-sitelink-page-edit-placeholder' => 'artigo',
@@ -6137,6 +6149,7 @@ O seu enderezo IP quedará rexistrado no historial de revisións da entidade "$1
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Modifico {{PLURAL:$4|un cualificativo|$4 cualificativos}} {{PLURAL:$3|dunha afirmación|de varias afirmacións}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Modifico {{PLURAL:$4|unha referencia|$4 referencias}} {{PLURAL:$3|dunha afirmación|de varias afirmacións}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Modifico o rango {{PLURAL:$3|dunha afirmación|de varias afirmacións}}',
+	'wikibase-item-summary-clientsitelink-update' => 'Traslado a páxina "[$3]" a "[$4]"',
 	'wikibase-property-summary-wbcreate-new' => 'Creo unha nova propiedade',
 	'wikibase-property-summary-wbeditentity-create' => 'Creo unha nova propiedade',
 	'wikibase-property-summary-wbeditentity-update' => 'Actualizo unha propiedade',
@@ -8007,7 +8020,6 @@ $messages['it'] = array(
 	'wikibase-label-empty' => 'Nessuna etichetta ancora definita.',
 	'wikibase-label-edit-placeholder' => 'inserisci etichetta',
 	'wikibase-description-empty' => 'Nessuna descrizione ancora definita.',
-	'wikibase-deletedentity' => '$1 cancellato/a',
 	'wikibase-description-edit-placeholder' => 'inserisci descrizione',
 	'wikibase-sitelink-site-edit-placeholder' => 'sito',
 	'wikibase-sitelink-page-edit-placeholder' => 'voce',
@@ -8219,6 +8231,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => "{{PLURAL:$4|Modificato un qualificatore|Modificati $4 qualificatori}} di {{PLURAL:$3|un'asserzione|asserzioni}}",
 	'wikibase-item-summary-wbsetclaim-update-references' => "{{PLURAL:$4|Modificato un riferimento|Modificati $4 riferimenti}} di {{PLURAL:$3|un'asserzione|asserzioni}}",
 	'wikibase-item-summary-wbsetclaim-update-rank' => "Modificata classificazione di {{PLURAL:$3|un'asserzione|asserzioni}}",
+	'wikibase-item-summary-clientsitelink-update' => 'Pagina spostata da [$3] a [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Creata una nuova proprietà',
 	'wikibase-property-summary-wbeditentity-create' => 'Creata una nuova proprietà',
 	'wikibase-property-summary-wbeditentity-update' => 'Aggiornata una proprietà',
@@ -8320,7 +8333,6 @@ $messages['ja'] = array(
 	'wikibase-label-empty' => 'ラベルはまだ設定されていません',
 	'wikibase-label-edit-placeholder' => 'ラベルを入力',
 	'wikibase-description-empty' => '説明はまだ設定されていません',
-	'wikibase-deletedentity' => '削除済みの$1',
 	'wikibase-description-edit-placeholder' => '説明を入力',
 	'wikibase-sitelink-site-edit-placeholder' => 'サイト',
 	'wikibase-sitelink-page-edit-placeholder' => 'ページ',
@@ -8530,6 +8542,7 @@ $messages['ja'] = array(
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$3|主張}}に関する{{PLURAL:$4|$4個の修飾子}}を変更',
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$3|主張}}に関する{{PLURAL:$4|$4個の情報源}}を変更',
 	'wikibase-item-summary-wbsetclaim-update-rank' => '{{PLURAL:$3|主張}}の等級を変更',
+	'wikibase-item-summary-clientsitelink-update' => 'ページ [$3] を [$4] に移動',
 	'wikibase-property-summary-wbcreate-new' => 'プロパティを新規作成',
 	'wikibase-property-summary-wbeditentity-create' => 'プロパティを新規作成',
 	'wikibase-property-summary-wbeditentity-update' => 'プロパティを更新',
@@ -8562,12 +8575,12 @@ $messages['ja'] = array(
 * altitude (省略可) – ある参考面からの高さを表した明示 (?) の値。地球については「WGS84」準拠楕円体が使われる
 * globe (省略可) – 星を表す明示 (?) のデータ値。既定は「地球」それから「WGS84」',
 	'wikibase-listdatatypes-quantity-head' => '数量',
-	'wikibase-listdatatypes-quantity-body' => 'なんらかの明確に定義された単位に結びついた量を表すリテラルデータ。実際の単位は入力されたデータ値に含まれています。
+	'wikibase-listdatatypes-quantity-body' => '何らかの明確に定義された単位に結びついた量を表すリテラルデータ。実際の単位は入力されたデータ値に含まれています。
 * value – 文字列の非明示部分（単位接頭辞の対応付けは不明瞭です）
 * unit – 文字列の非明示部分（標準化団体への対応付けは不明瞭です）
 * accuracy (省略可能) – value と同じ単位を持つ、明示のデータ値',
 	'wikibase-listdatatypes-monolingual-text-head' => '単一言語のテキスト',
-	'wikibase-listdatatypes-monolingual-text-body' => '他の言語に翻訳されない文字列のリテラルデータ。この種の文字列は一度定義されると、すべての言語にわたって再利用されます。典型的な用途としては、地元の言語で表記した地名、なんらかの識別子、化学式、ラテン語の学名などがあります。
+	'wikibase-listdatatypes-monolingual-text-body' => '他の言語に翻訳されない文字列のリテラルデータ。この種の文字列は一度定義されると、すべての言語にわたって再利用されます。典型的な用途としては、地元の言語で表記した地名、何らかの識別子、化学式、ラテン語の学名などがあります。
 * language - テキスト (text) 部分の言語を識別するための明示の値
 * value - 言語を特定した文字列、明示の値',
 	'wikibase-listdatatypes-multilingual-text-head' => '多言語のテキスト',
@@ -9765,7 +9778,6 @@ $messages['mk'] = array(
 	'wikibase-label-empty' => 'Сè уште нема зададено етикета.',
 	'wikibase-label-edit-placeholder' => 'внесете натпис',
 	'wikibase-description-empty' => 'Сè уште нема зададено опис.',
-	'wikibase-deletedentity' => 'Избришано $1',
 	'wikibase-description-edit-placeholder' => 'внесете опис',
 	'wikibase-sitelink-site-edit-placeholder' => 'вики',
 	'wikibase-sitelink-page-edit-placeholder' => 'статија',
@@ -9979,6 +9991,7 @@ $messages['mk'] = array(
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Изменета една|Изменети $4}} {{PLURAL:$4|определница|определници}} за {{PLURAL:$3|тврдење|тврдења}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Изменет еден|Изменети $4}} {{PLURAL:$4|навод|наводи}} за {{PLURAL:$3|тврдење|тврдења}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Сменет рангот на {{PLURAL:$3|тврдење|тврдења}}',
+	'wikibase-item-summary-clientsitelink-update' => 'Страницата е преместена од [$3] на [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Создадено ново својство',
 	'wikibase-property-summary-wbeditentity-create' => 'Создадено ново својство',
 	'wikibase-property-summary-wbeditentity-update' => 'Изменето својство',
@@ -11410,7 +11423,6 @@ $messages['pl'] = array(
 	'wikibase-label-empty' => 'Etykieta nie została jeszcze podana',
 	'wikibase-label-edit-placeholder' => 'podaj etykietę',
 	'wikibase-description-empty' => 'Opis nie został jeszcze podany',
-	'wikibase-deletedentity' => 'Usunięto $1',
 	'wikibase-description-edit-placeholder' => 'podaj opis',
 	'wikibase-sitelink-site-edit-placeholder' => 'witryna',
 	'wikibase-sitelink-page-edit-placeholder' => 'strona',
@@ -11607,6 +11619,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}} gdy zm
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Zmieniono {{PLURAL:$4|kwalifikator|$4 kwalifikatory|$4 kwalifikatorów}} w {{PLURAL:$3|stwierdzeniu|stwierdzeniach}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Zmieniono {{PLURAL:$4|przypis|$4 przypisy|$4 przypisów}} w {{PLURAL:$3|stwierdzeniu|stwierdzeniach}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Zmieniono rangę {{PLURAL:$3|stwierdzenia|stwierdzeń}}',
+	'wikibase-item-summary-clientsitelink-update' => 'Strona przeniesiona z [$3] na [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Utworzono nową właściwość',
 	'wikibase-property-summary-wbeditentity-create' => 'Utworzono nową właściwość',
 	'wikibase-property-summary-wbeditentity-update' => 'Zaktualizowano właściwość',
@@ -11632,7 +11645,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}} gdy zm
 * część hierarchiczna – niejawna część łańcucha IRI
 * zapytanie – niejawna część łańcucha IRI
 * fragment – niejawna część łańcucha IRI',
-	'wikibase-listdatatypes-geo-coordinate-head' => 'Współrzędne geograficzne',
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Współrzędne geograficzne',
 	'wikibase-listdatatypes-quantity-head' => 'Ilość',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Tekst jednojęzyczny',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Tekst wielojęzyczny',
@@ -13338,13 +13351,13 @@ $messages['sv'] = array(
 	'wikibase-save' => 'spara',
 	'wikibase-cancel' => 'avbryt',
 	'wikibase-add' => 'lägg till',
+	'wikibase-addqualifier' => 'lägg till bestämningsord',
 	'wikibase-addreference' => 'lägg till källa',
 	'wikibase-save-inprogress' => 'Sparar...',
 	'wikibase-remove-inprogress' => 'Tar bort...',
 	'wikibase-label-empty' => 'Ingen etikett har definierats ännu.',
 	'wikibase-label-edit-placeholder' => 'ange etikett',
 	'wikibase-description-empty' => 'Ingen beskrivning har definierats ännu.',
-	'wikibase-deletedentity' => 'Raderade $1',
 	'wikibase-description-edit-placeholder' => 'ange beskrivning',
 	'wikibase-sitelink-site-edit-placeholder' => 'webbplats',
 	'wikibase-sitelink-page-edit-placeholder' => 'artikel',
@@ -13401,7 +13414,7 @@ Din IP-adress kommer att sparas i historiken för $1.',
 	'wikibase-error-constraint-violation-label' => 'Det finns {{PLURAL:$1|ett restriktionsbrott|restriktionsbrott}} för {{PLURAL:$1|etiketten|etiketterna}} "$3" för {{PLURAL:$1|språkkoden|språkkoderna}} "$2".',
 	'wikibase-error-constraint-violation-description' => 'Det finns {{PLURAL:$1|ett restriktionsbrott|restriktionsbrott}} för {{PLURAL:$1|beskrivningen|beskrivningarna}} "$3" för {{PLURAL:$1|språkkoden|språkkoderna}} "$2".',
 	'wikibase-error-constraint-violation-aliases' => 'Det finns {{PLURAL:$1|ett restriktionsbrott|restriktionsbrott}} för {{PLURAL:$1|alias|flera alias}} "$3" för {{PLURAL:$1|språkkoden|språkkoderna}} "$2".',
-	'wikibase-error-sitelink-already-used' => 'Webbplatslänken [$1 $2] används redan av objektet [[$3]].', # Fuzzy
+	'wikibase-error-sitelink-already-used' => 'Webbplatslänken [$1 $2] används redan av objektet [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'En annan egenskap ($3) har redan associerat etiketten "$1" med språkkoden $2',
 	'special-itembytitle' => 'Objekt efter titel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Sök efter objekt med webbplats och titel',
@@ -13446,6 +13459,14 @@ Din IP-adress kommer att sparas i historiken för $1.',
 	'wikibase-setaliases-label' => 'Alias:',
 	'wikibase-setaliases-submit' => 'Ange alias',
 	'wikibase-setaliases-warning-remove' => 'Vill du verkligen ta bort alla alias för [[$1]]?',
+	'special-setsitelink' => 'Ange en webbplatslänk',
+	'wikibase-setsitelink-site' => 'Webbplats-ID:',
+	'wikibase-setsitelink-label' => 'Webbplatslänk:',
+	'wikibase-setsitelink-submit' => 'Ange webbplatslänken',
+	'wikibase-setsitelink-warning-remove' => 'Vill du verkligen ta bort webbplatslänken för [[$1]]?',
+	'wikibase-setsitelink-invalid-site' => 'Webbplats-ID "$1" är okänt. Var god använd ett befintligt webbplats-ID, som "enwiki".',
+	'wikibase-setsitelink-add-failed' => 'Webbplatslänken kunde inte sparas.',
+	'wikibase-setsitelink-remove-failed' => 'Webbplatslänken kunde inte tas bort.',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Språk:',
 	'wikibase-setentity-invalid-langcode' => 'Språkidentifieraren "$1" är okänd. Var god använd en språkidentifierare som känns igen av systemet, t.ex. "en".',
@@ -13459,6 +13480,7 @@ Din IP-adress kommer att sparas i historiken för $1.',
 	'wikibase-dispatchstats-pos' => 'Position',
 	'wikibase-dispatchstats-lag-num' => 'Väntande',
 	'wikibase-dispatchstats-lag-time' => 'Försening',
+	'wikibase-dispatchstats-touched' => 'Berört',
 	'wikibase-dispatchstats-large-lag' => '(mycket stor)',
 	'wikibase-dispatchstats-freshest' => 'Nyaste',
 	'wikibase-dispatchstats-stalest' => 'Äldst',
@@ -13480,6 +13502,7 @@ Din IP-adress kommer att sparas i historiken för $1.',
 	'special-entitydata' => 'Enhetsdata',
 	'wikibase-entitydata-not-found' => 'Ingen enhet med ID $1 hittades.',
 	'wikibase-entitydata-bad-revision' => 'Kan inte visa versionen $2 av enheten $1.',
+	'wikibase-entitydata-bad-id' => 'Ogiltigt ID: $1.',
 	'wikibase-entitydata-unsupported-format' => 'Dataformatet $1 stöds inte av detta gränssnitt.',
 	'wikibase-entitydata-title' => 'Enhetsdata',
 	'wikibase-conflict-patched' => 'Din redigering lappades i den senaste versionen.',
@@ -13499,6 +13522,7 @@ för att ta reda på var den tog vägen.',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Tog bort etiketten för [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Ändrade beskrivningen för [$2]',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Tog bort beskrivningen för [$2]',
+	'wikibase-item-summary-wbsetaliases-set' => 'Anger [$2] {{PLURAL:$1|alias}}',
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Lade till och tog bort {{PLURAL:$1|alias}} [$2]',
 	'wikibase-item-summary-wbsetaliases-add' => 'Lade till {{PLURAL:$1|alias}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Tog bort {{PLURAL:$1|alias}} [$2]',
@@ -13517,6 +13541,10 @@ för att ta reda på var den tog vägen.',
 	'wikibase-item-summary-wbremoveclaims-remove' => 'Tog bort {{PLURAL:$3|anspråk}}',
 	'wikibase-item-summary-wbsetclaim-update' => 'Ändrade {{PLURAL:$3|anspråk}}',
 	'wikibase-item-summary-wbsetclaim-create' => 'Skapade {{PLURAL:$3|anspråk}}',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Ändrade {{PLURAL:$4|ett bestämningsord|$4 bestämningsord}} för {{PLURAL:$3|anspråk}}',
+	'wikibase-item-summary-wbsetclaim-update-references' => 'Ändrade {{PLURAL:$4|en referens|$4 referenser}} för {{PLURAL:$3|anspråk}}',
+	'wikibase-item-summary-wbsetclaim-update-rank' => 'Ändrade rank för {{PLURAL:$3|anspråk}}',
+	'wikibase-item-summary-clientsitelink-update' => 'Sida flyttades från [$3] till [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Skapade en ny egenskap',
 	'wikibase-property-summary-wbeditentity-create' => 'Skapade en ny egenskap',
 	'wikibase-property-summary-wbeditentity-update' => 'Uppdaterade en egenskap',
@@ -13524,13 +13552,14 @@ för att ta reda på var den tog vägen.',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Tog bort etiketten [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Ändrade beskrivningen för [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Tog bort beskrivningen för [$2]',
+	'wikibase-property-summary-wbsetaliases-set' => 'Anger [$2] {{PLURAL:$1|alias}}',
 	'wikibase-property-summary-wbsetaliases-add-remove' => 'Lade till och tog bort {{PLURAL:$1|alias}} [$2]',
 	'wikibase-property-summary-wbsetaliases-add' => 'Lade till {{PLURAL:$1|alias}} [$2]',
 	'wikibase-property-summary-wbsetaliases-remove' => 'Tog bort {{PLURAL:$1|alias}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'Skapade en egenskap för [$2] med {{PLURAL:$1|värde|värden}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Objekt',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons-media',
-	'wikibase-listdatatypes-geo-coordinate-head' => 'Geo-koordinat',
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Globkoordinat',
 	'wikibase-listdatatypes-quantity-head' => 'Kvantitet',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Enspråkig text',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Flerspråkig text',
@@ -14394,7 +14423,6 @@ $messages['vi'] = array(
 	'wikibase-label-empty' => 'Chưa định rõ nhãn.',
 	'wikibase-label-edit-placeholder' => 'nhập nhãn',
 	'wikibase-description-empty' => 'Chưa định rõ lời miêu tả.',
-	'wikibase-deletedentity' => 'Đã xóa $1',
 	'wikibase-description-edit-placeholder' => 'nhập miêu tả',
 	'wikibase-sitelink-site-edit-placeholder' => 'dịch vụ',
 	'wikibase-sitelink-page-edit-placeholder' => 'bài',
@@ -14614,6 +14642,7 @@ Một wiki khách được thông báo về một thay đổi trên {{SITENAME}}
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Đã thay đổi {{PLURAL:$4|một từ hạn định|$4 từ hạn định}} cho {{PLURAL:$3|lời khẳng định|các lời khẳng định}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Đã thay đổi {{PLURAL:$4|một tham chiếu|$4 tham chiếu}} đến {{PLURAL:$3|lời khẳng định|các lời khẳng định}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Đã thay đổi thứ tự của {{PLURAL:$3|lời khẳng định|các lời khẳng định}}',
+	'wikibase-item-summary-clientsitelink-update' => 'Trang được di chuyển từ [$3] đến [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Đã tạo một thuộc tính mới',
 	'wikibase-property-summary-wbeditentity-create' => 'Đã tạo thuộc tính mới',
 	'wikibase-property-summary-wbeditentity-update' => 'Đã cập nhật thuộc tính',
