@@ -34,6 +34,77 @@ use Sanitizer, UtfNormal, Language, SiteList, SiteSQLStore;
  */
 final class Utils {
 
+	const LANGUAGE_FALLBACK_ALL = -1;
+	const LANGUAGE_FALLBACK_SELF = 1;
+	const LANGUAGE_FALLBACK_VARIANTS = 2;
+	const LANGUAGE_FALLBACK_OTHERS = 4;
+
+	/**
+	 * Returns the fallback chain for a single language.
+	 *
+	 * @param Language $language
+	 * @param $mode bitfield of self::LANGUAGE_FALLBACK_*
+	 * @param array $fetched private use only for internal call
+	 *
+	 * @return array of LanguageWrapper objects
+	 */
+	public static function getLanguageFallbackChain( Language $language,
+		$mode = self::LANGUAGE_FALLBACK_ALL, &$fetched = array()
+	) {
+		$chain = array();
+
+		if ( $mode & self::LANGUAGE_FALLBACK_SELF ) {
+			if ( !isset( $fetched[$language->getCode()] ) ) {
+				$chain[] = LanguageWrapper::factory( $language );
+				$fetched[$language->getCode()] = true;
+			}
+		}
+
+		if ( $mode & self::LANGUAGE_FALLBACK_VARIANTS ) {
+			$parentLanguage = $language->getParentLanguage();
+			if ( $parentLanguage ) {
+				// It's less likely to trigger conversion mistakes by converting
+				// zh-tw to zh-hk first instead of converting zh-cn to zh-tw.
+				$variantFallbacks = $parentLanguage->getConverter()
+					->getVariantFallbacks( $language->getCode() );
+				if ( is_array( $variantFallbacks ) ) {
+					$variants = array_unique( array_merge(
+						$variantFallbacks, $parentLanguage->getVariants()
+					) );
+				} else {
+					$variants = $parentLanguage->getVariants();
+				}
+
+				foreach ( $variants as $variant ) {
+					$variantLanguage = Language::factory( $variant );
+					if ( isset( $fetched[$variantLanguage->getCode()] ) ) {
+						continue;
+					}
+
+					$chain[] = LanguageWrapper::factory( $language, $variantLanguage );
+					$fetched[$variantLanguage->getCode()] = true;
+				}
+			}
+		}
+
+		if ( $mode & self::LANGUAGE_FALLBACK_OTHERS ) {
+			// Regarding $mode in recursive calls:
+			// * self is a must to have the fallback item itself included;
+			// * respect the original caller about whether to include variants or not;
+			// * others should be excluded as they'll be handled here in loops.
+			$recursiveMode = $mode;
+			$recursiveMode &= self::LANGUAGE_FALLBACK_VARIANTS;
+			$recursiveMode |= self::LANGUAGE_FALLBACK_SELF;
+			foreach ( $language->getFallbackLanguages() as $other ) {
+				$chain = array_merge( $chain, self::getLanguageFallbackChain(
+					Language::factory( $other ), $recursiveMode, $fetched
+				) );
+			}
+		}
+
+		return $chain;
+	}
+
 	/**
 	 * Returns a list of language codes that Wikibase supports,
 	 * ie the languages that a label or description can be in.
