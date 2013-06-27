@@ -41,6 +41,7 @@ return call_user_func( function() {
 		'Wikibase\DiffOpValueFormatter' => 'includes/DiffOpValueFormatter.php',
 		'Wikibase\DiffView' => 'includes/DiffView.php',
 		'Wikibase\LanguageWithConversion' => 'includes/LanguageWithConversion.php',
+		'Wikibase\LanguageUtils' => 'includes/LanguageUtils.php',
 		'Wikibase\Lib\GuidGenerator' => 'includes/GuidGenerator.php',
 		'Wikibase\Lib\V4GuidGenerator' => 'includes/GuidGenerator.php',
 		'Wikibase\Lib\EntityRetrievingDataTypeLookup' => 'includes/EntityRetrievingDataTypeLookup.php',
