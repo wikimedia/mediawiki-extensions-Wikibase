@@ -24,6 +24,126 @@ class UtilsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseUtils
+	 * @dataProvider providerGetLanguageFallbackChain
+	 */
+	public function testGetLanguageFallbackChain( $lang, $mode, $expected ) {
+		$chain = Utils::getLanguageFallbackChain( \Language::factory( $lang ), $mode );
+
+		$this->assertEquals( count( $chain ), count( $expected ) );
+		for ( $i = 0; $i < count( $chain ); $i++ ) {
+			if ( is_array( $expected[$i] ) ) {
+				$this->assertEquals( $chain[$i]->getLanguage()->getCode(), $expected[$i][0] );
+				$this->assertEquals( $chain[$i]->getSourceLanguage()->getCode(), $expected[$i][1] );
+			} else {
+				$this->assertEquals( $chain[$i]->getLanguage()->getCode(), $expected[$i] );
+				$this->assertNull( $chain[$i]->getSourceLanguage() );
+			}
+		}
+	}
+
+	public static function providerGetLanguageFallbackChain() {
+		return array(
+			array( 'en', Utils::LANGUAGE_FALLBACK_ALL, array( 'en' ) ),
+			array( 'en', Utils::LANGUAGE_FALLBACK_VARIANTS, array() ),
+			array( 'en', Utils::LANGUAGE_FALLBACK_OTHERS, array() ),
+
+			array( 'de-formal', Utils::LANGUAGE_FALLBACK_ALL, array( 'de-formal', 'de', 'en' ) ),
+			// Repeated to test caching
+			array( 'de-formal', Utils::LANGUAGE_FALLBACK_ALL, array( 'de-formal', 'de', 'en' ) ),
+			array( 'de-formal', Utils::LANGUAGE_FALLBACK_VARIANTS, array() ),
+			array( 'de-formal', ~Utils::LANGUAGE_FALLBACK_SELF, array( 'de', 'en' ) ),
+
+			array( 'zh', Utils::LANGUAGE_FALLBACK_ALL, array(
+				'zh',
+				array( 'zh', 'zh-hans' ),
+				array( 'zh', 'zh-hant' ),
+				array( 'zh', 'zh-cn' ),
+				array( 'zh', 'zh-tw' ),
+				array( 'zh', 'zh-hk' ),
+				array( 'zh', 'zh-sg' ),
+				array( 'zh', 'zh-mo' ),
+				array( 'zh', 'zh-my' ),
+				'en',
+			) ),
+			array( 'zh', Utils::LANGUAGE_FALLBACK_SELF, array( 'zh' ) ),
+			array( 'zh', Utils::LANGUAGE_FALLBACK_VARIANTS, array(
+				array( 'zh', 'zh-hans' ),
+				array( 'zh', 'zh-hant' ),
+				array( 'zh', 'zh-cn' ),
+				array( 'zh', 'zh-tw' ),
+				array( 'zh', 'zh-hk' ),
+				array( 'zh', 'zh-sg' ),
+				array( 'zh', 'zh-mo' ),
+				array( 'zh', 'zh-my' ),
+				array( 'zh', 'zh' ),
+			) ),
+			array( 'zh', Utils::LANGUAGE_FALLBACK_OTHERS, array( 'zh-hans', 'en' ) ),
+			array( 'zh', Utils::LANGUAGE_FALLBACK_SELF | Utils::LANGUAGE_FALLBACK_OTHERS,
+				array( 'zh', 'zh-hans', 'en' )
+			),
+
+			array( 'zh-cn', Utils::LANGUAGE_FALLBACK_ALL, array(
+				'zh-cn',
+				array( 'zh-cn', 'zh-hans' ),
+				array( 'zh-cn', 'zh-sg' ),
+				array( 'zh-cn', 'zh-my' ),
+				array( 'zh-cn', 'zh' ),
+				array( 'zh-cn', 'zh-hant' ),
+				array( 'zh-cn', 'zh-hk' ),
+				array( 'zh-cn', 'zh-mo' ),
+				array( 'zh-cn', 'zh-tw' ),
+				'en',
+			) ),
+			array( 'zh-cn', ~Utils::LANGUAGE_FALLBACK_VARIANTS,
+				array( 'zh-cn', 'zh-hans', 'en' )
+			),
+			array( 'zh-cn', ~Utils::LANGUAGE_FALLBACK_OTHERS, array(
+				'zh-cn',
+				array( 'zh-cn', 'zh-hans' ),
+				array( 'zh-cn', 'zh-sg' ),
+				array( 'zh-cn', 'zh-my' ),
+				array( 'zh-cn', 'zh' ),
+				array( 'zh-cn', 'zh-hant' ),
+				array( 'zh-cn', 'zh-hk' ),
+				array( 'zh-cn', 'zh-mo' ),
+				array( 'zh-cn', 'zh-tw' ),
+			) ),
+
+			array( 'ii', Utils::LANGUAGE_FALLBACK_ALL, array(
+				'ii',
+				'zh-cn',
+				array( 'zh-cn', 'zh-hans' ),
+				array( 'zh-cn', 'zh-sg' ),
+				array( 'zh-cn', 'zh-my' ),
+				array( 'zh-cn', 'zh' ),
+				array( 'zh-cn', 'zh-hant' ),
+				array( 'zh-cn', 'zh-hk' ),
+				array( 'zh-cn', 'zh-mo' ),
+				array( 'zh-cn', 'zh-tw' ),
+				'en',
+			) ),
+			array( 'ii', ~Utils::LANGUAGE_FALLBACK_VARIANTS,
+				array( 'ii', 'zh-cn', 'zh-hans', 'en' )
+			),
+			array( 'ii', Utils::LANGUAGE_FALLBACK_VARIANTS, array() ),
+			array( 'ii', Utils::LANGUAGE_FALLBACK_VARIANTS | Utils::LANGUAGE_FALLBACK_OTHERS, array(
+				'zh-cn',
+				array( 'zh-cn', 'zh-hans' ),
+				array( 'zh-cn', 'zh-sg' ),
+				array( 'zh-cn', 'zh-my' ),
+				array( 'zh-cn', 'zh' ),
+				array( 'zh-cn', 'zh-hant' ),
+				array( 'zh-cn', 'zh-hk' ),
+				array( 'zh-cn', 'zh-mo' ),
+				array( 'zh-cn', 'zh-tw' ),
+				'en',
+			) ),
+			array( 'ii', Utils::LANGUAGE_FALLBACK_OTHERS, array( 'zh-cn', 'zh-hans', 'en' ) ),
+		);
+	}
+
+	/**
+	 * @group WikibaseUtils
 	 * @dataProvider providerGetLanguageCodes
 	 */
 	public function testGetLanguageCodes( $lang ) {
