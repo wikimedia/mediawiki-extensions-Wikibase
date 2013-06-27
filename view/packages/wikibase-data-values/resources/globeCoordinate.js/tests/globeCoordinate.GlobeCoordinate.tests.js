@@ -9,23 +9,6 @@
 ( function( QUnit, $, globeCoordinate ) {
 	'use strict';
 
-	/**
-	 * ISO 6709 representations keyed by the input string used to generate a GlobeCoordinate object.
-	 * @type {Object}
-	 */
-	var iso6709representations = {
-		'+00+000/': { latitude: 0, longitude: 0, precision: 1 },
-		'-03+002/': { latitude: -3, longitude: 2, precision: 1 },
-		'+0106+00200/': { latitude: 1.1, longitude: 2, precision: 0.1 },
-		'+900000+0300600/': { latitude: 90, longitude: 30.1, precision: 0.01 },
-		'+000600+0000027/': { latitude: 0.1, longitude: 0.0075, precision: 1 / 3600 },
-		'-0006+00000/': { latitude: -0.1, longitude: 0, precision: 1 / 60 },
-		'+010001+0000000/': { latitude: 1.00028, longitude: 0, precision: 1 / 3600 },
-		'+010001.8+0000000.0/': { latitude: 1.0005, longitude: 0, precision: 1 / 36000 },
-		'+895400.000-0000001.116/': { latitude: 89.9, longitude: -0.00031, precision: 1 / 3600000 },
-		'+050000.0-0000010.5/': { latitude: 5, longitude: -0.00292, precision: 1 / 36000 }
-	};
-
 	QUnit.module( 'globeCoordinate.GlobeCoordinate.js' );
 
 	QUnit.test( 'Basic checks', function( assert ) {
@@ -73,93 +56,57 @@
 			'Verified getPrecision()'
 		);
 
-		assert.equal(
-			typeof c.getPrecisionText(),
-			'string',
-			'Verified getPrecisionText()'
-		);
-
-		assert.equal(
-			typeof c.getPrecisionTextEarth(),
-			'string',
-			'Verified getPrecisionTextEarth()'
-		);
-
-		assert.equal(
-			c.latitudeDecimal(),
-			1.5,
-			'Verified latitudeDecimal()'
-		);
-
-		assert.equal(
-			c.longitudeDecimal(),
-			1.5,
-			'Verified longitudeDecimal()'
-		);
-
 		assert.deepEqual(
-			c.latitudeDegree(),
-			{ degree: 1, minute: 30, second: undefined },
-			'Verified latitudeDegree()'
-		);
-
-		assert.deepEqual(
-			c.longitudeDegree(),
-			{ degree: 1, minute: 30, second: undefined },
-			'Verified longitudeDegree()'
+			c.getDecimal(),
+			{ latitude: 1.5, longitude: 1.5, precision: 0.1 },
+			'Verified getDecimal()'
 		);
 
 		assert.equal(
-			typeof c.decimalText(),
+			typeof c.iso6709(),
 			'string',
-			'Verified decimalText()'
+			'Verified iso6709()'
 		);
-
-		assert.equal(
-			typeof c.degreeText(),
-			'string',
-			'Verified degreeText()'
-		);
-
-	} );
-
-	QUnit.test( 'iso6709()', function( assert ) {
-		var c;
-
-		$.each( iso6709representations, function( iso6709string, gcDef ) {
-			c = new globeCoordinate.GlobeCoordinate( gcDef );
-
-			assert.equal(
-				c.iso6709(),
-				iso6709string,
-				'Validated ISO 6709 string for \'' + c.decimalText() + '\': \'' + iso6709string + '\'.'
-			);
-
-		} );
 
 	} );
 
 	QUnit.test( 'equals()', function( assert ) {
-		var c1, c2;
+		var gcDefs = [
+				{ latitude: 0, longitude: 0, precision: 1 },
+				{ latitude: -3, longitude: 2, precision: 1 },
+				{ latitude: 1.1, longitude: 2, precision: 0.1 },
+				{ latitude: 90, longitude: 30.1, precision: 0.01 },
+				{ latitude: 0.1, longitude: 0.0075, precision: 1 / 3600 },
+				{ latitude: -0.1, longitude: 0, precision: 1 / 60 },
+				{ latitude: 1.00028, longitude: 0, precision: 1 / 3600 },
+				{ latitude: 1.0005, longitude: 0, precision: 1 / 36000 },
+				{ latitude: 89.9, longitude: -0.00031, precision: 1 / 3600000 },
+				{ latitude: 5, longitude: -0.00292, precision: 1 / 36000 }
+			],
+			c1, c2;
 
-		$.each( iso6709representations, function( iso6709string1, gcDef1 ) {
+		$.each( gcDefs, function( i1, gcDef1 ) {
 			c1 = new globeCoordinate.GlobeCoordinate( gcDef1 );
 
-			$.each( iso6709representations, function( iso6709string2, gcDef ) {
-				c2 = new globeCoordinate.GlobeCoordinate( gcDef );
+			$.each( gcDefs, function( i2, gcDef2 ) {
+				c2 = new globeCoordinate.GlobeCoordinate( gcDef2 );
 
-				if( iso6709string1 === iso6709string2 ) {
+				if(
+					gcDef1.latitude === gcDef2.latitude
+					&& gcDef1.longitude === gcDef2.longitude
+					&& gcDef1.precision === gcDef2.precision
+				) {
 
 					assert.ok(
 						c1.equals( c2 ),
-						'Validated equality for \'' + c1.decimalText() + '\'.'
+						'Validated equality for data set #' + i1 + '.'
 					);
 
 				} else {
 
 					assert.ok(
 						!c1.equals( c2 ),
-						'Validated inequality of \'' + c1.decimalText() + '\' and \'' + c2.decimalText() + '\'.'
+						'Validated inequality of data set #' + i1 + ' to #' + i2 + '.'
 					);
 
 				}

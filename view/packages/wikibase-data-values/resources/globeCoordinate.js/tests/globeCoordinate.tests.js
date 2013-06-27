@@ -9,12 +9,19 @@
 ( function( QUnit, $, globeCoordinate ) {
 	'use strict';
 
+	/**
+	 * Values that are used in combination with the "precisions" object.
+	 * @type {number[]}
+	 */
 	var values = [0, 0.06, 0.4, 0.5, 1, 10, 17];
 
+	/**
+	 * Keyed by the precision to apply, this object contains the results for the values specified in
+	 * the "values" array.
+	 * @type {Object}
+	 */
 	var precisions = {
 		0: {
-			tech: '±0°',
-			earth: '1 mm',
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
@@ -27,8 +34,6 @@
 			]
 		},
 		1: {
-			tech: 1,
-			earth: '100 km',
 			toDecimal: [0, 0, 0, 1, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
@@ -41,36 +46,30 @@
 			]
 		},
 		2: {
-			tech: '±2°',
-			earth: '200 km',
 			toDecimal: [0, 0, 0, 1, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
-				{ degree: 1, minute: undefined, second: undefined },
+				{ degree: 2, minute: undefined, second: undefined },
 				{ degree: 10, minute: undefined, second: undefined },
-				{ degree: 17, minute: undefined, second: undefined }
+				{ degree: 18, minute: undefined, second: undefined }
 			]
 		},
 		1.00000001: {
-			tech: 1,
-			earth: '100 km',
 			toDecimal: [0, 0, 0, 1, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
-				{ degree: 1, minute: undefined, second: undefined },
-				{ degree: 10, minute: undefined, second: undefined },
-				{ degree: 17, minute: undefined, second: undefined }
+				{ degree: 1.00000001, minute: undefined, second: undefined },
+				{ degree: 10.0000001, minute: undefined, second: undefined },
+				{ degree: 17.00000017, minute: undefined, second: undefined }
 			]
 		},
 		0.016666666666666666: {
-			tech: 1 / 60,
-			earth: '2 km',
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: 0, second: undefined },
@@ -83,8 +82,6 @@
 			]
 		},
 		2.7777777777777776e-7: {
-			tech: 1 / 3600000,
-			earth: '3 cm',
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
@@ -97,8 +94,6 @@
 			]
 		},
 		1.0000000001e-10: {
-			tech: '±1.0000000001e-10°',
-			earth: '1 mm',
 			toDecimal: [0, 0.06, 0.4, 0.5, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: 0, second: 0 },
@@ -111,36 +106,30 @@
 			]
 		},
 		1.0000001: {
-			tech: '±1.0000001°',
-			earth: '100 km',
 			toDecimal: [0, 0, 0, 1, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
-				{ degree: 1, minute: undefined, second: undefined },
-				{ degree: 10, minute: undefined, second: undefined },
-				{ degree: 17, minute: undefined, second: undefined }
+				{ degree: 1.0000001, minute: undefined, second: undefined },
+				{ degree: 10.000001, minute: undefined, second: undefined },
+				{ degree: 17.0000017, minute: undefined, second: undefined }
 			]
 		},
 		1.1: {
-			tech: '±1.1°',
-			earth: '100 km',
 			toDecimal: [0, 0, 0, 1, 1, 10, 17],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
 				{ degree: 0, minute: undefined, second: undefined },
-				{ degree: 1, minute: undefined, second: undefined },
-				{ degree: 10, minute: undefined, second: undefined },
-				{ degree: 17, minute: undefined, second: undefined }
+				{ degree: 1.1, minute: undefined, second: undefined },
+				{ degree: 9.9, minute: undefined, second: undefined },
+				{ degree: 16.5, minute: undefined, second: undefined }
 			]
 		},
 		10: {
-			tech: '±10°',
-			earth: '1100 km',
 			toDecimal: [0, 0, 0, 0, 0, 10, 20],
 			toDegree: [
 				{ degree: 0, minute: undefined, second: undefined },
@@ -154,57 +143,24 @@
 		}
 	};
 
+	/**
+	 * ISO 6709 representations keyed by the input string used to generate a GlobeCoordinate object.
+	 * @type {Object}
+	 */
+	var iso6709representations = {
+		'+00+000/': { latitude: 0, longitude: 0, precision: 1 },
+		'-03+002/': { latitude: -3, longitude: 2, precision: 1 },
+		'+0106+00200/': { latitude: 1.1, longitude: 2, precision: 0.1 },
+		'+900000+0300600/': { latitude: 90, longitude: 30.1, precision: 0.01 },
+		'+000600+0000027/': { latitude: 0.1, longitude: 0.0075, precision: 1 / 3600 },
+		'-0006+00000/': { latitude: -0.1, longitude: 0, precision: 1 / 60 },
+		'+010001+0000000/': { latitude: 1.00028, longitude: 0, precision: 1 / 3600 },
+		'+010001.8+0000000.0/': { latitude: 1.0005, longitude: 0, precision: 1 / 36000 },
+		'+895400.000-0000001.116/': { latitude: 89.9, longitude: -0.00031, precision: 1 / 3600000 },
+		'+050000.0-0000010.5/': { latitude: 5, longitude: -0.00292, precision: 1 / 36000 }
+	};
+
 	QUnit.module( 'globeCoordinate.js' );
-
-	QUnit.test( 'precisionText()', function( assert ) {
-
-		$.each( precisions, function( precision, expected ) {
-			var precisionText = globeCoordinate.precisionText( precision );
-
-			// Look up precision text:
-			if( typeof expected.tech === 'number' ) {
-
-				$.each( globeCoordinate.settings.precisions, function( i, precisionDefinition ) {
-					if( precisionDefinition.level === expected.tech ) {
-
-						assert.strictEqual(
-							precisionText,
-							precisionDefinition.text,
-							'Precision text for \'' + precision + '\' results in text \''
-								+ precisionDefinition.text + '\'.'
-						);
-
-						return false;
-					}
-				} );
-
-			} else {
-
-				assert.strictEqual(
-					precisionText,
-					expected.tech,
-					'Precision text for \'' + precision + '\' results in text \'' + expected.tech + '\'.'
-				);
-
-			}
-
-		} );
-
-	} );
-
-	QUnit.test( 'precisionTextEarth()', function( assert ) {
-
-		$.each( precisions, function( precision, expected ) {
-
-				assert.strictEqual(
-					globeCoordinate.precisionTextEarth( precision ),
-					expected.earth,
-					'Precision text for \'' + precision + '\' results in text \'' + expected.earth + '\'.'
-				);
-
-		} );
-
-	} );
 
 	QUnit.test( 'Applying precision', function( assert ) {
 
@@ -242,61 +198,15 @@
 
 	} );
 
-	QUnit.test( 'Text output', function( assert ) {
+	QUnit.test( 'iso6709()', function( assert ) {
 
-		// Just some output sanity checking:
-
-		// decimalText():
-
-		assert.equal(
-			globeCoordinate.decimalText( 0, 0, 0 ),
-			'0, 0',
-			'Verified output: 0, 0'
-		);
-
-		assert.equal(
-			globeCoordinate.decimalText( 1, 1, 1 ),
-			'1, 1',
-			'Verified output: 1, 1'
-		);
-
-		assert.equal(
-			globeCoordinate.decimalText( -10, -1.5, 0.1 ),
-			'-10, -1.5',
-			'Verified output: -10, -1.5'
-		);
-
-		assert.equal(
-			globeCoordinate.decimalText( 24, -1.5, 10 ),
-			'20, 0',
-			'Verified output: 20, 0'
-		);
-
-		// degreeText():
-
-		assert.equal(
-			globeCoordinate.degreeText( 0, 0, 0 ),
-			'0°0\'0"N, 0°0\'0"E',
-			'Verified output: 0°0\'0"N, 0°0\'0"E'
-		);
-
-		assert.equal(
-			globeCoordinate.degreeText( 1, 1, 1 ),
-			'1°N, 1°E',
-			'Verified output: 1°N, 1°E'
-		);
-
-		assert.equal(
-			globeCoordinate.degreeText( -10, -2.5, 0.1 ),
-			'10°0\'S, 2°30\'W',
-			'Verified output: 10°0\'S, 2°30\'W'
-		);
-
-		assert.equal(
-			globeCoordinate.degreeText( 24, -1.5, 10 ),
-			'20°N, 0°W',
-			'Verified output: 20°N, 0°W'
-		);
+		$.each( iso6709representations, function( iso6709string, gcDef ) {
+			assert.equal(
+				globeCoordinate.iso6709( gcDef ),
+				iso6709string,
+				'Generated ISO 6709 string: \'' + iso6709string + '\'.'
+			);
+		} );
 
 	} );
 

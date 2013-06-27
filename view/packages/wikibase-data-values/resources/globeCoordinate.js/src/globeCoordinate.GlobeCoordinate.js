@@ -6,7 +6,6 @@
  * @ingroup globeCoordinate.js
  * @licence GNU GPL v2+
  *
- * @author Denny Vrandečić
  * @author H. Snater < mediawiki@snater.com >
  *
  * @dependency globeCoordinate
@@ -33,6 +32,10 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 			throw new Error( 'No proper globe coordinate definition given' );
 		}
 
+		if( !isValidPrecision( gcDef.precision ) ) {
+			throw new Error( 'No valid precision given' );
+		}
+
 		this._latitude = gcDef.latitude;
 		this._longitude = gcDef.longitude;
 		this._precision = gcDef.precision;
@@ -48,19 +51,6 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 			throw new Error( 'Longitude (' + this._longitude + ') is out of bounds' );
 		}
 
-		// Keep precision boundaries:
-		// TODO: get definition of precisions out of global settings and put them into
-		//  a globeCoordinate.GlobeCoordinate.PRECISION constant.
-		var precisions = globeCoordinate.settings.precisions,
-			minPrecision = precisions[0].level,
-			maxPrecision = precisions[precisions.length - 1].level;
-
-		if( this._precision > minPrecision ) {
-			this._precision = minPrecision;
-		} else if( this._precision < maxPrecision ) {
-			this._precision = maxPrecision;
-		}
-
 		this._globe = 'http://www.wikidata.org/entity/Q2'; // TODO: Support other globes
 	}
 
@@ -73,12 +63,6 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 		 * @type {string}
 		 */
 		_globe: null,
-
-		/**
-		 * Raw input
-		 * @type {string}
-		 */
-		_rawInput: null,
 
 		/**
 		 * Latitude (decimal)
@@ -129,133 +113,26 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 		getPrecision: function() { return this._precision; },
 
 		/**
-		 * Returns the precision text.
-		 *
-		 * @return {string}
-		 */
-		getPrecisionText: function() { return globeCoordinate.precisionText( this._precision ); },
-
-		/**
-		 * Returns the precision text in a common unit.
-		 *
-		 * @return {string}
-		 */
-		getPrecisionTextEarth: function() {
-			return globeCoordinate.precisionTextEarth( this._precision );
-		},
-
-		/**
-		 * Returns the decimal latitude.
+		 * Returns an object with decimal latitude, longitude and precision.
 		 *
 		 * @return {Object}
 		 */
-		latitudeDecimal: function() {
-			return globeCoordinate.toDecimal( this._latitude, this._precision );
+		getDecimal: function() {
+			return {
+				latitude: this._latitude,
+				longitude: this._longitude,
+				precision: this._precision
+			};
 		},
 
 		/**
-		 * Returns the decimal longitude.
-		 *
-		 * @return {Object}
-		 */
-		longitudeDecimal: function() {
-			return globeCoordinate.toDecimal( this._longitude, this._precision );
-		},
-
-		/**
-		 * Returns the latitude in degree.
-		 *
-		 * @return {Object}
-		 */
-		latitudeDegree: function() {
-			return globeCoordinate.toDegree( this._latitude, this._precision );
-		},
-
-		/**
-		 * Returns the longitude in degree.
-		 *
-		 * @return {Object}
-		 */
-		longitudeDegree: function() {
-			return globeCoordinate.toDegree( this._longitude, this._precision );
-		},
-
-		/**
-		 * Returns the decimal coordinate as text.
-		 *
-		 * @return {string}
-		 */
-		decimalText: function() {
-			return globeCoordinate.decimalText( this._latitude, this._longitude, this._precision );
-		},
-
-		/**
-		 * Returns the coordinate as text in degree.
-		 *
-		 * @return {string}
-		 */
-		degreeText: function() {
-			return globeCoordinate.degreeText( this._latitude, this._longitude, this._precision );
-		},
-
-		/**
-		 * Returns the coordinate's ISO 6709 string representation.
+		 * Returns a coordinate's ISO 6709 string representation.
+		 * @see globeCoordinate.iso6709
 		 *
 		 * @return {string}
 		 */
 		iso6709: function() {
-			var lat = this.latitudeDegree(),
-				lon = this.longitudeDegree(),
-				latISO,
-				lonISO;
-
-			/**
-			 * Strips a number's sign and fills the number's integer part with zeroes according to a
-			 * given string length.
-			 *
-			 * @param {number} number
-			 * @param {string} length
-			 */
-			function pad( number, length ) {
-				var absolute = Math.abs( number || 0 ),
-					string = String( absolute ),
-					exploded = string.split( '.' );
-
-				if( exploded[0].length === length ) {
-					return string;
-				}
-
-				return ''
-					+ new Array( length - exploded[0].length + 1 ).join( '0' )
-					+ exploded[0]
-					+ ( ( exploded[1] ) ? '.' + exploded[1] : '' );
-			}
-
-			latISO = ''
-				+ ( ( ( this.getLatitude() < 0 ) ? '-' : '+' ) + pad( lat.degree, 2 ) )
-				+ ( ( this.getPrecision() < 1 ) ? pad( lat.minute, 2 ) : '' )
-				+ ( ( this.getPrecision() < 1 / 60 ) ? pad( lat.second, 2 ) : '' );
-
-			lonISO = ''
-				+ ( ( ( this.getLongitude() < 0 ) ? '-' : '+' ) + pad( lon.degree, 3 ) )
-				+ ( ( this.getPrecision() < 1 ) ? pad( lon.minute, 2 ) : '' )
-				+ ( ( this.getPrecision() < 1 / 60 ) ? pad( lon.second, 2 ) : '' );
-
-			// Synchronize precision (longitude degree needs to be 1 digit longer):
-			if( lonISO.indexOf( '.' ) !== -1 && latISO.indexOf( '.' ) === -1 ) {
-				latISO += '.';
-			}
-			while( latISO.length < lonISO.length - 1 ) {
-				latISO += '0';
-			}
-			if( latISO.indexOf( '.' ) !== -1 && lonISO.indexOf( '.' ) === -1 ) {
-				lonISO += '.';
-			}
-			while( lonISO.length < latISO.length + 1 ) {
-				lonISO += '0';
-			}
-
-			return latISO + lonISO + '/';
+			return globeCoordinate.iso6709( this.getDecimal() );
 		},
 
 		/**
@@ -270,11 +147,52 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 				return false;
 			}
 
+			var gc1Iso6709 = globeCoordinate.iso6709( this.getDecimal() ),
+				gc2Iso6709 = globeCoordinate.iso6709( otherGlobeCoordinate.getDecimal() );
+
 			return this.getPrecision() === otherGlobeCoordinate.getPrecision()
-				&& this.iso6709() === otherGlobeCoordinate.iso6709();
+				&& gc1Iso6709 === gc2Iso6709;
 		}
 
 	};
+
+	/**
+	 * Checks if a specific precision is defined in the predefined constant.
+	 *
+	 * @param {number} precision
+	 * @return {boolean}
+	 */
+	function isValidPrecision( precision ) {
+		var precisions = globeCoordinate.GlobeCoordinate.PRECISIONS;
+
+		for( var i in precisions ) {
+			if( Math.abs( precision - precisions[i] ) < 0.0000001 ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Precisions a globe coordinate may feature.
+	 * @type {number[]}
+	 */
+	GlobeCoordinate.PRECISIONS = [
+		10,
+		1,
+		0.1,
+		1 / 60,
+		0.01,
+		0.001,
+		1 / 3600,
+		0.0001,
+		1 / 36000,
+		0.00001,
+		1 / 360000,
+		0.000001,
+		1 / 3600000
+	];
 
 	return GlobeCoordinate;
 

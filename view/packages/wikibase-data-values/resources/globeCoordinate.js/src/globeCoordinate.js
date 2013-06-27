@@ -17,129 +17,7 @@ this.globeCoordinate = ( function() {
 
 	return {
 		/**
-		 * Default settings/texts.
-		 * @type {Object}
-		 */
-		settings: {
-			north: 'N',
-			east: 'E',
-			south: 'S',
-			west: 'W',
-			dot: '.',
-			latLongCombinator: ', ',
-			degree: '°',
-			minute: '\'',
-			second: '"',
-			precisions: [
-				{ level: 10 },
-				{ level: 1, text: 'to a degree' },
-				{ level: 0.1 },
-				{ level: 1 / 60, text: 'to an arcminute' },
-				{ level: 0.01 },
-				{ level: 0.001 },
-				{ level: 1 / 3600, text: 'to an arcsecond' },
-				{ level: 0.0001 },
-				{ level: 1 / 36000, text: 'to 1/10 of an arcsecond' },
-				{ level: 0.00001 },
-				{ level: 1 / 360000, text: 'to 1/100 of an arcsecond' },
-				{ level: 0.000001 },
-				{ level: 1 / 3600000, text: 'to 1/1000 of an arcsecond' }
-			]
-		},
-
-		/**
-		 * Returns the index of a precision within the settings array containing the precisions or
-		 * -1 if the precision could not be found.
-		 *
-		 * @param {number} precision
-		 * @return {number}
-		 */
-		getPrecisionIndex: function( precision ) {
-			for( var i in this.settings.precisions ) {
-				if(
-					this.settings.precisions.hasOwnProperty( i )
-					&& Math.abs( precision - this.settings.precisions[i].level ) < 0.0000001
-				) {
-					return parseInt( i, 10 );
-				}
-			}
-			return -1;
-		},
-
-		/**
-		 * Returns a precision's string representation.
-		 *
-		 * @param {number} precision
-		 * @return {string}
-		 */
-		precisionText: function( precision ) {
-			var precisionText;
-
-			// Figure out if the precision is very close to a precision that can be expressed with a
-			// string:
-			for( var i in this.settings.precisions ) {
-				if(
-					this.settings.precisions.hasOwnProperty( i )
-					&& Math.abs( precision - this.settings.precisions[i].level ) < 0.0000001
-					&& this.settings.precisions[i].text
-				) {
-					precisionText = this.settings.precisions[i].text;
-				}
-			}
-
-			if( !precisionText ) {
-				precisionText = '±' + precision + this.settings.degree;
-			}
-
-			return precisionText;
-		},
-
-		/**
-		 * Returns a given precision as string with units commonly used on earth.
-		 *
-		 * @param {number} precision
-		 * @return {string}
-		 */
-		precisionTextEarth: function( precision ) {
-			var km = 40000 / 360 * precision;
-
-			if( km > 100 ) {
-				return Math.round( km / 100 ) * 100 + ' km';
-			} else if( km > 10 ) {
-				return Math.round( km / 10 ) * 10 + ' km';
-			} else if( km > 1 ) {
-				return Math.round( km ) + ' km';
-			}
-
-			var m = km * 1000;
-
-			if( m > 100 ) {
-				return Math.round( m / 100 ) * 100 + ' m';
-			} else if( m > 10 ) {
-				return Math.round( m / 10 ) * 10 + ' m';
-			} else if( m > 1 ) {
-				return Math.round( m ) + ' m';
-			}
-
-			var cm = m * 100;
-
-			if( cm > 10 ) {
-				return Math.round( cm / 10 ) * 10 + ' cm';
-			} else if( cm > 1 ) {
-				return Math.round( cm ) + ' cm';
-			}
-
-			var mm = cm * 10;
-
-			if( mm > 1 ) {
-				return Math.round( mm ) + ' mm';
-			}
-
-			return '1 mm';
-		},
-
-		/**
-		 * Applies a precision to a decimal value.
+		 * Return a given decimal value applying a precision.
 		 *
 		 * @param {number} value
 		 * @param {number} precision
@@ -153,26 +31,17 @@ this.globeCoordinate = ( function() {
 		},
 
 		/**
-		 * Returns a given coordinate as a string according to the decimal system.
-		 *
-		 * @param {number} latitude
-		 * @param {number} longitude
-		 * @param {number} precision
-		 * @return {string}
-		 */
-		decimalText: function( latitude, longitude, precision ) {
-			return ''
-				+ this.toDecimal( latitude, precision )
-				+ this.settings.latLongCombinator
-				+ this.toDecimal( longitude, precision );
-		},
-
-		/**
-		 * Returns a given value converted to degree.
+		 * Returns a given decimal value converted to degree taking a precision into account.
 		 *
 		 * @param {number} value
 		 * @param {number} precision
-		 * @return {Object}
+		 * @return {Object} Returned object has the following structure:
+		 *         {
+		 *           degree: {number},
+		 *           minute: {number|undefined},
+		 *           second: {number|undefined}
+		 *         }
+		 *         "minute" and/or "second" are undefined if not covered by the precision.
 		 */
 		toDegree: function( value, precision ) {
 			var result = {};
@@ -203,11 +72,23 @@ this.globeCoordinate = ( function() {
 				}
 			}
 
+			// TODO: precision might be a floating point number and might cause minutes/seconds
+			// to be "generated".
 			if( precision > 1 ) {
-				var index = this.getPrecisionIndex( precision );
-				if( index !== -1 ) {
-					var level = this.settings.precisions[index].level;
-					result.degree = Math.round( result.degree / level ) * level;
+				result.degree = Math.round( result.degree / precision ) * precision;
+
+				// JavaScript may cause some disturbance regarding rounding and precision. The
+				// result should not have a higher floating point number precision than the
+				// applied precision.
+				var degreeFloat = ( '' + result.degree ).split( '.' ),
+					precisionFloat = ( '' + precision ).split( '.' );
+
+				if(
+					degreeFloat[1] && precisionFloat[1]
+					&& degreeFloat[1].length > precisionFloat[1].length
+				) {
+					var trimmedPrecision = degreeFloat[1].substr( 0, precisionFloat[1].length );
+					result.degree = parseFloat( degreeFloat[0] + '.' + trimmedPrecision );
 				}
 			}
 
@@ -215,34 +96,73 @@ this.globeCoordinate = ( function() {
 		},
 
 		/**
-		 * Returns a given coordinate as a string using degree.
+		 * Returns a coordinate's ISO 6709 string representation.
 		 *
-		 * @param {number} latitude
-		 * @param {number} longitude
-		 * @param {number} precision
+		 * @param {Object} decimalCoordinateDefinition
+		 *        Object with the following structure:
+		 *        {
+		 *          latitude: {number},
+		 *          longitude: {number},
+		 *          precision: {number}
+		 *        }
 		 * @return {string}
 		 */
-		degreeText: function( latitude, longitude, precision ) {
-			var text = function( number, sign ) {
-				if( number === undefined ) {
-					return '';
+		iso6709: function( decimalCoordinateDefinition ) {
+			var latitude = decimalCoordinateDefinition.latitude,
+				longitude = decimalCoordinateDefinition.longitude,
+				precision = decimalCoordinateDefinition.precision,
+				lat = globeCoordinate.toDegree( latitude, precision ),
+				lon = globeCoordinate.toDegree( longitude, precision ),
+				latISO,
+				lonISO;
+
+			/**
+			 * Strips a number's sign and fills the number's integer part with zeroes according to a
+			 * given string length.
+			 *
+			 * @param {number} number
+			 * @param {string} length
+			 */
+			function pad( number, length ) {
+				var absolute = Math.abs( number || 0 ),
+					string = String( absolute ),
+					exploded = string.split( '.' );
+
+				if( exploded[0].length === length ) {
+					return string;
 				}
-				return number + sign;
-			};
 
-			var latDeg = this.toDegree( latitude, precision ),
-				longDeg = this.toDegree( longitude, precision );
+				return ''
+					+ new Array( length - exploded[0].length + 1 ).join( '0' )
+					+ exploded[0]
+					+ ( ( exploded[1] ) ? '.' + exploded[1] : '' );
+			}
 
-			return ''
-				+ text( Math.abs( latDeg.degree ), this.settings.degree )
-				+ text( latDeg.minute, this.settings.minute )
-				+ text( latDeg.second, this.settings.second )
-				+ ( ( latitude < 0 ) ? this.settings.south : this.settings.north )
-				+ this.settings.latLongCombinator
-				+ text( Math.abs( longDeg.degree ), this.settings.degree )
-				+ text( longDeg.minute, this.settings.minute )
-				+ text( longDeg.second, this.settings.second )
-				+ ( ( longitude < 0 ) ? this.settings.west : this.settings.east );
+			latISO = ''
+				+ ( ( ( latitude < 0 ) ? '-' : '+' ) + pad( lat.degree, 2 ) )
+				+ ( ( precision < 1 ) ? pad( lat.minute, 2 ) : '' )
+				+ ( ( precision < 1 / 60 ) ? pad( lat.second, 2 ) : '' );
+
+			lonISO = ''
+				+ ( ( ( longitude < 0 ) ? '-' : '+' ) + pad( lon.degree, 3 ) )
+				+ ( ( precision < 1 ) ? pad( lon.minute, 2 ) : '' )
+				+ ( ( precision < 1 / 60 ) ? pad( lon.second, 2 ) : '' );
+
+			// Synchronize precision (longitude degree needs to be 1 digit longer):
+			if( lonISO.indexOf( '.' ) !== -1 && latISO.indexOf( '.' ) === -1 ) {
+				latISO += '.';
+			}
+			while( latISO.length < lonISO.length - 1 ) {
+				latISO += '0';
+			}
+			if( latISO.indexOf( '.' ) !== -1 && lonISO.indexOf( '.' ) === -1 ) {
+				lonISO += '.';
+			}
+			while( lonISO.length < latISO.length + 1 ) {
+				lonISO += '0';
+			}
+
+			return latISO + lonISO + '/';
 		}
 
 	};
