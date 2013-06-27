@@ -115,7 +115,7 @@ class SetSiteLink extends ModifyEntity {
 			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
 
 			$summary->setAction( 'set' );
-			$summary->addAutoSummaryArgs( $params['linktitle'] );
+			$summary->addAutoSummaryArgs( $page );
 
 			wfProfileOut( __METHOD__ );
 			return $summary;
