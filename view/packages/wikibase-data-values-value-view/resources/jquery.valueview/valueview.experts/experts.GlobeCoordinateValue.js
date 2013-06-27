@@ -5,8 +5,10 @@
  *
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( dv, vp, $, vv, GlobeCoordinate ) {
+( function( dv, vp, $, vv, GlobeCoordinate, Formatter ) {
 	'use strict';
+
+	var formatter = new Formatter( { format: 'degree' } );
 
 	var PARENT = vv.BifidExpert,
 		editableExpert = vv.experts.GlobeCoordinateInput;
@@ -46,7 +48,7 @@
 			 */
 			domBuilder: function( currentRawValue, viewState, messageProvider ) {
 				if( currentRawValue instanceof GlobeCoordinate ) {
-					currentRawValue = currentRawValue.degreeText();
+					currentRawValue = formatter.format( currentRawValue );
 				}
 
 				return $( '<span/>' ).text( currentRawValue || '' );
@@ -55,4 +57,4 @@
 		}
 	} );
 
-}( dataValues, valueParsers, jQuery, jQuery.valueview, globeCoordinate.GlobeCoordinate ) );
+}( dataValues, valueParsers, jQuery, jQuery.valueview, globeCoordinate.GlobeCoordinate, globeCoordinate.Formatter ) );
