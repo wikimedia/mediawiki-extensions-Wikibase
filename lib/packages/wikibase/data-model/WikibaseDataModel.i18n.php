@@ -120,6 +120,13 @@ $messages['vi'] = array(
 	'wikibasedatamodel-desc' => 'Bộ phận xác định mô hình dữ liệu Wikibase',
 );
 
+/** Yiddish (ייִדיש)
+ * @author פוילישער
+ */
+$messages['yi'] = array(
+	'wikibasedatamodel-desc' => 'קאמפאנענט וואס דעפינירט דעם וויקיבאזע דאטן מאדעל',
+);
+
 /** Traditional Chinese (中文（繁體）‎)
  * @author Justincheng12345
  */
