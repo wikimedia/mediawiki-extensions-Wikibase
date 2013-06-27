@@ -58,4 +58,12 @@ abstract class ModifyClaim extends ApiWikibase {
 		return $summary;
 	}
 
+	/**
+	 * @see ApiBase::isWriteMode
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
 }

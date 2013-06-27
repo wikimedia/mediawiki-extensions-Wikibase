@@ -44,9 +44,13 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class RemoveClaims extends ApiWikibase {
 
-	// TODO: example
-	// TODO: rights
-	// TODO: conflict detection
+	/**
+	 * @see ApiBase::isWriteMode
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
+	}
 
 	/**
 	 * @see \ApiBase::execute
