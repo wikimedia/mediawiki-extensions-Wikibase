@@ -222,6 +222,18 @@ $messages['dsb'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Wobźěłowanje gódnotow za datowy typ "$1" hyšći se njepódpěra.', # Fuzzy
 );
 
+/** Greek (Ελληνικά)
+ * @author Nikosguard
+ */
+$messages['el'] = array(
+	'valueview-expert-timevalue-calendar-gregorian' => 'Γρηγοριανό',
+	'valueview-expert-timevalue-calendar-julian' => 'Ιουλιανό',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Γρηγοριανό ημερολόγιο)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Ιουλιανό ημερολόγιο)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; αλλαγή σε Γρηγοριανό',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; αλλαγή σε Ιουλιανό',
+);
+
 /** British English (British English)
  */
 $messages['en-gb'] = array(
