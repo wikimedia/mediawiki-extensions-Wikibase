@@ -4,12 +4,14 @@ namespace Wikibase\Lib;
 
 use InvalidArgumentException;
 use RuntimeException;
+use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatterBase;
 use ValueFormatters\Result;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
+use Wikibase\LanguageFallbackChain;
 
 /**
  * This program is free software; you can redistribute it and/or modify
@@ -146,12 +148,25 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 			return false;
 		}
 
-		$languageCode = $this->getOption( self::OPT_LANG );
+		$languageFallbackChain = $this->getOption( self::OPT_LANG );
+
+		// back-compat for usages where self::OPT_LANG is a string
+		if ( is_string( $languageFallbackChain ) ) {
+			$languageFallbackChain = LanguageFallbackChain::newFromLanguage(
+				Language::factory( $languageFallbackChain ), LanguageFallbackChain::FALLBACK_SELF
+			);
+		}
 
 		/**
 		 * @var Entity $entity
 		 */
-		return $entity->getLabel( $languageCode );
+		$extractedData = $languageFallbackChain->extractPreferredValue( $entity->getLabels() );
+
+		if ( $extractedData === null ) {
+			return false;
+		} else {
+			return $extractedData['value'];
+		}
 	}
 
 }
