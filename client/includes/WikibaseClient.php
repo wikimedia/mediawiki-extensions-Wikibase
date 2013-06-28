@@ -8,6 +8,7 @@ use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\ClientStore;
 use Wikibase\EntityLookup;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
@@ -64,6 +65,7 @@ final class WikibaseClient {
 
 	protected $dataTypeFactory = null;
 	protected $entityIdParser = null;
+	protected $languageFallbackChainFactory = null;
 
 	protected $isInTestMode;
 
@@ -200,6 +202,19 @@ final class WikibaseClient {
 			$this->settings->getSetting( 'repoScriptPath' ),
 			$this->settings->getSetting( 'repoNamespaces' )
 		);
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return LanguageFallbackChainFactory
+	 */
+	public function getLanguageFallbackChainFactory() {
+		if ( $this->languageFallbackChainFactory === null ) {
+			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory();
+		}
+
+		return $this->languageFallbackChainFactory;
 	}
 
 	/**

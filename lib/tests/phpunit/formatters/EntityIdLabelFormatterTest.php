@@ -2,11 +2,13 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use ValueFormatters\FormatterOptions;
 use Wikibase\EntityId;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Item;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Property;
 
 /**
@@ -48,6 +50,7 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 		$entity = Item::newEmpty();
 		$entity->setLabel( 'en', 'foo' );
 		$entity->setLabel( 'nl', 'bar' );
+		$entity->setLabel( 'zh-cn', '测试' );
 		$entity->setId( 42 );
 
 		$loader->putEntity( $entity );
@@ -74,10 +77,18 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @return array
 	 */
 	public function validProvider() {
+		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
+
 		$argLists = array();
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'foo', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage( Language::factory( 'en' ) ) );
 
 		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'foo', $options );
 
@@ -92,6 +103,49 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'de' );
 
 		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'I42', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage( Language::factory( 'de' ) ) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'foo', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage( Language::factory( 'zh' ) ) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), '测试', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage( Language::factory( 'zh-tw' ) ) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), '測試', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage(
+			Language::factory( 'zh-tw' ), LanguageFallbackChainFactory::FALLBACK_SELF
+		) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'I42', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage(
+			Language::factory( 'zh-tw' ),
+			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
+		) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), '測試', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageFallbackChainFactory->newFromLanguage(
+			Language::factory( 'sr' )
+		) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'foo', $options );
 
 
 		$options = new FormatterOptions();

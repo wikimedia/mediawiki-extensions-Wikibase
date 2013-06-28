@@ -114,7 +114,11 @@ class PropertyParserFunction {
 	 * @return string - wikitext format
 	 */
 	private function formatSnakList( $snaks ) {
-		$formattedValues = $this->snaksFormatter->formatSnaks( $snaks, $this->language->getCode() );
+		$languageFallbackChainFactory = WikibaseClient::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $this->language,
+			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
+		);
+		$formattedValues = $this->snaksFormatter->formatSnaks( $snaks, $languageFallbackChain );
 		return $this->language->commaList( $formattedValues );
 	}
 
