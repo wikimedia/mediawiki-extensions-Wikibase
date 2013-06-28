@@ -2,11 +2,13 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use ValueFormatters\FormatterOptions;
 use Wikibase\EntityId;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Item;
+use Wikibase\LanguageUtils;
 use Wikibase\Property;
 
 /**
@@ -48,6 +50,7 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 		$entity = Item::newEmpty();
 		$entity->setLabel( 'en', 'foo' );
 		$entity->setLabel( 'nl', 'bar' );
+		$entity->setLabel( 'zh-cn', '测试' );
 		$entity->setId( 42 );
 
 		$loader->putEntity( $entity );
@@ -83,6 +86,12 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 
 
 		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, LanguageUtils::getFallbackChain( Language::factory( 'en' ) ) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'foo', $options );
+
+
+		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'nl' );
 
 		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'bar', $options );
@@ -90,6 +99,69 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'de' );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'I42', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, LanguageUtils::getFallbackChain( Language::factory( 'de' ) ) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'foo', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, LanguageUtils::getFallbackChain( Language::factory( 'zh' ) ) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), '测试', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, LanguageUtils::getFallbackChain( Language::factory( 'zh-tw' ) ) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), '測試', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, LanguageUtils::getFallbackChain(
+			Language::factory( 'zh-tw' ), LanguageUtils::FALLBACK_SELF
+		) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'I42', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, LanguageUtils::getFallbackChain(
+			Language::factory( 'zh-tw' ), LanguageUtils::FALLBACK_SELF | LanguageUtils::FALLBACK_VARIANTS
+		) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), '測試', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, LanguageUtils::getFallbackChain( Language::factory( 'sr-ec' ) ) );
+
+		// Shouldn't be converted to Cyrillic ('фоо') as this specific value ('foo') is taken from the English label.
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'foo', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, LanguageUtils::getFallbackChain(
+			Language::factory( 'sr-ec' ), LanguageUtils::FALLBACK_SELF | LanguageUtils::FALLBACK_VARIANTS
+		) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'I42', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, LanguageUtils::getFallbackChain( Language::factory( 'gan-hant' )	) );
+
+		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), '測試', $options );
+
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, LanguageUtils::getFallbackChain(
+			Language::factory( 'gan-hant' ), LanguageUtils::FALLBACK_SELF | LanguageUtils::FALLBACK_VARIANTS
+		) );
 
 		$argLists[] = array( new EntityId( Item::ENTITY_TYPE, 42 ), 'I42', $options );
 
