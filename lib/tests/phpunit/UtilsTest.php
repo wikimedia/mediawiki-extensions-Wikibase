@@ -12,6 +12,7 @@ use Wikibase\Utils;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseUtils
  *

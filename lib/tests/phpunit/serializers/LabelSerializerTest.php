@@ -29,6 +29,7 @@ use Wikibase\Lib\Serializers\LabelSerializer;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
  * @group WikibaseLabelSerializer
