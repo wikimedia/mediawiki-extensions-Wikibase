@@ -67,34 +67,34 @@ class SnakFormatter {
 	 * @since 0.4
 	 *
 	 * @param Snak[] $snaks
-	 * @param string $languageCode
+	 * @param array $languages
 	 *
 	 * @return string[]
 	 */
-	public function formatSnaks( array $snaks, $languageCode ) {
+	public function formatSnaks( array $snaks, $languages ) {
 		$formattedValues = array();
 
 		foreach ( $snaks as $snak ) {
-			$formattedValues[] = $this->formatSnak( $snak, $languageCode );
+			$formattedValues[] = $this->formatSnak( $snak, $languages );
 		}
 
 		return $formattedValues;
 	}
 
-	private function formatSnak( Snak $snak, $languageCode ) {
+	private function formatSnak( Snak $snak, $languages ) {
 		if ( $snak instanceof PropertyValueSnak ) {
-			return $this->formatPropertyValueSnak( $snak, $languageCode );
+			return $this->formatPropertyValueSnak( $snak, $languages );
 		}
 
 		// TODO: we might want to allow customization here (this happens for NoValue and SomeValue snaks)
 		return '';
 	}
 
-	private function formatPropertyValueSnak( PropertyValueSnak $snak, $languageCode ) {
+	private function formatPropertyValueSnak( PropertyValueSnak $snak, $languages ) {
 		$dataValue = $snak->getDataValue();
 		$dataTypeId = $this->getDataTypeForProperty( $snak->getPropertyId() );
 
-		return $this->typedValueFormatter->formatToString( $dataValue, $dataTypeId, $languageCode );
+		return $this->typedValueFormatter->formatToString( $dataValue, $dataTypeId, $languages );
 	}
 
 	private function getDataTypeForProperty( EntityId $propertyId ) {
