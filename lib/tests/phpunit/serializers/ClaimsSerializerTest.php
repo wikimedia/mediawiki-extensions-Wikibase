@@ -32,6 +32,7 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
  *

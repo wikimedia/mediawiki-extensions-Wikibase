@@ -28,6 +28,7 @@ use Wikibase\Lib\Serializers\SnakSerializer;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
  *

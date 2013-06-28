@@ -26,6 +26,7 @@ namespace Wikibase\Test;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
  *

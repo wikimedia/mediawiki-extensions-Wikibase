@@ -30,6 +30,7 @@ use Wikibase\Lib\EntityIdParser;
  * @ingroup WikibaseLibTest
  *
  * @group ValueParsers
+ * @group WikibaseLib
  * @group Wikibase
  * @group EntityIdParserTest
  *

@@ -32,6 +32,7 @@ use InvalidArgumentException;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
  * @group WikibaseDescriptionSerializer

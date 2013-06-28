@@ -27,6 +27,7 @@ use Wikibase\Lib\Serializers\SerializationOptions;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
  *
