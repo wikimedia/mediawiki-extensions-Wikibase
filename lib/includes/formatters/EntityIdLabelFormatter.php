@@ -146,12 +146,23 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 			return false;
 		}
 
-		$languageCode = $this->getOption( self::OPT_LANG );
+		$languageFallbackChain = $this->getOption( self::OPT_LANG );
+
+		// back-compat for usages where self::OPT_LANG is a string as a language code
+		if ( is_string( $languageFallbackChain ) ) {
+			return $entity->getLabel( $languageFallbackChain );
+		}
 
 		/**
 		 * @var Entity $entity
 		 */
-		return $entity->getLabel( $languageCode );
+		$extractedData = $languageFallbackChain->extractPreferredValue( $entity->getLabels() );
+
+		if ( $extractedData === null ) {
+			return false;
+		} else {
+			return $extractedData['value'];
+		}
 	}
 
 }
