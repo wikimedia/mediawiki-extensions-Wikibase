@@ -38,7 +38,7 @@ use Wikibase\WikiPageEntityLookup;
  */
 class TypedValueFormatter {
 
-	public function formatToString( DataValue $dataValue, DataType $dataType, $languageCode ) {
+	public function formatToString( DataValue $dataValue, DataType $dataType, $languages ) {
 		// TODO: update this code to obtain the string formatter as soon as corresponding changes
 		// in the DataTypes library have been made.
 
@@ -48,7 +48,7 @@ class TypedValueFormatter {
 		// FIXME: before we can properly use the DataType system some issues to its implementation need
 		// to be solved. Once this is done, this evil if block and function it calls should go.
 		if ( $valueFormatter === false && $dataType->getId() === 'wikibase-item' ) {
-			$valueFormatter = $this->evilGetEntityIdFormatter( $languageCode );
+			$valueFormatter = $this->evilGetEntityIdFormatter( $languages );
 		}
 
 		if ( $valueFormatter === false ) {
@@ -69,7 +69,7 @@ class TypedValueFormatter {
 		return $valueFormatter->format( $dataValue );
 	}
 
-	private function evilGetEntityIdFormatter( $languageCode ) {
+	private function evilGetEntityIdFormatter( $languages ) {
 		$entityLookup = new CachingEntityLoader( new WikiPageEntityLookup( Settings::get( 'repoDatabase' ) ) );
 
 		$prefixMap = array();
@@ -85,7 +85,7 @@ class TypedValueFormatter {
 		$idFormatter = new EntityIdFormatter( $options );
 
 		$options = new FormatterOptions();
-		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languageCode );
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, $languages );
 
 		$labelFormatter = new EntityIdLabelFormatter( $options, $entityLookup );
 		$labelFormatter->setIdFormatter( $idFormatter );
