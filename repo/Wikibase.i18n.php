@@ -2660,7 +2660,6 @@ $messages['cs'] = array(
 	'wikibase-label-empty' => 'Štítek zatím nebyl definován',
 	'wikibase-label-edit-placeholder' => 'vložte štítek',
 	'wikibase-description-empty' => 'Popis není dosud definován',
-	'wikibase-deletedentity' => 'Smazáno ($1)',
 	'wikibase-description-edit-placeholder' => 'zadejte popis',
 	'wikibase-sitelink-site-edit-placeholder' => 'projekt',
 	'wikibase-sitelink-page-edit-placeholder' => 'článek',
@@ -2848,6 +2847,7 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Změněno jedno vymezení|Změněna $4 vymezení|Změněno $4 vymezení}} u {{PLURAL:$3|tvrzení}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Změněna jedna reference|Změněny $4 reference|Změněno $4 referencí}} u {{PLURAL:$3|tvrzení}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Postavení {{PLURAL:$3|tvrzení}} bylo změněno',
+	'wikibase-item-summary-clientsitelink-update' => 'Stránka přesunuta z [$3] na [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Vytvořena nová vlastnost',
 	'wikibase-property-summary-wbeditentity-create' => 'Vytvořena nová vlastnost',
 	'wikibase-property-summary-wbeditentity-update' => 'Aktualizována vlastnost',
@@ -2863,7 +2863,7 @@ Klientská wiki se o změně na {{grammar:6sg|{{SITENAME}}}} dozví, jakmile byl
 	'wikibase-property-summary-special-create-property' => 'Založena vlastnost pro [$2] s {{PLURAL:$1|hodnotou|hodnotami}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Položka',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Média na Commons',
-	'wikibase-listdatatypes-geo-coordinate-head' => 'Zeměpisné souřadnice',
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Zeměpisné souřadnice',
 	'wikibase-listdatatypes-quantity-head' => 'Množství',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Jednojazyčný text',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Vícejazyčný text',
@@ -2995,7 +2995,6 @@ $messages['da'] = array(
 	'wikibase-label-empty' => 'Ingen etiket er endnu fastlagt',
 	'wikibase-label-edit-placeholder' => 'angiv etiket',
 	'wikibase-description-empty' => 'Ingen beskrivelse endnu',
-	'wikibase-deletedentity' => 'Slettet $1',
 	'wikibase-description-edit-placeholder' => 'angiv beskrivelse',
 	'wikibase-sitelink-site-edit-placeholder' => 'websted',
 	'wikibase-sitelink-page-edit-placeholder' => 'artikel',
@@ -3151,6 +3150,7 @@ Din IP-adresse vil blive registreret i redigeringshistorikken for dette/denne $1
 	'special-entitydata' => 'Entitetsdata',
 	'wikibase-entitydata-not-found' => 'Ingen entitet med ID $1 blev fundet.',
 	'wikibase-entitydata-bad-revision' => 'Kan ikke vise version $2 for entitet $1.',
+	'wikibase-entitydata-bad-id' => 'Ugyldig ID: $1',
 	'wikibase-entitydata-unsupported-format' => 'Dataformatet $1 understøttes ikke af denne grænseflade.',
 	'wikibase-entitydata-title' => 'Entitetsdata',
 	'wikibase-entitydata-text' => 'Denne side giver datahenvisninger til entitetsværdier. Angiv entitets-ID i URL-adressen ved hjælp af undersidesyntaks.',
@@ -3197,6 +3197,7 @@ for at finde ud af, hvad der er sket med det.',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Ændrede {{PLURAL:$4|en kvalifikator|$4 kvalifikatorer}} i {{PLURAL:$3|en påstand|$3 påstande}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Ændrede {{PLURAL:$4|en kilde|$4 kilder}} til {{PLURAL:$3|en påstand|$3 påstande}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Ændrede rangering af {{PLURAL:$3|en påstand|$3 påstande}}',
+	'wikibase-item-summary-clientsitelink-update' => 'Side flyttet fra [$3] til [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Oprettede en ny egenskab',
 	'wikibase-property-summary-wbeditentity-create' => 'Oprettede en ny egenskab',
 	'wikibase-property-summary-wbeditentity-update' => 'Opdaterede en egenskab',
@@ -3222,12 +3223,12 @@ for at finde ud af, hvad der er sket med det.',
 * hierarkisk del – implicit del af Iri-streng
 * forespørgsel – implicit del af Iri-streng
 * fragment – implicit del af Iri-streng',
-	'wikibase-listdatatypes-globe-coordinate-head' => 'Geokoordinat', # Fuzzy
-	'wikibase-listdatatypes-globe-coordinate-body' => 'Bogstavelige data for geografisk position givet parvis som breddegrad-længdegrad par i dms eller decimale grader for det angivne himmellegeme. Standard er "Jorden" og derefter "WGS84". Det tilføjer en opløsning og område.
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Kuglekoordinat',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Bogstavelige data for en geografisk position givet som et breddegrad-længdegrad-par i dms eller decimale grader for det angivne himmellegeme. Standard er "Jorden" og derefter "WGS84". Det tilføjer en opløsning og område.
 * breddegrad – implicit første del (float, dms, dm, dd) af koordinatstrengen, retning er enten givet ved fortegn eller ved efterstillet N/S
 * længdegrad – implicit anden del (float, dms, dm, dd) af koordinatstrengen, retning er enten givet ved fortegn eller ved efterstillet E/W
 * højde (valgfrit) – eksplicit (?) værdi for højden over en referenceplanet, for kloden "jorden" ville det være "WGS84"-referencekloden
-* globe (valgfri) – eksplicit (?) dataværdi, givet som himmellegeme der som standard er sat til "Jorden" og derefter "WGS84"', # Fuzzy
+* globe (valgfri) – eksplicit (?) dataværdi, givet som himmellegeme der som standard er sat til "Jorden" og derefter "WGS84"',
 	'wikibase-listdatatypes-quantity-head' => 'Kvantitet',
 	'wikibase-listdatatypes-quantity-body' => 'Bogstaveligt datafelt for en kvantitet, der relaterer sig til en veldefineret enhed. Den faktiske enhed indgår i de dataværdier, der indtastes.
 * værdi – implicit del af strengen (mapping af enhedspræfiks er uklart)
@@ -10507,6 +10508,7 @@ untuk mencari di mana set data itu.',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Menukar {{PLURAL:$4|satu penerang|$4 penerang}} {{PLURAL:$3|tuntutan}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => 'Changed {{PLURAL:$4|satu rujukan|$4 rujukan}} {{PLURAL:$3|tuntutan}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Menukar pangkat {{PLURAL:$3|tuntutan}}',
+	'wikibase-item-summary-clientsitelink-update' => 'Halaman dipindahkan dari [$3] ke [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Mewujudkan sifat baru',
 	'wikibase-property-summary-wbeditentity-create' => 'Sifat baru dicipta',
 	'wikibase-property-summary-wbeditentity-update' => 'Sifat dikemaskinikan',
