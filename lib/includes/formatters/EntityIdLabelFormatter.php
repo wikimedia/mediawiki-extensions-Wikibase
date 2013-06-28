@@ -10,6 +10,7 @@ use ValueFormatters\Result;
 use Wikibase\Entity;
 use Wikibase\EntityId;
 use Wikibase\EntityLookup;
+use Wikibase\LanguageWrapper;
 
 /**
  * This program is free software; you can redistribute it and/or modify
@@ -146,12 +147,24 @@ class EntityIdLabelFormatter extends ValueFormatterBase {
 			return false;
 		}
 
-		$languageCode = $this->getOption( self::OPT_LANG );
+		$languages = $this->getOption( self::OPT_LANG );
+
+		// back-compat for usages where $languages is a string
+		if ( is_string( $languages ) ) {
+			$languages = array( LanguageWrapper::factory( Language::factory( $languages ) ) );
+		}
 
 		/**
 		 * @var Entity $entity
 		 */
-		return $entity->getLabel( $languageCode );
+		foreach ( $languages as $language ) {
+			$label = $entity->getLabel( $language->getFetchLanguage()->getCode() );
+			if ( $label !== false ) {
+				return $language->translate( $label );
+			}
+		}
+
+		return false;
 	}
 
 }
