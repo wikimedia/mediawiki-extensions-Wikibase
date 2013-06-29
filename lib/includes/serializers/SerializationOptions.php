@@ -1,10 +1,12 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
+use Language;
 use MWException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\EntityId;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\LanguageUtils;
 
 /**
  * Options for Serializer objects.
@@ -141,14 +143,46 @@ class MultiLangSerializationOptions extends SerializationOptions {
 	protected $languageCodes = null;
 
 	/**
-	 * Sets the language codes of the languages for which internationalized data (ie descriptions) should be returned.
+	 * The language fallback chains of languages defined in $languageCodes. When $languageCodes is null, this is null
+	 * too currently, but don't depend on anything in this variable for forward compatibility reasons in this case.
+	 *
+	 * @since 0.4
+	 *
+	 * @var null|array of LanguageFallbackChain
+	 */
+	protected $languageFallbackChains = null;
+
+	/**
+	 * Sets the language codes or language fallback chains of the languages for which internationalized data
+	 * (ie descriptions) should be returned.
 	 *
 	 * @since 0.2
 	 *
-	 * @param array|null $languageCodes
+	 * @param array|null $languages array of strings (back compat, as language codes)
+	 *                     or LanguageFallbackChain objects (requested language codes as keys, to identify chains)
 	 */
-	public function setLanguages( array $languageCodes = null ) {
-		$this->languageCodes = $languageCodes;
+	public function setLanguages( array $languages = null ) {
+		if ( $languages === null ) {
+			$this->languageCodes = null;
+			$this->languageFallbackChains = null;
+
+			return;
+		}
+
+		$this->languageCodes = array();
+		$this->languageFallbackChains = array();
+
+		foreach ( $languages as $languageCode => $languageFallbackChain ) {
+			if ( is_numeric( $languageCode ) ) {
+				$languageCode = $languageFallbackChain;
+				$languageFallbackChain = LanguageUtils::getFallbackChain(
+					Language::factory( $languageCode ), LanguageUtils::FALLBACK_SELF
+				);
+			}
+
+			$this->languageCodes[] = $languageCode;
+			$this->languageFallbackChains[] = $languageFallbackChain;
+		}
 	}
 
 	/**
@@ -160,6 +194,21 @@ class MultiLangSerializationOptions extends SerializationOptions {
 	 */
 	public function getLanguages() {
 		return $this->languageCodes;
+	}
+
+	/**
+	 * Gets an associative array with language codes as keys and their fallback chains as values, or null.
+	 *
+	 * @since 0.4
+	 *
+	 * @return array|null
+	 */
+	public function getLanguageFallbackChains() {
+		if ( $this->languageCodes === null ) {
+			return null;
+		} else {
+			return array_combine( $this->languageCodes, $this->languageFallbackChains );
+		}
 	}
 }
 
