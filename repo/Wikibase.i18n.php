@@ -935,7 +935,8 @@ This is an error message for a situation where the arguments to the API is incon
 	'wikibase-api-edit-conflict' => 'There is an edit conflict that that could not be resolved. This can have several reasons, but there is only a generic message for all of them.',
 	'wikibase-self-conflict-patched' => 'Warning issued when an edit is made based on an old revision, clean patching was not possible, but all intermediate edits where made by the same user, so aggressive patching was applied, overriding earlier changes by the same user. This may happen e.g. when editing the same item in multiple browser windows. This warning is usually not displayed.',
 	'wikibase-conflict-patched' => 'Warning issued when an edit is made based on an old revision, but the edit conflict could be resolved by patching. This warning is usually not displayed.',
-	'wikibase-restoreold' => "Link text shown on the link that lets the user restore the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
+	'wikibase-restoreold' => "Link text shown on the link that lets the user restore the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.
+{{Identical|Restore}}",
 	'wikibase-restore-summary' => 'Edit summary for a restore action. Parameters:
 * $1 - the revision id number
 * $2 - the username whose changes are being undone',
@@ -1964,6 +1965,7 @@ $messages['be-tarask'] = array(
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => '{{PLURAL:$4|Зьменены $4 кваліфікатар|Зьмененыя $4 кваліфікатары|Зьмененыя $4 кваліфікатараў}} у {{PLURAL:$3|сьцьверджаньні|сьцьверджаньнях}}',
 	'wikibase-item-summary-wbsetclaim-update-references' => '{{PLURAL:$4|Зьмененая $4 крыніца|Зьмененыя $4 крыніцы|Зьмененыя $4 крыніц}} у {{PLURAL:$3|сьцьверджаньні|сьцьверджаньнях}}',
 	'wikibase-item-summary-wbsetclaim-update-rank' => 'Зьменены ранг {{PLURAL:$3|сьцьверджаньня|сьцьверджаньняў}}',
+	'wikibase-item-summary-clientsitelink-update' => 'Старонка перанесеная з [$3] у [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Створаная новая ўласьцівасьць',
 	'wikibase-property-summary-wbeditentity-create' => 'Створаная новая ўласьцівасьць',
 	'wikibase-property-summary-wbeditentity-update' => 'Абноўленая ўласьцівасьць',
@@ -9506,18 +9508,37 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 
 /** Lithuanian (lietuvių)
  * @author Eitvys200
+ * @author Hugo.arg
  */
 $messages['lt'] = array(
 	'wikibase-edit' => 'redaguoti',
 	'wikibase-save' => 'išsaugoti',
 	'wikibase-cancel' => 'atšaukti',
 	'wikibase-add' => 'pridėti',
+	'wikibase-addqualifier' => 'pridėti kvalifikatorių',
+	'wikibase-addreference' => 'pridėti šaltinį',
 	'wikibase-save-inprogress' => 'Saugoma...',
 	'wikibase-remove-inprogress' => 'Šalinama...',
+	'wikibase-label-empty' => 'Dar nėra žymos',
+	'wikibase-label-edit-placeholder' => 'įvesti žymą',
+	'wikibase-description-empty' => 'Dar nėra aprašo',
+	'wikibase-description-edit-placeholder' => 'įvesti aprašą',
 	'wikibase-sitelink-site-edit-placeholder' => 'svetainė',
 	'wikibase-sitelink-page-edit-placeholder' => 'straipsnis',
+	'wikibase-statements' => 'Faktinė informacija',
+	'wikibase-terms' => 'Kitomis kalbomis',
 	'wikibase-remove' => 'pašalinti',
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|įvestis|įvestys|įvesčių}}',
 	'wikibase-aliases-label' => 'Taip pat žinomas kaip:',
+	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|šaltinis|šaltiniai|šaltinių}}',
+	'wikibase-statementview-referencesheading-pendingcountertooltip' => '{{PLURAL:$1|Vienas šaltinis|$1 šaltiniai}} dar neišsaugoti',
+	'wikibase-snakview-property-input-placeholder' => 'savybė',
+	'wikibase-shortcopyrightwarning' => 'Paspausdamas "$1", jūs sutinkate su [[$2|naudojimo taisyklėmis]] ir neatšaukiamai sutinkate savo indėlį platinti pagal $3.',
+	'wikibase-copyrighttooltip-acknowledge' => 'Aš sutinku su šiomis taisyklėmis darydamas keitimus ateityje. Daugiau nerodykite šio pranešimo.',
+	'wikibase-entityselector-more' => 'daugiau',
+	'wikibase-anonymouseditwarning' => 'Dėmesio: Jūs neprisijungęs.
+Jūsų IP adresas bus įrašytas į šio $1 keitimų istoriją.',
+	'wikibase-restrictionedit-tooltip-message' => 'Puslapis apsaugotas. Keitimai negalimi.',
 	'wikibase-restoreold' => 'perkrauti',
 );
 
