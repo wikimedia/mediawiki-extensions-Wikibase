@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
+use Wikibase\LanguageFallbackChainFactory;
 
 /**
  * Tests for the Wikibase\SerializationOptions class.
@@ -33,12 +35,79 @@ use Wikibase\Lib\Serializers\SerializationOptions;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Liangent < liangent@gmail.com >
  */
 class SerializationOptionsTest extends \MediaWikiTestCase {
 
-	public function testConstructor() {
+	public function testSerializationOptionsConstructor() {
 		new SerializationOptions();
 		$this->assertTrue( true );
+	}
+
+	public function testMultiLangSerializationOptionsConstructor() {
+		new MultiLangSerializationOptions();
+		$this->assertTrue( true );
+	}
+
+	private function preprocessTestMultiLangSerializationOptionsLanguages( $languages ) {
+		if ( $languages === null ) {
+			return null;
+		}
+
+		$factory = new LanguageFallbackChainFactory();
+
+		foreach ( $languages as $languageKey => &$languageValue ) {
+			if ( !is_numeric( $languageKey ) ) {
+				$languageValue = $factory->newFromLanguage(
+					\Language::factory( $languageKey ), $languageValue
+				);
+			}
+		}
+
+		return $languages;
+	}
+
+	/**
+	 * @dataProvider provideTestMultiLangSerializationOptionsLanguages
+	 */
+	public function testMultiLangSerializationOptionsLanguages( $languages, $codes, $fallbackChains ) {
+		$languages = $this->preprocessTestMultiLangSerializationOptionsLanguages( $languages );
+		$fallbackChains = $this->preprocessTestMultiLangSerializationOptionsLanguages( $fallbackChains );
+
+		$options = new MultiLangSerializationOptions();
+		$options->setLanguages( $languages );
+
+		$this->assertEquals( $codes, $options->getLanguages() );
+		$this->assertEquals( $fallbackChains, $options->getLanguageFallbackChains() );
+	}
+
+	public function provideTestMultiLangSerializationOptionsLanguages() {
+		return array(
+			array( null, null, null ),
+			array( array( 'en' ), array( 'en' ), array( 'en' => LanguageFallbackChainFactory::FALLBACK_SELF ) ),
+			array( array( 'en', 'de' ), array( 'en', 'de' ), array(
+				'en' => LanguageFallbackChainFactory::FALLBACK_SELF, 'de' => LanguageFallbackChainFactory::FALLBACK_SELF
+			) ),
+			array(
+				array( 'en', 'zh' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS ),
+				array( 'en', 'zh' ),
+				array(
+					'en' => LanguageFallbackChainFactory::FALLBACK_SELF,
+					'zh' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				),
+			),
+			array(
+				array(
+					'de-formal' => LanguageFallbackChainFactory::FALLBACK_OTHERS,
+					'sr' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				),
+				array( 'de-formal', 'sr' ),
+				array(
+					'de-formal' => LanguageFallbackChainFactory::FALLBACK_OTHERS,
+					'sr' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				),
+			),
+		);
 	}
 
 }
