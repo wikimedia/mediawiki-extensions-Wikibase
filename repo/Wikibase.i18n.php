@@ -228,6 +228,11 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-entitydata-unsupported-format' => "The data format $1 is not supported by this interface.",
 	'wikibase-entitydata-title' => 'Entity Data',
 	'wikibase-entitydata-text' => 'This page provides a linked data interface to entity values. Please provide the entity ID in the URL, using subpage syntax.',
+	'special-mylanguagefallbackchain' => 'My language fallback chain',
+	'wikibase-mylanguagefallbackchain-text' => 'The language fallback chain used to display entity labels for you is shown below.',
+	'wikibase-mylanguagefallbackchain-babel' => 'You can edit it by putting <nowiki>{{#babel: }}</nowiki> on your [[Special:MyPage|user page]].',
+	'wikibase-mylanguagefallbackchain-verbatim-item' => '$1',
+	'wikibase-mylanguagefallbackchain-converted-item' => '$1 (converted from $2)',
 
 	// API errors - these messages should not be translated
 	'wikibase-api-aliases-invalid-list' => 'Use either "set" or "add"/"remove" parameters.', # Do not translate
