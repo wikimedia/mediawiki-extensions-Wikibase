@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9daf9a7_831a126b",
+        "filename": "lib/includes/LanguageWithConversion.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-30T19:50:15Z",
+      "side": 1,
+      "message": "not a blocker, but perhaps have $langCode \u003d $language-\u003egetCode(); above and then use that in both places here and in line 87?",
+      "revId": "24380d92b02efcc7461e595801ce99b6eee2a89d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
