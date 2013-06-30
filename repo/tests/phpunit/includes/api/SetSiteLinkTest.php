@@ -36,6 +36,7 @@ use ApiTestCase;
  * @group WikibaseAPI
  * @group SetSiteLinkTest
  * @group BreakingTheSlownessBarrier
+ * @group XXX
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -186,8 +187,7 @@ class SetSiteLinkTest extends ModifyItemBase {
 				array( 'site' => 'dewiki', 'title' => 'London' ), // by sitelink
 				'svwiki', // not set
 				'', // remove the entry
-				false, // will fail
-				'should not be able to remove non-existing link' //XXX: shouldn't that rather be a warning?!
+				false, // expect nothing
 			),
 		);
 	}
@@ -228,13 +228,20 @@ class SetSiteLinkTest extends ModifyItemBase {
 
 			// check the response -------------------------------
 			//$this->assertSuccess( $res, 'entity', 'sitelinks', 0 );
-			$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
+			if ( $expectedTitle !== false ) {
+				$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
+			}
+
 			$this->assertArrayHasKey( 'lastrevid', $res['entity'] , 'entity should contain lastrevid key' );
 
-			$link = array_shift( $res['entity']['sitelinks'] );
-			$this->assertEquals( $linksite, $link['site'] );
+			if ( $expectedTitle !== false ) {
+				$link = array_shift( $res['entity']['sitelinks'] );
+				$this->assertEquals( $linksite, $link['site'] );
+			} else {
+				$link = null;
+			}
 
-			if ( $linktitle === '' ) {
+			if ( $linktitle === '' && $link !== null ) {
 				$this->assertArrayHasKey( 'removed', $link );
 			}
 
@@ -245,7 +252,7 @@ class SetSiteLinkTest extends ModifyItemBase {
 			if ( $expectedTitle !== false && $linktitle !== '' ) {
 				$this->assertArrayHasKey( 'url', $link );
 			}
-			else {
+			elseif ( $link !== null ) {
 				$this->assertArrayNotHasKey( 'url', $link );
 			}
 		} catch ( \UsageException $e ) {
