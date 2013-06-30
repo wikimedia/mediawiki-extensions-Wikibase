@@ -186,13 +186,36 @@ final class Utils {
 		// Second pass to get other languages from system fallback chain
 		foreach ( $babels as $languageCodes ) {
 			foreach ( $languageCodes as $languageCode ) {
-				$chain = array_merge( $chain, self::getLanguageFallbackChainInternal(
+				// Special case for English: In Language::getFallbacksFor(), 'en' is always added
+				// to every fallback chain, but we want it to be the last one of the merged chain.
+				if ( isset( $fetched['en'] ) ) { // User has already explicitly chosen to see English.
+					$enWanted = true;
+				} else {
+					$mwFallbacks = Language::getLocalisationCache()->getItem( $languageCode, 'fallback' );
+					$mwFallbacks = array_map( 'trim', explode( ',', $mwFallbacks ) );
+					$enWanted = ( $mwFallbacks[count( $mwFallbacks ) - 1] === 'en' );
+				}
+
+				$languageChain = self::getLanguageFallbackChainInternal(
 					Language::factory( $languageCode ),
 					self::LANGUAGE_FALLBACK_OTHERS | self::LANGUAGE_FALLBACK_VARIANTS,
 					$fetched
-				) );
+				);
+
+				if ( !$enWanted ) {
+					// The last item in $languageChain must be for English (not converted).
+					unset( $fetched['en'] );
+					unset( $languageChain[count( $languageChain ) - 1] );
+				}
+
+				$chain = array_merge( $chain, $languageChain );
 			}
 		}
+
+		// Add English back to the end of the chain if it's not already there (indicated by $fetched['en']).
+		$chain = array_merge( $chain, self::getLanguageFallbackChainInternal(
+			Language::factory( 'en' ), self::LANGUAGE_FALLBACK_ALL, $fetched
+		) );
 
 		$cache[$user->getName()] = $chain;
 
