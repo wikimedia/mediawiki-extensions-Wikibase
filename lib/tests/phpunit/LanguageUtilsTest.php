@@ -145,4 +145,12 @@ class LanguageUtilsTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @group WikibaseUtils
+	 */
+	public function testGetFallbackChainFromContext() {
+		$chain = LanguageUtils::getFallbackChainFromContext( \RequestContext::getMain() );
+		$this->assertTrue( is_array( $chain ) );
+	}
+
 }
