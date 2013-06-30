@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use MWException;
 use SiteStore;
 use Sites;
 use Site;
@@ -156,7 +157,7 @@ class LangLinkHandler {
 	 * @param ParserOutput $out
 	 * @param array $repoLinks An array that uses global site IDs as keys.
 	 *
-	 * @return array A filtered copy of $repoLinks, which any inappropriate
+	 * @return array A filtered copy of $repoLinks, with any inappropriate
 	 *         entries removed.
 	 */
 	public function suppressRepoLinks( ParserOutput $out, $repoLinks ) {
@@ -165,6 +166,11 @@ class LangLinkHandler {
 		$nel = $this->getNoExternalLangLinks( $out );
 
 		foreach ( $nel as $code ) {
+			if ( $code === '*' ) {
+				// all are suppressed
+				return array();
+			}
+
 			$site = $this->getSiteByNavigationId( $code );
 
 			if ( $site === false ) {
@@ -176,6 +182,42 @@ class LangLinkHandler {
 		}
 
 		unset( $repoLinks[$this->siteId] ); // remove self-link
+
+		wfProfileOut( __METHOD__ );
+		return $repoLinks;
+	}
+
+	/**
+	 * Filters the given list of links by site group:
+	 * Any links pointing to a site that is not in $allowedGroups will be removed.
+	 *
+	 * @since  0.4
+	 *
+	 * @param array $repoLinks An array that uses global site IDs as keys.
+	 * @param array $allowedGroups A list of allowed site groups
+	 *
+	 * @return array A filtered copy of $repoLinks, retaining only the links
+	 *         pointing to a site in an allowed group.
+	 */
+	public function filterRepoLinksByGroup( array $repoLinks, array $allowedGroups ) {
+		wfProfileIn( __METHOD__ );
+
+		foreach ( $repoLinks as $wiki => $page ) {
+			$site = $this->sites->getSite( $wiki );
+
+			if ( $site === null ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ': skipping link to unknown site ' . $wiki );
+
+				unset( $repoLinks[$wiki] );
+				continue;
+			}
+
+			if ( !in_array( $site->getGroup(), $allowedGroups ) ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ': skipping link to other group: ' . $wiki . ' belongs to ' . $site->getGroup() );
+				unset( $repoLinks[$wiki] );
+				continue;
+			}
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $repoLinks;
@@ -331,7 +373,7 @@ class LangLinkHandler {
 	 * {{#noexternallanglinks}} function on the page.
 	 *
 	 * The result is an associative array of links that should be added to the
-	 * current page, excluding any target languages for which there already is a
+	 * current page, excluding any target sites for which there already is a
 	 * link on the page.
 	 *
 	 * @since 0.4
@@ -350,12 +392,16 @@ class LangLinkHandler {
 			return array();
 		}
 
+		//TODO: make $allowedGroups configurable
+		$allowedGroups = array( $this->getSiteGroup() );
+
 		$onPageLinks = $out->getLanguageLinks();
 		$onPageLinks = $this->localLinksToArray( $onPageLinks );
 
 		$repoLinks = $this->getEntityLinks( $title );
-
 		$repoLinks = $this->repoLinksToArray( $repoLinks );
+
+		$repoLinks = $this->filterRepoLinksByGroup( $repoLinks, $allowedGroups );
 		$repoLinks = $this->suppressRepoLinks( $out, $repoLinks );
 
 		$repoLinks = array_diff_key( $repoLinks, $onPageLinks ); // remove local links
@@ -384,7 +430,7 @@ class LangLinkHandler {
 		foreach ( $repoLinks as $wiki => $page ) {
 			$targetSite = $this->sites->getSite( $wiki );
 			if ( !$targetSite ) {
-				trigger_error( "Unknown wiki '$wiki' used as sitelink target", E_USER_WARNING );
+				wfLogWarning( "Unknown wiki '$wiki' used as sitelink target" );
 				continue;
 			}
 
@@ -402,6 +448,22 @@ class LangLinkHandler {
 		}
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Returns the local wiki's site group.
+	 * This is based on the siteId provided to the constructor.
+	 *
+	 * @return string
+	 * @throws \MWException
+	 */
+	public function getSiteGroup() {
+		$thisSite = $this->sites->getSite( $this->siteId );
+		if ( !$thisSite ) {
+			throw new MWException( "Unable to resolve site ID '{$this->siteId}'!" );
+		}
+
+		return $thisSite->getGroup();
 	}
 
 	/**
