@@ -39,7 +39,7 @@ class MockSiteStore implements SiteStore {
 	/**
 	 * @var Site[]
 	 */
-	private $sites;
+	private $sites = array();
 
 	/**
 	 * Returns a SiteStore object that contains TestSites::getSites().
@@ -48,14 +48,7 @@ class MockSiteStore implements SiteStore {
 	 * @return SiteStore
 	 */
 	public static function newFromTestSites() {
-		$testSites = TestSites::getSites();
-
-		$sites = array();
-		foreach( $testSites as $site ) {
-			$sites[$site->getGlobalId()] = $site;
-		}
-
-		$store = new MockSiteStore( $sites );
+		$store = new MockSiteStore( TestSites::getSites() );
 		return $store;
 	}
 
@@ -63,7 +56,7 @@ class MockSiteStore implements SiteStore {
 	 * @param array $sites
 	 */
 	public function __construct( $sites = array() ) {
-		$this->sites = $sites;
+		$this->saveSites( $sites );
 	}
 
 	/**
