@@ -736,6 +736,12 @@ final class ClientHooks {
 	 */
 	public static function onTitleMoveComplete( $oldTitle, $newTitle, $user, $pageId, $redirectId ) {
 		wfProfileIn( __METHOD__ );
+
+		if ( Settings::get( 'propagateChangesToRepo' ) !== true ) {
+			wfProfileOut( __METHOD__ );
+			return true;
+		}
+
 		$repoDB = Settings::get( 'repoDatabase' );
 		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
 		$jobQueueGroup = \JobQueueGroup::singleton( $repoDB );
