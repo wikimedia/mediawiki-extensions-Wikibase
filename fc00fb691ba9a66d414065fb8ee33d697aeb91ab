@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9daf9a7_4342da42",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-30T19:45:46Z",
+      "side": 1,
+      "message": "To make the code easier to read, I would split this code out and put above.  then pass a $languageChain or some variable here.",
+      "revId": "fc00fb691ba9a66d414065fb8ee33d697aeb91ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9daf9a7_2336c6e6",
+        "filename": "lib/includes/SnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-30T19:45:46Z",
+      "side": 1,
+      "message": "language objects or language codes? maybe add a comment to specify",
+      "revId": "fc00fb691ba9a66d414065fb8ee33d697aeb91ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9daf9a7_833332f5",
+        "filename": "lib/includes/SnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-30T19:45:46Z",
+      "side": 1,
+      "message": "$languages should get an array type hint",
+      "revId": "fc00fb691ba9a66d414065fb8ee33d697aeb91ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9daf9a7_c34d2a75",
+        "filename": "lib/includes/SnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-30T19:45:46Z",
+      "side": 1,
+      "message": "please add an array type hint",
+      "revId": "fc00fb691ba9a66d414065fb8ee33d697aeb91ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9daf9a7_6330bee8",
+        "filename": "lib/includes/SnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-30T19:45:46Z",
+      "side": 1,
+      "message": "please add an array type hint",
+      "revId": "fc00fb691ba9a66d414065fb8ee33d697aeb91ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9daf9a7_43393ad5",
+        "filename": "lib/includes/TypedValueFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-06-30T19:45:46Z",
+      "side": 1,
+      "message": "is $languages an array of Language objects or language codes?\n\nalso, while this class is lacking documentation, if you could add documentation for the function parameters that would be helpful.",
+      "revId": "fc00fb691ba9a66d414065fb8ee33d697aeb91ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
