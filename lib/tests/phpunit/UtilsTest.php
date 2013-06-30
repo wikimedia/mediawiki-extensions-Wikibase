@@ -150,6 +150,14 @@ class UtilsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseUtils
+	 */
+	public function testGetLanguageFallbackChainFromContext() {
+		$chain = Utils::getLanguageFallbackChainFromContext( \RequestContext::getMain() );
+		$this->assertTrue( is_array( $chain ) );
+	}
+
+	/**
+	 * @group WikibaseUtils
 	 * @dataProvider providerGetLanguageCodes
 	 */
 	public function testGetLanguageCodes( $lang ) {

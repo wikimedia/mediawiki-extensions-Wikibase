@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Sanitizer, UtfNormal, Language, SiteList, SiteSQLStore;
+use Sanitizer, UtfNormal, Language, SiteList, SiteSQLStore, IContextSource;
 
 /**
  * Utility functions for Wikibase.
@@ -121,6 +121,80 @@ final class Utils {
 				) );
 			}
 		}
+
+		return $chain;
+	}
+
+	/**
+	 * Returns the fallback chain for a context, currently based on data provided by Extension:Babel.
+	 *
+	 * @param IContextSource $context
+	 *
+	 * @return array of LanguageWithConversion objects
+	 */
+	public static function getLanguageFallbackChainFromContext( IContextSource $context ) {
+		static $cache = array();
+		static $levels = null;
+		$user = $context->getUser();
+
+		if ( !class_exists( 'Babel' ) || $user->isAnon() ) {
+			return self::getLanguageFallbackChain( $context->getLanguage() );
+		}
+
+		if ( isset( $cache[$user->getName()] ) ) {
+			return $cache[$user->getName()];
+		}
+
+		if ( $levels === null ) {
+			global $wgBabelCategoryNames;
+			$levels = array_keys( $wgBabelCategoryNames );
+			rsort( $levels );
+		}
+
+		$fetched = array();
+		$chain = array();
+		$babels = array();
+		$contextLanguage = array( $context->getLanguage()->getCode() );
+
+		if ( count( $levels ) ) {
+			// A little redundant but it's the only way to get required information with current Babel API.
+			$previousLevelBabel = array();
+			foreach ( $levels as $level ) {
+				// Make the current language at the top of the chain.
+				$levelBabel = array_unique( array_merge(
+					$contextLanguage, \Babel::getUserLanguages( $user, $level )
+				) );
+				$babels[$level] = array_diff( $levelBabel, $previousLevelBabel );
+				$previousLevelBabel = $levelBabel;
+			}
+		} else {
+			// Just in case
+			$babels['N'] = $contextLanguage;
+		}
+
+		// First pass to get "compatible" languages (self and variants)
+		foreach ( $babels as $languageCodes ) { // Already sorted when added
+			foreach ( array( self::LANGUAGE_FALLBACK_SELF, self::LANGUAGE_FALLBACK_VARIANTS ) as $mode ) {
+				foreach ( $languageCodes as $languageCode ) {
+					$chain = array_merge( $chain, self::getLanguageFallbackChainInternal(
+						Language::factory( $languageCode ), $mode, $fetched
+					) );
+				}
+			}
+		}
+
+		// Second pass to get other languages from system fallback chain
+		foreach ( $babels as $languageCodes ) {
+			foreach ( $languageCodes as $languageCode ) {
+				$chain = array_merge( $chain, self::getLanguageFallbackChainInternal(
+					Language::factory( $languageCode ),
+					self::LANGUAGE_FALLBACK_OTHERS | self::LANGUAGE_FALLBACK_VARIANTS,
+					$fetched
+				) );
+			}
+		}
+
+		$cache[$user->getName()] = $chain;
 
 		return $chain;
 	}
