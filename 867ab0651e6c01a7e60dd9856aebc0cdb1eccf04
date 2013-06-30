@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9daf9a7_9815619c",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2013-06-30T17:55:06Z",
+      "side": 1,
+      "message": "Avoid trailing line comments (more below).",
+      "revId": "867ab0651e6c01a7e60dd9856aebc0cdb1eccf04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
