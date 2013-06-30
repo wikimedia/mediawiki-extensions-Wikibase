@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use MWException;
 use SiteStore;
 use Sites;
 use Site;
@@ -331,7 +332,7 @@ class LangLinkHandler {
 	 * {{#noexternallanglinks}} function on the page.
 	 *
 	 * The result is an associative array of links that should be added to the
-	 * current page, excluding any target languages for which there already is a
+	 * current page, excluding any target sites for which there already is a
 	 * link on the page.
 	 *
 	 * @since 0.4
@@ -369,6 +370,9 @@ class LangLinkHandler {
 	 * to the ParserOutput object, taking into account any applicable
 	 * configuration and any use of the {{#noexternallanglinks}} function on the page.
 	 *
+	 * This ignores all sitelinks that do not point to a site in the group returned
+	 * by $this->getSiteGroup().
+	 *
 	 * The language links are not sorted, call sortLanguageLinks() to do that.
 	 *
 	 * @since 0.4
@@ -381,10 +385,18 @@ class LangLinkHandler {
 
 		$repoLinks = $this->getEffectiveRepoLinks( $title, $out );
 
+		$ownGroup = $this->getSiteGroup();
+
 		foreach ( $repoLinks as $wiki => $page ) {
 			$targetSite = $this->sites->getSite( $wiki );
 			if ( !$targetSite ) {
 				trigger_error( "Unknown wiki '$wiki' used as sitelink target", E_USER_WARNING );
+				continue;
+			}
+
+			// Would be nice to do the filtering in getEntityLinks() already.
+			// But here we already have the Site objects - easier for now.
+			if ( $targetSite->getGroup() !== $ownGroup ) {
 				continue;
 			}
 
@@ -402,6 +414,22 @@ class LangLinkHandler {
 		}
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Returns the local wiki's site group.
+	 * This is based on the siteId provided to the constructor.
+	 *
+	 * @return string
+	 * @throws \MWException
+	 */
+	public function getSiteGroup() {
+		$thisSite = $this->sites->getSite( $this->siteId );
+		if ( !$thisSite ) {
+			throw new MWException( "Unable to resolve site ID '{$this->siteId}'!" );
+		}
+
+		return $thisSite->getGroup();
 	}
 
 	/**
