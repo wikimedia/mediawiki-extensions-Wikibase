@@ -31,6 +31,7 @@ use Wikibase\Lib\Serializers\EntitySerializationOptions;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
  *

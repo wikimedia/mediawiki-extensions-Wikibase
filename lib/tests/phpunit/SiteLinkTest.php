@@ -29,6 +29,7 @@ use Wikibase\SiteLink;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseDataModel
  * @group SiteLink
