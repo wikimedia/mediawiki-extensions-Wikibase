@@ -29,6 +29,7 @@ $specialPageAliases['en'] = array(
 	'SetSiteLink' => array( 'SetSiteLink' ),
 	'EntitiesWithoutLabel' => array( 'EntitiesWithoutLabel' ),
 	'ItemsWithoutSitelinks' => array( 'ItemsWithoutSitelinks' ),
+	'MyLanguageFallbackChain' => array( 'MyLanguageFallbackChain' ),
 );
 
 /** Arabic (العربية) */
