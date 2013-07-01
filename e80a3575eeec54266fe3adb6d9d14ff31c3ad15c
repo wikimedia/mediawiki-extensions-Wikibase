@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c9cff5e9_b1620240",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-01T21:04:36Z",
+      "side": 1,
+      "message": "Well I\u0027m just copying text from another class and changing a few words...",
+      "parentUuid": "c9cff5e9_b105e2c6",
+      "revId": "e80a3575eeec54266fe3adb6d9d14ff31c3ad15c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9cff5e9_11202e4b",
         "filename": "lib/includes/LanguageFallbackChain.php",
         "patchSetId": 14
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "c9cff5e9_b1c32209",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-01T21:04:36Z",
+      "side": 1,
+      "message": "There\u0027ll be a newFromContext later, originally at Change-Id: Id5c2131cd072506ffeed1d53d7d0dfdba0c8e782",
+      "parentUuid": "c9cff5e9_f1b2ba04",
+      "revId": "e80a3575eeec54266fe3adb6d9d14ff31c3ad15c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9cff5e9_91bd3ed7",
         "filename": "lib/includes/LanguageFallbackChain.php",
         "patchSetId": 14
@@ -64,6 +100,24 @@
       "writtenOn": "2013-07-01T20:23:20Z",
       "side": 1,
       "message": "what about a function to get the language and mode of the object?",
+      "revId": "e80a3575eeec54266fe3adb6d9d14ff31c3ad15c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_91c89e24",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-01T21:04:36Z",
+      "side": 1,
+      "message": "A specified language is not the only source of a fallback chain.",
+      "parentUuid": "c9cff5e9_91bd3ed7",
       "revId": "e80a3575eeec54266fe3adb6d9d14ff31c3ad15c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
