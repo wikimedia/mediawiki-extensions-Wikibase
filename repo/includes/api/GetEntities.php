@@ -13,6 +13,7 @@ use Wikibase\StoreFactory;
 use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\EntityContentFactory;
+use Wikibase\Settings;
 
 /**
  * API module to get the data for one or more Wikibase entities.
@@ -26,6 +27,7 @@ use Wikibase\EntityContentFactory;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
 class GetEntities extends ApiWikibase {
 
@@ -49,6 +51,7 @@ class GetEntities extends ApiWikibase {
 			$numSites = count( $params['sites'] );
 			$numTitles = count( $params['titles'] );
 			$max = max( $numSites, $numTitles );
+
 			if ( $numSites === 0 || $numTitles === 0 ) {
 				wfProfileOut( __METHOD__ );
 				$this->dieUsage( $this->msg( 'wikibase-api-ids-xor-wikititles' )->text(), 'id-xor-wikititle' );
@@ -57,18 +60,32 @@ class GetEntities extends ApiWikibase {
 				$idxSites = 0;
 				$idxTitles = 0;
 
+				$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
 				for ( $k = 0; $k < $max; $k++ ) {
 					$siteId = $params['sites'][$idxSites++ % $numSites];
 					$title = Utils::trimToNFC( $params['titles'][$idxTitles++ % $numTitles] );
 
-					$id = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $title );
+					$id = $siteLinkCache->getItemIdForLink( $siteId, $title );
+
+					// Try harder by requesting normalization on the external site.
+					// For performance reasons we only do this if the user asked for it and only for one title!
+					if ( $id === false && $numSites === 1 && $numTitles === 1 && $params['normalize'] === true
+						&& Settings::get( 'normalizeItemByTitlePageNames' ) === true )
+					{
+						$siteObj = \SiteSQLStore::newInstance()->getSite( $siteId );
+						if ( $siteObj ) {
+							$title = $siteObj->normalizePageName( $title );
+							if ( $title !== false ) {
+								$id = $siteLinkCache->getItemIdForLink( $siteId, $title );
+							}
+						}
+					}
 
 					if ( $id === false ) {
 						$this->getResult()->addValue( 'entities', (string)(--$missing),
 							array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
 						);
-					}
-					else {
+					} else {
 						$id = new EntityId( Item::ENTITY_TYPE, $id );
 						$params['ids'][] = $id->getPrefixedId();
 					}
@@ -247,6 +264,10 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
+			'normalize' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false
+			),
 		) );
 	}
 
@@ -275,6 +296,9 @@ class GetEntities extends ApiWikibase {
 			),
 			'languages' => array( 'By default the internationalized values are returned in all available languages.',
 				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
+			),
+			'normalize' => array( 'Try to normalize the page title against the client site.',
+				'This only works if exactly one site and one page have been given.'
 			),
 		) );
 	}
