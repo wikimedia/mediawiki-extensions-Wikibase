@@ -137,10 +137,14 @@ $messages['ast'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Inda nun hai sofitu pa xestionar valores de datos de tipu «$1».',
 	'valueview-expert-emptyvalue-empty' => 'balero',
 	'valueview-expert-globecoordinateinput-precision' => 'Precisión:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Gregorianu',
+	'valueview-expert-timevalue-calendar-julian' => 'Xulianu',
 	'valueview-expert-timeinput-precision' => 'Precisión:',
 	'valueview-expert-timeinput-calendar' => 'Calendariu:',
-	'valueview-expert-timeinput-calendarhint' => '(calendariu $1)',
-	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; cambiar al $1',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Calendariu gregorianu)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Calendariu xulianu)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; cambiar a gregorianu',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; cambiar a xulianu',
 	'valueview-preview-label' => 'veráse como:',
 	'valueview-preview-novalue' => 'nun se reconoció dengún valor válidu',
 	'valueview-listrotator-auto' => 'automáticu',
@@ -235,9 +239,11 @@ $messages['el'] = array(
 );
 
 /** British English (British English)
+ * @author Shirayuki
  */
 $messages['en-gb'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Handling of "$1" data values is not yet supported.', # Fuzzy
+	'valueview-preview-novalue' => 'no valid value recognised',
 );
 
 /** Spanish (español)
@@ -538,10 +544,14 @@ $messages['nl'] = array(
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Het verwerken van waarden van het gegevenstype "$1" wordt nog niet ondersteund.',
 	'valueview-expert-emptyvalue-empty' => 'leeg',
 	'valueview-expert-globecoordinateinput-precision' => 'Precisie:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'Gregoriaanse',
+	'valueview-expert-timevalue-calendar-julian' => 'Juliaanse',
 	'valueview-expert-timeinput-precision' => 'Precisie:',
 	'valueview-expert-timeinput-calendar' => 'Kalender:',
-	'valueview-expert-timeinput-calendarhint' => '(kalendersysteem $1)',
-	'valueview-expert-timeinput-calendarhint-switch' => '&rarr; wijzigen naar $1',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Gregoriaanse kalender)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Juliaanse kalender)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; wijzigen naar Gregoriaans',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; wijzigen naar Juliaans',
 	'valueview-preview-label' => 'wordt weergegeven als:',
 	'valueview-preview-novalue' => 'geen geldige waarde herkend',
 	'valueview-listrotator-auto' => 'automatisch',
