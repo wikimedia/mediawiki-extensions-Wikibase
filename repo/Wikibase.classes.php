@@ -75,6 +75,7 @@ return call_user_func( function() {
 		// includes/api
 		'Wikibase\Api\ApiWikibase' => 'includes/api/ApiWikibase.php',
 		'Wikibase\Api\IAutocomment' => 'includes/api/IAutocomment.php',
+		'Wikibase\Api\ItemByTitleHelper' => 'includes/api/ItemByTitleHelper.php',
 		'Wikibase\Api\EditEntity' => 'includes/api/EditEntity.php',
 		'Wikibase\Api\GetEntities' => 'includes/api/GetEntities.php',
 		'Wikibase\Api\LinkTitles' => 'includes/api/LinkTitles.php',
