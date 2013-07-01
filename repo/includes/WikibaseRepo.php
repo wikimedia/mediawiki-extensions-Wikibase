@@ -12,6 +12,7 @@ use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Settings;
@@ -153,7 +154,9 @@ final class WikibaseRepo {
 	 */
 	public function getPropertyDataTypeLookup() {
 		if ( $this->propertyDataTypeLookup === null ) {
-			$this->propertyDataTypeLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
+			$infoStore = $this->getStore()->getPropertyInfoStore();
+			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
+			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup( $infoStore, $retrievingLookup );
 		}
 
 		return $this->propertyDataTypeLookup;
