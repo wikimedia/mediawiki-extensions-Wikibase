@@ -332,9 +332,17 @@ $.widget( 'wikibase.linkitem', {
 		// Show a spinning animation and do an API request
 		this._showSpinner();
 
-		this.repoApi.getEntitiesByPage( this.targetSite, this.targetArticle, ['info', 'sitelinks'], mw.config.get( 'wgUserLanguage' ), 'sitelinks', 'ascending' )
-			.done( $.proxy( this._onEntityLoad, this ) )
-			.fail( $.proxy( this._onError, this ) );
+		this.repoApi.getEntitiesByPage(
+			this.targetSite,
+			this.targetArticle,
+			['info', 'sitelinks'],
+			mw.config.get( 'wgUserLanguage' ),
+			'sitelinks',
+			'ascending',
+			true
+		)
+		.done( $.proxy( this._onEntityLoad, this ) )
+		.fail( $.proxy( this._onError, this ) );
 	},
 
 	/**
