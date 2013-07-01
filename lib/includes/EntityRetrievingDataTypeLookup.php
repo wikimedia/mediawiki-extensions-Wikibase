@@ -8,7 +8,8 @@ use Wikibase\EntityLookup;
 use Wikibase\Property;
 
 /**
- * PropertyDataTypeLookup that uses an EntityLookup to find the
+ * PropertyDataTypeLookup that uses an EntityLookup to find
+ * a property's data type ID.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +53,6 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 	 * @return string
 	 */
 	public function getDataTypeIdForProperty( EntityId $propertyId ) {
-		//TODO: use memcached here, or wrap this object!
 		$this->verifyIdIsOfAProperty( $propertyId );
 		return $this->getProperty( $propertyId )->getDataTypeId();
 	}
