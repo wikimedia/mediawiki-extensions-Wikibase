@@ -95,4 +95,13 @@ interface Store {
 	 */
 	public function getEntityLookup();
 
+	/**
+	 * Returns an PropertyInfoStore
+	 *
+	 * @since 0.4
+	 *
+	 * @return PropertyInfoStore
+	 */
+	public function getPropertyInfoStore();
+
 }

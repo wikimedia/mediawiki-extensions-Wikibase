@@ -149,6 +149,8 @@ return call_user_func( function() {
 		'Wikibase\EntityModificationUpdate' => 'includes/updates/EntityModificationUpdate.php',
 		'Wikibase\ItemDeletionUpdate' => 'includes/updates/ItemDeletionUpdate.php',
 		'Wikibase\ItemModificationUpdate' => 'includes/updates/ItemModificationUpdate.php',
+		'Wikibase\PropertyInfoUpdate' => 'includes/updates/PropertyInfoUpdate.php',
+		'Wikibase\PropertyInfoDeletion' => 'includes/updates/PropertyInfoDeletion.php',
 
 		// includes/Validators
 		'Wikibase\Validators\SnakValidator' => 'includes/Validators/SnakValidator.php',
