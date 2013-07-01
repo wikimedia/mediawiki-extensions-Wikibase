@@ -13,6 +13,7 @@ use Wikibase\StoreFactory;
 use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\EntityContentFactory;
+use Wikibase\Settings;
 
 /**
  * API module to get the data for one or more Wikibase entities.
@@ -26,6 +27,7 @@ use Wikibase\EntityContentFactory;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
 class GetEntities extends ApiWikibase {
 
@@ -53,38 +55,11 @@ class GetEntities extends ApiWikibase {
 			$this->dieUsage( $this->msg( 'wikibase-api-ids-xor-wikititles' )->text(), 'id-xor-wikititle' );
 		}
 
-		$missing = 0;
-
 		if ( !isset( $params['ids'] ) ) {
-			$params['ids'] = array();
-			$numSites = count( $params['sites'] );
-			$numTitles = count( $params['titles'] );
-			$max = max( $numSites, $numTitles );
-			if ( $numSites === 0 || $numTitles === 0 ) {
-				wfProfileOut( __METHOD__ );
-				$this->dieUsage( $this->msg( 'wikibase-api-ids-xor-wikititles' )->text(), 'id-xor-wikititle' );
-			}
-			else {
-				$idxSites = 0;
-				$idxTitles = 0;
-
-				for ( $k = 0; $k < $max; $k++ ) {
-					$siteId = $params['sites'][$idxSites++ % $numSites];
-					$title = $this->stringNormalizer->trimToNFC( $params['titles'][$idxTitles++ % $numTitles] );
-
-					$id = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $title );
-
-					if ( $id === false ) {
-						$this->getResult()->addValue( 'entities', (string)(--$missing),
-							array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
-						);
-					}
-					else {
-						$id = new EntityId( Item::ENTITY_TYPE, $id );
-						$params['ids'][] = $id->getPrefixedId();
-					}
-				}
-			}
+			$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
+			$siteStore = \SiteSQLStore::newInstance();
+			$itemByTitleHelper = new ItemByTitleHelper( $this, $siteLinkCache, $siteStore, $this->stringNormalizer );
+			$params['ids'] = $itemByTitleHelper->getEntityIds( $params['sites'], $params['titles'], $params['normalize'] );
 		}
 
 		$params['ids'] = array_unique( $params['ids'] );
@@ -93,8 +68,7 @@ class GetEntities extends ApiWikibase {
 			$props = array_flip( array_values( $params['props'] ) );
 			$props['sitelinks'] = true;
 			$props = array_keys( $props );
-		}
-		else {
+		} else {
 			$props = $params['props'];
 		}
 
@@ -258,6 +232,10 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
+			'normalize' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false
+			),
 		) );
 	}
 
@@ -286,6 +264,9 @@ class GetEntities extends ApiWikibase {
 			),
 			'languages' => array( 'By default the internationalized values are returned in all available languages.',
 				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
+			),
+			'normalize' => array( 'Try to normalize the page title against the client site.',
+				'This only works if exactly one site and one page have been given.'
 			),
 		) );
 	}
