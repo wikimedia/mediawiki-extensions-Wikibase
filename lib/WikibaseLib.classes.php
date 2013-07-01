@@ -174,6 +174,7 @@ return call_user_func( function() {
 		'Wikibase\Test\EntityLookupTest' => 'tests/phpunit/EntityLookupTest.php',
 		'Wikibase\Test\MockChunkAccess' => 'tests/phpunit/store/MockChunkAccess.php',
 		'Wikibase\Test\TermIndexTest' => 'tests/phpunit/store/TermIndexTest.php',
+		'Wikibase\Test\MockSiteStore' => 'tests/phpunit/MockSiteStore.php',
 	);
 
 	return $classes;
