@@ -1,3 +1,6 @@
 # UUID                                  	Group Name
 #
+global:Registered-Users                 	Registered Users
+2bc47fcadf4e44ec9a1a73bcfa06232554f47ce2	JenkinsBot
+cc37d98e3a4301744a0c0a9249173ae170696072	l10n-bot
 c814a6e958c5e9ab445f800e9889aba610c9ab37	extension-Wikibase
