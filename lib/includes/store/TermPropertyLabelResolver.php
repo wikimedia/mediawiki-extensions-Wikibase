@@ -79,6 +79,8 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	 * @param int         $cacheDuration    Number of seconds to keep the cached version for.
 	 *                                      Defaults to 3600 seconds = 1 hour.
 	 * @param string|null $cacheKey         The cache key to use, auto-generated based on $lang per default.
+	 *                                      Should be set to something including the wiki name
+	 *                                      of the wiki that maintains the properties.
 	 */
 	public function __construct(
 		$lang,
