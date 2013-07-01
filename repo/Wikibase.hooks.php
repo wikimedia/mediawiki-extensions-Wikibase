@@ -186,6 +186,7 @@ final class RepoHooks {
 			'api/RemoveQualifiers',
 			'api/SetQualifier',
 			'api/SnakValidationHelper',
+			'api/ItemByTitleHelper',
 
 			'changeop/ChangeOps',
 			'changeop/ChangeOpLabel',
