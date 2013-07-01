@@ -13,6 +13,7 @@ use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\TypedValueFormatter;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
@@ -47,6 +48,11 @@ use Wikibase\Test\MockRepository;
  * @author Daniel Kinzler
  */
 final class WikibaseClient {
+
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	public $propertyDataTypeLookup;
 
 	/**
 	 * @since 0.4
@@ -169,10 +175,14 @@ final class WikibaseClient {
 	 *
 	 * @return PropertyDataTypeLookup
 	 */
-	public function newPropertyDataTypeLookup() {
-		//TODO: remember instance, re-use in getPropertyDataTypeLookup
-		//TODO: make sure in-process and memcached/apc caching is applied to property types
-		return new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
+	public function getPropertyDataTypeLookup() {
+		if ( $this->propertyDataTypeLookup === null ) {
+			$infoStore = $this->getStore()->getPropertyInfoStore();
+			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
+			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup( $infoStore, $retrievingLookup );
+		}
+
+		return $this->propertyDataTypeLookup;
 	}
 
 	/**
@@ -182,7 +192,7 @@ final class WikibaseClient {
 	 */
 	public function newSnakFormatter() {
 		return new SnakFormatter(
-			$this->newPropertyDataTypeLookup(),
+			$this->getPropertyDataTypeLookup(),
 			new TypedValueFormatter(),
 			$this->getDataTypeFactory()
 		);

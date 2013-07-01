@@ -39,6 +39,9 @@ return call_user_func( function() {
 		// whether changes get recorded to wb_changes
 		'useChangesTable' => true,
 
+		// whether property meta data is available in wb_property_info
+		'usePropertyInfoTable' => true,
+
 		'entityPrefixes' => array(
 			'q' => 'item',
 			'p' => 'property',
