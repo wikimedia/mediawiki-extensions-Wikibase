@@ -37,6 +37,42 @@
     },
     {
       "key": {
+        "uuid": "e9daf9a7_5eebd1dd",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 919
+      },
+      "writtenOn": "2013-07-01T12:16:50Z",
+      "side": 1,
+      "message": "I can remove it; supported values are also documented in createEntity and I found it useful.",
+      "parentUuid": "e9daf9a7_afdd7d13",
+      "revId": "2ff718dfba7f658565dba4be906433819f3281ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9daf9a7_7eee95ef",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 919
+      },
+      "writtenOn": "2013-07-01T12:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9daf9a7_6fc3853c",
+      "revId": "2ff718dfba7f658565dba4be906433819f3281ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e9daf9a7_2fc98d5c",
         "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
         "patchSetId": 1
@@ -54,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "e9daf9a7_beb80de7",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 919
+      },
+      "writtenOn": "2013-07-01T12:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9daf9a7_2fc98d5c",
+      "revId": "2ff718dfba7f658565dba4be906433819f3281ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e9daf9a7_0fc6494c",
         "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
         "patchSetId": 1
@@ -65,6 +119,24 @@
       "writtenOn": "2013-06-29T15:16:16Z",
       "side": 1,
       "message": "as above",
+      "revId": "2ff718dfba7f658565dba4be906433819f3281ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9daf9a7_9ebd49d7",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 919
+      },
+      "writtenOn": "2013-07-01T12:16:50Z",
+      "side": 1,
+      "message": "Why not? I have no idea how I could have found out that wikibase-item requires a {\"entity-type\":string, \"numeric-id\":number} object. My approach so far was retrieving an entity that already existed and looking at its JSON representation and then trying the structure used there, but that\u0027s kind of a trial-and-error way. I only found the above link via Google.\nAnd the documentation in the link is really helpful! :)",
+      "parentUuid": "e9daf9a7_0fc6494c",
       "revId": "2ff718dfba7f658565dba4be906433819f3281ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
