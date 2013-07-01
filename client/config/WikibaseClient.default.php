@@ -56,7 +56,7 @@ return call_user_func( function() {
 			'wikibase-property' => 'Property'
 		),
 		'allowDataTransclusion' => true,
-		'enableSiteLinkWidget' => false,
+		'enableSiteLinkWidget' => true,
 		'propagateChangesToRepo' => true,
 
 		'siteGroup' => 'wikipedia', //TODO: require this to be set, default doesn't make sense.
