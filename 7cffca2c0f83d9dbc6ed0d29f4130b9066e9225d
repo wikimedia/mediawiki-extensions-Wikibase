@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9cff5e9_a8761ba1",
+        "filename": "lib/includes/LanguageUtils.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-01T15:34:02Z",
+      "side": 1,
+      "message": "this class has several issues:\n* try to avoid having a class that collects otherwise unrelated functions\n* the functions are public static, which basically means they are globals. This makes unit testing basically impossible.\n* make one class per service, where the instantiated objects fulfill the service.\n\nThis should be especially easy since this function currently only provides one service anyway.",
+      "revId": "7cffca2c0f83d9dbc6ed0d29f4130b9066e9225d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_887b5789",
+        "filename": "lib/includes/LanguageUtils.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-01T15:34:02Z",
+      "side": 1,
+      "message": "what do these consts mean?",
+      "revId": "7cffca2c0f83d9dbc6ed0d29f4130b9066e9225d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
