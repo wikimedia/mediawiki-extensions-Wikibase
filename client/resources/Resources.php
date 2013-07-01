@@ -53,6 +53,7 @@ return call_user_func( function() {
 				'jquery.wikibase.siteselector',
 				'mediawiki.api',
 				'mediawiki.util',
+				'mediawiki.Title',
 				'mediawiki.jqueryMsg',
 				'wikibase.client.currentSite',
 				'wikibase.sites',
