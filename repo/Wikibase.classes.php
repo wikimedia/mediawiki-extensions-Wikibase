@@ -143,6 +143,7 @@ return call_user_func( function() {
 		'Wikibase\EntityPerPageTable' => 'includes/store/sql/EntityPerPageTable.php',
 		'Wikibase\DispatchStats' => 'includes/store/sql/DispatchStats.php',
 		'Wikibase\TermSearchKeyBuilder' => 'includes/store/sql/TermSearchKeyBuilder.php',
+		'Wikibase\PropertyInfoTableBuilder' => 'includes/store/sql/PropertyInfoTableBuilder.php',
 
 		// includes/updates
 		'Wikibase\EntityDeletionUpdate' => 'includes/updates/EntityDeletionUpdate.php',
@@ -158,6 +159,7 @@ return call_user_func( function() {
 		// maintenance
 		'Wikibase\RebuildTermsSearchKey' => 'maintenance/rebuildTermsSearchKey.php',
 		'Wikibase\RebuildEntityPerPage' => 'maintenance/rebuildEntityPerPage.php',
+		'Wikibase\RebuildPropertyInfo' => 'maintenance/rebuildPropertyInfo.php',
 
 		// tests
 		'Wikibase\Test\TestItemContents' => 'tests/phpunit/TestItemContents.php',
