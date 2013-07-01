@@ -30,8 +30,7 @@ use \Wikibase\SiteLink;
  *
  * @group WikibaseClient
  * @group Database
- *        ^--- uses DB indirectly; may be removed if Sites is mocked out
- *             and Title is made not to use the database.
+ *        ^--- uses DB indirectly; removed when Title is made not to use the database.
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -72,8 +71,6 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 		if ( !$hasSites ) {
 			$hasSites = true;
-			//TODO: use mock SiteList instead!
-			\TestSites::insertIntoDb();
 		}
 
 		$this->mockRepo = new MockRepository();
@@ -83,12 +80,12 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			$this->mockRepo->putEntity( $item );
 		}
 
-		$this->langLinkHandler = new \Wikibase\LangLinkHandler(
+		$this->langLinkHandler = new LangLinkHandler(
 			'srwiki',
 			array(),
 			array( NS_TALK ),
 			$this->mockRepo,
-			\SiteSQLStore::newInstance()
+			MockSiteStore::newFromTestSites()
 		);
 	}
 
