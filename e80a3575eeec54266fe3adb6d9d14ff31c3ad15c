@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9cff5e9_b105e2c6",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-01T20:23:20Z",
+      "side": 1,
+      "message": "only for Wikibase?",
+      "revId": "e80a3575eeec54266fe3adb6d9d14ff31c3ad15c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_11202e4b",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-01T20:23:20Z",
+      "side": 1,
+      "message": "please a little bit documentation on what this constants mean?",
+      "revId": "e80a3575eeec54266fe3adb6d9d14ff31c3ad15c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_f1b2ba04",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-01T20:23:20Z",
+      "side": 1,
+      "message": "why not a normal constructor instead the newFromLanguage thing?",
+      "revId": "e80a3575eeec54266fe3adb6d9d14ff31c3ad15c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_91bd3ed7",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-01T20:23:20Z",
+      "side": 1,
+      "message": "what about a function to get the language and mode of the object?",
+      "revId": "e80a3575eeec54266fe3adb6d9d14ff31c3ad15c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
