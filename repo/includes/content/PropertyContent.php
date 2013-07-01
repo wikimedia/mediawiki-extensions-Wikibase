@@ -3,6 +3,7 @@
 namespace Wikibase;
 use Title, Content, ParserOptions, ParserOutput, WikiPage, User, Status, DataUpdate;
 use \ValueFormatters\ValueFormatterFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -159,9 +160,43 @@ class PropertyContent extends EntityContent {
 	 * @return DataUpdate[]
 	 */
 	public function getDeletionUpdates( \WikiPage $page, \ParserOutput $parserOutput = null ) {
+		//XXX: access to services should be done via the ContentHandler.
+		$infoStore = WikibaseRepo::getDefaultInstance()->getStore()->getPropertyInfoStore();
+
 		return array_merge(
 			parent::getDeletionUpdates( $page, $parserOutput ),
-			array( new EntityDeletionUpdate( $this ) )
+			array(
+				new EntityDeletionUpdate( $this ),
+				new PropertyInfoDeletion( $this->getProperty()->getId(), $infoStore ),
+			)
+		);
+	}
+
+	/**
+	 * @see ContentHandler::getSecondaryDataUpdates
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title $title
+	 * @param Content|null $old
+	 * @param boolean $recursive
+	 *
+	 * @param null|ParserOutput $parserOutput
+	 *
+	 * @return DataUpdate[]
+	 */
+	public function getSecondaryDataUpdates( Title $title, Content $old = null,
+		$recursive = false, ParserOutput $parserOutput = null ) {
+
+		//XXX: access to services should be done via the ContentHandler.
+		$infoStore = WikibaseRepo::getDefaultInstance()->getStore()->getPropertyInfoStore();
+
+		return array_merge(
+			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
+			array(
+				new EntityModificationUpdate( $this ),
+				new PropertyInfoUpdate( $this->getProperty(), $infoStore ),
+			)
 		);
 	}
 
@@ -182,28 +217,6 @@ class PropertyContent extends EntityContent {
 
 		$propertyView = new PropertyView( $valueFormatters );
 		return $propertyView->getParserOutput( $this, $options, $generateHtml );
-	}
-
-	/**
-	 * @see ContentHandler::getSecondaryDataUpdates
-	 *
-	 * @since 0.1
-	 *
-	 * @param Title $title
-	 * @param Content|null $old
-	 * @param boolean $recursive
-	 *
-	 * @param null|ParserOutput $parserOutput
-	 *
-	 * @return DataUpdate[]
-	 */
-	public function getSecondaryDataUpdates( Title $title, Content $old = null,
-		$recursive = false, ParserOutput $parserOutput = null ) {
-
-		return array_merge(
-			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
-			array( new EntityModificationUpdate( $this ) )
-		);
 	}
 
 }
