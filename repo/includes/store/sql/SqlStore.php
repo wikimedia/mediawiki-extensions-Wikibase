@@ -271,10 +271,17 @@ class SqlStore implements Store {
 	 * @return PropertyInfoTable
 	 */
 	protected function newPropertyInfoTable() {
-		//FIXME: use usePropertyInfoTable defined in follow-up
-		//FIXME: use CachingPropertyInfoStore defined in follow-up
-		$table = new PropertyInfoTable( false );
-		return $table;
+		if ( Settings::get( 'usePropertyInfoTable' ) ) {
+			$table = new PropertyInfoTable( false );
+
+			//TODO: get cache type etc from config
+			//TODO: better version ID from config!
+			$key = wfWikiID() . '/Wikibase/CachingPropertyInfoStore/' . WBL_VERSION;
+			return new CachingPropertyInfoStore( $table, wfGetMainCache(), 3600, $key );
+		} else {
+			// dummy info store
+			return new DummyPropertyInfoStore();
+		}
 	}
 
 }

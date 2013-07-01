@@ -52,6 +52,11 @@ class DirectSqlStore implements ClientStore {
 	private $termIndex = null;
 
 	/**
+	 * @var PropertyInfoTable
+	 */
+	private $propertyInfoTable = null;
+
+	/**
 	 * @var String|bool $repoWiki
 	 */
 	protected $repoWiki;
@@ -241,4 +246,38 @@ class DirectSqlStore implements ClientStore {
 		$this->clear();
 	}
 
+
+	/**
+	 * @see Store::getPropertyInfoStore
+	 *
+	 * @since 0.4
+	 *
+	 * @return PropertyInfoStore
+	 */
+	public function getPropertyInfoStore() {
+		if ( !$this->propertyInfoTable ) {
+			$this->propertyInfoTable = $this->newPropertyInfoTable();
+		}
+
+		return $this->propertyInfoTable;
+	}
+
+	/**
+	 * Creates a new PropertyInfoTable
+	 *
+	 * @return PropertyInfoTable
+	 */
+	protected function newPropertyInfoTable() {
+		if ( Settings::get( 'usePropertyInfoTable' ) ) {
+			$table = new PropertyInfoTable( true, $this->repoWiki );
+
+			//TODO: get cache type etc from config
+			//TODO: better version ID from config!
+			$key = $this->repoWiki . '/Wikibase/CachingPropertyInfoStore/' . WBL_VERSION;
+			return new CachingPropertyInfoStore( $table, wfGetMainCache(), 3600, $key );
+		} else {
+			// dummy info store
+			return new DummyPropertyInfoStore();
+		}
+	}
 }
