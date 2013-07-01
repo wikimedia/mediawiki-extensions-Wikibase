@@ -133,12 +133,15 @@ return call_user_func( function() {
 		'Wikibase\TermCombinationMatchFinder' => 'includes/store/TermCombinationMatchFinder.php',
 		'Wikibase\TermMatchScoreCalculator' => 'includes/store/TermMatchScoreCalculator.php',
 		'Wikibase\TermPropertyLabelResolver' => 'includes/store/TermPropertyLabelResolver.php',
-		'Wikibase\TermSqlIndex' => 'includes/store/sql/TermSqlIndex.php',
+
+		'Wikibase\PropertyInfoStore' => 'includes/store/PropertyInfoStore.php',
 
 		// includes/store/sql
 		'Wikibase\CachingEntityLoader' => 'includes/store/sql/CachingEntityLoader.php',
 		'Wikibase\SiteLinkTable' => 'includes/store/sql/SiteLinkTable.php',
 		'Wikibase\WikiPageEntityLookup' => 'includes/store/sql/WikiPageEntityLookup.php',
+		'Wikibase\TermSqlIndex' => 'includes/store/sql/TermSqlIndex.php',
+		'Wikibase\PropertyInfoTable' => 'includes/store/sql/PropertyInfoTable.php',
 
 		// includes/util
 		'Wikibase\HttpAcceptNegotiator' => 'includes/util/HttpAcceptNegotiator.php',
@@ -175,6 +178,8 @@ return call_user_func( function() {
 		'Wikibase\Test\EntityLookupTest' => 'tests/phpunit/EntityLookupTest.php',
 		'Wikibase\Test\MockChunkAccess' => 'tests/phpunit/store/MockChunkAccess.php',
 		'Wikibase\Test\TermIndexTest' => 'tests/phpunit/store/TermIndexTest.php',
+
+		'Wikibase\Test\PropertyInfoStoreTestHelper' => 'tests/phpunit/store/PropertyInfoStoreTestHelper.php',
 	);
 
 	return $classes;
