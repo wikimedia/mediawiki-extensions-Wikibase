@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Api;
 use ApiTestCase;
+use Wikibase\Settings;
 
 /**
  * Tests for the ApiWikibase class.
@@ -30,6 +31,7 @@ use ApiTestCase;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
+ * @author Marius Hoch < hoo@online.de >
  *
  * @group API
  * @group Wikibase
@@ -154,6 +156,64 @@ class GetEntitiesTest extends ModifyItemBase {
 	}
 
 	/**
+	 * Test basic lookup of items to get the id.
+	 * This is really a fast lookup without reparsing the stringified item.
+	 *
+	 * @dataProvider provideGetItemByTitle
+	 */
+	public function testGetItemByTitleNormalized( $handle, $site, $title ) {
+		if ( Settings::get( 'normalizeItemByTitlePageNames' ) !== true || \Title::newFromText( 'a' )->getPrefixedText() !== 'A' ) {
+			// This is super bad, but normalization needs to be enabled and this silly basic "normalization" has to work
+			$this->markTestSkipped( 'normalizeItemByTitlePageNames needs to be true for normalization to work!' );
+		}
+
+		$title = lcfirst( $title );
+		list($res,,) = $this->doApiRequest( array(
+			'action' => 'wbgetentities',
+			'sites' => $site,
+			'titles' => $title,
+			'normalize' => true,
+			'format' => 'json', // make sure IDs are used as keys
+		) );
+
+		$item = $this->getItemOutput( $handle );
+		$id = $item['id'];
+
+		$this->assertSuccess( $res, 'entities', $id );
+		$this->assertItemEquals( $item,  $res['entities'][$id] );
+		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
+
+		// The normalization that has been applied should be noted
+		$this->assertEquals(
+			$title,
+			$res['normalized']['n']['from']
+		);
+
+		$this->assertEquals(
+			// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
+			\Title::newFromText( $title )->getPrefixedText(),
+			$res['normalized']['n']['to']
+		);
+	}
+
+	/**
+	 * Test that the API isn't showing the normalization note in case nothing changed.
+	 *
+	 * @group API
+	 */
+	public function testGetEntitiesNoNormalizationApplied( ) {
+		list($res,,) = $this->doApiRequest( array(
+			'action' => 'wbgetentities',
+			'sites' => 'enwiki',
+			'titles' => 'HasNoItemAndIsNormalized',
+			'normalize' => true,
+			'format' => 'json', // make sure IDs are used as keys
+		) );
+
+		$this->assertFalse( isset( $res['normalized'] ) );
+	}
+
+	/**
 	 * Testing if we can get missing items if we do lookup with single fake ids.
 	 * Note that this makes assumptions about which ids have been assigned.
 	 *
@@ -229,6 +289,48 @@ class GetEntitiesTest extends ModifyItemBase {
 		$this->assertEquals( 1, count( $keys ), "requesting a single item should return exactly one item entry" );
 
 		$this->assertSuccess( $res, 'entities', $keys[0], 'missing' );
+	}
+
+	/**
+	 * Testing if we can get missing items if we do lookup with failing titles and
+	 * that the normalization that has been applied is being noted correctly.
+	 *
+	 * Note that this makes assumptions about which sitelinks they have been assigned.
+	 *
+	 * @group API
+	 */
+	public function testGetEntitiesByBadTitleNormalized( ) {
+		if ( Settings::get( 'normalizeItemByTitlePageNames' ) !== true ) {
+			// This is super bad
+			$this->markTestSkipped( 'normalizeItemByTitlePageNames needs to be true for normalization to work!' );
+		}
+
+		$pageTitle = 'klaijehr qowienx_qopweiu';
+		list( $res,, ) = $this->doApiRequest( array(
+			'action' => 'wbgetentities',
+			'sites' => 'enwiki',
+			'titles' => $pageTitle,
+			'normalize' => true
+		) );
+
+		$this->assertSuccess( $res, 'entities' );
+
+		$keys = array_keys( $res['entities'] );
+		$this->assertEquals( 1, count( $keys ), "requesting a single item should return exactly one item entry" );
+
+		$this->assertSuccess( $res, 'entities', $keys[0], 'missing' );
+
+		// The normalization that has been applied should be noted
+		$this->assertEquals(
+			$pageTitle,
+			$res['normalized']['n']['from']
+		);
+
+		$this->assertEquals(
+			// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
+			\Title::newFromText( $pageTitle )->getPrefixedText(),
+			$res['normalized']['n']['to']
+		);
 	}
 
 	/**

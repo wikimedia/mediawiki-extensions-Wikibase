@@ -636,7 +636,7 @@ abstract class ModifyItemBase extends ApiTestCase {
 	 *
 	 * @param array $response
 	 * @param string $path1 first path element (optional)
-	 * @param string $path2 seconds path element (optional)
+	 * @param string $path2 second path element (optional)
 	 * @param ...
 	 */
 	public function assertSuccess( $response ) {
