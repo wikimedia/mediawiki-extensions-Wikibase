@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9cff5e9_a8973b9a",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-01T15:47:24Z",
+      "side": 1,
+      "message": "array of array of what?",
+      "revId": "219489bd6a28f0a5f2edf53d952aca95f4243f4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_889cf7bd",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-01T15:47:24Z",
+      "side": 1,
+      "message": "array of what?",
+      "revId": "219489bd6a28f0a5f2edf53d952aca95f4243f4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
