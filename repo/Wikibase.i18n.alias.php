@@ -70,12 +70,12 @@ $specialPageAliases['de'] = array(
 
 /** Zazaki (Zazaki) */
 $specialPageAliases['diq'] = array(
-	'NewItem' => array( 'LeteVırazê' ),
-	'NewProperty' => array( 'XısusiyetêNewey' ),
-	'ItemByTitle' => array( 'SernuşteyêLeti' ),
-	'ItemDisambiguation' => array( 'EtiketêLeti' ),
+	'NewItem' => array( 'LeteVırazé' ),
+	'NewProperty' => array( 'XısusiyetéNewey' ),
+	'ItemByTitle' => array( 'SernuşteyéLeti' ),
+	'ItemDisambiguation' => array( 'EtiketéLeti' ),
 	'ListDatatypes' => array( 'ListeyaBabetandeMelumati' ),
-	'SetLabel' => array( 'SazêEtiketan' ),
+	'SetLabel' => array( 'SazéEtiketan' ),
 );
 
 /** Esperanto (Esperanto) */
@@ -173,7 +173,10 @@ $specialPageAliases['ko'] = array(
 $specialPageAliases['lb'] = array(
 	'DispatchStats' => array( 'Statistike_verbreeden' ),
 	'NewItem' => array( 'Neit_Element', 'Element_uleeën' ),
+	'NewProperty' => array( 'Eegeschaft_uleeën' ),
 	'ItemByTitle' => array( 'Element_nom_Titel' ),
+	'ItemDisambiguation' => array( 'Homonymie_vun_engem_Element' ),
+	'ListDatatypes' => array( 'Lëscht_vun_Datentypen' ),
 	'SetLabel' => array( 'Etiquette_festleeën' ),
 	'SetDescription' => array( 'Beschreiwung_festleeën' ),
 	'SetAliases' => array( 'Aliase_festleeën' ),

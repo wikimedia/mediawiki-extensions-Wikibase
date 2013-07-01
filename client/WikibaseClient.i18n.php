@@ -305,6 +305,7 @@ $messages['ast'] = array(
 	'specialpages-group-wikibaseclient' => 'Cliente de Wikidata',
 	'tooltip-t-wikibase' => 'Enllaz al elementu del depósitu de datos coneutáu',
 	'wikibase-after-page-move' => "Tamién pue [$1 anovar] l'elementu asociáu de Wikidata pa caltener los enllaces d'idioma na páxina treslladada.",
+	'wikibase-after-page-move-queued' => "L'[$1 elementu de Wikidata] asociáu con esta páxina pronto s'actualizará automáticamente.",
 	'wikibase-comment-remove' => "Desanicióse l'elementu asociáu de Wikidata. Quitaronse los enllaces de llingua.",
 	'wikibase-comment-linked' => 'Enllazóse un elementu de Wikidata a esta páxina.',
 	'wikibase-comment-unlink' => "Desenllazóse esta páxina d'un elementu de Wikidata. Quitaronse los enllaces de llingua.",
@@ -1048,6 +1049,13 @@ $messages['el'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|διαγλωσσικός σύνδεσμος|διαγλωσσικοί σύνδεσμοι}} για τη σελίδα)',
 	'wikibase-pageinfo-entity-id' => 'Κωδικός αντικειμένου των Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Κανένα',
+);
+
+/** British English (British English)
+ * @author Shirayuki
+ */
+$messages['en-gb'] = array(
+	'wikibase-error-serialize-error' => 'Failed to serialise data',
 );
 
 /** Esperanto (Esperanto)
@@ -1832,6 +1840,7 @@ $messages['ilo'] = array(
 $messages['is'] = array(
 	'wikibase-client-desc' => 'Biðlari fyrir Wikibase viðbótina',
 	'wikibase-after-page-move' => 'Þú mátt einnig [$1 uppfæra] viðeigandi Wikidata hlut til að viðhalda tungumálatenglum á færðu síðunni.',
+	'wikibase-after-page-move-queued' => '[$1 Wikidata hluturinn] sem tengist þessari síðu verður fljótlega uppfærður sjálfvirkt.',
 	'wikibase-comment-remove' => 'Tengdum Wikidata hlut eytt. Tungumálatenglar fjarlægðir.',
 	'wikibase-comment-linked' => 'Wikidata hlutur hefur tengst þessari síðu.',
 	'wikibase-comment-unlink' => 'Þessi síða hefur verið aftengd Wikidata hlut. Tungumálatenglar fjarlægðir.',
@@ -1853,7 +1862,7 @@ $messages['is'] = array(
 	'wikibase-linkitem-input-site' => 'Tungumál:',
 	'wikibase-linkitem-input-page' => 'Síða:',
 	'wikibase-linkitem-invalidsite' => 'Óþekkt eða ógild síða valin',
-	'wikibase-linkitem-confirmitem-text' => 'Síðan sem þú valdir er þegar tengd við [$1 hlut á miðlægum gagnagrunni]. Vinsamlegast staðfestu að síðurnar fyrir neðan séu þær sem þú vilt tengja við þessa síðu.',
+	'wikibase-linkitem-confirmitem-text' => 'Síðan sem þú valdir er þegar tengd við [$1 hlut á miðlægum gagnagrunni]. Vinsamlegast staðfestu að {{PLURAL:$2|síðan|síðurnar}} fyrir neðan {{PLURAL:$2|sé|séu}} þær sem þú vilt tengja við þessa síðu.',
 	'wikibase-linkitem-confirmitem-button' => 'Staðfesta',
 	'wikibase-linkitem-not-loggedin-title' => 'Þú þarft að vera skráð/ur inn',
 	'wikibase-linkitem-not-loggedin' => 'Þú þarft að vera skráð/ur inn á þennann wiki og á [$1 samnýtta þekkingargrunninn] til að nota þennan möguleika.',
@@ -1871,7 +1880,7 @@ $messages['is'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '„$1” er ógildur tungumálakóði.',
 	'wikibase-unconnectedpages-page-warning' => 'Síðutitilinn var ekki hægt að nota fyrir fyrirspurnina og hann var hunsaður.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Aðeins síður með tungumálatengla',
-	'wikibase-unconnectedpages-format-row' => '($1 tungumálatenglar á síðunni)',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|tungumálatengill|tungumálatenglar}} á síðunni)',
 );
 
 /** Italian (italiano)
@@ -2630,6 +2639,7 @@ $messages['nl'] = array(
 	'wikibase-comment-sitelink-change' => 'Taalkoppeling gewijzigd van $1 naar $2',
 	'wikibase-comment-sitelink-remove' => 'Taalkoppeling verwijderd: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|wijziging|wijzigingen}}',
+	'wikibase-dataitem' => 'Gegevensitem',
 	'wikibase-editlinks' => 'Koppelingen bewerken',
 	'wikibase-editlinkstitle' => 'Intertaalkoppelingen bewerken',
 	'wikibase-linkitem-addlinks' => 'Koppelingen toevoegen',
@@ -2642,7 +2652,7 @@ $messages['nl'] = array(
 	'wikibase-linkitem-input-site' => 'Taal:',
 	'wikibase-linkitem-input-page' => 'Pagina:',
 	'wikibase-linkitem-invalidsite' => 'Er is een onbekende of ongeldige site geselecteerd',
-	'wikibase-linkitem-confirmitem-text' => "De pagina die u hebt gekozen is al gekoppeld aan een [$1 item in onze centrale gegevensrepository]. Bevestig dat de onderstaande pagina's inderdaad de pagina's zijn die u met deze pagina wilt koppelen.",
+	'wikibase-linkitem-confirmitem-text' => "De pagina die u hebt gekozen is al gekoppeld aan een [$1 item in onze centrale gegevensrepository]. Bevestig dat de onderstaande pagina's inderdaad de pagina's zijn die u met deze pagina wilt koppelen.", # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Bevestigen',
 	'wikibase-linkitem-not-loggedin-title' => 'U moet aangemeld zijn',
 	'wikibase-linkitem-not-loggedin' => 'U moet aangemeld zijn bij deze wiki en de [$1 centrale gegevensrepository] om deze functie te kunnen gebruiken.',
@@ -2653,6 +2663,7 @@ $messages['nl'] = array(
 	'wikibase-rc-hide-wikidata' => 'Wikidata $1',
 	'wikibase-rc-show-wikidata-pref' => 'Wikidatabewerkingen weergeven in recente wijzigingen',
 	'wikibase-watchlist-show-changes-pref' => 'Wikidata bewerkingen weergeven in uw volglijst',
+	'wikibase-error-serialize-error' => 'De gegevens konden niet geserialiseerd worden',
 	'wikibase-error-invalid-entity-id' => 'Het opgegeven ID is niet bekend in het systeem. Gebruik een geldig entiteits-ID.',
 	'special-unconnectedpages' => "Pagina's niet niet gekoppeld zijn aan items",
 	'wikibase-unconnectedpages-legend' => "Instellingen voor ongekoppelde pagina's",
@@ -2661,7 +2672,7 @@ $messages['nl'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" is geen geldige taalcode.',
 	'wikibase-unconnectedpages-page-warning' => 'De paginanaam kan niet worden gebruikt voor de zoekopdracht en wordt genegeerd.',
 	'wikibase-unconnectedpages-iwdata-label' => "Alleen pagina's met intertaalkoppelingen",
-	'wikibase-unconnectedpages-format-row' => '($1 intertaalkoppeling{{PLURAL:$1||en}} op de pagina)',
+	'wikibase-unconnectedpages-format-row' => '($1 intertaalkoppeling{{PLURAL:$1||en}} op de pagina)', # Fuzzy
 	'wikibase-pageinfo-entity-id' => 'Wikidata Item-ID',
 	'wikibase-pageinfo-entity-id-none' => 'Geen',
 );
@@ -3258,6 +3269,7 @@ $messages['tr'] = array(
  * @author Base
  * @author Lystopad
  * @author Microcell
+ * @author RLuts
  * @author Ата
  */
 $messages['uk'] = array(
@@ -3285,7 +3297,7 @@ $messages['uk'] = array(
 	'wikibase-linkitem-input-site' => 'Мова:',
 	'wikibase-linkitem-input-page' => 'Сторінка:',
 	'wikibase-linkitem-invalidsite' => 'Вибрано невідомий або недопустимий сайт',
-	'wikibase-linkitem-confirmitem-text' => "Сторінка, до якої Ви хотіли прив'язатись, уже прикріплена до [$1 елемента у центральному сховищі даних]. Підтвердіть, що наведений нижче список сторінок до прив'язання складено правильно.",
+	'wikibase-linkitem-confirmitem-text' => "Сторінка, до якої Ви хотіли прив'язатись, уже прикріплена до [$1 елемента у центральному сховищі даних]. Підтвердіть, що наведений нижче список сторінок до прив'язання складено правильно.", # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Підтвердити',
 	'wikibase-linkitem-not-loggedin-title' => 'Вам необхідно увійти в систему',
 	'wikibase-linkitem-not-loggedin' => 'Вам необхідно увійти в систему на цій вікі і на [$1 центральному сховищі даних], щоб скористатись цією функцією.',
@@ -3304,7 +3316,8 @@ $messages['uk'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '«$1» — неправильний код мови.',
 	'wikibase-unconnectedpages-page-warning' => 'Ця назва сторінки не може бути використаною у запиті й ігнорована.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Лише сторінки із міжмовними інтервікі-посиланнями',
-	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|міжмовне інтервікі-посилання|міжмовні інтервікі-посилання|міжмовних інтервікі-посилань}} на сторінці)',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|міжмовне інтервікі-посилання|міжмовні інтервікі-посилання|міжмовних інтервікі-посилань}} на сторінці)', # Fuzzy
+	'wikibase-pageinfo-entity-id' => 'Ідентифікатор елемента у Вікіданих',
 );
 
 /** Urdu (اردو)

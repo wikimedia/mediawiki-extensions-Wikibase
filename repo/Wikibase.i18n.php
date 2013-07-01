@@ -462,7 +462,8 @@ This is a generic text used for a link (fig. 1 and 3 on [[m:Wikidata/Notes/JavaS
 This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that saves what the user has done while the user interface has been in edit mode.
 {{Identical|Save}}',
 	'wikibase-cancel' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
-This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that cancels what the user has done while the user interface has been in edit mode.',
+This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that cancels what the user has done while the user interface has been in edit mode.
+{{Identical|Cancel}}',
 	'wikibase-add' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
 [[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an additional element of some kind.',
@@ -563,7 +564,8 @@ Parameters:
 	'wikibase-statementview-referencesheading-pendingcountersubject' => "Used in the heading for the references associated with a statement (see [[d:Wikidata:Glossary]]). The heading is giving information about how many references exist for that statement. This is just the label for the counter's subject: the number of references is not part of this message, and the word order is defined via {{msg-mw|wikibase-ui-pendingquantitycounter-nonpending}}.
 
 Parameters:
-* $1 - the number of references for plural usage",
+* $1 - the number of references for plural usage
+{{Identical|Source}}",
 	'wikibase-statementview-referencesheading-pendingcountertooltip' => 'Tooltip displayed in the references heading when there are references (see [[d:Wikidata:Glossary]]) in edit mode which are not saved yet.
 
 Parameters:
@@ -1556,6 +1558,22 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-item-summary-wbremoveclaims' => '{{PLURAL:$1|Desaniciada una afirmación|Desaniciaes afirmaciones}}',
 	'wikibase-item-summary-special-create-item' => 'Creáu un elementu en [$2] con {{PLURAL:$1|valor|valores}}',
 	'wikibase-item-summary-wbcreateclaim-create' => 'Creada una afirmación',
+	'wikibase-item-summary-wbremoveclaims-remove' => '{{PLURAL:$3|Desaniciada una afirmación|Desaniciaes afirmaciones}}',
+	'wikibase-item-summary-wbsetclaim-update' => '{{PLURAL:$3|Camudada una afirmación|Camudaes afirmaciones}}',
+	'wikibase-item-summary-wbsetclaim-create' => '{{PLURAL:$3|Creada una afirmación|Creaes afirmaciones}}',
+	'wikibase-item-summary-wbsetclaim-update-qualifiers' => "{{PLURAL:$4|Camudáu un calificador|Camudaos $4 calificadores}} d'{{PLURAL:$3|una afirmación|afirmaciones}}",
+	'wikibase-item-summary-wbsetclaim-update-references' => "{{PLURAL:$4|Camudó una referencia|Camudaron $4 referencies}} {{PLURAL:$3|d'una afirmación|d'afirmaciones}}",
+	'wikibase-item-summary-wbsetclaim-update-rank' => "Camudó'l rangu {{PLURAL:$3|d'una afirmación|d'afirmaciones}}",
+	'wikibase-item-summary-clientsitelink-update' => 'Páxina treslladada de [$3] a [$4]',
+	'wikibase-property-summary-wbcreate-new' => 'Creada una propiedá nueva',
+	'wikibase-property-summary-wbeditentity-create' => 'Creada una propiedá nueva',
+	'wikibase-property-summary-wbeditentity-update' => 'Actualizada una propiedá nueva',
+	'wikibase-property-summary-wbeditentity-override' => 'Sobreescrita una propiedá nueva',
+	'wikibase-property-summary-wbsetlabel-set' => 'Camudada la etiqueta en [$2]',
+	'wikibase-property-summary-wbsetlabel-remove' => 'Desaniciada la etiqueta en [$2]',
+	'wikibase-property-summary-wbsetdescription-set' => 'Camudada la descripción en [$2]',
+	'wikibase-property-summary-wbsetdescription-remove' => 'Desaniciada la descripción en [$2]',
+	'wikibase-listdatatypes-wikibase-item-head' => 'Elementu',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenada del globu',
 );
 
@@ -11167,7 +11185,6 @@ $messages['nn'] = array(
 	'wikibase-label-empty' => 'Ingen merkelapp er definert enno',
 	'wikibase-label-edit-placeholder' => 'skriv inn merkelapp',
 	'wikibase-description-empty' => 'Inga skildring er definert enno',
-	'wikibase-deletedentity' => 'Sletta $1',
 	'wikibase-description-edit-placeholder' => 'skriv inn skildring',
 	'wikibase-sitelink-site-edit-placeholder' => 'nettstad',
 	'wikibase-sitelink-page-edit-placeholder' => 'artikkel',
@@ -11270,6 +11287,10 @@ IP-adressa di vert lagra i endringshistorikken til dette objektet av type $1.",
 	'wikibase-setaliases-label' => 'Tilleggsnamn:',
 	'wikibase-setaliases-submit' => 'Set tilleggsnamna',
 	'wikibase-setaliases-warning-remove' => 'Er du viss på at du ynskjer å fjerna alle tilleggsnamna til [[$1]]?',
+	'wikibase-setsitelink-site' => 'Nettstad-ID:',
+	'wikibase-setsitelink-label' => 'Nettstadlenkje:',
+	'wikibase-setsitelink-submit' => 'Set nettstadlenkja',
+	'wikibase-setsitelink-warning-remove' => 'Er du viss på at du ynskjer å fjerna nettstadlenkja [[$1]]?',
 	'wikibase-setentity-id' => 'ID:',
 	'wikibase-setentity-language' => 'Språk:',
 	'wikibase-setentity-invalid-langcode' => 'Språkkjennemerket «$1» er ukjent. Gjer vel å nytta eit kjennemerke som systemet kjenner, slik som «nn».',
@@ -11315,6 +11336,7 @@ Ein klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endri
 	'special-entitydata' => 'Einingsdata',
 	'wikibase-entitydata-not-found' => 'Inga eining med ID-en $1 vart funnen.',
 	'wikibase-entitydata-bad-revision' => 'Kan ikkje visa versjon $2 av eininga $1.',
+	'wikibase-entitydata-bad-id' => 'Ugild ID: $1',
 	'wikibase-entitydata-unsupported-format' => 'Dataformatet $1 er ikkje stødd av dette grensesnittet.',
 	'wikibase-entitydata-title' => 'Einingsdata',
 	'wikibase-entitydata-text' => 'Sida gjev eit grensesnitt med lenkja data for einingsverdiar. Oppgje einings-ID-en i URL-en ved hjelp av undersidesyntaks.',
@@ -11356,6 +11378,7 @@ Ein klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endri
 	'wikibase-item-summary-wbsetclaim-update' => 'Endra {{PLURAL:$3|påstand|påstandar}}',
 	'wikibase-item-summary-wbsetclaim-create' => 'Oppretta {{PLURAL:$3|påstand|påstandar}}',
 	'wikibase-item-summary-wbsetclaim-update-qualifiers' => 'Endra {{PLURAL:$4|éin kvalifikator|$4 kvalifikatorar}} for {{PLURAL:$3|éin påstand|fleire påstandar}}',
+	'wikibase-item-summary-clientsitelink-update' => 'Sida flytt frå [$3] til [$4]',
 	'wikibase-property-summary-wbcreate-new' => 'Oppretta ein ny eigenskap',
 	'wikibase-property-summary-wbeditentity-create' => 'Oppretta ein ny eigenskap',
 	'wikibase-property-summary-wbeditentity-update' => 'Oppdaterte ein eigenskap',
@@ -11371,7 +11394,7 @@ Ein klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endri
 	'wikibase-property-summary-special-create-property' => 'Oppretta ein eigenskap med {{PLURAL:$1|verdi|verdiar}} [$2]',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Datasett',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons-media',
-	'wikibase-listdatatypes-geo-coordinate-head' => 'Geografisk koordinat',
+	'wikibase-listdatatypes-globe-coordinate-head' => 'Geografisk koordinat', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => 'Mengd',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Éinspråkleg tekst',
 	'wikibase-listdatatypes-multilingual-text-head' => 'Fleirspråkleg tekst',
@@ -13018,10 +13041,10 @@ $messages['si'] = array(
 	'wikibase-newentity-submit' => 'තනන්න',
 	'special-setlabel' => 'ලේබලයක් සකසන්න',
 	'wikibase-setlabel-introfull' => 'ඔබ විසින් $2 හී [[$1]] සඳහා ලේබලය සකසමින්.',
-	'wikibase-setlabel-label' => 'ලේබලය', # Fuzzy
+	'wikibase-setlabel-label' => 'ලේබලය:',
 	'wikibase-setlabel-submit' => 'ලේබලය සකසන්න',
-	'wikibase-setentity-id' => 'හැඳුනුම', # Fuzzy
-	'wikibase-setentity-language' => 'භාෂාව', # Fuzzy
+	'wikibase-setentity-id' => 'හැඳුනුම:',
+	'wikibase-setentity-language' => 'භාෂාව:',
 	'special-listdatatypes' => 'ලබාගත හැකි සියලුම දත්තවර්ගවල ලැයිස්තුව',
 	'wikibase-history-title-with-label' => '"$2" හී සංශෝධන ඉතිහාසය ($1)',
 	'wikibase-history-title-without-label' => '($1) හී සංශෝධන ඉතිහාසය',
