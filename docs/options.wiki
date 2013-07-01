@@ -54,6 +54,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :;length: the maximum length of the string, in characters.
 :Default: <code>array( 'length' => 250 )</code>
 ;multilang-truncate-length: Length of the prefix of overly long strings to be included in error messages reporting overly long strings. Defaults is 32 characters.
+;usePropertyInfoTable: Whether to use the wb_property_info table for quick lookup of meta-information about properties. True per default, can be set to false in an environment where the necessary database update can't be deployed right away. To create the table manually, use lib/includes/store/sql/wb_property_info.sql.
 
 == Client Settings ==
 
