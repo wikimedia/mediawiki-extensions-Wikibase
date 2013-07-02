@@ -58,7 +58,7 @@ describe "Check functionality of blocking a user" do
         page.wait_for_entity_to_load
         page.addAliases?.should be_false
         page.addAliasesDisabled?.should be_true
-        page.addAliasesDisabled_element.click
+        page.addAliasesDisabled_element.click # Clicking should not trigger any action.
         page.wbTooltip?.should be_true
         page.aliasesInputEmpty?.should be_false
         page.saveAliases?.should be_false

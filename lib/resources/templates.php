@@ -185,14 +185,14 @@ HTML;
 <span class="wb-ui-toolbar-group">[$1]</span>
 HTML;
 
-	$templates['wb-toolbar-button'] =
+	$templates['wikibase-wbbutton'] =
 <<<HTML
-<a href="$2" class="wb-ui-toolbar-button">$1</a>
+<a href="$2" class="wikibase-wbbutton">$1</a>
 HTML;
 
-	$templates['wb-toolbar-button-disabled'] =
+	$templates['wikibase-wbbutton-disabled'] =
 <<<HTML
-<span class="wb-ui-toolbar-button wb-ui-toolbar-button-disabled">$1</span>
+<a href="#" class="wikibase-wbbutton wikibase-wbbutton-disabled" tabindex="-1">$1</a>
 HTML;
 
 	$templates['wb-terms-heading'] =

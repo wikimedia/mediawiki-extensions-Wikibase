@@ -256,7 +256,10 @@ abstract class EntityView extends \ContextSource {
 		//@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
 
 		// make css available for JavaScript-less browsers
-		$pout->addModuleStyles( array( 'wikibase.common' ) );
+		$pout->addModuleStyles( array(
+			'wikibase.common',
+			'wikibase.ui.Toolbar',
+		) );
 
 		// make sure required client sided resources will be loaded:
 		$pout->addModules( 'wikibase.ui.entityViewInit' );
@@ -663,11 +666,11 @@ abstract class EntityView extends \ContextSource {
 		$buttonLabel = wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )->text();
 
 		$button = ( $enabled ) ?
-			wfTemplate( 'wb-toolbar-button',
+			wfTemplate( 'wikibase-wbbutton',
 				$buttonLabel,
 				$url // todo: add link to special page for non-JS editing
 			) :
-			wfTemplate( 'wb-toolbar-button-disabled',
+			wfTemplate( 'wikibase-wbbutton-disabled',
 				$buttonLabel
 			);
 

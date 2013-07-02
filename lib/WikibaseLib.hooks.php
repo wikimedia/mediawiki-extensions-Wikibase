@@ -99,8 +99,6 @@ final class LibHooks {
 				'tests/qunit/wikibase.ui.Toolbar.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.Group.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.Label.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
 				'tests/qunit/wikibase.ui.Tooltip.tests.js',
 
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ClaimGuidGenerator.tests.js',
@@ -117,7 +115,8 @@ final class LibHooks {
 
 				'tests/qunit/jquery.wikibase/jquery.wikibase.entityselector.tests.js',
 				'tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js',
-
+				'tests/qunit/jquery.wikibase/jquery.wikibase.wbbutton.tests.js',
+				'tests/qunit/jquery.wikibase/jquery.wikibase.wblabel.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',

@@ -13,12 +13,12 @@ module StatementPage
   include QualifierPage
 
   # statements UI elements
-  link(:addStatement, :xpath => "//div[contains(@class, 'wb-claimlist')]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
-  link(:addClaimToFirstStatement, :xpath => "//div[contains(@class, 'wb-claim-section')][1]/span[contains(@class, 'wb-addtoolbar')]/div/span/span/a")
-  link(:editFirstStatement, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-innoneditmode')]/span/a")
-  link(:saveStatement, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='save']")
-  link(:cancelStatement, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='cancel']")
-  link(:removeClaimButton, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[text()='remove']")
+  link(:addStatement, :css => "div.wb-claimlist > span.wb-addtoolbar > div > span > span > a:not(.wikibase-wbbutton-disabled)")
+  link(:addClaimToFirstStatement, :css => "div.wb-claim-section:nth-child(1) > span.wb-addtoolbar > div > span > span > a:not(.wikibase-wbbutton-disabled):nth-child(1)")
+  link(:editFirstStatement, :css => "span.wb-edittoolbar > span > span > span.wb-ui-toolbar-editgroup-innoneditmode > span > a:not(.wikibase-wbbutton-disabled):nth-child(1)")
+  link(:saveStatement, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[not(contains(@class, 'wikibase-wbbutton-disabled'))][text()='save']")
+  link(:cancelStatement, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[not(contains(@class, 'wikibase-wbbutton-disabled'))][text()='cancel']")
+  link(:removeClaimButton, :xpath => "//span[contains(@class, 'wb-edittoolbar')]/span/span/span[contains(@class, 'wb-ui-toolbar-editgroup-ineditmode')]/span/a[not(contains(@class, 'wikibase-wbbutton-disabled'))][text()='remove']")
   text_area(:statementValueInput, :class => "valueview-input")
   text_field(:statementValueInputField, :class => "valueview-input")
   div(:claimEditMode, :xpath => "//div[contains(@class, 'wb-claim-section')]/div[contains(@class, 'wb-edit')]")
