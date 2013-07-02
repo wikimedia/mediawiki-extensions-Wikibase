@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9cff5e9_62a71aab",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T13:19:48Z",
+      "side": 1,
+      "message": "if numSites or numTitles is \u003e 1 but normalize is set, it should not be silently ignored, that\u0027s confusing. We should fail with an error in this case. Similarly, if normalizeItemByTitlePageNames is disabled but normalize is requested, there should be an error. The client relies on the normalization, after all.\n\nAlso, I suggest to add a warning to the result in case normalization was applied (or include that information elsewhere in the result structure).",
+      "revId": "d5f2c899166e3c360cc2b83aeac8b558fdf81ec7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
