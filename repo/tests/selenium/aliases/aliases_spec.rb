@@ -41,6 +41,10 @@ describe "Check functionality of add/edit/remove aliases" do
         page.addAliases
         page.cancelAliases?.should be_true
         page.saveAliases?.should be_false
+        page.saveAliasesDisabled?.should be_true
+        page.saveAliasesDisabled # Clicking should not trigger any action
+        page.cancelAliases?.should be_true
+        page.addAliases_element.visible?.should be_false
         page.cancelAliases
         page.addAliases?.should be_true
 
@@ -170,7 +174,7 @@ describe "Check functionality of add/edit/remove aliases" do
   end
 
   context "Check functionality of duplicate-alias-detection" do
-    it "should check that duplicate aliases get detected and not beeing stored" do
+    it "should check that duplicate aliases get detected and cannot be stored" do
       on_page(ItemPage) do |page|
         page.wait_for_entity_to_load
 

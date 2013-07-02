@@ -241,7 +241,7 @@
 					: 'nw';
 
 				var tooltip = new wb.ui.Tooltip(
-					toolbar.btnSave.getTooltipParent(), // adjust tooltip to save button
+					toolbar.btnSave.data( 'toolbarbutton' ).getTooltipParent(), // adjust tooltip to save button
 					{},
 					$message,
 					// assuming the toolbar is used on the right side of some edit UI, we want to
@@ -253,12 +253,12 @@
 				// we don't even have to add this new toolbar element to the toolbar, we only use it
 				// to manage the tooltip which will have the 'save' button as element to point to.
 				// The 'save' button can still have its own tooltip though.
-				var messageAnchor = new wb.ui.Toolbar.Label( $( '<span/>' ) );
-				messageAnchor.setTooltip( tooltip );
+				var messageAnchor = $( '<span/>' ).toolbarlabel();
+				messageAnchor.data( 'toolbarlabel' ).setTooltip( tooltip );
 
 				$hideMessage.on( 'click', function( event ) {
 					event.preventDefault();
-					messageAnchor.removeTooltip();
+					messageAnchor.data( 'toolbarlabel' ).removeTooltip();
 					$.cookie( cookieKey, messageText, { 'expires': null, 'path': '/' } );
 				} );
 
@@ -267,6 +267,9 @@
 				// destroy tooltip after edit mode gets closed again:
 				$( wb ).one( 'stopItemPageEditMode', function( event ) {
 					tooltip.destroy();
+					// FIXME: messageAnchor is never added to the toolbar, so there is no need
+					//  trying to remove it. However, probably the messageAnchor itself should be
+					//  destroyed.
 					toolbar.removeElement( messageAnchor );
 				} );
 			}
