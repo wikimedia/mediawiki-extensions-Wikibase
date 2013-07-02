@@ -33,6 +33,24 @@
       "revId": "161ba50badfca36aad94ca27838de13512a22243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_8ff51683",
+        "filename": "lib/includes/LanguageUtils.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-02T18:19:57Z",
+      "side": 1,
+      "message": "Right. But why is core code checking the last item?\n\nSee Language::getFallbacksFor()",
+      "parentUuid": "c9cff5e9_fde72be5",
+      "revId": "161ba50badfca36aad94ca27838de13512a22243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
