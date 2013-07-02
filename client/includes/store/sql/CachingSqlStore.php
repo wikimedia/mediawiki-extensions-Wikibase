@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Language;
 use LogicException;
+use ObjectCache;
 
 /**
  * Implementation of the client store interface using an SQL backend via MediaWiki's
@@ -53,10 +54,50 @@ class CachingSqlStore implements ClientStore {
 	protected $language;
 
 	/**
-	 * @param Language $wikiLanguage
+	 * @var string
 	 */
-	public function __construct( Language $wikiLanguage ) {
+	private $cachePrefix;
+
+	/**
+	 * @var string
+	 */
+	private $cacheType;
+
+	/**
+	 * @var int
+	 */
+	private $cacheDuration;
+
+	/**
+	 * @param Language $wikiLanguage
+	 * @param string   $cachePrefix
+	 * @param          $cacheDuration
+	 * @param          $cacheType
+	 */
+	public function __construct( Language $wikiLanguage, $cachePrefix, $cacheDuration, $cacheType ) {
 		$this->language = $wikiLanguage;
+		$this->cachePrefix = $cachePrefix;
+		$this->cacheDuration = $cacheDuration;
+		$this->cacheType = $cacheType;
+	}
+
+	/**
+	 * This pseudo-constructor uses the following settings from $settings:
+	 * - sharedCacheKeyPrefix
+	 * - sharedCacheDuration
+	 * - sharedCacheType
+	 *
+	 * @param SettingsArray $settings
+	 * @param Language      $wikiLanguage
+	 *
+	 * @return CachingSqlStore
+	 */
+	public static function newFromSettings( SettingsArray $settings, Language $wikiLanguage ) {
+		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
+		$cacheType = $settings->getSetting( 'sharedCacheType' );
+
+		return new self( $wikiLanguage, $cachePrefix, $cacheDuration, $cacheType );
 	}
 
 	/**
@@ -206,10 +247,13 @@ class CachingSqlStore implements ClientStore {
 	 * @return PropertyLabelResolver
 	 */
 	protected function newPropertyLabelResolver() {
+		$key = $this->cachePrefix . ':TermPropertyLabelResolver';
 		return new TermPropertyLabelResolver(
 			$this->language->getCode(),
 			$this->getTermIndex(),
-			wfGetMainCache()
+			ObjectCache::getInstance( $this->cacheType ),
+			$this->cacheDuration,
+			$key
 		);
 	}
 
