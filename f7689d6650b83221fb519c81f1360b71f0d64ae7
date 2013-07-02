@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9cff5e9_5de59738",
+        "filename": "lib/includes/serializers/SiteLinkSerializer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T15:38:54Z",
+      "side": 1,
+      "message": "You moved existing code here, please credit the original authors. Or did you write that?",
+      "revId": "f7689d6650b83221fb519c81f1360b71f0d64ae7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
