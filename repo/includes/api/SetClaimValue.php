@@ -296,11 +296,9 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 	 */
 	protected function getExamples() {
 		return array(
-			// TODO
-			// 'ex' => 'desc'
+			'api.php?action=wbsetclaimvalue&claim=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&snaktype=value&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010' => 'Sets the claim with the GUID of q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F to a value of q1',
 		);
 	}
-
 
 	/**
 	 * @see \Wikibase\Api\IAutocomment::getTextForComment()

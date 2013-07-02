@@ -44,7 +44,6 @@ use Wikibase\Repo\WikibaseRepo;
 class RemoveQualifiers extends ApiWikibase {
 
 	// TODO: automcomment
-	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
 	// TODO: claim uniqueness
@@ -224,8 +223,7 @@ class RemoveQualifiers extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			// TODO
-			// 'ex' => 'desc'
+			'api.php?action=wbremovequalifiers&statement=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&references=1eb8793c002b1d9820c833d234a1b54c8e94187e&token=foobar&baserevid=7201010' => 'Remove qualifier with hash "1eb8793c002b1d9820c833d234a1b54c8e94187e" from claim with GUID of "q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F"',
 		);
 	}
 

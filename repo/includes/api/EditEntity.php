@@ -508,6 +508,8 @@ class EditEntity extends ModifyEntity {
 			=> 'Set an empty JSON structure for the entity, it will be extended with an id and the structure cleansed and completed. Report it as pretty printed json format.',
 			'api.php?action=wbeditentity&data={"labels":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
 			=> 'Set a more complete JSON structure for the entity, it will be extended with an id and the structure cleansed and completed.',
+			'api.php?action=wbeditentity&id=q42&data={"sitelinks":{"nowiki":"København","svwiki":"Köpenhamn"}}'
+			=> 'Extencs item with id q42 with a more complete JSON structure for the entity, structure cleansed and completed.',
 		);
 	}
 
