@@ -304,14 +304,11 @@ class GetEntities extends ApiWikibase {
 	 * @see \ApiBase::getExamples()
 	 */
 	protected function getExamples() {
-		$exampleId = new EntityId( Item::ENTITY_TYPE, 42 );
-		$exampleId = $exampleId->getPrefixedId();
-
 		return array(
-			"api.php?action=wbgetentities&ids=$exampleId"
-			=> "Get item with ID $exampleId with language attributes in all available languages",
-			"api.php?action=wbgetentities&ids=$exampleId&languages=en"
-			=> "Get item with ID $exampleId with language attributes in English language",
+			"api.php?action=wbgetentities&ids=q42"
+			=> "Get item with ID q42 with language attributes in all available languages",
+			"api.php?action=wbgetentities&ids=q42&languages=en"
+			=> "Get item with ID q42 with language attributes in English language",
 			'api.php?action=wbgetentities&sites=enwiki&titles=Berlin&languages=en'
 			=> 'Get the item for page "Berlin" on the site "enwiki", with language attributes in English language',
 		);

@@ -504,10 +504,14 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbeditentity&data={}&format=jsonfm'
-			=> 'Set an empty JSON structure for the entity, it will be extended with an id and the structure cleansed and completed. Report it as pretty printed json format.',
-			'api.php?action=wbeditentity&data={"labels":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
-			=> 'Set a more complete JSON structure for the entity, it will be extended with an id and the structure cleansed and completed.',
+			'api.php?action=wbeditentity&new=item&data={}'
+			=> 'Create a new empty item, returns extended with an id and the structure cleansed and completed',
+			'?action=wbeditentity&clear=true&id=q42&data={}'
+			=> 'Clear item with id q42',
+			'api.php?action=wbeditentity&new=item&data={"labels":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
+			=> 'Set a more complete JSON structure for the entity, it will be extended with an id and the structure cleansed and completed',
+			'api.php?action=wbeditentity&id=q42&data={"sitelinks":{"nowiki":"København","svwiki":"Köpenhamn"}}'
+			=> 'Extends item with id q42 with a more complete JSON structure for the entity, structure cleansed and completed',
 		);
 	}
 
