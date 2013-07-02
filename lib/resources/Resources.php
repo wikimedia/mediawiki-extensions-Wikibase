@@ -330,12 +330,12 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.ui.Toolbar.js',
 				'wikibase.ui.Toolbar.Group.js',
-				'wikibase.ui.Toolbar.Label.js',
-				'wikibase.ui.Toolbar.Button.js'
 			),
 			'dependencies' => array(
 				'jquery.nativeEventHandler',
 				'jquery.ui.core',
+				'jquery.wikibase.toolbarlabel',
+				'jquery.wikibase.toolbarbutton',
 				'mediawiki.legacy.shared',
 				'wikibase',
 				'wikibase.common',
@@ -716,6 +716,32 @@ return call_user_func( function() {
 			'messages' => array(
 				'wikibase-entity-item',
 			)
+		),
+
+		'jquery.wikibase.toolbarlabel' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/toolbar/toolbarlabel.js',
+			),
+			'styles' => array(
+				'jquery.wikibase/toolbar/themes/default/toolbarlabel.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.widget',
+				'wikibase.ui.Tooltip',
+				'wikibase.utilities',
+			),
+		),
+
+		'jquery.wikibase.toolbarbutton' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/toolbar/toolbarbutton.js',
+			),
+			'styles' => array(
+				'jquery.wikibase/toolbar/themes/default/toolbarbutton.css',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.toolbarlabel',
+			),
 		),
 
 	);

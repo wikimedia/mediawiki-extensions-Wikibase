@@ -1,0 +1,19 @@
+/**
+ * @since 0.4
+ * @file
+ * @ingroup WikibaseLib
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.wikibase-toolbarbutton-disabled {
+	cursor: default;
+}
+
+.wikibase-toolbarbutton-disabled:link,
+.wikibase-toolbarbutton-disabled:hover,
+.wikibase-toolbarbutton-disabled:active,
+.wikibase-toolbarbutton-disabled:visited {
+	color: grey;
+	text-decoration: none;
+}

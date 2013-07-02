@@ -77,12 +77,16 @@ describe "Check references UI" do
         page.addReferenceToFirstClaim
         page.referenceEditHeading?.should be_true
         page.addReferenceToFirstClaim?.should be_false
+        page.addReferenceToFirstClaimDisabled?.should be_true
         page.saveReference?.should be_false
+        page.saveReferenceDisabled?.should be_true
         page.removeReference?.should be_false
         page.cancelReference?.should be_true
         page.addReferenceLine?.should be_false
+        page.addReferenceLineDisabled?.should be_true
         page.entitySelectorInput?.should be_true
         page.removeReferenceLine1?.should be_false
+        page.removeReferenceLine1Disabled?.should be_true
         page.cancelReference
 
         page.addReferenceToFirstClaim?.should be_true
