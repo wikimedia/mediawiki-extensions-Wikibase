@@ -68,6 +68,7 @@ $messages['en'] = array(
 /** Message documentation (Message documentation)
  * @author Amire80
  * @author Jeblad
+ * @author Lloffiwr
  * @author Metalhead64
  * @author Nemo bis
  * @author Nnemo
@@ -150,7 +151,7 @@ See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and
 Parameters:
 * $1 is the expected type
 * $2 is the actual type',
-	'wikibase-validator-too-long' => 'Input validation error shown when the input is too short
+	'wikibase-validator-too-long' => 'Input validation error shown when the input is too long
 
 Parameters:
 * $1 is the minimum length
@@ -615,6 +616,7 @@ $messages['cy'] = array(
 	'wikibase-entity-item' => 'yr eitem',
 	'wikibase-entity-property' => 'y nodwedd',
 	'wikibase-entity-query' => 'chwiliad',
+	'wikibase-deletedentity-query' => 'Gofyniad a ddilewyd',
 	'wikibase-diffview-reference' => 'ffynhonnell',
 	'wikibase-diffview-rank' => 'gradd',
 	'wikibase-diffview-qualifier' => 'goleddfwr',
@@ -642,6 +644,7 @@ $messages['cy'] = array(
 	'wikibase-sitelinks-siteid-columnheading' => 'Cod',
 	'wikibase-sitelinks-link-columnheading' => 'Erthygl a gysylltwyd',
 	'wikibase-tooltip-error-details' => 'Manylion',
+	'wikibase-validator-bad-type' => '$2 yn lle $1',
 	'datatypes-type-wikibase-item' => 'Eitem',
 	'datatypes-type-commonsMedia' => 'Ffeil cyfrwng ar y Comin',
 	'version-wikibase' => 'Wikibase',
@@ -1602,6 +1605,36 @@ $messages['ka'] = array(
 	'wikibase-tooltip-error-details' => 'დეტალები',
 	'datatypes-type-wikibase-item' => 'ელემენტი',
 	'datatypes-type-commonsMedia' => 'მედიაფაილი ვიკისაწყობში',
+);
+
+/** Kazakh (Cyrillic script) (қазақша (кирил)‎)
+ * @author Arystanbek
+ */
+$messages['kk-cyrl'] = array(
+	'wikibase-entity-item' => 'элемент',
+	'wikibase-entity-property' => 'Сипат',
+	'wikibase-entity-query' => 'сұрау',
+	'wikibase-deletedentity-item' => 'Жойылған элемент',
+	'wikibase-deletedentity-property' => 'Жойылған сипат',
+	'wikibase-deletedentity-query' => 'Жойылған сұрау',
+	'wikibase-diffview-reference' => 'дереккөз',
+	'wikibase-diffview-rank' => 'Рет',
+	'wikibase-diffview-qualifier' => 'көрсеткіш',
+	'wikibase-diffview-label' => 'деңгей',
+	'wikibase-diffview-alias' => 'лақаптар',
+	'wikibase-diffview-description' => 'сипаттамасы',
+	'wikibase-diffview-link' => 'сілтемелер',
+	'wikibase-error-ui-edit-conflict' => 'Осында өңдеу қақтығысы. Қайта жүктеңіз және қайтадан сақтаңыз.',
+	'wikibase-sitelinks-wikipedia' => 'Бұл элементке Уикипедия беттері сілтенген',
+	'wikibase-sitelinks-sitename-columnheading' => 'Тіл',
+	'wikibase-sitelinks-siteid-columnheading' => 'Код',
+	'wikibase-sitelinks-link-columnheading' => 'Сілтенген мақала',
+	'wikibase-tooltip-error-details' => 'Бөлшектер',
+	'wikibase-validator-bad-entity-id' => 'Көріксіз ID: $1',
+	'wikibase-validator-no-such-entity' => '$1 табылмады',
+	'datatypes-type-wikibase-item' => 'элемент',
+	'datatypes-type-commonsMedia' => 'Ортаққор медиа файлы',
+	'version-wikibase' => 'Уикиқор',
 );
 
 /** Korean (한국어)

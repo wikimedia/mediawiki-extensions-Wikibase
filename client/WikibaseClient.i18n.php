@@ -780,7 +780,7 @@ $messages['cs'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ není platný kód jazyka.',
 	'wikibase-unconnectedpages-page-warning' => 'Název stránky nelze pro dotaz použít, takže se ignoruje.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Jen stránky s mezijazykovými odkazy',
-	'wikibase-unconnectedpages-format-row' => '(stránka obsahuje $1 {{PLURAL:$1|mezijazykový odkaz|mezijazykové odkazy|mezijazykových odkazů}})', # Fuzzy
+	'wikibase-unconnectedpages-format-row' => '(stránka obsahuje $1 {{PLURAL:$1|mezijazykový odkaz|mezijazykové odkazy|mezijazykových odkazů}})',
 );
 
 /** Church Slavic (словѣ́ньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ)
@@ -1736,7 +1736,9 @@ $messages['ia'] = array(
 $messages['id'] = array(
 	'wikibase-client-desc' => 'Klien untuk ekstensi Wikibase',
 	'specialpages-group-wikibaseclient' => 'Klien Wikidata',
+	'tooltip-t-wikibase' => 'Pranala untuk menghubungkan data penyimpanan item',
 	'wikibase-after-page-move' => 'Anda juga perlu [$1 memperbarui item] yang terkait di Wikidata dalam hal interwiki saat pemindahan halaman',
+	'wikibase-after-page-move-queued' => '[$1 item Wikidata] yang terkait dengan halaman ini akan secara otomatis diperbarui secepatnya.',
 	'wikibase-comment-remove' => 'Item Wikidata terkait dihapus. Interwiki dihapus.',
 	'wikibase-comment-linked' => 'Item Wikidata telah tertaut ke halaman ini.',
 	'wikibase-comment-unlink' => 'Halaman ini sudah tidak tertaut pada item Wikidata. Interwiki dihapus.',
@@ -1746,6 +1748,7 @@ $messages['id'] = array(
 	'wikibase-comment-sitelink-change' => 'Interwiki berubah dari $1 ke $2',
 	'wikibase-comment-sitelink-remove' => 'Pengurangan interwiki: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|perubahan}}',
+	'wikibase-dataitem' => 'Data item',
 	'wikibase-editlinks' => 'Sunting interwiki',
 	'wikibase-editlinkstitle' => 'Sunting pranala interwiki',
 	'wikibase-linkitem-addlinks' => 'Tambah interwiki',
@@ -1769,6 +1772,7 @@ $messages['id'] = array(
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Tampilkan suntingan Wikidata di perubahan terbaru',
 	'wikibase-watchlist-show-changes-pref' => 'Tampilkan suntingan Wikidata pada daftar pantauan Anda',
+	'wikibase-error-serialize-error' => 'Gagal menghubungkan data',
 	'wikibase-error-invalid-entity-id' => 'ID yang dimasukkan tidak dikenal sistem. Gunakan entitas ID yang valid.',
 	'special-unconnectedpages' => 'Halaman yang belum terhubung ke Wikidata',
 	'wikibase-unconnectedpages-legend' => 'Pilihan halaman yang belum terhubung',
@@ -1780,6 +1784,7 @@ $messages['id'] = array(
 	'wikibase-unconnectedpages-format-row' => '($1 interwiki pada halaman)', # Fuzzy
 	'wikibase-pageinfo-entity-id' => 'ID Item Wikidata',
 	'wikibase-pageinfo-entity-id-none' => 'Tidak ada',
+	'wikibase-property-render-error' => 'Gagal merender properti $1: $2',
 );
 
 /** Iloko (Ilokano)
@@ -2049,6 +2054,54 @@ $messages['ka'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '„$1“ არ არის ენის სწორი კოდი.',
 	'wikibase-unconnectedpages-iwdata-label' => 'მხოლოდ ენათშორისი ბმულების მქონე გვერდები',
 	'wikibase-unconnectedpages-format-row' => '($1 ენათშორისი ბმული გვერდზე)', # Fuzzy
+);
+
+/** Kazakh (Cyrillic script) (қазақша (кирил)‎)
+ * @author Arystanbek
+ */
+$messages['kk-cyrl'] = array(
+	'specialpages-group-wikibaseclient' => 'Уикидерек тұтынушы',
+	'tooltip-t-wikibase' => 'Сілтеме дерек қойма элементімен байланысты',
+	'wikibase-comment-remove' => 'Байланысқан Уикидерек элементі жойылды. Тіл сілтемелері алынып тасталды.',
+	'wikibase-comment-linked' => 'Уикидерек элементі бұл бетке сілтенді.',
+	'wikibase-comment-unlink' => 'Бұл бет Уикидерек элементінен сілтенілмеді. Тіл сілтемелері алынып тасталды.',
+	'wikibase-comment-restore' => 'Байланысқан Уикидерек элементі жойылмады. Тіл сілтемелері қалпына келтірілді.',
+	'wikibase-comment-update' => 'Уикидерек элементі өзгертілді',
+	'wikibase-comment-sitelink-add' => 'Тіл сілтемесі қосылды: $1',
+	'wikibase-comment-sitelink-change' => 'Тіл сілтемесі $1 дегеннен $2 дегенге өзгертілді',
+	'wikibase-comment-sitelink-remove' => 'Тіл сілтемесі алынып тасталды: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|өзгеріс|өзгерістер}}',
+	'wikibase-dataitem' => 'Дерек элементі',
+	'wikibase-editlinks' => 'Сілтемелерді өңдеу',
+	'wikibase-editlinkstitle' => 'Тіларалық сілтемелерді өңдеу',
+	'wikibase-linkitem-addlinks' => 'Сілтемелер қосу',
+	'wikibase-linkitem-close' => 'Тілқатысу терезесін жабу және бетті қайта жүктеу',
+	'wikibase-linkitem-failure' => 'Белгісіз қателік осы бетті қайтадан сілтетіп көру.',
+	'wikibase-linkitem-title' => 'Бетке сілтеу',
+	'wikibase-linkitem-linkpage' => 'Бетке сілтеу',
+	'wikibase-linkitem-selectlink' => 'Бұл бетке сілтегіңіз келген сайтты және бетті таңдаңыз.',
+	'wikibase-linkitem-input-site' => 'Тіл:',
+	'wikibase-linkitem-input-page' => 'Бет:',
+	'wikibase-linkitem-invalidsite' => 'Белгісіз немесе жарамсыз сайт таңдалды',
+	'wikibase-linkitem-confirmitem-button' => 'Құптау',
+	'wikibase-linkitem-not-loggedin-title' => 'Сіз кіруіңіз керек',
+	'wikibase-linkitem-not-loggedin' => 'Сіз бұл уикиге кіруіңіз керек және  [$1 орталық дерек қоймасында] бұл мүмкіндікті қолдану',
+	'wikibase-linkitem-success-create' => 'Беттер сәтті сілтенді. Сіз [$1 орталық дерек қоймасыңыздан] жаңадан басталған элементердегі қамтылған сілтемелерді таба аласыз.',
+	'wikibase-linkitem-success-link' => 'Беттер сәтті сілтенді. Сіз [$1 орталық дерек қоймасыңыздан] жаңадан басталған элементердегі қамтылған сілтемелерді таба аласыз.',
+	'wikibase-property-notfound' => '$1 сипаты табылмады.',
+	'wikibase-property-notsupportedyet' => 'Уикиқор $1 түріндегі сипаттарды қолдамайды.',
+	'wikibase-rc-hide-wikidata' => '$1 Уикидерек',
+	'wikibase-rc-show-wikidata-pref' => 'Уикидерек өңдемелерін жуықтағы өзгерістерден көрсету',
+	'wikibase-watchlist-show-changes-pref' => 'Уикидерек өңдемелерін бақылау тізіміңізден көрсету',
+	'special-unconnectedpages' => 'Беттер элементтерге байланыспады',
+	'wikibase-unconnectedpages-legend' => 'Байланыспаған беттер параметрлері',
+	'wikibase-unconnectedpages-page' => 'Беттегі тізім нәтижелерін бастау:',
+	'wikibase-unconnectedpages-submit' => 'Өту',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" жарамсыз тіл коды емес.',
+	'wikibase-unconnectedpages-iwdata-label' => 'Тек тіларалық сілтемелер беттері',
+	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|тіларалықсілтеме|тіларалықсілтемелер}} бетінде)',
+	'wikibase-pageinfo-entity-id' => 'Уикидерек элемент ID',
+	'wikibase-pageinfo-entity-id-none' => 'Ешқандай',
 );
 
 /** Korean (한국어)
