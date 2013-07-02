@@ -203,9 +203,7 @@
 			// Display anonymous user edit warning:
 			if ( mw.user && mw.user.isAnon() ) {
 				mw.notify(
-					mw.msg( 'wikibase-anonymouseditwarning',
-						mw.msg( 'wikibase-entity-' + wb.entity.getType() )
-					)
+					mw.msg( 'wikibase-anonymouseditwarning-' + wb.entity.getType() )
 				);
 			}
 

@@ -157,10 +157,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 
 		if ( $this->getUser()->isAnon() ) {
 			$this->showErrorHTML(
-				$this->msg(
-					'wikibase-anonymouseditwarning',
-					$this->msg( 'wikibase-entity-item' )->text()
-				)->parse(),
+				$this->msg( 'wikibase-anonymouseditwarning-item' )->parse(),
 				'warning'
 			);
 		}
