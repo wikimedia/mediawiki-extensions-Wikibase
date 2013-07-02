@@ -304,14 +304,23 @@ class GetEntities extends ApiWikibase {
 	 * @see \ApiBase::getExamples()
 	 */
 	protected function getExamples() {
-		$exampleId = new EntityId( Item::ENTITY_TYPE, 42 );
-		$exampleId = $exampleId->getPrefixedId();
-
 		return array(
-			"api.php?action=wbgetentities&ids=$exampleId"
-			=> "Get item with ID $exampleId with language attributes in all available languages",
-			"api.php?action=wbgetentities&ids=$exampleId&languages=en"
-			=> "Get item with ID $exampleId with language attributes in English language",
+			"api.php?action=wbgetentities&ids=q42"
+			=> "Get entity with ID q42 with all available attributes in all available languages",
+			"api.php?action=wbgetentities&ids=p2"
+			=> "Get entity with ID p2 with all available attributes in all available languages",
+			"api.php?action=wbgetentities&ids=q42|p2"
+			=> "Get entities with IDs q42 and p2 with all available attributes in all available languages",
+			"api.php?action=wbgetentities&ids=q42&languages=en"
+			=> "Get entity with ID q42 with all available attributes in English language",
+			"api.php?action=wbgetentities&ids=q42&props=labels"
+			=> "Get entity with ID q42 showing all labels in all available languages",
+			"api.php?action=wbgetentities&ids=p2|p3&props=datatype"
+			=> "Get entities with IDs p2 and p3 showing only datatypes",
+			"api.php?action=wbgetentities&ids=q42&props=aliases&languages=en"
+			=> "Get entity with ID q42 showing all aliases in English language",
+			"api.php?action=wbgetentities&ids=q1|q42&props=descriptions&languages=en|de|fr"
+			=> "Get entities with IDs q1 and q42 showing descriptions in English, German and French languages",
 			'api.php?action=wbgetentities&sites=enwiki&titles=Berlin&languages=en'
 			=> 'Get the item for page "Berlin" on the site "enwiki", with language attributes in English language',
 		);

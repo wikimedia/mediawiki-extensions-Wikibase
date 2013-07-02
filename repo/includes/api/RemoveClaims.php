@@ -364,8 +364,7 @@ class RemoveClaims extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			// TODO
-			// 'ex' => 'desc'
+			'api.php?action=wbremoveclaims&claim=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N&token=foobar&baserevid=7201010' => 'Remove claim with GUID of "q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N"',
 		);
 	}
 
