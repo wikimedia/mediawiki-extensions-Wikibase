@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9cff5e9_425db644",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T15:07:34Z",
+      "side": 1,
+      "message": "These are flags for a bitmap, right? in that case, the \"all\" constant should probably be 0xFF or 0xFFFF or so, to make it obvious what\u0027s going on. Using -1 relies on a two-compliment representation for negative numbers - that\u0027s common, but I don\u0027t know whether PHP guarantees it; and even if it does, it may not be obvious at the casual reader.",
+      "revId": "633bc50baf431afe924644bb4319b4f351f13057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_8257ae24",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T15:07:34Z",
+      "side": 1,
+      "message": "It should be documented what the output of this method depends on - just what\u0027s in the Language classes, or also configuration, or even user preferences?\n\nThis would be obvious from the arguments if we avoided global state consequently, but since that is not the case (LanguageWithConversion::factory, for starters), it\u0027s good to be explicit about this.",
+      "revId": "633bc50baf431afe924644bb4319b4f351f13057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_e2194a84",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T15:07:34Z",
+      "side": 1,
+      "message": "It\u0027s not obvious to me that the logic for *building* a fallback chain should be in the same class as the code representing the fallback chain (and applying the fallback chain). It\u0027s not a big deal right now, but consider putting it somewhere else (into a separate \"service\" object, perhaps? FallbackChainFactory?).",
+      "revId": "633bc50baf431afe924644bb4319b4f351f13057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_a2363200",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T15:07:34Z",
+      "side": 1,
+      "message": "The name is a bit obscure. How about \"getPreferredValue\" or \"getValueInBestLanguage\" or some such?",
+      "revId": "633bc50baf431afe924644bb4319b4f351f13057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_e2402a5c",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T15:07:34Z",
+      "side": 1,
+      "message": "hm, \"getFetchLanguage\" should rather be called \"getOriginalLanguage\", I think... should have seen that earlier.",
+      "revId": "633bc50baf431afe924644bb4319b4f351f13057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
