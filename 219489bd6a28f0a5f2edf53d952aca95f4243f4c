@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "c9cff5e9_1d22ff04",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T16:18:42Z",
+      "side": 1,
+      "message": "I don\u0027t think we need this, see my comment below.",
+      "revId": "219489bd6a28f0a5f2edf53d952aca95f4243f4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9cff5e9_a8973b9a",
         "filename": "lib/includes/serializers/SerializationOptions.php",
         "patchSetId": 5
@@ -30,6 +47,40 @@
       "writtenOn": "2013-07-01T15:47:24Z",
       "side": 1,
       "message": "array of what?",
+      "revId": "219489bd6a28f0a5f2edf53d952aca95f4243f4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_3d6ee330",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T16:18:42Z",
+      "side": 1,
+      "message": "Just use $languageCode as the key for $this-\u003elanguageFallbackChains",
+      "revId": "219489bd6a28f0a5f2edf53d952aca95f4243f4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_3d25430d",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T16:18:42Z",
+      "side": 1,
+      "message": "Following my above comment, this should just be:\nreturn $this-\u003elanguageFallbackChains.",
       "revId": "219489bd6a28f0a5f2edf53d952aca95f4243f4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
