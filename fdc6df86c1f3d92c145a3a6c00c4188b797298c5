@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9cff5e9_7daa1b74",
+        "filename": "lib/includes/LanguageUtils.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T16:04:44Z",
+      "side": 1,
+      "message": "I\u0027d recommend to make a service class, with an instance managed by WikibaseRepo (and/or WikibaseClient).",
+      "revId": "fdc6df86c1f3d92c145a3a6c00c4188b797298c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_5da757aa",
+        "filename": "lib/includes/LanguageUtils.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T16:04:44Z",
+      "side": 1,
+      "message": "Global state is evil, you can\u0027s force or replace it for testing. There would at least need to be a way to reset the cache...",
+      "revId": "fdc6df86c1f3d92c145a3a6c00c4188b797298c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
