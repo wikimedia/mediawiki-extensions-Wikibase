@@ -11,6 +11,7 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
+use Wikibase\Item;
 use Wikibase\Statement;
 use Wikibase\Claims;
 use Wikibase\Claim;
@@ -45,7 +46,6 @@ use Wikibase\Repo\WikibaseRepo;
 class GetClaims extends ApiWikibase {
 
 	// TODO: automcomment
-	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
 
@@ -270,9 +270,12 @@ class GetClaims extends ApiWikibase {
 	 * @return array
 	 */
 	protected function getExamples() {
+		$exampleId = new EntityId( Item::ENTITY_TYPE, 42 );
+		$exampleId = $exampleId->getPrefixedId();
 		return array(
-			// TODO
-			// 'ex' => 'desc'
+			"api.php?action=wbgetclaims&entity=q42" => "Get claims for item with ID $exampleId",
+			"api.php?action=wbgetclaims&entity=$exampleId&rank=normal" => "Get claims for item with ID $exampleId that are ranked as normal",
+			'api.php?action=wbgetclaims&claim=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' => "Get claim with GUID of q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 		);
 	}
 
