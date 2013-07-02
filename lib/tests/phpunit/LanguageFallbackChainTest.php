@@ -213,4 +213,12 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			) ),
 		);
 	}
+
+	/**
+	 * @group WikibaseUtils
+	 */
+	public function testGetFallbackChainFromContext() {
+		$chain = LanguageFallbackChain::newFromContext( \RequestContext::getMain() );
+		$this->assertTrue( $chain instanceof LanguageFallbackChain );
+	}
 }
