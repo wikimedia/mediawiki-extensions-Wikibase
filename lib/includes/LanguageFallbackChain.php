@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Language;
+use Language, IContextSource;
 
 /**
  * Object representing a language fallback chain used in Wikibase.
@@ -136,6 +136,73 @@ class LanguageFallbackChain {
 			$recursiveMode |= self::FALLBACK_SELF;
 			foreach ( $language->getFallbackLanguages() as $other ) {
 				$this->loadFromLanguage( Language::factory( $other ), $recursiveMode );
+			}
+		}
+	}
+
+	/**
+	 * Construct the fallback chain based a context, currently from on data provided by Extension:Babel.
+	 *
+	 * @param IContextSource $context
+	 *
+	 * @return LanguageFallbackChain
+	 */
+	public static function newFromContext( IContextSource $context ) {
+		$chain = new self();
+		$chain->loadFromContext( $context );
+
+		return $chain;
+	}
+
+	/**
+	 * Load fallback chain for a given context into this object.
+	 *
+	 * @param IContextSource $context
+	 */
+	private function loadFromContext( IContextSource $context ) {
+		global $wgBabelCategoryNames;
+
+		$user = $context->getUser();
+
+		if ( !class_exists( 'Babel' ) || $user->isAnon() ) {
+			$this->loadFromLanguage( $context->getLanguage(), self::FALLBACK_ALL );
+			return;
+		}
+
+		$babels = array();
+		$contextLanguage = array( $context->getLanguage()->getCode() );
+
+		if ( count( $wgBabelCategoryNames ) ) {
+			// A little redundant but it's the only way to get required information with current Babel API.
+			$previousLevelBabel = array();
+			foreach ( $wgBabelCategoryNames as $level => $_ ) {
+				// Make the current language at the top of the chain.
+				$levelBabel = array_unique( array_merge(
+					$contextLanguage, \Babel::getUserLanguages( $user, $level )
+				) );
+				$babels[$level] = array_diff( $levelBabel, $previousLevelBabel );
+				$previousLevelBabel = $levelBabel;
+			}
+		} else {
+			// Just in case
+			$babels['N'] = $contextLanguage;
+		}
+
+		// First pass to get "compatible" languages (self and variants)
+		foreach ( $babels as $languageCodes ) { // Already sorted when added
+			foreach ( array( self::FALLBACK_SELF, self::FALLBACK_VARIANTS ) as $mode ) {
+				foreach ( $languageCodes as $languageCode ) {
+					$this->loadFromLanguage( Language::factory( $languageCode ), $mode );
+				}
+			}
+		}
+
+		// Second pass to get other languages from system fallback chain
+		foreach ( $babels as $languageCodes ) {
+			foreach ( $languageCodes as $languageCode ) {
+				$this->loadFromLanguage( Language::factory( $languageCode ),
+					self::FALLBACK_OTHERS | self::FALLBACK_VARIANTS
+				);
 			}
 		}
 	}
