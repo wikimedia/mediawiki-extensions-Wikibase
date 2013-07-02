@@ -16,6 +16,41 @@
       "revId": "a55357e82c31b7800f890325566a560206770e42",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_7d94dbe0",
+        "filename": "client/tests/phpunit/includes/LangLinkHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T16:35:09Z",
+      "side": 1,
+      "message": "it means i forgot to remove my debug code :)",
+      "parentUuid": "e9daf9a7_5eb3d14c",
+      "revId": "a55357e82c31b7800f890325566a560206770e42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_5d9117ef",
+        "filename": "client/tests/phpunit/includes/LangLinkHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T16:35:09Z",
+      "side": 1,
+      "message": "that would be nice, but needs to be changed in core.",
+      "revId": "a55357e82c31b7800f890325566a560206770e42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
