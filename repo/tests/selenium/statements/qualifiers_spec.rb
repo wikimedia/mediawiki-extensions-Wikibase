@@ -83,6 +83,7 @@ describe "Check qualifiers UI" do
         page.addQualifier?.should be_true
         page.addQualifier
         page.addQualifier?.should be_false
+        page.addQualifierDisabled?.should be_true
         page.saveStatement?.should be_false
         page.cancelStatement?.should be_true
         page.removeClaimButton?.should be_true
