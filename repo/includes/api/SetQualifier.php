@@ -55,7 +55,6 @@ use Wikibase\validators\SnakValidator;
 class SetQualifier extends ApiWikibase {
 
 	// TODO: automcomment
-	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
 	// TODO: more explicit support for snak merging?
@@ -461,8 +460,7 @@ class SetQualifier extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			// TODO
-			// 'ex' => 'desc'
+			'api.php?action=wbsetqualifier&claim=q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&property=qp&value=GdyjxP8I6XB3&snaktype=value&token=foobar' => 'Set qualifier for claim to string value GdyjxP8I6XB3',
 		);
 	}
 
