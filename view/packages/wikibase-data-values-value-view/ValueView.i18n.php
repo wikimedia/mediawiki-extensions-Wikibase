@@ -185,6 +185,18 @@ $messages['ca'] = array(
 	'valueview-expert-emptyvalue-empty' => 'buit',
 );
 
+/** Welsh (Cymraeg)
+ * @author Lloffiwr
+ */
+$messages['cy'] = array(
+	'valueview-expert-timevalue-calendar-gregorian' => 'Calendr Gregori',
+	'valueview-expert-timevalue-calendar-julian' => 'Calendr Iŵl',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Calendr Gregori)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Calendr Iŵl)',
+	'valueview-expert-timeinput-calendarhint-switch-gregorian' => '&rarr; newid i Galendr Gregori',
+	'valueview-expert-timeinput-calendarhint-switch-julian' => '&rarr; newid i galendr Iŵl',
+);
+
 /** Danish (dansk)
  * @author Byrial
  */
