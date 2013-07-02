@@ -49,8 +49,8 @@ describe "Check for bugs" do
     end
   end
 
-  context "bug: zombie alias appearing again after beeing removed (bug 42101)" do
-    it "should check that alias does not get readded when removed" do
+  context "bug: zombie alias appearing again after being removed (bug 42101)" do
+    it "should check that alias does not get re-added when removed" do
       visit_page(CreateItemPage) do |page|
         page.create_new_item(generate_random_string(10), generate_random_string(20))
       end
