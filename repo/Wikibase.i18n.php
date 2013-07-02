@@ -91,8 +91,10 @@ $messages['en'] = array(
 
 	'wikibase-entityselector-more' => 'more',
 
-	'wikibase-anonymouseditwarning' => "Warning: You are not logged in.
-Your IP address will be recorded in the edit history of this $1.",
+	'wikibase-anonymouseditwarning-item' => "Warning: You are not logged in.
+Your IP address will be recorded in the edit history of this item.",
+	'wikibase-anonymouseditwarning-property' => "Warning: You are not logged in.
+Your IP address will be recorded in the edit history of this property.",
 	'wikibase-restrictionedit-tooltip-message' => 'This page is protected. Editing is not allowed.',
 	'wikibase-blockeduser-tooltip-message' => 'You do not have permission to edit because your username or IP address has been blocked.',
 
@@ -597,12 +599,10 @@ See also {{msg-mw|wikidata-shortcopyrightwarning}}',
 	'wikibase-copyrighttooltip-acknowledge' => 'Label of the link to not show the copyright warning again. A copyright warning is presented to the user whenever the user is about to alter any data unless the warning is not suppressed permanently by clicking this link.',
 	'wikibase-entityselector-more' => 'The entity selector is a user interface widget that allows selecting an entity (see [[d:Wikidata:Glossary]]). It consists out of an input field and a list of suggestions that is filled according to the text typed into the input field. Initially, the list of suggestions is filled with a certain number of suggestions. Clicking the link labeled with this message will fill the list of suggestions with additional suggestions. If there are no additional suggestions or no suggestions at all, the link does not show up.
 {{Identical|More}}',
-	'wikibase-anonymouseditwarning' => "Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on an entity (see [[d:Wikidata:Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in.
-
-Parameters:
-* $1 - the entity's name
-
-See also:
+	'wikibase-anonymouseditwarning-item' => "Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on an entity (see [[d:Wikidata:Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in. See also:
+* {{msg-mw|Anoneditwarning}}
+* {{msg-mw|Sf autoedit anoneditwarning}}",
+	'wikibase-anonymouseditwarning-property' => "Warning message that is displayed using the MediaWiki notification system each time the user starts to edit something on an entity (see [[d:Wikidata:Glossary]]) page (e.g. by clicking an edit button). Basically, the message shall make the user aware that his/her IP will be recorded when saving as long as not being logged in. See also:
 * {{msg-mw|Anoneditwarning}}
 * {{msg-mw|Sf autoedit anoneditwarning}}",
 	'wikibase-restrictionedit-tooltip-message' => 'When editing a page (a data item) is restricted for the current user, this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item.',

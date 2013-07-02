@@ -56,7 +56,8 @@ return call_user_func( function() {
 				'wikibase-sitelinks-wikipedia',
 				'wikibase-statements',
 				'wikibase-copyrighttooltip-acknowledge',
-				'wikibase-anonymouseditwarning',
+				'wikibase-anonymouseditwarning-item',
+				'wikibase-anonymouseditwarning-property',
 				'wikibase-entity-item',
 				'wikibase-entity-property',
 			)

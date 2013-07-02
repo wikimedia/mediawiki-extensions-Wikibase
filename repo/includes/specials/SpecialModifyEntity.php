@@ -157,10 +157,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 
 		if ( $this->getUser()->isAnon() ) {
 			$this->showErrorHTML(
-				$this->msg(
-					'wikibase-anonymouseditwarning',
-					$this->msg( 'wikibase-entity-item' )->text()
-				)->parse(),
+				$this->msg( 'wikibase-anonymouseditwarning-item' )->parse(),
 				'warning'
 			);
 		}
@@ -220,26 +217,26 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	 * @return string
 	 */
 	protected function getFormElements() {
-		$id = $this->entityContent ? $this->entityContent->getTitle()->getText() : '';
-		return Html::element(
-			'label',
-			array(
-				'for' => 'wb-setentity-id',
-				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-setentity-id' )->text()
+	$id = $this->entityContent ? $this->entityContent->getTitle()->getText() : '';
+	return Html::element(
+		'label',
+		array(
+			'for' => 'wb-setentity-id',
+			'class' => 'wb-label'
+		),
+		$this->msg( 'wikibase-setentity-id' )->text()
+	)
+	. Html::input(
+		'id',
+		$id,
+		'text',
+		array(
+			'class' => 'wb-input',
+			'id' => 'wb-setentity-id'
 		)
-		. Html::input(
-			'id',
-			$id,
-			'text',
-			array(
-				'class' => 'wb-input',
-				'id' => 'wb-setentity-id'
-			)
-		)
-		. Html::element( 'br' );
-	}
+	)
+	. Html::element( 'br' );
+}
 
 	/**
 	 * Modifies the entity.
@@ -262,18 +259,18 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	 * @return string The summary
 	 */
 	protected function getSummary( $key, $value, $i18n ) {
-		list( $counts, $summary, $lang ) = Autocomment::formatAutoSummary(
-			array( $value ),
-			$this->getLanguage()
-		);
+	list( $counts, $summary, $lang ) = Autocomment::formatAutoSummary(
+		array( $value ),
+		$this->getLanguage()
+	);
 
-		$comment = Autocomment::formatAutoComment(
-			$i18n,
-			array( $counts, $key )
-		);
+	$comment = Autocomment::formatAutoComment(
+		$i18n,
+		array( $counts, $key )
+	);
 
-		return AutoComment::formatTotalSummary( $comment, $summary, $lang );
-	}
+	return AutoComment::formatTotalSummary( $comment, $summary, $lang );
+}
 
 	/**
 	 * Output an error message telling the user that he is blocked
@@ -291,10 +288,10 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	 * @since 0.4
 	 */
 	public function checkBlocked() {
-		if ( $this->getUser()->isBlocked() ) {
-			$this->displayBlockedError();
-		}
+	if ( $this->getUser()->isBlocked() ) {
+		$this->displayBlockedError();
 	}
+}
 
 	/**
 	 * Show the rights warning message
@@ -302,13 +299,13 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 	 * @since 0.4
 	 */
 	public function showRightsMessage() {
-		$this->showErrorHTML(
-			Html::rawElement(
-				'p',
-				array(),
-				Utils::getRightsWarningMessage()->parse()
-			),
-			'warning'
-		);
-	}
+	$this->showErrorHTML(
+		Html::rawElement(
+			'p',
+			array(),
+			Utils::getRightsWarningMessage()->parse()
+		),
+		'warning'
+	);
+}
 }
