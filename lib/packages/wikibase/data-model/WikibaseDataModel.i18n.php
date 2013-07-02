@@ -78,6 +78,13 @@ $messages['he'] = array(
 	'wikibasedatamodel-desc' => 'רכיב שמגדיר את מודל הנתונים של ויקיבייס',
 );
 
+/** Indonesian (Bahasa Indonesia)
+ * @author Iwan Novirion
+ */
+$messages['id'] = array(
+	'wikibasedatamodel-desc' => 'Komponen yang mendefinisikan model data Wikibase',
+);
+
 /** Italian (italiano)
  * @author Beta16
  */
