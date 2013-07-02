@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c9cff5e9_ef893226",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-02T18:05:16Z",
+      "side": 1,
+      "message": "Well this is a protected instead of a private member, and I didn\u0027t (and I\u0027m unable to) track all attempts to extends this class and usages of this member, so I guess I\u0027d better keep it here...",
+      "parentUuid": "c9cff5e9_1d22ff04",
+      "revId": "219489bd6a28f0a5f2edf53d952aca95f4243f4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9cff5e9_a8973b9a",
         "filename": "lib/includes/serializers/SerializationOptions.php",
         "patchSetId": 5
