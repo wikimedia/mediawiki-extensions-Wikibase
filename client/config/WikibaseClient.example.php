@@ -65,6 +65,9 @@ $wgWBClientSettings['changesDatabase'] = "repo";
 $wgWBClientSettings['injectRecentChanges'] = true;
 $wgWBClientSettings['showExternalRecentChanges'] = true;
 
+// Make sure we use the same keys on repo and clients, so we can share cached objects.
+$wgWBClientSettings['sharedCacheKeyPrefix'] = $wgWBClientSettings['repoDatabase'] . ':WBL/' . WBL_VERSION;
+
 $wgLBFactoryConf = array(
 	// In order to seamlessly access a remote wiki, to fetch entity data,
 	// LBFactory_Multi must be used.

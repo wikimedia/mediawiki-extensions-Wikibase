@@ -263,8 +263,7 @@ final class WikibaseRepo {
 	 * @return Store
 	 */
 	public function getStore() {
-		//TODO: inject this, get rid of global store instance(s)
-		return StoreFactory::getStore();
+		return $this->store;
 	}
 
 }

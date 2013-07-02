@@ -59,6 +59,21 @@ return call_user_func( function() {
 		// may contain mappings from site-id to db-name.
 		'localClientDatabases' => array(),
 
+		// Prefix to use for cache keys that should be shared among
+		// a wikibase repo and all its clients.
+		// The default includes WBL_VERSION and $wgDBname;
+		// In order to share caches between clients (and the repo),
+		// set a prefix based on the repo's name and WBL_VERSION
+		// or a similar version ID.
+		// @todo: generate the default programmatically, so it can automatically use the right repo ID.
+		'sharedCacheKeyPrefix' => $GLOBALS['wgDBname'] . ':WBL/' . WBL_VERSION,
+
+		// The duration of the object cache, in seconds.
+		'sharedCacheDuration' => 60 * 60,
+
+		// The type of object cache to use. Use CACHE_XXX constants.
+		'sharedCacheType' => $GLOBALS['wgMainCacheType'],
+
 		'dispatchBatchChunkFactor' => 3,
 		'dispatchBatchCacheFactor' => 3,
 
