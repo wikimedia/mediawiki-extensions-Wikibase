@@ -294,8 +294,9 @@ class SearchEntities extends ApiBase {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsearchentities&search=abc&language=en'
-			=> 'Search for "abc" in English language, with defaults for type and limit.',
+			'api.php?action=wbsearchentities&search=abc&language=en' => 'Search for "abc" in English language, with defaults for type and limit',
+			'api.php?action=wbsearchentities&search=abc&language=en&limit=50' => 'Search for "abc" in English language with a limit of 50',
+			'api.php?action=wbsearchentities&search=alphabet&language=en&type=property' => 'Search for "alphabet" in English language for type property',
 		);
 	}
 
