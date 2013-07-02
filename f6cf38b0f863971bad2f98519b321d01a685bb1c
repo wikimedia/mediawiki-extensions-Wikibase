@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9cff5e9_a21f5268",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-02T15:06:34Z",
+      "side": 1,
+      "message": "getPrefixedId is deprecated. Just put in q42 as string, no need to invoke services here",
+      "revId": "f6cf38b0f863971bad2f98519b321d01a685bb1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
