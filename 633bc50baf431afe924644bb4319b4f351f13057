@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c9cff5e9_3d5d4346",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-02T16:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9cff5e9_425db644",
+      "revId": "633bc50baf431afe924644bb4319b4f351f13057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9cff5e9_8257ae24",
         "filename": "lib/includes/LanguageFallbackChain.php",
         "patchSetId": 16
@@ -30,6 +48,24 @@
       "writtenOn": "2013-07-02T15:07:34Z",
       "side": 1,
       "message": "It should be documented what the output of this method depends on - just what\u0027s in the Language classes, or also configuration, or even user preferences?\n\nThis would be obvious from the arguments if we avoided global state consequently, but since that is not the case (LanguageWithConversion::factory, for starters), it\u0027s good to be explicit about this.",
+      "revId": "633bc50baf431afe924644bb4319b4f351f13057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_1d5aff4d",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-02T16:43:12Z",
+      "side": 1,
+      "message": "Done. That LanguageWithConversion::factory is more like a cached constructor + argument validator. There isn\u0027t much global state besides cache...",
+      "parentUuid": "c9cff5e9_8257ae24",
       "revId": "633bc50baf431afe924644bb4319b4f351f13057",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c9cff5e9_9d36ef00",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-02T16:43:12Z",
+      "side": 1,
+      "message": "Anyway I guess the current invocation interface from external code doesn\u0027t prevent easy refactoring, right?",
+      "parentUuid": "c9cff5e9_e2194a84",
+      "revId": "633bc50baf431afe924644bb4319b4f351f13057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9cff5e9_a2363200",
         "filename": "lib/includes/LanguageFallbackChain.php",
         "patchSetId": 16
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "c9cff5e9_fd3babe6",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-02T16:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9cff5e9_a2363200",
+      "revId": "633bc50baf431afe924644bb4319b4f351f13057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9cff5e9_e2402a5c",
         "filename": "lib/includes/LanguageFallbackChain.php",
         "patchSetId": 16
@@ -81,6 +153,24 @@
       "writtenOn": "2013-07-02T15:07:34Z",
       "side": 1,
       "message": "hm, \"getFetchLanguage\" should rather be called \"getOriginalLanguage\", I think... should have seen that earlier.",
+      "revId": "633bc50baf431afe924644bb4319b4f351f13057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_7d305b01",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-02T16:43:12Z",
+      "side": 1,
+      "message": "The original point it to *fetch* data in this language...",
+      "parentUuid": "c9cff5e9_e2402a5c",
       "revId": "633bc50baf431afe924644bb4319b4f351f13057",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
