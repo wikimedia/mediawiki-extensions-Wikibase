@@ -69,6 +69,24 @@
       "revId": "fdc6df86c1f3d92c145a3a6c00c4188b797298c5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_4f6e7e31",
+        "filename": "lib/includes/LanguageUtils.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-02T18:35:33Z",
+      "side": 1,
+      "message": "... except we update categorylinks table again and again",
+      "parentUuid": "c9cff5e9_ef0f7287",
+      "revId": "fdc6df86c1f3d92c145a3a6c00c4188b797298c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
