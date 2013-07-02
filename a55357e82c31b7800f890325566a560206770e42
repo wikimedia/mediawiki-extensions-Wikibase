@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "c9cff5e9_fd428b6a",
+        "filename": "client/tests/phpunit/includes/LangLinkHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T16:39:28Z",
+      "side": 1,
+      "message": "I have now set up a pre-commit hook to prevent me from submitting files that contain @group XXX :)\n\nPerhaps I should share the script...",
+      "parentUuid": "c9cff5e9_3d7423ce",
+      "revId": "a55357e82c31b7800f890325566a560206770e42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9cff5e9_5d9117ef",
         "filename": "client/tests/phpunit/includes/LangLinkHandlerTest.php",
         "patchSetId": 2
