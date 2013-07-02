@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9cff5e9_3d7f0314",
+        "filename": "repo/includes/specials/SpecialMyLanguageFallbackChain.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T16:01:51Z",
+      "side": 1,
+      "message": "Global state should be avoided. There should be a way to inject a FallbackChain builder, or at least a FallbackChain.",
+      "revId": "05b0e4221a7f6e00335d17607e3606cb37d6dd8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_5d76373d",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMyLanguageFallbackChainTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-02T16:01:51Z",
+      "side": 1,
+      "message": "Not so useful... if the fallback chain could be injected into the special page object for testing, we could actually test that the output corresponds to the input.",
+      "revId": "05b0e4221a7f6e00335d17607e3606cb37d6dd8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
