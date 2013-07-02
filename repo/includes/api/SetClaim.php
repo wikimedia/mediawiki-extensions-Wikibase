@@ -228,7 +228,6 @@ class SetClaim extends ApiWikibase {
 	protected function getExamples() {
 		return array(
 			'api.php?action=setclaim&claim={json-stuff}&baserevid=9042&token=foobar'
-			// 'ex' => 'desc'
 		);
 	}
 }
