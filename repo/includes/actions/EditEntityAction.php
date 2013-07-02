@@ -443,7 +443,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 			new ClaimDifferenceVisualizer(
 				new WikiPageEntityLookup(),
 				$langCode,
-				WikibaseRepo::newInstance()->getIdFormatter()
+				WikibaseRepo::getDefaultInstance()->getIdFormatter()
 			)
 		);
 

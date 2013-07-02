@@ -279,7 +279,7 @@ final class WikibaseClient {
 	 *
 	 * @return WikibaseClient
 	 */
-	public static function newInstance() {
+	protected static function newInstance() {
 		global $wgContLang;
 
 		return new self(

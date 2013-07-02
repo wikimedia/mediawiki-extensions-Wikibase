@@ -49,8 +49,8 @@ use Wikibase\PropertyValueSnak;
  */
 class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 
-	private function newInstance() {
-		$wikibaseClient = WikibaseClient::newInstance();
+	private function getDefaultInstance() {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$targetLanguage = \Language::factory( 'en' );
 		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
@@ -120,7 +120,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideRenderForEntityId
 	 */
 	public function testRenderForEntityId( $name, $expected, $info ) {
-		$parserFunction = $this->newInstance();
+		$parserFunction = $this->getDefaultInstance();
 
 		$status = $parserFunction->renderForEntityId(
 			new EntityId( Item::ENTITY_TYPE, 42 ),

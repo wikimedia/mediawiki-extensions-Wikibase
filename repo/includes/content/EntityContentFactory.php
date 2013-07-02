@@ -48,7 +48,7 @@ class EntityContentFactory {
 		static $instance = false;
 
 		if ( $instance === false ) {
-			$instance = WikibaseRepo::newInstance()->getEntityContentFactory();
+			$instance = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		}
 
 		return $instance;

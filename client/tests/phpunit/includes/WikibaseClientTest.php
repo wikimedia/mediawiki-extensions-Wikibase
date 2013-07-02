@@ -40,32 +40,32 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return WikibaseClient
 	 */
-	private function newInstance() {
-		return WikibaseClient::newInstance();
+	private function getDefaultInstance() {
+		return WikibaseClient::getDefaultInstance();
 	}
 
 	public function testGetSettingsReturnType() {
-		$returnValue = $this->newInstance()->getSettings();
+		$returnValue = $this->getDefaultInstance()->getSettings();
 		$this->assertInstanceOf( 'Wikibase\SettingsArray', $returnValue );
 	}
 
 	public function testGetStoreReturnType() {
-		$returnValue = $this->newInstance()->getStore();
+		$returnValue = $this->getDefaultInstance()->getStore();
 		$this->assertInstanceOf( 'Wikibase\ClientStore', $returnValue );
 	}
 
 	public function testGetDataTypeFactoryReturnType() {
-		$returnValue = $this->newInstance()->getDataTypeFactory();
+		$returnValue = $this->getDefaultInstance()->getDataTypeFactory();
 		$this->assertInstanceOf( 'DataTypes\DataTypeFactory', $returnValue );
 	}
 
 	public function testGetEntityIdParserReturnType() {
-		$returnValue = $this->newInstance()->getEntityIdParser();
+		$returnValue = $this->getDefaultInstance()->getEntityIdParser();
 		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdParser', $returnValue );
 	}
 
 	public function testEntityIdLabelFormatterReturnType() {
-		$returnValue = $this->newInstance()->newEntityIdLabelFormatter( 'en' );
+		$returnValue = $this->getDefaultInstance()->newEntityIdLabelFormatter( 'en' );
 		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdLabelFormatter', $returnValue );
 	}
 

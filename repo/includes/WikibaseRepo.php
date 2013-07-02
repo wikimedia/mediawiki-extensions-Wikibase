@@ -232,7 +232,7 @@ final class WikibaseRepo {
 	 *
 	 * @return WikibaseRepo
 	 */
-	public static function newInstance() {
+	protected static function newInstance() {
 		return new self(
 			Settings::singleton(),
 			StoreFactory::getStore()

@@ -147,7 +147,7 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 			new ClaimDifferenceVisualizer(
 				new WikiPageEntityLookup(),
 				$langCode,
-				WikibaseRepo::newInstance()->getIdFormatter()
+				WikibaseRepo::getDefaultInstance()->getIdFormatter()
 			)
 		);
 
