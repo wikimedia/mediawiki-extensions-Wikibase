@@ -504,10 +504,18 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbeditentity&data={}&format=jsonfm'
-			=> 'Set an empty JSON structure for the entity, it will be extended with an id and the structure cleansed and completed. Report it as pretty printed json format.',
-			'api.php?action=wbeditentity&data={"labels":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
-			=> 'Set a more complete JSON structure for the entity, it will be extended with an id and the structure cleansed and completed.',
+			'api.php?action=wbeditentity&new=item&data={}'
+			=> 'Create a new empty item, returns extended with the item structure',
+			'api.php?action=wbeditentity&clear=true&id=q42&data={}'
+			=> 'Clear item with id q42',
+			'api.php?action=wbeditentity&new=item&data={"labels":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
+			=> 'Create a new item and set labels for de and en',
+			'api.php?action=wbeditentity&new=property&data={"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}'
+			=> 'Create a new property containing the json data, returns extended with the item structure',
+			'api.php?action=wbeditentity&id=q42&data={"sitelinks":{"nowiki":"København","svwiki":"Köpenhamn"}}'
+			=> 'Sets sitelinks for nowiki and svwiki, overwriting them if they already exist',
+			'api.php?action=wbeditentity&id=p2&data={"datatype":"string"}'
+			=> 'Sets the datatype type for property with id p2 to type of string',
 		);
 	}
 
