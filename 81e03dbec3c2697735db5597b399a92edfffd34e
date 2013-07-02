@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9cff5e9_e85c8824",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-02T22:32:34Z",
+      "side": 1,
+      "message": "One empty line to much",
+      "revId": "81e03dbec3c2697735db5597b399a92edfffd34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_4842f442",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-02T22:32:34Z",
+      "side": 1,
+      "message": "Please use tabs for indentation like in the rest of the file",
+      "revId": "81e03dbec3c2697735db5597b399a92edfffd34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_283fc0b2",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-02T22:32:34Z",
+      "side": 1,
+      "message": "@return",
+      "revId": "81e03dbec3c2697735db5597b399a92edfffd34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9cff5e9_884cec72",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-02T22:32:34Z",
+      "side": 1,
+      "message": "No space prior to colons",
+      "revId": "81e03dbec3c2697735db5597b399a92edfffd34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
