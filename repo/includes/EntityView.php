@@ -45,6 +45,9 @@ use Wikibase\Repo\WikibaseRepo;
  *        of DataValue instances instead of having functions here for generating different parts of the HTML. Right now
  *        these functions require an EntityContent while a DataValue (if it were implemented) should be sufficient.
  *
+ * DanielK on this class:
+ * (2013-07-02 18:29:44) DanielK_WMDE_: it's actually not that horrible,
+ *
  * @file
  * @ingroup WikibaseRepo
  *
