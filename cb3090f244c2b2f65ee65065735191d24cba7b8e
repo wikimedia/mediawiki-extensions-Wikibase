@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9d4817d_8a006b05",
+        "filename": "repo/includes/specials/SpecialMyLanguageFallbackChain.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-03T10:49:59Z",
+      "side": 1,
+      "message": "The call WikibaseRepo::getDefaultInstance()-\u003egetLanguageFallbackChainFa\nctory() should be in the constructor, setting the member $this-\u003elanguageFallbackChainFactory.\n\nThis is a good practice that makes it easier to later implement proper injection. It also allows us to provide a setLanguageFallbackChainFactory() method that could be used by tests to provide a \"fake\" factory. We should make it as easy as possible to \"detach\" from the rest of the framework.",
+      "revId": "cb3090f244c2b2f65ee65065735191d24cba7b8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9d4817d_ca0a6321",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMyLanguageFallbackChainTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-03T10:49:59Z",
+      "side": 1,
+      "message": "Repo test cases have to be registered manually in RepoHooks::registerUnitTests.\n\nI guess I should fix that, so the repo tests are also picked up automatically...",
+      "revId": "cb3090f244c2b2f65ee65065735191d24cba7b8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
