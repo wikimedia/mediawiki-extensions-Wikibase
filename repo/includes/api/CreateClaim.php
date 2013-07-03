@@ -4,9 +4,9 @@ namespace Wikibase\Api;
 
 use ApiBase, MWException;
 
+use ApiMain;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
-use UsageException;
 use ValueParsers\ParseException;
 use Wikibase\EntityId;
 use Wikibase\Entity;
@@ -14,13 +14,12 @@ use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SnakFactory;
 use Wikibase\LibRegistry;
 use Wikibase\Claim;
 use Wikibase\Autocomment;
-use Wikibase\Settings;
 use Wikibase\Summary;
 use Wikibase\Snak;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * API module for creating claims.
@@ -51,7 +50,29 @@ use Wikibase\Snak;
  */
 class CreateClaim extends ModifyClaim {
 
-	// TODO: rights
+
+	/**
+	 * @var SnakValidationHelper
+	 */
+	protected $snakValidation;
+
+	/**
+	 * see ApiBase::__construct()
+	 *
+	 * @param ApiMain $mainModule
+	 * @param string  $moduleName
+	 * @param string  $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$this->snakValidation = new SnakValidationHelper(
+			$this,
+			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
+			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
+			new ValidatorErrorLocalizer()
+		);
+	}
 
 	/**
 	 * @see \ApiBase::execute
@@ -84,6 +105,8 @@ class CreateClaim extends ModifyClaim {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( $parseException->getMessage(), 'claim-invalid-guid' );
 		}
+
+		$this->snakValidation->validateSnak( $snak );
 
 		$claim = $this->addClaim( $entityContent->getEntity(), $snak );
 		$summary = $this->createSummary( $snak, 'create' );
