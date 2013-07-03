@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9d4817d_e73b22e7",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-03T10:40:35Z",
+      "side": 1,
+      "message": "Temp variables called $fetchCode and $langCode would make the code a lot more readable.",
+      "revId": "45ef0d466a51cfd143078b19397e8c087e6dada9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9d4817d_2726dad1",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-03T10:40:35Z",
+      "side": 1,
+      "message": "Consider making this public so it can be tested separately. If you feel that it clutters the classe\u0027s interface, you could make it a public method in a helper class that is held in a private member of the factory class. This kind of \"composition\" works quite nicely to make \"internal\" things testable (and reusable).",
+      "revId": "45ef0d466a51cfd143078b19397e8c087e6dada9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9d4817d_0723d6c1",
+        "filename": "lib/tests/phpunit/LanguageFallbackChainFactoryTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-03T10:40:35Z",
+      "side": 1,
+      "message": "why not just\nforeach ( $expected as $exp )\n?",
+      "revId": "45ef0d466a51cfd143078b19397e8c087e6dada9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9d4817d_472dcea7",
+        "filename": "lib/tests/phpunit/LanguageFallbackChainFactoryTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-03T10:40:35Z",
+      "side": 1,
+      "message": "It would be better to construct a Context object we can control, and then check that the output is consistent with the user and language in that context.",
+      "revId": "45ef0d466a51cfd143078b19397e8c087e6dada9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
