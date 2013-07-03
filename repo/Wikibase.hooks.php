@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase;
-use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, MWException;
-
+use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, MWException, RequestContext;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * File defining the hook handlers for the Wikibase extension.
@@ -782,8 +782,6 @@ final class RepoHooks {
 			return true;
 		}
 
-		global $wgLang, $wgOut;
-
 		// The following three vars should all exist, unless there is a failurre
 		// somewhere, and then it will fail hard. Better test it now!
 		$page = new WikiPage( $target );
@@ -820,39 +818,36 @@ final class RepoHooks {
 			return true;
 		}
 
-		// If this fails we will not find labels and descriptions later,
-		// but we will try to get a list of alternate languages. The following
-		// uses the user language as a starting point for the fallback chain.
-		// It could be argued that the fallbacks should be limited to the user
-		// selected languages.
-		$lang = $wgLang->getCode();
-		static $langStore = array();
-		if ( !isset( $langStore[$lang] ) ) {
-			$langStore[$lang] = array_merge( array( $lang ), Language::getFallbacksFor( $lang ) );
+		// Try to find the most preferred available language to display data in current context.
+		$languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$context = RequestContext::getMain();
+		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
+
+		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $entity->getLabels() );
+		$descriptionData = $languageFallbackChain->extractPreferredValueOrAny( $entity->getDescriptions() );
+
+		if ( $labelData ) {
+			$labelText = $labelData['value'];
+			$labelLang = Language::factory( $labelData['language'] );
+		} else {
+			$labelText = '';
+			$labelLang = $context->getLanguage();
 		}
 
-		// Get the label and description for the first languages on the chain
-		// that doesn't fail, use a fallback if everything fails. This could
-		// use the user supplied list of acceptable languages as a filter.
-		list( , $labelText, $labelLang) = $labelTriplet =
-			Utils::lookupMultilangText(
-				$entity->getLabels( $langStore[$lang] ),
-				$langStore[$lang],
-				array( $wgLang->getCode(), null, $wgLang )
-			);
-		list( , $descriptionText, $descriptionLang) = $descriptionTriplet =
-			Utils::lookupMultilangText(
-				$entity->getDescriptions( $langStore[$lang] ),
-				$langStore[$lang],
-				array( $wgLang->getCode(), null, $wgLang )
-			);
+		if ( $descriptionData ) {
+			$descriptionText = $descriptionData['value'];
+			$descriptionLang = Language::factory( $descriptionData['language'] );
+		} else {
+			$descriptionText = '';
+			$descriptionLang = $context->getLanguage();
+		}
 
 		// Go on and construct the link
 		$idHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
 			. wfMessage( 'wikibase-itemlink-id-wrapper', $target->getText() )->inContentLanguage()->escaped()
 			. Html::closeElement( 'span' );
 
-		$labelHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-label', 'lang' => $labelLang->getCode(), 'dir' => $labelLang->getDir() ) )
+		$labelHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-label', 'lang' => $labelLang->getHtmlCode(), 'dir' => $labelLang->getDir() ) )
 			. htmlspecialchars( $labelText )
 			. Html::closeElement( 'span' );
 
@@ -861,19 +856,19 @@ final class RepoHooks {
 			. Html::closeElement( 'span' );
 
 		// Set title attribute for constructed link, and make tricks with the directionality to get it right
-		$titleText = ( $labelText !== null )
-			? $labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
+		$titleText = ( $labelText !== '' )
+			? $labelLang->getDirMark() . $labelText . $context->getLanguage()->getDirMark()
 			: $target->getPrefixedText();
-		$customAttribs[ 'title' ] = ( $descriptionText !== null ) ?
+		$customAttribs[ 'title' ] = ( $descriptionText !== '' ) ?
 			wfMessage(
 				'wikibase-itemlink-title',
 				$titleText,
-				$descriptionLang->getDirMark() . $descriptionText . $wgLang->getDirMark()
+				$descriptionLang->getDirMark() . $descriptionText . $context->getLanguage()->getDirMark()
 			)->inContentLanguage()->text() :
 			$titleText; // no description, just display the title then
 
 		// add wikibase styles in all cases, so we can format the link properly:
-		$wgOut->addModuleStyles( array( 'wikibase.common' ) );
+		$context->getOutput()->addModuleStyles( array( 'wikibase.common' ) );
 
 		wfProfileOut( __METHOD__ );
 		return true;
