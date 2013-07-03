@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use \Language;
 
 /**
  * Object representing a language fallback chain used in Wikibase.
@@ -61,7 +62,7 @@ class LanguageFallbackChain {
 	 * 	'value' => finally fetched and translated value
 	 * 	'language' => language code of the language which final value is in
 	 * 	'source' => language code of the language where the value is fetched
-	 * ), or null when no data can be found.
+	 * ), or null when no "acceptable" data can be found.
 	 */
 	public function extractPreferredValue( $data ) {
 
@@ -73,6 +74,38 @@ class LanguageFallbackChain {
 					),
 					'language' => $languageWithConversion->getLanguage()->getCode(),
 					'source' => $languageWithConversion->getFetchLanguage()->getCode(),
+				);
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Try to fetch the best value in a multilingual data array first.
+	 * If no "acceptable" value exists, return any value known.
+	 *
+	 * @param string[] $data Multilingual data with language codes as keys
+	 *
+	 * @return null|array of three items: array(
+	 * 	'value' => finally fetched and translated value
+	 * 	'language' => language code of the language which final value is in
+	 * 	'source' => language code of the language where the value is fetched
+	 * ), or null when no data with a valid language code can be found.
+	 */
+	public function extractPreferredValueOrAny( $data ) {
+
+		$preferred = $this->extractPreferredValue( $data );
+		if ( $preferred ) {
+			return $preferred;
+		}
+
+		foreach ( $data as $code => $value ) {
+			if ( Language::isValidCode( $code ) ) {
+				return array(
+					'value' => $value,
+					'language' => $code,
+					'source' => $code,
 				);
 			}
 		}

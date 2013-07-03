@@ -20,6 +20,39 @@ use Wikibase\Repo\WikibaseRepo;
 abstract class ViewEntityAction extends \ViewAction {
 
 	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	protected $languageFallbackChainFactory;
+
+	/**
+	 * Get the language fallback chain factory previously set, or the default one.
+	 *
+	 * @since 0.4
+	 *
+	 * @return LanguageFallbackChainFactory
+	 */
+	public function getLanguageFallbackChainFactory() {
+		if ( $this->languageFallbackChainFactory === null ) {
+			$this->languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		}
+
+		return $this->languageFallbackChainFactory;
+	}
+
+	/**
+	 * Set language fallback chain factory and return the previously set one.
+	 *
+	 * @since 0.4
+	 *
+	 * @param LanguageFallbackChainFactory $factory
+	 *
+	 * @return LanguageFallbackChainFactory|null
+	 */
+	public function setLanguageFallbackChainFactory( LanguageFallbackChainFactory $factory ) {
+		return wfSetVar( $this->languageFallbackChainFactory, $factory );
+	}
+
+	/**
 	 * @see Action::getName()
 	 *
 	 * @since 0.1
@@ -194,20 +227,12 @@ abstract class ViewEntityAction extends \ViewAction {
 		$this->getArticle()->view();
 
 		// Figure out which label to use for title.
-		$langCode = $this->getContext()->getLanguage()->getCode();
-		// FIXME: Removed as a quickfix
-		/*
-		list( $labelCode, $labelText, $labelLang) =
-			Utils::lookupUserMultilangText(
-				$content->getEntity()->getLabels(),
-				Utils::languageChain( $langCode ),
-				array( $langCode, $this->getPageTitle(), $this->getContext()->getLanguage() )
-			);
-*/
-		// FIXME: this replaces the stuff above
-		$labelText = $content->getEntity()->getLabel( $langCode );
+		$languageFallbackChain = $this->getLanguageFallbackChainFactory()->newFromContext( $this->getContext() );
+		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
 
-		if ( $labelText === false ) {
+		if ( $labelData ) {
+			$labelText = $labelData['value'];
+		} else {
 			$idPrefixer = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 			$labelText = strtoupper( $idPrefixer->format( $content->getEntity()->getId() ) );
 		}
