@@ -126,6 +126,7 @@ return call_user_func( function() {
 		'SpecialListDatatypes' => 'includes/specials/SpecialListDatatypes.php',
 		'SpecialDispatchStats' => 'includes/specials/SpecialDispatchStats.php',
 		'SpecialEntityData' => 'includes/specials/SpecialEntityData.php',
+		'SpecialMyLanguageFallbackChain' => 'includes/specials/SpecialMyLanguageFallbackChain.php',
 		'Wikibase\LinkedData\EntityDataSerializationService' => 'includes/LinkedData/EntityDataSerializationService.php',
 		'Wikibase\LinkedData\EntityDataRequestHandler' => 'includes/LinkedData/EntityDataRequestHandler.php',
 		'Wikibase\LinkedData\EntityDataUriManager' => 'includes/LinkedData/EntityDataUriManager.php',
