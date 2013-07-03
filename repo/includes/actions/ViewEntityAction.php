@@ -194,20 +194,13 @@ abstract class ViewEntityAction extends \ViewAction {
 		$this->getArticle()->view();
 
 		// Figure out which label to use for title.
-		$langCode = $this->getContext()->getLanguage()->getCode();
-		// FIXME: Removed as a quickfix
-		/*
-		list( $labelCode, $labelText, $labelLang) =
-			Utils::lookupUserMultilangText(
-				$content->getEntity()->getLabels(),
-				Utils::languageChain( $langCode ),
-				array( $langCode, $this->getPageTitle(), $this->getContext()->getLanguage() )
-			);
-*/
-		// FIXME: this replaces the stuff above
-		$labelText = $content->getEntity()->getLabel( $langCode );
+		$languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $this->getContext() );
+		$labelData = $languageFallbackChain->extractPreferredValue( $content->getEntity()->getLabels() );
 
-		if ( $labelText === false ) {
+		if ( $labelData ) {
+			$labelText = $labelData['value'];
+		} else {
 			$idPrefixer = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 			$labelText = strtoupper( $idPrefixer->format( $content->getEntity()->getId() ) );
 		}

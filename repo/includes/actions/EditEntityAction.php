@@ -288,15 +288,15 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 */
 	public function getLabelText( EntityContent $content ) {
 
-		$langCode = $this->getContext()->getLanguage()->getCode();
-		list( , $labelText, ) =
-			Utils::lookupUserMultilangText(
-				$content->getEntity()->getLabels(),
-				Utils::languageChain( $langCode ),
-				array( $langCode, $this->getPageTitle(), $this->getContext()->getLanguage() )
-			);
+		$languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $this->getContext() );
+		$labelData = $languageFallbackChain->extractPreferredValue( $content->getEntity()->getLabels() );
 
-		return $labelText;
+		if ( $labelData ) {
+			return $labelData['value'];
+		} else {
+			return $this->getPageTitle();
+		}
 	}
 
 	/**
