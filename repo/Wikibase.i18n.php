@@ -1573,7 +1573,23 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-property-summary-wbsetlabel-remove' => 'Desaniciada la etiqueta en [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Camudada la descripción en [$2]',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Desaniciada la descripción en [$2]',
+	'wikibase-property-summary-wbsetaliases-set' => "Definiendo {{PLURAL:$1|l'alcuñu|los alcuños}} en [$2]",
+	'wikibase-property-summary-wbsetaliases-add-remove' => "S'{{PLURAL:$1|añadió y desanició un alcuñu|añadieron y desaniciaron alcuños}} en [$2]",
+	'wikibase-property-summary-wbsetaliases-add' => '{{PLURAL:$1|Añadíu un alcuñu|Añadíos alcuños}} en [$2]',
+	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|Desaniciáu un alcuñu|Desaniciaos alcuños}} en [$2]',
+	'wikibase-property-summary-special-create-property' => 'Creada una propiedá con {{PLURAL:$1|un valor|valores}} en [$2]',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Elementu',
+	'wikibase-listdatatypes-wikibase-item-body' => 'Enllaz a otros elementos del proyeutu. Demientres la entrada, guetaráse nel espaciu de nomes "Item" de Wikidata pa buscar entraes que coincidan. Consiste nun únicu campu d\'entrada de testu.
+*scheme – parte implícita de la cadena Iri
+*hierarchicalpart – parte implícita de la cadena Iri
+*query – parte implícita de la cadena Iri
+*fragment – parte implícita de la cadena Iri',
+	'wikibase-listdatatypes-commonsmedia-head' => 'Multimedia de Commons',
+	'wikibase-listdatatypes-commonsmedia-body' => 'Enllaz a ficheros guardaos en Wikimedia Commons. Demientres la entrada, guetaráse nel espaciu de nomes "File" de Commons pa buscar entraes que coincidan.
+*scheme – parte implícita de la cadena Iri
+*hierarchicalpart – parte implícita de la cadena Iri
+*query – parte implícita de la cadena Iri
+*fragment – parte implícita de la cadena Iri',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenada del globu',
 );
 
@@ -8888,6 +8904,96 @@ $messages['ka'] = array(
 	'action-description-update' => 'აღწერების განახლება',
 );
 
+/** Kazakh (Cyrillic script) (қазақша (кирил)‎)
+ * @author Arystanbek
+ */
+$messages['kk-cyrl'] = array(
+	'wikibase-edit' => 'өңдеу',
+	'wikibase-save' => 'сақтау',
+	'wikibase-cancel' => 'болдырмау',
+	'wikibase-add' => 'қосу',
+	'wikibase-addqualifier' => 'көрсеткіш қосу',
+	'wikibase-addreference' => 'қайнар қосу',
+	'wikibase-save-inprogress' => 'Сақталуда...',
+	'wikibase-remove-inprogress' => 'Алынып тасталуда...',
+	'wikibase-description-edit-placeholder' => 'сипаттама енгізу',
+	'wikibase-sitelink-site-edit-placeholder' => 'сайт',
+	'wikibase-sitelink-page-edit-placeholder' => 'мақала',
+	'wikibase-alias-edit-placeholder' => 'бүркеншік ат енгізу',
+	'wikibase-description-input-help-message' => '$1 тілінде қысқаша сиптатама енгізу',
+	'wikibase-terms' => 'Басқа тілдерде',
+	'wikibase-sitelinks-add' => 'сайт-сілтемесіне сілтеме қосу',
+	'wikibase-sitelinks-empty' => 'Бұл элемент үшін сайт-сілтемесі жоқ.',
+	'wikibase-remove' => 'алып тастау',
+	'wikibase-restore-title' => 'Бұрыңғы тарихын қалпына келтіру: "$1"',
+	'wikibase-undo-revision-error' => 'Болдырмау орындалмады',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|бір мән|$1 мәндер}} сақталмады',
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|енгізілім|енгізілімдер}}',
+	'wikibase-disambiguation-title' => '"$1" үшін айрық бет',
+	'wikibase-datatype-label' => 'Дерек түрі:',
+	'wikibase-snakview-variations-somevalue-label' => 'белгісіз мән',
+	'wikibase-snakview-variations-novalue-label' => 'мән жоқ',
+	'wikibase-snakview-snaktypeselector-value' => 'қалаулы мән',
+	'wikibase-snakview-snaktypeselector-somevalue' => 'белгісіз мән',
+	'wikibase-snakview-snaktypeselector-novalue' => 'мән жоқ',
+	'wikibase-entityselector-more' => 'толығырақ',
+	'wikibase-anonymouseditwarning' => 'Ескерту: Сіз жүйеге кірмегенсіз. 
+IP-мекенжайыңыз бұл  $1 түзету тарихында жазылып алынады.',
+	'wikibase-restrictionedit-tooltip-message' => 'Бұл бет құлыпталған. Өңдеуге рұқсатыңыз жоқ.',
+	'wikibase-blockeduser-tooltip-message' => 'Қатысушы атыңыз не IP мекенжайыңыз бұғатталғандықтан өңдеуге рұқсатыңыз жоқ.',
+	'special-itembytitle' => 'Түріне қарай элемент',
+	'wikibase-itembytitle-lookup-site' => 'Сайт:',
+	'wikibase-itembytitle-lookup-page' => 'Бет:',
+	'wikibase-itembytitle-submit' => 'Іздеу',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Тіл және деңгейіне қарай элементерді іздеу',
+	'wikibase-itemdisambiguation-lookup-language' => 'Тіл:',
+	'wikibase-itemdisambiguation-lookup-label' => 'Деңгей:',
+	'wikibase-itemdisambiguation-submit' => 'Іздеу',
+	'wikibase-itemdisambiguation-nothing-found' => 'Кешіріңіз, бұл деңгейден элемент табылмады.',
+	'wikibase-newproperty-datatype' => 'Дерек түрі:',
+	'special-newitem' => 'Жаңа элемент бастау',
+	'wikibase-newitem-fieldset' => 'Жаңа элемент бастау',
+	'wikibase-newitem-site' => 'Бірінші сілтенген бет сайты',
+	'wikibase-newitem-page' => 'Бірінші сілтенген бет атауы',
+	'wikibase-newitem-add-sitelink-failed' => 'Сайт сілтемесі сақталмады.',
+	'wikibase-newentity-label' => 'Деңгей:',
+	'wikibase-newentity-description' => 'Сипаттама:',
+	'wikibase-newentity-submit' => 'Бастау',
+	'wikibase-setlabel-label' => 'Деңгей:',
+	'wikibase-setdescription-label' => 'Сипаттама:',
+	'wikibase-setsitelink-label' => 'Сайт сілтемесі:',
+	'wikibase-setsitelink-add-failed' => 'Сайт сілтемесі сақталмады.',
+	'wikibase-setsitelink-remove-failed' => 'Сайт сілтемесі анынып тасталмады.',
+	'wikibase-setentity-id' => 'ID:',
+	'wikibase-setentity-language' => 'Тіл:',
+	'wikibase-dispatchstats-changes' => 'Өзгерту журналы статистикасы',
+	'wikibase-dispatchstats-change-id' => 'ID',
+	'wikibase-dispatchstats-oldest-change' => 'Ең ескі',
+	'wikibase-dispatchstats-newest-change' => 'Ең жаңа',
+	'wikibase-dispatchstats-site-id' => 'Сайт',
+	'wikibase-dispatchstats-pos' => 'Позиция',
+	'wikibase-dispatchstats-lag-num' => 'Бітпеуде',
+	'wikibase-dispatchstats-large-lag' => '(өте үлкен)',
+	'wikibase-entitieswithoutlabel-label-language' => 'Тіл:',
+	'wikibase-entitieswithoutlabel-label-type' => 'Түрі:',
+	'wikibase-entitieswithoutlabel-label-alltypes' => 'Барлығы',
+	'wikibase-entitieswithoutlabel-submit' => 'Табу',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" жарамсыз тіл коды емес.',
+	'wikibase-entitieswithoutlabel-invalid-type' => '"$1" жарамсыз енгізілім түрі.',
+	'wikibase-entitydata-bad-id' => 'Жарамсыз ID: $1.',
+	'wikibase-restoreold' => 'қалпына келтіру',
+	'wikibase-noentity-createone' => 'Сіз тағы [[$1|біреуін бастаңыз]].',
+	'wikibase-item-summary-wbsetitem' => 'Жаңа элемент бастау',
+	'wikibase-item-summary-wbcreate-new' => 'Жаңа элемент құрылды',
+	'wikibase-item-summary-wbeditentity' => 'Жаңа элемент құрылды',
+	'wikibase-item-summary-wbeditentity-create' => 'also',
+	'wikibase-item-summary-wbeditentity-update' => 'Элемент жаңартылды',
+	'wikibase-item-summary-wbsetlabel-set' => '[$2] деғгейі өзгертілді',
+	'wikibase-item-summary-wbsetlabel-remove' => '[$2] деңгейі алынып тасталды',
+	'wikibase-item-summary-wbsetdescription-set' => '[$2] сипаттамасы өзгертілді',
+	'wikibase-item-summary-wbsetdescription-remove' => '[$2]  сипаттамасы алынып тасталды',
+);
+
 /** Korean (한국어)
  * @author ChongDae
  * @author Kwj2772
@@ -8906,7 +9012,6 @@ $messages['ko'] = array(
 	'wikibase-label-empty' => '아직 정의한 레이블이 없습니다.',
 	'wikibase-label-edit-placeholder' => '레이블 입력',
 	'wikibase-description-empty' => '아직 정의한 설명이 없습니다.',
-	'wikibase-deletedentity' => '$1 삭제',
 	'wikibase-description-edit-placeholder' => '설명 입력',
 	'wikibase-sitelink-site-edit-placeholder' => '사이트',
 	'wikibase-sitelink-page-edit-placeholder' => '문서',
@@ -9042,8 +9147,8 @@ IP 주소가 $1의 편집 역사에 남게 됩니다.',
 	'wikibase-dispatchstats-average' => '평균',
 	'special-listdatatypes' => '사용 가능한 모든 데이터 유형 목록',
 	'wikibase-listdatatypes-intro' => '현재 이 설치에 사용하는 모든 데이터 유형의 목록입니다 :',
-	'wikibase-history-title-with-label' => '"$2"($1)의 바뀜 내역',
-	'wikibase-history-title-without-label' => '($1)의 바뀜 내역',
+	'wikibase-history-title-with-label' => '"$2"($1)의 판 내역',
+	'wikibase-history-title-without-label' => '($1)의 판 내역',
 	'special-entitieswithoutlabel' => '레이블이 없는 항목',
 	'wikibase-entitieswithoutlabel-legend' => '레이블이 없는 항목 목록 가져오기',
 	'wikibase-entitieswithoutlabel-label-language' => '언어:',
@@ -9114,12 +9219,12 @@ IP 주소가 $1의 편집 역사에 남게 됩니다.',
 	'wikibase-property-summary-special-create-property' => '{{PLURAL:$1|값}}으로 [$2] 속성을 만듦',
 	'wikibase-listdatatypes-wikibase-item-head' => '항목',
 	'wikibase-listdatatypes-commonsmedia-head' => '공용 미디어',
-	'wikibase-listdatatypes-geo-coordinate-head' => '지리 좌표',
+	'wikibase-listdatatypes-globe-coordinate-head' => '지리 좌표', # Fuzzy
 	'wikibase-listdatatypes-quantity-head' => '수량',
 	'wikibase-listdatatypes-monolingual-text-head' => '단일 언어 텍스트',
 	'wikibase-listdatatypes-monolingual-text-body' => '다른 언어로 번역되지 않는 문자열 데이터 필드입니다. 이런 종류의 문자열은 한 번 정의되어 모든 언어에 걸쳐 사용됩니다. 일반적으로 원어로 된 지명이나 특정한 항목의 식별자, 화학식, 라틴어 학명에 주로 사용됩니다.
 * 언어 – 텍스트 부분에 대해 언어를 구별하는 명시적인 값
-* 텍스트 – 특정 언어에 대한 문자열 값',
+* 텍스트 – 특정 언어에 대한 문자열 값', # Fuzzy
 	'wikibase-listdatatypes-multilingual-text-head' => '다언어 텍스트',
 	'wikibase-listdatatypes-string-head' => '문자열',
 	'wikibase-listdatatypes-time-head' => '시간',
@@ -9290,6 +9395,7 @@ $messages['ku-latn'] = array(
 
 /** Kirghiz (Кыргызча)
  * @author Growingup
+ * @author Викиней
  */
 $messages['ky'] = array(
 	'wikibase-save' => 'сактоо',
@@ -9303,7 +9409,7 @@ $messages['ky'] = array(
 	'wikibase-itemdisambiguation-lookup-language' => 'Тил:',
 	'wikibase-itemdisambiguation-submit' => 'Табуу',
 	'wikibase-newentity-description' => 'Баяндама:',
-	'wikibase-setentity-language' => 'Тил', # Fuzzy
+	'wikibase-setentity-language' => 'Тили:',
 	'wikibase-entitieswithoutlabel-label-language' => 'Тил:',
 	'wikibase-entitieswithoutlabel-submit' => 'Издөө',
 );
@@ -14831,7 +14937,9 @@ $messages['yi'] = array(
 	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|ענדערונג|ענדערונגען}} האט מען אויסגעשלאסן ווייל  {{PLURAL:$1|דער צוגעפאסטער ווערט איז|די צוגעפאסטע ווערטן זענען}} צווישנצייט געענדערט געווארן.',
 	'wikibase-empty-undo' => "נישטא גארנישט וואס מ'קען אנולירן.",
 	'wikibase-undo-revision-error' => 'צוריקשטעלן דורכגעפאלן',
+	'wikibase-undo-badpage' => 'שלעכטע ווערסיע: ווערסיע $2 געהערט נישט צו [[$1]].',
 	'wikibase-undo-firstrev' => "מ'קען נישט אנולירן דאס שאפֿן א בלאט.",
+	'wikibase-undo-nocontent' => 'קען נישט אנלאדן אינהאלט פון ווערסיע $2 פון בלאט $1.',
 	'wikibase-propertyedittool-full' => 'ליסטע פון ווערטן איז גאנץ.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|איין ווערט|$1 ווערטן}} נאך נישט אויפֿגעהיטן',
 	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|פארשרייב|פארשרייבן}}',
@@ -14839,6 +14947,7 @@ $messages['yi'] = array(
 	'wikibase-disambiguation-title' => 'באדייט אויפקלערונג פאר "$1"',
 	'wb-special-newitem-new-item-notification' => 'נייעם דאטנאביעקט $1 געשאפֿן און  און געריכטעוועט צו זײַן בלאט. צוריק צו $2.',
 	'wikibase-aliases-label' => 'אויך באקאנט ווי:',
+	'wikibase-aliases-input-help-message' => 'אז דער דאטנזאץ איז באוואוסט מיט מער ווי איין באשטימטן נאמען, קענט איר איינגעבן אליאסן און סינאנימען, כדי מען זאל קענען טרעפן זי מיט אירע אלטערנאטיווע נעמען.',
 	'wikibase-aliases-empty' => 'קיין אליאסן נישט דעפֿינירט.',
 	'wikibase-datatype-label' => 'דאטן טיפ:',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|מקור|מקורות}}',
