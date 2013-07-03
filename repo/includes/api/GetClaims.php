@@ -44,7 +44,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class GetClaims extends ApiWikibase {
 
-	// TODO: automcomment
 	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
@@ -223,9 +222,6 @@ class GetClaims extends ApiWikibase {
 				),
 				ApiBase::PARAM_DFLT => 'references',
 			),
-			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-			),
 		);
 	}
 
@@ -243,9 +239,6 @@ class GetClaims extends ApiWikibase {
 			'claim' => 'A GUID identifying the claim. Required unless entity is provided.',
 			'rank' => 'Optional filter to return only the claims that have the specified rank',
 			'props' => 'Some parts of the claim are returned optionally. This parameter controls which ones are returned.',
-			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
-				"This is used for detecting conflicts during save."
-			),
 		);
 	}
 
