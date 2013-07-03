@@ -43,6 +43,7 @@ use ApiTestCase;
  * @group WikibaseAPI
  * @group EditEntityTest
  * @group BreakingTheSlownessBarrier
+ * @group Broken
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
