@@ -84,14 +84,17 @@ class LanguageFallbackChainFactory {
 	}
 
 	/**
-	 * Build fallback chain for a given language.
+	 * Build fallback chain array for a given language.
 	 *
 	 * @param Language $language
 	 * @param $mode bitfield of self::FALLBACK_*
 	 * @param LanguageFallbackChain[] $chain for recursive calls
 	 * @param array $fetched for recursive calls
+	 *
+	 * @return LanguageWithConversion[]
 	 */
-	private function buildFromLanguage( Language $language, $mode, &$chain = array(), &$fetched = array() ) {
+	public function buildFromLanguage( Language $language, $mode, &$chain = array(), &$fetched = array() ) {
+		wfProfileIn( __METHOD__ );
 
 		if ( $mode & self::FALLBACK_SELF ) {
 			if ( !isset( $fetched[$language->getCode()] ) ) {
@@ -140,6 +143,7 @@ class LanguageFallbackChainFactory {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $chain;
 	}
 
@@ -152,15 +156,20 @@ class LanguageFallbackChainFactory {
 	 */
 	public function newFromContext( IContextSource $context ) {
 		global $wgBabelCategoryNames;
+		wfProfileIn( __METHOD__ );
 
 		$user = $context->getUser();
 
 		if ( !class_exists( 'Babel' ) || $user->isAnon() ) {
-			return $this->newFromLanguage( $context->getLanguage(), self::FALLBACK_ALL );
+			$cached =  $this->newFromLanguage( $context->getLanguage(), self::FALLBACK_ALL );
+			wfProfileOut( __METHOD__ );
+			return $cached;
 		}
 
 		if ( isset( $this->userLanguageCache[$user->getName()][$context->getLanguage()->getCode()] ) ) {
-			return $this->userLanguageCache[$user->getName()][$context->getLanguage()->getCode()];
+			$cached = $this->userLanguageCache[$user->getName()][$context->getLanguage()->getCode()];
+			wfProfileOut( __METHOD__ );
+			return $cached;
 		}
 
 		$babel = array();
@@ -187,15 +196,19 @@ class LanguageFallbackChainFactory {
 
 		$this->userLanguageCache[$user->getName()][$context->getLanguage()->getCode()] = $languageFallbackChain;
 
+		wfProfileOut( __METHOD__ );
 		return $languageFallbackChain;
 	}
 
 	/**
-	 * Build fallback chain for a given babel array.
+	 * Build fallback chain array for a given babel array.
 	 *
 	 * @param array $babel
+	 *
+	 * @return LanguageWithConversion[]
 	 */
-	private function buildFromBabel( array $babel ) {
+	public function buildFromBabel( array $babel ) {
+		wfProfileIn( __METHOD__ );
 
 		$chain = array();
 		$fetched = array();
@@ -218,6 +231,7 @@ class LanguageFallbackChainFactory {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $chain;
 	}
 
