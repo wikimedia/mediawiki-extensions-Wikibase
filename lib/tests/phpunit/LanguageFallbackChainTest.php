@@ -105,4 +105,61 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @group WikibaseLib
+	 * @dataProvider provideExtractPreferredValueOrAny
+	 */
+	public function testExtractPreferredValueOrAny( $lang, $mode, $data, $expected ) {
+		$factory = new LanguageFallbackChainFactory();
+		$chain = $factory->newFromLanguage( \Language::factory( $lang ), $mode );
+
+		$resolved = $chain->extractPreferredValueOrAny( $data );
+
+		$this->assertEquals( $expected, $resolved );
+	}
+
+	public function provideExtractPreferredValueOrAny() {
+		$data = array(
+			'en' => 'foo',
+			'nl' => 'bar',
+			'zh-cn' => '测试',
+		);
+
+		return array(
+			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+				'value' => 'foo',
+				'language' => 'en',
+				'source' => 'en',
+			) ),
+			array( 'nl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+				'value' => 'bar',
+				'language' => 'nl',
+				'source' => 'nl',
+			) ),
+			array( 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $data, array(
+				'value' => 'foo',
+				'language' => 'en',
+				'source' => 'en',
+			) ),
+			array( 'fr', LanguageFallbackChainFactory::FALLBACK_SELF, array(
+				'kk' => 'baz',
+			), array(
+				'value' => 'baz',
+				'language' => 'kk',
+				'source' => 'kk',
+			) ),
+			array( 'it', LanguageFallbackChainFactory::FALLBACK_SELF, array(
+				':' => 'qux',
+				'kk' => 'baz',
+			), array(
+				'value' => 'baz',
+				'language' => 'kk',
+				'source' => 'kk',
+			) ),
+			array( 'sr', LanguageFallbackChainFactory::FALLBACK_SELF, array(
+				':' => 'qux',
+			), null ),
+			array( 'ar', LanguageFallbackChainFactory::FALLBACK_SELF, array(), null ),
+		);
+	}
 }
