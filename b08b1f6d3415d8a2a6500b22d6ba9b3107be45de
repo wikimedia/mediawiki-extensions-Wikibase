@@ -16,6 +16,24 @@
       "revId": "b08b1f6d3415d8a2a6500b22d6ba9b3107be45de",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9d4817d_ea1e475b",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-03T10:56:50Z",
+      "side": 1,
+      "message": "It\u0027s not really a problem, but if it bothers you, move the constants somewhere else, e.g. into a LanguageFallback interface. LanguageFallbackChain and/or LanguageFallabckChainFactory could implement this, but that\u0027s not necessary.",
+      "parentUuid": "a9d4817d_e78322ce",
+      "revId": "b08b1f6d3415d8a2a6500b22d6ba9b3107be45de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
