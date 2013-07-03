@@ -810,6 +810,9 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbEntityType', $entity->getType() );
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 
+		// Some constant, but to avoid hard coding it everywhere
+		$out->addJsConfigVars( 'wbContextLanguageCode', LanguageFallbackChain::CONTEXT_LANGUAGE_CODE );
+
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
 
@@ -832,7 +835,7 @@ abstract class EntityView extends \ContextSource {
 		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
 
 		$usedEntityIds = $refFinder->findClaimLinks( $entity->getClaims() );
-		$basicEntityInfo = static::getBasicEntityInfo( $entityLoader, $usedEntityIds, $langCode );
+		$basicEntityInfo = static::getBasicEntityInfo( $entityLoader, $usedEntityIds, $langCode, $this->getContext() );
 
 		$out->addJsConfigVars(
 			'wbUsedEntities',
@@ -850,9 +853,12 @@ abstract class EntityView extends \ContextSource {
 	 * @param EntityLookup $entityLoader
 	 * @param EntityId[] $entityIds
 	 * @param string $langCode For the entity labels which will be included in one language only.
+	 * @param IContextSource $context Set it to include labels to display for the given context too.
 	 * @return array
 	 */
-	protected static function getBasicEntityInfo( EntityLookup $entityLoader, array $entityIds, $langCode ) {
+	protected static function getBasicEntityInfo(
+		EntityLookup $entityLoader, array $entityIds, $langCode, IContextSource $context = null
+	) {
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = EntityContentFactory::singleton();
@@ -864,7 +870,12 @@ abstract class EntityView extends \ContextSource {
 		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		$serializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
 
-		$serializationOptions->setLanguages( array( $langCode ) );
+		$languages = array( $langCode );
+		if ( $context ) {
+			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+			$languages[LanguageFallbackChain::CONTEXT_LANGUAGE_CODE] = $factory->newFromContext( $context );
+		}
+		$serializationOptions->setLanguages( $languages );
 
 		foreach( $entities as $prefixedId => $entity ) {
 			if( $entity === null ) {
