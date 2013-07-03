@@ -41,22 +41,22 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	/**
 	 * @return WikibaseRepo
 	 */
-	private function newInstance() {
-		return WikibaseRepo::newInstance();
+	private function getDefaultInstance() {
+		return WikibaseRepo::getDefaultInstance();
 	}
 
 	public function testGetSettingsReturnType() {
-		$returnValue = $this->newInstance()->getSettings();
+		$returnValue = $this->getDefaultInstance()->getSettings();
 		$this->assertInstanceOf( 'Wikibase\SettingsArray', $returnValue );
 	}
 
 	public function testGetDataTypeFactoryReturnType() {
-		$returnValue = $this->newInstance()->getDataTypeFactory();
+		$returnValue = $this->getDefaultInstance()->getDataTypeFactory();
 		$this->assertInstanceOf( 'DataTypes\DataTypeFactory', $returnValue );
 	}
 
 	public function testGetEntityIdParserReturnType() {
-		$returnValue = $this->newInstance()->getEntityIdParser();
+		$returnValue = $this->getDefaultInstance()->getEntityIdParser();
 		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdParser', $returnValue );
 	}
 
@@ -74,7 +74,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	public function testGetRdfBaseURI( $server, $expected ) {
 		$this->setMwGlobals( 'wgServer', $server );
 
-		$returnValue = $this->newInstance()->getRdfBaseURI();
+		$returnValue = $this->getDefaultInstance()->getRdfBaseURI();
 		$this->assertEquals( $expected, $returnValue );
 	}
 }

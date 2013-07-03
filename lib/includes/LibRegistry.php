@@ -116,14 +116,31 @@ final class LibRegistry {
 
 	/**
 	 * Returns a new instance constructed from global settings.
+	 *
+	 * @since 0.4
+	 *
+	 * @return LibRegistry
+	 */
+	protected static function newInstance() {
+		return new self( Settings::singleton() );
+	}
+
+	/**
+	 * Returns a default instance constructed from global settings.
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @since 0.4
 	 *
 	 * @return LibRegistry
 	 */
-	public static function newInstance() {
-		return new self( Settings::singleton() );
+	public static function getDefaultInstance() {
+		static $instance = null;
+
+		if ( $instance === null ) {
+			$instance = self::newInstance();
+		}
+
+		return $instance;
 	}
 
 	// Do not add new stuff here without reading the notice at the top first.

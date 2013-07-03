@@ -81,7 +81,7 @@ return call_user_func( function() {
 		'mw.config.values.wbDataTypes' => $moduleTemplate + array(
 			'class' => 'DataTypes\DataTypesModule',
 			'datatypefactory' => function() {
-				return LibRegistry::newInstance()->getDataTypeFactory();
+				return LibRegistry::getDefaultInstance()->getDataTypeFactory();
 			},
 			'datatypesconfigvarname' => 'wbDataTypes',
 		),

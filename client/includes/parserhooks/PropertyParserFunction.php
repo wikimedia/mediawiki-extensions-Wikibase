@@ -182,7 +182,7 @@ class PropertyParserFunction {
 		$targetLanguage = $parser->getTargetLanguage();
 		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
 
-		$wikibaseClient = WikibaseClient::newInstance();
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
