@@ -45,7 +45,15 @@ class HistoryEntityAction extends \HistoryAction {
 
 		$entity = $content->getEntity();
 
-		$labelText = $entity->getLabel( $this->getContext()->getLanguage()->getCode() );
+		$languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $this->getContext() );
+		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+
+		if ( $labelData ) {
+			$labelText = $labelData['value'];
+		} else {
+			$labelText = null;
+		}
 
 		$idPrefixer = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$prefixedId = ucfirst( $idPrefixer->format( $entity->getId() ) );
