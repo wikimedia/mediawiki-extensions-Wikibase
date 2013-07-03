@@ -18,6 +18,39 @@ use Wikibase\Repo\WikibaseRepo;
 class HistoryEntityAction extends \HistoryAction {
 
 	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	protected $languageFallbackChainFactory;
+
+	/**
+	 * Get the language fallback chain factory previously set, or the default one.
+	 *
+	 * @since 0.4
+	 *
+	 * @return LanguageFallbackChainFactory
+	 */
+	public function getLanguageFallbackChainFactory() {
+		if ( $this->languageFallbackChainFactory === null ) {
+			$this->languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		}
+
+		return $this->languageFallbackChainFactory;
+	}
+
+	/**
+	 * Set language fallback chain factory and return the previously set one.
+	 *
+	 * @since 0.4
+	 *
+	 * @param LanguageFallbackChainFactory $factory
+	 *
+	 * @return LanguageFallbackChainFactory|null
+	 */
+	public function setLanguageFallbackChainFactory( LanguageFallbackChainFactory $factory ) {
+		return wfSetVar( $this->languageFallbackChainFactory, $factory );
+	}
+
+	/**
 	 * Returns the content of the page being viewed.
 	 *
 	 * @since 0.3
@@ -45,7 +78,14 @@ class HistoryEntityAction extends \HistoryAction {
 
 		$entity = $content->getEntity();
 
-		$labelText = $entity->getLabel( $this->getContext()->getLanguage()->getCode() );
+		$languageFallbackChain = $this->getLanguageFallbackChainFactory()->newFromContext( $this->getContext() );
+		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+
+		if ( $labelData ) {
+			$labelText = $labelData['value'];
+		} else {
+			$labelText = null;
+		}
 
 		$idPrefixer = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$prefixedId = ucfirst( $idPrefixer->format( $entity->getId() ) );
