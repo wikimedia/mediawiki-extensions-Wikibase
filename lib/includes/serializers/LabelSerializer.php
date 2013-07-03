@@ -73,12 +73,23 @@ class LabelSerializer extends SerializerObject {
 		$value = array();
 		$idx = 0;
 
-		foreach ( $labels as $languageCode => $label ) {
+		foreach ( $labels as $languageCode => $labelData ) {
 			$key = $this->options->shouldUseKeys() ? $languageCode : $idx++;
+			if ( is_array( $labelData ) ) {
+				$label = $labelData['value'];
+				$labelLanguageCode = $labelData['language'];
+				$labelSourceLanguageCode = $labelData['source'];
+			} else {
+				// back-compat
+				$label = $labelData;
+				$labelLanguageCode = $languageCode;
+				$labelSourceLanguageCode = $languageCode;
+			}
 			$valueKey = ( $label === '' ) ? 'removed' : 'value';
 			$value[$key] = array(
-				'language' => $languageCode,
-				$valueKey => $label
+				'language' => $labelLanguageCode,
+				'source-language' => $labelSourceLanguageCode,
+				$valueKey => $label,
 			);
 		}
 

@@ -146,6 +146,7 @@ call_user_func( function() {
 	$wgSpecialPages['ListDatatypes']					= 'SpecialListDatatypes';
 	$wgSpecialPages['DispatchStats']					= 'SpecialDispatchStats';
 	$wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
+	$wgSpecialPages['MyLanguageFallbackChain'] 				= 'SpecialMyLanguageFallbackChain';
 
 	// Special page groups
 	$wgSpecialPageGroups['NewItem']						= 'wikibaserepo';
@@ -161,6 +162,7 @@ call_user_func( function() {
 	$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
 	$wgSpecialPageGroups['ListDatatypes']				= 'wikibaserepo';
 	$wgSpecialPageGroups['DispatchStats']				= 'wikibaserepo';
+	$wgSpecialPageGroups['MyLanguageFallbackChain'] 			= 'wikibaserepo';
 
 	// Hooks
 	$wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';

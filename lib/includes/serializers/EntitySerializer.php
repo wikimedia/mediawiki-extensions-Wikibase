@@ -89,7 +89,19 @@ class EntitySerializer extends SerializerObject {
 					break;
 				case 'labels':
 					$labelSerializer = new LabelSerializer( $this->options );
-					$labels = $entity->getLabels( $this->options->getLanguages() );
+					$allLabels = $entity->getLabels();
+					$labels = array();
+					$languageFallbackChains = $this->options->getLanguageFallbackChains();
+					if ( $languageFallbackChains ) {
+						foreach ( $languageFallbackChains as $languageCode => $languageFallbackChain ) {
+							$data = $languageFallbackChain->extractPreferredValue( $allLabels );
+							if ( $data !== null ) {
+								$labels[$languageCode] = $data;
+							}
+						}
+					} else {
+						$labels = $allLabels;
+					}
 					$serialization['labels'] = $labelSerializer->getSerialized( $labels );
 					break;
 				case 'claims':
