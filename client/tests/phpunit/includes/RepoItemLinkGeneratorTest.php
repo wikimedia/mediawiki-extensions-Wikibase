@@ -50,6 +50,13 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 	 */
 	protected $namespaceChecker;
 
+	protected function setUp() {
+		parent::setUp();
+		$this->setMwGlobals( array(
+			'wgLang' => \Language::factory( 'en' )
+		) );
+	}
+
 	protected function getRepoLinker() {
 		$baseUrl = 'http://www.example.com';
 		$articlePath = '/wiki/$1';
