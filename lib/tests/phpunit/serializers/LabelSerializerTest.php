@@ -53,18 +53,22 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 		$expectedSerialization = array(
 			"en" => array(
 				"language" => "en",
+				"source-language" => "en",
 				"value" => "Rome"
 			),
 			"de" => array(
 				"language" => "de",
+				"source-language" => "de",
 				"value" => "Rom"
 			),
 			"it" => array(
 				"language" => "it",
+				"source-language" => "it",
 				"removed" => ""
 			),
 			"fi" => array(
 				"language" => "fi",
+				"source-language" => "fi",
 				"value" => "Rooma"
 			),
 		);
@@ -81,18 +85,22 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 		$expectedSerialization = array(
 			array(
 				"language" => "en",
+				"source-language" => "en",
 				"value" => "Rome"
 			),
 			array(
 				"language" => "de",
+				"source-language" => "de",
 				"value" => "Rom"
 			),
 			array(
 				"language" => "it",
+				"source-language" => "it",
 				"value" => "Roma"
 			),
 			array(
 				"language" => "fi",
+				"source-language" => "fi",
 				"value" => "Rooma"
 			),
 			"_element" => "label",
