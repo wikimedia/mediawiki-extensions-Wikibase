@@ -42,14 +42,16 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveClaims extends ApiWikibase {
+class RemoveClaims extends ModifyClaim {
 
 	/**
-	 * @see ApiBase::isWriteMode
-	 * @return bool true
+	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()
 	 */
-	public function isWriteMode() {
-		return true;
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
+
+		$permissions[] = 'claim-remove';
+		return $permissions;
 	}
 
 	/**

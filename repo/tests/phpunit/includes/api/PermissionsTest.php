@@ -303,4 +303,18 @@ class PermissionsTest extends ModifyItemBase {
 		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError );
 	}
 
+	function provideSetClaimPermissions() {
+		$permissions = $this->provideEditPermissions();
+
+		$permissions[] = array( //5
+			array( // permissions
+				'*'    => array( 'claim-update' => false ),
+				'user' => array( 'claim-update' => false )
+			),
+			'cant-edit' // error
+		);
+
+		return $permissions;
+	}
+
 }

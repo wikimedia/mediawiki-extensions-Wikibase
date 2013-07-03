@@ -97,6 +97,8 @@ call_user_func( function() {
 	$wgGroupPermissions['*']['label-update']		= true;
 	$wgGroupPermissions['*']['description-remove']	= true;
 	$wgGroupPermissions['*']['description-update']	= true;
+	$wgGroupPermissions['*']['claim-remove']		= true;
+	$wgGroupPermissions['*']['claim-update']		= true;
 
 	// i18n
 	$wgExtensionMessagesFiles['Wikibase'] 				= __DIR__ . '/Wikibase.i18n.php';

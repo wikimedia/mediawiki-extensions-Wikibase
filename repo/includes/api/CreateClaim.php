@@ -51,8 +51,6 @@ use Wikibase\Snak;
  */
 class CreateClaim extends ModifyClaim {
 
-	// TODO: rights
-
 	/**
 	 * @see \ApiBase::execute
 	 *

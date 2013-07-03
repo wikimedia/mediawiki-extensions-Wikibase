@@ -402,6 +402,8 @@ to find out where it went.',
 	'right-label-update' => 'Update labels',
 	'right-description-remove' => 'Remove descriptions',
 	'right-description-update' => 'Update descriptions',
+	'right-claim-remove' => 'Remove claims',
+	'right-claim-update' => 'Update claims',
 
 	// User actions
 	'action-item-override' => 'override items',
@@ -419,6 +421,8 @@ to find out where it went.',
 	'action-label-update' => 'update labels',
 	'action-description-remove' => 'remove descriptions',
 	'action-description-update' => 'update descriptions',
+	'action-claim-remove' => 'remove claims',
+	'action-claim-update' => 'update claims',
 );
 
 /** Message documentation (Message documentation)
@@ -1095,6 +1099,8 @@ For information about "Iri" and related terms, see [[:w:Internationalized resour
 	'action-label-update' => '{{doc-action|label-update}}',
 	'action-description-remove' => '{{doc-action|description-remove}}',
 	'action-description-update' => '{{doc-action|description-update}}',
+	'action-claim-remove' => '{{doc-action|claim-remove}}',
+	'action-claim-update' => '{{doc-action|claim-update}}',
 );
 
 /** Achinese (Acèh)

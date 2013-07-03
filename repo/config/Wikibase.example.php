@@ -118,6 +118,8 @@ $wgGroupPermissions['*']['label-remove']	= false;
 $wgGroupPermissions['*']['label-update']	= false;
 $wgGroupPermissions['*']['description-remove']	= false;
 $wgGroupPermissions['*']['description-update']	= false;
+$wgGroupPermissions['*']['claim-remove']	= false;
+$wgGroupPermissions['*']['claim-update']	= false;
 // Second block sets all rights for anonymous to true, that is they hold the rights.
 $wgGroupPermissions['user']['item-override']	= true;
 $wgGroupPermissions['user']['item-create']		= true;
@@ -134,5 +136,7 @@ $wgGroupPermissions['user']['label-remove']	= true;
 $wgGroupPermissions['user']['label-update']	= true;
 $wgGroupPermissions['user']['description-remove']	= true;
 $wgGroupPermissions['user']['description-update']	= true;
+$wgGroupPermissions['user']['claim-remove']	= true;
+$wgGroupPermissions['user']['claim-update']	= true;
 
 */

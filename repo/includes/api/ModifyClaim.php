@@ -59,6 +59,16 @@ abstract class ModifyClaim extends ApiWikibase {
 	}
 
 	/**
+	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 */
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
+
+		$permissions[] = 'claim-update';
+		return $permissions;
+	}
+
+	/**
 	 * @see ApiBase::isWriteMode
 	 * @return bool true
 	 */
