@@ -24,17 +24,17 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	 * @group WikibaseLib
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromLanguage( $lang, $mode, $expected ) {
+	public function testNewFromLanguage( $lang, $mode, $expectedItems ) {
 		$factory = new LanguageFallbackChainFactory();
 		$chain = $factory->newFromLanguage( \Language::factory( $lang ), $mode )->getFallbackChain();
 
-		$this->assertEquals( count( $expected ), count( $chain ) );
-		for ( $i = 0; $i < count( $chain ); $i++ ) {
-			if ( is_array( $expected[$i] ) ) {
-				$this->assertEquals( $expected[$i][0], $chain[$i]->getLanguage()->getCode() );
-				$this->assertEquals( $expected[$i][1], $chain[$i]->getSourceLanguage()->getCode() );
+		$this->assertEquals( count( $expectedItems ), count( $chain ) );
+		foreach ( $expectedItems as $i => $expected ) {
+			if ( is_array( $expected ) ) {
+				$this->assertEquals( $expected[0], $chain[$i]->getLanguage()->getCode() );
+				$this->assertEquals( $expected[1], $chain[$i]->getSourceLanguage()->getCode() );
 			} else {
-				$this->assertEquals( $expected[$i], $chain[$i]->getLanguage()->getCode() );
+				$this->assertEquals( $expected, $chain[$i]->getLanguage()->getCode() );
 				$this->assertNull( $chain[$i]->getSourceLanguage() );
 			}
 		}
