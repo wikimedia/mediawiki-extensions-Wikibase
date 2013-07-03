@@ -298,46 +298,6 @@ final class Utils {
 	}
 
 	/**
-	 * Find the first multilingual string that can be used for constructing a language object. The
-	 * global chain is always used.
-	 *
-	 * Note that a multilingual string from the global chain will always be globally cachable.
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $texts the key-value pairs to check for existence
-	 * @param array $sequence the list of keys that should exist
-	 * @param array $fallback an array of values that are used as a replacement if nothing is found
-	 * 		The fallback is in the form array( code, text, language )
-	 * @return array|null triplet with the initial language code, the text, and the language object
-	 */
-	static public function lookupMultilangText( array $texts = null, array $sequence = null, array $fallback = null ) {
-
-		// Prerequisites for further processing
-		if ( is_null( $texts ) || is_null( $sequence ) ) {
-			return $fallback; // makes the simplest use case
-		}
-
-		// Filter down the result
-		$texts = \Wikibase\Utils::filterMultilangText( $texts, $sequence );
-		if ( is_null( $texts ) || empty( $texts ) ) {
-			return $fallback;
-		}
-
-		// Find the first language code we can turn into a language object
-		// Note that the factory call do a pretty dumb cleaning up that can make this vejjy slow
-		foreach ( $texts as $code => $text ) {
-			$lang = Language::factory( $code );
-			if ( !is_null( $lang ) ) {
-				return array( $code, $text, $lang );
-			}
-		}
-
-		// Use the fallback if the previous fails
-		return $fallback;
-	}
-
-	/**
 	 * Find the first multilingual string that can be used for constructing a language object
 	 * for the current user. If a preferred language can't be identified the global chain is
 	 * used.
