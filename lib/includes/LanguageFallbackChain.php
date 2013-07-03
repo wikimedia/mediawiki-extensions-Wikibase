@@ -66,13 +66,13 @@ class LanguageFallbackChain {
 	public function extractPreferredValue( $data ) {
 
 		foreach ( $this->chain as $languageWithConversion ) {
-			if ( isset( $data[$languageWithConversion->getFetchLanguage()->getCode()] ) ) {
+			$fetchCode = $languageWithConversion->getFetchLanguage()->getCode();
+			$languageCode = $languageWithConversion->getLanguage()->getCode();
+			if ( isset( $data[$fetchCode] ) ) {
 				return array(
-					'value' => $languageWithConversion->translate(
-						$data[$languageWithConversion->getFetchLanguage()->getCode()]
-					),
-					'language' => $languageWithConversion->getLanguage()->getCode(),
-					'source' => $languageWithConversion->getFetchLanguage()->getCode(),
+					'value' => $languageWithConversion->translate( $data[$fetchCode] ),
+					'language' => $languageCode,
+					'source' => $fetchCode,
 				);
 			}
 		}

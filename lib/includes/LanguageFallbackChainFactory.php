@@ -84,14 +84,16 @@ class LanguageFallbackChainFactory {
 	}
 
 	/**
-	 * Build fallback chain for a given language.
+	 * Build fallback chain array for a given language.
 	 *
 	 * @param Language $language
 	 * @param $mode bitfield of self::FALLBACK_*
 	 * @param LanguageFallbackChain[] $chain for recursive calls
 	 * @param array $fetched for recursive calls
+	 *
+	 * @return array of LanguageWithConversion objects
 	 */
-	private function buildFromLanguage( Language $language, $mode, &$chain = array(), &$fetched = array() ) {
+	public function buildFromLanguage( Language $language, $mode, &$chain = array(), &$fetched = array() ) {
 
 		if ( $mode & self::FALLBACK_SELF ) {
 			if ( !isset( $fetched[$language->getCode()] ) ) {
@@ -191,11 +193,13 @@ class LanguageFallbackChainFactory {
 	}
 
 	/**
-	 * Build fallback chain for a given babel array.
+	 * Build fallback chain array for a given babel array.
 	 *
 	 * @param array $babel
+	 *
+	 * @return array of LanguageWithConversion objects
 	 */
-	private function buildFromBabel( array $babel ) {
+	public function buildFromBabel( array $babel ) {
 
 		$chain = array();
 		$fetched = array();
