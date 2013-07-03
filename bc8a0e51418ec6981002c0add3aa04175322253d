@@ -16,6 +16,74 @@
       "revId": "bc8a0e51418ec6981002c0add3aa04175322253d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89c97deb_c6dee23a",
+        "filename": "repo/includes/store/sql/DispatchStats.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-03T14:53:44Z",
+      "side": 1,
+      "message": "This is not used?",
+      "revId": "bc8a0e51418ec6981002c0add3aa04175322253d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89c97deb_26e41610",
+        "filename": "repo/includes/store/sql/DispatchStats.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-03T14:53:44Z",
+      "side": 1,
+      "message": "What about having constants for the states?",
+      "revId": "bc8a0e51418ec6981002c0add3aa04175322253d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89c97deb_460152b1",
+        "filename": "repo/includes/store/sql/DispatchStats.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-03T14:53:44Z",
+      "side": 1,
+      "message": "Gerrit trying to scare me by making this look like it is in the constructor.",
+      "revId": "bc8a0e51418ec6981002c0add3aa04175322253d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89c97deb_e6d95e55",
+        "filename": "repo/includes/store/sql/DispatchStats.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-03T14:53:44Z",
+      "side": 1,
+      "message": "Based on the method name I guessed this returned the number of possible states. What about getCountOfClientsWithState?",
+      "revId": "bc8a0e51418ec6981002c0add3aa04175322253d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
