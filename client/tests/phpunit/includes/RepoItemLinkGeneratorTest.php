@@ -93,8 +93,8 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 
 		$editLinksLink = array(
 			'href' => $href,
-			'text' => 'Edit links',
-			'title' => 'Edit interlanguage links',
+			'text' => wfMessage( 'wikibase-editlinks' )->text(),
+			'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
 			'class' => 'wbc-editpage'
 		);
 
