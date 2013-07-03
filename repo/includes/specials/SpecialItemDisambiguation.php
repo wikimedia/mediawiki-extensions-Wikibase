@@ -90,7 +90,10 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 					$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-nothing-found' );
 
 					if ( $language === $this->getLanguage()->getCode() ) {
-						$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-create', $label );
+						$this->getOutput()->addWikiMsg(
+							'wikibase-itemdisambiguation-create',
+							urlencode( $label )
+						);
 					}
 				} else {
 					$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-invalid-langcode' );
