@@ -137,6 +137,7 @@ return call_user_func( function() {
 		'Wikibase\TermPropertyLabelResolver' => 'includes/store/TermPropertyLabelResolver.php',
 
 		'Wikibase\PropertyInfoStore' => 'includes/store/PropertyInfoStore.php',
+		'Wikibase\CachingPropertyInfoStore' => 'includes/store/CachingPropertyInfoStore.php',
 
 		// includes/store/sql
 		'Wikibase\CachingEntityLoader' => 'includes/store/sql/CachingEntityLoader.php',
@@ -180,6 +181,7 @@ return call_user_func( function() {
 		'Wikibase\Test\EntityLookupTest' => 'tests/phpunit/EntityLookupTest.php',
 		'Wikibase\Test\MockChunkAccess' => 'tests/phpunit/store/MockChunkAccess.php',
 		'Wikibase\Test\TermIndexTest' => 'tests/phpunit/store/TermIndexTest.php',
+		'Wikibase\Test\MockPropertyInfoStore' => 'tests/phpunit/store/MockPropertyInfoStore.php',
 
 		'Wikibase\Test\PropertyInfoStoreTestHelper' => 'tests/phpunit/store/PropertyInfoStoreTestHelper.php',
 	);
