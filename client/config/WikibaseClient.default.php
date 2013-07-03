@@ -57,7 +57,6 @@ return call_user_func( function() {
 		),
 		'allowDataTransclusion' => true,
 		'enableSiteLinkWidget' => false,
-		'propagateChangesToRepo' => true,
 
 		'siteGroup' => 'wikipedia', //TODO: require this to be set, default doesn't make sense.
 

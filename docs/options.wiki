@@ -85,7 +85,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 </poem>
 ;allowDataTransclusion: switch to enable data transclusion features like the <nowiki>{{#property}}</nowiki> parser function and the <tt>wikibase</tt> Scribunto module. Defaults to <tt>true</tt>.
 ;enableSiteLinkWidget: switch to enable or disable add site link widget. Defaults to <tt>false</tt>.
-;propagateChangesToRepo: switch to enable or disable the propagation of client changes to the repo. Defaults to <tt>true</tt>.
 
 === Expert Settings ===
 ;injectRecentChanges: whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc. Requires the <code>dispatchChanges.php</code> script to run, and this wiki to be listed in the <code>localClientDatabases</code> setting on the repository.
