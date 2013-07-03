@@ -106,6 +106,13 @@ $messages['ko'] = array(
 	'wikibasedatamodel-desc' => '위키베이스 데이터 모형을 정의하는 구성 요소',
 );
 
+/** Luxembourgish (Lëtzebuergesch)
+ * @author Robby
+ */
+$messages['lb'] = array(
+	'wikibasedatamodel-desc' => 'Komponent, déi den Datemodell vun der Datebank definéiert',
+);
+
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
