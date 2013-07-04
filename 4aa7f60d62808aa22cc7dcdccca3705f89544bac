@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_b9b4a7d3",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-04T22:27:16Z",
+      "side": 1,
+      "message": "I would feel more comfortable if you checked that $errors[0] actually is set before calling it (to avoid fatals)... just adding \"\u0026\u0026 $editEntity-\u003egetStatus()-\u003egetErrorsArray()\" to the if above should probably suffice",
+      "revId": "4aa7f60d62808aa22cc7dcdccca3705f89544bac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_199dfb54",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-04T22:27:16Z",
+      "side": 1,
+      "message": "It would probably be nicer to read to just do $item \u003d $entityContent-\u003egetItem(); above and simplify this (and below)",
+      "revId": "4aa7f60d62808aa22cc7dcdccca3705f89544bac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_39a0b794",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-04T22:27:16Z",
+      "side": 1,
+      "message": "this wont happen... it either throws or returns a SimpleSiteLink",
+      "revId": "4aa7f60d62808aa22cc7dcdccca3705f89544bac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_d99a435f",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-04T22:27:16Z",
+      "side": 1,
+      "message": "This doesn\u0027t actually throw, so it probably shouldn\u0027t be in the try block",
+      "revId": "4aa7f60d62808aa22cc7dcdccca3705f89544bac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_9990cb43",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-04T22:27:16Z",
+      "side": 1,
+      "message": "Item::addSimpleSiteLink doesn\u0027t actually return anything",
+      "revId": "4aa7f60d62808aa22cc7dcdccca3705f89544bac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
