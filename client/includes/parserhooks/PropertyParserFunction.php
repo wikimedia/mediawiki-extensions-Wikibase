@@ -161,8 +161,9 @@ class PropertyParserFunction {
 	 * @since 0.4
 	 *
 	 * @param \Parser &$parser
+	 * @param string $propertyLabel property label or ID (pXXX)
 	 *
-	 * @return string
+	 * @return array
 	 */
 	public static function render( \Parser $parser, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
