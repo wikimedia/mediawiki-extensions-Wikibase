@@ -104,12 +104,6 @@ call_user_func( function() {
 	// i18n
 	$wgExtensionMessagesFiles['WikibaseLib'] = __DIR__ . '/WikibaseLib.i18n.php';
 
-	// TODO: this is not nice, figure out a better design
-	$wgExtensionFunctions[] = function() {
-		\Wikibase\TemplateRegistry::singleton()->addTemplates( include( __DIR__ . "/resources/templates.php" ) );
-		return true;
-	};
-
 	$wgValueParsers['wikibase-entityid'] = 'Wikibase\Lib\EntityIdParser';
 	$wgDataValues['wikibase-entityid'] = 'Wikibase\EntityId';
 	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
@@ -135,6 +129,17 @@ call_user_func( function() {
 
 		return true;
 		// @codeCoverageIgnoreEnd
+	};
+
+	/**
+	 * Called when setup is done. This is somewhat ugly, find a better time to register templates.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SetupAfterCache
+	 *
+	 * @return bool
+	 */
+	$wgHooks['SetupAfterCache'][] = function() {
+		\Wikibase\TemplateRegistry::singleton()->addTemplates( include( __DIR__ . "/resources/templates.php" ) );
+		return true;
 	};
 
 	/**
