@@ -9,8 +9,6 @@ use Wikibase\Lib\SnakFormatter;
 /**
  * Handler of the {{#property}} parser function.
  *
- * TODO: cleanup injection of dependencies
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -37,128 +35,154 @@ use Wikibase\Lib\SnakFormatter;
  */
 class PropertyParserFunction {
 
-	/* @var \Language */
-	protected $language;
-
-	/* @var EntityLookup */
-	protected $entityLookup;
-
-	/* @var PropertyLabelResolver */
-	protected $propertyLabelResolver;
-
-	/* @var ParserErrorMessageFormatter */
-	protected $errorFormatter;
-
-	/* @var SnakFormatter */
-	protected $snaksFormatter;
+	/**
+	 * @var \Parser
+	 */
+	protected $parser;
 
 	/**
-	 * @since    0.4
-	 *
-	 * @param \Language                   $language
-	 * @param EntityLookup                $entityLookup
-	 * @param PropertyLabelResolver       $propertyLabelResolver
-	 * @param ParserErrorMessageFormatter $errorFormatter
-	 * @param Lib\SnakFormatter           $snaksFormatter
+	 * @var EntityId
 	 */
-	public function __construct( \Language $language,
-		EntityLookup $entityLookup, PropertyLabelResolver $propertyLabelResolver,
-		ParserErrorMessageFormatter $errorFormatter, SnakFormatter $snaksFormatter ) {
-		$this->language = $language;
-		$this->entityLookup = $entityLookup;
-		$this->propertyLabelResolver = $propertyLabelResolver;
-		$this->errorFormatter = $errorFormatter;
-		$this->snaksFormatter = $snaksFormatter;
+	protected $entityId;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param \Parser $parser
+	 * @param EntityId $entityId
+	 */
+	public function __construct( \Parser $parser, EntityId $entityId ) {
+		$this->parser = $parser;
+		$this->entityId = $entityId;
 	}
 
 	/**
-	 * Returns such Claims from $entity that have a main Snak for the property that
-	 * is specified by $propertyLabel.
+	 * Check whether variants are used in this parser run.
 	 *
-	 * @param Entity $entity The Entity from which to get the clams
-	 * @param string $propertyLabel A property label (in the wiki's content language) or a prefixed property ID.
-	 *
-	 * @return Claims The claims for the given property.
+	 * @param \Parser $parser
+	 * @return bool
 	 */
-	private function getClaimsForProperty( Entity $entity, $propertyLabel ) {
-		$propertyIdToFind = EntityId::newFromPrefixedId( $propertyLabel );
+	public function isParserUsingVariants() {
+		$parserOptions = $this->parser->getOptions();
+		return $this->parser->OutputType() === \Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
+			&& !$parserOptions->getDisableContentConversion();
+	}
 
-		if ( $propertyIdToFind === null ) {
-			//XXX: It might become useful to give the PropertyLabelResolver a hint as to which
-			//     properties may become relevant during the present request, namely the ones
-			//     used by the Item linked to the current page. This could be done with
-			//     something like this:
-			//
-			//     $this->propertyLabelResolver->preloadLabelsFor( $propertiesUsedByItem );
+	/**
+	 * Post-process rendered array (variant text) into wikitext to be used in pages.
+	 *
+	 * @param array $textArray
+	 * @return string
+	 */
+	public function processRenderedArray( $textArray ) {
+		// This condition is less strict than self::isParserUsingVariants().
+		if ( $this->parser->OutputType() === \Parser::OT_HTML || $this->parser->OutputType() === \Parser::OT_PREPROCESS ) {
+			$textArray = array_map( 'wfEscapeWikitext', $textArray );
+		}
+		// XXX: When "else", we may still want to escape semicolons for -{ }-, but escaping them doesn't really work there...
 
-			$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels( array( $propertyLabel ) );
+		// We got arrays, so they must have already checked that variants are being used.
+		$text = '-{';
+		foreach ( $textArray as $variantCode => $variantText ) {
+			$text .= "$variantCode:$variantText;";
+		}
+		$text .= '}-';
 
-			if ( empty( $propertyIds ) ) {
-				return new Claims();
-			} else {
-				$propertyIdToFind = $propertyIds[$propertyLabel];
-			}
+		return $text;
+	}
+
+	/**
+	 * Post-process rendered text into wikitext to be used in pages.
+	 *
+	 * @param string $text
+	 * @return string
+	 */
+	public function processRenderedText( $text ) {
+		// This condition is less strict than self::isParserUsingVariants().
+		if ( $this->parser->OutputType() === \Parser::OT_HTML || $this->parser->OutputType() === \Parser::OT_PREPROCESS ) {
+			$text = wfEscapeWikitext( $text );
 		}
 
-		$allClaims = new Claims( $entity->getClaims() );
-		$claims = $allClaims->getClaimsForProperty( $propertyIdToFind->getNumericId() );
-
-		return $claims;
+		return $text;
 	}
 
 	/**
-	 * @since 0.4
+	 * Build a PropertyParserFunctionRenderer object for a given language.
 	 *
-	 * @param Snak[] $snaks
-	 *
-	 * @return string - wikitext format
+	 * @param \Language $language
+	 * @return PropertyParserFunctionRenderer
 	 */
-	private function formatSnakList( $snaks ) {
-		$languageFallbackChainFactory = WikibaseClient::getDefaultInstance()->getLanguageFallbackChainFactory();
-		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $this->language,
-			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
-		);
-		$formattedValues = $this->snaksFormatter->formatSnaks( $snaks, $languageFallbackChain );
-		return $this->language->commaList( $formattedValues );
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param EntityId $entityId
-	 * @param string   $propertyLabel
-	 *
-	 * @return \Status a status object wrapping a wikitext string
-	 */
-	public function renderForEntityId( EntityId $entityId, $propertyLabel ) {
+	public function getRenderer( \Language $language ) {
 		wfProfileIn( __METHOD__ );
 
-		try {
-			$entity = $this->entityLookup->getEntity( $entityId );
+		$errorFormatter = new ParserErrorMessageFormatter( $language );
 
-			if ( !$entity ) {
-				wfProfileOut( __METHOD__ );
-				return \Status::newGood( '' );
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
+		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
+		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
+		$formatter = $wikibaseClient->newSnakFormatter();
+
+		$instance = new PropertyParserFunctionRenderer( $language,
+			$entityLookup, $propertyLabelResolver,
+			$errorFormatter, $formatter );
+
+		wfProfileIn( __METHOD__ );
+		return $instance;
+	}
+
+	/**
+	 * @param string $propertyLabel property label or ID (pXXX)
+	 * @param \Language $language
+	 *
+	 * @return string
+	 */
+	public function renderInLanguage( $propertyLabel, \Language $language ) {
+
+		$renderer = $this->getRenderer( $language );
+
+		$status = $renderer->renderForEntityId( $this->entityId, $propertyLabel );
+
+		if ( !$status->isGood() ) {
+			// stuff the error messages into the ParserOutput, so we can render them later somewhere
+
+			$errors = $this->parser->getOutput()->getExtensionData( 'wikibase-property-render-errors' );
+			if ( $errors === null ) {
+				$errors = array();
 			}
 
-			$claims = $this->getClaimsForProperty( $entity, $propertyLabel );
+			//XXX: if Status sucked less, we'd could get an array of Message objects
+			$errors[] = $status->getWikiText();
 
-			if ( $claims->isEmpty() ) {
-				wfProfileOut( __METHOD__ );
-				return \Status::newGood( '' );
+			$this->parser->getOutput()->setExtensionData( 'wikibase-property-render-errors', $errors );
+		}
+
+		return $status->isOK() ? $status->getValue() : '';
+	}
+
+	/**
+	 * @param string $propertyLabel property label or ID (pXXX)
+	 *
+	 * @return string Wikitext
+	 */
+	public function doRender( $propertyLabel ) {
+		wfProfileIn( __METHOD__ );
+
+		$targetLanguage = $this->parser->getTargetLanguage();
+
+		if ( $this->isParserUsingVariants() && $this->parser->getConverterLanguage()->hasVariants() ) {
+			$textArray = array();
+			foreach ( $this->parser->getConverterLanguage()->getVariants() as $variantCode ) {
+				$variantLanguage = \Language::factory( $variantCode );
+				$textArray[$variantCode] = $this->renderInLanguage( $propertyLabel, $variantLanguage );
 			}
-
-			$snakList = $claims->getMainSnaks();
-			$text = $this->formatSnakList( $snakList, $propertyLabel );
-			$status = \Status::newGood( $text );
-		} catch ( \Exception $ex ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': ' . $ex->getMessage() );
-
-			$status = \Status::newFatal( 'wikibase-property-render-error', $propertyLabel, $ex->getMessage() );
+			$text = $this->processRenderedArray( $textArray );
+		} else {
+			$text = $this->processRenderedText( $this->renderInLanguage( $propertyLabel, $targetLanguage ) );
 		}
 
 		wfProfileOut( __METHOD__ );
-		return $status;
+		return $text;
 	}
 
 	/**
@@ -171,6 +195,7 @@ class PropertyParserFunction {
 	 */
 	public static function render( \Parser $parser, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
+
 		$siteId = Settings::get( 'siteGlobalID' );
 
 		$siteLinkLookup = WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable();
@@ -184,41 +209,11 @@ class PropertyParserFunction {
 			return '';
 		}
 
-		$targetLanguage = $parser->getTargetLanguage();
-		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
-
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
-		$formatter = $wikibaseClient->newSnakFormatter();
-
-		$instance = new self( $targetLanguage,
-			$entityLookup, $propertyLabelResolver,
-			$errorFormatter, $formatter );
-
-		$status = $instance->renderForEntityId( $entityId, $propertyLabel );
-
-		if ( !$status->isGood() ) {
-			// stuff the error messages into the ParserOutput, so we can render them later somewhere
-
-			$errors = $parser->getOutput()->getExtensionData( 'wikibase-property-render-errors' );
-			if ( $errors === null ) {
-				$errors = array();
-			}
-
-			//XXX: if Status sucked less, we'd could get an array of Message objects
-			$errors[] = $status->getWikiText();
-
-			$parser->getOutput()->setExtensionData( 'wikibase-property-render-errors', $errors );
-		}
-
-		$text = $status->isOK() ? $status->getValue() : '';
+		$instance = new self( $parser, $entityId );
 
 		$result = array(
-			$text,
+			$instance->doRender( $propertyLabel ),
 			'noparse' => false,
-			'nowiki' => true,
 		);
 
 		wfProfileOut( __METHOD__ );
