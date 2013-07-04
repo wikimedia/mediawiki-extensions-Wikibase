@@ -1591,6 +1591,69 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 *query – parte implícita de la cadena Iri
 *fragment – parte implícita de la cadena Iri',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Coordenada del globu',
+	'wikibase-listdatatypes-globe-coordinate-body' => 'Datos lliterales pa una posición xeográfica dada como un par llatitú-llonxitú en gms o en graos decimales pal cuerpu estelar dau. De mou predetermináu ye "Tierra" y llueu "WGS84". Añade una resolución y un rangu.
+* latitude – primera parte implícita (float, dms, dm, dd) de la cadena de coordenaes; la direición dase o col signu del prefixu o col sufixu N/S
+* longitude – segunda parte implícita (float, dms, dm, dd) de la cadena de coordenaes; la direición dase o col signu del prefixu o col sufixu E/W
+* altitude (opcional) – valor esplícitu (?) pa l\'altura sobre un planu de referencia; pal globu "Tierra" esti sedría\'l globu de referencia "WGS84"
+* globe (opcional) – valor de datos explícitu (?), dau como un cuerpu estelar que de mou predetermináu ye "Tierra" y llueu "WGS84"',
+	'wikibase-listdatatypes-quantity-head' => 'Cantidá',
+	'wikibase-listdatatypes-quantity-body' => "Campu de datos lliteral pa una cantidá rellacionada con alguna clase d'unidá bien definida. La unidá concreta va nos valores de datos introducíos.
+* value – parte implícita de la cadena (el mapéu del prefixu d'unidá nun ta claru)
+* unit – parte implícita de la cadena (el mapéu del organismu estandarizador nun ta claru)
+* accuracy (opcional) – valor de datos explícitu; tien la mesma unidá que'l valor",
+	'wikibase-listdatatypes-monolingual-text-head' => 'Testu monollingüe',
+	'wikibase-listdatatypes-monolingual-text-body' => "Campu de datos lliteral pa una cadena que nun se traduz a otros idiomes. Esti tipu de cadena defínese una vez y reutilízase'n tolos idiomes. L'usu típicu ye pa los nomes xeográficos escritos na llingua llocal, un identificador d'algún tipu, una fórmula química o un nome científicu en llatín.
+* language – valor esplícitu pa identificar la llingua de la parte de testu
+* value – valor esplícitu de la cadena de la variante específica d'idioma",
+	'wikibase-listdatatypes-multilingual-text-head' => 'Testu multillingüe',
+	'wikibase-listdatatypes-multilingual-text-body' => "Campu de datos lliteral pa una cadena que tien de traducise a otres llingües. L'usu típicu ye colos nomes de entidaes d'interés global que tienen formes escrites nun llocales. Estes puen cambiar ente idiomes y sistemes d'escritura.
+* language – valor esplícitu pa identificar la llingua de la parte de testu
+* value – valor esplícitu pa la cadena de la variante específica de llingua",
+	'wikibase-listdatatypes-string-head' => 'Cadena',
+	'wikibase-listdatatypes-string-body' => "Campu de datos lliteral par una cadena de glifos. L'usu típicu son los identificadores que tienen formes escrites que nun dependen del idioma del llector.
+* value – valor esplícitu pa la cadena de la variante específica de llingua",
+	'wikibase-listdatatypes-time-head' => 'Hora',
+	'wikibase-listdatatypes-time-body' => "Campu de datos lliteral pa un valor de tiempu. Dau como un tiempu con cierta precisión y llendes. El tiempu guardase siempre internamente'n formatu gregorianu, pero puen usase otros formatos nel análisis y al dar formatu. (?)
+* time – valor esplícitu pa un puntu nel tiempu, representáu en ISO8601, teniendo l'añu siempre 11 cifres, y la data siempre con signu, nel formatu +00000002013-01-01T00:00:00Z
+* timezone – valor esplícitu como enteru con signu. La información del fusu horariu como un desplazamientu dende UTC en minutos.
+* before – valor enteru esplícitu pal númberu d'unidaes posibles después del tiempu dau. La unidá vien dada pola precisión.
+* after – valor enteru esplícitu pal númberu d'unidaes posibles antes del tiempu dau. La unidá vien dada pola precisión.
+* precision – valor esplícitu codificáu nun enteru curtiu. Los númberos tienen el siguiente significáu: 0 - mil millones d'años, 1 - cien millones d'años, ..., 6 - mileniu, 7 - sieglu, 8 - década, 9 - añu, 10 - mes, 11 - día, 12 - hora, 13 - minutu, 14 - segundu.
+* calendarmodel – valor esplícitu dau como URI. Identificará'l modelu de calendariu que tien d'usase p'amosar esti valor de tiempu.",
+	'content-model-wikibase-item' => 'Elementu de Wikibase',
+	'content-model-wikibase-property' => 'Propiedá de Wikibase',
+	'content-model-wikibase-query' => 'Consulta de Wikibase',
+	'right-item-override' => 'Sobre-escribir elementos',
+	'right-item-create' => 'Crear elementos',
+	'right-item-remove' => 'Desaniciar elementos',
+	'right-property-override' => 'Sobre-escribir propiedaes',
+	'right-property-create' => 'Crear propiedaes',
+	'right-property-remove' => 'Desaniciar propiedaes',
+	'right-alias-add' => 'Amestar alcuños',
+	'right-alias-set' => 'Definir alcuños',
+	'right-alias-remove' => 'Desaniciar alcuños',
+	'right-sitelink-remove' => 'Desaniciar enllaces de sitios',
+	'right-sitelink-update' => 'Anovar enllaces de sitios',
+	'right-linktitles-update' => "Anovar los títulos d'enllaces",
+	'right-label-remove' => 'Desaniciar etiquetes',
+	'right-label-update' => 'Anovar etiquetes',
+	'right-description-remove' => 'Desaniciar descripciones',
+	'right-description-update' => 'Anovar descripciones',
+	'action-item-override' => 'sobre-escribir elementos',
+	'action-item-create' => 'crear elementos',
+	'action-item-remove' => 'desaniciar elementos',
+	'action-property-override' => 'sobre-escribir propiedaes',
+	'action-property-create' => 'crear propiedaes',
+	'action-property-remove' => 'desaniciar propiedaes',
+	'action-alias-update' => 'anovar alcuños',
+	'action-alias-remove' => 'desaniciar alcuños',
+	'action-sitelink-remove' => 'desaniciar enllaces de sitios',
+	'action-sitelink-update' => 'anovar enllaces de sitios',
+	'action-linktitles-update' => "anovar los títulos d'enllaces",
+	'action-label-remove' => 'desaniciar etiquetes',
+	'action-label-update' => 'anovar etiquetes',
+	'action-description-remove' => 'desaniciar descripciones',
+	'action-description-update' => 'anovar descripciones',
 );
 
 /** South Azerbaijani (تورکجه)
