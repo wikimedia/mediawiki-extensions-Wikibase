@@ -76,7 +76,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'entity' => $this->getFormattedIdForEntity( $entity ),
 			'snaktype' => 'value',
 			'property' => $this->getFormattedIdForEntity( $property ),
-			'value' => '"foo"',
+			'value' => '"Foo.png"',
 			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
@@ -111,7 +111,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'entity' => 'q0',
 			'snaktype' => 'value',
 			'property' => '-',
-			'value' => '"foo"',
+			'value' => '"Foo.png"',
 		);
 
 		$argLists[] = array( 'cant-load-entity-content', $params );
@@ -121,7 +121,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'entity' => '-',
 			'snaktype' => 'value',
 			'property' => 'q0',
-			'value' => '"foo"',
+			'value' => '"Foo.png"',
 		);
 
 		$argLists[] = array( 'claim-invalid-snak', $params );
@@ -131,7 +131,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'entity' => '-',
 			'snaktype' => 'hax',
 			'property' => '-',
-			'value' => '"foo"',
+			'value' => '"Foo.png"',
 		);
 
 		$argLists[] = array( 'unknown_snaktype', $params );
@@ -142,7 +142,7 @@ class CreateClaimTest extends \ApiTestCase {
 				'entity' => '-',
 				'snaktype' => 'value',
 				'property' => '-',
-				'value' => '"foo"',
+				'value' => '"Foo.png"',
 			);
 
 			unset( $params[$requiredParam] );
@@ -154,7 +154,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'action' => 'wbcreateclaim',
 			'entity' => '-',
 			'snaktype' => 'value',
-			'value' => '"foo"',
+			'value' => '"Foo.png"',
 		);
 
 		$argLists[] = array( 'claim-property-id-missing', $params );
@@ -244,7 +244,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'entity' => $this->getFormattedIdForEntity( $entity ),
 			'snaktype' => 'value',
 			'property' => $this->getFormattedIdForEntity( $property ),
-			'value' => '"foo"',
+			'value' => '"Foo.png"',
 			'token' => $GLOBALS['wgUser']->getEditToken()
 		);
 
@@ -261,7 +261,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'entity' => $this->getFormattedIdForEntity( $entity ),
 			'snaktype' => 'value',
 			'property' => $this->getFormattedIdForEntity( $property ),
-			'value' => '"bar"',
+			'value' => '"Bar.jpg"',
 			'token' => $GLOBALS['wgUser']->getEditToken(),
 			'baserevid' => $revId
 		);
