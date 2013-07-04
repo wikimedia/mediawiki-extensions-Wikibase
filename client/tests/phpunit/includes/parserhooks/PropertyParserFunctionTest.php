@@ -124,4 +124,99 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * @dataProvider provideGetInstance
+	 */
+	public function testGetInstance( $languageCode, $outputType ) {
+		$parser = new \Parser();
+		$parserOptions = new \ParserOptions();
+		$parser->startExternalParse( null, $parserOptions, $outputType );
+		$instance = PropertyParserFunction::getInstance( $parser, \Language::factory( $languageCode ) );
+		$this->assertInstanceOf( 'Wikibase\PropertyParserFunction', $instance );
+	}
+
+	public function provideGetInstance() {
+		return array(
+			array( 'en', \Parser::OT_HTML ),
+			array( 'zh', \Parser::OT_WIKI ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideIsParserUsingVariants
+	 */
+	public function testIsParserUsingVariants(
+		$outputType, $interfaceMessage, $disableContentConversion, $disableTitleConversion, $expected
+	) {
+		$parser = new \Parser();
+		$parserOptions = new \ParserOptions();
+		$parserOptions->setInterfaceMessage( $interfaceMessage );
+		$parserOptions->disableContentConversion( $disableContentConversion );
+		$parserOptions->disableTitleConversion( $disableTitleConversion );
+		$parser->startExternalParse( null, $parserOptions, $outputType );
+		$this->assertEquals( $expected, PropertyParserFunction::isParserUsingVariants( $parser ) );
+	}
+
+	public function provideIsParserUsingVariants() {
+		return array(
+			array( \Parser::OT_HTML, false, false, false, true ),
+			array( \Parser::OT_WIKI, false, false, false, false ),
+			array( \Parser::OT_PREPROCESS, false, false, false, false ),
+			array( \Parser::OT_PLAIN, false, false, false, false ),
+			array( \Parser::OT_HTML, true, false, false, false ),
+			array( \Parser::OT_HTML, false, true, false, false ),
+			array( \Parser::OT_HTML, false, false, true, true ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideProcessRenderedText
+	 */
+	public function testProcessRenderedText( $outputType, $text, $expected ) {
+		$parser = new \Parser();
+		$parserOptions = new \ParserOptions();
+		$parser->startExternalParse( null, $parserOptions, $outputType );
+		$this->assertEquals( $expected, PropertyParserFunction::processRenderedText( $parser, $text ) );
+	}
+
+	public function provideProcessRenderedText() {
+		return array(
+			array( \Parser::OT_HTML, 'fo<b>ob</b>ar', 'fo&#60;b&#62;ob&#60;/b&#62;ar' ),
+			array( \Parser::OT_WIKI, 'fo<b>ob</b>ar', 'fo<b>ob</b>ar' ),
+			array( \Parser::OT_PREPROCESS, 'fo<b>ob</b>ar', 'fo&#60;b&#62;ob&#60;/b&#62;ar' ),
+			array( \Parser::OT_PLAIN, 'fo<b>ob</b>ar', 'fo<b>ob</b>ar' ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideProcessRenderedArray
+	 */
+	public function testProcessRenderedArray( $outputType, $textArray, $expected ) {
+		$parser = new \Parser();
+		$parserOptions = new \ParserOptions();
+		$parser->startExternalParse( null, $parserOptions, $outputType );
+		$this->assertEquals( $expected, PropertyParserFunction::processRenderedArray( $parser, $textArray ) );
+	}
+
+	public function provideProcessRenderedArray() {
+		return array(
+			array( \Parser::OT_HTML, array(
+				'zh-cn' => 'fo<b>ob</b>ar',
+				'zh-tw' => 'FO<b>OB</b>AR',
+			), '-{zh-cn:fo&#60;b&#62;ob&#60;/b&#62;ar;zh-tw:FO&#60;b&#62;OB&#60;/b&#62;AR;}-' ),
+			array( \Parser::OT_WIKI, array(
+				'zh-cn' => 'fo<b>ob</b>ar',
+				'zh-tw' => 'FO<b>OB</b>AR',
+			), '-{zh-cn:fo<b>ob</b>ar;zh-tw:FO<b>OB</b>AR;}-' ),
+			array( \Parser::OT_PREPROCESS, array(
+				'zh-cn' => 'fo<b>ob</b>ar',
+				'zh-tw' => 'FO<b>OB</b>AR',
+			), '-{zh-cn:fo&#60;b&#62;ob&#60;/b&#62;ar;zh-tw:FO&#60;b&#62;OB&#60;/b&#62;AR;}-' ),
+			array( \Parser::OT_PLAIN, array(
+				'zh-cn' => 'fo<b>ob</b>ar',
+				'zh-tw' => 'FO<b>OB</b>AR',
+			), '-{zh-cn:fo<b>ob</b>ar;zh-tw:FO<b>OB</b>AR;}-' ),
+		);
+	}
+
 }
