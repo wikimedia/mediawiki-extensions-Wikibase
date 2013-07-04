@@ -188,7 +188,18 @@ class PropertyParserFunction {
 		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
 		$formatter = $wikibaseClient->newSnakFormatter();
 
-		$instance = new self( $targetLanguage,
+		// Use variant language instead of content language itself when the output will
+		// be converted, in case some labels can't be converted correctly afterwards.
+		$parserOptions = $parser->getOptions();
+		$handleVariants = $parser->OutputType() === \Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
+			&& !$parserOptions->getDisableContentConversion();
+		if ( $handleVariants ) {
+			$labelLanguage = \Language::factory( $parser->getConverterLanguage()->getPreferredVariant() );
+		} else {
+			$labelLanguage = $targetLanguage;
+		}
+
+		$instance = new self( $labelLanguage,
 			$entityLookup, $propertyLabelResolver,
 			$errorFormatter, $formatter );
 
@@ -210,10 +221,21 @@ class PropertyParserFunction {
 
 		$text = $status->isOK() ? $status->getValue() : '';
 
+		// This condition is less strict than $handleVariants.
+		if ( $parser->OutputType() === \Parser::OT_HTML || $parser->OutputType() === \Parser::OT_PREPROCESS ) {
+			$text = wfEscapeWikitext( $text );
+
+			// Since we've already fetched labels in requested variant languages,
+			// prevent them from being converted again in further parsing process.
+			// Some tests may be added to ensure this behavior.
+			if ( $handleVariants ) {
+				$text = $parser->getConverterLanguage()->getConverter()->markNoConversion( $text );
+			}
+		}
+
 		$result = array(
 			$text,
 			'noparse' => false,
-			'nowiki' => true,
 		);
 
 		wfProfileOut( __METHOD__ );
