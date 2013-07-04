@@ -103,6 +103,7 @@ call_user_func( function() {
 	$wgAutoloadClasses['Wikibase\NoLangLinkHandler']    = $dir . 'includes/parserhooks/NoLangLinkHandler.php';
 	$wgAutoloadClasses['Wikibase\ParserErrorMessageFormatter']	= $dir . 'includes/parserhooks/ParserErrorMessageFormatter.php';
 	$wgAutoloadClasses['Wikibase\PropertyParserFunction'] = $dir . 'includes/parserhooks/PropertyParserFunction.php';
+	$wgAutoloadClasses['Wikibase\PropertyParserFunctionRenderer'] = $dir . 'includes/parserhooks/PropertyParserFunctionRenderer.php';
 
 	// includes/recentchanges
 	$wgAutoloadClasses['Wikibase\ExternalChangesLine']	= $dir . 'includes/recentchanges/ExternalChangesLine.php';
