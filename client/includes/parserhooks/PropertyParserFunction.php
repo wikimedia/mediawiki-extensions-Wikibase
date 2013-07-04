@@ -162,6 +162,75 @@ class PropertyParserFunction {
 	}
 
 	/**
+	 * Check whether variants are used in this parser run.
+	 *
+	 * @param \Parser $parser
+	 * @return bool
+	 */
+	public static function isParserUsingVariants( $parser ) {
+		$parserOptions = $parser->getOptions();
+		return $parser->OutputType() === \Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
+			&& !$parserOptions->getDisableContentConversion();
+	}
+
+	/**
+	 * Post-process rendered text into wikitext to be used in pages.
+	 *
+	 * @param \Parser $parser
+	 * @param string $text
+	 * @return string
+	 */
+	public static function processRenderedText( $parser, $text ) {
+		// This condition is less strict than self::isParserUsingVariants( $parser ).
+		if ( $parser->OutputType() === \Parser::OT_HTML || $parser->OutputType() === \Parser::OT_PREPROCESS ) {
+			$text = wfEscapeWikitext( $text );
+
+			// Since we've already fetched labels in requested variant languages,
+			// prevent them from being converted again in further parsing process.
+			// Some tests may be added to ensure this behavior.
+			if ( self::isParserUsingVariants( $parser ) ) {
+				$text = $parser->getConverterLanguage()->getConverter()->markNoConversion( $text );
+			}
+		}
+
+		return $text;
+	}
+
+	/**
+	 * Build a PropertyParserFunction object for a specific parser run.
+	 *
+	 * @param \Parser $parser
+	 * @return PropertyParserFunction
+	 */
+	public static function getInstance( $parser ) {
+		wfProfileIn( __METHOD__ );
+
+		$targetLanguage = $parser->getTargetLanguage();
+		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
+
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
+		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
+		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
+		$formatter = $wikibaseClient->newSnakFormatter();
+
+		// Use variant language instead of content language itself when the output will
+		// be converted, in case some labels can't be converted correctly afterwards.
+		if ( self::isParserUsingVariants( $parser ) ) {
+			$labelLanguage = \Language::factory( $parser->getConverterLanguage()->getPreferredVariant() );
+		} else {
+			$labelLanguage = $targetLanguage;
+		}
+
+		$instance = new self( $labelLanguage,
+			$entityLookup, $propertyLabelResolver,
+			$errorFormatter, $formatter );
+
+		wfProfileIn( __METHOD__ );
+		return $instance;
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param \Parser &$parser
@@ -184,18 +253,7 @@ class PropertyParserFunction {
 			return '';
 		}
 
-		$targetLanguage = $parser->getTargetLanguage();
-		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
-
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
-		$formatter = $wikibaseClient->newSnakFormatter();
-
-		$instance = new self( $targetLanguage,
-			$entityLookup, $propertyLabelResolver,
-			$errorFormatter, $formatter );
+		$instance = self::getInstance( $parser );
 
 		$status = $instance->renderForEntityId( $entityId, $propertyLabel );
 
@@ -216,9 +274,8 @@ class PropertyParserFunction {
 		$text = $status->isOK() ? $status->getValue() : '';
 
 		$result = array(
-			$text,
+			self::processRenderedText( $parser, $text ),
 			'noparse' => false,
-			'nowiki' => true,
 		);
 
 		wfProfileOut( __METHOD__ );
