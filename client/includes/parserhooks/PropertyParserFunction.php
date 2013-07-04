@@ -162,6 +162,122 @@ class PropertyParserFunction {
 	}
 
 	/**
+	 * Check whether variants are used in this parser run.
+	 *
+	 * @param \Parser $parser
+	 * @return bool
+	 */
+	public static function isParserUsingVariants( $parser ) {
+		$parserOptions = $parser->getOptions();
+		return $parser->OutputType() === \Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
+			&& !$parserOptions->getDisableContentConversion();
+	}
+
+	/**
+	 * Post-process rendered array (variant text) into wikitext to be used in pages.
+	 *
+	 * @param \Parser $parser
+	 * @param array $textArray
+	 * @return string
+	 */
+	public static function processRenderedArray( $parser, $textArray ) {
+		// This condition is less strict than self::isParserUsingVariants( $parser ).
+		if ( $parser->OutputType() === \Parser::OT_HTML || $parser->OutputType() === \Parser::OT_PREPROCESS ) {
+			$textArray = array_map( 'wfEscapeWikitext', $textArray );
+		} else {
+			// I don't know why it wasn't escaped in this case before,
+			// but at least I have to escape it for language conversion syntax.
+			$textArray = array_map( function( $text ) {
+				return str_replace( ';', '&#59;' );
+			}, $textArray );
+		}
+
+		// We got arrays, so they must have already checked that variants are being used.
+		$text = '-{';
+		foreach ( $textArray as $variantCode => $variantText ) {
+			$text .= "$variantCode:$variantText;";
+		}
+		$text .= '}-';
+
+		return $text;
+	}
+
+	/**
+	 * Post-process rendered text into wikitext to be used in pages.
+	 *
+	 * @param \Parser $parser
+	 * @param string $text
+	 * @return string
+	 */
+	public static function processRenderedText( $parser, $text ) {
+		// This condition is less strict than self::isParserUsingVariants( $parser ).
+		if ( $parser->OutputType() === \Parser::OT_HTML || $parser->OutputType() === \Parser::OT_PREPROCESS ) {
+			$text = wfEscapeWikitext( $text );
+		}
+
+		return $text;
+	}
+
+	/**
+	 * Build a PropertyParserFunction object for a specific parser run.
+	 *
+	 * @param \Parser $parser
+	 * @param \Language $language
+	 * @return PropertyParserFunction
+	 */
+	public static function getInstance( \Parser $parser, \Language $language ) {
+		wfProfileIn( __METHOD__ );
+
+		$errorFormatter = new ParserErrorMessageFormatter( $language );
+
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
+		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
+		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
+		$formatter = $wikibaseClient->newSnakFormatter();
+
+		$instance = new self( $language,
+			$entityLookup, $propertyLabelResolver,
+			$errorFormatter, $formatter );
+
+		wfProfileIn( __METHOD__ );
+		return $instance;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param \Parser &$parser
+	 * @param EntityId $entityId
+	 * @param string $propertyLabel property label or ID (pXXX)
+	 * @param \Language $language
+	 *
+	 * @return string
+	 */
+	public static function renderInLanguage( \Parser $parser, EntityId $entityId, $propertyLabel, \Language $language ) {
+
+		$instance = self::getInstance( $parser, $language );
+
+		$status = $instance->renderForEntityId( $entityId, $propertyLabel );
+
+		if ( !$status->isGood() ) {
+			// stuff the error messages into the ParserOutput, so we can render them later somewhere
+
+			$errors = $parser->getOutput()->getExtensionData( 'wikibase-property-render-errors' );
+			if ( $errors === null ) {
+				$errors = array();
+			}
+
+			//XXX: if Status sucked less, we'd could get an array of Message objects
+			$errors[] = $status->getWikiText();
+
+			$parser->getOutput()->setExtensionData( 'wikibase-property-render-errors', $errors );
+		}
+
+		return $status->isOK() ? $status->getValue() : '';
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param \Parser &$parser
@@ -185,40 +301,23 @@ class PropertyParserFunction {
 		}
 
 		$targetLanguage = $parser->getTargetLanguage();
-		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
-		$formatter = $wikibaseClient->newSnakFormatter();
-
-		$instance = new self( $targetLanguage,
-			$entityLookup, $propertyLabelResolver,
-			$errorFormatter, $formatter );
-
-		$status = $instance->renderForEntityId( $entityId, $propertyLabel );
-
-		if ( !$status->isGood() ) {
-			// stuff the error messages into the ParserOutput, so we can render them later somewhere
-
-			$errors = $parser->getOutput()->getExtensionData( 'wikibase-property-render-errors' );
-			if ( $errors === null ) {
-				$errors = array();
+		if ( self::isParserUsingVariants( $parser ) && $parser->getConverterLanguage()->hasVariants() ) {
+			$textArray = array();
+			foreach ( $parser->getConverterLanguage()->getVariants() as $variantCode ) {
+				$variantLanguage = \Language::factory( $variantCode );
+				$textArray[$variantCode] = self::renderInLanguage( $parser, $entityId, $propertyLabel, $variantLanguage );
 			}
-
-			//XXX: if Status sucked less, we'd could get an array of Message objects
-			$errors[] = $status->getWikiText();
-
-			$parser->getOutput()->setExtensionData( 'wikibase-property-render-errors', $errors );
+			$text = self::processRenderedArray( $parser, $textArray );
+		} else {
+			$text = self::processRenderedText( $parser,
+				self::renderInLanguage( $parser, $entityId, $propertyLabel, $targetLanguage )
+			);
 		}
-
-		$text = $status->isOK() ? $status->getValue() : '';
 
 		$result = array(
 			$text,
 			'noparse' => false,
-			'nowiki' => true,
 		);
 
 		wfProfileOut( __METHOD__ );
