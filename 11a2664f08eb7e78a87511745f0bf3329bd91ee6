@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_ab8a8d1a",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-04T14:13:15Z",
+      "side": 1,
+      "message": "limit: limit || undefined (as it\u0027s optional AFAIS)",
+      "revId": "11a2664f08eb7e78a87511745f0bf3329bd91ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_4b9dd961",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-04T14:13:15Z",
+      "side": 1,
+      "message": "\u0027continue\u0027: offset || undefined (as above)",
+      "revId": "11a2664f08eb7e78a87511745f0bf3329bd91ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_0b7c811b",
+        "filename": "lib/tests/qunit/wikibase.RepoApi/wikibase.RepoApi.tests.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-04T14:13:15Z",
+      "side": 1,
+      "message": "createItem( data ) -\u003e We want spaces here",
+      "revId": "11a2664f08eb7e78a87511745f0bf3329bd91ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_cb89c926",
+        "filename": "lib/tests/qunit/wikibase.RepoApi/wikibase.RepoApi.tests.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-04T14:13:15Z",
+      "side": 1,
+      "message": ".fail( probably should go into its own line, like .done below",
+      "revId": "11a2664f08eb7e78a87511745f0bf3329bd91ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_6b79b52b",
+        "filename": "lib/tests/qunit/wikibase.RepoApi/wikibase.RepoApi.tests.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-04T14:13:15Z",
+      "side": 1,
+      "message": "function( response ) -\u003e We want spaces here",
+      "revId": "11a2664f08eb7e78a87511745f0bf3329bd91ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
