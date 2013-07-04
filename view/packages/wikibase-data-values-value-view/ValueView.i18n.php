@@ -530,6 +530,7 @@ $messages['mk'] = array(
  */
 $messages['ms'] = array(
 	'valueview-desc' => 'Komponen-komponen UI untuk memaparkan dan menyunting nilai data',
+	'valueview-expert-advancedadjustments' => 'penyelarasan lanjutan',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Pengelolaan nilai "$1" belum disokong.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Pengelolaan nilai untuk jenis data "$1" belum disokong.',
 	'valueview-expert-emptyvalue-empty' => 'kosong',
