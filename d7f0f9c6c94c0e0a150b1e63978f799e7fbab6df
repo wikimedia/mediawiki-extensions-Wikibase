@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_8b2cf103",
+        "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-04T15:07:21Z",
+      "side": 1,
+      "message": "The test for this is missing",
+      "revId": "d7f0f9c6c94c0e0a150b1e63978f799e7fbab6df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
