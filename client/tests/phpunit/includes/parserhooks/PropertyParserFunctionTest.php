@@ -124,4 +124,122 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGetInstance() {
+		$parser = new \Parser();
+		$parser->startExternalParse();
+		$instance = PropertyParserFunction::getInstance( $parser );
+		$this->assertInstanceOf( 'Wikibase\PropertyParserFunction', $instance );
+	}
+
+	/**
+	 * @dataProvider provideIsParserUsingVariants
+	 */
+	public function testIsParserUsingVariants(
+		$outputType, $interfaceMessage, $disableContentConversion, $disableTitleConversion, $expected
+	) {
+		$parser = new \Parser();
+		$parserOptions = new \ParserOptions();
+		$parserOptions->setInterfaceMessage( $interfaceMessage );
+		$parserOptions->disableContentConversion( $disableContentConversion );
+		$parserOptions->disableTitleConversion( $disableTitleConversion );
+		$parser->startExternalParse( null, $parserOptions, $outputType );
+		$this->assertEquals( $expected, PropertyParserFunction::isParserUsingVariants( $parser ) );
+	}
+
+	public function provideIsParserUsingVariants() {
+		return array(
+			array( \Parser::OT_HTML, false, false, false, true ),
+			array( \Parser::OT_WIKI, false, false, false, false ),
+			array( \Parser::OT_PREPROCESS, false, false, false, false ),
+			array( \Parser::OT_PLAIN, false, false, false, false ),
+			array( \Parser::OT_HTML, true, false, false, false ),
+			array( \Parser::OT_HTML, false, true, false, false ),
+			array( \Parser::OT_HTML, false, false, true, true ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideProcessRenderedText
+	 */
+	public function testProcessRenderedText(
+		$outputType, $interfaceMessage, $disableContentConversion, $disableTitleConversion,
+		$language, $text, $rawExpected, $markedNoConversion
+	) {
+		$parser = new \Parser();
+		$parserOptions = new \ParserOptions();
+		$parserOptions->setInterfaceMessage( $interfaceMessage );
+		$parserOptions->disableContentConversion( $disableContentConversion );
+		$parserOptions->disableTitleConversion( $disableTitleConversion );
+		$languageObject = Language::factory( $language );
+		$parserOptions->setTargetLanguage( $languageObject );
+		$parser->startExternalParse( null, $parserOptions, $outputType );
+		if ( $markedNoConversion ) {
+			$expected = $languageObject->getConverter()->markNoConversion( $rawExpected );
+		} else {
+			$expected = $rawExpected;
+		}
+		$this->assertEquals( $rawExpected, PropertyParserFunction::processRenderedText( $parser, $text ) );
+	}
+
+	public function provideProcessRenderedText() {
+		return array(
+			array(
+				\Parser::OT_HTML, false, false, false
+				'en', 'fo<b>ob</b>ar', 'fo&lt;b&gt;ob&lt;/b&gt;ar', true
+		       	),
+			array(
+				\Parser::OT_HTML, false, false, false
+				'zh', 'fo<b>ob</b>ar', 'fo&lt;b&gt;ob&lt;/b&gt;ar', true
+		       	),
+			array(
+				\Parser::OT_WIKI, false, false, false
+				'en', 'fo<b>ob</b>ar', 'fo<b>ob</b>ar', false
+		       	),
+			array(
+				\Parser::OT_WIKI, false, false, false
+				'zh', 'fo<b>ob</b>ar', 'fo<b>ob</b>ar', false
+		       	),
+			array(
+				\Parser::OT_PREPROCESS, false, false, false
+				'en', 'fo<b>ob</b>ar', 'fo&lt;b&gt;ob&lt;/b&gt;ar', false
+		       	),
+			array(
+				\Parser::OT_PREPROCESS, false, false, false
+				'zh', 'fo<b>ob</b>ar', 'fo&lt;b&gt;ob&lt;/b&gt;ar', false
+		       	),
+			array(
+				\Parser::OT_PLAIN, false, false, false
+				'en', 'fo<b>ob</b>ar', 'fo<b>ob</b>ar', false
+		       	),
+			array(
+				\Parser::OT_PLAIN, false, false, false
+				'zh', 'fo<b>ob</b>ar', 'fo<b>ob</b>ar', false
+		       	),
+			array(
+				\Parser::OT_HTML, true, false, false
+				'en', 'fo<b>ob</b>ar', 'fo&lt;b&gt;ob&lt;/b&gt;ar', false
+		       	),
+			array(
+				\Parser::OT_HTML, true, false, false
+				'zh', 'fo<b>ob</b>ar', 'fo&lt;b&gt;ob&lt;/b&gt;ar', false
+		       	),
+			array(
+				\Parser::OT_HTML, false, true, false
+				'en', 'fo<b>ob</b>ar', 'fo&lt;b&gt;ob&lt;/b&gt;ar', false
+		       	),
+			array(
+				\Parser::OT_HTML, false, true, false
+				'zh', 'fo<b>ob</b>ar', 'fo&lt;b&gt;ob&lt;/b&gt;ar', false
+		       	),
+			array(
+				\Parser::OT_HTML, false, false, true
+				'en', 'fo<b>ob</b>ar', 'fo&lt;b&gt;ob&lt;/b&gt;ar', true
+		       	),
+			array(
+				\Parser::OT_HTML, false, false, true
+				'zh', 'fo<b>ob</b>ar', 'fo&lt;b&gt;ob&lt;/b&gt;ar', true
+		       	),
+		);
+	}
+
 }
