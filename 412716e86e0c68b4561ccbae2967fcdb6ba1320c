@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "69c609db_bfc3e708",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-05T15:23:01Z",
+      "side": 1,
+      "message": "I just got told by DanielK that it should be in the constructor, not in this function. Since this might necessitate a bigger change, you can leave that for after merge, so that you don\u0027t have too much hassle with Git.",
+      "parentUuid": "69c609db_5f43d3b2",
+      "revId": "412716e86e0c68b4561ccbae2967fcdb6ba1320c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69c609db_9f2c2b04",
         "filename": "lib/tests/phpunit/serializers/SerializationOptionsTest.php",
         "patchSetId": 11
