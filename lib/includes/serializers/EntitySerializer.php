@@ -84,13 +84,13 @@ class EntitySerializer extends SerializerObject {
 					break;
 				case 'descriptions':
 					$descriptionSerializer = new DescriptionSerializer( $this->options );
-					$descriptions = $entity->getDescriptions( $this->options->getLanguages() );
-					$serialization['descriptions'] = $descriptionSerializer->getSerialized( $descriptions );
+					$serialization['descriptions'] = $descriptionSerializer->
+						getSerializedMultilingualValues( $entity->getDescriptions() );
 					break;
 				case 'labels':
 					$labelSerializer = new LabelSerializer( $this->options );
-					$labels = $entity->getLabels( $this->options->getLanguages() );
-					$serialization['labels'] = $labelSerializer->getSerialized( $labels );
+					$serialization['labels'] = $labelSerializer->
+						getSerializedMultilingualValues( $entity->getLabels() );
 					break;
 				case 'claims':
 					$claimsSerializer = new ClaimsSerializer( $this->options );
