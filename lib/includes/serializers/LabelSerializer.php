@@ -30,30 +30,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class LabelSerializer extends SerializerObject {
-
-	/**
-	 * @see ApiSerializerObject::$options
-	 *
-	 * @since 0.4
-	 *
-	 * @var MultiLangSerializationOptions
-	 */
-	protected $options;
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 0.4
-	 *
-	 * @param MultiLangSerializationOptions $options
-	 */
-	public function __construct( MultiLangSerializationOptions $options = null ) {
-		if ( $options === null ) {
-			$this->options = new MultiLangSerializationOptions();
-		}
-		parent::__construct( $options );
-	}
+class LabelSerializer extends MultilingualSerializerObject {
 
 	/**
 	 * Returns a serialized array of labels.
@@ -70,18 +47,7 @@ class LabelSerializer extends SerializerObject {
 			throw new InvalidArgumentException( 'LabelSerializer can only serialize an array of labels' );
 		}
 
-		$value = array();
-		$idx = 0;
-
-		foreach ( $labels as $languageCode => $label ) {
-			$key = $this->options->shouldUseKeys() ? $languageCode : $idx++;
-			$valueKey = ( $label === '' ) ? 'removed' : 'value';
-			$value[$key] = array(
-				'language' => $languageCode,
-				$valueKey => $label
-			);
-		}
-
+		$value = $this->serializeMultilingualValues( $labels );
 		if ( !$this->options->shouldUseKeys() ) {
 			$this->setIndexedTagName( $value, 'label' );
 		}
