@@ -2,14 +2,11 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityFactory;
-
 use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
-use Wikibase\Lib\Serializers\DescriptionSerializer;
-use InvalidArgumentException;
+use Wikibase\Lib\Serializers\MultilingualSerializer;
 
 /**
- * @covers Wikibase\Lib\Serializers\DescriptionSerializer
+ * @covers Wikibase\Lib\Serializers\MultilingualSerializer
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,14 +32,12 @@ use InvalidArgumentException;
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
- * @group WikibaseDescriptionSerializer
  *
  * @licence GNU GPL v2+
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
+class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 
-	public function validProvider() {
+	public function provideSerialize() {
 		$validArgs = array();
 
 		$options = new MultiLangSerializationOptions();
@@ -106,7 +101,6 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 				"source-language" => "fi",
 				"value" => "kunta Italiassa"
 			),
-			"_element" => "description",
 		);
 		$validArgs[] = array( $descriptions, $options, $expectedSerialization );
 
@@ -164,31 +158,13 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider validProvider
+	 * @dataProvider provideSerialize
 	 */
-	public function testGetSerialized( $descriptions, $options, $expectedSerialization ) {
-		$descriptionSerializer = new DescriptionSerializer( $options );
-		$serializedDescriptions = $descriptionSerializer->getSerialized( $descriptions );
+	public function testSerialize( $values, $options, $expectedSerialization ) {
+		$serializer = new MultilingualSerializer( $options );
+		$serialized = $serializer->serializeMultilingualValues( $values );
 
-		$this->assertEquals( $expectedSerialization, $serializedDescriptions );
-	}
-
-	public function invalidProvider() {
-		$invalidArgs = array();
-
-		$invalidArgs[] = array( 'foo' );
-		$invalidArgs[] = array( 42 );
-
-		return $invalidArgs;
-	}
-
-	/**
-	 * @dataProvider invalidProvider
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testInvalidGetSerialized( $descriptions ) {
-		$descriptionSerializer = new DescriptionSerializer();
-		$serializedDescriptions = $descriptionSerializer->getSerialized( $descriptions );
+		$this->assertEquals( $expectedSerialization, $serialized );
 	}
 
 }
