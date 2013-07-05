@@ -107,6 +107,15 @@
 				new wb.ui.AliasesEditTool( this );
 			} );
 
+			// store site link section headings for usage in SiteLinksEditTool DOM
+			var siteLinkHeadings = {};
+
+			$( '.wb-sitelinks-heading' ).each( function() {
+				var $elem = $( this ),
+					group = $elem.attr( 'id' ).replace( /^sitelinks-/, '' );
+				siteLinkHeadings[ group ] = $elem;
+			} );
+
 			$( '.wb-section-heading' ).remove();
 
 			// BUILD CLAIMS VIEW:
@@ -136,7 +145,10 @@
 						mw.msg( 'wikibase-sitelinks-' + group ),
 						'sitelinks-' + group
 					).append( $sitesCounterContainer )
+
+					siteLinkHeadings[ group ].append( $sitesCounterContainer )
 				);
+
 				// actual initialization
 				new wb.ui.SiteLinksEditTool( $( this ), {
 					allowedSites: wb.getSitesOfGroup( group ),
