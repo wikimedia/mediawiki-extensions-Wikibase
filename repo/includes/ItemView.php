@@ -90,7 +90,7 @@ class ItemView extends EntityView {
 		$html = $thead = $tbody = $tfoot = '';
 
 		$html .= wfTemplate(
-			'wb-section-heading',
+			'wb-section-heading-sitelinks',
 			wfMessage( 'wikibase-sitelinks-' . $group )->parse(), // heading
 			htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES ) // ID
 			// TODO: support entity-id as prefix for element IDs.

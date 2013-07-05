@@ -53,7 +53,6 @@ return call_user_func( function() {
 				'wikibase.serialization.fetchedcontent'
 			),
 			'messages' => array(
-				'wikibase-sitelinks-wikipedia',
 				'wikibase-statements',
 				'wikibase-copyrighttooltip-acknowledge',
 				'wikibase-anonymouseditwarning',
