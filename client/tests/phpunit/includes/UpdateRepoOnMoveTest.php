@@ -2,8 +2,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\UpdateRepoOnMove;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Settings;
+use Wikibase\EntityId;
 
 /**
  * Tests for the UpdateRepoOnMove class.
@@ -29,8 +29,6 @@ use Wikibase\Settings;
  * @ingroup WikibaseClient
  * @ingroup Test
  *
- * @group WikibaseClient
- *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
@@ -45,9 +43,19 @@ class UpdateRepoOnMoveTest extends \MediaWikiTestCase {
 		static $ret = array();
 
 		if ( !$ret ) {
+			$entityId = new EntityId( 'Item', 123 );
+
+			$siteLinkLookupMock = $this->getMockBuilder( '\Wikibase\SiteLinkLookup' )
+				->disableOriginalConstructor()
+				->getMock();
+
+			$siteLinkLookupMock->expects( $this->any() )
+				->method( 'getEntityIdForSiteLink' )
+				->will( $this->returnValue( $entityId ) );
+
 			$ret = array(
 				'repoDB' => wfWikiID(),
-				'siteLinkLookup' => WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
+				'siteLinkLookup' => $siteLinkLookupMock,
 				'user' => \User::newFromName( 'RandomUserWhichDoesntExist' ),
 				'siteId' => Settings::get( 'siteGlobalID' ),
 				'oldTitle' => \Title::newFromText( 'ThisOneDoesntExist' ),
