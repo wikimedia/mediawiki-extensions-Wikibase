@@ -107,6 +107,13 @@
 				new wb.ui.AliasesEditTool( this );
 			} );
 
+			// store site link section heading text for js entity view
+			var siteLinkHeadings = [];
+
+			$( '.wb-sitelink-heading' ).each( function( i ) {
+				siteLinkHeadings[$( this ).attr( 'id' )] = $( this ).text();
+			});
+
 			$( '.wb-section-heading' ).remove();
 
 			// BUILD CLAIMS VIEW:
@@ -133,7 +140,7 @@
 				$( this ).before(
 					mw.template(
 						'wb-section-heading',
-						mw.msg( 'wikibase-sitelinks-' + group ),
+						siteLinkHeadings['sitelinks-' + group],
 						'sitelinks'
 					).append( $sitesCounterContainer )
 				);
