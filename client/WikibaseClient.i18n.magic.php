@@ -27,6 +27,7 @@ $magicWords['ar'] = array(
 /** German (Deutsch) */
 $magicWords['de'] = array(
 	'noexternallanglinks' => array( 0, 'keineexternensprachlinks', 'keine_externen_sprachlinks' ),
+	'property' => array( 0, 'eigenschaft' ),
 );
 
 /** Esperanto (Esperanto) */
