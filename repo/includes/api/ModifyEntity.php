@@ -12,6 +12,8 @@ use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\ItemHandler;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StringNormalizer;
 use Wikibase\Summary;
 use Wikibase\Utils;
 
@@ -29,6 +31,17 @@ use Wikibase\Utils;
  * @author Daniel Kinzler
  */
 abstract class ModifyEntity extends ApiWikibase {
+
+	/**
+	 * @var StringNormalizer
+	 */
+	protected $stringNormalizer;
+
+	public function __construct( \ApiMain $main, $name, $prefix = '' ) {
+		parent::__construct( $main, $name, $prefix );
+
+		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+	}
 
 	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
@@ -83,7 +96,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 			$entityTitle = $itemHandler->getTitleFromSiteLink(
 				$params['site'],
-				Utils::trimToNFC( $params['title'] )
+				$this->stringNormalizer->trimToNFC( $params['title'] )
 			);
 
 			if ( is_null( $entityTitle ) ) {
@@ -257,7 +270,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected function addNormalizationInfoToOutput( $title ) {
 		$normalized = array();
 
-		$normTitle = Utils::trimToNFC( $title );
+		$normTitle = $this->stringNormalizer->trimToNFC( $title );
 		if ( $normTitle !== $title ) {
 			$normalized['from'] = $title;
 			$normalized['to'] = $normTitle;
