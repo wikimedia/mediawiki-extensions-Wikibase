@@ -115,6 +115,7 @@ return call_user_func( function() {
 		'Wikibase\Lib\Serializers\ReferenceSerializer' => 'includes/serializers/ReferenceSerializer.php',
 		'Wikibase\Lib\Serializers\SerializationOptions' => 'includes/serializers/SerializationOptions.php',
 		'Wikibase\Lib\Serializers\MultiLangSerializationOptions' => 'includes/serializers/SerializationOptions.php',
+		'Wikibase\Lib\Serializers\MultilingualSerializer' => 'includes/serializers/MultilingualSerializer.php',
 		'Wikibase\Lib\Serializers\EntitySerializationOptions' => 'includes/serializers/SerializationOptions.php',
 		'Wikibase\Lib\Serializers\Serializer' => 'includes/serializers/Serializer.php',
 		'Wikibase\Lib\Serializers\SerializerFactory' => 'includes/serializers/SerializerFactory.php',

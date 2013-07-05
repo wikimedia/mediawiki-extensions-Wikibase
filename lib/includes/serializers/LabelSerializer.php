@@ -42,6 +42,11 @@ class LabelSerializer extends SerializerObject {
 	protected $options;
 
 	/**
+	 * @var MultilingualSerializer
+	 */
+	protected $multilingualSerializer;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -53,10 +58,11 @@ class LabelSerializer extends SerializerObject {
 			$this->options = new MultiLangSerializationOptions();
 		}
 		parent::__construct( $options );
+		$this->multilingualSerializer = new MultilingualSerializer( $options );
 	}
 
 	/**
-	 * Returns a serialized array of labels.
+	 * Returns a serialized array of labels for all data given.
 	 *
 	 * @since 0.4
 	 *
@@ -70,22 +76,29 @@ class LabelSerializer extends SerializerObject {
 			throw new InvalidArgumentException( 'LabelSerializer can only serialize an array of labels' );
 		}
 
-		$value = array();
-		$idx = 0;
-
-		foreach ( $labels as $languageCode => $label ) {
-			$key = $this->options->shouldUseKeys() ? $languageCode : $idx++;
-			$valueKey = ( $label === '' ) ? 'removed' : 'value';
-			$value[$key] = array(
-				'language' => $languageCode,
-				$valueKey => $label
-			);
-		}
+		$value = $this->multilingualSerializer->serializeMultilingualValues( $labels );
 
 		if ( !$this->options->shouldUseKeys() ) {
 			$this->setIndexedTagName( $value, 'label' );
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Returns a serialized array of labels from raw label data array.
+	 *
+	 * Unlike getSerialized(), $labels is filtered first for requested languages then gets serialized with getSerialized().
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $labels
+	 *
+	 * @return array
+	 * @throws InvalidArgumentException
+	 */
+	public final function getSerializedMultilingualValues( $labels ) {
+		$labels = $this->multilingualSerializer->filterPreferredMultilingualValues( $labels );
+		return $this->getSerialized( $labels );
 	}
 }

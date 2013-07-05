@@ -42,6 +42,11 @@ class DescriptionSerializer extends SerializerObject {
 	protected $options;
 
 	/**
+	 * @var MultilingualSerializer
+	 */
+	protected $multilingualSerializer;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -53,10 +58,11 @@ class DescriptionSerializer extends SerializerObject {
 			$this->options = new MultiLangSerializationOptions();
 		}
 		parent::__construct( $options );
+		$this->multilingualSerializer = new MultilingualSerializer( $options );
 	}
 
 	/**
-	 * Returns a serialized array of descriptions.
+	 * Returns a serialized array of descriptions for all data given.
 	 *
 	 * @since 0.4
 	 *
@@ -70,22 +76,29 @@ class DescriptionSerializer extends SerializerObject {
 			throw new InvalidArgumentException( 'DescriptionSerializer can only serialize an array of descriptions' );
 		}
 
-		$value = array();
-		$idx = 0;
-
-		foreach ( $descriptions as $languageCode => $description ) {
-			$key = $this->options->shouldUseKeys() ? $languageCode : $idx++;
-			$valueKey = ( $description === '' ) ? 'removed' : 'value';
-			$value[$key] = array(
-				'language' => $languageCode,
-				$valueKey => $description
-			);
-		}
+		$value = $this->multilingualSerializer->serializeMultilingualValues( $descriptions );
 
 		if ( !$this->options->shouldUseKeys() ) {
 			$this->setIndexedTagName( $value, 'description' );
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Returns a serialized array of descriptions from raw description data array.
+	 *
+	 * Unlike getSerialized(), $descriptions is filtered first for requested languages then gets serialized with getSerialized().
+	 *
+	 * @since 0.4
+	 *
+	 * @param array $descriptions
+	 *
+	 * @return array
+	 * @throws InvalidArgumentException
+	 */
+	public final function getSerializedMultilingualValues( $descriptions ) {
+		$descriptions = $this->multilingualSerializer->filterPreferredMultilingualValues( $descriptions );
+		return $this->getSerialized( $descriptions );
 	}
 }
