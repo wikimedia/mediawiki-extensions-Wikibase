@@ -58,6 +58,32 @@ class EntitySerializer extends SerializerObject {
 	}
 
 	/**
+	 * Used in getSerialized(), to filter multilingual labels and descriptions
+	 *
+	 * @param array $allData
+	 *
+	 * @return array
+	 */
+	private function filterPreferredMultilingualValues( array $allData ) {
+		$data = array();
+
+		$languageFallbackChains = $this->options->getLanguageFallbackChains();
+
+		if ( $languageFallbackChains ) {
+			foreach ( $languageFallbackChains as $languageCode => $languageFallbackChain ) {
+				$data = $languageFallbackChain->extractPreferredValue( $allData );
+				if ( $data !== null ) {
+					$labels[$languageCode] = $data;
+				}
+			}
+		} else {
+			$data = $allData;
+		}
+
+		return $data;
+	}
+
+	/**
 	 * @see ApiSerializer::getSerialized
 	 *
 	 * @since 0.2
@@ -84,13 +110,15 @@ class EntitySerializer extends SerializerObject {
 					break;
 				case 'descriptions':
 					$descriptionSerializer = new DescriptionSerializer( $this->options );
-					$descriptions = $entity->getDescriptions( $this->options->getLanguages() );
-					$serialization['descriptions'] = $descriptionSerializer->getSerialized( $descriptions );
+					$serialization['descriptions'] = $descriptionSerializer->getSerialized(
+						$this->filterPreferredMultilingualValues( $entity->getDescriptions() )
+					);
 					break;
 				case 'labels':
 					$labelSerializer = new LabelSerializer( $this->options );
-					$labels = $entity->getLabels( $this->options->getLanguages() );
-					$serialization['labels'] = $labelSerializer->getSerialized( $labels );
+					$serialization['labels'] = $labelSerializer->getSerialized(
+						$this->filterPreferredMultilingualValues( $entity->getLabels() )
+					);
 					break;
 				case 'claims':
 					$claimsSerializer = new ClaimsSerializer( $this->options );
