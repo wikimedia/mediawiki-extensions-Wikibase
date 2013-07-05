@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_da0a3121",
+        "filename": "repo/includes/actions/HistoryEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-05T15:51:55Z",
+      "side": 1,
+      "message": "Please set the factory as a member in the constructor. This makes it easier to implement real injection later, and woudl allow us to override it using a setLanguageFallbackChainFactory() method, if need be.",
+      "revId": "9ee8408784f98e2fc2f42d0f0292fd70dbbca82e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
