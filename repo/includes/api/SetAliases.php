@@ -64,6 +64,8 @@ class SetAliases extends ModifyEntity {
 	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
+		$this_ = $this; // hack for PHP fail.
+
 		wfProfileIn( __METHOD__ );
 
 		$summary = $this->createSummary( $params );
@@ -76,7 +78,7 @@ class SetAliases extends ModifyEntity {
 			$entityContent->getEntity()->setAliases(
 				$params['language'],
 				array_map(
-					function( $str ) { return Utils::trimToNFC( $str ); },
+					function( $str ) use ( $this_ ) { return $this_->stringNormalizer->trimToNFC( $str ); },
 					$params['set']
 				)
 			);
@@ -87,7 +89,7 @@ class SetAliases extends ModifyEntity {
 				$entityContent->getEntity()->addAliases(
 					$params['language'],
 					array_map(
-						function( $str ) { return Utils::trimToNFC( $str ); },
+						function( $str ) use ( $this_ ) { return $this_->stringNormalizer->trimToNFC( $str ); },
 						$params['add']
 					)
 				);
@@ -97,7 +99,7 @@ class SetAliases extends ModifyEntity {
 				$entityContent->getEntity()->removeAliases(
 					$params['language'],
 					array_map(
-						function( $str ) { return Utils::trimToNFC( $str ); },
+						function( $str ) use ( $this_ ) { return $this_->stringNormalizer->trimToNFC( $str ); },
 						$params['remove']
 					)
 				);

@@ -45,7 +45,7 @@ class SetDescription extends ModifyLangAttribute {
 
 		if ( isset( $params['value'] ) ) {
 
-			$description = Utils::trimToNFC( $params['value'] );
+			$description = $this->stringNormalizer->trimToNFC( $params['value'] );
 			$language = $params['language'];
 
 			if ( 0 < strlen( $description ) ) {

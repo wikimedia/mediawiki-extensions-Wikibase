@@ -156,7 +156,8 @@ abstract class SpecialNewEntity extends SpecialWikibasePage {
 	 * @return bool
 	 */
 	protected function hasSufficientArguments() {
-		return Utils::trimWhitespace( $this->label ) !== '' || Utils::trimWhitespace( $this->description ) !== '';
+		return $this->stringNormalizer->trimWhitespace( $this->label ) !== ''
+			|| $this->stringNormalizer->trimWhitespace( $this->description ) !== '';
 	}
 
 	/**
