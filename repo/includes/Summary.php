@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Language;
 use DataValues\StringValue;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * File defining the handler for autocomments and additional utility functions
@@ -374,9 +375,10 @@ class Summary {
 	 */
 	public static function formatTotalSummary( $comment, $summary, $length = SUMMARY_MAX_LENGTH ) {
 		global $wgContLang;
+		$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
 
-		$comment = Utils::trimToNFC( $comment );
-		$summary = Utils::trimToNFC( $summary );
+		$comment = $normalizer->trimToNFC( $comment );
+		$summary = $normalizer->trimToNFC( $summary );
 		$mergedString = '';
 		if ( $comment !== '' ) {
 			$mergedString .=  "/* $comment */";
@@ -411,8 +413,10 @@ class Summary {
 			)
 		);
 
-		$comment = ( $format & self::USE_COMMENT) ? Utils::trimToNFC( $comment ) : '';
-		$summary = ( $format & self::USE_SUMMARY) ? Utils::trimToNFC( $summary ) : '';
+		$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+
+		$comment = ( $format & self::USE_COMMENT) ? $normalizer->trimToNFC( $comment ) : '';
+		$summary = ( $format & self::USE_SUMMARY) ? $normalizer->trimToNFC( $summary ) : '';
 
 		$totalSummary = self::formatTotalSummary( $comment, $summary, $length );
 

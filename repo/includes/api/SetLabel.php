@@ -45,7 +45,7 @@ class SetLabel extends ModifyLangAttribute {
 
 		if ( isset( $params['value'] ) ) {
 
-			$label = Utils::trimToNFC( $params['value'] );
+			$label = $this->stringNormalizer->trimToNFC( $params['value'] );
 			$language = $params['language'];
 			if ( 0 < strlen( $label ) ) {
 				$summary->addAutoSummaryArgs( $label );

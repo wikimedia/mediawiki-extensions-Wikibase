@@ -21,6 +21,7 @@ use Wikibase\SettingsArray;
 use Wikibase\Store;
 use Wikibase\StoreFactory;
 use Wikibase\SnakFactory;
+use Wikibase\StringNormalizer;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -83,6 +84,12 @@ final class WikibaseRepo {
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory;
+
+	/**
+	 * @var StringNormalizer
+	 */
+	private $stringNormalizer;
+
 
 	/**
 	 * @since 0.4
@@ -166,6 +173,19 @@ final class WikibaseRepo {
 		}
 
 		return $this->propertyDataTypeLookup;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return StringNormalizer
+	 */
+	public function getStringNormalizer() {
+		if ( $this->stringNormalizer === null ) {
+			$this->stringNormalizer = new StringNormalizer();
+		}
+
+		return $this->stringNormalizer;
 	}
 
 	/**
