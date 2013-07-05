@@ -42,6 +42,11 @@ class DescriptionSerializer extends SerializerObject {
 	protected $options;
 
 	/**
+	 * @var MultilingualSerializerObject
+	 */
+	protected $multilingualSerializer;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -53,6 +58,7 @@ class DescriptionSerializer extends SerializerObject {
 			$this->options = new MultiLangSerializationOptions();
 		}
 		parent::__construct( $options );
+		$this->multilingualSerializer = new MultilingualSerializer( $options );
 	}
 
 	/**
@@ -70,17 +76,7 @@ class DescriptionSerializer extends SerializerObject {
 			throw new InvalidArgumentException( 'DescriptionSerializer can only serialize an array of descriptions' );
 		}
 
-		$value = array();
-		$idx = 0;
-
-		foreach ( $descriptions as $languageCode => $description ) {
-			$key = $this->options->shouldUseKeys() ? $languageCode : $idx++;
-			$valueKey = ( $description === '' ) ? 'removed' : 'value';
-			$value[$key] = array(
-				'language' => $languageCode,
-				$valueKey => $description
-			);
-		}
+		$value = $this->multilingualSerializer->serializeMultilingualValues( $descriptions );
 
 		if ( !$this->options->shouldUseKeys() ) {
 			$this->setIndexedTagName( $value, 'description' );
