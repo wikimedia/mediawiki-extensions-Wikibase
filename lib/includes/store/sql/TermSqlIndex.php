@@ -41,6 +41,11 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	protected $tableName;
 
 	/**
+	 * @var StringNormalizer
+	 */
+	protected $stringNormalizer;
+
+	/**
 	 * Maps table fields to TermIndex interface field names.
 	 *
 	 * @since 0.2
@@ -58,14 +63,15 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1
+	 * @since    0.4
 	 *
-	 * @param string $tableName
-	 * @param string|bool $wikiDb
+	 * @param StringNormalizer $stringNormalizer
+	 * @param string|bool      $wikiDb
 	 */
-	public function __construct( $tableName, $wikiDb = false ) {
+	public function __construct( StringNormalizer $stringNormalizer, $wikiDb = false ) {
 		parent::__construct( $wikiDb );
-		$this->tableName = $tableName;
+		$this->stringNormalizer = $stringNormalizer;
+		$this->tableName = 'wb_terms';
 	}
 
 	/**
@@ -190,7 +196,7 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		);
 
 		if ( !Settings::get( 'withoutTermSearchKey' ) ) {
-			$fields['term_search_key'] = $term->getNormalizedText();
+			$fields['term_search_key'] = $this->getSearchKey( $term->getText(), $term->getLanguage() );
 		}
 
 		return $fields;
@@ -620,7 +626,7 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 				}
 				else {
 					$textField = 'term_search_key';
-					$text = $term->getNormalizedText();
+					$text = $this->getSearchKey( $term->getText(), $term->getLanguage() );
 				}
 
 				if ( $options['prefixSearch'] ) {
@@ -835,5 +841,57 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		}
 
 		return $resultTerms;
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @param string $text
+	 * @param string $lang language code of the text's language, may be used
+	 *                     for specialized normalization.
+	 *
+	 * @return string
+	 */
+	public function getSearchKey( $text, $lang = 'en' ) {
+		if ( $text === null ) {
+			return null;
+		}
+
+		if ( $text === '' ) {
+			return '';
+		}
+
+		// composed normal form
+		$nfcText = $this->stringNormalizer->cleanupToNFC( $text );
+
+		if ( !is_string( $nfcText ) || $nfcText === '' ) {
+			wfWarn( "Unicode normalization failed for `$text`" );
+		}
+
+		// \p{Z} - whitespace
+		// \p{C} - control chars
+		// WARNING: *any* invalid UTF8 sequence causes preg_replace to return an empty string.
+		$strippedText = $nfcText;
+		$strippedText = preg_replace( '/[\p{Cc}\p{Cf}\p{Cn}\p{Cs}]+/u', ' ', $strippedText );
+		$strippedText = preg_replace( '/^[\p{Z}]+|[\p{Z}]+$/u', '', $strippedText );
+
+		if ( $strippedText === '' ) {
+			// NOTE: This happens when there is only whitespace in the string.
+			//       However, preg_replace will also return an empty string if it
+			//       encounters any invalid utf-8 sequence.
+			return '';
+		}
+
+		//TODO: Use Language::lc to convert to lower case.
+		//      But that requires us to load ALL the language objects,
+		//      which loads ALL the messages, which makes us run out
+		//      of RAM (see bug 41103).
+		$normalized = mb_strtolower( $strippedText, 'UTF-8' );
+
+		if ( !is_string( $normalized ) || $normalized === '' ) {
+			wfWarn( "mb_strtolower normalization failed for `$strippedText`" );
+		}
+
+		return $normalized;
 	}
 }
