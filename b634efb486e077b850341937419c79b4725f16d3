@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_3f0ff739",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-05T15:50:39Z",
+      "side": 1,
+      "message": "Ugh, this hook handler is huge - it should really be factored out into a separate class. But that\u0027s not for this change.",
+      "revId": "b634efb486e077b850341937419c79b4725f16d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_df40635c",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-05T15:50:39Z",
+      "side": 1,
+      "message": "Please set the factory as a member in the constructor. This makes it easier to implement real injection later, and woudl allow us to override it using a setLanguageFallbackChainFactory() method, if need be.",
+      "revId": "b634efb486e077b850341937419c79b4725f16d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_1f231bc2",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-05T15:50:39Z",
+      "side": 1,
+      "message": "Please set the factory as a member in the constructor. This makes it easier to implement real injection later, and woudl allow us to override it using a setLanguageFallbackChainFactory() method, if need be.",
+      "revId": "b634efb486e077b850341937419c79b4725f16d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
