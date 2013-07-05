@@ -84,7 +84,7 @@ class SetSiteLink extends ModifyEntity {
 		$item = $entityContent->getItem();
 
 		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
-			$linksite = Utils::trimToNFC( $params['linksite'] );
+			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 
 			try {
 				$link = $item->getSimpleSiteLink( $linksite );
@@ -108,7 +108,7 @@ class SetSiteLink extends ModifyEntity {
 				$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-siteid' )->text(), 'not-recognized-siteid' );
 			}
 
-			$page = $site->normalizePageName( Utils::trimWhitespace( $params['linktitle'] ) );
+			$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $params['linktitle'] ) );
 
 			if ( $page === false ) {
 				wfProfileOut( __METHOD__ );

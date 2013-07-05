@@ -29,7 +29,30 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StringNormalizer;
+
 abstract class SpecialWikibasePage extends SpecialPage {
+
+	/**
+	 * @var StringNormalizer
+	 */
+	protected $stringNormalizer;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.4
+	 *
+	 * @param string $name
+	 * @param string $restriction
+	 * @param bool   $listed
+	 */
+	public function __construct( $name = '', $restriction = '', $listed = true ) {
+		parent::__construct( $name, $restriction, $listed );
+
+		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+	}
 
 	/**
 	 * The subpage, ie the part after Special:PageName/
