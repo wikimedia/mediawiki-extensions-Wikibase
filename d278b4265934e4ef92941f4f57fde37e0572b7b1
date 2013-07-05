@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_bfdda713",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-05T14:49:05Z",
+      "side": 1,
+      "message": "you can use @return LanguageWithConversion[] for this, (some) IDEs will understand it and automatically associate the correct type with array values.",
+      "revId": "d278b4265934e4ef92941f4f57fde37e0572b7b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_9fe26bd7",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-05T14:49:05Z",
+      "side": 1,
+      "message": "missing wfProfileOut() here.",
+      "revId": "d278b4265934e4ef92941f4f57fde37e0572b7b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_ffe71fe5",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-05T14:49:05Z",
+      "side": 1,
+      "message": "missing wfProfileOut() here.",
+      "revId": "d278b4265934e4ef92941f4f57fde37e0572b7b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
