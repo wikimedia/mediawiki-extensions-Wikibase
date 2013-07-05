@@ -30,30 +30,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class DescriptionSerializer extends SerializerObject {
-
-	/**
-	 * @see ApiSerializerObject::$options
-	 *
-	 * @since 0.4
-	 *
-	 * @var MultiLangSerializationOptions
-	 */
-	protected $options;
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 0.4
-	 *
-	 * @param MultiLangSerializationOptions $options
-	 */
-	public function __construct( MultiLangSerializationOptions $options = null ) {
-		if ( $options === null ) {
-			$this->options = new MultiLangSerializationOptions();
-		}
-		parent::__construct( $options );
-	}
+class DescriptionSerializer extends MultilingualSerializerObject {
 
 	/**
 	 * Returns a serialized array of descriptions.
@@ -70,18 +47,7 @@ class DescriptionSerializer extends SerializerObject {
 			throw new InvalidArgumentException( 'DescriptionSerializer can only serialize an array of descriptions' );
 		}
 
-		$value = array();
-		$idx = 0;
-
-		foreach ( $descriptions as $languageCode => $description ) {
-			$key = $this->options->shouldUseKeys() ? $languageCode : $idx++;
-			$valueKey = ( $description === '' ) ? 'removed' : 'value';
-			$value[$key] = array(
-				'language' => $languageCode,
-				$valueKey => $description
-			);
-		}
-
+		$value = $this->serializeMultilingualValues( $descriptions );
 		if ( !$this->options->shouldUseKeys() ) {
 			$this->setIndexedTagName( $value, 'description' );
 		}
