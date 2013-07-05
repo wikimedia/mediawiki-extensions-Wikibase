@@ -76,7 +76,7 @@ class SetAliases extends ModifyEntity {
 			$entityContent->getEntity()->setAliases(
 				$params['language'],
 				array_map(
-					function( $str ) { return Utils::trimToNFC( $str ); },
+					function( $str ) { return $this->stringNormalizer->trimToNFC( $str ); },
 					$params['set']
 				)
 			);
@@ -87,7 +87,7 @@ class SetAliases extends ModifyEntity {
 				$entityContent->getEntity()->addAliases(
 					$params['language'],
 					array_map(
-						function( $str ) { return Utils::trimToNFC( $str ); },
+						function( $str ) { return $this->stringNormalizer->trimToNFC( $str ); },
 						$params['add']
 					)
 				);
@@ -97,7 +97,7 @@ class SetAliases extends ModifyEntity {
 				$entityContent->getEntity()->removeAliases(
 					$params['language'],
 					array_map(
-						function( $str ) { return Utils::trimToNFC( $str ); },
+						function( $str ) { return $this->stringNormalizer->trimToNFC( $str ); },
 						$params['remove']
 					)
 				);
