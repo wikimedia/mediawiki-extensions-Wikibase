@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_5febd3dd",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-05T14:13:54Z",
+      "side": 1,
+      "message": "This doesn\u0027t consider Settings::get( \u0027normalizeItemByTitlePageNames\u0027 ) - if that\u0027S not set, we still get a silent failure.",
+      "revId": "ab9840edb39f5989511df1c40e5bc407ed7329ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_7fee8fef",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-05T14:13:54Z",
+      "side": 1,
+      "message": "If the \"we won\u0027t do this for multiple titles\" case is already covered above, it should not be checked here again. Otherwise we need to keep these conditions in sync - they are bound to diverge and cause curious errors.\n\nBasically: if normalization is requested, make sure it\u0027s also allowed/supported at the top. Down here, just heck if normalization is needed and requested, and if so, perform it.",
+      "revId": "ab9840edb39f5989511df1c40e5bc407ed7329ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_ffb27f04",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-05T14:13:54Z",
+      "side": 1,
+      "message": "So, if the site is unknown, we just don\u0027t normalize? Hm... shouldn\u0027t that trigger an error? Actually, shouldn\u0027t the initial parameter check prevent this, so that case would really be a fatal error indicating that something Is Seriously Wrong?",
+      "revId": "ab9840edb39f5989511df1c40e5bc407ed7329ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_1fe15b00",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-05T14:13:54Z",
+      "side": 1,
+      "message": "eek, 5 levels of indentation? 3 are usually already an indicator that stuff needs to be pulled out into a separate function...\n\nI recommend to create function getNormalizedTitle or some such.",
+      "revId": "ab9840edb39f5989511df1c40e5bc407ed7329ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
