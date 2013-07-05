@@ -99,6 +99,103 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 		$validArgs[] = array( $labels, $options, $expectedSerialization );
 
+		$options = new MultiLangSerializationOptions();
+		$options->setUseKeys( true );
+		$labels = array(
+			"en" => "Rome",
+			"de-formal" => array(
+				"value" => "Rom",
+				"language" => "de",
+				"source" => null,
+			),
+			"it" => "",
+			"zh-tw" => array(
+				"value" => "羅馬",
+				"language" => "zh-tw",
+				"source" => "zh-cn",
+			),
+			"sr-ec" => array(
+				"value" => "Rome",
+				"language" => "en",
+				"source" => "en",
+			),
+		);
+		$expectedSerialization = array(
+			"en" => array(
+				"language" => "en",
+				"value" => "Rome"
+			),
+			"de-formal" => array(
+				"language" => "de",
+				"value" => "Rom"
+			),
+			"it" => array(
+				"language" => "it",
+				"removed" => ""
+			),
+			"zh-tw" => array(
+				"language" => "zh-tw",
+				"source-language" => "zh-cn",
+				"value" => "羅馬"
+			),
+			"sr-ec" => array(
+				"language" => "en",
+				"source-language" => "en",
+				"value" => "Rome"
+			),
+		);
+		$validArgs[] = array( $labels, $options, $expectedSerialization );
+
+		$options = new MultiLangSerializationOptions();
+		$options->setUseKeys( false );
+		$descriptions = array(
+			"en" => "Rome",
+			"de-formal" => array(
+				"value" => "Rom",
+				"language" => "de",
+				"source" => null,
+			),
+			"it" => "",
+			"zh-tw" => array(
+				"value" => "羅馬",
+				"language" => "zh-tw",
+				"source" => "zh-cn",
+			),
+			"sr-ec" => array(
+				"value" => "Rome",
+				"language" => "en",
+				"source" => "en",
+			),
+		);
+		$expectedSerialization = array(
+			array(
+				"language" => "en",
+				"value" => "Rome"
+			),
+			array(
+				"language" => "de",
+				"for-language" => "de-formal",
+				"value" => "Rom"
+			),
+			array(
+				"language" => "it",
+				"removed" => ""
+			),
+			array(
+				"language" => "zh-tw",
+				"source-language" => "zh-cn",
+				"value" => "羅馬"
+			),
+			array(
+				"language" => "en",
+				"source-language" => "en",
+				"for-language" => "sr-ec",
+				"value" => "Rome"
+			),
+			"_element" => "label",
+		);
+		$validArgs[] = array( $descriptions, $options, $expectedSerialization );
+
 		return $validArgs;
 	}
 
