@@ -122,20 +122,24 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 					'en' => array(
 						'value' => 'foo',
 						'language' => 'en',
+						'source-language' => 'en',
 					),
 					'de' => array(
 						'value' => 'bar',
 						'language' => 'de',
+						'source-language' => 'de',
 					),
 				),
 				'descriptions' => array(
 					'en' => array(
 						'value' => 'baz',
 						'language' => 'en',
+						'source-language' => 'en',
 					),
 					'de' => array(
 						'value' => 'bah',
 						'language' => 'de',
+						'source-language' => 'de',
 					),
 				),
 			),
