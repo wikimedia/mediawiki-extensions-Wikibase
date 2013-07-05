@@ -56,18 +56,22 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 		$expectedSerialization = array(
 			"en" => array(
 				"language" => "en",
+				"source-language" => "en",
 				"value" => "capital city of Italy"
 			),
 			"de" => array(
 				"language" => "de",
+				"source-language" => "de",
 				"value" => "Hauptstadt von Italien"
 			),
 			"it" => array(
 				"language" => "it",
+				"source-language" => "it",
 				"removed" => ""
 			),
 			"fi" => array(
 				"language" => "fi",
+				"source-language" => "fi",
 				"value" => "kunta Italiassa"
 			),
 		);
@@ -84,21 +88,75 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 		$expectedSerialization = array(
 			array(
 				"language" => "en",
+				"source-language" => "en",
 				"value" => "capital city of Italy"
 			),
 			array(
 				"language" => "de",
+				"source-language" => "de",
 				"value" => "Hauptstadt von Italien"
 			),
 			array(
 				"language" => "it",
+				"source-language" => "it",
 				"value" => "capitale della Repubblica Italiana"
 			),
 			array(
 				"language" => "fi",
+				"source-language" => "fi",
 				"value" => "kunta Italiassa"
 			),
 			"_element" => "description",
+		);
+		$validArgs[] = array( $descriptions, $options, $expectedSerialization );
+
+		$options = new MultiLangSerializationOptions();
+		$options->setUseKeys( true );
+		$descriptions = array(
+			"en" => "Rome",
+			"de-formal" => array(
+				"value" => "Rom",
+				"language" => "de",
+				"source" => "de",
+			),
+			"it" => "",
+			"zh-tw" => array(
+				"value" => "羅馬",
+				"language" => "zh-tw",
+				"source" => "zh-cn",
+			),
+			"sr-ec" => array(
+				"value" => "Rome",
+				"language" => "en",
+				"source" => "en",
+			),
+		);
+		$expectedSerialization = array(
+			"en" => array(
+				"language" => "en",
+				"source-language" => "en",
+				"value" => "Rome"
+			),
+			"de-formal" => array(
+				"language" => "de",
+				"source-language" => "de",
+				"value" => "Rom"
+			),
+			"it" => array(
+				"language" => "it",
+				"source-language" => "it",
+				"removed" => ""
+			),
+			"zh-tw" => array(
+				"language" => "zh-tw",
+				"source-language" => "zh-cn",
+				"value" => "羅馬"
+			),
+			"sr-ec" => array(
+				"language" => "en",
+				"source-language" => "en",
+				"value" => "Rome"
+			),
 		);
 		$validArgs[] = array( $descriptions, $options, $expectedSerialization );
 

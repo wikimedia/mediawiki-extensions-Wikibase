@@ -2,10 +2,8 @@
 
 namespace Wikibase\Lib\Serializers;
 
-use InvalidArgumentException;
-
 /**
- * Serializer for descriptions.
+ * Multilingual serializer, for serializer of labels and descriptions.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,9 +26,8 @@ use InvalidArgumentException;
  * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class DescriptionSerializer extends SerializerObject {
+class MultilingualSerializerObject {
 
 	/**
 	 * @see ApiSerializerObject::$options
@@ -42,11 +39,6 @@ class DescriptionSerializer extends SerializerObject {
 	protected $options;
 
 	/**
-	 * @var MultilingualSerializerObject
-	 */
-	protected $multilingualSerializer;
-
-	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -56,32 +48,45 @@ class DescriptionSerializer extends SerializerObject {
 	public function __construct( MultiLangSerializationOptions $options = null ) {
 		if ( $options === null ) {
 			$this->options = new MultiLangSerializationOptions();
+		} else {
+			$this->options = $options;
 		}
-		parent::__construct( $options );
-		$this->multilingualSerializer = new MultilingualSerializerObject( $options );
 	}
 
 	/**
-	 * Returns a serialized array of descriptions.
+	 * Handle multilingual arrays.
 	 *
 	 * @since 0.4
 	 *
-	 * @param array $descriptions
+	 * @param array $data
 	 *
 	 * @return array
-	 * @throws InvalidArgumentException
 	 */
-	public final function getSerialized( $descriptions ) {
-		if ( !is_array( $descriptions ) ) {
-			throw new InvalidArgumentException( 'DescriptionSerializer can only serialize an array of descriptions' );
+	public function serializeMultilingualValues( array $data ) {
+
+		$values = array();
+		$idx = 0;
+
+		foreach ( $data as $languageCode => $valueData ) {
+			$key = $this->options->shouldUseKeys() ? $languageCode : $idx++;
+			if ( is_array( $valueData ) ) {
+				$value = $valueData['value'];
+				$valueLanguageCode = $valueData['language'];
+				$valueSourceLanguageCode = $valueData['source'];
+			} else {
+				// back-compat
+				$value = $valueData;
+				$valueLanguageCode = $languageCode;
+				$valueSourceLanguageCode = $languageCode;
+			}
+			$valueKey = ( $value === '' ) ? 'removed' : 'value';
+			$values[$key] = array(
+				'language' => $valueLanguageCode,
+				'source-language' => $valueSourceLanguageCode,
+				$valueKey => $value,
+			);
 		}
 
-		$value = $this->multilingualSerializer->serializeMultilingualValues( $descriptions );
-
-		if ( !$this->options->shouldUseKeys() ) {
-			$this->setIndexedTagName( $value, 'description' );
-		}
-
-		return $value;
+		return $values;
 	}
 }

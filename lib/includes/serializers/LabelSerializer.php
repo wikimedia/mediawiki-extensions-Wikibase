@@ -42,6 +42,11 @@ class LabelSerializer extends SerializerObject {
 	protected $options;
 
 	/**
+	 * @var MultilingualSerializerObject
+	 */
+	protected $multilingualSerializer;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -53,6 +58,7 @@ class LabelSerializer extends SerializerObject {
 			$this->options = new MultiLangSerializationOptions();
 		}
 		parent::__construct( $options );
+		$this->multilingualSerializer = new MultilingualSerializerObject( $options );
 	}
 
 	/**
@@ -70,17 +76,7 @@ class LabelSerializer extends SerializerObject {
 			throw new InvalidArgumentException( 'LabelSerializer can only serialize an array of labels' );
 		}
 
-		$value = array();
-		$idx = 0;
-
-		foreach ( $labels as $languageCode => $label ) {
-			$key = $this->options->shouldUseKeys() ? $languageCode : $idx++;
-			$valueKey = ( $label === '' ) ? 'removed' : 'value';
-			$value[$key] = array(
-				'language' => $languageCode,
-				$valueKey => $label
-			);
-		}
+		$value = $this->multilingualSerializer->serializeMultilingualValues( $labels );
 
 		if ( !$this->options->shouldUseKeys() ) {
 			$this->setIndexedTagName( $value, 'label' );
