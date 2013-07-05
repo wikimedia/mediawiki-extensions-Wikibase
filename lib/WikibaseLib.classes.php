@@ -63,6 +63,7 @@ return call_user_func( function() {
 		'Wikibase\Term' => 'includes/Term.php',
 		'Wikibase\Lib\TermsToClaimsTranslator' => 'includes/TermsToClaimsTranslator.php',
 		'Wikibase\Lib\TypedValueFormatter' => 'includes/TypedValueFormatter.php',
+		'Wikibase\StringNormalizer' => 'includes/StringNormalizer.php',
 		'Wikibase\Utils' => 'includes/Utils.php',
 		'Wikibase\WikibaseDiffOpFactory' => 'includes/WikibaseDiffOpFactory.php',
 		'Wikibase\Lib\WikibaseDataTypeBuilders' => 'includes/WikibaseDataTypeBuilders.php',

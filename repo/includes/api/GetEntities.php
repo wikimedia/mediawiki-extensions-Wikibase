@@ -30,6 +30,17 @@ use Wikibase\EntityContentFactory;
 class GetEntities extends ApiWikibase {
 
 	/**
+	 * @var \Wikibase\StringNormalizer
+	 */
+	protected $stringNormalizer;
+
+	public function __construct( \ApiMain $main, $name, $prefix = '' ) {
+		parent::__construct( $main, $name, $prefix );
+
+		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+	}
+
+	/**
 	 * @see \ApiBase::execute()
 	 */
 	public function execute() {
@@ -59,7 +70,7 @@ class GetEntities extends ApiWikibase {
 
 				for ( $k = 0; $k < $max; $k++ ) {
 					$siteId = $params['sites'][$idxSites++ % $numSites];
-					$title = Utils::trimToNFC( $params['titles'][$idxTitles++ % $numTitles] );
+					$title = $this->stringNormalizer->trimToNFC( $params['titles'][$idxTitles++ % $numTitles] );
 
 					$id = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $title );
 

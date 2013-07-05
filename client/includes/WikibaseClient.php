@@ -19,6 +19,7 @@ use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\RepoLinker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
+use Wikibase\StringNormalizer;
 use Wikibase\Test\MockRepository;
 
 /**
@@ -68,6 +69,11 @@ final class WikibaseClient {
 	protected $isInTestMode;
 
 	private $storeInstances = array();
+
+	/**
+	 * @var StringNormalizer
+	 */
+	private $stringNormalizer;
 
 	/**
 	 * @since 0.4
@@ -186,6 +192,19 @@ final class WikibaseClient {
 			new TypedValueFormatter(),
 			$this->getDataTypeFactory()
 		);
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return StringNormalizer
+	 */
+	public function getStringNormalizer() {
+		if ( $this->stringNormalizer === null ) {
+			$this->stringNormalizer = new StringNormalizer();
+		}
+
+		return $this->stringNormalizer;
 	}
 
 	/**

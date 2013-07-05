@@ -64,8 +64,8 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		// If ther are enough data, then try to lookup the item content
 		if ( isset( $site ) && isset( $page ) ) {
 			// Try to get a item content
-			$siteId = \Wikibase\Utils::trimToNFC( $site ); // no stripping of underscores here!
-			$pageName = \Wikibase\Utils::trimToNFC( $page );
+			$siteId = $this->stringNormalizer->trimToNFC( $site ); // no stripping of underscores here!
+			$pageName = $this->stringNormalizer->trimToNFC( $page );
 
 			if ( !\Sites::singleton()->getSite( $siteId ) ) {
 				// HACK: If the site ID isn't known, add "wiki" to it; this allows the wikipedia

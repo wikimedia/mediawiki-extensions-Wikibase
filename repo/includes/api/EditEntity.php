@@ -202,7 +202,7 @@ class EditEntity extends ModifyEntity {
 			$status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
 
 			$language = $arg['language'];
-			$newLabel = Utils::trimToNFC( $arg['value'] );
+			$newLabel = $this->stringNormalizer->trimToNFC( $arg['value'] );
 
 			if ( array_key_exists( 'remove', $arg ) || $newLabel === "" ) {
 				$labelChangeOps[] = new ChangeOpLabel( $language, null );
@@ -235,7 +235,7 @@ class EditEntity extends ModifyEntity {
 			$status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
 
 			$language = $arg['language'];
-			$newDescription = Utils::trimToNFC( $arg['value'] );
+			$newDescription = $this->stringNormalizer->trimToNFC( $arg['value'] );
 
 			if ( array_key_exists( 'remove', $arg ) || $newDescription === "" ) {
 				$descriptionChangeOps[] = new ChangeOpDescription( $language, null );
@@ -278,7 +278,7 @@ class EditEntity extends ModifyEntity {
 			foreach ( $args as $arg ) {
 				$status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
 
-				$alias = array( Utils::trimToNFC( $arg['value'] ) );
+				$alias = array( $this->stringNormalizer->trimToNFC( $arg['value'] ) );
 				$language = $arg['language'];
 
 				if ( array_key_exists( 'remove', $arg ) ) {
@@ -333,7 +333,7 @@ class EditEntity extends ModifyEntity {
 			if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
 				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, null );
 			} else {
-				$linkPage = $linkSite->normalizePageName( Utils::trimWhitespace( $arg['title'] ) );
+				$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $arg['title'] ) );
 
 				if ( $linkPage === false ) {
 					wfProfileOut( __METHOD__ );
