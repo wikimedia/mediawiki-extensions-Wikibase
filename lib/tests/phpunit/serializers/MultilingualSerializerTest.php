@@ -4,11 +4,10 @@ namespace Wikibase\Test;
 
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
-use Wikibase\Lib\Serializers\LabelSerializer;
 use Wikibase\Lib\Serializers\MultilingualSerializer;
 
 /**
- * @covers Wikibase\Lib\Serializers\LabelSerializer
+ * @covers Wikibase\Lib\Serializers\MultilingualSerializer
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,32 +33,30 @@ use Wikibase\Lib\Serializers\MultilingualSerializer;
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
- * @group WikibaseLabelSerializer
  *
  * @licence GNU GPL v2+
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
+class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 
-	public function validProvider() {
+	public function provideSerialize() {
 		$validArgs = array();
 
 		$options = new MultiLangSerializationOptions();
 		$options->setUseKeys( true );
-		$labels = array(
-			"en" => "Rome",
-			"de" => "Rom",
+		$values = array(
+			"en" => "capital city of Italy",
+			"de" => "Hauptstadt von Italien",
 			"it" => "",
-			"fi" => "Rooma",
+			"fi" => "kunta Italiassa",
 		);
 		$expectedSerialization = array(
 			"en" => array(
 				"language" => "en",
-				"value" => "Rome"
+				"value" => "capital city of Italy"
 			),
 			"de" => array(
 				"language" => "de",
-				"value" => "Rom"
+				"value" => "Hauptstadt von Italien"
 			),
 			"it" => array(
 				"language" => "it",
@@ -67,43 +64,42 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 			),
 			"fi" => array(
 				"language" => "fi",
-				"value" => "Rooma"
+				"value" => "kunta Italiassa"
 			),
 		);
-		$validArgs[] = array( $labels, $options, $expectedSerialization );
+		$validArgs[] = array( $values, $options, $expectedSerialization );
 
 		$options = new MultiLangSerializationOptions();
 		$options->setUseKeys( false );
-		$labels = array(
-			"en" => "Rome",
-			"de" => "Rom",
-			"it" => "Roma",
-			"fi" => "Rooma",
+		$values = array(
+			"en" => "capital city of Italy",
+			"de" => "Hauptstadt von Italien",
+			"it" => "capitale della Repubblica Italiana",
+			"fi" => "kunta Italiassa",
 		);
 		$expectedSerialization = array(
 			array(
 				"language" => "en",
-				"value" => "Rome"
+				"value" => "capital city of Italy"
 			),
 			array(
 				"language" => "de",
-				"value" => "Rom"
+				"value" => "Hauptstadt von Italien"
 			),
 			array(
 				"language" => "it",
-				"value" => "Roma"
+				"value" => "capitale della Repubblica Italiana"
 			),
 			array(
 				"language" => "fi",
-				"value" => "Rooma"
+				"value" => "kunta Italiassa"
 			),
-			"_element" => "label",
 		);
-		$validArgs[] = array( $labels, $options, $expectedSerialization );
+		$validArgs[] = array( $values, $options, $expectedSerialization );
 
 		$options = new MultiLangSerializationOptions();
 		$options->setUseKeys( true );
-		$labels = array(
+		$values = array(
 			"en" => "Rome",
 			"de-formal" => array(
 				"value" => "Rom",
@@ -146,11 +142,11 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 				"value" => "Rome"
 			),
 		);
-		$validArgs[] = array( $labels, $options, $expectedSerialization );
+		$validArgs[] = array( $values, $options, $expectedSerialization );
 
 		$options = new MultiLangSerializationOptions();
 		$options->setUseKeys( false );
-		$descriptions = array(
+		$values = array(
 			"en" => "Rome",
 			"de-formal" => array(
 				"value" => "Rom",
@@ -158,6 +154,11 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 				"source" => null,
 			),
 			"it" => "",
+			"fr" => array(
+				"value" => "",
+				"language" => "fr",
+				"source" => null,
+			),
 			"zh-tw" => array(
 				"value" => "羅馬",
 				"language" => "zh-tw",
@@ -184,6 +185,10 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 				"removed" => ""
 			),
 			array(
+				"language" => "fr",
+				"removed" => ""
+			),
+			array(
 				"language" => "zh-tw",
 				"source-language" => "zh-cn",
 				"value" => "羅馬"
@@ -194,54 +199,23 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 				"for-language" => "sr-ec",
 				"value" => "Rome"
 			),
-			"_element" => "label",
 		);
-		$validArgs[] = array( $descriptions, $options, $expectedSerialization );
+		$validArgs[] = array( $values, $options, $expectedSerialization );
 
 		return $validArgs;
 	}
 
 	/**
-	 * @dataProvider validProvider
+	 * @dataProvider provideSerialize
 	 */
-	public function testGetSerialized( $labels, $options, $expectedSerialization ) {
-		$labelSerializer = new LabelSerializer( $options );
-		$serializedLabels = $labelSerializer->getSerialized( $labels );
+	public function testSerialize( $values, $options, $expectedSerialization ) {
+		$serializer = new MultilingualSerializer( $options );
+		$serialized = $serializer->serializeMultilingualValues( $values );
 
-		$this->assertEquals( $expectedSerialization, $serializedLabels );
+		$this->assertEquals( $expectedSerialization, $serialized );
 	}
 
-	public function invalidProvider() {
-		$invalidArgs = array();
-
-		$invalidArgs[] = array( 'foo' );
-		$invalidArgs[] = array( 42 );
-
-		return $invalidArgs;
-	}
-
-	/**
-	 * @dataProvider invalidProvider
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testInvalidGetSerialized( $labels ) {
-		$labelSerializer = new LabelSerializer();
-		$serializedLabels = $labelSerializer->getSerialized( $labels );
-	}
-
-	/**
-	 * @dataProvider provideGetSerializedMultilingualValues
-	 */
-	public function testGetSerializedMultilingualValues( $values, $options ) {
-		$multilingualSerializer = new MultilingualSerializer( $options );
-		$labelSerializer = new LabelSerializer( $options, $multilingualSerializer );
-		$filtered = $multilingualSerializer->filterPreferredMultilingualValues( $values );
-		$expected = $labelSerializer->getSerialized( $filtered );
-
-		$this->assertEquals( $expected, $labelSerializer->getSerializedMultilingualValues( $values ) );
-	}
-
-	public function provideGetSerializedMultilingualValues() {
+	public function provideFilter() {
 		$validArgs = array();
 
 		$options = new MultiLangSerializationOptions();
@@ -253,7 +227,24 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 			"it" => "",
 			"fi" => "kunta Italiassa",
 		);
-		$validArgs[] = array( $values, $options );
+		$expectedOutput = array(
+			"en" => array(
+				"value" => "capital city of Italy",
+				"language" => "en",
+				"source" => null,
+			),
+			"de" => array(
+				"value" => "Hauptstadt von Italien",
+				"language" => "de",
+				"source" => null,
+			),
+			"it" => array(
+				"value" => "",
+				"language" => "it",
+				"source" => null,
+			),
+		);
+		$validArgs[] = array( $values, $options, $expectedOutput );
 
 		$options = new MultiLangSerializationOptions();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
@@ -272,8 +263,41 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 			"zh-tw" => "羅馬",
 			"gan-hant" => "羅馬G",
 		);
-		$validArgs[] = array( $values, $options );
+		$expectedOutput = array(
+			"de-formal" => array(
+				"value" => "Hauptstadt von Italien",
+				"language" => "de",
+				"source" => null,
+			),
+			"zh-cn" => array(
+				"value" => "罗马",
+				"language" => "zh-cn",
+				"source" => "zh-tw",
+			),
+			"key-fr" => array(
+				"value" => "capital city of Italy",
+				"language" => "en",
+				"source" => null,
+			),
+			"gan-hant" => array(
+				"value" => "羅馬G",
+				"language" => "gan-hant",
+				"source" => null,
+			),
+		);
+		$validArgs[] = array( $values, $options, $expectedOutput );
 
 		return $validArgs;
 	}
+
+	/**
+	 * @dataProvider provideFilter
+	 */
+	public function testFilter( $values, $options, $expectedOutput ) {
+		$serializer = new MultilingualSerializer( $options );
+		$filtered = $serializer->filterPreferredMultilingualValues( $values );
+
+		$this->assertEquals( $expectedOutput, $filtered );
+	}
+
 }
