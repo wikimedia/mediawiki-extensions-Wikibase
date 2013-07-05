@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_9a4d599d",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-05T18:41:42Z",
+      "side": 1,
+      "message": "The property in the url is \"p9001\", not \"p101\".\nRather than using a comma to indicate that q1 is the value of the claim, it would be clearer if you said \"Creates a claim for q42 of p101 with a value of q1\" like you did in other examples.",
+      "revId": "585e1266fb30866c7cbedc81b8bbaa25b6bcd693",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_9a643925",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-05T18:41:42Z",
+      "side": 1,
+      "message": "There should be an example of creating a new property (setting the datatype) as well.",
+      "revId": "585e1266fb30866c7cbedc81b8bbaa25b6bcd693",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_ba5f7549",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-05T18:41:42Z",
+      "side": 1,
+      "message": "This should indicate somewhere that you are creating a new item.",
+      "revId": "585e1266fb30866c7cbedc81b8bbaa25b6bcd693",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_5aaac11a",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-05T18:41:42Z",
+      "side": 1,
+      "message": "The word \"extend\" seems weird. I think something like \"Adds sitelinks for nowiki and svwiki, overwriting them if they already exist\" or something is much clearer.",
+      "revId": "585e1266fb30866c7cbedc81b8bbaa25b6bcd693",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_3ab38599",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-05T18:41:42Z",
+      "side": 1,
+      "message": "You should have examples for the various arguments that can be supplied via \u0026props\u003dsitelinks|claims|aliases, etc.",
+      "revId": "585e1266fb30866c7cbedc81b8bbaa25b6bcd693",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_ba95b5e4",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-05T18:41:42Z",
+      "side": 1,
+      "message": "Maybe \"Set a claim of property p1 with a string value of \"City\"?\nSomething similar to the one for SetClaimValue.php",
+      "revId": "585e1266fb30866c7cbedc81b8bbaa25b6bcd693",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_babe5560",
+        "filename": "repo/includes/api/SetQualifier.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-05T18:41:42Z",
+      "side": 1,
+      "message": "Is \"property\u003dqp\" valid?",
+      "revId": "585e1266fb30866c7cbedc81b8bbaa25b6bcd693",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_fab8cd75",
+        "filename": "repo/includes/api/SetReference.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-05T18:41:42Z",
+      "side": 1,
+      "message": "Should be \"baserevid\".",
+      "revId": "585e1266fb30866c7cbedc81b8bbaa25b6bcd693",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_dabd1164",
+        "filename": "repo/includes/api/SetSiteLink.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-05T18:41:42Z",
+      "side": 1,
+      "message": "Since the only difference between the first example and this one is the edit summary, this should be indicated in the documentation (\"...with an edit summary of \"World domination will be mine soon!\")",
+      "revId": "585e1266fb30866c7cbedc81b8bbaa25b6bcd693",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
