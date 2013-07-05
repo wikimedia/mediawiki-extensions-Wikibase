@@ -82,14 +82,12 @@ class CompositeValidator implements ValueValidator {
 		foreach ( $this->validators as $validator ) {
 			$subResult = $validator->validate( $value );
 
-			//XXX: Some validators should be fatal and cause us to abort the loop.
-			//     Others shouldn't.
-
 			if ( !$subResult->isValid() ) {
-				//TODO: Don't bail out immediately if $this->failFast == false.
-				// Accumulate errors from all validators.
-				// We need Result::merge() for this.
-				return $subResult;
+				if ( $this->failFast ) {
+					return $subResult;
+				} else {
+					$result = Result::merge( $result, $subResult );
+				}
 			}
 		}
 
