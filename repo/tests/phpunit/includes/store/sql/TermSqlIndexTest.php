@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\Item;
+use Wikibase\StringNormalizer;
 use Wikibase\Term;
 
 /**
@@ -39,7 +40,8 @@ use Wikibase\Term;
 class TermSqlIndexTest extends TermIndexTest {
 
 	public function getTermIndex() {
-		return new \Wikibase\TermSqlIndex( 'wb_terms' );
+		$normalizer = new StringNormalizer();
+		return new \Wikibase\TermSqlIndex( $normalizer );
 	}
 
 	public function termProvider() {
@@ -69,7 +71,7 @@ class TermSqlIndexTest extends TermIndexTest {
 		/**
 		 * @var \Wikibase\TermSqlIndex $termIndex
 		 */
-		$termIndex = \Wikibase\StoreFactory::getStore( 'sqlstore' )->getTermIndex();
+		$termIndex = $this->getTermIndex();
 
 		$termIndex->clear();
 
@@ -97,5 +99,64 @@ class TermSqlIndexTest extends TermIndexTest {
 
 			$this->assertEquals( $termText, $obtainedTerm->getText() );
 		}
+	}
+
+	public static function provideGetSearchKey() {
+		return array(
+			array( // #0
+				'foo', // raw
+				'en',  // lang
+				'foo', // normalized
+			),
+
+			array( // #1
+				'  foo  ', // raw
+				'en',  // lang
+				'foo', // normalized
+			),
+
+			array( // #2: lower case of non-ascii character
+				'ÄpFEl', // raw
+				'de',    // lang
+				'äpfel', // normalized
+			),
+
+			array( // #3: lower case of decomposed character
+				"A\xCC\x88pfel", // raw
+				'de',    // lang
+				'äpfel', // normalized
+			),
+
+			array( // #4: lower case of cyrillic character
+				'Берлин', // raw
+				'ru',     // lang
+				'берлин', // normalized
+			),
+
+			array( // #5: lower case of greek character
+				'Τάχιστη', // raw
+				'he',      // lang
+				'τάχιστη', // normalized
+			),
+
+			array( // #6: nasty unicode whitespace
+				// ZWNJ: U+200C \xE2\x80\x8C
+				// RTLM: U+200F \xE2\x80\x8F
+				// PSEP: U+2029 \xE2\x80\xA9
+				"\xE2\x80\x8F\xE2\x80\x8Cfoo\xE2\x80\x8Cbar\xE2\x80\xA9", // raw
+				'en',      // lang
+				"foo bar", // normalized
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetSearchKey
+	 */
+	public function testGetSearchKey( $raw, $lang, $normalized ) {
+		$index = $this->getTermIndex();
+
+		$key = $index->getSearchKey( $raw, $lang );
+		$this->assertEquals( $normalized, $key );
 	}
 }

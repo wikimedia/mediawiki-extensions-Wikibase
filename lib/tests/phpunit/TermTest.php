@@ -71,58 +71,6 @@ class TermTest extends \MediaWikiTestCase {
 		$this->assertEquals( isset( $fields['termText'] ) ? $fields['termText'] : null, $term->getText() );
 	}
 
-	public static function provideGetNormalizedText() {
-		return array(
-			array( // #0
-				'foo', // raw
-				'foo', // normalized
-			),
-
-			array( // #1
-				'  foo  ', // raw
-				'foo', // normalized
-			),
-
-			array( // #2: lower case of non-ascii character
-				'ÄpFEl', // raw
-				'äpfel', // normalized
-			),
-
-			array( // #3: lower case of decomposed character
-				"A\xCC\x88pfel", // raw
-				'äpfel', // normalized
-			),
-
-			array( // #4: lower case of cyrillic character
-				'Берлин', // raw
-				'берлин', // normalized
-			),
-
-			array( // #5: lower case of greek character
-				'Τάχιστη', // raw
-				'τάχιστη', // normalized
-			),
-
-			array( // #6: nasty unicode whitespace
-				// ZWNJ: U+200C \xE2\x80\x8C
-				// RTLM: U+200F \xE2\x80\x8F
-				// PSEP: U+2029 \xE2\x80\xA9
-				"\xE2\x80\x8F\xE2\x80\x8Cfoo\xE2\x80\x8Cbar\xE2\x80\xA9", // raw
-				"foo bar", // normalized
-			),
-		);
-	}
-
-	/**
-	 * @dataProvider provideGetNormalizedText
-	 */
-	public function testGetNormalizedText( $raw, $normalized ) {
-		$term = new Term( array() );
-
-		$term->setText( $raw );
-		$this->assertEquals( $normalized, $term->getNormalizedText() );
-	}
-
 	public function testClone() {
 		$term = new Term( array(
 			'termText' => 'Foo'

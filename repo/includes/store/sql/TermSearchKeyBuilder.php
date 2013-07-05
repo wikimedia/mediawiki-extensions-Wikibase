@@ -219,9 +219,9 @@ class TermSearchKeyBuilder {
 
 	/**
 	 * Updates a single row with a newley calculated search key.
-	 * The search key is calculated using Term::normalizeText().
+	 * The search key is calculated using TermSqlIndex::getSearchKey().
 	 *
-	 * @see Term::normalizeText
+	 * @see TermSqlIndex::getSearchKey
 	 *
 	 * @since 0.4
 	 *
@@ -233,7 +233,7 @@ class TermSearchKeyBuilder {
 	 * @return string the search key
 	 */
 	protected function updateSearchKey( \DatabaseBase $dbw, $rowId, $text, $lang ) {
-		$key = Term::normalizeText( $text, $lang );
+		$key = $this->table->getSearchKey( $text, $lang );
 
 		$dbw->update(
 			$this->table->getTableName(),
