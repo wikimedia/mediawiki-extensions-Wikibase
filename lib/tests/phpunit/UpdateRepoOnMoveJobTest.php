@@ -82,6 +82,9 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	 * @group WikibaseRepoTest
 	 */
 	public function testGetSummary() {
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->markTestSkipped( 'Wikibase\Summary is only available on repo' );
+		}
 		$moveData = $this->getSampleData();
 		$job = $this->getNewFromMove( $moveData );
 

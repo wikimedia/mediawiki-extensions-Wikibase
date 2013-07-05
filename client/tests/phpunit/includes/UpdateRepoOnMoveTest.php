@@ -30,6 +30,7 @@ use Wikibase\Settings;
  * @ingroup Test
  *
  * @group WikibaseClient
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
