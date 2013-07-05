@@ -53,18 +53,22 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 		$expectedSerialization = array(
 			"en" => array(
 				"language" => "en",
+				"source-language" => "en",
 				"value" => "Rome"
 			),
 			"de" => array(
 				"language" => "de",
+				"source-language" => "de",
 				"value" => "Rom"
 			),
 			"it" => array(
 				"language" => "it",
+				"source-language" => "it",
 				"removed" => ""
 			),
 			"fi" => array(
 				"language" => "fi",
+				"source-language" => "fi",
 				"value" => "Rooma"
 			),
 		);
@@ -81,21 +85,75 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 		$expectedSerialization = array(
 			array(
 				"language" => "en",
+				"source-language" => "en",
 				"value" => "Rome"
 			),
 			array(
 				"language" => "de",
+				"source-language" => "de",
 				"value" => "Rom"
 			),
 			array(
 				"language" => "it",
+				"source-language" => "it",
 				"value" => "Roma"
 			),
 			array(
 				"language" => "fi",
+				"source-language" => "fi",
 				"value" => "Rooma"
 			),
 			"_element" => "label",
+		);
+		$validArgs[] = array( $labels, $options, $expectedSerialization );
+
+		$options = new MultiLangSerializationOptions();
+		$options->setUseKeys( true );
+		$labels = array(
+			"en" => "Rome",
+			"de-formal" => array(
+				"value" => "Rom",
+				"language" => "de",
+				"source" => "de",
+			),
+			"it" => "",
+			"zh-tw" => array(
+				"value" => "羅馬",
+				"language" => "zh-tw",
+				"source" => "zh-cn",
+			),
+			"sr-ec" => array(
+				"value" => "Rome",
+				"language" => "en",
+				"source" => "en",
+			),
+		);
+		$expectedSerialization = array(
+			"en" => array(
+				"language" => "en",
+				"source-language" => "en",
+				"value" => "Rome"
+			),
+			"de-formal" => array(
+				"language" => "de",
+				"source-language" => "de",
+				"value" => "Rom"
+			),
+			"it" => array(
+				"language" => "it",
+				"source-language" => "it",
+				"removed" => ""
+			),
+			"zh-tw" => array(
+				"language" => "zh-tw",
+				"source-language" => "zh-cn",
+				"value" => "羅馬"
+			),
+			"sr-ec" => array(
+				"language" => "en",
+				"source-language" => "en",
+				"value" => "Rome"
+			),
 		);
 		$validArgs[] = array( $labels, $options, $expectedSerialization );
 
