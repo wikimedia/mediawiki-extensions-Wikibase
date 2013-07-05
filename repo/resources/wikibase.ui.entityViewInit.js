@@ -107,7 +107,8 @@
 				new wb.ui.AliasesEditTool( this );
 			} );
 
-			$( '.wb-section-heading' ).remove();
+			// remove all the headings except the site link section headings
+			$( '.wb-section-heading:not(.wb-sitelinks-heading)' ).remove();
 
 			// BUILD CLAIMS VIEW:
 			// Note: $.entityview() only works for claims right now, the goal is to use it for more
@@ -129,14 +130,8 @@
 				var group = $( this ).data( 'wb-sitelinks-group' ),
 					$sitesCounterContainer = $( '<span/>' );
 
-				// add site links section heading:
-				$( this ).before(
-					mw.template(
-						'wb-section-heading',
-						mw.msg( 'wikibase-sitelinks-' + group ),
-						'sitelinks-' + group
-					).append( $sitesCounterContainer )
-				);
+				$( this ).prev().append( $sitesCounterContainer );
+
 				// actual initialization
 				new wb.ui.SiteLinksEditTool( $( this ), {
 					allowedSites: wb.getSitesOfGroup( group ),
