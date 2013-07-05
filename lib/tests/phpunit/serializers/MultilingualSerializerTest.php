@@ -2,14 +2,12 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityFactory;
-
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\MultiLangSerializationOptions;
-use Wikibase\Lib\Serializers\DescriptionSerializer;
-use InvalidArgumentException;
+use Wikibase\Lib\Serializers\MultilingualSerializer;
 
 /**
- * @covers Wikibase\Lib\Serializers\DescriptionSerializer
+ * @covers Wikibase\Lib\Serializers\MultilingualSerializer
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,14 +33,12 @@ use InvalidArgumentException;
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
- * @group WikibaseDescriptionSerializer
  *
  * @licence GNU GPL v2+
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
+class MultilingualSerializerTest extends \PHPUnit_Framework_TestCase {
 
-	public function validProvider() {
+	public function provideSerialize() {
 		$validArgs = array();
 
 		$options = new MultiLangSerializationOptions();
@@ -98,7 +94,6 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 				"language" => "fi",
 				"value" => "kunta Italiassa"
 			),
-			"_element" => "description",
 		);
 		$validArgs[] = array( $descriptions, $options, $expectedSerialization );
 
@@ -159,6 +154,11 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 				"source" => null,
 			),
 			"it" => "",
+			"fr" => array(
+				"value" => "",
+				"language" => "fr",
+				"source" => null,
+			),
 			"zh-tw" => array(
 				"value" => "羅馬",
 				"language" => "zh-tw",
@@ -185,6 +185,10 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 				"removed" => ""
 			),
 			array(
+				"language" => "fr",
+				"removed" => ""
+			),
+			array(
 				"language" => "zh-tw",
 				"source-language" => "zh-cn",
 				"value" => "羅馬"
@@ -195,7 +199,6 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 				"for-language" => "sr-ec",
 				"value" => "Rome"
 			),
-			"_element" => "description",
 		);
 		$validArgs[] = array( $descriptions, $options, $expectedSerialization );
 
@@ -203,31 +206,98 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider validProvider
+	 * @dataProvider provideSerialize
 	 */
-	public function testGetSerialized( $descriptions, $options, $expectedSerialization ) {
-		$descriptionSerializer = new DescriptionSerializer( $options );
-		$serializedDescriptions = $descriptionSerializer->getSerialized( $descriptions );
+	public function testSerialize( $values, $options, $expectedSerialization ) {
+		$serializer = new MultilingualSerializer( $options );
+		$serialized = $serializer->serializeMultilingualValues( $values );
 
-		$this->assertEquals( $expectedSerialization, $serializedDescriptions );
+		$this->assertEquals( $expectedSerialization, $serialized );
 	}
 
-	public function invalidProvider() {
-		$invalidArgs = array();
+	public function provideFilter() {
+		$validArgs = array();
 
-		$invalidArgs[] = array( 'foo' );
-		$invalidArgs[] = array( 42 );
+		$options = new MultiLangSerializationOptions();
+		$options->setUseKeys( true );
+		$options->setLanguages( array( 'en', 'it', 'de', 'fr' ) );
+		$values = array(
+			"en" => "capital city of Italy",
+			"de" => "Hauptstadt von Italien",
+			"it" => "",
+			"fi" => "kunta Italiassa",
+		);
+		$expectedOutput = array(
+			"en" => array(
+				"value" => "capital city of Italy",
+				"language" => "en",
+				"source" => null,
+			),
+			"de" => array(
+				"value" => "Hauptstadt von Italien",
+				"language" => "de",
+				"source" => null,
+			),
+			"it" => array(
+				"value" => "",
+				"language" => "it",
+				"source" => null,
+			),
+		);
+		$validArgs[] = array( $values, $options, $expectedOutput );
 
-		return $invalidArgs;
+		$options = new MultiLangSerializationOptions();
+		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
+		$options->setUseKeys( true );
+		$options->setLanguages( array(
+			'de-formal' => $languageFallbackChainFactory->newFromLanguageCode( 'de-formal' ),
+			'zh-cn' => $languageFallbackChainFactory->newFromLanguageCode( 'zh-cn' ),
+			'key-fr' => $languageFallbackChainFactory->newFromLanguageCode( 'fr' ),
+			'sr-ec' => $languageFallbackChainFactory->newFromLanguageCode( 'zh-cn', LanguageFallbackChainFactory::FALLBACK_SELF ),
+			'gan-hant' => $languageFallbackChainFactory->newFromLanguageCode( 'gan-hant' ),
+	      	) );
+		$values = array(
+			"en" => "capital city of Italy",
+			"de" => "Hauptstadt von Italien",
+			"fi" => "kunta Italiassa",
+			"zh-tw" => "羅馬",
+			"gan-hant" => "羅馬G",
+		);
+		$expectedOutput = array(
+			"de-formal" => array(
+				"value" => "Hauptstadt von Italien",
+				"language" => "de",
+				"source" => null,
+			),
+			"zh-cn" => array(
+				"value" => "罗马",
+				"language" => "zh-cn",
+				"source" => "zh-tw",
+			),
+			"key-fr" => array(
+				"value" => "capital city of Italy",
+				"language" => "en",
+				"source" => null,
+			),
+			"gan-hant" => array(
+				"value" => "羅馬G",
+				"language" => "gan-hant",
+				"source" => null,
+			),
+		);
+		$validArgs[] = array( $values, $options, $expectedOutput );
+
+		return $validArgs;
 	}
 
 	/**
-	 * @dataProvider invalidProvider
-	 * @expectedException InvalidArgumentException
+	 * @dataProvider provideFilter
 	 */
-	public function testInvalidGetSerialized( $descriptions ) {
-		$descriptionSerializer = new DescriptionSerializer();
-		$serializedDescriptions = $descriptionSerializer->getSerialized( $descriptions );
+	public function testFilter( $values, $options, $expectedOutput ) {
+		$serializer = new MultilingualSerializer( $options );
+		$filtered = $serializer->filterPreferredMultilingualValues( $values );
+
+		$this->assertEquals( $expectedOutput, $filtered );
 	}
 
 }
