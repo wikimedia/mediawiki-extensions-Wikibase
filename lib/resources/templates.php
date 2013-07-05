@@ -46,6 +46,11 @@ HTML;
 <h2 class="wb-section-heading" dir="auto" id="$2">$1</h2>
 HTML;
 
+	$templates['wb-section-heading-sitelinks'] =
+<<<HTML
+<h2 class="wb-section-heading wb-sitelinks-heading" dir="auto" id="$2">$1</h2>
+HTML;
+
 	$templates['wb-claimlist'] =
 <<<HTML
 <div class="wb-claimlist">
