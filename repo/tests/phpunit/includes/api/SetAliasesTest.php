@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test\Api;
 use ApiTestCase;
-//use Wikibase\Test\ModifyItemBase;
+//use Wikibase\Test\ModifyEntityTestBase;
 
 /**
  * Tests for the ApiSetAliases API module.
@@ -59,7 +59,7 @@ use ApiTestCase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetAliasesTest extends ModifyItemBase {
+class SetAliasesTest extends ModifyEntityTestBase {
 
 	public function paramProvider() {
 		return array(
@@ -86,12 +86,12 @@ class SetAliasesTest extends ModifyItemBase {
 	 * @dataProvider paramProvider
 	 */
 	public function testSetAliases( $handle, $langCode, $op, $value, $expected ) {
-		$id = $this->getItemId( $handle );
+		$id = $this->getEntityId( $handle );
 		$expected = $expected === '' ? array() : explode( '|', $expected );
 
 		// update the item ----------------------------------------------------------------
 		$req = array(
-			'token' => $this->getItemToken(),
+			'token' => $this->getEditToken(),
 			'id' => $id,
 			'action' => 'wbsetaliases',
 			'language' => $langCode,
@@ -115,7 +115,7 @@ class SetAliasesTest extends ModifyItemBase {
 		}
 
 		// check item in database --------------------------------------------------
-		$item = $this->loadItem( $id );
+		$item = $this->loadEntity( $id );
 
 		$aliases = self::flattenArray( $item['aliases'], 'language', 'value', true );
 		$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();
@@ -130,7 +130,7 @@ class SetAliasesTest extends ModifyItemBase {
 
 	public function testSetAliases_length( ) {
 		$handle = 'Oslo';
-		$id = $this->getItemId( $handle );
+		$id = $this->getEntityId( $handle );
 		$langCode = 'en';
 		$op = 'add';
 		$value = LangAttributeBase::makeOverlyLongString();
@@ -138,7 +138,7 @@ class SetAliasesTest extends ModifyItemBase {
 
 		// update the item ----------------------------------------------------------------
 		$req = array(
-			'token' => $this->getItemToken(),
+			'token' => $this->getEditToken(),
 			'id' => $id,
 			'action' => 'wbsetaliases',
 			'language' => $langCode,
@@ -162,7 +162,7 @@ class SetAliasesTest extends ModifyItemBase {
 		$badId = 'xyz123+++';
 
 		$req = array(
-			'token' => $this->getItemToken(),
+			'token' => $this->getEditToken(),
 			'id' => $badId,
 			'action' => 'wbsetaliases',
 			'language' => 'en',
@@ -184,7 +184,7 @@ class SetAliasesTest extends ModifyItemBase {
 	 * @dataProvider paramProvider
 	 */
 	public function testReset( $handle ) {
-		$this->resetItem( $handle );
+		$this->resetEntity( $handle );
 		$this->assertTrue( true );
 	}
 }

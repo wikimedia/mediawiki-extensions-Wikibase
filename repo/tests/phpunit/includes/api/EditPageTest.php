@@ -45,7 +45,7 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class EditPageTest extends ModifyItemBase {
+class EditPageTest extends ModifyEntityTestBase {
 
 	/**
 	 * @group API
@@ -58,7 +58,7 @@ class EditPageTest extends ModifyItemBase {
 		$this->assertTrue( $status->isOK(), $status->getMessage() ); // sanity check
 
 		$this->login();
-		$token = $this->getItemToken();
+		$token = $this->getEditToken();
 
 		$content->getItem()->setLabel( "de", "Test" );
 		$data = $content->getItem()->toArray();
@@ -93,7 +93,7 @@ class EditPageTest extends ModifyItemBase {
 		$page = \Wikibase\EntityContentFactory::singleton()->getWikiPageForId( $id );
 
 		$this->login();
-		$token = $this->getItemToken();
+		$token = $this->getEditToken();
 
 		$text = "hallo welt";
 

@@ -58,7 +58,7 @@ namespace Wikibase\Test\Api;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class LangAttributeBase extends ModifyItemBase {
+abstract class LangAttributeBase extends ModifyEntityTestBase {
 
 	public static function makeOverlyLongString( $text = "Test", $length = null ) {
 		if ( $length === null ) {
@@ -76,11 +76,11 @@ abstract class LangAttributeBase extends ModifyItemBase {
 	 * @dataProvider paramProvider
 	 */
 	public function doLanguageAttribute( $handle, $action, $attr, $langCode, $value, $exception = null ) {
-		$id = $this->getItemId( $handle );
+		$id = $this->getEntityId( $handle );
 
 		// update the item ----------------------------------------------------------------
 		$req = array(
-			'token' => $this->getItemToken(),
+			'token' => $this->getEditToken(),
 			'id' => $id,
 			'action' => $action,
 			'language' => $langCode,
@@ -126,7 +126,7 @@ abstract class LangAttributeBase extends ModifyItemBase {
 		}
 
 		// check item in the database ----------------------------------------------------------------
-		$item = $this->loadItem( $id );
+		$item = $this->loadEntity( $id );
 		$values = self::flattenArray( $item[$section], 'language', 'value' );
 
 		if ( $value !== '' ) {
@@ -141,7 +141,7 @@ abstract class LangAttributeBase extends ModifyItemBase {
 			$apiResponse['entity']['lastrevid'] );
 
 		// cleanup ----------------------------------------------------------------
-		$this->resetItem( $handle );
+		$this->resetEntity( $handle );
 	}
 
 }
