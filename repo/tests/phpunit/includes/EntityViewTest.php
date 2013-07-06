@@ -11,9 +11,12 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
+use Wikibase\EntityLookup;
 use Wikibase\EntityView;
 use Wikibase\Item;
 use Wikibase\ItemContent;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Property;
 use Wikibase\PropertyContent;
@@ -40,9 +43,13 @@ use Wikibase\PropertyValueSnak;
  */
 class EntityViewTest extends \PHPUnit_Framework_TestCase {
 
-	protected function newEntityView( EntityContent $entityContent ) {
+	protected function newEntityView( EntityContent $entityContent, EntityLookup $entityLoader = null,
+		\IContextSource $context = null, LanguageFallbackChain $languageFallbackChain = null
+	) {
 		$valueFormatters = new ValueFormatterFactory( array() );
-		$entityLoader = new MockRepository();
+		if ( !$entityLoader ) {
+			$entityLoader = new MockRepository();
+		}
 
 		$p11 = new PropertyId( 'p11' );
 		$p23 = new PropertyId( 'p23' );
@@ -60,7 +67,9 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 			$entityContent,
 			$valueFormatters,
 			$dataTypeLookup,
-			$entityLoader
+			$entityLoader,
+			$context,
+			$languageFallbackChain
 		);
 
 		return $entityView;
@@ -268,5 +277,70 @@ class EntityViewTest extends \PHPUnit_Framework_TestCase {
 			array( ItemContent::newEmpty() ),
 			array( PropertyContent::newEmpty() )
 		);
+	}
+
+	/**
+	 * @dataProvider provideRegisterJsConfigVars
+	 */
+	public function testRegisterJsConfigVars( EntityContent $entityContent, EntityLookup $entityLoader,
+		$context, LanguageFallbackChain $languageFallbackChain, $langCode, $editableView, $expected
+	) {
+		$entityView = $this->newEntityView( $entityContent, $entityLoader, $context, $languageFallbackChain );
+		$out = new \OutputPage( new \RequestContext() );
+		$entityView->registerJsConfigVars( $out, $entityContent, $langCode, $editableView );
+		// Remove HTML stuff to avoid mismatching
+		unset( $out->mJsConfigVars['wbCopyright'] );
+		$this->assertEquals( $expected, $out->mJsConfigVars );
+	}
+
+	public function provideRegisterJsConfigVars() {
+		$entityContentFactory = EntityContentFactory::singleton();
+		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
+
+		$argLists = array();
+
+		$entity = Item::newEmpty();
+		$entity->setLabel( 'de', 'foo' );
+		$entity->setId( 49 );
+		$content = $entityContentFactory->newFromEntity( $entity );
+		$q98 = new ItemId( 'Q98' );
+		$entityQ98 = Item::newEmpty();
+		$entityQ98->setLabel( 'de', 'bar' );
+		$entityQ98->setId( $q98 );
+		$entityLoader = new MockRepository();
+		$entityLoader->putEntity( $entityQ98 );
+		$p11 = new PropertyId( 'p11' );
+		$entity->addClaim( new Claim( new PropertyValueSnak( $p11, new EntityIdValue( $q98 ) ) ) );
+		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguageCode(
+			'de-formal', LanguageFallbackChainFactory::FALLBACK_ALL
+		); // with fallback to German
+		$argLists[] = array( $content, $entityLoader, null, $languageFallbackChain, 'fr', true, array(
+			'wbUserIsBlocked' => false,
+			'wbUserCanEdit' => true,
+			'wbIsEditView' => true,
+			'wbEntityType' => 'item',
+			'wbDataLangName' => 'français',
+			'wbEntityId' => 'Q49',
+			'wbEntity' => '{"id":"Q49","type":"item","labels":{"de":{"language":"de","value":"foo"},"fr":{"language":"de","value":"foo"}},"claims":{"P11":[{"id":null,"mainsnak":{"snaktype":"value","property":"P11","datavalue":{"value":{"entity-type":"item","numeric-id":98},"type":"wikibase-entityid"}},"type":"claim"}]}}',
+			'wbUsedEntities' => '{"Q98":{"content":{"id":"Q98","type":"item","labels":{"fr":{"language":"de","value":"bar"}}},"title":"Item:Q98","lastrevid":0}}',
+		) );
+
+		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguageCode(
+			'de-formal', LanguageFallbackChainFactory::FALLBACK_SELF
+		); // with no fallback
+		$argLists[] = array( $content, $entityLoader, null, $languageFallbackChain, 'nl', true, array(
+			'wbUserIsBlocked' => false,
+			'wbUserCanEdit' => true,
+			'wbIsEditView' => true,
+			'wbEntityType' => 'item',
+			'wbDataLangName' => 'Nederlands',
+			'wbEntityId' => 'Q49',
+			'wbEntity' => '{"id":"Q49","type":"item","labels":{"de":{"language":"de","value":"foo"}},"claims":{"P11":[{"id":null,"mainsnak":{"snaktype":"value","property":"P11","datavalue":{"value":{"entity-type":"item","numeric-id":98},"type":"wikibase-entityid"}},"type":"claim"}]}}',
+			'wbUsedEntities' => '{"Q98":{"content":{"id":"Q98","type":"item"},"title":"Item:Q98","lastrevid":0}}',
+		) );
+
+		// TODO: add more tests for other JS vars
+
+		return $argLists;
 	}
 }
