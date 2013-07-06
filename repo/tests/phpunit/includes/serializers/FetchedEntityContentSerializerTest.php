@@ -10,6 +10,7 @@ use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\LanguageFallbackChainFactory;
 use Title;
 
 /**
@@ -78,7 +79,10 @@ class FetchedEntityContentSerializerTest extends SerializerBaseTest {
 	 * @since 0.5
 	 */
 	public function testNewForFrontendStore() {
-		$serializer = FetchedEntityContentSerializer::newForFrontendStore( 'en' );
+		$serializer = FetchedEntityContentSerializer::newForFrontendStore( 'en',
+			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
+				->newFromLanguageCode( 'en', LanguageFallbackChainFactory::FALLBACK_SELF )
+		);
 		$this->assertInstanceOf( $this->getClass(), $serializer );
 	}
 }
