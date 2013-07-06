@@ -46,7 +46,7 @@ use Wikibase\EntityId;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class SetQualifierTest extends ModifyItemBase {
+class SetQualifierTest extends ModifyEntityBase {
 
 	/**
 	 * @return Snak[]
@@ -172,7 +172,7 @@ class SetQualifierTest extends ModifyItemBase {
 	}
 
 	protected function makeAddRequest( $statementGuid, Snak $qualifier, EntityId $entityId ) {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 
 		$params = array(
 			'action' => 'wbsetqualifier',

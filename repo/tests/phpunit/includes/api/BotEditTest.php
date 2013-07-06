@@ -56,7 +56,7 @@ use Wikibase\NamespaceUtils;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class BotEditTest extends ModifyItemBase {
+class BotEditTest extends ModifyEntityBase {
 
 	protected static $baseOfItemIds = 1;
 	protected static $usepost;
@@ -112,7 +112,7 @@ class BotEditTest extends ModifyItemBase {
 	 * @depends testTokensAndRights
 	 */
 	function testSetItemTop() {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 
 		$req = array(
 			'action' => 'wbeditentity',
@@ -139,7 +139,7 @@ class BotEditTest extends ModifyItemBase {
 	 * @dataProvider providerCreateItem
 	 */
 	function testCreateItem( $handle, $bot, $new, $data ) {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 		$myid = null;
 
 		$req = array(
@@ -150,7 +150,7 @@ class BotEditTest extends ModifyItemBase {
 		);
 
 		if ( !$new ) {
-			$myid = $this->getItemId( $handle );
+			$myid = $this->getEntityId( $handle );
 			$req['id'] = $myid;
 		} else {
 			$req['new'] = 'item';
@@ -175,8 +175,8 @@ class BotEditTest extends ModifyItemBase {
 
 		if ( $new ) {
 			// register new object for use by subsequent test cases
-			$this->createItems(); // make sure self::$itemOutput is initialized first.
-			self::$itemOutput[$handle] = $second[0]['entity'];
+			$this->createEntity(); // make sure self::$entityOutput is initialized first.
+			self::$entityOutput[$handle] = $second[0]['entity'];
 			$myid = $second[0]['entity']['id'];
 		}
 

@@ -53,7 +53,7 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group large
  */
-class EditEntityTest extends ModifyItemBase {
+class EditEntityTest extends ModifyEntityBase {
 
 	static public $id = null;
 
@@ -128,7 +128,7 @@ class EditEntityTest extends ModifyItemBase {
 	 * Checks the creation of a property via the editEntity API module
 	 */
 	function testEditEntityCreateProperty() {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 		$data = '{"datatype":"string","labels":{"en":{"language":"en","value":"its a test!"}}}';
 
 		list($res,,) = $this->doApiRequest(
@@ -155,7 +155,7 @@ class EditEntityTest extends ModifyItemBase {
 	 * note that upon completion the id will be stored for later reuse
 	 */
 	function testEditEntityWithToken() {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 
 		list($res,,) = $this->doApiRequest(
 			array(
@@ -171,7 +171,7 @@ class EditEntityTest extends ModifyItemBase {
 		);
 
 		$this->assertSuccess( $res, 'entity', 'id' );
-		$this->assertItemEquals( self::$expect, $res['entity'] );
+		$this->assertEntityEquals( self::$expect, $res['entity'] );
 		$this->assertRegExp( '/^q\d+$/',
 				$res['entity']['id'],
 				'Expected a qualfied ID with prefix' );
@@ -184,7 +184,7 @@ class EditEntityTest extends ModifyItemBase {
 	 * Check failure to set the same entity again, without id
 	 */
 	function testEditEntityNoId() {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 
 		$data = array( 'labels' => array(
 				"de" => array( "language" => "de", "value" => "Foo X" ),
@@ -216,7 +216,7 @@ class EditEntityTest extends ModifyItemBase {
 	 * Check success of entity update with a valid id
 	 */
 	function testEditEntityWithId() {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 
 		list($res,,) = $this->doApiRequest(
 			array(
@@ -237,14 +237,14 @@ class EditEntityTest extends ModifyItemBase {
 		//      because the content stayed the same.
 		$this->assertSuccess( $res, 'entity', 'lastrevid' );
 
-		$this->assertItemEquals( self::$expect, $res['entity'] );
+		$this->assertEntityEquals( self::$expect, $res['entity'] );
 	}
 
 	/**
 	 * Check failure to set the same entity again, with illegal field values in the json
 	 */
 	function testEditEntityWithIllegalData() {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 
 		// these sets of failing data must be merged with an existing entity
 		$failingData = array( //@todo: check each of these separately, so we know that each one fails!
@@ -279,7 +279,7 @@ class EditEntityTest extends ModifyItemBase {
 	 * Check success to set the same entity again, with legal field values in the json
 	 */
 	function testEditEntityWithLegalData() {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 
 		// request the test data from the entity itself
 		list($query,,) = $this->doApiRequest(
@@ -318,7 +318,7 @@ class EditEntityTest extends ModifyItemBase {
 					self::$users['wbeditor']->user
 				);
 				$this->assertSuccess( $res, 'entity', 'id' );
-				$this->assertItemEquals( self::$expect, $res['entity'] );
+				$this->assertEntityEquals( self::$expect, $res['entity'] );
 			}
 			catch ( \UsageException $e ) {
 				$this->fail( "Got unexpected exception: $e" );
@@ -330,7 +330,7 @@ class EditEntityTest extends ModifyItemBase {
 	 * Check if it possible to clear out the content of the object
 	 */
 	function testEditEntityEmptyData() {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 
 		try {
 			list($res,,) = $this->doApiRequest(
@@ -347,7 +347,7 @@ class EditEntityTest extends ModifyItemBase {
 				self::$users['wbeditor']->user
 			);
 			$this->assertSuccess( $res, 'entity', 'id' );
-			$this->assertItemEquals( array( 'id' => self::$id ), $res['entity'] );
+			$this->assertEntityEquals( array( 'id' => self::$id ), $res['entity'] );
 		}
 		catch ( \UsageException $e ) {
 			$this->fail( "Got unexpected exception: $e" );
@@ -460,7 +460,7 @@ class EditEntityTest extends ModifyItemBase {
 	 * @dataProvider provideBadData
 	 */
 	function testEditEntityBadData( $data, $expectedErrorCode ) {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 
 		try {
 			$this->doApiRequest(
@@ -572,8 +572,8 @@ class EditEntityTest extends ModifyItemBase {
 	 * @dataProvider provideEditEntityData
 	 */
 	function testEditEntityData( $handle, $data, $expected = null ) {
-		$id = $this->getItemId( $handle );
-		$token = $this->getItemToken();
+		$id = $this->getEntityId( $handle );
+		$token = $this->getEntityToken();
 
 		// wbsetentity ------------------------------------------------------
 		list($res,,) = $this->doApiRequest(
@@ -605,7 +605,7 @@ class EditEntityTest extends ModifyItemBase {
 		}
 
 		// check entity in database -------------------------------------------
-		$entity = $this->loadItem( $id );
+		$entity = $this->loadEntity( $id );
 
 		// check relevant entries
 		foreach ( $expected as $key => $exp ) {
@@ -615,7 +615,7 @@ class EditEntityTest extends ModifyItemBase {
 		}
 
 		// cleanup ------------------------------------------------------
-		$this->resetItem( $handle );
+		$this->resetEntity( $handle );
 	}
 
 	static function flattenValues( $prop, $values ) {

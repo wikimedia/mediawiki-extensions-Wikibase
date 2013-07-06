@@ -45,7 +45,7 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class LinkTitlesTest extends ModifyItemBase {
+class LinkTitlesTest extends ModifyEntityBase {
 
 	public function testLinkTitlesWithNoToken( ) {
 		if ( !self::$usetoken ) {
@@ -130,10 +130,10 @@ class LinkTitlesTest extends ModifyItemBase {
 	 * @dataProvider provideLinkTitles
 	 */
 	public function testLinkTitles( $handle, $item_spec, $fromsite, $fromtitle, $tosite, $totitle, $expectedFailure = null ) {
-		$token = $this->getItemToken();
+		$token = $this->getEntityToken();
 		if ( $handle ) {
-			$id = $this->getItemId( $handle );
-			$this->resetItem( $handle ); //nasty. we shouldn't need to do this. But apparently some other test spills bad state.
+			$id = $this->getEntityId( $handle );
+			$this->resetEntity( $handle ); //nasty. we shouldn't need to do this. But apparently some other test spills bad state.
 		}
 
 		// set the sitelink -------------------------------
@@ -171,7 +171,7 @@ class LinkTitlesTest extends ModifyItemBase {
 
 			// check the item in the database -------------------------------
 			if ( isset( $id ) ) {
-				$item = $this->loadItem( $id );
+				$item = $this->loadEntity( $id );
 				$links = self::flattenArray( $item['sitelinks'], 'site', 'title' );
 				$this->assertEquals( $fromtitle, $links[$fromsite], 'wrong link target' );
 				$this->assertEquals( $totitle, $links[$tosite], 'wrong link target' );
@@ -185,7 +185,7 @@ class LinkTitlesTest extends ModifyItemBase {
 
 		// clean up, but note that we can't clean up newly created items -------------------------------
 		if ( $handle ) {
-			$this->resetItem( $handle );
+			$this->resetEntity( $handle );
 		}
 
 		$this->assertTrue( true );
