@@ -3,6 +3,8 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use DerivativeContext;
+use Language;
 use MWException;
 
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
@@ -13,6 +15,7 @@ use Wikibase\StoreFactory;
 use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\EntityContentFactory;
+use Wikibase\LanguageFallbackChain;
 
 /**
  * API module to get the data for one or more Wikibase entities.
@@ -30,6 +33,11 @@ use Wikibase\EntityContentFactory;
 class GetEntities extends ApiWikibase {
 
 	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	protected $languageFallbackChainFactory;
+
+	/**
 	 * @var \Wikibase\StringNormalizer
 	 */
 	protected $stringNormalizer;
@@ -38,6 +46,7 @@ class GetEntities extends ApiWikibase {
 		parent::__construct( $main, $name, $prefix );
 
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+		$this->languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
 	}
 
 	/**
@@ -189,7 +198,24 @@ class GetEntities extends ApiWikibase {
 
 				// TODO: inject id formatter
 				$options = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
-				$options->setLanguages( $params['languages'] );
+				$languagefallback = $params['languagefallback'];
+				if ( $languagefallback ) {
+					foreach ( $params['languages'] as $languageCode ) {
+						try {
+							$contextLang = Language::factory( $languageCode );
+						} catch ( MWException $e ) {
+							wfProfileOut( __METHOD__ );
+							$this->dieUsage( "Invalid language: $languageCode", 'invalid-language' );
+						}
+						$context = new DerivativeContext( $this->getContext() );
+						$context->setLanguage( $contextLang );
+						$chain = $this->languageFallbackChainFactory->newFromContext( $context );
+						$languages[$languageCode] = $chain;
+					}
+				} else {
+					$languages = $params['languages'];
+				}
+				$options->setLanguages( $languages );
 				$options->setSortDirection( $params['dir'] );
 				$options->setProps( $props );
 				$options->setIndexTags( $this->getResult()->getIsRawMode() );
@@ -258,6 +284,7 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
+			'languagefallback' => false,
 		) );
 	}
 
@@ -286,6 +313,9 @@ class GetEntities extends ApiWikibase {
 			),
 			'languages' => array( 'By default the internationalized values are returned in all available languages.',
 				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
+			),
+			'languagefallback' => array( 'Apply language fallback?',
+				'Note: the returned data might be somehow unusable in "raw modes" such as XML output.',
 			),
 		) );
 	}
