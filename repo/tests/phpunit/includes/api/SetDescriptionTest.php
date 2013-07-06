@@ -77,7 +77,7 @@ class SetDescriptionTest extends LangAttributeBase {
 	 */
 	public function testLanguageAttribute( $handle, $langCode, $value, $exception = null ) {
 		$this->doLanguageAttribute( $handle, 'wbsetdescription', 'description', $langCode, $value, $exception );
-		$this->getItemId( $handle );
+		$this->getEntityId( $handle );
 	}
 
 }

@@ -77,7 +77,7 @@ class SetLabelTest extends LangAttributeBase {
 	 */
 	public function testLanguageAttribute( $handle, $langCode, $value, $exception = null ) {
 		$this->doLanguageAttribute( $handle, 'wbsetlabel', 'label', $langCode, $value, $exception );
-		$id = $this->getItemId( $handle );
+		$id = $this->getEntityId( $handle );
 	}
 
 }
