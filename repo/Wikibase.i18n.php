@@ -675,7 +675,8 @@ The item is identified through use of the site and title, but the lookup failed 
 	'wikibase-itembytitle-lookup-site' => "Label for the textfield holding the site id. See also Wikidata's glossary for [[d:Wikidata:Glossary#sitelinks|site links]].",
 	'wikibase-itembytitle-lookup-page' => "Label for the textfield holding the external page title. See also Wikidata's glossary for [[d:Wikidata:Glossary#sitelinks|site links]].
 {{Identical|Page}}",
-	'wikibase-itembytitle-submit' => 'Text for the submit button in the search form.',
+	'wikibase-itembytitle-submit' => 'Text for the submit button in the search form.
+{{Identical|Search}}',
 	'wikibase-itembytitle-nothing-found' => 'Informative text that the previous search failed for some reason, and that the search arguments must be refined.',
 	'wikibase-itembytitle-invalid-site' => 'Informative text when the provided site id is invalid.',
 	'wikibase-itembytitle-description' => 'Further information about the search fields and the valid values.',
@@ -691,7 +692,8 @@ This special page returns all items with a given label. It provides an interface
 {{Identical|Language}}',
 	'wikibase-itemdisambiguation-lookup-label' => 'Label for the textfield holding the language specific label. See also Wikidatas glossary for [[d:Wikidata:Glossary#label|label]].
 {{Identical|Label}}',
-	'wikibase-itemdisambiguation-submit' => 'Text for the submit button in the search form.',
+	'wikibase-itemdisambiguation-submit' => 'Text for the submit button in the search form.
+{{Identical|Search}}',
 	'wikibase-itemdisambiguation-nothing-found' => 'Response if the search failed because no such items have been found.',
 	'wikibase-itemdisambiguation-create' => 'Invitation to click a link and create an item with the given label.',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Response informing that the language code is not valid. Could give an example of a valid language code.
@@ -1348,6 +1350,7 @@ $messages['arc'] = array(
 	'wikibase-aliases-label' => 'ܐܦ ܐܬܝܕܥܬ ܒܫܡ:',
 	'wikibase-statementview-referencesheading-pendingcountersubject' => '{{PLURAL:$1|ܡܒܘܥܐ|ܡܒܘܥ̈ܐ}}',
 	'wikibase-itemdisambiguation-lookup-language' => 'ܠܫܢܐ:',
+	'wikibase-setentity-language' => 'ܠܫܢܐ:',
 );
 
 /** Asturian (asturianu)
@@ -3611,6 +3614,10 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses $1 gespei
 	'wikibase-entitydata-unsupported-format' => 'Das Datenformat $1 wird von dieser Schnittstelle nicht unterstützt.',
 	'wikibase-entitydata-title' => 'Objektdaten',
 	'wikibase-entitydata-text' => 'Diese Seite liefert eine verlinkte Datenschnittstelle zu Objektwerten. Bitte gib die Objektkennung in der URL an, indem du Unterseitensyntax verwendest.',
+	'special-mylanguagefallbackchain' => 'Meine Sprach-Fallback-Kette',
+	'wikibase-mylanguagefallbackchain-text' => 'Die Sprach-Fallback-Kette zur Verwendung der Anzeige deiner Objektbezeichnungen wird unten angezeigt.',
+	'wikibase-mylanguagefallbackchain-babel' => 'Du kannst sie bearbeiten, indem du <nowiki>{{#babel:}}</nowiki> in deine [[Special:MyPage|Benutzerseite]] einfügst.',
+	'wikibase-mylanguagefallbackchain-converted-item' => '$1 – $2, konvertiert von $3 – $4',
 	'wikibase-api-patch-incomplete' => 'Der generierte Patch erwies sich als unvollständig.',
 	'wikibase-self-conflict-patched' => 'Deine Bearbeitung wurde in die aktuellste Version gepatcht und deine eigenen zwischenzeitlichen Änderungen überschrieben.',
 	'wikibase-conflict-patched' => 'Deine Bearbeitung wurde in die aktuellste Version gepatcht.',
@@ -8625,6 +8632,8 @@ $messages['ja'] = array(
 	'wikibase-entitydata-unsupported-format' => 'このインターフェイスはデータ形式 $1 に対応していません。',
 	'wikibase-entitydata-title' => 'エンティティのデータ',
 	'wikibase-entitydata-text' => 'このページではエンティティの値にリンクされたデータ インターフェイスを提供します。下位ページの構文を使用して、URL にエンティティ ID を指定してください。',
+	'wikibase-mylanguagefallbackchain-verbatim-item' => '$1 - $2',
+	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2、変換元 $3 - $4',
 	'wikibase-api-patch-incomplete' => '生成されるパッチが不完全であることが判明しました。',
 	'wikibase-self-conflict-patched' => '編集内容を最新版に反映させたため、あなたの中間の版での変更が上書きされます。',
 	'wikibase-conflict-patched' => 'あなたの編集内容を最新版に反映させました。',
