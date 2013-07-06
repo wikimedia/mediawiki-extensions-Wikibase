@@ -18,6 +18,34 @@ use \Language;
  */
 class LanguageWithConversionTest extends \MediaWikiTestCase {
 
+	private function assertLanguageWithConversion( $obj,
+		$expectedLangCode, $expectedSourceLangCode, $expectedFetchLangCode
+	) {
+		$this->assertEquals( $expectedLangCode, $obj->getLanguage()->getCode() );
+		$this->assertEquals( $expectedLangCode, $obj->getLanguageCode() );
+		if ( $expectedSourceLangCode === null ) {
+			$this->assertNull( $obj->getSourceLanguage() );
+			$this->assertNull( $obj->getSourceLanguageCode() );
+		} else {
+			$this->assertEquals( $expectedSourceLangCode, $obj->getSourceLanguage()->getCode() );
+			$this->assertEquals( $expectedSourceLangCode, $obj->getSourceLanguageCode() );
+		}
+		$this->assertEquals( $expectedFetchLangCode, $obj->getFetchLanguage()->getCode() );
+		$this->assertEquals( $expectedFetchLangCode, $obj->getFetchLanguageCode() );
+	}
+
+	/**
+	 * @dataProvider provideFactory
+	 */
+	public function testFactoryCode( $langCode, $sourceLangCode,
+		$expectedLangCode, $expectedSourceLangCode, $expectedFetchLangCode
+	) {
+		$obj = LanguageWithConversion::factory( $langCode, $sourceLangCode );
+		$this->assertLanguageWithConversion( $obj,
+			$expectedLangCode, $expectedSourceLangCode, $expectedFetchLangCode
+		);
+	}
+
 	/**
 	 * @dataProvider provideFactory
 	 */
@@ -26,13 +54,9 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 	) {
 		$obj = LanguageWithConversion::factory( Language::factory( $langCode ),
 			$sourceLangCode === null ? null : Language::factory( $sourceLangCode ) );
-		$this->assertEquals( $obj->getLanguage()->getCode(), $expectedLangCode );
-		if ( $expectedSourceLangCode === null ) {
-			$this->assertNull( $obj->getSourceLanguage() );
-		} else {
-			$this->assertEquals( $obj->getSourceLanguage()->getCode(), $expectedSourceLangCode );
-		}
-		$this->assertEquals( $obj->getFetchLanguage()->getCode(), $expectedFetchLangCode );
+		$this->assertLanguageWithConversion( $obj,
+			$expectedLangCode, $expectedSourceLangCode, $expectedFetchLangCode
+		);
 	}
 
 	public function provideFactory() {
@@ -44,6 +68,14 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 			array( 'zh-cn', 'zh', 'zh-cn', 'zh', 'zh' ),
 			array( 'zh-cn', 'zh-tw', 'zh-cn', 'zh-tw', 'zh-tw' ),
 		);
+	}
+
+	/**
+	 * @dataProvider provideFactoryException
+	 * @expectedException MWException
+	 */
+	public function testFactoryCodeException( $langCode, $sourceLangCode ) {
+		LanguageWithConversion::factory( $langCode, $sourceLangCode );
 	}
 
 	/**
@@ -73,8 +105,7 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 	 * @dataProvider provideTranslate
 	 */
 	public function testTranslate( $langCode, $sourceLangCode, $translations ) {
-		$obj = LanguageWithConversion::factory( Language::factory( $langCode ),
-			$sourceLangCode === null ? null : Language::factory( $sourceLangCode ) );
+		$obj = LanguageWithConversion::factory( $langCode, $sourceLangCode );
 		foreach ( $translations as $text => $translatedText ) {
 			$this->assertEquals( $obj->translate( $text ), $translatedText );
 		}
@@ -84,8 +115,7 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 	 * @dataProvider provideTranslate
 	 */
 	public function testTranslateBatched( $langCode, $sourceLangCode, $translations ) {
-		$obj = LanguageWithConversion::factory( Language::factory( $langCode ),
-			$sourceLangCode === null ? null : Language::factory( $sourceLangCode ) );
+		$obj = LanguageWithConversion::factory( $langCode, $sourceLangCode );
 		foreach ( $translations as $text => $translatedText ) {
 			$obj->prepareForTranslate( $text );
 		}
