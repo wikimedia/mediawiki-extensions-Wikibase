@@ -7,6 +7,7 @@ use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityIdParser;
@@ -76,6 +77,11 @@ final class WikibaseRepo {
 	 * @var PropertyDataTypeLookup
 	 */
 	private $propertyDataTypeLookup;
+
+	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	private $languageFallbackChainFactory;
 
 	/**
 	 * @since 0.4
@@ -213,6 +219,19 @@ final class WikibaseRepo {
 		) );
 
 		return new EntityIdParser( $options );
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return LanguageFallbackChainFactory
+	 */
+	public function getLanguageFallbackChainFactory() {
+		if ( $this->languageFallbackChainFactory === null ) {
+			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory();
+		}
+
+		return $this->languageFallbackChainFactory;
 	}
 
 	/**
