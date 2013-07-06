@@ -96,9 +96,6 @@ final class LibHooks {
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.ListInterface.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.Group.tests.js',
 				'tests/qunit/wikibase.ui.Tooltip.tests.js',
 
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ClaimGuidGenerator.tests.js',
@@ -117,6 +114,9 @@ final class LibHooks {
 				'tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js',
 				'tests/qunit/jquery.wikibase/jquery.wikibase.toolbarbutton.tests.js',
 				'tests/qunit/jquery.wikibase/jquery.wikibase.toolbarlabel.tests.js',
+
+				'tests/qunit/jquery.wikibase/toolbar/toolbar.tests.js',
+				'tests/qunit/jquery.wikibase/toolbar/toolbareditgroup.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
@@ -128,10 +128,11 @@ final class LibHooks {
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.utilities.GuidGenerator',
 				'wikibase.utilities.jQuery',
-				'wikibase.ui.Toolbar',
 				'wikibase.ui.PropertyEditTool',
 				'jquery.ui.suggester',
 				'jquery.wikibase.entityselector',
+				'jquery.wikibase.toolbar',
+				'jquery.wikibase.toolbareditgroup',
 				'jquery.nativeEventHandler',
 				'jquery.client',
 				'jquery.eachchange',

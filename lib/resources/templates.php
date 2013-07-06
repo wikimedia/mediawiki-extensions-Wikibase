@@ -175,14 +175,14 @@ HTML;
 <$1 class="wb-editsection">$2</$1>
 HTML;
 
-	$templates['wb-toolbar'] =
+	$templates['wikibase-toolbar'] =
 <<<HTML
-<span class="wb-ui-toolbar $1">$2</span>
+<span class="wikibase-toolbar $1">$2</span>
 HTML;
 
-	$templates['wb-toolbar-group'] =
+	$templates['wikibase-toolbareditgroup'] =
 <<<HTML
-<span class="wb-ui-toolbar-group">[$1]</span>
+<span class="wikibase-toolbareditgroup $1">[$2]</span>
 HTML;
 
 	$templates['wikibase-toolbarbutton'] =
