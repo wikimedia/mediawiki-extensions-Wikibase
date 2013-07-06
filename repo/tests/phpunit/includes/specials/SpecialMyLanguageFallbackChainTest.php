@@ -1,11 +1,9 @@
 <?php
 
-namespace Wikibase\Lib\Serializers;
-
-use InvalidArgumentException;
+namespace Wikibase\Test;
 
 /**
- * Serializer for descriptions.
+ * Tests for the SpecialMyLanguageFallbackChain class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,36 +20,27 @@ use InvalidArgumentException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @file
  * @since 0.4
  *
- * @file
- * @ingroup WikibaseLib
+ * @ingroup WikibaseRepoTest
+ * @ingroup Test
+ *
+ * @group Wikibase
+ * @group SpecialPage
+ * @group WikibaseSpecialPage
  *
  * @licence GNU GPL v2+
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class DescriptionSerializer extends MultilingualSerializerObject {
+class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 
-	/**
-	 * Returns a serialized array of descriptions.
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $descriptions
-	 *
-	 * @return array
-	 * @throws InvalidArgumentException
-	 */
-	public final function getSerialized( $descriptions ) {
-		if ( !is_array( $descriptions ) ) {
-			throw new InvalidArgumentException( 'DescriptionSerializer can only serialize an array of descriptions' );
-		}
-
-		$value = $this->serializeMultilingualValues( $descriptions );
-		if ( !$this->options->shouldUseKeys() ) {
-			$this->setIndexedTagName( $value, 'description' );
-		}
-
-		return $value;
+	protected function newSpecialPage() {
+		return new \SpecialMyLanguageFallbackChain();
 	}
+
+	public function testExecute() {
+		list( $output, ) = $this->executeSpecialPage( '' );
+		$this->assertTrue( strpos( $output, 'en - ' ) !== false );
+	}
+
 }
