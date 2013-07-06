@@ -16,7 +16,7 @@ module SitelinkPage
   element(:sitelinksHeaderLink, :th, :class => "wb-sitelinks-link")
   element(:sitelinksTableBody, :tbody, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody")
   element(:sitelinksTableLanguage, :td, :index => 1)
-  link(:addSitelinkLink, :css => "table.wb-sitelinks > tfoot > tr > td > span.wb-ui-toolbar > span.wb-ui-toolbar-group > a.wikibase-wbbutton:not(.wikibase-wbbutton-disabled):nth-child(1)")
+  link(:addSitelinkLink, :css => "table.wb-sitelinks > tfoot .wikibase-toolbar > .wikibase-toolbar > a.wikibase-wbbutton:not(.wikibase-wbbutton-disabled):nth-child(1)")
   span(:siteLinkCounter, :class => "wb-ui-propertyedittool-counter")
   text_field(:siteIdInputField, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tfoot/tr/td[1]/input")
   text_field(:pageInputField, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tfoot/tr/td[contains(@class, 'wb-sitelinks-link')]/input")

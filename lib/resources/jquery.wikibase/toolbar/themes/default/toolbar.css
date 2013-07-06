@@ -1,0 +1,25 @@
+/**
+ * @since 0.4
+ * @file
+ * @ingroup WikibaseLib
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.wikibase-toolbar {
+	white-space: nowrap;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.mw-content-rtl .wikibase-toolbar {
+	padding-top: 5px;
+}
+
+.wikibase-toolbar .wikibase-wblabel,
+.wikibase-toolbar .wikibase-wbbutton {
+	padding: 0.15em;
+}
+
