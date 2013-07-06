@@ -258,7 +258,7 @@ abstract class EntityView extends \ContextSource {
 		// make css available for JavaScript-less browsers
 		$pout->addModuleStyles( array(
 			'wikibase.common',
-			'wikibase.ui.Toolbar',
+			'jquery.wikibase.toolbar',
 		) );
 
 		// make sure required client sided resources will be loaded:
@@ -532,7 +532,7 @@ abstract class EntityView extends \ContextSource {
 				$propertyHtml .= $this->getHtmlForClaim( $entity, $claim, $lang, $editable );
 			}
 
-			$propertyHtml .= wfTemplate( 'wb-toolbar',
+			$propertyHtml .= wfTemplate( 'wikibase-toolbar',
 				'wb-addtoolbar',
 				// TODO: add link to SpecialPage
 				$this->getHtmlForEditSection( $entity, $lang, '', 'span', 'add' )
@@ -676,9 +676,12 @@ abstract class EntityView extends \ContextSource {
 
 		$html = wfTemplate( 'wb-editsection',
 			$tag,
-			wfTemplate( 'wb-toolbar',
+			wfTemplate( 'wikibase-toolbar',
 				'',
-				wfTemplate( 'wb-toolbar-group', $button )
+				wfTemplate( 'wikibase-toolbareditgroup',
+					'',
+					wfTemplate( 'wikibase-toolbar', '', $button )
+				)
 			)
 		);
 
