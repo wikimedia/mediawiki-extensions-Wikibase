@@ -67,6 +67,16 @@ abstract class EntityView extends \ContextSource {
 	protected $idFormatter;
 
 	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	protected $languageFallbackChainFactory;
+
+	/**
+	 * @var LanguageFallbackChainSerializer
+	 */
+	protected $languageFallbackChainSerializer;
+
+	/**
 	 * Maps entity types to the corresponding entity view.
 	 * FIXME: remove this stuff, big OCP violation
 	 *
@@ -103,6 +113,9 @@ abstract class EntityView extends \ContextSource {
 
 		// TODO: this need to be properly injected
 		$this->idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+
+		$this->languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$this->languageFallbackChainSerializer = new LanguageFallbackChainSerializer();
 	}
 
 	/**
@@ -799,6 +812,7 @@ abstract class EntityView extends \ContextSource {
 		$user = $this->getUser();
 		$entity = $entityContent->getEntity();
 		$title = $out->getTitle();
+		$languageFallbackChain = $this->languageFallbackChainFactory->newFromContext( $this->getContext() );
 
 		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
 		$out->addJsConfigVars( 'wbUserIsBlocked', $user->isBlockedFrom( $entityContent->getTitle() ) ); //NOTE: deprecated
@@ -810,6 +824,14 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbEntityType', $entity->getType() );
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 
+		// Some constant, but to avoid hard coding it everywhere
+		$out->addJsConfigVars( 'wbContextLanguageCode', LanguageFallbackChain::CONTEXT_LANGUAGE_CODE );
+
+		// The language fallback chain for current context. Used to echo back in API requests
+		$out->addJsConfigVars( 'wbContextLanguage',
+			$this->languageFallbackChainSerializer->serialize( $languageFallbackChain )
+		);
+
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
 
@@ -818,13 +840,24 @@ abstract class EntityView extends \ContextSource {
 
 		// TODO: use injected id formatter
 		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+		$contextSerializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+		// FIXME: need a saner way to have context language fallback chain in addition to all languages included
+		// in the serialized form. calling setLanguage with an explicit list of all languages doesn't work, which
+		// requires a huge amount of memory due to Language object initialization.
+		$contextSerializationOptions->setLanguages( array(
+			LanguageFallbackChain::CONTEXT_LANGUAGE_CODE => $languageFallbackChain,
+		) );
+		$contextSerializationOptions->setProps( array( 'labels', 'descriptions' ) );
 
 		$serializerFactory = new SerializerFactory();
 		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
+		$contextSerializer = $serializerFactory->newSerializerForObject( $entity, $contextSerializationOptions );
 
 		$out->addJsConfigVars(
 			'wbEntity',
-			FormatJson::encode( $serializer->getSerialized( $entity ) )
+			FormatJson::encode( array_replace_recursive(
+				$serializer->getSerialized( $entity ), $contextSerializer->getSerialized( $entity )
+			) )
 		);
 
 		// make information about other entities used in this entity available in JavaScript view:
@@ -832,7 +865,7 @@ abstract class EntityView extends \ContextSource {
 		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
 
 		$usedEntityIds = $refFinder->findClaimLinks( $entity->getClaims() );
-		$basicEntityInfo = static::getBasicEntityInfo( $entityLoader, $usedEntityIds, $langCode );
+		$basicEntityInfo = static::getBasicEntityInfo( $entityLoader, $usedEntityIds, $langCode, $languageFallbackChain );
 
 		$out->addJsConfigVars(
 			'wbUsedEntities',
@@ -850,9 +883,13 @@ abstract class EntityView extends \ContextSource {
 	 * @param EntityLookup $entityLoader
 	 * @param EntityId[] $entityIds
 	 * @param string $langCode For the entity labels which will be included in one language only.
+	 * @param null|LanguageFallbackChain $languageFallbackChain
+	 *                         Set it to include labels to display for the given language fallback chain too.
 	 * @return array
 	 */
-	protected static function getBasicEntityInfo( EntityLookup $entityLoader, array $entityIds, $langCode ) {
+	protected static function getBasicEntityInfo(
+		EntityLookup $entityLoader, array $entityIds, $langCode, $languageFallbackChain = null
+	) {
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = EntityContentFactory::singleton();
@@ -864,7 +901,11 @@ abstract class EntityView extends \ContextSource {
 		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		$serializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
 
-		$serializationOptions->setLanguages( array( $langCode ) );
+		$languages = array( $langCode );
+		if ( $languageFallbackChain ) {
+			$languages[LanguageFallbackChain::CONTEXT_LANGUAGE_CODE] = $languageFallbackChain;
+		}
+		$serializationOptions->setLanguages( $languages );
 
 		foreach( $entities as $prefixedId => $entity ) {
 			if( $entity === null ) {
