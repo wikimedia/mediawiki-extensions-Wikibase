@@ -9,6 +9,8 @@ use MWException;
 use Wikibase\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\EntityContent;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializerObject;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -89,13 +91,20 @@ class FetchedEntityContentSerializer extends SerializerObject {
 	 * @since 0.5
 	 *
 	 * @param string $primaryLanguage
+	 * @param LanguageFallbackChain|null $languageFallbackChain
 	 * @return FetchedEntityContentSerializer
 	 */
-	public static function newForFrontendStore( $primaryLanguage ) {
+	public static function newForFrontendStore( $primaryLanguage, LanguageFallbackChain $languageFallbackChain ) {
 		$entitySerializationOptions =
 			new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		$entitySerializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
-		$entitySerializationOptions->setLanguages( array( $primaryLanguage ) );
+		if ( !$languageFallbackChain ) {
+			$languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChain();
+			$languageFallbackChain = $languageFallbackChainFactory->newFromLanguageCode(
+				$primaryLanguage, LanguageFallbackChainFactory::FALLBACK_SELF
+			);
+		}
+		$entitySerializationOptions->setLanguages( array( $primaryLanguage => $languageFallbackChain ) );
 
 		$fetchedEntityContentSerializationOptions =
 			new FetchedEntityContentSerializationOptions( $entitySerializationOptions );
