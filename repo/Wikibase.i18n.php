@@ -882,6 +882,22 @@ Paramters:
 	'wikibase-entitydata-unsupported-format' => 'Error shown when the requested output format is not supported for entity data (HTTP error 415).',
 	'wikibase-entitydata-title' => 'Title shown on the special page when a form or text is presented',
 	'wikibase-entitydata-text' => 'Explanatory text shown on the special page.',
+	'special-mylanguagefallbackchain' => '{{doc-special|MyLanguageFallbackChain}}
+The special page display the language fallback chain used to display Wikibase data for current context.',
+	'wikibase-mylanguagefallbackchain-text' => 'Explanatory text shown on the special page.',
+	'wikibase-mylanguagefallbackchain-babel' => 'More explanatory text shown on the special page. Only displayed when Extension:Babel is installed and the user is logged in.',
+	'wikibase-mylanguagefallbackchain-verbatim-item' => 'A "verbatim" (taken from database and displayed as-is) fallback chain item.
+
+Parameters:
+* $1 - Language code
+* $2 - Language name',
+	'wikibase-mylanguagefallbackchain-converted-item' => 'A "converted" (taken from data in another language and converted to another language on display) fallback chain item.
+
+Parameters:
+* $1 - Language code
+* $2 - Language name
+* $3 - Source language code
+* $4 - Source language name',
 	'wikibase-api-aliases-invalid-list' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions.
 
 {{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
