@@ -6,11 +6,14 @@ use ApiBase;
 use MWException;
 
 use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\EntityIdParser;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
+use Wikibase\Property;
 use Wikibase\Statement;
 use Wikibase\Claims;
 use Wikibase\Claim;
@@ -129,7 +132,7 @@ class GetClaims extends ApiWikibase {
 		$claims = array();
 		$params = $this->extractRequestParams();
 
-		// TODO: we probably need this elswhere, so make filter methods in Claim
+		// TODO: we probably need this elsewhere, so make filter methods in Claim
 		$rank = isset( $params['rank'] ) ? ClaimSerializer::unserializeRank( $params['rank'] ) : false;
 		$propertyId = isset( $params['property'] ) ? $params['property'] : false;
 
@@ -141,7 +144,7 @@ class GetClaims extends ApiWikibase {
 				|| ( $claim instanceof Statement && $claim->getRank() === $rank );
 
 			if ( $rankIsOk
-				&& ( $propertyId === false || $propertyId === $claim->getPropertyId() ) ) {
+				&& ( $propertyId === false ||  $propertyId === $claim->getPropertyId()->getPrefixedId() ) ) {
 				$claims[] = $claim;
 			}
 		}
