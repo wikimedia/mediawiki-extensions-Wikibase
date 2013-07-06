@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_e75cb124",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2013-07-06T09:07:23Z",
+      "side": 0,
+      "message": "Please add message documentation. Translators need to know the context of the messages and the possible values of the variables. Thanks.",
+      "revId": "7c01278d87f9643a34c505b1b2d5d1112d812e70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
