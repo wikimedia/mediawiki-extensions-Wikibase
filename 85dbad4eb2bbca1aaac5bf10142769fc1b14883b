@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_07e8edb4",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-06T14:16:39Z",
+      "side": 1,
+      "message": "You can\u0027t change the datatype for a property once it\u0027s been created.",
+      "revId": "85dbad4eb2bbca1aaac5bf10142769fc1b14883b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
