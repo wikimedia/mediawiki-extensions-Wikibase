@@ -28,7 +28,6 @@ return call_user_func( function() {
 		'wikibase.common' => $moduleTemplate + array(
 			'styles' => array(
 				'wikibase.css',
-				'wikibase.ui.Toolbar.css'
 			)
 		),
 
@@ -325,30 +324,8 @@ return call_user_func( function() {
 			)
 		),
 
-		// should be independent from the rest of Wikibase (or only use other stuff that could go into core)
-		'wikibase.ui.Toolbar' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.ui.Toolbar.js',
-				'wikibase.ui.Toolbar.Group.js',
-			),
-			'dependencies' => array(
-				'jquery.nativeEventHandler',
-				'jquery.ui.core',
-				'jquery.wikibase.toolbarlabel',
-				'jquery.wikibase.toolbarbutton',
-				'mediawiki.legacy.shared',
-				'wikibase',
-				'wikibase.common',
-				'wikibase.ui.Base',
-				'wikibase.ui.Tooltip',
-				'wikibase.utilities',
-				'wikibase.utilities.jQuery'
-			),
-		),
-
 		'wikibase.ui.PropertyEditTool' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.ui.Toolbar.EditGroup.js', // related to EditableValue, see todo in file
 				'wikibase.ui.PropertyEditTool.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.Interface.js',
@@ -376,6 +353,7 @@ return call_user_func( function() {
 				'jquery.tablesorter',
 				'jquery.ui.suggester',
 				'jquery.wikibase.entityselector',
+				'jquery.wikibase.toolbareditgroup',
 				'jquery.wikibase.siteselector',
 				'mediawiki.api',
 				'mediawiki.language',
@@ -383,7 +361,6 @@ return call_user_func( function() {
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase',
 				'wikibase.ui.Base',
-				'wikibase.ui.Toolbar',
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
 				'wikibase.utilities.jQuery.ui.tagadata',
@@ -453,7 +430,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.widget',
-				'wikibase.ui.Toolbar',
+				'jquery.wikibase.toolbar',
+				'jquery.wikibase.toolbareditgroup',
 			),
 		),
 
@@ -475,7 +453,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.toolbarbase',
-				'wikibase.ui.PropertyEditTool', // needs wikibase.ui.Toolbar.EditGroup
+				'jquery.wikibase.toolbareditgroup',
 			)
 		),
 
@@ -741,6 +719,27 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.toolbarlabel',
+			),
+		),
+
+		'jquery.wikibase.toolbar' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/toolbar/toolbar.js',
+			),
+			'styles' => array(
+				'jquery.wikibase/toolbar/themes/default/toolbar.css',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.toolbarbutton',
+			),
+		),
+
+		'jquery.wikibase.toolbareditgroup' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/toolbar/toolbareditgroup.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.toolbar',
 			),
 		),
 
