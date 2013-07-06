@@ -46,15 +46,15 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class GetEntitiesTest extends ModifyItemBase {
+class GetEntitiesTest extends ModifyEntityBase {
 
 	/**
-	 * @dataProvider provideItemHandles
+	 * @dataProvider provideEntityHandles
 	 */
 	function testGetItemById( $handle ) {
-		$this->createItems();
+		$this->createEntity();
 
-		$item = $this->getItemOutput( $handle );
+		$item = $this->getEntityOutput( $handle );
 		$id = $item['id'];
 
 		list($res,,) = $this->doApiRequest(
@@ -65,7 +65,7 @@ class GetEntitiesTest extends ModifyItemBase {
 		);
 
 		$this->assertSuccess( $res, 'entities', $id );
-		$this->assertItemEquals( $item,  $res['entities'][$id] );
+		$this->assertEntityEquals( $item,  $res['entities'][$id] );
 		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
 		// This should be correct for all items we are testing
 		$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entities'][$id]['type'] );
@@ -93,12 +93,12 @@ class GetEntitiesTest extends ModifyItemBase {
 	}
 
 	/**
-	 * @dataProvider provideItemHandles
+	 * @dataProvider provideEntityHandles
 	 */
 	function testGetItemByPrefixedId( $handle ) {
-		$this->createItems();
+		$this->createEntity();
 
-		$item = $this->getItemOutput( $handle );
+		$item = $this->getEntityOutput( $handle );
 		$id = $item['id'];
 
 		list($res,,) = $this->doApiRequest(
@@ -109,15 +109,15 @@ class GetEntitiesTest extends ModifyItemBase {
 		);
 
 		$this->assertSuccess( $res, 'entities', $id );
-		$this->assertItemEquals( $item,  $res['entities'][$id] );
+		$this->assertEntityEquals( $item,  $res['entities'][$id] );
 	}
 
 	public static function provideGetItemByTitle() {
 		$calls = array();
-		$handles = static::getItemHandles();
+		$handles = static::getEntityHandles();
 
 		foreach ( $handles as $handle ) {
-			$item = static::getItemInput( $handle );
+			$item = static::getEntityInput( $handle );
 
 			if ( !isset( $item['sitelinks'] ) ) {
 				continue;
@@ -145,11 +145,11 @@ class GetEntitiesTest extends ModifyItemBase {
 			'format' => 'json', // make sure IDs are used as keys
 		) );
 
-		$item = $this->getItemOutput( $handle );
+		$item = $this->getEntityOutput( $handle );
 		$id = $item['id'];
 
 		$this->assertSuccess( $res, 'entities', $id );
-		$this->assertItemEquals( $item,  $res['entities'][$id] );
+		$this->assertEntityEquals( $item,  $res['entities'][$id] );
 		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
 	}
 
@@ -237,8 +237,8 @@ class GetEntitiesTest extends ModifyItemBase {
 	 * @group API
 	 */
 	public function testGetEntitiesMultipleIds() {
-		$handles = $this->getItemHandles();
-		$ids = array_map( array( $this, 'getItemId' ), $handles );
+		$handles = $this->getEntityHandles();
+		$ids = array_map( array( $this, 'getEntityId' ), $handles );
 
 		list( $res,, ) = $this->doApiRequest( array(
 			'action' => 'wbgetentities',
@@ -276,7 +276,7 @@ class GetEntitiesTest extends ModifyItemBase {
 		$this->assertEquals( count( $titles ), count( $res['entities'] ), "the actual number of items differs from the number of requested items" );
 
 		foreach ( $handles as $handle ) {
-			$id = $this->getItemId( $handle );
+			$id = $this->getEntityId( $handle );
 
 			$this->assertArrayHasKey( $id, $res['entities'], "missing item" );
 			$this->assertEquals( $id, $res['entities'][$id]['id'], "bad ID" );
@@ -297,9 +297,9 @@ class GetEntitiesTest extends ModifyItemBase {
 	 * @dataProvider provideLanguages
 	 */
 	function testLanguages( $handle, $languages ) {
-		$this->createItems();
+		$this->createEntity();
 
-		$id = $this->getItemId( $handle );
+		$id = $this->getEntityId( $handle );
 
 		list($res,,) = $this->doApiRequest(
 			array(
@@ -351,9 +351,9 @@ class GetEntitiesTest extends ModifyItemBase {
 	 * @dataProvider provideProps
 	 */
 	function testProps( $handle, $props, $expectedProps ) {
-		$this->createItems();
+		$this->createEntity();
 
-		$id = $this->getItemId( $handle );
+		$id = $this->getEntityId( $handle );
 
 		list($res,,) = $this->doApiRequest(
 			array(
@@ -384,8 +384,8 @@ class GetEntitiesTest extends ModifyItemBase {
 	 * @dataProvider provideSitelinkUrls
 	 */
 	function testSitelinkUrls( $handle ) {
-		$this->createItems();
-		$id = $this->getItemId( $handle );
+		$this->createEntity();
+		$id = $this->getEntityId( $handle );
 
 		list($res,,) = $this->doApiRequest(
 			array(
@@ -429,8 +429,8 @@ class GetEntitiesTest extends ModifyItemBase {
 	 * @dataProvider provideSitelinkSorting
 	 */
 	function testSitelinkSorting( $handle ) {
-		$this->createItems();
-		$id = $this->getItemId( $handle );
+		$this->createEntity();
+		$id = $this->getEntityId( $handle );
 
 		list($res,,) = $this->doApiRequest(
 			array(
@@ -474,9 +474,9 @@ class GetEntitiesTest extends ModifyItemBase {
 	 * @dataProvider providerGetItemFormat
 	 */
 	function testGetItemFormat( $format, $usekeys ) {
-		$this->createItems();
+		$this->createEntity();
 
-		$item = $this->getItemOutput( 'Berlin' );
+		$item = $this->getEntityOutput( 'Berlin' );
 		$id = $item['id'];
 
 		list($res,,) = $this->doApiRequest(

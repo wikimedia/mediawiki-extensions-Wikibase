@@ -165,7 +165,7 @@ return call_user_func( function() {
 		// tests
 		'Wikibase\Test\TestItemContents' => 'tests/phpunit/TestItemContents.php',
 		'Wikibase\Test\ActionTestCase' => 'tests/phpunit/includes/actions/ActionTestCase.php',
-		'Wikibase\Test\Api\ModifyItemBase' => 'tests/phpunit/includes/api/ModifyItemBase.php',
+		'Wikibase\Test\Api\ModifyEntityBase' => 'tests/phpunit/includes/api/ModifyEntityBase.php',
 		'Wikibase\Test\Api\LangAttributeBase' => 'tests/phpunit/includes/api/LangAttributeBase.php',
 		'Wikibase\Test\EntityContentTest' => 'tests/phpunit/includes/content/EntityContentTest.php',
 		'Wikibase\Test\EntityHandlerTest' => 'tests/phpunit/includes/content/EntityHandlerTest.php',

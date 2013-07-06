@@ -12,7 +12,7 @@ use Wikibase\Settings;
  * The tests are using "Database" to get its own set of temporal tables.
  * This is nice so we avoid poisoning an existing database.
  *
- * The tests are using "medium" so they are able to run alittle longer before they are killed.
+ * The tests are using "medium" so they are able to run a little longer before they are killed.
  * Without this they will be killed after 1 second, but the setup of the tables takes so long
  * time that the first few tests get killed.
  *
@@ -47,14 +47,14 @@ use Wikibase\Settings;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class ModifyItemBase extends ApiTestCase {
+abstract class ModifyEntityBase extends ApiTestCase {
 
 	protected static $usepost;
 	protected static $usetoken;
 	protected static $userights;
 
-	protected static $itemInput = null; // items in input format, using handles as keys
-	protected static $itemOutput = array(); // items in output format, using handles as keys
+	protected static $entityInput = null; // entities in input format, using handles as keys
+	protected static $entityOutput = array(); // entities in output format, using handles as keys
 
 	protected static $loginSession = null;
 	protected static $loginUser = null;
@@ -107,39 +107,41 @@ abstract class ModifyItemBase extends ApiTestCase {
 		self::$loginSession = false;
 		self::$token = false;
 
-		self::initItems();
+		self::initEntities();
 		$this->setUpComplete = true;
 	}
 
 	/**
-	 * Initializes the static list of item input structures, using data from makeItemData().
-	 * Note that test items are identified by "handles".
+	 * Initializes the static list of entity input structures, using data from makeEntityData().
+	 * Note that test entities are identified by "handles".
 	 */
-	protected static function initItems() {
-		if ( self::$itemInput ) {
+	protected static function initEntities() {
+		if ( self::$entityInput ) {
 			return;
 		}
 
-		self::$itemInput = array();
-		$data = self::makeItemData();
+		self::$entityInput = array();
+		$data = self::makeEntityData();
 
-		foreach ( $data as $item ) {
-			self::$itemInput[ $item['handle'] ] = $item;
+		foreach ( $data as $entity ) {
+			self::$entityInput[ $entity['handle'] ] = $entity;
 		}
 	}
 
 	/**
-	 * Provides the item data that is to be used as input for creating the test environment.
-	 * This data is used in particular by createItems().
-	 * Note that test items are identified by "handles".
+	 * Provides the entity data that is to be used as input for creating the test environment.
+	 * This data is used in particular by createEntities().
+	 * Note that test Entities are identified by "handles".
 	 */
-	static function makeItemData() {
+	static function makeEntityData() {
 		return array(
 			array(
 				"handle" => "Empty",
+				"type" => "item",
 			),
 			array(
 				"handle" => "Berlin",
+				"type" => "item",
 				"sitelinks" => array(
 					array( "site" => "dewiki", "title" => "Berlin" ),
 					array( "site" => "enwiki", "title" => "Berlin" ),
@@ -166,6 +168,7 @@ abstract class ModifyItemBase extends ApiTestCase {
 			),
 			array(
 				"handle" => "London",
+				"type" => "item",
 				"sitelinks" => array(
 					array( "site" => "enwiki", "title" => "London" ),
 					array( "site" => "dewiki", "title" => "London" ),
@@ -201,6 +204,7 @@ abstract class ModifyItemBase extends ApiTestCase {
 			),
 			array(
 				"handle" => "Oslo",
+				"type" => "item",
 				"sitelinks" => array(
 					array( "site" => "dewiki", "title" => "Oslo" ),
 					array( "site" => "enwiki", "title" => "Oslo" ),
@@ -235,6 +239,7 @@ abstract class ModifyItemBase extends ApiTestCase {
 			),
 			array(
 				"handle" => "Episkopi",
+				"type" => "item",
 				"sitelinks" => array(
 					array( "site" => "dewiki", "title" => "Episkopi Cantonment" ),
 					array( "site" => "enwiki", "title" => "Episkopi Cantonment" ),
@@ -258,6 +263,7 @@ abstract class ModifyItemBase extends ApiTestCase {
 			),
 			array(
 				"handle" => "Leipzig",
+				"type" => "item",
 				"labels" => array(
 					array( "language" => "de", "value" => "Leipzig" ),
 				),
@@ -315,9 +321,9 @@ abstract class ModifyItemBase extends ApiTestCase {
 	}
 
 	/**
-	 * Gets an item edit token. Returns a cached token if available.
+	 * Gets an entity edit token. Returns a cached token if available.
 	 */
-	function getItemToken() {
+	function getEntityToken() {
 		$this->init();
 
 		if ( !self::$usetoken ) {
@@ -343,54 +349,54 @@ abstract class ModifyItemBase extends ApiTestCase {
 	}
 
 	/**
-	 * Initializes the test environment with the items defined by makeItemData() by creating these
-	 * items in the database.
+	 * Initializes the test environment with the entities defined by makeEntityData() by creating these
+	 * entities in the database.
 	 */
-	function createItems() {
-		if ( self::$itemOutput ) {
+	function createEntity() {
+		if ( self::$entityOutput ) {
 			return;
 		}
 
-		self::initItems();
-		$token = $this->getItemToken();
+		self::initEntities();
+		$token = $this->getEntityToken();
 
-		foreach ( self::$itemInput as $item ) {
-			$handle = $item['handle'];
-			$createdItem = $this->setItem( $item, $token );
+		foreach ( self::$entityInput as $entity ) {
+			$handle = $entity['handle'];
+			$createdEntity = $this->setEntity( $entity, $token );
 
-			self::$itemOutput[ $handle ] = $createdItem;
+			self::$entityOutput[ $handle ] = $createdEntity;
 		}
 	}
 
 	/**
-	 * Restores all well known items test in the database to their original state.
+	 * Restores all well known entities test in the database to their original state.
 	 */
-	function resetItems() {
-		$this->createItems();
-		$token = $this->getItemToken();
+	function resetEntities() {
+		$this->createEntity();
+		$token = $this->getEntityToken();
 
-		foreach ( self::$itemInput as $handle => $item ) {
-			$item['id'] = $this->getItemId( $handle );
+		foreach ( self::$entityInput as $handle => $entity ) {
+			$entity['id'] = $this->getEntityId( $handle );
 
-			$this->setItem( $item, $token );
+			$this->setEntity( $entity, $token );
 		}
 	}
 
 	/**
-	 * Restores the item with the given handle to its original state
+	 * Restores the entity with the given handle to its original state
 	 */
-	function resetItem( $handle ) {
-		$item = $this->getItemInput( $handle );
-		$item['id'] = $this->getItemId( $handle );
+	function resetEntity( $handle ) {
+		$entity = $this->getEntityInput( $handle );
+		$entity['id'] = $this->getEntityId( $handle );
 
-		$token = $this->getItemToken();
-		return $this->setItem( $item, $token );
+		$token = $this->getEntityToken();
+		return $this->setEntity( $entity, $token );
 	}
 
 	/**
-	 * Creates or updates a single item in the database
+	 * Creates or updates a single entity in the database
 	 */
-	function setItem( $data, $token ) {
+	function setEntity( $data, $token ) {
 		$params = array(
 			'action' => 'wbeditentity',
 			'format' => 'json', // make sure IDs are used as keys.
@@ -404,8 +410,10 @@ abstract class ModifyItemBase extends ApiTestCase {
 				$params['id'] = $data['id'];
 				unset( $data['id'] );
 			} else {
-				$params['new'] = 'item';
+				$params['new'] = $data['type'];
 			}
+
+			unset( $data['type'] );
 
 			$data = json_encode( $data );
 		}
@@ -420,51 +428,51 @@ abstract class ModifyItemBase extends ApiTestCase {
 		);
 
 		if ( !isset( $res['success'] ) || !isset( $res['entity'] ) ) {
-			throw new \MWException( "failed to create item" );
+			throw new \MWException( "failed to create entity" );
 		}
 
 		return $res['entity'];
 	}
 
 	/**
-	 * Returns the item for the given handle, in input format.
+	 * Returns the entity for the given handle, in input format.
 	 */
-	static function getItemInput( $handle ) {
+	static function getEntityInput( $handle ) {
 		if ( !is_string( $handle ) ) {
 			trigger_error( "bad handle: $handle", E_USER_ERROR );
 		}
 
-		self::initItems();
-		return self::$itemInput[ $handle ];
+		self::initEntities();
+		return self::$entityInput[ $handle ];
 	}
 
 	/**
-	 * Returns the item for the given handle, in output format.
-	 * Will initialize the database with test items if necessary.
+	 * Returns the entity for the given handle, in output format.
+	 * Will initialize the database with test entities if necessary.
 	 */
-	function getItemOutput( $handle ) {
-		$this->createItems();
-		return self::$itemOutput[ $handle ];
+	function getEntityOutput( $handle ) {
+		$this->createEntity();
+		return self::$entityOutput[ $handle ];
 	}
 
 	/**
-	 * Returns the database id for the given item handle.
-	 * Will initialize the database with test items if necessary.
+	 * Returns the database id for the given entity handle.
+	 * Will initialize the database with test entities if necessary.
 	 */
-	function getItemId( $handle ) {
-		$item = $this->getItemOutput( $handle );
-		return $item['id'];
+	function getEntityId( $handle ) {
+		$entity = $this->getEntityOutput( $handle );
+		return $entity['id'];
 	}
 
 	/**
-	 * data provider for passing each item handle to the test function.
+	 * data provider for passing each entity handle to the test function.
 	 */
-	function provideItemHandles() {
-		self::initItems();
+	function provideEntityHandles() {
+		self::initEntities();
 
 		$handles = array();
 
-		foreach ( self::$itemInput as $handle => $item ) {
+		foreach ( self::$entityInput as $handle => $entity ) {
 			$handles[] = array( $handle );
 		}
 
@@ -472,18 +480,18 @@ abstract class ModifyItemBase extends ApiTestCase {
 	}
 
 	/**
-	 * returns the list handles for the well known test items.
+	 * returns the list handles for the well known test entities.
 	 */
-	static function getItemHandles() {
-		self::initItems();
+	static function getEntityHandles() {
+		self::initEntities();
 
-		return array_keys( self::$itemInput );
+		return array_keys( self::$entityInput );
 	}
 
 	/**
-	 * Loads an item from the database (via an API call).
+	 * Loads an entity from the database (via an API call).
 	 */
-	function loadItem( $id ) {
+	function loadEntity( $id ) {
 		list($res,,) = $this->doApiRequest(
 			array(
 				'action' => 'wbgetentities',
@@ -580,13 +588,13 @@ abstract class ModifyItemBase extends ApiTestCase {
 	}
 
 	/**
-	 * Compares two item structures and asserts that they are equal. Only fields present in $expected are considered.
+	 * Compares two entity structures and asserts that they are equal. Only fields present in $expected are considered.
 	 * $expected and $actual can both be either in "flat" or in "deep" form, they are converted as needed before comparison.
 	 *
 	 * @param $expected
 	 * @param $actual
 	 */
-	public function assertItemEquals( $expected, $actual ) {
+	public function assertEntityEquals( $expected, $actual ) {
 		if ( isset( $expected['id'] ) ) {
 			$this->assertEquals( $expected['id'], $actual['id'] );
 		}
