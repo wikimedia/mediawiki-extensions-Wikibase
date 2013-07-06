@@ -42,7 +42,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveClaims extends ApiWikibase {
+class RemoveClaims extends ModifyClaim {
 
 	/**
 	 * @see ApiBase::isWriteMode
