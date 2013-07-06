@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use MWException;
 
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
@@ -13,6 +14,7 @@ use Wikibase\StoreFactory;
 use Wikibase\EntityId;
 use Wikibase\Item;
 use Wikibase\EntityContentFactory;
+use Wikibase\LanguageFallbackChain;
 
 /**
  * API module to get the data for one or more Wikibase entities.
@@ -28,6 +30,22 @@ use Wikibase\EntityContentFactory;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class GetEntities extends ApiWikibase {
+
+	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	protected $languageFallbackChainFactory;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.4
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$this->languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+	}
 
 	/**
 	 * @see \ApiBase::execute()
@@ -178,7 +196,21 @@ class GetEntities extends ApiWikibase {
 
 				// TODO: inject id formatter
 				$options = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
-				$options->setLanguages( $params['languages'] );
+				$languages = $params['languages'];
+				$contextlanguage = $params['contextlanguage'];
+				if ( $contextlanguage !== '' ) {
+					try {
+						$contextLang = Language::factory( $contextlanguage );
+					} catch ( MWException $e ) {
+						wfProfileOut( __METHOD__ );
+						$this->dieUsage( "Invalid contextlanguage: $contextlanguage", 'invalid-contextlanguage' );
+					}
+					$context = new DerivativeContext( $this->getContext() );
+					$context->setLanguage( $contextLang );
+					$chain = $this->languageFallbackChainFactory->newFromContext( $context );
+					$languages[LanguageFallbackChain::CONTEXT_LANGUAGE_CODE] = $chain;
+				}
+				$options->setLanguages( $languages );
 				$options->setSortDirection( $params['dir'] );
 				$options->setProps( $props );
 				$options->setIndexTags( $this->getResult()->getIsRawMode() );
@@ -247,6 +279,13 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
+			'contextlanguage' => array(
+				// Not: ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
+				// Otherwise &uselang=qqx views fail.
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_DFLT => '',
+				ApiBase::PARAM_ISMULTI => false,
+			),
 		) );
 	}
 
@@ -275,6 +314,9 @@ class GetEntities extends ApiWikibase {
 			),
 			'languages' => array( 'By default the internationalized values are returned in all available languages.',
 				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
+			),
+			'contextlanguage' => array( 'Serialized form of context language fallback chain to fetch values.',
+				"Taken from mw.config.get( 'wbContextLanguage' ), or don't send one for standalone requests.",
 			),
 		) );
 	}
