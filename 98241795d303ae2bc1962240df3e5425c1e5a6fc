@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_e2101fad",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-06T19:16:30Z",
+      "side": 1,
+      "message": "There should be an example documenting the \"property\" parameter.",
+      "revId": "98241795d303ae2bc1962240df3e5425c1e5a6fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_02ec5b8f",
+        "filename": "repo/includes/api/RemoveQualifiers.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2013-07-06T19:16:30Z",
+      "side": 1,
+      "message": "Not your error, but can you fix this typo too? :)",
+      "revId": "98241795d303ae2bc1962240df3e5425c1e5a6fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
