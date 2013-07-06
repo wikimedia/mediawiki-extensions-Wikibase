@@ -62,6 +62,21 @@ class LanguageFallbackChainFactory {
 	public $userLanguageCache;
 
 	/**
+	 * @var bool
+	 */
+	public $anonymousPageViewCached;
+
+	/**
+	 * Constructor
+	 *
+	 * @param $anonymousPageViewCached bool
+	 *          Whether full page outputs are cached for anons, so some fine-grained fallbacks shouldn't be used for them.
+	 */
+	public function __construct( $anonymousPageViewCached = false ) {
+		$this->anonymousPageViewCached = $anonymousPageViewCached;
+	}
+
+	/**
 	 * Get the fallback chain based a single language, and specified fallback level.
 	 *
 	 * @param Language $language
@@ -327,6 +342,24 @@ class LanguageFallbackChainFactory {
 
 		wfProfileOut( __METHOD__ );
 		return $chain;
+	}
+
+	/**
+	 * Construct the fallback chain based on a context for direct page views.
+	 * Caching mechanisms used are taken into consideration.
+	 *
+	 * @param IContextSource $context
+	 *
+	 * @return LanguageFallbackChain
+	 */
+	public function newFromContextForPageView( IContextSource $context ) {
+		if ( $this->anonymousPageViewCached && $context->getUser()->isAnon() ) {
+			// Anonymous users share the same Squid cache, which is splitted by URL.
+			// That means we can't do anything except for what completely depends by URL such as &uselang=.
+			return $this->newFromLanguage( $context->getLanguage() );
+		} else {
+			return $this->newFromContext( $context );
+		}
 	}
 
 }
