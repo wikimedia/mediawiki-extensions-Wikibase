@@ -273,7 +273,8 @@ class WikibaseRepo {
 	 */
 	public function getLanguageFallbackChainFactory() {
 		if ( $this->languageFallbackChainFactory === null ) {
-			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory();
+			global $wgUseSquid;
+			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory( $wgUseSquid );
 		}
 
 		return $this->languageFallbackChainFactory;

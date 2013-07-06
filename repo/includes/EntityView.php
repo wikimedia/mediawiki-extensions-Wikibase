@@ -86,6 +86,11 @@ abstract class EntityView extends \ContextSource {
 	protected $dataTypeLookup;
 
 	/**
+	 * @var LanguageFallbackChain
+	 */
+	protected $languageFallbackChain;
+
+	/**
 	 * Maps entity types to the corresponding entity view.
 	 * FIXME: remove this stuff, big OCP violation
 	 *
@@ -110,6 +115,7 @@ abstract class EntityView extends \ContextSource {
 	 * @param EntityLookup               $entityLookup
 	 * @param EntityTitleLookup          $entityTitleLookup
 	 * @param Lib\EntityIdFormatter      $idFormatter
+	 * @param LanguageFallbackChain      $languageFallbackChain
 	 */
 	public function __construct(
 		IContextSource $context,
@@ -117,7 +123,8 @@ abstract class EntityView extends \ContextSource {
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
-		EntityIdFormatter $idFormatter
+		EntityIdFormatter $idFormatter,
+		LanguageFallbackChain $languageFallbackChain
 	) {
 		$this->setContext( $context );
 		$this->valueFormatters = $valueFormatters;
@@ -125,6 +132,7 @@ abstract class EntityView extends \ContextSource {
 		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->idFormatter = $idFormatter;
+		$this->languageFallbackChain = $languageFallbackChain;
 	}
 
 	/**
@@ -853,6 +861,9 @@ abstract class EntityView extends \ContextSource {
 
 		// TODO: use injected id formatter
 		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+		$serializationOptions->setLanguages( Utils::getLanguageCodes() + array(
+			$langCode => $this->languageFallbackChain,
+		) );
 
 		$serializerFactory = new SerializerFactory();
 		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
@@ -866,7 +877,7 @@ abstract class EntityView extends \ContextSource {
 		$refFinder = new ReferencedEntitiesFinder();
 
 		$usedEntityIds = $refFinder->findSnakLinks( $entity->getAllSnaks() );
-		$basicEntityInfo = $this->getBasicEntityInfo( $usedEntityIds, $langCode );
+		$basicEntityInfo = $this->getBasicEntityInfo( $usedEntityIds, $langCode, $this->languageFallbackChain );
 
 		$out->addJsConfigVars(
 			'wbUsedEntities',
@@ -883,9 +894,10 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @param EntityId[] $entityIds
 	 * @param string $langCode For the entity labels which will be included in one language only.
+	 * @param LanguageFallbackChain $languageFallbackChain Set it to include labels to display for the given language fallback chain too.
 	 * @return array
 	 */
-	protected function getBasicEntityInfo( array $entityIds, $langCode ) {
+	protected function getBasicEntityInfo( array $entityIds, $langCode, LanguageFallbackChain $languageFallbackChain = null ) {
 		wfProfileIn( __METHOD__ );
 
 		$entities = $this->entityLookup->getEntities( $entityIds );
@@ -894,8 +906,7 @@ abstract class EntityView extends \ContextSource {
 		$serializerFactory = new SerializerFactory();
 		$serializationOptions = new EntitySerializationOptions( $this->idFormatter );
 		$serializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
-
-		$serializationOptions->setLanguages( array( $langCode ) );
+		$serializationOptions->setLanguages( array( $langCode => $languageFallbackChain ) );
 
 		/* @var Entity $entity */
 		foreach( $entities as $prefixedId => $entity ) {
@@ -951,7 +962,17 @@ abstract class EntityView extends \ContextSource {
 		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 		$entityTitleLookup = EntityContentFactory::singleton();
 
-		$instance = new self::$typeMap[ $type ]( $context, $valueFormatters, $dataTypeLookup, $entityLookup, $entityTitleLookup, $idFormatter );
+		$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			$languageFallbackChain = $factory->newFromContextForPageView( $context );
+		} else {
+			# Effectively disables fallback.
+			$languageFallbackChain = $factory->newFromLanguage(
+				$context->getLanguage(), LanguageFallbackChainFactory::FALLBACK_SELF
+			);
+		}
+
+		$instance = new self::$typeMap[ $type ]( $context, $valueFormatters, $dataTypeLookup, $entityLookup, $entityTitleLookup, $idFormatter, $languageFallbackChain );
 		return $instance;
 	}
 }
