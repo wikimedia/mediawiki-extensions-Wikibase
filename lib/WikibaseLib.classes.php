@@ -42,6 +42,7 @@ return call_user_func( function() {
 		'Wikibase\DiffView' => 'includes/DiffView.php',
 		'Wikibase\LanguageFallbackChain' => 'includes/LanguageFallbackChain.php',
 		'Wikibase\LanguageFallbackChainFactory' => 'includes/LanguageFallbackChainFactory.php',
+		'Wikibase\LanguageFallbackChainSerializer' => 'includes/LanguageFallbackChainSerializer.php',
 		'Wikibase\LanguageWithConversion' => 'includes/LanguageWithConversion.php',
 		'Wikibase\Lib\GuidGenerator' => 'includes/GuidGenerator.php',
 		'Wikibase\Lib\V4GuidGenerator' => 'includes/GuidGenerator.php',
