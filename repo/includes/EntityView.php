@@ -70,6 +70,11 @@ abstract class EntityView extends \ContextSource {
 	protected $idFormatter;
 
 	/**
+	 * @var LanguageFallbackChain
+	 */
+	protected $languageFallbackChain;
+
+	/**
 	 * Maps entity types to the corresponding entity view.
 	 * FIXME: remove this stuff, big OCP violation
 	 *
@@ -115,6 +120,9 @@ abstract class EntityView extends \ContextSource {
 
 		// TODO: this need to be properly injected
 		$this->idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+
+		$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$this->languageFallbackChain = $factory->newFromContextForPageView( $context );
 	}
 
 	/**
@@ -849,6 +857,12 @@ abstract class EntityView extends \ContextSource {
 		// TODO: use injected id formatter
 		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			$serializationOptions->setLanguages( Utils::getLanguageCodes() + array(
+				$langCode => $this->languageFallbackChain,
+			) );
+		}
+
 		$serializerFactory = new SerializerFactory();
 		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
 
@@ -861,7 +875,7 @@ abstract class EntityView extends \ContextSource {
 		$refFinder = new ReferencedEntitiesFinder();
 
 		$usedEntityIds = $refFinder->findSnakLinks( $entity->getAllSnaks() );
-		$basicEntityInfo = $this->getBasicEntityInfo( $usedEntityIds, $langCode );
+		$basicEntityInfo = $this->getBasicEntityInfo( $usedEntityIds, $langCode, $this->languageFallbackChain );
 
 		$out->addJsConfigVars(
 			'wbUsedEntities',
@@ -878,9 +892,10 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @param EntityId[] $entityIds
 	 * @param string $langCode For the entity labels which will be included in one language only.
+	 * @param LanguageFallbackChain $languageFallbackChain Set it to include labels to display for the given language fallback chain too.
 	 * @return array
 	 */
-	protected function getBasicEntityInfo( array $entityIds, $langCode ) {
+	protected function getBasicEntityInfo( array $entityIds, $langCode, LanguageFallbackChain $languageFallbackChain = null ) {
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = EntityContentFactory::singleton();
@@ -892,7 +907,12 @@ abstract class EntityView extends \ContextSource {
 		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		$serializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
 
-		$serializationOptions->setLanguages( array( $langCode ) );
+		if ( $languageFallbackChain && defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			$languages = array( $langCode => $languageFallbackChain );
+		} else {
+			$languages = array( $langCode );
+		}
+		$serializationOptions->setLanguages( $languages );
 
 		foreach( $entities as $prefixedId => $entity ) {
 			if( $entity === null ) {
