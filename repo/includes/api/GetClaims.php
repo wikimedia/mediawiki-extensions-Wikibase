@@ -129,7 +129,7 @@ class GetClaims extends ApiWikibase {
 		$claims = array();
 		$params = $this->extractRequestParams();
 
-		// TODO: we probably need this elswhere, so make filter methods in Claim
+		// TODO: we probably need this elsewhere, so make filter methods in Claim
 		$rank = isset( $params['rank'] ) ? ClaimSerializer::unserializeRank( $params['rank'] ) : false;
 		$propertyId = isset( $params['property'] ) ? $params['property'] : false;
 
