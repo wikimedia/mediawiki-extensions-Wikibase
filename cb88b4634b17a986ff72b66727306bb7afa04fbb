@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_a4647724",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-06T03:11:16Z",
+      "side": 1,
+      "message": "what happened here?",
+      "revId": "cb88b4634b17a986ff72b66727306bb7afa04fbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_e46e6f00",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-06T03:11:16Z",
+      "side": 1,
+      "message": "is this from a rebase?",
+      "revId": "cb88b4634b17a986ff72b66727306bb7afa04fbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_4474a3ce",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-06T03:11:16Z",
+      "side": 1,
+      "message": "is this from a rebase?",
+      "revId": "cb88b4634b17a986ff72b66727306bb7afa04fbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
