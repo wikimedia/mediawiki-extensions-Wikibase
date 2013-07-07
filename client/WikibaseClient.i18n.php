@@ -1546,7 +1546,9 @@ $messages['gu'] = array(
 $messages['he'] = array(
 	'wikibase-client-desc' => 'לקוח להרחבה Wikibase',
 	'specialpages-group-wikibaseclient' => 'לקוח ויקינתונים',
+	'tooltip-t-wikibase' => 'קישור לפריט המשויך במאגר הנתונים',
 	'wikibase-after-page-move' => 'אפשר גם [$1 לעדכן] את הפריט המשויך בוויקינתונים כדי לתחזק את קישורי השפה בדף שהועבר.',
+	'wikibase-after-page-move-queued' => '[$1 פריט הוויקינתונים] שמשויך לדף הזה יעודכן באופן אוטומטי בקרוב.',
 	'wikibase-comment-remove' => 'פריט הוויקינתונים המשויך נמחק. קישורי שפה הוסרו.',
 	'wikibase-comment-linked' => 'פריט ויקינתונים קוּשר לדף הזה.',
 	'wikibase-comment-unlink' => 'הדף הזה נותק מִפריט ויקינתונים. קישורי השפה הוסרו.',
@@ -1556,6 +1558,7 @@ $messages['he'] = array(
 	'wikibase-comment-sitelink-change' => 'קישור השפה שוּנה מ־$1 אל $2',
 	'wikibase-comment-sitelink-remove' => 'קישור השפה הוסר: $1',
 	'wikibase-comment-multi' => '{{PLURAL:$1|שינוי אחד|$1 שינויים}}',
+	'wikibase-dataitem' => 'פריט נתונים',
 	'wikibase-editlinks' => 'עריכת קישורים',
 	'wikibase-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
 	'wikibase-linkitem-addlinks' => 'הוספת קישורים',
@@ -1660,11 +1663,12 @@ $messages['hsb'] = array(
 	'wikibase-comment-linked' => 'Element z Wikidata je so z tutej stronu zwjazał.',
 	'wikibase-comment-unlink' => 'Zwisk strony z elementom Wikidata je so wotstronił. Mjezyrěčne wotkazy wotstronjene.',
 	'wikibase-comment-restore' => 'Přirjadowany element Wikidata zaso wobnowjeny. Mjezyrěčne wotkazy wobnowjene.',
-	'wikibase-comment-update' => 'Mjezyrěčne wotkazy su so zaktualizowali.', # Fuzzy
+	'wikibase-comment-update' => 'Element Wikidata je so změnił',
 	'wikibase-comment-sitelink-add' => 'Mjezyrěčny wotkaz přidaty: $1',
 	'wikibase-comment-sitelink-change' => 'Mjezyrěčny wotkaz změnjeny wot $1 do $2',
 	'wikibase-comment-sitelink-remove' => 'Mjezyrěčny wotkaz wotstronjeny: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|změna|změnje|změny|změnow}}',
+	'wikibase-dataitem' => 'Datowy element',
 	'wikibase-editlinks' => 'Wotkazy wobdźěłać',
 	'wikibase-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
 	'wikibase-linkitem-addlinks' => 'Wotkazy přidać',
@@ -1677,7 +1681,7 @@ $messages['hsb'] = array(
 	'wikibase-linkitem-input-site' => 'Rěč:',
 	'wikibase-linkitem-input-page' => 'Strona:',
 	'wikibase-linkitem-invalidsite' => 'Njeznate abo njepłaćiwe sydło wubrane',
-	'wikibase-linkitem-confirmitem-text' => 'Strona, kotruž sy wubrał, je hižo z [$1 elementom w našim centralnym datowym repozitoriju] zwjazany. Prošu wobkruć, zo slědowace strony su te, kotrež chceš z tutej stronu zwjazać.',
+	'wikibase-linkitem-confirmitem-text' => 'Strona, kotruž sy wubrał, je hižo z [$1 elementom w našim centralnym datowym repozitoriju] zwjazany. Prošu wobkruć, zo {{PLURAL:$2|slědowaca strona|slědowacej stronje|slědowace strony}} {{PLURAL:$2|je ta, kotruž|stej tej, kotrejž|su te, kotrež}} chceš z tutej stronu zwjazać.',
 	'wikibase-linkitem-confirmitem-button' => 'Wobkrućić',
 	'wikibase-linkitem-not-loggedin-title' => 'Dyrbiš přizjewjeny być',
 	'wikibase-linkitem-not-loggedin' => 'Dyrbiš w tutym wikiju a w [$1 centralnym datowym repozitoriju] přizjewjeny być, zo by tutu funkciju wužiwał.',
@@ -1689,6 +1693,8 @@ $messages['hsb'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Změny Wikidata w aktualnych změnach pokazać',
 	'wikibase-watchlist-show-changes-pref' => 'Změny Wikidata w twojich wobkedźbowankach pokazać',
 	'wikibase-error-invalid-entity-id' => 'Zapodaty ID je systemej njeznaty. Prošu wužij płaćiwy entitowy ID.',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" płaćiwy rěčny kod njeje.',
+	'wikibase-pageinfo-entity-id' => 'ID elementa Wikidata',
 );
 
 /** Hungarian (magyar)
@@ -2628,6 +2634,7 @@ $messages['mt'] = array(
 $messages['nb'] = array(
 	'wikibase-client-desc' => 'Klientutvidelse for Wikibase, det strukturerte datalageret',
 	'specialpages-group-wikibaseclient' => 'Wikidata klient',
+	'tooltip-t-wikibase' => 'Lenke til koblet datalagerelement',
 	'wikibase-after-page-move' => 'Du kan også [$1 oppdatere] det tilknyttede Wikidata-elementet for å bevare språklenkene til den flyttede siden.',
 	'wikibase-comment-remove' => 'Det tilknyttede Wikidata-element har blitt slettet. Språklenker har blitt fjernet.',
 	'wikibase-comment-linked' => 'Et Wikidata-element har blitt knyttet til denne siden.',
@@ -2673,6 +2680,39 @@ $messages['nb'] = array(
 	'wikibase-pageinfo-entity-id' => 'Wikidata element ID',
 	'wikibase-pageinfo-entity-id-none' => 'Ingen',
 	'wikibase-property-render-error' => 'Klarte ikke å vise egenskapen $1: $2',
+);
+
+/** Low Saxon (Netherlands) (Nedersaksies)
+ * @author Servien
+ */
+$messages['nds-nl'] = array(
+	'wikibase-client-desc' => 'Kliënt veur de Wikibase-uutbreiding',
+	'specialpages-group-wikibaseclient' => 'Wikidata-kliënt',
+	'wikibase-comment-linked' => 'Der is n Wikidata-onderwarp ekoppeld an disse zied.',
+	'wikibase-comment-update' => 'Wikidata-onderwarp bie-ewörken',
+	'wikibase-comment-sitelink-add' => 'Taalverwiezing derbie ezet: $1',
+	'wikibase-comment-sitelink-change' => 'Taalverwiezing ewiezigd van $1 naor $2',
+	'wikibase-comment-sitelink-remove' => 'Taalverwiezing vortedaon: $1',
+	'wikibase-comment-multi' => '$1 {{PLURAL:$1|wieziging|wiezigingen}}',
+	'wikibase-dataitem' => 'Gegevensonderwarp',
+	'wikibase-editlinks' => 'Verwiezingen bewarken',
+	'wikibase-editlinkstitle' => 'Verwiezingen veur aandere talen bewarken',
+	'wikibase-linkitem-addlinks' => 'Verwiezingen derbie zetten',
+	'wikibase-linkitem-close' => 'Vienster sluten en de zied opniej laojen',
+	'wikibase-linkitem-title' => 'Koppelen mit zied',
+	'wikibase-linkitem-linkpage' => 'Koppelen mit zied',
+	'wikibase-linkitem-input-site' => 'Taal:',
+	'wikibase-linkitem-input-page' => 'Zied:',
+	'wikibase-linkitem-invalidsite' => 'Je hebben n onbekende of ongeldige webstee ekeuzen',
+	'wikibase-linkitem-confirmitem-button' => 'Bevestigen',
+	'wikibase-linkitem-not-loggedin-title' => 'Je mutten an-emeld ween',
+	'wikibase-rc-hide-wikidata' => '$1 wikidata',
+	'special-unconnectedpages' => 'Ziejen die niet ekoppeld bin an n onderwarp',
+	'wikibase-unconnectedpages-legend' => 'Instellingen veur ongekoppelde ziejen',
+	'wikibase-unconnectedpages-page' => 'Lieste beginnen mit zied:',
+	'wikibase-unconnectedpages-submit' => 'Zeuk',
+	'wikibase-unconnectedpages-invalid-language' => '"$1" is gien geldige taalkode.',
+	'wikibase-pageinfo-entity-id-none' => 'Gien',
 );
 
 /** Dutch (Nederlands)
