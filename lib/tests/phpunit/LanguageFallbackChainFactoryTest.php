@@ -44,11 +44,23 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 		$this->assertChainEquals( $expected, $chain );
 	}
 
+	/**
+	 * @group WikibaseLib
+	 * @dataProvider providerNewFromLanguage
+	 */
+	public function testNewFromLanguageCode( $lang, $mode, $expected ) {
+		$factory = new LanguageFallbackChainFactory();
+		$chain = $factory->newFromLanguageCode( $lang, $mode )->getFallbackChain();
+		$this->assertChainEquals( $expected, $chain );
+	}
+
 	public static function providerNewFromLanguage() {
 		return array(
 			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, array( 'en' ) ),
 			array( 'en', LanguageFallbackChainFactory::FALLBACK_VARIANTS, array() ),
 			array( 'en', LanguageFallbackChainFactory::FALLBACK_OTHERS, array() ),
+
+			array( 'zh-classical', LanguageFallbackChainFactory::FALLBACK_SELF, array( 'lzh' ) ),
 
 			array( 'de-formal', LanguageFallbackChainFactory::FALLBACK_ALL, array( 'de-formal', 'de', 'en' ) ),
 			// Repeated to test caching
@@ -152,6 +164,22 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @dataProvider provideNewFromLanguageCodeException
+	 * @expectedException MWException
+	 */
+	public function testNewFromLanguageCodeException( $langCode ) {
+		$factory = new LanguageFallbackChainFactory();
+		$factory->newFromLanguageCode( $langCode );
+	}
+
+	public function provideNewFromLanguageCodeException() {
+		return array(
+			array( ':' ),
+			array( '/' ),
+		);
+	}
+
+	/**
 	 * @group WikibaseLib
 	 */
 	public function testNewFromContext() {
@@ -179,6 +207,39 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 				array(
 					'de-formal',
 					'de',
+					'en',
+				),
+			),
+			array(
+				array(
+					'N' => array( '/' ),
+				),
+				array(
+				),
+			),
+			array(
+				array(
+					'N' => array( ':', 'en' ),
+				),
+				array(
+					'en',
+				),
+			),
+			array(
+				array(
+					'N' => array( 'unknown' ),
+				),
+				array(
+					'unknown',
+					'en',
+				),
+			),
+			array(
+				array(
+					'N' => array( 'zh-classical' ),
+				),
+				array(
+					'lzh',
 					'en',
 				),
 			),
