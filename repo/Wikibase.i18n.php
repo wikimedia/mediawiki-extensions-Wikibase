@@ -331,7 +331,7 @@ to find out where it went.',
 	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
 	'wikibase-property-summary-wbeditentity-create' => 'Created a new property',
 	'wikibase-property-summary-wbeditentity-update' => 'Updated a property',
-	'wikibase-property-summary-wbeditentity-override' => 'Overrided a property',
+	'wikibase-property-summary-wbeditentity-override' => 'Overrode a property',
 	'wikibase-property-summary-wbsetlabel-set' => 'Changed [$2] label',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Removed [$2] label',
 	'wikibase-property-summary-wbsetdescription-set' => 'Changed [$2] description',
@@ -378,7 +378,7 @@ to find out where it went.',
 	'wikibase-listdatatypes-string-body' => 'Literal data field for a string of glyphs. Typical use are identifiers that have written forms which do not depend on the language of the reader.
 * value – explicit value for the language specific variant string',
 	'wikibase-listdatatypes-time-head' => 'Time',
-	'wikibase-listdatatypes-time-body' => 'Literal data field for a time value. Given as a time with some precision and boundaries. The time is always saved internally in the Proleptic Gregorian format, but can use other formats during parsing and formating.(?)
+	'wikibase-listdatatypes-time-body' => 'Literal data field for a time value. Given as a time with some precision and boundaries. The time is always saved internally in the Proleptic Gregorian format, but can use other formats during parsing and formatting.(?)
 * time – explicit value for point in time, represented per ISO8601, the year always having 11 digits and the date always being signed, in the format +00000002013-01-01T00:00:00Z
 * timezone – explicit value as a signed integer. Timezone information as an offset from UTC in minutes.
 * before – explicit integer value for how many units after the given time it could be. The unit is given by the precision.
