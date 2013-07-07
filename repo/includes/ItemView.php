@@ -23,7 +23,7 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 */
-	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+	public function getInnerHtml( EntityContent $entity, LanguageFallbackChain $lang = null, $editable = true ) {
 		$html = parent::getInnerHtml( $entity, $lang, $editable );
 
 		// add site-links to default entity stuff
@@ -38,11 +38,11 @@ class ItemView extends EntityView {
 	 * @since 0.1
 	 *
 	 * @param EntityContent $itemContent the entity to render
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param LanguageFallbackChain|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForSiteLinks( EntityContent $item, Language $lang = null, $editable = true ) {
+	public function getHtmlForSiteLinks( EntityContent $item, LanguageFallbackChain $lang = null, $editable = true ) {
 		$groups = Settings::get( "siteLinkGroups" );
 		$html = '';
 
@@ -60,11 +60,11 @@ class ItemView extends EntityView {
 	 *
 	 * @param EntityContent $itemContent the entity to render
 	 * @param string $group a site group ID
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param LanguageFallbackChain|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForSiteLinkGroup( EntityContent $itemContent, $group, Language $lang = null, $editable = true ) {
+	public function getHtmlForSiteLinkGroup( EntityContent $itemContent, $group, LanguageFallbackChain $lang = null, $editable = true ) {
 		/**
 		 * @var ItemContent $itemContent
 		 */
