@@ -331,7 +331,7 @@ to find out where it went.',
 	'wikibase-property-summary-wbcreate-new' => 'Created a new property', // legacy, backwards compatibility
 	'wikibase-property-summary-wbeditentity-create' => 'Created a new property',
 	'wikibase-property-summary-wbeditentity-update' => 'Updated a property',
-	'wikibase-property-summary-wbeditentity-override' => 'Overrided a property',
+	'wikibase-property-summary-wbeditentity-override' => 'Overrode a property',
 	'wikibase-property-summary-wbsetlabel-set' => 'Changed [$2] label',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Removed [$2] label',
 	'wikibase-property-summary-wbsetdescription-set' => 'Changed [$2] description',
