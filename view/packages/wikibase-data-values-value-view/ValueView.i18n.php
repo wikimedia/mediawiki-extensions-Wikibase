@@ -189,6 +189,7 @@ $messages['ca'] = array(
  * @author Lloffiwr
  */
 $messages['cy'] = array(
+	'valueview-desc' => "Elfennau o'r rhyngwyneb sy'n arddangos gwerthoedd data a'u golygu",
 	'valueview-expert-advancedadjustments' => 'cymhwysiadau uwch',
 	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Nid ydym yn gallu trin gwerthoedd "$1" hyd yn hyn.',
 	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Nid ydym yn gallu trin gwerthoedd o\'r math "$1" o ddata hyd yn hyn.',
@@ -388,10 +389,11 @@ $messages['he'] = array(
 );
 
 /** Upper Sorbian (hornjoserbsce)
+ * @author Michawiki
  */
 $messages['hsb'] = array(
-	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Wobdźěłowanje datowych hódnotow "$1" so hišće njepodpěruje.', # Fuzzy
-	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Wobdźěłowanje hódnotow za datowy typ "$1" hišće so njepodpěruje.', # Fuzzy
+	'valueview-expert-unsupportedvalue-unsupporteddatavalue' => 'Wobdźěłowanje hódnotow "$1" so hišće njepodpěruje.',
+	'valueview-expert-unsupportedvalue-unsupporteddatatype' => 'Wobdźěłowanje hódnotow za datowy typ "$1" hišće so njepodpěruje.',
 );
 
 /** Hungarian (magyar)
