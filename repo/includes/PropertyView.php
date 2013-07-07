@@ -37,11 +37,11 @@ class PropertyView extends EntityView {
 	 * @see EntityView::getInnerHtml
 	 *
 	 * @param EntityContent $property
-	 * @param \Language|null $lang
+	 * @param LanguageFallbackChain|null $lang
 	 * @param bool $editable
 	 * @return string
 	 */
-	public function getInnerHtml( EntityContent $property, Language $lang = null, $editable = true ) {
+	public function getInnerHtml( EntityContent $property, LanguageFallbackChain $lang = null, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
 		$html = parent::getInnerHtml( $property, $lang, $editable );
@@ -66,17 +66,24 @@ class PropertyView extends EntityView {
 	 * @since 0.1
 	 *
 	 * @param \DataTypes\DataType $dataType the data type to render
-	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param LanguageFallbackChain|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForDataType( \DataTypes\DataType $dataType, Language $lang = null, $editable = true ) {
-		if( $lang === null ) {
-			$lang = $this->getLanguage();
+	public function getHtmlForDataType( \DataTypes\DataType $dataType, LanguageFallbackChain $lang = null, $editable = true ) {
+		$languageCode = null;
+		if ( $lang ) {
+			$chain = $lang->getFallbackChain();
+			if ( count( $chain ) > 0 ) {
+				$languageCode = $chain[0]->getLanguageCode();
+			}
+		}
+		if ( $languageCode === null ) {
+			$languageCode = $this->getLanguage()->getCode();
 		}
 		return wfTemplate( 'wb-property-datatype',
 			wfMessage( 'wikibase-datatype-label' )->text(),
-			htmlspecialchars( $dataType->getLabel( $lang->getCode() ) )
+			htmlspecialchars( $dataType->getLabel( $languageCode ) )
 		);
 	}
 }
