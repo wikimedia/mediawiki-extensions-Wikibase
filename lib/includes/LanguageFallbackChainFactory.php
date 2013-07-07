@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Language, IContextSource;
+use Language, IContextSource, MWException;
 
 /**
  * Object creating LanguageFallbackChain objects in Wikibase.
@@ -84,32 +84,69 @@ class LanguageFallbackChainFactory {
 	}
 
 	/**
-	 * Build fallback chain array for a given language.
+	 * Get the fallback chain based a single language code, and specified fallback level.
 	 *
-	 * @param Language $language
+	 * @param string $language
+	 * @param $mode bitfield of self::FALLBACK_*
+	 *
+	 * @return LanguageFallbackChain
+	 */
+	public function newFromLanguageCode( $languageCode, $mode = self::FALLBACK_ALL ) {
+
+		$validatedLanguageCode = LanguageWithConversion::validateLanguageCode( $languageCode );
+		if ( $validatedLanguageCode === null ) {
+			throw new MWException( __METHOD__ . ': invalid language code ' . $languageCode );
+		}
+		$languageCode = $validatedLanguageCode;
+
+		if ( isset( $this->languageCache[$languageCode][$mode] ) ) {
+			return $this->languageCache[$languageCode][$mode];
+		}
+
+		$chain = $this->buildFromLanguage( $languageCode, $mode );
+		$languageFallbackChain = new LanguageFallbackChain( $chain );
+
+		$this->languageCache[$languageCode][$mode] = $languageFallbackChain;
+
+		return $languageFallbackChain;
+	}
+
+	/**
+	 * Build fallback chain array for a given language or validated language code.
+	 *
+	 * @param $language Language object or language code as string
 	 * @param $mode bitfield of self::FALLBACK_*
 	 * @param LanguageFallbackChain[] $chain for recursive calls
 	 * @param array $fetched for recursive calls
 	 *
 	 * @return LanguageWithConversion[]
 	 */
-	public function buildFromLanguage( Language $language, $mode, &$chain = array(), &$fetched = array() ) {
+	public function buildFromLanguage( $language, $mode, &$chain = array(), &$fetched = array() ) {
 		wfProfileIn( __METHOD__ );
 
+		if ( is_string( $language ) ) {
+			$languageCode = $language;
+		} else {
+			$languageCode = $language->getCode();
+		}
+
 		if ( $mode & self::FALLBACK_SELF ) {
-			if ( !isset( $fetched[$language->getCode()] ) ) {
+			if ( !isset( $fetched[$languageCode] ) ) {
 				$chain[] = LanguageWithConversion::factory( $language );
-				$fetched[$language->getCode()] = true;
+				$fetched[$languageCode] = true;
 			}
 		}
 
 		if ( $mode & self::FALLBACK_VARIANTS ) {
+			if ( is_string( $language ) ) {
+				$language = Language::factory( $language );
+			}
 			$parentLanguage = $language->getParentLanguage();
 			if ( $parentLanguage ) {
 				// It's less likely to trigger conversion mistakes by converting
 				// zh-tw to zh-hk first instead of converting zh-cn to zh-tw.
 				$variantFallbacks = $parentLanguage->getConverter()
-					->getVariantFallbacks( $language->getCode() );
+					->getVariantFallbacks( $languageCode );
 				if ( is_array( $variantFallbacks ) ) {
 					$variants = array_unique( array_merge(
 						$variantFallbacks, $parentLanguage->getVariants()
@@ -119,13 +156,12 @@ class LanguageFallbackChainFactory {
 				}
 
 				foreach ( $variants as $variant ) {
-					$variantLanguage = Language::factory( $variant );
-					if ( isset( $fetched[$variantLanguage->getCode()] ) ) {
+					if ( isset( $fetched[$variant] ) ) {
 						continue;
 					}
 
-					$chain[] = LanguageWithConversion::factory( $language, $variantLanguage );
-					$fetched[$variantLanguage->getCode()] = true;
+					$chain[] = LanguageWithConversion::factory( $language, $variant );
+					$fetched[$variant] = true;
 				}
 			}
 		}
@@ -138,8 +174,8 @@ class LanguageFallbackChainFactory {
 			$recursiveMode = $mode;
 			$recursiveMode &= self::FALLBACK_VARIANTS;
 			$recursiveMode |= self::FALLBACK_SELF;
-			foreach ( $language->getFallbackLanguages() as $other ) {
-				$this->buildFromLanguage( Language::factory( $other ), $recursiveMode, $chain, $fetched );
+			foreach ( Language::getFallbacksFor( $languageCode ) as $other ) {
+				$this->buildFromLanguage( $other, $recursiveMode, $chain, $fetched );
 			}
 		}
 
@@ -217,7 +253,11 @@ class LanguageFallbackChainFactory {
 		foreach ( $babel as $languageCodes ) { // Already sorted when added
 			foreach ( array( self::FALLBACK_SELF, self::FALLBACK_VARIANTS ) as $mode ) {
 				foreach ( $languageCodes as $languageCode ) {
-					$this->buildFromLanguage( Language::factory( $languageCode ), $mode, $chain, $fetched );
+					$languageCode = LanguageWithConversion::validateLanguageCode( $languageCode );
+					if ( $languageCode === null ) {
+						continue;
+					}
+					$this->buildFromLanguage( $languageCode, $mode, $chain, $fetched );
 				}
 			}
 		}
@@ -225,7 +265,11 @@ class LanguageFallbackChainFactory {
 		// Second pass to get other languages from system fallback chain
 		foreach ( $babel as $languageCodes ) {
 			foreach ( $languageCodes as $languageCode ) {
-				$this->buildFromLanguage( Language::factory( $languageCode ),
+				$languageCode = LanguageWithConversion::validateLanguageCode( $languageCode );
+				if ( $languageCode === null ) {
+					continue;
+				}
+				$this->buildFromLanguage( $languageCode,
 					self::FALLBACK_OTHERS | self::FALLBACK_VARIANTS, $chain, $fetched
 				);
 			}
