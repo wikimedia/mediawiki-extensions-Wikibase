@@ -174,8 +174,8 @@ class MultiLangSerializationOptions extends SerializationOptions {
 			// back-compat
 			if ( is_numeric( $languageCode ) ) {
 				$languageCode = $languageFallbackChain;
-				$languageFallbackChain = $this->getLanguageFallbackChainFactory()->newFromLanguage(
-					Language::factory( $languageCode ), LanguageFallbackChainFactory::FALLBACK_SELF
+				$languageFallbackChain = $this->getLanguageFallbackChainFactory()->newFromLanguageCode(
+					$languageCode, LanguageFallbackChainFactory::FALLBACK_SELF
 				);
 			}
 
