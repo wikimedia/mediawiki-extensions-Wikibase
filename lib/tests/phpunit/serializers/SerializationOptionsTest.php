@@ -58,9 +58,7 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 
 		foreach ( $languages as $languageKey => &$languageValue ) {
 			if ( !is_numeric( $languageKey ) ) {
-				$languageValue = $factory->newFromLanguage(
-					\Language::factory( $languageKey ), $languageValue
-				);
+				$languageValue = $factory->newFromLanguageCode( $languageKey, $languageValue );
 			}
 		}
 
