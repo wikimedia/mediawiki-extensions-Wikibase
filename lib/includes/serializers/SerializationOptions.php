@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Lib\Serializers;
-use Language;
 use MWException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\EntityId;
@@ -174,8 +173,8 @@ class MultiLangSerializationOptions extends SerializationOptions {
 			// back-compat
 			if ( is_numeric( $languageCode ) ) {
 				$languageCode = $languageFallbackChain;
-				$languageFallbackChain = $this->getLanguageFallbackChainFactory()->newFromLanguage(
-					Language::factory( $languageCode ), LanguageFallbackChainFactory::FALLBACK_SELF
+				$languageFallbackChain = $this->getLanguageFallbackChainFactory()->newFromLanguageCode(
+					$languageCode, LanguageFallbackChainFactory::FALLBACK_SELF
 				);
 			}
 
