@@ -24,7 +24,7 @@ return call_user_func( function() {
 // container reserved for widgets, will be displayed on the right side if there is space
 // TODO: no point in inserting this here, is there? Should be generated in JS!
 <<<HTML
-<div id="wb-$1-$2" class="wb-entity wb-$1" lang="$3" dir="$4">$5</div>
+<div id="wb-$1-$2" class="wb-entity wb-$1" lang="mul" dir="auto">$3</div>
 <div id="wb-widget-container-$2" class="wb-widget-container"></div>
 HTML;
 
@@ -59,9 +59,9 @@ HTML;
 <<<HTML
 <div class="wb-claim-section wb-claim-section-$1">
 	<div class="wb-claim-section-name">
-		<div class="wb-claim-name" dir="auto">$2</div>
+		<div class="wb-claim-name" lang="$3" dir="$4">$2</div>
 	</div>
-	$3 <!-- [1,*] wb-claim -->
+	$5 <!-- [1,*] wb-claim -->
 </div>
 HTML;
 
