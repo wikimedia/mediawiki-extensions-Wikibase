@@ -159,14 +159,8 @@ class PermissionsTest extends ModifyEntityBase {
 		) );
 	}
 
-
-	function provideGetEntitiesPermissions() {
-		$permissions = $this->provideReadPermissions();
-		return $permissions;
-	}
-
 	/**
-	 * @dataProvider provideGetEntitiesPermissions
+	 * @dataProvider provideReadPermissions
 	 */
 	function testGetEntities( $permissions, $expectedError ) {
 		$params = array(
@@ -176,7 +170,19 @@ class PermissionsTest extends ModifyEntityBase {
 		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError );
 	}
 
-	function provideAddItemPermissions() {
+	/**
+	 * @dataProvider provideReadPermissions
+	 */
+	function testSearchEntities( $permissions, $expectedError ) {
+		$params = array(
+			'search' => "Oslo",
+			'language' => "en",
+		);
+
+		$this->doPermissionsTest( 'wbsearchentities', $params, $permissions, $expectedError );
+	}
+
+	function provideCreateItemPermissions() {
 		$permissions = $this->provideEditPermissions();
 
 		$permissions[] = array( //5
@@ -200,9 +206,9 @@ class PermissionsTest extends ModifyEntityBase {
 	}
 
 	/**
-	 * @dataProvider provideAddItemPermissions
+	 * @dataProvider provideCreateItemPermissions
 	 */
-	function testAddItem( $permissions, $expectedError ) {
+	function testCreateItem( $permissions, $expectedError ) {
 		$itemData = array(
 			'labels' => array("en" => array( "language" => 'en', "value" => 'Test' ) ),
 		);
@@ -301,6 +307,33 @@ class PermissionsTest extends ModifyEntityBase {
 		);
 
 		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError );
+	}
+
+	function provideSetAliasPermissions() {
+		$permissions = $this->provideEditPermissions();
+
+		$permissions[] = array( //5
+			array( // permissions
+				'*'    => array( 'alias-update' => false ),
+				'user' => array( 'alias-update' => false )
+			),
+			'cant-edit' // error
+		);
+
+		return $permissions;
+	}
+
+	/**
+	 * @dataProvider provideSetAliasPermissions
+	 */
+	function testSetAlias( $permissions, $expectedError ) {
+		$params = array(
+			'id' => $this->getEntityId( "Oslo" ),
+			'language' => 'en',
+			'add' => 'Oosslloo',
+		);
+
+		$this->doPermissionsTest( 'wbsetaliases', $params, $permissions, $expectedError );
 	}
 
 }
