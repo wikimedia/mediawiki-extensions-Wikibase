@@ -148,10 +148,24 @@
 			} );
 		}
 
-		// handle edit restrictions
-		// TODO/FIXME: most about this system sucks, especially the part where the Button constructor is hacked to disable
-		//             all buttons when this is fired. it also doesn't effect any edit tools added after this point and
-		//             edit tool initialized above do not even know that they are disabled.
+		// Handle edit restrictions:
+		$( wb )
+		.on( 'restrictEntityPageActions blockEntityPageActions', function( event ) {
+			$( '.wikibase-toolbarbutton' ).each( function( i, node ) {
+				var toolbarButton = $( node ).data( 'toolbarbutton' );
+
+				toolbarButton.disable();
+
+				var messageId = ( event.type === 'blockEntityPageActions' )
+					? 'wikibase-blockeduser-tooltip-message'
+					: 'wikibase-restrictionedit-tooltip-message';
+
+				toolbarButton.setTooltip( mw.message( messageId ).escaped() );
+
+				toolbarButton._tooltip.setGravity( 'nw' );
+			} );
+		} );
+
 		if (
 			mw.config.get( 'wgRestrictionEdit' ) !== null &&
 			mw.config.get( 'wgRestrictionEdit' ).length === 1
