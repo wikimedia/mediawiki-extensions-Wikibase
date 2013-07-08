@@ -44,7 +44,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class GetClaims extends ApiWikibase {
 
-	// TODO: example
 	// TODO: rights
 	// TODO: conflict detection
 
@@ -129,7 +128,7 @@ class GetClaims extends ApiWikibase {
 		$claims = array();
 		$params = $this->extractRequestParams();
 
-		// TODO: we probably need this elswhere, so make filter methods in Claim
+		// TODO: we probably need this elsewhere, so make filter methods in Claim
 		$rank = isset( $params['rank'] ) ? ClaimSerializer::unserializeRank( $params['rank'] ) : false;
 		$propertyId = isset( $params['property'] ) ? $params['property'] : false;
 
@@ -264,8 +263,10 @@ class GetClaims extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			// TODO
-			// 'ex' => 'desc'
+			"api.php?action=wbgetclaims&entity=q42" => "Get claims for item with ID q42",
+			"api.php?action=wbgetclaims&entity=q42&property=p2" => "Get claims for item with ID q42 and property with ID p2",
+			"api.php?action=wbgetclaims&entity=q42&rank=normal" => "Get claims for item with ID q42 that are ranked as normal",
+			'api.php?action=wbgetclaims&claim=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' => "Get claim with GUID of q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 		);
 	}
 

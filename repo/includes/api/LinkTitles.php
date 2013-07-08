@@ -252,6 +252,9 @@ class LinkTitles extends ApiWikibase {
 				'and the requester should then start using the new token from the next request, possibly when',
 				'repeating a failed request.'
 			),
+			'bot' => array( 'Mark this edit as bot',
+				'This URL flag will only be respected if the user belongs to the group "bot".'
+			),
 		) );
 	}
 
