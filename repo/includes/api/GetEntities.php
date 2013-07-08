@@ -129,7 +129,7 @@ class GetEntities extends ApiWikibase {
 		if ( !$entityId ) {
 			//TODO: report as missing instead?
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "Invalid id: $id", 'no-such-entity-id' );
+			$this->dieUsage( "Invalid id: $id", 'no-such-entity' );
 		}
 
 		// key should be numeric to get the correct behavior

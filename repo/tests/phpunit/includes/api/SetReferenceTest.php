@@ -142,7 +142,7 @@ class SetReferenceTest extends \ApiTestCase {
 			$this->assertFalse( true, 'Invalid request should raise an exception' );
 		}
 		catch ( \UsageException $e ) {
-			$this->assertEquals( 'setreference-no-such-reference', $e->getCodeString(), 'Invalid request raised correct error' );
+			$this->assertEquals( 'no-such-reference', $e->getCodeString(), 'Invalid request raised correct error' );
 		}
 	}
 
@@ -176,8 +176,8 @@ class SetReferenceTest extends \ApiTestCase {
 		$refHash = $reference->getHash();
 
 		return array(
-			array( 'xyz', $snakHash, $refHash, 'setreference-invalid-guid' ),
-			array( 'x$y$z', $snakHash, $refHash, 'setreference-invalid-guid' )
+			array( 'xyz', $snakHash, $refHash, 'invalid-guid' ),
+			array( 'x$y$z', $snakHash, $refHash, 'invalid-guid' )
 		);
 	}
 

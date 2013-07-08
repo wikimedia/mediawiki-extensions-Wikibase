@@ -80,14 +80,14 @@ class RemoveQualifiers extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validateFormat( $params['claim'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid', 'removequalifiers-invalid-guid' );
+			$this->dieUsage( $this->msg( 'wikibase-api-invalid-guid' )->text(), 'invalid-guid' );
 		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'removequalifiers-entity-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -110,7 +110,7 @@ class RemoveQualifiers extends ApiWikibase {
 		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
 			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
 				// TODO: does $qualifierHash need to be escaped?
-				$this->dieUsage( 'There is no qualifier with hash ' . $qualifierHash, 'removequalifiers-qualifier-not-found' );
+				$this->dieUsage( 'There is no qualifier with hash ' . $qualifierHash, 'no-such-qualifier' );
 			}
 
 			$qualifiers->removeSnakHash( $qualifierHash );
@@ -129,7 +129,7 @@ class RemoveQualifiers extends ApiWikibase {
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'No such claim', 'removequalifiers-claim-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-claim' )->text(), 'no-such-claim' );
 		}
 
 		$claim = $claims->getClaimWithGuid( $claimGuid );

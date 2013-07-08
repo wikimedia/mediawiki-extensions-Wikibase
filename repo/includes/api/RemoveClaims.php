@@ -167,7 +167,7 @@ class RemoveClaims extends ApiWikibase {
 
 				$guids[$entityId][] = $guid;
 			} else {
-				$this->dieUsage( 'Invalid claim guid', 'removeclaims-invalid-guid' );
+				$this->dieUsage( $this->msg( 'wikibase-api-invalid-guid' )->text(), 'invalid-guid' );
 			}
 		}
 
@@ -226,7 +226,7 @@ class RemoveClaims extends ApiWikibase {
 			$entityId = EntityId::newFromPrefixedId( $id );
 
 			if ( $entityId === null ) {
-				$this->dieUsage( 'Invalid entity id provided', 'removeclaims-invalid-entity-id' );
+				$this->dieUsage( 'Invalid entity id provided', 'no-such-entity' );
 			}
 
 			$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
@@ -234,7 +234,7 @@ class RemoveClaims extends ApiWikibase {
 			$content = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 			if ( $content === null ) {
-				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'removeclaims-entity-not-found' );
+				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'no-such-entity' );
 			}
 
 			$contents[] = $content;

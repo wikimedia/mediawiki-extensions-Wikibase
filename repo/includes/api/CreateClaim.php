@@ -94,16 +94,16 @@ class CreateClaim extends ModifyClaim {
 		}
 		catch ( IllegalValueException $ex ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $ex->getMessage(), 'claim-invalid-snak' );
+			$this->dieUsage( $ex->getMessage(), 'invalid-snak' );
 		}
 		catch ( InvalidArgumentException $ex ) {
 			// shouldn't happen, but might.
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $ex->getMessage(), 'claim-invalid-snak' );
+			$this->dieUsage( $ex->getMessage(), 'invalid-snak' );
 		}
 		catch ( ParseException $parseException ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $parseException->getMessage(), 'claim-invalid-guid' );
+			$this->dieUsage( $parseException->getMessage(), 'invalid-guid' );
 		}
 
 		$this->snakValidation->validateSnak( $snak );
@@ -221,7 +221,7 @@ class CreateClaim extends ModifyClaim {
 		$entityId = $entityIdParser->parse( $params['property'] );
 
 		if ( $entityId->getEntityType() !== Property::ENTITY_TYPE ) {
-			$this->dieUsage( "Property expected, got " . $entityId->getEntityType(), 'claim-invalid-snak' );
+			$this->dieUsage( "Property expected, got " . $entityId->getEntityType(), 'invalid-snak' );
 		}
 
 		return $factory->newSnak(

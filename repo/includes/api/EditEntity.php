@@ -327,7 +327,7 @@ class EditEntity extends ModifyEntity {
 				$linkSite = $sites->getSite( $globalSiteId );
 			} else {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'site-not-found' );
+				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
 			}
 
 			if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
@@ -381,7 +381,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( is_null( $data ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-json-invalid' )->text(), 'json-invalid' );
+			$this->dieUsage( $this->msg( 'wikibase-api-invalid-json' )->text(), 'invalid-json' );
 		}
 
 		if ( !is_array( $data ) ) { // NOTE: json_decode will decode any JS literal or structure, not just objects!

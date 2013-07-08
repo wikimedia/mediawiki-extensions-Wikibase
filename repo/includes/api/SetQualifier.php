@@ -154,14 +154,14 @@ class SetQualifier extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid', 'setqualifier-invalid-guid' );
+			$this->dieUsage( $this->msg( 'wikibase-api-invalid-guid' )->text(), 'invalid-guid' );
 		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setqualifier-entity-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -184,7 +184,7 @@ class SetQualifier extends ApiWikibase {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'No such claim', 'setqualifier-claim-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-claim' )->text(), 'no-such-claim' );
 		}
 
 		$claim = $claims->getClaimWithGuid( $claimGuid );
@@ -224,7 +224,7 @@ class SetQualifier extends ApiWikibase {
 	 */
 	protected function updateQualifier( Snaks $qualifiers, $snakHash ) {
 		if ( !$qualifiers->hasSnakHash( $snakHash ) ) {
-			$this->dieUsage( 'No such qualifier', 'setqualifier-qualifier-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-qualifier' )->text(), 'no-such-qualifier' );
 		}
 
 		$params = $this->extractRequestParams();
@@ -258,7 +258,7 @@ class SetQualifier extends ApiWikibase {
 		} catch ( IllegalValueException $ex ) {
 			//Note: This handles failures during snak instantiation, not validation.
 			//      Validation errors are handled by the validation helper.
-			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-snak' );
+			$this->dieUsage( $ex->getMessage(), 'invalid-snak' );
 		}
 
 		return false; // we should never get here.
@@ -290,7 +290,7 @@ class SetQualifier extends ApiWikibase {
 	 */
 	protected function newSnak( EntityId $propertyId, $snakType, $valueData ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			$this->dieUsage( "Property expected, got " . $propertyId->getEntityType(), 'claim-invalid-snak' );
+			$this->dieUsage( "Property expected, got " . $propertyId->getEntityType(), 'invalid-snak' );
 		}
 
 		//TODO: Inject this, or at least initialize it in a central location.
@@ -327,7 +327,7 @@ class SetQualifier extends ApiWikibase {
 
 			return $qualifiers->addSnak( $newQualifier );
 		} catch ( IllegalValueException $ex ) {
-			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-snak' );
+			$this->dieUsage( $ex->getMessage(), 'invalid-snak' );
 		}
 
 		return false; // we should never get here.

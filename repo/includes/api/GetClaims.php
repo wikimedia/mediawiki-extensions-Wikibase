@@ -62,7 +62,7 @@ class GetClaims extends ApiWikibase {
 		$entity = $entityId ? $this->getEntity( $entityId ) : null;
 
 		if ( !$entity ) {
-			$this->dieUsage( "No entity found matching ID $id", 'no-such-entity-id' );
+			$this->dieUsage( "No entity found matching ID $id", 'no-such-entity' );
 		}
 
 		$this->outputClaims( $this->getClaims( $entity, $claimGuid ) );
@@ -104,7 +104,7 @@ class GetClaims extends ApiWikibase {
 		$content = EntityContentFactory::singleton()->getFromId( $id );
 
 		if ( $content === null ) {
-			$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'getclaims-entity-not-found' );
+			$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'no-such-entity' );
 		}
 
 		return $content->getEntity();
@@ -163,7 +163,7 @@ class GetClaims extends ApiWikibase {
 		$params = $this->extractRequestParams();
 
 		if ( !isset( $params['entity'] ) && !isset( $params['claim'] ) ) {
-			$this->dieUsage( 'Either the entity parameter or the key parameter need to be set', 'getclaims-entity-or-key' );
+			$this->dieUsage( 'Either the entity parameter or the key parameter need to be set', 'entity-or-key' );
 		}
 
 		$claimGuid = null;
@@ -174,14 +174,14 @@ class GetClaims extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( isset( $params['claim'] ) && $claimGuidValidator->validateFormat( $params['claim'] ) === false ) {
-			$this->dieUsage( 'Claim guid is invalid', 'getclaims-invalid-guid' );
+			$this->dieUsage( $this->msg( 'wikibase-api-invalid-guid' )->text(), 'invalid-guid' );
 		}
 
 		if ( isset( $params['entity'] ) && isset( $params['claim'] ) ) {
 			$entityId = Entity::getIdFromClaimGuid( $params['claim'] );
 
 			if ( $entityId !== $params['entity'] ) {
-				$this->dieUsage( 'If both entity id and claim key are provided they need to point to the same entity', 'getclaims-id-mismatch' );
+				$this->dieUsage( 'If both entity id and claim key are provided they need to point to the same entity', 'id-mismatch' );
 			}
 		}
 		else if ( isset( $params['entity'] ) ) {

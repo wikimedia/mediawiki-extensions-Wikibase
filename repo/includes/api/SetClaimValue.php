@@ -118,14 +118,14 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid', 'setclaimvalue-invalid-guid' );
+			$this->dieUsage( $this->msg( 'wikibase-api-invalid-guid' )->text(), 'invalid-guid' );
 		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setclaimvalue-entity-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -150,7 +150,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $guid ) ) {
-			$this->dieUsage( 'No such claim', 'setclaimvalue-claim-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-claim' )->text(), 'no-such-claim' );
 		}
 
 		$claim = $claims->getClaimWithGuid( $guid );
@@ -185,7 +185,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 
 			return $claim;
 		} catch ( IllegalValueException $ex ) {
-			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-snak' );
+			$this->dieUsage( $ex->getMessage(), 'invalid-snak' );
 		}
 	}
 
