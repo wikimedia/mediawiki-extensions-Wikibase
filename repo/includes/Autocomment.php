@@ -60,7 +60,7 @@ final class Autocomment {
 	}
 
 	/**
-	 * Pretty formating of autocomments.
+	 * Pretty formatting of autocomments.
 	 *
 	 * Note that this function does _not_ use $title and $local but
 	 * could use them if links should be created that points to something.
