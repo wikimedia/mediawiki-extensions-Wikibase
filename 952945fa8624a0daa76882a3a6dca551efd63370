@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_b9b6593b",
+        "filename": "repo/tests/phpunit/includes/api/ModifyEntityBase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T15:40:49Z",
+      "side": 1,
+      "message": "While you are at it, please make the name less misleading - \"ModifyEntityTestBase\" wold work.\n\nPlease also consider that a base class is a bad way to share code between tests, helper classes work better (compare PropertyInfoStoreTestHelper or DatabaseTestHelper).",
+      "revId": "952945fa8624a0daa76882a3a6dca551efd63370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_99b39d4c",
+        "filename": "repo/tests/phpunit/includes/api/ModifyEntityBase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T15:40:49Z",
+      "side": 1,
+      "message": "should be getEditToken(). There\u0027s nothing entitiy-specific or even wikibase-specific about this,",
+      "revId": "952945fa8624a0daa76882a3a6dca551efd63370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
