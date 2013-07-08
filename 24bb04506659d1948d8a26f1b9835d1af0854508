@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_f6c3c007",
+        "filename": "repo/includes/actions/HistoryEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T14:55:06Z",
+      "side": 1,
+      "message": "We don\u0027t really need the factory, right? So just make this getLanguageFallbackChain(). The only situation where that could go wrong is if the context returned by getContext() changes, which seems unlikely.\n\nGenerally: passing around factories only makes sense if we don\u0027t know in advanced which parameters will be used for calling the factory. But here we do. So just call it and store the actual chain as a member.",
+      "revId": "24bb04506659d1948d8a26f1b9835d1af0854508",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_d6c84425",
+        "filename": "repo/includes/actions/HistoryEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T14:55:06Z",
+      "side": 1,
+      "message": "Like above: could just be setLanguageFallbackChain.",
+      "revId": "24bb04506659d1948d8a26f1b9835d1af0854508",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_964eccbf",
+        "filename": "repo/includes/actions/HistoryEntityAction.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T14:55:06Z",
+      "side": 1,
+      "message": "I don\u0027t think I have ever seen wfSetVar used :) What is it good for?",
+      "revId": "24bb04506659d1948d8a26f1b9835d1af0854508",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
