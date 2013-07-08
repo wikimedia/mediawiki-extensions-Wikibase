@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_f348f28d",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialEntitiesWithoutDescriptionTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-08T10:11:56Z",
+      "side": 1,
+      "message": "0.1?",
+      "revId": "d2a3885a87619ea128cd790cf4153ae136a7ec03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_937b7ebb",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialEntitiesWithoutDescriptionTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-08T10:11:56Z",
+      "side": 1,
+      "message": "what\u0027s this about item creation?",
+      "revId": "d2a3885a87619ea128cd790cf4153ae136a7ec03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_735d2245",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialEntitiesWithoutLabelTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-08T10:11:56Z",
+      "side": 1,
+      "message": "0.1?",
+      "revId": "d2a3885a87619ea128cd790cf4153ae136a7ec03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_b37e7aaa",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialEntitiesWithoutLabelTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-08T10:11:56Z",
+      "side": 1,
+      "message": "item creation?",
+      "revId": "d2a3885a87619ea128cd790cf4153ae136a7ec03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_b3579a24",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-08T10:11:56Z",
+      "side": 1,
+      "message": "0.1?",
+      "revId": "d2a3885a87619ea128cd790cf4153ae136a7ec03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_f331120c",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-08T10:11:56Z",
+      "side": 1,
+      "message": "item creation?  how about have the test verify that a site link was created?",
+      "revId": "d2a3885a87619ea128cd790cf4153ae136a7ec03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
