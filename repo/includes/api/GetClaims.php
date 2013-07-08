@@ -131,19 +131,10 @@ class GetClaims extends ApiWikibase {
 		$claims = array();
 		$params = $this->extractRequestParams();
 
-		// TODO: we probably need this elsewhere, so make filter methods in Claim
-		$rank = isset( $params['rank'] ) ? ClaimSerializer::unserializeRank( $params['rank'] ) : false;
-		$propertyId = isset( $params['property'] ) ? $params['property'] : false;
-
-		/**
-		 * @var \Wikibase\Claim $claim
-		 */
+		/** @var \Wikibase\Claim $claim */
 		foreach ( $claimsList as $claim ) {
-			$rankIsOk = $rank === false
-				|| ( $claim instanceof Statement && $claim->getRank() === $rank );
-
-			if ( $rankIsOk
-				&& ( $propertyId === false || $propertyId === $claim->getPropertyId()->getPrefixedId() ) ) {
+			if( ( !isset( $params['property'] ) || $claim->hasPropertyId( $params['property'] ) ) &&
+				( !isset( $params['rank'] ) || $claim->hasRank( $params['rank'] ) ) ) {
 				$claims[] = $claim;
 			}
 		}
