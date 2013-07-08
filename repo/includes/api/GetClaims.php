@@ -129,26 +129,47 @@ class GetClaims extends ApiWikibase {
 		}
 
 		$claims = array();
-		$params = $this->extractRequestParams();
 
-		// TODO: we probably need this elsewhere, so make filter methods in Claim
-		$rank = isset( $params['rank'] ) ? ClaimSerializer::unserializeRank( $params['rank'] ) : false;
-		$propertyId = isset( $params['property'] ) ? $params['property'] : false;
-
-		/**
-		 * @var \Wikibase\Claim $claim
-		 */
+		/** @var \Wikibase\Claim $claim */
 		foreach ( $claimsList as $claim ) {
-			$rankIsOk = $rank === false
-				|| ( $claim instanceof Statement && $claim->getRank() === $rank );
-
-			if ( $rankIsOk
-				&& ( $propertyId === false || $propertyId === $claim->getPropertyId()->getPrefixedId() ) ) {
+			if ( $this->claimMatchesFilters( $claim ) ) {
 				$claims[] = $claim;
 			}
 		}
 
 		return $claims;
+	}
+
+	protected function claimMatchesFilters( Claim $claim ) {
+		return $this->rankMatchesFilter( $claim->getRank() )
+			&& $this->propertyMatchesFilter( $claim->getPropertyId() );
+	}
+
+	protected function rankMatchesFilter( $rank ) {
+		if ( $rank === null ) {
+			return true;
+		}
+		$params = $this->extractRequestParams();
+
+		if( isset( $params['rank'] ) ){
+			$unserializedRank = ClaimSerializer::unserializeRank( $params['rank'] );
+			$matchFilter = $rank === $unserializedRank;
+			return $matchFilter;
+		}
+
+		return true;
+	}
+
+	protected function propertyMatchesFilter( EntityId $propertyId ) {
+		$params = $this->extractRequestParams();
+
+		if ( isset( $params['property'] ) ){
+			$parsedProperty = WikibaseRepo::getDefaultInstance()->getEntityIdParser()->parse( $params['property'] );
+			$matchFilter = $propertyId->equals( $parsedProperty );
+			return $matchFilter;
+		}
+
+		return true;
 	}
 
 	/**
