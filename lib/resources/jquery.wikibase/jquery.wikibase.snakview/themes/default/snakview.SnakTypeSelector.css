@@ -16,4 +16,5 @@
 
 .wb-snaktypeselector-menu {
 	position: absolute;
+	z-index: 2; /* Monobook #content has 2 */
 }
