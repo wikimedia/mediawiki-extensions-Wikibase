@@ -278,7 +278,7 @@ class CreateClaim extends ModifyClaim {
 			'baserevid' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
-			'bot' => null,
+			'bot' => false,
 		);
 	}
 

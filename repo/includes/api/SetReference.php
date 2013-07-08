@@ -282,7 +282,7 @@ class SetReference extends ApiWikibase {
 			'baserevid' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
-			'bot' => null,
+			'bot' => false,
 		);
 	}
 
