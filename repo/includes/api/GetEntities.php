@@ -129,7 +129,7 @@ class GetEntities extends ApiWikibase {
 		if ( !$entityId ) {
 			//TODO: report as missing instead?
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "Invalid id: $id", 'no-such-entity-id' );
+			$this->dieUsage( "Invalid id: $id", 'no-such-entity' );
 		}
 
 		// key should be numeric to get the correct behavior
@@ -293,10 +293,8 @@ class GetEntities extends ApiWikibase {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
 			array( 'code' => 'id-xor-wikititle', 'info' => $this->msg( 'wikibase-api-ids-xor-wikititles' )->text() ),
-			array( 'code' => 'no-such-item', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
+			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
 		) );
 	}
 

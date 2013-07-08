@@ -113,19 +113,19 @@ class SetReference extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validate( $params['statement'] ) ) ) {
-			$this->dieUsage( 'Invalid guid', 'setreference-invalid-guid' );
+			$this->dieUsage( $this->msg( 'wikibase-api-invalid-guid' )->text(), 'invalid-guid' );
 		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
 
 		if ( $entityId === null ) {
-			$this->dieUsage( 'No such entity', 'setreference-entity-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 		}
 
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setreference-entity-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -144,7 +144,7 @@ class SetReference extends ApiWikibase {
 		$rawSnaks = \FormatJson::decode( $rawSnaks, true );
 
 		if ( !is_array( $rawSnaks ) || !count( $rawSnaks ) ) {
-			$this->dieUsage( 'No snaks or invalid JSON given', 'setreference-no-snaks' );
+			$this->dieUsage( 'No snaks or invalid JSON given', 'invalid-json' );
 		}
 
 		$snaks = new SnakList();
@@ -155,7 +155,7 @@ class SetReference extends ApiWikibase {
 		try {
 			foreach ( $rawSnaks as $byPropertySnaks ) {
 				if ( !is_array( $byPropertySnaks ) ) {
-					$this->dieUsage( 'Invalid snak JSON given', 'setreference-invalid-snaks' );
+					$this->dieUsage( 'Invalid snak JSON given', 'invalid-json' );
 				}
 				foreach ( $byPropertySnaks as $rawSnak ) {
 					$snak = $snakUnserializer->newFromSerialization( $rawSnak );
@@ -165,7 +165,7 @@ class SetReference extends ApiWikibase {
 			}
 		} catch ( IllegalValueException $ex ) {
 			// Handle Snak instantiation failures
-			$this->dieUsage( $ex->getMessage(), 'setreference-invalid-snaks' );
+			$this->dieUsage( $ex->getMessage(), 'invalid-json' );
 		}
 
 		return $snaks;
@@ -185,7 +185,7 @@ class SetReference extends ApiWikibase {
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'No such statement', 'setreference-statement-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-statement' )->text(), 'no-such-statement' );
 		}
 
 		$statement = $claims->getClaimWithGuid( $statementGuid );
@@ -193,7 +193,7 @@ class SetReference extends ApiWikibase {
 		if ( ! ( $statement instanceof Statement ) ) {
 			$this->dieUsage(
 				'The referenced claim is not a statement and thus cannot have references',
-				'setreference-not-a-statement'
+				'not-a-statement'
 			);
 		}
 
@@ -211,7 +211,7 @@ class SetReference extends ApiWikibase {
 			else {
 				$this->dieUsage(
 					'The statement does not have any associated reference with the provided reference hash',
-					'setreference-no-such-reference'
+					'no-such-reference'
 				);
 			}
 		}
@@ -284,6 +284,20 @@ class SetReference extends ApiWikibase {
 			),
 			'bot' => false,
 		);
+	}
+
+	/**
+	 * @see ApiBase::getPossibleErrors()
+	 */
+	public function getPossibleErrors() {
+		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
+			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+			array( 'code' => 'invalid-json', 'info' => $this->msg( 'wikibase-api-invalid-json' )->text() ),
+			array( 'code' => 'no-such-statement', 'info' => $this->msg( 'wikibase-api-no-such-statement' )->text() ),
+			array( 'code' => 'not-a-statement', 'info' => $this->msg( 'wikibase-api-not-a-statement' )->text() ),
+			array( 'code' => 'no-such-reference', 'info' => $this->msg( 'wikibase-api-no-such-reference' )->text() ),
+		) );
 	}
 
 	/**

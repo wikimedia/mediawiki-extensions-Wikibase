@@ -327,7 +327,7 @@ class EditEntity extends ModifyEntity {
 				$linkSite = $sites->getSite( $globalSiteId );
 			} else {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'site-not-found' );
+				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
 			}
 
 			if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
@@ -381,7 +381,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( is_null( $data ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-json-invalid' )->text(), 'json-invalid' );
+			$this->dieUsage( $this->msg( 'wikibase-api-invalid-json' )->text(), 'invalid-json' );
 		}
 
 		if ( !is_array( $data ) ) { // NOTE: json_decode will decode any JS literal or structure, not just objects!
@@ -426,19 +426,25 @@ class EditEntity extends ModifyEntity {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'no-such-entity', 'info' => "Either 'id' or 'new' parameter has to be set" ),
+			array( 'code' => 'no-such-entity-type', 'info' => "No such entity type" ),
+			array( 'code' => 'data-or-id-xor-wikititle', 'info' => "@todo addshore" ),
+			array( 'code' => 'add-with-id', 'info' => "Parameter 'id' and 'new' are not allowed to be both set in the same request" ),
 			array( 'code' => 'no-data', 'info' => $this->msg( 'wikibase-api-no-data' )->text() ),
-			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
-			array( 'code' => 'cant-edit', 'info' => $this->msg( 'wikibase-api-cant-edit' )->text() ),
-			array( 'code' => 'no-permissions', 'info' => $this->msg( 'wikibase-api-no-permissions' )->text() ),
-			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
-			array( 'code' => 'add-sitelink-failed', 'info' => $this->msg( 'wikibase-api-add-sitelink-failed' )->text() ),
-			array( 'code' => 'illegal-field', 'info' => $this->msg( 'wikibase-api-illegal-field' )->text() ),
-			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
-			array( 'code' => 'not-recognized-string', 'info' => $this->msg( 'wikibase-api-not-recognized-string' )->text() ),
+			array( 'code' => 'edit-entity-create-property-failed', 'info' => 'No datatype given' ),
+			array( 'code' => 'not-recognized', 'info' => "key can't be handled: sitelinks" ),
+			array( 'code' => 'edit-entity-apply-failed', 'info' => "Change could not be applied to entity" ),
 			array( 'code' => 'not-recognized-array', 'info' => $this->msg( 'wikibase-api-not-recognized-array' )->text() ),
+			array( 'code' => 'no-such-site', 'info' => 'There is no site for global site id' ),
+			array( 'code' => 'add-sitelink-failed', 'info' => $this->msg( 'wikibase-api-add-sitelink-failed' )->text() ),
+			array( 'code' => 'invalid-json', 'info' => 'Invalid json' ),
+			array( 'code' => 'not-recognized-string', 'info' => $this->msg( 'wikibase-api-not-recognized-string' )->text() ),
+			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
+			array( 'code' => 'illegal-field', 'info' => $this->msg( 'wikibase-api-illegal-field' )->text() ),
 			array( 'code' => 'inconsistent-language', 'info' => $this->msg( 'wikibase-api-inconsistent-language' )->text() ),
+			array( 'code' => 'not-recognised-language', 'info' => $this->msg( 'wikibase-not-recognised-language' )->text() ),
 			array( 'code' => 'inconsistent-site', 'info' => $this->msg( 'wikibase-api-inconsistent-site' )->text() ),
-			array( 'code' => 'inconsistent-values', 'info' => $this->msg( 'wikibase-api-inconsistent-values' )->text() )
+			array( 'code' => 'not-recognized-site', 'info' => "Unknown site" ),
 		) );
 	}
 

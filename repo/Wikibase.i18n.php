@@ -243,9 +243,7 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-api-no-external-page' => 'The external client site did not provide page information.', # Do not translate
 	'wikibase-api-add-sitelink-failed' => 'The site link could not be saved.', # Do not translate
 	'wikibase-api-remove-sitelink-failed' => 'The site link could not be removed.', # Do not translate
-	'wikibase-api-cant-edit' => 'Edit not allowed:
-$1', # Do not translate
-	'wikibase-api-json-invalid' => 'The supplied JSON structure could not be parsed or recreated as a valid structure.', # Do not translate
+	'wikibase-api-cant-edit' => 'Edit not allowed: $1', # Do not translate
 	'wikibase-api-not-recognized' => 'An invalid property was requested: $1.', # Do not translate
 	'wikibase-api-not-recognized-string' => 'A string was expected, but not found.', # Do not translate
 	'wikibase-api-not-recognized-array' => 'An array was expected, but not found.', # Do not translate
@@ -258,17 +256,14 @@ $1', # Do not translate
 	'wikibase-api-data-or-id-xor-wikititle' => 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page, or "data" for a new item.', # Do not translate
 	'wikibase-api-id-xor-wikititle' => 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page.', # Do not translate
 	'wikibase-api-ids-xor-wikititles' => 'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages.', # Do not translate
-	'wikibase-api-no-such-entity' => 'Could not find an existing entity.', # Do not translate
 	'wikibase-api-link-exists' => 'An article on the specified wiki is already linked.', # Do not translate
 	'wikibase-api-add-with-id' => 'Cannot add with the id of an existing item.', # Do not translate
 	'wikibase-api-add-exists' => 'Cannot add to an existing item.', # Do not translate
 	'wikibase-api-update-without-id' => 'Update without a previous id is not possible.', # Do not translate
-	'wikibase-api-no-such-item-link' => 'Could not find an existing item for this link.', # Do not translate
 	'wikibase-api-create-failed' => 'Attempted creation of a new item failed: $1', # Do not translate
 	'wikibase-api-modify-failed' => 'Attempted modification of the item failed.', # Do not translate
 	'wikibase-api-delete-failed' => 'Attempted deletion of the item failed.', # Do not translate
 	'wikibase-api-save-failed' => 'Attempted save of the item failed: $1', # Do not translate
-	'wikibase-api-invalid-contentmodel' => 'The content model for the page is invalid.', # Do not translate
 	'wikibase-api-alias-incomplete' => 'Cannot find a definition of the alias for the item.', # Do not translate
 	'wikibase-api-alias-not-found' => 'Cannot find any previous alias in the item.', # Do not translate
 	'wikibase-api-alias-found' => 'Found a previous alias in the item.', # Do not translate
@@ -279,6 +274,18 @@ $1', # Do not translate
 	'wikibase-api-session-failure' => 'The current session has failed. You have to log in again.', # Do not translate
 	'wikibase-api-illegal-field' => 'Illegal field used in call: $1', # Do not translate
 	'wikibase-api-edit-conflict' => 'Edit conflict, could not patch the current revision', # Do not translate
+	'wikibase-api-invalid-contentmodel' => 'The content model for the page is invalid.', # Do not translate
+	'wikibase-api-invalid-claim' => 'Invalid claim', # Do not translate
+	'wikibase-api-invalid-guid' => 'Invalid claim guid', # Do not translate
+	'wikibase-api-invalid-snak' => 'Invalid snak', # Do not translate
+	'wikibase-api-invalid-json' => 'Invalid json: The supplied JSON structure could not be parsed or recreated as a valid structure.', # Do not translate
+	'wikibase-api-no-such-entity' => 'Could not find an existing entity.', # Do not translate
+	'wikibase-api-no-such-entity-revision' => 'Count not find entity revision.', # Do not translate
+	'wikibase-api-no-such-item-link' => 'Could not find an existing item for this link.', # Do not translate
+	'wikibase-api-no-such-site' => 'Could not find the site.', # Do not translate
+	'wikibase-api-no-such-statement' => 'Could not find the statement.', # Do not translate
+	'wikibase-api-no-such-claim' => 'Could not find the claim.', # Do not translate
+	'wikibase-api-no-such-qualifier' => 'Could not find the qualifier.', # Do not translate
 
 	'wikibase-self-conflict-patched' => 'Your edit was patched into the latest version, overriding some of your own intermediate changes.',
 	'wikibase-conflict-patched' => 'Your edit was patched into the latest version.',

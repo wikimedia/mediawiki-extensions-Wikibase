@@ -91,7 +91,8 @@ class SetQualifier extends ApiWikibase {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$this->checkParameterRequirements();
+		$params = $this->extractRequestParams();
+		$this->validateParameters( $params );
 
 		$content = $this->getEntityContent();
 
@@ -112,9 +113,8 @@ class SetQualifier extends ApiWikibase {
 	 *
 	 * @since 0.2
 	 */
-	protected function checkParameterRequirements() {
-		$params = $this->extractRequestParams();
-
+	protected function validateParameters( array $params ) {
+		//@todo addshore all of these errors should be more general
 		if ( !isset( $params['snakhash'] ) ) {
 			if ( !isset( $params['snaktype'] ) ) {
 				$this->dieUsage(
@@ -153,14 +153,14 @@ class SetQualifier extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid', 'setqualifier-invalid-guid' );
+			$this->dieUsage( $this->msg( 'wikibase-api-invalid-guid' )->text(), 'invalid-guid' );
 		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setqualifier-entity-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -183,7 +183,7 @@ class SetQualifier extends ApiWikibase {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'No such claim', 'setqualifier-claim-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-claim' )->text(), 'no-such-claim' );
 		}
 
 		$claim = $claims->getClaimWithGuid( $claimGuid );
@@ -223,7 +223,7 @@ class SetQualifier extends ApiWikibase {
 	 */
 	protected function updateQualifier( Snaks $qualifiers, $snakHash ) {
 		if ( !$qualifiers->hasSnakHash( $snakHash ) ) {
-			$this->dieUsage( 'No such qualifier', 'setqualifier-qualifier-not-found' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-qualifier' )->text(), 'no-such-qualifier' );
 		}
 
 		$params = $this->extractRequestParams();
@@ -257,7 +257,7 @@ class SetQualifier extends ApiWikibase {
 		} catch ( IllegalValueException $ex ) {
 			//Note: This handles failures during snak instantiation, not validation.
 			//      Validation errors are handled by the validation helper.
-			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-snak' );
+			$this->dieUsage( $ex->getMessage(), 'invalid-snak' );
 		}
 
 		return false; // we should never get here.
@@ -289,7 +289,7 @@ class SetQualifier extends ApiWikibase {
 	 */
 	protected function newSnak( EntityId $propertyId, $snakType, $valueData ) {
 		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			$this->dieUsage( "Property expected, got " . $propertyId->getEntityType(), 'claim-invalid-snak' );
+			$this->dieUsage( "Property expected, got " . $propertyId->getEntityType(), 'invalid-snak' );
 		}
 
 		//TODO: Inject this, or at least initialize it in a central location.
@@ -326,7 +326,7 @@ class SetQualifier extends ApiWikibase {
 
 			return $qualifiers->addSnak( $newQualifier );
 		} catch ( IllegalValueException $ex ) {
-			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-snak' );
+			$this->dieUsage( $ex->getMessage(), 'invalid-snak' );
 		}
 
 		return false; // we should never get here.
@@ -436,6 +436,22 @@ class SetQualifier extends ApiWikibase {
 				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),
 		);
+	}
+
+	/**
+	 * @see ApiBase::getPossibleErrors()
+	 */
+	public function getPossibleErrors() {
+		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'setqualifier-snaktype-required', 'info' => $this->msg( 'wikibase-api-setqualifier-snaktype-required' )->text() ),
+			array( 'code' => 'setqualifier-property-required', 'info' => $this->msg( 'wikibase-api-setqualifier-property-required' )->text() ),
+			array( 'code' => 'setqualifier-value-required', 'info' => $this->msg( 'wikibase-api-setqualifier-value-required' )->text() ),
+			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
+			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+			array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
+			array( 'code' => 'no-such-qualifer', 'info' => $this->msg( 'wikibase-api-no-such-qualifier' )->text() ),
+			array( 'code' => 'invalid-property-id', 'info' => $this->msg( 'wikibase-api-invalid-property-id' )->text() ),
+		) );
 	}
 
 	/**

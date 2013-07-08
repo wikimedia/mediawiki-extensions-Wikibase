@@ -160,7 +160,7 @@ class RemoveClaimsTest extends \ApiTestCase {
 		try {
 			$this->doApiRequest( $params );
 		} catch ( \UsageException $e ) {
-			$this->assertEquals( $e->getCodeString(), 'removeclaims-invalid-guid', 'Invalid claim guid raised correct error' );
+			$this->assertEquals( $e->getCodeString(), 'invalid-guid', 'Invalid claim guid raised correct error' );
 			$caughtException = true;
 		}
 

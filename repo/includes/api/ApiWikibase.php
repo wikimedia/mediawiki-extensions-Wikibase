@@ -58,8 +58,10 @@ abstract class ApiWikibase extends \ApiBase {
 	 */
 	public function getPossibleErrors() {
 		return array(
-			array( 'code' => 'jsonp-token-violation', 'info' => $this->msg( 'wikibase-api-jsonp-token-violation' )->text() ),
-			array( 'code' => 'no-such-entity-revision', 'info' => 'The given revision ID doesn\'t exist in the specified entity.'  ),
+			array( 'code' => 'save-failed', 'info' => 'Save failed.'  ),
+			array( 'code' => 'edit-conflict', 'info' => 'Edit conflict.'  ),
+			array( 'code' => 'badtoken', 'info' => 'Token error.'  ),
+			array( 'code' => 'nosuchrevid', 'info' => 'The given revision ID doesn\'t exist in the specified entity.'  ),
 			array( 'code' => 'cant-load-entity-content', 'info' => 'Can\'t load the content of the given page or revision.'  ),
 		);
 	}
@@ -400,12 +402,12 @@ abstract class ApiWikibase extends \ApiBase {
 			$revision = \Revision::newFromId( $revId );
 
 			if ( !$revision ) {
-				$this->dieUsage( "Revision not found: $revId", 'no-such-entity-revision' );
+				$this->dieUsage( "Revision not found: $revId", 'nosuchrevid' );
 			}
 
 			if ( $revision->getPage() != $title->getArticleID() ) {
 				$this->dieUsage( "Revision $revId does not belong to " .
-					$title->getPrefixedDBkey(), 'no-such-entity-revision' );
+					$title->getPrefixedDBkey(), 'nosuchrevid' );
 			}
 
 			$content = $revision->getContent( $audience, $user );
@@ -447,7 +449,7 @@ abstract class ApiWikibase extends \ApiBase {
 			}
 
 			if ( ( $editError & EditEntity::TOKEN_ERROR ) > 0 ) {
-				$errorCode = 'session-failure';
+				$errorCode = 'badtoken';
 			} elseif ( ( $editError & EditEntity::EDIT_CONFLICT_ERROR ) > 0 ) {
 				$errorCode = 'edit-conflict';
 			} elseif ( ( $editError & EditEntity::ANY_ERROR ) > 0 ) {

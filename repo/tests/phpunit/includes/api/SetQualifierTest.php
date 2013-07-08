@@ -236,7 +236,7 @@ class SetQualifierTest extends ModifyItemBase {
 		try {
 			$this->doApiRequest( $params );
 		} catch ( \UsageException $e ) {
-			$this->assertEquals( $e->getCodeString(), 'setqualifier-invalid-guid', 'Invalid claim guid raised correct error' );
+			$this->assertEquals( $e->getCodeString(), 'invalid-guid', 'Invalid claim guid raised correct error' );
 			$caughtException = true;
 		}
 
