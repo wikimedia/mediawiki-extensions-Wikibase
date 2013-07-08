@@ -433,7 +433,7 @@ class EditEntityTest extends ModifyItemBase {
 			// json must be valid
 			array(
 				'',
-				"json-invalid"
+				"invalid-json"
 			),
 
 			// json must be an object
