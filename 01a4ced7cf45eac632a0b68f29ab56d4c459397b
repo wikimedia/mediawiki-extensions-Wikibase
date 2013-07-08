@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_3c58972f",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-08T17:13:10Z",
+      "side": 1,
+      "message": "This condition can go into its own method (ie doesNotHaveMismatchingPropertyId). That increases readability and does not pollute local scope with stuff that is quite possibly not even needed.\n\nIn this method you can also take care to only instantiate the id parser when needed.",
+      "revId": "01a4ced7cf45eac632a0b68f29ab56d4c459397b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
