@@ -226,7 +226,8 @@ abstract class ViewEntityAction extends \ViewAction {
 				)
 			);
 		} else {
-			$this->getOutput()->setHTMLTitle( $this->msg( 'pagetitle' )->params( $labelText ) );
+			// Prevent replacing {{...}} by using rawParams() instead of params():
+			$this->getOutput()->setHTMLTitle( $this->msg( 'pagetitle' )->rawParams( $labelText ) );
 		}
 	}
 

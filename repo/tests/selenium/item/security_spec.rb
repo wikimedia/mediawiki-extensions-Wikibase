@@ -9,6 +9,7 @@
 require 'spec_helper'
 
 dangerous_text = "<script>$('body').empty();</script>"
+template_text = "{{Template:Foo}}"
 
 describe "Check for security issues" do
   before :all do
@@ -68,6 +69,8 @@ describe "Check for security issues" do
         page.entityLabelSpan.should == dangerous_text
         @browser.refresh
         page.firstHeading?.should be_true
+        # Reset property label to prevent conflicts in repeated test runs:
+        page.change_label(generate_random_string(10))
       end
     end
     it "should check if no JS injection is possible for property descriptions" do
@@ -95,6 +98,22 @@ describe "Check for security issues" do
           @browser.refresh
           page.firstHeading?.should be_true
         end
+      end
+    end
+  end
+  context "Template replacement prevention" do
+    it "should check if templates {{...}} are not replaced" do
+      visit_page(CreateItemPage) do |page|
+        page.create_new_item(generate_random_string(10), generate_random_string(20))
+      end
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.change_label(template_text)
+        page.entityLabelSpan.should == template_text
+        @browser.refresh
+        page.entityLabelSpan.should == template_text
+        @browser.title.include?(template_text).should be_true
       end
     end
   end
