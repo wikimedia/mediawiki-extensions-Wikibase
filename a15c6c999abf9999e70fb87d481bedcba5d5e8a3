@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_d6368401",
+        "filename": "lib/includes/serializers/DescriptionSerializer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T15:18:39Z",
+      "side": 1,
+      "message": "Subclassing for the purpose of code sharing is frowned upon, because it limits re-use and does not allow the abstract base class to be tested separately. It\u0027s better to use composition - that is, have DescriptionSerializer create and store a MultilingualSerializer in the constructor and use it when needed.",
+      "revId": "a15c6c999abf9999e70fb87d481bedcba5d5e8a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_7626b0d2",
+        "filename": "lib/includes/serializers/MultilingualSerializerObject.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T15:18:39Z",
+      "side": 1,
+      "message": "This is a complex function that can not be tested directly. That\u0027s bad.  To allow for testing, make it public - and to not pollute the other serializer\u0027s interface, use composition instead of inheritance.\n\nIf there\u0027s a very good reason to use inheritance, don\u0027t make this object abstract; it could be re-used (and more importantly: tested) as a standalone utility.",
+      "revId": "a15c6c999abf9999e70fb87d481bedcba5d5e8a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
