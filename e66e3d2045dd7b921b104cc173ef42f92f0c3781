@@ -84,6 +84,24 @@
       "revId": "e66e3d2045dd7b921b104cc173ef42f92f0c3781",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_dc38639f",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-08T17:40:27Z",
+      "side": 1,
+      "message": "Going to resolve after Change-Id: I8884ac5c90883628282c8406a474974dd53408c8 , at which time \n\n$serializationOptions-\u003esetLanguages( Utils::getLanguageCodes() + array(\n    LanguageFallbackChain::CONTEXT_LANGUAGE_CODE \u003d\u003e $languageFallbackChain,\n) );\n\nwill be fast enough (already tested).",
+      "parentUuid": "69c609db_d90b558e",
+      "revId": "e66e3d2045dd7b921b104cc173ef42f92f0c3781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
