@@ -4,7 +4,7 @@
 *
 * @since 0.4
 *
-* Author: Marius Hoch hoo@online.de
+* @author Marius Hoch < hoo@online.de >
 */
 ( function( wb, mw, $ ) {
 'use strict';
@@ -480,11 +480,16 @@ $.widget( 'wikibase.linkitem', {
 						var entityData = {
 							labels: {},
 							sitelinks: {}
-						};
+						}, title;
+
+						title = new mw.Title(
+							mw.config.get( 'wgTitle' ), mw.config.get( 'wgNamespaceNumber' )
+						);
+
 						// Label (page title)
 						entityData.labels[ mw.config.get( 'wgContentLanguage' ) ] = {
 							language: mw.config.get( 'wgContentLanguage' ),
-							value: mw.config.get( 'wgTitle' )
+							value: title.getPrefixedText()
 						};
 						// Link this page
 						entityData.sitelinks[ mw.config.get( 'wbCurrentSite' ).globalSiteId ] = {
