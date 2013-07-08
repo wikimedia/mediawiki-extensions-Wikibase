@@ -50,7 +50,7 @@ class GetEntities extends ApiWikibase {
 
 		if ( !( isset( $params['ids'] ) XOR ( isset( $params['sites'] ) && isset( $params['titles'] ) ) ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-ids-xor-wikititles' )->text(), 'id-xor-wikititle' );
+			$this->dieUsage( 'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages', 'param-missing' );
 		}
 
 		$missing = 0;
@@ -62,7 +62,7 @@ class GetEntities extends ApiWikibase {
 			$max = max( $numSites, $numTitles );
 			if ( $numSites === 0 || $numTitles === 0 ) {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( $this->msg( 'wikibase-api-ids-xor-wikititles' )->text(), 'id-xor-wikititle' );
+				$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page', 'param-missing' );
 			}
 			else {
 				$idxSites = 0;
@@ -140,7 +140,7 @@ class GetEntities extends ApiWikibase {
 		if ( !$entityId ) {
 			//TODO: report as missing instead?
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "Invalid id: $id", 'no-such-entity-id' );
+			$this->dieUsage( "Invalid id: $id", 'no-such-entity' );
 		}
 
 		// key should be numeric to get the correct behavior
@@ -304,10 +304,8 @@ class GetEntities extends ApiWikibase {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
-			array( 'code' => 'id-xor-wikititle', 'info' => $this->msg( 'wikibase-api-ids-xor-wikititles' )->text() ),
-			array( 'code' => 'no-such-item', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
+			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
+			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
 		) );
 	}
 
