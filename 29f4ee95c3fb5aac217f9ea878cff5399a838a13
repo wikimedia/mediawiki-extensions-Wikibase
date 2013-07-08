@@ -16,6 +16,24 @@
       "revId": "29f4ee95c3fb5aac217f9ea878cff5399a838a13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_5339063c",
+        "filename": "docs/options.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T07:38:11Z",
+      "side": 1,
+      "message": "I\u0027ll put a note here, and make the updater do that automatically.",
+      "parentUuid": "69c609db_ff31df59",
+      "revId": "29f4ee95c3fb5aac217f9ea878cff5399a838a13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
