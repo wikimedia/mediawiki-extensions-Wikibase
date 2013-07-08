@@ -34,6 +34,40 @@
       "revId": "b08b1f6d3415d8a2a6500b22d6ba9b3107be45de",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_566e1498",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T12:58:07Z",
+      "side": 1,
+      "message": "Why not use FALLBACK_ALL? It seems like an aggressive strategy is appropriate in this case (the english label is usually better than \"q7811290\").",
+      "revId": "b08b1f6d3415d8a2a6500b22d6ba9b3107be45de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_16f93ce7",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T12:58:07Z",
+      "side": 1,
+      "message": "The fallback chain should probably injected into the constructor, or at least created there, and stored in a member. This way it could be re-used later - we may well see this function being used a few dozen times on a page, maybe even hundreds of times.\n\nAlso, this would allow us not to worry about the parameters the fallback chain needs for construction - because we already have it. This follows the general idea of pushing construction logic up the stack as far as possible.",
+      "revId": "b08b1f6d3415d8a2a6500b22d6ba9b3107be45de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
