@@ -42,15 +42,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class RemoveClaims extends ApiWikibase {
-
-	/**
-	 * @see ApiBase::isWriteMode
-	 * @return bool true
-	 */
-	public function isWriteMode() {
-		return true;
-	}
+class RemoveClaims extends ModifyClaim {
 
 	/**
 	 * @see \ApiBase::execute
@@ -167,7 +159,7 @@ class RemoveClaims extends ApiWikibase {
 
 				$guids[$entityId][] = $guid;
 			} else {
-				$this->dieUsage( 'Invalid claim guid', 'removeclaims-invalid-guid' );
+				$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 			}
 		}
 
@@ -226,7 +218,7 @@ class RemoveClaims extends ApiWikibase {
 			$entityId = EntityId::newFromPrefixedId( $id );
 
 			if ( $entityId === null ) {
-				$this->dieUsage( 'Invalid entity id provided', 'removeclaims-invalid-entity-id' );
+				$this->dieUsage( 'Invalid entity id provided', 'no-such-entity' );
 			}
 
 			$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
@@ -234,7 +226,7 @@ class RemoveClaims extends ApiWikibase {
 			$content = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 			if ( $content === null ) {
-				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'removeclaims-entity-not-found' );
+				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'no-such-entity' );
 			}
 
 			$contents[] = $content;
@@ -298,6 +290,16 @@ class RemoveClaims extends ApiWikibase {
 		);
 
 		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
+	}
+
+	/**
+	 * @see \ApiBase::getPossibleErrors()
+	 */
+	public function getPossibleErrors() {
+		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
+			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+		) );
 	}
 
 	/**

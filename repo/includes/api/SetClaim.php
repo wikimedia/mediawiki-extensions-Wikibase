@@ -46,7 +46,7 @@ use Wikibase\validators\SnakValidator;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class SetClaim extends ApiWikibase {
+class SetClaim extends ModifyClaim {
 
 	/**
 	 * @var SnakValidationHelper
@@ -69,14 +69,6 @@ class SetClaim extends ApiWikibase {
 			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
 			new ValidatorErrorLocalizer()
 		);
-	}
-
-	/**
-	 * @see ApiBase::isWriteMode
-	 * @return bool true
-	 */
-	public function isWriteMode() {
-		return true;
 	}
 
 	/**
@@ -146,8 +138,8 @@ class SetClaim extends ApiWikibase {
 
 			assert( $claim instanceof Claim );
 			return $claim;
-		} catch ( IllegalValueException $ex ) {
-			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-claim' );
+		} catch ( IllegalValueException $illegalValueException ) {
+			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-claim' );
 		}
 	}
 
@@ -187,6 +179,16 @@ class SetClaim extends ApiWikibase {
 			),
 			'bot' => false,
 		);
+	}
+
+	/**
+	 * @see ApiBase::getPossibleErrors()
+	 */
+	public function getPossibleErrors() {
+		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'fromsite-eq-tosite', 'info' => $this->msg( 'wikibase-api-fromsite-eq-tosite' )->text() ),
+			array( 'code' => 'fromtitle-and-totitle', 'info' => $this->msg( 'wikibase-api-fromtitle-and-totitle' )->text() ),
+		) );
 	}
 
 	/**

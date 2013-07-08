@@ -119,7 +119,7 @@ class EditEntityTest extends ModifyItemBase {
 				$this->fail( "Adding an entity without a token should have failed" );
 			}
 			catch ( \UsageException $e ) {
-				$this->assertTrue( ($e->getCodeString() == 'session-failure'), "Expected session-failure, got unexpected exception: $e" );
+				$this->assertTrue( ($e->getCodeString() == 'badtoken'), "Expected session-failure, got unexpected exception: $e" );
 			}
 		}
 	}
@@ -433,7 +433,7 @@ class EditEntityTest extends ModifyItemBase {
 			// json must be valid
 			array(
 				'',
-				"json-invalid"
+				"invalid-json"
 			),
 
 			// json must be an object

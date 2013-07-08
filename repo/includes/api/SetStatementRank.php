@@ -92,14 +92,14 @@ class SetStatementRank extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validate( $params['statement'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid', 'setstatementrank-invalid-guid' );
+			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setstatementrank-entity-not-found' );
+			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -120,16 +120,13 @@ class SetStatementRank extends ApiWikibase {
 		$claims = new \Wikibase\Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'No such statement', 'setstatementrank-statement-not-found' );
+			$this->dieUsage( 'Could not find the statement' , 'no-such-statement' );
 		}
 
 		$statement = $claims->getClaimWithGuid( $statementGuid );
 
 		if ( ! ( $statement instanceof Statement ) ) {
-			$this->dieUsage(
-				'The referenced claim is not a statement and thus does not have a rank',
-				'setstatementrank-not-a-statement'
-			);
+			$this->dieUsage( 'The referenced claim is not a statement and thus does not have a rank' , 'not-a-statement' );
 		}
 
 		$statement->setRank( ClaimSerializer::unserializeRank( $rank ) );
@@ -195,6 +192,18 @@ class SetStatementRank extends ApiWikibase {
 			),
 			'bot' => false,
 		);
+	}
+
+	/**
+	 * @see ApiBase::getPossibleErrors()
+	 */
+	public function getPossibleErrors() {
+		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
+			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+			array( 'code' => 'no-such-statement', 'info' => $this->msg( 'wikibase-api-no-such-statement' )->text() ),
+			array( 'code' => 'not-a-statement', 'info' => $this->msg( 'wikibase-api-not-a-statement' )->text() ),
+		) );
 	}
 
 	/**

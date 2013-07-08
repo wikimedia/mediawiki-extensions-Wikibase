@@ -52,12 +52,12 @@ class LinkTitles extends ApiWikibase {
 
 		if ( $params['fromsite'] === $params['tosite'] ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-fromsite-eq-tosite' )->text(), 'fromsite-eq-tosite' );
+			$this->dieUsage( 'The from site can not match the to site' , 'fromsite-eq-tosite' );
 		}
 
 		if ( !( strlen( $params['fromtitle'] ) > 0 && strlen( $params['totitle'] ) > 0 ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-fromtitle-and-totitle' )->text(), 'fromtitle-and-totitle' );
+			$this->dieUsage( 'The from title can not match the to title' , 'fromtitle-and-totitle' );
 		}
 
 		$sites = $this->getSiteLinkTargetSites();
@@ -70,7 +70,7 @@ class LinkTitles extends ApiWikibase {
 
 		if ( $fromPage === false ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
+			$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
 		}
 
 		// This is used for testing purposes later
@@ -84,7 +84,7 @@ class LinkTitles extends ApiWikibase {
 
 		if ( $toPage === false ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
+			$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
 		}
 		// This is used for testing purposes later
 		$toId = StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $params['tosite'], $toPage );
@@ -133,12 +133,12 @@ class LinkTitles extends ApiWikibase {
 		elseif ( $fromId === $toId ) {
 			// no-op
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-common-item' )->text(), 'common-item' );
+			$this->dieUsage( 'Common item detected', 'common-item' );
 		}
 		else {
 			// dissimilar items
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-no-common-item' )->text(), 'no-common-item' );
+			$this->dieUsage( 'No common item detected' , 'no-common-item' );
 		}
 
 		$this->addSiteLinksToResult( $return, 'entity' );
@@ -182,14 +182,11 @@ class LinkTitles extends ApiWikibase {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'create-failed', 'info' => $this->msg( 'wikibase-api-create-failed' )->text() ),
-			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
-			array( 'code' => 'session-failure', 'info' => $this->msg( 'wikibase-api-session-failure' )->text() ),
+			array( 'code' => 'fromsite-eq-tosite', 'info' => $this->msg( 'wikibase-api-fromsite-eq-tosite' )->text() ),
+			array( 'code' => 'fromtitle-and-totitle', 'info' => $this->msg( 'wikibase-api-fromtitle-and-totitle' )->text() ),
+			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
 			array( 'code' => 'common-item', 'info' => $this->msg( 'wikibase-api-common-item' )->text() ),
 			array( 'code' => 'no-common-item', 'info' => $this->msg( 'wikibase-api-no-common-item' )->text() ),
-			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
-			array( 'code' => 'fromtitle-and-totitle', 'info' => $this->msg( 'wikibase-api-fromtitle-and-totitle' )->text() ),
-			array( 'code' => 'fromsite-eq-tosite', 'info' => $this->msg( 'wikibase-api-fromsite-eq-tosite' )->text() ),
 		) );
 	}
 

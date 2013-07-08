@@ -286,7 +286,8 @@ class SearchEntities extends ApiBase {
 	 * @see \ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array() );
+		return array_merge( parent::getPossibleErrors(), array()
+		);
 	}
 
 	/**
