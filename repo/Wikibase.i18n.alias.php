@@ -200,6 +200,7 @@ $specialPageAliases['mk'] = array(
 	'SetSiteLink' => array( 'ЗадајВикиврска' ),
 	'EntitiesWithoutLabel' => array( 'ЕдинициБезЕтикета' ),
 	'ItemsWithoutSitelinks' => array( 'ПредметиБезВикиврски' ),
+	'MyLanguageFallbackChain' => array( 'МојЛанецНаРезервниЈазици' ),
 );
 
 /** Dutch (Nederlands) */
