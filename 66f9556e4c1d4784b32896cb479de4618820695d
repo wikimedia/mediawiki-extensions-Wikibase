@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_b6adc833",
+        "filename": "lib/includes/LanguageFallbackChainSerializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T15:09:01Z",
+      "side": 1,
+      "message": "This isn\u0027t JSON.",
+      "revId": "66f9556e4c1d4784b32896cb479de4618820695d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_96aa4c18",
+        "filename": "lib/includes/LanguageFallbackChainSerializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T15:09:01Z",
+      "side": 1,
+      "message": "Really? Doesn\u0027t the frontend use this info?",
+      "revId": "66f9556e4c1d4784b32896cb479de4618820695d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
