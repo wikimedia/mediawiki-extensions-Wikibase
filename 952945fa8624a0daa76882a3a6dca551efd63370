@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "69c609db_3c32575e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-08T18:14:51Z",
+      "side": 1,
+      "message": "https://www.mediawiki.org/wiki/Gerrit/Commit_message_guidelines#Conventions",
+      "revId": "952945fa8624a0daa76882a3a6dca551efd63370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69c609db_b9b6593b",
         "filename": "repo/tests/phpunit/includes/api/ModifyEntityBase.php",
         "patchSetId": 2
