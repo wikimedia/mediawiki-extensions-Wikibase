@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_b6094834",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T15:21:36Z",
+      "side": 1,
+      "message": "getPrefixedId() is deprecated, and this check is case sensitive, which an ID comparison shouldn\u0027t be.\n\nPlease use an EntityIdParser to create an EntityId from $propertyId, and then use EntityId::equals.",
+      "revId": "610f0949ddb837492978f1e7659b4dada4c3391b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
