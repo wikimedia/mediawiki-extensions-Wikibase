@@ -131,24 +131,29 @@ class GetClaims extends ApiWikibase {
 		$claims = array();
 		$params = $this->extractRequestParams();
 
-		// TODO: we probably need this elsewhere, so make filter methods in Claim
-		$rank = isset( $params['rank'] ) ? ClaimSerializer::unserializeRank( $params['rank'] ) : false;
-		$propertyId = isset( $params['property'] ) ? $params['property'] : false;
-
-		/**
-		 * @var \Wikibase\Claim $claim
-		 */
+		/** @var \Wikibase\Claim $claim */
 		foreach ( $claimsList as $claim ) {
-			$rankIsOk = $rank === false
-				|| ( $claim instanceof Statement && $claim->getRank() === $rank );
-
-			if ( $rankIsOk
-				&& ( $propertyId === false || $propertyId === $claim->getPropertyId()->getPrefixedId() ) ) {
+			if ( $this->claimMatchesFilters( $claim ) ) {
 				$claims[] = $claim;
 			}
 		}
 
 		return $claims;
+	}
+
+	function claimMatchesFilters(Claim $claim) {
+		return $this->rankMatchesFilter( $claim->getRank() )
+		&& $this->propertyMatchesFilter( $claim->getPropertyId() );
+	}
+
+	function rankMatchesFilter( $rank ) {
+		$params = $this->extractRequestParams();
+		return !isset( $params['rank'] ) || $rank === ClaimSerializer::unserializeRank( $param );
+	}
+	function propertyMatchesFilter( EntityId $propertyId ) {
+		$params = $this->extractRequestParams();
+		return !isset( $params['property'] ) ||
+		$propertyId->equals( WikibaseRepo::getDefaultInstance()->getEntityIdParser()->parse( $params['property'] ) );
 	}
 
 	/**
