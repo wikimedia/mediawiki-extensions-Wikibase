@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_533f46b1",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2013-07-08T00:47:04Z",
+      "side": 1,
+      "message": "wants",
+      "revId": "78cc5dd0968915a2ac50dc2790ee89fccd875172",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
