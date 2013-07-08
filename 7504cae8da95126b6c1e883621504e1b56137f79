@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_3971c9a9",
+        "filename": "lib/includes/LanguageWithConversion.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T15:31:41Z",
+      "side": 1,
+      "message": "It should just throw an exception if the code is invalid. Returning null seems pointless, and it makes factory() more complex.",
+      "revId": "7504cae8da95126b6c1e883621504e1b56137f79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
