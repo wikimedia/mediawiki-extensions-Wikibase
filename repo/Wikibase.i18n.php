@@ -235,50 +235,35 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, converted from $3 - $4',
 
 	// API errors - these messages should not be translated
-	'wikibase-api-aliases-invalid-list' => 'Use either "set" or "add"/"remove" parameters.', # Do not translate
-	'wikibase-api-no-token' => 'No token given.', # Do not translate
-	'wikibase-api-no-data' => 'No data to operate upon.', # Do not translate
-	'wikibase-api-client-error' => 'The external client site failed.', # Do not translate
-	'wikibase-api-no-external-data' => 'There was no data from the external client site, possibly due to connection errors.', # Do not translate
-	'wikibase-api-no-external-page' => 'The external client site did not provide page information.', # Do not translate
-	'wikibase-api-add-sitelink-failed' => 'The site link could not be saved.', # Do not translate
-	'wikibase-api-remove-sitelink-failed' => 'The site link could not be removed.', # Do not translate
-	'wikibase-api-cant-edit' => 'Edit not allowed:
-$1', # Do not translate
-	'wikibase-api-json-invalid' => 'The supplied JSON structure could not be parsed or recreated as a valid structure.', # Do not translate
-	'wikibase-api-not-recognized' => 'An invalid property was requested: $1.', # Do not translate
-	'wikibase-api-not-recognized-string' => 'A string was expected, but not found.', # Do not translate
-	'wikibase-api-not-recognized-array' => 'An array was expected, but not found.', # Do not translate
-	'wikibase-api-not-recognized-language' => 'The supplied language identifier was not recognized.', # Do not translate
-	'wikibase-api-not-recognized-siteid' => 'The supplied site identifier was not recognized.', # Do not translate
-	'wikibase-api-no-permissions' => 'The user does not have sufficient rights.', # Do not translate
-	'wikibase-api-no-revision' => 'The revision could not be found.', # Do not translate
-	'wikibase-api-patch-empty' => 'The generated patch turned out to be empty.', # Do not translate
-	'wikibase-api-patch-incomplete' => 'The generated patch turned out to be incomplete.', # Do not translate
-	'wikibase-api-data-or-id-xor-wikititle' => 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page, or "data" for a new item.', # Do not translate
-	'wikibase-api-id-xor-wikititle' => 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page.', # Do not translate
-	'wikibase-api-ids-xor-wikititles' => 'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages.', # Do not translate
-	'wikibase-api-no-such-entity' => 'Could not find an existing entity.', # Do not translate
-	'wikibase-api-link-exists' => 'An article on the specified wiki is already linked.', # Do not translate
-	'wikibase-api-add-with-id' => 'Cannot add with the id of an existing item.', # Do not translate
-	'wikibase-api-add-exists' => 'Cannot add to an existing item.', # Do not translate
-	'wikibase-api-update-without-id' => 'Update without a previous id is not possible.', # Do not translate
-	'wikibase-api-no-such-item-link' => 'Could not find an existing item for this link.', # Do not translate
-	'wikibase-api-create-failed' => 'Attempted creation of a new item failed: $1', # Do not translate
-	'wikibase-api-modify-failed' => 'Attempted modification of the item failed.', # Do not translate
-	'wikibase-api-delete-failed' => 'Attempted deletion of the item failed.', # Do not translate
-	'wikibase-api-save-failed' => 'Attempted save of the item failed: $1', # Do not translate
-	'wikibase-api-invalid-contentmodel' => 'The content model for the page is invalid.', # Do not translate
-	'wikibase-api-alias-incomplete' => 'Cannot find a definition of the alias for the item.', # Do not translate
-	'wikibase-api-alias-not-found' => 'Cannot find any previous alias in the item.', # Do not translate
-	'wikibase-api-alias-found' => 'Found a previous alias in the item.', # Do not translate
-	'wikibase-api-label-or-description' => 'Use either or both of "label" and "description".', # Do not translate
-	'wikibase-api-label-not-found' => 'Cannot find a previous label for this language in the item.', # Do not translate
-	'wikibase-api-description-not-found' => 'Cannot find a previous description for this language in the item.', # Do not translate
-	'wikibase-api-wrong-class' => 'The content on the found page is not of correct type.',  # Do not translate
-	'wikibase-api-session-failure' => 'The current session has failed. You have to log in again.', # Do not translate
-	'wikibase-api-illegal-field' => 'Illegal field used in call: $1', # Do not translate
-	'wikibase-api-edit-conflict' => 'Edit conflict, could not patch the current revision', # Do not translate
+	'wikibase-api-common-item' => 'Common item detected', # Do not translate
+	'wikibase-api-editconflict' => 'Edit conflict, could not patch the current revision', # Do not translate
+	'wikibase-api-failed-add-sitelink' => 'The site link could not be saved', # Do not translate
+	'wikibase-api-failed-modify' => 'Attempted modification of the item failed', # Do not translate
+	'wikibase-api-inconsistent-language' => 'Inconsistent language detected', # Do not translate
+	'wikibase-api-inconsistent-site' => 'Inconsistent site detected', # Do not translate
+	'wikibase-api-invalid-guid' => 'Invalid claim guid', # Do not translate
+	'wikibase-api-invalid-list' => 'Invalid list', # Do not translate
+	'wikibase-api-invalid-property-id' => 'Invalid propertyid', # Do not translate
+	'wikibase-api-invalid-snak' => 'Invalid snak', # Do not translate
+	'wikibase-api-no-common-iten' => 'there is no common item', # Do not translate
+	'wikibase-api-no-data' => 'No data to operate on', # Do not translate
+	'wikibase-api-no-external-page' => 'The external client site did not provide page information', # Do not translate
+	'wikibase-api-no-such-claim' => 'Could not find such a claim', # Do not translate
+	'wikibase-api-no-such-entity' => 'Could not find such an entity', # Do not translate
+	'wikibase-api-no-such-qualifier' => 'Could not find such a qualifier', # Do not translate
+	'wikibase-api-no-such-reference' => 'Could not find such a reference', # Do not translate
+	'wikibase-api-no-such-statement' => 'Could not find such a statement', # Do not translate
+	'wikibase-api-not-a-statement' => 'Not a statement', # Do not translate
+	'wikibase-api-not-an-item' => 'Not an item', # Do not translate
+	'wikibase-api-not-recognized-siteid' => 'The supplied site identifier was not recognized', # Do not translate
+	'wikibase-api-not-recognized' => 'Something was not recognized', # Do not translate
+	'wikibase-api-not-recognized-array' => 'An array was expected, but not recognized', # Do not translate
+	'wikibase-api-not-recognized-language' => 'The supplied language identifier was not recognized', # Do not translate
+	'wikibase-api-not-recognized-string' => 'A string was expected, but not recognized', # Do not translate
+	'wikibase-api-param-missing' => 'A parameter that is required was missing', # Do not translate
+	'wikibase-api-param-illegal' => 'An illegal set of parameters have been used', # Do not translate
+	'wikibase-api-permissiondenied' => 'You do not have the permissions needed to carry out this action', # Do not translate
+	'wikibase-api-wrong-class' => 'Wrong class type detected', # Do not translate
 
 	'wikibase-self-conflict-patched' => 'Your edit was patched into the latest version, overriding some of your own intermediate changes.',
 	'wikibase-conflict-patched' => 'Your edit was patched into the latest version.',
@@ -958,6 +943,7 @@ This is an error message for a situation where the arguments to the API is incon
 	'wikibase-api-illegal-field' => '!!DO NOT TRANSLATE!! There is an illegal field name in the props for the module call. This makes the call fail, but the name of failing field will be reported. Parameters:
 * $1 is the failing field name',
 	'wikibase-api-edit-conflict' => 'There is an edit conflict that that could not be resolved. This can have several reasons, but there is only a generic message for all of them.',
+
 	'wikibase-self-conflict-patched' => 'Warning issued when an edit is made based on an old revision, clean patching was not possible, but all intermediate edits where made by the same user, so aggressive patching was applied, overriding earlier changes by the same user. This may happen e.g. when editing the same item in multiple browser windows. This warning is usually not displayed.',
 	'wikibase-conflict-patched' => 'Warning issued when an edit is made based on an old revision, but the edit conflict could be resolved by patching. This warning is usually not displayed.',
 	'wikibase-restoreold' => "Link text shown on the link that lets the user restore the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.

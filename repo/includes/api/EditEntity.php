@@ -86,7 +86,7 @@ class EditEntity extends ModifyEntity {
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
 		if ( !( isset( $params['data'] ) OR  isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-data-or-id-xor-wikititle' )->text(), 'data-or-id-xor-wikititle' );
+			$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page, or "data" for a new item', 'data-or-id-xor-wikititle' );
 		}
 		if ( isset( $params['id'] ) && isset( $params['new'] ) ) {
 			$this->dieUsage( "Parameter 'id' and 'new' are not allowed to be both set in the same request", 'add-with-id' );
@@ -118,7 +118,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( !isset( $params['data'] ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-no-data' )->text(), 'no-data' );
+			$this->dieUsage( 'No data to operate upon', 'no-data' );
 		}
 
 		$data = json_decode( $params['data'], true );
@@ -160,7 +160,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( !$status->isOk() ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "Edit failed: $1", $status->getWikiText() );
+			$this->dieUsage( "Edit failed: $1", 'save-failed' );
 		}
 
 		if ( $changeOps->apply( $entity ) === false ) {
@@ -327,7 +327,7 @@ class EditEntity extends ModifyEntity {
 				$linkSite = $sites->getSite( $globalSiteId );
 			} else {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'site-not-found' );
+				$this->dieUsage( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
 			}
 
 			if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
@@ -337,7 +337,7 @@ class EditEntity extends ModifyEntity {
 
 				if ( $linkPage === false ) {
 					wfProfileOut( __METHOD__ );
-					$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'add-sitelink-failed' );
+					$this->dieUsage( 'The external client site did not provide page information' , 'failed-add-sitelink' );
 				}
 
 				$siteLinksChangeOps[] = new ChangeOpSiteLink( $globalSiteId, $linkPage );
@@ -381,7 +381,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( is_null( $data ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-json-invalid' )->text(), 'json-invalid' );
+			$this->dieUsage( 'Invalid json: The supplied JSON structure could not be parsed or recreated as a valid structure' , 'invalid-json' );
 		}
 
 		if ( !is_array( $data ) ) { // NOTE: json_decode will decode any JS literal or structure, not just objects!
@@ -402,20 +402,20 @@ class EditEntity extends ModifyEntity {
 		// conditional processing
 		if ( isset( $data['pageid'] ) && ( is_object( $page ) ? $page->getId() !== $data['pageid'] : true ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'pageid' )->text(), 'illegal-field' );
+			$this->dieUsage( 'Illegal field used in call: pageid', 'param-illegal' );
 		}
 		// not completely convinced that we can use title to get the namespace in this case
 		if ( isset( $data['ns'] ) && ( is_object( $title ) ? $title->getNamespace() !== $data['ns'] : true ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'namespace' )->text(), 'illegal-field' );
+			$this->dieUsage( 'Illegal field used in call: namespace', 'param-illegal' );
 		}
 		if ( isset( $data['title'] ) && ( is_object( $title ) ? $title->getPrefixedText() !== $data['title'] : true ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'title' )->text(), 'illegal-field' );
+			$this->dieUsage( 'Illegal field used in call: title', 'param-illegal' );
 		}
 		if ( isset( $data['lastrevid'] ) && ( is_object( $revision ) ? $revision->getId() !== $data['lastrevid'] : true ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'lastrevid' )->text(), 'illegal-field' );
+			$this->dieUsage( 'Illegal field used in call: lastrevid', 'param-illegal' );
 		}
 
 		return $status;
@@ -426,19 +426,26 @@ class EditEntity extends ModifyEntity {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'no-such-entity', 'info' => "Either 'id' or 'new' parameter has to be set" ),
+			array( 'code' => 'no-such-entity-type', 'info' => "No such entity type" ),
+			array( 'code' => 'data-or-id-xor-wikititle', 'info' => "Use either id or wikititle combination" ),
+			array( 'code' => 'add-with-id', 'info' => "Parameter 'id' and 'new' are not allowed to be both set in the same request" ),
 			array( 'code' => 'no-data', 'info' => $this->msg( 'wikibase-api-no-data' )->text() ),
-			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
-			array( 'code' => 'cant-edit', 'info' => $this->msg( 'wikibase-api-cant-edit' )->text() ),
-			array( 'code' => 'no-permissions', 'info' => $this->msg( 'wikibase-api-no-permissions' )->text() ),
-			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
-			array( 'code' => 'add-sitelink-failed', 'info' => $this->msg( 'wikibase-api-add-sitelink-failed' )->text() ),
-			array( 'code' => 'illegal-field', 'info' => $this->msg( 'wikibase-api-illegal-field' )->text() ),
-			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
-			array( 'code' => 'not-recognized-string', 'info' => $this->msg( 'wikibase-api-not-recognized-string' )->text() ),
+			array( 'code' => 'edit-entity-create-property-failed', 'info' => 'No datatype given' ),
+			array( 'code' => 'not-recognized', 'info' => "key can't be handled: sitelinks" ),
+			array( 'code' => 'edit-entity-apply-failed', 'info' => "Change could not be applied to entity" ),
 			array( 'code' => 'not-recognized-array', 'info' => $this->msg( 'wikibase-api-not-recognized-array' )->text() ),
+			array( 'code' => 'no-such-site', 'info' => 'There is no site for global site id' ),
+			array( 'code' => 'failed-add-sitelink', 'info' => $this->msg( 'wikibase-api-failed-add-sitelink' )->text() ),
+			array( 'code' => 'invalid-json', 'info' => 'Invalid json' ),
+			array( 'code' => 'not-recognized-string', 'info' => $this->msg( 'wikibase-api-not-recognized-string' )->text() ),
+			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
+			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
 			array( 'code' => 'inconsistent-language', 'info' => $this->msg( 'wikibase-api-inconsistent-language' )->text() ),
+			array( 'code' => 'not-recognised-language', 'info' => $this->msg( 'wikibase-not-recognised-language' )->text() ),
 			array( 'code' => 'inconsistent-site', 'info' => $this->msg( 'wikibase-api-inconsistent-site' )->text() ),
-			array( 'code' => 'inconsistent-values', 'info' => $this->msg( 'wikibase-api-inconsistent-values' )->text() )
+			array( 'code' => 'not-recognized-site', 'info' => "Unknown site" ),
+			array( 'code' => 'save-failed', 'info' => "Save failed" ),
 		) );
 	}
 
@@ -528,10 +535,10 @@ class EditEntity extends ModifyEntity {
 	public function checkMultilangArgs( $arg, $langCode ) {
 		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
+			$this->dieUsage( 'An array was expected, but not found' , 'not-recognized-array' );
 		}
 		if ( !is_string( $arg['language'] ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
+			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
 		}
 		if ( !is_numeric( $langCode ) ) {
 			if ( $langCode !== $arg['language'] ) {
@@ -542,7 +549,7 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( "unknown language: {$arg['language']}", 'not-recognized-language' );
 		}
 		if ( !is_string( $arg['value'] ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
+			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
 		}
 		return $status;
 	}
@@ -559,10 +566,10 @@ class EditEntity extends ModifyEntity {
 	public function checkSiteLinks( $arg, $siteCode, SiteList &$sites = null ) {
 		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
+			$this->dieUsage( 'An array was expected, but not found' , 'not-recognized-array' );
 		}
 		if ( !is_string( $arg['site'] ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
+			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
 		}
 		if ( !is_numeric( $siteCode ) ) {
 			if ( $siteCode !== $arg['site'] ) {
@@ -573,7 +580,7 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( "unknown site: {$arg['site']}", 'not-recognized-site' );
 		}
 		if ( !is_string( $arg['title'] ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
+			$this->dieUsage( 'A string was expected, but not found' , 'not-recognized-string' );
 		}
 		return $status;
 	}
