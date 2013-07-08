@@ -247,7 +247,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 			'baserevid' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
-			'bot' => null,
+			'bot' => false,
 		);
 	}
 
