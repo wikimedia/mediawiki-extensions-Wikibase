@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_796ea131",
+        "filename": "lib/includes/specials/SpecialWikibasePage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-08T16:21:58Z",
+      "side": 1,
+      "message": "So now one can no longer construct such a special page without having this thing invoked... not good",
+      "revId": "a9aada78a06a890fb3f78e58b138c4af8b8b732a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_99755dfa",
+        "filename": "lib/tests/phpunit/StringNormalizerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-08T16:21:58Z",
+      "side": 1,
+      "message": "Replace line with: @covers Wikibase\\StringNormalizer",
+      "revId": "a9aada78a06a890fb3f78e58b138c4af8b8b732a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_f9629140",
+        "filename": "lib/tests/phpunit/StringNormalizerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-08T16:21:58Z",
+      "side": 1,
+      "message": "Why does this derive from MediaWikiTestCase?",
+      "revId": "a9aada78a06a890fb3f78e58b138c4af8b8b732a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_395d4978",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-08T16:21:58Z",
+      "side": 1,
+      "message": "yep :)",
+      "revId": "a9aada78a06a890fb3f78e58b138c4af8b8b732a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
