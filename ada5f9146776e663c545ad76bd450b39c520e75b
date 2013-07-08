@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_59dbe579",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T15:50:40Z",
+      "side": 1,
+      "message": "if validateLanguageCode itself throw an exception, this code would be less awkward.",
+      "revId": "ada5f9146776e663c545ad76bd450b39c520e75b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_5920054c",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T15:50:40Z",
+      "side": 1,
+      "message": "We only need the language object for the parent language relation, right? Would be nice to just cache that somewhere.",
+      "revId": "ada5f9146776e663c545ad76bd450b39c520e75b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
