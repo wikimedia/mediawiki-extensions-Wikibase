@@ -283,6 +283,17 @@ $messages['es'] = array(
 	'valueview-preview-label' => 'se mostrará como:',
 );
 
+/** Estonian (eesti)
+ * @author Pikne
+ */
+$messages['et'] = array(
+	'valueview-expert-timeinput-precision' => 'Täpsus:',
+	'valueview-expert-timeinput-calendar' => 'Kalender:',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(Uus kalender)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(Vana kalender)',
+	'valueview-preview-label' => 'kuvatakse nii:',
+);
+
 /** Persian (فارسی)
  */
 $messages['fa'] = array(
