@@ -33,6 +33,24 @@
       "revId": "66f9556e4c1d4784b32896cb479de4618820695d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_5923e5c0",
+        "filename": "lib/includes/LanguageFallbackChainSerializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2013-07-08T17:01:56Z",
+      "side": 1,
+      "message": "No. Frontend just sends it back to API, in my design, to have fallback chain resolved server side, instead of fetching labels in all languages then resolve them itself, and the resolved chain is identified by language code \u0027qqc\u0027 (answering your question at Change-Id: Id0eef45099469771d4d50787c4083eb238c21690 here).",
+      "parentUuid": "69c609db_96aa4c18",
+      "revId": "66f9556e4c1d4784b32896cb479de4618820695d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
