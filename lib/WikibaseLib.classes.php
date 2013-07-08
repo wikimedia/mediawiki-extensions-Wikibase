@@ -138,6 +138,7 @@ return call_user_func( function() {
 		'Wikibase\TermPropertyLabelResolver' => 'includes/store/TermPropertyLabelResolver.php',
 
 		'Wikibase\PropertyInfoStore' => 'includes/store/PropertyInfoStore.php',
+		'Wikibase\DummyPropertyInfoStore' => 'includes/store/DummyPropertyInfoStore.php',
 		'Wikibase\CachingPropertyInfoStore' => 'includes/store/CachingPropertyInfoStore.php',
 
 		// includes/store/sql

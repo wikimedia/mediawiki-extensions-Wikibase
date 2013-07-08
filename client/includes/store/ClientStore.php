@@ -90,6 +90,15 @@ interface ClientStore {
 	public function newChangesTable();
 
 	/**
+	 * Returns an PropertyInfoStore
+	 *
+	 * @since 0.4
+	 *
+	 * @return PropertyInfoStore
+	 */
+	public function getPropertyInfoStore();
+
+	/**
 	 * Removes all data from the store.
 	 *
 	 * @since 0.2

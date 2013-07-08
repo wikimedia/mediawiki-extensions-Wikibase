@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Language;
+use LogicException;
 
 /**
  * Implementation of the client store interface using an SQL backend via MediaWiki's
@@ -185,7 +186,18 @@ class CachingSqlStore implements ClientStore {
 	 * @return TermIndex
 	 */
 	public function getTermIndex() {
-		throw new MWException( "Not Implemented, " . __CLASS__ . " is incomplete." );
+		throw new LogicException( "Not Implemented, " . __CLASS__ . " is incomplete." );
+	}
+
+	/**
+	 * @see Store::getPropertyInfoStore
+	 *
+	 * @since 0.4
+	 *
+	 * @return PropertyInfoStore
+	 */
+	public function getPropertyInfoStore() {
+		throw new LogicException( "Not Implemented, " . __CLASS__ . " is incomplete." );
 	}
 
 	/**
