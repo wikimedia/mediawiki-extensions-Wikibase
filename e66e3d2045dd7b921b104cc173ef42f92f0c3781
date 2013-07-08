@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_f9b451d4",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T16:10:23Z",
+      "side": 1,
+      "message": "avoid globals. If we must use them, use them in the constructor to set a member.",
+      "revId": "e66e3d2045dd7b921b104cc173ef42f92f0c3781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_59c6454d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T16:10:23Z",
+      "side": 1,
+      "message": "This entire block could be in the constructor, then we\u0027d only need the fallback chain in a member and wouldn\u0027t need to deal with object creation inline.",
+      "revId": "e66e3d2045dd7b921b104cc173ef42f92f0c3781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_39e8a9b5",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T16:10:23Z",
+      "side": 1,
+      "message": "It seems quite odd to me that this should be needed... I don\u0027t see why the API would take a fallback chain as an argument.",
+      "revId": "e66e3d2045dd7b921b104cc173ef42f92f0c3781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_79d22101",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T16:10:23Z",
+      "side": 1,
+      "message": "more inline object creation -\u003e should go into the constructor.",
+      "revId": "e66e3d2045dd7b921b104cc173ef42f92f0c3781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_d90b558e",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-08T16:10:23Z",
+      "side": 1,
+      "message": "This is somewhat scary. The logic for injecting labels in the preferred language should be factored out so it has a name we can discuss, and so it can be tested separately.",
+      "revId": "e66e3d2045dd7b921b104cc173ef42f92f0c3781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
