@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_623c262e",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-08T21:46:48Z",
+      "side": 1,
+      "message": "if ( $this-\u003eclaimMatchesFilters( $claim ) ) {\n    $claims[] \u003d $claim;\n}\n\nfunction claimMatchesFilters() {\n    return $this-\u003erankMatchesFilter( $claim-\u003egetRank() )\n        \u0026\u0026 $this-\u003epropertyMatchesFilter( $claim-\u003egetPropertyId() )\n}\n\nfunction rankMatchesFilter( $rank ) {\n    $params \u003d $this-\u003eextractRequestParams();\n    return !isset( $params[\u0027rank\u0027] ) || $rank \u003d\u003d\u003d ClaimSerializer::unserializeRank( $param );\n}\n\nfunction propertyMatchesFilter( EntityId $propertyId ) {\n    $params \u003d $this-\u003eextractRequestParams();\n    return $propertyId-\u003eequals( WikibaseRepo::getDefaultInstance()-\u003egetEntityIdParser()-\u003eparse( $params[\u0027property\u0027] ) );\n}",
+      "revId": "5c5a072f57fbb9e16bd2424e5ffcb5ce31a95f41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
