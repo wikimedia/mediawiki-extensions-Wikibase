@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_4d92fb9f",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-08T23:29:14Z",
+      "side": 1,
+      "message": "this line is no longer needed looks like",
+      "revId": "a4720674eb7622576a186e32c8beee53b76a2827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_2d7b3f7a",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-08T23:29:14Z",
+      "side": 1,
+      "message": "protected",
+      "revId": "a4720674eb7622576a186e32c8beee53b76a2827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_0d800349",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-08T23:29:14Z",
+      "side": 1,
+      "message": "indent \u0026\u0026",
+      "revId": "a4720674eb7622576a186e32c8beee53b76a2827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_6d953786",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-08T23:29:14Z",
+      "side": 1,
+      "message": "|| on next line and indented",
+      "revId": "a4720674eb7622576a186e32c8beee53b76a2827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
