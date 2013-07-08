@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "69c609db_5620d44b",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-08T13:16:59Z",
+      "side": 1,
+      "message": "errr, an empty string",
+      "parentUuid": "69c609db_566e1498",
+      "revId": "b08b1f6d3415d8a2a6500b22d6ba9b3107be45de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69c609db_16f93ce7",
         "filename": "client/includes/parserhooks/PropertyParserFunction.php",
         "patchSetId": 19
