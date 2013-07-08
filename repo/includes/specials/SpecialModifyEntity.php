@@ -81,7 +81,7 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 			$this->setForm();
 		}
 		else {
-			//TODO: need conflict detection??
+			// TODO: need conflict detection??
 			$editEntity = new \Wikibase\EditEntity( $this->entityContent, $this->getUser(), false, $this->getContext() );
 			$editEntity->attemptSave(
 				$summary,
@@ -89,8 +89,10 @@ abstract class SpecialModifyEntity extends SpecialWikibasePage {
 				$this->getRequest()->getVal( 'wpEditToken' )
 			);
 
-			if ( !$editEntity->isSuccess() ) {
-				$editEntity->showErrorPage();
+			if ( !$editEntity->isSuccess() && $editEntity->getStatus()->getErrorsArray() ) {
+				$errors = $editEntity->getStatus()->getErrorsArray();
+				$this->showErrorHTML( $errors[0]->parse() );
+				$this->setForm();
 			}
 			else {
 				$entityUrl = $this->entityContent->getTitle()->getFullUrl();

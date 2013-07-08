@@ -253,37 +253,40 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return Status
 	 */
 	protected function setSiteLink( $entityContent, $siteId, $pageName, &$summary ) {
-		$site = \Sites::singleton()->getSite( $siteId );
 		$status = \Status::newGood();
+		$site = \Sites::singleton()->getSite( $siteId );
 
 		if ( $site === null ) {
-			$status->error( 'wikibase-setsitelink-invalid-site', $siteId );
+			$status->fatal( 'wikibase-setsitelink-invalid-site', $siteId );
 			return $status;
 		}
 
-		if ( $pageName !== '' ) {
-			// Don't try to normalize an empty string (which means: remove the link)
-			$pageName = $site->normalizePageName( $pageName );
+		/**
+		 * @var Item $item
+		 */
+		$item = $entityContent->getItem();
 
-			if ( $pageName === false ) {
-				$status->error( 'wikibase-error-ui-no-external-page' );
-				return $status;
-			}
-		}
-
+		// Empty page means remove site link
 		if ( $pageName === '' ) {
 			try {
-				$link = $entityContent->getItem()->getSimpleSiteLink( $siteId );
-			} catch( \OutOfBoundsException $e ) {
-				$status->error( 'wikibase-setsitelink-remove-failed' );
+				$item->getSimpleSiteLink( $siteId );
+			}
+			catch( \OutOfBoundsException $ex ) {
+				$status->fatal( 'wikibase-setsitelink-remove-failed' );
 				return $status;
 			}
-			$entityContent->getItem()->removeSiteLink( $siteId );
+			$item->removeSiteLink( $siteId );
 			$i18n = 'wbsetsitelink-remove';
 		}
 		else {
+			// Try to normalize the page name
+			$pageName = $site->normalizePageName( $pageName );
+			if ( $pageName === false ) {
+				$status->fatal( 'wikibase-error-ui-no-external-page' );
+				return $status;
+			}
 			$siteLink = new SimpleSiteLink( $siteId, $pageName );
-			$entityContent->getItem()->addSimpleSiteLink( $siteLink );
+			$item->addSimpleSiteLink( $siteLink );
 			$i18n = 'wbsetsitelink-set';
 		}
 
