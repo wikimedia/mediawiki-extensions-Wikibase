@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_366a78ef",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-08T15:14:36Z",
+      "side": 1,
+      "message": "why is this null here while it\u0027s being changed to false in Ieb93f88a?",
+      "revId": "c5e7d64c54113c85789e1404c136d6249b0b7cc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
