@@ -187,7 +187,10 @@ class DirectSqlStore implements ClientStore {
 	 * @return TermIndex
 	 */
 	protected function newTermIndex() {
-		return new TermSqlIndex( 'wb_terms', $this->repoWiki );
+		//TODO: Get $stringNormalizer from WikibaseClient?
+		//      Can't really pass this via the constructor...
+		$stringNormalizer = new StringNormalizer();
+		return new TermSqlIndex( $stringNormalizer , $this->repoWiki );
 	}
 
 	/**
