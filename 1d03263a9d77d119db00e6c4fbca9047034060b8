@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_3c437218",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-09T12:22:46Z",
+      "side": 1,
+      "message": "I still think it would be better to do this in the constructor, because then we can change easily from local initialization to injection. The \"lazy init\" pattern here cements the dependency on the global registry, which is something we really want to get rid of.",
+      "revId": "1d03263a9d77d119db00e6c4fbca9047034060b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
