@@ -28,12 +28,6 @@ use Wikibase\Test\Api\ModifyItemBase;
  * @ingroup WikibaseRepoTest
  * @ingroup Test
  *
- * @group Wikibase
- * @group WikibaseEntity
- * @group WikibaseContent
- *
- * @group Database
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
