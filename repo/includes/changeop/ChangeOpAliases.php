@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use MWExceptiontion;
+use MWException;
 
 /**
  * Class for aliases change operation
