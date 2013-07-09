@@ -117,14 +117,36 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 		if ( $res === false ) {
 			$info = null;
 		} else {
-			$info = json_decode( $res, true );
+			$info = $this->decodeInfo( $res );
 
 			if ( $info === null ) {
-				wfLogWarning( "failed to decode property info blob for " . $propertyId . ": " . $res );
+				wfLogWarning( "failed to decode property info blob for " . $propertyId . ": " . substr( $res, 0, 200 ) );
 			}
 		}
 
 		wfProfileOut( __METHOD__ );
+		return $info;
+	}
+
+	/**
+	 * Decodes an info blob.
+	 *
+	 * @param string|null|bool  $blob
+	 *
+	 * @return array|null The decoded blob as an associative array, or null if the blob
+	 *         could not be decoded.
+	 */
+	protected function decodeInfo( $blob ) {
+		if ( $blob === false || $blob === null ) {
+			return null;
+		}
+
+		$info = json_decode( $blob, true );
+
+		if ( !is_array( $info ) ) {
+			$info = null;
+		}
+
 		return $info;
 	}
 
@@ -149,7 +171,7 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 		$infos = array();
 
 		while ( $row = $res->fetchObject() ) {
-			$info = json_decode( $row->pi_info );
+			$info = $this->decodeInfo( $row->pi_info );
 
 			if ( $info === null ) {
 				wfLogWarning( "failed to decode property info blob for property "
