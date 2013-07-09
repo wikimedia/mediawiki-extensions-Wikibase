@@ -20,6 +20,38 @@ use Wikibase\Repo\WikibaseRepo;
 abstract class ViewEntityAction extends \ViewAction {
 
 	/**
+	 * @var LanguageFallbackChain
+	 */
+	protected $languageFallbackChain;
+
+	/**
+	 * Get the language fallback chain for current context.
+	 *
+	 * @since 0.4
+	 *
+	 * @return LanguageFallbackChain
+	 */
+	public function getLanguageFallbackChain() {
+		if ( $this->languageFallbackChain === null ) {
+			$this->languageFallbackChain = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
+				->newFromContext( $this->getContext() );
+		}
+
+		return $this->languageFallbackChain;
+	}
+
+	/**
+	 * Set language fallback chain.
+	 *
+	 * @since 0.4
+	 *
+	 * @param LanguageFallbackChain $chain
+	 */
+	public function setLanguageFallbackChain( LanguageFallbackChain $chain ) {
+		$this->languageFallbackChain = $chain;
+	}
+
+	/**
 	 * @see Action::getName()
 	 *
 	 * @since 0.1
@@ -194,20 +226,12 @@ abstract class ViewEntityAction extends \ViewAction {
 		$this->getArticle()->view();
 
 		// Figure out which label to use for title.
-		$langCode = $this->getContext()->getLanguage()->getCode();
-		// FIXME: Removed as a quickfix
-		/*
-		list( $labelCode, $labelText, $labelLang) =
-			Utils::lookupUserMultilangText(
-				$content->getEntity()->getLabels(),
-				Utils::languageChain( $langCode ),
-				array( $langCode, $this->getPageTitle(), $this->getContext()->getLanguage() )
-			);
-*/
-		// FIXME: this replaces the stuff above
-		$labelText = $content->getEntity()->getLabel( $langCode );
+		$languageFallbackChain = $this->getLanguageFallbackChain();
+		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
 
-		if ( $labelText === false ) {
+		if ( $labelData ) {
+			$labelText = $labelData['value'];
+		} else {
 			$idPrefixer = WikibaseRepo::getDefaultInstance()->getIdFormatter();
 			$labelText = strtoupper( $idPrefixer->format( $content->getEntity()->getId() ) );
 		}
