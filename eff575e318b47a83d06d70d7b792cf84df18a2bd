@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_fc0b9a8d",
+        "filename": "lib/includes/serializers/MultilingualSerializerObject.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-09T12:49:02Z",
+      "side": 1,
+      "message": "Just call it \"MultilingualSerializer\" - that\u0027s what it is, right?",
+      "revId": "eff575e318b47a83d06d70d7b792cf84df18a2bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_5c010e6e",
+        "filename": "lib/includes/serializers/MultilingualSerializerObject.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-09T12:49:02Z",
+      "side": 1,
+      "message": "Please provide a unit test for this.",
+      "revId": "eff575e318b47a83d06d70d7b792cf84df18a2bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
