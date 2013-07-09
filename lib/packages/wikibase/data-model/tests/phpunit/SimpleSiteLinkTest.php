@@ -104,4 +104,59 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		new SimpleSiteLink( 'enwiki', $invalidPageName );
 	}
 
+	/**
+	 * @dataProvider badgesProvider
+	 */
+	public function testGetBadges( $badges ) {
+		$siteLink = new SimpleSiteLink( 'enwiki', 'Wikidata', $badges );
+		$this->assertEquals( $badges, $siteLink->getBadges() );
+	}
+
+	public function badgesProvider() {
+		$argLists = array();
+
+		$argLists[] = array( array() );
+		$argLists[] = array( array( "Nyan Certified" ) );
+		$argLists[] = array( array( "FA", "stub" ) );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider stuffThatIsNotArrayProvider
+	 */
+	public function testCannotConstructWithNonArrayBadges( $invalidBadges ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new SimpleSiteLink( 'enwiki', 'Wikidata', $invalidBadges );
+	}
+
+	public function stuffThatIsNotArrayProvider() {
+		$argLists = array();
+
+		$argLists[] = array( 42 );
+		$argLists[] = array( true );
+		$argLists[] = array( 'nyan nyan' );
+		$argLists[] = array( null );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider stuffThatIsNotArrayOfStringsProvider
+	 */
+	public function testCannotConstructWithNonArrayOfStringsBadges( $invalidBadges ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new SimpleSiteLink( 'enwiki', 'Wikidata', $invalidBadges );
+	}
+
+	public function stuffThatIsNotArrayOfStringsProvider() {
+		$argLists = array();
+
+		$argLists[] = array( array( 'nyan', 42 ) );
+		$argLists[] = array( array( 'nyan', true ) );
+		$argLists[] = array( array( 'nyan', array() ) );
+		$argLists[] = array( array( 'nyan', null ) );
+
+		return $argLists;
+	}
 }
