@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_1cb956ea",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-09T12:19:23Z",
+      "side": 1,
+      "message": "These comments are not particularly useful. They are not adding info on the parameter type, and the return type can be inferred from the method name, or by having a glance as the return statement.",
+      "revId": "25da74bbcca49e04f6f532b61a1330933b147757",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_fcbd5ad5",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-09T12:19:23Z",
+      "side": 1,
+      "message": "Missing spaces",
+      "revId": "25da74bbcca49e04f6f532b61a1330933b147757",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
