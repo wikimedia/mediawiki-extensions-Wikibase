@@ -184,6 +184,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.json',
 				'user.tokens',
+				'mediawiki.api',
 				'wikibase.repoAccess',
 				'wikibase',
 			)
