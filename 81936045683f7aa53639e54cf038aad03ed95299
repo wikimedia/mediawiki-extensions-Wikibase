@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_1c1156af",
+        "filename": "repo/tests/phpunit/includes/api/PermissionsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-09T13:14:52Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure this right isn\u0027t checked when updating aliases via the EditEntity module. My gut feeling is that we should remove it if there\u0027s no clear use case.",
+      "revId": "81936045683f7aa53639e54cf038aad03ed95299",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
