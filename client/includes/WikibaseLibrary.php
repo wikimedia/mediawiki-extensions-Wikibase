@@ -28,6 +28,8 @@ use ValueParsers\ParseException;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Serializers\EntitySerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Utils;
 
 class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
@@ -76,6 +78,19 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		$serializerFactory = new SerializerFactory();
 		$opt = new EntitySerializationOptions( WikibaseClient::getDefaultInstance()->getEntityIdFormatter() );
+
+		// This is $wgContLang, not parser target language or anything else.
+		// See Scribunto_LuaLanguageLibrary::getContLangCode().
+		global $wgContLang;
+
+		// See mw.wikibase.lua. This is the only way to inject values into mw.wikibase.label( ),
+		// so any customized Lua modules can access labels of another entity written in another variant,
+		// unless we give them the ability to getEntity() any entity by specifying its ID, not just self.
+		$chain = WikibaseClient::getDefaultInstance()->getLanguageFallbackChainFactory()->newFromLanguage(
+			$wgContLang, LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
+		);
+		$opt->setLanguages( Utils::getLanguageCodes() + array( $wgContLang->getCode() => $chain ) );
+
 		$serializer = $serializerFactory->newSerializerForObject( $entityObject, $opt );
 
 		try {
