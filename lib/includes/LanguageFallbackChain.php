@@ -31,6 +31,11 @@ use \Language;
 class LanguageFallbackChain {
 
 	/**
+	 * Pseudo language code used to identify a fallback chain initialized from current context.
+	 */
+	const CONTEXT_LANGUAGE_CODE = 'qqc';
+
+	/**
 	 * @var LanguageWithConversion[]
 	 */
 	private $chain = array();
