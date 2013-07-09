@@ -119,7 +119,9 @@ abstract class EntityView extends \ContextSource {
 		wfProfileIn( __METHOD__ );
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
-		$info = $this->extractEntityInfo( $entity, $lang );
+		if ( !$lang ) {
+			$lang = $this->getLanguage();
+		}
 
 		$entityId = $entity->getEntity()->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 		$html = '';
@@ -127,8 +129,8 @@ abstract class EntityView extends \ContextSource {
 		$html .= wfTemplate( 'wb-entity',
 			$entity->getEntity()->getType(),
 			$entityId,
-			$info['lang']->getCode(),
-			$info['lang']->getDir(),
+			$lang->getCode(),
+			$lang->getDir(),
 			$this->getInnerHtml( $entity, $lang, $editable )
 		);
 
@@ -140,7 +142,7 @@ abstract class EntityView extends \ContextSource {
 				var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
 				$div.css( "top", $div.height() + "px" );
 				$div.css(
-					( "' . $info['lang']->getDir() . '" === "rtl" ) ? "right" : "left",
+					( "' . $lang->getDir() . '" === "rtl" ) ? "right" : "left",
 					( parseInt( $( this ).width() / 2 ) - $div.width() / 2 ) + "px"
 				);
 				return $div;
@@ -162,6 +164,10 @@ abstract class EntityView extends \ContextSource {
 	}
 
 	protected function getFormattedIdForEntity( Entity $entity ) {
+		if ( !$entity->getId() ) {
+			return ''; //XXX: should probably throw an exception
+		}
+
 		return $this->idFormatter->format( $entity->getId() );
 	}
 
@@ -284,12 +290,16 @@ abstract class EntityView extends \ContextSource {
 	public function getHtmlForLabel( EntityContent $entity, Language $lang = null, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$info = $this->extractEntityInfo( $entity, $lang );
-		$label = $entity->getEntity()->getLabel( $info['lang']->getCode() );
-		$editUrl = $this->getEditUrl( $info['id'], $info['lang'], 'SetLabel' );
+		if ( !$lang ) {
+			$lang = $this->getLanguage();
+		}
+
+		$label = $entity->getEntity()->getLabel( $lang->getCode() );
+		$editUrl = $this->getEditUrl( 'SetLabel', $entity->getEntity(), $lang );
+		$prefixedId = $this->getFormattedIdForEntity( $entity->getEntity() );
 
 		$html = wfTemplate( 'wb-label',
-			$info['id'],
+			$prefixedId,
 			wfTemplate( 'wb-property',
 				$label === false ? 'wb-value-empty' : '',
 				$label === false ? wfMessage( 'wikibase-label-empty' )->text() : htmlspecialchars( $label ),
@@ -314,9 +324,12 @@ abstract class EntityView extends \ContextSource {
 	public function getHtmlForDescription( EntityContent $entity, Language $lang = null, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$info = $this->extractEntityInfo( $entity, $lang );
-		$description = $entity->getEntity()->getDescription( $info['lang']->getCode() );
-		$editUrl = $this->getEditUrl( $info['id'], $info['lang'], 'SetDescription' );
+		if ( !$lang ) {
+			$lang = $this->getLanguage();
+		}
+
+		$description = $entity->getEntity()->getDescription( $lang->getCode() );
+		$editUrl = $this->getEditUrl( 'SetDescription', $entity->getEntity(), $lang );
 
 		$html = wfTemplate( 'wb-description',
 			wfTemplate( 'wb-property',
@@ -343,9 +356,12 @@ abstract class EntityView extends \ContextSource {
 	public function getHtmlForAliases( EntityContent $entity, Language $lang = null, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$info = $this->extractEntityInfo( $entity, $lang );
-		$aliases = $entity->getEntity()->getAliases( $info['lang']->getCode() );
-		$editUrl = $this->getEditUrl( $info['id'], $info['lang'], 'SetAliases' );
+		if ( !$lang ) {
+			$lang = $this->getLanguage();
+		}
+
+		$aliases = $entity->getEntity()->getAliases( $lang->getCode() );
+		$editUrl = $this->getEditUrl( 'SetAliases', $entity->getEntity(), $lang );
 
 		if ( empty( $aliases ) ) {
 			$html = wfTemplate( 'wb-aliases-wrapper',
@@ -686,43 +702,34 @@ abstract class EntityView extends \ContextSource {
 	/**
 	 * Returns the url of the editlink.
 	 *
-	 * @since 0.4
+	 * @since    0.4
 	 *
-	 * @param string|null $id
+	 * @param string  $specialpagename
+	 * @param Entity  $entity
 	 * @param \Language|null $lang
-	 * @param string $specialpagename
+	 *
 	 * @return string
 	 */
-	protected function getEditUrl( $id, $lang, $specialpagename ) {
+	protected function getEditUrl( $specialpagename, Entity $entity, Language $lang = null ) {
 		$specialpage = \SpecialPageFactory::getPage( $specialpagename );
 
 		if ( $specialpage === null ) {
-			return '';
-		} else {
-			return $specialpage->getTitle()->getLocalURL()
-				. ( $id === null ? '' : '/' . wfUrlencode( $id )
-					. ( $lang === null ? '' : '/' . wfUrlencode( $lang->getCode() ) )
-				);
+			return ''; //XXX: this should throw an exception?!
 		}
-	}
 
-	/**
-	 * Helper function returning language and id information bundled in an array.
-	 *
-	 * @since 0.1
-	 *
-	 * @param EntityContent $entity
-	 * @param \Language|null $lang
-	 * @return array
-	 */
-	protected function extractEntityInfo( EntityContent $entity, Language $lang = null ) {
 		if( !$lang ) {
 			$lang = $this->getLanguage();
 		}
-		return array(
-			'lang' => $lang,
-			'id' => $this->getFormattedIdForEntity( $entity->getEntity() )
-		);
+
+		if ( $entity->getId() ) {
+			$id = $this->getFormattedIdForEntity( $entity );
+		} else {
+			$id = ''; // can't skip this, that would confuse the order of parameters!
+		}
+
+		return $specialpage->getTitle()->getLocalURL()
+				. '/' . wfUrlencode( $id )
+				. ( $lang === null ? '' : '/' . wfUrlencode( $lang->getCode() ) );
 	}
 
 	/**
