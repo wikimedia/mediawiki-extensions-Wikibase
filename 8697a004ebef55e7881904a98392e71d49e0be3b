@@ -16,6 +16,24 @@
       "revId": "8697a004ebef55e7881904a98392e71d49e0be3b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_bff8f447",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-09T17:23:45Z",
+      "side": 1,
+      "message": "Not really subject of the change set, has been done like this before (though, I might be the one to blame for this).\n\nNot sure why I did it like this in the first place, but I think the reason was that we don\u0027t have control over construction of these objects and the function calls to this one.\n\nAnyhow, if you ask me, the design of the whole Content thing is a little flawed in this perspective. For rendering i.e. getting the parser output, there should probably just be a separate service object (like EntityView) which would get some rendering related service providers injected.",
+      "parentUuid": "69c609db_6825250c",
+      "revId": "8697a004ebef55e7881904a98392e71d49e0be3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
