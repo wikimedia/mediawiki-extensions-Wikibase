@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_685d2545",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-07-09T09:54:24Z",
+      "side": 1,
+      "message": "What is the point in having the widget name stored in a constant?",
+      "revId": "96311d9024c9bfd0c4752673f9f9f139360c9596",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_a8571d24",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-07-09T09:54:24Z",
+      "side": 1,
+      "message": "Documentated parameter name misfits actual parameter name.",
+      "revId": "96311d9024c9bfd0c4752673f9f9f139360c9596",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_8854e120",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-07-09T09:54:24Z",
+      "side": 1,
+      "message": "Your always using \"@returns\" but it should be \"@return\" according to the documentation standards.",
+      "revId": "96311d9024c9bfd0c4752673f9f9f139360c9596",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_e831150c",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-07-09T09:54:24Z",
+      "side": 1,
+      "message": "If you really want to have \u00270\u0027 instead of \u00270px\u0027 than that does not work.",
+      "revId": "96311d9024c9bfd0c4752673f9f9f139360c9596",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_c836d901",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.tests.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-07-09T09:54:24Z",
+      "side": 1,
+      "message": "Should be 0.4. Is it needed here at all?",
+      "revId": "96311d9024c9bfd0c4752673f9f9f139360c9596",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_283ccdde",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.tests.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-07-09T09:54:24Z",
+      "side": 1,
+      "message": "@return",
+      "revId": "96311d9024c9bfd0c4752673f9f9f139360c9596",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_482309c1",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.claimgrouplabelscroll.tests.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2013-07-09T09:54:24Z",
+      "side": 1,
+      "message": "Sould be \"jQuery.wikibase.claimlabelscroll\" since $ is not defined at this point.",
+      "revId": "96311d9024c9bfd0c4752673f9f9f139360c9596",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
