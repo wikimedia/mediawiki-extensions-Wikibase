@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_3c809249",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-09T11:08:31Z",
+      "side": 1,
+      "message": "Can and should be removed, it\u0027s already in ModifyClaim. \nThe same is probably true for some more methods as well - createSummary perhaps?",
+      "revId": "8e4253abb8ed085b6ec2de8621981f96ceaab646",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
