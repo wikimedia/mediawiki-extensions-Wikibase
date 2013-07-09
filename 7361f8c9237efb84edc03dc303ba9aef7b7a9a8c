@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "69c609db_b2b30b4c",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-09T18:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69c609db_086f51fe",
+      "revId": "7361f8c9237efb84edc03dc303ba9aef7b7a9a8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69c609db_1cfcb608",
         "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-07-09T10:05:01Z",
       "side": 1,
       "message": "The entity must have an ID set, otherwise rendering will fail (that\u0027s a bug by itself, i\u0027ll fix that later). You\u0027ll have to set an ID here to make it work for now.",
+      "revId": "7361f8c9237efb84edc03dc303ba9aef7b7a9a8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_f285835c",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-09T18:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69c609db_1cfcb608",
       "revId": "7361f8c9237efb84edc03dc303ba9aef7b7a9a8c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
