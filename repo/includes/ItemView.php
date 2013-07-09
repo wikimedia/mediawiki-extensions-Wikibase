@@ -123,8 +123,7 @@ class ItemView extends EntityView {
 		}
 
 		// Link to SpecialPage
-		$idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
-		$editLink = $this->getEditUrl( $idFormatter->format( $itemContent->getEntity()->getId() ), null, 'SetSiteLink' );
+		$editLink = $this->getEditUrl( 'SetSiteLink', $itemContent->getEntity(), null );
 
 		foreach( $siteLinks as $link ) {
 			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
