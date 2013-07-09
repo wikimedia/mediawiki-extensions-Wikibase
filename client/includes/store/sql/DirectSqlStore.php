@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Language;
+use Site;
 
 /**
  * Implementation of the client store interface using direct access to the repository's
@@ -77,6 +78,11 @@ class DirectSqlStore implements ClientStore {
 	private $entityUsageIndex = null;
 
 	/**
+	 * @var Site|null
+	 */
+	private $site = null;
+
+	/**
 	 * @param Language $wikiLanguage
 	 * @param string    $repoWiki the symbolic database name of the repo wiki
 	 */
@@ -110,11 +116,29 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
+	 * Sets the site object representing the local wiki.
+	 * For testing only!
+	 *
+	 * @todo: remove this once the Site can be injected via the constructor!
+	 *
+	 * @param Site $site
+	 */
+	public function setSite( Site $site ) {
+		$this->site = $site;
+	}
+
+	/**
+	 * Returns the site object representing the local wiki.
+	 *
 	 * @return null|\Site
 	 */
 	private function getSite() {
-		$site = \Sites::singleton()->getSite( Settings::get( 'siteGlobalID' ) );
-		return $site;
+		//FIXME: inject the site or at least the settings!
+		if ( $this->site === null ) {
+			$this->site = \Sites::singleton()->getSite( Settings::get( 'siteGlobalID' ) );
+		}
+
+		return $this->site;
 	}
 
 	/**
