@@ -26,7 +26,7 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 	 */
 	public function testExtractPreferredValue( $lang, $mode, $data, $expected ) {
 		$factory = new LanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguage( \Language::factory( $lang ), $mode );
+		$chain = $factory->newFromLanguageCode( $lang, $mode );
 
 		$resolved = $chain->extractPreferredValue( $data );
 
@@ -38,6 +38,8 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			'en' => 'foo',
 			'nl' => 'bar',
 			'zh-cn' => '测试',
+			'lzh' => '試',
+			'zh-classical' => '驗',
 		);
 
 		return array(
@@ -45,6 +47,11 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 				'value' => 'foo',
 				'language' => 'en',
 				'source' => 'en',
+			) ),
+			array( 'zh-classical', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+				'value' => '試',
+				'language' => 'lzh',
+				'source' => 'lzh',
 			) ),
 			array( 'nl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
 				'value' => 'bar',

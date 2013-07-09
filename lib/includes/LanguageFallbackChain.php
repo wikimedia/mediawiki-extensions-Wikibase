@@ -67,8 +67,8 @@ class LanguageFallbackChain {
 	public function extractPreferredValue( $data ) {
 
 		foreach ( $this->chain as $languageWithConversion ) {
-			$fetchCode = $languageWithConversion->getFetchLanguage()->getCode();
-			$languageCode = $languageWithConversion->getLanguage()->getCode();
+			$fetchCode = $languageWithConversion->getFetchLanguageCode();
+			$languageCode = $languageWithConversion->getLanguageCode();
 
 			if ( isset( $data[$fetchCode] ) ) {
 				return array(
