@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "69c609db_5cce2e2f",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-09T13:45:53Z",
+      "side": 1,
+      "message": "Not affected by this change, was already there",
+      "parentUuid": "69c609db_dc517e62",
+      "revId": "25da74bbcca49e04f6f532b61a1330933b147757",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69c609db_7c54ca51",
         "filename": "repo/includes/api/GetClaims.php",
         "patchSetId": 7
@@ -81,6 +99,24 @@
       "writtenOn": "2013-07-09T13:39:21Z",
       "side": 1,
       "message": "Please put the entity parser in a member and initialize it in the constructor. This allows for easier refactoring later on, and for injection using a setter.",
+      "revId": "25da74bbcca49e04f6f532b61a1330933b147757",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_9cd8a6ef",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-09T13:45:53Z",
+      "side": 1,
+      "message": "Easier refactoring? I suggest making this change whenever you do that refactoring then. Can I coin \"premature refcatoring\" here? :D\n\nGiven this is a ApiModule and that we do not have control over the object lifecycle, injection using a setter is not going to happen. If proper dependency management is the goal here, code should just be moved out of this class altogether.\n\nActually -1 on doing what you propose here: want to really initialize all dependencies whenever the API docs get generated?",
+      "parentUuid": "69c609db_7c54ca51",
       "revId": "25da74bbcca49e04f6f532b61a1330933b147757",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
