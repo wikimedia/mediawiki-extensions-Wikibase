@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_5faf407e",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-09T16:22:15Z",
+      "side": 1,
+      "message": "the i18n documentation also needs to be updated to reflect the new errors",
+      "revId": "f89047df9987fa670d403e73e50f0071b9b112cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_3fb404cf",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-09T16:22:15Z",
+      "side": 1,
+      "message": "this should be \u0027editconflict\u0027 per core",
+      "revId": "f89047df9987fa670d403e73e50f0071b9b112cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_bfc0f42e",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-09T16:22:15Z",
+      "side": 1,
+      "message": "we should use the illegal-field in other modules also as some include similar conditional parameters",
+      "revId": "f89047df9987fa670d403e73e50f0071b9b112cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_5fe8e0b5",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-09T16:22:15Z",
+      "side": 1,
+      "message": "illegal-field could be used here?",
+      "revId": "f89047df9987fa670d403e73e50f0071b9b112cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_7fcf9c57",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-09T16:22:15Z",
+      "side": 1,
+      "message": "illegal-field ?",
+      "revId": "f89047df9987fa670d403e73e50f0071b9b112cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
