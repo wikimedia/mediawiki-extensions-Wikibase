@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_6825250c",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-09T08:58:01Z",
+      "side": 1,
+      "message": "Eek, inline service construction. If we can\u0027t inject it, please at least move the service construction to the constructor.",
+      "revId": "8697a004ebef55e7881904a98392e71d49e0be3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
