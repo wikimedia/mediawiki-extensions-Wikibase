@@ -36,6 +36,7 @@ use Wikibase\SiteLink;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Michał Łazowik
  */
 class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 
@@ -138,4 +139,47 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 		return $argLists;
 	}
 
+	/**
+	 * @dataProvider stuffThatIsNotArrayProvider
+	 */
+	public function testCannotConstructWithNonArrayBadges( $invalidBadges ) {
+		$site = new \MediaWikiSite();
+		$site->setGlobalId( 'enwiki' );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new SiteLink( $site, 'Wikidata', $invalidBadges );
+	}
+
+	public function stuffThatIsNotArrayProvider() {
+		$argLists = array();
+
+		$argLists[] = array( 42 );
+		$argLists[] = array( true );
+		$argLists[] = array( 'nyan nyan' );
+		$argLists[] = array( null );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider stuffThatIsNotArrayOfStringsProvider
+	 */
+	public function testCannotConstructWithNonArrayOfStringsBadges( $invalidBadges ) {
+		$site = new \MediaWikiSite();
+		$site->setGlobalId( 'enwiki' );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new SiteLink( $site, 'Wikidata', $invalidBadges );
+	}
+
+	public function stuffThatIsNotArrayOfStringsProvider() {
+		$argLists = array();
+
+		$argLists[] = array( array( 'nyan', 42 ) );
+		$argLists[] = array( array( 'nyan', true ) );
+		$argLists[] = array( array( 'nyan', array() ) );
+		$argLists[] = array( array( 'nyan', null ) );
+
+		return $argLists;
+	}
 }

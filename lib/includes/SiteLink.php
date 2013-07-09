@@ -31,6 +31,7 @@ use Site;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Michał Łazowik
  */
 class SiteLink {
 
@@ -47,6 +48,12 @@ class SiteLink {
 	protected $site;
 
 	/**
+	 * @since 0.4
+	 * @var Array
+	 */
+	protected $badges;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
@@ -56,13 +63,24 @@ class SiteLink {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( Site $site, $page ) {
+	public function __construct( Site $site, $page, $badges = array() ) {
 		if ( !is_string( $page ) ) {
 			throw new InvalidArgumentException( '$page must be a string' );
 		}
 
+		if ( !is_array( $badges ) ) {
+			throw new InvalidArgumentException( '$badges must be an array' );
+		}
+
+		foreach( $badges as $badge ) {
+			if ( !is_string( $badge) ) {
+				throw new InvalidArgumentException( 'Every $badges value must be a string' );
+			}
+		}
+
 		$this->site = $site;
 		$this->page = $page;
+		$this->badges = $badges;
 	}
 
 	/**
@@ -85,6 +103,17 @@ class SiteLink {
 	 */
 	public function getSite() {
 		return $this->site;
+	}
+
+	/**
+	 * Return the target site's badges.
+	 *
+	 * @since 0.4
+	 *
+	 * @return Array
+	 */
+	public function getBadges() {
+		return $this->badges;
 	}
 
 	/**
