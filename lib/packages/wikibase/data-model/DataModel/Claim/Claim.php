@@ -261,6 +261,23 @@ class Claim implements \Hashable, \Serializable {
 		return self::RANK_TRUTH;
 	}
 
+	/**
+	 * Returns a list of all Snaks on this Claim. This includes at least the main snak,
+	 * and the snaks from qualifiers.
+	 *
+	 * This is a convenience method for use in code that needs to operate on all snaks, e.g.
+	 * to find all referenced Entities.
+	 *
+	 * @return Snak[]
+	 */
+	public function getAllSnaks() {
+		$snaks = array();
+
+		$snaks[] = $this->getMainSnak();
+		$snaks = array_merge( $snaks, iterator_to_array( $this->getQualifiers() ) );
+
+		return $snaks;
+	}
 }
 
 /**

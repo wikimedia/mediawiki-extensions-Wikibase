@@ -188,6 +188,24 @@ class Statement extends Claim {
 		$this->setReferences( $instance->getReferences() );
 	}
 
+	/**
+	 * @see Claim::getAllSnaks.
+	 *
+	 * In addition to the Snaks returned by Claim::getAllSnaks(), this also includes all
+	 * snaks from any References in this Statement.
+	 *
+	 * @return Snak[]
+	 */
+	public function getAllSnaks() {
+		$snaks = parent::getAllSnaks();
+
+		/* @var Reference $reference */
+		foreach( $this->getReferences() as $reference ) {
+			$snaks = array_merge( $snaks, iterator_to_array( $reference->getSnaks() ) );
+		}
+
+		return $snaks;
+	}
 }
 
 /**

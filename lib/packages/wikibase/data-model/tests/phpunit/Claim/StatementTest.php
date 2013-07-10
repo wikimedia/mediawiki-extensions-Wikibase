@@ -186,4 +186,23 @@ class StatementTest extends ClaimTest {
 		$this->assertEquals( $claim0->getHash(), $claim1->getHash() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param Statement $statement
+	 */
+	public function testGetAllSnaks( Claim $claim ) {
+		/* @var Statement $statement */
+		$statement = $claim;
+		$snaks = $statement->getAllSnaks();
+
+		$c = count( $statement->getQualifiers() ) + 1;
+
+		/* @var Reference $reference */
+		foreach ( $statement->getReferences() as $reference ) {
+			$c += count( $reference->getSnaks() );
+		}
+
+		$this->assertGreaterThanOrEqual( $c, count( $snaks ), "At least one snak per Qualifier and Reference" );
+	}
 }

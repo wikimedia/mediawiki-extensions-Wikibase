@@ -43,6 +43,7 @@ use Wikibase\Snaks;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ClaimTest extends \PHPUnit_Framework_TestCase {
 
@@ -218,4 +219,14 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( Claim::RANK_TRUTH, $claim->getRank() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param Claim $claim
+	 */
+	public function testGetAllSnaks( Claim $claim ) {
+		$snaks = $claim->getAllSnaks();
+
+		$this->assertGreaterThanOrEqual( count( $claim->getQualifiers() ) +1, count( $snaks ), "At least one snak per Qualifier" );
+	}
 }

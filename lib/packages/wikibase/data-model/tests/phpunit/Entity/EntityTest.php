@@ -17,6 +17,7 @@ use Wikibase\ObjectComparer;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
+use Wikibase\Reference;
 use Wikibase\Statement;
 
 /**
@@ -48,6 +49,7 @@ use Wikibase\Statement;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
@@ -798,6 +800,20 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	public function testPatch( Entity $source, EntityDiff $patch, Entity $expected ) {
 		$source->patch( $patch );
 		$this->assertTrue( $expected->equals( $source ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param Entity $entity
+	 */
+	public function testGetAllSnaks( Entity $entity ) {
+		$snaks = $entity->getAllSnaks();
+		$claims = $entity->getClaims();
+
+		$this->assertInternalType( 'array', $snaks );
+
+		$this->assertGreaterThanOrEqual( count( $claims ), count( $snaks ), "At least one snak per Claim" );
 	}
 
 }

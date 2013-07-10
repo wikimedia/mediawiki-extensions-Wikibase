@@ -935,4 +935,24 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 		return $keyParts[0];
 	}
 
+	/**
+	 * Returns a list of all Snaks on this Entity. This includes at least the main snaks of
+	 * Claims, the snaks from Claim qualifiers, and the snaks from Statement References.
+	 *
+	 * This is a convenience method for use in code that needs to operate on all snaks, e.g.
+	 * to find all referenced Entities.
+	 *
+	 * @return Snak[]
+	 */
+	public function getAllSnaks() {
+		$claims = $this->getClaims();
+		$snaks = array();
+
+		foreach ( $claims as $claim ) {
+			$snaks = array_merge( $snaks, $claim->getAllSnaks() );
+		}
+
+		return $snaks;
+	}
+
 }
