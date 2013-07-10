@@ -33,36 +33,37 @@ if ( !defined( 'WB_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
 
-global $wgAPIModules, $wgHooks;
+call_user_func( function() {
+	global $wgAutoloadClasses, $wgAPIModules, $wgHooks;
 
-$dir = __DIR__ . '/../';
+	$dir = __DIR__ . '/../';
 
-$wgAutoloadClasses['Wikibase\Api\SetStatementRank']		= $dir . 'includes/api/SetStatementRank.php';
+	$wgAutoloadClasses['Wikibase\Api\SetStatementRank']		= $dir . 'includes/api/SetStatementRank.php';
 
-unset( $dir );
+	$wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
 
-$wgAPIModules['wbsetstatementrank'] 				= 'Wikibase\Api\SetStatementRank';
+	/**
+	 * Hook to add PHPUnit test cases.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
+	 *
+	 * @since 0.3
+	 *
+	 * @param array &$files
+	 *
+	 * @return boolean
+	 */
+	$wgHooks['UnitTestsList'][] = function( array &$files ) {
+		// @codeCoverageIgnoreStart
+		$testFiles = array(
+			'api/SetStatementRank',
+		);
 
-/**
- * Hook to add PHPUnit test cases.
- * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
- *
- * @since 0.3
- *
- * @param array &$files
- *
- * @return boolean
- */
-$wgHooks['UnitTestsList'][] = function( array &$files ) {
-	// @codeCoverageIgnoreStart
-	$testFiles = array(
-		'api/SetStatementRank',
-	);
+		foreach ( $testFiles as $file ) {
+			$files[] = __DIR__ . '/../tests/phpunit/includes/' . $file . 'Test.php';
+		}
 
-	foreach ( $testFiles as $file ) {
-		$files[] = __DIR__ . '/../tests/phpunit/includes/' . $file . 'Test.php';
-	}
+		return true;
+		// @codeCoverageIgnoreEnd
+	};
 
-	return true;
-	// @codeCoverageIgnoreEnd
-};
+} );
