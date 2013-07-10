@@ -53,7 +53,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 	/**
 	 * @var int $cacheTimeout
 	 */
-	protected $cacheTimeout = 3600;
+	protected $cacheTimeout;
 
 	/**
 	 * @param String|bool $wiki           The name of thw wiki database to use, in a form
@@ -66,20 +66,22 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 	 *                                    Note that the $wiki parameter determines the cache compartment,
 	 *                                    so multiple wikis loading entities from the same repository
 	 *                                    will share the cache.
+	 * @param int          $cacheDuration Cache duration in seconds.
 	 * @param string      $cacheKeyPrefix The key prefix to use for constructing cache keys.
 	 *                                    Defaults to "wbentity". There should be no reason to change this.
 	 *
 	 * @return \Wikibase\WikiPageEntityLookup
 	 */
-	public function __construct( $wiki = false, $cacheType = null, $cacheKeyPrefix = "wbentity" ) {
+	public function __construct( $wiki = false, $cacheType = null, $cacheDuration = 3600, $cacheKeyPrefix = "wbentity" ) {
 		parent::__construct( $wiki );
 
 		if ( $cacheType === null ) {
 			$cacheType = $GLOBALS[ 'wgMainCacheType' ];
 		}
 
-		$this->cacheType = $cacheType; //FIXME: take from Settings: defaultEntityCache
+		$this->cacheType = $cacheType;
 		$this->cacheKeyPrefix = $cacheKeyPrefix;
+		$this->cacheTimeout = $cacheDuration;
 	}
 
 	/**
@@ -90,15 +92,10 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityLookup, Entity
 	 * @return String
 	 */
 	protected function getEntityCacheKey( EntityId $entityId ) {
-		global $wgCachePrefix;
+		$cacheKey = $this->cacheKeyPrefix
+				. ':' . $entityId->getEntityType()
+				. ':' . $entityId->getNumericId();
 
-		if ( $this->wiki === false ) {
-			$keyDB = $wgCachePrefix === false ? wfWikiID() : $wgCachePrefix;
-		} else {
-			$keyDB = $this->wiki;
-		}
-
-		$cacheKey = wfForeignMemcKey( $keyDB, $this->cacheKeyPrefix, $entityId->getPrefixedId() );
 		return $cacheKey;
 	}
 

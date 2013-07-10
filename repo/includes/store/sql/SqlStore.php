@@ -48,20 +48,47 @@ class SqlStore implements Store {
 	private $termIndex = null;
 
 	/**
+	 * @var string
 	 */
-	public function __construct() {
+	private $cachePrefix;
+
+	/**
+	 * @var int
+	 */
+	private $cacheType;
+
+	/**
+	 * @var int
+	 */
+	private $cacheDuration;
+
+	/**
+	 * @param string $cachePrefix
+	 * @param int    $cacheDuration
+	 * @param int    $cacheType
+	 */
+	public function __construct( $cachePrefix, $cacheDuration, $cacheType ) {
+		$this->cachePrefix = $cachePrefix;
+		$this->cacheDuration = $cacheDuration;
+		$this->cacheType = $cacheType;
 	}
 
 	/**
 	 * This pseudo-constructor uses the following settings from $settings:
+	 * - sharedCacheKeyPrefix
+	 * - sharedCacheDuration
+	 * - sharedCacheType
 	 *
 	 * @param SettingsArray
 	 *
 	 * @return \Wikibase\SqlStore
 	 */
 	public static function newFromSettings( SettingsArray $settings ) {
-		// we'll need some settings soon.
-		return new self();
+		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
+		$cacheType = $settings->getSetting( 'sharedCacheType' );
+
+		return new self( $cachePrefix, $cacheDuration, $cacheType );
 	}
 
 	/**
@@ -264,10 +291,11 @@ class SqlStore implements Store {
 	 * @return CachingEntityLoader
 	 */
 	protected function newEntityLookup() {
-		//TODO: get cache type etc from config
 		//NOTE: two layers of caching: persistent external cache in WikiPageEntityLookup;
 		//      transient local cache in CachingEntityLoader.
-		$lookup = new WikiPageEntityLookup( false );
+		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
+		$key = $this->cachePrefix . ':WikiPageEntityLookup';
+		$lookup = new WikiPageEntityLookup( false, $this->cacheType, $this->cacheDuration, $key );
 		return new CachingEntityLoader( $lookup );
 	}
 

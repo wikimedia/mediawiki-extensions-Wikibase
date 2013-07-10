@@ -14,6 +14,10 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 
 === Expert Settings ===
 
+;sharedCacheKeyPrefix:  Prefix to use for cache keys that should be shared among a wikibase repo and all its clients. The default is constructed from $wgDBname and WBL_VERSION. In order to share caches between clients (and the repo), set a prefix based on the repo's name and WBL_VERSION or a similar version ID.
+:* NOTE: The default may change in order to use the repo's database name automatically.
+;sharedCacheDuration: The default duration of entries in the shared object cache, in seconds. Default is 3600 seconds = 1 hour.
+;sharedCacheType: The type of cache to use for the shared object cache. Defaults to $wgMainCacheType. Use CACHE_XXX constants.
 ;entityPrefixes: ID prefixes to use for the different entity types, as an associative array mapping prefixes to entity type constants. Default:
 <poem>
           array(
