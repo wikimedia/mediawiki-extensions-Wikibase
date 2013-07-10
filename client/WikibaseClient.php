@@ -28,6 +28,9 @@ if ( defined( 'WBC_VERSION' ) ) {
 	return;
 }
 
+define( 'WBC_VERSION', '0.4 alpha'
+	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
+
 if ( version_compare( $GLOBALS['wgVersion'], '1.21c', '<' ) ) { // Needs to be 1.21c because version_compare() works in confusing ways.
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.21 alpha or above.\n" );
 }
@@ -40,9 +43,6 @@ if ( !defined( 'WBL_VERSION' ) ) {
 if ( !defined( 'WBL_VERSION' ) ) {
 	throw new Exception( 'WikibaseClient depends on the WikibaseLib extension.' );
 }
-
-define( 'WBC_VERSION', '0.4 alpha'
-	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks;
