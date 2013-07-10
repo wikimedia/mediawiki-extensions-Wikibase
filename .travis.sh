@@ -23,7 +23,6 @@ echo '$wgDevelopmentWarnings = true;' >> LocalSettings.php
 if [ "$1" == "repo" ]
 then
 	echo "define( 'WB_EXPERIMENTAL_FEATURES', true );" >> LocalSettings.php
-	echo 'require_once __DIR__ . "/extensions/Wikibase/repo/Wikibase.php";' >> LocalSettings.php
 	echo 'require_once __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
 else
 	echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
