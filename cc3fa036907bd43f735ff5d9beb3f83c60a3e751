@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_615a5b4f",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-10T13:29:24Z",
+      "side": 1,
+      "message": "Could you add an example use to the examples listed at the bottom of this file? :)",
+      "revId": "cc3fa036907bd43f735ff5d9beb3f83c60a3e751",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_c1306f03",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-10T13:29:24Z",
+      "side": 1,
+      "message": "This error code has changed in https://gerrit.wikimedia.org/r/#/c/72528/ which you might not spot in the rebase\n\nI have a feeling it is / should be \u0027params-illegal\u0027",
+      "revId": "cc3fa036907bd43f735ff5d9beb3f83c60a3e751",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_011ba77f",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-10T13:29:24Z",
+      "side": 1,
+      "message": "This error code should be added to the list of possible errors thrown by the module (again i would rebase before you change it :))",
+      "revId": "cc3fa036907bd43f735ff5d9beb3f83c60a3e751",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
