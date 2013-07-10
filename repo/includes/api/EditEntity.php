@@ -479,7 +479,7 @@ class EditEntity extends ModifyEntity {
 				'data' => array( 'The serialized object that is used as the data source.',
 					"A newly created entity will be assigned an 'id'."
 				),
-				'clear' => array( 'If set, the complete emptied is emptied before proceeding.',
+				'clear' => array( 'If set, the complete entity is emptied before proceeding.',
 					'The entity will not be saved before it is filled with the "data", possibly with parts excluded.'
 				),
 				'new' => array( "If set, a new entity will be created.",
