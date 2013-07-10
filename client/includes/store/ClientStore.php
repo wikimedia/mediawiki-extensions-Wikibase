@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Language;
+
 /**
  * Client store interface.
  *
@@ -22,8 +24,6 @@ namespace Wikibase;
  *
  * @since 0.1
  *
- * @todo: provide getXXX() methods for getting local pseudo-singletons (shared service objects).
- *
  * @file
  * @ingroup WikibaseClient
  *
@@ -32,6 +32,17 @@ namespace Wikibase;
  * @author Daniel Kinzler
  */
 interface ClientStore {
+
+	/**
+	 * Creates a new ClientStore instance based on the given settings.
+	 * Use by StoreFactory to instantiate stores of unknown type.
+	 *
+	 * @param SettingsArray $settings
+	 * @param Language      $wikiLanguage
+	 *
+	 * @return ClientStore
+	 */
+	public static function newFromSettings( SettingsArray $settings, Language $wikiLanguage );
 
 	/**
 	 * Returns a SiteLinkLookup for this store.

@@ -28,6 +28,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SqlStore implements Store {
 
@@ -45,6 +46,23 @@ class SqlStore implements Store {
 	 * @var TermIndex
 	 */
 	private $termIndex = null;
+
+	/**
+	 */
+	public function __construct() {
+	}
+
+	/**
+	 * This pseudo-constructor uses the following settings from $settings:
+	 *
+	 * @param SettingsArray
+	 *
+	 * @return \Wikibase\SqlStore
+	 */
+	public static function newFromSettings( SettingsArray $settings ) {
+		// we'll need some settings soon.
+		return new self();
+	}
 
 	/**
 	 * @see Store::getTermIndex
@@ -286,5 +304,4 @@ class SqlStore implements Store {
 			return new DummyPropertyInfoStore();
 		}
 	}
-
 }

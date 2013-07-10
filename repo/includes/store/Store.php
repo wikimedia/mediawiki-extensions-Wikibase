@@ -31,8 +31,19 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 interface Store {
+
+	/**
+	 * Creates a new Store instance based on the given settings.
+	 * Use by StoreFactory to instantiate stores of unknown type.
+	 *
+	 * @param SettingsArray $settings
+	 *
+	 * @return Store
+	 */
+	public static function newFromSettings( SettingsArray $settings );
 
 	/**
 	 * Returns a new SiteLinkCache for this store.
