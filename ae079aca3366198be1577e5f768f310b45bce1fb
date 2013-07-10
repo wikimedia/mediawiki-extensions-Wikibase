@@ -19,6 +19,58 @@
     },
     {
       "key": {
+        "uuid": "69c609db_c1c18f84",
+        "filename": "repo/Wikibase.classes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T10:10:46Z",
+      "side": 1,
+      "message": "Wikibase\\ClaimHtmlGenerator is fine for now",
+      "parentUuid": "69c609db_21806349",
+      "revId": "ae079aca3366198be1577e5f768f310b45bce1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_41cd9fb8",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T10:10:46Z",
+      "side": 1,
+      "message": "this needs to be made public",
+      "revId": "ae079aca3366198be1577e5f768f310b45bce1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_81c79798",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T10:10:46Z",
+      "side": 1,
+      "message": "probably best (for now) to obtain this before calling this function in entity view, and then pass $editSectionHtml as a function param",
+      "revId": "ae079aca3366198be1577e5f768f310b45bce1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69c609db_c18fcf74",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 1
