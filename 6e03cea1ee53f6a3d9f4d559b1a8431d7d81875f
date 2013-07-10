@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_a9db9978",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-10T14:42:23Z",
+      "side": 1,
+      "message": "this check and resulting error code is actually not needed.\n\nGet entities already checks and returns an error is not sites and titles are given",
+      "revId": "6e03cea1ee53f6a3d9f4d559b1a8431d7d81875f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49c305cb_c40a5e21",
+        "filename": "repo/includes/api/ItemByTitleHelper.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-10T14:42:23Z",
+      "side": 1,
+      "message": "Could we not try and use one of the more general error codes? Perhaps params-illegal? as far as I can tell that would fit rather well",
+      "revId": "6e03cea1ee53f6a3d9f4d559b1a8431d7d81875f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
