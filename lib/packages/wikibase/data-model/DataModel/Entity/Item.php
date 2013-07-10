@@ -39,13 +39,6 @@ class Item extends Entity {
 	const ENTITY_TYPE = 'item';
 
 	/**
-	 * @since 0.2
-	 *
-	 * @var Claims|null
-	 */
-	protected $statements = null;
-
-	/**
 	 * Adds a site link to the list of site links.
 	 * If there already is a site link with the site id of the provided site link,
 	 * then that one will be overridden by the provided one.

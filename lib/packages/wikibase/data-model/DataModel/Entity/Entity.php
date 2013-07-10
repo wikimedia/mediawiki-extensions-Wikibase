@@ -653,6 +653,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 		}
 
 		$this->data['claims'] = $this->getStubbedClaims( empty( $this->data['claims'] ) ? array() : $this->data['claims'] );
+		$this->claims = null;
 	}
 
 	private function getStubbedId() {

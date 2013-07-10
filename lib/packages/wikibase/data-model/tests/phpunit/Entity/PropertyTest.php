@@ -43,6 +43,15 @@ use Wikibase\PropertyNoValueSnak;
 class PropertyTest extends EntityTest {
 
 	/**
+	 * Returns no claims
+	 *
+	 * @return array
+	 */
+	public function makeClaims() {
+		return array();
+	}
+
+	/**
 	 * @see EntityTest::getNewEmpty
 	 *
 	 * @since 0.1

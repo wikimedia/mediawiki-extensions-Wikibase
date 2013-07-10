@@ -8,12 +8,13 @@ use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Wikibase\Claim;
+use Wikibase\Claims;
 use Wikibase\Entity;
 use Wikibase\EntityDiff;
 use Wikibase\EntityId;
 use Wikibase\Item;
-use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\ObjectComparer;
+use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -52,6 +53,13 @@ use Wikibase\Statement;
  * @author Daniel Kinzler
  */
 abstract class EntityTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * Returns several more or less complex claims
+	 *
+	 * @return array
+	 */
+	public abstract function makeClaims();
 
 	/**
 	 * @since 0.1
@@ -488,8 +496,17 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	public function instanceProvider() {
 		$entities = array();
 
-		$entities[] = $this->getNewEmpty();
+		// empty
+		$entity = $this->getNewEmpty();
+		$entities[] = $entity;
 
+		// ID only
+		$entity = clone $entity;
+		$entity->setId( 44 );
+
+		$entities[] = $entity;
+
+		// with labels and stuff
 		$entity = $this->getNewEmpty();
 		$entity->setAliases( 'en', array( 'o', 'noez' ) );
 		$entity->setLabel( 'de', 'spam' );
@@ -497,15 +514,16 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 		$entities[] = $entity;
 
+		// with labels etc and ID
 		$entity = clone $entity;
-
 		$entity->setId( 42 );
 
 		$entities[] = $entity;
 
+		// With claims
 		$entity = $this->getNewEmpty();
-
-		$entity->setId( 42 );
+		$entity->setClaims( new Claims( $this->makeClaims() ) );
+		$entity->setId( 55 );
 
 		$entities[] = $entity;
 
@@ -543,7 +561,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $entity->getId(), $copy->getId() );
 
 		// More checks that should also pass
-		$this->assertEquals( $entity, $copy );
+		$this->assertEquals( $entity->toArray(), $copy->toArray() );
 		$this->assertFalse( $entity === $copy );
 	}
 
@@ -865,6 +883,33 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @param Entity $entity
 	 */
+	public function testGetClaims( Entity $entity ) {
+		$claims = $entity->getClaims();
+
+		$this->assertInternalType( 'array', $claims );
+	}
+
+	public function testSetClaims() {
+		$entity = $this->getNewEmpty();
+		$this->assertCount( 0, $entity->getClaims(), "initially, no claims" );
+
+		$claims = array(
+			$claim0 = new Claim( new PropertyNoValueSnak( 42 ) ),
+			$claim1 = new Claim( new PropertySomeValueSnak( 42 ) ),
+		);
+
+		$entity->setClaims( new Claims( $claims ) );
+		$this->assertSameSize( $claims, $entity->getClaims(), "added some claims" );
+
+		$entity->setClaims( new Claims() );
+		$this->assertCount( 0, $entity->getClaims(), "should be empty again" );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param Entity $entity
+	 */
 	public function testGetAllSnaks( Entity $entity ) {
 		$snaks = $entity->getAllSnaks();
 		$claims = $entity->getClaims();
@@ -872,6 +917,32 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'array', $snaks );
 
 		$this->assertGreaterThanOrEqual( count( $claims ), count( $snaks ), "At least one snak per Claim" );
+
+		foreach ( $claims as $claim ) {
+			$snak = $claim->getMainSnak();
+			$this->assertContains( $snak, $snaks, "main snak" );
+
+			$qualifiers = $claim->getQualifiers();
+
+			// check the first qualifier
+			foreach ( $qualifiers as $snak ) {
+				$this->assertContains( $snak, $snaks, "qualifier snak" );
+			}
+
+			// check the first reference
+			if ( $claim instanceof Statement ) {
+				$references = $claim->getReferences();
+
+				/* @var Reference $ref */
+				foreach ( $qualifiers as $ref ) {
+					$refSnaks = $ref->getSnaks();
+
+					foreach ( $refSnaks as $snak ) {
+						$this->assertContains( $snak, $snaks, "reference snak" );
+					}
+				}
+			}
+		}
 	}
 
 	/**
