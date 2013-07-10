@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Language;
 use Site;
+use ObjectCache;
 
 /**
  * Implementation of the client store interface using direct access to the repository's
@@ -83,18 +84,42 @@ class DirectSqlStore implements ClientStore {
 	private $site = null;
 
 	/**
-	 * @param Language $wikiLanguage
-	 * @param Site    $site
-	 * @param string   $repoWiki the symbolic database name of the repo wiki
+	 * @var string
 	 */
-	public function __construct( Language $wikiLanguage, Site $site, $repoWiki ) {
+	private $cachePrefix;
+
+	/**
+	 * @var int
+	 */
+	private $cacheType;
+
+	/**
+	 * @var int
+	 */
+	private $cacheDuration;
+
+	/**
+	 * @param Language $wikiLanguage
+	 * @param Site     $site
+	 * @param string   $repoWiki the symbolic database name of the repo wiki
+	 * @param string   $cachePrefix
+	 * @param int      $cacheDuration
+	 * @param int      $cacheType
+	 */
+	public function __construct( Language $wikiLanguage, Site $site, $repoWiki, $cachePrefix, $cacheDuration, $cacheType ) {
 		$this->repoWiki = $repoWiki;
+		$this->cachePrefix = $cachePrefix;
+		$this->cacheDuration = $cacheDuration;
+		$this->cacheType = $cacheType;
 		$this->language = $wikiLanguage;
 		$this->site = $site;
 	}
 
 	/**
 	 * This pseudo-constructor uses the following settings from $settings:
+	 * - sharedCacheKeyPrefix
+	 * - sharedCacheDuration
+	 * - sharedCacheType
 	 * - siteGlobalID
 	 * - repoDatabase
 	 *
@@ -104,6 +129,9 @@ class DirectSqlStore implements ClientStore {
 	 * @return DirectSqlStore
 	 */
 	public static function newFromSettings( SettingsArray $settings, Language $wikiLanguage ) {
+		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
+		$cacheType = $settings->getSetting( 'sharedCacheType' );
 		$repoWiki = $settings->getSetting( 'repoDatabase' );
 		$siteId = $settings->getSetting( 'siteGlobalID' );
 
@@ -134,7 +162,7 @@ class DirectSqlStore implements ClientStore {
 			$site->setGlobalId( $siteId );
 		}
 
-		return new self( $wikiLanguage, $site, $repoWiki );
+		return new self( $wikiLanguage, $site, $repoWiki, $cachePrefix, $cacheDuration, $cacheType );
 	}
 
 
@@ -217,8 +245,11 @@ class DirectSqlStore implements ClientStore {
 	 * @return CachingEntityLoader
 	 */
 	protected function newEntityLookup() {
-		//TODO: get config for persistent cache from config
-		$lookup = new WikiPageEntityLookup( $this->repoWiki ); // entities are stored in wiki pages
+		//NOTE: two layers of caching: persistent external cache in WikiPageEntityLookup;
+		//      transient local cache in CachingEntityLoader.
+		//NOTE: Keep in sync with SqlStore::newEntityLookup on the repo
+		$key = $this->cachePrefix . ':WikiPageEntityLookup';
+		$lookup = new WikiPageEntityLookup( $this->repoWiki, $this->cacheType, $this->cacheDuration, $key );
 		return new CachingEntityLoader( $lookup );
 	}
 
@@ -267,10 +298,13 @@ class DirectSqlStore implements ClientStore {
 	 * @return PropertyLabelResolver
 	 */
 	protected function newPropertyLabelResolver() {
+		$key = $this->cachePrefix . ':TermPropertyLabelResolver';
 		return new TermPropertyLabelResolver(
 			$this->language->getCode(),
 			$this->getTermIndex(),
-			wfGetMainCache()
+			ObjectCache::getInstance( $this->cacheType ),
+			$this->cacheDuration,
+			$key
 		);
 	}
 

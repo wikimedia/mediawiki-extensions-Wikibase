@@ -42,7 +42,7 @@ use Wikibase\Store;
 class StoreTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
-		$instances = array( new \Wikibase\SqlStore() );
+		$instances = array( new \Wikibase\SqlStore( 'testing', 1, CACHE_NONE ) );
 
 		return $this->arrayWrap( $instances );
 	}

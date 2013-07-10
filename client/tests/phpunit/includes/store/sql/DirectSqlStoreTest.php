@@ -50,9 +50,12 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 		$lang = Language::factory( 'en' );
 
+		$cachePrefix = 'DirectSqlStoreTestDummy';
+		$cacheDuration = 3600;
+		$cacheType = CACHE_NONE;
 		$repoWiki = 'DirectSqlStoreTestDummyRepoId';
 
-		$store = new DirectSqlStore( $lang, $site, $repoWiki );
+		$store = new DirectSqlStore( $lang, $site, $repoWiki, $cachePrefix, $cacheDuration, $cacheType );
 		return $store;
 	}
 
@@ -63,6 +66,9 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 		$lang = Language::factory( 'en' );
 
 		$settings = new SettingsArray();
+		$settings->setSetting( 'sharedCacheKeyPrefix', 'DirectSqlStoreTestDummy' );
+		$settings->setSetting( 'sharedCacheDuration', 3600 );
+		$settings->setSetting( 'sharedCacheType', CACHE_NONE );
 		$settings->setSetting( 'repoDatabase', 'DirectSqlStoreTestDummyRepoId' );
 
 		// This relies on a hack in DirectSqlStore that allows us to set the Site object directly.
