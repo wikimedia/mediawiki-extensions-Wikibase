@@ -44,7 +44,7 @@ class EntityFactory {
 		Property::ENTITY_TYPE => '\Wikibase\Property',
 
 		// TODO: Query::ENTITY_TYPE
-		'query' => '\Wikibase\Query'
+		'query' => '\Wikibase\Query\QueryEntity'
 	);
 
 	/**
