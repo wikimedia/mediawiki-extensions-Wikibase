@@ -47,6 +47,33 @@ class SqlStore implements Store {
 	private $termIndex = null;
 
 	/**
+	 * @var string
+	 */
+	private $cachePrefix;
+
+	/**
+	 * @var int
+	 */
+	private $cacheType;
+
+	/**
+	 * @var int
+	 */
+	private $cacheDuration;
+
+	public function __construct() {
+		//NOTE: once I59e8423c is in, we no longer need the singleton.
+		$settings = Settings::singleton();
+		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
+		$cacheType = $settings->getSetting( 'sharedCacheType' );
+
+		$this->cachePrefix = $cachePrefix;
+		$this->cacheDuration = $cacheDuration;
+		$this->cacheType = $cacheType;
+	}
+
+	/**
 	 * @see Store::getTermIndex
 	 *
 	 * @since 0.4
@@ -246,10 +273,11 @@ class SqlStore implements Store {
 	 * @return CachingEntityLoader
 	 */
 	protected function newEntityLookup() {
-		//TODO: get cache type etc from config
 		//NOTE: two layers of caching: persistent external cache in WikiPageEntityLookup;
 		//      transient local cache in CachingEntityLoader.
-		$lookup = new WikiPageEntityLookup( false );
+		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
+		$key = $this->cachePrefix . ':WikiPageEntityLookup';
+		$lookup = new WikiPageEntityLookup( false, $this->cacheType, $this->cacheDuration, $key );
 		return new CachingEntityLoader( $lookup );
 	}
 

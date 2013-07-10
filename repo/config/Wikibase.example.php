@@ -58,6 +58,9 @@ call_user_func( function() {
 	$wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_ITEM] = WB_NS_ITEM;
 	$wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_PROPERTY;
 
+// Make sure we use the same keys on repo and clients, so we can share cached objects.
+$wgWBRepoSettings['sharedCacheKeyPrefix'] = $wgDBname . ':WBL/' . WBL_VERSION;
+
 	// NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $wgWBRepoSettings
 
 	// Tell MediaWIki to search the item namespace
