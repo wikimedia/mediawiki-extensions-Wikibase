@@ -38,8 +38,12 @@ class StoreFactory {
 			return $instances[$store];
 		}
 
+		$settings = Settings::singleton();
 		$class = $wgWBStores[$store];
-		$instance = new $class();
+
+		// Since we can't know what settings the Store needs,
+		// delegate the instantiation to a factory method (poor man's builder).
+		$instance = $class::newFromSettings( $settings );
 
 		assert( $instance instanceof Store );
 
