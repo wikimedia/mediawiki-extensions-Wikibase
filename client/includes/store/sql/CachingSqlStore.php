@@ -60,6 +60,21 @@ class CachingSqlStore implements ClientStore {
 	}
 
 	/**
+	 * This pseudo-constructor uses the following settings from $settings:
+	 * - sharedCacheKeyPrefix
+	 * - sharedCacheDuration
+	 * - sharedCacheType
+	 *
+	 * @param SettingsArray $settings
+	 * @param Language      $wikiLanguage
+	 *
+	 * @return CachingSqlStore
+	 */
+	public static function newFromSettings( SettingsArray $settings, Language $wikiLanguage ) {
+		return new self( $wikiLanguage );
+	}
+
+	/**
 	 * @var SiteLinkTable
 	 */
 	private $siteLinkTable = null;

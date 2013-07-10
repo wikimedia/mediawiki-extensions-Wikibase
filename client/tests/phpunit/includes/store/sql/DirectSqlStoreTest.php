@@ -6,6 +6,7 @@ use Site;
 use TestSites;
 use Wikibase\DirectSqlStore;
 use Wikibase\Settings;
+use Wikibase\SettingsArray;
 
 /**
  * Tests for the Wikibase\DirectSqlStore class.
@@ -45,13 +46,30 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 	protected function newStore() {
 		$site = new Site( \MediaWikiSite::TYPE_MEDIAWIKI );
-		$site->setGlobalId( 'dummy' );
+		$site->setGlobalId( 'DirectSqlStoreTestDummySite' );
+
 		$lang = Language::factory( 'en' );
 
-		$store = new DirectSqlStore( $lang, 'DirectStoreSqlTestDummyRepoId');
-		$store->setSite( $site ); //TODO: inject via constructor once that is possible
+		$repoWiki = 'DirectSqlStoreTestDummyRepoId';
 
+		$store = new DirectSqlStore( $lang, $site, $repoWiki );
 		return $store;
+	}
+
+	public function testNewFromSettings() {
+		$site = new Site( \MediaWikiSite::TYPE_MEDIAWIKI );
+		$site->setGlobalId( 'DirectSqlStoreTestDummySite' );
+
+		$lang = Language::factory( 'en' );
+
+		$settings = new SettingsArray();
+		$settings->setSetting( 'repoDatabase', 'DirectSqlStoreTestDummyRepoId' );
+
+		// This relies on a hack in DirectSqlStore that allows us to set the Site object directly.
+		$settings->setSetting( 'siteGlobalID', $site );
+
+		$store = DirectSqlStore::newFromSettings( $settings, $lang );
+		$this->assertInstanceOf( 'Wikibase\DirectSqlStore', $store );
 	}
 
 	/**

@@ -84,12 +84,59 @@ class DirectSqlStore implements ClientStore {
 
 	/**
 	 * @param Language $wikiLanguage
-	 * @param string    $repoWiki the symbolic database name of the repo wiki
+	 * @param Site    $site
+	 * @param string   $repoWiki the symbolic database name of the repo wiki
 	 */
-	public function __construct( Language $wikiLanguage, $repoWiki ) {
+	public function __construct( Language $wikiLanguage, Site $site, $repoWiki ) {
 		$this->repoWiki = $repoWiki;
 		$this->language = $wikiLanguage;
+		$this->site = $site;
 	}
+
+	/**
+	 * This pseudo-constructor uses the following settings from $settings:
+	 * - siteGlobalID
+	 * - repoDatabase
+	 *
+	 * @param SettingsArray $settings
+	 * @param Language      $wikiLanguage
+	 *
+	 * @return DirectSqlStore
+	 */
+	public static function newFromSettings( SettingsArray $settings, Language $wikiLanguage ) {
+		$repoWiki = $settings->getSetting( 'repoDatabase' );
+		$siteId = $settings->getSetting( 'siteGlobalID' );
+
+		// HACK: Allow the Site object to be set directly, to avoid
+		// depending on global state while testing.
+		if ( $siteId instanceof Site ) {
+			$site = $siteId;
+			$siteId = $site->getGlobalId();
+		} else {
+			$sites = \Sites::singleton();
+			$site = $sites->getSite( $siteId );
+		}
+
+		if ( $site === null ) {
+			// HACK: If in testing mode, always pretend the Site exists.
+			//       This covers the case where the test a) relies on the actual settings
+			//       of the local installation and b) the site ID used there is not
+			//       covered by TestSites.
+			if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+				// XXX: Since the sites table isn't complete on some live sites, be lenient for now.
+				//      But really, this should be a fatal error.
+				wfLogWarning( __METHOD__ . ": "
+					. "Constructing Site object for unknown site ID $siteId. "
+					. "Make sure this ID is present in the sites table." );
+			}
+
+			$site = new Site( \MediaWikiSite::TYPE_MEDIAWIKI );
+			$site->setGlobalId( $siteId );
+		}
+
+		return new self( $wikiLanguage, $site, $repoWiki );
+	}
+
 
 	/**
 	 * @see Store::getEntityUsageIndex
@@ -116,28 +163,11 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * Sets the site object representing the local wiki.
-	 * For testing only!
-	 *
-	 * @todo: remove this once the Site can be injected via the constructor!
-	 *
-	 * @param Site $site
-	 */
-	public function setSite( Site $site ) {
-		$this->site = $site;
-	}
-
-	/**
 	 * Returns the site object representing the local wiki.
 	 *
-	 * @return null|\Site
+	 * @return Site
 	 */
 	private function getSite() {
-		//FIXME: inject the site or at least the settings!
-		if ( $this->site === null ) {
-			$this->site = \Sites::singleton()->getSite( Settings::get( 'siteGlobalID' ) );
-		}
-
 		return $this->site;
 	}
 

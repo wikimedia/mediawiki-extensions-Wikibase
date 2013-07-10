@@ -286,9 +286,11 @@ final class WikibaseClient {
 			return $this->storeInstances[$store];
 		}
 
-		$instance = new $class(
-			$this->getContentLanguage(),
-			$repoDatabase
+		// Since we can't know what settings the ClientStore needs,
+		// delegate the instantiation to a factory method (poor man's builder).
+		$instance = $class::newFromSettings(
+			$this->settings,
+			$this->getContentLanguage()
 		);
 
 		assert( $instance instanceof ClientStore );
