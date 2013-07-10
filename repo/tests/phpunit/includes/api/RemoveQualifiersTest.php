@@ -100,7 +100,7 @@ class RemoveQualifiersTest extends \ApiTestCase {
 				$this->makeInvalidRequest(
 					$statement->getGuid(),
 					array( '~=[,,_,,]:3' ),
-					'no-such-qualifier'
+					'removequalifiers-qualifier-not-found'
 				);
 			}
 			else {
@@ -132,7 +132,7 @@ class RemoveQualifiersTest extends \ApiTestCase {
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
 
-		$this->makeInvalidRequest( $statementGuid, $hashes, 'no-such-qualifier' );
+		$this->makeInvalidRequest( $statementGuid, $hashes, 'removequalifiers-qualifier-not-found' );
 	}
 
 	protected function makeInvalidRequest( $statementGuid, array $hashes, $expectedError = null ) {
@@ -173,7 +173,7 @@ class RemoveQualifiersTest extends \ApiTestCase {
 		try {
 			$this->doApiRequest( $params );
 		} catch ( \UsageException $e ) {
-			$this->assertEquals( $e->getCodeString(), 'invalid-guid', 'Invalid claim guid raised correct error' );
+			$this->assertEquals( $e->getCodeString(), 'removequalifiers-invalid-guid', 'Invalid claim guid raised correct error' );
 			$caughtException = true;
 		}
 

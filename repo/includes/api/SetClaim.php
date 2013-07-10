@@ -46,7 +46,7 @@ use Wikibase\validators\SnakValidator;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class SetClaim extends ModifyClaim {
+class SetClaim extends ApiWikibase {
 
 	/**
 	 * @var SnakValidationHelper
@@ -69,6 +69,14 @@ class SetClaim extends ModifyClaim {
 			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
 			new ValidatorErrorLocalizer()
 		);
+	}
+
+	/**
+	 * @see ApiBase::isWriteMode
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
 	}
 
 	/**
@@ -138,8 +146,8 @@ class SetClaim extends ModifyClaim {
 
 			assert( $claim instanceof Claim );
 			return $claim;
-		} catch ( IllegalValueException $illegalValueException ) {
-			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-claim' );
+		} catch ( IllegalValueException $ex ) {
+			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-claim' );
 		}
 	}
 
@@ -179,15 +187,6 @@ class SetClaim extends ModifyClaim {
 			),
 			'bot' => false,
 		);
-	}
-
-	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-claim', 'info' => $this->msg( 'wikibase-api-invalid-claim' )->text() ),
-		) );
 	}
 
 	/**
