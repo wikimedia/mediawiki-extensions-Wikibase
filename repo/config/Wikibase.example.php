@@ -34,40 +34,45 @@ if ( !defined( 'WB_REPO_EXAMPLE_ENTRY' ) ) {
 	die( 'Not an entry point.' );
 }
 
-$wgContentHandlerUseDB = true;
+call_user_func( function() {
+	global $wgContentHandlerUseDB, $baseNs, $wgExtraNamespaces, $wgWBRepoSettings;
+	global $wgNamespacesToBeSearchedDefault, $wgGroupPermissions;
 
-$baseNs = 120;
+	$wgContentHandlerUseDB = true;
 
-// Define custom namespaces. Use these exact constant names.
-define( 'WB_NS_ITEM', $baseNs );
-define( 'WB_NS_ITEM_TALK', $baseNs + 1 );
-define( 'WB_NS_PROPERTY', $baseNs + 2 );
-define( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
+	$baseNs = 120;
 
-// Register extra namespaces.
-$wgExtraNamespaces[WB_NS_ITEM] = 'Item';
-$wgExtraNamespaces[WB_NS_ITEM_TALK] = 'Item_talk';
-$wgExtraNamespaces[WB_NS_PROPERTY] = 'Property';
-$wgExtraNamespaces[WB_NS_PROPERTY_TALK] = 'Property_talk';
+	// Define custom namespaces. Use these exact constant names.
+	define( 'WB_NS_ITEM', $baseNs );
+	define( 'WB_NS_ITEM_TALK', $baseNs + 1 );
+	define( 'WB_NS_PROPERTY', $baseNs + 2 );
+	define( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
 
-// Tell Wikibase which namespace to use for which kind of entity
-$wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_ITEM] = WB_NS_ITEM;
-$wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_PROPERTY;
+	// Register extra namespaces.
+	$wgExtraNamespaces[WB_NS_ITEM] = 'Item';
+	$wgExtraNamespaces[WB_NS_ITEM_TALK] = 'Item_talk';
+	$wgExtraNamespaces[WB_NS_PROPERTY] = 'Property';
+	$wgExtraNamespaces[WB_NS_PROPERTY_TALK] = 'Property_talk';
 
-// NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $wgWBRepoSettings
+	// Tell Wikibase which namespace to use for which kind of entity
+	$wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_ITEM] = WB_NS_ITEM;
+	$wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_PROPERTY;
 
-// Tell MediaWIki to search the item namespace
-$wgNamespacesToBeSearchedDefault[WB_NS_ITEM] = true;
+	// NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $wgWBRepoSettings
 
-// More things to play with
-$wgWBRepoSettings['apiInDebug'] = false;
-$wgWBRepoSettings['apiInTest'] = false;
-$wgWBRepoSettings['apiWithRights'] = true;
-$wgWBRepoSettings['apiWithTokens'] = true;
+	// Tell MediaWIki to search the item namespace
+	$wgNamespacesToBeSearchedDefault[WB_NS_ITEM] = true;
 
-$wgGroupPermissions['wbeditor']['item-set'] = true;
+	// More things to play with
+	$wgWBRepoSettings['apiInDebug'] = false;
+	$wgWBRepoSettings['apiInTest'] = false;
+	$wgWBRepoSettings['apiWithRights'] = true;
+	$wgWBRepoSettings['apiWithTokens'] = true;
 
-$wgWBRepoSettings['normalizeItemByTitlePageNames'] = true;
+	$wgGroupPermissions['wbeditor']['item-set'] = true;
+
+	$wgWBRepoSettings['normalizeItemByTitlePageNames'] = true;
+} );
 
 
 /*
