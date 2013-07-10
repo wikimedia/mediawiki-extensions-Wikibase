@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_21806349",
+        "filename": "repo/Wikibase.classes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T09:58:41Z",
+      "side": 1,
+      "message": "the namespace is inconsistant with what is in the class file, so the class can\u0027t be found.",
+      "revId": "ae079aca3366198be1577e5f768f310b45bce1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_c18fcf74",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T09:58:41Z",
+      "side": 1,
+      "message": "instead of $this, it should be an instance of the new class",
+      "revId": "ae079aca3366198be1577e5f768f310b45bce1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
