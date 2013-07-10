@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_09662def",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-10T13:55:37Z",
+      "side": 1,
+      "message": "Please rebase and take into account the error code changes in https://gerrit.wikimedia.org/r/#/c/72528/\n\nThis should currently be param-illegal\n(Please also make sure it it listed in the getPossibleErrors method listed below.",
+      "revId": "3e927f1d02a9e314c052a199455669671be4e121",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_e9b3d14a",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-10T13:55:37Z",
+      "side": 1,
+      "message": "Could you please add an example usage to the bottom of the file! :)",
+      "revId": "3e927f1d02a9e314c052a199455669671be4e121",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
