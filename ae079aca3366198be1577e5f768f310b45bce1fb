@@ -54,6 +54,40 @@
     },
     {
       "key": {
+        "uuid": "69c609db_013447a9",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T10:12:18Z",
+      "side": 1,
+      "message": "FormatterOptions come from ValueFormatters\n\nwe need to put this in the use section at the top",
+      "revId": "ae079aca3366198be1577e5f768f310b45bce1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_e1380b9f",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T10:12:18Z",
+      "side": 1,
+      "message": "this also goes in the use section",
+      "revId": "ae079aca3366198be1577e5f768f310b45bce1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69c609db_81c79798",
         "filename": "repo/includes/ClaimHtmlGenerator.php",
         "patchSetId": 1
