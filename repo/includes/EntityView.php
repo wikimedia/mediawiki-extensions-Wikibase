@@ -67,6 +67,11 @@ abstract class EntityView extends \ContextSource {
 	protected $idFormatter;
 
 	/**
+	 * @var LanguageFallbackChain
+	 */
+	protected $languageFallbackChain;
+
+	/**
 	 * Maps entity types to the corresponding entity view.
 	 * FIXME: remove this stuff, big OCP violation
 	 *
@@ -94,6 +99,8 @@ abstract class EntityView extends \ContextSource {
 	 * @param IContextSource|null $context
 	 */
 	public function __construct( ValueFormatterFactory $valueFormatters, IContextSource $context = null ) {
+		global $wgUseSquid;
+
 		$this->valueFormatters = $valueFormatters;
 
 		if ( !$context ) {
@@ -103,6 +110,15 @@ abstract class EntityView extends \ContextSource {
 
 		// TODO: this need to be properly injected
 		$this->idFormatter = WikibaseRepo::getDefaultInstance()->getIdFormatter();
+
+		$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		if ( $wgUseSquid && $context->getUser()->isAnon() ) {
+			// Anonymous users share the same Squid cache, which is splitted by URL.
+			// That means we can't do anything except for what completely depends by URL such as &uselang=.
+			$this->languageFallbackChain = $factory->newFromLanguage( $context->getLanguage() );
+		} else {
+			$this->languageFallbackChain = $factory->newFromContext( $context );
+		}
 	}
 
 	/**
@@ -810,6 +826,9 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbEntityType', $entity->getType() );
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 
+		// Some constant, but to avoid hard coding it everywhere
+		$out->addJsConfigVars( 'wbContextLanguageCode', LanguageFallbackChain::CONTEXT_LANGUAGE_CODE );
+
 		// entity specific data
 		$out->addJsConfigVars( 'wbEntityId', $this->getFormattedIdForEntity( $entity ) );
 
@@ -818,6 +837,9 @@ abstract class EntityView extends \ContextSource {
 
 		// TODO: use injected id formatter
 		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
+		$serializationOptions->setLanguages( Utils::getLanguageCodes() + array(
+			LanguageFallbackChain::CONTEXT_LANGUAGE_CODE => $this->languageFallbackChain,
+		) );
 
 		$serializerFactory = new SerializerFactory();
 		$serializer = $serializerFactory->newSerializerForObject( $entity, $serializationOptions );
@@ -832,7 +854,7 @@ abstract class EntityView extends \ContextSource {
 		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
 
 		$usedEntityIds = $refFinder->findClaimLinks( $entity->getClaims() );
-		$basicEntityInfo = static::getBasicEntityInfo( $entityLoader, $usedEntityIds, $langCode );
+		$basicEntityInfo = static::getBasicEntityInfo( $entityLoader, $usedEntityIds, $langCode, $this->languageFallbackChain );
 
 		$out->addJsConfigVars(
 			'wbUsedEntities',
@@ -850,9 +872,12 @@ abstract class EntityView extends \ContextSource {
 	 * @param EntityLookup $entityLoader
 	 * @param EntityId[] $entityIds
 	 * @param string $langCode For the entity labels which will be included in one language only.
+	 * @param LanguageFallbackChain $languageFallbackChain Set it to include labels to display for the given language fallback chain too.
 	 * @return array
 	 */
-	protected static function getBasicEntityInfo( EntityLookup $entityLoader, array $entityIds, $langCode ) {
+	protected static function getBasicEntityInfo(
+		EntityLookup $entityLoader, array $entityIds, $langCode, LanguageFallbackChain $languageFallbackChain = null
+	) {
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = EntityContentFactory::singleton();
@@ -864,7 +889,11 @@ abstract class EntityView extends \ContextSource {
 		$serializationOptions = new EntitySerializationOptions( WikibaseRepo::getDefaultInstance()->getIdFormatter() );
 		$serializationOptions->setProps( array( 'labels', 'descriptions', 'datatype' ) );
 
-		$serializationOptions->setLanguages( array( $langCode ) );
+		$languages = array( $langCode );
+		if ( $languageFallbackChain ) {
+			$languages = array( $langCode => $languageFallbackChain );
+		}
+		$serializationOptions->setLanguages( $languages );
 
 		foreach( $entities as $prefixedId => $entity ) {
 			if( $entity === null ) {
