@@ -34,6 +34,16 @@ use InvalidArgumentException;
 class Claim implements \Hashable, \Serializable {
 
 	/**
+	 * Rank enum. Higher values are more preferred.
+	 *
+	 * @since 0.1
+	 */
+	const RANK_TRUTH = 3;
+	const RANK_PREFERRED = 2;
+	const RANK_NORMAL = 1;
+	const RANK_DEPRECATED = 0;
+
+	/**
 	 * @since 0.1
 	 *
 	 * @var Snak
@@ -237,6 +247,18 @@ class Claim implements \Hashable, \Serializable {
 		$this->setMainSnak( $instance->getMainSnak() );
 		$this->setQualifiers( $instance->getQualifiers() );
 		$this->setGuid( $instance->getGuid() );
+	}
+
+	/**
+	 * Gets the rank of the claim.
+	 * The rank is an element of the Claim::RANK_ enum.
+	 *
+	 * @since 0.1
+	 *
+	 * @return integer
+	 */
+	public function getRank() {
+		return self::RANK_TRUTH;
 	}
 
 }

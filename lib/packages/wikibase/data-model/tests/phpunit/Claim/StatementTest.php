@@ -50,7 +50,7 @@ class StatementTest extends ClaimTest {
 		$instances[] = $baseInstance;
 
 		$instance = clone $baseInstance;
-		$instance->setRank( Statement::RANK_PREFERRED );
+		$instance->setRank( Claim::RANK_PREFERRED );
 
 		$instances[] = $instance;
 
@@ -110,7 +110,7 @@ class StatementTest extends ClaimTest {
 		$rank = $statement->getRank();
 		$this->assertInternalType( 'integer', $rank );
 
-		$ranks = array( Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED );
+		$ranks = array( Claim::RANK_DEPRECATED, Claim::RANK_NORMAL, Claim::RANK_PREFERRED );
 		$this->assertTrue( in_array( $rank, $ranks ), true );
 	}
 
@@ -118,8 +118,8 @@ class StatementTest extends ClaimTest {
 	 * @dataProvider instanceProvider
 	 */
 	public function testSetRank( Statement $statement ) {
-		$statement->setRank( Statement::RANK_DEPRECATED );
-		$this->assertEquals( Statement::RANK_DEPRECATED, $statement->getRank() );
+		$statement->setRank( Claim::RANK_DEPRECATED );
+		$this->assertEquals( Claim::RANK_DEPRECATED, $statement->getRank() );
 	}
 
 	/**
@@ -128,6 +128,20 @@ class StatementTest extends ClaimTest {
 	public function testSetInvalidRank( Statement $statement ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$statement->setRank( 9001 );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testSetRankToTruth( Statement $statement ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$statement->setRank( Claim::RANK_TRUTH );
+	}
+
+	public function testStatementRankCompatibility() {
+		$this->assertEquals( Claim::RANK_DEPRECATED, Statement::RANK_DEPRECATED );
+		$this->assertEquals( Claim::RANK_PREFERRED, Statement::RANK_PREFERRED );
+		$this->assertEquals( Claim::RANK_NORMAL, Statement::RANK_NORMAL );
 	}
 
 	/**
@@ -163,11 +177,11 @@ class StatementTest extends ClaimTest {
 	public function testGetHash() {
 		$claim0 = new Statement( new \Wikibase\PropertyNoValueSnak( 42 ) );
 		$claim0->setGuid( 'claim0' );
-		$claim0->setRank( Statement::RANK_DEPRECATED );
+		$claim0->setRank( Claim::RANK_DEPRECATED );
 
 		$claim1 = new Statement( new \Wikibase\PropertyNoValueSnak( 42 ) );
 		$claim1->setGuid( 'claim1' );
-		$claim1->setRank( Statement::RANK_DEPRECATED );
+		$claim1->setRank( Claim::RANK_DEPRECATED );
 
 		$this->assertEquals( $claim0->getHash(), $claim1->getHash() );
 	}

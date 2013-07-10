@@ -34,15 +34,6 @@ use InvalidArgumentException;
 class Statement extends Claim {
 
 	/**
-	 * Rank enum. Higher values are more preferred.
-	 *
-	 * @since 0.1
-	 */
-	const RANK_PREFERRED = 2;
-	const RANK_NORMAL = 1;
-	const RANK_DEPRECATED = 0;
-
-	/**
 	 * @since 0.1
 	 *
 	 * @var References
@@ -92,7 +83,7 @@ class Statement extends Claim {
 
 	/**
 	 * Sets the rank of the statement.
-	 * The rank is an element of the Statement::RANK_ enum.
+	 * The rank is an element of the Claim::RANK_ enum, excluding RANK_TRUTH.
 	 *
 	 * @since 0.1
 	 *
@@ -110,8 +101,7 @@ class Statement extends Claim {
 	}
 
 	/**
-	 * Gets the rank of the statement.
-	 * The rank is an element of the Statement::RANK_ enum.
+	 * @see Claim::getRank
 	 *
 	 * @since 0.1
 	 *
