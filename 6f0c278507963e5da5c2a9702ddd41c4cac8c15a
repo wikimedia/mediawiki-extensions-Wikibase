@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_a11a9311",
+        "filename": "repo/includes/store/sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T10:22:15Z",
+      "side": 1,
+      "message": "it is a bit weird that you can set useTransactions publically, but not actually see the value publically. That makes it a Heisenvar.",
+      "revId": "6f0c278507963e5da5c2a9702ddd41c4cac8c15a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
