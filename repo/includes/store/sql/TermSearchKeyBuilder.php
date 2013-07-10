@@ -173,16 +173,24 @@ class TermSearchKeyBuilder {
 			);
 
 			$c = 0;
+			$cError = 0;
 
 			foreach ( $terms as $row ) {
-				$this->updateSearchKey( $dbw, $row->term_row_id, $row->term_text, $row->term_language );
+				$key = $this->updateSearchKey( $dbw, $row->term_row_id, $row->term_text, $row->term_language );
+
+				if ( $key === false ) {
+					$this->report( "Unable to calculate search key for " . $row->term_text );
+					$cError += 1;
+				} else {
+					$c+= 1;
+				}
+
 				$rowId = $row->term_row_id;
-				$c+= 1;
 			}
 
 			$dbw->commit();
 
-			$this->report( "Updated $c search keys, up to row $rowId." );
+			$this->report( "Updated $c search keys (skipped $cError), up to row $rowId." );
 			$total += $c;
 
 			if ( $c < $this->batchSize ) {
@@ -230,10 +238,17 @@ class TermSearchKeyBuilder {
 	 * @param string $text the term's text
 	 * @param string $lang the term's language
 	 *
-	 * @return string the search key
+	 * @return string|bool the search key, or false if no search key could be calculated.
 	 */
 	protected function updateSearchKey( \DatabaseBase $dbw, $rowId, $text, $lang ) {
 		$key = $this->table->getSearchKey( $text, $lang );
+
+		if ( $key === '' ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to normalized term: $text" );
+			return false;
+		}
+
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": row_id = $rowId, search_key = `$key`" );
 
 		$dbw->update(
 			$this->table->getTableName(),
