@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49c305cb_2410924e",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2013-07-10T14:34:04Z",
+      "side": 1,
+      "message": "getRank() will fail for Claims that are not entities.",
+      "revId": "e01959209c90c2aa6dddf5408c679d2d80e631e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
