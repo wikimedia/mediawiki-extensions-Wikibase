@@ -16,6 +16,24 @@
       "revId": "e01959209c90c2aa6dddf5408c679d2d80e631e0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49c305cb_64e8ca12",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2013-07-10T15:09:33Z",
+      "side": 1,
+      "message": "Yup! Waiting for I96872212e374c2b28",
+      "parentUuid": "49c305cb_2410924e",
+      "revId": "e01959209c90c2aa6dddf5408c679d2d80e631e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
