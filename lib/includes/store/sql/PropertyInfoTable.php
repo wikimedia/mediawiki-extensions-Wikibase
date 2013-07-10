@@ -83,7 +83,37 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 			}
 
 			$updater->addExtensionTable( $table, $file );
+
+			// populate the table after creating it
+			$updater->addExtensionUpdate( array(
+				array( 'Wikibase\PropertyInfoTable', 'rebuildPropertyInfo' )
+			) );
 		}
+	}
+
+	/**
+	 * Wrapper for invoking PropertyInfoTableBuilder from DatabaseUpdater
+	 * during a database update.
+	 *
+	 * @param \DatabaseUpdater $updater
+	 */
+	public static function rebuildPropertyInfo( \DatabaseUpdater $updater ) {
+		$reporter = new \ObservableMessageReporter();
+		$reporter->registerReporterCallback(
+			function ( $msg ) use ( $updater ) {
+				$updater->output( "..." . $msg . "\n" );
+			}
+		);
+
+		$table = new PropertyInfoTable( false );
+		$entityLookup = new WikiPageEntityLookup( false );
+
+		$builder = new PropertyInfoTableBuilder( $table, $entityLookup );
+		$builder->setReporter( $reporter );
+		$builder->setUseTransactions( false );
+
+		$updater->output( 'Populating ' . $table->getTableName() . "\n" );
+		$builder->rebuildPropertyInfo();
 	}
 
 	/**
