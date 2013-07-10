@@ -28,58 +28,16 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author Daniel Kinzler
  */
 class ReferencedEntitiesFinder {
-
-	/**
-	 * @since 0.4
-	 *
-	 * @var EntityLookup
-	 */
-	protected $entityLoader;
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param EntityLookup $entityLoader
-	 */
-	public function __construct( EntityLookup $entityLoader ) {
-		$this->entityLoader = $entityLoader;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param Claim[]|Claims $claims
-	 *
-	 * @return EntityId[]
-	 */
-	public function findClaimLinks( $claims ) {
-		$snaks = array();
-
-		/**
-		 * @var Claim $claim
-		 */
-		foreach ( $claims as $claim ) {
-			$snaks[] = $claim->getMainSnak();
-			$snaks = array_merge( $snaks, iterator_to_array( $claim->getQualifiers() ) );
-
-			if( $claim instanceof Statement ) {
-				foreach( $claim->getReferences() as $reference ) {
-					$snaks = array_merge( $snaks, iterator_to_array( $reference->getSnaks() ) );
-				}
-			}
-		}
-
-		return $this->findSnakLinks( $snaks );
-	}
 
 	/**
 	 * @param Snak[] $snaks
 	 *
 	 * @return EntityId[]
 	 */
-	protected function findSnakLinks( array $snaks ) {
+	public function findSnakLinks( array $snaks ) {
 		$foundEntities = array();
 
 		foreach ( $snaks as $snak ) {

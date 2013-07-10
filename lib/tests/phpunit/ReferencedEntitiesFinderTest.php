@@ -14,6 +14,7 @@ use Wikibase\EntityId;
 use Wikibase\Property;
 use Wikibase\Item;
 use Wikibase\SnakList;
+use Wikibase\Snak;
 use DataValues\StringValue;
 use Wikibase\LibRegistry;
 use Wikibase\Settings;
@@ -50,95 +51,55 @@ use Wikibase\Reference;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 
 	public function claimsProvider() {
 		$argLists = array();
 
-		$argLists[] = array( array(), array() );
+		$p11 = new EntityId( Property::ENTITY_TYPE, 11 );
+		$p42 = new EntityId( Property::ENTITY_TYPE, 42 );
+		$p44 = new EntityId( Property::ENTITY_TYPE, 44 );
+
+		$q23 = new EntityId( Item::ENTITY_TYPE, 23 );
+		$q24 = new EntityId( Item::ENTITY_TYPE, 24 );
+
+		$argLists[] = array(
+			array(),
+			array(),
+			"empty" );
+
+		$argLists[] = array(
+			array( new PropertyNoValueSnak( $p42 ) ),
+			array( $p42 ),
+			"Property" );
+
+		$argLists[] = array(
+			array( new PropertySomeValueSnak( $p42 ) ),
+			array( $p42 ),
+			"PropertySomeValueSnak" );
+
+		$argLists[] = array(
+			array( new PropertyValueSnak( $p42, new StringValue( 'onoez' )  ) ),
+			array( $p42 ),
+			"PropertyValueSnak with string value" );
+
+		$argLists[] = array(
+			array( new PropertyValueSnak( $p42, $q23 ) ),
+			array( $p42, $q23 ),
+			"PropertyValueSnak with EntityId" );
 
 		$argLists[] = array(
 			array(
-				new Claim( new PropertyNoValueSnak( 42 ) )
+				new PropertyValueSnak( $p11, $q23 ),
+				new PropertyNoValueSnak( $p42 ),
+				new PropertySomeValueSnak( $p44 ),
+				new PropertyValueSnak( $p44, new StringValue( 'onoez' ) ),
+				new PropertyValueSnak( $p44, $q24 ),
 			),
-			array(
-				new EntityId( Property::ENTITY_TYPE, 42 )
-			)
-		);
-
-		$argLists[] = array(
-			array(
-				new Statement(
-					new PropertyNoValueSnak( 42 ),
-					null,
-					new ReferenceList( array( new Reference( new SnakList( array(
-						new PropertyNoValueSnak( 24 ) ) ) ) ) )
-				)
-			),
-			array(
-				new EntityId( Property::ENTITY_TYPE, 42 ),
-				new EntityId( Property::ENTITY_TYPE, 24 )
-			)
-		);
-
-		$argLists[] = array(
-			array(
-				new Claim( new PropertyNoValueSnak( 42 ) ),
-				new Claim( new PropertyNoValueSnak( 43 ) ),
-			),
-			array(
-				new EntityId( Property::ENTITY_TYPE, 42 ),
-				new EntityId( Property::ENTITY_TYPE, 43 ),
-			)
-		);
-
-		$argLists[] = array(
-			array(
-				new Claim(
-					new PropertyNoValueSnak( 42 ),
-					new SnakList( array(
-						new PropertyNoValueSnak( 42 ),
-						new PropertySomeValueSnak( 43 ),
-						new PropertyValueSnak( 1, new StringValue( 'onoez' ) ),
-					) )
-				),
-				new Claim( new PropertyNoValueSnak( 44 ) ),
-			),
-			array(
-				new EntityId( Property::ENTITY_TYPE, 42 ),
-				new EntityId( Property::ENTITY_TYPE, 43 ),
-				new EntityId( Property::ENTITY_TYPE, 44 ),
-				new EntityId( Property::ENTITY_TYPE, 1 ),
-			)
-		);
-
-		$id9001 = new EntityId( Item::ENTITY_TYPE, 9001 );
-		$id1 = new EntityId( Item::ENTITY_TYPE, 1 );
-
-		$argLists[] = array(
-			array(
-				new Claim(
-					new PropertyValueSnak( 2, $id9001 ),
-					new SnakList( array(
-						new PropertyNoValueSnak( 42 ),
-						new PropertySomeValueSnak( 43 ),
-						new PropertyValueSnak( 1, new StringValue( 'onoez' ) ),
-						new PropertyValueSnak( 2, $id1 ),
-					) )
-				),
-				new Claim( new PropertyNoValueSnak( 44 ) ),
-			),
-			array(
-				new EntityId( Property::ENTITY_TYPE, 2 ),
-				new EntityId( Property::ENTITY_TYPE, 42 ),
-				new EntityId( Property::ENTITY_TYPE, 43 ),
-				new EntityId( Property::ENTITY_TYPE, 44 ),
-				new EntityId( Property::ENTITY_TYPE, 1 ),
-				new EntityId( Item::ENTITY_TYPE, 9001 ),
-				new EntityId( Item::ENTITY_TYPE, 1 ),
-			)
-		);
+			array( $p11, $q23, $p42, $p44, $q24 ),
+			"PropertyValueSnak with EntityId" );
 
 		return $argLists;
 	}
@@ -146,34 +107,16 @@ class ReferencedEntitiesFinderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider claimsProvider
 	 *
-	 * @param Claim[] $claims
+	 * @param Snak[]     $snaks
 	 * @param EntityId[] $expected
+	 * @param            $message
 	 */
-	public function testFindClaimLinks( array $claims, array $expected ) {
-		$linkFinder = new ReferencedEntitiesFinder( $this->getMockEntityLoader() );
+	public function testFindSnakLinks( array $snaks, array $expected, $message ) {
+		$linkFinder = new ReferencedEntitiesFinder();
 
-		$actual = $linkFinder->findClaimLinks( new Claims( $claims ) );
+		$actual = $linkFinder->findSnakLinks( $snaks );
 
-		$this->assertArrayEquals( $expected, $actual );
-	}
-
-	/**
-	 * @return \Wikibase\EntityLookup
-	 */
-	protected function getMockEntityLoader() {
-		$entityLoader = new \Wikibase\Test\MockRepository();
-
-		$stringProp = Property::newEmpty();
-		$stringProp->setId( 1 );
-		$stringProp->setDataTypeId( 'commonsMedia' );
-		$entityLoader->putEntity( $stringProp );
-
-		$itemProp = Property::newEmpty();
-		$itemProp->setId( 2 );
-		$itemProp->setDataTypeId( 'wikibase-item' );
-		$entityLoader->putEntity( $itemProp );
-
-		return $entityLoader;
+		$this->assertArrayEquals( $expected, $actual ); // assertArrayEquals doesn't take a message :(
 	}
 
 }
