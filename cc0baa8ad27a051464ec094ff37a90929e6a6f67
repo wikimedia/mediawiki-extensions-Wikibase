@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_a14f3334",
+        "filename": "repo/includes/store/sql/TermSearchKeyBuilder.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T10:18:08Z",
+      "side": 1,
+      "message": "suggesting to rephrase bracket: (not including $cerror skipped)",
+      "revId": "cc0baa8ad27a051464ec094ff37a90929e6a6f67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
