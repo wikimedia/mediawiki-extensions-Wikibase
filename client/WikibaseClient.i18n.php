@@ -471,8 +471,9 @@ $messages['bg'] = array(
 	'wikibase-linkitem-input-site' => 'Език:',
 	'wikibase-linkitem-input-page' => 'Страница:',
 	'wikibase-linkitem-invalidsite' => 'Избран е неизвестен или невалиден сайт',
-	'wikibase-linkitem-confirmitem-text' => 'Избраната страница е вече свързана с [$1 обект от нашето централно хранилище с данни]. Потвърдете, ако страниците, показани по-долу, са онези, които искате да свържете с тази страница.',
+	'wikibase-linkitem-confirmitem-text' => 'Избраната страница е вече свързана с [$1 обект от нашето централно хранилище с данни]. Потвърдете, ако страниците, показани по-долу, са онези, които искате да свържете с тази страница.', # Fuzzy
 	'wikibase-linkitem-not-loggedin-title' => 'Трябва да сте влезли в системата',
+	'wikibase-pageinfo-entity-id' => 'ID на обекта в Уикиданни',
 );
 
 /** Bengali (বাংলা)
@@ -671,6 +672,8 @@ $messages['ce'] = array(
 	'wikibase-linkitem-invalidsite' => 'Къастина йозушйоцу я нийса йоцу сайт',
 	'wikibase-linkitem-confirmitem-text' => 'Ахьа къастийна агӀо хӀинцале [$1 кхечу Википедишан агӀонашца] вовшахтесна ю. Дехар до, бакъдар лахахь гайтина йолу агӀонашан юкъахь хьой къузара хьажориг тӀехӀоттош йолу агӀо хилар.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'Бакъдан',
+	'wikibase-linkitem-not-loggedin-title' => 'Ахьа авторизаци ян еза',
+	'wikibase-linkitem-not-loggedin' => 'И функци лела я йиш хилийта ахьа хьай цӀерца болх ба беза хӀокху вики чох а [$1 Викихаамаш чохь а].',
 	'wikibase-linkitem-success-create' => 'АгӀонаш кхиамца [$1 Викихаамаш чохь] вовшахтесна.',
 	'wikibase-linkitem-success-link' => 'АгӀонаш кхиамца [$1 Викихаамаш чохь] вовшахтесна.',
 	'wikibase-property-notfound' => 'Свойства «$1» ца карайо',
@@ -740,6 +743,7 @@ $messages['crh-latn'] = array(
 $messages['cs'] = array(
 	'wikibase-client-desc' => 'Klient pro rozšíření Wikibase',
 	'specialpages-group-wikibaseclient' => 'Klient Wikidat',
+	'tooltip-t-wikibase' => 'Odkaz na propojenou položku datového úložiště',
 	'wikibase-after-page-move' => 'Můžete také [$1 aktualizovat] související položku Wikidat, aby na přesunuté stránce zůstaly odkazy na další jazyky.',
 	'wikibase-after-page-move-queued' => 'Související [$1 položka Wikidat] bude zanedlouho automaticky aktualizována.',
 	'wikibase-comment-remove' => 'Související položka Wikidat odstraněna. Mezijazykové odkazy odstraněny.',
@@ -751,6 +755,7 @@ $messages['cs'] = array(
 	'wikibase-comment-sitelink-change' => 'Mezijazykový odkaz změněn z $1 na $2',
 	'wikibase-comment-sitelink-remove' => 'Odstraněn mezijazykový odkaz: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|změna|změny|změn}}',
+	'wikibase-dataitem' => 'Datová položka',
 	'wikibase-editlinks' => 'Upravit odkazy',
 	'wikibase-editlinkstitle' => 'Editovat mezijazykové odkazy',
 	'wikibase-linkitem-addlinks' => 'Přidat odkazy',
@@ -763,16 +768,19 @@ $messages['cs'] = array(
 	'wikibase-linkitem-input-site' => 'Jazyk:',
 	'wikibase-linkitem-input-page' => 'Stránka:',
 	'wikibase-linkitem-invalidsite' => 'Neznámá nebo neplatná stránka',
-	'wikibase-linkitem-confirmitem-text' => 'Na zvolenou stránku již odkazuje [$1 položka v našem ústředním úložišti]. Potvrďte, že s touto stránkou chcete provázat níže zobrazené stránky.', # Fuzzy
+	'wikibase-linkitem-confirmitem-text' => 'Na zvolenou stránku již odkazuje [$1 položka v našem ústředním úložišti]. Potvrďte, že níže {{PLURAL:$2|zobrazená stránka je ta, se kterou|zobrazené stránky jsou ty, se kterými}} chcete tuto stránku provázat.',
 	'wikibase-linkitem-confirmitem-button' => 'Potvrdit',
 	'wikibase-linkitem-not-loggedin-title' => 'Musíte být přihlášen',
 	'wikibase-linkitem-not-loggedin' => 'Je třeba být přihlášen na této wiki a [$1  Wikidatech], chcete-li použít tuto funkci.',
 	'wikibase-linkitem-success-create' => 'Stránky byly úspěšně propojeny. Nově vytvořenou položku s odkazy na ně najdete v [$1 centrálním úložišti dat].',
 	'wikibase-linkitem-success-link' => 'Stránky byly úspěšně spojeny. Byla založena položka obsahující tyto odkazy v [$1  centrálním datovém úložišti].',
 	'wikibase-property-notfound' => 'Vlastnost $1 nebyla nalezena.',
+	'wikibase-property-notsupportedyet' => 'Wikibase zatím nepodporuje typ vlastnosti $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
 	'wikibase-rc-show-wikidata-pref' => 'Zobrazit změny Wikidat v posledních změnách',
 	'wikibase-watchlist-show-changes-pref' => 'Zobrazit změny Wikidat ve sledovaných stránkách',
+	'wikibase-error-serialize-error' => 'Nepodařilo se zaserializovat data',
+	'wikibase-error-invalid-entity-id' => 'Systém zadané ID nezná. Použijte platné ID entity.',
 	'special-unconnectedpages' => 'Stránky nepropojené s položkou',
 	'wikibase-unconnectedpages-legend' => 'Nastavení nepropojených stránek',
 	'wikibase-unconnectedpages-page' => 'Seznam výsledků začít stránkou:',
@@ -781,6 +789,9 @@ $messages['cs'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Název stránky nelze pro dotaz použít, takže se ignoruje.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Jen stránky s mezijazykovými odkazy',
 	'wikibase-unconnectedpages-format-row' => '(stránka obsahuje $1 {{PLURAL:$1|mezijazykový odkaz|mezijazykové odkazy|mezijazykových odkazů}})',
+	'wikibase-pageinfo-entity-id' => 'ID položky Wikidat',
+	'wikibase-pageinfo-entity-id-none' => 'Žádná',
+	'wikibase-property-render-error' => 'Nepodařilo se zobrazit vlastnost $1: $2',
 );
 
 /** Church Slavic (словѣ́ньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ)
@@ -3359,6 +3370,7 @@ $messages['tr'] = array(
 
 /** Ukrainian (українська)
  * @author AS
+ * @author Ahonc
  * @author Base
  * @author Lystopad
  * @author Microcell
@@ -3402,7 +3414,7 @@ $messages['uk'] = array(
 	'wikibase-rc-show-wikidata-pref' => 'Показати зміни Вікіданих у списку нових редагувань',
 	'wikibase-watchlist-show-changes-pref' => 'Показувати редагування Вікіданих у Вашому списку спостереження',
 	'wikibase-error-invalid-entity-id' => 'Введений ідентифікатор не відомий системі. Будь ласка, введіть коректний ідентифікатор сутності.',
-	'special-unconnectedpages' => "Сторінки не пов'язані з елементами",
+	'special-unconnectedpages' => "Сторінки, не пов'язані з елементами",
 	'wikibase-unconnectedpages-legend' => "Параметри непов'язаних сторінок",
 	'wikibase-unconnectedpages-page' => 'Почати список результатів із сторінки:',
 	'wikibase-unconnectedpages-submit' => 'Виконати',
