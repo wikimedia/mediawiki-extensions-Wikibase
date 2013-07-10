@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49c305cb_e4831ace",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2013-07-10T15:55:18Z",
+      "side": 1,
+      "message": "no point in having  the comment here, there is a TODO already ;)",
+      "revId": "fd7632a2d9a09e577ce7124393b2454887bae103",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
