@@ -64,7 +64,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	/**
-	 * Find the entity.
+	 * Get the entity.
 	 *
 	 * @since 0.1
 	 *
@@ -72,7 +72,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 *
 	 * @return \Wikibase\EntityContent Found existing entity
 	 */
-	protected function findEntity( array $params ) {
+	protected function getEntityContent( array $params ) {
 		$entityContent = null;
 
 		// If we have an id try that first. If the id isn't prefixed, assume it refers to an item.
@@ -100,9 +100,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			);
 
 			if ( is_null( $entityTitle ) ) {
-				$this->dieUsage( $this->msg( "No entity found matching site link " .
-					$params['site'] . ":" . $params['title'] )->text(),
-					'no-such-entity-link' );
+				$this->dieUsage( 'No entity found matching site link ' . $params['site'] . ':' . $params['title'] , 'no-such-entity-link' );
 			}
 		} else {
 			return null;
@@ -112,9 +110,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 		if ( is_null( $entityContent ) ) {
-			$this->dieUsage( "Can't access item content of " .
-				$entityTitle->getPrefixedDBkey() .
-				", revision may have been deleted.", 'no-such-entity' );
+			$this->dieUsage( "Can't access item content of " . $entityTitle->getPrefixedDBkey() . ", revision may have been deleted.", 'no-such-entity' );
 		}
 
 		return $entityContent;
@@ -131,7 +127,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @return \Wikibase\EntityContent Newly created entity
 	 */
 	protected function createEntity( array $params ) {
-		$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
+		$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
 	}
 
 	/**
@@ -169,7 +165,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
 		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
+			$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page' , 'param-illegal' );
 		}
 	}
 
@@ -188,7 +184,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		$this->validateParameters( $params );
 
 		// Try to find the entity or fail and create it, or die in the process
-		$entityContent = $this->findEntity( $params );
+		$entityContent = $this->getEntityContent( $params );
 		if ( is_null( $entityContent ) ) {
 			$entityContent = $this->createEntity( $params );
 		}
@@ -198,7 +194,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		if ( !$status->isOK() ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' ), 'cant-edit' );
+			$this->dieUsage( 'You do not have sufficient permissions' , 'permissiondenied' );
 		}
 
 		$summary = $this->modifyEntity( $entityContent, $params );
@@ -207,7 +203,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			//XXX: This could rather be used for "silent" failure, i.e. in cases where
 			//     there was simply nothing to do.
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( $this->msg( 'wikibase-api-modify-failed' )->text(), 'modify-failed' );
+			$this->dieUsage( 'Attempted modification of the item failed' , 'failed-modify' );
 		}
 
 		if ( $summary === true ) { // B/C, for implementations of modifyEntity that return true on success.
@@ -289,19 +285,12 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'id-xor-wikititle', 'info' => $this->msg( 'wikibase-api-id-xor-wikititle' )->text() ),
-			array( 'code' => 'add-with-id', 'info' => $this->msg( 'wikibase-api-add-with-id' )->text() ),
-			array( 'code' => 'add-exists', 'info' => $this->msg( 'wikibase-api-add-exists' )->text() ),
-			array( 'code' => 'update-without-id', 'info' => $this->msg( 'wikibase-api-update-without-id' )->text() ),
-			array( 'code' => 'no-such-entity-link', 'info' => 'No item found with the given sitelink' ),
-			array( 'code' => 'no-such-entity-id', 'info' => 'No item found with the given ID' ),
-			array( 'code' => 'create-failed', 'info' => $this->msg( 'wikibase-api-create-failed' )->text() ),
-			array( 'code' => 'modify-failed', 'info' => $this->msg( 'wikibase-api-modify-failed' )->text() ),
-			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
-			array( 'code' => 'invalid-contentmodel', 'info' => $this->msg( 'wikibase-api-invalid-contentmodel' )->text() ),
-			array( 'code' => 'no-permissions', 'info' => $this->msg( 'wikibase-api-no-permissions' )->text() ),
-			array( 'code' => 'session-failure', 'info' => $this->msg( 'wikibase-api-session-failure' )->text() ),
-			array( 'code' => 'patch-empty', 'info' => $this->msg( 'wikibase-api-patch-empty' )->text() ),
+			array( 'code' => 'no-such-entity-id', 'info' => $this->msg( 'wikibase-api-no-such-entity-id' )->text() ),
+			array( 'code' => 'no-such-entity-link', 'info' => $this->msg( 'wikibase-api-no-such-entity-link' )->text() ),
+			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
+			array( 'code' => 'permissiondenied', 'info' => $this->msg( 'wikibase-api-permissiondenied' )->text() ),
+			array( 'code' => 'failed-modify', 'info' => $this->msg( 'wikibase-api-failed-modify' )->text() ),
 		) );
 	}
 

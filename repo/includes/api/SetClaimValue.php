@@ -45,7 +45,7 @@ use Wikibase\validators\SnakValidator;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetClaimValue extends ApiWikibase implements IAutocomment{
+class SetClaimValue extends ModifyClaim implements IAutocomment{
 
 	/**
 	 * @var SnakValidationHelper
@@ -68,14 +68,6 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
 			new ValidatorErrorLocalizer()
 		);
-	}
-
-	/**
-	 * @see ApiBase::isWriteMode
-	 * @return bool true
-	 */
-	public function isWriteMode() {
-		return true;
 	}
 
 	/**
@@ -118,14 +110,14 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validate( $params['claim'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid', 'setclaimvalue-invalid-guid' );
+			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'No such entity', 'setclaimvalue-entity-not-found' );
+			$this->dieUsage( 'No such entity' , 'no-such-entity' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -150,7 +142,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $guid ) ) {
-			$this->dieUsage( 'No such claim', 'setclaimvalue-claim-not-found' );
+			$this->dieUsage( 'No such claim' , 'no-such-claim' );
 		}
 
 		$claim = $claims->getClaimWithGuid( $guid );
@@ -164,10 +156,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 			$content = EntityContentFactory::singleton()->getFromId( $claim->getMainSnak()->getPropertyId() );
 
 			if ( $content === null ) {
-				$this->dieUsage(
-					'The value cannot be interpreted since the property cannot be found, and thus the type of the value not be determined',
-					'setclaimvalue-property-not-found'
-				);
+				$this->dieUsage( 'The value cannot be interpreted since the property cannot be found, and thus the type of the value not be determined', 'no-such-property' );
 			}
 
 			$constructorArguments[] = \DataValues\DataValueFactory::singleton()->newDataValue(
@@ -185,7 +174,7 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 
 			return $claim;
 		} catch ( IllegalValueException $ex ) {
-			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-snak' );
+			$this->dieUsage( $ex->getMessage(), 'invalid-snak' );
 		}
 	}
 
@@ -249,6 +238,18 @@ class SetClaimValue extends ApiWikibase implements IAutocomment{
 			),
 			'bot' => false,
 		);
+	}
+
+	/**
+	 * @see ApiBase::getPossibleErrors()
+	 */
+	public function getPossibleErrors() {
+		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
+			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
+			array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
+			array( 'code' => 'invalid-snak', 'info' => $this->msg( 'wikibase-api-invalid-snak' )->text() ),
+		) );
 	}
 
 	/**

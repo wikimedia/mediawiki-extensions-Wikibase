@@ -45,6 +45,7 @@ abstract class ModifyClaim extends ApiWikibase {
 	 * @param string $action
 	 *
 	 * @return Summary
+	 * @throws \MWException
 	 */
 	protected function createSummary( Snak $snak, $action ) {
 		if ( !is_string( $action ) ) {

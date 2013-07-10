@@ -49,7 +49,7 @@ class SetAliases extends ModifyEntity {
 		parent::validateParameters( $params );
 
 		if ( !( ( !empty( $params['add'] ) || !empty( $params['remove'] ) ) xor isset( $params['set'] ) ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-aliases-invalid-list' )->text(), 'aliases-invalid-list' );
+			$this->dieUsage( 'Invalid-list' , 'invalid-list' );
 		}
 	}
 
@@ -57,7 +57,7 @@ class SetAliases extends ModifyEntity {
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
-		$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-item' );
+		$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
 	}
 
 	/**
@@ -136,7 +136,8 @@ class SetAliases extends ModifyEntity {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'aliases-invalid-list', 'info' => $this->msg( 'wikibase-api-aliases-invalid-list' )->text() ),
+			array( 'code' => 'invalid-list', 'info' => $this->msg( 'wikibase-api-invalid-list' )->text() ),
+			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
 		) );
 	}
 
