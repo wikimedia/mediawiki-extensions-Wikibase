@@ -15,6 +15,7 @@ use MWException;
 use FormatJson;
 use User;
 use ValueParsers\FormattingException;
+use Wikibase\ClaimHtmlGenerator;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
@@ -25,6 +26,7 @@ use Wikibase\Serializers\EntityRevisionSerializer;
 use Wikibase\Lib\SnakFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use ValueFormatters\ValueFormatterFactory;
 use ValueFormatters\TimeFormatter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\MwTimeIsoFormatter;
@@ -576,9 +578,21 @@ abstract class EntityView extends \ContextSource {
 				);
 			}
 
+			$htmlForEditSection = $this->getHtmlForEditSection( $entity, $lang, '', 'span' ); // TODO: add link to SpecialPage
+
+			$entitiesPrefixMap = array();
+			foreach ( Settings::get( 'entityPrefixes' ) as $prefix => $entityType ) {
+				$entitiesPrefixMap[ $entityType ] = $prefix;
+			}
+
+			$claimHtmlGenerator = new ClaimHtmlGenerator(
+				$this->snakFormatter,
+				new ValueFormatterFactory( $GLOBALS['wgValueFormatters'] )
+			);
+
 			$i = 0;
 			foreach( $claims as $claim ) {
-				$propertyHtml .= $this->getHtmlForClaim( $entity, $claim, $lang, $editable );
+				$propertyHtml .= $claimHtmlGenerator->getHtmlForClaim( $claim, $languageCode, $htmlForEditSection );
 			}
 
 			$toolbarHtml = wfTemplate( 'wikibase-toolbar',
@@ -601,70 +615,6 @@ abstract class EntityView extends \ContextSource {
 
 		wfProfileOut( __METHOD__ );
 		return $html;
-	}
-
-	/**
-	 * Builds and returns the HTML representing a single WikibaseEntity's claim.
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity the entity related to the claim
-	 * @param Claim $claim the claim to render
-	 * @param Language $lang the language to use for rendering. if not given, the local
-	 *        context will be used.
-	 * @param bool $editable whether editing is allowed (enabled edit links)
-	 * @return string
-	 *
-	 * @throws MWException If a claim's value can't be displayed because the related value formatter
-	 *         is not yet implemented or provided in the constructor. (Also see related todo)
-	 */
-	protected function getHtmlForClaim(
-		Entity $entity,
-		Claim $claim,
-		Language $lang,
-		$editable = true
-	) {
-		wfProfileIn( __METHOD__ );
-
-		$languageCode = $lang->getCode();
-
-		$valueFormatterOptions = new FormatterOptions( array(
-			ValueFormatter::OPT_LANG => $languageCode,
-			TimeFormatter::OPT_TIME_ISO_FORMATTER => new MwTimeIsoFormatter(
-				new FormatterOptions( array( ValueFormatter::OPT_LANG => $languageCode ) )
-			),
-		) );
-
-		try {
-			$snakValueHtml = $this->snakFormatter->formatSnak( $claim->getMainSnak() );
-		} catch ( FormattingException $ex ) {
-			$snakValueHtml = '?'; // XXX: perhaps show error message?
-		} catch ( PropertyNotFoundException $ex ) {
-			$snakValueHtml = '?'; // XXX: perhaps show error message?
-		}
-
-		$mainSnakHtml = wfTemplate( 'wb-snak',
-			'wb-mainsnak',
-			'', // Link to property. NOTE: we don't display this ever (instead, we generate it on
-				// Claim group level) If this was a public function, this should be generated
-				// anyhow since important when displaying a Claim on its own.
-			'', // type selector, JS only
-			( $snakValueHtml === '' ) ? '&nbsp;' : $snakValueHtml
-		);
-
-		// TODO: Use 'wb-claim' or 'wb-statement' template accordingly
-		$claimHtml = wfTemplate( 'wb-statement',
-			'', // additional classes
-			$claim->getGuid(),
-			$mainSnakHtml,
-			'', // TODO: Qualifiers
-			$this->getHtmlForEditSection( $entity, $lang, '', 'span' ), // TODO: add link to SpecialPage
-			'', // TODO: References heading
-			'' // TODO: References
-		);
-
-		wfProfileOut( __METHOD__ );
-		return $claimHtml;
 	}
 
 	/**
