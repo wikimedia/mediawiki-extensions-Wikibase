@@ -48,7 +48,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class CreateClaim extends ModifyClaim {
+class CreateClaim extends ApiWikibase {
 
 
 	/**
@@ -156,6 +156,37 @@ class CreateClaim extends ModifyClaim {
 		);
 
 		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
+	}
+
+	/**
+	 * Create a summary
+	 *
+	 * @since 0.4
+	 *
+	 * @param Snak $snak
+	 * @param string $action
+	 *
+	 * @return Summary
+	 * @throws \MWException
+	 */
+	protected function createSummary( Snak $snak, $action ) {
+		if ( !is_string( $action ) ) {
+			throw new \MWException( 'action is invalid or unknown type.' );
+		}
+
+		$summary = new Summary( $this->getModuleName() );
+		$summary->setAction( $action );
+		$summary->addAutoSummaryArgs( $snak->getPropertyId(), $snak->getDataValue() );
+
+		return $summary;
+	}
+
+	/**
+	 * @see ApiBase::isWriteMode
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
 	}
 
 	/**

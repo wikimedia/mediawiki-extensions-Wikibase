@@ -45,7 +45,7 @@ use Wikibase\validators\SnakValidator;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SetClaimValue extends ModifyClaim implements IAutocomment{
+class SetClaimValue extends ApiWikibase implements IAutocomment{
 
 	/**
 	 * @var SnakValidationHelper
@@ -320,6 +320,14 @@ class SetClaimValue extends ModifyClaim implements IAutocomment{
 		return Autocomment::formatAutoSummary(
 			Autocomment::pickValuesFromParams( $params, 'claim' )
 		);
+	}
+
+	/**
+	 * @see ApiBase::isWriteMode
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
 	}
 
 }

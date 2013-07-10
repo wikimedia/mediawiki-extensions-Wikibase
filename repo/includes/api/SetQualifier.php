@@ -54,7 +54,7 @@ use Wikibase\validators\SnakValidator;
  */
 class SetQualifier extends ApiWikibase {
 
-	// TODO: automcomment
+	// TODO: auto comment
 	// TODO: rights
 	// TODO: conflict detection
 	// TODO: more explicit support for snak merging?

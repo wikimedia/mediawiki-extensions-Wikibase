@@ -46,7 +46,7 @@ use Wikibase\validators\SnakValidator;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class SetClaim extends ModifyClaim {
+class SetClaim extends ApiWikibase {
 
 	/**
 	 * @var SnakValidationHelper
@@ -236,4 +236,13 @@ class SetClaim extends ModifyClaim {
 			=> 'Set the claim with the given id to property p1 with a string value of "City',
 		);
 	}
+
+	/**
+	 * @see ApiBase::isWriteMode
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
 }

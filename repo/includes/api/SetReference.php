@@ -47,7 +47,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class SetReference extends ApiWikibase {
 
-	// TODO: automcomment
+	// TODO: auto comment
 	// TODO: rights
 	// TODO: conflict detection
 

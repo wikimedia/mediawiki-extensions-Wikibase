@@ -78,7 +78,6 @@ return call_user_func( function() {
 		'Wikibase\Api\EditEntity' => 'includes/api/EditEntity.php',
 		'Wikibase\Api\GetEntities' => 'includes/api/GetEntities.php',
 		'Wikibase\Api\LinkTitles' => 'includes/api/LinkTitles.php',
-		'Wikibase\Api\ModifyClaim' => 'includes/api/ModifyClaim.php',
 		'Wikibase\Api\ModifyEntity' => 'includes/api/ModifyEntity.php',
 		'Wikibase\Api\ModifyLangAttribute' => 'includes/api/ModifyLangAttribute.php',
 		'Wikibase\Api\SearchEntities' => 'includes/api/SearchEntities.php',
