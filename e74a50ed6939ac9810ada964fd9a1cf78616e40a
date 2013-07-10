@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_01ea8710",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T09:59:07Z",
+      "side": 1,
+      "message": "invalid-json?",
+      "revId": "e74a50ed6939ac9810ada964fd9a1cf78616e40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_417bdf78",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T09:59:07Z",
+      "side": 1,
+      "message": "\" instead of \u0027",
+      "revId": "e74a50ed6939ac9810ada964fd9a1cf78616e40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_e185ab5c",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T09:59:07Z",
+      "side": 1,
+      "message": "\u0027 instead of \"",
+      "revId": "e74a50ed6939ac9810ada964fd9a1cf78616e40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_0181e750",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T09:59:07Z",
+      "side": 1,
+      "message": "\" instead of \u0027, missing whitespace after .",
+      "revId": "e74a50ed6939ac9810ada964fd9a1cf78616e40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_a1b3b34b",
+        "filename": "repo/includes/api/RemoveQualifiers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T09:59:07Z",
+      "side": 1,
+      "message": "\" instead of \u0027",
+      "revId": "e74a50ed6939ac9810ada964fd9a1cf78616e40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_c1b6af3c",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T09:59:07Z",
+      "side": 1,
+      "message": "why newline? I mean, either start the params on newline or dont have one here, right?",
+      "revId": "e74a50ed6939ac9810ada964fd9a1cf78616e40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_61a9bbde",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T09:59:07Z",
+      "side": 1,
+      "message": "\" instead of \u0027?",
+      "revId": "e74a50ed6939ac9810ada964fd9a1cf78616e40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_21a7c30f",
+        "filename": "repo/includes/api/SetClaimValue.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T09:59:07Z",
+      "side": 1,
+      "message": "why \" instead of \u0027?",
+      "revId": "e74a50ed6939ac9810ada964fd9a1cf78616e40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_41a2bf00",
+        "filename": "repo/includes/api/SetQualifier.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T09:59:07Z",
+      "side": 1,
+      "message": "yay!",
+      "revId": "e74a50ed6939ac9810ada964fd9a1cf78616e40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_c1650fe4",
+        "filename": "repo/tests/phpunit/includes/api/GetClaimsTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T09:59:07Z",
+      "side": 1,
+      "message": "superfluous whitespace",
+      "revId": "e74a50ed6939ac9810ada964fd9a1cf78616e40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
