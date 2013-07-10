@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_41711fa8",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T11:19:29Z",
+      "side": 1,
+      "message": "inconsistent with the rest",
+      "revId": "3c1cf32a929111fce9c2b99304e5b11317cdbf22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_e17beb87",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T11:19:29Z",
+      "side": 1,
+      "message": "inconsistent with the rest",
+      "revId": "3c1cf32a929111fce9c2b99304e5b11317cdbf22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_017727a0",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T11:19:29Z",
+      "side": 1,
+      "message": "inconsistent with the rest",
+      "revId": "3c1cf32a929111fce9c2b99304e5b11317cdbf22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_c14cef73",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T11:19:29Z",
+      "side": 1,
+      "message": "inconsistent with the rest",
+      "revId": "3c1cf32a929111fce9c2b99304e5b11317cdbf22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_a149f362",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T11:19:29Z",
+      "side": 1,
+      "message": "inconsistent with the rest",
+      "revId": "3c1cf32a929111fce9c2b99304e5b11317cdbf22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_613ffbb1",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T11:19:29Z",
+      "side": 1,
+      "message": "inconsistent with the rest",
+      "revId": "3c1cf32a929111fce9c2b99304e5b11317cdbf22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_215d031f",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T11:19:29Z",
+      "side": 1,
+      "message": "inconsistent with the rest",
+      "revId": "3c1cf32a929111fce9c2b99304e5b11317cdbf22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_8142f73f",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T11:19:29Z",
+      "side": 1,
+      "message": "inconsistent with the rest",
+      "revId": "3c1cf32a929111fce9c2b99304e5b11317cdbf22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_e152cb11",
+        "filename": "repo/includes/api/SetReference.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2013-07-10T11:19:29Z",
+      "side": 1,
+      "message": "this is inconsistent with the other error messages",
+      "revId": "3c1cf32a929111fce9c2b99304e5b11317cdbf22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
