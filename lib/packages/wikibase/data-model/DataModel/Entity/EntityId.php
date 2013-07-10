@@ -208,7 +208,7 @@ class EntityId extends \DataValues\DataValueObject {
 	 * @return string
 	 */
 	public function serialize() {
-		return \FormatJson::encode( array( $this->entityType, $this->numericId ) );
+		return json_encode( array( $this->entityType, $this->numericId ) );
 	}
 
 	/**
@@ -221,7 +221,7 @@ class EntityId extends \DataValues\DataValueObject {
 	 * @return EntityId
 	 */
 	public function unserialize( $value ) {
-		list( $entityType, $numericId ) = \FormatJson::decode( $value );
+		list( $entityType, $numericId ) = json_decode( $value );
 		$this->__construct(  $entityType, $numericId );
 	}
 

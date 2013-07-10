@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\EntityId;
+use Wikibase\Item;
+use Wikibase\Property;
 
 /**
  * Tests for the Wikibase\EntityId class.
@@ -39,11 +41,8 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 	public function constructorProvider() {
 		$argLists = array();
 
-		$argLists[] = array( \Wikibase\Item::ENTITY_TYPE, 123 );
-		$argLists[] = array( \Wikibase\Property::ENTITY_TYPE, 321 );
-
-		// TODO
-		//$argLists[] = array( \Wikibase\Query::ENTITY_TYPE, 9342 );
+		$argLists[] = array( Item::ENTITY_TYPE, 123 );
+		$argLists[] = array( Property::ENTITY_TYPE, 321 );
 
 		return $argLists;
 	}
@@ -65,39 +64,18 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 		$ids = array();
 
 		foreach ( $this->constructorProvider() as $argList ) {
-			$ids[] = array( new EntityId( $argList[0], $argList[1] ), $argList );
+			$ids[] = array( new EntityId( $argList[0], $argList[1] ) );
 		}
 
 		return $ids;
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param \Wikibase\EntityId $id
-	 * @param array $constructorArgs
-	 */
-	public function testGetEntityType( EntityId $id, array $constructorArgs ) {
-		$this->assertEquals( $constructorArgs[0], $id->getEntityType() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param \Wikibase\EntityId $id
-	 * @param array $constructorArgs
-	 */
-	public function testGetNumericId( EntityId $id, array $constructorArgs ) {
-		$this->assertEquals( $constructorArgs[1], $id->getNumericId() );
 	}
 
 	public function equalityProvider() {
 		$argLists = array();
 
 		$types = array(
-			\Wikibase\Item::ENTITY_TYPE,
-			\Wikibase\Property::ENTITY_TYPE,
-
-			// TODO
-			// \Wikibase\Query::ENTITY_TYPE
+			Item::ENTITY_TYPE,
+			Property::ENTITY_TYPE,
 		);
 
 		foreach ( array_values( $types ) as $type ) {
@@ -127,12 +105,44 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 * @param \Wikibase\EntityId $id
-	 * @param array $constructorArgs
 	 */
-	public function testEqualsSimple( EntityId $id, array $constructorArgs ) {
+	public function testEqualsSimple( EntityId $id ) {
 		$this->assertTrue( $id->equals( $id ) );
 		$this->assertFalse( $id->equals( $id->getNumericId() ) );
 		$this->assertFalse( $id->equals( $id->getEntityType() ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param \Wikibase\EntityId $id
+	 */
+	public function testSerializationRoundtrip( EntityId $id ) {
+		$this->assertEquals( $id, unserialize( serialize( $id ) ) );
+	}
+
+	public function testDeserializationCompatibility() {
+		$v04serialization = 'C:17:"Wikibase\EntityId":12:{["item",123]}';
+
+		$this->assertEquals(
+			new EntityId(
+				'item',
+				123
+			),
+			unserialize( $v04serialization )
+		);
+	}
+
+	public function testSerializationStability() {
+		$v04serialization = 'C:17:"Wikibase\EntityId":12:{["item",123]}';
+		$id = new EntityId(
+			'item',
+			123
+		);
+
+		$this->assertEquals(
+			serialize( $id ),
+			$v04serialization
+		);
 	}
 
 }
