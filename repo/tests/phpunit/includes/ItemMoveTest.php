@@ -32,6 +32,7 @@ use WikiPage, Title, WikitextContent;
  *
  * @group Wikibase
  * @group WikibaseItem
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -56,6 +57,14 @@ class ItemMoveTest extends \MediaWikiTestCase {
 	 */
 	public function setUp() {
 		parent::setUp();
+
+		//XXX: global fixture cruft
+		static $hasSites = false;
+
+		if ( !$hasSites ) {
+			\TestSites::insertIntoDb();
+			$hasSites = true;
+		}
 
 		$this->itemContent = ItemContent::newEmpty();
 		$this->itemContent->save( '', null, EDIT_NEW );
