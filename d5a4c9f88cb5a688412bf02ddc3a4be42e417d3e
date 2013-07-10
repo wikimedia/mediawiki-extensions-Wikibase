@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_810f9737",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T13:34:03Z",
+      "side": 1,
+      "message": "we might want to inject language code into the function, as a param, instead of requiring the entire Language object as a param.",
+      "revId": "d5a4c9f88cb5a688412bf02ddc3a4be42e417d3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_690b6126",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T13:34:03Z",
+      "side": 1,
+      "message": "think that entitiesPrefixMap should be a constructor parameter and then we can use that for the formatter options.",
+      "revId": "d5a4c9f88cb5a688412bf02ddc3a4be42e417d3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_89069d1d",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T13:34:03Z",
+      "side": 1,
+      "message": "could put EntityIdFormatter in the use section",
+      "revId": "d5a4c9f88cb5a688412bf02ddc3a4be42e417d3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_e11f6b67",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T13:34:03Z",
+      "side": 1,
+      "message": "the stuff in this block could be split into its own protected function",
+      "revId": "d5a4c9f88cb5a688412bf02ddc3a4be42e417d3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_c1098f33",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T13:34:03Z",
+      "side": 1,
+      "message": "might be good to split this also.... getMainSnakHtml()",
+      "revId": "d5a4c9f88cb5a688412bf02ddc3a4be42e417d3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
