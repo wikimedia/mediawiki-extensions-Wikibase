@@ -49,6 +49,7 @@ return call_user_func( function() {
 		'Wikibase\PropertyView' => 'includes/PropertyView.php',
 		'Wikibase\Summary' => 'includes/Summary.php',
 		'Wikibase\Repo\WikibaseRepo' => 'includes/WikibaseRepo.php',
+		'Wikibase\ClaimHtmlGenerator' => 'includes/ClaimHtmlGenerator.php',
 
 		// includes/changeop
 		'Wikibase\ChangeOps' => 'includes/changeop/ChangeOps.php',
