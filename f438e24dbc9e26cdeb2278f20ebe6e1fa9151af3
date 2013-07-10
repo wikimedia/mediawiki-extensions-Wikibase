@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c609db_e64dc19b",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2013-07-10T09:24:12Z",
+      "side": 1,
+      "message": "Why did you remove the table name?! \u003e_\u003e",
+      "revId": "f438e24dbc9e26cdeb2278f20ebe6e1fa9151af3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
