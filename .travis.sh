@@ -29,12 +29,8 @@ echo 'ini_set("display_errors", 1);' >> LocalSettings.php
 echo '$wgShowExceptionDetails = true;' >> LocalSettings.php
 echo '$wgDevelopmentWarnings = true;' >> LocalSettings.php
 
-if [ "$1" == "repo" ]
-then
-	echo "define( 'WB_EXPERIMENTAL_FEATURES', true );" >> LocalSettings.php
-	echo 'require_once __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
-else
-	echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
-fi
+echo "define( 'WB_EXPERIMENTAL_FEATURES', true );" >> LocalSettings.php
+echo 'require_once __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
+echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
 
 php maintenance/update.php --quick
