@@ -247,7 +247,7 @@ abstract class EntityView extends \ContextSource {
 		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
 		$contentFactory = EntityContentFactory::singleton();
 
-		$usedEntityIds = $refFinder->findClaimLinks( $entity->getEntity()->getClaims() );
+		$usedEntityIds = $refFinder->findSnakLinks( $entity->getEntity()->getAllSnaks() );
 
 		foreach ( $usedEntityIds as $entityId ) {
 			$pout->addLink( $contentFactory->getTitleForId( $entityId ) );
@@ -838,7 +838,7 @@ abstract class EntityView extends \ContextSource {
 		$entityLoader = StoreFactory::getStore()->getEntityLookup();
 		$refFinder = new ReferencedEntitiesFinder( $entityLoader );
 
-		$usedEntityIds = $refFinder->findClaimLinks( $entity->getClaims() );
+		$usedEntityIds = $refFinder->findSnakLinks( $entity->getAllSnaks() );
 		$basicEntityInfo = static::getBasicEntityInfo( $entityLoader, $usedEntityIds, $langCode );
 
 		$out->addJsConfigVars(
