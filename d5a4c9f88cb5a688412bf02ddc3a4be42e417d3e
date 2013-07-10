@@ -84,6 +84,23 @@
       "revId": "d5a4c9f88cb5a688412bf02ddc3a4be42e417d3e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c609db_4925c5af",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-10T13:41:13Z",
+      "side": 1,
+      "message": "having this wfTemplate global function will make testing difficult.  We need to see what the options are for injecting this somewhere or how to handle",
+      "revId": "d5a4c9f88cb5a688412bf02ddc3a4be42e417d3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
