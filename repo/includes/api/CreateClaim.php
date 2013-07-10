@@ -82,8 +82,7 @@ class CreateClaim extends ModifyClaim {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		$params = $this->extractRequestParams();
-		$this->validateParameters( $params );
+		$this->checkParameterRequirements();
 
 		$entityContent = $this->getEntityContent();
 
@@ -95,16 +94,16 @@ class CreateClaim extends ModifyClaim {
 		}
 		catch ( IllegalValueException $ex ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Invalid snak: IllegalValueException', 'invalid-snak' );
+			$this->dieUsage( $ex->getMessage(), 'claim-invalid-snak' );
 		}
 		catch ( InvalidArgumentException $ex ) {
 			// shouldn't happen, but might.
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Invalid snak: InvalidArgumentException', 'invalid-snak' );
+			$this->dieUsage( $ex->getMessage(), 'claim-invalid-snak' );
 		}
 		catch ( ParseException $parseException ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Invalid guid: ParseException', 'invalid-guid' );
+			$this->dieUsage( $parseException->getMessage(), 'claim-invalid-guid' );
 		}
 
 		$this->snakValidation->validateSnak( $snak );
@@ -164,18 +163,20 @@ class CreateClaim extends ModifyClaim {
 	 *
 	 * @since 0.2
 	 */
-	protected function validateParameters( array $params ) {
+	protected function checkParameterRequirements() {
+		$params = $this->extractRequestParams();
+
 		if ( $params['snaktype'] == 'value' XOR isset( $params['value'] ) ) {
 			if ( $params['snaktype'] == 'value' ) {
-				$this->dieUsage( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'param-missing' );
+				$this->dieUsage( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'claim-value-missing' );
 			}
 			else {
-				$this->dieUsage( 'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak', 'param-illegal' );
+				$this->dieUsage( 'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak', 'claim-value-set' );
 			}
 		}
 
 		if ( !isset( $params['property'] ) ) {
-			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a Snak', 'param-missing' );
+			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a Snak', 'claim-property-id-missing' );
 		}
 	}
 
@@ -194,7 +195,7 @@ class CreateClaim extends ModifyClaim {
 		$entityContent = $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 		if ( $entityContent === null ) {
-			$this->dieUsage( 'Entity not found, snak not created', 'no-such-entity' );
+			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
 		}
 
 		return $entityContent;
@@ -220,7 +221,7 @@ class CreateClaim extends ModifyClaim {
 		$entityId = $entityIdParser->parse( $params['property'] );
 
 		if ( $entityId->getEntityType() !== Property::ENTITY_TYPE ) {
-			$this->dieUsage( 'Property expected, got ' . $entityId->getEntityType(), 'invalid-snak' );
+			$this->dieUsage( "Property expected, got " . $entityId->getEntityType(), 'claim-invalid-snak' );
 		}
 
 		return $factory->newSnak(
@@ -246,19 +247,6 @@ class CreateClaim extends ModifyClaim {
 			'claim',
 			$serializer->getSerialized( $claim )
 		);
-	}
-
-	/**
-	 * @see \ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-snak', 'info' => $this->msg( 'wikibase-api-invalid-snak' )->text() ),
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
-			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-		) );
 	}
 
 	/**

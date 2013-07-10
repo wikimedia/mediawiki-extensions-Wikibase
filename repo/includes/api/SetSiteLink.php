@@ -40,14 +40,14 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * @see  \Wikibase\Api\ModifyEntity::getEntityContent
+	 * @see  \Wikibase\Api\ModifyEntity::findEntity()
 	 */
-	protected function getEntityContent( array $params ) {
-		$entityContent = parent::getEntityContent( $params );
+	protected function findEntity( array $params ) {
+		$entityContent = parent::findEntity( $params );
 
 		// If we found anything then check if it is of the correct base class
 		if ( !is_null( $entityContent ) && !( $entityContent instanceof ItemContent ) ) {
-			$this->dieUsage( 'The content on the found page is not of correct type', 'wrong-class' );
+			$this->dieUsage( $this->msg( 'wikibase-api-wrong-class' )->text(), 'wrong-class' );
 		}
 
 		return $entityContent;
@@ -77,7 +77,7 @@ class SetSiteLink extends ModifyEntity {
 
 		if ( !( $entityContent instanceof ItemContent ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "The given entity is not an item", "not-item" );
+			$this->dieUsage( "The given entity is not an item", "not-and-item" );
 		}
 
 		/* @var Item $item */
@@ -105,14 +105,14 @@ class SetSiteLink extends ModifyEntity {
 
 			if ( $site === false ) {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( 'The supplied site identifier was not recognized' , 'not-recognized-siteid' );
+				$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-siteid' )->text(), 'not-recognized-siteid' );
 			}
 
 			$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $params['linktitle'] ) );
 
 			if ( $page === false ) {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
+				$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
 			}
 
 			$link = new SimpleSiteLink( $site->getGlobalId(), $page );
@@ -135,10 +135,11 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
-			array( 'code' => 'not-item', 'info' => $this->msg( 'wikibase-api-not-item' )->text() ),
-			array( 'code' => 'not-recognized-siteid', 'info' => $this->msg( 'wikibase-api-not-recognized-siteid' )->text() ),
-			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
+			array( 'code' => 'empty-link-title', 'info' => $this->msg( 'wikibase-api-empty-link-title' )->text() ),
+			array( 'code' => 'link-exists', 'info' => $this->msg( 'wikibase-api-link-exists' )->text() ),
+			array( 'code' => 'database-error', 'info' => $this->msg( 'wikibase-api-database-error' )->text() ),
+			array( 'code' => 'add-sitelink-failed', 'info' => $this->msg( 'wikibase-api-add-sitelink-failed' )->text() ),
+			array( 'code' => 'remove-sitelink-failed', 'info' => $this->msg( 'wikibase-api-remove-sitelink-failed' )->text() ),
 		) );
 	}
 
