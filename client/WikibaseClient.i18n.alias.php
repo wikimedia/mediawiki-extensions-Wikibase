@@ -29,6 +29,11 @@ $specialPageAliases['et'] = array(
 	'UnconnectedPages' => array( 'Ühendamata_leheküljed' ),
 );
 
+/** Persian (فارسی) */
+$specialPageAliases['fa'] = array(
+	'UnconnectedPages' => array( 'صفخات_متصل‌نشده' ),
+);
+
 /** Finnish (suomi) */
 $specialPageAliases['fi'] = array(
 	'UnconnectedPages' => array( 'Yhdistämättömät_sivut' ),

@@ -216,6 +216,32 @@ $messages['af'] = array(
 	'version-wikibase' => 'Wikibase',
 );
 
+/** Arabic (العربية)
+ * @author زكريا
+ */
+$messages['ar'] = array(
+	'wikibase-entity-item' => 'عنصر',
+	'wikibase-entity-property' => 'خاصية',
+	'wikibase-entity-query' => 'طلب',
+	'wikibase-deletedentity-item' => 'عنصر محذوف',
+	'wikibase-deletedentity-property' => 'خاصية محذوفة',
+	'wikibase-deletedentity-query' => 'طلب محذوف',
+	'wikibase-diffview-reference' => 'مرجع',
+	'wikibase-diffview-qualifier' => 'صفة',
+	'wikibase-diffview-label' => 'علامة',
+	'wikibase-diffview-alias' => 'أسماء أخرى',
+	'wikibase-diffview-description' => 'وصف',
+	'wikibase-diffview-link' => 'وصلات',
+	'wikibase-error-unexpected' => 'وقع خطأ غير متوقع.',
+	'wikibase-error-save-generic' => 'وقع خطأ عند الحفظ فلم تحفظ تعديلاتك.',
+	'wikibase-error-remove-generic' => 'وقع خطأ عند الحذف ولم تحفظ تعديلاتك.',
+	'wikibase-error-save-connection' => 'وقع خطأ في الاتصال عند الحفظ فلم تحفظ تعديلاتك. تحقق من الاتصال بالإنترنت.',
+	'wikibase-error-remove-connection' => 'وقع خطأ في الاتصال عند الحذف فلم تحفظ تعديلاتك. تحقق من الاتصال بالإنترنت.',
+	'wikibase-error-save-timeout' => 'يشهد الموقع صعوبات تقنية حاليا فلم ينفذ الحفظ.',
+	'wikibase-error-remove-timeout' => 'يشهد الموقع صعوبات تقنية حاليا فلم ينفذ الحذف.',
+	'wikibase-replicationnote' => 'قد يلزم وقت لتظهر التعديلات في جميع الويكيات.',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -1907,7 +1933,7 @@ $messages['ml'] = array(
 	'wikibase-error-remove-connection' => 'നീക്കം ചെയ്യാൻ ശ്രമിക്കുന്നതിനിടെ ബന്ധത്തിൽ പിഴവുണ്ടായതിനാൽ, താങ്കളുടെ മാറ്റങ്ങൾ പൂർണ്ണമാക്കാനായിട്ടില്ല. ദയവായി താങ്കളുടെ ഇന്റർനെറ്റ് ബന്ധം പരിശോധിക്കുക.',
 	'wikibase-error-save-timeout' => 'ഞങ്ങൾ സാങ്കേതിക പ്രശ്നങ്ങൾ നേരിടുന്നതിനാൽ, താങ്കളുടെ "സേവ്" പ്രക്രിയ പൂർത്തിയാക്കാനായിട്ടില്ല.',
 	'wikibase-error-remove-timeout' => 'ഞങ്ങൾ സാങ്കേതിക പ്രശ്നങ്ങൾ നേരിടുന്നതിനാൽ, താങ്കൾ ആവശ്യപ്പെട്ട "നീക്കം ചെയ്യൽ" പ്രക്രിയ പൂർത്തിയാക്കാനായിട്ടില്ല.',
-	'wikibase-error-autocomplete-connection' => 'വിക്കിപീഡിയ എ.പി.ഐ. പരിശോധിക്കാൻ കഴിയുന്നില്ല. ദയവായി പിന്നീട് വീണ്ടും ശ്രമിക്കുക.',
+	'wikibase-error-autocomplete-connection' => 'വിക്കിപീഡിയ എ.പി.ഐ. പരിശോധിക്കാൻ കഴിയുന്നില്ല. ദയവായി പിന്നീട് വീണ്ടും ശ്രമിക്കുക.', # Fuzzy
 	'wikibase-error-autocomplete-response' => 'സെർവർ പ്രതികരണം: $1',
 	'wikibase-error-ui-client-error' => 'ക്ലയന്റ് താളിലേയ്ക്കുള്ള ബന്ധം പരാജയപ്പെട്ടു. ദയവായി പിന്നീട് വീണ്ടും ശ്രമിക്കുക.',
 	'wikibase-error-ui-no-external-page' => 'ബന്ധപ്പെട്ട സൈറ്റിൽ, വ്യക്തമാക്കിയ ലേഖനം കണ്ടെത്താനായില്ല.',
@@ -1917,7 +1943,6 @@ $messages['ml'] = array(
 	'wikibase-error-ui-session-failure' => 'താങ്കളുടെ സെഷൻ കാലഹരണപ്പെട്ടിരിക്കുന്നു. ദയവായി വീണ്ടും പ്രവേശിക്കുക.',
 	'wikibase-error-ui-edit-conflict' => 'തിരുത്തൽ സമരസപ്പെടായ്ക ഉണ്ടായിരിക്കുന്നു. റീലോഡ് ചെയ്ത ശേഷം വീണ്ടും സേവ് ചെയ്യുക.',
 	'wikibase-replicationnote' => 'മാറ്റങ്ങൾ എല്ലാ വിക്കികളിലും പ്രത്യക്ഷപ്പെടാൻ കുറച്ച് മിനിറ്റുകൾ എടുത്തേയ്ക്കും എന്നത് പ്രത്യേകം ശ്രദ്ധിക്കുക',
-	'wikibase-sitelinks' => 'ഈ ഇനത്തിലേയ്ക്ക് കണ്ണി ചേർത്തിട്ടുള്ള താളുകളുടെ പട്ടിക',
 	'wikibase-sitelinks-sitename-columnheading' => 'ഭാഷ',
 	'wikibase-sitelinks-siteid-columnheading' => 'കോഡ്',
 	'wikibase-sitelinks-link-columnheading' => 'കണ്ണിചേർത്തിട്ടുള്ള ലേഖനം',
@@ -2477,7 +2502,7 @@ $messages['sr-ec'] = array(
 	'wikibase-deletedentity-property' => 'Обрисано својство',
 	'wikibase-deletedentity-query' => 'Обрисан упит',
 	'wikibase-diffview-reference' => 'референца',
-	'wikibase-diffview-rank' => 'ниво',
+	'wikibase-diffview-rank' => 'ранг',
 	'wikibase-diffview-qualifier' => 'квалификатор',
 	'wikibase-diffview-label' => 'назив',
 	'wikibase-diffview-alias' => 'псеудоними',
@@ -2486,6 +2511,8 @@ $messages['sr-ec'] = array(
 	'wikibase-error-unexpected' => 'Дошло је до неочекиване грешке.',
 	'wikibase-error-save-generic' => 'Дошло је до грешке приликом покушаја чувања и због тога, промене не могу бити завршене.',
 	'wikibase-error-remove-generic' => 'Дошло је до грешке приликом покушаја да се изврши уклањање и због тога, промене не могу бити завршене.',
+	'wikibase-error-save-timeout' => 'Тренутно имамо техничких потешкоћа и због тога се ништа није могло сачувати.',
+	'wikibase-error-remove-timeout' => 'Тренутно имамо техничких потешкоћа и због тога се ништа није могло избрисати.',
 	'wikibase-error-autocomplete-response' => 'Одговор сервера: $1',
 	'wikibase-error-ui-client-error' => 'Веза са клијентском страницом није успела. Молимо вас покушајте поново касније.',
 	'wikibase-error-ui-no-external-page' => 'Наведени чланак није пронађен на одговарајућем сајту.',

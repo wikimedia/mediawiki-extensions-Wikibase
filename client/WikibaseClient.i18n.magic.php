@@ -42,6 +42,11 @@ $magicWords['et'] = array(
 	'property' => array( 0, 'omadus' ),
 );
 
+/** Persian (فارسی) */
+$magicWords['fa'] = array(
+	'property' => array( 0, 'ویژگی' ),
+);
+
 /** Finnish (suomi) */
 $magicWords['fi'] = array(
 	'property' => array( 0, 'ominaisuus' ),

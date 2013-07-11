@@ -2009,7 +2009,7 @@ $messages['ja'] = array(
 	'wikibase-rc-hide-wikidata' => 'ウィキデータを$1',
 	'wikibase-rc-show-wikidata-pref' => '最近の更新にウィキデータの編集を表示',
 	'wikibase-watchlist-show-changes-pref' => 'ウィキデータの編集をウォッチリストに表示',
-	'wikibase-error-serialize-error' => 'データのシリアライズに失敗しました',
+	'wikibase-error-serialize-error' => 'データをシリアライズできませんでした。',
 	'wikibase-error-invalid-entity-id' => '入力した ID はシステムに登録されていません。有効なエンティティ ID を使用してください。',
 	'special-unconnectedpages' => '項目に関連付けられていないページ',
 	'wikibase-unconnectedpages-legend' => '関連付けられていないページのオプション',
@@ -2529,7 +2529,7 @@ $messages['ml'] = array(
 	'wikibase-linkitem-input-site' => 'ഭാഷ:',
 	'wikibase-linkitem-input-page' => 'താൾ:',
 	'wikibase-linkitem-invalidsite' => 'അപരിചിതമോ അസാധുവോ ആയ സൈറ്റാണ് തിരഞ്ഞെടുത്തത്',
-	'wikibase-linkitem-confirmitem-text' => 'താങ്കൾ തിരഞ്ഞെടുത്ത താൾ മുമ്പേതന്നെ  [$1 കേന്ദ്രീകൃത വിവര ശേഖരത്തിലെ ഒരിനവുമായി] കണ്ണിചേർക്കപ്പെട്ടിരിക്കുന്നു. ഈ താളുമായി കണ്ണിചേർക്കേണ്ട താളുകളാണ് താഴെ പ്രദർശിപ്പിച്ചിരിക്കുന്നതെന്ന് സ്ഥിരീകരിക്കുക.',
+	'wikibase-linkitem-confirmitem-text' => 'താങ്കൾ തിരഞ്ഞെടുത്ത താൾ മുമ്പേതന്നെ  [$1 കേന്ദ്രീകൃത വിവര ശേഖരത്തിലെ ഒരിനവുമായി] കണ്ണിചേർക്കപ്പെട്ടിരിക്കുന്നു. ഈ താളുമായി കണ്ണിചേർക്കേണ്ട താളുകളാണ് താഴെ പ്രദർശിപ്പിച്ചിരിക്കുന്നതെന്ന് സ്ഥിരീകരിക്കുക.', # Fuzzy
 	'wikibase-linkitem-confirmitem-button' => 'സ്ഥിരീകരിക്കുക',
 	'wikibase-linkitem-not-loggedin-title' => 'താങ്കൾ പ്രവേശിച്ചിരിക്കേണ്ടതാവശ്യമാണ്',
 	'wikibase-linkitem-not-loggedin' => 'ഈ സൗകര്യം ഉപയോഗിക്കുന്നതിനായി ഈ വിക്കിയിലും [$1 കേന്ദ്രീകൃത വിവര ശേഖരത്തിലും] താങ്കൾ പ്രവേശിച്ചിരിക്കേണ്ടതുണ്ട്.',
@@ -2548,7 +2548,7 @@ $messages['ml'] = array(
 	'wikibase-unconnectedpages-invalid-language' => '"$1" സാധുവായ ഒരു ഭാഷാ കോഡ് അല്ല.',
 	'wikibase-unconnectedpages-page-warning' => 'താളിന്റെ തലക്കെട്ട് ക്വറിയ്ക്കായി ഉപയോഗിക്കാൻ കഴിയില്ലാത്തതിനാൽ അവഗണിച്ചിരിക്കുന്നു.',
 	'wikibase-unconnectedpages-iwdata-label' => 'അന്തർഭാഷാകണ്ണികളുള്ള താളുകൾ മാത്രം',
-	'wikibase-unconnectedpages-format-row' => '(താളിൽ $1 അന്തർഭാഷാകണ്ണികളുണ്ട്)',
+	'wikibase-unconnectedpages-format-row' => '(താളിൽ $1 അന്തർഭാഷാകണ്ണികളുണ്ട്)', # Fuzzy
 );
 
 /** Marathi (मराठी)
@@ -3217,6 +3217,7 @@ $messages['sr-ec'] = array(
 	'wikibase-client-desc' => 'Клијент за проширење Викибаза',
 	'specialpages-group-wikibaseclient' => 'Клијент Википодатака',
 	'wikibase-after-page-move' => 'Можете такође [$1 ажурирати] придружене ставке на Википодацима ради одржавања језичких веза на премештеној страници.',
+	'wikibase-after-page-move-queued' => '[$1 Ставка Википодатака] повезана са овом страницом ће се ускоро аутоматски ажурирати.',
 	'wikibase-comment-remove' => 'Придружена ставка на Википодацима је избрисана. Језичке везе уклоњене.',
 	'wikibase-comment-linked' => 'Ставка на Википодацима је повезана са овом страницом.',
 	'wikibase-comment-unlink' => 'Веза до ове странице је уклоњена са ставке на Википодацима. Језичке везе уклоњене.',
