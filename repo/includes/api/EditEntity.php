@@ -275,6 +275,8 @@ class EditEntity extends ModifyEntity {
 		}
 
 		foreach ( $indexedAliases as $langCode => $args ) {
+			$aliasesToSet = array();
+
 			foreach ( $args as $arg ) {
 				$status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
 
@@ -288,8 +290,12 @@ class EditEntity extends ModifyEntity {
 					$aliasesChangeOps[] = new ChangeOpAliases( $language, $alias, 'add' );
 				}
 				else {
-					$aliasesChangeOps[] = new ChangeOpAliases( $language, $alias, 'set' );
+					$aliasesToSet[] = $alias[0];
 				}
+			}
+
+			if ( $aliasesToSet !== array() ) {
+				$aliasesChangeOps[] = new ChangeOpAliases( $language, $aliasesToSet, 'set' );
 			}
 		}
 
