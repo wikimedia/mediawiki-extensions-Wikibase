@@ -619,10 +619,19 @@ $messages['nn'] = array(
 );
 
 /** Polish (polski)
+ * @author Chrumps
  * @author Ty221
  */
 $messages['pl'] = array(
+	'valueview-expert-advancedadjustments' => 'ustawienia zaawansowane',
 	'valueview-expert-emptyvalue-empty' => 'pusty',
+	'valueview-expert-globecoordinateinput-precision' => 'Precyzja:',
+	'valueview-expert-timevalue-calendar-gregorian' => 'gregoriański',
+	'valueview-expert-timevalue-calendar-julian' => 'juliański',
+	'valueview-expert-timeinput-precision' => 'Precyzja:',
+	'valueview-expert-timeinput-calendar' => 'Kalendarz',
+	'valueview-expert-timeinput-calendarhint-gregorian' => '(kalendarz gregoriański)',
+	'valueview-expert-timeinput-calendarhint-julian' => '(kalendarz juliański)',
 );
 
 /** Piedmontese (Piemontèis)
