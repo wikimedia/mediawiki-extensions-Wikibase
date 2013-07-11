@@ -379,6 +379,12 @@ to find out where it went.',
 * after – explicit integer value for how many units before the given time it could be. The unit is given by the precision.
 * precision – explicit value encoded in a shortint. The numbers have the following meaning: 0 - billion years, 1 - hundred million years, ..., 6 - millennia, 7 - century, 8 - decade, 9 - year, 10 - month, 11 - day, 12 - hour, 13 - minute, 14 - second.
 * calendarmodel – explicit value given as a URI. It will identify the calendar model that should be used to display this time value.',
+	'wikibase-listdatatypes-url-head' => 'URL',
+	'wikibase-listdatatypes-url-body' => 'Literal data field for a URL. URLs are restricted to the protocols also supported for external links in wikitext.',
+
+	//extra data types
+	'datatypes-type-url' => 'URL',
+
 	//content model names
 	'content-model-wikibase-item' => 'Wikibase item',
 	'content-model-wikibase-property' => 'Wikibase property',
@@ -1058,6 +1064,9 @@ For information about "Iri" and related terms, see [[:w:Internationalized resour
 	'wikibase-listdatatypes-time-head' => '{{Wikibase-datatype-head|Time}}
 {{Identical|Time}}',
 	'wikibase-listdatatypes-time-body' => '{{Wikibase-datatype-body|Time}}',
+	'wikibase-listdatatypes-url-head' => '{{Wikibase-datatype-head|Url}}
+{{Identical|Url}}',
+	'wikibase-listdatatypes-url-body' => '{{Wikibase-datatype-body|Url}}',
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-property' => 'The name for Wikibase property content model, used when describing what type of content a page contains.',
 	'content-model-wikibase-query' => 'The name for Wikibase query content model, used when describing what type of content a page contains.',

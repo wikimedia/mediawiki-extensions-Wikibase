@@ -78,7 +78,7 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideDataTypeValidation() {
-		return array(
+		$cases = array(
 			//wikibase-item
 			array( 'wikibase-item', 'q8', false, 'Expected EntityId, string supplied' ),
 			array( 'wikibase-item', new StringValue( 'q8' ), false, 'Expected EntityId, StringValue supplied' ),
@@ -139,6 +139,26 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			//TODO: must be an item reference
 			//TODO: must be from a list of configured values
 		);
+
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			$cases = array_merge( $cases, array(
+
+				// url
+				array( 'url', 'Foo', false, 'StringValue expected, string supplied' ),
+				array( 'url', new NumberValue( 7 ), false, 'StringValue expected' ),
+
+				array( 'url', new StringValue( 'http://acme.com' ), true, 'Simple HTTP URL' ),
+				array( 'url', new StringValue( 'http://acme.com/foo/bar?some=stuff#fragment' ), true, 'Complex HTTP URL' ),
+
+				// evil url
+				array( 'url', new StringValue( '//bla' ), false, 'Protocol-relative' ),
+				array( 'url', new StringValue( '/bla/bla' ), false, 'relative path' ),
+				array( 'url', new StringValue( 'just stuff' ), false, 'just words' ),
+				array( 'url', new StringValue( 'javascript:alert("evil")' ), false, 'JavaScript URL' ),
+			) );
+		}
+
+		return $cases;
 	}
 
 	/**
