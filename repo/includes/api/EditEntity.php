@@ -171,7 +171,6 @@ class EditEntity extends ModifyEntity {
 		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
-
 		// TODO: This is a temporary fix that should be handled properly with a
 		// serializer class that is specific for the given entity
 		if ( $entity->getType() === Item::ENTITY_TYPE ) {
@@ -274,22 +273,30 @@ class EditEntity extends ModifyEntity {
 			}
 		}
 
+		$aliasesChanges = array();
+
 		foreach ( $indexedAliases as $langCode => $args ) {
 			foreach ( $args as $arg ) {
 				$status->merge( $this->checkMultilangArgs( $arg, $langCode ) );
 
-				$alias = array( $this->stringNormalizer->trimToNFC( $arg['value'] ) );
+				$alias = $this->stringNormalizer->trimToNFC( $arg['value'] );
 				$language = $arg['language'];
 
 				if ( array_key_exists( 'remove', $arg ) ) {
-					$aliasesChangeOps[] = new ChangeOpAliases( $language, $alias, 'remove' );
+					$aliasesChanges['remove'][$language][] = $alias;
 				}
 				elseif ( array_key_exists( 'add', $arg ) ) {
-					$aliasesChangeOps[] = new ChangeOpAliases( $language, $alias, 'add' );
+					$aliasesChanges['add'][$language][] = $alias;
 				}
 				else {
-					$aliasesChangeOps[] = new ChangeOpAliases( $language, $alias, 'set' );
+					$aliasesChanges['set'][$language][] = $alias;
 				}
+			}
+		}
+
+		foreach ( $aliasesChanges as $opType => $aliasChange ) {
+			foreach ( $aliasChange as $language => $aliasArray ) {
+				$aliasesChangeOps[] = new ChangeOpAliases( $language, $aliasArray, $opType );
 			}
 		}
 
