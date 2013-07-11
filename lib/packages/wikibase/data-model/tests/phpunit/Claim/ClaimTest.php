@@ -211,4 +211,11 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 		$claim0->setGuid( 42 );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetRank( Claim $claim ) {
+		$this->assertEquals( Claim::RANK_TRUTH, $claim->getRank() );
+	}
+
 }
