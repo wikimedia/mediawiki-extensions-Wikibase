@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49c305cb_9f4c2473",
+        "filename": "repo/tests/phpunit/includes/api/ModifyEntityTestBase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2013-07-12T10:13:38Z",
+      "side": 1,
+      "message": "not something you changed, but I find the name \"Handles\" quite confusing.  it\u0027s not really clear what a \"handle\" is in this context.",
+      "revId": "6181aac51579e89c5891b34d26f3e83f7bb83259",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
