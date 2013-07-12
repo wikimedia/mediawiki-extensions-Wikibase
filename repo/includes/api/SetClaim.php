@@ -72,6 +72,14 @@ class SetClaim extends ApiWikibase {
 	}
 
 	/**
+	 * @see ApiBase::isWriteMode
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
 	 * @see ApiBase::execute
 	 *
 	 * @since 0.4
@@ -138,8 +146,8 @@ class SetClaim extends ApiWikibase {
 
 			assert( $claim instanceof Claim );
 			return $claim;
-		} catch ( IllegalValueException $illegalValueException ) {
-			$this->dieUsage( $illegalValueException->getMessage(), 'invalid-claim' );
+		} catch ( IllegalValueException $ex ) {
+			$this->dieUsage( $ex->getMessage(), 'setclaim-invalid-claim' );
 		}
 	}
 
@@ -179,15 +187,6 @@ class SetClaim extends ApiWikibase {
 			),
 			'bot' => false,
 		);
-	}
-
-	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-claim', 'info' => $this->msg( 'wikibase-api-invalid-claim' )->text() ),
-		) );
 	}
 
 	/**
