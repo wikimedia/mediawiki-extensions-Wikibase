@@ -56,6 +56,10 @@ class ItemMoveTest extends \MediaWikiTestCase {
 	 * This is to set up the environment
 	 */
 	public function setUp() {
+		if ( defined( 'WBC_VERSION' ) ) {
+			$this->markTestSkipped( 'Cannot run ItemMoveTest when the client is hooked up to the repo' );
+		}
+
 		parent::setUp();
 
 		$this->itemContent = ItemContent::newEmpty();
