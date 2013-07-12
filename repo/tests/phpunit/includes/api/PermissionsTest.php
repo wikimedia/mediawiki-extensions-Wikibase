@@ -138,7 +138,7 @@ class PermissionsTest extends ModifyItemBase {
 					'*'    => array( 'edit' => false ),
 					'user' => array( 'edit' => false )
 				),
-				'permissiondenied' // error
+				'cant-edit' // error
 			),
 
 			array( //3
@@ -184,7 +184,7 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'createpage' => false ),
 				'user' => array( 'createpage' => false )
 			),
-			'permissiondenied' // error
+			'cant-edit' // error
 		);
 
 
@@ -193,7 +193,7 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'item-create' => false ),
 				'user' => array( 'item-create' => false )
 			),
-			'permissiondenied' // error
+			'cant-edit' // error
 		);
 
 		return $permissions;
@@ -223,7 +223,7 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'sitelink-update' => false ),
 				'user' => array( 'sitelink-update' => false )
 			),
-			'permissiondenied' # error
+			'cant-edit' # error
 		);
 
 		return $permissions;
@@ -257,7 +257,7 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'label-update' => false ),
 				'user' => array( 'label-update' => false )
 			),
-			'permissiondenied' // error
+			'cant-edit' // error
 		);
 
 		return $permissions;
@@ -284,7 +284,7 @@ class PermissionsTest extends ModifyItemBase {
 				'*'    => array( 'description-update' => false ),
 				'user' => array( 'description-update' => false )
 			),
-			'permissiondenied' // error
+			'cant-edit' // error
 		);
 
 		return $permissions;

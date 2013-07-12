@@ -235,44 +235,50 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, converted from $3 - $4',
 
 	// API errors - these messages should not be translated
-	'wikibase-api-common-item' => 'Common item detected', # Do not translate
-	'wikibase-api-badtoken' => 'Bad token detected', # Do not translate
-	'wikibase-api-cant-load-entity-content' => 'Cant access content, revision may be deleted', # Do not translate
-	'wikibase-api-editconflict' => 'Edit conflict, could not patch the current revision', # Do not translate
-	'wikibase-api-failed-add-sitelink' => 'The site link could not be saved', # Do not translate
-	'wikibase-api-failed-modify' => 'Attempted modification of the item failed', # Do not translate
-	'wikibase-api-failed-save' => 'The save has failed', # Do not translate
-	'wikibase-api-inconsistent-language' => 'Inconsistent language detected', # Do not translate
-	'wikibase-api-inconsistent-site' => 'Inconsistent site detected', # Do not translate
-	'wikibase-api-invalid-guid' => 'Invalid claim guid', # Do not translate
-	'wikibase-api-invalid-json' => 'Invalid json in request', # Do not translate
-	'wikibase-api-invalid-snak' => 'Invalid snak', # Do not translate
-	'wikibase-api-invalid-list' => 'Invalid list', # Do not translate
-	'wikibase-api-invalid-property-id' => 'Invalid propertyid', # Do not translate
-	'wikibase-api-invalid-snak' => 'Invalid snak', # Do not translate
-	'wikibase-api-no-common-iten' => 'There is no common item', # Do not translate
-	'wikibase-api-no-data' => 'No data to operate on', # Do not translate
-	'wikibase-api-no-external-page' => 'The external client site did not provide page information', # Do not translate
-	'wikibase-api-nosuchrevid' => 'Revision with id not found', # Do not translate
-	'wikibase-api-no-such-claim' => 'Could not find such a claim', # Do not translate
-	'wikibase-api-no-such-entity' => 'Could not find such an entity', # Do not translate
-	'wikibase-api-no-such-entity-id' => 'Could not find such an entity id', # Do not translate
-	'wikibase-api-no-such-entity-link' => 'Could not find such an entity link', # Do not translate
-	'wikibase-api-no-such-qualifier' => 'Could not find such a qualifier', # Do not translate
-	'wikibase-api-no-such-reference' => 'Could not find such a reference', # Do not translate
-	'wikibase-api-no-such-site' => 'Could not find such a site', # Do not translate
-	'wikibase-api-no-such-statement' => 'Could not find such a statement', # Do not translate
-	'wikibase-api-not-a-statement' => 'Not a statement', # Do not translate
-	'wikibase-api-not-an-item' => 'Not an item', # Do not translate
-	'wikibase-api-not-recognized-siteid' => 'The supplied site identifier was not recognized', # Do not translate
-	'wikibase-api-not-recognized' => 'Something was not recognized', # Do not translate
-	'wikibase-api-not-recognized-array' => 'An array was expected, but not recognized', # Do not translate
-	'wikibase-api-not-recognized-language' => 'The supplied language identifier was not recognized', # Do not translate
-	'wikibase-api-not-recognized-string' => 'A string was expected, but not recognized', # Do not translate
-	'wikibase-api-param-missing' => 'A parameter that is required was missing', # Do not translate
-	'wikibase-api-param-illegal' => 'An illegal set of parameters have been used', # Do not translate
-	'wikibase-api-permissiondenied' => 'You do not have the permissions needed to carry out this action', # Do not translate
-	'wikibase-api-wrong-class' => 'Wrong class type detected', # Do not translate
+	'wikibase-api-aliases-invalid-list' => 'Use either "set" or "add"/"remove" parameters.', # Do not translate
+	'wikibase-api-no-token' => 'No token given.', # Do not translate
+	'wikibase-api-no-data' => 'No data to operate upon.', # Do not translate
+	'wikibase-api-client-error' => 'The external client site failed.', # Do not translate
+	'wikibase-api-no-external-data' => 'There was no data from the external client site, possibly due to connection errors.', # Do not translate
+	'wikibase-api-no-external-page' => 'The external client site did not provide page information.', # Do not translate
+	'wikibase-api-add-sitelink-failed' => 'The site link could not be saved.', # Do not translate
+	'wikibase-api-remove-sitelink-failed' => 'The site link could not be removed.', # Do not translate
+	'wikibase-api-cant-edit' => 'Edit not allowed:
+$1', # Do not translate
+	'wikibase-api-json-invalid' => 'The supplied JSON structure could not be parsed or recreated as a valid structure.', # Do not translate
+	'wikibase-api-not-recognized' => 'An invalid property was requested: $1.', # Do not translate
+	'wikibase-api-not-recognized-string' => 'A string was expected, but not found.', # Do not translate
+	'wikibase-api-not-recognized-array' => 'An array was expected, but not found.', # Do not translate
+	'wikibase-api-not-recognized-language' => 'The supplied language identifier was not recognized.', # Do not translate
+	'wikibase-api-not-recognized-siteid' => 'The supplied site identifier was not recognized.', # Do not translate
+	'wikibase-api-no-permissions' => 'The user does not have sufficient rights.', # Do not translate
+	'wikibase-api-no-revision' => 'The revision could not be found.', # Do not translate
+	'wikibase-api-patch-empty' => 'The generated patch turned out to be empty.', # Do not translate
+	'wikibase-api-patch-incomplete' => 'The generated patch turned out to be incomplete.', # Do not translate
+	'wikibase-api-data-or-id-xor-wikititle' => 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page, or "data" for a new item.', # Do not translate
+	'wikibase-api-id-xor-wikititle' => 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page.', # Do not translate
+	'wikibase-api-ids-xor-wikititles' => 'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages.', # Do not translate
+	'wikibase-api-no-such-entity' => 'Could not find an existing entity.', # Do not translate
+	'wikibase-api-link-exists' => 'An article on the specified wiki is already linked.', # Do not translate
+	'wikibase-api-add-with-id' => 'Cannot add with the id of an existing item.', # Do not translate
+	'wikibase-api-add-exists' => 'Cannot add to an existing item.', # Do not translate
+	'wikibase-api-update-without-id' => 'Update without a previous id is not possible.', # Do not translate
+	'wikibase-api-no-such-item-link' => 'Could not find an existing item for this link.', # Do not translate
+	'wikibase-api-create-failed' => 'Attempted creation of a new item failed: $1', # Do not translate
+	'wikibase-api-modify-failed' => 'Attempted modification of the item failed.', # Do not translate
+	'wikibase-api-delete-failed' => 'Attempted deletion of the item failed.', # Do not translate
+	'wikibase-api-save-failed' => 'Attempted save of the item failed: $1', # Do not translate
+	'wikibase-api-invalid-contentmodel' => 'The content model for the page is invalid.', # Do not translate
+	'wikibase-api-alias-incomplete' => 'Cannot find a definition of the alias for the item.', # Do not translate
+	'wikibase-api-alias-not-found' => 'Cannot find any previous alias in the item.', # Do not translate
+	'wikibase-api-alias-found' => 'Found a previous alias in the item.', # Do not translate
+	'wikibase-api-label-or-description' => 'Use either or both of "label" and "description".', # Do not translate
+	'wikibase-api-label-not-found' => 'Cannot find a previous label for this language in the item.', # Do not translate
+	'wikibase-api-description-not-found' => 'Cannot find a previous description for this language in the item.', # Do not translate
+	'wikibase-api-wrong-class' => 'The content on the found page is not of correct type.',  # Do not translate
+	'wikibase-api-session-failure' => 'The current session has failed. You have to log in again.', # Do not translate
+	'wikibase-api-illegal-field' => 'Illegal field used in call: $1', # Do not translate
+	'wikibase-api-edit-conflict' => 'Edit conflict, could not patch the current revision', # Do not translate
 
 	'wikibase-self-conflict-patched' => 'Your edit was patched into the latest version, overriding some of your own intermediate changes.',
 	'wikibase-conflict-patched' => 'Your edit was patched into the latest version.',
@@ -894,49 +900,64 @@ Parameters:
 * $2 - Language name
 * $3 - Source language code
 * $4 - Source language name',
+	'wikibase-api-aliases-invalid-list' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions.
 
-
-	'wikibase-api-common-item' => '!!DO NOT TRANSLATE!! This is an error message for a situation where a common item detected that should not',
-	'wikibase-api-badtoken' => '!!DO NOT TRANSLATE!! This is an error message for a situation where there are no or bad token given in the API call and it is expected. Usually this should never be shown to the user, unless there are some exceptional error conditions. The message can be shown after misconfiguration of the system.',
-	'wikibase-api-cant-load-entity-content' => '!!DO NOT TRANSLATE!! Shown when w cant access the content revision. This could be because it has been deleted',
-	'wikibase-api-editconflict' => 'There is an edit conflict that that could not be resolved. This can have several reasons, but there is only a generic message for all of them.',
-	'wikibase-api-failed-add-sitelink' => 'This is an error message where the system of some unspecific reason could not add the site link to the temporary store.
+{{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
+	'wikibase-api-no-token' => '!!DO NOT TRANSLATE!! This is an error message for a situation where there are no token given in the API call and it is expected. Usually this should never be shown to the user, unless there are some exceptional error conditions. The message can be shown after misconfiguration of the system.',
+	'wikibase-api-no-data' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are some exceptional error condition. This message should probably not exist in the final version.',
+	'wikibase-api-client-error' => '!!DO NOT TRANSLATE!! To verify site links the repository must query the external client. Sometimes this fails, but without any possibility for the user to fix the problem.',
+	'wikibase-api-no-external-data' => '!!DO NOT TRANSLATE!! This is an error message where the external client did not reply, either because of the repo or the client terminated the connection, or because of some other connection error.',
+	'wikibase-api-no-external-page' => '!!DO NOT TRANSLATE!! This is an error message where the external client did reply, but either because of a faulty reply or because the page title could not be unwound, it was not possible to identify an external page.',
+	'wikibase-api-add-sitelink-failed' => 'This is an error message where the system of some unspecific reason could not add the site link to the temporary store.
 
 See also:
 * {{msg-mw|Wikibase-newitem-add-sitelink-failed}}',
-	'wikibase-api-failed-modify' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API tries to modify an item but the operation cannot be completed. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the database is in maintenance mode.',
-	'wikibase-api-failed-save' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API tries to save an item but the operation cannot be completed.',
-	'wikibase-api-inconsistent-language' => '!!DO NOT TRANSLATE!! Inconsistent language detected',
-	'wikibase-api-inconsistent-site' => '!!DO NOT TRANSLATE!! Inconsistent site detected',
-	'wikibase-api-invalid-guid' => '!!DO NOT TRANSLATE!! Invalid uniquie identifying provided for a claim',
-	'wikibase-api-invalid-json' => '!!DO NOT TRANSLATE!! The supplied JSON structure is invalid of some reson, usually because it is malformed or because it can not be recreated as a legal form. The exact reason is not clear and there should be made no attempt to guess a reason.',
-	'wikibase-api-invalid-snak' => '!!DO NOT TRANSLATE!! Invalid snak has been provided, This is similar to invalid-json',
-	'wikibase-api-invalid-list' => '!!DO NOT TRANSLATE!! Invalid list or data has been provided. This can occour when a list conflicts with itself (the list contains something to modify, but also to remove this item)',
-	'wikibase-api-invalid-property-id' => '!!DO NOT TRANSLATE!! Invalid propertyid has been supplied',
-	'wikibase-api-no-common-iten' => '!!DO NOT TRANSLATE!! There is no common item between to passed parameters when there should be',
-	'wikibase-api-no-data' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are some exceptional error condition. This message should probably not exist in the final version.',
-	'wikibase-api-no-external-page' => '!!DO NOT TRANSLATE!! This is an error message where the external client did reply, but either because of a faulty reply or because the page title could not be unwound, it was not possible to identify an external page.',
-	'wikibase-api-nosuchrevid' => '!!DO NOT TRANSLATE!! Page or entity with this revision id could not be found in the database',
-	'wikibase-api-no-such-claim' => '!!DO NOT TRANSLATE!! Could not find such a claim on wikidata, this could be to the user entering the wrong data',
-	'wikibase-api-no-such-entity' => '!!DO NOT TRANSLATE!! Could not find such an entity, this could be to the user entering the wrong data',
-	'wikibase-api-no-such-entity-id' => '!!DO NOT TRANSLATE!! Could not find such an entity id, this could be to the user entering the wrong data',
-	'wikibase-api-no-such-entity-link' => '!!DO NOT TRANSLATE!! Could not find such an entity link, this could be to the user entering the wrong data',
-	'wikibase-api-no-such-qualifier' => '!!DO NOT TRANSLATE!! Could not find such a qualifier, this could be to the user entering the wrong data',
-	'wikibase-api-no-such-reference' => '!!DO NOT TRANSLATE!! Could not find such a reference, this could be to the user entering the wrong data',
-	'wikibase-api-no-such-site' => '!!DO NOT TRANSLATE!! Could not find such a site, this could be to the user entering the wrong data',
-	'wikibase-api-no-such-statement' => '!!DO NOT TRANSLATE!! Could not find such a statement, this could be to the user entering the wrong data',
-	'wikibase-api-not-a-statement' => '!!DO NOT TRANSLATE!! The passed parameter is Not a statement when a statement is expected',
-	'wikibase-api-not-an-item' => '!!DO NOT TRANSLATE!! The passed parameter is Not an item when an item is expected (the passed parameter may infact be a property)',
-	'wikibase-api-not-recognized-siteid' => '!!DO NOT TRANSLATE!! The supplied site identifier was not recognized',
-	'wikibase-api-not-recognized' => '!!DO NOT TRANSLATE!! Something was not recognized (general message)',
-	'wikibase-api-not-recognized-array' => '!!DO NOT TRANSLATE!! An array was expected, but not recognized. The user probably passed the api a malformed parameter',
-	'wikibase-api-not-recognized-language' => '!!DO NOT TRANSLATE!! The supplied language identifier was not recognized. The user probably passed the api a malformed parameter',
-	'wikibase-api-not-recognized-string' => '!!DO NOT TRANSLATE!! A string was expected, but not recognized. The user probably passed the api a malformed parameter',
-	'wikibase-api-param-missing' => '!!DO NOT TRANSLATE!! A parameter that is required was missing, General message for when a parameter is missing from a request',
-	'wikibase-api-param-illegal' => '!!DO NOT TRANSLATE!! An illegal set of parameters have been used, General message for when the parameters passed in a request conflict or do not pass the initial tests',
-	'wikibase-api-permissiondenied' => '!!DO NOT TRANSLATE!! the user making the request does not have the correct permissions or rights to carry out the request',
-	'wikibase-api-wrong-class' => '!!DO NOT TRANSLATE!! The wrong class type has been detected when trying to make the request, this could be and item isntead of a property.',
+	'wikibase-api-remove-sitelink-failed' => '!!DO NOT TRANSLATE!! This is an error message where the system of some unspecific reason could not remove the site link from the temporary store.',
+	'wikibase-api-cant-edit' => '!!DO NOT TRANSLATE!! This error message is used when the user is not allowed to edit or create an item via the API. Parameters:
+* $1 is a wikitext list of reasons. It should be placed on a separate line.',
+	'wikibase-api-json-invalid' => '!!DO NOT TRANSLATE!! The supplied JSON structure is invalid of some reson, usually because it is malformed or because it can not be recreated as a legal form. The exact reason is not clear and there should be made no attempt to guess a reason.',
+	'wikibase-api-not-recognized' => '!!DO NOT TRANSLATE!! This is an error message that is returned when an invalid API property is requested.  This leads to termination of the on-going parsing.',
+	'wikibase-api-not-recognized-string' => 'During parsing of some source data structure, usually coming from a JSON structure, a string was expected but not found. This leads to termination of the on-going parsing.',
+	'wikibase-api-not-recognized-array' => '!!DO NOT TRANSLATE!! During parsing of some source data structure, usually coming from a JSON structure, an array was expected but not found. This leads to termination of the on-going parsing.',
+	'wikibase-api-not-recognized-language' => '!!DO NOT TRANSLATE!! During parsing of some source data structure, usually coming from a JSON structure, a language identifier was expected but the found one was invalid. This leads to termination of the on-going parsing.',
+	'wikibase-api-not-recognized-siteid' => 'During parsing of some source data structure, usually coming from a JSON structure, a site identifier was expected but the found one was invalid. This leads to termination of the on-going parsing.
 
+See also:
+* {{msg-mw|Wikibase-newitem-not-recognized-siteid}}',
+	'wikibase-api-no-permissions' => '!!DO NOT TRANSLATE!! This error message is used when the user is not allowed to perform a specific action via the API. The first parameter is a wikitext list of reasons, it should be placed on a separate line.',
+	'wikibase-api-no-revision' => '!!DO NOT TRANSLATE!! This error message is used when the user has supplied an revision id that could not be found via the API. There could be several reasons for why the user are not allowed to look up the revision.',
+	'wikibase-api-patch-empty' => '!!DO NOT TRANSLATE!! This error message is used when the API tried to patch a contribution and the patch got empty. This typically happens due to edit conflicts.',
+	'wikibase-api-patch-incomplete' => 'This error message is used when the API tried to patch a contribution and the patch missed some parts. This typically happens due to edit conflicts.',
+	'wikibase-api-data-or-id-xor-wikititle' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions. {{doc-important|Do not translate "id", "site", "title" and "data".}}',
+	'wikibase-api-id-xor-wikititle' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions. This is a version where the parameter names are on a singular form. {{doc-important|Do not translate "id", "site" and "title".}}',
+	'wikibase-api-ids-xor-wikititles' => '{{doc-important|Do not translate "ids", "sites" and "titles".}}
+This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions. This is a version where the parameter names are on a plural form.',
+	'wikibase-api-no-such-entity' => 'This is an error message for a situation where the API could not find an entity, usually on an already found page. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the entity is deleted due to a race condition.',
+	'wikibase-api-link-exists' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API requests a sitelink to be created but there already exist a similar link. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the link is already created due to a race condition.',
+	'wikibase-api-add-with-id' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API includes an id, but the operation cannot be fullfilled because this creates a conflict. Usually this should never be shown to the user, unless there are some exceptional error conditions.',
+	'wikibase-api-add-exists' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API already found an item, but the operation cannot be fullfilled because this creates a conflict. Usually this should never be shown to the user, unless there are some exceptional error conditions, or an item is already created due to a race condition.',
+	'wikibase-api-update-without-id' => '!!DO NOT TRANSLATE!! This is an error message for an update where the API expect to have an id, but none are found. Usually this should never be shown to the user, unless there are some exceptional error conditions.',
+	'wikibase-api-no-such-item-link' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API could not find an item given the specific sitelink. This message will be shown to the user if he manually specifies an invalid title.',
+	'wikibase-api-create-failed' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API tries to create an item but the operation cannot be completed. Paramters:
+* $1 contains further details as wikitext, composed from other error messages.',
+	'wikibase-api-modify-failed' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API tries to modify an item but the operation cannot be completed. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the database is in maintenance mode.',
+	'wikibase-api-delete-failed' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API tries to delete an item but the operation cannot be completed. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the database is in maintenance mode.',
+	'wikibase-api-save-failed' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API tries to save an item but the operation cannot be completed. Parameters:
+* $1 contains further details as wikitext, composed from other error messages.',
+	'wikibase-api-invalid-contentmodel' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API somehow requested content from a page but found the contentmodel to be inconsistent with the expected one. Usually this should never be shown to the user, unless there are some exceptional error conditions, or an old database is not updated correctly.',
+	'wikibase-api-alias-incomplete' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API but somehow the alias is incomplete. Usually this should never be shown to the user, unless there are some exceptional error conditions.',
+	'wikibase-api-alias-not-found' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API expects to find a previous alias but cannot find any. Usually this should never be shown to the user, unless there are some exceptional error conditions, or there is a race condition during delete of the alias.',
+	'wikibase-api-alias-found' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API expects to find no previous alias but still finds one. Usually this should never be shown to the user, unless there are some exceptional error conditions, or there is a race condition during creation of the alias.',
+	'wikibase-api-label-or-description' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent, either or both of "label" or "description" should be used but not none of them. Usually this should never be shown to the user, unless there are some exceptional error condition.
+
+{{doc-important|Do not translate the names of the arguments: "label" and "description"}}',
+	'wikibase-api-label-not-found' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are some exceptional error conditions, or there is a race condition during delete of the label.',
+	'wikibase-api-description-not-found' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are some exceptional error conditions, or there is a race condition during delete of the description.',
+	'wikibase-api-wrong-class' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
+	'wikibase-api-session-failure' => '!!DO NOT TRANSLATE!! Sometimes the session fails, usually because of timeouts or because the server of other reasons ends the user session. This leads to an invalid token and the user should then log in again.',
+	'wikibase-api-illegal-field' => '!!DO NOT TRANSLATE!! There is an illegal field name in the props for the module call. This makes the call fail, but the name of failing field will be reported. Parameters:
+* $1 is the failing field name',
+	'wikibase-api-edit-conflict' => 'There is an edit conflict that that could not be resolved. This can have several reasons, but there is only a generic message for all of them.',
 	'wikibase-self-conflict-patched' => 'Warning issued when an edit is made based on an old revision, clean patching was not possible, but all intermediate edits where made by the same user, so aggressive patching was applied, overriding earlier changes by the same user. This may happen e.g. when editing the same item in multiple browser windows. This warning is usually not displayed.',
 	'wikibase-conflict-patched' => 'Warning issued when an edit is made based on an old revision, but the edit conflict could be resolved by patching. This warning is usually not displayed.',
 	'wikibase-restoreold' => "Link text shown on the link that lets the user restore the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.

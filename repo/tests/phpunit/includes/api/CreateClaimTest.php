@@ -124,7 +124,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'value' => '"Foo.png"',
 		);
 
-		$argLists[] = array( 'invalid-snak', $params );
+		$argLists[] = array( 'claim-invalid-snak', $params );
 
 		$params = array(
 			'action' => 'wbcreateclaim',
@@ -157,7 +157,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'value' => '"Foo.png"',
 		);
 
-		$argLists[] = array( 'param-missing', $params );
+		$argLists[] = array( 'claim-property-id-missing', $params );
 
 		$params = array(
 			'action' => 'wbcreateclaim',
@@ -166,7 +166,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'property' => '-',
 		);
 
-		$argLists[] = array( 'param-missing', $params );
+		$argLists[] = array( 'claim-value-missing', $params );
 
 		$params = array(
 			'action' => 'wbcreateclaim',
@@ -176,7 +176,7 @@ class CreateClaimTest extends \ApiTestCase {
 			'value' => '{"x":"foo", "y":"bar"}',
 		);
 
-		$argLists[] = array( 'invalid-snak', $params );
+		$argLists[] = array( 'claim-invalid-snak', $params );
 
 		return $argLists;
 	}
