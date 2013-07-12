@@ -106,7 +106,7 @@
 			.addClass( this.widgetBaseClass + '-icon ui-icon' );
 
 			this.element
-			.on( 'click', function( event ) {
+			.on( 'click.' + this.widgetName, function( event ) {
 				if( !self.element.hasClass( 'ui-state-disabled' ) ) {
 					// Change toggle icon to reflect current state of toggle subject visibility:
 					self._reflectVisibilityOnToggleIcon( true );
@@ -117,10 +117,10 @@
 					} );
 				}
 			} )
-			.on( 'mouseover', function( event ) {
+			.on( 'mouseover.' + this.widgetName, function( event ) {
 				self.element.addClass( 'ui-state-hover' );
 			} )
-			.on( 'mouseout', function( event ) {
+			.on( 'mouseout.' + this.widgetName, function( event ) {
 				self.element.removeClass( 'ui-state-hover' );
 			} )
 			.append( this.$toggleIcon )
