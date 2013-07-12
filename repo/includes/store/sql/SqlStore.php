@@ -120,6 +120,9 @@ class SqlStore implements Store {
 		$db = $updater->getDB();
 		$type = $db->getType();
 
+		// TODO the following ifs are utterly confusing and need some clean up
+		// i.e. there are code branches that are unreachable, extension adding happens a little
+		// on the start, a little later, etc.
 		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
 			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
 
@@ -183,6 +186,23 @@ class SqlStore implements Store {
 					'term_row_id',
 					__DIR__ . '/AddRowIDs' . $alteredExtension
 				);
+			}
+
+			// Update to add weight to wb_terms
+			if ( !$db->fieldExists( 'wb_terms' , 'wb_weight' ) ) {
+				// creates wb_terms.wb_weight
+
+				$alteredExtension = $extension;
+				if ( $type === 'sqlite' ) {
+					$alteredExtension = '.sqlite' . $alteredExtension;
+				}
+
+				$updater->addExtensionField(
+					'wb_terms',
+					'term_search_key',
+					__DIR__ . '/AddTermsWeight' . $alteredExtension
+				);
+
 			}
 		}
 		else {
