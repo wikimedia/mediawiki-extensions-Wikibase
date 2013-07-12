@@ -226,7 +226,7 @@ class SetStatementRankTest extends \ApiTestCase {
 		try {
 			$this->doApiRequest( $params );
 		} catch ( \UsageException $e ) {
-			$this->assertEquals( 'invalid-guid', $e->getCodeString(), 'Invalid claim guid raised correct error' );
+			$this->assertEquals( $e->getCodeString(), 'setstatementrank-invalid-guid', 'Invalid claim guid raised correct error' );
 			$caughtException = true;
 		}
 

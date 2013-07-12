@@ -58,32 +58,18 @@ class GetClaims extends ApiWikibase {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
-		//@todo validate
-		//@todo check permissions
-
 		list( $id, $claimGuid ) = $this->getIdentifiers();
 
 		$entityId = EntityId::newFromPrefixedId( $id );
 		$entity = $entityId ? $this->getEntity( $entityId ) : null;
 
 		if ( !$entity ) {
-			$this->dieUsage( "No entity found matching ID $id", 'no-such-entity' );
+			$this->dieUsage( "No entity found matching ID $id", 'no-such-entity-id' );
 		}
 
 		$this->outputClaims( $this->getClaims( $entity, $claimGuid ) );
 
 		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * @see \ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text()  ),
-			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
-			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
-		) );
 	}
 
 	/**
@@ -120,7 +106,7 @@ class GetClaims extends ApiWikibase {
 		$content = EntityContentFactory::singleton()->getFromId( $id );
 
 		if ( $content === null ) {
-			$this->dieUsage( 'The specified entity does not exist, so it\'s claims cannot be obtained', 'no-such-entity' );
+			$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'getclaims-entity-not-found' );
 		}
 
 		return $content->getEntity();
@@ -179,7 +165,7 @@ class GetClaims extends ApiWikibase {
 		$params = $this->extractRequestParams();
 
 		if ( !isset( $params['entity'] ) && !isset( $params['claim'] ) ) {
-			$this->dieUsage( 'Either the entity parameter or the key parameter need to be set', 'param-missing' );
+			$this->dieUsage( 'Either the entity parameter or the key parameter need to be set', 'getclaims-entity-or-key' );
 		}
 
 		$claimGuid = null;
@@ -190,14 +176,14 @@ class GetClaims extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( isset( $params['claim'] ) && $claimGuidValidator->validateFormat( $params['claim'] ) === false ) {
-			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieUsage( 'Claim guid is invalid', 'getclaims-invalid-guid' );
 		}
 
 		if ( isset( $params['entity'] ) && isset( $params['claim'] ) ) {
 			$entityId = Entity::getIdFromClaimGuid( $params['claim'] );
 
 			if ( $entityId !== $params['entity'] ) {
-				$this->dieUsage( 'If both entity id and claim key are provided they need to point to the same entity', 'param-illegal' );
+				$this->dieUsage( 'If both entity id and claim key are provided they need to point to the same entity', 'getclaims-id-mismatch' );
 			}
 		}
 		else if ( isset( $params['entity'] ) ) {

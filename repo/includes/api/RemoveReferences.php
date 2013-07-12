@@ -49,7 +49,7 @@ class RemoveReferences extends ApiWikibase {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 	}
 
-	// TODO: autocomment
+	// TODO: automcomment
 	// TODO: rights
 	// TODO: conflict detection
 
@@ -89,14 +89,14 @@ class RemoveReferences extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validateFormat( $params['statement'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieUsage( 'Invalid claim guid', 'removereferences-invalid-guid' );
 		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['statement'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
+			$this->dieUsage( 'No such entity', 'removereferences-entity-not-found' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -115,13 +115,16 @@ class RemoveReferences extends ApiWikibase {
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $statementGuid ) ) {
-			$this->dieUsage( 'Could not find the claim' , 'no-such-claim' );
+			$this->dieUsage( 'No such statement', 'removereferences-statement-not-found' );
 		}
 
 		$statement = $claims->getClaimWithGuid( $statementGuid );
 
 		if ( ! ( $statement instanceof Statement ) ) {
-			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
+			$this->dieUsage(
+				'The referenced claim is not a statement and thus cannot have references',
+				'removereferences-not-a-statement'
+			);
 		}
 
 		/**
@@ -135,8 +138,11 @@ class RemoveReferences extends ApiWikibase {
 				$references->removeReferenceHash( $refHash );
 			}
 			else {
-				// TODO: does $refHash need to be escaped somehow?
-				$this->dieUsage( 'The statement does not have any associated reference with the provided reference hash "' . $refHash . '"', 'no-such-reference' );
+				$this->dieUsage(
+					// TODO: does $refHash need to be escaped somehow?
+					'The statement does not have any associated reference with the provided reference hash "' . $refHash . '"',
+					'removereferences-no-such-reference'
+				);
 			}
 		}
 
@@ -203,18 +209,6 @@ class RemoveReferences extends ApiWikibase {
 				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),
 		);
-	}
-
-	/**
-	 * @see \ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
-			array( 'code' => 'not-statement', 'info' => $this->msg( 'wikibase-api-not-statement' )->text() ),
-		) );
 	}
 
 	/**

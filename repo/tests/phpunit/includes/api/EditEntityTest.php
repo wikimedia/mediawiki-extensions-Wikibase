@@ -119,7 +119,7 @@ class EditEntityTest extends ModifyItemBase {
 				$this->fail( "Adding an entity without a token should have failed" );
 			}
 			catch ( \UsageException $e ) {
-				$this->assertTrue( ($e->getCodeString() == 'badtoken'), "Expected session-failure, got unexpected exception: $e" );
+				$this->assertTrue( ($e->getCodeString() == 'session-failure'), "Expected session-failure, got unexpected exception: $e" );
 			}
 		}
 	}
@@ -208,7 +208,7 @@ class EditEntityTest extends ModifyItemBase {
 			$this->fail( "Adding another entity with the same sitelinks should have failed" );
 		}
 		catch ( \UsageException $e ) {
-			$this->assertTrue( ($e->getCodeString() == 'failed-save'), "Expected failed-save, got unexpected exception: $e" );
+			$this->assertTrue( ($e->getCodeString() == 'save-failed'), "Expected set-sitelink-failed, got unexpected exception: $e" );
 		}
 	}
 
@@ -270,7 +270,7 @@ class EditEntityTest extends ModifyItemBase {
 				$this->fail( "Updating the entity with wrong data should have failed" );
 			}
 			catch ( \UsageException $e ) {
-				$this->assertTrue( ($e->getCodeString() == 'param-illegal'), "Expected param-illegal, got unexpected exception: $e" );
+				$this->assertTrue( ($e->getCodeString() == 'illegal-field'), "Expected illegal-field, got unexpected exception: $e" );
 			}
 		}
 	}
@@ -433,7 +433,7 @@ class EditEntityTest extends ModifyItemBase {
 			// json must be valid
 			array(
 				'',
-				"invalid-json"
+				"json-invalid"
 			),
 
 			// json must be an object
