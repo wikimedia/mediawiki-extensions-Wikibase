@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Language, IContextSource, MWException;
+use Language, LanguageConverter, IContextSource, MWException;
 
 /**
  * Object creating LanguageFallbackChain objects in Wikibase.
@@ -134,10 +134,14 @@ class LanguageFallbackChainFactory {
 		}
 
 		if ( $mode & self::FALLBACK_VARIANTS ) {
-			if ( is_string( $language ) ) {
-				$language = Language::factory( $language );
+			if ( !in_array( $languageCode, LanguageConverter::$languagesWithVariants ) ) {
+				$parentLanguage = null;
+			} else {
+				if ( is_string( $language ) ) {
+					$language = Language::factory( $language );
+				}
+				$parentLanguage = $language->getParentLanguage();
 			}
-			$parentLanguage = $language->getParentLanguage();
 			if ( $parentLanguage ) {
 				// It's less likely to trigger conversion mistakes by converting
 				// zh-tw to zh-hk first instead of converting zh-cn to zh-tw.
