@@ -150,6 +150,16 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 			'term_entity_type' => $entity->getType()
 		);
 
+		// very simple weighting calculation.
+		// TODO delegate this to an object of its own
+		$entityWeight = array();
+		if ( $dbw->fieldExists( $this->tableName, 'term_weight' ) ) {
+			if ( $entity instanceof Item ) {
+				$weight = count( $entity->getSimpleSiteLinks() ) / 1000.0;
+				$entityWeight['term_weight'] = $weight;
+			}
+		}
+
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": updating terms for " . $entity->getId()->getPrefixedId() );
 
 		$success = $dbw->delete(
@@ -166,7 +176,8 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 				$this->tableName,
 				array_merge(
 					$this->getTermFields( $term ),
-					$entityIdentifiers
+					$entityIdentifiers,
+					$entityWeight
 				),
 				__METHOD__
 			);
@@ -539,7 +550,7 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 *
 	 * @param array $terms
 	 * @param string $entityType
-	 * @param array $options
+	 * @param array $options There is an implicit LIMIT of 5000 items in this implementation
 	 *
 	 * @return EntityId[]
 	 */
@@ -548,16 +559,22 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 			return array();
 		}
 
+		// this is the maximum limit of search results TODO this should not be hardcoded
+		$internalLimit = 5000;
+
 		$conditions = $this->termsToConditions( $terms, null, $entityType, false, $options );
 
-		$selectionFields = array( 'term_entity_id' );
-
 		$dbr = $this->getReadDb();
+
+		$selectionFields = array( 'term_entity_id' );
+		if ( $dbr->fieldExists( $this->tableName, 'term_weight' ) ) {
+			$selectionFields[] = 'term_weight';
+		}
 
 		$queryOptions = array( 'DISTINCT' );
 
 		if ( array_key_exists( 'LIMIT', $options ) && $options['LIMIT'] ) {
-			$queryOptions['LIMIT'] = $options['LIMIT'];
+			$queryOptions['LIMIT'] = max( $options['LIMIT'], $internalLimit );
 		}
 
 		$obtainedIDs = $dbr->select(
@@ -568,12 +585,30 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 			$queryOptions
 		);
 
-		$result = array();
+		$entityIds = array();
+		$weights = array();
 		foreach ( $obtainedIDs as $obtainedID ) {
-			$result[] = new EntityId( $entityType, (int)$obtainedID->term_entity_id );
+			$entityIds[] = new EntityId( $entityType, (int)$obtainedID->term_entity_id );
+			if ( array_key_exists( 'term_weight', $obtainedID ) ) {
+				$weights[] = floatval( $obtainedID->term_weight );
+			} else {
+				$weights[] = 0.0;
+			}
+		}
+		$this->releaseConnection( $dbr );
+
+		// this is a post-search sorting by weight. This allows us to not require an additional
+		// index on the wb_terms table that is very big already. This is also why we have
+		// the internal limit of 5000, since SQL's index would explode in size if we added the
+		// weight to it here (which would allow us to delegate the sorting to SQL itself)
+		array_multisort( $weights, SORT_DESC, SORT_NUMERIC, $entityIds );
+
+		if ( array_key_exists( 'LIMIT', $options ) && $options['LIMIT'] ) {
+			$result = array_slice( $entityIds, 0, $options['LIMIT'] );
+		} else {
+			$result = $entityIds;
 		}
 
-		$this->releaseConnection( $dbr );
 		return $result;
 	}
 
