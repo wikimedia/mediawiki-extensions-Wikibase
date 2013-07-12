@@ -36,17 +36,18 @@ switch( $jenkins_job_name) {
 		require_once __DIR__ . '/client/ExampleSettings.php';
 		break;
 
-	case 'mwext-Wikibase-repo-tests':
-		require_once __DIR__ . '/repo/Wikibase.php';
-		require_once __DIR__ . '/repo/ExampleSettings.php';
-		break;
-
-	default:
+	case 'mwext-WikibaseQuery-testextensions-master':
 		require_once __DIR__ . '/repo/Wikibase.php';
 		require_once __DIR__ . '/client/WikibaseClient.php';
 
 		require_once __DIR__ . '/repo/ExampleSettings.php';
 		require_once __DIR__ . '/client/ExampleSettings.php';
+		break;
+
+	default:
+		require_once __DIR__ . '/repo/Wikibase.php';
+		require_once __DIR__ . '/repo/ExampleSettings.php';
+		break;
 }
 
 // Avoid polluting the global namespace
