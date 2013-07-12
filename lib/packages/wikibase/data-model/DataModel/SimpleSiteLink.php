@@ -29,13 +29,15 @@ use InvalidArgumentException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Michał Łazowik
  */
 class SimpleSiteLink {
 
 	protected $siteId;
 	protected $pageName;
+	protected $badges;
 
-	public function __construct( $siteId, $pageName ) {
+	public function __construct( $siteId, $pageName, $badges = array() ) {
 		if ( !is_string( $siteId ) ) {
 			throw new InvalidArgumentException( '$siteId needs to be a string' );
 		}
@@ -44,8 +46,19 @@ class SimpleSiteLink {
 			throw new InvalidArgumentException( '$pageName needs to be a string' );
 		}
 
+		if ( !is_array( $badges ) ) {
+			throw new InvalidArgumentException( '$badges needs to be an array' );
+		}
+
+		foreach( $badges as $badge ) {
+			if ( !is_string( $badge ) ) {
+				throw new InvalidArgumentException( 'Each value of $badges needs to be a string' );
+			}
+		}
+
 		$this->siteId = $siteId;
 		$this->pageName = $pageName;
+		$this->badges = $badges;
 	}
 
 	/**
@@ -64,6 +77,15 @@ class SimpleSiteLink {
 	 */
 	public function getPageName() {
 		return $this->pageName;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return array
+	 */
+	public function getBadges() {
+		return $this->badges;
 	}
 
 }
