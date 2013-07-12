@@ -62,6 +62,12 @@ return call_user_func( function() {
 		// (depending on the database's collation).
 		'withoutTermSearchKey' => false,
 
+		// Allow the TermIndex table to work without weights,
+		// for sites that can not easily roll out schema changes on large tables.
+		// This means that all searches will return an undefined order
+		// (depending on the database's inner working).
+		'withoutTermWeight' => false,
+
 		'entityNamespaces' => array(),
 
 		// These are used for multilanguage strings that should have a soft length constraint
