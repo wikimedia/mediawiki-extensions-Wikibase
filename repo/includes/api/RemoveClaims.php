@@ -45,6 +45,14 @@ use Wikibase\Repo\WikibaseRepo;
 class RemoveClaims extends ApiWikibase {
 
 	/**
+	 * @see ApiBase::isWriteMode
+	 * @return bool true
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
 	 * @see \ApiBase::execute
 	 *
 	 * @since 0.3
@@ -159,7 +167,7 @@ class RemoveClaims extends ApiWikibase {
 
 				$guids[$entityId][] = $guid;
 			} else {
-				$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+				$this->dieUsage( 'Invalid claim guid', 'removeclaims-invalid-guid' );
 			}
 		}
 
@@ -218,7 +226,7 @@ class RemoveClaims extends ApiWikibase {
 			$entityId = EntityId::newFromPrefixedId( $id );
 
 			if ( $entityId === null ) {
-				$this->dieUsage( 'Invalid entity id provided', 'no-such-entity' );
+				$this->dieUsage( 'Invalid entity id provided', 'removeclaims-invalid-entity-id' );
 			}
 
 			$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
@@ -226,7 +234,7 @@ class RemoveClaims extends ApiWikibase {
 			$content = $this->loadEntityContent( $entityTitle, $baseRevisionId );
 
 			if ( $content === null ) {
-				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'no-such-entity' );
+				$this->dieUsage( "The specified entity does not exist, so it's claims cannot be obtained", 'removeclaims-entity-not-found' );
 			}
 
 			$contents[] = $content;
@@ -290,16 +298,6 @@ class RemoveClaims extends ApiWikibase {
 		);
 
 		$this->addRevisionIdFromStatusToResult( 'pageinfo', 'lastrevid', $status );
-	}
-
-	/**
-	 * @see \ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-		) );
 	}
 
 	/**
@@ -368,13 +366,6 @@ class RemoveClaims extends ApiWikibase {
 		return array(
 			'api.php?action=wbremoveclaims&claim=q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N&token=foobar&baserevid=7201010' => 'Remove claim with GUID of "q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N"',
 		);
-	}
-
-	/**
-	 * @see \ApiBase::isWriteMode()
-	 */
-	public function isWriteMode() {
-		return true;
 	}
 
 }

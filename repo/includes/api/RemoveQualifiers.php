@@ -43,7 +43,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class RemoveQualifiers extends ApiWikibase {
 
-	// TODO: autocomment
+	// TODO: automcomment
 	// TODO: rights
 	// TODO: conflict detection
 	// TODO: claim uniqueness
@@ -79,14 +79,14 @@ class RemoveQualifiers extends ApiWikibase {
 		$claimGuidValidator = new ClaimGuidValidator( $entityPrefixes );
 
 		if ( !( $claimGuidValidator->validateFormat( $params['claim'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieUsage( 'Invalid claim guid', 'removequalifiers-invalid-guid' );
 		}
 
 		$entityId = EntityId::newFromPrefixedId( Entity::getIdFromClaimGuid( $params['claim'] ) );
 		$entityTitle = EntityContentFactory::singleton()->getTitleForId( $entityId );
 
 		if ( $entityTitle === null ) {
-			$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
+			$this->dieUsage( 'No such entity', 'removequalifiers-entity-not-found' );
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
@@ -109,7 +109,7 @@ class RemoveQualifiers extends ApiWikibase {
 		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
 			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
 				// TODO: does $qualifierHash need to be escaped?
-				$this->dieUsage( 'There is no qualifier with hash ' . $qualifierHash, 'no-such-qualifier' );
+				$this->dieUsage( 'There is no qualifier with hash ' . $qualifierHash, 'removequalifiers-qualifier-not-found' );
 			}
 
 			$qualifiers->removeSnakHash( $qualifierHash );
@@ -128,7 +128,7 @@ class RemoveQualifiers extends ApiWikibase {
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->dieUsage( 'Could not find a claim with that guid', 'no-such-claim' );
+			$this->dieUsage( 'No such claim', 'removequalifiers-claim-not-found' );
 		}
 
 		$claim = $claims->getClaimWithGuid( $claimGuid );
@@ -177,18 +177,6 @@ class RemoveQualifiers extends ApiWikibase {
 			),
 			'bot' => false,
 		);
-	}
-
-	/**
-	 * @see \ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-guid', 'info' => $this->msg( 'wikibase-api-invalid-guid' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array( 'code' => 'no-such-qualifer', 'info' => $this->msg( 'wikibase-api-no-such-qualifer' )->text() ),
-			array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
-		) );
 	}
 
 	/**
