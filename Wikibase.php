@@ -27,7 +27,7 @@ if( PHP_SAPI !== 'cli' || $jenkins_job_name === false ) {
 }
 
 if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
-	define( 'WB_EXPERIMENTAL_FEATURES', true );
+	//define( 'WB_EXPERIMENTAL_FEATURES', true );
 }
 
 switch( $jenkins_job_name) {
