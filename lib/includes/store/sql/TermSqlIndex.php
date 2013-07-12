@@ -158,15 +158,23 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 			__METHOD__
 		);
 
+		$weightField = array();
+		if ( $this->supportsWeight() ) {
+			$weightField = array( 'term_weight'  => $this->getWeight( $entity ) );
+		}
+
+
 		/**
 		 * @var Term $term
 		 */
+
 		foreach ( $entity->getTerms() as $term ) {
 			$success = $dbw->insert(
 				$this->tableName,
 				array_merge(
 					$this->getTermFields( $term ),
-					$entityIdentifiers
+					$entityIdentifiers,
+					$weightField
 				),
 				__METHOD__
 			);
@@ -177,6 +185,27 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		}
 
 		return $success;
+	}
+
+	/**
+	 * Calculate a weight the given entity to be used for ranking. Should be normalized
+	 * between 0 and 1, but that's not a strong constraint.
+	 * This implementation relies on sitelinks, and simply takes the number of sitelinks
+	 * as the weight.
+	 *
+	 * TODO Should be moved to its own object and be added via dependency injection
+	 *
+	 * @since 0.4
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return float weight
+	 */
+	protected function getWeight( Entity $entity ) {
+		if ( $entity instanceof Item ) {
+			return count( $entity->getSimpleSiteLinks() ) / 1000.0;
+		}
+		return 0.0;
 	}
 
 	/**
@@ -539,7 +568,7 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 	 *
 	 * @param array $terms
 	 * @param string $entityType
-	 * @param array $options
+	 * @param array $options There is an implicit LIMIT of 5000 items in this implementation
 	 *
 	 * @return EntityId[]
 	 */
@@ -548,16 +577,32 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 			return array();
 		}
 
+		// this is the maximum limit of search results TODO this should not be hardcoded
+		$internalLimit = 5000;
+
 		$conditions = $this->termsToConditions( $terms, null, $entityType, false, $options );
+
+		$dbr = $this->getReadDb();
 
 		$selectionFields = array( 'term_entity_id' );
 
-		$dbr = $this->getReadDb();
+		// TODO instead of a DB query, get a setting. Should save on a few Database round trips.
+		$hasWeight = $this->supportsWeight();
+
+		if ( $hasWeight ) {
+			$selectionFields[] = 'term_weight';
+		}
 
 		$queryOptions = array( 'DISTINCT' );
 
 		if ( array_key_exists( 'LIMIT', $options ) && $options['LIMIT'] ) {
-			$queryOptions['LIMIT'] = $options['LIMIT'];
+			if ( $hasWeight ) {
+				// if we take the weight into account, we need to grab basically all hits in order
+				// to allow for the post-search sorting below.
+				$queryOptions['LIMIT'] = max( $options['LIMIT'], $internalLimit );
+			} else {
+				$queryOptions['LIMIT'] = $options['LIMIT'];
+			}
 		}
 
 		$obtainedIDs = $dbr->select(
@@ -568,12 +613,38 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 			$queryOptions
 		);
 
-		$result = array();
-		foreach ( $obtainedIDs as $obtainedID ) {
-			$result[] = new EntityId( $entityType, (int)$obtainedID->term_entity_id );
+		if ( $hasWeight ) {
+			$weights = array();
+			foreach ( $obtainedIDs as $obtainedID ) {
+				$weights[intval( $obtainedID->term_entity_id )] = floatval( $obtainedID->term_weight );
+			}
+
+			// this is a post-search sorting by weight. This allows us to not require an additional
+			// index on the wb_terms table that is very big already. This is also why we have
+			// the internal limit of 5000, since SQL's index would explode in size if we added the
+			// weight to it here (which would allow us to delegate the sorting to SQL itself)
+			arsort( $weights, SORT_NUMERIC );
+
+			if ( array_key_exists( 'LIMIT', $options ) && $options['LIMIT'] ) {
+				$ids = array_keys( array_slice( $weights, 0, $options['LIMIT'], true ) );
+			} else {
+				$ids = array_keys( $weights );
+			}
+		} else {
+			$ids = array();
+			foreach ( $obtainedIDs as $obtainedID ) {
+				$ids[] = intval( $obtainedID->term_entity_id );
+			}
 		}
 
 		$this->releaseConnection( $dbr );
+
+		// turn numbers into entity ids
+		$result = array();
+		foreach ( $ids as $id ) {
+			$result[] = new EntityId( $entityType, $id );
+		}
+
 		return $result;
 	}
 
@@ -893,5 +964,13 @@ class TermSqlIndex extends \DBAccessBase implements TermIndex {
 		}
 
 		return $normalized;
+	}
+
+	/**
+	 * @param $dbr
+	 * @return mixed
+	 */
+	public function supportsWeight() {
+		return !\Wikibase\Settings::get( 'withoutTermWeight' );
 	}
 }
