@@ -856,6 +856,7 @@ class DispatchChanges extends \Maintenance {
 			$siteLinkDiff = $change->getSiteLinkDiff();
 
 			if ( isset( $siteLinkDiff[ $siteID ] ) ) {
+				wfProfileOut( __METHOD__ );
 				return true;
 			}
 		}
