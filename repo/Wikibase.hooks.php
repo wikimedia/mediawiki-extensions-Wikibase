@@ -904,7 +904,16 @@ final class RepoHooks {
 				$handler = ContentHandler::getForModelID( $model );
 
 				if ( $handler->getEntityNamespace() == $namespace ) {
-					// trying to use ApiEditPage on an entity namespace - just fail
+					// trying to use ApiEditPage on an entity namespace
+					$params = $module->extractRequestParams();
+
+					// allow undo
+					if ( $params['undo'] > 0 ) {
+						wfProfileOut( __METHOD__ );
+						return true;
+					}
+
+					// fail
 					$message = array(
 						'wikibase-no-direct-editing',
 						$pageObj->getTitle()->getNsText()

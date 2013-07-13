@@ -285,5 +285,4 @@ class ItemContent extends EntityContent {
 		$itemView = new ItemView( $valueFormatters );
 		return $itemView->getParserOutput( $this, $options, $generateHtml );
 	}
-
 }
