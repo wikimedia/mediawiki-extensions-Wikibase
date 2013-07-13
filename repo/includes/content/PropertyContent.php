@@ -218,5 +218,4 @@ class PropertyContent extends EntityContent {
 		$propertyView = new PropertyView( $valueFormatters );
 		return $propertyView->getParserOutput( $this, $options, $generateHtml );
 	}
-
 }

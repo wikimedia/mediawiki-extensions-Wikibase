@@ -587,5 +587,4 @@ abstract class EntityContent extends \AbstractContent {
 			}
 		}
 	}
-
 }

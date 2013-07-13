@@ -2,6 +2,10 @@
 
 namespace Wikibase\Test;
 use ContentHandler;
+use Revision;
+use Wikibase\Entity;
+use Wikibase\EntityContentFactory;
+use Wikibase\EntityFactory;
 use Wikibase\EntityHandler;
 use Wikibase\EntityContent;
 
@@ -35,6 +39,7 @@ use Wikibase\EntityContent;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
@@ -59,6 +64,14 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 */
 	protected function getHandler() {
 		return ContentHandler::getForModelID( $this->getModelId() );
+	}
+
+	/**
+	 * @return Entity
+	 */
+	protected function newEntity() {
+		$handler = $this->getHandler();
+		return EntityFactory::singleton()->newEmpty( $handler->getEntityType() );
 	}
 
 	/**
@@ -179,6 +192,108 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$name = ContentHandler::getLocalizedName( $this->getModelId() );
 
 		$this->assertNotEquals( $this->getModelId(), $name, "localization of model name" );
+	}
+
+	protected function fakeRevision( Entity $entity, $id = 0 ) {
+		$content = EntityContentFactory::singleton()->newFromEntity( $entity );
+
+		$revision = new Revision( array(
+			'id' => $id,
+			'page' => $id,
+			'content' => $content,
+		) );
+
+		return $revision;
+	}
+
+	public function provideGetUndoContent() {
+		$e1 = $this->newEntity();
+		$r1 = $this->fakeRevision( $e1, 1 );
+
+		$e2 = $e1->copy();
+		$e2->setLabel( 'en', 'Foo' );
+		$r2 = $this->fakeRevision( $e2, 2 );
+
+		$e3 = $e2->copy();
+		$e3->setLabel( 'de', 'Fuh' );
+		$r3 = $this->fakeRevision( $e3, 3 );
+
+		$e4 = $e3->copy();
+		$e4->setLabel( 'fr', 'Fu' );
+		$r4 = $this->fakeRevision( $e4, 4 );
+
+		$e5 = $e4->copy();
+		$e5->setLabel( 'en', 'F00' );
+		$r5 = $this->fakeRevision( $e5, 5 );
+
+		$e5u4 = $e5->copy();
+		$e5u4->removeLabel( 'fr' );
+
+		$e5u4u3 = $e5u4->copy();
+		$e5u4u3->removeLabel( 'de' );
+
+		return array(
+			array( $r5, $r5, $r4, $e4, "undo last edit" ),
+			array( $r5, $r4, $r3, $e5u4, "undo previous edit" ),
+
+			array( $r5, $r5, $r3, $e3, "undo last two edits" ),
+			array( $r5, $r4, $r2, $e5u4u3, "undo past two edits" ),
+
+			array( $r5, $r2, $r1, null, "undo conflicting edit" ),
+			array( $r5, $r3, $r1, null, "undo two edits with conflict" ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetUndoContent
+	 *
+	 * @param Revision      $latestRevision
+	 * @param Revision      $newerRevision
+	 * @param Revision      $olderRevision
+	 * @param EntityContent $expected
+	 * @param string        $message
+	 */
+	public function testGetUndoContent(
+		Revision $latestRevision,
+		Revision $newerRevision,
+		Revision $olderRevision,
+		Entity $expected = null,
+		$message ) {
+
+		$handler = $this->getHandler();
+		$undo = $handler->getUndoContent( $latestRevision, $newerRevision, $olderRevision );
+
+		if ( $expected ) {
+			$this->assertInstanceOf( 'Wikibase\EntityContent', $undo, $message );
+			$this->assertEquals( $expected->toArray(), $undo->getEntity()->toArray(), $message );
+		} else {
+			$this->assertFalse( $undo, $message );
+		}
+	}
+
+	public function testGetEntityType() {
+		$handler = $this->getHandler();
+		$content = $handler->makeEmptyContent();
+		$entity = $content->getEntity();
+
+		$this->assertEquals( $entity->getType(), $handler->getEntityType() );
+	}
+
+	public function testMakeEntityContent() {
+		$entity = $this->newEntity();
+
+		$handler = $this->getHandler();
+		$content = $handler->makeEntityContent( $entity );
+
+		$this->assertEquals( $this->getModelId(), $content->getModel() );
+		$this->assertSame( $entity, $content->getEntity() );
+	}
+
+	public function testMakeEmptyContent() {
+		$handler = $this->getHandler();
+		$content = $handler->makeEmptyContent();
+
+		$this->assertEquals( $this->getModelId(), $content->getModel() );
 	}
 
 }
