@@ -855,7 +855,7 @@ class DispatchChanges extends \Maintenance {
 		if ( $change instanceof ItemChange && !$change->isEmpty() ) {
 			$siteLinkDiff = $change->getSiteLinkDiff();
 
-			if ( is_array( $siteLinkDiff ) && isset( $siteLinkDiff[ $siteID ] ) ) {
+			if ( isset( $siteLinkDiff[ $siteID ] ) ) {
 				wfProfileOut( __METHOD__ );
 				return true;
 			}
