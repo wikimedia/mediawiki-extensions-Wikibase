@@ -157,5 +157,14 @@ class ItemHandler extends EntityHandler {
 	public function getSpecialPageForCreation() {
 		return 'NewItem';
 	}
+
+	/**
+	 * Returns Item::ENTITY_TYPE
+	 *
+	 * @return string
+	 */
+	public function getEntityType() {
+		return Item::ENTITY_TYPE;
+	}
 }
 

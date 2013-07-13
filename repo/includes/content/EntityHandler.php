@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use MWException, WikiPage, Title, Content;
+use Revision;
 
 /**
  * Base handler class for Wikibase\Entity content classes.
@@ -61,6 +62,20 @@ abstract class EntityHandler extends \ContentHandler {
 	public function makeEmptyContent() {
 		$contentClass = $this->getContentClass();
 		return $contentClass::newEmpty();
+	}
+
+	/**
+	 * Creates a Content object for the given Entity object.
+	 *
+	 * @since 0.4
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return EntityContent
+	 */
+	public function makeEntityContent( Entity $entity ) {
+		$contentClass = $this->getContentClass();
+		return new $contentClass( $entity );
 	}
 
 	/**
@@ -240,4 +255,55 @@ abstract class EntityHandler extends \ContentHandler {
 		return new $contentClass( $entity );
 	}
 
+	/**
+	 * @see ContentHandler::getUndoContent
+	 *
+	 * @since 0.4
+	 *
+	 * @param $latestRevision Revision The current text
+	 * @param $newerRevision Revision The revision to undo
+	 * @param $olderRevision Revision Must be an earlier revision than $undo
+	 *
+	 * @return Content|bool Content on success, false on failure
+	 */
+	public function getUndoContent( Revision $latestRevision, Revision $newerRevision, Revision $olderRevision ) {
+		/**
+		 * @var EntityContent $latestContent
+		 * @var EntityContent $olderContent
+		 * @var EntityContent $newerContent
+		 */
+		$olderContent = $olderRevision->getContent();
+		$newerContent = $newerRevision->getContent();
+		$latestContent = $latestRevision->getContent();
+
+		if ( $newerRevision->getId() === $latestRevision->getId() ) {
+			// no patching needed, just roll back
+			return $olderContent;
+		}
+
+		// diff from new to base
+		$patch = $newerContent->getEntity()->getDiff( $olderContent->getEntity() );
+
+		// apply the patch( new -> old ) to the current revision.
+		$patchedCurrent = $latestContent->getEntity()->copy();
+		$patchedCurrent->patch( $patch );
+
+		// detect conflicts against current revision
+		$cleanPatch = $latestContent->getEntity()->getDiff( $patchedCurrent );
+		$conflicts = $patch->count() - $cleanPatch->count();
+
+		if ( $conflicts > 0 ) {
+			return false;
+		} else {
+			$undo = $this->makeEntityContent( $patchedCurrent );
+			return $undo;
+		}
+	}
+
+	/**
+	 * Returns the entity type ID for the kind of entity managed by this EntityContent implementation.
+	 *
+	 * @return string
+	 */
+	public abstract function getEntityType();
 }
