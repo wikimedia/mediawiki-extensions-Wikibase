@@ -67,6 +67,7 @@ $specialPageAliases['de'] = array(
 	'SetSiteLink' => array( 'Websitelink_festlegen' ),
 	'EntitiesWithoutLabel' => array( 'Objekte_ohne_Bezeichnung' ),
 	'ItemsWithoutSitelinks' => array( 'Objekte_ohne_Websitelinks' ),
+	'MyLanguageFallbackChain' => array( 'Meine_Sprachfallbackkette' ),
 );
 
 /** Zazaki (Zazaki) */
@@ -166,6 +167,7 @@ $specialPageAliases['ko'] = array(
 	'SetLabel' => array( '레이블설정' ),
 	'SetDescription' => array( '설명설정' ),
 	'SetAliases' => array( '별명설정' ),
+	'SetSiteLink' => array( '사이트링크설정' ),
 	'EntitiesWithoutLabel' => array( '레이블없는항목' ),
 	'ItemsWithoutSitelinks' => array( '사이트링크없는항목' ),
 );

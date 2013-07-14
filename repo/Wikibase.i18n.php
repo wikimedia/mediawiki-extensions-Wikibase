@@ -9222,7 +9222,7 @@ IP 주소가 $1의 편집 역사에 남게 됩니다.',
 	'wikibase-dispatchstats-stats' => '전송 통계',
 	'wikibase-dispatchstats-change-id' => 'ID',
 	'wikibase-dispatchstats-change-timestamp' => '시간 기록',
-	'wikibase-dispatchstats-oldest-change' => '가장 오래됨',
+	'wikibase-dispatchstats-oldest-change' => '오래됨',
 	'wikibase-dispatchstats-newest-change' => '최신',
 	'wikibase-dispatchstats-site-id' => '사이트',
 	'wikibase-dispatchstats-pos' => '위치',
@@ -9646,6 +9646,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser $1 gespäichert.',
 	'special-itemswithoutsitelinks' => 'Elementer ouni Linke mat Siten',
 	'wikibase-entitydata-bad-revision' => "D'Versioun $2 vun der Eenheet $1 kann net gewise ginn.",
 	'wikibase-entitydata-unsupported-format' => 'Den Dateformat $1 gëtt net vun dësem Interface ënnerstëtzt.',
+	'special-mylanguagefallbackchain' => 'Meng Lëscht vun Ersatz-Sproochen',
 	'wikibase-mylanguagefallbackchain-babel' => 'Dir kënnt et änneren andeems Dir <nowiki>{{#babel: }}</nowiki> op Är [[Special:MyPage|Benotzersäit]] setzt.',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, ëmgewandelt vu(n) $3 - $4',
 	'wikibase-self-conflict-patched' => 'Är Ännerung gouf an déi lescht Versioun integréiert an e puer vun Ären Ännerungen déi Dir an der Tëschenzäit gemaach hat goufen iwwerschriwwen.',
@@ -11829,9 +11830,10 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}} gdy zm
 	'wikibase-entitieswithoutlabel-invalid-type' => '„$1” jest nie prawidłowym typem encji.',
 	'special-itemswithoutsitelinks' => 'Elementy bez odnośników',
 	'wikibase-entitydata-not-found' => 'Nie znaleziono żadnej encji o identyfikatorze $1',
+	'wikibase-entitydata-not-acceptable' => 'Nie znaleziono dopasowania formatu. Obsługiwane typy MIME: $1',
 	'wikibase-entitydata-bad-revision' => 'Nie można pokazać wersji $2 encji $1.',
+	'wikibase-entitydata-bad-id' => 'Nieprawidłowy identyfikator: $1.',
 	'wikibase-entitydata-unsupported-format' => 'Ten interfejs nie obsługuje formatu danych $1.',
-	'wikibase-api-patch-incomplete' => 'Wygenerowany patch okazał się niekompletny.',
 	'wikibase-restoreold' => 'przywróć',
 	'wikibase-restore-summary' => 'Przywrócono wersję $1 zrobioną przez [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Bezpośrednia edycja jest wyłączona w przestrzeni nazw $1',
@@ -11874,7 +11876,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}} gdy zm
 	'wikibase-property-summary-wbcreate-new' => 'Utworzono nową właściwość',
 	'wikibase-property-summary-wbeditentity-create' => 'Utworzono nową właściwość',
 	'wikibase-property-summary-wbeditentity-update' => 'Zaktualizowano właściwość',
-	'wikibase-property-summary-wbeditentity-override' => 'Nadpisano właściwość',
+	'wikibase-property-summary-wbeditentity-override' => 'Wyczyszczono właściwość',
 	'wikibase-property-summary-wbsetlabel-set' => 'Zmieniono etykietę [$2]',
 	'wikibase-property-summary-wbsetlabel-remove' => 'Usunięto etykietę [$2]',
 	'wikibase-property-summary-wbsetdescription-set' => 'Zmieniono opis [$2]',
@@ -15208,6 +15210,7 @@ $messages['yi'] = array(
 );
 
 /** Simplified Chinese (中文（简体）‎)
+ * @author Byfserag
  * @author Dimension
  * @author Hydra
  * @author Li3939108
@@ -15401,7 +15404,6 @@ $messages['zh-hans'] = array(
 	'wikibase-entitydata-unsupported-format' => '此界面不支持数据格式$1。',
 	'wikibase-entitydata-title' => '实体数据',
 	'wikibase-entitydata-text' => '此页面提供实体数值链接的数据界面。请使用子页面语法在URl中提供实体ID。',
-	'wikibase-api-patch-incomplete' => '生成的补丁不完整。',
 	'wikibase-self-conflict-patched' => '您的编辑已成为最新版本，覆盖了你自己中间做的一些更改。',
 	'wikibase-conflict-patched' => '您的编辑已成为最新版本。',
 	'wikibase-restoreold' => '恢复',
@@ -15445,7 +15447,7 @@ $messages['zh-hans'] = array(
 	'wikibase-property-summary-wbcreate-new' => '新建属性',
 	'wikibase-property-summary-wbeditentity-create' => '新建属性',
 	'wikibase-property-summary-wbeditentity-update' => '更新属性',
-	'wikibase-property-summary-wbeditentity-override' => '覆盖属性',
+	'wikibase-property-summary-wbeditentity-override' => '清除属性',
 	'wikibase-property-summary-wbsetlabel-set' => '更改[$2]标签',
 	'wikibase-property-summary-wbsetlabel-remove' => '删除[$2]标签',
 	'wikibase-property-summary-wbsetdescription-set' => '更改[$2]描述',
@@ -15467,16 +15469,16 @@ $messages['zh-hans'] = array(
 *阶层部分——IRI串的非明示部分
 *查询——IRI串的非明示部分
 *片——IRI串的非明示部分',
-	'wikibase-listdatatypes-globe-coordinate-head' => '地理坐标', # Fuzzy
+	'wikibase-listdatatypes-globe-coordinate-head' => '地理坐标',
 	'wikibase-listdatatypes-quantity-head' => '数量',
 	'wikibase-listdatatypes-monolingual-text-head' => '单语言文本',
 	'wikibase-listdatatypes-monolingual-text-body' => '不能译为其他语言的一个串的原始数据字段。该类型的串一经定义就可在所有语言中使用。典型的是用于当地语言书写的地名、某种标识符、化学方程式或拉丁科学名称。
 *语言——标定文本部分语言的明确的值
-*文本——特定语言变体字符串的明确的值', # Fuzzy
+*值——特定语言变体字符串的明确的值',
 	'wikibase-listdatatypes-multilingual-text-head' => '多语言文本',
 	'wikibase-listdatatypes-multilingual-text-body' => '一个必须翻译成其他语言的串的原始数据字段。典型的是用于具有不同于当地书写形式但却全球知名的实体名称。它们可能在语言和文字系统上都不同。
 *语言——标定文本部分语言的明确的值
-*文本——特定语言变体字符串的明确的值', # Fuzzy
+*值——特定语言变体字符串的明确的值',
 	'wikibase-listdatatypes-string-head' => '串',
 	'wikibase-listdatatypes-string-body' => '字符串的原始数据字段。典型的用途是语言无关的书写形式的标识符。这样的串在某些情况下可以直接移入其他文字系统。
 *语言——标定文本部分语言的明确的值

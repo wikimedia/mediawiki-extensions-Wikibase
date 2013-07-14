@@ -52,6 +52,12 @@ $magicWords['fi'] = array(
 	'property' => array( 0, 'ominaisuus' ),
 );
 
+/** French (français) */
+$magicWords['fr'] = array(
+	'noexternallanglinks' => array( 0, 'sanslienexterne' ),
+	'property' => array( 0, 'propriété' ),
+);
+
 /** Korean (한국어) */
 $magicWords['ko'] = array(
 	'noexternallanglinks' => array( 0, '바깥언어링크없음', '바깥언어고리없음' ),

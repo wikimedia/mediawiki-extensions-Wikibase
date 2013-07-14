@@ -2293,6 +2293,7 @@ $messages['lb'] = array(
 	'wikibase-comment-sitelink-change' => 'Sproochlink vun $1 op $2 geännert',
 	'wikibase-comment-sitelink-remove' => 'Sproochlink ewechgeholl: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|Ännerung|Ännerungen}}',
+	'wikibase-dataitem' => 'Datenelement',
 	'wikibase-editlinks' => 'Linken änneren',
 	'wikibase-editlinkstitle' => 'Interwiki-Linken änneren',
 	'wikibase-linkitem-addlinks' => 'Link derbäisetzen',
@@ -2847,6 +2848,7 @@ $messages['nn'] = array(
 
 /** Polish (polski)
  * @author BeginaFelicysym
+ * @author Chrumps
  * @author Lazowik
  * @author Maćko
  * @author Odie2
@@ -2855,6 +2857,7 @@ $messages['nn'] = array(
 $messages['pl'] = array(
 	'wikibase-client-desc' => 'Klient rozszerzenia Wikibase',
 	'specialpages-group-wikibaseclient' => 'Klient Wikidanych',
+	'tooltip-t-wikibase' => 'Link do powiązanego elementu w repozytorium danych',
 	'wikibase-after-page-move' => 'Możesz także [$1 zaktualizować] powiązany element Wikidanych w celu zachowania linków do innych wersji językowych na przeniesionej stronie.',
 	'wikibase-after-page-move-queued' => 'Powiązany z tą stroną [$1 element Wikidanych] zostanie wkrótce automatycznie zaktualizowany.',
 	'wikibase-comment-remove' => 'Powiązany element Wikidanych skasowany. Linki do innych wersji językowych usunięte.',
@@ -2866,6 +2869,7 @@ $messages['pl'] = array(
 	'wikibase-comment-sitelink-change' => 'Zmieniono link interwiki z $1 na $2',
 	'wikibase-comment-sitelink-remove' => 'Usunięto link interwiki: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|zmiana|zmiany|zmian}}',
+	'wikibase-dataitem' => 'Element Wikidanych',
 	'wikibase-editlinks' => 'Edytuj linki',
 	'wikibase-editlinkstitle' => 'Edytuj linki wersji językowych',
 	'wikibase-linkitem-addlinks' => 'Dodaj linki',
@@ -2885,6 +2889,7 @@ $messages['pl'] = array(
 	'wikibase-linkitem-success-create' => 'Strony zostały pomyślnie powiązane. Utworzony element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].',
 	'wikibase-linkitem-success-link' => 'Strony zostały pomyślnie powiązane. Element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].',
 	'wikibase-property-notfound' => 'Właściwość $1 nie została znaleziona.',
+	'wikibase-property-notsupportedyet' => 'Wikibase nie obsługuje jeszcze typu właściwość dla właściwości $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidane',
 	'wikibase-rc-show-wikidata-pref' => 'Pokazuj edycje w Wikidanych w ostatnich zmianach',
 	'wikibase-watchlist-show-changes-pref' => 'Pokazuj edycje w Wikidanych w obserwowanych',
@@ -2899,6 +2904,7 @@ $messages['pl'] = array(
 	'wikibase-unconnectedpages-format-row' => '(zawiera $1 {{PLURAL:$1|odnośnik interwiki|odnośniki interwiki|odnośników interwiki}})',
 	'wikibase-pageinfo-entity-id' => 'Identyfikator elementu Wikidanych',
 	'wikibase-pageinfo-entity-id-none' => 'brak',
+	'wikibase-property-render-error' => 'Nie można zrenderować właściwości $1: $2',
 );
 
 /** Piedmontese (Piemontèis)
@@ -2966,6 +2972,7 @@ $messages['pt-br'] = array(
 	'wikibase-comment-sitelink-change' => 'Link de idioma alterado de $1 para $2',
 	'wikibase-comment-sitelink-remove' => 'Link de idioma removido: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|mudança|mudanças}}',
+	'wikibase-dataitem' => 'Item no Wikidata',
 	'wikibase-editlinks' => 'Editar links',
 	'wikibase-editlinkstitle' => 'Editar links para outros idiomas',
 	'wikibase-linkitem-addlinks' => 'Adicionar links',
@@ -3362,6 +3369,7 @@ $messages['tl'] = array(
 
 /** Turkish (Türkçe)
  * @author Emperyan
+ * @author Rapsar
  * @author Sadrettin
  */
 $messages['tr'] = array(
@@ -3369,6 +3377,7 @@ $messages['tr'] = array(
 	'wikibase-editlinkstitle' => 'Diğer dillerdeki bağlantıları düzenle',
 	'wikibase-rc-hide-wikidata' => 'Vikiveri değişikliklerini $1',
 	'wikibase-rc-show-wikidata-pref' => 'Vikiveri düzenlemelerini son değişikliklerde göster',
+	'wikibase-watchlist-show-changes-pref' => 'İzleme listemde Vikiveri değişikliklerini göster',
 	'special-unconnectedpages' => 'Öğelerine bağlanmamış sayfalar',
 	'wikibase-unconnectedpages-legend' => 'Bağlanmamış sayfa seçenekleri',
 	'wikibase-unconnectedpages-submit' => 'Git',
