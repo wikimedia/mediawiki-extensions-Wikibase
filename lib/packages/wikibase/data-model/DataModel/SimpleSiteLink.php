@@ -65,6 +65,8 @@ class SimpleSiteLink {
 	}
 
 	/**
+	 * Badges are not order dependent.
+	 *
 	 * @since 0.5
 	 *
 	 * Returns an array of ItemIds
@@ -74,5 +76,71 @@ class SimpleSiteLink {
 	public function getBadges() {
 		return $this->badges;
 	}
+
+	/**
+	 * Returns an array representing the claim.
+	 * Roundtrips with Claim::newFromArray
+	 *
+	 * @since 0.5
+	 *
+	 * @return array
+	 */
+	 public function toArray() {
+	 	$array = array(
+	 		'name' => $this->pageName,
+			'badges' => array()
+		);
+
+		foreach ($this->badges as $badge) {
+			$array['badges'][] = $badge->getSerialization();
+		}
+
+		return $array;
+	 }
+
+	 /**
+	 * Constructs a new SimpleSiteLink from an array
+	 * in the same format as SimpleSiteLink::toArray returns.
+	 *
+	 * @since 0.5
+	 *
+	 * @param $siteId
+	 * @param $data
+	 *
+	 * @return SimpleSiteLink
+	 */
+	 public static function newFromArray( $siteId, $data ) {
+	 	if ( is_string( $data ) ) {
+	 		// legacy serialization format
+	 		$siteLink = new static( $siteId, $data );
+	 	} else {
+			if ( !is_array( $data ) ) {
+				throw new InvalidArgumentException( '$data needs to be an array or string (legacy)' );
+			}
+
+			if ( !array_key_exists( 'name' , $data ) ) {
+				throw new InvalidArgumentException( '$data needs to have a "name" key' );
+			}
+
+			if ( !array_key_exists( 'badges' , $data ) ) {
+				throw new InvalidArgumentException( '$data needs to have a "badges" key' );
+			}
+
+			if ( !is_array( $data['badges'] ) ) {
+				throw new InvalidArgumentException( '$data["badges"] needs to be an array' );
+			}
+
+	 		$pageName = $data['name'];
+	 		$badges = array();
+
+			foreach ($data['badges'] as $badge) {
+				$badges[] = new Entity\ItemId( $badge );
+			}
+
+			$siteLink = new static( $siteId, $pageName, $badges );
+	 	}
+
+		return $siteLink;
+	 }
 
 }

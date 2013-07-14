@@ -19,10 +19,18 @@ use Wikibase\DataModel\SimpleSiteLink;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Michał Łazowik
  */
 class Item extends Entity {
 
 	const ENTITY_TYPE = 'item';
+
+	/**
+	 * @since 0.5
+	 *
+	 * @var SimpleSiteLink[]|null
+	 */
+	protected $siteLinks = null;
 
 	/**
 	 * Adds a site link to the list of site links.
@@ -34,7 +42,8 @@ class Item extends Entity {
 	 * @param SimpleSiteLink $siteLink
 	 */
 	public function addSimpleSiteLink( SimpleSiteLink $siteLink ) {
-		$this->data['links'][$siteLink->getSiteId()] = $siteLink->getPageName();
+		$this->unstubSiteLinks();
+		$this->siteLinks[ $siteLink->getSiteId() ] = $siteLink;
 	}
 
 	/**
@@ -50,15 +59,17 @@ class Item extends Entity {
 	 * @return bool Success indicator
 	 */
 	public function removeSiteLink( $siteId, $pageName = false ) {
+		$this->unstubSiteLinks();
+
 		if ( $pageName !== false ) {
-			$success = array_key_exists( $siteId, $this->data['links'] ) && $this->data['links'][$siteId] === $pageName;
+			$success = array_key_exists( $siteId, $this->siteLinks ) && $this->siteLinks[ $siteId ]->getPageName() === $pageName;
 		}
 		else {
-			$success = array_key_exists( $siteId, $this->data['links'] );
+			$success = array_key_exists( $siteId, $this->siteLinks );
 		}
 
 		if ( $success ) {
-			unset( $this->data['links'][$siteId] );
+			unset( $this->siteLinks[ $siteId ] );
 		}
 
 		return $success;
@@ -70,10 +81,12 @@ class Item extends Entity {
 	 * @return SimpleSiteLink[]
 	 */
 	public function getSimpleSiteLinks() {
+		$this->unstubSiteLinks();
+
 		$links = array();
 
-		foreach ( $this->data['links'] as $siteId => $pageName ) {
-			$links[] = new SimpleSiteLink( $siteId, $pageName );
+		foreach ( $this->siteLinks as $link ) {
+			$links[] = $link;
 		}
 
 		return $links;
@@ -88,11 +101,13 @@ class Item extends Entity {
 	 * @throws OutOfBoundsException
 	 */
 	public function getSimpleSiteLink( $siteId ) {
-		if ( !array_key_exists( $siteId, $this->data['links'] ) ) {
-			throw new OutOfBoundsException( "There is no site link with site id '$siteId'" );
+		$this->unstubSiteLinks();
+
+		if ( !array_key_exists( $siteId, $this->siteLinks ) ) {
+			throw new OutOfBoundsException( "There is no site link with site id $siteId" );
 		}
 
-		return new SimpleSiteLink( $siteId, $this->data['links'][$siteId] );
+		return $this->siteLinks[ $siteId ];
 	}
 
 	/**
@@ -103,8 +118,63 @@ class Item extends Entity {
 	 * @return bool
 	 */
 	public function hasLinkToSite( $siteId ) {
-		return array_key_exists( $siteId, $this->data['links'] );
+		$this->unstubSiteLinks();
+		return array_key_exists( $siteId, $this->siteLinks );
 	}
+
+	/**
+	 * Unstubs sitelinks from the unserialized data.
+	 *
+	 * @since 0.5
+	 */
+	protected function unstubSiteLinks() {
+		if ( $this->siteLinks === null ) {
+			$this->siteLinks = array();
+
+			foreach ( $this->data['links'] as $siteId => $linkSerialization ) {
+				$this->siteLinks[$siteId] = SimpleSiteLink::newFromArray( $siteId, $linkSerialization );
+			}
+		}
+	}
+
+	/**
+	 * Returns the SimpleSiteLinks as stubs.
+	 *
+	 * @since 0.5
+	 *
+	 * @return array
+	 */
+	protected function getStubbedSiteLinks() {
+		if ( is_string( reset( $this->data['links'] ) ) ) {
+			// legacy serialization
+			$this->unstubSiteLinks();
+		}
+
+		if ( $this->siteLinks !== null ) {
+			$siteLinks = array();
+
+			foreach ( $this->siteLinks as $siteId => $siteLink ) {
+				$siteLinks[$siteId] = $siteLink->toArray();
+			}
+		} else {
+			$siteLinks = $this->data['links'];
+		}
+
+		return $siteLinks;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return bool
+	 */
+	 public function hasSiteLinks() {
+		if ( $this->siteLinks === null ) {
+			return $this->data['links'] !== array();
+		} else {
+			return !empty( $this->siteLinks );
+		}
+	 }
 
 	/**
 	 * @see Entity::isEmpty
@@ -115,7 +185,17 @@ class Item extends Entity {
 	 */
 	public function isEmpty() {
 		return parent::isEmpty()
-			&& $this->data['links'] === array();
+			&& !$this->hasSiteLinks();
+	}
+
+	/**
+	 * @see Entity::stub
+	 *
+	 * @since 0.5
+	 */
+	public function stub() {
+		parent::stub();
+		$this->data['links'] = $this->getStubbedSiteLinks();
 	}
 
 	/**
@@ -133,6 +213,8 @@ class Item extends Entity {
 				$this->data[$field] = array();
 			}
 		}
+
+		$this->siteLinks = null;
 	}
 
 	/**
@@ -198,11 +280,7 @@ class Item extends Entity {
 
 		$array = parent::entityToDiffArray( $entity );
 
-		$array['links'] = array();
-
-		foreach ( $entity->getSimpleSiteLinks() as $siteLink ) {
-			$array['links'][$siteLink->getSiteId()] = $siteLink->getPageName();
-		}
+		$array['links'] = $entity->getStubbedSiteLinks();
 
 		return $array;
 	}
@@ -220,9 +298,15 @@ class Item extends Entity {
 			$siteLinksDiff = $patch->getSiteLinkDiff();
 
 			if ( !$siteLinksDiff->isEmpty() ) {
-				$links = $this->data['links'];
+				$links = $this->getStubbedSiteLinks();
 				$links = $patcher->patch( $links, $siteLinksDiff );
-				$this->data['links'] = $links;
+
+				$this->siteLinks = array();
+				foreach ( $links as $siteId => $linkSerialization ) {
+					if ( array_key_exists( 'name', $linkSerialization ) ) {
+						$this->siteLinks[$siteId] = SimpleSiteLink::newFromArray( $siteId, $linkSerialization );
+					}
+				}
 			}
 		}
 	}

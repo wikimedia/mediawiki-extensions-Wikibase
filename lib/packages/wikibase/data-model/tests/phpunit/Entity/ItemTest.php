@@ -44,6 +44,7 @@ use Wikibase\Statement;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Michał Łazowik
  */
 class ItemTest extends EntityTest {
 
@@ -219,7 +220,72 @@ class ItemTest extends EntityTest {
 
 		$expected = new \Wikibase\EntityDiff( array(
 			'links' => new Diff( array(
-				'enwiki' => new DiffOpAdd( 'Berlin' ),
+				'enwiki' => new Diff( array(
+					'page'   => new DiffOpAdd( 'Berlin' )
+				), true),
+			), true ),
+		) );
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+
+		// Addition of badges
+		$entity0 = $this->getNewEmpty();
+		$entity0->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Berlin',
+				array(
+					new ItemId( 'Q42' )
+				)
+			)
+		);
+		$entity1 = $this->getNewEmpty();
+		$entity1->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Berlin',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
+
+		$expected = new \Wikibase\EntityDiff( array(
+			'links' => new Diff( array(
+				'enwiki' => new Diff( array(
+					'badges' => new Diff( array(
+						new DiffOpAdd( 'Q3' )
+					), false ),
+				), true ),
+			), true ),
+		) );
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+
+		// Addition of a sitelink with badges
+		$entity0 = $this->getNewEmpty();
+		$entity1 = $this->getNewEmpty();
+		$entity1->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Berlin',
+				array(
+					new ItemId( 'Q42' )
+				)
+			)
+		);
+
+		$expected = new \Wikibase\EntityDiff( array(
+			'links' => new Diff( array(
+				'enwiki' => new Diff( array(
+					'page'   => new DiffOpAdd( 'Berlin' ),
+					'badges' => new Diff( array(
+						new DiffOpAdd( 'Q42' )
+					), false ),
+				), true ),
 			), true ),
 		) );
 
@@ -233,7 +299,74 @@ class ItemTest extends EntityTest {
 
 		$expected = new \Wikibase\EntityDiff( array(
 			'links' => new Diff( array(
-				'enwiki' => new DiffOpRemove( 'Berlin' ),
+				'enwiki' => new Diff( array(
+					'page'   => new DiffOpRemove( 'Berlin' ),
+				), true ),
+			), true ),
+		) );
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+
+		// Removal of badges
+		$entity0 = $this->getNewEmpty();
+		$entity0->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Berlin',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
+		$entity1 = $this->getNewEmpty();
+		$entity1->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Berlin',
+				array(
+					new ItemId( 'Q42' )
+				)
+			)
+		);
+
+		$expected = new \Wikibase\EntityDiff( array(
+			'links' => new Diff( array(
+				'enwiki' => new Diff( array(
+					'badges' => new Diff( array(
+						new DiffOpRemove( 'Q3' )
+					), false ),
+				), true ),
+			), true ),
+		) );
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+
+		// Removal of sitelink with badges
+		$entity0 = $this->getNewEmpty();
+		$entity0->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Berlin',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
+		$entity1 = $this->getNewEmpty();
+
+		$expected = new \Wikibase\EntityDiff( array(
+			'links' => new Diff( array(
+				'enwiki' => new Diff( array(
+					'name'   => new DiffOpRemove( 'Berlin' ),
+					'badges' => new Diff( array(
+						new DiffOpRemove( 'Q42' ),
+						new DiffOpRemove( 'Q3' )
+					), false ),
+				), true ),
 			), true ),
 		) );
 
@@ -242,13 +375,110 @@ class ItemTest extends EntityTest {
 
 		// Modification of a sitelink
 		$entity0 = $this->getNewEmpty();
-		$entity0->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin' ) );
+		$entity0->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Berlin',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
 		$entity1 = $this->getNewEmpty();
-		$entity1->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foobar' ) );
+		$entity1->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Foobar',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
 
 		$expected = new \Wikibase\EntityDiff( array(
 			'links' => new Diff( array(
-				'enwiki' => new DiffOpChange( 'Berlin', 'Foobar' ),
+				'enwiki' => new Diff( array(
+					'name'   => new DiffOpChange( 'Berlin', 'Foobar' ),
+				), true ),
+			), true ),
+		) );
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+
+		// Modification of badges
+		$entity0 = $this->getNewEmpty();
+		$entity0->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Berlin',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
+		$entity1 = $this->getNewEmpty();
+		$entity1->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Berlin',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q4' )
+				)
+			)
+		);
+
+		$expected = new \Wikibase\EntityDiff( array(
+			'links' => new Diff( array(
+				'enwiki' => new Diff( array(
+					'badges' => new Diff( array(
+						new DiffOpRemove( 'Q3' ),
+						new DiffOpAdd( 'Q4' )
+					), false ),
+				), true ),
+			), true ),
+		) );
+
+		$argLists[] = array( $entity0, $entity1, $expected );
+
+
+		// Modification of a sitelink and badges
+		$entity0 = $this->getNewEmpty();
+		$entity0->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Berlin',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
+		$entity1 = $this->getNewEmpty();
+		$entity1->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Foobar',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q4' )
+				)
+			)
+		);
+
+		$expected = new \Wikibase\EntityDiff( array(
+			'links' => new Diff( array(
+				'enwiki' => new Diff( array(
+					'name'   => new DiffOpChange( 'Berlin', 'Foobar' ),
+					'badges' => new Diff( array(
+						new DiffOpRemove( 'Q3' ),
+						new DiffOpAdd( 'Q4' )
+					), false ),
+				), true ),
 			), true ),
 		) );
 
@@ -263,10 +493,25 @@ class ItemTest extends EntityTest {
 		// Addition of a sitelink
 		$source = $this->getNewEmpty();
 		$patch = new ItemDiff( array(
-			'links' => new Diff( array( 'enwiki' => new DiffOpAdd( 'Berlin' ) ), true )
+			'links' => new Diff( array(
+				'enwiki' => new Diff( array(
+					'name'   => new DiffOpAdd( 'Berlin' ),
+					'badges' => new Diff( array(
+						new DiffOpAdd( 'Q42' ),
+					), false ),
+				), true ),
+			), true ),
 		) );
 		$expected = clone $source;
-		$expected->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Berlin' ) );
+		$expected->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Berlin',
+				array(
+					new ItemId( 'Q42' )
+				)
+			)
+		);
 
 		$argLists[] = array( $source, $patch, $expected );
 
@@ -282,10 +527,26 @@ class ItemTest extends EntityTest {
 		// Modification of a sitelink
 		$source = clone $expected;
 		$patch = new ItemDiff( array(
-			'links' => new Diff( array( 'enwiki' => new DiffOpChange( 'Berlin', 'Foobar' ) ), true )
+			'links' => new Diff( array(
+				'enwiki' => new Diff( array(
+					'name'   => new DiffOpChange( 'Berlin', 'Foobar' ),
+					'badges' => new Diff( array(
+						new DiffOpRemove( 'Q42' ),
+						new DiffOpAdd( 'Q149' )
+					), false ),
+				), true ),
+			), true )
 		) );
 		$expected = $this->getNewEmpty();
-		$expected->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Foobar' ) );
+		$expected->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Foobar',
+				array(
+					new ItemId( 'Q149' )
+				)
+			)
+		);
 
 		$argLists[] = array( $source, $patch, $expected );
 
@@ -293,7 +554,14 @@ class ItemTest extends EntityTest {
 		// Removal of a sitelink
 		$source = clone $expected;
 		$patch = new ItemDiff( array(
-			'links' => new Diff( array( 'enwiki' => new DiffOpRemove( 'Foobar' ) ), true )
+			'links' => new Diff( array(
+				'enwiki' => new Diff( array(
+					'name'   => new DiffOpRemove( 'Foobar' ),
+					'badges' => new Diff( array(
+						new DiffOpRemove( 'Q149' ),
+					), false ),
+				), true ),
+			), true )
 		) );
 		$expected = $this->getNewEmpty();
 
@@ -326,10 +594,41 @@ class ItemTest extends EntityTest {
 	public function simpleSiteLinkProvider() {
 		$argLists = array();
 
-		$argLists[] = array( new SimpleSiteLink( 'enwiki', 'Wikidata' ) );
-		$argLists[] = array( new SimpleSiteLink( 'nlwiki', 'Wikidata' ) );
-		$argLists[] = array( new SimpleSiteLink( 'nlwiki', 'Nyan!' ) );
-		$argLists[] = array( new SimpleSiteLink( 'foo bar', 'baz bah' ) );
+		$argLists[] = array(
+			new SimpleSiteLink(
+				'enwiki',
+				'Wikidata',
+				array(
+					new ItemId( 'Q42' )
+				)
+			)
+		);
+		$argLists[] = array(
+			new SimpleSiteLink(
+				'nlwiki',
+				'Wikidata'
+			)
+		);
+		$argLists[] = array(
+			new SimpleSiteLink(
+				'enwiki',
+				'Nyan!',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q149' )
+				)
+			)
+		);
+		$argLists[] = array(
+			new SimpleSiteLink(
+				'foo bar',
+				'baz bah',
+				array(
+					new ItemId( 'Q3' ),
+					new ItemId( 'Q7' )
+				)
+			)
+		);
 
 		return $argLists;
 	}
@@ -354,17 +653,17 @@ class ItemTest extends EntityTest {
 
 		$argLists[] = array();
 
-		$argLists[] = array( new SimpleSiteLink( 'enwiki', 'Wikidata' ) );
+		$argLists[] = array( new SimpleSiteLink( 'enwiki', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
 
 		$argLists[] = array(
 			new SimpleSiteLink( 'enwiki', 'Wikidata' ),
-			new SimpleSiteLink( 'nlwiki', 'Wikidata' )
+			new SimpleSiteLink( 'nlwiki', 'Wikidata', array( new ItemId( 'Q3' ) ) )
 		);
 
 		$argLists[] = array(
 			new SimpleSiteLink( 'enwiki', 'Wikidata' ),
 			new SimpleSiteLink( 'nlwiki', 'Wikidata' ),
-			new SimpleSiteLink( 'foo bar', 'baz bah' )
+			new SimpleSiteLink( 'foo bar', 'baz bah', array( new ItemId( 'Q2' ) ) )
 		);
 
 		return $argLists;
@@ -372,7 +671,7 @@ class ItemTest extends EntityTest {
 
 	public function testHasLinkToSiteForFalse() {
 		$item = Item::newEmpty();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'ENWIKI', 'Wikidata' ) );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'ENWIKI', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
 
 		$this->assertFalse( $item->hasLinkToSite( 'enwiki' ) );
 		$this->assertFalse( $item->hasLinkToSite( 'dewiki' ) );
@@ -381,7 +680,7 @@ class ItemTest extends EntityTest {
 
 	public function testHasLinkToSiteForTrue() {
 		$item = Item::newEmpty();
-		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Wikidata' ) );
+		$item->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
 		$item->addSimpleSiteLink( new SimpleSiteLink( 'dewiki', 'Wikidata' ) );
 		$item->addSimpleSiteLink( new SimpleSiteLink( 'foo bar', 'Wikidata' ) );
 

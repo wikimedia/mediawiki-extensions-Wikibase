@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Entity;
 use Wikibase\EntityDiff;
@@ -30,6 +31,7 @@ use Wikibase\ItemDiff;
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Michał Łazowik
  */
 class ItemDiffTest extends EntityDiffOldTest {
 	//TODO: make the new EntityDiffTest also run for Items.
@@ -45,17 +47,128 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// add link ------------------------------
 		$a = Item::newEmpty();
-		$a->addSimpleSiteLink( new SimpleSiteLink( 'enwiki', 'Test' ) );
+		$a->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Test',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
 
 		$b = $a->copy();
-		$b->addSimpleSiteLink( new SimpleSiteLink(  'dewiki', 'Test' ) );
+		$b->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'dewiki',
+				'Test',
+				array(
+					new ItemId( 'Q42' )
+				)
+			)
+		);
+
+
+		$tests[] = array( $a, $b );
+
+		// add badges
+		$a = Item::newEmpty();
+		$a->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Test',
+				array(
+					new ItemId( 'Q42' ),
+				)
+			)
+		);
+
+		$b = $a->copy();
+		$b->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Test',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
+
+		$tests[] = array( $a, $b );
+
+		// remove badges
+		$a = Item::newEmpty();
+		$a->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Test',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
+
+		$b = $a->copy();
+		$b->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Test',
+				array(
+					new ItemId( 'Q42' )
+				)
+			)
+		);
+
+		// modify badges
+		$a = Item::newEmpty();
+		$a->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Test',
+				array(
+					new ItemId( 'Q41' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
+
+		$b = $a->copy();
+		$b->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Test',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
 
 		$tests[] = array( $a, $b );
 
 		// remove link
 		$a = Item::newEmpty();
-		$a->addSimpleSiteLink( new SimpleSiteLink(  'enwiki', 'Test' ), 'set' );
-		$a->addSimpleSiteLink( new SimpleSiteLink(  'dewiki', 'Test' ), 'set' );
+		$a->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Test',
+				array(
+					new ItemId( 'Q42' )
+				)
+			)
+		);
+		$a->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'dewiki',
+				'Test',
+				array(
+					new ItemId( 'Q3' )
+				)
+			)
+		);
 
 		$b = $a->copy();
 		$b->removeSiteLink( 'enwiki' );
@@ -64,10 +177,28 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// change link
 		$a = Item::newEmpty();
-		$a->addSimpleSiteLink( new SimpleSiteLink(  'enwiki', 'Test' ), 'set' );
+		$a->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Test',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
 
 		$b = $a->copy();
-		$b->addSimpleSiteLink( new SimpleSiteLink(  'enwiki', 'Test!!!' ), 'set' );
+		$b->addSimpleSiteLink(
+			new SimpleSiteLink(
+				'enwiki',
+				'Test!!!',
+				array(
+					new ItemId( 'Q42' ),
+					new ItemId( 'Q3' )
+				)
+			)
+		);
 
 		$tests[] = array( $a, $b );
 
@@ -90,7 +221,18 @@ class ItemDiffTest extends EntityDiffOldTest {
 		$this->assertEquals( $a->getLabels(), $b->getLabels() );
 		$this->assertEquals( $a->getDescriptions(), $b->getDescriptions() );
 		$this->assertEquals( $a->getAllAliases(), $b->getAllAliases() );
-		$this->assertEquals( $a->getSimpleSiteLinks(), $b->getSimpleSiteLinks() );
+
+		$siteLinks = $a->getSimpleSiteLinks() + $b->getSimpleSiteLinks();
+		foreach ($siteLinks as $siteLink) {
+			$aLink = $a->getSimpleSiteLink( $siteLink->getSiteId() );
+			$bLink = $a->getSimpleSiteLink( $siteLink->getSiteId() );
+
+			$this->assertEquals( $aLink->getPageName(), $bLink->getPageName() );
+
+			$aBadges = $aLink->getBadges();
+			$bBadges = $bLink->getBadges();
+			$this->assertEquals( sort( $aBadges ), sort( $bBadges ) );
+		}
 	}
 
 	public function isEmptyProvider() {

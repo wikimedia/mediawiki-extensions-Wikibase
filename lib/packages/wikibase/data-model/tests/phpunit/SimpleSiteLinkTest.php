@@ -20,6 +20,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Michał Łazowik
  */
 class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
@@ -109,7 +110,7 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 
 		$badges = array(
-			new ItemId( "q149" )
+			new ItemId( 'Q149' )
 		);
 		$expected = array_values( $badges );
 
@@ -118,13 +119,13 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		// removing from the middle of array
 		$badges = array(
-			new ItemId( "q36" ),
-			new ItemId( "q149" ),
-			new ItemId( "q7" )
+			new ItemId( 'Q36' ),
+			new ItemId( 'Q149' ),
+			new ItemId( 'Q7' )
 		);
 
 		$key = array_search(
-			new ItemId( "q149" ),
+			new ItemId( 'Q149' ),
 			$badges
 		);
 		unset( $badges[$key] );
@@ -176,14 +177,129 @@ class SimpleSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			array()
 		) );
 		$argLists[] = array( array(
-			new PropertyId( "p2" ),
-			new ItemId( "q149" )
+			new PropertyId( 'P2' ),
+			new ItemId( 'Q149' )
 		) );
 		$argLists[] = array( array(
-			new PropertyId( "p2" ),
-			new PropertyId( "p3" )
+			new PropertyId( 'P2' ),
+			new PropertyId( 'P3' )
 		) );
 
 		return $argLists;
 	}
+
+	/**
+	 * @dataProvider siteLinkProvider
+	 */
+	public function testArrayConversion( $siteLink, $array ) {
+		$this->assertEquals( $siteLink->toArray(), $array );
+		$this->assertEquals( SimpleSiteLink::newFromArray( 'enwiki', $array ), $siteLink );
+	}
+
+	public function siteLinkProvider() {
+		$argLists = array();
+
+		$siteLink = new SimpleSiteLink(
+			'enwiki',
+			'Nyan Cat',
+			array(
+				new ItemId( "Q149" )
+			)
+		);
+		$array = array(
+			'name' => 'Nyan Cat',
+			'badges' => array(
+				"Q149"
+			)
+		);
+		$argLists[] = array( $siteLink, $array );
+
+
+		$siteLink = new SimpleSiteLink(
+			'enwiki',
+			'Nyan Cat'
+		);
+		$array = array(
+			'name' => 'Nyan Cat',
+			'badges' => array()
+		);
+		$argLists[] = array( $siteLink, $array );
+
+
+		$siteLink = new SimpleSiteLink(
+			'enwiki',
+			'Nyan Cat',
+			array(
+				new ItemId( "Q149" ),
+				new ItemId( "Q3" )
+			)
+		);
+		$array = array(
+			'name' => 'Nyan Cat',
+			'badges' => array(
+				"Q149",
+				"Q3"
+			)
+		);
+		$argLists[] = array( $siteLink, $array );
+
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider legacySiteLinkProvider
+	 */
+	public function testLegacyArrayConversion( $siteLink, $data ) {
+		$this->assertEquals( SimpleSiteLink::newFromArray( 'enwiki', $data ), $siteLink );
+	}
+
+	public function legacySiteLinkProvider() {
+		$argLists = array();
+
+		$siteLink = new SimpleSiteLink(
+			'enwiki',
+			'Nyan Cat'
+		);
+		$name = 'Nyan Cat';
+		$argLists[] = array( $siteLink, $name );
+
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider wrongSerializationProvider
+	 */
+	public function testWrongSerialization( $data ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		SimpleSiteLink::newFromArray( 'enwiki', $data );
+	}
+
+	public function wrongSerializationProvider() {
+		$argLists = array();
+
+		$argLists[] = array( true );
+
+		$argLists[] = array( 42 );
+
+		$argLists[] = array( array(
+			'Nyan Takeover!' => 149,
+			'badges' => array()
+		) );
+
+		$argLists[] = array( array(
+			'name' => "Nyan Cat",
+			'Wikidata' => 42
+		) );
+
+		$argLists[] = array( array(
+			'name' => "Wikidata",
+			'badges' => "not an array"
+		) );
+
+
+		return $argLists;
+	}
+
 }
