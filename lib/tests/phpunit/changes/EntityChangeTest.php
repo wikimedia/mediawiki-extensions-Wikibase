@@ -76,13 +76,54 @@ class EntityChangeTest extends DiffChangeTest {
 		return 'Wikibase\EntityChange';
 	}
 
+	/**
+	 * Returns the name of the class of the entities under test.
+	 *
+	 * @since 0.4
+	 * @return string
+	 */
+	protected function getEntityClass() {
+		return 'Wikibase\Entity';
+	}
+
+
 	public function entityProvider() {
-		return array_map(
+		$entityClass = $this->getEntityClass(); // PHP fail
+
+		$entities = array_filter(
+			TestChanges::getEntities(),
+			function( Entity $entity ) use ( $entityClass ) {
+				return is_a( $entity, $entityClass );
+			}
+		);
+
+		$cases = array_map(
 			function( Entity $entity ) {
 				return array( $entity );
 			},
-			TestChanges::getEntities()
+			$entities
 		);
+
+		return $cases;
+	}
+
+	public function changeProvider() {
+		$rowClass = $this->getRowClass(); // PHP fail
+
+		$changes = array_filter(
+			TestChanges::getChanges(),
+			function( EntityChange $change ) use ( $rowClass ) {
+				return is_a( $change, $rowClass );
+			}
+		);
+
+		$cases = array_map(
+			function( EntityChange $change ) {
+				return array( $change );
+			},
+			$changes );
+
+		return $cases;
 	}
 
 	/**
@@ -101,7 +142,7 @@ class EntityChangeTest extends DiffChangeTest {
 	}
 
 	/**
-	 * @dataProvider instanceProvider
+	 * @dataProvider changeProvider
 	 *
 	 * @param \Wikibase\EntityChange $entityChange
 	 */
@@ -122,7 +163,7 @@ class EntityChangeTest extends DiffChangeTest {
 	}
 
 	/**
-	 * @dataProvider instanceProvider
+	 * @dataProvider changeProvider
 	 * @since 0.3
 	 */
 	public function testMetadata( EntityChange $entityChange ) {
@@ -142,7 +183,7 @@ class EntityChangeTest extends DiffChangeTest {
 	}
 
 	/**
-	 * @dataProvider instanceProvider
+	 * @dataProvider changeProvider
 	 * @since 0.3
 	 */
 	public function testGetEmptyMetadata( EntityChange $entityChange ) {
@@ -154,7 +195,7 @@ class EntityChangeTest extends DiffChangeTest {
 	}
 
 	/**
-	 * @dataProvider instanceProvider
+	 * @dataProvider changeProvider
 	 * @since 0.4
 	 */
 	public function testToString( EntityChange $entityChange ) {
