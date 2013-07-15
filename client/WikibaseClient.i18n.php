@@ -3679,6 +3679,7 @@ $messages['zh-hans'] = array(
 	'wikibase-comment-sitelink-change' => '语言链接从$1更改为$2',
 	'wikibase-comment-sitelink-remove' => '删除语言链接：$1',
 	'wikibase-comment-multi' => '$1个更改',
+	'wikibase-dataitem' => '数据项',
 	'wikibase-editlinks' => '编辑链接',
 	'wikibase-editlinkstitle' => '编辑跨语言链接',
 	'wikibase-linkitem-addlinks' => '添加链接',
@@ -3719,6 +3720,7 @@ $messages['zh-hans'] = array(
  * @author Bencmq
  * @author Justincheng12345
  * @author Li3939108
+ * @author Liangent
  * @author Simon Shek
  * @author Stevenliuyi
  * @author Tntchn
@@ -3737,6 +3739,7 @@ $messages['zh-hant'] = array(
 	'wikibase-comment-sitelink-change' => '語言連結從$1更改為$2',
 	'wikibase-comment-sitelink-remove' => '刪除語言連結：$1',
 	'wikibase-comment-multi' => '$1次{{PLURAL:$1|更改|更改}}',
+	'wikibase-dataitem' => '數據項',
 	'wikibase-editlinks' => '編輯連結',
 	'wikibase-editlinkstitle' => '編輯跨語言連結',
 	'wikibase-linkitem-addlinks' => '添加連結',

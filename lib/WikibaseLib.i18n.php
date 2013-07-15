@@ -736,6 +736,7 @@ $messages['da'] = array(
 
 /** German (Deutsch)
  * @author G.Hagedorn
+ * @author Inkowik
  * @author Kghbln
  * @author Metalhead64
  * @author Se4598
@@ -772,7 +773,7 @@ $messages['de'] = array(
 	'wikibase-error-ui-session-failure' => 'Deine Sitzung ist abgelaufen. Du musst dich daher erneut anmelden.',
 	'wikibase-error-ui-edit-conflict' => 'Es gab einen Bearbeitungskonflikt. Bitte lade und speichere die Seite erneut.',
 	'wikibase-replicationnote' => 'Bitte bedenke, dass es einige Minuten dauern kann, bis die Änderungen auf allen Wikis sichtbar sind.',
-	'wikibase-sitelinks-wikipedia' => 'Wikipedia-Seiten, die auf dieses Objekt verlinkt sind',
+	'wikibase-sitelinks-wikipedia' => 'Wikipedia-Seiten, die mit diesem Objekt verlinkt sind',
 	'wikibase-sitelinks-sitename-columnheading' => 'Sprache',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
 	'wikibase-sitelinks-link-columnheading' => 'Verlinkter Artikel',
@@ -2106,11 +2107,15 @@ $messages['nl'] = array(
 	'wikibase-error-ui-session-failure' => 'Uw sessie is verlopen. Meld u opnieuw aan.',
 	'wikibase-error-ui-edit-conflict' => 'Er is een bewerkingsconflict opgetreden. Laad de pagina opnieuw en sla uw wijzigingen opnieuw op.',
 	'wikibase-replicationnote' => "Het kan een aantal minuten duren voor alle wijzigingen op alle wiki's zichtbaar zijn",
+	'wikibase-sitelinks-wikipedia' => "Pagina's op Wikipedia die gekoppeld zijn aan dit item",
 	'wikibase-sitelinks-sitename-columnheading' => 'Taal',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
 	'wikibase-sitelinks-link-columnheading' => 'Gekoppelde pagina',
 	'wikibase-tooltip-error-details' => 'Details',
 	'wikibase-validator-bad-type' => '$2 in plaats van $1',
+	'wikibase-validator-malformed-value' => 'Ongeldige invoer: $1',
+	'wikibase-validator-bad-entity-id' => 'Ongeldig ID: $1',
+	'wikibase-validator-bad-entity-type' => 'Onverwacht entiteitstype $1',
 	'wikibase-validator-no-such-entity' => '$1 is niet gevonden',
 	'datatypes-type-wikibase-item' => 'Item',
 	'datatypes-type-commonsMedia' => 'Mediabestand van Commons',
@@ -2523,7 +2528,7 @@ $messages['sr-ec'] = array(
 	'wikibase-error-ui-link-exists' => 'Не можете да повежете са овом страницом, јер друга ставка већ води до ње.',
 	'wikibase-error-ui-session-failure' => 'Ваша сесија је истекла. Молимо пријавите се поново.',
 	'wikibase-error-ui-edit-conflict' => 'Дошло је до сукоба измена. Молимо учитајте и сачувајте поново страну.',
-	'wikibase-replicationnote' => 'Имајте на уму да промене највероватније неће бити одмах видљиве на свим викијима, него ће бити потребно сачекати неколико минута',
+	'wikibase-replicationnote' => 'Имајте на уму да је потребно и до неколико минута да промене постану видљиве на свим викијима.',
 	'wikibase-sitelinks-wikipedia' => 'Списак страна повезаних са овом ставком',
 	'wikibase-sitelinks-sitename-columnheading' => 'Језик',
 	'wikibase-sitelinks-siteid-columnheading' => 'Код',
@@ -2539,6 +2544,13 @@ $messages['sr-ec'] = array(
 	'datatypes-type-wikibase-item' => 'Ставка',
 	'datatypes-type-commonsMedia' => 'Датотека са Оставе',
 	'version-wikibase' => 'Викибаза',
+);
+
+/** Serbian (Latin script) (srpski (latinica)‎)
+ * @author Milicevic01
+ */
+$messages['sr-el'] = array(
+	'wikibase-replicationnote' => 'Imajte na umu da je potrebno i do nekoliko minuta da promene postanu vidljive na svim vikijima.',
 );
 
 /** Swedish (svenska)
@@ -2781,7 +2793,7 @@ $messages['yi'] = array(
 	'wikibase-diffview-alias' => 'אליאסן',
 	'wikibase-diffview-description' => 'באַשרײַבונג',
 	'wikibase-diffview-link' => 'לינקען',
-	'wikibase-sitelinks' => 'ליסטע פון בלעטער פארבונדן מיט דעם דאטנאביעקט',
+	'wikibase-sitelinks-wikipedia' => 'וויקיפעדיע בלעטער פארבונדן מיט דעם דאטנאביעקט',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפראַך',
 	'wikibase-sitelinks-siteid-columnheading' => 'קאד',
 	'wikibase-sitelinks-link-columnheading' => 'פארלינקטער ארטיקל',
