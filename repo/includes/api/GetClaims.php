@@ -61,7 +61,10 @@ class GetClaims extends ApiWikibase {
 		//@todo validate
 		//@todo check permissions
 
-		list( $id, $claimGuid ) = $this->getIdentifiers();
+		$params = $this->extractRequestParams();
+		$this->validateParameters( $params );
+
+		list( $id, $claimGuid ) = $this->getIdentifiers( $params );
 
 		$entityId = EntityId::newFromPrefixedId( $id );
 		$entity = $entityId ? $this->getEntity( $entityId ) : null;
@@ -75,8 +78,15 @@ class GetClaims extends ApiWikibase {
 		wfProfileOut( __METHOD__ );
 	}
 
+	protected function validateParameters( array $params ) {
+		if ( !isset( $params['entity'] ) && !isset( $params['claim'] ) ) {
+			$this->dieUsage( 'Either the entity parameter or the claim parameter need to be set', 'param-missing' );
+		}
+	}
+
 	/**
 	 * @see \ApiBase::getPossibleErrors()
+	 * @return array
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
@@ -89,6 +99,7 @@ class GetClaims extends ApiWikibase {
 	/**
 	 * @since 0.3
 	 *
+	 * @param array $claims
 	 * @param \Wikibase\Claim[] $claims
 	 */
 	protected function outputClaims( array $claims ) {
@@ -171,16 +182,12 @@ class GetClaims extends ApiWikibase {
 	 *
 	 * @since 0.3
 	 *
+	 * @param $params
 	 * @return array
 	 * First element is a prefixed entity id
 	 * Second element is either null or a claim GUID
 	 */
-	protected function getIdentifiers() {
-		$params = $this->extractRequestParams();
-
-		if ( !isset( $params['entity'] ) && !isset( $params['claim'] ) ) {
-			$this->dieUsage( 'Either the entity parameter or the key parameter need to be set', 'param-missing' );
-		}
+	protected function getIdentifiers( $params ) {
 
 		$claimGuid = null;
 
