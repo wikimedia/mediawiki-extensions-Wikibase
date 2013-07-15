@@ -66,10 +66,6 @@ class EditEntity extends ModifyEntity {
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
-		if ( !isset( $params['new'] ) ) {
-			$this->dieUsage( "Either 'id' or 'new' parameter has to be set", 'no-such-entity' );
-		}
-
 		$type = $params['new'];
 		$this->flags |= EDIT_NEW;
 		$entityContentFactory = EntityContentFactory::singleton();
