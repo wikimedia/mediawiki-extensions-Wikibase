@@ -129,8 +129,34 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 		}
 	}
 
+	/**
+	 * @dataProvider provideTranslate
+	 */
+	public function testReverseTranslate( $langCode, $sourceLangCode, $translations ) {
+		if ( $sourceLangCode === null ) {
+			$sourceLangCode = $langCode;
+			$langCode = null;
+		}
+		$obj = LanguageWithConversion::factory( $sourceLangCode, $langCode );
+		foreach ( $translations as $text => $translatedText ) {
+			$this->assertEquals( $obj->reverseTranslate( $text ), $translatedText );
+		}
+	}
+
 	public function provideTranslate() {
 		return array(
+			array( 'de', null, array(
+				'foo' => 'foo',
+				'bar' => 'bar',
+			) ),
+			array( 'zh', null, array(
+				'測試' => '測試',
+				'测试' => '测试',
+			) ),
+			array( 'zh-cn', null, array(
+				'測試' => '測試',
+				'测试' => '测试',
+			) ),
 			array( 'zh-cn', 'zh-tw', array(
 				'測試' => '测试',
 			) ),
