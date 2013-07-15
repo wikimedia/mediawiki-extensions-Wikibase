@@ -134,7 +134,7 @@
 					mw.template(
 						'wb-section-heading',
 						mw.msg( 'wikibase-sitelinks-' + group ),
-						'sitelinks'
+						'sitelinks-' + group
 					).append( $sitesCounterContainer )
 				);
 				// actual initialization
